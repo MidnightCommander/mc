@@ -35,7 +35,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.30\n"
-"POT-Creation-Date: 1999-04-28 14:41+0200\n"
+"POT-Creation-Date: 1999-05-01 16:56+0200\n"
 "PO-Revision-Date: 1999-04-10 22:00+0100\n"
 "Last-Translator: David Martín <dmartina@mailexcite.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
@@ -70,13 +70,12 @@ msgid " There is no other panel to compare contents to "
 msgstr " No existe otro panel para comparar el contenido "
 
 #: gnome/gcmd.c:109
-#, fuzzy
 msgid "The Midnight Commander Team"
-msgstr " The Midnight Commander "
+msgstr "El Equipo del Midnight Commander"
 
 #: gnome/gcmd.c:111
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
+msgstr "comunicar errores en http://bugs.gnome.org o con gnome-bug"
 
 #: gnome/gcmd.c:123
 msgid "GNU Midnight Commander"
@@ -84,7 +83,7 @@ msgstr "GNU Midnight Commander"
 
 #: gnome/gcmd.c:126
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "El administrador de archivos Midnight Commander en versión GNOME."
+msgstr "El Administrador de Archivos Midnight Commander en versión GNOME."
 
 #: gnome/gcmd.c:263
 msgid "Sort By"
@@ -194,7 +193,7 @@ msgstr ""
 "Indique un filtro para escoger los archivos del panel.\n"
 "\n"
 "Así, por ejemplo:\n"
-"*.png mostrará sólo imágenes tipo PNG"
+"*.png mostrará sólo las imágenes en formato PNG"
 
 #: gnome/gcmd.c:676
 msgid "Enter a Regular Expression to filter files in the panel view."
@@ -213,12 +212,10 @@ msgid "Desktop entry properties"
 msgstr "Propiedades de entrada escritorio"
 
 #: gnome/gcmd.c:821
-#, fuzzy
 msgid "Select File"
-msgstr "_Seleccionar archivos..."
+msgstr "Seleccionar archivo"
 
 #: gnome/gcmd.c:829
-#, fuzzy
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -228,10 +225,9 @@ msgstr ""
 "Indique un filtro para escoger los archivos del panel.\n"
 "\n"
 "Así, por ejemplo:\n"
-"*.png mostrará sólo imágenes tipo PNG"
+"*.png mostrará sólo las imágenes en formato PNG"
 
 #: gnome/gcmd.c:831
-#, fuzzy
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Indique una expresión regular para escoger los archivos del panel."
 
@@ -462,7 +458,7 @@ msgid "Replace it?"
 msgstr " ¿Reemplazarlo? "
 
 #: gnome/gdialogs.c:567 gtkedit/editwidget.c:1069 src/file.c:802
-#: src/screen.c:2355 src/screen.c:2385 src/tree.c:1015
+#: src/screen.c:2365 src/screen.c:2395 src/tree.c:1015
 msgid "Copy"
 msgstr "Copiar"
 
@@ -671,8 +667,8 @@ msgid ""
 "\n"
 "Are you sure you want to exit?"
 msgstr ""
-"Observe que si cierra el gestor de archivos, también acabará\n"
-"con el gestor del escritorio GNOME.\n"
+"Observe que al salir del Administrador de Archivos,\n"
+"también se eliminará el gestor del escritorio GNOME.\n"
 "\n"
 "¿Desea realmente salir del programa?"
 
@@ -685,12 +681,12 @@ msgid ""
 "\n"
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
-"El gestor de archivos y el escritorio se van a cerrar\n"
+"El Administrador de Archivos y el escritorio se van a cerrar ahora\n"
 "\n"
-"Para activarlos de nuevo puede usar el Panel\n"
-"o ejecutar el comando UNIX `gmc'\n"
+"Para activarlos de nuevo puede hacerlo desde el Panel, o ejecutar\n"
+"el comando UNIX `gmc'\n"
 "\n"
-"Pulse Aceptar para acabar el programa o Cancelar para seguir con él."
+"Pulse Aceptar para salir del programa o Cancelar para seguir con él."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:384
@@ -754,9 +750,8 @@ msgid "Search"
 msgstr "Buscar"
 
 #: gnome/glayout.c:400
-#, fuzzy
 msgid "Search for a file in the current Panel"
-msgstr "Seleccionar todos los archivos del panel"
+msgstr "Buscar un archivo en el panel actual"
 
 #: gnome/glayout.c:403 gnome/gscreen.c:1437
 msgid "_Rescan Directory"
@@ -862,6 +857,10 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
+"Está ejecutando el Administrador de Archivos GNOME como superusuario.\n"
+"\n"
+"Accidentalmente podría causar PELIGROSOS DAÑOS AL SISTEMA, que el programa "
+"no va a evitar."
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
@@ -957,17 +956,15 @@ msgstr "Título:"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2353 src/screen.c:2383
+#: src/screen.c:2363 src/screen.c:2393
 msgid "View"
 msgstr "Ver"
 
 #: gnome/gnome-file-property-dialog.c:404
-#, fuzzy
 msgid "Use default View options"
-msgstr "Realiza la acción predefinida para Ver"
+msgstr "Realizar la acción predefinida para Ver"
 
 #: gnome/gnome-file-property-dialog.c:439
-#, fuzzy
 msgid "Select an Icon"
 msgstr "Seleccionar icono"
 
@@ -978,7 +975,7 @@ msgstr "Abrir"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr "Realiza la acción predefinida para Abrir"
+msgstr "Realizar la acción predefinida para Abrir"
 
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Drop Action"
@@ -986,20 +983,20 @@ msgstr "Arrastrar"
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
-msgstr "Realiza la acción predefinida para Arrastrar"
+msgstr "Realizar la acción predefinida para Arrastrar"
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr "Realiza la acción predefinida para Ver"
+msgstr "Realizar la acción predefinida para Ver"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2354 src/screen.c:2384 src/view.c:2027
+#: src/screen.c:2364 src/screen.c:2394 src/view.c:2027
 msgid "Edit"
 msgstr "Editar"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
-msgstr "Realiza la acción predefinida para Editar"
+msgstr "Realizar la acción predefinida para Editar"
 
 #: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
 msgid "Icon"
@@ -1143,8 +1140,8 @@ msgstr "Ver sin Filtrar"
 msgid "Copy..."
 msgstr "Copiar..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2358
-#: src/screen.c:2388
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2368
+#: src/screen.c:2398
 msgid "Delete"
 msgstr "Borrar"
 
@@ -1234,15 +1231,15 @@ msgstr "Permitir iconos personalizados"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Ocultar bordes de iconos"
 
 #: gnome/gprefs.c:171
 msgid "Auto place icons"
-msgstr ""
+msgstr "Colocar los iconos de forma automática"
 
 #: gnome/gprefs.c:175
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "Posiciones magnéticas"
 
 #: gnome/gprefs.c:184
 msgid "File display"
@@ -1258,12 +1255,11 @@ msgstr "VFS"
 
 #: gnome/gprefs.c:196
 msgid "Caching"
-msgstr "Guardando en caché"
+msgstr "Caché"
 
 #: gnome/gprefs.c:200
-#, fuzzy
 msgid "Desktop"
-msgstr "Escri_torio"
+msgstr "Escritorio"
 
 #: gnome/gprefs.c:479
 msgid "Preferences"
@@ -1311,17 +1307,15 @@ msgstr "Seleccionar icono"
 
 #: gnome/gscreen.c:1437
 msgid "Reloads the current directory"
-msgstr "Actualiza el directorio actual"
+msgstr "Actualizar el directorio actual"
 
 #: gnome/gscreen.c:1439
-#, fuzzy
 msgid "New _Directory..."
-msgstr "_Directorio..."
+msgstr "_Directorio nuevo..."
 
 #: gnome/gscreen.c:1439
-#, fuzzy
 msgid "Creates a new directory here"
-msgstr "Crear un directorio nuevo"
+msgstr "Crear aquí un directorio nuevo"
 
 #: gnome/gscreen.c:1620
 msgid "All files"
@@ -1448,7 +1442,7 @@ msgstr "Actualizar la presentación del directorio"
 
 #: gnome/gscreen.c:2383
 msgid "Home"
-msgstr "Hogar"
+msgstr "Personal"
 
 #: gnome/gscreen.c:2383
 msgid "Go to your home directory"
@@ -1600,7 +1594,7 @@ msgstr "Dispositivo %d"
 #: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
 #: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
 #: gtkedit/editcmd.c:1951 gtkedit/editwidget.c:952 src/dir.c:386
-#: src/screen.c:2373 src/tree.c:683 src/tree.c:689 src/wtools.c:222
+#: src/screen.c:2383 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr " Error "
@@ -1673,7 +1667,7 @@ msgstr " Guardar como "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:490 gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
 #: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083 src/ext.c:303 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:2093 src/screen.c:2136
+#: src/help.c:318 src/main.c:699 src/screen.c:2103 src/screen.c:2146
 #: src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390 src/utilunix.c:394
 #: src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
@@ -2017,13 +2011,13 @@ msgid "Cancel quit"
 msgstr "Cancelar salida"
 
 #: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "&Sí"
 
 #: gtkedit/editcmd.c:2266 src/cmd.c:251 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2122
+#: src/filegui.c:601 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
 msgstr "&No"
@@ -2220,8 +2214,8 @@ msgstr " Opciones del editor "
 msgid "Error initialising editor.\n"
 msgstr "Error al inicializar el editor.\n"
 
-#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2351
-#: src/screen.c:2381 src/tree.c:1009 src/view.c:2018
+#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2361
+#: src/screen.c:2391 src/tree.c:1009 src/view.c:2018
 msgid "Help"
 msgstr "Ayuda"
 
@@ -3408,12 +3402,12 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: src/ext.c:131 src/user.c:506
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
-" No puedo abrir el archivo %s \n"
+" No puedo generar un nombre de archivo único \n"
 " %s "
 
 #: src/ext.c:138 src/user.c:518
@@ -3858,11 +3852,11 @@ msgstr " aplicando la máscara:"
 msgid " Can't operate on \"..\"! "
 msgstr " ¡No puedo operar sobre \"..\"! "
 
-#: src/file.c:1856 src/screen.c:2082
+#: src/file.c:1856 src/screen.c:2092
 msgid "Yes"
 msgstr "Sí"
 
-#: src/file.c:1856 src/screen.c:2082
+#: src/file.c:1856 src/screen.c:2092
 msgid "No"
 msgstr "No"
 
@@ -4685,7 +4679,7 @@ msgstr "Presione cualquier tecla para continuar..."
 msgid " The shell is already running a command "
 msgstr " El shell ya está ejecutando un comando "
 
-#: src/main.c:852 src/screen.c:2080 src/screen.c:2120
+#: src/main.c:852 src/screen.c:2090 src/screen.c:2130
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
@@ -4937,7 +4931,7 @@ msgstr ""
 " caso use C-r para obligar al programa a actualizar los datos.\n"
 " Lea la página de manual para mayor información.             "
 
-#: src/main.c:1706 src/screen.c:2352 src/screen.c:2382
+#: src/main.c:1706 src/screen.c:2362 src/screen.c:2392
 msgid "Menu"
 msgstr "Menú"
 
@@ -5287,27 +5281,27 @@ msgstr "GID"
 msgid "  %s bytes in %d file%s"
 msgstr " %s bytes en %d archivo%s"
 
-#: src/screen.c:1304
+#: src/screen.c:1314
 msgid "Unknow tag on display format: "
 msgstr "Campo desconocido en el formato de pantalla: "
 
-#: src/screen.c:2081 src/screen.c:2121
+#: src/screen.c:2091 src/screen.c:2131
 msgid " Do you really want to execute? "
 msgstr " ¿Realmente quiere ejecutar?"
 
-#: src/screen.c:2093 src/screen.c:2136
+#: src/screen.c:2103 src/screen.c:2146
 msgid " No action taken "
 msgstr " No se tomó ninguna medida "
 
-#: src/screen.c:2356 src/screen.c:2386 src/tree.c:1017
+#: src/screen.c:2366 src/screen.c:2396 src/tree.c:1017
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2357 src/screen.c:2387 src/tree.c:1021
+#: src/screen.c:2367 src/screen.c:2397 src/tree.c:1021
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/screen.c:2373
+#: src/screen.c:2383
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
@@ -5456,6 +5450,16 @@ msgstr " Menú de usuario "
 msgid "name_trunc: too big"
 msgstr "name_trunc: demasiado grande"
 
+#. strftime() format string for recent dates
+#: src/util.c:598 src/util.c:623
+msgid "%b %e %H:%M"
+msgstr "%e %b %H:%M"
+
+#. strftime() format string for old dates
+#: src/util.c:599 src/util.c:621
+msgid "%b %e  %Y"
+msgstr "%e %b  %Y"
+
 #: src/utilunix.c:390
 msgid " Pipe failed "
 msgstr " Fallo en la tubería "
@@ -5519,12 +5523,12 @@ msgstr ""
 " no es un archivo ordinario "
 
 #: src/view.c:567 src/view.c:572
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't open \"%s\"\n"
 " %s "
 msgstr ""
-" No puedo abrir el archivo %s \n"
+" No puedo abrir \"%s\"\n"
 " %s "
 
 #: src/view.c:704
