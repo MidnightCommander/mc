@@ -57,9 +57,6 @@ same line.
 
 Report errors in fish operations and recover from them.
 
-SMB crash when not starting with the share root, but copying to the
-share root.
-
 Scan more packages for patches, check Red Hat and Ximian Bugzilla.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
