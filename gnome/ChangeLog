@@ -1,3 +1,10 @@
+Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* gtools.c (translate_gdk_keysym_to_curses): renamed KEY_BACKTAB
+	to KEY_BTAB (the name ncurses uses)
+
+	* Makefile.in: Install the icon-files and the layout-file from $srcdir.
+
 1998-03-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (icon_properties): 

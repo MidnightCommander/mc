@@ -1,3 +1,8 @@
+Mon Mar 23 00:42:21 1998  Christofer Edvardsen <ce@earthling.net>
+
+	* Makefile.in, extfs/extfs.ini, extfs/hp48: New external
+	filesystem to view and copy files to/from the HP48.
+
 Wed Feb 11 14:09:02 1998  Oleg <oleg@pobox.com>
 
 	* extfs.c: Add support for writtable external file systems.

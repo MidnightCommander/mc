@@ -15,9 +15,9 @@ LINUXDOCDIR =	/usr/local/linuxdoc-sgml
 all:
 
 install:
-	-$(SEDCMD2) < $(srcdir)/mc.1 > $(DESTDIR)$(mandir)/$(manprefix)mc.$(manext)
-	-$(SEDCMD2) < $(srcdir)/mcedit.1 > $(DESTDIR)$(mandir)/$(manprefix)mcedit.$(manext)
-	-$(SEDCMD2) < $(srcdir)/mcserv.8 > $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)
+	-$(SEDCMD2) < mc.1 > $(DESTDIR)$(mandir)/$(manprefix)mc.$(manext)
+	-$(SEDCMD2) < mcedit.1 > $(DESTDIR)$(mandir)/$(manprefix)mcedit.$(manext)
+	-$(SEDCMD2) < mcserv.8 > $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)
 
 uninstall:
 	-cd $(mandir); $(RMF) $(manprefix)mc.$(manext)

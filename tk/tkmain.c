@@ -329,6 +329,11 @@ x_focus_widget (Widget_Item *p)
     tk_evalf ("focus %s", wname+1);
 }
 
+void
+x_unfocus_widget (Widget_Item *p)
+{
+}
+
 /* Setup done before using tkrundlg_event */
 void
 x_init_dlg (Dlg_head *h)

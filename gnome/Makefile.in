@@ -44,11 +44,11 @@ GNOMEHDRS = 		\
 	gpageprop.h	\
 	gmc-chargrid.h
 
-ICONS = 			\
-	directory-ok.xpm	\
-	directory.xpm		\
-	multi.xpm		\
-	multi-ok.xpm
+ICONS = 				\
+	$(srcdir)/directory-ok.xpm	\
+	$(srcdir)/directory.xpm		\
+	$(srcdir)/multi.xpm		\
+	$(srcdir)/multi-ok.xpm
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
@@ -180,7 +180,7 @@ install_gmc: all
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	$(INSTALL_DATA) $(ICONS) $(DESTDIR)$(icondir)
-	-$(INSTALL_DATA) layout $(DESTDIR)$(libdir)
+	-$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc

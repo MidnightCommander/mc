@@ -29,7 +29,7 @@ VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 VFSOBJS = $(NONETFILES) @NETFILES@
 
 EXTFSSTUFF = README extfs.ini a cpio.in deb.in ftplist.in lha.in lslR.in \
-	rar.in rpm zip.in zoo.in arfs patchfs mailfs 
+	rar.in rpm zip.in zoo.in arfs patchfs mailfs hp48
 
 #
 # Distribution variables
@@ -100,7 +100,8 @@ install.extfs:
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/a $(DESTDIR)$(libdir)/extfs/a
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/arfs $(DESTDIR)$(libdir)/extfs/arfs
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/rpm  $(DESTDIR)$(libdir)/extfs/rpm
-
+	$(INSTALL_PROGRAM) $(srcdir)/extfs/hp48  $(DESTDIR)$(libdir)/extfs/hp48
+	
 	$(INSTALL_PROGRAM) extfs/cpio $(DESTDIR)$(libdir)/extfs/cpio
 	$(INSTALL_PROGRAM) extfs/deb  $(DESTDIR)$(libdir)/extfs/deb
 	$(INSTALL_PROGRAM) extfs/ftplist $(DESTDIR)$(libdir)/extfs/ftplist
@@ -112,6 +113,7 @@ install.extfs:
 
 uninstall:
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/rpm
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/hp48
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/cpio
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/deb
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/zip

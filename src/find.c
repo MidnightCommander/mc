@@ -663,7 +663,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     add_widgetl (find_dlg,
     button_new (FIND2_Y-3, 17, B_VIEW, NORMAL_BUTTON, "&View - F3", find_do_view_file, find_dlg, "button-view"), 0);
     add_widgetl (find_dlg,
-	button_new (FIND2_Y-3, 3, B_PANELIZE, NORMAL_BUTTON, "&Panelize", 0, 0, "button-panelize"),
+	button_new (FIND2_Y-3, 3, B_PANELIZE, NORMAL_BUTTON, "Pane&lize", 0, 0, "button-panelize"),
 	XV_WLAY_CENTERROW);
     add_widgetl (find_dlg, button_new (FIND2_Y-4, 37, B_CANCEL, NORMAL_BUTTON, "&Quit", 0, 0, "button-quit"), 
         XV_WLAY_RIGHTOF);

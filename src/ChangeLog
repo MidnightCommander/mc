@@ -12,6 +12,23 @@ Mon Mar 23 08:17:55 1998 Pavel Roskin <pavel@absolute.spb.su>
 	
 	* myslang.h: using fast one_vline() and one_hline() for OS2_NT
 	
+Mon Mar 23 00:47:51 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* autogen.sh: added support for builddir != srcdir
+
+	* doc/Makefile.in: The manual pages are generated files and
+	located in the builddir and not in the srcdir.
+
+	* find.c (find_file): Use the same hotkey for the panelize button
+	as we use with the external panelize command.
+
+Fri Mar 20 17:51:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* myslang.h: --with-ncurses didn't compile: renamed
+	KEY_BACKTAB to KEY_BTAB (the name ncurses uses)
+
+	* dlg.c (dlg_key_event): likewise
+
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c: Remove KEY_DC forever.  This should have never been
