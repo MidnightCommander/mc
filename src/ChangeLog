@@ -1,3 +1,10 @@
+2004-01-23  Pavel Roskin  <proski@gnu.org>
+
+	* fileopctx.h: Add "operation" filed to FileOpContext.
+	* fileopctx.c (file_op_context_new): Add "operation" argument.
+	* filegui.c (file_op_context_create_ui): Remove "operation"
+	argument, it's known already.  Adjust all callers.
+
 2004-01-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* user.c (execute_menu_command): Put /bin/sh in the beginning of

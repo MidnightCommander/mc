@@ -600,8 +600,8 @@ static void tree_copy (WTree *tree, char *default_dest)
 	return;
     }
 
-    ctx = file_op_context_new ();
-    file_op_context_create_ui (ctx, OP_COPY, FALSE);
+    ctx = file_op_context_new (OP_COPY);
+    file_op_context_create_ui (ctx, FALSE);
     copy_dir_dir (ctx, tree->selected_ptr->name, dest, 1, 0, 0, 0, &count, &bytes);
     file_op_context_destroy (ctx);
 
@@ -651,8 +651,8 @@ static void tree_move (WTree *tree, char *default_dest)
 	return;
     }
 
-    ctx = file_op_context_new ();
-    file_op_context_create_ui (ctx, OP_MOVE, FALSE);
+    ctx = file_op_context_new (OP_MOVE);
+    file_op_context_create_ui (ctx, FALSE);
     move_dir_dir (ctx, tree->selected_ptr->name, dest, &count, &bytes);
     file_op_context_destroy (ctx);
 
@@ -711,8 +711,8 @@ tree_rmdir_cmd (WTree *tree)
 	    return;
     }
 
-    ctx = file_op_context_new ();
-    file_op_context_create_ui (ctx, OP_DELETE, FALSE);
+    ctx = file_op_context_new (OP_DELETE);
+    file_op_context_create_ui (ctx, FALSE);
     if (erase_dir (ctx, tree->selected_ptr->name, &count, &bytes) ==
 	FILE_CONT)
 	tree_forget_cmd (tree);

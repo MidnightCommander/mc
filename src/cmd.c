@@ -577,8 +577,8 @@ check_for_default(char *default_file, char *file)
 	if (mc_stat (default_file, &s)){
 	    return -1;
 	}
-	ctx = file_op_context_new ();
-	file_op_context_create_ui (ctx, OP_COPY, 0);
+	ctx = file_op_context_new (OP_COPY);
+	file_op_context_create_ui (ctx, 0);
 	copy_file_file (ctx, default_file, file, 1, &count, &bytes, 1);
 	file_op_context_destroy (ctx);
     }

@@ -165,8 +165,7 @@ check_progress_buttons (FileOpContext *ctx)
 /* {{{ File progress display routines */
 
 void
-file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
-			   int with_eta)
+file_op_context_create_ui (FileOpContext *ctx, int with_eta)
 {
     FileOpContextUI *ui;
     int x_size;
@@ -195,8 +194,10 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
     ui->eta_extra = with_eta ? WX_ETA_EXTRA : 0;
     x_size = (WX + 4) + ui->eta_extra;
 
-    ui->op_dlg = create_dlg (0, 0, WY - minus + 4, x_size, dialog_colors,
-			     NULL, NULL, op_names[op], DLG_CENTER | DLG_REVERSE);
+    ui->op_dlg =
+	create_dlg (0, 0, WY - minus + 4, x_size, dialog_colors, NULL,
+		    NULL, op_names[ctx->operation],
+		    DLG_CENTER | DLG_REVERSE);
 
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
@@ -213,22 +214,19 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
 		gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[2] =
 		label_new (7, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->bps_label =
-		label_new (7, WX, ""));
+    add_widget (ui->op_dlg, ui->bps_label = label_new (7, WX, ""));
 
     add_widget (ui->op_dlg, ui->progress_gauge[1] =
 		gauge_new (8, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[1] =
 		label_new (8, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->stalled_label =
-		label_new (8, WX, ""));
+    add_widget (ui->op_dlg, ui->stalled_label = label_new (8, WX, ""));
 
     add_widget (ui->op_dlg, ui->progress_gauge[0] =
 		gauge_new (6, FCOPY_GAUGE_X, 0, 100, 0));
     add_widget (ui->op_dlg, ui->progress_label[0] =
 		label_new (6, FCOPY_LABEL_X, fifteen));
-    add_widget (ui->op_dlg, ui->eta_label =
-		label_new (6, WX, ""));
+    add_widget (ui->op_dlg, ui->eta_label = label_new (6, WX, ""));
 
     add_widget (ui->op_dlg, ui->file_string[1] =
 		label_new (4, FCOPY_GAUGE_X, sixty));

@@ -36,11 +36,12 @@
  * Return value: The newly-created context, filled with the default file mask values.
  **/
 FileOpContext *
-file_op_context_new (void)
+file_op_context_new (FileOperation op)
 {
     FileOpContext *ctx;
 
     ctx = g_new0 (FileOpContext, 1);
+    ctx->operation = op;
     ctx->eta_secs = 0.0;
     ctx->progress_bytes = 0.0;
     ctx->op_preserve = TRUE;

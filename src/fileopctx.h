@@ -13,6 +13,11 @@
 #include <sys/types.h>
 #include "eregex.h"
 
+typedef enum {
+	OP_COPY,
+	OP_MOVE,
+	OP_DELETE
+} FileOperation;
 
 typedef int (*mc_stat_fn) (char *filename, struct stat *buf);
 
@@ -20,6 +25,9 @@ typedef int (*mc_stat_fn) (char *filename, struct stat *buf);
  * the progress windows and pass around options.
  */
 typedef struct FileOpContext {
+	/* Operation type (copy, move, delete) */
+	FileOperation operation;
+
 	/* The estimated time of arrival in seconds */
 	double eta_secs;
 
@@ -103,15 +111,9 @@ typedef struct FileOpContext {
 } FileOpContext;
 
 
-FileOpContext *file_op_context_new (void);
+FileOpContext *file_op_context_new (FileOperation op);
 void file_op_context_destroy (FileOpContext *ctx);
 
-
-typedef enum {
-	OP_COPY,
-	OP_MOVE,
-	OP_DELETE
-} FileOperation;
 
 extern char *op_names [3];
 
@@ -138,7 +140,7 @@ enum OperationMode {
 
 /* The following functions are implemented separately by each port */
 
-void file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta);
+void file_op_context_create_ui (FileOpContext *ctx, int with_eta);
 void file_op_context_destroy_ui (FileOpContext *ctx);
 
 FileProgressStatus file_progress_show (FileOpContext *ctx, off_t done, off_t total);

@@ -1826,7 +1826,7 @@ panel_operate (void *source_panel, FileOperation operation,
     /* Generate confirmation prompt */
     panel_operate_generate_prompt (panel, operation, source, &src_stat);
 
-    ctx = file_op_context_new ();
+    ctx = file_op_context_new (operation);
 
     /* Show confirmation dialog */
     if (operation == OP_DELETE && confirm_delete) {
@@ -1905,7 +1905,7 @@ panel_operate (void *source_panel, FileOperation operation,
     if (do_bg)
 	ctx->ui = NULL;
     else
-	file_op_context_create_ui (ctx, operation, 1);
+	file_op_context_create_ui (ctx, 1);
 
     /* This code is only called by the tree and panel code */
     if (single_entry) {
