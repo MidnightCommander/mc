@@ -10,8 +10,6 @@ REGRESSION: Allow minimal functionality on read-only filesystems.
 
 Don't rely on temporary scripts being executable.  Run shell explicitly.
 
-Alt-P in the editor should return the viewport to the leftmost position.
-
 Recheck and clean up manuals.  Add node names to the English manual.
 
 Check "mc --help-colors" for completeness.
