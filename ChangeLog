@@ -1,5 +1,9 @@
 2002-10-31  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.csh.in: Update to use the new -P option.  This script
+	has absolutely no protection against special symbols in
+	directory names and lacks TMPDIR support.
+
 	* lib/mc.sh.in: Update to use the new -P option.
 
 	* configure.in: Displaying the install paths is too problematic
