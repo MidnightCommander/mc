@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "edit-widget.h"
 
 #include "src/tty.h"		/* LINES */
 #include "src/key.h"		/* get_modifier() */

@@ -23,6 +23,8 @@
 
 #include <config.h>
 #include "edit.h"
+#include "edit-widget.h"
+
 
 /* note, if there is more than one bookmark on a line, then they are
    appended after each other and the last one is always the one found

@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "edit-widget.h"
 
 #define MAX_LINE_LEN 1024
 

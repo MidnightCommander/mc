@@ -28,6 +28,7 @@
 
 #include "edit.h"
 #include "editcmddef.h"
+#include "edit-widget.h"
 
 #include "src/color.h"		/* dialog_colors */
 #include "src/tty.h"		/* LINES */

@@ -38,7 +38,7 @@ struct _book_mark {
     struct _book_mark *prev;
 };
 
-typedef struct WEdit {
+struct WEdit {
     Widget widget;
 #define from_here num_widget_lines
     int num_widget_lines;
@@ -120,13 +120,6 @@ typedef struct WEdit {
     int macro_i;		/* -1 if not recording index to macro[] otherwise */
     int macro_depth;		/* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
-} WEdit;
-
-#define EDIT_DIR           PATH_SEP_STR ".mc" PATH_SEP_STR "cedit"
-#define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
-#define CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
-#define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
-#define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
-#define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
+};
 
 #endif /* !__EDIT_WIDGET_H */

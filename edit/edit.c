@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "edit-widget.h"
 
 #include "src/cmd.h"		/* view_other_cmd() */
 #include "src/user.h"		/* user_menu_cmd() */

@@ -43,7 +43,6 @@
 #endif
 
 #include "src/global.h"
-#include "edit-widget.h"	/* WEdit */
 
 #    define WIDGET_COMMAND (WIDGET_USER + 10)
 #    define N_menus 5
@@ -148,6 +147,9 @@ struct context_rule {
 /* first word is word[1] */
     struct key_word **keyword;
 };
+
+struct WEdit;
+typedef struct WEdit WEdit;
 
 int edit_drop_hotkey_menu (WEdit *e, int key);
 void edit_menu_cmd (WEdit *e);
@@ -256,6 +258,7 @@ void edit_left_word_move (WEdit * edit, int s);
 void edit_right_word_move (WEdit * edit, int s);
 void edit_get_selection (WEdit * edit);
 
+struct macro;
 int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n);
 int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k);
 void edit_delete_macro_cmd (WEdit * edit);
@@ -360,5 +363,13 @@ extern char *option_backup_ext;
 
 extern int edit_confirm_save;
 extern int column_highlighting;
+
+/* File names */
+#define EDIT_DIR           PATH_SEP_STR ".mc" PATH_SEP_STR "cedit"
+#define SYNTAX_FILE        EDIT_DIR PATH_SEP_STR "Syntax"
+#define CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
+#define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
+#define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
+#define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
 
 #endif 				/* __EDIT_H */

@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "edit-widget.h"
 #include "src/color.h"		/* use_colors */
 #include "src/main.h"		/* mc_home */
 #include "src/wtools.h"		/* message() */

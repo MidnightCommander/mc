@@ -29,6 +29,7 @@
 #include "src/key.h"		/* XCTRL */
 #include "src/main.h"		/* drop_menus */
 
+#include "edit-widget.h"
 #include "editcmddef.h"
 
 #undef edit_message_dialog
