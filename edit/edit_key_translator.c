@@ -61,6 +61,7 @@
      KEY_F (4), CK_Replace, KEY_F (7), CK_Find, KEY_F (14), CK_Replace_Again,
      XCTRL ('h'), CK_BackSpace, ALT ('l'), CK_Goto, ALT ('L'), CK_Goto, XCTRL ('y'), CK_Delete_Line,
      KEY_F (17), CK_Find_Again, ALT ('p'), CK_Paragraph_Format,
+     ALT ('b'), CK_Match_Bracket,
      0177, CK_BackSpace,
      0, 0};
 

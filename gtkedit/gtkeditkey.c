@@ -175,6 +175,10 @@ int edit_translate_key (unsigned int x_keycode, long x_key, int x_state, int *cm
 	case GDK_L:
 	    command = CK_Goto;
 	    goto fin;
+	case GDK_b:
+	case GDK_B:
+	    command = CK_Match_Bracket;
+	    goto fin;
 	case GDK_Insert:
 	case GDK_KP_Insert:
 	    command = CK_Selection_History;

@@ -1,3 +1,11 @@
+2001-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* edit/Makefile.in: Make edit.o depend on edit_key_translator.c.
+	* edit/edit_key_translator.c (cooledit_key_map): Add support
+	for bracket matching on Alt-B.
+	* gtkedit/gtkeditkey.c: Likewise.
+	From Steef Boerrigter <sxmboer@sci.kun.nl>
+
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Use nm to view object files.

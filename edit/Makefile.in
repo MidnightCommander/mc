@@ -39,6 +39,8 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DMIDNIGHT $<
 
+edit.o: edit_key_translator.c
+
 check:
 	@echo no tests are supplied.
 
