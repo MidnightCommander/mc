@@ -671,18 +671,20 @@ msgstr ""
 "Si vos voloz renonder onk ou l' ôte, vos l' poloz fé a pårti\n"
 " do scriftôr, oudôbén vos poloz taper li cmande UNIX 'gmc'."
 
+# _Copyî is the normal way, but we alreadi have _Cloyu on the same menu
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:384
 msgid "_Copy..."
-msgstr "_Copyî..."
+msgstr "C_opyî..."
 
 #: gnome/glayout.c:384
 msgid "Copy files"
 msgstr "Copyî des fitchîs"
 
+# _Disfacer is the normal way; but we already have _Drovi on the same menu
 #: gnome/glayout.c:385
 msgid "_Delete..."
-msgstr "_Disfacer..."
+msgstr "Dis_facer..."
 
 #: gnome/glayout.c:385
 msgid "Delete files"
@@ -698,7 +700,7 @@ msgstr "Rilomer ou bodjî des fitchîs"
 
 #: gnome/glayout.c:388
 msgid "Show directory sizes"
-msgstr "Mostrer li grandeu des ridants"
+msgstr "_Mostrer li grandeu des ridants"
 
 #: gnome/glayout.c:388
 msgid "Shows the disk space used by each directory"
@@ -714,7 +716,7 @@ msgstr "Tchwezi tos les fitchîs è ci panea chal"
 
 #: gnome/glayout.c:397
 msgid "_Select Files..."
-msgstr "_Tchwezi les Fitchîs..."
+msgstr "Tchwezi les _Fitchîs..."
 
 #: gnome/glayout.c:397
 msgid "Select a group of files"
@@ -771,7 +773,7 @@ msgstr "Trover des fitchîs ene sawice avå li plake"
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:421
 msgid "_Edit mime types..."
-msgstr "_Candjî les sôrts mime"
+msgstr "Candjî les sôrts _Mime"
 
 #: gnome/glayout.c:421
 msgid "Edits the MIME type bindings"
@@ -779,7 +781,7 @@ msgstr "Candjî les loyaedjes après des sôrts mime"
 
 #: gnome/glayout.c:423
 msgid "_Run Command..."
-msgstr "E_nonder Comande..."
+msgstr "Enonder _Comande..."
 
 #: gnome/glayout.c:423
 msgid "Runs a command"
@@ -787,7 +789,7 @@ msgstr "Po-z enonder ene comande"
 
 #: gnome/glayout.c:425
 msgid "_Run Command in panel..."
-msgstr "E_nonder Comande è Panea..."
+msgstr "Enonder Comande è _Panea..."
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
@@ -1637,7 +1639,7 @@ msgstr "Cawete:"
 #. NLS ?
 #: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
-msgstr " Môde Aspougnî Schaper "
+msgstr " Aspougnî Môde Schaper "
 
 #: gtkedit/editcmd.c:476
 msgid " Save As "
@@ -2243,23 +2245,23 @@ msgstr ""
 
 #: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
 msgid "&Open/load...     C-o"
-msgstr "&Drovi/tcherdjî...     C-o"
+msgstr "&Drovi/tcherdjî...    C-o"
 
 #: gtkedit/editmenu.c:120
 msgid "&New              C-n"
-msgstr "&Novea              C-n"
+msgstr "&Novea                C-n"
 
 #: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
 msgid "&Save              F2"
-msgstr "&Schaper             F2"
+msgstr "&Schaper               F2"
 
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
 msgid "save &As...       F12"
-msgstr "Schaper èt &rlomer...       F12"
+msgstr "Schaper èt &rlomer...  F12"
 
 #: gtkedit/editmenu.c:125 gtkedit/editmenu.c:141
 msgid "&Insert file...   F15"
-msgstr "S&itichî fitchî...   F15"
+msgstr "S&itichî fitchî...     F15"
 
 #: gtkedit/editmenu.c:126
 msgid "copy to &File...  C-f"
@@ -2267,15 +2269,15 @@ msgstr "copyî dins &Fitchî...  C-f"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
 msgid "a&Bout...            "
-msgstr "Å&dfait...            "
+msgstr "Å&dfait...                "
 
 #: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
 msgid "&Quit             F10"
-msgstr "&Cwiter             F10"
+msgstr "&Cwiter                F10"
 
 #: gtkedit/editmenu.c:136
 msgid "&New            C-x k"
-msgstr "&Novea            C-x k"
+msgstr "&Novea               C-x k"
 
 #: gtkedit/editmenu.c:142
 msgid "copy to &File...     "
@@ -2283,95 +2285,95 @@ msgstr "copyî dins &Fitchî...     "
 
 #: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
 msgid "&Toggle Mark       F3"
-msgstr "&Discandjî Marke       F3"
+msgstr "&Discandjî Marke        F3"
 
 #: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
 msgid "&Mark Columns    S-F3"
-msgstr "&Marker Colones    S-F3"
+msgstr "&Marker Colones       S-F3"
 
 #: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
 msgid "toggle &Ins/overw Ins"
-msgstr "discandjî &Ins/overw Ins"
+msgstr "discandjî &Ins/overw   Ins"
 
 #: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
 msgid "&Copy              F5"
-msgstr "&Copyî              F5"
+msgstr "&Copyî                  F5"
 
 #: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
 msgid "&Move              F6"
-msgstr "&Bodjî              F6"
+msgstr "&Bodjî                  F6"
 
 #: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
 msgid "&Delete            F8"
-msgstr "&Disfacer            F8"
+msgstr "&Disfacer               F8"
 
 #: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
 msgid "&Undo             C-u"
-msgstr "Di&sfé             C-u"
+msgstr "Di&sfé                 C-u"
 
 #: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
 msgid "&Beginning     C-PgUp"
-msgstr "Co&pete     C-PgUp"
+msgstr "Co&pete             C-PgUp"
 
 #: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
 msgid "&End           C-PgDn"
-msgstr "&Valeye           C-PgDn"
+msgstr "&Valeye             C-PgDn"
 
 #: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
 msgid "&Search...         F7"
-msgstr "C&weri...         F7"
+msgstr "C&weri...               F7"
 
 #: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
 msgid "search &Again     F17"
-msgstr "cweri eco ene &Feye     F17"
+msgstr "cweri eco ene &Feye    F17"
 
 #: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
 msgid "&Replace...        F4"
-msgstr "Discand&jî...        F4"
+msgstr "Discand&jî...           F4"
 
 #: gtkedit/editmenu.c:199 gtkedit/editmenu.c:221
 msgid "&Goto line...            M-l"
-msgstr "&Potchî al roye...            M-l"
+msgstr "&Potchî al roye...                 M-l"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
-msgid "insert &Literal...       C-q"
+msgid "insert &Literal...                  C-q"
 msgstr ""
 
 #: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
 msgid "&Refresh screen          C-l"
-msgstr "&Riponde li waitroûle          C-l"
+msgstr "&Riponde li waitroûle              C-l"
 
 #: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
 msgid "&Start record macro      C-r"
-msgstr "&Ataker a inredjistrer ene macro      C-r"
+msgstr "&Ataker a inredjistrer ene macro   C-r"
 
 #: gtkedit/editmenu.c:206 gtkedit/editmenu.c:228
 msgid "&Finish record macro...  C-r"
-msgstr "&Fini d' inredjistrer ene macro...  C-r"
+msgstr "&Fini d' inredjistrer ene macro... C-r"
 
 #: gtkedit/editmenu.c:207
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Enonder ene macro...   C-a, KEY"
+msgstr "&Enonder ene macro...         C-a, KEY"
 
 #: gtkedit/editmenu.c:208 gtkedit/editmenu.c:230
 msgid "delete macr&O...            "
-msgstr "disfacer ene macr&O...            "
+msgstr "disfacer ene macr&O...                "
 
 #: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
 msgid "insert &Date/time           "
-msgstr "sititchî &Date/eure           "
+msgstr "sititchî &Date/eure                   "
 
 #: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
 msgid "format p&Aragraph        M-p"
-msgstr "arindjî h&Agnon        M-p"
+msgstr "arindjî h&Agnon                    M-p"
 
 #: gtkedit/editmenu.c:213
 msgid "'ispell' s&Pell check    C-p"
-msgstr "waitî li scrîjhaedje avou 'ispell'    C-p"
+msgstr "waitî li scrîjhaedje avou 'ispell' C-p"
 
 #: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
 msgid "sor&T...                 M-t"
-msgstr "re&Lire...                 M-t"
+msgstr "re&Lire...                         M-t"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:237
 msgid "'indent' &C Formatter    F19"
@@ -2379,15 +2381,15 @@ msgstr ""
 
 #: gtkedit/editmenu.c:216
 msgid "&Mail...                    "
-msgstr "e&Mîler...                    "
+msgstr "e&Mîler...                            "
 
 #: gtkedit/editmenu.c:229
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Enonder ene macro... C-x e, KEY"
+msgstr "&Enonder ene macro...       C-x e, KEY"
 
 #: gtkedit/editmenu.c:235
 msgid "'ispell' s&Pell check    M-$"
-msgstr "waitî li scrîjhaedje avou 'ispell'    M-$"
+msgstr "waitî li scrîjhaedje avou 'ispell' M-$"
 
 #: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
 msgid "&General...  "
@@ -2399,7 +2401,7 @@ msgstr ""
 
 #: gtkedit/editmenu.c:247 gtkedit/editmenu.c:256 src/main.c:1339
 msgid "&Layout..."
-msgstr "arindj&mint del pådje..."
+msgstr "arindj&Mint del pådje..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:392
@@ -4075,7 +4077,7 @@ msgstr ""
 
 #: src/help.c:741
 msgid " Help "
-msgstr ""
+msgstr " Aidance "
 
 #: src/help.c:766 src/user.c:655
 #, c-format
@@ -4423,7 +4425,7 @@ msgstr ""
 
 #: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:146
 msgid "&Save"
-msgstr ""
+msgstr "&Schaper"
 
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
@@ -4578,11 +4580,11 @@ msgstr ""
 
 #: src/main.c:1275
 msgid "&User menu          F2"
-msgstr ""
+msgstr "menu di l' &Uzeu     F2"
 
 #: src/main.c:1276
 msgid "&View               F3"
-msgstr ""
+msgstr "&Vey                 F3"
 
 #: src/main.c:1277
 msgid "Vie&w file...         "
@@ -4594,11 +4596,11 @@ msgstr ""
 
 #: src/main.c:1279
 msgid "&Edit               F4"
-msgstr ""
+msgstr "&Aspougnî            F4"
 
 #: src/main.c:1280
 msgid "&Copy               F5"
-msgstr ""
+msgstr "&Copyî               F5"
 
 #: src/main.c:1281
 msgid "c&Hmod           C-x c"
@@ -4634,7 +4636,7 @@ msgstr ""
 
 #: src/main.c:1291
 msgid "&Delete             F8"
-msgstr ""
+msgstr "&Disfacer            F8"
 
 #: src/main.c:1292
 msgid "&Quick cd          M-c"
@@ -4654,11 +4656,11 @@ msgstr ""
 
 #: src/main.c:1298
 msgid "e&Xit              F10"
-msgstr ""
+msgstr "moussî &Foû         F10"
 
 #: src/main.c:1308
 msgid "&Directory tree"
-msgstr ""
+msgstr "åbe des &Ridants"
 
 #: src/main.c:1310
 msgid "&Find file            M-?"
@@ -4686,7 +4688,7 @@ msgstr ""
 
 #: src/main.c:1317
 msgid "command &History"
-msgstr ""
+msgstr "&Istwere des comandes"
 
 #: src/main.c:1318
 msgid "di&Rectory hotlist    C-\\"
@@ -4718,7 +4720,7 @@ msgstr ""
 
 #: src/main.c:1338
 msgid "&Configuration..."
-msgstr ""
+msgstr "a&Pontiaedje..."
 
 #: src/main.c:1340
 msgid "c&Onfirmation..."
@@ -4738,39 +4740,39 @@ msgstr ""
 
 #: src/main.c:1349
 msgid "&Save setup"
-msgstr ""
+msgstr "&Schaper apontiaedje"
 
 #: src/main.c:1365 src/main.c:1367
 msgid " &Left "
-msgstr ""
+msgstr " &Hintche "
 
 #: src/main.c:1367
 msgid " &Above "
-msgstr ""
+msgstr " co&Pete "
 
 #: src/main.c:1370
 msgid " &File "
-msgstr ""
+msgstr " &Fitchî "
 
 #: src/main.c:1371
 msgid " &Command "
-msgstr ""
+msgstr " &Comande "
 
 #: src/main.c:1372
 msgid " &Options "
-msgstr ""
+msgstr " &Tchûzes "
 
 #: src/main.c:1374 src/main.c:1376
 msgid " &Right "
-msgstr ""
+msgstr " &Droete "
 
 #: src/main.c:1376
 msgid " &Below "
-msgstr ""
+msgstr " &Bas "
 
 #: src/main.c:1431
 msgid " Information "
-msgstr ""
+msgstr " Informåcion "
 
 #: src/main.c:1432
 msgid ""
