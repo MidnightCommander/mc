@@ -64,7 +64,7 @@ filename_completion_function (char *text, int state)
 
     /* If we're starting the match process, initialize us a bit. */
     if (!state){
-        char *temp;
+        const char *temp;
 
         g_free (dirname);
         g_free (filename);
@@ -229,7 +229,7 @@ variable_completion_function (char *text, int state)
 {
     static char **env_p;
     static int varlen, isbrace;
-    char *p = 0;
+    const char *p = NULL;
 
     if (!state){ /* Initialization stuff */
 	isbrace = (text [1] == '{');
@@ -396,7 +396,7 @@ hostname_completion_function (char *text, int state)
 static char *
 command_completion_function (char *text, int state)
 {
-    static char *path_end;
+    static const char *path_end;
     static int isabsolute;
     static int phase;
     static int text_len;
@@ -418,7 +418,7 @@ command_completion_function (char *text, int state)
 	    "shift", "source", "suspend", "test", "times", "trap", "type",
 	    "typeset", "ulimit", "umask", "unalias", "unset", "wait", 0
     };
-    char *p, *found;
+    char *found;
 
     if (!state) {		/* Initialize us a little bit */
 	isabsolute = strchr (text, PATH_SEP) != 0;
@@ -427,10 +427,10 @@ command_completion_function (char *text, int state)
 	    words = bash_reserved;
 	    phase = 0;
 	    text_len = strlen (text);
-	    if (!path && (path = getenv ("PATH")) != NULL) {
-		p = path = g_strdup (path);
+	    if (!path && (path = g_strdup (getenv ("PATH"))) != NULL) {
+		char *p = path;
 		path_end = strchr (p, 0);
-		while ((p = strchr (p, PATH_ENV_SEP))) {
+		while ((p = (char *) strchr (p, PATH_ENV_SEP))) {
 		    *p++ = 0;
 		}
 	    }
@@ -438,7 +438,7 @@ command_completion_function (char *text, int state)
     }
 
     if (isabsolute) {
-	p = filename_completion_function (text, state);
+	char *p = filename_completion_function (text, state);
 	if (!p)
 	    look_for_executables = 0;
 	return p;
@@ -476,7 +476,7 @@ command_completion_function (char *text, int state)
 		cur_word = concat_dir_and_file (expanded, text);
 		g_free (expanded);
 		canonicalize_pathname (cur_word);
-		cur_path = strchr (cur_path, 0) + 1;
+		cur_path = (char *) strchr (cur_path, 0) + 1;
 		init_state = state;
 	    }
 	    found =
@@ -495,11 +495,13 @@ command_completion_function (char *text, int state)
 	path = NULL;
 	return NULL;
     }
-    if ((p = strrchr (found, PATH_SEP)) != NULL) {
+    { char *p;
+    if ((p = (char *) strrchr (found, PATH_SEP)) != NULL) {
 	p++;
 	p = g_strdup (p);
 	g_free (found);
 	return p;
+    }
     }
     return found;
 
@@ -665,11 +667,11 @@ try_complete (char *text, int *start, int *end, int flags)
     }
 
     if (flags & INPUT_COMPLETE_COMMANDS)
-    	p = strrchr (word, '`');
+    	p = (char *) strrchr (word, '`');
     if (flags & (INPUT_COMPLETE_COMMANDS | INPUT_COMPLETE_VARIABLES))
-        q = strrchr (word, '$');
+        q = (char *) strrchr (word, '$');
     if (flags & INPUT_COMPLETE_HOSTNAMES)    
-        r = strrchr (word, '@');
+        r = (char *) strrchr (word, '@');
     if (q && q [1] == '(' && INPUT_COMPLETE_COMMANDS){
     	if (q > p)
     	    p = q + 1;
@@ -722,7 +724,8 @@ try_complete (char *text, int *start, int *end, int flags)
     	    if (!strncmp (p, "cd", 2))
     	        for (p += 2; *p && p < q && (*p == ' ' || *p == '\t'); p++);
     	    if (p == q){
-		char *cdpath = getenv ("CDPATH");
+		char * const cdpath_ref = g_strdup (getenv ("CDPATH"));
+		char *cdpath = cdpath_ref;
 		char c, *s, *r;
 
 		if (cdpath == NULL)
@@ -730,9 +733,9 @@ try_complete (char *text, int *start, int *end, int flags)
 		else
 		    c = ':';
 		while (!matches && c == ':'){
-		    s = strchr (cdpath, ':');
+		    s = (char *) strchr (cdpath, ':');
 		    if (s == NULL)
-		        s = strchr (cdpath, 0);
+		        s = (char *) strchr (cdpath, 0);
 		    c = *s; 
 		    *s = 0;
 		    if (*cdpath){
@@ -745,6 +748,7 @@ try_complete (char *text, int *start, int *end, int flags)
 		    *s = c;
 		    cdpath = s + 1;
 		}
+		g_free (cdpath_ref);
     	    }
     	}
     }

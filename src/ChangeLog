@@ -5,6 +5,11 @@
 
 	* view.c (hex_search): Added const qualifier.
 	* boxes.c (display_unit): Likewise.
+	* command.c (examine_cd): Likewise. Additionally used g_strdup to
+	not accidentally modify an environment variable.
+	* complete.c (command_completion_function): Likewise.
+	(filename_completion_function): Likewise. (try_complete): Likewise.
+	(variable_completion_function): Likewise.
 	* file.c (check_hardlinks): Likewise.
 	* find.c (find_do_view_edit): Likewise. (find_file): Likewise.
 	* global.h (home_dir): Likewise.

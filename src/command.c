@@ -57,7 +57,8 @@ examine_cd (char *path)
 {
     int result, qlen;
     char *path_tilde;
-    char *p, *q, *r, *s, *t, c;
+    char *p, *q, *r, *s, c;
+    const char *t;
 
     /* Tilde expansion */
     path_tilde = tilde_expand (path);
@@ -107,7 +108,8 @@ examine_cd (char *path)
 
     /* CDPATH handling */
     if (*q != PATH_SEP && !result) {
-	p = getenv ("CDPATH");
+	char * const cdpath = g_strdup (getenv ("CDPATH"));
+	char *p = cdpath;
 	if (p == NULL)
 	    c = 0;
 	else
@@ -126,6 +128,7 @@ examine_cd (char *path)
 	    *s = c;
 	    p = s + 1;
 	}
+	g_free (cdpath);
     }
     g_free (q);
     g_free (path_tilde);
