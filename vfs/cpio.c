@@ -89,7 +89,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super);
 static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super);
-static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, struct stat *stat, char *name);
+static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, struct stat *, char *name);
 static int cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
@@ -250,7 +250,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
     struct old_cpio_header buf;
     int len;
     char *name;
-    struct stat stat;
+    struct stat st;
 
     if((len = mc_read(super->u.arch.fd, (char *)&buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
@@ -275,17 +275,17 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    stat.st_dev = buf.c_dev;
-    stat.st_ino = buf.c_ino;
-    stat.st_mode = buf.c_mode;
-    stat.st_nlink = buf.c_nlink;
-    stat.st_uid = buf.c_uid;
-    stat.st_gid = buf.c_gid;
-    stat.st_rdev = buf.c_rdev;
-    stat.st_size = (buf.c_filesizes[0] << 16) | buf.c_filesizes[1];
-    stat.st_atime = stat.st_mtime = stat.st_ctime = (buf.c_mtimes[0] << 16) | buf.c_mtimes[1];
+    st.st_dev = buf.c_dev;
+    st.st_ino = buf.c_ino;
+    st.st_mode = buf.c_mode;
+    st.st_nlink = buf.c_nlink;
+    st.st_uid = buf.c_uid;
+    st.st_gid = buf.c_gid;
+    st.st_rdev = buf.c_rdev;
+    st.st_size = (buf.c_filesizes[0] << 16) | buf.c_filesizes[1];
+    st.st_atime = st.st_mtime = st.st_ctime = (buf.c_mtimes[0] << 16) | buf.c_mtimes[1];
 
-    return cpio_create_entry(me, super, &stat, name);
+    return cpio_create_entry(me, super, &st, name);
 }
 #undef HEAD_LENGTH
 
@@ -293,7 +293,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
 static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
-    struct stat stat;
+    struct stat st;
     char buf[HEAD_LENGTH + 1];
     int len;
     char *name;
@@ -325,17 +325,17 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    stat.st_dev = hd.c_dev;
-    stat.st_ino = hd.c_ino;
-    stat.st_mode = hd.c_mode;
-    stat.st_nlink = hd.c_nlink;
-    stat.st_uid = hd.c_uid;
-    stat.st_gid = hd.c_gid;
-    stat.st_rdev = hd.c_rdev;
-    stat.st_size = hd.c_filesize;
-    stat.st_atime = stat.st_mtime = stat.st_ctime = hd.c_mtime;
+    st.st_dev = hd.c_dev;
+    st.st_ino = hd.c_ino;
+    st.st_mode = hd.c_mode;
+    st.st_nlink = hd.c_nlink;
+    st.st_uid = hd.c_uid;
+    st.st_gid = hd.c_gid;
+    st.st_rdev = hd.c_rdev;
+    st.st_size = hd.c_filesize;
+    st.st_atime = st.st_mtime = st.st_ctime = hd.c_mtime;
 
-    return cpio_create_entry(me, super, &stat, name);
+    return cpio_create_entry(me, super, &st, name);
 }
 #undef HEAD_LENGTH
 
@@ -343,7 +343,7 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct new_cpio_header hd;
-    struct stat stat;
+    struct stat st;
     char buf[HEAD_LENGTH + 1];
     int len;
     char *name;
@@ -381,29 +381,29 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_TRAIL;
     }
 
-    stat.st_dev = (hd.c_dev << 8) + hd.c_devmin;
-    stat.st_ino = hd.c_ino;
-    stat.st_mode = hd.c_mode;
-    stat.st_nlink = hd.c_nlink;
-    stat.st_uid = hd.c_uid;
-    stat.st_gid = hd.c_gid;
-    stat.st_rdev = (hd.c_rdev << 8) + hd.c_rdevmin;
-    stat.st_size = hd.c_filesize;
-    stat.st_atime = stat.st_mtime = stat.st_ctime = hd.c_mtime;
+    st.st_dev = (hd.c_dev << 8) + hd.c_devmin;
+    st.st_ino = hd.c_ino;
+    st.st_mode = hd.c_mode;
+    st.st_nlink = hd.c_nlink;
+    st.st_uid = hd.c_uid;
+    st.st_gid = hd.c_gid;
+    st.st_rdev = (hd.c_rdev << 8) + hd.c_rdevmin;
+    st.st_size = hd.c_filesize;
+    st.st_atime = st.st_mtime = st.st_ctime = hd.c_mtime;
 
-    return cpio_create_entry(me, super, &stat, name);
+    return cpio_create_entry(me, super, &st, name);
 }
 
 static int
 cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
-		   struct stat *stat, char *name)
+		   struct stat *st, char *name)
 {
     struct vfs_s_inode *inode = NULL;
     struct vfs_s_inode *root = super->root;
     struct vfs_s_entry *entry = NULL;
     char *tn;
 
-    switch (stat->st_mode & S_IFMT) {	/* For case of HP/UX archives */
+    switch (st->st_mode & S_IFMT) {	/* For case of HP/UX archives */
     case S_IFCHR:
     case S_IFBLK:
 #ifdef S_IFSOCK
@@ -412,24 +412,24 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 #ifdef S_IFIFO
     case S_IFIFO:
 #endif
-	if ((stat->st_size != 0) && (stat->st_rdev == 0x0001)) {
-	    stat->st_rdev = (unsigned) stat->st_size;
-	    stat->st_size = 0;
+	if ((st->st_size != 0) && (st->st_rdev == 0x0001)) {
+	    st->st_rdev = (unsigned) st->st_size;
+	    st->st_size = 0;
 	}
 	break;
     default:
 	break;
     }
 
-    if ((stat->st_nlink > 1) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
+    if ((st->st_nlink > 1) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
 	struct defer_inode i, *l;
-	i.inumber = stat->st_ino;
-	i.device = stat->st_dev;
+	i.inumber = st->st_ino;
+	i.device = st->st_dev;
 	i.inode = NULL;
 	if ((l = cpio_defer_find (super->u.arch.deferred, &i)) != NULL) {
 	    inode = l->inode;
-	    if (inode->st.st_size && stat->st_size
-		&& (inode->st.st_size != stat->st_size)) {
+	    if (inode->st.st_size && st->st_size
+		&& (inode->st.st_size != st->st_size)) {
 		message (1, MSG_ERROR,
 			 _
 			 ("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
@@ -460,48 +460,48 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 		     _("%s contains duplicate entries! Skipping!"),
 		     super->name);
 	} else {
-	    entry->ino->st.st_mode = stat->st_mode;
-	    entry->ino->st.st_uid = stat->st_uid;
-	    entry->ino->st.st_gid = stat->st_gid;
-	    entry->ino->st.st_atime = stat->st_atime;
-	    entry->ino->st.st_mtime = stat->st_mtime;
-	    entry->ino->st.st_ctime = stat->st_ctime;
+	    entry->ino->st.st_mode = st->st_mode;
+	    entry->ino->st.st_uid = st->st_uid;
+	    entry->ino->st.st_gid = st->st_gid;
+	    entry->ino->st.st_atime = st->st_atime;
+	    entry->ino->st.st_mtime = st->st_mtime;
+	    entry->ino->st.st_ctime = st->st_ctime;
 	}
 
     } else {			/* !entry */
 
 	if (!inode) {
-	    inode = vfs_s_new_inode (me, super, stat);
-	    if ((stat->st_nlink > 0) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
+	    inode = vfs_s_new_inode (me, super, st);
+	    if ((st->st_nlink > 0) && (super->u.arch.type == CPIO_NEWC || super->u.arch.type == CPIO_CRC)) {	/* For case of hardlinked files */
 		struct defer_inode *i;
 		i = g_new (struct defer_inode, 1);
-		i->inumber = stat->st_ino;
-		i->device = stat->st_dev;
+		i->inumber = st->st_ino;
+		i->device = st->st_dev;
 		i->inode = inode;
 		i->next = super->u.arch.deferred;
 		super->u.arch.deferred = i;
 	    }
 	}
 
-	if (stat->st_size)
+	if (st->st_size)
 	    inode->data_offset = CPIO_POS (super);
 
 	entry = vfs_s_new_entry (me, tn, inode);
 	vfs_s_insert_entry (me, root, entry);
 
-	if (S_ISLNK (stat->st_mode)) {
-	    inode->linkname = g_malloc (stat->st_size + 1);
-	    if (mc_read (super->u.arch.fd, inode->linkname, stat->st_size)
-		< stat->st_size) {
+	if (S_ISLNK (st->st_mode)) {
+	    inode->linkname = g_malloc (st->st_size + 1);
+	    if (mc_read (super->u.arch.fd, inode->linkname, st->st_size)
+		< st->st_size) {
 		inode->linkname[0] = 0;
 		g_free (name);
 		return STATUS_EOF;
 	    }
-	    inode->linkname[stat->st_size] = 0;	/* Linkname stored without terminating \0 !!! */
-	    CPIO_POS (super) += stat->st_size;
+	    inode->linkname[st->st_size] = 0;	/* Linkname stored without terminating \0 !!! */
+	    CPIO_POS (super) += st->st_size;
 	    cpio_skip_padding (super);
 	} else {
-	    CPIO_SEEK_CUR (super, stat->st_size);
+	    CPIO_SEEK_CUR (super, st->st_size);
 	}
 
     }				/* !entry */
