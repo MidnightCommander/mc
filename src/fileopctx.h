@@ -1,0 +1,138 @@
+/* File operation contexts for the Midnight Commander
+ *
+ * Copyright (C) 1998 The Free Software Foundation
+ *
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
+#ifndef FILEOPCTX_H
+#define FILEOPCTX_H
+
+#include <sys/stat.h>
+#include <sys/types.h>
+#include "background.h"
+#include "regex.h"
+
+
+/* This structure describes a context for file operations.  It is used to update
+ * the progress windows and pass around options.
+ */
+typedef struct {
+	/* The estimated time of arrival in seconds */
+	double eta_secs;
+
+	/* Transferred bytes per second */
+	long bps;
+
+	/* Transferred seconds */
+	long bps_time;
+
+	/* Whether the panel total has been computed */
+	int progress_totals_computed;
+
+	/* Counters for progress indicators */
+	long progress_count;
+	double progress_bytes;
+
+	/* Result from the recursive query */
+	int recursive_result;
+
+	/* Whether to do a reget */
+	int do_reget;
+
+	/* Controls appending to files */
+	int do_append;
+
+	/* Whether to stat or lstat */
+	int follow_links;
+
+	/* Pointer to the stat function we will use */
+	int (*stat_func) (char *filename, struct stat *buf);
+
+	/* Whether to recompute symlinks */
+	int stable_symlinks;
+
+	/* Preserve the original files' owner, group, permissions, and
+	 * timestamps (owner, group only as root).
+	 */
+	int preserve;
+
+	/* If running as root, preserve the original uid/gid (we don't want to
+	 * try chwon for non root) preserve_uidgid = preserve && uid == 0
+	 */
+	int preserve_uidgid;
+
+	/* The bits to preserve in created files' modes on file copy */
+	int umask_kill;
+
+	/* The mask of files to actually operate on */
+	char *dest_mask;
+
+	/* Regex for the file mask */
+	struct re_pattern_buffer rx;
+	struct re_registers regs;
+
+	/* Whether to dive into subdirectories for recursive operations */
+	int dive_into_subdirs;
+
+	/* When moving directories cross filesystem boundaries delete the
+	 * successfull copied files when all files below the directory and its
+	 * subdirectories were processed.
+	 *
+	 * If erase_at_end is zero files will be deleted immediately after their
+	 * successful copy (Note: this behaviour is not tested and at the moment
+	 * it can't be changed at runtime).
+	 */
+	int erase_at_end;
+
+	/* PID of the child for background operations */
+	pid_t pid;
+
+	/* User interface data goes here */
+
+	void *ui;
+} FileOpContext;
+
+
+FileOpContext *file_op_context_new (void);
+void file_op_context_destroy (FileOpContext *ctx);
+
+
+typedef enum {
+	OP_COPY,
+	OP_MOVE,
+	OP_DELETE
+} FileOperation;
+
+extern char *op_names [3];
+
+typedef enum {
+	FILE_CONT,
+	FILE_RETRY,
+	FILE_SKIP,
+	FILE_ABORT
+} FileProgressStatus;
+
+/* The following functions are implemented separately by each port */
+
+void file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta);
+void file_op_context_destroy_ui (FileOpContext *ctx);
+
+FileProgressStatus file_progress_show (FileOpContext *ctx, long done, long total);
+FileProgressStatus file_progress_show_count (FileOpContext *ctx, long done, long total);
+FileProgressStatus file_progress_show_bytes (FileOpContext *ctx, double done, double total);
+FileProgressStatus file_progress_show_source (FileOpContext *ctx, char *path);
+FileProgressStatus file_progress_show_target (FileOpContext *ctx, char *path);
+FileProgressStatus file_progress_show_deleting (FileOpContext *ctx, char *path);
+
+void file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg);
+
+FileProgressStatus file_progress_real_query_replace (FileOpContext *ctx,
+						     enum OperationMode mode,
+						     char *destname,
+						     struct stat *_s_stat,
+						     struct stat *_d_stat);
+
+
+#endif
