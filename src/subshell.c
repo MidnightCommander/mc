@@ -1023,8 +1023,9 @@ static int pty_open_master (char *pty_name)
     char *slave_name;
     int pty_master;
 
-
-#ifdef HAVE_GETPT
+#ifdef HAVE_POSIX_OPENPT
+    pty_master = posix_openpt(O_RDWR);
+#elif HAVE_GETPT
     /* getpt () is a GNU extension (glibc 2.1.x) */
     pty_master = getpt ();
 #elif IS_AIX
@@ -1034,6 +1035,7 @@ static int pty_open_master (char *pty_name)
     strcpy (pty_name, "/dev/ptmx");
     pty_master = open (pty_name, O_RDWR);
 #endif 
+
     if (pty_master == -1)
 	return -1;
 

@@ -1,5 +1,9 @@
 2003-07-21  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (pty_open_master) [HAVE_GRANTPT]: Prefer
+	posix_openpt() over GNU-specific getpt().  Needed for FreeBSD
+	5.x.  Original patch by Max Khon <fjoe@FreeBSD.org>
+
 	* screen.c (panel_key): Redisplay ministatus if the searching
 	was turned off.  Reported by gotar@poczta.onet.pl
 
