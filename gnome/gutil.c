@@ -95,11 +95,7 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		 */
 		_exit (0);
 	}
-	if (*pid != 0 && (flags & EXECUTE_WAIT)){
-		int status;
-		
-		waitpid (*pid, &status, 0);
-	}
+	waitpid (*pid, &status, 0);
 	sigaction (SIGINT,  &save_intr, NULL);
 	sigaction (SIGQUIT, &save_quit, NULL);
 	sigaction (SIGTSTP, &save_stop, NULL);

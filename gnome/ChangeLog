@@ -1,5 +1,8 @@
 1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gutil.c (my_system_get_child_pid): Fix.  We always wait for the
+	child process.
+
 	* gtkdtree.c (gtk_dtree_lookup_dir): Scan the whole tree.
 	Appanrently now the nodes expose are not ordered, but can contain
 	holes and gaps
