@@ -1,5 +1,6 @@
 2002-09-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* edit.c: Don't initialize static selection and selection_history.
 	* editdraw.c (status_string): Remove font_width argument.
 	(edit_status): Fix calculation to use last column in the
 	status string.

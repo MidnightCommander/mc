@@ -60,22 +60,10 @@ int option_edit_bottom_extreme = 0;
 char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = "~";
 
-static struct selection selection = {0, 0};
+static struct selection selection;
 static int current_selection = 0;
 /* Note: selection.text = selection_history[current_selection].text */
-static struct selection selection_history[NUM_SELECTION_HISTORY] =
-{
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0},
-    {0, 0}
-};
+static struct selection selection_history[NUM_SELECTION_HISTORY];
 
 static char *option_chars_move_whole_word =
     "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
@@ -2032,7 +2020,7 @@ void edit_push_key_press (WEdit * edit)
 /* this find the matching bracket in either direction, and sets edit->bracket */
 static long edit_get_bracket (WEdit * edit, int in_screen, unsigned long furthest_bracket_search)
 {
-    const char *b = "{}{[][()(", *p;
+    const char * const b = "{}{[][()(", *p;
     int i = 1, a, inc = -1, c, d, n = 0;
     unsigned long j = 0;
     long q;
