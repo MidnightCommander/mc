@@ -564,17 +564,17 @@ static void dbits_refresh()
 
 static int dbits_callback( Dlg_head * h, int Par, int Msg )
 {
-    switch (Msg) {
 #ifndef HAVE_X
+    switch (Msg) {
 	case DLG_DRAW:
 	    dbits_refresh();
 	    break;
-#endif /* HAVE_X */
     }
+#endif /* HAVE_X */
     return 0;
 }
 
-int new_display_codepage;
+static int new_display_codepage;
 
 WLabel *cplabel;
 WCheck *inpcheck;
@@ -586,7 +586,7 @@ static int sel_charset_button( int action, void *param )
     cpname = (new_display_codepage < 0)
 	     ? "Other 8 bit"
 	     : codepages[ new_display_codepage ].name;
-    sprintf( buf, "%-27s", cpname ); // avoid strange bug with label repainting
+    sprintf( buf, "%-27s", cpname ); /* avoid strange bug with label repainting */
     label_set_text( cplabel, buf );
     return 0;
 }
@@ -622,9 +622,10 @@ void init_disp_bits_box()
 			  _("F&ull 8 bits input"), NULL );
     add_widget( dbits_dlg, inpcheck );
 
+    cpname = _("&Select");
     add_widget( dbits_dlg,
-		button_new( 4, DISPX - 8 - strlen(_("&Select")) , B_USER,
-			    NORMAL_BUTTON, _("&Select"),
+		button_new( 4, DISPX - 8 - strlen(cpname) , B_USER,
+			    NORMAL_BUTTON, cpname,
 			    sel_charset_button, 0, NULL ) );
 }
 
@@ -644,7 +645,7 @@ void display_bits_box()
 	display_codepage = new_display_codepage;
 	errmsg = init_translation_table( source_codepage, display_codepage );
 	if (errmsg)
-	    message( 1, _(" Error "), errmsg );
+	    message( 1, MSG_ERROR, "%s", errmsg );
 #ifndef HAVE_X
 #ifndef HAVE_SLANG
 	meta( stdscr, display_codepage != 0 );

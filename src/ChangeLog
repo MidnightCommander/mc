@@ -7,6 +7,9 @@
 	(load_setup) [HAVE_CHARSET]: init_printable_table commented
 	out to enable compilation. Error strings tagged for translation.
 	(init_setup): Optimized.
+	* boxes.c (sel_charset_button): Eliminate C++ comment.
+	(new_display_codepage): Made static.
+	(display_bits_box): Use "%s" for plain string in message.
 
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
