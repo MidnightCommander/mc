@@ -8,7 +8,6 @@
 #
 #
 XAR=ar
-XUNAR=ar
 XARINFO="ar tv"
 AWK=awk
 
@@ -32,7 +31,17 @@ mcarfs_list ()
 
 mcarfs_copyout ()
 {
-    $XUNAR p $1 $2 > $3
+    $XAR p $1 $2 > $3
+}
+
+mcarfs_copyin ()
+{
+    $XAR r $1 $2 > $3
+}
+
+mcarfs_rm ()
+{
+    $XAR d $1 $2
 }
 
 # override any locale for dates
@@ -41,8 +50,11 @@ export LC_ALL
 
 umask 077
 case "$1" in
-  list) mcarfs_list $2; exit 0;;
-  copyout) shift; mcarfs_copyout $*; exit 0;;
-  copyin) shift; mcarfs_copyin $*; exit 0;;
+  list) mcarfs_list $2 ;;
+  copyout) shift; mcarfs_copyout "$@" ;;
+  copyin) shift; mcarfs_copyin "$@" ;;
+  rm) shift; mcarfs_rm "$@" ;;
+  *) exit 1;
 esac
-exit 1
+
+exit 0

@@ -1,3 +1,7 @@
+2002-12-06  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uar.in: Implement "copyin" and "rm" commands.
+
 2002-12-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c: Don't include ../src/profile.h.
