@@ -98,9 +98,9 @@ undelfs_shutdown (void)
 }
 
 static void
-undelfs_get_path (char *dirname, char **ext2_fname, char **file)
+undelfs_get_path (const char *dirname, char **ext2_fname, char **file)
 {
-    char *p;
+    const char *p;
 
     /* To look like filesystem, we have virtual directories
        /#undel:XXX, which have no subdirectories. XXX is replaced with
@@ -129,10 +129,12 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
     
     while (p > dirname){
 	if (*p == '/'){
+	    char *tmp;
+
 	    *file = g_strdup (p+1);
-	    *p = 0;
-	    *ext2_fname = g_strconcat ("/dev/", dirname, NULL);
-	    *p = '/';
+	    tmp = g_strndup (dirname, p - dirname);
+	    *ext2_fname = g_strconcat ("/dev/", tmp, NULL);
+	    g_free (tmp);
 	    return;
 	}
 	p--;
@@ -627,7 +629,7 @@ undelfs_lseek(void *vfs_info, off_t offset, int whence)
 }
 
 static vfsid
-undelfs_getid(vfs *me, char *path, struct vfs_stamping **parent)
+undelfs_getid(vfs *me, const char *path, struct vfs_stamping **parent)
 {
     char *ext2_fname, *file;
 

@@ -1665,7 +1665,7 @@ smbfs_link (vfs *me, char *p1, char *p2)
  * out of them
  */
 static vfsid
-smbfs_getid (vfs *me, char *p, struct vfs_stamping **parent)
+smbfs_getid (vfs *me, const char *p, struct vfs_stamping **parent)
 {
     *parent = NULL;
     DEBUG (3, ("smbfs_getid(p:%s)\n", p));

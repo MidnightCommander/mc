@@ -226,7 +226,7 @@ void vfs_s_dump(vfs *me, char *prefix, vfs_s_inode *ino);
 char *vfs_s_getlocalcopy (vfs *me, char *path);
 
 /* stamping support */
-vfsid vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent);
+vfsid vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent);
 int vfs_s_nothingisopen (vfsid id);
 void vfs_s_free (vfsid id);
 int vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg);

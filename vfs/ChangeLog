@@ -1,5 +1,8 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* undelfs.c (undelfs_get_path): Constify first argument.
+	* vfs.h (struct vfs_class): Constify path.  Fix all dependencies.
+
 	* vfs.c (vfs_release_path): New function, code taken from
 	_do_panel_cd().
 	(vfs_ncs_getid): Make static.

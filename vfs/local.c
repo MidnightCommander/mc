@@ -252,7 +252,7 @@ local_rmdir (vfs *me, char *path)
 }
 
 static vfsid
-local_getid (vfs *me, char *path, struct vfs_stamping **parent)
+local_getid (vfs *me, const char *path, struct vfs_stamping **parent)
 {
     *parent = NULL;
     return (vfsid) -1; /* We do not free local fs stuff at all */

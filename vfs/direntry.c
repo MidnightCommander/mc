@@ -522,7 +522,7 @@ return_success:
 }
 
 static char *
-vfs_s_get_path (vfs *me, char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path (vfs *me, const char *inname, struct vfs_s_super **archive, int flags)
 {
     char *buf = g_strdup( inname );
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
@@ -1071,7 +1071,7 @@ vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg)
 /* ----------------------------- Stamping support -------------------------- */
 
 vfsid
-vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent)
+vfs_s_getid (vfs *me, const char *path, struct vfs_stamping **parent)
 {
     vfs_s_super *archive;
     vfs *v;

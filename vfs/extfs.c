@@ -408,9 +408,6 @@ read_archive (int fstype, char *name, struct archive **pparc)
     return 0;
 }
 
-static char *get_path (char *inname, struct archive **archive, int is_dir,
-    int do_not_open);
-
 /* Returns path inside argument. Returned char* is inside inname, which is
  * mangled by this operation (so you must not free it's return value).
  */
@@ -471,6 +468,19 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
   return_success:
     *archive = parc;
     return local;
+}
+
+static char *
+get_path (const char *inname, struct archive **archive, int is_dir,
+	  int do_not_open)
+{
+    char *buf = g_strdup (inname);
+    char *res = get_path_mangle (buf, archive, is_dir, do_not_open);
+    char *res2 = NULL;
+    if (res)
+	res2 = g_strdup (res);
+    g_free (buf);
+    return res2;
 }
 
 /* Returns allocated path (without leading slash) inside the archive  */
@@ -756,18 +766,6 @@ static int extfs_close (void *data)
 }
 
 #define RECORDSIZE 512
-
-static char *get_path (char *inname, struct archive **archive, int is_dir,
-    int do_not_open)
-{
-    char *buf = g_strdup (inname);
-    char *res = get_path_mangle( buf, archive, is_dir, do_not_open );
-    char *res2 = NULL;
-    if (res)
-        res2 = g_strdup(res);
-    g_free(buf);
-    return res2;
-}
 
 static struct entry*
 __find_entry (struct entry *dir, char *name, 
@@ -1133,7 +1131,7 @@ static int extfs_lseek (void *data, off_t offset, int whence)
     return lseek (file->local_handle, offset, whence);
 }
 
-static vfsid extfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
+static vfsid extfs_getid (vfs *me, const char *path, struct vfs_stamping **parent)
 {
     struct archive *archive;
     vfs *v;

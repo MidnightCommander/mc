@@ -205,7 +205,7 @@ static int sfs_readlink (vfs *me, char *path, char *buf, int size)
 }
 
 static vfsid
-sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
+sfs_getid (vfs *me, const char *path, struct vfs_stamping **parent)
 {				/* FIXME: what should I do? */
     vfs *v;
     vfsid id;
