@@ -108,8 +108,11 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 			    icon_height + SPACING,
 			    text_width, text_height);
 
+	if (!GTK_WIDGET_REALIZED (dicon))
+		gtk_widget_realize (GTK_WIDGET (dicon));
+
 	gtk_widget_shape_combine_mask (GTK_WIDGET (dicon), mask, 0, 0);
-	gdk_pixmap_unref (mask);
+	gdk_bitmap_unref (mask);
 	gdk_gc_unref (mgc);
 }
 
@@ -119,8 +122,8 @@ reshape (DesktopIcon *dicon)
 {
 	GtkArg args[2];
 	int icon_width, icon_height;
-	double x1, y1, x2, y2;
 	int text_width, text_height;
+	double x1, y1, x2, y2;
 
 	/* Get size of icon image */
 
@@ -133,8 +136,9 @@ reshape (DesktopIcon *dicon)
 	/* Get size of icon text */
 
 	gnome_canvas_item_get_bounds (dicon->text, &x1, &y1, &x2, &y2);
-	text_width = x2 - x1;
-	text_height = y2 - y1;
+
+	text_width = x2 - x1 + 1;
+	text_height = y2 - y1 + 1;
 
 	/* Calculate new size of widget */
 
@@ -228,31 +232,14 @@ desktop_icon_realize (GtkWidget *widget)
 	}
 }
 
-GtkWidget *
-desktop_icon_new (char *image_file, char *text)
-{
-	DesktopIcon *dicon;
-
-	g_return_val_if_fail (image_file != NULL, NULL);
-	g_return_val_if_fail (text != NULL, NULL);
-
-	dicon = gtk_type_new (desktop_icon_get_type ());
-
-	desktop_icon_set_icon (dicon, image_file);
-	desktop_icon_set_text (dicon, text);
-
-	return GTK_WIDGET (dicon);
-}
-
-void
-desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
+/* Sets the icon from the specified image file.  Does not re-create the window shape for the desktop
+ * icon.
+ */
+static void
+set_icon (DesktopIcon *dicon, char *image_file)
 {
 	GdkImlibImage *im, *old_im;
 	GtkArg arg;
-
-	g_return_if_fail (dicon != NULL);
-	g_return_if_fail (IS_DESKTOP_ICON (dicon));
-	g_return_if_fail (image_file != NULL);
 
 	/* Load the new image */
 
@@ -278,19 +265,14 @@ desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
 
 	if (old_im)
 		gdk_imlib_destroy_image (old_im);
-
-	reshape (dicon);
 }
 
-void
-desktop_icon_set_text (DesktopIcon *dicon, char *text)
+/* Sets the text in the desktop icon, but does not re-create its window shape.  */
+static void
+set_text (DesktopIcon *dicon, char *text)
 {
 	GtkArg arg;
 	int icon_width;
-
-	g_return_if_fail (dicon != NULL);
-	g_return_if_fail (IS_DESKTOP_ICON (dicon));
-	g_return_if_fail (text != NULL);
 
 	arg.name = "width";
 	gtk_object_getv (GTK_OBJECT (dicon->icon), 1, &arg);
@@ -308,6 +290,43 @@ desktop_icon_set_text (DesktopIcon *dicon, char *text)
 
 	gtk_signal_handler_unblock (GTK_OBJECT (dicon->text), dicon->w_changed_id);
 	gtk_signal_handler_unblock (GTK_OBJECT (dicon->text), dicon->h_changed_id);
+}
 
+GtkWidget *
+desktop_icon_new (char *image_file, char *text)
+{
+	DesktopIcon *dicon;
+
+	g_return_val_if_fail (image_file != NULL, NULL);
+	g_return_val_if_fail (text != NULL, NULL);
+
+	dicon = gtk_type_new (desktop_icon_get_type ());
+
+	set_icon (dicon, image_file);
+	set_text (dicon, text);
+	reshape (dicon);
+
+	return GTK_WIDGET (dicon);
+}
+
+void
+desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
+{
+	g_return_if_fail (dicon != NULL);
+	g_return_if_fail (IS_DESKTOP_ICON (dicon));
+	g_return_if_fail (image_file != NULL);
+
+	set_icon (dicon, image_file);
+	reshape (dicon);
+}
+
+void
+desktop_icon_set_text (DesktopIcon *dicon, char *text)
+{
+	g_return_if_fail (dicon != NULL);
+	g_return_if_fail (IS_DESKTOP_ICON (dicon));
+	g_return_if_fail (text != NULL);
+
+	set_text (dicon, text);
 	reshape (dicon);
 }

@@ -1,3 +1,8 @@
+1998-10-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* desktop-icon.c (desktop_icon_new): Do now reshape more than
+	needed by splitting the set_icon and set_text functions apart.
+
 1998-10-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_set_position): Do not lower the
