@@ -1,3 +1,11 @@
+1999-08-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ftpfs.c (translate_path): Remove static buffer from here.
+	Return a strdupped string now.
+	(send_ftp_command): Release translate_path result here.
+	(open_data_connection): Release translate_path result here.
+	(ftpfs_chdir_internal): Reease it here too.
+
 1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* shared_ftp_fish.c (get_line): Fixed off by one error ('\0' might

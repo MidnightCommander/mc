@@ -172,36 +172,38 @@ static char *
 translate_path (struct connection *bucket, char *remote_path)
 {
     char *p;
-    static char buf[255]; /* No one ever needs more ;-).
-                             Actually I consider this static a bug 
-                             -- Norbert */
     
-    if (!bucket->remote_is_amiga || strlen (remote_path) >= sizeof (buf) - 1)
-	return remote_path;
+    if (!bucket->remote_is_amiga)
+	return g_strdup (remote_path);
     else {
+	char *ret;
+
 	if (logfile) {
 	    fprintf (logfile, "MC -- translate_path: %s\n", remote_path);
 	    fflush (logfile);
 	}
 
+	/*
+	 * Don't change "/" into "", e.g. "CWD " would be
+	 * invalid.
+	 */
         if (*remote_path == '/' && remote_path[1] == '\0')
-	    return "."; /* Don't change "/" into "", e.g. "CWD " would be
-                           invalid. */
+	    return g_strdup ("."); 
 
 	/* strip leading slash */
 	if (*remote_path == '/')
-	    strcpy (buf, remote_path + 1);
+	    ret = g_strdup (remote_path + 1);
 	else
-	    strcpy (buf, remote_path);
+	    ret = g_strdup (remote_path);
 
 	/* replace first occurance of ":/" with ":" */
-	if ((p = strchr (buf, ':')) && *(p + 1) == '/')
+	if ((p = strchr (ret, ':')) && *(p + 1) == '/')
 	    strcpy (p + 1, p + 2);
 
 	/* strip trailing "/." */
-	if ((p = strrchr (buf, '/')) && *(p + 1) == '.' && *(p + 2) == '\0')
+	if ((p = strrchr (ret, '/')) && *(p + 1) == '.' && *(p + 2) == '\0')
 	    *p = '\0';
-	return buf;
+	return ret;
     }
 }
 
@@ -1033,10 +1035,12 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
 	if (j != CONTINUE)
 	    return -1;
     }
-    if (remote)
-        j = command (bucket, WAIT_REPLY, "%s %s", cmd, 
-		translate_path (bucket, remote));
-    else
+    if (remote){
+	char *path = translate_path (bucket, remote);
+	
+        j = command (bucket, WAIT_REPLY, "%s %s", cmd, path);
+	g_free (path);
+    } else
     	j = command (bucket, WAIT_REPLY, "%s", cmd);
     if (j != PRELIM)
 	    ERRNOR (EPERM, -1);
@@ -1692,6 +1696,7 @@ send_ftp_command(char *filename, char *cmd, int flags)
 	return -1;
     p = translate_path (bucket, remote_path);
     r = command (bucket, WAIT_REPLY, cmd, p);
+    g_free (p);
     g_free(remote_path);
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) bucket, NULL);
     if (flags & OPT_IGNORE_ERROR)
@@ -1783,7 +1788,8 @@ ftpfs_chdir_internal (struct connection *bucket ,char *remote_path)
 
     p = translate_path (bucket, remote_path);
     r = command (bucket, WAIT_REPLY, "CWD %s", p);
-
+    g_free (p);
+    
     if (r != COMPLETE) {
 	my_errno = EIO;
     } else {
