@@ -19,6 +19,7 @@ Release candidate for 4.6.0.
 	  mc in the parent shell, "mc" is now an alias in all shells,
 	  not a function.  The "-P" option needs an argument now.
 	- Alt-O sets the same directory on the other panel.
+	- Current directory is shown in the xterm window title.
 
 - Screen libraries.
 	- Screen library is now selected by the option --with-screen.
