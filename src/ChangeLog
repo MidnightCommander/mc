@@ -1,5 +1,7 @@
 2000-08-30  Pavel Roskin  <proski@gnu.org>
 
+	* dirhist.c, dirhist.h: removed
+
 	* features.h, keys.h, textconf.h, x.h: added protection against
 	multiple inclusion
 
