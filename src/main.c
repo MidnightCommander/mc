@@ -90,6 +90,10 @@
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */
 #endif
 
+#ifdef USE_INTERNAL_EDIT
+#   include "../edit/edit.h"
+#endif
+
 #ifdef	HAVE_CHARSET
 #include "charsets.h"
 #endif				/* HAVE_CHARSET */
