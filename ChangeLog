@@ -1,3 +1,8 @@
+2004-11-02  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Add feature test whether socklen_t is defined
+	in <sys/socket.h>.
+
 2004-10-28  Jindrich Novy  <jnovy@redhat.com>
 
 	* lib/mc.ext.in: Add a few sound formats that "play" and "mikmod"

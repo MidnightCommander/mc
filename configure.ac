@@ -152,7 +152,7 @@ AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
 	stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h sys/time.h \
 	sys/timeb.h sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
-	security/pam_misc.h])
+	security/pam_misc.h sys/socket.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
@@ -212,10 +212,13 @@ dnl
 AC_TYPE_MODE_T
 AC_CHECK_TYPE(umode_t, int)
 AC_CHECK_TYPE(off_t, long)
-AC_CHECK_TYPE(socklen_t, int)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)
+AC_CHECK_TYPES([socklen_t],
+  AC_DEFINE([HAVE_C_TYPE_SOCKLEN_T], [1], [Define to 1 if socklen_t is defined by <sys/socket.h>]),,
+[#include <sys/types.h>
+#include <sys/socket.h>])
 
 dnl This is needed for regex.c only
 AC_CHECK_TYPE(uintptr_t,
