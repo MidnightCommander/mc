@@ -1,6 +1,10 @@
 2001-10-30  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* smbfs.c: Include <config.h> before everything else.
+	(myhostname): Declare extern.
+
+	(get_master_browser): Declare ipzero extern. By drk@sgi.com.
+	http://bugzilla.gnome.org/show_bug.cgi?id=60933
 
 	* cpio.c (cpio_read_bin_head): Release name if mc_read fails.
 	(cpio_read_crc_head): Likewise.

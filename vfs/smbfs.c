@@ -20,7 +20,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports smbfs_vfs_ops */
+/* Namespace: exports smbfs_vfs_ops smbfs_set_debug */
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -52,7 +52,7 @@ static uint32 err;
 
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
-static pstring myhostname;
+extern pstring myhostname;
 static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
@@ -945,7 +945,9 @@ static int
 get_master_browser(char **host)
 {
 	int count;
-	struct in_addr *ip_list, bcast_addr, ipzero;
+	struct in_addr *ip_list, bcast_addr;
+	extern struct in_addr  ipzero;
+
 	/* does port = 137 for win95 master browser? */
 	int fd= open_socket_in( SOCK_DGRAM, 0, 3,
                              interpret_addr(lp_socket_address()), True ); 
