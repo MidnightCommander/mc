@@ -2267,7 +2267,9 @@ OS_Setup ()
 	shell = get_default_shell ();
     
     /* Default opening mode for files is binary, not text (CR/LF translation) */
+#ifndef __EMX__
     _fmode = O_BINARY;
+#endif
 
     mc_home = get_mc_lib_dir ();
 }
