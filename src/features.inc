@@ -14,6 +14,9 @@ char *features =
 #    endif
 #else
     "text mode"
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
+    " with X11 support to read modifiers"
+#endif
 #endif
     ".\n"
 

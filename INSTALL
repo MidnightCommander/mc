@@ -162,6 +162,12 @@ installed the gpm package.
      Default is somewhere in your XView binaries directory,
      $OPENWINHOME/bin.
 
+`--with-tm-x-support'
+     This option enables minimal X Window support in the text edition. It 
+     enables MC to query the status of the modifiers CONTROL and SHIFT 
+     when invoked in a terminal emulation under X11. That's necessary 
+     to recognice key combinations like C-HOME or S-Cursor key.
+
 `--without-vfs'
      This option disables the Virtual File System switch code in the
      Midnight Commander and uses the standard file system calls for

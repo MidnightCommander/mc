@@ -1,3 +1,20 @@
+Wed Apr 21 20:40:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Makefile.in: use MCCFLAGS and MCLIBS
+
+Wed Apr 21 20:19:45 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* key.c (get_modifier): Query the state of the modifier keys when 
+	running inside a terminal emulation under X11.
+
+	* key.c (init_textmode_x11_support, done_textmode_x11_support): new
+	functions, only used in the text edition. Connect to and disconnect 
+	from the X Server when DISPLAY is set.
+
+	* key.h: added prototypes for the new functions
+
+	* main.c (main): call (init|done)_textmode_x11_support
+
 Sat Apr 17 13:04:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* view.c (do_view_init): Enable viewing of files with negative

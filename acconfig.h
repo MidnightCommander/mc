@@ -62,6 +62,9 @@
 /* Is the program using the GPM library? */
 #undef HAVE_LIBGPM
 
+/* Is the text edition compiled with X11 support? */
+#undef HAVE_TEXTMODE_X11_SUPPORT
+
 /* Is the program using the distributed slang library? */
 #undef HAVE_SLANG
 

@@ -2990,6 +2990,10 @@ main (int argc, char *argv [])
        calls any define_sequence */
     init_key ();
 
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+    init_textmode_x11_support ();
+#endif
+
 #ifndef HAVE_GNOME
     handle_args (argc, argv);
 #endif
@@ -3170,6 +3174,11 @@ main (int argc, char *argv [])
 #ifdef HAVE_MAD
     done_key ();
 #endif
+
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+    done_textmode_x11_support ();
+#endif
+
     mad_finalize (__FILE__, __LINE__);
 #ifdef HAVE_X
     xtoolkit_end ();

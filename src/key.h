@@ -4,6 +4,9 @@
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
+void init_textmode_x11_support (void);
+void done_textmode_x11_support (void);
+
 int get_event (Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
 int ctrl_pressed (void);

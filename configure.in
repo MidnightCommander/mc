@@ -296,6 +296,27 @@ dnl ])
 AC_PATH_XTRA
 
 dnl
+dnl X11 support in the textmode edition. 
+dnl
+
+dnl These variables are only used when building the text edition MC binary
+MCCFLAGS=""
+MCLIBS=""
+AC_SUBST(MCCFLAGS)
+AC_SUBST(MCLIBS)
+
+textmode_x11_support="no"
+AC_ARG_WITH(tm-x-support,
+	[--with-tm-x-support        Add X Window System support to the text edition],
+	if test x$withval = xyes; then
+		MCCFLAGS="$X_CFLAGS"
+		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
+		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT)
+		textmode_x11_support="yes"
+	fi
+)
+
+dnl
 dnl Network related functions
 dnl
 
@@ -696,11 +717,10 @@ AC_ARG_WITH(debug,
 	mem_debug="Janne's MAD library"
 	AC_DEFINE(HAVE_MAD)
 	AC_DEFINE(MCDEBUG)
-	if [ echo `uname -s -r` | grep 'SunOS 4.1' ]
+	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
 	then
     	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi >& /dev/null
-
+        fi
 	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
 		:
 	else
@@ -721,10 +741,10 @@ AC_ARG_WITH(efence,
 	CFLAGS="$CFLAGS -Wall"
 	AC_DEFINE(MCDEBUG)
 	LIBS="$LIBS -lefence"
-	if [ echo `uname -s -r` | grep 'SunOS 4.1' ]
+	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
 	then
     	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi >& /dev/null
+        fi
 	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
 		:
 	else
@@ -1247,9 +1267,9 @@ if test x$srcdir != x; then
     fi
 fi
 
-if echo "$screen_manager" | grep "SLang" ; then
+if echo "$screen_manager" | grep -q "SLang" ; then
     screen_manager="${screen_manager}${slang_term}"
-fi >& /dev/null
+fi
 
 echo "
 Configuration:
@@ -1262,6 +1282,7 @@ Configuration:
   Text mode screen manager:   ${screen_manager}
   Install console saver:      ${install_saver}
   Text mode mouse library:    ${mouse_lib}
+  Text mode X11 support:      ${textmode_x11_support}
   Debugger code:              ${mem_debug}
   With subshell support:      ${subshell}
   X11 versions:               ${xvers}

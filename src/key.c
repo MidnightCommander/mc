@@ -44,6 +44,10 @@
 #include "cons.saver.h"
 #include "../vfs/vfs.h"
 
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#include <X11/Xlib.h>
+#endif
+
 #ifdef __linux__
 #    if defined(__GLIBC__) && (__GLIBC__ < 2)
 #        include <linux/termios.h>	/* This is needed for TIOCLINUX */
@@ -225,6 +229,19 @@ define_sequences (key_define_t *kd)
 	define_sequence(kd [i].code, kd [i].seq, kd [i].action);
 #endif	
 }
+
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+Display *display;
+Window w;
+
+void
+init_textmode_x11_support (void)
+{
+    display = XOpenDisplay (0);
+    if (display)
+        w = DefaultRootWindow (display);
+}
+#endif
 
 /* This has to be called before slang_init or whatever routine
    calls any define_sequence */
@@ -963,15 +980,38 @@ int is_idle (void)
 int
 get_modifier (void)
 {
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+    if (display) {
+        Window root, child;
+        int root_x, root_y;
+        int win_x, win_y;
+        unsigned int mask;
+        Bool b;
+	int result = 0;
+
+	b = XQueryPointer(display, w, &root, &child,
+                                  &root_x, &root_y,
+                                  &win_x, &win_y,
+             			  &mask);
+
+	if (mask & ShiftMask)
+	    result |= SHIFT_PRESSED;
+        if (mask & ControlMask)
+	    result |= CONTROL_PRESSED;
+	return result;
+    } else 
+#endif
 #ifdef __linux__
-    unsigned char modifiers;
+    {
+	unsigned char modifiers;
 
-    modifiers = 6;
+	modifiers = 6;
 
-    if (ioctl (0, TIOCLINUX, &modifiers) < 0)
-	return 0;
+	if (ioctl (0, TIOCLINUX, &modifiers) < 0)
+	    return 0;
 
-    return (int) modifiers;
+        return (int) modifiers;
+    }
 #else
     return 0;
 #endif
@@ -989,6 +1029,7 @@ ctrl_pressed ()
 
 #ifdef HAVE_MAD
 #ifndef HAVE_X
+
 void k_dispose (key_def *k)
 {
     if (!k)
@@ -1014,10 +1055,18 @@ void done_key ()
 }
 
 #else
-
 void done_key () 
 {
 }
 
 #endif /* HAVE_X */
 #endif /* HAVE_MAD */
+
+#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+void
+done_textmode_x11_support (void)
+{
+    if (display)
+	XCloseDisplay (display);
+}
+#endif
