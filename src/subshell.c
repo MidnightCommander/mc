@@ -582,6 +582,7 @@ int invoke_subshell (const char *command, int how, char **new_dir)
     {
 	if (how == QUIETLY)
 	    write (subshell_pty, " ", 1);
+	/* FIXME: if command is long (>8KB ?) we go comma */
 	write (subshell_pty, command, strlen (command));
 	write (subshell_pty, "\n", 1);
 	subshell_state = RUNNING_COMMAND;
@@ -752,10 +753,8 @@ int exit_subshell (void)
 
 /* {{{ do_subshell_chdir */
 /* If it actually changed the directory it returns true */
-void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
+void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
-    char *temp;
-    
     if (!(subshell_state == INACTIVE && strcmp (subshell_cwd, cpanel->cwd))){
 	/* We have to repaint the subshell prompt if we read it from
 	 * the main program.  Please note that in the code after this
@@ -770,9 +769,23 @@ void do_subshell_chdir (char *directory, int do_update, int reset_prompt)
        because we set "HISTCONTROL=ignorespace") */
     write (subshell_pty, " cd ", 4);
     if (*directory) {
+	struct termios old_mode, new_mode;
+	char *temp;
+
+	/* FIXME: Lines below are dirty hack to prevent command execution
+	 *        for directory names containing 0x03 (intr) 0x14.
+	 *	  See http://www.securityfocus.com/vdb/?id=2016 for details.
+	 *        Subshell still can't chdir to such directories */
+	tcgetattr (subshell_pty, &old_mode);
+	new_mode = old_mode;
+	new_mode.c_lflag &= ~ISIG;    /* Disable intr, quit & suspend chars */
+	tcsetattr (subshell_pty, TCSANOW, &new_mode);
+
 	temp = name_quote (directory, 0);
-	write (subshell_pty, temp, strlen (temp));    
-       g_free (temp);
+	write (subshell_pty, temp, strlen (temp));
+	g_free (temp);
+
+	tcsetattr (subshell_pty, TCSANOW, &old_mode);
     } else {
 	write (subshell_pty, "/", 1);
     }
