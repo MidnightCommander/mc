@@ -821,8 +821,8 @@ static void add_widgets_i18n(QuickWidget* qw, int len)
 #endif /* ENABLE_NLS */
 
 static int
-add_new_entry_input (const char *header, char *text1, char *text2,
-                    const char *help, char **r1, char **r2)
+add_new_entry_input (const char *header, const char *text1, const char *text2,
+		    const char *help, char **r1, char **r2)
 {
 #define RELATIVE_Y_BUTTONS	4
 #define RELATIVE_Y_LABEL_PTH	3
