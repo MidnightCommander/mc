@@ -87,7 +87,7 @@ void mc_refresh (void);
 
 #   define ACS_MAP(x) '*'
 
-#   define NO_COLOR_SUPPORT
+#   define NO_COLOR_CURSES
 #   define untouchwin(win) 
 #   define xgetch x_getch
 #   define wtouchln(win,b,c,d) touchwin(win)
@@ -123,7 +123,7 @@ void mc_refresh (void);
 
 #endif /* USE_SYSV_CURSES */
 
-#ifdef NO_COLOR_SUPPORT
+#ifdef NO_COLOR_CURSES
 #   define COLOR_PAIR(x) 1
 
 enum {

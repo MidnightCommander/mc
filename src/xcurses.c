@@ -35,7 +35,7 @@ int start_color ()
     return 0;
 }
 
-#ifndef SUNOS_CURSES
+#ifndef USE_SUNOS_CURSES
 void hline (int character, int len)
 {
     int i, x, y;

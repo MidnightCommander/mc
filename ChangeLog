@@ -1,3 +1,13 @@
+Thu Nov 26 12:20:06 1998  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* config.h.in: Removed from CVS, added to .cvsignore
+
+	* acconfig.h, macros/curses.m4, src/xcurses.c, src/tty.h,
+	configure.in:
+	NO_COLOR_SUPPORT renamed to NO_COLOR_CURSES
+	HAVE_SUNOS_CURSES and SUNOS_CURSES renamed to USE_SUNOS_CURSES
+	HAS_CURSES added to acconfig.h
+
 1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* autogen.sh: Add "-I macros" to the aclocal flags.

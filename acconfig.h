@@ -79,6 +79,9 @@
 /* If you don't have gcc, define this */
 #undef OLD_TOOLS 
 
+/* Found some version of curses that we're going to use */
+#undef HAS_CURSES
+
 /* Are you using other type of curses? */
 #undef OTHER_CURSES
 
@@ -86,7 +89,7 @@
 #undef SUBSHELL_OPTIONAL
 
 /* Use SunOS SysV curses? */
-#undef SUNOS_CURSES
+#undef USE_SUNOS_CURSES
 
 /* Use old BSD curses? */
 #undef USE_BSD_CURSES
@@ -98,7 +101,7 @@
 #undef USE_NCURSES
 
 /* If you Curses does not have color define this one */
-#undef NO_COLOR_SUPPORT
+#undef NO_COLOR_CURSES
 
 /* Support the Midnight Commander Virtual File System? */
 #undef USE_VFS

@@ -4,6 +4,7 @@ Specfile
 config.status
 config.cache
 config.h
+config.h.in
 config.log
 configure
 mcfn_install
