@@ -27,7 +27,7 @@ if (eval "require Date::Parse") { # fancy date parsing available?
 	# Date: Mon, 27 Mar 100 16:30:47 +0000 (GMT)
 	if (/(\d\d?) ([A-Z][a-z][a-z]) (1?\d\d) (\d\d?:\d\d)/) {
 	    $correct_year = 1900 + $3;
-	    if ($correct_year < 2000) {
+	    if ($correct_year < 1970) {
 		$correct_year += 100;
 	    }
 	    return "$2 $1 $correct_year $4";

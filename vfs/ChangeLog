@@ -1,3 +1,8 @@
+2001-02-19  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/mailfs (parse_date): Correctly handle two-digit years
+	between 1970 and 1999.
+
 2001-02-14  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_parse_filedate): Don't reset got_year to 0 while
