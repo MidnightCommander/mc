@@ -122,7 +122,9 @@
 #include "command.h"
 #include "wtools.h"
 #include "complete.h"		/* For the free_completion */
-#include "features.h"
+#ifndef HAVE_X
+#include "textconf.h"
+#endif
 
 #include "chmod.h"
 #include "chown.h"

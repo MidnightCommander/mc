@@ -25,7 +25,7 @@ SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c	\
 	complete.c slint.c command.c cmd.c panelize.c learn.c		\
 	listmode.c utilunix.c background.c rxvt.c			\
 	text.c popt.c findme.c poptparse.c poptconfig.c popthelp.c	\
-	filegui.c filenot.c fileopctx.c treestore.c features.c
+	filegui.c filenot.c fileopctx.c treestore.c textconf.c
 
 HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	util.h dir.h global.h menu.h panel.h win.h mem.h		\
@@ -34,7 +34,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	subshell.h view.h setup.h key.h ext.h boxes.h			\
 	hotlist.h layout.h fsusage.h mountlist.h eregex.h complete.h	\
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
-	learn.h listmode.h features.h background.h			\
+	learn.h listmode.h background.h					\
 	x.h textconf.h i18n.h findme.h popt.h filegui.h keys.h xtty.h	\
 	poptint.h poptalloca.h fileopctx.h treestore.h
 
@@ -47,7 +47,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 	cmd.o main.o panelize.o learn.o listmode.o utilunix.o		\
 	background.o rxvt.o text.o popt.o findme.o poptparse.o		\
 	poptconfig.o popthelp.o filegui.o filenot.o fileopctx.o		\
-	treestore.o features.o
+	treestore.o textconf.o
 
 #
 # Distribution variables

@@ -77,7 +77,9 @@
 #include "setup.h"
 #include "x.h"
 #include "profile.h"
-#include "features.h"
+#ifndef HAVE_X
+#include "textconf.h"
+#endif
 
 #define MIDNIGHT
 #include "../vfs/vfs.h"

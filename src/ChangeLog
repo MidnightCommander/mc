@@ -1,5 +1,11 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* features.h: Joined with textconf.h to avoid name clash with
+	GNU Libc.
+	* features.c: Renamed to ...
+	* textconf.c: ... this
+	* Makefile.in, cmd.c, main.c, text.c: necessary adjustments
+
 	* Makefile.in: Don't make softlinks to the libraries
 
 2000-09-13  Pavel Roskin  <proski@gnu.org>

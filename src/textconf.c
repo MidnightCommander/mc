@@ -6,7 +6,7 @@
 #include <glib.h>
 #include "i18n.h"
 #include "cmd.h"
-#include "features.h"
+#include "textconf.h"
 
 static const char * const features [] =  {
     N_("Edition: "),
