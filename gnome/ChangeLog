@@ -1,5 +1,16 @@
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (panel_create_file_list): Added GDK_ACTION_ASK to the
+	destination actions.
+	(panel_create_icon_display): Likewise.
+	(panel_create_tree_view): Likewise.
+
+	* gdesktop.c (desktop_drag_motion): If the user explicitly
+	requested action ASK, then do not make feedback show MOVE.
+
+	* gscreen.c (panel_widget_motion): Pass in all drag actions now
+	that Gtk handles button 2 by itself.
+
 	* gdesktop.c (icon_event): Also delay the call to select_icon()
 	until button release if the icon is selected and there are no
 	modifier keys pressed.  This lets us perform drags on

@@ -330,7 +330,6 @@ x_select_item (WPanel *panel)
 		gnome_canvas_update_now (GNOME_CANVAS (list));
 	} else {
 		GtkCList *clist = CLIST_FROM_SW (panel->list);
-		int color, marked;
 
 		gtk_clist_select_row (clist, panel->selected, 0);
 
@@ -460,14 +459,6 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	gtk_clist_thaw (clist);
 }
 
-static void
-internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
-{
-	unselect_item (panel);
-	panel->selected = row;
-
-	select_item (panel);
-}
 static int
 panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 {
@@ -928,7 +919,6 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 {
 	GtkTargetList *list;
 	GdkDragContext *context;
-	int action;
 		
 	if (!panel->maybe_start_drag)
 		return FALSE;
@@ -939,12 +929,9 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
-	if (panel->maybe_start_drag == 2)
-		action = GDK_ACTION_ASK;
-	else
-		action = GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK;
-	
-	context = gtk_drag_begin (widget, list, action,
+	context = gtk_drag_begin (widget, list,
+				  (GDK_ACTION_COPY | GDK_ACTION_MOVE
+				   | GDK_ACTION_LINK | GDK_ACTION_ASK),
 				  panel->maybe_start_drag, (GdkEvent *) event);
 	gtk_drag_set_icon_default (context);
 
@@ -1204,7 +1191,7 @@ panel_create_file_list (WPanel *panel)
 
 	gtk_drag_dest_set (GTK_WIDGET (file_list), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
-			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
 	/* Make directories draggable */
 	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
@@ -1396,7 +1383,7 @@ panel_create_icon_display (WPanel *panel)
 
 	gtk_drag_dest_set (GTK_WIDGET (ilist), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
-			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get),
@@ -2038,7 +2025,7 @@ panel_create_tree_view (WPanel *panel)
 
 	gtk_drag_dest_set (GTK_WIDGET (tree), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
-			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
 	/*
 	 * Drag and drop signals.

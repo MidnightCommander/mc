@@ -1642,8 +1642,12 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 	} else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
 		source_widget = gtk_drag_get_source_widget (context);
 
-		/* If it comes from ourselves, make move the default */
-		if (source_widget && (context->actions & GDK_ACTION_MOVE))
+		/* If it comes from ourselves, make move the default unless the
+		 * user is explicitly asking for ASK.
+		 */
+		if (source_widget
+		    && context->suggested_action != GDK_ACTION_ASK
+		    && (context->actions & GDK_ACTION_MOVE))
 			action = GDK_ACTION_MOVE;
 	} else
 		action = 0; /* we cannot handle that type of data */
