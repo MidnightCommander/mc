@@ -1,10 +1,10 @@
-2004-10-05 Gergely Sza'sz,,,  <szaszg@hu.inter.net> 
+2004-10-05  Gergely Sza'sz  <szaszg@hu.inter.net> 
 
 	* syntax/perl.syntax: Fix highlight the hashes.
-	* syntax/diff.syntax: highlight comments (lines begin with #),
+	* syntax/diff.syntax: Highlight comments (lines begin with #),
 	and garbage in diff files.
 
-2004-09-17 Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+2004-09-17  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* mc.qpg.in: New file. Description for QNX 6.x packager.
 
@@ -15,24 +15,24 @@
 
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
-	* HACKING (Programming tips): added a tip concerning the NULL
+	* HACKING (Programming tips): Added a tip concerning the NULL
 	pointer in varargs function calls.
 
 2004-09-22  Roland Illig  <roland.illig@gmx.de>
 
-	* HACKING: added advice for using g_strdup for a modifiable
+	* HACKING: Added advice for using g_strdup for a modifiable
 	copy of a string.
-	* HACKING: added a section about where to look for bug reports
+	* HACKING: Added a section about where to look for bug reports
 	and patches.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
-	* HACKING: added explanation for const_cast.
+	* HACKING: Added explanation for const_cast.
 
 2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru> 
 
-	* syntax/makefile.syntax.diff: adds "define" and "ended" keywords
-	* syntax/perl.syntax.diff: adds "break" keyword
+	* syntax/makefile.syntax.diff: Adds "define" and "ended" keywords
+	* syntax/perl.syntax.diff: Adds "break" keyword
 
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
@@ -64,12 +64,11 @@
 	--disable option. Before, --disable has not been handled
 	correctly.
 
-
-
 2004-08-22  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* m4/ri-gcc-warnings.m4: Using AC_HELP_STRING for more portable.
 	AS_HELP_STRING was introduced after autoconf 2.57+.
+
 	From Leonard den Ottolander <leonard * den.ottolander.nl>
 
 2004-08-18  Roland Illig  <roland.illig@gmx.de>
@@ -102,7 +101,7 @@
 	* doc/mc.1.in (Extension File Edit): Document "directory" keyword.
 	* doc/ru/mc.1.in: Likewise.
 
-2004-08-02  Pavel Shirshov <pavelsh@mail.ru>
+2004-08-02  Pavel Shirshov  <pavelsh@mail.ru>
 
         * autogen.sh: Fix unportable "\n" in sed.
 
