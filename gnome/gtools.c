@@ -89,7 +89,7 @@ query_dialog (char *header, char *text, int flags, int count, ...)
 
 /* To show nice messages to the users */
 Dlg_head *
-message (int error, char *header, char *text, ...)
+message (int error, char *header, const char *text, ...)
 {
 	va_list  args;
 	char     buffer [4096];
@@ -98,7 +98,7 @@ message (int error, char *header, char *text, ...)
 	/* Setup the display information */
 	strcpy (buffer, "\n");
 	va_start (args, text);
-	vsprintf (&buffer [1], text, args);
+	g_vsnprintf (&buffer [1], sizeof (buffer), text, args);
 	strcat (buffer, "\n");
 	va_end (args);
 	
