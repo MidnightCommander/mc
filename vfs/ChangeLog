@@ -1,3 +1,10 @@
+2004-11-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* fish.c (fish_file_store): Check write() more carefully.
+	(PREFIX): Fix memory leak.
+	(fish_##name): Likewise.
+	(fish_chown): Likewise.
+
 2004-11-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* direntry.c (vfs_s_open): Fix memory leak.

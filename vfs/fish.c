@@ -542,6 +542,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
     total = 0;
     
     while (1) {
+	int t;
 	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
 	    if ((errno == EINTR) && got_interrupt())
 	        continue;
@@ -551,8 +552,12 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 	}
 	if (n == 0)
 	    break;
-    	while (write(SUP.sockw, buffer, n) < 0) {
-	    me->verrno = errno;
+    	if ((t = write (SUP.sockw, buffer, n)) != n) {
+	    if (t == -1) {
+		me->verrno = errno
+	    } else { 
+		me->verrno = EIO;
+	    }
 	    goto error_return;
 	}
 	disable_interrupt_key();
@@ -692,15 +697,17 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, const char *c
 
 #define PREFIX \
     char buf[BUF_LARGE]; \
-    char *rpath, *mpath; \
+    char *rpath, *mpath = g_strdup (path); \
     struct vfs_s_super *super; \
-    if (!(rpath = vfs_s_get_path_mangle(me, mpath = g_strdup(path), &super, 0))) \
+    if (!(rpath = vfs_s_get_path_mangle (me, mpath, &super, 0))) { \
+	g_free (mpath); \
 	return -1; \
-    rpath = name_quote (rpath, 0);
+    } \
+    rpath = name_quote (rpath, 0); \
+    g_free (mpath);
 
 #define POSTFIX(flags) \
     g_free (rpath); \
-    g_free (mpath); \
     return fish_send_command(me, super, buf, flags);
 
 static int
@@ -721,17 +728,22 @@ static int fish_##name (struct vfs_class *me, const char *path1, const char *pat
     char buf[BUF_LARGE]; \
     char *rpath1, *rpath2, *mpath1, *mpath2; \
     struct vfs_s_super *super1, *super2; \
-    if (!(rpath1 = vfs_s_get_path_mangle(me, mpath1 = g_strdup(path1), &super1, 0))) \
+    if (!(rpath1 = vfs_s_get_path_mangle (me, mpath1 = g_strdup(path1), &super1, 0))) { \
+	g_free (mpath1); \
 	return -1; \
-    if (!(rpath2 = vfs_s_get_path_mangle(me, mpath2 = g_strdup(path2), &super2, 0))) \
+    } \
+    if (!(rpath2 = vfs_s_get_path_mangle (me, mpath2 = g_strdup(path2), &super2, 0))) { \
+	g_free (mpath1); \
+	g_free (mpath2); \
 	return -1; \
+    } \
     rpath1 = name_quote (rpath1, 0); \
+    g_free (mpath1); \
     rpath2 = name_quote (rpath2, 0); \
+    g_free (mpath2); \
     g_snprintf(buf, sizeof(buf), string "\n", rpath1, rpath2, rpath1, rpath2); \
     g_free (rpath1); \
     g_free (rpath2); \
-    g_free (mpath1); \
-    g_free (mpath2); \
     return fish_send_command(me, super2, buf, OPT_FLUSH); \
 }
 
@@ -763,7 +775,6 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
     char *sowner, *sgroup;
     struct passwd *pw;
     struct group *gr;
-    PREFIX
 
     if ((pw = getpwuid (owner)) == NULL)
 	return 0;
@@ -773,22 +784,25 @@ fish_chown (struct vfs_class *me, const char *path, int owner, int group)
 
     sowner = pw->pw_name;
     sgroup = gr->gr_name;
-    g_snprintf(buf, sizeof(buf),
-            "#CHOWN /%s /%s\n"
+    {
+	PREFIX
+	g_snprintf (buf, sizeof(buf),
+    	    "#CHOWN /%s /%s\n"
 	    "chown %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sowner, rpath,
 	    sowner, rpath);
-    fish_send_command(me, super, buf, OPT_FLUSH); 
-    /* FIXME: what should we report if chgrp succeeds but chown fails? */
-    g_snprintf(buf, sizeof(buf),
+	fish_send_command (me, super, buf, OPT_FLUSH); 
+	/* FIXME: what should we report if chgrp succeeds but chown fails? */
+	g_snprintf (buf, sizeof(buf),
             "#CHGRP /%s /%s\n"
 	    "chgrp %s /%s 2>/dev/null\n"
 	    "echo '### 000'\n", 
 	    sgroup, rpath,
 	    sgroup, rpath);
-    /* fish_send_command(me, super, buf, OPT_FLUSH); */
-    POSTFIX(OPT_FLUSH)
+	/* fish_send_command(me, super, buf, OPT_FLUSH); */
+	POSTFIX (OPT_FLUSH)
+    }
 }
 
 static int fish_unlink (struct vfs_class *me, const char *path)
