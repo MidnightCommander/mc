@@ -237,7 +237,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 #define debug_printf(x,y)
 #endif
 
-static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned long rule)
+static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned long rule)
 {
     struct context_rule *r;
     int context, keyword, c1, c2;
@@ -249,6 +249,8 @@ static unsigned long apply_rules_going_right (WEdit * edit, long i, unsigned lon
     border = rule & (RULE_ON_LEFT_BORDER | RULE_ON_RIGHT_BORDER);
     c1 = edit_get_byte (edit, i - 1);
     c2 = edit_get_byte (edit, i);
+    if (!c2 || !c1)
+	return rule;
 
     debug_printf ("%c->", c1);
     debug_printf ("%c ", c2);
@@ -390,7 +392,7 @@ static inline int resolve_left_delim (WEdit * edit, long i, struct context_rule 
     return 0;
 }
 
-static unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long rule)
+static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long rule)
 {
     struct context_rule *r;
     int context, keyword, c2, c1;
@@ -402,6 +404,8 @@ static unsigned long apply_rules_going_left (WEdit * edit, long i, unsigned long
     border = rule & (RULE_ON_RIGHT_BORDER | RULE_ON_LEFT_BORDER);
     c1 = edit_get_byte (edit, i);
     c2 = edit_get_byte (edit, i + 1);
+    if (!c2 || !c1)
+	return rule;
 
     debug_printf ("%c->", c2);
     debug_printf ("%c ", c1);
@@ -1327,6 +1331,10 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 #else
 			    (*syntax_change_callback) (edit->widget);
 #endif
+/* if there are no rules then turn off syntax highlighting for speed */
+			if (!edit->rules[1])
+			    if (!edit->rules[0]->keyword[1])
+				edit_free_syntax_rules (edit);
 		    }
 		    break;
 		}
