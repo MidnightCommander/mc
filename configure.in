@@ -118,12 +118,10 @@ fi
 dnl
 dnl OS specific flags.
 dnl
-
-posix_libs=""
 case $host_os in
 aux*)
     # A/UX
-    posix_libs="-lposix"
+    LIBS="$LIBS -lposix"
     AC_DEFINE(_POSIX_SOURCE)
     ;;
 sco*)
@@ -131,6 +129,7 @@ sco*)
     AC_DEFINE(_SVID3, 1, [Needs to be defined on SCO])
     ;;
 esac
+
 
 AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
@@ -527,8 +526,6 @@ fi
 if test "$GLIBC21" != yes; then
     AC_DEFINE(USE_INCLUDED_REGEX, 1, [Use the regex included here])
 fi
-
-LIBS="$LIBS $posix_libs"
 
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)

@@ -1,3 +1,7 @@
+2003-01-24  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add -lposix on A/UX before all tests.
+
 2003-01-23  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (MC_EXTFS_CHECKS): Fix redirection to /dev/null.
