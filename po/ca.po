@@ -1,14 +1,14 @@
 # mc translation to Catalan.
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Softcatalà <info@softcatala.org>, 2000.
+# Softcatalà <info@softcatala.org>, 2000-2001.
 #
 # Traducció per Softcatalà <info@softcatala.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.49\n"
 "POT-Creation-Date: 2001-05-21 19:06+0200\n"
-"PO-Revision-Date: 2000-06-29 14:00+0200\n"
-"Last-Translator: Quico Llach <quico@softcatala.org>\n"
+"PO-Revision-Date: 2001-05-21 22:04+0200\n"
+"Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -508,9 +508,8 @@ msgid "Home directory"
 msgstr "Directori personal"
 
 #: gnome/gdesktop-init.c:158
-#, fuzzy
 msgid "Trash"
-msgstr "Buida la paperera"
+msgstr "Paperera"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -704,7 +703,7 @@ msgstr "_Mou aquí"
 msgid "_Copy here"
 msgstr "_Copia aquí"
 
-# «Enllaçar ací» sembla el contrari...  iv
+# "Enllaçar ací" sembla el contrari...  iv
 #: gnome/gdnd.c:55
 msgid "_Link here"
 msgstr "Crea un en_llaç aquí"
@@ -804,7 +803,7 @@ msgstr ""
 "\n"
 "Si voleu iniciar novament el gestor d'escriptori o el de fitxers,\n"
 "podeu executar-los des del quadre, o bé podeu executar la comanda UNIX "
-"«gmc».\n"
+"\"gmc\".\n"
 "\n"
 "Premeu 'D'acord' per tancar l'aplicació, o 'cancel·lar' per continuar usant-"
 "la."
@@ -1002,52 +1001,43 @@ msgstr ""
 
 #: gnome/gmc-window.c:69
 msgid "Copyright (C) 1998 The Free Software Foundation"
-msgstr ""
+msgstr "Copyright (C) 1998 The Free Software Foundation"
 
 #: gnome/gmc-window.c:81
-#, fuzzy
 msgid "Open _new window"
-msgstr "Crea una finestra _nova"
+msgstr "Obra una finestra _nova"
 
 #: gnome/gmc-window.c:86
-#, fuzzy
 msgid "_Close this window"
-msgstr "Tanca aquesta finestra"
+msgstr "_Tanca aquesta finestra"
 
 #: gnome/gmc-window.c:88
-#, fuzzy
 msgid "E_xit"
-msgstr "Surt"
+msgstr "S_urt"
 
 #: gnome/gmc-window.c:95
-#, fuzzy
 msgid "_Listing view"
-msgstr "Mode de llistat"
+msgstr "Vista de _llista"
 
 #: gnome/gmc-window.c:96
-#, fuzzy
 msgid "_Icon view"
-msgstr "Vista d'_Icones"
+msgstr "Vista d'_icones"
 
 #: gnome/gmc-window.c:102
-#, fuzzy
 msgid "Display _tree view"
-msgstr " Bits de visualització "
+msgstr "Mos_tra la vista d'arbre"
 
 #: gnome/gmc-window.c:112
-#, fuzzy
 msgid "_About the Midnight Commander..."
-msgstr " El Midnight Commander "
+msgstr "Qu_ant al Midnight Commander..."
 
 #: gnome/gmc-window.c:119
-#, fuzzy
 msgid "_File"
-msgstr "Fitxer"
+msgstr "_Fitxer"
 
 #: gnome/gmc-window.c:120
-#, fuzzy
 msgid "_View"
-msgstr "Vista"
+msgstr "_Vista"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1340,8 +1330,8 @@ msgstr "Heu de canviar el nom del fitxer"
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "No podeu reanomenar el fitxer amb el caràcter '/'"
 
-# FIXME: A català, per exemple, el correcte és usar guillemots «».
-# No té pq assumir que acabarà amb «"»  iv
+# FIXME: A català, per exemple, el correcte és usar guillemots "".
+# No té pq assumir que acabarà amb """  iv
 #: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
@@ -1570,7 +1560,6 @@ msgid "Up"
 msgstr "Amunt"
 
 #: gnome/gscreen.c:2273
-#, fuzzy
 msgid "Go up a level in the directory hierarchy"
 msgstr "Puja un nivell a la jerarquia de directoris"
 
@@ -1795,10 +1784,8 @@ msgstr ""
 " Incrementeu MAXBUF a edit.h i recompileu l'editor. "
 
 #: gtkedit/edit.c:2594
-#, fuzzy
 msgid "User menu available only in mcedit invoked from mc"
-msgstr ""
-"El menú d'usuari només està disponible en el mcedit que s'activa des d'mc"
+msgstr "El menú d'usuari només està disponible en el mcedit que s'activa des d'mc"
 
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2943
 msgid "Error trying to stat file:"
@@ -1809,9 +1796,8 @@ msgid "&Dismiss"
 msgstr "&Ignora"
 
 #: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1810
-#, fuzzy
 msgid "mc.hlp"
-msgstr "ajuda"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
 msgid " Error writing to pipe: "
@@ -2298,12 +2284,12 @@ msgstr " Primer cal que seleccioneu un bloc de text. "
 
 #: gtkedit/editcmd.c:2836
 msgid " Run Sort "
-msgstr " Executa «Ordenar» "
+msgstr " Executa \"Ordenar\" "
 
 #: gtkedit/editcmd.c:2837
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
-" Introduïu les opcions per «ordenar» (vegeu manual) separades per espais: "
+" Introduïu les opcions per \"ordenar\" (vegeu manual) separades per espais: "
 
 #: gtkedit/editcmd.c:2848 gtkedit/editcmd.c:2853
 msgid " Sort "
@@ -2311,11 +2297,11 @@ msgstr " Ordena "
 
 #: gtkedit/editcmd.c:2849
 msgid " Error trying to execute sort command "
-msgstr " S'ha produït un error en executar la comanda «ordena» "
+msgstr " S'ha produït un error en executar la comanda \"ordena\" "
 
 #: gtkedit/editcmd.c:2854
 msgid " Sort returned non-zero: "
-msgstr " «Ordena» ha retornat «non-zero»: "
+msgstr " \"Ordena\" ha retornat \"non-zero\": "
 
 #: gtkedit/editcmd.c:2887
 msgid "Error create script:"
@@ -3549,7 +3535,7 @@ msgstr ""
 
 #: src/cmd.c:971
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Teclegeu «exit» per retornar al Midnight Commander"
+msgstr "Teclegeu \"exit\" per retornar al Midnight Commander"
 
 #: src/cmd.c:1027
 #, c-format
@@ -3798,7 +3784,6 @@ msgid "Format of the "
 msgstr "Formatatge  del "
 
 #: src/ext.c:414
-#, fuzzy
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -3807,9 +3792,8 @@ msgid ""
 msgstr ""
 "El fitxer mc.ext ha canviat\n"
 "amb la versió 3.0. Sembla que la instal·lació\n"
-"ha fallat. Si us plau, agafeu-ne una còpia nova del\n"
-"paquet Midnight Commander, o, si no en teniu cap,\n"
-"la podeu aconseguir a ftp://ftp.nuclecu.unam.mx."
+"ha fallat. Si us plau, agafeu una còpia nova del\n"
+"paquet Midnight Commander."
 
 #: src/ext.c:428
 msgid " file error "
@@ -3983,7 +3967,7 @@ msgstr ""
 " No puc crear enllaços simbòlics estables entre els sistemes de fitxers no "
 "locals: \n"
 "\n"
-" S'inhabilitarà l'opció «enllaços simbòlics estables» "
+" S'inhabilitarà l'opció \"enllaços simbòlics estables\" "
 
 #: src/file.c:442
 #, c-format
@@ -4412,7 +4396,7 @@ msgstr "ca&P"
 # No usa el locale... Deuria ser un FIXME?  iv
 #: src/file.c:2264
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Teclegeu «yes» si esteu segur que voleu suprimir-ho "
+msgstr " Teclegeu \"yes\" si esteu segur que voleu suprimir-ho "
 
 #: src/file.c:2266
 msgid "all the directories "
@@ -4875,7 +4859,7 @@ msgid ""
 msgstr ""
 "  Mantenir - mantenir els registres antics; us preguntarà\n"
 "             el mateix la pròxima volta\n"
-"  Mesclar  - afegir els registres antics com a grup «Entries from ~/»"
+"  Mesclar  - afegir els registres antics com a grup \"Els registres del ~/\""
 
 #: src/hotlist.c:1424
 msgid "&Merge"
@@ -5086,7 +5070,7 @@ msgstr ""
 "i espereu fins que desaparegui aquest missatge.\n"
 "\n"
 "Aleshores, premeu-la de nou per veure si\n"
-"apareix «D'acord» vora el seu botó.\n"
+"apareix \"D'acord\" vora el seu botó.\n"
 "\n"
 "Si voleu sortir, premeu un cop la tecla\n"
 "d'Escapada i espereu."
@@ -5134,7 +5118,7 @@ msgstr "Premeu totes les tecles esmentades. Quan ho hagueu fet, comproveu"
 
 #: src/learn.c:302
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "a quina tecla no hi ha la marca «D'acord».  Per definir-la, premeu-hi"
+msgstr "a quina tecla no hi ha la marca \"D'acord\".  Per definir-la, premeu-hi"
 
 #: src/learn.c:304
 msgid "key, or click with the mouse to define it. Move around with Tab."
@@ -5169,14 +5153,13 @@ msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Realment voleu sortir del Midnight Commander? "
 
 #: src/main.c:1237
-#, fuzzy
 msgid " Listing format edit "
-msgstr "edita el format de &Llistat"
+msgstr " Edició del format de llista "
 
 #: src/main.c:1237
 #, c-format
 msgid " New mode is \"%s\" "
-msgstr ""
+msgstr " El nou mode és \"%s\" "
 
 #: src/main.c:1249 src/main.c:1273
 msgid "&Listing mode..."
@@ -6848,7 +6831,7 @@ msgstr "ftpfs: s'està emmagatzemar el fitxer %d (%d)"
 #. This is place of next pointer
 #: vfs/ftpfs.c:1684
 msgid "File Transfer Protocol (ftp)"
-msgstr ""
+msgstr "Protocol de transferència de fitxers (FTP)"
 
 #: vfs/ftpfs.c:1797
 msgid ""
@@ -6975,7 +6958,7 @@ msgstr " %s està reanomenant els fitxers\n"
 #. This is place of next pointer
 #: vfs/smbfs.c:2005
 msgid "netbios over tcp/ip"
-msgstr ""
+msgstr "netbios sobre tcp/ip"
 
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
@@ -7242,7 +7225,7 @@ msgstr "Recupera el sistema de fitxers per a ext2 que s'havia suprimit"
 #~ msgid "All files"
 #~ msgstr "Tots els fitxers"
 
-# «Equilicuà» la diferència entre fitxer i arxiu! ;)  iv
+# "Equilicuà" la diferència entre fitxer i arxiu! ;)  iv
 #~ msgid "Archives and compressed files"
 #~ msgstr "Arxius i fitxers comprimits"
 
@@ -7319,3 +7302,4 @@ msgstr "Recupera el sistema de fitxers per a ext2 que s'havia suprimit"
 
 #~ msgid "ftpfs: got listing"
 #~ msgstr "ftpfs: s'ha obtingut el llistat"
+
