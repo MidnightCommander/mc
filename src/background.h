@@ -36,9 +36,13 @@ extern struct TaskList *task_list;
 
 extern int background_wait;
 
-int do_background (FileOpContext *ctx, char *info);
 void tell_parent (int msg);
+
+/* fileopctx.h must be included for FileOpContext to be defined */
+#ifdef FILEOPCTX_H
+int do_background (FileOpContext *ctx, char *info);
 int parent_call (void *routine, FileOpContext *ctx, int argc, ...);
+#endif /* FILEOPCTX_H */
 
 void unregister_task_running (pid_t, int fd);
 

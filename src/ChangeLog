@@ -1,5 +1,8 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* background.h: Omit definitions that require FileOpContext if
+	fileopctx.h has not been included yet.
+
 	* background.c (real_message_2s): Declare arguments "const" when
 	possible.
 	(real_message_3s): Likewise.
