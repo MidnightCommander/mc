@@ -7,7 +7,15 @@ top_builddir = ..
 top_srcdir = $(srcdir)/..
 @MCF@
 
-GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@
+corbadir   = $(sysconfdir)/CORBA/servers
+desktopdir = $(mclibdir)/desktop-scripts
+gnewdir	   = $(prefix)/share/mc/templates
+gnomeicondir = @gnomeicondir@
+icondir    = $(datadir)/pixmaps/mc
+
+GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME -DICONDIR=\""$(icondir)/"\" \
+	-DDESKTOP_INIT_DIR=\""$(desktopdir)/"\" \
+	@GNOME_INCLUDEDIR@
 
 CFLAGS        = $(XCFLAGS)
 CPPFLAGS      = $(XCPPFLAGS) -I. -I$(gnomedir) -I$(mcsrcdir) $(GNOMEDEFS)
