@@ -1,5 +1,9 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* lib/startup.links: Remove.
+	* lib/README.desktop: Likewise.
+	* lib/Makefile.am: Remove all references to DESKTOP_FILES.
+
 	* configure.in: Bump version to 4.5.99a.
 
 	* configure.in: Bump version to 4.5.55.  Release mc-4.5.55.

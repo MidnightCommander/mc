@@ -28,19 +28,12 @@ conf_DATA = mc.global
 suppbin_SCRIPTS = mc.csh mc.sh
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
-DESKTOP_FILES = startup.links README.desktop
-if GNOME
-desktopdir = $(mclibdir)/desktop-scripts
-desktop_DATA = $(DESKTOP_FILES)
-endif
-
 mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
 	$(LOCALIZED_HELP) \
-	$(DESKTOP_FILES) \
 	$(conf_DATA) \
 	$(ti_DATA) \
 	$(noinst_DATA) \
