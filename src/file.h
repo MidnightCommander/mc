@@ -48,7 +48,10 @@ int erase_dir_iff_empty (char *s);
 void  create_op_win      (FileOperation op, int with_eta);
 void  destroy_op_win     (void);
 void  refresh_op_win     (void);
-int   panel_operate      (void *source_panel, FileOperation op, char *thedefault);
+int   panel_operate      (void *source_panel, FileOperation op,
+			  char *thedefault);
+int   panel_operate_def  (void *source_panel, FileOperation op,
+			  char *thedefault);
 void  file_mask_defaults (void);
 char *file_mask_dialog   (FileOperation operation, char *text, char *def_text,
 			  int only_one, int *do_background);

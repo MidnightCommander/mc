@@ -980,7 +980,7 @@ copy_dir_dir (char *s, char *d, int toplevel,
          * If the destination directory exists, we want to copy the whole
          * directory, but we only want this to happen once.
 	 *
-	 * Escape sequences added to the * to avoid compiler warnings.
+	 * Escape sequences added to the * to compiler warnings.
          * so, say /bla exists, if we copy /tmp/\* to /bla, we get /bla/tmp/\*
          * or ( /bla doesn't exist )       /tmp/\* to /bla     ->  /bla/\*
          */
@@ -1668,8 +1668,8 @@ panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
  * Returns 1 if did change the directory
  * structure, Returns 0 if user aborted
  */
-int
-panel_operate (void *source_panel, FileOperation operation, char *thedefault)
+static int
+panel_operate_flags (void *source_panel, FileOperation operation, char *thedefault, int ask_user)
 {
     WPanel *panel = source_panel;
 #ifdef WITH_FULL_PATHS
@@ -1716,27 +1716,38 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 	if (i != 0)
 	    return 0;
     } else if (operation != OP_DELETE){
-	char *dest_dir;
-	
-	if (thedefault != NULL)
-	    dest_dir = thedefault;
-	else if (get_other_type () == view_listing)
-	    dest_dir = opanel->cwd;
-	else
-	    dest_dir = panel->cwd;
-
 	file_mask_rx.buffer = (char *) xmalloc (MC_MAXPATHLEN, "mask copying");
 	file_mask_rx.allocated = MC_MAXPATHLEN;
 	file_mask_rx.translate = 0;
-	dest = file_mask_dialog (operation, cmd_buf, dest_dir, only_one, &do_bg);
-	if (!dest){
-	    free (file_mask_rx.buffer);
-	    return 0;
-	}
-	if (!*dest){
-	    free (file_mask_rx.buffer);
-	    free (dest);
-	    return 0;
+	
+        if (ask_user){
+	    char *dest_dir;
+	    
+	    if (thedefault != NULL)
+		dest_dir = thedefault;
+	    else if (get_other_type () == view_listing)
+		dest_dir = opanel->cwd;
+	    else
+		dest_dir = panel->cwd;
+	    
+	    dest = file_mask_dialog (operation, cmd_buf, dest_dir, only_one, &do_bg);
+	    if (!dest){
+		free (file_mask_rx.buffer);
+		return 0;
+	    }
+	    if (!*dest){
+		free (file_mask_rx.buffer);
+		free (dest);
+		return 0;
+	    }
+	} else {
+	    char *all = "^\\(.*\\)$";
+	    
+	    re_compile_pattern (all, strlen (all), &file_mask_rx);
+	    file_mask_dest_mask = strdup ("*");
+	    do_bg = FALSE;
+	    dest = strdup (thedefault);
+	    file_mask_defaults ();
 	}
     }
 
@@ -2006,6 +2017,18 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault)
     } 
 #endif
     return 1;
+}
+
+int
+panel_operate_def (void *source_panel, FileOperation operation, char *thedefault)
+{
+    panel_operate_flags (source_panel, operation, thedefault, FALSE);
+}
+
+int
+panel_operate (void *source_panel, FileOperation operation, char *thedefault)
+{
+    panel_operate_flags (source_panel, operation, thedefault, TRUE);
 }
 
 /* }}} */

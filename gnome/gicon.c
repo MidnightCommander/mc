@@ -39,7 +39,7 @@ static gid_t our_gid;
 /*
  * If true, we choose the icon in a way that might be a bit slow
  */
-static int we_can_affort_the_speed = 1;
+static int we_can_affort_the_speed = 0;
 
 /**
  * gicon_init:
@@ -173,7 +173,7 @@ gnome_file_entry_color (file_entry *fe)
  * icon for it.  Including a lookup in the metadata.
  */
 GdkImlibImage *
-gicon_get_icon_for_file (file_entry *fe)
+gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 {
 	GdkImlibImage *image;
 	int            size;
@@ -229,7 +229,7 @@ gicon_get_icon_for_file (file_entry *fe)
 	/*
 	 * 2. Expensive tests
 	 */
-	if (we_can_affort_the_speed){
+	if (!do_quick || we_can_affort_the_speed){
 		/*
 		 * 2.1 Try to fetch the icon as an inline png from the metadata.
 		 */
@@ -247,6 +247,8 @@ gicon_get_icon_for_file (file_entry *fe)
 		 */
 		if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
 			image = gicon_get_by_filename (buf);
+
+			free (buf);
 			
 			if (image)
 				return image;
@@ -279,4 +281,10 @@ gicon_get_icon_for_file (file_entry *fe)
 	g_assert (image != NULL);
 
 	return image;
+}
+
+GdkImlibImage *
+gicon_get_icon_for_file (file_entry *fe)
+{
+	gicon_get_icon_for_file_speed (fe, TRUE);
 }

@@ -174,6 +174,11 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
     if (internal){
 	char view_entry [32];
 
+#ifdef HAVE_GNOME
+	if (!gmc_view (filename, start_line)){
+	    view (0, filename, &move_dir, start_line);
+	}
+#else
 	if (start_line != 0)
 	    sprintf (view_entry, "View:%d", start_line);
 	else
@@ -183,6 +188,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	    view (0, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
+#endif
     } else {
 	char *localcopy;
 	

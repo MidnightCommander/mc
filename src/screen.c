@@ -59,7 +59,6 @@
 
 #include "x.h"
 
-/* "$Id$" */
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
 /* If true, show the mini-info on the panel */
@@ -2056,8 +2055,15 @@ do_enter_on_file_entry (file_entry *fe)
 	    return 1;
 	} else {
 	    char *p;
-	    
+
+#ifdef HAVE_GNOME
+	    if (gmc_open (fe))
+		    return 1;
+	    else
+		    return 0;
+#else
 	    p = regex_command (fe->fname, "Open", NULL, 0);
+#endif
 	    if (p && (strcmp (p, "Success") == 0))
 		    return 1;
 	    else

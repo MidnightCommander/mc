@@ -70,7 +70,7 @@ gmc_run_view (char *filename, char *buf)
 	exec_extension (filename, buf, NULL, NULL, 0);
 }
 
-void
+int
 gmc_view (char *filename, int start_line)
 {
 	char *mime_type, *cmd;

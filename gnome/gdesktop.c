@@ -230,9 +230,11 @@ remove_from_slot (struct desktop_icon_info *dii)
 	layout_slots[dii->slot].icons = g_list_remove (layout_slots[dii->slot].icons, dii);
 }
 
-/* Places a desktop icon.  If auto_pos is true, then the function will look for a place to position
- * the icon automatically, else it will use the specified coordinates, snapped to the grid if the
- * global desktop_snap_icons flag is set.
+/*
+ * Places a desktop icon.  If auto_pos is true, then the function will
+ * look for a place to position the icon automatically, else it will
+ * use the specified coordinates, snapped to the grid if the global
+ * desktop_snap_icons flag is set.
  */
 static void
 desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, int ypos)
@@ -281,7 +283,10 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 	g_free (filename);
 }
 
-/* Returns TRUE if there is already an icon in the desktop for the specified filename, FALSE otherwise. */
+/*
+ * Returns TRUE if there is already an icon in the desktop for the
+ * specified filename, FALSE otherwise.
+ */
 static int
 icon_exists (char *filename)
 {
@@ -299,9 +304,11 @@ icon_exists (char *filename)
 	return FALSE;
 }
 
-/* Reads the ~/Desktop directory and creates the desktop icons.  If incremental is TRUE, then an
- * icon will not be created for a file if there is already an icon for it, and icons will be created
- * starting at the specified position.
+/*
+ * Reads the ~/Desktop directory and creates the desktop icons.  If
+ * incremental is TRUE, then an icon will not be created for a file if
+ * there is already an icon for it, and icons will be created starting
+ * at the specified position.
  */
 static void
 load_desktop_icons (int incremental, int xpos, int ypos)
@@ -386,8 +393,10 @@ destroy_desktop_icons (void)
 	}
 }
 
-/* Reloads the desktop icons.  If incremental is TRUE, then the existing icons will not be destroyed
- * first, and the new icons will be put at the specified position.
+/*
+ * Reloads the desktop icons.  If incremental is TRUE, then the
+ * existing icons will not be destroyed first, and the new icons will
+ * be put at the specified position.
  */
 static void
 reload_desktop_icons (int incremental, int x, int y)
@@ -484,7 +493,8 @@ select_range (struct desktop_icon_info *dii, int sel)
 			}
 }
 
-/* Handles icon selection and unselection due to button presses.  The
+/*
+ * Handles icon selection and unselection due to button presses.  The
  * event_state is the state field of the event.
  */
 static void
@@ -558,8 +568,10 @@ file_entry_free (file_entry *fe)
 	g_free (fe);
 }
 
-/* Callback used when an icon's text changes.  We must validate the rename and return the
- * appropriate value.  The desktop icon info structure is passed in the user data.
+/*
+ * Callback used when an icon's text changes.  We must validate the
+ * rename and return the appropriate value.  The desktop icon info
+ * structure is passed in the user data.
  */
 static int
 text_changed (GnomeIconTextItem *iti, gpointer data)
@@ -589,8 +601,10 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	return retval;
 }
 
-/* Callback used when the user begins editing the icon text item in a desktop icon.  It installs the
- * mouse and keyboard grabs that are required while an icon is being edited.
+/*
+ * Callback used when the user begins editing the icon text item in a
+ * desktop icon.  It installs the mouse and keyboard grabs that are
+ * required while an icon is being edited.
  */
 static void
 editing_started (GnomeIconTextItem *iti, gpointer data)
@@ -635,8 +649,9 @@ setup_icon_dnd_actions (struct desktop_icon_info *dii)
 			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 }
 
-/* Callback used when the user finishes editing the icon text item in a desktop icon.  It removes
- * the mouse and keyboard grabs.
+/*
+ * Callback used when the user finishes editing the icon text item in
+ * a desktop icon.  It removes the mouse and keyboard grabs.
  */
 static void
 editing_stopped (GnomeIconTextItem *iti, gpointer data)
@@ -1076,9 +1091,12 @@ setup_icon_dnd_dest (struct desktop_icon_info *dii)
 			    dii);
 }
 
-/* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
- * If auto_pos is false, it will use the specified coordinates for the icon.  Else, it will use
- * auto- positioning trying to start at the specified coordinates.  It does not show the icon.
+/*
+ * Creates a new desktop icon.  The filename is the pruned filename
+ * inside the desktop directory.  If auto_pos is false, it will use
+ * the specified coordinates for the icon.  Else, it will use auto-
+ * positioning trying to start at the specified coordinates.  It does
+ * not show the icon.
  */
 static struct desktop_icon_info *
 desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
@@ -1092,7 +1110,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
 	fe = file_entry_from_file (full_name);
-	icon_im = gicon_get_icon_for_file (fe);
+	icon_im = gicon_get_icon_for_file_speed (fe, FALSE);
 
 	dii = g_new (struct desktop_icon_info, 1);
 	dii->dicon = desktop_icon_new (icon_im, filename);
@@ -1143,8 +1161,9 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	return dii;
 }
 
-/* Frees a desktop icon information structure, and destroy the icon widget.  Does not remove the
- * structure from the desktop_icons list!
+/*
+ * Frees a desktop icon information structure, and destroy the icon
+ * widget.  Does not remove the structure from the desktop_icons list!
  */
 static void
 desktop_icon_info_free (struct desktop_icon_info *dii)
@@ -1167,8 +1186,28 @@ create_layout_info (void)
 	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
-/* Check that the user's desktop directory exists, and if not, create it with a symlink to the
- * user's home directory so that an icon will be displayed.
+static void
+setup_trashcan (char *desktop_dir)
+{
+	char *trashcan_dir;
+	char *trash_pix;
+	
+	trashcan_dir = g_concat_dir_and_file (desktop_directory, _("Trashcan"));
+	trash_pix = g_concat_dir_and_file (ICONDIR, "trash.xpm");
+		
+	if (!g_file_exists (trashcan_dir)){
+		mkdir (trashcan_dir, 0777);
+		gnome_metadata_set (
+			trashcan_dir, "icon-filename", strlen (trash_pix)+1, trash_pix);
+	}
+	
+	g_free (trashcan_dir);
+	g_free (trash_pix);
+}
+
+/*
+ * Check that the user's desktop directory exists, and if not, create
+ * the default desktop setup.
  */
 static void
 create_desktop_dir (void)
@@ -1183,7 +1222,6 @@ create_desktop_dir (void)
 		mkdir (desktop_directory, 0777);
 
 		/* Create the link to the user's home directory so that he will have an icon */
-
 		home_link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
 
 		if (mc_symlink (gnome_user_home_dir, home_link_name) != 0) {
@@ -1191,12 +1229,11 @@ create_desktop_dir (void)
 				 _("Warning"),
 				 _("Could not symlink %s to %s; will not have initial desktop icons."),
 				 gnome_user_home_dir, home_link_name);
-			g_free (home_link_name);
-			return;
 		}
-
 		g_free (home_link_name);
 	}
+
+	setup_trashcan (desktop_directory);
 }
 
 /* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */
@@ -1314,7 +1351,8 @@ find_icon_by_drag_context (GdkDragContext *context)
 	return NULL;
 }
 
-/* Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
+/*
+ * Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
  * original position to the new coordinates.
  */
 static void
@@ -1408,7 +1446,7 @@ setup_desktop_dnd (void)
 	gtk_widget_show (dnd_proxy_window);
 
 	if (!setup_xdnd_proxy (GDK_ROOT_WINDOW (), dnd_proxy_window->window))
-		g_warning ("Eeeeek, some moron is already taking drops on the root window!");
+		g_warning ("There is already a process taking drop windows on the desktop\n");
 
 	gtk_drag_dest_set (dnd_proxy_window,
 			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
@@ -1527,7 +1565,8 @@ draw_rubberband (int x, int y)
 	gdk_draw_rectangle (GDK_ROOT_PARENT (), click_gc, FALSE, x1, y1, x2 - x1, y2 - y1);
 }
 
-/* Stores dii->selected into dii->tmp_selected to keep the original selection
+/*
+ * Stores dii->selected into dii->tmp_selected to keep the original selection
  * around while the user is rubberbanding.
  */
 static void
@@ -1545,7 +1584,11 @@ store_temp_selection (void)
 		}
 }
 
-/* Returns TRUE if the specified icon is at least partially inside the specified
+/**
+ * icon_is_in_area:
+ * @dii: the desktop icon information
+ * 
+ * Returns TRUE if the specified icon is at least partially inside the specified
  * area, or FALSE otherwise.
  */
 static int
@@ -1721,7 +1764,8 @@ click_proxy_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	return TRUE;
 }
 
-/* Filter that translates proxied events from virtual root windows into normal
+/*
+ * Filter that translates proxied events from virtual root windows into normal
  * Gdk events for the click_proxy_invisible widget.
  */
 static GdkFilterReturn
@@ -1773,8 +1817,9 @@ click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	return GDK_FILTER_CONTINUE;
 }
 
-/* Creates a proxy window to receive clicks from the root window and sets up the
- * necessary event filters.
+/*
+ * Creates a proxy window to receive clicks from the root window and
+ * sets up the necessary event filters.
  */
 static void
 setup_desktop_click_proxy_window (void)
@@ -1791,7 +1836,8 @@ setup_desktop_click_proxy_window (void)
 	/* Add our filter to get events */
 	gdk_window_add_filter (click_proxy_gdk_window, click_proxy_filter, NULL);
 
-	/* The proxy window for clicks sends us button press events with
+	/*
+	 * The proxy window for clicks sends us button press events with
 	 * SubstructureNotifyMask.  We need StructureNotifyMask to receive
 	 * DestroyNotify events, too.
 	 */
@@ -1800,7 +1846,8 @@ setup_desktop_click_proxy_window (void)
 		      SubstructureNotifyMask | StructureNotifyMask);
 }
 
-/* Handler for PropertyNotify events from the root window; it must change the
+/*
+ * Handler for PropertyNotify events from the root window; it must change the
  * proxy window to a new one.
  */
 static gint

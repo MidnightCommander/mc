@@ -120,11 +120,11 @@ perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destd
 {
 	switch (action) {
 	case GDK_ACTION_COPY:
-		panel_operate (source_panel, OP_COPY, destdir);
+		panel_operate_def (source_panel, OP_COPY, destdir);
 		break;
 
 	case GDK_ACTION_MOVE:
-		panel_operate (source_panel, OP_MOVE, destdir);
+		panel_operate_def (source_panel, OP_MOVE, destdir);
 		break;
 
 	default:
@@ -134,7 +134,9 @@ perform_action_on_panel (WPanel *source_panel, GdkDragAction action, char *destd
 	/* Finish up */
 
 	update_one_panel_widget (source_panel, FALSE, UP_KEEPSEL);
-	panel_update_contents (source_panel);
+
+	if (action == GDK_ACTION_MOVE)
+		panel_update_contents (source_panel);
 }
 
 /*

@@ -1,3 +1,15 @@
+1998-12-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdialogs.c (create_op_win): Remove second spurious packing.
+	(create_op_win): OP_MOVE uses the same stuff OP_COPY does.  Fix
+	this. 
+	(file_progress_show_target): More compliant to the original
+	functions.
+	(file_progress_show_source): More compliant to the original
+	functions.
+
+	* gdesktop.c (create_desktop_dir): Fix mem leak.
+
 Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
 
 	* gdesktop-icon.c : Attach a desktop_icon wmclass to the desktop

@@ -332,28 +332,35 @@ get_label_text (GtkMenuItem *item)
 }
 
 static void
-regex_command_from_panel (GtkMenuItem *item, WPanel *panel)
+mime_command_from_panel (GtkMenuItem *item, WPanel *panel)
 {
 	char *filename;
 	char *action;
 	int movedir;
-
-	/* This is broken */
-	filename = panel->dir.list[panel->selected].fname;
-	action = get_label_text (item);
-
-	regex_command (filename, action, NULL, &movedir);
+	
+	/*
+	 * This is broken, but we dont mind.  Federico
+	 * needs to explain me what was he intending here.
+	 * panel->selected does not mean, it was the icon
+	 * that got clicked.
+	 */
 }
 
 static void
-regex_command_from_desktop_icon (GtkMenuItem *item, char *filename)
+mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
 {
 	char *action;
 	int movedir;
-
+	char *key, *mime_type, *val;
 	action = get_label_text (item);
 
-	regex_command (filename, action, NULL, &movedir);
+	key = gtk_object_get_user_data (GTK_OBJECT (item));
+	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (!mime_type)
+		return;
+	
+	val = gnome_mime_get_value (mime_type, key);
+	exec_extension (filename, val, NULL, NULL, 0);
 }
 
 /* Create the menu items common to files from panel window and desktop icons, and also the items for
@@ -366,8 +373,8 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 	GnomeUIInfo *a_uiinfo;
 	int i;
 	GtkSignalFunc regex_callback;
-	char *p, *q;
-	int c;
+	char *mime_type;
+	GList *keys, *l;
 	GnomeUIInfo uiinfo[] = {
 		{ 0 },
 		GNOMEUIINFO_END
@@ -376,12 +383,12 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 	if (panel) {
 		a_uiinfo = panel_actions;
 		closure = panel;
-		regex_callback = regex_command_from_desktop_icon;
+		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	} else {
 		a_uiinfo = desktop_icon_actions;
 		closure = filename;
-		regex_callback = regex_command_from_desktop_icon;
+		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	}
 
@@ -395,30 +402,34 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 
 	/* Fill in the regex command part */
 
-	p = regex_command (filename, NULL, NULL, NULL);
-	if (!p)
+	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (!mime_type)
 		return;
+	
+	keys = gnome_mime_get_keys (mime_type);
 
-	for (;;) {
-		/* Strip off an entry */
+	for (l = keys; l; l = l->next) {
+		char *key = l->data;
+		char *str;
+		
+		str = key;
+		if (strncmp (key, "open.", 5) != 0)
+			continue;
 
-		while (*p == ' ' || *p == '\t')
-			p++;
+		str += 5;
+		while (*str && *str != '.')
+			str++;
 
-		if (!*p)
-			break;
-
-		q = p;
-		while (*q && *q != '=' && *q != '\t')
-			q++;
-
-		c = *q;
-		*q = 0;
+		if (*str)
+			str++;
+		
+		if (!*str)
+			continue;
 
 		/* Create the item for that entry */
 
 		uiinfo[0].type = GNOME_APP_UI_ITEM;
-		uiinfo[0].label = p;
+		uiinfo[0].label = str;
 		uiinfo[0].hint = NULL;
 		uiinfo[0].moreinfo = regex_callback;
 		uiinfo[0].user_data = regex_closure;
@@ -430,14 +441,9 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 		uiinfo[0].widget = NULL;
 
 		fill_menu (GTK_MENU_SHELL (menu), uiinfo, insert_pos++);
-
-		/* Next! */
-
-		if (!c)
-			break;
-
-		p = q + 1;
+		gtk_object_set_user_data (GTK_OBJECT (uiinfo [0].widget), key);
 	}
+	g_list_free (keys);
 }
 
 /* Convenience callback to exit the main loop of a modal popup menu when it is deactivated*/
