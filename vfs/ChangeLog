@@ -1,3 +1,8 @@
+2001-09-07  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: Include necessary parts of Make.common to
+	eliminate the later.
+
 2001-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* names.c (finduname): Don't use HAVE_GETPWUID - it's never

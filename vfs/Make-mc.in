@@ -1,6 +1,10 @@
-# This is the "Makefile.in" that is used when vfs is built as part of
-# mc.  Any changes here must also be made in Makefile.am.
-# x
+# This is the "Makefile.in" that is used when vfs is built as part of mc.
+# Makefile.am is for the standalone VFS library.
+# Please keep them in sync.
+
+VERSION = @VERSION@
+
+SHELL = @SHELL@
 
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
@@ -8,7 +12,41 @@ VPATH = @srcdir@
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 top_builddir = ..
 
-@MCF@
+# Installation target directories & other installation stuff
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+binprefix =
+manprefix =
+
+bindir     = @bindir@
+libdir	   = @libdir@
+
+# Tools & program stuff
+@SET_MAKE@
+CC = @CC@
+CPP = @CPP@
+AR = @AR@
+RANLIB = @RANLIB@
+RMF = rm -f
+MV = mv
+CP = cp
+LN_S = @LN_S@
+
+XCFLAGS = @CFLAGS@
+XCPPFLAGS = -I$(srcdir) -I.. @CPPFLAGS@ @GLIB_CFLAGS@
+XLDFLAGS = @LDFLAGS@
+XDEFS = @DEFS@
+XLIBS = @LIBS@
+
+# Rules
+default: all
+
+.PHONY: default all check TAGS clean install uninstall distcopy depend
+
+# Added for compatibility with Automake
+dvi:
+
+installcheck:
 
 SAMBA_INCLUDES =
 
@@ -178,7 +216,7 @@ SRC_LINKS = mad.c mad.h
 
 $(SRC_LINKS):
 	for i in $(SRC_LINKS); do \
-		$(LN_S) $(mcsrcdir)/$$i . || exit 1; \
+		$(LN_S) $(top_srcdir)/src/$$i . || exit 1; \
 	done
 
 mcserv: mcserv.o tcputil.o mad.o
