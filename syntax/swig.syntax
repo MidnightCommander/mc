@@ -1,0 +1,155 @@
+context default
+
+    keyword whole linestart %addmethods red/orange
+    keyword whole linestart %alpha red/orange
+    keyword whole linestart %apply red/orange
+    keyword whole linestart %checkout red/orange
+    keyword whole linestart %clear red/orange
+    keyword whole linestart %disabledoc red/orange
+    keyword whole linestart %doconly red/orange
+    keyword whole linestart %echo red/orange
+    keyword whole linestart %enabledoc red/orange
+    keyword whole linestart %except red/orange
+    keyword whole linestart %extern red/orange
+    keyword whole linestart %import red/orange
+    keyword whole linestart %include red/orange
+    keyword whole linestart %init red/orange
+    keyword whole linestart %inline red/orange
+    keyword whole linestart %localstyle red/orange
+    keyword whole linestart %module red/orange
+    keyword whole linestart %name red/orange
+    keyword whole linestart %native red/orange
+    keyword whole linestart %new red/orange
+    keyword whole linestart %out red/orange
+    keyword whole linestart %pragma red/orange
+    keyword whole linestart %raw red/orange
+    keyword whole linestart %readonly red/orange
+    keyword whole linestart %readwrite red/orange
+    keyword whole linestart %rename red/orange
+    keyword whole linestart %section red/orange
+    keyword whole linestart %style red/orange
+    keyword whole linestart %subsection red/orange
+    keyword whole linestart %subsubsection red/orange
+    keyword whole linestart %text red/orange
+    keyword whole linestart %title red/orange
+    keyword whole linestart %typedef red/orange
+    keyword whole linestart %typemap red/orange
+    keyword whole linestart %val red/orange
+    keyword whole linestart %wrapper red/orange
+    keyword whole linestart %{ red/orange
+    keyword whole linestart %} red/orange
+
+    keyword whole auto yellow/24
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole char yellow/24
+    keyword whole const yellow/24
+    keyword whole continue yellow/24
+    keyword whole default yellow/24
+    keyword whole do yellow/24
+    keyword whole double yellow/24
+    keyword whole else yellow/24
+    keyword whole enum yellow/24
+    keyword whole extern yellow/24
+    keyword whole float yellow/24
+    keyword whole for yellow/24
+    keyword whole goto yellow/24
+    keyword whole if yellow/24
+    keyword whole int yellow/24
+    keyword whole long yellow/24
+    keyword whole register yellow/24
+    keyword whole return yellow/24
+    keyword whole short yellow/24
+    keyword whole signed yellow/24
+    keyword whole sizeof yellow/24
+    keyword whole static yellow/24
+    keyword whole struct yellow/24
+    keyword whole switch yellow/24
+    keyword whole typedef yellow/24
+    keyword whole union yellow/24
+    keyword whole unsigned yellow/24
+    keyword whole void yellow/24
+    keyword whole volatile yellow/24
+    keyword whole while yellow/24
+    keyword whole asm yellow/24
+    keyword whole catch yellow/24
+    keyword whole class yellow/24
+    keyword whole friend yellow/24
+    keyword whole delete yellow/24
+    keyword whole inline yellow/24
+    keyword whole new yellow/24
+    keyword whole operator yellow/24
+    keyword whole private yellow/24
+    keyword whole protected yellow/24
+    keyword whole public yellow/24
+    keyword whole this yellow/24
+    keyword whole throw yellow/24
+    keyword whole template yellow/24
+    keyword whole try yellow/24
+    keyword whole virtual yellow/24
+    keyword whole bool yellow/24
+    keyword whole const_cast yellow/24
+    keyword whole dynamic_cast yellow/24
+    keyword whole explicit yellow/24
+    keyword whole false yellow/24
+    keyword whole mutable yellow/24
+    keyword whole namespace yellow/24
+    keyword whole reinterpret_cast yellow/24
+    keyword whole static_cast yellow/24
+    keyword whole true yellow/24
+    keyword whole typeid yellow/24
+    keyword whole typename yellow/24
+    keyword whole using yellow/24
+    keyword whole wchar_t yellow/24
+    keyword whole ... yellow/24
+
+    keyword /\* brown/22
+    keyword \*/ brown/22
+
+    keyword '\s' brightgreen/16
+    keyword '+' brightgreen/16
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+#    keyword / yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword != yellow/24
+    keyword == yellow/24
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword : brightcyan/14
+    keyword ; brightmagenta/19
+context exclusive /\* \*/ brown/22
+    spellcheck
+context // \n brown/22
+    spellcheck
+context linestart # \n brightred/18
+    keyword \\\n yellow/24
+    keyword /\**\*/ brown/22
+    keyword "+" red/19
+    keyword <+> red/19
+context " " green/6
+    spellcheck
+    keyword \\" brightgreen/16
+    keyword \\\n brightgreen/16
+    keyword %% brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen/16
+    keyword %\[hl\]n brightgreen/16
+    keyword %\[.\]\[0123456789\]s brightgreen/16
+    keyword %[*] brightgreen/16
+    keyword %c brightgreen/16
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
+    keyword \\\\ brightgreen/16
+    keyword \\' brightgreen/16
+    keyword \\\{abtnvfr\} brightgreen/16
+
+
