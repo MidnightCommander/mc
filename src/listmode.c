@@ -60,73 +60,78 @@
 
 static WListbox *l_listmode;
 
-static Dlg_head *listmode_dlg;
-
 static WLabel *pname;
 
 static char *listmode_section = "[Listing format edit]";
 
-static char *s_genwidth [2] = {"Half width", "Full width"};
-WRadio *radio_genwidth;
-static char *s_columns [2] = {"One column", "Two columns"};
-WRadio *radio_columns;
-static char *s_justify [3] =
-{"Left justified", "Default justification", "Right justified"};
-WRadio *radio_justify;
-static char *s_itemwidth [3] =
-{"Free width", "Fixed width", "Growable width"};
-WRadio *radio_itemwidth;
+static char *s_genwidth[2] = { "Half width", "Full width" };
+static WRadio *radio_genwidth;
+static char *s_columns[2] = { "One column", "Two columns" };
+static WRadio *radio_columns;
+static char *s_justify[3] =
+    { "Left justified", "Default justification", "Right justified" };
+static WRadio *radio_justify;
+static char *s_itemwidth[3] =
+    { "Free width", "Fixed width", "Growable width" };
+static WRadio *radio_itemwidth;
 
-struct {
+struct listmode_button {
     int ret_cmd, flags, y, x;
     char *text;
-} listmode_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel" },
-    { B_ADD, NORMAL_BUTTON,    0, 22, "&Add item"},
-    { B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove" },
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, "&Ok" },
+};
+
+static struct listmode_button listmode_but[BUTTONS] = {
+    {B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel"},
+    {B_ADD, NORMAL_BUTTON, 0, 22, "&Add item"},
+    {B_REMOVE, NORMAL_BUTTON, 0, 10, "&Remove"},
+    {B_ENTER, DEFPUSH_BUTTON, 0, 0, "&Ok"},
 };
 
 #define B_PLUS B_USER
 #define B_MINUS B_USER+1
 
-struct {
+struct listmode_label {
     int y, x;
     char *text;
-} listmode_text [LABELS] = {
-    { UY, UX + 1, " General options " },
-    { UY+4, UX+1, " Items "},
-    { UY+4, UX+21, " Item options" },
-    { UY+13, UX+22, "Item width:" }
 };
 
-static void listmode_refresh (void)
+static struct listmode_label listmode_labels[LABELS] = {
+    {UY, UX + 1, " General options "},
+    {UY + 4, UX + 1, " Items "},
+    {UY + 4, UX + 21, " Item options"},
+    {UY + 13, UX + 22, "Item width:"}
+};
+
+static void
+listmode_refresh (Dlg_head * h)
 {
+    common_dialog_repaint (h);
+
     attrset (COLOR_NORMAL);
-    dlg_erase (listmode_dlg);
-    
-    draw_box (listmode_dlg, 1, 2, 20, 70);
-    draw_box (listmode_dlg, UY, UX, 4, 63);
-    draw_box (listmode_dlg, UY + 4, UX, 11, 18);
-    draw_box (listmode_dlg, UY + 4, UX+20, 11, 43);
+    draw_box (h, UY, UX, 4, 63);
+    draw_box (h, UY + 4, UX, 11, 18);
+    draw_box (h, UY + 4, UX + 20, 11, 43);
 }
 
-static int bplus_cback (int action, void *data)
+static int
+bplus_cback (int action, void *data)
 {
     return 0;
 }
 
-static int bminus_cback (int action, void *data)
+static int
+bminus_cback (int action, void *data)
 {
     return 0;
 }
 
-static int listmode_callback (Dlg_head * h, int Par, int Msg)
+static int
+listmode_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
 
     case DLG_DRAW:
-	listmode_refresh ();
+	listmode_refresh (h);
 	break;
 
     case DLG_POST_KEY:
@@ -134,7 +139,7 @@ static int listmode_callback (Dlg_head * h, int Par, int Msg)
 
     case DLG_INIT:
 	attrset (COLOR_NORMAL);
-	dlg_move (h, UY+13, UX+35);
+	dlg_move (h, UY + 13, UX + 35);
 	printw ("%02d", 99);
 	attrset (MENU_ENTRY_COLOR);
 	break;
@@ -142,24 +147,27 @@ static int listmode_callback (Dlg_head * h, int Par, int Msg)
     return 0;
 }
 
-static int l_call (void *data)
+static int
+l_call (void *data)
 {
     return 1;
 }
 
-static void init_listmode (char *oldlistformat)
+static Dlg_head *
+init_listmode (char *oldlistformat)
 {
     int i;
     char *s;
     int format_width = 0;
     int format_columns = 0;
+    Dlg_head *listmode_dlg;
 
     do_refresh ();
 
-    listmode_dlg = create_dlg (0, 0, 22, 74, dialog_colors,
-			      listmode_callback, listmode_section, "listmode",
-			      DLG_CENTER);
-    x_set_dialog_title (listmode_dlg, "Listing format edit");	    
+    listmode_dlg =
+	create_dlg (0, 0, 22, 74, dialog_colors, listmode_callback,
+		    listmode_section, "listmode", DLG_CENTER);
+    x_set_dialog_title (listmode_dlg, "Listing format edit");
 
 #define XTRACT(i) BY+listmode_but[i].y, BX+listmode_but[i].x, listmode_but[i].ret_cmd, listmode_but[i].flags, listmode_but[i].text, 0, 0, NULL
 
@@ -167,43 +175,46 @@ static void init_listmode (char *oldlistformat)
 	add_widget (listmode_dlg, button_new (XTRACT (i)));
 
     /* We add the labels. */
-    for (i = 0; i < LABELS; i++){
-	pname = label_new (listmode_text [i].y,
-			   listmode_text [i].x, listmode_text [i].text, NULL);
+    for (i = 0; i < LABELS; i++) {
+	pname =
+	    label_new (listmode_labels[i].y, listmode_labels[i].x,
+		       listmode_labels[i].text, NULL);
 	add_widget (listmode_dlg, pname);
     }
 
-    add_widget (listmode_dlg, button_new (UY+13, UX+37, B_MINUS, NORMAL_BUTTON,
-					  "&-", bminus_cback, 0, NULL));
-    add_widget (listmode_dlg, button_new (UY+13, UX+34, B_PLUS, NORMAL_BUTTON,
-					  "&+", bplus_cback, 0, NULL));
-    radio_itemwidth = radio_new (UY+9, UX+22, 3, s_itemwidth, 1, NULL);
+    add_widget (listmode_dlg,
+		button_new (UY + 13, UX + 37, B_MINUS, NORMAL_BUTTON, "&-",
+			    bminus_cback, 0, NULL));
+    add_widget (listmode_dlg,
+		button_new (UY + 13, UX + 34, B_PLUS, NORMAL_BUTTON, "&+",
+			    bplus_cback, 0, NULL));
+    radio_itemwidth = radio_new (UY + 9, UX + 22, 3, s_itemwidth, 1, NULL);
     add_widget (listmode_dlg, radio_itemwidth);
     radio_itemwidth = 0;
-    radio_justify = radio_new (UY+5, UX+22, 3, s_justify, 1, NULL);
+    radio_justify = radio_new (UY + 5, UX + 22, 3, s_justify, 1, NULL);
     add_widget (listmode_dlg, radio_justify);
     radio_justify->sel = 1;
 
     /* get new listbox */
     l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, 0, l_call, NULL);
 
-    if (strncmp (oldlistformat, "full ", 5) == 0){
+    if (strncmp (oldlistformat, "full ", 5) == 0) {
 	format_width = 1;
 	oldlistformat += 5;
     }
-    if (strncmp (oldlistformat, "half ", 5) == 0){
+    if (strncmp (oldlistformat, "half ", 5) == 0) {
 	oldlistformat += 5;
     }
-    if (strncmp (oldlistformat, "2 ", 2) == 0){
+    if (strncmp (oldlistformat, "2 ", 2) == 0) {
 	format_columns = 1;
 	oldlistformat += 2;
     }
-    if (strncmp (oldlistformat, "1 ", 2) == 0){
+    if (strncmp (oldlistformat, "1 ", 2) == 0) {
 	oldlistformat += 2;
     }
     s = strtok (oldlistformat, ",");
 
-    while (s){
+    while (s) {
 	listbox_add_item (l_listmode, 0, 0, s, NULL);
 	s = strtok (NULL, ",");
     }
@@ -211,43 +222,50 @@ static void init_listmode (char *oldlistformat)
     /* add listbox to the dialogs */
     add_widget (listmode_dlg, l_listmode);
 
-    radio_columns = radio_new (UY+1, UX+32, 2, s_columns, 1, NULL);
+    radio_columns = radio_new (UY + 1, UX + 32, 2, s_columns, 1, NULL);
     add_widget (listmode_dlg, radio_columns);
     radio_columns->sel = format_columns;
-    radio_genwidth = radio_new (UY+1, UX+2, 2, s_genwidth, 1, NULL);
+    radio_genwidth = radio_new (UY + 1, UX + 2, 2, s_genwidth, 1, NULL);
     add_widget (listmode_dlg, radio_genwidth);
     radio_genwidth->sel = format_width;
+
+    return listmode_dlg;
 }
 
-static void listmode_done (void)
+static void
+listmode_done (Dlg_head * h)
 {
-    destroy_dlg (listmode_dlg);
+    destroy_dlg (h);
     if (0)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
 
-static char *select_new_item (void)
+static char *
+select_new_item (void)
 {
     /* NOTE: The following array of possible items must match the
        formats array in screen.c. Better approach might be to make the
        formats array global */
-    char *possible_items [] =
-    { "name", "size", "type", "mtime", "perm", "mode", "|", "nlink",
-	  "owner", "group", "atime", "ctime", "space", "mark",
-	  "inode", NULL };
+    char *possible_items[] =
+	{ "name", "size", "type", "mtime", "perm", "mode", "|", "nlink",
+	"owner", "group", "atime", "ctime", "space", "mark",
+	"inode", NULL
+    };
 
     int i;
     Listbox *mylistbox;
 
-    mylistbox = create_listbox_window (12, 20, " Add listing format item ", listmode_section);
-    for (i = 0; possible_items [i]; i++){
-	listbox_add_item (mylistbox->list, 0, 0, possible_items [i], NULL);
+    mylistbox =
+	create_listbox_window (12, 20, " Add listing format item ",
+			       listmode_section);
+    for (i = 0; possible_items[i]; i++) {
+	listbox_add_item (mylistbox->list, 0, 0, possible_items[i], NULL);
     }
 
     i = run_listbox (mylistbox);
     if (i >= 0)
-	return possible_items [i];
+	return possible_items[i];
     else
 	return NULL;
 }
@@ -268,7 +286,7 @@ collect_new_format (void)
     if (radio_columns->sel)
 	strcat (newformat, "2 ");
     last = NULL;
-    for (i = 0;;i++){
+    for (i = 0;; i++) {
 	listbox_select_by_number (l_listmode, i);
 	listbox_get_current (l_listmode, &text, &extra);
 	if (text == last)
@@ -281,17 +299,18 @@ collect_new_format (void)
     return newformat;
 }
 
-char *listmode_edit (char *oldlistformat)
+char *
+listmode_edit (char *oldlistformat)
 {
     char *newformat = NULL;
     char *s;
+    Dlg_head *listmode_dlg;
 
     s = g_strdup (oldlistformat);
-    init_listmode (s);
-   g_free (s);
+    listmode_dlg = init_listmode (s);
+    g_free (s);
 
-    while (newformat == NULL)
-    {
+    while (newformat == NULL) {
 	/* display file info */
 	attrset (SELECTED_COLOR);
 
@@ -318,8 +337,8 @@ char *listmode_edit (char *oldlistformat)
 	}
     }
 
-    listmode_done ();
+    listmode_done (listmode_dlg);
     return newformat;
 }
 
-#endif /* LISTMODE_EDITOR */
+#endif				/* LISTMODE_EDITOR */

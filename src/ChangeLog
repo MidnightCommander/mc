@@ -1,5 +1,8 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* listmode.c (listmode_refresh): Use common_dialog_repaint().
+	Eliminate all global variables.  Reformat the whole file.
+
 	* boxes.c (init_disp_bits_box): Use common_dialog_callback().
 	Return the new dialog.
 
