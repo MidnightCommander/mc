@@ -2,15 +2,6 @@
 
 main()
 {
-#if !(defined(HAVE_FCNTL_LOCK) || defined(HAVE_STRUCT_FLOCK64))
-	printf("ERROR: No locking available. Running Samba would be unsafe\n");
-	exit(1);
-#endif
-
-#if !(defined(HAVE_SYSV_IPC) || defined(HAVE_SHARED_MMAP))
-	printf("WARNING: no shared memory. Running with slow locking code\n");
-#endif
-
 #if !(defined(HAVE_NETMASK_IFCONF) || defined(HAVE_NETMASK_IFREQ) || defined(HAVE_NETMASK_AIX))
 	printf("WARNING: No automated netmask determination - use an interfaces line\n");
 #endif

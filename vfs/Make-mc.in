@@ -67,9 +67,7 @@ SAMBA_DIST_TOPLEVEL =		\
 	configure.in		\
 	configure		\
 	internals.doc		\
-	parsing.doc		\
-	samba-files		\
-	smbadduser
+	parsing.doc
 
 SAMBA_DIST_INCLUDE =		\
 	byteorder.h		\
@@ -137,13 +135,9 @@ SAMBA_DIST_PARAM =		\
 
 SAMBA_DIST_TESTS =		\
 	README			\
-	crypttest.c		\
-	fcntl_lock.c		\
 	ftruncate.c		\
 	getgroups.c		\
-	shared_mmap.c		\
 	summary.c		\
-	sysv_ipc.c		\
 	trivial.c
 
 NONETFILES = 			\

@@ -1,5 +1,16 @@
 2001-02-09  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Remove more useless tests.
+	* samba/tests/crypttest.c: Remove.
+	* samba/tests/fcntl_lock.c: Likewise.
+	* samba/tests/shared_mmap.c: Likewise.
+	* samba/tests/sysv_ipc.c: Likewise.
+	* samba/samba-files: Likewise.
+	* samba/smbadduser: Likewise.
+	* Make-mc.in: Adjust for the above.
+	* samba/include/includes.h: Removed definitions related to the
+	above tests.
+
 	* Make-mc.in: Eliminate ubiqx.
 	* samba/Makefile.in: Likewise. Remove some unused variables.
 	* samba/include/includes.h: Eliminate dependency on ubiqx.
