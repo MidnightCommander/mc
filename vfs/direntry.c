@@ -217,9 +217,11 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
     /* make full path from relative */
     if (*linkname != PATH_SEP) {
 	char *fullpath = vfs_s_fullpath (me, entry->dir);
-	fullname = g_strconcat (fullpath, "/", linkname, NULL);
-	linkname = fullname;
-	g_free (fullpath);
+	if (fullpath) {
+	    fullname = g_strconcat (fullpath, "/", linkname, NULL);
+	    linkname = fullname;
+	    g_free (fullpath);
+	}
     }
 
     target =

@@ -1,5 +1,9 @@
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* direntry.c (vfs_s_resolve_symlink): Check vfs_s_fullpath()
+	return value to avoid NULL dereference.
+	Reported by wwp <subscript@free.fr>.
+
 	* vfs.c (mc_def_ungetlocalcopy): Fix missed "%s".
 	* utilvfs.c (vfs_parse_ls_lga): Likewise.
 
