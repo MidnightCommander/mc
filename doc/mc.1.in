@@ -432,11 +432,10 @@ move the selection bar one page down.
 move the selection bar one page up.
 .TP
 .B M-o
-if the other panel is a listing panel and you are standing on a
-directory in the current panel, then the other panel contents are set
-to the contents of the currently selected directory (like Emacs' dired
-C-o key) otherwise the other panel contents are set to the parent dir
-of the current dir.
+make the current directory of the current panel also the current
+directory of the other panel.  Put the other panel to the listing mode
+if needed.  If the current panel is panelized, the other panel doesn't
+become panelized.
 .TP
 .B C-PageUp, C-PageDown
 only when ran on the Linux console: does a chdir to ".." and to the
