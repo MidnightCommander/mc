@@ -1,3 +1,8 @@
+2003-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Don't run compressed logs from /var/log through
+	nroff.  Suggested by Alfie Costa <agcosta@gmx.net>
+
 2003-05-16  Marco Ciampa  <ciampix@libero.it>
 
 	* syntax/ruby.syntax: upgrade

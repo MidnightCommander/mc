@@ -170,7 +170,7 @@ shell/.ms
 # Manual page - compressed
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.g?[Zz]$
 	Open=gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@
+	View=%view{ascii,nroff} case %d in /var/log*) gzip -dc %f ;; *) gzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ ;; esac
 
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
 	Open=bzip -dc %f | nroff @MAN_FLAGS@ @MANDOC@ | %var{PAGER:more}
