@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-11-13 01:15+0100\n"
-"PO-Revision-Date: 1999-09-26 21:40+02:00\n"
+"POT-Creation-Date: 1999-12-01 10:43+0100\n"
+"PO-Revision-Date: 1999-12-01 10:43+01:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -352,19 +352,19 @@ msgstr "Advarsel"
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kunne ikke åpne %s; vil ikke ha skrivebordsikoner"
 
-#: gnome/gdesktop.c:1181
+#: gnome/gdesktop.c:1186
 msgid "While running the mount/umount command"
 msgstr "Under kjøring av mount/umount kommandoen"
 
-#: gnome/gdesktop.c:1250
+#: gnome/gdesktop.c:1255
 msgid "While running the eject command"
 msgstr "Under kjøring av eject kommandoen"
 
-#: gnome/gdesktop.c:1434 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1439 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Feil"
 
-#: gnome/gdesktop.c:2593
+#: gnome/gdesktop.c:2598
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -378,84 +378,84 @@ msgstr ""
 "\n"
 "Kan ikke sette bakgrunnen."
 
-#: gnome/gdesktop.c:2616 gnome/glayout.c:362
+#: gnome/gdesktop.c:2621 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2616 gnome/glayout.c:363
+#: gnome/gdesktop.c:2621 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Starter en ny terminal i aktiv katalog"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2618 gnome/glayout.c:365
+#: gnome/gdesktop.c:2623 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "Katalog..."
 
-#: gnome/gdesktop.c:2618 gnome/glayout.c:366
+#: gnome/gdesktop.c:2623 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Oppretter en ny katalog"
 
-#: gnome/gdesktop.c:2619
+#: gnome/gdesktop.c:2624
 msgid "URL L_ink..."
 msgstr "URL-snarve_i..."
 
-#: gnome/gdesktop.c:2619
+#: gnome/gdesktop.c:2624
 msgid "Creates a new URL link"
 msgstr "Oppretter en ny URL-snarvei"
 
-#: gnome/gdesktop.c:2620
+#: gnome/gdesktop.c:2625
 msgid "_Launcher..."
 msgstr "_Oppstarter..."
 
-#: gnome/gdesktop.c:2620
+#: gnome/gdesktop.c:2625
 msgid "Creates a new launcher"
 msgstr "Oppretter en ny oppstarter"
 
-#: gnome/gdesktop.c:2626
+#: gnome/gdesktop.c:2631
 msgid "By _Name"
 msgstr "Etter _navn"
 
-#: gnome/gdesktop.c:2627
+#: gnome/gdesktop.c:2632
 msgid "By File _Type"
 msgstr "Etter _filtype"
 
-#: gnome/gdesktop.c:2628
+#: gnome/gdesktop.c:2633
 msgid "By _Size"
 msgstr "Etter _størrelse"
 
-#: gnome/gdesktop.c:2629
+#: gnome/gdesktop.c:2634
 msgid "By Time Last _Accessed"
 msgstr "Etter tid for siste _aksess"
 
-#: gnome/gdesktop.c:2630
+#: gnome/gdesktop.c:2635
 msgid "By Time Last _Modified"
 msgstr "Etter tid for siste _modifikasjon"
 
-#: gnome/gdesktop.c:2631
+#: gnome/gdesktop.c:2636
 msgid "By Time Last _Changed"
 msgstr "Etter tid for siste _endring"
 
-#: gnome/gdesktop.c:2639 gnome/glayout.c:462
+#: gnome/gdesktop.c:2644 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Plasser ikonene"
 
-#: gnome/gdesktop.c:2640
+#: gnome/gdesktop.c:2645
 msgid "Create _New Window"
 msgstr "Opprett _nytt vindu"
 
-#: gnome/gdesktop.c:2642 gnome/glayout.c:464
+#: gnome/gdesktop.c:2647 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "Oppdater skrivebor_dskatalogen"
 
-#: gnome/gdesktop.c:2643 gnome/glayout.c:465
+#: gnome/gdesktop.c:2648 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Oppdater en_heter"
 
-#: gnome/gdesktop.c:2644 gnome/glayout.c:466
+#: gnome/gdesktop.c:2649 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Lag standard_ikonene på nytt"
 
-#: gnome/gdesktop.c:2646
+#: gnome/gdesktop.c:2651
 msgid "Configure _Background Image"
 msgstr "Konfigurer _bakgrunnsbilde"
 
@@ -6450,6 +6450,3 @@ msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes overført"
-
-#~ msgid "fish: got listing"
-#~ msgstr "fish: hentet liste"
