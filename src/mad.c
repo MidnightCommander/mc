@@ -27,6 +27,7 @@
 #undef realloc
 #undef xmalloc
 #undef strdup
+#undef strndup
 #undef free
 
 #undef g_malloc
@@ -34,6 +35,7 @@
 #undef g_calloc
 #undef g_realloc
 #undef g_strdup
+#undef g_strndup
 #undef g_free
 
 #include <stdlib.h>
@@ -50,7 +52,7 @@
 
 /* Maximum number of memory area handles,
    increase this if you run out of handles */
-#define MAD_MAX_AREAS 10000
+#define MAD_MAX_AREAS 20000 /* vfs leaks Lots of memory*/
 /* Maximum file name length */
 #define MAD_MAX_FILE 50
 /* Signature for detecting overwrites */
@@ -68,9 +70,17 @@ typedef struct {
 static mad_mem_area mem_areas [MAD_MAX_AREAS];
 static FILE *memlog;
 
+#define MAD_CHECK_CALL_FACTOR 30        /* Perform actual test every N call. */
+static int Mad_check_call_delay;
+static int Alloc_idx_hint = 0;
+static struct /*mad_stats_struct*/ {
+	int last_max_i;
+	long check_call_cnt;
+} Stats = { -1, 0 } ;
+
 void *watch_free_pointer = 0;
 
-void 
+void
 mad_init (void)
 {
     memlog = stderr;
@@ -95,12 +105,30 @@ static void mad_abort (char *message, int area, char *file, int line)
     kill (getpid (), 3);
 }
 
+/* Code repeated in lots of places. Could be merged with mad_abort() above. */
+static void mad_fatal_error(const char *problem, void *ptr, const char *file, int line)
+{
+    if (NULL != ptr) {
+        fprintf(memlog, "MAD: %s: %p.\r\n", problem, ptr);
+    } else {
+        fprintf(memlog, "MAD: %s.\r\n", problem);
+    }
+    fprintf(memlog, "     Discovered in file \"%s\" at line %d.\r\n", file, line);
+    fprintf(memlog, "MAD: Aborting...\r\n");
+    fflush(memlog); 
+    abort();
+}
+
 /* Checks all the allocated memory areas.
    This is called everytime memory is allocated or freed.
    You can also call it anytime you think memory might be corrupted. */
 void mad_check (char *file, int line)
 {
     int i;
+
+    if (--Mad_check_call_delay > 0)
+	return;
+    Mad_check_call_delay = MAD_CHECK_CALL_FACTOR;
 
     for (i = 0; i < MAD_MAX_AREAS; i++){
  	if (! mem_areas [i].in_use)
@@ -110,6 +138,7 @@ void mad_check (char *file, int line)
 	if (*(mem_areas [i].end_sig) != MAD_SIGNATURE)
 	    mad_abort ("Overwrite error: Bad end signature", i, file, line);
     }
+    Stats.check_call_cnt++;
     fflush (memlog);
 }
 
@@ -121,30 +150,22 @@ void *mad_alloc (int size, char *file, int line)
 
     mad_check (file, line);
 
-    for (i = 0; i < MAD_MAX_AREAS; i++){
-	if (! mem_areas [i].in_use)
-	    break;
+    for (i = Alloc_idx_hint; i < MAD_MAX_AREAS; i++) {
+        if (! mem_areas [i].in_use)
+            break;
     }
-    if (i >= MAD_MAX_AREAS){
-	fprintf (memlog, "MAD: Out of memory area handles. Increase the value of MAD_MAX_AREAS.\r\n");
-	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
-		 file, line);
-	fprintf (memlog, "MAD: Aborting...\r\n");
-	fflush (memlog);
-	abort ();
-    }
+    if (i >= MAD_MAX_AREAS)
+	mad_fatal_error("Out of memory area handles. Increase the value of MAD_MAX_AREAS.", NULL, file, line);
+
+    Alloc_idx_hint = i+1;
+    if (i > Stats.last_max_i)
+        Stats.last_max_i = i;
 
     mem_areas [i].in_use = 1;
     size = (size + 3) & (~3); /* Alignment */
     area = (char*) g_malloc (size + 2 * sizeof (long));
-    if (!area){
-	fprintf (memlog, "MAD: Out of memory.\r\n");
-	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
-		 file, line);
-	fprintf (memlog, "MAD: Aborting...\r\n");
-	fflush (memlog);
-	abort ();
-    }
+    if (!area)
+	mad_fatal_error("Out of memory.", NULL, file, line);
 
     mem_areas [i].start_sig = (long*) area;
     mem_areas [i].data = (area + sizeof (long));
@@ -177,26 +198,15 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
 	if (mem_areas [i].data == ptr)
 	    break;
     }
-    if (i >= MAD_MAX_AREAS){
-	fprintf (memlog, "MAD: Attempted to realloc unallocated pointer: %p.\r\n", ptr);
-	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
-		 file, line);
-	fprintf (memlog, "MAD: Aborting...\r\n");
-	fflush (memlog);
-	abort ();
-    }
+    if (i >= MAD_MAX_AREAS)
+	mad_fatal_error("Attempted to realloc unallocated pointer", ptr, file, line);
 
     newsize = (newsize + 3) & (~3); /* Alignment */
     area = (char*) g_realloc (mem_areas [i].start_sig, newsize + 2 * sizeof (long));
-    if (!area){
-	fprintf (memlog, "MAD: Out of memory.\r\n");
-	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
-		 file, line);
-	fprintf (memlog, "MAD: Aborting...\r\n");
-	fflush (memlog);
-	abort ();
-    }
+    if (!area)
+	mad_fatal_error("Out of memory", NULL, file, line);
 
+    /* Reuses a position in mem_areas[] and thus does not set .in_use */
     mem_areas [i].start_sig = (long*) area;
     mem_areas [i].data = (area + sizeof (long));
     mem_areas [i].end_sig = (long*) (area + newsize + sizeof (long));
@@ -215,7 +225,7 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
 void *mad_alloc0 (int size, char *file, int line)
 {
     char *t;
-    
+
     t = (char *) mad_alloc (size, file, line);
     memset (t, 0, size);
     return (void *) t;
@@ -231,11 +241,25 @@ char *mad_strdup (const char *s, char *file, int line)
     return t;
 }
 
+/* Duplicates a character string. Used instead of strndup. */
+/* Dup of GLib's gstrfuncs.c:g_strndup() */
+char *mad_strndup (const char *s, int n, char *file, int line)
+{
+    if(s) {
+        char *new_str = mad_alloc(n + 1, file, line);
+        strncpy(new_str, s, n);
+        new_str[n] = '\0';
+        return new_str;
+    } else {
+        return NULL;
+    }
+}
+
 /* Frees a memory area. Used instead of free. */
 void mad_free (void *ptr, char *file, int line)
 {
     int i;
-    
+
     mad_check (file, line);
 
     if (watch_free_pointer && ptr == watch_free_pointer){
@@ -243,7 +267,7 @@ void mad_free (void *ptr, char *file, int line)
 		 file, line);
 	fflush (memlog);
     }
-    
+
     if (ptr == NULL){
 	fprintf (memlog, "MAD: Attempted to free a NULL pointer in file \"%s\" at line %d.\r\n",
 		 file, line);
@@ -251,23 +275,28 @@ void mad_free (void *ptr, char *file, int line)
 	return;
     }
 
-    for (i = 0; i < MAD_MAX_AREAS; i++){
- 	if (! mem_areas [i].in_use)
-	    continue;
-	if (mem_areas [i].data == ptr)
-	    break;
-    }
-    if (i >= MAD_MAX_AREAS){
-	fprintf (memlog, "MAD: Attempted to free an unallocated pointer: %p.\r\n", ptr);
-	fprintf (memlog, "     Discovered in file \"%s\" at line %d.\r\n",
-		 file, line);
-	fprintf (memlog, "MAD: Aborting...\r\n");
-	fflush (memlog);
-	abort ();
-    }
-    
+    /* Do a quick search in the neighborhood of Alloc_idx_hint. */
+    for ( i = MAX(Alloc_idx_hint-100, 0); i <= Alloc_idx_hint; i++ )
+	if ( mem_areas [i].data == ptr )
+	    goto found_it;
+
+    for ( i = MIN(Alloc_idx_hint+100, MAD_MAX_AREAS-1); i > Alloc_idx_hint; i-- )
+	if ( mem_areas [i].data == ptr )
+	    goto found_it;
+
+    for (i = 0; i < MAD_MAX_AREAS; i++)
+	if ( mem_areas [i].data == ptr )
+	    goto found_it;
+	
+    mad_fatal_error("Attempted to free an unallocated pointer", ptr, file, line);
+
+  found_it:
     g_free (mem_areas [i].start_sig);
     mem_areas [i].in_use = 0;
+
+    mem_areas[i].data = NULL;   /* Kill the pointer - no need to check .in_use above.*/
+    if ( i < Alloc_idx_hint )
+        Alloc_idx_hint = i;
 }
 
 char *mad_tempnam (char *a, char *b)
@@ -275,8 +304,8 @@ char *mad_tempnam (char *a, char *b)
     char *t, *u;
     t = tempnam(a,b); /* This malloc's internal buffer.. */
     u = mad_strdup(t, "(mad_tempnam)", 0);
-    free(t); 
-    return u;    
+    free(t);
+    return u;
 }
 
 /* Outputs a list of unfreed memory areas,
@@ -284,7 +313,8 @@ char *mad_tempnam (char *a, char *b)
 void mad_finalize (char *file, int line)
 {
     int i;
-    
+
+    Mad_check_call_delay = 0;
     mad_check (file, line);
 
     /* Following can be commented out if you don't want to see the
@@ -300,6 +330,10 @@ void mad_finalize (char *file, int line)
 		 file, line);
 	fflush (memlog);
     }
+    fprintf(memlog,
+        "MAD: Stats -\n     last_max_i:%d\n     check_call_cnt:%ld\n",
+	Stats.last_max_i, Stats.check_call_cnt
+    );
 #endif
 }
 
@@ -312,15 +346,15 @@ mad_strconcat (const char *first, ...)
 
     if (!first)
 	return 0;
-    
+
     len = strlen (first) + 1;
     va_start (ap, first);
 
     while ((data = va_arg (ap, char *)) != 0)
 	len += strlen (data);
 
-    result = g_malloc (len);
-    
+    result = mad_alloc(len, "(mad_strconcat)", 0);
+
     va_end (ap);
 
     va_start (ap, first);
@@ -334,7 +368,8 @@ mad_strconcat (const char *first, ...)
     return result;
 }
 
-/* This two functions grabbed from GLib's gstrfuncs.c */
+
+/* These two functions grabbed from GLib's gstrfuncs.c */
 char*
 mad_strdup_vprintf (const char *format, va_list args1)
 {
@@ -343,7 +378,7 @@ mad_strdup_vprintf (const char *format, va_list args1)
 
   G_VA_COPY (args2, args1);
 
-  buffer = g_new (char, g_printf_string_upper_bound (format, args1));
+  buffer = mad_alloc(g_printf_string_upper_bound(format, args1), "(mad_strdup_vprintf)", 0);
 
   vsprintf (buffer, format, args2);
   va_end (args2);
@@ -358,7 +393,7 @@ mad_strdup_printf (const char *format, ...)
   va_list args;
 
   va_start (args, format);
-  buffer = g_strdup_vprintf (format, args);
+  buffer = mad_strdup_vprintf(format, args);
   va_end (args);
 
   return buffer;

@@ -1,3 +1,29 @@
+2000-04-06  Timur Bakeyev  <mc@bat.ru>
+
+	* file.c, widget.[ch]: Fixed long existing problems with filenames
+	and input widgets, then char is greater than 128. They were processed
+	incorrectly. As usual, char != unsigned char problem.
+	
+2000-03-03  Björn Eriksson  <mdeans@algonet.se>
+	
+	* Similar patches came from Andrew V. Samoilov <sav@bcs.zp.ua>.
+
+	* mad.[ch]: Some functions wrongly by-passed mad_alloc*() (causing 
+	problems when later g_free()ed.
+	
+	* Added mad_strndup().
+	
+	* Repeated code collected in mad_fatal_error().
+	
+	* The gcc-extension/C99-standard variable argument macros (adding
+	__FILE__, __LINE__ before ', ...') would be nice.
+	
+	* Alloc_idx_hint and code added, the mad code was way too slow for my
+	poor computer. A hash-table would be nice.
+
+	* (mad_strconcat, mad_strdup_vprintf): g_malloc and g_new are 
+	undefined at the top of mad.c, so mad_alloc must be used.
+
 2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (parse_control_file): add missing right parentheses

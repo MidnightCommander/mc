@@ -79,7 +79,7 @@ typedef struct {
     int  first;			/* Is first keystroke? */
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */
-    char *buffer;		/* pointer to editing buffer */
+    unsigned char *buffer;	/* pointer to editing buffer */
     Hist *history;		/* The history */
     int  need_push;		/* need to push the current Input on hist? */
     char **completions;		/* Possible completions array */

@@ -188,14 +188,14 @@ convert_case (int c, enum CaseConvs *conversion)
 
 static int transform_error = 0;
 
-static char *
-do_transform_source (FileOpContext *ctx, char *source)
+static unsigned char *
+do_transform_source (FileOpContext *ctx, unsigned char *source)
 {
     int j, k, l, len;
-    char *fnsource = x_basename (source);
+    unsigned char *fnsource = x_basename (source);
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
-    static char fntarget [MC_MAXPATHLEN];
+    static unsigned char fntarget [MC_MAXPATHLEN];
 
     len = strlen (fnsource);
     j = re_match (&ctx->rx, fnsource, len, 0, &ctx->regs);
@@ -259,11 +259,11 @@ do_transform_source (FileOpContext *ctx, char *source)
     return fntarget;
 }
 
-static char *
-transform_source (FileOpContext *ctx, char *source)
+static unsigned char *
+transform_source (FileOpContext *ctx, unsigned char *source)
 {
-    char *s = g_strdup (source);
-    char *q;
+    unsigned char *s = g_strdup (source);
+    unsigned char *q;
 
     /* We remove \n from the filename since regex routines would use \n as an anchor */
     /* this is just to be allowed to maniupulate file names with \n on it */

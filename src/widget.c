@@ -1285,9 +1285,9 @@ forward_char (WInput *in)
 static void
 forward_word (WInput *in)
 {
-    char *p = in->buffer+in->point;
+    unsigned char *p = in->buffer+in->point;
 
-    while ((*p && isspace (*p)) || ispunct (*p))
+    while (*p && (isspace (*p) || ispunct (*p)))
 	p++;
     while (*p && isalnum (*p))
 	p++;
@@ -1297,7 +1297,7 @@ forward_word (WInput *in)
 static void
 backward_word (WInput *in)
 {
-    char *p = in->buffer+in->point;
+    unsigned char *p = in->buffer+in->point;
 
     while (p-1 > in->buffer-1 && (isspace (*(p-1)) || ispunct (*(p-1))))
 	p--;

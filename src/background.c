@@ -393,6 +393,7 @@ background_attention (int fd, void *closure)
 	    resstr = (*(char * (*)(char *, char *, char *, char *))routine)
 		(data [0], data [1], data [2], data [3]);
 	    break;
+	default: g_assert_not_reached();
 	}
 	if (resstr){
 	    len = strlen (resstr);
