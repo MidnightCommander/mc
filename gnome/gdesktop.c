@@ -908,11 +908,18 @@ icon_delete (GtkWidget *widget, desktop_icon_t *di)
 	desktop_icon_remove (di);
 }
 
+static void
+lower_window(GtkWidget *widget)
+{
+  g_print("Lowering window\n");
+  gdk_window_lower(widget->window);
+}
+
 GtkWidget *
 my_create_transparent_text_window (char *file, char *text)
 {
 	GtkWidget *w;
-	int events = GDK_BUTTON_PRESS_MASK | GDK_BUTTON1_MOTION_MASK;
+	int events = GDK_BUTTON_PRESS_MASK | GDK_BUTTON1_MOTION_MASK | GDK_EXPOSURE_MASK;
 	
 	w = create_transparent_text_window (file, text, events);
 	if (!w){
@@ -925,6 +932,8 @@ my_create_transparent_text_window (char *file, char *text)
 		if (!w)
 			return NULL;
 	}
+	gtk_signal_connect(GTK_OBJECT(w), "expose_event",
+			   lower_window, NULL);
 	return w;
 }
 
