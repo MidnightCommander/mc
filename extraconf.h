@@ -58,6 +58,7 @@ the need to embed this logic into configure.in.
 #    undef HAVE_SLANG
 #    undef HAS_CURSES
 #    undef USE_NCURSES
+#    undef HAVE_CHARSET
 #endif
 
 #ifndef USE_VFS

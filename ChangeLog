@@ -1,5 +1,8 @@
 2001-05-30  Pavel Roskin  <proski@gnu.org>
 
+	* extraconf.h [HAVE_X]: Undefine HAVE_CHARSET - it doesn't
+	work with GNOME.
+
 	* lib/mc.charsets: New file. From Walery Studennikov.
 	* lib/Makefile.am: Distribute mc.charsets. Install it if
 	the charset support is enabled.
