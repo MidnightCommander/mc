@@ -13,6 +13,10 @@ typedef struct {
 	GtkCTree ctree;
 
 	char         *current_path;
+	char	     *requested_path;
+
+	int          visible;
+	
 	GtkCTreeNode *root_node;	/* root node */
 	GtkCTreeNode *last_node;	/* last visited node */
 

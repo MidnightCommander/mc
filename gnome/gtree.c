@@ -191,34 +191,19 @@ gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 	return NULL;
 }
 
-/**
- * gtk_dtree_select_dir:
- * @dtree: the tree
- * @path:  The path we want loaded into the tree
- *
- * Attemps to open all of the tree notes until
- * path is reached.  It takes a fully qualified 
- * pathname.
- *
- * Returns: TRUE if it succeeded, otherwise, FALSE
- */
 gboolean
-gtk_dtree_select_dir (GtkDTree *dtree, char *path)
+gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 {
 	GtkCTreeNode *current_node;
 	char *s, *current, *npath;
 	
-	g_return_if_fail (dtree != NULL);
-	g_return_if_fail (GTK_IS_DTREE (dtree));
-	g_return_if_fail (path != NULL);
-	g_return_if_fail (*path == '/');
-
 	s = alloca (strlen (path)+1);
 	strcpy (s, path);
 	current_node = dtree->root_node;
 
 	s++;
 	npath = g_strdup ("/");
+
 	while ((current = strtok (s, "/")) != NULL){
 		char *comp, *full_path;
 		GtkCTreeNode *node;
@@ -234,16 +219,82 @@ gtk_dtree_select_dir (GtkDTree *dtree, char *path)
 
 			node = gtk_dtree_lookup_dir (dtree, current_node, current);
 		}
-		g_free (full_path);
 		
-		if (node)
+		if (node){
+			gtk_ctree_expand (GTK_CTREE (dtree), node);
 			current_node = node;
-		else
+		} else
 			break;
 		
 		s = NULL;
 	}
         g_free (npath);
+
+	if (current_node){
+		if (!gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node)){
+			printf ("moviendo!\n");
+			gtk_ctree_node_moveto (GTK_CTREE (dtree), current_node, 0, 0.5, 0.0);
+		}
+
+	}
+	if (dtree->current_path){
+		g_free (dtree->current_path);
+		dtree->current_path = g_strdup (path);
+	}
+
+	if (dtree->requested_path){
+		g_free (dtree->requested_path);
+		dtree->requested_path = NULL;
+	}
+}
+
+/**
+ * gtk_dtree_select_dir:
+ * @dtree: the tree
+ * @path:  The path we want loaded into the tree
+ *
+ * Attemps to open all of the tree notes until
+ * path is reached.  It takes a fully qualified 
+ * pathname.
+ *
+ * Returns: TRUE if it succeeded, otherwise, FALSE
+ */
+gboolean
+gtk_dtree_select_dir (GtkDTree *dtree, char *path)
+{
+	g_return_if_fail (dtree != NULL);
+	g_return_if_fail (GTK_IS_DTREE (dtree));
+	g_return_if_fail (path != NULL);
+	g_return_if_fail (*path == '/');
+
+	if (dtree->visible)
+		gtk_dtree_do_select_dir (dtree, path);
+	else {
+		if (dtree->requested_path){
+			g_free (dtree->requested_path);
+			dtree->requested_path = g_strdup (path);
+		}
+	}
+}
+
+static void
+gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
+{
+	GtkDTree *dtree = GTK_DTREE (widget);
+
+	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
+	if (allocation->width != 0 && allocation->height != 0)
+		dtree->visible = TRUE;
+	else
+		dtree->visible = FALSE;
+
+	if (!(dtree->visible && dtree->requested_path))
+		return;
+	
+	if (strcmp (dtree->current_path, dtree->requested_path) != 0)
+		return;
+
+	gtk_dtree_do_select_dir (dtree, dtree->requested_path);
 }
 
 static void
@@ -270,6 +321,7 @@ static void
 gtk_dtree_class_init (GtkDTreeClass *klass)
 {
 	GtkObjectClass *object_class = (GtkObjectClass *) klass;
+	GtkWidgetClass *widget_class = (GtkWidgetClass *) klass;
 	GtkCTreeClass  *ctree_class  = (GtkCTreeClass *) klass;
 	
 	parent_class = gtk_type_class (GTK_TYPE_CTREE);
@@ -287,6 +339,8 @@ gtk_dtree_class_init (GtkDTreeClass *klass)
 	gtk_object_class_add_signals (object_class, gtk_dtree_signals, LAST_SIGNAL);
 
 	object_class->destroy        = gtk_dtree_destroy;
+
+	widget_class->size_allocate  = gtk_dtree_size_allocate;
 	
 	ctree_class->tree_select_row = gtk_dtree_select_row;
 	ctree_class->tree_expand     = gtk_dtree_expand;
@@ -332,16 +386,17 @@ gtk_dtree_load_root_tree (GtkDTree *dtree)
 static void
 gtk_dtree_load_pixmap (char *pix [], GdkPixmap **pixmap, GdkBitmap **bitmap)
 {
+	GdkImlibImage *image;
+	
 	g_assert (pix);
 	g_assert (pixmap);
 	g_assert (bitmap);
-	
-	*pixmap = gdk_pixmap_colormap_create_from_xpm_d (
-		NULL,		/* NULL window */
-		gtk_widget_get_default_colormap (),
-		bitmap,
-		NULL,
-		pix);
+
+	image = gdk_imlib_create_image_from_xpm_data (pix);
+	gdk_imlib_render (image, image->rgb_width, image->rgb_height);
+	*pixmap = gdk_imlib_move_image (image);
+	*bitmap = gdk_imlib_move_mask (image);
+
 }
 
 /*
