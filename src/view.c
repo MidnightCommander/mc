@@ -787,7 +787,7 @@ view_status (WView *view, gboolean update_gui)
 	if (w > 46) {
 	    widget_move (view, view->have_frame, 24 + view->have_frame);
 	    if (view->hex_mode)
-		printw (_("Offset 0x%08x"), view->edit_cursor);
+		printw (_("Offset 0x%08lx"), view->edit_cursor);
 	    else
 		printw (_("Col %d"), -view->start_col);
 	}
