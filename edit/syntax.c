@@ -48,6 +48,11 @@
 #define RULE_ON_LEFT_BORDER 1
 #define RULE_ON_RIGHT_BORDER 2
 
+#define SYNTAX_TOKEN_STAR	'\001'
+#define SYNTAX_TOKEN_PLUS	'\002'
+#define SYNTAX_TOKEN_BRACKET	'\003'
+#define SYNTAX_TOKEN_BRACE	'\004'
+
 struct key_word {
     char *keyword;
     unsigned char first;
@@ -155,7 +160,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    return -1;
     for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
 	switch (*p) {
-	case '\001':
+	case SYNTAX_TOKEN_STAR:
 	    if (++p >= q)
 		return -1;
 	    for (;;) {
@@ -171,7 +176,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		i++;
 	    }
 	    break;
-	case '\002':
+	case SYNTAX_TOKEN_PLUS:
 	    if (++p >= q)
 		return -1;
 	    j = 0;
@@ -208,14 +213,14 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		i++;
 	    }
 	    break;
-	case '\003':
+	case SYNTAX_TOKEN_BRACKET:
 	    if (++p >= q)
 		return -1;
 	    c = -1;
 	    for (;; i++) {
 		d = c;
 		c = edit_get_byte (edit, i);
-		for (j = 0; p[j] != '\003'; j++)
+		for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET; j++)
 		    if (c == p[j])
 			goto found_char2;
 		break;
@@ -223,23 +228,23 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		j = c;		/* dummy command */
 	    }
 	    i--;
-	    while (*p != '\003' && p < q)
+	    while (*p != SYNTAX_TOKEN_BRACKET && p < q)
 		p++;
 	    if (p >= q)
 		return -1;
 	    if (p[1] == d)
 		i--;
 	    break;
-	case '\004':
+	case SYNTAX_TOKEN_BRACE:
 	    if (++p >= q)
 		return -1;
 	    c = edit_get_byte (edit, i);
-	    for (; *p != '\004'; p++)
+	    for (; *p != SYNTAX_TOKEN_BRACE; p++)
 		if (c == *p)
 		    goto found_char3;
 	    return -1;
 	  found_char3:
-	    for (; *p != '\004' && p < q; p++);
+	    for (; *p != SYNTAX_TOKEN_BRACE && p < q; p++);
 	    break;
 	default:
 	    if (*p != edit_get_byte (edit, i))
@@ -529,11 +534,11 @@ static char *convert (char *s)
 		break;
 	    case '[':
 	    case ']':
-		*p = '\003';
+		*p = SYNTAX_TOKEN_BRACKET;
 		break;
 	    case '{':
 	    case '}':
-		*p = '\004';
+		*p = SYNTAX_TOKEN_BRACE;
 		break;
 	    case 0:
 		*p = *s;
@@ -544,10 +549,10 @@ static char *convert (char *s)
 	    }
 	    break;
 	case '*':
-	    *p = '\001';
+	    *p = SYNTAX_TOKEN_STAR;
 	    break;
 	case '+':
-	    *p = '\002';
+	    *p = SYNTAX_TOKEN_PLUS;
 	    break;
 	default:
 	    *p = *s;
