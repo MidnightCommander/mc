@@ -1290,7 +1290,7 @@ backward_word (WInput *in)
     in->point = p - in->buffer;
 }
 
-#if defined(__linux__) && !defined(HAVE_X)
+#ifndef HAVE_X
 static void
 key_left (WInput *in)
 {
@@ -1311,7 +1311,7 @@ key_right (WInput *in)
 #else
 #define key_left  backward_char
 #define key_right forward_char
-#endif
+#endif /* HAVE_X */
     
 static void
 backward_delete (WInput *in)

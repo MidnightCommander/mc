@@ -978,13 +978,12 @@ get_modifier (void)
 }
 
 int
-ctrl_pressed ()
+ctrl_pressed (void)
 {
-#ifdef __linux__
     if (get_modifier () & CONTROL_PRESSED)
 	return 1;
-#endif
-    return 0;
+    else
+	return 0;
 }
 
 #ifdef HAVE_MAD

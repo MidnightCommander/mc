@@ -36,7 +36,6 @@
 #include "main.h"
 #include "ext.h"		/* regexp_command */
 #include "mouse.h"		/* For Gpm_Event */
-#include "cons.saver.h"		/* For console_flag */
 #include "layout.h"		/* Most layout variables are here */
 #include "dialog.h"		/* for message (...) */
 #include "cmd.h"
@@ -1792,15 +1791,17 @@ prev_page (WPanel *panel)
     select_item (panel);
 #ifndef HAVE_X
     paint_dir (panel);
-#endif
+#endif /* !HAVE_X */
 }
 
 static void
 prev_page_key (WPanel *panel)
 {
-    if (console_flag && ctrl_pressed ()){
+#ifndef HAVE_X
+    if (ctrl_pressed ()){
 	do_cd ("..", cd_exact);
     } else
+#endif /* !HAVE_X */
 	prev_page (panel);
 }
 
@@ -1832,16 +1833,18 @@ next_page (WPanel *panel)
     select_item (panel);
 #ifndef HAVE_X
     paint_dir (panel);
-#endif
+#endif /* !HAVE_X */
 }
 
 static void next_page_key (WPanel *panel)
 {
-    if (console_flag&&ctrl_pressed()&&
+#ifndef HAVE_X
+    if (ctrl_pressed() &&
 	(S_ISDIR(selection (panel)->buf.st_mode) ||
 	 link_isdir (selection (panel))))
         do_cd (selection (panel)->fname, cd_exact);
     else
+#endif /* !HAVE_X */
 	next_page (panel);
 }
 

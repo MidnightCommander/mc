@@ -1,5 +1,12 @@
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (ctrl_pressed): Don't limit functionality to Linux.
+	* screen.c (prev_page_key): Don't require console_flag to be set
+	to use ctrl_pressed(), only require that HAVE_X is undefined.
+	(next_page_key): Likewise.
+	* widget.c (key_left): Don't limit functionality to Linux.
+	(key_right): Likewise.
+
 	* main.h: Use "ifdef HAVE_GNOME", not "if HAVE_GNOME". Fix the
 	order of conditionals and put comments on endifs.
 
