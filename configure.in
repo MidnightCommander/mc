@@ -719,7 +719,6 @@ Configuration:
   Install console saver:      ${install_saver}
   Mouse support:              ${mouse_lib}
   X11 events support:         ${textmode_x11_support}
-  Debugger code:              ${mem_debug}
   With subshell support:      ${subshell}
   Internal editor:            ${EDIT_msg}
   Install path:               ${prefix}/bin, ${prefix}/lib/mc
