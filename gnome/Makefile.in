@@ -9,7 +9,7 @@ CPPFLAGS = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) -DHAVE_X -DHAVE_GNOME @GNOME_I
 LDFLAGS = $(XLDFLAGS) @X_LIBS@ @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 DEFS = $(XDEFS)
 LIBS = @X_EXTRA_LIBS@ -lX11 @X_PRE_LIBS@ $(XLIBS) $(XLIB) @TERMNET@
-EXTRALIBS = @LVFS@ @LSLANG@ @LEDIT@ @LINTL@
+EXTRALIBS = @LVFS@ @LSLANG@ ../gtkedit/libgtkedit.a @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -122,8 +122,8 @@ Makefile: Makefile.in ../config.status
 gmc: checklinks 
 	$(MAKE) mx
 
-mx: @LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@
-	$(CC) $(LDFLAGS) -o gmc $(OBJS) -L../vfs -L../slang -L../edit $(EXTRALIBS) $(LIBS) 
+mx: @LIBVFS@ $(OBJS) @LIBSLANG@ libgtkedit.a
+	$(CC) $(LDFLAGS) -o gmc $(OBJS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
 	touch mx
 
 @LIBVFS@:
@@ -136,10 +136,10 @@ libmcslang.a:
 @PCENTRULE@	-$(RMF) libmcslang.a
 @PCENTRULE@	$(LN_S) ../slang/libmcslang.a .
 
-libedit.a:
-	cd ../edit; $(MAKE) libedit.a
-@PCENTRULE@	-$(RMF) libedit.a
-@PCENTRULE@	$(LN_S) ../edit/libedit.a .
+libgtkedit.a:
+	cd ../gtkedit; $(MAKE) libgtkedit.a
+@PCENTRULE@	-$(RMF) libgtkedit.a
+@PCENTRULE@	$(LN_S) ../edit/libgtkedit.a .
 
 checklinks:
 	@if test -f $(gnomedir)/regex.c; then echo ok; \
@@ -168,7 +168,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) @tkmc@ *.o core a.out mx @LIBVFS@ libedit.a libmcslang.a
+	$(RMF) @tkmc@ *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend

@@ -492,6 +492,12 @@ panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 }
 
 void
+panel_action_edit (GtkWidget *widget, WPanel *panel)
+{
+	edit_cmd (panel);
+}
+
+void
 panel_action_properties (GtkWidget *widget, WPanel *panel)
 {
 	file_entry *fe = &panel->dir.list [panel->selected];
