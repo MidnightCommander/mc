@@ -1,5 +1,11 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (edit_move_forward3): Use caret notation for code 127
+	and below code 32.
+	* editdraw.c (edit_draw_this_line): Likewise.  Print '.' for
+	other non-printable characters and remove this code from ...
+	(print_to_widget): ... here.
+
 	* edit.c (edit_move_forward3): Show '\r' as ^M.
 	* editdraw.c (edit_draw_this_line): Likewise.  Use MOD_ABNORMAL
 	attribute.

@@ -1214,21 +1214,17 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return p - 1;
 	}
 	c = edit_get_byte (edit, p);
-	/* '\r' is shown as ^M, so we must advance 2 characters */
-	if (c == '\r') 
-	    col += 2;
-	else
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;
-	else
-	    col++;
-	/*if(edit->nroff ... */
-	if (c == '\n') {
+	else if (c == '\n') {
 	    if (upto)
 		return col;
 	    else
 		return p;
-	}
+	} else if (c < 32 || c == 127)
+	    col += 2; /* Caret notation for control characters */
+	else
+	    col++;
     }
     return col;
 }

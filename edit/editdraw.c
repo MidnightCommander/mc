@@ -211,9 +211,8 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 	    color = *p >> 16;
 
 	    if (style & MOD_ABNORMAL) {
-		/* Non-printable - show as a dot on black background */
+		/* Non-printable - use black background */
 		color = 0;
-		textchar = '.';
 	    }
 	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
 		lowlevel_set_color (color);
@@ -299,23 +298,29 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		    while (--i)
 			*(p++) = c;
 		    break;
-		case '\r':
-		    /* Display '\r' as ^M, just like vi does */
-		    *(p++) = '^';
-		    *p |= (256 * MOD_ABNORMAL);
-		    *(p++) = 'M';
-		    *p |= (256 * MOD_ABNORMAL);
-		    col += 2;
-		    break;
 		default:
 #ifdef HAVE_CHARSET
 		    if (c >= 0 && c <= 255)
 			c = conv_displ[ c ];
 #endif
+		    /* Caret notation for control characters */
+		    if (c < 32) {
+			*(p++) = '^' | (256 * MOD_ABNORMAL);
+			*(p++) = (c + 0x40) | (256 * MOD_ABNORMAL);
+			col += 2;
+			break;
+		    }
+		    if (c == 127) {
+			*(p++) = '^' | (256 * MOD_ABNORMAL);
+			*(p++) = '?' | (256 * MOD_ABNORMAL);
+			col += 2;
+			break;
+		    }
+
 		    if (is_printable (c)) {
 			*(p++) |= c;
 		    } else {
-			*(p++) |= (256 * MOD_ABNORMAL);
+			*(p++) = '.' | (256 * MOD_ABNORMAL);
 		    }
 		    col++;
 		    break;
