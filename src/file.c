@@ -649,7 +649,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	    continue;
 	goto ret;
     }
-    buf = (char *) g_malloc (buf_size);
+    buf = g_malloc (buf_size);
 
     ctx->eta_secs = 0.0;
     ctx->bps = 0;

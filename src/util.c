@@ -606,7 +606,7 @@ char *load_file (char *filename)
 	fclose (data_file);
 	return 0;
     }
-    data = (char *) g_malloc (s.st_size+1);
+    data = g_malloc (s.st_size+1);
     read_size = fread (data, 1, s.st_size, data_file);
     data [read_size] = 0;
     fclose (data_file);

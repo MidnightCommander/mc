@@ -400,7 +400,7 @@ init_subshell (void)
 	/* Initialise the pty's I/O buffer */
 
 	pty_buffer_size = INITIAL_PTY_BUFFER_SIZE;
-	pty_buffer = (char *) g_malloc (pty_buffer_size);
+	pty_buffer = g_malloc (pty_buffer_size);
 
 	/* Create a pipe for receiving the subshell's CWD */
 
@@ -574,7 +574,7 @@ read_subshell_prompt (void)
     FD_SET (subshell_pty, &tmp);
 
     if (subshell_prompt == NULL) {	/* First time through */
-	subshell_prompt = (char *) g_malloc (prompt_size);
+	subshell_prompt = g_malloc (prompt_size);
 	*subshell_prompt = '\0';
 	prompt_pos = 0;
     }
@@ -607,8 +607,7 @@ read_subshell_prompt (void)
 		subshell_prompt[prompt_pos++] = pty_buffer[i];
 		if (prompt_pos == prompt_size)
 		    subshell_prompt =
-			(char *) g_realloc (subshell_prompt, prompt_size *=
-					    2);
+			g_realloc (subshell_prompt, prompt_size *= 2);
 	    }
 
 	subshell_prompt[prompt_pos] = '\0';
