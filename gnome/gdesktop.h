@@ -42,10 +42,6 @@ void desktop_destroy (void);
 
 
 
-enum {
-	TARGET_URI_LIST,
-	TARGET_TEXT_PLAIN,
-};
 typedef enum {
 	application,
 	directory,

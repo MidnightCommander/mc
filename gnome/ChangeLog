@@ -1,3 +1,25 @@
+1998-12-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_new): Connect the signals for DnD
+	so that we can drag icons from the desktop.
+	(drag_begin): New function to set the drag cursor for icons on the desktop.
+	(button_press): New function that stores the hot spot position for
+	DnD cursors.
+	(drag_data_get): New function to fetch the URI-list of selected icons.
+
+	* gdialogs.c: Fixed some includes.
+
+	* gdesktop.h: Removed the DnD target enum from here, since it is
+	specific to each submodule.
+
+	* gdnd.h: Moved the DnD target enums to here.  Added a new
+	TARGET_MC_DESKTOP_ICON.
+
+	* gdesktop.c (get_icon_snap_pos): Fixed icon snapping; the
+	coordinates not being updated correctly.
+
+	* gscreen.c (panel_drag_data_get): Free the uri list; it was being leaked.
+
 1998-12-04  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdialogs.c (file_progress_show_count): finished the copy dialog.

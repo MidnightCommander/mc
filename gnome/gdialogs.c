@@ -1,10 +1,12 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* New dialogs... */
-#include <gnome.h>
-#include "../vfs/vfs.h"
-#include "file.h"
+#include <config.h>
+#include "util.h"
 #include "panel.h"
+#include <gnome.h>
+#include "file.h"
 #include "filegui.h"
+#include "../vfs/vfs.h"
 
 static GtkWidget *op_win = NULL;
 static GtkWidget *fmd_win = NULL;

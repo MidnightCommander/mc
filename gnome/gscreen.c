@@ -718,10 +718,8 @@ panel_drag_data_get (GtkWidget        *widget,
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
 		data = panel_build_selected_file_list (panel, &len);
-
-		gtk_selection_data_set (
-			selection_data, selection_data->target, 8,
-			data, len);
+		gtk_selection_data_set (selection_data, selection_data->target, 8, data, len);
+		g_free (data);
 		break;
 	}
 }

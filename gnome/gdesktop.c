@@ -58,6 +58,7 @@ struct desktop_icon_info {
 	int slot;		/* Index of the slot the icon is in, or -1 for none */
 	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
 	enum icon_type type;	/* Type of icon, used to determine menu and DnD behavior */
+	int press_x, press_y;	/* Button press position to compute hot spot offset */
 	int selected : 1;	/* Is the icon selected? */
 };
 
@@ -71,7 +72,7 @@ struct layout_slot {
 
 int desktop_use_shaped_icons = TRUE;
 int desktop_auto_placement = FALSE;
-int desktop_snap_icons = FALSE;
+int desktop_snap_icons = TRUE;
 
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
@@ -88,11 +89,20 @@ static struct layout_slot *layout_slots;
 /* The last icon to be selected */
 static struct desktop_icon_info *last_selected_icon;
 
-/* Drag and drop targets for the desktop */
+/* Drag and drop sources and targets for the desktop */
+
+static GtkTargetEntry dnd_sources[] = {
+	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/plain", 0, TARGET_TEXT_PLAIN }
+};
+
 static GtkTargetEntry dnd_targets[] = {
+	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST }
 };
 
+static int dnd_nsources = sizeof (dnd_sources) / sizeof (dnd_sources[0]);
 static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
 
 /* Proxy window for DnD on the root window */
@@ -142,7 +152,6 @@ get_icon_snap_pos (int *x, int *y)
 {
 	int min, min_x, min_y;
 	int min_dist;
-	int sx, sy;
 	int u, v;
 	int val, dist;
 	int dx, dy;
@@ -151,18 +160,16 @@ get_icon_snap_pos (int *x, int *y)
 	min_x = min_y = 0;
 	min_dist = INT_MAX;
 
-	sx = DESKTOP_SNAP_X * ((*x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X);
-	sy = DESKTOP_SNAP_Y * ((*y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y);
-
 	for (u = 0; u < layout_cols; u++)
 		for (v = 0; v < layout_rows; v++) {
 			val = l_slots (u, v).num_icons;
 
-			dx = sx - u;
-			dy = sy - v;
+			dx = *x - u * DESKTOP_SNAP_X;
+			dy = *y - v * DESKTOP_SNAP_Y;
 			dist = dx * dx + dy * dy;
 
 			if ((val == min && dist < min_dist) || (val < min)) {
+				min = val;
 				min_dist = dist;
 				min_x = u;
 				min_y = v;
@@ -197,10 +204,12 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 	int u, v;
 	char *filename;
 
-	if (auto_pos)
-		get_icon_auto_pos (&xpos, &ypos);
-	else if (desktop_snap_icons)
-		get_icon_snap_pos (&xpos, &ypos);
+	if (auto_pos) {
+		if (desktop_auto_placement)
+			get_icon_auto_pos (&xpos, &ypos);
+		else if (desktop_snap_icons)
+			get_icon_snap_pos (&xpos, &ypos);
+	}
 
 	/* Increase the number of icons in the corresponding slot */
 
@@ -478,9 +487,153 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
 }
 
+/* Callback used to store the button press position for the hot spot of the DnD cursor */
+static gint
+button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	struct desktop_icon_info *dii;
+
+	dii = data;
+	dii->press_x = event->x;
+	dii->press_y = event->y;
+
+	return FALSE;
+}
+
+/* Callback used when a drag from the desktop icons is started.  We set the drag icon to the proper
+ * pixmap.
+ */
+static void
+drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	DesktopIcon *dicon;
+	GtkArg args[3];
+	GdkImlibImage *im;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+	int x, y;
+
+	dii = data;
+	dicon = DESKTOP_ICON (dii->dicon);
+
+	/* FIXME: see if it is more than one icon and if so, use a multiple-files icon. */
+
+	args[0].name = "image";
+	args[1].name = "x";
+	args[2].name = "y";
+	gtk_object_getv (GTK_OBJECT (dicon->icon), 3, args);
+	im = GTK_VALUE_BOXED (args[0]);
+	x = GTK_VALUE_DOUBLE (args[1]);
+	y = GTK_VALUE_DOUBLE (args[2]);
+
+	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	pixmap = gdk_imlib_copy_image (im);
+	mask = gdk_imlib_copy_mask (im);
+
+	gtk_drag_set_icon_pixmap (context,
+				  gtk_widget_get_colormap (dicon->canvas),
+				  pixmap,
+				  mask,
+				  dii->press_x - x,
+				  dii->press_y - y);
+
+	gdk_pixmap_unref (pixmap);
+	gdk_bitmap_unref (mask);
+}
+
+/* Builds a string with the URI-list of the selected desktop icons */
+static char *
+build_selected_icons_uri_list (int *len)
+{
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+	char *filelist, *p;
+	int desktop_dir_len;
+
+	/* First, count the number of selected icons and add up their filename lengths */
+
+	*len = 0;
+	desktop_dir_len = strlen (desktop_directory);
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			/* "file:" + desktop_directory + "/" + dii->filename + "\r\n" */
+
+			if (dii->selected)
+				*len += 5 + desktop_dir_len + 1 + strlen (dii->filename) + 2;
+		}
+
+	/* Second, create the file list string */
+
+	filelist = g_new (char, *len + 1); /* plus 1 for null terminator */
+	p = filelist;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			if (dii->selected) {
+				strcpy (p, "file:");
+				p += 5;
+
+				strcpy (p, desktop_directory);
+				p += desktop_dir_len;
+
+				*p++ = '/';
+
+				strcpy (p, dii->filename);
+				p += strlen (dii->filename);
+
+				strcpy (p, "\r\n");
+				p += 2;
+			}
+		}
+
+	*p = 0;
+
+	return filelist;
+}
+
+/* Callback used to get the drag data from the desktop icons */
+static void
+drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *selection_data,
+	       guint info, guint32 time, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	char *filelist;
+	int len;
+
+	dii = data;
+
+	switch (info) {
+	case TARGET_MC_DESKTOP_ICON:
+		printf ("Getting data for desktop icons\n");
+		/* Do nothing, as we will know when we get a root window drop */
+		break;
+
+	case TARGET_URI_LIST:
+	case TARGET_TEXT_PLAIN:
+		filelist = build_selected_icons_uri_list (&len);
+		gtk_selection_data_set (selection_data,
+					selection_data->target,
+					8,
+					filelist,
+					len);
+		g_free (filelist);
+		break;
+
+	default:
+		g_assert_not_reached ();
+	}
+}
+
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
- * If auto_pos is true, then the function will look for a place to position the icon automatically,
- * else it will use the specified coordinates.  It does not show the icon.
+ * If auto_pos is false, it will use the specified coordinates for the icon.  Else, it will use
+ * auto- positioning trying to start at the specified coordinates.  It does not show the icon.
  */
 static struct desktop_icon_info *
 desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
@@ -536,6 +689,24 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_stopped",
 			    (GtkSignalFunc) editing_stopped,
+			    dii);
+
+	/* Connect the DnD signals */
+
+	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
+			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
+			     dnd_sources,
+			     dnd_nsources,
+			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
+			    (GtkSignalFunc) button_press,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_begin",
+			    (GtkSignalFunc) drag_begin,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get),
 			    dii);
 
 	/* Place the icon and append it to the list */
@@ -675,7 +846,7 @@ load_desktop_icons (int incremental, int xpos, int ypos)
 	need_position_list = g_slist_reverse (need_position_list);
 
 	for (l = need_position_list; l; l = l->next) {
-		dii = desktop_icon_info_new (l->data, FALSE, xpos, ypos);
+		dii = desktop_icon_info_new (l->data, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 		g_free (l->data);
 	}
@@ -812,6 +983,10 @@ drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 	gint dx, dy;
 
 	switch (info) {
+	case TARGET_MC_DESKTOP_ICON:
+		printf ("Dropped desktop icons!\n"); /* FIXME */
+		break;
+
 	case TARGET_URI_LIST:
 		/* Fix the proxy window offsets */
 		gdk_window_get_position (widget->window, &dx, &dy);
@@ -900,96 +1075,6 @@ desktop_destroy (void)
 
 
 
-
-
-#if 0
-/* Stubs for filegui.h */
-
-#include "file.h"
-#include "panel.h"
-
-FileProgressStatus
-file_progress_show_source (char *path)
-{
-	g_warning ("file_progres_show_source: Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_show_target (char *path)
-{
-	g_warning ("file_progres_show_target: Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_show_deleting (char *path)
-{
-	g_warning ("file_progress_show_deleting: Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_show (long done, long total)
-{
-	g_warning ("file-progress_show; Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_show_count (long done, long total)
-{
-	g_warning ("file_progress_show_count: Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_show_bytes (long done, long total)
-{
-	g_warning ("file_progress_show_bytes: Implement this function!\n");
-	return FILE_CONT;
-}
-
-FileProgressStatus
-file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat, struct stat *_d_stat)
-{
-	g_warning ("file_progress_real_query_replace: Implement this function!\n");
-	return FILE_CONT;
-}
-
-void
-file_progress_set_stalled_label (char *stalled_msg)
-{
-	g_warning ("file_progress_set_stalled_label: Implement this function!\n");
-}
-
-char *
-panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int only_one, struct stat* src_stat)
-{
-	g_warning ("panel_opreate_create_prompt: Implement this function!\n");
-	return NULL;
-}
-
-char *
-file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_one, int *do_background)
-{
-	g_warning ("file_mask_dialog: Implement this function!\n");
-	return NULL;
-}
-
-void
-create_op_win (FileOperation op, int with_eta)
-{
-	g_warning ("create_op_win: Implement this function!\n");
-}
-
-void
-destroy_op_win (void)
-{
-	g_warning ("destory_op_win: Implement this function!\n");
-}
-
-#endif
 
 
 
