@@ -977,7 +977,7 @@ toggle_fast_reload (void)
 	message (0, _(" Information "),
 		 _
 		 (" Using the fast reload option may not reflect the exact \n"
-		  " directory contents. In this cases you'll need to do a  \n"
+		  " directory contents. In this case you'll need to do a   \n"
 		  " manual reload of the directory. See the man page for   \n"
 		  " the details.                                           "));
 	fast_reload_w = 1;

@@ -1735,7 +1735,7 @@ static int ftpfs_netrc_bad_mode (char *netrcname, char *netrc)
     if (stat (netrcname, &mystat) >= 0 && (mystat.st_mode & 077)) {
 	if (be_angry) {
 	    message (1, MSG_ERROR,
-			_("~/.netrc file has not correct mode.\n"
+			_("~/.netrc file has incorrect mode.\n"
 			  "Remove password or correct mode."));
 	    be_angry = 0;
 	}

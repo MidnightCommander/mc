@@ -2879,7 +2879,7 @@ msgstr " Bilgi       "
 #: src/main.c:1158
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
-" directory contents. In this cases you'll need to do a  \n"
+" directory contents. In this case you'll need to do a   \n"
 " manual reload of the directory. See the man page for   \n"
 " the details.                                           "
 msgstr ""
@@ -4233,7 +4233,7 @@ msgstr "ftpfs: %d dosyasý kaydediliyor (%lu)"
 
 #: vfs/ftpfs.c:1860
 msgid ""
-"~/.netrc file has not correct mode.\n"
+"~/.netrc file has incorrect mode.\n"
 "Remove password or correct mode."
 msgstr ""
 "~/.netrc dosyasý doðru kipte deðil .\n"
