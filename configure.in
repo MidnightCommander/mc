@@ -44,8 +44,26 @@ if test "x$glib_found" != "xyes" ; then
 	AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config (version 1.2.x only)])
 	AM_PATH_GLIB(1.2.6, , [AC_MSG_ERROR([Test for glib failed.
 GNU Midnight Commander requires glib 1.2.6 or above.])])
+	dnl Save GLIB_CFLAGS and GLIB_LIBS, since the following call to
+	dnl AM_PATH_GLIB will overwrite them.
+	save_GLIB_CFLAGS="$GLIB_CFLAGS"
+	save_GLIB_LIBS="$GLIB_LIBS"
+	dnl Check for gmodule.  Store the flags necessary to compile and
+	dnl link programs using gmodule functionality in GMODULE_CFLAGS
+	dnl and GMODULE_LIBS.
+	AM_PATH_GLIB(1.2.6, [gmodule_found=yes], , [gmodule])
+	GMODULE_CFLAGS="$GLIB_CFLAGS"
+	GMODULE_LIBS="$GLIB_LIBS"
+	GLIB_CFLAGS="$save_GLIB_CFLAGS"
+	GLIB_LIBS="$save_GLIB_LIBS"
+else
+	PKG_CHECK_MODULES(GMODULE, [gmodule-2.0], [gmodule_found=yes])
 fi
 
+if test "x$gmodule_found" = "xyes" ; then
+	dnl Check if the gmodule functionality supported on this system.
+	AC_G_MODULE_SUPPORTED
+fi
 
 AC_HEADER_MAJOR
 AC_C_CONST
@@ -221,7 +239,16 @@ if test "x$no_x" = xyes; then
     textmode_x11_support="no"
 else
     CPPFLAGS="$CPPFLAGS $X_CFLAGS"
-    MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
+    if test "x$mc_cv_g_module_supported" = "xyes" ; then
+	dnl Replace the contents of GLIB_CFLAGS and GLIB_LIBS with those of
+	dnl GMODULE_CFLAGS and GMODULE_LIBS, only if X is available and gmodule
+	dnl functionality is supported on the system.  This way, mc will be
+	dnl linked against the gmodule library only when it's really required.
+	GLIB_CFLAGS="$GMODULE_CFLAGS"
+	GLIB_LIBS="$GMODULE_LIBS"
+    else
+        MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
+    fi
     AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,
 	      [Define to enable getting events from X Window System])
     textmode_x11_support="yes"
