@@ -1,3 +1,8 @@
+2002-10-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Expand $bindir and $datadir to show at the end.
+	Reported by Nerijus Baliunas <nerijus@users.sourceforge.net>
+
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Remove the argument from --with-gpm-mouse.  The

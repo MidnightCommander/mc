@@ -462,10 +462,10 @@ AC_ARG_WITH(edit,
 if test x$with_edit != xno; then
 	AC_DEFINE(USE_INTERNAL_EDIT, 1, [Define to enable internal editor])
 	use_edit=yes
-	EDIT_msg="yes"
+	edit_msg="yes"
 	AC_MSG_NOTICE([using internal editor])
 else
-	EDIT_msg="no"
+	edit_msg="no"
 fi
 
 
@@ -600,6 +600,13 @@ po/Makefile.in
 
 AC_OUTPUT
 
+# Expand $bindir and $datadir to show the user.
+# Two levels of expansion should be enough.
+bindir_msg=`eval echo "$bindir"`
+bindir_msg=`eval echo "$bindir_msg"`
+datadir_msg=`eval echo "$datadir"`
+datadir_msg=`eval echo "$datadir_msg"`
+
 echo "
 Configuration:
 
@@ -613,6 +620,7 @@ Configuration:
   Mouse support:              ${mouse_lib}
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}
-  Internal editor:            ${EDIT_msg}
-  Install path:               ${prefix}/bin, ${prefix}/lib/mc
+  Internal editor:            ${edit_msg}
+  Install path for binaries:  ${bindir_msg}
+  Install path for data:      ${datadir_msg}
 "
