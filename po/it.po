@@ -629,7 +629,7 @@ msgstr "&Aggiorna lo schermo            C-l"
 
 #: edit/editmenu.c:208 edit/editmenu.c:231
 msgid "&Start record macro      C-r"
-msgstr "Registra &Nuova macro           C-r"
+msgstr "&Registra nuova macro           C-r"
 
 #: edit/editmenu.c:209 edit/editmenu.c:232
 msgid "&Finish record macro...  C-r"
@@ -637,7 +637,7 @@ msgstr "&Blocca registrazione macro...  C-r"
 
 #: edit/editmenu.c:210
 msgid "&Execute macro...   C-a, KEY"
-msgstr "&Esegue macro...         C-a, TASTO"
+msgstr "&Esegui macro...         C-a, TASTO"
 
 #: edit/editmenu.c:211 edit/editmenu.c:234
 msgid "delete macr&O...            "
@@ -669,7 +669,7 @@ msgstr "&Posta..."
 
 #: edit/editmenu.c:233
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Esegue macro... C-x e, TASTO"
+msgstr "&Esegui macro... C-x e, TASTO"
 
 #: edit/editmenu.c:239
 msgid "'ispell' s&Pell check    M-$"
@@ -681,7 +681,7 @@ msgstr "&Generale...  "
 
 #: edit/editmenu.c:248 edit/editmenu.c:257
 msgid "&Save mode..."
-msgstr "Modalità &Salvataggio..."
+msgstr "&Modalità di salvataggio..."
 
 #: edit/editmenu.c:250 edit/editmenu.c:259 src/main.c:1075
 msgid "&Layout..."
@@ -2231,7 +2231,7 @@ msgstr " Processo in background: il file esiste "
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:738
 msgid "preserve &Attributes"
-msgstr "Mantiene gli &Attributi"
+msgstr "Preserva gli &Attributi"
 
 #. &op_preserve
 #: src/filegui.c:740
@@ -2872,11 +2872,11 @@ msgstr "Collegamento S&hell..."
 
 #: src/main.c:968 src/main.c:995
 msgid "SM&B link..."
-msgstr "Connessione FT&P..."
+msgstr "Connessione SM&B..."
 
 #: src/main.c:973 src/main.c:1000
 msgid "&Drive...       M-d"
-msgstr "&Disco...    M-d"
+msgstr "&Disco...          M-d"
 
 #: src/main.c:975 src/main.c:1002
 msgid "&Rescan         C-r"

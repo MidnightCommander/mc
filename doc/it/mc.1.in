@@ -1627,17 +1627,17 @@ Dopo l'esecuzione di comandi, il Midnight Commander può fermarsi, in
 maniera da permettere di esaminare il risultato del comando. Ci sono
 tre possibili impostazioni per questa variabile:
 .IP
-.I Mai
+.I Mai.
 Significa che non si vuole vedere il risultato del comando. Se si sta
 usando la console Linux o SCO o un xterm, ci sarà la possibilità di vedere
 il risultato del comando premendo C-o.
 .IP
-.I su terminali stupidi
+.I Su terminali stupidi.
 Si avrà il messaggio di pausa su quei terminali che non sono in grado di
 mostrare il risultato dell'ultimo comando eseguito (qualsiasi terminale che
 non sia un xterm o una console Linux o SCO).
 .IP
-.I Sempre
+.I Sempre.
 Il programma si fermerà dopo l'esecuzione di tutti i comandi.
 .PP
 .B Altre opzioni
@@ -2319,33 +2319,33 @@ non è impostata), mc farebbe la copia in /pinco/pallo. Abilitando
 quest'opzione verrà eseguita la copia in /pinco/pallo/pallo, perchè
 la directory esiste già.
 .PP
-Mantiene gli attributi, tells whether to preserve the original files' 
-permissions, timestamps and if you are root whether to preserve 
-the original files' UID and GID. If this option is not set the current 
-value of the umask will be respected.
+Mantiene gli attributi, specifica se si vuole preservare i permessi
+originali del file, le date e se si è l'utente root, gli attributi
+UID e GID. Se quest'opzione non è impostata verrà rispettato il valore 
+corrente di umask.
 .PP
-.B "Use shell patterns on"
+.B "Usa i modelli della shell, opzione abilitata"
 .PP
-When the shell patterns option is on you can use the '*' and '?'
-wildcards in the source mask. They work like they do in the shell. In
-the target mask only the '*' and '\\<digit>' wildcards are allowed. The
-first '*' wildcard in the target mask corresponds to the first
-wildcard group in the source mask, the second '*' corresponds to the
-second group and so on. The '\\1' wildcard corresponds to the first
-wildcard group in the source mask, the '\\2' wildcard corresponds to
-the second group and so on all the way up to '\\9'. The '\\0' wildcard
-is the whole filename of the source file.
+Quando l'opzione dei modelli della shell è abilitata è possibile usare
+i caratteri jolly '*' e '?' nella maschera sorgente. Questi lavorano
+come nella shell. Nella maschera obbiettivo sono permessi solo i caratteri 
+jolly '*' e '\\<cifra>'. Il primo carattere jolly '*' nella maschera
+obbiettivo corrisponde al primo gruppo di caratteri jolly nella maschera
+sorgente, il secondo '*' al secondo gruppo e così via. Il carattere 
+jolly '\\1' corrisponde al primo gruppo di caratteri jolly nella maschera
+sorgente, '\\2' corrisponde al secondo gruppo e così via fino al '\\9'.
+Il carattere jolly '\\0' rappresenta tutto il nome del file sorgente.
 .PP
-Two examples:
+Due esempi:
 .PP
-If the source mask is "*.tar.gz", the destination is "/bla/*.tgz" and the
-file to be copied is "foo.tar.gz", the copy will be "foo.tgz" in "/bla".
+Se la maschera sorgente è "*.tar.gz", la destinazione è "/bla/*.tgz" e
+il file da copiare è "foo.tar.gz", la copia sarà "foo.tgz" in "/bla".
 .PP
-Let's suppose you want to swap basename and extension so that "file.c"
-will become "c.file" and so on. The source mask for this is "*.*" and
-the destination is "\\2.\\1".
+Supponiamo si voglia scambiare il base e l'estensione cosicché "file.c"
+divenga "c.file" e così via. La maschera sorgente per questo sarà "*.*" 
+e la destinazione sarà "\\2.\\1".
 .PP
-.B "Use shell patterns off"
+.B "Usa i modelli della shell, opzione disabilitata"
 .PP
 When the shell patterns option is off the MC doesn't do automatic
 grouping anymore. You must use '\\(...\\)' expressions in the source
