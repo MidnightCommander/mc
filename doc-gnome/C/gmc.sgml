@@ -392,7 +392,7 @@
     The GNOME File Manager allows you to launch applications from the main
     window by simply double clicking your mouse on a file which has an
     application associated with it. You can change the way file types are
-    handled by reading <xref linkend="gccmime">
+    handled by reading the Mime Capplet Chapter in the GNOME User's Guide.
    </para>
    <para>
    <indexterm>
@@ -443,7 +443,7 @@
      <para>
       <guimenuitem>Open</guimenuitem> - This will open the file with the default
       application associated with it. You may read more about editing these
-      associations in <xref linkend="gccmime">.
+      associations in Mime Capplet Chapter in the GNOME User's Guide..
      </para>
     </listitem>
     <listitem>
@@ -463,8 +463,8 @@
      <para>
       <guimenuitem>Edit</guimenuitem> - This will launch an editor to edit the
       file. The editor launched is determined by the application associated with
-      that file type. You may read more about editing this association in <xref 
-      linkend="gccmime">.
+      that file type. You may read more about editing this association in Mime
+      Capplet Chapter in the GNOME User's Guide..
      </para>
     </listitem>
     <listitem>
@@ -837,6 +837,7 @@
         </itemizedlist>
        </listitem>
       </itemizedlist>
+      </sect2>
       <sect2 id="gmcprefs-desk">
 	<title>Desktop</title>
 	<para>
@@ -890,8 +891,6 @@
           the icons will automatically move to when you release it after dragging.
          </para>
        </sect2>
-
-   <sect2>
    <sect2 id="gmcprefs-custom">
     <title>Custom View</title>
     <para>
@@ -1197,11 +1196,11 @@
        </listitem>
        <listitem>
         <para>
-         <guimenuitem>Edit mime types</guimenuitem> - This option will launch 
-	 the GNOME Control Center Capplet that allows you to edit Mime Types for 
-	 GNOME. Mime types determine, among other things, what application will 
-	 handle particular file types. You can read more about mime types in 
-	 <xref linkend="gccmime">
+         <guimenuitem>Edit mime types</guimenuitem> - This option will launch
+	 the GNOME Control Center Capplet that allows you to edit Mime Types for
+	 GNOME. Mime types determine, among other things, what application will
+	 handle particular file types. You can read more about mime types in
+	 Mime Capplet Chapter in the GNOME User's Guide.
         </para>
        </listitem>
        <listitem>
