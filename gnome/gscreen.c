@@ -179,8 +179,10 @@ x_select_item (WPanel *panel)
 
 	gtk_clist_select_row (clist, panel->selected, 0);
 
-	if (!gtk_clist_row_is_visible (clist, panel->selected))
+	if (!gtk_clist_row_is_visible (clist, panel->selected)){
+		printf ("No fue visible %d\n", panel->selected);
 		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
+	}
 }
 
 void
@@ -199,7 +201,7 @@ x_filter_changed (WPanel *panel)
 void
 x_adjust_top_file (WPanel *panel)
 {
-	gtk_clist_moveto (GTK_CLIST (panel->list), panel->top_file, 0, 0.0, 0.0);
+/*	gtk_clist_moveto (GTK_CLIST (panel->list), panel->top_file, 0, 0.0, 0.0); */
 }
 
 #define COLUMN_INSET 3
@@ -447,7 +449,9 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 	unselect_item (panel);
 	panel->selected = row;
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
+	printf ("Selecttionando\n");
 	select_item (panel);
+	printf ("Post-selección\n");
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
 }
 
@@ -611,13 +615,14 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked)
 				total_len += (cwdlen + panel->dir.list [i].fnamelen + 1);
-		
+
+		printf ("Total lenght: %d\n", total_len);
 		data = copy = xmalloc (total_len, "build_selected_file_list");
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
 				strcpy (copy, panel->cwd);
-				copy [cwdlen] = '/';
-				strcpy (&copy [cwdlen+1], panel->dir.list [i].fname);
+				copy [cwdlen-1] = '/';
+				strcpy (&copy [cwdlen], panel->dir.list [i].fname);
 				copy += panel->dir.list [i].fnamelen + 1 + cwdlen;
 			}
 		*file_list_len = total_len;

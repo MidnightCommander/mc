@@ -1,8 +1,15 @@
-Tue Mar 10 00:10:32 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Tue Mar 10 14:01:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (panel_drop_data_available): Now drop support uses the
-	new coords.x and coords.y fields from the DropDataAvailableEvent
-	to find out which directory receives the drop. 
+	* gscreen.c 
+
+	* gscreen.c (x_adjust_top_file): We no longer adjust the top
+	displayed filename.
+	
+	(panel_build_selected_file_list): Fix for the transfered data.
+	
+	(panel_drop_data_available): Now drop support uses the new
+	coords.x and coords.y fields from the DropDataAvailableEvent to
+	find out which directory receives the drop.
 
 	* gwidget.c (x_radio_focus_item): Add support for focusing radio
 	buttons.
