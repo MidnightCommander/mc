@@ -101,7 +101,6 @@ void init_extfs (void);
 void init_fish (void);
 void init_ftpfs (void);
 void init_localfs (void);
-void init_localfs (void);
 void init_mcfs (void);
 void init_sfs (void);
 void init_smbfs (void);

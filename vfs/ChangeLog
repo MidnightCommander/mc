@@ -1,5 +1,7 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Remove redundant declaration of init_localfs().
+
 	* mcserv.c: Don't use HAVE_CRYPT from extraonf.h.
 	* samba/include/includes.h: Likewise.
 
