@@ -16,6 +16,8 @@
 	* utilunix.c: likewise.
 	* view.c: likewise.
 	* widget.c: likewise.
+	* complete.c: Surrounded the declaration of environ by and #ifdef
+	guard to avoid a GCC warning about a redundant declaration.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 

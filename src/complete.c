@@ -217,7 +217,10 @@ username_completion_function (char *text, int state)
     }
 }
 
+/* Linux declares environ in <unistd.h>, so don't repeat it here. */
+#if !defined(__linux__)
 extern char **environ;
+#endif
 
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */
