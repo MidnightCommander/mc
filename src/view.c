@@ -162,6 +162,18 @@ struct WView {
     struct stat s;		/* stat for file */
 };
 
+static void view_move_cursor_to_eol(WView *view)
+{
+    offset_type last_line = (view->last_byte - 1) / view->bytes_per_line;
+    offset_type current_line = view->edit_cursor / view->bytes_per_line;
+
+    if (current_line == last_line) {
+        view->edit_cursor = view->last_byte - 1;
+    } else {
+        view->edit_cursor = (1 + current_line) * view->bytes_per_line - 1;
+    }
+    view->dirty++;
+}
 
 /* Maxlimit for skipping updates */
 int max_dirt_limit = 10;
@@ -2369,9 +2381,7 @@ view_handle_key (WView *view, int c)
 	    return MSG_HANDLED;
 
 	case XCTRL ('e'):	/* End of line */
-	    view->edit_cursor -= view->edit_cursor % view->bytes_per_line;
-	    view->edit_cursor += view->bytes_per_line - 1;
-	    view->dirty++;
+	    view_move_cursor_to_eol (view);
 	    return MSG_HANDLED;
 
 	case XCTRL ('f'):	/* Character forward */

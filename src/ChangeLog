@@ -1,4 +1,9 @@
-2004-09-18  Roland Illig <roland.illig@gmx.de>
+2004-09-18  Roland Illig  <roland.illig@gmx.de>
+
+	* view.c (view_handle_key): Fixed invalid-offset-bug when handling
+	ctrl-e in hex mode.
+
+2004-09-18  Roland Illig  <roland.illig@gmx.de>
 
 	* help.c (search_string): Fixed a warning about a const qualifier.
 	A local copy of the string is used for modifying.
