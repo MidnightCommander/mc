@@ -449,6 +449,7 @@ create_new_menu_from (GnomeApp *app, WPanel *panel, char *file)
 		file2 = g_concat_dir_and_file (file, dirstruc->d_name);
 
 		if ((stat (file2, &filedata) != -1) && (S_ISREG (filedata.st_mode))){
+			char *path;
 			char *test;
 			
 			gde = gnome_desktop_entry_load (file2);
