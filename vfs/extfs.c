@@ -48,6 +48,7 @@
 
 static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
+static int extfs_which (vfs *me, char *path);
 
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
@@ -394,7 +395,9 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
     
     archive_name = inname;
     vfs_split( inname, &local, &op );
-    fstype = extfs_which( op );
+    fstype = extfs_which( NULL, op ); /* FIXME: we really should pass
+					 self pointer. But as we know that extfs_which does not touch vfs
+					 *me, it does not matter for now */
     if (!local)
         local = "";
     if (fstype == -1)
@@ -873,7 +876,7 @@ static void extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chan
 
 
 #include "../src/profile.h"
-int extfs_init (vfs *me)
+static int extfs_init (vfs *me)
 {
     FILE *cfg;
     char *mc_extfsini;
@@ -925,7 +928,8 @@ int extfs_init (vfs *me)
     return 1;
 }
 
-int extfs_which (vfs *me, char *path)
+/* Do NOT use me argument in this function */
+static int extfs_which (vfs *me, char *path)
 {
     int i;
 
@@ -935,12 +939,12 @@ int extfs_which (vfs *me, char *path)
     return -1;
 }
 
-char *extfs_get_prefix (int idx)
+static char *extfs_get_prefix (int idx)
 {
     return extfs_prefixes [idx];
 }
 
-void extfs_done (vfs *me)
+static void extfs_done (vfs *me)
 {
     int i;
 

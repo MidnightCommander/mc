@@ -219,7 +219,7 @@ static int command (struct connection *bucket, int wait_reply,
     int sock = qsock (bucket);
     
     va_start (ap, fmt);
-    vsprintf (buf, fmt, ap);
+    vsnprintf (buf, 2046, fmt, ap);
     va_end (ap);
     n = strlen(buf);
     buf[n++] = '\r';

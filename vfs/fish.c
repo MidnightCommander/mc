@@ -157,7 +157,7 @@ static int command (struct connection *bucket, int wait_reply,
     int n, status;
     
     va_start (ap, fmt);
-    vsprintf (buf, fmt, ap);
+    vsnprintf (buf, 2046, fmt, ap);
     va_end (ap);
     n = strlen(buf);
     buf[n] = 0;
@@ -492,6 +492,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	    fe->bucket = bucket;
 	    fe->s.st_ino = bucket->__inode_counter++;
 	    fe->s.st_nlink = 1;
+	    fe->local_filename = NULL;
 	}
 
 	switch(buffer[0]) {

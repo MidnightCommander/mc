@@ -426,7 +426,7 @@ remove_temp_file (char *file_name)
 	    if (ent->local_filename) {
 		unlink (ent->local_filename);
 		free (ent->local_filename);
-		ent->local_filename = 0;
+		ent->local_filename = NULL;
 		return 0;
 	    }
 	}

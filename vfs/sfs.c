@@ -288,7 +288,7 @@ extern int local_fstat (void *data, struct stat *buf);
 extern int local_errno (vfs *me);
 extern int local_lseek (void *data, off_t offset, int whence);
 
-int sfs_init (vfs *me)
+static int sfs_init (vfs *me)
 {
     FILE *cfg = fopen( LIBDIR "extfs/sfs.ini", "r" );
     if (!cfg) {
@@ -342,7 +342,7 @@ int sfs_init (vfs *me)
     return 1;
 }
 
-void sfs_done (vfs *me)
+static void sfs_done (vfs *me)
 {
     int i;
     for (i=0; i<sfs_no; i++) {
@@ -353,7 +353,7 @@ void sfs_done (vfs *me)
     sfs_no = 0;
 }
 
-int sfs_which (vfs *me, char *path)
+static int sfs_which (vfs *me, char *path)
 {
     int i;
 

@@ -814,16 +814,26 @@ paint_panel (WPanel *panel)
     mini_info_separator (panel);
 }
 
+static void
+do_select (WPanel *panel, int i)
+{
+    if (i != panel->selected){
+        panel->selected = i;
+	panel->top_file = panel->selected - (panel->widget.lines-2)/2;
+	if (panel->top_file < 0)
+	    panel->top_file = 0;
+	x_adjust_top_file (panel);
+    }
+}
+
 void
 Xtry_to_select (WPanel *panel, char *name)
 {
-    int i;
+    int i, best = -1, bestl = -1;
     char *subdir;
     
-    if (!name){
-	panel->selected = 0;
-	panel->top_file = 0;
-	x_adjust_top_file (panel);
+    if (!name) {
+        do_select(panel, 0);
 	return;
     }
 
@@ -835,28 +845,31 @@ Xtry_to_select (WPanel *panel, char *name)
     
     /* Search that subdirectory, if found select it */
     for (i = 0; i < panel->count; i++){
-	if (strcmp (subdir, panel->dir.list [i].fname))
+        char *s = panel->dir.list [i].fname;
+        int l = strlen (s);
+	if (strncmp (subdir, s, l))
 	    continue;
 
-	if (i != panel->selected){
-	    panel->selected = i;
-	    panel->top_file = panel->selected - (panel->widget.lines-2)/2;
-	    if (panel->top_file < 0)
-		panel->top_file = 0;
-	    x_adjust_top_file (panel);
+        if (l == strlen(subdir)){
+	    /* Complete match, hilight */
+	    do_select (panel, i);
+	    return;
 	}
-	return;
+        if (bestl > l)
+	    continue;
+        bestl = l;
+	best = i;
+    }
+
+    if (best != -1) {
+      /* Try to select longest inclusive match - good for vfs */
+       do_select (panel, best);
+       return;
     }
 
     /* Try to select a file near the file that is missing */
-    if (panel->selected >= panel->count){
-	panel->selected = panel->count-1;
-	panel->top_file = panel->selected - (panel->widget.lines)/2;
-	if (panel->top_file < 0)
-	    panel->top_file = 0;
-	x_adjust_top_file (panel);
-    } else
-	return;
+    if (panel->selected >= panel->count)
+        do_select (panel, panel->count-1);
 }
 
 #ifndef PORT_HAS_PANEL_UPDATE_COLS

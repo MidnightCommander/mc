@@ -1,3 +1,8 @@
+Tue Sep 29 17:23:03 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* extfs.c, sfs.c: added few static's to prevent people from doing
+ 	stupid things
+
 Mon Sep 28 21:43:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.h (struct vfs): renamed errno to verrno because glibc2 

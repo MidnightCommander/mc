@@ -922,6 +922,8 @@ translate_url_to_new_syntax (const char *p)
  *  If we moved to the parent directory move the selection pointer to
  *  the old directory name; If we leave VFS dir, remove FS specificator.
  *  Warn: This code spoils lwd string.
+ *
+ *  You do _NOT_ want to add any vfs aware code here. <pavel@ucw.cz>
  */
 char*
 get_parent_dir_name (char *cwd, char *lwd)
@@ -929,15 +931,7 @@ get_parent_dir_name (char *cwd, char *lwd)
     char *p;
     if (strlen (lwd) > strlen (cwd))
 	if((p=strrchr(lwd, PATH_SEP)) && !strncmp(cwd, lwd, p-lwd)){
-#ifdef USE_VFS
-	    char *q;
-	    if((q=strrchr(p, '#')) != 0){
-		/* Here we need proper VFS function */
-		if(!strcmp((q+1), "utar") || extfs_which(q+1) >= 0 || sfs_which(q+1) >= 0)
-		    *q = '\0';
-	    }
-#endif /* USE_VFS */
-	return (p+1);
+	    return (p+1);
 	}
     return NULL;
 }

@@ -1,3 +1,11 @@
+Tue Sep 29 17:53:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* main.c: removed stupid reference to {sfs,extfs}_which
+
+	* screen.c: fixed higlighting to go for longest match if it does
+ 	not find exact match. This is so that it works well with vfs (and
+ 	needs _NO_ knowledge about vfs layer).
+
 Tue Sep 29 14:02:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* layout.c (print_vfs_message): fixed buffer overrun by
