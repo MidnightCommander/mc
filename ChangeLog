@@ -1,5 +1,8 @@
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Use --nosignature with rpm to avoid a message
+	in the viewer about unsigned packages.
+
 	* acinclude.m4 (MC_WITH_SLANG): Don't add -lslang to MCLIBS if
 	the system S-Lang is rejected.
 

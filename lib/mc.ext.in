@@ -486,15 +486,10 @@ regex/\.trpm$
 	Open=%cd %p#trpm
 	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
 
-# Source RPMs (SuSE uses *.spm, others use *.src.rpm)
-regex/\.(spm|src\.rpm)$
+# RPM packages (SuSE uses *.spm for source packages)
+regex/\.(rpm|spm)$
 	Open=%cd %p#rpm
-	View=%view{ascii} rpm -qivlp --scripts %f
-
-# Compiled RPMs
-regex/\.rpm$
-	Open=%cd %p#rpm
-	View=%view{ascii} rpm -qivlp --scripts %f
+	View=%view{ascii} rpm -qivlp --nosignature --scripts %f
 
 # deb
 regex/\.deb$
