@@ -9,7 +9,7 @@
 # tested to comply with isoinfo 2.0's output
 
 test_iso () {
-    CHARSET=`echo $save_ctype | sed -n -e 's/.*\.\(.*\)"$/\1/p' |tr '[A-Z]' '[a-z]'`
+    CHARSET=`echo "$save_ctype" | sed -n -e 's/.*\.\(.*\)"$/\1/p' | tr '[A-Z]' '[a-z]'`
     if test -n "$CHARSET"; then
 	isoinfo -j $CHARSET 2>&1 | grep "Unknown charset" >/dev/null && CHARSET=
     fi

@@ -3,6 +3,8 @@
 	* tar.c tar_read_header(): q should not point to a static string.
 	Canonicalize q.
 
+	* extfs/iso9660.in: Fix quoting issues.
+
 2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * smbfs.c (smbfs_open_readwrite): Comment out flags games,
