@@ -66,8 +66,7 @@ else
 mc_SOURCES = $(SRCS)
 endif
 
-EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
-	ncurses.patch $(CHARSET_SRC)
+EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c $(CHARSET_SRC)
 
 install-exec-hook:
 	$(MAKE) install_mcview
