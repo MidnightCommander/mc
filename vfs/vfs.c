@@ -1736,9 +1736,15 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     return 1;
 
 error:
-#if 0
-    message_1s (1, "Could not parse:", p_copy);
-#endif
+    {
+      static int errorcount = 0;
+
+      if (++errorcount < 5) {
+	message_1s (1, "Could not parse:", p_copy);
+      } else if (errorcount == 5)
+	message_1s (1, "More parsing errors will be ignored.", "(sorry)" );
+    }
+
     if (p_copy != p)		/* Carefull! */
 	g_free (p_copy);
     return 0;

@@ -2,6 +2,7 @@
 
 	* vfs.c (vfs_parse_filemode): fix for solaris which uses 'l'
 	instead of 'S'.
+	(vfs_parse_ls_lga): do not silently ignore parsing errors.
 
 Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
