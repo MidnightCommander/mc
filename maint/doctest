@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Run this script in the top-level source directory to check the
+# documentation for compatibility with groff and nroff.
+
 set -e
 
 function one_test () {
@@ -21,7 +24,7 @@ one_test find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tps {} \;
 one_test find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tdvi {} \;
 one_test find doc -name '*.[1-9].in' -exec nroff -mandoc -Tlatin1 {} \;
 
-# Check English manuals to be in ASCII.
+# Check the English manuals to be in ASCII.
 one_test find doc -maxdepth 1 -name '*.[1-9].in' -exec groff -wall -Tascii {} \;
 
 rm -rf doctest.err
