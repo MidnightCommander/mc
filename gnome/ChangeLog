@@ -1,3 +1,9 @@
+1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_open): Run "execute" if the file
+	is an executable.  I forgot that gmc_open does not test for
+	executable-ness. 
+
 1999-02-04  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-file-property-dialog.c (apply_uid_group_change): Bug fix.

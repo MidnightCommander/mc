@@ -26,7 +26,7 @@
 #include "gdnd.h"
 #include "gpopup.h"
 #include "../vfs/vfs.h"
-
+#include "main.h"
 
 /* Name of the user's desktop directory (i.e. ~/desktop) */
 #define DESKTOP_DIR_NAME "desktop"
@@ -799,10 +799,15 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
-	else
-		gmc_open_filename (filename);
+	else {
+		if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
+			my_system (EXECUTE_AS_SHELL, shell, filename);
+		else
+			gmc_open_filename (filename);
+	}
 
 	file_entry_free (fe);
+	g_free (filename);
 }
 
 void
