@@ -8,6 +8,7 @@ Makefile.in
 Makefile.in.in
 Makevars.template
 POTFILES
+POTFILES.in.missing
 Rules-quot
 boldquot.sed
 cat-id-tbl.c
