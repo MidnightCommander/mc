@@ -5,7 +5,6 @@
 #include "dialog.h"		/* Widget */
 
 #define selection(p) (&(p->dir.list[p->selected]))
-#define other_panel get_other_panel()
 #define DEFAULT_USER_FORMAT "half type name | size | perm"
 
 #define LIST_TYPES	4
@@ -92,12 +91,10 @@ void update_dirty_panels (void);
 void panel_update_cols (Widget *widget, int frame_size);
 int set_panel_formats (WPanel *p);
 
-WPanel *get_current_panel (void);
-WPanel *get_other_panel (void);
-
 /* Useful macros to avoid too much typing */
-#define cpanel get_current_panel()
+#define cpanel current_panel
 #define opanel get_other_panel()
+#define other_panel get_other_panel()
 
 extern WPanel *left_panel;
 extern WPanel *right_panel;

@@ -1,5 +1,9 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (get_current_panel): Remove.
+	(get_other_panel): Move ...
+	* layout.c: ... here.
+
 	* info.h: Don't expose WInfo internals.
 
 	* background.c (tell_parent): Eliminate.

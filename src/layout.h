@@ -21,6 +21,9 @@ char *get_nth_panel_name (int num);
 struct Widget;
 struct Widget *get_panel_widget (int index);
 
+struct WPanel;
+struct WPanel *get_other_panel (void);
+
 void set_hintbar (char *str);
 
 /* Clear screen */

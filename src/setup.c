@@ -328,7 +328,7 @@ save_setup (void)
     save_string ("Dirs", "other_dir",
 			       get_other_type () == view_listing
 			       ? opanel->cwd : ".", profile);
-    if (get_current_panel () != NULL)
+    if (current_panel != NULL)
 	    WritePrivateProfileString ("Dirs", "current_is_left",
 				       get_current_index () == 0 ? "1" : "0", profile);
     save_hotlist ();

@@ -1109,6 +1109,12 @@ int get_other_index (void)
     return !get_current_index ();
 }
 
+struct WPanel *
+get_other_panel (void)
+{
+    return (struct WPanel *) get_panel_widget (get_other_index ());
+}
+
 /* Returns the view type for the current panel/view */
 int get_current_type (void)
 {

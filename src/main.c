@@ -276,18 +276,6 @@ char *mc_home;
 
 char cmd_buf[512];
 
-WPanel *
-get_current_panel (void)
-{
-    return current_panel;
-}
-
-WPanel *
-get_other_panel (void)
-{
-    return (WPanel *) get_panel_widget (get_other_index ());
-}
-
 static void
 reload_panelized (WPanel *panel)
 {
