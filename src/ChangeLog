@@ -1,3 +1,9 @@
+Wed Nov  4 17:51:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* src/findme.h: added from popt-1.2 by RedHat
+
+	* src/Makefile.in: appropriate changes to use new popt
+
 Sun Nov  1 20:59:05 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (erase_file): translated goto into while loop (it is both
