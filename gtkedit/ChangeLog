@@ -9,8 +9,9 @@
 	sprintf (s, "%s", ).
 
 	(set_color) [MIDNIGHT]: Became a macro.
-	(render_edit_text) [!defined(MIDNIGHT) && !defined(GTK)]: Warning fix.
+	(render_edit_text) [defined(MIDNIGHT) || defined(GTK)]: Warning fix.
 	(edit_render) [GTK]: Eliminate win variable.
+	(key_pending) [!GTK]: Warning fix.
 
 2001-05-30  Pavel Roskin  <proski@gnu.org>
 

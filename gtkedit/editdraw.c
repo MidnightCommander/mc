@@ -39,9 +39,6 @@ extern int column_highlighting;
 
 static void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 {
-#ifdef MIDNIGHT
-    int i;
-#endif
     char byte_str[16];
 
     /*
@@ -76,16 +73,6 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
 	      edit->curs1,
 	      edit->last_byte, 
 	      byte_str);
-
-#ifdef MIDNIGHT
-    /*
-     * Make string exactly w chars wide
-     * Fill the remainder with the fill char
-     */
-    i = strlen (s);
-    memset (s + i, fill, w - i);
-    s[w] = 0;
-#endif
 }
 
 #endif
@@ -107,17 +94,17 @@ void edit_status (WEdit * edit)
 	widget_move (edit, edit->have_frame, edit->have_frame);
 	i = w > 24 ? 18 : w - 6;
 	i = i < 13 ? 13 : i;
-	sprintf (s, "%s", (char *) name_trunc (edit->filename ? edit->filename : "", i));
-	i += strlen (s);
-	s[strlen (s)] = ' ';
+	strcpy (s, (char *) name_trunc (edit->filename ? edit->filename : "", i));
+	i = strlen (s);
+	s[i] = ' ';
 	t = w - 20;
 	if (t < 0)
 	    t = 0;
 	status_string (edit, s + 20, t, ' ', 1);
-    } else {
-	s[w] = 0;
     }
-    printw ("%.*s", w, s);
+    s[w] = 0;
+
+    printw ("%-*s", w, s);
     attrset (NORMAL_COLOR);
     free (s);
 }
@@ -143,7 +130,7 @@ void edit_status (WEdit *edit)
     if (w > 1) {
 	i = w > 24 ? 18 : w - 6;
 	i = i < 13 ? 13 : i;
-	sprintf (s, "%s", (char *) name_trunc (edit->filename ? edit->filename : "", i));
+	strcpy (s, (char *) name_trunc (edit->filename ? edit->filename : "", i));
 	i = strlen (s);
 	s[i] = ' ';
 	s[i + 1] = ' ';
@@ -205,9 +192,9 @@ void edit_status (WEdit * edit)
     CPopFont ();
 }
 
-#endif
+#endif	/* GTK */
 
-#endif
+#endif	/* MIDNIGHT */
 
 
 /* boolean */
@@ -339,10 +326,7 @@ void edit_set_cursor_color (unsigned long c)
 
 #else
 
-static void set_color (int font)
-{
-    attrset (font);
-}
+#define set_color(font)    attrset (font)
 
 #define edit_move(x,y) widget_move(edit, y, x);
 
@@ -489,10 +473,10 @@ int option_smooth_scrolling = 0;
 
 static int key_pending (WEdit * edit)
 {
-    static int flush = 0, line = 0;
 #ifdef GTK
     /* ******* */
 #else
+    static int flush = 0, line = 0;
     if (!edit) {
 	flush = line = 0;
     } else if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw && !option_smooth_scrolling) {
