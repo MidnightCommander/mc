@@ -168,7 +168,7 @@ void init_menu (void);
 #endif /* !NATIVE_WIN32 */
 
 struct WPanel;
-void directory_history_add   (struct WPanel *panel, char *s);
+void directory_history_add   (struct WPanel *panel, const char *dir);
 int  do_panel_cd             (struct WPanel *panel, char *new_dir, enum cd_enum cd_type);
 
 #endif /* !__MAIN_H */

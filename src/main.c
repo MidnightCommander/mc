@@ -687,14 +687,14 @@ subshell_chdir (char *directory)
 }
 
 void
-directory_history_add (struct WPanel *panel, char *s)
+directory_history_add (struct WPanel *panel, const char *dir)
 {
-    char *text;
+    char *tmp;
 
-    text = g_strdup (s);
-    strip_password (s, 1);
+    tmp = g_strdup (dir);
+    strip_password (tmp, 1);
 
-    panel->dir_history = list_append_unique (panel->dir_history, text);
+    panel->dir_history = list_append_unique (panel->dir_history, tmp);
 }
 
 /*
