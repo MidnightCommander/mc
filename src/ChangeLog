@@ -1,3 +1,7 @@
+2003-07-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* main.c: Make more variables static.
+
 2003-07-23  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (xterm_key_defines): Add more sequences for xterm-179 by

@@ -224,11 +224,6 @@ Dlg_head *midnight_dlg;
 /* We need to paint it after CONSOLE_RESTORE, see: load_prompt */
 int update_prompt = 0;
 
-#if 0
-/* The name which was used to invoke mc */
-char *program_name;
-#endif
-
 /* The home directory */
 char *home_dir;
 
@@ -238,7 +233,7 @@ char *other_dir = 0;
 /* Only used at program boot */
 int boot_current_is_left = 1;
 
-char *this_dir = 0;
+static char *this_dir = 0;
 
 /* If this is true, then when browsing the tree the other window will
  * automatically reload it's directory with the contents of the currently
@@ -259,10 +254,10 @@ int force_colors = 0;
 char *command_line_colors;
 
 /* File name to view if argument was supplied */
-char *view_one_file = 0;
+static char *view_one_file = 0;
 
 /* File name to edit if argument was supplied */
-char *edit_one_file = 0;
+static char *edit_one_file = 0;
 
 /* Line to start the editor on */
 static int edit_one_file_start_line = 0;

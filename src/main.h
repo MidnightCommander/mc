@@ -32,8 +32,6 @@ extern int pause_after_run;
 extern int auto_save_setup;
 extern int use_internal_view;
 extern int use_internal_edit;
-extern char *view_one_file;
-extern char *edit_one_file;
 extern int fast_reload_w;
 extern int clear_before_exec;
 extern int mou_auto_repeat;
