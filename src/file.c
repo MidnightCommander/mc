@@ -2259,19 +2259,19 @@ query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 
 #else
 static int
-do_file_error (char *str)
+do_file_error (const char *str)
 {
     return real_do_file_error (Foreground, str);
 }
 
 static int
-query_recursive (FileOpContext *ctx, char *s)
+query_recursive (FileOpContext *ctx, const char *s)
 {
     return real_query_recursive (ctx, Foreground, s);
 }
 
 static int
-query_replace (FileOpContext *ctx, char *destname, struct stat *_s_stat,
+query_replace (FileOpContext *ctx, const char *destname, struct stat *_s_stat,
 	       struct stat *_d_stat)
 {
     return file_progress_real_query_replace (ctx, Foreground, destname,
