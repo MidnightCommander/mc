@@ -484,39 +484,33 @@ file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 
     print_vfs_message(_("fish: store %s: sending command..."), name );
     quoted_name = name_quote (name, 0);
-    /*
-     * FIXME: Limit size to unsigned long for now.
-     * Files longer than 256 * ULONG_MAX are not supported.
-     */
+
+    /* FIXME: File size is limited to ULONG_MAX */
     if (!fh->u.fish.append)
 	n = command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "> /%s\n"
 		 "echo '### 001'\n"
 		 "(\n"
-		   "dd ibs=256 obs=4096 count=%lu\n"
-		   "dd bs=%lu count=1\n"
+		   "dd bs=1 count=%lu\n"
 		 ") 2>/dev/null | (\n"
 		   "cat > /%s\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
 		 (unsigned long) s.st_size, name, quoted_name,
-		 (unsigned long) (s.st_size >> 8),
-		 ((unsigned long) s.st_size) & (256 - 1), quoted_name);
+		 (unsigned long) s.st_size, quoted_name);
     else
 	n = command (me, super, WAIT_REPLY,
 		 "#STOR %lu /%s\n"
 		 "echo '### 001'\n"
 		 "(\n"
-		   "dd ibs=256 obs=4096 count=%lu\n"
-		   "dd bs=%lu count=1\n"
+		   "dd bs=1 count=%lu\n"
 		 ") 2>/dev/null | (\n"
 		   "cat >> /%s\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
 		 (unsigned long) s.st_size, name,
-		 (unsigned long) (s.st_size >> 8),
-		 ((unsigned long) s.st_size) & (256 - 1), quoted_name);
+		 (unsigned long) s.st_size, quoted_name);
 
     g_free (quoted_name);
     if (n != PRELIM) {

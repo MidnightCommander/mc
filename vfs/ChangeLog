@@ -1,5 +1,8 @@
 2003-05-08  Pavel Roskin  <proski@gnu.org>
 
+	* fish.c (file_store): Use block size 1.  It's slower, but much
+	safer.  GNU dd is not persistent enough when reading data.
+
 	* extfs/rpm: If rpm doesn't support --info as in Red Hat 9,
 	ignore it and don't show HEADER in the listing.
 
