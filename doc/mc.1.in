@@ -639,11 +639,11 @@ options dialog).
 .SH "    Listing Mode..."
 The listing mode view is used to display a listing of files, there are
 four different listing modes available:
-.B Full,
-.B Brief,
+.BR Full ,
+.BR Brief ,
 .B Long
 and
-.B User.
+.BR User .
 The full directory view shows the file name, the size of the file and
 the modification time.
 .PP
@@ -666,20 +666,20 @@ string.
 .PP
 After this you add the name of the fields with an optional size
 specifier.  This are the available fields you may display:
-.PP
-.B name,
+.TP
+.B name
 displays the file name.
-.PP
-.B size,
+.TP
+.B size
 displays the file size.
-.PP
-.B bsize,
+.TP
+.B bsize
 is an alternative form of the
 .B size
 format. It displays the size of the files and for directories it just
 shows SUB-DIR or UP--DIR.
-.PP
-.B type,
+.TP
+.B type
 displays a one character field type.  This character is similar to
 what is displayed by ls with the -F flag -
 .B *
@@ -700,73 +700,76 @@ for pipes,
 for symbolic links to directories and
 .B !
 for stale symlinks (links that point nowhere).
-.PP
-.B mtime,
+.TP
+.B mark
+an asterisk if the file is tagged, a space if it's not.
+.TP
+.B mtime
 file's last modification time.
-.PP
-.B atime,
+.TP
+.B atime
 file's last access time.
-.PP
-.B ctime,
+.TP
+.B ctime
 file's creation time.
-.PP
-.B perm,
+.TP
+.B perm
 a string representing the current permission bits of the file.
-.PP
-.B mode,
+.TP
+.B mode
 an octal value with the current permission bits of the file.
-.PP
-.B nlink,
+.TP
+.B nlink
 the number of links to the file.
-.PP
-.B ngid,
+.TP
+.B ngid
 the GID (numeric).
-.PP
-.B nuid,
+.TP
+.B nuid
 the UID (numeric).
-.PP
-.B owner,
+.TP
+.B owner
 the owner of the file.
-.PP
-.B group,
+.TP
+.B group
 the group of the file.
-.PP
-.B inode,
+.TP
+.B inode
 the inode of the file.
 .PP
-Also you may use these field names for arranging the display:
-.PP
-.B space,
+Also you can use following keywords to define the panel layout:
+.TP
+.B space
 a space in the display format.
-.PP
-.B mark,
-An asterisk if the file is tagged, a space if it's not.
-.PP
-.B |,
-This character is used to add a vertical line to the display format.
+.TP
+.B |
+add a vertical line to the display format.
 .PP
 To force one field to a fixed size (a size specifier), you just add
-a ':' and then the number of characters you want the field to have, if
-the number is followed by the symbol '+', then the size specifies the
-minimum field size, if the program finds out that there is more space
-on the screen, it will then expand this field.
+.B :
+followed by the number of characters you want the field to have.  If the
+number is followed by the symbol
+.BR + ,
+then the size specifies the minimal field size - if the program finds
+out that there is more space on the screen, it will then expand that
+field.
 .PP
 For example, the
 .B Full
 display corresponds to this format:
 .PP
-half type,name,|,size,|,mtime
+half type name | size | mtime
 .PP
 And the
 .B Long
 display corresponds to this format:
 .PP
-full perm,space,nlink,space,owner,space,group,space,size,space,
-mtime,space,name
+full perm space nlink space owner space group space size space mtime
+space name
 .PP
 This is a nice user display format:
 .PP
-half name,|,size:7,|,type,mode:3
+half name | size:7 | type mode:3
 .PP
 Panels may also be set to the following modes:
 .TP
