@@ -121,7 +121,7 @@ struct color_table_s {
 
 
 #ifndef HAVE_X
-static struct color_table_s color_table [] = {
+static struct color_table_s const color_table [] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },
     { "red",           COLOR_RED     },
