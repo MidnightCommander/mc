@@ -886,6 +886,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
     lp->next = parent_dirs;
     parent_dirs = lp;
 
+ retry_dst_stat:
     /* Now, check if the dest dir exists, if not, create it. */
     if (mc_stat (d, &buf)){
     	/* Here the dir doesn't exist : make it !*/
@@ -906,6 +907,13 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
          * so, say /bla exists, if we copy /tmp/\* to /bla, we get /bla/tmp/\*
          * or ( /bla doesn't exist )       /tmp/\* to /bla     ->  /bla/\*
          */
+	if (!S_ISDIR (buf.st_mode)){
+	    return_status = file_error (_(" Destination \"%s\" must be a directory \n %s "), d);
+	    if (return_status == FILE_RETRY)
+		goto retry_dst_stat;
+	    g_free (parent_dirs);
+	    return return_status;
+	}
 #if 1
 /* Again, I'm getting curious. Is not d already what we wanted, incl.
  *  masked source basename? Is not this just a relict of the past versions? 

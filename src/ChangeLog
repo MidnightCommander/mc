@@ -1,7 +1,12 @@
+2002-01-15  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* file.c (copy_dir_dir): Check the destination is a directory
+	if it exists. Reported by Thomas <metaf4@pseudonym.org>.
+
 2002-01-09  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* util.c (string_perm) [S_IFDOOR]: Support Solaris doors.
-	screen.c (string_file_type) [S_IFDOOR]: Likewise.
+	* screen.c (string_file_type) [S_IFDOOR]: Likewise.
 
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
@@ -126,7 +131,7 @@
 2001-10-26  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* key.c (push_char): Fix buffer length calculation.
-	By drk@sgi.com.
+	By David Kaelbling <drk@sgi.com>.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60932
 
 	(define_sequence): Likewise.
