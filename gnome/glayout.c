@@ -314,7 +314,7 @@ GnomeUIInfo gnome_panel_view_menu [] = {
 
 GnomeUIInfo gnome_panel_layout_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_Sort By..."),     N_("Confirmation settings"), gnome_sort_cmd },
-	{ GNOME_APP_UI_ITEM, N_("_Filter View..."),    N_("Global option settings"), NULL },
+	{ GNOME_APP_UI_ITEM, N_("_Filter View..."),    N_("Global option settings"), filter_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_RADIOITEMS, NULL , NULL, gnome_panel_view_menu},
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }

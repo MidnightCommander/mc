@@ -183,6 +183,7 @@ gnome_custom_view_cmd (GtkWidget *widget, WPanel *panel)
 static void
 option_menu_sort_callback(GtkWidget *widget, gpointer data)
 {
+	g_print ("FIXME: implement this function;option_menu_sort_callback\n");
 	switch ((gint) data) {
 	case SORT_NAME:
 

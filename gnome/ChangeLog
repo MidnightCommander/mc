@@ -1,3 +1,12 @@
+1998-12-30  Jonathan Blandford  <jrb@redhat.com>
+
+	* gaction.c (gmc_execute): now takes an filename instead of a file
+	entry for an argument
+	(gmc_open_filename): handles the new gmc_execute code.
+
+	* gdesktop.c (desktop_icon_drop_uri_list): commented out
+	action_drop.  Needs defining.
+
 1998-12-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_delete): New function, used for

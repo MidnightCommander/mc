@@ -20,9 +20,9 @@
 #include "../vfs/vfs.h"
 
 static void
-gmc_execute (file_entry *fe, char *buf)
+gmc_execute (char *fname, char *buf)
 {
-	exec_extension (fe->fname, buf, NULL, NULL, 0);
+	exec_extension (fname, buf, NULL, NULL, 0);
 }
 
 int
@@ -33,13 +33,13 @@ gmc_open_filename (char *fname, GList *args)
 	int size;
 
 	if (gnome_metadata_get (fname, "fm-open", &size, &buf) == 0){
-		gmc_execute (fe, buf);
+		gmc_execute (fname, buf);
 		free (buf);
 		return 1;
 	}
 
 	if (gnome_metadata_get (fname, "open", &size, &buf) == 0){
-		gmc_execute (fe, buf);
+		gmc_execute (fname, buf);
 		free (buf);
 		return 1;
 	}
@@ -52,13 +52,13 @@ gmc_open_filename (char *fname, GList *args)
 	cmd = gnome_mime_get_value (mime_type, "fm-open");
 	
 	if (cmd){
-		gmc_execute (fe, cmd);
+		gmc_execute (fname, cmd);
 		return 1;
 	}
 	
 	cmd = gnome_mime_get_value (mime_type, "open");
 	if (cmd){
-		gmc_execute (fe, cmd);
+		gmc_execute (fname, cmd);
 		return 1;
 	}
 	return 0;

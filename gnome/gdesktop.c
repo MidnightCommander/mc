@@ -1099,7 +1099,7 @@ setup_icon_dnd_source (struct desktop_icon_info *dii)
 static void
 desktop_icon_drop_uri_list (struct desktop_icon_info *dii,
 			    GdkDragContext           *context,
-			    GtkSelectionData         *data);
+			    GtkSelectionData         *data)
 {
 	char *filename;
 	file_entry *fe;
@@ -1124,7 +1124,7 @@ desktop_icon_drop_uri_list (struct desktop_icon_info *dii,
 	 * 2. Try to use a metadata-based drop action 
 	 */
 	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0){
-		action_drop (filename, buf, context, data);
+		/*action_drop (filename, buf, context, data);*/ /* Fixme: i'm undefined */
 		free (buf);
 		goto out;
 	}
@@ -1139,7 +1139,7 @@ desktop_icon_drop_uri_list (struct desktop_icon_info *dii,
 		action = gnome_mime_get_value (mime_type, "drop-action");
 		
 		if (action){
-			action_drop (filename, action, context, data);
+			/*action_drop (filename, action, context, data);*/ /* Fixme: i'm undefined */
 			goto out;
 		}
 	}
