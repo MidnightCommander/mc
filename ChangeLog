@@ -1,3 +1,7 @@
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add definition for "bs" for xterm and xterm-color.
+
 2001-08-17  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/po.syntax: New file - PO file highlighting.
