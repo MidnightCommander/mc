@@ -1,3 +1,9 @@
+Mon May 25 23:32:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* editdraw.c (print_to_widget): Ifdef'd SLang specific code in order 
+	to make it compile with ncurses. Syntax highlighting in the
+	internal editor is already disabled when SLang isn't used.
+
 1998-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* widget.c (port_region_marked_for_delete): New per-port

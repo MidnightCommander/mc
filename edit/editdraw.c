@@ -282,8 +282,10 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
 	while (*p) {
 	    style = *p >> 8;
 	    textchar = *p & 0xFF;
+#ifdef HAVE_SYNTAXH
 	    if (!(style & (0xFF - MOD_ABNORMAL - MOD_CURSOR)))
 		SLsmg_set_color ((*p & 0x007F0000) >> 16);
+#endif
 	    if (style & MOD_ABNORMAL)
 		textchar = '.';
 	    if (style & MOD_HIGHLIGHTED) {
