@@ -205,32 +205,6 @@ set_list_type (GtkWidget *widget, WPanel *panel, enum list_types type)
 	g_assert_not_reached ();
 }
 
-/* Sets the listing view for a panel */
-void
-gnome_set_panel_list_type (WPanel *panel, int list_type)
-{
-	g_return_if_fail (panel != NULL);
-	g_return_if_fail (list_type >= list_full && list_type <= list_icons);
-
-	/* Set the list type by poking a toolbar item.  Yes, this is hackish.
-	 * We fall back to icon view if a certain listing type is not supported.
-	 * Be sure to keep this in sync with the uiinfo arrays in glayout.c.
-	 */
-
-	if (list_type == list_brief)
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[1].widget), TRUE);
-	else if (list_type == list_full)
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[2].widget), TRUE);
-	else if (list_type == list_user)
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[3].widget), TRUE);
-	else
-		gtk_toggle_button_set_active (
-			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[0].widget), TRUE);
-}
-
 void
 gnome_icon_view_cmd (GtkWidget *widget, WPanel *panel)
 {

@@ -127,7 +127,7 @@ create_panel_from_info (PanelInfo *pi)
 	g_free (panel->user_format);
 	panel->user_format = g_strdup (pi->user_format);
 	memcpy (panel->column_width, pi->column_width, sizeof (pi->column_width));
-	gnome_set_panel_list_type (panel, pi->list_type);
+	panel->list_type = pi->list_type;
 }
 
 static void
@@ -151,67 +151,6 @@ load_session_info (char *filename)
 		}
 }
 
-#if 0
-
-/* Idle handler to create the list of panels loaded from the session info file */
-static gint
-idle_create_panels (gpointer data)
-{
-	GSList *panels, *p;
-	PanelInfo *pi;
-	WPanel *panel;
-
-	panels = data;
-
-	for (p = panels; p; p = p->next) {
-		pi = p->data;
-		panel = new_panel_at (pi->cwd);
-
-		g_free (panel->user_format);
-		panel->user_format = g_strdup (pi->user_format);
-		memcpy (panel->column_width, pi->column_width, sizeof (pi->column_width));
-		gnome_set_panel_list_type (panel, pi->list_type);
-
-		free_panel_info (pi);
-	}
-
-	g_slist_free (panels);
-	return FALSE;
-}
-
-/* Loads session information from the specified gnome-config file */
-static void
-load_session_info (char *filename)
-{
-	void *iterator;
-	char *key, *value;
-	GSList *panels;
-	PanelInfo *pi;
-
-	/* Slurp the list of panels to create */
-
-	iterator = gnome_config_init_iterator_sections (filename);
-	panels = NULL;
-
-	while ((iterator = gnome_config_iterator_next (iterator, &key, &value)) != NULL)
-		if (key && strncmp (key, "panel ", 6) == 0) {
-			pi = load_panel_info (filename, key);
-			if (!pi)
-				continue;
-
-			panels = g_slist_prepend (panels, pi);
-			g_free (key);
-		}
-
-	/* Create the panels in the idle loop to keep run_dlg() happy.  See the
-	 * comment in gmain.c:non_corba_create_panels().
-	 */
-
-	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_panels, panels);
-}
-
-#endif
-
 static void
 create_default_panel (const char *startup_dir)
 {
@@ -225,37 +164,6 @@ create_default_panel (const char *startup_dir)
 
 	new_panel_with_geometry_at (dir, cmdline_geometry);
 }
-
-#if 0
-/* Idle handler to create the default panel */
-static gint
-idle_create_default_panel (gpointer data)
-{
-	char *cwd;
-
-	cwd = data;
-	new_panel_with_geometry_at (cwd, cmdline_geometry);
-	g_free (cwd);
-
-	return FALSE;
-}
-
-/* Queues the creation of the default panel */
-static void
-create_default_panel (const char *startup_dir)
-{
-	char buf[MC_MAXPATHLEN];
-	char *dir = buf;
-
-	if (startup_dir == NULL)
-		mc_get_current_wd (buf, MC_MAXPATHLEN);
-	else
-		dir = startup_dir;
-
-	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT + 1, idle_create_default_panel, g_strdup (dir));
-}
-
-#endif
 
 /* Callback from the master client to save the session */
 static gint

@@ -44,6 +44,4 @@ void set_cursor_normal		  (WPanel *panel);
 void set_cursor_busy		  (WPanel *panel);
 void gnome_new_link               (GtkWidget *widget, WPanel *panel);
 
-void gnome_set_panel_list_type (WPanel *panel, int list_type);
-
 #endif /* __GCMD_H */

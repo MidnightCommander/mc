@@ -1,5 +1,8 @@
 1999-09-21  Federico Mena Quintero  <federico@redhat.com>
 
+	* gsession.c (create_panel_from_info): The widgets are not created
+	yet, so just set the panel->list_type field.
+
 	* gscreen.c (x_create_panel): Do not change the dialog head's
 	current pointer.
 
