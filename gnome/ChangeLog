@@ -1,5 +1,18 @@
 1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gmain.h: Removed set_current_panel() since it was never used.
+
+	* glayout.c (set_current_panel): Made static and renamed from
+	set_new_current_panel().
+	Removed old toolbar cruft.
+
+	* gmount.c (get_mountable_devices): Made static.
+
+	* Makefile.in (ICONS): Added i-floppy.png, i-cdrom.png,
+	i-printer.png.  Thanks, Tigert!
+
+1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gmount.c (gmount_setup_devices): New function to set up the
 	mountable devices on the desktop directory.  Moved over from
 	gdesktop.c.  Added an argument that specifies whether it should

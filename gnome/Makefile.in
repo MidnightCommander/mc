@@ -88,17 +88,20 @@ GNOMEHDRS = 		\
 
 ICONS = 			\
 	directory.xpm		\
+	i-blockdev.png		\
+	i-cdrom.png		\
+	i-chardev.png		\
+	i-core.png		\
 	i-dirclosed.png		\
 	i-directory.png		\
 	i-executable.png	\
-	i-symlink.png		\
-	i-regular.png		\
-	i-core.png		\
-	i-sock.png		\
 	i-fifo.png		\
-	i-chardev.png		\
-	i-blockdev.png		\
-	i-stalled.png
+	i-floppy.png		\
+	i-printer.png		\
+	i-regular.png		\
+	i-sock.png		\
+	i-stalled.png		\
+	i-symlink.png
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??

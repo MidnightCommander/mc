@@ -139,8 +139,8 @@ is_block_device_mounted (char *filename)
 	return retval;
 }
 
-GList *
-get_list_of_mountable_devices (void)
+static GList *
+get_mountable_devices (void)
 {
 	FILE *f;
 	struct mntent *mnt;
@@ -168,8 +168,8 @@ is_block_device_mountable (char *devname)
 	return FALSE;
 }
 
-GList *
-get_list_of_mountable_devices ()
+static GList *
+get_mountable_devices (void)
 {
 	return NULL;
 }
@@ -245,7 +245,7 @@ setup_devices (void)
 	int hd_count;
 	int generic_count;
 
-	list = get_list_of_mountable_devices ();
+	list = get_mountable_devices ();
 
 	floppy_count = hd_count = generic_count = 0;
 

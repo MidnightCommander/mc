@@ -88,18 +88,8 @@ get_other_index (void)
 	return UNDEFINED_INDEX;
 }
 
-void
-set_current_panel (int index)
-{
-	GList *p;
-	
-	for (p = containers; index; p = p->next)
-		index--;
-	current_panel_ptr = p->data; 
-}
-
-void
-set_new_current_panel (WPanel *panel)
+static void
+set_current_panel (WPanel *panel)
 {
 	GList *p;
 
@@ -406,53 +396,9 @@ panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 	if (get_current_panel () == panel)
 		return;
 	
-	set_new_current_panel (panel);
+	set_current_panel (panel);
 	dlg_select_widget (panel->widget.parent, panel);
 	send_message (panel->widget.parent, (Widget *) panel, WIDGET_FOCUS, 0);
-}
-
-struct _TbItems {
-	char *key, *text, *tooltip, *icon;
-	void (*cb) (GtkWidget *, void *);
-	GtkWidget *widget; /* will be filled in */
-};
-typedef struct _TbItems TbItems;
-
-void user_menu_cmd (void);
-
-static TbItems tb_items[] =
-{
-/* 1Help   2Menu   3View   4Edit   5Copy   6RenMov 7Mkdir  8Delete 9PullDn 10Quit */
-    {"F1", "Help", "Interactive help browser", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) help_cmd, 0},
-    {"F2", "Menu", "User actions", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) user_menu_cmd, 0},
-    {"F3", "View", "View file", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) view_panel_cmd, 0},
-    {"F4", "Edit", "Edit file", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) edit_panel_cmd, 0},
-    {"F5", "Copy", "Copy file or directory", GNOME_STOCK_MENU_COPY, (void (*) (GtkWidget *, void *)) copy_cmd, 0},
-    {"F6", "Move", "Rename or move a file or directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) ren_cmd, 0},
-    {"F7", "Mkdir", "Create directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) mkdir_panel_cmd, 0},
-    {"F8", "Dlete", "Delete file or directory", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) delete_cmd, 0},
-    {"F9", "Menu", "Pull down menu", GNOME_STOCK_MENU_BLANK, (void (*) (GtkWidget *, void *)) 0, 0},
-    {"F10", "Quit", "Close and exit", GNOME_STOCK_MENU_QUIT, (void (*) (GtkWidget *, void *)) 0, 0},
-    {0, 0, 0, 0, 0, 0}
-};
-
-static GtkWidget *create_toolbar (GtkWidget * window, GtkWidget *widget)
-{
-	GtkWidget *toolbar;
-	TbItems *t;
-	
-	toolbar = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-	
-	for (t = &tb_items[0]; t->text; t++){
-		t->widget = gtk_toolbar_append_item (GTK_TOOLBAR (toolbar),
-						     t->text,
-					     t->tooltip,
-						     0,
-						     gnome_stock_pixmap_widget (window, t->icon),
-						     t->cb,
-						     t->cb ? widget : 0);
-	}
-	return toolbar;
 }
 
 static void
@@ -577,10 +523,6 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	gnome_app_set_statusbar(GNOME_APP (app), GTK_WIDGET(panel->ministatus));
 
 	gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu);
-	/*
-	 * I am trying to unclutter the screen, so this toolbar is gone now
-	 */
-/*	gnome_app_set_toolbar(GNOME_APP (app), GTK_TOOLBAR(create_toolbar(app, 0))); */
 
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
@@ -618,7 +560,7 @@ new_panel_with_geometry_at (char *dir, char *geometry)
 	mc_chdir (dir);
 	panel = create_container (desktop_dlg, dir, geometry);
 	add_widget (desktop_dlg, panel);
-	set_new_current_panel (panel);
+	set_current_panel (panel);
 	x_flush_events ();
 
 	return panel;
