@@ -1,3 +1,7 @@
+1999-06-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (x_select_item): Removed icon list hacks.
+
 1999-06-24  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gmc-chargrid.c (update_strip): Paint every character with the 

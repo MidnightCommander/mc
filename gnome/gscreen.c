@@ -243,7 +243,7 @@ panel_fill_panel_icons (WPanel *panel)
 
 	gnome_icon_list_freeze (icons);
 	gnome_icon_list_clear (icons);
-
+#if 0
 	/*
 	 * HACK_BEGIN:
 	 *    Temporary hack for pre-gnome-libs-1.0.10
@@ -255,8 +255,8 @@ panel_fill_panel_icons (WPanel *panel)
 	/*
 	 * HACK_END:
 	 */
-	 
-	for (i = 0; i < top; i++){
+#endif
+	for (i = 0; i < top; i++) {
 		file_entry *fe = &panel->dir.list [i];
 		int p;
 		
@@ -342,16 +342,13 @@ x_select_item (WPanel *panel)
 	do_file_mark (panel, panel->selected, 1);
 	display_mini_info (panel);
 
-	if (panel->list_type == list_icons){
+	if (panel->list_type == list_icons) {
 		GnomeIconList *list = ILIST_FROM_SW (panel->icons);
 
 		gnome_icon_list_select_icon (list, panel->selected);
-
-		if (list->icon_list){
-			if (GTK_WIDGET (list)->allocation.x != -1)
-				if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
-					gnome_icon_list_moveto (list, panel->selected, 0.5);
-		}
+		if (GTK_WIDGET (list)->allocation.x != -1)
+			if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
+				gnome_icon_list_moveto (list, panel->selected, 0.5);
 	} else {
 		GtkCList *clist = CLIST_FROM_SW (panel->list);
 
