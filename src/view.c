@@ -281,7 +281,7 @@ get_byte (WView *view, unsigned int byte_index)
 	    view->block_ptr = g_realloc (view->block_ptr,
 					 page * sizeof (char *));
 	    for (i = view->blocks; i < page; i++) {
-		char *p = g_malloc (VIEW_PAGE_SIZE);
+		char *p = g_try_malloc (VIEW_PAGE_SIZE);
 		view->block_ptr[i] = p;
 		if (!p)
 		    return '\n';
@@ -545,9 +545,11 @@ load_view_file (WView *view, int fd)
 	return init_growing_view (view, 0, view->filename);
     }
 #ifdef HAVE_MMAP
-    view->data =
-	mc_mmap (0, view->s.st_size, PROT_READ, MAP_FILE | MAP_SHARED,
-		 view->file, 0);
+    if ((size_t) view->s.st_size == view->s.st_size)
+	view->data = mc_mmap (0, view->s.st_size, PROT_READ,
+			      MAP_FILE | MAP_SHARED, view->file, 0);
+    else
+	view->data = (caddr_t) -1;
     if ((caddr_t) view->data != (caddr_t) - 1) {
 	/* mmap worked */
 	view->first = 0;

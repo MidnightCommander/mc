@@ -1,3 +1,10 @@
+2004-09-10  Jakub Jelinek  <jakub@redhat.com>
+
+	* view.c (get_byte): Fix avoid dying if file is too large 
+	to fit into memory.
+	(load_view_file): Fix avoid mmaping just part of a >=4GB file 
+	on 32-bit arches.
+
 2004-09-04  Jakub Jelinek  <jakub@redhat.com>
 
 	* info.c (info_show_info): don't truncate block counts to 32 bits
