@@ -543,12 +543,7 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
-		if ((event->button.button == 1) && !dii->selected) {
-			/* If the icon was not selected, we select it.  Otherwise, we delay
-			 * selection until button_release.  This is needed so that we can drag a
-			 * multiple selection without having the click that starts the drag unselect
-			 * all the icons first.
-			 */
+		if ((event->button.button == 1) && (!dii->selected || (event->button.state & GDK_CONTROL_MASK))) {
 			select_icon (dii, (GdkEventButton *) event);
 			retval = TRUE;
 		} else if (event->button.button == 3) {
@@ -582,7 +577,7 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		select_icon (dii, (GdkEventButton *) event);
+/* 		select_icon (dii, (GdkEventButton *) event); */
 		retval = TRUE;
 		break;
 
