@@ -42,8 +42,8 @@
 #include "../src/wtools.h"	/* message() */
 #include "../src/charsets.h"
 
-#define edit_get_load_file(f,h) input_dialog (h, _(" Enter file name: "), f)
-#define edit_get_save_file(f,h) input_dialog (h, _(" Enter file name: "), f)
+#define edit_get_load_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
+#define edit_get_save_file(f,h) input_expand_dialog (h, _(" Enter file name: "), f)
 
 struct selection {
    unsigned char * text;
