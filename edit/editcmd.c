@@ -1182,20 +1182,16 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	 0, 0, 0, 0, 0},
 	 NULL_QuickWidget};
 
-#ifdef HAVE_CHARSET
-    char *msg = _(" Replace with: ");
-
+    GString *label_text = g_string_new (_(" Replace with: "));
     if (*replace_text) {
-	int msg_len = strlen (msg);
-	msg = catstrs (msg, replace_text, 0);
-	convert_to_display (msg + msg_len);
+        size_t label_text_len = label_text->len;
+        g_string_append (label_text, replace_text);
+        convert_to_display (label_text->str + label_text_len);
     }
-    quick_widgets[5].text = msg;
-#else
-    quick_widgets[5].text = catstrs (_ (" Replace with: "), replace_text, 0);
-#endif /* !HAVE_CHARSET */
+    quick_widgets[5].text = label_text->str;
 
     {
+    	int retval;
 	QuickDialog Quick_input =
 	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
 	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
@@ -1210,7 +1206,9 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	    ypos -= CONFIRM_DLG_HEIGTH;
 
 	Quick_input.ypos = ypos;
-	return quick_dialog (&Quick_input);
+	retval = quick_dialog (&Quick_input);
+	g_string_free (label_text, TRUE);
+	return retval;
     }
 }
 
