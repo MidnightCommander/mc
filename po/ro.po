@@ -1,0 +1,2635 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: mc VERSION\n"
+"POT-Creation-Date: 1999-03-02 12:00+0200\n"
+"PO-Revision-Date: 1999-03-02 12:00+0200\n"
+"Last-Translator: Iustin Pop <iusty@geocities.com>\n"
+"Language-Team: Iustin Pop <iusty@geocitiesc.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid ""
+"[Contents]\n"
+" Topics:\n"
+"\n"
+msgstr ""
+"[Conşinut]\n"
+" Index:\n"
+"\n"
+
+msgid ""
+"\n"
+"\n"
+"\n"
+"refresh stack underflow!\n"
+"\n"
+"\n"
+msgstr ""
+"\n"	
+"\n"
+"\n"
+"stiva de împrospãtare goalã!\n"
+"\n"
+"\n"
+
+msgid ""
+"\n"
+" Group not empty.\n"
+" Remove it?"
+msgstr ""
+"\n"
+" Grupul nu este gol.\n"
+" Îl ºterg totuºi?"
+
+msgid ""
+" \n"
+" Increase edit.h:MAXBUF and recompile the editor. "
+msgstr ""
+" \n"
+" Mãrişi edit.h:MAXBUF ºi recompilaşi editorul. "
+
+msgid "  %s bytes in %d file%s"
+msgstr "  %s octeşi în %d fiºier(e)"
+
+msgid "  Delete %s?  "
+msgstr "  ªterg %s?  "
+
+msgid "  Malformed regular expression  "
+msgstr " Expresie reguliatã malformatã "
+
+msgid " %ld replacements made. "
+msgstr " %ld înlocuiri efectuate. "
+
+msgid " %s bytes in %d file%s"
+msgstr " %s octeşi în %d fiºier(e)"
+
+msgid " &Cancel quit "
+msgstr " &Anulez ieºirea "
+
+msgid " &No "
+msgstr " &Nu "
+
+msgid " &Yes "
+msgstr " &Da "
+
+msgid " (%d blocks)"
+msgstr " (%d blocuri)"
+
+msgid " A file already exists with this name. "
+msgstr " Un fiºier cu acest nume existã deja. "
+
+msgid " Above "
+msgstr " Deasupra "
+
+msgid " Add to hotlist "
+msgstr " Adaug la lista rapidã "
+
+msgid " Background process error "
+msgstr " Eroare în procesul de fond "
+
+msgid ""
+" Background process sent us a request for more arguments \n"
+" than we can handle. \n"
+msgstr " Un proces de font a trimis o cerere pentru mai multe argumente. \n"
+" decât îi pot da. \n"
+
+msgid " Background process: Recursive Delete "
+msgstr " Sarcinã de font: ªtergere recursivã "
+
+msgid " Backwards "
+msgstr " Încapoi "
+
+msgid " Below "
+msgstr " Dedesupt "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr ""
+" Blocul este mare, s-ar putea sã nu poşi anula aceastã acşiune. "
+
+msgid " CD "
+msgstr " CD "
+
+msgid " Can not fetch a local copy of %s "
+msgstr " Nu pot aduce o copie localã a %s"
+
+msgid ""
+" Can't chdir to '%s' \n"
+" %s "
+msgstr ""
+" Nu pot deschide '%s' \n"
+" %s "
+
+msgid ""
+" Can't create temporary command file \n"
+" %s "
+msgstr ""
+" Nu pot creea un fiºier temporar de comenzi \n"
+" %s "
+
+msgid " Can't execute commands on a Virtual File System directory "
+msgstr " Nu pot executa comenzi pe un director dintr-un Sistem de Fiºiere Virtual "
+
+msgid " Can't find node %s in help file "
+msgstr " Nu gãsesc nodul %s în fiºierul de ajutor "
+
+msgid " Can't find node [Contents] in help file "
+msgstr " Nu gãsesc nodul [Conşinut] în fiºierul de ajutor "
+
+msgid " Can't open file \""
+msgstr " Nu pot deschide fiºierul \""
+
+msgid ""
+" Can't open file %s \n"
+" %s "
+msgstr ""
+" Nu pot deschide fiºierul %s \n"
+" %s "
+
+msgid " Can't open target file "
+msgstr " Nu pot deschide fiºierul destinaşie"
+
+msgid " Can't operate on \"..\"! "
+msgstr " Nu pot opera pe  \"..\"! "
+
+msgid ""
+" Can't stat file \n"
+" "
+msgstr ""
+" Nu pot analiza %s \n"
+" %s "
+
+msgid " Can't write to local target file "
+msgstr " Nu pot scrie în fiºierul destinaşie local "
+
+msgid " Cancel "
+msgstr " Anulez "
+
+msgid ""
+" Cannnot chmod target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa chmod pe fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot chmod target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa chmod pe fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot chown target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa chown pe directorul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot chown target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa chown pe fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot close source file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot închide fiºierul sursã \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot close target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot închide fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot copy cyclic symbolic link \n"
+" `%s' "
+msgstr ""
+" Nu pot copia o legãturã simbolicã ciclicã \n"
+" `%s' "
+
+msgid ""
+" Cannot create special file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot crea fiºierul special \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot create target directory \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot crea directorul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot create target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot crea fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot create target symlink \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot crea legãtura simbolicã destinaşie \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot delete file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot ºterge fiºierul \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot fstat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa fstat pe fiºierul sursã \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot fstat target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot executa fstat pe fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid " Cannot get size/permissions info on file: "
+msgstr " Nu pot obşine mãrimea/drepturile fiºierului: "
+
+msgid ""
+" Cannot make stable symlinks across non-local filesystems: \n"
+"\n"
+" Option Stable Symlinks will be disabled "
+msgstr ""
+" Nu pot crea legãturi simbolice stabile pe sisteme de fiºiere non-locale: \n"
+"\n"
+" Opşiunea Legaturi Simbolice Stabile va fi dezactivatã "
+
+msgid ""
+" Cannot move directory \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot muta directorul \"%s\" în \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot move file \"%s\" to \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot muta fiºierul \"%s\" în \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot open source file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot deschide fiºierul sursã \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot overwrite directory \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot suprascrie directorul \"%s\" \n"
+" %s "
+
+msgid " Cannot overwrite directory \"%s\" %s "
+msgstr " Nu pot suprascrie directorul \"%s\" %s "
+
+msgid " Cannot overwrite directory `%s' "
+msgstr " Nu pot suprascrie directorul `%s' "
+
+msgid " Cannot overwrite file \"%s\" %s "
+msgstr " Nu pot suprascrie fiºierul \"%s\" %s "
+
+msgid ""
+" Cannot read source file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot citi fiºierul sursã \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot read source link \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot citi legãtura sursã \"%s\n"
+" \n"
+" %s "
+
+msgid ""
+" Cannot remove directory \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot ºterge directorul \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot remove file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot ºterge fiºierul \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot stat file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot analiza fiºierul \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot stat source file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot analiza fiºierul sursã \"%s\" \n"
+" %s "
+
+msgid ""
+" Cannot write target file \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot scrie fiºierul destinaşie \"%s\" \n"
+" %s "
+
+msgid " Case sensitive "
+msgstr " Respect capitalizarea "
+
+msgid " Chmod command "
+msgstr " Comanda chmod "
+
+msgid " Chown advanced command "
+msgstr " Comanda chown avansatã "
+
+msgid " Chown command "
+msgstr " Comanda chown "
+
+msgid " Command "
+msgstr " Comandã "
+
+msgid " Command history "
+msgstr " Istoria comenzilor "
+
+msgid " Compare directories "
+msgstr " Compar directoarele "
+
+msgid " Confirm save file? : "
+msgstr " Vreşi sã salvaşi? : "
+
+msgid " Confirmation "
+msgstr " Confirmare "
+
+msgid " Continue "
+msgstr " Continuu "
+
+msgid " Copy "
+msgstr " Copiez "
+
+msgid " Copy to clipboard "
+msgstr " Copiez în clipboard "
+
+msgid " Could not chdir to %s "
+msgstr " Nu pot merge în %s "
+
+msgid " Could not open %s directory"
+msgstr " Nu pot deschide directorul %s"
+
+msgid " Could not open file "
+msgstr " Nu pot deschide fiºierul "
+
+msgid ""
+" Couldn't chmod \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot schimba drepturile de acces ale %s \n"
+" %s "
+
+msgid ""
+" Couldn't chown \"%s\" \n"
+" %s "
+msgstr ""
+" Nu pot schimba proprietarul lui %s \n"
+" %s "
+
+msgid ""
+" Couldn't stat %s \n"
+" %s "
+msgstr ""
+" Nu pot analiza %s \n"
+" %s "
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Continue discards these changes. "
+msgstr ""
+" Fiºierul curent a fost modificat fãrã a fi salvat. \n"
+" Continuarea va anula aceste schimbãri. "
+
+msgid ""
+" Current text was modified without a file save. \n"
+" Save with exit? "
+msgstr ""
+" Acest text a fost modificat dar nu ºi salvat. \n"
+" Salvez la ieºire? "
+
+msgid " Cut to clipboard "
+msgstr " Tai ºi pun în clipboard "
+
+msgid " Debug "
+msgstr " Depanez "
+
+msgid " Delete "
+msgstr " ªterg "
+
+msgid " Delete Macro "
+msgstr " ªterg Combinaşia "
+
+msgid " Delete macro "
+msgstr " ªterg combinaşia "
+
+msgid ""
+" Destination \"%s\" must be a directory \n"
+" %s "
+msgstr " Destinaşia \"%s\" trebuie sã fie un director\n"
+" %s "
+
+msgid " Directory label "
+msgstr " Eticheta directorului "
+
+msgid " Directory path "
+msgstr " Calea directorului "
+
+msgid " Do you really want to quit the Midnight Commander? "
+msgstr " Vreşi într-adevãr sã ieºişi din Midnight Commander? "
+
+msgid " ERROR: "
+msgstr " EROARE: "
+
+msgid " Edit "
+msgstr " Editez "
+
+msgid " Edit symlink "
+msgstr " Editez legãtura simbolicã "
+
+msgid " Emacs key: "
+msgstr " Tasta Emacs: "
+
+msgid " Enter argument order : "
+msgstr " Introduceşi ordinea argumentelor : "
+
+msgid " Enter directory name:"
+msgstr " Introduceşi numele directorului:"
+
+msgid " Enter line length, 0 for off: "
+msgstr " Introduceşi lumgimea liniei, 0 pentru dezactivare: "
+
+msgid " Enter line: "
+msgstr " Introduceşi linia: "
+
+msgid " Enter machine name (F1 for details): "
+msgstr " Introduceşi numele maºinii (F1 pentru detalii): "
+
+msgid " Enter regexp:"
+msgstr " Introduceşi expresia regularã:"
+
+msgid " Enter replace text : "
+msgstr " Introduceşi textul înlocuitor : "
+
+msgid " Enter search string:"
+msgstr " Introduceşi ºirul de cãutat:"
+
+msgid " Enter search text : "
+msgstr " Introduceşi textul de cãutat : "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Introduceşi opşiunile de sortare (cf: sort(1)) separate prin spaşii: "
+
+msgid " Error "
+msgstr " Eroare "
+
+msgid " Error allocating memory "
+msgstr " Eroare la alocarea memoriei "
+
+msgid " Error in replacement format string. "
+msgstr " Eroare în formatul ºirului înlocuitor. "
+
+msgid " Error trying to execute sort command "
+msgstr " Eroare la încercarea de execuşie a comenzii sort "
+
+msgid " Error trying to insert file. "
+msgstr " Eroare la încercarea de inserare fiºierului. "
+
+msgid " Error trying to open file for reading "
+msgstr " Eroare la încercarea de deschidere a fiºierului pentru citire "
+
+msgid " Error trying to open macro file "
+msgstr " Eroare la încercarea de deschidere a fiºierului de combinaşii "
+
+msgid " Error trying to open temp file "
+msgstr " Eroare la încercarea de deschidere a fiºierului temporar "
+
+msgid " Error trying to overwrite macro file "
+msgstr " Eroare la încercarea de suprascriere a fiºierului de combinaşii "
+
+msgid " Error trying to save file. "
+msgstr " Eroare la încercarea de salvare a fiºierului. "
+
+msgid " Error trying to stat file "
+msgstr " Eroare la încercarea de analizare a fiºierului "
+
+msgid " Execute Macro "
+msgstr " Execut combinaşie "
+
+msgid " FTP to machine "
+msgstr " FTP cãtre maºina "
+
+msgid " Fail trying to open file for reading: "
+msgstr " Eºec la încercarea de deschidere pentru citire a fiºierului: "
+
+msgid " False: "
+msgstr " Fals: "
+
+msgid " File "
+msgstr " Fiºier "
+
+msgid " File exists "
+msgstr " Fiºierul existã "
+
+msgid " File is too large: "
+msgstr " Fiºierul este prea mare: "
+
+msgid " File was modified, Save with exit? "
+msgstr " Fiºierul a fost modificat, Salvez la ieºire? "
+
+msgid " Filter "
+msgstr " Filtru "
+
+msgid " Filtered view "
+msgstr " Vedere filtratã "
+
+msgid " Find/read "
+msgstr " Caut/citesc "
+
+msgid " Goto line "
+msgstr " Merg la linia "
+
+msgid " Group name "
+msgstr " Nume grup "
+
+msgid " Help "
+msgstr " Ajutor "
+
+msgid " Host name "
+msgstr " Numele gazdei "
+
+msgid " Hotlist Load "
+msgstr " Încarc lista rapidã "
+
+msgid " I can't run the Advanced Chown command on a tarfs "
+msgstr " Nu pot executa comanda Chown Avansat pe un tarfs"
+
+msgid " I can't run the Advanced Chown command on an extfs "
+msgstr " Nu pot executa comanda Chown Avansat pe un extfs"
+
+msgid " I can't run the Chmod command on an extfs "
+msgstr " Nu pot executa comanda Chmod pe un extfs"
+
+msgid " I can't run the Chown command on a tarfs "
+msgstr " Nu pot executa comanda Chown pe un tarfs"
+
+msgid " I can't run the Chown command on an extfs "
+msgstr " Nu pot executa comanda Chown pe un extfs"
+
+msgid " Information "
+msgstr " Informaşii "
+
+msgid " Insert File "
+msgstr " Inserez Fiºier "
+
+msgid " Insert Literal "
+msgstr " Inserez un Literal "
+
+msgid " Insert file "
+msgstr " Inserez fiºier "
+
+msgid " Internal bug: Double start of link area "
+msgstr " Eroare internã: Dublu start al ariei legãturã "
+
+msgid " Internal error: get_file \n"
+msgstr " Eroare internã: get_file\n"
+
+msgid " Internal failure "
+msgstr " Eºec intern "
+
+msgid " Invalid regular expression "
+msgstr " Expresie regularã invalidã "
+
+msgid ""
+" Invalid regular expression, or scanf expression with to many conversions "
+msgstr ""
+" Expresie regularã invalidã, sau expresie scanf cu prea multe conversii "
+
+msgid " Invalid target mask "
+msgstr " Mascã destinaşie invalidã "
+
+msgid " Layout "
+msgstr " Aranjare "
+
+msgid " Left "
+msgstr " Stânga "
+
+msgid " Link "
+msgstr " Legãturã "
+
+msgid " Link symbolically "
+msgstr " Legãturã simbolicã "
+
+msgid " Link to a remote machine "
+msgstr " Legãturã la o maºinã la distanşã "
+
+msgid " Listing mode "
+msgstr " Mod de listare "
+
+msgid " Load "
+msgstr " Încarc "
+
+msgid " Load macro "
+msgstr " Încarc combinaşie "
+
+msgid " Macro "
+msgstr " Combinaşie "
+
+msgid " Mail "
+msgstr " Poºta "
+
+msgid " Mkdir "
+msgstr " Mkdir "
+
+msgid " Move "
+msgstr " Mut "
+
+msgid " Name "
+msgstr " Nume "
+
+msgid " New hotlist group "
+msgstr " Un nou grup de liste rapide "
+
+msgid " Not an ordinary file: "
+msgstr " Acesta nu e un fiºier ordinar: "
+
+msgid " Notice "
+msgstr " Notã "
+
+msgid " Oops... "
+msgstr " Argh... "
+
+msgid " Open with..."
+msgstr " Deschid cu..."
+
+msgid " Options "
+msgstr " Opşiuni "
+
+msgid " Other options "
+msgstr " Alte opşiuni "
+
+msgid " Owner name "
+msgstr " Nume proprietar "
+
+msgid " Parameter "
+msgstr " Parametru "
+
+msgid " Permission "
+msgstr " Drepturi "
+
+msgid " Pipe failed "
+msgstr " Tubul a eºuat "
+
+msgid " Press any key: "
+msgstr " Apãsaşi o tastã: "
+
+msgid " Press macro hotkey: "
+msgstr " Apãsaşi tasta combinaşiei: "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Apãsaşi noua tastã a combinaşiei: "
+
+msgid " Process block "
+msgstr " Blocul procesului "
+
+msgid " Prompt on replace "
+msgstr " Confirm înaintea înlocuirii "
+
+msgid " Quit "
+msgstr " Ies "
+
+msgid " Quit anyway? "
+msgstr " Ies oricum? "
+
+msgid " Recursive Delete "
+msgstr " ªtergere recursivã "
+
+msgid " Regular expression "
+msgstr " Expresie regularã "
+
+msgid " Relative symlink "
+msgstr " Legãturã simbolicã relativã "
+
+msgid " Remove: "
+msgstr " ªterg: "
+
+msgid " Replace "
+msgstr " Înlocuiesc "
+
+msgid " Replace all "
+msgstr " Înlocuiesc totul "
+
+msgid " Replace with: "
+msgstr " Înlocuiesc cu: "
+
+msgid " Right "
+msgstr " Dreapta "
+
+msgid " Run Sort "
+msgstr " Sortez "
+
+msgid " Save As "
+msgstr " Salvez ca ºi "
+
+msgid " Save Block "
+msgstr " Salvez blocul "
+
+msgid " Save as "
+msgstr " Salvez ca ºi "
+
+msgid " Save changes "
+msgstr " Salvez schimbãrile "
+
+msgid " Save file "
+msgstr " Salvez fiºierul "
+
+msgid " Save macro "
+msgstr " Salvez combinaşia "
+
+msgid " Scanf expression "
+msgstr " Expresia scanf "
+
+msgid " Sear/Repl "
+msgstr " Caut/Înloc "
+
+msgid " Search "
+msgstr " Caut "
+
+msgid " Search string not found "
+msgstr " ªirul cãutat nu a fost gãsit "
+
+msgid " Search string not found. "
+msgstr " ªirul cãutat nu a fost gãsit. "
+
+msgid " Select "
+msgstr " Selectez "
+
+msgid " Select compare method: "
+msgstr " Alegeşi metoda de comparaşie: "
+
+msgid " Set expression for filtering filenames"
+msgstr " Setaşi expresia pentru filtrarea numelor fiºierelor"
+
+msgid " Setup "
+msgstr " Configurare "
+
+msgid " Setup saved to ~/"
+msgstr " Configuraşia salvatã în ~/"
+
+msgid " Size "
+msgstr " Mãrime "
+
+msgid " Sorry, I could not put the job in background "
+msgstr " Îmi pare rãu, nu pot trimite sarcina în fundal "
+
+msgid " Sort "
+msgstr " Sortez "
+
+msgid " Sort block "
+msgstr " Sortez blocul "
+
+msgid " Sort returned non-zero: "
+msgstr " Sortarea a returnat cod non-zero: "
+
+msgid ""
+" Source directory \"%s\" is not a directory \n"
+" %s "
+msgstr " Directorul sursã \"%s\" nu este un director\n"
+" %s "
+
+msgid " Srch/Replce "
+msgstr " Caut/Înloc "
+
+msgid " Symlink "
+msgstr " Legãturã simbolicã "
+
+msgid " The Midnight Commander "
+msgstr " Midnight Commander "
+
+msgid " The command history is empty "
+msgstr " Istoria comenzilor este goalã "
+
+msgid " The destination isn't a directory "
+msgstr " Destinaşia nu este un director "
+
+msgid " The shell is still active. Quit anyway? "
+msgstr " Shell-ul este încã activ. Ies oricum? "
+
+msgid " There are stopped jobs."
+msgstr " Existã sarcini oprite."
+
+msgid " True:  "
+msgstr " Adevãrat: "
+
+msgid " Type 'yes' if you REALLY want to delete "
+msgstr " Scrieşi 'yes' daca CHIAR vreşi sã ºtergeşi "
+
+msgid " Unable to save to file. "
+msgstr " Nu pot salva în fiºier. "
+
+msgid " Unknown file operation "
+msgstr " Operaşie pe fiºier necunoscutã "
+
+msgid " Unselect "
+msgstr " Deselectez "
+
+msgid " User menu "
+msgstr " Meniu utilizator "
+
+msgid " User name "
+msgstr " Nume proprietar "
+
+msgid " Virtual File System Setting "
+msgstr " Configurarea Sistemului de Fiºiere Virtual "
+
+msgid " Warning "
+msgstr " Atenşie "
+
+msgid " Which extension file you want to edit? "
+msgstr " Care fiºier de extensii dorişi sã îl editaşi? "
+
+msgid " Which menu file will you edit? "
+msgstr " Care fiºier de meniuri dorişi sã îl editaşi? "
+
+msgid " Whole words only "
+msgstr " Doar cuvinte întregi "
+
+msgid " Word wrap "
+msgstr " Aranjare automatã a cuvintelor "
+
+msgid " You must first highlight a block of text. "
+msgstr " Trebuie întâi sa selectaşi un bloc de text. "
+
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' et `%s' sunt acelaºi fiºier "
+
+msgid " `%s' and `%s' are the same file. "
+msgstr " `%s' et `%s' sunt acelaºi fiºier. "
+
+msgid " and then delete [Hotlist] section there"
+msgstr " ºi atunci ºtergeşi scşiunea [Hotlist] acolo"
+
+msgid " confirm &Delete "
+msgstr " confirm º&Tergerea "
+
+msgid " confirm &Exit "
+msgstr " confirm i&Eºirea "
+
+msgid " confirm e&Xecute "
+msgstr " confirm e&Xecuşia "
+
+msgid " confirm o&Verwrite "
+msgstr " confirm sup&Rascrierea "
+
+msgid " edit symlink: %s "
+msgstr " editez legãtura simbolicã: %s "
+
+msgid ""
+" entries\n"
+"\n"
+msgstr ""
+"intrãri\n"
+"\n"
+
+msgid " file error"
+msgstr " eroare fiºier"
+
+msgid " file error "
+msgstr " eroare fiºier "
+
+msgid " file, your old hotlist entries were not deleted"
+msgstr "fiºier, intrãrile din vechea listã rapidã nu au fost ºterse"
+
+msgid " link: %s "
+msgstr " legãturã: %s "
+
+msgid " points to:"
+msgstr " trimite la:"
+
+msgid " relative symlink: %s "
+msgstr " legãturã simbolicã relativã: %s "
+
+msgid " symlink: %s "
+msgstr " legãturã simbolicã: %s "
+
+msgid " to:"
+msgstr " cãtre:"
+
+msgid "%6d of %d"
+msgstr "%6d din %d"
+
+msgid "%s bytes"
+msgstr "%s octeşi"
+
+msgid "&Abort"
+msgstr "&Întrerup"
+
+msgid "&Access time"
+msgstr "data a&Ccesului"
+
+msgid "&Advanced chown       "
+msgstr "Chown &Avansat        "
+
+msgid "&Again"
+msgstr "Din nou"
+
+msgid "&Always use ftp proxy"
+msgstr "&Utilizez delegat ftp"
+
+msgid "&Append"
+msgstr "&Adaug"
+
+msgid "&Auto save setup"
+msgstr "salve&Z automat parametrii"
+
+msgid "&Background"
+msgstr "&Fundal"
+
+msgid "&Beginning     C-PgUp"
+msgstr "început        C-PgUp"
+
+msgid "&Brief file list"
+msgstr "listã &Scurtã de fiºiere"
+
+msgid "&Cancel"
+msgstr "&Anulez"
+
+msgid "&Change time"
+msgstr "data &Schimbãrii"
+
+msgid "&Chdir"
+msgstr "&Chdir"
+
+msgid "&Compare directories  C-x d"
+msgstr "&Compar directorii           C-x d"
+
+msgid "&Configuration..."
+msgstr "&Configuraşie..."
+
+msgid "&Continue"
+msgstr "&Continuu"
+
+msgid "&Copy               F5"
+msgstr "&Copiez             F5"
+
+msgid "&Copy              F5"
+msgstr "&Copiez            F5"
+
+msgid "&Delete             F8"
+msgstr "&ªterg              F8"
+
+msgid "&Delete            F8"
+msgstr "&ªterg             F8"
+
+msgid "&Dive into subdir if exists"
+msgstr "&Plonjez în subdirector dacã existã"
+
+msgid "&Drive...       M-d"
+msgstr "&Disc...        M-d"
+
+msgid "&Edit               F4"
+msgstr "&Editez             F4"
+
+msgid "&Edit - F4"
+msgstr "&Editez - F4"
+
+msgid "&End           C-PgDn"
+msgstr "&Sfârºit       C-PgDn"
+
+msgid "&Execute macro...   C-a, KEY"
+msgstr "&Execut combinaşia... C-a, TASTÃ"
+
+msgid "&Execute macro... C-x e, KEY"
+msgstr "&Execut combinaşia... C-x e, TOUCHE"
+
+msgid "&Extension"
+msgstr "&Extensie"
+
+msgid "&Filter..."
+msgstr "&Filtru..."
+
+msgid "&Filtered view     M-!"
+msgstr "Vedere &Filtratã   M-!"
+
+msgid "&Finish record macro...  C-r"
+msgstr "Termine înregistrarea combinaşiei... C-r"
+
+msgid "&Full file list"
+msgstr "listã de &Fiºiere completã"
+
+msgid "&General...  "
+msgstr "&General...  "
+
+msgid "&Goto line...            M-l"
+msgstr "Merg la linia...         M-l"
+
+msgid "&Group"
+msgstr "&Grup"
+
+msgid "&Home"
+msgstr "&Acasã"
+
+msgid "&Icon view"
+msgstr "Vedere &Icoane"
+
+msgid "&Info           C-x i"
+msgstr "&Info            C-x i"
+
+msgid "&Inode"
+msgstr "&I-nod"
+
+msgid "&Insert"
+msgstr "&Inserez"
+
+msgid "&Insert file...   F15"
+msgstr "&Inserez fiºier.. F15"
+
+msgid "&Kill"
+msgstr "&Omor"
+
+msgid "&Layout..."
+msgstr "&Aranjare..."
+
+msgid "&Link            C-x l"
+msgstr "&Legaturã        C-x l"
+
+msgid "&Links"
+msgstr "&Legãturi"
+
+msgid "&Listing mode..."
+msgstr "mod de &Listare..."
+
+msgid "&Local"
+msgstr "&Local"
+
+msgid "&Long file list"
+msgstr "&Listã lungã de fiºiere"
+
+msgid "&Mail...                    "
+msgstr "&Poºta...                   "
+
+msgid "&Marked all"
+msgstr "Toate &Marcate"
+
+msgid "&Mkdir              F7"
+msgstr "creez direc&Tor     F7"
+
+msgid "&Modify time"
+msgstr "data &Modificãrii"
+
+msgid "&Move"
+msgstr "&Mut"
+
+msgid "&Move              F6"
+msgstr "&Mut               F6"
+
+msgid "&Name"
+msgstr "&Nume"
+
+msgid "&Network link..."
+msgstr "l&Egãturã reşea..."
+
+msgid "&Never"
+msgstr "&Niciodatã"
+
+msgid "&New              C-n"
+msgstr "&Nou              C-n"
+
+msgid "&New            C-x k"
+msgstr "&Nou            C-x k"
+
+msgid "&No"
+msgstr "&Nu"
+
+msgid "&Ok"
+msgstr "&Ok"
+
+msgid "&Open/load...     C-o"
+msgstr "&Deschid/încarc.. C-o"
+
+msgid "&Owner"
+msgstr "pr&Oprietar"
+
+msgid "&Quit"
+msgstr "&Îeºire"
+
+msgid "&Quit             F10"
+msgstr "&Îes              F10"
+
+msgid "&Refresh screen          C-l"
+msgstr "&Redesenez ecranul       C-l"
+
+msgid "&Remove"
+msgstr "ªte&Rg"
+
+msgid "&Rename/Move        F6"
+msgstr "&Redenumesc/Mut     F6"
+
+msgid "&Replace...        F4"
+msgstr "&Înlocuiesc...     F4"
+
+msgid "&Resume"
+msgstr "&Reiau"
+
+msgid "&Retry"
+msgstr "&Re-încerc"
+
+msgid "&Reverse"
+msgstr "inve&Rs"
+
+msgid "&Save"
+msgstr "&Salvez"
+
+msgid "&Save              F2"
+msgstr "&Salvez            F2"
+
+msgid "&Save mode..."
+msgstr "Modul &Salvãrii..."
+
+msgid "&Save setup"
+msgstr "&Salvez setãrile"
+
+msgid "&Search...         F7"
+msgstr "Caut...            F7"
+
+msgid "&Set"
+msgstr "a&Plic"
+
+msgid "&Size"
+msgstr "m&Ârime"
+
+msgid "&Size only"
+msgstr "&Doar mãrime"
+
+msgid "&Skip"
+msgstr "&Sar"
+
+msgid "&Sort order..."
+msgstr "&Ordinea sortãrii..."
+
+msgid "&Stable Symlinks"
+msgstr "Legãturi simbolice &Stabile"
+
+msgid "&Start record macro      C-r"
+msgstr "Încep înregistrarea combinaşiei C-r"
+
+msgid "&Stop"
+msgstr "&Stop"
+
+msgid "&Suspend"
+msgstr "&Suspend"
+
+msgid "&SymLink         C-x s"
+msgstr "Legãtura &Symb   C-x s"
+
+msgid "&System Wide"
+msgstr "Pentru tot &Sistemul"
+
+msgid "&Tree"
+msgstr "&Arbore"
+
+msgid "&Type"
+msgstr "&Tipul"
+
+msgid "&Undo             C-u"
+msgstr "&Anulez           C-u"
+
+msgid "&Unsorted"
+msgstr "ne-sor&Tat"
+
+msgid "&User"
+msgstr "&Utilizator"
+
+msgid "&User defined:"
+msgstr "definit de &Utilizator:"
+
+msgid "&User menu          F2"
+msgstr "Meniu &Utilizator   F2"
+
+msgid "&Using shell patterns"
+msgstr "&Utilizez \"shell patterns\""
+
+msgid "&View               F3"
+msgstr "&Vãd                F3"
+
+msgid "&View - F3"
+msgstr "&Vãd - F3"
+
+msgid "&Virtual FS..."
+msgstr "Sistem Fiºiere &Virtual..."
+
+msgid "&Yes"
+msgstr "&Da"
+
+msgid "'indent' &C Formatter    F19"
+msgstr "Formator &C 'indent'     F19"
+
+msgid "'ispell' s&Pell check    C-p"
+msgstr "corector ortografic 'is&Pell' C-p"
+
+msgid "'ispell' s&Pell check    M-$"
+msgstr "corector ortografic 'is&Pell' M-$"
+
+msgid "(stalled)"
+msgstr "(împotmolit)"
+
+msgid "1Copy"
+msgstr "1Copiez"
+
+msgid "1Delete"
+msgstr "1ªterg"
+
+msgid "1Move"
+msgstr "1Mut"
+
+msgid "7 bits"
+msgstr "&7 bişi"
+
+msgid "<Unknown group>"
+msgstr "<Grup Necunoscut>"
+
+msgid "<Unknown user>"
+msgstr "<Utilizator necunoscut>"
+
+msgid "<Unknown>"
+msgstr "<Necunoscut>"
+
+msgid "Abort this dialog, Esc"
+msgstr "Apãsaşi ESC pt. a închide acest dialog"
+
+msgid "About"
+msgstr "Despre"
+
+msgid "Active VFS directories"
+msgstr "Directoare VFS active"
+
+msgid "Active VFS list..."
+msgstr "Lista VFS active..."
+
+msgid "All files"
+msgstr "Toate fiºierele"
+
+msgid "Allows entering of a C format string, see the scanf man page"
+msgstr "Permite introducerea unui ºir în format C, vezi paginia de manual scanf"
+
+msgid "Always to memory"
+msgstr "Întotdeauna în memorie"
+
+msgid "Animation"
+msgstr "Animaşie"
+
+msgid "Archives and compressed files"
+msgstr "Arhive ºi fiºiere comprimate"
+
+msgid "Ask before making each replacement"
+msgstr " Întreb înainte de fiecare înlocuire"
+
+msgid "Assembler program files"
+msgstr "Fiºiere program asamblor"
+
+msgid "Audio files"
+msgstr "Fiºiere audio"
+
+msgid "Background Jobs"
+msgstr "Sarcini de fundal"
+
+msgid "Background jobs..."
+msgstr "Sarcini de fundal..."
+
+msgid "Background process:"
+msgstr "Sarcini de fundal:"
+
+msgid "Begin search, Enter"
+msgstr "Apãsaşi Enter pentru începerea cãutãrii"
+
+msgid "Bytes"
+msgstr "Octeşi"
+
+msgid "C program files"
+msgstr "Fiºiere program C"
+
+msgid "C++ program files"
+msgstr "Fiºiere program C++"
+
+msgid "Cancel"
+msgstr "Anulez"
+
+msgid "Cancel quit"
+msgstr "Anulez ieºirea"
+
+msgid "Cannot invoke command."
+msgstr "Nu pot invoca comanda."
+
+msgid "Cannot invoke du command."
+msgstr "Nu pot invoca comanda \"du\"."
+
+msgid "Changes the sort order of the files"
+msgstr "Schimbã ordinea de sortare a fiºierelor"
+
+msgid "Chmod command"
+msgstr "Comanda chmod"
+
+msgid "Close"
+msgstr "Închid"
+
+msgid "Command"
+msgstr "Comandã"
+
+msgid "Commands"
+msgstr "Comenzi"
+
+msgid "Configure options"
+msgstr "Opşiuni de configurare"
+
+msgid "Confirmation..."
+msgstr "Confirmãri..."
+
+msgid "Connect to a remote machine"
+msgstr "Conexiune la o maºinã depãrtatã"
+
+msgid "Connect to a remote machine with FTP"
+msgstr "Conectez la o maºinã depãrtatã prin FTP"
+
+msgid "Content: "
+msgstr "Conşinut: "
+
+msgid "Continue"
+msgstr "Continuu"
+
+msgid "Continue searching"
+msgstr "Continuu cãutarea"
+
+msgid "Copy"
+msgstr "Copiez"
+
+msgid "Copy \"%s\" directory to:"
+msgstr "Copiez directorul \"%s\" în:"
+
+msgid "Copy block to clipbrd\tC-Ins"
+msgstr "Copiez blocul în clipbrd\tC-Ins"
+
+msgid "Copy files"
+msgstr "Copiez fiºierele"
+
+msgid "Copy to file...\tC-f"
+msgstr "Copiez în fiºier...\tC-f"
+
+msgid "Copy..."
+msgstr "Copiez..."
+
+msgid "Count"
+msgstr "Numãr"
+
+msgid "Creates a new folder"
+msgstr "Creez un nou dosar"
+
+msgid "Current mode: "
+msgstr "Mod actual: "
+
+msgid "Cut block to clipbrd\tS-Del"
+msgstr "Tai blocul în clipbrd\tS-Del"
+
+msgid "Delete"
+msgstr "ªterg"
+
+msgid "Delete block\tF8/C-Del"
+msgstr "ªterg blocul\tF8/C-Del"
+
+msgid "Delete files from disk"
+msgstr "ªterg fiºierele de pe disc"
+
+msgid "Delete macro...\t"
+msgstr "ªterg combinaşia...\t"
+
+msgid "Delete..."
+msgstr "ªterg..."
+
+msgid "Deleting"
+msgstr "ªtergere"
+
+msgid "Desktop"
+msgstr "Birou"
+
+msgid "Directory hotlist"
+msgstr "Lista rapidã de directori"
+
+msgid "Directory label"
+msgstr "Eticheta directorului"
+
+msgid "Directory path"
+msgstr "Chalea directorului"
+
+msgid "Disk operations"
+msgstr "Operaşii disc"
+
+msgid "Display mode..."
+msgstr "Modul de afiºaj..."
+
+msgid "Do you want to delete "
+msgstr "Dorişi sã ºtergeşi "
+
+msgid "Dynamc"
+msgstr "Dynamic"
+
+msgid "Dynamic paragraphing"
+msgstr "Paragrafare automatã"
+
+msgid "Edit"
+msgstr "Editez"
+
+msgid "Edit symlink..."
+msgstr "Editez legãturã simbolicã..."
+
+msgid "Enter extra arguments:"
+msgstr "Introduceşi argumente suplimentare:"
+
+msgid "Enter the order of replacement of your scanf format specifiers"
+msgstr "Introduceşi ordinea de înlocuire a specificatorulor de format scanf"
+
+msgid "Error"
+msgstr "Eroare"
+
+msgid "Error initialising editor.\n"
+msgstr "Eroare la inişializarea editorului.\n"
+
+msgid "Exec"
+msgstr "Exec"
+
+msgid "Execute macro...\tC-a, KEY"
+msgstr "Execut combinaşie...\tC-a, TOUCHE"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Fiºier existent (cãtre care legãtura va arãta):"
+
+msgid "Exit"
+msgstr "Ies"
+
+msgid "Exit program"
+msgstr "Ies din program"
+
+msgid "Extension file edit"
+msgstr "Editez fiºierul de extensii"
+
+msgid "FT&P link..."
+msgstr "legãturã FT&P..."
+
+msgid "FTP link..."
+msgstr "Legãturã FTP..."
+
+msgid "File"
+msgstr " Fiºier"
+
+msgid "File mode (permissions)"
+msgstr "Modul fiºierului (drepturile)"
+
+msgid "File:       %s"
+msgstr "Fiºier:     %s"
+
+msgid "File:       None"
+msgstr "Fiºier:Nici unul"
+
+msgid "File: %s"
+msgstr "Fiºier: %s"
+
+msgid "Filename"
+msgstr "NumeFiºier"
+
+msgid "Filename:"
+msgstr "Nume fiºier:"
+
+msgid "Files tagged, want to cd?"
+msgstr "Fiºiere marcate, dorişi sã schimbaşi directorul?"
+
+msgid "Filesystem: %s"
+msgstr "Sistem de fiºiere: %s"
+
+msgid "Filter"
+msgstr "Filtru"
+
+msgid "Filter..."
+msgstr "Filtru.."
+
+msgid "Find File"
+msgstr "Caut fiºier"
+
+msgid "Find file"
+msgstr "Caut fiºier"
+
+msgid "Find..."
+msgstr "Caut..."
+
+msgid "Finish record macro...\tC-r"
+msgstr "Termin înregistrarea combinaşiei...\tC-r"
+
+msgid "Finished"
+msgstr "Terminat"
+
+msgid "Flag"
+msgstr "Drapel"
+
+msgid "Font files"
+msgstr "Fiºiere font"
+
+msgid "Forget"
+msgstr "Uitã"
+
+msgid "Format"
+msgstr "Format"
+
+msgid "Format of the "
+msgstr "Format al "
+
+msgid "Format of the ~/"
+msgstr "Format al ~/"
+
+msgid "Format paragraph\tM-p"
+msgstr "Formatez paragraf\tM-p"
+
+msgid "Formatted"
+msgstr "Formatat"
+
+msgid "Free space "
+msgstr "Spaşiu liber "
+
+msgid "Full 8 bits output"
+msgstr "&Complet 8 bişi"
+
+msgid "Full name: "
+msgstr "Nume complet: "
+
+msgid "GNU Midnight Commander"
+msgstr "GNU Midnight Commander"
+
+msgid "General"
+msgstr "General"
+
+msgid "Global option settings"
+msgstr "Configuraşie globalã"
+
+msgid "Goto line"
+msgstr "Merg la linia"
+
+msgid "Goto line...\tM-l"
+msgstr "Merg la linia...\tM-l"
+
+msgid "Grepping in %s"
+msgstr "Caut în %s"
+
+msgid "Group"
+msgstr "Grup"
+
+msgid "Group name"
+msgstr "Nume grup"
+
+msgid "Gzipped tar archive extract:"
+msgstr "Extragere arhivã tar gzipatã:"
+
+msgid "HTML and SGML files"
+msgstr "Fiºiere HTML ºi SGML"
+
+msgid "Help"
+msgstr "Ajutor"
+
+msgid "Hotlist is now kept in file ~/"
+msgstr "Lista rapidã este acum şinutã în fiºierul ~/"
+
+msgid "Hotlist..."
+msgstr "Lista rapidã..."
+
+msgid "ISO 8859-1"
+msgstr "&ISO 8859-1"
+
+msgid "Icon"
+msgstr "Icon"
+
+msgid "If size less than:"
+msgstr "Dacã mãrimea este mai micã decât:"
+
+msgid "Image files"
+msgstr "Fiºiers imagine"
+
+msgid "Index"
+msgstr "Index"
+
+msgid "Information on this program"
+msgstr "Informaşii despre acest program"
+
+msgid "Inode"
+msgstr "Inod"
+
+msgid "Insert date/time\tC-d"
+msgstr "Inserez data/ora\tC-d"
+
+msgid "Insert file...\tF15"
+msgstr "Inserez fiºier...\tF15"
+
+msgid "Key emulation"
+msgstr "Emulare de taste"
+
+msgid "Label for \"%s\":"
+msgstr "Eticheta pentru \"%s\":"
+
+msgid "Layout"
+msgstr "Aranjare"
+
+msgid "Line"
+msgstr "Linie"
+
+msgid "Link"
+msgstr "Legãturã"
+
+msgid "Link..."
+msgstr "Legãturã..."
+
+msgid "Links:     %d"
+msgstr "Legãturi:     %d"
+
+msgid "List of background operations"
+msgstr "Lista operaşiilor din fundal"
+
+msgid "Listing mode"
+msgstr "Mod de listare"
+
+msgid "Locate files on disk"
+msgstr "Localizez fiºiere pe disc"
+
+msgid "Location:  %Xh:%Xh"
+msgstr "Locaşie: %Xh:%Xh"
+
+msgid "MC was unable to write ~/"
+msgstr "MC nu a putu sã scrie fiºierul ~/"
+
+msgid "MC will load hotlist from ~/"
+msgstr "MC va încãrca lista rapidã din ~/"
+
+msgid "Macros and internal commands"
+msgstr "Combinaşii ºi comezi interne"
+
+msgid "Manipulating blocks of text"
+msgstr "Manipularea blocurilor de text"
+
+msgid "Mark"
+msgstr "Marcare"
+
+msgid "Menu"
+msgstr "Meniu"
+
+msgid "Midnight Commander %s"
+msgstr "Midnight Commander %s"
+
+msgid "Misc. program files"
+msgstr "Fiºiers program diverse"
+
+msgid "Mkdir"
+msgstr "Mkdir"
+
+msgid "Mode"
+msgstr "Mod"
+
+msgid "Mode:      %s (%04o)"
+msgstr "Mod:      %s (%04o)"
+
+msgid "Move"
+msgstr "Mut"
+
+msgid "Moving "
+msgstr "Mut "
+
+msgid "N&GID"
+msgstr "N&GID"
+
+msgid "N&UID"
+msgstr "N&UID"
+
+msgid "Name"
+msgstr "Nume"
+
+msgid "Name of new group"
+msgstr "Numele noului grup"
+
+msgid "Network link..."
+msgstr "Legãturã reşea..."
+
+msgid "New\tC-n"
+msgstr "Nou\tC-n"
+
+msgid "New &Entry"
+msgstr "Intrar&E nouã"
+
+msgid "New &Group"
+msgstr "&Grup nou"
+
+msgid "New directory..."
+msgstr "Director nou..."
+
+msgid "New hotlist entry"
+msgstr "O nouã intrare în lista rapidã"
+
+msgid "New window"
+msgstr "Fereastrã nouã"
+
+msgid "None"
+msgstr "Nimic"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Objective-C program files"
+msgstr "Fiºiers program Objective-C"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "On"
+msgstr "Activ"
+
+msgid "Open"
+msgstr "Deschis"
+
+msgid "Open Terminal"
+msgstr "Deschid Terminal"
+
+msgid "Open with"
+msgstr "Deschid cu"
+
+msgid "Open with..."
+msgstr "Deschid cu..."
+
+msgid "Open...\tC-o"
+msgstr "Deschid...\tC-o"
+
+msgid "Opens a new window"
+msgstr "Deschide o nouã fereastrã"
+
+msgid "Opens a terminal"
+msgstr "Deschide un terminal"
+
+msgid "Options"
+msgstr "Opşiuni"
+
+msgid "Options..."
+msgstr "Opşiuni..."
+
+msgid "Other"
+msgstr "Alte"
+
+msgid "Other command"
+msgstr "Alte comenzi"
+
+msgid "Other options"
+msgstr "Alte opşiuni"
+
+msgid "Overwrite"
+msgstr "Suprascriu"
+
+msgid "Owner"
+msgstr "Proprietar"
+
+msgid "Owner name"
+msgstr "Nume proprietar"
+
+msgid "Owner:     %s/%s"
+msgstr "Proprietar:%s/%s"
+
+msgid "Parse"
+msgstr "Analizator"
+
+msgid "Password"
+msgstr "Parola"
+
+msgid "Paste block from clipbrd\tS-Ins"
+msgstr "Lipesc blocul din clipbrd\tS-Ins"
+
+msgid "Permission"
+msgstr "Drepturi"
+
+msgid "Permissions (Octal)"
+msgstr "Drepturi (Octal)"
+
+msgid "Pipe close failed"
+msgstr "Eºec la închiderea tubului"
+
+msgid "Postscript and PDF files"
+msgstr "Fiºiere Postscript ºi PDF"
+
+msgid "Press any key to continue..."
+msgstr "Apãsaşi o tastã..."
+
+msgid "Prev"
+msgstr "Precedentul"
+
+msgid "Properties"
+msgstr "Proprietãşi"
+
+msgid "PullDn"
+msgstr "Meniu"
+
+msgid "Quick cd"
+msgstr "Cd rapid"
+
+msgid "Quit"
+msgstr "Ies"
+
+msgid "RPM/DEB files"
+msgstr "Fiºiere RPM/DEB"
+
+msgid "Read"
+msgstr "Citesc"
+
+msgid "Recover deleted files"
+msgstr "Recuperarea fiºierelor ºterse"
+
+msgid "Regexp search"
+msgstr "Caut dupã o expresie regularã"
+
+msgid "Regular expression search"
+msgstr "Caut dupã o expresie regularã"
+
+msgid "Rename or move files"
+msgstr "Redenumesc sau mut fiºiere"
+
+msgid "Rename/Move..."
+msgstr "Rdenumesc/mut..."
+
+msgid "Rename/move.."
+msgstr "Redenumesc/mut..."
+
+msgid "Replac"
+msgstr "Înlocuiesc"
+
+msgid "Replace"
+msgstr "Înlocuiesc"
+
+msgid "Replace again\tF14"
+msgstr "Înlocuiesc din nou\tF14"
+
+msgid "Replace all"
+msgstr "Înlocuiesc toate"
+
+msgid "Replace...\tF4"
+msgstr "Înlocuiesc...\tF4"
+
+msgid "Rescan"
+msgstr "Re-scan"
+
+msgid "Rmdir"
+msgstr "Rmdir"
+
+msgid "Running "
+msgstr "Rulez "
+
+msgid "RxSrch"
+msgstr "Caut RX"
+
+msgid "S&kip"
+msgstr "S&ar"
+
+msgid "Save"
+msgstr "Salvez"
+
+msgid "Save\tF2"
+msgstr "Salvez\tF2"
+
+msgid "Save as...\tF12"
+msgstr "Salvez ca ºi...\tF12"
+
+msgid "Save setup"
+msgstr "Salvez configuraşia"
+
+msgid "Scheme program files"
+msgstr "Fiºiere program Scheme"
+
+msgid "Search"
+msgstr "Caut"
+
+msgid "Search again\tF17"
+msgstr "Caut din nou\tF17"
+
+msgid "Search again..."
+msgstr "Caut din nou..."
+
+msgid "Search for and replace text"
+msgstr "Caut ºi înlocuiesc text"
+
+msgid "Search...\tF7"
+msgstr "Caut...\tF7"
+
+msgid "Search: "
+msgstr "Caut: "
+
+msgid "Searching %s"
+msgstr "Caut %s"
+
+msgid "See the regex man page for how to compose a regular expression"
+msgstr ""
+"Consultaşi pagina de manual 'regex' pentru a ºti cum sã creaşi "
+"o expresie regularã"
+
+msgid "Select icon"
+msgstr "Selectez un icon"
+
+msgid "Selection history\tM-Ins"
+msgstr "Istoria selecşiilor\tM-Ins"
+
+msgid "Set &all"
+msgstr "Setez to&ate"
+
+msgid "Set a filter for the files"
+msgstr "Definesc un filtru pentru fiºiere"
+
+msgid "Show directory sizes"
+msgstr "Afiºez mãrimea directorilor"
+
+msgid "Size"
+msgstr "Mãrime"
+
+msgid "Size:      "
+msgstr "Mãrime:    "
+
+msgid "Skip"
+msgstr "Sar"
+
+msgid "Sort order"
+msgstr "Ordinea de sortare"
+
+msgid "Sort order..."
+msgstr "Ordinea de sortare..."
+
+msgid "Source"
+msgstr "Sursã"
+
+msgid "Special"
+msgstr "Special"
+
+msgid "Spreadsheet files"
+msgstr "Fiºiers de calcul tabelar"
+
+msgid "Start at:"
+msgstr "Încep la:"
+
+msgid "Start record macro\tC-r"
+msgstr "Încep înregistrarea unei combinaşii\tC-r"
+
+msgid "Static"
+msgstr "Static"
+
+msgid "Stopped"
+msgstr "Oprit"
+
+msgid "String search"
+msgstr "Caut ºir"
+
+msgid "Subgroup - press ENTER to see list"
+msgstr "Subgrup - apasã ENTER ca sã vezi lista"
+
+msgid "Symbolic link filename:"
+msgstr "Numele legãturii simbolice:"
+
+msgid "Symlink..."
+msgstr "Legãturã Simbolicã..."
+
+msgid "Target"
+msgstr "Destinaşie"
+
+msgid "Target file \"%s\" already exists!"
+msgstr "Fiºierul destinaşie \"%s\" existã deja!"
+
+msgid "Text/Document files"
+msgstr "Documente text"
+
+msgid "The GNOME edition of the Midnight Commander file manager."
+msgstr "Edişia GNOME a managerului de fiºiere Midnight Comander."
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Întârziere la eliberarea SFV:"
+
+msgid "Title"
+msgstr "Titlu"
+
+msgid "Toggle insert/overwrite\tIns"
+msgstr "Schimb insert/suprascriere\tIns"
+
+msgid ""
+"Type `exit' to return to the Midnight Commander\n"
+"\r\n"
+"\r"
+msgstr ""
+"Apãsaşi `exit' pentru revenire în Midnight Commander\n"
+"\r\n"
+"\r"
+
+msgid "Type writer wrap"
+msgstr "Aranjare \"maºinã de scris\""
+
+msgid "Un-selects a group of marked files"
+msgstr "Deselecteazã un grup de fiºiere marcate"
+
+msgid "Unknown"
+msgstr "Necunoscut"
+
+msgid "Unselect group by pattern..."
+msgstr "Deselectare grup dupã model..."
+
+msgid "Usage: fixhlp <width> <tocname>\n"
+msgstr "Utilizare: fixhlp <lãşime> <subiect>\n"
+
+msgid "Use SPACE to change"
+msgstr "Apãsaşi SPAŞIU pentru"
+
+msgid "User"
+msgstr "Utilizator"
+
+msgid "Video/animation files"
+msgstr "Fiºiers animaşie/video"
+
+msgid "View"
+msgstr "Vãd"
+
+msgid "View file"
+msgstr "Vãd fiºier"
+
+msgid "Virtual FS..."
+msgstr "SF Virtual..."
+
+msgid "Virtual File System settings"
+msgstr "Configuraşia Sistemului de Fiºiere Virtual"
+
+msgid "Warning: Searching backward can be slow"
+msgstr "Atenşie: cãutarea înapoi poate fi înceatã"
+
+msgid "Window"
+msgstr "Fereastrã"
+
+msgid "Wrap"
+msgstr "Aranjare"
+
+msgid "Wrap mode"
+msgstr "Mod de aranjare"
+
+msgid "Write"
+msgstr "Scriu"
+
+msgid "a&Bout...            "
+msgstr "Despre...            "
+
+msgid "abort"
+msgstr "stop"
+
+msgid "advanced cho&Wn"
+msgstr "cho&Wn avansat"
+
+msgid "all the directories "
+msgstr "toşi directorii "
+
+msgid "an option, ARROW KEYS"
+msgstr "schimbare opşiuni, SÃGEŞILE"
+
+msgid "and T or INS to mark"
+msgstr "ºi T sau INS pentru marcare"
+
+msgid "c&Hmod           C-x c"
+msgstr "c&Hmod           C-x c"
+
+msgid "c&Onfirmation..."
+msgstr "c&Onfirmare..."
+
+msgid "cancel"
+msgstr "anulez"
+
+msgid "case sensi&tive"
+msgstr "res&Pect capitalizarea "
+
+msgid "cd"
+msgstr "cd"
+
+msgid "ch&Own           C-x o"
+msgstr "ch&Own           C-x o"
+
+msgid "command &History"
+msgstr "&Istoria comenzilor "
+
+msgid "copy to &File...     "
+msgstr "copiez în &Fiºier... "
+
+msgid "copy to &File...  C-f"
+msgstr "copiez în &Fiºier... C-f"
+
+msgid "delete macr&O...            "
+msgstr "ºterg c&ombinaşie...        "
+
+msgid "di&Rectory hotlist    C-\\"
+msgstr "lista rapidã de di&Rectoare    C-\\"
+
+msgid "directories"
+msgstr "directoare"
+
+msgid "directory"
+msgstr "director"
+
+msgid "e&Xit              F10"
+msgstr "&Ieºire            F10"
+
+msgid "edit s&Ymlink  C-x C-s"
+msgstr "edit leg sim&B C-x C-s"
+
+msgid "execute/search by group"
+msgstr "execuşie/cãutare de grup"
+
+msgid "execute/search by others"
+msgstr "execuşie/cãutare de alşii"
+
+msgid "execute/search by owner"
+msgstr "execuşie/cãutare de propr."
+
+msgid "exit"
+msgstr "ies"
+
+msgid "file"
+msgstr "fiºier"
+
+msgid "files"
+msgstr "fiºiere"
+
+msgid "files/directories"
+msgstr "fiºiere/directoare"
+
+msgid "fixhlp: Cannot open toc for writing"
+msgstr "fixhlp: Nu pot deschide indexul pentru scriere"
+
+msgid "follow &Links"
+msgstr "urmez &Legãturile"
+
+msgid "format p&Aragraph        M-p"
+msgstr "formatez p&Aragraful     M-p"
+
+msgid "ftp anonymous password:"
+msgstr "parola ftp anonim:"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "durata depozitului ftpfs:"
+
+msgid "group"
+msgstr "grup"
+
+msgid "help"
+msgstr "ajutor"
+
+msgid "if &Size differs"
+msgstr "dacã mã&Rimea diferã"
+
+msgid "insert &Date/time           "
+msgstr "inserez &Data/ora           "
+
+msgid "insert &Literal...       C-q"
+msgstr "inserez un &Literal...   C-q"
+
+msgid "key '%d 0': "
+msgstr "tasta '%d 0': "
+
+msgid "mc.ext will be used for this moment."
+msgstr "mc.ext va fi utilizat pentru acest moment."
+
+msgid "no"
+msgstr "nu"
+
+msgid "ok"
+msgstr "ok"
+
+msgid "other"
+msgstr "alşii"
+
+msgid "owner"
+msgstr "proprietar"
+
+msgid "pe&Rmissions"
+msgstr "d&Repturi"
+
+msgid "preserve &Attributes"
+msgstr "pãstrez &Atributele"
+
+msgid "read by group"
+msgstr "citire de grup"
+
+msgid "read by others"
+msgstr "citire de alşii"
+
+msgid "read by owner"
+msgstr "citire de proprietar"
+
+msgid "reverse selec&Tion M-*"
+msgstr "inversez selec&Şia M-*"
+
+msgid "ro&Tating dash"
+msgstr "linie ro&Tativã"
+
+msgid "save &As...       F12"
+msgstr "Salvez ca ºi...   F12"
+
+msgid "search &Again     F17"
+msgstr "c&Aut din nou     F17"
+
+msgid "sec"
+msgstr "sec"
+
+msgid "select &Group      M-+"
+msgstr "selectez &Grup     M-+"
+
+msgid "set group ID on execution"
+msgstr "setez ID grup la execuşie"
+
+msgid "set user ID on execution"
+msgstr "setez ID propr. la exec"
+
+msgid "show directory s&Izes"
+msgstr "af&Iºez mãrimea directorilor"
+
+msgid "sor&T...                 M-t"
+msgstr "sor&Tez...               M-t"
+
+msgid "sticky bit"
+msgstr "bitul lipicios"
+
+msgid "to move between options"
+msgstr "pentru navigare"
+
+msgid "to:"
+msgstr "cãtre:"
+
+msgid "toggle &Ins/overw Ins"
+msgstr "schimb &Inserez/suprascriu Ins"
+
+msgid "u&Nselect group    M-\\"
+msgstr "deselecte&Z grup   M-\\"
+
+msgid "write by group"
+msgstr "scriere de grup"
+
+msgid "write by others"
+msgstr "scriere de alşii"
+
+msgid "write by owner"
+msgstr "scriere de proprietar"
+
+msgid "yes"
+msgstr "da"
+
+msgid "Created:   %s"
+msgstr "Creat:     %s"
+
+msgid "Accessed:  %s"
+msgstr "Accesat:   %s"
+
+msgid " &Left "
+msgstr " &Stânga "
+
+msgid " &Right "
+msgstr " &Dreapta "
+
+msgid " &File "
+msgstr " &Fiºiere "
+
+msgid "Vie&w file...         "
+msgstr "Vãd fiºier...         "
+
+msgid "&Quick cd          M-c"
+msgstr "c&D Rapid          M-c"
+
+msgid " &Command "
+msgstr " &Comandã "
+
+msgid "&Directory tree"
+msgstr "Arborele de &Directoare"
+
+msgid "&Find file            M-?"
+msgstr "Caut &Fiºier                   M-?"
+
+msgid "switch &Panels on/off C-o"
+msgstr "acti&Vez/deactivez panourile   C-o"
+
+msgid "s&Wap panels          C-u"
+msgstr "&Schimb panourile              C-u"
+
+msgid "e&Xternal panelize    C-x !"
+msgstr "panelare e&Xterioarã         C-x !"
+
+msgid "&Active VFS list      C-x a"
+msgstr "Lista VFS &Active            C-x a"
+
+msgid "&Background jobs      C-x j"
+msgstr "Sarcini de funda&L           C-x j"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Rec&Uperez fiºiere (doar ext2fs)"
+
+msgid "&Display bits..."
+msgstr "&Bişi afiºaj..."
+
+msgid "learn &Keys..."
+msgstr "învãş &Tastele..."
+
+msgid " &Options "
+msgstr " &Opşiuni "
+
+msgid " &Command "
+msgstr " &Comandã "
+
+msgid "&Menu file edit"
+msgstr "Editare fiºier &Meniuri"
+
+msgid "&Extension file edit"
+msgstr "Editare fiºier &Extensii"
+
+msgid "&Quick view     C-x q"
+msgstr "&Vedere rapidã   C-x q"
+
+msgid "&Rescan         C-r"
+msgstr "&Re-scanez         C-r"
+
+msgid "Free nodes %d (%d%%) of %d"
+msgstr "Noduri libere %d (%d%%) of %d"
+
+msgid "Type:      %s "
+msgstr "Tip:       %s "
+
+msgid "Device:    %s"
+msgstr "Dispozitiv:%s"
+
+msgid "Modified:  %s"
+msgstr "Modificat: %s"
+
+msgid "RenMov"
+msgstr "RedMut"
+
+msgid "Thank you for using GNU Midnight Commander"
+msgstr "Vã mulşumim cã folosişi GNU Midnight Commander"
+
+msgid "Create a new Directory"
+msgstr "Creez un nou Director"
+
+msgid "Password:"
+msgstr "Parola:"
+
+msgid " Configure options "
+msgstr " Opşiuni configurare "
+
+msgid " Panel options "
+msgstr " Opşiuni panou "
+
+msgid " Pause after run... "
+msgstr " Pauzã dupã rulare... "
+
+msgid "&Fast dir reload"
+msgstr "încãrcare director ra&Pidã"
+
+msgid "mi&X all files"
+msgstr "mi&Xez toate fiºierele"
+
+msgid "&Drop down menus"
+msgstr "meniuri &Drop down"
+
+msgid "ma&Rk moves down"
+msgstr "ma&Rchez mutã în jos"
+
+msgid "show &Hidden files"
+msgstr "arãt fiºierele a&Scunse"
+
+msgid "show &Backup files"
+msgstr "arãt fiºierele &Backup"
+
+msgid "alwa&Ys"
+msgstr "întotdeauna"
+
+msgid "on dumb &Terminals"
+msgstr "pe &Terminale proaste"
+
+msgid "safe de&Lete"
+msgstr "ºter&Gere sigurã"
+
+msgid "cd follows lin&Ks"
+msgstr "'&Cd' urmeazã legãturile"
+
+msgid "advanced cho&Wn"
+msgstr "cho&Wn avansat"
+
+msgid "l&Ynx-like motion"
+msgstr "miºcare ca ºi l&Ynx"
+
+msgid "rotatin&G dash"
+msgstr "linie &Rotitoare"
+
+msgid "co&Mplete: show all"
+msgstr "co&Mpletare: arãt toate"
+
+msgid "&Use internal view"
+msgstr "Folosesc viz&Ualizatorul intern"
+
+msgid "use internal ed&It"
+msgstr "folosesc ed&Itorul intern"
+
+msgid "auto m&Enus"
+msgstr "auto m&Eniuri"
+
+msgid "shell &Patterns"
+msgstr "modele (pattern) shell"
+
+msgid "Compute &Totals"
+msgstr "calculez &Totalurile"
+
+msgid "&Verbose operation"
+msgstr "operaşii descripti&Ve"
+
+msgid " with source mask:"
+msgstr " cu mascã sursã:"
+
+msgid "Source date: %s, size %d"
+msgstr "Data sursei     : %s, mãrime %d"
+
+msgid "Target date: %s, size %d"
+msgstr "Data destinaşiei: %s, mãrime %d"
+
+msgid "ap&Pend"
+msgstr "adau&G"
+
+msgid "&Reget"
+msgstr "&Readuc"
+
+msgid "Overwrite all targets?"
+msgstr "Suprascriu toate desinaşiile?"
+
+msgid "al&L"
+msgstr "&Toate"
+
+msgid "&Update"
+msgstr "cele &Vechi"
+
+msgid "non&E"
+msgstr "&Niciuna"
+
+msgid "Overwrite this target?"
+msgstr "Suprascriu aceastã destinaşie?"
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Apãsaşi toate tastele menşionate aici. Dupã aceea, verificaşi"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "care nu sunt marcat cu OK. Apãsaşi SPAŞIU pe tasta lipsã,"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "sau daşi click cu mouse-ul pentru a o defini. Navigaşi cu Tab."
+
+msgid " Panel split "
+msgstr " Împãrşire panou "
+
+msgid " Highlight... "
+msgstr " Iluminare... "
+
+msgid "output lines"
+msgstr "linii ieºire"
+
+msgid "&Horizontal"
+msgstr "orizonta&Lã"
+
+msgid "&Vertical"
+msgstr "&Verticalã"
+
+msgid "&Xterm hintbar"
+msgstr "barã ajutor &Xterm"
+
+msgid "h&Intbar visible"
+msgstr "barã ajutor v&Izibilã"
+
+msgid "&Keybar visible"
+msgstr "bara taste vi&Zibilã"
+
+msgid "command &Prompt"
+msgstr "&Prompter comandã"
+
+msgid "show &Mini status"
+msgstr "arãt &Mini status"
+
+msgid "menu&Bar visible"
+msgstr "&Bara meniu vizibilã"
+
+msgid "&Equal split"
+msgstr "împãrşire &Egalã"
+
+msgid "&File types"
+msgstr "tipul &Fiºierelor"
+
+msgid "F&ull 8 bits input"
+msgstr "int&Rare completã 8 bişi"
+
+msgid " Display bits "
+msgstr " Bişi afiºaj "
+
+msgid " Learn keys "
+msgstr " Învãş tastele "
+
+msgid "Learn keys"
+msgstr "Învãş tastele"
+
+msgid "* on keypad"
+msgstr "* pe keypad"
+
+msgid "+ on keypad"
+msgstr "+ pe keypad"
+
+msgid "- on keypad"
+msgstr "- pe keypad"
+
+msgid "Completion/M-tab"
+msgstr "Completare/Alt-tab"
+
+msgid "Pane&lize"
+msgstr "pane&Lizez"
+
+msgid " External panelize "
+msgstr " Panelare externã "
+
+msgid "External panelize"
+msgstr "Panelare externã"
+
+msgid "&Thorough"
+msgstr "comple&Tã"
+
+msgid "&Quick"
+msgstr "&Rapidã"
+
+msgid " Top level group "
+msgstr " Grupul pãrinte "
+
+msgid "Change &To"
+msgstr "Schimb &La"
+
+msgid "&Add current"
+msgstr "&Adaug curent"
+
+msgid "&Up"
+msgstr "&Sus"
+
+msgid " Enter device (without /dev/) to undelete\n"
+"   files on: (F1 for details)"
+msgstr " Introduceşi perifericul (fãra /dev/) pentru\n"
+"   recuperare: (F1 pentru detalii)"
+
+msgid " Undelete files on an ext2 file system "
+msgstr " Recuperez fiºiere pe un sistem ext2 de fiºiere "
+
+msgid "user &Mini status"
+msgstr "&Mini status utilizator"
+
+msgid " Filename:"
+msgstr " Nume fiºier:"
+
+msgid " View file "
+msgstr " Vizualizez fiºier "
+
+msgid "&Add new"
+msgstr "&Adaug nou"
+
+msgid "  [grow]"
+msgstr "[creºte]"
+
+msgid "a&ll"
+msgstr "&Toate"
+
+msgid "\n   Directory not empty.   \n   Delete it recursively? "
+msgstr "\n   Directorul nu exte gol.\n   Îl ºterg recursiv? "
+
+msgid " Delete: "
+msgstr " ªtergere: "
+
