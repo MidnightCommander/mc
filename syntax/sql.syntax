@@ -47,8 +47,8 @@ context default
     keyword whole Constraint yellow
     keyword whole CONSTRAINTS yellow
     keyword whole CONTINUE yellow
-    keyword whole CORRESPONDING yellow
     keyword whole COPY yellow
+    keyword whole CORRESPONDING yellow
     keyword whole CREATE yellow
     keyword whole CROSS yellow
     keyword whole CURRENT yellow
@@ -59,6 +59,7 @@ context default
     keyword whole CURSOR yellow
     keyword whole DATABASE yellow
     keyword whole DATE yellow
+    keyword whole DATETIME yellow
     keyword whole DAY yellow
     keyword whole DEALLOCATE yellow
     keyword whole DEC yellow
@@ -208,11 +209,13 @@ context default
     keyword whole TABLE yellow
     keyword whole TEMPLATE yellow
     keyword whole TEMPORARY yellow
+    keyword whole TEXT yellow
     keyword whole THEN yellow
     keyword whole TIME yellow
     keyword whole TIMESTAMP yellow
     keyword whole TIMEZONE_HOUR yellow
     keyword whole TIMEZONE_MINUTE yellow
+    keyword whole TINYINT yellow
     keyword whole TO yellow
     keyword whole TRAILING yellow
     keyword whole TRANSACTION yellow
@@ -222,8 +225,11 @@ context default
     keyword whole UNION yellow
     keyword whole UNIQUE yellow
     keyword whole UNKNOWN yellow
+    keyword whole UNSIGNED yellow
     keyword whole UPDATE yellow
     keyword whole USAGE yellow
+    keyword whole USE yellow
+    keyword whole USER yellow
     keyword whole USING yellow
     keyword whole VALUE yellow
     keyword whole VALUES yellow
@@ -237,7 +243,6 @@ context default
     keyword whole WORK yellow
     keyword whole WRITE yellow
     keyword whole YEAR yellow
-    keyword whole USER yellow
     keyword whole ZONE yellow
 											    
     keyword whole absolute yellow
@@ -282,8 +287,10 @@ context default
     keyword whole connect yellow
     keyword whole connection yellow
     keyword whole constraint yellow
+    keyword whole constraint yellow
     keyword whole constraints yellow
     keyword whole continue yellow
+    keyword whole copy yellow
     keyword whole corresponding yellow
     keyword whole create yellow
     keyword whole cross yellow
@@ -293,7 +300,9 @@ context default
     keyword whole current_timestamp yellow
     keyword whole current_user yellow
     keyword whole cursor yellow
+    keyword whole database yellow
     keyword whole date yellow
+    keyword whole datetime yellow
     keyword whole day yellow
     keyword whole deallocate yellow
     keyword whole dec yellow
@@ -313,6 +322,7 @@ context default
     keyword whole double yellow
     keyword whole drop yellow
     keyword whole else yellow
+    keyword whole encoding yellow
     keyword whole end yellow
     keyword whole end-exec yellow
     keyword whole escape yellow
@@ -362,6 +372,7 @@ context default
     keyword whole isolation yellow
     keyword whole join yellow
     keyword whole key yellow
+    keyword whole key yellow
     keyword whole language yellow
     keyword whole last yellow
     keyword whole leading yellow
@@ -405,6 +416,7 @@ context default
     keyword whole prepare yellow
     keyword whole preserve yellow
     keyword whole primary yellow
+    keyword whole primary yellow
     keyword whole prior yellow
     keyword whole privileges yellow
     keyword whole procedure yellow
@@ -423,6 +435,7 @@ context default
     keyword whole second yellow
     keyword whole section yellow
     keyword whole select yellow
+    keyword whole sequence yellow
     keyword whole session yellow
     keyword whole session_user yellow
     keyword whole set yellow
@@ -437,6 +450,7 @@ context default
     keyword whole substring yellow
     keyword whole system_user yellow
     keyword whole table yellow
+    keyword whole template yellow
     keyword whole temporary yellow
     keyword whole text yellow
     keyword whole then yellow
@@ -444,6 +458,7 @@ context default
     keyword whole timestamp yellow
     keyword whole timezone_hour yellow
     keyword whole timezone_minute yellow
+    keyword whole tinyint yellow
     keyword whole to yellow
     keyword whole trailing yellow
     keyword whole transaction yellow
@@ -453,8 +468,11 @@ context default
     keyword whole union yellow
     keyword whole unique yellow
     keyword whole unknown yellow
+    keyword whole unsigned yellow
     keyword whole update yellow
     keyword whole usage yellow
+    keyword whole use yellow
+    keyword whole user yellow
     keyword whole using yellow
     keyword whole value yellow
     keyword whole values yellow
