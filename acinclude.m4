@@ -39,8 +39,6 @@ dnl MC_VFS_CHECKS
 dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
 dnl     Sets MC_VFS_LIBS to libraries required
-dnl     Sets termnet  to true or false depending on whether it is required.
-dnl        If yes, defines USE_TERMNET.
 dnl     Sets vfs_flags to "pretty" list of vfs implementations we include.
 dnl     Sets shell variable use_vfs to yes (default, --with-vfs) or
 dnl        "no" (--without-vfs).
@@ -157,20 +155,6 @@ AC_DEFUN([MC_WITH_VFS],[
   )
   fi
 
-  dnl
-  dnl The termnet support
-  dnl
-  termnet=false
-  AC_ARG_WITH(termnet,
-	  [--with-termnet             If you want a termified net support],[
-	  if test x$withval = xyes; then
-		  AC_DEFINE(USE_TERMNET, 1,
-			    [Define to enable `term' firewall support])
-		  termnet=true		
-	  fi
-  ])
-
-  TERMNET=""
   AC_DEFINE(USE_VFS, 1, [Define to enable VFS support])
   if $use_net_code; then
      AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])
@@ -178,12 +162,8 @@ AC_DEFUN([MC_WITH_VFS],[
   mcserv=
   if test $have_socket = yes; then
      mcserv="mcserv"
-     if $termnet; then
-	TERMNET="-ltermnet"
-     fi
   fi
 
-  AC_SUBST(TERMNET)
   AC_SUBST(mcserv)
 
 dnl FIXME:

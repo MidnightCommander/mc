@@ -116,9 +116,6 @@ the directory base where you installed the gpm package.
      =optional parameter, then the subshell support is turned off by
      default.  To turn it on, specify the `-U' option to the program.
 
-`--with-termnet'
-     Enables the network support with the Term package.
-
 `--with-tm-x-support'
      This option enables minimal X Window support in the text edition. It 
      enables MC to query the status of the modifiers CONTROL and SHIFT 

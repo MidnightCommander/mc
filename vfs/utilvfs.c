@@ -35,9 +35,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-#ifdef USE_TERMNET
-#include <termnet.h>
-#endif
 #include <errno.h>
 
 #include "utilvfs.h"

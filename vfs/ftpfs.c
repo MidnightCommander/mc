@@ -69,10 +69,6 @@ What to do with this?
 #include <arpa/telnet.h>
 #include <sys/param.h>
 
-#ifdef USE_TERMNET
-#include <termnet.h>
-#endif
-
 #include "utilvfs.h"
 
 #include "xdirentry.h"

@@ -38,10 +38,6 @@
 #endif
 #endif
 
-#ifdef USE_TERMNET
-#include <termnet.h>
-#endif
-
 #include <errno.h>
 #include "tcputil.h"
 #include "../src/dialog.h"	/* for message () */

@@ -35,9 +35,6 @@ static const char * const features [] =  {
 #   ifdef WITH_MCFS
     N_(", mcfs"),
 #   endif
-#   ifdef USE_TERMNET
-    N_(" (with termnet support)"),
-#   endif
 #   ifdef WITH_SMBFS
     N_(", smbfs"),
 #   endif

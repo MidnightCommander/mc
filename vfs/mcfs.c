@@ -39,10 +39,6 @@
 #include <netinet/in.h>		/* struct in_addr */
 #include <arpa/inet.h>
 
-#ifdef USE_TERMNET
-#include <termnet.h>
-#endif
-
 #include "utilvfs.h"
 
 #include "vfs.h"
