@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2000-11-04 01:37+0100\n"
-"PO-Revision-Date: 2000-11-04 01:43+0100\n"
+"POT-Creation-Date: 2000-12-05 17:58+0100\n"
+"PO-Revision-Date: 2000-12-05 18:00+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -897,7 +897,7 @@ msgstr "_Invertera markeringen"
 msgid "Reverses the list of tagged files"
 msgstr "Vänd listan av markerade filer"
 
-#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2085
+#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2081
 msgid "Search"
 msgstr "Sök"
 
@@ -1232,7 +1232,7 @@ msgid "Use default View action"
 msgstr "Använd standardmetod för att visa"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2081
+#: src/screen.c:2396 src/screen.c:2426 src/view.c:2077
 msgid "Edit"
 msgstr "Redigera"
 
@@ -1881,7 +1881,7 @@ msgstr "Gör backup -->"
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:861 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
 #: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: src/view.c:407 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
 msgid "&Cancel"
 msgstr "&Avbryt"
@@ -1983,7 +1983,7 @@ msgid " Save file "
 msgstr " Spara fil "
 
 #: gtkedit/editcmd.c:838 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2077
+#: src/view.c:2073
 msgid "Save"
 msgstr "Spara"
 
@@ -2075,7 +2075,7 @@ msgstr " Ange ordning för ersättningsargument, tex 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Ange ersättningssträng:"
 
-#: gtkedit/editcmd.c:1268 gtkedit/editcmd.c:1341 src/view.c:2000
+#: gtkedit/editcmd.c:1268 gtkedit/editcmd.c:1341 src/view.c:1992
 msgid " Enter search string:"
 msgstr " Ange söksträng:"
 
@@ -2087,8 +2087,8 @@ msgstr " Ersätt "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1355 gtkedit/editcmd.c:1585 gtkedit/editcmd.c:2320
-#: gtkedit/editcmd.c:2322 gtkedit/editcmd.c:2350 src/view.c:1528
-#: src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
+#: gtkedit/editcmd.c:2322 gtkedit/editcmd.c:2350 src/view.c:1518
+#: src/view.c:1615 src/view.c:1738 src/view.c:1956 src/view.c:1992
 msgid " Search "
 msgstr " Sök "
 
@@ -2271,13 +2271,13 @@ msgstr "Avbryt avsluta"
 
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "&Ja"
 
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "&Nej"
 
@@ -2307,7 +2307,7 @@ msgid " Cut to clipboard "
 msgstr " Klipp ut till klippbordet "
 
 #: gtkedit/editcmd.c:2736 gtkedit/editcmd.c:2740 gtkedit/editcmd.c:2745
-#: gtkedit/editcmd.c:2748 src/view.c:1915
+#: gtkedit/editcmd.c:2748 src/view.c:1903
 msgid " Goto line "
 msgstr " Gå till rad "
 
@@ -2873,7 +2873,7 @@ msgstr "Fel vid initiering.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2070
+#: src/view.c:2066
 msgid "Help"
 msgstr "Hjälp"
 
@@ -2893,7 +2893,7 @@ msgstr "Rullgardin"
 # får plats
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1738 src/view.c:2072 src/view.c:2094
+#: src/main.c:1738 src/view.c:2068 src/view.c:2090
 msgid "Quit"
 msgstr "Avsluta"
 
@@ -4678,7 +4678,7 @@ msgstr " Problem att läsa från barn "
 msgid "Finished"
 msgstr "Klar"
 
-#: src/find.c:561 src/view.c:1528
+#: src/find.c:561 src/view.c:1518
 #, c-format
 msgid "Searching %s"
 msgstr "Söker efter %s"
@@ -6213,7 +6213,7 @@ msgstr " Pipe misslyckades"
 msgid " Dup failed "
 msgstr " Dup misslyckades"
 
-#: src/view.c:403
+#: src/view.c:404
 msgid ""
 "File: \n"
 "\n"
@@ -6223,7 +6223,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:404
+#: src/view.c:405
 msgid ""
 "\n"
 "\n"
@@ -6233,27 +6233,27 @@ msgstr ""
 "\n"
 "har modifierats, vill du spara ändringarna?\n"
 
-#: src/view.c:406
+#: src/view.c:407
 msgid " Save changes "
 msgstr " Spara ändringar "
 
-#: src/view.c:448
+#: src/view.c:449
 msgid " Can't spawn child program "
 msgstr " Kan inte skapa barnprogram "
 
-#: src/view.c:457
+#: src/view.c:458
 msgid " Empty output from child filter "
 msgstr " Tom utmatning från barnfilter "
 
-#: src/view.c:462
+#: src/view.c:463
 msgid " Could not open file "
 msgstr " Kan inte öppna fil "
 
-#: src/view.c:477
+#: src/view.c:478
 msgid " Can't open file \""
 msgstr " Kan inte öppna fil \""
 
-#: src/view.c:484
+#: src/view.c:485
 msgid ""
 " Can't stat file \n"
 " "
@@ -6261,11 +6261,11 @@ msgstr ""
 " Kan inte inhämta status om fil \n"
 " "
 
-#: src/view.c:490
+#: src/view.c:491
 msgid " Can't view: not a regular file "
 msgstr " Kan inte visa: inte en vanlig fil "
 
-#: src/view.c:571
+#: src/view.c:572
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
@@ -6274,7 +6274,7 @@ msgstr ""
 " Kan inte öppna \"%s\"\n"
 " %s "
 
-#: src/view.c:580
+#: src/view.c:581
 #, c-format
 msgid ""
 " Can't stat \"%s\"\n"
@@ -6297,20 +6297,20 @@ msgstr "Offset 0x%08x"
 msgid "  [grow]"
 msgstr "  [väx]"
 
-#: src/view.c:1520
+#: src/view.c:1510
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Söker efter `%s'"
 
-#: src/view.c:1627 src/view.c:1750
+#: src/view.c:1615 src/view.c:1738
 msgid " Search string not found "
 msgstr " Söksträngen ej funnen "
 
-#: src/view.c:1789
+#: src/view.c:1777
 msgid " Invalid regular expression "
 msgstr " Ogiltigt reguljärt uttryck"
 
-#: src/view.c:1913
+#: src/view.c:1901
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6319,7 +6319,7 @@ msgstr ""
 " Det nuvarande radnumret är %d.\n"
 " Mata in det nya radnumret:"
 
-#: src/view.c:1935
+#: src/view.c:1923
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6328,73 +6328,73 @@ msgstr ""
 " Den aktuella adressen är 0x%lx.\n"
 " Mata in den nya adressen:"
 
-#: src/view.c:1937
+#: src/view.c:1925
 msgid " Goto Address "
 msgstr " Gå till adress "
 
-#: src/view.c:1968
+#: src/view.c:1956
 msgid " Enter regexp:"
 msgstr " Mata in regexp:"
 
-#: src/view.c:2073
+#: src/view.c:2069
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2073
+#: src/view.c:2069
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2074
+#: src/view.c:2070
 msgid "Goto"
 msgstr "Gå till"
 
-#: src/view.c:2074
+#: src/view.c:2070
 msgid "Line"
 msgstr "Linje"
 
-#: src/view.c:2077
+#: src/view.c:2073
 msgid "RxSrch"
 msgstr "RxSrch"
 
 # ?
-#: src/view.c:2080
+#: src/view.c:2076
 msgid "EdText"
 msgstr "EdText"
 
 # ?
-#: src/view.c:2080
+#: src/view.c:2076
 msgid "EdHex"
 msgstr "EdHex"
 
 # ?
-#: src/view.c:2082
+#: src/view.c:2078
 msgid "UnWrap"
 msgstr "UnWrap"
 
 # ?
-#: src/view.c:2082
+#: src/view.c:2078
 msgid "Wrap"
 msgstr "Wrap"
 
 # ?
-#: src/view.c:2085
+#: src/view.c:2081
 msgid "HxSrch"
 msgstr "HxSrch"
 
-#: src/view.c:2088
+#: src/view.c:2084
 msgid "Raw"
 msgstr "Rå"
 
-#: src/view.c:2088
+#: src/view.c:2084
 msgid "Parse"
 msgstr "Parsa"
 
 # ?
-#: src/view.c:2092
+#: src/view.c:2088
 msgid "Unform"
 msgstr "Oformera"
 
-#: src/view.c:2092
+#: src/view.c:2088
 msgid "Format"
 msgstr "Formera"
 
@@ -6831,95 +6831,95 @@ msgid " Could not set source routing (%s)"
 msgstr " Kan inte sätta \"source routing\" (%s)"
 
 # incomplete
-#: vfs/ftpfs.c:638
+#: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ogiltigt värdnamn."
 
-#: vfs/ftpfs.c:658
+#: vfs/ftpfs.c:657
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ogiltig värdadress."
 
-#: vfs/ftpfs.c:681
+#: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: skapar anslutning till %s"
 
-#: vfs/ftpfs.c:691
+#: vfs/ftpfs.c:690
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: anslutningen har avbrutits av användaren"
 
-#: vfs/ftpfs.c:693
+#: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: misslyckades att ansluta till servern: %s"
 
-#: vfs/ftpfs.c:734
+#: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Försöker igen... %d (Control-C för att avbryta)"
 
 # incomplete
-#: vfs/ftpfs.c:920
+#: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kan inte sätta upp passivt läge"
 
-#: vfs/ftpfs.c:996
+#: vfs/ftpfs.c:995
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: avbryter överföringen."
 
-#: vfs/ftpfs.c:998
+#: vfs/ftpfs.c:997
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: abort fel: %s"
 
-#: vfs/ftpfs.c:1003
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: abort kommandot misslyckades"
 
-#: vfs/ftpfs.c:1092 vfs/ftpfs.c:1191
+#: vfs/ftpfs.c:1091 vfs/ftpfs.c:1190
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD kommandot misslyckades."
 
-#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1109
+#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: kunde inte hitta filen som den symboliska länken pekar på"
 
-#: vfs/ftpfs.c:1160
+#: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
 msgstr "Analyserar en symbolisk länk..."
 
-#: vfs/ftpfs.c:1179
+#: vfs/ftpfs.c:1178
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Läser FTP-katalogen %s... %s%s"
 
-#: vfs/ftpfs.c:1180
+#: vfs/ftpfs.c:1179
 msgid "(strict rfc959)"
 msgstr "(strikt rfc959)"
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1180
 msgid "(chdir first)"
 msgstr "(chdir först)"
 
-#: vfs/ftpfs.c:1305
+#: vfs/ftpfs.c:1304
 msgid "ftpfs: failed"
 msgstr "ftpfs: misslyckades"
 
-#: vfs/ftpfs.c:1315
+#: vfs/ftpfs.c:1314
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
 
-#: vfs/ftpfs.c:1378
+#: vfs/ftpfs.c:1377
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: lagrar fil %d (%d)"
 
 #. This is place of next pointer
-#: vfs/ftpfs.c:1683
-msgid "File Tranfer Protocol (ftp)"
-msgstr "File Transfer Protocol (FTP)"
+#: vfs/ftpfs.c:1682
+msgid "File Transfer Protocol (ftp)"
+msgstr "File Transfer Protocol (ftp)"
 
-#: vfs/ftpfs.c:1796
+#: vfs/ftpfs.c:1795
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
