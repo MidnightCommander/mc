@@ -16,7 +16,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2000-05-15 20:23+0200\n"
+"POT-Creation-Date: 2000-05-19 22:06+0200\n"
 "PO-Revision-Date: 2000-04-20 17:22+0200\n"
 "Last-Translator: Martin Norbäck <d95mback@dtek.chalmers.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -93,7 +93,7 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
-"Oförmögen att %s\n"
+"Kan inte att %s\n"
 "\"%s\"\n"
 "med kommandot:\n"
 "\"%s\"%s"
@@ -132,7 +132,7 @@ msgstr "GNU Midnight Commander"
 
 #: gnome/gcmd.c:117
 msgid "The GNOME edition of the Midnight Commander file manager."
-msgstr "GNOME versionen av filhanterare Midnight Commander."
+msgstr "GNOME-versionen av filhanterare Midnight Commander."
 
 #: gnome/gcmd.c:290
 msgid "Sort By"
@@ -178,11 +178,11 @@ msgstr "Omvänd ordning."
 
 #: gnome/gcmd.c:395
 msgid "Enter name."
-msgstr "Mata in namn."
+msgstr "Ange namn."
 
 #: gnome/gcmd.c:401
 msgid "Enter label for command:"
-msgstr "Mata in etikett för kommando:"
+msgstr "Ange etikett för kommando:"
 
 #: gnome/gcmd.c:506
 msgid "Find all core files"
@@ -271,7 +271,7 @@ msgid ""
 "For example:\n"
 "*.png will select all png images"
 msgstr ""
-"Mata in ett filter för välja vilka filer som skall visas i panelvyn.\n"
+"Ange ett filter för välja vilka filer som skall visas i panelvyn.\n"
 "\n"
 "Till exempel:\n"
 "*.png kommer att välja alla png-filer"
@@ -279,7 +279,7 @@ msgstr ""
 #: gnome/gcmd.c:871
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr ""
-"Mata in ett reguljärt uttryck för att välja vilka filer som skall visas i "
+"Ange ett reguljärt uttryck för att välja vilka filer som skall visas i "
 "panelvyn."
 
 #: gnome/gcmd.c:917 src/cmd.c:540 src/cmd.c:591
@@ -292,7 +292,7 @@ msgstr "Skapar en skrivbordslänk"
 
 #: gnome/gcmd.c:963
 msgid "Enter the URL:"
-msgstr "Mata in URL:"
+msgstr "Ange URL:"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -349,7 +349,7 @@ msgstr "Typ"
 
 #: gnome/gcustom-layout.c:48
 msgid "User ID"
-msgstr "Användar ID"
+msgstr "Användar-id"
 
 #: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
@@ -683,7 +683,7 @@ msgstr "klar."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1823
 msgid "Password:"
 msgstr "Lösenord:"
 
@@ -861,7 +861,7 @@ msgstr "Visa katalogstorlek"
 
 #: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
-msgstr "Visa mängden använt diskutrymme i varje katalog"
+msgstr "Visa mängden utnyttjat diskutrymme i varje katalog"
 
 #: gnome/glayout.c:395
 msgid "Close window"
@@ -942,7 +942,7 @@ msgstr "_Redigera mime-typer..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
-msgstr "Redigera mime-typ-associationer"
+msgstr "Redigera MIME-typsassociationer"
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
@@ -1010,7 +1010,7 @@ msgstr ""
 "Du kör GNOME filhanterare som root.\n"
 "\n"
 "Som root kan det hända att du skadar ditt system om du inte är försiktig. "
-"GNOME filhanterare kommer inte att hindra dig från att göra det."
+"GNOMEs filhanterare kommer inte att hindra dig från att göra det."
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1042,7 +1042,7 @@ msgstr "Enhet %d"
 #: gnome/gmount.c:462
 #, c-format
 msgid "NFS dir %s"
-msgstr "NFS katalog %s"
+msgstr "NFS-katalog %s"
 
 #: gnome/gmount.c:466
 #, c-format
@@ -1103,20 +1103,20 @@ msgstr "Filstorlek:"
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " bytes"
-msgstr " bytes"
+msgstr " byte"
 
 #: gnome/gnome-file-property-dialog.c:252
 msgid " KBytes  ("
-msgstr " KBytes ("
+msgstr " KByte  ("
 
 #: gnome/gnome-file-property-dialog.c:253
 #: gnome/gnome-file-property-dialog.c:259
 msgid " bytes)"
-msgstr " bytes)"
+msgstr " byte)"
 
 #: gnome/gnome-file-property-dialog.c:258
 msgid " MBytes  ("
-msgstr " MBytes ("
+msgstr " MByte  ("
 
 #: gnome/gnome-file-property-dialog.c:266
 msgid "File Size: N/A"
@@ -1303,7 +1303,7 @@ msgstr "Du måste ge din fil ett namn"
 # detta kommer väl upp när man försöker ge filen ett tomt namn?
 #: gnome/gnome-file-property-dialog.c:1226
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr "Du måste ge din fil ett namn som inte INTE  innehåller ett '/' tecken"
+msgstr "Du måste ge din fil ett namn som inte innehåller ett '/' tecken"
 
 #: gnome/gnome-open-dialog.c:385
 #, c-format
@@ -1529,12 +1529,12 @@ msgstr "Sök: %s"
 #: gnome/gscreen.c:1643
 #, c-format
 msgid "%s bytes in %d file"
-msgstr "%s bytes i %d fil"
+msgstr "%s byte i %d fil"
 
 #: gnome/gscreen.c:1643
 #, c-format
 msgid "%s bytes in %d files"
-msgstr "%s bytes i %d filer"
+msgstr "%s byte i %d filer"
 
 #: gnome/gscreen.c:1669 src/screen.c:688
 msgid "<readlink failed>"
@@ -1632,12 +1632,12 @@ msgstr "Hoppa till ett specificerat radnummer"
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
-msgstr "_Bevaka fil"
+msgstr "_Övervaka fil"
 
 # filtillväxt är för långt
 #: gnome/gview.c:309
 msgid "Monitor file growing"
-msgstr "Bevaka hur en fil växer"
+msgstr "Övervaka hur en fil växer"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
@@ -1838,15 +1838,12 @@ msgstr "&Avbryt"
 
 #: gtkedit/editcmd.c:390
 msgid "Extension:"
-msgstr "Utökning:"
+msgstr "Ändelse:"
 
-# eller kanske suffix
-#. NLS ?
 #: gtkedit/editcmd.c:397
 msgid " Edit Save Mode "
 msgstr " Redigera sparläge "
 
-# urk låter som APM e.dy
 #: gtkedit/editcmd.c:525
 msgid " Save As "
 msgstr " Spara som "
@@ -1891,7 +1888,7 @@ msgstr " Radera makro "
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:681
 msgid " Error trying to open temp file "
-msgstr " Fel vid försök att öppna temporär fil "
+msgstr " Fel vid försök att öppna tillfällig fil "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:689 gtkedit/editcmd.c:750 gtkedit/editcmd.c:818
@@ -2028,15 +2025,15 @@ msgstr "&Skilj gemener/versaler"
 
 #: gtkedit/editcmd.c:1253
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Mata in ordning för ersättningsargument, tex 3,2,1,4 "
+msgstr " Ange ordning för ersättningsargument, tex 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1257
 msgid " Enter replacement string:"
-msgstr " Mata in ersättningssträng:"
+msgstr " Ange ersättningssträng:"
 
 #: gtkedit/editcmd.c:1261 gtkedit/editcmd.c:1334 src/view.c:2000
 msgid " Enter search string:"
-msgstr " Mata in söksträng:"
+msgstr " Ange söksträng:"
 
 #. Heads the 'Replace' dialog box
 #: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:1584 gtkedit/editcmd.c:1671
@@ -2054,11 +2051,11 @@ msgstr " Sök "
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1402
 msgid " Enter search text : "
-msgstr " Mata in söktext : "
+msgstr " Ange söktext : "
 
 #: gtkedit/editcmd.c:1409
 msgid " Enter replace text : "
-msgstr " Mata in ersättningstext : "
+msgstr " Ange ersättningstext : "
 
 #: gtkedit/editcmd.c:1412 gtkedit/editcmd.c:1413
 #, c-format
@@ -2067,12 +2064,12 @@ msgid ""
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
 "Du kan inte mata in reguljära uttryck med %s\n"
-"(inte \\1, \\2 som i 'sed'). Använd sedan \"Mata in...ordningen\""
+"(inte \\1, \\2 som i 'sed'). Använd sedan \"Ange...ordningen\""
 
 # får plats?
 #: gtkedit/editcmd.c:1415
 msgid " Enter argument (or substring) order : "
-msgstr " Mata in argument (eller delsträngs) ordning : "
+msgstr " Ange argument (eller delsträngs) ordning : "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1419 gtkedit/editcmd.c:1420
@@ -2080,7 +2077,7 @@ msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
-"Mata in ersättningsordningen för ditt reguljära\n"
+"Ange ersättningsordningen för ditt reguljära\n"
 "uttryck eller 'scanf' formatssträng, tex 3,1,2"
 
 #. The following are check boxes
@@ -2102,7 +2099,7 @@ msgid ""
 "to compose a regular expression"
 msgstr ""
 "För tips om hur man bygger reguljära\n"
-"uttryck. Se mansidan för 'regex'"
+"uttryck, se mansidan för 'regex'"
 
 #: gtkedit/editcmd.c:1440
 msgid " Backwards "
@@ -2142,7 +2139,7 @@ msgstr "Skapa bokmärken för alla funna rader"
 
 #: gtkedit/editcmd.c:1480
 msgid " Scanf expression "
-msgstr " Scanf uttryck "
+msgstr " Scanf-uttryck "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1482
@@ -2193,7 +2190,7 @@ msgstr " Fel i formatsträngen för ersättningar."
 #: gtkedit/editcmd.c:2240
 #, c-format
 msgid " %ld replacements made. "
-msgstr " %ld ersättningar gjorda. "
+msgstr " %ld strängar ersattes. "
 
 #: gtkedit/editcmd.c:2243 gtkedit/editcmd.c:2311 gtkedit/editcmd.c:2339
 msgid " Search string not found. "
@@ -3744,9 +3741,8 @@ msgstr "&Namn"
 
 #: src/dir.c:63
 msgid "&Extension"
-msgstr "&Suffix"
+msgstr "&Ändelse"
 
-# använd suffix istället för utökning här
 #: src/dir.c:64
 msgid "&Modify time"
 msgstr "&Modifierad senast"
@@ -3772,7 +3768,6 @@ msgstr "&Inod"
 msgid "&Type"
 msgstr "&Typ"
 
-# hmm om detta är suffix vad är då Extension
 #: src/dir.c:72
 msgid "&Links"
 msgstr "&Länkar"
@@ -4428,7 +4423,7 @@ msgstr "&Ingen"
 
 #: src/file.c:2260
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Skriv 'ja' om du VERKLIGEN vill radera "
+msgstr " Skriv \"ja\" om du VERKLIGEN vill radera "
 
 # hoppas att ja fungerar som svar KONTROLLERA!
 #: src/file.c:2262
@@ -6738,146 +6733,146 @@ msgid "Aborted transfer would be successful."
 msgstr "Avbruten överföring skulle ha varit lyckad."
 
 # ???
-#: vfs/ftpfs.c:318
+#: vfs/ftpfs.c:315
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Kopplar ned från %s"
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:373
 msgid " FTP: Password required for "
 msgstr " FTP: Lösenord behövs för "
 
-#: vfs/ftpfs.c:409
+#: vfs/ftpfs.c:402
 msgid " Proxy: Password required for "
 msgstr " Proxy: Lösenord behövs för "
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:428
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: sänder proxyn loginnamn"
 
 # ???
-#: vfs/ftpfs.c:439
+#: vfs/ftpfs.c:432
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: sänder proxyn användarlösenord"
 
 # ???
-#: vfs/ftpfs.c:443
+#: vfs/ftpfs.c:436
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: proxy autenticationen lyckades"
 
 # ???
-#: vfs/ftpfs.c:447
+#: vfs/ftpfs.c:440
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: ansluten till %s"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:457
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sänder loginnamn"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:462
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sänder användarlösenord"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:467
 msgid "ftpfs: logged in"
 msgstr "ftpfs: Inloggad"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:482
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Inloggningen felaktig för användare %s "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:514
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Kan inte sätta \"source routing\" (%s)"
 
 # incomplete
-#: vfs/ftpfs.c:647
+#: vfs/ftpfs.c:640
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ogiltigt värdnamn."
 
-#: vfs/ftpfs.c:667
+#: vfs/ftpfs.c:660
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ogiltig värdadress."
 
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:683
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: skapar anslutning till %s"
 
-#: vfs/ftpfs.c:700
+#: vfs/ftpfs.c:693
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: anslutningen har avbrutits av användaren"
 
-#: vfs/ftpfs.c:702
+#: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: misslyckades att ansluta till servern: %s"
 
-#: vfs/ftpfs.c:744
+#: vfs/ftpfs.c:736
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Försöker igen... %d (Control-C för att avbryta)"
 
 # incomplete
-#: vfs/ftpfs.c:930
+#: vfs/ftpfs.c:922
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: kan inte sätta upp passivt läge"
 
-#: vfs/ftpfs.c:1005
+#: vfs/ftpfs.c:997
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: avbryter överföringen."
 
-#: vfs/ftpfs.c:1007
+#: vfs/ftpfs.c:999
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: abort fel: %s"
 
-#: vfs/ftpfs.c:1012
+#: vfs/ftpfs.c:1004
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: abort kommandot misslyckades"
 
-#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1200
+#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD kommandot misslyckades."
 
-#: vfs/ftpfs.c:1111 vfs/ftpfs.c:1118
+#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: kunde inte hitta filen som den symboliska länken pekar på"
 
-#: vfs/ftpfs.c:1169
+#: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
 msgstr "Analyserar en symbolisk länk..."
 
-#: vfs/ftpfs.c:1188
+#: vfs/ftpfs.c:1180
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Läser FTP-katalogen %s... %s%s"
 
-#: vfs/ftpfs.c:1189
+#: vfs/ftpfs.c:1181
 msgid "(strict rfc959)"
 msgstr "(strikt rfc959)"
 
-#: vfs/ftpfs.c:1190
+#: vfs/ftpfs.c:1182
 msgid "(chdir first)"
 msgstr "(chdir först)"
 
-#: vfs/ftpfs.c:1287
+#: vfs/ftpfs.c:1279
 msgid "ftpfs: failed"
 msgstr "ftpfs: misslyckades"
 
-#: vfs/ftpfs.c:1297
+#: vfs/ftpfs.c:1289
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
 
-#: vfs/ftpfs.c:1360
+#: vfs/ftpfs.c:1352
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: lagrar fil %d (%d)"
 
-#: vfs/ftpfs.c:1775
+#: vfs/ftpfs.c:1767
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -7011,11 +7006,11 @@ msgstr ""
 msgid "Unexpected EOF on archive file"
 msgstr "Oväntad EOF i arkivfilen"
 
-#: vfs/tar.c:339 vfs/tar.c:346
+#: vfs/tar.c:336 vfs/tar.c:343
 msgid "Inconsistent tar archive"
 msgstr "Inkonsistensfel i tararkivet"
 
-#: vfs/tar.c:411
+#: vfs/tar.c:413
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -7026,31 +7021,31 @@ msgstr ""
 "%s\n"
 "ser inte ut att vara en tarfil"
 
-#: vfs/vfs.c:1151
+#: vfs/vfs.c:1141
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
 
-#: vfs/vfs.c:1794
+#: vfs/vfs.c:1784
 msgid "Could not parse:"
 msgstr "Kunde inte tolka:"
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1786
 msgid "More parsing errors will be ignored."
 msgstr "Resten av tolkningsfelen ignoreras."
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1786
 msgid "(sorry)"
 msgstr "(tyvärr)"
 
-#: vfs/vfs.c:1807
+#: vfs/vfs.c:1797
 msgid "Internal error:"
 msgstr " Internt fel:"
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1807
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes överförda)"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1808
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes överförda"
