@@ -1,3 +1,7 @@
+2002-01-24  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c: Don't include glib.h directly.
+
 2002-01-22  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/uzip: Fix unsafe printf.
