@@ -1,3 +1,9 @@
+2004-11-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* sldisply.c (SLtt_delete_nlines): Add boundary check.
+	(forward_cursor): Remove unneeded boundary check.
+	(tt_write): Remove unneeded cast.
+
 2004-11-09  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
         * include/slang.h (SLang_Version): Delete const qualifier for

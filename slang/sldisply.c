@@ -316,7 +316,7 @@ static void tt_write(char *str, unsigned int n)
 	ndiff = MAX_OUTPUT_BUFFER_SIZE - (int) (Output_Bufferp - Output_Buffer);
 	if (ndiff < n)
 	  {
-	     SLMEMCPY ((char *) Output_Bufferp, (char *) str, ndiff);
+	     SLMEMCPY ((char *) Output_Bufferp, str, ndiff);
 	     Output_Bufferp += ndiff;
 	     SLtt_flush_output ();
 	     n -= ndiff;
@@ -743,9 +743,7 @@ void SLtt_goto_rc(int r, int c)
 			  current table is not a G0, so we'll disable it. */
                        if (!QANSI_Console)
                        {
-		          s = buf;
-		          *s++ = '\b'; *s = 0;
-		          s = buf;
+		          s = "\b";
                        }
                        else
                        {
@@ -844,12 +842,19 @@ void SLtt_delete_nlines (int n)
    else
    /* get a new terminal */
      {
+	int t = n;
 	r1 = Scroll_r1;
 	curs = Cursor_r;
+
 	SLtt_set_scroll_region(curs, Scroll_r2);
 	SLtt_goto_rc(Scroll_r2 - Scroll_r1, 0);
-	SLMEMSET(buf, '\n', (unsigned int) n);
-	tt_write(buf, (unsigned int) n);
+	if (n > sizeof (buf))
+	    t = sizeof (buf);
+	SLMEMSET (buf, '\n', t);
+	do {
+	    tt_write (buf, (n < t) ? n : t);
+	    n -= t;
+	} while (n > 0);
 	/* while (n--) tt_putchar('\n'); */
 	SLtt_set_scroll_region(r1, Scroll_r2);
 	SLtt_goto_rc(curs, 0);
@@ -867,7 +872,7 @@ void SLtt_cls (void)
 	if (Reset_Color_String != NULL)
 	  tt_write_string (Reset_Color_String);
 	else
-	  tt_write_string ("\033[0m\033[m");
+	  tt_write ("\033[0m\033[m", 7);
      }
 
    SLtt_normal_video();
@@ -907,10 +912,10 @@ void SLtt_beep (void)
 #ifdef __linux__
 	else if (Linux_Console)
 	  {
-	     tt_write_string ("\033[?5h");
+	     tt_write ("\033[?5h", 5);
 	     SLtt_flush_output ();
 	     _SLusleep (50000);
-	     tt_write_string ("\033[?5l");
+	     tt_write ("\033[?5l", 5);
 	  }
 #endif
      }
@@ -1439,12 +1444,12 @@ void SLtt_normal_video (void)
 
 void SLtt_narrow_width (void)
 {
-   tt_write_string("\033[?3l");
+   tt_write ("\033[?3l", 5);
 }
 
 void SLtt_wide_width (void)
 {
-   tt_write_string("\033[?3h");
+   tt_write ("\033[?3h", 5);
 }
 
 /* Highest bit represents the character set. */
@@ -1607,8 +1612,6 @@ static void forward_cursor (unsigned int n, int row)
    if (n <= 4)
      {
 	SLtt_normal_video ();
-	if (n >= sizeof (buf))
-	  n = sizeof (buf) - 1;
 	SLMEMSET (buf, ' ', n);
 	buf[n] = 0;
 	write_string_with_care (buf);
