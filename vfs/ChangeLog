@@ -1,5 +1,8 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Don't link container.o into libvfs-mc.a - it's
+	not used.
+
 	* samba/aclocal.m4: Fix underquoting.
 	* samba/configure.in: Fix underquoting. Don't use loff_t as the
 	second argument to AC_CHECK_TYPE - it's not a builtin type.

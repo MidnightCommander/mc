@@ -163,7 +163,6 @@ SAMBA_DIST_UBIQX =		\
 	ubi_sLinkList.h
 
 NONETFILES = 			\
-	container.o		\
 	cpio.o			\
 	direntry.o		\
 	extfs.o 		\
