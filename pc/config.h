@@ -38,7 +38,6 @@
 #define NEEDS_DRIVE_H
 #define NEEDS_FCNTL_H
 
-#define USE_O_TEXT
 #define HAS_ACS_AS_PCCHARS
 #define NEEDS_CR_LF_TRANSLATION
 

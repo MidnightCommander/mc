@@ -1,5 +1,8 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h: Remove all references to O_TEXT, USE_O_TEXT and
+	MY_O_TEXT.
+
 	* edit.c: Use O_BINARY when opening files.
 	* editcmd.c: Likewise.
 	From Alexander Varakin <avarakin00@hotmail.com>

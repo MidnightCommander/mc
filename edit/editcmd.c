@@ -228,7 +228,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	/* FIXME:
 	 * Close for now because mc_mkstemps use pure open system call 
 	 * to create temporary file and it needs to be reopened by
-	 * VFS-aware mc_open() and MY_O_TEXT should be used.
+	 * VFS-aware mc_open().
 	 */
 	close (fd);
     } else

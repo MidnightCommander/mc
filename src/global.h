@@ -42,7 +42,7 @@
 #  define O_BINARY _O_BINARY
 #endif
 #ifdef __BEOS__
-  /* BeOS 5 has O_BINARY and O_TEXT, but they have no effect.  */
+  /* BeOS 5 has O_BINARY, but is has no effect.  */
 #  undef O_BINARY
 #endif
 /* On reasonable systems, binary I/O is the default.  */

@@ -323,15 +323,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 #define CPushFont(x,y)
 #define CPopFont()
 #define FIXED_FONT 1
-
-/* put OS2/NT/WIN95 defines here */
-
-#ifdef USE_O_TEXT
-#    define MY_O_TEXT O_TEXT
-#else
-#    define MY_O_TEXT 0
-#endif
-
 #define FONT_PIX_PER_LINE 1
 #define FONT_MEAN_WIDTH 1
      

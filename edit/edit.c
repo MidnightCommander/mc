@@ -136,12 +136,6 @@ char *edit_get_buffer_as_text (WEdit * e)
 }
 
 
-/* Note on CRLF->LF translation: */
-
-#if MY_O_TEXT
- #error "MY_O_TEXT is depreciated. CR_LF_TRANSLATION must be defined which does CR-LF translation internally. See note in source."
-#endif
-
 /* 
    The edit_open_file (previously edit_load_file) function uses
    init_dynamic_edit_buffers to load a file. This is unnecessary
