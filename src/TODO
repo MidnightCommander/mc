@@ -1,6 +1,11 @@
 Before 4.6.1
 ============
 
+Regression - revert and review last changes to edit/syntax.c.  Shell
+variables are not highlighted.
+
+Regression - restore tilde expansion, but do it properly this time.
+
 Cannot spell check unsaved files in the editor.
 
 Dynamic loading for libgpm, libext2fs.
@@ -39,10 +44,10 @@ Totals are not calculated when copying or moving a single directory.
 Totals should only be omitted for single files.
 
 Add support for mouse wheel with gpm.  Latest versions of gpm (1.20)
-have mose wheel support.
+have mouse wheel support.
 
 Recheck all mouse handlers, make sure that they check button number.  We
-don't wan't mouse scrolling to be interpreted as mouse click.
+don't want mouse scrolling to be interpreted as mouse click.
 
 Smooth mouse scrolling on panels.  Scrolling one page per step is too
 fast.
@@ -68,7 +73,7 @@ same line.
 Report errors in fish operations and recover from them.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
-avoid using a superlong line to redefine all colors.
+avoid using a super-long line to redefine all colors.
 
 Use separate colors for hotkeys in error dialogs.
 
