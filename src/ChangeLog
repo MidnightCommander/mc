@@ -1,3 +1,13 @@
+2003-10-28  Pavel Roskin  <proski@gnu.org>
+
+	* ext.c (regex_check_type): Use mc_getlocalcopy() instead of
+	piping first 8k to "file".  If the user selected the file, we
+	are likely to need the whole file.  Besides, mc_getlocalcopy()
+	on ftpfs and fish shares file cache with other VFS operations.
+	(get_file_type_pipe): Remove.
+	(mc_doublepopen): Likewise.
+	(mc_doublepclose): Likewise.
+
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c: Move mc_doublepopen() and mc_doublepclose() ...

@@ -320,178 +320,16 @@ get_file_type_local (char *filename, char *buf, int buflen)
 }
 
 
-#ifdef FILE_STDIN
-static struct sigaction ignore, save_intr, save_quit, save_stop;
-
-/* INHANDLE is a result of some mc_open call to any vfs, this function
-   returns a normal handle (to be used with read) of a pipe for reading
-   of the output of COMMAND with arguments ... (must include argv[0] as
-   well) which gets as its input at most INLEN bytes from the INHANDLE
-   using mc_read. You have to call mc_doublepclose to close the returned
-   handle afterwards. If INLEN is -1, we read as much as we can :) */
-static int
-mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command,
-		...)
-{
-    int pipe0[2], pipe1[2];
-    pid_t pid;
-
-#define closepipes() close(pipe0[0]);close(pipe0[1]);close(pipe1[0]);close(pipe1[1])
-
-    pipe (pipe0);
-    pipe (pipe1);
-    ignore.sa_handler = SIG_IGN;
-    sigemptyset (&ignore.sa_mask);
-    ignore.sa_flags = 0;
-
-    sigaction (SIGINT, &ignore, &save_intr);
-    sigaction (SIGQUIT, &ignore, &save_quit);
-    sigaction (SIGTSTP, &startup_handler, &save_stop);
-
-    switch (pid = fork ()) {
-    case -1:
-	closepipes ();
-	return -1;
-    case 0:{
-	    sigaction (SIGINT, &save_intr, NULL);
-	    sigaction (SIGQUIT, &save_quit, NULL);
-	    switch (pid = fork ()) {
-	    case -1:
-		closepipes ();
-		_exit (1);
-	    case 0:{
-#define MAXARGS 16
-		    int argno;
-		    char *args[MAXARGS];
-		    va_list ap;
-		    int nulldevice;
-
-		    nulldevice = open ("/dev/null", O_WRONLY);
-		    close (0);
-		    dup (pipe0[0]);
-		    close (1);
-		    dup (pipe1[1]);
-		    close (2);
-		    dup (nulldevice);
-		    close (nulldevice);
-		    closepipes ();
-		    va_start (ap, command);
-		    argno = 0;
-		    while ((args[argno++] = va_arg (ap, char *)) != NULL)
-			if (argno == (MAXARGS - 1)) {
-			    args[argno] = NULL;
-			    break;
-			}
-		    va_end (ap);
-		    execvp (command, args);
-
-		    /* If we are here exec has failed */
-		    _exit (0);
-		}
-	    default:
-		{
-		    char buffer[8192];
-		    int i;
-
-		    close (pipe0[0]);
-		    close (pipe1[0]);
-		    close (pipe1[1]);
-		    while ((i =
-			    mc_read (inhandle, buffer,
-				     (inlen == -1 || inlen > 8192)
-				     ? 8192 : inlen)) > 0) {
-			write (pipe0[1], buffer, i);
-			if (inlen != -1) {
-			    inlen -= i;
-			    if (!inlen)
-				break;
-			}
-		    }
-		    close (inhandle);
-		    close (pipe0[1]);
-		    while (waitpid (pid, &i, 0) < 0)
-			if (errno != EINTR)
-			    break;
-
-		    _exit (i);
-		}
-	    }
-	}
-    default:
-	*the_pid = pid;
-	break;
-    }
-    close (pipe0[0]);
-    close (pipe0[1]);
-    close (pipe1[1]);
-    return pipe1[0];
-}
-
-static int
-mc_doublepclose (int pipe, pid_t pid)
-{
-    int status = 0;
-
-    close (pipe);
-    waitpid (pid, &status, 0);
-    sigaction (SIGINT, &save_intr, NULL);
-    sigaction (SIGQUIT, &save_quit, NULL);
-    sigaction (SIGTSTP, &save_stop, NULL);
-
-    return status;
-}
-
-/*
- * Read file through VFS and feed is to the "file" command.
- * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
- */
-static int
-get_file_type_pipe (char *filename, char *buf, int buflen)
-{
-    int read_bytes = 0;
-
-    int pipehandle, remotehandle;
-    pid_t p;
-
-    remotehandle = mc_open (filename, O_RDONLY);
-    if (remotehandle != -1) {
-	/* 8192 is HOWMANY hardcoded value in the file-3.14
-	 * sources. Tell me if any other file uses larger
-	 * chunk from beginning
-	 */
-	pipehandle =
-	    mc_doublepopen (remotehandle, 8192, &p, "file", "file", "-",
-			    NULL);
-	if (pipehandle != -1) {
-	    int i;
-	    while ((i =
-		    read (pipehandle, buf + read_bytes,
-			  buflen - 1 - read_bytes)) > 0)
-		read_bytes += i;
-	    mc_doublepclose (pipehandle, p);
-	    buf[read_bytes] = 0;
-	}
-	mc_close (remotehandle);
-    } else {
-	return -1;
-    }
-
-    return (read_bytes > 0);
-}
-#endif				/* FILE_STDIN */
-
-
 /*
  * Invoke the "file" command on the file and match its output against PTR.
  * have_type is a flag that is set if we already have tried to determine
  * the type of that file.
- * Return 1 for match, 0 otherwise.
+ * Return 1 for match, 0 for no match, -1 errors.
  */
 static int
-regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
+regex_check_type (char *filename, char *ptr, int *have_type)
 {
     int found = 0;
-    int islocal;
 
     /* Following variables are valid if *have_type is 1 */
     static char content_string[2048];
@@ -502,27 +340,21 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	return 0;
     }
 
-    islocal = vfs_file_is_local (filename);
-
     if (!*have_type) {
+	char *realname;		/* name used with "file" */
+	char *localfile;
 	/* Don't repeate even unsuccessful checks */
 	*have_type = 1;
 
-	if (islocal) {
-	    got_data =
-		get_file_type_local (filename, content_string,
-				     sizeof (content_string));
-	} else
-#ifdef FILE_STDIN
-	{
-	    got_data =
-		get_file_type_pipe (filename, content_string,
-				    sizeof (content_string));
-	}
-#else
-	    /* Cannot use pipe, must make a local copy, not yet supported */
-	    return 0;
-#endif				/* !FILE_STDIN */
+	localfile = mc_getlocalcopy (filename);
+	if (!localfile)
+	    return -1;
+
+	realname = g_strdup (localfile);
+	got_data =
+	    get_file_type_local (localfile, content_string,
+				 sizeof (content_string));
+	mc_ungetlocalcopy (filename, localfile, 0);
 
 	if (got_data > 0) {
 	    char *pp;
@@ -533,28 +365,14 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	    if ((pp = strchr (content_string, '\n')) != 0)
 		*pp = 0;
 
-	    if (islocal) {
-		if (!strncmp (content_string, filename, file_len)) {
-		    /* Skip "filename: " */
-		    content_shift = file_len;
-		    if (content_string[content_shift] == ':') {
-			/* Solaris' file prints tab(s) after ':' */
-			for (content_shift++;
-			     content_string[content_shift] == ' '
-			     || content_string[content_shift] == '\t';
-			     content_shift++);
-		    }
-		}
-	    } else {
-		if (!strncmp (content_string, "standard input:", 15)) {
-		    /* Skip "standard input: " */
-		    for (content_shift = 15;
-			 content_string[content_shift] == ' ';
-			 content_shift++);
-		} else if (!strncmp (content_string, "/dev/stdin:", 11)) {
-		    /* Skip "/dev/stdin: " */
-		    for (content_shift = 11;
-			 content_string[content_shift] == ' ';
+	    if (!strncmp (content_string, realname, strlen (realname))) {
+		/* Skip "realname: " */
+		content_shift = strlen (realname);
+		if (content_string[content_shift] == ':') {
+		    /* Solaris' file prints tab(s) after ':' */
+		    for (content_shift++;
+			 content_string[content_shift] == ' '
+			 || content_string[content_shift] == '\t';
 			 content_shift++);
 		}
 	    }
@@ -562,6 +380,7 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	    /* No data */
 	    content_string[0] = 0;
 	}
+	g_free (realname);
     }
 
     if (got_data == -1) {
@@ -727,7 +546,7 @@ regex_command (char *filename, char *action, int *move_dir)
 	    } else if (!strncmp (p, "type/", 5)) {
 		int res;
 		p += 5;
-		res = regex_check_type (filename, file_len, p, &have_type);
+		res = regex_check_type (filename, p, &have_type);
 		if (res == 1)
 		    found = 1;
 		if (res == -1)
