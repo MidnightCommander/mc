@@ -1,3 +1,9 @@
+2002-07-25  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* mcserv.c [HAVE_MAD]: Include "../src/mad.c" at the end of
+	file to fix compilation.
+	(main): Add mad_init() and mad_finalize().
+	
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c: Don't use SUP.home, use SUP.cwdir.
