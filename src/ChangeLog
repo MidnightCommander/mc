@@ -1,5 +1,9 @@
 1998-12-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* main.c (main): Removed old, unused code.
+	(setup_panels_and_run_mc): Register the corba server here, not
+	before, as the program is not ready to accept any commands yet. 
+
 	* screen.c (panel_set_sort_order): New routine to set the sorting
 	mode.  
 	(panel_re_sort): New routine to force a resort on a panel.

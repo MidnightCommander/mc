@@ -2652,6 +2652,14 @@ static struct poptOption argument_table [] = {
     { NULL, 		0,			0, NULL, 0 }
 };
 
+void
+main_corba_register_server (void)
+{
+#ifdef HAVE_CORBA
+	corba_register_server ();
+#endif
+}
+
 static void
 handle_args (int argc, char *argv [])
 {
@@ -2668,7 +2676,6 @@ handle_args (int argc, char *argv [])
     orb = gnome_CORBA_init_with_popt_table (
 	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, GNORBA_INIT_SERVER_FUNC, &ev);
 
-    corba_register_server ();
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
 #endif
@@ -2798,16 +2805,12 @@ compatibility_move_mc_files (void)
 
 int main (int argc, char *argv [])
 {
-#ifndef OS2_NT
-    /* Backward compatibility: Gives up privileges in case someone
-       installed the mc as setuid */
-    setuid (getuid ());
-#endif
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
 
+    /* This is here to debug the CORBA async invocations */
     {
 	    volatile  int i = 1;
 
@@ -2819,6 +2822,13 @@ int main (int argc, char *argv [])
     init_groups ();
     
     OS_Setup ();
+
+    /* This variable is used by the subshell */
+    home_dir = getenv ("HOME");
+    if (!home_dir) {
+	    /* mc_home was computed by OS_Setup */
+	    home_dir = mc_home; 
+    }
 
     vfs_init ();
 
@@ -2904,16 +2914,6 @@ int main (int argc, char *argv [])
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
     
-    /* This variable is used by the subshell */
-    home_dir = getenv ("HOME");
-    if (!home_dir) {
-#ifndef OS2_NT
-    home_dir = PATH_SEP_STR;
-#else
-    home_dir = mc_home; /* LIBDIR, calculated in OS_Setup() */
-#endif
-    }
-
     compatibility_move_mc_files ();
     
 #   ifdef HAVE_X

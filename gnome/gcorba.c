@@ -107,7 +107,7 @@ static POA_GNOME_FileManagerFactory__vepv impl_GNOME_FileManagerFactory_vepv =
 
 impl_POA_GNOME_FileManagerFactory poa_filemanagerfactory_servant =
 {
-	{ NULL, &impl_GNOME_FileManagerWindow_vepv}, NULL
+	{ NULL, &impl_GNOME_FileManagerFactory_vepv}, NULL
 };
 
 GNOME_FileManagerFactory filemanagerfactory_server;
@@ -239,7 +239,7 @@ corba_register_server (void)
 	
 	v = goad_server_register (
 		NULL, filemanagerfactory_server,
-		"gmc_FileManagerFactory", "server", &ev);
+		"gmc_filemanager_factory", "server", &ev);
 
 	if (v != 0)
 		return;

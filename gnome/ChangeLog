@@ -1,3 +1,10 @@
+1998-12-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (create_panels): Register corba server here.
+
+	* gcorba.c: Fix a servant declaration to point to the correct
+	vepv. 
+
 1998-12-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (find_icon_by_drag_context): Made static.

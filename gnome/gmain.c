@@ -539,6 +539,8 @@ create_panels (void)
 	g_list_free (directory_list);
 #endif
 
+	main_corba_register_server ();
+
 	run_dlg (desktop_dlg);
 
 	/* shutdown gnome specific bits of midnight commander */
