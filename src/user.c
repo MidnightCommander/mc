@@ -173,6 +173,8 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     WPanel *panel;
     char *(*quote_func) (const char *, int);
     char *fname;
+    char *result;
+    char c_lc;
 
     if (c == '%')
 	return g_strdup ("%");
@@ -192,10 +194,10 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
     else
 	quote_func = fake_name_quote;
 
-    c = tolower (c);
+    c_lc = tolower (c);
     fname = panel->dir.list[panel->selected].fname;
 
-    switch (c) {
+    switch (c_lc) {
     case 'f':
     case 'p':
 	return (*quote_func) (fname, 0);
@@ -218,7 +220,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 		fname = (*quote_func) (file, 0);
 		g_free (file);
 		return fname;
-	    } else if (c == 'b') {
+	    } else if (c_lc == 'b') {
 		return strip_ext ((*quote_func) (fname, 0));
 	    }
 	    break;
@@ -255,13 +257,15 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 			    (*quote_func) (panel->dir.list[i].fname, 0));
 		    g_free (tmp);
 		    strcat (block, " ");
-		    if (c == 'u')
+		    if (c_lc == 'u')
 			do_file_mark (panel, i, 0);
 		}
 	    return block;
 	}			/* sub case block */
     }				/* switch */
-    return g_strdup ("%");
+    result = g_strdup ("% ");
+    result[1] = c;
+    return result;
 }
 
 /*
