@@ -59,9 +59,6 @@ What to do with this?
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
-#ifdef HAVE_SETSOCKOPT
-#    include <netinet/ip.h>	/* IP options */
-#endif
 #ifdef HAVE_ARPA_INET_H
 #include <arpa/inet.h>
 #endif
@@ -519,37 +516,6 @@ login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrc
     ERRNOR (EPERM, 0);
 }
 
-#ifdef HAVE_SETSOCKOPT
-static void
-setup_source_route (int socket, int dest)
-{
-    char buffer [20];
-    char *ptr = buffer;
-
-    if (!source_route)
-	return;
-    memset (buffer, 0, sizeof (buffer));
-    *ptr++ = IPOPT_LSRR;
-    *ptr++ = 3 + 8;
-    *ptr++ = 4;			/* pointer */
-
-    /* First hop */
-    memcpy (ptr, (char *) &source_route, sizeof (int));
-    ptr += 4;
-
-    /* Second hop (ie, final destination) */
-    memcpy (ptr, (char *) &dest, sizeof (int));
-    ptr += 4;
-    while ((ptr - buffer) & 3)
-	ptr++;
-    if (setsockopt (socket, IPPROTO_IP, IP_OPTIONS,
-		    buffer, ptr - buffer) < 0)
-	message_2s (1, MSG_ERROR, _(" Cannot set source routing (%s)"), unix_error_string (errno));
-}
-#else
-#define setup_source_route(x,y)
-#endif
-    
 static struct no_proxy_entry {
     char  *domain;
     void  *next;
@@ -705,7 +671,6 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
 	    g_free (host);
 	return -1;
     }
-    setup_source_route (my_socket, server_address.sin_addr.s_addr);
     
     print_vfs_message (_("ftpfs: making connection to %s"), host);
     if (free_host)
@@ -908,7 +873,6 @@ setup_passive (struct vfs_class *me, struct vfs_s_super *super, int my_socket, s
 
     memcpy (&(sa->sin_addr.s_addr), (void *)n, 4);
     memcpy (&(sa->sin_port), (void *)&n[4], 2);
-    setup_source_route (my_socket, sa->sin_addr.s_addr);
     if (connect (my_socket, (struct sockaddr *) sa, sizeof (struct sockaddr_in)) < 0)
 	return 0;
     return 1;

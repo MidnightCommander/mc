@@ -1,3 +1,8 @@
+2003-10-24  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (setup_source_route): Remove.  It's a badly
+	implemented hack that was never enabled.
+
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_find_entry_tree): Canonicalize path.
