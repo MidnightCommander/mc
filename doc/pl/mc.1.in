@@ -547,8 +547,8 @@ i
 .PP
 .\"NODE "    Listing Mode..."
 .SH "    Tryby wy¶wietlania (Listing modes)"
-Tryby wy¶wietlania s± u¿ywane do zmienia ustawieñ przy wy¶wietlaniu. Dostêpne
-s± cztery ró¿ne tryby:
+Tryby wy¶wietlania s± u¿ywane do zmienia ustawieñ przy wy¶wietlaniu.
+Dostêpne s± cztery ró¿ne tryby:
 .BR Full ,
 .BR Brief ,
 .B Long
@@ -556,38 +556,38 @@ i
 .BR User .
 Tryb "Full" pokazuje nazwê, rozmiar i czas modyfikacji pliku.
 .PP
-Tryb "Brief" pokazuje tylko nazwê pliku i ma dwie kolumny (dziêki
-temu mo¿e pokazywaæ nawet dwa razy wiêcej ni¿ inne tryby). Tryb "Long" jest
+Tryb "Brief" pokazuje tylko nazwê pliku i ma dwie kolumny (dziêki temu
+mo¿e pokazywaæ nawet dwa razy wiêcej ni¿ inne tryby). Tryb "Long" jest
 podobny do wyniku polecenia
 .BR "ls -l" .
 Zabiera on szeroko¶æ ca³ego ekranu.
 .PP
-Je¶li wybierzesz tryb "user" (u¿ytkownika), bêdziesz móg³ wybraæ w³asny sposób
-wy¶wietlania.
+Je¶li wybierzesz tryb "user" (u¿ytkownika), bêdziesz móg³ wybraæ w³asny
+sposób wy¶wietlania.
 .PP
 Tryb u¿ytkownika musi zaczynaæ siê od okre¶lenia wielko¶ci panelu. Mo¿e
-to byæ "half" (pó³) lub "full" (ca³y) i okre¶la, czy ma byæ widoczny jeden
-du¿y panel na ca³y ekran czy dwa mniejsze.
+to byæ "half" (pó³) lub "full" (ca³y) i okre¶la, czy ma byæ widoczny
+jeden du¿y panel na ca³y ekran czy dwa mniejsze.
 .PP
 Po rozmiarze panelu mo¿esz w³±czyæ tryb dwóch kolumn panelu. Robi siê
 to dodaj±c liczbê "2" do tekstu formatu.
 .PP
 Po tym wpisujesz ju¿ nazwy pól z podaniem opcjonalnej wielko¶ci.
 Wszystkie mo¿liwe pola jakich mo¿esz u¿yæ to:
-.PP
-.BR name ,
+.TP
+.B name
 wy¶wietla nazwê pliku.
-.PP
-.BR size ,
+.TP
+.B size
 wy¶wietla wielko¶æ pliku.
-.PP
-.BR bsize ,
+.TP
+.B bsize
 jest alternatyw± dla format
 .BR size .
 Wy¶wietla rozmiar plików, a dla katalogów po prostu wy¶wietla tekst
 "SUB-DIR" lub "UP--DIR".
-.PP
-.BR type ,
+.TP
+.B type
 wy¶wietla jednoznakowy opis typu pliku. Ten znak jest taki sam co ten
 wy¶wietlany prze komendê ls z flag± -F. Wy¶wietlana jest gwiazdka
 dla plików wykonywalnych,
@@ -595,48 +595,48 @@ uko¶nik dla katalogów, ma³pa (@) dla dowi±zañ, znak równo¶ci dla gniazd,
 minus dla urz±dzeñ niestniej±cych, znak plus dla urz±dzeñ istniej±cych,
 pionow± kreskê (|) dla kolejek FIFO, tyldê dla dowi±zañ
 symbolicznych, i wykrzyknik dla dowi±zañ wskazuj±cych na nieistniej±cy plik.
-.PP
-.BR mtime ,
+.TP
+.B mark
+Gwiazdka je¶li plik jest zaznaczony, spacja je¶li nie jest.
+.TP
+.B mtime
 czas ostatniej modyfikacji pliku.
-.PP
-.BR atime ,
+.TP
+.B atime
 czas ostatniego dostêpu do pliku.
-.PP
-.BR ctime ,
+.TP
+.B ctime
 czas utworzenia pliku.
-.PP
-.BR perm ,
+.TP
+.B perm
 tekst reprezentuj±cy aktualne uprawnienia do pliku.
-.PP
-.BR mode ,
+.TP
+.B mode
 warto¶æ (cyfrowa) przedstawiaj±ca prawa do pliku.
-.PP
-.BR nlink ,
+.TP
+.B nlink
 liczba dowi±zañ do pliku.
-.BR ngid ,
+.B ngid
 GID (numeryczny).
-.PP
-.BR nuid ,
+.TP
+.B nuid
 UID (numeryczny).
-.PP
-.BR owner ,
+.TP
+.B owner
 w³a¶ciciel pliku.
-.PP
-.BR group ,
+.TP
+.B group
 grupa pliku.
-.PP
-.BR inode ,
+.TP
+.B inode
 numer i-wêz³a pliku.
 .PP
 Mo¿esz równie¿ u¿ywaæ nastêpuj±cych znaków dla zmiany wy¶wietlania:
-.PP
-.BR space ,
+.TP
+.B space
 spacja w formacie wy¶wietlania.
-.PP
-.BR mark ,
-Gwiazdka je¶li plik jest zaznaczony, spacja je¶li nie jest.
-.PP
-.BR | ,
+.TP
+.B |
 Ten znak jest u¿ywany w celu dodania pionowej linii od formatu wy¶wietlania.
 .PP
 ¯eby wymusiæ szeroko¶æ pola, po prostu dodaj ':' a potem ilo¶æ znaków jakie
@@ -648,35 +648,37 @@ Na przyk³ad tryb
 .B Full
 wy¶wietla w formacie:
 .PP
-half type,name,|,size,|,mtime
+half type name | size | mtime
 .PP
 A format
 .B Long
 wy¶wietla w formacie:
 .PP
-full perm,space,nlink,space,owner,space,group,space,size,space,
-mtime,space,name
+full perm space nlink space owner space group space size space mtime
+space name
 .PP
 A to jest ca³kiem ³adny tryb u¿ytkownika:
 .PP
-half name,|,size:7,|,type,mode:3
+half name | size:7 | type mode:3
 .PP
 Panele mog± byæ równie¿ przestawione do nastêpuj±cych trybów:
 .TP
-.B "Info"
+.B Info
 Tryb info wy¶wietla informacjê o aktualnie zaznaczonym pliku i (je¶li
 to mo¿liwe) o systemie plików.
 .TP
-.B "Tree (drzewo)"
+.B Tree (drzewo)
 Widok drzewa jest ca³kiem podobny do widoku
-.IR "Drzewa katalogów" .
+.\"LINK2"
+Drzewa katalogów\&.
+.\"Directory Tree"
 Zobacz tê sekcjê je¶li chcesz siê dowiedzieæ czego¶ na ten temat.
 .TP
-.B "Quick View"
+.B Quick View
 W tym trybie, panele zostan± prze³±czone w tryb zredukowanego podgl±du
-wy¶wietlaj±cego zawarto¶æ aktualnego pliku. Je¶li zaznaczysz panel (klawiszem
-tab lub myszk±), bêdziesz mia³ dostêp do wiêkszo¶ci komend podgl±du.
-.PP
+wy¶wietlaj±cego zawarto¶æ aktualnego pliku. Je¶li zaznaczysz panel
+(klawiszem tab lub myszk±), bêdziesz mia³ dostêp do wiêkszo¶ci komend
+podgl±du.
 .\"NODE "    Sort Order..."
 .SH "    Porz±dek sortowania (Sort order...)"
 Istnieje osiem porz±dków sortowania. Przez: nazwê, rozszerzenie,
