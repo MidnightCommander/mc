@@ -570,6 +570,9 @@ char *canonicalize_pathname (char *path)
     int i, start;
     char stub_char;
 
+    if (!*path)
+	return path;
+
     stub_char = (*path == PATH_SEP) ? PATH_SEP : '.';
 
     /* Walk along path looking for things to compact. */

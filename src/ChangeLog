@@ -1,5 +1,8 @@
 2002-07-26  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (canonicalize_pathname): Don't extend empty path
+	to "." - it can corrupt memory.
+
 	* cmd.c (copymove_cmd_with_default): Remove, it's unused.
 	(copy_cmd_local): New function, copy within panel.
 	(ren_cmd_local): New function, rename within panel.
