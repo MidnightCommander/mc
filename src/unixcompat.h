@@ -24,5 +24,8 @@
 #ifndef minor
 # define minor(devnum) (((devnum) & 0xff)
 #endif
+#ifndef makedev
+# define makedev(major,minor) ((((major) & 0xff) << 8) | ((minor) & 0xff))
+#endif
 
 #endif
