@@ -473,7 +473,7 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
     } else 
 	strncpy (dest+still, txt, txtlen);
     
-    dest[len] = NULL;
+    dest[len] = '\0';
     
     return (dest + len);
 }
