@@ -243,7 +243,8 @@ static menu_entry CmdMenuEmacs[] =
     {' ', N_("format p&Aragraph        M-p"), 'a', menu_format_paragraph},
     {' ', N_("'ispell' s&Pell check    M-$"), 'P', menu_ispell_cmd},
     {' ', N_("sor&T...                 M-t"), 'T', menu_sort_cmd},
-    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd}
+    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
+    {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };
 
 extern void menu_save_mode_cmd (void);

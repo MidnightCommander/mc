@@ -1,3 +1,8 @@
+2002-01-21  Pavel Roskin  <proski@gnu.org>
+
+	* editmenu.c (CmdMenuEmacs): Add mail command without shortcut.
+	Users of emacs keys should be able to send mail too.
+
 2002-01-15  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax.c (syntax_g_free): New macro to release and NULLify
