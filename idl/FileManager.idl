@@ -5,6 +5,10 @@ module GNOME {
 
 	};
 
+	exception POSIX_ERROR {};
+
 	interface FileManager {
+		void chdir (in string dir)
+			raises (POSIX_ERROR);
 	};
 };

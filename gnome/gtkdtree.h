@@ -48,5 +48,8 @@ void       gtk_dtree_remove_dir_by_name (GtkDTree *dtree,
 					 char *directory);
 gboolean   gtk_dtree_select_dir         (GtkDTree *dtree,
 					 char *directory);
+char      *gtk_dtree_get_row_path       (GtkDTree *ctree,
+					 GtkCTreeNode *row,
+					 gint column);
 
 #endif

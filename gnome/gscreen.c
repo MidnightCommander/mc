@@ -835,8 +835,22 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 			       WPanel              *panel)
 {
 	GtkDTree *dtree = GTK_DTREE (widget);
+	GtkCTreeNode *node;
+	int row, col;
+	char *path;
+	
+	if (!gtk_clist_get_selection_info (GTK_CLIST (dtree), x, y, &row, &col))
+		return;
 
-	printf ("Drop received on tree\n");
+	node = gtk_ctree_node_nth (GTK_CTREE (dtree), row);
+	if (!node)
+		return;
+	gtk_ctree_expand_recursive (GTK_CTREE (dtree), node);
+	path = gtk_dtree_get_row_path (dtree, node, 0);
+
+	gdnd_drop_on_directory (context, selection_data, path);
+		
+	g_free (path);
 }
 
 #ifdef OLD_DND
@@ -1753,7 +1767,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 
 	dtree->drag_motion_x = x;
 	dtree->drag_motion_y = y;
-	dtree->timer_id = gtk_timeout_add (500, tree_drag_open_directory, data);
+	dtree->timer_id = gtk_timeout_add (200, tree_drag_open_directory, data);
 
 	return TRUE;
 }

@@ -81,6 +81,7 @@
 
 #ifdef HAVE_CORBA
 #    include <libgnorba/gnorba.h>
+#    include "gcorba.h"
 #endif
 
 /* Program include files */
@@ -2667,8 +2668,10 @@ handle_args (int argc, char *argv [])
 
     CORBA_exception_init (&ev);
 
-    gnome_CORBA_init_with_popt_table (
-	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, 0, &ev);
+    orb = gnome_CORBA_init_with_popt_table (
+	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, GNORBA_INIT_SERVER_FUNC, &ev);
+
+    corba_register_server ();
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
 #endif

@@ -16,11 +16,21 @@ INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
+PIXMAPS =			\
+	dev.xpm			\
+	link.xpm		\
+	directory.xpm		\
+	listing-list.xpm	\
+	listing-iconic.xpm	\
+	dir-close.xpm		\
+	dir-open.xpm
+
 GNOMESRCS = 		\
 	gblist.c	\
 	gcache.c	\
 	gcliplabel.c	\
 	gcmd.c		\
+	gcorba.c	\
 	gdesktop-icon.c	\
 	gdesktop.c 	\
 	gdnd.c		\
@@ -79,8 +89,6 @@ ICONS = 			\
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
 #
 LOBJS = mad.o
-# popt.o poptconfig.o \
-#	popthelp.o poptparse.o findme.o
 
 #
 # These objects from ../src do depend on HAVE_GNOME
@@ -93,7 +101,15 @@ OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
 	option.o cmd.o utilunix.o xslint.o filegui.o filenot.o 
 
-OBJS = $(LOBJS) $(OOBJS) \
+CORBAOBJS = 			\
+	main-corba.o		\
+	gcorba.o		\
+	FileManager-impl.o	\
+	FileManager-skels.o
+
+OBJS = 			\
+	$(LOBJS) 	\
+	$(OOBJS) 	\
 	gblist.o	\
 	gcache.o	\
 	gcliplabel.o	\
@@ -123,32 +139,18 @@ OBJS = $(LOBJS) $(OOBJS) \
 NORMALOBJS =		\
 	main.o
 
-CORBAOBJS = 		\
-	main-corba.o
-
-
-#
-# Distribution variables
-#
-
-PIXMAPS =			\
-	dev.xpm			\
-	link.xpm		\
-	directory.xpm		\
-	listing-list.xpm	\
-	listing-iconic.xpm	\
-	dir-close.xpm		\
-	dir-open.xpm
-
 CORBA_GENERATED =		\
 	FileManager.h		\
 	FileManager-stubs.c	\
 	FileManager-skels.c	\
 	FileManager-common.c
 
-CORBA_SOURCES = FileManager-impl.c
+CORBA_SOURCES = 		\
+	gcorba.c		\
+	FileManager-impl.c
 
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
+	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
 FileManager-impl.c: FileManager.h
 

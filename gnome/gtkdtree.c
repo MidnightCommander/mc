@@ -36,18 +36,22 @@ enum {
 
 static guint gtk_dtree_signals [LAST_SIGNAL] = { 0 };
 
-static char *
-gtk_dtree_get_row_path (GtkCTree *ctree, GtkCTreeNode *row, gint column)
+char *
+gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
 {
 	char *node_text, *path;
 
+	g_return_val_if_fail (dtree != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_DTREE (dtree), NULL);
+	g_return_val_if_fail (row != NULL, NULL);
+	
 	path = g_strdup ("");
 	do {
 		char *new_path;
 		int val;
 		
 		val = gtk_ctree_node_get_pixtext (
-			ctree, row, column,
+			GTK_CTREE (dtree), row, column,
 			&node_text, NULL, NULL, NULL);
 
 		if (!val)
