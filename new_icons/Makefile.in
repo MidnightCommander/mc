@@ -34,6 +34,7 @@ ALLICONS =						\
 	gnome-library.png				\
 	gnome-pack-deb.png				\
 	gnome-pack-rpm.png				\
+	gnome-pack-slp.png              \
 	gnome-video-mpeg.png				\
 	gnome-video-quicktime.png			\
 	gnome-video-x-msvideo.png			\
