@@ -246,7 +246,7 @@
 	necessary files should be created when needed.
 	* edit.h: Remove declaration of edit_init_file().
 
-2000-11-01  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (canonicalize_pathname) [GTK]: memory leaking fixed
 
@@ -257,7 +257,7 @@
 	(edit_split_filename) [GTK]: Make the second argument constant
 	to match the declaration.
 
-2000-10-30  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-10-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_save_file): better error handling on writting
 
@@ -323,12 +323,12 @@
 	* Makefile.in: adjusted list of distributed files.
 	Added rule for rebuilding Makefile
 
-2000-08-08  Pavel Roskin <proski@gnu.org>
+2000-08-08  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit.c [GTK]: don't include mousemark.h
 	* gtkedit.h [GTK]: likewise
 
-2000-08-03  Pavel Roskin <proski@gnu.org>
+2000-08-03  Pavel Roskin  <proski@gnu.org>
 
 	* mousemark.c, mousemark.h: removed
 	* Makefile.in: don't distribute mousemark.h

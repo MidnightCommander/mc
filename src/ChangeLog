@@ -1,21 +1,21 @@
-2001-08-31 23:14:21  Timur Bakeyev <mc@bat.ru>
-	
+2001-08-31 23:14:21  Timur Bakeyev  <mc@bat.ru>
+
 	* utilunix.c: init_groups(), destroy_groups(), get_user_permissions()
 	rewritten to use GTree structure and functions. Add new static helper
 	functions mc_gid_compare() and mc_gid_destroy().
-	
+
 	* util.h: Removed deprecated structure user_in_groups.
-	
+
 	* screen.c: Fixed typo in format report error string.
 
-2001-08-31 23:14:21  Timur Bakeyev <mc@bat.ru>
-	
+2001-08-31 23:14:21  Timur Bakeyev  <mc@bat.ru>
+
 	* utilunix.c: get_user_rights() renamed into get_user_permissions().
 	delete_groups() renamed into destroy_groups().
 	* util.h: Likewise.
 	* screen.c: Likewise.
 	* main.c: Likewise.
-	
+
 2001-08-27  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (dirsizes_cmd): Don't cast st_size to long - use off_t
@@ -410,7 +410,7 @@
 	terminal settings when the quoted path is sent to the shell -
 	it's now safe.
 
-2001-07-12  Andrew V. Samoilov <kai@cmail.ru>
+2001-07-12  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* main.c: Eliminate iconify_on_exec.
 	[!HAVE_GNOME]: Eliminate nowindows, nodesktop, twopanel,
@@ -426,7 +426,7 @@
 
 	setup.c (options):  Eliminate iconify_on_exec.
 
-2001-07-10  Andrew V. Samoilov <kai@cmail.ru>
+2001-07-10  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (hex_search): Release buffer after use.
 
@@ -1120,13 +1120,13 @@
 
 	* dir.c: Respect HAVE_STRCOLL. Added a comment about strcoll().
 
-2001-01-26  Pablo Saratxaga <pablo@mandrakesoft.com>
+2001-01-26  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* file.c: moved a comment one line down so it becomes visible on the
 	translators' po files. Also added gettext:no-c-format comments for
 	a few strings with % in them that are not C format printf codes.
 
-2001-01-21  Andrew V. Samoilov <sav@bcs.zp.ua>
+2001-01-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* subshell.c (do_subshell_chdir): temporary patch to prevent command
 	execution for directory names containing 0x03 (intr) 0x14.
@@ -1139,7 +1139,7 @@
 
 	* Makefile.in: Respect LDFLAGS when linking cons.saver.
 
-2000-11-20  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-11-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c: Fixed long existed bugs in internal viewer. When search is
 	doing in binary file it ignore skipped zero(es), so cursor is before
@@ -1150,7 +1150,7 @@
 
 	(search): new features of get_line_at used.
 
-2000-11-16  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-11-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cons.saver.c (check_file): close fd on error. There was a bug, which
 	allowed luser to write '\0' char to any symlinkable file in Linux
@@ -1158,11 +1158,11 @@
 	of a SUID/SGID binary.
 	Based on patch from bugtrack by Maurycy Prodeus <z33d@ETH-SECURITY.NET>.
 
-2000-11-14  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* layout.c (print_vfs_message): format string vulnerability fixed
 
-2000-11-03  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-11-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c (CmdMenu): don't include edit_user_menu_cmd ()
 	if USE_INTERNAL_EDIT is not defined
@@ -1355,7 +1355,7 @@
 	Improved a status string of cool editor for best understand,
 	and to add char,hex view.
 
-2000-04-17  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-04-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* widget.c: (history_put): profile is free()d if chmod failed,
 	  (input_map): added const qualifier
@@ -1426,7 +1426,7 @@
 	* boxes.c: fix incorrect initialization of array of structure (gcc
 	version 2.96 20000131 chokes on it).
 
-2000-02-18  Paul Sheer <psheer@obsidian.co.za>
+2000-02-18  Paul Sheer  <psheer@obsidian.co.za>
 
 	* gtkedit/*.[ch], edit.c et al: updates to reflect
 	cooledit-3.13.0. See CVS commits and cooledit ChangeLog
@@ -1516,7 +1516,7 @@
 
 	* panel.h (WPanel): Added a field for the column widths.
 
-1999-09-19  Andrew V. Samoilov <sav@bcs.zp.ua>
+1999-09-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* user.c (check_patterns): char* is used instead of char [] in sizeof
 
@@ -1589,7 +1589,7 @@
 
 	(get_random_hint): use guess_message_value
 
-1999-08-15  David Martin <dmartina@usa.net>
+1999-08-15  David Martin  <dmartina@usa.net>
 
 	* boxes.c: (symlink_dialog): Move dialog misaligned elements
 
@@ -1599,7 +1599,7 @@
 
 	* ext.c: Added missing include file.
 
-1999-08-08  David Martin <dmartina@usa.net>
+1999-08-08  David Martin  <dmartina@usa.net>
 
 	* menu.c: (create_menu): Adjust "#ifdef ENABLE_NLS" so that menus
 	get the right size even when NLS is disabled.
@@ -1640,7 +1640,7 @@
 	it used to be (this was part of davids patches but I haven't
 	applied it, yet).
 
-1999-08-01  David Martin <dmartina@usa.net>
+1999-08-01  David Martin  <dmartina@usa.net>
 
 	* menu.c (create_menu, menubar_drop_compute, menubar_paint_idx):
 	Discount '&' for hotkeys when checking menu widths to avoid the
@@ -1696,7 +1696,7 @@
 	* view.c (do_view_init): improved error handling w.r.t quick view
 	(mc used to dump core when the file to view couldn't be opened).
 
-1999-06-22  David Martin <dmartina@usa.net>
+1999-06-22  David Martin  <dmartina@usa.net>
 
 	* view.c (display): added view_gotoxy's in order to make the gnome
 	edition operational in hex mode.
@@ -1723,7 +1723,7 @@ Fri Jun 18 11:29:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	(set_panel_formats): warn user when he gives bogus format, move
 	checks into set_panel_formats
 
-1999-06-01  Akira Higuchi <a-higuti@math.sci.hokudai.ac.jp>
+1999-06-01  Akira Higuchi  <a-higuti@math.sci.hokudai.ac.jp>
 
 	* util.c (is_printable): in GNOME all characters are printable.
 
@@ -1736,7 +1736,7 @@ Fri Jun 18 11:29:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* treestore.c (should_skip_directory): Add fix from Wayne Roberts
 	to actually acknowledge the settings of mc.global.
 
-1999-05-24  Brandon S. Allbery <allbery@ece.cmu.edu>
+1999-05-24  Brandon S. Allbery  <allbery@ece.cmu.edu>
 
 	* subshell.c (pty_open_master): Added missing comma.p
 
@@ -1785,7 +1785,7 @@ Tue Apr 27 20:31:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	middle of a directory, e.g. "/home/bofh" will not be translated to
 	"~h" (fixes the bug reported by Alex Fortuna <alex@rdc.ru>)
 
-1999-04-25  Sergei Ivanov <svivanov@pdmi.ras.ru>
+1999-04-25  Sergei Ivanov  <svivanov@pdmi.ras.ru>
 
 	* find.c: The origin of the bug is in the function do_search (file
 	find.c).  It limits the number of subdirectories to scan by the
@@ -1924,7 +1924,7 @@ Tue Apr 13 07:13:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* screen.c (do_enter_on_file_entry): added a consistent behaviour
 	for GNOME stuff.
 
-1999-04-06  David Martin <dmartina@usa.net>
+1999-04-06  David Martin  <dmartina@usa.net>
 
 	* info.c (text out of box and locale layout).
 
@@ -2012,7 +2012,7 @@ Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	Fix test: Skip only "." and "..", before it could skip "?.".
 
-1999-03-22  David Martin <dmartina@mailexcite.com>
+1999-03-22  David Martin  <dmartina@mailexcite.com>
 
 	* wtools.c (real_input_dialog_help): Do a strncmp with the lenght
 	of th same translated "Password:" string.
@@ -2120,7 +2120,7 @@ Thu Mar 18 16:09:09 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* background.c (do_background): Handle EINTR in dup2.
 
-Wed Mar 10 22:21:19 1999  David Martin <dmartina@usa.net>
+Wed Mar 10 22:21:19 1999  David Martin  <dmartina@usa.net>
 
 	* util.c (my_putenv): char* was used to store the length of a string
 
@@ -2207,12 +2207,12 @@ Tue Feb 16 21:21:32 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* popt.c: Compilation fix: on systems without setreuid use setuid.
 
-Tue Feb 16 21:18:08 1999  David Martin <dmartina@usa.net>
+Tue Feb 16 21:18:08 1999  David Martin  <dmartina@usa.net>
 
 	* achown.c: Make buttons fit in the (new) translated
 	Advanced Chown dialog.
 
-1999-02-16  Alexaander Savelyev <fano@ham.kiev.ua>
+1999-02-16  Alexaander Savelyev  <fano@ham.kiev.ua>
 
 	* subshell.c (exit_subshell): Use the size of the buffer, not
 	sizeof of the pointer to the buffer.
@@ -2338,7 +2338,7 @@ Wed Feb  3 22:27:04 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	history file to the owner (Just in case I forgot to strip passwords
 	somewhere).
 
-Mon Feb  1 00:43:15 1999  Timur Bakeyev <mc@bat.ru>
+Mon Feb  1 00:43:15 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c (to_buffer): Code of the function rewritten, as a side
 	effect added J_CENTER (who needs this?). Also, justification flags
@@ -2382,7 +2382,7 @@ Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* cons.saver.c: Removed glib from the suid app
 
-Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
+Wed Jan 27 03:17:44 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
 	g_strdup()/g_free() routings. Also, copy_strings() replaced by
@@ -2411,7 +2411,7 @@ Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 	to global.h (see above), minor changes, like "0" -> NULL in string func-
 	tions.
 
-1999-01-25  Alexander Savelyev <fano@vcom.kiev.ua>
+1999-01-25  Alexander Savelyev  <fano@vcom.kiev.ua>
 
 	* ext.c (exec_extension): Always use /bin/sh.  Not the user
 	shell.
@@ -2442,7 +2442,7 @@ Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 	* ext.c: we use /tmp in "creative" way: creating there file and
 	then executing it. I do not see how it is needed. Marked with FIXME.
 
-Thu Jan 21 01:11:24 1999  Timur Bakeyev <mc@bat.ru>
+Thu Jan 21 01:11:24 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* mad.[ch], util.[ch]: commit changes, that allow coexist (temporary)
 	GLib'ed VFS and not still converted MC itself.
@@ -2452,13 +2452,13 @@ Thu Jan 21 01:11:24 1999  Timur Bakeyev <mc@bat.ru>
 	* treestore.c (tree_store_start_check): Use mc_stat(), not stat().
 	(tree_store_rescan): Use mc_lstat(), not lstat().
 
-Tue Jan 19 05:28:04 1999  Timur Bakeyev <mc@bat.ru>
+Tue Jan 19 05:28:04 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* ext.c, filenot.c, main.c, screen.c, treestore.c: add missed #include's
 	and moved glib.h so, it follows "fs.h", but preceed "util.h" and "mad.h".
 	There were conflicts during compilation with MAD and GLibed vfs.
 
-Mon Jan 18 21:23:29 1999 Paul Sheer <psheer@obsidian.co.za>
+Mon Jan 18 21:23:29 1999 Paul Sheer  <psheer@obsidian.co.za>
 
 	* cmd.c: update_panels (UP_OPTIMIZE, UP_KEEPSEL); instead
 	of reread after editing a file.
@@ -2475,7 +2475,7 @@ Mon Jan 18 21:23:29 1999 Paul Sheer <psheer@obsidian.co.za>
 
 	* cmd.c (mkdir_cmd): Please, check your pointer usage.
 
-Thu Jan 14 13:18:58 1999  Timur Bakeyev <mc@bat.ru>
+Thu Jan 14 13:18:58 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c (string_file_[owner|group]): Workaround the fact, that some
 	systems have user and group names greater than 8 symbols. Now we trun-
@@ -2511,7 +2511,7 @@ Thu Jan 14 13:18:58 1999  Timur Bakeyev <mc@bat.ru>
 	* cmd.c (mkdir_cmd): now mkdir_cmd will accept relative, and
 	absolute directories.
 
-Tue Jan 12 13:40:46 1999  Timur Bakeyev <mc@bat.ru>
+Tue Jan 12 13:40:46 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* gtkedit(syntax.c): Fixed a typo in Pascal syntax.
 
@@ -2539,7 +2539,7 @@ Tue Jan 12 13:40:46 1999  Timur Bakeyev <mc@bat.ru>
 
 	* util.c: Provide workarounds for Linux kernel bug.
 
-Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
+Sun Jan 10 02:18:33 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c(string_file_size): Fixed (incorrect?) printing of device num-
 	bers. Major should never be greater 255.
@@ -2564,7 +2564,7 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 	Moved all of the tree store information into a new file:
 	treestore.  To be reused by the Gnome code.
 
-1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
+1999-01-08  Ilya Zakharevich  <ilya@math.ohio-state.edu>
 
 	* popt.c: OS/2 and Windows NT portability fix.
 
@@ -2668,7 +2668,7 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 
 	* cmd.c (check_for_default): Make this compile.
 
-Tue Dec 29 22:25:34 1998  Timur Bakeyev <mc@bat.ru>
+Tue Dec 29 22:25:34 1998  Timur Bakeyev  <mc@bat.ru>
 
 	* mountlist.c: Compress all xBSD systems to one line and add check
 	for MOUNT_UFS - it seems, that 4.4BSD and 4.4BSD2 systems different-
@@ -2788,7 +2788,7 @@ Mon Dec 21 14:28:55 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* mountlist.c: Deleted function prototypes for strdup and strstr,
 	they might conflict with definitions in the system header files.
 
-Wed Dec 16 14:41:15 1998  Paul Sheer <psheer@obsidian.co.za>
+Wed Dec 16 14:41:15 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* gtkedit.c, editwidget.c: gnome selection now works with the
 	editor.
@@ -2823,13 +2823,13 @@ Sun Dec 13 18:35:05 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* main.c (try_to_select): We do not need to select the item
 	manually in this case, as the X code will do this for us.
 
-Fri Dec 11 00:05:50 1998 Paul Sheer <psheer@obsidian.co.za>
+Fri Dec 11 00:05:50 1998 Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c, slint.c, color.c, color.h: editor now has its
 	own color configuration so you can set editor background
 	colors with MC_COLOR_TABLE.
 
-1998-12-10 Paul Sheer <psheer@obsidian.co.za>
+1998-12-10 Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c: perl syntax highlighting. syntax highlighting
 	bug fizes for python and sh.
@@ -3071,7 +3071,7 @@ Wed Oct  7 22:20:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c: Ask user if (s)he wants to delete incomplete file
 
-Sun Oct 11 20:21:20 1998  Peter Kleiweg <kleiweg@let.rug.nl>
+Sun Oct 11 20:21:20 1998  Peter Kleiweg  <kleiweg@let.rug.nl>
 
 	* mfmt.c (main): When there are an even number of empty lines
 	between messages, all goes well, but when the number of empty
@@ -3100,7 +3100,7 @@ Sat Oct  3 00:54:23 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* gtkedit/Makefile.in (EDITOBJS): removed one wrong \\ (line
 	continuation)
 
-Thu Oct  1 18:43:34 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Thu Oct  1 18:43:34 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* file.c: Commented out search for egrep because execvp() does
 	it itself
@@ -3120,7 +3120,7 @@ Tue Sep 29 14:02:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 	* layout.c (print_vfs_message): fixed buffer overrun by
 	vsnprintf. Unfortunately I have no clue how to do this portably.
 
-Tue Sep 29 11:42:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Tue Sep 29 11:42:32 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* setup.c: Corrected code which prevents using icon view by
 	ports which don't support it
@@ -3133,12 +3133,12 @@ Mon Sep 28 21:55:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* Makefile.in: search config.status in builddir and not in rootdir,
 	i.e. make it compile for builddir != srcdir
 
-Wed Sep 23 14:06:44 1998  Pavel Machek <pavel@atrey.karlin.mff.cuni.cz>
+Wed Sep 23 14:06:44 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* src/file.c: Made file.c use new O_LINEAR mode (so copying from
 	ftp works nicely, again)
 
-Fri Sep 18 14:15:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Sep 18 14:15:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* src/mad.c: All messages are sent to stderr and terminate with \r\n
 
@@ -3155,7 +3155,7 @@ Thu Sep 17 07:32:23 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	the object files if symlinks have been created.
 	Added target cleansourcelinks (invoked with make distclean).
 
-Tue Sep 15 22:41:24 1998  Paul Sheer <psheer@obsidian.co.za>
+Tue Sep 15 22:41:24 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* edit.c, editwidget.c, gtkedit.c: fixed segfault when trying to
 	edit a non-file under gmc.
@@ -3169,7 +3169,7 @@ Tue Sep 15 20:51:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* setup.c: save and restore new global variable/option
 	ftp_use_unix_list_options
 
-Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
+Tue Sep 15 01:02:34 1998   Paul Sheer  <psheer@obsidian.co.za>
 
 	* gtkedit: Directory added. This directory contains all the editor
 	code modified to work with gnome. Mcedit now works properly under
@@ -3185,7 +3185,7 @@ Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
 	boundaries): make sure erase_list is emptied always not only when we
 	deleted files.
 
-Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
+Sat Sep 12 02:59:43 1998  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c: Xtry_to_select() Remove extfs hack to the main.c. Change
 	for() cycle to the x_basename() call (Thanks to Pavel Roskin).
@@ -3194,24 +3194,24 @@ Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
 	* main.c: Rename cd_try_to_select() to the get_parent_dir_name(). Now
 	it process VFS postfixes too. Reduced number of loops against prev hack.
 
-Fri Sep 11 15:27:59 1998  Pavel Machek <pavel@ucw.cz>
+Fri Sep 11 15:27:59 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* screen.c: make cd .. from extfs file highlight it
 
-Tue Sep  8 13:10:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Tue Sep  8 13:10:32 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* autogen.sh: Don't destroy aclocal.m4 if "macros" directory
 	is missing
 
 	* layout.c: Use stdout instead of stderr in set_hintbar()
 
-Mon Aug 31 12:40:29 1998  Pavel Machek <pavel@ucw.cz>
+Mon Aug 31 12:40:29 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* cmd.c: added view_file_cmd which asks user which file to view -
 	_very_ usefull with vfs (now you can browse web with mc: try
 	/#url:http:||atrey.karlin.mff.cuni.cz|~pavel#uhtml)
 
-Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Thu Aug 27 19:52:45 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* Make.common.in: Don't define VERSION anymore
 
@@ -3229,7 +3229,7 @@ Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* mad.h: Include stdlib.h/malloc.h first, to prevent prototypes
 	from being clobbered by the subsequent macro defines.
 
-Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Wed Aug 12 15:56:46 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* edit.h: added "../" before some includes to avoid unnecessary
 	"-I" options for the PC port makefiles.
@@ -3239,7 +3239,7 @@ Sun Aug  9 22:39:12 1998  Janne Kukonlehto  <jtklehto@paju.oulu.fi>
 	* mad.h (calloc): Added parentheses around the arguments as
 	suggested by Steef Boerrigter <sxmboer@sci.kun.nl>.
 
-Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Jul 31 09:04:35 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* syntax.c: makefile* will be highlighted as Makefile*
 
@@ -3248,7 +3248,7 @@ Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* main.c (translated_mc_chdir): Quick hack to make the old
 	url-like pathnames to be used on the command line.
 
-1998-06-22  T.E.Dickey <dickey@clark.net>
+1998-06-22  T.E.Dickey  <dickey@clark.net>
 
 	* keyxdef.c: Fix for compiling with ncurses.
 
@@ -3269,7 +3269,7 @@ Thu Jul 23 22:44:16 1998  Tom Tromey  <tromey@cygnus.com>
 	macros instead of in-line checks.  Create vfs/Makefile from
 	vfs/Make-mc.in.
 
-Thu Jul 23 19:49:12 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Thu Jul 23 19:49:12 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* hotlist.c: corrected layout of the warning which appears
 	if ~/.mc doesn't exist. Appropriate changes in translations.
@@ -3291,7 +3291,7 @@ Wed Jun 18   Pavel Machek  <pavel@ucw.cz>
 	* i18n.h: we do not want i18n in case of compiling standalone
 	libvfs.so.
 
-Fri Jun  5 23:34:20 1998  Timur I. Bakeyev <timur@comtat.kazan.ru>
+Fri Jun  5 23:34:20 1998  Timur I. Bakeyev  <timur@comtat.kazan.ru>
 
 	* screen.c (file_entry_color): take care about BSD core dumps
 	which have names program.core instead of core
@@ -3307,7 +3307,7 @@ Mon Jun  1 15:41:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	to the vfs layer if there are other places where we want to enter
 	ftp://host.
 
-Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov <lav@yars.free.net>
+Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov  <lav@yars.free.net>
 
 	* configure.in: allowed to use `configure --with-included-gettext'
 	on systems (like solaris) that have their own libintl
@@ -3317,7 +3317,7 @@ Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov <lav@yars.free.net>
 	* complete.c (filename_completion_function): Use the vfs routines
 	for name completion.
 
-1998-05-31  Jakub Jelinek <jj@ultra.linux.cz>
+1998-05-31  Jakub Jelinek  <jj@ultra.linux.cz>
 
 	* complete.c (complete_engine): Fix completions.
 
@@ -3334,19 +3334,19 @@ Sun May 31 10:23:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* keyxdef.c: include tty.h instead of myslang.h as suggested by
 	Tamasi Gyorgy <gt_cosy@usa.net>
 
-Fri May 29 15:41:19 1998  Alexander V. Lukyanov <lav@yars.free.net>
+Fri May 29 15:41:19 1998  Alexander V. Lukyanov  <lav@yars.free.net>
 
 	* widget.c (update_input): this patch allows entering 8-bit
 	characters in input fields without screwing attributes. (the
 	same old sign extension...)
 
-Wed May 27 22:23:48 1998  Ed Cogburn <ecogburn@greene.xtn.net>
+Wed May 27 22:23:48 1998  Ed Cogburn  <ecogburn@greene.xtn.net>
 
 	* lib/xterm.ti: The 'xterm-color' definition needs 'sgr0'. The tic
 	program from ncurses 4.2 doesn't like the xterm.ti file that comes
 	with mc.
 
-Wed May 27 15:29:01 1998  Alexander V. Lukyanov <lav@yars.free.net>
+Wed May 27 15:29:01 1998  Alexander V. Lukyanov  <lav@yars.free.net>
 
 	* key.c (get_key_code): characters with high bit set were input
 	as 0x80 char when use_8th_bit_as_meta was set
@@ -3528,12 +3528,12 @@ Wed May 20 16:27:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	Btw. PORT_WIDGET_WANTS_HISTORY seems incomplete because a lot of
 	history code is included even when this define is undefined.
 
-1998-05-19  Tamasi Gyorgy <gt_cosy@usa.net>
+1998-05-19  Tamasi Gyorgy  <gt_cosy@usa.net>
 
 	* src/*: Until I get a better ChangeLog:  Tamasi's port of the
 	code to QNX.
 
-1998-05-19  Alexander Lukyanov <lav@yars.free.net>
+1998-05-19  Alexander Lukyanov  <lav@yars.free.net>
 
 	* Makefile.in: Distirbution fix so that people are not forced to
 	install gettext.
@@ -3703,7 +3703,7 @@ Fri May  1 11:24:21 1998  Paul Sheer  <psheer@obsidian.co.za>
 	* syntax.c: syntax highlighting segfaults when editing a binary
 	file - now fixed.
 
-Thu Apr 30 12:23:50 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Thu Apr 30 12:23:50 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/file.c: lot of i18n of file Copy/Move/Delete operations. Maintainers
 	of message catalogs please notice introduced op_names1 and formats for
@@ -3895,11 +3895,11 @@ Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* cmd.c (save_setup_cmd): Per Elliot's suggestion, do not pop up a
 	dialog box to inform the user about the saved setup.
 
-1998-04-15  Pavel Machek <pavel@elf.ucw.cz>
+1998-04-15  Pavel Machek  <pavel@elf.ucw.cz>
 
 	* cmd.c: Report failed chdir attempts.
 
-Wed Apr 15 10:48:41 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Wed Apr 15 10:48:41 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/hotlist.c: changes to hotlist boxes i18n.
 
@@ -3967,7 +3967,7 @@ Fri Apr 10 10:35:06 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* dlg.c (add_widgetl): Adding widgets to an already running dialog
 	had some flaws.  Fix this.
 
-Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Wed Apr  8 11:15:29 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/find.c: changes to find_parameters/find_file i18n.
 
@@ -4004,7 +4004,7 @@ Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	* utilunix.c (max_open_files): new routine;  Used to figure out
 	the number of available file descriptors.
 
-Sat Apr  4 00:16:49 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Sat Apr  4 00:16:49 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/layout.c: changes to layout dialog box i18n
 
@@ -4018,11 +4018,11 @@ Sat Apr  4 00:16:49 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* src/boxes.c (confirm_box): i18n stuff added.
 
-Mon Apr  6 07:48:22 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Mon Apr  6 07:48:22 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* Makefile.in: "make dist" works with bash 1.x again
 
-Fri Apr  3 05:23:20 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Fri Apr  3 05:23:20 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* configure.in: ALL_LINGUAS test added, to allow specify list
 	of languages to be installed by setting env variable before
@@ -4102,7 +4102,7 @@ Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* cmd.h: Added function prototypes.
 
-1998-03-31  Paul Sheer <psheer@obsidian.co.za>
+1998-03-31  Paul Sheer  <psheer@obsidian.co.za>
 
 	* cmd.c (nice_cd): Forgot to invoke the history registration in
 	one spot.
@@ -4115,7 +4115,7 @@ Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* wtools.c (quick_dialog_skip): Do not i18n any string that is empty.
 
-Sun Mar 29 23:02:09 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Sun Mar 29 23:02:09 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/menu.[ch]: new member to menu_entry (hot_pos) introduced to make
 	internationalized version of menu use externally defined hotkeys
@@ -4130,12 +4130,12 @@ Sun Mar 29 23:02:09 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	dynamically upon initialization and window size changes. Mouse event
 	processing is fixed accordingly.
 
-Sat Mar 28 13:18:36 1998 Alex Tkachenko <alex@bcs.zp.ua>
+Sat Mar 28 13:18:36 1998 Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* src/screen.c: (repaint_file) last patches to format_file() in the
 	same file broke appearance of panels in brief mode -- fixed.
 
-Mon Mar 30 20:02:49 1998  Paul Sheer <psheer@obsidian.co.za>
+Mon Mar 30 20:02:49 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* main.c, screen.c, dirhist.c, dirhist.h, main.h, widget.c,
 	main.h and others?: Directory history added. The previous
@@ -4175,7 +4175,7 @@ Mon Mar 23 14:04:07 1998  Philippe De Muyter  <phdm@macqel.be>
 	* configure.in (nlink_t): Check it using AC_CHECK_TYPE.
 	* acconfig.h (nlink_t): New define slot.
 
-Mon Mar 23 08:17:55 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Mon Mar 23 08:17:55 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* src/main.c: mcedit can be named mce or mcedit.exe - only
 	3 first letters are significant. The same for mcview.
@@ -4217,23 +4217,23 @@ Wed Mar 18 22:08:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* chown.c (init_chown): call endgrent, endpwent.
 
-Tue Mar 17 23:58:40 1998  Pavel Machek <pavel@elf.ucw.cz>
+Tue Mar 17 23:58:40 1998  Pavel Machek  <pavel@elf.ucw.cz>
 
 	* src/file.c: Fix for the case where the disk gets full.
 
-Tue Mar 16 18:35:53 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+Tue Mar 16 18:35:53 1998 Stas Maximov  <stmax@u213.srcc.msu.su>
 
 	* src/hotlist.c default values for dialogs which add entries to hotlist
 	are now set to the current directory.
 
-Tue Mar 10 14:42:01 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+Tue Mar 10 14:42:01 1998 Stas Maximov  <stmax@u213.srcc.msu.su>
 
 	* vfs/extfs.c, lib/mc.ext, vfs/extfs/extfs.ini, vfs/extfs/cpio.in
 	Added support for cpio extfs including compressed and gziped
 	cpio archives. compress and gzip handled separately because I saw
 	a lot of systems which have compress, but don't have gzip.
 
-Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+Sat Feb 21 16:46:49 1998 Stas Maximov  <stmax@u213.srcc.msu.su>
 
 	* src/subshell.c: failed to grantpt on SVR4 due to zero-initialized
 	subshell_pid. sigaction handler for SIGCHLD does waitpid(subshell_pid,
@@ -4250,7 +4250,7 @@ Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 	* file.c (file_mask_dialog): Free the source_mask after calling
 	convert_pattern().
 
-Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Mon Mar 16 13:03:45 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* cmd.c: Internal edit is used by default. vi may be
 	confusing for some users.
@@ -4267,7 +4267,7 @@ Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* view.c: Events are flushed only if the ports supports it.
 
-Mon Mar 16 12:30:39 1998  Stas Maximov <stmax@u213.srcc.msu.su>
+Mon Mar 16 12:30:39 1998  Stas Maximov  <stmax@u213.srcc.msu.su>
 
 	* hotlist.c: Defaults on the hotlist add-current and new-entry is
 	the current directory.
@@ -4364,7 +4364,7 @@ Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (handle_args): Added parentheses around assignment/truth value.
 
-Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Sat Mar  7 14:33:38 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* src/complete.c: obsolete hack for OS/2 and NT removed.
 	Completion works for NT now (not very good)
@@ -4416,7 +4416,7 @@ Fri Mar  6 19:29:54 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	will is required by the GNOME X ports (to figure out if a field
 	has been inited or not).
 
-Thu Mar  5 10:28:40 1998  Norbert Warmuth <k3190@fh-sw.de>
+Thu Mar  5 10:28:40 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* popt.c (poptParseArgvString): make it compile with the native
 	compiler on AIX 4.1.3
@@ -4425,7 +4425,7 @@ Thu Mar  5 10:28:40 1998  Norbert Warmuth <k3190@fh-sw.de>
 
 	* cmd.c: Added #include "x.h"
 
-Wed Mar  4 14:49:55 1998  Norbert Warmuth <k3190@fh-sw.de>
+Wed Mar  4 14:49:55 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* doc/mc.1.in, mc.hlp: updated (these files haven't been updated
 	at the last change to mc.sgml)
@@ -4456,7 +4456,7 @@ Mon Mar  2 15:54:55 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(add_widgetl): do widget initialization if the dialog is already
 	running when this dialog box is created.
 
-Mon Mar  2 12:11:37 1998  Norbert Warmuth <k3190@fh-sw.de>
+Mon Mar  2 12:11:37 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* vfs/ftpfs.c (changetype): Removed the hack which always forced
 	sending the command "TYPE I" when changing to binary transfer mode
@@ -4479,11 +4479,11 @@ Mon Mar  2 12:11:37 1998  Norbert Warmuth <k3190@fh-sw.de>
 
 	* tree.c (tree_key): likewise
 
-Tue Feb 24 18:37:36 1998  Stas Maximov <stmax@u213.srcc.msu.su>
+Tue Feb 24 18:37:36 1998  Stas Maximov  <stmax@u213.srcc.msu.su>
 
 	* subshell.c: Set subshell_pid to 1 on startup
 
-Fri Feb 13 19:59:39 1998  Alexander Savelyev <fano@VCom.kiev.ua>
+Fri Feb 13 19:59:39 1998  Alexander Savelyev  <fano@VCom.kiev.ua>
 
 	* screen.c: KEY_DC is also handled by delete_cmd.
 
@@ -4500,7 +4500,7 @@ Fri Feb 13 19:59:39 1998  Alexander Savelyev <fano@VCom.kiev.ua>
 	* file.c (init_replace): Add support for copying files only if the
 	size differs, and support for regetting ftp files.
 
-Wed Feb 11 20:08:50 1998  Norbert Warmuth <k3190@fh-sw.de>
+Wed Feb 11 20:08:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* user.c (execute_menu_command): Extented the syntax of %-macros
 	used in the user menu in order to switch quoting on (default) and
@@ -4515,7 +4515,7 @@ Fri Jan 30 16:43:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* tkmain.c (xtoolkit_create_dialog): Check for the grided value
 
-Fri Jan 23 07:28:54 1998  Peter Daum <gator@cs.tu-berlin.de>
+Fri Jan 23 07:28:54 1998  Peter Daum  <gator@cs.tu-berlin.de>
 
 	* extfs.c (open_extfs_archive): Pass the filename to the list
 	command.
@@ -4523,7 +4523,7 @@ Fri Jan 23 07:28:54 1998  Peter Daum <gator@cs.tu-berlin.de>
 	* extfs/mailfs: New file system for browsing mail files (support
 	for compressed mail fiels as well).
 
-Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Jan 23 07:19:18 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* edit/edit.h: mc_mkdir requires 2 arguments for any operation
 	system. Obsolete #ifdef's removed.
@@ -4576,7 +4576,7 @@ Wed Jan 21 14:01:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	newlines, carriage-returns and vertical tabs as well.  Which is
 	not what we want.
 
-Wed Jan 21 11:58:39 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
+Wed Jan 21 11:58:39 1998  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
 	* ftpfs.c (retrieve_dir): Avoid compiler warning by testing
 	explicitly the value.
@@ -4606,7 +4606,7 @@ Wed Jan 21 11:28:21 1998  Alex Tkachenko  <alex@bcs.zp.ua>
 	Also default_nroff_flag is initialized to be 1; thus enabling all
 	filter processing by default easies mc usage for novice users.
 
-Sun Jan 18 13:47:37 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
+Sun Jan 18 13:47:37 1998  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
 	* main.c
 	* panel.h, tkscreen.h : error when compile dlg.c
@@ -4628,12 +4628,12 @@ Fri Jan 16 16:19:59 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	configuration: core;  Fixed the case where the color spec was
 	buggy and we kept on a infinite loop;
 
-Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Jan 16 13:47:13 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* nt/drive.nt.c, nt/chmod.nt.c: Updated button_new and check_new
 	calls
 
-Fri Jan 16 12:47:39 1998  Norbert Warmuth <k3190@fh-sw.de>
+Fri Jan 16 12:47:39 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* vfs/ftpfs.c (command): Don't log passwords when the dialog between
 	server and client is logged to a file (mc -l logfile).

@@ -349,7 +349,7 @@
 	* fish.c (open_archive_int): Redirect stderr of start_fish_server
 	to stdout so we don't get confused if it doesn't exist.
 
-2001-04-09  Andrew V. Samoilov <sav@bcs.zp.ua>
+2001-04-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/includes/proto.h, samba/libsmb/nterr.c (get_nt_error): return
 	NULL when appropriative error message can't be found as it is expected
@@ -367,7 +367,7 @@
 	* Make-mc.in: Use a single variable SAMBA_DIST to hold all
 	distributable samba files.
 
-2001-03-15  Andrew V. Samoilov <sav@bcs.zp.ua>
+2001-03-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/libsmb/smbdes.c: undefine uchar before redefine it
 
@@ -405,14 +405,14 @@
 	* extfs/*uzip*: replace uzip with perl version by
 	Oskar Liljeblad <osk@hem.passagen.se>
 
-2001-03-05  Andrew V. Samoilov <sav@bcs.zp.ua>
+2001-03-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.[ch] (vfs_parse_ls_lga, vfs_parse_filemode): p constified
 	(vfs_strip_suffix_from_filename): filename constified
 	(vfs_parse_ls_lga): memory leaking fixed when line can't be parsed,
 	chomping unified
 
-2001-03-04  Andrew V. Samoilov <sav@bcs.zp.ua>
+2001-03-04  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/patchfs: LANG overrides LC_TIME at least in glibc,
 	so use LC_ALL=C to override any locale
@@ -708,16 +708,16 @@
 
 	* samba/include/stamp-h.in: Added to CVS.
 
-2000-05-23  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-05-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.c (mc_[un]def_getlocalcopy): better error handling on writing
 
-2000-05-18  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-05-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c: (my_get_host_and_username) space between macro name and
 	  parentheses removed
 
-2000-05-15  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-05-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* tar.c (read_header): memory leaking for empty symlink's names fixed
 
@@ -752,7 +752,7 @@
 	of archive to always exist. It seems I'm hiding some underlying
 	problem :-(.
 
-2000-04-26  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-04-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* direntry.c (vfs_s_find_entry_tree): segfault fixed when root is NULL
 
@@ -791,7 +791,7 @@
 
 	* undelfs.c: use NULLs instead of 0s when you assign to pointers!
 
-2000-04-05  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-04-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* utilfs.c (vfs_split_url): don't assign *pass if pass is NULL
 	* fish.c (archive_open, archive_same): memory allocated by
@@ -813,7 +813,7 @@
 
 	* util-alone.h: Declare load_anon_passwd() to avoid warnings.
 
-2000-03-31  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-03-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.c (mc_def_getlocalcopy): free() replaced by g_free() to prevent
 	  crushes with mad, thanks to Timur I. Bakeyev <timur@bat.ru>
@@ -893,11 +893,11 @@
 
 	* ftpfs.c (ftpfs_unlink, *): prepend / so that it actually works
 
-2000-02-03  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-02-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* xdirentry.h: added prototype for vfs_s_retrieve_file
 
-2000-01-31  Andrew V. Samoilov <sav@bcs.zp.ua>
+2000-01-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* direntry.c: (vfs_s_resolve_symlink, vfs_s_readlink) fixed segfaults
 	for broken symlinks like 2001 -> The Space Oddysea.
@@ -924,7 +924,7 @@
 	* extfs.c (extfs_chdir): removed unneeded statment, plus applied
 	cosmetics fixes from Andrew V. Samoilov
 
-2000-01-02  Martin Bialasinski <martin@internet-treff.uni-koeln.de>
+2000-01-02  Martin Bialasinski  <martin@internet-treff.uni-koeln.de>
 
 	* extfs/deb.in: Change to the deb vfs. tar has changed, and
 	depending on the version, it saves files as "./filename" or
@@ -932,7 +932,7 @@
 
 	* From debian: added deba, debd, dpkg, apt script file systems.
 
-1999-12-28  Andrew V. Samoilov <sav@bcs.zp.ua>
+1999-12-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* vfs.c (vfs_parse_filedate): don't decode last columns as year
 
@@ -983,7 +983,7 @@
 
 	* shared_ftpfs_fish.c: Style fixes and small fixes
 
-1999-09-22  Bjorn Eriksson <mdeans@algonet.se>
+1999-09-22  Bjorn Eriksson  <mdeans@algonet.se>
 
 	* extfs/uzip.in: Better handling of zip-archives that contain files
 	which contain spaces.
@@ -1106,7 +1106,7 @@
 
 	* fish.c: Fix typo.
 
-1999-08-15  David Martin <dmartina@usa.net>
+1999-08-15  David Martin  <dmartina@usa.net>
 
 	* vfs.c (vfs_print_stats): Translate vfs stats
 
@@ -1147,7 +1147,7 @@ Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
 	files.
 	Added smbfs.[ch] to the list of sources.
 
-1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+1999-07-02  Tuomas J. Lukka  <lukka@iki.fi>
 
 	* Make-mc.in: $SAMBAFILES -> @SAMBAFILES@ in the rule
 	as well as the dependencies.
@@ -1159,7 +1159,7 @@ Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
 	(get_stat_info): 2 line fixes from Wayne to check the
 	cache properly.  WOOOOHOOOO!  Works like a charm.
 
-1999-06-14  Wayne Roberts <wroberts1@cx983858-b.orng1.occa.home.com>
+1999-06-14  Wayne Roberts  <wroberts1@cx983858-b.orng1.occa.home.com>
 
 	* vfs/smbfs.c: New file.  Implements the Samba-based file system.
 
@@ -1176,7 +1176,7 @@ Fri Jun 18 11:49:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	make a difference between "LIST -la" and "LIST -lLa". If we find such
 	a server don't use -lLa when resolving symbolic links.
 
-1999-05-12  Christian GENNERAT   <christian.gennerat@alcatel.fr>
+1999-05-12  Christian GENNERAT  <christian.gennerat@alcatel.fr>
 
 	* urar.in, uzip.in: patches to use in #urar and #uzip the new features
 	added in mc-4.5.31 (unlink, mkdir, rmdir)
@@ -1241,7 +1241,7 @@ Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	up "TMP RACE" comments so they are at least secure,
 	if not terribly robust.
 
-1999-03-31 Serge Winitzki <swinitzk@hotmail.com>
+1999-03-31 Serge Winitzki  <swinitzk@hotmail.com>
 
 	* added copy_in capability to mtools filesystem
 
@@ -1266,7 +1266,7 @@ Sun Mar 28 23:50:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* vfs.h (vfs_translate_url): Fixed the macro which is used when
 	compiling without vfs.
 
-1999-03-22  David Martin <dmartina@mailexcite.com>
+1999-03-22  David Martin  <dmartina@mailexcite.com>
 
 	* ftpfs.c: Internationalize the messages that are displayed as
 	hints.
@@ -1276,11 +1276,11 @@ Sun Mar 28 23:50:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* extfs.c (extfs_init): Fix the code here:  If the key is empty or
 	only contains a new line, C would be pointing into an invalid location.
 
-Mon Mar 22 02:56:23 1999  Timur I. Bakeyev <mc@bat.ru>
+Mon Mar 22 02:56:23 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Makefile-mc.in: s/$(libdir)\/extfs/$(extfsdir)/
 
-Mon Mar 22 02:00:16 1999  Valery Kornienkov <vlk@st.simbirsk.su>
+Mon Mar 22 02:00:16 1999  Valery Kornienkov  <vlk@st.simbirsk.su>
 
 	* extfs/uha.in: Add support for ha archives.
 
@@ -1294,7 +1294,7 @@ Mon Mar 22 02:00:16 1999  Valery Kornienkov <vlk@st.simbirsk.su>
 	* vfs.h: Make it compile in AIX.  Boy do those guys polute the
 	name space.
 
-1999-03-09  Shooby Ban <bansz@szif.hu>
+1999-03-09  Shooby Ban  <bansz@szif.hu>
 
 	* extfs/extfs.ini: Corrected rpms -> rpms:
 	by Balazs Nagy <julian7@kva.hu>
@@ -1303,7 +1303,7 @@ Mon Mar 22 02:00:16 1999  Valery Kornienkov <vlk@st.simbirsk.su>
 
 	* vfs.c (parse_ls_lga): kill the messages on each error.
 
-Tue Feb 16 12:11:04 1999 Paul Sheer <psheer@obsidian.co.za>
+Tue Feb 16 12:11:04 1999 Paul Sheer  <psheer@obsidian.co.za>
 
 	* mcserv.c, mcfs.c: mcserv and mcfs exchange st_dev instead
 	of st_rdev. This makes stats on device files useless. Fixing
@@ -1313,7 +1313,7 @@ Tue Feb 16 12:11:04 1999 Paul Sheer <psheer@obsidian.co.za>
 	recreate hardlinks. Whose idea was it to only return one of
 	these???
 
-1999-02-12  Sergey Korshunoff <seyko@p5.f434.n5020.z2.fidonet.org>
+1999-02-12  Sergey Korshunoff  <seyko@p5.f434.n5020.z2.fidonet.org>
 
 	* unlha.in: Fix the problem of having incorrect pathnames when
 	pulling out files from the LHA file.
@@ -1328,16 +1328,16 @@ Mon Feb  1 19:32:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	insert ".." as well or directories from ftp servers which don't
 	list "." and ".." are displayed with an additional "/".
 
-Mon Feb  1 02:55:07 1999  Timur I. Bakeyev <mc@bat.ru>
+Mon Feb  1 02:55:07 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* tcputil.c: One more my bug with '\0' -> NULL. Oops..
 
-Mon Feb  1 01:45:08 1999  Timur I. Bakeyev <mc@bat.ru>
+Mon Feb  1 01:45:08 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* mcserv.c: If setuid() is avaliable, use it, even, streuid() also
 	present. (BTW, bsdi uses it's own auth system..)
 
-Sun Jan 31 20:51:17 1999  Alexander Savelyev <fano@vcom.kiev.ua>
+Sun Jan 31 20:51:17 1999  Alexander Savelyev  <fano@vcom.kiev.ua>
 
 	* mcserv.c (do_auth): mcserv never auth properly on bsdi.
 	(mc/vfs/mcserv.c do_auth() on bsdi we must use setuid() not
@@ -1397,7 +1397,7 @@ Sun Jan 31 19:50:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* vfs.c (vfs_parse_ls_lga): attempt to correctly work against
 	Notwell 4
 
-Wed Jan 27 03:09:48 1999  Timur I. Bakeyev <mc@bat.ru>
+Wed Jan 27 03:09:48 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* All around the source: Changed copy_strings() to g_strconcat(). Modi-
 	fy last parameter in concat_dir_and_file() to "" - to prevent stack from
@@ -1408,7 +1408,7 @@ Wed Jan 27 03:09:48 1999  Timur I. Bakeyev <mc@bat.ru>
 	* Makefile.am (libvfs_la_SOURCES): Added utilvfs.h.
 	* Make-mc.in (VFSHDRS): Likewise.
 
-Sat Jan 23 18:40:19 1999  Timur I. Bakeyev <mc@bat.ru>
+Sat Jan 23 18:40:19 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* utilvfs.c (append_path_sep): Removed - concat_dir_and_file(dir, NULL);
 	gives the same effect.
@@ -1418,7 +1418,7 @@ Sat Jan 23 18:40:19 1999  Timur I. Bakeyev <mc@bat.ru>
 	* utilvfs.c (append_path_sep): Fixed, it was broken for paths
 	which already have a / at the end.
 
-Fri Jan 22 01:41:25 1999  Timur I. Bakeyev <mc@bat.ru>
+Fri Jan 22 01:41:25 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* undelfs.c: Found one more unconverted realloc() call.
 
@@ -1426,11 +1426,11 @@ Fri Jan 22 01:41:25 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* undelfs.c (undelfs_loaddel): Fix Timur's changes.
 
-Thu Jan 21 00:58:12 1999  Timur I. Bakeyev <mc@bat.ru>
+Thu Jan 21 00:58:12 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Actually commit all changes :>
 
-Tue Jan 19 05:15:49 1999  Timur I. Bakeyev <mc@bat.ru>
+Tue Jan 19 05:15:49 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Converted all occurences of DIR_SEP_CHAR and "/" to PATH_SEP and
 	PATH_SEP_STR. Additionall cleanups of the memory code.
@@ -1443,7 +1443,7 @@ Tue Jan 19 05:15:49 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* vfs.h: The correct thing to use is PATH_SEP and PATH_SEP_STR
 
-Sun Jan 17 16:19:48 1999  Timur I. Bakeyev <mc@bat.ru>
+Sun Jan 17 16:19:48 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
 	g_strdup()/g_free() routings. Also, copy_strings() replaced by
@@ -1452,7 +1452,7 @@ Sun Jan 17 16:19:48 1999  Timur I. Bakeyev <mc@bat.ru>
 	* utilvfs.h: New header file. Introduced as a stock header, which keeps
 	all includes in a right order, to avoid order-dependence mistakes.
 
-Sun Jan 17 15:49:39 1999  Paul Sheer <psheer@obsidian.co.za>
+Sun Jan 17 15:49:39 1999  Paul Sheer  <psheer@obsidian.co.za>
 
 	* direntry.c: vfs_s_find_entry_tree changed to follow
 	symlinks properly. Symlinks are now always followed
@@ -1483,30 +1483,30 @@ Sat Jan  9 19:13:28 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	(sfs_getid): dito, return value was wrong.
 
-Sat Jan  9 22:49:02 1999  Timur I. Bakeyev <mc@bat.ru>
+Sat Jan  9 22:49:02 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* vfs.c (parse_ls_lga): Rewrite function to make it more stright.
 	Also, fixed some bugs in parsing (and add new ones:), which diasallowed
 	proper parsing of device major and minor numbers. Some other fixes. Add
 	several new is_*() functions to make code readable.
 
-1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
+1999-01-08  Ilya Zakharevich  <ilya@math.ohio-state.edu>
 
 	* vfs.h (vfs_strip_suffix_from_filename): Typo fix.  Include
 	defines for non-vfs compilation.
 
-Fri Jan  8 20:03:36 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
+Fri Jan  8 20:03:36 1999  Andrej Borsenkow  <borsenkow.msk@sni.de>
 
 	* vfs.c (vfs_parse_filedate): I forgot to set got_year in one place
 	(where YY-MM-DD is parsed).
 
-Thu Jan  7 06:24:25 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
+Thu Jan  7 06:24:25 1999  Andrej Borsenkow  <borsenkow.msk@sni.de>
 
 	* vfs.c (vfs_parse_filedate): If the date is less than 6 months
 	in the past, it is shown without year. In this case MC assumed
 	the current year which is wrong from Jan to Jun.
 
-Thu Jan  7 03:47:35 1999  Timur I. Bakeyev <mc@bat.ru>
+Thu Jan  7 03:47:35 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* vfs.c (parse_ls_lga): Fixed Y2K typo pointed by Alex.
 
@@ -1610,7 +1610,7 @@ Wed Dec  2 14:06:49 KST 1998  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
 	* direntry.c (vfs_s_new_super): Added the missing return value.
 
-Sun Nov 29 02:54:54 1998  Timur I. Bakeyev <mc@bat.ru>
+Sun Nov 29 02:54:54 1998  Timur I. Bakeyev  <mc@bat.ru>
 
 	* vfs.h: (Temporary?) fix to the compiling error: Some of the error
 	codes, defined here are Linux specific and unknown to other systems.
@@ -1857,16 +1857,16 @@ Wed Sep 23 15:09:55 1998  Tom Tromey  <tromey@cygnus.com>
 	* vfs.h (MIN, MAX): Only define if not already defined; glib.h
 	also defines them.
 
-Wed Sep 23 13:33:14 1998  Pavel Machek <pavel@ucw.cz>
+Wed Sep 23 13:33:14 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* ftpfs.c: Fixed segfault caused by unitialized varialble
 
-Wed Sep 23 11:51:12 1998  Pavel Roskin <pavel_roskin@geocities.com)
+Wed Sep 23 11:51:12 1998  Pavel Roskin  <pavel_roskin@geocities.com)
 
 	* ftpfs.c: Special characters were printed via print_vfs_message.
 	This caused funny effects if "XTerm hintbar" was on.
 
-Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
+Mon Sep 21 11:40:30 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* ftpfs.c, fish.c: added O_LINEAR mode to handle linear read of
 	files in sane way. copy_file_file will make temporary files for a
@@ -1874,14 +1874,14 @@ Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
 
 	* tar.c: fixed bzip/bzip2 compressed archives
 
-Wed Sep 18 12:51:51 1998  Pavel Machek <pavel@ucw.cz>
+Wed Sep 18 12:51:51 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* fish.c, vfs.c: created aliases /#ssh: and /#rsh:
 
 	* vfs.h: created ERRNOR() macro which sets my_errno and returns,
 	which makes vfs's _much_ more readable
 
-Fri Sep 18 10:37:28 1998  Pavel Roskin <pavel_roskin@geocities.com)
+Fri Sep 18 10:37:28 1998  Pavel Roskin  <pavel_roskin@geocities.com)
 
 	* extfs.c: free() was called twice for the same place in memory
 	in extfs_open()
@@ -1936,7 +1936,7 @@ Tue Sep 15 20:02:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* shared_ftp_fish.c, fish.c: updated references to retrieve_dir to
 	honour the additional boolean parameter
 
-Tue Sep 15 00:42:15 1998  Timur Bakeyev <mc@bat.ru>
+Tue Sep 15 00:42:15 1998  Timur Bakeyev  <mc@bat.ru>
 
 	* vfs.h: add vfs_split() declaration, to make sfs.c happy.
 
@@ -1946,7 +1946,7 @@ Tue Sep 15 00:42:15 1998  Timur Bakeyev <mc@bat.ru>
 
 	* sfs.c (sfs_free): assignment operator was used to check for equality
 
-Fri Sep 11 22:36:38 1998  Pavel Machek <pavel@ucw.cz>
+Fri Sep 11 22:36:38 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* sfs.c: memory leak fixed
 
@@ -1956,7 +1956,7 @@ Fri Sep 11 22:36:38 1998  Pavel Machek <pavel@ucw.cz>
 
 	* shared*.c: reworked a bit not to include so many of ugly X_'s
 
-Wed Sep  2 13:59:47 1998  Pavel Machek <pavel@ucw.cz>
+Wed Sep  2 13:59:47 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* ftpfs.c: cleanup of code, few static's added
 
@@ -1966,7 +1966,7 @@ Wed Sep  2 13:59:47 1998  Pavel Machek <pavel@ucw.cz>
 	* util-alone.c: now includes code from libvfs.c, so we can kill
 	libvfs.c (which is good thing as it was non-standard in Makefiles)
 
-Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
+Sun Aug 30 13:19:49 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* undelfs.c: fixed, it has been broken for too long
 
@@ -1981,7 +1981,7 @@ Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
 
 	* libvfs.c: adding variable mc_home
 
-Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Thu Aug 27 19:45:31 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* extfs.c: mc_extfsdir was not defined in extfs_open()
 
@@ -1990,7 +1990,7 @@ Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* Makefile.am: sfs.c was not linked to standalone VFS
 
-Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
+Tue Aug 25 17:54:17 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* Added vfs_uid for use by libvfs.so users (rpc.nfsd)
 
@@ -2007,7 +2007,7 @@ Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
 	* Makefile.am (mad.c, mad.h): Create symlinks to counterparts in
 	`mc-src'.
 
-Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Wed Aug 12 19:04:48 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* extfs/patchfs: %k replaced with more portable %H in the format
 	for "date" command
@@ -2015,12 +2015,12 @@ Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* extfs/extfs.ini: Added patchfs and mailfs. Some comments
 	changed
 
-Tue Aug 11 15:25:52 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Tue Aug 11 15:25:52 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* extfs/rpm: Fix for buggy "cut" on HP-UX 10.20 which ignores
 	lines without enf-of-line.
 
-Mon Jun 01 03:30:07 1998  Alexander Savelyev <fano@vcom.kiev.ua>
+Mon Jun 01 03:30:07 1998  Alexander Savelyev  <fano@vcom.kiev.ua>
 
 	* tar.c (read_header): Support for linkflag on BSDI tar (pax), it
 	is always 0.
@@ -2048,24 +2048,24 @@ Fri Jul 24 00:22:30 1998  Tom Tromey  <tromey@cygnus.com>
 	* Make-mc.in: Renamed from Makefile.in.
 	* Makefile.in: Removed.
 
-Mon Jun 29 15:12:55 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Mon Jun 29 15:12:55 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* Makefile.in: Rewritten stuff concerning extfs files.
 
-Mon Jun 22 22:30:00 1998  Manish Vachharajani <mvachhar@vger.rutgers.edu>
+Mon Jun 22 22:30:00 1998  Manish Vachharajani  <mvachhar@vger.rutgers.edu>
 
 	* Makefile.in: Remove arfs, since it doesn't seem to exist
 
-Wed Jun 17 Pavel Machek <pavel@ucw.cz>
+Wed Jun 17 Pavel Machek  <pavel@ucw.cz>
 	* Rename helper scripts (extfs/{rar|lha|...}.in), so their names
 	are more logical (and so that things actually work, because new
 	names are currently in extfs.ini).
 
-Wed Jun 17 Pavel Machek <pavel@ucw.cz>
+Wed Jun 17 Pavel Machek  <pavel@ucw.cz>
 	* Modified code to use tempnam() instead of tmpnam(), fixed
 	tempnam() to use NULL instead of 0.
 
-Wed Jun  3 Pavel Machek <pavel@ucw.cz>
+Wed Jun  3 Pavel Machek  <pavel@ucw.cz>
 
 	* libvfs.c: adding libvfs.c which should contain things specific
 	to stand-alone libvfs.so. (This file was missing from previous
@@ -2076,7 +2076,7 @@ Mon Jun  1 16:00:19 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* ftpfs.c (ftpfs_fill_names): use right character to seperate
 	prefix and username
 
-Mon Jun  1 14:19:20 1998  Bakeyev I. Timur <mc@bat.ru>
+Mon Jun  1 14:19:20 1998  Bakeyev I. Timur  <mc@bat.ru>
 	* vfs.c (parse_ls_lga): allow a bit wider range of listings.
 
 	* vfs.c (is_time, is_year): new functions
@@ -2085,7 +2085,7 @@ Mon Jun  1 12:47:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (ftpfs_forget): Use the new ftpfs prefix.
 
-Thu May 28 16:42:31 1998  Pavel Machek <pavel@ucw.cz>
+Thu May 28 16:42:31 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* extfs.c, shared.c, tar.c: I changed semantics in my previous
 	patch - _get_path() now modifies strings passed to it. I thought
@@ -2166,7 +2166,7 @@ Tue Apr 28 06:06:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* ftpfs.c (retrieve_file_start2): Open file exclusively.
 	(retrieve_file): likewise.
 
-1998-03-31  Philippe De Muyter <phdm@macqel.be>
+1998-03-31  Philippe De Muyter  <phdm@macqel.be>
 
 	* vfs.h: compilation fix for m68k-motorola-sysv
 
@@ -2174,24 +2174,24 @@ Wed Mar 25 19:01:48 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* extfs/hp48: Added a usage summary
 
-Mon Mar 23 00:42:21 1998  Christofer Edvardsen <ce@earthling.net>
+Mon Mar 23 00:42:21 1998  Christofer Edvardsen  <ce@earthling.net>
 
 	* Makefile.in, extfs/extfs.ini, extfs/hp48: New external
 	filesystem to view and copy files to/from the HP48.
 
-Wed Feb 11 14:09:02 1998  Oleg <oleg@pobox.com>
+Wed Feb 11 14:09:02 1998  Oleg  <oleg@pobox.com>
 
 	* extfs.c: Add support for writtable external file systems.
 	Required for the httpfs.
 
-Fri Jan 23 07:27:37 1998  Peter Daum <gator@cs.tu-berlin.de>
+Fri Jan 23 07:27:37 1998  Peter Daum  <gator@cs.tu-berlin.de>
 
 	* extfs.c (open_extfs_archive): Pass the quoted argument to the
 	list command.
 
 	* mailfs: new file system.
 
-1997-12-21  Yuri Kuzmenko <Yuri.Kuzmenko@f169.n463.z2.fidonet.org>
+1997-12-21  Yuri Kuzmenko  <Yuri.Kuzmenko@f169.n463.z2.fidonet.org>
 
 	* tar.c: fix the bug which core dumps when trying to view tar file
 	with many files (over 60000).
@@ -2202,11 +2202,11 @@ Mon Jul 21 18:47:37 1997  Miguel de Icaza  <miguel@athena.nuclecu.unam.mx>
 	to make the code compile and work on the Alpha correctly.
 	Allocate a pointer to an int and use that instead.
 
-Thu Jul  3 19:08:43 1997  Michele Marziani <marziani@axpfe1.fe.infn.it>
+Thu Jul  3 19:08:43 1997  Michele Marziani  <marziani@axpfe1.fe.infn.it>
 
 	* extfs/rpm: Small fix for older RPM files.
 
-Mon Jun  9 19:00:30 1997  Norbert Warmuth <k3190@fh-sw.de>
+Mon Jun  9 19:00:30 1997  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* vfs/vfs.c (vfs_canon): Fix for the 'cd a:/somedir/..' problem
 
@@ -2237,7 +2237,7 @@ Fri May 16 16:42:18 1997  Tomasz K³oczko, <kloczek@rudy.mif.pg.gda.pl>
 	* vfs/ext/rpm: instead using sed and rpm -qpi use rpm queries,
 	more info currently displayed (changeslogs, Os, URL, packager
 
-Tue May 13 18:14:49 1997  Wojtek Pilorz <wpilorz@bdk.lublin.pl>
+Tue May 13 18:14:49 1997  Wojtek Pilorz  <wpilorz@bdk.lublin.pl>
 
 	* vfs/Makefile.in (INSTALL_PROGRAM): Use -m flag for install to
 	force vfs scripts to be executable on those systems that use
@@ -2245,7 +2245,7 @@ Tue May 13 18:14:49 1997  Wojtek Pilorz <wpilorz@bdk.lublin.pl>
 
 	* src/utilunix.c: Implement socketpair for SCO flavored systems.
 
-Mon Mar 17 12:03:50 1997  Norbert Warmuth <k3190@fh-sw.de>
+Mon Mar 17 12:03:50 1997  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* configure.in (--with-hsc): fix.
 
@@ -2253,7 +2253,7 @@ Mon Mar 17 12:03:50 1997  Norbert Warmuth <k3190@fh-sw.de>
 	passing (HSC_DEFAULT_PORT was passed as pointer to char instead of
 	passing it as integer)
 
-Tue Feb 25 20:21:00 1997  Joseph M. Hinkle <jhinkle@rockisland.com>
+Tue Feb 25 20:21:00 1997  Joseph M. Hinkle  <jhinkle@rockisland.com>
 
 	* extfs/lha: Updated the lha filesystem and included a command
 	for running an executable from within an lha archive suggested

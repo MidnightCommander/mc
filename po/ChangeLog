@@ -3,7 +3,7 @@
 	* zh_TW.Big5.po: Rename to ......
 	* zh_TW.po: This.
 
-2001-08-25  Fatih Demir <kabalak@gtranslator.org>
+2001-08-25  Fatih Demir  <kabalak@gtranslator.org>
 
 	* tr.po: Committed updated Turkish translation by Nilgün.
 
@@ -19,11 +19,11 @@
 2001-08-24  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian (bokmål) translation.
-	
+
 2001-08-20  Christian Meyer  <chrisime@gnome.org>
 
 	* de.po: Updated German translation.
-                 Oh man! This translations really needs a fully check.
+	         Oh man! This translations really needs a fully check.
 
 2001-08-20  Christian Rose  <menthos@menthos.com>
 
@@ -32,14 +32,14 @@
 
 2001-08-19  Andras Timar  <timar@gnome.hu>
 
-	* hu.po: Updated Hungarian translation 
+	* hu.po: Updated Hungarian translation
 	         by Arpad Biro <biro_arpad@yahoo.com>
 
 2001-08-17  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* pl.po: Updated Polish translation.
 
-2001-08-17  David Martin <dmartina@excite.es>
+2001-08-17  David Martin  <dmartina@excite.es>
 
 	* es.po: Update.
 	* es_ES.po: Likewise.
@@ -62,7 +62,7 @@
 
 	* cs.po: Updated translation.
 
-2001-08-02  Abel Cheung <maddog@linux.org.hk>
+2001-08-02  Abel Cheung  <maddog@linux.org.hk>
 
 	* it.po: Mark line 6916 as fuzzy, gettext is complaining.
 
@@ -70,7 +70,7 @@
 
 	* cs.po: Updated translation.
 
-2001-07-26  Abel Cheung <maddog@linux.org.hk>
+2001-07-26  Abel Cheung  <maddog@linux.org.hk>
 
 	* zh_TW.Big5.po: Update/cleanup traditional chinese translation.
 
@@ -103,7 +103,7 @@
 
 	* Makefile.in.in: Upgrade to gettext-0.10.38.
 
-2001-06-12  David Martin <dmartina@excite.es>
+2001-06-12  David Martin  <dmartina@excite.es>
 
 	* es.po: Update.
 	* es_ES.po: Likewise.
@@ -149,7 +149,7 @@
 	* POTFILES.in: Added some missing files.
 	* no.po: Updated Norwegian translation.
 
-2001-05-21  Pablo Saratxaga <pablo@mandrakesoft.com>
+2001-05-21  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* hu.po,zh_*: fixed syntax errors and multibyte errors
 	* ca.po: Updated Catalan file
@@ -174,17 +174,17 @@
 
 	* no.po: Updated Norwegian translation.
 
-2001-03-26  Gediminas Paulauskas <menesis@delfi.lt>
+2001-03-26  Gediminas Paulauskas  <menesis@delfi.lt>
 
 	* lv.po: added Latvian translation by
 	Peteris Krisjanis <peterisk@apollo.lv>.
 
-2001-03-24  Fatih Demir <kabalak@gtranslator.org>
+2001-03-24  Fatih Demir  <kabalak@gtranslator.org>
 
 	* tr.po: Committed fullfilled and finished
 		Turkish translation by Nilgün.
 
-2001-03-09  Carlos Perelló Marín <carlos@gnome-db.org>
+2001-03-09  Carlos Perelló Marín  <carlos@gnome-db.org>
 
 	* es.po, es_ES.po: Update Spanish translation by
 	  David Martin <dmartina@excite.es>
@@ -201,7 +201,7 @@
 
 	* de.po: Updated German translation.
 
-2001-02-17  Carlos Perelló Marín <carlos@gnome-db.org>
+2001-02-17  Carlos Perelló Marín  <carlos@gnome-db.org>
 
 	* es.po, es_ES.po: Update Spanish translation by
 	  David Martin <dmartina@excite.es>
@@ -223,7 +223,7 @@
 
 	* sk.po: Updated Slovak translation
 
-2001-01-26  Pablo Saratxaga <pablo@mandrakesoft.com>
+2001-01-26  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* az.po: Added Azeri file
 	* {fr,sl,po,uk,sk,nl,it,ro,pl,ru,ta,zh_TW.Big5}.po: fixed headers and
@@ -238,7 +238,7 @@
 
 	* no.po: Updated Norwegian (bokmål) translation.
 
-2001-01-08  Szabolcs Ban <shooby@gnome.hu>
+2001-01-08  Szabolcs Ban  <shooby@gnome.hu>
 
 	* hu.po: Updated, added mc.hlp.hu
 
@@ -250,12 +250,12 @@
 
 	* fr.po: Updated French translation.
 
-2000-12-27  Fatih Demir	<kabalak@gmx.net>
+2000-12-27  Fatih Demir  <kabalak@gmx.net>
 
 	* tr.po: Committed updated
 		Turkish translation.
 
-2000-12-26  Szabolcs Ban <shooby@gnome.hu>
+2000-12-26  Szabolcs Ban  <shooby@gnome.hu>
 
 	* hu.po: Fixed many horrible l10n bugs
 
@@ -271,7 +271,7 @@
 
 	* sv.po: Updated Swedish translation.
 
-2000-12-03  Kai Lahmann <kl@linuxfaqs.de>
+2000-12-03  Kai Lahmann  <kl@linuxfaqs.de>
 
 	* de.po: UPdated German translation
 
@@ -279,7 +279,7 @@
 
 	* pl.po: Updated Polish translation
 
-2000-11-13  Szabolcs BAN <shooby@gnome.hu>
+2000-11-13  Szabolcs BAN  <shooby@gnome.hu>
 
 	* hu.po: Updated from Szabolcs Szasz.
 
@@ -307,7 +307,7 @@
 
 	* pl.po: Updated Polish translation.
 
-2000-10-28  Kai Lahmann <kl@linuxfaqs.de>
+2000-10-28  Kai Lahmann  <kl@linuxfaqs.de>
 
 	* de.po: Updated German translation
 
@@ -361,11 +361,11 @@
 
 	* POTFILES.in: src/features.c renamed to src/textconf.c
 
-2000-09-09  Szabolcs BAN <shooby@gnome.hu>
+2000-09-09  Szabolcs BAN  <shooby@gnome.hu>
 
 	* hu.po: Updated from Szabolcs Szasz <sz@szasz.hu>
 
-2000-09-08  Szabolcs BAN <shooby@gnome.hu>
+2000-09-08  Szabolcs BAN  <shooby@gnome.hu>
 
 	* hu.po: Changes, typo and bug fixes from the new translator
 	Szabolcs Szasz <sz@szasz.hu>
@@ -471,7 +471,7 @@
 
 	* no.po: Updated Norwegian translation.
 
-2000-05-16  Yukihiro Nakai <nakai@gnome.gr.jp>
+2000-05-16  Yukihiro Nakai  <nakai@gnome.gr.jp>
 
 	* ja.po: Update from Akira TAGOH.
 
@@ -518,7 +518,7 @@
 
 	* ru.po: updated russian translation.
 
-2000-04-29  Pablo Saratxaga <pablo@mandrakesoft.com>
+2000-04-29  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* wa.po: small fixes
 
@@ -530,7 +530,7 @@
 
 	* no.po: Updated Norwegian translation.
 
-2000-04-18  Fatih Demir	<kabalak@gmx.net>
+2000-04-18  Fatih Demir  <kabalak@gmx.net>
 
 	* tr.po : A little bit more strings & no crashes any more ..
 
@@ -539,11 +539,11 @@
 	* cs.po: patch from rebel@penguin.cz: make shortcuts more like in
 	english version
 
-2000-04-16  Pablo Saratxaga <pablo@mandrakesoft.com>
+2000-04-16  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* da.po: Updated Danish file
 
-2000-04-14  Yukihiro Nakai <nakai@gnome.gr.jp>
+2000-04-14  Yukihiro Nakai  <nakai@gnome.gr.jp>
 
 	* ja.po: Update from Akira Tagoh.
 
@@ -564,19 +564,19 @@
 
 	* no.po: Updated Norwegian translation.
 
-2000-02-12  Fatih Demir <kabalak@gmx.net>
+2000-02-12  Fatih Demir  <kabalak@gmx.net>
 
 	* tr.po: Updated tr.po a little bit ..
 
-2000-01-31  Yuan-Chung Cheng <platin@linux.org.tw>
+2000-01-31  Yuan-Chung Cheng  <platin@linux.org.tw>
 
 	* zh_CN.GB2312.po: Added po file from TurboLinux Chinese Develop Team.
 
-2000-01-26  Yukihiro Nakai <nakai@gnome.gr.jp>
+2000-01-26  Yukihiro Nakai  <nakai@gnome.gr.jp>
 
 	* ja.po: Update from Akira Tagoh.
 
-2000-01-04  Vincent Renardias <vincent@ldsol.com>
+2000-01-04  Vincent Renardias  <vincent@ldsol.com>
 
 	* fr.po: update.
 
@@ -585,7 +585,7 @@
 	* update.sh: A little script that lets people
 	update the .pot file without makefiles etc.
 
-2000-01-03  Fatih Demir <kabalak@gmx.net>
+2000-01-03  Fatih Demir  <kabalak@gmx.net>
 
 	* tr.po: Added a first-translation try ...
 
@@ -602,7 +602,7 @@
 	* sk.po: Minor update
 	  ../configure.in: added sk to list of translations
 
-1999-12-12 Sergey Panov <sipan@mit.edu>
+1999-12-12 Sergey Panov  <sipan@mit.edu>
 
 	* ru.po: Updated translation
 	from Evgeny Bulgakov <bgav@netvision.net.il>
@@ -668,7 +668,7 @@
 
 	* no.po: Updated Norwegian translation.
 
-1999-10-06  David Martin <dmartina@usa.net>
+1999-10-06  David Martin  <dmartina@usa.net>
 
 	* POTFILES.in: added gdeskdop-init.c
 
@@ -683,7 +683,7 @@
 	* da.po: Updated Danish translation from Birger
 	Langkjer <birger.langkjer@image.dk>
 
-1999-09-29  Yukihiro Nakai <nacai@iname.com>
+1999-09-29  Yukihiro Nakai  <nacai@iname.com>
 
 	* ja.po: Update from Kusano Takayuki
 
@@ -716,7 +716,7 @@
 
 	* no.po: Updated Norwegian translation.
 
-1999-09-23  Jorge Godoy	 <godoy@conectiva.com.br>
+1999-09-23  Jorge Godoy  <godoy@conectiva.com.br>
 
 	* pt_BR.po: Added pt_BR translation.
 
@@ -728,7 +728,7 @@
 
 	* de.po: Updates, cleanups, etc.
 
-1999-09-02  Vincent Renardias <vincent@ldsol.com>
+1999-09-02  Vincent Renardias  <vincent@ldsol.com>
 
 	* Updated fr.po for mc-4.5.39:
 	  < 1375 translated messages, 14 fuzzy translations, 4 untranslated messages.
@@ -769,11 +769,11 @@
 
 	* no.po: Updated translation. All done.
 
-1999-09-02  Vincent Renardias <vincent@ldsol.com>
+1999-09-02  Vincent Renardias  <vincent@ldsol.com>
 
 	* Updated fr.po: 1379 translated messages.
 
-1999-09-02  Vincent Renardias <vincent@ldsol.com>
+1999-09-02  Vincent Renardias  <vincent@ldsol.com>
 
 	* Updated fr.po:
 	before: 1318 translated messages, 38 fuzzy translations, 19 untranslated messages.
@@ -802,7 +802,7 @@
 	* da.po: Updated Danish translation from Birger Langkjer
 	<birger.langkjer@image.dk>
 
-1999-08-30  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+1999-08-30  Pablo Saratxaga  <srtxg@chanae.alphanet.ch>
 
 	* wa.po: updated walloon language file from
 	Lorint Hendschel <LorintHendschel@skynet.be>
@@ -811,11 +811,11 @@
 
 	* POTFILES.in: Added gnome/gdesktop-prefs.c to the list of files.
 
-1999-08-24  Mikko Rauhala <mjr@iki.fi>
+1999-08-24  Mikko Rauhala  <mjr@iki.fi>
 
 	* fi.po: Added lots of stuff, gnome ui should be okay now, at least.
 
-1999-08-19  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+1999-08-19  Pablo Saratxaga  <srtxg@chanae.alphanet.ch>
 
 	* wa.po: updated walloon language file from
 	Lorint Hendschel <LorintHendschel@skynet.be>
@@ -824,7 +824,7 @@
 
 	* no.po: Updated translation.
 
-1999-08-13  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+1999-08-13  Pablo Saratxaga  <srtxg@chanae.alphanet.ch>
 
 	* wa.po: updated walloon language file
 
@@ -832,7 +832,7 @@
 
 	* POTFILE.in: Removed gpopup.c as it is not compiled.
 
-1999-08-08  David Martin <dmartina@usa.net>
+1999-08-08  David Martin  <dmartina@usa.net>
 
 	* POTFILES.in: Removed symbolic links, and outdated
 	gmc-window.[ch] and olddnd.c. These don't repport any new strings,
@@ -843,29 +843,29 @@
 	strings in gaction.c. Merged with a new mc.pot after the changes
 	in POTFILES.in.
 
-1999-08-01  David Martin <dmartina@usa.net>
+1999-08-01  David Martin  <dmartina@usa.net>
 
 	* es.po, es_ES.po: added translation for history box title
 
-1997-07-23  Spiros Papadimitriou <spapadim+@cs.cmu.edu>
+1997-07-23  Spiros Papadimitriou  <spapadim+@cs.cmu.edu>
 
 	* el.po: Added; translation still incomplete.
 
-1999-07-21  Vincent Renardias <vincent@ldsol.com>
+1999-07-21  Vincent Renardias  <vincent@ldsol.com>
 
 	* fr.po: integrated big proof-reading patch
 	from  Thibaut Cousin <cousin@clrhp04.in2p3.fr>.
 	* completed translation: 1357 translated messages.
 
-1999-07-04  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
+1999-07-04  Pablo Saratxaga  <srtxg@chanae.alphanet.ch>
 
 	* Added walloon language (wa.po)
 
-1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+1999-07-02  Tuomas J. Lukka  <lukka@iki.fi>
 
 	* Fix it.po
 
-1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+1999-07-02  Tuomas J. Lukka  <lukka@iki.fi>
 
 	* Fix fi.po
 
@@ -873,11 +873,11 @@
 
 	* no.po: Updated translation.
 
-1999-06-24  David Martin <dmartina@mailexcite.com>
+1999-06-24  David Martin  <dmartina@mailexcite.com>
 
 	* es.po: Updated Spanish translations
 
-1999-06-22  Norbert Warmuth <nwarmuth@privat.circular.de>
+1999-06-22  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Updated translation from David Martin.
 
@@ -905,7 +905,7 @@
 
 	* no.po: Updated translation.
 
-Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
+Wed May  5 07:15:12 1999  David Martin  <dmartina@usa.net>
 
 	* Updated es.po and es_ES.po
 
@@ -913,11 +913,11 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 
 	* de.po: Very very very small update.
 
-1999-04-19  Tuomas J. Lukka <lukka@iki.fi>
+1999-04-19  Tuomas J. Lukka  <lukka@iki.fi>
 
 	* fi.po: initial Finnish translation
 
-1999-04-15  Yukihiro Nakai <nacai@iname.com>
+1999-04-15  Yukihiro Nakai  <nacai@iname.com>
 
 	* ja.po: Initial Japanese translation from Yasuyuki Furukawa.
 
@@ -925,7 +925,7 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 
 	* de.po: Updated.
 
-1999-04-06  David Martin <dmartina@usa.net>
+1999-04-06  David Martin  <dmartina@usa.net>
 
 	* Updated es.po
 
@@ -933,7 +933,7 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 
 	* no.po: Updated translation.
 
-1999-03-22  David Martin <dmartina@mailexcite.com>
+1999-03-22  David Martin  <dmartina@mailexcite.com>
 
 	* es.po: Updated.
 
@@ -945,7 +945,7 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 
 	* no.po: Updated translation.
 
-Fri Mar 19 06:32:36 1999  David Martin <dmartina@usa.net>
+Fri Mar 19 06:32:36 1999  David Martin  <dmartina@usa.net>
 
 	* es.po: update
 
@@ -957,7 +957,7 @@ Wed Mar 10 22:05:46 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Updated with David Martins translation.
 
-1999-03-08 Sergey Panov <sipan@mit.edu>
+1999-03-08 Sergey Panov  <sipan@mit.edu>
 
 	* POTFILES.in: add gnome/gcustom-layout.c file
 
@@ -995,7 +995,7 @@ Tue Feb 16 20:46:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Remove " from middle of line.
 
-Sun Jan 31 21:09:38 1999  Alexander Savelyev <fano@vcom.kiev.ua>
+Sun Jan 31 21:09:38 1999  Alexander Savelyev  <fano@vcom.kiev.ua>
 
 	* Makefile.in.in: use DESTDIR (makes it possible to move
 	installation path with "make DESTDIR="...")
@@ -1022,7 +1022,7 @@ Wed May 13 12:24:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	dependencies of the target all-yes (instead prefix cat-id-tbl.c
 	with $(src)).
 
-1998-05-03  David Martin <mozart.usal.es>
+1998-05-03  David Martin  <mozart.usal.es>
 
 	* es.po: Various spelling and typo fixes .
 

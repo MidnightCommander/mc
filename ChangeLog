@@ -723,7 +723,7 @@
 
 	* lib/Makefile.am: Distribute files listed in LOCALIZED_HELP.
 
-2001-01-08  Szabolcs Ban <shooby@gnome.hu>
+2001-01-08  Szabolcs Ban  <shooby@gnome.hu>
 
 	* lib/mc.hlp.hu: Added Hungarian help file from
 	  tothb1@freemail.hu, Janos.Zana@elfiz2.kee.hu,
@@ -733,7 +733,7 @@
 	* src/cmd.c, src/dlg.c, src/tree.c, src/view.c,
 	  gtkedit/editcmd.c: I18n of mc.hlp
 
-2000-12-29  Szabolcs Ban <shooby@gnome.hu>
+2000-12-29  Szabolcs Ban  <shooby@gnome.hu>
 
 	* doc/mc.1.in: Corrected badly formatted link...
 
@@ -1050,7 +1050,7 @@
 
 	* README.PC, doc/mc.1.in, doc/mc.sgml: Updated e-mail address
 
-2000-07-21  Pablo Saratxaga <pablo@mandrakesoft.com>
+2000-07-21  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* src/main.c: make 8bit input/output the default (99% of the people
 	expects that; lets the remaining 1% use the configuration menu
@@ -1146,7 +1146,7 @@
 
 	* configure.in: Fix the extfs-configure-fragment-in-final-output bug
 
-2000-01-31  Yuan-Chung Cheng <platin@linux.org.tw>
+2000-01-31  Yuan-Chung Cheng  <platin@linux.org.tw>
 
 	* configure.in: Added "zh_CN.GB2312" to ALL_LINGUAS.
 
@@ -1181,7 +1181,7 @@
 
 	* Added icon and keys entry for Scheme source.
 
-2000-01-03  Fatih Demir <kabalak@gmx.net>
+2000-01-03  Fatih Demir  <kabalak@gmx.net>
 
 	* configure.in: Added tr -> ALL_LINGUAS .
 
@@ -1193,7 +1193,7 @@
 
 	* configure.in (VERSION): Bumped version number to 4.5.42.
 
-1999-11-25  Yuri Syrota <rasta@renome.rovno.ua>
+1999-11-25  Yuri Syrota  <rasta@renome.rovno.ua>
 
 	* configure.in: added 'uk' to ALL_LINGUAS.
 
@@ -1210,7 +1210,7 @@
 
 	* configure.in (VERSION): Set version number to 4.5.39.
 
-1999-09-23	Jorge Godoy	<godoy@conectiva.com.br>
+1999-09-23	Jorge Godoy  <godoy@conectiva.com.br>
 
 	* configure.in: Added pt_BR to ALL_LINGUAS
 
@@ -1235,7 +1235,7 @@
 
 	* lib/startup.links: Changed the news link to Gnotices
 
-1999-09-19  David Martin <dmartina@usa.net>
+1999-09-19  David Martin  <dmartina@usa.net>
 
 	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that
 	8 bit chars from strftime get displayed when inserting date.
@@ -1274,7 +1274,7 @@
 	* doc-gnome/*: Shiny new docs from users-guide.
 	All synced up.
 
-1999-09-03  Pablo Saratxaga <pablo@mandrakesoft.com>
+1999-09-03  Pablo Saratxaga  <pablo@mandrakesoft.com>
 
 	* configure.in: added 'nl' to ALL_LINGUAS, it was missing.
 
@@ -1294,19 +1294,19 @@
 	symlink attacks (mcfn_install and the man page still needs to be
 	updated).
 
-1999-08-20  Norbert Warmuth <nwarmuth@privat.circular.de>
+1999-08-20  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* configure.in (AC_WITH_SLANG): rm -f destination before makeing
 	a symbolic link (ln -sf doesn't work as expected on Solaris)
 
-1999-08-19  Elliot Lee <sopwith@redhat.com>
+1999-08-19  Elliot Lee  <sopwith@redhat.com>
 	* */Makefile.in: Have 'make dist' work with builddir != srcdir.
 
 1999-08-19  Federico Mena Quintero  <federico@redhat.com>
 
 	* doc-gnome/C/gmc.sgml: Index fixes.
 
-1999-08-18  Elliot Lee <sopwith@redhat.com>
+1999-08-18  Elliot Lee  <sopwith@redhat.com>
 
 	* gtkedit/gtkedit.c: Make it build with gcc 2.95, by fixing the non-constant
 	initializers in the GnomeUIInfo structure.
@@ -1315,17 +1315,17 @@
 
 	* configure.in (VERSION): Bumped version number to 4.5.38.
 
-1999-08-15  Norbert Warmuth <nwarmuth@privat.circular.de>
+1999-08-15  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* lib/Makefile.in: added mc.hint.es to LIBFILES_CONST
 
-1999-08-15  David Martin <dmartina@usa.net>
+1999-08-15  David Martin  <dmartina@usa.net>
 
 	* gtkedit/edit.c: Print localized date with strftime()
 
 	* lib/mc.hint.es: NEW FILE. Hints in Spanish flavour.
 
-1999-08-08  David Martin <dmartina@usa.net>
+1999-08-08  David Martin  <dmartina@usa.net>
 
 	* gtkedit/syntax.c (upgrade_syntax_file): Mark error strings for
 	translation.
@@ -1343,7 +1343,7 @@
 	* syntax/Makefile.in (ALLSYNTAX): Added the missing syntax files
 	to the list.
 
-1999-07-21  Paul Sheer <psheer@obsidian.co.za>
+1999-07-21  Paul Sheer  <psheer@obsidian.co.za>
 
 	* gtkedit.c, edit.c, editcmd.c, syntax.c, edit.h, bookmark.c,
 	editwidget.c: bring editor stuff up to date with cooledit 3.11.5
@@ -1373,7 +1373,7 @@ July 19, 1999 Elliot Lee
 
 	* configure.in (VERSION): Bumped version number to 4.5.34.
 
-1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+1999-07-02  Tuomas J. Lukka  <lukka@iki.fi>
 
 	* Add fi into ALL_LINGUAS
 
@@ -1394,11 +1394,11 @@ July 19, 1999 Elliot Lee
 	* Make.common.in (confdir): Define confdir as sysconfdir.  This
 	should fix the problem we had with FSSTND distributions.
 
-1999-02-22  Vladimir Kondratiev <vkondra@iil.intel.com>
+1999-02-22  Vladimir Kondratiev  <vkondra@iil.intel.com>
 
 	* mc.spec.in: added syntax files to %files
 
-1999-06-22  David Martin <dmartina@usa.net>
+1999-06-22  David Martin  <dmartina@usa.net>
 
 	* gtkedit/gtkedit.c (tb_items): Mark strings for localization.
 
@@ -1412,7 +1412,7 @@ July 19, 1999 Elliot Lee
 
 	* configure.in, Makefile.in: added the gmc helpfile to the build
 
-1999-05-23  Yukihiro Nakai <nacai@iname.com>
+1999-05-23  Yukihiro Nakai  <nacai@iname.com>
 
 	* Add ja entry to LANG in configure.in
 
@@ -1448,7 +1448,7 @@ Wed Apr 21 20:44:41 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* INSTALL: Added documentation for --with-tm-x-support
 
-Sun Apr 18 17:51:54 EDT 1999 Gregory McLean <gregm@comstar.net>
+Sun Apr 18 17:51:54 EDT 1999 Gregory McLean  <gregm@comstar.net>
 
 	* mc.spec.in : Folded in some changes from the 'offical' rpm
 	spec file.
@@ -1520,7 +1520,7 @@ Mon Mar 22 01:52:32 1999  Timur Bakeyev  <mc@bat.ru>
 	* configure.in, Makefile.in, Makefile.common: Add syntax/Makefile.in,
 	as requested by Paul. Still, need some checking...
 
-Sun Mar 21 03:55:24 1999 Paul Sheer <psheer@obsidian.co.za>
+Sun Mar 21 03:55:24 1999 Paul Sheer  <psheer@obsidian.co.za>
 
 	* edit/*.[ch] gtkedit/*.[ch]: brought the editor up
 	to date with cooledit 3.9.0. This adds some new features.
@@ -1543,7 +1543,7 @@ Sun Mar 21 03:55:24 1999 Paul Sheer <psheer@obsidian.co.za>
 	No need to copy VERSION from $srcdir, it's already generated in
 	$buildir.
 
-Fri Mar 19 06:32:36 1999  David Martin <dmartina@usa.net>
+Fri Mar 19 06:32:36 1999  David Martin  <dmartina@usa.net>
 
 	* edit/edit_key_translator.c: Added missing translation tags.
 
@@ -1552,14 +1552,14 @@ Fri Mar 19 06:32:36 1999  David Martin <dmartina@usa.net>
 	* configure.in: Minimum version of glib should be 1.2.0.
 	(VERSION): Bumped version number to 4.5.27.
 
-Wed Mar 10 21:52:55 1999  David Martin <dmartina@usa.net>
+Wed Mar 10 21:52:55 1999  David Martin  <dmartina@usa.net>
 
 	* gtkedit/editcmd.c: Added missing translation tags.
 
 	* gtkedit/editoptions.c: Added missing translation tags. Translate
 	radio buttons on first use.
 
-Sat Feb 27 21:00:45 1999 Gregory McLean <gregm@comstar.net>
+Sat Feb 27 21:00:45 1999 Gregory McLean  <gregm@comstar.net>
 
 	* applied a patch from Duncan Mak <mustapha@wegythu.res.cmu.edu>
 	to get the mc spec file to work.
@@ -1570,7 +1570,7 @@ Fri Feb 26 22:06:51 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* gtkedit/editcmd.c (menu_save_mode_cmd): translate strings for
 	radio buttons on first pass.
 
-Fri Feb 26 21:45:30 1999  David Martin <dmartina@usa.net>
+Fri Feb 26 21:45:30 1999  David Martin  <dmartina@usa.net>
 
 	* gtkedit/editcmd.c: Mark strings in the search and replace
 	dialogs for translation. Resized these dialogs to let the messages
@@ -1581,7 +1581,7 @@ Fri Feb 26 21:45:30 1999  David Martin <dmartina@usa.net>
 	* gtkedit/editwidget.c (selection_send): Use the proper type for
 	64-bit cleanliness (Patch from George Lebl).
 
-Tue Feb 16 21:24:43 1999  David Martin <dmartina@usa.net>
+Tue Feb 16 21:24:43 1999  David Martin  <dmartina@usa.net>
 
 	* gtkedit/gtkedit.c: Hack to get one more string defined in a macro
 	into the catalog file.
@@ -1679,7 +1679,7 @@ Sun Jan 17 03:19:47 1999  Timur Bakeyev  <mc@bat.ru>
 	* configure.in: Add comments before "Let" and "the" - typo. Add new
 	path to include's search.
 
-1999-01-10  Ilya Zakharevich <ilya@math.ohio-state.edu>
+1999-01-10  Ilya Zakharevich  <ilya@math.ohio-state.edu>
 
 	* gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.
 
