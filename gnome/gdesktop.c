@@ -39,6 +39,7 @@ typedef struct {
 	icon_t            type;
 	int               x, y;
 	char              *title;
+	char              *pathname;
 } desktop_icon_t;
 
 /* The list of icons on the desktop */
@@ -131,7 +132,9 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	char *p;
 	int count;
 	int len;
-	
+	int is_directory = strcasecmp (di->dentry->type, "directory") == 0;
+
+		
 	if (strcmp (event->data_type, "url:ALL") == 0){
 		count = event->data_numbytes;
 		p = event->data;
@@ -145,8 +148,6 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 		return;
 	}
 
-	if (strcmp (event->data_type, "urls:ALL") == 0){
-	}
 }
 
 static void
@@ -190,6 +191,13 @@ dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *d
 		dentry_properties (di);
 }
 		
+char *drop_types [] = {
+	"text/plain",
+	"url:ALL",
+};
+
+#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
+
 static void
 desktop_load_dentry (char *filename)
 {
@@ -197,11 +205,6 @@ desktop_load_dentry (char *filename)
 	desktop_icon_t *di;
 	GtkWidget *window;
 
-	char *drop_types [] = {
-		"text/plain",
-		"url:ALL",
-	};
-	
 	dentry = gnome_desktop_entry_load (filename);
 
 	if (!dentry)
@@ -241,7 +244,7 @@ desktop_load_dentry (char *filename)
 
 	/* 1. Drag and drop functionality */
 	connect_drop_signals (window, di);
-	gtk_widget_dnd_drop_set (window, TRUE, drop_types, 1, FALSE);
+	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 	
 	/* 2. Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
@@ -291,8 +294,21 @@ get_desktop_icon (char *pathname)
 static void
 desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
-	if (event->type == GDK_2BUTTON_PRESS && event->button == 1)
-		printf ("YOu just discovered that regex_command ('open') is not being invoked yet\n");
+	if (!(event->type == GDK_2BUTTON_PRESS && event->button == 1))
+		return;
+
+	if (di->dentry){
+		printf ("FIXME: No support for dentry loaded stuff yet\n");
+	} else 
+		regex_command (di->pathname, "Open", 0, 0);
+}
+
+static void
+drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
+{
+	if (strcmp (event->data_type, "url:ALL") == 0){
+	}
+	
 }
 
 static void
@@ -308,12 +324,20 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	di = xmalloc (sizeof (desktop_icon_t), "dcle");
 	di->dentry = NULL;
 	di->widget = window;
+	di->pathname = strdup (pathname);
 	desktop_icon_set_position (di, window);
 
 	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
 
 	/* Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (desktop_file_exec), di);
+	gtk_widget_realize (window);
+	
+	gtk_signal_connect (GTK_OBJECT (window), "drop_data_available_event",
+			    GTK_SIGNAL_FUNC (drop_on_launch_entry), di);
+
+	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	
 	gtk_widget_show (window);
 }
 
@@ -360,8 +384,14 @@ desktop_load (char *desktop_dir)
 		} else {
 			if (strstr (dent->d_name, ".desktop"))
 				desktop_load_dentry (full);
-			else
-				desktop_create_launch_entry (full, dent->d_name);
+			else {
+				char *desktop_version;
+				
+				desktop_version = copy_strings (full, ".desktop", NULL);
+				if (!exist_file (desktop_version))
+					desktop_create_launch_entry (full, dent->d_name);
+				free (desktop_version);
+			}
 		}
 		
 		free (full);

@@ -11,6 +11,7 @@
 #include <stdlib.h>		/* atoi */
 #include "fs.h"
 #include "x.h"
+#include <gdk/gdkprivate.h>
 #include "dir.h"
 #include "panel.h"
 #include "command.h"
@@ -37,6 +38,7 @@ GdkBitmap *directory_mask;
 static int mc_bindings;
 
 static char *drag_types [] = { "text/plain", "url:ALL" };
+static char *drop_types [] = { "url:ALL" };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
@@ -621,23 +623,28 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 	if (panel->marked){
 		char *data, *copy;
 		int i, total_len = 0;
-
+		int cwdlen = strlen (panel->cwd) + 1;
+		
 		/* first pass, compute the length */
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked)
-				total_len += panel->dir.list [i].fnamelen + 1;
+				total_len += (cwdlen + panel->dir.list [i].fnamelen + 1);
 		
 		data = copy = xmalloc (total_len, "build_selected_file_list");
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
-				strcpy (copy, panel->dir.list [i].fname);
-				copy += panel->dir.list [i].fnamelen + 1;
+				strcpy (copy, panel->cwd);
+				copy [cwdlen] = '/';
+				strcpy (&copy [cwdlen+1], panel->dir.list [i].fname);
+				copy += panel->dir.list [i].fnamelen + 1 + cwdlen;
 			}
 		*file_list_len = total_len;
 		return data;
 	} else {
-		*file_list_len = strlen (panel->dir.list [panel->selected].fname) + 1;
-		return strdup (panel->dir.list [panel->selected].fname);
+		char *fullname = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+		
+		*file_list_len = strlen (fullname) + 1;
+		return fullname;
 	}
 }
 
@@ -646,12 +653,21 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 {
 	void *data;
 	int  len;
-
+	GdkWindowPrivate *clist_window = (GdkWindowPrivate *) (GTK_WIDGET (widget)->window);
+	GdkWindowPrivate *clist_areaw  = (GdkWindowPrivate *) (GTK_CLIST (widget)->clist_window);
+		
 	printf ("Drag request!\n");
+	printf ("Drag [%s] request!\n", event->data_type);
+	
 	if ((strcmp (event->data_type, "text/plain") == 0) ||
 	    (strcmp (event->data_type, "url:ALL")    == 0)){
 		data = panel_build_selected_file_list (panel, &len);
-		gtk_widget_dnd_data_set (widget, (GdkEvent *) event, data, len);
+		printf ("Data: %s\n", data);
+		
+		if (clist_window->dnd_drag_accepted)
+			gdk_window_dnd_data_set ((GdkWindow *)clist_window, (GdkEvent *) event, data, len);
+		else
+			gdk_window_dnd_data_set ((GdkWindow *)clist_areaw, (GdkEvent *) event, data, len);
 		free (data);
 	}
 }
@@ -671,17 +687,17 @@ panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, W
 
 /* Workaround for the CList that is not adding its clist-window to the DND windows */
 static void
-fixed_gtk_widget_dnd_drop_set (GtkCList *clist, int drop_enable, char **drag_types, int count, int is_destructive)
+fixed_gtk_widget_dnd_drop_set (GtkCList *clist, int drop_enable, char **drop_types, int count, int is_destructive)
 {
-	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drag_types, count, is_destructive);
-	gdk_window_dnd_drop_set (clist->clist_window, drop_enable, drag_types, count, is_destructive);
+	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drop_types, count, is_destructive);
+	gdk_window_dnd_drop_set (clist->clist_window, drop_enable, drop_types, count, is_destructive);
 }
 
 static void
 fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_accept_list, int numtypes)
 {
 	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes);
-/*	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes); */
+	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes);
 }
 				
 void
@@ -693,7 +709,7 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_signal_connect (obj, "drag_request_event",
 			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
 	fixed_gtk_widget_dnd_drag_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types));
-
+ 
 	/* DND: Drop setup */
 	gtk_signal_connect (obj, "drop_enter_event",
 			    GTK_SIGNAL_FUNC (panel_drop_enter), panel);
@@ -704,7 +720,7 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_signal_connect (obj, "drop_data_available_event",
 			    GTK_SIGNAL_FUNC (panel_drop_data_available), panel);
 
-	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drag_types, ELEMENTS (drag_types), FALSE);
+	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
 GtkWidget *
@@ -738,7 +754,6 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list),
 			    "realize",
 			    GTK_SIGNAL_FUNC (panel_realized), panel);
-	
 	return file_list;
 }
 

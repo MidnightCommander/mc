@@ -1,3 +1,9 @@
+Mon Mar  2 15:54:55 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* dlg.c (create_dlg): Set running to 0 on creation;  
+	(add_widgetl): do widget initialization if the dialog is already
+	running when this dialog box is created. 
+
 Mon Mar  2 12:11:37 1998  Norbert Warmuth <k3190@fh-sw.de>
 
 	* vfs/ftpfs.c (changetype): Removed the hack which always forced 

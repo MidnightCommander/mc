@@ -2000,6 +2000,7 @@ int midnight_callback (struct Dlg_head *h, int id, int msg)
 /* This should be rewritten in order to support as many panel containers as
    the user wants */
 
+#ifndef HAVE_GNOME
 widget_data containers [2];
 int containers_no = 2;
 
@@ -2024,6 +2025,10 @@ xtoolkit_panel_setup ()
     get_panel_widget (1)->area = AREA_RIGHT;
     the_menubar->widget.wcontainer = (widget_data) NULL;
 }
+#else
+#    define xtoolkit_panel_setup()
+#endif
+
 #else
 #    define xtoolkit_panel_setup()
 #endif

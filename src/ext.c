@@ -178,7 +178,8 @@ exec_extension (char *filename, char *data, char *drops, int *move_dir, int star
 			    text = (*quote_func) (filename, 0);
 			}
 		    } else if (*data == 'q') {
-		        text = (*quote_func) (drops, 0);
+			    /* FIXME: currently broken */
+/*		        text = (*quote_func) (drops, 0); */
 		    } else
 		        text = expand_format (*data, !is_cd);
 		    if (!is_cd)
@@ -298,7 +299,7 @@ exec_extension (char *filename, char *data, char *drops, int *move_dir, int star
  * if the value for %d exists, then the viewer is started up at that line number.
  */
 char *regex_command_title = NULL;
-char *regex_command (char *filename, char *action, char *drops, int *move_dir)
+char *regex_command (char *filename, char *action, char **drops, int *move_dir)
 {
     char *extension_file;
     char *p, *q, *r, c;
