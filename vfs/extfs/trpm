@@ -6,9 +6,15 @@
 # minor changes by Wojtek Pilorz (wpilorz@bdk.lublin.pl) 1997
 # minor changes by Michele Marziani (marziani@fe.infn.it) 1997
 # slight changes to put rpm to Trpm by Balazs Nagy (julian7@kva.hu) 1998
+# locale bugfix by Michal Svec (rebel@penguin.cz) 2000
 # (C) 1996 The Free Software Foundation.
 #
 #
+
+# override any locale for dates
+unset LC_ALL
+LC_TIME=C
+export LC_TIME
 
 mcrpmfs_list ()
 {
@@ -143,9 +149,6 @@ mcrpmfs_run ()
     esac
 }
 
-# override any locale for dates
-LC_ALL=C
-export LC_ALL
 name=$2
 if [ ${name%%.trpm} = $name ]; then
 	name=`head -1 $name`

@@ -6,9 +6,15 @@
 # minor changes by Wojtek Pilorz (wpilorz@bdk.lublin.pl) 1997
 # minor changes by Michele Marziani (marziani@fe.infn.it) 1997
 # bug files by Marc Merlin (marcsoft@merlins.org) 1998
+# locale bugfix by Michal Svec (rebel@penguin.cz) 2000
 # (C) 1996 The Free Software Foundation.
 #
 #
+
+# override any locale for dates
+unset LC_ALL
+LC_TIME=C
+export LC_TIME
 
 mcrpmfs_list ()
 {
@@ -151,10 +157,6 @@ mcrpmfs_run ()
 	UPGRADE) echo "Upgrading \"$1\""; rpm -iUvh "$1"; exit 0;;
     esac
 }
-
-# override any locale for dates
-LC_ALL=C
-export LC_ALL
 
 umask 077
 case "$1" in

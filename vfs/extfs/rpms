@@ -1,9 +1,17 @@
 #! /usr/bin/perl
 #
 # Written by Balazs Nagy (julian7@kva.hu) 1998
+# locale bugfix by Michal Svec (rebel@penguin.cz) 2000
 # (C) 1998 The Free Software Foundation.
 #
 #
+
+# override any locale for dates
+delete $ENV{"LC_ALL"};
+$ENV{"LC_TIME"}="C";
+
+#print $ENV{"LC_ALL"};
+#exit 0;
 
 sub gd
 {
@@ -44,9 +52,6 @@ sub list
 	}
     }
 }
-
-# override any locale for dates
-$ENV{"LC_ALL"}="C";
 
 #open O, ">>/tmp/tt";
 #print O "RPMS: ";
