@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Mime Types
-Name=MIME-tyypit
+Name[fi]=MIME-tyypit
 Name[it]=Tipi MIME
 Name[no]=Mime typer
 Comment=Configure how files are associated and started.
