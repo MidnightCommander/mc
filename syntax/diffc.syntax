@@ -1,0 +1,14 @@
+# Jeroen Ruigrok van der Werven <asmodai@wxs.nl>
+# did thusly spake:
+
+context default
+    keyword linestart \s black/0 white/26
+    keyword linestart \*\*\*\*\*\*\*\*\*\*\*\*\*\*\* white/26 brightred/18
+    keyword linestart \*\*\**\*\*\*\* white/26 brightcyan/14
+context linestart diff \n white/26 red/9
+context linestart --- \n brightmagenta/20
+context linestart \*\*\* \n brightmagenta/20
+context linestart + \n green/6
+context linestart ! \n yellow/24
+
+ 

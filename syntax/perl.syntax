@@ -1,0 +1,367 @@
+context default
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan/17 black/0
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan/17 black/0
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan/17 black/0
+    keyword whole linestart #!\[\s\]/\[abcdefghijklmnopqrstuvwxyz\]/bin/perl brightcyan/17 black/0
+    keyword whole linestart #!\[\s\]/bin/perl brightcyan/17 black/0
+
+    keyword $_ red/orange
+    keyword $. red/orange
+    keyword $/ red/orange
+    keyword $, red/orange
+    keyword $" red/orange
+    keyword $\\ red/orange
+    keyword $# red/orange
+    keyword $\* red/orange
+    keyword $? red/orange
+    keyword $] red/orange
+    keyword $[ red/orange
+    keyword $; red/orange
+    keyword $! red/orange
+    keyword $@ red/orange
+    keyword $: red/orange
+    keyword $0 red/orange
+    keyword $$ red/orange
+    keyword $< red/orange
+    keyword $> red/orange
+    keyword $( red/orange
+    keyword $) red/orange
+
+    keyword $% red/orange
+    keyword $= red/orange
+    keyword $- red/orange
+    keyword $~ red/orange
+    keyword $| red/orange
+    keyword $& red/orange
+    keyword $` red/orange
+    keyword $' red/orange
+    keyword $+ red/orange
+    keyword $11 red/orange
+    keyword $12 red/orange
+    keyword $13 red/orange
+    keyword $14 red/orange
+    keyword $15 red/orange
+    keyword $16 red/orange
+    keyword $17 red/orange
+    keyword $18 red/orange
+    keyword $19 red/orange
+    keyword $20 red/orange
+    keyword $10 red/orange
+    keyword $1 red/orange
+    keyword $2 red/orange
+    keyword $3 red/orange
+    keyword $4 red/orange
+    keyword $5 red/orange
+    keyword $6 red/orange
+    keyword $7 red/orange
+    keyword $8 red/orange
+    keyword $9 red/orange
+    keyword $0 red/orange
+
+    keyword $^A red/orange
+    keyword $^D red/orange
+    keyword $^E red/orange
+    keyword $^I red/orange
+    keyword $^L red/orange
+    keyword $^P red/orange
+    keyword $^T red/orange
+    keyword $^W red/orange
+    keyword $^X red/orange
+    keyword $^A red/orange
+
+    keyword @EXPORT red/orange
+    keyword @EXPORT_OK red/orange
+    keyword @INC red/orange
+    keyword @ISA red/orange
+    keyword @_ red/orange
+    keyword @ENV red/orange
+    keyword @OVERLOAD red/orange
+    keyword @SIG red/orange
+
+    keyword $ brightgreen/15
+    keyword & brightmagenta/19
+    keyword % brightcyan/17
+    keyword @ white/21
+    keyword \\" brightred/18
+    keyword \\' brightred/18
+
+    keyword <+> brightred/18
+    keyword -> yellow/24
+    keyword => yellow/24
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+    keyword / yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword != yellow/24
+    keyword == yellow/24
+    keyword whole ge yellow/24
+    keyword whole le yellow/24
+    keyword whole gt yellow/24
+    keyword whole lt yellow/24
+    keyword whole eq yellow/24
+    keyword whole ne yellow/24
+    keyword whole cmp yellow/24
+    keyword ~ yellow/24
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword .. brightcyan/14
+    keyword : brightcyan/14
+    keyword ; brightmagenta/19
+
+    keyword whole sub yellow/24
+    keyword whole STDIN brightred/18
+    keyword whole STDOUT brightred/18
+    keyword whole STDERR brightred/18
+    keyword whole STDARGV brightred/18
+    keyword whole DATA brightred/18
+
+    keyword whole do magenta/23
+    keyword whole if magenta/23
+    keyword whole until magenta/23
+    keyword whole elsif magenta/23
+    keyword whole else magenta/23
+    keyword whole unless magenta/23
+    keyword whole while magenta/23
+    keyword whole foreach magenta/23
+    keyword whole goto magenta/23
+    keyword whole last magenta/23
+    keyword whole next magenta/23
+    keyword whole bless magenta/23
+    keyword whole caller magenta/23
+    keyword whole import magenta/23
+    keyword whole package magenta/23
+    keyword whole require magenta/23
+    keyword whole return magenta/23
+    keyword whole untie magenta/23
+    keyword whole use magenta/23
+
+    keyword whole diagnostics brightcyan/17
+    keyword whole integer brightcyan/17
+    keyword whole less brightcyan/17
+    keyword whole lib brightcyan/17
+    keyword whole ops brightcyan/17
+    keyword whole overload brightcyan/17
+    keyword whole sigtrap brightcyan/17
+    keyword whole strict brightcyan/17
+    keyword whole vars brightcyan/17
+
+    keyword whole abs yellow/24
+    keyword whole atan2 yellow/24
+    keyword whole cos yellow/24
+    keyword whole exp yellow/24
+    keyword whole int yellow/24
+    keyword whole log yellow/24
+    keyword whole rand yellow/24
+    keyword whole sin yellow/24
+    keyword whole sqrt yellow/24
+    keyword whole srand yellow/24
+    keyword whole time yellow/24
+    keyword whole chr yellow/24
+    keyword whole gmtime yellow/24
+    keyword whole hex yellow/24
+    keyword whole localtime yellow/24
+    keyword whole oct yellow/24
+    keyword whole ord yellow/24
+    keyword whole vec yellow/24
+    keyword whole pack yellow/24
+    keyword whole unpack yellow/24
+
+    keyword whole chomp yellow/YellowGreen
+    keyword whole chop yellow/YellowGreen
+    keyword whole crypt yellow/YellowGreen
+    keyword whole eval yellow/YellowGreen
+    keyword whole index yellow/YellowGreen
+    keyword whole length yellow/YellowGreen
+    keyword whole lc yellow/YellowGreen
+    keyword whole lcfirst yellow/YellowGreen
+    keyword whole quotemeta yellow/YellowGreen
+    keyword whole rindex yellow/YellowGreen
+    keyword whole substr yellow/YellowGreen
+    keyword whole uc yellow/YellowGreen
+    keyword whole ucfirst yellow/YellowGreen
+
+    keyword whole delete yellow/24
+    keyword whole each yellow/24
+    keyword whole exists yellow/24
+    keyword whole grep yellow/24
+    keyword whole join yellow/24
+    keyword whole keys yellow/24
+    keyword whole map yellow/24
+    keyword whole pop yellow/24
+    keyword whole push yellow/24
+    keyword whole reverse yellow/24
+    keyword whole scalar yellow/24
+    keyword whole shift yellow/24
+    keyword whole sort yellow/24
+    keyword whole splice yellow/24
+    keyword whole split yellow/24
+    keyword whole unshift yellow/24
+    keyword whole values yellow/24
+
+    keyword whole chmod yellow/24
+    keyword whole chown yellow/24
+    keyword whole truncate yellow/24
+    keyword whole link yellow/24
+    keyword whole lstat yellow/24
+    keyword whole mkdir yellow/24
+    keyword whole readlink yellow/24
+    keyword whole rename yellow/24
+    keyword whole rmdir yellow/24
+    keyword whole stat yellow/24
+    keyword whole symlink yellow/24
+    keyword whole unlink yellow/24
+    keyword whole utime yellow/24
+
+    keyword whole binmade yellow/24
+    keyword whole close yellow/24
+    keyword whole dbmclose yellow/24
+    keyword whole dbmopen yellow/24
+    keyword whole binmade yellow/24
+    keyword whole eof yellow/24
+    keyword whole fcntl yellow/24
+    keyword whole fileno yellow/24
+    keyword whole flock yellow/24
+    keyword whole getc yellow/24
+    keyword whole ioctl yellow/24
+    keyword whole open yellow/24
+    keyword whole pipe yellow/24
+    keyword whole print yellow/24
+    keyword whole printf yellow/24
+    keyword whole read yellow/24
+    keyword whole seek yellow/24
+    keyword whole select yellow/24
+    keyword whole sprintf yellow/24
+    keyword whole sysopen yellow/24
+    keyword whole sysread yellow/24
+    keyword whole syswrite yellow/24
+    keyword whole tell yellow/24
+
+    keyword whole formline yellow/24
+    keyword whole write yellow/24
+
+    keyword whole closedir yellow/24
+    keyword whole opendir yellow/24
+    keyword whole readdir yellow/24
+    keyword whole rewinddir yellow/24
+    keyword whole seekdir yellow/24
+    keyword whole telldir yellow/24
+
+    keyword whole alarm yellow/24
+    keyword whole chdir yellow/24
+    keyword whole chroot yellow/24
+    keyword whole die yellow/24
+    keyword whole exec yellow/24
+    keyword whole exit yellow/24
+    keyword whole fork yellow/24
+    keyword whole getlogin yellow/24
+    keyword whole getpgrp yellow/24
+    keyword whole getppid yellow/24
+    keyword whole getpriority yellow/24
+    keyword whole glob yellow/24
+    keyword whole kill yellow/24
+    keyword whole setpgrp yellow/24
+    keyword whole setpriority yellow/24
+    keyword whole sleep yellow/24
+    keyword whole syscall yellow/24
+    keyword whole system yellow/24
+    keyword whole times yellow/24
+    keyword whole umask yellow/24
+    keyword whole wait yellow/24
+    keyword whole waitpid yellow/24
+    keyword whole warn yellow/24
+
+    keyword whole accept yellow/24
+    keyword whole bind yellow/24
+    keyword whole connect yellow/24
+    keyword whole getpeername yellow/24
+    keyword whole getsockname yellow/24
+    keyword whole getsockopt yellow/24
+    keyword whole listen yellow/24
+    keyword whole recv yellow/24
+    keyword whole send yellow/24
+    keyword whole setsockopt yellow/24
+    keyword whole shutdown yellow/24
+    keyword whole socket yellow/24
+    keyword whole socketpair yellow/24
+
+    keyword whole msgctl yellow/24
+    keyword whole msgget yellow/24
+    keyword whole msgsnd yellow/24
+    keyword whole msgrcv yellow/24
+    keyword whole semctl yellow/24
+    keyword whole semget yellow/24
+    keyword whole semop yellow/24
+    keyword whole shmctl yellow/24
+    keyword whole shmget yellow/24
+    keyword whole shmread yellow/24
+    keyword whole shmwrite yellow/24
+
+    keyword whole defined yellow/24
+    keyword whole dump yellow/24
+    keyword whole eval yellow/24
+    keyword whole local yellow/24
+    keyword whole my yellow/24
+    keyword whole ref yellow/24
+    keyword whole reset yellow/24
+    keyword whole scalar yellow/24
+    keyword whole undef yellow/24
+    keyword whole wantarray yellow/24
+
+    keyword whole endpwent yellow/24
+    keyword whole getpwent yellow/24
+    keyword whole getpwnam yellow/24
+    keyword whole getpwuid yellow/24
+    keyword whole setpwent yellow/24
+    keyword whole endgrent yellow/24
+    keyword whole getgrgid yellow/24
+    keyword whole getgrnam yellow/24
+    keyword whole getgrent yellow/24
+    keyword whole setgrent yellow/24
+
+    keyword whole endhostent yellow/24
+    keyword whole gethostbyaddr yellow/24
+    keyword whole gethostbyname yellow/24
+    keyword whole gethostent yellow/24
+    keyword whole sethostent yellow/24
+
+    keyword whole endnetent yellow/24
+    keyword whole getnetbyaddr yellow/24
+    keyword whole getnetbyname yellow/24
+    keyword whole getnetent yellow/24
+    keyword whole setnetent yellow/24
+    keyword whole endservent yellow/24
+    keyword whole getservbyname yellow/24
+    keyword whole getservbyport yellow/24
+    keyword whole getservent yellow/24
+    keyword whole serservent yellow/24
+    keyword whole endprotoent yellow/24
+    keyword whole getprotobyname yellow/24
+    keyword whole getprotobynumber yellow/24
+    keyword whole getprotoent yellow/24
+    keyword whole setprotoent yellow/24
+
+context exclusive whole <\[\s\\\]EOF EOF green/6
+context # \n brown/22
+context linestart = =cut brown/22
+context " " green/6
+    keyword \\" brightgreen/16
+    keyword \\\\ brightgreen/16
+context ' ' brightgreen/16
+    keyword \\' green/6
+    keyword \\\\ green/6
+
+context exclusive ` ` white/26 black/0
+
+context whole __END__ guacomale_pudding white/26 black/0
+
+###############################################################################
+

@@ -1,0 +1,168 @@
+#From lol_zimmerli%headbanger.ch@mail.headbanger.ch  Tue Feb  9 15:26:11 1999
+#
+#Hi again,
+#
+#>Cooledit checks the extension and the first line of a file.
+#>You can add in .java to the .c .cpp and so on, in your ~/.cedit/syntax
+#>file.
+#
+#Very simple, in fact. Bravo!
+#
+#I've edited it and added a 'Java Program' item. It's a quick edit, so it 
+#may contain typos and/or error. Maybe I also have forgot some words...
+#
+#The java item is a copy of the c/c++ with stuff added (The first lines 
+#until the comment).
+#and stuff deleted (some c/c++ specific words).
+#
+#I'm not sure how I named it (file ..\*\\.(java|JAVA|Java|jav)$ 
+#Java\sProgram)...
+#
+#Feel free to do whatever you want with it, including distribute it in any 
+#ways, delete it, re-edit it... Just, if you re-edit it, please mail me it 
+#back.
+#
+#
+#>Thanks for the feedback
+#
+#Thank you for cooledit :)
+#
+#
+#/* Lol Zimmerli */
+## Encoder
+#// www.headbanger.ch
+#<!-- www.couleur3.ch www.ebel.ch www.refresh.ch -->
+#
+#
+
+context default
+    keyword whole abstract yellow/24
+    keyword whole boolean yellow/24
+    keyword whole byte yellow/24
+    keyword whole byvalue yellow/24
+    keyword whole cast yellow/24
+    keyword whole extends yellow/24
+    keyword whole final yellow/24
+    keyword whole implements yellow/24
+    keyword whole import yellow/24
+    keyword whole inner yellow/24
+    keyword whole instanceof yellow/24
+    keyword whole outer yellow/24
+    keyword whole package yellow/24
+    keyword whole rest yellow/24
+    keyword whole synchronized yellow/24
+    keyword whole throws yellow/24
+    keyword whole transient yellow/24
+    keyword whole finally yellow/24
+    keyword whole future yellow/24
+    keyword whole generic yellow/24
+    keyword whole interface yellow/24
+    keyword whole native yellow/24
+    keyword whole null yellow/24
+    keyword whole super yellow/24
+    keyword whole var yellow/24
+    keyword whole clone brightred/18
+    keyword whole equals brightred/18
+    keyword whole finalize brightred/18
+    keyword whole getClass brightred/18
+    keyword whole hashCode brightred/18
+    keyword whole notify brightred/18
+    keyword whole notifyAll brightred/18
+    keyword whole toString brightred/18
+    keyword whole wait brightred/18
+    #end Lol's adds
+    keyword whole break yellow/24
+    keyword whole case yellow/24
+    keyword whole char yellow/24
+    keyword whole const yellow/24
+    keyword whole continue yellow/24
+    keyword whole default yellow/24
+    keyword whole do yellow/24
+    keyword whole double yellow/24
+    keyword whole else yellow/24
+    keyword whole float yellow/24
+    keyword whole for yellow/24
+    keyword whole goto yellow/24
+    keyword whole if yellow/24
+    keyword whole int yellow/24
+    keyword whole long yellow/24
+    keyword whole return yellow/24
+    keyword whole short yellow/24
+    keyword whole static yellow/24
+    keyword whole switch yellow/24
+    keyword whole void yellow/24
+    keyword whole volatile yellow/24
+    keyword whole while yellow/24
+    keyword whole catch yellow/24
+    keyword whole class yellow/24
+    keyword whole new yellow/24
+    keyword whole private yellow/24
+    keyword whole protected yellow/24
+    keyword whole public yellow/24
+    keyword whole this yellow/24
+    keyword whole throw yellow/24
+    keyword whole try yellow/24
+    keyword whole false yellow/24
+    keyword whole true yellow/24
+
+    keyword /\* brown/22
+    keyword \*/ brown/22
+
+    keyword '\s' brightgreen/16
+    keyword '+' brightgreen/16
+    keyword > yellow/24
+    keyword < yellow/24
+    keyword \+ yellow/24
+    keyword - yellow/24
+    keyword \* yellow/24
+#    keyword / yellow/24
+    keyword % yellow/24
+    keyword = yellow/24
+    keyword != yellow/24
+    keyword == yellow/24
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword : brightcyan/14
+    keyword ; brightmagenta/19
+context exclusive /\* \*/ brown/22
+context // \n brown/22
+context linestart # \n brightred/18
+    keyword \\\n yellow/24
+    keyword /\**\*/ brown/22
+    keyword "+" red/19
+    keyword <+> red/19
+context " " green/6
+    keyword \\" brightgreen/16
+    keyword %% brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]e brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]E brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]f brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]g brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]G brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]d brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]i brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]o brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]u brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]x brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]X brightgreen/16
+    keyword %\[hl\]n brightgreen/16
+    keyword %\[.\]\[0123456789\]s brightgreen/16
+    keyword %[*] brightgreen/16
+    keyword %c brightgreen/16
+    keyword \\\\ brightgreen/16
+    keyword \\' brightgreen/16
+    keyword \\a brightgreen/16
+    keyword \\b brightgreen/16
+    keyword \\t brightgreen/16
+    keyword \\n brightgreen/16
+    keyword \\v brightgreen/16
+    keyword \\f brightgreen/16
+    keyword \\r brightgreen/16
+    keyword \\0 brightgreen/16
+
+

@@ -1,0 +1,160 @@
+###################################################################################
+# (GNU) SmallTalk syntax hilighting by Carlos Rodrigues <a9566@lei.di.fct.unl.pt> #
+###################################################################################
+
+# I guess this is not very syntax strict, but it makes the code
+# a lot more readable.
+
+context default
+    keyword whole methodsFor yellow/24
+    keyword whole subclass yellow/24
+    keyword whole class yellow/24
+    keyword whole nil yellow/24
+    keyword whole self yellow/24
+    keyword whole instanceVariableNames yellow/24
+    keyword whole classVariableNames yellow/24
+    keyword whole poolDictionaries yellow/24
+    keyword whole category yellow/24
+    keyword whole super yellow/24
+    keyword whole category yellow/24
+    keyword whole variableSubclass yellow/24
+    keyword whole variableByteSubclass yellow/24
+    keyword whole variableWordSubclass yellow/24
+    keyword whole superclass yellow/24
+
+    keyword whole not brightmagenta/23
+    keyword whole comment brightmagenta/23
+    keyword whole error brightmagenta/23
+    keyword whole at brightmagenta/23
+    keyword whole put brightmagenta/23
+    keyword whole add brightmagenta/23
+    keyword whole remove brightmagenta/23
+    keyword whole new brightmagenta/23
+    keyword whole ifTrue brightmagenta/23
+    keyword whole ifFalse brightmagenta/23
+    keyword whole whileTrue brightmagenta/23
+    keyword whole whileFalse brightmagenta/23
+    keyword whole ifAbsent brightmagenta/23
+    keyword whole init brightmagenta/23
+    keyword whole do brightmagenta/23
+    keyword whole from brightmagenta/23
+    keyword whole with brightmagenta/23
+    keyword whole do brightmagenta/23
+    keyword whole true brightmagenta/23
+    keyword whole false brightmagenta/23
+    keyword whole or brightmagenta/23
+    keyword whole and brightmagenta/23
+    keyword whole to brightmagenta/23
+    keyword whole by brightmagenta/23
+    
+    keyword whole Smalltalk brightgreen/6
+    keyword whole Object brightgreen/6
+    keyword whole Autoload brightgreen/6
+    keyword whole Behavior brightgreen/6
+    keyword whole ClassDescription brightgreen/6
+    keyword whole Class brightgreen/6
+    keyword whole MetaClass brightgreen/6
+    keyword whole BlockContext brightgreen/6
+    keyword whole Boolean brightgreen/6
+    keyword whole False brightgreen/6
+    keyword whole True brightgreen/6
+    keyword whole CFunctionDescriptor brightgreen/6
+    keyword whole CObject brightgreen/6
+    keyword whole Collection brightgreen/6
+    keyword whole Bag brightgreen/6
+    keyword whole MappedCollection brightgreen/6
+    keyword whole SequenceableCollection brightgreen/6
+    keyword whole ArrayedCollection brightgreen/6
+    keyword whole Array brightgreen/6
+    keyword whole ByteArray brightgreen/6
+    keyword whole CompiledCollection brightgreen/6
+    keyword whole String brightgreen/6
+    keyword whole Symbol brightgreen/6
+    keyword whole Interval brightgreen/6
+    keyword whole LinkedList brightgreen/6
+    keyword whole Semaphore brightgreen/6
+    keyword whole OrderedCollection brightgreen/6
+    keyword whole SortedCollection brightgreen/6
+    keyword whole Set brightgreen/6
+    keyword whole Dictionary brightgreen/6
+    keyword whole IdentityDictionary brightgreen/6
+    keyword whole SystemDictionary brightgreen/6
+    keyword whole Delay brightgreen/6
+    keyword whole FileSegment brightgreen/6
+    keyword whole Link brightgreen/6
+    keyword whole Process brightgreen/6
+    keyword whole SymLink brightgreen/6
+    keyword whole Magnitude brightgreen/6
+    keyword whole Character brightgreen/6
+    keyword whole Date brightgreen/6
+    keyword whole LookupKey brightgreen/6
+    keyword whole Association brightgreen/6
+    keyword whole Number brightgreen/6
+    keyword whole Float brightgreen/6
+    keyword whole Integer brightgreen/6
+    keyword whole Time brightgreen/6
+    keyword whole Memory brightgreen/6
+    keyword whole ByteMemory brightgreen/6
+    keyword whole WordMemory brightgreen/6
+    keyword whole Message brightgreen/6
+    keyword whole MethodContext brightgreen/6
+    keyword whole MethodInfo brightgreen/6
+    keyword whole ProcessorScheduler brightgreen/6
+    keyword whole SharedQueue brightgreen/6
+    keyword whole Stream brightgreen/6
+    keyword whole PositionableStream brightgreen/6
+    keyword whole ReadStream brightgreen/6
+    keyword whole WriteStream brightgreen/6
+    keyword whole ReadWriteStream brightgreen/6
+    keyword whole FileStream brightgreen/6
+    keyword whole Random brightgreen/6
+    keyword whole TokenStream brightgreen/6
+    keyword whole UndefinedObject brightgreen/6
+
+    keyword wholeright !! brightred/18
+    keyword wholeright ! brightred/18
+    keyword wholeleft ! brightred/18
+    keyword wholeright . brightred/18
+
+    keyword > cyan/16
+    keyword <> cyan/16
+    keyword < cyan/16
+    keyword \+ cyan/16
+    keyword - cyan/16
+    keyword \* cyan/16
+    keyword / cyan/16
+    keyword % cyan/16
+    keyword = cyan/16
+    keyword | cyan/16
+    keyword # cyan/16
+    keyword @ cyan/16
+    keyword ^ cyan/16
+    keyword { cyan/16
+    keyword } cyan/16
+    keyword ( cyan/16
+    keyword ) cyan/16
+    keyword [ cyan/16
+    keyword ] cyan/16
+    keyword , cyan/16
+    keyword : cyan/16
+    keyword & cyan/16
+    keyword $ cyan/16
+    keyword . cyan/16
+    keyword ! cyan/16
+    keyword ; cyan/16
+    keyword _ cyan/16
+    keyword ~ cyan/16
+    keyword ? cyan/16
+
+context $ ; cyan/16
+
+context " " brown/22
+
+context ' ' brightcyan/8
+
+    keyword \\\n brightmagenta/23
+    keyword \\" brightmagenta/23
+    keyword \\\\ brightmagenta/23
+    keyword \\' brightmagenta/23
+
+

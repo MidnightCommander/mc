@@ -1,0 +1,275 @@
+##################################################################################
+# ML (CamlLight) syntax hilighting by Carlos Rodrigues <a9566@lei.di.fct.unl.pt> #
+##################################################################################
+
+context default
+    keyword whole and yellow/24
+    keyword whole as yellow/24
+    keyword whole begin yellow/24
+    keyword whole do ywllow/24
+    keyword whole done yellow/24
+    keyword whole downto yellow/24
+    keyword whole else yellow/24
+    keyword whole end yellow/24
+    keyword whole exception yellow/24
+    keyword whole for yellow/24
+    keyword whole fun yellow/24
+    keyword whole function yellow/24
+    keyword whole if yellow/24
+    keyword whole in yellow/24
+    keyword whole let yellow/24
+    keyword whole match yellow/24
+    keyword whole mutable yellow/24
+    keyword whole not yellow/24
+    keyword whole of yellow/24
+    keyword whole or yellow/24
+    keyword whole prefix yellow/24
+    keyword whole rec yellow/24
+    keyword whole then yellow/24
+    keyword whole to yellow/24
+    keyword whole try yellow/24
+    keyword whole type yellow/24
+    keyword whole value yellow/24
+    keyword whole where yellow/24
+    keyword whole while yellow/24
+    keyword whole mod yellow/24
+    keyword whole with yellow/24
+    keyword whole true yellow/24
+    keyword whole false yellow/24
+
+    keyword (\* brown/22
+    keyword \*) brown/22
+
+    keyword `\s` brightcyan/8
+    keyword `+` brightcyan/8
+    keyword > cyan/16
+    keyword <> cyan/16
+    keyword < cyan/16
+    keyword . cyan/16
+    keyword -> brightgreen/6
+    keyword <- cyan/16
+    keyword \+ cyan/16
+    keyword - cyan/16
+    keyword \* cyan/16
+    keyword / cyan/16
+    keyword % cyan/16
+    keyword = cyan/16
+    keyword | cyan/16
+    keyword # cyan/16
+    keyword @ cyan/16
+    keyword ^ cyan/16
+    keyword { cyan/16
+    keyword } cyan/16
+    keyword ( cyan/16
+    keyword ) cyan/16
+    keyword [ cyan/16
+    keyword ] cyan/16
+    keyword , cyan/16
+    keyword : cyan/16
+    keyword & cyan/16
+    
+    keyword wholeright ;; brightred/18
+    keyword wholeright ; brightred/18
+    
+    keyword ; cyan/16
+
+context exclusive (\* \*) brown/22
+
+    keyword \\\n yellow/24
+    keyword "+" brown/22
+    keyword <+> brown/22
+
+context " " brightcyan/8
+
+    keyword \\" brightmagenta/23
+    keyword %% brightmagenta/23
+
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]e brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]E brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]f brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]g brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]G brightmagenta/23
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]d brightmagenta/23
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]i brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]o brightmagenta/23
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]u brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]x brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]X brightmagenta/23
+    keyword %\[hl\]n brightmagenta/23
+    keyword %\[.\]\[0123456789\]s brightmagenta/23
+    keyword %[*] brightmagenta/23
+    keyword %c brightmagenta/23
+    keyword \\\\ brightmagenta/23
+    keyword \\' brightmagenta/23
+    keyword \\a brightmagenta/23
+    keyword \\b brightmagenta/23
+    keyword \\t brightmagenta/23
+    keyword \\n brightmagenta/23
+    keyword \\v brightmagenta/23
+    keyword \\f brightmagenta/23
+    keyword \\r brightmagenta/23
+    keyword \\0 brightmagenta/23
+
+
+###################################################################################
+# (GNU) SmallTalk syntax hilighting by Carlos Rodrigues <a9566@lei.di.fct.unl.pt> #
+###################################################################################
+
+file ..\*\\.(st)$ SmallTalk\sProgram
+
+# I guess this is not very syntax strict, but it makes the code
+# a lot more readable.
+
+context default
+    keyword whole methodsFor yellow/24
+    keyword whole subclass yellow/24
+    keyword whole class yellow/24
+    keyword whole nil yellow/24
+    keyword whole self yellow/24
+    keyword whole instanceVariableNames yellow/24
+    keyword whole classVariableNames yellow/24
+    keyword whole poolDictionaries yellow/24
+    keyword whole category yellow/24
+    keyword whole super yellow/24
+    keyword whole category yellow/24
+    keyword whole variableSubclass yellow/24
+    keyword whole variableByteSubclass yellow/24
+    keyword whole variableWordSubclass yellow/24
+    keyword whole superclass yellow/24
+
+    keyword whole not brightmagenta/23
+    keyword whole comment brightmagenta/23
+    keyword whole error brightmagenta/23
+    keyword whole at brightmagenta/23
+    keyword whole put brightmagenta/23
+    keyword whole add brightmagenta/23
+    keyword whole remove brightmagenta/23
+    keyword whole new brightmagenta/23
+    keyword whole ifTrue brightmagenta/23
+    keyword whole ifFalse brightmagenta/23
+    keyword whole whileTrue brightmagenta/23
+    keyword whole whileFalse brightmagenta/23
+    keyword whole ifAbsent brightmagenta/23
+    keyword whole init brightmagenta/23
+    keyword whole do brightmagenta/23
+    keyword whole from brightmagenta/23
+    keyword whole with brightmagenta/23
+    keyword whole do brightmagenta/23
+    keyword whole true brightmagenta/23
+    keyword whole false brightmagenta/23
+    keyword whole or brightmagenta/23
+    keyword whole and brightmagenta/23
+    keyword whole to brightmagenta/23
+    keyword whole by brightmagenta/23
+    
+    keyword whole Smalltalk brightgreen/6
+    keyword whole Object brightgreen/6
+    keyword whole Autoload brightgreen/6
+    keyword whole Behavior brightgreen/6
+    keyword whole ClassDescription brightgreen/6
+    keyword whole Class brightgreen/6
+    keyword whole MetaClass brightgreen/6
+    keyword whole BlockContext brightgreen/6
+    keyword whole Boolean brightgreen/6
+    keyword whole False brightgreen/6
+    keyword whole True brightgreen/6
+    keyword whole CFunctionDescriptor brightgreen/6
+    keyword whole CObject brightgreen/6
+    keyword whole Collection brightgreen/6
+    keyword whole Bag brightgreen/6
+    keyword whole MappedCollection brightgreen/6
+    keyword whole SequenceableCollection brightgreen/6
+    keyword whole ArrayedCollection brightgreen/6
+    keyword whole Array brightgreen/6
+    keyword whole ByteArray brightgreen/6
+    keyword whole CompiledCollection brightgreen/6
+    keyword whole String brightgreen/6
+    keyword whole Symbol brightgreen/6
+    keyword whole Interval brightgreen/6
+    keyword whole LinkedList brightgreen/6
+    keyword whole Semaphore brightgreen/6
+    keyword whole OrderedCollection brightgreen/6
+    keyword whole SortedCollection brightgreen/6
+    keyword whole Set brightgreen/6
+    keyword whole Dictionary brightgreen/6
+    keyword whole IdentityDictionary brightgreen/6
+    keyword whole SystemDictionary brightgreen/6
+    keyword whole Delay brightgreen/6
+    keyword whole FileSegment brightgreen/6
+    keyword whole Link brightgreen/6
+    keyword whole Process brightgreen/6
+    keyword whole SymLink brightgreen/6
+    keyword whole Magnitude brightgreen/6
+    keyword whole Character brightgreen/6
+    keyword whole Date brightgreen/6
+    keyword whole LookupKey brightgreen/6
+    keyword whole Association brightgreen/6
+    keyword whole Number brightgreen/6
+    keyword whole Float brightgreen/6
+    keyword whole Integer brightgreen/6
+    keyword whole Time brightgreen/6
+    keyword whole Memory brightgreen/6
+    keyword whole ByteMemory brightgreen/6
+    keyword whole WordMemory brightgreen/6
+    keyword whole Message brightgreen/6
+    keyword whole MethodContext brightgreen/6
+    keyword whole MethodInfo brightgreen/6
+    keyword whole ProcessorScheduler brightgreen/6
+    keyword whole SharedQueue brightgreen/6
+    keyword whole Stream brightgreen/6
+    keyword whole PositionableStream brightgreen/6
+    keyword whole ReadStream brightgreen/6
+    keyword whole WriteStream brightgreen/6
+    keyword whole ReadWriteStream brightgreen/6
+    keyword whole FileStream brightgreen/6
+    keyword whole Random brightgreen/6
+    keyword whole TokenStream brightgreen/6
+    keyword whole UndefinedObject brightgreen/6
+
+    keyword wholeright !! brightred/18
+    keyword wholeright ! brightred/18
+    keyword wholeleft ! brightred/18
+    keyword wholeright . brightred/18
+
+    keyword > cyan/16
+    keyword <> cyan/16
+    keyword < cyan/16
+    keyword \+ cyan/16
+    keyword - cyan/16
+    keyword \* cyan/16
+    keyword / cyan/16
+    keyword % cyan/16
+    keyword = cyan/16
+    keyword | cyan/16
+    keyword # cyan/16
+    keyword @ cyan/16
+    keyword ^ cyan/16
+    keyword { cyan/16
+    keyword } cyan/16
+    keyword ( cyan/16
+    keyword ) cyan/16
+    keyword [ cyan/16
+    keyword ] cyan/16
+    keyword , cyan/16
+    keyword : cyan/16
+    keyword & cyan/16
+    keyword $ cyan/16
+    keyword . cyan/16
+    keyword ! cyan/16
+    keyword ; cyan/16
+    keyword _ cyan/16
+    keyword ~ cyan/16
+    keyword ? cyan/16
+
+context $ ; cyan/16
+
+context " " brown/22
+
+context ' ' brightcyan/8
+
+    keyword \\\n brightmagenta/23
+    keyword \\" brightmagenta/23
+    keyword \\\\ brightmagenta/23
+    keyword \\' brightmagenta/23
+
+

@@ -1,0 +1,19 @@
+
+context default white/25
+    keyword whole &*; brightgreen/16
+context <!-- --> white/26
+context < > brightcyan/17
+    keyword "http:*" magenta/22
+    keyword "ftp:*" magenta/22
+    keyword "mailto:*" magenta/22
+    keyword "gopher:*" magenta/22
+    keyword "telnet:*" magenta/22
+    keyword "file:*" magenta/22
+    keyword "*.gif" brightred/19
+    keyword "*.jpg" brightred/19
+    keyword "*.png" brightred/19
+    keyword "*" cyan/5
+
+###############################################################################
+# Pascal (BP7 IDE alike)
+

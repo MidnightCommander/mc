@@ -1,0 +1,112 @@
+context default yellow/24
+    keyword whole absolute white/25
+    keyword whole and white/25
+    keyword whole array white/25
+    keyword whole as white/25
+    keyword whole asm white/25
+    keyword whole assembler white/25
+    keyword whole begin white/25
+    keyword whole break white/25
+    keyword whole case white/25
+    keyword whole class white/25
+    keyword whole const white/25
+    keyword whole continue white/25
+    keyword whole constructor white/25
+    keyword whole destructor white/25
+    keyword whole dispose white/25
+    keyword whole div white/25
+    keyword whole do white/25
+    keyword whole downto white/25
+    keyword whole else white/25
+    keyword whole end white/25
+    keyword whole except white/25
+    keyword whole exit white/25
+    keyword whole export white/25
+    keyword whole exports white/25
+    keyword whole external white/25
+    keyword whole fail white/25
+    keyword whole far white/25
+    keyword whole false white/25
+    keyword whole file white/25
+    keyword whole finally white/25
+    keyword whole for white/25
+    keyword whole forward white/25
+    keyword whole function white/25
+    keyword whole goto white/25
+    keyword whole if white/25
+    keyword whole implementation white/25
+    keyword whole in white/25
+    keyword whole inherited white/25
+    keyword whole initialization white/25
+    keyword whole inline white/25
+    keyword whole interface white/25
+    keyword whole interrupt white/25
+    keyword whole is white/25
+    keyword whole label white/25
+    keyword whole library white/25
+    keyword whole mod white/25
+    keyword whole near white/25
+    keyword whole new white/25
+    keyword whole nil white/25
+    keyword whole not white/25
+    keyword whole object white/25
+    keyword whole of white/25
+    keyword whole on white/25
+    keyword whole operator white/25
+    keyword whole or white/25
+    keyword whole otherwise white/25
+    keyword whole packed white/25
+    keyword whole procedure white/25
+    keyword whole program white/25
+    keyword whole property white/25
+    keyword whole raise white/25
+    keyword whole record white/25
+    keyword whole repeat white/25
+    keyword whole self white/25
+    keyword whole set white/25
+    keyword whole shl white/25
+    keyword whole shr white/25
+    keyword whole string white/25
+    keyword whole then white/25
+    keyword whole to white/25
+    keyword whole true white/25
+    keyword whole try white/25
+    keyword whole type white/25
+    keyword whole unit white/25
+    keyword whole until white/25
+    keyword whole uses white/25
+    keyword whole var white/25
+    keyword whole virtual white/25
+    keyword whole while white/25
+    keyword whole with white/25
+    keyword whole xor white/25
+    keyword whole .. white/25
+    
+    keyword > cyan/5
+    keyword < cyan/5
+    keyword \+ cyan/5
+    keyword - cyan/5
+    keyword / cyan/5
+    keyword % cyan/5
+    keyword = cyan/5
+    keyword [ cyan/5
+    keyword ] cyan/5
+    keyword ( cyan/5
+    keyword ) cyan/5
+    keyword , cyan/5
+    keyword . cyan/5
+    keyword : cyan/5
+    keyword ; cyan/5
+    keyword {$*} brightred/19
+
+context ' ' brightcyan/22
+context // \n brown/22
+context (\* \*) brown/22
+# context {$ } brightred/19
+#    keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]\[-\+\] brightgreen/16
+#    keyword $* brightgreen/16
+context { } lightgray/22
+
+
+###############################################################################
+

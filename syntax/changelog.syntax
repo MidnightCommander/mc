@@ -1,0 +1,30 @@
+
+context default
+    keyword \s+() brightmagenta/23
+    keyword \t+() brightmagenta/23
+
+context linestart \t\* : brightcyan/17
+context linestart \s\s\s\s\s\s\s\s\* : brightcyan/17
+
+context linestart 19+-+\s \n            yellow/24
+    keyword <+@+> 			brightred/19
+context linestart 20+-+\s \n            yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Mon\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Tue\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Wed\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Thu\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Fri\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Sat\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+context linestart Sun\s+\s+\s+\s \n     yellow/24
+    keyword <+@+> 			brightred/19
+
+
+###############################################################################
+

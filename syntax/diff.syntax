@@ -1,0 +1,38 @@
+# yawn
+context default
+    keyword linestart @@*@@	green/16
+    keyword linestart \s black/0 white/26
+context linestart diff \n white/26 red/9
+context linestart --- \n brightmagenta/20
+context linestart +++ \n brightmagenta/20
+context linestart + \n brightgreen/6
+context linestart - \n brightred/18
+context linestart A \n white/26 black/0
+context linestart B \n white/26 black/0
+context linestart C \n white/26 black/0
+context linestart D \n white/26 black/0
+context linestart E \n white/26 black/0
+context linestart F \n white/26 black/0
+context linestart G \n white/26 black/0
+context linestart H \n white/26 black/0
+context linestart I \n white/26 black/0
+context linestart J \n white/26 black/0
+context linestart K \n white/26 black/0
+context linestart L \n white/26 black/0
+context linestart M \n white/26 black/0
+context linestart N \n white/26 black/0
+context linestart O \n white/26 black/0
+context linestart P \n white/26 black/0
+context linestart Q \n white/26 black/0
+context linestart R \n white/26 black/0
+context linestart S \n white/26 black/0
+context linestart T \n white/26 black/0
+context linestart U \n white/26 black/0
+context linestart V \n white/26 black/0
+context linestart W \n white/26 black/0
+context linestart X \n white/26 black/0
+context linestart Y \n white/26 black/0
+context linestart Z \n white/26 black/0
+
+###############################################################################
+
