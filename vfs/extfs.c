@@ -1249,6 +1249,7 @@ static int extfs_init (struct vfs_class *me)
 {
     FILE *cfg;
     char *mc_extfsini;
+    char key[256];
 
     mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
@@ -1257,18 +1258,14 @@ static int extfs_init (struct vfs_class *me)
      * UI is not initialized at this time and message would not
      * appear on screen. */
     if (!cfg) {
-	fprintf(stderr, _("Warning: file %s not found\n"), mc_extfsini);
+	fprintf (stderr, _("Warning: file %s not found\n"), mc_extfsini);
 	g_free (mc_extfsini);
 	return 0;
     }
 
     extfs_no = 0;
-    while ( extfs_no < MAXEXTFS ) {
-        char key[256];
+    while (extfs_no < MAXEXTFS && fgets (key, sizeof (key), cfg)) {
 	char *c;
-
-        if (!fgets( key, sizeof (key)-1, cfg ))
-	    break;
 
 	/* Handle those with a trailing ':', those flag that the
 	 * file system does not require an archive to work
@@ -1281,23 +1278,21 @@ static int extfs_init (struct vfs_class *me)
 	    g_free (mc_extfsini);
 	    return 0;
 	}
-	if (*key == '#')
+	if (*key == '#' || *key == '\n')
 	    continue;
 
 	if ((c = strchr (key, '\n'))){
-	    *c = 0;
+	    *c-- = 0;
+	} else {	/* Last line without newline or strlen (key) > 255 */
 	    c = &key [strlen (key) - 1];
-	} else {
-	    c = key;
 	}
 	extfs_need_archive [extfs_no] = !(*c == ':');
 	if (*c == ':')
-		*c = 0;
+	    *c = 0;
 	if (!(*key))
 	    continue;
 
-	extfs_prefixes [extfs_no] = g_strdup (key);
-	extfs_no++;
+	extfs_prefixes [extfs_no++] = g_strdup (key);
     }
     fclose(cfg);
     g_free (mc_extfsini);
