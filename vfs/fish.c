@@ -179,7 +179,7 @@ pipeopen(vfs_s_super *super, char *path, char *argv[])
 static char *fish_getcwd(vfs *me, vfs_s_super *super)
 {
     if (command(me, super, WANT_STRING, "#PWD\npwd; echo '### 200'\n") == COMPLETE)
-        return copy_strings(reply_str, "/", NULL);
+        return  g_strconcat (reply_str, "/", NULL);
     ERRNOR (EIO, NULL);
 }
 static int
@@ -226,7 +226,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
 #endif
 	    if (!SUP.password){
 		char *p, *op;
-		p = copy_strings (" fish: Password required for ", SUP.user, 
+		p = g_strconcat (" fish: Password required for ", SUP.user, 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
@@ -253,7 +253,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
     SUP.home = fish_getcwd (me, super);
     print_vfs_message( "FISH: Connected, home %s.", SUP.home );
 #if 0
-    super->name = copy_strings( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
+    super->name = g_strconcat ( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
 #endif
     super->name = g_strdup(PATH_SEP_STR);
 

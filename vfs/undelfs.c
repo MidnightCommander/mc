@@ -133,14 +133,14 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
 	if (*p == '/'){
 	    *file = g_strdup (p+1);
 	    *p = 0;
-	    *ext2_fname = copy_strings ("/dev/", dirname, NULL);
+	    *ext2_fname = g_strconcat ("/dev/", dirname, NULL);
 	    *p = '/';
 	    return;
 	}
 	p--;
     }
     *file = g_strdup ("");
-    *ext2_fname = copy_strings ("/dev/", dirname, NULL);
+    *ext2_fname = g_strconcat ("/dev/", dirname, NULL);
     return;
 }
 

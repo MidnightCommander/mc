@@ -1,7 +1,18 @@
+Wed Jan 27 03:09:48 1999  Timur I. Bakeyev <mc@bat.ru>
+
+	* All around the source: Changed copy_strings() to g_strconcat(). Modi-
+	fy last parameter in concat_dir_and_file() to "" - to prevent stack from
+	disbalancing.
+	
 1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.am (libvfs_la_SOURCES): Added utilvfs.h.
 	* Make-mc.in (VFSHDRS): Likewise.
+
+Sat Jan 23 18:40:19 1999  Timur I. Bakeyev <mc@bat.ru>
+
+	* utilvfs.c (append_path_sep): Removed - concat_dir_and_file(dir, NULL);
+	gives the same effect.
 
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

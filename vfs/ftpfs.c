@@ -229,7 +229,7 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     fmt_str = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    str = copy_strings (fmt_str, "\r\n", NULL);
+    str = g_strconcat (fmt_str, "\r\n", NULL);
     g_free (fmt_str);
 
     if (logfile){
@@ -320,7 +320,7 @@ login_server (struct connection *bucket, char *netrcpass)
             char *p;
 
 	    if (!bucket->password){
-		p = copy_strings (" FTP: Password required for ", quser (bucket), 
+		p = g_strconcat (" FTP: Password required for ", quser (bucket), 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
@@ -335,7 +335,7 @@ login_server (struct connection *bucket, char *netrcpass)
     if (!anon || logfile)
 	pass = g_strdup (op);
     else
-	pass = copy_strings ("-", op, NULL);
+	pass = g_strconcat ("-", op, NULL);
     wipe_password (op);
 
     
@@ -352,7 +352,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	g_free (host);
 	if (proxypass)
 	    wipe_password (proxypass);
-	p = copy_strings (" Proxy: Password required for ", proxyname, " ",
+	p = g_strconcat (" Proxy: Password required for ", proxyname, " ",
 			  NULL);
 	proxypass = vfs_get_password (p);
 	g_free (p);
@@ -363,7 +363,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	}
 	name = g_strdup (quser (bucket));
 #else
-	name = copy_strings (quser (bucket), "@", 
+	name = g_strconcat (quser (bucket), "@", 
 		qhost (bucket)[0] == '!' ? qhost (bucket)+1 : qhost (bucket), NULL);
 #endif
     } else 
@@ -1243,7 +1243,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     else if (has_spaces)
         sock = open_data_connection (bucket, "LIST -la", ".", TYPE_ASCII, 0);
     else {
-	char *path = copy_strings (remote_path, PATH_SEP_STR, ".", NULL);
+	char *path = g_strconcat (remote_path, PATH_SEP_STR, ".", NULL);
 	sock = open_data_connection (bucket, "LIST -la", path, TYPE_ASCII, 0);
 	g_free (path);
     }
@@ -1560,9 +1560,9 @@ ftpfs_init_passwd(void)
     gethostname(hostname, sizeof(hostname));
     hp = gethostbyname(hostname);
     if (hp != NULL)
-	ftpfs_anonymous_passwd = copy_strings (p, "@", hp->h_name, NULL);
+	ftpfs_anonymous_passwd = g_strconcat (p, "@", hp->h_name, NULL);
     else
-	ftpfs_anonymous_passwd = copy_strings (p, "@", hostname, NULL);
+	ftpfs_anonymous_passwd = g_strconcat (p, "@", hostname, NULL);
     endpwent ();
 }
 

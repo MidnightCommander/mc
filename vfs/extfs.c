@@ -65,7 +65,7 @@ static void extfs_fill_names (vfs *me, void (*func)(char *))
     char *name;
     
     while (a){
-	name = copy_strings (extfs_prefixes [a->fstype], "#", 
+	name = g_strconcat (extfs_prefixes [a->fstype], "#", 
 			    (a->name ? a->name : ""), "/",
 			     a->current_dir->name, NULL);
 	(*func)(name);
@@ -202,7 +202,7 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
 #endif
     
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = copy_strings (mc_extfsdir, extfs_prefixes [fstype], 
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [fstype], 
                         " list ", local_name ? local_name : tmp, NULL);
     if (tmp)
 	g_free (tmp);
@@ -562,7 +562,7 @@ void extfs_run (char *file)
     
     archive_name = name_quote (get_archive_name(archive), 0);
     mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = copy_strings (mc_extfsdir, extfs_prefixes [archive->fstype], 
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype], 
                         " run ", archive_name, " ", q, NULL);
     g_free (mc_extfsdir);
     g_free (archive_name);
@@ -613,7 +613,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	archive_name = name_quote (get_archive_name (archive), 0);
 
         mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-        cmd = copy_strings (mc_extfsdir, extfs_prefixes [archive->fstype],
+        cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
                              " copyout ", 
                             archive_name, 
                             " ", q, " ", entry->inode->local_filename, NULL);
@@ -675,7 +675,7 @@ static int extfs_close (void *data)
 	g_free (p);
 	
 	mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-	cmd = copy_strings (mc_extfsdir,
+	cmd = g_strconcat (mc_extfsdir,
 			    extfs_prefixes [archive->fstype],
 			    " copyin ", archive_name, " ",
 			    file_name, " ",
@@ -750,7 +750,7 @@ static int extfs_chdir (vfs *me, char *path)
     if ((!entry) || (!S_ISDIR (entry->inode->mode)))
     	return -1;
     entry->inode->archive->current_dir = entry;
-    res = copy_strings (
+    res = g_strconcat (
         entry->inode->archive->name, "#", extfs_prefixes [entry->inode->archive->fstype], 
 	"/", q, NULL);
     my_errno = 0;

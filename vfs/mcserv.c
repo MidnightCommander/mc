@@ -454,7 +454,7 @@ void do_readdir (void)
 
 	rpc_send (msock, RPC_INT, length, RPC_END);
 	rpc_send (msock, RPC_BLOCK, length, dirent->d_name, RPC_END);
-	fname = copy_strings (mcfs_DIR.names [handle], 
+	fname = g_strconcat (mcfs_DIR.names [handle], 
 				PATH_SEP_STR, dirent->d_name, NULL);
 	n = lstat (fname, &st);
 	send_status (n, errno);
@@ -1290,7 +1290,7 @@ void vfs_die( char *m )
 	exit (1);
     }
 #ifdef HAVE_MAD
-char *copy_strings (const char *first, ...)
+char * mad_strconcat (const char *first, ...)
 {
     va_list ap;
     long len;

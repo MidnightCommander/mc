@@ -535,7 +535,7 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 	vfs_die ("Implement me!");
     if ((!ino->ent) || (!ino->ent->dir) || (!ino->ent->dir->ent))
 	ERRNOR (EAGAIN, NULL);
-    return copy_strings (ino->ent->dir->ent->name, PATH_SEP_STR, 
+    return  g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, 
 			    ino->ent->name, NULL);
 }
 
@@ -912,7 +912,7 @@ vfs_s_fill_names (vfs *me, void (*func)(char *))
     char *name;
     
     while (a){
-	name = copy_strings ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
+	name = g_strconcat ( a->name, "#", me->prefix, "/", /* a->current_dir->name, */ NULL);
 	(*func)(name);
 	g_free (name);
 	a = a->next;
@@ -938,7 +938,7 @@ vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
 	ent = ino->subdir;
 	while (ent){
 	    char *s;
-	    s = copy_strings (prefix, "/", ent->name, NULL);
+	    s = g_strconcat (prefix, "/", ent->name, NULL);
 	    if (ent->name[0] == '.')
 		printf ("%s IGNORED\n", s);
 	    else

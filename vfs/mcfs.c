@@ -88,7 +88,7 @@ static void mcfs_fill_names (vfs *me, void (*func)(char *))
     for (i = 0; i < MCFS_MAX_CONNECTIONS; i++){
 	if (mcfs_connections [i].host == 0)
 	    continue;
-	name = copy_strings ("/#mc:", mcfs_connections [i].user,
+	name = g_strconcat ("/#mc:", mcfs_connections [i].user,
 			     "@",   mcfs_connections [i].host, NULL);
 	(*func) (name);
 	g_free (name);

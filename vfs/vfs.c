@@ -509,7 +509,7 @@ mc_opendir (char *dirname)
     char *p = NULL;
 
     /* We should make possible reading of the root directory in a tar file */
-    dirname = p = append_path_sep (dirname);
+    dirname = p = concat_dir_and_file (dirname, "");
     
     dirname = vfs_canon (dirname);
     vfs = vfs_type (dirname);
@@ -712,9 +712,9 @@ vfs_canon (char *path)
     	char *local, *result;
 
 	if (current_dir [strlen (current_dir) - 1] == PATH_SEP)
-	    local = copy_strings (current_dir, path, NULL);
+	    local = g_strconcat (current_dir, path, NULL);
 	else
-	    local = copy_strings (current_dir, PATH_SEP_STR, path, NULL);
+	    local = g_strconcat (current_dir, PATH_SEP_STR, path, NULL);
 
 	result = vfs_canon (local);
 	g_free (local);
@@ -737,7 +737,7 @@ vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
 {
     vfsid nvfsid;
 
-    dir = append_path_sep (dir);
+    dir = concat_dir_and_file (dir, "");
 
     nvfsid = (*nvfs->getid)(nvfs, dir, par);
     
@@ -881,7 +881,7 @@ mc_chdir (char *path)
     struct vfs_stamping *parent;
 
     /* We should make possible reading of the root directory in a tar archive */
-    path = p = append_path_sep (path);
+    path = p = concat_dir_and_file (path, "");
 
     a = current_dir; /* Save a copy for case of failure */
     current_dir = vfs_canon (path);
@@ -1764,7 +1764,7 @@ char *
 vfs_translate_url (char *url)
 {
     if (strncmp (url, "ftp://", 6) == 0)
-        return copy_strings ("/#ftp:", url + 6, NULL);
+        return  g_strconcat ("/#ftp:", url + 6, NULL);
     else
         return g_strdup (url);
 }

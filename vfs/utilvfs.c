@@ -153,18 +153,6 @@ done:
     return retval;
 }
 
-/* Returns allocated string with trailing PATH_SEP */
-char*
-append_path_sep (char *path)
-{
-    int i = strlen (path);
-
-    if (path[i - 1] == PATH_SEP)
-	return g_strndup (path, i);
-    else
-	return copy_strings (path, PATH_SEP_STR, NULL);
-}
-
 #ifdef test_get_host_and_username
 struct tt {
     char *url;

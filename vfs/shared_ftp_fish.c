@@ -187,7 +187,7 @@ static void X_fill_names (vfs *me, void (*func)(char *))
     do {
 	if ((bucket = lptr->data) != 0){
 
-	    path_name = copy_strings ( X_myname, quser (bucket),
+	    path_name = g_strconcat ( X_myname, quser (bucket),
 				      "@",      qhost (bucket), 
 				      qcdir(bucket), NULL);
 	    (*func)(path_name);
@@ -226,8 +226,10 @@ s_get_path (struct connection **bucket, char *path, char *name)
 	    remote_path = NULL;
 	}
     }
-    g_free (host);
-    g_free (user);
+    if (host)
+	g_free (host);
+    if (user)
+	g_free (user);
     if (pass)
         wipe_password (pass);
 

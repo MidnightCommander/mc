@@ -95,7 +95,7 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     if (size > 0) {
 	char *s;
 	mc_close( result );
-	s = copy_strings( archive->name, decompress_extension (type), NULL );
+	s = g_strconcat ( archive->name, decompress_extension (type), NULL );
 	result = mc_open (s, O_RDONLY);
 	if (result == -1) 
 	    message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), s);
