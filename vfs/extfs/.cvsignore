@@ -1,10 +1,9 @@
 Makefile
 Makefile.in
+audio
 deb
-ftplist
 lslR
 uar
-ucpio
 uha
 ulha
 urar
