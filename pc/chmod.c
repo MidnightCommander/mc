@@ -33,22 +33,22 @@
 #include <io.h>
 #include <sys\types.h>
 #include <sys\stat.h>
-#include "tty.h"
-#include "mad.h"
-#include "util.h"
-#include "win.h"
-#include "color.h"
-#include "dlg.h"
-#include "widget.h"
-#include "dialog.h"	/* For do_refresh() */
+#include "../src/tty.h"
+#include "../src/mad.h"
+#include "../src/util.h"
+#include "../src/win.h"
+#include "../src/color.h"
+#include "../src/dlg.h"
+#include "../src/widget.h"
+#include "../src/dialog.h"	/* For do_refresh() */
 
-#include "dir.h"
-#include "panel.h"		/* Needed for the externs */
-#include "file.h"
-#include "main.h"
-#include "chmod.h"
-#include "achown.h"
-#include "chown.h"
+#include "../src/dir.h"
+#include "../src/panel.h"		/* Needed for the externs */
+#include "../src/file.h"
+#include "../src/main.h"
+#include "../src/chmod.h"
+#include "../src/achown.h"
+#include "../src/chown.h"
 
 #ifdef _OS_NT
 #define FILE_ARCHIVED  FILE_ATTRIBUTE_ARCHIVE

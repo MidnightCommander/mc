@@ -28,18 +28,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "tty.h"
-#include "mad.h"
-#include "util.h"
-#include "win.h"
-#include "color.h"
-#include "dlg.h"
-#include "widget.h"
-#include "dialog.h"
-#include "dir.h"
-#include "panel.h"
-#include "main.h"
-#include "cmd.h"
+#include "../src/tty.h"
+#include "../src/mad.h"
+#include "../src/util.h"
+#include "../src/win.h"
+#include "../src/color.h"
+#include "../src/dlg.h"
+#include "../src/widget.h"
+#include "../src/dialog.h"
+#include "../src/dir.h"
+#include "../src/panel.h"
+#include "../src/main.h"
+#include "../src/cmd.h"
 
 struct Dlg_head *drive_dlg;
 WPanel *this_panel;

@@ -25,12 +25,12 @@
 
 #include <windows.h>
 #include <stdio.h>
-#include "mouse.h"
-#include "global.h"
-#include "main.h"
-#include "key.h"
+#include "../src/mouse.h"
+#include "../src/global.h"
+#include "../src/main.h"
+#include "../src/key.h"
 #include "../vfs/vfs.h"
-#include "tty.h"
+#include "../src/tty.h"
 #include "trace_nt.h"
 
 /*  Global variables */

@@ -16,8 +16,8 @@ OBJ_SUFFIX=o
 OBJ_PLACE=-o
 EXE_PLACE=-o
 #      Just comment RSC out if you have problems with resources
-# RSC=rc.exe
-# RES_PLACE=-fo
+RSC=grc.exe
+RES_PLACE=-o
 
 # ---- Compiler-specific optional stuff
 MC_MISC_CFLAGS=-Zrsx32
@@ -31,7 +31,7 @@ SPECIFIC_MC_CFLAGS=-g -O0 $(MC_MISC_CFLAGS)
 SPECIFIC_MC_LFLAGS_EXTRA=
 SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
 SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
-RC_DEFINES=-D_DEBUG
+RC_DEFINES=
 else
 # ---- Release build
 OBJS_DIR=release
@@ -41,7 +41,7 @@ SPECIFIC_MC_CFLAGS=-O2 $(MC_MISC_CFLAGS)
 SPECIFIC_MC_LFLAGS_EXTRA=
 SPECIFIC_SLANG_CFLAGS=$(SPECIFIC_MC_CFLAGS)
 SPECIFIC_MCEDIT_CFLAGS=$(SPECIFIC_MC_CFLAGS)
-RC_DEFINES=-DRELEASE=$(RELEASE)
+RC_DEFINES=
 endif
 
 # ---- Compiler independent defines
@@ -54,3 +54,6 @@ MC_LIBS=-lvideont -ladvapi32
 
 $(MC_EXE): $(MC_RES) $(OBJS) $(MCEDIT_OBJS) $(SLANG_OBJS)
 	$(LINK) $(EXE_PLACE) $(MC_EXE) $(SPECIFIC_MC_LFLAGS) $+ $(MC_LIBS)
+
+resources: $(MC_RES)
+	rsrc $(MC_EXE) $(MC_RES)

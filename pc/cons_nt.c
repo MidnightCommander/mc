@@ -27,10 +27,10 @@
 
 int    cons_saver_pid = 1;
 
-#include "tty.h"
-#include "util.h"
-#include "win.h"
-#include "cons.saver.h"
+#include "../src/tty.h"
+#include "../src/util.h"
+#include "../src/win.h"
+#include "../src/cons.saver.h"
 
 signed char console_flag = 1;
 static HANDLE hSaved, hNew;

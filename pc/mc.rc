@@ -1,9 +1,7 @@
-#ifdef WINDRES
-#   include "../VERSION"
-#else
+#include "../VERSION"
+#ifndef WINDRES
 #   include "windows.h"
 #   include "winver.h"
-#   include "config.h"
 #endif
 
 /*   English (U.S.) resources   */

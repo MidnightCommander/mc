@@ -19,14 +19,14 @@
 
 #include <config.h>
 #include <stdio.h>
-#include "tty.h"
-#include "mad.h"
-#include "color.h"
-#include "util.h"
-#include "mouse.h"		/* Gpm_Event is required in key.h */
-#include "key.h"		/* define_sequence */
-#include "main.h"		/* extern: force_colors */
-#include "win.h"		/* do_exit_ca_mode */
+#include "../src/tty.h"
+#include "../src/mad.h"
+#include "../src/color.h"
+#include "../src/util.h"
+#include "../src/mouse.h"	/* Gpm_Event is required in key.h */
+#include "../src/key.h"		/* define_sequence */
+#include "../src/main.h"	/* extern: force_colors */
+#include "../src/win.h"		/* do_exit_ca_mode */
 
 #ifdef HAVE_SLANG
 

@@ -34,8 +34,8 @@
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <process.h>
-#include <fs.h>
-#include "util.h"
+#include "../src/fs.h"
+#include "../src/util.h"
 #include "util_win32.h"
 
 #ifdef __BORLANDC__
@@ -196,10 +196,12 @@ char *tilde_expand (char *directory)
 /* sleep: Call Windows API.
 	  Can't do simple define. That would need <windows.h> in every source
 */
+#ifndef __EMX__
 void sleep(unsigned long dwMiliSecs)
 {
     Sleep(dwMiliSecs);
 }
+#endif
 
 /* Canonicalize path, and return a new path. Do everything in situ.
    The new path differs from path in:
@@ -295,7 +297,10 @@ int mc_rmdir (char *path)
     if (win32_GetPlatform() == OS_Win95) {
 		if (rmdir(path)) {
 			SetLastError (ERROR_DIR_NOT_EMPTY);
-			_doserrno = ERROR_DIR_NOT_EMPTY;			/* FIXME: We are always saying the same thing! */ 
+#ifndef __EMX__
+			/* FIXME: We are always saying the same thing! */
+			_doserrno = ERROR_DIR_NOT_EMPTY;
+#endif
 			errno = ENOTEMPTY;
 			return -1;
 		} else
@@ -602,7 +607,7 @@ int vfs_file_is_ftp (char *filename)
 	return 0;
 }
 
-int mc_utime (char *path, struct utimbuf *times)
+int mc_utime (char *path, void *times)
 {
 	return 0;
 }
