@@ -93,10 +93,13 @@ sub fm
 
 sub ls {
     my ($file,$path,$mode) = @_;
-    my @stat = stat($file);
-    # mode, nlink, uid, gid, size, mtime, filename
-    printf "%s %d %d %d %d %s %s\n", $mode || ft($file).fm($stat[2] & 07777),
-    $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $path;
+
+    if (-f $file) {
+	my @stat = stat(_);
+	# mode, nlink, uid, gid, size, mtime, filename
+	printf "%s %d %d %d %d %s %s\n", $mode || ft($file).fm($stat[2] & 07777),
+	  $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $path;
+    }
 }
 
 $DATE=bt(time());

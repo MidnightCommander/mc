@@ -93,10 +93,13 @@ sub fm
 
 sub ls {
     my ($file,$path,$mode) = @_;
-    my @stat = stat($file);
-    # mode, nlink, uid, gid, size, mtime, filename
-    printf "%s %d %d %d %d %s %s\n", $mode || ft($file).fm($stat[2] & 07777),
-    $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $path;
+
+    if (-f $file) {
+	my @stat = stat(_);
+	# mode, nlink, uid, gid, size, mtime, filename
+	printf "%s %d %d %d %d %s %s\n", $mode || ft($file).fm($stat[2] & 07777),
+	  $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $path;
+    }
 }
 
 $DATE=bt(time());
@@ -125,7 +128,7 @@ sub list
     print "-r-xr--r-- 1 root root $sz $DATE DIST-UPGRADE\n";
 
     ls("/etc/apt/sources.list","sources.list");
-    ls("/etc/apt/apt.conf","apt.conf");
+    ls('/etc/apt/apt.conf','apt.conf') if (-f '/etc/apt/apt.conf');
 
     print "drwxr-xr-x 1 root root 0 $DATE all\n";
 
