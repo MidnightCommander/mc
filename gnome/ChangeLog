@@ -1,3 +1,8 @@
+Thu May 14 23:31:15 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gmain.c (session_save_state): Use "+" instead of "%s" in format
+	specification.  Free `argv'.
+
 1998-05-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtrans.c (create_transparent_text_window): Removed the hack to

@@ -1,7 +1,7 @@
 /*
  * Midnight Commander -- GNOME frontend
  *
- * Copyright (C) 1997 The Free Software Foundation
+ * Copyright (C) 1997, 1998 The Free Software Foundation
  *
  * Author: Miguel de Icaza (miguel@gnu.org)
  *
@@ -534,7 +534,7 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 
 		gdk_window_get_origin (GTK_WIDGET (pc->panel->widget.wdata)->window, &x, &y);
 		gdk_window_get_size   (GTK_WIDGET (pc->panel->widget.wdata)->window, &w, &h);
-		sprintf (buffer, "%dx%d%s%d%s%d", w, h, x, y);
+		sprintf (buffer, "%dx%d+%d+%d", w, h, x, y);
 		argv [i++] = pc->panel->cwd;
 		argv [i++] = "--geometry";
 		argv [i++] = buffer;
@@ -545,7 +545,7 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 	if (i == 1){
 		argv [i++] = "--nowindows";
 	}
-	
+
 	argv [i] = NULL;
 	gnome_client_set_clone_command (client, i, argv);
 	gnome_client_set_restart_command (client, i, argv);
@@ -553,7 +553,9 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 	for (l = free_list; l; l = l->next)
 		g_free (l->data);
 	g_list_free (free_list);
-	
+
+	g_free (argv);
+
 	return 1;
 }
 
