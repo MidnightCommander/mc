@@ -1,5 +1,7 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* editwidget.c (edit): Install handler for DLG_RESIZE.
+
 	* editwidget.c (edit): Set edit_dlg to NULL after it's
 	destroyed.
 

@@ -117,6 +117,35 @@ int edit_mouse_event (Gpm_Event * event, void *x)
 	return menubar_event (event, edit_menubar);
 }
 
+static void
+edit_adjust_size (Dlg_head * h)
+{
+    WEdit *edit;
+    WButtonBar *edit_bar;
+
+    edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
+    edit_bar = (WButtonBar *) edit->widget.parent->current->next->widget;
+    widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
+    widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
+    widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
+
+#ifdef RESIZABLE_MENUBAR
+    menubar_arrange (edit_menubar);
+#endif
+}
+
+/* Callback for the edit dialog */
+static int
+edit_dialog_callback (Dlg_head * h, int id, int msg)
+{
+    switch (msg) {
+    case DLG_RESIZE:
+	edit_adjust_size (h);
+	return MSG_HANDLED;
+    }
+    return default_dlg_callback (h, id, msg);
+}
+
 int
 edit (const char *_file, int line)
 {
@@ -150,7 +179,7 @@ edit (const char *_file, int line)
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
-	create_dlg (0, 0, LINES, COLS, NULL, NULL,
+	create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
@@ -274,22 +303,6 @@ void edit_labels (WEdit * edit)
 long get_key_state (void)
 {
     return (long) get_modifier ();
-}
-
-void edit_adjust_size (Dlg_head * h)
-{
-    WEdit *edit;
-    WButtonBar *edit_bar;
-
-    edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
-    edit_bar = (WButtonBar *) edit->widget.parent->current->next->widget;
-    widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
-    widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
-    widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
-
-#ifdef RESIZABLE_MENUBAR
-    menubar_arrange (edit_menubar);
-#endif
 }
 
 void edit_update_screen (WEdit * e)
