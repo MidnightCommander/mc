@@ -212,7 +212,7 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	im_pixmap = gdk_imlib_move_image (im);
 	im_mask = gdk_imlib_move_mask (im);
 
-	if (!want_transparent_icons) {
+	if (!want_transparent_icons || im_mask == NULL) {
 		/* black background */
 
 		gdk_color_black (gdk_imlib_get_colormap (), &color);

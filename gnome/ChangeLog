@@ -1,3 +1,8 @@
+1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtrans.c (set_window_text): draw pixmaps without transparency
+	correctly. 
+
 1998-05-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_realized): Add drag and drop support
