@@ -1,5 +1,7 @@
 2002-10-02  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (VFSHDRS): Remove container.h.
+
 	* tcputil.c (check_hooks): Remove, it does nothing.  Also remove
 	all related data structures.
 

@@ -23,7 +23,6 @@ BASICFILES = 			\
 	vfs.c
 
 VFSHDRS = 			\
-	container.h 		\
 	extfs.h 		\
 	fish.h			\
 	ftpfs.h 		\
