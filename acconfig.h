@@ -23,9 +23,6 @@
 
 @TOP@
 
-#undef VERSION
-#undef PACKAGE
-
 /* Always defined */
 #undef D_INO_IN_DIRENT
 #undef IS_AIX
@@ -112,9 +109,6 @@
 
 /* Support for the Memory Allocation Debugger */
 #undef HAVE_MAD
-
-/* Extra Debugging */
-#undef MCDEBUG
 
 /* If the Slang library will be using it's own terminfo instead of termcap */
 #undef SLANG_TERMINFO

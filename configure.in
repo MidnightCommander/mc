@@ -2,23 +2,12 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 AC_INIT(create_vcs)
+AC_PREREQ(2.13)
 AC_CANONICAL_SYSTEM
+
 AM_INIT_AUTOMAKE(mc, 4.5.51)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
-
-dnl This is path where we're looking for headers in addition to /usr/include
-dnl and whatever cpp defaults to.
-include_additional_path="/usr/local/include /usr/contrib/include /opt/gnu/include"
-
-dnl This sets/resets compiling with -g by default. It should be set to yes for
-dnl development versions and set to no for release versions.
-use_cc_g_flag=yes
-
-dnl We want autoconf to check whether -g is available
-dnl We reset it back soon.
-CCOPTS="$CFLAGS"
-unset CFLAGS
 
 AC_PROG_MAKE_SET
 AC_PROG_CC
@@ -50,7 +39,6 @@ AC_ISC_POSIX
 MC_HPUX_PROG_CC_STDC
 AC_HEADER_MAJOR
 AC_C_CONST
-AC_PATH_PROG(CHMOD, chmod, :)
 AC_PATH_PROG(AR, ar, ar)
 
 AC_CHECK_PROG(system,uname,`uname`,unknown)
@@ -61,56 +49,16 @@ fi
 
 ALL_LINGUAS="ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sl sv sk uk wa zh_TW.Big5 tr zh_CN.GB2312"
 
-dnl ultra ulgy hack to get MKINSTALLDIRS right
 AM_GNOME_GETTEXT
 
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
 dnl
-dnl This part supplies reasonable defaults for CFLAGS, if they weren't
-dnl specified by ''CFLAGS=flags ./configure''
+dnl Enforce coding standards
 dnl
-cc_uses_g=yes
-if test x$GCC = xyes; then
-    if test x$ac_cv_prog_gcc_g = xyes; then
-	:
-    else
-	cc_uses_g=no
-    fi
+if test "x$GCC" = xyes; then
+    CFLAGS="$CFLAGS -Wall"
 fi
-
-dnl Debug mode is turned ON for now
-if test "x$CCOPTS" = x; then
-    CCOPTS='-g'
-fi
-
-if test "x$CCOPTS" = x; then
-    if test x$GCC = xyes; then
-        if test x$system = xLinux; then
-            CCOPTS='-O2 -fno-strength-reduce'
-	    if test x$use_cc_g_flag = xyes; then
-		if test $cc_uses_g = yes; then
-		    CCOPTS='-g -O'
-		fi
-	    fi
-	else
-            CCOPTS='-O'
-	    if test x$use_cc_g_flag = xyes; then
-		if test $cc_uses_g = yes; then
-		    CCOPTS='-g -O'
-		fi
-	    fi
-	fi
-    else
-	if test x$use_cc_g_flag = xyes; then
-	    CCOPTS="$CFLAGS"
-	else
-	    CCOPTS=
-	fi
-    fi
-fi
-CFLAGS="$CCOPTS"
-
 
 dnl
 dnl We now use glib
@@ -213,16 +161,7 @@ AC_CHECK_FUNCS(crypt, , [
 	AC_CHECK_LIB(crypt_i, crypt, LCRYPT="-lcrypt_i")])])
 AC_SUBST(LCRYPT)
 
-dnl This is the correct version
-dnl AC_CHECK_FUNCS(grantpt, , AC_CHECK_LIB(pt, grantpt))
-dnl
-dnl And workaround for a Autoconf 2.4 bug:
-AC_CHECK_FUNCS(grantpt)
-if test x$ac_cv_func_grantpt = xyes; then
-    :
-else
-    AC_CHECK_LIB(pt, grantpt)
-fi
+AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
 
 dnl
 dnl libintl.a required on SCO to provide proper NLS support
@@ -374,9 +313,6 @@ AC_SUBST(fastdepvfs)
 
 screen_manager=unknown
 search_ncurses=false
-
-CFLAGS=${CFLAGS--O}
-LDFLAGS=${LDFLAGS--O}
 
 AC_DEFUN(AC_USE_SUNOS_CURSES, [
 	search_ncurses=false
@@ -716,53 +652,25 @@ then
 fi
 
 dnl
-dnl This option is only inteded for being used by me :-)
-dnl It has some nasty hacks built in.
+dnl Memory Allocation Debugger
 dnl
 mem_debug="none"
-AC_ARG_WITH(debug, 
-[--with-debug               For use by developers only: activates -Wall and MAD],
+AC_ARG_WITH(mad,
+[--with-mad                 Developers only: activates MAD (memory debugger)],
 	[if test x$withval = xyes; then
-	CFLAGS="$CFLAGS -Wall"
 	mem_debug="Janne's MAD library"
 	AC_DEFINE(HAVE_MAD)
-	AC_DEFINE(MCDEBUG)
-	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
-	then
-    	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi
-	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
-		:
-	else
-	    if test $cc_uses_g = yes; then
-		CFLAGS="$CFLAGS -g"
-	    fi
-	fi
-	AC_MSG_RESULT(compiling with -Wall and the memory leak detector)
+	AC_MSG_RESULT(compiling with memory leak detector)
 fi])
 
 dnl
-dnl This option is only inteded for being used by me :-)
-dnl It has some nasty hacks built in.
+dnl Electric Fence - another memory debugger
 dnl
 AC_ARG_WITH(efence, 
-[--with-efence              Developers only: activates -Wall and efence],
+[--with-efence              Developers only: activates Electric Fence],
 	[if test x$withval = xyes; then
-	CFLAGS="$CFLAGS -Wall"
-	AC_DEFINE(MCDEBUG)
 	LIBS="$LIBS -lefence"
-	if [ echo `uname -s -r` | grep -q 'SunOS 4.1' ]
-	then
-    	    CFLAGS="$CFLAGS -Wno-implicit"
-        fi
-	if echo "$CFLAGS" | grep -e -g >/dev/null 2>&1; then
-		:
-	else
-	    if test $cc_uses_g = yes; then
-		CFLAGS="$CFLAGS -g"
-	    fi
-	fi
-	AC_MSG_RESULT(compiling with -Wall and Electric fence)
+	AC_MSG_RESULT(compiling with Electric fence)
 	mem_debug="Electric Fence"
 fi])
 
@@ -1208,9 +1116,6 @@ AC_SUBST(PCENTRULE)
 
 AC_SUBST(builddir)
 builddir=`pwd`
-
-SHELL=${SHELL-"/bin/sh"}
-AC_SUBST(SHELL)
 
 dnl
 dnl Output configuration files

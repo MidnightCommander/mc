@@ -1,5 +1,11 @@
 2000-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* acconfig.h, configure.in: Require autoconf 2.13 or above.
+	Removed workarounds for older versions. Removed MCDEBUG
+	variable - it's not used. --with-debug renamed to --with-mad and
+	cleaned up. Always use -Wall with gcc, other manipulations with
+	CFLAGS removed.
+
 	* doc/Makefile.in, edit/Makefile.in, gnome/Makefile.in,
 	gtkedit/Makefile.in, slang/Makefile.in, src/Makefile.in,
 	vfs/Make-mc.in: preserve timestamp on "make distdir", otherwise
