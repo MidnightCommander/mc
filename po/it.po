@@ -268,7 +268,7 @@ msgstr "&Tutti"
 
 #: edit/editcmd.c:1040 src/file.c:2076 src/filegui.c:230
 msgid "&Skip"
-msgstr "&Ignora"
+msgstr "&Salta"
 
 #: edit/editcmd.c:1042
 msgid "&Replace"
@@ -2111,7 +2111,7 @@ msgstr "&Tutto"
 
 #: src/file.c:2135 src/filegui.c:526
 msgid "non&E"
-msgstr "non&E"
+msgstr "nessun&O"
 
 #: src/file.c:2145
 msgid " Type 'yes' if you REALLY want to delete "
@@ -2188,7 +2188,7 @@ msgstr " Il file \"%s\" esiste già!"
 
 #: src/filegui.c:524
 msgid "if &Size differs"
-msgstr " se dimensione diversa"
+msgstr "solo se la dimensione è &Diversa"
 
 #: src/filegui.c:527
 msgid "&Update"
@@ -2204,7 +2204,7 @@ msgstr "&Reget"
 
 #: src/filegui.c:532
 msgid "ap&Pend"
-msgstr "attacca"
+msgstr "atta&Cca"
 
 #: src/filegui.c:535
 msgid "Overwrite this target?"
