@@ -33,6 +33,7 @@ VFSHDRS = 			\
 	tcputil.h 		\
 	utilvfs.h		\
 	vfs.h			\
+	vfs-impl.h		\
 	xdirentry.h
 
 SMBFILES = smbfs.c
