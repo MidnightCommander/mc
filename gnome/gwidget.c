@@ -342,9 +342,7 @@ x_update_input (WInput *in)
 #else
 		gtk_widget_draw (GTK_WIDGET (entry), NULL);
 #endif
-		/* This is a private member, hopefully the widget
-                   properly updates itself */
-		gtk_entry_adjust_scroll (GTK_ENTRY (entry));
+		gtk_editable_changed (GTK_EDITABLE (entry));
 		gtk_widget_queue_draw (GTK_WIDGET (entry));
 	}
 }
@@ -353,7 +351,7 @@ x_update_input (WInput *in)
 static GtkWidget *
 listbox_pull (widget_data data)
 {
-	return GTK_SCROLLED_WINDOW (data)->child;
+	return GTK_BIN (data)->child;
 }
 
 void
@@ -449,7 +447,7 @@ x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 	gtk_widget_show (listbox);
 	
 	for (p = l->list, i = 0; i < l->count; i++, p = p->next){
-		const char *text [1];
+		char *text [1];
 
 		text [0] = p->text;
 		gtk_clist_append (GTK_CLIST (listbox), text);

@@ -1,3 +1,10 @@
+1998-11-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_update_input): Use gtk_editable_changed on the entry.
+	(x_create_listbox): Fix more CList api change. 
+	* gscreen.c (CLIST_FROM_SW): Adapt to new GtkScrolledWindow
+	inheritance. 
+
 1998-11-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* Makefile.in (OOBJS): Add filegui.o back until the GTK-specific

@@ -97,7 +97,7 @@ typedef void (*context_menu_callback)(GtkWidget *, void *);
 
 static void panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width, int height);
 
-#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_SCROLLED_WINDOW (panel_list)->child)
+#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
 void
