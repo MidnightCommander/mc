@@ -5,7 +5,7 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=pc
-codedirs=vfs lib doc slang edit gtkedit src gnome new_icons icons idl
+codedirs=vfs lib doc slang gtkedit src gnome new_icons icons idl
 unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)

@@ -154,8 +154,7 @@ CORBA_GENERATED =		\
 	FileManager-common.c
 
 CORBA_SOURCES = 		\
-	gcorba.c		\
-	FileManager-impl.c
+	gcorba.c
 
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl

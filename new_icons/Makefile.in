@@ -63,6 +63,6 @@ distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
 
 distcopy:
-	$(CP) $(DISTICONS) ../../mc-$(VERSION)/icons
+	$(CP) $(DISTICONS) ../../mc-$(VERSION)/new_icons
 
 depend dep:
