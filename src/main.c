@@ -288,9 +288,6 @@ char *shell;
 /* mc_home: The home of MC */
 char *mc_home;
 
-/* if on, it displays the information that files have been moved to ~/.mc */
-int show_change_notice = 0;
-
 char cmd_buf [512];
 
 /* Used during argument processing */
@@ -1528,7 +1525,7 @@ init_xterm_support (void)
 	
     termvalue = getenv ("TERM");
     if (!termvalue || !(*termvalue)){
-	fprintf (stderr, _("The TERM environment variable is unset!\n"));
+	fputs (_("The TERM environment variable is unset!\n"), stderr);
 	exit (1);
     }
 
@@ -2070,21 +2067,19 @@ init_sigchld (void)
 #endif /* NATIVE_WIN32, UNIX */
 
 static void
-print_mc_usage (poptContext ctx, FILE *stream)
+print_mc_usage (poptContext ctx, FILE * stream)
 {
     int leftColWidth;
 
-    poptSetOtherOptionHelp (ctx,
-			    _("[flags] [this_dir] [other_panel_dir]\n"));
+    poptSetOtherOptionHelp (ctx, _("[flags] [this_dir] [other_panel_dir]\n"));
 
     /* print help for options */
     leftColWidth = poptPrintHelp (ctx, stream, 0);
     fprintf (stream, "  %-*s   %s\n", leftColWidth, _("+number"),
 	     _("Set initial line number for the internal editor"));
-    fprintf (stream,
-	     _("\n"
-	       "Please send any bug reports (including the output of `mc -V')\n"
-	       "to mc-devel@gnome.org\n"));
+    fputs (_("\n"
+	     "Please send any bug reports (including the output of `mc -V')\n"
+	     "to mc-devel@gnome.org\n"), stream);
     version (0);
 }
 
@@ -2304,7 +2299,7 @@ handle_args (int argc, char *argv [])
 	if (tmp)
 	    view_one_file = g_strdup (tmp);
 	else {
-	    fprintf (stderr, "No arguments given to the viewer\n");
+	    fputs ("No arguments given to the viewer\n", stderr);
 	    finish_program = 1;
 	    probably_finish_program ();
  	}
@@ -2329,7 +2324,7 @@ handle_args (int argc, char *argv [])
  * the $HOME, we are now putting them in $HOME/.mc
  */
 #ifdef NATIVE_WIN32
-#    define compatibility_move_mc_files()
+#    define compatibility_move_mc_files() 0
 #else
 
 static int
@@ -2345,19 +2340,14 @@ do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
 	return move;
 }
 
-static void
-do_compatibility_move (char *mc_dir)
+static int
+compatibility_move_mc_files (void)
 {
-	struct stat s;
-	int move;
-	
-	if (stat (mc_dir, &s) == 0)
-		return;
-	if (errno != ENOENT)
-		return;
-	
-	if (mkdir (mc_dir, 0777) == -1)
-		return;
+    struct stat s;
+    int move = 0;
+    char *mc_dir = concat_dir_and_file (home_dir, ".mc");
+
+    if (stat (mc_dir, &s) && (errno == ENOENT) && (mkdir (mc_dir, 0777) != -1)) {
 
 	move = do_mc_filename_rename (mc_dir, ".mc.ini", "ini");
 	move += do_mc_filename_rename (mc_dir, ".mc.hot", "hotlist");
@@ -2366,27 +2356,19 @@ do_compatibility_move (char *mc_dir)
 	move += do_mc_filename_rename (mc_dir, ".mc.bashrc", "bashrc");
 	move += do_mc_filename_rename (mc_dir, ".mc.inputrc", "inputrc");
 	move += do_mc_filename_rename (mc_dir, ".mc.tcshrc", "tcshrc");
-	move += do_mc_filename_rename (mc_dir, ".mc.tree", "tree");
-
-	if (!move)
-		return;
-
-	show_change_notice = 1;
-}
-
-static void
-compatibility_move_mc_files (void)
-{
-	char *mc_dir = concat_dir_and_file (home_dir, ".mc");
-	
-	do_compatibility_move (mc_dir);
-	g_free (mc_dir);
+	move += do_mc_filename_rename (mc_dir, ".mc.tree", "Tree");
+    }
+    g_free (mc_dir);
+    return move;
 }
 #endif	/* NATIVE_WIN32 */
 
 int
 main (int argc, char *argv [])
 {
+    /* if on, it displays the information that files have been moved to ~/.mc */
+    int show_change_notice = 0;
+
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
@@ -2451,7 +2433,7 @@ main (int argc, char *argv [])
     /* Install the SIGCHLD handler; must be done before init_subshell() */
     init_sigchld ();
     
-    compatibility_move_mc_files ();
+    show_change_notice = compatibility_move_mc_files ();
     
     /* We need this, since ncurses endwin () doesn't restore the signals */
     save_stop_handler ();

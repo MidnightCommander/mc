@@ -1,6 +1,11 @@
 2002-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* file.c (copy_file_file): Reuse message.
+	* main.c (show_change_notice): Make local variable in main().
+	(compatibility_move_mc_files): Merge with
+	do_compatibility_move() and return 1 if moving was done, 0
+	otherwise.  Move ~/.mc.tree to ~/.mc/Tree.
+
+	* file.c (copy_file_file): Reuse message from move_file_file().
 	(copy_dir_dir): Eliminate one more goto.
 
 2002-10-22  Pavel Roskin  <proski@gnu.org>
