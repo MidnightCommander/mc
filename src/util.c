@@ -441,7 +441,7 @@ strip_password (char *p, int has_prefix)
     return (result);
 }
 
-char *strip_home_and_password(char *dir)
+char *strip_home_and_password(const char *dir)
 {
     size_t len;
     static char newdir [MC_MAXPATHLEN];
@@ -449,7 +449,7 @@ char *strip_home_and_password(char *dir)
     if (home_dir && !strncmp (dir, home_dir, len = strlen (home_dir)) && 
 	(dir[len] == PATH_SEP || dir[len] == '\0')){
 	newdir [0] = '~';
-	strcpy (&newdir [1], &dir [strlen (home_dir)]);
+	strcpy (&newdir [1], &dir [len]);
 	return newdir;
     } 
 
@@ -903,7 +903,7 @@ int get_compression_type (int fd)
     return 0;
 }
 
-char *
+const char *
 decompress_extension (int type)
 {
 	switch (type){
@@ -1025,21 +1025,6 @@ char *convert_controls (char *s)
     }
     *q = 0;
     return valcopy;
-}
-
-/* Reverse the string */
-char *reverse_string (char *string)
-{
-    char *str_beg = string;
-    char *str_end = string + strlen (string);
-    
-    while (--str_end > str_beg){
-	char c = *str_end;
-    
-	*str_end = *str_beg;
-	*str_beg++ = c;
-    }
-    return string;
 }
 
 static char *resolve_symlinks (char *path)

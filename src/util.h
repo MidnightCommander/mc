@@ -18,7 +18,7 @@ void size_trunc_len (char *buffer, int len, off_t size, int units);
 int  is_exe (mode_t mode);
 char *string_perm (mode_t mode_bits);
 char *strip_password (char *path, int has_prefix);
-char *strip_home_and_password(char *dir);
+char *strip_home_and_password (const char *dir);
 char *extension (char *);
 char *concat_dir_and_file (const char *dir, const char *file);
 char *unix_error_string (int error_num);
@@ -27,7 +27,6 @@ char *skip_numbers (char *s);
 char *strip_ctrl_codes (char *s);
 char *convert_controls (char *s);
 void wipe_password (char *passwd);
-char *reverse_string (char *string);
 char *diff_two_paths (char *first, char *second);
 
 char *x_basename (char *s);
@@ -111,7 +110,7 @@ enum {
 };
 
 int get_compression_type (int fd);
-char *decompress_extension (int type);
+const char *decompress_extension (int type);
 
 int mc_doublepopen (int inhandle, int inlen, pid_t *tp, char *command, ...);
 int mc_doublepclose (int pipehandle, pid_t pid);

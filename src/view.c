@@ -1442,7 +1442,7 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 
 	/* If we are searching backwards, reverse the string */
 	if (direction < 0) {
-	    reverse_string (buffer + 1);
+	    g_strreverse (buffer + 1);
 	}
     }
 
