@@ -3,6 +3,9 @@
  * Copyright (C) 1998 The Free Software Foundation
  *
  * Author: Federico Mena <federico@nuclecu.unam.mx>
+ *
+ * Known bug: the problem with the multiple entries in the Properties
+ * is a problem with the hisotry code.
  */
 
 #include <grp.h>
@@ -71,7 +74,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 
 	gtk_box_pack_start (GTK_BOX (hbox), label_new (_("Filename"), 0.0, 0.5), FALSE, FALSE, 0);
 
-	gp->filename = gnome_entry_new ("gprop_filename_filename");
+	gp->filename = gnome_entry_new (NULL);
 	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (gp->filename))), filename);
 	gtk_box_pack_start (GTK_BOX (hbox), gp->filename, TRUE, TRUE, 0);
 	gtk_widget_show (gp->filename);
@@ -117,7 +120,7 @@ gprop_exec_new (GnomeDesktopEntry *dentry)
 			  0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
 	
-	ge->entry = gnome_entry_new ("gprop_filename_entry");
+	ge->entry = gnome_entry_new (NULL);
 	s = gnome_config_assemble_vector (dentry->exec_length, (const char * const *) dentry->exec);
 	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (ge->entry))), s);
 	g_free (s);
@@ -304,7 +307,7 @@ perm_owner_new (char *owner)
 	struct passwd *passwd;
 	int i, sel;
 
-	gentry = gnome_entry_new ("gprop_perm_owner");
+	gentry = gnome_entry_new (NULL);
 
 	list = GTK_COMBO (gentry)->list;
 

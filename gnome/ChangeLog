@@ -1,5 +1,7 @@
 1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gprop.c (perm_owner_new): Forget about history for now.
+
 	* gpageprop.c (item_properties), gprop.c: Add executable editing
 	(command, and terminal).  Save the dentry after modification 
 

@@ -50,8 +50,6 @@ General Comments
 
  - needs documentation, context help, etc. Is anyone writing this?
 
- - icon view would be nice, I realize its in the works
-
  - the panel scrollbar is wierd - if you middle mouse click somewhere the
    thumb moves there, but if you then move the mouse (while holding
    middle button down) up and down, the thumb doesn't follow the mouse.
@@ -78,11 +76,6 @@ Panel comments
  - the user needs some feedback that something is happening - for example,
    on  an ftp link, the cursor needs to change or a modal dialog popping
    up saying 'getting directory listing...' or something.
-
- - 'Compare panels' doesnt appear to do anything - i didnt see any feedback
-   after I chose the compare method.
-
- - Alt-t didnt seem to change the listing mode.
 
  - the pull-downs on the entry boxes under the floating menubar dont
    seem to do anything. I thought they might act as a history of the
@@ -120,11 +113,6 @@ VFS Options
 
 NEW BUG LIST:
 
-- In the properties dialog, permissions tab, the user & group drop-downs
-  list the same users/groups multiple times.
-- Why use a GnomeEntry *everywhere* when a lot of the places don't need
-  the history that it provides? Only when the user changes an entry
-  box often and needs a history should GnomeEntry be used...?
 - Find file is pretty cool, but you might want to force-set a maximum size
   during the search (and then unset it after the search is done) to stop
   it from dancing around while it displays all the files that it's
@@ -133,13 +121,9 @@ NEW BUG LIST:
   here'/'Make a tarball' menu options.
 
 OPEN ISSUES:
-- Selection of multiple files is somewhat confusing in general
-
 - Also if you have multi-file selection, is there a way to get a popup
   menu of the operations that are applicable to all those files, instead
   of an empty one?
-- The text in a lot of text entries disappears as soon as I start typing
-  in them.
 
 Havoc Pennington comments:
 
