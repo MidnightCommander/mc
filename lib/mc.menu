@@ -2,11 +2,11 @@ shell_patterns=0
 + ! t t
 @       Do something on the current file
 	CMD=%{Enter command}
-	$CMD ./%0f
+	$CMD %f
 
 + t t
 @       Do something on the tagged files
-	set %u; CMD=%0{Enter command}
+	set %u; CMD=%{Enter command}
 	while [ -n "$1" ]; do
 	  $CMD "$1" || echo tag "$1" >>$MC_CONTROL_FILE
 	  shift
