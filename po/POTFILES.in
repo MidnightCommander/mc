@@ -4,6 +4,7 @@ edit/edit.c
 edit/edit.h
 edit/editcmd.c
 edit/editkeys.c
+edit/editlock.c
 edit/editmenu.c
 edit/editoptions.c
 edit/editwidget.c
