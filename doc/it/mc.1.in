@@ -1874,46 +1874,47 @@ dello schermo
 valide per l'utente che usa il Midnight Commander 
 sono evidenziati con il colore definito con la parolachiave
 .I selezionata
- . If file type highlighting is enabled, files are colored according
-to their file type (e.g. directory, core file, executable, ...). 
+ . Se l'evidenziazione del tipo di file è abilitata, i file vengono colorati a seconda
+del tipo (per esempio directory, file core, eseguibili, ...). 
 .PP
-If the 
-.I Show Mini-Status
-option is enabled, one line of status
-information about the currently selected item is showed at the bottom 
-of the panels.
+Se l'opzione 
+.I Mostra mini-stato
+è abilitata, una linea di informazioni di stato circa la voce correntemente
+selezionata viene mostrata sul fondo dei pannelli.
 .PP
-.SH "    Save Setup"
-At startup the Midnight Commander will try to load initialization
-information from the ~/.mc/ini file. If this file doesn't exist,
-it will load the information from the system-wide configuration file,
-located in @prefix@/lib/mc/mc.ini. If the system-wide configuration
-file doesn't exist, MC uses the default settings.
+.\"NODE "    Save Setup"
+.SH "    Salva configurazione"
+Alla partenza il Midnight Commander prova a caricare le informazioni di
+inizializzazione dal file ~/.mc/ini. Se questo file non esiste, 
+caricherà le informazioni dal file di configurazione di sistema 
+posizionato in @prefix@/lib/mc/mc.ini. Se il file di configurazione di 
+sistema non esiste, MC userà le impostazioni predefinite.
 .PP
+Il comando 
 The
-.I Save Setup
-command creates the ~/.mc/ini file by saving the current settings
-of the
+.I Salva configurazione
+crea il file ~/.mc/ini salvando le impostazioni correnti 
+dei menu
 .\"LINK2"
-Left, Right
+Sinistre, Destra
 .\"Left and Right Menus"
-and
+e
 .\"LINK2"
-Options
+Opzioni
 .\"Options Menu"
-menus.
+ .
 .PP
-If you activate the
-.I auto save setup
-option, MC will always save the current settings when exiting.
+Se si attiva l'opzione
+.I autosalva configurazione
+, MC salverà sempre le impostazioni correnti all'uscita.
 .PP
-There also exist settings which can't be changed from the menus. To
-change these settings you have to edit the setup file with your
-favorite editor. See the section on
+Esistono anche impostazioni che non possono essere cambiate dai menu.
+Per cambiare queste impostazioni è necessario modificare il file di
+configurazione con il vostro editor preferito. Vedere sezione 
 .\"LINK2"
-Special Settings
+Impostazioni speciali
 .\"Special Settings"
-for more information.
+per ulteriori informazioni.
 .PP
 .SH ""
 .SH "Executing operating system commands"
