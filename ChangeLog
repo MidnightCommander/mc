@@ -1,5 +1,7 @@
 2001-08-26  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: New conditional USE_EDIT.
+
 	* syntax/changelog.syntax: Don't require '@' to be in the
 	address.  This also works around a bug in the syntax engine
 	that prevented highlighting of addresses.
