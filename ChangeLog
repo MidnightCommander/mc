@@ -1,3 +1,12 @@
+2003-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* lib/*.ti: Remove, these files are obsolete.
+	* lib/tdiff: Likewise.
+	* lib/xterm.tcap: Likewise.
+	* lib/Makefile.am: Remove obsolete files.  Don't install
+	README.xterm and xterm.ad, there are partly obsolete and can
+	break things if used as is.
+
 2003-09-22  Strahinya Radich  <mr99164@alas.matf.bg.ac.yu>
 
 	* lib/mc.hint.sr: Updated.

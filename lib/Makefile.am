@@ -1,5 +1,4 @@
 suppbindir = $(pkgdatadir)/bin
-tidir      = $(pkgdatadir)/term
 
 if CHARSET
 LIBFILES_ADD = mc.charsets
@@ -13,17 +12,12 @@ LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.hu mc.hint.it	\
 	mc.hint.zh mc.lib mc.menu mc.menu.sr cedit.menu edit.indent.rc	\
 	edit.spell.rc
 
-noinst_DATA = \
-	mcserv.init 		\
-	mcserv.pamd
-
-noinst_SCRIPTS = tdiff
+noinst_DATA = README.xterm mcserv.init mcserv.pamd xterm.ad
 
 SCRIPTS_IN = mc.csh.in mc.sh.in mc-wrapper.csh.in mc-wrapper.sh.in
 SCRIPTS_OUT = mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh
 
 suppbin_SCRIPTS = $(SCRIPTS_OUT)
-ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
 pkgdata_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
 
@@ -33,9 +27,7 @@ CLEANFILES = $(SCRIPTS_OUT)
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
 	$(SCRIPTS_IN) \
-	$(ti_DATA) \
 	$(noinst_DATA) \
-	$(noinst_SCRIPTS) \
 	mc.charsets
 
 mc.csh: $(srcdir)/mc.csh.in
