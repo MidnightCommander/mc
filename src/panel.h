@@ -131,7 +131,6 @@ void paint_paint (WPanel *panel);
 void panel_refresh (WPanel *panel);
 void Xtry_to_select (WPanel *panel, char *name);
 void panel_clean_dir (WPanel *panel);
-int is_a_panel (Widget *);
 
 extern int torben_fj_mode;
 extern int permission_mode;
@@ -158,14 +157,9 @@ extern int extra_info;
 #define RP_ONLY_PAINT 0
 #define RP_SETPOS 1
 
-void set_colors           (WPanel *panel);
 void paint_panel          (WPanel *panel);
-void format_file          (char *dest, WPanel *panel, int file_index, int panel_width, int attr, int isstatus);
-void repaint_file         (WPanel *panel, int file_index, int move, int attr, int isstatus);
 void display_mini_info    (WPanel *panel);
 void panel_reload         (WPanel *panel);
-void paint_dir            (WPanel *panel);
-void show_dir             (WPanel *panel);
 
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
@@ -186,14 +180,9 @@ extern void paint_info_panel (WPanel *);
 extern void paint_quick_view_panel (WPanel *);
 void info_frame (WPanel *panel);
 extern WPanel *the_info_panel;
-void paint_frame (WPanel *panel);
 void panel_update_contents (WPanel *panel);
 void panel_update_cols (Widget *widget, int frame_size);
-format_e *use_display_format (WPanel *panel, char *format, char **error, int isstatus);
-char *panel_format (WPanel *panel);
-char *mini_status_format (WPanel *panel);
 int set_panel_formats (WPanel *p);
-void start_search (WPanel *panel);
 
 WPanel *get_current_panel (void);
 WPanel *get_other_panel (void);
@@ -211,38 +200,12 @@ void try_to_select (WPanel *panel, char *name);
 /* This were in main: */
 void unmark_files (WPanel *panel);
 void select_item (WPanel *panel);
-int ITEMS (WPanel *p);
-void unselect_item (WPanel *panel);
 
 extern Hook *select_file_hook;
-
-char *string_file_type (file_entry *fe, int len);
-char *string_file_size_brief (file_entry *fe, int len);
-char *string_file_permission (file_entry *fe, int len);
-char *string_file_nlinks (file_entry *fe, int len);
-char *string_file_owner (file_entry *fe, int len);
-char *string_file_group (file_entry *fe, int len);
-char *string_file_size (file_entry *fe, int len);
-char *string_file_mtime (file_entry *fe, int len);
-char *string_file_atime (file_entry *fe, int len);
-char *string_file_ctime (file_entry *fe, int len);
-char *string_file_name (file_entry *fe, int len);
-char *string_space (file_entry *fe, int len);
-char *string_dot (file_entry *fe, int len);
-char *string_marked (file_entry *fe, int len);
-char *string_file_perm_octal (file_entry *fe, int len);
-char *string_inode (file_entry *fe, int len);
-char *string_file_ngid (file_entry *fe, int len);
-char *string_file_nuid (file_entry *fe, int len);
 
 void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int index, int val);
 void do_file_mark (WPanel *panel, int index, int val);
-int  file_compute_color (int attr, file_entry *fe);
-int  file_entry_color (file_entry *fe);
-void do_file_mark_range (WPanel *panel, int r1, int r2);
-int do_enter_on_file_entry (file_entry *fe);
-int do_enter (WPanel *panel);
 
 void    x_panel_select_item (WPanel *panel, int index, int val);
 void    x_select_item (WPanel *panel);

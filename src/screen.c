@@ -77,8 +77,10 @@ WPanel *the_info_panel = 0;
 Hook *select_file_hook = 0;
 
 static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
-
 static int panel_event (Gpm_Event *event, WPanel *panel);
+static void paint_frame (WPanel *panel);
+static char *panel_format (WPanel *panel);
+static char *mini_status_format (WPanel *panel);
 
 #define x_adjust_top_file(p)
 #define x_reset_sort_labels(x)
@@ -103,7 +105,7 @@ static int panel_event (Gpm_Event *event, WPanel *panel);
 #define x_panel_select_item(a,b,c)
 #define x_panel_destroy(p)
 
-void
+static void
 set_colors (WPanel *panel)
 {
     standend ();
@@ -161,14 +163,14 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 
 /* String representations of various file attributes */
 /* name */
-char *
+static char *
 string_file_name (file_entry *fe, int len)
 {
 	return fe->fname;
 }
 
 /* size */
-char *
+static char *
 string_file_size (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -193,7 +195,7 @@ string_file_size (file_entry *fe, int len)
 }
 
 /* bsize */
-char *
+static char *
 string_file_size_brief (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -213,7 +215,7 @@ string_file_size_brief (file_entry *fe, int len)
 
 /* This functions return a string representation of a file entry */
 /* type */
-char *
+static char *
 string_file_type (file_entry *fe, int len)
 {
     static char buffer [2];
@@ -250,7 +252,7 @@ string_file_type (file_entry *fe, int len)
 }
 
 /* mtime */
-char *
+static char *
 string_file_mtime (file_entry *fe, int len)
 {
 #ifdef PORT_STATIC_IN_STRING_FILE_XTIME
@@ -263,7 +265,7 @@ string_file_mtime (file_entry *fe, int len)
 }
 
 /* atime */
-char *
+static char *
 string_file_atime (file_entry *fe, int len)
 {
 #ifdef PORT_STATIC_IN_STRING_FILE_XTIME
@@ -276,7 +278,7 @@ string_file_atime (file_entry *fe, int len)
 }
 
 /* ctime */
-char *
+static char *
 string_file_ctime (file_entry *fe, int len)
 {
 #ifdef PORT_STATIC_IN_STRING_FILE_XTIME
@@ -289,14 +291,14 @@ string_file_ctime (file_entry *fe, int len)
 }
 
 /* perm */
-char *
+static char *
 string_file_permission (file_entry *fe, int len)
 {
     return string_perm (fe->buf.st_mode);
 }
 
 /* mode */
-char *
+static char *
 string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -306,7 +308,7 @@ string_file_perm_octal (file_entry *fe, int len)
 }
 
 /* nlink */
-char *
+static char *
 string_file_nlinks (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -316,7 +318,7 @@ string_file_nlinks (file_entry *fe, int len)
 }
 
 /* inode */
-char *
+static char *
 string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -326,7 +328,7 @@ string_inode (file_entry *fe, int len)
 }
 
 /* nuid */
-char *
+static char *
 string_file_nuid (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -336,7 +338,7 @@ string_file_nuid (file_entry *fe, int len)
 }
 
 /* ngid */
-char *
+static char *
 string_file_ngid (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -346,35 +348,35 @@ string_file_ngid (file_entry *fe, int len)
 }
 
 /* owner */
-char *
+static char *
 string_file_owner (file_entry *fe, int len)
 {
     return get_owner (fe->buf.st_uid);
 }
 
 /* group */
-char *
+static char *
 string_file_group (file_entry *fe, int len)
 {
     return get_group (fe->buf.st_gid);
 }
 
 /* mark */
-char *
+static char *
 string_marked (file_entry *fe, int len)
 {
     return fe->f.marked ? "*" : " ";
 }
 
 /* space */
-char *
+static char *
 string_space (file_entry *fe, int len)
 {
     return " ";
 }
 
 /* dot */
-char *
+static char *
 string_dot (file_entry *fe, int len)
 {
     return ".";
@@ -449,7 +451,7 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
     return (dest + len);
 }
 
-int
+static int
 file_compute_color (int attr, file_entry *fe)
 {
     switch (attr){
@@ -494,7 +496,7 @@ file_compute_color (int attr, file_entry *fe)
 }
 
 /* Formats the file number file_index of panel in the buffer dest */
-void
+static void
 format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
     int      color, length, empty_line;
@@ -561,7 +563,7 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
     }
 }
 
-void
+static void
 repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 {
     int    second_column = 0;
@@ -664,7 +666,7 @@ display_mini_info (WPanel *panel)
     return;
 }
 
-void
+static void
 paint_dir (WPanel *panel)
 {
     int i;
@@ -703,7 +705,7 @@ mini_info_separator (WPanel *panel)
 #endif /* !HAVE_SLANG */
 }
 
-void
+static void
 show_dir (WPanel *panel)
 {
     char tmp [200];
@@ -906,12 +908,6 @@ panel_format_modified (WPanel *panel)
     x_reset_sort_labels (panel);
 }
 
-int
-is_a_panel (Widget *w)
-{
-	return (w->callback == (callback_fn) panel_callback);
-}
-
 /* Panel creation */
 /* The parameter specifies the name of the panel for setup retieving */
 WPanel *
@@ -1022,7 +1018,7 @@ panel_reload (WPanel *panel)
     recalculate_panel_summary (panel);
 }
 
-void
+static void
 paint_frame (WPanel *panel)
 {
     int  header_len;
@@ -1268,7 +1264,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     return home;
 }
 
-format_e *
+static format_e *
 use_display_format (WPanel *panel, char *format, char **error, int isstatus)
 {
 #define MAX_EXPAND 4
@@ -1395,7 +1391,7 @@ set_panel_formats (WPanel *p)
 }
 
 /* Given the panel->view_type returns the format string to be parsed */
-char *
+static char *
 panel_format (WPanel *panel)
 {
     switch (panel->list_type){
@@ -1415,7 +1411,7 @@ panel_format (WPanel *panel)
     }
 }
 
-char *
+static char *
 mini_status_format (WPanel *panel)
 {
     if (panel->user_mini_status)
@@ -1443,7 +1439,7 @@ mini_status_format (WPanel *panel)
 /*                          */
 
 /* Returns the number of items in the given panel */
-int
+static int
 ITEMS (WPanel *p)
 {
     if (p->split)
@@ -1522,7 +1518,7 @@ unmark_files (WPanel *panel)
     panel->total = 0;
 }
 
-void
+static void
 unselect_item (WPanel *panel)
 {
     repaint_file (panel, panel->selected, 1, 2*selection (panel)->f.marked, 0);
@@ -1882,19 +1878,6 @@ do_file_mark (WPanel *panel, int idx, int mark)
     }
 }
 
-void
-do_file_mark_range (WPanel *panel, int r1, int r2)
-{
-	const int start = min (r1, r2);
-	const int end   = max (r1, r2);
-	int i, mark;
-
-	mark = !panel->dir.list [start].f.marked;
-
-	for (i = start; i < end; i++)
-	    do_file_mark (panel, i, mark);
-}
-
 static void
 do_mark_file (WPanel *panel, int do_move)
 {
@@ -1955,7 +1938,7 @@ do_search (WPanel *panel, int c_code)
     paint_panel (panel);
 }
 
-void
+static void
 start_search (WPanel *panel)
 {
     if (panel->searching){
@@ -1972,7 +1955,7 @@ start_search (WPanel *panel)
     }
 }
 
-int
+static int
 do_enter_on_file_entry (file_entry *fe)
 {
     char *full_name;
@@ -2027,7 +2010,7 @@ do_enter_on_file_entry (file_entry *fe)
     }
 }
 
-int
+static int
 do_enter (WPanel *panel)
 {
     return do_enter_on_file_entry (selection (panel));

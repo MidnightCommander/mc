@@ -1,3 +1,9 @@
+2002-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c: Make functions static whenever possible.  Remove
+	unused functions.
+	* panel.h: Remove corresponding declarations.
+
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
 	* util.c: Move replacements for permission bits ...
