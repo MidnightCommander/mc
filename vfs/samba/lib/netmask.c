@@ -234,6 +234,9 @@ this should cover most of the rest of systems
 #elif defined(HAVE_NETMASK_AIX)
 
 #include <stdio.h>
+#ifdef	HAVE_UNISTD_H
+#include <unistd.h>	/* close() declaration for gcc in fussy mode */
+#endif
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -246,9 +249,16 @@ this should cover most of the rest of systems
 #include <sys/sockio.h>
 #endif
 
+/*
+ * Prototype for gcc in fussy mode.
+ */
+
+int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask);
+
 /****************************************************************************
 this one is for AIX
 ****************************************************************************/
+
  int get_netmask(struct in_addr *ipaddr, struct in_addr *nmask)
 {
 	char buff[2048];
