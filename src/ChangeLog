@@ -76,7 +76,7 @@
 
 	* screen.c (user_file_menu_cmd) [HAVE_X]: Disable.
 	(panel_callback) [HAVE_X]: Don't define labels, they are unused.
-	* user.c [HAVE_X]: Disable all user meny code.
+	* user.c [HAVE_X]: Disable all user menu code.
 
 	* color.c (color_table): Make static. Only use in text edition.
 	* xtty.h: Remove unused definitions.
@@ -454,7 +454,7 @@
 
 2001-04-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* view.c (get_line_at): previous newline is right condition 
+	* view.c (get_line_at): previous newline is right condition
 	for regexp '^' pattern also, fixed
 
 	(search) [HAVE_GNOME]: gnome_message_box_new doesn't expand printf
@@ -545,7 +545,7 @@
 	execution for directory names containing 0x03 (intr) 0x14.
 	See http://www.securityfocus.com/vdb/?id=2016 for details.
 	Subshell still can't chdir to such directories :(
-	
+
 	* subshell.[ch] (do_subshell_chdir): directory constified
 
 2001-01-17  Pavel Roskin  <proski@gnu.org>
@@ -558,16 +558,16 @@
 	doing in binary file it ignore skipped zero(es), so cursor is before
 	searched expression and next search find the same string. Also regexp
 	search could return wrong results for '^ ?' expressions.
-	
+
 	(get_line_at): skipped: new parameter for number of skipped zero(es)
-	
+
 	(search): new features of get_line_at used.
 
 2000-11-16  Andrew V. Samoilov <sav@bcs.zp.ua>
 
-	* cons.saver.c (check_file): close fd on error. There was a bug, which 
-	allowed luser to write '\0' char to any symlinkable file in Linux 
-	system which don't ensure that fd's 0, 1, and 2 are open on startup 
+	* cons.saver.c (check_file): close fd on error. There was a bug, which
+	allowed luser to write '\0' char to any symlinkable file in Linux
+	system which don't ensure that fd's 0, 1, and 2 are open on startup
 	of a SUID/SGID binary.
 	Based on patch from bugtrack by Maurycy Prodeus <z33d@ETH-SECURITY.NET>.
 
@@ -577,7 +577,7 @@
 
 2000-11-03  Andrew V. Samoilov <sav@bcs.zp.ua>
 
-	* main.c (CmdMenu): don't include edit_user_menu_cmd () 
+	* main.c (CmdMenu): don't include edit_user_menu_cmd ()
 	if USE_INTERNAL_EDIT is not defined
 	(main): call edit_init_file () if USE_INTERNAL_EDIT is defined only
 	(listmode_cmd): messages are localized
@@ -677,7 +677,7 @@
 
 2000-08-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* hotlist.c (done_hotlist): static tkn_buf, tkn_buf_length and 
+	* hotlist.c (done_hotlist): static tkn_buf, tkn_buf_length and
 	tkn_length nullified after tkn_buf is freed to prevent crushes.
 
 	(new_hotlist): became a macro
@@ -699,8 +699,8 @@
 2000-06-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* panel.h, util.[ch] (struct WPanel, size_trunc, size_trunc_sep): size
-	parameters and WPanel.total field became double, thus, total size 
-	of selected files/directories is shown in the mini status correctly 
+	parameters and WPanel.total field became double, thus, total size
+	of selected files/directories is shown in the mini status correctly
 	when it exceeds 2 GB.
 
 2000-05-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
@@ -709,10 +709,10 @@
 
 	* user.c (check_format_var): error messages are localized
 
-	(expand_format, user_menu_cmd): memory leaking for %e and %k macro 
+	(expand_format, user_menu_cmd): memory leaking for %e and %k macro
 	fixed; segfault fixed when %m macro is used outside user_menu_cmd ()
 
-	* ext.c (regex_command): memory leaking fixed when user extension 
+	* ext.c (regex_command): memory leaking fixed when user extension
 	file is absent
 
 	(exec_extension): error message for changed mc.ext file format
@@ -722,19 +722,19 @@
 
 2000-05-11  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
-	src/user.c: fix segfault when Shift-F4, Shift-F1, so when menu
-       content condition y , macro %y
-	
+	* src/user.c: fix segfault when Shift-F4, Shift-F1, so when menu
+	content condition y, macro %y
+
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
-       * src/user.c: Add macro %k it is block file name
-       Add macro %e it is error file name
-       Add macro %i it is cursor column indent of spaces, only for edit
-       Add macro %y, it is syntax of current file in editor, only for edit
-       Add condition y , it is syntax pattern of current file in edit
-       Add macro %x it is extension of current file
-       Add macro %m it is current menu filename
-	
+	* src/user.c: Add macro %k it is block file name
+	Add macro %e it is error file name
+	Add macro %i it is cursor column indent of spaces, only for edit
+	Add macro %y, it is syntax of current file in editor, only for edit
+	Add condition y, it is syntax pattern of current file in edit
+	Add macro %x it is extension of current file
+	Add macro %m it is current menu filename
+
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
 	* gtkedit/editcmd.c: Modify External Formatter (was C indent formatter) .
@@ -749,28 +749,28 @@
 
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
-	src/user.c: fix segfault in chunk_alloc of glibc, when into condition
+	* src/user.c: fix segfault in chunk_alloc of glibc, when into condition
 	of .mnu we have quoted space. (~.mc/menu: + f \.\ test$).
 
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
 	* gtkedit/edit.c:
-       Add ability user edit menus: system: /usr/lib/mc/cedit.menu,
-	* gtkedit/editmenu.c:        home: ~/.cedit.menu, local: .cedit.menu 
+	Add ability user edit menus: system: /usr/lib/mc/cedit.menu,
+	* gtkedit/editmenu.c:        home: ~/.cedit.menu, local: .cedit.menu
 	Marked block is access now from an user edit menu
-	Access ~/.cedit/cooledit.block for insert to cursor place from 
+	Access ~/.cedit/cooledit.block for insert to cursor place from
 	user edit menu.
 	Created system cedit.menu
 
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
-    	* gtkedit/editdraw.c: 
+	* gtkedit/editdraw.c:
 	Improved a status string of cool editor for best understand,
 	and to add char,hex view.
 
 2000-04-17  Andrew V. Samoilov <sav@bcs.zp.ua>
-	
-	* widget.c: (history_put): profile is free()d if chmod failed, 
+
+	* widget.c: (history_put): profile is free()d if chmod failed,
 	  (input_map): added const qualifier
 	* utilunix.c, util.h: (tilde_expand): added const qualifier
 	* cmd.c: (nice_cd): i18n update,
@@ -780,7 +780,7 @@
 
 2000-04-15  Timur Bakeyev  <mc@bat.ru>
 
-	* dir.c (string_sortcomp): strcmp() replaced with strcoll() to make 
+	* dir.c (string_sortcomp): strcmp() replaced with strcoll() to make
 	directory listing LOCALE sensitive. I assume, strcoll exists everywhere,
 	as it is in POSIX.
 
@@ -788,9 +788,9 @@
 
 	* dlg.c: Commited at last patch, that fixes screwed up right panel in
 	a long format. Occasionaly, all my colors problems also gone. All thanks
-	to Norbert Warmuth <nwarmuth@privat.circular.de>, who tracked down the 
+	to Norbert Warmuth <nwarmuth@privat.circular.de>, who tracked down the
 	problem, blames to me and Federico :)
-	
+
 2000-04-12  Timur Bakeyev  <mc@bat.ru>
 
 	* widget.c ([forward|backward]_word): Changed one more time - now it
@@ -805,31 +805,31 @@
 	in one operation. That's nasty, IMHO. Made this a separate commit, so,
 	if it seriously breaks compatability it's easy to revert it. Still hope,
 	nobody'll do that.
-	
+
 2000-04-06  Timur Bakeyev  <mc@bat.ru>
 
 	* file.c, widget.[ch]: Fixed long existing problems with filenames
 	and input widgets, then char is greater than 128. They were processed
 	incorrectly. As usual, char != unsigned char problem.
-	
+
 2000-03-03  Björn Eriksson  <mdeans@algonet.se>
-	
+
 	* Similar patches came from Andrew V. Samoilov <sav@bcs.zp.ua>.
 
-	* mad.[ch]: Some functions wrongly by-passed mad_alloc*() (causing 
+	* mad.[ch]: Some functions wrongly by-passed mad_alloc*() (causing
 	problems when later g_free()ed.
-	
+
 	* Added mad_strndup().
-	
+
 	* Repeated code collected in mad_fatal_error().
-	
+
 	* The gcc-extension/C99-standard variable argument macros (adding
 	__FILE__, __LINE__ before ', ...') would be nice.
-	
+
 	* Alloc_idx_hint and code added, the mad code was way too slow for my
 	poor computer. A hash-table would be nice.
 
-	* (mad_strconcat, mad_strdup_vprintf): g_malloc and g_new are 
+	* (mad_strconcat, mad_strdup_vprintf): g_malloc and g_new are
 	undefined at the top of mad.c, so mad_alloc must be used.
 
 2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -851,18 +851,18 @@
 	passwd by do_load_string(), it is doing by
 	ftpfs_init_passwd. (Patch by sav@bcs.zp.ua)
 
-2000-02-04 "David H.Martin" <dmartina@usa.net> 
-	
+2000-02-04 "David H.Martin" <dmartina@usa.net>
+
 	* src/widget.c (input_new): Change NULL to empty strings and avoid
 	  crashing when string functions are called.
 	* src/boxes.c (configure_vfs): Remove local change to empty string.
-	* src/setup.c (load setup): Load anonymous password     
+	* src/setup.c (load setup): Load anonymous password
 
 2000-02-03 Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* setup.c (load_setup): call ftpfs_init_passwd to avoid segfault
 
-2000-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>             
+2000-01-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c (parse_control_file): add extra secutity checks for
 	 control file. It cannot be group/world writable;
@@ -874,7 +874,7 @@
 
 	* cmd.c (nice_cd): disabled ability to go to home.
 
-2000-01-02  viro@math.psu.edu 
+2000-01-02  viro@math.psu.edu
 
 	* src/subshell.c: Reason: in feed_subshell() we are trying to read
 	from shell pty,check for retval==-1 && errno != EIO. In that case
@@ -1022,7 +1022,7 @@
 	* screen.c (string_file_[amc]time): These three functions use
 	file_date which returns a pointer to a static buffer. In the
 	Gnome edition this buffer has to be coppied to a static buffer
- 	which isn't used in the other two functions (Fix Bug #1766).
+	which isn't used in the other two functions (Fix Bug #1766).
 
 	* util.c, util.h: Moved some constants to util.h
 
@@ -1065,7 +1065,7 @@
 1999-07-21  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* popt.c, popt.h, poptconfig.c, popthelp.c, poptparse.c: updated
- 	to the version found in the popt module
+	to the version found in the popt module
 
 	* features.inc: added report information for smbfs
 
@@ -2184,7 +2184,7 @@ Mon Dec 21 22:39:35 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	the option tables and gmc tried to use the option tables later.
 
 	* main.c (handle_args): In the Gnome edition don't parse the
- 	options a second time.
+	options a second time.
 
 	* boxes.c (configure_vfs), setup.c: Deleted obsolete options.
 	tar.gz files are now always unzipped to a temporary file on disk.
@@ -2253,12 +2253,12 @@ Fri Dec 11 00:05:50 1998 Paul Sheer <psheer@obsidian.co.za>
 Mon Nov 30 21:10:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (copy_file_file): minor code beatifulling: replace goto's
- 	with while loops (it is both shorter and nicer :-)
+	with while loops (it is both shorter and nicer :-)
 	(panel_operate): hopefully done WANT_STALE_DATA right. We really
- 	should kill ftpfs_hint_reread hack soon.
+	should kill ftpfs_hint_reread hack soon.
 
 	* cmd.c (dirsizes_cmd): report error if you are on non-local
- 	filesystem. (As oposed to silently failing.)
+	filesystem. (As oposed to silently failing.)
 
 1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -2396,7 +2396,7 @@ Sun Nov 15 00:37:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 Thu Nov  5 12:10:10 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* file.c (panel_operate): check for null pointer before passing it
- 	to mc_setctl
+	to mc_setctl
 
 Wed Nov  4 17:51:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
@@ -2407,20 +2407,20 @@ Wed Nov  4 17:51:43 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 Sun Nov  1 20:59:05 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (erase_file): translated goto into while loop (it is both
- 	shorter AND cleaner)
+	shorter AND cleaner)
 
 	* subshell.c (feed_subshell): do NOT print anything if we get
- 	errors/eofs from read(subshell) - this fixes (or at least hides)
- 	nasty bug where typing "exit" on mc prompt prints lots of garbage
- 	and falls into infinite loop. Someone with better knowledge should
- 	read feed_subshell(), and make it handle errors properly. (Why do
- 	we ignore EIO for example?)
+	errors/eofs from read(subshell) - this fixes (or at least hides)
+	nasty bug where typing "exit" on mc prompt prints lots of garbage
+	and falls into infinite loop. Someone with better knowledge should
+	read feed_subshell(), and make it handle errors properly. (Why do
+	we ignore EIO for example?)
 
 Sun Oct 18 22:56:17 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* view.c: we now rely on sfs to do file decompressing for us. That
- 	has advantage of displaying #ugz at first line, so user knows what
- 	we are doing behind his back
+	has advantage of displaying #ugz at first line, so user knows what
+	we are doing behind his back
 
 	* view.c: fix indentation, fallback to read whole file if mmap fails.
 
@@ -2466,19 +2466,19 @@ Thu Oct 22 20:31:17 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 Fri Oct 16 12:10:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* cmd.c (quick_chdir_cmd): you must check for return code of
- 	do_cd(). (Fixed error for here, but more such bugs are present in
- 	src/ tree. Or maybe move error checking into do_cd?)
+	do_cd(). (Fixed error for here, but more such bugs are present in
+	src/ tree. Or maybe move error checking into do_cd?)
 
 	* command.c: warn user if he is pressing enter while on non-local
- 	filesystem. (Prev. behaviour was fail silently to do anything,
- 	which is _bad_.)
+	filesystem. (Prev. behaviour was fail silently to do anything,
+	which is _bad_.)
 
 Mon Oct 12 22:47:53 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (copy_file_file): MCCTL_SETREMOTECOPY is no longer used
 
 	* file.c (copy_file_file): do_reget is now correctly done using
- 	open()/lseek() pair
+	open()/lseek() pair
 
 Wed Oct  7 22:20:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
@@ -2525,13 +2525,13 @@ Tue Sep 29 17:53:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 	* main.c: removed stupid reference to {sfs,extfs}_which
 
 	* screen.c: fixed higlighting to go for longest match if it does
- 	not find exact match. This is so that it works well with vfs (and
- 	needs _NO_ knowledge about vfs layer).
+	not find exact match. This is so that it works well with vfs (and
+	needs _NO_ knowledge about vfs layer).
 
 Tue Sep 29 14:02:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* layout.c (print_vfs_message): fixed buffer overrun by
- 	vsnprintf. Unfortunately I have no clue how to do this portably.
+	vsnprintf. Unfortunately I have no clue how to do this portably.
 
 Tue Sep 29 11:42:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -2549,7 +2549,7 @@ Mon Sep 28 21:55:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Wed Sep 23 14:06:44 1998  Pavel Machek <pavel@atrey.karlin.mff.cuni.cz>
 
 	* src/file.c: Made file.c use new O_LINEAR mode (so copying from
- 	ftp works nicely, again)
+	ftp works nicely, again)
 
 Fri Sep 18 14:15:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -2621,8 +2621,8 @@ Tue Sep  8 13:10:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
 Mon Aug 31 12:40:29 1998  Pavel Machek <pavel@ucw.cz>
 
 	* cmd.c: added view_file_cmd which asks user which file to view -
- 	_very_ usefull with vfs (now you can browse web with mc: try
- 	/#url:http:||atrey.karlin.mff.cuni.cz|~pavel#uhtml)
+	_very_ usefull with vfs (now you can browse web with mc: try
+	/#url:http:||atrey.karlin.mff.cuni.cz|~pavel#uhtml)
 
 Thu Aug 27 19:52:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -2650,7 +2650,7 @@ Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel_roskin@geocities.com>
 Sun Aug  9 22:39:12 1998  Janne Kukonlehto  <jtklehto@paju.oulu.fi>
 
 	* mad.h (calloc): Added parentheses around the arguments as
- 	suggested by Steef Boerrigter <sxmboer@sci.kun.nl>.
+	suggested by Steef Boerrigter <sxmboer@sci.kun.nl>.
 
 Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -2697,7 +2697,7 @@ Wed Jul 15 00:41:01 1998    Paul Sheer  <psheer@obsidian.co.za>
 1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* main.c (main): 'session_management_setup' will be called after
- 	'gnome_init'.
+	'gnome_init'.
 
 Wed Jun 18   Pavel Machek  <pavel@ucw.cz>
 
@@ -2742,7 +2742,7 @@ Sun May 31 10:23:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	the appropriate entries in mc.lib and ~/.mc/ini).
 
 	* widget.c (show_hist): Don't display the listbox partly
- 	off screen (the left panel's history started in column - 2).
+	off screen (the left panel's history started in column - 2).
 
 	* keyxdef.c: include tty.h instead of myslang.h as suggested by
 	Tamasi Gyorgy <gt_cosy@usa.net>
