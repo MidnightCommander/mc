@@ -140,6 +140,9 @@ is_block_device_mountable (char *devname)
 		return NULL;
 
 	while ((mnt = getmntent (f))){
+		if (strcmp (mnt->mnt_fsname, devname) != 0)
+			continue;
+		
 		if (option_has_user (mnt->mnt_opts)){
 			retval = g_strdup (mnt->mnt_dir);
 			break;

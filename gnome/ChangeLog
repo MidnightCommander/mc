@@ -1,7 +1,10 @@
 1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gmount.c (get_mountable_devices): Do not stop scanning devices. 
-
+	* gmount.c (is_block_device_mountable): compare the device name
+	here. 
+	
+	(get_mountable_devices): Do not stop scanning devices. 	
+	
 	* gview.c (scrollbar_moved): Call view update here, with
 	update_gui = FALSE.
 
