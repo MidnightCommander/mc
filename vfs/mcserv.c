@@ -90,11 +90,15 @@ extern char *crypt (const char *, const char *);
 
 #include "vfs.h"
 #include "mcfs.h"
+#include "mcfsutil.h"
 #include "tcputil.h"
 
 /* replacement for g_free() from glib */
 #undef g_free
 #define g_free(x) do {if (x) free (x);} while (0)
+
+/* We don't care about SIGPIPE */
+int got_sigpipe = 0;
 
 /* The socket from which we accept commands */
 int msock;

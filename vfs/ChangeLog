@@ -1,5 +1,13 @@
 2002-10-04  Pavel Roskin  <proski@gnu.org>
 
+	* tcputil.c: Split mcfs-specific part to
+	* mcfsutil.c: ... this.
+	* tcputil.h: Split mcfs-specific part to
+	* mcfsutil.h: ... this.
+	* Makefile.am: Add mcfsutil.c and mcfsutil.h.
+	* mcserv.c: Define own got_sigpipe, which is always 0, since
+	mcserv doesn't call tcp_init().
+
 	* Makefile.am: Don't link mcserv with glib.  It's unreasonable
 	to require a glib port for embedded systems mcserv may run on.
 	* mcserv.c: Replace all glib calls with standard libc calls.

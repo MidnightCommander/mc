@@ -28,6 +28,7 @@ VFSHDRS = 			\
 	ftpfs.h 		\
 	local.h			\
 	mcfs.h 			\
+	mcfsutil.h 		\
 	names.h 		\
 	smbfs.h			\
 	tar.h 			\
@@ -46,7 +47,8 @@ if USE_UNDEL_FS
 UNDEL_FILES = $(UNDELFILES)
 endif
 
-NETFILES = tcputil.c fish.c ftpfs.c mcfs.c utilvfs.c $(SMB_NETFILES)
+NETFILES = tcputil.c fish.c ftpfs.c mcfs.c mcfsutil.c utilvfs.c \
+	$(SMB_NETFILES)
 
 NONETFILES = $(BASICFILES) $(UNDEL_FILES)
 
@@ -95,7 +97,7 @@ if USE_MCFS
 sbin_PROGRAMS = mcserv
 endif
 
-mcserv_SOURCES = mcserv.c tcputil.c
+mcserv_SOURCES = mcserv.c mcfsutil.c
 
 mcserv_LDADD = $(PAMLIBS) $(LCRYPT)
 

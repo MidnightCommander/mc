@@ -52,6 +52,7 @@
 
 #include "vfs.h"
 #include "mcfs.h"
+#include "mcfsutil.h"
 #include "tcputil.h"
 #include "../src/dialog.h"
 

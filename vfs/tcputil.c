@@ -1,5 +1,4 @@
-/* Server for the Midnight Commander Virtual File System.
-   Routines for the tcp connection, includes the primitive rpc routines.
+/* Network utilities for the Midnight Commander Virtual File System.
    
    Copyright (C) 1995, 1996 Miguel de Icaza
    
@@ -18,195 +17,15 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include <unistd.h>
 #include <stdlib.h>
-#include <stdarg.h>
 #include <stdio.h>
 #include <signal.h>
-#include <pwd.h>
 #include <sys/types.h>
-#include <netdb.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#ifdef HAVE_ARPA_INET_H
-#include <arpa/inet.h>
-#endif
 
-#ifdef HAVE_PMAP_SET
-#include <rpc/rpc.h>
-#include <rpc/pmap_prot.h>
-#ifdef HAVE_RPC_PMAP_CLNT_H
-#include <rpc/pmap_clnt.h>
-#endif
-#endif
-
-#include <errno.h>
 #include "tcputil.h"
-#include "../src/dialog.h"	/* for message () */
-
 #include "utilvfs.h"
 
-#include "mcfs.h"		/* for mcserver_port definition */
-
-#define CHECK_SIG_PIPE(sock) if (got_sigpipe) \
-     { tcp_invalidate_socket (sock); return got_sigpipe = 0; }
-
-extern void tcp_invalidate_socket (int);
-extern void vfs_die (char *);
-
 int got_sigpipe;
-
-#ifdef	WITH_MCFS
-/* Reads a block on dest for len bytes from sock */
-/* Returns a boolean indicating the success status */
-int
-socket_read_block (int sock, char *dest, int len)
-{
-    int nread, n;
-
-    for (nread = 0; nread < len;) {
-	n = read (sock, dest + nread, len - nread);
-	if (n <= 0) {
-	    tcp_invalidate_socket (sock);
-	    return 0;
-	}
-	nread += n;
-    }
-    return 1;
-}
-
-int
-socket_write_block (int sock, char *buffer, int len)
-{
-    int left, status;
-
-    for (left = len; left > 0;) {
-	status = write (sock, buffer, left);
-	CHECK_SIG_PIPE (sock);
-	if (status < 0)
-	    return 0;
-	left -= status;
-	buffer += status;
-    }
-    return 1;
-}
-
-int
-rpc_send (int sock, ...)
-{
-    long int tmp, len, cmd;
-    char *text;
-    va_list ap;
-
-    va_start (ap, sock);
-
-    for (;;) {
-	cmd = va_arg (ap, int);
-	switch (cmd) {
-	case RPC_END:
-	    va_end (ap);
-	    return 1;
-
-	case RPC_INT:
-	    tmp = htonl (va_arg (ap, int));
-	    write (sock, &tmp, sizeof (tmp));
-	    CHECK_SIG_PIPE (sock);
-	    break;
-
-	case RPC_STRING:
-	    text = va_arg (ap, char *);
-	    len = strlen (text);
-	    tmp = htonl (len);
-	    write (sock, &tmp, sizeof (tmp));
-	    CHECK_SIG_PIPE (sock);
-	    write (sock, text, len);
-	    CHECK_SIG_PIPE (sock);
-	    break;
-
-	case RPC_BLOCK:
-	    len = va_arg (ap, int);
-	    text = va_arg (ap, char *);
-	    tmp = htonl (len);
-	    write (sock, text, len);
-	    CHECK_SIG_PIPE (sock);
-	    break;
-
-	default:
-	    vfs_die ("Unknown rpc message\n");
-	}
-    }
-}
-
-int
-rpc_get (int sock, ...)
-{
-    long int tmp, len;
-    char *text, **str_dest;
-    int *dest, cmd;
-    va_list ap;
-
-    va_start (ap, sock);
-
-    for (;;) {
-	cmd = va_arg (ap, int);
-	switch (cmd) {
-	case RPC_END:
-	    va_end (ap);
-	    return 1;
-
-	case RPC_INT:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    dest = va_arg (ap, int *);
-	    *dest = ntohl (tmp);
-	    break;
-
-	    /* returns an allocated string */
-	case RPC_LIMITED_STRING:
-	case RPC_STRING:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    len = ntohl (tmp);
-	    if (cmd == RPC_LIMITED_STRING)
-		if (len > 16 * 1024) {
-		    /* silently die */
-		    abort ();
-		}
-	    if (len > 128 * 1024)
-		abort ();
-
-	    /* Don't use glib functions here - this code is used by mcserv */
-	    text = malloc (len + 1);
-	    if (socket_read_block (sock, text, len) == 0) {
-		free (text);
-		va_end (ap);
-		return 0;
-	    }
-	    text[len] = '\0';
-
-	    str_dest = va_arg (ap, char **);
-	    *str_dest = text;
-	    break;
-
-	case RPC_BLOCK:
-	    len = va_arg (ap, int);
-	    text = va_arg (ap, char *);
-	    if (socket_read_block (sock, text, len) == 0) {
-		va_end (ap);
-		return 0;
-	    }
-	    break;
-
-	default:
-	    vfs_die ("Unknown rpc message\n");
-	}
-    }
-}
-#endif				/* WITH_MCFS */
 
 static void
 sig_pipe (int unused)
