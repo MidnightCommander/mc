@@ -2320,9 +2320,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *cwd;
-	GtkWidget *hbox, *evbox, *dock, *box;
+	GtkWidget *dock, *box;
 	GnomeUIBuilderData uibdata;
-
 
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 

@@ -1,3 +1,7 @@
+1999-02-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (x_create_panel): Removed a couple unused variables.
+
 1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_select_row): Disable row selection when
