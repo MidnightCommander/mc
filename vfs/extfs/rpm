@@ -149,6 +149,7 @@ mcrpmfs_copyout ()
 	INFO/BUILDTIME)		$RPM -qp --qf "%{BUILDTIME:date}\n" "$f" >"$3"; exit 0;;
 	INFO/SERIAL)		$RPM -qp --qf "%{SERIAL}\n" "$f" >"$3"; exit 0;;
 	INFO/COPYRIGHT)		$RPM -qp --qf "%{COPYRIGHT}\n" "$f" >"$3"; exit 0;;
+	INFO/LICENSE)		$RPM -qp --qf "%{LICENSE}\n" "$f" >"$3"; exit 0;;
 	INFO/RPMVERSION)	$RPM -qp --qf "%{RPMVERSION}\n" "$f" >"$3"; exit 0;;
 	INFO/REQUIRENAME)	$RPM -qp --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" "$f" >"$3"; exit 0;;
 	INFO/PROVIDES)		$RPM -qp --qf "[%{PROVIDES}\n]" "$f" >"$3"; exit 0;;
@@ -162,6 +163,7 @@ mcrpmfs_copyout ()
 	INFO/OS)		$RPM -qp --qf "%{OS}\n" "$f" > "$3"; exit 0;;
 	INFO/CHANGELOG)		$RPM -qp --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" "$f" > "$3"; exit 0;;
 	INFO/SIZE)		$RPM -qp --qf "%{SIZE} bytes\n" "$f" > "$3"; exit 0;;
+	INFO/OBSOLETES)		$RPM -qp --qf "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" "$f" > "$3"; exit 0;;
 	CONTENTS.cpio)		$RPM2CPIO "$1" > "$3"; exit 0;;
 	*)
 	    TMPDIR=/tmp/mctmpdir.$$
@@ -179,7 +181,7 @@ mcrpmfs_run ()
 {
     case "$2" in
 	INSTALL) echo "Installing \"\"$1\"\""; $RPM -ivh "$1"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$1\"\""; $RPM -iUvh "$1"; exit 0;;
+	UPGRADE) echo "Upgrading \"\"$1\"\""; $RPM -Uvh "$1"; exit 0;;
     esac
 }
 

@@ -1,3 +1,10 @@
+2004-08-18  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* extfs/rpm: Command line parameters fix for UPGRADE.
+	Fix mcrpmfs_copyout for INFO/OBSOLETES and INFO/LICENSE 
+
+	From Leonard den Ottolander <leonard@den.ottolander.nl>
+
 2004-08-16  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* extfs/deb.in: Security fix patch. Fix insecure temporary file and 
