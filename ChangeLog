@@ -1,5 +1,9 @@
 2002-11-16  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (MC_MCSERVER_CHECKS): Don't limit PAM check to
+	Linux.  Use AC_SEARCH_LIBS to find crypt().  Consolidate mcserv
+	libraries into MCSERVLIBS.
+
 	* configure.in: Move all mcserv related checks ...
 	* acinclude.m4 (MC_MCSERVER_CHECKS): ... here.
 

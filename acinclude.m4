@@ -40,26 +40,34 @@ dnl    Check how mcserver should check passwords.
 dnl    Possible methods are PAM and libcrypt.
 
 AC_DEFUN([MC_MCSERVER_CHECKS], [
+
+    mcserv_auth=
+
     dnl Check if PAM can be used for mcserv
-    PAMLIBS=""
-    case $host_os in
-    linux*)
-	AC_CHECK_LIB(pam, pam_start, [
-	    AC_DEFINE(HAVE_PAM, 1,
-		      [Define if PAM (Pluggable Authentication Modules) is available])
-	    PAMLIBS="-lpam -ldl"
-	],[],[-ldl])
-	;;
-    esac
-    AC_SUBST(PAMLIBS)
+    AC_CHECK_LIB(dl, dlopen, [LIB_DL="-ldl"])
+    AC_CHECK_LIB(pam, pam_start, [
+	AC_DEFINE(HAVE_PAM, 1,
+		  [Define if PAM (Pluggable Authentication Modules) is available])
+	MCSERVLIBS="-lpam $LIB_DL"
+	mcserv_auth=pam], [], [$LIB_DL])
 
-    AC_CHECK_HEADERS([crypt.h])
+    dnl Fallback to libcrypt (uses passwords from /etc/passwd)
+    if test -z "$mcserv_auth"; then
+	AC_CHECK_HEADERS([crypt.h], [crypt_header=yes])
+	if test -n "$crypt_header"; then
+	    save_LIBS="$LIBS"
+	    LIBS=
+	    AC_SEARCH_LIBS(crypt, [crypt crypt_i], [mcserv_auth=crypt])
+	    MCSERVLIBS="$LIBS"
+	    LIBS="$save_LIBS"
+	    if test -n "$mcserv_auth"; then
+		AC_DEFINE(HAVE_CRYPT, 1,
+			  [Define to use crypt function in mcserv])
+	    fi
+	fi
+    fi
 
-    LCRYPT=""
-    AC_CHECK_FUNCS(crypt, , [
-	AC_CHECK_LIB(crypt, crypt, [LCRYPT="-lcrypt"], [
-	    AC_CHECK_LIB(crypt_i, crypt, [LCRYPT="-lcrypt_i"])])])
-    AC_SUBST(LCRYPT)
+    AC_SUBST(MCSERVLIBS)
 ])
 
 
@@ -71,7 +79,6 @@ dnl     Sets MC_VFS_LIBS to libraries required
 dnl     Sets vfs_flags to "pretty" list of vfs implementations we include.
 dnl     Sets shell variable use_vfs to yes (default, --with-vfs) or
 dnl        "no" (--without-vfs).
-dnl     Calls AC_SUBST(mcserv), which is either empty or "mcserv".
 
 dnl Private define
 AC_DEFUN([MC_WITH_VFS],[
@@ -186,16 +193,6 @@ AC_DEFUN([MC_WITH_VFS],[
   if $use_net_code; then
      AC_DEFINE(USE_NETCODE, 1, [Define to use networked VFS])
   fi
-  mcserv=
-  if test $have_socket = yes; then
-     mcserv="mcserv"
-  fi
-
-  AC_SUBST(mcserv)
-
-dnl FIXME:
-dnl MC_VFS_LIBS=
-
 ])
 
 
