@@ -15,7 +15,7 @@ typedef struct {
 	Widget *other;
 } PanelContainer;
 
-GList *containers;
+GList *containers = 0;
 
 int output_lines = 0;
 int command_prompt = 1;
@@ -75,6 +75,20 @@ set_current_panel (int index)
 	for (p = containers; index; p = p->next)
 		index--;
 	current_panel_ptr = p->data; 
+}
+
+void
+set_new_current_panel (WPanel *panel)
+{
+	GList *p;
+
+	other_panel_ptr = current_panel_ptr;
+	for (p = containers; p; p = p->next){
+		if (((PanelContainer *)p->data)->panel == panel){
+			printf ("Setting current panel to %p\n", p);
+			current_panel_ptr = p->data;
+		}
+	}
 }
 
 void
@@ -172,27 +186,19 @@ GnomeUIInfo gnome_panel_menu [] = {
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
-int
-dialog_panel_callback (struct Dlg_head *h, int id, int msg)
-{
-	return default_dlg_callback (h, id, msg);
-}
-
 void
 gnome_init_panels ()
 {
-	containers = g_list_alloc ();
 	current_panel_ptr = NULL;
 	other_panel_ptr = NULL;
 }
 
-void
-create_container (char *name)
+WPanel *
+create_container (Dlg_head *h, char *name)
 {
 	PanelContainer *container = g_new (PanelContainer, 1);
 	WPanel     *panel;
-	GtkWidget *app, *vbox;
-	Dlg_head *h;
+	GtkWidget  *app, *vbox;
 	int slot;
 
 	container->splitted = 0;
@@ -206,21 +212,45 @@ create_container (char *name)
 	gtk_widget_show (app);
 
 	panel = panel_new (name);
+
+	/* Ultra nasty hack follows:
+	 * I am setting the panel->widget.wdata value here before the
+	 * panel X stuff gets created in the INIT message section of the
+	 * widget.  There I put a pointer to the vbox where the panel
+	 * should pack itself
+	 */
+	panel->widget.wdata = (widget_data) vbox;
 	container->panel = panel;
-	containers = g_list_append (containers, container);
+	if (!containers){
+		containers = g_list_alloc ();
+		containers->data = container;
+	} else  
+		containers = g_list_append (containers, container);
 
 	if (!current_panel_ptr){
 		current_panel_ptr = container;
 	} else if (!other_panel_ptr)
 		other_panel_ptr = container;
-	
-	h = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
-	add_widget (h, panel);
-	bind_gtk_keys (GTK_WIDGET (app), h);
-	
-	gtk_object_set_data (GTK_OBJECT (h->wdata), "parent-container", vbox);
 
-	run_dlg (h);
+	bind_gtk_keys (GTK_WIDGET (app), h);
+	return panel;
+}
+
+void
+new_panel_at (char *dir)
+{
+	WPanel *panel;
+	Dlg_head *h = current_panel_ptr->panel->widget.parent;
+	
+	mc_chdir (dir);
+	panel = create_container (h, "Other");
+	add_widget (h, panel);
+
+	/* Gross hack 2: add_widget should know that the dialog is already
+	 * executing and shold call the init method manually.  We do so instead:
+	 */
+	panel->widget.callback (h, panel, WIDGET_INIT, 0);
+	set_new_current_panel (panel);
 }
 
 void

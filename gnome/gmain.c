@@ -234,19 +234,28 @@ setup_sigwinch ()
 {
 }
 
+int
+dialog_panel_callback (struct Dlg_head *h, int id, int msg)
+{
+	return default_dlg_callback (h, id, msg);
+}
+
 void
 create_panels (void)
 {
 	Dlg_head *h;
-
+	WPanel *panel;
+	
 	start_desktop ();
 	cmdline = command_new (0, 0, 0);
 	the_hint = label_new (0, 0, 0, NULL);
 
 	gnome_init_panels ();
-	create_container ("My Panel");
-
+	
+	h = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
+	
+	panel = create_container (h, "My Panel");
+	add_widget (h, panel);
 	set_current_panel (0);
+	run_dlg (h);
 }
-
-

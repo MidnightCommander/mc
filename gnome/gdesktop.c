@@ -55,6 +55,13 @@ shaped_icon_new_from_file (char *file, int extra_events)
 	GdkImlibImage *im;
 	GdkWindowPrivate *private;
 
+	if (!g_file_exists (file))
+		return;
+	
+	im = gdk_imlib_load_image (file);
+	if (!im)
+		return NULL;
+
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
@@ -64,8 +71,6 @@ shaped_icon_new_from_file (char *file, int extra_events)
 	
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
-
-	im = gdk_imlib_load_image (file);
 
 	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
 	gtk_widget_realize (window);
@@ -163,9 +168,9 @@ dentry_execute (desktop_icon_t *di)
 	 * invocation 
 	 */
 
-	if (strcmp (di->dentry->type, "Directory") == 0)
-		do_cd (di->dentry->exec, cd_exact);
-	else 
+	if (strcmp (di->dentry->type, "Directory") == 0){
+		new_panel_at (di->dentry->exec);
+	} else 
 		gnome_desktop_entry_launch (dentry);
 }
 
@@ -205,9 +210,25 @@ desktop_load_dentry (char *filename)
 	if (dentry->icon)
 		window = shaped_icon_new_from_file (dentry->icon, GDK_BUTTON_PRESS_MASK);
 	else {
-		window = gtk_window_new (GTK_WINDOW_POPUP);
-		gtk_widget_set_usize (window, 20, 20);
+		static char *default_icon_path;
+		static char exists;
+		
+		if (!default_icon_path){
+			default_icon_path = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+			if (g_file_exists (default_icon_path))
+				exists = 1;
+		}
+
+		if (exists)
+			window = shaped_icon_new_from_file (default_icon_path, GDK_BUTTON_PRESS_MASK);
+		else {
+			window = gtk_window_new (GTK_WINDOW_POPUP);
+			gtk_widget_set_usize (window, 20, 20);
+		}
 	}
+	if (!window)
+		return;
+	
 	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
 	di->dentry = dentry;
 	di->widget = window;
@@ -270,7 +291,8 @@ get_desktop_icon (char *pathname)
 static void
 desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
-	printf ("YOu just discovered that regex_command ('open') is not being invoked yet\n");
+	if (event->type == GDK_2BUTTON_PRESS && event->button == 1)
+		printf ("YOu just discovered that regex_command ('open') is not being invoked yet\n");
 }
 
 static void
@@ -335,10 +357,12 @@ desktop_load (char *desktop_dir)
 				desktop_create_directory_entry (dir_full, full, dent->d_name);
 			
 			free (dir_full);
-		} else if (!strstr (dent->d_name, ".desktop"))
-			desktop_load_dentry (full);
-		else
-			desktop_create_launch_entry (full, dent->d_name);
+		} else {
+			if (strstr (dent->d_name, ".desktop"))
+				desktop_load_dentry (full);
+			else
+				desktop_create_launch_entry (full, dent->d_name);
+		}
 		
 		free (full);
 	}

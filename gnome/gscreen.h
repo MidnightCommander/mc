@@ -17,4 +17,6 @@ typedef struct {
 	GtkWidget *status;
 } g_panel_contents;
 
+WPanel *create_container (Dlg_head *h, char *str);
+
 #endif /* __GSCREEN_H */

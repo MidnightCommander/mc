@@ -675,8 +675,8 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	g_panel_contents *g = g_new (g_panel_contents, 1);
-	GtkWidget *table, *status_line, *filter_w, *statusbar;
-
+	GtkWidget *table, *status_line, *filter_w, *statusbar, *vbox;
+	
 	g->table = gtk_table_new (2, 1, 0);
 	gtk_widget_show (g->table);
 	
@@ -711,11 +711,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  0, 0, 0);
 	
 	gtk_widget_show (g->table);
-	panel->widget.wdata = (widget_data) g;
 
+	/* Ultra nasty hack: pull the vbox from wdata */
+	vbox =  GTK_WIDGET (panel->widget.wdata);
+	
+	panel->widget.wdata = (widget_data) g;
+	
 	/* Now, insert our table in our parent */
-	gtk_container_add (GTK_CONTAINER (gtk_object_get_data (GTK_OBJECT (h->wdata), "parent-container")),
-			   g->table);
+	gtk_container_add (GTK_CONTAINER (vbox), g->table);
 	
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (g->list))
