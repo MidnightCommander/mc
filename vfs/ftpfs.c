@@ -319,55 +319,59 @@ static int
 command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
-    char *str, *fmt_str;
-    int status;
-    int sock = SUP.sock;
-    
+    char *cmdstr;
+    int status, cmdlen;
+
     va_start (ap, fmt);
-    fmt_str = g_strdup_vprintf (fmt, ap);
+    cmdstr = g_strdup_vprintf (fmt, ap);
     va_end (ap);
 
-    status = strlen (fmt_str);
-    str = g_realloc (fmt_str, status + 3);
-    strcpy (str + status, "\r\n");
+    cmdlen = strlen (cmdstr);
+    cmdstr = g_realloc (cmdstr, cmdlen + 3);
+    strcpy (cmdstr + cmdlen, "\r\n");
+    cmdlen += 2;
 
-    if (logfile){
-        if (strncmp (str, "PASS ", 5) == 0){
-            fputs ("PASS <Password not logged>\r\n", logfile);
-        } else
-	    fwrite (str, status + 2, 1, logfile);
+    if (logfile) {
+	if (strncmp (cmdstr, "PASS ", 5) == 0) {
+	    fputs ("PASS <Password not logged>\r\n", logfile);
+	} else
+	    fwrite (cmdstr, cmdlen, 1, logfile);
 
 	fflush (logfile);
     }
 
     got_sigpipe = 0;
     enable_interrupt_key ();
-    status = write (SUP.sock, str, status + 2);
-    
-    if (status < 0){
+    status = write (SUP.sock, cmdstr, cmdlen);
+
+    if (status < 0) {
 	code = 421;
 
-	if (errno == EPIPE){		/* Remote server has closed connection */
+	if (errno == EPIPE) {	/* Remote server has closed connection */
 	    static int level = 0;	/* login_server() use command() */
-	    if (level == 0){  
+	    if (level == 0) {
 		level = 1;
 		status = reconnect (me, super);
 		level = 0;
-		if (status && write (SUP.sock, str, status + 2) > 0)
+		if (status && (write (SUP.sock, cmdstr, cmdlen) > 0)) {
 		    goto ok;
+		}
+
 	    }
 	    got_sigpipe = 1;
 	}
-	g_free (str);
+	g_free (cmdstr);
 	disable_interrupt_key ();
 	return TRANSIENT;
     }
   ok:
-    g_free (str);
+    g_free (cmdstr);
     disable_interrupt_key ();
-    
+
     if (wait_reply)
-	return get_reply (me, sock, (wait_reply & WANT_STRING) ? reply_str : NULL, sizeof (reply_str)-1);
+	return get_reply (me, SUP.sock,
+			  (wait_reply & WANT_STRING) ? reply_str : NULL,
+			  sizeof (reply_str) - 1);
     return COMPLETE;
 }
 

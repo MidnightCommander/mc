@@ -1,3 +1,8 @@
+2003-06-21  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
+
+	* ftpfs.c (command): Fix misuse of the status variable.  Don't
+	cache the value of SUP.sock before reconnect.
+
 2003-06-05  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Rename mc_return_cwd() to _vfs_get_cwd().  Move
