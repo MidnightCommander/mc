@@ -1,3 +1,7 @@
+2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
+
+	* utilvfs.c(vfs_split_url): Add support for '@' in username.
+
 2004-09-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (smbfs_forget): Check smbfs_connections[i].cli

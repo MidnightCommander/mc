@@ -70,7 +70,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     }
 
     /* search for any possible user */
-    at = strchr (pcopy, '@');
+    at = strrchr (pcopy, '@');
 
     /* We have a username */
     if (at) {
