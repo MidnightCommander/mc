@@ -1,3 +1,10 @@
+2003-03-03  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.lib: Add xterm arrows both for application and normal
+	mode.  Normal mode can be accidentally enabled if one mc is run
+	from another and Ctrl-O is used to switch between them.
+	Add F11-F20 definitions for cons25 (FreeBSD console).
+
 2003-02-27  Juan C. Olivares  <juancri@TAGnet.org>
 
 	* syntax/cs.syntax: New file.

@@ -105,6 +105,16 @@ f18=\e[19;2~
 f19=\e[20;2~
 f20=\e[21;2~
 
+# Arrows for both keypad modes (application and normal).
+up=\e[A
+up=\eOA
+down=\e[B
+down=\eOB
+right=\e[C
+right=\eOC
+left=\e[D
+left=\eOD
+
 [terminal:xterm-color]
 insert=\e[2~
 f11=\e[23~
@@ -155,3 +165,15 @@ end=\e[F
 kpplus=\e[+
 kpminus=\e[-
 kpasterix=\e[*
+
+[terminal:cons25]
+f11=\e[Y
+f12=\e[Z
+f13=\e[a
+f14=\e[b
+f15=\e[c
+f16=\e[d
+f17=\e[e
+f18=\e[f
+f19=\e[g
+f20=\e[h
