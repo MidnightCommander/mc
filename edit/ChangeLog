@@ -1,5 +1,7 @@
 2002-12-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* editcmd.c (edit_block_process_cmd): Quote filename.
+
 	* edit.h (edit_save_mode_t): New enum for file saving mode.
 	* editcmd.c (): Use edit_save_mode_t.
 	(pipe_mail): Quote to, subject and cc with name_quote().

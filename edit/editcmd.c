@@ -2308,7 +2308,7 @@ int edit_sort_cmd (WEdit * edit)
    processes it. If block is 0 the shell command is a straight system
    command, that just produces some output which is to be inserted */
 void
-edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
+edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 {
     long start_mark, end_mark;
     char buf[BUFSIZ];
@@ -2318,6 +2318,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     char *o = NULL;
     char *h = NULL;
     char *b = NULL;
+    char *quoted_name = NULL;
 
     o = catstrs (mc_home, shell_cmd, 0);	/* original source script */
     h = catstrs (home_dir, EDIT_DIR, shell_cmd, 0);	/* home script */
@@ -2350,8 +2351,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	}
 	chmod (h, 0700);
 	edit_error_dialog ("", get_sys_error (catstrs
-					      (_("Script created:"), h,
-					       0)));
+					      (_("Script created:"), h, 0)));
     }
 
     open_error_pipe ();
@@ -2364,7 +2364,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	    return;
 	}
 	edit_save_block (edit, b, start_mark, end_mark);
-
+	quoted_name = name_quote (edit->filename, 0);
 	/*
 	 * Run script.
 	 * Initial space is to avoid polluting bash history.
@@ -2374,9 +2374,8 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	 *   $3 - file where error messages should be put
 	 *        (for compatibility with old scripts).
 	 */
-	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
-			 edit->filename, " ", home_dir, BLOCK_FILE,
-			 " /dev/null", NULL));
+	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ", quoted_name,
+			 " ", home_dir, BLOCK_FILE " /dev/null", NULL));
 
     } else {
 	/*
@@ -2385,9 +2384,9 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	 *   $1 - name of the edited file.
 	 */
 	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
-			 edit->filename, NULL));
+			 quoted_name, NULL));
     }
-
+    g_free (quoted_name);
     close_error_pipe (0, 0);
 
     edit_refresh_cmd (edit);
