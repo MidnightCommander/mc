@@ -8,6 +8,7 @@
 #include <gnome.h>
 #include <string.h>
 #include "gdesktop.h"
+#include <gdk/gdkx.h>
 /* The spacing between the cute little icon and the text */
 #define SPACING 2
 
@@ -280,6 +281,7 @@ make_transparent_window (char *file)
 {
 	GdkImlibImage *im;
 	GtkWidget *window;
+	XSetWindowAttributes xwa;
 	
 	if (!g_file_exists (file))
 		return NULL;
@@ -288,7 +290,6 @@ make_transparent_window (char *file)
 	if (!im)
 		return NULL;
 
-	printf ("Lo cargo\n");
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
@@ -297,6 +298,11 @@ make_transparent_window (char *file)
 	gtk_widget_pop_visual ();
 
 	gtk_widget_realize (window);
+	xwa.save_under = True;
+	XChangeWindowAttributes (GDK_WINDOW_XDISPLAY (window->window),
+				 GDK_WINDOW_XWINDOW (window->window),
+				 CWSaveUnder, &xwa);
+
 	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
 
 	/* All of the following 3 lines should not be required, only

@@ -56,6 +56,9 @@ enum {
 /* The list of icons on the desktop */
 static GList *desktop_icons;
 
+/* The X11 root window */
+static GnomeRootWin *root_window;
+
 /*
  * If the dentry is zero, then no information from the on-disk .desktop file is used
  * In this case, we probably will have to store the geometry for a file somewhere
@@ -575,8 +578,50 @@ desktop_setup_default (char *desktop_dir)
 		file_mask_defaults ();
 		copy_dir_dir (mc_desktop_dir, desktop_dir);
 		destroy_op_win ();
+	} else {
+		char *desktop_dir_home_link;
+
+		desktop_dir_home_link = concat_dir_and_file (desktop_dir, "Home directory.desktop");
+		mkdir (desktop_dir, 0777);
+		desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory");
+		
+		g_free (desktop_dir_home_link);
 	}
 	free (mc_desktop_dir);
+}
+
+void
+root_drop_cb (GtkWidget *rw, GdkEventDropDataAvailable *event)
+{
+	printf ("Weeee!  Getting a drop on the root window!\n");
+}
+
+static GdkFilterReturn
+root_event_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
+{
+	XEvent *x_event = (XEvent *) xevent;
+
+	printf ("root filter: tipo de evento: %d\n", x_event->type);
+	if (x_event->type == ClientMessage) {
+		printf ("El mundo me ama\n");
+		return GDK_FILTER_CONTINUE;
+	}
+	return GDK_FILTER_CONTINUE;
+}
+
+void
+desktop_root (void)
+{
+	GtkWidget *rw;
+
+	rw = gnome_rootwin_new ();
+	gtk_signal_connect (GTK_OBJECT (rw), "drop_data_available_event",
+			    GTK_SIGNAL_FUNC (root_drop_cb), NULL);
+			       
+	gtk_widget_realize (rw);
+	gtk_widget_dnd_drop_set (rw, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	gtk_widget_show (rw);
+	root_window = GNOME_ROOTWIN (rw);
 }
 
 void
@@ -586,7 +631,8 @@ start_desktop (void)
 
 	if (!exist_file (f))
 		desktop_setup_default (f);
-	
+
+	desktop_root ();
 	desktop_load (f);
 	free (f);
 }

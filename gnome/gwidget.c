@@ -102,7 +102,11 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 		button = gnome_stock_button (stock);
 	} else 
 		button = gtk_button_new_with_label (b->text);
-		
+
+	if (b->flags == DEFPUSH_BUTTON){
+		GTK_WIDGET_SET_FLAGS (button, GTK_CAN_DEFAULT);
+		gtk_widget_grab_default (button);
+	}
 	gtk_widget_show (button);
 	tag = gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
 	gtk_object_set_data (GTK_OBJECT (button), "click-signal-tag", (void *) tag);
@@ -432,11 +436,11 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 		GtkButton *b;
 
 		sprintf (buffer, "F%d %s", bb->labels [i].text ? bb->labels [i].text : "      ");
-		b = gtk_button_new_with_label (buffer);
+		b = (GtkButton *) gtk_button_new_with_label (buffer);
 		gtk_signal_connect (GTK_OBJECT (b), "clicked",
 				    GTK_SIGNAL_FUNC (buttonbar_clicked), bb);
-		gtk_widget_show (b);
-		gtk_box_pack_start_defaults (GTK_BOX (hbox), b);
+		gtk_widget_show (GTK_WIDGET (b));
+		gtk_box_pack_start_defaults (GTK_BOX (hbox), (GtkWidget *)b);
 	}
 	gtk_widget_show (hbox);
 	bb->widget.wdata = (widget_data) hbox;

@@ -1,3 +1,23 @@
+Tue Mar 16 18:35:53 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+
+	* src/hotlist.c default values for dialogs which add entries to hotlist
+	are now set to the current directory.
+
+Tue Mar 10 14:42:01 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+
+	* vfs/extfs.c, lib/mc.ext, vfs/extfs/extfs.ini, vfs/extfs/cpio.in
+	Added support for cpio extfs including compressed and gziped
+	cpio archives. compress and gzip handled separately because I saw
+	a lot of systems which have compress, but don't have gzip.
+
+Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
+
+	* src/subshell.c: failed to grantpt on SVR4 due to zero-initialized
+	subshell_pid. sigaction handler for SIGCHLD does waitpid(subshell_pid,
+	...) and when subshell_pid == 0 it steals the zombie from grantpt(3) 
+	which does fork/exec/waitpid for suid program to set the permissions on
+	pty. It's enough to initialize it to 1 or -2.
+
 1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* util.c (convert_pattern): Now the internal buffer is malloc()ed

@@ -1,3 +1,11 @@
+Tue Mar 17 02:38:37 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_setup_default): Create a default desktop
+	entry on the root window for the Home directory if not mc.desktop
+	exists -yet-
+
+	Get drops on the root window to work.   Joy and hapiness!
+
 Tue Mar 17 00:43:50 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* glayout.c (gnome_panel_about_menu): "About" item now a stock
