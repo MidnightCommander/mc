@@ -1671,78 +1671,64 @@ block_search (WView *view, char *buffer, int len)
     return -1;
 }
 
-/* States of our funny recognizer */
-enum {
-    normal,
-    inside_quotes,
-    zero,
-    hex1,
-    hex2,
-    oct1
-};
-
-/* This routine doesn't report all the user mistakes, it just ignores them */
+/*
+ * Search in the hex mode.  Supported input:
+ * - numbers (oct, dec, hex).  Each of them matches one byte.
+ * - strings in double quotes.  Matches exactly without quotes.
+ */
 static void
 hex_search (WView *view, char *text)
 {
-    char buffer [120];		/* Where we hold the information */
-    int  i, block_len;
-    int  v = 0;
+    char *buffer;		/* Where we hold the information */
     long pos;			/* Where did we found the string */
-    char *p;			/* Temporary */
-    int  state = normal;	/* Initial state of the micro-scanner */
-    
+    int  i = 0;
+    int  block_len = 0;
+    int  parse_error = 0;
+
+    /* buffer will never be longer that text */
+    buffer = g_new (char, strlen (text));
+
     /* First convert the string to a stream of bytes */
-    for (i = block_len = 0; text [i] && block_len < sizeof (buffer); i++){
-	switch (state){
-	case inside_quotes:
-	    if (text [i] == '"')
-		state = normal;
-	    else
-		buffer [block_len++] = text [i];
-	    break;
+    while (text [i]) {
+	int val;
+	int ptr;
 
-	case normal:
-	    if (text [i] == '"'){
-		state = inside_quotes;
+	/* %i matches octal, decimal, and hexadecimal numbers */
+	if (sscanf (text + i, "%i%n", &val, &ptr) > 0) {
+	    /* Allow signed and unsigned char in the user input */
+	    if (val < -128 || val > 255) {
+		parse_error = 1;
 		break;
 	    }
-	    if (text [i] == '0'){
-		state = zero;
-		break;
-	    }
-	    if (text [i] == 'x'){
-		state = hex1;
-		break;
-	    }
-	    break;
 
-	case zero:
-	    if (text [i] == 'x')
-		state = hex1;
-	    break;
-
-	case hex1:
-	    v = 0;
-	    text [i] = toupper (text [i]);
-	    if ((p = strchr (hex_char, text [i])) != 0){
-		v = (p - hex_char) << 4;
-		state = hex2;
-	    }
-	    break;
-
-	case hex2:
-	    text [i] = toupper (text [i]);
-	    if ((p = strchr (hex_char, text [i])) != 0){
-		v |= (p - hex_char);
-		state = normal;
-	    }
-	    buffer [block_len++] = v;
-	    break;
+	    buffer [block_len++] = (char) val;
+	    i += ptr;
+	    continue;
 	}
+
+	/* Try quoted string, strip quotes */
+	if (sscanf (text + i, "\"%[^\"]\"%n", buffer + block_len, &ptr) > 0) {
+	    i += ptr;
+	    block_len += ptr - 2;
+	    continue;
+	}
+
+	parse_error = 1;
+	break;
     }
+
+    /* No valid bytes in the user input */
+    if (block_len <= 0 || parse_error) {
+	if (*text)
+	    message (0, _(" Search "), _("Invalid hex search expression"));
+	g_free (buffer);
+	view->found_len = 0;
+	return;
+    }
+
     /* Then start the search */
     pos = block_search (view, buffer, block_len);
+
     if (pos == -1){
 	message (0, _(" Search "), _(" Search string not found "));
 	view->found_len = 0;

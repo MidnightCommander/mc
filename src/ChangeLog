@@ -1,5 +1,9 @@
 2001-07-09  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (hex_search): Reimplement parser using sscanf. Add
+	support for decimal and octal numbers. Add error reporting.
+	Allocate buffer dynamically.
+
 	* hotlist.c: Add comments to avoid confusion between
 	done_hotlist() and hotlist_done().
 	(hotlist_done): Set l_hotlist to NULL.
