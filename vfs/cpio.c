@@ -311,7 +311,8 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
     }
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) < hd.c_namesize) {
+    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) == -1 ||
+       (unsigned long) len < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
@@ -366,7 +367,8 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_FAIL;
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) < hd.c_namesize) {
+    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) != -1 &&
+       (unsigned long) len < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
