@@ -98,10 +98,10 @@ static int cpio_read(void *fh, char *buffer, int count);
 
 #define CPIO_POS(super) cpio_position
 /* If some time reentrancy should be needed change it to */
-/* #define CPIO_POS(super) (super)->u.cpio.fd */
+/* #define CPIO_POS(super) (super)->u.arch.fd */
 
-#define CPIO_SEEK_SET(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) = (where), SEEK_SET)
-#define CPIO_SEEK_CUR(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) += (where), SEEK_SET)
+#define CPIO_SEEK_SET(super, where) mc_lseek((super)->u.arch.fd, CPIO_POS(super) = (where), SEEK_SET)
+#define CPIO_SEEK_CUR(super, where) mc_lseek((super)->u.arch.fd, CPIO_POS(super) += (where), SEEK_SET)
 
 static struct defer_inode * defer_find(struct defer_inode *l, struct defer_inode *i)
 {
@@ -112,7 +112,7 @@ static struct defer_inode * defer_find(struct defer_inode *l, struct defer_inode
 
 static int cpio_skip_padding(struct vfs_s_super *super)
 {
-    switch(super->u.cpio.type) {
+    switch(super->u.arch.type) {
     case CPIO_BIN:
     case CPIO_BINRE:
 	return CPIO_SEEK_CUR(super, (2 - (CPIO_POS(super) % 2)) % 2);
@@ -129,8 +129,8 @@ static int cpio_skip_padding(struct vfs_s_super *super)
 
 static void cpio_free_archive(struct vfs_class *me, struct vfs_s_super *super)
 {
-    if(super->u.cpio.fd != -1)
-	mc_close(super->u.cpio.fd);
+    if(super->u.arch.fd != -1)
+	mc_close(super->u.arch.fd);
 }
 
 static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, char *name)
@@ -145,9 +145,9 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
     }
 
     super->name = g_strdup(name);
-    super->u.cpio.fd = -1; /* for now */
-    mc_stat(name, &(super->u.cpio.stat));
-    super->u.cpio.type = CPIO_UNKNOWN;
+    super->u.arch.fd = -1; /* for now */
+    mc_stat(name, &(super->u.arch.st));
+    super->u.arch.type = CPIO_UNKNOWN;
 
     type = get_compression_type(fd);
     if (type != COMPRESSION_NONE) {
@@ -163,14 +163,14 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
 	g_free(s);
     }
 
-    super->u.cpio.fd = fd;
-    mode = super->u.cpio.stat.st_mode & 07777;
+    super->u.arch.fd = fd;
+    mode = super->u.arch.st.st_mode & 07777;
     mode |= (mode & 0444) >> 2; /* set eXec where Read is */
     mode |= S_IFDIR;
 
-    root = vfs_s_new_inode(me, super, &(super->u.cpio.stat));
+    root = vfs_s_new_inode(me, super, &(super->u.arch.st));
     root->st.st_mode = mode;
-    root->u.cpio.offset = -1;
+    root->data_offset = -1;
     root->st.st_nlink++;
     root->st.st_dev = MEDATA->rdev++;
 
@@ -203,8 +203,8 @@ static int cpio_read_head(struct vfs_class *me, struct vfs_s_super *super)
 
 #define MAGIC_LENGTH (6) /* How many bytes we have to read ahead */
 #define SEEKBACK CPIO_SEEK_CUR(super, ptr - top)
-#define RETURN(x) return(super->u.cpio.type = (x))
-#define TYPEIS(x) ((super->u.cpio.type == CPIO_UNKNOWN) || (super->u.cpio.type == (x)))
+#define RETURN(x) return(super->u.arch.type = (x))
+#define TYPEIS(x) ((super->u.arch.type == CPIO_UNKNOWN) || (super->u.arch.type == (x)))
 static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 {
     char buf[256];
@@ -212,7 +212,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
     int top = 0;
     int tmp;
 
-    top = mc_read(super->u.cpio.fd, buf, 256);
+    top = mc_read(super->u.arch.fd, buf, 256);
     CPIO_POS(super) += top;
     for(;;) {
 	if(ptr + MAGIC_LENGTH >= top) {
@@ -221,7 +221,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 		top = 128;
 		ptr -= top - 128;
 	    }
-	    if((tmp = mc_read(super->u.cpio.fd, buf, top)) == 0 || tmp == -1) {
+	    if((tmp = mc_read(super->u.arch.fd, buf, top)) == 0 || tmp == -1) {
 		message_2s(1, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
 		cpio_free_archive(me, super);
 		return CPIO_UNKNOWN;
@@ -253,10 +253,10 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
     char *name;
     struct stat stat;
 
-    if((len = mc_read(super->u.cpio.fd, (char *)&buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if((len = mc_read(super->u.arch.fd, (char *)&buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
-    if(super->u.cpio.type == CPIO_BINRE) {
+    if(super->u.arch.type == CPIO_BINRE) {
 	int i;
 	for(i = 0; i < (HEAD_LENGTH >> 1); i++)
 	    ((short *)&buf)[i] = GUINT16_SWAP_LE_BE(((short *)&buf)[i]);
@@ -264,7 +264,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
     g_assert(buf.c_magic == 070707);
 
     name = g_malloc(buf.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, buf.c_namesize)) < buf.c_namesize){
+    if((len = mc_read(super->u.arch.fd, name, buf.c_namesize)) < buf.c_namesize) {
 	g_free(name);
 	return STATUS_EOF;
     }
@@ -299,7 +299,7 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
     int len;
     char *name;
 
-    if((len = mc_read(super->u.cpio.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if((len = mc_read(super->u.arch.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
     buf[HEAD_LENGTH] = 0;
@@ -313,7 +313,7 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
     }
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize) {
+    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
@@ -348,7 +348,7 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
     int len;
     char *name;
 
-    if((len = mc_read(super->u.cpio.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if((len = mc_read(super->u.arch.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
     buf[HEAD_LENGTH] = 0;
@@ -363,12 +363,12 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	return STATUS_FAIL;
     }
 
-    if((super->u.cpio.type == CPIO_NEWC && hd.c_magic != 070701) ||
-       (super->u.cpio.type == CPIO_CRC && hd.c_magic != 070702))
+    if((super->u.arch.type == CPIO_NEWC && hd.c_magic != 070701) ||
+       (super->u.arch.type == CPIO_CRC && hd.c_magic != 070702))
 	return STATUS_FAIL;
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize){
+    if((len = mc_read(super->u.arch.fd, name, hd.c_namesize)) < hd.c_namesize) {
 	g_free (name);
 	return STATUS_EOF;
     }
@@ -420,13 +420,13 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
     }
 
     if((stat->st_nlink > 1) &&
-       (super->u.cpio.type == CPIO_NEWC ||
-	super->u.cpio.type == CPIO_CRC)) { /* For case of hardlinked files */
+       (super->u.arch.type == CPIO_NEWC ||
+	super->u.arch.type == CPIO_CRC)) { /* For case of hardlinked files */
 	struct defer_inode i, *l;
 	i.inumber = stat->st_ino;
 	i.device = stat->st_dev;
 	i.inode = NULL;
-	if((l = defer_find(super->u.cpio.defered, &i)) != NULL) {
+	if((l = defer_find(super->u.arch.defered, &i)) != NULL) {
 	    inode = l->inode;
 	    if(inode->st.st_size && stat->st_size && (inode->st.st_size != stat->st_size)) {
 		message_3s(1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
@@ -467,20 +467,20 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	if(!inode) {
 	    inode = vfs_s_new_inode(me, super, stat);
 	    if((stat->st_nlink > 0) &&
-	       (super->u.cpio.type == CPIO_NEWC ||
-		super->u.cpio.type == CPIO_CRC)) { /* For case of hardlinked files */
+	       (super->u.arch.type == CPIO_NEWC ||
+		super->u.arch.type == CPIO_CRC)) { /* For case of hardlinked files */
 		struct defer_inode *i;
 		i = g_new(struct defer_inode, 1);
 		i->inumber = stat->st_ino;
 		i->device = stat->st_dev;
 		i->inode = inode;
-		i->next = super->u.cpio.defered;
-		super->u.cpio.defered = i;
+		i->next = super->u.arch.defered;
+		super->u.arch.defered = i;
 	    }
 	}
 	
 	if(stat->st_size)
-	    inode->u.cpio.offset = CPIO_POS(super);
+	    inode->data_offset = CPIO_POS(super);
 	
 	entry = vfs_s_new_entry(me, tn, inode);
 	vfs_s_insert_entry(me, root, entry);
@@ -490,7 +490,7 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 
 	if(S_ISLNK(stat->st_mode)) {
 	    inode->linkname = g_malloc(stat->st_size + 1);
-	    if(mc_read(super->u.cpio.fd, inode->linkname, stat->st_size) < stat->st_size) {
+	    if(mc_read(super->u.arch.fd, inode->linkname, stat->st_size) < stat->st_size) {
 		inode->linkname[0] = 0;
 		return STATUS_EOF;
 	    }
@@ -553,7 +553,7 @@ cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_n
 	return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc->u.cpio.stat.st_mtime < archive_stat->st_mtime) {
+    if (parc->u.arch.st.st_mtime < archive_stat->st_mtime) {
 	/* Yes, reload! */
 	(*vfs_cpiofs_ops.free) ((vfsid) parc);
 	vfs_rmstamp (&vfs_cpiofs_ops, (vfsid) parc, 0);
@@ -566,8 +566,8 @@ cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_n
 
 static int cpio_read(void *fh, char *buffer, int count)
 {
-    off_t begin = FH->ino->u.tar.data_offset;
-    int fd = FH_SUPER->u.tar.fd;
+    off_t begin = FH->ino->data_offset;
+    int fd = FH_SUPER->u.arch.fd;
     struct vfs_class *me = FH_SUPER->me;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 

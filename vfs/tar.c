@@ -63,8 +63,8 @@ static struct stat hstat;		/* Stat struct corresponding */
 
 static void tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
-    if (archive->u.tar.fd != -1)
-	mc_close(archive->u.tar.fd);
+    if (archive->u.arch.fd != -1)
+	mc_close(archive->u.arch.fd);
 }
 
 /* As we open one archive at a time, it is safe to have this static */
@@ -84,8 +84,8 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
     }
     
     archive->name = g_strdup (name);
-    mc_stat (name, &(archive->u.tar.tarstat));
-    archive->u.tar.fd = -1;
+    mc_stat (name, &(archive->u.arch.st));
+    archive->u.arch.fd = -1;
 
     /* Find out the method to handle this tar file */
     type = get_compression_type (result);
@@ -102,16 +102,16 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
 	    ERRNOR (ENOENT, -1);
     }
    
-    archive->u.tar.fd = result;
-    mode = archive->u.tar.tarstat.st_mode & 07777;
+    archive->u.arch.fd = result;
+    mode = archive->u.arch.st.st_mode & 07777;
     if (mode & 0400) mode |= 0100;
     if (mode & 0040) mode |= 0010;
     if (mode & 0004) mode |= 0001;
     mode |= S_IFDIR;
 
-    root = vfs_s_new_inode (me, archive, &archive->u.tar.tarstat);
+    root = vfs_s_new_inode (me, archive, &archive->u.arch.st);
     root->st.st_mode = mode;
-    root->u.tar.data_offset = -1;
+    root->data_offset = -1;
     root->st.st_nlink++;
     root->st.st_dev = MEDATA->rdev++;
 
@@ -350,7 +350,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	fill_stat_from_header (me, &st, header);
 	inode = vfs_s_new_inode (me, archive, &st);
 
-	inode->u.tar.data_offset = data_position;
+	inode->data_offset = data_position;
 	if (*current_link_name) {
 	    inode->linkname = current_link_name;
 	} else if (current_link_name != next_long_link) {
@@ -366,7 +366,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 
 	if (header->header.isextended) {
 	    while (get_next_record (archive, tard)->ext_hdr.isextended);
-	    inode->u.tar.data_offset = current_tar_position;
+	    inode->data_offset = current_tar_position;
 	}
 	return STATUS_SUCCESS;
     }
@@ -453,7 +453,7 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_na
 	return 0;
 
     /* Has the cached archive been changed on the disk? */
-    if (parc->u.tar.tarstat.st_mtime < archive_stat->st_mtime) {
+    if (parc->u.arch.st.st_mtime < archive_stat->st_mtime) {
 	/* Yes, reload! */
 	(*vfs_tarfs_ops.free) ((vfsid) parc);
 	vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc, 0);
@@ -466,8 +466,8 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc, char *archive_na
 
 static int tar_read (void *fh, char *buffer, int count)
 {
-    off_t begin = FH->ino->u.tar.data_offset;
-    int fd = FH_SUPER->u.tar.fd;
+    off_t begin = FH->ino->data_offset;
+    int fd = FH_SUPER->u.arch.fd;
     struct vfs_class *me = FH_SUPER->me;
 
     if (mc_lseek (fd, begin + FH->pos, SEEK_SET) != 

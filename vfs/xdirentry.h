@@ -45,25 +45,11 @@ struct vfs_s_inode {
     struct stat st;		/* Parameters of this inode */
     char *linkname;		/* Symlink's contents */
     char *localname;		/* Filename of local file, if we have one */
-    int flags;
 
     struct vfs_s_entry *ent;	/* ftp needs this backpointer; don't use if you can avoid it */
 
-    union {
-	struct {
-	    long data_offset;
-	} tar;
-	struct {
-	    long offset;
-	} cpio;
-	struct {
-	    struct timeval timestamp;
-	    struct stat local_stat;
-	} fish;
-	struct {
-	    struct timeval timestamp;
-	} ftp;
-    } u;
+    struct timeval timestamp;
+    long data_offset;
 };
 
 struct vfs_s_super {
@@ -76,10 +62,6 @@ struct vfs_s_super {
     int want_stale;		/* If set, we do not flush cache properly */
 
     union {
-	struct {
-	    int fd;
-	    struct stat tarstat;
-	} tar;
 	struct {
 	    int sockr, sockw;
 	    char *cwdir;
@@ -109,11 +91,10 @@ struct vfs_s_super {
 	} ftp;
 	struct {
 	    int fd;
-	    struct stat stat;
+	    struct stat st;
 	    int type;		/* Type of the archive */
-	    /*int pos;    In case reentrancy will be needed */
 	    struct defer_inode *defered;	/* List of inodes for which another entries may appear */
-	} cpio;
+	} arch;
     } u;
 };
 

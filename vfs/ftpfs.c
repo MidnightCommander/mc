@@ -844,7 +844,7 @@ dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 	return 0;
     }
     gettimeofday(&tim, NULL);
-    if (tim.tv_sec < ino->u.ftp.timestamp.tv_sec)
+    if (tim.tv_sec < ino->timestamp.tv_sec)
 	return 1;
     return 0;
 }
@@ -1254,8 +1254,8 @@ again:
 	g_free (p);
     }
 
-    gettimeofday(&dir->u.ftp.timestamp, NULL);
-    dir->u.ftp.timestamp.tv_sec += ftpfs_directory_timeout;
+    gettimeofday(&dir->timestamp, NULL);
+    dir->timestamp.tv_sec += ftpfs_directory_timeout;
 
     if (SUP.strict == RFC_STRICT) 
         sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);

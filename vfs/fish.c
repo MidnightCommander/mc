@@ -346,7 +346,7 @@ dir_uptodate(struct vfs_class *me, struct vfs_s_inode *ino)
 	force_expiration = 0;
 	return 0;
     }
-    if (tim.tv_sec < ino->u.fish.timestamp.tv_sec)
+    if (tim.tv_sec < ino->timestamp.tv_sec)
 	return 1;
     return 0;
 }
@@ -364,8 +364,8 @@ dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 
     print_vfs_message(_("fish: Reading directory %s..."), remote_path);
 
-    gettimeofday(&dir->u.fish.timestamp, NULL);
-    dir->u.fish.timestamp.tv_sec += 10; /* was 360: 10 is good for
+    gettimeofday(&dir->timestamp, NULL);
+    dir->timestamp.tv_sec += 10; /* was 360: 10 is good for
 					   stressing direntry layer a bit */
     quoted_path = name_quote (remote_path, 0);
     command(me, super, NONE,
@@ -568,7 +568,6 @@ static int linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
     char *quoted_name;
     if (offset)
         ERRNOR (E_NOTSUPP, 0);
-/*    fe->local_stat.st_mtime = 0; FIXME: what is this good for? */
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
@@ -642,8 +641,6 @@ linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 {
     if (fh->u.fish.total != fh->u.fish.got)
 	linear_abort(me, fh);
-    else if (stat (fh->ino->localname, &fh->ino->u.fish.local_stat) < 0)
-	fh->ino->u.fish.local_stat.st_mtime = 0;
 }
 
 static int

@@ -1,5 +1,8 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Cleanup unused or write-only fields.  Adjust all
+	dependencies.
+
 	* xdirentry.h: Remove magic numbers.  Move some constants ...
 	* ftpfs.c: ... here.
 
