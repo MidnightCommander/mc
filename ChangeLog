@@ -1,5 +1,7 @@
 2001-08-10  Pavel Roskin  <proski@gnu.org>
 
+	* BUGS: Remove.  Bugzilla.gnome.org doesn't have those bugs.
+
 	* doc/LSM: Remove, it's outdated.
 	* doc/FILES: Likewise.
 	* doc/DEVEL: Remove information about FILES.
