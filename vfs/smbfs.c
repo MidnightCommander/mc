@@ -20,7 +20,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports smbfs_vfs_ops smbfs_set_debug */
+/* Namespace: exports smbfs_vfs_ops, smbfs_set_debug */
 #include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
@@ -404,6 +404,24 @@ new_dir_entry (const char * name)
 	return new_entry;
 }
 
+static int
+smbfs_add_dots (opendir_info *current_info)
+{
+    dir_entry *entry;
+    
+    entry = g_new0 (dir_entry, 1);
+    entry->text = g_strdup (".");
+    entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
+
+    entry->next = g_new0 (dir_entry, 1);
+    entry->next->text = g_strdup ("..");
+    entry->next->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
+
+    entry->next->next = current_info->entries;
+    current_info->entries = entry;
+    return 0;
+}
+
 /* browse for shares on server */
 static void
 browsing_helper(const char *name, uint32 type, const char *comment)
@@ -664,6 +682,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 			else
 				current_share_info = smbfs_info;
 		}
+		smbfs_add_dots (smbfs_info);
 		goto done;
 	}
 
@@ -988,8 +1007,8 @@ smbfs_get_free_bucket ()
 
 	{	/* search for most dormant connection */
 		int oldest = 0;	/* index */
-		time_t oldest_time = time(NULL);
-		for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
+		time_t oldest_time = smbfs_connections[0].last_use;
+		for (i = 1; i < SMBFS_MAX_CONNECTIONS; i++) {
 			if (smbfs_connections[i].last_use < oldest_time) {
 				oldest_time = smbfs_connections[i].last_use;
 				oldest = i;
@@ -1222,7 +1241,7 @@ fake_server_stat(const char *server_url, const char *path, struct stat *buf)
 }
 
 static int
-fake_share_stat(const char *server_url, char *path, struct stat *buf)
+fake_share_stat(const char *server_url, const char *path, struct stat *buf)
 {
 	dir_entry *dentry;
 	if (strlen(path) < strlen(server_url))
@@ -1440,7 +1459,7 @@ loaddir(vfs *me, const char *path)
 	char *mypath, *p;
 
 	mypath = g_strdup(path);
-	p = strchr(mypath, '/');
+	p = strrchr(mypath, '/');
 
 	if (p > mypath)
 		*p = 0;

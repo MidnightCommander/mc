@@ -1,3 +1,14 @@
+2001-11-05  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* smbfs.c (smbfs_add_dots): New function. Insert a "." and ".."
+	entries into the linked list.
+	(smbfs_loaddir): Call smbfs_add_dots for shares or servers.
+	(smbfs_get_free_bucket): Eliminate utime.
+	(fake_share_stat): Make path const.
+
+	* samba/configure.in: Don't check whether getpass
+	should be replaced.
+
 2001-11-02  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* vfs.c (mc_return_cwd): Memory leak fixed.
