@@ -1636,6 +1636,9 @@ panel_compute_totals (WPanel *panel, long *ret_marked, double *ret_total)
 {
 	int i;
 	
+        *ret_marked = 0;
+        *ret_total = 0.0;
+
 	for (i = 0; i < panel->count; i++){
 		struct stat *s;
 		
@@ -1972,12 +1975,9 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	    if (value == FILE_CONT)
 		do_file_mark (panel, i, 0);
 
-	    count++;
-
 	    if (file_progress_show_count (count, file_progress_count) == FILE_ABORT)
 		goto clean_up;
 
-	    bytes += src_stat.st_size;
 	    if (verbose &&
 	        file_progress_show_bytes (bytes, file_progress_bytes) == FILE_ABORT)
 		goto clean_up;
@@ -2040,13 +2040,13 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 int
 panel_operate_def (void *source_panel, FileOperation operation, char *thedefault)
 {
-    panel_operate_flags (source_panel, operation, thedefault, FALSE);
+    return panel_operate_flags (source_panel, operation, thedefault, FALSE);
 }
 
 int
 panel_operate (void *source_panel, FileOperation operation, char *thedefault)
 {
-    panel_operate_flags (source_panel, operation, thedefault, TRUE);
+    return panel_operate_flags (source_panel, operation, thedefault, TRUE);
 }
 
 /* }}} */
