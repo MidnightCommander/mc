@@ -233,6 +233,8 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "O2D",   MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_IC,    ESC_STR "[2;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DC,    ESC_STR "[3;5~", MCKEY_NOACTION },
 
     /* rxvt keys with modifiers */
     { KEY_M_SHIFT | KEY_UP,    ESC_STR "[a",  MCKEY_NOACTION },
@@ -245,6 +247,14 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_CTRL  | KEY_END,   ESC_STR "[8^", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_HOME,  ESC_STR "[7$", MCKEY_NOACTION },
     { KEY_M_SHIFT | KEY_END,   ESC_STR "[8$", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_IC,    ESC_STR "[2^", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_DC,    ESC_STR "[3^", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3$", MCKEY_NOACTION },
+
+    /* konsole keys with modifiers */
+    { KEY_M_SHIFT | KEY_HOME,  ESC_STR "O2H",   MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_END,   ESC_STR "O2F",   MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DC,    ESC_STR "[3;2~", MCKEY_NOACTION },
 
     { 0, 0, MCKEY_NOACTION },
 };

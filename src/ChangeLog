@@ -1,3 +1,8 @@
+2003-03-14  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (xterm_key_defines): Add more sequences for xterm, rxvt
+	and konsole.
+
 2003-03-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* key.c: Use fputs() instead of fprintf().
