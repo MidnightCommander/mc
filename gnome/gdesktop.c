@@ -912,12 +912,15 @@ desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 static void
 desktop_icon_make_draggable (desktop_icon_t *di)
 {
-	GtkObject *obj = GTK_OBJECT (di->widget);
+	GtkObject *obj;
+        GList *child;
 	char *drag_types [] = { "icon/root", "url:ALL" };
 
-	/* To artificially start up drag and drop */
+        child = gtk_container_children(GTK_CONTAINER(di->widget));
+        obj = GTK_OBJECT (child->data);
+  /* To artificially start up drag and drop */
 /*	gtk_signal_connect (obj, "motion_notify_event", GTK_SIGNAL_FUNC (start_icon_drag), di); */
-	gtk_widget_dnd_drag_set (di->widget, TRUE, drag_types, ELEMENTS (drag_types));
+	gtk_widget_dnd_drag_set (GTK_WIDGET(child->data), TRUE, drag_types, ELEMENTS (drag_types));
 
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (desktop_icon_drag_request), di);
 	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (desktop_icon_drag_start), di);
@@ -1036,16 +1039,19 @@ char *drop_types [] = {
 static void
 post_setup_desktop_icon (desktop_icon_t *di, int show)
 {
+        GList *child;
 	desktop_icon_make_draggable (di);
 
 	/* Setup the widget to make it useful: */
 
 	/* 1. Drag and drop functionality */
-	connect_drop_signals (di->widget, di);
-	gtk_widget_dnd_drop_set (di->widget, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+  
+        child = gtk_container_children(GTK_CONTAINER(di->widget));
+        connect_drop_signals (GTK_WIDGET(child->data), di);
+	gtk_widget_dnd_drop_set (GTK_WIDGET(child->data), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 	
 	/* 2. Double clicking executes the command */
-	gtk_signal_connect (GTK_OBJECT (di->widget), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
+	gtk_signal_connect (GTK_OBJECT (child->data), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
 
 	if (show)
 		gtk_widget_show (di->widget);

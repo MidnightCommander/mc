@@ -159,7 +159,7 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 
 	gtk_widget_set_usize (window, width, height);
 	gdk_window_set_back_pixmap (window->window, pixmap, FALSE);
-	gdk_window_shape_combine_mask (window->window, mask, 0, 0);
+	gdk_window_shape_combine_mask (window->parent->window, mask, 0, 0);
 
 	gdk_gc_destroy (p_gc);
 	gdk_gc_destroy (m_gc);
@@ -179,7 +179,7 @@ lower_icon_window(GtkWidget *widget, GdkEventExpose *event)
 GtkWidget *
 create_transparent_text_window (char *file, char *text, int extra_events)
 {
-	GtkWidget *window;
+	GtkWidget *window, *win;
 	GdkImlibImage *im;
 	GdkCursor *cursor;
 
@@ -190,10 +190,17 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	if (!im)
 		return NULL;
 
+        win = gtk_window_new(GTK_WINDOW_POPUP);
+	gtk_widget_set_events (win, gtk_widget_get_events (win) | extra_events);
+  
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
-	window = gtk_window_new (GTK_WINDOW_POPUP);
+	window = gtk_drawing_area_new ();
+  
+        gtk_container_add(GTK_CONTAINER(win), window);
+        gtk_widget_show(window);
+  
 	gtk_widget_set_events (window, gtk_widget_get_events (window) | extra_events);
 
 	gtk_widget_pop_colormap ();
@@ -219,14 +226,14 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	 */
 	gtk_signal_connect(window, "expose_event", GTK_SIGNAL_FUNC(lower_icon_window), NULL);
 #endif
-	return window;
+	return win;
 }
 
 GtkWidget *
 make_transparent_window (char *file)
 {
 	GdkImlibImage *im;
-	GtkWidget *window;
+	GtkWidget *window, *win;
 	XSetWindowAttributes xwa;
 	
 	if (!g_file_exists (file))
@@ -236,18 +243,24 @@ make_transparent_window (char *file)
 	if (!im)
 		return NULL;
 	
+        win = gtk_window_new(GTK_WINDOW_POPUP);
+  
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
-	window = gtk_window_new (GTK_WINDOW_POPUP);
+	window = gtk_drawing_area_new ();
+  
+        gtk_container_add(GTK_CONTAINER(win), window);
+        gtk_widget_show(window);
+  
 	gtk_widget_pop_colormap ();
 	gtk_widget_pop_visual ();
 
 	gtk_widget_realize (window);
 
 	xwa.save_under = True;
-	XChangeWindowAttributes (GDK_WINDOW_XDISPLAY (window->window),
-				 GDK_WINDOW_XWINDOW (window->window),
+	XChangeWindowAttributes (GDK_WINDOW_XDISPLAY (win->window),
+				 GDK_WINDOW_XWINDOW (win->window),
 				 CWSaveUnder, &xwa);
 
 	gtk_widget_set_usize (window, im->rgb_width, im->rgb_height);
@@ -258,8 +271,8 @@ make_transparent_window (char *file)
 	 */
 	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
 	gdk_window_set_back_pixmap (window->window, gdk_imlib_move_image (im), FALSE);
-	gdk_window_shape_combine_mask (window->window, gdk_imlib_move_mask (im), 0, 0);
+	gdk_window_shape_combine_mask (win->window, gdk_imlib_move_mask (im), 0, 0);
 	
-	return window;
+	return win;
 }
 

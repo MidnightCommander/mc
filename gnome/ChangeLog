@@ -1,3 +1,9 @@
+Wed Aug 19 19:45:16 EDT 1998 The Rasterman <raster@redhat.com>
+	* gdesktop.c - changed dnd setting routine for desktop icon to set
+          events on child window...
+        * gtrans.c - chnaged routines to make window with child rawing area
+	  and set shape on parent window
+
 1998-08-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_make_local_copies_and_transfer): Fix.
