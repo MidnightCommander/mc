@@ -272,7 +272,7 @@ confbuild_configure() {
 	test_phase="configure"
 	eval "${setup_testenv}"
 
-	if test ${do_configure} = no && test -f "${test_workdir}/Makefile"; then
+	if test ${do_configure} != yes && test -f "${test_workdir}/Makefile"; then
 		return 0
 	fi
 
