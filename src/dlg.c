@@ -348,7 +348,7 @@ int dlg_focus (Dlg_head *h)
         return 0;
 
     if (send_message (h->current->widget, WIDGET_FOCUS, 0)){
-	(*h->callback) (h, DLG_FOCUS, h->current->dlg_id);
+	(*h->callback) (h, DLG_FOCUS, 0);
 	return 1;
     }
     return 0;
@@ -361,7 +361,7 @@ dlg_unfocus (Dlg_head *h)
         return 0;
 
     if (send_message (h->current->widget, WIDGET_UNFOCUS, 0)){
-	(*h->callback) (h, DLG_UNFOCUS, h->current->dlg_id);
+	(*h->callback) (h, DLG_UNFOCUS, 0);
 	return 1;
     }
     return 0;
@@ -755,7 +755,7 @@ void init_dlg (Dlg_head *h)
 void dlg_run_done (Dlg_head *h)
 {
     if (h->current)
-	(*h->callback) (h, DLG_END, h->current->dlg_id);
+	(*h->callback) (h, DLG_END, 0);
 
     current_dlg = (Dlg_head *) h->previous_dialog;
 }

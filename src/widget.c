@@ -290,7 +290,7 @@ radio_callback (WRadio *r, int Msg, int Par)
 	switch (Par){
 	case ' ':
 	    r->sel = r->pos;
-    	    (*h->callback) (h, DLG_ACTION, h->current->dlg_id);
+    	    (*h->callback) (h, DLG_ACTION, 0);
 	    radio_callback (r, WIDGET_FOCUS, ' ');
 	    return 1;
 
@@ -312,7 +312,7 @@ radio_callback (WRadio *r, int Msg, int Par)
 	return 0;
 
     case WIDGET_CURSOR:
-	(*h->callback) (h, DLG_ACTION, h->current->dlg_id);
+	(*h->callback) (h, DLG_ACTION, 0);
 	radio_callback (r, WIDGET_FOCUS, ' ');
 	widget_move (&r->widget, r->pos, 1);
 	break;
@@ -417,7 +417,7 @@ check_callback (WCheck *c, int Msg, int Par)
 	    break;
 	c->state ^= C_BOOL;
 	c->state ^= C_CHANGE;
-        (*h->callback) (h, DLG_ACTION, h->current->dlg_id);
+        (*h->callback) (h, DLG_ACTION, 0);
 	check_callback (c, WIDGET_FOCUS, ' ');
 	return 1;
 

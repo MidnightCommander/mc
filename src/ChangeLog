@@ -1,5 +1,12 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c: Don't supply ID of the current widget with any
+	callbacks.  It's mostly useless and can be found by the
+	callback.
+	* layout.c: Likewise.
+	* widget.c: Likewise.
+	* chmod.c (chmod_callback): Adjust for the above.
+
 	* layout.c (layout_change): Make static.
 	* screen.c (paint_panel): Likewise.
 	* cmd.c (dirsizes_cmd): Use dirty flag.
