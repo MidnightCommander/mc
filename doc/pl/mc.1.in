@@ -557,7 +557,7 @@ Tryb "Full" pokazuje nazwê, rozmiar i czas modyfikacji pliku.
 Tryb "Brief" pokazuje tylko nazwê pliku i ma dwie kolumny (dziêki
 temu mo¿e pokazywaæ nawet dwa razy wiêcej ni¿ inne tryby). Tryb "Long" jest
 podobny do wyniku polecenia
-\fB"ls -l"\fR.
+.BR "ls -l" .
 Zabiera on szeroko¶æ ca³ego ekranu.
 .PP
 Je¶li wybierzesz tryb "user" (u¿ytkownika), bêdziesz móg³ wybraæ w³asny sposób
@@ -689,7 +689,7 @@ przez opcjê
 .SH "    Filtry (Filter...)"
 Komenda filtra pozwala ci na podanie rozszerzenia, które musi byæ spe³nione,
 ¿eby pliki by³y widoczne (na przyk³ad
-\fB"*.tar.gz."\fR).
+.BR "*.tar.gz" ).
 Niezale¿nie od filtru katalalogi i dowi±zania do katalogów s± zawsze pokazywane.
 .PP
 .\"NODE "    Reread"
@@ -2083,7 +2083,7 @@ szesna¶cie megabajtów i potrafi bez skazy edytowaæ pliki binarne.
 .PP
 Opcje, które aktualnie posiada to: kopiowanie, przenoszenie, kasowanie,
 wycinanie i wklejanie bloków;
-\fI"klawisz dla klawisza undo"\fP;
+.IR "klawisz dla klawisza undo" ;
 rozci±gane menu; wklejanie plików; definiowanie makr; szukanie i
 zastêpowanie wyra¿eñ regularnych (i nasze w³asne funkcje scanf-printf
 szukaj±ce i zamieniaj±ce); strza³ki z Shiftem zaznaczaj±ce teksty w stylu
@@ -2185,10 +2185,13 @@ polskich znaków w Midnight Commanderze.
 Pozwól Midnight Commanderowi pisaæ za ciebie.
 .PP
 Spróbuj u¿yæ dokoñczenia na tek¶cie przed aktualn± pozycj±. MC próbuje
-dokoñczyæ tekst jako zmienn± (je¶li tekst zaczyna siê od znaku \fB$\fP), nazwê
-u¿ytkownika (je¶li tekst zaczyna siê od znaku \fB~\fP), nazwê hosta (je¶li
-tekst zaczyna siê od znaku \fB@\fP) lub komendê (je¶li jeste¶ w linii
-komend w pozycji gdzie mo¿esz wpisaæ
+dokoñczyæ tekst jako zmienn± (je¶li tekst zaczyna siê od znaku
+.BR $ ),
+nazwê u¿ytkownika (je¶li tekst zaczyna siê od znaku
+.BR ~ ),
+nazwê hosta (je¶li tekst zaczyna siê od znaku
+.BR @ )
+lub komendê (je¶li jeste¶ w linii komend w pozycji gdzie mo¿esz wpisaæ
 jak±¶ komendê, mo¿liwe dokoñczenia bêd± zawieraæ równie¿ zarezerwowane
 s³owa i wbudowane komendy pow³oki). Je¶li ¿aden z powy¿szych warunków nie
 jest spe³niony, próbuje siê dokañczaæ nazwê pliku.
@@ -2460,8 +2463,9 @@ F9). W menu opcji wybieramy
 .I Display bits
 i w³±czamy opcje 
 .I ISO 8859-1
-oraz \fIFull 8 bits input\fP. Potem
-zapisujemy konfiguracjê w opcje | Save setup.
+oraz
+.IR "Full 8 bits input" .
+Potem zapisujemy konfiguracjê w opcje | Save setup.
 .PP
 I gotowe - polskie literki dzia³aj± równie¿ w podgl±dzie i wbudowanym
 edytorze plików.
