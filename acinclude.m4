@@ -607,33 +607,6 @@ and uses `struct fs_data'])
     dnl fi
 ])
 
-dnl AC_TRY_WARNINGS(INCLUDES, FUNCTION-BODY,
-dnl             ACTION-IF-NO-WARNINGS [, ACTION-IF-WARNINGS-OR-ERROR])
-AC_DEFUN([AC_TRY_WARNINGS],
-[cat > conftest.$ac_ext <<EOF
-dnl This sometimes fails to find confdefs.h, for some reason.
-dnl [#]line __oline__ "[$]0"
-[#]line __oline__ "configure"
-#include "confdefs.h"
-[$1]
-int main() { return 0; }
-int t() {
-[$2]
-; return 0; }
-EOF
-ac_compile_warn='${CC-cc} -c $CFLAGS $CPPFLAGS conftest.$ac_ext 2>&1'
-if { if eval $ac_compile_warn; then :; else echo arning; fi; } |
-	grep arning 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD; then
-  ifelse([$4], , :, [rm -rf conftest*
-  $4])
-ifelse([$3], , , [else
-  rm -rf conftest*
-  $3
-])dnl
-fi
-rm -f conftest*]
-)
-
 AC_DEFUN([AC_USE_TERMCAP], [
 	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap library])

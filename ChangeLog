@@ -1,5 +1,10 @@
 2002-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Don't check if crypt() prototype is needed to
+	avoid warnings - the whole code is not worth avoiding one
+	legitimate warning.
+	* acinclude.m4: Remove AC_TRY_WARNINGS.
+
 	* configure.in: ALL_LINGUAS should be defined unconditionally.
 
 	* acinclude.m4: Clarify some help texts, add defaults in square

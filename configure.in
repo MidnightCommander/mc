@@ -136,28 +136,6 @@ dnl getpt is a GNU Extension (glibc 2.1.x)
 dnl
 AC_CHECK_FUNCS(getpt)
 
-dnl
-dnl Password encryption support for mcserv
-dnl Check if function crypt needs a prototype
-dnl
-NEED_CRYPT_PROTOTYPE=yes
-if test x$ac_cv_header_crypt_h = xyes; then
-AC_TRY_WARNINGS([#include <crypt.h>], [char *p = crypt("xxx", "yyy");
-if (p)
-return 0;],[
-NEED_CRYPT_PROTOTYPE=no])
-else 
-    if test x$ac_cv_header_unistd_h = xyes; then
-AC_TRY_WARNINGS([#include <unistd.h>], [char *p = crypt("xxx", "yyy");
-if (p)
-return 0;],[
-NEED_CRYPT_PROTOTYPE=no])
-    fi
-fi
-if test x$NEED_CRYPT_PROTOTYPE = xyes; then
-AC_DEFINE(NEED_CRYPT_PROTOTYPE, 1,
-	  [Define if function `crypt' needs a prototype])
-fi
 
 dnl
 dnl On SCO and some SVR4, crypt is on libcrypt.a
