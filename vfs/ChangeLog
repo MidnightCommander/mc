@@ -1,5 +1,8 @@
 2001-07-09  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/mailfs: Strip trailing DOS newlines from mail files.
+	From Christian Gennerat <christian.gennerat@vz.cit.alcatel.fr>
+
 	* fish.c (fish_chown): Do nothing and return success if
 	getpwuid() or getgrgid() fails.
 

@@ -44,6 +44,7 @@ if (eval "require Date::Parse") { # fancy date parsing available?
 
 sub process_header {
     while (<IN>) {
+	s/\r$//;
 	last if /^$/;
 	die "unexpected EOF\n" if eof;
 	if (/^Date:\s(.*)$/) {
@@ -72,6 +73,7 @@ sub mailfs_list {
     
     while(1) {
 	$_=<IN>;
+	s/\r$//;
 	if (!defined($_)) {	# EOF
 	    print_dir_line; 
 	    exit 0;
@@ -96,6 +98,7 @@ sub mailfs_copyout {
     
     my $blank = 1;
     while(<IN>) {
+	s/\r$//;
 	if($blank && /^From /) {
 	    $msg_nr++;
 	    exit(0) if ($msg_nr > $nr);
