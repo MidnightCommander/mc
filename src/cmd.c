@@ -327,6 +327,7 @@ void do_edit_at_line (const char *what, int start_line)
     if (use_internal_edit){
 	edit (what, start_line);
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	repaint_screen ();
 	return;
     }
 #endif
@@ -337,6 +338,7 @@ void do_edit_at_line (const char *what, int start_line)
     }
     execute_internal (editor, what);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+    repaint_screen ();
 }
 
 void
