@@ -1,3 +1,9 @@
+1999-03-08 Sergey Panov <sipan@mit.edu>
+
+        * POTFILES.in: add gnome/gcustom-layout.c file
+
+        * ru.po: update
+
 Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Updated with David Martins translation.
