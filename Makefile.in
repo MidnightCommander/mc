@@ -131,7 +131,6 @@ check: Makefile
 	  && ../configure --srcdir=.. --prefix=$$dc_install_base \
 	  && $(MAKE) \
 	  && make install \
-	  && make dist
 	-rm -rf mc-$(VERSION)
 
 distcheck: dist check
