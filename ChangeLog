@@ -1,3 +1,8 @@
+2001-08-03  Abel Cheung  <maddog@linux.org.hk>
+
+	* lib/mc.hint.zh_TW.Big5: New file.
+	* lib/Makefile.am: Added mc.hint.zh_TW.Big5
+
 2001-08-02  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.hint.uk: New file.

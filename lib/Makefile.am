@@ -13,8 +13,8 @@ endif
 LOCALIZED_HELP = mc.hlp.hu
 LIBFILES_OUT = mc.ext
 LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.it mc.hint.nl \
-	mc.hint.pl mc.hint.ru mc.hint.uk mc.lib mc.menu cedit.menu \
-	edit.indent.rc edit.spell.rc
+	mc.hint.pl mc.hint.ru mc.hint.uk mc.hint.zh_TW.Big5 mc.lib mc.menu \ 
+	cedit.menu edit.indent.rc edit.spell.rc
 
 noinst_DATA = \
 	xnc.hlp			\

@@ -1,3 +1,7 @@
+2001-08-03  Abel Cheung  <maddog@linux.org.hk>
+
+	* *.desktop: Added traditional Chinese strings.
+
 2001-07-30  Pavel Roskin  <proski@gnu.org>
 
 	* gmain.h: Fix declaration of gnome_init_panels().
