@@ -21,7 +21,7 @@ Il Midnight Commander è stato scritto dai suoi autoriAUTHORS.
 
 Il Midnight Commander NON E' COPERTO DA ALCUNA GARANZIAWarranty.
 Questo è software libero, lo puoi ridistribuire sotto 
-certe condizioniLicense.[License]
+certe condizioniLicenza.[Licenza]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -472,10 +472,10 @@ I tasti di movimentoGeneral Movement Keys sono validi.
 
 tab           Va alla voce successiva.
 M-tab         Va alla voce precedente. 
-down          Va alla voce successiva o una linea in basso.
-up            Va alla voce precedente o una linea in alto.
-right, enter  Segue il collegamento corrente.    
-left, l       Torna indietro nello storico dei nodi visitati.
+giu           Va alla voce successiva o una linea in basso.
+su            Va alla voce precedente o una linea in alto.
+destra, invio Segue il collegamento corrente.    
+sinistra, l   Torna indietro nello storico dei nodi visitati.
 F1            Mostra l'aiuto per il visualizzatore dell'aiuto.
 n             Va al nodo successivo.
 p             Va al nodo precedente.    

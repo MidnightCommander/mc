@@ -339,12 +339,12 @@ mostrerà il risultato del comando precedente. Eseguito in console Linux, il
 Midnight Commander usa un programma esterno (cons.saver) per gestire il
 salvataggio e recupero delle informazioni sullo schermo.
 .PP
-When the subshell support is compiled in, you can type C-o at any time
-and you will be taken back to the Midnight Commander main screen, to
-return to your application just type C-o.  If you have an application
-suspended by using this trick, you won't be able to execute other
-programs from the Midnight Commander until you terminate the suspended
-application. 
+Se è stato compilato il supporto alla subsell, è possibile premere C-o
+in ogni momento per tornare alla schermata principale del Midnight Commander;
+per tornare all'applicazione basta premere C-o. Se si ha un'applicazione
+sospesa usando questo trucco, non si sarà in grado di eseguire altri
+programmi dal Midnight Commander finchè non si terminerà l'applicazione
+sospesa.
 .PP
 ./"NODE "  Directory Panels"
 .SH "  Pannelli Directory"
@@ -370,66 +370,67 @@ Usato per selezionare rispettivamente il file superiore, il file centrale o
 quello inferiore in un pannello.
 .PP
 .B C-s, M-s.
-Start a filename search in the directory listing. When the search is
-active, the user input will be added to the search string instead of
-the command line. If the
-.I "Show mini-status"
-option is enabled the search string is shown on the mini-status
-line. When typing, the selection bar will move to the next file
-starting with the typed letters. The
+Inizia una ricerca nel nella directory. Quando la ricerca è attiva
+i dati immessi dall'utente vengono aggiunti alla stringa di ricerca
+invece della riga di comando. Se l'opzione
+.I "Mostra mini-stato"
+è abilitata, la stringa di ricerca viene mostrata nella riga di
+mini-stato. Scrivendo, la barra di selezione si muove al prossimo
+file che comincia con le lettere battute. Il tasti
 .I "backspace"
-or
-.I DEL 
-keys can be used to correct typing mistakes. If C-s is pressed
-again, the next match is searched for.
+o
+.I canc 
+possono essere utilizzati per correggere errori di battitura. Se viene premuto
+nuovamente, viene ricercata la corrispondenza seguente.
 .PP
 .B M-t
-Toggle the current display listing to show the next display listing
-mode.  With this it is possible to quickly switch from long listing
-to regular listing and the user defined listing mode.
+Cambia il modo di visualizzazione corrente per mostrare la modalità
+successiva. In questo modo è possibile cambiare velocemente da listati
+lunghi a listati normali a listati definiti dall'utente.
 .PP
-.B C-\\\\ (control-backslash).
-Show the 
+.B C-\\\\ (control-barra retroversa).
+Mostra le
 .\"LINK2"
-directory hotlist
+directory favorite
 .\"Hotlist"
-and change to the selected directory.
+e va alla directory selezionata.
 .PP
-.B + \ (plus).
-This is used to select (tag) a group of files. The Midnight Commander
-will prompt for a regular expression describing the group. When
-.I Shell Patterns 
-are enabled, the regular expression is much like the regular
-expressions in the shell (* standing for zero or more characters and ?
-standing for one character). If
-.I Shell Patterns
-is off, then the tagging of files is done with normal regular
-expressions (see ed (1)).
+.B + \ (più).
+Viene utilizzato per selezionare (marcare) un gruppo di file. Il Midnight 
+Commander richiederà un'espressione regolare per descrivere il gruppo.
+Quando le 
+.I pattern della shell
+sono abilitate, le espressioni regolari sono molto simili alle espressioni
+regolari in una shell (* significa zero o più caratteri e ? un carattere). Se
+le 
+.I pattern della shell 
+sono disabilitate, la marcatura dei file viene fatta con le normali espressioni
+regolari (vedere (1)).
 .PP
-If the expression starts or ends with a slash (/), then it will select
-directories instead of files.
+Se l'espressione comincia o finisce con una barra (/), allora selezionerà
+directory invece che file.
 .PP
-.B \\\\ (backslash).
-Use the "\\" key to unselect a group of files. This is the opposite of
-the Plus key.
+.B \\\\ (barra retroversa).
+Usare il tasto "\\" per deselezionare un gruppo di file. Questo è l'opposto
+del tasto più.
 .PP
-.B up-key, C-p.
-Move the selection bar to the previous entry in the panel.
+.B freccia-su, C-p.
+Sposta la barra di selezione alla voce precedente nel pannello.
 .PP
-.B down-key, C-n.
-Move the selection bar to the next entry in the panel.
+.B freccia-giùy, C-n.
+Sposta barra di selezione alla voce successiva nel pannello.
 .PP
 .B home, a1, M-<.
-Move the selection bar to the first entry in the panel.
+Sposta la barra di selezione alla prima voce nel pannello.
 .PP
-.B end, c1, M->.
-Move the selection bar to the last entry in the panel.
+.B fine, c1, M->.
+Sposta la barra di selezione all'ultima voce nel pannello.
 .PP
-.B next-page, C-v.
-Move the selection bar one page down.
+.B pagina-giù, C-v.
+Sposta la barra di selezione di una pagina in basso.
 .PP
-.B prev-page, M-v.
-Move the selection bar one page up.
+.B pagina-su, M-v.
+Sposta la barra di selezione di una pagina in alto.
 .PP
 .B M-o,
 If the other panel is a listing panel and you are standing on a
@@ -503,31 +504,31 @@ altri tasti indipendenti.
 Altre parti del Midnight Commander usano alcuni degli stessi tasti di
 movimento, perciò questa sezione può applicarsi anche a quelle sezioni.
 .PP
-.B Up, C-p.
+.B Su, C-p.
 Si sposta di una linea indietro.
 .PP
-.B Down, C-n.
+.B Giu, C-n.
 Si sposta di una linea avanti.
 .PP
-.B Prev Page, Page Up, M-v.
+.B Pagina Su, M-v.
 Si sposta di una pagina in alto.
 .PP
-.B Next Page, Page Down, C-v.
+.B Pagina Giu, C-v.
 Si sposta di una pagina in basso.
 .PP
 .B Home, A1.
 Si sposta all'inizio.
 .PP
-.B End, C1.
+.B Fine, C1.
 Si sposta alla fine.
 .PP
 Il visualizzatore dell'aiuto accetta i seguenti tasti in aggiunta a quelli
 menzionati sopra:
 .PP
-.B b, C-b, C-h, Backspace, Delete.
+.B b, C-b, C-h, Backspace, Canc.
 Si sposta di una pagina in alto.
 .PP
-.B Space bar.
+.B Barra spaziatrice.
 Si sposta di una pagina in basso.
 .PP
 .B u, d.
@@ -643,25 +644,25 @@ e
 .
 .PP
 .\"NODE ""    Listing Mode..."
-.SH "    Modalità vista..."
-The listing mode view is used to display a listing of files, there are
-four different listing modes available:
-.B Full,
-.B Brief,
-.B Long
-and
-.B User.
-The full directory view shows the file name, the size of the file and
-the modification time. 
+.SH "    Modalità Lista..."
+La modalità lista serve a mostrare un elenco di file; ci sono quattro
+modalità elenco disponibili:
+.B Completa,
+.B Breve,
+.B Lunga
+e
+.B Definita dall'utente.
+La modalità completa mostra il nome del file, l'ampiezza del file e
+la data di modifica.
 .PP
-The brief view shows only the file name and it has two columns
-(therefore showing twice as many files as other views). The long view
-is similar to the output of
+La modalità breve mostra solo il nome del file in due colonne
+(perciò mostrando il doppio del numero dei file che nelle altre
+modalità). La modalità lunga è simile a quella del comando 
 .B "ls -l"
-command. The long view takes the whole screen width.
+. La modalità lunga usa tutta l'ampiezza dello schermo.
 .PP
-If you choose the "User" display format, then you have to specify
-the display format.
+Se si sceglie il formato definibile dall'utente, è necessario specificare 
+il formato della vista.
 .PP
 The user display format must start with a panel size specifier.  This
 may be "half" or "full", and they specify a half screen panel and a
