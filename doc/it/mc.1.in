@@ -2965,7 +2965,7 @@ essere usato solo come colore di sfondo. Esempio:
 base_color=normal=white,default:marked=magenta,default
 .fi
 .\"NODE "Special Settings"
-.SH "Impostazioni Speciali"
+.SH "Impostazioni speciali"
 Molte delle impostazioni del Midnight Commander possono essere cambiate
 dai menu. Comunque, c'è un piccolo numero di impostazioni che possono
 essere cambiate solo agendo sul file di configurazione.
