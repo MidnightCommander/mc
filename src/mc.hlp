@@ -106,13 +106,22 @@ function below, will allow you to browse through your
 directories and automatically move to the last directory
 you were in (thanks to Torben Fjerdingstad and Sergey for
 contributing this function and the code which implements
-this option).
+this option). Please don't add verbatim copies of the
+function definitions below. Source the files
+@prefix@/lib/mc/bin/mc.sh (bash and zsh users)
+respectively @prefix@/lib/mc/bin/mc.csh (tcsh users)
+instead. This way you will not need to change your
+profiles if the function definitions are improved,
+provided that you don't compile MC with a different
+prefix.
 
 bash and zsh users:
 
 mc ()
 {
-        MC=/tmp/mc$$-"$RANDOM"
+        mkdir -p ~/.mc/tmp 2> /dev/null
+	chmod 700 ~/.mc/tmp
+	MC=~/.mc/tmp/mc-$$
         @prefix@/bin/mc -P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
@@ -124,7 +133,9 @@ alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
 
 I know the bash function could be shorter for zsh and bash
 but the backquotes on bash won't accept your suspension
-the program with C-z.
+the program with C-z. The temporary file is created in the
+private directory ~/.mc/tmp in order to avoid symlink
+attachs in a world writable /tmp.
 
 "-s" Turns on the slow terminal mode, in this mode the
 program will not draw expensive line drawing characters
@@ -2767,13 +2778,14 @@ port (j-grigera@usa.net), Juan Jose Ciarlante
 (jjciarla@raiz.uncu.edu.ar), Ilya Rybkin
 (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
 (mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli
-(MC8737@mclink.it), Pavel Roskin 
+(MC8737@mclink.it), Pavel Roskin
 (pavel_roskin@geocities.com), Sergey Ya. Korshunoff
-(root@seyko.msk.su), Thomas Pundt 
-(pundtt@math.uni-muenster.de), Timur Bakeyev (timur@bat.ru), 
-Tomasz Cholewo (tjchol01@mecca.spd.louisville.edu), 
-Torben Fjerdingstad (torben.fjerdingstad@uni-c.dk), 
-Vadim Sinolitis (vvs@nsrd.npi.msu.su) and Wim Osterholt
+(root@seyko.msk.su), Thomas Pundt
+(pundtt@math.uni-muenster.de), Timur Bakeyev
+(timur@goff.comtat.kazan.su), Tomasz Cholewo
+(tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
+(torben.fjerdingstad@uni-c.dk), Vadim Sinolitis
+(vvs@nsrd.npi.msu.su) and Wim Osterholt
 (wim@djo.wtm.tudelft.nl).
 
 [BUGS]

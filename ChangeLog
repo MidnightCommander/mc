@@ -1,3 +1,7 @@
+1999-09-23  Federico Mena Quintero  <federico@redhat.com>
+
+	* configure.in (VERSION): Set version number to 4.5.39.
+
 1999-09-23	Jorge Godoy	<godoy@conectiva.com.br>
 
 	* configure.in: Added pt_BR to ALL_LINGUAS
