@@ -2,11 +2,7 @@ Midnight Commander
 Questions and Answers
 
    The newest version of this document is available at
-   http://www.gnome.org/mc/answers.html
-   
-   The [NEW] tag marks the sections which have been added recently.
-   
-   The [UPDATED] tag marks the sections which have been updated recently.
+   http://cvs.gnome.org/lxr/source/mc/FAQ?raw=1
    
      * 1 Getting started
           + 1.1 What is Midnight Commander?
@@ -19,14 +15,13 @@ Questions and Answers
      * 2 Keyboard
           + 2.1 What does documentation mean with the C-?, M-? and F?
             keys?
-          + 2.2 [UPDATED] Why don't function keys (or some other key)
-            work?
+          + 2.2 Why don't function keys (or some other key) work?
           + 2.3 How do I use function keys F11 to F20?
           + 2.4 Why does the ESC key behave funny?
           + 2.5 How can I add the plus sign (+) on the command line?
-          + 2.6 [NEW] C-o doesn't work!
-          + 2.7 [NEW] What 'keys' are the "a1" and "c1" keys mentioned in
-            the manual?
+          + 2.6 C-o doesn't work!
+          + 2.7 What 'keys' are the "a1" and "c1" keys mentioned in the
+            manual?
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
@@ -34,24 +29,24 @@ Questions and Answers
             pop up?
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
-            SLang"?
+            SLang" or "Terminal not powerful enough for SLsmg"?
           + 4.2 Why don't line drawing characters work?
           + 4.3 Can one use latin-1 characters without losing the lines?
           + 4.4 I have problems with entering/viewing national
             characters!
           + 4.5 How can I get colors?
           + 4.6 My color_xterm goes completely (or partially) black!
-          + 4.7 Where can I get color_xterm?
+          + 4.7 Where can I get rxvt?
           + 4.8 I got colors working with MC but the other programs don't
             work at all anymore!
           + 4.9 Why are there both terminfo and termcap? Wouldn't one
             database be enough?
      * 5 Graphical user interface
-          + 5.1 [UPDATED] Xview, Tk and Gnome editions?
+          + 5.1 Xview, Tk and Gnome editions?
      * 6 Command line problems
           + 6.1 How do I stay in the last directory when I exit Midnight
             Commander?
-          + 6.2 [UPDATED] How can I access command line history?
+          + 6.2 How can I access command line history?
           + 6.3 How can I complete commands, file names, variable names
             and so on?
           + 6.4 I am using ksh. Can I use functions defined in the .kshrc
@@ -65,18 +60,16 @@ Questions and Answers
           + 7.4 How do I do non-anonymous ftp with MC?
           + 7.5 How do I close an ftp connection?
           + 7.6 Why aren't the contents of ftp panel updated?
-          + 7.7 [UPDATED] What kind of proxy server works with Midnight
-            Commander?
+          + 7.7 What kind of proxy server works with Midnight Commander?
      * 8 Other common problems
           + 8.1 How do I get the internal editor to work?
-          + 8.2 [UPDATED] Why doesn't "mcedit newfile" work?
+          + 8.2 Why doesn't "mcedit newfile" work?
           + 8.3 Is there any way to 'bookmark' favourite ftp-fs links?
           + 8.4 When copying the directories lose their original date,
             uid and gid!
           + 8.5 Why I keep getting: "There is no disk in the drive.
             Please insert a disk into drive D:"?
-          + 8.6 [UPDATED] When I start Midnight Commander, nothing
-            happens!
+          + 8.6 When I start Midnight Commander, nothing happens!
           + 8.7 When I try to view a file MC hangs!
      * 9 Development
           + 9.1 Who has written Midnight Commander?
@@ -91,9 +84,8 @@ Questions and Answers
           + 10.4 Are the mailing lists archived anywhere?
      * 11 Administrivia
           + 11.1 Authorship
-          + 11.2 [UPDATED] File formats
-          + 11.3 Feedback is invited
-          + 11.4 Disclaimer and copyright
+          + 11.2 Feedback is invited
+          + 11.3 Disclaimer and copyright
        
 1 Getting started
 
@@ -115,9 +107,9 @@ Questions and Answers
    clones, Windows 95/NT and OS/2. Midnight Commander does not run on
    Macintosh.
    
-   Midnight Commander uses GNU autoconfigure which can automatically
-   configure Midnight Commander for use on almost any (if not every) Unix
-   clone. Following configurations have been tested:
+   Midnight Commander uses GNU Autoconf which can automatically
+   configure Midnight Commander for use on almost any (if not every)
+   Unix clone. Following configurations have been tested:
      * i386-*-linux1.x, 2.x
      * alpha-linux-linux2
      * sparc-linux-linux2.x
@@ -141,10 +133,6 @@ Questions and Answers
        
    See http://www.gnome.org/mc/download.html.
    
-   There is also a preliminary Ms-Dos port at
-   http://www.gnome.org/cgi-bin/mc/download/DOS/.html (but no Ms-Dos
-   binary).
-   
    Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
    C++, Cygwin32 and Mingw32.
    
@@ -164,17 +152,17 @@ Questions and Answers
    You need an Unix compatible operating system. Support for Windows 95/NT
    and OS/2 is incomplete - you should be prepared to fix things.
 
-   To compile any edition you need to have glib installed. It's available
-   in ftp://ftp.gtk.org/pub/gtk.
+   To compile any edition you need to have GLib installed. It's available
+   at ftp://ftp.gtk.org/pub/gtk/.
    
-   If you want to use mouse on the Linux console you need General Purpose
-   Mouse server from ftp://ftp.systemy.it/pub/develop/. You need nothing
-   extra to use mouse on xterm.
+   If you want to use mouse on the Linux console you need the gpm daemon
+   from ftp://ftp.systemy.it/pub/develop/. You need nothing extra to use
+   mouse on xterm.
    
    To compile the GNOME edition you need GNOME libraries as well as the
    libraries they depend on. See http://www.gnome.org/ for details.
    
-   If you do not want to use the slang library you could try using
+   If you do not want to use the S-Lang library you could try using
    ncurses (we recommend only version 4.1 and above).
    
    You can get it along with other curses libraries, too, but results may
@@ -202,8 +190,8 @@ Questions and Answers
    
 1.7 I don't have FTP access. Where can I get MC?
 
-   Most Linux CD-ROMs include Midnight Commander. For example, Slackware,
-   Yggdrasil, S.U.S.E., Jurix, RedHat, Caldera and Debian.
+   Most Linux CD-ROMs include Midnight Commander. For example,
+   Debian, Mandrake, Red Hat, Slackware and SuSE.
    
 2 Keyboard
 
@@ -225,7 +213,7 @@ Questions and Answers
    keys or they don't work you can use Esc. For example, for F3 press the
    Esc key and then press the 3 key.
    
-2.2 [UPDATED] Why don't function keys (or some other key) work?
+2.2 Why don't function keys (or some other key) work?
 
    Your terminfo or termcap database has missing or incorrect definations
    for function keys. Type "mc -V" to see what terminal database is being
@@ -239,10 +227,9 @@ Questions and Answers
    
    Better termcap and terminfo databases are available here:
    
-     http://sagan.earthspace.net/~esr/terminfo/
+     http://www.tuxedo.org/~esr/terminfo/
+     ftp://dickey.his.com/ncurses/
      
-   Best terminfo database is bundled with ncurses 4.2.
-   
    You can select whether Midnight Commander will use terminfo or termcap
    database by giving --with-terminfo or --with-termcap option to the
    configure. Default is terminfo if found, otherwise termcap.
@@ -295,12 +282,12 @@ Questions and Answers
    
    Another common key which needs the C-q prefix is backslash "\".
    
-2.6 [NEW] C-o doesn't work!
+2.6 C-o doesn't work!
 
    Maybe C-o is a stty control character on your terminal. See man stty
    for details on how to list and change stty control characters.
    
-2.7 [NEW] What 'keys' are the "a1" and "c1" keys mentioned in the manual?
+2.7 What 'keys' are the "a1" and "c1" keys mentioned in the manual?
 
    The "a1" key is the key which has the "a1" caption on it.
    
@@ -317,7 +304,7 @@ Questions and Answers
    Invoke mc like this (without quotes): "mc -x". If this doesn't work
    upgrade to a terminal which compatible with the Xterm mouse sequences.
    
-   Alternatively, on Linux console you can use GPM.
+   Alternatively, on Linux console you can use gpm.
    
 3.2 How do I cut and paste text with mouse?
 
@@ -333,7 +320,8 @@ Questions and Answers
 
 4 Display
 
-4.1 Why do I keep getting "Terminal not powerful enough for SLang"?
+4.1 Why do I keep getting "Terminal not powerful enough for SLang" or
+    "Terminal not powerful enough for SLsmg"?
 
    This means that your terminfo databases do not contain the correct
    definitions for your terminal.
@@ -356,7 +344,7 @@ Questions and Answers
 4.2 Why don't line drawing characters work?
 
    Since version 4.0.13 there's the commandline option -a to force use of
-   +, |, - for line drawing (only available when compiled with SLang).
+   +, |, - for line drawing (only available when compiled with S-Lang).
    Use this -a option if any of the suggestions below doesn't help.
    
    In general, there are three subcases:
@@ -379,9 +367,10 @@ Questions and Answers
        is 3 or 4 (see below).
        
    The reason for the problem is one of following:
+
     1. Your curses library might not support line drawing characters.
-       Slang, Ncurses and System V curses do support them, BSD curses
-       doesn't. MC uses Slang by default so this is not usually a
+       S-Lang, ncurses and SystemV curses do support them, BSD curses
+       doesn't. MC uses S-Lang by default so this is not usually a
        problem.
     2. Your terminal might not support line drawing characters. Vt100
        compatible terminals, rxvt, xterm and color_xterm do support them.
@@ -455,7 +444,7 @@ Questions and Answers
    
    More detailed answer:
    
-   First, check that your terminal supports color. Color_xterm, rxvt and
+   First, check that your terminal supports color. color_xterm, rxvt and
    Linux console do support, most other terminals don't. You can test
    color support with following simple C program:
 
@@ -470,11 +459,11 @@ Questions and Answers
    terminal supports color, otherwise not (however, for color_xterm see
    also the next question).
    
-   Second, check that you are using Ncurses or the Slang library (type
-   "mc -V" to find out), in addition some System V curses implementations
+   Second, check that you are using Ncurses or the S-Lang library (type
+   "mc -V" to find out), in addition some SystemV curses implementations
    do support color, most don't.
    
-   With Slang library you can force color support by setting the
+   With S-Lang library you can force color support by setting the
    environment variable COLORTERM to any value.
    
    Third, if you use ncurses library, check that your terminfo database
@@ -522,12 +511,9 @@ Questions and Answers
    your X configuration file is). Or you can replace your non-ANSI
    color_xterm with an ANSI color_xterm.
    
-4.7 Where can I get color_xterm?
+4.7 Where can I get rxvt?
 
-   Try ftp.x.org: /contrib/utilities/colour_xterm.tar.gz.
-   
-   Alternatively, rxvt is a better choice, see
-   http://www.gnome.org/cgi-bin/mc/download/rxvt/.html
+   http://www.rxvt.org/distribution.html
    
 4.8 I got colors working with MC but the other programs don't work at all
 anymore!
@@ -550,9 +536,9 @@ anymore!
 4.9 Why are there both terminfo and termcap? Wouldn't one database be
 enough?
 
-   You might want to read the Unix-haters handbook at
-   http://www.digital.de/people/jmh/Unix_Haters/unix-haters.html. It
-   lists many more reasons why Unix sucks.
+   You might want to read the Unix-Haters Handbook at
+   http://catalog.com/hopkins/unix-haters/handbook.html. It lists many
+   more reasons why Unix sucks.
    
    You can configure which terminal database you want to use with the
    "--with-termcap" and "--with-terminfo" flags of configure. If you
@@ -561,7 +547,7 @@ enough?
    
 5 Graphical user interface
 
-5.1 [UPDATED] Xview, Tk and Gnome editions?
+5.1 Xview, Tk and Gnome editions?
 
    Xview and Tk editions have been removed from the sources.
 
@@ -579,7 +565,7 @@ enough?
    See the description of the -P option in the Options section of the
    manual.
    
-6.2 [UPDATED] How can I access command line history?
+6.2 How can I access command line history?
 
    You can browse previous commands with M-p and M-n. Alternatively, you
    can summon the command history listbox by pressing F9 c h.
@@ -676,7 +662,7 @@ enough?
    
    You can use C-r to force an update.
    
-7.7 [UPDATED] What kind of proxy server works with Midnight Commander?
+7.7 What kind of proxy server works with Midnight Commander?
 
    There are two kinds of ftp proxies: proxies for ftp clients and
    proxies for web browsers.
@@ -725,7 +711,7 @@ enough?
    And please don't forget that "make install" overwrites
    $prefix/lib/mc/mc.ext.
    
-8.2 [UPDATED] Why doesn't "mcedit newfile" work?
+8.2 Why doesn't "mcedit newfile" work?
 
    This is a known bug.
    
@@ -765,7 +751,7 @@ into drive D:"?
    Midnight Commander configuration files with the MCHOME environment
    variable.
    
-8.6 [UPDATED] When I start Midnight Commander, nothing happens!
+8.6 When I start Midnight Commander, nothing happens!
 
    First, invoke MC without subshell support: "mc -u". If this helps
    check the shell you are using. Subshell support works best with bash
@@ -774,11 +760,11 @@ into drive D:"?
    tcsh or zsh, subshell support is disabled automatically.
    
    If disabling subshell doesn't help, try to reconfigure MC with
-   "--with-included-slang" and "--with-termcap" options and recompile. If
-   this helps, there is something wrong with your terminfo database or
-   shared slang library. For better terminfo databases see chapter 4. For
-   a better slang library, upgrade to a newer version or keep using the
-   "--with-included-slang" option.
+   "--with-included-slang" and "--with-termcap" options and recompile.
+   If this helps, there is something wrong with your terminfo database
+   or shared S-Lang library. For better terminfo databases see chapter
+   4. For a better S-Lang library, upgrade to a newer version or keep
+   using the "--with-included-slang" option.
    
    This problem can also be caused by gpm as noted by Luis Espinoza:
    
@@ -816,13 +802,9 @@ into drive D:"?
      * Alex I. Tkachenko
        
    Alessandro Rubini has been specially helpful with debugging and
-   enhancing of the mouse support. John Davis has made his S-Lang library
-   available to us and answered many questions about it.
+   enhancing of the mouse support. John E. Davis has made his S-Lang
+   library available to us and answered many questions about it.
    
-   The photographs of the authors are available as:
-   
-     http://www.gnome.org/mc/authstat.html
-     
    Many people have contributed bug reports, feature suggestions and
    small code bits (alphabetical order):
      * Thomasz Cholewo
@@ -936,25 +918,16 @@ answer?
 
 11.1 Authorship
 
-   Questions and Answers is written by Janne Kukonlehto. Parts of it
+   Questions and Answers was written by Janne Kukonlehto. Parts of it
    originate from Ian Jackson, Miguel de Icaza, Dugan Porter, Norbert
    Warmuth and Paul Sheer.
    
-11.2 [UPDATED] File formats
+11.2 Feedback is invited
 
-   This document is available in HTML, postscript and PDF formats at
-   http://www.gnome.org/mc/answers.html.
+   Send your comments about this document and the Midnight Commander to
+   mc@gnome.org
    
-   This document is available in ASCII format in the Midnight Commander
-   source package.
-   
-11.3 Feedback is invited
-
-   Send your comments about this document to janne@gnome.org
-   
-   Send your comments about the Midnight Commander to mc@gnome.org
-   
-11.4 Disclaimer and copyright
+11.3 Disclaimer and copyright
 
    Note that this document is provided as is. The information in it is
    not warranted to be correct; you use it at your own risk.
@@ -962,6 +935,3 @@ answer?
    You can use Questions and Answers according to GNU Public License (see
    the COPYING file in the Midnight Commander source distribution).
    Questions and Answers is not public domain.
-     __________________________________________________________________
-   
-   This document is maintained by Janne Kukonlehto <janne@gnome.org>.

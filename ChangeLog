@@ -1,3 +1,7 @@
+2001-08-08  Pavel Roskin  <proski@gnu.org>
+
+	* FAQ: Changes from Frederic L. W. Meunier <0@pervalidus.net>
+
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in (Internal File Viewer): Document Ctrl-O and F17.
@@ -7,7 +11,7 @@
 2001-08-06  Pavel Roskin  <proski@gnu.org>
 
 	* INSTALL: Numerous changes.  Declare old curses obsolete.
-	Partly from "Frederic L. W. Meunier" <0@pervalidus.net>
+	Partly from Frederic L. W. Meunier <0@pervalidus.net>
 
 	* doc/mc.1.in (Menu Bar): Add link to the "Options Menu".
 
