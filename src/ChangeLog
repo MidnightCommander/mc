@@ -1,3 +1,9 @@
+Wed Feb  3 23:55:54 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* widget.c (history_put): set the access rights correctly when
+	the history file is created initially. Don't save the history
+	if we can't set the access rights.
+
 1999-02-01  Jonathan Blandford  <jrb@redhat.com>
 
 	* setup.c: save we_can_afford_the_speed

@@ -28,6 +28,10 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "tty.h"
 #include <ctype.h>
 #include "global.h"
@@ -40,7 +44,6 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "x.h"
 #include "profile.h"	/* for history loading and saving */
-#include "../vfs/vfs.h"
 
 #ifndef HAVE_X
 #   define x_create_button(a,b,c)  1
@@ -944,8 +947,12 @@ void history_put (char *input_name, Hist *h)
 
     profile = concat_dir_and_file (home_dir, HISTORY_FILE_NAME);
 
+    if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
+	close (i);
     /* Just in case I forgot to strip passwords somewhere -- Norbert */
-    mc_chmod (profile, S_IRUSR | S_IWUSR);
+    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT)
+	return;
+
     while (h->next)		/* go to end of list */
 	h = h->next;
 
