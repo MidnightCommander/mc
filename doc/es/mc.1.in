@@ -180,7 +180,7 @@ y el
 .\"Directory Tree"
 .PP
 El valor por defecto de auto repetición para los botones del ratón es 400
-milisegundos. Éste valor se puede modificar editando el fichero
+milisegundos. Este valor se puede modificar editando el fichero
 .\"LINK2"
 \&~/.mc/ini
 .\"Save Setup"
@@ -195,23 +195,24 @@ texto) manteniendo pulsada la tecla Shift.
 .SH "Teclas"
 Algunos comandos en Midnight Commander implican el uso de las teclas
 .I Control
-(algunas veces representado por CTRL o CTL) y
+(etiquetada habitualmente CTRL o CTL) y
 .I Meta
-(algunas veces denominado ALT o incluso Compose). En este manual usaremos
-las siguientes abreviaturas:
+(identificada como ALT o incluso Compose). En este manual usaremos las
+siguientes abreviaturas:
 .PP
-C-<chr> significa mantener pulsada la tecla Control mientras pulsamos el carácter
-<chr>. Así C-f sería: manteniendo pulsada la tecla Control teclear f.
+C-<chr> significa mantener pulsada la tecla Control mientras pulsamos
+el carácter <chr>. Así C-f sería: manteniendo pulsada la tecla Control
+teclear f.
 .PP
-M-<chr> significa mantener pulsada la tecla Meta o Alt mientras pulsamos el carácter <chr>.
-Si no hay tecla Meta o Alt, pulsar ESC, soltar, y entonces pulsar el
-carácter <chr>.
+M-<chr> significa mantener pulsada la tecla Meta o Alt mientras pulsamos
+el carácter <chr>. Si no hay tecla Meta o Alt, pulsar ESC, soltar,
+y entonces pulsar el carácter <chr>.
 .PP
-Todas las líneas de entrada en Midnight Commander usan una aproximación a
-las prerrogativas de teclado del editor GNU Emacs.
+Todas las líneas de entrada en Midnight Commander usan una aproximación
+a las asociaciones de teclas del editor GNU Emacs.
 .PP
-Hay muchas secciones que hablan de las teclas. Las siguientes son
-las más importantes.
+Hay bastantes secciones que hablan acerca de las teclas. Las siguientes
+son las más importantes.
 .PP
 La sección
 .\"LINK2"
@@ -1592,17 +1593,17 @@ manual (con C-r).
 Después de ejecutar comandos, Midnight Commander puede realizar una pausa,
 y darnos tiempo a examinar la salida del comando. Hay tres posibles
 valores para esta variable:
-.IP
+.PP
 .I Nunca.
 Significa que no queremos ver la salida de nuestros comandos. Si estamos
 utilizando la consola Linux o SCO o un xterm, podremos ver la salida
 del comando pulsando C-o.
-.IP
-.I "Sólo en Terminales Tontas".
+.PP
+.I Sólo en Terminales Tontas.
 Obtendremos el mensaje de pausa sólo en terminales que no sean capaces
 de mostrar la salida del último comando ejecutado (en realidad, cualquier
 terminal que no sea un xterm o una consola de Linux).
-.IP
+.PP
 .I Siempre.
 El programa realizará siempre una pausa después de ejecutar comandos.
 .PP
@@ -1877,45 +1878,45 @@ expansión
 muy simple antes de ejecutar el comando.
 .PP
 .\"NODE "  The cd internal command"
-.SH "  El Comando cd Interno"
+.SH "  Comando cd Interno"
 El comando
 .I cd
 es interpretado directamente por Midnight Commander, en vez de pasarlo
 al interprete de comandos para su ejecución. Por ello puede que no todas
-las posibilidades de expansión y sustitución de macro que hace nuestro shell
-estén disponibles, pero sí algunas de ellas:
+las posibilidades de expansión y sustitución de macro que hace nuestro
+shell estén disponibles, pero sí algunas de ellas:
 .PP
-.I Sustitución de Tilde
-La tilde (~) será sustituida por nuestro directorio de inicio. Si añadimos un
-nombre de usuario tras la tilde, entonces será sustituido por el directorio
-de entrada al sistema del usuario especificado.
+.I Sustitución de tilde.
+La tilde (~) será sustituida por nuestro directorio de inicio. Si
+añadimos un nombre de usuario tras la tilde, entonces será sustituido
+por el directorio de entrada al sistema del usuario especificado.
 .PP
-Por ejemplo, ~guest es el directorio del usuario invitado (literalmente, guest), mientras
-que ~/guest es el directorio guest en nuestro directorio de inicio.
+Por ejemplo, ~coco sería el directorio de un supuesto usuario denominado
+"coco", mientras que ~/coco es el directorio coco dentro de nuestro
+propio directorio de inicio.
 .PP
-.I Directorio Anterior
-Podemos saltar al directorio donde estábamos anteriormente de la mano del
+.I Directorio anterior.
+Podemos volver al directorio donde estábamos anteriormente empleando el
 nombre de directorio especial '-' del siguiente modo:
 .B cd -
 .PP
-.I directorios de CDPATH
+.I Directorios en CDPATH.
 Si el directorio especificado al comando
 .B cd
-no está en el directorio actual, entonces Midnight Commander
-utiliza el valor de la variable de entorno
+no está en el directorio actual, entonces Midnight Commander utiliza el
+valor de la variable de entorno
 .B CDPATH
-para buscar el directorio en cualquiera de los directorios mencionados.
+para buscar el directorio en cualquiera de los directorios enumerados.
 .PP
-Por ejemplo, podríamos asignar nuestra variable
+Por ejemplo, podríamos asignar a nuestra variable
 .B CDPATH
-como ~/src:/usr/src, permitiéndonos cambiar nuestro directorio a
-cualquiera de los directorios dentro de ~/src y /usr/src, desde cualquier lugar
-dentro del sistema de ficheros usando su nombre relativo (por ejemplo
-cd linux podría llevarnos a /usr/src/linux).
+el valor ~/src:/usr/src, lo que nos permitiría cambiar de directorio
+a cualquiera de los directorios dentro de ~/src y /usr/src, desde
+cualquier lugar del sistema de ficheros, usando sólo su nombre relativo
+(por ejemplo cd linux podría llevarnos a /usr/src/linux).
 .PP
 .\"NODE "  Macro Substitution"
 .SH "  Sustitución de Macro"
-.PP
 Cuando se accede al
 .\"LINK2"
 menú de usuario,
@@ -2340,7 +2341,7 @@ con la pulsación de esa tecla.
 .PP
 .B F9
 Alterna entre la visualización con y sin formato: en el modo con formato
-se interpretan algunas sequencias de caracteres para mostrar texto en
+se interpretan algunas secuencias de caracteres para mostrar texto en
 negrita y subrayado con diferentes colores. Como en el caso anterior,
 la etiqueta del botón muestra el estado contrario al actual.
 .PP
@@ -2388,44 +2389,45 @@ Editar Fichero de Extensiones.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor de Ficheros Interno"
-El editor interno proporciona la mayoría de funcionalidades de los editores
-comunes de pantalla completa. Es invocado pulsando
+El editor interno incorpora las prestaciones habituales de los editores
+a pantalla completa. Se inicia pulsando
 .B F4
-indicado por la variable
+supuesto que la variable
 .I use_internal_edit
-en el fichero de inicialización. Tiene un tamaño límite de fichero extensible
-de dieciséis megabytes y edita los ficheros binarios de manera impecable.
+esté presente en el fichero de inicialización. El tamaño de los ficheros
+está limitado a dieciséis megabytes ampliables y edita sin problemas
+ficheros binarios.
 .PP
-Las características actualmente soportadas son: Copia
-desplazamiento, borrado, corte, y pegado de bloques;
+Las características soportadas actualmente son: copia desplazamiento,
+borrado, corte, y pegado de bloques;
+.IR "deshacer paso a paso" ;
+menús desplegables; inserción de ficheros; definición de macros;
+buscar y reemplazar usando expresiones regulares (y nuestro propio
+buscar y reemplazar basado en formatos de scanf/printf); selección de
+texto con mayúsculas-cursor (sólo para la consola de linux); alternancia
+insertar-sobreescribir; y la opción de pasar bloques de texto por comandos
+externos como indent.
 .PP
-.I "Tecla para tecla Deshacer";
-menús emergentes; inserción de ficheros; definición de macros; expresión regular
-buscar y reemplazar (y nuestra propia localizar y cambiar de scanf-printf );
-resaltado de texto tipo MS Windows-Macintosh con mayúsculas-cursor
-(para la consola de linux sólo); intercambio insertar-sobreescribir ; y una opción
-para pasar bloques de texto a los comandos del shell sangrado.
-.PP
-El editor es muy fácil de utilizar y no requiere de aprendizaje alguno.
-Para conocer la función de las teclas, basta consultar el menú emergente apropiado.
-Otras teclas son: Mayúsculas + teclas de movimiento producen el resaltado de
-texto.
-.B Ctrl-Insert
+El editor es muy fácil de usar y no requiere aprendizaje alguno.
+Para conocer las teclas asignadas a cada función, basta consultar los
+menús correspondientes. Además, las teclas de desplazamiento con la
+tecla de mayúsculas seleccionan texto. Se puede seleccionar con el ratón,
+aunque podemos recuperar su funcionamiento habitual en terminales (copiar
+y pegar) manteniendo pulsada la tecla mayúsculas.
+.B Ctrl-Ins
 copia al fichero
-.B cooledit.clip  y
-.B Mayúsculas-Insert
+.B cooledit.clip
+y
+.B Mayúsculas-Ins
 pega desde
-.B cooledit.clip.
+.BR cooledit.clip .
 .B Mayúsculas-Supr
-corta a
-.B cooledit.clip,
+corta y copia en
+.BR cooledit.clip ,
 y
 .B Ctrl-Supr
-Elimina el texto resaltado. La tecla de terminación también realiza un Return
-con un sangrado automático. la selección con ratón también funciona, y podemos
-utilizar el ratón normalmente manteniendo pulsada la tecla mayúsculas
-mientras arrastramos el ratón para permitir el trabajo normal del ratón
-en el terminal.
+elimina el texto resaltado. La tecla Intro produce un salto de línea
+con sangrado automático opcional.
 .PP
 Para definir una macro, pulsar
 .B Ctrl-R
@@ -2444,16 +2446,15 @@ en nuestro directorio de inicio. Podemos eliminar una macro borrando
 la línea adecuada en este fichero.
 .PP
 .B F19
-formateará código C cuando esté resaltado. Para que funcione
-esto, crearemos un fichero ejecutable llamado
-.B cedit/edit.indent.rc
-en nuestro directorio de inicio conteniendo lo siguiente:
-.PP
-.nf
-#!/bin/sh
-/usr/bin/indent -kr -pcs ~/cedit/cooledit.block >& /dev/null
-cat /dev/null > ~/cedit/cooledit.error
-.fi
+formateará el bloque seleccionado (sea texto, código
+.B C
+o
+.B C++
+u otro). Esto está controlado por el fichero
+.B @prefix@/share/mc/edit.indent.rc
+que se copia la primera vez que se usa en
+.B .mc/cedit/edit.indent.rc
+en el directorio personal.
 .PP
 Podemos usar la búsqueda scanf y Buscar y cambiar
 una cadena en formato C. Primero miraremos
@@ -2662,7 +2663,6 @@ que es manipular ficheros con ftpfs sobre una conexión lenta.
 .PP
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Sistema de ficheros de envío FIcheros por SHell (fish)"
-.PP
 El fish es un sistema de ficheros por red que permite manipular ficheros
 en una máquina remota como si estuvieran almacenados localmente. Para
 ello es preciso que el sistema remoto este ejecutando el servidor fish
@@ -2739,23 +2739,19 @@ Ejemplos:
 .PP
 .\"NODE "  SMB File System"
 .SH "  Sistema de ficheros SMB"
-El smbfs permite manipular ficheros en máquinas remotas con los protocolos
-denominados SMB (o CIFS). Esto incluye Windows Trabajo en Grupo, Windows 9x,
-Windows NT, Windows 2000 y Samba.
-Para comenzar a usarlo, se puede emplear la "Conexión por SMB..."
-(accesible desde la barra de  menús) o bien cambiar de directorio a un
-directorio virtual cuyo nombre sea de la forma:
+El smbfs permite manipular ficheros en máquinas remotas con el protocolo
+denominado SMB (o CIFS). Esto incluye Windows Trabajo en Grupo, Windows
+9x/ME/XP, Windows NT, Windows 2000 y Samba. Para comenzar a usarlo,
+se puede emplear la "Conexión por SMB..." (accesible desde la barra de
+menús) o bien cambiar de directorio a un directorio virtual cuyo nombre
+sea de la forma:
 .PP
-.I /#smb:maquina[/nombre-recurso][/directorio-remoto]
+.I /#smb:[usuario@]maquina[/recurso][/directorio-remoto]
 .PP
 Los elementos
-.I nombre-recurso
-y
-.I directorio-remoto
-con opcionales. El
-.I usuario, dominio
-y
-.I contraseña
+.IR "usuario" , " recurso " y " directorio-remoto"
+son opcionales. El
+.IR "usuario" , " dominio " y " contraseña"
 se pueden especificar en un cuadro de diálogo.
 .PP
 Ejemplos:
@@ -2763,6 +2759,7 @@ Ejemplos:
 .nf
     /#smb:maquina/Compartido
     /#smb:otramaquina
+    /#smb:invitado@maquina/publico/leyes
 .fi
 .PP
 .\"NODE "  Undelete File System"
@@ -2792,7 +2789,7 @@ antes de empezar a navegar por los ficheros allí contenidos.
 .\"NODE "Colors"
 .SH "Colores"
 Midnight Commander intentará determinar si nuestro terminal soporta
-el uso de color utilizando la base de datos del terminal y nuestro nombre de terminal. Algunas veces
+el uso de color utilizando la base de datos de terminales y nuestro nombre de terminal. Algunas veces
 estará confundido, por lo que deberemos forzar el modo en color o deshabilitar el modo de color
 usando el argumento -c y -b respectivamente.
 .PP
@@ -2816,7 +2813,7 @@ color_terminals=nombre-terminal1,nombre-terminal2...
 .PP
 El programa puede compilarse con ncurses y slang, ncurses no
 ofrece la posibilidad de forzar el modo en color: ncurses utiliza la
-información de en la base de datos del terminal.
+información de la base de datos de terminales.
 .PP
 Midnight Commander ofrece una forma de cambiar los colores por defecto.
 Actualmente los colores se configuran a través de la variable de entorno
@@ -2903,46 +2900,39 @@ azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco
 .PP
 .\"NODE "Special Settings"
 .SH "Ajustes Especiales"
-La mayoría de las opciones de Midnight Commander pueden cambiarse
-desde los menús. Sin embargo, hay un pequeño número de ajustes que sólo pueden ser
-modificados editando el fichero de configuración
+La mayoría de las opciones de Midnight Commander pueden cambiarse desde
+los menús. Sin embargo, hay un pequeño número de ajustes para los que
+es necesario editar el fichero de configuración.
 .PP
-Esas variables pueden seleccionarse en nuestro fichero ~/.mc/ini:
+Estas variables se pueden cambiar en nuestro fichero ~/.mc/ini:
 .PP
-.I clear_before_exec.
+.I clear_before_exec
 .IP
 Por defecto Midnight Commander limpia la pantalla antes de ejecutar un
-comando. Si preferimos ver la salida del comando
-en la parte inferior de la pantalla, editaremos nuestro fichero ~/mc.ini y cambiaremos el valor del
-campo clear_before_exec a 0.
+comando. Si preferimos ver la salida del comando en la parte inferior
+de la pantalla, editaremos nuestro fichero ~/mc.ini y cambiaremos el
+valor del campo clear_before_exec a 0.
 .PP
-.I confirm_view_dir.
+.I confirm_view_dir
 .IP
-Si pulsamos F3 en un directorio, normalmente MC entra en ese directorio. Si
-este valor está a 1, entonces MC pedirá confirmación antes
-de cambiar el directorio si tenemos ficheros marcados.
+Al pulsar F3 en un directorio, normalmente MC entra en ese directorio. Si
+este valor está a 1, entonces MC pedirá confirmación antes de cambiar
+el directorio si tenemos ficheros marcados.
 .PP
-.I drop_menus.
-.IP
-Si está definida esta variable, al pulsar F9 aparecen los menús desplegados.
-Si no, sólo aparecerán la cabeceras de menú, y tendremos que seleccionar uno
-con las teclas del cursor, ratón o letra resaltada para abrirlo y poder
-acceder a la opción deseada en el menú.
-.PP
-.I ftpfs_retry_seconds.
+.I ftpfs_retry_seconds
 .IP
 Este valor es el número de segundos que Midnight Commander esperará
 antes de intentar volver a conectar con un servidor de ftp que ha denegado el
 acceso. Si el valor es cero, el programa no reintentará el acceso.
 .PP
-.I ftpfs_use_passive_connections.
+.I ftpfs_use_passive_connections
 .IP
 Esta opción está desactivada por defecto. Hace que el código de FTPfs utilice el
 modo de apertura pasivo para transferir ficheros. Esto es usado por aquellos
 que están detrás de un encaminador con filtrado de paquetes. Esta opción sólo funciona si
 estamos utilizando un proxy para ftp.
 .PP
-.I max_dirt_limit.
+.I max_dirt_limit
 .IP
 Especifica cuántas actualizaciones de pantalla pueden saltarse al menos en el visor
 de ficheros interno. Normalmente este valor no es significativo, porque
@@ -2954,12 +2944,12 @@ que la pantalla se actualice dando saltos.
 Parece ser que poniendo max_dirt_limit a 10 produce el mejor comportamiento,
 y éste es el valor por defecto.
 .PP
-.I mouse_move_pages.
+.I mouse_move_pages
 .IP
 Controla cuándo el desplazamiento de pantalla realizado con el ratón se realiza por páginas o línea
 a línea en los paneles.
 .PP
-.I mouse_move_pages_viewer.
+.I mouse_move_pages_viewer
 .IP
 Controla cuándo el desplazamiento de pantalla realizado con el ratón se realiza por páginas o línea
 a línea en el visor de ficheros interno.
@@ -2997,20 +2987,6 @@ Cuando utilizamos la combinación C-o para volver a la pantalla de usuario, si
 está activada, tendremos un nuevo shell. De otro modo, pulsando cualquier tecla
 nos devolverá a Midnight Commander.
 .PP
-.I show_all_if_ambiguous.
-.IP
-Por defecto Midnight Commander muestra todas las posibles
-.\"LINK2"
-terminaciones
-.\"Completion"
-si la solución es ambigua si pulsamos
-.B M-Tab
-por segunda vez, la primera vez sólo completa hasta donde le sea posible
-y en caso de ambigüedad pita. Si queremos ver todas las
-posibles conclusiones antes de pulsar
-.B M-Tab,
-pondremos esta opción a 1.
-.PP
 .I torben_fj_mode
 .IP
 Si este modificador existe, entonces las teclas Inicio y Fin funcionarán de manera
@@ -3024,23 +3000,6 @@ irá al primer fichero del panel.
 La tecla Fin tiene un comportamiento similar: Irá a la línea central del panel, si
 está situada en la mitad superior del panel; si no irá a la línea inferior del panel a menos que
 ya estemos ahí, en cuyo caso moverá la selección al último nombre de fichero del panel.
-.PP
-.I highlight_mode
-Por defecto toda la información de los paneles se mostrará con
-el mismo color. Si esta variable está a 1, entonces las señales
-.I perm
-o
-.I mode
-en el formato de pantalla tendrán la habilidad de mostrar los derechos de
-acceso del usuario para el fichero mostrado. Un trio adecuado de derechos
-de lectura, escritura y ejecución destacados con el color amarillo
-.RI ( selected ).
-Además, si la variable es igual a 2, entonces todas las líneas serán
-mostradas con el color que corresponda a su tipo (véase
-.\"LINK2"
-Colores).
-.\"Colors"
-La enfatización por colores también funciona en este modo.
 .PP
 .I use_file_to_guess_type
 .IP
@@ -3064,7 +3023,7 @@ del sistema sin necesidad de privilegios de superusuario. El programa
 busca definiciones de teclas en el fichero de inicialización del sistema
 .B @prefix@/share/mc/mc.lib
 o en el del usuario
-.B ~/.mc/ini,
+.BR ~/.mc/ini ,
 en la sección "terminal:nuestro-terminal" y si no en "terminal:general".
 Cada línea comienza con el identificador de la tecla, seguido de un signo
 de igual y la definición de la tecla. Para representar el carácter de escape
@@ -3090,7 +3049,7 @@ complete      tecla para completar
 .PP
 Ejemplo: para indicar que la secuencia Escape + [ + O + p corresponde
 a la tecla de insertar, hay que colocar en el fichero
-.B ~/.mc/ini:
+.BR ~/.mc/ini :
 .PP
 .nf
 insert=\\e[Op

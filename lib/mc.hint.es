@@ -1,5 +1,5 @@
 Midnight Commander (c) 1995-2001 The Free Software Foundation
-Ayudita: C-x t copia los nombres de archivos en la línea de órdenes.
+Ayudita: C-x t pone los archivos marcados en la línea de órdenes.
 Ayudita: C-x p copia la trayectoria completa en la línea de órdenes.
 Ayudita: C-x C-p copia la trayectoria del panel opuesto en la línea de órdenes.
 Ayudita: M-Tab (o Esc+Tab) completa nombres; dos veces y muestra una lista.
@@ -8,7 +8,7 @@ Ayudita: Para introducir un carácter especial: C-q y el caracter.
 Ayudita: ¿Harto de mensajitos? Se quitan en el menú Opciones/Presentación.
 Ayudita: Para seleccionar directorios añadir "/" tras el patrón a buscar.
 Ayudita: Si no funcionan las teclas de función, ESC+número sirve.
-Ayudita: El WWW del Midnight Commander está en http://www.gnome.org/mc/
+Ayudita: El web del Midnight Commander está en http://www.gnome.org/mc/
 Ayudita: Comunique cualquier defecto a mc-devel@gnome.org
 Ayudita: El sitio oficial del Midnight Commander es http://www.gnome.org/mc/
 Ayudita: El tabulador cambia de panel.
