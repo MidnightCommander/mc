@@ -736,10 +736,10 @@ void load_key_defs (void)
      * Load keys from mc.lib before ~/.mc/ini, so that the user
      * definitions override global settings.
      */
-    load_keys_from_section (getenv ("TERM"), libfile);
     load_keys_from_section ("general", libfile);
-    load_keys_from_section (getenv ("TERM"), profile_name);
+    load_keys_from_section (getenv ("TERM"), libfile);
     load_keys_from_section ("general", profile_name);
+    load_keys_from_section (getenv ("TERM"), profile_name);
 
     /* We don't want a huge database loaded in core */
     free_profile_name (libfile);
