@@ -349,6 +349,7 @@ vfs_s_super *vfs_s_new_super (vfs *me)
     super->name = NULL;
     super->fd_usage = 0;
     super->me = me;
+    return super;
 }
 
 void vfs_s_insert_super (vfs *me, vfs_s_super *super)

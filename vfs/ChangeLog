@@ -1,3 +1,7 @@
+Wed Dec  2 14:06:49 KST 1998  Sung-Hyun Nam  <namsh@lgic.co.kr>
+
+	* direntry.c (vfs_s_new_super): Added the missing return value.
+
 Sun Nov 29 02:54:54 1998  Timur I. Bakeyev <timur@com.bat.ru>
 
 	* vfs.h: (Temporary?) fix to the compiling error: Some of the error
