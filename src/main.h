@@ -99,7 +99,7 @@ extern int output_starts_shell;
 extern int midnight_shutdown;
 extern char search_buffer [256];
 extern char cmd_buf [512];
-extern int run_desktop;
+extern char *cmdline_geometry;
 
 #if HAVE_GNOME
 #define MENU_PANEL get_current_panel ()
@@ -187,8 +187,6 @@ void edition_post_exec (void);
 void done_menu (void);
 void init_menu (void);
 void exec_shell (void);
-
-void main_corba_register_server (void);
 
 #ifdef OS2_NT
 #    define MC_BASE ""

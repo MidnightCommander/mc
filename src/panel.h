@@ -158,6 +158,9 @@ typedef struct {
 
     int dragging;
 
+    /* Unique numerical ID for session management */
+    int id;
+
     /* Used for scrolling nicely during drags */
     int timer_id;
     int drag_motion_x;

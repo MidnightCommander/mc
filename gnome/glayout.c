@@ -26,6 +26,7 @@
 #include "setup.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
+#include "gsession.h"
 #include "listing-iconic.xpm"
 #include "listing-brief-list.xpm"
 #include "listing-list.xpm"
@@ -333,11 +334,11 @@ gnome_exit (void)
 		GNOME_STOCK_BUTTON_CANCEL,
 		NULL);
 	v = gnome_dialog_run (GNOME_DIALOG (w));
-	if (v == 0){
+	if (v == 0) {
 		/*
 		 * We do not want to be restarted by the session manager now
 		 */
-		gnome_client_set_restart_style (session_client, GNOME_RESTART_NEVER);
+		session_set_restart (FALSE);
 		gmc_do_quit ();
 	}
 }
@@ -705,17 +706,19 @@ copy_uiinfo_widgets (GnomeUIInfo *uiinfo, gpointer **dest)
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {
-	PanelContainer *container = g_new (PanelContainer, 1);
-	WPanel     *panel;
-	GtkWidget  *app, *vbox;
-	int        xpos, ypos, width, height;
+	PanelContainer *container;
+	WPanel *panel;
+	GtkWidget *app, *vbox;
+	int xpos, ypos, width, height;
 	GnomeUIInfo *uiinfo;
+	char buf[50];
+
+	container = g_new (PanelContainer, 1);
 
 	gnome_parse_geometry (geometry, &xpos, &ypos, &width, &height);
-	
+
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
-	gtk_window_set_wmclass (GTK_WINDOW (app), "gmc", "gmc");
 
 	/* Geometry configuration */
 	if (width != -1 && height != -1)
@@ -727,7 +730,13 @@ create_container (Dlg_head *h, char *name, char *geometry)
 
 	panel = panel_new (name);
 
-	
+	/* Set the unique name for session management */
+
+	sprintf (buf, "%d", panel->id);
+	gtk_window_set_wmclass (GTK_WINDOW (app), "gmc", buf);
+
+	/* Create the holder for the contents */
+
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
@@ -739,7 +748,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 
 	my_app_create_menus (GNOME_APP (app), uiinfo, panel);
 	copy_uiinfo_widgets (panel_view_menu_uiinfo, &panel->view_menu_items);
-	
+
 	create_new_menu (GNOME_APP (app), panel);
 
 	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_NEVER));
@@ -749,7 +758,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 		gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu_without_desktop);
 	else
 		gnome_app_install_menu_hints (GNOME_APP (app), gnome_panel_menu_with_desktop);
-	
+
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
 			    GTK_SIGNAL_FUNC (panel_enter_event),
@@ -766,7 +775,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	 */
 	panel->widget.wdata = (widget_data) vbox;
 	container->panel = panel;
-	
+
 	containers = g_list_append (containers, container);
 
 	if (!current_panel_ptr){
@@ -787,7 +796,9 @@ new_panel_with_geometry_at (char *dir, char *geometry)
 	panel = create_container (desktop_dlg, dir, geometry);
 	add_widget (desktop_dlg, panel);
 	set_current_panel (panel);
+#if 0
 	x_flush_events ();
+#endif
 
 	return panel;
 }

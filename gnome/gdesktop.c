@@ -20,6 +20,7 @@
 #include "gconf.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
+#include "gdesktop-init.h"
 #include "gicon.h"
 #include "gmain.h"
 #include "gmetadata.h"
@@ -1364,6 +1365,7 @@ create_panel_from_desktop (void)
 	panel->total = total;
 	panel->selected = selected_index;
 	panel->is_a_desktop_panel = TRUE;
+	panel->id = -1;
 
 	return panel;
 }
@@ -2399,19 +2401,22 @@ set_background_image (GtkWidget *widget, gpointer data)
 {
 	gchar *bg_capplet;
 	gchar *argv[1];
+	GtkWidget *msg_box;
+
 	bg_capplet = gnome_is_program_in_path ("background-properties-capplet");
+
 	if (bg_capplet) {
 		argv[0] = bg_capplet;
 		gnome_execute_async (bg_capplet, 1, argv);
 		g_free (bg_capplet);
 	} else {
-		GtkWidget *msg_box;
-		msg_box = gnome_message_box_new (_("Unable to locate the file:\nbackground-properties-capplet\n"
-						   "in your path.\n\nWe are unable to set the background."),
-						 GNOME_MESSAGE_BOX_WARNING,
-						 GNOME_STOCK_BUTTON_OK,
-						 NULL);
-		gnome_dialog_run (msg_box);
+		msg_box = gnome_message_box_new (
+			_("Unable to locate the file:\nbackground-properties-capplet\n"
+			  "in your path.\n\nWe are unable to set the background."),
+			GNOME_MESSAGE_BOX_WARNING,
+			GNOME_STOCK_BUTTON_OK,
+			NULL);
+		gnome_dialog_run (GNOME_DIALOG (msg_box));
 	}
 }
 static GnomeUIInfo gnome_panel_new_menu [] = {

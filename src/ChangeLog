@@ -1,3 +1,33 @@
+1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* dlg.c (dlg_run_done): Do not call the callback of a NULL current
+	widget.
+
+	* setup.h: Added missing prototype for setup_init().
+
+	* filegui.c (check_progress_buttons): Added a missing return
+	value.
+
+	* dlg.c (remove_widget): Added a missing return value.
+
+	* main.c: Removed the global directory_list variable.
+	Removed the main_corba_register_server() function.
+
+	* main.h: Removed the global run_desktop variable.
+
+	* panel.h: Now the panel structure has a unique numerical ID used
+	for session management.
+
+	* screen.c (panel_new): Maintain a unique ID for each panel.
+
+	* main.c (maybe_display_linksdir): Handle display of the desktop
+	init dir here.
+	(main): Call gnome_check_super_user().
+	(init_corba_with_args): Call corba_init_server().
+
+	* main.c (init_corba_with_args): Do CORBA initialization here.  Also
+	removed the global force_activation option.
+
 1999-03-29  Jonathan Blandford  <jrb@redhat.com>
 
 	* main.c (main): updated message.

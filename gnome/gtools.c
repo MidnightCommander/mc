@@ -20,26 +20,20 @@
 #include "color.h"
 #include "gmain.h"
 #include "gwidget.h"
+
 Dlg_head *last_query_dlg;
 static int sel_pos;
 
-void query_set_sel (int new_sel)
+void
+query_set_sel (int new_sel)
 {
 	sel_pos = new_sel;
 }
 
-static void
-pack_button (WButton *button, GtkBox *box)
-{
-	if (!button)
-		return;
-	gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (button->widget.wdata), 0, 0, 0);
-}
-
-int query_dialog (char *header, char *text, int flags, int count, ...)
+int
+query_dialog (char *header, char *text, int flags, int count, ...)
 {
 	va_list ap;
-	WLabel    *label;
 	GtkWidget *dialog;
 	int i, result = -1;
 	const gchar **buttons;
@@ -94,7 +88,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 }
 
 /* To show nice messages to the users */
-Dlg_head *message (int error, char *header, char *text, ...)
+Dlg_head *
+message (int error, char *header, char *text, ...)
 {
 	va_list  args;
 	char     buffer [4096];

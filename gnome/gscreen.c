@@ -2022,10 +2022,11 @@ static void
 panel_tree_check_auto_expand (WPanel *panel, GtkCTreeNode *current)
 {
 	GtkDTree *dtree = GTK_DTREE (panel->tree);
-	GtkCList *clist = GTK_CLIST (dtree);
 	GList *tmp_list = dtree->auto_expanded_nodes;
-	GList *free_list;
+#if 0
+	GtkCList *clist = GTK_CLIST (dtree);
 	gint row, old_y, new_y;
+#endif
 
 	if (current) {
 		while (tmp_list) {

@@ -157,6 +157,14 @@ desktop_icon_realize (GtkWidget *widget)
 
 	gdk_window_set_decorations (widget->window, 0);
 	gdk_window_set_functions (widget->window, 0);
+
+	/* Remove the client leader property so that the window manager will not
+	 * save SM information for icons.
+	 */
+
+	gdk_property_delete (widget->window, gdk_atom_intern ("WM_CLIENT_LEADER", FALSE));
+
+	/* Set the proper GNOME hints */
 	
 	gnome_win_hints_init ();
 

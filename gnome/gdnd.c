@@ -18,6 +18,7 @@
 #include "gscreen.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
+#include "gdesktop.h"
 #include "gdnd.h"
 
 

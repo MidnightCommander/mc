@@ -341,7 +341,7 @@ int remove_widget (Dlg_head *h, void *what)
     Widget_Item *first, *p;
 
     if (!h->current)
-	    return;
+	    return 0;
     
     first = p = h->current;
 
@@ -866,7 +866,9 @@ void init_dlg (Dlg_head *h)
 /* Shutdown the run_dlg */
 void dlg_run_done (Dlg_head *h)
 {
-    (*h->callback) (h, h->current->dlg_id, DLG_END);
+    if (h->current)
+	(*h->callback) (h, h->current->dlg_id, DLG_END);
+
     current_dlg = (Dlg_head *) h->previous_dialog;
     if (current_dlg){
 

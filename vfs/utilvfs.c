@@ -102,7 +102,7 @@ char *vfs_split_url (char *path, char **host, char **user, int *port, char **pas
 	    else
 		*pass = g_strdup (inner_colon);
 	}
-	if (*pcopy != NULL)
+	if (*pcopy != 0)
 	    *user = g_strdup (pcopy);
 	else
 	    default_is_anon = 0;

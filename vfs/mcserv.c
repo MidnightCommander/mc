@@ -63,6 +63,7 @@
 #endif
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/wait.h>
 #include <errno.h>
 #include <signal.h>
 #ifdef SCO_FLAVOR
@@ -1109,7 +1110,9 @@ char *get_client (int portnum)
     struct hostent *hp;
     char hostname [255];
     int yes = 1;
+#ifdef __EMX__
     char *me;
+#endif
     
     if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
 	return "Can't create socket";

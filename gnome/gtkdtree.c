@@ -18,6 +18,7 @@
 #include "main.h"
 #include "treestore.h"
 #include "gtkdtree.h"
+#include "../vfs/vfs.h"
 
 #ifdef HACK
 # define mc_opendir opendir

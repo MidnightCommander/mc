@@ -1,6 +1,7 @@
 #ifndef __SETUP_H
 #define __SETUP_H
 
+char *setup_init (void);
 void save_layout (void);
 void save_configure (void);
 void load_setup (void);

@@ -1292,7 +1292,6 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     struct dir *dcache;
     int got_intr = 0;
     int dot_found = 0;
-    int dot_dot_found = 0;
     int has_spaces = (strchr (remote_path, ' ') != NULL);
 
     canonicalize_pathname (remote_path);

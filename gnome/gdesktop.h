@@ -1,6 +1,6 @@
 /* Desktop management for the Midnight Commander
  *
- * Copyright (C) 1998 The Free Software Foundation
+ * Copyright (C) 1998-1999 The Free Software Foundation
  *
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Miguel de Icaza <miguel@nuclecu.unam.mx>
@@ -66,6 +66,8 @@ gboolean    do_eject (char *filename);
 void desktop_arrange_icons (void);
 void desktop_rescan_devices (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);
+void desktop_create_url (const char *filename, const char *title, const char *url, const char *icon);
 
 extern int desktop_wm_is_gnome_compliant;
+
 #endif

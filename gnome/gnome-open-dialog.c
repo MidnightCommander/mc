@@ -17,12 +17,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
+#include "util.h"
 #include <gnome.h>
 #include "gnome-open-dialog.h"
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include <string.h>
 #include <unistd.h>
+
 static void gnome_open_dialog_init		   (GnomeOpenDialog *open_dialog);
 static void gnome_open_dialog_class_init           (GnomeOpenDialogClass *klass);
 static void gnome_open_dialog_destroy              (GtkObject *object);

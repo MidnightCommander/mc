@@ -865,10 +865,16 @@ void
 vfs_add_current_stamps (void)
 {
     vfs_stamp_path (current_dir);
-    if (get_current_type () == view_listing)
-        vfs_stamp_path (cpanel->cwd);
-    if (get_other_type () == view_listing)
-	vfs_stamp_path (opanel->cwd);
+
+    if (cpanel) {
+	if (get_current_type () == view_listing)
+	    vfs_stamp_path (cpanel->cwd);
+    }
+
+    if (opanel) {
+	if (get_other_type () == view_listing)
+	    vfs_stamp_path (opanel->cwd);
+    }
 }
 #endif
 

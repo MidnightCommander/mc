@@ -1,3 +1,45 @@
+1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.c (desktop_icon_realize): Remove the
+	WM_CLIENT_LEADER property from icon windows so that window
+	managers will not store SM information for them.
+
+	* gnome-open-dialog.c: Added missing #includes.
+
+	* gdesktop-init.c (desktop_init_at): Removed an unused variable.
+
+	* gdesktop.h: Added some missing prototypes.
+
+	* gmain.h: Added some missing prototypes.
+
+	* Makefile.in: Added gsession.[ch] to the list of sources.
+
+	* gmain.c (create_panels): Consider whether we have a CORBA server
+	and session management.
+
+	* gdesktop.c: #include "gdesktop-init.h"
+	* gdesktop.c: Added a missing cast to GNOME_DIALOG.
+
+	* gmain.c (create_panels): Removed the run_desktop global
+	variable.
+
+	* glayout.c (create_container): Set the wmclass of the panel to
+	include its unique ID.
+
+	* gsession.[ch]: New file with the functions that deal with
+	session management.
+
+	* glayout.c (gnome_exit): Use session_set_restart().
+
+	* gcorba.c (corba_init): Now returns an int with an error value.
+	(corba_init_server): Initialize the server properly.
+	Fixed all the object implementation code.
+	(corba_create_window): New function used to create a window with
+	the CORBA server.
+
+	* gmain.c (gnome_check_super_user): Now the check for running as
+	root is done here.  There should be no GUI code in src/.
+
 1999-03-29  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdesktop.c (create_desktop_dir): improved wording.

@@ -955,12 +955,15 @@ void directory_history_add (WPanel * panel, char *s);
 WPanel *
 panel_new (char *panel_name)
 {
+#ifdef HAVE_GNOME
+    static int panel_id = 0;
+#endif
     WPanel *panel;
     char *section;
     int i, err;
 
     panel = g_new0 (WPanel, 1);
-    
+
     /* No know sizes of the panel at startup */
     init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
 		 panel_callback, (destroy_fn) panel_destroy,
@@ -968,7 +971,7 @@ panel_new (char *panel_name)
 
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
-    
+
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd)-2);
     strcpy (panel->lwd, ".");
 
@@ -995,14 +998,15 @@ panel_new (char *panel_name)
     panel->format_modified  = 1;
 #ifdef HAVE_GNOME
     panel->is_a_desktop_panel = FALSE;
+    panel->id = panel_id++;
 #endif
-    
+
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
-    
+
     for(i = 0; i < LIST_TYPES; i++)
 	panel->user_status_format [i] = g_strdup (DEFAULT_USER_FORMAT);
-    
+
     panel->search_buffer [0] = 0;
     panel->frame_size = frame_half;
     section = g_strconcat ("Temporal:", panel->panel_name, NULL);
@@ -1026,7 +1030,7 @@ panel_new (char *panel_name)
 	}
 	set_panel_formats (panel);
     }
-    
+
     /* Load the default format */
     panel->count = do_load_dir (&panel->dir, panel->sort_type,
 				panel->reverse, panel->case_sensitive, panel->filter);

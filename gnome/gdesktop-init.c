@@ -82,8 +82,7 @@ desktop_init_at (const char *dir)
 	DIR *d;
 	struct dirent *dent;
 	const int links_extlen = sizeof (".links")-1;
-	struct stat s;
-	
+
 	d = opendir (dir);
 	if (!d)
 		return;
@@ -100,7 +99,7 @@ desktop_init_at (const char *dir)
 		if (access (fname, X_OK) == 0){
 			char *desktop_quoted;
 			char *command;
-			
+
 			desktop_quoted = name_quote (desktop_directory, 0);
 			command = g_strconcat (fname, " --desktop-dir", desktop_quoted, NULL);
 			g_free (desktop_quoted);
@@ -115,12 +114,12 @@ desktop_init_at (const char *dir)
 			g_free (fname);
 			continue;
 		}
-		
+
 		if (strcmp (dent->d_name + len - links_extlen, ".links")){
 			g_free (fname);
 			continue;
 		}
-		
+
 		desktop_load_init_from (fname);
 	}
 }

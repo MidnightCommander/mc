@@ -10,6 +10,7 @@ void xtoolkit_end (void);
 
 extern Dlg_head *desktop_dlg;
 extern int nowindows;
+extern int corba_have_server;
 
 /* Required by the standard code */
 widget_data xtoolkit_create_dialog   (Dlg_head *h, int with_grid);
@@ -44,6 +45,8 @@ int gmc_can_view_file (char *filename);
 int gmc_view (char *filename, int start_line);
 void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
+void gnome_check_super_user (void);
+gint create_new_menu_from (char *file, GtkWidget *shell, gint pos);
 
 /*
  * stuff from gaction.c
@@ -60,7 +63,9 @@ struct gmc_color_pairs_s {
 };
 
 void gmc_do_quit (void);
+#if 0
 extern GnomeClient *session_client;
+#endif
 
 extern struct gmc_color_pairs_s gmc_color_pairs [];
 #endif

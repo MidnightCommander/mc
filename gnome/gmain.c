@@ -21,9 +21,11 @@
 #include "panel.h"
 #include "gscreen.h"
 #include "gcmd.h"
+#include "gcorba.h"
+#include "gdesktop.h"
+#include "gsession.h"
 #include "command.h"
 #include "cmd.h"
-#include "gdesktop.h"
 
 GdkColorContext *mc_cc;
 
@@ -52,13 +54,14 @@ int dialog_panel_callback (struct Dlg_head *h, int id, int msg);
 /* The Dlg_head for the whole desktop */
 Dlg_head *desktop_dlg;
 
-int run_desktop = 1;
-
 /* Session client */
 GnomeClient *session_client;
 
 /* Used during argument processing */
 extern int finish_program;
+
+/* Whether the gmc server was present or not */
+int corba_have_server = FALSE;
 
 /* This is only used by the editor, so we provide a dummy implementation */
 void
@@ -453,52 +456,48 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	return 0;
 }
 
-extern char *cmdline_geometry;
-
-typedef struct {
-	char *dir; char *geometry;
-} dir_and_geometry;
-
-static int
-idle_create_panel (void *data)
+/* Ugly function to support the hack described in non_corba_create_panels() */
+static gint
+idle_destroy_panel (gpointer data)
 {
-	dir_and_geometry *dg = data;
+	WPanel *panel;
 
-	new_panel_with_geometry_at (dg->dir, dg->geometry);
-	g_free (data);
-
-	return 0;
-}
-
-static int
-idle_destroy_window (void *data)
-{
-	WPanel *panel = data;
-
+	panel = data;
 	gnome_close_panel (GTK_WIDGET (panel->widget.wdata), panel);
-	return 0;
+	return FALSE;
 }
 
-/*
- * wrapper for new_panel_with_geometry_at.
- * first invocation is called directly, further calls use
- * the idle handler
+/* Initializes the desktop and creates the initial panels.  This is to be used
+ * when we do not have a CORBA server.
  */
-static WPanel *
-create_one_panel (char *dir, char *geometry)
+static void
+non_corba_create_panels (void)
 {
-	static int first = 1;
-	
-	if (first){
-		first = 0;
-		return new_panel_with_geometry_at (dir, geometry);
-	} else {
-		dir_and_geometry *dg = g_new (dir_and_geometry, 1);
-		dg->dir = dir;
-		dg->geometry = geometry;
-		gtk_idle_add (idle_create_panel, dg);
-		return NULL;
-	}
+	WPanel *panel;
+
+	desktop_init ();
+	gnome_init_panels ();
+
+	cmdline = command_new (0, 0, 0);
+	the_hint = label_new (0, 0, 0, NULL);
+	desktop_dlg = create_dlg (0, 0, 24, 80, 0,
+				  dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
+
+	session_load ();
+
+	/* The following is a hack.  We have to have at least one panel for
+	 * run_dlg() to be happy.  So we destroy it in the idle loop if we
+	 * didn't need it in the first place.  This idle function is to be run
+	 * at a higher priority than the one used in session_load().
+	 */
+
+	panel = new_panel_at (".");
+	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, idle_destroy_panel, panel);
+	panel->widget.options |= W_PANEL_HIDDEN;
+
+	run_dlg (desktop_dlg);
+
+	desktop_destroy ();
 }
 
 /*
@@ -511,46 +510,14 @@ create_one_panel (char *dir, char *geometry)
 void
 create_panels (void)
 {
-	WPanel *panel;
+	if (!corba_have_server)
+		non_corba_create_panels ();
+	else {
+		if (!nowindows)
+			corba_create_window ();
 
-	if (run_desktop)
-		desktop_init ();
-	
-	cmdline = command_new (0, 0, 0);
-	the_hint = label_new (0, 0, 0, NULL);
-
-	gnome_init_panels ();
-	
-	desktop_dlg = create_dlg (0, 0, 24, 80, 0, dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
-
-#if 0
-	if (directory_list){
-
-		for (p = directory_list; p; p = p->next){
-			create_one_panel (p->data, cmdline_geometry);
-		}
-		panel = NULL;
-	} else
-#endif
-	  {
-		panel = create_one_panel (".", cmdline_geometry);
-
-		if (nowindows){
-			gtk_idle_add (idle_destroy_window, panel);
-			panel->widget.options |= W_PANEL_HIDDEN;
-		}
+		session_set_restart (FALSE);
 	}
-#if 0
-	g_list_free (directory_list);
-#endif
-
-	main_corba_register_server ();
-
-	run_dlg (desktop_dlg);
-
-	/* shutdown gnome specific bits of midnight commander */
-
-	desktop_destroy ();
 }
 
 void
@@ -561,7 +528,7 @@ gmc_do_quit (void)
 	quit = 1;
 	dlg_stop (desktop_dlg);
 }
-
+#if 0
 static void
 session_die (void)
 {
@@ -632,7 +599,7 @@ session_management_setup (char *name)
 				    GTK_SIGNAL_FUNC (session_die), NULL);
 	}
 }
-
+#endif
 /*
  * Configures the GtkWindow/GnomeDialog from a WPanel.
  *
@@ -644,4 +611,29 @@ gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel)
 {
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
 	gnome_dialog_set_parent (dialog, GTK_WINDOW (panel->xwindow));
+}
+
+/**
+ * gnome_check_super_user:
+ * @void: 
+ * 
+ * Puts out a warning if the user is running gmc as root.  If the user selects
+ * Cancel, then gmc will terminate.
+ **/
+void
+gnome_check_super_user (void)
+{
+	GtkWidget *warning_dlg;
+	GnomeClient *client;
+
+	if (geteuid () != 0)
+		return;
+
+	warning_dlg = gnome_message_box_new (
+		_("You are running the GNOME Midnight Commander as root. \n\n"
+		  "You will not be protected from severly damaging your system."),
+		GNOME_MESSAGE_BOX_WARNING,
+		GNOME_STOCK_BUTTON_OK, NULL);
+
+	gnome_dialog_run (GNOME_DIALOG (warning_dlg));
 }

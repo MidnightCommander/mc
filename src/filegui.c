@@ -179,7 +179,7 @@ check_progress_buttons (FileOpContext *ctx)
     FileOpContextUI *ui;
 
     if (ctx->ui == NULL)
-	    return;
+	    return FILE_CONT;
     
     ui = ctx->ui;
 

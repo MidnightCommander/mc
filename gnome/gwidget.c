@@ -326,7 +326,9 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 void
 x_update_input (WInput *in)
 {
+#ifdef USE_GNOME_ENTRY
 	GnomeEntry *gnome_entry;
+#endif
 	GtkEntry   *entry;
 	char       *text;
 	int        draw = 0;
@@ -545,6 +547,7 @@ x_label_set_text (WLabel *label, char *text)
 		gtk_label_set (GTK_LABEL (label->widget.wdata), text);
 }
 
+#if 0
 /* Buttonbar */
 static void
 buttonbar_clicked (GtkWidget *widget, WButtonBar *bb)
@@ -563,12 +566,15 @@ buttonbar_clicked (GtkWidget *widget, WButtonBar *bb)
 	}
 	printf ("Mhm, should not happen or The Cow is out\n");
 }
+#endif
 
 int
 x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 {
 	GtkWidget *hbox;
+#if 0
 	int i;
+#endif
 	
 	hbox = gtk_hbox_new (0, 0);
 #if 0

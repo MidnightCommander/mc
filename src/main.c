@@ -81,7 +81,6 @@
 
 #ifdef HAVE_CORBA
 #    include <libgnorba/gnorba.h>
-#    include "gcorba.h"
 #endif
 
 #include <glib.h>
@@ -138,6 +137,12 @@
 #include "../vfs/extfs.h"
 
 #include "popt.h"
+
+#ifdef HAVE_GNOME
+#include "gcorba.h"
+#include "gmain.h"
+#include "gsession.h"
+#endif
 
 /* "$Id$" */
 
@@ -2637,8 +2642,6 @@ static void parse_an_arg (poptContext state,
 #endif
 
 char *cmdline_geometry = NULL;
-char **directory_list = NULL;
-int   force_activation = 0;
 
 static struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
@@ -2715,21 +2718,58 @@ static struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
     { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
     {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
-    {"force-activation",0,POPT_ARG_NONE, &force_activation, 0, N_("Force activation even if a server is already running"), NULL},
     {"desktop-linksdir", '\0', POPT_ARG_NONE, &display_linksdir, 0,
-     N_("Displays the directory that holds the .links startup files")},
+     N_("Display the directory that holds the .links startup files and exit")},
 #endif
 
     { NULL, 		0,			0, NULL, 0 }
 };
 
-void
-main_corba_register_server (void)
+/* Convenience function to display the desktop initialization directory and exit */
+static void
+maybe_display_linksdir (void)
 {
-#ifdef HAVE_CORBA
-	corba_register_server ();
-#endif
+	if (display_linksdir) {
+		puts (DESKTOP_INIT_DIR);
+		exit (1);
+	}
 }
+
+#ifdef HAVE_CORBA
+/* Initializes the ORB and does the initial argument processing */
+static void
+init_corba_with_args (int *argc, char **argv, poptContext *ctx)
+{
+    CORBA_Environment ev;
+
+    CORBA_exception_init (&ev);
+    orb = gnome_CORBA_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, ctx,
+					    GNORBA_INIT_SERVER_FUNC, &ev);
+
+    maybe_display_linksdir ();
+
+    if (ev._major != CORBA_NO_EXCEPTION) {
+	    CORBA_exception_free (&ev);
+	    g_warning ("Could not initialize CORBA");
+	    exit (1);
+    }
+
+    CORBA_exception_free (&ev);
+
+    if (!corba_init_server ()) {
+	    g_warning ("Could not initialize the CORBA server");
+	    exit (1);
+    }
+}
+#endif
+
+#ifndef HAVE_CORBA
+void
+corba_create_window (void)
+{
+	/* nothing */
+}
+#endif
 
 static void
 handle_args (int argc, char *argv [])
@@ -2740,28 +2780,12 @@ handle_args (int argc, char *argv [])
 
 #ifdef HAVE_GNOME
 #ifdef HAVE_CORBA
-    CORBA_Environment ev;
-
-    CORBA_exception_init (&ev);
-    orb = gnome_CORBA_init_with_popt_table (
-	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, GNORBA_INIT_SERVER_FUNC, &ev);
-
-    if (display_linksdir){
-	    puts (DESKTOP_INIT_DIR);
-	    exit (1);
-    }
-
-    corba_init ();
-    if (!force_activation)
-	    if (try_to_activate_running_copy ())
-		    exit (1);
+    init_corba_with_args (&argc, argv, &ctx);
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
 #endif
-    if (display_linksdir){
-	    puts (DESKTOP_INIT_DIR);
-	    exit (1);
-    }
+    maybe_display_linksdir ();
+
     gtk_widget_push_visual (gdk_imlib_get_visual ());
     gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
@@ -2913,15 +2937,17 @@ int main (int argc, char *argv [])
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
-
-    /* This is here to debug the CORBA async invocations */
+#if 0
+    /* This is here to debug startup stuff */
     {
-	    volatile  int i = 1;
+	    volatile int i = 0;
 
+	    printf ("GMC IS WAITING %d\n", getpid ());
 	    while (!i)
 		    ;
 
     }
+#endif
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
     
@@ -2956,7 +2982,7 @@ int main (int argc, char *argv [])
 
     mc_tree_store_load ();
 
-    session_management_setup (argv [0]);
+    session_init ();
     probably_finish_program ();
 #endif
     
@@ -3065,17 +3091,11 @@ int main (int argc, char *argv [])
     if (alternate_plus_minus)
         application_keypad_mode ();
 #   endif
-/* INSERT ROOT DIALOG HERE */
+
 #ifdef HAVE_GNOME
-    if (geteuid () == 0) {
-	    GtkWidget *warning_dlg;
-	    warning_dlg = gnome_message_box_new (_("You are running the GNOME Midnight Commander as root. \n\n"
-						   "You will not be protected from severly damaging your system.")
-						 GNOME_MESSAGE_BOX_WARNING,
-						 GNOME_STOCK_BUTTON_OK, NULL);
-	    gnome_dialog_run (GNOME_DIALOG (warning_dlg));
-    }
+    gnome_check_super_user ();
 #endif
+
     if (show_change_notice){
 	message (1, _(" Notice "),
 		 _(" The Midnight Commander configuration files \n"

@@ -1,3 +1,19 @@
+1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* vfs.c (vfs_add_current_stamps): Only do stamping of the panels
+	if they exist.
+
+	* mcserv.c: #include <sys/wait.h>
+	(get_client): Put `#ifdef __EMX__' around an otherwise-unused
+	variable.
+
+	* utilvfs.c (vfs_split_url): Fix NULL <-> 0 confusion when
+	comparing characters.
+
+	* ftpfs.c (retrieve_dir): Removed unused variable dot_dot_found.
+
+	* extfs.c (extfs_init): Assign `key' to c, not `&key'.
+
 Sun Mar 28 23:50:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.h (vfs_translate_url): Fixed the macro which is used when 

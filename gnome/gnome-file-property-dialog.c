@@ -434,7 +434,7 @@ static GtkWidget *
 generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 {
 	GtkWidget *retval;
-	const gchar *icon;
+	gchar *icon;
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
 	icon = g_strdup (gicon_get_filename_for_icon (fp_dlg->im));
