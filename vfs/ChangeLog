@@ -1,3 +1,12 @@
+2003-08-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* direntry.c (vfs_s_dump): Commented out.
+	* extfs.c (s_readlink): Fix return value and possible buffer
+	overflow.
+	* mcfs.c (mcfs_readlink): Fix return value.
+	* mcserv.c (do_readlink):  Fix possible off-by-one.
+	(commands): Make const array and remove needless comma.
+
 2003-08-29  Pavel Roskin  <proski@gnu.org>
 
 	* ftpfs.c (initconn): Use more portable initialization.

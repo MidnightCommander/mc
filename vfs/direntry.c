@@ -1011,6 +1011,7 @@ vfs_s_ferrno (vfs *me)
     return me->verrno;
 }
 
+#if 0
 void
 vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
 {
@@ -1030,6 +1031,7 @@ vfs_s_dump (vfs *me, char *prefix, vfs_s_inode *ino)
 	}
     }
 }
+#endif
 
 char *
 vfs_s_getlocalcopy (vfs *me, char *path)

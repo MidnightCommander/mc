@@ -997,7 +997,8 @@ static int s_fstat (void *data, struct stat *buf)
     return 0;
 }
 
-static int s_readlink (vfs *me, char *path, char *buf, int size)
+static int
+s_readlink (vfs *me, char *path, char *buf, int size)
 {
     struct archive *archive;
     char *q;
@@ -1008,10 +1009,11 @@ static int s_readlink (vfs *me, char *path, char *buf, int size)
 	return -1;
     entry = find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
-    	return -1;
-    if (!S_ISLNK (entry->inode->mode)) ERRNOR (EINVAL, -1);
-    if (size > (i = strlen (entry->inode->linkname))) {
-    	size = i;
+	return -1;
+    if (!S_ISLNK (entry->inode->mode))
+	ERRNOR (EINVAL, -1);
+    if (size < (i = strlen (entry->inode->linkname))) {
+	i = size;
     }
     strncpy (buf, entry->inode->linkname, i);
     return i;

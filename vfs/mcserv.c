@@ -582,7 +582,7 @@ do_readlink (void)
     int n;
 
     rpc_get (msock, RPC_STRING, &file, RPC_END);
-    n = readlink (file, buffer, 2048);
+    n = readlink (file, buffer, 2048 - 1);
     send_status (n, errno);
     if (n >= 0) {
 	buffer[n] = 0;
@@ -1080,7 +1080,7 @@ do_login (void)
 
 /* This structure must be kept in synch with mcfs.h enums */
 
-static struct _command {
+static const struct _command {
     char *command;
     void (*callback) (void);
 } commands[] = {
@@ -1111,7 +1111,7 @@ static struct _command {
     "getupdir", do_getupdir}, {
     "login", do_login}, {
     "quit", do_quit}, {
-"utime", do_utime},};
+"utime", do_utime}};
 
 static int ncommands = sizeof (commands) / sizeof (struct _command);
 

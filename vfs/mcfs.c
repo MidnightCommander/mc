@@ -985,9 +985,12 @@ mcfs_readlink (vfs *me, char *path, char *buf, int size)
     if (!rpc_get (mc->sock, RPC_STRING, &stat_str, RPC_END))
 	return the_error (-1, EIO);
 
+    status = strlen (stat_str);
+    if (status < size)
+	size = status;
     strncpy (buf, stat_str, size);
     g_free (stat_str);
-    return strlen (buf);
+    return size;
 }
 
 static int
