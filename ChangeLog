@@ -1,5 +1,7 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove now unused variables LIBVFS and LVFS.
+
 	* configure.in: Remove unused variables LINTL and INTLDEPS.
 
 	* configure.in: Add -I\$(top_builddir)/intl to CPPFLAGS when

@@ -272,18 +272,12 @@ if test $have_socket = yes; then
 fi
 AC_SUBST(NETFILES)
 
-LIBVFS=""
-LVFS=""
 vfs_type="normal"
 if test $use_vfs = yes
 then
-	LIBVFS="libvfs-mc.a"
-	LVFS="-lvfs-mc"
 	AC_MSG_RESULT([Using the VFS switch code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
-AC_SUBST(LIBVFS)
-AC_SUBST(LVFS)
 
 screen_manager=unknown
 search_ncurses=false
@@ -804,7 +798,7 @@ if test "x$SAMBAFILES" != x; then
 fi
 
 AM_CONDITIONAL(USE_EDIT, [test -n "$LIBEDIT_A"])
-AM_CONDITIONAL(USE_VFS, [test -n "$LIBVFS"])
+AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test -n "$NETFILES"])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$SAMBAFILES"])
