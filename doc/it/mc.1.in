@@ -103,163 +103,165 @@ pannello.
 .PP
 .\"NODE "Overview"
 .SH "Panoramica"
-The screen of the Midnight Commander is divided into four parts.
-Almost all of the screen space is taken up by two directory panels.
-By default, the second line from the bottom of the screen is the
-shell command line, and the bottom line shows the function key labels.
-The topmost line is the
+Lo schermo del Midnight Commander è diviso in quattro parti.
+Quasi tutto lo spazio è occupato dai due pannelli directory.
+Per default, la seconda linea dal fondo è la riga di comando, 
+mentre quella in basso mostra le etichette dei tasti funzione.
+La riga più in alto è la
 .\"LINK2"
-menu bar line.
+riga dei menu.
 .\"Menu Bar"
-The menu bar line may not be visible, but appears if you click the
-topmost line with the mouse or press the F9 key.
+La riga dei menu può essere invisibile, ma compare se clicchi la
+riga più in alto con il mouse o se premi il tasto F9.
 .PP
-The Midnight Commander provides a view of two directories at the same
-time. One of the panels is the current panel (a selection bar is in
-the current panel). Almost all operations take place on the current
-panel. Some file operations like Rename and Copy by default use the
-directory of the unselected panel as a destination (don't worry, they
-always ask you for confirmation first). For more information, see the
-sections on the
+Il Midnight Commander fornisce la vista di due directory 
+contemporaneamente. Uno dei due pannelli è quello corrente (la barra
+di selezione è presente solo in questo). Quasi tutte le operazioni
+hanno lougo nel pannello corrente. Alcune azioni come Rinomina e 
+Copia usano la directory del pannello non selezionato come valore
+predefinito di destinazione (ma si richiede sempre una conferma prima).
+Per informazioni aggiuntive, vedere le sezioni sui 
 .\"LINK2"
-Directory Panels,
+Pannelli Directory,
 .\"Directory Panels"
-the
+i
 .\"LINK2"
-Left and Right Menus
+Menu Sinistro e Destro
 .\"Left and Right Menus"
-and the
+e
 .\"LINK2"
-File Menu.
+Menu File.
 .\"File Menu"
 .PP
-You can execute system commands from the Midnight Commander by simply
-typing them. Everything you type will appear on the shell command line,
-and when you press Enter the Midnight Commander will execute the
-command line you typed; read the
+E' possibile eseguire comandi di sistema dal Midnight Commander 
+semplicemente battendoli. Ogni cosa scritta apparirà sulla linea di 
+comando e quando si preme l'invio il Midnight Commander eseguirà la
+riga di comando appena battuta; leggere le sezioni
 .\"LINK2"
-Shell Command Line
+Riga di Comando
 .\"Shell Command Line"
-and
+e
 .\"LINK2"
-Input Line Keys
+Tasti di Ingresso
 .\"Input Line Keys"
-sections to learn more about the command line.
+per saperne di più sulla riga di comando.
 .PP
 .\"NODE "Mouse Support"
 .SH "Supporto Mouse"
-The Midnight Commander comes with mouse support.  It is activated
-whenever you are running on an
+Il Midnight Commander è fornito di supporto mouse. Esso viene
+attivato ogniqualvolta lo si esegue in un terminale
 .B xterm(1)
-terminal (it even works if you take a telnet or rlogin connection to
-another machine from the xterm) or if you are running on a Linux
-console and have the
+(funziona anche se si fa una connessione telnet o rlogin con
+un'altra macchina da un xterm) o se sta funzionando su una console Linux
+e si ha il mouse server
 .B gpm
-mouse server running.
+in funzione.
 .PP
-When you left click on a file in the directory panels, that file is
-selected; if you click with the right button, the file is marked (or
-unmarked, depending on the previous state).
+Quando si fa click con il tasto sinistro in un file nel pannello
+directory, il file viene selezionato; se si fa click con il tasto destro
+il file viene marcato (o smarcato, a seconda dello stato precedente).
 .PP
-Double-clicking on a file will try to execute the command if it is
-an executable program; and if the
+Se il file è un programma eseguibile, il doppio click su di esso lo eseguirà 
+altrimenti se il
 .\"LINK2"
-extension file
+file estensioni
 .\"Extension File Edit"
-has a program specified for the file's extension, the specified
-program is executed.
+ha un programma specifico per quell'estensione del file, il suddetto programma
+verrà eseguito.
 .PP
-Also, it is possible to execute the commands assigned to the function
-key labels by clicking on them.
+E' anche possibile eseguire i comandi assegnati ai tasti funzione 
+cliccando sulle etichette dei tasti.
 .PP
-If a mouse button is clicked on the top frame line of the directory panel,
-it is scrolled one page up.  Likewise, a click on the bottom frame line
-will cause scrolling one page down.  This frame line method works also
-in the
+Se un tasto del mouse viene premuto sulla linea in cima al pannello directory
+il pannello sfoglia di una pagina in alto. Allo stesso modo, un click sulla 
+riga in basso provocherà un cambio di pagina in basso. Questo metodo dei bordi
+funziona anche nel
 .\"LINK2"
-Help Viewer
+Visualizzatore dell'Aiuto
 .\"Contents"
-and the
+e nal 
 .\"LINK2"
-Directory Tree.
+Albero Directory.
 .\"Directory Tree"
 .PP
-The default auto repeat rate for the mouse buttons is 400
-milliseconds. This may be changed to other values by editing the
+L'auto ripetizione predefinita per il mouse è di 400 millisecondi. Questa
+può essere cambiata in valori differenti modificando il file
 .\"LINK2"
 \&~/.mc/ini
 .\"Save Setup"
-file and changing the 
+e cambiando il parametro
 .I mouse_repeat_rate
-parameter.
+.
 .PP
-If you are running the Commander with the mouse support, you can bypass
-the Commander and get the default mouse behavior (cutting and pasting
-text) by holding down the Shift key.
+Se il Commander sta funzionando con il supporto mouse, si può saltarlo
+ed ottenere il funzionamento del mouse normale (taglia e incolla di testo)
+tenendo premuto il tasto Maiuscolo.
 .SH ""
-.SH "Keys"
-Some commands in the Midnight Commander involve the use of the
+.\"NODE "Keys"
+.SH "Tasti"
+Alcuni comandi nel Midnight Commander presuppongono l'uso dei tasti
 .I Control
-(sometimes labeled CTRL or CTL) and the 
+(talvolta chiamato CTRL o CTL) e  
 .I Meta
-(sometimes labeled ALT or even Compose) keys. In this manual we will
-use the following abbreviations:
+(talvolta chiamato ALT o anche Compose). In questo manuale si utilizzeranno
+le seguenti abbreviazioni:
 .PP
-C-<chr> means hold the Control key while typing the character
-<chr>. Thus C-f would be: hold the Control key and type f.
+C-<chr> significa premere il tasto control mentre si batte il carattere
+<chr>. Perciò C-f sarà: premi e tieni premuto il tasto Control e premi f.
 .PP
-M-<chr> means hold the Meta or Alt key down while typing <chr>. If
-there is no Meta or Alt key, type ESC, release it, then type the
-character <chr>. 
+M-<chr> significa premere il tasto Meta o Alt mentre si batte <chr>. Se
+non c'è un tasto Meta o Alt, premere ESC, rilasciarlo, poi premere il
+carattere <chr>. 
 .PP
-All input lines in the Midnight Commander use an approximation to
-the GNU Emacs editor's key bindings.
+Tutte le linee di ingresso nel Midnight Commander usano un'approssimazione
+dei tasti del GNU Emacs.
 .PP
-There are many sections which tell about the keys. The following are
-the most important.
+Ci sono molte sezioni che parlano dei tasti. Le seguenti sono le 
+principali.
 .PP
-The
+La sezione
 .\"LINK2"
-File Menu
+Menu File
 .\"File Menu"
-section documents the keyboard shortcuts for the commands appearing in
-the File menu. This section includes the function keys. Most of these
-commands perform some action, usually on the selected file or the
-tagged files.
+documenta le abbreviazioni di tasti per i comandi che appaiono nel
+menu File. Questa sezione include i tasti funzione. Molti di questi comandi
+lavorano sui file selezionati o sui marcati.
 .PP
-The
+La sezione
 .\"LINK2"
-Directory Panels
+Pannelli Directory
 .\"Directory Panels"
-section documents the keys which select a file or tag files as a
-target for a later action (the action is usually one from the file
-menu).
+documenta i tasti che selezionano o marcano i file come obiettivo
+per una seguente azione (l'azione normalmente deriva dal menu file).
 .PP
-The
+La sezione
 .\"LINK2"
-Shell Command Line
+Linea di Comando
 .\"Shell Command Line"
-section list the keys which are used for entering and editing command
-lines. Most of these copy file names and such from the directory
-panels to the command line (to avoid excessive typing) or access the
-command line history.
+elenca i tasti utilizzati per immettere e modificare linee di comando.
+Molti di questi copiano nomi di file o altro dal pannello directory
+alla riga di comando (per evitare troppo lavoro di battitura) o per
+accedere allo storico comandi.
 .PP
+I
 .\"LINK2"
-Input Line Keys
+Tasti Linea di Ingresso
 .\"Input Line Keys"
-are used for editing input lines. This means both the command line and
-the input lines in the query dialogs.
+sono usati per modificare le linee di ingresso. Cioè sia la linea di comando
+che le linee di ingresso nelle finestre di interrogazione.
 .PP
-.SH "  Miscellaneous Keys"
-Here are some keys which don't fall into any of the other categories:
+.\"NODE "  Miscellaneous Keys"
+.SH "  Tasti Vari"
+Qua ci sono alcuni tasti che non sono classificabili in nessuna delle
+altre categorie:
 .PP
-.B Enter.
-If there is some text in the command line (the one at the bottom of
-the panels), then that command is executed. If there is no text in the
-command line then if the selection bar is over a directory the
-Midnight Commander does a 
+.B Invio.
+Se c'è del testo nella linea di comando (quella in fondo ai pannelli),
+allora quel comando viene eseguito. Se non c'è testo nella linea di
+comando allora se la barra di selezione è sopra una directory il
+Midnight Commander esegue un
 .B chdir(2)
-to the selected directory and reloads the information on the panel;
+alla directory selezionata e ricarica le informazioni sul pannello;
 if the selection is an executable file then it is executed. Finally,
 if the extension of the selected file name matches one of the
 extensions in the
@@ -269,14 +271,14 @@ extensions file
 then the corresponding command is executed.
 .PP
 .B C-l.
-Repaint all the information in the Midnight Commander.
+Ridisegna tutto nel Midnight Commander.
 .PP
 .B C-x c.
-Run the
+Esegue il comando
 .\"LINK2"
 Chmod
 .\"Chmod"
-command on a file or on the tagged files.
+su un file o su un gruppo di file marcati.
 .PP
 .B C-x o.
 Run the
@@ -491,107 +493,112 @@ to the last entry, M-n takes you to the next one.
 .B M-h.
 Displays the history for the current input line. 
 .PP
-.SH "  General Movement Keys"
-The help viewer, the file viewer and the directory tree use common
-code to handle moving. Therefore they accept exactly the same
-keys. Each of them also accepts some keys of its own.
+.\"NODE "  General Movement Keys"
+.SH "  Tasti Generali di Movimento"
+Il visualizzatore dell'aiuto, il visualizzato dei file e l'albero directory
+usano un codice comune per gestire il movimento. Per questa ragione essi
+accettano esattamente gli stessi tasti. Ogniuno di questi però accetta anche
+altri tasti indipendenti.
 .PP
-Other parts of the Midnight Commander use some of the same movement
-keys, so this section may be of use for those parts too.
+Altre parti del Midnight Commander usano alcuni degli stessi tasti di
+movimento, perciò questa sezione può applicarsi anche a quelle sezioni.
 .PP
 .B Up, C-p.
-Moves one line backward.
+Si sposta di una linea indietro.
 .PP
 .B Down, C-n.
-Moves one line forward.
+Si sposta di una linea avanti.
 .PP
 .B Prev Page, Page Up, M-v.
-Moves one page up.
+Si sposta di una pagina in alto.
 .PP
 .B Next Page, Page Down, C-v.
-Moves one page down.
+Si sposta di una pagina in basso.
 .PP
 .B Home, A1.
-Moves to the beginning.
+Si sposta all'inizio.
 .PP
 .B End, C1.
-Move to the end.
+Si sposta alla fine.
 .PP
-The help viewer and the file viewer accept the following keys in
-addition the to ones mentioned above:
+Il visualizzatore dell'aiuto accetta i seguenti tasti in aggiunta a quelli
+menzionati sopra:
 .PP
 .B b, C-b, C-h, Backspace, Delete.
-Moves one page up.
+Si sposta di una pagina in alto.
 .PP
 .B Space bar.
-Moves one page down.
+Si sposta di una pagina in basso.
 .PP
 .B u, d.
-Moves one half of a page up or down.
+Si sposta di mezza pagina in alto o in basso.
 .PP
 .B g, G.
-Moves to the beginning or to the end.
+Si sposta all'inizio o alla fine.
 .PP
-.SH "  Input Line Keys"
-The input lines (they are used for the
+.\"NODE "  Input Line Keys"
+.SH "  Tasti di Linea di Ingresso"
+I tasti di linea di ingresso (sono usati
+per la
 .\"LINK2"
-command line
+riga di comando
 .\"Shell Command Line"
-and for the query dialogs in the program) accept these keys:
+e per i dialoghi di richiesta dati nel programma) accettano
+questi tasti:
 .PP
 .B C-a
-puts the cursor at the beginning of line.
+sposta il cursore all'inizio della linea.
 .PP
 .B C-e
-puts the cursor at the end of the line.
+sposta il cursore alla fine della linea
 .PP
 .B C-b, move-left
-move the cursor one position left.
+sposta il cursore di una posizione a sinistra.
 .PP
 .B C-f, move-right
-move the cursor one position right.
+sposta il cursore di una posizione a destra.
 .PP
 .B M-f
-moves one word forward.
+sposta il cursore di una parola in avanti.
 .PP
 .B M-b
-moves one word backward.
+sposta il cursore di una parola indietro.
 .PP
 .B C-h, backspace
-delete the previous character.
+cancella il carattere precedente.
 .PP
 .B C-d, Delete
-delete the character in the point (over the cursor).
+cancella il carattere nel punto (sopra il cursore).
 .PP
 .B C-@
-sets the mark for cutting.
+imposta il marcatore per tagliare.
 .PP
 .B C-w
-copies the text between the cursor and the mark to a kill buffer and
-removes the text from the input line.
+copia il testo tra il cursore e il marcatore in un kill buffer 
+e rimuove il testo dalla linea di ingresso.
 .PP
 .B M-w
-copies the text between the cursor and the mark to a kill buffer.
+copia il testo tra il cursore ed il marcatore in un kill buffer.
 .PP
 .B C-y
-yanks back the contents of the kill buffer.
+inserisce il contenuto del kill buffer.
 .PP
 .B C-k
-kills the text from the cursor to the end of the line.
+elimina il testo dal cursore alla fine della linea.
 .PP
 .B M-p, M-n
-Use these keys to browse through the command history. M-p takes you
-to the last entry, M-n takes you to the next one.
+Usa questi tasti per navigare attraverso lo storico dei comandi. M-p 
+posiziona sull'ultima voce, M-n posiziona sulla seguente.
 .PP
 .B M-C-h, M-Backspace
-delete one word backward.
+cancella una parola indietro.
 .PP
 .B M-Tab
-does the filename, command, variable, username and hostname
+fa del nomefile, comando, variabile, nomeutente e nomehost il
 .\"LINK2"
-completion
+completamento
 .\"Completion"
-for you.
+automatico.
 .PP
 .SH ""
 .SH "Menu Bar"
@@ -601,14 +608,14 @@ row of the screen. The menu bar has five menus: "Left", "File",
 .PP
 The
 .\"LINK2"
-Left and Right Menus
+Menu Sinistro e Destro
 .\"Left and Right Menus"
-allow you to modify the appearance of the left and right directory
-panels.
+permette di modificare l'apparenza dei pannelli directory di sinistra
+e destra.
 .PP
 The
 .\"LINK2"
-File Menu
+Menu File
 .\"File Menu"
 lists the actions you can perform on the currently selected file or
 the tagged files.
