@@ -1,5 +1,5 @@
 # Note that this is NOT a relocatable package
-%define ver      4.5.7
+%define ver      4.5.16
 %define prefix   /usr
 
 Summary:   Midnight Commander visual shell
@@ -10,7 +10,7 @@ Copyright: GPL
 Group:     Shells
 Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
-BuildRoot: /tmp/mc-%{PACKAGE_VERSION}-root
+BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Requires:  pam >= 0.59
 Prereq:    /sbin/chkconfig
 
@@ -22,7 +22,7 @@ files, and poke into RPMs for specific files.  :-)
 
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
-Requires: mc >= 4.1.31
+Requires: mc >= %{PACKAGE_VERSION}
 Group:    X11/Shells
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
@@ -82,37 +82,38 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 
 %doc FAQ COPYING NEWS README
-/usr/bin/mc
-/usr/bin/mcedit
-/usr/bin/mcmfmt
-/usr/lib/mc/mc.ext
-/usr/lib/mc/mc.hint
-/usr/lib/mc/mc.hlp
-/usr/lib/mc/mc.lib
-/usr/lib/mc/mc.menu
-/usr/lib/mc/bin/cons.saver
-/usr/lib/mc/extfs/*
-/usr/man/man1/*
+%{prefix}/bin/mc
+%{prefix}/bin/mcedit
+%{prefix}/bin/mcmfmt
+%{prefix}/lib/mc/mc.ext
+%{prefix}/lib/mc/mc.hint
+%{prefix}/lib/mc/mc.hlp
+%{prefix}/lib/mc/mc.lib
+%{prefix}/lib/mc/mc.menu
+%{prefix}/lib/mc/bin/cons.saver
+%{prefix}/lib/mc/extfs/*
+%{prefix}/man/man1/*
 %config /etc/profile.d/*
-%dir /usr/lib/mc
-%dir /usr/lib/mc/bin
-%dir /usr/lib/mc/extfs
-%dir /usr/share/mime-info
+%dir %{prefix}/lib/mc
+%dir %{prefix}/lib/mc/bin
 
 %files -n mcserv
 %defattr(-, root, root)
 
 %config /etc/pam.d/mcserv
 %config /etc/rc.d/init.d/mcserv
-%attr(-, root, man)  /usr/man/man8/mcserv.8
-/usr/bin/mcserv
+%attr(-, root, man)  %{prefix}/man/man8/mcserv.8
+%{prefix}/bin/mcserv
 
 %files -n gmc
 %defattr(-, root, root)
-
-/usr/bin/gmc
-/usr/lib/mc/layout
-/usr/share/pixmaps/mc/*
+%{prefix}/bin/gmc
+%{prefix}/bin/plain-gmc
+%{prefix}/lib/mc/layout
+%{prefix}/lib/mc/mc-gnome.ext
+%{prefix}/share/pixmaps/mc/*
+%{prefix}/share/mime-info/mc.keys
+%config %{prefix}/etc/CORBA/servers/*
 
 %changelog
 * Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
