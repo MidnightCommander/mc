@@ -1,0 +1,115 @@
+# Sytnax highlighting for Eiffel 
+# Daniel F Moisset - dmoisset@grulic.org.ar
+# Based on mc's pascal.syntax
+
+context default yellow/24
+
+	keyword whole agent	white/24
+	keyword whole alias	white/24
+	keyword whole as	white/24
+	keyword whole check	white/24
+	keyword whole class	white/24
+	keyword whole create	white/24
+	keyword whole creation	white/24
+	keyword whole debug	white/24
+	keyword whole deferred	white/24
+	keyword whole do	white/24
+	keyword whole else	white/24
+	keyword whole elseif	white/24
+	keyword whole end	white/24
+	keyword whole ensure	white/24
+	keyword whole expanded	white/24
+	keyword whole export	white/24
+	keyword whole external	white/24
+	keyword whole feature	white/24
+	keyword whole from	white/24
+	keyword whole if	white/24
+	keyword whole is	white/24
+	keyword whole indexing	white/24
+	keyword whole inherit	white/24
+	keyword whole inspect	white/24
+	keyword whole invariant	white/24
+	keyword whole like	white/24
+	keyword whole local	white/24
+	keyword whole loop	white/24
+	keyword whole obsolete	white/24
+	keyword whole old	white/24
+	keyword whole once	white/24
+	keyword whole redefine	white/24
+	keyword whole reference	white/24
+	keyword whole rename	white/24
+	keyword whole require	white/24
+	keyword whole rescue	white/24
+	keyword whole retry	white/24
+	keyword whole select	white/24
+	keyword whole then	white/24
+	keyword whole undefine	white/24
+	keyword whole unique	white/24
+	keyword whole until	white/24
+	keyword whole variant	white/24
+	keyword whole when	white/24
+
+	keyword whole Current	brightmagenta/23
+	keyword whole Precursor	brightmagenta/23
+	keyword whole Result	brightmagenta/23
+	keyword whole Void	brightmagenta/23
+
+# prevents - keyword from interfering with comment
+	keyword --	lightgray/22
+
+	keyword :=	brightcyan/6
+	keyword ?=	brightcyan/6
+	keyword !	brightcyan/6
+	keyword :	brightcyan/6
+	keyword ;	brightcyan/6
+	keyword (	brightcyan/6
+	keyword )	brightcyan/6
+	keyword [	brightcyan/6
+	keyword ]	brightcyan/6
+
+	keyword {*}	brightred/6
+
+	keyword \+	cyan/14
+	keyword -	cyan/14
+	keyword \*	cyan/14
+	keyword /	cyan/14
+	keyword >	cyan/14
+	keyword <	cyan/14
+	keyword =	cyan/14
+	keyword ^	cyan/14
+	keyword \\	cyan/14
+	keyword @	cyan/14
+	keyword |	cyan/14
+	keyword whole and	cyan/14
+	keyword whole implies	cyan/14
+	keyword whole not	cyan/14
+	keyword whole xor	cyan/14
+	keyword whole or	cyan/14
+
+# Uncomment this to highlight tabs and trailing spaces
+#	keyword \t yellow/24 red/6
+#	keyword \s\[\s\]\n yellow/24 red/6
+
+# Comments
+context exclusive -- \n	lightgray/22
+        keyword `*' brown/22
+
+# Strings and characters
+context " "	green/green
+	keyword %N	brightgreen/6
+	keyword %R	brightgreen/6
+	keyword %U	brightgreen/6
+	keyword %"	brightgreen/6
+	keyword %'	brightgreen/6
+	keyword %%	brightgreen/6
+	keyword %/\[0123456789\]/	brightgreen/6
+
+context ' '	green/green
+	keyword %N	brightgreen/6
+	keyword %R	brightgreen/6
+	keyword %U	brightgreen/6
+	keyword %"	brightgreen/6
+	keyword %'	brightgreen/6
+	keyword %%	brightgreen/6
+	keyword %/\[0123456789\]/	brightgreen/6
+	

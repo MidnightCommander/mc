@@ -1,3 +1,12 @@
+2004-10-16  Roland Illig  <roland.illig@gmx.de>
+
+	* syntax/eiffel.syntax: Add syntax highlighting rules for the
+	Eiffel programming language.
+	* syntax/Syntax: Bind *.e with eiffel.syntax.
+	* syntax/Makefile.am: Added syntax.eiffel.
+
+	From Daniel F Moisset <dmoisset grulic org ar>
+
 2004-10-12  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* syntax/sql.syntax: Improve sql.syntax file and added several

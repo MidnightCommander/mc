@@ -8,6 +8,7 @@ syntax_DATA =			\
 	changelog.syntax	\
 	diff.syntax		\
 	dos.syntax		\
+	eiffel.syntax		\
 	fortran.syntax		\
 	html.syntax		\
 	java.syntax		\

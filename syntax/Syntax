@@ -20,6 +20,9 @@
 file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 include syntax.syntax
 
+file ..\*\\.(e)$ Eiffel\sSource\sFile
+include eiffel.syntax
+
 file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^(diff|Index:)\s
 include diff.syntax
 
