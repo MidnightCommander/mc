@@ -28,10 +28,6 @@
 
 #include <config.h>
 
-#ifndef NO_SYSLOG_H
-#  include <syslog.h>
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
 #include <stdarg.h>
@@ -42,17 +38,12 @@
 #include <ctype.h>	/* is_digit() */
 
 #include "utilvfs.h"
-
-#include "../src/panel.h"	/* get_current_panel() */
-#include "../src/layout.h"	/* get_current_type() */
-#include "../src/wtools.h"	/* input_dialog() */
+#include "gc.h"
 
 #include "vfs.h"
 #ifdef USE_NETCODE
 #   include "tcputil.h"
 #endif
-
-int vfs_timeout = 60; /* VFS timeout in seconds */
 
 /* They keep track of the current directory */
 static struct vfs_class *current_vfs;
@@ -304,116 +295,6 @@ vfs_get_class (const char *path)
 	vfs = localfs_class;
 
     return vfs;
-}
-
-static struct vfs_stamping *stamps;
-
-/*
- * Returns the number of seconds remaining to the vfs timeout
- *
- * FIXME: currently this is set to 10 seconds.  We should compute this.
- */
-int
-vfs_timeouts ()
-{
-    return stamps ? 10 : 0;
-}
-
-static void
-vfs_addstamp (struct vfs_class *v, vfsid id, struct vfs_stamping *parent)
-{
-    if (!(v->flags & VFSF_LOCAL) && id != (vfsid)-1){
-        struct vfs_stamping *stamp;
-	struct vfs_stamping *last_stamp = NULL;
-        
-        for (stamp = stamps; stamp != NULL; stamp = stamp->next) {
-            if (stamp->v == v && stamp->id == id){
-		gettimeofday(&(stamp->time), NULL);
-                return;
-	    }
-	    last_stamp = stamp;
-	}
-        stamp = g_new (struct vfs_stamping, 1);
-        stamp->v = v;
-        stamp->id = id;
-	if (parent){
-	    struct vfs_stamping *st = stamp;
-	    while (parent){
-		st->parent = g_new (struct vfs_stamping, 1);
-		*st->parent = *parent;
-		parent = parent->parent;
-		st = st->parent;
-	    }
-	    st->parent = 0;
-	}
-	else
-    	    stamp->parent = 0;
-	
-        gettimeofday (&(stamp->time), NULL);
-        stamp->next = 0;
-
-	if (stamps) {
-	    /* Add to the end */
-	    last_stamp->next = stamp;
-	} else {
-	    /* Add first element */
-    	    stamps = stamp;
-	}
-    }
-}
-
-void
-vfs_stamp (struct vfs_class *v, vfsid id)
-{
-    struct vfs_stamping *stamp;
-
-    for (stamp = stamps; stamp != NULL; stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id){
-
-            gettimeofday (&(stamp->time), NULL);
-            if (stamp->parent != NULL)
-                vfs_stamp (stamp->parent->v, stamp->parent->id);
-
-            return;
-        }
-}
-
-static void
-vfs_rm_parents (struct vfs_stamping *stamp)
-{
-    struct vfs_stamping *parent;
-
-    while (stamp) {
-	parent = stamp->parent;
-	g_free (stamp);
-	stamp = parent;
-    }
-}
-
-void
-vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
-{
-    struct vfs_stamping *stamp, *st1;
-
-    for (stamp = stamps, st1 = NULL; stamp != NULL;
-	 st1 = stamp, stamp = stamp->next)
-	if (stamp->v == v && stamp->id == id) {
-	    if (stamp->parent != NULL) {
-		if (removeparents)
-		    vfs_rmstamp (stamp->parent->v, stamp->parent->id, 1);
-		vfs_rm_parents (stamp->parent);
-		stamp->parent = NULL;
-		continue;	/* rescan the tree */
-	    }
-	    if (st1 == NULL) {
-		stamps = stamp->next;
-	    } else {
-		st1->next = stamp->next;
-	    }
-	    g_free (stamp);
-
-	    return;
-	}
 }
 
 static int
@@ -777,158 +658,6 @@ vfs_canon (const char *path)
     }
 }
 
-static vfsid
-vfs_ncs_getid (struct vfs_class *nvfs, const char *dir, struct vfs_stamping **par)
-{
-    vfsid nvfsid;
-    char *dir1;
-
-    dir1 = concat_dir_and_file (dir, "");
-    nvfsid = (*nvfs->getid) (nvfs, dir1, par);
-    g_free (dir1);
-    return nvfsid;
-}
-
-static int
-is_parent (struct vfs_class * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
-{
-    struct vfs_stamping *stamp;
-
-    for (stamp = parent; stamp; stamp = stamp->parent)
-	if (stamp->v == nvfs && stamp->id == nvfsid)
-	    break;
-
-    return (stamp ? 1 : 0);
-}
-
-static void
-_vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
-			    struct vfs_stamping *parent)
-{
-    struct vfs_class *nvfs, *n2vfs, *n3vfs;
-    vfsid nvfsid, n2vfsid, n3vfsid;
-    struct vfs_stamping *par, *stamp;
-    int f;
-
-    /* FIXME: As soon as we convert to multiple panels, this stuff
-       has to change. It works like this: We do not time out the
-       vfs's which are current in any panel and on the other
-       side we add the old directory with all its parents which
-       are not in any panel (if we find such one, we stop adding
-       parents to the time-outing structure. */
-
-    /* There are three directories we have to take care of: current_dir,
-       current_panel->cwd and other_panel->cwd. Athough most of the time either
-       current_dir and current_panel->cwd or current_dir and other_panel->cwd are the
-       same, it's possible that all three are different -- Norbert */
-
-    if (!current_panel)
-	return;
-
-    nvfs = vfs_get_class (current_dir);
-    nvfsid = vfs_ncs_getid (nvfs, current_dir, &par);
-    vfs_rmstamp (nvfs, nvfsid, 1);
-
-    f = is_parent (oldvfs, oldvfsid, par);
-    vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid *) - 1
-	|| f) {
-	return;
-    }
-
-    if (get_current_type () == view_listing) {
-	n2vfs = vfs_get_class (current_panel->cwd);
-	n2vfsid = vfs_ncs_getid (n2vfs, current_panel->cwd, &par);
-	f = is_parent (oldvfs, oldvfsid, par);
-	vfs_rm_parents (par);
-	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f)
-	    return;
-    } else {
-	n2vfs = (struct vfs_class *) -1;
-	n2vfsid = (vfsid) - 1;
-    }
-
-    if (get_other_type () == view_listing) {
-	n3vfs = vfs_get_class (other_panel->cwd);
-	n3vfsid = vfs_ncs_getid (n3vfs, other_panel->cwd, &par);
-	f = is_parent (oldvfs, oldvfsid, par);
-	vfs_rm_parents (par);
-	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
-	    return;
-    } else {
-	n3vfs = (struct vfs_class *) -1;
-	n3vfsid = (vfsid) - 1;
-    }
-
-    if ((*oldvfs->nothingisopen) (oldvfsid)) {
-#if 0				/* need setctl for this */
-	if (oldvfs == &vfs_extfs_ops
-	    && ((extfs_archive *) oldvfsid)->name == 0) {
-	    /* Free the resources immediatly when we leave a mtools fs
-	       ('cd a:') instead of waiting for the vfs-timeout */
-	    (oldvfs->free) (oldvfsid);
-	} else
-#endif
-	    vfs_addstamp (oldvfs, oldvfsid, parent);
-	for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
-	    if ((stamp->v == nvfs && stamp->id == nvfsid)
-		|| (stamp->v == n2vfs && stamp->id == n2vfsid)
-		|| (stamp->v == n3vfs && stamp->id == n3vfsid)
-		|| stamp->id == (vfsid) - 1
-		|| !(*stamp->v->nothingisopen) (stamp->id))
-		break;
-#if 0
-	    if (stamp->v == &vfs_extfs_ops
-		&& ((extfs_archive *) stamp->id)->name == 0) {
-		(stamp->v->free) (stamp->id);
-		vfs_rmstamp (stamp->v, stamp->id, 0);
-	    } else
-#endif
-		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
-	}
-    }
-}
-
-void
-vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
-			   struct vfs_stamping *parent)
-{
-    _vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
-    vfs_rm_parents (parent);
-}
-
-static void
-vfs_stamp_path (char *path)
-{
-    struct vfs_class *vfs;
-    vfsid id;
-    struct vfs_stamping *par, *stamp;
-    
-    vfs = vfs_get_class (path);
-    id  = vfs_ncs_getid (vfs, path, &par);
-    vfs_addstamp (vfs, id, par);
-    
-    for (stamp = par; stamp != NULL; stamp = stamp->parent) 
-	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
-    vfs_rm_parents (par);
-}
-
-void
-vfs_add_current_stamps (void)
-{
-    vfs_stamp_path (current_dir);
-
-    if (current_panel) {
-	if (get_current_type () == view_listing)
-	    vfs_stamp_path (current_panel->cwd);
-    }
-
-    if (other_panel) {
-	if (get_other_type () == view_listing)
-	    vfs_stamp_path (other_panel->cwd);
-    }
-}
-
 /*
  * VFS chdir.
  * Return 0 on success, -1 on failure.
@@ -1175,52 +904,6 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
     return return_value;
 }
 
-/*
- * Hmm, as timeout is minute or so, do we need to care about usecs?
- */
-static inline int
-timeoutcmp (struct timeval *t1, struct timeval *t2)
-{
-    return ((t1->tv_sec < t2->tv_sec)
-	    || ((t1->tv_sec == t2->tv_sec) && (t1->tv_usec <= t2->tv_usec)));
-}
-
-/* This is called from timeout handler with now = 0, or can be called
-   with now = 1 to force freeing all filesystems that are not in use */
-
-void
-vfs_expire (int now)
-{
-    static int locked = 0;
-    struct timeval time;
-    struct vfs_stamping *stamp, *st;
-
-    /* Avoid recursive invocation, e.g. when one of the free functions
-       calls message */
-    if (locked)
-	return;
-    locked = 1;
-
-    gettimeofday (&time, NULL);
-    time.tv_sec -= vfs_timeout;
-
-    for (stamp = stamps; stamp != NULL;){
-        if (now || (timeoutcmp (&stamp->time, &time))){
-            st = stamp->next;
-            (*stamp->v->free) (stamp->id);
-	    vfs_rmstamp (stamp->v, stamp->id, 0);
-	    stamp = st;
-        } else
-            stamp = stamp->next;
-    }
-    locked = 0;
-}
-
-void
-vfs_timeout_handler (void)
-{
-    vfs_expire (0);
-}
 
 void
 vfs_init (void)
@@ -1257,25 +940,16 @@ vfs_init (void)
 void
 vfs_shut (void)
 {
-    struct vfs_stamping *stamp, *st;
     struct vfs_class *vfs;
 
-    for (stamp = stamps, stamps = 0; stamp != NULL;){
-	(*stamp->v->free)(stamp->id);
-	st = stamp->next;
-	g_free (stamp);
-	stamp = st;
-    }
+    vfs_gc_done ();
 
-    if (stamps)
-	vfs_rmstamp (stamps->v, stamps->id, 1);
-    
     if (current_dir)
 	g_free (current_dir);
 
-    for (vfs=vfs_list; vfs; vfs=vfs->next)
-        if (vfs->done)
-	     (*vfs->done) (vfs);
+    for (vfs = vfs_list; vfs; vfs = vfs->next)
+	if (vfs->done)
+	    (*vfs->done) (vfs);
 
     g_slist_free (vfs_openfiles);
 }
@@ -1307,17 +981,4 @@ vfs_translate_url (const char *url)
 	return g_strdup ("/#a");
     else
 	return g_strdup (url);
-}
-
-
-void
-vfs_release_path (const char *dir)
-{
-    struct vfs_class *oldvfs;
-    vfsid oldvfsid;
-    struct vfs_stamping *parent;
-
-    oldvfs = vfs_get_class (dir);
-    oldvfsid = vfs_ncs_getid (oldvfs, dir, &parent);
-    vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
 }

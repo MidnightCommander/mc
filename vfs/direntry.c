@@ -28,6 +28,7 @@
 #include <errno.h>
 
 #include "utilvfs.h"
+#include "gc.h"		/* vfs_rmstamp */
 #include "xdirentry.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x

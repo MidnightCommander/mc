@@ -22,6 +22,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
+#include "gc.h"		/* vfs_add_noncurrent_stamps */
 #include "local.h"
 #include "../src/execute.h"	/* EXECUTE_AS_SHELL */
 

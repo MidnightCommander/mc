@@ -1,3 +1,11 @@
+2003-11-07  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Split garbage collection code into ...
+	* gc.c: ... this.
+	* vfs.h: Corresponding code moved ...
+	* gc.h: ... here.
+	* Makefile.am: Adjustments for the above.
+
 2003-11-05  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Eliminate MC_OP.  Reorder other MC_* macros for

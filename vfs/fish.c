@@ -43,6 +43,7 @@
 
 #include "xdirentry.h"
 #include "vfs.h"
+#include "gc.h"		/* vfs_add_noncurrent_stamps */
 #include "tcputil.h"
 
 #define FISH_DIRECTORY_TIMEOUT 30 * 60

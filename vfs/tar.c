@@ -31,6 +31,7 @@
 #endif
 
 #include "utilvfs.h"
+#include "gc.h"		/* vfs_rmstamp */
 #include "xdirentry.h"
 
 static struct vfs_class vfs_tarfs_ops;

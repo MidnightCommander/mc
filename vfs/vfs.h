@@ -7,14 +7,7 @@
 
 
 typedef void *vfsid;
-
-struct vfs_stamping {
-    struct vfs_class *v;
-    vfsid id;
-    struct vfs_stamping *parent;	/* At the moment applies to tarfs only */
-    struct vfs_stamping *next;
-    struct timeval time;
-};
+struct vfs_stamping;
 
 /* Flags of VFS classes */
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
@@ -130,17 +123,6 @@ vfs_file_is_local (const char *filename)
 {
     return vfs_file_class_flags (filename) & VFSF_LOCAL;
 }
-
-extern int vfs_timeout;
-
-void vfs_stamp (struct vfs_class *, vfsid);
-void vfs_rmstamp (struct vfs_class *, vfsid, int);
-void vfs_add_noncurrent_stamps (struct vfs_class *, vfsid, struct vfs_stamping *);
-void vfs_add_current_stamps (void);
-void vfs_timeout_handler (void);
-void vfs_expire (int);
-int vfs_timeouts (void);
-void vfs_release_path (const char *dir);
 
 void vfs_fill_names (void (*)(char *));
 char *vfs_translate_url (const char *);

@@ -16,6 +16,7 @@ BASICFILES = 			\
 	cpio.c			\
 	direntry.c		\
 	extfs.c 		\
+	gc.c	 		\
 	local.c 		\
 	tar.c			\
 	sfs.c			\
@@ -24,6 +25,7 @@ BASICFILES = 			\
 
 VFSHDRS = 			\
 	ftpfs.h 		\
+	gc.h	 		\
 	local.h			\
 	mcfs.h 			\
 	mcfsutil.h 		\

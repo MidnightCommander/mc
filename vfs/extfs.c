@@ -37,6 +37,7 @@
 #include "utilvfs.h"
 #include "../src/execute.h"	/* For shell_execute */
 #include "vfs.h"
+#include "gc.h"		/* vfs_rmstamp */
 
 #undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
