@@ -85,7 +85,7 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 	/* Paint the mask of the image */
 
 	im = GNOME_CANVAS_IMAGE (dicon->icon)->im;
-	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	gdk_imlib_render (im, icon_width, icon_height);
 	im_mask = gdk_imlib_move_mask (im);
 
 	if (im_mask) {
@@ -142,7 +142,7 @@ reshape (DesktopIcon *dicon)
 
 	/* Calculate new size of widget */
 
-	dicon->width = MAX (icon_width, text_width);
+	dicon->width = MAX (icon_width, SNAP_X);
 	dicon->height = icon_height + SPACING + text_height;
 
 	/* Set new position of children */
@@ -152,9 +152,7 @@ reshape (DesktopIcon *dicon)
 			       "y", 0.0,
 			       NULL);
 
-	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text),
-				    (dicon->width - text_width) / 2,
-				    icon_height + SPACING);
+	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text), 0, icon_height + SPACING);
 
 	/* Create and set the window shape */
 
@@ -272,18 +270,18 @@ static void
 set_text (DesktopIcon *dicon, char *text)
 {
 	GtkArg arg;
-	int icon_width;
+	int icon_height;
 
-	arg.name = "width";
+	arg.name = "height";
 	gtk_object_getv (GTK_OBJECT (dicon->icon), 1, &arg);
-	icon_width = GTK_VALUE_DOUBLE (arg);
+	icon_height = GTK_VALUE_DOUBLE (arg);
 
 	gtk_signal_handler_block (GTK_OBJECT (dicon->text), dicon->w_changed_id);
 	gtk_signal_handler_block (GTK_OBJECT (dicon->text), dicon->h_changed_id);
 
 	gnome_icon_text_item_configure (GNOME_ICON_TEXT_ITEM (dicon->text),
-					0, 0,
-					MAX (SNAP_X, icon_width),
+					0, icon_height + SPACING,
+					SNAP_X,
 					DESKTOP_ICON_FONT,
 					text,
 					TRUE);

@@ -1,3 +1,7 @@
+1998-10-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* desktop-icon.c (reshape): Position the icon text item correctly.
+
 1998-10-27  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* desktop-icon.c (desktop_icon_new): Do now reshape more than
