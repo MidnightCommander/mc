@@ -4055,11 +4055,11 @@ msgstr " Inserisci espressione regolare:"
 
 #: src/view.c:2044
 msgid "Ascii"
-msgstr "Ascii"
+msgstr "Testo"
 
 #: src/view.c:2044
 msgid "Hex"
-msgstr "Hex"
+msgstr "Esadec"
 
 #: src/view.c:2045
 msgid "Goto"
@@ -4071,43 +4071,43 @@ msgstr "Linea"
 
 #: src/view.c:2048
 msgid "RxSrch"
-msgstr "CercaRx"
+msgstr "CercaER"
 
 #: src/view.c:2051
 msgid "EdText"
-msgstr "EdText"
+msgstr "ModTxt"
 
 #: src/view.c:2051
 msgid "EdHex"
-msgstr "EdHex"
+msgstr "ModHex"
 
 #: src/view.c:2053
 msgid "UnWrap"
-msgstr "DesEnv"
+msgstr "NoACapo"
 
 #: src/view.c:2053
 msgid "Wrap"
-msgstr "Envolver"
+msgstr "ACapo"
 
 #: src/view.c:2056
 msgid "HxSrch"
-msgstr "CercaHx"
+msgstr "CercHex"
 
 #: src/view.c:2059
 msgid "Raw"
-msgstr "Raw"
+msgstr "Normale"
 
 #: src/view.c:2059
 msgid "Parse"
-msgstr "Processa"
+msgstr "Filtrat"
 
 #: src/view.c:2063
 msgid "Unform"
-msgstr "Unformat"
+msgstr "NonForm"
 
 #: src/view.c:2063
 msgid "Format"
-msgstr "Formato"
+msgstr "Formatt"
 
 #: src/widget.c:898
 msgid " History "
