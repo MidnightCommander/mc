@@ -239,7 +239,7 @@ static char *pop_directory(GFindDlg *head)
 		return 0;
 }
 
-static void insert_file(GFindDlg *head, char *dir, char *file)
+static void find_add_match(GFindDlg *head, char *dir, char *file)
 {
 	char *tmp_name;
 	static char *dirname;
@@ -269,11 +269,6 @@ static void insert_file(GFindDlg *head, char *dir, char *file)
 	tmp_name = g_strconcat("    ", file, NULL);
 	add_to_list(head, tmp_name, dirname);
 	g_free(tmp_name);
-}
-
-static void find_add_match(GFindDlg *head, char *dir, char *file)
-{
-	insert_file(head, dir, file);
 }
 
 /* 
@@ -577,7 +572,7 @@ static void find_do_edit(GtkWidget *widget, GFindDlg *head)
 static void setup_gui(GFindDlg *head)
 {
 	GtkWidget *sw;
-	GtkWidget *box, *box2;
+	GtkWidget *box1, *box2, *box3;
 
 	head->g_find_dlg = gnome_dialog_new(_("Find file"),
 						GNOME_STOCK_BUTTON_OK, NULL);
@@ -594,10 +589,10 @@ static void setup_gui(GFindDlg *head)
 	head->g_edit = gtk_button_new_with_label(_("Edit this file"));
 	head->g_panelize = gtk_button_new_with_label(_("Send the results to a Panel"));
 
-	box = gtk_hbox_new(TRUE, GNOME_PAD);
-	gtk_box_pack_start(GTK_BOX(box), head->g_change, 0, 1, 0);
-	gtk_box_pack_start(GTK_BOX(box), head->g_again, 0, 1, 0);
-	gtk_box_pack_start(GTK_BOX(box), head->g_start_stop, 0, 1, 0);
+	box1 = gtk_hbox_new(TRUE, GNOME_PAD);
+	gtk_box_pack_start(GTK_BOX(box1), head->g_change, 0, 1, 0);
+	gtk_box_pack_start(GTK_BOX(box1), head->g_again, 0, 1, 0);
+	gtk_box_pack_start(GTK_BOX(box1), head->g_start_stop, 0, 1, 0);
 
 /*	RECOONECT	_("Panelize contents"), */
 /*		_("View"),
@@ -645,14 +640,16 @@ static void setup_gui(GFindDlg *head)
 	gtk_box_pack_start(GTK_BOX(box2), head->g_edit, 0, 0, 0);
 
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
-			   box, TRUE, TRUE, GNOME_PAD_SMALL);
+			   box1, TRUE, TRUE, GNOME_PAD_SMALL);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
 			   box2, TRUE, TRUE, GNOME_PAD_SMALL);
 
 	head->g_status_label = gtk_label_new(_("Searching"));
 	gtk_misc_set_alignment(GTK_MISC(head->g_status_label), 0.0, 0.5);
+	box3 = gtk_hbox_new(1, GNOME_PAD);
+	gtk_container_add(GTK_CONTAINER(box3), head->g_status_label);
 	gtk_box_pack_start(GTK_BOX(GNOME_DIALOG(head->g_find_dlg)->vbox),
-			   head->g_status_label, TRUE, TRUE, GNOME_PAD_SMALL);
+			   box3, TRUE, TRUE, GNOME_PAD_SMALL);
 
 	gtk_widget_show_all(head->g_find_dlg);
 	gtk_widget_hide(GTK_WIDGET(head->g_view));
