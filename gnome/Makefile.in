@@ -30,7 +30,8 @@ GNOMESRCS = 		\
 	gview.c		\
 	gcmd.c		\
 	gprop.c		\
-	gmc-chargrid.c
+	gmc-chargrid.c	\
+	gpageprop.c
 
 GNOMEHDRS = 		\
 	gmain.h 	\
@@ -40,6 +41,7 @@ GNOMEHDRS = 		\
 	gconf.h		\
 	gcmd.h		\
 	gprop.h		\
+	gpageprop.h	\
 	gmc-chargrid.h
 
 ICONS = 			\
@@ -80,7 +82,8 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gcmd.o		\
 	gmc-chargrid.o 	\
 	gview.o		\
-	gprop.o
+	gprop.o		\
+	gpageprop.o
 
 #
 # Distribution variables

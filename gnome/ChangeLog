@@ -1,3 +1,11 @@
+Wed Mar 18 22:32:53 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_action_properties): Make Federico's
+	page-properties code functional.
+	 
+	* gpageprop.c: New file, implements most of the page properties on
+	top of the gprop.c code. 
+
 Wed Mar 18 20:35:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_create_launch_entry): Support for the "Drop"

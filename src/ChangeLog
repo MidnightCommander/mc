@@ -1,3 +1,9 @@
+Wed Mar 18 22:08:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* achown.c (do_enter_key): call endgrent, endpwent.
+	
+	* chown.c (init_chown): call endgrent, endpwent.
+
 Tue Mar 17 23:58:40 1998  Pavel Machek <pavel@elf.ucw.cz>
 
 	* src/file.c: Fix for the case where the disk gets full. 

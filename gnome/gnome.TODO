@@ -1,13 +1,34 @@
-
-- Drop targets on the desktop. 
-- Sync the screen panels with the real panels
-- Use containers instead of WPanels as the toplevel window displayed
-- widgets event forwarding in WInputs and WPanels.
-- Split view.
-- Menu organization
+All:
 - Intenrationalization
-- All of the dialogs.
+- It crashes
+- It leaks objects.
+- It does not object to leaks.
 
-Possibly make a way to bind a toplevel widget to the Dlg_head part of the
-system so that grab_add/ungrab and the widget destruction reuse all of that
-code for NON_TED dialogs.
+Desktop:
+- Add special destkop entries ("Network neighborhood")
+- Property pages do not work for desktop icons
+
+Panels:
+- Global bindings (some shortcuts are not implemented)
+- Mini-info panel display
+- Finish regular property pages
+- Add a nifty toolbar
+- Split view.
+- External panelize hangs
+
+Viewer:
+
+- Toolbar
+- Scrollbar
+- Enable editor.
+- Fix colors.
+- Add cursor
+- Debug monitor
+
+Widgets:
+- Push history
+- Use Gnome File Entry where possible.
+
+DND:
+- Get sopwith to fix the random motion of his dnd icons.
+- Check the purify stuff.

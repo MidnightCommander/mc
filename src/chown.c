@@ -195,12 +195,14 @@ static void init_chown (void)
     while ((l_pass = getpwent ())) {
 	listbox_add_item (l_user, 0, 0, l_pass->pw_name, NULL);
     }
-
+    endpwent ();
+    
     setgrent ();		/* get and put group names in the listbox */
     while ((l_grp = getgrent ())) {
 	listbox_add_item (l_group, 0, 0, l_grp->gr_name, NULL);
     }
-
+    endgrent ();
+    
     tk_new_frame (ch_dlg, "f.");
     add_widget (ch_dlg, l_group);
     tk_new_frame (ch_dlg, "g.");

@@ -260,7 +260,7 @@ perm_owner_new (char *owner)
 		if (strcmp (passwd->pw_name, owner) == 0)
 			sel = i;
 	}
-
+	endpwent ();
 	gtk_list_select_item (GTK_LIST (list), sel);
 
 	entry = gnome_entry_gtk_entry (GNOME_ENTRY (gentry));
@@ -295,7 +295,8 @@ perm_group_new (char *group)
 		if (strcmp (grp->gr_name, group) == 0)
 			sel = i;
 	}
-
+	endgrent ();
+	
 	gtk_list_select_item (GTK_LIST (list), sel);
 
 	entry = gnome_entry_gtk_entry (GNOME_ENTRY (gentry));

@@ -28,7 +28,7 @@
 #include "dir.h"
 #include "dialog.h"
 #include "gdesktop.h"
-#include "gprop.h"
+#include "gpageprop.h"
 
 /* The pixmaps */
 #include "directory.xpm"
@@ -311,23 +311,33 @@ panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 	view_simple_cmd (panel);
 }
 
+void
+panel_action_properties (GtkWidget *widget, WPanel *panel)
+{
+	file_entry *fe = &panel->dir.list [panel->selected];
+	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
+	
+	item_properties (full_name, NULL);
+	reread_cmd ();
+	
+	free (full_name);
+}
+
 static struct {
 	char *text;
 	int  flags;
 	context_menu_callback callback;
 } file_actions [] = {
-#if 0
-	{ "Info",            0, NULL },
-	{ "",                0, NULL },
-#endif
-	{ "Open",            F_ALL, panel_action_open },
-	{ "Open with",       F_ALL, panel_action_open_with },
-	{ "View",            F_ALL, panel_action_view },
-	{ "View unfiltered", F_ALL, panel_action_view_unfiltered },  
-	{ "",                0, NULL },
+	{ "Properties",      F_SINGLE,   	    panel_action_properties },
+	{ "",                F_SINGLE,   	    NULL },
+	{ "Open",            F_ALL,      	    panel_action_open },
+	{ "Open with",       F_ALL,      	    panel_action_open_with },
+	{ "View",            F_ALL,      	    panel_action_view },
+	{ "View unfiltered", F_ALL,      	    panel_action_view_unfiltered },  
+	{ "",                0,          	    NULL },
 	{ "Link...",         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
-	{ "Symlink...",      F_SINGLE, (context_menu_callback) symlink_cmd },
-	{ "Edit symlink...", F_SYMLINK,  (context_menu_callback) edit_symlink_cmd },
+	{ "Symlink...",      F_SINGLE,             (context_menu_callback) symlink_cmd },
+	{ "Edit symlink...", F_SYMLINK,            (context_menu_callback) edit_symlink_cmd },
 	{ NULL, 0, NULL },
 };
 

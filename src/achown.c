@@ -278,7 +278,7 @@ static void do_enter_key (Dlg_head *h, int f_pos)
 	    setpwent ();
 	    while ((chl_pass = getpwent ()))
 		listbox_add_item (chl_list, 0, 0, chl_pass->pw_name, NULL);
-	    
+	    endpwent ();
 	    fe = listbox_search_text (chl_list, get_owner (sf_stat->st_uid));
 	}
 	else
@@ -288,6 +288,7 @@ static void do_enter_key (Dlg_head *h, int f_pos)
 	    while ((chl_grp = getgrent ())) {
 		listbox_add_item (chl_list, 0, 0, chl_grp->gr_name, NULL);
 	    }
+	    endgrent ();
 	    fe = listbox_search_text (chl_list, get_group (sf_stat->st_gid));
 	}
 	

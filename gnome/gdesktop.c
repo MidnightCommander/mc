@@ -464,8 +464,7 @@ dentry_properties (desktop_icon_t *di)
 static void
 icon_properties (GtkWidget *widget, desktop_icon_t *di)
 {
-	printf ("Sorry, no property pages yet\n");
-	gtk_main_quit ();
+	item_properties (di->pathname, di->dentry);
 }
 
 /*
@@ -612,7 +611,6 @@ static void
 icon_delete (GtkWidget *widget, desktop_icon_t *di)
 {
 	desktop_icon_remove (di);
-	gtk_main_quit ();
 }
 
 /*
@@ -638,11 +636,9 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 	
 	gtk_widget_set_uposition (menu, event->x, event->y);
 
-	gtk_grab_add (menu);
+	gtk_signal_connect (GTK_OBJECT (menu), "deactivate", GTK_SIGNAL_FUNC (gtk_widget_destroy), NULL);
+	
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 3, event->time);
-	gtk_main ();
-	gtk_grab_remove (menu);
-	gtk_widget_destroy (menu);
 }
 
 static int

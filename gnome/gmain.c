@@ -219,7 +219,7 @@ x_add_widget (Dlg_head *h, Widget_Item *w)
 }
 
 static int
-gnome_dlg_send_destroy (GtkWidget *widget, Dlg_head *h)
+gnome_dlg_send_destroy (GtkWidget *widget, GdkEvent *event, Dlg_head *h)
 {
 	printf ("destruyendo\n");
 	h->ret_value = B_CANCEL;
