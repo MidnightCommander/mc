@@ -1143,14 +1143,15 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
 int
 mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
 {
+    int return_value = 0;
     char *path = vfs_canon (pathname);
     vfs *vfs = vfs_type (path);
 
-    vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
-                          mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
-    /* FIXME: errors are ignored at this point */
+    return_value = vfs->ungetlocalcopy ? 
+            (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
+            mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
     g_free (path);
-    return 0;
+    return return_value;
 }
 
 /*
