@@ -1,18 +1,14 @@
 # Romanian translation for Midnight Commander
-# Copyright (C) 1999-2001 Free Software Foundation, Inc.
+# Copyright (C) 1999-2003 Free Software Foundation, Inc.
 # Iustin Pop <iusty@geocities.com>
 # Dan Damian <dand@dnttm.ro>, 1999.
-# Miºu Moldovan <dumol@go.ro>, 2000, 2001.
-#
-# Expresii netraduse (cu sugestii din KDE):
-# desktop (ecran), socket (soclu), cache/caching, server, bytes, drag, 
-# drop, shell (interpretor/interpretor de comenzi), shell pattern, backup.
+# Miºu Moldovan <dumol@go.ro>, 2000 - 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.55\n"
-"POT-Creation-Date: 2003-01-22 02:37-0500\n"
-"PO-Revision-Date: 2001-08-20 02:05+0300\n"
+"Project-Id-Version: mc 4.6\n"
+"POT-Creation-Date: 2003-01-30 17:22-0500\n"
+"PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -56,14 +52,14 @@ msgstr "Meniul utilizatorului este accesibil numai când mcedit e pornit de mc"
 
 #: edit/edit.c:2686
 msgid "Macro recursion is too deep"
-msgstr ""
+msgstr "Recursivitatea macro este prea mare"
 
-#: edit/edit.h:264
+#: edit/edit.h:268
 msgid "&Dismiss"
 msgstr "&Închide"
 
-#: edit/edit.h:266 edit/editcmd.c:367 edit/editcmd.c:1162 edit/editcmd.c:1244
-#: edit/editcmd.c:2480 edit/editmenu.c:36 edit/editoptions.c:71
+#: edit/edit.h:270 edit/editcmd.c:367 edit/editcmd.c:1162 edit/editcmd.c:1244
+#: edit/editcmd.c:2480 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:373 src/boxes.c:465
 #: src/boxes.c:588 src/boxes.c:712 src/boxes.c:939 src/boxes.c:1008
 #: src/filegui.c:781 src/find.c:177 src/layout.c:360 src/option.c:145
@@ -121,7 +117,7 @@ msgstr " Salveazã Ca "
 #: edit/editcmd.c:460 edit/editcmd.c:747 edit/editcmd.c:775 edit/editcmd.c:934
 #: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:466
 #: src/screen.c:1397 src/screen.c:1976 src/selcodepage.c:106
-#: src/subshell.c:701 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
+#: src/subshell.c:703 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
 #: src/utilunix.c:479 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "Atenþie"
@@ -308,7 +304,7 @@ msgstr " ªirul cãutat nu a fost gãsit "
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d cãutãri efectuate, %d semne de carte adãugate "
 
-#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1421
+#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
 #: src/view.c:491 src/view.c:2154 src/view.c:2179
 msgid "Quit"
 msgstr "Ieºi"
@@ -322,14 +318,14 @@ msgid "Cancel quit"
 msgstr "Anulez ieºirea"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:629 src/screen.c:1964
-#: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:630 src/screen.c:1964
+#: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Da"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:629 src/screen.c:1965
-#: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:630 src/screen.c:1965
+#: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Nu"
 
@@ -449,11 +445,11 @@ msgstr " Inserez un Literal "
 msgid " Press any key: "
 msgstr " Apãsaþi o tastã: "
 
-#: edit/editmenu.c:52
+#: edit/editmenu.c:53
 msgid " About "
 msgstr " Despre "
 
-#: edit/editmenu.c:53
+#: edit/editmenu.c:54
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -471,191 +467,191 @@ msgstr ""
 "          Un editor de text scris pentru\n"
 "                Midnight Commander.\n"
 
-#: edit/editmenu.c:274 edit/editmenu.c:292
+#: edit/editmenu.c:275 edit/editmenu.c:293
 msgid "&Open file..."
 msgstr "D&eschide cu..."
 
-#: edit/editmenu.c:275
+#: edit/editmenu.c:276
 msgid "&New              C-n"
 msgstr "&Nou                  C-n"
 
-#: edit/editmenu.c:277 edit/editmenu.c:295
+#: edit/editmenu.c:278 edit/editmenu.c:296
 msgid "&Save              F2"
 msgstr "&Salveazã              F2"
 
-#: edit/editmenu.c:278 edit/editmenu.c:296
+#: edit/editmenu.c:279 edit/editmenu.c:297
 msgid "Save &as...       F12"
 msgstr "s&Alveazã ca...       F12"
 
-#: edit/editmenu.c:280 edit/editmenu.c:298
+#: edit/editmenu.c:281 edit/editmenu.c:299
 msgid "&Insert file...   F15"
 msgstr "insereazã &Fiºier...  F15"
 
-#: edit/editmenu.c:281
+#: edit/editmenu.c:282
 msgid "Copy to &file...  C-f"
 msgstr "&Copiazã în fiºier... C-f"
 
-#: edit/editmenu.c:283 edit/editmenu.c:301
+#: edit/editmenu.c:284 edit/editmenu.c:302
 msgid "&User menu...     F11"
 msgstr "&Meniu utilizator     F11"
 
-#: edit/editmenu.c:285 edit/editmenu.c:303
+#: edit/editmenu.c:286 edit/editmenu.c:304
 msgid "A&bout...            "
 msgstr "des&Pre...               "
 
-#: edit/editmenu.c:287 edit/editmenu.c:305
+#: edit/editmenu.c:288 edit/editmenu.c:306
 msgid "&Quit             F10"
 msgstr "&Ieºire               F10"
 
-#: edit/editmenu.c:293
+#: edit/editmenu.c:294
 msgid "&New            C-x k"
 msgstr "&Nou                C-x k"
 
-#: edit/editmenu.c:299
+#: edit/editmenu.c:300
 msgid "Copy to &file...     "
 msgstr "copiazã în &Fiºier...    "
 
-#: edit/editmenu.c:310 edit/editmenu.c:327
+#: edit/editmenu.c:311 edit/editmenu.c:328
 msgid "&Toggle Mark       F3"
 msgstr "in&Verseazã selecþia    F3"
 
-#: edit/editmenu.c:311 edit/editmenu.c:328
+#: edit/editmenu.c:312 edit/editmenu.c:329
 msgid "&Mark Columns    S-F3"
 msgstr "se&Lecteazã coloanele S-F3"
 
-#: edit/editmenu.c:313 edit/editmenu.c:330
+#: edit/editmenu.c:314 edit/editmenu.c:331
 msgid "Toggle &ins/overw Ins"
 msgstr "&Inserare/suprascriere Ins"
 
-#: edit/editmenu.c:315 edit/editmenu.c:332
+#: edit/editmenu.c:316 edit/editmenu.c:333
 msgid "&Copy              F5"
 msgstr "&Copiazã                F5"
 
-#: edit/editmenu.c:316 edit/editmenu.c:333
+#: edit/editmenu.c:317 edit/editmenu.c:334
 msgid "&Move              F6"
 msgstr "&Mutã                   F6"
 
-#: edit/editmenu.c:317 edit/editmenu.c:334
+#: edit/editmenu.c:318 edit/editmenu.c:335
 msgid "&Delete            F8"
 msgstr "ºter&Ge                 F8"
 
-#: edit/editmenu.c:319 edit/editmenu.c:336
+#: edit/editmenu.c:320 edit/editmenu.c:337
 msgid "&Undo             C-u"
 msgstr "&Anuleazã              C-u"
 
-#: edit/editmenu.c:321 edit/editmenu.c:338
+#: edit/editmenu.c:322 edit/editmenu.c:339
 msgid "&Beginning     C-PgUp"
 msgstr "începu&T            C-PgUp"
 
-#: edit/editmenu.c:322 edit/editmenu.c:339
+#: edit/editmenu.c:323 edit/editmenu.c:340
 msgid "&End           C-PgDn"
 msgstr "&Sfârºit            C-PgDn"
 
-#: edit/editmenu.c:344 edit/editmenu.c:351
+#: edit/editmenu.c:345 edit/editmenu.c:352
 msgid "&Search...         F7"
 msgstr "&Cautã...          F7"
 
-#: edit/editmenu.c:345 edit/editmenu.c:352
+#: edit/editmenu.c:346 edit/editmenu.c:353
 msgid "Search &again     F17"
 msgstr "cautã din &Nou    F17"
 
-#: edit/editmenu.c:346 edit/editmenu.c:353
+#: edit/editmenu.c:347 edit/editmenu.c:354
 msgid "&Replace...        F4"
 msgstr "în&Locuieºte...    F4"
 
-#: edit/editmenu.c:358 edit/editmenu.c:381
+#: edit/editmenu.c:359 edit/editmenu.c:382
 msgid "&Go to line...            M-l"
 msgstr "&Du-te la linia...               M-l"
 
-#: edit/editmenu.c:359 edit/editmenu.c:382
+#: edit/editmenu.c:360 edit/editmenu.c:383
 msgid "Go to matching &bracket   M-b"
 msgstr "d&U-te la paranteza pereche      M-b"
 
-#: edit/editmenu.c:361 edit/editmenu.c:384
+#: edit/editmenu.c:362 edit/editmenu.c:385
 msgid "Insert &literal...       C-q"
 msgstr "insereazã un &Literal...         C-q"
 
-#: edit/editmenu.c:363 edit/editmenu.c:386
+#: edit/editmenu.c:364 edit/editmenu.c:387
 msgid "&Refresh screen          C-l"
 msgstr "&Redeseneazã ecranul             C-l"
 
-#: edit/editmenu.c:365 edit/editmenu.c:388
+#: edit/editmenu.c:366 edit/editmenu.c:389
 msgid "&Start record macro      C-r"
 msgstr "înregistreazã &Combinaþia        C-r"
 
-#: edit/editmenu.c:366 edit/editmenu.c:389
+#: edit/editmenu.c:367 edit/editmenu.c:390
 msgid "&Finish record macro...  C-r"
 msgstr "opreºte înre&Gistrarea           C-r"
 
-#: edit/editmenu.c:367
+#: edit/editmenu.c:368
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Executã combinaþia...    C-a, TASTA"
 
-#: edit/editmenu.c:368 edit/editmenu.c:391
+#: edit/editmenu.c:369 edit/editmenu.c:392
 msgid "Delete macr&o...            "
 msgstr "ºterge com&Binaþia...               "
 
-#: edit/editmenu.c:370 edit/editmenu.c:393
+#: edit/editmenu.c:371 edit/editmenu.c:394
 msgid "Insert &date/time           "
 msgstr "insereazã data/&Ora                 "
 
-#: edit/editmenu.c:372 edit/editmenu.c:395
+#: edit/editmenu.c:373 edit/editmenu.c:396
 msgid "Format p&aragraph        M-p"
 msgstr "formateazã p&Aragraful           M-p"
 
-#: edit/editmenu.c:373
+#: edit/editmenu.c:374
 msgid "'ispell' s&pell check    C-p"
 msgstr "corectare ortograficã cu &Ispell C-p"
 
-#: edit/editmenu.c:374 edit/editmenu.c:397
+#: edit/editmenu.c:375 edit/editmenu.c:398
 msgid "Sor&t...                 M-t"
 msgstr "Sor&teazã...                     M-t"
 
-#: edit/editmenu.c:375 edit/editmenu.c:398
+#: edit/editmenu.c:376 edit/editmenu.c:399
 msgid "E&xternal Formatter      F19"
 msgstr "Formatare E&xternã               F19"
 
-#: edit/editmenu.c:376 edit/editmenu.c:399
+#: edit/editmenu.c:377 edit/editmenu.c:400
 msgid "&Mail...                    "
 msgstr "&Poºta...                           "
 
-#: edit/editmenu.c:390
+#: edit/editmenu.c:391
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Executã combinaþia...  C-x e, TASTA"
 
-#: edit/editmenu.c:396
+#: edit/editmenu.c:397
 msgid "'ispell' s&pell check    M-$"
 msgstr "corectare ortograficã 'is&Pell'  M-$"
 
-#: edit/editmenu.c:404 edit/editmenu.c:413
+#: edit/editmenu.c:405 edit/editmenu.c:414
 msgid "&General...  "
 msgstr "&Generale...      "
 
-#: edit/editmenu.c:405 edit/editmenu.c:414
+#: edit/editmenu.c:406 edit/editmenu.c:415
 msgid "&Save mode..."
 msgstr "Modul de &Salvare..."
 
-#: edit/editmenu.c:407 edit/editmenu.c:416 src/main.c:1078
-msgid "&Layout..."
-msgstr "&Aspect..."
+#: edit/editmenu.c:408 edit/editmenu.c:417 src/main.c:1083
+msgid "learn &Keys..."
+msgstr "învaþã &Tastele..."
 
-#: edit/editmenu.c:426 edit/editmenu.c:440 src/chmod.c:149 src/chown.c:121
+#: edit/editmenu.c:427 edit/editmenu.c:441 src/chmod.c:149 src/chown.c:121
 msgid " File "
 msgstr " Fiºier "
 
-#: edit/editmenu.c:428 edit/editmenu.c:442
+#: edit/editmenu.c:429 edit/editmenu.c:443
 msgid " Edit "
 msgstr " Editare "
 
-#: edit/editmenu.c:430 edit/editmenu.c:444
+#: edit/editmenu.c:431 edit/editmenu.c:445
 msgid " Sear/Repl "
 msgstr " Caut/Înloc "
 
-#: edit/editmenu.c:432 edit/editmenu.c:446
+#: edit/editmenu.c:433 edit/editmenu.c:447
 msgid " Command "
 msgstr " Comenzi "
 
-#: edit/editmenu.c:434 edit/editmenu.c:448
+#: edit/editmenu.c:435 edit/editmenu.c:449
 msgid " Options "
 msgstr " Opþiuni "
 
@@ -692,9 +688,8 @@ msgid "Synta&x highlighting"
 msgstr "&Evidenþiere sintaxã"
 
 #: edit/editoptions.c:91
-#, fuzzy
 msgid "Save file &position"
-msgstr " Salveazã fiºierul "
+msgstr "Salveazã fiºierul ºi &poziþia"
 
 #: edit/editoptions.c:94
 msgid "Confir&m before saving"
@@ -728,7 +723,7 @@ msgstr "Emulare de taste"
 msgid " Editor options "
 msgstr " Opþiuni ale editorului "
 
-#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1418
+#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1419
 #: src/screen.c:2191 src/tree.c:1029 src/view.c:2152
 msgid "Help"
 msgstr "Ajutor"
@@ -753,7 +748,7 @@ msgstr "Mutã"
 msgid "Delete"
 msgstr "ªterge"
 
-#: edit/editwidget.c:291 src/main.c:1420
+#: edit/editwidget.c:291 src/main.c:1421
 msgid "PullDn"
 msgstr "Meniu"
 
@@ -957,17 +952,16 @@ msgid "&Select"
 msgstr "&Selecteazã "
 
 #: src/boxes.c:715
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "Modul de &Salvare..."
+msgstr "Utilizeazã modul _pasiv"
 
 #: src/boxes.c:717
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "&Utilizeazã ~/.netrc"
 
 #: src/boxes.c:721
 msgid "&Always use ftp proxy"
-msgstr "&Utilizez ftp-ul proxy"
+msgstr "&Utilizeazã ftp-ul proxy"
 
 #: src/boxes.c:723
 msgid "sec"
@@ -1209,7 +1203,7 @@ msgstr " Nu pot aduce o copie localã a %s "
 msgid "Files tagged, want to cd?"
 msgstr "Existã fiºiere marcate, doriþi sã schimbaþi directorul?"
 
-#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:851 src/screen.c:1937
+#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:852 src/screen.c:1937
 msgid "Cannot change directory"
 msgstr "Nu pot deschide directorul %s"
 
@@ -1290,14 +1284,12 @@ msgid "&Home"
 msgstr "&Personal"
 
 #: src/cmd.c:738
-#, fuzzy
 msgid "Syntax file edit"
-msgstr "editare fiºier &Meniuri"
+msgstr "editare fiºier sintaxã"
 
 #: src/cmd.c:739
-#, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Care fiºier de extensii doriþi sã îl editaþi? "
+msgstr " Care fiºier de sintaxã doriþi sã îl editaþi? "
 
 #: src/cmd.c:898
 msgid " Compare directories "
@@ -1343,96 +1335,95 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Tastaþi `exit' pentru a reveni în Midnight Commander"
 
-#: src/cmd.c:1059
-#, fuzzy, c-format
-msgid "Link %s to:"
-msgstr " legãturã: %s "
-
 #: src/cmd.c:1060
+#, c-format
+msgid "Link %s to:"
+msgstr "Leagã %s de:"
+
+#: src/cmd.c:1061
 msgid " Link "
 msgstr " Legãturã "
 
-#: src/cmd.c:1070
+#: src/cmd.c:1071
 #, c-format
 msgid " link: %s "
 msgstr " legãturã: %s "
 
-#: src/cmd.c:1098
+#: src/cmd.c:1099
 #, c-format
 msgid " symlink: %s "
 msgstr " legãturã simbolicã: %s "
 
-#: src/cmd.c:1132
+#: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Legãtura simbolicã `%s' indicã: "
 
-#: src/cmd.c:1137
+#: src/cmd.c:1138
 msgid " Edit symlink "
 msgstr " Editare legãturã simbolicã "
 
-#: src/cmd.c:1142
+#: src/cmd.c:1143
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " editare legãturã simbolicã, nu am putut sã elimin %s: %s "
 
-#: src/cmd.c:1146
+#: src/cmd.c:1147
 #, c-format
 msgid " edit symlink: %s "
 msgstr " editare legãturã simbolicã: %s "
 
-#: src/cmd.c:1157
+#: src/cmd.c:1158
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' nu este o legãturã simbolicã"
 
-#: src/cmd.c:1283
+#: src/cmd.c:1284
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " Nu pot schimba directorul la %s "
 
-#: src/cmd.c:1292
+#: src/cmd.c:1293
 msgid " Enter machine name (F1 for details): "
-msgstr " Introduceþi numele server-ului (F1 pentru detalii): "
+msgstr " Introduceþi numele serverului (F1 pentru detalii): "
 
-#: src/cmd.c:1297 src/widget.c:1048
+#: src/cmd.c:1298 src/widget.c:1048
 msgid " Link to a remote machine "
 msgstr " Legãturã la un server la distanþã "
 
-#: src/cmd.c:1304 src/widget.c:1049
+#: src/cmd.c:1305 src/widget.c:1049
 msgid " FTP to machine "
-msgstr " FTP cãtre server-ul "
+msgstr " FTP cãtre serverul "
 
-#: src/cmd.c:1310
-#, fuzzy
+#: src/cmd.c:1311
 msgid " Shell link to machine "
-msgstr " Legãturã SMB cãtre server-ul "
+msgstr " Conexiune shell la serverul "
 
-#: src/cmd.c:1317 src/widget.c:1050
+#: src/cmd.c:1318 src/widget.c:1050
 msgid " SMB link to machine "
-msgstr " Legãturã SMB cãtre server-ul "
+msgstr " Legãturã SMB cãtre serverul "
 
-#: src/cmd.c:1328
+#: src/cmd.c:1329
 msgid " Socket source routing setup "
 msgstr " Setare a rutãrii sursei socket-ului "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1330
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Introduceþi numele gazdei de folosit ca nod de rutare al sursei: "
 
-#: src/cmd.c:1337
+#: src/cmd.c:1338
 msgid " Host name "
 msgstr " Numele gazdei "
 
-#: src/cmd.c:1337
+#: src/cmd.c:1338
 msgid " Error while looking up IP address "
 msgstr " Eroare în timpul cãutãrii adresei IP "
 
-#: src/cmd.c:1348
+#: src/cmd.c:1349
 msgid " Undelete files on an ext2 file system "
 msgstr " Recupereazã fiºiere pe un sistem de fiºiere ext2 "
 
-#: src/cmd.c:1349
+#: src/cmd.c:1350
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1440,11 +1431,11 @@ msgstr ""
 " Introduceþi perifericul (fãra /dev/) pentru\n"
 "   recuperare: (F1 pentru detalii)"
 
-#: src/cmd.c:1399
+#: src/cmd.c:1400
 msgid " Setup saved to ~/"
 msgstr " Configuraþia salvatã în ~/"
 
-#: src/cmd.c:1401
+#: src/cmd.c:1402
 msgid " Setup "
 msgstr " Configurare "
 
@@ -1534,9 +1525,8 @@ msgid "&Group"
 msgstr "&Grup"
 
 #: src/dir.c:478 src/dir.c:584
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Nu pot deschide directorul %s"
+msgstr "Nu pot citi conþinutul directorului"
 
 #: src/ext.c:106 src/user.c:568
 #, c-format
@@ -2008,22 +1998,22 @@ msgstr "&Niciunul"
 #: src/filegui.c:341
 #, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr ""
+msgstr "ETA %d:%02d.%02d"
 
 #: src/filegui.c:364
 #, c-format
 msgid "%.2f MB/s"
-msgstr ""
+msgstr "%.2f MB/"
 
 #: src/filegui.c:367
 #, c-format
 msgid "%.2f KB/s"
-msgstr ""
+msgstr "%.2f KB/"
 
 #: src/filegui.c:370
 #, c-format
 msgid "%ld B/s"
-msgstr ""
+msgstr "%ld B/"
 
 #: src/filegui.c:393
 msgid "File"
@@ -2177,7 +2167,7 @@ msgstr "Nume fiºier:"
 msgid "Content: "
 msgstr "Conþinut: "
 
-#: src/find.c:177 src/main.c:958 src/main.c:985
+#: src/find.c:177 src/main.c:959 src/main.c:986
 msgid "&Tree"
 msgstr "&Arbore"
 
@@ -2355,18 +2345,18 @@ msgid "File:       %s"
 msgstr "Fiºier:     %s"
 
 #: src/info.c:111
-#, fuzzy, c-format
+#, c-format
 msgid "Free nodes: %d (%d%%) of %d"
-msgstr "Noduri:    %d (%d%%) din %d"
+msgstr "N. libere: %d (%d%%) din %d"
 
 #: src/info.c:117
 msgid "No node information"
 msgstr "Nu existã informaþii despre noduri"
 
 #: src/info.c:125
-#, fuzzy, c-format
+#, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Noduri:    %d (%d%%) din %d"
+msgstr "Spaþiu gol: %s (%d%%) în %s"
 
 #: src/info.c:128
 msgid "No space information"
@@ -2407,12 +2397,12 @@ msgid "Created:   %s"
 msgstr "Creat:     %s"
 
 #: src/info.c:170
-#, fuzzy, c-format
+#, c-format
 msgid "Size:      %s"
-msgstr "Mãrime:    "
+msgstr "Mãrime:    %s"
 
 #: src/info.c:173
-#, fuzzy, c-format
+#, c-format
 msgid " (%d block)"
 msgstr " (%d blocuri)"
 
@@ -2454,9 +2444,8 @@ msgid "&Horizontal"
 msgstr "ori&Zontalã"
 
 #: src/layout.c:164
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "barã ajutor &Xterm"
+msgstr "barã titlu &Xterm"
 
 #: src/layout.c:165
 msgid "h&Intbar visible"
@@ -2605,282 +2594,280 @@ msgstr ""
 msgid "Press any key to continue..."
 msgstr "Apãsaþi o tastã pentru a continua..."
 
-#: src/main.c:588
+#: src/main.c:589
 msgid " The shell is already running a command "
 msgstr " Shell-ul deja executã o altã comandã "
 
-#: src/main.c:627 src/screen.c:1963
+#: src/main.c:628 src/screen.c:1963
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:628
+#: src/main.c:629
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Vreþi într-adevãr sã ieºiþi din Midnight Commander? "
 
-#: src/main.c:947
+#: src/main.c:948
 msgid " Listing format edit "
 msgstr " Editarea modului de listare"
 
-#: src/main.c:947
+#: src/main.c:948
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Noul mod este \"%s\" "
 
-#: src/main.c:955 src/main.c:982
+#: src/main.c:956 src/main.c:983
 msgid "&Listing mode..."
 msgstr "mod de &Listare..."
 
-#: src/main.c:956 src/main.c:983
+#: src/main.c:957 src/main.c:984
 msgid "&Quick view     C-x q"
 msgstr "&Vizualizare rapidã C-x q"
 
-#: src/main.c:957 src/main.c:984
+#: src/main.c:958 src/main.c:985
 msgid "&Info           C-x i"
 msgstr "&Info               C-x i"
 
-#: src/main.c:960 src/main.c:987
+#: src/main.c:961 src/main.c:988
 msgid "&Sort order..."
 msgstr "&Ordinea sortãrii..."
 
-#: src/main.c:962 src/main.c:989
+#: src/main.c:963 src/main.c:990
 msgid "&Filter..."
 msgstr "&Filtru..."
 
-#: src/main.c:966 src/main.c:993
+#: src/main.c:967 src/main.c:994
 msgid "&Network link..."
 msgstr "l&Egãturã reþea..."
 
-#: src/main.c:968 src/main.c:995
+#: src/main.c:969 src/main.c:996
 msgid "FT&P link..."
 msgstr "legãturã FT&P..."
 
-#: src/main.c:969 src/main.c:996
-#, fuzzy
+#: src/main.c:970 src/main.c:997
 msgid "S&hell link..."
-msgstr "legãturã SM&B..."
+msgstr "conexiune s&hell..."
 
-#: src/main.c:971 src/main.c:998
+#: src/main.c:972 src/main.c:999
 msgid "SM&B link..."
 msgstr "legãturã SM&B..."
 
-#: src/main.c:976 src/main.c:1003
+#: src/main.c:977 src/main.c:1004
 msgid "&Drive...       M-d"
 msgstr "&Disc...            M-d"
 
-#: src/main.c:978 src/main.c:1005
+#: src/main.c:979 src/main.c:1006
 msgid "&Rescan         C-r"
 msgstr "&Re-scaneazã        C-r"
 
-#: src/main.c:1009
+#: src/main.c:1010
 msgid "&User menu          F2"
 msgstr "meniu &Utilizator       F2"
 
-#: src/main.c:1010
+#: src/main.c:1011
 msgid "&View               F3"
 msgstr "&Vizualizare            F3"
 
-#: src/main.c:1011
+#: src/main.c:1012
 msgid "Vie&w file...         "
 msgstr "vizualizare fi&ªier...    "
 
-#: src/main.c:1012
+#: src/main.c:1013
 msgid "&Filtered view     M-!"
 msgstr "vizualizare &Filtratã   M-!"
 
-#: src/main.c:1013
+#: src/main.c:1014
 msgid "&Edit               F4"
 msgstr "&Editare                F4"
 
-#: src/main.c:1014
+#: src/main.c:1015
 msgid "&Copy               F5"
 msgstr "&Copiazã                F5"
 
-#: src/main.c:1015
+#: src/main.c:1016
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod                  C-x c"
 
-#: src/main.c:1017
+#: src/main.c:1018
 msgid "&Link            C-x l"
 msgstr "&Legaturã               C-x l"
 
-#: src/main.c:1018
+#: src/main.c:1019
 msgid "&SymLink         C-x s"
 msgstr "legãturã &Simbolicã     C-x s"
 
-#: src/main.c:1019
+#: src/main.c:1020
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "edit. legãt. sim&Bolicã C-x C-s"
 
-#: src/main.c:1020
+#: src/main.c:1021
 msgid "ch&Own           C-x o"
 msgstr "ch&Own                  C-x o"
 
-#: src/main.c:1021
+#: src/main.c:1022
 msgid "&Advanced chown       "
 msgstr "chown &Avansat            "
 
-#: src/main.c:1023
+#: src/main.c:1024
 msgid "&Rename/Move        F6"
 msgstr "&Redenumeºte/Mutã       F6"
 
-#: src/main.c:1024
+#: src/main.c:1025
 msgid "&Mkdir              F7"
 msgstr "creeazã direc&Tor       F7"
 
-#: src/main.c:1025
+#: src/main.c:1026
 msgid "&Delete             F8"
 msgstr "ºter&Ge                 F8"
 
-#: src/main.c:1026
+#: src/main.c:1027
 msgid "&Quick cd          M-c"
 msgstr "c&D rapid               M-c"
 
-#: src/main.c:1028
+#: src/main.c:1029
 msgid "select &Group      M-+"
 msgstr "selecteaz&Ã grup        M-+"
 
-#: src/main.c:1029
+#: src/main.c:1030
 msgid "u&Nselect group    M-\\"
 msgstr "deselectea&Zã grup      M-\\"
 
-#: src/main.c:1030
+#: src/main.c:1031
 msgid "reverse selec&Tion M-*"
 msgstr "inverseazã selec&Þia    M-*"
 
-#: src/main.c:1032
+#: src/main.c:1033
 msgid "e&Xit              F10"
 msgstr "&Ieºire                 F10"
 
-#: src/main.c:1040
+#: src/main.c:1041
 msgid "&Directory tree"
 msgstr "arbore de &Directoare"
 
-#: src/main.c:1041
+#: src/main.c:1042
 msgid "&Find file            M-?"
 msgstr "cautã &Fiºier                     M-?"
 
-#: src/main.c:1042
+#: src/main.c:1043
 msgid "s&Wap panels          C-u"
 msgstr "&Schimbã panourile                C-u"
 
-#: src/main.c:1043
+#: src/main.c:1044
 msgid "switch &Panels on/off C-o"
 msgstr "acti&Veazã/dezactiveazã panourile C-o"
 
-#: src/main.c:1044
+#: src/main.c:1045
 msgid "&Compare directories  C-x d"
 msgstr "&Compar directoarele              C-x d"
 
-#: src/main.c:1045
+#: src/main.c:1046
 msgid "e&Xternal panelize    C-x !"
 msgstr "panelare e&Xterioarã              C-x !"
 
-#: src/main.c:1046
+#: src/main.c:1047
 msgid "show directory s&Izes"
 msgstr "afi&ªeazã mãrimea directoarelor"
 
-#: src/main.c:1048
+#: src/main.c:1049
 msgid "command &History"
 msgstr "&Istoricul comenzilor "
 
-#: src/main.c:1049
+#: src/main.c:1050
 msgid "di&Rectory hotlist    C-\\"
 msgstr "lista rapidã de di&Rectoare       C-\\"
 
-#: src/main.c:1051
+#: src/main.c:1052
 msgid "&Active VFS list      C-x a"
 msgstr "lista VFS-urilor &Active          C-x a"
 
-#: src/main.c:1052
+#: src/main.c:1053
 msgid "Fr&ee VFSs now"
 msgstr "&Goleºte VFS-urile"
 
-#: src/main.c:1055
+#: src/main.c:1056
 msgid "&Background jobs      C-x j"
 msgstr "sarcini de funda&L                C-x j"
 
-#: src/main.c:1059
+#: src/main.c:1060
 msgid "&Undelete files (ext2fs only)"
 msgstr "rec&Uperare fiºiere (doar ext2fs)"
 
-#: src/main.c:1062
+#: src/main.c:1063
 msgid "&Listing format edit"
 msgstr "Mod de listare"
 
-#: src/main.c:1067
+#: src/main.c:1068
 msgid "Edit &extension file"
 msgstr "editare fiºier &Extensii"
 
-#: src/main.c:1068
+#: src/main.c:1069
 msgid "Edit &menu file"
 msgstr "editare fiºier &Meniuri"
 
-#: src/main.c:1070
+#: src/main.c:1071
 msgid "Edit edi&tor menu file"
 msgstr "editare meniuri edi&Tor"
 
-#: src/main.c:1071
-#, fuzzy
+#: src/main.c:1072
 msgid "Edit &syntax file"
-msgstr "editare fiºier &Meniuri"
+msgstr "editare fiºier &Sintaxã"
 
-#: src/main.c:1077
+#: src/main.c:1078
 msgid "&Configuration..."
 msgstr "&Configurare..."
 
 #: src/main.c:1079
+msgid "&Layout..."
+msgstr "&Aspect..."
+
+#: src/main.c:1080
 msgid "c&Onfirmation..."
 msgstr "c&Onfirmare..."
 
-#: src/main.c:1080
+#: src/main.c:1081
 msgid "&Display bits..."
 msgstr "&Biþi de afiºare..."
 
-#: src/main.c:1082
-msgid "learn &Keys..."
-msgstr "învaþã &Tastele..."
-
-#: src/main.c:1085
+#: src/main.c:1086
 msgid "&Virtual FS..."
 msgstr "Sistem &Virtual de Fiºiere..."
 
-#: src/main.c:1088
+#: src/main.c:1089
 msgid "&Save setup"
 msgstr "&Salveazã setãrile"
 
-#: src/main.c:1099
+#: src/main.c:1100
 msgid " &Above "
 msgstr " &Deasupra "
 
-#: src/main.c:1099
+#: src/main.c:1100
 msgid " &Left "
 msgstr " &Stânga "
 
-#: src/main.c:1103
+#: src/main.c:1104
 msgid " &File "
 msgstr " &Fiºiere "
 
-#: src/main.c:1106
+#: src/main.c:1107
 msgid " &Command "
 msgstr " &Comenzi "
 
-#: src/main.c:1109
+#: src/main.c:1110
 msgid " &Options "
 msgstr " &Opþiuni "
 
-#: src/main.c:1112
+#: src/main.c:1113
 msgid " &Below "
 msgstr " Dedesu&Bt "
 
-#: src/main.c:1112
+#: src/main.c:1113
 msgid " &Right "
 msgstr " &Dreapta "
 
-#: src/main.c:1155
+#: src/main.c:1156
 msgid " Information "
 msgstr " Informaþii "
 
-#: src/main.c:1157
+#: src/main.c:1158
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2893,33 +2880,32 @@ msgstr ""
 " alã (Ctrl-R) a conþinutului directorului. Consultaþi    \n"
 " pagina man pentru mai multe detalii.              "
 
-#: src/main.c:1419 src/screen.c:2192
+#: src/main.c:1420 src/screen.c:2192
 msgid "Menu"
 msgstr "Meniu"
 
-#: src/main.c:1559
+#: src/main.c:1560
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setatã!\n"
 
-#: src/main.c:1876 src/textconf.c:116
+#: src/main.c:1877 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2128
+#: src/main.c:2129
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[opþiuni] [acest_dir] [celãlalt_dir]\n"
 
-#: src/main.c:2132
-#, fuzzy
-msgid "+number"
-msgstr "Numãrul Inodului"
-
 #: src/main.c:2133
-msgid "Set initial line number for the internal editor"
-msgstr ""
+msgid "+number"
+msgstr "+numãr"
 
-#: src/main.c:2135
+#: src/main.c:2134
+msgid "Set initial line number for the internal editor"
+msgstr "Numãrul primei linii pentru editorul intern"
+
+#: src/main.c:2136
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2930,7 +2916,7 @@ msgstr ""
 "V')\n"
 "la adresa mc-devel@gnome.org\n"
 
-#: src/main.c:2150
+#: src/main.c:2151
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2970,102 +2956,99 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2225
+#: src/main.c:2226
 msgid "Use to debug the background code"
 msgstr "Utilizat pentru depanarea codului de fundal"
 
-#: src/main.c:2228
+#: src/main.c:2229
 msgid "Request to run in color mode"
 msgstr "Cerere de rulare în culori"
 
-#: src/main.c:2230
+#: src/main.c:2231
 msgid "Specifies a color configuration"
 msgstr "Specificã o configuraþie de culori"
 
-#: src/main.c:2234
+#: src/main.c:2235
 msgid "Edits one file"
 msgstr "Editeazã un fiºier"
 
-#: src/main.c:2238
+#: src/main.c:2239
 msgid "Displays this help message"
 msgstr "Afiºeazã un mesaj de ajutor"
 
-#: src/main.c:2240
+#: src/main.c:2241
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Afiºeazã un ecran de ajutor despre cum se schimbã schema de culori"
 
-#: src/main.c:2243
+#: src/main.c:2244
 msgid "Log ftp dialog to specified file"
 msgstr "Înregistreazã dialogul ftp în fiºierul specificat"
 
-#: src/main.c:2246
+#: src/main.c:2247
 msgid "Set debug level"
-msgstr ""
+msgstr "Nivelul de depanare"
 
-#: src/main.c:2250
-#, fuzzy
+#: src/main.c:2251
 msgid "Print data directory"
-msgstr "Creeazã un nou director în directorul curent"
+msgstr "Aratã datele directorului"
 
-#: src/main.c:2252
+#: src/main.c:2253
 msgid "Requests to run in black and white"
 msgstr "Cerere de rulare în alb/negru"
 
-#: src/main.c:2254
+#: src/main.c:2255
 msgid "Disable mouse support in text version"
 msgstr "Dezactiveazã suportul de mouse în versiunea text"
 
-#: src/main.c:2257
+#: src/main.c:2258
 msgid "Disables subshell support"
 msgstr "Dezactiveazã suportul subshell"
 
-#: src/main.c:2259
-#, fuzzy
+#: src/main.c:2260
 msgid "Force subshell execution"
-msgstr "setez ID propr. la exec."
+msgstr "Forþeazã pornirea unui subshell"
 
-#: src/main.c:2262
-#, fuzzy
+#: src/main.c:2263
 msgid "Print last working directory to specified file"
-msgstr "Afiºeazã directorul curent la ieºirea din program"
+msgstr "Aratã ultimul directorul curent în fiºierul specificat"
 
-#: src/main.c:2264
+#: src/main.c:2265
 msgid "Resets soft keys on HP terminals"
 msgstr "Reseteazã tastele soft pe terminale HP"
 
-#: src/main.c:2266
+#: src/main.c:2267
 msgid "To run on slow terminals"
 msgstr "Pentru a rula pe terminale încete"
 
-#: src/main.c:2269
+#: src/main.c:2270
 msgid "Use stickchars to draw"
 msgstr "Utilizeazã +, -, | pentru desenare"
 
-#: src/main.c:2273
+#: src/main.c:2274
 msgid "Enables subshell support (default)"
 msgstr "Activeazã suportul pentru subshell (implicit)"
 
-#: src/main.c:2277
+#: src/main.c:2278
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Încearcã sã utilizeze termcap în locul terminfo"
 
-#: src/main.c:2280
+#: src/main.c:2281
 msgid "Displays the current version"
 msgstr "Afiºeazã versiunea curentã"
 
-#: src/main.c:2282
+#: src/main.c:2283
 msgid "Launches the file viewer on a file"
 msgstr "Lanseazã vizualizatorul de fiºiere pe un fiºier"
 
-#: src/main.c:2284
+#: src/main.c:2285
 msgid "Forces xterm features"
 msgstr "Forþeazã facilitãþile xterm"
 
-#: src/main.c:2501
+#: src/main.c:2502
 msgid " Notice "
 msgstr " Notã "
 
-#: src/main.c:2502
+#: src/main.c:2503
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3222,16 +3205,15 @@ msgstr "Închiderea filtrului a eºuat"
 
 #: src/popt.c:547
 msgid "missing argument"
-msgstr ""
+msgstr "argument lipsã"
 
 #: src/popt.c:549
-#, fuzzy
 msgid "unknown option"
-msgstr "<Grup necun.>"
+msgstr "opþiune necunoscutã"
 
 #: src/popt.c:555
 msgid "invalid numeric value"
-msgstr ""
+msgstr "valoare numericã invalidã"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
@@ -3243,12 +3225,11 @@ msgstr "Afiºeazã un mesaj sumar de utilizare"
 
 #: src/popthelp.c:60
 msgid "ARG"
-msgstr ""
+msgstr "ARG"
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "Nume proprietar:"
+msgstr "Utilizare:"
 
 #: src/screen.c:202
 msgid "UP--DIR"
@@ -3256,7 +3237,7 @@ msgstr "SUS-DIR"
 
 #: src/screen.c:223
 msgid "SYMLINK"
-msgstr ""
+msgstr "LEG. SIMB."
 
 #: src/screen.c:227
 msgid "SUB-DIR"
@@ -3325,7 +3306,6 @@ msgid "<readlink failed>"
 msgstr "<readlink eºuat>"
 
 #: src/screen.c:1273
-#, fuzzy
 msgid "Unknown tag on display format: "
 msgstr "Etichetã necunoscutã pe formatul de afiºare: "
 
@@ -3389,11 +3369,11 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr " Nu pot deschide filtrul numit %s\n"
 
-#: src/subshell.c:701
+#: src/subshell.c:703
 msgid " The shell is still active. Quit anyway? "
 msgstr " Shell-ul este încã activ. Ies oricum? "
 
-#: src/subshell.c:840
+#: src/subshell.c:842
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr " Atenþie: Nu pot schimba în %s \n"
@@ -3407,9 +3387,8 @@ msgid "Using system-installed S-Lang library"
 msgstr "Utilizând versiunea instalatã de bibliotecã S-Lang"
 
 #: src/textconf.c:58
-#, fuzzy
 msgid "Using included S-Lang library"
-msgstr "Utilizând biblioteca S-lang"
+msgstr "Utilizând biblioteca S-lang inclusã"
 
 #: src/textconf.c:64
 msgid "with termcap database"
@@ -3444,13 +3423,12 @@ msgid "With mouse support on xterm\n"
 msgstr "Cu suport de mouse în xterm.\n"
 
 #: src/textconf.c:97
-#, fuzzy
 msgid "With support for X11 events\n"
-msgstr "Cu suport pentru operaþii în fundal\n"
+msgstr "Cu suport pentru evenimente X11\n"
 
 #: src/textconf.c:101
 msgid "With internationalization support\n"
-msgstr ""
+msgstr "Cu suport de internaþionalizare\n"
 
 #: src/textconf.c:105
 msgid "With multiple codepages support\n"
@@ -3574,46 +3552,42 @@ msgstr " Nu au fost gãsite intrãri adecvate în %s "
 msgid " User menu "
 msgstr " Meniu utilizator "
 
-#: src/util.c:665 src/util.c:691
+#: src/util.c:670 src/util.c:696
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:666 src/util.c:689
+#: src/util.c:671 src/util.c:694
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
 #: src/utilunix.c:333
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Creeazã un nou director în directorul curent"
+msgstr "%s nu este un director\n"
 
 #: src/utilunix.c:335
 #, c-format
 msgid "Directory %s is not owned by you\n"
-msgstr ""
+msgstr "Nu deþineþi directorul %s\n"
 
 #: src/utilunix.c:338
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot set correct permissions for directory %s\n"
-msgstr ""
-" Nu pot crea directorul þintã \"%s\" \n"
-" %s "
+msgstr " Nu pot seta permisiile corecte pentru directorul %s\n"
 
 #: src/utilunix.c:343
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Nu pot crea directorul þintã \"%s\" \n"
-" %s "
+msgstr "Nu pot crea directorul temporar %s: %s\n"
 
 #: src/utilunix.c:373
 #, c-format
 msgid "Temporary files will be created in %s\n"
-msgstr ""
+msgstr "Fiºierele temporare vor fi create în %s\n"
 
 #: src/utilunix.c:376
 msgid "Temporary files will not be created\n"
-msgstr ""
+msgstr "Nu vor fi create fiºiere temporare\n"
 
 #: src/utilunix.c:401
 msgid " Pipe failed "
@@ -3629,7 +3603,7 @@ msgstr " Nu pot clona programul copil "
 
 #: src/view.c:548
 msgid "Empty output from child filter"
-msgstr ""
+msgstr "Ieºire vidã de la filtrul copil "
 
 #: src/view.c:554
 msgid " Cannot open file "
@@ -4109,9 +4083,9 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Citirea localã a eºuat, trimit zerouri"
 
 #: vfs/fish.c:544
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: stochez %s %d (%d)"
+msgstr "fish: stochez %s %d (%lu)"
 
 #: vfs/fish.c:545
 msgid "zeros"
@@ -4234,9 +4208,9 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: eºec; nu mai existã nici o variantã la care sã revin"
 
 #: vfs/ftpfs.c:1403
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: stochez fiºierul %d (%d)"
+msgstr "ftpfs: stochez fiºierul %lu (%lu)"
 
 #: vfs/ftpfs.c:1860
 msgid ""
