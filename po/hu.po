@@ -1,6 +1,6 @@
 # mc hu.po
 # Copyright (C) 1999 Free Software Foundation, Inc.
-# Shooby Ban <bansz@szif.hu>, 1999.
+# Szabolcs Ban <shooby@gnome.hu>, 2000.
 # Hungarian translation by Kádár András <kadara.inf.bme.hu> and 
 # Tamas Fejos <tms@rt.dunaferr.hu>
 #
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: control-center 4.5.38\n"
 "POT-Creation-Date: 1999-08-30 13:07+0200\n"
-"PO-Revision-Date: 1998-03-27 01:22+0100\n"
-"Last-Translator: Shooby Ban <bansz@szif.hu>\n"
+"PO-Revision-Date: 2000-05-09 01:22+0100\n"
+"Last-Translator: Szabolcs Ban <shooby@gnome.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-2\n"
@@ -46,6 +46,10 @@ msgid ""
 "\n"
 "Please check it to see if it points to a valid command."
 msgstr ""
+"Nem tudom elindítani\n"
+"\"%s\".\n"
+"\n"
+"Kérlek vizsgáld meg, hogy helyes programra mutat-e."
 
 #: gnome/gaction.c:40
 #, c-format
@@ -55,6 +59,10 @@ msgid ""
 "To fix this, bring up the mime-properties editor in the GNOME Control "
 "Center, and edit the default %s-action for \"%s\"."
 msgstr ""
+"\".\n"
+"\n"
+"A hiba kijavításához kattints a mime típusokra a GNOME vezérlõpulton"
+" és szerkeszd a %s-action beállítást \"%s\"-nek."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -64,6 +72,10 @@ msgid ""
 "To fix this error, bring up this file's properties and change the default "
 "%s-action."
 msgstr ""
+"\".\n"
+"\n"
+"A hiba javításához hozd be a fájl beállításait és cseréld ki az alap "
+"%s-action-t."
 
 #: gnome/gaction.c:51
 #, c-format
@@ -73,21 +85,22 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
+"Nem megy: %s\n"
+"\"%s\"\n"
+"a parancs:\n"
+"\"%s\"%s"
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
-#, fuzzy
 msgid "open"
-msgstr "Megnyitás"
+msgstr "megnyitás"
 
 #: gnome/gaction.c:185 gnome/gaction.c:198
-#, fuzzy
 msgid "edit"
-msgstr "Szerk"
+msgstr "szerk"
 
 #: gnome/gaction.c:331
-#, fuzzy
 msgid "view"
-msgstr "Megnéz"
+msgstr "megnéz"
 
 #: gnome/gcmd.c:48
 msgid " There is no other panel to compare contents to "
@@ -205,7 +218,7 @@ msgstr "Minden fájlt mutat"
 
 #: gnome/gcmd.c:685
 msgid "."
-msgstr ""
+msgstr "."
 
 #: gnome/gcmd.c:701
 msgid ""
@@ -339,12 +352,12 @@ msgstr "Beállított nézet"
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
-msgstr ""
+msgstr "Ikon pozíció"
 
 #. Snap and placement
 #: gnome/gdesktop-prefs.c:258
 msgid "Automatic icon placement"
-msgstr ""
+msgstr "Automatikus ikon helyezés"
 
 #: gnome/gdesktop-prefs.c:262
 msgid "Snap icons to grid"
@@ -355,9 +368,8 @@ msgid "Use shaped icons"
 msgstr "Árnyékolt ikonok használata"
 
 #: gnome/gdesktop-prefs.c:281
-#, fuzzy
 msgid "Use shaped text"
-msgstr "Árnyékolt ikonok használata"
+msgstr "Árnyékolt szöveg használata"
 
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
@@ -432,7 +444,7 @@ msgstr "Új URL link létrehozása"
 
 #: gnome/gdesktop.c:2613
 msgid "URL L_ink..."
-msgstr ""
+msgstr "URL L_ink..."
 
 #: gnome/gdesktop.c:2614
 msgid "Creates a new launcher"
@@ -443,59 +455,48 @@ msgid "_Launcher..."
 msgstr "I_ndító..."
 
 #: gnome/gdesktop.c:2620
-#, fuzzy
 msgid "By _Name"
-msgstr " Fájlnév "
+msgstr "_Név szerint"
 
 #: gnome/gdesktop.c:2621
-#, fuzzy
 msgid "By File _Type"
-msgstr "Fájl típusok"
+msgstr "_Típus szerint"
 
 #: gnome/gdesktop.c:2622
-#, fuzzy
 msgid "By _Size"
-msgstr " Hossz "
+msgstr "Ho_ssz szerint"
 
 #: gnome/gdesktop.c:2623
-#, fuzzy
 msgid "By Time Last _Accessed"
-msgstr "Utolsó elérés ideje"
+msgstr "Utolsó _elérés szerint"
 
 #: gnome/gdesktop.c:2624
-#, fuzzy
 msgid "By Time Last _Modified"
-msgstr "Utolsó módosítás ideje"
+msgstr "Utolsó _módosítás szerint"
 
 #: gnome/gdesktop.c:2625
-#, fuzzy
 msgid "By Time Last _Changed"
-msgstr "Utolsó változás ideje"
+msgstr "Utolsó _változás szerint"
 
 #: gnome/gdesktop.c:2633 gnome/glayout.c:455
-#, fuzzy
 msgid "_Arrange Icons"
 msgstr "Ikonok elrendezése"
 
 #: gnome/gdesktop.c:2634
-#, fuzzy
 msgid "Create _New Window"
-msgstr "Új ablak készítése"
+msgstr "Új _ablak készítése"
 
 #: gnome/gdesktop.c:2636 gnome/glayout.c:457
-#, fuzzy
 msgid "Recreate Desktop _Shortcuts"
-msgstr "Készítsd el újra a munkaasztal-linkeket"
+msgstr "_Készítsd el újra a munkaasztal-linkeket"
 
 #: gnome/gdesktop.c:2637 gnome/glayout.c:458
-#, fuzzy
 msgid "Rescan _Desktop"
-msgstr "Munkaasztal újraolvasása"
+msgstr "Munkaaszta_l újraolvasása"
 
 #: gnome/gdesktop.c:2638
-#, fuzzy
 msgid "Configure _Background Image"
-msgstr "Háttérkép beállítása"
+msgstr "Háttérkép _beállítása"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -932,7 +933,7 @@ msgstr "A fájlmenedzsert és a munkaasztalkezelõt megállítja"
 
 #: gnome/glayout.c:465 gnome/glayout.c:476
 msgid "_Settings"
-msgstr ""
+msgstr "_Beállítások"
 
 #: gnome/glayout.c:466 gnome/glayout.c:477
 msgid "_Layout"
@@ -1088,7 +1089,7 @@ msgstr "Elérve: "
 
 #: gnome/gnome-file-property-dialog.c:303
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: gnome/gnome-file-property-dialog.c:310
 msgid "Caption:"
@@ -1100,9 +1101,8 @@ msgid "Drop Action"
 msgstr "Elejtés akció"
 
 #: gnome/gnome-file-property-dialog.c:388
-#, fuzzy
 msgid "Use default Drop Action options"
-msgstr "Használd az alapértelmezett elejtést"
+msgstr "Használd az _alapértelmezett elejtést"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
@@ -1210,9 +1210,9 @@ msgstr "Sticky"
 
 #: gnome/gnome-file-property-dialog.c:815
 #: gnome/gnome-file-property-dialog.c:905
-#, fuzzy, c-format
+#, c-format
 msgid "<Unknown> (%d)"
-msgstr "<Ismeretlen>"
+msgstr "<Ismeretlen> (%d)"
 
 #: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
@@ -1220,7 +1220,7 @@ msgstr "Fájl tulajdonos"
 
 #: gnome/gnome-file-property-dialog.c:1079
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: gnome/gnome-file-property-dialog.c:1082
 msgid "Statistics"
@@ -1251,9 +1251,9 @@ msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Nem nevezheted át a fájlodat olyan névre, amiben van '/'"
 
 #: gnome/gnome-open-dialog.c:384
-#, fuzzy, c-format
+#, c-format
 msgid "Select an application to open \"%s\" with."
-msgstr "Válassz egy alkalmazást hogy megnyisd \""
+msgstr "Válassz egy alkalmazást hogy megnyisd \"%s\"-t."
 
 #: gnome/gnome-open-dialog.c:394
 msgid "Select a file to run with"
@@ -1391,11 +1391,11 @@ msgstr "Megerõsítés"
 
 #: gnome/gprefs.c:180
 msgid "VFS"
-msgstr ""
+msgstr "VFS"
 
 #: gnome/gprefs.c:184
 msgid "Caching"
-msgstr ""
+msgstr "Gyorstár"
 
 #: gnome/gprefs.c:474
 msgid "Preferences"
@@ -1539,9 +1539,9 @@ msgid "&Ok"
 msgstr "&Oké"
 
 #: gnome/gview.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Offset 0x%08lx"
-msgstr "Offset 0x%08x"
+msgstr "Offset 0x%08lx"
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
@@ -1835,7 +1835,7 @@ msgstr " Folytatás "
 #: gtkedit/editcmd.c:1151
 #, fuzzy
 msgid "o&Ne"
-msgstr "&Név"
+msgstr "e&Gy"
 
 #: gtkedit/editcmd.c:1153 src/filegui.c:597
 msgid "al&L"
@@ -1920,12 +1920,13 @@ msgid " Enter replace text : "
 msgstr " Csere erre : "
 
 #: gtkedit/editcmd.c:1370 gtkedit/editcmd.c:1371
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
-"Beírhatsz egy reguláris kifejezést %s-el (nem \\1, \\2 mint a sed-ben)majd "
+"Beírhatsz egy reguláris kifejezést %s-el\n"
+"(nem \\1, \\2 mint a sed-ben) majd "
 "használd az 'Írd be..rendezési'"
 
 #: gtkedit/editcmd.c:1373
@@ -1934,12 +1935,12 @@ msgstr " Add meg az argumentum (vagy résszöveg) sorrendet : "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:1378
-#, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
-"Írd be a rendezési elvet a scanf formátumú vagy reguláris kifejezés helyett"
+"Írd be a rendezési elvet a scanf\n"
+"formátumú vagy reguláris kifejezés helyett, pl. 3,1,2"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1383
@@ -1955,11 +1956,12 @@ msgid " Regular expression "
 msgstr " Szabályos kifejezés "
 
 #: gtkedit/editcmd.c:1389 gtkedit/editcmd.c:1390
-#, fuzzy
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
-msgstr "Szabályos kifelyezések alkotásához nézd meg a regexp man oldalt"
+msgstr 
+"Szabályos kifelyezések alkotásához\n"
+"nézd meg a regexp man oldalt"
 
 #: gtkedit/editcmd.c:1396
 msgid " Backwards "
@@ -1989,11 +1991,12 @@ msgstr " Scanf kifejezés "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1421
-#, fuzzy
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
-msgstr "A `scanf' C függvényben használt formátummegadást tesz lehetõvé"
+msgstr 
+"A `scanf' C függvényben használt \n"
+"formátummegadást tesz lehetõvé, lásd man scanf"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1426
@@ -2014,9 +2017,8 @@ msgid "Replace all"
 msgstr "Mindet cseréli"
 
 #: gtkedit/editcmd.c:1585
-#, fuzzy
 msgid "Replace one"
-msgstr " Csere "
+msgstr "Egyet cserél"
 
 #: gtkedit/editcmd.c:1585
 msgid "Skip"
@@ -2203,7 +2205,6 @@ msgid " About "
 msgstr " Névjegy "
 
 #: gtkedit/editmenu.c:75
-#, fuzzy
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2214,7 +2215,7 @@ msgid ""
 "           for the Midnight Commander.\n"
 msgstr ""
 "\n"
-"                 Cooledit  v2.1\n"
+"                 Cooledit  v3.11.5\n"
 "\n"
 "   Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
@@ -2430,7 +2431,7 @@ msgstr "Másolás fájlba...\tC-f"
 #. Tool hint
 #: gtkedit/editmenu.c:407
 msgid "Disk operations and file indexing/searching"
-msgstr ""
+msgstr "Lemez mûveletek és fájl indexelés/keresés"
 
 #: gtkedit/editmenu.c:413
 msgid "Toggle mark\tF3"
@@ -2561,7 +2562,7 @@ msgstr "Makrók és belsõ parancsok"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
-msgstr ""
+msgstr "Emacs"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
@@ -2682,53 +2683,45 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1246
 msgid "Interactive help browser"
-msgstr ""
+msgstr "Interaktív súgó böngészõ"
 
 #: gtkedit/gtkedit.c:1247
-#, fuzzy
 msgid "Save to current file name"
-msgstr " Írd be a fájlnevet: "
+msgstr "Jelenlegi fájlnévre ments"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
-msgstr ""
+msgstr "Ki/be kapcsolja a láthatatlan jelölõt a kijelölt szöveghez"
 
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Find and replace strings/regular expressions"
-msgstr " Hibás reguláris kifejezés "
+msgstr "Reguláris kifejezés, sztringek keresése, cseréje"
 
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Replc"
 msgstr "Csere"
 
 #: gtkedit/gtkedit.c:1250
-#, fuzzy
 msgid "Copy highlighted block to cursor position"
-msgstr "Kijelölés másolása\tF5"
+msgstr "Kijelölés másolása kurzor pozícióba"
 
 #: gtkedit/gtkedit.c:1252
-#, fuzzy
 msgid "Move highlighted block to cursor position"
-msgstr "Kijelölés áthelyezése\tF6"
+msgstr "Kijelölés áthelyezése kurzor pozícióba"
 
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find"
-msgstr "Befejezve"
+msgstr "Keres"
 
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find strings/regular expressions"
-msgstr " Hibás reguláris kifejezés "
+msgstr "Reguláris kifejezések/szövegek keresése"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Delete highlighted text"
-msgstr ""
+msgstr "Törli a kijelölt szöveget"
 
 #: gtkedit/gtkedit.c:1254
-#, fuzzy
 msgid "Dlete"
 msgstr "Töröl"
 
@@ -2737,13 +2730,12 @@ msgid "Menu"
 msgstr "Menü"
 
 #: gtkedit/gtkedit.c:1255
-#, fuzzy
 msgid "Pull down menu"
-msgstr "&Legördülõ menük"
+msgstr "Legördülõ menük"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Exit editor"
-msgstr ""
+msgstr "Kilép a szerkesztõbõl"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
@@ -2779,7 +2771,7 @@ msgstr ""
 #: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
 #: gtkedit/syntax.c:1078
 msgid " Spelling Message "
-msgstr ""
+msgstr " Helyesírási üzenet "
 
 #: gtkedit/syntax.c:1060
 msgid ""
@@ -2802,7 +2794,6 @@ msgid ""
 msgstr ""
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
-#, fuzzy
 msgid " Load Syntax Rules "
 msgstr " Szintaxis fájl betöltése"
 
@@ -3440,9 +3431,8 @@ msgid " FTP to machine "
 msgstr " FTP kapcsolat "
 
 #: src/cmd.c:1374
-#, fuzzy
 msgid " SMB link to machine "
-msgstr " FTP kapcsolat "
+msgstr " SMB kapcsolat "
 
 #: src/cmd.c:1384
 msgid " Socket source routing setup "
@@ -3820,7 +3810,7 @@ msgstr ""
 
 #: src/file.c:802
 msgid "Incomplete file was retrieved. Keep it?"
-msgstr ""
+msgstr "Nem jött le a teljes fájl. Megtartod?"
 
 #: src/file.c:803
 msgid "&Delete"
@@ -3915,9 +3905,9 @@ msgstr ""
 " %s "
 
 #: src/file.c:1246
-#, fuzzy, c-format
+#, c-format
 msgid " `%s' and `%s' are the same directory "
-msgstr " %s' és %s' ugyanaz a fájl "
+msgstr " %s' és %s' ugyanaz a könyvtár "
 
 #: src/file.c:1265
 #, c-format
@@ -3984,22 +3974,22 @@ msgstr "1Mozgat"
 #: src/file.c:1695
 #, c-format
 msgid "%o %f \"%s\"%m"
-msgstr ""
+msgstr "%o %f \"%s\"%m"
 
 #: src/file.c:1696
 #, c-format
 msgid "%o %d %f%m"
-msgstr ""
+msgstr "%o %d %f%m"
 
 #: src/file.c:1698
 #, c-format
 msgid "%o %f \"%s\"%e"
-msgstr ""
+msgstr "%o %f \"%s\"%e"
 
 #: src/file.c:1699
 #, c-format
 msgid "%o %d %f%e"
-msgstr ""
+msgstr "%o %d %f%e"
 
 #: src/file.c:1703
 msgid "directories"
@@ -4893,9 +4883,8 @@ msgid "FT&P link..."
 msgstr "F&TP kapcsolat..."
 
 #: src/main.c:1246 src/main.c:1270
-#, fuzzy
 msgid "SM&B link..."
-msgstr "F&TP kapcsolat..."
+msgstr "&SMB kapcsolat..."
 
 #: src/main.c:1251 src/main.c:1275
 msgid "&Drive...       M-d"
@@ -5224,7 +5213,7 @@ msgstr "Xterm tulajdonságok kényszerítése"
 
 #: src/main.c:2740
 msgid "GEOMETRY"
-msgstr ""
+msgstr "GEOMETRY"
 
 #: src/main.c:2740
 msgid "Geometry for the window"
@@ -5643,12 +5632,12 @@ msgstr " Figyelem: a fájl mellõzve lesz"
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
 #: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5722,7 +5711,7 @@ msgstr ""
 " %s "
 
 #: src/view.c:578
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't stat \"%s\"\n"
 " %s "
@@ -5767,18 +5756,17 @@ msgstr ""
 " Írd be az kívánt sor számát:"
 
 #: src/view.c:1933
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
-" Az aktuális sor száma %d.\n"
+" Az aktuális sor száma 0x%lx.\n"
 " Írd be az kívánt sor számát:"
 
 #: src/view.c:1935
-#, fuzzy
 msgid " Goto Address "
-msgstr " Ugrás sorra "
+msgstr " Ugrás címre "
 
 #: src/view.c:1966
 msgid " Enter regexp:"
@@ -5794,7 +5782,7 @@ msgstr "Hex"
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr ""
+msgstr "Menj"
 
 #: src/view.c:2072
 msgid "Line"
@@ -5841,9 +5829,8 @@ msgid "Unform"
 msgstr "NForm"
 
 #: src/widget.c:999
-#, fuzzy
 msgid " History "
-msgstr "Parancssor &elõzmények"
+msgstr " Elõzmények "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
@@ -6054,88 +6041,83 @@ msgid "Inconsistent extfs archive"
 msgstr "Nem konzisztens extfs archív"
 
 #: vfs/fish.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "ftpfs: Lecsatlakozás %s-rõl"
+msgstr "fish: Lecsatlakozás %s-rõl"
 
 #: vfs/fish.c:214
 msgid "fish: Waiting for initial line..."
-msgstr ""
+msgstr "fish: Kezdõ sorra várva..."
 
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Bocs, nem tudok jelszóellenõrzött kapcsolatot létesíteni most."
 
 #: vfs/fish.c:238
-#, fuzzy
 msgid "fish: Sending password..."
-msgstr "ftpfs: felhasználójelszó küldése"
+msgstr "fish: Jelszó küldése..."
 
 #: vfs/fish.c:244
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish: Kezdõsor küldése..."
 
 #: vfs/fish.c:248
 msgid "fish: Handshaking version..."
-msgstr ""
+msgstr "fish: Kézfogás verzió..."
 
 #: vfs/fish.c:252
-#, fuzzy
 msgid "fish: Setting up current directory..."
-msgstr "Könyvtár tartalmat újra olvas"
+msgstr "fish: Könyvtár beállítása..."
 
 #: vfs/fish.c:254
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Connected, home %s."
-msgstr "ftpfs: csatlakozva: "
+msgstr "fish: Csatlakozva, %s a könyvtár."
 
 #: vfs/fish.c:331
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Reading directory %s..."
-msgstr "ftpfs: %s FTP könyvtár olvasása"
+msgstr "fish: %s könyvtár olvasása..."
 
 #: vfs/fish.c:426
-#, fuzzy
 msgid "fish: got listing"
-msgstr "ftpfs: listázva"
+msgstr "fish: listázva"
 
 #: vfs/fish.c:430
-#, fuzzy
 msgid "fish: failed"
-msgstr "ftpfs: nem sikerült"
+msgstr "fish: nem sikerült"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:450
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish: store %s: parancs küldése..."
 
 #: vfs/fish.c:464
 msgid "fish: Local read failed, sending zeros"
-msgstr ""
+msgstr "fish: Helyi olvasás sikertelen, 0-k küldése"
 
 #: vfs/fish.c:476
 #, fuzzy, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr "ftpfs: fájl feltöltése %d (%s)"
+msgstr "fish: %s fájl feltöltése %d (%d)"
 
 #: vfs/fish.c:516
-#, fuzzy
 msgid "Aborting transfer..."
-msgstr "ftpfs: átvitel megszakítása."
+msgstr "fish: átvitel megszakítása..."
 
 #: vfs/fish.c:525
 msgid "Error reported after abort."
-msgstr ""
+msgstr "Hiba a megszakítás után."
 
 #: vfs/fish.c:527
 msgid "Aborted transfer would be successful."
-msgstr ""
+msgstr "A megszakított átvitel sikeres lehet."
 
 #: vfs/ftpfs.c:326
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: Lecsatlakozás %s-rõl"
+msgstr "fish: Lecsatlakozás %s-rõl"
 
 #: vfs/ftpfs.c:377
 msgid " FTP: Password required for "
@@ -6289,7 +6271,7 @@ msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " MCFS "
-msgstr ""
+msgstr " MCFS "
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
@@ -6330,26 +6312,24 @@ msgid " Too many open connections "
 msgstr " Túl sok nyitott kapcsolat"
 
 #: vfs/smbfs.c:1421
-#, fuzzy, c-format
+#, c-format
 msgid " %s mkdir'ing %s "
-msgstr " szimbolikus link: %s"
+msgstr " %s mkdir-ezi: %s"
 
 #: vfs/smbfs.c:1442
-#, fuzzy, c-format
+#, c-format
 msgid " %s rmdir'ing %s "
-msgstr " szimbolikus link: %s"
+msgstr " %s rmdir-ezi: %s"
 
 #: vfs/smbfs.c:1550 vfs/smbfs.c:1570 vfs/smbfs.c:1631
-#, fuzzy, c-format
+#, c-format
 msgid " %s opening remote file %s "
-msgstr ""
-" A(z) \"%s\" fájlt nem sikerült törölni.\n"
-" %s "
+msgstr " %s megnyitja a %s távoli fájlt "
 
 #: vfs/smbfs.c:1654
-#, fuzzy, c-format
+#, c-format
 msgid " %s renaming files\n"
-msgstr "  %s bájt %d fájlban"
+msgstr "  %s fájl van hátra\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6381,69 +6361,9 @@ msgstr ""
 
 #: vfs/vfs.c:1792
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%ld byte átment)"
 
 #: vfs/vfs.c:1793
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr ""
-
-#~ msgid "Rescan System Devices"
-#~ msgstr "A rendszereszközök újraellenõrzése"
-
-#~ msgid "Auto place icons"
-#~ msgstr "Ikonok elrendezése"
-
-#~ msgid "All files"
-#~ msgstr "Minden fájl"
-
-#~ msgid "Archives and compressed files"
-#~ msgstr "Archív és tömörített fájlok"
-
-#~ msgid "RPM/DEB files"
-#~ msgstr "RPM/DEB fájlok"
-
-#~ msgid "Text/Document files"
-#~ msgstr "Szöveg/Dokumentum fájlok"
-
-#~ msgid "HTML and SGML files"
-#~ msgstr "HTML és SGML fájlok"
-
-#~ msgid "Postscript and PDF files"
-#~ msgstr "Postscript és PDF fájlok"
-
-#~ msgid "Spreadsheet files"
-#~ msgstr "Táblázat fájlok"
-
-#~ msgid "Image files"
-#~ msgstr "Kép fájlok"
-
-#~ msgid "Video/animation files"
-#~ msgstr "Video/animáció fájlok"
-
-#~ msgid "Audio files"
-#~ msgstr "Hang fájlok"
-
-#~ msgid "C program files"
-#~ msgstr "C program fájlok"
-
-#~ msgid "C++ program files"
-#~ msgstr "C++ program fájlok"
-
-#~ msgid "Objective-C program files"
-#~ msgstr "Objective-C program fájlok"
-
-#~ msgid "Scheme program files"
-#~ msgstr "Scheme program fájlok"
-
-#~ msgid "Assembler program files"
-#~ msgstr "Assembler program fájlok"
-
-#~ msgid "Misc. program files"
-#~ msgstr "Vegyes program fájlok"
-
-#~ msgid "Font files"
-#~ msgstr "Font fájlok"
-
-#~ msgid "Disk operations"
-#~ msgstr "Lemezmûveletek"
+msgstr "%s: %s: %s %ld byte átment"
