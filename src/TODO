@@ -1,6 +1,8 @@
 Before 4.6.0-pre2
 =================
 
+Test for groff and for -P-c option to groff to disable ANSI colors.
+
 Write a document explaining how to report bugs and ask questions in the
 mailing lists.
 
