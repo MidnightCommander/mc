@@ -442,7 +442,7 @@ static void init_layout (void)
 
     layout_dlg = create_dlg (0, 0, 15, first_width + second_width + 9, 
 		dialog_colors, layout_callback,
-		"[Layout]", "layout", DLG_CENTER | DLG_GRID);
+		"[Layout]", "layout", DLG_CENTER);
 			     
     x_set_dialog_title (layout_dlg, _("Layout"));
 

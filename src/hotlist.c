@@ -582,7 +582,7 @@ static void init_hotlist (int list_type)
 			      hotlist_callback, 
 			      list_type == LIST_VFSLIST ? "[vfshot]" : "[Hotlist]",
 			      list_type == LIST_VFSLIST ? "vfshot" : "hotlist",
-			      DLG_CENTER|DLG_GRID);
+			      DLG_CENTER);
     x_set_dialog_title (hotlist_dlg,
         list_type == LIST_VFSLIST ? _("Active VFS directories") : _("Directory hotlist"));
 
@@ -634,7 +634,7 @@ static void init_movelist (int list_type, struct hotlist *item)
     movelist_dlg = create_dlg (0, 0, LINES-6, movelist_cols, dialog_colors,
 			      hotlist_callback, "[Hotlist]",
 			      "movelist",
-			      DLG_CENTER|DLG_GRID);
+			      DLG_CENTER);
     x_set_dialog_title (movelist_dlg, hdr);
     g_free (hdr);
 

@@ -187,7 +187,7 @@ display_init (int radio_sel, char *init_text,
     }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
 		     display_callback, "[Listing Mode...]", "display",
-		     DLG_CENTER | DLG_GRID);
+		     DLG_CENTER);
 
     x_set_dialog_title (dd, _("Listing mode"));
     add_widget (dd,
@@ -329,7 +329,7 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 	}
     
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, common_dialog_callback,
-		     "[Sort Order...]", "sort", DLG_CENTER | DLG_GRID);
+		     "[Sort Order...]", "sort", DLG_CENTER);
 		     
     x_set_dialog_title (dd, sort_title);
 
@@ -1003,7 +1003,7 @@ jobs_cmd (void)
 
     jobs_dlg = create_dlg (0, 0, JOBS_Y, JOBS_X, dialog_colors,
 			   common_dialog_callback, "[Background jobs]", "jobs",
-			   DLG_CENTER | DLG_GRID);
+			   DLG_CENTER);
     x_set_dialog_title (jobs_dlg, _("Background Jobs"));
     
     bg_list = listbox_new (2, 3, JOBS_X-7, JOBS_Y-9, listbox_nothing, 0, "listbox");
@@ -1088,7 +1088,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 
     auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors,
                        common_dialog_callback, "[Smb Authinfo]", "smbauthinfo",
-                       DLG_CENTER | DLG_GRID);
+                       DLG_CENTER);
 
     title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
     x_set_dialog_title (auth_dlg, title);

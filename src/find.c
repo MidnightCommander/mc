@@ -203,7 +203,7 @@ find_par_start:
     
     find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
 			   common_dialog_callback, "[Find File]", "findfile",
-			   DLG_CENTER | DLG_GRID);
+			   DLG_CENTER);
 
     x_set_dialog_title (find_dlg, _("Find File"));
 
@@ -786,7 +786,7 @@ setup_gui (void)
 	}
     
     find_dlg = create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors,
-			   find_callback, "[Find File]", "mfind", DLG_CENTER | DLG_GRID);
+			   find_callback, "[Find File]", "mfind", DLG_CENTER);
     
     x_set_dialog_title (find_dlg, _("Find file"));
 

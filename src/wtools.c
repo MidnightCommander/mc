@@ -118,7 +118,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     /* Create components */
     listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
-			       listbox_callback, help, "listbox", DLG_CENTER|DLG_GRID);
+			       listbox_callback, help, "listbox", DLG_CENTER);
     x_set_dialog_title (listbox->dlg, title);	       
     
     listbox->list = listbox_new (2, 2, cols, lines, listbox_finish, 0, "li");
@@ -334,7 +334,7 @@ Chooser *new_chooser (int lines, int cols, char *help, int flags)
 
     c =g_new (Chooser, 1);
     c->dialog = create_dlg (0, 0, lines, cols, dialog_colors, common_dialog_callback,
-			    help, "chooser", DLG_CENTER | DLG_GRID);
+			    help, "chooser", DLG_CENTER);
     
     c->dialog->lines = lines;
     c->dialog->cols  = cols;
@@ -417,11 +417,11 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     
     if (qd->xpos == -1)
         dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, quick_callback,
-		         qd->help, qd->class, DLG_CENTER | DLG_TRYUP | DLG_GRID);
+		         qd->help, qd->class, DLG_CENTER | DLG_TRYUP);
     else
         dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen, dialog_colors, 
                          quick_callback,
-		         qd->help, qd->class, DLG_GRID);
+		         qd->help, qd->class, DLG_NONE);
 
     x_set_dialog_title (dd, qd->title);
     

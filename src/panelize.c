@@ -175,7 +175,7 @@ static void init_panelize (void)
 
     panelize_dlg = create_dlg (0, 0, 22, panelize_cols, dialog_colors,
 			      panelize_callback, "[External panelize]", "panelize",
-			      DLG_CENTER|DLG_GRID);
+			      DLG_CENTER);
     x_set_dialog_title (panelize_dlg, _("External panelize"));
 
 #define XTRACT(i) BY+panelize_but[i].y, BX+panelize_but[i].x, panelize_but[i].ret_cmd, panelize_but[i].flags, panelize_but[i].text, 0, 0, panelize_but[i].tkname
