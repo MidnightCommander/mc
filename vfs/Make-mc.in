@@ -211,17 +211,20 @@ VFSHDRS = 			\
 VFSOBJS = $(NONETFILES) @NETFILES@
 
 Makefile: $(srcdir)/Make-mc.in $(top_builddir)/config.status
-	cd $(top_builddir) && CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in CONFIG_HEADERS= $(SHELL) ./config.status
+	cd $(top_builddir) && \
+	  CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in \
+	  CONFIG_HEADERS= $(SHELL) ./config.status
 
 
 #
 # Distribution variables
 #
 
-DISTVFS = 	Make-mc.in ChangeLog $(VFSSRCS) $(VFSHDRS) callback.h README README.fish
+DISTVFS = Make-mc.in ChangeLog callback.h README README.fish \
+	$(VFSSRCS) $(VFSHDRS)
 
 all: @LIBVFS@ @mcserv@
-	(cd extfs; $(MAKE) all)
+	cd extfs && $(MAKE) all
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -254,20 +257,22 @@ TAGS: $(VFSSRCS)
 	etags $(VFSSRCS)
 
 mostlyclean:
-	(cd extfs; $(MAKE) mostlyclean)
+	(cd extfs && $(MAKE) mostlyclean)
 	rm -f $(SAMBAFILES)
 	rm -f *.o core a.out
 
 clean: mostlyclean
-	(cd extfs; $(MAKE) clean)
+	(cd extfs && $(MAKE) clean)
 	if test -f samba/Makefile; then \
-	  (cd samba; make clean); \
+	  (cd samba && $(MAKE) clean); \
 	else :;	fi
 	rm -f mcserv *.a
 
 distclean: clean
-	(cd extfs; $(MAKE) distclean)
-	(cd samba; $(MAKE) distclean)
+	(cd extfs && $(MAKE) distclean)
+	if test -f samba/Makefile; then \
+	  (cd samba && $(MAKE) distclean); \
+	else :;	fi
 	rm -f $(SRC_LINKS)
 	rm -f .depend
 	rm -f TAGS
@@ -283,10 +288,10 @@ install_mcserv:
 	$(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 install.extfs:
-	(cd extfs; $(MAKE) install)
+	cd extfs && $(MAKE) install
 
 uninstall:
-	(cd extfs; $(MAKE) uninstall)
+	(cd extfs && $(MAKE) uninstall)
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
@@ -306,15 +311,30 @@ distdir:
 	mkdir $(distdir)/samba/smbwrapper
 	mkdir $(distdir)/samba/tests
 	mkdir $(distdir)/samba/ubiqx
-
-	for I in $(SAMBA_DIST_TOPLEVEL); do cp -p $(srcdir)/samba/$$I $(distdir)/samba || exit 1; done
-	for I in $(SAMBA_DIST_INCLUDE); do cp -p $(srcdir)/samba/include/$$I $(distdir)/samba/include || exit 1; done
-	for I in $(SAMBA_DIST_LIB); do cp -p $(srcdir)/samba/lib/$$I $(distdir)/samba/lib || exit 1; done
-	for I in $(SAMBA_DIST_LIBSMB); do cp -p $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb || exit 1; done
-	for I in $(SAMBA_DIST_PARAM); do cp -p $(srcdir)/samba/param/$$I $(distdir)/samba/param || exit 1; done
-	for I in $(SAMBA_DIST_SMBWRAPPER); do cp -p $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper || exit 1; done
-	for I in $(SAMBA_DIST_TESTS); do cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests || exit 1; done
-	for I in $(SAMBA_DIST_UBIQX); do cp -p $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx || exit 1; done
+	for I in $(SAMBA_DIST_TOPLEVEL); do \
+	  cp -p $(srcdir)/samba/$$I $(distdir)/samba \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_INCLUDE); do \
+	  cp -p $(srcdir)/samba/include/$$I $(distdir)/samba/include \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_LIB); do \
+	  cp -p $(srcdir)/samba/lib/$$I $(distdir)/samba/lib \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_LIBSMB); do \
+	  cp -p $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_PARAM); do \
+	  cp -p $(srcdir)/samba/param/$$I $(distdir)/samba/param \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_SMBWRAPPER); do \
+	  cp -p $(srcdir)/samba/smbwrapper/$$I $(distdir)/samba/smbwrapper \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_TESTS); do \
+	  cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests \
+	  || exit 1; done
+	for I in $(SAMBA_DIST_UBIQX); do \
+	  cp -p $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx \
+	  || exit 1; done
 	
 depend dep: mcdep
 

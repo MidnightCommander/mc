@@ -1,3 +1,9 @@
+2001-02-09  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: Always check for samba/Makefile before descending
+	there. Don't ever ignore errors from "cd". Use $(MAKE), not
+	make. Formatting changes.
+
 2001-02-08  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Undo previous fix. Don't run "make clean" in
