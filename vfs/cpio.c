@@ -494,6 +494,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 		return STATUS_EOF;
 	    }
 	    inode->linkname[stat->st_size] = 0; /* Linkname stored without terminating \0 !!! */
+	    CPIO_POS(super) += stat->st_size;
 	    cpio_skip_padding(super);
 	} else {
 	    CPIO_SEEK_CUR(super, stat->st_size);

@@ -2,7 +2,8 @@
 
 	* cpio.c (cpio_read_oldc_head): Use char[] for buf instead
 	of char*[].  Remove unneeded casts.  Fix error message.
-	(cpio_create_entry): G_free name.
+	(cpio_create_entry): G_free name.  Fix offset calculation
+	for symbolic links.
 
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
