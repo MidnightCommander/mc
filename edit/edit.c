@@ -23,16 +23,12 @@
 #include <config.h>
 #include "edit.h"
 #include "edit-widget.h"
+#include "editcmddef.h"
 
 #include "src/cmd.h"		/* view_other_cmd() */
 #include "src/user.h"		/* user_menu_cmd() */
-#include "src/tty.h"		/* keys */
 #include "src/main.h"		/* edit_one_file */
-#include "src/key.h"		/* KEY_M_SHIFT */
 #include "src/wtools.h"		/* query_dialog() */
-
-#include "src/charsets.h"
-#include "src/selcodepage.h"
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL
@@ -2033,26 +2029,6 @@ static void check_and_wrap_line (WEdit * edit)
 }
 
 static void edit_execute_macro (WEdit *edit, struct macro macro[], int n);
-
-int
-edit_translate_key (WEdit *edit, unsigned int x_keycode, long x_key,
-		    int *cmd, int *ch)
-{
-    int command = -1;
-    int char_for_insertion = -1;
-
-#include "edit_key_translator.c"
-
-    *cmd = command;
-    *ch = char_for_insertion;
-
-    if ((command == -1 || command == 0) && char_for_insertion == -1) {
-	/* unchanged, key has no function here */
-	return 0;
-    }
-
-    return 1;
-}
 
 void edit_push_key_press (WEdit * edit)
 {

@@ -1,3 +1,10 @@
+2002-12-23  Pavel Roskin  <proski@gnu.org>
+
+	* edit_key_translator.c: Rename to ...
+	* editkeys.c: ... this.
+	* edit.c (edit_translate_key): Move to editkeys.c.
+	* Makefile.am: Adjust for the above.
+
 2002-12-21  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (edit_translate_key): Remove x_state argument, it's now

@@ -6,11 +6,9 @@ else
 noinst_LIBRARIES =
 endif
 
-libedit_a_SOURCES = edit.c editcmd.c editwidget.c editdraw.c \
-	editmenu.c wordproc.c syntax.c editoptions.c bookmark.c \
-	editcmddef.h edit.h edit-widget.h
+libedit_a_SOURCES = \
+	bookmark.c edit.c editcmd.c editwidget.c editdraw.c editkeys.c \
+	editmenu.c editoptions.c editcmddef.h edit.h edit-widget.h \
+	syntax.c wordproc.c
 
-EXTRASRC = edit_key_translator.c
-EXTRADOCS = ChangeLog
-
-EXTRA_DIST = $(EXTRASRC) $(EXTRADOCS)
+EXTRA_DIST = ChangeLog
