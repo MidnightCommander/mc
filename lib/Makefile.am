@@ -38,14 +38,14 @@ EXTRA_DIST = \
 	mc.charsets
 
 mc.csh: $(srcdir)/mc.csh.in
-	sed "s%@suppbindir@%$(suppbindir)%" $(srcdir)/mc.csh.in > mc.csh
+	sed "s%@""suppbindir@%$(suppbindir)%" $(srcdir)/mc.csh.in > mc.csh
 
 mc.sh: $(srcdir)/mc.sh.in
-	sed "s%@suppbindir@%$(suppbindir)%" $(srcdir)/mc.sh.in > mc.sh
+	sed "s%@""suppbindir@%$(suppbindir)%" $(srcdir)/mc.sh.in > mc.sh
 
 mc-wrapper.csh: $(srcdir)/mc-wrapper.csh.in
-	sed "s%\@bindir\@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
+	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.csh.in > mc-wrapper.csh
 
 mc-wrapper.sh: $(srcdir)/mc-wrapper.sh.in
-	sed "s%\@bindir\@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
+	sed "s%@""bindir@%$(bindir)%" $(srcdir)/mc-wrapper.sh.in > mc-wrapper.sh
 
