@@ -22,7 +22,6 @@ Hint: Wil je een gewone shell? Druk C-o, en ga terug naar MC met nogmaals C-o.
 Hint: De CDPATH variabele kan je een hoop typewerk met cd commandos besparen.
 Hint: Als je .* bestanden wilt zien, stel dat dan in in het Configuratie scherm.
 Hint: Wil je *~ backup bestanden zien? Ga naar het Configuratie scherm.
-Hint: Heb je genoeg RAM/Virtueel RAM? Zet de tar VFS geheugenlimiet dan op -1.
 Hint: Completering met M-Tab werkt op alle invoer regels in alle dialogen.
 Hint: Op trage terminals zou de -s vlag weleens kunnen helpen.
 Hint: Vind bestanden: gebruik de gevonden bestanden met de Extern Venster optie.

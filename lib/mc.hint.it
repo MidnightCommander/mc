@@ -22,7 +22,6 @@ Dritta: vuoi la tua shell? Premi C-o e torna nuovamente a MC con C-o.
 Dritta: impostare la variabile CDPATH può far risparmiare tasti nei comandi cd.
 Dritta: se vuoi vedere i tuoi file .* impostalo nella Configurazione.
 Dritta: vuoi vedere i tuoi *~ file di backup? Impostalo nella Configurazione.
-Dritta: hai tanta RAM/Virtual RAM? Imposta il tar VFS memlimit a -1.
 Dritta: il completamento funziona su tutti gli input. Basta premere M-Tab.
 Dritta: con terminali lenti può aiutare la flag -s.
 Dritta: trova file: puoi elaborare i file trovati usando il bottone Pannellizza.

@@ -1,3 +1,9 @@
+2002-10-13  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.hint*: Remove all references to "-1" - hints file is no
+	substitute to unambigous GUI.
+	From Christian Laubscher <christian.laubscher@tiscalinet.ch>
+
 2002-10-12  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Redirect stderr from "links" to suppress a

@@ -22,7 +22,6 @@ Hint: Want your plain shell? Press C-o, and get back to MC with C-o again.
 Hint: Setting the CDPATH variable can save you keystrokes in cd commands.
 Hint: If you want to see your .* files, say so in the Configuration dialog.
 Hint: Want to see your *~ backup files? Set it in the Configuration dialog.
-Hint: Have you plenty of RAM/Virtual RAM? Set the tar VFS memlimit to -1.
 Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
 Hint: On slow terminals the -s flag may help.
 Hint: Find File: you can work on the files found using the Panelize button.

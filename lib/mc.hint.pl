@@ -22,7 +22,6 @@ Porada: Dostêp do zwyk³ej pow³oki przez C-o. Powrót do MC przez ponowne C-o.
 Porada: Ustawienie zmiennej CDPATH mo¿e ci zaoszczêdziæ pisania.
 Porada: Je¶li chcesz zobaczyæ pliki .*, zmieñ ustawienie w menu Konfiguracja...
 Porada: Je¶li chcesz zobaczyæ pliki .*~, zmieñ ustawienie w menu Konfiguracja...
-Porada: Masz du¿o pamiêci? Ustaw limit pamiêci VFS archiwum tar na -1.
 Porada: Uzupe³nianie dzia³a wszêdzie. Po prostu naci¶nij M-Tab.
 Porada: Je¶li masz powolny terminal, spróbuj u¿yæ opcji -s.
 Porada: Znajd¼ plik: na znalezionych plikach wykonujemy operacje poprzez Filtruj.

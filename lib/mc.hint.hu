@@ -22,7 +22,6 @@ Tipp: A sima shell-t szeretnéd? Használd ezt: C-o (visszatérés MC-be: ugyanígy).
 Tipp: A CDPATH változó beállításával egyszerûbbé tehetõ a "cd" parancsok kiadása.
 Tipp: Ha látni szeretnéd a .* rejtett fájlokat, állítsd be az Alapbeállításoknál.
 Tipp: Ha látni szeretnéd a *~ másolatfájlokat, állítsd be az Alapbeállításoknál.
-Tipp: Sok RAM/virtuális RAM van a gépben? Állítsd a tar VFS memlimit-et -1-re.
 Tipp: A kiegészítés minden ablak összes beviteli mezõjében mûködik: M-Tab
 Tipp: Lassú terminálokon a -s opció hasznos lehet.
 Tipp: Fájlkeresés: mûveletek végzése a megtalált fájlokkal: "Listát a panelra".

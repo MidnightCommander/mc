@@ -23,7 +23,6 @@ Ayudita: Con C-o se puede ir y volver a la shell de siempre.
 Ayudita: La variable CDPATH ahorra teclas al cambiar de directorios.
 Ayudita: Para ver los archivos .* basta indicarlo en Configuración.
 Ayudita: Para ver los archivos de seguridad tipo *~ ir a Configuración.
-Ayudita: ¿Memoria real/virtual de sobra? Fijar el límite para VFS en -1.
 Ayudita: Se puede auto-completar nombres también en los diálogos con M-Tab.
 Ayudita: En terminales lentos la opción -s puede ayudar.
 Ayudita: Puede "Llevar al panel" los resultados de "Buscar archivos" y usarlos.

@@ -21,7 +21,6 @@ Tip: Chcete opìt vá¹ shell? Stisknìte C-o. Do MC se vrátíte opìt pøes C-o.
 Tip: Nastavením promìnné CDPATH mù¾ete ¹etøit klávesnici.
 Tip: Pokud chcete vidìt soubory zaèínající teèkou, øeknìte to v Nastavení.
 Tip: Chcete vidìt zálohy svých souborù (konèí ~). Pou¾ijte Nastavení.
-Tip: Máte opravdu mnoho pamìti? Zkuste nastavit limit ve VFS na -1.
 Tip: Doplòování funguje ve vstupních øádkách v¹ech dialogù. Pou¾ijte M-Tab.
 Tip: Na terminálech s pomalou odezvou skuste na parametr -s (mc -s).
 Tip: S nalezenými soubory mù¾ete pracovat. Stiknìte tlaèítko Panelizace.
