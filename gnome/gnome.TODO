@@ -1,3 +1,17 @@
+New task list:
+
+	- Make the tree faster (cache loaded directories)
+	
+	- Sync the tree to the panel view
+
+	- Add focus management to the tree
+
+	- Sync the tree selection to the panel view.
+
+	- Add drag and drop to the tree view.
+
+	- Add to the gnome-panel mime-type support
+
 Other features requested:
 
 	- Make the default action on drop configurable.
