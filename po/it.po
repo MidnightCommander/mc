@@ -1373,11 +1373,11 @@ msgstr "di &Sistema"
 
 #: src/cmd.c:641
 msgid "Syntax file edit"
-msgstr "Modifica il file edit"
+msgstr "Modifica il file della sintassi"
 
 #: src/cmd.c:642
 msgid " Which syntax file you want to edit? "
-msgstr " Quale file delle sintassi vuoi modificare? "
+msgstr " Quale file della sintassi vuoi modificare? "
 
 #: src/cmd.c:668
 msgid " Menu edit "
@@ -3090,11 +3090,11 @@ msgstr "Modifica il file &Menu"
 
 #: src/main.c:1209
 msgid "Menu edi&Tor edit"
-msgstr "Modifica edi&Tor menu"
+msgstr "Modifica menu edito&R"
 
 #: src/main.c:1210
 msgid "&Syntax file edit"
-msgstr "Modifica il file &Sintassi"
+msgstr "Modifica il file sintass&I"
 
 #: src/main.c:1216
 msgid "&Configuration..."
