@@ -768,7 +768,9 @@ extern int option_long_whitespace;
 void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
     int f = 0;
-
+#ifdef GTK
+    GtkEdit *win;
+#endif
     if (page)			/* if it was an expose event, 'page' would be set */
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
     f = edit->force & (REDRAW_PAGE | REDRAW_COMPLETELY);
@@ -781,7 +783,9 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 	edit_set_space_width (FONT_PER_CHAR[' '] * 2);
     else
 	edit_set_space_width (FONT_PER_CHAR[' ']);
-
+#ifdef GTK
+    win = (GtkEdit *) edit->widget;
+#endif
     edit_set_foreground_colors (
 				 color_palette (option_editor_fg_normal),
 				   color_palette (option_editor_fg_bold),
