@@ -313,7 +313,7 @@ radio_callback (WRadio *r, int msg, int parm)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++) {
-	    register unsigned char *cp;
+	    register const unsigned char *cp;
 	    attrset ((i == r->pos
 		      && msg == WIDGET_FOCUS) ? FOCUSC : NORMALC);
 	    widget_move (&r->widget, i, 0);
@@ -375,7 +375,7 @@ radio_new (int y, int x, int count, const char **texts, int use_hotkey)
     r->pos = 0;
     r->sel = 0;
     r->count = count;
-    r->texts = const_cast(char **, texts);
+    r->texts = texts;
     r->upper_letter_is_hotkey = use_hotkey;
     widget_want_hotkey (r->widget, 1);
     
@@ -1704,7 +1704,7 @@ listbox_draw (WListbox *l, int focused)
     Dlg_head *h = l->widget.parent;
     int normalc = NORMALC; 
     int selc;
-    char *text; 
+    const char *text; 
 
     if (focused){
 	selc    = FOCUSC;

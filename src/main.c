@@ -259,10 +259,10 @@ int force_colors = 0;
 char *command_line_colors = NULL;
 
 /* File name to view if argument was supplied */
-static char *view_one_file = 0;
+static const char *view_one_file = NULL;
 
 /* File name to edit if argument was supplied */
-static char *edit_one_file = 0;
+static const char *edit_one_file = NULL;
 
 /* Line to start the editor on */
 static int edit_one_file_start_line = 0;
@@ -322,6 +322,7 @@ update_one_panel_widget (WPanel *panel, int force_update,
 			 const char *current_file)
 {
     int free_pointer;
+    char *my_current_file = NULL;
 
     if (force_update & UP_RELOAD) {
 	panel->is_panelized = 0;
@@ -332,7 +333,8 @@ update_one_panel_widget (WPanel *panel, int force_update,
     /* If current_file == -1 (an invalid pointer) then preserve selection */
     if (current_file == UP_KEEPSEL) {
 	free_pointer = 1;
-	current_file = g_strdup (panel->dir.list[panel->selected].fname);
+	my_current_file = g_strdup (panel->dir.list[panel->selected].fname);
+	current_file = my_current_file;
     } else
 	free_pointer = 0;
 
@@ -345,7 +347,7 @@ update_one_panel_widget (WPanel *panel, int force_update,
     panel->dirty = 1;
 
     if (free_pointer)
-	g_free (current_file);
+	g_free (my_current_file);
 }
 
 void
@@ -560,12 +562,13 @@ get_parent_dir_name (const char *cwd, const char *lwd)
 static int
 _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
 {
-    char *directory, *olddir;
+    const char *directory;
+    char *olddir;
     char temp[MC_MAXPATHLEN];
     char *translated_url;
 
     olddir = g_strdup (panel->cwd);
-    translated_url = new_dir = vfs_translate_url (new_dir);
+    new_dir = translated_url = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
 
@@ -1671,7 +1674,7 @@ setup_panels_and_run_mc (void)
 
 /* result must be free'd (I think this should go in util.c) */
 static char *
-prepend_cwd_on_local (char *filename)
+prepend_cwd_on_local (const char *filename)
 {
     char *d;
     int l;
