@@ -1,5 +1,10 @@
 2003-08-31  Pavel Roskin  <proski@gnu.org>
 
+	* option.c (check_options): Remove tk field.
+	* widget.c: Comment fix to get rid of references to Tk.
+	* wtools.c (real_input_dialog_help): Rename tk_name to histname.
+	Remove names from non-input widgets.
+
 	* widget.h: Completely get rid of tkname.  Rename it to histname
 	for the input widget.  Adjust all dependencies.
 

@@ -791,7 +791,7 @@ int num_history_items_recorded = 60;
 
 /*
    This loads and saves the history of an input line to and from the
-   widget. It is called with the widgets tk name on creation of the
+   widget. It is called with the widgets history name on creation of the
    widget, and returns the GList list. It stores histories in the file
    ~/.mc/history in using the profile code.
 

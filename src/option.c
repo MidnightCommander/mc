@@ -55,28 +55,27 @@ static struct {
     int    *variable;
     void   (*toggle_function)(void);
     WCheck *widget;
-    char   *tk;
 } check_options [] = {
    /* other options */
-   {N_("safe de&Lete"),       &safe_delete,       TOGGLE_VARIABLE,       0, "safe-del" },
-   {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
-   {N_("L&ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
-   {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
-   {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
-   {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
-   {N_("use internal ed&It"), &use_internal_edit, TOGGLE_VARIABLE,       0, "edit-int" },
-   {N_("auto m&Enus"),        &auto_menu,         TOGGLE_VARIABLE,       0, "auto-menus" },
-   {N_("&Auto save setup"),   &auto_save_setup,   TOGGLE_VARIABLE,       0, "auto-save" },
-   {N_("shell &Patterns"),    &easy_patterns,     TOGGLE_VARIABLE,       0, "shell-patt" },
-   {N_("Compute &Totals"),    &file_op_compute_totals,           TOGGLE_VARIABLE,       0, "compute-totals" },
-   {N_("&Verbose operation"), &verbose,           TOGGLE_VARIABLE,       0, "verbose" },
+   {N_("safe de&Lete"),       &safe_delete,       TOGGLE_VARIABLE,       0 },
+   {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0 },
+   {N_("L&ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0 },
+   {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0 },
+   {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0 },
+   {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0 },
+   {N_("use internal ed&It"), &use_internal_edit, TOGGLE_VARIABLE,       0 },
+   {N_("auto m&Enus"),        &auto_menu,         TOGGLE_VARIABLE,       0 },
+   {N_("&Auto save setup"),   &auto_save_setup,   TOGGLE_VARIABLE,       0 },
+   {N_("shell &Patterns"),    &easy_patterns,     TOGGLE_VARIABLE,       0 },
+   {N_("Compute &Totals"),    &file_op_compute_totals, TOGGLE_VARIABLE,  0 },
+   {N_("&Verbose operation"), &verbose,           TOGGLE_VARIABLE,       0 },
    /* panel options */
-   {N_("&Fast dir reload"),   &fast_reload,       toggle_fast_reload,    0, "fast-reload" },
-   {N_("mi&X all files"),     &mix_all_files,     toggle_mix_all_files,  0, "mix-files" },
-   {N_("&Drop down menus"),   &drop_menus,        TOGGLE_VARIABLE,       0, "drop-menus" },
-   {N_("ma&Rk moves down"),   &mark_moves_down,   TOGGLE_VARIABLE,       0, "mark-moves" },
-   {N_("show &Hidden files"), &show_dot_files,    toggle_show_hidden,    0, "show-hidden" },
-   {N_("show &Backup files"), &show_backups,      toggle_show_backup,    0, "show-backup" },
+   {N_("&Fast dir reload"),   &fast_reload,       toggle_fast_reload,    0 },
+   {N_("mi&X all files"),     &mix_all_files,     toggle_mix_all_files,  0 },
+   {N_("&Drop down menus"),   &drop_menus,        TOGGLE_VARIABLE,       0 },
+   {N_("ma&Rk moves down"),   &mark_moves_down,   TOGGLE_VARIABLE,       0 },
+   {N_("show &Hidden files"), &show_dot_files,    toggle_show_hidden,    0 },
+   {N_("show &Backup files"), &show_backups,      toggle_show_backup,    0 },
    { 0, 0, 0, 0 }
 };
 

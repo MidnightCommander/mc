@@ -392,11 +392,10 @@ real_input_dialog_help (char *header, char *text, char *help,
     QuickDialog Quick_input;
     QuickWidget quick_widgets[] = {
 	{quick_button, 6, 10, 1, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
-	 "button-cancel"},
-	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0,
-	 "button-ok"},
-	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, 0},
-	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, "label"},
+	 NULL},
+	{quick_button, 3, 10, 1, 0, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
+	{quick_input, 4, 80, 0, 0, "", 58, 0, 0, 0, NULL},
+	{quick_label, 4, 80, 2, 0, "", 0, 0, 0, 0, NULL},
 	{0}
     };
 
@@ -405,14 +404,13 @@ real_input_dialog_help (char *header, char *text, char *help,
     int lines;
     int ret;
     char *my_str;
-    char tk_name[64] = "inp|";
+    char histname[64] = "inp|";
 
-/* we need a unique name for histname because widget.c:history_tool()
-   needs a unique name for each dialog - using the header is ideal */
-
-    strncpy (tk_name + 3, header, 60);
-    tk_name[63] = '\0';
-    quick_widgets[2].histname = tk_name;
+    /* we need a unique name for histname because widget.c:history_tool()
+       needs a unique name for each dialog - using the header is ideal */
+    strncpy (histname + 3, header, 60);
+    histname[63] = '\0';
+    quick_widgets[2].histname = histname;
 
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
@@ -421,7 +419,7 @@ real_input_dialog_help (char *header, char *text, char *help,
        and hide characters with "*".  Don't save passwords in history! */
     if (def_text == INPUT_PASSWORD) {
 	quick_widgets[INPUT_INDEX].value = 1;
-	tk_name[3] = 0;
+	histname[3] = 0;
 	def_text = "";
     } else {
 	quick_widgets[INPUT_INDEX].value = 0;
