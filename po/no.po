@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.28\n"
-"POT-Creation-Date: 1999-03-28 01:02+0100\n"
-"PO-Revision-Date: 1999-03-28 10:30+0100\n"
+"POT-Creation-Date: 1999-03-28 23:52+0200\n"
+"PO-Revision-Date: 1999-03-29 00:04+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -76,7 +76,7 @@ msgstr "Sorter etter"
 #. we define this up here so we can pass it in to our callback
 #: gnome/gcmd.c:274
 msgid "Ignore case sensitivity."
-msgstr "Ikke skill mellom s&tore/små tegn"
+msgstr "Ikke skill mellom store/små tegn"
 
 #: gnome/gcmd.c:282 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
 msgid "Name"
@@ -696,7 +696,7 @@ msgstr "Velg en gruppe av filer"
 
 #: gnome/glayout.c:398
 msgid "_Invert Selection"
-msgstr "Reverser valg"
+msgstr "_Reverser valg"
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
@@ -990,6 +990,10 @@ msgstr "Sett GID"
 #: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:287
 msgid "Sticky"
 msgstr "Sticky"
+
+#: gnome/gnome-file-property-dialog.c:914
+msgid "File ownership"
+msgstr "Eierskap for fil"
 
 #: gnome/gnome-file-property-dialog.c:1074
 msgid "URL"
@@ -5904,4 +5908,3 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "ser ikke ut som et tar-arkiv."
-
