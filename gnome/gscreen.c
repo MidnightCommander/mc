@@ -113,6 +113,17 @@ panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, f
 	}
 }
 
+static void
+panel_cancel_drag_scroll (WPanel *panel)
+{
+	g_return_if_fail (panel != NULL);
+	
+	if (panel->timer_id != -1){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
+	}
+}
+
 /*
  * Sets the color attributes for a given row.
  */
@@ -605,10 +616,7 @@ typedef gboolean (*scroll_fn)(gpointer data);
 static gboolean
 panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, scroll_fn scroll)
 {
-	if (panel->timer_id != -1){
-		gtk_timeout_remove (panel->timer_id);
-		panel->timer_id = -1;
-	}
+	panel_cancel_drag_scroll (panel);
 
 	panel->drag_motion_x = x;
 	panel->drag_motion_y = y;
@@ -728,6 +736,7 @@ panel_drag_data_get (GtkWidget        *widget,
 	char *data;
 	GList *files;
 
+	panel_cancel_drag_scroll (panel);
 	data = panel_build_selected_file_list (panel, &len);
 
 	switch (info){
@@ -1005,6 +1014,7 @@ panel_drag_begin (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 static void
 panel_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 {
+	panel_cancel_drag_scroll (panel);
 	panel->dragging = 0;
 }
 
@@ -1164,10 +1174,7 @@ panel_clist_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void
 {
 	WPanel *panel = data;
 
-	if (panel->timer_id != -1){
-		gtk_timeout_remove (panel->timer_id);
-		panel->timer_id = -1;
-	}
+	panel_cancel_drag_scroll (panel);
 }
 
 /**
@@ -1280,10 +1287,7 @@ panel_icon_list_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, 
 {
 	WPanel *panel = data;
 
-	if (panel->timer_id != -1){
-		gtk_timeout_remove (panel->timer_id);
-		panel->timer_id = -1;
-	}
+	panel_cancel_drag_scroll (panel);
 }
 
 /*

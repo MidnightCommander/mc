@@ -358,6 +358,9 @@ int finish_program = 0;
 /* If set, then no windows are displayed in the GNOME edition */
 int   nowindows = 0;
 
+/* If set it displays the directory that holds the gnome .links files */
+int display_linksdir = 0;
+
 /* Forward declarations */
 char *get_mc_lib_dir ();
 int panel_event    (Gpm_Event *event, WPanel *panel);
@@ -2544,7 +2547,7 @@ process_args (int c, const char *option_arg)
 	version (1);
 	finish_program = 1;
 	break;
-		
+
     case 'c':
 	disable_colors = 0;
 #ifdef HAVE_SLANG
@@ -2713,6 +2716,8 @@ static struct poptOption argument_table [] = {
     { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
     {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
     {"force-activation",0,POPT_ARG_NONE, &force_activation, 0, N_("Force activation even if a server is already running"), NULL},
+    {"desktop-linksdir", '\0', POPT_ARG_NONE, &display_linksdir, 0,
+     N_("Displays the directory that holds the .links startup files")},
 #endif
 
     { NULL, 		0,			0, NULL, 0 }
@@ -2741,6 +2746,11 @@ handle_args (int argc, char *argv [])
     orb = gnome_CORBA_init_with_popt_table (
 	    "gmc", VERSION, &argc, argv, argument_table, 0, &ctx, GNORBA_INIT_SERVER_FUNC, &ev);
 
+    if (display_linksdir){
+	    puts (DESKTOP_INIT_DIR);
+	    exit (1);
+    }
+
     corba_init ();
     if (!force_activation)
 	    if (try_to_activate_running_copy ())
@@ -2748,6 +2758,10 @@ handle_args (int argc, char *argv [])
 #else
     gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
 #endif
+    if (display_linksdir){
+	    puts (DESKTOP_INIT_DIR);
+	    exit (1);
+    }
     gtk_widget_push_visual (gdk_imlib_get_visual ());
     gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
@@ -2888,7 +2902,6 @@ mc_tree_store_save (void)
 {
 	char *tree_file;
 
-	printf ("Saving tree!\n");
 	tree_file = concat_dir_and_file (home_dir, MC_TREE);
 	tree_store_save (tree_file);
 	g_free (tree_file);
@@ -2896,10 +2909,6 @@ mc_tree_store_save (void)
 
 int main (int argc, char *argv [])
 {
-#ifdef HAVE_GNOME
-    /* Just to time things */
-    printf ("GNU Midnight Commander " VERSION "\n");
-#endif
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);

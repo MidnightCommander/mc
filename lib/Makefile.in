@@ -15,14 +15,26 @@ INSTALL_DATA = @INSTALL_DATA@
 LIBFILES_IN = mc.ext.in mc-gnome.ext.in
 LIBFILES_OUT = mc.ext mc-gnome.ext
 LIBFILES_CONST = mc.hint mc.lib mc.menu
+DESKTOP_FILES = startup.links README.desktop
 TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
-DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
-	Makefile.in tdiff xnc.hlp ncurses.h mc.sh mc.csh mcserv.init \
-	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff mc.global
+
+DISTLIB = \
+	$(LIBFILES_IN) 		\
+	$(LIBFILES_CONST) 	\
+	$(TIFILES) 		\
+	$(DESKTOP_FILES)	\
+	Makefile.in tdiff 	\
+	xnc.hlp ncurses.h 	\
+	mc.sh mc.csh 		\
+	mcserv.init 		\
+	mcserv.pamd 		\
+	tkmc.wmconfig 		\
+	mc.ext.in.qnx.diff 	\
+	mc.global
 
 all: Makefile
 
-Makefile.in: ../config.status
+Makefile: ../config.status Makefile.in
 	(cd ..; CONFIG_FILES=lib/Makefile CONFIG_HEADERS= ./config.status)
 
 check:
@@ -49,6 +61,9 @@ install:
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 	$(MKINSTALLDIRS) $(DESTDIR)$(confdir)
 	$(INSTALL_DATA) $(srcdir)/mc.global $(DESTDIR)$(confdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(desktopdir)
+	for I in $(DESKTOP_FILES); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(desktopdir)/$$I; done
 
 uninstall:
 	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \

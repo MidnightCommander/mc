@@ -1,0 +1,38 @@
+
+* The Desktop startup directory
+
+The directory $(libdir)/desktop-scripts is a place holder for
+information on how to configure the default's user desktop.  There are
+a number of files that can be installed in this directory:
+
+	* Link definition files: These files are used to create
+	  links to web and ftp sites on the user's desktop.
+
+	* Executables: Programs or links to programs that will be
+	  executed when the user requests a directory rescan.
+
+* Link definition file format
+
+The file should contain an ini-like file whose contents are as follows:
+
+[linkname]
+title=Title in english
+title[NN]=Title in language NN
+type=url
+url=some-url
+
+The linkname is the name of the file that will be created in the
+user's desktop directory.  
+
+title is the caption that will be used by this file.  This can be
+localized by providing one or more title[NN] entries, where NN is
+the setting that would be set by the user for the NN locale.
+
+
+* Executables
+
+Executable programs will be executed like this:
+
+	program --desktop-dir DESKTOPDIR
+
+Where DESKTOPDIR is the user's desktop directory.

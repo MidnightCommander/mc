@@ -1,0 +1,9 @@
+[gnews]
+title=GNOME News
+type=url
+url=http://www.gnome.org/news
+
+[slashdot]
+title=Slashdot
+type=url
+url=http://slashdot.org

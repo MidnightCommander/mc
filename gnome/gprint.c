@@ -26,7 +26,7 @@ gprint_setup_devices (void)
 		return;
 
 	desktop_quoted = name_quote (desktop_directory, 0);
-	command = g_strconcat (gprint_path, " --create-printers ", desktop_quoted, NULL);
+	command = g_strconcat (gprint_path, " --desktop-dir ", desktop_quoted, NULL);
 	g_free (desktop_quoted);
 	
 	my_system (EXECUTE_WAIT | EXECUTE_AS_SHELL, shell, command);

@@ -264,26 +264,16 @@ drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data
 	template = g_concat_dir_and_file (destdir, "urlXXXXXX");
 
 	if (mktemp (template)) {
-		FILE *f;
+		char *icon;
 
-		f = fopen (template, "w");
-		if (f) {
-			char *icon;
-			
-			fprintf (f, "URL: %s\n", selection_data->data);
-			fclose (f);
-
-			gnome_metadata_set (template, "desktop-url",
-					    strlen (selection_data->data) + 1, selection_data->data);
-			gnome_metadata_set (template, "icon-caption",
-					    strlen (selection_data->data) + 1, selection_data->data);
-
-			icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-			gnome_metadata_set (template, "icon-filename", strlen (icon) + 1, icon);
-			g_free (icon);
-		}
+		icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+		desktop_create_url (
+			template,
+			selection_data->data,
+			selection_data->data,
+			icon);
+		g_free (icon);
 	}
-
 	g_free (template);
 }
 

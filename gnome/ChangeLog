@@ -1,5 +1,10 @@
 1999-03-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop-init.c (desktop_load_init_from): New file that loads
+	new configuration files from the installation directory.
+
+	* gdesktop.c: Drop all the reload code from there, put it above. 
+
 	* gpopup2.c (create_mime_actions): Attach to the menu, not the uiinfo.
 
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>

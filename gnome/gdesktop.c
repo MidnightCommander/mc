@@ -25,13 +25,11 @@
 #include "gmetadata.h"
 #include "gcmd.h"
 #include "gdnd.h"
-#include "gmount.h"
 #include "gpopup.h"
-#include "gprint.h"
 #include "gscreen.h"
 #include "../vfs/vfs.h"
 #include "main.h"
-
+#include "gmount.h"
 
 
 struct layout_slot {
@@ -2042,7 +2040,8 @@ create_layout_info (void)
 	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
-/* Check that the user's desktop directory exists, and if not, create the
+/*
+ * Check that the user's desktop directory exists, and if not, create the
  * default desktop setup.
  */
 static void
@@ -2072,7 +2071,7 @@ create_desktop_dir (void)
 		}
 		g_free (home_link_name);
 
-		gmount_setup_devices ();
+		gdesktop_init ();
 	}
 }
 
@@ -2376,8 +2375,9 @@ void
 desktop_rescan_devices (void)
 {
 	desktop_cleanup_devices ();
-	gmount_setup_devices ();
-	gprint_setup_devices ();
+
+	gdesktop_init ();
+
 	desktop_reload_icons (FALSE, 0, 0);
 }
 
@@ -2409,7 +2409,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
 	GNOMEUIINFO_ITEM_NONE (N_("Create New Window"), NULL, handle_new_window),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Rescan Mountable Devices"), NULL, handle_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Recreate Desktop Shortcuts"), NULL, handle_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, handle_rescan_desktop),
 	GNOMEUIINFO_END
 };
@@ -2902,4 +2902,25 @@ desktop_destroy (void)
 	gtk_widget_destroy (proxy_invisible);
 	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
 }
+
+void
+desktop_create_url (const char *filename, const char *title, const char *url, const char *icon)
+{
+	FILE *f;
+
+	f = fopen (filename, "w");
+	if (f) {
+		
+		fprintf (f, "URL: %s\n", url);
+		fclose (f);
+		
+		gnome_metadata_set (filename, "desktop-url",
+				    strlen (url) + 1, url);
+		gnome_metadata_set (filename, "icon-caption",
+				    strlen (title) + 1, title);
+		
+		gnome_metadata_set (filename, "icon-filename", strlen (icon) + 1, icon);
+	}
+}
+
 
