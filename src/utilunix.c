@@ -327,6 +327,8 @@ void open_error_pipe (void)
 
 /*
  * Returns true if an error was displayed
+ * error: -1 - ignore errors, 0 - display warning, 1 - display error
+ * text is prepended to the error message from the pipe
  */
 int
 close_error_pipe (int error, char *text)
@@ -352,7 +354,8 @@ close_error_pipe (int error, char *text)
     if (error < 0)
 	return 0;	/* Just ignore error message */
     if (text == NULL){
-	if (len == 0) return 0;	/* Nothing to show */
+	if (len <= 0)
+	    return 0;	/* Nothing to show */
 
 	/* Show message from pipe */
 	message (error, title, "%s", msg);

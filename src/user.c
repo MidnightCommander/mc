@@ -172,16 +172,17 @@ strip_ext(char *ss)
     return ss;
 }
 
-char *expand_format (WEdit *edit_widget, char c, int quote)
+char *
+expand_format (WEdit * edit_widget, char c, int quote)
 {
     WPanel *panel;
-    char *(*quote_func)(const char *, int);
+    char *(*quote_func) (const char *, int);
     char *fname;
 
     if (c == '%')
 	return g_strdup ("%");
-    
-    if (islower ((unsigned)c))
+
+    if (islower ((unsigned) c))
 	panel = cpanel;
     else {
 	if (get_other_type () != view_listing)
@@ -197,72 +198,74 @@ char *expand_format (WEdit *edit_widget, char c, int quote)
 	quote_func = fake_name_quote;
 
     c = tolower (c);
-    fname = panel->dir.list [panel->selected].fname;
-    
-    switch (c){
-    case 'f': 
-    case 'p': return (*quote_func) (fname, 0);
-    case 'x': return (*quote_func) (extension(fname), 0);
-    case 'd': return (*quote_func) (panel->cwd, 0);
-    case 'i': /* indent equal number cursor position in line */
-        if (edit_widget)
-	        return g_strnfill (edit_widget->curs_col, ' ');
-        break;
-    case 'y': /* syntax type */
-        if (edit_widget && edit_widget->syntax_type)
-	        return g_strdup (edit_widget->syntax_type);
-        break;
-    case 'e': /* error file name */
-    case 'k': /* block file name */
-    case 'b': /* block file name / strip extension */ {
-	if (edit_widget) {
-	    char *file = g_strconcat (home_dir,
-				      (c == 'e') ? ERROR_FILE : BLOCK_FILE,
-				      NULL);
-	    fname = (*quote_func) (file, 0);
-	    g_free (file);
-	    return fname;
-	} else if (c == 'b') {
-	    return strip_ext((*quote_func) (fname, 0));
-	}
-	break;
-    }
-    case 'n': /* strip extension in editor */
+    fname = panel->dir.list[panel->selected].fname;
+
+    switch (c) {
+    case 'f':
+    case 'p':
+	return (*quote_func) (fname, 0);
+    case 'x':
+	return (*quote_func) (extension (fname), 0);
+    case 'd':
+	return (*quote_func) (panel->cwd, 0);
+    case 'i':			/* indent equal number cursor position in line */
 	if (edit_widget)
-	    return strip_ext((*quote_func) (fname, 0));
+	    return g_strnfill (edit_widget->curs_col, ' ');
 	break;
-    case 'm': /* menu file name */
+    case 'y':			/* syntax type */
+	if (edit_widget && edit_widget->syntax_type)
+	    return g_strdup (edit_widget->syntax_type);
+	break;
+    case 'k':			/* block file name */
+    case 'b':			/* block file name / strip extension */  {
+	    if (edit_widget) {
+		char *file = g_strconcat (home_dir, BLOCK_FILE, NULL);
+		fname = (*quote_func) (file, 0);
+		g_free (file);
+		return fname;
+	    } else if (c == 'b') {
+		return strip_ext ((*quote_func) (fname, 0));
+	    }
+	    break;
+	}
+    case 'n':			/* strip extension in editor */
+	if (edit_widget)
+	    return strip_ext ((*quote_func) (fname, 0));
+	break;
+    case 'm':			/* menu file name */
 	if (menu)
 	    return (*quote_func) (menu, 0);
 	break;
-    case 's': if (!panel->marked)
-		return (*quote_func) (fname, 0);
+    case 's':
+	if (!panel->marked)
+	    return (*quote_func) (fname, 0);
 
 	/* Fall through */
 
     case 't':
     case 'u':
-    {
-	int length = 2, i;
-	char *block, *tmp;
-	
-	for (i = 0; i < panel->count; i++)
-	    if (panel->dir.list [i].f.marked)
-		length += strlen (panel->dir.list [i].fname) + 1; /* for space */
+	{
+	    int length = 2, i;
+	    char *block, *tmp;
 
-	block = g_malloc (length*2+1);
-	*block = 0;
-	for (i = 0; i < panel->count; i++)
-	    if (panel->dir.list [i].f.marked){
-		strcat (block, tmp = (*quote_func) (panel->dir.list [i].fname, 0));
-		g_free (tmp);
-		strcat (block, " ");
-		if (c == 'u')
-		    do_file_mark (panel, i, 0);
-	    }
-	return block;
-    } /* sub case block */
-    } /* switch */
+	    for (i = 0; i < panel->count; i++)
+		if (panel->dir.list[i].f.marked)
+		    length += strlen (panel->dir.list[i].fname) + 1;	/* for space */
+
+	    block = g_malloc (length * 2 + 1);
+	    *block = 0;
+	    for (i = 0; i < panel->count; i++)
+		if (panel->dir.list[i].f.marked) {
+		    strcat (block, tmp =
+			    (*quote_func) (panel->dir.list[i].fname, 0));
+		    g_free (tmp);
+		    strcat (block, " ");
+		    if (c == 'u')
+			do_file_mark (panel, i, 0);
+		}
+	    return block;
+	}			/* sub case block */
+    }				/* switch */
     return g_strdup ("");
 }
 
