@@ -921,7 +921,7 @@ void
 history_cmd (void)
 {
     Listbox *listbox;
-    Hist *current;
+    GList *current;
 
     if (cmdline->need_push) {
 	if (push_history (cmdline, cmdline->buffer) == 2)
@@ -931,14 +931,12 @@ history_cmd (void)
 	message (1, MSG_ERROR, _(" The command history is empty "));
 	return;
     }
-    current = cmdline->history;
-    while (current->prev)
-	current = current->prev;
+    current = g_list_first (cmdline->history);
     listbox = create_listbox_window (60, 10, _(" Command history "),
 				     "[Command Menu]");
     while (current) {
-	LISTBOX_APPEND_TEXT (listbox, 0, current->text, current);
-	current = current->next;
+	LISTBOX_APPEND_TEXT (listbox, 0, (char *) current->data, current);
+	current = g_list_next(current);
     }
     run_dlg (listbox->dlg);
     if (listbox->dlg->ret_value == B_CANCEL)
@@ -951,7 +949,7 @@ history_cmd (void)
     if (!current)
 	return;
     cmdline->history = current;
-    assign_text (cmdline, cmdline->history->text);
+    assign_text (cmdline, (char *) current->data);
     update_input (cmdline, 1);
 }
 

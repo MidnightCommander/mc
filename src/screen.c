@@ -895,20 +895,14 @@ panel_destroy (WPanel *p)
     panel_save_setup (p, name);
     panel_clean_dir (p);
 
-/* save and clean history */
+    /* save and clean history */
     if (p->dir_history){
-	Hist *current, *old;
 	history_put (p->hist_name, p->dir_history);
-	current = p->dir_history;
-	while (current->next)
-	    current = current->next;
-	while (current){
-	    old = current;
-	    current = current->prev;
-	    g_free (old->text);
-	    g_free (old);
-	}
+
+	g_list_foreach (p->dir_history, (GFunc) g_free, NULL);
+	g_list_free (p->dir_history);
     }
+
     g_free (p->hist_name);
 
     delete_format (p->format);

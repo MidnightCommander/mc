@@ -50,15 +50,9 @@ typedef struct WGauge {
     int current;
 } WGauge;
 
-typedef struct hist_entry {
-    struct hist_entry *prev;
-    struct hist_entry *next;
-    char   *text;
-} Hist;
-
-Hist *history_get (char *input_name);
-void history_put (char *input_name, Hist *h);
-char *show_hist (Hist *history, int widget_y, int widget_x);
+GList *history_get (char *input_name);
+void history_put (char *input_name, GList *h);
+char *show_hist (GList *history, int widget_y, int widget_x);
 
 typedef struct {
     Widget widget;
@@ -72,7 +66,7 @@ typedef struct {
     int  disable_update;	/* Do we want to skip updates? */
     int  is_password;		/* Is this a password input line? */
     unsigned char *buffer;	/* pointer to editing buffer */
-    Hist *history;		/* The history */
+    GList *history;		/* The history */
     int  need_push;		/* need to push the current Input on hist? */
     char **completions;		/* Possible completions array */
     int  completion_flags;	/* INPUT_COMPLETE* bitwise flags(complete.h) */

@@ -692,26 +692,12 @@ subshell_chdir (char *directory)
 void
 directory_history_add (struct WPanel *panel, char *s)
 {
-    if (!panel->dir_history) {
-	panel->dir_history = g_new0 (Hist, 1);
-	panel->dir_history->text = g_strdup (s);
-	strip_password (panel->dir_history->text, 1);
-	return;
-    }
-    if (!strcmp (panel->dir_history->text, s))
-	return;
-    if (panel->dir_history->next) {
-	if (panel->dir_history->next->text) {
-	    g_free (panel->dir_history->next->text);
-	    panel->dir_history->next->text = 0;
-	}
-    } else {
-	panel->dir_history->next = g_new0 (Hist, 1);
-	panel->dir_history->next->prev = panel->dir_history;
-    }
-    panel->dir_history = panel->dir_history->next;
-    panel->dir_history->text = g_strdup (s);
-    strip_password (panel->dir_history->text, 1);
+    char *text;
+
+    text = g_strdup (s);
+    strip_password (s, 1);
+
+    panel->dir_history = g_list_append (panel->dir_history, text);
 }
 
 /*
@@ -818,19 +804,29 @@ do_cd (char *new_dir, enum cd_enum exact)
 void
 directory_history_next (WPanel *panel)
 {
-    if (!panel->dir_history->next)
+    GList *nextdir;
+
+    nextdir = g_list_next (panel->dir_history);
+
+    if (!nextdir)
 	return;
-    if (_do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
-	panel->dir_history = panel->dir_history->next;
+
+    if (_do_panel_cd (panel, (char *) nextdir->data, cd_exact))
+	panel->dir_history = nextdir;
 }
 
 void
 directory_history_prev (WPanel *panel)
 {
-    if (!panel->dir_history->prev)
+    GList *prevdir;
+
+    prevdir = g_list_previous (panel->dir_history);
+
+    if (!prevdir)
 	return;
-    if (_do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
-	panel->dir_history = panel->dir_history->prev;
+
+    if (_do_panel_cd (panel, (char *) prevdir->data, cd_exact))
+	panel->dir_history = prevdir;
 }
 
 void

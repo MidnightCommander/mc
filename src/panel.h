@@ -41,7 +41,7 @@ typedef struct WPanel {
     int      active;		/* If panel is currently selected */
     char     cwd [MC_MAXPATHLEN];/* Current Working Directory */
     char     lwd [MC_MAXPATHLEN];/* Last Working Directory */
-    struct   hist_entry *dir_history;	/* directory history */
+    GList    *dir_history;	/* directory history */
     char     *hist_name;	/* directory history name for history file */
     int      count;		/* Number of files in dir structure */
     int      marked;		/* Count of marked files */

@@ -787,10 +787,12 @@ winput_set_origin (WInput *in, int x, int field_len)
 
 /* {{{ history saving and loading */
 
+int num_history_items_recorded = 60;
+
 /*
    This loads and saves the history of an input line to and from the
    widget. It is called with the widgets tk name on creation of the
-   widget, and returns the Hist list. It stores histories in the file
+   widget, and returns the GList list. It stores histories in the file
    ~/.mc/history in using the profile code.
 
    If def_text is passed as INPUT_LAST_TEXT (to the input_new()
@@ -798,17 +800,15 @@ winput_set_origin (WInput *in, int x, int field_len)
    entered, or "" if not found.
  */
 
-int num_history_items_recorded = 60;
-
-Hist *
+GList *
 history_get (char *input_name)
 {
     int i;
-    Hist *old, *new;
+    GList *hist;
     char *profile;
-    
-    old = new = NULL;
-    
+
+    hist = NULL;
+
     if (!num_history_items_recorded)	/* this is how to disable */
 	return 0;
     if (!input_name)
@@ -820,22 +820,21 @@ history_get (char *input_name)
 	char key_name[BUF_TINY];
 	char this_entry[BUF_LARGE];
 	g_snprintf (key_name, sizeof (key_name), "%d", i);
-	GetPrivateProfileString (input_name, key_name, "", this_entry, sizeof (this_entry), profile);
+	GetPrivateProfileString (input_name, key_name, "", this_entry,
+				 sizeof (this_entry), profile);
 	if (!*this_entry)
 	    break;
-	new = g_new0 (Hist, 1);
-	new->text = g_strdup (this_entry);
-	new->prev = old;	/* set up list pointers */
-	if (old)
-	    old->next = new;
-	old = new;
+
+	hist = g_list_append (hist, g_strdup (this_entry));
     }
     g_free (profile);
-    return new;			/* return pointer to last entry in list */
+
+    /* return pointer to last entry in list */
+    return hist;
 }
 
 void
-history_put (char *input_name, Hist *h)
+history_put (char *input_name, GList *h)
 {
     int i;
     char *profile;
@@ -845,7 +844,7 @@ history_put (char *input_name, Hist *h)
 
     if (!*input_name)
 	return;
-    
+
     if (!h)
 	return;
 
@@ -856,34 +855,38 @@ history_put (char *input_name, Hist *h)
 
     if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
 	close (i);
-    /* Just in case I forgot to strip passwords somewhere -- Norbert */
-    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT){
+
+    /* Make sure the history is only readable by the user */
+    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT) {
 	g_free (profile);
 	return;
     }
 
-    while (h->next)		/* go to end of list */
-	h = h->next;
+    /* go to end of list */
+    h = g_list_last (h);
 
     /* go back 60 places */
-    for (i = 0; i < num_history_items_recorded - 1 && h->prev; i++)	
-	h = h->prev;
+    for (i = 0; i < num_history_items_recorded - 1 && h->prev; i++)
+	h = g_list_previous (h);
 
     if (input_name)
 	profile_clean_section (input_name, profile);
 
     /* dump histories into profile */
-    for (i = 0; h; h = h->next){
-	if (h->text){
+    for (i = 0; h; h = g_list_next (h)) {
+	char *text;
 
-	    /* probably aren't any null entries, but lets be sure */
-	    if (*(h->text)){
-		char key_name[BUF_TINY];
-		g_snprintf (key_name, sizeof(key_name), "%d", i++);
-		WritePrivateProfileString (input_name, key_name, h->text, profile);
-	    }
+	text = (char *) h->data;
+
+	/* We shouldn't have null entries, but let's be sure */
+	if (text && *text) {
+	    char key_name[BUF_TINY];
+	    g_snprintf (key_name, sizeof (key_name), "%d", i++);
+	    WritePrivateProfileString (input_name, key_name, text,
+				       profile);
 	}
     }
+
     g_free (profile);
 }
 
@@ -905,9 +908,9 @@ i18n_htitle (void)
 static inline int listbox_fwd (WListbox *l);
 
 char *
-show_hist (Hist * history, int widget_x, int widget_y)
+show_hist (GList *history, int widget_x, int widget_y)
 {
-    Hist *hi, *z;
+    GList *hi, *z;
     size_t maxlen = strlen (i18n_htitle ()), i, count = 0;
     int x, y, w, h;
     char *q, *r = 0;
@@ -918,14 +921,13 @@ show_hist (Hist * history, int widget_x, int widget_y)
     if (!z)
 	return 0;
 
-    while (z->prev)		/* goto first */
-	z = z->prev;
+    z = g_list_first (history);
     hi = z;
     while (hi) {
-	if ((i = strlen (hi->text)) > maxlen)
+	if ((i = strlen ((char *) hi->data)) > maxlen)
 	    maxlen = i;
 	count++;
-	hi = hi->next;
+	hi = g_list_next (hi);
     }
 
     y = widget_y;
@@ -954,17 +956,18 @@ show_hist (Hist * history, int widget_x, int widget_y)
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
-	while (hi) {		/* traverse */
-	    listbox_add_item (query_list, 0, 0, hi->text, NULL);
-	    hi = hi->next;
+	/* traverse */
+	while (hi) {
+	    listbox_add_item (query_list, 0, 0, (char *) hi->data, NULL);
+	    hi = g_list_next (hi);
 	}
 	while (listbox_fwd (query_list));
     } else {
-	while (hi->next)
-	    hi = hi->next;
-	while (hi) {		/* traverse backwards */
-	    listbox_add_item (query_list, 0, 0, hi->text, NULL);
-	    hi = hi->prev;
+	/* traverse backwards */
+	hi = g_list_last (history);
+	while (hi) {
+	    listbox_add_item (query_list, 0, 0, (char *) hi->data, NULL);
+	    hi = g_list_previous (hi);
 	}
     }
     run_dlg (query_dlg);
@@ -999,22 +1002,15 @@ input_destroy (WInput *in)
     }
 
     new_input (in);
-    if (in->history){
-	Hist *current, *old;
 
+    if (in->history){
 	if (!in->is_password)	/* don't save passwords ;-) */
 	    history_put (in->history_name, in->history);
 
-	current = in->history;
-	while (current->next)
-	    current = current->next;
-	while (current){
-	    old = current;
-	    current = current->prev;
-	   g_free (old->text);
-	   g_free (old);
-	}
+	g_list_foreach (in->history, (GFunc) g_free, NULL);
+	g_list_free (in->history);
     }
+
     g_free (in->buffer);
     free_completions (in);
     if (in->history_name)
@@ -1049,44 +1045,43 @@ push_history (WInput *in, char *text)
 	N_(" FTP to machine "),
 	N_(" SMB link to machine ")
     };
-    Hist *new;
+    char *t;
     char *p;
     int i;
 
     if (!i18n) {
 	i18n = 1;
-        for (i = 0; i < ELEMENTS(password_input_fields); i++)
+	for (i = 0; i < ELEMENTS (password_input_fields); i++)
 	    password_input_fields[i] = _(password_input_fields[i]);
     }
-    
+
     for (p = text; *p == ' ' || *p == '\t'; p++);
     if (!*p)
-        return 0;
-    if (in->history){
-	while (in->history->next)
-	    in->history = in->history->next;
-	if (!strcmp (in->history->text, text))
+	return 0;
+
+    if (in->history) {
+	/* Avoid duplicated entries */
+	in->history = g_list_last (in->history);
+	if (!strcmp ((char *) in->history->data, text))
 	    return 1;
-    	new = g_new (Hist, 1);
-	in->history->next = new;
-    } else
-    	new = g_new (Hist, 1);
-    in->need_push = 0;
-    new->next = 0;
-    new->prev = in->history;
-    new->text = g_strdup (text);
-    if (in->history_name) {
-        p = in->history_name + 3;
-        for (i = 0; i < ELEMENTS(password_input_fields); i++)
-            if (strcmp (p, password_input_fields[i]) == 0)
-                break;
-        if (i < ELEMENTS(password_input_fields))
-            strip_password (new->text, 0);
-        else
-            strip_password (new->text, 1);
     }
-    
-    in->history = new;
+
+    t = g_strdup (text);
+
+    if (in->history_name) {
+	p = in->history_name + 3;
+	for (i = 0; i < ELEMENTS (password_input_fields); i++)
+	    if (strcmp (p, password_input_fields[i]) == 0)
+		break;
+	if (i < ELEMENTS (password_input_fields))
+	    strip_password (t, 0);
+	else
+	    strip_password (t, 1);
+    }
+
+    in->history = g_list_append (in->history, t);
+    in->need_push = 0;
+
     return 2;
 }
 
@@ -1351,15 +1346,21 @@ hist_prev (WInput *in)
 
     if (in->need_push) {
 	switch (push_history (in, in->buffer)) {
-	 case 2: in->history = in->history->prev; break;
-	 case 1: if (in->history->prev) in->history = in->history->prev; break;
-	 case 0: break;
+	case 2:
+	    in->history = g_list_previous (in->history);
+	    break;
+	case 1:
+	    if (in->history->prev)
+		in->history = g_list_previous (in->history);
+	    break;
+	case 0:
+	    break;
 	}
     } else if (in->history->prev)
-        in->history = in->history->prev;
+	in->history = g_list_previous (in->history);
     else
-        return;
-    assign_text (in, in->history->text);
+	return;
+    assign_text (in, (char *) in->history->data);
     in->need_push = 0;
 }
 
@@ -1384,8 +1385,8 @@ hist_next (WInput *in)
 	return;
     }
     
-    in->history = in->history->next;
-    assign_text (in, in->history->text);
+    in->history = g_list_next (in->history);
+    assign_text (in, (char *) in->history->data);
     in->need_push = 0;
 }
 
@@ -1623,8 +1624,8 @@ input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
     if (def_text == INPUT_LAST_TEXT) {
 	def_text = "";
 	if (in->history)
-	    if (in->history->text)
-		def_text = in->history->text;
+	    if (in->history->data)
+		def_text = (char *) in->history->data;
     }
     initial_buffer_len = 1 + max (len, strlen (def_text));
     in->widget.options |= W_IS_INPUT;
