@@ -1,3 +1,21 @@
+2001-08-31 23:14:21  Timur Bakeyev <mc@bat.ru>
+	
+	* utilunix.c: init_groups(), destroy_groups(), get_user_permissions()
+	rewritten to use GTree structure and functions. Add new static helper
+	functions mc_gid_compare() and mc_gid_destroy().
+	
+	* util.h: Removed deprecated structure user_in_groups.
+	
+	* screen.c: Fixed typo in format report error string.
+
+2001-08-31 23:14:21  Timur Bakeyev <mc@bat.ru>
+	
+	* utilunix.c: get_user_rights() renamed into get_user_permissions().
+	delete_groups() renamed into destroy_groups().
+	* util.h: Likewise.
+	* screen.c: Likewise.
+	* main.c: Likewise.
+	
 2001-08-27  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (dirsizes_cmd): Don't cast st_size to long - use off_t

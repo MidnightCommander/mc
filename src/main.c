@@ -3177,8 +3177,8 @@ main (int argc, char *argv [])
     /* Virtual File System shutdown */
     vfs_shut ();
 
-    /* Delete list of all user groups*/
-    delete_groups ();
+    /* Delete list of all user groups */
+    destroy_groups ();
 
     flush_extension_file (); /* does only free memory */
 

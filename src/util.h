@@ -63,14 +63,9 @@ char *load_mc_home_file (const char *filename, char ** allocated_filename);
 #endif
 
 /* uid/gid managing */
-typedef struct user_in_groups{
-    struct user_in_groups *next;
-    int gid;
-} user_in_groups;
-
 void init_groups (void);
-void delete_groups (void);
-int get_user_rights (struct stat *buf);
+void destroy_groups (void);
+int get_user_permissions (struct stat *buf);
 
 void init_uid_gid_cache (void);
 char *get_group (int);

@@ -72,10 +72,6 @@ int permission_mode = 0;
 /* If 1 - then add per file type hilighting */
 int filetype_mode = 1;
 
-/* This gives abilitiy to determine colored user priveleges */
-extern user_in_groups *current_user_gid;
-extern uid_t current_user_uid;
-
 /* If we have an info panel, this points to it */
 WPanel *the_info_panel = 0;
 
@@ -158,7 +154,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 {
     int i, r, l;
 
-    l = get_user_rights (&fe->buf);
+    l = get_user_permissions (&fe->buf);
 
     if (is_octal){
 	/* Place of the access bit in octal mode */
@@ -1307,7 +1303,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    delete_format (home);
 	    old_char = format [pos];
 	    format [pos] = 0;
-	    *error = g_strconcat (_("Unknow tag on display format: "), format, NULL);
+	    *error = g_strconcat (_("Unknown tag on display format: "), format, NULL);
 	    format [pos] = old_char;
 	    return 0;
 	}

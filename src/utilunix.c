@@ -70,9 +70,6 @@
 
 struct sigaction startup_handler;
 
-uid_t current_user_uid;
-user_in_groups *current_user_gid;
-
 int
 max_open_files (void)
 {
@@ -94,63 +91,92 @@ max_open_files (void)
 }
 
 #ifndef VFS_STANDALONE
+/* uid of the MC user */
+uid_t current_user_uid = -1;
+/* List of the gids of the user */
+GTree *current_user_gid = NULL;
+
+/* Helper function to compare 2 gids */
+static gint
+mc_gid_compare (gconstpointer v, gconstpointer v2)
+{
+    return ((GPOINTER_TO_UINT(v) > GPOINTER_TO_UINT(v2)) ? 1 :
+	    (GPOINTER_TO_UINT(v) < GPOINTER_TO_UINT(v2)) ? -1 : 0);
+}
+
+/* Helper function to delete keys of the gids tree */
+static gint
+mc_gid_destroy (gpointer key, gpointer value, gpointer data)
+{
+    g_free (value);
+    
+    return FALSE;
+}
+
+/* This function initialize global GTree with the gids of groups,
+   to which user belongs. Tree also store corresponding string 
+   with the name of the group.
+   FIXME: Do we need this names at all? If not, we can simplify
+   initialization by eliminating g_strdup's.
+*/
 void init_groups (void)
 {
     int i;
     struct passwd *pwd;
     struct group *grp;
-    user_in_groups *cug, *pug;
+    
+    current_user_uid = getuid ();
 
-    pwd = getpwuid (current_user_uid=getuid ());
+    pwd = getpwuid (current_user_uid);
+    
+    g_return_if_fail (pwd != NULL);
+    
+    grp = getgrgid (pwd->pw_gid);
+    
+    g_return_if_fail (grp != NULL);
+    
+    current_user_gid = g_tree_new (mc_gid_compare);
 
-    current_user_gid = (pug = g_new (user_in_groups, 1));
-    current_user_gid->gid = getgid (); 
-    current_user_gid->next = NULL;
-
-    if (pwd == NULL)
-       return;
+    g_tree_insert (current_user_gid, 
+      GUINT_TO_POINTER(grp->gr_gid), g_strdup(grp->gr_name));
     
     setgrent ();
+    
     while ((grp = getgrent ()))
-       for (i = 0; grp->gr_mem[i]; i++)
-           if (!strcmp (pwd->pw_name,grp->gr_mem[i]))
-               {
-               cug = g_new (user_in_groups, 1);
-               cug->gid  = grp->gr_gid;
-               pug->next = cug;
-               cug->next = NULL;
-               pug = cug;
-               break;
-               }
+    {
+	for (i = 0; grp->gr_mem[i]; i++)
+	{
+    	    if (!strcmp (pwd->pw_name, grp->gr_mem[i]) &&
+	      !g_tree_lookup (current_user_gid, GUINT_TO_POINTER(grp->gr_gid)))
+	    {
+		g_tree_insert (current_user_gid, 
+		  GUINT_TO_POINTER(grp->gr_gid), g_strdup(grp->gr_name));
+		break;
+	    }
+	}
+    }
     endgrent ();
 }
 
-/* Return the index of permission triplet */
+/* Return the index of the permissions triplet */
 int
-get_user_rights (struct stat *buf)
-{
-    user_in_groups *cug;
+get_user_permissions (struct stat *buf) {
 
     if (buf->st_uid == current_user_uid || current_user_uid == 0)
        return 0;
-
-    for (cug = current_user_gid; cug; cug = cug->next)
-       if (cug->gid == buf->st_gid) return 1;
+    
+    if(current_user_gid && g_tree_lookup (current_user_gid, GUINT_TO_POINTER(buf->st_gid)))
+       return 1;
 
     return 2;
 }
 
-
+/* Completely destroys the gids tree */
 void
-delete_groups (void)
+destroy_groups (void)
 {
-    user_in_groups *pug, *cug = current_user_gid;
-
-    while (cug){
-       pug = cug->next;
-       g_free (cug);
-       cug = pug;
-    }
+    g_tree_traverse (current_user_gid, mc_gid_destroy, G_POST_ORDER, NULL);
+    g_tree_destroy (current_user_gid);
 }
 
 #define UID_CACHE_SIZE 200
