@@ -965,7 +965,7 @@ msgstr "Modalità lista"
 
 #: src/boxes.c:280
 msgid "&Reverse"
-msgstr "inve&Rti"
+msgstr "inve&Rso"
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
@@ -973,7 +973,7 @@ msgstr "controlla maiuscole/minuscole"
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr "Modalità Ordinamento"
+msgstr "Modalità ordinamento"
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
@@ -1566,7 +1566,7 @@ msgstr ""
 
 #: src/dir.c:53
 msgid "&Unsorted"
-msgstr "Senza ordine"
+msgstr "&Senza ordine"
 
 #: src/dir.c:54
 msgid "&Name"
@@ -1574,15 +1574,15 @@ msgstr "&Nome"
 
 #: src/dir.c:55
 msgid "&Extension"
-msgstr "&Estensioni"
+msgstr "&Estensione"
 
 #: src/dir.c:56
 msgid "&Modify time"
-msgstr "Data modifica"
+msgstr "Data di &Modifica"
 
 #: src/dir.c:57
 msgid "&Access time"
-msgstr "Data di accesso"
+msgstr "Data di &Accesso"
 
 #: src/dir.c:58
 msgid "&Change time"
