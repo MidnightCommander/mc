@@ -1,5 +1,8 @@
 Fri Oct 23 12:29:48 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
+	* tar.c (tar_open_archive): do not double-free memory if you can
+ 	not open archive, better error handling
+
 	* Makefile.in: add direntry.o to list of NONETFILES so we actually compile
 
 	* sfs.c, tar.c: remove debugging messages (which really should not

@@ -88,8 +88,10 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     struct vfs_s_inode *root;
     
     result = mc_open (name, O_RDONLY);
-    if (result == -1)
+    if (result == -1) {
+        message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), name);
 	ERRNOR (ENOENT, -1);
+    }
     
     archive->name = strdup (name);
     mc_stat (name, &(archive->u.tar.tarstat));
@@ -103,12 +105,11 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 	mc_close( result );
 	s = copy_strings( archive->name, decompress_extension (type), NULL );
 	result = mc_open (s, O_RDONLY);
+	if (result == -1) 
+	    message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), s);
 	free(s);
-
-	if (result == -1) {
-	    vfs_s_free_super (me, archive);
+	if (result == -1)
 	    ERRNOR (ENOENT, -1);
-	}
     }
    
     archive->u.tar.fd = result;
@@ -383,10 +384,8 @@ static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
     int tard;
 
     current_tar_position = 0;
-    if ((tard = tar_open_archive (me, name, archive)) == -1) {	/* Open for reading */
-        message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), name);
+    if ((tard = tar_open_archive (me, name, archive)) == -1)	/* Open for reading */
 	return -1;
-    }
 
     archive->name = strdup(name);
     for (;;) {
