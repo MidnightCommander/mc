@@ -1,3 +1,11 @@
+1998-12-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (drop_desktop_icons): New function to perform a drop
+	from desktop icons to the desktop.  It effectively moves the icons
+	around.
+	(desktop_icon_info_place): Do not place the icons past the edge of
+	the screen.
+
 1998-12-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (file_entry_from_file): Finished implementing

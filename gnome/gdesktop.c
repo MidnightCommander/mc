@@ -75,6 +75,8 @@ static char *desktop_directory;
 /* Layout information:  number of rows/columns for the layout slots, and the array of slots.  Each
  * slot is an integer that specifies the number of icons that belong to that slot.
  */
+static int layout_screen_width;
+static int layout_screen_height;
 static int layout_cols;
 static int layout_rows;
 static struct layout_slot *layout_slots;
@@ -209,6 +211,12 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 		else if (desktop_snap_icons)
 			get_icon_snap_pos (&xpos, &ypos);
 	}
+
+	if (xpos > layout_screen_width)
+		xpos = layout_screen_width - DESKTOP_SNAP_X;
+
+	if (ypos > layout_screen_height)
+		ypos = layout_screen_height - DESKTOP_SNAP_Y;
 
 	/* Increase the number of icons in the corresponding slot */
 
@@ -905,8 +913,10 @@ desktop_icon_info_free (struct desktop_icon_info *dii)
 static void
 create_layout_info (void)
 {
-	layout_cols = (gdk_screen_width () + DESKTOP_SNAP_X - 1) / DESKTOP_SNAP_X;
-	layout_rows = (gdk_screen_height () + DESKTOP_SNAP_Y - 1) / DESKTOP_SNAP_Y;
+	layout_screen_width = gdk_screen_width ();
+	layout_screen_height = gdk_screen_height ();
+	layout_cols = (layout_screen_width + DESKTOP_SNAP_X - 1) / DESKTOP_SNAP_X;
+	layout_rows = (layout_screen_height + DESKTOP_SNAP_Y - 1) / DESKTOP_SNAP_Y;
 	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
@@ -1030,6 +1040,80 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 		return FALSE;
 }
 
+/* Returns the desktop icon that started the drag from the specified context */
+struct desktop_icon_info *
+find_icon_by_drag_context (GdkDragContext *context)
+{
+	GtkWidget *source;
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+
+	source = gtk_drag_get_source_widget (context);
+	if (!source)
+		return NULL;
+
+	source = gtk_widget_get_toplevel (source);
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			if (dii->dicon == source)
+				return dii;
+		}
+
+	return NULL;
+}
+
+/* Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
+ * original position to the new coordinates.
+ */
+static void
+drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
+{
+	struct desktop_icon_info *source_dii, *dii;
+	int dx, dy;
+	int i;
+	GList *l;
+	GSList *sel_icons, *sl;
+
+	/* Find the icon that the user is dragging */
+
+	source_dii = find_icon_by_drag_context (context);
+	if (!source_dii) {
+		g_warning ("Eeeeek, could not find the icon that started the drag!");
+		return;
+	}
+
+	/* Compute the distance to move icons */
+
+	dx = x - source_dii->x;
+	dy = y - source_dii->y;
+
+	/* Build a list of selected icons */
+
+	sel_icons = NULL;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+			if (dii->selected)
+				sel_icons = g_slist_prepend (sel_icons, l->data);
+		}
+
+	/* Move the icons */
+
+	for (sl = sel_icons; sl; sl = sl->next) {
+		dii = sl->data;
+		desktop_icon_info_place (dii, FALSE, dii->x + dx, dii->y + dy);
+	}
+
+	/* Clean up */
+
+	g_slist_free (sel_icons);
+}
+
 /* Callback used when the root window receives a drop */
 static void
 drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
@@ -1040,7 +1124,7 @@ drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
-		printf ("Dropped desktop icons!\n"); /* FIXME */
+		drop_desktop_icons (context, data, x, y);
 		break;
 
 	case TARGET_URI_LIST:
@@ -1056,7 +1140,7 @@ drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 		if (retval)
 			reload_desktop_icons (TRUE, x, y);
 
-		return;
+		break;
 
 	default:
 		break;
