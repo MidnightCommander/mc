@@ -1162,6 +1162,8 @@ search_dir_entry (dir_entry *dentry, char *text, struct stat *buf)
 	while (dentry) {
 		if (strcmp(text, dentry->text) == 0) {
 			memcpy(buf, &dentry->my_stat, sizeof(struct stat));
+			memcpy(&single_entry->my_stat, &dentry->my_stat,
+				sizeof(struct stat));
 			return 0;
 		}
 		dentry = dentry->next;
@@ -1188,6 +1190,8 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		return -1;
 	}
 #endif
+	if (!single_entry)	/* when found, this will be written too */
+		single_entry = g_new (dir_entry, 1);
 	if (search_dir_entry(current_info->entries, mypath, buf) == 0)
 		return 0;
 		/* now try to identify mypath as PARENT dir */
@@ -1207,6 +1211,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 			bzero(&fake_stat, sizeof(struct stat));
 			fake_stat.st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(buf, &fake_stat, sizeof(struct stat));
+			memcpy(&single_entry->my_stat, &fake_stat, sizeof(struct stat));
 			g_free(mdp);
 			g_free(mpp);
 			DEBUG(1, ("	PARENT:found in %s\n", current_info->dirname));
@@ -1230,6 +1235,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 			bzero(&fake_stat, sizeof(struct stat));
 			fake_stat.st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(buf, &fake_stat, sizeof(struct stat));
+			memcpy(&single_entry->my_stat, &fake_stat, sizeof(struct stat));
 			g_free(mpp);
 			DEBUG(1, ("	CURRENT:found in %s\n", current_info->dirname));
 			return 0;
@@ -1684,8 +1690,10 @@ smbfs_fstat (void *data, struct stat *buf)
 	/* use left over from previous get_remote_stat, if available */
 	if (single_entry)
 		memcpy(buf, &single_entry->my_stat, sizeof(struct stat));
-/*	my_errno = EOPNOTSUPP;
-	return -1;	*/
+	else {	/* single_entry not set up: bug */
+		return -EFAULT;
+		my_errno = -EFAULT;
+	}
 	return 0;
 }
 
