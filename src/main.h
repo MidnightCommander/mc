@@ -45,6 +45,8 @@ extern int pause_after_run;
 extern int auto_save_setup;
 extern int use_internal_view;
 extern int use_internal_edit;
+extern char *view_one_file;
+extern char *edit_one_file;
 #ifdef USE_INTERNAL_EDIT
 extern int edit (const char *file, int line);
 extern int option_word_wrap_line_length;

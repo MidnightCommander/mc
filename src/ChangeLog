@@ -1,3 +1,7 @@
+2001-10-22  Pavel Roskin  <proski@gnu.org>
+
+	* main.h: Declare view_one_file and edit_one_file.
+
 2001-10-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* dialog.h: Include global.h.
