@@ -1,3 +1,7 @@
+Thu May 14 02:03:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in (EXTRALIBS): add @LINTL@
+
 1998-04-10  Marc Ewing  <marc@redhat.com>
 
 	* tkscreen.c: removed duplicate (conflicting) definition

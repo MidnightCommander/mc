@@ -1,3 +1,7 @@
+Thu May 14 02:05:52 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in (LIBS): add @LINTL@
+
 Sun May 10 14:51:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (__ftpfs_chdir): CWD command wasn't sent at all. This

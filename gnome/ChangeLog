@@ -1,3 +1,7 @@
+Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in (EXTRALIBS): add @LINTL@
+
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtrans.c (set_window_text): draw pixmaps without transparency

@@ -1,3 +1,11 @@
+Thu May 14 01:56:11 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* configure.in: Don't add -lintl to LIBS when included gettext is
+	used (further checks for libraries would fail because libintl.a
+	isn't build, yet). Instead use and substitute LINTL.
+
+	* Makefile.in (OURLIBS): add @LINTL@
+
 Tue May 12 17:45:49 1998  <psheer@obsidian.co.za>
 
 	* syntax.c: yet more minor modifications.

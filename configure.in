@@ -943,14 +943,17 @@ AC_ARG_WITH(efence,
 fi])
 
 INTLSUB=""
+LINTL=""
+AC_CHECK_HEADER(libintl.h)
 if test x$USE_NLS = xyes; then
     if test $ac_cv_header_libintl_h = no; then
 	CPPFLAGS="$CPPFLAGS -I\$(builddir)/intl"
-	LIBS="-L\$(builddir)/intl -lintl $LIBS"
+	LINTL="-L\$(builddir)/intl -lintl"
     fi
     INTLSUB=intl
 fi
 AC_SUBST(INTLSUB)
+AC_SUBST(LINTL)
 
 dnl
 dnl To force mmap support
