@@ -103,6 +103,7 @@ static int x_io_error_handler (Display *dpy)
 static int x_error_handler (Display *dpy, XErrorEvent *ee)
 {
     (void) ee;
+    (void) func_XCloseDisplay (dpy);
     return x_io_error_handler (dpy);
 }
 

@@ -1,3 +1,9 @@
+2005-04-06  Roland Illig  <roland.illig@gmx.de>
+
+	* x11conn.c (x_io_error_handler): Close the X11 connection when
+	a protocol error occurs. Otherwise the X11 connection is held
+	open, which may keep ssh from closing the connection.
+
 2005-03-28  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (chdir_other_panel): When used on a file entry, move
