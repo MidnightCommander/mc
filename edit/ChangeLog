@@ -5,12 +5,18 @@
 	* edit.c: Remove edit_execute_cmd declaration.
 	(edit_execute_cmd): Use edit_print_string instead of edit_printf.
 
-	* editcmd.c:  Remove edit_execute_cmd declaration.
+	* editcmd.c: Remove edit_execute_cmd declaration.
 	(edit_search_dialog): Eliminate tsearch_text.
 	(edit_search_cmd): edit_search_dialog gives g_malloc()ed exp.
 	Use g_strdup/g_free instead of strdup/free.
 	(edit_mail_dialog): quick_dialog use g_strdup, so g_free
 	must be used.
+	(edit_load_cmd): input_dialog returns g_malloc(ed) string,
+	so g_free has to be used.
+	(edit_save_block_cmd): Likewise.
+	(edit_insert_file_cmd): Likewise.
+	(edit_sort_cmd): Likewise.
+	(edit_save_as_cmd): Likewise. Memory leak fixed.
 
 	* bookmark.c (book_mark_clear): Eliminate rend.
 	It's only written but never read.
