@@ -1,3 +1,10 @@
+2001-06-12  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c [HAVE_CHARSET]: Localize more strings. Lay out the
+	encoding dialog using the translated title length. Remove
+	useless preprocessor directives.
+	From David Martin <dmartina@excite.es>
+
 2001-06-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* dlg.[ch] (x_set_dialog_title): title constified.

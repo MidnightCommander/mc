@@ -546,9 +546,6 @@ display_bits_box ()
 
 Dlg_head *dbits_dlg;
 
-static char* dbits_title = N_(" Display bits ");
-
-#ifndef HAVE_X
 static void dbits_refresh()
 {
     attrset( COLOR_NORMAL );
@@ -557,20 +554,17 @@ static void dbits_refresh()
     draw_box( dbits_dlg, 1, 2, dbits_dlg->lines - 2, dbits_dlg->cols - 4 );
     
     attrset( COLOR_HOT_NORMAL );
-    dlg_move( dbits_dlg, 1, (dbits_dlg->cols - strlen(dbits_title)) / 2 );
-    addstr( dbits_title );
+    dlg_move( dbits_dlg, 1, (dbits_dlg->cols - strlen(dbits_dlg->title)) / 2 );
+    addstr( dbits_dlg->title );
 }
-#endif /* HAVE_X */
 
 static int dbits_callback( Dlg_head * h, int Par, int Msg )
 {
-#ifndef HAVE_X
     switch (Msg) {
 	case DLG_DRAW:
 	    dbits_refresh();
 	    break;
     }
-#endif /* HAVE_X */
     return 0;
 }
 
@@ -584,7 +578,7 @@ static int sel_charset_button( int action, void *param )
     char *cpname, buf[64];
     new_display_codepage = select_charset( new_display_codepage, 1 );
     cpname = (new_display_codepage < 0)
-	     ? "Other 8 bit"
+	     ? _("Other 8 bit")
 	     : codepages[ new_display_codepage ].name;
     sprintf( buf, "%-27s", cpname ); /* avoid strange bug with label repainting */
     label_set_text( cplabel, buf );
@@ -600,7 +594,7 @@ void init_disp_bits_box()
     dbits_dlg = create_dlg( 0, 0, DISPY, DISPX, dialog_colors,
 		dbits_callback, "[Display bits]", "Display bits",
 		DLG_CENTER );
-    x_set_dialog_title( dbits_dlg, dbits_title );
+    x_set_dialog_title( dbits_dlg, _(" Display bits "));
 
     add_widget( dbits_dlg,
 		label_new( 3, 4, _("Input / display codepage:"), NULL));
@@ -633,9 +627,7 @@ void display_bits_box()
 {
     new_display_codepage = display_codepage;
 
-#ifndef HAVE_X
     application_keypad_mode ();
-#endif
     init_disp_bits_box();
 
     run_dlg( dbits_dlg );
@@ -646,13 +638,11 @@ void display_bits_box()
 	errmsg = init_translation_table( source_codepage, display_codepage );
 	if (errmsg)
 	    message( 1, MSG_ERROR, "%s", errmsg );
-#ifndef HAVE_X
 #ifndef HAVE_SLANG
 	meta( stdscr, display_codepage != 0 );
 #else
 	SLsmg_Display_Eight_Bit
 	    = (display_codepage != 0 && display_codepage != 1) ? 128 : 160;
-#endif
 #endif
 	use_8th_bit_as_meta = ! (inpcheck->state & C_BOOL);
     }    
