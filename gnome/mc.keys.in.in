@@ -40,6 +40,11 @@ application/x-object-file:
 
 application/x-shared-library:
 	fm-view=%view{hex}
+	icon-filename=@icondir@/gnome-library.png
+
+application/x-shared-library-la:
+	fm-view=%view{hex}
+	icon-filename=@icondir@/gnome-library.png
 
 application/x-cpio-compressed:
 	fm-open=%cd %p#ucpio/
@@ -127,6 +132,9 @@ application/x-arj:
 application/x-unix-archive:	
 	fm-open=%cd %p#uar
 	fm-view=%view{ascii} nm %f
+application/x-shared-library:
+	fm-view=%view{hex}
+	icon-filename=@icondir@/gnome-library.png
 
 application/x-object-file:
 	open=%view{hex} %f
