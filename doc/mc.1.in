@@ -803,13 +803,12 @@ from the
 Options menu
 .\"Options Menu"
 (option
-.B "Mix all files"
-).
+.BR "Mix all files" ).
 .PP
 .SH "    Filter..."
 The filter command allows you to specify a shell pattern (for example
-.B "*.tar.gz"
-) which the files must match to be shown. Regardless
+.BR "*.tar.gz" )
+which the files must match to be shown. Regardless
 of the filter pattern, the directories and the links to directories
 are always shown in the directory panel.
 .PP
@@ -1902,7 +1901,7 @@ does some of them:
 .I Tilde substitution.
 The (~) will be substituted with your home directory, if you append a
 username after the tilde, then it will be substituted with the login
-directory of the the specified user.
+directory of the specified user.
 .PP
 For example, ~guest is the home directory for the user guest, while
 ~/guest is the directory guest in your home directory.
@@ -1928,7 +1927,6 @@ any place in the file system by using it's relative name (for example
 cd linux could take you to /usr/src/linux).
 .PP
 .SH "  Macro Substitution"
-.PP
 When accessing a
 .\"LINK2"
 user menu,
@@ -2424,17 +2422,15 @@ Extension File Edit section
 The internal file editor provides most of the features of
 common full screen editors. It is invoked using
 .B F4
-provided
-the
+provided the
 .I use_internal_edit
 option is set in the initialization file. It has an extendable file size
 limit of sixteen megabytes and edits binary files flawlessly.
 .PP
 The features it presently supports are: Block
-copy, move, delete, cut, paste;
+copy, move, delete, cut and paste;
 .I "key for key undo";
-pull-down
-menus; file insertion; macro definition; regular expression
+pull-down menus; file insertion; macro definition; regular expression
 search and replace (and our own scanf-printf search and
 replace); shift-arrow MSW-MAC text highlighting (for the
 linux console only); insert-overwrite toggle; and an option
@@ -2452,7 +2448,7 @@ and
 pastes from cooledit.clip.
 .B Shift-Del
 cuts to
-.B cooledit.clip,
+.BR cooledit.clip ,
 and
 .B Ctrl-Del
 deletes highlighted text. Mouse highlighting also works, and you
@@ -2467,7 +2463,7 @@ strokes you want to be executed. Press
 .B Ctrl-R
 again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
-.B Ctrl-A 
+.B Ctrl-A
 and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
@@ -2498,7 +2494,7 @@ is and how it works. An example is as follows: Suppose you want
 to replace all occurrences of say, an open bracket, three
 comma separated numbers, and a close bracket, with the
 word
-.I apples,
+.IR apples ,
 the third number, the word
 .I oranges
 and then the second number, I would fill in the Replace dialog
@@ -2532,13 +2528,12 @@ Let the Midnight Commander type for you.
 .PP
 Attempt to perform completion on the text before current position. MC
 attempts completion treating the text as variable (if the text begins with
-.B $
-), username (if the text begins with
-.B ~
-), hostname (if the text
-begins with
-.B @
-) or command (if you are on the command line in the
+.BR $ ),
+username (if the text begins with
+.BR ~ ),
+hostname (if the text begins with
+.BR @ )
+or command (if you are on the command line in the
 position where you might type a command, possible completions then include
 shell reserved words and shell builtin commands as well) in turn. If none
 of these produces a match, filename completion is attempted.
@@ -2690,7 +2685,6 @@ Examples:
 .PP
 The latter specifies the full path of the tar archive.
 .SH "  FIle transfer over SHell filesystem"
-.PP
 The fish file system is a network based file system that allows you to
 manipulate the files in a remote machine as if they were local. To use
 this, the other side has to either run fish server, or has to have
@@ -3108,7 +3102,6 @@ and unused keys everywhere).
 .PP
 .SH ""
 .SH "FILES"
-.PP
 The program will retrieve all of its information relative to the
 MC_DATADIR environment variable, if this variable is not set, then it will
 fall back to the @prefix@/share/mc directory.
