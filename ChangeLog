@@ -1,3 +1,8 @@
+2002-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Don't use "-dump" option with "links".
+	From David Martin <dmartina@excite.com>
+
 2002-10-13  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.hint*: Remove all references to "-1" - hints file is no

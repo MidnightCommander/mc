@@ -298,7 +298,7 @@ type/^PDF
 # html
 regex/\.([Hh]tml?|HTML?)$
 	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then (@X11_WWW@ file://%d/%p &) >/dev/null 2>&1; else links %f 2>/dev/null || lynx -force_html %f; fi
-	View=%view{ascii} links -dump %f 2>/dev/null || lynx -dump -force_html %f
+	View=%view{ascii} links %f 2>/dev/null || lynx -dump -force_html %f
 
 # StarOffice 5.2
 shell/.sdw
