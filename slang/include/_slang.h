@@ -718,12 +718,14 @@ extern void _SLcompile_byte_compiled (void);
 
 extern int (*_SLprep_eval_hook) (char *);
 
-#ifndef _SLvsnprintf
+/* GNU Midnight Commander uses replacements from glib */
+#define MIDNIGHT_COMMANDER_CODE 1
+#ifndef MIDNIGHT_COMMANDER_CODE
+
 #ifdef HAVE_VSNPRINTF
 #define _SLvsnprintf vsnprintf
 #else
 extern int _SLvsnprintf (char *, unsigned int, char *, va_list);
-#endif
 #endif
 
 #ifdef HAVE_SNPRINTF
@@ -731,6 +733,8 @@ extern int _SLvsnprintf (char *, unsigned int, char *, va_list);
 #else
 extern int _SLsnprintf (char *, unsigned int, char *, ...);
 #endif
+
+#endif				       /* !MIDNIGHT_COMMANDER_CODE */
 
 #undef _INLINE_
 #if defined(__GNUC__) && _SLANG_USE_INLINE_CODE

@@ -1,3 +1,12 @@
+2002-10-07  Pavel Roskin  <proski@gnu.org>
+
+	* include/jdmacros.h: Define SLMEMSET and SLMEMCPY
+	unconditionally, use macros with arguments.
+	* include/_slang.h: Make it clear which parts are disabled
+	for compatibility with glib.
+	* include/slinclud.h: Include malloc.h only if STDC_HEADERS is
+	not defined.
+
 2002-10-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sldisply.c (Color_Def_Type): Make const.

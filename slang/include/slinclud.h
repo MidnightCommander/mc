@@ -19,8 +19,8 @@
 # include <unistd.h>
 #endif
 
-#ifdef HAVE_MALLOC_H
-# include <malloc.h>
+#if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
+#  include <malloc.h>
 #endif
 
 #ifdef HAVE_MEMORY_H
