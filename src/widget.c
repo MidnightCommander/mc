@@ -2344,7 +2344,7 @@ buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cb
 void
 buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
 {
-    define_label_data (h, idx, text, (buttonbarfn) cback, 0);
+    buttonbar_set_label_data (h, idx, text, (buttonbarfn) cback, 0);
 }
 
 void

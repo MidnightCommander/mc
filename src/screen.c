@@ -2228,15 +2228,15 @@ panel_callback (WPanel *panel, widget_msg_t msg, int parm)
 	show_dir (panel);
 	paint_dir (panel);
 
-	define_label (h, 1, _("Help"), help_cmd);
-	define_label (h, 2, _("Menu"), user_file_menu_cmd);
-	define_label (h, 3, _("View"), view_cmd);
-	define_label (h, 4, _("Edit"), edit_cmd);
-	define_label (h, 5, _("Copy"), copy_cmd);
-	define_label (h, 6, _("RenMov"), ren_cmd);
-	define_label (h, 7, _("Mkdir"), mkdir_cmd);
-	define_label (h, 8, _("Delete"), delete_cmd);
-	redraw_labels (h);
+	buttonbar_set_label (h, 1, _("Help"), help_cmd);
+	buttonbar_set_label (h, 2, _("Menu"), user_file_menu_cmd);
+	buttonbar_set_label (h, 3, _("View"), view_cmd);
+	buttonbar_set_label (h, 4, _("Edit"), edit_cmd);
+	buttonbar_set_label (h, 5, _("Copy"), copy_cmd);
+	buttonbar_set_label (h, 6, _("RenMov"), ren_cmd);
+	buttonbar_set_label (h, 7, _("Mkdir"), mkdir_cmd);
+	buttonbar_set_label (h, 8, _("Delete"), delete_cmd);
+	buttonbar_redraw (h);
 	return MSG_HANDLED;
 
     case WIDGET_UNFOCUS:

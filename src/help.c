@@ -822,19 +822,19 @@ interactive_display (const char *filename, const char *node)
     add_widget (whelp, md);
     add_widget (whelp, help_bar);
 
-    define_label_data (whelp, 1, _("Help"), (buttonbarfn) help_help_cmd,
+    buttonbar_set_label_data (whelp, 1, _("Help"), (buttonbarfn) help_help_cmd,
 		       whelp);
-    define_label_data (whelp, 2, _("Index"), (buttonbarfn) help_index_cmd,
+    buttonbar_set_label_data (whelp, 2, _("Index"), (buttonbarfn) help_index_cmd,
 		       whelp);
-    define_label_data (whelp, 3, _("Prev"), (buttonbarfn) prev_node_cmd,
+    buttonbar_set_label_data (whelp, 3, _("Prev"), (buttonbarfn) prev_node_cmd,
 		       whelp);
-    define_label (whelp, 4, "", 0);
-    define_label (whelp, 5, "", 0);
-    define_label (whelp, 6, "", 0);
-    define_label (whelp, 7, "", 0);
-    define_label (whelp, 8, "", 0);
-    define_label (whelp, 9, "", 0);
-    define_label_data (whelp, 10, _("Quit"), help_quit_cmd, whelp);
+    buttonbar_set_label (whelp, 4, "", 0);
+    buttonbar_set_label (whelp, 5, "", 0);
+    buttonbar_set_label (whelp, 6, "", 0);
+    buttonbar_set_label (whelp, 7, "", 0);
+    buttonbar_set_label (whelp, 8, "", 0);
+    buttonbar_set_label (whelp, 9, "", 0);
+    buttonbar_set_label_data (whelp, 10, _("Quit"), help_quit_cmd, whelp);
 
     run_dlg (whelp);
     interactive_display_finish ();

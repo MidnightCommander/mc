@@ -1204,10 +1204,10 @@ copy_other_tagged (void)
 static void
 init_labels (void)
 {
-    define_label (midnight_dlg, 1, _("Help"), help_cmd);
-    define_label (midnight_dlg, 2, _("Menu"), user_file_menu_cmd);
-    define_label (midnight_dlg, 9, _("PullDn"), menu_cmd);
-    define_label (midnight_dlg, 10, _("Quit"), quit_cmd);
+    buttonbar_set_label (midnight_dlg, 1, _("Help"), help_cmd);
+    buttonbar_set_label (midnight_dlg, 2, _("Menu"), user_file_menu_cmd);
+    buttonbar_set_label (midnight_dlg, 9, _("PullDn"), menu_cmd);
+    buttonbar_set_label (midnight_dlg, 10, _("Quit"), quit_cmd);
 }
 
 static const key_map ctl_x_map[] = {

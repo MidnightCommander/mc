@@ -1225,7 +1225,7 @@ static inline void
 my_define (Dlg_head *h, int idx, const char *text, void (*fn) (WView *),
 	   WView *view)
 {
-    define_label_data (h, idx, text, (buttonbarfn) fn, view);
+    buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, view);
 }
 
 /* If the last parameter is nonzero, it means we want get the count of lines
@@ -2275,7 +2275,7 @@ view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
 
-    define_label (h, 1, _("Help"), view_help_cmd);
+    buttonbar_set_label (h, 1, _("Help"), view_help_cmd);
 
     my_define (h, 10, _("Quit"), view_quit_cmd, view);
     my_define (h, 4, view->hex_mode ? _("Ascii") : _("Hex"),
@@ -2311,7 +2311,7 @@ view_labels (WView *view)
 	my_define (h, 3, _("Quit"), view_quit_cmd, view);
     }
 
-    redraw_labels (h);
+    buttonbar_redraw (h);
 }
 
 /* Check for left and right arrows, possibly with modifiers */

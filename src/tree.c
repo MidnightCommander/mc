@@ -731,7 +731,7 @@ tree_toggle_navig (WTree *tree)
 static void
 set_navig_label (WTree *tree)
 {
-    define_label_data (tree->widget.parent, 4,
+    buttonbar_set_label_data (tree->widget.parent, 4,
 		       tree_navigation_flag ? _("Static") : _("Dynamc"),
 		       (buttonbarfn) tree_toggle_navig, tree);
 }
@@ -973,26 +973,26 @@ tree_callback (WTree *tree, widget_msg_t msg, int parm)
 
     case WIDGET_FOCUS:
 	tree->active = 1;
-	define_label (h, 1, _("Help"), (voidfn) tree_help_cmd);
-	define_label_data (h, 2, _("Rescan"),
+	buttonbar_set_label (h, 1, _("Help"), (voidfn) tree_help_cmd);
+	buttonbar_set_label_data (h, 2, _("Rescan"),
 			   (buttonbarfn) tree_rescan_cmd, tree);
-	define_label_data (h, 3, _("Forget"),
+	buttonbar_set_label_data (h, 3, _("Forget"),
 			   (buttonbarfn) tree_forget_cmd, tree);
-	define_label_data (h, 5, _("Copy"), (buttonbarfn) tree_copy_cmd,
+	buttonbar_set_label_data (h, 5, _("Copy"), (buttonbarfn) tree_copy_cmd,
 			   tree);
-	define_label_data (h, 6, _("RenMov"), (buttonbarfn) tree_move_cmd,
+	buttonbar_set_label_data (h, 6, _("RenMov"), (buttonbarfn) tree_move_cmd,
 			   tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	define_label_data (h, 7, _("Mkdir"), (buttonbarfn) tree_mkdir_cmd,
+	buttonbar_set_label_data (h, 7, _("Mkdir"), (buttonbarfn) tree_mkdir_cmd,
 			   tree);
 #else
-	define_label (h, 7, "", 0);
+	buttonbar_set_label (h, 7, "", 0);
 #endif
-	define_label_data (h, 8, _("Rmdir"), (buttonbarfn) tree_rmdir_cmd,
+	buttonbar_set_label_data (h, 8, _("Rmdir"), (buttonbarfn) tree_rmdir_cmd,
 			   tree);
 	set_navig_label (tree);
-	redraw_labels (h);
+	buttonbar_redraw (h);
 
 
 	/* FIXME: Should find a better way of only displaying the

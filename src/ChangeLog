@@ -5,6 +5,7 @@
 	redraw_labels to buttonbar_redraw. Provided compatibility macros
 	to enable a smooth transition between the old and the new names.
 	* widget.c: Likewise.
+	* help.c, main.c, screen.c, tree.v, view.c: Likewise.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
