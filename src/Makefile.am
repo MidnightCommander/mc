@@ -46,11 +46,11 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	chmod.c chmod.h chown.c chown.h cmd.c cmd.h color.c color.h	\
 	command.c command.h complete.c complete.h cons.handler.c	\
 	cons.saver.h dialog.c dialog.h dir.c dir.h dlg.c dlg.h		\
-	eregex.h ext.c ext.h file.c filegui.c filegui.h file.h		\
-	filenot.c fileopctx.c fileopctx.h find.c find.h findme.c	\
-	findme.h fs.h fsusage.c fsusage.h global.h help.c help.h	\
-	hotlist.c hotlist.h i18n.h info.c info.h key.c key.h		\
-	keyxdef.c layout.c layout.h learn.c learn.h listmode.c		\
+	eregex.h execute.c execute.h ext.c ext.h file.c filegui.c	\
+	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
+	find.h findme.c	findme.h fs.h fsusage.c fsusage.h global.h	\
+	help.c help.h hotlist.c hotlist.h i18n.h info.c info.h key.c	\
+	key.h keyxdef.c layout.c layout.h learn.c learn.h listmode.c	\
 	listmode.h main.c main.h menu.c menu.h				\
 	mountlist.c mountlist.h mouse.c mouse.h myslang.h option.c	\
 	option.h panel.h panelize.c panelize.h poptalloca.h popt.c	\

@@ -31,6 +31,7 @@
 #include "subshell.h" 		/* for subshell_pty */
 #include "user.h"
 #include "layout.h"
+#include "execute.h"
 #include "setup.h"
 
 #include "edit/edit.h"		/* BLOCK_FILE */

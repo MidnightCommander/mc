@@ -37,6 +37,7 @@
 #include "subshell.h"		/* SUBSHELL_EXIT */
 #include "tree.h"		/* for tree_chdir */
 #include "color.h"		/* DEFAULT_COLOR */
+#include "execute.h"		/* shell_execute */
 
 /* This holds the command line */
 WInput *cmdline;

@@ -32,6 +32,7 @@
 #include "dlg.h"
 #include "dialog.h"	/* For push_refresh() and pop_refresh() */
 #include "layout.h"
+#include "execute.h"
 #include "main.h"
 
 #define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)

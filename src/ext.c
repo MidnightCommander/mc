@@ -35,6 +35,7 @@
 #include "wtools.h"
 #include "ext.h"
 #include "view.h"
+#include "execute.h"
 
 #include "cons.saver.h"
 #include "layout.h"

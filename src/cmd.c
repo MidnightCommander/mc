@@ -65,6 +65,7 @@
 #include "boxes.h"		/* cd_dialog() */
 #include "setup.h"		/* save_setup() */
 #include "profile.h"		/* PROFILE_NAME */
+#include "execute.h"		/* toggle_panels() */
 
 #ifndef MAP_FILE
 #   define MAP_FILE 0
@@ -82,50 +83,6 @@ int source_route = 0;
 
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
-
-
-/*
- * Execute command on a filename that can be on VFS.
- * Errors are reported to the user.
- */
-static void
-execute_with_vfs_arg (const char *command, const char *filename)
-{
-    char *localcopy;
-    char *fn;
-    struct stat st;
-    time_t mtime;
-
-    /* Simplest case, this file is local */
-    if (!filename || vfs_file_is_local (filename)) {
-	execute_internal (command, filename);
-	return;
-    }
-
-    /* FIXME: Creation of new files on VFS is not supported */
-    if (!*filename)
-	return;
-
-    localcopy = mc_getlocalcopy (filename);
-    if (localcopy == NULL) {
-	message (1, MSG_ERROR, _(" Cannot fetch a local copy of %s "),
-		 filename);
-	return;
-    }
-
-    /*
-     * filename can be an entry on panel, it can be changed by executing
-     * the command, so make a copy.  Smarter VFS code would make the code
-     * below unnecessary.
-     */
-    fn = g_strdup (filename);
-    mc_stat (localcopy, &st);
-    mtime = st.st_mtime;
-    execute_internal (command, localcopy);
-    mc_stat (localcopy, &st);
-    mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
-    g_free (fn);
-}
 
 
 int
@@ -964,87 +921,15 @@ void
 view_other_cmd (void)
 {
     static int message_flag = TRUE;
-#ifdef HAVE_SUBSHELL_SUPPORT
-    char *new_dir = NULL;
-    char **new_dir_p;
-#endif /* HAVE_SUBSHELL_SUPPORT */
 
-    if (!xterm_flag && !console_flag && !use_subshell){
+    if (!xterm_flag && !console_flag && !use_subshell) {
 	if (message_flag)
-	    message (1, MSG_ERROR, _(" Not an xterm or Linux console; \n"
-				     " the panels cannot be toggled. "));
+	    message (1, MSG_ERROR,
+		     _(" Not an xterm or Linux console; \n"
+		       " the panels cannot be toggled. "));
 	message_flag = FALSE;
     } else {
-	channels_down ();
-	disable_mouse ();
-	if (clear_before_exec)
-	    clr_scr ();
-        if (alternate_plus_minus)
-            numeric_keypad_mode ();
-#ifndef HAVE_SLANG
-	/* With slang we don't want any of this, since there
-	 * is no mc_raw_mode supported
-	 */
-	reset_shell_mode ();
-	noecho ();
-#endif /* !HAVE_SLANG */
-	keypad(stdscr, FALSE);
-	endwin ();
-	do_exit_ca_mode ();
-	mc_raw_mode ();
-	if (console_flag)
-	    restore_console ();
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-	if (use_subshell){
-	    new_dir_p = vfs_current_is_local () ? &new_dir : NULL;
-	    if (invoke_subshell (NULL, VISIBLY, new_dir_p))
-		quiet_quit_cmd();  /* User did `exit' or `logout': quit MC quietly */
-	} else
-#endif /* HAVE_SUBSHELL_SUPPORT */
-	{
-	    if (output_starts_shell){
-		fprintf (stderr,
-		 _("Type `exit' to return to the Midnight Commander"));
-		fprintf (stderr, "\n\r\n\r");
-			 
-		my_system (EXECUTE_AS_SHELL, shell, NULL);
-	    } else
-		get_key_code (0);
-	}
-	if (console_flag)
-	    handle_console (CONSOLE_SAVE);
-
-	do_enter_ca_mode ();
-
-	reset_prog_mode ();
-	keypad(stdscr, TRUE);
-
-	/* Prevent screen flash when user did 'exit' or 'logout' within
-	   subshell */
-	if (quit)
-	    return;
-
-	enable_mouse ();
-	channels_up ();
-        if (alternate_plus_minus)
-            application_keypad_mode ();
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-	if (use_subshell){
-	    load_prompt (0, 0);
-	    if (new_dir)
-		do_possible_cd (new_dir);
-	    if (console_flag && output_lines)
-		show_console_contents (output_start_y,
-				       LINES-keybar_visible-output_lines-1,
-				       LINES-keybar_visible-1);
-	}
-#endif /* HAVE_SUBSHELL_SUPPORT */
-        touchwin (stdscr);
-	
-	repaint_screen ();
-	update_xterm_title_path ();
+	toggle_panels ();
     }
 }
 

@@ -67,6 +67,7 @@
 #include "learn.h"		/* learn_keys() */
 #include "listmode.h"
 #include "background.h"
+#include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
 
 /* Listbox for the command history feature */
@@ -144,9 +145,6 @@ int alternate_plus_minus = 0;
  * command line is emtpy, otherwise they behave like regular letters
  */
 int only_leading_plus_minus = 1;
-
-/* If true, after executing a command, wait for a keystroke */
-enum { pause_never, pause_on_dumb_terminals, pause_always };
 
 int pause_after_run = pause_on_dumb_terminals;
 
@@ -280,9 +278,6 @@ static int edit_one_file_start_line = 0;
 /* Used so that widgets know if they are being destroyed or
    shut down */
 int midnight_shutdown = 0;
-
-/* to show nice prompts */
-static int last_paused = 0;
 
 /* Used for keeping track of the original stdout */
 int stdout_fd = 0;
@@ -435,14 +430,6 @@ update_panels (int force_update, char *current_file)
     mc_chdir (panel->cwd);
 }
 
-/* Sets up the terminal before executing a program */
-static void
-pre_exec (void)
-{
-    use_dash (0);
-    edition_pre_exec ();
-}
-
 /* Save current stat of directories to avoid reloading the panels */
 /* when no modifications have taken place */
 void
@@ -482,111 +469,6 @@ void
 restore_console (void)
 {
     handle_console (CONSOLE_RESTORE);
-}
-
-void
-exec_shell (void)
-{
-    do_execute (shell, 0, 0);
-}
-
-void
-do_execute (const char *shell, const char *command, int flags)
-{
-#ifdef HAVE_SUBSHELL_SUPPORT
-    char *new_dir = NULL;
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-
-#ifdef USE_VFS
-    char *old_vfs_dir = 0;
-
-    if (!vfs_current_is_local ())
-	old_vfs_dir = g_strdup (vfs_get_current_dir ());
-#endif				/* USE_VFS */
-
-    save_cwds_stat ();
-    pre_exec ();
-    if (console_flag)
-	restore_console ();
-
-    if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
-	printf ("%s%s%s\n", last_paused ? "\r\n" : "", prompt, command);
-	last_paused = 0;
-    }
-#ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && !(flags & EXECUTE_INTERNAL)) {
-	do_update_prompt ();
-
-	/* We don't care if it died, higher level takes care of this */
-#ifdef USE_VFS
-	invoke_subshell (command, VISIBLY, old_vfs_dir ? 0 : &new_dir);
-#else
-	invoke_subshell (command, VISIBLY, &new_dir);
-#endif				/* !USE_VFS */
-    } else
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-	my_system (flags, shell, command);
-
-    if (!(flags & EXECUTE_INTERNAL)) {
-	if ((pause_after_run == pause_always
-	     || (pause_after_run == pause_on_dumb_terminals && !xterm_flag
-		 && !console_flag)) && !quit
-#ifdef HAVE_SUBSHELL_SUPPORT
-	    && subshell_state != RUNNING_COMMAND
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-	    ) {
-	    printf ("%s\r\n", _("Press any key to continue..."));
-	    last_paused = 1;
-	    fflush (stdout);
-	    mc_raw_mode ();
-	    getch ();
-	}
-	if (console_flag) {
-	    if (output_lines && keybar_visible) {
-		putchar ('\n');
-		fflush (stdout);
-	    }
-	}
-    }
-
-    if (console_flag)
-	handle_console (CONSOLE_SAVE);
-    edition_post_exec ();
-
-#ifdef HAVE_SUBSHELL_SUPPORT
-    if (new_dir)
-	do_possible_cd (new_dir);
-
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-
-#ifdef USE_VFS
-    if (old_vfs_dir) {
-	mc_chdir (old_vfs_dir);
-	g_free (old_vfs_dir);
-    }
-#endif				/* USE_VFS */
-
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    update_xterm_title_path ();
-
-    do_refresh ();
-    use_dash (TRUE);
-}
-
-/* Executes a command */
-void
-shell_execute (const char *command, int flags)
-{
-#ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell)
-	if (subshell_state == INACTIVE)
-	    do_execute (shell, command, flags | EXECUTE_AS_SHELL);
-	else
-	    message (1, MSG_ERROR,
-		     _(" The shell is already running a command "));
-    else
-#endif				/* HAVE_SUBSHELL_SUPPORT */
-	do_execute (shell, command, flags | EXECUTE_AS_SHELL);
 }
 
 void
@@ -1363,45 +1245,6 @@ copy_other_tagged (void)
     if (get_other_type () != view_listing)
 	return;
     copy_tagged (opanel);
-}
-
-static void
-do_suspend_cmd (void)
-{
-    pre_exec ();
-
-    if (console_flag && !use_subshell)
-	restore_console ();
-
-#ifdef SIGTSTP
-    {
-	struct sigaction sigtstp_action;
-
-	/* Make sure that the SIGTSTP below will suspend us directly,
-	   without calling ncurses' SIGTSTP handler; we *don't* want
-	   ncurses to redraw the screen immediately after the SIGCONT */
-	sigaction (SIGTSTP, &startup_handler, &sigtstp_action);
-
-	kill (getpid (), SIGTSTP);
-
-	/* Restore previous SIGTSTP action */
-	sigaction (SIGTSTP, &sigtstp_action, NULL);
-    }
-#endif				/* SIGTSTP */
-
-    if (console_flag && !use_subshell)
-	handle_console (CONSOLE_SAVE);
-
-    edition_post_exec ();
-}
-
-void
-suspend_cmd (void)
-{
-    save_cwds_stat ();
-    do_suspend_cmd ();
-    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-    do_refresh ();
 }
 
 static void

@@ -43,6 +43,7 @@
 #include "setup.h"		/* For loading/saving panel options */
 #include "user.h"
 #include "profile.h"
+#include "execute.h"
 #include "widget.h"
 
 #ifdef NATIVE_WIN32

@@ -78,8 +78,6 @@ void check_error_pipe (void);
 int close_error_pipe (int error, char *text);
 
 /* Process spawning */
-#define EXECUTE_INTERNAL   1
-#define EXECUTE_AS_SHELL   4
 int my_system (int flags, const char *shell, const char *command);
 void save_stop_handler (void);
 extern struct sigaction startup_handler;

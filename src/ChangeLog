@@ -1,5 +1,10 @@
 2003-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* execute.c: New file with all functions for execution and
+	toggling panels not specific to subshell.
+	* execute.h: Corresponding header.
+	* Makefile.am: Adjust for the above.
+
 	* main.c (execute): Eliminate.  Fix all dependencies.
 	(shell_execute): Constify string argument.
 

@@ -65,51 +65,6 @@ char *default_edition_colors =
 "editmarked=black,cyan";
 
 void
-edition_post_exec (void)
-{
-    do_enter_ca_mode ();
-
-    /* FIXME: Missing on slang endwin? */
-    reset_prog_mode ();
-    flushinp ();
-    
-    keypad (stdscr, TRUE);
-    mc_raw_mode ();
-    channels_up ();
-    enable_mouse ();
-    if (alternate_plus_minus)
-        application_keypad_mode ();
-}
-
-void
-edition_pre_exec (void)
-{
-    if (clear_before_exec)
-	clr_scr ();
-    else {
-	if (!(console_flag || xterm_flag))
-	    printf ("\n\n");
-    }
-
-    channels_down ();
-    disable_mouse ();
-    
-    reset_shell_mode ();
-    keypad (stdscr, FALSE);
-    endwin ();
-    
-    numeric_keypad_mode ();
-    
-    /* on xterms: maybe endwin did not leave the terminal on the shell
-     * screen page: do it now.
-     *
-     * Do not move this before endwin: in some systems rmcup includes
-     * a call to clear screen, so it will end up clearing the shell screen.
-     */
-    do_exit_ca_mode ();
-}
-
-void
 clr_scr (void)
 {
     standend ();

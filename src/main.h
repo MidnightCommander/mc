@@ -20,15 +20,8 @@ enum {
 extern int quote;
 extern volatile int quit;
 
-/* Execute functions: the base and the routines that use it */
-void do_execute (const char *shell, const char *command, int internal_command);
-#define execute_internal(command,args) do_execute (command, args, 1)
-
-/* Execute functions that use the shell to execute */
-void shell_execute (const char *command, int flags);
-
-/* This one executes a shell */
-void exec_shell (void);
+/* If true, after executing a command, wait for a keystroke */
+enum { pause_never, pause_on_dumb_terminals, pause_always };
 
 void subshell_chdir (char *command);
 
@@ -104,7 +97,6 @@ void update_panels (int force_update, char *current_file);
 void create_panels (void);
 void repaint_screen (void);
 void outrefresh_screen (void);
-void suspend_cmd (void);
 void do_update_prompt (void);
 
 extern char *shell;
@@ -153,9 +145,6 @@ extern WLabel     *process_status;
 struct WMenu;
 extern struct WMenu *the_menubar;
 #endif /* WANT_WIDGETS */
-
-void edition_pre_exec (void);
-void edition_post_exec (void);
 
 void done_menu (void);
 void init_menu (void);
