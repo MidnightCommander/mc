@@ -167,7 +167,7 @@ char *detect_console (void)
 	!isdigit(tty_name[len - 1]))
 	return "Doesn't look like console";
 
-    sprintf (vcs_name, "/dev/vcsa%c", tty_name [len-1]);
+    sprintf (vcs_name, "/dev/vcsa%s", tty_name + xlen - 1);
     vcs_fd = check_file (vcs_name, 0, &msg);
     console_fd = check_file (tty_name, 1, &msg);
 
