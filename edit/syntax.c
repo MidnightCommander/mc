@@ -190,8 +190,6 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
     is_end = (rule.end == (unsigned char) i);
 /* check to turn off a keyword */
     if (_rule.keyword) {
-	struct key_word *k;
-	k = edit->rules[_rule.context]->keyword[_rule.keyword];
 	if (edit_get_byte (edit, i - 1) == '\n')
 	    _rule.keyword = 0;
 	if (is_end) {
@@ -373,12 +371,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
    Returns 0 on error/eof or a count of the number of bytes read
    including the newline. Result must be free'd.
  */
-#ifdef HAVE_MAD
-static int mad_read_one_line (char **line, FILE * f, char *file, int line_)
-#define read_one_line(a,b) mad_read_one_line(a,b,__FILE__,__LINE__)
-#else
 static int read_one_line (char **line, FILE * f)
-#endif
 {
     char *p;
     int len = 256, c, r = 0, i = 0;
@@ -673,9 +666,6 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		c->right = (char *) strdup (*a++);
 		c->first_left = *c->left;
 		c->first_right = *c->right;
-#if 0
-		c->single_char = (strlen (c->right) == 1);
-#endif
 	    }
 	    c->keyword = syntax_malloc (MAX_WORDS_PER_CONTEXT * sizeof (struct key_word *));
 #if 0
@@ -742,7 +732,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    k->color = this_try_alloc_color_pair (fg, bg);
 	    check_not_a;
 	    num_words++;
-	} else if (!strncmp (args[0], "#", 1)) {
+	} else if (*(args[0]) == '#') {
 	    /* do nothing for comment */
 	} else if (!strcmp (args[0], "file")) {
 	    break;

@@ -144,7 +144,6 @@ struct key_word {
     unsigned char first;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-    time_t time;
 #define NO_COLOR 0x7FFFFFFF
 #define SPELLING_ERROR 0x7EFEFEFE
     int line_start;
@@ -158,9 +157,6 @@ struct context_rule {
     unsigned char first_right;
     char line_start_left;
     char line_start_right;
-#if 0
-    int single_char;
-#endif
     int between_delimiters;
     char *whole_word_chars_left;
     char *whole_word_chars_right;

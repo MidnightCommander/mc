@@ -1,3 +1,8 @@
+2002-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit.h (struct key_word): Remove time field.
+	* syntax.c: Remove MAD support.
+
 2002-09-24  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c (edit): Make edit_dlg local variable.
