@@ -1,5 +1,9 @@
 2005-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* samba/libsmb/clientgen.c (cli_oem_change_password): Removed.
+	* samba/libsmb/smbencrypt.c (make_oem_passwd_hash): Removed.
+	* samba/lib/util_sock.c (reset_globals_after_fork): Removed.
+
 	* samba/lib/util_file.c: Comment out all but fgets_slash().
 
 	* samba/lib/util.c: Comment out some more unused functions.
@@ -8,7 +12,7 @@
 	(remote_proto, remote_arch): Make static const char * instead of
 	fstring.
 	(local_machine, remote_machine): Ditto.
-	* samba/libsmb/clientgen.c (interpret_long_filename): Fix 
+	(interpret_long_filename): Fix 
 	def_finfo declaration.
 
 2005-01-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
