@@ -9,6 +9,7 @@
    Copyright (C) 1995, 1997 the Free Software Foundation
    Written by: 1995 Miguel de Icaza.
                1997 Norbert Warmuth.
+	       2000 Pavel Machek
    
    $Id$
  
@@ -89,16 +90,16 @@ undelfs_shutdown (void)
 {
     if (fs)
 	ext2fs_close (fs);
-    fs = 0;
+    fs = NULL;
     if (ext2_fname)
 	g_free (ext2_fname);
-    ext2_fname = 0;
+    ext2_fname = NULL;
     if (delarray)
         g_free (delarray);
-    delarray = 0;
+    delarray = NULL;
     if (block_buf)
 	g_free (block_buf);
-    block_buf = 0;
+    block_buf = NULL;
 }
 
 static void
@@ -111,7 +112,7 @@ undelfs_get_path (char *dirname, char **ext2_fname, char **file)
        hda5, sdb8 etc, which is assumed to live under /dev. 
                                                     -- pavel@ucw.cz */
 
-    *ext2_fname = 0;
+    *ext2_fname = NULL;
     
     if (strncmp (dirname, "/#undel:", 8))
 	return;
@@ -254,10 +255,10 @@ error_out:
     ext2fs_close_inode_scan (scan);
 free_block_buf:
     g_free (block_buf);
-    block_buf = 0;
+    block_buf = NULL;
 free_delarray:
     g_free (delarray);
-    delarray = 0;
+    delarray = NULL;
     return 0;
 }
 
@@ -386,7 +387,7 @@ undelfs_open (vfs *me, char *fname, int flags, int mode)
 {
     char *file, *f;
     ino_t  inode, i;
-    undelfs_file *p = 0;
+    undelfs_file *p = NULL;
     
     /* Only allow reads on this file system */
     undelfs_get_path (fname, &file, &f);
