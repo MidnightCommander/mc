@@ -5,6 +5,10 @@
 
 set -e
 
+# Bootstrap from CVS
+./autogen.sh >test-autogen.out 2>test-autogen.err
+make all >test0.out 2>test0.err
+
 # Default configuration
 make distcheck >test1.out 2>test1.err
 
