@@ -1746,8 +1746,10 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 	DEBUG (3, ("smbfs_open: O_TRUNC\n"));
 
     remote_handle->fnum =
-	cli_open (remote_handle->cli, rname, flags & O_CREAT ? flags : O_RDONLY,
-		  DENY_NONE);
+	cli_open (remote_handle->cli, rname, ((flags & O_CREAT)
+					      || (flags ==
+						  (O_WRONLY | O_APPEND))) ?
+		  flags : O_RDONLY, DENY_NONE);
 
     if (remote_handle->fnum == -1) {
 	message (1, MSG_ERROR, _(" %s opening remote file %s "),
@@ -1772,6 +1774,12 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 	       ("smbfs_open(rname:%s) getattrib:%s\n", rname,
 		cli_errstr (remote_handle->cli)));
 	my_errno = cli_error (remote_handle->cli, NULL, &err, NULL);
+	cli_close (remote_handle->cli, remote_handle->fnum);
+	return NULL;
+    }
+
+    if ((flags == (O_WRONLY | O_APPEND)) /* file.c:copy_file_file() -> do_append */
+	&& smbfs_lseek (remote_handle, 0, SEEK_END) == -1) {
 	cli_close (remote_handle->cli, remote_handle->fnum);
 	return NULL;
     }

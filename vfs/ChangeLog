@@ -1,3 +1,7 @@
+2004-08-27  Andrew V. Samoilov  <sav bcs zp ua>
+
+	* smbfs.c (smbfs_open_readwrite): Implement O_APPEND via smbfs_lseek().
+
 2004-08-26  Roland Illig  <roland.illig@gmx.de>
 
 	* undelfs.c (undelfs_lstat): Adjusted declaration.
