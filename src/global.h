@@ -102,7 +102,6 @@ struct timeval {
 
 #include "fs.h"
 #include "util.h"
-#include "mad.h"
 
 #include "textconf.h"
 #include "../vfs/vfs.h"

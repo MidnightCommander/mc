@@ -2242,9 +2242,6 @@ print_mc_usage (FILE *stream)
 #ifdef USE_NETCODE
     N_("-l, --ftplog file  Log ftpfs commands to the file.\n"),
 #endif
-#ifdef HAVE_MAD
-    N_("-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"),
-#endif
     N_("-P, --printwd      At exit, print the last working directory.\n"
        "-s, --slow         Disables verbose operation (for slow terminals).\n"),
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
@@ -2344,12 +2341,6 @@ process_args (int c, const char *option_arg)
 	finish_program = 1;
 	break;
 
-#ifdef HAVE_MAD
-    case 'M':
-	mad_set_debug (option_arg);
-	break;
-#endif
-		
 #ifdef OS2_NT
     case 'S':
 	print_last_wd = 2;
@@ -2403,9 +2394,6 @@ static const struct poptOption argument_table [] = {
 #ifdef USE_NETCODE
     { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l',
       N_("Log ftp dialog to specified file") },
-#endif
-#ifdef HAVE_MAD
-    { "memory", 	'M', POPT_ARG_STRING, 	NULL, 			 'M', },
 #endif
     { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
     { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm',
@@ -2592,7 +2580,6 @@ main (int argc, char *argv [])
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
-    mad_init ();
 
     /* Initialize list of all user group for timur_clr_mode */
     init_groups ();
@@ -2786,6 +2773,5 @@ main (int argc, char *argv [])
 	g_free (other_dir);
 #endif
 
-    mad_finalize (__FILE__, __LINE__);
     return 0;
 }

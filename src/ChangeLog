@@ -1,3 +1,15 @@
+2002-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* mad.c: Remove.
+	* mad.h: Likewise.
+	* Makefile.am (SRCS): Remove mad.c and mad.h.
+	* cmd.c: Remove references to MAD.
+	* main.c: Likewise.
+	* dlg.c: Use inline, not INLINE.
+	* hotlist.c: Likewise.
+	* menu.c: Likewise.
+	* global.h: Don't include mad.h.
+
 2002-07-31  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* man2hlp.c (main): Don't use freed structure member.

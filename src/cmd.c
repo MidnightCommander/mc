@@ -456,7 +456,6 @@ void reread_cmd (void)
 {
     int flag;
 
-    mad_check (__FILE__, __LINE__);
     if (get_current_type () == view_listing &&
 	get_other_type () == view_listing)
 	flag = strcmp (cpanel->cwd, opanel->cwd) ? UP_ONLY_CURRENT : 0;

@@ -556,7 +556,7 @@ void dlg_stop (Dlg_head *h)
     h->running = 0;
 }
 
-static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
+static inline void dialog_handle_key (Dlg_head *h, int d_key)
 {
     switch (d_key){
     case KEY_LEFT:
@@ -710,7 +710,7 @@ int dlg_key_event (Dlg_head *h, int d_key)
     return 1;
 }
 
-static INLINE int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
+static inline int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
 {
     Widget_Item *item;
     Widget_Item *starting_widget = h->current;
