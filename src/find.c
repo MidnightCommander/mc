@@ -92,7 +92,7 @@ typedef struct dir_stack {
 static dir_stack *dir_stack_base = 0;
 
 static struct {
-	char* text;
+	const char* text;
 	int len;	/* length including space and brackets */
 	int x;
 } fbuts [] = {
