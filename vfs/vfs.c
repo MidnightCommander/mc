@@ -1583,7 +1583,7 @@ int vfs_parse_filedate(int idx, time_t *t)
 
 	/* This is a special case for ctime() or Mon DD YYYY hh:mm */
 	if(is_num (idx) && (columns[idx+1][0]) &&
-	    ((got_year = is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
+	    ((got_year |= is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
 		idx++; /* time & year or reverse */
 	} /* only time or date */
     }

@@ -1,3 +1,9 @@
+2001-02-14  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_parse_filedate): Don't reset got_year to 0 while
+	checking for ctime() format.
+	From Peter Daum.
+
 2001-02-11  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/mailfs (parse_date): Workaround for Y2K bugs. Support
