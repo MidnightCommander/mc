@@ -865,8 +865,10 @@ find_file(char *start_dir, char *pattern, char *content, char **dirname,
 			*dirname = g_strdup(dir_tmp);
 		if (file_tmp)
 			*filename = g_strdup(file_tmp);
+		break;
 	case B_PANELIZE:
 		find_panelize(head, start_dir);
+		break;
 	}
 
 	kill_gui(head);

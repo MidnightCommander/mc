@@ -1,5 +1,7 @@
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
+	* gfind.c (find_file): Add missing break.
+
 	* gdesktop.c (desktop_create_url): Accept new parameter
 	is_template.  Use mc_mkstemps() is it's TRUE.  Change all
 	callers.
