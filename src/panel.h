@@ -139,11 +139,6 @@ typedef struct {
     void *ministatus;
     void *tree_scrolled_window;
 
-#ifdef NEW_GNOME_LIBS
-#else
-    void *scrollbar;
-#endif
-	
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
     int estimated_total;
