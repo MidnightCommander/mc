@@ -8,8 +8,10 @@
 
 #include <stdlib.h>	/* for free() and other usefull routins */
 
-#ifdef NEEDS_IO_H
+#ifdef _OS_NT
+#  include <windows.h>
 #  include <io.h>
+#  include <direct.h>
 #endif
 
 #ifdef HAVE_SYS_PARAM_H
@@ -31,7 +33,7 @@
 #  endif
 #endif
 
-#ifndef HAVE_SYS_TIME_H
+#if !defined(HAVE_SYS_TIME_H) && !defined(_OS_NT)
 struct timeval {
     long int tv_sec;  /* seconds */
     long int tv_usec; /* microseconds */
