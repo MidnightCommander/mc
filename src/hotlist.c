@@ -164,7 +164,7 @@ update_path_name (void)
 {
     char *text, *p;
     WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head *dlg = hotlist_state.moving ? movelist_dlg : hotlist_dlg;
+    Dlg_head *dlg = list->widget.parent;
 
     if (list->current) {
 	if (list->current->data != 0) {
@@ -478,7 +478,7 @@ l1:
 
 static int l_call (WListbox *list)
 {
-    Dlg_head *dlg = hotlist_state.moving ? movelist_dlg : hotlist_dlg;
+    Dlg_head *dlg = list->widget.parent;
 
     if (list->current){
 	if (list->current->data) {

@@ -1,5 +1,8 @@
 2003-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c (update_path_name): Avoid using global variable.
+	(l_call): Likewise.
+
 	* widget.h: Eliminate listbox_cback.  Call listbox callback
 	whenever it's defined.  Adjust all users.
 
