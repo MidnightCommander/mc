@@ -393,7 +393,7 @@ no funciona directamente.
 .PP
 .B + \ (más).
 Usado para seleccionar (marcar) un grupo de ficheros. Midnight Commander
-preguntará por una expresión refgular describiendo el grupo. Cuando los
+preguntará por una expresión regular describiendo el grupo. Cuando los
 .I Caracteres Comodín (Shell Patterns)
 están habilitados, la expresión regular es idéntica a las expresiones
 regulares en el shell (poniendo * para cero o más caracteres y ?
@@ -509,7 +509,7 @@ Mueve al principio.
 .B Fin (End), C1.
 Mueve al final.
 .PP
-El visor de ayuda y el de fichero reconocen las siguiente teclas
+El visor de ayuda y el de fichero reconocen las siguientes teclas
 aparte de las mencionadas anteriormente:
 .PP
 .B b, C-b, C-h, Retroespacio (Backspace), Suprimir (Delete).
@@ -2378,8 +2378,8 @@ en el terminal.
 .PP
 Para definir una macro, pulsar
 .B Ctrl-R
-y entonces teclearemos las secuencias de teclas que deseamos sean ejecutadas
-. Pulsaremos
+y entonces teclearemos las secuencias de teclas que deseamos sean
+ejecutadas. Pulsaremos
 .B Ctrl-R
 de nuevo al finalizar. Podemos asignar la macro a la tecla que queramos
 pulsándo sobre ella. La macro será ejecutada cuando pulsemos
@@ -2992,17 +2992,18 @@ La enfatización por colores también funciona en este modo.
 .PP
 .I use_file_to_guess_type
 .IP
-Si esta variable está activa (por defecto) engendrará el comando de fichero
-para corresponder con los tipos de ficheros listados en el fichero
+Si esta variable está activada (por defecto lo está) se recurrirá al
+comando "file" para reconocer los tipos de fichero referidos en el fichero
 .\"LINK2"
 mc.ext.
 .\"Extension File Edit"
 .PP
 .I xterm_mode
 .IP
-Si esta variable es activada (por defecto no) cuando naveguemos por el sistema de
-ficheros en un panel en árbol, será recargado automáticamente el otro panel
-con los contenidos del directorio seleccionado.
+Si esta variable esta activada (por defecto no) cuando naveguemos
+por el sistema de ficheros en un panel en árbol, se irá actualizando
+automáticamente el otro panel con los contenidos del directorio
+seleccionado en cada momento.
 .PP
 .\"NODE "Terminal databases"
 .SH "Ajustes del Terminal"
@@ -3115,55 +3116,64 @@ personal o de sistema.
 .PP
 .\"SKIP_SECTION"
 .SH "LICENCIA"
-Este programa es distribuido bajo los términos de la Licencia Pública General de GNU
-como fue publicado por la Fundación de Software Libre (Free Software Foundation).
-Véase la ayuda incorporada para más detalles sobre la Licencia y la ausencia de garantía.
+Este programa se distribuye en los términos que recoge la Licencia Pública
+General de GNU (GNU General Public License) tal como fue publicada por
+la Fundación de Software Libre (Free Software Foundation). La ayuda
+integrada con el programa contiene detalles sobre la Licencia y la
+carencia de garantía.
 .\"NODE "AVAILABILITY"
 .SH "DISPONIBILIDAD"
 La última versión de este programa puede encontrarse en
-ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/
-y en los servidores espejo de GNOME que se relacionan en
-http://www.gnome.org/.
+ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ y en los
+servidores espejo de GNOME que se relacionan en http://www.gnome.org/.
 .\"NODE "SEE ALSO"
 .SH "VÉASE TAMBIÉN"
-ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
-tcsh(1), zsh(1).
+mcedit(1), mcserv(8), sh(1), bash(1), tcsh(1), zsh(1), ed(1), view(1),
+terminfo(1), gpm(1).
 .PP
 .nf
 La página web de Midnight Commander está en:
 	http://www.gnome.org/mc/
 .fi
 .PP
+La presente documentación recoge información relativa a la versión 4.6.0
+(Agosto de 2002). Esta traducción no está actualizada con la versión
+original en inglés. Para acceder a información sobre versiones recientes
+consultar la página de manual en inglés que contiene información más
+completa y actualizada. Para ver el susodicho manual original ejecutar
+en la línea de órdenes:
+.nf
+        LANG= LC_ALL= man mc
+.fi
+.PP
 .\"NODE "AUTHORS"
 .SH "AUTORES"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
-(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
-Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
+(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred Leeflang
+(fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
 Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
 (mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
-Norbert Warmuth (nwarmuth@privat.circular.de),
-Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
-(psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) y Pavel Roskin
-(proski@gnu.org) son los desarrolladores de este paquete.
-Alessandro Rubini (rubini@ipvvis.unipv.it) ha sido especialmente útil
-depurando y mejorando el soporte de ratón del programa, John Davis
-(davis@space.mit.edu) también dejó su librería S-Lang disponible para nosotros
-bajo la GPL y respondió a mis preguntas sobre ella, y las siguientes personas
-han contribuido con código y la corrección de muchos errores (en orden alfabético):
+Norbert Warmuth (nwarmuth@privat.circular.de), Mauricio Plaza
+(mok@roxanne.nuclecu.unam.mx), Paul Sheer (psheer@icon.co.za),
+Pavel Machek (pavel@ucw.cz) y Pavel Roskin (proski@gnu.org)
+son los desarrolladores de este paquete. Alessandro Rubini
+(rubini@ipvvis.unipv.it) ha sido especialmente útil depurando y mejorando
+el soporte de ratón del programa, John Davis (davis@space.mit.edu) también
+dejó su librería S-Lang disponible para nosotros bajo la GPL y respondió
+a mis preguntas sobre ella, y las siguientes personas han contribuido
+con código y la corrección de muchos errores (en orden alfabético):
 .PP
-Adam Tla/lka (atlka@sunrise.pg.gda.pl),
-alex@bcs.zp.ua (Alex I. Tkachenko), Antonio Palama,
-DOS port (palama@posso.dm.unipi.it), Erwin van Eijk
-(wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
+Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua (Alex
+I. Tkachenko), Antonio Palama, DOS port (palama@posso.dm.unipi.it), Erwin
+van Eijk (wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
 Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
 (root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
 (j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
 Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
 (mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
 Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
-(pundtt@math.uni-muenster.de), Timur Bakeyev
-(timur@goff.comtat.kazan.su), Tomasz Cholewo
-(tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
+(pundtt@math.uni-muenster.de), Timur Bakeyev (timur@goff.comtat.kazan.su),
+Tomasz Cholewo (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 y Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
@@ -3171,17 +3181,17 @@ y Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .SH "ERRORES"
 Véase el fichero "TODO" en la distribución para saber qué falta por hacer.
 .PP
-Si quieres informar de algún problema con el programa, por favor envía un
-mensaje a esta dirección: mc-devel@gnome.org.
+Para informar de problemas con el programa, envíar un
+mensaje a la dirección: mc-devel@gnome.org.
 .PP
-informa detalladamente sobre el error, la versión del programa que estás ejecutando
-(mc -V muestra esta información), el sistema operativo en el que estás ejecutando
-el programa y si el programa se estrella, apreciaríamos mucho un trazado de la pila.
+Proporcionar una descripción en detalle del problema, la versión del
+programa que se está empleando (mc -V muestra esta información) y el
+sistema operativo en el se ejecuta el programa. Si el programa revienta,
+sería también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
-Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David Martín, 2002.
+Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David
+Martín, 2002.
 .PP
-Esta traducción no está actualizada con la versión original en inglés. Para acceder a
-información sobre versiones recientes consultar la página de manual en inglés.
-.PP
-Midnight Commander traducido a castellano por David Martín <dmartina@excite.com>.
+Midnight Commander traducido a castellano por David Martín
+<dmartina@excite.com>.
