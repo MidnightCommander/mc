@@ -29,6 +29,7 @@
 #include "dialog.h"
 #include "gdesktop.h"
 #include "gpageprop.h"
+#include "gcliplabel.h"
 
 /* The pixmaps */
 #include "directory.xpm"
@@ -70,7 +71,8 @@ repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 void
 show_dir (WPanel *panel)
 {
-	gtk_entry_set_text (GTK_ENTRY (panel->current_dir), panel->cwd);
+	assign_text (panel->current_dir, panel->cwd);
+	update_input (panel->current_dir);
 }
 
 static void
@@ -134,8 +136,8 @@ x_fill_panel (WPanel *panel)
 			col++;
 		}
 		gtk_clist_append (cl, texts);
-		
-		color = file_entry_color (fe);
+
+		color = file_compute_color (fe->f.marked ? MARKED : NORMAL, fe);
 		panel_file_list_set_row_colors (cl, i, color);
 		if (type_col != -1)
 			panel_file_list_set_type_bitmap (cl, i, type_col, color, fe);
@@ -191,7 +193,6 @@ x_select_item (WPanel *panel)
 	gtk_clist_select_row (clist, panel->selected, 0);
 
 	if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL){
-		printf ("No fue visible %d\n", panel->selected);
 		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
 	}
 }
@@ -205,8 +206,8 @@ x_unselect_item (WPanel *panel)
 void
 x_filter_changed (WPanel *panel)
 {
-	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (panel->filter_w))),
-			    panel->filter ? panel->filter : "");
+	assign_text (panel->filter_w, panel->filter ? panel->filter : "");
+	update_input (panel->filter_w);
 }
 
 void
@@ -226,7 +227,7 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 	int char_width, usable_pixels, extra_pixels, width;
 	int total_columns, extra_columns;
 	int expand_space, extra_space, shrink_space;
-	int lost_pixels;
+	int lost_pixels, display_the_mini_info;
 	
 	/* Pass 1: Count minimum columns,
 	 * set field_len to default to the requested_field_len
@@ -264,7 +265,16 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 	} else
 		extra_space = expand_space = 0;
 
+	/* Hack: the default mini-info display only gets displayed
+	 * if panel->estimated_total is not zero, ie, if this has been
+	 * initialized for the first time.
+	 */
+	
+	display_the_mini_info = (panel->estimated_total == 0);
 	panel->estimated_total = total_columns;
+
+	if (display_the_mini_info)
+		display_mini_info (panel);
 	
 	/* If we dont have enough space, shorten the fields */
 	if (used_columns > total_columns){
@@ -672,7 +682,6 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 			if (panel->dir.list [i].f.marked)
 				total_len += (cwdlen + panel->dir.list [i].fnamelen + 1);
 
-		printf ("Total lenght: %d\n", total_len);
 		data = copy = xmalloc (total_len, "build_selected_file_list");
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
@@ -715,8 +724,6 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 static void
 panel_drop_enter (GtkWidget *widget, GdkEvent *event)
 {
-	printf ("%s\n", event->type == GDK_DROP_ENTER ? "DROP ENTER" :
-		(event->type == GDK_DROP_LEAVE ? "DROP LEAVE" : "?"));
 }
 
 static void
@@ -902,14 +909,8 @@ panel_switch_new_display_mode (WPanel *panel)
 	panel_update_contents (panel);
 }
 
-static void
-change_cwd (GtkWidget *entry, WPanel *panel)
-{
-	printf ("Cambiando a...%s\n", "xxx");
-}
-
 static GtkWidget *
-panel_create_cwd (Dlg_head *h, WPanel *panel, GtkWidget **the_entry)
+panel_create_cwd (Dlg_head *h, WPanel *panel, void **entry)
 {
 	WInput *in;
 
@@ -919,11 +920,7 @@ panel_create_cwd (Dlg_head *h, WPanel *panel, GtkWidget **the_entry)
 	/* Force the creation of the gtk widget */
 	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
 
-	*the_entry = gnome_entry_gtk_entry (GNOME_ENTRY (in->widget.wdata));
-	gtk_signal_connect (GTK_OBJECT (*the_entry),
-			    "activate",
-			    GTK_SIGNAL_FUNC (change_cwd), panel);
-	
+	*entry = in;
 	return GTK_WIDGET (in->widget.wdata);
 }
 
@@ -932,7 +929,7 @@ panel_change_filter (GtkWidget *entry, WPanel *panel)
 {
 	char *reg_exp;
 
-	reg_exp = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))));
+	reg_exp = ((WInput *)panel->filter_w)->buffer; 
 	set_panel_filter_to (panel, strdup (reg_exp));
 }
 
@@ -1098,11 +1095,11 @@ void
 display_mini_info (WPanel *panel)
 {
 	GtkLabel *label = GTK_LABEL (panel->ministatus);
-	
+
 	if (panel->searching){
 		char *str = copy_strings ("Search: ", panel->search_buffer, NULL);
 		
-		gtk_label_set (label, str);
+		gtk_clip_label_set (label, str);
 		free (str);
 		return;
 	}
@@ -1110,11 +1107,12 @@ display_mini_info (WPanel *panel)
 	if (panel->marked){
 		char buffer [120];
 		
-		sprintf (buffer, " %s bytes in %d files%s",
+		sprintf (buffer, " %s bytes in %d file%s",
 			 size_trunc_sep (panel->total), panel->marked,
 			 panel->marked == 1 ? "" : "s");
 		
-		gtk_label_set (label, buffer);
+		gtk_clip_label_set (label, buffer);
+		return;
 	}
 
 	if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
@@ -1130,10 +1128,10 @@ display_mini_info (WPanel *panel)
 
 			link_target [len] = 0;
 			str = copy_strings ("-> ", link_target, NULL);
-			gtk_label_set (label, str);
+			gtk_clip_label_set (label, str);
 			free (str);
 		} else 
-			gtk_label_set (label, "<readlink failed>");
+			gtk_clip_label_set (label, "<readlink failed>");
 		return;
 	}
 
@@ -1144,14 +1142,13 @@ display_mini_info (WPanel *panel)
 		buffer = xmalloc (len + 2, "display_mini_info");
 		format_file (buffer, panel, panel->selected, panel->estimated_total-2, 0, 1);
 		buffer [len] = 0;
-		gtk_label_set (label, buffer);
-
+		gtk_clip_label_set (label, buffer);
 		free (buffer);
 	}
 }
 
 static GtkWidget *
-panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
+panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 {
 	GtkWidget *fhbox;
 	GtkWidget *button;
@@ -1191,18 +1188,9 @@ panel_create_filter (Dlg_head *h, WPanel *panel, GtkWidget **filter_w)
 
 	/* Force the creation of the gtk widget */
 	send_message_to (h, (Widget *) in, WIDGET_INIT, 0);
-	*filter_w = (GtkWidget *) in->widget.wdata;
+	*filter_w = in;
 
-	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
-	h->current = h->current->prev;
-	
-	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (*filter_w))),
-			    "activate",
-			    GTK_SIGNAL_FUNC (panel_change_filter),
-			    panel);
-
-	gtk_box_pack_start (GTK_BOX (fhbox), *filter_w, TRUE, TRUE, 0);
-	gtk_widget_show (*filter_w);
+	gtk_box_pack_start (GTK_BOX (fhbox), GTK_WIDGET (in->widget.wdata), TRUE, TRUE, 0);
 
 	return fhbox;
 }
@@ -1211,33 +1199,38 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox;
-	GtkWidget *ministatus_align, *frame, *cwd;
+	GtkWidget *frame, *cwd;
 
 	panel->table = gtk_table_new (2, 1, 0);
 	
 	panel->list  = panel_create_file_list (panel);
 
+	filter = panel_create_filter (h, panel, &panel->filter_w);
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
-
-	filter = panel_create_filter (h, panel, (GtkWidget **) &panel->filter_w);
+	
+	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
+	h->current = h->current->prev;
 
 	/* ministatus */
-	ministatus_align = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
-	panel->ministatus = gtk_label_new ("");
-	gtk_container_add (GTK_CONTAINER (ministatus_align), panel->ministatus);
-	
+	panel->ministatus = gtk_clip_label_new ("");
+	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
+	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
 	status_line = gtk_hbox_new (0, 0);
-	
+	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 0);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
-
+	
 	/* The statusbar */
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
 	gtk_container_border_width (GTK_CONTAINER (frame), 3);
-	panel->status = gtk_label_new ("");
+
+	panel->status = gtk_clip_label_new ("");
+	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
 	gtk_container_add (GTK_CONTAINER (frame), panel->status);
-	
+	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
+			       
 	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
@@ -1246,10 +1239,9 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
-	gtk_table_attach (GTK_TABLE (panel->table), ministatus_align, 0, 1, 2, 3,
+	gtk_table_attach (GTK_TABLE (panel->table), panel->ministatus, 0, 1, 2, 3,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
-	
 	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);

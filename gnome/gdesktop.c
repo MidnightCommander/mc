@@ -96,11 +96,13 @@ get_desktop_icon (char *pathname)
 	fname = regex_command (x_basename (pathname), "Icon", 0, 0);
 
 	/* Try the GNOME icon */
-	full_fname = gnome_unconditional_pixmap_file (fname);
-	if (exist_file (full_fname))
-		return full_fname;
-	g_free (full_fname);
-
+	if (fname){
+		full_fname = gnome_unconditional_pixmap_file (fname);
+		if (exist_file (full_fname))
+			return full_fname;
+		g_free (full_fname);
+	}
+	
 	/* Try a mc icon */
 	full_fname = concat_dir_and_file (ICONDIR, fname);
 	if (exist_file (full_fname))

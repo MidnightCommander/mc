@@ -259,7 +259,6 @@ x_update_input (WInput *in)
 		return;
 	
 	gtk_entry_set_text (entry, in->buffer);
-	printf ("POniendo el putno en %d\n", in->point);
 	gtk_entry_set_position (entry, in->point);
 	gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
 }

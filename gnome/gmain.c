@@ -322,19 +322,35 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
 	WPanel *p;
 	WInput *in;
+	void *current_widget;	/* The widget.wdata of the current widget */
 	
 	if (msg == DLG_KEY && id == '\n'){
 		if (h->current->widget->callback == (callback_fn) panel_callback)
 			return 0;
 
-		/*
-		 * If this was a keystroke, and the current widget is not the
-		 * panel, it is the filter
-		 */
-		p = (WPanel *) h->current->next->widget;
-		in = (WInput *) h->current->widget;
-		
-		set_panel_filter_to (p, strdup (in->buffer));
+		/* Find out which one of the widgets is the WPanel */
+		p = (WPanel *) find_widget_type (h, (callback_fn) panel_callback);
+		g_return_if_fail (p != 0);
+
+		current_widget = (void *) h->current->widget;
+
+		printf ("Got an enter\n");
+		if (current_widget == p->filter_w){
+			printf ("It is the filter\n");
+			
+			in = (WInput *) current_widget;
+			set_panel_filter_to (p, strdup (in->buffer));
+		}
+			
+		if (current_widget == p->current_dir){
+			WInput *in = p->current_dir;
+			
+			do_panel_cd (p, in->buffer, cd_parse_command);
+			assign_text (in, p->cwd);
+			update_input (in);
+			
+			return MSG_HANDLED;
+		}
 	}
 	return default_dlg_callback (h, id, msg);
 }

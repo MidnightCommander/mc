@@ -31,7 +31,8 @@ GNOMESRCS = 		\
 	gcmd.c		\
 	gprop.c		\
 	gmc-chargrid.c	\
-	gpageprop.c
+	gpageprop.c	\
+	gcliplabel.c	
 
 GNOMEHDRS = 		\
 	gmain.h 	\
@@ -42,7 +43,8 @@ GNOMEHDRS = 		\
 	gcmd.h		\
 	gprop.h		\
 	gpageprop.h	\
-	gmc-chargrid.h
+	gmc-chargrid.h	\
+	gcliplabel.h
 
 ICONS = 				\
 	$(srcdir)/directory-ok.xpm	\
@@ -83,7 +85,8 @@ OBJS = $(LOBJS) $(OOBJS) \
 	gmc-chargrid.o 	\
 	gview.o		\
 	gprop.o		\
-	gpageprop.o
+	gpageprop.o	\
+	gcliplabel.o
 
 #
 # Distribution variables

@@ -17,6 +17,7 @@
 #include "boxes.h"
 #include "panelize.h"
 #include "gcmd.h"
+#include "gcliplabel.h"
 
 #define UNDEFINED_INDEX -1
 

@@ -112,11 +112,11 @@ typedef struct {
     /* These are standard GtkWidgets */
     void *table;
     void *list;
-    void *current_dir;
-    void *filter_w;
     void *status;
     void *ministatus;
 
+    void *filter_w;		/* A WInput* */
+    void *current_dir;		/* A WInput* */
     int estimated_total; 
 #endif
 } WPanel;
