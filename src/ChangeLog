@@ -1,9 +1,17 @@
+Mon Mar 22 02:05:28 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* screen.c (file_entry_color): Dropped. Code went to file_compute_color.
+	
+	* screen (format_file): Add check, that avoids reported error, when
+	long file list -> quick view -> brief file list gives core dump.
+
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>
 
 	* main.c (main): We don't want to restart if we hit cancel.
 
 	* file.c (panel_operate): Ugly hack for GNOME.  We only treat the
 	copy as if it were many files, and skip the only_one branch.
+
 1999-03-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* utilunix.c (close_error_pipe): Inform parent of the return value
@@ -12,8 +20,8 @@
 
 Thu Mar 18 16:09:09 1999  Timur Bakeyev  <mc@bat.ru>
 
-	* panel.h, screen.c: Add an ability to center justify fields in
-	panel, in addition to left and right justificatin. Just for fun.
+	* panel.h, screen.c: Add an ability to center justify fields in the
+	panel, in addition to left and right justification. Just for fun.
 	Try =name in user format.
 
 	* util.c (name_quote): Quote "~@^|;:". Hope, that's all :)

@@ -12,7 +12,7 @@
    GNU General Public License for more details.
 
    Written by: 1995 Miguel de Icaza
-               1997 Timur Bakeyev
+         1997, 1999 Timur Bakeyev
 
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
@@ -72,7 +72,6 @@ int permission_mode = 0;
 
 /* If 1 - then add per file type hilighting */
 int filetype_mode = 1;
-
 
 /* This gives abilitiy to determine colored user priveleges */
 extern user_in_groups *current_user_gid;
@@ -181,35 +180,6 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 }
 #endif /* HAVE_X */
 
-int
-file_entry_color (file_entry *fe)
-{
-    if (filetype_mode){
-        if (S_ISDIR (fe->buf.st_mode))
-            return (DIRECTORY_COLOR);
-        else if (S_ISLNK (fe->buf.st_mode)) {
-            if (fe->f.link_to_dir)
-                return (DIRECTORY_COLOR);
-            else if (fe->f.stalled_link)
-                return (STALLED_LINK_COLOR);
-            else
-                return (LINK_COLOR);
-        } else if (S_ISSOCK (fe->buf.st_mode))
-            return (SPECIAL_COLOR);
-        else if (S_ISCHR (fe->buf.st_mode))
-            return (DEVICE_COLOR);
-        else if (S_ISBLK (fe->buf.st_mode))
-            return (DEVICE_COLOR);
-        else if (S_ISFIFO (fe->buf.st_mode))
-            return (SPECIAL_COLOR);
-        else if (is_exe (fe->buf.st_mode))
-            return (EXECUTABLE_COLOR);
-        else if (fe->fname && (!strcmp (fe->fname, "core") || !strcmp (extension(fe->fname), "core")))
-	    return (CORE_COLOR);
-    }
-    return (NORMAL_COLOR);
-}
-
 /* String representations of various file attributes */
 /* name */
 char *
@@ -289,7 +259,7 @@ string_file_type (file_entry *fe, int len)
 	buffer [0] = '*';
     else
 	buffer [0] = ' ';
-    buffer [1] = 0;
+    buffer [1] = '\0';
     return buffer;
 }
 
@@ -448,9 +418,10 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
 {
     int txtlen = strlen (txt);
     int still, over;
-    
-    memset (dest, ' ', len);
 
+    /* Fill buffer with spaces */
+    memset (dest, ' ', len);
+    
     still = (over=(txtlen > len)) ? (txtlen - len) : (len - txtlen);
     
     switch (HIDE_FIT(just_mode)){
@@ -481,26 +452,45 @@ to_buffer (char *dest, int just_mode, int len, char *txt)
 int
 file_compute_color (int attr, file_entry *fe)
 {
-    int color;
-    
     switch (attr){
     case SELECTED:
-	color = SELECTED_COLOR;
-	break;
+	return (SELECTED_COLOR);
     case MARKED:
-	color = MARKED_COLOR;
-	break;
+	return (MARKED_COLOR);
     case MARKED_SELECTED:
-	color = MARKED_SELECTED_COLOR;
-	break;
+	return (MARKED_SELECTED_COLOR);
     case STATUS:
-	color = NORMAL_COLOR;
-	break;
+	return (NORMAL_COLOR);
     case NORMAL:
     default:
-	color = file_entry_color(fe);
+	if (!filetype_mode)
+	    return (NORMAL_COLOR);
     }
-    return color;
+    
+    /* if filetype_mode == true  */
+    if (S_ISDIR (fe->buf.st_mode))
+        return (DIRECTORY_COLOR);
+    else if (S_ISLNK (fe->buf.st_mode)){
+        if (fe->f.link_to_dir)
+            return (DIRECTORY_COLOR);
+        else if (fe->f.stalled_link)
+            return (STALLED_LINK_COLOR);
+        else
+            return (LINK_COLOR);
+    } else if (S_ISSOCK (fe->buf.st_mode))
+        return (SPECIAL_COLOR);
+    else if (S_ISCHR (fe->buf.st_mode))
+        return (DEVICE_COLOR);
+    else if (S_ISBLK (fe->buf.st_mode))
+        return (DEVICE_COLOR);
+    else if (S_ISFIFO (fe->buf.st_mode))
+        return (SPECIAL_COLOR);
+    else if (is_exe (fe->buf.st_mode))
+        return (EXECUTABLE_COLOR);
+    else if (fe->fname && (!strcmp (fe->fname, "core") || !strcmp (extension(fe->fname), "core")))
+	return (CORE_COLOR);
+
+    return (NORMAL_COLOR); /* just for safeness */
 }
 
 /* Formats the file number file_index of panel in the buffer dest */
@@ -523,7 +513,12 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	color = file_compute_color (attr, fe);
     else
 	color = NORMAL_COLOR;
+
     for (format = home; format; format = format->next){
+
+    	if (length == width)
+	    break;
+
 	if (format->string_fn){
 	    int len;
 	    
@@ -540,10 +535,7 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	    cdest = to_buffer (cdest, format->just_mode, len, txt);
 	    length += len;
 
-#ifdef HAVE_X
-	    if (length == width)
-		    break;
-#else
+#ifndef HAVE_X
             attrset (color);
  
             if (permission_mode && !strcmp(format->id, "perm"))
@@ -552,6 +544,7 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
                 add_permission_string (old_pos, format->field_len, fe, attr, color, 1);
             else
 		addstr (old_pos);
+
 #endif
 	} else {
 #ifndef HAVE_X
@@ -572,7 +565,7 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	while (still--)
 #ifdef HAVE_X
 	    *cdest++ = ' ';
-	*cdest = 0;
+	*cdest = '\0';
 #else
 	    addch (' ');
 #endif
@@ -899,7 +892,7 @@ panel_save_name (WPanel *panel)
     
     /* If the program is shuting down */
     if ((midnight_shutdown && auto_save_setup) || saving_setup)
-	return  g_strconcat (panel->panel_name, NULL);
+	return  g_strdup (panel->panel_name);
     else
 	return  g_strconcat ("Temporal:", panel->panel_name, NULL);
 }
@@ -1181,7 +1174,7 @@ parse_panel_size (WPanel *panel, char *format, int isstatus)
                      | format , one_format_e
 
    one_format_e     := just format.id [opt_size]
-   just             := [<|>]
+   just             := [<=>]
    opt_size         := : size [opt_expand]
    size             := [0-9]+
    opt_expand       := +
