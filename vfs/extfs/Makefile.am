@@ -4,7 +4,7 @@ extfsdir = $(pkgdatadir)/extfs
 EXTFS_MISC  = README extfs.ini sfs.ini
 
 # Scripts hat don't need adaptation to the local system
-EXTFS_CONST = bpp hp48 rpm trpm uarj
+EXTFS_CONST = bpp rpm trpm
 
 # Scripts that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -15,11 +15,13 @@ EXTFS_IN    = 			\
 	deba.in			\
 	debd.in			\
 	dpkg.in			\
+	hp48.in			\
 	lslR.in			\
 	mailfs.in		\
 	patchfs.in		\
 	rpms.in			\
 	uar.in			\
+	uarj.in			\
 	uha.in			\
 	ulha.in			\
 	urar.in			\
@@ -35,11 +37,13 @@ EXTFS_OUT = 			\
 	deba			\
 	debd			\
 	dpkg			\
+	hp48			\
 	lslR			\
 	mailfs			\
 	patchfs			\
 	rpms			\
 	uar			\
+	uarj			\
 	uha			\
 	ulha			\
 	urar			\

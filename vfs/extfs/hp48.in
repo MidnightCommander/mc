@@ -21,7 +21,7 @@
 #
 # Make sure you have kermit installed and that it's using the right serial
 # device by changing /dev/ttyXX on the next line
-AWK=awk
+AWK=@AWK@
 KERMIT="kermit -l /dev/ttyS1 -b 9600"
 
 hp48_cmd()
@@ -54,7 +54,7 @@ HP48_DIRS=
 read INPUT
 while [ "$INPUT" != "EOF" ]
 do
-    case `echo $INPUT | @AWK@ '{if (int($2)) if ($3=="Directory") print "dir";else print "file"}'` in
+    case `echo $INPUT | $AWK '{if (int($2)) if ($3=="Directory") print "dir";else print "file"}'` in
     dir) HP48_DIRS="$HP48_DIRS `hp48_retdir $INPUT`"
     printf "drwxr-xr-x   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize $INPUT` "`date +\"%b %d %Y %k:%M"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;
     file) printf "-rw-r--r--   1 %-8d %-8d %8d %s %s\n" 0 0 `hp48_retsize $INPUT` "`date +"%b %d %Y %k:%M"`" "$HP48_CDIR/`hp48_retdir $INPUT`";;

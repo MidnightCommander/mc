@@ -1,0 +1,77 @@
+#! /bin/sh
+#                                                                     
+# Written by Viatcheslav Odintsov (2:5020/181)
+# (C) 2002 ARJ Software Russia.
+#
+# This is an updated parser for ARJ archives in Midnight Commander. You need
+# full ARJ rather than UNARJ. Open-source ARJ v 3.10 for Unix platforms can
+# be obtained here:
+#
+# - http://www.sourceforge.net/projects/arj/
+# - http://arj.sourceforge.net/
+
+
+ARJ="arj -+ -ja1"
+
+
+mcarjfs_list ()
+{
+ $ARJ v "$1" | @AWK@ -v uuid=${UID-0} '
+  { 
+   if (($0 ~ /^[0-9]+\) .*/)||($0 ~ /^------------ ---------- ---------- -----/)){
+    if (filestr ~ /^[0-9]+\) .*/) {
+     printf "%s   1 %-8d %-8d %8d %02d-%02d-%02d %02d:%02d %s%s\n", perm, uid, gid, size, date[2], date[3], date[1], time[1], time[2], file, symfile
+     perm=""
+     file=""
+     symfile=""
+     filestr=""
+    }
+   }
+
+   if ($0 ~ /^[0-9]+\) .*/) {
+    filestr=$0
+#   file=substr($0, 6)
+    sub(/^[0-9]*\) /, "")
+    file=$0
+    uid=uuid
+    gid=0
+   }
+
+   if ($0 ~ /^.* [0-9]+[\t ]+[0-9]+ [0-9]\.[0-9][0-9][0-9] [0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9].*/) {
+    size=$3
+    split($6, date, "-")
+    split($7, time, ":")
+    if ($8 ~ /^[rwx-]/) {perm=$8;}
+    else                {perm="-rw-r--r--"}
+   }
+
+   if ($0 ~ /^[\t ]+SymLink -> .*/) {
+    symfile = " -> "$3
+    perm="l"substr(perm, 2)
+   }
+
+   if ($0 ~ /^[\t ]+Owner: UID [0-9]+\, GID [0-9]+/) {
+    uid=$3
+    gid=$5
+    owner=1
+   }
+  }'
+ #2>/dev/null
+}
+
+
+mcarjfs_copyout ()
+{
+    $ARJ p "$1" "$2" > "$3" 2>/dev/null
+}
+
+
+umask 077
+cmd="$1"
+shift
+case "$cmd" in
+    list)    mcarjfs_list    "$@" ;;
+    copyout) mcarjfs_copyout "$@" ;;
+    *)       exit 1 ;;
+esac
+exit 0

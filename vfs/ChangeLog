@@ -1,5 +1,12 @@
 2002-12-13  Pavel Roskin  <proski@gnu.org>
 
+	* extfs/uarj.in: New script working with open-source ARJ.
+	Contributed by Viatcheslav Odintsov.
+	* extfs/uarj: Remove.
+	* extfs/hp48: Rename to ...
+	* extfs/hp48.in: ... this.  It needs awk substitution.
+	* extfs/Makefile.am: Adjust for the above.
+
 	* extfs/ulha.in: Strengthen quoting.
 
 	* extfs/uha.in: Strengthen quoting.  Remove unnecessary space
