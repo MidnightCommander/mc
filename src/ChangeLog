@@ -1,5 +1,9 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Option -P takes an argument (output filename) now.
+	(main): Output the last directory to the specified file.  Don't
+	output "." is this information is unavailable.
+
 	* subshell.c (subshell_name_quote): Don't quote numbers and
 	letters if possible and safe.
 
