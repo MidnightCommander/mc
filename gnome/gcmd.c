@@ -973,6 +973,7 @@ void
 gnome_new_link (GtkWidget *widget, WPanel *panel)
 {
 	char *template;
+	char *icon;
 	char *url;
 
 	url = input_expand_dialog (_("Creating a desktop link"),
@@ -980,15 +981,12 @@ gnome_new_link (GtkWidget *widget, WPanel *panel)
 	if (!url)
 		return;
 
-	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
+	template = g_concat_dir_and_file (desktop_directory, "url");
 
-	if (mktemp (template)) {
-		char *icon;
+	icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
+	desktop_create_url (template, url, url, icon, TRUE);
 
-		icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-		desktop_create_url (template, url, url, icon);
-		g_free (icon);
-	}
+	g_free (icon);
 	g_free (template);
 	g_free (url);
 }

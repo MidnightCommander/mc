@@ -1,3 +1,13 @@
+2001-07-27  Pavel Roskin  <proski@gnu.org>
+
+	* gdesktop.c (desktop_create_url): Accept new parameter
+	is_template.  Use mc_mkstemps() is it's TRUE.  Change all
+	callers.
+	* gcmd.c (gnome_new_link): Don't calculate the filename, trust
+	desktop_create_url() to do it.
+	* gdnd.c (drop_url_on_directory): Likewise.  Add support for
+	drag and drop from Mozilla.
+
 2001-07-26  Pavel Roskin  <proski@gnu.org>
 
 	* gfind.c (get_list_info): Get row number as argument.  Return

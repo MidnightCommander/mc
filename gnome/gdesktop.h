@@ -75,7 +75,9 @@ void desktop_rescan_devices (void);
 void desktop_recreate_default_icons (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);
 void desktop_arrange_icons (SortType type);
-void desktop_create_url (const char *filename, const char *title, const char *url, const char *icon);
+void desktop_create_url (const char *filename, const char *title,
+			 const char *url, const char *icon,
+			 gboolean is_template);
 void desktop_tidy_icons (void);
 
 

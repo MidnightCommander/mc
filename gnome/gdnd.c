@@ -263,20 +263,27 @@ static void
 drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
 {
 	char *template;
+	char *icon;
+	char *url;
+	char *title;
 
-	template = g_concat_dir_and_file (destdir, "urlXXXXXX");
+	template = g_concat_dir_and_file (destdir, "url");
+	icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
 
-	if (mktemp (template)) {
-		char *icon;
-
-		icon = g_concat_dir_and_file (ICONDIR, "gnome-http-url.png");
-		desktop_create_url (
-			template,
-			selection_data->data,
-			selection_data->data,
-			icon);
-		g_free (icon);
+	/* Mozilla uses newline to separate URL from title.  */
+	url = g_strdup(selection_data->data);
+	title = strchr (url, '\n');
+	if (title) {
+		title[0] = 0;
+		title++;
+	} else {
+		title = url;
 	}
+
+	desktop_create_url (template, title, url, icon, TRUE);
+
+	g_free (url);
+	g_free (icon);
 	g_free (template);
 }
 

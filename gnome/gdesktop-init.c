@@ -59,7 +59,7 @@ desktop_load_init_from (const char *file)
 			if (url && *url){
 				char *filename = g_concat_dir_and_file (desktop_directory, key);
 
-				desktop_create_url (filename, title, url, icon2);
+				desktop_create_url (filename, title, url, icon2, FALSE);
 				g_free (filename);
 			}
 

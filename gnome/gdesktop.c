@@ -3593,21 +3593,36 @@ desktop_destroy (void)
 }
 
 void
-desktop_create_url (const char *filename, const char *title, const char *url, const char *icon)
+desktop_create_url (const char *filename, const char *title,
+		    const char *url, const char *icon, gboolean is_template)
 {
 	FILE *f;
+	char *tmpname = NULL;
 
-	f = fopen (filename, "w");
-	if (f) {
+	if (is_template) {
+		int fd;
 
-		fprintf (f, "URL: %s\n", url);
-		fclose (f);
-
-		gnome_metadata_set (filename, "desktop-url",
-				    strlen (url) + 1, url);
-		gnome_metadata_set (filename, "icon-caption",
-				    strlen (title) + 1, title);
-
-		gnome_metadata_set (filename, "icon-filename", strlen (icon) + 1, icon);
+		fd = mc_mkstemps (&tmpname, filename, NULL);
+		if (fd == -1)
+			return;
+		f = fdopen (fd, "w");
+		filename = tmpname;
+	} else {
+		f = fopen (filename, "w");
 	}
+
+	if (!f) {
+		g_free (tmpname);
+		return;
+	}
+
+	fprintf (f, "URL: %s\n", url);
+	fclose (f);
+
+	gnome_metadata_set (filename, "desktop-url",
+			    strlen (url) + 1, url);
+	gnome_metadata_set (filename, "icon-caption",
+			    strlen (title) + 1, title);
+
+	gnome_metadata_set (filename, "icon-filename", strlen (icon) + 1, icon);
 }
