@@ -60,7 +60,7 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
 	strcpy(byte_str, "<EOF>");
     }
 
-    /* The field lengths just prevent the status line from shortening to much */
+    /* The field lengths just prevent the status line from shortening too much */
     snprintf (s, w,
 	      "[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
 	      edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
@@ -79,7 +79,7 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
 	      byte_str);
 }
 
-#endif
+#endif /* MIDNIGHT || GTK */
 
 #ifdef MIDNIGHT
 
@@ -198,10 +198,10 @@ void edit_status (WEdit * edit)
 
 #endif	/* GTK */
 
-#endif	/* MIDNIGHT */
+#endif	/* !MIDNIGHT */
 
 
-/* boolean */
+/* result is boolean */
 int cursor_in_screen (WEdit * edit, long row)
 {
     if (row < 0 || row >= edit->num_widget_lines)
@@ -295,7 +295,10 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 int EditExposeRedraw = 0;
 int EditClear = 0;
 
-/* background colors: marked is refers to mouse highlighting, highlighted refers to a found string. */
+/*
+ * background colors: marked is refers to mouse highlighting,
+ * highlighted refers to a found string.
+ */
 unsigned long edit_abnormal_color, edit_marked_abnormal_color;
 unsigned long edit_highlighted_color, edit_marked_color;
 unsigned long edit_normal_background_color;
@@ -376,7 +379,7 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
     }
 }
 
-/* b pointer to begining of line */
+/* b is a pointer to the beginning of the line */
 static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_col)
 {
     static unsigned int line[MAX_LINE_LEN];
@@ -502,7 +505,6 @@ static int key_pending (WEdit * edit)
 #endif
 
 
-/* b for pointer to begining of line */
 static void edit_draw_this_char (WEdit * edit, long curs, long row)
 {
     int b = edit_bol (edit, curs);
@@ -537,8 +539,8 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 
 /*
-   if the position of the page has not moved then we can draw the cursor character only.
-   This will prevent line flicker when using arrow keys.
+ * If the position of the page has not moved then we can draw the cursor
+ * character only.  This will prevent line flicker when using arrow keys.
  */
     if ((!(force & REDRAW_CHAR_ONLY)) || (force & REDRAW_PAGE)
 #ifndef MIDNIGHT
@@ -802,9 +804,12 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 #endif
 #endif
     render_edit_text (edit, row_start, col_start, row_end, col_end);
-    if (edit->force)		/* edit->force != 0 means a key was pending and the redraw 
-				   was halted, so next time we must redraw everything in case stuff
-				   was left undrawn from a previous key press */
+    /*
+     * edit->force != 0 means a key was pending and the redraw 
+     * was halted, so next time we must redraw everything in case stuff
+     * was left undrawn from a previous key press.
+     */
+    if (edit->force)
 	edit->force |= REDRAW_PAGE;
 #ifndef MIDNIGHT
     if (f) {

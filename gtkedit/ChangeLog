@@ -1,3 +1,7 @@
+2001-07-05  Pavel Roskin  <proski@gnu.org>
+
+	* editdraw.c: Comment fixes.
+
 2001-06-26  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h (editor_widget): Rename `stat' to `stat1' to
@@ -76,7 +80,7 @@
 
 2001-05-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* editdraw.c (edit_status): Use strcpy (s, ) instead of 
+	* editdraw.c (edit_status): Use strcpy (s, ) instead of
 	sprintf (s, "%s", ).
 
 	(set_color) [MIDNIGHT]: Became a macro.
@@ -96,7 +100,7 @@
 
 2001-05-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* syntax.c (open_include_file) [MIDNIGHT]: Don't hardcode location 
+	* syntax.c (open_include_file) [MIDNIGHT]: Don't hardcode location
 	of syntax file(s) with LIBDIR, use mc_home instead.
 	From Ludovic Drolez <ludovic.drolez@freealter.com>.
 
@@ -136,7 +140,7 @@
 
 	(edit_split_filename): f constified
 
-	* edit.c (edit_init) [ENABLE_NLS]: option_whole_chars_search 
+	* edit.c (edit_init) [ENABLE_NLS]: option_whole_chars_search
 	expanded by national letters using current locale on first call
 
 	(edit_file_is_open) [MIDNIGHT]: all occurences and related code
@@ -153,7 +157,7 @@
 
 	* editcmd.c (edit_delete_macro, edit_(load|save)_macro_cmd): don't
 	translate keywords written to macro file or macro don't work, at least
-	for Cyrillic. Made this as separate commit, so, if it seriously breaks 
+	for Cyrillic. Made this as separate commit, so, if it seriously breaks
 	compatibility it's easy to revert it.
 
 2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
@@ -161,7 +165,7 @@
 	* editcmd.c (edit_save_file): fopen()+fwrite()+fclose() replaced
 	by open()+write()+close() to restore possibility to edit files
 	over Midnight Commander's VFSes
-	
+
 	(edit_replace_cmd) [MIDNIGHT]: some more right algorithm to calculate
 	menu coordinates used. I don't like if menu hides replaced text.
 
@@ -172,11 +176,11 @@
 	* edit.c (check_file_access) [MIDNIGHT,GTK]: error message localized;
 	some cosmetics changes to avoid annoying warnings
 
-	* editcmd.c (edit_save_file): pclose returns 0 on success, 
+	* editcmd.c (edit_save_file): pclose returns 0 on success,
 	file fclose()d when fwrite fails
-	
+
 	(pipe_mail): malloc () + sprintf () replaced by g_strdup_printf ()
-	
+
 	* syntax.c (syntax_text): Makefile replaced by [Mm]akefile to cover
 	makefile and GNUmakefile
 	(upgrade_syntax_file): infinitive loop fixed when rule file
@@ -211,7 +215,7 @@
 	(edit_block_process_cmd): don't translate empty string
 
 	* gtkedit/edit.h (edit_get_write_filter, edit_write_stream,
-	edit_init_file): added declarations 
+	edit_init_file): added declarations
 
 	* edit.c (edit_filters): constified
 	(edit_get_write_filter): filename constified
