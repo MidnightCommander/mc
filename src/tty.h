@@ -35,7 +35,8 @@ void mc_refresh (void);
 /* print a string left-aligned, adjusted to exactly LEN characters */
 static inline void printwstr (const char *s, int len)
 {
-    printw("%-*.*s", len, len, s);
+    if (len > 0)
+        printw("%-*.*s", len, len, s);
 }
 
 #endif
