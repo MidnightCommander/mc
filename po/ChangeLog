@@ -1,3 +1,8 @@
+2000-02-24  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* POTFILES.in: src/features.inc and vfs/cpio.c added. 
+		Patch by Andrew V. Samoilov <sav@bcs.zp.ua>                
+
 2000-02-19  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.

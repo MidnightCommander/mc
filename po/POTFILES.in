@@ -39,6 +39,7 @@ src/command.c
 src/dialog.c
 src/dir.c
 src/ext.c
+src/features.inc
 src/file.c
 src/filegui.c
 src/find.c
@@ -66,6 +67,7 @@ src/view.c
 src/widget.c
 src/win.c
 src/wtools.c
+vfs/cpio.c
 vfs/direntry.c
 vfs/extfs.c
 vfs/fish.c
