@@ -835,6 +835,7 @@ void print_vfs_message (char *msg, ...)
 	if (!nice_rotating_dash || (ok_to_refresh <= 0))
 	    return;
 	move (0, 0);
+	attrset (NORMAL_COLOR);
 	printw ("%-*s", COLS-1, str);
 	mc_refresh ();
 	return;
