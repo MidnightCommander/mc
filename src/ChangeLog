@@ -1,5 +1,7 @@
 2001-10-01  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (panel_format_modified): Use more portable cast.
+
 	* fileopctx.h: Define new type mc_stat_fn.
 	* filegui.c (file_mask_dialog): Cast mc_stat and mc_lstat to
 	mc_stat_fn to prevent warnings without VFS support.

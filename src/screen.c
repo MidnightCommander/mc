@@ -916,7 +916,7 @@ panel_format_modified (WPanel *panel)
 int
 is_a_panel (Widget *w)
 {
-	return (w->callback == (void *) panel_callback);
+	return (w->callback == (callback_fn) panel_callback);
 }
 
 /* Panel creation */
