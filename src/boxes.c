@@ -561,7 +561,7 @@ static int sel_charset_button( int action, void *param )
     return 0;
 }
 
-Dlg_head *
+static Dlg_head *
 init_disp_bits_box (void)
 {
     char *cpname;

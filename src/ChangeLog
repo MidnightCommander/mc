@@ -1,3 +1,7 @@
+2002-11-17  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c (init_disp_bits_box): Make static.
+
 2002-11-15  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (main): Don't call subshell_get_console_attributes() if
