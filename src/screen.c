@@ -146,7 +146,25 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 static char *
 string_file_name (file_entry *fe, int len)
 {
-	return fe->fname;
+    static char buffer [BUF_SMALL];
+    int i;
+
+    for (i = 0; i < sizeof(buffer); i++) {
+	char c;
+
+	c = fe->fname[i];
+
+	if (!c)
+	    break;
+
+	if (!is_printable(c))
+	    c = '?';
+
+	buffer[i] = c;
+    }
+
+    buffer[i] = 0;
+    return buffer;
 }
 
 /* size */
