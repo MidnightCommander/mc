@@ -67,7 +67,7 @@
 	* editcmd.c (snprintf_p): Likewise. (edit_replace_prompt):
 	Simplified the code.
 
-2004-09-25  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-25  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* edit.c (edit_clean): g_free handles NULL argument too, 
 	no need for the comparison.
@@ -107,7 +107,7 @@
 
 	* editcmd.c (edit_replace_prompt) [HAVE_CHARSET]: Warning hack.
 
-2004-09-03  Pavel S. Shirshov  <pavelsh@mail.ru>
+2004-09-03  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* editwidget.c (edit_adjust_size): Fix warnings.
 	(edit_dialog_callback): Likewise.
@@ -116,14 +116,14 @@
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
 
-2004-09-02  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-02  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* editcmd.c (edit_save_as_cmd): Add hotkey to dialog.
 	(edit_save_confirm_cmd): Likewise. (edit_new_cmd): Likewise.
 	(edit_load_cmd): Likewise. (edit_block_move_cmd): Likewise.
 	(edit_block_delete): Likewise. (edit_ok_to_exit): Likewise.
 
-2004-09-01  Pavel S. Shirshov <pavelsh@mail.ru>
+2004-09-01  Pavel S. Shirshov <me@pavelsh.pp.ru>
 
 	* syntax.c (this_try_alloc_color_pair): Use g_strlcpy instead 
 	sequence strncpy(), name[len] = '\0'
