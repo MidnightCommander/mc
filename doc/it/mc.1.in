@@ -2613,7 +2613,7 @@ Ovvero lascia che il Midnight Commander scriva per te.
 .PP
 Tentativi per eseguire un completamento del testo prima della posizione
 corrente. MC tenta il completamento trattando il testo come una variabile
-(se il testo comincia con $
+(se il testo comincia con
 .B $
 ), nomeutente (se il testo comincia con
 .B ~
