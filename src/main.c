@@ -262,11 +262,6 @@ static int print_last_wd = 0;
 static char *last_wd_string;
 static int print_last_revert = 0;
 
-/* On Win32, we need a batch file to do the -P magic */
-#ifdef NATIVE_WIN32
-static char *batch_file_name = 0;
-#endif
-
 /* Force colors, only used by Slang */
 int force_colors = 0;
 
@@ -2146,7 +2141,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	disable_colors = 0;
 #ifdef HAVE_SLANG
 	force_colors = 1;
-#endif
+#endif /* HAVE_SLANG */
 	break;
 		
     case 'f':
@@ -2159,23 +2154,16 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	ftpfs_set_debug (option_arg);
 #ifdef WITH_SMBFS
 	smbfs_set_debugf (option_arg);
-#endif
+#endif /* WITH_SMBFS */
 	break;
 
 #ifdef WITH_SMBFS
     case 'D':
 	smbfs_set_debug (atoi (option_arg));
 	break;
-#endif
-#endif
+#endif /* WITH_SMBFS */
+#endif /* USE_NETCODE */
 
-#ifdef NATIVE_WIN32
-    case 'S':
-	print_last_wd = 2;
-	batch_file_name = option_arg;
-	break;
-#endif
-		
     case 'd':
 	use_mouse_p = MOUSE_DISABLED;
 	break;
@@ -2201,9 +2189,6 @@ static const struct poptOption argument_table [] = {
 #ifdef WITH_BACKGROUND
     { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0,
       N_("Use to debug the background code") },
-#endif
-#if defined(HAVE_SLANG) && defined(NATIVE_WIN32)
-    { "createcmdfile",	'S', POPT_ARG_STRING, 	NULL, 			 'S' },
 #endif
     { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c',
       N_("Request to run in color mode") },
@@ -2563,22 +2548,6 @@ main (int argc, char *argv [])
 #ifdef NATIVE_WIN32
     /* On NT, home_dir is malloced */
     g_free (home_dir);
-#endif
-#if defined(NATIVE_WIN32)
-    if (print_last_wd == 2){
-	FILE *bat_file;
-
-	print_last_wd = 0;
-	bat_file = fopen(batch_file_name, "w");
-	if (bat_file != NULL){
-            /* .ado: \r\n for Win95 */
-	    fprintf(bat_file, "@echo off\r\n");
-	    if (isalpha(last_wd_string[0]))
-		fprintf(bat_file, "%c:\r\n", last_wd_string[0]);
-	    fprintf(bat_file, "cd %s\r\n", last_wd_string);
-	    fclose(bat_file);
-	}
-    }
 #endif
     if (print_last_wd) {
         if (print_last_revert || edit_one_file || view_one_file)
