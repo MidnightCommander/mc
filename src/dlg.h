@@ -85,7 +85,7 @@ typedef struct Dlg_head {
 
     /* Internal variables */
     int count;			/* number of widgets */
-    struct Widget_Item *current, *first, *last;
+    struct Widget_Item *current, *first;
     dlg_cb_fn callback;
     struct Widget_Item *initfocus;
     void *previous_dialog;	/* Pointer to the previously running Dlg_head */

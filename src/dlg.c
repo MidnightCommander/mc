@@ -257,8 +257,7 @@ int add_widget (Dlg_head *where, void *what)
 		    where->current->next = where->current;
 		    where->first = where->current;
 		    where->current->prev = where->first;
-		    where->last = where->current;
-		    where->first->next = where->last;
+		    where->first->next = where->current;
 	    }
     } else {
 	    back = where->current;
@@ -272,8 +271,7 @@ int add_widget (Dlg_head *where, void *what)
 	    }
 
 	    where->current->prev = where->first;
-	    where->last = where->current;
-	    where->first->next = where->last;
+	    where->first->next = where->current;
 
     }
     where->current->dlg_id = where->count;

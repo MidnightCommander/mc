@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove "last" field from Dlg_head, it's unneeded in a
+	circularly linked list.
+
 	* screen.c (paint_dir): Don't make panel clean here.
 	(panel_update_contents): Do it here.
 	(panel_callback): Repaint the panel on focus.
