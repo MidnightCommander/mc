@@ -64,7 +64,7 @@ flush_extension_file (void)
 typedef char *(*quote_func_t)(const char *name, int i);
 
 static void
-exec_extension (const char *filename, const char *data, int *move_dir, int start_line, int needs_term)
+exec_extension (const char *filename, const char *data, int *move_dir, int start_line)
 {
     char *file_name;
     int  cmd_file_fd;
@@ -276,28 +276,24 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 #   define FILE_CMD "file "
 #endif
 
-/* The second argument is action, i.e. Open, View, Edit, or NULL if
- * we want regex_command to return a list of all user defined actions.
+/* The second argument is action, i.e. Open, View or Edit
  *
  * This function returns:
  *
- * If action != NULL, then it returns "Success" (not allocated) if it ran
- * some command or NULL if not.
- *
- * If action == NULL, it returns NULL if there are no user defined commands
- * or an allocated space separated list of user defined Actions.
+ * 1 if it ran some command or 0 otherwise.
  *
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
  */
-char *regex_command (char *filename, char *action, int *move_dir)
+int
+regex_command (char *filename, char *action, int *move_dir)
 {
     char *p, *q, *r, c;
     int  file_len = strlen (filename);
     int found = 0;
     char content_string [2048];
     int content_shift = 0;
-    char *to_return = NULL;
+    int ret = 0;
     int old_patterns;
     struct stat mystat;
     int asked_file;
@@ -312,7 +308,7 @@ char *regex_command (char *filename, char *action, int *move_dir)
 #endif
 
     /* Check for the special View:%d parameter */
-    if (action && strncmp (action, "View:", 5) == 0){
+    if (strncmp (action, "View:", 5) == 0){
 	view_at_line_number = atoi (action + 5);
 	action [4] = 0;
     } else {
@@ -398,10 +394,6 @@ file as an example of how to write it.\n\
 	if (p == q) { /* i.e. starts in the first column, should be
 	               * keyword/descNL
 	               */
-	    if (found && action == NULL) /* We have already accumulated all
-	    				  * the user actions
-	    				  */
-	        break;
 	    found = 0;
 	    q = strchr (p, '\n');
 	    if (q == NULL)
@@ -554,24 +546,7 @@ match_file_output:
 			    break;
 			continue;
 		    }
-    	            if (action == NULL) {
-    	                if (strcmp (p, "Open") &&
-    	                    strcmp (p, "View") &&
-    	                    strcmp (p, "Edit") &&
-			    strcmp (p, "Include")) {
-    	                    /* I.e. this is a name of a user defined action */
-    	                        static char *q;
-
-    	                        if (to_return == NULL) {
-    	                            to_return = g_malloc (512);
-    	                            q = to_return;
-    	                        } else
-    	                            *(q++) = '='; /* Mark separator */
-    	                        strcpy (q, p);
-    	                        q = strchr (q, 0);
-    	                }
-    	                *r = c;
-    	            } else if (!strcmp (action, p)) {
+		if (!strcmp (action, p)) {
     	                *r = c;
     	                for (p = r + 1; *p == ' ' || *p == '\t'; p++)
 			    ;
@@ -587,10 +562,10 @@ match_file_output:
     	                if (p < q) {
 			    char *filename_copy = g_strdup (filename);
 
-			    exec_extension (filename_copy, r + 1, move_dir, view_at_line_number, 0);
+			    exec_extension (filename_copy, r + 1, move_dir, view_at_line_number);
 			    g_free (filename_copy);
 
-    	                    to_return = "Success";
+    	                    ret = 1;
     	                }
     	                break;
     	            } else
@@ -603,5 +578,5 @@ match_file_output:
     	}
     }
     easy_patterns = old_patterns;
-    return to_return;
+    return ret;
 }

@@ -1933,7 +1933,6 @@ static int
 do_enter_on_file_entry (file_entry *fe)
 {
     char *full_name;
-    char *p;
 
     /* Directory or link to directory - change directory */
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
@@ -1942,8 +1941,7 @@ do_enter_on_file_entry (file_entry *fe)
     }
 
     /* Try associated command */
-    p = regex_command (fe->fname, "Open", 0);
-    if (p && (strcmp (p, "Success") == 0))
+    if (regex_command (fe->fname, "Open", 0))
 	return 1;
 
     /* Check if the file is executable */
