@@ -1200,7 +1200,7 @@ msgstr "<Bilinmeyen>"
 
 #: src/cmd.c:175
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " `%s'in yerel kopyasý alýnamadý "
 
 #: src/cmd.c:228
@@ -1533,7 +1533,7 @@ msgstr "&Grup"
 
 #: src/dir.c:386
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "'%s' dosyasý var ama durumlanamaz: %s"
 
 #: src/ext.c:107 src/user.c:565
@@ -4049,7 +4049,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Kendi satýrý için bekliyor..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Üzgünüm, þimdilik parola ile kimlik bildirimi yapýlan baðlantýlar yapýlamýyor"
 

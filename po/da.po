@@ -1205,7 +1205,7 @@ msgstr "<Ukendt gruppe>"
 
 #: src/cmd.c:175
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " Kan ikke hente en lokal kopi af %s "
 
 #: src/cmd.c:228
@@ -1539,7 +1539,7 @@ msgstr "&Gruppe"
 
 #: src/dir.c:386
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "Filen '%s' findes men kan ikke stat'es: %s"
 
 #: src/ext.c:107 src/user.c:565
@@ -4055,7 +4055,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fisk: Venter på begyndelseslinie..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Beklager, vi kan ikke lave adgangskodebekræftede forbindelser endnu."
 
 #: vfs/fish.c:237

@@ -14,7 +14,7 @@ Midnight Commander for QNX (not QNX Neutrino)
 ----------------
 
 Use 'gmake'. (This is the default 'make' under QNX 4.23+). [The old 'qmake'
-can not handle the makefiles in the mc-source.]
+cannot handle the makefiles in the mc-source.]
 
 1.2 Configuring
 ---------------
@@ -73,7 +73,7 @@ mc-4.1.33, mc-4.1.34
 
 Using 'qnx*' terminals:
 
-  You can not use your keyboard correctly, if you disable the "Full 8 bits
+  You cannot use your keyboard correctly, if you disable the "Full 8 bits
   input" feature in the 'Options|Display bits...' dialog.
 
   On 'qnx*' terminals 'mc' will run in black and white mode by default,
@@ -82,7 +82,7 @@ Using 'qnx*' terminals:
 Accessing remote nodes via the native QNX-network:
 
   [The problem exists under the older versions of 'mc' only...]
-  If directory panels can not handle '//<node-id>' prefix in directory names,
+  If directory panels cannot handle '//<node-id>' prefix in directory names,
   use directory links in order to access remote nodes on the native QNX
   network:
 
@@ -165,7 +165,7 @@ slang/
     terminal: so not only the line-drawing characters can be written, when
     the alt-char-set is activated. It implicitly means, that space, NL, CR,
     etc. characters (exactly: anything besides the "standard" line drawing
-    characters) can not be written directly to the terminal, when the
+    characters) cannot be written directly to the terminal, when the
     alt-char-set is activated, because writing these characters doesn't cause
     an implicit/temporary switching-back to the standard char-set!
    
@@ -257,7 +257,7 @@ src/
   mouse.c:
 
     QNX: ncurses 1.9.8a ported to QNX doesn't provide the 'SP' pointer as a
-    global symbol in the library, so the keyok() emulation currently can not
+    global symbol in the library, so the keyok() emulation currently cannot
     be used under QNX (4.24 & Watcom C 10.6 release version).
 
   slint.c:

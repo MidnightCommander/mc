@@ -1204,7 +1204,7 @@ msgstr "<Groupe inconnu>"
 
 #: src/cmd.c:175
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " Ne peut récupérer une copie locale de %s"
 
 #: src/cmd.c:228
@@ -1538,7 +1538,7 @@ msgstr "&Groupe"
 
 #: src/dir.c:386
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "Le fichier « %s » existe mais ne peut être lus : %s"
 
 #: src/ext.c:107 src/user.c:565
@@ -4059,7 +4059,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish : attente de la première ligne..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr ""
 "Désolé, nous ne pouvons pas faire de connexion authentifiée par mot de passe "
 "pour l'instant."

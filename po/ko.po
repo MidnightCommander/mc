@@ -1193,7 +1193,7 @@ msgstr "<모르는 집단>"
 
 #: src/cmd.c:148
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " 원격지 파일 %s을(를) 로컬로 가져올 수 없습니다 "
 
 #: src/cmd.c:211
@@ -1523,7 +1523,7 @@ msgstr "집단(&G)"
 
 #: src/dir.c:385
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "파일 '%s'이(가) 있지만 정보를 얻을 수 없음: %s"
 
 #: src/dir.c:474 src/dir.c:582
@@ -4006,7 +4006,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: 초기 라인을 기다리는 중..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "미안합니다. 아직 비밀번호 인증 연결은 할 수 없습니다."
 
 #: vfs/fish.c:237

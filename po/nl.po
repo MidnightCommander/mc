@@ -1200,7 +1200,7 @@ msgstr "<onbekende groep>"
 
 #: src/cmd.c:175
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " Er kan geen lokale kopie van %s worden gemaakt "
 
 #: src/cmd.c:228
@@ -1535,7 +1535,7 @@ msgstr "&Groep"
 
 #: src/dir.c:386
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "Bestand bestaat, maar kan niet geïnspecteerd worden: %s %s"
 
 #: src/ext.c:107 src/user.c:565
@@ -4052,7 +4052,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish: Wachten op initiële lijn..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
 
 #: vfs/fish.c:237

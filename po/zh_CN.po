@@ -1195,7 +1195,7 @@ msgstr "<未知群组>"
 
 #: src/cmd.c:175
 #, c-format
-msgid " Can not fetch a local copy of %s "
+msgid " Cannot fetch a local copy of %s "
 msgstr " 无法获取 %s 的本地副本 "
 
 #: src/cmd.c:228
@@ -1528,7 +1528,7 @@ msgstr "群组(&G)"
 
 #: src/dir.c:386
 #, c-format
-msgid "File '%s' exists but can not be stat-ed: %s"
+msgid "File '%s' exists but cannot be stat-ed: %s"
 msgstr "文件“%s”存在，但是无法获取信息：%s"
 
 #: src/ext.c:107 src/user.c:565
@@ -4024,7 +4024,7 @@ msgid "fish: Waiting for initial line..."
 msgstr "fish：正在等待初始化行..."
 
 #: vfs/fish.c:232
-msgid "Sorry, we can not do password authenticated connections for now."
+msgid "Sorry, we cannot do password authenticated connections for now."
 msgstr "抱歉，目前无法创建口令验证连接。"
 
 #: vfs/fish.c:237

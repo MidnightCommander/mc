@@ -981,7 +981,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
  *  masked source basename? Is not this just a relict of the past versions? 
  *  I'm afraid this will lead into a two level deep dive :(
  *
- * I think this is indeed the problem.  I can not remember any case where
+ * I think this is indeed the problem.  I cannot remember any case where
  * we actually would like that behaviour -miguel
  *
  * It's a documented feature (option `Dive into subdir if exists' in the

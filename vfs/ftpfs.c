@@ -668,7 +668,7 @@ ftpfs_open_socket (vfs *me, vfs_s_super *super)
 	}
 	server_address.sin_family = hp->h_addrtype;
 
-	/* We copy only 4 bytes, we can not trust hp->h_length, as it comes from the DNS */
+	/* We copy only 4 bytes, we cannot trust hp->h_length, as it comes from the DNS */
 	memcpy ((char *) &server_address.sin_addr, (char *) hp->h_addr, 4);
     }
 

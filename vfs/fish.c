@@ -229,7 +229,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
        /dev/tty, not from stdin :-(. */
 
 #ifndef HAVE_HACKED_SSH
-	    message_1s (1, MSG_ERROR, _("Sorry, we can not do password authenticated connections for now."));
+	    message_1s (1, MSG_ERROR, _("Sorry, we cannot do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);
 #endif
 	    if (!SUP.password){
@@ -403,7 +403,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 			  break;  /* We'll do . and .. ourself */
 		      ent->name = g_strdup(buffer+1); 
 		      /* if ((c=strchr(ent->name, ' ')))
-			  *c = 0; / * this is ugly, but we can not handle " " in name */
+			  *c = 0; / * this is ugly, but we cannot handle " " in name */
 		      break;
 	          }
 	case 'S': ST.st_size = atoi(buffer+1); break;

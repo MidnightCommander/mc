@@ -289,7 +289,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	return 1;
     }
 
-    /* .ado: NT Alpha can not allow CTRL in Menubar */
+    /* .ado: NT Alpha cannot allow CTRL in Menubar */
 #if defined(NATIVE_WIN32)
        if (!key)
                return 0;

@@ -108,7 +108,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
 
     localcopy = mc_getlocalcopy (filename);
     if (localcopy == NULL) {
-	message (1, MSG_ERROR, _(" Can not fetch a local copy of %s "),
+	message (1, MSG_ERROR, _(" Cannot fetch a local copy of %s "),
 		 filename);
 	return;
     }

@@ -98,7 +98,7 @@ static int
 vfs_register (vfs *vfs)
 {
     if (!vfs)
-	vfs_die("You can not register NULL.");
+	vfs_die("You cannot register NULL.");
     
     if (vfs->init)		/* vfs has own initialization function */
 	if (!(*vfs->init)(vfs))	/* but it failed */
@@ -189,7 +189,7 @@ vfs_split (char *path, char **inpath, char **op)
     vfs *ret;
 
     if (!path)
-	vfs_die("Can not split NULL");
+	vfs_die("Cannot split NULL");
     
     semi = strrchr (path, '#');
     if (!semi || !path_magic(path))
