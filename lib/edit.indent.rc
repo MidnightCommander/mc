@@ -9,7 +9,8 @@ exec >/dev/null
 case `echo $1 |sed 's/^.*\.//'` in
     c|h)
     # ftp://ftp.gnu.org/pub/gnu/indent/
-        indent -kr -pcs "$2"
+    # Please add options to your ~/.indent.pro, not here.
+        indent "$2"
     ;;
     C|cc|CC|cxx|CXX|cpp|CPP)
     # http://astyle.sourceforge.net/

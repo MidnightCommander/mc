@@ -1,3 +1,8 @@
+2002-11-06  Pavel Roskin  <proski@gnu.org>
+
+	* lib/edit.indent.rc: Remove all options for indent and add a
+	comment explaining where those options should be.
+
 2002-11-05  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc-wrapper.csh.in: Remove /bin/csh at the beginning - this
