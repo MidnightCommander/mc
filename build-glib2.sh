@@ -20,7 +20,7 @@
 
 : ${MC_TOPDIR=`pwd`}
 : ${TMP_INSTDIR=$MC_TOPDIR/tmp-inst}
-: ${GLIB_VERSION=2.2.4}
+: ${GLIB_VERSION=2.2.3}
 : ${PKGC_VERSION=0.15.0}
 : ${GETTEXT_VERSION=0.11.5}
 
