@@ -11,7 +11,6 @@ AM_INIT_AUTOMAKE(mc, 4.6.0-pre1a)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
-AC_PROG_LN_S
 AC_CANONICAL_HOST
 
 AC_AIX
@@ -20,11 +19,24 @@ AC_ISC_POSIX
 
 AC_PROG_CC_STDC
 
+
+dnl
+dnl Find glib 1.2.x.  This check should be kept close to the beginning,
+dnl as it tends to fail often.
+dnl
+dnl Klugde for FreeBSD, where glib-config is renamed to glib12-config.
+AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,
+	      [$PATH:/usr/local/bin])
+AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config])
+AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
+LIBS="$LIBS $GLIB_LIBS"
+
+
 AC_HEADER_MAJOR
 AC_C_CONST
-
 AC_SYS_LARGEFILE
 
+AC_PROG_LN_S
 AC_CHECK_TOOL(AR, ar, ar)
 
 dnl Only list browsers here that can be run in background (i.e. with `&')
@@ -72,12 +84,6 @@ dnl
 if test "x$GCC" = xyes; then
     CFLAGS="$CFLAGS -Wall"
 fi
-
-dnl
-dnl We now use glib
-dnl 
-AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
-LIBS="$LIBS $GLIB_LIBS"
 
 dnl
 dnl OS specific flags.

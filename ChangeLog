@@ -1,3 +1,10 @@
+2002-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Move glib test earlier, as it tends to fail for
+	many users.  Make GLIB_CONFIG a precious variable.  Check for
+	glib12-config - that's how it's called on FreeBSD.
+	Reported by Pavel Shirshov <pavelsh@mail.ru>
+
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Remove old-style Linux-only support for shadow
