@@ -1,3 +1,10 @@
+2001-03-04  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* extfs/patchfs: LANG overrides LC_TIME at least in glibc, 
+	so use LC_ALL=C to override any locale
+	* smbfs.c (smbfs_open_link): service initialized
+	* (my_forget): new features of vfs_split_url used
+
 2001-03-01  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/uzip.in (mczipfs_list): Allow filenames with colons.

@@ -26,7 +26,7 @@
 #include "../config.h"
 #include "samba/include/config.h"
 /* don't load crap in "samba/include/includes.h" we don't use and which 
-   confilcts with definitions in other includes */
+   conflicts with definitions in other includes */
 #undef HAVE_LIBREADLINE
 #define NO_CONFIG_H
 #define BOOL_DEFINED
@@ -388,9 +388,10 @@ smbfs_init(vfs *me)
 	if(!get_myname(myhostname,NULL))
         DEBUG(0,("Failed to get my hostname.\n"));
 
-	if (!lp_load(servicesf,True,False,False))
+	if (!lp_load(servicesf,True,False,False)) {
+		if (errno != ENOENT)
 		DEBUG(0, ("Can't load %s - run testparm to debug it\n", servicesf));
-
+	}
     codepage_initialise(lp_client_code_page());
 
     load_interfaces();
@@ -486,7 +487,7 @@ typedef struct dir_entry {
 typedef struct {
 	gboolean server_list;
 	char *dirname;
-	char *path;	/* the dir orginally passed to smbfs_opendir */
+	char *path;	/* the dir originally passed to smbfs_opendir */
     smbfs_connection *conn;
     dir_entry *entries;
     dir_entry *current;
@@ -654,7 +655,7 @@ reconnect(smbfs_connection *conn, int *retries) {
 	char *host;
 	DEBUG(3, ("RECONNECT\n"));
 
-	if (strlen(conn->host) == 0)
+	if (*(conn->host) == 0)
 		host = g_strdup(conn->cli->desthost);		/* server browsing */
 	else
 		host = g_strdup(conn->host);
@@ -1128,9 +1129,9 @@ smbfs_get_free_bucket ()
 		if (!smbfs_connections [i].cli) return &smbfs_connections [i];
 
 	{	/* search for most dormant connection */
-		int oldest;	/* index */
+		int oldest = 0;	/* index */
 		time_t oldest_time = time(NULL);
-		for (i = 0; i< SMBFS_MAX_CONNECTIONS; i++) {
+		for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 			if (smbfs_connections[i].last_use < oldest_time) {
 				oldest_time = smbfs_connections[i].last_use;
 				oldest = i;
@@ -1153,8 +1154,8 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 {
     int i;
     smbfs_connection *bucket;
-	pstring service;
-	struct in_addr *dest_ip = NULL;
+    pstring service;
+    struct in_addr *dest_ip = NULL;
 
 	DEBUG(3, ("smbfs_open_link(host:%s, path:%s)\n", host, path));
 
@@ -1164,7 +1165,8 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 		char *p;
 		if ((p = strchr(path, '/')))	/* get share aka				*/
 			pstrcpy(service, ++p);	/* service name from path		*/
-
+		else
+			pstrcpy(service, "");
 		/* now check for trailing directory/filenames	*/
 		p = strchr(service, '/');
 		if (p)
@@ -1227,16 +1229,15 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 		bucket->host = g_strdup(host);
 
 	if (!bucket_set_authinfo (bucket,
-				  0,      /* domain not currently not used */
+				  0,      /* domain currently not used */
 				  user, 
 				  this_pass, 
 				  1))
 		return 0;
 
 	/* connect to share */
-    for ( ;; ) {
-        if (bucket->cli = do_connect(host, service))
-		break;
+    while (!(bucket->cli = do_connect(host, service))) {
+
 	if (my_errno != EPERM)
             return 0;
 	message_1s (1, MSG_ERROR,
@@ -1798,13 +1799,13 @@ smbfs_free (vfsid id)
 	authinfo_free_all ();
 }
 
-/* Gives up on a socket and reopnes the connection, the child own the socket
+/* Gives up on a socket and reopens the connection, the child own the socket
  * now
  */
 static void
 my_forget (char *path)
 {
-    char *host, *user, *pass, *p;
+    char *host, *user, *p;
     int  port, i;
 
     if (strncmp (path, URL_HEADER, HEADER_LEN))
@@ -1816,14 +1817,13 @@ my_forget (char *path)
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
 
-    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, &pass))
+    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))
 		== 0) {
 		g_free (host);
 		g_free (user);
-		if (pass)
-		    wipe_password (pass);
 		return;
     }
+    g_free (p);
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 		if ((strcmp (host, smbfs_connections [i].host) == 0) &&
 		    (strcmp (user, smbfs_connections [i].user) == 0) &&
@@ -1837,11 +1837,8 @@ my_forget (char *path)
 				do_connect(host, smbfs_connections[i].service);
 		}
     }
-    g_free (p);
     g_free (host);
     g_free (user);
-    if (pass)
-		wipe_password (pass);
 }
 
 static int 
@@ -1995,7 +1992,7 @@ smbfs_fstat (void *data, struct stat *buf)
 
 vfs vfs_smbfs_ops = {
     NULL,	/* This is place of next pointer */
-    "netbios over tcp/ip",
+    N_("netbios over tcp/ip"),
     F_NET,	/* flags */
     "smb:",	/* prefix */
     NULL,	/* data */

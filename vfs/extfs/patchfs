@@ -1,11 +1,13 @@
-#!/bin/sh
+#! /bin/sh
 
 # Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.22)
 
-# override any locale for dates
-unset LC_ALL
-LC_TIME=C
-export LC_TIME
+# override any locale for dates. But LANG override LC_TIME (at least in glibc)
+# unset LC_ALL
+# LC_TIME=C
+# export LC_TIME
+LC_ALL=C
+export LC_ALL
 
 # paths to used programs:
 ncat=cat                  # regular cat
