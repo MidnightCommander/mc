@@ -1,5 +1,8 @@
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (init_xterm_support): Revert last change, it doesn't
+	free all S-Lang memory anyways, but creates portability issues.
+
 	* dlg.h: Add new event DLG_VALIDATE.
 	* dlg.c (frontend_run_dlg): Send DLG_VALIDATE.
 	(select_a_widget): Don't send DLG_ONE_DOWN, nobody uses it.

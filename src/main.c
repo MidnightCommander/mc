@@ -1564,7 +1564,6 @@ init_xterm_support (void)
 #ifdef HAVE_SLANG
     term_entry = SLtt_tigetent (termvalue);
     xmouse_seq = SLtt_tigetstr ("Km", &term_entry);
-    SLfree (term_entry);
 #else
     xmouse_seq = tigetstr ("kmous");
 #endif
