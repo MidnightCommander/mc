@@ -67,6 +67,9 @@ install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
 
+# clean up this setuid problem for now
+chmod 755 $RPM_BUILD_ROOT/usr/lib/mc/bin/cons.saver
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -112,6 +115,12 @@ rm -rf $RPM_BUILD_ROOT
 /usr/share/icons/mc/*
 
 %changelog
+* Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
+- rebuilt against gnome-libs 0.27 and gtk+-1.1
+
+* Thu Jul 09 1998 Michael Fulbright <msf@redhat.com>
+- made cons.saver not setuid
+
 * Sun Apr 19 1998 Marc Ewing <marc@redhat.com>
 - removed tkmc
 
