@@ -2022,6 +2022,33 @@ do_enter (WPanel *panel)
 static void
 chdir_other_panel (WPanel *panel)
 {
+    char *new_dir;
+    
+    if (get_other_type () != view_listing) {
+	set_display_type (get_other_index (), view_listing);
+    }
+
+    if (!S_ISDIR (panel->dir.list [panel->selected].st.st_mode))
+        new_dir = concat_dir_and_file (panel->cwd, "..");
+    else
+        new_dir = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+
+    do_panel_cd (other_panel, new_dir, cd_exact);
+ 
+    move_down (panel);
+
+    g_free (new_dir);
+}
+
+/*
+ * Make the current directory of the current panel also the current
+ * directory of the other panel.  Put the other panel to the listing
+ * mode if needed.  If the current panel is panelized, the other panel
+ * doesn't become panelized.
+ */
+static void
+sync_other_panel (WPanel *panel)
+{
     if (get_other_type () != view_listing) {
 	set_display_type (get_other_index (), view_listing);
     }
@@ -2128,6 +2155,7 @@ static const panel_key_map panel_keymap [] = {
     { ALT('s'),   start_search },	/* M-s not like emacs */
     { XCTRL('t'), mark_file },
     { ALT('o'),   chdir_other_panel },
+    { ALT('i'),   sync_other_panel },
     { ALT('l'),   chdir_to_readlink },
     { ALT('H'),   directory_history_list },
     { KEY_F(13),  cmd_view_simple },

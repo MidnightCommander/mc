@@ -1,3 +1,15 @@
+2005-02-26  Miguel de Icaza  <miguel@novell.com>
+
+	* screen.c (chdir_other_panel): Restored original functionality.
+
+	(sync_other_panel): This is now bound to the key Alt-i, and is the
+	functionality that was lost.
+
+2005-01-29  Miguel de Icaza  <miguel@novell.com>
+
+	* utilunix.c (init_groups): Added support for getgrouplist patch
+	from Stefan Gohmann <gohmann@univention.de>.
+
 2005-02-23  Roland Illig  <roland.illig@gmx.de>
 
 	* tty.h: Moved the function printwstr to slint.c, because the
