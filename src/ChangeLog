@@ -1,3 +1,10 @@
+2001-06-04  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* charsets.c (load_codepages_list): Lines in mc.charset beginning
+	with a # are comments. Use "default character_set_name" in mc.charset
+	to set default codepage for your system.
+	(xstrncpy): Eliminate.
+
 2001-06-04  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (edit_symlink_cmd) [!HAVE_GNOME]: Warn if the current

@@ -17,19 +17,14 @@ uchar conv_displ[256];
 uchar conv_input[256];
 uchar printable[256];
 
-static char *xstrncpy( char *dest, const char *src, int n )
-{
-    strncpy( dest, src, n );
-    dest[n] = '\0';
-    return dest;
-}
-
 int load_codepages_list()
 {
     int result = -1;
     FILE *f;
     char buf[256];
     extern char* mc_home;
+    extern int display_codepage;
+    char * default_codepage = NULL;
 
     strcpy ( buf, mc_home );
     strcat ( buf, "/mc.charsets" );
@@ -37,7 +32,7 @@ int load_codepages_list()
 	return -1;
 
     for ( n_codepages=0; fgets( buf, sizeof buf, f ); )
-	if ( buf[0] != '\n' && buf[0] != '\0' )
+	if ( buf[0] != '\n' && buf[0] != '\0' && buf [0] != '#' )
 	    ++n_codepages;
     rewind( f );
 
@@ -47,7 +42,8 @@ int load_codepages_list()
 	/* split string into id and cpname */
 	char *p = buf;
 	int buflen = strlen( buf );
-	if ( *p == '\n' || *p == '\0' )
+
+	if ( *p == '\n' || *p == '\0' || *p == '#')
 	    continue;
 
 	if ( buflen > 0 && buf[ buflen - 1 ] == '\n' )
@@ -57,16 +53,26 @@ int load_codepages_list()
 	if ( *p == '\0' )
 	    goto fail;
 
-	codepages[n_codepages].id = malloc( p - buf + 1 );
-	xstrncpy( codepages[n_codepages].id, buf, p - buf );
+	*p++ = 0;
 
 	while ( *p == '\t' || *p == ' ' )
 	    ++p;
 	if ( *p == '\0' )
 	    goto fail;
 
+	if (strcmp (buf, "default") == 0) {
+	    default_codepage = strdup (p);
+	    continue;
+	}
+
+	codepages[n_codepages].id = strdup( buf  );
 	codepages[n_codepages].name = strdup( p );
 	++n_codepages;
+    }
+
+    if (default_codepage) {
+	display_codepage = get_codepage_index (default_codepage);
+	free (default_codepage);
     }
 
     result = n_codepages;
@@ -162,24 +168,23 @@ char* init_translation_table( int cpsource, int cpdisplay )
     for (i=128; i<=255; ++i) {
 	ch = translate_character( cd, i );
 	conv_input[i] = (ch == UNKNCHAR) ? i : ch;
+	printable[i] = 1;
     }
 
     iconv_close( cd );
-
-    /* ch = (strcmp( cpdisp, "ASCII" ) == 0) ? 0 : 1; */
-    for (i=128; i<=255; ++i)
-	printable[i] = 1;
 
     return NULL;
 }
 
 void convert_to_display( char *str )
 {
-    while ( (*str++ = conv_displ[ (uchar) *str ]) ) ;
+    while ((*str = conv_displ[ (uchar) *str ]))
+	str++;
 }
 
 void convert_from_input( char *str )
 {
-    while ( (*str++ = conv_input[ (uchar) *str ]) ) ;
+    while ((*str = conv_input[ (uchar) *str ]))
+	str++;
 }
 #endif /* HAVE_CHARSET */
