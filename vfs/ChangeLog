@@ -1,3 +1,7 @@
+Fri Jan 22 01:41:25 1999  Timur I. Bakeyev <mc@bat.ru>
+
+	* undelfs.c: Found one more unconverted realloc() call.
+
 1999-01-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* undelfs.c (undelfs_loaddel): Fix Timur's changes.

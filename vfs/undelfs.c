@@ -219,8 +219,7 @@ undelfs_loaddel (void)
 	if (lsd.free_blocks && !lsd.bad_blocks) {
 	    if (num_delarray >= max_delarray) {
 		max_delarray += 50;
-		delarray = realloc(delarray,
-				   max_delarray * sizeof(struct deleted_info));
+		delarray = g_renew (struct deleted_info, delarray, max_delarray);
 		if (!delarray) {
 		    message_1s (1, undelfserr, " no more memory while reallocating array ");
 		    goto error_out;
