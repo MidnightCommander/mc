@@ -1,5 +1,8 @@
 1999-02-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdnd.c (drop_on_directory): Do not ask for the action twice.
+	This was a leftover from a bit of code reorganization.
+
 	* gscreen.c (panel_icon_list_button_press): Fixed "=" -> "!="
 	typo.
 

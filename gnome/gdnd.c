@@ -289,18 +289,9 @@ drop_url_on_directory (GdkDragContext *context, GtkSelectionData *selection_data
 
 /* Drop stuff on a directory */
 static int
-drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data, char *destdir)
+drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
+		   GdkDragAction action, char *destdir)
 {
-	GdkDragAction action;
-
-	if (context->action == GDK_ACTION_ASK) {
-		action = get_action (context);
-
-		if (action == GDK_ACTION_ASK)
-			return FALSE;
-	} else
-		action = context->action;
-
 	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST))
 		drop_uri_list_on_directory (context, selection_data, action, destdir);
 	else if (gdnd_drag_context_has_target (context, TARGET_URL))
@@ -402,7 +393,7 @@ gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
 		action = context->action;
 
 	if (S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir)
-		return drop_on_directory (context, selection_data, dest_name);
+		return drop_on_directory (context, selection_data, action, dest_name);
 	else
 		return drop_on_file (context, selection_data, dest_fe, dest_name);
 }
