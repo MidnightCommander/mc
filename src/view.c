@@ -2706,7 +2706,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_KEY:
 	i = view_handle_key ((WView *) view, parm);
-	if (view->view_quit)
+	if (view->view_quit && !view->have_frame)
 	    dlg_stop (h);
 	else {
 	    view_update (view, TRUE);
