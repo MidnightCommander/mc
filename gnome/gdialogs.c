@@ -244,7 +244,7 @@ file_progress_show (FileOpContext *ctx, long done, long total)
 
         if (total > 0) {
                 perc = (double) done / (double) total;
-                snprintf (count, 9, "%3d%% ", (gint) (100.0 * perc));
+                g_snprintf (count, 9, "%3d%% ", (gint) (100.0 * perc));
                 gtk_label_set_text (GTK_LABEL (ui->file_label), count);
         }
         while (gtk_events_pending ())
@@ -269,7 +269,7 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
         if (ui->aborting)
                 return FILE_ABORT;
 
-        snprintf (count, 100, "%ld/%ld ", done, total);
+        g_snprintf (count, 100, "%ld/%ld ", done, total);
         gtk_label_set_text (GTK_LABEL (ui->count_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -484,7 +484,7 @@ file_progress_real_query_replace (FileOpContext *ctx, enum OperationMode mode, c
                                            GNOME_STOCK_BUTTON_CANCEL, NULL);
 
                 gtk_window_set_position (GTK_WINDOW (qr_dlg), GTK_WIN_POS_MOUSE);
-                snprintf (msg, sizeof (msg)-1, _("The target file already exists: %s"), destname);
+                g_snprintf (msg, sizeof (msg)-1, _("The target file already exists: %s"), destname);
                 label = gtk_label_new (msg);
                 gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
                 gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);

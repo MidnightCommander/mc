@@ -1,3 +1,9 @@
+2001-07-11  Pavel Roskin  <proski@gnu.org>
+
+	* gdialogs.c: Use g_snprintf() instead of snprintf().
+	* gnome-file-property-dialog.c: Likewise.
+	* gprefs.c: Likewise.
+
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
 	* gscreen.c (panel_icon_list_select_icon): This function doesn't

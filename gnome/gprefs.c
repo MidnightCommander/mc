@@ -378,7 +378,7 @@ create_prop_int (PrefsDlg *dlg, Property *prop)
 
         entry = gnome_entry_new (_(prop->label));
 
-        snprintf (buffer, 9, "%d", *( (int*) prop->property_variable));
+        g_snprintf (buffer, 9, "%d", *( (int*) prop->property_variable));
 
         gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))),
                             buffer);

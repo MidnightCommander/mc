@@ -244,17 +244,17 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	    || S_ISREG (fp_dlg->st.st_mode)
 	    || S_ISLNK (fp_dlg->st.st_mode)) {
 		if ((gint)fp_dlg->st.st_size < 1024) {
-			snprintf (buf, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			g_snprintf (buf, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
 			gen_string = g_strconcat (_("File Size: "), buf, _(" bytes"), NULL);
 		} else if ((gint)fp_dlg->st.st_size < 1024 * 1024) {
-			snprintf (buf, MC_MAXPATHLEN, "%.1f", (gfloat) fp_dlg->st.st_size / 1024.0);
-			snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			g_snprintf (buf, MC_MAXPATHLEN, "%.1f", (gfloat) fp_dlg->st.st_size / 1024.0);
+			g_snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
 			gen_string = g_strconcat (_("File Size: "), buf, _(" KBytes  ("),
 						  buf2, _(" bytes)"), NULL);
 		} else {
-			snprintf (buf, MC_MAXPATHLEN, "%.1f",
+			g_snprintf (buf, MC_MAXPATHLEN, "%.1f",
 				  (gfloat) fp_dlg->st.st_size / (1024.0 * 1024.0));
-			snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
+			g_snprintf (buf2, MC_MAXPATHLEN, "%d", (gint) fp_dlg->st.st_size);
 			gen_string = g_strconcat (_("File Size: "), buf, _(" MBytes  ("),
 						  buf2, _(" bytes)"), NULL);
 		}
