@@ -2,7 +2,7 @@
 
 	* xdirentry.h: Comment out magic field everywhere.
 
-2002-10-02  Pavel Roskin  <proski@gnu.org>
+2002-10-01  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am (VFSHDRS): Remove container.h.
 
