@@ -1,3 +1,7 @@
+2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in (AC_CONFIG_FILES): Add doc/ru/mc.1.
+
 2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* doc/mc.1.in: Use nodename `Background jobs' for section
