@@ -913,45 +913,47 @@ sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
 dell'impostazione di 'pattern della shell') o sui caratteri jolly sulla destinazione
 vedere
 .\"LINK2"
-Mask copy/rename.
+Maschera copia/rinomina.
 .\"Mask Copy/Rename"
 .PP
-On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing M-b in the dialog
-box).  The 
+In alcuni sistemi è possibile eseguire la copia in background cliccando
+sul bottone background (o premendo M-b nella finestra di dialogo). Il
+comando 
 .\"LINK2"
-Background Jobs
+Processi in background
 .\"Background jobs"
-is used to control the background process.
+è utile per controllarne l'andamento.
 .PP
-.B Link (C-x l)
+.B Collegamento (C-x l)
 .PP
-Create a hard link to the current file.
+Crea un collegamento fisico (hard link) al file corrente.
 .PP
-.B SymLink (C-x s)
+.B Collegamento Simbolico (C-x s)
 .PP
-Create a symbolic link to the current file. To those of you who don't
-know what links are: creating a link to a file is a bit like copying
-the file, but both the source filename and the destination filename
-represent the same file image. For example, if you edit one of these
-files, all changes you make will appear in both files. Some people call
-links aliases or shortcuts.
+Crea un collegamento simbolico al file corrente. Per chi non sapesse
+cosa sono i collegamenti: creare un collegamento ad un file è come
+copiare il file ma sia il nome sorgente che destinazione rappresentano
+la stessa immagine fisica del file. Per esempio, se si modifica uno dei
+due file, tutti i cambiamenti appariranno su tutti i file. Alcuni li
+chiamano anche alias o scorciatoie (o link come in originale inglese).
 .PP
-A hard link appears as a real file. After making it, there is no way of
-telling which one is the original and which is the link. If you delete
-either one of them the other one is still intact. It is very difficult
-to notice that the files represent the same image. Use hard links when
-you don't even want to know.
+Un collegamento fisico appare come un file reale. Dopo che sia stato 
+creato non c'è modo di distinguere quale sia il collegamento e quale sia 
+l'originale. Se si cancella uno dei due l'altro rimarrà intatto. E' molto
+difficile notare che i file rappresentano la stessa immagine. Usate i
+collegamenti fisici quando non volete proprio saperlo.
 .PP
-A symbolic link is a reference to the name of the original file. If
-the original file is deleted the symbolic link is useless. It is quite
-easy to notice that the files represent the same image. The Midnight
-Commander shows an "@"-sign in front of the file name if it is a
-symbolic link to somewhere (except to directory, where it shows a tilde (~)).
-The original file which the link points to is shown on mini-status line if the
-.I "Show mini-status"
-option is enabled. Use symbolic links when you want to avoid the
-confusion that can be caused by hard links.
+Un collegamento simbolico è un riferimento al nome del file originale.
+Se il file originale viene cancellato, il collegamento è inutile.
+E' facile distinguere i collegamenti simbolici dall'immagine stessa.
+Se il file è un collegamento simbolico a qualcosa, il Midnight Commander
+mostra un simbolo "@" davanti al nome del file (eccetto se punta ad una
+directory, nel qualcaso mostrerà una tilde  (~)).
+Il file originale sul quale punta il collegamento simbolico viene mostrato
+sulla riga di mini-stato se
+.I "Mostra Mini-stato"
+è abilitata. Usare i collegamenti simbolici se si vuole evitare la confusione
+che creano i collegamenti fisici.
 .PP
 .B Rename/Move (F6)
 .PP
