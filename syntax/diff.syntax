@@ -10,9 +10,9 @@ context default
 context exclusive linestart @@*@@ \n brightcyan
 context exclusive linestart Index:\s \n black white
 context linestart diff \n white red
-context linestart --- \n brightmagenta
-context linestart \+\+\+ \n brightmagenta
-context linestart \*\*\* \n brightmagenta
+context linestart ---\s \n brightmagenta
+context linestart \+\+\+\s \n brightmagenta
+context linestart \*\*\*\s \n brightmagenta
 context linestart === \n brown
 context linestart \+ \n brightgreen
 context linestart > \n brightgreen
