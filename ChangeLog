@@ -1,5 +1,7 @@
 2000-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: output vfs/extfs/Makefile
+
 	* configure.in: AC_CANONICAL_SYSTEM moved above AM_INIT_AUTOMAKE
 	to avoid a warning
 	* acinclude.m4: removed unused macros AC_CHECK_HEADER_IN_PATH,

@@ -1244,6 +1244,7 @@ doc/Makefile
 doc-gnome/Makefile
 doc-gnome/C/Makefile
 vfs/Makefile:vfs/Make-mc.in
+vfs/extfs/Makefile
 lib/Makefile
 gnome/Makefile 
 gnome/mc.keys.in
