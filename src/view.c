@@ -2346,7 +2346,7 @@ view_handle_key (WView *view, int c)
 	return MSG_HANDLED;
 
     if (check_movement_keys
-	(c, 1, vheight, view, (movefn) view_move_backward,
+	(c, vheight, view, (movefn) view_move_backward,
 	 (movefn) view_move_forward, (movefn) move_to_top,
 	 (movefn) move_to_bottom)) {
 	return MSG_HANDLED;

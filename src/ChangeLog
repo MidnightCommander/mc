@@ -1,5 +1,8 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
+	* win.c (check_movement_keys): Remove "additional" argument,
+	it's always 1.
+
 	* view.c: (put_editkey): Rename to ...
 	(view_handle_editkey): ... this.  Move here some logic from ...
 	(view_handle_key): ... here.

@@ -32,66 +32,78 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "layout.h"
 
-/* Return values: 0 = not a movement key, 1 = was a movement key */
-int check_movement_keys (int c, int additional, int page_size, void *data,
-			 movefn backfn, movefn forfn, movefn topfn,
-			 movefn bottomfn)
+/*
+ * Common handler for standard movement keys in a text area.  Provided
+ * functions are called with the "data" argument.  backfn and forfn also
+ * get an argument indicating how many lines to scroll.  Return 1 if
+ * the key was handled, 0 otherwise.
+ */
+int
+check_movement_keys (int key, int page_size, void *data, movefn backfn,
+		     movefn forfn, movefn topfn, movefn bottomfn)
 {
-    switch (c){
+    switch (key) {
     case KEY_UP:
     case XCTRL ('p'):
-	(*backfn)(data, 1);
-	return 1;
-	
+	(*backfn) (data, 1);
+	break;
+
     case KEY_DOWN:
     case XCTRL ('n'):
-	(*forfn)(data, 1);
-	return 1;
-	
+	(*forfn) (data, 1);
+	break;
+
     case KEY_PPAGE:
-    case ALT('v'):
-	(*backfn)(data, page_size-1);
-	return 1;
-	
+    case ALT ('v'):
+	(*backfn) (data, page_size - 1);
+	break;
+
     case KEY_NPAGE:
-    case XCTRL('v'):
-	(*forfn)(data, page_size-1);
-	return 1;
-	
+    case XCTRL ('v'):
+	(*forfn) (data, page_size - 1);
+	break;
+
     case KEY_HOME:
     case KEY_A1:
     case ALT ('<'):
-	(*topfn)(data, 0);
-	return 1;
+	(*topfn) (data, 0);
+	break;
+
     case KEY_END:
     case KEY_C1:
     case ALT ('>'):
-	(*bottomfn)(data, 0);
-	return 1;
+	(*bottomfn) (data, 0);
+	break;
+
+    case 'b':
+    case KEY_BACKSPACE:
+	(*backfn) (data, page_size - 1);
+	break;
+
+    case ' ':
+	(*forfn) (data, page_size - 1);
+	break;
+
+    case 'u':
+	(*backfn) (data, page_size / 2);
+	break;
+
+    case 'd':
+	(*forfn) (data, page_size / 2);
+	break;
+
+    case 'g':
+	(*topfn) (data, 0);
+	break;
+
+    case 'G':
+	(*bottomfn) (data, 0);
+	break;
+
+    default:
+	return MSG_NOT_HANDLED;
     }
-    if (additional)
-        switch (c){
-	case 'b':  
-	case KEY_BACKSPACE:
-	    (*backfn)(data, page_size-1);
-	    return 1;
-	case ' ':
-	    (*forfn)(data, page_size-1);
-	    return 1;
-	case 'u':
-	    (*backfn)(data, page_size / 2);
-	    return 1;
-	case 'd':
-	    (*forfn)(data, page_size / 2);
-	    return 1;
-	case 'g':
-	    (*topfn)(data, 0);
-	    return 1;
-	case 'G':
-	    (*bottomfn)(data, 0);
-	    return 1;
-	}
-    return 0;
+    return MSG_HANDLED;
 }
 
 /* Classification routines */

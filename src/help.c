@@ -605,7 +605,7 @@ help_handle_key (struct Dlg_head *h, int c)
     char *new_item;
 
     if (c != KEY_UP && c != KEY_DOWN &&
-	check_movement_keys (c, 1, help_lines, currentpoint,
+	check_movement_keys (c, help_lines, currentpoint,
 			     (movefn) move_backward2,
 			     (movefn) move_forward2,
 			     (movefn) move_to_top,

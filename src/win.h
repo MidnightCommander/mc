@@ -1,13 +1,13 @@
 #ifndef __WIN_H
 #define __WIN_H
 
-/* Keys managing */
-typedef void (*movefn)(void *, int);
-int check_movement_keys (int c, int additional, int page_size, void *,
-    movefn backfn, movefn forfn, movefn topfn, movefn bottomfn);
+/* Keys management */
+typedef void (*movefn) (void *, int);
+int check_movement_keys (int key, int page_size, void *data, movefn backfn,
+			 movefn forfn, movefn topfn, movefn bottomfn);
 int lookup_key (char *keyname);
 
-/* Terminal managing */
+/* Terminal management */
 extern int xterm_flag;
 void do_enter_ca_mode (void);
 void do_exit_ca_mode (void);
