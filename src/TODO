@@ -1,6 +1,9 @@
 Before 4.6.0-pre2
 =================
 
+Use paranoid quoting in subshell_name_quote() only when absolutely
+necessary.
+
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
 Crash on circular macro definitions in the editor.
