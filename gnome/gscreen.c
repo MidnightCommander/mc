@@ -160,21 +160,10 @@ x_panel_select_item (WPanel *panel, int index, int value)
 	/* Not required */
 }
 
-/* FIXME: this variable is used by x_select_item() to indicate the
- * lack of idempotence in gtk_clist_select_row().  I think it can be
- * removed once Jay fixes CList :-)
- * - Federico
- */
-
-static int will_select;
-
 void
 x_select_item (WPanel *panel)
 {
 	GtkCList *clist = GTK_CLIST (panel->list);
-
-	if (will_select)
-		return;
 
 	gtk_clist_select_row (clist, panel->selected, 0);
 
@@ -191,14 +180,8 @@ x_unselect_item (WPanel *panel)
 void
 x_filter_changed (WPanel *panel)
 {
-	if (panel->filter){
-		char *string;
-		
-		string = g_copy_strings ("Filter: ", panel->filter, NULL);
-		gtk_label_set (GTK_LABEL (panel->filter), string);
-		g_free (string);
-	} else
-		gtk_label_set (GTK_LABEL (panel->filter), "No filter");
+	gtk_entry_set_text (GTK_ENTRY (panel->filter_w),
+			    panel->filter ? panel->filter : "");
 }
 
 void
@@ -449,37 +432,18 @@ file_popup (GdkEvent *event, WPanel *panel, char *filename)
 static void
 internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 {
-#if 0
-	/* FIXME:
-	 *
-	 * This is #ifdef'ed out to work around a bug in GtkCList.  If
-	 * a row is selected and you call gtk_clist_select_row() on
-	 * it, the CList will *un*select that row.  Jay already told
-	 * me that he has to fix this.  When it is fixed, this #ifdef
-	 * should be removed.
-	 *
-	 * BTW, the thing will be unselected even if we return here,
-	 * because the class' signal handler is still pending.
-	 */
-
-	if (panel->selected == row)
-		return;
-#endif
-
-	will_select = 1;
-
 	unselect_item (panel);
 	panel->selected = row;
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	select_item (panel);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
-
-	will_select = 0;
 }
 
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
+	printf ("panel_file_list_select_row\n");
+	
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
@@ -522,6 +486,8 @@ panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
 static void
 panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
 {
+	printf ("Aqui\n");
+
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
 	
 	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
@@ -585,10 +551,8 @@ panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
 
 	/* Configure the CList */
-	/* We use GTK_SELECTION_MULTIPLE because we manage the selection explicitly.
-	 * So we want as little interference from Gtk as possible.
-	 */
-	gtk_clist_set_selection_mode (cl, GTK_SELECTION_MULTIPLE);
+
+	gtk_clist_set_selection_mode (cl, GTK_SELECTION_BROWSE);
 	gtk_clist_set_policy (cl, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	
 	for (i = 0, format = panel->format; format; format = format->next){
@@ -797,28 +761,84 @@ panel_create_cwd (WPanel *panel)
 }
 
 static void
-panel_change_filter (GtkWidget *button, WPanel *panel)
+panel_change_filter (GtkWidget *entry, WPanel *panel)
 {
-	fprintf (stderr, "Change filter: not yet hooked\n");
+	char *reg_exp;
+
+	/* This functionality is duplicated from set_panel_filter().
+	 * We cannot just call set_panel_filter() because in the Gnome
+	 * version we have a nice GnomeEntry in the panel to set the
+	 * filters, instead of having the user have to click on a menu
+	 * item to bring up a "set filter" dialog box.
+	 */
+
+	printf ("panel_change_filter\n");
+
+	reg_exp = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	if (panel->filter) {
+		g_free (panel->filter);
+		panel->filter = NULL;
+	}
+
+	if (!((reg_exp[0] == '*') && (reg_exp[1] == 0)))
+		panel->filter = g_strdup (reg_exp);
+
+	reread_cmd ();
 }
 
-static GtkWidget *
-panel_create_filter (WPanel *panel, GtkWidget **label)
-{
-	GtkWidget *filter;
+/* FIXME!!!  These patterns only work if we are using glob (easy_patterns).
+ * Find out a way to either change the contents of the history list or convert
+ * them to a regexp if the user selects them when easy_patterns is activated.
+ */
 
-	*label = gtk_label_new ("");
-	gtk_widget_show (*label);
-	filter = gtk_button_new ();
-	gtk_container_add (GTK_CONTAINER (filter), *label);
-	gtk_signal_connect (GTK_OBJECT (filter), "clicked", GTK_SIGNAL_FUNC (panel_change_filter), panel);
-	return filter;
+static char *default_filters[] = {
+	"*",
+	"*.(txt|tex|doc|ps|pdf|rtf)",
+	"*.(html|htm|sgml|sgm)",
+	"*.(gif|jpg|jpeg|png|tif|tiff|x[bp]m|p[bgpn]m|xcf|tga|rgb|iff|lbm|ilbm|bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits|)",
+	"*.(mpg|mpeg|mov|avi|fl[ichx]|dl)",
+	"*.(c|h|C|cc|cpp|cxx|H|m|scm|s|S|asm|awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)",
+	"*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)",
+	"*.(rpm|deb)",
+	"*.(au|wav|mp3|snd|mod|s3m|ra)",
+	"*.(pfa|pfb|afm|ttf|fon|pcf|spd)",
+	"*.(wk[s1]|xls)"
+};
+
+static GtkWidget *
+panel_create_filter (WPanel *panel, GtkWidget **filter_w)
+{
+	GtkWidget *hbox;
+	GtkWidget *label;
+	int i;
+
+	hbox = gtk_hbox_new (FALSE, 0);
+
+	label = gtk_label_new ("Filter:");
+	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 4);
+	gtk_widget_show (label);
+
+	*filter_w = gnome_entry_new ("filter");
+	
+	for (i = 0; i < ELEMENTS (default_filters); i++)
+		gnome_entry_append_history (GNOME_ENTRY (*filter_w), FALSE, default_filters[i]);
+
+	gtk_signal_connect (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (*filter_w))),
+			    "activate",
+			    (GtkSignalFunc) panel_change_filter,
+			    panel);
+
+	gtk_box_pack_start (GTK_BOX (hbox), *filter_w, TRUE, TRUE, 0);
+	gtk_widget_show (*filter_w);
+
+	return hbox;
 }
 
 void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
-	GtkWidget *status_line, *filter_w, *statusbar, *vbox;
+	GtkWidget *status_line, *filter, *statusbar, *vbox;
 
 	panel->table = gtk_table_new (2, 1, 0);
 	gtk_widget_show (panel->table);
@@ -829,14 +849,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->current_dir = panel_create_cwd (panel);
 	gtk_widget_show (panel->current_dir);
 
-	filter_w = panel_create_filter (panel, &panel->filter_w);
-	gtk_widget_show (filter_w);
+	filter = panel_create_filter (panel, (GtkWidget **) &panel->filter_w);
+	gtk_widget_show (filter);
 
 	status_line = gtk_hbox_new (0, 0);
 	gtk_widget_show (status_line);
 	
 	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 0, 0, 0);
-	gtk_box_pack_end   (GTK_BOX (status_line), filter_w, 0, 0, 0);
+	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
 
 	panel->status = statusbar = gtk_label_new ("");
 	gtk_widget_show (statusbar);

@@ -1,3 +1,14 @@
+1998-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_filter): The filter control is now a
+	nice GnomeEntry.  It does not work due to gmc trapping key events;
+	I'll look into it tomorrow.
+	(internal_select_item): Fixed broken behavior.  Now uses GtkCList properly.
+	default_filters: new structure with pre-defined glob patterns.
+	This is actually broken, because it will only work when
+	easy_patterns is enabled.  I have to figure a way to make it work
+	with regexp mode as well.
+
 Thu Mar  5 23:54:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (drop_on_panel): New function;  Used by the directory
@@ -13,6 +24,13 @@ Thu Mar  5 23:54:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	the drag and drop code.  The little square at the end did not make
 	much sense as a drop/drag spot.
 	
+1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmain.h: Added prototype for x_filter_changed().
+	Added #include "panel.h".
+
+	* gconf.h (PORT_HAS_FILTER_CHANGED): New flag for conditional compilation.
+
 Wed Mar  4 22:43:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtools.c (query_dialog): Rewritten to use the MC dialog/widget code. 

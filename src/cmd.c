@@ -75,6 +75,7 @@
 #include "color.h"
 #include "user.h"
 #include "setup.h"
+#include "x.h"
 
 #define MIDNIGHT
 #ifdef  USE_INTERNAL_EDIT
@@ -105,7 +106,7 @@ int is_right;
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 
 
-#ifndef HAVE_TK
+#ifndef PORT_HAS_FILTER_CHANGED
 #    define x_filter_changed(p)
 #endif
 

@@ -1,6 +1,7 @@
 #ifndef __GMC_MAIN_H
 #define __GMC_MAIN_H
 #include "dlg.h"
+#include "panel.h"
 #include "widget.h"
 
 int xtoolkit_init (int *argc, char *argv []);
@@ -20,6 +21,7 @@ int x_create_label (Dlg_head *h, widget_data parent, WLabel *l);
 int x_create_input (Dlg_head *h, widget_data parent, WInput *in);
 int x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l);
 int x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb);
+void x_filter_changed (WPanel *panel);
 void x_list_insert (WListbox *l, WLEntry *p, WLEntry *e);
 void x_redefine_label (WButtonBar *bb, int idx);
 void x_add_widget (Dlg_head *h, Widget_Item *w);

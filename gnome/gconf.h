@@ -12,6 +12,7 @@
 #define PORT_WANTS_GET_SORT_FN      1
 #define PORT_HAS_LLINES             1
 #define PORT_HAS_LOAD_HINT          1
+#define PORT_HAS_FILTER_CHANGED     1
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

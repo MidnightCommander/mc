@@ -3,6 +3,10 @@ Thu Mar  5 10:28:40 1998  Norbert Warmuth <k3190@fh-sw.de>
 	* popt.c (poptParseArgvString): make it compile with the native
 	compiler on AIX 4.1.3
 
+1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* cmd.c: Added #include "x.h"
+
 Wed Mar  4 14:49:55 1998  Norbert Warmuth <k3190@fh-sw.de>
 
 	* doc/mc.1.in, mc.hlp: updated (these files haven't been updated
