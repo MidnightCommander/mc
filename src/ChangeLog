@@ -1,3 +1,7 @@
+2002-09-19  Pavel Roskin  <proski@gnu.org>
+
+	* poptint.h: Use i18n.h instead of most own replacement macros.
+
 2002-09-18  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (other_symlink_cmd): Remove, this function is
