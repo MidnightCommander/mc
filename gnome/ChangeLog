@@ -1,5 +1,18 @@
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (click_proxy_button_press): Use a nice arrow cursor
+	for rubberbanding.
+	(click_proxy_filter): Keep a firm jaw when the window manager dies
+	and thus the proxy window is destroyed.
+	(setup_desktop_click_proxy_window): Moved the proxy window
+	creation code to this function.
+	(click_proxy_property_notify): Handle PropertyNotify events from
+	the root window for when the proxy window changes.  Now the window
+	manager can restart itself as it pleases and GMC will handle it
+	correctly.
+
+1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	Wheeeee!  Desktop icons can be selected by rubberbanding.  You
 	need Englightenment to do this, as so far it seems to be the only
 	WM with support for the _WIN_DESKTOP_BUTTON_PROXY property.

@@ -693,7 +693,6 @@ static gint
 window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
 	struct desktop_icon_info *dii;
-	int retval;
 
 	dii = data;
 
@@ -1623,6 +1622,8 @@ update_drag_selection (int x, int y)
 static gint
 click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
+	GdkCursor *cursor;
+
 	if (event->button == 1) {
 		click_start_x = event->x;
 		click_start_y = event->y;
@@ -1630,12 +1631,14 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 
 		XGrabServer (GDK_DISPLAY ());
 
+		cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
 		gdk_pointer_grab (GDK_ROOT_PARENT (),
 				  FALSE,
 				  GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK,
 				  NULL,
-				  NULL,
+				  cursor,
 				  event->time);
+		gdk_cursor_destroy (cursor);
 
 		/* If no modifiers are pressed, we unselect all the icons */
 
@@ -1705,6 +1708,10 @@ click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 	switch (xev->type) {
 	case ButtonPress:
 	case ButtonRelease:
+		/* Translate button events into events that come from the proxy
+		 * window, so that we can catch them as a signal from the
+		 * invisible widget.
+		 */
 		if (xev->type == ButtonPress)
 			event->button.type = GDK_BUTTON_PRESS;
 		else
@@ -1719,13 +1726,77 @@ click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 		event->button.y = xev->xbutton.y;
 		event->button.state = xev->xbutton.state;
 		event->button.button = xev->xbutton.button;
-		break;
+
+		return GDK_FILTER_TRANSLATE;
+
+	case DestroyNotify:
+		/* The proxy window was destroyed (i.e. the window manager
+		 * died), so we have to cope with it
+		 */
+		printf ("Proxy window destroyed!\n");
+		g_assert (((GdkEventAny *) event)->window == click_proxy_gdk_window);
+		gdk_window_destroy_notify (click_proxy_gdk_window);
+		click_proxy_gdk_window = NULL;
+
+		return GDK_FILTER_REMOVE;
 
 	default:
-		return GDK_FILTER_CONTINUE;
+		break;
 	}
 
-	return GDK_FILTER_TRANSLATE;
+	return GDK_FILTER_CONTINUE;
+}
+
+/* Creates a proxy window to receive clicks from the root window and sets up the
+ * necessary event filters.
+ */
+static void
+setup_desktop_click_proxy_window (void)
+{
+	click_proxy_gdk_window = find_click_proxy_window ();
+	if (!click_proxy_gdk_window) {
+		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
+		return;
+	}
+
+	/* Make the proxy window send events to the invisible proxy widget */
+	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible);
+
+	/* Add our filter to get events */
+	gdk_window_add_filter (click_proxy_gdk_window, click_proxy_filter, NULL);
+
+	/* The proxy window for clicks sends us button press events with
+	 * SubstructureNotifyMask.  We need StructureNotifyMask to receive
+	 * DestroyNotify events, too.
+	 */
+
+	XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (click_proxy_gdk_window),
+		      SubstructureNotifyMask | StructureNotifyMask);
+}
+
+/* Handler for PropertyNotify events from the root window; it must change the
+ * proxy window to a new one.
+ */
+static gint
+click_proxy_property_notify (GtkWidget *widget, GdkEventProperty *event, gpointer data)
+{
+	if (event->window != GDK_ROOT_PARENT ())
+		return FALSE;
+
+	if (event->atom != gdk_atom_intern ("_WIN_DESKTOP_BUTTON_PROXY", FALSE))
+		return FALSE;
+
+	/* If there already is a proxy window, destroy it */
+
+	click_proxy_gdk_window = NULL;
+
+	/* Get the new proxy window */
+
+	setup_desktop_click_proxy_window ();
+
+	printf ("Property changed on the root window and I have a new proxy\n");
+
+	return TRUE;
 }
 
 #define gray50_width 2
@@ -1741,27 +1812,26 @@ setup_desktop_clicks (void)
 	GdkColor color;
 	GdkBitmap *stipple;
 
-	click_proxy_gdk_window = find_click_proxy_window ();
-	if (!click_proxy_gdk_window) {
-		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
-		return;
-	}
-
 	click_proxy_invisible = gtk_invisible_new ();
 	gtk_widget_show (click_proxy_invisible);
 
-	/* Make the proxy and the root windows send events to the invisible proxy widget */
-
-	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible);
+	/* Make the root window send events to the invisible proxy widget */
 	gdk_window_set_user_data (GDK_ROOT_PARENT (), click_proxy_invisible);
 
-	/* Add our filter to translate virtual root window events into Gdk events */
-
+	/* Add our filter to get button press/release events (they are sent by
+	 * the WM * with the window set to the root).  Our filter will translate
+	 * them to a GdkEvent with the proxy window as its window field.
+	 */
 	gdk_window_add_filter (GDK_ROOT_PARENT (), click_proxy_filter, NULL);
 
-	/* The proxy window for clicks sends us events as SubstructureNotify things */
+	/* Select for PropertyNotify events from the root window */
 
-	XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (click_proxy_gdk_window), SubstructureNotifyMask);
+	XSelectInput (GDK_DISPLAY (), GDK_ROOT_WINDOW (), PropertyChangeMask);
+
+	/* Create the proxy window for clicks on the root window */
+	setup_desktop_click_proxy_window ();
+
+	/* Connect the signals */
 
 	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "button_press_event",
 			    (GtkSignalFunc) click_proxy_button_press,
@@ -1771,6 +1841,10 @@ setup_desktop_clicks (void)
 			    NULL);
 	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "motion_notify_event",
 			    (GtkSignalFunc) click_proxy_motion,
+			    NULL);
+
+	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "property_notify_event",
+			    (GtkSignalFunc) click_proxy_property_notify,
 			    NULL);
 
 	/* Create the GC to paint the rubberband rectangle */
@@ -1835,4 +1909,9 @@ desktop_destroy (void)
 
 	gtk_widget_destroy (dnd_proxy_window);
 	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
+
+	/* Remove click-on-desktop crap */
+
+	gdk_window_unref (click_proxy_gdk_window);
+	gtk_widget_destroy (click_proxy_invisible);
 }
