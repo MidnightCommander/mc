@@ -1,5 +1,8 @@
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/changelog.syntax: Fix highlighting of functions.  Relax
+	strictness for dates.
+
 	* doc/mc.1.in: Fix troff warnings.
 	* doc/mcedit.1.in: Likewise.
 
