@@ -1222,7 +1222,7 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
      */
     format = parse_panel_size (panel, format, isstatus);
 
-    while (*format){
+    while (*format){           /* format can be an empty string */
 	int found = 0;
 
         darr = xmalloc (sizeof (format_e), "parse_display_format");
@@ -1313,7 +1313,8 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     }
     
     *res_total_cols = total_cols;
-    home->items = items;
+    if (home)
+	home->items = items;
     return home;
 }
 
