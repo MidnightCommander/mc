@@ -1,0 +1,6 @@
+module GNOME {
+  interface MagicDev {
+    void reread_config();
+    boolean is_running();
+  };
+};

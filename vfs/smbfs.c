@@ -28,6 +28,7 @@
 /* don't load crap in "samba/include/includes.h" we don't use and which 
    confilcts with definitions in other includes */
 #undef HAVE_LIBREADLINE
+#define NO_CONFIG_H
 #include "samba/include/includes.h"
 
 #include <string.h>

@@ -1,3 +1,10 @@
+1999-09-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* gmain.c (x_init_dlg): Display a warning if the GtkTed code path
+	is ever reached.
+	(xtoolkit_create_dialog): Likewise.
+	(x_add_widget): Likewise.
+
 1999-09-16  Owen Taylor  <otaylor@redhat.com>
 
         * gmount.c: Remove the HAVE_MAGICDEV conditional.

@@ -1,3 +1,10 @@
+1999-09-17  Federico Mena Quintero  <federico@redhat.com>
+
+	* smbfs.c: #define NO_CONFIG_H before including the samba
+	includes; this way it will not re=define HAVE_LIBREADLINE.  This
+	situation sucks.  Should we change the names of the widget.h
+	history_*() functions?
+
 1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* smbfs.c (various places): Store filenames in memory with the unix

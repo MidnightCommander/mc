@@ -231,6 +231,7 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
+		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
 		ted = gtk_ted_new_layout (h->name, LIBDIR "/layout");
 		gtk_container_add (GTK_CONTAINER (win), ted);
 		gtk_widget_show (ted);
@@ -292,6 +293,8 @@ x_add_widget (Dlg_head *h, Widget_Item *w)
 	if (!(h->grided & DLG_NO_TED)){
 		GtkTed *ted = GTK_TED (GTK_BIN (h->wdata)->child);
 
+		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
+
 		gtk_ted_add (ted, GTK_WIDGET (w->widget->wdata), w->widget->tkname);
 		bind_gtk_keys (GTK_WIDGET (w->widget->wdata), h);
 	}
@@ -313,6 +316,8 @@ x_init_dlg (Dlg_head *h)
 		GtkTed *ted = GTK_TED (GTK_BIN (h->wdata)->child);
 		Widget_Item *p, *first;
 	
+		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
+
 		first = p = h->current;
 		do {
 			gtk_ted_add (ted, GTK_WIDGET (p->widget->wdata), p->widget->tkname);

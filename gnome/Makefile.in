@@ -4,13 +4,13 @@ VPATH = @srcdir@
 rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
-GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
+GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@
 CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@ -I. -I$(rootdir)/src
 CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) $(GNOMEDEFS)
 LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
-LIBS = $(XLIBS) @TERMNET@ 
+LIBS = $(XLIBS) @TERMNET@
 EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -215,7 +215,13 @@ $(MAGICDEV_GENERATED): magicdev.idl
 
 FileManager-impl.c: FileManager.h
 
-EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop magicdev.idl
+EXTRA_DIST =			\
+	gnome.TODO		\
+	layout			\
+	gmc.gnorba		\
+	mc.keys.in.in		\
+	gimp.image.desktop	\
+	magicdev.idl
 
 DISTGNOME_NEW = \
 	gimp.image.desktop application.x-gnumeric.desktop
@@ -237,12 +243,12 @@ gmount-corba.o: gmount.c
 gcorba.o: gcorba.c $(CORBA_GENERATED)
 gmount.o: gmount.c $(MAGICDEV_GENERATED)
 
-all: @mx@ Makefile mc.keys 
+all: @mx@ Makefile mc.keys
 
 Makefile: Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
 
-mx: checklinks 
+mx: checklinks
 	$(MAKE) plain-gmc
 	$(MAKE) corba-gmc
 	$(MAKE) gmc-client
@@ -255,10 +261,10 @@ mx: checklinks
 	@touch mx
 
 plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) libgtkedit.a
-	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(EXTRALIBS) $(LDFLAGS) $(LIBS) 
+	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(EXTRALIBS) $(LDFLAGS) $(LIBS)
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) libgtkedit.a
-	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS) 
+	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS)
 
 gmc-client: $(CLIENTOBJS)
 	$(CC) -o gmc-client $(CLIENTOBJS) $(CORBA_LDFLAGS) $(LIBS)
@@ -267,7 +273,7 @@ mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' \
 	    -e 's^\@gnomeicondir\@^$(gnomeicondir)^g' \
 	< mc.keys.in > mc.keys.tmp \
-	&& mv mc.keys.tmp mc.keys 
+	&& mv mc.keys.tmp mc.keys
 
 mc.keys.in: mc.keys.in.in Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/mc.keys.in CONFIG_HEADERS= ./config.status)
@@ -325,7 +331,7 @@ install: install_@mx@
 
 install_:
 
-install_mx: all 
+install_mx: all
 	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(icondir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(mclibdir)
@@ -341,7 +347,7 @@ install_mx: all
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
-uninstall: 
+uninstall:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)corba-gmc
 	for I in $(ICONS); \
