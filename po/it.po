@@ -1855,7 +1855,7 @@ msgstr "Fai i backup -->"
 #: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:117
 msgid "&Cancel"
-msgstr "&Annulla"
+msgstr "&Cancella"
 
 #: gtkedit/editcmd.c:397
 msgid "Extension:"
@@ -2486,7 +2486,7 @@ msgstr "&Cerca...          F7"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
 msgid "search &Again     F17"
-msgstr "&Ripeti Cerca     F17"
+msgstr "&Ripete Cerca     F17"
 
 #: gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
 msgid "&Replace...        F4"
@@ -4558,11 +4558,11 @@ msgstr "&Chdir"
 
 #: src/find.c:133
 msgid "&Again"
-msgstr "&Ripeti"
+msgstr "&Ripete"
 
 #: src/find.c:134
 msgid "&Quit"
-msgstr "&Uscire"
+msgstr "&Uscita"
 
 #: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"

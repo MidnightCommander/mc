@@ -21,8 +21,8 @@ Dritta: Il formato della lista file è impostabile; "man mc" per i dettagli.
 Dritta: %D/%T espande i file selezionati nella directory opposta.
 Dritta: Vuoi la tua shell? Premi C-o e torna nuovamente a MC con C-o.
 Dritta: Impostare la variabile CDPATH può far risparmiare tasti nei comandi cd.
-Dritta: Se vuoi vedere i tuoi file .* impostalo in Configurazione.
-Dritta: Vuoi vedere i tuoi *~ file di backup? Impostalo in Configurazione.
+Dritta: Se vuoi vedere i tuoi file .* impostalo nella Configurazione.
+Dritta: Vuoi vedere i tuoi *~ file di backup? Impostalo nella Configurazione.
 Dritta: Hai tanta RAM/Virtual RAM? Imposta il tar VFS memlimit a -1.
 Dritta: Il completamento funziona su tutti gli input. Basta premere M-Tab.
 Dritta: Con terminali lenti può aiutare la flag -s.
