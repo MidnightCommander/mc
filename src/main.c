@@ -2211,11 +2211,6 @@ process_args (int c, const char *option_arg)
 #endif
 #endif
 
-    case 'm':
-	fputs (_("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"), stderr);
-	finish_program = 1;
-	break;
-
 #ifdef NATIVE_WIN32
     case 'S':
 	print_last_wd = 2;
@@ -2274,8 +2269,6 @@ static const struct poptOption argument_table [] = {
 #endif
 #endif
     { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
-    { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm',
-      N_("Obsolete") },
     { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0,
       N_("Requests to run in black and white") },
     { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd',
