@@ -1,5 +1,8 @@
 2003-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (dlg_replace_widget): Clean rewrite.  It was broken
+	after eliminating Widget_Item.
+
 	* menu.h: Return to keeping dialog id instead of a widget
 	pointer for previous widget.  The widget can be replaced in the
 	meantime.

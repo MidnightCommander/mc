@@ -822,33 +822,39 @@ void widget_set_size (Widget *widget, int y, int x, int lines, int cols)
 void
 dlg_replace_widget (Dlg_head *h, Widget *old_w, Widget *new_w)
 {
-    Widget *p = h->current;
     int should_focus = 0;
 
     if (!h->current)
 	return;
 
-    do {
-	if (p == old_w) {
+    if (old_w == h->current)
+	should_focus = 1;
 
-	    if (old_w == h->current)
-		should_focus = 1;
+    new_w->parent = h;
+    new_w->dlg_id = old_w->dlg_id;
 
-	    /* We found the widget */
-	    /* First kill the widget */
-	    new_w->parent = h;
-	    send_message (old_w, WIDGET_DESTROY, 0);
+    if (old_w == old_w->next) {
+	/* just one widget */
+	new_w->prev = new_w;
+	new_w->next = new_w;
+    } else {
+	new_w->prev = old_w->prev;
+	new_w->next = old_w->next;
+	old_w->prev->next = new_w;
+	old_w->next->prev = new_w;
+    }
 
-	    /* We insert the new_w widget */
-	    p = new_w;
-	    send_message (new_w, WIDGET_INIT, 0);
-	    if (should_focus) {
-		if (dlg_focus (h) == 0)
-		    select_a_widget (h, 1);
-	    }
-	    send_message (new_w, WIDGET_DRAW, 0);
-	    break;
+    if (should_focus)
+	h->current = new_w;
+
+    send_message (old_w, WIDGET_DESTROY, 0);
+    send_message (new_w, WIDGET_INIT, 0);
+
+    if (should_focus) {
+	if (!dlg_focus (h)) {
+	    select_a_widget (h, 1);
 	}
-	p = p->next;
-    } while (p != h->current);
+    }
+
+    send_message (new_w, WIDGET_DRAW, 0);
 }
