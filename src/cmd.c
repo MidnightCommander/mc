@@ -20,17 +20,22 @@
 
 #include <config.h>
 #ifdef __os2__
-#  define INCL_DOSFILEMGR
-#  define INCL_DOSMISC
-#  define INCL_DOSERROR
+#   define INCL_DOSFILEMGR
+#   define INCL_DOSMISC
+#   define INCL_DOSERROR
 #endif
+
 #ifdef HAVE_UNISTD_H
-#    include <unistd.h>
+#   include <unistd.h>
 #endif
-#include "tty.h"
+
 #include <stdio.h>
 #include <sys/types.h>
-#include <sys/param.h>
+
+#ifdef HAVE_PARAM_H
+#   include <sys/param.h>
+#endif
+
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <string.h>
@@ -48,6 +53,8 @@
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>
 #endif
+
+#include "tty.h"
 #include "global.h"
 #include "dir.h"
 #include "panel.h"
@@ -77,9 +84,6 @@
 #include "setup.h"
 #include "x.h"
 #include "profile.h"
-#ifndef HAVE_X
-#include "textconf.h"
-#endif
 
 #define MIDNIGHT
 #include "../vfs/vfs.h"
@@ -102,10 +106,6 @@ int use_internal_edit = 1;
 int is_right;
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 
-
-#ifndef PORT_HAS_FILTER_CHANGED
-#    define x_filter_changed(p)
-#endif
 
 /* This is used since the parameter panel on some of the commands */
 /* defined in this file may receive a 0 parameter if they are invoked */
@@ -164,7 +164,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
         return move_dir;
     }
     if (internal){
-#ifdef HAVE_GNOME
+#ifdef HAVE_X
 	gmc_view (filename, start_line);
 #else
 	char view_entry [BUF_TINY];
@@ -178,7 +178,7 @@ int view_file_at_line (char *filename, int plain_view, int internal, int start_l
 	    view (0, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
-#endif /* !HAVE_GNOME */
+#endif /* !HAVE_X */
     } else {
 	char *localcopy;
 	
@@ -319,7 +319,7 @@ void do_edit_at_line (const char *what, int start_line)
 	repaint_screen ();
 	return;
     }
-#endif
+#endif /* USE_INTERNAL_EDIT */
     if (!editor){
 	editor = getenv ("EDITOR");
 	if (!editor)
@@ -338,13 +338,13 @@ do_edit (const char *what)
 
 void edit_cmd (WPanel *panel)
 {
-#ifndef HAVE_GNOME
+#ifndef HAVE_X
     panel = get_a_panel(panel);
     if (!regex_command (selection (panel)->fname, "Edit", NULL, 0))
         do_edit (selection (panel)->fname);
 #else
     gmc_edit (selection (panel)->fname);
-#endif
+#endif /* !HAVE_X */
 }
 
 void edit_cmd_new (WPanel *panel)
@@ -435,9 +435,12 @@ set_panel_filter_to (WPanel *p, char *allocated_filter_string)
     else
 	g_free (allocated_filter_string);
     reread_cmd ();
+#ifdef HAVE_X
     x_filter_changed (p);
+#endif /* HAVE_X */
 }
 
+#ifndef HAVE_X
 /* Set a given panel filter expression */
 void set_panel_filter (WPanel *p)
 {
@@ -463,6 +466,7 @@ void filter_cmd (void)
     p = MENU_PANEL;
     set_panel_filter (p);
 }
+#endif /* HAVE_X */
 
 void reread_cmd (void)
 {
@@ -500,10 +504,12 @@ void reverse_selection_cmd_panel (WPanel *panel)
     paint_panel (panel);
 }
 
+#ifndef HAVE_X
 void reverse_selection_cmd (void)
 {
     reverse_selection_cmd_panel (cpanel);
 }
+#endif /* HAVE_X */
 
 void select_cmd_panel (WPanel *panel)
 {
@@ -552,10 +558,12 @@ void select_cmd_panel (WPanel *panel)
     g_free (reg_exp);
 }
 
+#ifndef HAVE_X
 void select_cmd (void)
 {
 	select_cmd_panel (cpanel);
 }
+#endif /* !HAVE_X */
 
 void unselect_cmd_panel (WPanel *panel)
 {
@@ -603,12 +611,12 @@ void unselect_cmd_panel (WPanel *panel)
     g_free (reg_exp);
 }
 
+#ifndef HAVE_X
 void unselect_cmd (void)
 {
 	unselect_cmd_panel (cpanel);
 }
 
-#ifndef HAVE_GNOME
 /* Check if the file exists */
 /* If not copy the default */
 static int check_for_default(char *default_file, char *file)
@@ -734,7 +742,7 @@ void reselect_vfs (void)
     g_free (target);
 }
 #endif /* USE_VFS */
-#endif /* !HAVE_GNOME */
+#endif /* !HAVE_X */
 
 static int compare_files (char *name1, char *name2, long size)
 {
@@ -872,7 +880,7 @@ void compare_dirs_cmd (void)
     }
 }
 
-#ifndef HAVE_GNOME
+#ifndef HAVE_X
 void history_cmd (void)
 {
     Listbox *listbox;
@@ -925,7 +933,7 @@ view_other_cmd (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     char *new_dir = NULL;
     char **new_dir_p;
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
     if (!xterm_flag && !console_flag && !use_subshell){
 	if (message_flag)
@@ -945,7 +953,7 @@ view_other_cmd (void)
 	 */
 	reset_shell_mode ();
 	noecho ();
-#endif
+#endif /* HAVE_SLANG */
 	keypad(stdscr, FALSE);
 	endwin ();
 	if (!status_using_ncurses)
@@ -960,7 +968,7 @@ view_other_cmd (void)
 	    if (invoke_subshell (NULL, VISIBLY, new_dir_p))
 		quiet_quit_cmd();  /* User did `exit' or `logout': quit MC quietly */
 	} else
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 	{
 	    if (output_starts_shell){
 		fprintf (stderr,
@@ -994,7 +1002,7 @@ view_other_cmd (void)
 				       LINES-keybar_visible-output_lines-1,
 				       LINES-keybar_visible-1);
 	}
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
         touchwin (stdscr);
 	
 	/* prevent screen flash when user did 'exit' or 'logout' within
@@ -1003,7 +1011,7 @@ view_other_cmd (void)
 	    repaint_screen ();
     }
 }
-#endif /* !HAVE_GNOME */
+#endif /* !HAVE_X */
 
 #ifndef OS2_NT
 static void
@@ -1107,10 +1115,10 @@ void symlink_cmd (void)
 
 void edit_symlink_cmd (void)
 {
-#ifndef HAVE_GNOME
+#ifndef HAVE_X
 /* GNOME already checks this, and selection(cpanel) does bbad things */
     if (S_ISLNK (selection (cpanel)->buf.st_mode)) {
-#endif
+#endif /* !HAVE_X */
 	char buffer [MC_MAXPATHLEN];
 	char *p = NULL;
 	int i;
@@ -1151,12 +1159,12 @@ void edit_symlink_cmd (void)
 	    }
 	}
 	g_free (q);
-#ifndef HAVE_GNOME
+#ifndef HAVE_X
     } else {
 	message (1, MSG_ERROR, _("`%s' is not a symbolic link"),
 		 selection (cpanel)->fname);
     }
-#endif
+#endif /* !HAVE_X */
 }
 
 void other_symlink_cmd (void)
@@ -1197,7 +1205,7 @@ void other_symlink_cmd (void)
     g_free (p);
     g_free (r);
 }
-#endif
+#endif /* !OS2_NT */
 
 void help_cmd (void)
 {
@@ -1288,7 +1296,7 @@ char *get_random_hint (void)
     if (!(tv.tv_sec> last_sec+60))
 	return g_strdup (""); 
     last_sec = tv.tv_sec;
-#endif
+#endif /* !SCO_FLAVOR */
 
     data = load_mc_home_file (MC_HINT, NULL);
     if (!data)
@@ -1298,7 +1306,7 @@ char *get_random_hint (void)
     srand ((short) now);
 #else
     srand (tv.tv_sec);
-#endif
+#endif /* !SCO_FLAVOR */
     /* get a random entry */
     len = strlen (data);
     start = rand () % len;
@@ -1392,6 +1400,7 @@ void source_routing (void)
 #endif /* HAVE_SETSOCKOPT */
 #endif /* USE_NETCODE */
 
+#ifndef HAVE_X
 #ifdef USE_EXT2FSLIB
 void undelete_cmd (void)
 {
@@ -1402,7 +1411,6 @@ void undelete_cmd (void)
 }
 #endif /* USE_EXT2FSLIB */
 
-#ifndef HAVE_GNOME
 void quick_cd_cmd (void)
 {
     char *p = cd_dialog ();
@@ -1416,7 +1424,7 @@ void quick_cd_cmd (void)
     if (p)
        g_free (p);
 }
-#endif /* !HAVE_GNOME */
+#endif /* !HAVE_X */
 
 void 
 dirsizes_cmd (void)
@@ -1441,6 +1449,7 @@ dirsizes_cmd (void)
     paint_panel (panel);
 }
 
+#ifndef HAVE_X
 void
 save_setup_cmd (void)
 {
@@ -1450,12 +1459,8 @@ save_setup_cmd (void)
     sync_profiles ();
     str = g_strconcat ( _(" Setup saved to ~/"), PROFILE_NAME, NULL);
     
-#ifdef HAVE_GNOME
-    set_hintbar (str);
-#else
     message (0, _(" Setup "), str);
-#endif
-   g_free (str);
+    g_free (str);
 }
 
 void
@@ -1484,7 +1489,6 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
     do_refresh ();
 }
 
-#ifndef HAVE_GNOME
 void
 info_cmd_no_menu (void)
 {
@@ -1549,7 +1553,7 @@ quick_view_cmd (void)
 	change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }
-#endif
+#endif /* !HAVE_X */
 
 /* Handle the tree internal listing modes switching */
 static int
@@ -1557,9 +1561,9 @@ set_basic_panel_listing_to (int panel_index, int listing_mode)
 {
     WPanel *p = (WPanel *) get_panel_widget (panel_index);
 
-#ifndef HAVE_GNOME
+#ifndef HAVE_X
     switch_to_listing (panel_index);
-#endif
+#endif /* !HAVE_X */
     p->list_type = listing_mode;
     if (set_panel_formats (p))
 	return 0;

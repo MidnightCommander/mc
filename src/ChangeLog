@@ -1,3 +1,7 @@
+2001-06-22  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c [HAVE_X]: Disable more code. Reorder includes.
+
 2001-06-20  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Remove MenuBarEmpty. From Andrew V. Samoilov.
