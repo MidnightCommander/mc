@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.51\n"
-"POT-Creation-Date: 2001-01-26 14:35+0100\n"
+"POT-Creation-Date: 2001-02-04 19:02+0100\n"
 "PO-Revision-Date: 2000-09-01 03:29+1\n"
 "Last-Translator: Marco Ciampa <ciampa@ismaa.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
@@ -33,7 +33,7 @@ msgstr " Premi tasto veloce macro: "
 
 #: edit/edit_key_translator.c:149
 msgid " Insert Literal "
-msgstr " Inserisci letteralmente "
+msgstr " Ins. letteralmente "
 
 #: edit/edit_key_translator.c:149
 msgid " Press any key: "
@@ -512,9 +512,8 @@ msgid "Home directory"
 msgstr "Directory home"
 
 #: gnome/gdesktop-init.c:158
-#, fuzzy
 msgid "Trash"
-msgstr "Svuota Cestino"
+msgstr "Cestino"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -1781,7 +1780,7 @@ msgstr "Chiudi le finestre le cui directory non possono essere raggiunte"
 #: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
 #: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
 #: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2038 gtkedit/editwidget.c:1024
-#: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Errore "
 
@@ -1830,9 +1829,8 @@ msgid "Error trying to stat file:"
 msgstr "Errore nel provare lo stat del file:"
 
 #: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
-#, fuzzy
 msgid "mc.hlp"
-msgstr "aiuto"
+msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
 msgid " Error writing to pipe: "
@@ -3780,12 +3778,12 @@ msgstr "&Proprietario"
 msgid "&Group"
 msgstr "&Gruppo"
 
-#: src/dir.c:386
+#: src/dir.c:396
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Il file '%s' esiste ma non può essere eseguito stat su di esso: %s"
 
-#: src/dir.c:657
+#: src/dir.c:667
 msgid "Unknown"
 msgstr "Sconosciuto"
 
@@ -5729,7 +5727,7 @@ msgstr "Vedi più tradizionale gmc"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Mostra la directory che contiene il file di partenza .links e esce"
 
-#: src/main.c:3077
+#: src/main.c:3086
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5737,11 +5735,11 @@ msgstr ""
 "Non posso aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
-#: src/main.c:3155
+#: src/main.c:3164
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:3156
+#: src/main.c:3165
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -6256,17 +6254,17 @@ msgstr ""
 " Inserisci nuovo numero di linea:"
 
 #: src/view.c:1923
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
-" La linea corrente è %d.\n"
-" Inserisci nuovo numero di linea:"
+" L'indirizzo corrente è 0x%lx.\n"
+" Inserisci il nuovo indirizzo:"
 
 #: src/view.c:1925
 msgid " Goto Address "
-msgstr ""
+msgstr " Vai all'indirizzo "
 
 #: src/view.c:1956
 msgid " Enter regexp:"
@@ -6839,7 +6837,6 @@ msgstr "ftpfs: memorizzazione file %d (%d)"
 
 #. This is place of next pointer
 #: vfs/ftpfs.c:1682
-#, fuzzy
 msgid "File Transfer Protocol (ftp)"
 msgstr "Protocollo Trasferimento File (ftp)"
 
