@@ -11,8 +11,8 @@ CFLAGS   = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS) @MCCFLAGS@ -DREGEX_MALLOC
 LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
-LIBS     = $(XLIBS) @TERMNET@ $(XLIB) @TERMNET@ @MCLIBS@
-OURLIBS  = @LVFS@ @LSLANG@ @LEDIT@ @LGPM@ @LINTL@
+LIBS     = @LSLANG@ @LEDIT@ @LVFS@ @LINTL@ @LGPM@ \
+	$(XLIBS) $(XLIB) @TERMNET@ @MCLIBS@ @LIBICONV@
 DEPLIBS  = $(top_builddir)/vfs/@LIBVFS@ $(top_builddir)/slang/@LIBSLANG@ \
 	$(top_builddir)/edit/@LIBEDIT_A@ @INTLDEPS@
 INSTALL  = @INSTALL@
@@ -81,7 +81,7 @@ check:
 	@echo no tests are supplied.
 
 mc: $(OBJS) $(DEPLIBS)
-	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
+	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(LIBS) 
 
 man2hlp: man2hlp.o
 	$(CC) $(LDFLAGS) man2hlp.o -o man2hlp

@@ -1,5 +1,9 @@
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in (OURLIBS): Merge with ...
+	(LIBS): ... this. Add @LIBICONV@.
+	Reported by Libor Motyèka <l_motycka@ortex.cz>
+
 	* subshell.c (subshell_name_quote): New function. Quote all
 	characters as octals, use command substitution.
 	(do_subshell_chdir): Use subshell_name_quote(). Don't change
