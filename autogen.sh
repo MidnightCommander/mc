@@ -78,7 +78,6 @@ else
   # Ugly way to parse the instructions gettexize gives us.
   m4files="`cat tmpout | sed -n -e '/^Please/,/^from/s/^  *//p'`"
   fromdir=`cat tmpout | sed -n -e '/^Please/,/^from/s/^from the \([^ ]*\) .*$/\1/p'`
-  rm -f tmpout
   rm -rf gettext.m4
   mkdir gettext.m4
   for i in $m4files; do
@@ -86,6 +85,8 @@ else
   done
   ACLOCAL_INCLUDES="-I gettext.m4"
 fi
+
+rm -f tmpout
 
 # Some old version of GNU build tools fail to set error codes.
 # Check that they generate some of the files they should.
