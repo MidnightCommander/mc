@@ -5,6 +5,7 @@
 	handling out of get_byte.
 	* view.c: Cleaned up the code. Added error handling for the
 	growing buffer case.
+	* util.c (extension): Simplified the code.
 
 2004-12-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 

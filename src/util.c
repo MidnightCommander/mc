@@ -591,17 +591,8 @@ int regexp_match (const char *pattern, const char *string, int match_type)
 
 const char *extension (const char *filename)
 {
-    const char *d;
-
-    if (!(*filename))
-	return "";
-    
-    d = filename + strlen (filename) - 1;
-    for (;d >= filename; d--){
-	if (*d == '.')
-	    return d+1;
-    }
-    return "";
+    const char *d = strrchr (filename, '.');
+    return (d != NULL) ? d + 1 : "";
 }
 
 int get_int (const char *file, const char *key, int def)
