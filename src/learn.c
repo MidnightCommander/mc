@@ -110,7 +110,7 @@ _("Please press the %s\n"
 	int seq_ok;
 
 	if (*seq && strcmp (seq, "\\e") && strcmp (seq, "\\e\\e")
-	    && strcmp (seq, "^m" ) 
+	    && strcmp (seq, "^m" ) && strcmp (seq, "^i" )
             && (seq [1] || (*seq < ' ' || *seq > '~'))){
 	    
 	    learnchanged = 1;
