@@ -2080,7 +2080,7 @@ do_enter_on_file_entry (file_entry *fe)
 int
 do_enter (WPanel *panel)
 {
-    do_enter_on_file_entry (selection (panel));
+    return do_enter_on_file_entry (selection (panel));
 }
 
 static void

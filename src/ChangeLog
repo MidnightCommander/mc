@@ -1,3 +1,7 @@
+1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (do_enter): Return the value from this.
+
 1998-12-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* dir.c (link_isdir): Fetch the information from
