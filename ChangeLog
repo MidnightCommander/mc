@@ -1,5 +1,10 @@
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4: Replace smbfs and SAMBAFILES variables with
+	use_smbfs.
+	* configure.in: Likewise.
+	* INSTALL: Document --with-samba.
+
 	* configure.in: Roll --enable-mcserv-install into ...
 	* acinclude.m4: ... --with-mcfs.  Adjust makefiles.
 	* INSTALL: Document --with-mcfs.

@@ -650,7 +650,7 @@ dnl Version for the RedHat package, without dashes
 RH_VERSION=`echo $VERSION | sed 's/-//'`
 AC_SUBST(RH_VERSION)
 
-if test "x$SAMBAFILES" != x; then
+if test -n "$use_smbfs"; then
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi
 
@@ -658,7 +658,7 @@ AM_CONDITIONAL(USE_EDIT, [test -n "$LIBEDIT_A"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
 AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])
-AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$SAMBAFILES"])
+AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
 AM_CONDITIONAL(INCLUDED_SLANG,
 	       [test "x$slang_use_system_installed_lib" = xfalse])

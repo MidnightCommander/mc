@@ -109,21 +109,17 @@ AC_DEFUN([MC_WITH_VFS],[
   dnl
   dnl Samba support
   dnl
-  smbfs=""
-  SAMBAFILES=""
+  use_smbfs=
   AC_ARG_WITH(samba,
   	  [  --with-samba             Support smb virtual file system [[no]]],
 	  [if test "x$withval" != "xno"; then
   		  AC_DEFINE(WITH_SMBFS, 1, [Define to enable VFS over SMB])
 	          vfs_flags="$vfs_flags, smbfs"
-		  smbfs="smbfs.o"
-		  SAMBAFILES="\$(SAMBAFILES)"
+		  use_smbfs=yes
   	  fi
   ])
-  AC_SUBST(smbfs)
-  AC_SUBST(SAMBAFILES)
 
-  if test "x$smbfs" != x ; then
+  if test -n "$use_smbfs"; then
   #################################################
   # set Samba configuration directory location
   configdir="/etc"

@@ -139,6 +139,13 @@ the directory base where you installed the gpm package.
      implementation of mcfs is not optimized for speed.  There may be
      security issues with mcserv - don't run it if you don't need it.
 
+`--with-samba'
+     This option enables remote VFS over the SMB protocol.  A stripped
+     down version of samba distibuted with the sources is compiled and
+     linked with the mc executable.  It is recommended that you install
+     Samba client, since mc uses some files from Samba under certain
+     conditions.  Please visit http://www.samba.org/ to learn more.
+
 `--disable-largefile'
      This option disables support for large files (2 gigabytes and more)
      on the systems where file operations use 32-bit offsets by default,
