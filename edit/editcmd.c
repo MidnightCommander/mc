@@ -45,17 +45,22 @@
 #define edit_get_load_file(f,h) input_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(f,h) input_dialog (h, _(" Enter file name: "), f)
 
+struct selection {
+   unsigned char * text;
+   int len;
+};
+
 /* globals: */
 
 /* search and replace: */
-int replace_scanf = 0;
-int replace_regexp = 0;
-int replace_all = 0;
-int replace_prompt = 1;
-int replace_whole = 0;
-int replace_case = 0;
-int replace_backwards = 0;
-int search_create_bookmark = 0;
+static int replace_scanf = 0;
+static int replace_regexp = 0;
+static int replace_all = 0;
+static int replace_prompt = 1;
+static int replace_whole = 0;
+static int replace_case = 0;
+static int replace_backwards = 0;
+static int search_create_bookmark = 0;
 
 /* queries on a save */
 int edit_confirm_save = 1;
@@ -63,12 +68,16 @@ int edit_confirm_save = 1;
 #define NUM_REPL_ARGS 64
 #define MAX_REPL_LEN 1024
 
+static int edit_save_cmd (WEdit *edit);
+static unsigned char *edit_get_block (WEdit *edit, long start,
+				      long finish, int *l);
+
 static inline int my_lower_case (int c)
 {
     return tolower(c & 0xFF);
 }
 
-char *strcasechr (const unsigned char *s, int c)
+static char *strcasechr (const unsigned char *s, int c)
 {
     for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
 	if (*s == '\0')
@@ -195,7 +204,7 @@ void edit_refresh_cmd (WEdit * edit)
 			    c) rename <tempnam> to <filename>. */
 
 /* returns 0 on error */
-int
+static int
 edit_save_file (WEdit *edit, const char *filename)
 {
     char *p;
@@ -764,7 +773,8 @@ int edit_save_confirm_cmd (WEdit * edit)
 
 
 /* returns 1 on success */
-int edit_save_cmd (WEdit * edit)
+static int
+edit_save_cmd (WEdit *edit)
 {
     int res, save_lock = 0;
     
@@ -1088,7 +1098,7 @@ edit_delete_column_of_text (WEdit * edit)
 }
 
 /* if success return 0 */
-int
+static int
 edit_block_delete (WEdit *edit)
 {
     long count;
@@ -2099,7 +2109,7 @@ edit_ok_to_exit (WEdit *edit)
 #define TEMP_BUF_LEN 1024
 
 /* Return a null terminated length of text. Result must be g_free'd */
-unsigned char *
+static unsigned char *
 edit_get_block (WEdit *edit, long start, long finish, int *l)
 {
     unsigned char *s, *r;
@@ -2509,19 +2519,6 @@ int edit_print_string (WEdit * e, const char *s)
     return i;
 }
 
-int edit_printf (WEdit * e, const char *fmt, ...)
-{
-    int i;
-    va_list pa;
-    char s[1024];
-    va_start (pa, fmt);
-    g_vsnprintf (s, sizeof (s), fmt, pa);
-    i = edit_print_string (e, s);
-    va_end (pa);
-    return i;
-}
-
-/* FIXME: does this function break NT_OS2 ? */
 
 static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
 {

@@ -57,11 +57,6 @@ int option_edit_bottom_extreme = 0;
 char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = "~";
 
-static struct selection selection;
-static int current_selection = 0;
-/* Note: selection.text = selection_history[current_selection].text */
-static struct selection selection_history[NUM_SELECTION_HISTORY];
-
 /*
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
@@ -94,6 +89,7 @@ static struct selection selection_history[NUM_SELECTION_HISTORY];
 
 
 static void edit_move_to_prev_col (WEdit *edit, long p);
+static void user_menu (WEdit *edit);
 
 #ifndef NO_INLINE_GETBYTE
 
@@ -1627,34 +1623,6 @@ void edit_push_markers (WEdit * edit)
     edit_push_action (edit, MARK_2 + edit->mark2);
 }
 
-/* return -1 on nothing to store or error, zero otherwise */
-void
-edit_get_selection (WEdit *edit)
-{
-    long start_mark, end_mark;
-    if (eval_marks (edit, &start_mark, &end_mark))
-	return;
-    if (selection_history[current_selection].len < 4096)	/* large selections should not be held -- to save memory */
-	current_selection =
-	    (current_selection + 1) % NUM_SELECTION_HISTORY;
-    selection_history[current_selection].len = end_mark - start_mark;
-    g_free (selection_history[current_selection].text);
-    selection_history[current_selection].text =
-	g_malloc (selection_history[current_selection].len + 1);
-    if (!selection_history[current_selection].text) {
-	selection_history[current_selection].text = g_malloc (1);
-	*selection_history[current_selection].text = 0;
-	selection_history[current_selection].len = 0;
-    } else {
-	unsigned char *p = selection_history[current_selection].text;
-	for (; start_mark < end_mark; start_mark++)
-	    *p++ = edit_get_byte (edit, start_mark);
-	*p = 0;
-    }
-    selection.text = selection_history[current_selection].text;
-    selection.len = selection_history[current_selection].len;
-}
-
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2)
 {
     edit->mark1 = m1;
@@ -1717,7 +1685,8 @@ my_type_of (int c)
     return r;
 }
 
-void edit_left_word_move (WEdit * edit, int s)
+static void
+edit_left_word_move (WEdit *edit, int s)
 {
     for (;;) {
 	int c1, c2;
@@ -1742,7 +1711,8 @@ static void edit_left_word_move_cmd (WEdit * edit)
     edit->force |= REDRAW_PAGE;
 }
 
-void edit_right_word_move (WEdit * edit, int s)
+static void
+edit_right_word_move (WEdit *edit, int s)
 {
     for (;;) {
 	int c1, c2;
@@ -2686,16 +2656,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 }
 
 
-/* either command or char_for_insertion must be passed as -1 */
-/* returns 0 if command is a macro that was not found, 1 otherwise */
-int edit_execute_command (WEdit * edit, int command, int char_for_insertion)
-{
-    int r;
-    r = edit_execute_cmd (edit, command, char_for_insertion);
-    edit_update_screen (edit);
-    return r;
-}
-
 static void
 edit_execute_macro (WEdit *edit, struct macro macro[], int n)
 {
@@ -2715,7 +2675,7 @@ edit_execute_macro (WEdit *edit, struct macro macro[], int n)
 }
 
 /* User edit menu, like user menu (F2) but only in editor. */
-void
+static void
 user_menu (WEdit * edit)
 {
     FILE *fd;

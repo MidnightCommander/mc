@@ -97,22 +97,6 @@ int book_mark_query_color (WEdit * edit, int line, int c)
     return 0;
 }
 
-/* returns the number of bookmarks at this line and a list of their colors in c 
-   up to a maximum of 8 colors */
-int book_mark_query_all (WEdit * edit, int line, int *c)
-{
-    int i;
-    struct _book_mark *p;
-    if (!edit->book_mark)
-	return 0;
-    for (i = 0, p = book_mark_find (edit, line); p && i < 8; p = p->prev, i++) {
-	if (p->line != line)
-	    return i;
-	c[i] = p->c;
-    }
-    return i;
-}
-
 /* insert a bookmark at this line */
 void
 book_mark_insert (WEdit *edit, int line, int c)

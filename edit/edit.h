@@ -121,11 +121,6 @@ struct macro {
     short ch;
 };
 
-struct selection {
-   unsigned char * text;
-   int len;
-};
-
 struct WEdit;
 typedef struct WEdit WEdit;
 
@@ -136,7 +131,6 @@ void edit_init_menu_normal (void);
 void edit_done_menu (void);
 void menu_save_mode_cmd (void);
 int edit_raw_key_query (char *heading, char *query, int cancel);
-char *strcasechr (const unsigned char *s, int c);
 int edit (const char *_file, int line);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 
@@ -179,7 +173,6 @@ void edit_update_curs_col (WEdit * edit);
 void edit_block_copy_cmd (WEdit * edit);
 void edit_block_move_cmd (WEdit * edit);
 int edit_block_delete_cmd (WEdit * edit);
-int edit_block_delete (WEdit * edit);
 void edit_delete_line (WEdit * edit);
 
 int edit_delete (WEdit * edit);
@@ -188,10 +181,8 @@ int edit_cursor_move (WEdit * edit, long increment);
 void edit_push_action (WEdit * edit, long c, ...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
-int edit_save_file (WEdit * edit, const char *filename);
 long edit_write_stream (WEdit * edit, FILE * f);
 char *edit_get_write_filter (const char *writename, const char *filename);
-int edit_save_cmd (WEdit * edit);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit *edit, int lines, int columns,
@@ -220,22 +211,15 @@ void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
-int edit_execute_command (WEdit * edit, int command, int char_for_insertion);
 int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion);
 void edit_update_screen (WEdit * edit);
-int edit_printf (WEdit * e, const char *fmt, ...)
-    __attribute__ ((format (printf, 2, 3)));
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
-unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
 int edit_sort_cmd (WEdit * edit);
 int edit_ext_cmd (WEdit * edit);
 void edit_help_cmd (WEdit * edit);
-void edit_left_word_move (WEdit * edit, int s);
-void edit_right_word_move (WEdit * edit, int s);
-void edit_get_selection (WEdit * edit);
 
 int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n);
 int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k);
@@ -263,7 +247,6 @@ void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
-void user_menu (WEdit *edit);
 int line_is_blank (WEdit *edit, long line);
 int edit_indent_width (WEdit *edit, long p);
 void edit_insert_indent (WEdit *edit, int indent);
