@@ -3966,7 +3966,7 @@ msgstr " Не може да се стартират програми в не-л�
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Не са открити подходящи елементи в %s "
 
 #. Create listbox

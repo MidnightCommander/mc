@@ -3976,7 +3976,7 @@ msgstr ""
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " V %s nejsou odpovídající polo¾ky "
 
 #. Create listbox

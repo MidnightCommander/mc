@@ -3976,7 +3976,7 @@ msgstr "U kunt geen programma's uitvoeren vanuit een niet-lokale map"
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr "Geen passende items gevonden in %s "
 
 #. Create listbox

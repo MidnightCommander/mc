@@ -3951,7 +3951,7 @@ msgstr " Немагчыма выконваць праграмы, знаходзячыся не ў лякальным каталёгу "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Ня адшукана запісаў, што адпавядаюць, у %s"
 
 #. Create listbox

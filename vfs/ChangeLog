@@ -1166,7 +1166,7 @@
 2001-04-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/includes/proto.h, samba/libsmb/nterr.c (get_nt_error): return
-	NULL when appropriative error message can't be found as it is expected
+	NULL when suitable error message can't be found as it is expected
 	in cli_errstr(). Return type changed to const char *
 
 	* smbfs.c (smbfs_fill_names): implemented

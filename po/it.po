@@ -3906,7 +3906,7 @@ msgstr " Impossibile eseguire programmi su una directory non locale"
 
 #: src/user.c:769
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Non trovo voci appropriate in %s "
 
 #. Create listbox

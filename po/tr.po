@@ -3974,7 +3974,7 @@ msgstr " Bir uzak dizine giriþ yapýlýrken uygulamalar çalýþtýrýlamaz "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " %s içinde tahsis edilebilir bir girdi yok"
 
 #. Create listbox

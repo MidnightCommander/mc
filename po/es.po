@@ -3847,7 +3847,7 @@ msgstr " No puedo ejecutar programas estando en un directorio virtual "
 
 #: src/user.c:769
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " No se encuentran entradas apropiadas en %s "
 
 #: src/user.c:775

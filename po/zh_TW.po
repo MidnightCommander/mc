@@ -3968,7 +3968,7 @@ msgstr " 無法在登入於非本地檔案系統的時候執行程式 "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr "沒有在 %s 中找到符合的項目"
 
 #. Create listbox

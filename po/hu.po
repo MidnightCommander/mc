@@ -3935,7 +3935,7 @@ msgstr " Távoli könyvtárból nem lehet programokat futtatni. "
 
 #: src/user.c:769
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Nincsenek megfelelõ bejegyzések ebben: \"%s\" "
 
 #. Create listbox

@@ -3971,7 +3971,7 @@ msgstr "  ローカルでないディレクトリにいる時にプログラムの実行はできません "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " %s に特定のエントリーは見つかりませんでした "
 
 #. Create listbox

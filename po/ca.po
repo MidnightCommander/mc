@@ -3997,7 +3997,7 @@ msgstr " No puc executar programes dins d'un directori no-local "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " No s'han trobat entrades apropiades a %s "
 
 #. Create listbox

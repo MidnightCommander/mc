@@ -774,7 +774,7 @@ void user_menu_cmd (WEdit *edit_widget)
     }
 
     if (menu_lines == 0) {
-	message (1, MSG_ERROR, _(" No appropriative entries found in %s "), menu);
+	message (1, MSG_ERROR, _(" No suitable entries found in %s "), menu);
     } else {
 
     max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);

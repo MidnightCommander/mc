@@ -3979,7 +3979,7 @@ msgstr " Ne morem poganjati programov dokler sem prijavljen na oddaljen imenik"
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Ustrezni vpisi za %s niso bili najdeni "
 
 #. Create listbox

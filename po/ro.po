@@ -3988,7 +3988,7 @@ msgstr " Nu pot rula programe în timp ce sunt într-un director non-local"
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Nu au fost gãsite intrãri adecvate în %s "
 
 #. Create listbox

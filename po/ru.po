@@ -3757,7 +3757,7 @@ msgstr " Невозможно исполнять программы, будучи не в локальном каталоге "
 
 #: src/user.c:769
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Не найдено подходящих записей в %s"
 
 #: src/user.c:775

@@ -3939,7 +3939,7 @@ msgstr " 当登录到非本地的目录时无法运行程序 "
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " 在 %s 没有找到相应的项 "
 
 #. Create listbox

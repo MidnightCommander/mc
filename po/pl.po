@@ -3984,7 +3984,7 @@ msgstr " Wykonywanie poleceñ jest mo¿liwe tylko w lokalnym katalogu "
 
 #: src/user.c:1
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " Nie odnaleziono odpowiednich elementów w %s "
 
 #. Create listbox

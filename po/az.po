@@ -3975,7 +3975,7 @@ msgstr " Yerli olmayan dsoye sisteminə bağlı ikən proqram başlada bilmirəm
 
 #: src/user.c:766
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " %s'də işlədiləbiləcək girişlər tapıla bilmədi "
 
 #. Create listbox

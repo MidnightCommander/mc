@@ -3834,7 +3834,7 @@ msgstr " 원격지로 로깅한 상태에서는 풀그림을 실행할 수 없습니다 "
 
 #: src/user.c:769
 #, c-format
-msgid " No appropriative entries found in %s "
+msgid " No suitable entries found in %s "
 msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
 
 #: src/user.c:775
