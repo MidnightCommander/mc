@@ -100,15 +100,6 @@
 #define NO_INFOMOUNT
 
 typedef unsigned int umode_t;
-#define S_IFLNK 0
-#define S_ISLNK(x) 0
-
-#ifdef __EMX__
-
-#define S_IFBLK 0
-#define S_ISBLK(x) 0
-
-#endif /* __EMX__ */
 
 #ifdef __MINGW32__
 
@@ -134,12 +125,8 @@ typedef int pid_t;
 #define INLINE
 #define inline
 
-#define S_ISCHR(m)    (((m) & S_IFMT) == S_IFCHR)
 #define S_ISDIR(m)    (((m) & S_IFMT) == S_IFDIR)
 #define S_ISREG(m)    (((m) & S_IFMT) == S_IFREG)
-
-#define S_ISFIFO(m)   0
-#define S_ISBLK(x)    0
 
 #define S_IRWXU         0000700
 #define S_IRUSR         0000400
@@ -201,10 +188,6 @@ typedef int pid_t;
 #define INLINE
 #define inline
 
-#define S_ISFIFO(m)   0
-#define S_ISBLK(x)    0
-
-#define S_ISCHR(m)    (((m) & S_IFCHR) != 0)
 #define S_ISDIR(m)    (((m) & S_IFDIR) != 0)
 #define S_ISREG(m)    (((m) & S_IFREG) != 0)
 

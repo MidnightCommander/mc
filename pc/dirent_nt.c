@@ -1,13 +1,13 @@
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
+
+/* glib provides a replacement for MSVC */
+#ifndef _MSC_VER
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
 #include <errno.h>
-#include "dirent.h"
+#include "../src/global.h"
 
 DIR *opendir (const char * a_dir)
 {
@@ -93,3 +93,4 @@ int closedir (DIR *dd_dir)
 	return 1;
 }
 
+#endif /* _MSC_VER */
