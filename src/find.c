@@ -55,7 +55,7 @@
 #endif
 
 /* Size of the find parameters window */
-#define FIND_Y 12
+#define FIND_Y 14
 static int FIND_X = 50;
 
 /* Size of the find window */
@@ -156,6 +156,8 @@ static void get_list_info (char **file, char **dir);
  *
  */
 
+static int case_sensitive = 1;
+
 static int
 find_parameters (char **start_dir, char **pattern, char **content)
 {
@@ -163,6 +165,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
 #ifndef HAVE_GNOME
     char *temp_dir;
 #endif
+    WCheck *case_sense;
+    static char* case_label = N_("case sensi&tive");
+
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
@@ -205,6 +210,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		b2 = FIND_X - (strlen(buts[2]) + 6);
 		
 		i18n_flag = 1;
+		case_label = _(case_label);
 	}
 	
 #endif /* ENABLE_NLS */
@@ -220,16 +226,20 @@ find_par_start:
     find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
 			   common_dialog_callback, "[Find File]", "findfile",
 			   DLG_CENTER | DLG_GRID);
+
     x_set_dialog_title (find_dlg, _("Find File"));
 
-	add_widgetl (find_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
+	add_widgetl (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
 		buts[2], 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
 #ifndef HAVE_GNOME
-	add_widgetl (find_dlg, button_new (9, b1, B_TREE, NORMAL_BUTTON,
+	add_widgetl (find_dlg, button_new (11, b1, B_TREE, NORMAL_BUTTON,
 		buts[1], 0, 0, "tree"), XV_WLAY_RIGHTOF);
 #endif
-	add_widgetl (find_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
+	add_widgetl (find_dlg, button_new (11, b0, B_ENTER, DEFPUSH_BUTTON,
 		buts[0], 0, 0, "ok"), XV_WLAY_CENTERROW);
+
+    case_sense = check_new (9, 3, case_sensitive, case_label, "find-case-check");
+    add_widgetl (find_dlg, case_sense, XV_WLAY_RIGHTDOWN);
 
 	in_with  = input_new (7, istart, INPUT_COLOR, ilen,	in_contents, "content");
     add_widgetl (find_dlg, in_with, XV_WLAY_BELOWOF);
@@ -254,6 +264,7 @@ find_par_start:
 #ifndef HAVE_GNOME
     case B_TREE:
 	temp_dir = g_strdup (in_start->buffer);
+	case_sensitive = case_sense->state & C_BOOL;
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0){
@@ -271,6 +282,7 @@ find_par_start:
 #endif
 	
     default:
+	case_sensitive = case_sense->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern   = g_strdup (in_name->buffer);
@@ -417,6 +429,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
     int i;
     pid_t pid;
     static char *egrep_path;
+    char *egrep_opts = case_sensitive ? "-n" : "-in";
 
     fname = concat_dir_and_file (directory, filename);
 
@@ -439,9 +452,9 @@ search_content (Dlg_head *h, char *directory, char *filename)
 	egrep_path = locate_egrep ();
 
 #ifndef GREP_STDIN
-    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, "-n", content_pattern, NULL);
+    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, NULL);
 #else /* GREP_STDIN */
-    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, "-n", content_pattern, "-", NULL);
+    pipe = mc_doublepopen (file_fd, -1, &pid, egrep_path, egrep_path, egrep_opts, content_pattern, "-", NULL);
 #endif /* GREP STDIN */
 	
     if (pipe == -1){

@@ -1,3 +1,10 @@
+2001-04-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* find.c (find_parameters): Add a checkbox for case insensitive
+	content search.
+	(search_content): Pass `-i' to egrep for case insensitive
+	search.
+
 2001-03-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* panel.h, screen.c (panel_new): panel_name constified to do gcc
