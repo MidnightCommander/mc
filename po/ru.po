@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.46\n"
-"POT-Creation-Date: 2000-05-15 23:10+0000\n"
-"PO-Revision-Date: 2000-05-19 19:06+00:00\n"
+"POT-Creation-Date: 2000-05-26 20:00+0000\n"
+"PO-Revision-Date: 2000-05-26 20:05+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -507,7 +507,7 @@ msgid "Desktop"
 msgstr "Рабочий стол"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:141
+#: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "Персональный каталог"
 
@@ -674,7 +674,7 @@ msgstr "закончен."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 msgid "Password:"
 msgstr "Пароль:"
 
@@ -3044,7 +3044,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:669
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
 msgid " Oops... "
 msgstr " Ой... "
 
@@ -3596,15 +3596,15 @@ msgstr " Введите имя машины (детали по F1): "
 msgid " Could not chdir to %s "
 msgstr " Невозможно перейти в %s "
 
-#: src/cmd.c:1382 src/widget.c:1163
+#: src/cmd.c:1382 src/widget.c:1162
 msgid " Link to a remote machine "
 msgstr " Соединение с удаленной машиной "
 
-#: src/cmd.c:1388 src/widget.c:1164
+#: src/cmd.c:1388 src/widget.c:1163
 msgid " FTP to machine "
 msgstr " FTP-соединение с удаленной машиной "
 
-#: src/cmd.c:1394 src/widget.c:1165
+#: src/cmd.c:1394 src/widget.c:1164
 msgid " SMB link to machine "
 msgstr " SMB связь с машиной "
 
@@ -3739,7 +3739,7 @@ msgstr "Файл '%s' существует, но невозможно получить свойства: %s"
 msgid "Unknown"
 msgstr "Неизвестный"
 
-#: src/ext.c:143 src/user.c:542
+#: src/ext.c:143 src/user.c:544
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3748,7 +3748,7 @@ msgstr ""
 " Невозможно сформировать уникальное имя файла \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:554
+#: src/ext.c:150 src/user.c:556
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3757,7 +3757,7 @@ msgstr ""
 " Невозможно создать временный командный файл \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:576
+#: src/ext.c:165 src/user.c:578
 msgid " Parameter "
 msgstr " Параметр "
 
@@ -3765,23 +3765,37 @@ msgstr " Параметр "
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " Невозможно выполнить команду в каталоге Виртуальной Файловой Системы"
 
-#: src/ext.c:412
+#: src/ext.c:414
 msgid " file error"
 msgstr " ошибка файла"
 
-#: src/ext.c:413
+#: src/ext.c:415
 msgid "Format of the "
 msgstr "Формат "
 
-#: src/ext.c:431
+#: src/ext.c:417
+msgid ""
+"mc.ext file has changed\n"
+"with version 3.0. It seems that installation\n"
+"failed. Please fetch a fresh new copy from the\n"
+"Midnight Commander package or in case you don't\n"
+"have any, get it from ftp://ftp.nuclecu.unam.mx."
+msgstr ""
+"mc.ext файл изменен\n"
+"с версии 3.0. Возможно произошел сбой при установке.\n"
+"Пожалуйста возьмите свежую копию из пакета\n"
+"Midnight Commander или если у вас его нет, то\n"
+"с сервера ftp://ftp.nuclecu.unam.mx."
+
+#: src/ext.c:432
 msgid " file error "
 msgstr " ошибка файла "
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid "Format of the ~/"
 msgstr "Формат ~/"
 
-#: src/ext.c:432
+#: src/ext.c:433
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3791,7 +3805,7 @@ msgstr ""
 "в версии 3.0. Вы можете или\n"
 "скопировать его из "
 
-#: src/ext.c:434
+#: src/ext.c:435
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3799,7 +3813,7 @@ msgstr ""
 "mc.ext или использовать этот\n"
 "файл как пример написания.\n"
 
-#: src/ext.c:436
+#: src/ext.c:437
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext будет использован в настоящий момент."
 
@@ -4639,7 +4653,7 @@ msgstr " Невозможно найти узел [Contents] в файле помощи "
 msgid " Help "
 msgstr " Помощь "
 
-#: src/help.c:766 src/user.c:687
+#: src/help.c:766 src/user.c:689
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -5465,8 +5479,7 @@ msgstr "-l, --ftplog файл  Записывать команды ftpfs в файл.\n"
 #: src/main.c:2518
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
-"-M, --memory файл  [ТОЛЬКО для РАЗРАБОТЧИКОВ: Запись сообщений MAD в "
-"файл.]\n"
+"-M, --memory файл  [ТОЛЬКО для РАЗРАБОТЧИКОВ: Запись сообщений MAD в файл.]\n"
 
 #: src/main.c:2520
 msgid ""
@@ -5484,7 +5497,7 @@ msgstr "-t, --termcap      Активировать поддержку переменной TERMCAP.\n"
 #: src/main.c:2526
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
-msgstr ""
+msgstr "-S, --createcmdile Создать командный файл для установки каталога по умолчанию после выхода.\n"
 
 #: src/main.c:2529
 msgid ""
@@ -5502,7 +5515,8 @@ msgid ""
 msgstr ""
 "-v, --view fname    Запуск в режиме просмотра файла.\n"
 "\"-V, --version     Сообщить версию и параметры настройки.\n"
-"\"-x, --xterm       Поддержка мыши в xterm и сохранения/восстановления экрана.\n"
+"\"-x, --xterm       Поддержка мыши в xterm и сохранения/восстановления "
+"экрана.\n"
 "+число              число - номер начальной строки для редактора.\n"
 
 #: src/main.c:2538
@@ -6000,32 +6014,44 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-#: src/user.c:271
+#: src/user.c:137
+msgid " Format error on file Extensions File "
+msgstr " Ошибка формата в файле Расширений файлов"
+
+#: src/user.c:138
+msgid " The %%var macro does not have a default "
+msgstr " Максрос %%var не имеет значений по умолчанию"
+
+#: src/user.c:139
+msgid " The %%var macros does not have a variable "
+msgstr " Макрос %%var не имеет переменных"
+
+#: src/user.c:273
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Неверное определение образца оболочки \"%c\". "
 
-#: src/user.c:424
+#: src/user.c:426
 msgid " Debug "
 msgstr " Отладка "
 
-#: src/user.c:433
+#: src/user.c:435
 msgid " ERROR: "
 msgstr " ОШИБКА: "
 
-#: src/user.c:437
+#: src/user.c:439
 msgid " True:  "
 msgstr " Истина: "
 
-#: src/user.c:439
+#: src/user.c:441
 msgid " False: "
 msgstr " Ложь: "
 
-#: src/user.c:645
+#: src/user.c:647
 msgid " Warning -- ignoring file "
 msgstr " Предупреждение - файл игнорируется "
 
-#: src/user.c:646
+#: src/user.c:648
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6035,18 +6061,17 @@ msgstr ""
 "и доступен другим на запись. Использование такого файла неприемлемо\n"
 "c точки зрения безопасности."
 
-#: src/user.c:670
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Невозможно исполнять программы, будучи не в локальном каталоге "
 
-#. FIXME: this message is not quite right
 #: src/user.c:770
 #, c-format
-msgid " Empty file %s "
-msgstr " Пустой файл %s "
+msgid " No appropriative entries found in %s "
+msgstr " Не найдено подходящих записей в %s"
 
 #. Create listbox
-#: src/user.c:779
+#: src/user.c:776
 msgid " User menu "
 msgstr " Меню пользователя "
 
@@ -6251,7 +6276,7 @@ msgstr "НеФормт"
 msgid "Format"
 msgstr "Формат"
 
-#: src/widget.c:995
+#: src/widget.c:994
 msgid " History "
 msgstr "История команд"
 
@@ -6559,8 +6584,7 @@ msgstr "fish: Ожидается начальная строка..."
 
 #: vfs/fish.c:228
 msgid "Sorry, we can not do password authenticated connections for now."
-msgstr ""
-"Извините, невозможно создать авторизованные паролем соединения сейчас."
+msgstr "Извините, невозможно создать авторизованные паролем соединения сейчас."
 
 #: vfs/fish.c:233
 msgid " fish: Password required for "
@@ -6627,141 +6651,141 @@ msgstr "Отмечена ошибка после прерывания."
 msgid "Aborted transfer would be successful."
 msgstr "Передача успешно прервана."
 
-#: vfs/ftpfs.c:318
+#: vfs/ftpfs.c:315
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Отсоединение от %s"
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:373
 msgid " FTP: Password required for "
 msgstr " FTP: Требуется пароль для "
 
-#: vfs/ftpfs.c:409
+#: vfs/ftpfs.c:402
 msgid " Proxy: Password required for "
 msgstr " Прокси: Требуется пароль для "
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:428
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: Посылается имя пользователя прокси"
 
-#: vfs/ftpfs.c:439
+#: vfs/ftpfs.c:432
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: Посылается пароль пользователя прокси"
 
-#: vfs/ftpfs.c:443
+#: vfs/ftpfs.c:436
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: Авторизация на прокси успешна"
 
-#: vfs/ftpfs.c:447
+#: vfs/ftpfs.c:440
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: Подключен к %s"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:457
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Посылается имя пользователя"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:462
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: Посылается пароль пользователя"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:467
 msgid "ftpfs: logged in"
 msgstr "ftpfs: зарегистрирован"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:482
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Ошибка регистрации пользователя %s "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:514
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr "Невозможно установить распределение источника (%s)"
 
-#: vfs/ftpfs.c:647
+#: vfs/ftpfs.c:640
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Неверное имя системы."
 
-#: vfs/ftpfs.c:667
+#: vfs/ftpfs.c:660
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Неверный адрес системы."
 
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:683
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: осуществляется соединение с %s"
 
-#: vfs/ftpfs.c:700
+#: vfs/ftpfs.c:693
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: соединение прервано пользователем"
 
-#: vfs/ftpfs.c:702
+#: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: сбой соединения с сервером: %s"
 
-#: vfs/ftpfs.c:744
+#: vfs/ftpfs.c:736
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
 
-#: vfs/ftpfs.c:930
+#: vfs/ftpfs.c:922
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: невозможно установить пассивный режим"
 
-#: vfs/ftpfs.c:1005
+#: vfs/ftpfs.c:997
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: прерывание передачи."
 
-#: vfs/ftpfs.c:1007
+#: vfs/ftpfs.c:999
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Ошибка прерывания: %s"
 
-#: vfs/ftpfs.c:1012
+#: vfs/ftpfs.c:1004
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: сбой прерывания"
 
-#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1200
+#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: сбой поиска текущего рабочего каталога."
 
-#: vfs/ftpfs.c:1111 vfs/ftpfs.c:1118
+#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: невозможно распознать символическую ссылку"
 
-#: vfs/ftpfs.c:1169
+#: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
 msgstr "Распознается символическая ссылка..."
 
-#: vfs/ftpfs.c:1188
+#: vfs/ftpfs.c:1180
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Чтение каталога FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1189
+#: vfs/ftpfs.c:1181
 msgid "(strict rfc959)"
 msgstr "(ограничение rfc959)"
 
-#: vfs/ftpfs.c:1190
+#: vfs/ftpfs.c:1182
 msgid "(chdir first)"
 msgstr "(сначала chdir)"
 
-#: vfs/ftpfs.c:1287
+#: vfs/ftpfs.c:1279
 msgid "ftpfs: failed"
 msgstr "ftpfs: ошибка"
 
-#: vfs/ftpfs.c:1297
+#: vfs/ftpfs.c:1289
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
-#: vfs/ftpfs.c:1360
+#: vfs/ftpfs.c:1352
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: запись файла %d (%d)"
 
-#: vfs/ftpfs.c:1775
+#: vfs/ftpfs.c:1767
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6894,11 +6918,11 @@ msgstr ""
 msgid "Unexpected EOF on archive file"
 msgstr "Неожиданный конец архивного файла"
 
-#: vfs/tar.c:339 vfs/tar.c:346
+#: vfs/tar.c:336 vfs/tar.c:343
 msgid "Inconsistent tar archive"
 msgstr "Несогласованный архив tar"
 
-#: vfs/tar.c:411
+#: vfs/tar.c:413
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6909,31 +6933,31 @@ msgstr ""
 "%s\n"
 "не похож на tar-архив."
 
-#: vfs/vfs.c:1151
+#: vfs/vfs.c:1139
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
-#: vfs/vfs.c:1794
+#: vfs/vfs.c:1781
 msgid "Could not parse:"
 msgstr "Невозможно проанализировать:"
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
 msgstr "Остальные ошибки анализа будут проигнорированы."
 
-#: vfs/vfs.c:1796
+#: vfs/vfs.c:1783
 msgid "(sorry)"
 msgstr "(извините)"
 
-#: vfs/vfs.c:1807
+#: vfs/vfs.c:1794
 msgid "Internal error:"
 msgstr " Внутренняя ошибка:"
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld байт перенесено)"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1805
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld байт перенесено"
