@@ -1,6 +1,7 @@
 mx
 plain-gmc
 corba-gmc
+gmc-client
 Makefile
 .depend
 mc.metadata
@@ -14,3 +15,6 @@ FileManager-stubs.c
 FileManager-skels.c
 FileManager-impl.c
 make-thumb
+magicdev-common.c
+magicdev-stubs.c
+magicdev.h
