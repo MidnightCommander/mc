@@ -2092,6 +2092,10 @@ print_mc_usage (poptContext ctx, FILE * stream)
 static void
 print_color_usage (void)
 {
+    /*
+     * FIXME: undocumented keywords: viewunderline, editnormal, editbold,
+     * and editmarked.  To preserve translations, lines should be split.
+     */
     /* TRANSLATORS: don't translate keywords and names of colors */
     fputs (_("--colors KEYWORD={FORE},{BACK}\n\n"
 	     "{FORE} and {BACK} can be omitted, and the default will be used\n"
