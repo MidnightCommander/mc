@@ -1,6 +1,10 @@
 Before 4.6.1
 ============
 
+Alt-O doesn't save new directory in the history.
+
+Remove duplicate history entries.
+
 Allow modifiers for keys in mc.lib, like "shift-up".
 
 Backup config files when writing them.
