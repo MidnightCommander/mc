@@ -60,8 +60,8 @@ SAMBA_DIST_TOPLEVEL =		\
 	acconfig.h		\
 	aclocal.m4		\
 	architecture.doc	\
-	configure		\
 	configure.in		\
+	configure		\
 	internals.doc		\
 	parsing.doc		\
 	samba-files		\
@@ -368,6 +368,14 @@ distcopy:
 	mkdir ../../mc-$(VERSION)/vfs/samba/ubiqx
 
 	(cd samba; $(CP) $(SAMBA_DIST_TOPLEVEL) ../../../mc-$(VERSION)/vfs/samba)
+<<<<<<< Make-mc.in
+	(cd samba; $(CP) include/*.h ../../../mc-$(VERSION)/vfs/samba/include)
+	(cd samba; $(CP) lib/*.[ch] ../../../mc-$(VERSION)/vfs/samba/lib)
+	(cd samba; $(CP) libsmb/*.[ch] ../../../mc-$(VERSION)/vfs/samba/libsmb)
+	(cd samba; $(CP) ubiqx/*.[ch] ../../../mc-$(VERSION)/vfs/samba/ubiqx)
+	(cd samba; $(CP) tests/*.c ../../../mc-$(VERSION)/vfs/samba/tests)
+	(cd samba; $(CP) param/*.c ../../../mc-$(VERSION)/vfs/samba/param)
+=======
 	(cd samba/include; $(CP) $(SAMBA_DIST_INCLUDE)* ../../../../mc-$(VERSION)/vfs/samba/include)
 	(cd samba/lib; $(CP) $(SAMBA_DIST_LIB) ../../../../mc-$(VERSION)/vfs/samba/lib)
 	(cd samba/libsmb; $(CP) $(SAMBA_DIST_LIBSMB) ../../../../mc-$(VERSION)/vfs/samba/libsmb)
@@ -375,6 +383,7 @@ distcopy:
 	(cd samba/smbwrapper; $(CP) $(SAMBA_DIST_SMBWRAPPER) ../../../../mc-$(VERSION)/vfs/samba/smbwrapper)
 	(cd samba/tests; $(CP) $(SAMBA_DIST_TESTS) ../../../../mc-$(VERSION)/vfs/samba/tests)
 	(cd samba/ubiqx; $(CP) $(SAMBA_DIST_UBIQX) ../../../../mc-$(VERSION)/vfs/samba/ubiqx)
+>>>>>>> 1.32
 	
 depend dep: mcdep
 

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-06-22 16:07-0500\n"
+"POT-Creation-Date: 1999-07-04 12:08-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -146,7 +146,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
-#: gnome/gscreen.c:2564
+#: gnome/gscreen.c:2403
 msgid "Show all files"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgid ""
 msgstr ""
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384 gnome/gscreen.c:2233
+#: gnome/glayout.c:384 gnome/gscreen.c:2072
 msgid "_Copy..."
 msgstr ""
 
@@ -652,7 +652,7 @@ msgstr ""
 msgid "Copy files"
 msgstr ""
 
-#: gnome/glayout.c:385 gnome/gscreen.c:2234
+#: gnome/glayout.c:385 gnome/gscreen.c:2073
 msgid "_Delete..."
 msgstr ""
 
@@ -660,7 +660,7 @@ msgstr ""
 msgid "Delete files"
 msgstr ""
 
-#: gnome/glayout.c:386 gnome/gscreen.c:2235
+#: gnome/glayout.c:386 gnome/gscreen.c:2074
 msgid "_Move..."
 msgstr ""
 
@@ -700,7 +700,7 @@ msgstr ""
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2054
+#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2083
 msgid "Search"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 msgid "Search for a file in the current Panel"
 msgstr ""
 
-#: gnome/glayout.c:403 gnome/gscreen.c:1448
+#: gnome/glayout.c:403 gnome/gscreen.c:1445
 msgid "_Rescan Directory"
 msgstr ""
 
@@ -805,7 +805,7 @@ msgstr ""
 msgid "File/New/Directory..."
 msgstr ""
 
-#: gnome/gmain.c:558
+#: gnome/gmain.c:551
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -946,7 +946,7 @@ msgid "Use default View action"
 msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2367 src/screen.c:2397 src/view.c:2050
+#: src/screen.c:2367 src/screen.c:2397 src/view.c:2079
 msgid "Edit"
 msgstr ""
 
@@ -1261,158 +1261,90 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1448
+#: gnome/gscreen.c:1445
 msgid "Reloads the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:1450
+#: gnome/gscreen.c:1447
 msgid "New _Directory..."
 msgstr ""
 
-#: gnome/gscreen.c:1450
+#: gnome/gscreen.c:1447
 msgid "Creates a new directory here"
 msgstr ""
 
-#: gnome/gscreen.c:1631
-msgid "All files"
-msgstr ""
-
-#: gnome/gscreen.c:1633
-msgid "Archives and compressed files"
-msgstr ""
-
-#: gnome/gscreen.c:1635
-msgid "RPM/DEB files"
-msgstr ""
-
-#: gnome/gscreen.c:1637
-msgid "Text/Document files"
-msgstr ""
-
-#: gnome/gscreen.c:1639
-msgid "HTML and SGML files"
-msgstr ""
-
-#: gnome/gscreen.c:1641
-msgid "Postscript and PDF files"
-msgstr ""
-
-#: gnome/gscreen.c:1643
-msgid "Spreadsheet files"
-msgstr ""
-
-#: gnome/gscreen.c:1645
-msgid "Image files"
-msgstr ""
-
-#: gnome/gscreen.c:1648
-msgid "Video/animation files"
-msgstr ""
-
-#: gnome/gscreen.c:1650
-msgid "Audio files"
-msgstr ""
-
-#: gnome/gscreen.c:1652
-msgid "C program files"
-msgstr ""
-
-#: gnome/gscreen.c:1654
-msgid "C++ program files"
-msgstr ""
-
-#: gnome/gscreen.c:1656
-msgid "Objective-C program files"
-msgstr ""
-
-#: gnome/gscreen.c:1658
-msgid "Scheme program files"
-msgstr ""
-
-#: gnome/gscreen.c:1660
-msgid "Assembler program files"
-msgstr ""
-
-#: gnome/gscreen.c:1662
-msgid "Misc. program files"
-msgstr ""
-
-#: gnome/gscreen.c:1664
-msgid "Font files"
-msgstr ""
-
-#: gnome/gscreen.c:1791
+#: gnome/gscreen.c:1630
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1801
+#: gnome/gscreen.c:1640
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1801
+#: gnome/gscreen.c:1640
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1827 src/screen.c:670
+#: gnome/gscreen.c:1666 src/screen.c:670
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:2233
+#: gnome/gscreen.c:2072
 msgid "Copy directory"
 msgstr ""
 
-#: gnome/gscreen.c:2234
+#: gnome/gscreen.c:2073
 msgid "Delete directory"
 msgstr ""
 
-#: gnome/gscreen.c:2235
+#: gnome/gscreen.c:2074
 msgid "Rename or move directory"
 msgstr ""
 
-#: gnome/gscreen.c:2391
+#: gnome/gscreen.c:2230
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2391
+#: gnome/gscreen.c:2230
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2393
+#: gnome/gscreen.c:2232
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2393
+#: gnome/gscreen.c:2232
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2395
+#: gnome/gscreen.c:2234
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2395
+#: gnome/gscreen.c:2234
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2398 src/tree.c:1011
+#: gnome/gscreen.c:2237 src/tree.c:1011
 msgid "Rescan"
 msgstr ""
 
-#: gnome/gscreen.c:2398
+#: gnome/gscreen.c:2237
 msgid "Rescan the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:2401
+#: gnome/gscreen.c:2240
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2401
+#: gnome/gscreen.c:2240
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2542
+#: gnome/gscreen.c:2381
 msgid "Location:"
 msgstr ""
 
@@ -1715,7 +1647,7 @@ msgid " Save file "
 msgstr ""
 
 #: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 gtkedit/gtkedit.c:1247
-#: src/view.c:2046
+#: src/view.c:2075
 msgid "Save"
 msgstr ""
 
@@ -1807,7 +1739,7 @@ msgstr ""
 msgid " Enter replacement string:"
 msgstr ""
 
-#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1971
+#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1998
 msgid " Enter search string:"
 msgstr ""
 
@@ -1819,8 +1751,8 @@ msgstr ""
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1297 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2227
-#: src/view.c:1524 src/view.c:1623 src/view.c:1746 src/view.c:1939
-#: src/view.c:1971
+#: src/view.c:1526 src/view.c:1625 src/view.c:1748 src/view.c:1966
+#: src/view.c:1998
 msgid " Search "
 msgstr ""
 
@@ -1998,7 +1930,7 @@ msgid " Cut to clipboard "
 msgstr ""
 
 #: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595 src/view.c:1911
+#: gtkedit/editcmd.c:2595 src/view.c:1913
 msgid " Goto line "
 msgstr ""
 
@@ -2166,7 +2098,7 @@ msgstr ""
 
 #: gtkedit/editwidget.c:1065 gtkedit/gtkedit.c:1246 src/help.c:806
 #: src/main.c:1711 src/screen.c:2364 src/screen.c:2394 src/tree.c:1009
-#: src/view.c:2041
+#: src/view.c:2068
 msgid "Help"
 msgstr ""
 
@@ -2184,7 +2116,7 @@ msgstr ""
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1075 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1714 src/view.c:2043 src/view.c:2063
+#: src/main.c:1714 src/view.c:2070 src/view.c:2092
 msgid "Quit"
 msgstr ""
 
@@ -4029,7 +3961,7 @@ msgstr ""
 msgid "Finished"
 msgstr ""
 
-#: src/find.c:561 src/view.c:1524
+#: src/find.c:561 src/view.c:1526
 #, c-format
 msgid "Searching %s"
 msgstr ""
@@ -5400,79 +5332,94 @@ msgstr ""
 msgid "  [grow]"
 msgstr ""
 
-#: src/view.c:1516
+#: src/view.c:1518
 #, c-format
 msgid "Searching for `%s'"
 msgstr ""
 
-#: src/view.c:1623 src/view.c:1746
+#: src/view.c:1625 src/view.c:1748
 msgid " Search string not found "
 msgstr ""
 
-#: src/view.c:1785
+#: src/view.c:1787
 msgid " Invalid regular expression "
 msgstr ""
 
-#: src/view.c:1909
+#: src/view.c:1911
 #, c-format
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
 
-#: src/view.c:1939
+#: src/view.c:1933
+#, c-format
+msgid ""
+" The current address is 0x%lx.\n"
+" Enter the new address:"
+msgstr ""
+
+#: src/view.c:1935
+msgid " Goto Address "
+msgstr ""
+
+#: src/view.c:1966
 msgid " Enter regexp:"
 msgstr ""
 
-#: src/view.c:2044
+#: src/view.c:2071
 msgid "Ascii"
 msgstr ""
 
-#: src/view.c:2044
+#: src/view.c:2071
 msgid "Hex"
 msgstr ""
 
-#: src/view.c:2045
+#: src/view.c:2072
+msgid "Goto"
+msgstr ""
+
+#: src/view.c:2072
 msgid "Line"
 msgstr ""
 
-#: src/view.c:2046
+#: src/view.c:2075
 msgid "RxSrch"
 msgstr ""
 
-#: src/view.c:2049
+#: src/view.c:2078
 msgid "EdText"
 msgstr ""
 
-#: src/view.c:2049
+#: src/view.c:2078
 msgid "EdHex"
 msgstr ""
 
-#: src/view.c:2051
+#: src/view.c:2080
 msgid "UnWrap"
 msgstr ""
 
-#: src/view.c:2051
+#: src/view.c:2080
 msgid "Wrap"
 msgstr ""
 
-#: src/view.c:2054
+#: src/view.c:2083
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2057
+#: src/view.c:2086
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:2057
+#: src/view.c:2086
 msgid "Parse"
 msgstr ""
 
-#: src/view.c:2061
+#: src/view.c:2090
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2061
+#: src/view.c:2090
 msgid "Format"
 msgstr ""
 
