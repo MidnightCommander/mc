@@ -24,8 +24,8 @@ mcarfs_copyin ()
 {
     TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-uar.XXXXXX` || exit 1
     name=`basename "$2"`
-    (cd $TMPDIR && cp -fp "$3" $name && $XAR r "$1" $name)
-    rm -rf $TMPDIR
+    (cd "$TMPDIR" && cp -fp "$3" "$name" && $XAR r "$1" "$name")
+    rm -rf "$TMPDIR"
 }
 
 mcarfs_rm ()
@@ -43,7 +43,12 @@ case "$1" in
   copyout) shift; mcarfs_copyout "$@" ;;
   copyin) shift; mcarfs_copyin "$@" ;;
   rm) shift; mcarfs_rm "$@" ;;
-  *) exit 1;
+  mkdir|rmdir)
+    echo "mcarfs: ar archives cannot contain directories." 1>&2
+    exit 1;;
+  *)
+    echo "mcarfs: unknown command: \"$1\"." 1>&2
+    exit 1;;
 esac
 
 exit 0

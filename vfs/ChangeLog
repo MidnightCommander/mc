@@ -1,3 +1,7 @@
+2004-10-18  Roland Illig  <roland.illig@gmx.de>
+
+	* extfs/uar.in: Improve filename quoting. Add error messages.
+
 2004-10-17  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/audio.in: Fix quoting issues.
