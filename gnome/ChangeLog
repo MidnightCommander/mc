@@ -1,5 +1,7 @@
 1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (drop_types): Allow dropping URLs on file panels.
+
 	* gdnd.c (gdnd_validate_action): Added an "on_desktop" argument;
 	this specifies that the user is dragging over the desktop.  Added
 	cases for drags of desktop icons and URLs.

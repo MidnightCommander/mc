@@ -65,7 +65,8 @@ static GtkTargetEntry drag_types [] = {
 };
 
 static GtkTargetEntry drop_types [] = {
-	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
+	{ TARGET_URL_TYPE, 0, TARGET_URL }
 };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
