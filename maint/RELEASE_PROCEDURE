@@ -7,9 +7,9 @@ at least 3 days before the release date, unless it's a security release.
 
 Update the working directory from CVS, review last-minute changes.
 
-Review the English version of the manual and fix it if necessary. 
-Check the date in the .TH macro and  update it if significant changes
-have been done since the previous release.
+Review the English version of the manual and fix it if necessary.  Check
+the date in the .TH macro of the English manual and update it if
+significant changes have been done since the previous release.
 
 Make sure that all significant user-visible changes are in the NEWS
 file.  Group changes by topics to improve readability.
