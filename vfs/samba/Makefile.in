@@ -80,8 +80,6 @@ PROGS = $(PROGS1) $(PROGS2) $(MPROGS) bin/nmblookup bin/make_printerdef
 
 SCRIPTS = $(srcdir)/script/smbtar $(srcdir)/script/addtosmbpass $(srcdir)/script/convert_smbpasswd
 
-QUOTAOBJS=@QUOTAOBJS@
-
 ######################################################################
 # object file lists
 ######################################################################
@@ -239,9 +237,6 @@ SMBFILTER_OBJ = utils/smbfilter.o $(LIBSMB_OBJ) $(PARAM_OBJ) \
 PROTO_OBJ = $(CLIENT_OBJ) \
 	    $(RPCCLIENT_OBJ) $(SMBWRAPPER_OBJ) $(SMBTORTURE_OBJ)
 
-PICOBJS = $(SMBWRAPPER_OBJ:.o=.po)
-PICOBJS32 = $(SMBWRAPPER_OBJ:.o=.po32)
-
 ######################################################################
 # now the rules...
 ######################################################################
@@ -259,7 +254,7 @@ debug2html : CHECK bin/debug2html
 smbfilter : CHECK bin/smbfilter
 
 .SUFFIXES:
-.SUFFIXES: .c .o .po .po32
+.SUFFIXES: .c .o
 
 CHECK:
 	@echo "Using FLAGS = $(FLAGS)"
@@ -290,37 +285,6 @@ MAKEDIR = || exec false; \
 @MAINT@	@sed 's|^'`echo $@ | sed 's,.*/,,'`':|$@:|' \
 @MAINT@	  <.deps/$@ >.deps/$@d && \
 @MAINT@	rm -f .deps/$@ && : >.deps/.stamp
-
-.c.po: @MAINT@ .deps/.dummy
-	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
-	  dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
-@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
-@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
-@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
-	@echo Compiling $*.c with @PICFLAG@
-	@$(CC) -I. -I$(srcdir) $(FLAGS) @PICFLAG@ -c $< \
-	  -o $*.po.o @MAINT@ -Wp,-MD,.deps/$@
-@BROKEN_CC@	-mv `echo $@ | sed -e 's%^.*/%%g' -e 's%\.po$$%.o%'` $@.o
-@MAINT@	@sed 's|^'`echo $*\.po\.o | sed 's,.*/,,'`':|$@:|' \
-@MAINT@	  <.deps/$@ >.deps/$@d && \
-@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
-	@mv $*.po.o $@
-
-# this is for IRIX
-.c.po32: @MAINT@ .deps/.dummy
-	@if (: >> $@ || : > $@) >/dev/null 2>&1; then rm -f $@; else \
-	  dir=`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` $(MAKEDIR); fi
-@MAINT@	@if (: >> .deps/$@ || : > .deps/$@) >/dev/null 2>&1; then :; \
-@MAINT@	 else dir=.deps/`echo $@ | sed 's,/[^/]*$$,,;s,^$$,.,'` \
-@MAINT@	      $(MAKEDIR); fi; rm -f .deps/$@ .deps/$@d
-	@echo Compiling $*.c with @PICFLAG@ and -32
-	@$(CC) -32 -I. -I$(srcdir) $(FLAGS32) @PICFLAG@ -c $< \
-	  -o $*.po32.o @MAINT@ -Wp,-MD,.deps/$@
-@BROKEN_CC@	-mv `echo $@ | sed -e 's%^.*/%%g' -e 's%\.po32$$%.o%'` $@.o
-@MAINT@	@sed 's|^'`echo $*.po32.o | sed 's,.*/,,'`':|$@:|' \
-@MAINT@	  <.deps/$@ >.deps/$@d && \
-@MAINT@	rm -f .deps/$@ && : >.deps/.stamp
-	@mv $*.po32.o $@
 
 bin/.dummy:
 	@if (: >> $@ || : > $@) >/dev/null 2>&1; then :; else \
@@ -395,14 +359,6 @@ bin/smbfilter: $(SMBFILTER_OBJ) bin/.dummy
 	@echo Linking $@
 	@$(CC) $(FLAGS) -o $@ $(SMBFILTER_OBJ) $(LDFLAGS) $(LIBS)
 
-bin/smbwrapper.so: $(PICOBJS)
-	@echo Linking shared library $@
-	@$(LD) @LDSHFLAGS@ -o $@ $(PICOBJS) $(LIBS)
-
-bin/smbwrapper.32.so: $(PICOBJS32)
-	@echo Linking shared library $@
-	@$(LD) -32 @LDSHFLAGS@ -o $@ $(PICOBJS32) $(LIBS)
-
 bin/smbsh: $(SMBSH_OBJ) bin/.dummy
 	@echo Linking $@
 	@$(CC) $(FLAGS) -o $@ $(SMBSH_OBJ) $(LDFLAGS) $(LIBS)
@@ -453,7 +409,7 @@ uninstallcp:
 	@$(SHELL) $(srcdir)/script/uninstallcp.sh $(CODEPAGEDIR) $(CODEPAGELIST)
 
 clean: 
-	-rm -f core */*~ *~ */*.o */*.po */*.po32 */*.so bin/*
+	-rm -f core */*~ *~ */*.o */*.so bin/*
 
 proto: 
 	@echo rebuilding include/proto.h

@@ -12,7 +12,6 @@ AC_SUBST(LDSHFLAGS)
 AC_SUBST(HOST_OS)
 AC_SUBST(WRAP)
 AC_SUBST(WRAP32)
-AC_SUBST(PICFLAG)
 
 # compile with optimisation and without debugging by default
 CFLAGS=${CFLAGS-"-O"}
@@ -41,127 +40,9 @@ fi
 
 
 
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_HOST
 AC_VALIDATE_CACHE_SYSTEM_TYPE
 SAMBA_MAINTAINER_MODE
-
-#
-# Config CPPFLAG settings for strange OS's that must be set
-# before other tests.
-#
-case "$host_os" in
-# Try to work out if this is the native HPUX compiler that uses the -Ae flag.
-    *hpux*)
-      AC_PROG_CC_FLAG(Ae)
-      if test $ac_cv_prog_cc_Ae = yes; then
-        CPPFLAGS="$CPPFLAGS -Ae"
-      fi
-#
-# Defines needed for HPUX support.
-# HPUX has bigcrypt but (sometimes?) doesn't use it for
-# password hashing - hence the USE_BOTH_CRYPT_CALLS define.
-#
-      case `uname -r` in
-			*9*|*10*)
-				CPPFLAGS="$CPPFLAGS -D_HPUX_SOURCE -D_POSIX_SOURCE"
-		   		AC_DEFINE(USE_BOTH_CRYPT_CALLS)
-				;;
-			*11*)
-				CPPFLAGS="$CPPFLAGS -D_HPUX_SOURCE -D_POSIX_SOURCE -D_LARGEFILE64_SOURCE"
-		   		AC_DEFINE(USE_BOTH_CRYPT_CALLS)
-				;;
-      esac
-      ;;
-#
-# AIX4.x doesn't even admit to having large
-# files *at all* unless the -D_LARGE_FILE or -D_LARGE_FILE_API flags are set.
-#
-    *aix4*)
-	  AC_MSG_RESULT([enabling large file support])
-      CPPFLAGS="$CPPFLAGS -D_LARGE_FILES"
-      ;;    
-#
-# Defines needed for Solaris 2.6/2.7 aka 7.0 to make it admit
-# to the existance of large files..
-# Note that -D_LARGEFILE64_SOURCE is different from the Sun
-# recommendations on large file support, however it makes the
-# compile work using gcc 2.7 and 2.8, whereas using the Sun
-# recommendation makes the compile fail on gcc2.7. JRA.
-#
-	*solaris*)
-		case `uname -r` in
-			5.6*|5.7*)
-			AC_MSG_RESULT([enabling large file support])
-			if test "$ac_cv_prog_gcc" = yes; then
-				${CC-cc} -v >conftest.c 2>&1
-				ac_cv_gcc_compiler_version_number=`grep 'gcc version' conftest.c`
-				rm -fr conftest.c
-				case "$ac_cv_gcc_compiler_version_number" in
-					*"gcc version 2.6"*|*"gcc version 2.7"*)
-						CPPFLAGS="$CPPFLAGS -D_LARGEFILE64_SOURCE"
-						;;
-					*)
-						CPPFLAGS="$CPPFLAGS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
-						;;
-				esac
-			else
-				CPPFLAGS="$CPPFLAGS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
-			fi
-			;;
-		esac
-		;;
-#
-# Tests needed for SINIX large file support.
-#
-    *sysv4*)
-      if test $host = mips-sni-sysv4 ; then
-        AC_MSG_CHECKING([for LFS support])
-        old_CPPFLAGS="$CPPFLAGS"
-        CPPFLAGS="-D_LARGEFILE64_SOURCE $CPPFLAGS"
-        AC_TRY_RUN([
-#include <unistd.h>
-main () {
-#if _LFS64_LARGEFILE == 1
-exit(0);
-#else
-exit(1);
-#endif
-}], [SINIX_LFS_SUPPORT=yes], [SINIX_LFS_SUPPORT=no], [SINIX_LFS_SUPPORT=cross])
-        CPPFLAGS="$old_CPPFLAGS"
-        if test x$SINIX_LFS_SUPPORT = xyes ; then
-          CPPFLAGS="-D_LARGEFILE64_SOURCE $CPPFLAGS"
-          CFLAGS="`getconf LFS64_CFLAGS` $CFLAGS"
-          LDFLAGS="`getconf LFS64_LDFLAGS` $LDFLAGS"
-          LIBS="`getconf LFS64_LIBS` $LIBS"
-        fi
-      AC_MSG_RESULT([$SINIX_LFS_SUPPORT])
-      fi
-    ;;
-
-#
-# Tests needed for glibc 2.1 large file support.
-# 
-    *linux*|*hurd*)
-        AC_MSG_CHECKING([for LFS support])
-        old_CPPFLAGS="$CPPFLAGS"
-        CPPFLAGS="-D_LARGEFILE64_SOURCE $CPPFLAGS"
-        AC_TRY_RUN([
-#include <unistd.h>
-main () {
-#if _LFS64_LARGEFILE == 1
-exit(0);
-#else
-exit(1);
-#endif
-}], [GLIBC_LFS_SUPPORT=yes], [GLIBC_LFS_SUPPORT=no], [GLIBC_LFS_SUPPORT=cross])
-        CPPFLAGS="$old_CPPFLAGS"
-        if test x$GLIBC_LFS_SUPPORT = xyes ; then
-          CPPFLAGS="-D_LARGEFILE64_SOURCE $CPPFLAGS"
-        fi
-      AC_MSG_RESULT([$GLIBC_LFS_SUPPORT])
-    ;;
-
-esac
 
 AC_INLINE
 AC_HEADER_STDC
@@ -175,20 +56,7 @@ AC_CHECK_HEADERS(sys/param.h ctype.h sys/wait.h sys/resource.h sys/ioctl.h sys/m
 AC_CHECK_HEADERS(sys/mman.h sys/filio.h sys/priv.h string.h strings.h stdlib.h sys/socket.h)
 AC_CHECK_HEADERS(sys/mount.h sys/vfs.h sys/fs/s5param.h sys/filsys.h termios.h termio.h)
 AC_CHECK_HEADERS(sys/termio.h sys/statfs.h sys/dustat.h sys/statvfs.h stdarg.h sys/sockio.h)
-#
-# HPUX has a bug in that including shadow.h causes a re-definition of MAXINT.
-# This causes configure to fail to detect it. Check for shadow separately on HPUX.
-#
-case "$host_os" in
-    *hpux*)
-		AC_TRY_COMPILE([#include <shadow.h>],[struct spwd testme],
-			ac_cv_header_shadow_h=yes,ac_cv_header_shadow_h=no)
-		if test x"$ac_cv_header_shadow_h" = x"yes"; then
-		   AC_DEFINE(HAVE_SHADOW_H)
-		fi
-	;;
-esac
-AC_CHECK_HEADERS(shadow.h netinet/tcp.h netinet/in_systm.h netinet/in_ip.h)
+AC_CHECK_HEADERS(netinet/tcp.h netinet/in_systm.h netinet/in_ip.h)
 AC_CHECK_HEADERS(sys/security.h security/pam_appl.h)
 AC_CHECK_HEADERS(stropts.h poll.h readline.h history.h readline/readline.h)
 AC_CHECK_HEADERS(readline/history.h sys/capability.h syscall.h sys/syscall.h)
@@ -318,18 +186,8 @@ AC_CHECK_FUNCS(atexit grantpt dup2)
 AC_CHECK_FUNCS(setluid yp_get_default_domain getpwanam)
 AC_CHECK_FUNCS(srandom random srand rand setenv usleep strcasecmp)
 
-AC_CHECK_FUNCS(_dup _dup2 _opendir _readdir _seekdir _telldir _closedir)
-AC_CHECK_FUNCS(__dup __dup2 __opendir __readdir __seekdir __telldir __closedir)
-AC_CHECK_FUNCS(__getcwd _getcwd)
-AC_CHECK_FUNCS(__xstat __fxstat __lxstat)
-AC_CHECK_FUNCS(_stat _lstat _fstat __stat __lstat __fstat)
-AC_CHECK_FUNCS(_acl __acl _facl __facl _open __open _chdir __chdir)
-AC_CHECK_FUNCS(_close __close _fchdir __fchdir _fcntl __fcntl)
-AC_CHECK_FUNCS(getdents _getdents __getdents _lseek __lseek _read __read)
-AC_CHECK_FUNCS(_write __write _fork __fork)
-AC_CHECK_FUNCS(__sys_llseek llseek _llseek __llseek)
-AC_CHECK_FUNCS(pread _pread __pread)
-AC_CHECK_FUNCS(pwrite _pwrite __pwrite)
+AC_CHECK_FUNCS(getdents)
+AC_CHECK_FUNCS(llseek)
 
 #
 # If no strcasecmp, check for it in some known places
@@ -413,25 +271,6 @@ case "$host_os" in
 			LDSHFLAGS="-G"
 			;;
 esac
-
-# try to work out how to produce pic code with this compiler
-PICFLAG=""
-AC_PROG_CC_FLAG(fpic)
-if test $ac_cv_prog_cc_fpic = yes; then
-   PICFLAG="-fpic";
-fi
-if test x$PICFLAG = x; then
-  AC_PROG_CC_FLAG(Kpic)
-  if test $ac_cv_prog_cc_Kpic = yes; then
-    PICFLAG="-Kpic";
-  fi 
-fi
-if test x$PICFLAG = x; then
-  AC_PROG_CC_FLAG(KPIC)
-  if test $ac_cv_prog_cc_KPIC = yes; then
-    PICFLAG="-KPIC";
-  fi 
-fi
 
 ################
 
@@ -1111,24 +950,6 @@ AC_ARG_WITH(ssl,
 
 
 #################################################
-# check for experimental mmap support
-AC_MSG_CHECKING([whether to use MMAP])
-AC_ARG_WITH(mmap,
-[  --with-mmap     Include experimental MMAP support
-  --without-mmap  Don't include MMAP support (default)],
-[ case "$withval" in
-  yes)
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(WITH_MMAP)
-    ;;
-  *)
-    AC_MSG_RESULT(no)
-    ;;
-  esac ],
-  AC_MSG_RESULT(no)
-)
-
-#################################################
 # check for syslog logging
 AC_MSG_CHECKING([whether to use syslog logging])
 AC_ARG_WITH(syslog,
@@ -1145,45 +966,6 @@ AC_ARG_WITH(syslog,
   esac ],
   AC_MSG_RESULT(no)
 )
-
-#################################################
-# check for experimental netatalk resource fork support
-AC_MSG_CHECKING([whether to support netatalk])
-AC_ARG_WITH(netatalk,
-[  --with-netatalk     Include experimental Netatalk support
-  --without-netatalk  Don't include experimental Netatalk support (default)],
-[ case "$withval" in
-  yes)
-    AC_MSG_RESULT(yes)
-    AC_DEFINE(WITH_NETATALK)
-    ;;
-  *)
-    AC_MSG_RESULT(no)
-    ;;
-  esac ],
-  AC_MSG_RESULT(no)
-)
-
-#################################################
-# check for experimental disk-quotas support
-QUOTAOBJS=noquotas.o
-
-AC_MSG_CHECKING([whether to support disk-quotas])
-AC_ARG_WITH(quotas,
-[  --with-quotas     Include experimental disk-quota support
-  --without-quotas  Don't include experimental disk-quota support (default)],
-[ case "$withval" in
-  yes)
-    AC_MSG_RESULT(yes)
-    QUOTAOBJS=quotas.o
-    ;;
-  *)
-    AC_MSG_RESULT(no)
-    ;;
-  esac ],
-  AC_MSG_RESULT(no)
-)
-AC_SUBST(QUOTAOBJS)
 
 #################################################
 # set private directory location
@@ -1225,27 +1007,6 @@ AC_ARG_WITH(lockdir,
   AC_SUBST(lockdir)],
   [lockdir='$(VARDIR)/locks'
    AC_SUBST(lockdir)]
-)
-
-#################################################
-# set SWAT directory location
-AC_ARG_WITH(swatdir,
-[  --with-swatdir=DIR     Where to put SWAT files ($ac_default_prefix/swat)],
-[ case "$withval" in
-  yes|no)
-  #
-  # Just in case anybody does it
-  #
-    AC_MSG_WARN([--with-swatdir called without argument - will use default])
-    swatdir='${prefix}/swat'
-  ;;
-  * )
-    swatdir="$withval"
-    ;;
-  esac
-  AC_SUBST(swatdir)],
-  [swatdir='${prefix}/swat'
-   AC_SUBST(swatdir)]
 )
 
 AC_MSG_CHECKING([configure summary])
