@@ -30,6 +30,7 @@
 #include "gdesktop.h"
 #include "gpageprop.h"
 #include "gcliplabel.h"
+#include <gdk/gdkprivate.h>
 
 /* The pixmaps */
 #include "directory.xpm"

@@ -1,3 +1,7 @@
+1998-04-01  Marc Ewing  <marc@redhat.com>
+
+	* gscreen.c: Added #include <gdk/gdkprivate.h>
+
 1998-03-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcache.c: Added an Image cache for all of the imlib-loaded
