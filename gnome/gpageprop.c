@@ -10,14 +10,12 @@
 
 #include <config.h>
 #include <string.h>
-#include <stdlib.h>		/* atoi */
 #include <pwd.h>
 #include <grp.h>
 #include <sys/types.h>
-#include "fs.h"
 #include "x.h"
+#include "global.h"
 #include "gprop.h"
-#include "util.h"
 #include "dialog.h"
 #include "file.h"
 #include "fileopctx.h"
@@ -231,10 +229,10 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 		file_op_context_destroy (ctx);
 			
 		if (dii) {
-			free (dii->filename);
+			 g_free (dii->filename);
 			dii->filename = full_target;
 		} else
-			free (full_target);
+			 g_free (full_target);
 			
 		retval |= GPROP_FILENAME;
 	}

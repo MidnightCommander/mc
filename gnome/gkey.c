@@ -7,7 +7,7 @@
  */
 
 #include <config.h>
-#include "mad.h"
+#include "global.h"
 #include "x.h"
 #include "key.h"
 
@@ -46,7 +46,7 @@ add_select_channel (int fd, select_fn callback, void *info)
 {
 	struct trampoline *t;
 
-	t = xmalloc (sizeof (struct trampoline), "add_select_channel");
+	t = g_new (struct trampoline, 1);
 	t->fn = callback;
 	t->fd = fd;
 	t->fn_closure = info;
@@ -74,7 +74,7 @@ delete_select_channel (int fd)
 	if (tclosure){
 		select_list = g_list_remove (select_list, tclosure);
 		gdk_input_remove (tclosure->tag);
-		free (tclosure);
+		 g_free (tclosure);
 	} else {
 		fprintf (stderr, "PANIC: could not find closure for %d\n", fd);
 	}

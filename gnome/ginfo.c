@@ -4,9 +4,8 @@
 
 #include <config.h>
 #include <string.h>
-#include <stdlib.h>
 #include <string.h>
-#include "fs.h"
+#include "global.h"
 #include "dlg.h"
 #include "widget.h"
 #include "info.h"

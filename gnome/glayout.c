@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "global.h"
 #include "dir.h"
 #include "panel.h"
 #include "gscreen.h"

@@ -7,15 +7,14 @@
  *
  */
 #include <config.h>
-#include "util.h"
 #include "treestore.h"
 #include <gnome.h>
 #include "gtkdtree.h"
-
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include "global.h"
 #include "dir-open.xpm"
 #include "dir-close.xpm"
 

@@ -420,7 +420,7 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 
 				if (current_widget == p->filter_w){
 					in = (WInput *) current_widget;
-					set_panel_filter_to (p, strdup (in->buffer));
+					set_panel_filter_to (p, g_strdup (in->buffer));
 					return MSG_HANDLED;
 				}
 			

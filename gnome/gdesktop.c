@@ -27,10 +27,10 @@
  */
 
 #include <config.h>
-#include "fs.h"
 #include <gdk/gdkx.h>
 #include <gtk/gtkinvisible.h>
 #include <gnome.h>
+#include "global.h"
 #include "dialog.h"
 #define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
 #include "dir.h"

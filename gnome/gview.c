@@ -90,7 +90,7 @@ view_percent (WView *view, int p, int w)
          p / (view->s.st_size / 100) :
 	 p * 100 / view->s.st_size);
 
-    sprintf (buffer, "%3d%%", percent);
+    g_snprintf (buffer, sizeof (buffer), "%3d%%", percent);
     if (strcmp (buffer, GTK_LABEL (view->gtk_percent)->label))
 	    gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
 
@@ -116,13 +116,13 @@ view_status (WView *view)
 	char buffer [80];
 	
 	if (view->hex_mode)
-		sprintf (buffer, _("Offset 0x%08x"), view->edit_cursor);
+		g_snprintf (buffer, sizeof (buffer), _("Offset 0x%08x"), view->edit_cursor);
 	else
-		sprintf (buffer, _("Col %d"), -view->start_col);
+		g_snprintf (buffer, sizeof (buffer), _("Col %d"), -view->start_col);
 	if (strcmp (buffer, GTK_LABEL (view->gtk_offset)->label))
 		gtk_label_set (GTK_LABEL (view->gtk_offset), buffer);
 
-	sprintf (buffer, _("%s bytes"), size_trunc (view->s.st_size));
+	g_snprintf (buffer, sizeof (buffer), _("%s bytes"), size_trunc (view->s.st_size));
 	if (strcmp (buffer, GTK_LABEL (view->gtk_bytes)->label))
 		gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
 

@@ -1,3 +1,10 @@
+Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
+
+	* Converted memory managment to Glib - where it wasn't done. Now we 
+	use g_new()/g_malloc()/g_strdup()/g_free() routings. copy_strings() re-
+	placed by g_strconcat(), and sprintf() by g_snprintf(). Some other,
+	minor changes.
+
 1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_setup_drag_scroll): Renamed from

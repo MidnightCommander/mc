@@ -100,7 +100,7 @@ panel_make_local_copies_and_transfer (GtkWidget *widget, GdkEventDragRequest *ev
 		int j, total_len;
 
 		/* First assemble all of the filenames */
-		local_names_array = malloc (sizeof (char *) * panel->marked);
+		local_names_array = g_new (char *, panel->marked);
 		total_len = j = 0;
 		for (i = 0; i < panel->count; i++){
 			char *filename;
@@ -112,10 +112,10 @@ panel_make_local_copies_and_transfer (GtkWidget *widget, GdkEventDragRequest *ev
 			localname = mc_getlocalcopy (filename);
 			total_len += strlen (localname) + 1;
 			local_names_array [j++] = localname;
-			free (filename);
+			g_free (filename);
 		}
 		*len = total_len;
-		*data = p = malloc (total_len);
+		*data = p = g_malloc (total_len);
 		for (i = 0; i < j; i++){
 			strcpy (p, local_names_array [i]);
 			g_free (local_names_array [i]);
@@ -124,7 +124,7 @@ panel_make_local_copies_and_transfer (GtkWidget *widget, GdkEventDragRequest *ev
 	} else {
 		filename = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 		localname = mc_getlocalcopy (filename);
-		free (filename);
+		g_free (filename);
 		*data = localname;
 		*len = strlen (localname + 1);
 	}
@@ -166,7 +166,7 @@ panel_clist_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel 
 			gdk_window_dnd_data_set ((GdkWindow *)clist_window, (GdkEvent *) event, data, len);
 		else
 			gdk_window_dnd_data_set ((GdkWindow *)clist_areaw, (GdkEvent *) event, data, len);
-		free (data);
+		g_free (data);
 	}
 }
 
@@ -199,7 +199,7 @@ panel_clist_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *d
 #endif
 
 	if (drop_dir != panel->cwd)
-		free (drop_dir);
+		g_free (drop_dir);
 
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
 	panel_update_contents (panel);
@@ -264,7 +264,7 @@ panel_icon_list_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPa
 
 	if (len && data){
 		gdk_window_dnd_data_set (widget->window, (GdkEvent *) event, data, len);
-		free (data);
+		g_free (data);
 	}
 }
 
@@ -300,7 +300,7 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 #endif
 
 	if (drop_dir != panel->cwd)
-		free (drop_dir);
+		g_free (drop_dir);
 
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
 	panel_update_contents (panel);
@@ -369,7 +369,7 @@ init_spot_list (void)
 	x_spots = gdk_screen_width () / SNAP_X;
 	y_spots = gdk_screen_height () / SNAP_Y;
 	size = (x_spots * y_spots) / 8;
-	spot_array = xmalloc (size+1, "spot_array");
+	spot_array = g_malloc (size+1);
 	memset (spot_array, 0, size);
 }
 
@@ -529,7 +529,7 @@ get_desktop_icon (char *pathname)
 	/* Try the GNOME icon */
 	if (fname){
 		full_fname = gnome_unconditional_pixmap_file (fname);
-		free (fname);
+		g_free (fname);
 		if (exist_file (full_fname))
 			return full_fname;
 		g_free (full_fname);
@@ -541,7 +541,7 @@ get_desktop_icon (char *pathname)
 		if (exist_file (full_fname))
 			return full_fname;
 
-		free (full_fname);
+		 g_free (full_fname);
 	}
 	
 	return gnome_unconditional_pixmap_file ("launcher-program.png");
@@ -784,7 +784,7 @@ perform_drop_manually (GList *names, GdkDragAction action, char *dest)
 						copy_file_file (p, tmpf, 1);
 				}
 			} while (res != 0);
-			free (tmpf);
+			g_free (tmpf);
 			break;
 			
 		case GDK_ACTION_MOVE:
@@ -802,7 +802,7 @@ perform_drop_manually (GList *names, GdkDragAction action, char *dest)
 						move_file_file (p, tmpf);
 				}
 			} while (res != 0);
-			free (tmpf);
+			g_free (tmpf);
 			break;
 
 		default:
@@ -826,7 +826,7 @@ do_symlinks (GList *names, char *dest)
 		else
 			mc_symlink (name, full_dest_name);
 
-		free (full_dest_name);
+		g_free (full_dest_name);
 	} 
 }
 
@@ -850,7 +850,7 @@ drops_from_event (GdkEventDropDataAvailable *event, int *argc)
 	}
 
 	/* Create the exec vector with all of the filenames */
-	argv = (char **) xmalloc (sizeof (char *) * arguments + 1, "arguments");
+	argv = g_new (char *, arguments + 1);
 	count = event->data_numbytes;
 	p = event->data;
 	i = 0;
@@ -932,7 +932,7 @@ desktop_release_desktop_icon_t (desktop_icon_t *di, int destroy_dentry)
 		else
 			gnome_desktop_entry_free (di->dentry);
 	} else {
-		free (di->pathname);
+		g_free (di->pathname);
 		di->pathname = 0;
 	}
 
@@ -940,7 +940,7 @@ desktop_release_desktop_icon_t (desktop_icon_t *di, int destroy_dentry)
 		gtk_widget_destroy (di->widget);
 		di->widget = 0;
 	}
-	free (di);
+	g_free (di);
 }
 
 static int
@@ -956,7 +956,7 @@ remove_directory (char *path)
 		buffer = copy_strings (_("Do you want to delete "), path, "?", NULL);
 		i = query_dialog (_("Delete"), buffer,
 				  D_ERROR, 2, _("&Yes"), _("&No"));
-		free (buffer);
+		g_free (buffer);
 		if (i != 0)
 			return 0;
 	}
@@ -1020,14 +1020,14 @@ drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, deskt
 	
 	r = regex_command (di->pathname, "Drop", drops, 0);
 	if (r && strcmp (r, "Success") == 0){
-		free (drops);
+		g_free (drops);
 		return;
 	}
 	
 	if (is_exe (s.st_mode))
 		gnome_desktop_entry_launch_with_args (di->dentry, drop_count, drops);
 	
-	free (drops);
+	g_free (drops);
 }
 
 static void
@@ -1040,7 +1040,7 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 
 	/* if DI is set to zero, then it is a drop on the root window */
 	if (di)
-		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
+		is_directory = g_strcasecmp (di->dentry->type, "directory") == 0;
 	else {
 		char *drop_location;
 
@@ -1121,9 +1121,9 @@ desktop_icon_configure_position (desktop_icon_t *di, int x, int y)
 	if (di->dentry){
 		char buffer [40];
 
-		sprintf (buffer, "%d,%d", x, y);
+		g_snprintf (buffer, sizeof (buffer), "%d,%d", x, y);
 		if (di->dentry->geometry)
-			g_free (di->dentry->geometry);
+		    g_free (di->dentry->geometry);
 		di->dentry->geometry = g_strdup (buffer);
 		gnome_desktop_entry_save (di->dentry);
 	}
@@ -1217,7 +1217,7 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 	destroy_shaped_dnd_windows ();
 
 	if (di->dentry)
-		fname = strdup (di->dentry->icon);
+		fname = g_strdup (di->dentry->icon);
 	else
 		fname = get_desktop_icon (di->pathname);
 
@@ -1233,7 +1233,7 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 			gtk_widget_show (root_drag_not_ok_window);
 			gtk_widget_show (root_drag_ok_window);
 		}
-		free (fname);
+		g_free (fname);
 	}
 }
 
@@ -1440,7 +1440,7 @@ desktop_load_from_dentry (GnomeDesktopEntry *dentry)
 	if (!dicon)
 		return;
 
-	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
+	di = g_new (desktop_icon_t, 1);
 	di->dentry   = dentry;
 	di->widget   = dicon;
 	di->pathname = dentry->location;
@@ -1476,7 +1476,7 @@ desktop_setup_geometry_from_point (GnomeDesktopEntry *dentry, GdkPoint **point)
 {
 	char buffer [40];
 
-	sprintf (buffer, "%d,%d", (*point)->x, (*point)->y);
+	g_snprintf (buffer, sizeof (buffer), "%d,%d", (*point)->x, (*point)->y);
 	dentry->geometry = g_strdup (buffer);
 	*point = NULL;
 }
@@ -1490,10 +1490,10 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 {
 	GnomeDesktopEntry *dentry;
 
-	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
+	dentry = g_new (GnomeDesktopEntry, 1);
 	memset (dentry, 0, sizeof (GnomeDesktopEntry));
 	dentry->name     = g_strdup (short_name);
-	dentry->exec     = (char **) malloc (2 * sizeof (char *));
+	dentry->exec     = g_new (char *, 2);
 	dentry->exec[0]  = g_strdup (pathname);
 	dentry->exec[1]  = NULL;
 	dentry->exec_length = 1;
@@ -1535,7 +1535,7 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 								       _(" Do you really want to execute? "),
 								       0, 2, _("&Yes"), _("&No")) == 0))
 					execute (tmp);
-				free (tmp);
+				g_free (tmp);
 			} else {
 				char *result, *command;
 
@@ -1547,7 +1547,7 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 							       di->pathname);
 				if (command){
 					execute (command);
-					free (command);
+					g_free (command);
 				}
 			}
 		}
@@ -1572,11 +1572,11 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	struct stat s;
 
 	stat (pathname, &s);
-	dentry = xmalloc (sizeof (GnomeDesktopEntry), "launch_entry");
+	dentry = g_new (GnomeDesktopEntry, 1);
 	memset (dentry, 0, sizeof (GnomeDesktopEntry));
 	
 	dentry->name     = g_strdup (short_name);
-	dentry->exec     = (char **) malloc (2 * sizeof (char *));
+	dentry->exec     = g_new (char *, 2);
 	dentry->exec[0]  = g_strdup (pathname);
 	dentry->exec[1]  = NULL;
 	dentry->exec_length = 1;
@@ -1595,10 +1595,10 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	if (!dicon)
 		return;
 	
-	di = xmalloc (sizeof (desktop_icon_t), "dcle");
+	di = g_new (desktop_icon_t, 1);
 	di->dentry = NULL;
 	di->widget = dicon;
-	di->pathname = strdup (pathname);
+	di->pathname = g_strdup (pathname);
 
 	desktop_icon_set_position (di);
 	desktop_icon_make_draggable (di);
@@ -1647,7 +1647,7 @@ desktop_setup_icon (char *filename, char *full_pathname, GdkPoint **desired_posi
 			else
 				desktop_create_directory_entry (dir_full, full_pathname, filename, desired_position);
 		}
-		free (dir_full);
+		g_free (dir_full);
 	} else {
 		if (strstr (filename, ".desktop")){
 			if (!desktop_pathname_loaded (full_pathname))
@@ -1658,7 +1658,7 @@ desktop_setup_icon (char *filename, char *full_pathname, GdkPoint **desired_posi
 			desktop_version = copy_strings (full_pathname, ".desktop", NULL);
 			if (!exist_file (desktop_version) && !desktop_pathname_loaded (full_pathname))
 				desktop_create_launch_entry (desktop_version, full_pathname, filename, desired_position);
-			free (desktop_version);
+			g_free (desktop_version);
 		}
 	}
 }
@@ -1696,7 +1696,7 @@ desktop_reload (char *desktop_dir, GdkPoint *drop_position)
 		full = concat_dir_and_file (desktop_dir, dent->d_name);
 		desktop_setup_icon (dent->d_name, full, &drop_position);
 
-		free (full);
+		g_free (full);
 	}
 	mc_closedir (dir);
 	
@@ -1737,8 +1737,8 @@ desktop_setup_default (char *desktop_dir)
 		mkdir (desktop_dir, 0777);
 	
 	desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory", NULL);
-	free (desktop_dir_home_link);
-	free (mc_desktop_dir);
+	 g_free (desktop_dir_home_link);
+	 g_free (mc_desktop_dir);
 }
 
 /*

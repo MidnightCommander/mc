@@ -8,8 +8,8 @@
 
 
 #include <config.h>
-#include "util.h"
 #include <gnome.h>
+#include "global.h"
 #include "panel.h"
 #include "cmd.h"
 #include "dialog.h"
@@ -49,7 +49,7 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 	if (!command)
 		return;
 	execute (command);
-	free (command);
+	 g_free (command);
 }
 
 static void
@@ -119,7 +119,7 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
 		gtk_widget_destroy (dlg);
-	free (full_name);
+	 g_free (full_name);
 	if (retval)
 		reread_cmd ();
 }

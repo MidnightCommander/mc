@@ -10,10 +10,8 @@
 
 #include <config.h>
 #include <string.h>
-#include <stdlib.h>		/* atoi */
-#include "fs.h"
-#include "mad.h"
 #include "x.h"
+#include "global.h"
 #include "dir.h"
 #include "command.h"
 #include "panel.h"
@@ -171,7 +169,7 @@ panel_fill_panel_list (WPanel *panel)
 	int i, col, type_col, color;
 	char  **texts;
 
-	texts = malloc (sizeof (char *) * (items+1));
+	texts = g_new (char *, items+1);
 
 	gtk_clist_freeze (GTK_CLIST (cl));
 	gtk_clist_clear (GTK_CLIST (cl));
@@ -216,7 +214,7 @@ panel_fill_panel_list (WPanel *panel)
 	panel->selected = selected;
 	select_item (panel);
 	gtk_clist_thaw (GTK_CLIST (cl));
-	free (texts);
+	 g_free (texts);
 }
 
 /*
@@ -498,7 +496,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			    panel->dir.list [row].f.link_to_dir){
 				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
 				new_panel_at (fullname);
-				free (fullname);
+				 g_free (fullname);
 			}
 		}
 		break;
@@ -675,7 +673,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 				total_len += (filelen + cwdlen + panel->dir.list [i].fnamelen + seplen);
 
 		total_len++;
-		data = copy = xmalloc (total_len+1, "build_selected_file_list");
+		data = copy = g_malloc (total_len+1);
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
 				strcpy (copy, "file:");
@@ -694,7 +692,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 		fullname = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
 		uri = copy_strings ("file:", fullname, NULL);
-		free (fullname);
+		g_free (fullname);
 
 		*file_list_len = strlen (uri) + 1;
 		return uri;
@@ -788,7 +786,7 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 	}
 
 	reload = gdnd_drop_on_directory (context, selection_data, dir);
-	free (dir);
+	g_free (dir);
 
 	if (reload){
 		update_one_panel_widget (panel, 0, UP_KEEPSEL);
@@ -829,7 +827,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 	}
 
 	gdnd_drop_on_directory (context, selection_data, dir);
-	free (dir);
+	g_free (dir);
 
 	update_one_panel_widget (panel, 0, UP_KEEPSEL);
 	panel_update_contents (panel);
@@ -1325,7 +1323,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 			    panel->dir.list [index].f.link_to_dir){
 				fullname = concat_dir_and_file (panel->cwd, panel->dir.list [index].fname);
 				new_panel_at (fullname);
-				free (fullname);
+				g_free (fullname);
 			}
 		} 
 		break;
@@ -1356,8 +1354,8 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 
 	source = panel->dir.list [index].fname;
 	if (mc_rename (source, dest) == 0){
-		free (panel->dir.list [index].fname);
-		panel->dir.list [index].fname = strdup (dest);
+		g_free (panel->dir.list [index].fname);
+		panel->dir.list [index].fname = g_strdup (dest);
 		return TRUE;
 	} else
 		return FALSE;
@@ -1714,7 +1712,7 @@ display_mini_info (WPanel *panel)
 
 		link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 		len = mc_readlink (link, link_target, MC_MAXPATHLEN);
-		free (link);
+		g_free (link);
 
 		if (len > 0){
 			link_target [len] = 0;
@@ -1722,7 +1720,7 @@ display_mini_info (WPanel *panel)
 			/* str = copy_strings ("-> ", link_target, NULL); */
 			gnome_appbar_pop (bar);
 			gnome_appbar_push (bar, " ");
-			/*free (str); */
+			/* g_free (str); */
 		} else {
 			gnome_appbar_pop (bar);
 			gnome_appbar_push (bar, _("<readlink failed>"));
@@ -1734,12 +1732,12 @@ display_mini_info (WPanel *panel)
 		int  len = panel->estimated_total;
 		char *buffer;
 
-		buffer = xmalloc (len + 2, "display_mini_info");
+		buffer = g_malloc (len + 2);
 		format_file (buffer, panel, panel->selected, panel->estimated_total-2, 0, 1);
 		buffer [len] = 0;
 		gnome_appbar_pop (bar);
 		gnome_appbar_push (bar, buffer);
-		free (buffer);
+		g_free (buffer);
 	}
 	if (panel->list_type == list_icons){
 		if (panel->marked == 0){
@@ -2541,14 +2539,14 @@ panel_update_cols (Widget *panel, int frame_size)
 char *
 get_nth_panel_name (int num)
 {
-    static char buffer [20];
+    static char buffer [BUF_TINY];
 
     if (!num)
         return "New Left Panel";
     else if (num == 1)
         return "New Right Panel";
     else {
-        sprintf (buffer, "%ith Panel", num);
+        g_snprintf (buffer, sizeof (buffer), "%ith Panel", num);
         return buffer;
     }
 }
@@ -2561,7 +2559,7 @@ load_hint (void)
 	if ((hint = get_random_hint ())){
 		if (*hint)
 			set_hintbar (hint);
-		free (hint);
+		g_free (hint);
 	} else
 		set_hintbar ("The GNOME File Manager " VERSION);
 

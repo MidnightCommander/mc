@@ -87,19 +87,19 @@ stock_from_text (char *text)
 {
 	char *stock;
 		
-	if (strcasecmp (text, _("ok")) == 0)
+	if ( g_strcasecmp (text, _("ok")) == 0)
 		stock = GNOME_STOCK_BUTTON_OK;
-	else if (strcasecmp (text, _("cancel")) == 0)
+	else if ( g_strcasecmp (text, _("cancel")) == 0)
 		stock = GNOME_STOCK_BUTTON_CANCEL;
-	else if (strcasecmp (text, _("help")) == 0)
+	else if ( g_strcasecmp (text, _("help")) == 0)
 		stock = GNOME_STOCK_BUTTON_HELP;
-	else if (strcasecmp (text, _("yes")) == 0)
+	else if ( g_strcasecmp (text, _("yes")) == 0)
 		stock = GNOME_STOCK_BUTTON_YES;
-	else if (strcasecmp (text, _("no")) == 0)
+	else if ( g_strcasecmp (text, _("no")) == 0)
 		stock = GNOME_STOCK_BUTTON_NO;
-	else if (strcasecmp (text, _("exit")) == 0)
+	else if ( g_strcasecmp (text, _("exit")) == 0)
 		stock = GNOME_STOCK_BUTTON_CLOSE;
-	else if (strcasecmp (text, _("abort")) == 0)
+	else if ( g_strcasecmp (text, _("abort")) == 0)
 		stock = GNOME_STOCK_BUTTON_CANCEL;
 	else
 		stock = 0;
@@ -551,7 +551,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 		char buffer [40];
 		GtkButton *b;
 
-		sprintf (buffer, "F%d %s", i+1, bb->labels [i].text ? bb->labels [i].text : "      ");
+		g_snprintf (buffer, sizeof (buffer), "F%d %s", i+1, bb->labels [i].text ? bb->labels [i].text : "      ");
 		b = (GtkButton *) gtk_button_new_with_label (buffer);
 		gtk_signal_connect (GTK_OBJECT (b), "clicked",
 				    GTK_SIGNAL_FUNC (buttonbar_clicked), bb);

@@ -20,7 +20,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #include <unistd.h>
@@ -47,7 +46,7 @@
 #include <gnome.h>
 #include <X11/Xlib.h>
 #include <gdk/gdkprivate.h>
-#include "util.h"
+#include "global.h"
 
 int my_system_get_child_pid (int flags, const char *shell, const char *command, pid_t *pid)
 {

@@ -1,9 +1,7 @@
 #include <config.h>
 #include <string.h>
-#include <stdlib.h>		/* atoi */
-#include "fs.h"
-#include "mad.h"
 #include "x.h"
+#include "global.h"
 #include "dir.h"
 #include "command.h"
 #include "panel.h"

@@ -6,8 +6,8 @@
  */
 
 #include <config.h>
-#include "fs.h"
 #include <libgnome/libgnome.h>
+#include "global.h"
 #include "gmetadata.h"
 #include <sys/stat.h>
 #include "../vfs/vfs.h"
@@ -73,7 +73,7 @@ gmeta_set_icon_pos (char *filename, int x, int y)
 
 	g_return_if_fail (filename != NULL);
 
-	sprintf (buf, "%d %d", x, y);
+	g_snprintf (buf, sizeof (buf), "%d %d", x, y);
 
 	if (gnome_metadata_set (filename, ICON_POSITION, strlen (buf) + 1, buf) != 0)
 		g_warning ("Error setting the icon position metadata for \"%s\"", filename);

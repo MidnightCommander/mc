@@ -647,7 +647,7 @@ gnome_open_files (GtkWidget *widget, WPanel *panel)
 			/* we break out. */
 			break;
 		execute (command);
-		free (command);
+		 g_free (command);
 	}
 #endif
 	g_list_free (later);

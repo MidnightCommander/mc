@@ -8,9 +8,8 @@
 
 #include <config.h>
 #include <string.h>
-#include <malloc.h>
+#include "global.h"
 #include "main.h"
-#include "mad.h"
 #include "menu.h"
 #include "x.h"
 
@@ -22,7 +21,7 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 {
     Menu menu;
 
-    menu = (Menu) xmalloc (sizeof (*menu), "create_menu");
+    menu = (Menu) g_malloc (sizeof (*menu));
     menu->count = count;
     menu->max_entry_len = 0;
     menu->entries = entries;
@@ -50,7 +49,7 @@ static void menubar_destroy (WMenu *menubar)
 
 WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
 {
-    WMenu *menubar = (WMenu *) xmalloc (sizeof (WMenu), "menubar_new");
+    WMenu *menubar = g_new (WMenu, 1);
     GtkWidget *g_menubar;
     int i, j;
     

@@ -40,7 +40,7 @@ put_in_metadata (char *dest, char *png_file)
 		exit (1);
 	}
 
-	buffer = malloc (buf.st_size);
+	buffer = g_malloc (buf.st_size);
 	if (buffer == NULL){
 		printf ("No memory\n");
 		exit (1);
@@ -53,7 +53,7 @@ put_in_metadata (char *dest, char *png_file)
 	
 	gnome_metadata_set (dest, "icon-inline-png", buf.st_size, buffer);
 	
-	free (buffer);
+	g_free (buffer);
 }
 
 static void

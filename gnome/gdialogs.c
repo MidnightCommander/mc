@@ -1,9 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*- */
 /* New dialogs... */
 #include <config.h>
-#include "util.h"
 #include "panel.h"
 #include <gnome.h>
+#include "global.h"
 #include "file.h"
 #include "filegui.h"
 #include "fileopctx.h"
@@ -92,8 +92,7 @@ trim_file_name (FileOpContextUI *ui, gchar *path, gint length, gint cur_length)
                 while (gdk_string_width (ui->op_source_label->style->font, path + len) > length)
                         len ++;
         }
-        path_copy = g_malloc (sizeof (gchar [1 + 3 + strlen (path) - len]));
-        sprintf (path_copy, "...%s", path + len);
+        path_copy = g_strdup_printf ("...%s", path + len);
         return path_copy;
 }
 
@@ -652,11 +651,11 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 umask (i);
                 ctx->umask_kill = i ^ 0777777;
         }
-        source_mask = strdup ("*");
+        source_mask = g_strdup ("*");
         orig_mask = source_mask;
         if (!dest_dir || !*dest_dir){
                 if (source_mask)
-                        free (source_mask);
+                        g_free (source_mask);
                 return dest_dir;
         }
 
@@ -674,7 +673,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 source_mask = convert_pattern (source_mask, match_file, 1);
                 easy_patterns = source_easy_patterns;
                 error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
-                free (source_mask);
+                g_free (source_mask);
         } else
                 error = re_compile_pattern (source_mask, strlen (source_mask), &ctx->rx);
 
@@ -682,7 +681,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
                 g_warning ("%s\n",error);
 
         if (orig_mask)
-                free (orig_mask);
+                g_free (orig_mask);
         ctx->dest_mask = strrchr (dest_dir, PATH_SEP);
         if (ctx->dest_mask == NULL)
                 ctx->dest_mask = dest_dir;
@@ -695,14 +694,14 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
             (ctx->dive_into_subdirs && ((!only_one && !is_wildcarded (ctx->dest_mask)) ||
                                         (only_one && !mc_stat (dest_dir, &buf)
                                          && S_ISDIR (buf.st_mode)))))
-                ctx->dest_mask = strdup ("*");
+                ctx->dest_mask = g_strdup ("*");
         else {
-                ctx->dest_mask = strdup (ctx->dest_mask);
+                ctx->dest_mask = g_strdup (ctx->dest_mask);
                 *orig_mask = 0;
         }
         if (!*dest_dir){
-                free (dest_dir);
-                dest_dir = strdup ("./");
+                g_free (dest_dir);
+                dest_dir = g_strdup ("./");
         }
         return dest_dir;
 }
