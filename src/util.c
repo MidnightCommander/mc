@@ -496,7 +496,7 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
     char *new_pattern;
     int was_wildcard = 0;
 
-    if (easy_patterns){
+    if ((match_type != match_regex) && easy_patterns){
 	new_pattern = g_malloc (MC_MAXPATHLEN);
 	d = new_pattern;
 	if (match_type == match_file)

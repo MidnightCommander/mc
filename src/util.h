@@ -62,7 +62,12 @@ char *_icase_search (char *text, char *data, int *lng);
 #define icase_search(T,D) _icase_search((T), (D), NULL)
 
 /* Matching */
-enum { match_file, match_normal };
+enum {
+    match_file,			/* match a filename, use easy_patterns */
+    match_normal,		/* match pattern, use easy_patterns */
+    match_regex,		/* match pattern, force using regex */
+};
+
 extern int easy_patterns;
 char *convert_pattern (char *pattern, int match_type, int do_group);
 int regexp_match (char *pattern, char *string, int match_type);

@@ -1,5 +1,11 @@
 2003-06-06  Pavel Roskin  <proski@gnu.org>
 
+	* util.h: Add new match_type - match_regex.
+	* ext.c: Use it everywhere.
+	(regex_command): Don't change easy_patterns - it affects the
+	panel filters.
+	Reported by Andrew V. Samoilov <sav@bcs.zp.ua>
+
 	* view.c (get_byte): Fix off-by-one error.  Found by Valgrind.
 
 	* command.c (command_new): Fix memory leak.

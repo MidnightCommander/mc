@@ -457,7 +457,7 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 
     if (content_string && content_string[0]
 	&& regexp_match (ptr, content_string + content_shift,
-			 match_normal)) {
+			 match_regex)) {
 	found = 1;
     }
 
@@ -484,7 +484,6 @@ regex_command (char *filename, char *action, int *move_dir)
     int found = 0;
     int error_flag = 0;
     int ret = 0;
-    int old_patterns;
     struct stat mystat;
     int view_at_line_number;
     char *include_target;
@@ -566,8 +565,6 @@ regex_command (char *filename, char *action, int *move_dir)
     }
     mc_stat (filename, &mystat);
 
-    old_patterns = easy_patterns;
-    easy_patterns = 0;		/* Real regular expressions are needed :) */
     include_target = NULL;
     include_target_len = 0;
     for (p = data; *p; p++) {
@@ -600,11 +597,11 @@ regex_command (char *filename, char *action, int *move_dir)
 		/* Do not transform shell patterns, you can use shell/ for
 		 * that
 		 */
-		if (regexp_match (p, filename, match_normal))
+		if (regexp_match (p, filename, match_regex))
 		    found = 1;
 	    } else if (!strncmp (p, "directory/", 10)) {
 		if (S_ISDIR (mystat.st_mode)
-		    && regexp_match (p + 10, filename, match_normal))
+		    && regexp_match (p + 10, filename, match_regex))
 		    found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
 		p += 6;
@@ -690,7 +687,6 @@ regex_command (char *filename, char *action, int *move_dir)
 		break;
 	}
     }
-    easy_patterns = old_patterns;
     if (error_flag)
 	return -1;
     return ret;
