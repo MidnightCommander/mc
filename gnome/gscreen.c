@@ -1365,7 +1365,11 @@ panel_create_icon_display (WPanel *panel)
 {
 	GnomeIconList *ilist;
 			       
-	ilist = GNOME_ICON_LIST (gnome_icon_list_new (90, NULL, TRUE));
+	ilist = GNOME_ICON_LIST (
+		gnome_icon_list_new_flags (
+			90, NULL,
+			GNOME_ICON_LIST_IS_EDITABLE|
+			GNOME_ICON_LIST_STATIC_TEXT));
 
 	gnome_icon_list_set_separators (ilist, " /-_.");
 	gnome_icon_list_set_row_spacing (ilist, 2);
