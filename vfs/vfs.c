@@ -798,7 +798,7 @@ mc_munmap (caddr_t addr, size_t len)
 #endif
 
 static char *
-mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
+mc_def_getlocalcopy (const char *filename)
 {
     char *tmp;
     int fdin, fdout, i;
@@ -850,7 +850,7 @@ mc_getlocalcopy (const char *pathname)
     struct vfs_class *vfs = vfs_get_class (path);    
 
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, path) :
-                                 mc_def_getlocalcopy (vfs, path);
+                                 mc_def_getlocalcopy (path);
     g_free (path);
     if (!result)
 	errno = ferrno (vfs);

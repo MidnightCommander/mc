@@ -51,6 +51,8 @@ static int sfs_flags[ MAXFS ];
 static int
 sfs_uptodate (char *name, char *cache)
 {
+    (void) name;
+    (void) cache;
     return 1;
 }
 
@@ -250,6 +252,8 @@ sfs_getid (struct vfs_class *me, const char *path)
 {
     struct cachedfile *cur = head;
 
+    (void) me;
+
     while (cur) {
 	if (!strcmp (path, cur->name))
 	    break;
@@ -284,6 +288,8 @@ static void sfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct cachedfile *cur = head;
 
+    (void) me;
+
     while (cur){
 	(*func)(cur->name);
 	cur = cur->next;
@@ -294,6 +300,7 @@ static int sfs_nothingisopen (vfsid id)
 {
     /* FIXME: Investigate whether have to guard this like in
        the other VFSs (see fd_usage in extfs) -- Norbert */
+    (void) id;
     return 1;
 }
 
@@ -308,6 +315,10 @@ static int
 sfs_ungetlocalcopy (struct vfs_class *me, const char *path,
 		    const char *local, int has_changed)
 {
+    (void) me;
+    (void) path;
+    (void) local;
+    (void) has_changed;
     return 0;
 }
 
@@ -316,6 +327,8 @@ static int sfs_init (struct vfs_class *me)
     char *mc_sfsini;
     FILE *cfg;
     char key[256];
+
+    (void) me;
 
     mc_sfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "sfs.ini");
     cfg = fopen (mc_sfsini, "r");
@@ -384,6 +397,8 @@ sfs_done (struct vfs_class *me)
 {
     int i;
 
+    (void) me;
+
     for (i = 0; i < sfs_no; i++){
         g_free (sfs_prefix [i]);
 	g_free (sfs_command [i]);
@@ -396,6 +411,8 @@ static int
 sfs_which (struct vfs_class *me, const char *path)
 {
     int i;
+
+    (void) me;
 
     for (i = 0; i < sfs_no; i++)
         if (sfs_flags [i] & F_FULLMATCH) {

@@ -627,6 +627,8 @@ ftpfs_open_socket (struct vfs_class *me, struct vfs_s_super *super)
     char     *host;
     int      port = SUP.port;
     int      free_host = 0;
+
+    (void) me;
     
     /* Use a proxy host? */
     host = SUP.host;
@@ -751,6 +753,8 @@ ftpfs_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     char *host, *user, *password;
     int port;
 
+    (void) archive_name;
+
     ftpfs_split_url (strchr (op, ':') + 1, &host, &user, &port, &password);
 
     SUP.host = host;
@@ -779,6 +783,10 @@ ftpfs_archive_same (struct vfs_class *me, struct vfs_s_super *super,
 {
     char *host, *user;
     int port;
+
+    (void) me;
+    (void) archive_name;
+    (void) cookie;
 
     ftpfs_split_url (strchr (op, ':') + 1, &host, &user, &port, 0);
 
@@ -1427,6 +1435,8 @@ ftpfs_linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 
 static int ftpfs_ctl (void *fh, int ctlop, void *arg)
 {
+    (void) arg;
+
     switch (ctlop) {
         case VFS_CTL_IS_NOTREADY:
 	    {
@@ -1511,6 +1521,10 @@ static int ftpfs_chown (struct vfs_class *me, const char *path, int owner, int g
 #else
 /* Everyone knows it is not possible to chown remotely, so why bother them.
    If someone's root, then copy/move will always try to chown it... */
+    (void) me;
+    (void) path;
+    (void) owner;
+    (void) group;
     return 0;
 #endif    
 }
@@ -1524,6 +1538,8 @@ static int ftpfs_unlink (struct vfs_class *me, const char *path)
 static int
 ftpfs_is_same_dir (struct vfs_class *me, struct vfs_s_super *super, const char *path)
 {
+    (void) me;
+
     if (!SUP.cwdir)
 	return 0;
     if (strcmp (path, SUP.cwdir) == 0)
@@ -1562,6 +1578,8 @@ static int ftpfs_rename (struct vfs_class *me, const char *path1, const char *pa
 
 static int ftpfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    (void) mode; /* FIXME: should be used */
+
     return ftpfs_send_command(me, path, "MKD /%s", OPT_FLUSH);
 }
 
@@ -1574,6 +1592,8 @@ static int
 ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
 	       int mode)
 {
+    (void) mode;
+
     fh->u.ftp.append = 0;
     /* File will be written only, so no need to retrieve it from ftp server */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY | O_RDWR))) {
@@ -1652,6 +1672,8 @@ static void
 ftpfs_done (struct vfs_class *me)
 {
     struct no_proxy_entry *np;
+
+    (void) me;
 
     while (no_proxy) {
 	np = no_proxy->next;
@@ -1741,7 +1763,7 @@ static keyword_t ftpfs_netrc_next (void)
     return NETRC_UNKNOWN;
 }
 
-static int ftpfs_netrc_bad_mode (const char *netrcname, const char *arg_netrc)
+static int ftpfs_netrc_bad_mode (const char *netrcname)
 {
     static int be_angry = 1;
     struct stat mystat;
@@ -1894,7 +1916,7 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 
 	    /* Ignore unsafe passwords */
 	    if (strcmp (*login, "anonymous") && strcmp (*login, "ftp")
-		&& ftpfs_netrc_bad_mode (netrcname, netrc)) {
+		&& ftpfs_netrc_bad_mode (netrcname)) {
 		need_break = 1;
 		break;
 	    }
@@ -1912,7 +1934,7 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 	    }
 
 	    /* Ignore account, but warn user anyways */
-	    ftpfs_netrc_bad_mode (netrcname, netrc);
+	    ftpfs_netrc_bad_mode (netrcname);
 	    break;
 
 	default:

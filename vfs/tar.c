@@ -193,6 +193,8 @@ static long tar_from_oct (int digs, char *where)
 
 static void tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
+    (void) me;
+
     if (archive->u.arch.fd != -1)
 	mc_close(archive->u.arch.fd);
 }
@@ -262,6 +264,8 @@ tar_get_next_record (struct vfs_s_super *archive, int tard)
 {
     int n;
 
+    (void) archive;
+
     n = mc_read (tard, rec_buf.charptr, RECORDSIZE);
     if (n != RECORDSIZE)
 	return NULL;		/* An error has occurred */
@@ -271,6 +275,8 @@ tar_get_next_record (struct vfs_s_super *archive, int tard)
 
 static void tar_skip_n_records (struct vfs_s_super *archive, int tard, int n)
 {
+    (void) archive;
+
     mc_lseek (tard, n * RECORDSIZE, SEEK_CUR);
     current_tar_position += n * RECORDSIZE;
 }
@@ -279,6 +285,8 @@ static void
 tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header,
 	       size_t h_size)
 {
+    (void) me;
+
     st->st_mode = tar_from_oct (8, header->header.mode);
 
     /* Adjust st->st_mode because there are tar-files with
@@ -550,6 +558,8 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
     ReadStatus prev_status;
     int tard;
 
+    (void) op;
+
     current_tar_position = 0;
     /* Open for reading */
     if ((tard = tar_open_archive_int (me, name, archive)) == -1)
@@ -614,6 +624,10 @@ static void *
 tar_super_check (struct vfs_class *me, const char *archive_name, char *op)
 {
     static struct stat stat_buf;
+
+    (void) me;
+    (void) op;
+
     if (mc_stat (archive_name, &stat_buf))
 	return NULL;
     return &stat_buf;
@@ -624,6 +638,9 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
 		const char *archive_name, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
+
+    (void) me;
+    (void) op;
 
     if (strcmp (parc->name, archive_name))
 	return 0;
@@ -659,6 +676,9 @@ static int tar_read (void *fh, char *buffer, int count)
 
 static int tar_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
+    (void) fh;
+    (void) mode;
+
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
     return 0;
 }

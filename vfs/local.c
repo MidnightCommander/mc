@@ -27,6 +27,8 @@ local_open (struct vfs_class *me, const char *file, int flags, int mode)
     int *local_info;
     int fd;
 
+    (void) me;
+
     fd = open (file, NO_LINEAR (flags), mode);
     if (fd == -1)
 	return 0;
@@ -73,6 +75,7 @@ local_close (void *data)
 int
 local_errno (struct vfs_class *me)
 {
+    (void) me;
     return errno;
 }
 
@@ -81,6 +84,8 @@ local_opendir (struct vfs_class *me, const char *dirname)
 {
     DIR **local_info;
     DIR *dir;
+
+    (void) me;
 
     dir = opendir (dirname);
     if (!dir)
@@ -111,12 +116,16 @@ local_closedir (void *data)
 static int
 local_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
+    (void) me;
+
     return stat (path, buf);
 }
 
 static int
 local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
+    (void) me;
+
 #ifndef HAVE_STATLSTAT
     return lstat (path,buf);
 #else
@@ -127,42 +136,55 @@ local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 int
 local_fstat (void *data, struct stat *buf)
 {
-    return fstat (*((int *) data), buf);    
+    /* FIXME: avoid type cast */
+    return fstat (*((int *) data), buf);
 }
 
 static int
 local_chmod (struct vfs_class *me, const char *path, int mode)
 {
+    (void) me;
+
     return chmod (path, mode);
 }
 
 static int
 local_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
+    (void) me;
+
     return chown (path, owner, group);
 }
 
 static int
 local_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
+    (void) me;
+
     return utime (path, times);
 }
 
 static int
 local_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
+    (void) me;
+
     return readlink (path, buf, size);
 }
 
 static int
 local_unlink (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return unlink (path);
 }
 
 static int
 local_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
+    (void) me;
+
     return symlink (n1, n2);
 }
 
@@ -191,12 +213,16 @@ local_write (void *data, const char *buf, int nbyte)
 static int
 local_rename (struct vfs_class *me, const char *a, const char *b)
 {
+    (void) me;
+
     return rename (a, b);
 }
 
 static int
 local_chdir (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return chdir (path);
 }
 
@@ -211,30 +237,40 @@ local_lseek (void *data, off_t offset, int whence)
 static int
 local_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
+    (void) me;
+
     return mknod (path, mode, dev);
 }
 
 static int
 local_link (struct vfs_class *me, const char *p1, const char *p2)
 {
+    (void) me;
+
     return link (p1, p2);
 }
 
 static int
 local_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    (void) me;
+
     return mkdir (path, mode);
 }
 
 static int
 local_rmdir (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return rmdir (path);
 }
 
 static char *
 local_getlocalcopy (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return g_strdup (path);
 }
 
@@ -242,6 +278,11 @@ static int
 local_ungetlocalcopy (struct vfs_class *me, const char *path,
 		      const char *local, int has_changed)
 {
+    (void) me;
+    (void) path;
+    (void) local;
+    (void) has_changed;
+
     return 0;
 }
 
@@ -251,12 +292,17 @@ local_mmap (struct vfs_class *me, caddr_t addr, size_t len, int prot, int flags,
 {
     int fd = * (int *)data;
 
+    (void) me;
+
     return mmap (addr, len, prot, flags, fd, offset);
 }
 
 int
 local_munmap (struct vfs_class *me, caddr_t addr, size_t len, void *data)
 {
+    (void) me;
+    (void) data;
+
     return munmap (addr, len);
 }
 #endif
@@ -264,6 +310,9 @@ local_munmap (struct vfs_class *me, caddr_t addr, size_t len, void *data)
 static int
 local_which (struct vfs_class *me, const char *path)
 {
+    (void) me;
+    (void) path;
+
     return 0;		/* Every path which other systems do not like is expected to be ours */
 }
 

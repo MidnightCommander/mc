@@ -338,6 +338,9 @@ smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     int i;
     char *path;
+
+    (void) me;
+
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 	if (smbfs_connections [i].cli) {
 	    path = g_strconcat (URL_HEADER,
@@ -408,7 +411,9 @@ smbfs_close (void *data)
 static int
 smbfs_errno (struct vfs_class *me)
 {
-	DEBUG(3, ("smbfs_errno: %s\n", g_strerror(my_errno)));
+    (void) me;
+
+    DEBUG(3, ("smbfs_errno: %s\n", g_strerror(my_errno)));
     return my_errno;
 }
 
@@ -461,8 +466,9 @@ static void
 smbfs_browsing_helper (const char *name, uint32 type, const char *comment, void *state)
 {
     const char *typestr = "";
-
     dir_entry *new_entry = smbfs_new_dir_entry (name);
+
+    (void) state;
 
     switch (type) {
     case STYPE_DISKTREE:
@@ -490,6 +496,9 @@ smbfs_loaddir_helper (file_info * finfo, const char *mask, void *entry)
 {
     dir_entry *new_entry = (dir_entry *) entry;
     time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
+
+    (void) mask;
+
 #if 0				/* I want to see dot files */
     if (finfo->mode & aHIDDEN)
 	return;			/* don't bother with hidden files, "~$" screws up mc */
@@ -561,6 +570,9 @@ smbfs_srv_browsing_helper (const char *name, uint32 m, const char *comment,
 			   void *state)
 {
     dir_entry *new_entry = smbfs_new_dir_entry (name);
+
+    (void) m;
+    (void) state;
 
     /* show this as dir */
     new_entry->my_stat.st_mode =
@@ -839,6 +851,8 @@ smbfs_closedir (void *info)
 static int
 smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
+	(void) me;
+
 	DEBUG(3, ("smbfs_chmod(path:%s, mode:%d)\n", path, mode));
 /*	my_errno = EOPNOTSUPP;
 	return -1;	*/	/* cannot chmod on smb filesystem */
@@ -848,6 +862,8 @@ smbfs_chmod (struct vfs_class *me, const char *path, int mode)
 static int
 smbfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
+	(void) me;
+
 	DEBUG(3, ("smbfs_chown(path:%s, owner:%d, group:%d)\n", path, owner, group));
 	my_errno = EOPNOTSUPP;	/* ready for your labotomy? */
 	return -1;
@@ -856,27 +872,34 @@ smbfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 static int
 smbfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
 {
+	(void) me;
+	(void) times;
+
 	DEBUG(3, ("smbfs_utime(path:%s)\n", path));
 	my_errno = EOPNOTSUPP;
-    return -1;
+	return -1;
 }
 
 static int
 smbfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 {
+	(void) me;
+
 	DEBUG (3,
 	    ("smbfs_readlink(path:%s, buf:%s, size:%d)\n", path, buf,
 	    (int) size));
 	my_errno = EOPNOTSUPP;
-    return -1;                 /* no symlinks on smb filesystem? */
+	return -1;		/* no symlinks on smb filesystem? */
 }
 
 static int
 smbfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
+	(void) me;
+
 	DEBUG(3, ("smbfs_symlink(n1:%s, n2:%s)\n", n1, n2));
 	my_errno = EOPNOTSUPP;
-    return -1;	/* no symlinks on smb filesystem? */
+	return -1;		/* no symlinks on smb filesystem? */
 }
 
 /* Extract the hostname and username from the path */
@@ -1208,12 +1231,14 @@ smbfs_opendir (struct vfs_class *me, const char *dirname)
 	smbfs_connection *sc;
 	char *remote_dir;
 
-	DEBUG(3, ("smbfs_opendir(dirname:%s)\n", dirname));
+    (void) me;
+
+    DEBUG(3, ("smbfs_opendir(dirname:%s)\n", dirname));
 
     if (!(remote_dir = smbfs_get_path (&sc, dirname)))
-		return NULL;
+	return NULL;
 
-	/* FIXME: where freed? */
+    /* FIXME: where freed? */
     smbfs_info = g_new (opendir_info, 1);
 	smbfs_info->server_list = FALSE;
     smbfs_info->path = g_strdup(dirname);		/* keep original */
@@ -1230,6 +1255,8 @@ smbfs_fake_server_stat (const char *server_url, const char *path, struct stat *b
 {
     dir_entry *dentry;
     const char *p;
+
+    (void) server_url;
 
     if ((p = strrchr (path, '/')))
 	path = p + 1;		/* advance until last '/' */
@@ -1456,6 +1483,8 @@ smbfs_chdir (struct vfs_class *me, const char *path)
     char *remote_dir;
     smbfs_connection *sc;
 
+    (void) me;
+
     DEBUG (3, ("smbfs_chdir(path:%s)\n", path));
     if (!(remote_dir = smbfs_get_path (&sc, path)))
 	return -1;
@@ -1625,6 +1654,8 @@ smbfs_lseek (void *data, off_t offset, int whence)
 static int
 smbfs_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
+    (void) me;
+
 	DEBUG(3, ("smbfs_mknod(path:%s, mode:%d, dev:%d)\n", path, mode, dev));
 	my_errno = EOPNOTSUPP;
     return -1;
@@ -1636,6 +1667,8 @@ smbfs_mkdir (struct vfs_class * me, const char *path, mode_t mode)
     smbfs_connection *sc;
     char *remote_file;
     char *cpath;
+
+    (void) me;
 
     DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
@@ -1661,6 +1694,8 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 	char *remote_file;
 	char *cpath;
 
+	(void) me;
+
 	DEBUG(3, ("smbfs_rmdir(path:%s)\n", path));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
@@ -1682,6 +1717,8 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 static int
 smbfs_link (struct vfs_class *me, const char *p1, const char *p2)
 {
+    (void) me;
+
     DEBUG (3, ("smbfs_link(p1:%s, p2:%s)\n", p1, p2));
     my_errno = EOPNOTSUPP;
     return -1;
@@ -1736,6 +1773,9 @@ smbfs_forget (const char *path)
 static int
 smbfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
+    (void) me;
+    (void) arg;
+
     DEBUG (3, ("smbfs_setctl(path:%s, ctlop:%d)\n", path, ctlop));
     switch (ctlop) {
     case VFS_SETCTL_FORGET:
@@ -1750,6 +1790,8 @@ static smbfs_handle *
 smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 {
     size_t size;
+
+    (void) mode;
 
     if (flags & O_TRUNC)	/* if it exists truncate to zero */
 	DEBUG (3, ("smbfs_open: O_TRUNC\n"));
@@ -1807,6 +1849,8 @@ smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     smbfs_connection	*sc;
     smbfs_handle	*remote_handle;
 
+    (void) me;
+
     DEBUG(3, ("smbfs_open(file:%s, flags:%d, mode:%o)\n", file, flags, mode));
 
     if (!(remote_file = smbfs_get_path (&sc, file)))
@@ -1833,6 +1877,8 @@ smbfs_unlink (struct vfs_class *me, const char *path)
     smbfs_connection *sc;
     char *remote_file;
 
+    (void) me;
+
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
 
@@ -1854,6 +1900,8 @@ smbfs_rename (struct vfs_class *me, const char *a, const char *b)
     smbfs_connection *sc;
     char *ra, *rb;
     int retval;
+
+    (void) me;
 
     if ((ra = smbfs_get_path (&sc, a)) == 0)
 	return -1;

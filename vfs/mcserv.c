@@ -1240,6 +1240,8 @@ get_client (int portnum)
 static void
 signal_int_handler (int sig)
 {
+    (void) sig;
+
     pmap_unset (RPC_PROGNUM, RPC_PROGVER);
 }
 #endif

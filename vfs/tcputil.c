@@ -29,6 +29,7 @@ int got_sigpipe;
 static void
 sig_pipe (int unused)
 {
+    (void) unused;
     got_sigpipe = 1;
 }
 

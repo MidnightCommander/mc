@@ -134,6 +134,9 @@ static int cpio_skip_padding(struct vfs_s_super *super)
 static void cpio_free_archive(struct vfs_class *me, struct vfs_s_super *super)
 {
     struct defer_inode *l, *lnext;
+
+    (void) me;
+
     if(super->u.arch.fd != -1)
 	mc_close(super->u.arch.fd);
 	super->u.arch.fd = -1;
@@ -565,6 +568,8 @@ cpio_open_archive (struct vfs_class *me, struct vfs_s_super *super,
 {
     int status = STATUS_START;
 
+    (void) op;
+
     if (cpio_open_cpio_file (me, super, name) == -1)
 	return -1;
 
@@ -591,6 +596,10 @@ static void *
 cpio_super_check (struct vfs_class *me, const char *archive_name, char *op)
 {
     static struct stat sb;
+
+    (void) me;
+    (void) op;
+
     if (mc_stat (archive_name, &sb))
 	return NULL;
     return &sb;
@@ -601,6 +610,9 @@ cpio_super_same (struct vfs_class *me, struct vfs_s_super *parc,
 		 const char *archive_name, char *op, void *cookie)
 {
     struct stat *archive_stat = cookie;	/* stat of main archive */
+
+    (void) me;
+    (void) op;
 
     if (strcmp (parc->name, archive_name))
 	return 0;
@@ -636,6 +648,9 @@ static int cpio_read(void *fh, char *buffer, int count)
 
 static int cpio_fh_open(struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
 {
+    (void) fh;
+    (void) mode;
+
     if ((flags & O_ACCMODE) != O_RDONLY) ERRNOR (EROFS, -1);
     return 0;
 }

@@ -133,6 +133,8 @@ vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_
 {
     struct vfs_s_entry **ep;
 
+    (void) me;
+
     for (ep = &dir->subdir; *ep != NULL; ep = &((*ep)->next))
 	;
     ent->prevp = ep;
@@ -148,6 +150,8 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 {
     static struct stat st;
     int myumask;
+
+    (void) me;
 
     myumask = umask (022);
     umask (myumask);
@@ -293,6 +297,9 @@ static void
 split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char **save)
 {
     char *s;
+
+    (void) me;
+
     s = strrchr (path, PATH_SEP);
     if (!s){
 	*save = NULL;
@@ -1035,6 +1042,10 @@ static int
 vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path,
 		      const char *local, int has_changed)
 {
+    (void) me;
+    (void) path;
+    (void) local;
+    (void) has_changed;
     return 0;
 }
 
@@ -1084,7 +1095,8 @@ vfs_s_getid (struct vfs_class *me, const char *path)
 static int
 vfs_s_nothingisopen (vfsid id)
 {
-  /* Our data structures should survive free of superblock at any time */
+    (void) id;
+    /* Our data structures should survive free of superblock at any time */
     return 1;
 }
 
@@ -1193,6 +1205,8 @@ vfs_s_get_line_interruptible (struct vfs_class *me, char *buffer, int size, int 
 {
     int n;
     int i;
+
+    (void) me;
 
     enable_interrupt_key ();
     for (i = 0; i < size-1; i++){

@@ -113,6 +113,8 @@ extfs_fill_names (struct vfs_class *me, fill_names_f func)
     struct archive *a = first_archive;
     char *name;
 
+    (void) me;
+
     while (a) {
 	name =
 	    g_strconcat (a->name ? a->name : "", "#",
@@ -196,6 +198,7 @@ static struct entry *extfs_generate_entry (struct archive *archive,
 
 static void extfs_free_entries (struct entry *entry)
 {
+    (void) entry;
     return;
 }
 
@@ -432,7 +435,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
  * can be changed and the result may point inside the original string.
  */
 static char *
-extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **archive, int is_dir,
+extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **archive,
 		       int do_not_open)
 {
     char *local, *op;
@@ -480,11 +483,11 @@ extfs_get_path_mangle (struct vfs_class *me, char *inname, struct archive **arch
  * The result should be freed.
  */
 static char *
-extfs_get_path (struct vfs_class *me, const char *inname, struct archive **archive, int is_dir,
+extfs_get_path (struct vfs_class *me, const char *inname, struct archive **archive,
 		int do_not_open)
 {
     char *buf = g_strdup (inname);
-    char *res = extfs_get_path_mangle (me, buf, archive, is_dir, do_not_open);
+    char *res = extfs_get_path_mangle (me, buf, archive, do_not_open);
     char *res2 = NULL;
     if (res)
 	res2 = g_strdup (res);
@@ -636,7 +639,7 @@ extfs_run (struct vfs_class *me, const char *file)
     char *p, *q, *archive_name, *mc_extfsdir;
     char *cmd;
 
-    if ((p = extfs_get_path (me, file, &archive, 0, 0)) == NULL)
+    if ((p = extfs_get_path (me, file, &archive, 0)) == NULL)
 	return;
     q = name_quote (p, 0);
     g_free (p);
@@ -662,7 +665,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     int local_handle;
     int created = 0;
 
-    if ((q = extfs_get_path (me, file, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path (me, file, &archive, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL && (flags & O_CREAT)) {
@@ -855,6 +858,8 @@ static struct entry *extfs_find_entry (struct entry *dir, char *name, int make_d
 
 static int extfs_errno (struct vfs_class *me)
 {
+    (void) me;
+
     return my_errno;
 }
 
@@ -865,7 +870,7 @@ static void * extfs_opendir (struct vfs_class *me, const char *dirname)
     struct entry *entry;
     struct entry **info;
 
-    if ((q = extfs_get_path (me, dirname, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path (me, dirname, &archive, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     g_free (q);
@@ -937,7 +942,7 @@ extfs_internal_stat (struct vfs_class *me, const char *path, struct stat *buf,
     char *path2 = g_strdup (path);
     int result = -1;
 
-    if ((q = extfs_get_path_mangle (me, path2, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (me, path2, &archive, 0)) == NULL)
         goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -979,7 +984,7 @@ extfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     char *mpath = g_strdup (path);
     int result = -1;
 
-    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0)) == NULL)
 	goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -1000,6 +1005,9 @@ cleanup:
 
 static int extfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
+    (void) me;
+    (void) path;
+    (void) mode;
     return 0;
 }
 
@@ -1018,7 +1026,7 @@ static int extfs_unlink (struct vfs_class *me, const char *file)
     struct entry *entry;
     int result = -1;
 
-    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0)) == NULL)
 	goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -1047,7 +1055,9 @@ static int extfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
     struct entry *entry;
     int result = -1;
 
-    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0, 0)) == NULL)
+    (void) mode;
+
+    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0)) == NULL)
 	goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry != NULL) {
@@ -1082,7 +1092,7 @@ static int extfs_rmdir (struct vfs_class *me, const char *path)
     struct entry *entry;
     int result = -1;
 
-    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (me, mpath, &archive, 0)) == NULL)
 	goto cleanup;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -1113,7 +1123,7 @@ extfs_chdir (struct vfs_class *me, const char *path)
     struct entry *entry;
 
     my_errno = ENOTDIR;
-    if ((q = extfs_get_path (me, path, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path (me, path, &archive, 0)) == NULL)
 	return -1;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     g_free (q);
@@ -1139,7 +1149,7 @@ extfs_getid (struct vfs_class *me, const char *path)
     struct archive *archive;
     char *p;
 
-    if (!(p = extfs_get_path (me, path, &archive, 1, 1)))
+    if (!(p = extfs_get_path (me, path, &archive, 1)))
 	return NULL;
     g_free (p);
     return (vfsid) archive;
@@ -1279,6 +1289,8 @@ static int extfs_init (struct vfs_class *me)
     char *mc_extfsini;
     char key[256];
 
+    (void) me;
+
     mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
 
@@ -1331,6 +1343,8 @@ static int extfs_which (struct vfs_class *me, const char *path)
 {
     int i;
 
+    (void) me;
+
     for (i = 0; i < extfs_no; i++)
         if (!strcmp (path, extfs_prefixes [i]))
             return i;
@@ -1341,6 +1355,8 @@ static void extfs_done (struct vfs_class *me)
 {
     int i;
 
+    (void) me;
+
     for (i = 0; i < extfs_no; i++ )
 	g_free (extfs_prefixes [i]);
     extfs_no = 0;
@@ -1349,6 +1365,8 @@ static void extfs_done (struct vfs_class *me)
 static int
 extfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
+    (void) arg;
+
     if (ctlop == VFS_SETCTL_RUN) {
 	extfs_run (me, path);
 	return 1;

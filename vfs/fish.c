@@ -311,6 +311,8 @@ fish_open_archive (struct vfs_class *me, struct vfs_s_super *super,
     char *host, *user, *password, *p;
     int flags;
 
+    (void) archive_name;
+
     p = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags,
 		       &password, 0, URL_NOSLASH);
 
@@ -333,6 +335,10 @@ fish_archive_same (struct vfs_class *me, struct vfs_s_super *super,
 {
     char *host, *user;
     int flags;
+
+    (void) me;
+    (void) archive_name;
+    (void) cookie;
 
     op = vfs_split_url (strchr (op, ':') + 1, &host, &user, &flags, 0, 0,
 			URL_NOSLASH);
@@ -667,6 +673,7 @@ fish_linear_close (struct vfs_class *me, struct vfs_s_fh *fh)
 static int
 fish_ctl (void *fh, int ctlop, void *arg)
 {
+    (void) arg;
     return 0;
     switch (ctlop) {
         case VFS_CTL_IS_NOTREADY:
@@ -848,6 +855,8 @@ static int
 fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
 	      int mode)
 {
+    (void) mode;
+
     fh->u.fish.append = 0;
     /* File will be written only, so no need to retrieve it */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY | O_RDWR))) {

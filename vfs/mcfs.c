@@ -103,6 +103,8 @@ mcfs_fill_names (struct vfs_class *me, fill_names_f func)
     int i;
     char *name;
 
+    (void) me;
+
     for (i = 0; i < MCFS_MAX_CONNECTIONS; i++) {
 	if (mcfs_connections[i].host == 0)
 	    continue;
@@ -525,6 +527,8 @@ mcfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     int result, error_num;
     mcfs_handle *remote_handle;
 
+    (void) me;
+
     if (!(remote_file = mcfs_get_path (&mc, file)))
 	return 0;
 
@@ -619,6 +623,8 @@ mcfs_close (void *data)
 static int
 mcfs_errno (struct vfs_class *me)
 {
+    (void) me;
+
     return my_errno;
 }
 
@@ -644,6 +650,8 @@ mcfs_opendir (struct vfs_class *me, const char *dirname)
     int handle, error_num;
     char *remote_dir;
     int result;
+
+    (void) me;
 
     if (!(remote_dir = mcfs_get_path (&mc, dirname)))
 	return 0;
@@ -884,6 +892,8 @@ mcfs_stat_cmd (int cmd, const char *path, struct stat *buf)
 static int
 mcfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
+    (void) me;
+
     return mcfs_stat_cmd (MC_STAT, path, buf);
 }
 
@@ -892,6 +902,8 @@ mcfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     int path_len = strlen (path);
     int entry_len = strlen (mcfs_readdir_data.dent.d_name);
+
+    (void) me;
 
     /* Hack ... */
     if (strcmp (path + path_len - entry_len,
@@ -928,12 +940,16 @@ mcfs_fstat (void *data, struct stat *buf)
 static int
 mcfs_chmod (struct vfs_class *me, const char *path, int mode)
 {
+    (void) me;
+
     return mcfs_rpc_path_int (MC_CHMOD, path, mode);
 }
 
 static int
 mcfs_chown (struct vfs_class *me, const char *path, int owner, int group)
 {
+    (void) me;
+
     return mcfs_rpc_path_int_int (MC_CHOWN, path, owner, group);
 }
 
@@ -943,6 +959,8 @@ mcfs_utime (struct vfs_class *me, const char *path, struct utimbuf *times)
     mcfs_connection *mc;
     int status;
     char *file;
+
+    (void) me;
 
     if (!(file = mcfs_get_path (&mc, path)))
 	return -1;
@@ -977,6 +995,8 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
     mcfs_connection *mc;
     size_t len;
 
+    (void) me;
+
     if (!(remote_file = mcfs_get_path (&mc, path)))
 	return -1;
 
@@ -1004,18 +1024,24 @@ mcfs_readlink (struct vfs_class *me, const char *path, char *buf, size_t size)
 static int
 mcfs_unlink (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return mcfs_rpc_path (MC_UNLINK, path);
 }
 
 static int
 mcfs_symlink (struct vfs_class *me, const char *n1, const char *n2)
 {
+    (void) me;
+
     return mcfs_rpc_two_paths (MC_SYMLINK, n1, n2);
 }
 
 static int
 mcfs_rename (struct vfs_class *me, const char *a, const char *b)
 {
+    (void) me;
+
     return mcfs_rpc_two_paths (MC_RENAME, a, b);
 }
 
@@ -1025,6 +1051,8 @@ mcfs_chdir (struct vfs_class *me, const char *path)
     char *remote_dir;
     mcfs_connection *mc;
     int status, error;
+
+    (void) me;
 
     if (!(remote_dir = mcfs_get_path (&mc, path)))
 	return -1;
@@ -1059,28 +1087,36 @@ mcfs_lseek (void *data, off_t offset, int whence)
 static int
 mcfs_mknod (struct vfs_class *me, const char *path, int mode, int dev)
 {
+    (void) me;
+
     return mcfs_rpc_path_int_int (MC_MKNOD, path, mode, dev);
 }
 
 static int
 mcfs_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
+    (void) me;
+
     return mcfs_rpc_path_int (MC_MKDIR, path, mode);
 }
 
 static int
 mcfs_rmdir (struct vfs_class *me, const char *path)
 {
+    (void) me;
+
     return mcfs_rpc_path (MC_RMDIR, path);
 }
 
 static int
 mcfs_link (struct vfs_class *me, const char *p1, const char *p2)
 {
+    (void) me;
+
     return mcfs_rpc_two_paths (MC_LINK, p1, p2);
 }
 
-/* Gives up on a socket and reopnes the connection, the child own the socket
+/* Gives up on a socket and reopens the connection, the child own the socket
  * now
  */
 static void
@@ -1128,6 +1164,9 @@ mcfs_forget (const char *path)
 static int
 mcfs_setctl (struct vfs_class *me, const char *path, int ctlop, void *arg)
 {
+    (void) me;
+    (void) arg;
+
     switch (ctlop) {
     case VFS_SETCTL_FORGET:
 	mcfs_forget (path);
