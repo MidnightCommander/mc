@@ -1,13 +1,16 @@
-                                       
-                              Midnight Commander
-                             Questions and Answers
-                                       
+Midnight Commander
+Questions and Answers
+
    The newest version of this document is available at
-   http://mc.blackdown.org/mc/answers0.html
+   http://www.gnome.org/mc/answers.html
+   
+   The [NEW] tag marks the sections which have been added recently.
+   
+   The [UPDATED] tag marks the sections which have been updated recently.
    
      * 1 Getting started
           + 1.1 What is Midnight Commander?
-          + 1.2 [UPDATED] Does it run on my machine?
+          + 1.2 Does it run on my machine?
           + 1.3 Does it work with my terminal?
           + 1.4 What else do I need to run MC?
           + 1.5 Is Midnight Commander PD? Copyrighted?
@@ -21,13 +24,18 @@
           + 2.3 How do I use function keys F11 to F20?
           + 2.4 Why does the ESC key behave funny?
           + 2.5 How can I add the plus sign (+) on the command line?
+          + 2.6 [NEW] C-o doesn't work!
+          + 2.7 [NEW] What 'keys' are the "a1" and "c1" keys mentioned in
+            the manual?
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
+          + 3.3 [NEW] How do I get the extension dependant pop-up menu to
+            pop up?
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
             SLang"?
-          + 4.2 [UPDATED] Why don't line drawing characters work?
+          + 4.2 Why don't line drawing characters work?
           + 4.3 Can one use latin-1 characters without losing the lines?
           + 4.4 I have problems with entering/viewing national
             characters!
@@ -39,17 +47,17 @@
           + 4.9 Why are there both terminfo and termcap? Wouldn't one
             database be enough?
      * 5 Graphical user interface
-          + 5.1 Xview and Tk editions?
+          + 5.1 [UPDATED] Xview, Tk and Gnome editions?
      * 6 Command line problems
           + 6.1 How do I stay in the last directory when I exit Midnight
             Commander?
-          + 6.2 How can I access command line history?
+          + 6.2 [UPDATED] How can I access command line history?
           + 6.3 How can I complete commands, file names, variable names
             and so on?
-          + 6.4 [NEW] I am using ksh. Can I use functions defined in the
-            .kshrc within MC?
-          + 6.5 [NEW] Is there any way to include additional options or
-            hot keys to MC?
+          + 6.4 I am using ksh. Can I use functions defined in the .kshrc
+            within MC?
+          + 6.5 Is there any way to include additional options or hot
+            keys to MC?
      * 7 Virtual file systems
           + 7.1 How can I see the contents of a tar archive?
           + 7.2 How do I get out of a tar archive?
@@ -57,27 +65,27 @@
           + 7.4 How do I do non-anonymous ftp with MC?
           + 7.5 How do I close an ftp connection?
           + 7.6 Why aren't the contents of ftp panel updated?
-          + 7.7 [NEW] What kind of proxy server works with Midnight
+          + 7.7 [UPDATED] What kind of proxy server works with Midnight
             Commander?
      * 8 Other common problems
-          + 8.1 [UPDATED] How do I get the internal editor to work?
-          + 8.2 Why doesn't "mcedit newfile" work?
-          + 8.3 [UPDATED] Is there any way to 'bookmark' favourite ftp-fs
-            links?
+          + 8.1 How do I get the internal editor to work?
+          + 8.2 [UPDATED] Why doesn't "mcedit newfile" work?
+          + 8.3 Is there any way to 'bookmark' favourite ftp-fs links?
           + 8.4 When copying the directories lose their original date,
             uid and gid!
-          + 8.5 [UPDATED] Why I keep getting: "There is no disk in the
-            drive. Please insert a disk into drive D:"?
-          + 8.6 [NEW] When I start Midnight Commander, nothing happens!
-          + 8.7 [NEW] When I try to view a file MC hangs!
+          + 8.5 Why I keep getting: "There is no disk in the drive.
+            Please insert a disk into drive D:"?
+          + 8.6 [UPDATED] When I start Midnight Commander, nothing
+            happens!
+          + 8.7 When I try to view a file MC hangs!
      * 9 Development
           + 9.1 Who has written Midnight Commander?
           + 9.2 Do I dare to use a development version?
           + 9.3 How can I report a bug/request for a feature?
           + 9.4 How can I join the development?
      * 10 More information
-          + 10.1 [UPDATED] This document didn't answer my question. Where
-            else can I look for an answer?
+          + 10.1 This document didn't answer my question. Where else can
+            I look for an answer?
           + 10.2 What mailing lists are there for Midnight Commander?
           + 10.3 Where should I look on the World Wide Web for MC stuff?
           + 10.4 Are the mailing lists archived anywhere?
@@ -89,8 +97,8 @@
        
 1 Getting started
 
-  1.1 What is Midnight Commander?
-  
+1.1 What is Midnight Commander?
+
    The Midnight Commander is a user-friendly yet powerful file manager
    and visual shell, useful to novice and guru alike. It provides a
    clear, user-friendly, and somewhat protected interface to a Unix
@@ -101,8 +109,8 @@
    For more thorough description take a look at the announcement of
    Midnight Commander 4.0.
    
-  1.2 [UPDATED] Does it run on my machine?
-  
+1.2 Does it run on my machine?
+
    Yes, Midnight Commander can run on almost any machine, including Unix
    clones, Windows 95/NT and OS/2. Midnight Commander does not run on
    Macintosh.
@@ -131,17 +139,17 @@
      * i386-*-windows95
      * i386-*-os2
        
-   See http://mc.blackdown.org/mc/download.html.
+   See http://www.gnome.org/mc/download.html.
    
    There is also a preliminary Ms-Dos port at
-   http://mc.blackdown.org/cgi-mc/download/DOS/.html (but no Ms-Dos
+   http://www.gnome.org/cgi-bin/mc/download/DOS/.html (but no Ms-Dos
    binary).
    
-   Windows 95/NT port is compiled with Microsoft Visual C++ but it might
-   be possible to use cygwin32 or djgpp instead.
+   Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
+   C++, Cygwin32 and Mingw32.
    
-  1.3 Does it work with my terminal?
-  
+1.3 Does it work with my terminal?
+
    Yes, it does.
    
    Because Midnight Commander is a full screen program it doesn't run on
@@ -152,8 +160,8 @@
    The XView and Tk editions currently under development will require an
    X terminal.
    
-  1.4 What else do I need to run MC?
-  
+1.4 What else do I need to run MC?
+
    You need an Unix compatible operating system or Windows 95/NT or OS/2.
    
    If you want to use mouse on the Linux console you need General Purpose
@@ -174,8 +182,8 @@
    You can get it along with other curses libraries, too, but results may
    not be pretty or even usable.
    
-  1.5 Is Midnight Commander PD? Copyrighted?
-  
+1.5 Is Midnight Commander PD? Copyrighted?
+
    Midnight Commander is under GNU Public License which basically means
    that you may freely copy, change and distribute it, but that you may
    not impose any restrictions on further distribution, and that you must
@@ -187,9 +195,9 @@
    the authors of the Midnight Commander have given all their rights on
    the program to the Free Software Foundation.
    
-  1.6 Where can I get Midnight Commander?
-  
-   See http://mc.blackdown.org/mc/download.html. There are about seventy
+1.6 Where can I get Midnight Commander?
+
+   See http://www.gnome.org/mc/download.html. There are about seventy
    download sites. Note that the newest files might not be present on all
    the download sites yet.
    
@@ -197,15 +205,15 @@
    the sunsite.unc.edu mirrors have MC in the
    /pub/Linux/utils/file/managers/mc directory.
    
-  1.7 I don't have FTP access. Where can I get MC?
-  
+1.7 I don't have FTP access. Where can I get MC?
+
    Most Linux CD-ROMs include Midnight Commander. For example, Slackware,
    Yggdrasil, S.U.S.E., Jurix, RedHat, Caldera and Debian.
    
 2 Keyboard
 
-  2.1 What does documentation mean with the C-?, M-? and F? keys?
-  
+2.1 What does documentation mean with the C-?, M-? and F? keys?
+
    Midnight Commander documentation uses emacs style names for keyboard
    keys.
    
@@ -222,8 +230,8 @@
    keys or they don't work you can use Esc. For example, for F3 press the
    Esc key and then press the 3 key.
    
-  2.2 [UPDATED] Why don't function keys (or some other key) work?
-  
+2.2 [UPDATED] Why don't function keys (or some other key) work?
+
    Your terminfo or termcap database has missing or incorrect definations
    for function keys. Type "mc -V" to see what terminal database is being
    used. If the result is "using the S-Lang library with terminfo
@@ -234,8 +242,12 @@
    If the result is "using the S-Lang library with termcap database" you
    should fix your /etc/termcap database.
    
-   Best terminfo database is bundled with ncurses 4.2
-
+   Better termcap and terminfo databases are available here:
+   
+     http://sagan.earthspace.net/~esr/terminfo/
+     
+   Best terminfo database is bundled with ncurses 4.2.
+   
    You can select whether Midnight Commander will use terminfo or termcap
    database by giving --with-terminfo or --with-termcap option to the
    configure. Default is terminfo if found, otherwise termcap.
@@ -249,8 +261,8 @@
    produce F9, press ESC, then 9. If you don't have a ESC key on your
    keyboard you can try alt-9 or meta-9.
    
-  2.3 How do I use function keys F11 to F20?
-  
+2.3 How do I use function keys F11 to F20?
+
    These can mapped to function keys F1 to F10 with Shift held. eg.
    function key F13 can be activated by pressing Shift-F3. You can define
    the keys this way in the Options menu. The convention for PC keyboards
@@ -260,8 +272,8 @@
    current disk drive. In this case F11 and F12 mean the real F11 and F12
    keys, not shift-F1 and shift-F2.
    
-  2.4 Why does the ESC key behave funny?
-  
+2.4 Why does the ESC key behave funny?
+
    Midnight Commander uses the ESC key as a prefix for simulating the
    Meta and Alt keys (for terminals which don't have Meta or Alt, see the
    three previous questions). For example, pressing ESC-a is the same as
@@ -279,8 +291,8 @@
    might not concern the forthcoming XView and Tk editions of the
    Midnight Commander.
    
-  2.5 How can I add the plus sign (+) on the command line?
-  
+2.5 How can I add the plus sign (+) on the command line?
+
    Press C-q first, then press the + sign.
    
    The plus key is the hotkey for the select files command. If you want
@@ -289,23 +301,47 @@
    
    Another common key which needs the C-q prefix is backslash "\".
    
+2.6 [NEW] C-o doesn't work!
+
+   Maybe C-o is a stty control character on your terminal. See man stty
+   for details on how to list and change stty control characters.
+   
+2.7 [NEW] What 'keys' are the "a1" and "c1" keys mentioned in the manual?
+
+   The "a1" key is the key which has the "a1" caption on it.
+   
+   The "c1" key is the key which has the "c1" caption on it.
+   
+   If you have to ask what these two keys are your keyboard hasn't
+   probably got them. Actually, I have never seen a keyboard which has
+   got them.
+   
 3 Mouse
 
-  3.1 How do I enable mouse support?
-  
+3.1 How do I enable mouse support?
+
    Invoke mc like this (without quotes): "mc -x". If this doesn't work
    upgrade to a terminal which compatible with the Xterm mouse sequences.
    
    Alternatively, on Linux console you can use GPM.
    
-  3.2 How do I cut and paste text with mouse?
-  
+3.2 How do I cut and paste text with mouse?
+
    Hold down shift key while using mouse to cut'n'paste.
+   
+3.3 [NEW] How do I get the extension dependant pop-up menu to pop up?
+
+   You need a tk or xview edition (use the --with-tk or --with-xview
+   configure option when compiling). Normal MC (text-mode edition)
+   doesn't support this feature yet.
+   
+   In the tk and xview editions you can access the extension dependent
+   pop-up menu by pressing the right mouse button.
    
 4 Display
 
-  4.1 Why do I keep getting "Terminal not powerful enough for SLang"?
-  
+4.1 Why do I keep getting "Terminal not powerful enough for SLang"?
+
    This means that your terminfo databases do not contain the correct
    definitions for your terminal.
    
@@ -324,8 +360,8 @@
      ./configure --with-termcap
      make
      
-  4.2 [UPDATED] Why don't line drawing characters work?
-  
+4.2 Why don't line drawing characters work?
+
    Since version 4.0.13 there's the commandline option -a to force use of
    +, |, - for line drawing (only available when compiled with SLang).
    Use this -a option if any of the suggestions below doesn't help.
@@ -336,14 +372,16 @@
       +---------+
       |         |
       +---------+
-   This also happens when you use the -a option. Other than that possible
-       reason is 1, 2 or 3 (see below).
+
+       This also happens when you use the -a option. Other than that
+       possible reason is 1, 2 or 3 (see below).
      * Lines are shown as lower case characters like this
 
       lqqqqqqqqqk
       x         x
       mqqqqqqqqqj
-   Possible reason is 2 or 3 (see below).
+
+       Possible reason is 2 or 3 (see below).
      * Lines are shown as blanks or missing characters. Possible reason
        is 3 or 4 (see below).
        
@@ -394,8 +432,8 @@
      program, making the proper changes and running the tic program to
      compile your new terminfo database.
      
-  4.3 Can one use latin-1 characters without losing the lines?
-  
+4.3 Can one use latin-1 characters without losing the lines?
+
    Yes, you need a correct font and a correct termcap/terminfo database.
    
    For font, if you use xterm try "xterm -fn fixed".
@@ -403,15 +441,15 @@
    For termcap/terminfo database, change the acsc capability in the
    database.
    
-  4.4 I have problems with entering/viewing national characters!
-  
+4.4 I have problems with entering/viewing national characters!
+
    Upgrade to version 4.0.12 or newer.
    
    From the Options - Display Bits dialog select Full 8 bits or ISO
    8859-1. In addition, select 8 bit input from the same dialog.
    
-  4.5 How can I get colors?
-  
+4.5 How can I get colors?
+
    Invoke mc like this (without quotes): "mc -c".
    
    If you get colors, be happy.
@@ -459,8 +497,8 @@
    If you use Linux console the correct value for TERM is linux or
    console.
    
-  4.6 My color_xterm goes completely (or partially) black!
-  
+4.6 My color_xterm goes completely (or partially) black!
+
    Some color_xterm terminals define all colors as black instead of the
    standard ANSI colors. This makes them go completely black when you try
    to use Midnight Commander with colors.
@@ -491,16 +529,16 @@
    your X configuration file is). Or you can replace your non-ANSI
    color_xterm with an ANSI color_xterm.
    
-  4.7 Where can I get color_xterm?
-  
+4.7 Where can I get color_xterm?
+
    Try ftp.x.org: /contrib/utilities/colour_xterm.tar.gz.
    
    Alternatively, rxvt is a better choice, see
-   http://mc.blackdown.org/cgi-mc/download/rxvt/.html
+   http://www.gnome.org/cgi-bin/mc/download/rxvt/.html
    
-  4.8 I got colors working with MC but the other programs don't work at all
-  anymore!
-  
+4.8 I got colors working with MC but the other programs don't work at all
+anymore!
+
    Midnight Commander uses terminfo database (if available) but many
    other programs use termcap database. If you set the TERM environment
    variable to a value which has no corresponding entry in termcap
@@ -516,8 +554,9 @@
 
     xterm|xterm-color|vs100|xterm terminal emulator
 
-  4.9 Why are there both terminfo and termcap? Wouldn't one database be enough?
-  
+4.9 Why are there both terminfo and termcap? Wouldn't one database be
+enough?
+
    You might want to read the Unix-haters handbook at
    http://www.digital.de/people/jmh/Unix_Haters/unix-haters.html. It
    lists many more reasons why Unix sucks.
@@ -529,35 +568,37 @@
    
 5 Graphical user interface
 
-  5.1 Xview and Tk editions?
-  
+5.1 [UPDATED] Xview, Tk and Gnome editions?
+
    Get the newest development version, give the "--with-xview" or
-   "--with-tk" option to the configure and otherwise compile as usual.
-   See Download.
+   "--with-tk" or "--with-gnome" option to the configure and otherwise
+   compile as usual. See Download.
    
-   Xview and Tk editions are work in progress, they are not as robust as
-   the text mode edition.
+   Xview, Tk and Gnome editions are work in progress, they are not as
+   robust as the text mode edition.
    
 6 Command line problems
 
-  6.1 How do I stay in the last directory when I exit Midnight Commander?
-  
+6.1 How do I stay in the last directory when I exit Midnight Commander?
+
    See the description of the -P option in the Options section of the
    manual.
    
-  6.2 How can I access command line history?
-  
+6.2 [UPDATED] How can I access command line history?
+
    You can browse previous commands with M-p and M-n. Alternatively, you
    can summon the command history listbox by pressing F9 c h.
    
-  6.3 How can I complete commands, file names, variable names and so on?
-  
+   Since version 4.1.15 all the input widgets have permanent history. You
+   can summon the history listbox by pressing M-h.
+   
+6.3 How can I complete commands, file names, variable names and so on?
+
    Just press M-Tab. Press M-Tab again to get a listbox if there are
    multiple possible completions.
    
-  6.4 [NEW] I am using ksh. Can I use functions defined in the .kshrc within
-  MC?
-  
+6.4 I am using ksh. Can I use functions defined in the .kshrc within MC?
+
    Sorry, MC only supports bash, tcsh and zsh functions. Ksh functions
    are not supported because ksh lacks the necessary hooks needed for
    subshell integration.
@@ -565,14 +606,14 @@
    Switch to bash or zsh. They are both quite compatible with ksh. Your
    ksh functions should work as such or after minimal changes.
    
-  6.5 [NEW] Is there any way to include additional options or hot keys to MC?
-  
+6.5 Is there any way to include additional options or hot keys to MC?
+
    Yes, F2 invokes an user menu which fully configurable. You can add any
    shell commands to the user menu. See
-   http://mc.blackdown.org/mc/manual-d.html#8 for more info.
+   http://www.gnome.org/mc/manual-d.html#8 for more info.
    
    Another way to add functionality is the external panelize feature. See
-   http://mc.blackdown.org/mc/manual-d.html#4 for more info.
+   http://www.gnome.org/mc/manual-d.html#4 for more info.
    
    And finally, you can code any feature you want yourself. MC source
    code is free which means you can change it anyway you want. There are
@@ -586,8 +627,12 @@
    means you haven't got ftp, zip or tar support on Windows 95/NT and
    OS/2.
    
-  7.1 How can I see the contents of a tar archive?
-  
+   This chapter describes the behaviour of the 4.1.x versions of the
+   Midnight Commander. The behaviour of the 4.5.x versions is somewhat
+   different. More on that when the 4.5.x versions get more stable.
+   
+7.1 How can I see the contents of a tar archive?
+
    If you use keyboard just move the selection bar on the tar file and
    press enter.
    
@@ -602,52 +647,59 @@
    The recognized suffixes for tar archives are .tar, .tar.gz and .tgz.
    If your tar archive uses different suffix you have to rename it.
    
-  7.2 How do I get out of a tar archive?
-  
+7.2 How do I get out of a tar archive?
+
    Just press enter on the toplevel ".." file or chdir to a non-tar
    directory. Just typing "cd" with no parameters is enough (it will take
    you to your home directory).
    
-  7.3 How do I do anonymous ftp with MC?
-  
+7.3 How do I do anonymous ftp with MC?
+
    Just type "cd ftp://hostname" where hostname is the name of the host
    you want to connect. Alternatively, select FTP link from the Left or
    Right menu and type the name of the host you want to connect.
    
-  7.4 How do I do non-anonymous ftp with MC?
-  
+7.4 How do I do non-anonymous ftp with MC?
+
    Non-anonymous ftp works just like the anonymous ftp but you give the
    login name with the host name. For example, type "cd
    ftp://username@hostname".
    
-  7.5 How do I close an ftp connection?
-  
+7.5 How do I close an ftp connection?
+
    Just chdir to a non-ftp directory. Just typing "cd" with no parameters
    is enough (it will take you to your home directory).
    
    Internally Midnight Commander closes ftp connection only after a
    timeout. This isn't visible to the end user.
    
-  7.6 Why aren't the contents of ftp panel updated?
-  
+7.6 Why aren't the contents of ftp panel updated?
+
    Update is skipped because there would be a serious performance
    penalty. Constantly updating directory panels through a ftp connection
    would take too much time.
    
    You can use C-r to force an update.
    
-  7.7 [NEW] What kind of proxy server works with Midnight Commander?
-  
-   Midnight Commander only supports ftp-like ftp proxies. Common WWW
-   proxies (like Squid) are not supported yet because they make ftp
-   connections look like http connections.
+7.7 [UPDATED] What kind of proxy server works with Midnight Commander?
+
+   There are two kinds of ftp proxies: proxies for ftp clients and
+   proxies for web browsers.
+   
+   Midnight Commander only supports ftp proxies which are meant for ftp
+   clients. Common WWW proxies (like Squid) are not supported. A rule of
+   thumb is that if a ftp proxy works with a web browser, it won't work
+   with Midnight Commander.
    
 8 Other common problems
 
-  8.1 [UPDATED] How do I get the internal editor to work?
-  
-   The F4 key defaults to an external editor because thats what most
-   people are used to. To use the internal editor, select Configuration
+8.1 How do I get the internal editor to work?
+
+   The F4 key used to default to an external editor because that was what
+   most people were used to. The newer versions use internal editor by
+   default.
+   
+   To use the internal editor with an old version, select Configuration
    from the Options menu and check the 'use internal edit' option.
    
    Alternatively add the line
@@ -678,8 +730,8 @@
    And please don't forget that "make install" overwrites
    $prefix/lib/mc/mc.ext.
    
-  8.2 Why doesn't "mcedit newfile" work?
-  
+8.2 [UPDATED] Why doesn't "mcedit newfile" work?
+
    This is a known bug.
    
    If the newfile doesn't exist, mcedit fails.
@@ -687,26 +739,28 @@
    Start mcedit with no parameters, this will create a blank file. Then
    save the file with whatever name you like.
    
-  8.3 [UPDATED] Is there any way to 'bookmark' favourite ftp-fs links?
-  
+   This bug has been fixed since 4.1.17.
+   
+8.3 Is there any way to 'bookmark' favourite ftp-fs links?
+
    Use the directory hotlist. Just press control-backslash. If your
    national keyboard layout doesn't have backslash key, just press the
    control key with the key which is the backslash key in the English
    keyboard layout.
    
-  8.4 When copying the directories lose their original date, uid and gid!
-  
+8.4 When copying the directories lose their original date, uid and gid!
+
    This is a known bug. At moment only files preserve their original
    settings when copying, not directories.
    
    Uid and gid is fixed since 4.0.1. "Preserve UIDs/GIDs" in the copy
    dialog needs to be checked and you must be root.
    
-   Date problem is supposed to be fixed with 4.0.13.
+   Date problem is fixed since 4.0.13.
    
-  8.5 [UPDATED] Why I keep getting: "There is no disk in the drive. Please
-  insert a disk into drive D:"?
-  
+8.5 Why I keep getting: "There is no disk in the drive. Please insert a disk
+into drive D:"?
+
    This is a known bug of the Windows 95/NT and OS/2 ports. MC looks its
    configuration files from the D:\MC directory and if the D: drive is a
    removable drive (like a CD ROM drive) and there is no disk in drive
@@ -716,8 +770,8 @@
    Midnight Commander configuration files with the MCHOME environment
    variable.
    
-  8.6 [NEW] When I start Midnight Commander, nothing happens!
-  
+8.6 [UPDATED] When I start Midnight Commander, nothing happens!
+
    First, invoke MC without subshell support: "mc -u". If this helps
    check the shell you are using. Subshell support works best with bash
    although tcsh and zsh are also supported. You might want to upgrade
@@ -725,29 +779,37 @@
    tcsh or zsh, subshell support is disabled automatically.
    
    If disabling subshell doesn't help, try to reconfigure MC with
-   "--with-our-slang" and "--with-termcap" options and recompile. If this
-   helps, there is something wrong with your terminfo database or shared
-   slang library. For better terminfo databases see chapter 4. For a
-   better slang library, upgrade to a newer version or keep using the
-   "--with-our-slang" option.
+   "--with-included-slang" and "--with-termcap" options and recompile. If
+   this helps, there is something wrong with your terminfo database or
+   shared slang library. For better terminfo databases see chapter 4. For
+   a better slang library, upgrade to a newer version or keep using the
+   "--with-included-slang" option.
    
-  8.7 [NEW] When I try to view a file MC hangs!
-  
+   This problem can also be caused by gpm as noted by Luis Espinoza:
+   
+     In regards to why midnight commander does nothing when invoked. I
+     recently had the same problem. At the same time gpm was not loading
+     properly with my patched kernel (now 2.0.33 from 2.0.30).
+     Downloading version 1.13 of gpm, and got it working :-) MC still
+     appeared locked.... However moving the mouse, brought MC to life.
+     The mouse I am using is a Kensington Expert Mouse (Trackball).
+     
+8.7 When I try to view a file MC hangs!
+
    This is known bug. A quick fix is "chmod 666 /dev/tty". For a more
-   complete fix, see http://mc.blackdown.org/mc/maillist/97-10/98.html.
+   complete fix, see http://www.gnome.org/mc/maillist/97-10/98.html.
    
-   This bug will probably be fixed in 4.1.6.
+   This bug is fixed since 4.1.6.
    
 9 Development
 
-  9.1 Who has written Midnight Commander?
-  
+9.1 Who has written Midnight Commander?
+
    Midnight Commander was started by Miguel de Icaza and he is the
    maintainer of the package. Other authors have joined the project
    later:
-     * Mauricio Plaza (early releases, retired)
-     * Janne Kukonlehto (joined Sep 27 1994, retired Mar 8 1995, nowadays
-       Janne is the webmaster of the Midnight Commander web site)
+     * Mauricio Plaza (early releases)
+     * Janne Kukonlehto (joined Sep 27 1994)
      * Radek Doulik (joined Oct 30 1994)
      * Fred Leeflang (joined Nov 2 1994)
      * Dugan Porter (joined Dec 1 1994)
@@ -764,7 +826,7 @@
    
    The photographs of the authors are available as:
    
-     http://mc.blackdown.org/mc/about.html
+     http://www.gnome.org/mc/authstat.html
      
    Many people have contributed bug reports, feature suggestions and
    small code bits (alphabetical order):
@@ -787,14 +849,14 @@
      * Jon Stevens
      * Adam Tla/lka
        
-  9.2 Do I dare to use a development version?
-  
+9.2 Do I dare to use a development version?
+
    I am afraid you have to answer to this question yourself. Development
    versions seldom cause data loss but they have usually got many bugs.
    It's up to you to judge whether new features outweight the bugs.
    
-  9.3 How can I report a bug/request for a feature?
-  
+9.3 How can I report a bug/request for a feature?
+
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
    
@@ -824,8 +886,8 @@
             Usually it is "limit coredumpsize unlimited" or "ulimit
             coredumpsize" or "ulimit -c unlimited".
        
-  9.4 How can I join the development?
-  
+9.4 How can I join the development?
+
    To join the development just code the feature you want to add and send
    your patch for inclusion. Email address is mc-devel@nuclecu.unam.mx.
    Before you start coding check the latest development version. It might
@@ -838,11 +900,11 @@
    
 10 More information
 
-  10.1 [UPDATED] This document didn't answer my question. Where else can I look
-  for an answer?
-  
-   Read messages from the Discussion (mailing list archive), search the
-   web site or read the Manual.
+10.1 This document didn't answer my question. Where else can I look for an
+answer?
+
+   Read messages from the Discussion (mailing list archive) or read the
+   Manual.
    
    Upgrade to a newer version of Midnight Commander. Many problems are
    fixed in the new versions.
@@ -850,8 +912,8 @@
    If you still can't find an answer, post your question to the Midnight
    Commander mailing list. Its address is mc@nuclecu.unam.mx.
    
-  10.2 What mailing lists are there for Midnight Commander?
-  
+10.2 What mailing lists are there for Midnight Commander?
+
    Following mailing lists discuss about Midnight Commander:
    
    mc
@@ -863,7 +925,7 @@
    mc-announce
           Major announcements about the Commander
           
-   mc-patch
+   mc-patches
           The latest Commander patches
           
    mc-devel
@@ -881,17 +943,17 @@
    Replace <list-name> with the name of the list you want to subscribe
    and [optional-address] with your email address.
    
-  10.3 Where should I look on the World Wide Web for MC stuff?
-  
+10.3 Where should I look on the World Wide Web for MC stuff?
+
    There is a WWW page for Midnight Commander. The URL is:
    
-     http://mc.blackdown.org/mc/
+     http://www.gnome.org/mc/
      
    The WWW page features MC screen shots, photographs of the authors,
    mailing list archive and a few other things.
    
-  10.4 Are the mailing lists archived anywhere?
-  
+10.4 Are the mailing lists archived anywhere?
+
    The mc and mc-devel lists are archived on the World Wide Web page (see
    the previous question). Other lists are not currently archived though
    Miguel keeps a private archive. Contact him if you want copies of past
@@ -899,28 +961,28 @@
    
 11 Administrivia
 
-  11.1 Authorship
-  
+11.1 Authorship
+
    Questions and Answers is written by Janne Kukonlehto. Parts of it
    originate from Ian Jackson, Miguel de Icaza, Dugan Porter, Norbert
    Warmuth and Paul Sheer.
    
-  11.2 [UPDATED] File formats
-  
+11.2 [UPDATED] File formats
+
    This document is available in HTML, postscript and PDF formats at
-   http://mc.blackdown.org/mc/answers0.html.
+   http://www.gnome.org/mc/answers.html.
    
    This document is available in ASCII format in the Midnight Commander
    source package.
    
-  11.3 Feedback is invited
-  
-   Send your comments about this document to janne@mc.blackdown.org
+11.3 Feedback is invited
+
+   Send your comments about this document to janne@gnome.org
    
    Send your comments about the Midnight Commander to mc@nuclecu.unam.mx
    
-  11.4 Disclaimer and copyright
-  
+11.4 Disclaimer and copyright
+
    Note that this document is provided as is. The information in it is
    not warranted to be correct; you use it at your own risk.
    
@@ -928,7 +990,5 @@
    the COPYING file in the Midnight Commander source distribution).
    Questions and Answers is not public domain.
      __________________________________________________________________
-                                      
-   This document is maintained by Janne Kukonlehto
-   <janne@mc.blackdown.org>.
    
+   This document is maintained by Janne Kukonlehto <janne@gnome.org>.
