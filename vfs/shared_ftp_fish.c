@@ -87,7 +87,7 @@ direntry_destructor (void *data)
 	    }
 	}
 	free(fe->local_filename);
-	fe->local_filename = 0;
+	fe->local_filename = NULL;
     }
     if (fe->remote_filename)
 	free(fe->remote_filename);
