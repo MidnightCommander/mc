@@ -96,63 +96,6 @@ static tree_entry *forw_ptr (tree_entry *ptr, int *count)
     return ptr;
 }
 
-#if 0
-/* Add a directory to the list of directories */
-static tree_entry *tree_add_entry (WTree *tree, char *name)
-{
-    if (!tree)
-	return 0;
-
-    return tree_store_add_entry (name);
-}
-
-/* Append a directory to the list of directories */
-static tree_entry *tree_append_entry (WTree *tree, char *name)
-{
-    tree_entry *current, *new;
-    int i, len;
-    int submask = 0;
-
-    /* We assume the directory is not yet in the list */
-
-    new = g_new (tree_entry, 1);
-    if (!tree->store->tree_first){
-        /* Empty list */
-        tree->store->tree_first = new;
-        new->prev = NULL;
-    } else {
-        tree->tree_last->next = new;
-        new->prev = tree->tree_last;
-    }
-    new->next = NULL;
-    tree->store->tree_last = new;
-
-    /* Calculate attributes */
-    new->name = g_strdup (name);
-    len = strlen (new->name);
-    new->sublevel = 0;
-    for (i = 0; i < len; i++)
-	if (new->name [i] == PATH_SEP){
-	    new->sublevel++;
-	    new->subname = new->name + i + 1;
-	}
-    submask = 1 << new->sublevel;
-    submask &= (2 << new->sublevel) - 1;
-    new->submask = submask;
-    new->mark = 0;
-
-    /* Correct the submasks of the previous entries */
-    current = new->prev;
-    while (current && current->sublevel > new->sublevel){
-	current->submask |= 1 << new->sublevel;
-	current = current->prev;
-    }
-
-    /* The entry has now been appended */
-    return new;
-}
-#endif
-
 static void
 remove_callback (tree_entry *entry, void *data)
 {

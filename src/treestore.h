@@ -37,9 +37,7 @@ typedef struct {
 TreeStore  *tree_store_get             (void);
 int         tree_store_load            (void);
 int         tree_store_save            (void);
-tree_entry *tree_store_add_entry       (char *name);
 void        tree_store_remove_entry    (char *name);
-tree_entry *tree_store_start_check     (char *path);
 tree_entry *tree_store_start_check_cwd (void);
 void        tree_store_mark_checked    (const char *subname);
 void        tree_store_end_check       (void);

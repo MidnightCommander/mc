@@ -1,5 +1,9 @@
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
+	* tree.c: Remove dead code.
+	* treestore.c (tree_store_add_entry): Make static.
+	(tree_store_start_check): Likewise.
+
 	* cmd.c: Cleanup of unneeded global functions and data.
 	* color.c: Likewise.
 	* dir.c: Likewise.

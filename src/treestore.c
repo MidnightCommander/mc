@@ -49,6 +49,8 @@
 
 static TreeStore ts;
 
+static tree_entry *tree_store_add_entry(char *name);
+
 static void
 tree_store_dirty(int state)
 {
@@ -386,7 +388,7 @@ tree_store_save(void)
 	return 0;
 }
 
-tree_entry *
+static tree_entry *
 tree_store_add_entry(char *name)
 {
     int flag = -1;
@@ -631,7 +633,7 @@ tree_store_mark_checked(const char *subname)
 }
 
 /* Mark the subdirectories of the current directory for delete */
-tree_entry *
+static tree_entry *
 tree_store_start_check(char *path)
 {
     tree_entry *current, *retval;
