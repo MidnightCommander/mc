@@ -385,6 +385,16 @@ edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned l
     return init_dynamic_edit_buffers (edit, filename, text);
 }
 
+/* Clean the WEdit stricture except the widget part */
+static inline void
+edit_purge_widget (WEdit *edit)
+{
+    int len = sizeof (WEdit) - sizeof (Widget);
+    char *start = (char *) edit + sizeof (Widget);
+    memset (start, 0, len);
+    edit->macro_i = -1;		/* not recording a macro */
+}
+
 #define space_width 1
 
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
@@ -422,7 +432,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
     }
-    memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
+    edit_purge_widget (edit);
     edit->num_widget_lines = lines;
     edit->num_widget_columns = columns;
     edit->stat1.st_mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
@@ -497,8 +507,8 @@ int edit_clean (WEdit * edit)
 	    free (edit->undo_stack);
 	if (edit->filename)
 	    free (edit->filename);
-/* we don't want to clear the widget */
-	memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
+
+	edit_purge_widget (edit);
 
 	/* Free temporary strings used in catstrs() */
 	freestrs();

@@ -5,6 +5,7 @@
 
 #define MAXBUFF 1024
 #define MAX_MACRO_LENGTH 1024
+#define N_LINE_CACHES 32
 
 struct macro {
     short command;
@@ -15,8 +16,8 @@ struct macro {
 #define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
 
 struct _book_mark {
-    int line;		/* line number */
-    int c;		/* color */
+    int line;			/* line number */
+    int c;			/* color */
     struct _book_mark *next;
     struct _book_mark *prev;
 };
@@ -31,7 +32,7 @@ struct syntax_rule {
 
 struct WEdit {
     Widget widget;
-#define from_here num_widget_lines
+
     int num_widget_lines;
     int num_widget_columns;
 
@@ -39,55 +40,54 @@ struct WEdit {
 
     char *filename;		/* Name of the file */
 
-/* dynamic buffers and cursor position for editor: */
-    long curs1;			/*position of the cursor from the beginning of the file. */
-    long curs2;			/*position from the end of the file */
-    unsigned char *buffers1[MAXBUFF + 1];	/*all data up to curs1 */
-    unsigned char *buffers2[MAXBUFF + 1];	/*all data from end of file down to curs2 */
+    /* dynamic buffers and cursor position for editor: */
+    long curs1;			/* position of the cursor from the beginning of the file. */
+    long curs2;			/* position from the end of the file */
+    unsigned char *buffers1[MAXBUFF + 1];	/* all data up to curs1 */
+    unsigned char *buffers2[MAXBUFF + 1];	/* all data from end of file down to curs2 */
 
-/* search variables */
+    /* search variables */
     long search_start;		/* First character to start searching from */
     int found_len;		/* Length of found string or 0 if none was found */
     long found_start;		/* the found word from a search - start position */
 
-/* display information */
+    /* display information */
     long last_byte;		/* Last byte of file */
     long start_display;		/* First char displayed */
     long start_col;		/* First displayed column, negative */
     long max_column;		/* The maximum cursor position ever reached used to calc hori scroll bar */
-    long curs_row;		/*row position of cursor on the screen */
-    long curs_col;		/*column position on screen */
+    long curs_row;		/* row position of cursor on the screen */
+    long curs_col;		/* column position on screen */
     int force;			/* how much of the screen do we redraw? */
     unsigned char overwrite;
-    unsigned char modified;	/*has the file been changed?: 1 if char inserted or
+    unsigned char modified;	/* has the file been changed?: 1 if char inserted or
 				   deleted at all since last load or save */
     unsigned char screen_modified;	/* has the file been changed since the last screen draw? */
-    int delete_file;			/* has the file been created in edit_load_file? Delete
-			           it at end of editing when it hasn't been modified 
+    int delete_file;		/* has the file been created in edit_load_file? Delete
+				   it at end of editing when it hasn't been modified 
 				   or saved */
     unsigned char highlight;
-    long prev_col;		/*recent column position of the cursor - used when moving
+    long prev_col;		/* recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
-    long curs_line;		/*line number of the cursor. */
-    long start_line;		/*line nummber of the top of the page */
+    long curs_line;		/* line number of the cursor. */
+    long start_line;		/* line number of the top of the page */
 
-/* file info */
-    long total_lines;		/*total lines in the file */
-    long mark1;			/*position of highlight start */
-    long mark2;			/*position of highlight end */
-    int column1;			/*position of column highlight start */
-    int column2;			/*position of column highlight end */
-    long bracket;		/*position of a matching bracket */
+    /* file info */
+    long total_lines;		/* total lines in the file */
+    long mark1;			/* position of highlight start */
+    long mark2;			/* position of highlight end */
+    int column1;		/* position of column highlight start */
+    int column2;		/* position of column highlight end */
+    long bracket;		/* position of a matching bracket */
 
-/* cache speedup for line lookups */
-#define N_LINE_CACHES	32
+    /* cache speedup for line lookups */
     int caches_valid;
     int line_numbers[N_LINE_CACHES];
     long line_offsets[N_LINE_CACHES];
 
     struct _book_mark *book_mark;
 
-/* undo stack and pointers */
+    /* undo stack and pointers */
     unsigned long stack_pointer;
     long *undo_stack;
     unsigned long stack_size;
@@ -95,7 +95,7 @@ struct WEdit {
     unsigned long stack_bottom;
     struct stat stat1;
 
-/* syntax higlighting */
+    /* syntax higlighting */
     struct _syntax_marker *syntax_marker;
     struct context_rule **rules;
     long last_get_rule;
@@ -103,13 +103,10 @@ struct WEdit {
     char *syntax_type;		/* description of syntax highlighting type being used */
     int explicit_syntax;	/* have we forced the syntax hi. type in spite of the filename? */
 
-    int to_here;		/* dummy marker */
-
-
-/* macro stuff */
-    int macro_i;		/* -1 if not recording index to macro[] otherwise */
+    /* macro stuff */
+    int macro_i;		/* index to macro[], -1 if not recording a macro */
     int macro_depth;		/* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
 };
 
-#endif /* !__EDIT_WIDGET_H */
+#endif				/* !__EDIT_WIDGET_H */
