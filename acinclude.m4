@@ -675,7 +675,6 @@ AC_DEFUN([AC_WITH_SLANG], [
 	    MCLIBS="-lslang $MCLIBS"
 	    screen_manager="SLang (system-installed library)"
 	    AC_MSG_NOTICE([using system installed S-Lang library])
-	    rm -f slang/slang.h
 	    ac_save_LIBS="$LIBS"
 	    LIBS="$LIBS -lslang"
 	    AC_TRY_LINK(
@@ -691,7 +690,6 @@ AC_DEFUN([AC_WITH_SLANG], [
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
 	    screen_manager="SLang"
-	    CPPFLAGS="$CPPFLAGS -I../slang"
 	fi
 	if $slang_check_lib
 	then

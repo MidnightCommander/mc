@@ -1,5 +1,8 @@
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (AC_WITH_SLANG): Don't add ../slang to includes.
+	Don't remove slang/slang.h - it's never created.
+
 	* acinclude.m4 (AC_WITH_SLANG): Don't make symlink from
 	slang-mc.h to slang.h.  Remove fastdepslang variable, it's
 	unused.
