@@ -1,3 +1,10 @@
+2004-09-24  Roland Illig  <roland.illig@gmx.de>
+
+	* slsignal.c (SLsystem): Replaced NULL with (char *) NULL in
+	call to execl.
+
+	From patches from the OpenBSD ports collection.
+
 2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* sltermin.c (): Avoid strncpy, home_ti is 1K long and 

@@ -227,7 +227,7 @@ int SLsystem (char *cmd)
 	(void) sigprocmask (SIG_SETMASK, &save_mask, NULL);
 # endif
 
-	execl ("/bin/sh", "sh", "-c", cmd, NULL);
+	execl ("/bin/sh", "sh", "-c", cmd, (char *) NULL);
 	_exit (127);
      }
    else
