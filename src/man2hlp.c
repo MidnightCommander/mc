@@ -600,6 +600,7 @@ handle_link (char *buffer)
     static char old[80];
     int len;
     char *amp;
+    const char *amp_arg;
 
     switch (link_flag) {
     case 1:
@@ -632,12 +633,13 @@ handle_link (char *buffer)
 	if (amp) {
 	    *amp = 0;
 	    amp += 2;
+	    amp_arg = amp;
 	} else {
-	    amp = "";
+	    amp_arg = "";
 	}
 
 	printf_string ("%c%s%c%s%c%s\n", CHAR_LINK_START, old,
-		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END, amp);
+		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END, amp_arg);
 	link_flag = 0;
 	/* Add to the linked list */
 	if (current_link) {
