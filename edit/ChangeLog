@@ -1,3 +1,19 @@
+2001-11-28  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax.c (apply_rules_going_right): Fix crush for lines like
+	\s+ \n lightgray/13 red
+	in Syntax file.
+	(read_one_line): Use EOF instead of -1.
+	(get_args): Fix buffer overflow for l without trailing
+	whitespace(s).
+	(break_a): New macro.
+	(edit_read_syntax_rules): Use break_a to fix memory leaks.
+	(edit_load_syntax): Eliminate s and use message to prevent
+	buffer overflow.
+
+	* editdraw.c (edit_render): Eliminate f. It's only written
+	but never read.
+
 2001-11-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* editmenu.c (edit_wrap_cmd): Use g_free() on the result
@@ -7,6 +23,7 @@
 
 	* editcmd.c (edit_save_file): Use g_free() on the result of
 	mc_mkstemps().
+	(edit_replace_cmd): Fix rare memory leaks.
 
 2001-11-19  Andrew V. Samoilov  <kai@cmail.ru>
 

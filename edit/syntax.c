@@ -238,6 +238,7 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
     if (!_rule.keyword) {
 	char *p;
 	p = (r = edit->rules[_rule.context])->keyword_first_chars;
+	if (p)
 	while (*(p = xx_strchr ((unsigned char *) p + 1, c))) {
 	    struct key_word *k;
 	    int count;
@@ -402,7 +403,7 @@ static int read_one_line (char **line, FILE * f)
 #endif
     for (;;) {
 	c = fgetc (f);
-	if (c == -1) {
+	if (c == EOF) {
 	    if (errno == EINTR)
 		continue;
 	    r = 0;
@@ -493,14 +494,15 @@ static char *strdup_convert (char *s)
 static void get_args (char *l, char **args, int *argc)
 {
     *argc = 0;
-    l--;
     for (;;) {
-	char *p;
-	for (p = l + 1; *p && whiteness (*p); p++);
+	char *p = l;
+	while (*p && whiteness (*p))
+	    p++;
 	if (!*p)
 	    break;
 	for (l = p + 1; *l && !whiteness (*l); l++);
-	*l = '\0';
+	if (*l)
+	    *l++ = '\0';
 	*args = strdup_convert (p);
 	(*argc)++;
 	args++;
@@ -512,11 +514,11 @@ static void free_args (char **args)
 {
     while (*args) {
 	syntax_free (*args);
-	*args = 0;
 	args++;
     }
 }
 
+#define break_a	{result=line;break;}
 #define check_a {if(!*a){result=line;break;}}
 #define check_not_a {if(*a){result=line;break;}}
 
@@ -653,8 +655,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    check_a;
 	    if (num_contexts == -1) {
 		if (strcmp (*a, "default")) {	/* first context is the default */
-		    *a = 0;
-		    check_a;
+		    break_a;
 		}
 		a++;
 		c = r[0] = syntax_malloc (sizeof (struct context_rule));
@@ -724,7 +725,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	} else if (!strcmp (args[0], "keyword")) {
 	    struct key_word *k;
 	    if (num_words == -1)
-		*a = 0;
+		break_a;
 	    check_a;
 	    k = r[num_contexts - 1]->keyword[num_words] = syntax_malloc (sizeof (struct key_word));
 	    if (!strcmp (*a, "whole")) {
@@ -745,8 +746,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    }
 	    check_a;
 	    if (!strcmp (*a, "whole")) {
-		*a = 0;
-		check_a;
+		break_a;
 	    }
 	    k->keyword = (char *) strdup (*a++);
 	    k->first = *k->keyword;
@@ -768,8 +768,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	} else if (!strcmp (args[0], "file")) {
 	    break;
 	} else {		/* anything else is an error */
-	    *a = 0;
-	    check_a;
+	    break_a;
 	}
 	free_args (args);
 	syntax_free (l);
@@ -998,10 +997,10 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
 	return;
     }
     if (r) {
-	char s[80];
 	edit_free_syntax_rules (edit);
-	sprintf (s, _ (" Error in file %s on line %d "), error_file_name ? error_file_name : f, r);
-	edit_error_dialog (_ (" Load syntax file "), s);
+	message (0, _(" Load syntax file "), 
+		    _(" Error in file %s on line %d "),
+		    error_file_name ? error_file_name : f, r);
 	syntax_free (error_file_name);
 	return;
     }
