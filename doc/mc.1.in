@@ -3215,9 +3215,9 @@ everywhere).
 .SH ""
 .\"NODE "FILES"
 .SH "FILES"
-The program will retrieve all of its information relative to the
-MC_DATADIR environment variable.  If this variable is not set, it will
-fall back to the @prefix@/share/mc directory.
+Full paths below may vary between installations.  They are also affected
+by the MC_DATADIR environment variable.  If it's set, its value is used
+instead of @prefix@/share in the paths below.
 .PP
 .I @prefix@/share/mc/mc.hlp
 .IP
@@ -3253,7 +3253,7 @@ from here instead of the system-wide startup file.
 .PP
 .I @prefix@/share/mc/mc.hint
 .IP
-This file contains the hints (cookies) displayed by the program.
+This file contains the hints displayed by the program.
 .PP
 .I @prefix@/share/mc/mc.menu
 .IP
