@@ -122,7 +122,7 @@ CFLAGS="$CCOPTS"
 dnl
 dnl We now use glib
 dnl 
-AM_PATH_GLIB
+AM_PATH_GLIB(,,AC_MSG_ERROR(Test for GLIB failed.  MC requires GLIB.))
 LIBS="$LIBS $GLIB_LIBS"
 CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
