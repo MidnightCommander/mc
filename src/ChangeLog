@@ -1,3 +1,8 @@
+1999-01-25  Alexander Savelyev <fano@vcom.kiev.ua>
+
+	* ext.c (exec_extension): Always use /bin/sh.  Not the user
+	shell. 
+
 1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_remove_entry_remove_hook): Missing

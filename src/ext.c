@@ -146,7 +146,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
-    fprintf (cmd_file, "#!%s\n", shell);
+    fprintf (cmd_file, "#!/bin/sh\n");
 	     
     prompt [0] = 0;
     for (;*data && *data != '\n'; data++){
