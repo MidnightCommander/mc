@@ -12,9 +12,6 @@ security issues.
 Consider applying a patch from PLD to make M-o propagate the current
 directory to the other panel.
 
-Pressing F8 twice in the viewer causes error messages if the file was
-preprocessed (i.e. gzipped files, manpages).
-
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 

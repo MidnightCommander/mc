@@ -1,11 +1,17 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c (exec_extension): Don't create self-destructing scripts
+	for the viewer - remove those scripts manually after calling
+	view().  This fixes the problem with double F8 in the viewer on
+	parsed files.
+	Reported by David Martin <dmartina@excite.com>
+
 	* ext.c (exec_extension): Don't rely on working #! - explicitly
 	run /bin/sh on the temporary script.
 
 	* mouse.h: Use definitions for GPM_B_DOWN and GPM_B_UP
 	compatible with gpm-1.20.
-	Reported by by David Martin <dmartina@excite.com>
+	Reported by David Martin <dmartina@excite.com>
 
 2002-10-29  Pavel Roskin  <proski@gnu.org>
 

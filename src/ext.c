@@ -205,8 +205,15 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	}
     }				/* for */
 
-    /* Make sure that the file removes itself when it finishes */
-    fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
+    /*
+     * Make the script remove itself when it finishes.
+     * Don't do it for the viewer - it may need to rerun the script,
+     * so we clean up after calling view().
+     */
+    if (!run_view) {
+	fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
+    }
+
     fclose (cmd_file);
 
     if ((run_view && !written_nonspace) || is_cd) {
@@ -234,10 +241,12 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	/* If we've written whitespace only, then just load filename
 	 * into view
 	 */
-	if (written_nonspace)
+	if (written_nonspace) {
 	    view (cmd, filename, move_dir, start_line);
-	else
+	    unlink (file_name);
+	} else {
 	    view (0, filename, move_dir, start_line);
+	}
 	if (changed_hex_mode && !altered_hex_mode)
 	    default_hex_mode = def_hex_mode;
 	if (changed_nroff_flag && !altered_nroff_flag)
