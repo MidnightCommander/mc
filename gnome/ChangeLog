@@ -1,5 +1,8 @@
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gmain.c (dialog_panel_callback): Call midnight_callback to get
+	the main bindings working.
+
 	* gdesktop.c (perform_drop_manually): Use p to walk the dropped
 	data.  This is an important bug fix. 
 

@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-04 02:53:24-0500\n"
+"Date: 1998-05-04 12:45:28-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -2782,145 +2782,145 @@ msgstr ""
 msgid "Menu"
 msgstr ""
 
-#: src/main.c:1887
+#: src/main.c:1884
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2233
+#: src/main.c:2246
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2234
+#: src/main.c:2247
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2325
+#: src/main.c:2338
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2577
+#: src/main.c:2590
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2582
+#: src/main.c:2595
 msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2645
+#: src/main.c:2658
 msgid "[DEVEL-ONLY: Debug the background code]"
 msgstr ""
 
-#: src/main.c:2648
+#: src/main.c:2661
 msgid "Create command file to set default directory upon exit."
 msgstr ""
 
-#: src/main.c:2650
+#: src/main.c:2663
 msgid "Force color mode."
 msgstr ""
 
-#: src/main.c:2651
+#: src/main.c:2664
 msgid "Specify colors (use --help-colors to get a list)."
 msgstr ""
 
-#: src/main.c:2653
+#: src/main.c:2666
 msgid "[DEVEL-ONLY: Debug the subshell."
 msgstr ""
 
-#: src/main.c:2655
+#: src/main.c:2668
 msgid "Startup the internal editor."
 msgstr ""
 
-#: src/main.c:2656
+#: src/main.c:2669
 msgid "Shows this help message."
 msgstr ""
 
-#: src/main.c:2657
+#: src/main.c:2670
 msgid "Help on how to specify colors."
 msgstr ""
 
-#: src/main.c:2659
+#: src/main.c:2672
 msgid "Log ftpfs commands to the file."
 msgstr ""
 
-#: src/main.c:2661
+#: src/main.c:2674
 msgid "Prints out the configured paths."
 msgstr ""
 
-#: src/main.c:2663
+#: src/main.c:2676
 msgid "Force black and white display."
 msgstr ""
 
-#: src/main.c:2664
+#: src/main.c:2677
 msgid "Disable mouse support."
 msgstr ""
 
-#: src/main.c:2666
+#: src/main.c:2679
 msgid "Force the concurrent subshell mode"
 msgstr ""
 
-#: src/main.c:2667
+#: src/main.c:2680
 msgid "Disable the concurrent subshell mode."
 msgstr ""
 
-#: src/main.c:2668
+#: src/main.c:2681
 msgid "Force subshell execution."
 msgstr ""
 
-#: src/main.c:2670
+#: src/main.c:2683
 msgid "At exit, print the last working directory."
 msgstr ""
 
-#: src/main.c:2671
+#: src/main.c:2684
 msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
 msgstr ""
 
-#: src/main.c:2672
+#: src/main.c:2685
 msgid "Disables verbose operation (for slow terminals)."
 msgstr ""
 
-#: src/main.c:2674
+#: src/main.c:2687
 msgid "Use simple symbols for line drawing."
 msgstr ""
 
-#: src/main.c:2679
+#: src/main.c:2692
 msgid "Activate support for the TERMCAP variable."
 msgstr ""
 
-#: src/main.c:2681
+#: src/main.c:2694
 msgid "Report versionand configuration options."
 msgstr ""
 
-#: src/main.c:2682
+#: src/main.c:2695
 msgid "Start up into the viewer mode."
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2696
 msgid "Force xterm mouse support and screen save/restore"
 msgstr ""
 
-#: src/main.c:2684
+#: src/main.c:2697
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2685
+#: src/main.c:2698
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2762
+#: src/main.c:2775
 msgid "[this dir] [other dir]"
 msgstr ""
 
-#: src/main.c:3004
+#: src/main.c:3017
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3092
+#: src/main.c:3105
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3093
+#: src/main.c:3106
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"

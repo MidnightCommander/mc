@@ -1,3 +1,11 @@
+1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c (ctl_x_cmd): Implement ctl-x handling as a state of the
+	key press events.  Drop the usage of mi_getch to acomplish this
+	task. 
+	(midnight_callback): Deal with the current map depending on the
+	c-x state. 
+
 Mon May  4 10:21:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* background.c (message_1s1d): the unprocessed string with %d was

@@ -392,6 +392,10 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 			dh = dh->next;
 		} while (dh != h->current);
 	}
+
+	if (msg == DLG_UNHANDLED_KEY || msg == DLG_HOTKEY_HANDLED)
+		return midnight_callback (h, id, msg);
+
 	return default_dlg_callback (h, id, msg);
 }
 

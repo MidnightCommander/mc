@@ -1682,10 +1682,12 @@ static key_map ctl_x_map [] = {
     { 'a',          reselect_vfs },
 #endif
     { 'd',          compare_dirs_cmd },
+#ifndef HAVE_GNOME
     { 'p',          copy_current_pathname },
     { XCTRL('p'),   copy_other_pathname },
     { 't',          copy_current_tagged },
     { XCTRL('t'),   copy_other_tagged },
+#endif
     { 'c',          chmod_cmd },
 #ifndef OS2_NT
     { 'o',          chown_cmd },
@@ -1711,17 +1713,11 @@ static key_map ctl_x_map [] = {
     { 0,  0 }
 };
 
+static int ctl_x_map_enabled = 0;
+
 static void ctl_x_cmd (int ignore)
 {
-    int i;
-    int key = mi_getch ();
-
-    for (i = 0; ctl_x_map [i].key_code; i++){
-	if (key == ctl_x_map [i].key_code){
-	    (*ctl_x_map [i].fn)(key);
-	    break;
-	}
-    }
+	ctl_x_map_enabled = 1;
 }
 
 static void nothing ()
@@ -1729,6 +1725,7 @@ static void nothing ()
 }
 
 static key_map default_map [] = {
+#ifndef HAVE_GNOME
     { KEY_F(19),  menu_last_selected_cmd },
     { KEY_F(20),  (key_callback) quiet_quit_cmd },
 
@@ -1743,15 +1740,15 @@ static key_map default_map [] = {
     /* To access the directory hotlist */
     { XCTRL('\\'), quick_chdir_cmd },
 
+    /* Suspend */
+    { XCTRL('z'), suspend_cmd },
+#endif
     /* The filtered view command */
     { ALT('!'),   filtered_view_cmd_cpanel },
     
     /* Find file */
     { ALT('?'),	  find_cmd },
 	
-    /* Suspend */
-    { XCTRL('z'), suspend_cmd },
-
     /* Panel refresh */
     { XCTRL('r'), reread_cmd },
 
@@ -1932,6 +1929,15 @@ int midnight_callback (struct Dlg_head *h, int id, int msg)
 	return MSG_HANDLED;
 	
     case DLG_KEY:
+	if (ctl_x_map_enabled){
+		ctl_x_map_enabled = 0;
+		for (i = 0; ctl_x_map [i].key_code; i++)
+			if (id == ctl_x_map [i].key_code){
+				(*ctl_x_map [i].fn)(id);
+				return MSG_HANDLED;
+			}
+	}
+	    
 	if (id == KEY_F(10) && !the_menubar->active){
 	    quit_cmd ();
 	    return MSG_HANDLED;
@@ -2005,16 +2011,23 @@ int midnight_callback (struct Dlg_head *h, int id, int msg)
 	    if (v)
 		return v;
 	}
-	for (i = 0; default_map [i].key_code; i++){
-	    if (id == default_map [i].key_code){
-		(*default_map [i].fn)(id);
-		break;
-	    }
+	if (ctl_x_map_enabled){
+		ctl_x_map_enabled = 0;
+		for (i = 0; ctl_x_map [i].key_code; i++)
+			if (id == ctl_x_map [i].key_code){
+				(*ctl_x_map [i].fn)(id);
+				return MSG_HANDLED;
+			}
+	} else {
+		for (i = 0; default_map [i].key_code; i++){
+			if (id == default_map [i].key_code){
+				(*default_map [i].fn)(id);
+				return MSG_HANDLED;
+			}
+		}
 	}
-	if (default_map [i].key_code)
-	    return MSG_HANDLED;
-	else
-	    return MSG_NOT_HANDLED;
+	return MSG_NOT_HANDLED;
+	
 #endif
 #ifndef HAVE_X
 	/* We handle the special case of the output lines */
