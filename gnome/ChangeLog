@@ -1,3 +1,16 @@
+1999-01-21  Jonathan Blandford  <jrb@redhat.com>
+
+	* glayout.c: comment out compare panels.
+
+	* gnome-file-property-dialog.h: new file.  This is a new widget
+	for the file-properties dialog.  It doesn't handle mode changes
+	quite right yet, but does everything else beautifully...
+
+	* gnome-file-property-dialog.c: new file
+
+	* gpopup.c (panel_action_properties): use new dialog
+	(dicon_properties): as above.
+
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_create_file_list): Added GDK_ACTION_ASK to the

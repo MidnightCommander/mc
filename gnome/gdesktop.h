@@ -8,7 +8,7 @@
 
 #ifndef GDESKTOP_H
 #define GDESKTOP_H
-
+#include "dir.h"
 
 /* Snap granularity for desktop icons -- maybe these should be calculated in
  * terms of the font size?

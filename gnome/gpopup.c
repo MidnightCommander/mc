@@ -17,7 +17,7 @@
 #include "gpageprop.h"
 #include "gpopup.h"
 #include "main.h"
-
+#include "gnome-file-property-dialog.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
 
@@ -82,11 +82,17 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 static void
 dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 {
-	int retval;
+	int retval = 1;
 	char *path;
+	GtkWidget *dlg;
 	
 	path = g_strconcat (getenv("HOME"), "/desktop/", dii->filename, NULL);
-	retval = item_properties (dii->dicon, path, dii);
+/*	retval = item_properties (dii->dicon, path, dii);*/
+	dlg = gnome_file_property_dialog_new (path);
+	gtk_widget_show_all (dlg);
+	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
+		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
+	gtk_widget_destroy (dlg);
 	g_free(path);
 	if (retval)
 		reread_cmd ();
@@ -102,13 +108,20 @@ dicon_execute (GtkWidget *widget, DesktopIconInfo *dii)
 static void
 panel_action_properties (GtkWidget *widget, WPanel *panel)
 {
+	gint retval;
 	file_entry *fe = &panel->dir.list [panel->selected];
 	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
+	GtkWidget *dlg;
 
-	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
-		reread_cmd ();
-
+/*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
+	reread_cmd ();*/
+	dlg = gnome_file_property_dialog_new (full_name);
+	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
+		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
+		gtk_widget_destroy (dlg);
 	free (full_name);
+	if (retval)
+		reread_cmd ();
 }
 
 static void

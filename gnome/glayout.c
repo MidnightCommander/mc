@@ -303,7 +303,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Opens the selected files"), gnome_open_files },
 /*	{ GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },*/
 	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"), copy_cmd, NULL},
-	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd, NULL, NULL, 0, NULL, 'd', GDK_CONTROL_MASK},
 	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel, NULL,
@@ -313,11 +313,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_edit_menu [] = {
-	GNOMEUIINFO_MENU_CUT_ITEM(NULL, NULL),
-	GNOMEUIINFO_MENU_COPY_ITEM(NULL, NULL),
-	GNOMEUIINFO_MENU_PASTE_ITEM(NULL, NULL),
-	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("_Select All"),        N_("Select all files in the current Panel"), gnome_select_all_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Select _All"),        N_("Select all files in the current Panel"), gnome_select_all_cmd, NULL, NULL, 0, NULL, 'a', GDK_CONTROL_MASK  },
 	{ GNOME_APP_UI_ITEM, N_("_Select Files..."),   N_("Select a group of files"), select_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Invert Selection"),  N_("Reverses the list of tagged files"), reverse_selection_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
@@ -348,7 +344,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_Find File..."),      N_("Locate files on disk"),   find_cmd, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO},
 	  
-	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
+/*	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },*/
 	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),               N_("Runs a command"), run_cmd, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
 	{ GNOME_APP_UI_ITEM, N_("_Run Command in panel..."),N_("Run a command and put the results in a panel"), gnome_external_panelize },

@@ -4,6 +4,7 @@
 #define MIN_FILES 128
 #define RESIZE_STEPS 128
 
+#include <sys/stat.h>
 typedef struct {
 
     /* File attributes */
