@@ -6075,7 +6075,7 @@ msgid ""
 "Using it may compromise your security"
 msgstr ""
 "Файл %s в текущем каталоге не принадлежит ни root'у, ни Вам,\n"
-"и доступен другим на запись. Использование такого файла неприемлемо\n"
+"или доступен другим на запись. Использование такого файла неприемлемо\n"
 "c точки зрения безопасности."
 
 #: src/user.c:672
@@ -7004,7 +7004,7 @@ msgstr " open_inode_scan: %d "
 #: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
-msgstr " при начале сканирования inode %d "
+msgstr " при начале сканирования узла %d "
 
 #: vfs/undelfs.c:204
 #, c-format
