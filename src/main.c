@@ -3222,7 +3222,7 @@ main (int argc, char *argv [])
 	g_free (last_wd_string);
     }
 
-#ifdef HAVE_MAD
+#if defined(HAVE_MAD) && !defined(HAVE_X)
     done_key ();
 #endif
 

@@ -1,5 +1,8 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* mad.h: Include stdio.h to prevent redefining mad_tempnam().
+	* main.c [HAVE_X && HAVE_MAD]: Don't call done_key().
+
 	* dlg.h: Remove declarations of non-existent functions.
 	[HAVE_X]: Disable color constants - they shouldn't be used.
 

@@ -2,6 +2,7 @@
 #define __MAD_H
 
 /* To prevent molesting these files with the malloc/calloc/free macros.  */
+#include <stdio.h>
 #include <stdlib.h>
 #if !defined(STDC_HEADERS) && defined(HAVE_MALLOC_H)
 #   include <malloc.h>
