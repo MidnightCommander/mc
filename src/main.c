@@ -1799,7 +1799,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    show_console_contents (output_start_y,
 				   LINES-output_lines-keybar_visible-1,
 				   LINES-keybar_visible-1);
-	break;
+	return MSG_HANDLED;
 	
     }
     return default_dlg_callback (h, id, msg);

@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (midnight_callback): Avoid calling the default DLG_DRAW
+	handler.  From David Martin <dmartina@excite.com>
+
 	* help.c (help_handle_key): Sanity check for broken help files.
 	From David Martin <dmartina@excite.com>
 
