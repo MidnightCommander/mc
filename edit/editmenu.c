@@ -35,7 +35,7 @@
 
 #undef edit_message_dialog
 #define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&OK"))
-#define CFocus(x) 
+#define CFocus(x)
 
 static void
 menu_cmd (int command)
@@ -207,7 +207,7 @@ menu_sort_cmd (void)
     menu_cmd (CK_Sort);
 }
 
-static void 
+static void
 menu_ext_cmd (void)
 {
     menu_cmd (CK_ExtCmd);

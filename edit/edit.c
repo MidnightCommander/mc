@@ -1,14 +1,14 @@
 /* editor low level data handling and cursor fundamentals.
 
    Copyright (C) 1996, 1997 the Free Software Foundation
-   
+
    Authors: 1996, 1997 Paul Sheer
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -60,9 +60,9 @@ char *option_backup_ext = "~";
 /*
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
- * 
+ *
  * (b1 is buffers1 and b2 is buffers2)
- * 
+ *
  *                                       |
  * \0\0\0\0\0m e _ f i l e . \nf i n . \n|T h i s _ i s _ s o\0\0\0\0\0\0\0\0\0
  * ______________________________________|______________________________________
@@ -79,7 +79,7 @@ char *option_backup_ext = "~";
  *                              file end|||file beginning
  *                                       |
  *                                       |
- * 
+ *
  *           _
  * This_is_some_file
  * fin.
@@ -491,7 +491,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 
     if (!edit) {
 #ifdef ENABLE_NLS
-	/* 
+	/*
 	 * Expand option_whole_chars_search by national letters using
 	 * current locale
 	 */
@@ -570,7 +570,7 @@ edit_clean (WEdit *edit)
     /* a stale lock, remove it */
     if (edit->locked)
 	edit->locked = edit_unlock_file (edit->filename);
-    
+
     /* save cursor position */
     if (option_save_position)
 	edit_save_position (edit);
@@ -807,7 +807,7 @@ static inline void edit_modification (WEdit * edit)
 {
     edit->caches_valid = 0;
     edit->screen_modified = 1;
-    
+
     /* raise lock when file modified */
     if (!edit->modified && !edit->delete_file)
 	edit->locked = edit_lock_file (edit->filename);
@@ -837,7 +837,7 @@ edit_insert (WEdit *edit, int c)
     if (edit->loading_done) {
 	edit_modification (edit);
     }
-    
+
     /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n') {
 	if (edit->book_mark)
@@ -1451,7 +1451,7 @@ int line_is_blank (WEdit * edit, long line)
     return is_blank (edit, edit_find_line (edit, line));
 }
 
-/* moves up until a blank line is reached, or until just 
+/* moves up until a blank line is reached, or until just
    before a non-blank line is reached */
 static void edit_move_up_paragraph (WEdit * edit, int scroll)
 {
@@ -1958,7 +1958,7 @@ static void edit_tab_cmd (WEdit * edit)
     if (option_fake_half_tabs) {
 	if (is_in_indent (edit)) {
 	    /*insert a half tab (usually four spaces) unless there is a
-	       half tab already behind, then delete it and insert a 
+	       half tab already behind, then delete it and insert a
 	       full tab. */
 	    if (!option_fill_tabs_with_spaces && right_of_four_spaces (edit)) {
 		for (i = 1; i <= HALF_TAB_SIZE; i++)

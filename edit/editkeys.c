@@ -1,14 +1,14 @@
 /* Editor key translation.
 
    Copyright (C) 1996, 1997 the Free Software Foundation
-   
+
    Authors: 1996, 1997 Paul Sheer
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -269,7 +269,7 @@ edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch)
     }
 
     /* Function still not found for this key, so try macros */
-    /* This allows the same macro to be 
+    /* This allows the same macro to be
        enabled by either eg "ALT('f')" or "XCTRL('f')" or "XCTRL('a'), 'f'" */
 
     if (x_key & ALT (0)) {	/* is an alt key ? */

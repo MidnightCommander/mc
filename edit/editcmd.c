@@ -253,7 +253,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	if (!savename)
 	    return 0;
 	/* FIXME:
-	 * Close for now because mc_mkstemps use pure open system call 
+	 * Close for now because mc_mkstemps use pure open system call
 	 * to create temporary file and it needs to be reopened by
 	 * VFS-aware mc_open().
 	 */
@@ -405,7 +405,7 @@ void menu_save_mode_cmd (void)
 	/* OK/Cancel buttons */
 	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
 	maxlen = max (maxlen, l1);
-        
+
         for (i = 0; i < 3; i++ ) {
             str[i] = _(str[i]);
 	    maxlen = max (maxlen, strlen (str[i]) + 7);
@@ -495,7 +495,7 @@ edit_save_as_cmd (WEdit *edit)
 		if (!edit->locked && !edit->delete_file)
 		    save_lock = edit_lock_file (exp);
 	    }
-		
+
 	    if (edit_save_file (edit, exp)) {
 		/* Succesful, so unlock both files */
 		if (strcmp (edit->filename, exp)) {
@@ -507,7 +507,7 @@ edit_save_as_cmd (WEdit *edit)
 		    if (edit->locked || save_lock)
 			edit->locked = edit_unlock_file (edit->filename);
 		}
-		
+
 		edit_set_filename (edit, exp);
 		g_free (exp);
 		edit->modified = 0;
@@ -551,7 +551,7 @@ raw_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 }
 
 /* gets a raw key from the keyboard. Passing cancel = 1 draws
-   a cancel button thus allowing c-c etc.  Alternatively, cancel = 0 
+   a cancel button thus allowing c-c etc.  Alternatively, cancel = 0
    will return the next key pressed.  ctrl-a (=B_CANCEL), ctrl-g, ctrl-c,
    and Esc are cannot returned */
 int
@@ -779,17 +779,17 @@ static int
 edit_save_cmd (WEdit *edit)
 {
     int res, save_lock = 0;
-    
+
     if (!edit->locked && !edit->delete_file)
 	save_lock = edit_lock_file (edit->filename);
     res = edit_save_file (edit, edit->filename);
-    
+
     /* Maintain modify (not save) lock on failure */
     if ((res && edit->locked) || save_lock)
 	edit->locked = edit_unlock_file (edit->filename);
-    
+
     /* On failure try 'save as', it does locking on its own */
-    if (!res) 
+    if (!res)
 	return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     edit->delete_file = 0;
@@ -821,7 +821,7 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
 {
     int prev_locked = edit->locked;
     char *prev_filename = g_strdup (edit->filename);
-    
+
     if (!edit_reload (edit, exp)) {
 	g_free (prev_filename);
 	return 1;
@@ -1492,7 +1492,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    }
 	} else {	/* regexp matching */
 	    long offset = 0;
-	    int found_start, match_bol, move_win = 0; 
+	    int found_start, match_bol, move_win = 0;
 
 	    while (start + offset < last_byte) {
 		match_bol = (offset == 0 || (*get_byte) (data, start + offset - 1) == '\n');
@@ -2380,7 +2380,7 @@ int edit_sort_cmd (WEdit * edit)
 
     exp = old ? old : "";
 
-    exp = input_dialog (_(" Run Sort "), 
+    exp = input_dialog (_(" Run Sort "),
     _(" Enter sort options (see manpage) separated by whitespace: "), exp);
 
     if (!exp)
@@ -2391,12 +2391,12 @@ int edit_sort_cmd (WEdit * edit)
     e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, (char *) NULL));
     if (e) {
 	if (e == -1 || e == 127) {
-	    edit_error_dialog (_(" Sort "), 
+	    edit_error_dialog (_(" Sort "),
 	    get_sys_error (_(" Cannot execute sort command ")));
 	} else {
 	    char q[8];
 	    sprintf (q, "%d ", e);
-	    edit_error_dialog (_(" Sort "), 
+	    edit_error_dialog (_(" Sort "),
 	    catstrs (_(" Sort returned non-zero: "), q, (char *) NULL));
 	}
 	return -1;
@@ -2650,7 +2650,7 @@ void edit_mail_dialog (WEdit * edit)
 static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
 {
     int i, c, last;
-    
+
 /* return if at begin of file */
     if (edit->curs1 <= 0)
 	return 0;
@@ -2658,14 +2658,14 @@ static int edit_find_word_start (WEdit *edit, long *word_start, int *word_len)
     c = (unsigned char) edit_get_byte (edit, edit->curs1 - 1);
 /* return if not at end or in word */
     if (isspace (c) || !(isalnum (c) || c == '_'))
-	return 0; 
+	return 0;
 
 /* search start of word to be completed */
     for (i = 2;; i++) {
 /* return if at begin of file */
-	if (edit->curs1 - i < 0) 
+	if (edit->curs1 - i < 0)
 	    return 0;
-	    
+
 	last = c;
 	c = (unsigned char) edit_get_byte (edit, edit->curs1 - i);
 

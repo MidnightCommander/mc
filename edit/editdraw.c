@@ -80,7 +80,7 @@ static void status_string (WEdit * edit, char *s, int w)
 		edit->total_lines + 1,
 
 		edit->curs1,
-		edit->last_byte, 
+		edit->last_byte,
 		byte_str);
 }
 
@@ -471,7 +471,7 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 	redraw_labels (edit->widget.parent);
     render_edit_text (edit, row_start, col_start, row_end, col_end);
     /*
-     * edit->force != 0 means a key was pending and the redraw 
+     * edit->force != 0 means a key was pending and the redraw
      * was halted, so next time we must redraw everything in case stuff
      * was left undrawn from a previous key press.
      */

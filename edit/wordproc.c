@@ -148,8 +148,8 @@ static void strip_newlines (unsigned char *t, int size)
     }
 }
 
-/* 
-   This is a copy of the function 
+/*
+   This is a copy of the function
    int calc_text_pos (WEdit * edit, long b, long *q, int l)
    in propfont.c  :(
    It calculates the number of chars in a line specified to length l in pixels
@@ -238,8 +238,8 @@ static void format_this (unsigned char *t, int size, int indent)
 	    break;
 	p = word_start (t, q, size);
 	if (p == -1)
-	    q = next_word_start (t, q, size);	/* Return the end of the word if the beginning 
-						   of the word is at the beginning of a line 
+	    q = next_word_start (t, q, size);	/* Return the end of the word if the beginning
+						   of the word is at the beginning of a line
 						   (i.e. a very long word) */
 	else
 	    q = p;

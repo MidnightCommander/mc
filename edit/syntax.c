@@ -444,7 +444,7 @@ static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int 
 
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 {
-    if (edit->rules && byte_index < edit->last_byte && 
+    if (edit->rules && byte_index < edit->last_byte &&
                          option_syntax_highlighting && use_colors) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), color);
     } else {
@@ -577,7 +577,7 @@ static int get_args (char *l, char **args, int args_size)
 	args[argc++] = convert (p);
     }
     args[argc] = (char *) NULL;
-    return argc; 
+    return argc;
 }
 
 #define free_args(x)

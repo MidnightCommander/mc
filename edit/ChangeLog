@@ -1,5 +1,9 @@
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
+	* *.c: Removed trailing whitespace.
+
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
 	* edit.h: Removed catstrs, as it is only used in editcmd.c.
 	* editcmd.c (catstrs): Changed declaration to be static.
 	* editcmd.c: Added const qualifiers.
