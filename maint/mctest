@@ -40,3 +40,5 @@ if test -x /usr/bin/rpmbuild; then
 else
 	echo "rpmbuild not found"
 fi
+
+echo "All done.  No fatal errors.  Please check test*.err files."
