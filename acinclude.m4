@@ -756,6 +756,12 @@ AC_DEFUN([MC_WITH_SLANG], [
 	with_screen=mcslang
     fi
 
+    dnl Check if termcap is needed.
+    dnl This check must be done before anything is linked against S-Lang.
+    if test x$with_screen = xslang; then
+	MC_SLANG_TERMCAP
+    fi
+
     dnl Check the library
     if test x$with_screen = xslang; then
 	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
@@ -775,8 +781,7 @@ it's not fully supported yet])
     if test x$with_screen = xslang; then
 	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
 		  [Define to use S-Lang library installed on the system])
-        MC_SLANG_PRIVATE
-	MC_SLANG_TERMCAP
+	MC_SLANG_PRIVATE
 	screen_type=slang
 	screen_msg="S-Lang library (installed on the system)"
     else

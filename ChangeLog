@@ -1,5 +1,9 @@
 2005-03-19  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (MC_WITH_SLANG): Partly restore original order of
+	checks and add a comment with a warning.
+	From Pavel S. Shirshov <me@pavelsh.pp.ru>
+
 	* acinclude.m4 (MC_WITH_SLANG): Reorder checks.  Move termcap
 	checks ...
 	(MC_SLANG_TERMCAP): ... here.
