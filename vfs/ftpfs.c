@@ -1359,7 +1359,8 @@ fallback:
 static int
 file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 {
-    int h, sock, n, total;
+    int h, sock, n;
+    off_t total;
 #ifdef HAVE_STRUCT_LINGER
     struct linger li;
 #else
@@ -1415,8 +1416,8 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	    goto error_return;
 	}
 	total += n;
-	print_vfs_message(_("ftpfs: storing file %d (%lu)"),
-			  total, (unsigned long) s.st_size);
+	print_vfs_message(_("ftpfs: storing file %lu (%lu)"),
+			  (unsigned long) total, (unsigned long) s.st_size);
     }
     disable_interrupt_key();
     close(sock);

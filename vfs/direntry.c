@@ -368,7 +368,7 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
 	    return (MEDATA->find_entry) (me, entry->dir->super->root, linkname, follow - 1, 0);
 	else { /* FIXME: this does not work */ 
 	    char *fullpath = vfs_s_fullpath(me, entry->dir);
-	    sprintf(buf, "%s/%s", fullpath, linkname);
+	    snprintf(buf, sizeof (buf), "%s/%s", fullpath, linkname);
 	    g_free (fullpath);
 	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf, follow - 1, 0);
 	}
@@ -934,14 +934,14 @@ int
 vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
 {
     /* If you want reget, you'll have to open file with O_LINEAR */
-    int total = 0;
+    off_t total = 0;
     char buffer[8192];
     int handle, n;
-    int stat_size = ino->st.st_size;
+    off_t stat_size = ino->st.st_size;
     struct vfs_s_fh fh;
 
     memset(&fh, 0, sizeof(fh));
-    
+
     fh.ino = ino;
 
     handle = mc_mkstemps (&ino->localname, me->name, NULL);

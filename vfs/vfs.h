@@ -338,7 +338,8 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
 
 #define URL_DEFAULTANON 1
 #define URL_NOSLASH 2
-extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need);
+extern void vfs_print_stats (const char *fs_name, const char *action,
+			     const char *file_name, off_t have, off_t need);
 
 /* Don't use values 0..4 for a while -- 10/98, pavel@ucw.cz */
 #define MCCTL_REMOVELOCALCOPY   5

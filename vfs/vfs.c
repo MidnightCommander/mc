@@ -1397,7 +1397,7 @@ is_dos_date(char *str)
 static int
 is_week (char *str, struct tm *tim)
 {
-    char *week = "SunMonTueWedThuFriSat";
+    static const char *week = "SunMonTueWedThuFriSat";
     char *pos;
 
     if((pos=strstr(week, str)) != NULL){
@@ -1411,7 +1411,7 @@ is_week (char *str, struct tm *tim)
 static int
 is_month (char *str, struct tm *tim)
 {
-    char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     char *pos;
     
     if((pos=strstr(month, str)) != NULL){
@@ -1840,21 +1840,21 @@ vfs_die (char *m)
 }
 
 void
-vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need)
+vfs_print_stats (const char *fs_name, const char *action, const char *file_name, off_t have, off_t need)
 {
     static char *i18n_percent_transf_format = NULL, *i18n_transf_format = NULL;
-    
+
     if (i18n_percent_transf_format == NULL) {
-        i18n_percent_transf_format = _("%s: %s: %s %3d%% (%ld bytes transfered)");
-	i18n_transf_format = _("%s: %s: %s %ld bytes transfered");
-	}
+	i18n_percent_transf_format = _("%s: %s: %s %3d%% (%lu bytes transfered)");
+	i18n_transf_format = _("%s: %s: %s %lu bytes transfered");
+    }
 
     if (need) 
-        print_vfs_message (i18n_percent_transf_format, 
-			   fs_name, action, file_name, have*100/need, have);
+	print_vfs_message (i18n_percent_transf_format, fs_name, action,
+			   file_name, (int)((double)have*100/need), (unsigned long) have);
     else
-        print_vfs_message (i18n_transf_format,
-			   fs_name, action, file_name, have);
+	print_vfs_message (i18n_transf_format,
+			   fs_name, action, file_name, (unsigned long) have);
 }
 
 #ifndef VFS_STANDALONE

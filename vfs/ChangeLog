@@ -1,3 +1,19 @@
+2002-02-08  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* direntry.c (vfs_s_retrieve_file): Use off_t for total
+	and stat_size.
+
+	* vfs.c (vfs_s_resolve_symlink): Use snprintf
+	instead of sprintf.
+	(vfs_print_stats): Use off_t for have and need.  Cast
+	have to double to eliminate negative percent(s).
+	Fix print_vfs_message string formats.
+
+	* vfs.h (vfs_print_stats): Adjust declaration.
+
+	* ftpfs.c (file_store): Use off_t for total.
+	Fix print_vfs_message string format.
+
 2002-02-07  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ftpfs.c (dir_load): Speed up cd_first calculation.
