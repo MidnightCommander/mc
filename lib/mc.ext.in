@@ -261,6 +261,9 @@ regex/\.(asf|ASF|Asf)$
 regex/\.(divx|DIVX|DivX|Divx)$
 	Include=video
 
+regex/\.(mov|MOV|Mov)$
+	Include=video
+
 regex/\.(mp4|MP4|Mp4|mpe?g|MPE?G|Mpe?g)$
 	Include=video
 

@@ -1,3 +1,7 @@
+2002-12-24  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Play *.mov by mplayer.
+
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Enable X11 support by default, use --without-x
