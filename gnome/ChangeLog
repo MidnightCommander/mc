@@ -1,3 +1,7 @@
+Thu Mar 18 14:59:12 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* gnome-open-dialog.c (read_directory): s/basename/x_basename/g
+
 1999-03-17  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-file-property-dialog.c (generate_icon_sel): I don't know

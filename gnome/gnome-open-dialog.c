@@ -116,8 +116,8 @@ strip_name_from_gde (GnomeDesktopEntry *gde,
 	if (!fname)
 		return (g_strdup (gde->name));
 
-	if (strcmp (basename (gde->location), ".directory")) {
-		return g_strdup (basename(gde->location));
+	if (strcmp (x_basename (gde->location), ".directory")) {
+		return g_strdup (x_basename(gde->location));
 	}
 
 	ptr = strrchr (gde->location, '/');
@@ -152,7 +152,7 @@ insert_node_custom (GSList *order,
 
 	temp_node = sorted_list->children;
 	while (order) {
-		if (!strcmp ((gchar *) order->data, basename (name))) {
+		if (!strcmp ((gchar *) order->data, x_basename (name))) {
 			if (temp_node)
 				g_node_insert_before (sorted_list, temp_node, node);
 			else
