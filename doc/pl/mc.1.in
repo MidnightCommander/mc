@@ -1276,20 +1276,25 @@ Midnight Commander ma niektóre opcje, które mog± byæ w³±czane lyb wy³±czane
 w ró¿nych oknach dialogowych z tego menu. Opcja jest w³±czona je¶li widnieje
 przed ni± gwiazdka lyb "x".
 .PP
-Komanda
+Komenda
 .I Configuration
 w³±cza okno dialogowe, z którego mo¿esz zmieniæ
 wiêkszo¶æ ustawieñ Midnight Commandera.
 .PP
 Menu
-.I Display bits
-pozwala okre¶liæ jakiego typu znaki twój terminal jest
-w stanie wy¶wietliæ.
+.I Layout
+pozwala na zmianê wielu ustawieñ, które maj± znacz±cy wp³yw
+na to jak MC bêdzie wygl±da³ na ekranie.
 .PP
 Menu
 .I Confirmation
 w³±cza okno dialogowe, w którym mo¿esz ustawiæ przy wykonaniu
 których operacji chcesz byæ pytany o potwierdzenie.
+.PP
+Menu
+.I Display bits
+pozwala okre¶liæ jakiego typu znaki twój terminal jest
+w stanie wy¶wietliæ.
 .PP
 Menu
 .I Learn Keys
@@ -1300,11 +1305,6 @@ Menu
 .I Virtual FS
 pokazuje okno, w którym mo¿esz zmieniæ niektóre ustawienia
 dotycz±ce systemów VFS.
-.PP
-Menu
-.I Layout
-pozwala na zmianê wielu ustawieñ, które maj± znacz±cy wp³yw
-na to jak MC bêdzie wygl±da³ na ekranie.
 .PP
 Komenda
 .I Save Setup
@@ -1454,6 +1454,44 @@ trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z "Yes" na
 .IR yes .
 Standardowo ta opcja jest wy³±czona.
 .PP
+.\"NODE "    Layout"
+.SH "    Wygl±d (Layout)"
+Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
+zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
+hintów (pomocy) i linia klawiszy funkcyjnych maj± byæ widoczne. Na konsolach
+typu Linux lub SCO mo¿esz wybraæ ile linii ma byæ pokazywanych na wyj¶ciu okna.
+.PP
+Reszta powierzchni ekranu jest u¿ywana przez dwa panele katalogowe. Mo¿esz
+wybraæ nawet czy panele maj± byæ u³o¿one poziomo czy pionowo.
+Kolejn± mo¿liwo¶ci± jest zmiana ich standardowej szeroko¶ci (b±d¼ wysoko¶ci).
+Jest ona standardowo równa, ale mo¿na to zmieniæ.
+.PP
+Standardowo ca³a zawarto¶æ panelu katalogowego jest wy¶wietlana t± sam± barw±,
+ale mo¿esz zmieniæ to tak aby
+.I uprawnienia
+i
+.I typy plików
+by³y wy¶wietlane specjalnym pod¶wietlonym kolorem.
+Je¶li pod¶wietlanie uprawnieñ jest w³±czone, czê¶æ pól (ta z
+.I uprawnieniami
+i
+.IR "typami plików" )
+bêdzie pod¶wietlona przy u¿yciu koloru wybranego jako
+.IR selected .
+Je¶li pod¶wietlanie jest w³±czone, pliki s± kolorowane w zale¿no¶æi od swojego
+typu (np. katalogi, pliki typu core, wykonywalne, ...).
+.PP
+Je¶li opcja
+.I Show Mini-Status
+jest w³±czona, jeden wiersz informacji statusowych na temat aktualnie
+wybranej rzeczy w panelu, bêdzie pokazany na dole panelu.
+.PP
+.\"NODE "    Confirmation"
+.SH "    Potwierdzanie (Confirmation)"
+W tym menu mo¿esz skonfigurowaæ opcje potwierdzania dla kasowania,
+zastêpowania, wykonywania przez naci¶niêcie klawisza Enter, jak równie¿
+wychodzenia z programu.
+.PP
 .\"NODE "    Display bits"
 .SH "    Wy¶wietlanie znaków (Display bits)"
 U¿ywane do konfigurowania zakresu znaków widocznych potem na ekranie.
@@ -1465,12 +1503,6 @@ sobie z wy¶wietlaniem znaków o¶miobitowych.
 Zobacz sekcjê
 .IR "Polskie znaki" ,
 po wiêcej szczegó³ów na temat ich u¿ywania w Midnight Commanderze.
-.PP
-.\"NODE "    Confirmation"
-.SH "    Potwierdzanie (Confirmation)"
-W tym menu mo¿esz skonfigurowaæ opcje potwierdzania dla kasowania,
-zastêpowania, wykonywania przez naci¶niêcie klawisza Enter, jak równie¿
-wychodzenia z programu.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
@@ -1548,39 +1580,6 @@ ftp poniewa¿ ka¿da operacja bêdzie wymagaæ kolejnych zapytañ do serwera.
 Ponadto mo¿esz zdefiniowaæ serwer proxy dla transferów ftp i skonfigurowaæ
 Midnight Commandera tak, aby zawsze go u¿ywa³. Zobacz sekcjê
 System plików FTP (FTP File System) po wiêcej szczegó³ów.
-.PP
-.\"NODE "    Layout"
-.SH "    Wygl±d (Layout)"
-Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
-zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
-hintów (pomocy) i linia klawiszy funkcyjnych maj± byæ widoczne. Na konsolach
-typu Linux lub SCO mo¿esz wybraæ ile linii ma byæ pokazywanych na wyj¶ciu okna.
-.PP
-Reszta powierzchni ekranu jest u¿ywana przez dwa panele katalogowe. Mo¿esz
-wybraæ nawet czy panele maj± byæ u³o¿one poziomo czy pionowo.
-Kolejn± mo¿liwo¶ci± jest zmiana ich standardowej szeroko¶ci (b±d¼ wysoko¶ci).
-Jest ona standardowo równa, ale mo¿na to zmieniæ.
-.PP
-Standardowo ca³a zawarto¶æ panelu katalogowego jest wy¶wietlana t± sam± barw±,
-ale mo¿esz zmieniæ to tak aby
-.I uprawnienia
-i
-.I typy plików
-by³y wy¶wietlane specjalnym pod¶wietlonym kolorem.
-Je¶li pod¶wietlanie uprawnieñ jest w³±czone, czê¶æ pól (ta z
-.I uprawnieniami
-i
-.IR "typami plików" )
-bêdzie pod¶wietlona przy u¿yciu koloru wybranego jako
-.IR selected .
-Je¶li pod¶wietlanie jest w³±czone, pliki s± kolorowane w zale¿no¶æi od swojego
-typu (np. katalogi, pliki typu core, wykonywalne, ...).
-.PP
-Je¶li opcja
-.I Show Mini-Status
-jest w³±czona, jeden wiersz informacji statusowych na temat aktualnie
-wybranej rzeczy w panelu, bêdzie pokazany na dole panelu.
-.PP
 .\"NODE "    Save Setup"
 .SH "    Zapisz ustawienia (Save Setup)"
 Na starcie Midnight Commander bêdzie próbowa³ odczytaæ opcje startowe
