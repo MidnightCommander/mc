@@ -556,19 +556,21 @@ help_help_cmd (Dlg_head *h)
 }
 
 static void
-help_index_cmd (Dlg_head *h)
+help_index_cmd (Dlg_head * h)
 {
     char *new_item;
 
-    history_ptr = (history_ptr+1) % HISTORY_SIZE;
-    history [history_ptr].page = currentpoint;
-    history [history_ptr].link = selected_item;
-    currentpoint = startpoint = search_string (data, "[Help]") + 1;
+    if (!(new_item = search_string (data, "[Contents]"))) {
+	message (1, MSG_ERROR, _(" Cannot find node %s in help file "),
+		 "[Contents]");
+	return;
+    }
 
-    if (!(new_item = search_string (data, "[Contents]")))
-	message (1, MSG_ERROR, _(" Cannot find node [Contents] in help file "));
-    else
-	currentpoint = startpoint = new_item + 1;
+    history_ptr = (history_ptr + 1) % HISTORY_SIZE;
+    history[history_ptr].page = currentpoint;
+    history[history_ptr].link = selected_item;
+
+    currentpoint = startpoint = new_item + 1;
     selected_item = NULL;
     help_callback (h, 0, DLG_DRAW);
 }

@@ -1,5 +1,9 @@
 2002-09-03  Pavel Roskin  <proski@gnu.org>
 
+	* help.c (help_index_cmd): Eliminate unneeded search for
+	"[Help]", which always fails.  Fix crash if "[Contents]" cannot
+	be found.  Reuse more generic error message.
+
 	* filegui.c: Eliminate x_set_dialog_title().
 	* hotlist.c: Likewise.
 	* help.c: Likewise.
