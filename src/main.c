@@ -3018,9 +3018,6 @@ main (int argc, char *argv [])
     }
     
     vfs_init ();
-#ifdef USE_INTERNAL_EDIT
-    edit_init_file();
-#endif /* USE_INTERNAL_EDIT */
     
 #ifdef HAVE_X
     /* NOTE: This call has to be before any our argument handling :) */
