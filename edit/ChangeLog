@@ -21,7 +21,7 @@
 	too large.
 
 	* wordproc.c (line_start): Remove incorrect optimization abusing
-	static varaibles.  Internal formatting should be usable now.
+	static variables.  Internal formatting should be usable now.
 
 2002-10-18  Pavel Roskin  <proski@gnu.org>
 
@@ -187,7 +187,7 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* editoptions.c: Make some variables static.
-	* edit.h: Take extern declaratrions from all C files.
+	* edit.h: Take extern declarations from all C files.
 
 	* editcmd.c (edit_block_process_cmd): Plug memory leak.
 	Simplify logic, reformat.
@@ -315,7 +315,7 @@
 	(strdup_convert): Rename to ...
 	(convert): ... this.  Don't strdup() passed string.
 	(get_args): Use convert() instead of strdup_convert().
-	(free_args): Make it do notning macro.
+	(free_args): Make it do nothing macro.
 	(open_include_file): Eliminate p array. Use glib function to
 	construct error_file_name. Use PATH_SEP instead of '/';
 	(edit_read_syntax_file): Use PATH_SEP_STR.
@@ -778,7 +778,7 @@
 
 2000-10-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* editcmd.c (edit_save_file): better error handling on writting
+	* editcmd.c (edit_save_file): better error handling on writing
 
 	(edit_sort_cmd): saved sort options proposed in dialog
 
@@ -789,7 +789,7 @@
 	* edit.c (edit_init) [ENABLE_NLS]: option_whole_chars_search
 	expanded by national letters using current locale on first call
 
-	(edit_file_is_open) [MIDNIGHT]: all occurences and related code
+	(edit_file_is_open) [MIDNIGHT]: all occurrences and related code
 	are commented
 
 	(edit_execute_cmd): typo in error message fixed
