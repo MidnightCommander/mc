@@ -142,8 +142,8 @@
 
 2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru> 
 
-	* syntax/makefile.syntax.diff: Adds "define" and "ended" keywords
-	* syntax/perl.syntax.diff: Adds "break" keyword
+	* syntax/makefile.syntax: Adds "define" and "ended" keywords
+	* syntax/perl.syntax: Adds "break" keyword
 
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 

@@ -75,7 +75,7 @@
 
 2004-09-04  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* sltermin.c (): Avoid strncpy, home_ti is 1K long and 
+	* sltermin.c (_SLtt_tigetent): Avoid strncpy, home_ti is 1K long and
 	nobody really needs it whole cleared
 
 2004-08-31  Pavel S. Shirshov  <me@pavelsh.pp.ru>
