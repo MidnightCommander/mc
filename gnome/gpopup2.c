@@ -21,7 +21,6 @@
 #include "ext.h"
 #include "main.h"
 #include "../vfs/vfs.h"
-#include "gpageprop.h"
 #include "gpopup.h"
 #include "gnome-file-property-dialog.h"
 #include "gnome-open-dialog.h"

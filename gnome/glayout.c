@@ -21,7 +21,6 @@
 #include "boxes.h"
 #include "panelize.h"
 #include "gcmd.h"
-#include "gcliplabel.h"
 #include "gdesktop.h"
 #include "setup.h"
 #include "../vfs/vfs.h"
