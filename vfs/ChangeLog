@@ -1,3 +1,9 @@
+2002-06-06  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* cpio.c (cpio_read_oldc_head): Use char[] for buf instead
+	of char*[].  Remove unneeded casts.  Fix error message.
+	(cpio_create_entry): G_free name.
+
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am (mcserv_SOURCES): Remove $(top_srcdir)/src/mad.c,
