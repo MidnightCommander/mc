@@ -1,3 +1,9 @@
+2003-11-07  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (free_file): Don't use check_error_pipe(), display
+	error messages in close_error_pipe().
+	* utilunix.c (check_error_pipe): Remove, it's unused.
+
 2003-10-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* widget.[ch] (listbox_search_text): Constify "text" argument.

@@ -445,35 +445,6 @@ close_error_pipe (int error, char *text)
     return 1;
 }
 
-/* Checks for messages in the error pipe,
- * closes the pipe and displays an error box if needed
- */
-void check_error_pipe (void)
-{
-    char error[MAX_PIPE_SIZE];
-    int len = 0;
-    if (old_error >= 0){
-	while (len < MAX_PIPE_SIZE)
-	{
-            fd_set select_set;
-            struct timeval timeout;
-            FD_ZERO (&select_set);
-            FD_SET (error_pipe[0], &select_set);
-            timeout.tv_sec = 0;
-            timeout.tv_usec = 0;
-            select (error_pipe[0] + 1, &select_set, 0, 0, &timeout);
-            if (!FD_ISSET (error_pipe[0], &select_set))
-		break;
-	    read (error_pipe[0], error + len, 1);
-	    len ++;
-	}
-	error[len] = 0;
-	close (error_pipe[0]);
-    }
-    if (len > 0)
-        message (0, _("Warning"), "%s", error);
-}
-
 /* Canonicalize path, and return a new path. Do everything in situ.
    The new path differs from path in:
 	Multiple `/'s are collapsed to a single `/'.

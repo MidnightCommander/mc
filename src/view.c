@@ -214,16 +214,12 @@ free_file (WView *view)
 #endif				/* HAVE_MMAP */
     {
 	if (view->reading_pipe) {
-	    /* Check error messages */
-	    if (!view->have_frame)
-		check_error_pipe ();
-
 	    /* Close pipe */
 	    pclose (view->stdfile);
 	    view->stdfile = NULL;
 
-	    /* Ignore errors because we don't want to hear about broken pipe */
-	    close_error_pipe (-1, NULL);
+	    /* Close error pipe and show warnings if any */
+	    close_error_pipe (0, NULL);
 	} else
 	    close_view_file (view);
     }
