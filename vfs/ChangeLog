@@ -1,3 +1,9 @@
+2004-09-23  Roland Illig  <roland.illig@gmx.de>
+
+	* cpio.c (cpio_read_bin_head): Replaced GUINT16_SWAP_LE_BE with
+	GUINT16_SWAP_LE_BE_CONSTANT, because GCC-3.3 emitted a warning about
+	__asm__ __const__.
+
 2004-09-22  Roland Illig  <roland.illig@gmx.de>
 
 	* direntry.c (vfs_s_new_entry): see 2004-09-19. Additionally followed the advice

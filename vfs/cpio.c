@@ -267,7 +267,7 @@ static int cpio_read_bin_head(struct vfs_class *me, struct vfs_s_super *super)
     if(super->u.arch.type == CPIO_BINRE) {
 	int i;
 	for(i = 0; i < (HEAD_LENGTH >> 1); i++)
-	    u.shorts[i] = GUINT16_SWAP_LE_BE(u.shorts[i]);
+	    u.shorts[i] = GUINT16_SWAP_LE_BE_CONSTANT(u.shorts[i]);
     }
     g_assert(u.buf.c_magic == 070707);
 
