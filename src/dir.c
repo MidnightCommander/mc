@@ -76,7 +76,17 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Group"),       sort_group }
 };
 
+/*
+ * FIXME: strcoll() is not case sensitive in some locales, including en_US.
+ * The user gets a "choice" between two case insensitive sorts.
+ * Ideally, the user should be able to select between all three functions -
+ * strcoll() (if available), strcmp() and g_strcasecmp().
+ */
+#ifdef HAVE_STRCOLL
 #define string_sortcomp(a,b) (case_sensitive ? strcoll (a,b) : g_strcasecmp (a,b))
+#else
+#define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : g_strcasecmp (a,b))
+#endif
 
 int
 unsorted (const file_entry *a, const file_entry *b)
