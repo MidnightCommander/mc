@@ -1,3 +1,8 @@
+2003-11-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (pipe_mail):  Eliminate g_strdup_printf().
+	(edit_complete_word_cmd): Fix possible buffer overflow.
+
 2003-11-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* editcmd.c (edit_mail_dialog): Trivial clean-up.

@@ -2528,7 +2528,7 @@ static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
     to = name_quote (to, 0);
     subject = name_quote (subject, 0);
     cc = name_quote (cc, 0);
-    s = g_strdup_printf ("mail -s %s -c %s %s", subject, cc, to);
+    s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "" , cc, " ",  to, NULL);
     g_free (to);
     g_free (subject);
     g_free (cc);
@@ -2792,7 +2792,7 @@ edit_complete_word_cmd (WEdit *edit)
     int word_len = 0, i, num_compl = 0, max_len;
     long word_start = 0;
     char *bufpos;
-    char match_expr[MAX_REPL_LEN];
+    char *match_expr;
     struct selection compl[MAX_WORD_COMPLETIONS];	/* completions */
 
     /* don't want to disturb another search */
@@ -2809,9 +2809,7 @@ edit_complete_word_cmd (WEdit *edit)
     /* prepare match expression */
     bufpos = &edit->buffers1[word_start >> S_EDIT_BUF_SIZE]
 	[word_start & M_EDIT_BUF_SIZE];
-    strncpy (match_expr, bufpos, word_len);
-    match_expr[word_len] = '\0';
-    strcat (match_expr, "[a-zA-Z_0-9]+");
+    match_expr = g_strdup_printf ("%.*s[a-zA-Z_0-9]+", word_len, bufpos);
 
     /* init search: backward, regexp, whole word, case sensitive */
     edit_set_search_parameters (0, 1, 1, 1, 1);
@@ -2842,6 +2840,7 @@ edit_complete_word_cmd (WEdit *edit)
 	}
     }
 
+    g_free (match_expr);
     /* release memory before return */
     for (i = 0; i < num_compl; i++)
 	g_free (compl[i].text);
