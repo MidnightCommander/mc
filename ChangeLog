@@ -1,3 +1,10 @@
+2001-06-16  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Change the order of SUBDIRS to fully compile text
+	edition before compiling anything for GNOME.
+	* mc.spec.in: Don't use brace expansion to avoid implicit
+	build-time dependency on bash.
+
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
 	* acinclude.m4 (AC_SHORT_D_NAME_LEN): Fix compiler warnings in
