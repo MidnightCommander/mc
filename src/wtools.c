@@ -131,7 +131,8 @@ query_dialog (const char *header, const char *text, int flags, int count, ...)
     }
 
     /* count coordinates */
-    cols = 6 + max (win_len, max ((int) strlen (header), msglen (text, &lines)));
+    msglen (text, &lines, &cols);
+    cols = 6 + max (win_len, max ((int) strlen (header), cols));
     lines += 4 + (count > 0 ? 2 : 0);
     xpos = COLS / 2 - cols / 2;
     ypos = LINES / 3 - (lines - 3) / 2;
@@ -446,7 +447,7 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
 
     int len;
     int i;
-    int lines;
+    int lines, cols;
     int ret;
     char *my_str;
     char histname[64] = "inp|";
@@ -457,7 +458,8 @@ fg_input_dialog_help (const char *header, const char *text, const char *help,
     g_strlcpy (histname + 3, header, 61);
     quick_widgets[2].histname = histname;
 
-    len = max ((int) strlen (header), msglen (text, &lines)) + 4;
+    msglen (text, &lines, &cols);
+    len = max ((int) strlen (header), cols) + 4;
     len = max (len, 64);
 
     /* The special value of def_text is used to identify password boxes

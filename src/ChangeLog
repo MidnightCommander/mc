@@ -1,3 +1,12 @@
+2005-02-05  Roland Illig  <roland.illig@gmx.de>
+
+	* util.h (msglen): Converted from a function to a procedure.
+	* util.c (msglen): Changed variable names and did a speedup.
+	* hotlist.c (add_new_entry_input): Using new msglen function.
+	* hotlist.c (add_new_group_input): Likewise.
+	* wtools.c (query_dialog): Likewise.
+	* wtools.c (fg_input_dialog_help): Likewise.
+
 2005-02-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* find.c: Implement non-recursive 'Find file' feature.

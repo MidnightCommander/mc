@@ -852,16 +852,19 @@ add_new_entry_input (const char *header, const char *text1, const char *text2,
 	  0, 0, "label-lbl" },
     NULL_QuickWidget };
     
-    size_t len;
+    int len;
     int i;
     int lines1, lines2;
+    int cols1, cols2;
     
 #ifdef ENABLE_NLS
 	static int i18n_flag = 0;
 #endif /* ENABLE_NLS */
 
-    len = max (strlen (header), (size_t) msglen (text1, &lines1));
-    len = max (len, (size_t) msglen (text2, &lines2)) + 4;
+    msglen(text1, &lines1, &cols1);
+    msglen(text2, &lines2, &cols2);
+    len = max ((int) strlen (header), cols1);
+    len = max (len, cols2) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS
@@ -949,13 +952,14 @@ add_new_group_input (const char *header, const char *label, char **result)
                                            quick_widgets variable above */
     int len;
     int i;
-    int lines;
+    int lines, cols;
 
 #ifdef ENABLE_NLS
 	static int i18n_flag = 0;
 #endif /* ENABLE_NLS */
-    
-    len = max (strlen (header), (size_t) msglen (label, &lines)) + 4;
+
+    msglen (label, &lines, &cols);
+    len = max ((int) strlen (header), cols) + 4;
     len = max (len, 64);
 
 #ifdef ENABLE_NLS

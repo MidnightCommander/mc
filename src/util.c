@@ -97,23 +97,26 @@ is_printable (int c)
 #endif				/* !HAVE_CHARSET */
 }
 
-/* Returns the message dimensions (lines and columns) */
-int msglen (const char *text, int *lines)
+/* Calculates the message dimensions (lines and columns) */
+void msglen (const char *text, int *lines, int *columns)
 {
-    int max = 0;
-    int line_len = 0;
-    
-    for (*lines = 1;*text; text++){
-	if (*text == '\n'){
-	    line_len = 0;
-	    (*lines)++;
+    int nlines = 1; /* even the empty string takes one line */
+    int ncolumns = 0;
+    int colindex = 0;
+
+    for (; *text != '\0'; text++) {
+	if (*text == '\n') {
+	    nlines++;
+	    colindex = 0;
 	} else {
-	    line_len++;
-	    if (line_len > max)
-		max = line_len;
+	    colindex++;
+	    if (colindex > ncolumns)
+		ncolumns = colindex;
 	}
     }
-    return max;
+
+    *lines = nlines;
+    *columns = ncolumns;
 }
 
 /*

@@ -9,7 +9,7 @@ extern const char *cstrcasestr (const char *haystack, const char *needle);
 
 void str_replace(char *s, char from, char to);
 int  is_printable (int c);
-int  msglen (const char *text, int *lines);
+void msglen (const char *text, /*@out@*/ int *lines, /*@out@*/ int *columns);
 
 /* Copy from s to d, and trim the beginning if necessary, and prepend
  * "..." in this case.  The destination string can have at most len
