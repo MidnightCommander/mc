@@ -1,3 +1,10 @@
+2001-08-12  Pavel Roskin  <proski@gnu.org>
+
+	* dir.c (string_sortcomp) [HAVE_STRCOLL]: Always use strcmp()
+	for case sensitive sort.  For case insensitive sort use
+	strcoll() if it's case insensitive for ASCII and g_strcasecmp()
+	otherwise.
+
 2001-08-11  Pavel Roskin  <proski@gnu.org>
 
 	* achown.c (chown_advanced_cmd): Remove dead code.

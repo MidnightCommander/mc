@@ -76,14 +76,44 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Group"),       sort_group }
 };
 
-/*
- * FIXME: strcoll() is not case sensitive in some locales, including en_US.
- * The user gets a "choice" between two case insensitive sorts.
- * Ideally, the user should be able to select between all three functions -
- * strcoll() (if available), strcmp() and g_strcasecmp().
- */
 #ifdef HAVE_STRCOLL
-#define string_sortcomp(a,b) (case_sensitive ? strcoll (a,b) : g_strcasecmp (a,b))
+/*
+ * g_strcasecmp() doesn't work well in some locales because it relies on
+ * the locale-specific toupper().  On the other hand, strcoll() is case
+ * sensitive in the "C" and "POSIX" locales, unlike other locales.
+ * Solution: always use strcmp() for case sensitive sort.  For case
+ * insensitive sort use strcoll() if it's case insensitive for ASCII and
+ * g_strcasecmp() otherwise.
+ */
+typedef enum {
+    STRCOLL_NO,
+    STRCOLL_YES,
+    STRCOLL_TEST	
+} strcoll_status;
+
+int string_sortcomp (char *str1, char *str2)
+{
+    static strcoll_status use_strcoll = STRCOLL_TEST;
+
+    if (case_sensitive) {
+	return strcmp (str1, str2);
+    }
+
+    /* Initialize use_strcoll once.  */
+    if (use_strcoll == STRCOLL_TEST) {
+	/* Only use strcoll() if it considers "B" between "a" and "c".  */
+	if (strcoll ("a", "B") * strcoll ("B", "c") > 0) {
+	    use_strcoll = STRCOLL_YES;
+	} else {
+	    use_strcoll = STRCOLL_NO;
+	}
+    }
+
+    if (use_strcoll == STRCOLL_NO)
+	return g_strcasecmp (str1, str2);
+    else
+	return strcoll (str1, str2);
+}
 #else
 #define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : g_strcasecmp (a,b))
 #endif
