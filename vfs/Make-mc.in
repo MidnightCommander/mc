@@ -10,7 +10,7 @@ top_builddir = ..
 
 @MCF@
 
-SAMBA_INCLUDES = -I$(srcdir)/samba/ubiqx
+SAMBA_INCLUDES =
 
 CFLAGS   = $(XCFLAGS)
 CPPFLAGS = $(XCPPFLAGS) -I. $(SAMBA_INCLUDES)
@@ -145,17 +145,6 @@ SAMBA_DIST_TESTS =		\
 	summary.c		\
 	sysv_ipc.c		\
 	trivial.c
-
-SAMBA_DIST_UBIQX =		\
-	COPYING.LIB		\
-	README.UBI		\
-	debugparse.h		\
-	sys_include.h		\
-	ubi_BinTree.h		\
-	ubi_Cache.h		\
-	ubi_SplayTree.h		\
-	ubi_dLinkList.h		\
-	ubi_sLinkList.h
 
 NONETFILES = 			\
 	cpio.o			\
@@ -306,7 +295,6 @@ distdir:
 	mkdir $(distdir)/samba/libsmb
 	mkdir $(distdir)/samba/param
 	mkdir $(distdir)/samba/tests
-	mkdir $(distdir)/samba/ubiqx
 	for I in $(SAMBA_DIST_TOPLEVEL); do \
 	  cp -p $(srcdir)/samba/$$I $(distdir)/samba \
 	  || exit 1; done
@@ -324,9 +312,6 @@ distdir:
 	  || exit 1; done
 	for I in $(SAMBA_DIST_TESTS); do \
 	  cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_UBIQX); do \
-	  cp -p $(srcdir)/samba/ubiqx/$$I $(distdir)/samba/ubiqx \
 	  || exit 1; done
 	
 depend dep: mcdep

@@ -182,26 +182,6 @@ struct nmb_data
   time_t refresh_time; /* The time the record should be refreshed. */
 };
 
-/* This structure represents an entry in a local netbios name list. */
-struct name_record
-  {
-  ubi_trNode            node[1];
-  struct subnet_record *subnet;
-  struct nmb_name       name;    /* The netbios name. */
-  struct nmb_data       data;    /* The netbios data. */
-  };
-
-/* Browser cache for synchronising browse lists. */
-struct browse_cache_record
-  {
-  ubi_dlNode     node[1];
-  pstring        lmb_name;
-  pstring        work_group;
-  struct in_addr ip;
-  time_t         sync_time;
-  time_t         death_time; /* The time the record must be removed. */
-  };
-
 /* This is used to hold the list of servers in my domain, and is
    contained within lists of domains. */
 
@@ -387,28 +367,6 @@ enum subnet_type {
   UNICAST_SUBNET             = 1,  /* Subnet for unicast packets. */
   REMOTE_BROADCAST_SUBNET    = 2,  /* Subnet for remote broadcasts. */
   WINS_SERVER_SUBNET         = 3   /* Only created if we are a WINS server. */
-};
-
-struct subnet_record
-{
-  struct subnet_record *next;
-  struct subnet_record *prev;
-
-  char  *subnet_name;      /* For Debug identification. */
-  enum subnet_type type;   /* To catagorize the subnet. */
-
-  struct work_record     *workgrouplist; /* List of workgroups. */
-  ubi_trRoot              namelist[1];   /* List of netbios names. */
-  struct response_record *responselist;  /* List of responses expected. */
-
-  BOOL namelist_changed;
-  BOOL work_changed;
-
-  struct in_addr bcast_ip;
-  struct in_addr mask_ip;
-  struct in_addr myip;
-  int nmb_sock;               /* socket to listen for unicast 137. */
-  int dgram_sock;             /* socket to listen for unicast 138. */
 };
 
 /* A resource record. */

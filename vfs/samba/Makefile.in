@@ -7,7 +7,6 @@ prefix=@prefix@
 exec_prefix=@exec_prefix@
 mandir=@mandir@
 
-LIBS=@LIBS@
 CC=@CC@
 CFLAGS=@CFLAGS@
 CPPFLAGS=@CPPFLAGS@
@@ -65,13 +64,12 @@ SMBRUN = $(BINDIR)/smbrun
 
 
 PASSWD_FLAGS = -DPASSWD_PROGRAM=\"$(PASSWD_PROGRAM)\" -DSMB_PASSWD_FILE=\"$(SMB_PASSWD_FILE)\"
-FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include -I$(srcdir)/ubiqx $(CPPFLAGS) -DSMBLOGFILE=\"$(SMBLOGFILE)\" -DNMBLOGFILE=\"$(NMBLOGFILE)\"
+FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include $(CPPFLAGS) -DSMBLOGFILE=\"$(SMBLOGFILE)\" -DNMBLOGFILE=\"$(NMBLOGFILE)\"
 FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"  
 FLAGS3 = -DSWATDIR=\"$(SWATDIR)\" -DSBINDIR=\"$(SBINDIR)\" -DLOCKDIR=\"$(LOCKDIR)\" -DSMBRUN=\"$(SMBRUN)\" -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
 FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\" -DBINDIR=\"$(BINDIR)\"
 FLAGS5 = $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
 FLAGS  = $(ISA) $(FLAGS5) $(PASSWD_FLAGS)
-FLAGS32  = $(ISA32) $(FLAGS5) $(PASSWD_FLAGS)
 
 SCRIPTS = $(srcdir)/script/smbtar $(srcdir)/script/addtosmbpass $(srcdir)/script/convert_smbpasswd
 
@@ -121,108 +119,6 @@ LIB_OBJ = lib/charcnv.o lib/charset.o lib/debug.o lib/fault.o \
 	  lib/util_unistr.o lib/util_file.o \
 	  lib/util.o lib/util_sock.o lib/util_sec.o smbd/ssl.o
 
-UBIQX_OBJ = ubiqx/ubi_BinTree.o ubiqx/ubi_Cache.o ubiqx/ubi_SplayTree.o \
-            ubiqx/ubi_dLinkList.o ubiqx/ubi_sLinkList.o ubiqx/debugparse.o
-
-PARAM_OBJ = param/loadparm.o param/params.o 
-
-LIBSMB_OBJ = libsmb/clientgen.o libsmb/namequery.o libsmb/nmblib.o \
-             libsmb/nterr.o libsmb/smbdes.o libsmb/smbencrypt.o \
-             libsmb/smberr.o libsmb/credentials.o libsmb/pwd_cache.o \
-	     libsmb/passchange.o
-
-RPC_PARSE_OBJ = rpc_parse/parse_lsa.o rpc_parse/parse_misc.o \
-                rpc_parse/parse_net.o rpc_parse/parse_prs.o \
-                rpc_parse/parse_reg.o rpc_parse/parse_rpc.o \
-                rpc_parse/parse_samr.o rpc_parse/parse_srv.o \
-                rpc_parse/parse_wks.o rpc_parse/parse_sec.o
-
-RPC_CLIENT_OBJ = \
-		rpc_client/cli_login.o    \
-		rpc_client/cli_netlogon.o \
-		rpc_client/cli_pipe.o     \
-		rpc_client/cli_lsarpc.o   \
-		rpc_client/cli_wkssvc.o   \
-		rpc_client/cli_srvsvc.o   \
-		rpc_client/cli_reg.o   \
-		rpc_client/cli_samr.o 
-
-
-LOCKING_OBJ = locking/locking.o locking/locking_shm.o locking/locking_slow.o \
-              locking/shmem.o locking/shmem_sysv.o
-
-PASSDB_OBJ = passdb/passdb.o passdb/smbpassfile.o passdb/smbpass.o \
-             passdb/pass_check.o passdb/ldap.o passdb/nispass.o passdb/smbpasschange.o
-
-PRINTING_OBJ = printing/pcap.o printing/print_svid.o printing/printing.o
-
-SMBRUN_OBJ = utils/smbrun.o lib/util_sec.o
-
-MAKE_SMBCODEPAGE_OBJ = utils/make_smbcodepage.o $(PARAM_OBJ) \
-                       $(UBIQX_OBJ) $(LIB_OBJ)
-
-MAKE_PRINTERDEF_OBJ = utils/make_printerdef.o $(PARAM_OBJ) \
-                      $(UBIQX_OBJ) $(LIB_OBJ)
-
-STATUS_OBJ = utils/status.o $(LOCKING_OBJ) $(PARAM_OBJ) \
-             $(UBIQX_OBJ) $(LIB_OBJ)
-
-TESTPARM_OBJ = utils/testparm.o \
-               $(PARAM_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
-
-TESTPRNS_OBJ = utils/testprns.o $(PARAM_OBJ) $(PRINTING_OBJ) $(UBIQX_OBJ) \
-               $(LIB_OBJ)
-
-SMBPASSWD_OBJ = utils/smbpasswd.o $(PARAM_OBJ) $(LIBSMB_OBJ) $(PASSDB_OBJ) \
-                $(UBIQX_OBJ) $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(LIB_OBJ)
-
-RPCCLIENT_OBJ = rpcclient/rpcclient.o \
-             rpcclient/display.o \
-             rpcclient/cmd_lsarpc.o \
-             rpcclient/cmd_wkssvc.o \
-             rpcclient/cmd_samr.o \
-             rpcclient/cmd_reg.o \
-             rpcclient/cmd_srvsvc.o \
-             rpcclient/cmd_netlogon.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ) \
-             $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(PASSDB_OBJ)
-
-CLIENT_OBJ = client/client.o client/clitar.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
-
-MOUNT_OBJ = client/smbmount.o client/clientutil.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
-
-MNT_OBJ = client/smbmnt.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
-
-UMOUNT_OBJ = client/smbumount.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ)
-
-NMBLOOKUP_OBJ = utils/nmblookup.o $(PARAM_OBJ) $(UBIQX_OBJ) \
-                $(LIBSMB_OBJ) $(LIB_OBJ)
-
-SMBTORTURE_OBJ = utils/torture.o utils/nbio.o $(LIBSMB_OBJ) $(PARAM_OBJ) \
-                 $(UBIQX_OBJ) $(LIB_OBJ)
-
-RPCTORTURE_OBJ = utils/rpctorture.o \
-             rpcclient/display.o \
-             rpcclient/cmd_lsarpc.o \
-             rpcclient/cmd_wkssvc.o \
-             rpcclient/cmd_samr.o \
-             rpcclient/cmd_srvsvc.o \
-             rpcclient/cmd_netlogon.o \
-             $(PARAM_OBJ) $(LIBSMB_OBJ) $(UBIQX_OBJ) $(LIB_OBJ) \
-             $(RPC_CLIENT_OBJ) $(RPC_PARSE_OBJ) $(PASSDB_OBJ)
-
-DEBUG2HTML_OBJ = utils/debug2html.o ubiqx/debugparse.o
-
-SMBFILTER_OBJ = utils/smbfilter.o $(LIBSMB_OBJ) $(PARAM_OBJ) \
-                 $(UBIQX_OBJ) $(LIB_OBJ)
-
-PROTO_OBJ = $(CLIENT_OBJ) \
-	    $(RPCCLIENT_OBJ) $(SMBTORTURE_OBJ)
-
 ######################################################################
 # now the rules...
 ######################################################################
@@ -234,8 +130,6 @@ all : CHECK $(SAMBAFILES)
 
 CHECK:
 	@echo "Using FLAGS = $(FLAGS)"
-	@echo "Using FLAGS32 = $(FLAGS32)"
-	@echo "Using LIBS = $(LIBS)"
 
 MAKEDIR = || exec false; \
 	  if test -d "$$dir"; then :; else \
@@ -273,10 +167,6 @@ uninstall:
 
 clean: 
 	-rm -f core */*~ *~ */*.o */*.so bin/*
-
-proto: 
-	@echo rebuilding include/proto.h
-	@cd $(srcdir) && $(AWK) -f script/mkproto.awk `echo $(PROTO_OBJ) | tr ' ' '\n' | sed -e 's/\.o/\.c/g' | sort -u | egrep -v 'ubiqx/|wrapped'` > include/proto.h
 
 etags:
 	etags `find . -name "*.[ch]"`

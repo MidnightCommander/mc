@@ -1,5 +1,12 @@
 2001-02-09  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Eliminate ubiqx.
+	* samba/Makefile.in: Likewise. Remove some unused variables.
+	* samba/include/includes.h: Eliminate dependency on ubiqx.
+	* samba/include/nameserv.h: Likewise.
+	* samba/include/proto.h: Remove prototypes from nmbd/*.
+	* samba/ubiqx/*: Remove.
+
 	* samba/configure.in: More useless stuff removed.
 	* samba/Makefile.in: Likewise.
 	* Make-mc.in: Remove samba/smbwrapper directory.
