@@ -36,7 +36,7 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	GdkGC *p_gc, *m_gc;
 	int width, height;
 
-	ti = gnome_icon_layout_text (window->style->font, text, SNAP_X);
+	ti = gnome_icon_layout_text (window->style->font, text, " /-_.", SNAP_X, FALSE);
 
 	width = MAX (ti->width, im->rgb_width);
 	height = im->rgb_height + SPACING + ti->height;

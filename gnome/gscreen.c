@@ -316,7 +316,7 @@ x_select_item (WPanel *panel)
 		gnome_icon_list_select_icon (list, panel->selected);
 
 		if (list->icon_rows){
-			if (!gnome_icon_list_icon_is_visible (list, panel->selected))
+			if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
 				gnome_icon_list_moveto (list, panel->selected, 0.5);
 		}
 	} else {

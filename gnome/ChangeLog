@@ -1,3 +1,8 @@
+1998-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (x_select_item): Test for full icon visibility instead
+	of partial visibility only.
+
 1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (create_popup_submenu): Use continue, not break on
