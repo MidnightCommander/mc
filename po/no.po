@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
 "POT-Creation-Date: 2002-10-21 19:44-0400\n"
-"PO-Revision-Date: 2002-08-25 21:46+0200\n"
+"PO-Revision-Date: 2002-10-22 14:28+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "Brukermenyen er kun tilgjengelig i mcedit hvis startet fra mc"
 
 #: edit/edit.c:2595
 msgid "Macro recursion is too deep"
-msgstr ""
+msgstr "For dyp rekursjon i makro"
 
 #: edit/edit.h:319 edit/edit.h:320
 msgid " Enter file name: "
@@ -1338,9 +1338,9 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Skriv `exit' for å gå tilbake til Midnight Commander"
 
 #: src/cmd.c:1034
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " lenke: %s "
+msgstr "Lag lenke fra %s til:"
 
 #: src/cmd.c:1035
 msgid " Link "
@@ -2922,13 +2922,12 @@ msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[flagg] [denne_katalogen] [annet_panels_katalog]\n"
 
 #: src/main.c:2082
-#, fuzzy
 msgid "+number"
-msgstr "Inode nummer"
+msgstr "+nummer"
 
 #: src/main.c:2083
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Sett initielt linjenummer for intern redigering"
 
 #: src/main.c:2085
 msgid ""
@@ -3011,12 +3010,11 @@ msgstr "Logg ftp dialogen til spesifisert fil"
 
 #: src/main.c:2207
 msgid "Set debug level"
-msgstr ""
+msgstr "Sett feilsøkingsnivå"
 
 #: src/main.c:2211
-#, fuzzy
 msgid "Print data directory"
-msgstr "Oppretter en ny katalog"
+msgstr "Katalog for utskriftsdata"
 
 #: src/main.c:2213
 msgid "Requests to run in black and white"
@@ -3031,9 +3029,8 @@ msgid "Disables subshell support"
 msgstr "Slå av støtte for underskall"
 
 #: src/main.c:2220
-#, fuzzy
 msgid "Force subshell execution"
-msgstr "sett bruker ID ved kjøring"
+msgstr "Tvungen kjøring av underskall"
 
 #: src/main.c:2223
 msgid "Prints working directory at program exit"
@@ -3251,16 +3248,15 @@ msgstr "Vis kort bruksmelding"
 
 #: src/popthelp.c:60
 msgid "ARG"
-msgstr ""
+msgstr "ARG"
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "Brukernavn:"
+msgstr "Bruk:"
 
 #: src/popthelp.c:197
 msgid "[OPTION...]"
-msgstr ""
+msgstr "[FLAGG...]"
 
 #: src/screen.c:173
 msgid "UP--DIR"
@@ -3601,11 +3597,9 @@ msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
 #: src/utilunix.c:331
-#, fuzzy, c-format
+#, c-format
 msgid "Cannot create temporary directory %s: %s\n"
-msgstr ""
-" Kan ikke opprette målkatalogen \"%s\" \n"
-" %s "
+msgstr "Kan ikke opprette midlertidig katalog %s: %s\n"
 
 #: src/utilunix.c:354
 msgid " Pipe failed "
