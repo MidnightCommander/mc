@@ -1,5 +1,7 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Remove src/param.h.
+
 	* src/param.h: Remove. Should use HAVE_SYS_PARAM_H everywhere
 	instead.
 	* key_nt.c: Use indented #error.

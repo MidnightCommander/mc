@@ -14,4 +14,4 @@ EXTRA_DIST = BUGS Makefile.BC2 Makefile.BC5 Makefile.EMX \
 	drive.c drive.h key_nt.c key_os2.c mc.def mc.rc mc_nt.ico \
 	mc_os2.ico slint_pc.c trace_nt.c trace_nt.h util_nt.c \
 	util_os2.c util_win32.c util_win32.h util_winnt.c \
-	sys/param.h sys/time.h
+	sys/time.h
