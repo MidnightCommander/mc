@@ -1,0 +1,3224 @@
+# Polish locale - Midnight Commander.
+# Copyright (C) 1998 Free Software Foundation, Inc.
+# Arkadiusz Mi¶kiewicz <misiek@misiek.eu.org>, 1998.
+#
+# 1998-07-29 - Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+# fixed fiew typos.
+# 1998-11-20 - Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+# updated for mc 4.5.1
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 4.5.1\n"
+"POT-Creation-Date: 1998-07-29 00:27+0200\n"
+"PO-Revision-Date: 1998-11-20 03:08+0200\n"
+"Last-Translator: Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>\n"
+"Language-Team: Polish <pl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid " Error "
+msgstr " B³±d "
+
+msgid " Failed trying to open file for reading: "
+msgstr ""
+
+msgid " Cannot get size/permissions info on file: "
+msgstr " Nie mo¿na pobraæ informacji o rozmiarach/atrybutach pliku: "
+
+msgid " Not an ordinary file: "
+msgstr " To nie jest zwyk³y plik: "
+
+msgid " File is too large: "
+msgstr " Plik jest za du¿y: "
+
+msgid " \n Increase edit.h:MAXBUF and recompile the editor. "
+msgstr " \n Zwiêksz edit.h:MAXBUF i zrekompiluj edytor. "
+
+msgid " Error allocating memory "
+msgstr " B³ad alokacji pamiêci "
+
+msgid " Emacs key: "
+msgstr " Emacs klawisz: "
+
+msgid " Execute Macro "
+msgstr " Wykonaj makro "
+
+msgid " Press macro hotkey: "
+msgstr " Wci¶nij hotkey makra: "
+
+msgid " Insert Literal "
+msgstr " Wstaw Litera³ "
+
+msgid " Press any key: "
+msgstr " Naci¶nij dowolny klawisz: "
+
+msgid " Save As "
+msgstr " Zachowaj jako "
+
+msgid " Warning "
+msgstr " Ostrze¿enie "
+
+msgid " A file already exists with this name. "
+msgstr " Ju¿ istnieje plik o takiej samej nazwie. "
+
+msgid "Overwrite"
+msgstr "Nadpisz"
+
+msgid "Cancel"
+msgstr "Zaniechaj"
+
+msgid " Save as "
+msgstr " Zachowaj jako "
+
+msgid " Error trying to save file. "
+msgstr " B³±d w trakcie próby zapisu pliku. "
+
+msgid " Delete macro "
+msgstr " Kasuj makro "
+
+msgid " Error trying to open temp file "
+msgstr " B³±d w trakcie próby otwarcia pliku tymczasowego "
+
+msgid " Error trying to open macro file "
+msgstr " B³±d w trakcie próby otwarcia pliku makr "
+
+msgid "key '%d 0': "
+msgstr "klawisz `%d 0': "
+
+msgid " Error trying to overwrite macro file "
+msgstr "B³±d w trakcie próby nadpisania pliku makr "
+
+msgid " Macro "
+msgstr " Makro "
+
+msgid " Press the macro's new hotkey: "
+msgstr " Wci¶nij nowy hotkey makra: "
+
+msgid " Save macro "
+msgstr " Zachowaj makro "
+
+msgid " Delete Macro "
+msgstr " Kasuj makro "
+
+msgid " Load macro "
+msgstr " Za³aduj makro "
+
+msgid " Confirm save file? : "
+msgstr " Potwierd¼ zachowanie pliku : "
+
+msgid " Save file "
+msgstr " Zachowaj plik "
+
+msgid "Save"
+msgstr "Zachowaj"
+
+msgid " Current text was modified without a file save. \n Continue discards these changes. "
+msgstr "Bierz±cy text zosta³ zmodyfikowany bez zachowania w pliku. \n Kontynuacja pominie zmiany. "
+
+msgid "Continue"
+msgstr "Kontynuuj"
+
+msgid " Load "
+msgstr " Za³aduj"
+
+msgid " Error trying to open file for reading "
+msgstr " B³±d przy próbie otwarcia pliku do odczytu "
+
+msgid " Block is large, you may not be able to undo this action. "
+msgstr " Blok jest du¿y, mo¿esz nie byæ w stanie cofn±æ tej czynno¶ci. "
+
+msgid " Continue "
+msgstr " Kontynuuj"
+
+msgid " Cancel "
+msgstr " Zaniechaj "
+
+msgid " Replace with: "
+msgstr " Zast±p z: "
+
+msgid " Replace "
+msgstr " Zast±p "
+
+msgid " Search "
+msgstr " Szukaj "
+
+msgid " Enter search text : "
+msgstr " Wpisz szukany tekst : "
+
+msgid " Enter replace text : "
+msgstr " Wpisz tekst do zast±pienia : "
+
+msgid " Enter argument order : "
+msgstr " Wpisz kolejno¶æ argumentów: "
+
+msgid "Enter the order of replacement of your scanf format specifiers"
+msgstr "Wpisz kolejno¶æ zastêpowania wyszczególnieñ formatu scanf"
+
+msgid " Whole words only "
+msgstr " Ca³e s³owa tylko "
+
+msgid " Case sensitive "
+msgstr " Rozró¿niaj wielkie i ma³e litery "
+
+msgid " Regular expression "
+msgstr " Wyra¿enie regularne "
+
+msgid "See the regex man page for how to compose a regular expression"
+msgstr "Zobacz stronê man dotycz±c± regex by dowiedzieæ sie jak u¿ywaæ wyra¿enia regularnego"
+
+msgid " Backwards "
+msgstr " Do ty³u "
+
+msgid "Warning: Searching backward can be slow"
+msgstr "Ostrze¿enie: Poszukiwanie do ty³u mo¿e byæ powolne"
+
+msgid " Prompt on replace "
+msgstr " Znak zachêty przy zmianie "
+
+msgid "Ask before making each replacement"
+msgstr "Zapytaj przed wykonaniem ka¿dej zamiany"
+
+msgid " Replace all "
+msgstr " Zast±p wszystkie "
+
+msgid " Scanf expression "
+msgstr " Wyra¿enie scanf "
+
+msgid "Allows entering of a C format string, see the scanf man page"
+msgstr "Pozwala na wpisywanie ci±gu znaków z jêzyka C, zobacz man \"scanf\""
+
+msgid "Begin search, Enter"
+msgstr "Rozpoczynam szukanie, Enter"
+
+msgid "Abort this dialog, Esc"
+msgstr "Przerwij ten dialog, Esc"
+
+msgid "Replace"
+msgstr " Zast±p "
+
+msgid "Skip"
+msgstr "Pomiñ"
+
+msgid "Replace all"
+msgstr " Zast±p wszystko "
+
+msgid " Invalid regular expression, or scanf expression with to many conversions "
+msgstr " Nieprawid³owe wyra¿enie regularne lub scanf z zbyt du¿± liczb± konwersji "
+
+msgid " Error in replacement format string. "
+msgstr " B³±d w zastêpowaniu ci±gu znaków. "
+
+msgid " %ld replacements made. "
+msgstr " Wykonano %ld zmian. "
+
+msgid " Search string not found. "
+msgstr " Nie znaleziono ci±gu znaków. "
+
+msgid " Quit "
+msgstr " Wyj¶cie "
+
+msgid " Current text was modified without a file save. \n Save with exit? "
+msgstr " Bierzacy tekst zosta³ zmodyfikowany bez zachowania w pliku. \n  Zachowaæ i wyj¶æ? "
+
+msgid " File was modified, Save with exit? "
+msgstr " Plik zosta³ zmodyfikowany, Zachowaæ i wyj¶æ? "
+
+msgid "Cancel quit"
+msgstr " Zaniechaj wyjd¼ "
+
+msgid "&Yes"
+msgstr "&Tak"
+
+msgid "&No"
+msgstr "&Nie"
+
+msgid " &Cancel quit "
+msgstr " &Zaniechaj wyjd¼ "
+
+msgid " &Yes "
+msgstr "&Tak"
+
+msgid " &No "
+msgstr "&Nie"
+
+msgid " Copy to clipboard "
+msgstr " Kopiuj do schowka "
+
+msgid " Unable to save to file. "
+msgstr " Nie mo¿na zachowac do pliku "
+
+msgid " Cut to clipboard "
+msgstr " Wytnij do schowka "
+
+msgid " Goto line "
+msgstr " Id¼ do linii"
+
+msgid " Enter line: "
+msgstr " Podaj liniê "
+
+msgid " Save Block "
+msgstr " Zachowaj Blok "
+
+msgid " Insert File "
+msgstr " Wstaw Plik"
+
+msgid " Insert file "
+msgstr " Wstaw plik "
+
+msgid " Error trying to insert file. "
+msgstr " B³±d przy próbie wstawiania pliku. "
+
+msgid " Sort block "
+msgstr " Sortuj blok "
+
+msgid " You must first highlight a block of text. "
+msgstr " Musisz najpierw zaznaczyæ blok tekstu. "
+
+msgid " Run Sort "
+msgstr " Uruchom sortowanie "
+
+msgid " Enter sort options (see manpage) separated by whitespace: "
+msgstr " Wpisz opcje sortowania odzielone spacjami (zobacz stronê manuala): "
+
+msgid " Sort "
+msgstr " Sortuj "
+
+msgid " Error trying to execute sort command "
+msgstr " B³±d przy próbie wykonania sortowania "
+
+msgid " Sort returned non-zero: "
+msgstr " Sortowanie zwróci³o nie-zero: "
+
+msgid " Process block "
+msgstr " Praca nad blokiem "
+
+msgid " Error trying to stat file "
+msgstr " B³±d podczas próby zlokalizowania pliku "
+
+msgid " Mail "
+msgstr " Poczta "
+
+msgid " Word wrap "
+msgstr " Zawijaj linie "
+
+msgid " Enter line length, 0 for off: "
+msgstr " Wpisz d³ugo¶æ lini, 0 by wy³±czyæ: "
+
+msgid "&Open/load...     C-o"
+msgstr "&Otwórz/za³aduj..."
+
+msgid "&New              C-n"
+msgstr "&Nowy                C-n"
+
+msgid "&Save              F2"
+msgstr "&Zachowaj             F2"
+
+msgid "save &As...       F12"
+msgstr "zachowaj &Jako...    F12"
+
+msgid "&Insert file...   F15"
+msgstr "&Wstaw plik...       F15"
+
+msgid "copy to &File...  C-f"
+msgstr "skopiuj do &Pliku... C-f"
+
+msgid "a&Bout...            "
+msgstr "o programie...       "
+
+msgid "&Quit             F10"
+msgstr "&Wyj¶cie"
+
+msgid "&New            C-x k"
+msgstr "&Nowy"
+
+msgid "copy to &File...     "
+msgstr "skopiuj do &Pliku"
+
+msgid "&Toggle Mark       F3"
+msgstr "&W³±cz zaznaczanie    F3"
+
+msgid "&Mark Columns    S-F3"
+msgstr "Zaznacz &kolumny    S-F3"
+
+msgid "toggle &Ins/overw Ins"
+msgstr "w³±cz &Wstaw/nadpisz Ins"
+
+msgid "&Copy              F5"
+msgstr "&Kopiuj               F5"
+
+msgid "&Move              F6"
+msgstr "&Przesuñ              F6"
+
+msgid "&Delete            F8"
+msgstr "&Usuñ                 F8"
+
+msgid "&Undo             C-u"
+msgstr "&Cofnij              C-u"
+
+msgid "&Beginning     C-PgUp"
+msgstr "&Pocz±tek         C-PgUp"
+
+msgid "&End           C-PgDn"
+msgstr "&Koniec           C-PgDn"
+
+msgid "&Search...         F7"
+msgstr "&Szukaj...         F7"
+
+msgid "search &Again     F17"
+msgstr "szukaj &Ponownie  F17"
+
+msgid "&Replace...        F4"
+msgstr "&Zast±p...         F4"
+
+msgid "&Goto line...            M-l"
+msgstr "&Id¼ do linii...               M-l"
+
+msgid "insert &Literal...       C-q"
+msgstr "wstaw &Litera³...              C-q"
+
+msgid "&Refresh screen          C-l"
+msgstr "&Od¶wierz ekran                C-l"
+
+msgid "&Start record macro      C-r"
+msgstr "&Rozpocznij nagrywaæ makro     C-r"
+
+msgid "&Finish record macro...  C-r"
+msgstr "&Zakoñcz nagrywaæ makro...     C-r"
+
+msgid "&Execute macro...   C-a, KEY"
+msgstr "&Wykonaj makro...     C-a, KLAWISZ"
+
+msgid "delete macr&O...            "
+msgstr "usuñ makr&O...              "
+
+msgid "insert &Date/time           "
+msgstr "wstaw &Datê/czas	    "
+
+msgid "format p&Aragraph        M-p"
+msgstr "formatuj &Akapit               M-p"
+
+msgid "'ispell' s&Pell check    C-p"
+msgstr "'ispell' s&Prawdzanie pisowni  C-p"
+
+msgid "sor&T...                 M-t"
+msgstr "sor&Tuj...                     M-t"
+
+msgid "'indent' &C Formatter    F19"
+msgstr "'indent' &C Formatuj±cy        F19"
+
+msgid "&Mail...                    "
+msgstr "&Poczta...                  "
+
+msgid "&Execute macro... C-x e, KEY"
+msgstr "&Wykonaj makro... C-x e, KLUCZ"
+
+msgid "'ispell' s&Pell check    M-$"
+msgstr "'ispell' sprawdzanie &Pisowni    M-$"
+
+msgid "&General...  "
+msgstr "&Generalne... "
+
+msgid "&Save mode..."
+msgstr "tryb zapi&Su..."
+
+msgid "&Layout..."
+msgstr "wyg&L±d..."
+
+msgid " File "
+msgstr " Plik "
+
+msgid " Edit "
+msgstr " Edycja "
+
+msgid " Sear/Repl "
+msgstr " Szuk/Zast "
+
+msgid " Command "
+msgstr " Komendy "
+
+msgid " Options "
+msgstr " Opcje "
+
+msgid "Open...\tC-o"
+msgstr "Otwórz...\tC-o"
+
+msgid "New\tC-n"
+msgstr "Nowy\tC-n"
+
+msgid "Save\tF2"
+msgstr "Zachowaj\tF2"
+
+msgid "Save as...\tF12"
+msgstr "Zachowaj jako...\tF12"
+
+msgid "Insert file...\tF15"
+msgstr "Wstaw plik...\tF15"
+
+msgid "Copy to file...\tC-f"
+msgstr "Kopiuj do pliku...\tC-f"
+
+msgid "Disk operations"
+msgstr "Operacje na dysku"
+
+msgid "Toggle mark\tF3"
+msgstr "W³±cz zaznaczanie\tF3"
+
+msgid "Toggle mark columns\tC-b"
+msgstr ""
+
+msgid "Toggle insert/overwrite\tIns"
+msgstr "W³±cz wstawianie/nadpisywanie\tIns"
+
+msgid "Copy block to cursor\tF5"
+msgstr "Kopiuj blok do kursora\tF5"
+
+msgid "Move block to cursor\tF6"
+msgstr "Przenie¶ blok do kursora\tF6"
+
+msgid "Delete block\tF8/C-Del"
+msgstr "Usuñ blok\tF8/C-Del"
+
+msgid "Copy block to clipbrd\tC-Ins"
+msgstr "Kopiuj blok do schowka\tC-Ins"
+
+msgid "Cut block to clipbrd\tS-Del"
+msgstr "Wytnij blok do schowka\tS-Del"
+
+msgid "Paste block from clipbrd\tS-Ins"
+msgstr "Wklej blok ze schowka\tS-Ins"
+
+msgid "Selection history\tM-Ins"
+msgstr "Wybór historii\tM-Ins"
+
+msgid "Undo\tC-BackSpace"
+msgstr "Cofnij\tC-BackSpace"
+
+msgid "Manipulating blocks of text"
+msgstr "Manipulacja blokami tekstu"
+
+msgid " Srch/Replce "
+msgstr " Szuk/Zast±p "
+
+msgid "Search...\tF7"
+msgstr "Szukaj...\tF7"
+
+msgid "Search again\tF17"
+msgstr "Szukaj ponownie\tF17"
+
+msgid "Replace...\tF4"
+msgstr "Zast±p...\tF4"
+
+msgid "Replace again\tF14"
+msgstr "Zast±p ponownie\tF14"
+
+msgid "Search for and replace text"
+msgstr "Szukaj i zast±p tekst"
+
+msgid "Goto line...\tM-l"
+msgstr "Id¼ do linii...\tM-l"
+
+msgid "Start record macro\tC-r"
+msgstr "Rozpocznij nagrywaæ makro\tC-r"
+
+msgid "Finish record macro...\tC-r"
+msgstr "Zakoñcz nagrywaæ makro...\tC-r"
+
+msgid "Execute macro...\tC-a, KEY"
+msgstr "Wykonaj makro...\tC-a, KLUCZ"
+
+msgid "Delete macro...\t"
+msgstr "Skasuj makro...\t"
+
+msgid "Insert date/time\tC-d"
+msgstr "Wstaw datê/czas\tC-d"
+
+msgid "Format paragraph\tM-p"
+msgstr "Format akapitów\tM-p"
+
+msgid "Refresh display\tC-l"
+msgstr ""
+
+msgid "Macros and internal commands"
+msgstr "Makra i komendy wewnêtrzne"
+
+msgid "None"
+msgstr "Nic"
+
+msgid "Dynamic paragraphing"
+msgstr "Dynamiczne akapity"
+
+msgid "Type writer wrap"
+msgstr "Maszyna do pisania"
+
+msgid "Wrap mode"
+msgstr "Tryb zawijania lini"
+
+msgid "Key emulation"
+msgstr "Emulacja klawiszy"
+
+msgid "Error initialising editor.\n"
+msgstr "B³±d przy inicjowaniu edytora.\n"
+
+msgid "Help"
+msgstr "Pomoc"
+
+msgid "Mark"
+msgstr "Zaznacz"
+
+msgid "Replac"
+msgstr "Zast±p"
+
+msgid "Copy"
+msgstr "Kopiuj"
+
+msgid "Move"
+msgstr "Przenie¶"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Delete"
+msgstr "Usuñ"
+
+msgid "PullDn"
+msgstr "PrzesuñDó³"
+
+msgid "Quit"
+msgstr "Wyj¶cie"
+
+msgid " Load syntax file "
+msgstr " Za³aduj plik ze sk³adni± "
+
+msgid " File access error "
+msgstr " B³±d dostêpu do pliku "
+
+msgid " Syntax error in file %s on line %d "
+msgstr ""
+
+msgid " There is no other panel to compare contents to "
+msgstr " Nie ma innego panelu by porównaæ zawarto¶æ z "
+
+msgid "GNU Midnight Commander"
+msgstr ""
+
+msgid "The GNOME edition of the Midnight Commander file manager."
+msgstr "Menad¿era plików Midnight Commander. Edycja GNOME"
+
+msgid " The Midnight Commander "
+msgstr " Midnight Commander PL "
+
+msgid " Do you really want to quit the Midnight Commander? "
+msgstr " Chcesz na prawdê wyj¶c z Midnight Commandera? "
+
+msgid "Link"
+msgstr "Dowi±zanie"
+
+msgid "Do you want to delete "
+msgstr "Czy chcesz skasowaæ "
+
+msgid " Do you really want to execute? "
+msgstr " Czy naprawdê chcesz wykonaæ? "
+
+msgid "Open with..."
+msgstr "Otwórz przy u¿yciu..."
+
+msgid "Enter extra arguments:"
+msgstr "Wprowad¼ dodatowe argumenty:"
+
+msgid " Could not open %s directory"
+msgstr " Nie mogê otworzyæ katalogu %s"
+
+msgid "New window"
+msgstr "Nowe okno"
+
+msgid "Opens a new window"
+msgstr "Otwiera nowe okno"
+
+msgid "New Terminal"
+msgstr "Nowy terminal"
+
+msgid "Opens a terminal"
+msgstr "Otwiera terminal"
+
+msgid "Copy..."
+msgstr "Kopiuj..."
+
+msgid "Copy files"
+msgstr "Kopiuj pliki"
+
+msgid "Rename/Move..."
+msgstr "ZmNazw/Przen"
+
+msgid "Rename or move files"
+msgstr "Zmieñ nazwê lub przenie¶ pliki"
+
+msgid "New directory..."
+msgstr "Nowy katalog..."
+
+msgid "Creates a new folder"
+msgstr "Za³ó¿ nowy folder"
+
+msgid "Delete..."
+msgstr "Kasuj..."
+
+msgid "Delete files from disk"
+msgstr "Kasowanie plików z dysku"
+
+msgid "View"
+msgstr "Podgl±d"
+
+msgid "View file"
+msgstr "Podgl±d pliku"
+
+msgid "View raw"
+msgstr "Podgl±d surowy"
+
+msgid "View the file without further processing"
+msgstr "Podejrzyj plik bez zajmowania siê nim w przysz³o¶ci"
+
+msgid "Select group by pattern..."
+msgstr "Zaznacz grupê wed³ug wzorca..."
+
+msgid "Select a group of files"
+msgstr "Zaznacz grupê plików"
+
+msgid "Unselect group by pattern..."
+msgstr "Odznacz grupê wed³ug wzorca..."
+
+msgid "Un-selects a group of marked files"
+msgstr "Odznacz grupê zaznaczonych plików"
+
+msgid "Reverse selection"
+msgstr "Odwróæ zaznaczenie"
+
+msgid "Reverses the list of tagged files"
+msgstr "Odwróæ listê zaznaczonych plików"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Close this panel"
+msgstr "Zamknij panel"
+
+msgid "Exit"
+msgstr "Wyj¶cie"
+
+msgid "Exit program"
+msgstr "Wyj¶cie z programu"
+
+msgid "Display mode..."
+msgstr "tryb wy¶wietlania..."
+
+msgid "Set the display mode for the panel"
+msgstr "Ustaw tryb wy¶wietlania dla panelu"
+
+msgid "Sort order..."
+msgstr "Kolejno¶æ sortowania..."
+
+msgid "Changes the sort order of the files"
+msgstr "Zmiany kolejno¶ci sortowania plików"
+
+msgid "Filter..."
+msgstr "Filtruj..."
+
+msgid "Set a filter for the files"
+msgstr "Ustaw filtr dla plików"
+
+msgid "Rescan"
+msgstr "Przeskanuj ponownie"
+
+msgid "Rescan the directory contents"
+msgstr "Przeskanuj zawarto¶æ katalogu"
+
+msgid "Network link..."
+msgstr "Po³±czenie sieciowe..."
+
+msgid "Connect to a remote machine"
+msgstr "Po³±czenie ze zdaln± maszyn±"
+
+msgid "FTP link..."
+msgstr "Po³±czenie FTP..."
+
+msgid "Connect to a remote machine with FTP"
+msgstr "Po³±czenie FTP ze zdaln± maszyn±"
+
+msgid "Confirmation..."
+msgstr "Potwierdzenia..."
+
+msgid "Confirmation settings"
+msgstr "Ustawienia potwierdzeñ"
+
+msgid "Options..."
+msgstr "Opcje..."
+
+msgid "Global option settings"
+msgstr "Globalne ustawienia opcji"
+
+msgid "Virtual FS..."
+msgstr "Wirtualny FS..."
+
+msgid "Virtual File System settings"
+msgstr "Ustawienia Wirtualnego Systemu Plików"
+
+msgid "Save setup"
+msgstr "Zachowaj ustawienia"
+
+msgid "Find..."
+msgstr "Znajd¼..."
+
+msgid "Locate files on disk"
+msgstr "Zlokalizuj pliki na dysku"
+
+msgid "Hotlist..."
+msgstr ""
+
+msgid "List of favorite sites"
+msgstr "Lista faworyzowanych miejsc"
+
+msgid "Compare panels..."
+msgstr "Porównaj panele..."
+
+msgid "Compare panel contents"
+msgstr "Porównaj zawarto¶æ paneli"
+
+msgid "External panelize..."
+msgstr "Zewnêtrzne panelowanie..."
+
+msgid "Active VFS list..."
+msgstr "Lista aktywnych VFS..."
+
+msgid "List of active virtual file systems"
+msgstr "Lista aktywnych wirtualnych systemów plików"
+
+msgid "Undelete files (ext2fs only)..."
+msgstr "Odkasowywanie plików (tylko ext2fs)..."
+
+msgid "Recover deleted files"
+msgstr "Odzyskaj skasowane pliki"
+
+msgid "Background jobs..."
+msgstr "Zadania w tle..."
+
+msgid "List of background operations"
+msgstr "Lista operacji w tle"
+
+msgid "Arrange icons"
+msgstr "Wyrównaj ikony"
+
+msgid "Arranges the icons on the desktop"
+msgstr "Wyrównaj ikony na pulpicie"
+
+msgid "About"
+msgstr "O programie"
+
+msgid "Information on this program"
+msgstr "Informacja o tym programie"
+
+msgid "_File"
+msgstr "_Plik"
+
+msgid "Window"
+msgstr "Okno"
+
+msgid "Commands"
+msgstr "Komendy"
+
+msgid "Options"
+msgstr "Opcje"
+
+msgid "Desktop"
+msgstr "Pulpit"
+
+msgid "Filename"
+msgstr "Nazwa pliku"
+
+msgid "Full name: "
+msgstr "Pe³na nazwa: "
+
+msgid "Command"
+msgstr "Komenda"
+
+msgid "Command:"
+msgstr "Komenda:"
+
+msgid "Use terminal"
+msgstr "U¿yj terminala"
+
+msgid "File mode (permissions)"
+msgstr "Atrybuty pliku"
+
+msgid "Current mode: "
+msgstr "Aktualny tryb: "
+
+msgid "Read"
+msgstr "Odczyt"
+
+msgid "Write"
+msgstr "Zapis"
+
+msgid "Exec"
+msgstr "Wykonanie"
+
+msgid "Special"
+msgstr "Specjalne"
+
+msgid "User"
+msgstr "U¿ytkownik"
+
+msgid "Group"
+msgstr "Grupa"
+
+msgid "Other"
+msgstr "Inny"
+
+msgid "Set UID"
+msgstr "Ustaw UID"
+
+msgid "Set GID"
+msgstr "Ustaw GID"
+
+msgid "Sticky"
+msgstr "Lepki"
+
+msgid "<Unknown>"
+msgstr "<Nieznany>"
+
+msgid "Owner"
+msgstr "W³a¶ciciel"
+
+msgid "General"
+msgstr "Generalne"
+
+msgid "Title"
+msgstr "Tytu³"
+
+msgid "Icon"
+msgstr "Ikona"
+
+msgid "Select icon"
+msgstr "Wybierz ikonê"
+
+msgid " Open with..."
+msgstr " Otwórz przy u¿yciu..."
+
+msgid "Properties"
+msgstr "W³a¶ciwo¶ci"
+
+msgid "Open"
+msgstr "Otwórz"
+
+msgid "Open with"
+msgstr "Otwórz przy u¿yciu"
+
+msgid "View unfiltered"
+msgstr "Podgl±d niefiltrowany"
+
+msgid "Edit"
+msgstr "Edycja"
+
+msgid "Link..."
+msgstr "Dowi±zanie..."
+
+msgid "Symlink..."
+msgstr "Dowi±zanie symboliczne..."
+
+msgid "Edit symlink..."
+msgstr "Edytuj dowi±zanie symboliczne..."
+
+msgid "Rename/move..."
+msgstr ""
+
+msgid "All files"
+msgstr "Wszystkie pliki"
+
+msgid "Archives and compressed files"
+msgstr "Archiwa i nieskompresowane pliki"
+
+msgid "RPM/DEB files"
+msgstr "Pliki RPM/DEB"
+
+msgid "Text/Document files"
+msgstr "Pliki Tekstowe/Dokumenty"
+
+msgid "HTML and SGML files"
+msgstr "Pliki HTML i SGML"
+
+msgid "Postscript and PDF files"
+msgstr "Pliki postscriptowe i PDF"
+
+msgid "Spreadsheet files"
+msgstr "Pliki arkusza kalkulacyjnego"
+
+msgid "Image files"
+msgstr "Pliki graficzne"
+
+msgid "Video/animation files"
+msgstr "Pliki wideo/animacje"
+
+msgid "Audio files"
+msgstr "Pliki audio"
+
+msgid "C program files"
+msgstr "Pliki C"
+
+msgid "C++ program files"
+msgstr "Pliki C++"
+
+msgid "Objective-C program files"
+msgstr "Pliki Objektowego-C"
+
+msgid "Scheme program files"
+msgstr "Pliki schematów"
+
+msgid "Assembler program files"
+msgstr "Pliki asemblera"
+
+msgid "Misc. program files"
+msgstr "Pliki ró¿nych prg."
+
+msgid "Font files"
+msgstr "Pliki czcionek"
+
+msgid "Search: "
+msgstr "Szukaj: "
+
+msgid " %s bytes in %d file%s"
+msgstr " %s bajtów w %d plik%s"
+
+msgid "<readlink failed>"
+msgstr "<odczyt dowi±zania nie udany>"
+
+msgid "Filter"
+msgstr "Filtr"
+
+msgid "Error"
+msgstr "B³±d"
+
+msgid "&Ok"
+msgstr "&Ok"
+
+msgid "Offset 0x%08x"
+msgstr ""
+
+msgid "Col %d"
+msgstr "Kol %d"
+
+msgid "%s bytes"
+msgstr "%s bajtów"
+
+msgid "Goto line"
+msgstr "Id¼ do linii"
+
+msgid "Jump to a specified line number"
+msgstr "Id¼ do podanego numeru linii"
+
+msgid "Monitor file"
+msgstr "Monitoruj plik"
+
+msgid "Monitor file growing"
+msgstr "Plik monitorowany wzrasta"
+
+msgid "Terminate the viewer"
+msgstr "Wy³±cz przegl±darkê"
+
+msgid "String search"
+msgstr "Szukanie ci±gu znaków"
+
+msgid "Regexp search"
+msgstr "Szukanie regexp"
+
+msgid "Regular expression search"
+msgstr "Szukanie wyra¿enia regularnego"
+
+msgid "Search again..."
+msgstr "Szukaj ponownie..."
+
+msgid "Continue searching"
+msgstr "Kontunuuj wyszukiwanie"
+
+msgid "Wrap"
+msgstr "Zawi"
+
+msgid "Wrap the text"
+msgstr "Z³am tekst"
+
+msgid "Formatted"
+msgstr "Sformatowany"
+
+msgid "Hex"
+msgstr ""
+
+msgid "File"
+msgstr "Plik"
+
+msgid "Mode"
+msgstr "Tryb"
+
+msgid "ok"
+msgstr "ok"
+
+msgid "cancel"
+msgstr "zaniechaj"
+
+msgid "help"
+msgstr "pomoc"
+
+msgid "yes"
+msgstr "tak"
+
+msgid "no"
+msgstr "nie"
+
+msgid "exit"
+msgstr "wyj¶cie"
+
+msgid "abort"
+msgstr "anuluj"
+
+msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
+msgstr "Pójd¼¿e, kiñ tê chmurno¶æ w g³±b flaszy"
+
+msgid "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
+msgstr ""
+
+msgid "Open/Load"
+msgstr "Otwó¿/Za³aduj"
+
+msgid "Load a different/new file"
+msgstr ""
+
+msgid "New"
+msgstr "Nowy"
+
+msgid "Clear the edit buffer"
+msgstr "Wyczy¶æ bufor edycji"
+
+msgid "Save the current edit buffer to filename"
+msgstr "Zachowaj bierz±cy bufor edycji do pliku o nazwie"
+
+msgid "Save As"
+msgstr "Zachowaj jako"
+
+msgid "Save the current edit buffer as filename"
+msgstr "Zachowaj bierz±cy bufor edycji jako plik o nazwie"
+
+msgid "Insert File"
+msgstr "Wstaw plik"
+
+msgid "Insert text from a file"
+msgstr "Wstaw tekst z pliku"
+
+msgid "Copy to file"
+msgstr "Kopiuj do pliku"
+
+msgid "copy a block to a file"
+msgstr "kopiuj blok do pliku"
+
+msgid "Quit editor"
+msgstr ""
+
+msgid "Copy selection to clipboard"
+msgstr "Kopiuj zaznaczenie do schowaka"
+
+msgid "Cut"
+msgstr "Wytnij"
+
+msgid "Cut selection to clipboard"
+msgstr "Wytnij zaznaczenie do schowka"
+
+msgid "Paste"
+msgstr "Wstaw"
+
+msgid "Paste clipboard"
+msgstr "Wstaw schowek"
+
+msgid "Undo"
+msgstr "Cofnij"
+
+msgid "Go back in time one key press"
+msgstr ""
+
+msgid "Find"
+msgstr "Znajd¼"
+
+msgid "Find string/regular expression"
+msgstr ""
+
+msgid "Find again"
+msgstr "Znajd¼ ponownie"
+
+msgid "Repeat most recent search"
+msgstr ""
+
+msgid "Search/Replace"
+msgstr "Znajd¼/Zast±p"
+
+msgid "Find and replace text/regular expressions"
+msgstr ""
+
+msgid "About..."
+msgstr "O..."
+
+msgid "Info about GNOME hello"
+msgstr ""
+
+msgid "&Cancel"
+msgstr "&Zaniechaj"
+
+msgid "&Set"
+msgstr "&Ustaw"
+
+msgid "S&kip"
+msgstr "&Pomiñ"
+
+msgid "Set &all"
+msgstr "&Wszystk"
+
+msgid "owner"
+msgstr "w³a¶c."
+
+msgid "group"
+msgstr "grupa"
+
+msgid "other"
+msgstr "inni"
+
+msgid "On"
+msgstr "Na"
+
+msgid "Flag"
+msgstr "Flaga"
+
+msgid "%6d of %d"
+msgstr "%6d z  %d"
+
+msgid " Chown advanced command "
+msgstr " Zaawansowane chown "
+
+msgid " Couldn't chmod \"%s\" \n %s "
+msgstr " Nie mo¿na wykonaæ chmod \"%s\" \n %s "
+
+msgid " Couldn't chown \"%s\" \n %s "
+msgstr " Nie mo¿na wykonaæ chown \"%s\" \n %s "
+
+msgid " Oops... "
+msgstr " Ups... "
+
+msgid " I can't run the Advanced Chown command on an extfs "
+msgstr " Nie mo¿na wykonaæ zaawansowanego polecenia Chown na extfs "
+
+msgid " I can't run the Advanced Chown command on a tarfs "
+msgstr " Nie mo¿na wykonaæ zaawansowanego polecenia Chown na tarfs "
+
+msgid "Background process:"
+msgstr " Procesy w tle :"
+
+msgid " Background process error "
+msgstr " B³±d procesu w tle "
+
+msgid " Child died unexpectedly "
+msgstr " Proces potomny zosta³ niespodziewanie zabity "
+
+msgid " Unknown error in child "
+msgstr " Nieznany b³±d procesu potomnego "
+
+msgid " Background protocol error "
+msgstr " B³±d zadania w tle "
+
+msgid " Background process sent us a request for more arguments \n than we can handle. \n"
+msgstr " Proces z t³a wys³a³ pro¶bê po wiêcej argumentów \n by sobie poradziæ. \n"
+
+msgid " Listing mode "
+msgstr " Tryb listowania "
+
+msgid "&Full file list"
+msgstr "&Pe³na lista plików"
+
+msgid "&Brief file list"
+msgstr "&Uproszczona lista plików"
+
+msgid "&Long file list"
+msgstr "&D³uga lista plików"
+
+msgid "&User defined:"
+msgstr "&Definiowalny:"
+
+msgid "&Icon view"
+msgstr "&Podgl±d ikon"
+
+msgid "user &Mini status"
+msgstr "&Mini status u¿ytkownika"
+
+msgid "Listing mode"
+msgstr "Tryb listowania"
+
+msgid "&Reverse"
+msgstr "odw&Rócone"
+
+msgid "case sensi&tive"
+msgstr "rozró¿niaj wielko¶æ li&ter"
+
+msgid "Sort order"
+msgstr "Kolejno¶æ sortowania"
+
+msgid " confirm &Exit "
+msgstr " zatwierd¼ &Wyj¶cie "
+
+msgid " confirm e&Xecute "
+msgstr " zatwierd¼ w&Ykonaj"
+
+msgid " confirm o&Verwrite "
+msgstr " zatwierd¼ &Nadpisz "
+
+msgid " confirm &Delete "
+msgstr " zatwierd¼ &Usuñ"
+
+msgid " Confirmation "
+msgstr " Potwierdzenia "
+
+msgid "Full 8 bits output"
+msgstr "Pe³ne 8 bitowe wyj¶cie"
+
+msgid "ISO 8859-1"
+msgstr ""
+
+msgid "7 bits"
+msgstr "7 bitów"
+
+msgid "F&ull 8 bits input"
+msgstr "&Pe³ne 8 bitowe wej¶cie"
+
+msgid " Display bits "
+msgstr " Bity wy¶wietlania "
+
+msgid "Always to memory"
+msgstr "Zawsze do pamiêci"
+
+msgid "If size less than:"
+msgstr "Je¶li wielko¶æ mniejsza ni¿:"
+
+msgid "&Always use ftp proxy"
+msgstr "z&Awsze u¿ywaj ftp proxy "
+
+msgid "sec"
+msgstr "sek"
+
+msgid "ftpfs directory cache timeout:"
+msgstr "ftpfs timeout dla katalogu cache: "
+
+msgid "ftp anonymous password:"
+msgstr "anonimowe has³o ftp:"
+
+msgid "Gzipped tar archive extract:"
+msgstr "Rozpakuj zgzipowane archiwum tar:"
+
+msgid "Timeout for freeing VFSs:"
+msgstr "Czas po którym uwalniaæ VFS:"
+
+msgid " Virtual File System Setting "
+msgstr " Ustawienia Witrualnego Systemu Plików (VFS) "
+
+msgid "Quick cd"
+msgstr "Szybkie cd"
+
+msgid "cd"
+msgstr ""
+
+msgid "Symbolic link filename:"
+msgstr "Nazwa dowi±zania symbolicznego:"
+
+msgid "Existing filename (filename symlink will point to):"
+msgstr "Istniej±cy plik (dowi±zanie symb. bêdzie siê odnosi³o do):"
+
+msgid "Running "
+msgstr "Uruchamiam "
+
+msgid "Stopped"
+msgstr "Zatrzymany"
+
+msgid "&Stop"
+msgstr "Zatrzymaj"
+
+msgid "&Resume"
+msgstr "uak&Tywnij"
+
+msgid "&Kill"
+msgstr "&Unicestw"
+
+msgid "Background Jobs"
+msgstr "Procesy T³a"
+
+msgid "execute/search by others"
+msgstr "wyk/odczyt dla innych"
+
+msgid "write by others"
+msgstr "zapis dla innych"
+
+msgid "read by others"
+msgstr "odczyt dla innych"
+
+msgid "execute/search by group"
+msgstr "wyk/odczyt dla grupy"
+
+msgid "write by group"
+msgstr "zapis dla grupy"
+
+msgid "read by group"
+msgstr "odczyt dla grupy"
+
+msgid "execute/search by owner"
+msgstr "wyk/odczyt dla w³a¶ciciela"
+
+msgid "write by owner"
+msgstr "zapis dla w³a¶ciciela"
+
+msgid "read by owner"
+msgstr "odczyt dla w³a¶ciciela"
+
+msgid "sticky bit"
+msgstr "lepki bit"
+
+msgid "set group ID on execution"
+msgstr "ust. ID grupy przy wykon."
+
+msgid "set user ID on execution"
+msgstr "ust. ID u¿ytk. przy wykon."
+
+msgid "C&lear marked"
+msgstr "wy&Czy¶æ zazn"
+
+msgid "S&et marked"
+msgstr "&Ustaw zazn"
+
+msgid "&Marked all"
+msgstr "&Zaznaczone"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Permissions (Octal)"
+msgstr "Atrybuty (Ósemkowo)"
+
+msgid "Owner name"
+msgstr "W³a¶ciciel"
+
+msgid "Group name"
+msgstr "Grupa"
+
+msgid " Chmod command "
+msgstr " Polecenie chmod "
+
+msgid " Permission "
+msgstr " Atrybuty "
+
+msgid "Use SPACE to change"
+msgstr "U¿yj spacji do zmiany"
+
+msgid "an option, ARROW KEYS"
+msgstr "opcji, KLAWISZY STRZA£EK"
+
+msgid "to move between options"
+msgstr "do przesuwu miêdzy opcjami"
+
+msgid "and T or INS to mark"
+msgstr "i T lub INS do zaznaczania"
+
+msgid "Chmod command"
+msgstr "Polecenie chmod"
+
+msgid " I can't run the Chmod command on an extfs "
+msgstr " Nie mo¿na wykonaæ polecenia Chmod na plikach extfs "
+
+msgid "Set &users"
+msgstr "Ustaw &u¿yt"
+
+msgid "Set &groups"
+msgstr "Ustaw &grupy"
+
+msgid " Name "
+msgstr " Nazwa "
+
+msgid " Owner name "
+msgstr "W³a¶ciciel"
+
+msgid " Group name "
+msgstr " Nazwa grupy "
+
+msgid " Size "
+msgstr " Rozmiar "
+
+msgid " Chown command "
+msgstr " Polecenie chmod "
+
+msgid " User name "
+msgstr " Nazwa u¿ytkownika "
+
+msgid "<Unknown user>"
+msgstr "<Niezn u¿ytkowik>"
+
+msgid "<Unknown group>"
+msgstr "<Nieznana grupa>"
+
+msgid " I can't run the Chown command on an extfs "
+msgstr " Nie mo¿na wykonaæ polecenia Chown na plikach extfs "
+
+msgid " I can't run the Chown command on a tarfs "
+msgstr " Nie mo¿na wykonaæ polecenia Chown na plikach tarfs "
+
+msgid " Can not fetch a local copy of %s "
+msgstr "Nie mogê przes³aæ lokalnej kopi %s "
+
+msgid " CD "
+msgstr ""
+
+msgid "Files tagged, want to cd?"
+msgstr "Pliki zaznaczone, chcesz wykonaæ cd?"
+
+msgid " View file "
+msgstr " Podgl±d pliku "
+
+msgid " Filename:"
+msgstr " Nazwa pliku:"
+
+msgid " Filtered view "
+msgstr " Filtrowany podgl±d "
+
+msgid " Filter command and arguments:"
+msgstr " Komenda filtruj±ca i argumenty:"
+
+msgid " Mkdir "
+msgstr " StKat "
+
+msgid " Enter directory name:"
+msgstr " Podaj nazwê katalogu: "
+
+msgid " Filter "
+msgstr " Filtr "
+
+msgid " Set expression for filtering filenames"
+msgstr " Wpisz wyra¿enie dla filtrowania nazw plików"
+
+msgid " Select "
+msgstr " Wybierz "
+
+msgid "  Malformed regular expression  "
+msgstr " ¬le sforu³owane wyra¿enie regularne  "
+
+msgid " Unselect "
+msgstr " Odznacz "
+
+msgid "Extension file edit"
+msgstr "Edycja pliku rozszerzeñ"
+
+msgid " Which extension file you want to edit? "
+msgstr " Który plik rozszerzeñ chcesz edytowac? "
+
+msgid "&User"
+msgstr "&U¿ytkownika"
+
+msgid "&System Wide"
+msgstr "&Systemowy"
+
+msgid "Menu file edit"
+msgstr "Edycja pliku menu"
+
+msgid " Which menu file will you edit? "
+msgstr "Który plik menu chcesz edytowaæ? "
+
+msgid "&Local"
+msgstr "&Lokalny"
+
+msgid "&Home"
+msgstr "domowy"
+
+msgid " Compare directories "
+msgstr " Porównaj katalogi "
+
+msgid " Select compare method: "
+msgstr " Wybierz metodê porównywania: "
+
+msgid "&Quick"
+msgstr "&Szybka"
+
+msgid "&Size only"
+msgstr "tylko &Rozmiar"
+
+msgid "&Thorough"
+msgstr "&Precyzyjna"
+
+msgid " Both panels should be on the listing view mode to use this command "
+msgstr " Oba panele powinny byæ w trybie listowania by mo¿na by³o u¿yæ tej komendy "
+
+msgid " The command history is empty "
+msgstr " Historia komend jest pusta "
+
+msgid " Command history "
+msgstr " Historia komend "
+
+msgid " Not an xterm or Linux console; \n the panels cannot be toggled. "
+msgstr " Nie na xterm'ie ani Linux'owej konsoli; \n panele nie mog± byæ prze³±czane. "
+
+msgid "Type `exit' to return to the Midnight Commander\n\r\n\r"
+msgstr "Wpisz `Exit' by wróciæ do Midnight Commandera\n\r\n\r"
+
+msgid " Couldn't stat %s \n %s "
+msgstr " Nie mogê zlokalizowaæ %s \n %s "
+
+msgid " Link "
+msgstr " Dowi±zanie "
+
+msgid " to:"
+msgstr " do: "
+
+msgid " link: %s "
+msgstr " dowi±zanie: %s "
+
+msgid " symlink: %s "
+msgstr " dowi±zanie symboliczne: %s "
+
+msgid " Symlink "
+msgstr " Dowi±zanie symboliczne "
+
+msgid " points to:"
+msgstr " wskazuje na:"
+
+msgid " Edit symlink "
+msgstr " Edycja dowi±zania symbolicznego "
+
+msgid " edit symlink: %s "
+msgstr " edytuj dowi±zanie symboliczne: %s "
+
+msgid " Link symbolically "
+msgstr " Dowi±zanie symboliczne "
+
+msgid " Relative symlink "
+msgstr " Relatywne dowi±zanie symboliczne "
+
+msgid " relative symlink: %s "
+msgstr " relatywne dowi±zanie symboliczne: %s "
+
+msgid " Enter machine name (F1 for details): "
+msgstr " Podaj nazwe komputera (F1 po szczegó³y): "
+
+msgid " Could not chdir to %s "
+msgstr " Nie mogê zmieniæ katalogu na %s "
+
+msgid " Link to a remote machine "
+msgstr " Link na zdaln± maszynê "
+
+msgid " FTP to machine "
+msgstr " FTP na maszynê "
+
+msgid " Socket source routing setup "
+msgstr " Ustawienia ¼ród³owego socket routingu "
+
+msgid " Enter host name to use as a source routing hop: "
+msgstr " Wpisz nazwê hosta który ma byæ hopem dla ¼ród³owego routingu: "
+
+msgid " Host name "
+msgstr " Nazwa hosta "
+
+msgid " Error while looking up IP address "
+msgstr " B³±d podczas wyszukiwania adresu IP "
+
+msgid " Undelete files on an ext2 file system "
+msgstr " Odzyskaj pliki na systemie plików ext2 "
+
+msgid " Enter device (without /dev/) to undelete\n   files on: (F1 for details)"
+msgstr ""
+
+msgid "Show directory sizes"
+msgstr "Poka¿ rozmiary podkatalogów"
+
+msgid "Pipe close failed"
+msgstr "Nieudane zamkniêcie potoku"
+
+msgid "Cannot invoke du command."
+msgstr "Nie mo¿na wywo³ac polecenia du."
+
+msgid " Setup saved to ~/"
+msgstr " Ustawienia zapisane w ~/"
+
+msgid " Setup "
+msgstr " Ustawienia "
+
+msgid " Can't chdir to '%s' \n %s "
+msgstr " Nie mogê zmieniæ katalogu na '%s' \n %s "
+
+msgid "\n\n\nrefresh stack underflow!\n\n\n"
+msgstr "\n\n\nodswie¿anie stosu pod strumieniem!\n\n\n"
+
+msgid "&Unsorted"
+msgstr "nieposortowane"
+
+msgid "&Name"
+msgstr "&Nazwa"
+
+msgid "&Extension"
+msgstr "&Rozszerzenie"
+
+msgid "&Modify time"
+msgstr "czas &Modyfikacji"
+
+msgid "&Access time"
+msgstr "cz&As dostêpu"
+
+msgid "&Change time"
+msgstr "&Czas zmiany"
+
+msgid "&Size"
+msgstr "&Rozmiar"
+
+msgid "&Inode"
+msgstr "&IWêze³"
+
+msgid "&Type"
+msgstr "&Typ"
+
+msgid "&Links"
+msgstr "&Dowi±zania"
+
+msgid "N&GID"
+msgstr ""
+
+msgid "N&UID"
+msgstr ""
+
+msgid "&Owner"
+msgstr "&W³a¶ciciel"
+
+msgid "&Group"
+msgstr "&Grupa"
+
+msgid "Unknown"
+msgstr "Nieznane"
+
+msgid " Can't create temporary command file \n %s "
+msgstr " Nie mogê utworzyæ tymczasowego pliku dla komendy \n %s "
+
+msgid " Parameter "
+msgstr " Parametr "
+
+msgid " Can't execute commands on a Virtual File System directory "
+msgstr " Nie mogê wykonywaæ komend w Wirtualnym Systemie Plików (VFS) "
+
+msgid " file error"
+msgstr " b³±d pliku "
+
+msgid "Format of the "
+msgstr "Format "
+
+msgid " file error "
+msgstr " b³±d pliku "
+
+msgid "Format of the ~/"
+msgstr "Format ~/"
+
+msgid " file has changed\nwith version 3.0. You may want either to\ncopy it from "
+msgstr " plik zosta³ zmieniony\nprzy u¿yciu wersji 3.0. Mo¿esz albo\nskopiowaæ go z "
+
+msgid "mc.ext or use that\nfile as an example of how to write it.\n"
+msgstr "mc.ext lub u¿yæ tego\npliku jako przyk³adu jak napisaæ nowy.\n"
+
+msgid "mc.ext will be used for this moment."
+msgstr "mc.ext bêdzie u¿ywane w tym momencie."
+
+msgid " Copy "
+msgstr " Kopiuj "
+
+msgid " Move "
+msgstr " Przenie¶ "
+
+msgid " Delete "
+msgstr " Usun±æ "
+
+msgid "&Abort"
+msgstr "&Zaniechaj"
+
+msgid "&Skip"
+msgstr "&Pomiñ"
+
+msgid "Source"
+msgstr "¬ród³o"
+
+msgid "Target"
+msgstr "Cel"
+
+msgid "Deleting"
+msgstr "Usuwanie"
+
+msgid "Count"
+msgstr "Ilo¶æ"
+
+msgid "Bytes"
+msgstr "Bajtów"
+
+msgid " Invalid target mask "
+msgstr " Nieprawid³owa maska docelowa "
+
+msgid " Cannot read source link \"%s\" \n %s "
+msgstr " Nie mogê odczytaæ ¼ród³a dowi±zania \"%s\" \n %s "
+
+msgid " Cannot make stable symlinks across non-local filesystems: \n\n Option Stable Symlinks will be disabled "
+msgstr " Nie mogê tworzyæ stabilnych dowi±zañ symbolicznych poprzez nie-lokalne \n systemy plików: \n\n Opcja Stabile dowi±zania symbolicze bêdzie zablokowana "
+
+msgid " Cannot create target symlink \"%s\" \n %s "
+msgstr " Nie mogê stworzyæ docelowego\n dowi±zania symbolicznego \"%s\" \n %s "
+
+msgid " Cannot overwrite directory \"%s\" \n %s "
+msgstr " Nie mogê nadpisaæ katalogu \"%s\" \n %s "
+
+msgid " Cannot stat source file \"%s\" \n %s "
+msgstr " Nie mogê zlokalizowaæ pliku ¼ród³owego \"%s\" \n %s "
+
+msgid " `%s' and `%s' are the same file. "
+msgstr " `%s' i `%s' to ten sam plik. "
+
+msgid " Cannot create special file \"%s\" \n %s "
+msgstr " Nie mogê stworzyæ specjalnego pliku \"%s\" \n %s "
+
+msgid " Cannot chown target file \"%s\" \n %s "
+msgstr " Nie mogê zmieniæ w³a¶ciciela\n pliku docelowego \"%s\" \n %s "
+
+msgid " Cannot chmod target file \"%s\" \n %s "
+msgstr " Nie mogê zmieniæ atrybutów\n pliku docelowego \"%s\" \n %s "
+
+msgid " Cannot open source file \"%s\" \n %s "
+msgstr " Nie mogê otworzyæ pliku ¼ród³owego \"%s\" \n %s "
+
+msgid " Cannot fstat source file \"%s\" \n %s "
+msgstr " Nie mogê uzyskaæ statusu pliku ¼ród³owego \"%s\" \n %s "
+
+msgid " Cannot create target file \"%s\" \n %s "
+msgstr " Nie mogê stworzyæ pliku docelowego \"%s\" \n %s "
+
+msgid " Cannot fstat target file \"%s\" \n %s "
+msgstr " Nie mogê uzyskaæ statusu pliku docelowego \"%s\" \n %s "
+
+msgid " Cannot read source file \"%s\" \n %s "
+msgstr " Nie mogê odczytaæ pliku ¼ród³owego \"%s\" \n %s "
+
+msgid " Cannot write target file \"%s\" \n %s "
+msgstr " Nie mogê zapisaæ pliku docelowego \"%s\" \n %s "
+
+msgid "(stalled)"
+msgstr "(wstrzymane)"
+
+msgid " Cannot close source file \"%s\" \n %s "
+msgstr " Nie mogê zamkn±æ pliku ¼ród³owego \"%s\" \n %s "
+
+msgid " Cannot close target file \"%s\" \n %s "
+msgstr " Nie mogê zamkn±æ pliku docelowego \"%s\" \n %s "
+
+msgid " Cannot stat source directory \"%s\" \n %s "
+msgstr " Nie mogê zlokalizowaæ katalogu ¼ród³owego \"%s\" \n %s "
+
+msgid " Source directory \"%s\" is not a directory \n %s "
+msgstr " ¬ród³owy katalog \"%s\" nie jest katalogiem \n %s "
+
+msgid " Cannot copy cyclic symbolic link \n `%s' "
+msgstr " Nie mogê cyklicznie kopiowaæ dowi±zania symbolicznego \n `%s' "
+
+msgid " Cannot create target directory \"%s\" \n %s "
+msgstr " Nie mogê stworzyæ docelowego katalogu \"%s\" \n %s "
+
+msgid " Cannot chown target directory \"%s\" \n %s "
+msgstr " Nie mogê zmieniæ w³a¶ciciela\n katalogu docelowego \"%s\" \n %s "
+
+msgid " Cannot stat file \"%s\" \n %s "
+msgstr " Nie mogê zlokalizowaæ pliku \"%s\" \n %s "
+
+msgid " `%s' and `%s' are the same file "
+msgstr " `%s' i `%s' to ten sam plik "
+
+msgid " Cannot overwrite directory `%s' "
+msgstr " Nie mo¿na nadpisaæ katalogu %s' "
+
+msgid " Cannot move file \"%s\" to \"%s\" \n %s "
+msgstr " Nie mogê przenie¶æ pliku \"%s\" do \"%s\" \n %s "
+
+msgid " Cannot remove file \"%s\" \n %s "
+msgstr " Nie mogê usun±æ pliku \"%s\" \n %s "
+
+msgid " Cannot overwrite directory \"%s\" %s "
+msgstr " Nie mo¿na nadpisaæ katalogu \"%s\" %s "
+
+msgid " Cannot overwrite file \"%s\" %s "
+msgstr " Nie mo¿na nadpisaæ pliku \"%s\" %s "
+
+msgid " Cannot move directory \"%s\" to \"%s\" \n %s "
+msgstr " Nie mogê przenie¶æ katalogu \"%s\" do \"%s\" \n %s "
+
+msgid " Cannot delete file \"%s\" \n %s "
+msgstr " Nie mogê skasowaæ pliku \"%s\" \n %s "
+
+msgid " Cannot remove directory \"%s\" \n %s "
+msgstr " Nie mogê usun±æ katalogu \"%s\" \n %s "
+
+msgid " Internal error: get_file \n"
+msgstr " B³±d wewnêtrzny: get_file \n"
+
+msgid "preserve &Attributes"
+msgstr "zachowaj &Atrybuty"
+
+msgid "follow &Links"
+msgstr "pod±¿aj za symbo&Licznymi dow."
+
+msgid "to:"
+msgstr "do:"
+
+msgid "&Using shell patterns"
+msgstr "&U¿ywaj wzorów pow³oki"
+
+msgid "&Background"
+msgstr "&T³o"
+
+msgid "&Stable Symlinks"
+msgstr "&Stabilne Dowi±zania Symboliczne"
+
+msgid "&Dive into subdir if exists"
+msgstr "&Kopiuj do podkatalogów"
+
+msgid "Invalid source pattern `%s' \n %s "
+msgstr "Nieprawid³owy wzór ¼ród³owy %s' \n %s "
+
+msgid "1Copy"
+msgstr "1Kopiuj"
+
+msgid "1Move"
+msgstr "1Przenie¶"
+
+msgid "1Delete"
+msgstr "1Usuñ"
+
+msgid "%o %f \"%s\"%m"
+msgstr ""
+
+msgid "%o %d %f%m"
+msgstr ""
+
+msgid "file"
+msgstr "plik"
+
+msgid "files"
+msgstr "pliki"
+
+msgid "directory"
+msgstr "katalog"
+
+msgid "directories"
+msgstr "katalogi"
+
+msgid "files/directories"
+msgstr "pliki/katalogi"
+
+msgid " with source mask:"
+msgstr " ze ¼ród³ow± mask±:"
+
+msgid " Can't operate on \"..\"! "
+msgstr "Nie mogê operowaæ na \"..\"! "
+
+msgid " Sorry, I could not put the job in background "
+msgstr " Wybacz, nie mogê umiê¶ciæ tej pracy w tle "
+
+msgid " Internal failure "
+msgstr " Wewnêtrzne niepowodzenie "
+
+msgid " Unknown file operation "
+msgstr " Nieznana operacja pliku "
+
+msgid " Destination \"%s\" must be a directory \n %s "
+msgstr " Przeznaczenie \"%s\" musi byæ katalogiem \n %s "
+
+msgid "&Retry"
+msgstr "p&Róbuj ponownie"
+
+msgid "Target file \"%s\" already exists!"
+msgstr "Docelowy plik \"%s\" ju¿ istnieje!"
+
+msgid "if &Size differs"
+msgstr "je¶li ró¿ni± siê rozmiarem"
+
+msgid "non&E"
+msgstr "nic"
+
+msgid "&Update"
+msgstr "akt&Ualizuj"
+
+msgid "al&L"
+msgstr "wszystkie"
+
+msgid "Overwrite all targets?"
+msgstr "Nadpisaæ pliki/katalogi docelowe?"
+
+msgid "&Reget"
+msgstr "ponownie ¶ci±gaj"
+
+msgid "ap&Pend"
+msgstr "do³±cz"
+
+msgid "Overwrite this target?"
+msgstr "Nadpisaæ plik/katalog docelowy ?"
+
+msgid "Target date: %s, size %d"
+msgstr "Data celu  : %s, rozmiar %d"
+
+msgid "Source date: %s, size %d"
+msgstr "Data ¼ród³a: %s, rozmiar %d"
+
+msgid " File exists "
+msgstr " Plik istnieje "
+
+msgid " Background process: File exists "
+msgstr " Proces z t³a: Plik istnieje "
+
+msgid "\n   Directory not empty.   \n   Delete it recursively? "
+msgstr "\n   Katalog nie jest pusty.   \n   Skasowaæ go rekursywnie? "
+
+msgid "\n   Background process: Directory not empty \n   Delete it recursively? "
+msgstr "\n   Proces z t³a: Katalog nie jest pusty \n   Skasowaæ go rekursywnie? "
+
+msgid "a&ll"
+msgstr "wszystkie"
+
+msgid " Type 'yes' if you REALLY want to delete "
+msgstr " Wpisz 'yes' je¶li NAPRAWDÊ chcesz skasowaæ "
+
+msgid "all the directories "
+msgstr "wszystkie katalogi "
+
+msgid " Recursive Delete "
+msgstr " Kasowanie rekursywne "
+
+msgid " Background process: Recursive Delete "
+msgstr " Proces z t³a: Kasowanie Rekursywne "
+
+msgid "&Suspend"
+msgstr "zawie¶"
+
+msgid "Con&tinue"
+msgstr "&Kontynuuj"
+
+msgid "&Chdir"
+msgstr "zmieñ katalog"
+
+msgid "&Again"
+msgstr "ponownie"
+
+msgid "&Quit"
+msgstr "&Koniec"
+
+msgid "Pane&lize"
+msgstr "Pane&lowanie"
+
+msgid "&View - F3"
+msgstr "podgl±d   - F3"
+
+msgid "&Edit - F4"
+msgstr "&Edycja - F4"
+
+msgid "Start at:"
+msgstr "Rozpocznij w:"
+
+msgid "Filename:"
+msgstr "Nazwa pliku:"
+
+msgid "Content: "
+msgstr "Zawarto¶æ: "
+
+msgid "&Tree"
+msgstr "drz&Ewo"
+
+msgid "Find File"
+msgstr "Znajd¼ Plik"
+
+msgid "Grepping in %s"
+msgstr "Grepujê w %s"
+
+msgid " Find/read "
+msgstr " Znajd¼/czytaj"
+
+msgid " Problem reading from child "
+msgstr " Problem z czytaniem z procesu potomnego "
+
+msgid "Finished"
+msgstr "Zakoñczono"
+
+msgid "Searching %s"
+msgstr "Wyszukiwanie %s"
+
+msgid "Searching"
+msgstr "Poszukujê"
+
+msgid "Find file"
+msgstr "Znajd¼ plik"
+
+msgid "Usage: fixhlp <width> <tocname>\n"
+msgstr "U¿ycie: fixhlp <z> <nazwatoc>\n"
+
+msgid "fixhlp: Cannot open toc for writing"
+msgstr "fixhlp: Nie mo¿na otworzyæ toc do zapisu"
+
+msgid "[Contents]\n Topics:\n\n"
+msgstr ""
+
+msgid " Help file format error\n"
+msgstr ""
+
+msgid " Internal bug: Double start of link area "
+msgstr " Wewnêtrzny bug: Podwójny start strefy dowi±zañ "
+
+msgid " Can't find node [Contents] in help file "
+msgstr " Nie mogê znale¶æ wêz³a [Zawarto¶æ] w pliku pomocy "
+
+msgid " Help "
+msgstr " Pomoc "
+
+msgid " Can't open file %s \n %s "
+msgstr " Nie mogê otworzyæ pliku %s \n %s "
+
+msgid " Can't find node %s in help file "
+msgstr " Nie mogê znale¶æ wêz³a %s w pliku pomocy "
+
+msgid "Index"
+msgstr "Indeks"
+
+msgid "Prev"
+msgstr "Poprz"
+
+msgid "&Move"
+msgstr "&Przenie¶"
+
+msgid "&Remove"
+msgstr "&Usuñ"
+
+msgid "&Append"
+msgstr "&Do³±cz"
+
+msgid "&Insert"
+msgstr "&Wstaw"
+
+msgid "New &Entry"
+msgstr "Nowy wpis"
+
+msgid "New &Group"
+msgstr "Nowa &Grupa"
+
+msgid "&Up"
+msgstr "wy¿ej"
+
+msgid "&Add current"
+msgstr "dodaj &Aktualny"
+
+msgid "Change &To"
+msgstr "Zmien &Na"
+
+msgid "Subgroup - press ENTER to see list"
+msgstr "Podgrupa - wci¶nij ENTER by zobaczyæ listê"
+
+msgid "Active VFS directories"
+msgstr "Aktywne katalogi VFS"
+
+msgid "Directory hotlist"
+msgstr "Hotlista katalogów"
+
+msgid " Directory path "
+msgstr " ¦cie¿ka dostêpu do katalogu "
+
+msgid " Directory label "
+msgstr " Etykieta katalogu "
+
+msgid "Moving "
+msgstr "Przenoszê "
+
+msgid "New hotlist entry"
+msgstr "Nowy wpis do hotlisty"
+
+msgid "Directory label"
+msgstr "Etykieta katalogu"
+
+msgid "Directory path"
+msgstr "¦cie¿ka dostêpu do katalogu"
+
+msgid " New hotlist group "
+msgstr " Nowa grupa hotlisty "
+
+msgid "Name of new group"
+msgstr "Nazwa nowej grupy"
+
+msgid "Label for \"%s\":"
+msgstr "Etykieta dla \"%s\":"
+
+msgid " Add to hotlist "
+msgstr " Dodaj do hotlisty "
+
+msgid " Remove: "
+msgstr " Usuñ: "
+
+msgid "\n Group not empty.\n Remove it?"
+msgstr "\n Grupa nie jest pusta.\n Usun±æ j±?"
+
+msgid " Top level group "
+msgstr " Najwy¿sza strukturalnie grupa "
+
+msgid "Hotlist is now kept in file ~/"
+msgstr "Hotlista jest teraz trzymana w pliku ~/"
+
+msgid "MC will load hotlist from ~/"
+msgstr "MC bêdzie ³adowa³ hotlistê z ~/"
+
+msgid "and then delete [Hotlist] section there"
+msgstr ""
+
+msgid " Hotlist Load "
+msgstr " £adowanie Hotlisty "
+
+msgid "MC was unable to write ~/"
+msgstr "MC nie móg³ pisaæ do ~/"
+
+msgid " file, your old hotlist entries were not deleted"
+msgstr " plik, Twoje stare wpisy do hotlisty nie zosta³y skasowane"
+
+msgid "You have ~/"
+msgstr "Masz ~/"
+
+msgid " file and [Hotlist] section in ~/"
+msgstr " file i sekcja [Hotlist] w ~/"
+
+msgid "Your ~/"
+msgstr "Twój ~/"
+
+msgid " most probably was created\n"
+msgstr " najprawdopodobniej zosta³ stworzony\n"
+
+msgid "by an earlier development version of MC\nand is more actual than ~/"
+msgstr "poprzez wcze¶niejsz±, rozwijan± wersjê MC\ni jest bardziej aktualny ni¿ ~/"
+
+msgid " entries\n\n"
+msgstr " pozycji\n\n"
+
+msgid "You can choose between\n\n  Remove - remove old hotlist entries from ~/"
+msgstr "Mo¿esz wybieraæ pomiêdzy\n\n  Usuñ      - usuñ stare wpisy hotlisty z ~/"
+
+msgid "  Keep   - keep your old entries; you will be asked\n           the same question next time\n  Merge  - add old entries to hotlist as group \"Entries from ~/"
+msgstr "  Zatrzymaj - zatrzymaj stare wpisy; bêdziesz pytany o to samo\n           nastêpnym razem\n  Po³±cz    - dodaj stare wpisy do hotlisty jako grupê \"Wpisy z ~/"
+
+msgid "&Keep"
+msgstr "zatrzymaj"
+
+msgid "&Merge"
+msgstr "po³±cz"
+
+msgid " Entries from ~/"
+msgstr " Wpisy z ~/"
+
+msgid " file your old hotlist entries were not deleted"
+msgstr " plik z Twoimi starymi wpisami do hotlisty nie zosta³ skasowany"
+
+msgid "Midnight Commander %s"
+msgstr "Midnight Commander %s PL"
+
+msgid "Free nodes %d (%d%%) of %d"
+msgstr "Wolne wêz³y %d (%d%%) of %d"
+
+msgid "No node information"
+msgstr "Brak informacji o wê¼le"
+
+msgid "Free space "
+msgstr "Wolnego "
+
+msgid " (%d%%) of "
+msgstr " (%d%%) z "
+
+msgid "No space information"
+msgstr "Brak informacji o miejscu"
+
+msgid "Type:      %s "
+msgstr "Typ:        %s "
+
+msgid "non-local vfs"
+msgstr "nie lokalny vfs"
+
+msgid "Device:    %s"
+msgstr "Urz±dzenie: %s"
+
+msgid "Filesystem: %s"
+msgstr "System plików:  %s"
+
+msgid "Accessed:  %s"
+msgstr "Ostatni dostêp: %s"
+
+msgid "Modified:  %s"
+msgstr "Modyfikowany:   %s"
+
+msgid "Created:   %s"
+msgstr "Stworzony:      %s"
+
+msgid "Size:      "
+msgstr "Rozmiar:    "
+
+msgid " (%d blocks)"
+msgstr " (%d bloków)"
+
+msgid "Owner:     %s/%s"
+msgstr "W³a¶ciciel: %s/%s"
+
+msgid "Links:     %d"
+msgstr "Dowi±zania: %d"
+
+msgid "Mode:      %s (%04o)"
+msgstr "Atrybuty:   %s (%04o)"
+
+msgid "Location:  %Xh:%Xh"
+msgstr "Po³o¿enie:  %Xh:%Xh"
+
+msgid "File:       %s"
+msgstr " Plik:       %s"
+
+msgid "File:       None"
+msgstr " Plik:      Nie ma"
+
+msgid "&Vertical"
+msgstr "pionowo"
+
+msgid "&Horizontal"
+msgstr "poziomo"
+
+msgid "&Xterm hintbar"
+msgstr "&Xterm - podpowiedzi"
+
+msgid "h&Intbar visible"
+msgstr "widoczne podpowiedzi"
+
+msgid "&Keybar visible"
+msgstr "pasek &Klawiszy widoczny"
+
+msgid "command &Prompt"
+msgstr "znak zachêty"
+
+msgid "show &Mini status"
+msgstr "poka¿ &Mini status"
+
+msgid "menu&Bar visible"
+msgstr "pasek menu widoczny"
+
+msgid "&Equal split"
+msgstr "równy podzia³"
+
+msgid "pe&Rmissions"
+msgstr "at&Rybuty"
+
+msgid "&File types"
+msgstr "typy plików"
+
+msgid "&Save"
+msgstr "zapisz"
+
+msgid " Layout "
+msgstr " Wygl±d "
+
+msgid " Panel split "
+msgstr " Podzia³ panelu "
+
+msgid " Highlight... "
+msgstr " Pod¶wietlanie... "
+
+msgid " Other options "
+msgstr " Inne opcje "
+
+msgid "output lines"
+msgstr "wyj¶ciowych lini"
+
+msgid "Layout"
+msgstr "Wygl±d"
+
+msgid "Other options"
+msgstr "Inne opcje"
+
+msgid "Highlight..."
+msgstr "Pod¶wietlanie..."
+
+msgid "Panel split"
+msgstr "Podzia³ panelu"
+
+msgid " Learn keys "
+msgstr " Nauka klawiszy "
+
+msgid " Teach me a key "
+msgstr " Wci¶nij klawisz "
+
+msgid "Please press the %s\nand then wait until this message disappears.\n\nThen, press it again to see if OK appears\nnext to its button.\n\nIf you want to escape, press a single Escape key\nand wait as well."
+msgstr "Proszê wcisn±æ %s\ni czekaæ, a¿ ta wiadomo¶æ zniknie.\n\nWtedy proszê wscisnaæ klawisz jeszcze raz by zobaczyæ czy jest OK\n\nJe¶li chcesz wyj¶æ, proszê wci¶nij jeden raz klawisz Escape\ni chwilê zaczekaj."
+
+msgid " Cannot accept this key "
+msgstr " Nie mogê zaakceptowaæ tego klawisza "
+
+msgid " You have entered \"%s\""
+msgstr " Wpisa³e¶ \"%s\""
+
+msgid "OK"
+msgstr "OK"
+
+msgid "It seems that all your keys already\nwork fine. That's great."
+msgstr "Wygl±da na to, ¿e wszystkie Twoje klawisze\npracuj± dobrze. To ¶wietnie."
+
+msgid "&Discard"
+msgstr "porzuæ"
+
+msgid "Great! You have a complete terminal database!\nAll your keys work well."
+msgstr "Wspaniale! Masz kompletn± bazê danych terminali!\nWszystkie Twoje klawisze dzia³aj± dobrze."
+
+msgid "Learn keys"
+msgstr "Nauka klawiszy"
+
+msgid "Press all the keys mentioned here. After you have done it, check"
+msgstr "Proszê wciskaj wszystkie pokazane tu klawisze. Po zrobieniu tego"
+
+msgid "which keys are not marked with OK.  Press space on the missing"
+msgstr "sprawd¼, które klawisze nie s± zaznaczone jako OK. Proszê wci¶nij"
+
+msgid "key, or click with the mouse to define it. Move around with Tab."
+msgstr "spacjê lub kliknij mysz± na tych klawiszach. Przeno¶ kursor Tabem."
+
+msgid " The Commander can't change to the directory that \n the subshell claims you are in.  Perhaps you have \n deleted your working directory, or given yourself \n extra access permissions with the \"su\" command? "
+msgstr " Commander nie mo¿e zmieniæ katalogu na ten \n w którym podpow³oka zg³asza ¿e jeste¶.  Byæ mo¿e \n skasowa³e¶ swój katalog, lub da³e¶ sobie \n specjalne prawa dostêpu poprzez komendê \"su\"? "
+
+msgid "Press any key to continue..."
+msgstr "Nacisnij dowolny klawisz aby kontynuowac..."
+
+msgid " The shell is already running a command "
+msgstr " Pow³oka aktualnie uruchamia jak±¶ komendê "
+
+msgid "&Listing mode..."
+msgstr "&Tryb listowania..."
+
+msgid "&Quick view     C-x q"
+msgstr "s&Zybki podgl±d    C-x q"
+
+msgid "&Info           C-x i"
+msgstr "&Informacje        C-x i"
+
+msgid "&Sort order..."
+msgstr "porz±dek &Sortowania..."
+
+msgid "&Filter..."
+msgstr "&Filtr..."
+
+msgid "&Network link..."
+msgstr "po³±czenie sie&Ciowe..."
+
+msgid "FT&P link..."
+msgstr "po³±czenie FT&P..."
+
+msgid "&Drive...       M-d"
+msgstr "&Stacja...      M-d"
+
+msgid "&Rescan         C-r"
+msgstr "p&Rzeskanuj ponownie C-r"
+
+msgid "&User menu          F2"
+msgstr "&Menu u¿ytkownika                   F2"
+
+msgid "&View               F3"
+msgstr "&Podgl±d                            F3"
+
+msgid "Vie&w file...         "
+msgstr ""
+
+msgid "&Filtered view     M-!"
+msgstr "&Filtrowany podgl±d                M-!"
+
+msgid "&Edit               F4"
+msgstr "&Edycja                             F4"
+
+msgid "&Copy               F5"
+msgstr "&Kopiuj                             F5"
+
+msgid "c&Hmod           C-x c"
+msgstr "c&Hmod                           C-x c"
+
+msgid "&Link            C-x l"
+msgstr "&Dowi±zanie                      C-x l"
+
+msgid "&SymLink         C-x s"
+msgstr "dowi±zanie &Symboliczne          C-x s"
+
+msgid "edit s&Ymlink  C-x C-s"
+msgstr "ed&Ytuj dowi±zanie symboliczne C-x C-s"
+
+msgid "ch&Own           C-x o"
+msgstr "ch&Own                           C-x o"
+
+msgid "&Advanced chown       "
+msgstr "za&Awansowane chown   "
+
+msgid "&Rename/Move        F6"
+msgstr "&Zmieñ nazwê/przenie¶               F6"
+
+msgid "&Mkdir              F7"
+msgstr "utwórz ka&Talog                     F7"
+
+msgid "&Delete             F8"
+msgstr "&Usuñ                               F8"
+
+msgid "&Quick cd          M-c"
+msgstr "Szybkie &Cd                        M-c"
+
+msgid "select &Group      M-+"
+msgstr "zaznacz &Grupê                     M-+"
+
+msgid "u&Nselect group    M-\\"
+msgstr "odz&Nacz grupê                     M-\\"
+
+msgid "reverse selec&Tion M-*"
+msgstr "od&Wróæ zaznaczenie                M-*"
+
+msgid "e&Xit              F10"
+msgstr "&Wyj¶cie                           F10"
+
+msgid "&Directory tree"
+msgstr "&Drzewo katalogów"
+
+msgid "&Find file            M-?"
+msgstr "&Znajd¼ plik                     M-?"
+
+msgid "s&Wap panels          C-u"
+msgstr "zamieñ panele                   C-u"
+
+msgid "switch &Panels on/off C-o"
+msgstr "w³±cz/wy³±cz &Panele             C-o"
+
+msgid "&Compare directories  C-x d"
+msgstr "porównaj katalogi             C-x d"
+
+msgid "e&Xternal panelize    C-x !"
+msgstr "zewnêtrzne panelowanie        C-x !"
+
+msgid "show directory s&Izes"
+msgstr "poka¿ rozm&Iar katalogów"
+
+msgid "command &History"
+msgstr "&Historia poleceñ"
+
+msgid "di&Rectory hotlist    C-\\"
+msgstr "hotlista katalogów              C-\\"
+
+msgid "&Active VFS list      C-x a"
+msgstr "lista &Aktywnych VFS           C-x a"
+
+msgid "&Background jobs      C-x j"
+msgstr "procesy w tle                 C-x j"
+
+msgid "&Undelete files (ext2fs only)"
+msgstr "Odkasowywanie plików (tylko ext2fs)"
+
+msgid "&Listing format edit"
+msgstr "edycja formatu &Listowania"
+
+msgid "&Extension file edit"
+msgstr "&Edycja pliku rozszerzeñ"
+
+msgid "&Menu file edit"
+msgstr "edycja pliku &Menu"
+
+msgid "&Configuration..."
+msgstr "&Konfiguracja..."
+
+msgid "c&Onfirmation..."
+msgstr "p&Otwierdzenia..."
+
+msgid "&Display bits..."
+msgstr "&Bity wy¶wietlania..."
+
+msgid "learn &Keys..."
+msgstr "nauka &Klawiszy..."
+
+msgid "&Virtual FS..."
+msgstr "wirtualny FS..."
+
+msgid "&Save setup"
+msgstr "&Zachowaj ustawienia"
+
+msgid " &Left "
+msgstr " &Lewy "
+
+msgid " &Above "
+msgstr " &Powy¿ej "
+
+msgid " &File "
+msgstr " &Plik "
+
+msgid " &Command "
+msgstr ""
+
+msgid " &Options "
+msgstr " &Opcje "
+
+msgid " &Right "
+msgstr " &Prawy "
+
+msgid " &Below "
+msgstr " &Poni¿ej "
+
+msgid " Information "
+msgstr "Informacje"
+
+msgid " Using the fast reload option may not reflect the exact \n directory contents. In this cases you'll need to do a  \n manual reload of the directory. See the man page for   \n the details.                                           "
+msgstr " U¿ywanie szybkiego prze³adowywania katalogów mo¿e nie  \n odzwierciedlaæ aktualnej zawarto¶ci katalogu. W taki   \n bêdziesz musia³ prze³adowaæ rêcznie. Zobacz stronê man \n po szcegó³y.                                             "
+
+msgid "Menu"
+msgstr ""
+
+msgid "Thank you for using GNU Midnight Commander"
+msgstr "Dziêkujê Ci za u¿ywanie GNU Midnight Commandera"
+
+msgid "with mouse support on xterm%s.\n"
+msgstr "z wsparciem dla myszy na xterm%s.\n"
+
+msgid " and the Linux console"
+msgstr " i Linuxow± konsolê"
+
+msgid "The TERM environment variable is unset!\n"
+msgstr "Zmienna TERM jest nieustawiona!\n"
+
+msgid "Library directory for the Midnight Commander: %s\n"
+msgstr "Katalog biblioteczny dla Midnight Commandera: %s\n"
+
+msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
+msgstr "Opcja -m jest przestarza³a. Proszê spójrz na Bity wy¶wietlania... w menu Opcje\n"
+
+msgid "[DEVEL-ONLY: Debug the background code]"
+msgstr "[TYLKO-DEVEL: Debugowanie kodu t³a]"
+
+msgid "Create command file to set default directory upon exit."
+msgstr "Stworz plik komendy by ustawiæ domy¶lny katalog przy wyj¶ciu."
+
+msgid "Force color mode."
+msgstr "Wymu¶ kolorowy tryb wy¶wietlania."
+
+msgid "Specify colors (use --help-colors to get a list)."
+msgstr "Wyspecyfikuj kolory (u¿yj --help-colors by uzyskaæ listê)."
+
+msgid "[DEVEL-ONLY: Debug the subshell]"
+msgstr ""
+
+msgid "Startup the internal editor."
+msgstr "Wystartuj wewnêtrzny edytor."
+
+msgid "Shows this help message."
+msgstr "Poka¿ t± pomoc."
+
+msgid "Help on how to specify colors."
+msgstr "Pomoc o tym jak specyfikowaæ kolory."
+
+msgid "Log ftpfs commands to the file."
+msgstr "Loguj komendy ftpfs do pliku."
+
+msgid "Prints out the configured paths."
+msgstr "Wy¶wietl skonfigurowane ¶cie¿ki dostêpu."
+
+msgid "Force black and white display."
+msgstr "Wymu¶ czarno-bia³y tryb wy¶wietlania."
+
+msgid "Disable mouse support."
+msgstr "Zablokuj wsparcie dla myszy."
+
+msgid "Force the concurrent subshell mode"
+msgstr "Wymu¶ tryb podpow³oki."
+
+msgid "Disable the concurrent subshell mode."
+msgstr "Zablokuj tryb podpow³oki."
+
+msgid "Force subshell execution."
+msgstr "Wymu¶ wykonanie podpow³oki."
+
+msgid "At exit, print the last working directory."
+msgstr "Przy wyj¶ciu wyswietl ostatni katalog roboczy."
+
+msgid "Reset softkeys (HP terminals only) to their terminfo/termcap default."
+msgstr "Zresetuj softwarowe klawisze (tylko terminale HP) to stand. ust."
+
+msgid "Disables verbose operation (for slow terminals)."
+msgstr "Zablokuj wy¶wietlanie wielu komunikatów (dla powolnych terminali)."
+
+msgid "Use simple symbols for line drawing."
+msgstr "U¿yj prostych symboli do rysowania lini."
+
+msgid "Activate support for the TERMCAP variable."
+msgstr "Aktywuj wsparcie dla zmiennej TERMCAP."
+
+msgid "Report version and configuration options."
+msgstr "Wy¶wietl wersjê i opcje konfiguracyjne."
+
+msgid "Start up into the viewer mode."
+msgstr "Wystartuj w trybie przegl±darki."
+
+msgid "Force xterm mouse support and screen save/restore"
+msgstr "Wymu¶ wsparcie dla myszy w xterm i zapis/odzysk ekranu"
+
+msgid "Geometry for the window"
+msgstr "Geometria okna"
+
+msgid "No windows opened at startup"
+msgstr "Przy starcie nie otworzono rzadnego okna"
+
+msgid "[this dir] [other dir]"
+msgstr "[ten katalog] [inny katalog]"
+
+msgid "Couldn't open tty line. You have to run mc without the -P flag.\nOn some systems you may want to run # `which mc`\n"
+msgstr "Nie mogê otworzyæ lini tty. Muszisz uruchomiæ mc bez flagi -P.\nNa niektórych systemach mo¿esz chcieæ uruchomiæ # `which mc`\n"
+
+msgid " Notice "
+msgstr " Informacja "
+
+msgid " The Midnight Commander configuration files \n are now stored in the ~/.mc directory, the \n files have been moved now\n"
+msgstr " Pliki konfiguracyjne Midnight Commandera\n s± teraz zapisane w katalogu ~/.mc, \n pliki zosta³y tam przeniesione\n"
+
+msgid "safe de&Lete"
+msgstr "bezpieczne kasowanie"
+
+msgid "cd follows lin&Ks"
+msgstr "cd pod±¿a za lin&Kami"
+
+msgid "advanced cho&Wn"
+msgstr "zaawansowane cho&Wn"
+
+msgid "l&Ynx-like motion"
+msgstr "poruszanie sie w stylu l&Ynxa"
+
+msgid "Animation"
+msgstr "Animacja"
+
+msgid "ro&Tating dash"
+msgstr "obracaj±cy sie my¶lnik"
+
+msgid "co&Mplete: show all"
+msgstr "ko&Mpletne: pokazuj wszystko"
+
+msgid "&Use internal view"
+msgstr "&U¿yj wewnetrznej przegl±darki"
+
+msgid "use internal ed&It"
+msgstr "u¿yj wewnêtrznego edytora"
+
+msgid "auto m&Enus"
+msgstr "auto m&Enu"
+
+msgid "&Auto save setup"
+msgstr "&Automatycznie nagrywaj setup"
+
+msgid "shell &Patterns"
+msgstr "wzorce &Pow³oki"
+
+msgid "&Verbose operation"
+msgstr "&Wy¶. maks. komunikatów"
+
+msgid "&Fast dir reload"
+msgstr "szybkie prze³ad. katalogów"
+
+msgid "mi&X all files"
+msgstr "mieszaj wszystkie pliki"
+
+msgid "&Drop down menus"
+msgstr "rozwijane menu"
+
+msgid "ma&Rk moves down"
+msgstr "zaznaczenie p&Rzesuwa w dó³"
+
+msgid "show &Hidden files"
+msgstr "poka¿ ukryte pliki"
+
+msgid "show &Backup files"
+msgstr "poka¿ zapasowe kopie plików"
+
+msgid "&Never"
+msgstr "&Nigdy"
+
+msgid "on dumb &Terminals"
+msgstr "na g³upich &Terminalach"
+
+msgid "alwa&Ys"
+msgstr "zawsze"
+
+msgid " Configure options "
+msgstr " Opcje konfiruracji "
+
+msgid " Panel options "
+msgstr " Opcje panelu "
+
+msgid " Pause after run... "
+msgstr " Pauzuj po uruchomieniu... "
+
+msgid "Configure options"
+msgstr "Opcje konfiguracjyne"
+
+msgid "Pause after run..."
+msgstr "Pauzuj po uruchomieniu..."
+
+msgid "Panel options"
+msgstr "Opcje panelu"
+
+msgid "&Add new"
+msgstr "&Dodaj nowe"
+
+msgid " External panelize "
+msgstr " Zewnêtrzne panelowanie "
+
+msgid "External panelize"
+msgstr "Zewnêtrzne panelowanie"
+
+msgid "Other command"
+msgstr "Inne komendy"
+
+msgid " Add to external panelize "
+msgstr " Dodaj do zewnêtrznego panelowania "
+
+msgid " Enter command label: "
+msgstr " Wpisz etyketê komendy: "
+
+msgid " I can't run external panelize while logged on a non local directory "
+msgstr " Nie mogê uruchamiaæ zewnêtrznego panelowania na nie lokalnym katalogu "
+
+msgid "Find rejects after patching"
+msgstr "Znajd¼ odrzuty po patchowaniu"
+
+msgid "Find *.orig after patching"
+msgstr "Znajd¼ *.orig po patchowaniu"
+
+msgid "Find SUID and SGID programs"
+msgstr "Znajd¼ programy z SUID i SGIDem"
+
+msgid "Cannot invoke command."
+msgstr "Nie mogê wykonaæ komendy."
+
+msgid "Size"
+msgstr "Rozmiar"
+
+msgid "MTime"
+msgstr "CzasM"
+
+msgid "Permission"
+msgstr "Atrybuty"
+
+msgid "Perm"
+msgstr "Atry"
+
+msgid "|"
+msgstr ""
+
+msgid "Nl"
+msgstr ""
+
+msgid "GID"
+msgstr ""
+
+msgid "UID"
+msgstr ""
+
+msgid "ATime"
+msgstr "CzasD"
+
+msgid "CTime"
+msgstr "CzasS"
+
+msgid "Inode"
+msgstr "Iwêze³"
+
+msgid "  %s bytes in %d file%s"
+msgstr ""
+
+msgid "Unknow tag on display format: "
+msgstr "Nieznany tag w formacie wy¶wiatlania: "
+
+msgid "RenMov"
+msgstr "ZmnPrz"
+
+msgid "Mkdir"
+msgstr "StwKat"
+
+msgid "Couldn't open named pipe %s\n"
+msgstr "Nie mogê otworzyæ potoku %s\n"
+
+msgid " The shell is still active. Quit anyway? "
+msgstr " Shell jest w dalszym ci±gu aktywny. Wyj¶æ mimo wszystko? "
+
+msgid " There are stopped jobs."
+msgstr " Znajduj± siê zatrzymane prace."
+
+msgid " Quit anyway? "
+msgstr " Zakoñczyæ i tak ? "
+
+msgid "Warning: Couldn't change to %s.\n"
+msgstr "Ostrze¿enie: Nie mogê zmieniæ to %s.\n"
+
+msgid "Can't open the %s file for writing:\n%s\n"
+msgstr "Nie mogê otworzyæ pliku %s do zapisu:\n%s\n"
+
+msgid "Can't write to the %s file:\n%s\n"
+msgstr "Nie mogê pisaæ do pliku %s:\n%s\n"
+
+msgid "Copy \"%s\" directory to:"
+msgstr "Kopiuj katalog \"%s\" do:"
+
+msgid "Move \"%s\" directory to:"
+msgstr "Przenie¶ katalog \"%s\" do:"
+
+msgid " Can't stat the destination \n %s "
+msgstr " Nie mogê zlokalizowaæ przeznaczenia \n %s "
+
+msgid " The destination isn't a directory "
+msgstr " Przeznaczenie nie jest katalogiem "
+
+msgid "  Delete %s?  "
+msgstr " Usun±æ %s?  "
+
+msgid "Static"
+msgstr "Statyczne"
+
+msgid "Dynamc"
+msgstr "Dynamiczne"
+
+msgid " Can't chdir to \"%s\" \n %s "
+msgstr " Nie mogê zmieniæ katalogu na \"%s\" \n %s "
+
+msgid "Forget"
+msgstr "Zapomnij"
+
+msgid "Rmdir"
+msgstr "Skasuj katalog"
+
+msgid " Invalid shell pattern defination \"%c\". "
+msgstr " nieprawid³owa definicja wzoru pow³oki \"%c\". "
+
+msgid " Debug "
+msgstr " Debuowanie "
+
+msgid " ERROR: "
+msgstr "B£¡D: "
+
+msgid " True:  "
+msgstr " Prawda:"
+
+msgid " False: "
+msgstr " Fa³sz: "
+
+msgid " Warning -- ignoring file "
+msgstr " Ostrze¿enie -- ignorujê plik "
+
+msgid "File %s is not owned by root or you or is world writable.\nUsing it may compromise your security"
+msgstr "Plik %s nie nale¿y do root'a lub Ciebie lub ma ustawione atrybuty zapisu.\ndla wszystkich. U¿ywanie go mo¿e zmniejszyæ Twoje bezpieczeñstwo"
+
+msgid " I can't run programs while logged on a non local directory "
+msgstr " Nie mogê uruchamiaæ programów kiedy pracujê na nielokalnym katalogu "
+
+msgid " User menu "
+msgstr " Menu u¿ytkownika "
+
+msgid "name_trunc: too big"
+msgstr "name_trunc: zbyt du¿y"
+
+msgid " Pipe failed "
+msgstr " Potok nieudany "
+
+msgid " Dup failed "
+msgstr " Dup nieudany"
+
+msgid "File: \n\n    "
+msgstr "Plik: \n\n    "
+
+msgid "\n\nhas been modified, do you want to save the changes?\n"
+msgstr "\n\nzosta³ zmodyfikowany, czy chcesz zapisaæ zmiany?\n"
+
+msgid " Save changes "
+msgstr " Zapisz zmiany "
+
+msgid " Can't spawn child program "
+msgstr " Nie mogê zepspawaæ ;P potomnego procesu "
+
+msgid " Empty output from child filter "
+msgstr " Pusty wynik z filtru procesu potomnego "
+
+msgid " Could not open file "
+msgstr " Nie mogê otworzyæ pliku "
+
+msgid " Can't open file \""
+msgstr " Nie mogê otworzyæ pliku \""
+
+msgid " Can't stat file \n "
+msgstr " Niemogê zlokalizowaæ pliku \n "
+
+msgid " Can't view: not a regular file "
+msgstr " Nie mogê podejrzeæ: nieregularny plik "
+
+msgid " Can not fetch local copy "
+msgstr " Nie mogê przes³aæ lokalnej kopi "
+
+msgid "File: %s"
+msgstr "Plik: %s"
+
+msgid "  [grow]"
+msgstr "  [ro¶nie]"
+
+msgid " Search string not found "
+msgstr " Szukany ci±g znaków nie znaleziony "
+
+msgid " Invalid regular expression "
+msgstr " Nieprawid³owe wyra¿enie regularne "
+
+msgid " The current line number is %d.\n Enter the new line number:"
+msgstr " Aktualny numer lini to %d.\n Wpisz nowy numer lini:"
+
+msgid " Enter regexp:"
+msgstr " Wpisz regexp:"
+
+msgid " Enter search string:"
+msgstr " Wpisz szukany ci±g znaków:"
+
+msgid "Ascii"
+msgstr ""
+
+msgid "Line"
+msgstr "Linia"
+
+msgid "RxSrch"
+msgstr "RxSzuk"
+
+msgid "EdText"
+msgstr "EdTeks"
+
+msgid "EdHex"
+msgstr ""
+
+msgid "UnWrap"
+msgstr "CoZawi"
+
+msgid "HxSrch"
+msgstr "HxSzuk"
+
+msgid "Raw"
+msgstr ""
+
+msgid "Parse"
+msgstr ""
+
+msgid "Unform"
+msgstr "Odform"
+
+msgid "Format"
+msgstr ""
+
+msgid "Function key 1"
+msgstr "Klaw. funkc. 1"
+
+msgid "Function key 2"
+msgstr "Klaw. funkc. 2"
+
+msgid "Function key 3"
+msgstr "Klaw. funkc. 3"
+
+msgid "Function key 4"
+msgstr "Klaw. funkc. 4"
+
+msgid "Function key 5"
+msgstr "Klaw. funkc. 5"
+
+msgid "Function key 6"
+msgstr "Klaw. funkc. 6"
+
+msgid "Function key 7"
+msgstr "Klaw. funkc. 7"
+
+msgid "Function key 8"
+msgstr "Klaw. funkc. 8"
+
+msgid "Function key 9"
+msgstr "Klaw. funkc. 9"
+
+msgid "Function key 10"
+msgstr "Klaw. funkc. 10"
+
+msgid "Function key 11"
+msgstr "Klaw. funkc. 11"
+
+msgid "Function key 12"
+msgstr "Klaw. funkc. 12"
+
+msgid "Function key 13"
+msgstr "Klaw. funkc. 13"
+
+msgid "Function key 14"
+msgstr "Klaw. funkc. 14"
+
+msgid "Function key 15"
+msgstr "Klaw. funkc. 15"
+
+msgid "Function key 16"
+msgstr "Klaw. funkc. 16"
+
+msgid "Function key 17"
+msgstr "Klaw. funkc. 17"
+
+msgid "Function key 18"
+msgstr "Klaw. funkc. 18"
+
+msgid "Function key 19"
+msgstr "Klaw. funkc. 19"
+
+msgid "Function key 20"
+msgstr "Klaw. funkc. 20"
+
+msgid "Backspace key"
+msgstr "Klaw.  backspace"
+
+msgid "End key"
+msgstr "Klawisz End"
+
+msgid "Up arrow key"
+msgstr "Kursor do góry"
+
+msgid "Down arrow key"
+msgstr "Kursor w dó³"
+
+msgid "Left arrow key"
+msgstr "Kursor w lewo"
+
+msgid "Right arrow key"
+msgstr "Kursor w prawo"
+
+msgid "Home key"
+msgstr "Klawisz Home"
+
+msgid "Page Down key"
+msgstr "Klawisz PageDown"
+
+msgid "Page Up key"
+msgstr "Klawisz PageUp"
+
+msgid "Insert key"
+msgstr "Klawisz Insert"
+
+msgid "Delete key"
+msgstr "Klawisz Delete"
+
+msgid "Completion/M-tab"
+msgstr ""
+
+msgid "+ on keypad"
+msgstr "+ na numerycznej"
+
+msgid "- on keypad"
+msgstr "- na numerycznej"
+
+msgid "* on keypad"
+msgstr "* na numerycznej"
+
+msgid "Left arrow keypad"
+msgstr "Kurs w lew± na numerycznej"
+
+msgid "Right arrow keypad"
+msgstr "Kursor prawo na numerycznej"
+
+msgid "Up arrow keypad"
+msgstr "Kursor góra na numerycznej"
+
+msgid "Down arrow keypad"
+msgstr "Kursor dó³ na numerycznej"
+
+msgid "Home on keypad"
+msgstr "Home na numerycznej"
+
+msgid "End on keypad"
+msgstr "End na numerycznej"
+
+msgid "Page Down keypad"
+msgstr "PgDn na numerycznej"
+
+msgid "Page Up keypad"
+msgstr "PgUp na numerycznej"
+
+msgid "Insert on keypad"
+msgstr "Insert na numerycznej"
+
+msgid "Delete on keypad"
+msgstr "Del na numerycznej"
+
+msgid "Enter on keypad"
+msgstr "Enter na numerycznej"
+
+msgid "Slash on keypad"
+msgstr "Slash na numerycznej"
+
+msgid "NumLock on keypad"
+msgstr "NumLock na numerycznej"
+
+msgid "Password:"
+msgstr "Has³o:"
+
+msgid "Password"
+msgstr "Has³o"
+
+msgid "Ok"
+msgstr "Ok"
+
+msgid "Couldn't open %s archive\n%s"
+msgstr ""
+
+msgid "Inconsistent extfs archive"
+msgstr ""
+
+msgid "Sorry, we can not do password authenticated connections for now."
+msgstr ""
+
+msgid " Could not set source routing (%s)"
+msgstr ""
+
+msgid "~/.netrc file has not correct mode.\nRemove password or correct mode."
+msgstr ""
+
+msgid " MCFS "
+msgstr ""
+
+msgid " The server does not support this version "
+msgstr ""
+
+msgid " The remote server is not running on a system port \n you need a password to log in, but the information may \n not be safe on the remote side.  Continue? \n"
+msgstr ""
+
+msgid " Yes "
+msgstr " Tak "
+
+msgid " No "
+msgstr " Nie "
+
+msgid " The remote server is running on strange port. Giving up.\n"
+msgstr ""
+
+msgid " MCFS Password required "
+msgstr ""
+
+msgid " Invalid password "
+msgstr " Nieprawid³owe has³o "
+
+msgid " Too many open connections "
+msgstr " Za du¿o otwartych po³±czeñ "
+
+msgid "Couldn't open tar archive\n%s"
+msgstr ""
+
+msgid "Couldn't load compressed tar\n%s"
+msgstr ""
+
+msgid "Couldn't uncompress tar archive\n%s"
+msgstr ""
+
+msgid "Unexpected EOF on archive file"
+msgstr ""
+
+msgid "Inconsistent tar archive"
+msgstr ""
+
+msgid "Hmm,...\n%s\ndoesn't look like a tar archive."
+msgstr ""
+

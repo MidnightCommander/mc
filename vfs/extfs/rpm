@@ -74,11 +74,14 @@ mcrpmfs_list ()
 	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
      test "`rpm -qp --qf \"%{COPYRIGHT}\" $1`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+     test "`rpm -qp --qf \"%{LICENSE}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
     else
 	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
 	 echo "$FILEPREF 0 $DATE INFO/URL"
 	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
 	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
     fi
     echo "$FILEPREF 0 $DATE INFO/BUILDTIME"
     echo "$FILEPREF 0 $DATE INFO/RPMVERSION"
@@ -87,12 +90,15 @@ mcrpmfs_list ()
     if test "$MCFASTRPM" != 0 ; then
     rpm -qp --qf "[%{REQUIRENAME}\n]" $1 | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+    rpm -qp --qf "[%{OBSOLETES}\n]" $1 | grep "(none)" > /dev/null ||
+	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
     rpm -qp --qf "[%{PROVIDES}\n]" $1 | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
     test "`rpm -qp --qf \"%{CHANGELOGTEXT}\" $1`" = "(none)" ||
        echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     else 
 	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
 	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
@@ -119,6 +125,8 @@ mcrpmfs_copyout ()
 	INFO/BUILDTIME)		rpm -qp --qf "%{BUILDTIME:date}\n" $1 >$3; exit 0;;
 	INFO/SERIAL)		rpm -qp --qf "%{SERIAL}\n" $1 >$3; exit 0;;
 	INFO/COPYRIGHT)		rpm -qp --qf "%{COPYRIGHT}\n" $1 >$3; exit 0;;
+	INFO/LICENSE)		rpm -qp --qf "%{LICENSE}\n" $1 >$3; exit 0;;
+	INFO/OBSOLETES)		rpm -qp --qf "[%{OBSOLETES}\n]" $1 >$3; exit 0;;
 	INFO/RPMVERSION)	rpm -qp --qf "%{RPMVERSION}\n" $1 >$3; exit 0;;
 	INFO/REQUIRENAME)	rpm -qp --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" $1 >$3; exit 0;;
 	INFO/PROVIDES)		rpm -qp --qf "[%{PROVIDES}\n]" $1 >$3; exit 0;;
