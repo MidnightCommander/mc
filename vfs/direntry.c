@@ -720,8 +720,10 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     if ((q = vfs_s_get_path (me, file, &super, 0)) == NULL)
 	return NULL;
     ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
-    if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
+    if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL))) {
+	g_free (q);
 	ERRNOR (EEXIST, NULL);
+    }
     if (!ino) {
 	char *dirname, *name, *save;
 	struct vfs_s_entry *ent;
@@ -944,7 +946,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     enable_interrupt_key ();
 
     while ((n = MEDATA->linear_read (me, &fh, buffer, sizeof (buffer)))) {
-
+	int t;
 	if (n < 0)
 	    goto error_1;
 
@@ -955,8 +957,10 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 	if (got_interrupt ())
 	    goto error_1;
 
-	if (write (handle, buffer, n) < 0) {
-	    me->verrno = errno;
+	t = write (handle, buffer, n);
+	if (t != n) {
+	    if (t == -1)
+		me->verrno = errno;
 	    goto error_1;
 	}
     }

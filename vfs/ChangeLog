@@ -1,3 +1,8 @@
+2004-11-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* direntry.c (vfs_s_open): Fix memory leak.
+	(vfs_s_retrieve_file): Check write() return more carefully.
+
 2004-11-16  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/patchfs.in: Allow extraction and deletion of patches
