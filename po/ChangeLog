@@ -1,3 +1,8 @@
+2001-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: Remove all references to gnome files.  Change
+	"gtkedit/" to "edit/".
+
 2001-08-24  Abel Cheung  <maddog@linux.org.hk>
 
 	* de.po: Marked line 6853 as fuzzy, gettext complaint.
