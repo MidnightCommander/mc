@@ -174,7 +174,7 @@ Help Viewer
 and the
 .\"LINK2"
 Directory Tree.
-."Directory Tree"
+.\"Directory Tree"
 .PP
 The default auto repeat rate for the mouse buttons is 400
 milliseconds. This may be changed to other values by editing the
@@ -438,7 +438,8 @@ to depressing the '<' with the mouse.
 .B M-u
 Moves to the next directory in the history, equivalent 
 to depressing the '>' with the mouse.
-.BM-S-h, M-H
+.PP
+.B M-S-h, M-H
 Displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .PP
@@ -2308,13 +2309,13 @@ will become "c.file" and so on. The source mask for this is
 .PP
 .B "Case Conversions"
 .PP
-You can also change the case of the filenames. If you use '\\u' or
-'\\l' in the target mask the next character will be converted to
+You can also change the case of the filenames.  If you use '\\u'
+or '\\l' in the target mask, the next character will be converted to
 uppercase or lowercase correspondingly.
 .PP
-If you use '\\U' or '\\L' in the target mask the next characters will
-be converted to uppercase or lowercase correspondingly up to the next
-'\\E' or next '\\U', '\\L' or the end of the file name.
+If you use '\\U' or '\\L' in the target mask, the next characters will
+be converted to uppercase or lowercase correspondingly up to the
+next '\\E' or next '\\U', '\\L' or the end of the file name.
 .PP
 The '\\u' and '\\l' are stronger than '\\U' and '\\L'.
 .PP

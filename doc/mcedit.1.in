@@ -18,7 +18,7 @@ standalone X Window editor.
 .\".\"DONT_SPLIT"
 .SH OPTIONS
 .TP
-.I "\+number"
+.I "+number"
 Go  to the line specified by number (do not insert
 a space between the "+" sign and the number).
 .TP
@@ -328,7 +328,7 @@ editmarked=black,cyan"
 .SH OPTIONS
 Most options can now be set from the editors options dialog
 box. See the \fBOptions\fP menu. The following options are defined in 
-\fB.mc.ini\fP, and have obvious correspondences in the dialog box.
+\fB~/.mc.ini\fP and have obvious counterparts in the dialog box.
 You can modify them to change the editor behavior, by editing the file. 
 Unless specified, a 1 sets the option to on, and a 0 sets it to
 off, as is usual.
