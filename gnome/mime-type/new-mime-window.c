@@ -1,5 +1,6 @@
 #include "new-mime-window.h"
 #include "capplet-widget.h"
+#include <config.h>
 static GtkWidget *add_dialog = NULL;
 extern GtkWidget *capplet;
 

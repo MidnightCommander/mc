@@ -351,8 +351,8 @@ get_mime_clist (void)
         GtkWidget *retval;
         gchar *titles[2];
 
-        titles[0] = "Mime Type";
-        titles[1] = "Extension";
+        titles[0] = _("Mime Type");
+        titles[1] = _("Extension");
         retval = gtk_scrolled_window_new (NULL, NULL);
         gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (retval),
                                         GTK_POLICY_AUTOMATIC,
