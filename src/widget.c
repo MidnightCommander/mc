@@ -60,6 +60,17 @@ button_callback (WButton *b, int Msg, int Par)
 	return 1;
 
     case WIDGET_HOTKEY:
+	/*
+	 * Don't let the default button steal Enter from the current
+	 * button.  This is a workaround for the flawed event model
+	 * when hotkeys are sent to all widgets before the key is
+	 * handled by the current widget.
+	 */
+	if (Par == '\n' && h->current->widget == &b->widget) {
+	    button_callback (b, WIDGET_KEY, ' ');
+	    return 1;
+	}
+
 	if (Par == '\n' && b->flags == DEFPUSH_BUTTON) {
 	    button_callback (b, WIDGET_KEY, ' ');
 	    return 1;

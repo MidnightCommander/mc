@@ -1,5 +1,8 @@
 2003-09-09  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (button_callback): Don't let the default button steal
+	Enter from the current button.
+
 	* widget.c (button_callback): Treat Enter as hotkey for the
 	default button.
 	* wtools.c (quick_callback): Remove, it's unneeded now.
