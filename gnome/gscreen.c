@@ -2267,7 +2267,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	ministatus_box = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME(ministatus_box), GTK_SHADOW_IN);
       
-	panel->status = gtk_label_new (_("Show all Files"));
+	panel->status = gtk_label_new (_("Show all files"));
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.0);
       
 	gtk_box_pack_start (GTK_BOX (panel->ministatus), ministatus_box, FALSE, FALSE, 0);

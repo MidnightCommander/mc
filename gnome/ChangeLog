@@ -1,5 +1,9 @@
 1999-01-07  Jonathan Blandford  <jrb@redhat.com>
 
+	* gcmd.c (gnome_filter_cmd): Function filled in now.  Actually
+	works (amazing!.)  Next: put a history on it, and maybe an event
+	box for the label.
+
 	* glayout.c: use the function below.
 
 	* gcmd.c (gnome_filter_cmd): New function (or a sorry excuse for

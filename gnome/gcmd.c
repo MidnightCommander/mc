@@ -200,7 +200,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
         GtkWidget *menu;
         GtkWidget *menu_item;
 	GtkWidget *cbox1, *cbox2;
-	sortfn *sfn;
+	sortfn *sfn = NULL;
 
 	sort_box = gnome_dialog_new (_("Sort By"), GNOME_STOCK_BUTTON_OK, 
 				     GNOME_STOCK_BUTTON_CANCEL, NULL);
@@ -546,5 +546,43 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 {
 	GtkWidget *filter_dlg;
 	GtkWidget *entry;
+	GtkWidget *label;
+
+	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK, 
+				       GNOME_STOCK_BUTTON_CANCEL, NULL);
+	entry = gtk_entry_new ();
+	if (panel->filter && easy_patterns && !(strcmp (panel->filter, "*")))
+		gtk_entry_set_text (GTK_ENTRY (entry), _("Show all files"));
+	else
+		gtk_entry_set_text (GTK_ENTRY (entry), panel->filter);
+	if (easy_patterns)
+		label = gtk_label_new (_("Enter a filter here for files in the panel view.\n\nFor example:\n*.gif will show just gif images"));
+	else
+		label = gtk_label_new (_("Enter a Regular Expression to filter files in the panel view."));
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+	gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 	
-}	
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (filter_dlg)->vbox), label, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (filter_dlg)->vbox), entry, FALSE, FALSE, 0);
+	gtk_widget_show_all (GNOME_DIALOG (filter_dlg)->vbox);
+	switch (gnome_dialog_run (GNOME_DIALOG (filter_dlg))) {
+	case 0:
+		gtk_widget_hide (filter_dlg);
+		if (panel->filter) {
+			g_free (panel->filter);
+			panel->filter = NULL;
+		}
+		panel->filter = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+		if (!strcmp ("*", panel->filter)) {
+			g_free (panel->filter);
+			panel->filter = NULL;
+			gtk_label_set_text (GTK_LABEL (panel->status), _("Show all files"));
+		} else
+			gtk_label_set_text (GTK_LABEL (panel->status), panel->filter);
+		reread_cmd ();
+		x_filter_changed (panel);
+		break;
+	}
+	gtk_widget_destroy (filter_dlg);
+}
