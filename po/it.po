@@ -4,7 +4,8 @@
 #
 # mc it.po
 # Copyright (C) 1999 Free Software Foundation, Inc.
-# Giuliano Natali <natali@stone.trew.it>, 1998.
+# Giuliano Natali <diaolin@diaolin.com>, 1998.
+# Marco Ciampa <ciampix@libero.it>, 1999, 2000, 2001.
 #
 msgid ""
 msgstr ""
