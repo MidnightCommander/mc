@@ -1119,7 +1119,7 @@ static int pty_open_slave (const char *pty_name)
 	return -1;
     }
 
-#if !defined(__osf__)
+#if !defined(__osf__) && !defined(linux) && !defined(__linux__)
 #if defined (I_FIND) && defined (I_PUSH)
     if (!ioctl (pty_slave, I_FIND, "ptem"))
 	if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
@@ -1147,7 +1147,7 @@ static int pty_open_slave (const char *pty_name)
 	}
 #endif /* sgi || __sgi */
 #endif /* I_FIND && I_PUSH */
-#endif /* __osf__ */
+#endif /* __osf__ || linux || __linux__ */
 
     return pty_slave;
 }
