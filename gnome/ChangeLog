@@ -1,5 +1,10 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Compile our own mad.o. Don't link object files.
+	Put links to the build directory. Don't link headers, change
+	includes accordingly. gdialogs.o removed from OOBJS. Link
+	only sources we need. Obsolete comments removed or updated.
+
 	* Makefile.in: Don't make softlinks to the libraries
 
 2000-09-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
