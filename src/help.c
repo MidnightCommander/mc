@@ -70,7 +70,7 @@
 static char *data;		/* Pointer to the loaded data file */
 static int help_lines = 18;	/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
-static char *main;		/* The main node */
+static char *main_node;		/* The main node */
 static char *last_shown = 0;	/* Last byte shown in a screen */
 static int end_of_node = 0;	/* Flag: the last character of the node shown? */
 char *currentpoint, *startpoint;
@@ -582,9 +582,7 @@ void help_index_cmd (Dlg_head *h)
 
 static void quit_cmd (void *x)
 {
-    Dlg_head *h = (Dlg_head *) x;
-    
-    dlg_stop (x);
+    dlg_stop ((Dlg_head *)x);
 }
 
 static void prev_node_cmd (Dlg_head *h)
@@ -773,7 +771,7 @@ void interactive_display (char *filename, char *node)
 		 filename, unix_error_string (errno));
 	return;
     }
-    if (!(main = search_string (data, node))){
+    if (!(main_node = search_string (data, node))){
 	message (1, MSG_ERROR, _(" Can't find node %s in help file "), node);
 	interactive_display_finish ();
 	return;
@@ -790,8 +788,8 @@ void interactive_display (char *filename, char *node)
     whelp->raw = 1;
 
 #endif    
-    selected_item = search_string_node (main, STRING_LINK_START) - 1;
-    currentpoint = startpoint = main + 1;
+    selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
+    currentpoint = startpoint = main_node + 1;
 
     for (history_ptr = HISTORY_SIZE; history_ptr;){
 	history_ptr--;
