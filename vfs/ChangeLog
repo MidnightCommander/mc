@@ -1,3 +1,8 @@
+1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (mad.c, mad.h): Create symlinks to counterparts in
+	`mc-src'. 
+
 Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 
 	* extfs/patchfs: %k replaced with more portable %H in the format
