@@ -879,7 +879,7 @@ int get_compression_type (int fd)
     return 0;
 }
 
-char *
+const char *
 decompress_extension (int type)
 {
 	switch (type){
@@ -1000,22 +1000,21 @@ char *convert_controls (char *s)
 		*q++ = *p++;
 	}
     }
-    *q++ = 0;
+    *q = 0;
     return valcopy;
 }
 
 /* Reverse the string */
 char *reverse_string (char *string)
 {
-    int len = strlen (string);
-    int i;
-    const int steps = len/2;
+    char *str_beg = string;
+    char *str_end = string + strlen (string);
     
-    for (i = 0; i < steps; i++){
-	char c = string [i];
+    while (--str_end > str_beg){
+	char c = *str_end;
     
-	string [i] = string [len-i-1];
-	string [len-i-1] = c;
+	*str_end = *str_beg;
+	*str_beg++ = c;
     }
     return string;
 }
