@@ -1,3 +1,9 @@
+2002-02-20  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in (FILES): Use ~/.mc/bindings instead of
+	~/.mc/ext, ~/.mc/ini instead of ~/.mc.ini.
+	Fix tarfs URL syntax example.  Minor typo and format fixes.
+
 2002-02-14  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* doc/mc.1.in (FILES): Use MC_LIBDIR instead of MCHOME.

@@ -1248,7 +1248,7 @@ internal cd command
 description.
 .PP
 .SH "    Extension File Edit"
-This will invoke your editor on the file ~/.mc/ext. The format of this
+This will invoke your editor on the file ~/.mc/bindings. The format of this
 file is as follows (the format has changed with version 3.0):
 .PP
 All lines starting with # or empty lines are thrown away.
@@ -1540,7 +1540,7 @@ soon as you press the
 .B F9
 key.  Otherwise, you will only get the menu title, and you will have
 to activate the menu either with the arrow keys or with the hotkeys.
-It is recommanded if you are using hotkeys.
+It is recommended if you are using hotkeys.
 .PP
 .I Mix all files.
 If this option is enabled, all files and directories are shown mixed
@@ -1671,7 +1671,7 @@ command will be invoked if you run the
 .\"LINK2"
 Chmod
 .\"Chmod"
- or 
+or 
 .\"LINK2"
 Chown
 .\"Chown"
@@ -2488,17 +2488,17 @@ work.
 .PP
 To define a macro, press 
 .B Ctrl-R
- and then type out the key
+and then type out the key
 strokes you want to be executed. Press 
 .B Ctrl-R
- again when finished. You can then assign the macro to any key you
+again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
 .B Ctrl-A and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
 commands go into the file 
 .B .mc/cedit/cooledit.macros
- in your home directory. You can delete a macro by deleting the
+in your home directory. You can delete a macro by deleting the
 appropriate line in this file.
 .PP
 .B F19
@@ -2698,7 +2698,7 @@ files and compressed tar files by using the chdir command.  To change
 your directory to a tar file, you change your current directory to the
 tar file by using the following syntax:
 .PP
-.I /filename.tar:utar/[dir-inside-tar]
+.I /filename.tar#utar/[dir-inside-tar]
 .PP
 The mc.ext file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
@@ -2730,12 +2730,12 @@ format:
 .nf
 /#sh:[user@]machine[:options]/[remote-dir]
 .fi
-The, 
+The 
 .I user, 
 .I options
 and 
 .I remote-dir
- elements are optional. If
+elements are optional. If
 you specify the 
 .I user
 element then the Midnight Commander
@@ -2769,7 +2769,7 @@ directory which name is in the following format:
 .PP
 .I /#mc:[user@]machine[:port][remote-dir]
 .PP
-The,
+The
 .I user, port
 and
 .I remote-dir
@@ -2954,7 +2954,7 @@ These variables may be set in your ~/.mc/ini file:
 .IP
 By default the Midnight Commander clears the screen before executing a
 command. If you would prefer to see the output of the command at the
-bottom of the screen, edit your ~/mc.ini file and change the value of
+bottom of the screen, edit your ~/.mc/ini file and change the value of
 the field clear_before_exec to 0.
 .PP
 .I confirm_view_dir.
@@ -2971,7 +2971,7 @@ If the value is zero, the login will no be retried.
 .PP
 .I ftpfs_use_passive_connections.
 .IP
-This option is by off default.  This makes the ftpfs code use the
+This option is off by default.  This makes the ftpfs code use the
 passive open mode for transferring files.  This is used by people that
 are behind a filtering packet router.  This option just works if you
 are not using an ftp proxy.
@@ -3119,7 +3119,7 @@ The help file for the program.
 .IP
 The default system-wide extensions file.
 .PP
-~/.mc/ext
+~/.mc/bindings
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
