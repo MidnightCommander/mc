@@ -494,7 +494,7 @@ regex_command (char *filename, char *action, int *move_dir)
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
 Midnight Commander package."), NULL);
-		    message (1, msg, msg2);
+		    message (1, msg, "%s", msg2);
 		    g_free (msg);
 		    g_free (msg2);
 		    return 0;
@@ -513,7 +513,7 @@ copy it from "), mc_home, _("mc.ext or use that\n\
 file as an example of how to write it.\n\
 "), mc_home, _("mc.ext will be used for this moment."),
 			     NULL);
-	    message (1, msg, msg2);
+	    message (1, msg, "%s", msg2);
 	    g_free (msg);
 	    g_free (msg2);
 	}

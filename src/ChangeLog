@@ -2,6 +2,8 @@
 
 	* ext.c (regex_command): Use "%s" as text argument.
 
+	* win.c (key_name_conv_tab): Fix initialization.
+
 2002-08-31  Pavel Roskin  <proski@gnu.org>
 
 	* help.c (show): Fix segfault on unterminated help files.
