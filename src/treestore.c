@@ -770,7 +770,7 @@ should_skip_directory(char *dir)
 	loaded = 1;
 	setup_init();
 	process_special_dirs(&special_dirs, profile_name);
-	process_special_dirs(&special_dirs, CONFDIR "mc.global");
+	process_special_dirs(&special_dirs, global_profile_name);
     }
 
     for (l = special_dirs; l; l = l->next) {

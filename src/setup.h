@@ -19,6 +19,7 @@ void save_panel_types (void);
 char *load_anon_passwd (void);
 
 extern char *profile_name;
+extern char *global_profile_name;
 
 extern char setup_color_string [];
 extern char term_color_string [];

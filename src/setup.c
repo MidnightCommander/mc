@@ -61,7 +61,8 @@ extern char *find_ignore_dirs;
 
 extern int num_history_items_recorded;
 
-char *profile_name;
+char *profile_name;		/* .mc/ini */
+char *global_profile_name;	/* mc.lib */
 
 char setup_color_string [4096];
 char term_color_string [4096];
@@ -499,6 +500,11 @@ load_setup (void)
     int    i;
 
     profile = setup_init ();
+
+    /* mc.lib is common for all users, but has priority lower than
+       ~/.mc/ini.  FIXME: it's only used for keys and treestore now */
+    global_profile_name = concat_dir_and_file (mc_home, "mc.lib");
+
     /* Load integer boolean options */
     for (i = 0; options [i].opt_name; i++)
 	*options [i].opt_addr =
@@ -586,6 +592,7 @@ load_anon_passwd ()
 void done_setup (void)
 {
     g_free (profile_name);
+    g_free (global_profile_name);
     done_hotlist ();
     done_panelize ();
 /*    directory_history_free (); */
@@ -624,18 +631,15 @@ load_keys_from_section (char *terminal, char *profile_name)
 
 void load_key_defs (void)
 {
-    char *libfile = concat_dir_and_file (mc_home, "mc.lib");
-
     /*
      * Load keys from mc.lib before ~/.mc/ini, so that the user
      * definitions override global settings.
      */
-    load_keys_from_section ("general", libfile);
-    load_keys_from_section (getenv ("TERM"), libfile);
+    load_keys_from_section ("general", global_profile_name);
+    load_keys_from_section (getenv ("TERM"), global_profile_name);
     load_keys_from_section ("general", profile_name);
     load_keys_from_section (getenv ("TERM"), profile_name);
 
     /* We don't want a huge database loaded in core */
-    free_profile_name (libfile);
-    g_free (libfile);
+    free_profile_name (global_profile_name);
 }

@@ -1,12 +1,19 @@
 2002-08-16  Pavel Roskin  <proski@gnu.org>
 
+	* setup.c: New variable global_profile_name to hold full name of
+	mc.lib.
+	(load_setup): Calculate global_profile_name.
+	(done_setup): Free global_profile_name.
+	(load_key_defs): Use global_profile_name.
+	* treestore.c (should_skip_directory): Likewise.
+
 	* man2hlp.c: Implement persistent fread and fwrite to make sure
 	that all output is read and written.
 
 2002-08-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* help.c (show): Cast *paint_start to unsigned char to display
-	Cyryllic with ncurses.
+	Cyrillic with ncurses.
 	[HAS_ACS_AS_PCCHARS] (acs2pc_table): Make const.
 
 	* user.c (expand_format): Cast the argument to functions
