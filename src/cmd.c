@@ -931,20 +931,15 @@ view_other_cmd (void)
 }
 
 static void
-do_link (int symbolic_link, char *fname)
+do_link (int symbolic_link, const char *fname)
 {
-    char *dest, *src;
+    char *dest = NULL, *src = NULL;
 
     if (!symbolic_link) {
 	src = g_strdup_printf (_("Link %s to:"), name_trunc (fname, 46));
 	dest = input_expand_dialog (_(" Link "), src, "");
-	g_free (src);
-	if (!dest)
-	    return;
-	if (!*dest) {
-	    g_free (dest);
-	    return;
-	}
+	if (!dest || !*dest)
+	    goto cleanup;
 	save_cwds_stat ();
 	if (-1 == mc_link (fname, dest))
 	    message (1, MSG_ERROR, _(" link: %s "),
@@ -966,22 +961,20 @@ do_link (int symbolic_link, char *fname)
 	g_free (d);
 	g_free (s);
 
-	if (!dest || !*dest || !src || !*src) {
-	    if (src)
-		g_free (src);
-	    if (dest)
-		g_free (dest);
-	    return;
-	}
+	if (!dest || !*dest || !src || !*src)
+	    goto cleanup;
 	save_cwds_stat ();
 	if (-1 == mc_symlink (dest, src))
 	    message (1, MSG_ERROR, _(" symlink: %s "),
 		     unix_error_string (errno));
-	g_free (src);
     }
-    g_free (dest);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
+cleanup:
+    if (src != NULL)
+        g_free (src);
+    if (dest != NULL)
+        g_free (dest);
 }
 
 void link_cmd (void)
