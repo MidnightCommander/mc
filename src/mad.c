@@ -38,7 +38,7 @@
 
 /* Maximum number of memory area handles,
    increase this if you run out of handles */
-#define MAD_MAX_AREAS 3000
+#define MAD_MAX_AREAS 10000
 /* Maximum file name length */
 #define MAD_MAX_FILE 50
 /* Signature for detecting overwrites */
@@ -197,11 +197,12 @@ void mad_free (void *ptr, char *file, int line)
     mad_check (file, line);
 
     if (watch_free_pointer && ptr == watch_free_pointer){
-	printf ("watch free pointer found\n");
+	fprintf (stderr, "MAD: Watch free pointer found in file \"%s\" at line %d.\r\n",
+		 file, line);
     }
     
     if (ptr == NULL){
-	fprintf (stderr, "MAD: Attempted to free a NULL pointer in file \"%s\" at line %d.\n",
+	fprintf (stderr, "MAD: Attempted to free a NULL pointer in file \"%s\" at line %d.\r\n",
 		 file, line);
 	return;
     }
@@ -238,7 +239,7 @@ void mad_finalize (char *file, int line)
     for (i = 0; i < MAD_MAX_AREAS; i++){
  	if (! mem_areas [i].in_use)
 	    continue;
-	fprintf (stderr, "MAD: Unfreed pointer: %p.\n", mem_areas [i].data);
+	fprintf (stderr, "MAD: Unfreed pointer: %p.\r\n", mem_areas [i].data);
 	fprintf (stderr, "     Allocated in file \"%s\" at line %d.\r\n",
 		 mem_areas [i].file, mem_areas [i].line);
 	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",

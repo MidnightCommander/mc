@@ -1,4 +1,6 @@
-Fri Sep 18 13:11:29 1998  Pavel Roskin <pavel_roskin@geocities.com>
+Fri Sep 18 14:15:43 1998  Pavel Roskin <pavel_roskin@geocities.com>
+
+	* src/mad.c: All messages are sent to stderr and terminate with \r\n
 
 	* src/hotlist.c: Harmless memory leak fixed
 
