@@ -709,10 +709,10 @@ setup_panels (void)
     if (message_visible) {
 	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
 	set_hintbar ("");	/* clean up the line */
-	load_hint ();
     } else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
+    load_hint ();
     update_xterm_title_path ();
 }
 

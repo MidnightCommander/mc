@@ -1,5 +1,9 @@
 2002-12-27  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c (setup_panels): Revert unnecessary part of the
+	previous patch.  Call load_hint regardless of message_visible.
+	Reported by Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
+
 	* key.c (correct_key_code): Don't call get_modifier() for normal
 	characters - they only should get modifiers from sequences
 	tables.  This fixes entering characters with AltGr.
@@ -11,7 +15,7 @@
 
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
-	* key,c (get_modifier): Warning fix.
+	* key.c (get_modifier): Warning fix.
 
 	* file.c: Never access internals of ctx->rx directly.
 	* fileopctx.c (file_op_context_destroy): Use regfree() to free
@@ -732,7 +736,7 @@
 	* main.c (OS_Setup): Use DATADIR instead of LIBDIR.  Rename
 	MC_LIBDIR to MC_DATADIR.
 
-	* panelize,c: Remove unused variable panelize_title.
+	* panelize.c: Remove unused variable panelize_title.
 
 	* view.c (view_event): Add mouse wheel support.
 
@@ -3726,7 +3730,7 @@
 2000-01-02  viro@math.psu.edu
 
 	* src/subshell.c: Reason: in feed_subshell() we are trying to read
-	from shell pty,check for retval==-1 && errno != EIO. In that case
+	from shell pty, check for retval==-1 && errno != EIO. In that case
 	we flame and exit. Otherwise we are trying to write what we've
 	read. Good luck doing it if we got errno==EIO, which is _normal_
 	for situation when shell just died. Resulting write(1,foo,~0U) is
@@ -6642,7 +6646,7 @@ Sat Mar  7 14:33:38 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 	* vfs/vfs.h: Minor changes for OS/2. EMX defines mkdir with
 	2 arguments
 
-	* vfs/tcputil,c, vfs/utilvfs.c: signal.h was includes twice.
+	* vfs/tcputil.c, vfs/utilvfs.c: signal.h was includes twice.
 
 	* vfs/Makefile.in: undelfs.h is not used and should disapper
 
