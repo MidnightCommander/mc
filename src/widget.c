@@ -42,6 +42,7 @@
 #include "complete.h"
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "profile.h"	/* for history loading and saving */
+#include "wtools.h"		/* For common_dialog_repaint() */
 
 static int button_event (Gpm_Event *event, WButton *b);
 
@@ -898,29 +899,13 @@ i18n_htitle (void)
     return history_title;	
 }
 
-static int
-history_callback (Dlg_head * h, int Par, int Msg)
-{
-    switch (Msg) {
-    case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 0, 0, h->lines, h->cols);
-	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 0, (h->cols - strlen (i18n_htitle())) / 2);
-	printw (i18n_htitle());
-	break;
-    }
-    return 0;
-}
-
 static inline int listbox_fwd (WListbox *l);
 
 char *
-show_hist (Hist *history, int widget_x, int widget_y)
+show_hist (Hist * history, int widget_x, int widget_y)
 {
     Hist *hi, *z;
-    size_t maxlen = strlen (i18n_htitle()), i, count = 0;
+    size_t maxlen = strlen (i18n_htitle ()), i, count = 0;
     int x, y, w, h;
     char *q, *r = 0;
     Dlg_head *query_dlg;
@@ -928,66 +913,64 @@ show_hist (Hist *history, int widget_x, int widget_y)
 
     z = history;
     if (!z)
-		return 0;
+	return 0;
 
     while (z->prev)		/* goto first */
-		z = z->prev;
+	z = z->prev;
     hi = z;
     while (hi) {
-		if ((i = strlen (hi->text)) > maxlen)
-		    maxlen = i;
-		count++;
-		hi = hi->next;
+	if ((i = strlen (hi->text)) > maxlen)
+	    maxlen = i;
+	count++;
+	hi = hi->next;
     }
 
-       y = widget_y;
-	h = count + 2;
-	if (h <= y || y > LINES - 6)
-	{
-		h = min(h, y - 1);
-		y -= h;
-	}
-	else
-	{
-		y++;
-		h = min(h, LINES - y);
-	}
+    y = widget_y;
+    h = count + 2;
+    if (h <= y || y > LINES - 6) {
+	h = min (h, y - 1);
+	y -= h;
+    } else {
+	y++;
+	h = min (h, LINES - y);
+    }
 
-	if (widget_x > 2)
-	    x = widget_x - 2;
-        else
-            x = 0;
-	if ((w = maxlen + 4) + x > COLS)
-	{
-		w = min(w,COLS);
-		x = COLS - w;
-	}
+    if (widget_x > 2)
+	x = widget_x - 2;
+    else
+	x = 0;
+    if ((w = maxlen + 4) + x > COLS) {
+	w = min (w, COLS);
+	x = COLS - w;
+    }
 
-    query_dlg = create_dlg (y, x, h, w, dialog_colors, history_callback,
-			    "[History-query]", "history", DLG_NONE);
+    query_dlg =
+	create_dlg (y, x, h, w, dialog_colors, common_dialog_callback,
+		    "[History-query]", "history", DLG_COMPACT);
+    x_set_dialog_title (query_dlg, i18n_htitle ());
     query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0, NULL);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
-		while (hi) {		/* traverse */
-		    listbox_add_item (query_list, 0, 0, hi->text, NULL);
-	    	hi = hi->next;
-		}
-		while (listbox_fwd (query_list));
+	while (hi) {		/* traverse */
+	    listbox_add_item (query_list, 0, 0, hi->text, NULL);
+	    hi = hi->next;
+	}
+	while (listbox_fwd (query_list));
     } else {
-		while (hi->next)
-		    hi = hi->next;
-		while (hi) {		/* traverse backwards */
-		    listbox_add_item (query_list, 0, 0, hi->text, NULL);
-	    	hi = hi->prev;
-		}
+	while (hi->next)
+	    hi = hi->next;
+	while (hi) {		/* traverse backwards */
+	    listbox_add_item (query_list, 0, 0, hi->text, NULL);
+	    hi = hi->prev;
+	}
     }
     run_dlg (query_dlg);
     q = NULL;
     if (query_dlg->ret_value != B_CANCEL) {
-		listbox_get_current (query_list, &q, NULL);
-		if (q)
-		    r = g_strdup (q);
+	listbox_get_current (query_list, &q, NULL);
+	if (q)
+	    r = g_strdup (q);
     }
     destroy_dlg (query_dlg);
     return r;
