@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54a\n"
-"POT-Creation-Date: 2001-10-24 13:07+0200\n"
-"PO-Revision-Date: 2001-10-24 13:08CET\n"
+"POT-Creation-Date: 2001-11-27 11:41+0100\n"
+"PO-Revision-Date: 2001-11-27 11:41CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
@@ -14,64 +14,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.5\n"
 
-#: edit/edit_key_translator.c:127
+#: edit/edit_key_translator.c:135
 msgid " Emacs key: "
 msgstr "Emacs kláves: "
 
-#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
+#: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 msgid " Execute Macro "
 msgstr "Spusti» makro "
 
-#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
-#: edit/editcmd.c:636
+#: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
+#: edit/editcmd.c:621
 msgid " Press macro hotkey: "
 msgstr "Stlaète kláves pre makro: "
 
-#: edit/edit_key_translator.c:160
+#: edit/edit_key_translator.c:168
 msgid " Insert Literal "
 msgstr " Vlo¾i» znak "
 
-#: edit/edit_key_translator.c:160
+#: edit/edit_key_translator.c:168
 msgid " Press any key: "
 msgstr "Stlaète nejakú klávesu:"
 
 #. The file-name is printed after the ':'
-#: edit/edit.c:187 edit/edit.c:356 edit/edit.c:361 edit/edit.c:375
-#: edit/edit.c:379 edit/edit.c:416 edit/edit.c:424 edit/edit.c:432
-#: edit/edit.c:439 edit/editcmd.c:256 edit/editcmd.c:262 edit/editcmd.c:1590
-#: src/dir.c:427 src/wtools.c:216
+#: edit/edit.c:187 edit/edit.c:353 edit/edit.c:358 edit/edit.c:372
+#: edit/edit.c:376 edit/edit.c:413 edit/edit.c:421 edit/edit.c:429
+#: edit/edit.c:436 edit/editcmd.c:241 edit/editcmd.c:247 edit/editcmd.c:1565
+#: src/dir.c:422 src/wtools.c:204
 msgid " Error "
 msgstr " Chyba "
 
-#: edit/edit.c:187 edit/edit.c:379 edit/edit.c:424
+#: edit/edit.c:187 edit/edit.c:376 edit/edit.c:421
 msgid " Failed trying to open file for reading: "
 msgstr " Neúspe¹nı pokus o otvorenie súboru pre èítanie: "
 
-#: edit/edit.c:356
+#: edit/edit.c:353
 msgid " Error reading from pipe: "
 msgstr " Chyba pri èítaní z rúry: "
 
-#: edit/edit.c:361
+#: edit/edit.c:358
 msgid " Failed trying to open pipe for reading: "
 msgstr " Neúspe¹nı pokus o otvorenie rúry pre èítanie: "
 
-#: edit/edit.c:375
+#: edit/edit.c:372
 msgid " Error reading file: "
 msgstr " Chyba poèas èítania súboru:"
 
-#: edit/edit.c:416
+#: edit/edit.c:413
 msgid " Not an ordinary file: "
 msgstr " Toto nie je súbor ordinálneho typu: "
 
-#: edit/edit.c:432
+#: edit/edit.c:429
 msgid " Cannot get size/permissions info on file: "
 msgstr " Nemô¾em získa» info súbor o veµkosti/právach: "
 
-#: edit/edit.c:439
+#: edit/edit.c:436
 msgid " File is too large: "
 msgstr " Súbor je príli¹ veµkı: "
 
-#: edit/edit.c:440
+#: edit/edit.c:437
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -79,158 +79,158 @@ msgstr ""
 " \n"
 " Zvı¹ edit.h:MAXBUF a prekompiluj editor. "
 
-#: edit/edit.c:2545
+#: edit/edit.c:2535
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Pou¾ívateµské menu k dispozícii iba v mcedit spustenom z mc"
 
-#: edit/edit.h:352
+#: edit/edit.h:355
 msgid "&Dismiss"
 msgstr "&Odmietnu»"
 
 #. 1
-#: edit/edit.h:354 edit/editcmd.c:343 edit/editcmd.c:1102 edit/editcmd.c:1187
-#: edit/editcmd.c:2363 edit/editmenu.c:37 edit/editoptions.c:69
+#: edit/edit.h:357 edit/editcmd.c:328 edit/editcmd.c:1084 edit/editcmd.c:1165
+#: edit/editcmd.c:2338 edit/editmenu.c:37 edit/editoptions.c:69
 #: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
 #: src/boxes.c:616 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
 #: src/filegui.c:798 src/find.c:151 src/layout.c:365 src/option.c:135
-#: src/wtools.c:284 src/wtools.c:546
+#: src/wtools.c:522
 msgid "&Ok"
 msgstr "Án&o"
 
-#: edit/editcmd.c:256
+#: edit/editcmd.c:241
 msgid " Error writing to pipe: "
 msgstr " Chyba poèas zápisu do rúry: "
 
-#: edit/editcmd.c:262
+#: edit/editcmd.c:247
 msgid " Failed trying to open pipe for writing: "
 msgstr " Neúspe¹nı pokus o otvorenie rúry pre zápis: "
 
-#: edit/editcmd.c:336
+#: edit/editcmd.c:321
 msgid "Quick save "
 msgstr "Rıchle ulo¾."
 
-#: edit/editcmd.c:337
+#: edit/editcmd.c:322
 msgid "Safe save "
 msgstr "Bezpeèné ulo¾."
 
-#: edit/editcmd.c:338
+#: edit/editcmd.c:323
 msgid "Do backups -->"
 msgstr "Zálo¾. kópiu do"
 
 #. 0
-#: edit/editcmd.c:341 edit/editcmd.c:1041 edit/editcmd.c:1100
-#: edit/editcmd.c:1185 edit/editcmd.c:2361 edit/editoptions.c:66
+#: edit/editcmd.c:326 edit/editcmd.c:1026 edit/editcmd.c:1082
+#: edit/editcmd.c:1163 edit/editcmd.c:2336 edit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:145 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:467 src/boxes.c:613 src/boxes.c:751 src/boxes.c:1056
 #: src/chmod.c:107 src/chown.c:77 src/cmd.c:839 src/filegui.c:781
 #: src/find.c:151 src/hotlist.c:123 src/hotlist.c:495 src/hotlist.c:785
 #: src/hotlist.c:882 src/layout.c:366 src/learn.c:59 src/option.c:136
-#: src/panelize.c:74 src/view.c:398 src/wtools.c:107 src/wtools.c:374
-#: src/wtools.c:544
+#: src/panelize.c:73 src/view.c:398 src/wtools.c:101 src/wtools.c:352
+#: src/wtools.c:520
 msgid "&Cancel"
 msgstr "&Zru¹"
 
-#: edit/editcmd.c:347
+#: edit/editcmd.c:332
 msgid "Extension:"
 msgstr "Prípona:"
 
-#: edit/editcmd.c:353
+#: edit/editcmd.c:338
 msgid " Edit Save Mode "
 msgstr " Upravi» mód ukladania "
 
-#: edit/editcmd.c:418
+#: edit/editcmd.c:403
 msgid " Save As "
 msgstr " Ulo¾i» ako "
 
 #. Warning message with a query to continue or cancel the operation
-#: edit/editcmd.c:432 edit/editcmd.c:721 edit/editcmd.c:746 edit/editcmd.c:893
-#: edit/editcmd.c:991 src/file.c:609 src/help.c:314 src/main.c:648
-#: src/screen.c:1400 src/screen.c:2077 src/screen.c:2127 src/selcodepage.c:75
-#: src/selcodepage.c:92 src/subshell.c:726 src/subshell.c:752
+#: edit/editcmd.c:417 edit/editcmd.c:706 edit/editcmd.c:731 edit/editcmd.c:878
+#: edit/editcmd.c:976 src/file.c:599 src/help.c:314 src/main.c:654
+#: src/screen.c:1366 src/screen.c:1992 src/selcodepage.c:75
+#: src/selcodepage.c:92 src/subshell.c:723 src/subshell.c:749
 #: src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394 src/utilunix.c:445
 #: vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Varovanie "
 
-#: edit/editcmd.c:433
+#: edit/editcmd.c:418
 msgid " A file already exists with this name. "
 msgstr " Súbor s danım meno u¾ existuje. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: edit/editcmd.c:435
+#: edit/editcmd.c:420
 msgid "Overwrite"
 msgstr "Prepísa»"
 
-#: edit/editcmd.c:435 edit/editcmd.c:499 edit/editcmd.c:697 edit/editcmd.c:721
-#: edit/editcmd.c:746 edit/editcmd.c:893
+#: edit/editcmd.c:420 edit/editcmd.c:485 edit/editcmd.c:682 edit/editcmd.c:706
+#: edit/editcmd.c:731 edit/editcmd.c:878
 msgid "Cancel"
 msgstr "Zru¹"
 
-#: edit/editcmd.c:452
+#: edit/editcmd.c:438
 msgid " Save as "
 msgstr " Ulo¾i» ako "
 
-#: edit/editcmd.c:452 edit/editcmd.c:2117
+#: edit/editcmd.c:438 edit/editcmd.c:2094
 msgid " Error trying to save file. "
 msgstr " Chyba poèas ukladania súboru. "
 
 #. This heads the delete macro error dialog box
-#: edit/editcmd.c:555 edit/editcmd.c:563 edit/editcmd.c:588
+#: edit/editcmd.c:540 edit/editcmd.c:548 edit/editcmd.c:573
 msgid " Delete macro "
 msgstr " Zmaza» makro "
 
 #. 'Open' = load temp file
-#: edit/editcmd.c:557
+#: edit/editcmd.c:542
 msgid " Error trying to open temp file "
 msgstr " Chyba poèas otvárania temp súboru "
 
 #. 'Open' = load temp file
-#: edit/editcmd.c:565 edit/editcmd.c:626 edit/editcmd.c:683
+#: edit/editcmd.c:550 edit/editcmd.c:611 edit/editcmd.c:668
 msgid " Error trying to open macro file "
 msgstr " Chyba poèas otvárania makro súboru "
 
-#: edit/editcmd.c:589
+#: edit/editcmd.c:574
 msgid " Error trying to overwrite macro file "
 msgstr " Chyba poèas prepisovania makro súboru "
 
 #. This heads the 'Macro' dialog box
-#: edit/editcmd.c:605
+#: edit/editcmd.c:590
 msgid " Macro "
 msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
-#: edit/editcmd.c:607
+#: edit/editcmd.c:592
 msgid " Press the macro's new hotkey: "
 msgstr " Stlaète nové makro hotkey: "
 
 #. This heads the 'Save Macro' dialog box
-#: edit/editcmd.c:626
+#: edit/editcmd.c:611
 msgid " Save macro "
 msgstr " Ulo¾i» makro "
 
-#: edit/editcmd.c:635
+#: edit/editcmd.c:620
 msgid " Delete Macro "
 msgstr " Zmaza» makro "
 
 #. This heads the 'Load Macro' dialog box
-#: edit/editcmd.c:682
+#: edit/editcmd.c:667
 msgid " Load macro "
 msgstr " Nahra» makro "
 
-#: edit/editcmd.c:695
+#: edit/editcmd.c:680
 msgid " Confirm save file? : "
 msgstr " Potvrdi» ulo¾enie súboru? : "
 
 #. Buttons to 'Confirm save file' query
-#: edit/editcmd.c:697
+#: edit/editcmd.c:682
 msgid " Save file "
 msgstr " Ulo¾i» súbor "
 
-#: edit/editcmd.c:697 edit/editwidget.c:236 src/view.c:2018
+#: edit/editcmd.c:682 edit/editwidget.c:236 src/view.c:2017
 msgid "Save"
 msgstr "Ulo¾i»"
 
-#: edit/editcmd.c:721 edit/editcmd.c:746
+#: edit/editcmd.c:706 edit/editcmd.c:731
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -238,254 +238,254 @@ msgstr ""
 " Aktuálny text bol modifikovanı bez ulo¾enia súboru. \n"
 " Pokraèova» zru¹ením tıchto zmien. "
 
-#: edit/editcmd.c:721 edit/editcmd.c:746 edit/editcmd.c:893
+#: edit/editcmd.c:706 edit/editcmd.c:731 edit/editcmd.c:878
 msgid "Continue"
 msgstr "Pokraèova»"
 
-#: edit/editcmd.c:752
+#: edit/editcmd.c:737
 msgid " Load "
 msgstr " Nahra» "
 
-#: edit/editcmd.c:893 edit/editcmd.c:991
+#: edit/editcmd.c:878 edit/editcmd.c:976
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "Blok je príli¹ veµkı, mo¾no nebude mo¾né stornova» túto akciu. "
 
-#: edit/editcmd.c:991
+#: edit/editcmd.c:976
 msgid " Continue "
 msgstr " Pokraèova» "
 
-#: edit/editcmd.c:991
+#: edit/editcmd.c:976
 msgid " Cancel "
 msgstr " Zru¹i» "
 
-#: edit/editcmd.c:1043
+#: edit/editcmd.c:1028
 msgid "o&Ne"
 msgstr "Jede&N"
 
-#: edit/editcmd.c:1045 src/filegui.c:558
+#: edit/editcmd.c:1030 src/filegui.c:558
 msgid "al&L"
 msgstr "&V¹etko"
 
-#: edit/editcmd.c:1047 src/file.c:2185 src/filegui.c:249
+#: edit/editcmd.c:1032 src/file.c:2099 src/filegui.c:249
 msgid "&Skip"
 msgstr "&Preskoèi»"
 
-#: edit/editcmd.c:1049
+#: edit/editcmd.c:1034
 msgid "&Replace"
 msgstr "&Nahradi»"
 
-#: edit/editcmd.c:1058 edit/editcmd.c:1063
+#: edit/editcmd.c:1041 edit/editcmd.c:1048
 msgid " Replace with: "
 msgstr " Nahradi» s: "
 
-#: edit/editcmd.c:1068
+#: edit/editcmd.c:1053
 msgid " Confirm replace "
 msgstr " Potvrdi» nahradenie "
 
-#: edit/editcmd.c:1104 edit/editcmd.c:1189
+#: edit/editcmd.c:1086 edit/editcmd.c:1167
 msgid "scanf &Expression"
 msgstr "scanf v&Yjadrenie"
 
-#: edit/editcmd.c:1106
+#: edit/editcmd.c:1088
 msgid "replace &All"
 msgstr "nahradi» v¹&Etko"
 
-#: edit/editcmd.c:1108
+#: edit/editcmd.c:1090
 msgid "pr&Ompt on replace"
 msgstr "&Vyzva» pri nahradení"
 
-#: edit/editcmd.c:1110 edit/editcmd.c:1191
+#: edit/editcmd.c:1092 edit/editcmd.c:1169
 msgid "&Backwards"
 msgstr "&Spä»"
 
-#: edit/editcmd.c:1112 edit/editcmd.c:1193
+#: edit/editcmd.c:1094 edit/editcmd.c:1171
 msgid "&Regular expression"
 msgstr "sp&Rávne vıraz"
 
-#: edit/editcmd.c:1114 edit/editcmd.c:1195
+#: edit/editcmd.c:1096 edit/editcmd.c:1173
 msgid "&Whole words only"
 msgstr "&Iba celé slová"
 
-#: edit/editcmd.c:1116 edit/editcmd.c:1197 src/find.c:144
+#: edit/editcmd.c:1098 edit/editcmd.c:1175 src/find.c:144
 msgid "case &Sensitive"
 msgstr "&Citlivı na veµkos»"
 
-#: edit/editcmd.c:1120
+#: edit/editcmd.c:1102
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Zadajte poradie argumentu nahradenia eg. 3,2,1,4"
 
-#: edit/editcmd.c:1124
+#: edit/editcmd.c:1106
 msgid " Enter replacement string:"
 msgstr " Zadajte re»azec pre nahradenie:"
 
-#: edit/editcmd.c:1128 edit/editcmd.c:1201 src/view.c:1933
+#: edit/editcmd.c:1110 edit/editcmd.c:1179 src/view.c:1932
 msgid " Enter search string:"
 msgstr " Zadajte re»azec pre hµadanie:"
 
-#: edit/editcmd.c:1147 edit/editcmd.c:1786 edit/editcmd.c:1817
-#: edit/editcmd.c:1819
+#: edit/editcmd.c:1129 edit/editcmd.c:1763 edit/editcmd.c:1794
+#: edit/editcmd.c:1796
 msgid " Replace "
 msgstr " Nahradi» "
 
-#: edit/editcmd.c:1215 edit/editcmd.c:1897 edit/editcmd.c:1899
-#: edit/editcmd.c:1927 src/view.c:1464 src/view.c:1543 src/view.c:1663
-#: src/view.c:1675 src/view.c:1891 src/view.c:1933
+#: edit/editcmd.c:1193 edit/editcmd.c:1874 edit/editcmd.c:1876
+#: edit/editcmd.c:1904 src/view.c:1463 src/view.c:1542 src/view.c:1662
+#: src/view.c:1674 src/view.c:1890 src/view.c:1932
 msgid " Search "
 msgstr " Hµada» "
 
-#: edit/editcmd.c:1590
+#: edit/editcmd.c:1565
 msgid " Invalid regular expression, or scanf expression with to many conversions "
 msgstr " Nesprávny vıraz, alebo scanf vıraz s mnohımi zmenami "
 
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1788
+#: edit/editcmd.c:1765
 msgid " Error in replacement format string. "
 msgstr " Chyba vo forme nahradzovaného re»azca. "
 
-#: edit/editcmd.c:1816
+#: edit/editcmd.c:1793
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld náhrada vyrobená . "
 
-#: edit/editcmd.c:1819 edit/editcmd.c:1899 edit/editcmd.c:1927
+#: edit/editcmd.c:1796 edit/editcmd.c:1876 edit/editcmd.c:1904
 msgid " Search string not found. "
 msgstr " Hµadanı re»azec nebol nájdenı. "
 
 #. in response to number of bookmarks added because of string being found %d times
-#: edit/editcmd.c:1896
+#: edit/editcmd.c:1873
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d nájdenıch, %d pridanıch zálo¾iek"
 
-#: edit/editcmd.c:1945
+#: edit/editcmd.c:1922
 msgid " Quit "
 msgstr " Ukonèi»"
 
-#: edit/editcmd.c:1945
+#: edit/editcmd.c:1922
 msgid " File was modified, Save with exit? "
 msgstr " Súbor bol zmenenı, Ulo¾i» a ukonèi»? "
 
-#: edit/editcmd.c:1945
+#: edit/editcmd.c:1922
 msgid "Cancel quit"
 msgstr "Zru¹i» ukonèenie"
 
-#: edit/editcmd.c:1945 src/cmd.c:228 src/file.c:1873 src/file.c:2244
-#: src/filegui.c:564 src/hotlist.c:1006 src/main.c:802 src/screen.c:2114
-#: src/subshell.c:727 src/subshell.c:753 src/tree.c:755 src/view.c:398
+#: edit/editcmd.c:1922 src/cmd.c:228 src/file.c:1798 src/file.c:2157
+#: src/filegui.c:564 src/hotlist.c:1006 src/main.c:808 src/screen.c:1979
+#: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&Yes"
 msgstr "Án&o "
 
-#: edit/editcmd.c:1945 src/cmd.c:228 src/file.c:1873 src/file.c:2244
-#: src/filegui.c:563 src/hotlist.c:1006 src/main.c:802 src/screen.c:2114
-#: src/subshell.c:727 src/subshell.c:753 src/tree.c:755 src/view.c:398
+#: edit/editcmd.c:1922 src/cmd.c:228 src/file.c:1798 src/file.c:2157
+#: src/filegui.c:563 src/hotlist.c:1006 src/main.c:808 src/screen.c:1979
+#: src/subshell.c:724 src/subshell.c:750 src/tree.c:755 src/view.c:398
 msgid "&No"
 msgstr "&Nie "
 
-#: edit/editcmd.c:2052
+#: edit/editcmd.c:2029
 msgid " Copy to clipboard "
 msgstr " Kopírova» do schránky "
 
-#: edit/editcmd.c:2052 edit/editcmd.c:2065
+#: edit/editcmd.c:2029 edit/editcmd.c:2042
 msgid " Unable to save to file. "
 msgstr " Nemô¾em ulo¾i» súbor "
 
-#: edit/editcmd.c:2065
+#: edit/editcmd.c:2042
 msgid " Cut to clipboard "
 msgstr " Vystrihnu» do schránky "
 
-#: edit/editcmd.c:2085 src/view.c:1838
+#: edit/editcmd.c:2062 src/view.c:1837
 msgid " Goto line "
 msgstr " Choï na riadok "
 
-#: edit/editcmd.c:2085
+#: edit/editcmd.c:2062
 msgid " Enter line: "
 msgstr " Zadajte riadok: "
 
-#: edit/editcmd.c:2104 edit/editcmd.c:2117
+#: edit/editcmd.c:2081 edit/editcmd.c:2094
 msgid " Save Block "
 msgstr " Ulo¾i» blok "
 
-#: edit/editcmd.c:2129
+#: edit/editcmd.c:2106
 msgid " Insert File "
 msgstr " Vlo¾i» Súbor "
 
-#: edit/editcmd.c:2142
+#: edit/editcmd.c:2119
 msgid " Insert file "
 msgstr " Vlo¾i» súbor "
 
-#: edit/editcmd.c:2142
+#: edit/editcmd.c:2119
 msgid " Error trying to insert file. "
 msgstr " Chyba poèas vkladania do súboru. "
 
-#: edit/editcmd.c:2159
+#: edit/editcmd.c:2136
 msgid " Sort block "
 msgstr " Usporiada» blok "
 
-#: edit/editcmd.c:2159 edit/editcmd.c:2243
+#: edit/editcmd.c:2136 edit/editcmd.c:2220
 msgid " You must first highlight a block of text. "
 msgstr " Najskôr musíte zvırazni» blok textu. "
 
-#: edit/editcmd.c:2166
+#: edit/editcmd.c:2143
 msgid " Run Sort "
 msgstr " Spusti» Usporiadanie "
 
-#: edit/editcmd.c:2167
+#: edit/editcmd.c:2144
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Zadajte voµby pre triedenie oddelené prázdnym miestom(pozrí man stranku): "
 
-#: edit/editcmd.c:2178 edit/editcmd.c:2183
+#: edit/editcmd.c:2155 edit/editcmd.c:2160
 msgid " Sort "
 msgstr " Usporiada» "
 
-#: edit/editcmd.c:2179
+#: edit/editcmd.c:2156
 msgid " Error trying to execute sort command "
 msgstr " Chyba poèas pokusu vykona» príkaz pre triedenie "
 
-#: edit/editcmd.c:2184
+#: edit/editcmd.c:2161
 msgid " Sort returned non-zero: "
 msgstr " Triedenie nevrátilo non-zero: "
 
-#: edit/editcmd.c:2217
+#: edit/editcmd.c:2194
 msgid "Error create script:"
 msgstr "Chyba pri vytvorení skriptu:"
 
-#: edit/editcmd.c:2223
+#: edit/editcmd.c:2200
 msgid "Error read script:"
 msgstr "Chyba pri èítaní skriptu:"
 
-#: edit/editcmd.c:2230
+#: edit/editcmd.c:2207
 msgid "Error close script:"
 msgstr "Chyba pri zatvorení skriptu:"
 
-#: edit/editcmd.c:2235
+#: edit/editcmd.c:2212
 msgid "Script created:"
 msgstr "Vytvorenı skript:"
 
-#: edit/editcmd.c:2242
+#: edit/editcmd.c:2219
 msgid "Process block"
 msgstr "Spracovávam blok "
 
-#: edit/editcmd.c:2285
+#: edit/editcmd.c:2262
 msgid "Error trying to stat file:"
 msgstr " Chyba poèas urèovania stavu súboru:"
 
-#: edit/editcmd.c:2356
+#: edit/editcmd.c:2331
 msgid " Mail "
 msgstr " Po¹ta "
 
-#: edit/editcmd.c:2367
+#: edit/editcmd.c:2342
 msgid " Copies to"
 msgstr " Kopie komu"
 
-#: edit/editcmd.c:2371
+#: edit/editcmd.c:2346
 msgid " Subject"
 msgstr " Predmet"
 
-#: edit/editcmd.c:2375
+#: edit/editcmd.c:2350
 msgid " To"
 msgstr " Komu"
 
-#: edit/editcmd.c:2377
+#: edit/editcmd.c:2352
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " po¹ta -s <predmet> -c <cc> <k>"
 
@@ -683,11 +683,11 @@ msgstr "&V¹eobecne...  "
 msgid "&Save mode..."
 msgstr "&Ukladací mód..."
 
-#: edit/editmenu.c:256 edit/editmenu.c:265 src/main.c:1240
+#: edit/editmenu.c:256 edit/editmenu.c:265 src/main.c:1246
 msgid "&Layout..."
 msgstr "&Rozmiestnenie..."
 
-#: edit/editmenu.c:275 edit/editmenu.c:284 src/chmod.c:151 src/chown.c:128
+#: edit/editmenu.c:275 edit/editmenu.c:284 src/chmod.c:151 src/chown.c:127
 msgid " File "
 msgstr " Súbor "
 
@@ -780,8 +780,8 @@ msgstr "Emulácia kµúèa"
 msgid " Editor options "
 msgstr " Nastavenie editora"
 
-#: edit/editwidget.c:235 src/help.c:811 src/main.c:1583 src/screen.c:2378
-#: src/tree.c:1018 src/view.c:2011
+#: edit/editwidget.c:235 src/help.c:811 src/main.c:1589 src/screen.c:2213
+#: src/tree.c:1018 src/view.c:2010
 msgid "Help"
 msgstr "Pomoc"
 
@@ -793,7 +793,7 @@ msgstr "Oznaèi»"
 msgid "Replac"
 msgstr "Nahradi»"
 
-#: edit/editwidget.c:239 src/file.c:792 src/screen.c:2382 src/tree.c:1024
+#: edit/editwidget.c:239 src/file.c:777 src/screen.c:2217 src/tree.c:1024
 msgid "Copy"
 msgstr "Kopírova»"
 
@@ -801,20 +801,20 @@ msgstr "Kopírova»"
 msgid "Move"
 msgstr "Presunú»"
 
-#: edit/editwidget.c:241 src/view.c:2026
+#: edit/editwidget.c:241 src/view.c:2025
 msgid "Search"
 msgstr "Hµada»"
 
-#: edit/editwidget.c:242 src/screen.c:2385
+#: edit/editwidget.c:242 src/screen.c:2220
 msgid "Delete"
 msgstr "Zmaza»"
 
-#: edit/editwidget.c:244 src/main.c:1585
+#: edit/editwidget.c:244 src/main.c:1591
 msgid "PullDn"
 msgstr "H.menu"
 
-#: edit/editwidget.c:245 src/help.c:823 src/main.c:1586 src/view.c:2013
-#: src/view.c:2035
+#: edit/editwidget.c:245 src/help.c:823 src/main.c:1592 src/view.c:2012
+#: src/view.c:2034
 msgid "Quit"
 msgstr "Skonèi»"
 
@@ -886,8 +886,8 @@ msgstr ""
 " Nemohol som zmeni» práva \"%s\" \n"
 " %s "
 
-#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:221
-#: src/chown.c:328
+#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:217
+#: src/chown.c:324
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -900,7 +900,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Proces v pozadí:"
 
-#: src/background.c:276 src/file.c:2184
+#: src/background.c:276 src/file.c:2098
 msgid " Background process error "
 msgstr " Chyba v procese na pozadí:"
 
@@ -1111,7 +1111,7 @@ msgstr "Heslo pre \\\\%s\\%s"
 msgid "Warning: file %s not found\n"
 msgstr "Varovanie: súbor %s nenájdenı\n"
 
-#: src/charsets.c:173 src/charsets.c:186
+#: src/charsets.c:189 src/charsets.c:202
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Nemô¾em prelo¾i» z %s do %s"
@@ -1176,7 +1176,7 @@ msgstr "n&Astavi» oznaè."
 msgid "&Marked all"
 msgstr "&Oznaèi» v¹etko"
 
-#: src/chmod.c:137 src/screen.c:387
+#: src/chmod.c:137 src/screen.c:377
 msgid "Name"
 msgstr "Mena"
 
@@ -1196,7 +1196,7 @@ msgstr "Meno skupiny"
 msgid " Chmod command "
 msgstr " Príkaz zmeny práv"
 
-#: src/chmod.c:149 src/chown.c:118
+#: src/chmod.c:149 src/chown.c:117
 msgid " Permission "
 msgstr " Práva "
 
@@ -1228,36 +1228,36 @@ msgstr "Nastavi» &pou¾."
 msgid "Set &groups"
 msgstr "Nastavi» &skup."
 
-#: src/chown.c:110
+#: src/chown.c:109
 msgid " Name "
 msgstr " Meno "
 
-#: src/chown.c:112
+#: src/chown.c:111
 msgid " Owner name "
 msgstr " Meno vlastníka "
 
-#: src/chown.c:114 src/chown.c:126
+#: src/chown.c:113 src/chown.c:125
 msgid " Group name "
 msgstr " Meno skupiny "
 
-#: src/chown.c:116
+#: src/chown.c:115
 msgid " Size "
 msgstr " Veµkos» "
 
-#: src/chown.c:122
+#: src/chown.c:121
 msgid " Chown command "
 msgstr " Príkaz zmeny vlastníka"
 
-#: src/chown.c:124
+#: src/chown.c:123
 msgid " User name "
 msgstr " Meno pou¾ívateµa "
 
-#: src/chown.c:190
+#: src/chown.c:186
 msgid "<Unknown user>"
 msgstr "<Neznámy pou¾.>"
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:191
+#: src/chown.c:187
 msgid "<Unknown group>"
 msgstr "<Neznáma skupina>"
 
@@ -1402,7 +1402,7 @@ msgstr "Napí¹te `exit' ak sa chcete vráti» do Midnight Commandera"
 msgid " Link "
 msgstr " Odkaz "
 
-#: src/cmd.c:988 src/cmd.c:1120 src/file.c:1699
+#: src/cmd.c:988 src/cmd.c:1102 src/file.c:1636
 msgid " to:"
 msgstr " na:"
 
@@ -1416,85 +1416,85 @@ msgstr " odkaz: %s "
 msgid " symlink: %s "
 msgstr " symb. odkaz: %s "
 
-#: src/cmd.c:1078
+#: src/cmd.c:1060
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Symb. odkaz '%s' odkazuje: "
 
-#: src/cmd.c:1083
+#: src/cmd.c:1065
 msgid " Edit symlink "
 msgstr " Upravi» symb. odkaz "
 
-#: src/cmd.c:1088
+#: src/cmd.c:1070
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " upravi» symb.odkaz, nemô¾em odstráni» %s: %s "
 
-#: src/cmd.c:1092
+#: src/cmd.c:1074
 #, c-format
 msgid " edit symlink: %s "
 msgstr " upravi» symb. odkaz: %s "
 
-#: src/cmd.c:1103
+#: src/cmd.c:1085
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' nie je symbolickı odkaz"
 
-#: src/cmd.c:1120
+#: src/cmd.c:1102
 msgid " Link symbolically "
 msgstr " Symbolickı odkáza» "
 
-#: src/cmd.c:1121
+#: src/cmd.c:1103
 msgid " Relative symlink "
 msgstr " Relatívny symb. odkaz "
 
-#: src/cmd.c:1132
+#: src/cmd.c:1114
 #, c-format
 msgid " relative symlink: %s "
 msgstr " relatívny symb. odkaz: %s "
 
-#: src/cmd.c:1258
+#: src/cmd.c:1240
 msgid " Enter machine name (F1 for details): "
 msgstr " Zadajte meno poèítaèa (F1 pre detaily): "
 
-#: src/cmd.c:1285
+#: src/cmd.c:1267
 #, c-format
 msgid " Could not chdir to %s "
 msgstr "Nemohol som chdir na %s  "
 
-#: src/cmd.c:1292 src/widget.c:1083
+#: src/cmd.c:1274 src/widget.c:1083
 msgid " Link to a remote machine "
 msgstr " Pripojenie k vzdialenému poèítaèu "
 
-#: src/cmd.c:1298 src/widget.c:1084
+#: src/cmd.c:1280 src/widget.c:1084
 msgid " FTP to machine "
 msgstr " FTP k poèítaèu "
 
-#: src/cmd.c:1304 src/widget.c:1085
+#: src/cmd.c:1286 src/widget.c:1085
 msgid " SMB link to machine "
 msgstr " SMB odkaz k poèítaèu "
 
-#: src/cmd.c:1314
+#: src/cmd.c:1296
 msgid " Socket source routing setup "
 msgstr " Prvotné nastavenie smeru cesty Socketu "
 
-#: src/cmd.c:1315
+#: src/cmd.c:1297
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Zadajte hostiteµské meno pre pou¾itie ako zdrojového smeru cesty: "
 
-#: src/cmd.c:1323
+#: src/cmd.c:1305
 msgid " Host name "
 msgstr " Hostiteµské meno "
 
-#: src/cmd.c:1323
+#: src/cmd.c:1305
 msgid " Error while looking up IP address "
 msgstr "Nastala chyba poèas vyhµadávania IP adresy "
 
-#: src/cmd.c:1334
+#: src/cmd.c:1316
 msgid " Undelete files on an ext2 file system "
 msgstr " Obnovi» súbory na súborovom systéme ext2 "
 
-#: src/cmd.c:1335
+#: src/cmd.c:1317
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1502,11 +1502,11 @@ msgstr ""
 " Zadajte zariadenie (bez /dev/) pre obnovenie\n"
 "   súborov na: (F1 pre detaily)"
 
-#: src/cmd.c:1385
+#: src/cmd.c:1367
 msgid " Setup saved to ~/"
 msgstr " Nastavenie bolo ulo¾ené do ~/"
 
-#: src/cmd.c:1387
+#: src/cmd.c:1369
 msgid " Setup "
 msgstr " Nastavenie "
 
@@ -1539,73 +1539,69 @@ msgstr ""
 "\n"
 "\n"
 
-#: src/dir.c:61
+#: src/dir.c:53
 msgid "&Unsorted"
 msgstr "&Netriedené"
 
-#: src/dir.c:62
+#: src/dir.c:54
 msgid "&Name"
 msgstr "&Meno"
 
-#: src/dir.c:63
+#: src/dir.c:55
 msgid "&Extension"
 msgstr "&Prípona súboru"
 
-#: src/dir.c:64
+#: src/dir.c:56
 msgid "&Modify time"
 msgstr "èas úp&Ravy"
 
-#: src/dir.c:65
+#: src/dir.c:57
 msgid "&Access time"
 msgstr "èa&S prístupu "
 
-#: src/dir.c:66
+#: src/dir.c:58
 msgid "&Change time"
 msgstr "èas zmen&Y "
 
-#: src/dir.c:67
+#: src/dir.c:59
 msgid "&Size"
 msgstr "&Veµkos»"
 
-#: src/dir.c:68
+#: src/dir.c:60
 msgid "&Inode"
 msgstr "&Inoda"
 
 #. New sort orders
-#: src/dir.c:71
+#: src/dir.c:63
 msgid "&Type"
 msgstr "&Typ"
 
-#: src/dir.c:72
+#: src/dir.c:64
 msgid "&Links"
 msgstr "&Odkazy"
 
-#: src/dir.c:73
+#: src/dir.c:65
 msgid "N&GID"
 msgstr "N&GID"
 
-#: src/dir.c:74
+#: src/dir.c:66
 msgid "N&UID"
 msgstr "N&UID"
 
-#: src/dir.c:75
+#: src/dir.c:67
 msgid "&Owner"
 msgstr "&Vlastník"
 
-#: src/dir.c:76
+#: src/dir.c:68
 msgid "&Group"
 msgstr "s&Kupina"
 
-#: src/dir.c:427
+#: src/dir.c:422
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Súbor '%s' existuje, ale nemô¾em urèi» stav: %s"
 
-#: src/dir.c:698
-msgid "Unknown"
-msgstr "Neznámy"
-
-#: src/ext.c:141 src/user.c:555
+#: src/ext.c:141 src/user.c:552
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1614,7 +1610,7 @@ msgstr ""
 " Nemô¾em vytvori» doèasnı príkazovı súbor \n"
 " %s "
 
-#: src/ext.c:154 src/user.c:576
+#: src/ext.c:154 src/user.c:573
 msgid " Parameter "
 msgstr " Parameter "
 
@@ -1739,7 +1735,7 @@ msgstr ""
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' a `%s' sú rovnaké súbory "
 
-#: src/file.c:564
+#: src/file.c:558
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1748,7 +1744,7 @@ msgstr ""
 " Nemô¾em vytvori» ¹peciálny súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:573 src/file.c:802
+#: src/file.c:567 src/file.c:787
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1757,7 +1753,7 @@ msgstr ""
 " Nemô¾em zmeni» vlastníka cieµového súboru \"%s\" \n"
 " %s "
 
-#: src/file.c:582 src/file.c:821
+#: src/file.c:576 src/file.c:802
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1766,7 +1762,7 @@ msgstr ""
 " Nemô¾em zmeni» práva pre cieµovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:599
+#: src/file.c:589
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1775,11 +1771,11 @@ msgstr ""
 " Nemô¾em otvori» zdrojovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:609
+#: src/file.c:599
 msgid " Reget failed, about to overwrite file "
 msgstr " Reget zlyhal pri prepísavaní súboru "
 
-#: src/file.c:615
+#: src/file.c:605
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1788,7 +1784,7 @@ msgstr ""
 " Nemô¾em fstat zdrojovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:641
+#: src/file.c:626
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1797,7 +1793,7 @@ msgstr ""
 " Nemô¾em vytvori» cieµovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:655
+#: src/file.c:640
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1806,7 +1802,7 @@ msgstr ""
 " Nemô¾em fstat cieµovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:686
+#: src/file.c:671
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1815,7 +1811,7 @@ msgstr ""
 " Nemô¾em preèíta» zdrojovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:716
+#: src/file.c:701
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1824,11 +1820,11 @@ msgstr ""
 " Nemô¾em zapísa» do cieµového súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:735
+#: src/file.c:720
 msgid "(stalled)"
 msgstr "(zastavenı)"
 
-#: src/file.c:773
+#: src/file.c:758
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1837,7 +1833,7 @@ msgstr ""
 " Nemô¾em zavrie» zdrojovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:782
+#: src/file.c:767
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1846,19 +1842,19 @@ msgstr ""
 " Nemô¾em zavrie» cieµovı súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:792
+#: src/file.c:777
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Bol vyvolanı neúplnı súbor.Ponecha» si ho?"
 
-#: src/file.c:793
+#: src/file.c:778
 msgid "&Delete"
 msgstr "&Zmaza»"
 
-#: src/file.c:793 src/hotlist.c:1404
+#: src/file.c:778 src/hotlist.c:1404
 msgid "&Keep"
 msgstr "po&Necha»"
 
-#: src/file.c:866
+#: src/file.c:847
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1867,7 +1863,7 @@ msgstr ""
 " Nemô¾em urèi» zdrojovı adresár \"%s\" \n"
 " %s "
 
-#: src/file.c:889
+#: src/file.c:870
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -1877,7 +1873,7 @@ msgstr ""
 " %s "
 
 #. we found a cyclic symbolic link
-#: src/file.c:897
+#: src/file.c:878
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1886,7 +1882,7 @@ msgstr ""
 " Nemô¾em kopírova» cyklickı symbolickı odkaz \n"
 " `%s' "
 
-#: src/file.c:954
+#: src/file.c:931
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1895,7 +1891,7 @@ msgstr ""
 " Nemô¾em vytvori» cieµovı adresár \"%s\" \n"
 " %s "
 
-#: src/file.c:977
+#: src/file.c:949
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1905,7 +1901,7 @@ msgstr ""
 " %s "
 
 #. Source doesn't exist
-#: src/file.c:1091
+#: src/file.c:1060
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1914,17 +1910,17 @@ msgstr ""
 " Nemô¾em urèi» súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:1113
+#: src/file.c:1082
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' a `%s' sú rovnaké súbory "
 
-#: src/file.c:1120
+#: src/file.c:1089
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nemô¾em prepísa» adresár `%s' "
 
-#: src/file.c:1163
+#: src/file.c:1123
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1933,7 +1929,7 @@ msgstr ""
 " Nemô¾em presunú» súbor \"%s\" do \"%s\" \n"
 " %s "
 
-#: src/file.c:1183
+#: src/file.c:1143
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1942,22 +1938,22 @@ msgstr ""
 " Nemô¾em odstráni» súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:1238
+#: src/file.c:1194
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' a `%s' sú rovnaké adresáre "
 
-#: src/file.c:1257
+#: src/file.c:1213
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Nemô¾em prepísa» adresár \"%s\" %s "
 
-#: src/file.c:1259
+#: src/file.c:1215
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Nemô¾em prepísa» súbor \"%s\" %s "
 
-#: src/file.c:1286
+#: src/file.c:1238
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -1966,7 +1962,7 @@ msgstr ""
 " Nemô¾em presunú» adresár \"%s\" do \"%s\" \n"
 " %s "
 
-#: src/file.c:1349
+#: src/file.c:1301
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -1975,7 +1971,7 @@ msgstr ""
 " Nemô¾em zmaza» súbor \"%s\" \n"
 " %s "
 
-#: src/file.c:1410 src/file.c:1480 src/file.c:1512
+#: src/file.c:1360 src/file.c:1428 src/file.c:1458
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -1993,15 +1989,15 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1671
+#: src/file.c:1615
 msgid "1Copy"
 msgstr "1Skopírova»"
 
-#: src/file.c:1671
+#: src/file.c:1615
 msgid "1Move"
 msgstr "1Presunú»"
 
-#: src/file.c:1671
+#: src/file.c:1615
 msgid "1Delete"
 msgstr "1Zmaza»"
 
@@ -2014,75 +2010,57 @@ msgstr "1Zmaza»"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1687
+#: src/file.c:1630
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1689
+#: src/file.c:1632
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1692
-#, no-c-format
-msgid "%o %f \"%s\"%e"
-msgstr "%o %f \"%s\"%e"
-
-#: src/file.c:1694
-#, no-c-format
-msgid "%o %d %f%e"
-msgstr "%o %d %f%e"
-
-#: src/file.c:1698 vfs/fish.c:526
+#: src/file.c:1635 vfs/fish.c:526
 msgid "file"
 msgstr "súbor"
 
-#: src/file.c:1698
+#: src/file.c:1635
 msgid "files"
 msgstr "súbory"
 
-#: src/file.c:1698
+#: src/file.c:1635
 msgid "directory"
 msgstr "adresár"
 
-#: src/file.c:1698
+#: src/file.c:1635
 msgid "directories"
 msgstr "adresáre"
 
-#: src/file.c:1699
+#: src/file.c:1636
 msgid "files/directories"
 msgstr "súbory/adresáre"
 
-#: src/file.c:1699
+#: src/file.c:1636
 msgid " with source mask:"
 msgstr " so zdrojovou maskou:"
 
-#: src/file.c:1851
+#: src/file.c:1779
 msgid " Cannot operate on \"..\"! "
 msgstr " Nemô¾em pracova» na \"..\"! "
 
-#: src/file.c:1870 src/screen.c:2067
-msgid "Yes"
-msgstr "Áno"
-
-#: src/file.c:1870 src/screen.c:2067
-msgid "No"
-msgstr "Nie"
-
-#: src/file.c:1923
+#: src/file.c:1848
 msgid " Sorry, I could not put the job in background "
 msgstr " ¥utujem, ale nemohol som ulo¾i» úlohu do pozadia "
 
-#: src/file.c:2009 src/file.c:2093
+#: src/file.c:1933 src/file.c:2016
 msgid " Internal failure "
 msgstr " Vnútorná porucha "
 
-#: src/file.c:2009 src/file.c:2093
+#: src/file.c:1933 src/file.c:2016
 msgid " Unknown file operation "
 msgstr " Neznáma operácia so súborom "
 
-#: src/file.c:2024
+#: src/file.c:1947
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -2091,15 +2069,15 @@ msgstr ""
 " Cieµ \"%s\" musí by» adresár \n"
 " %s "
 
-#: src/file.c:2185
+#: src/file.c:2099
 msgid "&Retry"
 msgstr "&Zopakova»"
 
-#: src/file.c:2185 src/file.c:2246 src/filegui.c:247 src/filegui.c:553
+#: src/file.c:2099 src/file.c:2159 src/filegui.c:247 src/filegui.c:553
 msgid "&Abort"
 msgstr "p&Reru¹i»"
 
-#: src/file.c:2237
+#: src/file.c:2150
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2109,7 +2087,7 @@ msgstr ""
 "   Adresár nie je prázdny.  \n"
 "   Vymaza» ho rekurzívne? "
 
-#: src/file.c:2238
+#: src/file.c:2151
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2119,39 +2097,39 @@ msgstr ""
 "   Proces v pozadí: Adresár nie je prázdny \n"
 "   Vymaza» ho rekurzívne? "
 
-#: src/file.c:2239
+#: src/file.c:2152
 msgid " Delete: "
 msgstr " Zmaza»: "
 
-#: src/file.c:2245
+#: src/file.c:2158
 msgid "a&ll"
 msgstr "&V¹etko"
 
-#: src/file.c:2245 src/filegui.c:556
+#: src/file.c:2158 src/filegui.c:556
 msgid "non&E"
 msgstr "¾ia&Dne"
 
-#: src/file.c:2255
+#: src/file.c:2168
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Napí¹te 'áno' ak to chcete SKUTOÈNE vymaza» "
 
-#: src/file.c:2257
+#: src/file.c:2170
 msgid "all the directories "
 msgstr "v¹etky adresáre"
 
-#: src/file.c:2259
+#: src/file.c:2172
 msgid " Recursive Delete "
 msgstr " Rekurzívne Zmaza» "
 
-#: src/file.c:2260
+#: src/file.c:2173
 msgid " Background process: Recursive Delete "
 msgstr "Proces v pozadí: Rekurzívne zmaza»"
 
-#: src/file.c:2261
+#: src/file.c:2174
 msgid "no"
 msgstr "nie"
 
-#: src/file.c:2263
+#: src/file.c:2176
 msgid "yes"
 msgstr "áno"
 
@@ -2287,7 +2265,7 @@ msgstr "&Znovu"
 msgid "&Quit"
 msgstr "&Ukonèi»"
 
-#: src/find.c:112 src/panelize.c:77
+#: src/find.c:112 src/panelize.c:76
 msgid "Pane&lize"
 msgstr "pane&Lizova»"
 
@@ -2311,7 +2289,7 @@ msgstr "Meno súboru:"
 msgid "Content: "
 msgstr "Obsah: "
 
-#: src/find.c:151 src/main.c:1127 src/main.c:1151
+#: src/find.c:151 src/main.c:1133 src/main.c:1157
 msgid "&Tree"
 msgstr "&Strom"
 
@@ -2328,7 +2306,7 @@ msgstr "Grepping v %s"
 msgid "Finished"
 msgstr "Skonèené"
 
-#: src/find.c:538 src/view.c:1464
+#: src/find.c:538 src/view.c:1463
 #, c-format
 msgid "Searching %s"
 msgstr "Hµadanie %s"
@@ -2361,7 +2339,7 @@ msgstr " Nemô¾em nájs» uzol [Obsah] v súbore pomocníka "
 msgid " Help "
 msgstr " Pomoc "
 
-#: src/help.c:768 src/user.c:686
+#: src/help.c:768 src/user.c:683
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -2387,7 +2365,7 @@ msgstr "Pred"
 msgid "&Move"
 msgstr "pres&Unú»"
 
-#: src/hotlist.c:118 src/hotlist.c:1404 src/panelize.c:76 src/wtools.c:371
+#: src/hotlist.c:118 src/hotlist.c:1404 src/panelize.c:75 src/wtools.c:349
 msgid "&Remove"
 msgstr "&Odstráni»"
 
@@ -2821,7 +2799,7 @@ msgstr "nie sú oznaèené s Áno. Stlaète medzeru pre vynechanie klávesy,"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "alebo kliknite my¹kou pre jeho definovanie. Pohybujte sa s Tab."
 
-#: src/main.c:649
+#: src/main.c:655
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2833,148 +2811,148 @@ msgstr ""
 " zmazali vá¹ pracovnı adresár alebo ste zadali va¹e \n"
 " ¹peciálne práva pre prístup s príkazom \"su\" ? "
 
-#: src/main.c:723
+#: src/main.c:729
 msgid "Press any key to continue..."
 msgstr "Stlaète nejakú klávesu pre pokraèovanie..."
 
-#: src/main.c:773
+#: src/main.c:779
 msgid " The shell is already running a command "
 msgstr " Shell u¾ spustil príkaz "
 
-#: src/main.c:800 src/screen.c:2065 src/screen.c:2112
+#: src/main.c:806 src/screen.c:1977
 msgid " The Midnight Commander "
 msgstr "Midnight Commander"
 
-#: src/main.c:801
+#: src/main.c:807
 msgid " Do you really want to quit the Midnight Commander? "
-msgstr " Naozaj chcete skonèi» prácu v Midnight Commandery? "
+msgstr " Naozaj chcete skonèi» prácu v Midnight Commanderi? "
 
-#: src/main.c:1117
+#: src/main.c:1123
 msgid " Listing format edit "
 msgstr " Upravi» formát vıpisu"
 
-#: src/main.c:1117
+#: src/main.c:1123
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Novı mód je \"%s\" "
 
-#: src/main.c:1124 src/main.c:1148
+#: src/main.c:1130 src/main.c:1154
 msgid "&Listing mode..."
 msgstr "&Forma vıpisu..."
 
-#: src/main.c:1125 src/main.c:1149
+#: src/main.c:1131 src/main.c:1155
 msgid "&Quick view     C-x q"
 msgstr "&Rıchly pohµad  C-x q"
 
-#: src/main.c:1126 src/main.c:1150
+#: src/main.c:1132 src/main.c:1156
 msgid "&Info           C-x i"
 msgstr "&Informácie     C-x i"
 
-#: src/main.c:1129 src/main.c:1153
+#: src/main.c:1135 src/main.c:1159
 msgid "&Sort order..."
 msgstr "&Usporiada» poradie..."
 
-#: src/main.c:1131 src/main.c:1155
+#: src/main.c:1137 src/main.c:1161
 msgid "&Filter..."
 msgstr "fi&Lter..."
 
-#: src/main.c:1134 src/main.c:1158
+#: src/main.c:1140 src/main.c:1164
 msgid "&Network link..."
 msgstr "si&E»ové pripojenie..."
 
-#: src/main.c:1135 src/main.c:1159
+#: src/main.c:1141 src/main.c:1165
 msgid "FT&P link..."
 msgstr "FT&P pripojenie..."
 
-#: src/main.c:1137 src/main.c:1161
+#: src/main.c:1143 src/main.c:1167
 msgid "SM&B link..."
 msgstr "SM&B pripojenie..."
 
-#: src/main.c:1142 src/main.c:1166
+#: src/main.c:1148 src/main.c:1172
 msgid "&Drive...       M-d"
 msgstr "&Jednotka...      M-d"
 
-#: src/main.c:1144 src/main.c:1168
+#: src/main.c:1150 src/main.c:1174
 msgid "&Rescan         C-r"
 msgstr "ob&Novi»          C-r"
 
-#: src/main.c:1172
+#: src/main.c:1178
 msgid "&User menu          F2"
 msgstr "&Pou¾ívateµské menu       F2"
 
-#: src/main.c:1173
+#: src/main.c:1179
 msgid "&View               F3"
 msgstr "p&Ohµad                   F3"
 
-#: src/main.c:1174
+#: src/main.c:1180
 msgid "Vie&w file...         "
 msgstr "po&Hµad do súboru..    "
 
-#: src/main.c:1175
+#: src/main.c:1181
 msgid "&Filtered view     M-!"
 msgstr "&Filtrovanı pohµad       M-!"
 
-#: src/main.c:1176
+#: src/main.c:1182
 msgid "&Edit               F4"
 msgstr "úpr&Avi»                  F4"
 
-#: src/main.c:1177
+#: src/main.c:1183
 msgid "&Copy               F5"
 msgstr "&Kopírova»                F5"
 
-#: src/main.c:1178
+#: src/main.c:1184
 msgid "c&Hmod           C-x c"
 msgstr "Zmeni» prá&Va          C-x c"
 
-#: src/main.c:1180
+#: src/main.c:1186
 msgid "&Link            C-x l"
 msgstr "o&Dkaz                 C-x l"
 
-#: src/main.c:1181
+#: src/main.c:1187
 msgid "&SymLink         C-x s"
 msgstr "&Symb. odkaz           C-x s"
 
-#: src/main.c:1182
+#: src/main.c:1188
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "upravi» s&Ymb. odkaz C-x C-s"
 
-#: src/main.c:1183
+#: src/main.c:1189
 msgid "ch&Own           C-x o"
 msgstr "&Zmeni» vlastníka      C-x o"
 
-#: src/main.c:1184
+#: src/main.c:1190
 msgid "&Advanced chown       "
 msgstr "&Roz¹írená zmena vlastníka"
 
-#: src/main.c:1186
+#: src/main.c:1192
 msgid "&Rename/Move        F6"
 msgstr "pr&Emenova»/Presunú»      F6"
 
-#: src/main.c:1187
+#: src/main.c:1193
 msgid "&Mkdir              F7"
 msgstr "vy&Tvori» adresár         F7"
 
-#: src/main.c:1188
+#: src/main.c:1194
 msgid "&Delete             F8"
 msgstr "z&Maza»                   F8"
 
-#: src/main.c:1189
+#: src/main.c:1195
 msgid "&Quick cd          M-c"
 msgstr "rıch&Ly cd               M-c"
 
-#: src/main.c:1191
+#: src/main.c:1197
 msgid "select &Group      M-+"
 msgstr "oz&Naèi» skupinu         M-+"
 
-#: src/main.c:1192
+#: src/main.c:1198
 msgid "u&Nselect group    M-\\"
 msgstr "odzna&Èi» skupinu        M-\\"
 
-#: src/main.c:1193
+#: src/main.c:1199
 msgid "reverse selec&Tion M-*"
 msgstr "prevráti» oznaèen&Ie    M-*"
 
-#: src/main.c:1195
+#: src/main.c:1201
 msgid "e&Xit              F10"
 msgstr "&Ukonèi»                 F10"
 
@@ -2982,131 +2960,131 @@ msgstr "&Ukonèi»                 F10"
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1203
+#: src/main.c:1209
 msgid "&Directory tree"
 msgstr "adr&Esárovı strom"
 
-#: src/main.c:1204
+#: src/main.c:1210
 msgid "&Find file            M-?"
 msgstr "ná&Js» súbor              M-?"
 
-#: src/main.c:1205
+#: src/main.c:1211
 msgid "s&Wap panels          C-u"
 msgstr "&Prepnú» panely           C-u"
 
-#: src/main.c:1206
+#: src/main.c:1212
 msgid "switch &Panels on/off C-o"
 msgstr "panely zap./&Vyp.         C-o"
 
-#: src/main.c:1207
+#: src/main.c:1213
 msgid "&Compare directories  C-x d"
 msgstr "po&Rovna» adresáre      C-x d"
 
-#: src/main.c:1208
+#: src/main.c:1214
 msgid "e&Xternal panelize    C-x !"
 msgstr "v&Onkaj¹ia panelizácia  C-x !"
 
-#: src/main.c:1209
+#: src/main.c:1215
 msgid "show directory s&Izes"
 msgstr "ukáza» veµkos» a&Dresárov"
 
-#: src/main.c:1211
+#: src/main.c:1217
 msgid "command &History"
 msgstr "história príka&Zov"
 
-#: src/main.c:1212
+#: src/main.c:1218
 msgid "di&Rectory hotlist    C-\\"
 msgstr "&Adresárovı hotlist      C-\\"
 
-#: src/main.c:1214
+#: src/main.c:1220
 msgid "&Active VFS list      C-x a"
 msgstr "aktívn&Y VFS zoznam     C-x a"
 
-#: src/main.c:1215
+#: src/main.c:1221
 msgid "Fr&ee VFSs now"
 msgstr "&Uvoµni» VFS teraz"
 
-#: src/main.c:1218
+#: src/main.c:1224
 msgid "&Background jobs      C-x j"
 msgstr "prá&Ca v pozadí         C-x j"
 
-#: src/main.c:1222
+#: src/main.c:1228
 msgid "&Undelete files (ext2fs only)"
 msgstr "Obnovi» &Súbory (iba ext2fs)"
 
-#: src/main.c:1225
+#: src/main.c:1231
 msgid "&Listing format edit"
 msgstr "&Upravi» formát vıpisu"
 
-#: src/main.c:1230
+#: src/main.c:1236
 msgid "&Extension file edit"
 msgstr "upravi» priradenie sú&Boru"
 
-#: src/main.c:1231
+#: src/main.c:1237
 msgid "&Menu file edit"
 msgstr "upravi» súborové me&Nu "
 
-#: src/main.c:1233
+#: src/main.c:1239
 msgid "Menu edi&Tor edit"
 msgstr "Editor pou¾ívateµského menu"
 
-#: src/main.c:1239
+#: src/main.c:1245
 msgid "&Configuration..."
 msgstr "&Konfigurácia..."
 
-#: src/main.c:1241
+#: src/main.c:1247
 msgid "c&Onfirmation..."
 msgstr "&Potvrdenie..."
 
-#: src/main.c:1242
+#: src/main.c:1248
 msgid "&Display bits..."
 msgstr "&Zobrazené bity..."
 
-#: src/main.c:1244
+#: src/main.c:1250
 msgid "learn &Keys..."
 msgstr "uè&Enie kláves..."
 
-#: src/main.c:1247
+#: src/main.c:1253
 msgid "&Virtual FS..."
 msgstr "&Virtuálny FS..."
 
-#: src/main.c:1250
+#: src/main.c:1256
 msgid "&Save setup"
 msgstr "&Ulo¾ nastavenie"
 
-#: src/main.c:1260
+#: src/main.c:1266
 msgid " &Above "
 msgstr " &Hore "
 
-#: src/main.c:1260
+#: src/main.c:1266
 msgid " &Left "
 msgstr " vµ&Avo "
 
-#: src/main.c:1262
+#: src/main.c:1268
 msgid " &File "
 msgstr " &Súbor "
 
-#: src/main.c:1263
+#: src/main.c:1269
 msgid " &Command "
 msgstr " &Príkaz "
 
-#: src/main.c:1264
+#: src/main.c:1270
 msgid " &Options "
 msgstr " &Voµby "
 
-#: src/main.c:1265
+#: src/main.c:1271
 msgid " &Below "
 msgstr " &Poni¾e "
 
-#: src/main.c:1265
+#: src/main.c:1271
 msgid " &Right "
 msgstr " vp&Ravo "
 
-#: src/main.c:1313
+#: src/main.c:1319
 msgid " Information "
 msgstr " Informácie "
 
-#: src/main.c:1314
+#: src/main.c:1320
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -3118,19 +3096,19 @@ msgstr ""
 " adresár manuálne. Pre podrobnosti si pozrite manuálovú \n"
 " stránku.                                               "
 
-#: src/main.c:1584 src/screen.c:2379
+#: src/main.c:1590 src/screen.c:2214
 msgid "Menu"
 msgstr "Menu"
 
-#: src/main.c:1723
+#: src/main.c:1729
 msgid "The TERM environment variable is unset!\n"
 msgstr "Premenlivé prostredie TERM je vymazané!\n"
 
-#: src/main.c:1820
+#: src/main.c:1826
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Dakujeme, ¾e pou¾ívate Midnight Commander"
 
-#: src/main.c:2295
+#: src/main.c:2301
 msgid ""
 "Usage is:\n"
 "\n"
@@ -3142,19 +3120,19 @@ msgstr ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 
-#: src/main.c:2298
+#: src/main.c:2304
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Vynúti kreslenie èiar pomocou +, -, |.\n"
 
-#: src/main.c:2300
+#: src/main.c:2306
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Èiernobiely displej.\n"
 
-#: src/main.c:2302
+#: src/main.c:2308
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [DEVEL-ONLY: Ladenie kódu na pozadí]\n"
 
-#: src/main.c:2304
+#: src/main.c:2310
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -3165,11 +3143,11 @@ msgstr ""
 "zoznam).\n"
 "-d, --nomouse      Zaká¾e podporu my¹i.\n"
 
-#: src/main.c:2308
+#: src/main.c:2314
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Spustí internı editor.\n"
 
-#: src/main.c:2310
+#: src/main.c:2316
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -3183,15 +3161,15 @@ msgstr ""
 "hodnoty\n"
 "terminfo/termcap\n"
 
-#: src/main.c:2315
+#: src/main.c:2321
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog súbor  Zaznamenáva» príkazy ftpfs do súboru.\n"
 
-#: src/main.c:2318
+#: src/main.c:2324
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr "-M, --memory súbor  [DEVEL-ONLY: Zaznamenáva» MAD správy do súboru.]\n"
 
-#: src/main.c:2320
+#: src/main.c:2326
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -3199,17 +3177,17 @@ msgstr ""
 "-P, --printwd      Na konci vypísa» poslednı pracovnı adresár.\n"
 "-s, --slow         Zaká¾e operácie so správami (pre pomalé terminály).\n"
 
-#: src/main.c:2323
+#: src/main.c:2329
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Aktivova» podporu premennej TERMCAP.\n"
 
-#: src/main.c:2326
+#: src/main.c:2332
 msgid "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Vytvorí súbor s príkazmi pre nastavenie ¹tandardného "
 "prieèinku na konci.\n"
 
-#: src/main.c:2329
+#: src/main.c:2335
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -3219,7 +3197,7 @@ msgstr ""
 "-U, --subshell     Vynúti paralelnı mód subshellu.\n"
 "-r, --forceexec    Vynúti spustenie subshellu.\n"
 
-#: src/main.c:2333
+#: src/main.c:2339
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -3232,11 +3210,7 @@ msgstr ""
 "obrazovky.\n"
 "+number            Poèiatoèné èíslo riadku v súbore pre `mcedit'.\n"
 
-#: src/main.c:2338
-msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-msgstr "-X, --dbgsubshell  [DEVEL-ONLY: Ladi» subshell].\n"
-
-#: src/main.c:2340
+#: src/main.c:2343
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3246,7 +3220,7 @@ msgstr ""
 "Správy o chybách posielajte (vrátane vıpisu `mc -V')\n"
 "na adresu mc-devel@gnome.org\n"
 
-#: src/main.c:2355
+#: src/main.c:2358
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3284,26 +3258,26 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2404
+#: src/main.c:2407
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Adresár s kni¾nicami pre Midnight Commander: %s\n"
 
-#: src/main.c:2418
+#: src/main.c:2421
 msgid "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Voµba -m je nesprávna. Prosím pozrite sa na zobrazené Bity... v menu pre "
 "voµby\n"
 
-#: src/main.c:2459
+#: src/main.c:2462
 msgid "Use to debug the background code"
 msgstr "Pre ladenie pou¾ite kód na pozadí"
 
-#: src/main.c:2465
+#: src/main.c:2468
 msgid "Request to run in color mode"
 msgstr "Po¾iadavka pre spustenie vo farebnom móde"
 
-#: src/main.c:2467
+#: src/main.c:2470
 msgid "Specifies a color configuration"
 msgstr "©pecifikujte farebnú konfiguráciu"
 
@@ -3502,59 +3476,59 @@ msgstr " Pauza po spustení..."
 msgid "Configure options"
 msgstr "Nastavovateµne voµby"
 
-#: src/panelize.c:75
+#: src/panelize.c:74
 msgid "&Add new"
 msgstr "&Prida» nové"
 
-#: src/panelize.c:91
+#: src/panelize.c:88
 msgid " External panelize "
 msgstr " Vonkaj¹ie panelizova» "
 
-#: src/panelize.c:182 src/panelize.c:448
+#: src/panelize.c:179 src/panelize.c:442
 msgid "External panelize"
 msgstr "Vonkaj¹ie panelizova»"
 
-#: src/panelize.c:192
+#: src/panelize.c:189
 msgid "Command"
 msgstr "Príkaz"
 
-#: src/panelize.c:206 src/panelize.c:265 src/panelize.c:337 src/panelize.c:358
+#: src/panelize.c:203 src/panelize.c:260 src/panelize.c:331 src/panelize.c:352
 msgid "Other command"
 msgstr "Dal¹í príkaz"
 
-#: src/panelize.c:249
+#: src/panelize.c:244
 msgid " Add to external panelize "
 msgstr " Prida» k povrchnému panelizovaniu "
 
-#: src/panelize.c:250
+#: src/panelize.c:245
 msgid " Enter command label: "
 msgstr " Zadajte návestie pre príkaz: "
 
-#: src/panelize.c:289 src/user.c:668
+#: src/panelize.c:284 src/user.c:665
 msgid " Oops... "
 msgstr " Hop....."
 
-#: src/panelize.c:290
+#: src/panelize.c:285
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr "Nemô¾em povrchovo paneliz. pokiaµ som èinnı v nemiestnom adresári "
 
-#: src/panelize.c:340
+#: src/panelize.c:334
 msgid "Find rejects after patching"
 msgstr "Nájs» súbory po oprave"
 
-#: src/panelize.c:341
+#: src/panelize.c:335
 msgid "Find *.orig after patching"
 msgstr "Nájs» som po oprave *.orig"
 
-#: src/panelize.c:342
+#: src/panelize.c:336
 msgid "Find SUID and SGID programs"
 msgstr "Nájs» som SUID a SGID programy"
 
-#: src/panelize.c:393
+#: src/panelize.c:387
 msgid "Cannot invoke command."
 msgstr "Nemô¾em vyvola» príkaz."
 
-#: src/panelize.c:448
+#: src/panelize.c:442
 msgid "Pipe close failed"
 msgstr "Pipe, neúspe¹né uzavretie"
 
@@ -3566,93 +3540,93 @@ msgstr "Ukáza» tento pomocnı oznam"
 msgid "Display brief usage message"
 msgstr "Zobrazi» struènı pou¾. oznam"
 
-#: src/screen.c:201
+#: src/screen.c:195
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
-#: src/screen.c:201
+#: src/screen.c:195
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
-#: src/screen.c:388 src/screen.c:389
+#: src/screen.c:378 src/screen.c:379
 msgid "Size"
 msgstr "Veµkos»"
 
-#: src/screen.c:391
+#: src/screen.c:381
 msgid "MTime"
 msgstr "ÈasMod"
 
-#: src/screen.c:392
+#: src/screen.c:382
 msgid "ATime"
 msgstr "ÈasPri"
 
-#: src/screen.c:393
+#: src/screen.c:383
 msgid "CTime"
 msgstr "ÈasVyt"
 
-#: src/screen.c:394
+#: src/screen.c:384
 msgid "Permission"
 msgstr "Práva"
 
-#: src/screen.c:395
+#: src/screen.c:385
 msgid "Perm"
 msgstr "Perm"
 
-#: src/screen.c:396
+#: src/screen.c:386
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:397
+#: src/screen.c:387
 msgid "Inode"
 msgstr "Inoda"
 
-#: src/screen.c:398
+#: src/screen.c:388
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:399
+#: src/screen.c:389
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:400
+#: src/screen.c:390
 msgid "Owner"
 msgstr "Vlastník"
 
-#: src/screen.c:401
+#: src/screen.c:391
 msgid "Group"
 msgstr "Skupina"
 
-#: src/screen.c:635
+#: src/screen.c:614
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytov v %d súbore"
 
-#: src/screen.c:635
+#: src/screen.c:614
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytov v %d súboroch"
 
-#: src/screen.c:661
+#: src/screen.c:640
 msgid "<readlink failed>"
 msgstr "<èítanie odkazu zlyhalo>"
 
-#: src/screen.c:1274
+#: src/screen.c:1240
 msgid "Unknown tag on display format: "
 msgstr "Neznámy tag v zobrazenom formáte: "
 
-#: src/screen.c:1400
+#: src/screen.c:1366
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Pouívate¾skı suplied formát vırerá neplatnı, vráti sa k predvolenım."
 
-#: src/screen.c:2066 src/screen.c:2113
+#: src/screen.c:1978
 msgid " Do you really want to execute? "
 msgstr "Naozaj chcete spusti»? "
 
-#: src/screen.c:2077 src/screen.c:2127
+#: src/screen.c:1992
 msgid " No action taken "
 msgstr " Nie je zadaná èinnos» "
 
-#: src/screen.c:2370 src/tree.c:876
+#: src/screen.c:2205 src/tree.c:876
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -3661,19 +3635,19 @@ msgstr ""
 "Nemô¾em zmeni» adresár na \"%s\" \n"
 " %s "
 
-#: src/screen.c:2380
+#: src/screen.c:2215
 msgid "View"
 msgstr "Ukáza»"
 
-#: src/screen.c:2381 src/view.c:2022
+#: src/screen.c:2216 src/view.c:2021
 msgid "Edit"
 msgstr "Upravi»"
 
-#: src/screen.c:2383 src/tree.c:1026
+#: src/screen.c:2218 src/tree.c:1026
 msgid "RenMov"
 msgstr "Presunú»"
 
-#: src/screen.c:2384 src/tree.c:1030
+#: src/screen.c:2219 src/tree.c:1030
 msgid "Mkdir"
 msgstr "Vytvori» adr."
 
@@ -3703,7 +3677,7 @@ msgstr ""
 "v Nastavenie / Zobrazené bity!\n"
 "A nezabudnite nastavenie ulo¾i»."
 
-#: src/slint.c:190
+#: src/slint.c:196
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -3712,24 +3686,24 @@ msgstr ""
 "Veµkos» obrazovky %dx%d nie je podporovaná.\n"
 "Skontrolujte premennú prostredia TERM.\n"
 
-#: src/subshell.c:433
+#: src/subshell.c:430
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Nemohol som otvori» pipe %s\n"
 
-#: src/subshell.c:726
+#: src/subshell.c:723
 msgid " The shell is still active. Quit anyway? "
 msgstr " Shell je e¹te stále aktívny. Skonèi» napriek tomu? "
 
-#: src/subshell.c:752
+#: src/subshell.c:749
 msgid " There are stopped jobs."
 msgstr " Sú tam zastavené úlohy."
 
-#: src/subshell.c:753
+#: src/subshell.c:750
 msgid " Quit anyway? "
 msgstr " Ukonèi» napriek tomu? "
 
-#: src/subshell.c:866
+#: src/subshell.c:863
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Varovanie: Nemohol som zmeni» na %s.\n"
@@ -3897,46 +3871,46 @@ msgstr ""
 "Nemô¾em zapísa» do súboru %s:\n"
 "%s\n"
 
-#: src/user.c:136
+#: src/user.c:134
 msgid " Format error on file Extensions File "
 msgstr " Chyba formátu v súbore prípon"
 
-#: src/user.c:137
+#: src/user.c:135
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " Makro %%var nemá ¹tandardnú hodnotu"
 
-#: src/user.c:138
+#: src/user.c:136
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " Makro %%var nemá premennú"
 
-#: src/user.c:282
+#: src/user.c:279
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Neplatne definovanı shell model  \"%c\". "
 
-#: src/user.c:435
+#: src/user.c:432
 msgid " Debug "
 msgstr " Ladenie "
 
-#: src/user.c:444
+#: src/user.c:441
 msgid " ERROR: "
 msgstr " CHYBA: "
 
-#: src/user.c:448
+#: src/user.c:445
 msgid " True:  "
 msgstr " Pravda: "
 
-#: src/user.c:450
+#: src/user.c:447
 msgid " False: "
 msgstr " Nepravda: "
 
-#: src/user.c:645
+#: src/user.c:642
 msgid " Warning -- ignoring file "
 msgstr " Varovanie -- ignorujem súbor "
 
-#: src/user.c:646
+#: src/user.c:643
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3945,31 +3919,31 @@ msgstr ""
 "Súbor %s nieje vlast. rootom, vami, alebo nie je voµne zapisovateµnı.\n"
 "Pou¾itie mô¾e kompromitova» va¹u bezpeènos»"
 
-#: src/user.c:669
+#: src/user.c:666
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Nemô¾em spusti» programy, pokiaµ je èinnı v nemiestnom adresári "
 
-#: src/user.c:767
+#: src/user.c:764
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr " Nenájdené ¾iadne odpovedajúce polo¾ky v %s"
 
 #. Create listbox
-#: src/user.c:773
+#: src/user.c:770
 msgid " User menu "
 msgstr " Pou¾ívateµské menu"
 
-#: src/util.c:215
+#: src/util.c:211
 msgid "name_trunc: too big"
 msgstr "meno_trunc: je príli¹ veµké"
 
 #. strftime() format string for recent dates
-#: src/util.c:669 src/util.c:695
+#: src/util.c:665 src/util.c:691
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:670 src/util.c:693
+#: src/util.c:666 src/util.c:689
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -4017,7 +3991,7 @@ msgstr "Prázdny vıstup z filtra potomka procesu "
 msgid " Could not open file "
 msgstr " Nemohol som otvori» súbor "
 
-#: src/view.c:544
+#: src/view.c:545
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -4026,11 +4000,11 @@ msgstr ""
 " Nemô¾em urèi» \"%s\"\n"
 " %s "
 
-#: src/view.c:552
+#: src/view.c:553
 msgid " Cannot view: not a regular file "
 msgstr " Nemô¾em nahliadnu»: toto nie je normálny súbor "
 
-#: src/view.c:559
+#: src/view.c:560
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -4063,19 +4037,19 @@ msgstr "%s bytov"
 msgid "  [grow]"
 msgstr "  [rás»]"
 
-#: src/view.c:1543 src/view.c:1675
+#: src/view.c:1542 src/view.c:1674
 msgid " Search string not found "
 msgstr " Hµadanı re»azec nebol nájdenı "
 
-#: src/view.c:1663
+#: src/view.c:1662
 msgid "Invalid hex search expression"
 msgstr "Neplatnı hexadecimány vyhµadávací vıraz"
 
-#: src/view.c:1714
+#: src/view.c:1713
 msgid " Invalid regular expression "
 msgstr " Neplatnı regulárny vıraz "
 
-#: src/view.c:1836
+#: src/view.c:1835
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -4084,7 +4058,7 @@ msgstr ""
 " Aktuálne èíslo riadku je %d.\n"
 " Zadajte nové èíslo riadku:"
 
-#: src/view.c:1858
+#: src/view.c:1857
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -4093,67 +4067,67 @@ msgstr ""
 " Momentálna adresa je 0x%lx.\n"
 " Zadajte novú adresu:"
 
-#: src/view.c:1860
+#: src/view.c:1859
 msgid " Goto Address "
 msgstr " Choï na Adresu "
 
-#: src/view.c:1891
+#: src/view.c:1890
 msgid " Enter regexp:"
 msgstr " Zadajte regexp:"
 
-#: src/view.c:2014
+#: src/view.c:2013
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2014
+#: src/view.c:2013
 msgid "Hex"
 msgstr "Hexdec"
 
-#: src/view.c:2015
+#: src/view.c:2014
 msgid "Goto"
 msgstr "Choï"
 
-#: src/view.c:2015
+#: src/view.c:2014
 msgid "Line"
 msgstr "Riadok"
 
-#: src/view.c:2018
+#: src/view.c:2017
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2021
+#: src/view.c:2020
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2021
+#: src/view.c:2020
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2023
+#: src/view.c:2022
 msgid "UnWrap"
 msgstr "Rozbaµ"
 
-#: src/view.c:2023
+#: src/view.c:2022
 msgid "Wrap"
 msgstr "Zabaµ"
 
-#: src/view.c:2026
+#: src/view.c:2025
 msgid "HxSrch"
 msgstr "HxSrch"
 
-#: src/view.c:2029
+#: src/view.c:2028
 msgid "Raw"
 msgstr "Prvotnı"
 
-#: src/view.c:2029
+#: src/view.c:2028
 msgid "Parse"
 msgstr "Rozober"
 
-#: src/view.c:2033
+#: src/view.c:2032
 msgid "Unform"
 msgstr "Obnov"
 
-#: src/view.c:2033
+#: src/view.c:2032
 msgid "Format"
 msgstr "Formát"
 
@@ -4163,202 +4137,202 @@ msgstr " História "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
-#: src/win.c:191
+#: src/win.c:188
 msgid "Function key 1"
 msgstr "Funkènı klá. 1"
 
-#: src/win.c:192
+#: src/win.c:189
 msgid "Function key 2"
 msgstr "Funkènı klá. 2"
 
-#: src/win.c:193
+#: src/win.c:190
 msgid "Function key 3"
 msgstr "Funkènı klá. 3"
 
-#: src/win.c:194
+#: src/win.c:191
 msgid "Function key 4"
 msgstr "Funkènı klá. 4"
 
-#: src/win.c:195
+#: src/win.c:192
 msgid "Function key 5"
 msgstr "Funkènı klá. 5"
 
-#: src/win.c:196
+#: src/win.c:193
 msgid "Function key 6"
 msgstr "Funkènı klá. 6"
 
-#: src/win.c:197
+#: src/win.c:194
 msgid "Function key 7"
 msgstr "Funkènı klá. 7"
 
-#: src/win.c:198
+#: src/win.c:195
 msgid "Function key 8"
 msgstr "Funkènı klá. 8"
 
-#: src/win.c:199
+#: src/win.c:196
 msgid "Function key 9"
 msgstr "Funkènı klá. 9"
 
-#: src/win.c:200
+#: src/win.c:197
 msgid "Function key 10"
 msgstr "Funkènı klá. 10"
 
-#: src/win.c:201
+#: src/win.c:198
 msgid "Function key 11"
 msgstr "Funkènı klá. 11"
 
-#: src/win.c:202
+#: src/win.c:199
 msgid "Function key 12"
 msgstr "Funkènı klá. 12"
 
-#: src/win.c:203
+#: src/win.c:200
 msgid "Function key 13"
 msgstr "Funkènı klá. 13"
 
-#: src/win.c:204
+#: src/win.c:201
 msgid "Function key 14"
 msgstr "Funkènı klá. 14"
 
-#: src/win.c:205
+#: src/win.c:202
 msgid "Function key 15"
 msgstr "Funkènı klá. 15"
 
-#: src/win.c:206
+#: src/win.c:203
 msgid "Function key 16"
 msgstr "Funkènı klá. 16"
 
-#: src/win.c:207
+#: src/win.c:204
 msgid "Function key 17"
 msgstr "Funkènı klá. 17"
 
-#: src/win.c:208
+#: src/win.c:205
 msgid "Function key 18"
 msgstr "Funkènı klá. 18"
 
-#: src/win.c:209
+#: src/win.c:206
 msgid "Function key 19"
 msgstr "Funkènı klá. 19"
 
-#: src/win.c:210
+#: src/win.c:207
 msgid "Function key 20"
 msgstr "Funkènı klá. 20"
 
-#: src/win.c:211
+#: src/win.c:208
 msgid "Backspace key"
 msgstr "Kláv. Backspace"
 
-#: src/win.c:212
+#: src/win.c:209
 msgid "End key"
 msgstr "Klávesa End"
 
-#: src/win.c:213
+#: src/win.c:210
 msgid "Up arrow key"
 msgstr "©ípka hore"
 
-#: src/win.c:214
+#: src/win.c:211
 msgid "Down arrow key"
 msgstr "©ípka dole"
 
-#: src/win.c:215
+#: src/win.c:212
 msgid "Left arrow key"
 msgstr "©ípka vµavo"
 
-#: src/win.c:216
+#: src/win.c:213
 msgid "Right arrow key"
 msgstr "©ípka vpravo"
 
-#: src/win.c:217
+#: src/win.c:214
 msgid "Home key"
 msgstr "Klávesa Home"
 
-#: src/win.c:218
+#: src/win.c:215
 msgid "Page Down key"
 msgstr "Kláv. Page Down"
 
-#: src/win.c:219
+#: src/win.c:216
 msgid "Page Up key"
 msgstr "Kláv. Page Up"
 
-#: src/win.c:220
+#: src/win.c:217
 msgid "Insert key"
 msgstr "Klávesa Insert"
 
-#: src/win.c:221
+#: src/win.c:218
 msgid "Delete key"
 msgstr "Klávesa Delete"
 
-#: src/win.c:222
+#: src/win.c:219
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
-#: src/win.c:223
+#: src/win.c:220
 msgid "+ on keypad"
 msgstr "+ na num. kláves."
 
-#: src/win.c:224
+#: src/win.c:221
 msgid "- on keypad"
 msgstr "- na num. kláves."
 
-#: src/win.c:225
+#: src/win.c:222
 msgid "* on keypad"
 msgstr "* na num. kláves."
 
 #. From here on, these won't be shown in Learn keys (no space)
-#: src/win.c:227
+#: src/win.c:224
 msgid "Left arrow keypad"
 msgstr "¥ava ¹ípka na kláv."
 
-#: src/win.c:228
+#: src/win.c:225
 msgid "Right arrow keypad"
 msgstr "Pravá ¹ípka na kláv."
 
-#: src/win.c:229
+#: src/win.c:226
 msgid "Up arrow keypad"
 msgstr "©ípka hore na kláv."
 
-#: src/win.c:230
+#: src/win.c:227
 msgid "Down arrow keypad"
 msgstr "©ípka dole na kláv."
 
-#: src/win.c:231
+#: src/win.c:228
 msgid "Home on keypad"
 msgstr "Home na klávesnici"
 
-#: src/win.c:232
+#: src/win.c:229
 msgid "End on keypad"
 msgstr "End na klávesnici"
 
-#: src/win.c:233
+#: src/win.c:230
 msgid "Page Down keypad"
 msgstr "Page Down na kláves."
 
-#: src/win.c:234
+#: src/win.c:231
 msgid "Page Up keypad"
 msgstr "Page Up na kláves."
 
-#: src/win.c:235
+#: src/win.c:232
 msgid "Insert on keypad"
 msgstr "Insert na kláves."
 
-#: src/win.c:236
+#: src/win.c:233
 msgid "Delete on keypad"
 msgstr "Delete na kláves."
 
-#: src/win.c:237
+#: src/win.c:234
 msgid "Enter on keypad"
 msgstr "Enter na kláves."
 
-#: src/win.c:238
+#: src/win.c:235
 msgid "Slash on keypad"
 msgstr "Slash na kláves."
 
-#: src/win.c:239
+#: src/win.c:236
 msgid "NumLock on keypad"
 msgstr "NumLock na kláves."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: src/wtools.c:570 vfs/vfs.c:1863
+#: src/wtools.c:546 vfs/vfs.c:1864
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -4380,7 +4354,7 @@ msgstr ""
 "Predèasnı koniec cpio archívu\n"
 "%s"
 
-#: vfs/cpio.c:309 vfs/cpio.c:358
+#: vfs/cpio.c:310 vfs/cpio.c:360
 #, c-format
 msgid ""
 "Corrupt cpio header encountered in\n"
@@ -4389,7 +4363,7 @@ msgstr ""
 "Po¹kodená hlavièka cpio v\n"
 "%s"
 
-#: vfs/cpio.c:427
+#: vfs/cpio.c:430
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4406,12 +4380,12 @@ msgstr ""
 #. file and than a record for a directory it is in; cpio would die with
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
-#: vfs/cpio.c:450
+#: vfs/cpio.c:453
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
 msgstr "%s obsahuje duplicitné polo¾ky! Preskakujem!"
 
-#: vfs/cpio.c:517
+#: vfs/cpio.c:520
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4741,7 +4715,7 @@ msgstr ""
 "Varovanie: Neplatnı príznak %c v sfs.ini:\n"
 "%s\n"
 
-#: vfs/smbfs.c:527
+#: vfs/smbfs.c:544
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4750,31 +4724,31 @@ msgstr ""
 " prepájanie na %s zlyhalo\n"
 " "
 
-#: vfs/smbfs.c:1098
+#: vfs/smbfs.c:1118
 msgid " Authentication failed "
 msgstr " Overenie zlyhalo "
 
-#: vfs/smbfs.c:1590
+#: vfs/smbfs.c:1611
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s mkdir'ing %s "
 
-#: vfs/smbfs.c:1613
+#: vfs/smbfs.c:1634
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s rmdir'ing %s "
 
-#: vfs/smbfs.c:1717 vfs/smbfs.c:1737
+#: vfs/smbfs.c:1738 vfs/smbfs.c:1758
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s otváram vzdialenı súbor %s "
 
-#: vfs/smbfs.c:1805
+#: vfs/smbfs.c:1826
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s odstra?ujem vzdialenı súbor %s "
 
-#: vfs/smbfs.c:1843
+#: vfs/smbfs.c:1864
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s premenúvam súbor\n"
@@ -4908,32 +4882,32 @@ msgstr " poèas prechodu cez bloky"
 msgid " Could not open file: %s "
 msgstr " Nemohol som otvori» súbor: %s"
 
-#: vfs/vfs.c:1179
+#: vfs/vfs.c:1180
 msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
 
-#: vfs/vfs.c:1824
+#: vfs/vfs.c:1825
 msgid "Could not parse:"
 msgstr "Nemohol som spracova»:"
 
-#: vfs/vfs.c:1826
+#: vfs/vfs.c:1827
 msgid "More parsing errors will be ignored."
 msgstr "Ïal¹ie chyby pracovania budú ignorované."
 
-#: vfs/vfs.c:1826
+#: vfs/vfs.c:1827
 msgid "(sorry)"
 msgstr "(µutujem)"
 
-#: vfs/vfs.c:1837
+#: vfs/vfs.c:1838
 msgid "Internal error:"
 msgstr "Interná chyba:"
 
-#: vfs/vfs.c:1847
+#: vfs/vfs.c:1848
 #, c-format
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bitov prenesenıch)"
 
-#: vfs/vfs.c:1848
+#: vfs/vfs.c:1849
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bitov prenesenıch"
