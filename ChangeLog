@@ -1,3 +1,9 @@
+2003-10-25  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Remove check for socketpair().  Add new option
+	--enable-background.
+	* extraconf.h: Don't define WITH_BACKGROUND.
+
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't check for seekdir() and telldir().

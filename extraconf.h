@@ -30,10 +30,6 @@ the need to embed this logic into configure.in.
 #    undef USE_EXT2FSLIB
 #endif
 
-#ifdef HAVE_SOCKETPAIR
-#    define WITH_BACKGROUND
-#endif
-
 #if defined (__QNX__) && !defined(__QNXNTO__) && !defined (HAVE_INFOMOUNT_LIST)
 #    define HAVE_INFOMOUNT_QNX
 #endif

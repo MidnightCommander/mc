@@ -323,8 +323,6 @@ if test $have_gethostbyname = no; then
   done
 fi
 
-AC_CHECK_FUNCS(socketpair)
-
 dnl
 dnl Sequent wants getprocessstats
 dnl
@@ -578,6 +576,14 @@ case $host_os in
 linux*)
     cons_saver=yes
 esac
+
+
+dnl Support for background operations
+AC_ARG_ENABLE([background],
+	      [  --enable-background      Support for background file operations [[yes]]])
+if test "x$enable_background" != xno; then
+    AC_DEFINE(WITH_BACKGROUND, 1 [Define to enable background file operations])
+fi
 
 
 dnl
