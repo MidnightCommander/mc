@@ -5,11 +5,6 @@
 #ifndef _DIRENT_H_incl
 #define _DIRENT_H_incl
 
-#ifdef __WATCOMC__
-#include <direct.h>
-
-#else
-
 #ifdef __cplupplus
 extern "C" {
 #endif
@@ -64,7 +59,5 @@ extern int      rmdir( const char *__path );
 #ifdef __cplusplus
 };
 #endif
-
-#endif  /* __WATCOMC__ */
 
 #endif /* _DIRENT_H_incl */

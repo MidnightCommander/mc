@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <dirent.h>
 #include <windows.h>
 #include <errno.h>
+#include "dirent.h"
 
 DIR *opendir (const char * a_dir)
 {
