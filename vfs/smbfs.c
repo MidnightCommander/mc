@@ -1996,7 +1996,7 @@ smbfs_fstat (void *data, struct stat *buf)
 
 vfs vfs_smbfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_("netbios over tcp/ip"),
+    "smbfs",
     F_NET,	/* flags */
     "smb:",	/* prefix */
     NULL,	/* data */

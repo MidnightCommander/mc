@@ -1,3 +1,8 @@
+2001-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* smbfs.c (vfs_smbfs_ops): Use short name "smbfs" for the
+	filesystem. Don't translate it.
+
 2001-07-09  Pavel Roskin  <proski@gnu.org>
 
 	* tar.c (ReadStatus): Fix compilation on AIX.
