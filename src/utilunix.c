@@ -111,7 +111,7 @@ void init_groups (void)
     /* Put user's primary group first. */
     if ((grp = getgrgid (pwd->pw_gid)) != NULL) {
 	g_tree_insert (current_user_gid,
-		       GUINT_TO_POINTER (grp->gr_gid),
+		       GUINT_TO_POINTER ((int) grp->gr_gid),
 		       g_strdup (grp->gr_name));
     }
 
@@ -120,9 +120,9 @@ void init_groups (void)
 	for (i = 0; grp->gr_mem[i]; i++) {
 	    if (!strcmp (pwd->pw_name, grp->gr_mem[i]) &&
 		!g_tree_lookup (current_user_gid,
-				GUINT_TO_POINTER (grp->gr_gid))) {
+				GUINT_TO_POINTER ((int) grp->gr_gid))) {
 		g_tree_insert (current_user_gid,
-			       GUINT_TO_POINTER (grp->gr_gid),
+			       GUINT_TO_POINTER ((int) grp->gr_gid),
 			       g_strdup (grp->gr_name));
 		break;
 	    }
@@ -138,7 +138,8 @@ get_user_permissions (struct stat *buf) {
     if (buf->st_uid == current_user_uid || current_user_uid == 0)
        return 0;
     
-    if(current_user_gid && g_tree_lookup (current_user_gid, GUINT_TO_POINTER(buf->st_gid)))
+    if (current_user_gid && g_tree_lookup (current_user_gid,
+					   GUINT_TO_POINTER((int) buf->st_gid)))
        return 1;
 
     return 2;

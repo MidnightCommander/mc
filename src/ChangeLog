@@ -1,5 +1,8 @@
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c: Cast argument for GUINT_TO_POINTER to int to fix
+	warnings on Cygwin.
+
 	* subshell.c: ioctl() doesn't set errno - don't use perror() to
 	report failures.  Use fprintf() instead, ignore errors from
 	TIOCSWINSZ.
