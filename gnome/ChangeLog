@@ -1,5 +1,18 @@
 1998-12-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (setup_desktop_dnd): New function to set up drops
+	to the root window.
+	(setup_xdnd_proxy): Function by Owen Taylor to set up a DnD proxy
+	window.
+	(drag_data_received): Function to handle drops on the root window.
+	(desktop_destroy): Destroy the DnD setup.
+	(reload_desktop_icons): New function to reload the desktop.
+
+	* gscreen.c (drag_types, drop_types): Removed url-list; only
+	uri-list should be there.
+
+	* gdesktop.h: Removed TARGET_URL_LIST from the DnD enumerations.
+
 	* gtkdtree.c (gtk_dtree_do_select_dir): Made static, as it is for
 	internal use only.
 	Fixed a little bunch of compiler warnings.

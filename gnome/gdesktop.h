@@ -44,7 +44,6 @@ void desktop_destroy (void);
 
 enum {
 	TARGET_URI_LIST,
-	TARGET_URL_LIST,
 	TARGET_TEXT_PLAIN,
 };
 typedef enum {
@@ -69,7 +68,6 @@ typedef struct {
 /* Drag and drop types recognized by us */
 enum {
 	TARGET_URI_LIST,
-	TARGET_URL_LIST,
 	TARGET_TEXT_PLAIN,
 };
 

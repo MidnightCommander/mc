@@ -67,13 +67,11 @@ static char *drop_types [] = { "url:ALL" };
 
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/url-list", 0, TARGET_URL_LIST },
-	{ "text/plain",    0, TARGET_TEXT_PLAIN },
+	{ "text/plain",    0, TARGET_TEXT_PLAIN }
 };
 
 static GtkTargetEntry drop_types [] = {
-	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/url-list", 0, TARGET_URL_LIST },
+	{ "text/uri-list", 0, TARGET_URI_LIST }
 };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
@@ -721,7 +719,6 @@ panel_drag_data_get (GtkWidget        *widget,
 	char *data;
 			
 	switch (info){
-	case TARGET_URL_LIST:
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
 		data = panel_build_selected_file_list (panel, &len);

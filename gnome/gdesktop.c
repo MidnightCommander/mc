@@ -28,11 +28,14 @@
 #if 1
 #include <config.h>
 #include "fs.h"
+#include <gdk/gdkx.h>
+#include <gtk/gtkinvisible.h>
 #include <gnome.h>
 #include "dialog.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gmetadata.h"
+#include "gdnd.h"
 #include "gpopup.h"
 #include "../vfs/vfs.h"
 
@@ -85,6 +88,16 @@ static struct layout_slot *layout_slots;
 /* The last icon to be selected */
 static struct desktop_icon_info *last_selected_icon;
 
+/* Drag and drop targets for the desktop */
+static GtkTargetEntry dnd_targets[] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST }
+};
+
+static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
+
+static GtkWidget *dnd_proxy_window;
+
+	
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
  * it.  "Free" means it either has zero icons in it, or it has the minimum number of icons of all
@@ -587,7 +600,7 @@ create_desktop_dir (void)
 
 /* Reads the ~/Desktop directory and creates the initial desktop icons */
 static void
-load_initial_desktop_icons (void)
+load_desktop_icons (void)
 {
 	struct dirent *dirent;
 	DIR *dir;
@@ -630,33 +643,13 @@ load_initial_desktop_icons (void)
 		}
 }
 
-/**
- * desktop_init
- *
- * Initializes the desktop by setting up the default icons (if necessary), setting up drag and drop,
- * and other miscellaneous tasks.
- */
-void
-desktop_init (void)
-{
-	create_layout_info ();
-	create_desktop_dir ();
-	load_initial_desktop_icons ();
-}
-
-/**
- * desktop_destroy
- *
- * Shuts the desktop down by destroying the desktop icons.
- */
-void
-desktop_destroy (void)
+/* Destroys all the current desktop icons */
+static void
+destroy_desktop_icons (void)
 {
 	int i;
 	GList *l;
 	struct desktop_icon_info *dii;
-
-	/* Destroy the desktop icons */
 
 	for (i = 0; i < (layout_cols * layout_rows); i++) {
 		l = layout_slots[i].icons;
@@ -668,6 +661,172 @@ desktop_destroy (void)
 			desktop_icon_info_free (dii);
 		}
 	}
+}
+
+/* Reloads the desktop icons */
+static void
+reload_desktop_icons (void)
+{
+	destroy_desktop_icons ();
+	load_desktop_icons ();
+}
+
+/* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */
+static gboolean 
+setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
+{
+	GdkAtom xdnd_proxy_atom;
+	guint32 proxy_xid;
+	Atom type;
+	int format;
+	unsigned long nitems, after;
+	Window *proxy_data;
+	Window proxy;
+	guint32 old_warnings;
+
+	XGrabServer (GDK_DISPLAY ());
+
+	xdnd_proxy_atom = gdk_atom_intern ("XdndProxy", FALSE);
+	proxy_xid = GDK_WINDOW_XWINDOW (proxy_window);
+	type = None;
+	proxy = None;
+
+	old_warnings = gdk_error_warnings;
+
+	gdk_error_code = 0;
+	gdk_error_warnings = 0;
+
+	/* Check if somebody else already owns drops on the root window */
+
+	XGetWindowProperty (GDK_DISPLAY (), xid,
+			    xdnd_proxy_atom, 0,
+			    1, False, AnyPropertyType,
+			    &type, &format, &nitems, &after,
+			    (guchar **) &proxy_data);
+
+	if (type != None) {
+		if ((format == 32) && (nitems == 1))
+			proxy = *proxy_data;
+
+		XFree (proxy_data);
+	}
+
+	/* The property was set, now check if the window it points to exists and has a XdndProxy
+	 * property pointing to itself.
+	 */
+	if (proxy) {
+		XGetWindowProperty (GDK_DISPLAY (), proxy, 
+				    xdnd_proxy_atom, 0, 
+				    1, False, AnyPropertyType,
+				    &type, &format, &nitems, &after, 
+				    (guchar **) &proxy_data);
+
+		if (!gdk_error_code && type != None) {
+			if ((format == 32) && (nitems == 1))
+				if (*proxy_data != proxy)
+					proxy = GDK_NONE;
+
+			XFree (proxy_data);
+		} else
+			proxy = GDK_NONE;
+	}
+
+	if (!proxy) {
+		/* OK, we can set the property to point to us */
+
+		XChangeProperty (GDK_DISPLAY (), xid,
+				 xdnd_proxy_atom, gdk_atom_intern ("WINDOW", FALSE),
+				 32, PropModeReplace,
+				 (guchar *) &proxy_xid, 1);
+	}
+
+	gdk_error_code = 0;
+	gdk_error_warnings = old_warnings;
+  
+	XUngrabServer (GDK_DISPLAY ());
+
+	if (!proxy) {
+		/* Mark our window as a valid proxy window with a XdndProxy
+		 * property pointing recursively;
+		 */
+		XChangeProperty (GDK_DISPLAY (), proxy_xid,
+				 xdnd_proxy_atom, gdk_atom_intern ("WINDOW", FALSE),
+				 32, PropModeReplace,
+				 (guchar *) &proxy_xid, 1);
+      
+		return TRUE;
+	} else
+		return FALSE;
+}
+
+/* Callback used when the root window receives a drop */
+static void  
+drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
+		    GtkSelectionData *data, guint info, guint time, gpointer user_data)
+{
+	switch (info) {
+	case TARGET_URI_LIST:
+		printf ("uri list dropped on desktop!\n");
+
+		gdnd_drop_on_directory (context, data, desktop_directory);
+		reload_desktop_icons (); /* FIXME: this is inefficient and it sucks! */
+		
+		/* FIXME: return TRUE for delete if appropriate */
+		gtk_drag_finish (context, TRUE, FALSE, time);
+		return;
+
+	default:
+		break;
+	}
+
+	gtk_drag_finish (context, FALSE, FALSE, time);
+}
+
+/* Sets up drag and drop to the desktop root window */
+static void
+setup_desktop_dnd (void)
+{
+	dnd_proxy_window = gtk_invisible_new ();
+	gtk_widget_show (dnd_proxy_window);
+
+	if (!setup_xdnd_proxy (GDK_ROOT_WINDOW (), dnd_proxy_window->window))
+		g_warning ("Eeeeek, some moron is already taking drops on the root window!");
+
+	gtk_drag_dest_set (dnd_proxy_window,
+			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+			   dnd_targets, dnd_ntargets,
+			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
+
+	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_data_received",
+			    GTK_SIGNAL_FUNC (drag_data_received), NULL);
+}
+
+/**
+ * desktop_init
+ *
+ * Initializes the desktop by setting up the default icons (if necessary), setting up drag and drop,
+ * and other miscellaneous tasks.
+ */
+void
+desktop_init (void)
+{
+	create_layout_info ();
+	create_desktop_dir ();
+	load_desktop_icons ();
+	setup_desktop_dnd ();
+}
+
+/**
+ * desktop_destroy
+ *
+ * Shuts the desktop down by destroying the desktop icons.
+ */
+void
+desktop_destroy (void)
+{
+	/* Destroy the desktop icons */
+
+	destroy_desktop_icons ();
 
 	/* Cleanup */
 
@@ -678,6 +837,11 @@ desktop_destroy (void)
 
 	g_free (desktop_directory);
 	desktop_directory = NULL;
+
+	/* Remove DnD crap */
+
+	gtk_widget_destroy (dnd_proxy_window);
+	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
 }
 
 
