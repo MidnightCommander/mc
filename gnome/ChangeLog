@@ -1,3 +1,7 @@
+2001-04-06  Miguel de Icaza  <miguel@ximian.com>
+
+	* gdesktop.c (do_rescan): Added automatic desktop reloading. 
+
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
 	* gscreen.c (tree_size_allocate): Don't call save_setup() if

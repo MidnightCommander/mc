@@ -65,6 +65,9 @@ int desktop_use_shaped_text = 0;
 /* The computed name of the user's desktop directory */
 char *desktop_directory;
 
+/* Time of the last directory reload */
+time_t desktop_dir_modify_time;
+
 /* Layout information:  number of rows/columns for the layout slots, and the
  * array of slots.  Each slot is an integer that specifies the number of icons
  * that belong to that slot.
@@ -202,7 +205,7 @@ auto_pos (int sx, int ex, int sy, int ey, int *slot)
 {
 	int min, min_slot;
 	int x, y;
-	int val;
+	int val = 0;
 	int xinc, yinc;
 	int r, b;
 
@@ -614,14 +617,13 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 	char *full_name;
 	int have_pos, x, y, size;
 	DesktopIconInfo *dii;
-	GSList *need_position_list, *sl, *drop_grid_list, *drop_gl_copy;
+	GSList *need_position_list, *sl, *drop_grid_list = NULL, *drop_gl_copy = NULL;
 	GList *all_icons, *l;
 	char *desktop_url, *caption;
 	const char *mime;
 	int orig_xpos, orig_ypos;
 	guint need_position_list_length;
 	static int first_reload = TRUE;
-	file_and_url_t *fau;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -632,6 +634,18 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		return;
 	}
 
+	/*
+	 * Save the last time we scanned the directory
+	 */
+	{
+		struct stat buf;
+		
+		if (stat (desktop_directory, &buf) != -1)
+			desktop_dir_modify_time = buf.st_ctime;
+		else
+			desktop_dir_modify_time = time (NULL);
+	}
+	
 	gnome_metadata_lock ();
 
 	/* Read the directory.  For each file for which we do have an existing
@@ -3405,6 +3419,29 @@ setup_desktop_clicks (void)
 	gdk_bitmap_unref (stipple);
 }
 
+static gboolean
+do_rescan (void)
+{
+	struct stat buf;
+	
+	if (stat (desktop_directory, &buf) == -1)
+		return TRUE;
+
+	if (buf.st_ctime == desktop_dir_modify_time)
+		return TRUE;
+
+	desktop_reload_icons (FALSE, 0, 0);
+	
+	return TRUE;
+}
+
+#define RESCAN_TIMEOUT 4000
+
+static void
+setup_desktop_reload_monitor (void)
+{
+	gtk_timeout_add (RESCAN_TIMEOUT, do_rescan, NULL);
+}
 
 /**
  * desktop_init
@@ -3432,6 +3469,9 @@ desktop_init (void)
 
 	setup_desktop_dnd ();
 	setup_desktop_clicks ();
+
+	/* Setup reloading */
+	setup_desktop_reload_monitor ();
 }
 
 /**
