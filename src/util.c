@@ -1264,10 +1264,8 @@ load_file_position (char *filename, long *line, long *column)
     fn = concat_dir_and_file (home_dir, MC_FILEPOS);
     f = fopen (fn, "r");
     g_free (fn);
-    if (!f) {
-	g_free (filename);
+    if (!f)
 	return;
-    }
 
     len = strlen (filename);
 
