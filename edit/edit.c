@@ -28,7 +28,6 @@
 
 #include "src/cmd.h"		/* view_other_cmd() */
 #include "src/user.h"		/* user_menu_cmd() */
-#include "src/main.h"		/* edit_one_file */
 #include "src/wtools.h"		/* query_dialog() */
 
 /*
@@ -2566,12 +2565,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit_goto_matching_bracket (edit);
 	break;
     case CK_User_Menu:
-	if (edit_one_file) {
-	    message (1, MSG_ERROR, _("User menu available only in mcedit invoked from mc"));
-	    break;
-	}    
-	else
-	    user_menu (edit);
+	user_menu (edit);
 	break;
     case CK_Sort:
 	edit_sort_cmd (edit);

@@ -1,3 +1,7 @@
+2003-07-25  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (edit_execute_cmd): Enable user menu in mcedit.
+
 2003-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_quit_cmd): Rename to ...
