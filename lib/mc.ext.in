@@ -100,173 +100,23 @@
 # wider usage than on one system. You can send your modifications to
 # via email to mc-devel@roxanne.nuclecu.unam.mx
 
-### Archives ###
 
-# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
+### Changes ###
+# Reorganization: 2000-05-01 Michal Svec <rebel@penguin.cz>
 
-regex/\.t([gp]?z|ar\.g?[zZ])$
-	Open=%cd %p#utar
-	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
-	Extract=gzip -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
+### TODO ###
 
-regex/\.tar\.bz$
-#	Open=%cd %p#utar
-	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
-	Extract=bzip -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
+Postscript	Open: ps2svga [gs -DEVICE=jpeg|zgv or something]
+Images		asciiview
+RTF		rtf2html
 
-regex/\.tar\.bz2$
-	Open=%cd %p#utar
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
-	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
-	Icon=compressed.xpm
+All X Apps	[Nothing/Warning] if no DISPLAY
+Not found	[Default/Warning]
+Empty Output	[Default/Warning]
+Edit:		CopyOut+EDIT+CopyIn
+Security	Check gzip/bzip EDIT (mktemp)
 
-# .tar
-shell/.tar
-	Open=%cd %p#utar
-	View=%view{ascii} tar tvvf %f
-	Extract=tar xf %f
-	Icon=tar.xpm
-
-# zip
-regex/\.(zip|ZIP|jar|JAR)$
-	Open=%cd %p#uzip
-	View=%view{ascii} unzip -v %f
-	Icon=zip.xpm
-	Extract=unzip %f
-	Extract (with flags)=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
-	Unzip=unzip %f '*'
-
-# zoo
-shell/.zoo
-	Open=%cd %p#uzoo
-	View=%view{ascii} zoo l %f
-	Icon=zoo.xpm
-	Extract=zoo x %f '*'
-	
-# lha
-regex/\.(lha|LHA|lzh|LZH)$
-	Open=%cd %p#ulha
-	View=%view{ascii} lharc l %f
-	Icon=lharc.xpm
-	Extract=lharc x %f '*'
-	Extract (with flags)=I=%{Enter any LHarc flags:}; if test -n "$I"; then lharc x $I %f; fi
-
-# arj
-regex/\.a(rj|[0-9][0-9])$
-	Open=%cd %p#uarj
-	View=%view{ascii} unarj l %f
-	Icon=zip.xpm
-	Extract=unarj x %f '*'
-	Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
-
-# ha
-regex/\.(ha|HA|Ha)$
-	Open=%cd %p#uha
-	View=%view{ascii} ha lf %f
-	Icon=ha.xpm
-	Extract=ha xy %f '*'
-	Extract (with flags)=I=%{Enter any HA flags:}; if test -n "$I"; then ha xy $I %f; fi
-
-# rar
-regex/\.[rR]([aA][rR]|[0-9][0-9])$
-	Open=%cd %p#urar
-	View=%view{ascii} rar v -c- %f
-	Extract=rar x -c- %f '*'
-	Extract (with flags)=I=%{Enter any RAR flags:}; if test -n "$I";then rar x $I %f; fi
-
-# cpio
-shell/.cpio.Z
-	Open=%cd %d/%p#ucpio/
-	View=%view{ascii} compress -dc '%f' | cpio -ictv
-	Extract=compress -dc '%f' | cpio -ic
-	Icon=compressed.xpm
-
-shell/.cpio.gz
-	Open=%cd %d/%p#ucpio/
-	View=%view{ascii} gzip -dc '%f' | cpio -ictv
-	Extract=gzip -dc '%f' | cpio -ic
-	Icon=compressed.xpm
-
-shell/.cpio
-	Open=%cd %d/%p#ucpio/
-	View=%view{ascii} cat '%f' | cpio -ictv
-	Extract=cat '%f' | cpio -ic
-	Icon=cpio.xpm
-
-# gzip
-type/gzip
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Uncompress=gunzip %f
-	Icon=compressed.xpm
-
-# bzip2
-type/bzip2
-	Open=bzip2 -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip2 %f
-	Icon=compressed.xpm
-
-# bzip
-type/bzip
-	Open=bzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip %f
-	Icon=compressed.xpm
-
-# compress
-type/compress
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Icon=compressed.xpm
-
-# ar library
-regex/\.s?a$
-	Open=%cd %p#uar
-	#Open=%view{ascii} ar tv %f
-	View=%view{ascii} nm %f
-	Icon=a.xpm
-
-# .so libraries are not manual pages
-regex/\.so\.[0-9\.]*$
-	View=%view{hex}
-	Icon=so.xpm
-
-# ls-lR
-regex/^ls-?lR$
-	Open=%cd %p#lslR
-	View=%view{ascii}
-	Icon=plain_dir.xpm
-regex/^ls-?lR\.(g?z|Z)$
-	Open=%cd %p#lslR
-	View=%view{ascii} gunzip -c %f
-	Icon=plain_dir.xpm
-
-# ftplist
-regex/\.ftplist$
-	Open=%cd %p#ftplist
-
-# trpm
-regex/\.trpm$
-	Open=%cd %p#trpm
-	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
-
-# rpm
-regex/\.rpm$
-	Open=%cd %p#rpm
-	Install this RPM=rpm -i %f
-	Upgrade this RPM=rpm -U %f
-
-# deb
-regex/\.deb$
-	Open=%cd %p#deb
-	View=%view{ascii} dpkg-deb -c %f
+Maybe:	Open/XOpen/GOpen/KOpen/... for Console/X/GNOME/KDE/etc.
 
 
 ### Programs ###
@@ -467,6 +317,7 @@ shell/.xpm
 
 include/image-options
 	Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (ee %f &); fi
+	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
 	Set root window to this image=background-properties --setwallpaper %f &
 	Display this file=ee %f &
@@ -496,14 +347,16 @@ regex/\.(mp3|MP3|Mp3)$
 ### Multimedia ###
 
 regex/\.(mpe?g|MPE?G|Mpe?g)$
-	Open=mtvp %f&
-	#Open=plaympeg %f&
+	Open=mtvp %f 2>/dev/null&
+	#Open=mtv %f 2>/dev/null&
+	#Open=gtv %f 2>/dev/null&
+	#Open=plaympeg %f 2>/dev/null&
 	#Open=mpeg_play %f &
 	#Open(big)=mpeg_play -dither 2x2 %f &
 	#Open(gray)=mpeg_play -dither gray %f &
 
 regex/\.(avi|AVI|Avi|mov|MOV|Mov)$
-	Open=xanim %f&
+	Open=xanim %f 2>/dev/null&
 
 regex/\.(rm|RM|Rm|ram|RAM|Ram)$
 	Open=realplay %f&
@@ -511,18 +364,21 @@ regex/\.(rm|RM|Rm|ram|RAM|Ram)$
 
 ### Documents ###
 
+# Postscript
 type/PostScript
-	Open=gv %f
+	Open=gv %f&
 	Icon=postscript.xpm
 	View=%view{ascii} ps2ascii %f
 	View with GhostView=gv %f
 
+# PDF
 type/PDF
 	Open=xpdf %f&
 	#Open=acroread %f&
 	#Open=ghostview %f&
 	View=%view{ascii} pdftotext %f -
 
+# html
 regex/\.([Hh]tml?|HTML?)$
 	#Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
 	Open=if [ x$DISPLAY = x ]; then lynx -force_html %f; else (@X11_WWW@ %f &); fi
@@ -541,41 +397,27 @@ type/Microsoft Word Document
 	View=%view{ascii} word2x -f text %f -
 	Icon=word.xpm
  
+# Framemaker
 type/FrameMaker
 	Open=fmclient -f %f
 	Icon=framemaker.xpm
 
 # DVI
 regex/\.([Dd]vi|DVI)$
-	Open=xdvi %f
+	Open=if [ x$DISPLAY = x ]; then dvisvga %f; else (xdvi %f &); fi
+	View=%view{ascii} dvi2tty %f
 	Icon=binary.xpm
-	#View=%view{ascii} dvitty %f
 	Convert file to Postscript=dvips %f
 
-regex/\.(tex|TEX|Tex|TeX)$
+# TeX
+regex/\.([Tt]ex|TEX|TeX)$
 	Open=%var{EDITOR:vi} %f
 	Icon=tex.xpm
 	TeX this file=tex %f
 	LaTeX this file=latex %f
 
 
-### Directories ###
-
-directory/^\.\.$
-	Icon=parent_dir.xpm
-directory/^News$
-	Icon=news_dir.xpm
-directory/^Mail$
-	Icon=mail_dir.xpm
-directory/^\..*$
-	Icon=hidden_dir.xpm
-directory/^.*$
-	Start XTerm here=cd %p; exec xterm &
-	Make tar.gz=I=%{Enter destination file name:}; if test -n "$I"; then tar cvf - %p | gzip > $I; fi
-	Icon=plain_dir.xpm
-
-
-### Other ###
+### Miscellaneous ###
 
 shell/^RMAIL$
 	Start Emacs on this RMAIL file=emacs %f
@@ -619,6 +461,186 @@ regex/\.(dbf|DBF)$
 regex/\.(rexx)|(rex)|(cmd)$
        Open=rexx %f %{Enter parameters};echo "Press ENTER";read y
        Icon=rexx.xpm
+
+
+### Archives ###
+
+# .tgz, .tpz, .tar.gz, .tar.z, .tar.Z
+regex/\.t([gp]?z|ar\.g?[zZ])$
+	Open=%cd %p#utar
+	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
+	Extract=gzip -dc %f 2>/dev/null | tar xf -
+	Icon=compressed.xpm
+regex/\.tar\.bz$
+	# Open=%cd %p#utar
+	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
+	Extract=bzip -dc %f 2>/dev/null | tar xf -
+	Icon=compressed.xpm
+regex/\.tar\.bz2$
+	Open=%cd %p#utar
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
+	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
+	Icon=compressed.xpm
+
+# tar
+regex/\.(tar|TAR)$
+	Open=%cd %p#utar
+	View=%view{ascii} tar tvvf %f
+	Extract=tar xf %f
+	Icon=tar.xpm
+
+# zip
+regex/\.(zip|ZIP|jar|JAR)$
+	Open=%cd %p#uzip
+	View=%view{ascii} unzip -v %f
+	Icon=zip.xpm
+	Extract=unzip %f
+	Extract (with flags)=I=%{Enter any Unzip flags:}; if test -n "$I"; then unzip $I %f; fi
+	Unzip=unzip %f '*'
+
+# zoo
+regex/\.(zoo|ZOO)$
+	Open=%cd %p#uzoo
+	View=%view{ascii} zoo l %f
+	Icon=zoo.xpm
+	Extract=zoo x %f '*'
+	
+# lha
+regex/\.(lha|LHA|lzh|LZH)$
+	Open=%cd %p#ulha
+	View=%view{ascii} lharc l %f
+	Icon=lharc.xpm
+	Extract=lharc x %f '*'
+	Extract (with flags)=I=%{Enter any LHarc flags:}; if test -n "$I"; then lharc x $I %f; fi
+
+# arj
+regex/\.a(rj|[0-9][0-9])$
+	Open=%cd %p#uarj
+	View=%view{ascii} unarj l %f
+	Icon=zip.xpm
+	Extract=unarj x %f '*'
+	Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
+
+# ha
+regex/\.(ha|HA|Ha)$
+	Open=%cd %p#uha
+	View=%view{ascii} ha lf %f
+	Icon=ha.xpm
+	Extract=ha xy %f '*'
+	Extract (with flags)=I=%{Enter any HA flags:}; if test -n "$I"; then ha xy $I %f; fi
+
+# rar
+regex/\.[rR]([aA][rR]|[0-9][0-9])$
+	Open=%cd %p#urar
+	View=%view{ascii} rar v -c- %f
+	Extract=rar x -c- %f '*'
+	Extract (with flags)=I=%{Enter any RAR flags:}; if test -n "$I";then rar x $I %f; fi
+
+# cpio
+shell/.cpio.Z
+	Open=%cd %d/%p#ucpio/
+	View=%view{ascii} compress -dc '%f' | cpio -ictv
+	Extract=compress -dc '%f' | cpio -ic
+	Icon=compressed.xpm
+shell/.cpio.gz
+	Open=%cd %d/%p#ucpio/
+	View=%view{ascii} gzip -dc '%f' | cpio -ictv
+	Extract=gzip -dc '%f' | cpio -ic
+	Icon=compressed.xpm
+shell/.cpio
+	Open=%cd %d/%p#ucpio/
+	View=%view{ascii} cat '%f' | cpio -ictv
+	Extract=cat '%f' | cpio -ic
+	Icon=cpio.xpm
+
+# gzip
+type/gzip
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
+	Uncompress=gunzip %f
+	Icon=compressed.xpm
+
+# bzip2
+type/bzip2
+	Open=bzip2 -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
+	Uncompress=bunzip2 %f
+	Icon=compressed.xpm
+
+# bzip
+type/bzip
+	Open=bzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
+	Uncompress=bunzip %f
+	Icon=compressed.xpm
+
+# compress
+type/compress
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
+	Icon=compressed.xpm
+
+# ar library
+regex/\.s?a$
+	Open=%cd %p#uar
+	#Open=%view{ascii} ar tv %f
+	View=%view{ascii} nm %f
+	Icon=a.xpm
+
+# .so libraries are not manual pages
+regex/\.(so|so\.[0-9\.]*)$
+	View=%view{hex}
+	Icon=so.xpm
+
+# ls-lR
+regex/^ls-?lR$
+	Open=%cd %p#lslR
+	View=%view{ascii}
+	Icon=plain_dir.xpm
+regex/^ls-?lR\.(g?z|Z)$
+	Open=%cd %p#lslR
+	View=%view{ascii} gunzip -c %f
+	Icon=plain_dir.xpm
+
+# ftplist
+regex/\.ftplist$
+	Open=%cd %p#ftplist
+
+# trpm
+regex/\.trpm$
+	Open=%cd %p#trpm
+	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
+
+# rpm
+regex/\.rpm$
+	Open=%cd %p#rpm
+	Install this RPM=rpm -i %f
+	Upgrade this RPM=rpm -U %f
+
+# deb
+regex/\.deb$
+	Open=%cd %p#deb
+	View=%view{ascii} dpkg-deb -c %f
+
+
+### Directories ###
+
+directory/^\.\.$
+	Icon=parent_dir.xpm
+directory/^News$
+	Icon=news_dir.xpm
+directory/^Mail$
+	Icon=mail_dir.xpm
+directory/^\..*$
+	Icon=hidden_dir.xpm
+directory/^.*$
+	Start XTerm here=cd %p; exec xterm &
+	Make tar.gz=I=%{Enter destination file name:}; if test -n "$I"; then tar cvf - %p | gzip > $I; fi
+	Icon=plain_dir.xpm
 
 
 ### Default ###
