@@ -1387,13 +1387,10 @@ static menu_entry OptMenu [] = {
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
 Menu MenuBar [5];
-static Menu MenuBarEmpty [5];
 
 void
 init_menu (void)
 {
-    int i;
-
     MenuBar [0] = create_menu ( horizontal_split ? _(" &Above ") : _(" &Left "), 
                                 PanelMenu, menu_entries (PanelMenu));
     MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu));
@@ -1401,8 +1398,6 @@ init_menu (void)
     MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu));
     MenuBar [4] = create_menu (horizontal_split ? _(" &Below ") : _(" &Right "), 
 			       RightMenu, menu_entries (PanelMenu));
-    for (i = 0; i < 5; i++)
-	MenuBarEmpty [i] = create_menu (MenuBar [i]->name, 0, 0);
 }
 
 void
@@ -1412,7 +1407,6 @@ done_menu (void)
 
     for (i = 0; i < 5; i++){
 	destroy_menu (MenuBar [i]);
-	destroy_menu (MenuBarEmpty [i]);
     }
 }
     

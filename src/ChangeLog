@@ -1,5 +1,7 @@
 2001-06-20  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Remove MenuBarEmpty. From Andrew V. Samoilov.
+
 	* wtools.c [HAVE_X]: Disable quick dialog routines.
 
 	* setup.c (save_setup) [HAVE_X]: Don't save the [Dirs] section.
