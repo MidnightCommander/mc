@@ -3008,10 +3008,11 @@ ESC).
 .PP
 .I only_leading_plus_minus
 .IP
-Set special treatment for '+', '-', '*' in command line (select,
-unselect, reverse selection) only if command line is empty. No need to
-quote this characters in the middle of the command line. But we can not
-change selection when command line is not empty.
+Allow special treatment for '+', '-', '*' in the command line (select,
+unselect, reverse selection) only if the command line is empty.  You
+don't need to quote those characters in the middle of the command line.
+On the other hand, you cannot use them to change selection when the
+command line is not empty.
 .I panel_scroll_pages
 .IP
 If set (the default), panel will scroll by half the display when the
