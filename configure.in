@@ -435,27 +435,6 @@ filel=$ac_cv_filel
 AC_MSG_RESULT([$filel])
 fi 
 
-dnl
-dnl Check to see if grep program allowes dash to denote stdin 
-dnl
-AC_MSG_CHECKING([for - option to grep command])
-AC_CACHE_VAL(ac_cv_grep_stdin, [
-    echo "grep_test" | grep grep_test - >/dev/null 2>&1
-    if test $? = 0; then
-	ac_cv_grep_stdin=yes
-    else
-	ac_cv_grep_stdin=no
-    fi
-])
-if test x$ac_cv_grep_stdin = xyes; then
-    AC_DEFINE(GREP_STDIN, 1, [Define if the grep command accepts - for stdin])
-fi
-AC_MSG_RESULT([$ac_cv_grep_stdin])
-
-dnl
-dnl The subshell support
-dnl
-
 AC_MSG_CHECKING([for subshell support])
 AC_ARG_WITH(subshell,
 	[--with-subshell            If you want to use a concurrent shell],
