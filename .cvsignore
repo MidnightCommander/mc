@@ -1,6 +1,7 @@
 *.cache
 *.tar.gz
 ABOUT-NLS
+COPYING
 Make.common
 Makefile
 Makefile.in
