@@ -1,0 +1,5 @@
+1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c: Some hackish changes to work around idempotence bugs
+	in gtk_clist_select_row().
+

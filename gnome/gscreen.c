@@ -4,8 +4,10 @@
  *
  * Copyright (C) 1997 The Free Software Foundation
  *
- * Author: Miguel de Icaza
+ * Authors: Miguel de Icaza
+ *          Federico Mena
  */
+
 #include <config.h>
 #include <string.h>
 #include <stdlib.h>		/* atoi */
@@ -29,18 +31,17 @@
 
 #include "directory.xpm"
 
+
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
 GdkPixmap *directory_pixmap;
 GdkBitmap *directory_mask;
 
-/* button bindings, mc text mode (1) or gui-like  */
-static int mc_bindings;
-
 static char *drag_types [] = { "text/plain", "url:ALL" };
 static char *drop_types [] = { "url:ALL" };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
+
 
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
@@ -50,9 +51,7 @@ repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 void
 show_dir (WPanel *panel)
 {
-	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
 	GList *list;
-	char  *string;
 
 	list = g_list_alloc ();
 	g_list_append (list, panel->cwd);
@@ -103,8 +102,6 @@ x_fill_panel (WPanel *panel)
 		format_e *format = panel->format;
 		
 		for (col = 0; format; format = format->next){
-			char *text;
-
 			if (!format->use_in_gui)
 			    continue;
 
@@ -129,7 +126,7 @@ x_fill_panel (WPanel *panel)
 	free (texts);
 }
 
-void
+static void
 gmc_panel_set_size (int index, int boot)
 {
 	Widget *w;
@@ -161,26 +158,34 @@ x_panel_select_item (WPanel *panel, int index, int value)
 	/* Not required */
 }
 
+/* FIXME: this variable is used by x_select_item() to indicate the
+ * lack of idempotence in gtk_clist_select_row().  I think it can be
+ * removed once Jay fixes CList :-)
+ * - Federico
+ */
+
+static int will_select;
+
 void
 x_select_item (WPanel *panel)
 {
 	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
 	GtkCList *clist = GTK_CLIST (g->list);
-	
+
+	if (will_select)
+		return;
+
 	gtk_clist_select_row (clist, panel->selected, 0);
-	
-	if (!gtk_clist_row_is_visible (clist, panel->selected)){
+
+	if (!gtk_clist_row_is_visible (clist, panel->selected))
 		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
-	}
 }
 
 void
 x_unselect_item (WPanel *panel)
 {
-#if 0
 	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
 	gtk_clist_unselect_row (GTK_CLIST (g->list), panel->selected, 0);
-#endif
 }
 
 void
@@ -204,13 +209,12 @@ x_adjust_top_file (WPanel *panel)
 	g_panel_contents *g = (g_panel_contents *) panel->widget.wdata;
 
 	gtk_clist_moveto (GTK_CLIST (g->list), panel->top_file, 0, 0.0, 0.0);
-	panel->top_file;
 }
 
 #define COLUMN_INSET 3
 #define CELL_SPACING 1
 
-GtkWidget
+static void
 panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height)
 {
 	format_e *format = panel->format;
@@ -275,13 +279,13 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 	gtk_clist_thaw (GTK_CLIST (file_list));
 }
 
-void
+static void
 panel_action_open (GtkWidget *widget, WPanel *panel)
 {
 	do_enter (panel);
 }
 
-void
+static void
 panel_action_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
@@ -291,36 +295,21 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 	free (command);
 }
 
-void
+static void
 panel_action_view (GtkWidget *widget, WPanel *panel)
 {
 	view_cmd (panel);
 }
 
-void
+static void
 panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
 	view_simple_cmd (panel);
 }
 
-void
-panel_action_copy (GtkWidget *widget, WPanel *panel)
-{
-}
-
-void
-panel_action_rename (GtkWidget *widget, WPanel *panel)
-{
-}
-
-void
-panel_action_delete (GtkWidget *widget, WPanel *panel)
-{
-}
-
-typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
+typedef void (*context_menu_callback) (GtkWidget *, WPanel *);
 	
-struct {
+static struct {
 	char *text;
 	context_menu_callback callback;
 } file_actions [] = {
@@ -337,7 +326,7 @@ struct {
 	{ NULL, NULL },
 };
 	
-GtkWidget *
+static GtkWidget *
 create_popup_submenu (WPanel *panel, char *filename)
 {
 	static int submenu_translated;
@@ -449,35 +438,57 @@ file_popup (GdkEvent *event, WPanel *panel, char *filename)
 static void
 internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 {
+#if 0
+	/* FIXME:
+	 *
+	 * This is #ifdef'ed out to work around a bug in GtkCList.  If
+	 * a row is selected and you call gtk_clist_select_row() on
+	 * it, the CList will *un*select that row.  Jay already told
+	 * me that he has to fix this.  When it is fixed, this #ifdef
+	 * should be removed.
+	 *
+	 * BTW, the thing will be unselected even if we return here,
+	 * because the class' signal handler is still pending.
+	 */
+
 	if (panel->selected == row)
 		return;
-	
-	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
+#endif
+
+	will_select = 1;
+
 	unselect_item (panel);
 	panel->selected = row;
+	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	select_item (panel);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
+
+	will_select = 0;
 }
 
-void
+static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
-	const char *filename = panel->dir.list [row].fname;
-		
-	if (!event){
+	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
 	}
 	
-	if (event->type == GDK_BUTTON_PRESS)
+	switch (event->type) {
+	case GDK_BUTTON_PRESS:
 		internal_select_item (file_list, panel, row);
 
-	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3){
-		file_popup (event, panel, filename);
-	}
-	
-	if (event->type == GDK_2BUTTON_PRESS){
+		if (event->button.button == 3)
+			file_popup (event, panel, panel->dir.list[row].fname);
+
+		break;
+
+	case GDK_2BUTTON_PRESS:
 		do_enter (panel);
+		break;
+
+	default:
+		break;
 	}
 }
 
@@ -502,10 +513,6 @@ panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocat
 {
 	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
 	
-	/* Set the selection callback */
-	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
-
 	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
 }
 
@@ -536,7 +543,7 @@ panel_file_list_column_callback (GtkWidget *widget, int col, WPanel *panel)
 	}
 }
 
-void
+static void
 panel_create_pixmaps (GtkWidget *parent)
 {
 	GdkColor color = gtk_widget_get_style (parent)->bg [GTK_STATE_NORMAL];
@@ -548,13 +555,13 @@ panel_create_pixmaps (GtkWidget *parent)
 static void
 panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
 {
-	if (!GTK_IS_ADJUSTMENT (adj)){
+	if (!GTK_IS_ADJUSTMENT (adj)) {
 		fprintf (stderr, "CRAP!\n");
 		exit (1);
 	}
 }
 
-void
+static void
 panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 {
 	format_e *format = panel->format;
@@ -567,7 +574,10 @@ panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
 
 	/* Configure the CList */
-	gtk_clist_set_selection_mode (cl, GTK_SELECTION_BROWSE);
+	/* We use GTK_SELECTION_MULTIPLE because we manage the selection explicitly.
+	 * So we want as little interference from Gtk as possible.
+	 */
+	gtk_clist_set_selection_mode (cl, GTK_SELECTION_MULTIPLE);
 	gtk_clist_set_policy (cl, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	
 	for (i = 0, format = panel->format; format; format = format->next){
@@ -592,7 +602,7 @@ panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
 }
 
-void *
+static void *
 panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 {
 	if (panel->marked){
@@ -623,7 +633,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 	}
 }
 
-void
+static void
 panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
 {
 	void *data;
@@ -637,7 +647,7 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 	if ((strcmp (event->data_type, "text/plain") == 0) ||
 	    (strcmp (event->data_type, "url:ALL")    == 0)){
 		data = panel_build_selected_file_list (panel, &len);
-		printf ("Data: %s\n", data);
+		printf ("Data: %s\n", (char *) data);
 		
 		if (clist_window->dnd_drag_accepted)
 			gdk_window_dnd_data_set ((GdkWindow *)clist_window, (GdkEvent *) event, data, len);
@@ -647,14 +657,14 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 	}
 }
 
-void
+static void
 panel_drop_enter (GtkWidget *widget, GdkEvent *event)
 {
 	printf ("%s\n", event->type == GDK_DROP_ENTER ? "DROP ENTER" :
 		(event->type == GDK_DROP_LEAVE ? "DROP LEAVE" : "?"));
 }
 
-void
+static void
 panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
 {
 	printf ("Drop data available!\n");
@@ -675,7 +685,7 @@ fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_ac
 	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes);
 }
 				
-void
+static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
 {
 	GtkObject *obj = GTK_OBJECT (file_list);
@@ -698,7 +708,7 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
-GtkWidget *
+static GtkWidget *
 panel_create_file_list (WPanel *panel)
 {
 	const int items = panel->format->items;
@@ -724,10 +734,14 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list),
 			    "realize",
 			    GTK_SIGNAL_FUNC (panel_realized), panel);
+
+	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
+			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
+
 	return file_list;
 }
 
-GtkWidget *
+static GtkWidget *
 panel_create_cwd (WPanel *panel)
 {
 	GtkWidget *option_menu;
@@ -737,13 +751,13 @@ panel_create_cwd (WPanel *panel)
 	return option_menu;
 }
 
-void
+static void
 panel_change_filter (GtkWidget *button, WPanel *panel)
 {
 	fprintf (stderr, "Change filter: not yet hooked\n");
 }
 
-GtkWidget *
+static GtkWidget *
 panel_create_filter (WPanel *panel, GtkWidget **label)
 {
 	GtkWidget *filter;
@@ -760,7 +774,7 @@ void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	g_panel_contents *g = g_new (g_panel_contents, 1);
-	GtkWidget *table, *status_line, *filter_w, *statusbar, *vbox;
+	GtkWidget *status_line, *filter_w, *statusbar, *vbox;
 	
 	g->table = gtk_table_new (2, 1, 0);
 	gtk_widget_show (g->table);
@@ -819,7 +833,8 @@ panel_update_cols (Widget *panel, int frame_size)
 	panel->lines = 20;
 }
 
-char *get_nth_panel_name (int num)
+char *
+get_nth_panel_name (int num)
 {
     static char buffer [20];
     
