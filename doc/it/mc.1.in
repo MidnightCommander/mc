@@ -2661,48 +2661,53 @@ una seconda volta; la prima volta MC emette solo un suono.
 .SH "File System Virtuale"
 Il Midnight Commander è provvisto di uno strato di codice per 
 accedere al file system; questo strato di codice è conosciuto anche
-con il nome di switch di file system virtuale. Lo switch del file system
-virtuale permette al Midnight Commander di manipolare file non all'interno
-di un file system di tipo Unix.
+con il nome di commutazione di file system virtuale. La commutazione 
+del file system virtuale permette al Midnight Commander di manipolare 
+file all'interno di un file system non di tipo Unix.
 .PP
-Currently the Midnight Commander is packaged with some Virtual File
-Systems (VFS): the local file system, used for accessing the regular
-Unix file system; the ftpfs, used to manipulate files on remote
-systems with the FTP protocol; the tarfs, used to manipulate tar and
-compressed tar files; the undelfs, used to recover deleted files on
-ext2 file systems (the default file system for Linux systems), fish
-(for manipulating files over shell connections such as rsh and ssh) and
-finally the mcfs (Midnight Commander file system), a network based
-file system.  If the code was compiled with smbfs support, you can
-manipulate files on remote systems with the SMB (CIFS) protocol.
+Attualmente il Midnight Commander viene confezionato con alcuni File 
+System Virtuali (VFS): il file system locale, usato per accedere al 
+normale file system Unix; l' ftpfs, usato per manipolare file su sistemi 
+remoti con il protocollo FTP; il tarfs, usato per manipolare file tar
+e file tar compressi; l'undelfs, usato per recuperare file cancellati
+su file system di tipo ext2 (il file system predefinito per sistemi
+Unix), fish (per manipolare file su connessioni shell come rsh e ssh) e
+per ultimo l'mcfs (file system del Midnight Commander), un file system
+basato sulla rete. Se il codice è stato compilato con il supporto smbfs,
+è possibile manipolare file su file system remoti con il protocollo SMB
+(CIFS).
 .PP
-The VFS switch code will interpret all of the path names used and will
-forward them to the correct file system, the formats used for each one
-of the file systems is described later in their own section.
+Il codice di commutazione di file system interpreta tutti i nomi di 
+percorso utilizzati e li dirige al file system corretto; il formato
+utilizzato per ogniuno di questi file system viene descritto più avanti
+nella sezioni apposite.
 .PP
-.SH "  FTP File System"
-The ftpfs allows you to manipulate files on remote machines, to
-actually use it, you may try to use the panel command FTP link
-(accessible from the menubar) or you may directly change your current
-directory to it using the cd command to a path name that looks like this:
+.\"NODE "  FTP File System"
+.SH "  File System FTP"
+L'ftpfs permette di manipolare file su macchine remote; per 
+utilizzarlo, si può usare il pannello del comando di collegamento FTP 
+(accessibile dalla barra dei menu) oppure si può cambiare direttamente 
+la directory corrente con un comando cd verso un percorso simile al
+seguente:
 .PP
-.I /#ftp:[!][user[:pass]@]machine[:port][remote-dir]
+.I /#ftp:[!][utente[:pass]@]macchina[:porta][dir-remota]
 .PP
-The
-.I user, port
-and
-.I remote-dir
-elements are optional.  If you specify the
-.I user
-element, then the Midnight Commander will try to logon on the remote
-machine as that user, otherwise it will use your login name.  The
-optional 
+Gli elementi
+.I utente, porta
+e
+.I dir-remota
+sono opzionali. Se si specifica l'elemento 
+.I utente
+ , allora il Midnight Commander tenterà di collegarsi alla macchina remota
+gon on the remote come quell'utente, altrimenti userà il vostro nome di
+login. L'elemento opzionale
 .I pass
-element, if present is the password used for the connection.  This is not
-recommended (nor keeping the password in your hotlist, unless you set the
-appropriate permissions there, and even then it may not be entirely safe).
+ , se presente, è la parola d'ordine per la connessione. Quest'ultimo non
+è raccomandabile (e neanche tenere le password nella vostro elenco dei
+preferiti, a meno che non si imposti i permessi appropriati, e anche in
+quel caso può non essere completamente sicuro).
 .PP
-Examples:
+Esempi:
 .PP
 .nf
     /#ftp:ftp.nuclecu.unam.mx/linux/local
@@ -2712,61 +2717,63 @@ Examples:
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
-To connect to sites behind a firewall, you will need to use the prefix
-ftp://! (i.e., with a bang character after the double slash) to make
-the Midnight Commander use a proxy host for doing the ftp transfer.
-You can define the proxy host in the
+Per connettersi a siti dietro ad un firewall, c'è bisogno di usare un
+prefisso ftp://! (cioè con un esclamativo dopo la doppia barra) per fare
+in modo che il Midnight Commander usi una connessione proxy per fare il
+trasferimento ftp.
+E' possibile definire la connessione proxy nella finestra di dialogo
 .\"LINK2"
-Virtual File System
+Impostazione File System Virtuale (VFS)
 .\"Virtual FS"
-dialog box.  
+ .  
 .PP
-Another option to set is the 
-.I Always use ftp proxy
-option in the 
+Un'altra opzione da impostare è
+.I Usa sempre ftp proxy
+nella finestra di dialogo
 .\"LINK2"
-Virtual File System
+Impostazione File System Virtuale (VFS)
 .\"Virtual FS"
-dialog box.  This will configure the program
-to always use the proxy host.  If this variable is set, the program
-will do two things: consult the @prefix@/share/mc/mc.no_proxy file for
-lines containing host names that are local (if the host name starts
-with a dot, it is assumed to be a domain) and to assume that any
-hostnames without dots in their names are directly accessible.
+ . Quest'ultima configurerà il programma in modo da utilizzare
+sempre la connessione proxy. Se questa variabile è impostata, il programma
+farà due cose: consulterà il file @prefix@/share/mc/mc.no_proxy per
+le linee contenenti nomi di macchine locali (se il nome macchina comincia
+con un punto, si assume che sia un dominio) ed assumerà che ogni
+nomemacchina senza punti nel nome sia accessibile direttamente.
 .PP
-If you are using the ftpfs code with a filtering packet router that
-does not allow you to use the regular mode of opening files, you may
-want to force the program to use the passive-open mode.  To use this,
-set the ftpfs_use_passive_connections option in the initialization file.
+Se si sta usando il codice ftpfs con un router che filtra i pacchetti
+che non permette di usare il modo normale di aprire i file, si può 
+voler forzare il programma ad usare la modalità di apertura passiva.
+Per usarla, si imposti l'opzione ftpfs_use_passive_connections nel
+file di inizializzazione.
 .PP
-The Midnight Commander keeps the directory listing in a cache.  The cache
-expire time is configurable in the
+Il Midnight Commander mantiene gli elenchi delle directory in una cache.
+Il tempo di validità della cache è configurabile nella finestra di dialogo
 .\"LINK2"
-Virtual File System 
+Impostazione File System Virtuale (VFS)
 .\"Virtual FS"
-dialog box.  This has the funny behavior that even if you make changes to a
-directory, they will not be reflected in the directory listing until you
-force a cache reload with the C-r key.  This is a feature (when you think
-it's a bug, think about manipulating files on the other side of the Atlantic
-with ftpfs).
+ . Ciò ha come effetto che anche se si fanno dei cambiamenti alla directory,
+questi non verranno riflessi nell'elenco della directory fino a che non
+si forzi una rilettura della cache con il tasto C-r. Questa è una 
+caratteristica voluta (se si pensa che sia un difetto, si pensi al caso 
+di dover gestire file dall'altra parte dell'Atlantico con l'ftpfs).
 .PP
-.SH "  Tar File System"
-The tar file system provides you with read-only access to your tar
-files and compressed tar files by using the chdir command.  To change
-your directory to a tar file, you change your current directory to the
-tar file by using the following syntax:
+.\"NODE "  Tar File System"
+.SH "  File System Tar"
+Il file system tar fornisce un accesso in sola lettura ai file tar
+e tar compressi; per cambiare la directory corrente al file tar
+usare la seguente sintassi:
 .PP
-.I /filename.tar#utar/[dir-inside-tar]
+.I /nomefile.tar#utar/[dir-dentro-tar]
 .PP
-The mc.ext file already provides a shortcut for tar files, this means
-that usually you just point to a tar file and press return to enter
-into the tar file, see the 
+Il file mc.ext già fornisce un collegamento per il file tar; ciò
+significa che normalmente basta selezionare un file tar e premere invio
+per entrare nel file tar, vedere la sezione
 .\"LINK2"
-Extension File Edit 
+Editor File Estensioni
 .\"Extension File Edit"
-section for details on how this is done.
+per i dettagli su come questo viene fatto.
 .PP
-Examples:
+Esempi:
 .PP
 .nf
     mc-3.0.tar.gz#utar/mc-3.0/vfs
