@@ -338,7 +338,7 @@ regex/\.so\.[0-9\.]*$
 	Icon=so.xpm
 
 # Manual page
-regex/(([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)|\.man)$
+regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
 	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
 	View=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
 	Icon=man.xpm
