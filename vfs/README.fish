@@ -18,7 +18,7 @@ implementation. Fish commands always have priority: server is
 expected to execute fish command if it understands it. If it does not,
 however, it can try the luck and execute shell command.
 
-Server's reply is multiline, but alwyas ends with
+Server's reply is multiline, but always ends with
 
 ### 000<optional text>
 
@@ -44,7 +44,7 @@ connections from normal rsh/ssh.
 #FISH
 echo; start_fish_server; echo '### 200'
 
-This command is sent at the begining. It marks that client wishes to
+This command is sent at the beginning. It marks that client wishes to
 talk via FISH protocol. #VER command must follow. If server
 understands FISH protocol, it has option to put FISH server somewhere
 on system path and name it start_fish_server.
@@ -80,7 +80,7 @@ echo '### 200'
 
 This allows client to list directory or get status information about
 single file. Output is in following form (any line except :<filename>
-may be ommited):
+may be omitted):
 
 P<unix permissions> <owner>.<group>
 S<size>
@@ -107,7 +107,7 @@ ls -l /some/name | ( read a b c d x e; echo $x ); echo '### 100'; cat /some/name
 
 Server sends line with filesize on it, followed by line with ### 100
 indicating partial success, then it sends binary data (exactly
-filesize bytes) and follows them with (with no preceeding newline) ###
+filesize bytes) and follows them with (with no preceding newline) ###
 200.
 
 Note that there's no way to abort running RETR command - except

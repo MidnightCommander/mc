@@ -1,3 +1,7 @@
+2001-07-05  Pavel Roskin  <proski@gnu.org>
+
+	* README.fish: Spelling fixes.
+
 2001-06-29  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Don't ever link mcserv with libintl - it must not
