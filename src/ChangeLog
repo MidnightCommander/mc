@@ -1,3 +1,9 @@
+2002-05-30  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* view.c (regexp_search): Don't call save_edit_changes
+	if there are no changes.
+	(save_edit_changes): Use messages from ../po/mc.pot.
+
 2002-05-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (save_edit_changes): Handle errors.

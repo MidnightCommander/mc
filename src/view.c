@@ -386,9 +386,9 @@ save_edit_changes (WView *view)
 	}
 
 	if (fp == -1) {
-	    fp = query_dialog (_(" Error trying to save file. "), 
-			       _(" Try again ? "),
-			       2, 3, _("&Yes"), _("&No"), _("&Cancel"));
+	    fp = query_dialog (_(" Save file "),
+			       _(" Error trying to save file. "), 
+			       2, 2, _("&Retry"), _("&Cancel"));
 	    if (fp == 0)
 		fp = -1;
 	}
@@ -1895,7 +1895,8 @@ regexp_search (WView *view, int direction)
     /* This is really an F6 key handler */
     if (view->hex_mode){
         /* Save it without a confirmation prompt */
-        save_edit_changes(view);
+	if (view->change_list)
+	    save_edit_changes(view);
 	return;
     }
     
