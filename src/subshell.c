@@ -295,7 +295,7 @@ init_subshell_child (const char *pty_name)
  * 2 if parent mc was found and the user wants to quit mc.
  */
 static int
-check_sid ()
+check_sid (void)
 {
     pid_t my_sid, old_sid;
     char *sid_str;
