@@ -230,8 +230,10 @@ convert_to_display (char *str)
     if (!str)
 	return;
 
-    while ((*str = conv_displ[(unsigned char) *str]))
+    while (*str) {
+	*str = conv_displ[(unsigned char) *str];
 	str++;
+    }
 }
 
 void
@@ -240,7 +242,9 @@ convert_from_input (char *str)
     if (!str)
 	return;
 
-    while ((*str = conv_input[(unsigned char) *str]))
+    while (*str) {
+	*str = conv_input[(unsigned char) *str];
 	str++;
+    }
 }
 #endif				/* HAVE_CHARSET */

@@ -1,5 +1,10 @@
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c (convert_to_display): Don't crash on empty read
+	only strings.
+	(convert_from_input): Likewise.
+	Reported by David Martin <dmartina@excite.com>
+
 	* screen.c (select_item): Don't show the file selection if the
 	panel is inactive.
 	(chdir_other_panel): Select the same file on the other panel.
