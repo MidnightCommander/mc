@@ -11,12 +11,16 @@ struct direntry
     char *local_filename;
     int local_is_temp:1;
     int freshly_created:1;
+    int linear:1;
     struct stat local_stat;
     char *remote_filename;
     struct stat s;
     struct stat *l_stat;
     struct connection *bucket;
+
     int tmp_reget;
+
+    int got, total;	/* Bytes transfered / bytes need to be transfered */
 };
 
 struct dir

@@ -1,3 +1,11 @@
+Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
+	
+	* ftpfs.c, fish.c: added O_LINEAR mode to handle linear read of
+ 	files in sane way. copy_file_file will make temporary files for a
+ 	while (fix pending).
+
+	* tar.c: fixed bzip/bzip2 compressed archives
+
 Wed Sep 18 12:51:51 1998  Pavel Machek <pavel@ucw.cz>
 	
 	* fish.c, vfs.c: created aliases /#ssh: and /#rsh:

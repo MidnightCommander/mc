@@ -343,7 +343,8 @@ static INLINE int uncompress_tar_file  (struct archive *current_archive,
 
   /* From time we have sfs this function is pretty trivial */
     current_archive->is_gzipped = tar_uncompressed_local;
-    current_archive->tmpname = copy_strings( current_archive->name, "#ugz", NULL );
+    current_archive->tmpname = copy_strings( current_archive->name, 
+					     decompress_extension (type), NULL );
     
     result = mc_open (current_archive->tmpname, O_RDONLY);
     if (result == -1)

@@ -994,7 +994,7 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
 }
 
 static void
-ftpfs_abort (struct connection *bucket, int dsock)
+my_abort (struct connection *bucket, int dsock)
 {
     static unsigned char ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
@@ -1240,9 +1240,9 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	disable_interrupt_key();
 	print_vfs_message("ftpfs: reading FTP directory interrupt by user");
 #ifdef OLD_READ
-	ftpfs_abort(bucket, fileno(fp));
+	my_abort(bucket, fileno(fp));
 #else
-	ftpfs_abort(bucket, sock);
+	my_abort(bucket, sock);
 #endif
 	close_this_sock(fp, sock);
 	my_errno = EINTR;
@@ -1369,212 +1369,69 @@ error_return:
     return 0;
 }
 
-/* For _ctl routine */
-static int remotelocal_handle, remotesock, remoten, remotestat_size;
-
-static int retrieve_file_start(struct direntry *fe)
+static int 
+linear_start(struct direntry *fe)
 {
-    if (fe->local_filename == NULL) ERRNOR (ENOMEM, 0);
-    remotesock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
-    if (remotesock == -1) {
-	my_errno = EACCES;
-	free (fe->local_filename);
-	fe->local_filename = NULL;
-	return 0;
-    }
-    remotetotal = 0;
-    remoteent = fe;
+    fe->local_stat.st_mtime = 0;
+    fe->data_sock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
+    if (fe->data_sock == -1)
+	ERRNOR (EACCES, 0);
     return 1;
 }
 
-static int retrieve_file_start2(struct direntry *fe)
+static int
+linear_abort (struct direntry *fe)
 {
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
-    if (remotelocal_handle == -1) {
-	my_errno = EIO;
-	free(fe->local_filename);
-	fe->local_filename = NULL;
-	fe->local_is_temp = 1;
-	close(remotesock);
-	return 0;
+    my_abort(fe->bucket, fe->data_sock);
+    fe->data_sock = -1;
+}
+
+static int
+linear_read (struct direntry *fe, void *buf, int len)
+{
+    int n;
+    while ((n = read (fe->data_sock, buf, len))<0) {
+        if ((errno == EINTR) && !got_interrupt())
+	    continue;
+	break;
     }
-    remotestat_size = fe->s.st_size;
-    remotebuffer = xmalloc (8192, "");
-    return 1;
+
+    if (n<0) linear_abort(fe);
+
+    if (!n) {
+        if ((get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)) {
+	    my_errno = EIO;
+	    n=-1;
+	}
+	fe->data_sock = -1;
+    }
+    ERRNOR (errno, n);
+}
+
+static int
+linear_close (struct direntry *fe)
+{
+    if (fe->data_sock != -1)
+        linear_abort(fe);
 }
 
 int ftpfs_ctl (void *data, int ctlop, int arg)
 {
     int n = 0;
-
+    struct filp *fp = data;
+    int v;
     switch (ctlop) {
-        case MCCTL_ISREMOTECOPY:
-            return isremotecopy;
-	    
-        case MCCTL_REMOTECOPYCHUNK:
-            if (!transfer_started)
-                if (!retrieve_file_start2 (remoteent)){
-                    return MCERR_TARGETOPEN;
-		} else
-		    transfer_started = 1;
-
-	    enable_interrupt_key ();
-            if (!remoten) {
-		int v = select_on_two (remotesock, 0);
+        case MCCTL_IS_NOTREADY:
+	    {
+	        int v = select_on_two (fp->fe->data_sock, 0);
 		
-		if (((v < 0) && (errno == EINTR)) || v == 0){
-		    disable_interrupt_key ();
-		    return MCERR_DATA_ON_STDIN;
-		}
-		    
-    	        if ((n = read(remotesock, remotebuffer, 8192)) < 0){
-		    disable_interrupt_key ();
-		    if (errno == EINTR)
-			return MCERR_DATA_ON_STDIN;
-		    else
-			return MCERR_READ;
-		}
-	        if (n == 0) {
-    	    	    if (get_reply (qsock (remoteent->bucket), NULL, 0) != COMPLETE) {
-	        	my_errno = EIO;
-	    	    }
-    	    	    close(remotelocal_handle);
-    	    	    close(remotesock);
-		    if (localname){
-			free (localname);
-			localname = NULL;
-		    }
-		    disable_interrupt_key ();
-		    transfer_started = 0;
-	            return MCERR_FINISH;
-	        }
-		disable_interrupt_key ();
-	        remotetotal += n;
-	        remoten = n;
-            } else
-                n = remoten;
-            if (write(remotelocal_handle, remotebuffer, remoten) < 0)
-                return MCERR_WRITE;
-            remoten = 0;
-            return n;
-
-	    /* We get this message if the transfer was aborted */
-        case MCCTL_FINISHREMOTE:
-	    if (localname) {
-	        free (localname);
-	        localname = NULL;
+		if (((v < 0) && (errno == EINTR)) || v == 0)
+		    return 1;
+		return 0;
 	    }
-	    if (!arg) { /* OK */
-	        if (stat (remoteent->local_filename, &remoteent->local_stat) < 0)
-	            remoteent->local_stat.st_mtime = 0;
-	    } else
-	        remoteent->local_stat.st_mtime = 0;
-	    transfer_started = 0;
-	    ftpfs_abort (remoteent->bucket, remotesock);
-	    my_errno = EINTR;
+        default:
 	    return 0;
     }
-    return 0;
-}
-
-static int retrieve_file(struct direntry *fe)
-{
-    int total, tmp_reget = do_reget;
-    char buffer[8192];
-    int local_handle, sock, n;
-    
-    if (fe->local_filename)
-        return 1;
-    fe->local_stat.st_mtime = 0;
-    fe->local_filename = tempnam (NULL, "ftpfs");
-    fe->local_is_temp = 1;
-    if (fe->local_filename == NULL) ERRNOR (ENOMEM, 0);
-    local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
-    if (local_handle == -1) {
-	my_errno = EIO;
-	free(fe->local_filename);
-	fe->local_filename = NULL;
-	return 0;
-    }
-    sock = open_data_connection(fe->bucket, "RETR", fe->remote_filename, TYPE_BINARY);
-    if (sock == -1) {
-	my_errno = EACCES;
-	goto error_3;
-    }
-
-    /* Clear the interrupt status */
-    enable_interrupt_key ();
-    total = 0;
-    if (tmp_reget > 0)
-	total = tmp_reget;
-    else
-	total = 0;
-    
-    while (1) {
-	int stat_size = fe->s.st_size;
-	while ((n = read(sock, buffer, sizeof(buffer))) < 0) {
-	    if (errno == EINTR) {
-		if (got_interrupt ()) {
-		    disable_interrupt_key();
-		    ftpfs_abort(fe->bucket, sock);
-		    my_errno = EINTR;
-		    goto error_2;
-		}
-		else 
-		    continue;
-	    }
-	    my_errno = errno;
-	    disable_interrupt_key();
-	    goto error_1;
-	}
-	if (n == 0)
-	    break;
-	total += n;
-	if (stat_size == 0)
-	    print_vfs_message ("ftpfs: Getting file: %ld bytes transfered", 
-			       total);
-	else
-	    print_vfs_message ("ftpfs: Getting file: %3d%% (%ld bytes transfered)",
-			       total*100/stat_size, total);
-        while (write(local_handle, buffer, n) < 0) {
-	    if (errno == EINTR) {
-		if (got_interrupt()) {
-		    ftpfs_abort(fe->bucket, sock);
-		    my_errno = EINTR;
-		    goto error_2;
-		}
-		else
-		    continue;
-	    }
-	    my_errno = errno;
-	    goto error_1;
-	}
-    }
-    close(local_handle);
-    close(sock);
-    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE) {
-	my_errno = EIO;
-	goto error_2;
-    }
-    
-    if (stat (fe->local_filename, &fe->local_stat) < 0)
-        fe->local_stat.st_mtime = 0;
-    
-    if (tmp_reget > 0)
-	fe->tmp_reget = 1;
-    
-    return 1;
-error_1:
-    get_reply(qsock(fe->bucket), NULL, 0);
-error_2:
-    close(sock);
-error_3:
-    disable_interrupt_key ();
-    close(local_handle);
-    unlink(fe->local_filename);
-    free(fe->local_filename);
-    fe->local_filename = NULL;
-    return 0;
 }
 
 static int

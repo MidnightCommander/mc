@@ -23,7 +23,7 @@ static void *local_open (char *file, int flags, int mode)
     int *local_info;
     int fd;
 
-    fd = open (file, flags, mode);
+    fd = open (file, NO_LINEAR(flags), mode);
     if (fd == -1)
 	return 0;
 

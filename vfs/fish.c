@@ -628,187 +628,81 @@ error_return:
     return 0;
 }
 
-/* For _ctl routine */
-static int remotelocal_handle, remoten = 0, remotestat_size;
+static int linear_start(struct direntry *fe)
+{
+    fe->local_stat.st_mtime = 0;
+    if (command(fe->bucket, WANT_STRING, 
+		"#RETR %s\nls -l %s | ( read var1 var2 var3 var4 var5 var6; echo $var5 ); echo '### 100'; cat %s; echo '### 200'\n", 
+		fe->remote_filename, fe->remote_filename, fe->remote_filename )
+	!= PRELIM) ERRNOR (EACCES, 0);
+
+    fe->got = 0;
+    fe->total = atoi(reply_str);
+    return 1;
+}
 
 static void
-fish_abort (struct connection *bucket)
+linear_abort (struct direntry *fe)
 {
+    char buffer[8192];
     int n;
 
     print_vfs_message( "Aborting transfer..." );
     do {
-        n = remotestat_size - remotetotal;
-	n = (n>8192) ? 8192:n;
+	n = MIN(8192, fe->total - fe->got);
 	if (n)
-	    if ((n = read(qsockr(remoteent->bucket), remotebuffer, n)) < 0)
+	    if ((n = read(qsockr(fe->bucket), buffer, n)) < 0)
 	        return;
     } while (n);
 
-    if (get_reply (qsockr(remoteent->bucket), NULL, 0) != COMPLETE)
+    if (get_reply (qsockr(fe->bucket), NULL, 0) != COMPLETE)
         print_vfs_message( "Error reported after abort." );
     else
         print_vfs_message( "Aborted transfer would be successfull." );
 }
 
-static int retrieve_file_start(struct direntry *fe)
+static int
+linear_read (struct direntry *fe, void *buf, int len)
 {
-    if (fe->local_filename == NULL)
-	ERRNOR (ENOMEM, 0);
-    if (command(fe->bucket, WANT_STRING, 
-		"#RETR %s\nls -l %s | ( read var1 var2 var3 var4 var5 var6; echo $var5 ); echo '### 100'; cat %s; echo '### 200'\n", 
-		fe->remote_filename, fe->remote_filename, fe->remote_filename )
-	!= PRELIM) ERRNOR (EPERM, 0);
-
-    remotestat_size = atoi(reply_str);
-
-    remotetotal = 0;
-    remoteent = fe;
-    return 1;
-}
-
-static int retrieve_file_start2(struct direntry *fe)
-{
-    remotebuffer = xmalloc (8192, "retrieve_file");
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
-    if (remotelocal_handle == -1) {
-        fish_abort(remoteent->bucket);
-	free(remotebuffer);
-        free(fe->local_filename);
-        fe->local_filename = NULL;
-        fe->local_is_temp = 1;
-	ERRNOR (EIO, 0);
+    int n = 0;
+    len = MIN( fe->total - fe->got, len );
+    while (len && ((n = read (qsockr(fe->bucket), buf, len))<0)) {
+        if ((errno == EINTR) && !got_interrupt())
+	    continue;
+	break;
     }
 
-    return 1;
+    if (n>0) fe->got += n;
+    if (n<0) linear_abort(fe);
+    if ((!n) && ((get_reply (qsockr (fe->bucket), NULL, 0) != COMPLETE)))
+        ERRNOR (EIO, -1);
+    ERRNOR (errno, n);
+}
+
+static int
+linear_close (struct direntry *fe)
+{
+    if (fe->total != fe->got)
+        linear_abort(fe);
 }
 
 int fish_ctl (void *data, int ctlop, int arg)
 {
     int n = 0;
-
+    struct filp *fp = data;
+    int v;
     switch (ctlop) {
-        case MCCTL_ISREMOTECOPY:
-            return isremotecopy;
-	    
-        case MCCTL_REMOTECOPYCHUNK:
-            if (!transfer_started)
-                if (!retrieve_file_start2 (remoteent)){
-		    return MCERR_TARGETOPEN;
-		} else
-		    transfer_started = 1;
-
-	    enable_interrupt_key ();
-            if (!remoten) {
-		int v = select_on_two (qsockr(remoteent->bucket), 0);
+        case MCCTL_IS_NOTREADY:
+	    {
+	        int v = select_on_two (qsockr(fp->fe->bucket), 0);
 		
-		if (((v < 0) && (errno == EINTR)) || v == 0){
-		    disable_interrupt_key ();
-		    return MCERR_DATA_ON_STDIN;
-		}
-
-		n = remotestat_size - remotetotal;
-		n = (n>8192) ? 8192:n;
-		if (n)
-		    if ((n = read(qsockr(remoteent->bucket), remotebuffer, n)) < 0){
-		        disable_interrupt_key ();
-			if (errno == EINTR)
-			    return MCERR_DATA_ON_STDIN;
-			else
-			    return MCERR_READ;
-		    }
-	        if (!n) {
-    	    	    if (get_reply (qsockr(remoteent->bucket), NULL, 0) != COMPLETE)
-	        	my_errno = EIO;
-    	    	    close(remotelocal_handle);
-		    if (localname){
-			free (localname);
-			localname = NULL;
-		    }
-		    disable_interrupt_key ();
-		    transfer_started = 0;
-	            return MCERR_FINISH;
-	        }
-		disable_interrupt_key ();
-	        remotetotal += n;
-	        remoten = n;
-            } else
-                n = remoten;
-            if (write(remotelocal_handle, remotebuffer, remoten) < 0)
-                return MCERR_WRITE;
-            remoten = 0;
-            return n;
-
-	    /* We get this message if the transfer was aborted */
-        case MCCTL_FINISHREMOTE:
-	    if (localname) {
-	        free (localname);
-	        localname = NULL;
+		if (((v < 0) && (errno == EINTR)) || v == 0)
+		    return 1;
+		return 0;
 	    }
-	    if (!arg) { /* OK */
-	        if (stat (remoteent->local_filename, &remoteent->local_stat) < 0)
-	            remoteent->local_stat.st_mtime = 0;
-	    } else
-	        remoteent->local_stat.st_mtime = 0;
-	    transfer_started = 0;
-	    fish_abort (remoteent->bucket);
-	    my_errno = EINTR;
+        default:
+	    return 0;
     }
-    return 0;
-}
-
-static int retrieve_file(struct direntry *fe)
-{
-    if (fe->local_filename)
-        return 1;
-    fe->local_stat.st_mtime = 0;
-    fe->local_filename = tempnam (NULL, "fish");
-    fe->local_is_temp = 1;
-    isremotecopy = 0;
-
-    my_errno = ENOMEM;
-    if (!fe->local_filename ||
-	!retrieve_file_start(fe))
-	return 0;
-
-    /* Clear the interrupt status */
-    enable_interrupt_key ();
-    my_errno = 0;
-
-    while (1) {
-        int res;
-
-	res = fish_ctl(NULL, MCCTL_REMOTECOPYCHUNK, 0 );
-	if ((res == MCERR_TARGETOPEN) ||
-	    (res == MCERR_WRITE) ||
-	    (res == MCERR_DATA_ON_STDIN) ||
-	    (res == MCERR_READ)) {
-	    my_errno = EIO;
-	    break;
-	}
-	if (res == MCERR_FINISH)
-	    break;
-
-	if (remotestat_size == 0)
-	    print_vfs_message ("fish: Getting file: %ld bytes transfered", 
-			       remotetotal);
-	else
-	    print_vfs_message ("fish: Getting file: %3d%% (%ld bytes transfered)",
-			       remotetotal*100/remotestat_size, remotetotal);
-    }
-
-    if (my_errno) {
-	disable_interrupt_key ();
-	fish_abort( remoteent->bucket );
-	unlink(fe->local_filename);
-	free(fe->local_filename);
-	fe->local_filename = NULL;
-	return 0;
-    }
-    
-    if (stat (fe->local_filename, &fe->local_stat) < 0)
-        fe->local_stat.st_mtime = 0;
-    return 1;
 }
 
 static int

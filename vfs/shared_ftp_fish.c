@@ -3,6 +3,7 @@ static struct dir *retrieve_dir(struct connection *bucket, char *remote_path, in
 static int store_file(struct direntry *fe);
 static int retrieve_file_start(struct direntry *fe);
 static int retrieve_file(struct direntry *fe);
+static int remove_temp_file (char *file_name);
 
 static int
 select_on_two (int fd1, int fd2)
@@ -188,7 +189,6 @@ void X_fill_names (void (*func)(char *))
     } while (lptr != connections_list);
 }
 
-
 /* get_path:
  * makes BUCKET point to the connection bucket descriptor for PATH
  * returns a malloced string with the pathname relative to BUCKET.
@@ -244,31 +244,19 @@ s_get_path (struct connection **bucket, char *path, char *name)
     return remote_path;
 }
 
-void X_flushdir (void)
+void
+X_flushdir (void)
 {
-	    force_expiration = 1;
+    force_expiration = 1;
 }
 
-/* These variables are for the _ctl routine */
-static char *localname = NULL;
-static struct direntry *remoteent;
-static int remotetotal = 0;
-static int transfer_started = 0;
-static char *remotebuffer;
-static int isremotecopy = 0;
 
-static int remove_temp_file (char *file_name);
-
-static int s_setctl (char *path, int ctlop, char *arg)
+static int 
+s_setctl (char *path, int ctlop, char *arg)
 {
     switch (ctlop) {
 	case MCCTL_REMOVELOCALCOPY:
 	    return remove_temp_file (path);
-
-        case MCCTL_SETREMOTECOPY: if (localname) free (localname);
-            localname = strdup (vfs_canon (arg));
-            return 1;
-        default:
             return 0;
     }
 }
@@ -310,10 +298,8 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		if (S_ISDIR(fmode)) ERRNOR (EISDIR, NULL);
 		if (!S_ISREG(fmode)) ERRNOR (EPERM, NULL);
 		if ((flags & O_EXCL) && (flags & O_CREAT)) ERRNOR (EEXIST, NULL);
-		if (ent->remote_filename == NULL) {
-		    ent->remote_filename = strdup(file_name);
-		    if (ent->remote_filename == NULL) ERRNOR (ENOMEM, NULL);
-		}
+		if (ent->remote_filename == NULL)
+		    if (!(ent->remote_filename = strdup(file_name))) ERRNOR (ENOMEM, NULL);
 		if (ent->local_filename == NULL || 
 		    !ent->local_stat.st_mtime || 
 		    stat (ent->local_filename, &sb) < 0 || 
@@ -322,7 +308,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		    
 		    if (ent->local_filename){
 		        free (ent->local_filename);
-			ent->local_filename = 0;
+			ent->local_filename = NULL;
 		    }
 		    if (flags & O_TRUNC) {
 			ent->local_filename = tempnam (NULL, X "fs");
@@ -334,15 +320,11 @@ _get_file_entry(struct connection *bucket, char *file_name,
 			    ent->local_stat.st_mtime = 0;
 		    }
 		    else {
-		        if (localname != NULL) {
-		            isremotecopy = 1;
+		        if (IS_LINEAR(flags)) {
 		            ent->local_is_temp = 0;
-		            ent->local_stat.st_mtime = 0;
-		            ent->local_filename = strdup (localname);
-		            if (!retrieve_file_start (ent)) {
-		                isremotecopy = 0;
+		            ent->local_filename = NULL;
+		            if (!linear_start (ent))
 		                return NULL;
-		            }
 		            return ent;
 		        }
 		        if (!retrieve_file(ent))
@@ -405,7 +387,8 @@ error:
 /* this just free's the local temp file. I don't know if the
    remote file can be used after this without crashing - paul
    psheer@obsidian.co.za psheer@icon.co.za */
-static int remove_temp_file (char *file_name)
+static int
+remove_temp_file (char *file_name)
 {
     char *p, q;
     struct connection *bucket;
@@ -439,7 +422,6 @@ static int remove_temp_file (char *file_name)
     return -1;
 }
 
-
 static struct direntry *
 get_file_entry(char *path, int op, int flags)
 {
@@ -449,7 +431,6 @@ get_file_entry(char *path, int op, int flags)
 
     if (!(remote_path = get_path (&bucket, path)))
 	return NULL;
-    isremotecopy = 0;
     fe = _get_file_entry(bucket, remote_path, op,
 			 flags);
     free(remote_path);
@@ -490,24 +471,23 @@ static void *s_open (char *file, int flags, int mode)
     fp = xmalloc(sizeof(struct filp), "struct filp");
     if (fp == NULL) ERRNOR (ENOMEM, NULL);
     fe = get_file_entry(file, DO_OPEN | DO_RESOLVE_SYMLINK, flags);
-    if (fe == NULL) {
+    if (!fe) {
 	free(fp);
         return NULL;
     }
-    if (!isremotecopy) {
+    fe->linear = IS_LINEAR(flags);
+    if (!fe->linear) {
         fp->local_handle = open(fe->local_filename, flags, mode);
         if (fp->local_handle < 0) {
-	    my_errno = errno;
 	    free(fp);
-	    return NULL;
+	    ERRNOR (errno, NULL);
         }
-    } else
-        fp->local_handle = -1;
+    } else fp->local_handle = -1;
 #ifdef UPLOAD_ZERO_LENGTH_FILE        
     fp->has_changed = fe->freshly_created;
 #else
     fp->has_changed = 0;
-#endif    
+#endif
     fp->fe = fe;
     qlock(fe->bucket)++;
     fe->count++;
@@ -520,9 +500,12 @@ static int s_read (void *data, char *buffer, int count)
     int n;
     
     fp = data;
-    n = read(fp->local_handle, buffer, count);
+    if (fp->fe->linear)
+        return linear_read (fp->fe, buffer, count);
+        
+    n = read (fp->local_handle, buffer, count);
     if (n < 0)
-      my_errno = errno;
+        my_errno = errno;
     return n;
 }
 
@@ -532,9 +515,9 @@ static int s_write (void *data, char *buf, int nbyte)
     int n;
     
     fp = data;
-    n = write(fp->local_handle, buf, nbyte);
+    n = write (fp->local_handle, buf, nbyte);
     if (n < 0)
-      my_errno = errno;
+        my_errno = errno;
     fp->has_changed = 1;
     return n;
 }
@@ -550,6 +533,8 @@ static int s_close (void *data)
 	if (normal_flush)
 	    flush_all_directory(fp->fe->bucket);
     }
+    if (fp->fe->linear)
+        linear_close(fp->fe);
     if (fp->local_handle >= 0)
         close(fp->local_handle);
     qlock(fp->fe->bucket)--;
@@ -801,7 +786,6 @@ static void s_ungetlocalcopy (char *path, char *local, int has_changed)
     }
 }
 
-
 void
 X_done(void)
 {
@@ -810,4 +794,75 @@ X_done(void)
     if (logfile)
 	fclose (logfile);
     logfile = NULL;
+}
+
+static int retrieve_file(struct direntry *fe)
+{
+    int total, tmp_reget = 0; /* do_reget; -- I think it can not work: pavel@ucw.cz */
+    char buffer[8192];
+    int local_handle, n;
+    int stat_size = fe->s.st_size;
+    
+    if (fe->local_filename)
+        return 1;
+    if (!(fe->local_filename = tempnam (NULL, X))) ERRNOR (ENOMEM, 0);
+    fe->local_is_temp = 1;
+
+    local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
+    if (local_handle == -1) {
+	my_errno = EIO;
+	goto error_4;
+    }
+
+    if (!linear_start (fe))
+        goto error_3;
+
+    /* Clear the interrupt status */
+    enable_interrupt_key ();
+    total = (tmp_reget > 0) ? tmp_reget : 0;
+    
+    while (1) {
+	if ((n = linear_read(fe, buffer, sizeof(buffer))) < 0)
+	    goto error_1;
+	if (!n)
+	    break;
+
+	total += n;
+	print_vfs_stats (X, "Getting file", fe->remote_filename, total, stat_size);
+
+        while (write(local_handle, buffer, n) < 0) {
+	    if (errno == EINTR) {
+		if (got_interrupt()) {
+		    my_errno = EINTR;
+		    goto error_2;
+		}
+		else
+		    continue;
+	    }
+	    my_errno = errno;
+	    goto error_1;
+	}
+    }
+    linear_close(fe);
+    disable_interrupt_key();
+    close(local_handle);
+
+    if (stat (fe->local_filename, &fe->local_stat) < 0)
+        fe->local_stat.st_mtime = 0;
+    
+    if (tmp_reget > 0)
+	fe->tmp_reget = 1;
+    
+    return 1;
+error_1:
+error_2:
+    linear_close(fe);
+error_3:
+    disable_interrupt_key();
+    close(local_handle);
+    unlink(fe->local_filename);
+error_4:
+    free(fe->local_filename);
+    fe->local_filename = NULL;
+    return 0;
 }

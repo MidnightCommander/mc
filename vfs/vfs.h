@@ -360,4 +360,18 @@ extern void mc_vfs_done( void );
 #define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
 #endif
 
+/* O_LINEAR is strange beast, be carefull. If you open file asserting
+ * O_RDONLY | O_LINEAR, you promise:
+ *
+ *     	a) to read file linearily from beggining to the end
+ *	b) not to open another file before you close this one
+ *		(this will likely go away in future)
+ *
+ * O_LINEAR allows filesystems not to create temporary file in some
+ * cases (ftp transfer).				-- pavel@ucw.cz
+ */
+
+#define MIN(a,b) ((a)<(b) ? (a) : (b))
+#define MAX(a,b) ((a)<(b) ? (b) : (a))
+
 #endif /* __VFS_H */

@@ -826,7 +826,7 @@ int mc_chdir (char *path)
     current_dir = vfs_canon (path);
     current_vfs = vfs_type (current_dir);
     b = strdup (current_dir);
-    result = (*current_vfs->chdir)(vfs_name (b));
+    result = (*current_vfs->chdir) ?  (*current_vfs->chdir)(vfs_name (b)) : -1;
     free (b);
     if (result == -1){
 	errno = ferrno (current_vfs);
@@ -1578,6 +1578,17 @@ vfs_die (char *m)
 {
     message_1s (1, "Internal error:", m);
     exit (1);
+}
+
+void
+print_vfs_stats (char *fs_name, char *action, char *file_name, int have, int need)
+{
+    if (need) 
+        print_vfs_message ("%s: %s: %s %3d%% (%ld bytes transfered)", 
+			   fs_name, action, file_name, have*100/need, have);
+    else
+        print_vfs_message ("%s: %s: %s %ld bytes transfered",
+			   fs_name, action, file_name, have);
 }
 
 #ifndef VFS_STANDALONE

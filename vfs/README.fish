@@ -66,12 +66,12 @@ Server should reply with current directory (in form /abc/def/ghi)
 followed by line indicating success.
 
 #LIST /directory
-ls -lLga $1 | grep '^[^cbt]' | ( while read p x u g s m d y n; do echo "P$p $u.$g
+ls -lLa $1 | grep '^[^cbt]' | ( while read p x u g s m d y n; do echo "P$p $u.$g
 S$s
 d$m $d $y
 :$n
 "; done )
-ls -lLga $1 | grep '^[cb]' | ( while read p x u g a i m d y n; do echo "P$p $u.$g
+ls -lLa $1 | grep '^[cb]' | ( while read p x u g a i m d y n; do echo "P$p $u.$g
 E$a$i
 dD$m $d $y
 :$n
@@ -103,7 +103,7 @@ case). As you've probably noticed, this is pretty broken; it is for
 compatibility with ls listing.
 
 #RETR /some/name
-ls -lg /some/name | ( read a b c d x e; echo $x ); echo '### 100'; cat /some/name; echo '### 200'
+ls -l /some/name | ( read a b c d x e; echo $x ); echo '### 100'; cat /some/name; echo '### 200'
 
 Server sends line with filesize on it, followed by line with ### 100
 indicating partial success, then it sends binary data (exactly

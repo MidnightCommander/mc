@@ -8,15 +8,17 @@ struct direntry
     char *name;
     int count;
     char *linkname;
-    char *local_filename;
+    char *local_filename, *remote_filename;
     int local_is_temp:1;
     int freshly_created:1;
+    int linear:1;		/* Did they promiss not to seek? */
     int tmp_reget;
     struct stat local_stat;
-    char *remote_filename;
     struct stat s;
     struct stat *l_stat;
     struct connection *bucket;
+
+    int data_sock;		/* For linear_ operations */
 };
 
 struct dir
