@@ -2996,13 +2996,12 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
         edit_save_block (edit, b, start_mark, end_mark);
         
 	/* run your script */
-        my_system (EXECUTE_AS_SHELL, shell,
-	    catstrs (home_dir, EDIT_DIR, shell_cmd, " ", 
+        execute (catstrs (home_dir, EDIT_DIR, shell_cmd, " ", 
 	    edit->filename, " ", home_dir, BLOCK_FILE, " ", 
 	    home_dir, ERROR_FILE, 0));
 
     } else { /* for missing marked block run ... */
-	my_system (0, shell, catstrs (EDIT_DIR, shell_cmd));
+	execute (catstrs (EDIT_DIR, shell_cmd));
     }
 
     edit_refresh_cmd (edit);

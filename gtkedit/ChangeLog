@@ -1,3 +1,9 @@
+2001-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_block_process_cmd): Use execute(), not
+	my_system() to relieve interactive scripts, such as spell
+	checker, from saving and restoring the terminal.
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* gtkedit.c: Include <sys/param.h> if present - it should always
