@@ -70,8 +70,6 @@ slangdir    = $(top_srcdir)/slang
 vfsdir      = $(top_srcdir)/vfs
 gnomedir    = $(top_srcdir)/gnome
 
-hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir)
-
 # Rules
 first_rule: all
 
