@@ -1,5 +1,8 @@
 2001-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* tty.h: Remove support for old curses and GNOME.
+	* global.h: Likewise.
+
 	* widget.c (label_new): Set initial width of the widget based on
 	the initial text.
 

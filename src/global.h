@@ -7,24 +7,12 @@
 #endif
 #include <glib.h>
 
-#ifdef HAVE_GNOME
-#   define GNOME_REGEX_H
-#   include <gnome.h>
-#endif
-
 #include "fs.h"
 #include "mem.h"
 #include "util.h"
 #include "mad.h"
 
-#ifndef HAVE_X
-#   include "textconf.h"
-#endif
-
-#ifdef HAVE_GNOME
-#   include "gconf.h"
-#   include "gmain.h"
-#endif
+#include "textconf.h"
 
 extern char *home_dir;
 
@@ -56,10 +44,6 @@ void refresh_screen (void *);
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"
 
-#ifdef USE_BSD_CURSES
-#   define xgetch x_getch
-#else
-#   define xgetch getch
-#endif
+#define xgetch getch
 
 #endif
