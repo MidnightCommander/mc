@@ -11,20 +11,17 @@
 #include <regex.h>
 #include <ctype.h>
 #include "mime-data.h"
+#include "mime-info.h"
 /* Prototypes */
 static void mime_fill_from_file (const char *filename);
-static void mime_load_from_dir (const char *mime_info_dir);
+static void mime_load_from_dir (const char *mime_info_dir, gboolean system_dir);
 static void add_to_key (char *mime_type, char *def);
 static char *get_priority (char *def, int *priority);
 
 
 /* Global variables */
 static char *current_lang;
-                                /* Our original purpose for having
-                                 * the hash table seems to have dissappeared.
-                                 * Oh well... must-fix-later */
 static GHashTable *mime_types = NULL;
-
 /* Initialization functions */
 static char *
 get_priority (char *def, int *priority)
@@ -63,6 +60,10 @@ add_to_key (char *mime_type, char *def)
 		info->regex[1] = NULL;
 		info->ext[0] = NULL;
 		info->ext[1] = NULL;
+                info->regex_readable[0] = NULL;
+                info->regex_readable[1] = NULL;
+                info->ext_readable[0] = NULL;
+                info->ext_readable[1] = NULL;
                 info->keys = gnome_mime_get_keys (mime_type);
 		g_hash_table_insert (mime_types, mime_type, info);
 	}
@@ -76,8 +77,8 @@ add_to_key (char *mime_type, char *def)
 		used = 0;
 		
 		while ((ext = strtok_r (s, " \t\n\r,", &tokp)) != NULL){
+                        /* FIXME: We really need to check for duplicates before entering this. */
 			info->ext[priority] = g_list_prepend (info->ext[priority], ext);
-                        g_print ("inserting:%s:\n", ext);
 			used = 1;
 			s = NULL;
 		}
@@ -99,8 +100,11 @@ add_to_key (char *mime_type, char *def)
 			return;
 		if (regcomp (regex, def, REG_EXTENDED | REG_NOSUB))
 			g_free (regex);
-		else
+		else {
 			info->regex[priority] = regex;
+                        g_free (info->regex_readable[priority]);
+                        info->regex_readable[priority] = g_strdup (def);
+                }
 	}
 }
 static void
@@ -163,18 +167,22 @@ mime_fill_from_file (const char *filename)
 }
 
 static void
-mime_load_from_dir (const char *mime_info_dir)
+mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 {
 	DIR *dir;
 	struct dirent *dent;
 	const int extlen = sizeof (".mime") - 1;
+	char *filename;
 	
 	dir = opendir (mime_info_dir);
 	if (!dir)
 		return;
-
+	if (system_dir) {
+		filename = g_concat_dir_and_file (mime_info_dir, "gnome.mime");
+		mime_fill_from_file (filename);
+		g_free (filename);
+	}
 	while ((dent = readdir (dir)) != NULL){
-		char *filename;
 		
 		int len = strlen (dent->d_name);
 
@@ -183,8 +191,17 @@ mime_load_from_dir (const char *mime_info_dir)
 		
 		if (strcmp (dent->d_name + len - extlen, ".mime"))
 			continue;
-
+		if (system_dir && !strcmp (dent->d_name, "gnome.mime"))
+			continue;
+		if (!system_dir && !strcmp (dent->d_name, "user.mime"))
+			continue;
+		
 		filename = g_concat_dir_and_file (mime_info_dir, dent->d_name);
+		mime_fill_from_file (filename);
+		g_free (filename);
+	}
+	if (!system_dir) {
+		filename = g_concat_dir_and_file (mime_info_dir, "user.mime");
 		mime_fill_from_file (filename);
 		g_free (filename);
 	}
@@ -193,31 +210,50 @@ mime_load_from_dir (const char *mime_info_dir)
 static void
 add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer clist)
 {
+        /* we also finalize the MimeInfo structure here, now that we're done
+         * loading it */
         static gchar *text[2];
         GList *list;
         GString *extension;
         gint row;
         
         extension = g_string_new ("");
-        
         for (list = ((MimeInfo *) mi)->ext[0];list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next != NULL)
                         g_string_append (extension, ", ");
-                else if (((MimeInfo *) mi)->ext[1] != NULL)
-                        g_string_append (extension, ", ");
         }
+        ((MimeInfo *) mi)->ext_readable[0] = extension->str;
+        g_string_free (extension, FALSE);
+        
+        extension = g_string_new ("");
         for (list = ((MimeInfo *) mi)->ext[1];list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next)
                         g_string_append (extension, ", ");
         }
+        ((MimeInfo *) mi)->ext_readable[1] = extension->str;
+        g_string_free (extension, FALSE);
+
+        if (((MimeInfo *) mi)->ext[0]) {
+                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
+                if (((MimeInfo *) mi)->ext[1]) {
+                        g_string_append (extension, ", ");
+                        g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
+                }
+        } else if (((MimeInfo *) mi)->ext[1])
+                extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
+        else
+                extension = g_string_new ("");
+
         text[0] = ((MimeInfo *) mi)->mime_type;
         text[1] = extension->str;
+
         row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
         gtk_clist_set_row_data (GTK_CLIST (clist), row, mi);
         g_string_free (extension, TRUE);
 }
+
 static void
 selected_row_callback (GtkWidget *widget, gint row, gint column, GdkEvent *event, gpointer data)
 {
@@ -273,11 +309,11 @@ init_mime_type ()
 	mime_types = g_hash_table_new (g_str_hash, g_str_equal);
 
 	mime_info_dir = gnome_unconditional_datadir_file ("mime-info");
-	mime_load_from_dir (mime_info_dir);
+	mime_load_from_dir (mime_info_dir, TRUE);
 	g_free (mime_info_dir);
 
 	mime_info_dir = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
-	mime_load_from_dir (mime_info_dir);
+	mime_load_from_dir (mime_info_dir, FALSE);
 	g_free (mime_info_dir);
-
+        init_mime_info ();
 }

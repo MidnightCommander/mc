@@ -11,6 +11,7 @@
 #include <regex.h>
 #include <ctype.h>
 #include "mime-data.h"
+#include "mime-info.h"
 
 /* Prototypes */
 static void try_callback ();
@@ -18,11 +19,13 @@ static void revert_callback ();
 static void ok_callback ();
 static void cancel_callback ();
 static void help_callback ();
+GtkWidget *capplet;
 
 static void
 try_callback ()
 {
-        
+        g_print ("testing...\n");
+        write_user_keys ();
 }
 static void
 revert_callback ()
@@ -47,7 +50,6 @@ help_callback ()
 static void
 init_mime_capplet ()
 {
-	GtkWidget *capplet;
         GtkWidget *vbox;
         GtkWidget *hbox;
         GtkWidget *button;

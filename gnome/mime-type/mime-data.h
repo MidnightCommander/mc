@@ -11,6 +11,8 @@ typedef struct {
 	char     *mime_type;
 	regex_t  *regex[2];
 	GList    *ext[2];
+        char     *ext_readable[2];
+        char     *regex_readable[2];
 	char     *file_name;
         GList    *keys;
 } MimeInfo;
