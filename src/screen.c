@@ -934,7 +934,7 @@ panel_new (const char *panel_name)
     /* No know sizes of the panel at startup */
     init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
 		 panel_callback, (destroy_fn) panel_destroy,
-		 (mouse_h) panel_event, NULL);
+		 (mouse_h) panel_event);
 
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);

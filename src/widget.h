@@ -141,8 +141,7 @@ WCheck  *check_new    (int y, int x, int state,  char *text, char *tkname);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, char *tkname);
 WLabel  *label_new    (int y, int x, const char *text, char *tkname);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current, char *tkname);
-WListbox *listbox_new (int x, int y, int width, int height, int action,
-		        lcback, char *tkname);
+WListbox *listbox_new (int x, int y, int width, int height, int action, lcback callback);
 
 /* Input lines */
 void winput_set_origin (WInput *i, int x, int field_len);

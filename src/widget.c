@@ -210,7 +210,7 @@ button_new (int y, int x, int action, int flags, char *text,
 
     init_widget (&b->widget, y, x, 1, button_len (text, flags),
 		 (callback_fn) button_callback,
-		 (destroy_fn) button_destroy, (mouse_h)button_event, tkname);
+		 (destroy_fn) button_destroy, (mouse_h)button_event);
     
     b->action = action;
     b->flags  = flags;
@@ -362,7 +362,7 @@ radio_new (int y, int x, int count, char **texts, int use_hotkey, char *tkname)
     }
 
     init_widget (&r->widget, y, x, count, max, (callback_fn) radio_callback,
-		 0, (mouse_h) radio_event, tkname);
+		 0, (mouse_h) radio_event);
     r->state = 1;
     r->pos = 0;
     r->sel = 0;
@@ -457,7 +457,7 @@ check_new (int y, int x, int state, char *text, char *tkname)
     
     init_widget (&c->widget, y, x, 1, strlen (text),
 		 (callback_fn)check_callback,
-		 (destroy_fn)check_destroy, (mouse_h) check_event, tkname);
+		 (destroy_fn)check_destroy, (mouse_h) check_event);
     c->state = state ? C_BOOL : 0;
     c->text = g_strdup (text);
     c->hotkey = 0;
@@ -576,7 +576,7 @@ label_new (int y, int x, const char *text, char *tkname)
     l = g_new (WLabel, 1);
     init_widget (&l->widget, y, x, 1, width,
 		 (callback_fn) label_callback,
-		 (destroy_fn) label_destroy, NULL, tkname);
+		 (destroy_fn) label_destroy, NULL);
     l->text = text ? g_strdup (text) : 0;
     l->auto_adjust_cols = 1;
     l->transparent = 0;
@@ -668,7 +668,7 @@ gauge_new (int y, int x, int shown, int max, int current, char *tkname)
 
     init_widget (&g->widget, y, x, 1, gauge_len,
 		 (callback_fn) gauge_callback,
-		 (destroy_fn) gauge_destroy, NULL, tkname);
+		 (destroy_fn) gauge_destroy, NULL);
     g->shown = shown;
     if (max == 0)
         max = 1; /* I do not like division by zero :) */
@@ -954,7 +954,7 @@ show_hist (GList *history, int widget_x, int widget_y)
     query_dlg =
 	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
 		    i18n_htitle (), DLG_COMPACT);
-    query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0, NULL);
+    query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0);
     add_widget (query_dlg, query_list);
     hi = z;
     if (y < widget_y) {
@@ -1606,7 +1606,7 @@ input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
 
     init_widget (&in->widget, y, x, 1, len,
 		 (callback_fn) input_callback,
-	      (destroy_fn) input_destroy, (mouse_h) input_event, tkname);
+	      (destroy_fn) input_destroy, (mouse_h) input_event);
 
     /* history setup */
     in->history = NULL;
@@ -2089,32 +2089,32 @@ listbox_destroy (WListbox *l)
 }
 
 WListbox *
-listbox_new (int y, int x, int width, int height,
-	     int action, lcback callback, char *tkname)
+listbox_new (int y, int x, int width, int height, int action,
+	     lcback callback)
 {
     WListbox *l = g_new (WListbox, 1);
     extern int slow_terminal;
-    
-    init_widget (&l->widget, y, x, height, width,
-		 (callback_fn)listbox_callback,
-		 (destroy_fn) listbox_destroy, (mouse_h)listbox_event, tkname);
 
-    l->list   = l->top = l->current = 0;
-    l->pos    = 0;
-    l->width  = width;
+    init_widget (&l->widget, y, x, height, width,
+		 (callback_fn) listbox_callback,
+		 (destroy_fn) listbox_destroy, (mouse_h) listbox_event);
+
+    l->list = l->top = l->current = 0;
+    l->pos = 0;
+    l->width = width;
     if (height <= 0)
-	    l->height = 1;
+	l->height = 1;
     else
-	    l->height = height;
-    l->count  = 0;
-    l->top    = 0;
-    l->current= 0;
-    l->cback  = callback;
+	l->height = height;
+    l->count = 0;
+    l->top = 0;
+    l->current = 0;
+    l->cback = callback;
     l->action = action;
     l->allow_duplicates = 1;
     l->scrollbar = slow_terminal ? 0 : 1;
     widget_want_hotkey (l->widget, 1);
-    
+
     return l;
 }
 
@@ -2291,7 +2291,7 @@ buttonbar_new (int visible)
 
     init_widget (&bb->widget, LINES-1, 0, 1, COLS,
 		 (callback_fn) buttonbar_callback,
-		 (destroy_fn) buttonbar_destroy, (mouse_h) buttonbar_event, NULL);
+		 (destroy_fn) buttonbar_destroy, (mouse_h) buttonbar_event);
     
     bb->visible = visible;
     for (i = 0; i < 10; i++){

@@ -1072,7 +1072,7 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
 
     init_widget (&tree->widget, y, x, lines, cols,
 		 (callback_fn) tree_callback, (destroy_fn) tree_destroy,
-		 (mouse_h) event_callback, NULL);
+		 (mouse_h) event_callback);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 

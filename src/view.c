@@ -2745,7 +2745,7 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     init_widget (&view->widget, y, x, lines, cols,
 		 (callback_fn) view_callback,
 		 (destroy_fn) view_destroy,
-		 (mouse_h) real_view_event, NULL);
+		 (mouse_h) real_view_event);
 
     view->hex_mode = default_hex_mode;
     view->hexedit_mode = default_hexedit_mode;

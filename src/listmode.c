@@ -195,7 +195,7 @@ init_listmode (char *oldlistformat)
     radio_justify->sel = 1;
 
     /* get new listbox */
-    l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, 0, l_call, NULL);
+    l_listmode = listbox_new (UY + 5, UX + 1, 16, 9, 0, l_call);
 
     if (strncmp (oldlistformat, "full ", 5) == 0) {
 	format_width = 1;

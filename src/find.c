@@ -802,9 +802,9 @@ setup_gui (void)
 	fbuts[7].x = fbuts[6].x + fbuts[6].len + l2;
     }
 
-    find_dlg = create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors,
-			   find_callback, "[Find File]", _("Find File"),
-			   DLG_CENTER);
+    find_dlg =
+	create_dlg (0, 0, FIND2_Y, FIND2_X, dialog_colors, find_callback,
+		    "[Find File]", _("Find File"), DLG_CENTER);
 
     add_widget (find_dlg,
 		button_new (FIND2_Y - 3, fbuts[7].x, B_VIEW, NORMAL_BUTTON,
@@ -841,8 +841,7 @@ setup_gui (void)
     add_widget (find_dlg, status_label);
 
     find_list =
-	listbox_new (2, 2, FIND2_X - 4, FIND2_Y - 9, listbox_finish, 0,
-		     "listbox");
+	listbox_new (2, 2, FIND2_X - 4, FIND2_Y - 9, listbox_finish, 0);
     add_widget (find_dlg, find_list);
 }
 

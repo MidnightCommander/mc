@@ -248,7 +248,7 @@ WInfo *info_new ()
 
     init_widget (&info->widget, 0, 0, 0, 0, (callback_fn)
 		 info_callback, (destroy_fn) info_destroy,
-		 (mouse_h) info_event, NULL);
+		 (mouse_h) info_event);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

@@ -592,7 +592,7 @@ static Widget *mousedispatch_new (int y, int x, int yl, int xl)
     Widget *w = g_new (Widget, 1);
 
     init_widget (w, y, x, yl, xl,
-		 (callback_fn) md_callback, 0, (mouse_h)  help_event, NULL);
+		 (callback_fn) md_callback, 0, (mouse_h)  help_event);
 
     return w;
 }

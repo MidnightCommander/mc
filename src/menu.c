@@ -531,21 +531,21 @@ destroy_menu (Menu *menu)
     g_free (menu);
 }
 
-WMenu *menubar_new (int y, int x, int cols, Menu *menu [], int items)
+WMenu *
+menubar_new (int y, int x, int cols, Menu *menu[], int items)
 {
-    WMenu *menubar = g_new0 (WMenu, 1); /* FIXME: subsel used w/o being set */
-   
+    WMenu *menubar = g_new0 (WMenu, 1);	/* FIXME: subsel used w/o being set */
+
     init_widget (&menubar->widget, y, x, 1, cols,
-                 (callback_fn) menubar_callback,
-		 (destroy_fn)  menubar_destroy,
-		 (mouse_h)     menubar_event, NULL);
+		 (callback_fn) menubar_callback,
+		 (destroy_fn) menubar_destroy, (mouse_h) menubar_event);
     menubar->menu = menu;
     menubar->active = 0;
     menubar->dropped = 0;
     menubar->items = items;
     menubar->selected = 0;
     widget_want_cursor (menubar->widget, 0);
-    menubar_arrange(menubar);
+    menubar_arrange (menubar);
 
     return menubar;
 }

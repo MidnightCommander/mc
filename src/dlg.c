@@ -119,7 +119,7 @@ void dlg_erase (Dlg_head *h)
 void
 init_widget (Widget *w, int y, int x, int lines, int cols,
 	     callback_fn callback, destroy_fn destroy,
-	     mouse_h mouse_handler, char *tkname)
+	     mouse_h mouse_handler)
 {
     w->x = x;
     w->y = y;
@@ -129,12 +129,7 @@ init_widget (Widget *w, int y, int x, int lines, int cols,
     w->destroy = destroy;
     w->mouse = mouse_handler;
     w->parent = 0;
-    w->tkname = tkname;
 
-    if (tkname && *tkname == 0) {
-	fprintf (stderr, "Got a null string for the tkname\n");
-	abort ();
-    }
     /* Almost all widgets want to put the cursor in a suitable place */
     w->options = W_WANT_CURSOR;
 }

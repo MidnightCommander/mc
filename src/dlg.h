@@ -112,7 +112,6 @@ typedef struct Widget {
     destroy_fn destroy;
     mouse_h mouse;
     struct Dlg_head *parent;
-    char *tkname;		/* name used for history saving */
 } Widget;
 
 /* The options for the widgets */
@@ -171,7 +170,7 @@ void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, destroy_fn destroy,
-		  mouse_h mouse_handler, char *tkname);
+		  mouse_h mouse_handler);
 
 /* Default callback for dialogs */
 int default_dlg_callback  (Dlg_head *h, int id, int msg);

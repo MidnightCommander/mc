@@ -187,7 +187,7 @@ edit (const char *_file, int line)
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 (callback_fn) edit_callback, (destroy_fn) edit_clean,
-		 (mouse_h) edit_mouse_event, 0);
+		 (mouse_h) edit_mouse_event);
 
     widget_want_cursor (wedit->widget, 1);
 

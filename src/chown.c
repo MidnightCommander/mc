@@ -177,8 +177,8 @@ init_chown (void)
     }
 
     /* get new listboxes */
-    l_user = listbox_new (UY + 1, UX + 1, 19, 10, 0, l_call, NULL);
-    l_group = listbox_new (GY + 1, GX + 1, 19, 10, 0, l_call, NULL);
+    l_user = listbox_new (UY + 1, UX + 1, 19, 10, 0, l_call);
+    l_group = listbox_new (GY + 1, GX + 1, 19, 10, 0, l_call);
 
     /* add fields for unknown names (numbers) */
     listbox_add_item (l_user, 0, 0, _("<Unknown user>"), NULL);

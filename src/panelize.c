@@ -170,7 +170,7 @@ static void init_panelize (void)
     add_widget (panelize_dlg, label_new (UY+13, UX, _("Command"), "label-command"));
 
     /* get new listbox */
-    l_panelize = listbox_new (UY + 1, UX + 1, panelize_dlg->cols-12, 10, 0, l_call, "li");
+    l_panelize = listbox_new (UY + 1, UX + 1, panelize_dlg->cols-12, 10, 0, l_call);
 
     while (current){
 	listbox_add_item (l_panelize, 0, 0, current->label, current);
