@@ -33,7 +33,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Increlmente el tama\361o de edit.h:MAXBUG y recompile el editor"
+" Incremente el tama\361o de edit.h:MAXBUG y recompile el editor"
 
 #: edit/edit.c:227 edit/edit.c:259
 msgid " Error allocating memory "
@@ -182,7 +182,7 @@ msgstr " Cancelar "
 #. This is for the confirm replace dialog box. The replaced string comes after the ':'
 #: edit/editcmd.c:962 edit/editcmd.c:1311
 msgid " Replace with: "
-msgstr " Replazar con: "
+msgstr " Reemplazar con: "
 
 #. Heads the 'Replace' dialog box
 #: edit/editcmd.c:966 edit/editcmd.c:1043 edit/editcmd.c:1293 edit/editcmd.c:1309 edit/editcmd.c:1841 edit/editcmd.c:1872 edit/editcmd.c:1874
@@ -951,7 +951,7 @@ msgstr "Modo de listado"
 
 #: src/boxes.c:274
 msgid "&Reverse"
-msgstr "&Invertir"
+msgstr "inve&Rtir"
 
 #: src/boxes.c:275
 msgid "case sensi&tive"
@@ -967,7 +967,7 @@ msgstr " confirmar &Salida"
 
 #: src/boxes.c:377
 msgid " confirm e&Xecute "
-msgstr " confirmar &Ejecucci\363n "
+msgstr " confirmar &Ejecuci\363n "
 
 #: src/boxes.c:379
 msgid " confirm o&Verwrite "
@@ -975,7 +975,7 @@ msgstr " confirmar S&obrescritura "
 
 #: src/boxes.c:381
 msgid " confirm &Delete "
-msgstr " confirmar E&liminiar "
+msgstr " confirmar E&liminación "
 
 #: src/boxes.c:387
 msgid " Confirmation "
@@ -1183,7 +1183,7 @@ msgstr "Pon &usuarios"
 
 #: src/chown.c:84
 msgid "Set &groups"
-msgstr "POn &grupos"
+msgstr "Pon &grupos"
 
 #: src/chown.c:113
 msgid " Name "
@@ -1308,7 +1308,7 @@ msgstr "Directorio de &Inicio"
 
 #: src/cmd.c:831
 msgid " Compare directories "
-msgstr " Comprar directorios"
+msgstr " Comparar directorios"
 
 #: src/cmd.c:831
 msgid " Select compare method: "
@@ -1328,7 +1328,7 @@ msgstr "&Completo"
 
 #: src/cmd.c:842
 msgid " Both panels should be on the listing view mode to use this command "
-msgstr " AMbos paneles deben de estar en el modo de listad para usar este comando "
+msgstr " Ambos paneles deben de estar en el modo de listad para usar este comando "
 
 #: src/cmd.c:856
 msgid " The command history is empty "
@@ -2680,11 +2680,11 @@ msgstr "&Filtro"
 
 #: src/main.c:1211 src/main.c:1232
 msgid "&Network link..."
-msgstr "&Conección por red..."
+msgstr "&Conexión por red..."
 
 #: src/main.c:1212 src/main.c:1233
 msgid "FT&P link..."
-msgstr "Conección &FTP..."
+msgstr "Conexión &FTP..."
 
 #: src/main.c:1216 src/main.c:1237
 msgid "&Drive...       M-d"
@@ -2784,11 +2784,11 @@ msgstr "&Busca archivo   M-?"
 
 #: src/main.c:1277
 msgid "s&Wap panels          C-u"
-msgstr "&Intercambia páneles   C-u"
+msgstr "&Intercambia paneles   C-u"
 
 #: src/main.c:1278
 msgid "switch &Panels on/off C-o"
-msgstr "Activa/desactiva páneles   C-o"
+msgstr "Activa/desactiva paneles   C-o"
 
 #: src/main.c:1280
 msgid "&Compare directories  C-x d"
@@ -2900,7 +2900,7 @@ msgstr "Gracias por usar el GNU Midnight Commander"
 
 #: src/main.c:2231
 msgid "with mouse support on xterm%s.\n"
-msgstr "con soporte para mouse en xterm%s.\n"
+msgstr "con soporte para ratón en xterm%s.\n"
 
 #: src/main.c:2232
 msgid " and the Linux console"
@@ -3095,7 +3095,7 @@ msgstr "&Carga r\341pida de contenido"
 
 #: src/option.c:91
 msgid "mi&X all files"
-msgstr "me&zlca todos los archivos"
+msgstr "me&zcla todos los archivos"
 
 #: src/option.c:92
 msgid "&Drop down menus"
