@@ -1,5 +1,8 @@
 2001-10-20  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c (command): Declare with the printf attribute.
+	* undelfs.c: Remove declaration of print_vfs_message().
+
 	* fish.c (file_store): Fix incorrect format string
 	for print_vfs_message().
 	* ftpfs.c (file_store): Likewise.

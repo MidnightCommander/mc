@@ -158,6 +158,8 @@ static char reply_str [80];
 
 static char *ftpfs_get_current_directory (vfs *me, vfs_s_super *super);
 static int ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path);
+static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
+    __attribute__ ((format (printf, 4, 5)));
 
 static char *
 translate_path (vfs *me, vfs_s_super *super, const char *remote_path)

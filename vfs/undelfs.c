@@ -51,8 +51,6 @@
 
 #include "vfs.h"
 
-void print_vfs_message(char *, ...);
-
 struct deleted_info {
     ino_t   ino;
     unsigned short mode;
