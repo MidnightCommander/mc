@@ -131,7 +131,8 @@ static char *stacked[16];
    The result is later automatically free'd and must not be free'd
    by the caller.
  */
-const char *catstrs (const char *first,...)
+static const char *
+catstrs (const char *first,...)
 {
     static int i = 0;
     va_list ap;

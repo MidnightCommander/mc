@@ -1,7 +1,7 @@
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
-	* edit.h (catstrs): Changed the return type to "const char *".
-	* editcmd.c (catstrs): Likewise.
+	* edit.h: Removed catstrs, as it is only used in editcmd.c.
+	* editcmd.c (catstrs): Changed declaration to be static.
 	* editcmd.c: Added const qualifiers.
 	* syntax.c: Don't use catstrs anymore.
 	* edit.c (user_menu): Likewise.
