@@ -2,8 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2000-10-17 02:55+0200\n"
-"PO-Revision-Date: 2000-10-18 20:48+0200\n"
+"POT-Creation-Date: 2000-10-25 21:20+0200\n"
+"PO-Revision-Date: 2000-10-26 12:15+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1560,8 +1560,8 @@ msgid "Up"
 msgstr "Góra"
 
 #: gnome/gscreen.c:1
-msgid "Go up a level in the directory heirarchy"
-msgstr "Przechodzi do katalogu powy¿ej bie¿±cego w hierarhii"
+msgid "Go up a level in the directory hierarchy"
+msgstr "Przechodzi o poziom wy¿ej w hierarchii katalogów"
 
 #: gnome/gscreen.c:1
 msgid "Forward"
@@ -6700,6 +6700,10 @@ msgstr "ftpfs: niepowodzenie; brak mo¿liwo¶ci wycofania"
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: zapisywanie pliku %d (%d)"
+
+#: vfs/ftpfs.c:1
+msgid "File Tranfer Protocol (ftp)"
+msgstr "Protokó³ transmisji plików (FTP)"
 
 #: vfs/ftpfs.c:1
 msgid ""
