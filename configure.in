@@ -50,9 +50,6 @@ AC_ISC_POSIX
 MC_HPUX_PROG_CC_STDC
 AC_HEADER_MAJOR
 AC_C_CONST
-AC_PATH_PROG(MV, mv, mv)
-AC_PATH_PROG(CP, cp, cp)
-AC_PATH_PROG(RM, rm, rm)
 AC_PATH_PROG(CHMOD, chmod, :)
 AC_PATH_PROG(AR, ar, ar)
 
@@ -460,8 +457,7 @@ AC_ARG_WITH(osf1-curses,
 
 AC_ARG_WITH(vcurses,
 	[--with-vcurses[=incdir]    Used to force SysV curses],
-	if test x$withval = xyes; then
-		CPPFLAGS="$CPPFLAGS"
+	if test x$withval = xyes; then :
         else
 		CPPFLAGS="$CPPFLAGS -I$withval"
 	fi
@@ -717,7 +713,6 @@ dnl
 if test x$GCC = x
 then
 	AC_DEFINE(OLD_TOOLS)
-	CPPFLAGS="$CPPFLAGS"
 fi
 
 dnl
@@ -1177,7 +1172,6 @@ esac
 
 LIBS="$LIBS $posix_libs"
 
-CPPFLAGS="-I.. $CPPFLAGS"
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(MCCPPFLAGS)

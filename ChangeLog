@@ -1,5 +1,10 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Removed some abuses of CPPFLAGS. Removed useless
+	tests for cp, mv and rm.
+	* Make.common.in: Removed variables xv_bindir and STRIP.
+	Variables CP, MV and RMF are assigned trivial values.
+
 	* edit/Makefile.in: Don't link headers, add extra includes
 	to CPPFLAGS instead. Put links to the build directory.
 	Remove the hack with "mx" - it is not needed anymore.
