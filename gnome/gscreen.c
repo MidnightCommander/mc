@@ -140,6 +140,15 @@ x_panel_update_marks (WPanel *panel)
 	gtk_widget_set_sensitive (panel->back_b, bf);
 }
 
+static GtkAdjustment *
+scrolled_window_get_vadjustment (GtkScrolledWindow *sw)
+{
+	GtkRange *vsb = GTK_RANGE (sw->vscrollbar);
+	GtkAdjustment *va = vsb->adjustment;
+
+	return va;
+}
+
 /*
  * Listing view: Load the contents
  */
@@ -567,6 +576,28 @@ panel_create_pixmaps (void)
 	create_pixmap (dev_xpm, &icon_dev_pixmap, &icon_dev_mask);
 }
 
+typedef gboolean (*desirable_fn)(WPanel *p, int x, int y);
+typedef gboolean (*scroll_fn)(gpointer data);
+
+static gboolean
+panel_setup_drag_motion (WPanel *panel, int x, int y, desirable_fn desirable, scroll_fn scroll)
+{
+	if (panel->timer_id != -1){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
+	}
+
+	panel->drag_motion_x = x;
+	panel->drag_motion_y = y;
+
+	if ((*desirable)(panel, x, y)){
+		panel->timer_id = gtk_timeout_add (60, scroll, panel);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static void
 panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
 {
@@ -907,6 +938,86 @@ panel_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 	panel->dragging = 0;
 }
 
+/**
+ * panel_clist_scrolling_is_desirable:
+ *
+ * If the cursor is in a position close to either edge (top or bottom)
+ * and there is possible to scroll the window, this routine returns
+ * true.
+ */
+static gboolean
+panel_clist_scrolling_is_desirable (WPanel *panel, int x, int y)
+{
+	GtkAdjustment *va;
+
+	va = scrolled_window_get_vadjustment (panel->list);
+
+	if (y < 10){
+		if (va->value > va->lower)
+			return TRUE;
+	} else {
+		if (y > (GTK_WIDGET (panel->list)->allocation.height-20)){
+			if (va->value < va->upper)
+				return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+
+/**
+ * panel_clist_scroll:
+ *
+ * Timer callback invoked to scroll the clist window
+ */
+static gboolean
+panel_clist_scroll (gpointer data)
+{
+	WPanel *panel = data;
+	GtkAdjustment *va;
+
+	va = scrolled_window_get_vadjustment (panel->list);
+
+	if (panel->drag_motion_y < 10)
+		gtk_adjustment_set_value (va, va->value - va->step_increment);
+	else{
+		gtk_adjustment_set_value (va, va->value + va->step_increment);
+	}
+	return TRUE;
+}
+
+/**
+ * panel_clist_drag_motion:
+ *
+ * Invoked when an application dragging over us has the the cursor moved.
+ * If we are close to the top or bottom, we scroll the window
+ */
+static gboolean
+panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+{
+	WPanel *panel = data;
+	
+	panel_setup_drag_motion (panel, x, y, panel_clist_scrolling_is_desirable, panel_clist_scroll);
+	return TRUE;
+}
+
+/**
+ * panel_clist_drag_leave
+ *
+ * Invoked when the dragged object has left our region
+ */
+static void
+panel_clist_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
+{
+	WPanel *panel = data;
+
+	if (panel->timer_id != -1){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
+	}
+}
+
 /*
  * Create, setup the file listing display.
  */
@@ -958,6 +1069,15 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_clist_drag_data_received), panel);
 
+	/*
+	 * This signal is provided for scrolling the main window
+	 * if data is being dragged
+	 */
+	gtk_signal_connect (GTK_OBJECT (file_list), "drag_motion",
+			    GTK_SIGNAL_FUNC (panel_clist_drag_motion), panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "drag_leave",
+			    GTK_SIGNAL_FUNC (panel_clist_drag_leave), panel);
+	
 	/* These implement our drag-start activation code.  We need to
 	 * manually activate the drag as the DnD code in Gtk+ will
 	 * make the scrollbars in the CList activate drags when they
@@ -1388,8 +1508,6 @@ display_mini_info (WPanel *panel)
 		free (link);
 
 		if (len > 0){
-			char *str;
-
 			link_target [len] = 0;
 			/* FIXME: Links should be handled differently */
 			/* str = copy_strings ("-> ", link_target, NULL); */
@@ -1490,8 +1608,8 @@ tree_drag_open_directory (gpointer data)
 
 	r = gtk_clist_get_selection_info (
 		GTK_CLIST (panel->tree),
-		dtree->drag_motion_x,
-		dtree->drag_motion_y,
+		panel->drag_motion_x,
+		panel->drag_motion_y,
 		&row, &col);
 
 	if (!r)
@@ -1506,15 +1624,6 @@ tree_drag_open_directory (gpointer data)
 	gtk_ctree_expand (GTK_CTREE (panel->tree), node);
 
 	return FALSE;
-}
-
-static GtkAdjustment *
-scrolled_window_get_vadjustment (GtkScrolledWindow *sw)
-{
-	GtkRange *vsb = GTK_RANGE (sw->vscrollbar);
-	GtkAdjustment *va = vsb->adjustment;
-
-	return va;
 }
 
 /**
@@ -1627,7 +1736,7 @@ panel_tree_scroll (gpointer data)
 
 	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
 
-	if (GTK_DTREE (panel->tree)->drag_motion_y < 10)
+	if (panel->drag_motion_y < 10)
 		gtk_adjustment_set_value (va, va->value - va->step_increment);
 	else{
 		gtk_adjustment_set_value (va, va->value + va->step_increment);
@@ -1645,23 +1754,11 @@ panel_tree_scroll (gpointer data)
 static gboolean
 panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
 {
-	GtkDTree *dtree = GTK_DTREE (widget);
 	WPanel *panel = data;
 	int r, row, col;
 
-        if (dtree->timer_id != -1){
-		gtk_timeout_remove (dtree->timer_id);
-		dtree->timer_id = -1;
-	}
-
-	dtree->drag_motion_x = x;
-	dtree->drag_motion_y = y;
-
-	if (panel_tree_scrolling_is_desirable (panel, x, y)){
-	     
-		dtree->timer_id = gtk_timeout_add (60, panel_tree_scroll, data);
+	if (panel_setup_drag_motion (panel, x, y, panel_tree_scrolling_is_desirable, panel_tree_scroll))
 		return TRUE;
-	}
 
 	r = gtk_clist_get_selection_info (
 		GTK_CLIST (widget), x, y, &row, &col);
@@ -1673,7 +1770,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	} else
 		panel_tree_check_auto_expand (panel, NULL);
 		
-	dtree->timer_id = gtk_timeout_add (400, tree_drag_open_directory, data);
+	panel->timer_id = gtk_timeout_add (400, tree_drag_open_directory, data);
 	return TRUE;
 }
 
@@ -1686,12 +1783,11 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 static void
 panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *ctx, guint time, void *data)
 {
-	GtkDTree *dtree = GTK_DTREE (widget);
 	WPanel *panel = data;
 
-	if (dtree->timer_id != -1){
-		gtk_timeout_remove (dtree->timer_id);
-		dtree->timer_id = -1;
+	if (panel->timer_id != -1){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
 	}
 	panel_tree_check_auto_expand (panel, NULL);
 }
@@ -1740,7 +1836,6 @@ panel_tree_drag_data_get (GtkWidget *widget, GdkDragContext *context,
 	GtkDTree *dtree = GTK_DTREE (widget);
 	char *data;
 
-	printf ("TREE DATA GET\n");
 	switch (info){
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
@@ -2003,7 +2098,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 				   "Switch view to detailed view.", NULL);
 	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add(GTK_CONTAINER(dock),status_line);
-	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_POS_TOP, 1, 0, 0, FALSE);
+	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_TOP, 1, 0, 0, FALSE);
 	gtk_widget_show_all (dock);
 
 
@@ -2120,6 +2215,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 */
 	panel->widget.options |= W_WANT_CURSOR;
 	panel->estimated_total = 0;
+
+	panel->timer_id = -1;
 }
 
 void

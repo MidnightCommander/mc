@@ -17,9 +17,6 @@ typedef struct {
 
 	int          visible;
 
-	int          drag_motion_x;
-	int          drag_motion_y;
-	int          timer_id;
 	char         *drag_dir;
         GList        *auto_expanded_nodes;
 	

@@ -110,6 +110,11 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 {
 	Dlg_head *h = panel->widget.parent;
 
+	if (panel->timer_id){
+		gtk_timeout_remove (panel->timer_id);
+		panel->timer_id = -1;
+	}
+	
 	/* Remove the widgets from the dialog head */
 	remove_widget (h, panel->current_dir);
 	remove_widget (h, panel->filter_w);
@@ -125,3 +130,4 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 	mc_chdir ("/");
 	return TRUE;
 }
+

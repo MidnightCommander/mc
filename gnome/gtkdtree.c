@@ -377,9 +377,6 @@ gtk_dtree_destroy (GtkObject *object)
 	gdk_bitmap_unref (dtree->bitmap_open);
 	gdk_bitmap_unref (dtree->bitmap_close);
 
-	if (dtree->timer_id)
-	  gtk_timeout_remove (dtree->timer_id);
-	
 	(GTK_OBJECT_CLASS (parent_class))->destroy (object);
 }
 
@@ -489,7 +486,6 @@ gtk_dtree_init (GtkDTree *dtree)
 {
 	dtree->current_path = NULL;
 	dtree->auto_expanded_nodes = NULL;
-	dtree->timer_id = -1;
 }
 
 void
