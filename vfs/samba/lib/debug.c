@@ -108,9 +108,6 @@ int     DEBUGLEVEL = 1;
 
 static BOOL    stdout_logging = False;
 static int     debug_count    = 0;
-#ifdef WITH_SYSLOG
-static int     syslog_level   = 0;
-#endif
 static pstring format_bufr    = { '\0' };
 static size_t     format_pos     = 0;
 
@@ -173,20 +170,6 @@ void setup_logging( char *pname, BOOL interactive )
     stdout_logging = True;
     dbf = stderr;
     }
-#ifdef WITH_SYSLOG
-  else
-    {
-    char *p = strrchr( pname,'/' );
-
-    if( p )
-      pname = p + 1;
-#ifdef LOG_DAEMON
-    openlog( pname, LOG_PID, SYSLOG_FACILITY );
-#else /* for old systems that have no facility codes. */
-    openlog( pname, LOG_PID );
-#endif
-    }
-#endif
   } /* setup_logging */
 
 /* ************************************************************************** **
@@ -324,9 +307,6 @@ va_dcl
     return( 0 );
     }
   
-#ifdef WITH_SYSLOG
-  if( !lp_syslog_only() )
-#endif
     {
     if( !dbf )
       {
@@ -349,47 +329,8 @@ va_dcl
       }
     }
 
-#ifdef WITH_SYSLOG
-  if( syslog_level < lp_syslog() )
-    {
-    /* map debug levels to syslog() priorities
-     * note that not all DEBUG(0, ...) calls are
-     * necessarily errors
-     */
-    static int const priority_map[] = { 
-      LOG_ERR,     /* 0 */
-      LOG_WARNING, /* 1 */
-      LOG_NOTICE,  /* 2 */
-      LOG_INFO,    /* 3 */
-      };
-    int     priority;
-    pstring msgbuf;
-
-    if( syslog_level >= ( sizeof(priority_map) / sizeof(priority_map[0]) )
-     || syslog_level < 0)
-      priority = LOG_DEBUG;
-    else
-      priority = priority_map[syslog_level];
-      
-#ifdef HAVE_STDARG_H
-    va_start( ap, format_str );
-#else
-    va_start( ap );
-    format_str = va_arg( ap, char * );
-#endif
-    vslprintf( msgbuf, sizeof(msgbuf)-1, format_str, ap );
-    va_end( ap );
-      
-    msgbuf[255] = '\0';
-    syslog( priority, "%s", msgbuf );
-    }
-#endif
-  
   check_log_size();
 
-#ifdef WITH_SYSLOG
-  if( !lp_syslog_only() )
-#endif
     {
 #ifdef HAVE_STDARG_H
     va_start( ap, format_str );
@@ -528,11 +469,6 @@ BOOL dbghdr( int level, char *file, char *func, int line )
      */
     return( True );
     }
-
-#ifdef WITH_SYSLOG
-  /* Set syslog_level. */
-  syslog_level = level;
-#endif
 
   /* Don't print a header if we're logging to stdout. */
   if( stdout_logging )
