@@ -308,6 +308,8 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_REMOVE),
         GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move files"), ren_cmd),
 	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE(N_("Show directory sizes"), N_("Shows the disk space used by each directory"), dirsizes_cmd),
+	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(gnome_close_panel, NULL),
         GNOMEUIINFO_END
 };
@@ -358,6 +360,8 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 #ifdef WITH_BACKGROUND
 	GNOMEUIINFO_ITEM_NONE( N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd ),
 #endif
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE( N_("Recreate desktop devices"), N_("Recreates the devices shown on the desktop"), desktop_setup_devices ),
         GNOMEUIINFO_END
 };
 

@@ -24,7 +24,7 @@
 extern int desktop_use_shaped_icons;	/* Whether to use shaped icons or not (for slow X servers) */
 extern int desktop_auto_placement;	/* Whether to auto-place icons or not (user placement) */
 extern int desktop_snap_icons;		/* Whether to snap icons to the grid or not */
-
+extern char *desktop_directory;
 extern int tree_panel_visible;	        
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
@@ -53,5 +53,9 @@ void desktop_icon_info_delete    (DesktopIconInfo *dii);
 
 file_entry *file_entry_from_file (char *filename);
 void        file_entry_free      (file_entry *fe);
+
+gboolean    is_mountable (char *filename, file_entry *fe, int *is_mounted);
+gboolean    do_mount_umount (char *filename, gboolean is_mount);
+void        desktop_setup_devices ();
 
 #endif

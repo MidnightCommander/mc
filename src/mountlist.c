@@ -396,7 +396,6 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	    me->me_type = strdup (mnt.mnt_fstype);
 	    me->me_dev = -1;	/* Magic; means not known yet. */
 	    me->me_next = NULL;
-
 	    /* Add to the linked list. */
 	    mtail->me_next = me;
 	    mtail = me;

@@ -43,6 +43,7 @@ GNOMESRCS = 		\
 	gkey.c 		\
 	glayout.c 	\
 	gmain.c 	\
+	gmount.c	\
 	gmc-chargrid.c	\
 	gmenu.c		\
 	gmetadata.c	\
@@ -71,6 +72,7 @@ GNOMEHDRS = 		\
 	gdnd.h		\
 	gicon.h		\
 	gmain.h 	\
+	gmount.h	\
 	gmc-chargrid.h	\
 	gmetadata.h	\
 	gpageprop.h	\
@@ -138,6 +140,7 @@ OBJS = 			\
 	gkey.o 		\
 	glayout.o 	\
 	gmain.o 	\
+	gmount.o	\
 	gmc-chargrid.o 	\
 	gmenu.o 	\
 	gmetadata.o	\

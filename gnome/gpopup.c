@@ -31,7 +31,9 @@ enum {
 	F_SINGLE	= 1 << 3,	/* Applies only to a single file, not to a multiple selection */
 	F_NOTDIR	= 1 << 4,	/* Applies to non-directories */
 	F_DICON		= 1 << 5,	/* Applies to desktop icons */
-	F_PANEL		= 1 << 6	/* Applies to files from a panel window */
+	F_PANEL		= 1 << 6,       /* Applies to files from a panel window */
+	F_MOUNTABLE     = 1 << 7,       /* Only if the device is mountable */
+	F_UNMOUNTABLE   = 1 << 8        /* Only if the device is unmountable */
 };
 
 struct action {
@@ -116,6 +118,24 @@ static void
 dicon_execute (GtkWidget *widget, DesktopIconInfo *dii)
 {
 	desktop_icon_info_open (dii);
+}
+
+static void
+dicon_unmount (GtkWidget *widget, DesktopIconInfo *dii)
+{
+	char *full = g_concat_dir_and_file (desktop_directory, dii->filename);
+	
+	do_mount_umount (full, FALSE);
+	g_free (full);
+}
+
+static void
+dicon_mount (GtkWidget *widget, DesktopIconInfo *dii)
+{
+	char *full = g_concat_dir_and_file (desktop_directory, dii->filename);
+	
+	do_mount_umount (full, TRUE);
+	g_free (full);
 }
 
 static void
@@ -225,6 +245,8 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
 static struct action file_actions[] = {
 	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (GtkSignalFunc) panel_action_properties },
 	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) dicon_properties },
+	{ N_("Mount device"),    F_SINGLE|F_MOUNTABLE|F_DICON,   (GtkSignalFunc) dicon_mount },
+	{ N_("Unmount device"),  F_SINGLE|F_UNMOUNTABLE|F_DICON, (GtkSignalFunc) dicon_unmount },
 	{ "",                    F_SINGLE,   	    	  	 NULL },
 	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open },
 	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) dicon_execute },
@@ -333,6 +355,34 @@ create_actions (GtkWidget *menu, WPanel *panel,
 				if (!S_ISLNK (s->st_mode))
 					continue;
 			}
+
+			if (action->flags & (F_MOUNTABLE|F_UNMOUNTABLE)){
+				char *fullname;
+				file_entry *fe;
+				int v;
+				int is_mounted;
+
+				fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
+				fe = file_entry_from_file (fullname);
+				if (fe){
+					v = is_mountable (fullname, fe, &is_mounted);
+					file_entry_free (fe);
+					g_free (fullname);
+					
+					if (!v)
+						continue;
+
+					if (is_mounted && (action->flags & F_MOUNTABLE))
+						continue;
+
+					if ((!is_mounted) && (action->flags & F_UNMOUNTABLE))
+						continue;
+				} else {
+					g_free (fullname);
+					continue;
+				}
+			}
+
 		}
 
 		/* Create the appropriate GnomeUIInfo structure for the menu item */

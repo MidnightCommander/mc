@@ -27,6 +27,7 @@
 #include "gpopup.h"
 #include "../vfs/vfs.h"
 #include "main.h"
+#include "gmount.h"
 
 /* Name of the user's desktop directory (i.e. ~/desktop) */
 #define DESKTOP_DIR_NAME "desktop"
@@ -45,7 +46,7 @@ int desktop_auto_placement = FALSE;
 int desktop_snap_icons = FALSE;
 
 /* The computed name of the user's desktop directory */
-static char *desktop_directory;
+char *desktop_directory;
 
 /* Layout information:  number of rows/columns for the layout slots, and the array of slots.  Each
  * slot is an integer that specifies the number of icons that belong to that slot.
@@ -825,6 +826,112 @@ selection_stopped (GnomeIconTextItem *iti, gpointer data)
 	setup_editing_grab (dii);
 }
 
+static char *mount_known_locations [] = {
+	"/sbin/mount", "/bin/mount", "/etc/mount",
+	"/usr/sbin/mount", "/usr/etc/mount", "/usr/bin/mount",
+	NULL
+};
+
+static char *umount_known_locations [] = {
+	"/sbin/umount", "/bin/umount", "/etc/umount",
+	"/usr/sbin/umount", "/usr/etc/umount", "/usr/bin/umount",
+	NULL
+};
+
+/*
+ * Returns the full path to the mount command
+ */
+static char *
+find_command (char **known_locations)
+{
+	int i;
+
+	for (i = 0; known_locations [i]; i++){
+		if (g_file_exists (known_locations [i]))
+			return known_locations [i];
+	}
+	return NULL;
+}
+
+gboolean
+is_mountable (char *filename, file_entry *fe, int *is_mounted)
+{
+	char buffer [128];
+	umode_t mode;
+	struct stat s;
+
+	if (!S_ISLNK (fe->buf.st_mode))
+		return FALSE;
+
+	if (stat (filename, &s) == -1)
+		return FALSE;
+	mode = s.st_mode;
+		
+	if (!S_ISBLK (mode))
+		return FALSE;
+
+	if (readlink (filename, buffer, sizeof (buffer)) == -1)
+		return FALSE;
+
+	if (!is_block_device_mountable (buffer))
+		return FALSE;
+
+	*is_mounted = is_block_device_mounted (buffer);
+		
+	return TRUE;
+}
+
+gboolean
+do_mount_umount (char *filename, gboolean is_mount)
+{
+	static char *mount_command;
+	static char *umount_command;
+	char *command, *op;
+	char buffer [128];
+
+	if (is_mount){
+		if (!mount_command)
+			mount_command = find_command (mount_known_locations);
+		op = mount_command;
+	} else {
+		if (!umount_command)
+			umount_command = find_command (umount_known_locations);
+		op = umount_command;
+	}
+
+	if (readlink (filename, buffer, sizeof (buffer)) == -1)
+		return FALSE;
+	
+	if (op){
+		char *command;
+		FILE *f;
+		
+		command = g_strconcat (op, " ", buffer, NULL);
+		open_error_pipe ();
+		f = popen (command, "r");
+		if (f == NULL)
+			close_error_pipe (1, _("While running the mount/umount command"));
+		else 
+			close_error_pipe (0, 0);
+		pclose (f);
+		
+		return TRUE;
+	}
+	return FALSE;
+}
+
+static gboolean
+try_to_mount (char *filename, file_entry *fe)
+{
+	int x;
+	
+	if (!is_mountable (filename, fe, &x))
+		return FALSE;
+
+	return do_mount_umount (filename, TRUE);
+}
+
+
 /**
  * desktop_icon_info_open:
  * @dii: The desktop icon to open.
@@ -848,10 +955,12 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else {
-		if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
-			my_system (EXECUTE_AS_SHELL, shell, filename);
-		else
-			gmc_open_filename (filename, NULL);
+		if (!try_to_mount (filename, fe)){
+			if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
+				my_system (EXECUTE_AS_SHELL, shell, filename);
+			else
+				gmc_open_filename (filename, NULL);
+		}
 	}
 
 	file_entry_free (fe);
@@ -1576,6 +1685,90 @@ setup_trashcan (char *desktop_dir)
 	g_free (trash_pix);
 }
 
+static void
+setup_devices (void)
+{
+	GList *list = get_list_of_mountable_devices ();
+	GList *l;
+	int floppy = 0;
+	int generic = 0;
+	int hd = 0;
+	char buffer [60];
+	const char *device_icon = ICONDIR "i-blockdev.png";
+	
+	if (!list)
+		return;
+
+	/* Create the links */
+	for (l = list; l; l = l->next){
+		char *full;
+		char *name = l->data;
+		char *short_dev_name = x_basename (name);
+		char *format = NULL;
+		int count;
+		
+		if (strncmp (short_dev_name, "fd", 2) == 0){
+			char *full;
+
+			format = _("floppy %d");
+			count = floppy++;
+		} else if (strncmp (short_dev_name, "hd", 2) == 0 || strncmp (short_dev_name, "sd", 2) == 0){
+			format = _("disk %d");
+			count = hd++;
+		} else {
+			format = _("device %d");
+			count = generic++;
+		}
+		
+		g_snprintf (buffer, sizeof (buffer), format, count);
+		
+		full = g_concat_dir_and_file (desktop_directory, short_dev_name);
+		symlink (name, full);
+		
+		gnome_metadata_set (
+			full, "icon-filename",
+			strlen (device_icon) + 1, device_icon);
+		gnome_metadata_set (
+			full, "icon-caption",
+			strlen (buffer)+1, buffer);
+		gnome_metadata_set (
+			full, "is-desktop-device",
+			1, &buffer [0]);
+		g_free (full);
+	}
+	
+	/* release the list */
+	for (l = list; l; l = l->next)
+		g_free (l->data);
+	g_list_free (l);
+}
+
+void
+desktop_setup_devices ()
+{
+	DIR *dir;
+	struct dirent *dent;
+	
+	dir = mc_opendir (desktop_directory);
+	if (!dir)
+		return;
+	while ((dent = mc_readdir (dir)) != NULL){
+		char *full = g_concat_dir_and_file (desktop_directory, dent->d_name);
+		int size;
+		char *buf;
+		
+		if (gnome_metadata_get (full, "is-desktop-device", &size, &buf) == 0){
+			mc_unlink (full);
+			g_free (buf);
+		}
+		g_free (full);
+	}
+	mc_closedir (dir);
+	
+	setup_devices ();
+	reload_desktop_icons (FALSE, 0, 0);
+}
+
 /*
  * Check that the user's desktop directory exists, and if not, create
  * the default desktop setup.
@@ -1605,6 +1798,8 @@ create_desktop_dir (void)
 				 gnome_user_home_dir, home_link_name);
 		}
 		g_free (home_link_name);
+
+		setup_devices ();
 	}
 
 /*	setup_trashcan (desktop_directory); */

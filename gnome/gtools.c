@@ -45,10 +45,15 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	const gchar **buttons;
 	char *stock;
 	GSList *allocated = NULL;
+	char *h;
 	
-	if (header == MSG_ERROR)
+	if (header == MSG_ERROR){
+		h = GNOME_MESSAGE_BOX_ERROR;
 		header = _("Error");
-
+	} else {
+		h = GNOME_MESSAGE_BOX_ERROR;
+	}
+	
 	/* extract the buttons from the args */
 	buttons = g_malloc (sizeof (char *) * (count+1));
 	va_start (ap, count);
@@ -75,7 +80,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	va_end (ap);
 
 	buttons[i] = NULL;
-	dialog = gnome_message_box_newv (text, header, buttons);
+	dialog = gnome_message_box_newv (text, h, buttons);
+	gtk_window_set_title (GTK_WINDOW (dialog), header);
 	gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_MOUSE);
 	
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
