@@ -722,6 +722,8 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
     Quick_input.class = "hotlist_new_entry";
     quick_widgets [6].text = text1;
     quick_widgets [4].text = text2;
+    quick_widgets [5].text = *r1;
+    quick_widgets [3].text = *r2;
 
     for (i = 0; i < 7; i++)
 	quick_widgets [i].y_divisions = lines1+lines2+7;
@@ -749,6 +751,9 @@ static void add_new_entry_cmd (void)
 {
     char *title = 0, *url = 0;
     int ret;
+
+    /* Take current directory as default value for input fields */
+    title = url = cpanel->cwd;
 
     ret = add_new_entry_input ("New hotlist entry", "Directory label", "Directory path",
 	 "[Hotlist]", &title, &url);
@@ -835,7 +840,7 @@ void add2hotlist_cmd (void)
 
     prompt = xmalloc (strlen (cpanel->cwd) + 20, "add2hotlist_cmd");
     sprintf (prompt, "Label for \"%s\":", name_trunc (cpanel->cwd, COLS-2*UX-23));
-    label = input_dialog (" Add to hotlist ", prompt, "");
+    label = input_dialog (" Add to hotlist ", prompt, cpanel->cwd);
     free (prompt);
     if (!label || !*label)
 	return;
