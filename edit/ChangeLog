@@ -1,3 +1,9 @@
+2001-09-04  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_block_process_cmd): Prepend space to the
+	command to avoid polluting bash history.  Document arguments.
+	Fix crash if block is 0 - not used currently.
+
 2001-08-26  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Don't install libedit.a.

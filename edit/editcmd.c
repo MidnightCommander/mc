@@ -2995,13 +2995,26 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	}
         edit_save_block (edit, b, start_mark, end_mark);
         
-	/* run your script */
-        execute (catstrs (home_dir, EDIT_DIR, shell_cmd, " ", 
-	    edit->filename, " ", home_dir, BLOCK_FILE, " ", 
-	    home_dir, ERROR_FILE, 0));
+	/*
+	 * Run script.
+	 * Initial space is to avoid polluting bash history.
+	 * Arguments:
+	 *   $1 - name of the edited file (to check its extention etc).
+	 *   $2 - file containing the current block.
+	 *   $3 - file where error messages should be put.
+	 */
+	execute (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ", 
+			  edit->filename, " ", home_dir, BLOCK_FILE, " ", 
+			  home_dir, ERROR_FILE, NULL));
 
-    } else { /* for missing marked block run ... */
-	execute (catstrs (EDIT_DIR, shell_cmd));
+    } else {
+	/*
+	 * No block selected, just execute the command for the file.
+	 * Arguments:
+	 *   $1 - name of the edited file.
+	 */
+	execute (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
+			  edit->filename, NULL));
     }
 
     edit_refresh_cmd (edit);
