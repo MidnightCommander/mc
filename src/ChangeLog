@@ -1,5 +1,8 @@
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
+	* color.c (color_table): Make static. Only use in text edition.
+	* xtty.h: Remove unused definitions.
+
 	* slint.c (slang_init): Check screen dimensions and exit if they
 	are abnormal. This may happen due to a S-Lang bug when the TERM
 	is set to a value not listed in termcap or terminfo.

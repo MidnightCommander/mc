@@ -120,7 +120,8 @@ struct color_table_s {
 };
 
 
-struct color_table_s color_table [] = {
+#ifndef HAVE_X
+static struct color_table_s color_table [] = {
     { "black",         COLOR_BLACK   },
     { "gray",          COLOR_BLACK   | A_BOLD },
     { "red",           COLOR_RED     },
@@ -139,6 +140,7 @@ struct color_table_s color_table [] = {
     { "white",         COLOR_WHITE   | A_BOLD },
     { "default",       0 } /* hack for transparent background */
 };
+#endif /* !HAVE_X */
 
 #ifdef HAVE_GNOME
 void get_color (char *cpp, CTYPE *colp);
