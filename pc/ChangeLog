@@ -1,3 +1,7 @@
+2002-11-11  Pavel Roskin  <proski@gnu.org>
+
+	* key_nt.c: Remove C++ style comments.
+
 2002-11-06  Pavel Roskin  <proski@gnu.org>
 
 	* key_nt.c: Don't use ERR - it conflicts with sys/ucontext.h
