@@ -307,7 +307,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *p
 	char *dirname, *name, *save;
 	struct vfs_s_inode *ino;
 	split_dir_name (me, path, &dirname, &name, &save);
-	ino = vfs_s_find_inode (me, root, dirname, follow, flags | FL_DIR);
+	ino = vfs_s_find_inode (me, root->super, dirname, follow, flags | FL_DIR);
 	if (save)
 	    *save = PATH_SEP;
 	return vfs_s_find_entry_tree (me, ino, name, follow, flags);
@@ -350,12 +350,13 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *p
 }
 
 struct vfs_s_inode *
-vfs_s_find_inode (struct vfs_class *me, struct vfs_s_inode *root, char *path, int follow, int flags)
+vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
+		  char *path, int follow, int flags)
 {
     struct vfs_s_entry *ent;
     if ((MEDATA->find_entry == vfs_s_find_entry_tree) && (!*path))
-	return root;
-    ent = (MEDATA->find_entry)(me, root, path, follow, flags);
+	return super->root;
+    ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
     if (!ent)
 	return NULL;
     return ent->ino;
@@ -541,13 +542,20 @@ vfs_s_inode_from_path (struct vfs_class *me, char *name, int flags)
     struct vfs_s_inode *ino;
     char *q;
 
-    if (!(q = vfs_s_get_path_mangle (me, name, &super, 0))) 
+    if (!(q = vfs_s_get_path_mangle (me, name, &super, 0)))
 	return NULL;
 
-    ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
+    ino =
+	vfs_s_find_inode (me, super, q,
+			  flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW,
+			  flags & ~FL_FOLLOW);
     if ((!ino) && (!*q))
 	/* We are asking about / directory of ftp server: assume it exists */
-	ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
+	ino =
+	    vfs_s_find_inode (me, super, q,
+			      flags & FL_FOLLOW ? LINK_FOLLOW :
+			      LINK_NO_FOLLOW,
+			      FL_DIR | (flags & ~FL_FOLLOW));
     return ino;
 }
 
@@ -686,7 +694,7 @@ vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
 
     if ((q = vfs_s_get_path_mangle (me, file, &super, 0)) == NULL)
 	return NULL;
-    ino = vfs_s_find_inode (me, super->root, q, LINK_FOLLOW, FL_NONE);
+    ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
 	ERRNOR (EEXIST, NULL);
     if (!ino){ 
@@ -700,9 +708,8 @@ vfs_s_open (struct vfs_class *me, char *file, int flags, int mode)
 	    return NULL;
 
 	split_dir_name (me, q, &dirname, &name, &save);
-/* FIXME: if vfs_s_find_inode returns NULL, this will do rather bad
-   things. */
-	dir = vfs_s_find_inode (me, super->root, dirname, LINK_FOLLOW, FL_DIR);
+	/* FIXME: check if vfs_s_find_inode returns NULL */
+	dir = vfs_s_find_inode (me, super, dirname, LINK_FOLLOW, FL_DIR);
 	if (save)
 	    *save = PATH_SEP;
 	ent = vfs_s_generate_entry (me, name, dir, 0755);

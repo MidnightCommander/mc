@@ -1,5 +1,8 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_find_inode): Only allow search from root.
+	Change second argument to superblock to prevent abuse.
+
 	* direntry.c (vfs_s_find_entry_tree): Eliminate buffer of fixed
 	size.  Don't prepare path for vfs_s_resolve_symlink().
 	(vfs_s_resolve_symlink): Remove unused argument "path".

@@ -173,8 +173,8 @@ struct vfs_s_entry *vfs_s_find_entry_linear (struct vfs_class *me,
 					     char *path, int follow,
 					     int flags);
 struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
-				      struct vfs_s_inode *root, char *path,
-				      int follow, int flags);
+				      const struct vfs_s_super *super,
+				      char *path, int follow, int flags);
 struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
 				     struct vfs_s_entry *entry);
 
