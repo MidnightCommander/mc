@@ -56,12 +56,10 @@
 int we_are_background = 0;
 
 #ifdef WITH_BACKGROUND
-/* If set background tasks wait to be attached */
-int background_wait = 0;
 
 #ifndef HAVE_SOCKETPAIR
 int socketpair(int, int, int, int fd[2]);
-#endif
+#endif /* HAVE_SOCKETPAIR */
 
 /* File descriptor for talking to our parent */
 static int parent_fd;
@@ -122,7 +120,7 @@ unregister_task_running (pid_t pid, int fd)
 int
 do_background (FileOpContext *ctx, char *info)
 {
-    int comm [2];		/* control connection stream */
+    int comm[2];		/* control connection stream */
     pid_t pid;
 
     if (socketpair (AF_UNIX, SOCK_STREAM, 0, comm) == -1)
@@ -131,10 +129,10 @@ do_background (FileOpContext *ctx, char *info)
     if ((pid = fork ()) == -1)
 	return -1;
 
-    if (pid == 0){
+    if (pid == 0) {
 	int nullfd;
 
-	parent_fd = comm [1];
+	parent_fd = comm[1];
 	we_are_background = 1;
 
 	/* Make stdin/stdout/stderr point somewhere */
@@ -142,31 +140,20 @@ do_background (FileOpContext *ctx, char *info)
 	close (1);
 	close (2);
 
-	if ((nullfd = open ("/dev/null", O_RDONLY)) != -1){
-	    while (dup2 (nullfd, 0) == -1 && errno == EINTR)
-		    ;
-	    while (dup2 (nullfd, 1) == -1 && errno == EINTR)
-		    ;
-	    while (dup2 (nullfd, 2) == -1 && errno == EINTR)
-		    ;
+	if ((nullfd = open ("/dev/null", O_RDONLY)) != -1) {
+	    while (dup2 (nullfd, 0) == -1 && errno == EINTR);
+	    while (dup2 (nullfd, 1) == -1 && errno == EINTR);
+	    while (dup2 (nullfd, 2) == -1 && errno == EINTR);
 	}
 
 	/* To make it obvious if it fails, there is a bug report on this */
 	write (2, mymsg, sizeof (mymsg));
 	write (1, mymsg, sizeof (mymsg));
-
-	/* Just for debugging the background back end */
-	if (background_wait){
-	    volatile int i = 1;
-	    
-	    while (i)
-		;
-	}
 	return 0;
     } else {
-	close (comm [1]);
+	close (comm[1]);
 	ctx->pid = pid;
-	register_task_running (ctx, pid, comm [0], info);
+	register_task_running (ctx, pid, comm[0], info);
 	return 1;
     }
 }

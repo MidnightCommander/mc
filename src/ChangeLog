@@ -1,5 +1,8 @@
 2003-10-08  Pavel Roskin  <proski@gnu.org>
 
+	* background.h: Eliminate background_wait variable.  Adjust all
+	dependencies.
+
 	* main.c (argument_table): Reorder options into logical groups.
 
 2003-10-07  Pavel Roskin  <proski@gnu.org>

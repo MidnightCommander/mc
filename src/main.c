@@ -2003,10 +2003,6 @@ static const struct poptOption argument_table[] = {
      N_("Set debug level")},
 #endif
 #endif
-#ifdef WITH_BACKGROUND
-    {"background", 'B', POPT_ARG_NONE, &background_wait, 0,
-     N_("Use to debug the background code")},
-#endif
 
     /* options for wrappers */
     {"datadir", 'f', POPT_ARG_NONE, NULL, 'f',

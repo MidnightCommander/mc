@@ -28,8 +28,6 @@ typedef struct TaskList {
 
 extern struct TaskList *task_list;
 
-extern int background_wait;
-
 void tell_parent (int msg);
 
 /* fileopctx.h must be included for FileOpContext to be defined */
