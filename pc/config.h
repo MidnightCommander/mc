@@ -61,16 +61,6 @@
 #  endif
 #endif /* MC_NT */
 
-#ifdef MC_OS2
-#  ifndef OS2
-#    define OS2
-#  endif
-#  ifndef __os2__
-#    define __os2__
-#    define NEEDS_LOCAL_DIRENT_H
-#  endif
-#endif /* MC_OS2 */
-
 #include "VERSION"
 
 #ifndef pc_system
@@ -92,11 +82,6 @@
 #define STDC_HEADERS
 #define HAVE_STDLIB_H
 #define HAVE_STRING_H
-
-#ifndef MC_NT
-/* glib for Win32 provides its own dirent */
-#define HAVE_DIRENT_H
-#endif
 
 #define HAVE_LIMITS_H
 

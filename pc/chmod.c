@@ -18,14 +18,7 @@
 
 #include <config.h>
 
-#ifdef __os2__
-#define INCL_DOSFILEMGR
-#include <os2.h>
-#endif
-
-#ifdef _OS_NT
 #include <windows.h>
-#endif
 
 #include <string.h>
 #include <stdio.h>
@@ -50,14 +43,12 @@
 #include "../src/achown.h"
 #include "../src/chown.h"
 
-#ifdef _OS_NT
 #define FILE_ARCHIVED  FILE_ATTRIBUTE_ARCHIVE
 #define FILE_DIRECTORY FILE_ATTRIBUTE_DIRECTORY
 #define FILE_HIDDEN    FILE_ATTRIBUTE_HIDDEN
 #define FILE_READONLY  FILE_ATTRIBUTE_READONLY
 #define FILE_SYSTEM    FILE_ATTRIBUTE_SYSTEM
 #define mk_chmod(fname,st) SetFileAttributes(fname,st)
-#endif
 
 static int single_set;
 struct Dlg_head *ch_dlg;
@@ -269,40 +260,7 @@ int pc_stat_file (char *filename)
 {
     mode_t st;
 
-#ifdef _OS_NT
     st = GetFileAttributes (filename);
-#endif /* _OS_NT */
-
-#ifdef __os2__
-    HFILE       fHandle    = 0L;
-    ULONG       fInfoLevel = 1;  /* 1st Level Info: Standard attributs */
-    FILESTATUS3 fInfoBuf;
-    ULONG       fInfoBufSize;
-    ULONG      fAction    = 0;
-    APIRET      rc;
-
-    fInfoBufSize = sizeof(FILESTATUS3);
-    rc = DosOpen((PSZ) filename,
-                 &fHandle,
-                 &fAction,
-                 (ULONG) 0,
-                 FILE_NORMAL,
-                 OPEN_ACTION_OPEN_IF_EXISTS,
-                 (OPEN_ACCESS_READONLY | OPEN_SHARE_DENYNONE),
-                 (PEAOP2) NULL);
-    if (rc != 0) {
-       return -1;
-    }
-
-    rc = DosQueryFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
-    DosClose(fHandle);
-    if (rc != 0) {
-       return -1;  /* error ! */
-    } else {
-       st = fInfoBuf.attrFile;
-    }
-#endif /* __os2__ */
-
     if (st & FILE_DIRECTORY)
     	st = -1;
     return st;
@@ -322,43 +280,6 @@ char *next_file (void)
 
     return cpanel->dir.list[c_file].fname;
 }
-
-#ifdef __os2__
-static int mk_chmod (char *filename, ULONG st)
-{
-    HFILE       fHandle    = 0L;
-    ULONG       fInfoLevel = 1;  /* 1st Level Info: Standard attributs */
-    FILESTATUS3 fInfoBuf;
-    ULONG       fInfoBufSize;
-    ULONG       fAction    = 0L;
-    APIRET      rc;
-
-    if (!(st & FILE_READONLY))
-       chmod(filename, (S_IWRITE | S_IREAD));
-    fInfoBufSize = sizeof(FILESTATUS3);
-    rc = DosOpen((PSZ) filename,
-                 &fHandle,
-                 &fAction,
-                 (ULONG) 0,
-                 FILE_NORMAL,
-                 OPEN_ACTION_OPEN_IF_EXISTS,
-                 (OPEN_ACCESS_READWRITE | OPEN_SHARE_DENYNONE),
-                 0L);
-    if (rc != 0) {
-       return rc;
-    }
-
-    rc = DosQueryFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
-    if (rc!=0) {
-       DosClose(fHandle);
-       return rc;
-    }
-    fInfoBuf.attrFile = st;
-    rc = DosSetFileInfo(fHandle, fInfoLevel, &fInfoBuf, fInfoBufSize);
-    rc = DosClose(fHandle);
-    return rc;
-}
-#endif /* __os2__ */
 
 static void do_chmod (mode_t sf)
 {
