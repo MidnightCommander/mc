@@ -1,12 +1,18 @@
 [Desktop Entry]
 Name=Mime Types
+Name[es]=Tipos MIME
 Name[fi]=MIME-tyypit
+Name[fr]=Types MIME
 Name[it]=Tipi MIME
 Name[no]=Mime typer
+Name[wa]=Sôrtes MIME
 Comment=Configure how files are associated and started.
+Comment[es]=Configura los tipos de archivos y los programas asociados para manejarlos.
 Comment[fi]=Aseta tiedostoassosiaatiot ja avaajat.
+Comment[fr]=Configure les types de fichier et les programmes y associés
 Comment[it]=Configura i tipi di files e le applicazioni usate per aprirli
 Comment[no]=Konfigurer hvordan filer er assosiert og startet.
+Comment[wa]=Apontyî les sôrtes di fitchî èt les programes po les drovî.
 Exec=mime-type-capplet
 Terminal=0
 Type=Application
