@@ -32,9 +32,10 @@ EXTFS_OUT = 			\
 	ulha 			\
 	uha
 
+if USE_VFS
 extfs_DATA = $(EXTFS_MISC)
-
 extfs_SCRIPTS = $(EXTFS_CONST) $(EXTFS_OUT)
+endif
 
 EXTRA_DIST = $(EXTFS_MISC) $(EXTFS_CONST)
 

@@ -89,7 +89,9 @@ endif
 if MCSERV_INSTALL
 sbin_PROGRAMS = mcserv
 else
+if USE_VFS
 noinst_PROGRAMS = mcserv
+endif
 endif
 
 mcserv_SOURCES = mcserv.c tcputil.c

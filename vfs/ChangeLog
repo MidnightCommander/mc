@@ -1,5 +1,8 @@
 2002-02-19  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Don't compile mcserv if VFS is disabled.
+	* extfs/Makefile.am: Don't install anything if VFS is disabled.
+
 	* extfs.c (extfs_open): Only create a new entry if it has not
 	been found and O_CREAT is set.  Consider file as changed only
 	if it has been successfully created.
