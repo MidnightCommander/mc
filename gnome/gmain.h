@@ -10,6 +10,7 @@ void xtoolkit_end (void);
 
 extern Dlg_head *desktop_dlg;
 extern int nowindows;
+extern int disable_root_warning;
 extern int corba_have_server;
 
 /* Required by the standard code */

@@ -1,3 +1,10 @@
+1999-09-30  Vincent Renardias <vincent@ldsol.com>
+
+	* gmain.c, gmain.h: add a '--disablerootwarning' flag which
+	disable the iritating "You're running gmc as root." dialog box.
+	(idealy, that box should also contain a "don't show this
+	message again" checkbox; any objection?).
+
 1999-09-29  Federico Mena Quintero  <federico@redhat.com>
 
 	* gcorba.c (corba_activate_server): New function.  Activate the

@@ -550,6 +550,9 @@ gnome_check_super_user (void)
 	if (geteuid () != 0)
 		return;
 
+	if (disable_root_warning)
+		return;
+
 	warning_dlg = gnome_message_box_new (
 		_("You are running the GNOME File Manager as root.\n\n"
 		  "As root, you can damage your system if you are not careful, and the "
