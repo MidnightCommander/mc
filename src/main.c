@@ -298,9 +298,6 @@ char *mc_home;
 
 char cmd_buf[512];
 
-/* Used during argument processing */
-int finish_program = 0;
-
 WPanel *
 get_current_panel (void)
 {
@@ -2148,7 +2145,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
     switch (c) {
     case 'V':
 	version (1);
-	finish_program = 1;
+	exit (0);
 	break;
 
     case 'c':
@@ -2160,7 +2157,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 
     case 'f':
 	printf ("%s\n", mc_home);
-	finish_program = 1;
+	exit (0);
 	break;
 
 #ifdef USE_NETCODE
@@ -2190,12 +2187,12 @@ process_args (poptContext ctx, int c, const char *option_arg)
 
     case 'H':
 	print_color_usage ();
-	finish_program = 1;
+	exit (0);
 	break;
 
     case 'h':
 	print_mc_usage (ctx, stdout);
-	finish_program = 1;
+	exit (0);
     }
 }
 
@@ -2293,9 +2290,6 @@ handle_args (int argc, char *argv[])
 		 poptStrerror (c));
 	exit (1);
     }
-
-    if (finish_program)
-	exit (0);
 
     tmp = poptGetArg (ctx);
 

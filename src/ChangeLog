@@ -1,3 +1,8 @@
+2002-11-20  Pavel Roskin  <proski@gnu.org>
+
+	* main.c: Eliminate finish_program variable - mc can now exit
+	immediately.
+
 2002-11-17  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (do_select): Mark panel as dirty.
