@@ -1,5 +1,8 @@
 1999-03-19  Jonathan Blandford  <jrb@redhat.com>
 
+	* gcustom-layout.c (custom_layout_set): We don't want to let the
+	user remove all of the settings.
+
 	* gdialogs.c (file_progress_show_bytes): bug fix proposed by Max
 	Weninger <max@takefive.co.at>
 

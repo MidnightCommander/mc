@@ -26,6 +26,7 @@ struct _GCustomLayout {
 	GtkWidget *srcList;
 	GtkWidget *destList;
 	GtkWidget *addButton;
+	GtkWidget *delButton;
 	GHashTable *hash;
 	GnomePropertyBox *prop_box;
 	WPanel *panel;
@@ -72,6 +73,8 @@ custom_layout_add_clicked (GtkWidget *widget, GCustomLayout *layout)
 		gtk_widget_set_sensitive (layout->addButton, FALSE);
 		gnome_property_box_changed (layout->prop_box);
 	}
+	if (GTK_CLIST (layout->destList)->rows >= 2)
+		gtk_widget_set_sensitive (layout->delButton, TRUE);
 }
 
 static void
@@ -84,6 +87,8 @@ custom_layout_del_clicked (GtkWidget *widget, GCustomLayout *layout)
 		gtk_clist_remove (GTK_CLIST (layout->destList), row);
 		gnome_property_box_changed (layout->prop_box);
 	}
+	if (GTK_CLIST (layout->destList)->rows <= 1)
+		gtk_widget_set_sensitive (layout->delButton, FALSE);
 }
 
 static void
@@ -126,7 +131,6 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 {
 	GtkWidget *vbox2;
 	GtkWidget *scrollwin;
-	GtkWidget *delButton;
 	GtkWidget *label;
 	GtkWidget *align;
 	gint       i;
@@ -179,12 +183,12 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 	
 	/* add add/remove buttons in center */
 	layout->addButton = gtk_button_new_with_label(_("Add"));
-	delButton = gtk_button_new_with_label(_("Remove"));
+	layout->delButton = gtk_button_new_with_label(_("Remove"));
 
 	align = gtk_alignment_new(0.0, 0.5, 0, 0);
 	vbox2 = gtk_vbox_new(TRUE, 0);
 	gtk_box_pack_start(GTK_BOX(vbox2), layout->addButton, FALSE, FALSE, 0);
-	gtk_box_pack_start(GTK_BOX(vbox2), delButton, FALSE, FALSE, 0);
+	gtk_box_pack_start(GTK_BOX(vbox2), layout->delButton, FALSE, FALSE, 0);
 	gtk_container_add(GTK_CONTAINER(align), vbox2);
 	gtk_table_attach(GTK_TABLE(layout->table), align, 1, 2, 0, 1, 0, 0, 5, 5);
 
@@ -205,7 +209,7 @@ custom_layout_create(GCustomLayout *layout, ColumnInfo *columns, gint ncolumns)
 	gtk_signal_connect(GTK_OBJECT(layout->addButton), "clicked",
 			   GTK_SIGNAL_FUNC(custom_layout_add_clicked), 
 			   layout);
-	gtk_signal_connect(GTK_OBJECT(delButton), "clicked",
+	gtk_signal_connect(GTK_OBJECT(layout->delButton), "clicked",
 			   GTK_SIGNAL_FUNC(custom_layout_del_clicked), 
 			   layout);
 	gtk_signal_connect(GTK_OBJECT(layout->srcList), "select_row",
@@ -258,6 +262,9 @@ custom_layout_set (GCustomLayout *layout, gchar *string)
 		gint row = GPOINTER_TO_UINT (GTK_CLIST (layout->srcList)->selection->data);
 		custom_layout_select_row (NULL, row, 0, NULL, layout);
 	}
+	/* Set the status of the "Remove" button correctly */
+	if (GTK_CLIST (layout->destList)->rows <= 1)
+		gtk_widget_set_sensitive (layout->delButton, FALSE);
 
 }
 
