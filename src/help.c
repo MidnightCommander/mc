@@ -65,24 +65,24 @@
 static char *data;		/* Pointer to the loaded data file */
 static int help_lines;		/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
-static char *main_node;		/* The main node */
-static char *last_shown = 0;	/* Last byte shown in a screen */
+static const char *main_node;	/* The main node */
+static const char *last_shown = NULL;	/* Last byte shown in a screen */
 static int end_of_node = 0;	/* Flag: the last character of the node shown? */
-static char *currentpoint, *startpoint;
-static char *selected_item;
+static const char *currentpoint, *startpoint;
+static const char *selected_item;
 
 /* The widget variables */
 static Dlg_head *whelp;
 
 static struct {
-    char *page;			/* Pointer to the selected page */
-    char *link;			/* Pointer to the selected link */
+    const char *page;		/* Pointer to the selected page */
+    const char *link;		/* Pointer to the selected link */
 } history [HISTORY_SIZE];
 
 /* Link areas for the mouse */
 typedef struct Link_Area {
     int x1, y1, x2, y2;
-    char *link_name;
+    const char *link_name;
     struct Link_Area *next;
 } Link_Area;
 
@@ -124,12 +124,13 @@ static int acs2pc (int acscode)
 
 /* returns the position where text was found in the start buffer */
 /* or 0 if not found */
-static char *
-search_string (char *start, char *text)
+static const char *
+search_string (const char *start, char *text)
 {
     char *d = text;
-    char *e = start;
+    const char *e = start;
 
+    /* FIXME: correct this bug elsewhere, not in this function */
     /* fmt sometimes replaces a space with a newline in the help file */
     /* Replace the newlines in the link name with spaces to correct the situation */
     while (*d){
@@ -151,10 +152,10 @@ search_string (char *start, char *text)
 
 /* Searches text in the buffer pointed by start.  Search ends */
 /* if the CHAR_NODE_END is found in the text.  Returns 0 on failure */
-static char *search_string_node (char *start, char *text)
+static const char *search_string_node (const char *start, const char *text)
 {
-    char *d = text;
-    char *e = start;
+    const char *d = text;
+    const char *e = start;
 
     if (!start)
 	return 0;
@@ -172,9 +173,9 @@ static char *search_string_node (char *start, char *text)
 
 /* Searches the_char in the buffer pointer by start and searches */
 /* it can search forward (direction = 1) or backward (direction = -1) */
-static char *search_char_node (char *start, char the_char, int direction)
+static const char *search_char_node (const char *start, char the_char, int direction)
 {
-    char *e;
+    const char *e;
 
     e = start;
     
@@ -186,9 +187,9 @@ static char *search_char_node (char *start, char the_char, int direction)
 }
 
 /* Returns the new current pointer when moved lines lines */
-static char *move_forward2 (char *c, int lines)
+static const char *move_forward2 (const char *c, int lines)
 {
-    char *p;
+    const char *p;
     int  line;
 
     currentpoint = c;
@@ -201,9 +202,9 @@ static char *move_forward2 (char *c, int lines)
     return currentpoint = c;
 }
 
-static char *move_backward2 (char *c, int lines)
+static const char *move_backward2 (const char *c, int lines)
 {
-    char *p;
+    const char *p;
     int line;
 
     currentpoint = c;
@@ -253,10 +254,10 @@ static void move_to_bottom (int dummy)
     move_backward (help_lines - 1);
 }
 
-static char *help_follow_link (char *start, char *selected_item)
+static const char *help_follow_link (const char *start, const char *selected_item)
 {
     char link_name [MAXLINKNAME];
-    char *p;
+    const char *p;
     int  i = 0;
 
     if (!selected_item)
@@ -279,9 +280,9 @@ static char *help_follow_link (char *start, char *selected_item)
     return _(" Help file format error\n");
 }
 
-static char *select_next_link (char *start, char *current_link)
+static const char *select_next_link (const char *start, const char *current_link)
 {
-    char *p;
+    const char *p;
 
     if (!current_link)
 	return 0;
@@ -295,9 +296,9 @@ static char *select_next_link (char *start, char *current_link)
     return p - 1;
 }
 
-static char *select_prev_link (char *start, char *current_link)
+static const char *select_prev_link (const char *start, const char *current_link)
 {
-    char *p;
+    const char *p;
 
     if (!current_link)
 	return 0;
@@ -310,7 +311,7 @@ static char *select_prev_link (char *start, char *current_link)
     return p;
 }
 
-static void start_link_area (int x, int y, char *link_name)
+static void start_link_area (int x, int y, const char *link_name)
 {
     Link_Area *new;
 
@@ -355,9 +356,9 @@ static void clear_link_areas (void)
     inside_link_area = 0;
 }
 
-static void help_show (Dlg_head *h, char *paint_start)
+static void help_show (Dlg_head *h, const char *paint_start)
 {
-    char *p;
+    const char *p;
     int  col, line, c;
     int  painting = 1;
     int acs;			/* Flag: Alternate character set active? */
@@ -548,7 +549,7 @@ help_help_cmd (Dlg_head *h)
 static void
 help_index_cmd (Dlg_head * h)
 {
-    char *new_item;
+    const char *new_item;
 
     if (!(new_item = search_string (data, "[Contents]"))) {
 	message (1, MSG_ERROR, _(" Cannot find node %s in help file "),
@@ -601,7 +602,7 @@ mousedispatch_new (int y, int x, int yl, int xl)
 static cb_ret_t
 help_handle_key (struct Dlg_head *h, int c)
 {
-    char *new_item;
+    const char *new_item;
 
     if (c != KEY_UP && c != KEY_DOWN &&
 	check_movement_keys (c, help_lines, currentpoint,
@@ -753,7 +754,7 @@ interactive_display (const char *filename, const char *node)
 {
     WButtonBar *help_bar;
     Widget *md;
-    char *hlpfile = filename;
+    char *hlpfile = NULL;
 
     if (filename)
 	data = load_file (filename);
@@ -761,7 +762,7 @@ interactive_display (const char *filename, const char *node)
 	data = load_mc_home_file ("mc.hlp", &hlpfile);
 
     if (data == NULL) {
-	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "), hlpfile,
+	message (1, MSG_ERROR, _(" Cannot open file %s \n %s "), filename ? filename : hlpfile,
 		 unix_error_string (errno));
     }
 

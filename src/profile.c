@@ -146,7 +146,7 @@ static TSecHeader *load (const char *file)
     int state;
     TSecHeader *SecHeader = 0;
     char CharBuffer [STRSIZE];
-    char *next = "";		/* Not needed */
+    char *next = NULL;		/* Not needed */
     int c;
     
     if ((f = fopen (file, "r"))==NULL)
@@ -267,8 +267,8 @@ static void new_key (TSecHeader *section, const char *KeyName, const char *Value
 }
 
 static char *
-GetSetProfileChar (int set, const char *AppName, char *KeyName,
-		   char *Default, char *FileName)
+GetSetProfileChar (int set, const char *AppName, const char *KeyName,
+		   const char *Default, const char *FileName)
 {
     
     TProfile   *Current;
@@ -319,9 +319,9 @@ GetSetProfileChar (int set, const char *AppName, char *KeyName,
     return Default;
 }
 
-static short GetSetProfile (int set, const char * AppName, char * KeyName,
-			    char * Default, char * ReturnedString,
-			    short Size, char * FileName)
+static short GetSetProfile (int set, const char * AppName, const char * KeyName,
+			    const char * Default, char * ReturnedString,
+			    short Size, const char * FileName)
 
 {
     char  *s;
@@ -334,21 +334,21 @@ static short GetSetProfile (int set, const char * AppName, char * KeyName,
     return 1;
 }
 
-short GetPrivateProfileString (const char * AppName, char * KeyName,
-			       char * Default, char * ReturnedString,
-			       short Size, char * FileName)
+short GetPrivateProfileString (const char * AppName, const char * KeyName,
+			       const char * Default, char * ReturnedString,
+			       short Size, const char * FileName)
 {
     return (GetSetProfile (0, AppName, KeyName, Default, ReturnedString, Size, FileName));
 }
 
-char *get_profile_string (const char *AppName, char *KeyName, char *Default,
-			  char *FileName)
+char *get_profile_string (const char *AppName, const char *KeyName, const char *Default,
+			  const char *FileName)
 {
     return GetSetProfileChar (0, AppName, KeyName, Default, FileName);
 }
 
-int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
-			  char * File)
+int GetPrivateProfileInt (const char * AppName, const char * KeyName, int Default,
+			  const char * File)
 {
     char IntBuf [BUF_TINY];
     char buf [BUF_TINY];
@@ -364,10 +364,10 @@ int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
     return (int) atol (IntBuf);
 }
 
-int WritePrivateProfileString (const char * AppName, char * KeyName, char * String,
-				char * FileName)
+int WritePrivateProfileString (const char * AppName, const char * KeyName, const char * String,
+				const char * FileName)
 {
-    return GetSetProfile (1, AppName, KeyName, String, "", 0, FileName);
+    return GetSetProfile (1, AppName, KeyName, String, NULL, 0, FileName);
 }
 
 static void dump_keys (FILE * profile, TKeys * p)
@@ -448,7 +448,7 @@ static void free_profile (TProfile *p)
     g_free (p);
 }
 
-void free_profile_name (char *s)
+void free_profile_name (const char *s)
 {
     TProfile *p;
     
@@ -470,7 +470,7 @@ void free_profiles (void)
     free_profile (Base);
 }
 
-void *profile_init_iterator (char *appname, char *file)
+void *profile_init_iterator (const char *appname, const char *file)
 {
     TProfile   *Current;
     TSecHeader *section;
@@ -504,7 +504,7 @@ void *profile_iterator_next (void *s, char **key, char **value)
     return keys;
 }
 
-void profile_clean_section (const char *appname, char *file)
+void profile_clean_section (const char *appname, const char *file)
 {
     TSecHeader *section;
 
@@ -523,7 +523,7 @@ void profile_clean_section (const char *appname, char *file)
     }
 }
 
-int profile_has_section (char *section_name, char *profile)
+int profile_has_section (const char *section_name, const char *profile)
 {
     TSecHeader *section;
 
@@ -539,7 +539,7 @@ int profile_has_section (char *section_name, char *profile)
     return 0;
 }
 
-void profile_forget_profile (char *file)
+void profile_forget_profile (const char *file)
 {
     TProfile *p;
 
