@@ -95,7 +95,7 @@ static unsigned int SLang_getkey2 (void)
 	SLang_Input_Buffer_Len--;
 	imax = SLang_Input_Buffer_Len;
    
-	memcpy ((char *) SLang_Input_Buffer, 
+	memmove ((char *) SLang_Input_Buffer, 
 		(char *) (SLang_Input_Buffer + 1), imax);
 	return(ch);
      }
