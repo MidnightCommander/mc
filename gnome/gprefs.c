@@ -1,3 +1,9 @@
+/*
+ * Preferences configuration page for the GNU Midnight Commander
+ *
+ * Author:
+ *   Jonathan Blandford (jrb@redhat.com)
+ */
 #include <config.h>
 #include "x.h"
 #include <stdio.h>
@@ -17,6 +23,7 @@
 #include "gcustom-layout.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
+#include "gdesktop.h"
 
 /* Orphan confirmation options */
 /* Auto save setup */
@@ -155,6 +162,22 @@ static Property caching_and_optimization_props [] =
         PROPERTIES_DONE
 };
 
+static Property desktop_props [] = {
+	{
+		N_("Use shaped icons"), PROPERTY_BOOL,
+		&desktop_use_shaped_icons, NULL, NULL, NULL
+	},
+	{
+		N_("Auto place icons"), PROPERTY_BOOL,
+		&desktop_auto_placement, NULL, NULL, NULL
+	},
+	{
+		N_("Snap icons to grid"), PROPERTY_BOOL,
+		&desktop_snap_icons, NULL, NULL, NULL
+	},
+        PROPERTIES_DONE
+};
+
 static PrefsPage prefs_pages [] =
 {
         {
@@ -173,6 +196,10 @@ static PrefsPage prefs_pages [] =
                 N_("Caching"),
                 caching_and_optimization_props
         },
+	{
+		N_("Desktop"),
+		desktop_props
+	},
         PREFSPAGES_DONE
 };
 

@@ -253,6 +253,9 @@ static struct {
 #endif
 
 #ifdef HAVE_GNOME
+    { "desktop_use_shaped_icons", &desktop_use_shaped_icons },
+    { "desktop_auto_placement", &desktop_auto_placement },
+    { "desktop_snap_icons", &desktop_snap_icons },
     { "tree_panel_visible", &tree_panel_visible },
     { "we_can_afford_the_speed", &we_can_afford_the_speed },
 #else

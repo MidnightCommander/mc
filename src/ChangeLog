@@ -1,3 +1,7 @@
+1999-04-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* setup.c: Save desktop information.
+
 1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* cons.saver.c (main): dup2() may be interrupted; take this into

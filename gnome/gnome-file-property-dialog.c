@@ -267,7 +267,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	label = gtk_label_new (_("File Created on: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 0, 1);
-	time = gmtime (&(fp_dlg->st.st_ctime));
+	time = localtime (&(fp_dlg->st.st_ctime));
 	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
 	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -276,7 +276,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	label = gtk_label_new (_("Last Modified on: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 1, 2);
-	time = gmtime (&(fp_dlg->st.st_mtime));
+	time = localtime (&(fp_dlg->st.st_mtime));
 	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
 	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -285,7 +285,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	label = gtk_label_new (_("Last Accessed on: "));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_table_attach_defaults (GTK_TABLE (table), label, 0, 1, 2, 3);
-	time = gmtime (&(fp_dlg->st.st_atime));
+	time = localtime (&(fp_dlg->st.st_atime));
 	strftime (buf, MC_MAXPATHLEN, "%a, %b %d %Y,  %I:%M:%S %p", time);
 	label = gtk_label_new (buf);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
