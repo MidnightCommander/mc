@@ -18,7 +18,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: vfs_tarfs_ops */
+/* Namespace: init_tarfs */
 
 #include <config.h>
 #include <sys/types.h>
@@ -242,7 +242,6 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
     root->st.st_nlink++;
     root->st.st_dev = MEDATA->rdev++;
 
-    vfs_s_add_dots (me, root, NULL);
     archive->root = root;
 
     return result;

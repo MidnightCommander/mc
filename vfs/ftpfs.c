@@ -1174,47 +1174,49 @@ dir_load (struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
     struct vfs_s_entry *ent;
     struct vfs_s_super *super = dir->super;
     int sock, num_entries = 0;
-#ifdef FIXME_LATER
-    int has_symlinks = 0;
-#endif
     char buffer[BUF_8K];
     int cd_first;
-    
+
     cd_first = ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT)
 	|| (strchr (remote_path, ' ') != NULL);
 
-again:
-    print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,
-		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "",
-		      cd_first ? _("(chdir first)") : "");
+  again:
+    print_vfs_message (_("ftpfs: Reading FTP directory %s... %s%s"),
+		       remote_path,
+		       SUP.strict ==
+		       RFC_STRICT ? _("(strict rfc959)") : "",
+		       cd_first ? _("(chdir first)") : "");
 
     if (cd_first) {
-        char *p;
+	char *p;
 
-        p = translate_path (me, super, remote_path);
+	p = translate_path (me, super, remote_path);
 
-        if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
+	if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
 	    g_free (p);
-            my_errno = ENOENT;
-	    print_vfs_message(_("ftpfs: CWD failed."));
+	    my_errno = ENOENT;
+	    print_vfs_message (_("ftpfs: CWD failed."));
 	    return -1;
-        }
+	}
 	g_free (p);
     }
 
-    gettimeofday(&dir->timestamp, NULL);
+    gettimeofday (&dir->timestamp, NULL);
     dir->timestamp.tv_sec += ftpfs_directory_timeout;
 
-    if (SUP.strict == RFC_STRICT) 
-        sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
+    if (SUP.strict == RFC_STRICT)
+	sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
     else if (cd_first)
 	/* Dirty hack to avoid autoprepending / to . */
 	/* Wu-ftpd produces strange output for '/' if 'LIST -la .' used */
-        sock = open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
+	sock =
+	    open_data_connection (me, super, "LIST -la", 0, TYPE_ASCII, 0);
     else {
 	/* Trailing "/." is necessary if remote_path is a symlink */
 	char *path = concat_dir_and_file (remote_path, ".");
-	sock = open_data_connection (me, super, "LIST -la", path, TYPE_ASCII, 0);
+	sock =
+	    open_data_connection (me, super, "LIST -la", path, TYPE_ASCII,
+				  0);
 	g_free (path);
     }
 
@@ -1224,104 +1226,64 @@ again:
     /* Clear the interrupt flag */
     enable_interrupt_key ();
 
-#if 1
-    {
-      /* added 20001006 by gisburn
-       * add dots '.' and '..'. This must be _executed_ before scanning the dir as the 
-       * code below may jump directly into error handling code (without executing 
-       * remaining code). And C doesn't have try {...} finally {}; :-)
-       */
-      struct vfs_s_inode *parent = dir->ent->dir;
-      
-      if( parent==NULL )
-        parent = dir;
- 
-      ent = vfs_s_generate_entry(me, ".", dir, 0);
-      ent->ino->st=dir->st;
-      num_entries++;
-      vfs_s_insert_entry(me, dir, ent);
-      
-      ent = vfs_s_generate_entry(me, "..", parent, 0);
-      ent->ino->st=parent->st;
-      num_entries++;
-      vfs_s_insert_entry(me, dir, ent);      
-    }
-#endif
-
     while (1) {
 	int i;
-	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), sock);
+	int res =
+	    vfs_s_get_line_interruptible (me, buffer, sizeof (buffer),
+					  sock);
 	if (!res)
 	    break;
 
 	if (res == EINTR) {
 	    me->verrno = ECONNRESET;
 	    close (sock);
-	    disable_interrupt_key();
-	    get_reply(me, SUP.sock, NULL, 0);
+	    disable_interrupt_key ();
+	    get_reply (me, SUP.sock, NULL, 0);
 	    print_vfs_message (_("%s: failure"), me->name);
 	    return -1;
 	}
 
-	if (MEDATA->logfile){
+	if (MEDATA->logfile) {
 	    fputs (buffer, MEDATA->logfile);
-            fputs ("\n", MEDATA->logfile);
+	    fputs ("\n", MEDATA->logfile);
 	    fflush (MEDATA->logfile);
 	}
 
-	ent = vfs_s_generate_entry(me, NULL, dir, 0);
+	ent = vfs_s_generate_entry (me, NULL, dir, 0);
 	i = ent->ino->st.st_nlink;
-	if (!vfs_parse_ls_lga (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname)) {
+	if (!vfs_parse_ls_lga
+	    (buffer, &ent->ino->st, &ent->name, &ent->ino->linkname)) {
 	    vfs_s_free_entry (me, ent);
 	    continue;
 	}
-	ent->ino->st.st_nlink = i; /* Ouch, we need to preserve our counts :-( */
+	ent->ino->st.st_nlink = i;	/* Ouch, we need to preserve our counts :-( */
 	num_entries++;
-	if ((!strcmp(ent->name, ".")) || (!strcmp (ent->name, ".."))) {
-	    g_free (ent->name);
-	    ent->name = NULL;	/* Ouch, vfs_s_free_entry "knows" about . and .. being special :-( */
-	    vfs_s_free_entry (me, ent);
-	    continue;
-	}
-
-	vfs_s_insert_entry(me, dir, ent);
+	vfs_s_insert_entry (me, dir, ent);
     }
 
-    /*    vfs_s_add_dots(me, dir, NULL);
-	  FIXME This really should be here; but we need to provide correct parent.
-	  Disabled for now, please fix it. 				Pavel
-    */
-    close(sock);
+    close (sock);
     me->verrno = E_REMOTE;
     if ((get_reply (me, SUP.sock, NULL, 0) != COMPLETE) || !num_entries)
-        goto fallback;
+	goto fallback;
 
     if (SUP.strict == RFC_AUTODETECT)
 	SUP.strict = RFC_DARING;
 
-#ifdef FIXME_LATER
-    if (has_symlinks) {
-        if (resolve_symlinks)
-	    resolve_symlink(me, super, dcache);
-        else
-           dcache->symlink_status = FTPFS_UNRESOLVED_SYMLINKS;
-    }
-#endif
     print_vfs_message (_("%s: done."), me->name);
     return 0;
 
-fallback:
+  fallback:
     if (SUP.strict == RFC_AUTODETECT) {
-        /* It's our first attempt to get a directory listing from this
-	server (UNIX style LIST command) */
+	/* It's our first attempt to get a directory listing from this
+	   server (UNIX style LIST command) */
 	SUP.strict = RFC_STRICT;
 	/* I hate goto, but recursive call needs another 8K on stack */
 	/* return dir_load (me, dir, remote_path); */
 	cd_first = 1;
 	goto again;
     }
-    print_vfs_message(_("ftpfs: failed; nowhere to fallback to"));
-    ERRNOR(-1, EACCES);
+    print_vfs_message (_("ftpfs: failed; nowhere to fallback to"));
+    ERRNOR (-1, EACCES);
 }
 
 static int

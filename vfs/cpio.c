@@ -168,7 +168,6 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
     root->st.st_nlink++;
     root->st.st_dev = MEDATA->rdev++;
 
-    vfs_s_add_dots(me, root, NULL);
     super->root = root;
 
     CPIO_SEEK_SET(super, 0);
@@ -478,9 +477,6 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	
 	entry = vfs_s_new_entry(me, tn, inode);
 	vfs_s_insert_entry(me, root, entry);
-
-	if(S_ISDIR(stat->st_mode))
-	    vfs_s_add_dots(me, inode, root);
 
 	if(S_ISLNK(stat->st_mode)) {
 	    inode->linkname = g_malloc(stat->st_size + 1);

@@ -161,8 +161,6 @@ void vfs_s_insert_entry (struct vfs_class *me, struct vfs_s_inode *dir,
 			 struct vfs_s_entry *ent);
 struct stat *vfs_s_default_stat (struct vfs_class *me, mode_t mode);
 
-void vfs_s_add_dots (struct vfs_class *me, struct vfs_s_inode *dir,
-		     struct vfs_s_inode *parent);
 struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, char *name,
 					  struct vfs_s_inode *parent,
 					  mode_t mode);

@@ -103,7 +103,6 @@ vfs_s_free_inode (struct vfs_class *me, struct vfs_s_inode *ino)
 void
 vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
 {
-    int is_dot = 0;
     if (ent->prevp){	/* It is possible that we are deleting freshly created entry */
 	*ent->prevp = ent->next;
 	if (ent->next)
@@ -111,12 +110,11 @@ vfs_s_free_entry (struct vfs_class *me, struct vfs_s_entry *ent)
     }
 
     if (ent->name){
-	is_dot = (!strcmp (ent->name, ".")) || (!strcmp (ent->name, ".."));
 	g_free (ent->name);
 	ent->name = NULL;
     }
 	
-    if (!is_dot && ent->ino){
+    if (ent->ino){
 	ent->ino->ent = NULL;
 	vfs_s_free_inode (me, ent->ino);
 	ent->ino = NULL;
@@ -163,21 +161,6 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
     return &st;
 }
 
-void
-vfs_s_add_dots (struct vfs_class *me, struct vfs_s_inode *dir, struct vfs_s_inode *parent)
-{
-    struct vfs_s_entry *dot, *dotdot;
-
-    if (!parent)
-        parent = dir;
-    dot = vfs_s_new_entry (me, ".", dir);
-    dotdot = vfs_s_new_entry (me, "..", parent);
-    vfs_s_insert_entry (me, dir, dot);
-    vfs_s_insert_entry (me, dir, dotdot);
-    dir->st.st_nlink--;
-    parent->st.st_nlink--;	/* We do not count "." and ".." into nlinks */
-}
-
 struct vfs_s_entry *
 vfs_s_generate_entry (struct vfs_class *me, char *name, struct vfs_s_inode *parent, mode_t mode)
 {
@@ -186,8 +169,6 @@ vfs_s_generate_entry (struct vfs_class *me, char *name, struct vfs_s_inode *pare
 
     st = vfs_s_default_stat (me, mode);
     inode = vfs_s_new_inode (me, parent->super, st);
-    if (S_ISDIR (mode))
-        vfs_s_add_dots (me, inode, parent);
 
     return vfs_s_new_entry (me, name, inode);
 }
