@@ -539,7 +539,6 @@ dnl
 mx=""
 gmcdep=""
 libgtkedit=""
-have_magicdev=no
 
 AC_SUBST(insticons)
 GNOME_INIT_HOOK([
@@ -553,30 +552,12 @@ GNOME_INIT_HOOK([
 	    xvers="Gnome+$xvers"
 	fi
 	gnomeicondir=`gnome-config --datadir`/pixmaps
-        GNOME_IDLDIR=`gnome-config --datadir`/idl
-
-        dnl 
-        dnl Check for the MagicDev automounter
-        dnl
-	AC_MSG_CHECKING(for magicdev idl file)
-	if test -e $GNOME_IDLDIR/magicdev.idl ; then
-	    have_magicdev=yes
-        fi
-        AC_MSG_RESULT($have_magicdev)
 ])
 AC_SUBST(gnomeicondir)
-AC_SUBST(GNOME_IDLDIR)
 AC_SUBST(mx)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
 AC_SUBST(GNOMEGNORBA_LIBS)
-
-MAGICDEV=#
-if test x$have_magicdev = xyes ; then
-   AC_DEFINE(HAVE_MAGICDEV)
-   MAGICDEV=
-fi
-AC_SUBST(MAGICDEV)
 
 dnl
 dnl Check for the -mandoc package

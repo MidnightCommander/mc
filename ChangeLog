@@ -1,3 +1,9 @@
+1999-09-16  Owen Taylor  <otaylor@redhat.com>
+
+	* Remove the magicdev autoconf test in favor of just
+	including the idl file. Otherwise we have a dependency
+	loop between this and magicdev.
+
 1999-09-08  Federico Mena Quintero  <federico@redhat.com>
 
 	* idl/FileManager.idl: Changed names, and put everything under a

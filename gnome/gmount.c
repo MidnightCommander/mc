@@ -84,10 +84,10 @@ void free (void *ptr);
 #define MOUNTED_GETMNTTBL
 #endif
 
-#ifdef HAVE_MAGICDEV
+#ifdef HAVE_CORBA
 #include <libgnorba/gnorba.h>
 #include "magicdev.h"
-#endif /* HAVE_MAGICDEV */
+#endif HAVE_CORBA
 
 #include <dirent.h>
 #include <sys/types.h>
@@ -289,7 +289,7 @@ mount_point_to_device (char *mount_point)
 static gboolean
 automounter_is_running (void)
 {
-#if defined(HAVE_MAGICDEV) && defined(HAVE_CORBA)
+#if defined(HAVE_CORBA)
 	CORBA_Object server;
 	CORBA_Environment ev;
 	gboolean result = FALSE;
@@ -311,9 +311,9 @@ automounter_is_running (void)
 
 	return result;
 		
-#else  /* !HAVE_MAGICDEV */
+#else  /* !HAVE_CORBA */
 	return FALSE;
-#endif /* HAVE_MAGICDEV */
+#endif /* HAVE_CORBA */
 }
 
 

@@ -1,3 +1,10 @@
+1999-09-16  Owen Taylor  <otaylor@redhat.com>
+
+        * gmount.c: Remove the HAVE_MAGICDEV conditional.
+	
+	* Makefile.in magicdev.idl: Add the magicdev.idl file
+	here to avoid creating dependency loops.
+
 1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* layout: Added the new samba password dialog.

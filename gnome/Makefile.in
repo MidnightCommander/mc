@@ -140,7 +140,8 @@ CORBAOBJS = 			\
 	main-corba.o		\
 	gcorba.o		\
 	gmount-corba.o          \
-	$(MAGICDEV_OBJS)        \
+	magicdev-common.o 	\
+	magicdev-stubs.o	\
 	FileManager-skels.o	\
 	FileManager-stubs.o	\
 	FileManager-common.o
@@ -198,10 +199,6 @@ MAGICDEV_GENERATED =            \
 	magicdev-common.c 	\
 	magicdev-stubs.c
 
-@MAGICDEV@MAGICDEV_OBJS = 	  \
-@MAGICDEV@	magicdev-common.o \
-@MAGICDEV@      magicdev-stubs.o
-
 CLIENTSRCS = gmc-client.c
 
 CLIENTOBJS = 			\
@@ -213,12 +210,12 @@ CLIENTOBJS = 			\
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
-@MAGICDEV@$(MAGICDEV_GENERATED): $(GNOME_IDLDIR)/magicdev.idl
-@MAGICDEV@	orbit-idl `gnome-config --cflags idl` --noskels $(GNOME_IDLDIR)/magicdev.idl
+$(MAGICDEV_GENERATED): magicdev.idl
+	orbit-idl `gnome-config --cflags idl` --noskels magicdev.idl
 
 FileManager-impl.c: FileManager.h
 
-EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop 
+EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop magicdev.idl
 
 DISTGNOME_NEW = \
 	gimp.image.desktop application.x-gnumeric.desktop
