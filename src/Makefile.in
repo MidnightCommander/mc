@@ -8,9 +8,10 @@ SHELL   = @SHELL@
 @MCF@
 
 CFLAGS   = $(XCFLAGS)
-CPPFLAGS = $(XCPPFLAGS) @MCCFLAGS@ -DREGEX_MALLOC
+CPPFLAGS = $(XCPPFLAGS) @MCCFLAGS@
 LDFLAGS  = $(XLDFLAGS)
-DEFS     = $(XDEFS)
+DEFS     = $(XDEFS) -DREGEX_MALLOC -DLIBDIR=\""$(mclibdir)/"\" \
+	-DCONFDIR=\""$(confdir)/"\" -DLOCALEDIR=\""$(localedir)/"\"
 LIBS     = @LSLANG@ @LEDIT@ @LVFS@ @LINTL@ @LGPM@ \
 	$(XLIBS) $(XLIB) @TERMNET@ @MCLIBS@ @LIBICONV@
 DEPLIBS  = $(top_builddir)/vfs/@LIBVFS@ $(top_builddir)/slang/@LIBSLANG@ \
