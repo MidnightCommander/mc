@@ -47,7 +47,6 @@ int column_highlighting = 0;
 static GtkWidgetClass *parent_class = NULL;
 
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size);
-void edit_destroy_callback (CWidget * w);
 int edit_translate_key (unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch);
 void gtk_edit_alloc_colors (GtkEdit *edit, GdkColormap *colormap);
 static void gtk_edit_set_position (GtkEditable *editable, gint position);
@@ -1202,6 +1201,11 @@ void gtk_edit_move (GtkEdit * widget, void *data) { GtkEdit *edit = (GtkEdit *) 
 void gtk_edit_delete (GtkEdit * widget, void *data) { GtkEdit *edit = (GtkEdit *) data ; gtk_edit_command (edit, CK_Remove); }
 void gtk_edit_undo (GtkEdit * widget, void *data) { GtkEdit *edit = (GtkEdit *) data ; gtk_edit_command (edit, CK_Undo); }
 
+gint gtk_edit_delete_cb (GtkWidget *widget, GdkEvent *event, GtkWidget *edit) {
+    gtk_edit_quit (NULL, edit);
+    return TRUE;	
+}
+
 #if 0
 struct _GnomeUIInfo {
     GnomeUIInfoType type;
@@ -1353,6 +1357,9 @@ int edit (const char *file, int line)
 	gnome_app_set_toolbar(GNOME_APP (app), GTK_TOOLBAR(create_toolbar(app, GTK_EDIT (edit))));
 	GTK_EDIT(edit)->destroy_me = gtk_widget_destroy;
 	GTK_EDIT(edit)->destroy_me_user_data = app;
+
+	gtk_signal_connect (GTK_OBJECT (app), "delete_event",
+			    (GtkSignalFunc) gtk_edit_delete_cb, edit);
 
 	gtk_widget_show (edit);
 	gtk_widget_realize (edit);
