@@ -289,7 +289,7 @@ xmouse_get_event (Gpm_Event *ev)
 
     /* Variable btn has following meaning: */
     /* 0 = btn1 dn, 1 = btn2 dn, 2 = btn3 dn, 3 = btn up */
-    btn = xgetch () - 32;
+    btn = getch () - 32;
     
     /* There seems to be no way of knowing which button was released */
     /* So we assume all the buttons were released */
@@ -334,8 +334,8 @@ xmouse_get_event (Gpm_Event *ev)
     }
     /* Coordinates are 33-based */
     /* Transform them to 1-based */
-    ev->x = xgetch () - 32;
-    ev->y = xgetch () - 32;
+    ev->x = getch () - 32;
+    ev->y = getch () - 32;
 }
 
 static key_def *create_sequence (char *seq, int code, int action)
@@ -484,7 +484,7 @@ int get_key_code (int no_delay)
     if (no_delay) {
         nodelay (stdscr, TRUE);
     }
-    c = xgetch ();
+    c = getch ();
 #if defined(USE_NCURSES) && defined(KEY_RESIZE)
     if (c == KEY_RESIZE)
         goto nodelay_try_again;
@@ -519,7 +519,7 @@ int get_key_code (int no_delay)
     } else if (c == ERR){
 	/* Maybe we got an incomplete match.
 	   This we do only in delay mode, since otherwise
-	   xgetch can return ERR at any time. */
+	   getch can return ERR at any time. */
 	if (seq_append) {
 	    pending_keys = seq_buffer;
 	    goto pend_send;
@@ -570,7 +570,7 @@ int get_key_code (int no_delay)
 		} else {
 		    if (no_delay)
 		        goto nodelay_try_again;
-		    c = xgetch ();
+		    c = getch ();
 		}
 	    } else {
 		/* We got a complete match, return and reset search */
@@ -835,7 +835,7 @@ static int xgetch_second (void)
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
     select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
-    c = xgetch ();
+    c = getch ();
     nodelay (stdscr, FALSE);
     return c;
 }
@@ -871,9 +871,9 @@ char *learn_key (void)
     char *p = buffer;
     
     keypad(stdscr, FALSE); /* disable intepreting keys by ncurses */
-    c = xgetch ();
+    c = getch ();
     while (c == ERR)
-        c = xgetch (); /* Sanity check, should be unnecessary */
+        c = getch (); /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
     GET_TIME (endtime);
     endtime.tv_usec += LEARN_TIMEOUT;
@@ -883,7 +883,7 @@ char *learn_key (void)
     }
     nodelay (stdscr, TRUE);
     for (;;) {
-        while ((c = xgetch ()) == ERR) {
+        while ((c = getch ()) == ERR) {
             GET_TIME (timeout);
             timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
             if (timeout.tv_usec < 0)

@@ -547,7 +547,7 @@ do_execute (const char *shell, const char *command, int flags)
 	    last_paused = 1;
 	    fflush (stdout);
 	    mc_raw_mode ();
-	    xgetch ();
+	    getch ();
 	}
 	if (console_flag) {
 	    if (output_lines && keybar_visible) {

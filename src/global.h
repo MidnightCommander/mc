@@ -142,6 +142,4 @@ void refresh_screen (void *);
 #define ESC_CHAR '\033'
 #define ESC_STR  "\033"
 
-#define xgetch getch
-
 #endif /* !__MC_GLOBAL_H */
