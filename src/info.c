@@ -163,7 +163,7 @@ info_show_info (struct WInfo *info)
 	    printw (_("Size:      %s"), buffer);
 #ifdef HAVE_STRUCT_STAT_ST_BLOCKS
 	    printw ((st.st_blocks==1) ?
-		_(" (%d block)") : _(" (%d blocks)"), (int) st.st_blocks);
+		_(" (%ld block)") : _(" (%ld blocks)"), (long) st.st_blocks);
 #endif
 	}
 	

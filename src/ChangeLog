@@ -1,3 +1,8 @@
+2004-09-04  Jakub Jelinek  <jakub@redhat.com>
+
+	* info.c (info_show_info): don't truncate block counts to 32 bits
+	on 64-bit platforms
+
 2004-09-04  Pavel S. Shirshov <pavelsh@mail.ru>
 
 	* subshell.c (exit_subshell): Prevent unwanted reuse of freed 
@@ -20,6 +25,8 @@
 	* find.c (do_search): Likewise.
 	(init_find_vars): Likewise.
 	(do_find): Likewise.
+	* util.c (get_current_wd): We know there is just one '\0' byte 
+	in p, at p[len - 1].
 
         Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
