@@ -1,3 +1,8 @@
+1999-10-07  Miguel de Icaza  <miguel@gnu.org>
+
+	* ftpfs.c (linear_read): Applied patch from Alexander V. Lukyanov
+	<lav@yars.free.net> that makes the code compliant to RFC959
+
 1999-08-30  Miguel de Icaza  <miguel@gnu.org>
 
 	* ftpfs.c (insert_dots): Use g_new here.

@@ -1644,12 +1644,13 @@ linear_read (struct direntry *fe, void *buf, int len)
 	    linear_abort(fe);
 
     if (!n) {
+	close (fe->data_sock);
+	fe->data_sock = 1;
+	
         if ((get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)) {
 	    my_errno = EIO;
 	    n=-1;
 	}
-	close (fe->data_sock);
-	fe->data_sock = -1;
     }
     ERRNOR (errno, n);
 }
