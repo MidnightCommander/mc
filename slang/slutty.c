@@ -103,7 +103,7 @@ typedef struct termios TTY_Termio_Type;
 static TTY_Termio_Type Old_TTY;
 
 #ifdef HAVE_TERMIOS_H
-static struct 
+static const struct 
 {
     speed_t key;
     int value;
