@@ -13,6 +13,7 @@
 #	       files on the machine running the server. The server  \
 #              authenticates the user through PAM, which by default requires \
 #              a username/password combination before allowing access.
+# processname: mcserv
 
 # Source function library.
 . /etc/rc.d/init.d/functions
