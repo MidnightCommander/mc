@@ -341,6 +341,7 @@ reload_desktop_icons (int xpos, int ypos)
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
 
+	
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
 		message (FALSE,
@@ -349,6 +350,8 @@ reload_desktop_icons (int xpos, int ypos)
 			 desktop_directory);
 		return;
 	}
+
+	gnome_metadata_lock ();
 
 	/* Read the directory.  For each file for which we do have an existing
 	 * icon, do nothing.  Otherwise, if the file has its metadata for icon
@@ -404,6 +407,8 @@ reload_desktop_icons (int xpos, int ypos)
 
 	g_list_free (all_icons);
 
+	gnome_metadata_unlock ();
+	
 	/* Now create the icons for all the files that did not have their
 	 * position set.  This makes auto-placement work correctly without
 	 * overlapping icons.
