@@ -563,6 +563,7 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	p = strchr (f, '/');
 	if (p)
 	    *p = '\0';
+	fg = f;
     }
     if (bg) {
 	p = g_tree_lookup (defines, bg);
@@ -573,6 +574,7 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	p = strchr (b, '/');
 	if (p)
 	    *p = '\0';
+	bg = b;
     }
     return try_alloc_color_pair (fg, bg);
 }
@@ -821,8 +823,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	return result;
 
     if (num_contexts == -1) {
-	result = line;
-	return result;
+	return line;
     }
 
     {
@@ -847,10 +848,10 @@ void edit_free_syntax_rules (WEdit * edit)
     int i, j;
     if (!edit)
 	return;
-    if (!edit->rules)
-	return;
     if (defines)
 	destroy_defines ();
+    if (!edit->rules)
+	return;
     edit_get_rule (edit, -1);
     syntax_g_free (edit->syntax_type);
     edit->syntax_type = 0;
