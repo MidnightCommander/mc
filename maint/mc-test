@@ -47,6 +47,10 @@ mc_cflags=""
 
 mc_ldflags=""
 
+mc_tests="plain charset no_charset vfs no_vfs mcfs no_mcfs samba "\
+"no_samba ext2undel no_ext2undel slang mcslang ncurses maintainer "\
+"no_maintainer i18n no_i18n no_features all_features all_warnings"
+
 do_clean_basedir=no
 do_download=auto
 do_autoconf=auto
@@ -501,10 +505,9 @@ if test ${do_clean_basedir} = yes; then
 	} && phase_ok || phase_failed
 else
 	if test $# -gt 0; then
-		run_tests "$@"
-	else
-		run_tests `sed -n -e 's,^test_\([a-z0-9_]*\)() .*{,\1,p' $0`
+		mc_tests="$@"
 	fi
+	run_tests $mc_tests
 fi
 
 if test ${errors} -ne 0 || test ${warnings} -ne 0; then
