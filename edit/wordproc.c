@@ -67,10 +67,15 @@ static int bad_line_start (WEdit * edit, long p)
     return 0;
 }
 
-static long begin_paragraph (WEdit * edit, long p, int force)
+/*
+ * Find the start of the current paragraph for the purpose of formatting.
+ * Return position in the file.
+ */
+static long
+begin_paragraph (WEdit *edit, int force)
 {
     int i;
-    for (i = edit->curs_line - 1; i > 0; i--) {
+    for (i = edit->curs_line - 1; i >= 0; i--) {
 	if (line_is_blank (edit, i)) {
 	    i++;
 	    break;
@@ -82,11 +87,16 @@ static long begin_paragraph (WEdit * edit, long p, int force)
 	    }
 	}
     }
-    return edit_move_backward (edit, edit_bol (edit, edit->curs1), edit->curs_line - i);
+    return edit_move_backward (edit, edit_bol (edit, edit->curs1),
+			       edit->curs_line - i);
 }
 
+/*
+ * Find the end of the current paragraph for the purpose of formatting.
+ * Return position in the file.
+ */
 static long
-end_paragraph (WEdit *edit, long p, int force)
+end_paragraph (WEdit *edit, int force)
 {
     int i;
     for (i = edit->curs_line + 1; i <= edit->total_lines; i++) {
@@ -311,8 +321,8 @@ void format_paragraph (WEdit * edit, int force)
 	return;
     if (line_is_blank (edit, edit->curs_line))
 	return;
-    p = begin_paragraph (edit, edit->curs1, force);
-    q = end_paragraph (edit, edit->curs1, force);
+    p = begin_paragraph (edit, force);
+    q = end_paragraph (edit, force);
     indent = test_indent (edit, p, q);
     t = get_paragraph (edit, p, q, indent, &size);
     if (!t)

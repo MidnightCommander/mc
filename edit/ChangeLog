@@ -1,5 +1,10 @@
 2002-10-18  Pavel Roskin  <proski@gnu.org>
 
+	* wordproc.c (begin_paragraph): Fix the same off-by-one error as
+	in end_paragraph() - it affects formatting of the paragraph
+	after the first line in the file it that line starts with a dot.
+	Remove unused argument.
+
 	* wordproc.c (end_paragraph): The last line of the file wasn't
 	tested for being blank, which resulted in the last newline
 	becoming a space after formatting.
