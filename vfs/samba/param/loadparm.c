@@ -850,7 +850,6 @@ static void init_globals(void)
   string_set(&Globals.szPasswdProgram, PASSWD_PROGRAM);
   string_set(&Globals.szPrintcapname, PRINTCAP_NAME);
   string_set(&Globals.szDriverFile, DRIVERFILE);
-  string_set(&Globals.szLockDir, LOCKDIR);
   string_set(&Globals.szRootdir, "/");
   string_set(&Globals.szSocketAddress, "0.0.0.0");
   string_set(&Globals.szServerString, "Samba " VERSION);
