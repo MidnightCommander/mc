@@ -1,3 +1,7 @@
+Tue Dec  8 19:19:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* cmd.c (dirsizes_cmd): Fixed possible buffer overflow
+
 1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c (do_enter): Return the value from this.

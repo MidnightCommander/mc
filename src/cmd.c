@@ -1368,7 +1368,9 @@ void dirsizes_cmd (void)
             j += strlen (panel->dir.list [i].fname) + 1;
     if (!j)
         return;
-    cmd = xmalloc (strlen (dirsizes_command) + j + 1, "dirsizes_cmd");
+    /* worst case: name_quote doubles every filename, i.e. use
+       2 * j to be save */
+    cmd = xmalloc (strlen (dirsizes_command) + 2 * j + 1, "dirsizes_cmd");
     strcpy (cmd, dirsizes_command);
     p = strchr (cmd, 0);
     for (i = 0; i < panel->count; i++)
