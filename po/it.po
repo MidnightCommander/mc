@@ -6,7 +6,6 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Giuliano Natali <natali@stone.trew.it>, 1998.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.41\n"
