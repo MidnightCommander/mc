@@ -107,15 +107,27 @@ int msglen (char *text, int *lines)
     return max;
 }
 
-char *trim (char *s, char *d, int len)
+/*
+ * Copy from s to d, and trim the beginning if necessary, and prepend
+ * "..." in this case.  The destination string can have at most len
+ * bytes, not counting trailing 0.
+ */
+char *
+trim (char *s, char *d, int len)
 {
-    int source_len = strlen (s);
-    
-    if (source_len > len){
-	strcpy (d, s+(source_len-len));
-	d [0] = '.';
-	d [1] = '.';
-	d [2] = '.';
+    int source_len;
+
+    if (len < 3) {
+	len = max (len, 0);
+	memset (d, '.', len);
+	d[len] = 0;
+	return d;
+    }
+
+    source_len = strlen (s);
+    if (source_len > len) {
+	memset (d, '.', 3);
+	strcpy (d + 3, s + 3 + source_len - len);
     } else
 	strcpy (d, s);
     return d;

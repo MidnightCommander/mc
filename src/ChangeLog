@@ -1,3 +1,9 @@
+2002-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (show_dir): Don't call trim() with negative length.
+	* util.c (trim): Better handle short length.  Make sure that the
+	destination is always 0-terminated.
+
 2002-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* screen.c (string_file_name): Fix possible off-by-one
