@@ -265,15 +265,16 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 }
 
 void
-drop_on_panel (int requestor_id, char *dest)
+drop_on_panel (GdkEventDropDataAvailable *event, char *dest)
 {
 	WPanel *source_panel;
 	int x, y;
+	int operation;
 	
 	gdk_window_get_pointer (NULL, &x, &y, NULL);
 	operation = get_operation (x, y);
 	
-	source_panel = find_panel_owning_window_id (requestor_id);
+	source_panel = find_panel_owning_window_id (event->requestor);
 	
 	if (source_panel)
 		perform_drop_on_panel (source_panel, operation, dest);
@@ -289,10 +290,9 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	int count;
 	int len;
 	int is_directory = strcasecmp (di->dentry->type, "directory") == 0;
-	int operation;
 
 	if (is_directory){
-		drop_on_panel (event->requestor, di->dentry->exec);
+		drop_on_panel (event, di->dentry->exec);
 		return;
 	}
 		

@@ -686,7 +686,7 @@ panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, W
 	 * FIXME: gtk+ needs fixing here. 
 	 */
 
-	drop_on_panel (data->requestor, panel->cwd);
+	drop_on_panel (data, panel->cwd);
 }
 
 /* Workaround for the CList that is not adding its clist-window to the DND windows */
