@@ -1,6 +1,6 @@
 .TH MCEDIT 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .SH NAME
-mcedit \- Internal file viewer of GNU Midnight Commander.
+mcedit \- Internal file editor of GNU Midnight Commander.
 .SH USAGE
 .B mcedit
 [\-bcCdfhstVx?] [+number] file
