@@ -204,7 +204,8 @@ all: all-recursive all-local
 all-recursive:
 	cd extfs && $(MAKE) all
 
-all-local: @LIBVFS@ @mcserv@
+@USE_VFS_TRUE@all-local: libvfs-mc.a @mcserv@
+@USE_VFS_FALSE@all-local: @mcserv@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<

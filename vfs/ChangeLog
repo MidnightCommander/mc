@@ -1,3 +1,8 @@
+2001-09-10  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: Use USE_VFS conditional instead of relying on
+	LIBVFS.
+
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Include necessary parts of Make.common to
