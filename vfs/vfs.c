@@ -587,9 +587,42 @@ mc_closedir (DIR *dirp)
     return result; 
 }
 
-MC_NAMEOP   (stat, (char *path, struct stat *buf), (vfs, vfs_name (path), buf))
-MC_NAMEOP   (lstat, (char *path, struct stat *buf), (vfs, vfs_name (path), buf))
-MC_HANDLEOP (fstat, (int handle, struct stat *buf), (vfs_info (handle), buf))
+int mc_stat (char *path, struct stat *buf) {
+    vfs *vfs;
+    int result;
+
+    path = vfs_canon (path); vfs = vfs_type (path);
+    result = vfs->stat ? (*vfs->stat) (vfs, vfs_name (path), buf) : -1;
+    g_free (path);
+    if (result == -1)
+	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
+    return result;
+}
+
+int mc_lstat (char *path, struct stat *buf) {
+    vfs *vfs;
+    int result;
+
+    path = vfs_canon (path); vfs = vfs_type (path);
+    result = vfs->lstat ? (*vfs->lstat) (vfs, vfs_name (path), buf) : -1;
+    g_free (path);
+    if (result == -1)
+	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
+    return result;
+}
+
+int mc_fstat (int handle, struct stat *buf) {
+    vfs *vfs;
+    int result;
+
+    if (handle == -1)
+	return -1;
+    vfs = vfs_op (handle);
+    result = vfs->fstat ? (*vfs->fstat) (vfs_info (handle), buf) : -1;
+    if (result == -1)
+	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP;
+    return result;
+}
 
 /*
  * You must g_strdup whatever this function returns, static buffers are in use

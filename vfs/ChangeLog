@@ -1,3 +1,9 @@
+2001-09-17  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Manually expand macros for mc_stat(), mc_lstat() and
+	mc_fstat() because they don't expand correctly on Solaris 8 with
+	large file support.
+
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Use USE_VFS conditional instead of relying on
