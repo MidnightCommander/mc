@@ -372,6 +372,7 @@ panel_clean_dir (WPanel *panel)
     panel->total = 0;
     panel->searching = 0;
     panel->is_panelized = 0;
+    panel->dirty = 1;
 
     clean_dir (&panel->dir, count);
 }

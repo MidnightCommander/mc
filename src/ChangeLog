@@ -1,5 +1,9 @@
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* find.c (find_file): Don't call file_mark(), it would use
+	uninitialized data.
+	* main.c (panel_clean_dir): Make panel dirty.
+
 	* glibcompat.c: New file for compatibility with older versions
 	of glib.
 	* glibcompat.h: Likewise.

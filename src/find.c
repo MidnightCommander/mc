@@ -858,18 +858,19 @@ kill_gui (void)
 }
 
 static int
-find_file (char *start_dir, char *pattern, char *content, char **dirname,  char **filename)
+find_file (char *start_dir, char *pattern, char *content, char **dirname,
+	   char **filename)
 {
     int return_value = 0;
     char *dir;
     char *dir_tmp, *file_tmp;
 
     setup_gui ();
-	    
+
     /* FIXME: Need to cleanup this, this ought to be passed non-globaly */
-    find_pattern    = pattern;
+    find_pattern = pattern;
     content_pattern = content;
-    
+
     init_find_vars ();
     push_directory (start_dir);
 
@@ -882,11 +883,11 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     get_list_info (&file_tmp, &dir_tmp);
 
     if (dir_tmp)
-	*dirname  = g_strdup (dir_tmp);
+	*dirname = g_strdup (dir_tmp);
     if (file_tmp)
 	*filename = g_strdup (file_tmp);
 
-    if (return_value == B_PANELIZE && *filename){
+    if (return_value == B_PANELIZE && *filename) {
 	int status, link_to_dir, stale_link;
 	int next_free = 0;
 	int i;
@@ -895,67 +896,69 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	dir_list *list = &cpanel->dir;
 	char *dir, *name;
 
-	for (i = 0; entry && i < find_list->count; entry = entry->next, i++){
+	for (i = 0; entry && i < find_list->count;
+	     entry = entry->next, i++) {
 	    char *filename;
 
 	    if (!entry->text || !entry->data)
 		continue;
 
 	    if (content_pattern)
-		filename = strchr (entry->text+4, ':')+1;
+		filename = strchr (entry->text + 4, ':') + 1;
 	    else
-		filename = entry->text+4;
+		filename = entry->text + 4;
 
 	    dir = entry->data;
-	    if (dir [0] == '.' && dir [1] == 0)
+	    if (dir[0] == '.' && dir[1] == 0)
 		name = g_strdup (filename);
-	    else if (dir [0] == '.' && dir [1] == PATH_SEP)
+	    else if (dir[0] == '.' && dir[1] == PATH_SEP)
 		name = concat_dir_and_file (dir + 2, filename);
 	    else
 		name = concat_dir_and_file (dir, filename);
-	    status = handle_path (list, name, &st, next_free, &link_to_dir,
-	        &stale_link);
+	    status =
+		handle_path (list, name, &st, next_free, &link_to_dir,
+			     &stale_link);
 	    if (status == 0) {
 		g_free (name);
 		continue;
 	    }
 	    if (status == -1) {
-	        g_free (name);
+		g_free (name);
 		break;
 	    }
 
 	    /* don't add files more than once to the panel */
-	    if (content_pattern && next_free > 0){
-		if (strcmp (list->list [next_free-1].fname, name) == 0) {
+	    if (content_pattern && next_free > 0) {
+		if (strcmp (list->list[next_free - 1].fname, name) == 0) {
 		    g_free (name);
 		    continue;
 		}
 	    }
 
-	    if (!next_free) /* first turn i.e clean old list */
-    		panel_clean_dir (cpanel);
-	    list->list [next_free].fnamelen = strlen (name);
-	    list->list [next_free].fname = name;
-	    file_mark (cpanel, next_free, 0);
-	    list->list [next_free].f.link_to_dir = link_to_dir;
-	    list->list [next_free].f.stale_link = stale_link;
-	    list->list [next_free].f.dir_size_computed = 0;
-	    list->list [next_free].st = st;
+	    if (!next_free)	/* first turn i.e clean old list */
+		panel_clean_dir (cpanel);
+	    list->list[next_free].fnamelen = strlen (name);
+	    list->list[next_free].fname = name;
+	    list->list[next_free].f.marked = 0;
+	    list->list[next_free].f.link_to_dir = link_to_dir;
+	    list->list[next_free].f.stale_link = stale_link;
+	    list->list[next_free].f.dir_size_computed = 0;
+	    list->list[next_free].st = st;
 	    next_free++;
-           if (!(next_free & 15))
-	       rotate_dash ();
+	    if (!(next_free & 15))
+		rotate_dash ();
 	}
-	if (next_free){
+	if (next_free) {
 	    cpanel->count = next_free;
 	    cpanel->is_panelized = 1;
-	  /* Done by panel_clean_dir a few lines above 
-	    cpanel->dirs_marked = 0;
-	    cpanel->marked = 0;
-	    cpanel->total = 0;
-	    cpanel->top_file = 0;
-	    cpanel->selected = 0;*/
+	    /* Done by panel_clean_dir a few lines above 
+	       cpanel->dirs_marked = 0;
+	       cpanel->marked = 0;
+	       cpanel->total = 0;
+	       cpanel->top_file = 0;
+	       cpanel->selected = 0; */
 
-	    if (start_dir [0] == PATH_SEP){
+	    if (start_dir[0] == PATH_SEP) {
 		strcpy (cpanel->cwd, PATH_SEP_STR);
 		chdir (PATH_SEP_STR);
 	    }
@@ -963,8 +966,8 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
     }
 
     kill_gui ();
-    do_search (0); /* force do_search to release resources */
-    if (old_dir){
+    do_search (0);		/* force do_search to release resources */
+    if (old_dir) {
 	g_free (old_dir);
 	old_dir = 0;
     }
