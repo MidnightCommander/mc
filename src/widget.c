@@ -67,7 +67,7 @@
 #endif
 
 #ifndef PORT_HAS_RADIO_TOGGLE
-#   define x_radio_toggle
+#   define x_radio_toggle(r)
 #endif
 
 static int button_event (Gpm_Event *event, WButton *b);

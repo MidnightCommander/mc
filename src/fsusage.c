@@ -46,6 +46,8 @@ int statfs ();  /* We leave the type ambiguous intentionally here */
 #include <sys/filsys.h>		/* SVR2.  */
 #endif
 
+#include <stdlib.h>
+
 #ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif

@@ -1,5 +1,10 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* fsusage.c: Include stdlib.h for abort().
+	* tree.c (tree_mkdir_cmd): Disable tree_mkdir_cmd() since it's
+	not used.
+	* widget.c: Declare x_radio_toggle() with arguments.
+
 	* util.h: Remove declarations of some functions defined in
 	background.c.
 

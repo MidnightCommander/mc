@@ -705,6 +705,7 @@ tree_move_cmd (WTree *tree)
     return 1;
 }
 
+#if 0
 static int
 tree_mkdir_cmd (WTree *tree)
 {
@@ -723,6 +724,7 @@ tree_mkdir_cmd (WTree *tree)
     chdir (old_dir);
     return 1;
 }
+#endif
 
 static void
 tree_rmdir_cmd (WTree *tree)
