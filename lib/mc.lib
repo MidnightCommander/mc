@@ -90,6 +90,18 @@ home=\eOH
 pgdn=\e[6~
 pgup=\e[5~
 
+# Sequences below are for Konsole, which also sets TERM=xterm
+f11=\eO2P
+f12=\eO2Q
+f13=\eO2R
+f14=\eO2S
+f15=\e[15;2~
+f16=\e[17;2~
+f17=\e[18;2~
+f18=\e[19;2~
+f19=\e[20;2~
+f20=\e[21;2~
+
 [terminal:xterm-color]
 insert=\e[2~
 f11=\e[23~
