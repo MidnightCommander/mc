@@ -276,34 +276,27 @@ regex/\.(midi?|MIDI?|Midi?)$
 ### Multimedia ###
 
 regex/\.(mpe?g|MPE?G|Mpe?g)$
-	Open=mtvp %f 2>/dev/null&
-	#Open=mtv %f 2>/dev/null&
-	#Open=gtv %f 2>/dev/null&
-	#Open=plaympeg %f 2>/dev/null&
-	#Open=mpeg_play %f &
-	#Open(big)=mpeg_play -dither 2x2 %f &
-	#Open(gray)=mpeg_play -dither gray %f &
+	Open=(gtv %f 2>/dev/null &)
 
 regex/\.(avi|AVI|Avi|mov|MOV|Mov)$
-	Open=xanim %f 2>/dev/null&
+	Open=(xanim %f 2>/dev/null &)
 
 regex/\.(rm|RM|Rm|ram|RAM|Ram)$
-	Open=realplay %f&
+	Open=(realplay %f &)
 
 
 ### Documents ###
 
 # Postscript
 type/^PostScript
-	Open=gv %f&
+	Open=(gv %f &)
 	View=%view{ascii} ps2ascii %f
-	View with GhostView=gv %f
 
 # PDF
 type/^PDF
-	Open=xpdf %f&
-	#Open=acroread %f&
-	#Open=ghostview %f&
+	Open=(xpdf %f &)
+	#Open=(acroread %f &)
+	#Open=(ghostview %f &)
 	View=%view{ascii} pdftotext %f -
 
 # html
@@ -311,16 +304,14 @@ regex/\.([Hh]tml?|HTML?)$
 	#Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
 	Open=if test -n "@X11_WWW@" && test -n "$DISPLAY"; then echo @X11_WWW@ %f; (@X11_WWW@ %f &) >/dev/null 2>&1; else lynx -force_html %f; fi
 	View=%view{ascii} lynx -dump -force_html %f; 
-	Run with AppletViewer=appletviewer %f
-	View with @X11_WWW@=@X11_WWW@ file://%f
 
 # StarOffice and OpenOffice
 shell/.sdw
-	Open=soffice %f
+	Open=(soffice %f &)
 
 # AbiWord
 shell/.abw
-	Open=abiword %f
+	Open=(abiword %f &)
 
 # Microsoft Word Document
 regex/\.([Dd]o[ct]|DO[CT]|[Ww]ri|WRI)$
@@ -333,6 +324,10 @@ regex/\.([Xx]l[sw]|XL[SW])$
 	View=%view{ascii} xls2csv %f || strings %f
 type/^Microsoft\ Excel
 	View=%view{ascii} xls2csv %f || strings %f
+
+# Use StarOffice to open any MS Office documents
+type/^Microsoft\ Office\ Document
+	Open=(soffice %f &)
 
 # Framemaker
 type/^FrameMaker

@@ -1,5 +1,11 @@
 2001-11-27  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: When running X programs in background, do it
+	from subshell.  Otherwise some of them terminate when mc exits.
+	Reported by Christian Dysthe <christian@dysthe.net>
+	Remove some obsolete and gmc-specific entries.  Use StarOffice
+	to open files detected as "Microsoft Office Document".
+
 	* lib/mc.lib: Support "Home" and "End" sequences in xterm from
 	XFree86 4.1.0.
 
