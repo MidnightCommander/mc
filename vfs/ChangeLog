@@ -1,3 +1,8 @@
+2002-11-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* vfs.c (mc_get_current_wd): Make shue returned string is null
+	terminated.
+
 2002-11-03  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Remove unused code.
