@@ -1,3 +1,9 @@
+2003-09-11  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c (symlink_dialog): Add "OK" and "Cancel" buttons.
+	Don't translate strings, it's done in quick_dialog().
+	Reported by Ali Akcaagac <aliakc@web.de>
+
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.h: Remove "last" field from Dlg_head, it's unneeded in a

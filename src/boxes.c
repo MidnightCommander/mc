@@ -824,33 +824,39 @@ cd_dialog (void)
 }
 
 void
-symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
+symlink_dialog (char *existing, char *new, char **ret_existing,
+		char **ret_new)
 {
     QuickDialog Quick_input;
-    QuickWidget quick_widgets [] = {
-    { quick_input,  4, 80, 5, 8, "", 58, 0, 0, 0, "input-1" },
-    { quick_label,  4, 80, 4, 8, "", 0, 0, 0, 0, "label-1" },
-    { quick_input,  4, 80, 3, 8, "", 58, 0, 0, 0, "input-2" },
-    { quick_label,  4, 80, 2, 8, "", 0, 0, 0, 0, "label-2" },
-    { 0 } };
-    
-    Quick_input.xlen  = 64;
-    Quick_input.ylen  = 8;
-    Quick_input.title = _("Symbolic link");
-    Quick_input.help  = "[File Menu]";
-    Quick_input.i18n  = 0;
-    quick_widgets [0].text = new;
-    quick_widgets [1].text = _("Symbolic link filename:");
-    quick_widgets [2].text = existing;
-    quick_widgets [3].text = _("Existing filename (filename symlink will point to):");
+    QuickWidget quick_widgets[] = {
+	{quick_button, 50, 80, 6, 8, N_("&Cancel"), 0, B_CANCEL, 0, 0,
+	 NULL},
+	{quick_button, 16, 80, 6, 8, N_("&OK"), 0, B_ENTER, 0, 0, NULL},
+	{quick_input, 4, 80, 5, 8, "", 58, 0, 0, 0, "input-1"},
+	{quick_label, 4, 80, 4, 8, N_("Symbolic link filename:"), 0, 0, 0,
+	 0, NULL},
+	{quick_input, 4, 80, 3, 8, "", 58, 0, 0, 0, "input-2"},
+	{quick_label, 4, 80, 2, 8,
+	 N_("Existing filename (filename symlink will point to):"), 0, 0,
+	 0, 0, NULL},
+	{0}
+    };
+
+    Quick_input.xlen = 64;
+    Quick_input.ylen = 12;
+    Quick_input.title = N_("Symbolic link");
+    Quick_input.help = "[File Menu]";
+    Quick_input.i18n = 0;
+    quick_widgets[2].text = new;
+    quick_widgets[4].text = existing;
     Quick_input.xpos = -1;
-    quick_widgets [0].str_result = ret_new;
-    quick_widgets [2].str_result = ret_existing;
-    
+    quick_widgets[2].str_result = ret_new;
+    quick_widgets[4].str_result = ret_existing;
+
     Quick_input.widgets = quick_widgets;
-    if (quick_dialog (&Quick_input) == B_CANCEL){
-        *ret_new = NULL;
-        *ret_existing = NULL;
+    if (quick_dialog (&Quick_input) == B_CANCEL) {
+	*ret_new = NULL;
+	*ret_existing = NULL;
     }
 }
 
