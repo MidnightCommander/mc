@@ -266,7 +266,8 @@ const char *size_trunc_sep (double size)
 {
     static char x [60];
     int  count;
-    char *p, *d, *y;
+    const char *p, *y;
+    char *d;
 
     p = y = size_trunc (size);
     p += strlen (p) - 1;
@@ -344,7 +345,7 @@ int is_exe (mode_t mode)
 
 #define ismode(n,m) ((n & m) == m)
 
-char *
+const char *
 string_perm (mode_t mode_bits)
 {
     static char mode[11];
@@ -410,7 +411,7 @@ char *
 strip_password (char *p, int has_prefix)
 {
     static const struct {
-	char *name;
+	const char *name;
         size_t len;
     } prefixes[] = { {"/#ftp:", 6},
 		     {"/#mc:", 5},
@@ -451,7 +452,7 @@ strip_password (char *p, int has_prefix)
     return (result);
 }
 
-char *strip_home_and_password(const char *dir)
+const char *strip_home_and_password(const char *dir)
 {
     size_t len;
     static char newdir [MC_MAXPATHLEN];
@@ -497,11 +498,12 @@ static char *maybe_end_group (char *d, int do_group, int *was_wildcard)
 /* If shell patterns are on converts a shell pattern to a regular
    expression. Called by regexp_match and mask_rename. */
 /* Shouldn't we support [a-fw] type wildcards as well ?? */
-char *convert_pattern (char *pattern, int match_type, int do_group)
+char *convert_pattern (const char *pattern, int match_type, int do_group)
 {
-    char *s, *d;
+    char *d;
     char *new_pattern;
     int was_wildcard = 0;
+    const char *s;
 
     if ((match_type != match_regex) && easy_patterns){
 	new_pattern = g_malloc (MC_MAXPATHLEN);
@@ -542,12 +544,13 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
 	return  g_strdup (pattern);
 }
 
-int regexp_match (char *pattern, char *string, int match_type)
+int regexp_match (const char *pattern, const char *string, int match_type)
 {
     static regex_t r;
     static char *old_pattern = NULL;
     static int old_type;
     int    rval;
+    char *my_pattern;
 
     if (!old_pattern || STRCOMP (old_pattern, pattern) || old_type != match_type){
 	if (old_pattern){
@@ -555,21 +558,21 @@ int regexp_match (char *pattern, char *string, int match_type)
 	    g_free (old_pattern);
 	    old_pattern = NULL;
 	}
-	pattern = convert_pattern (pattern, match_type, 0);
-	if (regcomp (&r, pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
-	    g_free (pattern);
+	my_pattern = convert_pattern (pattern, match_type, 0);
+	if (regcomp (&r, my_pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
+	    g_free (my_pattern);
 	    return -1;
 	}
-	old_pattern = pattern;
+	old_pattern = my_pattern;
 	old_type = match_type;
     }
     rval = !regexec (&r, string, 0, NULL, 0);
     return rval;
 }
 
-char *extension (char *filename)
+const char *extension (const char *filename)
 {
-    char *d;
+    const char *d;
 
     if (!(*filename))
 	return "";
@@ -582,12 +585,12 @@ char *extension (char *filename)
     return "";
 }
 
-int get_int (char *file, char *key, int def)
+int get_int (const char *file, const char *key, int def)
 {
     return GetPrivateProfileInt (app_text, key, def, file);
 }
 
-int set_int (char *file, char *key, int value)
+int set_int (const char *file, const char *key, int value)
 {
     char buffer [BUF_TINY];
 
@@ -595,12 +598,12 @@ int set_int (char *file, char *key, int value)
     return WritePrivateProfileString (app_text, key, buffer, file);
 }
 
-int exist_file (char *name)
+int exist_file (const char *name)
 {
     return access (name, R_OK) == 0;
 }
 
-char *load_file (char *filename)
+char *load_file (const char *filename)
 {
     FILE *data_file;
     struct stat s;
@@ -688,7 +691,7 @@ size_t i18n_checktimelength (void)
     return length;
 }
 
-char *file_date (time_t when)
+const char *file_date (time_t when)
 {
     static char timebuf [MAX_I18NTIMELENGTH + 1];
     time_t current_time = time ((time_t) 0);
@@ -722,7 +725,7 @@ char *file_date (time_t when)
     return timebuf;
 }
 
-char *extract_line (char *s, char *top)
+const char *extract_line (const char *s, const char *top)
 {
     static char tmp_line [BUF_MEDIUM];
     char *t = tmp_line;
@@ -734,10 +737,10 @@ char *extract_line (char *s, char *top)
 }
 
 /* FIXME: I should write a faster version of this (Aho-Corasick stuff) */
-char * _icase_search (char *text, char *data, int *lng)
+const char * _icase_search (const char *text, const char *data, int *lng)
 {
-    char *d = text;
-    char *e = data;
+    const char *d = text;
+    const char *e = data;
     int dlng = 0;
 
     if (lng)
@@ -771,7 +774,7 @@ const char *x_basename (const char *s)
 }
 
 
-char *unix_error_string (int error_num)
+const char *unix_error_string (int error_num)
 {
     static char buffer [BUF_LARGE];
 #if GLIB_MAJOR_VERSION >= 2
@@ -788,7 +791,7 @@ char *unix_error_string (int error_num)
     return buffer;
 }
 
-char *skip_separators (char *s)
+const char *skip_separators (const char *s)
 {
     for (;*s; s++)
 	if (*s != ' ' && *s != '\t' && *s != ',')
@@ -796,10 +799,10 @@ char *skip_separators (char *s)
     return s;
 }
 
-char *skip_numbers (char *s)
+const char *skip_numbers (const char *s)
 {
     for (;*s; s++)
-	if (!isdigit ((unsigned int) *s))
+	if (!isdigit ((int) (unsigned char) *s))
 	    break;
     return s;
 }
@@ -1049,11 +1052,12 @@ char *convert_controls (char *s)
     return valcopy;
 }
 
-static char *resolve_symlinks (char *path)
+static char *resolve_symlinks (const char *path)
 {
-    char *buf, *buf2, *p, *q, *r, c;
+    char *buf, *buf2, *q, *r, c;
     int len;
     struct stat mybuf;
+    const char *p;
     
     if (*path != PATH_SEP)
         return NULL;
@@ -1114,24 +1118,25 @@ static char *resolve_symlinks (char *path)
 
 /* Finds out a relative path from first to second, i.e. goes as many ..
  * as needed up in first and then goes down using second */
-char *diff_two_paths (char *first, char *second) 
+char *diff_two_paths (const char *first, const char *second) 
 {
     char *p, *q, *r, *s, *buf = 0;
     int i, j, prevlen = -1, currlen;
+    char *my_first = NULL, *my_second = NULL;
     
-    first = resolve_symlinks (first);
-    if (first == NULL)
+    my_first = resolve_symlinks (first);
+    if (my_first == NULL)
         return NULL;
     for (j = 0; j < 2; j++) {
-	p = first;
+	p = my_first;
 	if (j) {
-	    second = resolve_symlinks (second);
-	    if (second == NULL) {
-		 g_free (first);
+	    my_second = resolve_symlinks (second);
+	    if (my_second == NULL) {
+		g_free (my_first);
 	        return buf;
 	    }
 	}
-	q = second;
+	q = my_second;
 	for (;;) {
 	    r = strchr (p, PATH_SEP);
 	    s = strchr (q, PATH_SEP);
@@ -1154,8 +1159,8 @@ char *diff_two_paths (char *first, char *second)
 	    if (currlen < prevlen)
 	        g_free (buf);
 	    else {
-		 g_free (first);
-		 g_free (second);
+		 g_free (my_first);
+		 g_free (my_second);
 		return buf;
 	    }
 	}
@@ -1165,8 +1170,8 @@ char *diff_two_paths (char *first, char *second)
 	  strcpy (p, "../");
 	strcpy (p, q);
     }
-    g_free (first);
-    g_free (second);
+    g_free (my_first);
+    g_free (my_second);
     return buf;
 }
 
@@ -1301,7 +1306,7 @@ mc_mkstemps (char **pname, const char *prefix, const char *suffix)
  * If there is no stored data, return line 1 and col 0.
  */
 void
-load_file_position (char *filename, long *line, long *column)
+load_file_position (const char *filename, long *line, long *column)
 {
     char *fn;
     FILE *f;
@@ -1346,7 +1351,7 @@ load_file_position (char *filename, long *line, long *column)
 
 /* Save position for the given file */
 void
-save_file_position (char *filename, long line, long column)
+save_file_position (const char *filename, long line, long column)
 {
     char *tmp, *fn;
     FILE *f, *t;

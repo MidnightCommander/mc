@@ -44,27 +44,37 @@ const char *size_trunc_sep (double size);
  * Units: size units (0=bytes, 1=Kbytes, 2=Mbytes, etc.) */
 void size_trunc_len (char *buffer, int len, off_t size, int units);
 int  is_exe (mode_t mode);
-char *string_perm (mode_t mode_bits);
+const char *string_perm (mode_t mode_bits);
+
+/* @modifies path. @returns pointer into path. */
 char *strip_password (char *path, int has_prefix);
-char *strip_home_and_password (const char *dir);
-char *extension (char *);
+
+/* @returns a pointer into a static buffer. */
+const char *strip_home_and_password (const char *dir);
+
+const char *extension (const char *);
 char *concat_dir_and_file (const char *dir, const char *file);
-char *unix_error_string (int error_num);
-char *skip_separators (char *s);
-char *skip_numbers (char *s);
+const char *unix_error_string (int error_num);
+const char *skip_separators (const char *s);
+const char *skip_numbers (const char *s);
 char *strip_ctrl_codes (char *s);
+
+/* in-place conversion. returns s. */
 char *convert_controls (char *s);
+
+/* overwrites passwd with '\0's and frees it. */
 void wipe_password (char *passwd);
-char *diff_two_paths (char *first, char *second);
+
+char *diff_two_paths (const char *first, const char *second);
 
 /* Returns the basename of fname. The result is a pointer into fname. */
 const char *x_basename (const char *fname);
 
 /* Profile managing functions */
-int set_int (char *, char *, int);
-int get_int (char *, char *, int);
+int set_int (const char *, const char *, int);
+int get_int (const char *, const char *, int);
 
-char *load_file (char *filename);
+char *load_file (const char *filename);
 char *load_mc_home_file (const char *filename, char ** allocated_filename);
 
 /* uid/gid managing */
@@ -81,13 +91,13 @@ char *get_owner (int);
 #define STD_I18NTIMELENGTH 12
 
 size_t i18n_checktimelength (void);
-char *file_date (time_t);
+const char *file_date (time_t);
 
-int exist_file (char *name);
+int exist_file (const char *name);
 
 /* Returns a copy of *s until a \n is found and is below top */
-char *extract_line (char *s, char *top);
-char *_icase_search (char *text, char *data, int *lng);
+const char *extract_line (const char *s, const char *top);
+const char *_icase_search (const char *text, const char *data, int *lng);
 #define icase_search(T,D) _icase_search((T), (D), NULL)
 
 /* Matching */
@@ -98,13 +108,13 @@ enum {
 };
 
 extern int easy_patterns;
-char *convert_pattern (char *pattern, int match_type, int do_group);
-int regexp_match (char *pattern, char *string, int match_type);
+char *convert_pattern (const char *pattern, int match_type, int do_group);
+int regexp_match (const char *pattern, const char *string, int match_type);
 
 /* Error pipes */
 void open_error_pipe (void);
 void check_error_pipe (void);
-int close_error_pipe (int error, char *text);
+int close_error_pipe (int error, const char *text);
 
 /* Process spawning */
 int my_system (int flags, const char *shell, const char *command);
@@ -119,8 +129,8 @@ void canonicalize_pathname (char *);
 
 /* Misc Unix functions */
 char *get_current_wd (char *buffer, int size);
-int my_mkdir (char *s, mode_t mode);
-int my_rmdir (char *s);
+int my_mkdir (const char *s, mode_t mode);
+int my_rmdir (const char *s);
 
 /* Rotating dash routines */
 void use_dash (int flag); /* Disable/Enable rotate_dash routines */
@@ -164,9 +174,9 @@ GList *list_append_unique (GList *list, char *text);
 /* maximum entries in MC_FILEPOS */
 #define MC_FILEPOS_ENTRIES 1024
 /* Load position for the given filename */
-void load_file_position (char *filename, long *line, long *column);
+void load_file_position (const char *filename, long *line, long *column);
 /* Save position for the given filename */
-void save_file_position (char *filename, long line, long column);
+void save_file_position (const char *filename, long line, long column);
 
 
 /* OS specific defines */

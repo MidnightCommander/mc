@@ -423,7 +423,7 @@ void open_error_pipe (void)
  * text is prepended to the error message from the pipe
  */
 int
-close_error_pipe (int error, char *text)
+close_error_pipe (int error, const char *text)
 {
     char *title;
     char msg[MAX_PIPE_SIZE];
@@ -616,7 +616,7 @@ extern char **environ;
 
 /* Put STRING, which is of the form "NAME=VALUE", in the environment.  */
 int
-putenv (const char *string)
+putenv (char *string)
 {
     const char *const name_end = strchr (string, '=');
     register size_t size;
