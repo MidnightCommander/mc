@@ -1,25 +1,15 @@
 Before 4.6.1
 ============
 
-Broken pipe warning when viewing large *.tar.gz files.  Warnings should
-be shown before the viewer is started if possible.
+Untaring files with # in name fails. 
 
 Check the following programs for proper pathname quoting.
-vfs/extfs/a.in
-vfs/extfs/apt.in
 vfs/extfs/audio.in
 vfs/extfs/bpp
-vfs/extfs/deba.in
-vfs/extfs/debd.in
-vfs/extfs/deb.in
-vfs/extfs/dpkg.in
 vfs/extfs/hp48.in
 vfs/extfs/iso9660.in
 vfs/extfs/lslR.in
-vfs/extfs/mailfs.in
-vfs/extfs/patchfs.in
 vfs/extfs/rpm
-vfs/extfs/rpms.in
 vfs/extfs/sfs.ini
 vfs/extfs/trpm
 vfs/extfs/uar.in
@@ -27,11 +17,13 @@ vfs/extfs/uarj.in
 vfs/extfs/uha.in
 vfs/extfs/ulha.in
 vfs/extfs/urar.in
-vfs/extfs/uzip.in
 vfs/extfs/uzoo.in
 
 Before 4.6.2
 ============
+
+Broken pipe warning when viewing large *.tar.gz files.  Warnings should
+be shown before the viewer is started if possible.
 
 Cannot spell check unsaved files in the editor.
 

@@ -1,3 +1,8 @@
+2004-10-27  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* TODO: Move entry 'Broken pipe warning...' to 4.6.2 TODO list.
+	Remove entries for perl extfs scripts.
+
 2004-10-24  Roland Illig  <roland.illig@gmx.de>
 
 	* configure.ac: Only add "-Wall" to CFLAGS if GCC is set to "yes".
