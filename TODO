@@ -6,6 +6,9 @@ be shown before the viewer is started if possible.
 
 Need a separate color for hotkeys in red dialogs.
 
+Crash when opening tar archives with links on the top level pointing
+inside a directory.
+
 
 Before 4.6.2
 ============
