@@ -1,3 +1,9 @@
+2002-10-31  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (probably_finish_program): Eliminate.
+	(handle_args): Use exit code 1 only for errors, 0 for legitimate
+	options such as "--help".
+
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Option -P takes an argument (output filename) now.

@@ -2139,14 +2139,6 @@ print_color_usage (void)
 }
 
 static void
-probably_finish_program (void)
-{
-    if (finish_program) {
-	exit (1);
-    }
-}
-
-static void
 process_args (poptContext ctx, int c, const char *option_arg)
 {
     switch (c) {
@@ -2295,9 +2287,11 @@ handle_args (int argc, char *argv[])
 	fprintf (stderr, "%s: %s\n",
 		 poptBadOption (ctx, POPT_BADOPTION_NOALIAS),
 		 poptStrerror (c));
-	finish_program = 1;
+	exit (1);
     }
-    probably_finish_program ();
+
+    if (finish_program)
+	exit (0);
 
     tmp = poptGetArg (ctx);
 
@@ -2328,8 +2322,7 @@ handle_args (int argc, char *argv[])
 	    view_one_file = g_strdup (tmp);
 	else {
 	    fputs ("No arguments given to the viewer\n", stderr);
-	    finish_program = 1;
-	    probably_finish_program ();
+	    exit (1);
 	}
     } else {
 	/* sets the current dir and the other dir */
@@ -2536,9 +2529,8 @@ main (int argc, char *argv[])
 #endif
     if (last_wd_file && !print_last_revert && !edit_one_file
 	&& !view_one_file) {
-	int last_wd_fd =
-	    open (last_wd_file, O_WRONLY | O_CREAT | O_EXCL,
-		  S_IRUSR | S_IWUSR);
+	int last_wd_fd = open (last_wd_file, O_WRONLY | O_CREAT | O_EXCL,
+			       S_IRUSR | S_IWUSR);
 
 	if (last_wd_fd != -1) {
 	    write (last_wd_fd, last_wd_string, strlen (last_wd_string));
