@@ -42,6 +42,13 @@ typedef struct {
 	char              *pathname;
 } desktop_icon_t;
 
+/* operations on drops */
+enum {
+	OPER_COPY,
+	OPER_MOVE,
+	OPER_LINK
+};
+
 /* The list of icons on the desktop */
 static GList *desktop_icons;
 
@@ -126,6 +133,68 @@ desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
 	gtk_widget_set_uposition (widget, x, y);
 }
 
+static int operation_value;
+
+static void
+set_option (GtkWidget *widget, int value)
+{
+	operation_value = value;
+	gtk_main_quit ();
+}
+
+static void
+option_menu_gone ()
+{
+	operation_value = -1;
+	gtk_main_quit ();
+}
+
+static int
+get_operation (int x, int y)
+{
+	static GtkWidget *menu;
+	
+	if (!menu){
+		GtkWidget *item;
+		
+		menu = gtk_menu_new ();
+
+		item = gtk_menu_item_new_with_label (_("Copy"));
+		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_COPY);
+		gtk_menu_append (GTK_MENU (menu), item);
+		gtk_widget_show (item);
+		
+		item = gtk_menu_item_new_with_label (_("Move"));
+		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_MOVE);
+		gtk_menu_append (GTK_MENU (menu), item);
+		gtk_widget_show (item);
+
+		item = gtk_menu_item_new_with_label (_("Link"));
+		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_LINK);
+		gtk_menu_append (GTK_MENU (menu), item);
+		gtk_widget_show (item);
+
+		gtk_signal_connect (GTK_OBJECT (menu), "hide", GTK_SIGNAL_FUNC(option_menu_gone), 0);
+	} 
+
+	/* Here, we could set the mask parameter (the last NULL) to a valid variable
+	 * and find out if the shift/control keys were set and do something smart
+	 * about that
+	 */
+	
+	gtk_widget_set_uposition (menu, x, y);
+
+	/* FIXME: We should catch any events that escape this menu and cancel it */
+	operation_value = -1;
+	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 1, GDK_CURRENT_TIME);
+	gtk_grab_add (menu);
+	gtk_main ();
+	gtk_grab_remove (menu);
+	gtk_widget_hide (menu);
+	
+	return operation_value;
+}
+
 static void
 drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
@@ -133,21 +202,26 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	int count;
 	int len;
 	int is_directory = strcasecmp (di->dentry->type, "directory") == 0;
+	int operation;
 
-		
-	if (strcmp (event->data_type, "url:ALL") == 0){
-		count = event->data_numbytes;
-		p = event->data;
-		do {
-			len = 1 + strlen (event->data);
-			count -= len;
-			printf ("Receiving: %s\n", p);
-			p += len;
-		} while (count);
-		printf ("Receiving: %s %d\n", event->data, event->data_numbytes);
-		return;
+	if (is_directory){
+		int x, y;
+
+		gdk_window_get_pointer (NULL, &x, &y, NULL);
+		operation = get_operation (x, y);
+
+		printf ("Operación: %d\n", operation);
 	}
-
+		
+	count = event->data_numbytes;
+	p = event->data;
+	do {
+		len = 1 + strlen (event->data);
+		count -= len;
+		printf ("Receiving: %s\n", p);
+		p += len;
+	} while (count);
+	printf ("Receiving: %s %d\n", event->data, event->data_numbytes);
 }
 
 static void

@@ -275,151 +275,6 @@ panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int mai
 	gtk_clist_thaw (GTK_CLIST (file_list));
 }
 
-static void
-internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
-{
-	if (panel->selected == row)
-		return;
-	
-	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
-	unselect_item (panel);
-	panel->selected = row;
-	select_item (panel);
-	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
-}
-
-void
-panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
-{
-	if (!event){
-		internal_select_item (file_list, panel, row);
-		return;
-	}
-	
-	if (event->type == GDK_BUTTON_PRESS)
-		internal_select_item (file_list, panel, row);
-
-	if (event->type == GDK_2BUTTON_PRESS){
-		do_enter (panel);
-	}
-}
-
-/* Figure out the number of visible lines in the panel */
-static void
-panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
-{
-	int lost_pixels = 0;
-	
-	if (GTK_WIDGET_VISIBLE (file_list->hscrollbar)){
-		int scrollbar_width = GTK_WIDGET (file_list->hscrollbar)->requisition.width;
-		int scrollbar_space = GTK_CLIST_CLASS (GTK_OBJECT (file_list)->klass)->scrollbar_spacing;
-
-		lost_pixels = scrollbar_space + scrollbar_width;
-	}
-	panel->widget.lines = (height-lost_pixels) /
-		(GTK_CLIST (file_list)->row_height + CELL_SPACING);
-}
-
-static void
-panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
-{
-	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
-	
-	/* Set the selection callback */
-	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
-
-	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
-}
-
-static void
-panel_file_list_column_callback (GtkWidget *widget, int col, WPanel *panel)
-{
-	format_e *format;
-	int i;
-	
-	for (i = 0, format = panel->format; format; format = format->next){
-		if (!format->use_in_gui)
-			continue;
-		if (i == col){
-			sortfn *sorting_routine;
-			
-			sorting_routine = get_sort_fn (format->id);
-			if (!sorting_routine)
-				return;
-
-			if (sorting_routine == panel->sort_type)
-				panel->reverse = !panel->reverse;
-			panel->sort_type = sorting_routine;
-
-			do_re_sort (panel);
-			return;
-		}
-		i++;
-	}
-}
-
-void
-panel_create_pixmaps (GtkWidget *parent)
-{
-	GdkColor color = gtk_widget_get_style (parent)->bg [GTK_STATE_NORMAL];
-
-	pixmaps_ready = 1;
-	directory_pixmap = gdk_pixmap_create_from_xpm_d (parent->window, &directory_mask, &color, directory_xpm);
-}
-
-static void
-panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
-{
-	if (!GTK_IS_ADJUSTMENT (adj)){
-		fprintf (stderr, "CRAP!\n");
-		exit (1);
-	}
-}
-
-void
-panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
-{
-	format_e *format = panel->format;
-	GtkCList *cl = GTK_CLIST (file_list);
-	GtkObject *adjustment;
-	int i;
-
-	/* Set sorting callback */
-	gtk_signal_connect (GTK_OBJECT (file_list), "click_column",
-			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
-
-	/* Configure the CList */
-	gtk_clist_set_selection_mode (cl, GTK_SELECTION_BROWSE);
-	gtk_clist_set_policy (cl, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
-	
-	for (i = 0, format = panel->format; format; format = format->next){
-		GtkJustification just;
-
-		if (!format->use_in_gui)
-			continue;
-
-		/* Set desired justification */
-		if (format->just_mode == J_LEFT)
-			just = GTK_JUSTIFY_LEFT;
-		else
-			just = GTK_JUSTIFY_RIGHT;
-		
-		gtk_clist_set_column_justification (cl, i, just);
-		i++;
-	}
-
-	/* Configure the scrolbars */
-	adjustment = GTK_OBJECT (gtk_range_get_adjustment (GTK_RANGE (cl->vscrollbar)));
-	gtk_signal_connect_after (GTK_OBJECT(adjustment), "value_changed", 
-				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
-}
-
-void
-panel_list_mc_bindings (GtkWidget *file_list, int row, int col, GdkEvent *event, WPanel *panel)
-{
-}
-
 void
 panel_action_open (GtkWidget *widget, WPanel *panel)
 {
@@ -591,30 +446,150 @@ file_popup (GdkEvent *event, WPanel *panel, char *filename)
 	gtk_widget_show (menu);
 }
 
-void
-panel_list_new_bindings (GtkWidget *file_list, int row, int col, GdkEvent *event, WPanel *panel)
+static void
+internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 {
-	char *filename = panel->dir.list [row].fname;
-
+	if (panel->selected == row)
+		return;
+	
+	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	unselect_item (panel);
 	panel->selected = row;
 	select_item (panel);
+	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
+}
+
+void
+panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
+{
+	const char *filename = panel->dir.list [row].fname;
+		
+	if (!event){
+		internal_select_item (file_list, panel, row);
+		return;
+	}
 	
-	if (event->button.button == 3){
+	if (event->type == GDK_BUTTON_PRESS)
+		internal_select_item (file_list, panel, row);
+
+	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3){
 		file_popup (event, panel, filename);
+	}
+	
+	if (event->type == GDK_2BUTTON_PRESS){
+		do_enter (panel);
+	}
+}
+
+/* Figure out the number of visible lines in the panel */
+static void
+panel_file_list_compute_lines (GtkCList *file_list, WPanel *panel, int height)
+{
+	int lost_pixels = 0;
+	
+	if (GTK_WIDGET_VISIBLE (file_list->hscrollbar)){
+		int scrollbar_width = GTK_WIDGET (file_list->hscrollbar)->requisition.width;
+		int scrollbar_space = GTK_CLIST_CLASS (GTK_OBJECT (file_list)->klass)->scrollbar_spacing;
+
+		lost_pixels = scrollbar_space + scrollbar_width;
+	}
+	panel->widget.lines = (height-lost_pixels) /
+		(GTK_CLIST (file_list)->row_height + CELL_SPACING);
+}
+
+static void
+panel_file_list_size_allocate_hook (GtkWidget *file_list, GtkAllocation *allocation, WPanel *panel)
+{
+	panel_file_list_configure_contents (file_list, panel, allocation->width, allocation->height);
+	
+	/* Set the selection callback */
+	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
+			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
+
+	panel_file_list_compute_lines (GTK_CLIST (file_list), panel, allocation->height);
+}
+
+static void
+panel_file_list_column_callback (GtkWidget *widget, int col, WPanel *panel)
+{
+	format_e *format;
+	int i;
+	
+	for (i = 0, format = panel->format; format; format = format->next){
+		if (!format->use_in_gui)
+			continue;
+		if (i == col){
+			sortfn *sorting_routine;
+			
+			sorting_routine = get_sort_fn (format->id);
+			if (!sorting_routine)
+				return;
+
+			if (sorting_routine == panel->sort_type)
+				panel->reverse = !panel->reverse;
+			panel->sort_type = sorting_routine;
+
+			do_re_sort (panel);
+			return;
+		}
+		i++;
 	}
 }
 
 void
-panel_file_list_row_selected (GtkWidget *file_list, int row, int col, GdkEvent *event, WPanel *panel)
+panel_create_pixmaps (GtkWidget *parent)
 {
-	if (!event)
-		return;
+	GdkColor color = gtk_widget_get_style (parent)->bg [GTK_STATE_NORMAL];
 
-	if (mc_bindings)
-		panel_list_mc_bindings (file_list, row, col, event, panel);
-	else
-		panel_list_new_bindings (file_list, row, col, event, panel);
+	pixmaps_ready = 1;
+	directory_pixmap = gdk_pixmap_create_from_xpm_d (parent->window, &directory_mask, &color, directory_xpm);
+}
+
+static void
+panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
+{
+	if (!GTK_IS_ADJUSTMENT (adj)){
+		fprintf (stderr, "CRAP!\n");
+		exit (1);
+	}
+}
+
+void
+panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
+{
+	format_e *format = panel->format;
+	GtkCList *cl = GTK_CLIST (file_list);
+	GtkObject *adjustment;
+	int i;
+
+	/* Set sorting callback */
+	gtk_signal_connect (GTK_OBJECT (file_list), "click_column",
+			    GTK_SIGNAL_FUNC (panel_file_list_column_callback), panel);
+
+	/* Configure the CList */
+	gtk_clist_set_selection_mode (cl, GTK_SELECTION_BROWSE);
+	gtk_clist_set_policy (cl, GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	
+	for (i = 0, format = panel->format; format; format = format->next){
+		GtkJustification just;
+
+		if (!format->use_in_gui)
+			continue;
+
+		/* Set desired justification */
+		if (format->just_mode == J_LEFT)
+			just = GTK_JUSTIFY_LEFT;
+		else
+			just = GTK_JUSTIFY_RIGHT;
+		
+		gtk_clist_set_column_justification (cl, i, just);
+		i++;
+	}
+
+	/* Configure the scrolbars */
+	adjustment = GTK_OBJECT (gtk_range_get_adjustment (GTK_RANGE (cl->vscrollbar)));
+	gtk_signal_connect_after (GTK_OBJECT(adjustment), "value_changed", 
+				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
 }
 
 void *
@@ -744,11 +719,6 @@ panel_create_file_list (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (file_list),
 			    "size_allocate",
 			    GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
-			    panel);
-
-	gtk_signal_connect (GTK_OBJECT (file_list),
-			    "select_row",
-			    GTK_SIGNAL_FUNC (panel_file_list_row_selected),
 			    panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list),
