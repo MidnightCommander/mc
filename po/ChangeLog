@@ -1,3 +1,9 @@
+1999-10-06  David Martin <dmartina@usa.net>
+
+	* POTFILES.in: added gdeskdop-init.c
+
+	* es.po, es_ES.po: updated
+
 1999-10-05  Sergey Panov  <sipan@mit.edu>
 
 	* ru.po: Updated Russian translation

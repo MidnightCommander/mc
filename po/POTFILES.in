@@ -4,6 +4,7 @@ gnome/gcmd.c
 gnome/gcustom-layout.c
 gnome/gdesktop.c
 gnome/gdesktop-prefs.c
+gnome/gdesktop-init.c
 gnome/gdialogs.c
 gnome/gdnd.c
 gnome/gicon.c

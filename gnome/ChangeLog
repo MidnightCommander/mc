@@ -1,3 +1,8 @@
+1999-10-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gmain.c, gmain.h: removed disable_root_warning. This variable
+	wasn't defined anywhere.
+
 1999-09-30  Vincent Renardias <vincent@ldsol.com>
 
 	* gmain.c, gmain.h: add a '--disablerootwarning' flag which
