@@ -822,12 +822,20 @@ void print_vfs_message (char *msg, ...)
 	return;
 
     if (!message_visible || !the_hint || !the_hint->widget.parent) {
+	int col, row;
 
 	if (!nice_rotating_dash || (ok_to_refresh <= 0))
 	    return;
+
+	/* Preserve current cursor position */
+	getyx (stdscr, row, col);
+
 	move (0, 0);
 	attrset (NORMAL_COLOR);
 	printw ("%-*s", COLS-1, str);
+
+	/* Restore cursor position */
+	move(row, col);
 	mc_refresh ();
 	return;
     }

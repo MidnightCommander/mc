@@ -1,5 +1,8 @@
 2002-11-14  Pavel Roskin  <proski@gnu.org>
 
+	* myslang.h: Define getyx() macro.
+	* layout.c (print_vfs_message): Preserve cursor position.
+
 	* view.h: Make struct WView opaque, move non-interface parts ...
 	* view.c: ... here.
 	* layout.c: Use struct WView, not typedef WView.

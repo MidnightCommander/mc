@@ -93,10 +93,13 @@ void slang_shell_mode (void);
 void slang_shutdown (void);
 int has_colors (void);
 
-/* copied from slcurses.h (MC version 4.0.7) */
 #define move(x, y) SLsmg_gotorc(x, y)
+#define getyx(stdscr, row, col) \
+    do { \
+	row = SLsmg_get_row(); \
+	col = SLsmg_get_column(); \
+    } while (0)
 #define printw SLsmg_printf
-#define mvprintw(x, y, z) SLsmg_gotorc(x, y); SLsmg_printf(z)
 #define COLS SLtt_Screen_Cols
 #define LINES SLtt_Screen_Rows
 #define standend() SLsmg_normal_video()
