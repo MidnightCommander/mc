@@ -31,23 +31,28 @@ $GETTEXTIZE --copy --force >tmpout || exit 1
 rm -f po/ChangeLog
 mv po/ChangeLog~ po/ChangeLog
 
-# Ugly way to parse the instructions gettexize gives us.
-m4files="`cat tmpout | sed -n -e '/^Please/,/^from/s/^  *//p'`"
-fromdir=`cat tmpout | sed -n -e '/^Please/,/^from/s/^from the \([^ ]*\) .*$/\1/p'`
-rm tmpout
-rm -rf gettext.m4
-mkdir gettext.m4
-for i in $m4files; do
-  cp -f $fromdir/$i gettext.m4
-done
-
 if test ! -d config; then
   mkdir config || exit 1
 fi
 
-$ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || \
-  $ACLOCAL $ACLOCAL_FLAGS || \
-  exit 1
+if test -f `aclocal --print-ac-dir`/gettext.m4; then
+  # gettext macro files are available to aclocal.
+  $ACLOCAL $ACLOCAL_FLAGS || exit 1
+else
+  # gettext macro files are not available.
+  # Find them and copy to a local directory.
+  # Ugly way to parse the instructions gettexize gives us.
+  m4files="`cat tmpout | sed -n -e '/^Please/,/^from/s/^  *//p'`"
+  fromdir=`cat tmpout | sed -n -e '/^Please/,/^from/s/^from the \([^ ]*\) .*$/\1/p'`
+  rm tmpout
+  rm -rf gettext.m4
+  mkdir gettext.m4
+  for i in $m4files; do
+    cp -f $fromdir/$i gettext.m4
+  done
+  $ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || exit 1
+fi
+
 $AUTOHEADER || exit 1
 $AUTOCONF || exit 1
 
