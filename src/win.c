@@ -123,6 +123,28 @@ void mc_noraw_mode (void)
     noraw ();
 }
 
+/* This flag is set by xterm detection routine in function main() */
+/* It is used by function view_other_cmd() */
+int xterm_flag = 0;
+
+/* The following routines only work on xterm terminals */
+
+void do_enter_ca_mode (void)
+{
+    if (!xterm_flag)
+	return;
+    fprintf (stdout, /* ESC_STR ")0" */ ESC_STR "7" ESC_STR "[?47h");
+    fflush (stdout);
+}
+
+void do_exit_ca_mode (void)
+{
+    if (!xterm_flag)
+	return;
+    fprintf (stdout, ESC_STR "[?47l" ESC_STR "8" ESC_STR "[m");
+    fflush (stdout);
+}
+
 /* This table is a mapping between names and the constants we use
  * We use this to allow users to define alternate definitions for
  * certain keys that may be missing from the terminal database

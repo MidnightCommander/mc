@@ -1,5 +1,9 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* terms.c: Merge ...
+	* win.c: ... here.
+	* Makefile.am: Remove terms.c.
+
 	* panel.h: Fix duplication between cpanel and current_panel in
 	favor of current_panel.  Ditto opanel and other_panel.
 
