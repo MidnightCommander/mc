@@ -62,7 +62,7 @@ typedef struct format_e {
     int    field_len;
     int    just_mode;
     int    expand;
-    char   *(*string_fn)(file_entry *, int len);
+    const char *(*string_fn)(file_entry *, int len);
     char   *title;
     char   *id;
 

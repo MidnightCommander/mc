@@ -192,7 +192,7 @@ fake_name_quote (const char *s, int quote_percent)
 /* If passed an empty txt (this usually means that there is an error)
  * in the upper layers, we return "/"
  */
-char *name_trunc (char *txt, int trunc_len)
+char *name_trunc (const char *txt, int trunc_len)
 {
     static char x [MC_MAXPATHLEN+MC_MAXPATHLEN];
     int    txt_len;

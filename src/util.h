@@ -11,7 +11,7 @@ int  msglen (char *text, int *lines);
 char *trim (char *s, char *d, int len);
 char *name_quote (const char *c, int quote_percent);
 char *fake_name_quote (const char *c, int quote_percent);
-char *name_trunc (char *txt, int trunc_len);
+char *name_trunc (const char *txt, int trunc_len);
 char *size_trunc (double size);
 char *size_trunc_sep (double size);
 void size_trunc_len (char *buffer, int len, off_t size, int units);

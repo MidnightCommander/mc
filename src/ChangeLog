@@ -1,5 +1,11 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* panel.h (struct format_e): Make string_fn return const char *.
+	Adjust all dependencies.
+	* screen.c (string_file_mtime): Return empty string for "..".
+	(string_file_atime): Likewise.
+	(string_file_ctime): Likewise.
+
 	* view.c (display): Use enum for boldflag values.  Fix cursor
 	highlighting for the ASCII part of the hex editor.
 

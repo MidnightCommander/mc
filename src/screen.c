@@ -143,7 +143,7 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 
 /* String representations of various file attributes */
 /* name */
-static char *
+static const char *
 string_file_name (file_entry *fe, int len)
 {
     static char buffer [BUF_SMALL];
@@ -168,7 +168,7 @@ string_file_name (file_entry *fe, int len)
 }
 
 /* size */
-static char *
+static const char *
 string_file_size (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -193,7 +193,7 @@ string_file_size (file_entry *fe, int len)
 }
 
 /* bsize */
-static char *
+static const char *
 string_file_size_brief (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -213,7 +213,7 @@ string_file_size_brief (file_entry *fe, int len)
 
 /* This functions return a string representation of a file entry */
 /* type */
-static char *
+static const char *
 string_file_type (file_entry *fe, int len)
 {
     static char buffer [2];
@@ -250,35 +250,44 @@ string_file_type (file_entry *fe, int len)
 }
 
 /* mtime */
-static char *
+static const char *
 string_file_mtime (file_entry *fe, int len)
 {
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
     return file_date (fe->buf.st_mtime);
 }
 
 /* atime */
-static char *
+static const char *
 string_file_atime (file_entry *fe, int len)
 {
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
     return file_date (fe->buf.st_atime);
 }
 
 /* ctime */
-static char *
+static const char *
 string_file_ctime (file_entry *fe, int len)
 {
+    if (!strcmp (fe->fname, "..")) {
+       return "";
+    }
     return file_date (fe->buf.st_ctime);
 }
 
 /* perm */
-static char *
+static const char *
 string_file_permission (file_entry *fe, int len)
 {
     return string_perm (fe->buf.st_mode);
 }
 
 /* mode */
-static char *
+static const char *
 string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -288,7 +297,7 @@ string_file_perm_octal (file_entry *fe, int len)
 }
 
 /* nlink */
-static char *
+static const char *
 string_file_nlinks (file_entry *fe, int len)
 {
     static char buffer [BUF_TINY];
@@ -298,7 +307,7 @@ string_file_nlinks (file_entry *fe, int len)
 }
 
 /* inode */
-static char *
+static const char *
 string_inode (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -308,7 +317,7 @@ string_inode (file_entry *fe, int len)
 }
 
 /* nuid */
-static char *
+static const char *
 string_file_nuid (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -318,7 +327,7 @@ string_file_nuid (file_entry *fe, int len)
 }
 
 /* ngid */
-static char *
+static const char *
 string_file_ngid (file_entry *fe, int len)
 {
     static char buffer [10];
@@ -328,35 +337,35 @@ string_file_ngid (file_entry *fe, int len)
 }
 
 /* owner */
-static char *
+static const char *
 string_file_owner (file_entry *fe, int len)
 {
     return get_owner (fe->buf.st_uid);
 }
 
 /* group */
-static char *
+static const char *
 string_file_group (file_entry *fe, int len)
 {
     return get_group (fe->buf.st_gid);
 }
 
 /* mark */
-static char *
+static const char *
 string_marked (file_entry *fe, int len)
 {
     return fe->f.marked ? "*" : " ";
 }
 
 /* space */
-static char *
+static const char *
 string_space (file_entry *fe, int len)
 {
     return " ";
 }
 
 /* dot */
-static char *
+static const char *
 string_dot (file_entry *fe, int len)
 {
     return ".";
@@ -371,7 +380,7 @@ static struct {
     int  default_just;
     char *title;
     int  use_in_gui;
-    char *(*string_fn)(file_entry *, int);
+    const char *(*string_fn)(file_entry *, int);
     sortfn *sort_routine;
 } formats [] = {
 { "name",  12, 1, J_LEFT_FIT,	N_("Name"),	1, string_file_name,	   (sortfn *) sort_name },
@@ -396,7 +405,7 @@ static struct {
 };
 
 static char *
-to_buffer (char *dest, int just_mode, int len, char *txt)
+to_buffer (char *dest, int just_mode, int len, const char *txt)
 {
     int txtlen = strlen (txt);
     int still, over;
@@ -480,7 +489,7 @@ static void
 format_file (char *dest, int limit, WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
     int      color, length, empty_line;
-    char     *txt;
+    const char *txt;
     char     *old_pos;
     char     *cdest = dest;
     format_e *format, *home;
