@@ -189,6 +189,7 @@ typedef struct Widget_Item {
 
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
+
 /* doubled line if possible */
 void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 
@@ -206,27 +207,30 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 #define DLG_TRYUP        2	/* Try to move two lines up the dialog */
 #define DLG_CENTER       1	/* Center the dialog */
 #define DLG_NONE         0	/* No options */
-int  add_widget (Dlg_head *dest, void *Widget);
-int  add_widgetl (Dlg_head *dest, void *Widget, WLay layout);
+int  add_widget           (Dlg_head *dest, void *Widget);
+int  add_widgetl          (Dlg_head *dest, void *Widget, WLay layout);
+int  remove_widget        (Dlg_head *dest, void *Widget);
+int  destroy_widget       (Widget *w);
 
-/* Runs dialog d */
-void run_dlg (Dlg_head *d);
-
-void dlg_run_done (Dlg_head *h);
-void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event);
-void init_dlg (Dlg_head *h);
+/* Runs dialog d */       
+void run_dlg              (Dlg_head *d);
+		          
+void dlg_run_done         (Dlg_head *h);
+void dlg_process_event    (Dlg_head *h, int key, Gpm_Event *event);
+void init_dlg             (Dlg_head *h);
 
 /* To activate/deactivate the idle message generation */
-void set_idle_proc (Dlg_head *d, int state);
+void set_idle_proc        (Dlg_head *d, int state);
+		          
+void dlg_redraw           (Dlg_head *h);
+void dlg_refresh          (void *parameter);
+void destroy_dlg          (Dlg_head *h);
+		          
+void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 
-void dlg_redraw (Dlg_head *h);
-void dlg_refresh (void *parameter);
-void destroy_dlg (Dlg_head *h);
-void widget_set_size (Widget *widget, int x1, int y1, int x2, int y2);
 void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags);
-void dlg_broadcast_msg (Dlg_head *h, int message, int reverse);
-void dlg_mouse (Dlg_head *h, Gpm_Event *event);
-int default_dlg_callback (Dlg_head *h, int id, int msg);
+void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
+void dlg_mouse            (Dlg_head *h, Gpm_Event *event);
 
 typedef void  (*destroy_fn)(void *);
 typedef int   (*callback_fn)(Dlg_head *, void *, int, int);
@@ -234,16 +238,11 @@ typedef int   (*callback_fn)(Dlg_head *, void *, int, int);
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, destroy_fn destroy,
 		  mouse_h mouse_handler, char *tkname);
-int std_callback (Dlg_head *h, int Msg, int Par);
-int default_proc (Dlg_head *h, int Msg, int Par);
 
-/* Nay, it has to be elsewhere, this header if widely used
-#ifdef HAVE_X
-#  ifndef move
-#      define move(a,b)
-#  endif
-#endif
- */
+/* Various default service provision */
+int default_dlg_callback  (Dlg_head *h, int id, int msg);
+int std_callback          (Dlg_head *h, int Msg, int Par);
+int default_proc          (Dlg_head *h, int Msg, int Par);
 
 #define real_widget_move(w, _y, _x) move((w)->y + _y, (w)->x + _x)
 #define dlg_move(h, _y, _x) move(((Dlg_head *) h)->y + _y, \
@@ -255,24 +254,24 @@ int default_proc (Dlg_head *h, int Msg, int Par);
 extern Dlg_head *current_dlg;
 extern Hook *idle_hook;
 
-int send_message (Dlg_head *h, Widget *w, int msg, int par);
-int send_message_to (Dlg_head *h, Widget *w, int msg, int par);
-void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new);
-void widget_redraw (Dlg_head *h, Widget_Item *w);
-int dlg_overlap (Widget *a, Widget *b);
-void widget_erase (Widget *);
-void dlg_erase (Dlg_head *h);
-void dlg_stop (Dlg_head *h);
+int  send_message         (Dlg_head *h, Widget *w, int msg, int par);
+int  send_message_to      (Dlg_head *h, Widget *w, int msg, int par);
+void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
+void widget_redraw        (Dlg_head *h, Widget_Item *w);
+int  dlg_overlap          (Widget *a, Widget *b);
+void widget_erase         (Widget *);
+void dlg_erase            (Dlg_head *h);
+void dlg_stop             (Dlg_head *h);
 
 /* Widget selection */
-int  dlg_select_widget (struct Dlg_head *h, void *widget);
-void dlg_one_up (Dlg_head *h);
-void dlg_one_down (Dlg_head *h);
-int  dlg_focus (Dlg_head *h);
-int  dlg_unfocus (Dlg_head *h);
-int dlg_select_nth_widget (Dlg_head *h, int n);
-int dlg_item_number (Dlg_head *h);
-Widget *find_widget_type (Dlg_head *h, callback_fn signature);
+int  dlg_select_widget     (Dlg_head *h, void *widget);
+void dlg_one_up            (Dlg_head *h);
+void dlg_one_down          (Dlg_head *h);
+int  dlg_focus             (Dlg_head *h);
+int  dlg_unfocus           (Dlg_head *h);
+int  dlg_select_nth_widget (Dlg_head *h, int n);
+int  dlg_item_number       (Dlg_head *h);
+Widget *find_widget_type   (Dlg_head *h, callback_fn signature);
 
 /* Sets/clear the specified flag in the options field */
 #define widget_option(w,f,i) \

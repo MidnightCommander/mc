@@ -211,8 +211,10 @@ find_par_start:
 
 	add_widgetl (find_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
 		buts[2], 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
+#ifndef HAVE_GNOME
 	add_widgetl (find_dlg, button_new (9, b1, B_TREE, NORMAL_BUTTON,
 		buts[1], 0, 0, "tree"), XV_WLAY_RIGHTOF);
+#endif
 	add_widgetl (find_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
 		buts[0], 0, 0, "ok"), XV_WLAY_CENTERROW);
 

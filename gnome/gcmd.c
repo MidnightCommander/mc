@@ -73,3 +73,21 @@ gnome_open_panel (GtkWidget *widget, WPanel *panel)
 {
 	new_panel_at (panel->cwd);
 }
+
+int
+gnome_close_panel (GtkWidget *widget, WPanel *panel)
+{
+	Dlg_head *h = panel->widget.parent;
+
+	/* Remove the widgets from the dialog head */
+	remove_widget (h, panel->current_dir);
+	remove_widget (h, panel->filter_w);
+	remove_widget (h, panel);
+
+	/* Kill them */
+	destroy_widget (panel->current_dir);
+	destroy_widget (panel->filter_w);
+	destroy_widget ((void *)panel);
+
+	return TRUE;
+}

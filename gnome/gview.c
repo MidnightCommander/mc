@@ -63,7 +63,16 @@ x_focus_view (WView *view)
 static void
 scrollbar_moved (GtkAdjustment *adj, WView *view)
 {
-	view->start_display = adj->value;
+	if (adj->value == view->start_display)
+		return;
+	
+	if (adj->value < view->start_display){
+		while (adj->value < view->start_display)
+			view_move_backward (view, 1);
+	} else {
+		while (adj->value > view->start_display)
+			view_move_forward (view, 1);
+	}
 
 	/* To force a display */
 	view->dirty = max_dirt_limit + 1;
@@ -82,12 +91,12 @@ view_percent (WView *view, int p)
 	 p * 100 / view->s.st_size);
 
     sprintf (buffer, "%3d%%", percent);
-    gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
+    if (strcmp (buffer, GTK_LABEL (view->gtk_percent)->label))
+	    gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
 
     if (view->sadj){
 	    GtkAdjustment *adj = GTK_ADJUSTMENT (view->sadj);
 	    
-	    printf ("adj\n");
 	    if ((int) adj->upper != view->last_byte){
 		    adj->upper = view->last_byte;
 		    adj->step_increment = 1.0;
@@ -110,10 +119,12 @@ view_status (WView *view)
 		sprintf (buffer, _("Offset 0x%08x"), view->edit_cursor);
 	else
 		sprintf (buffer, _("Col %d"), -view->start_col);
-	gtk_label_set (GTK_LABEL (view->gtk_offset), buffer);
+	if (strcmp (buffer, GTK_LABEL (view->gtk_offset)->label))
+		gtk_label_set (GTK_LABEL (view->gtk_offset), buffer);
 
 	sprintf (buffer, _("%s bytes"), size_trunc (view->s.st_size));
-	gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
+	if (strcmp (buffer, GTK_LABEL (view->gtk_bytes)->label))
+		gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
 
 	if (view->hex_mode)
 		view_percent (view, view->edit_cursor - view->first);

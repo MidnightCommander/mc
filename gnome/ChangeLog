@@ -1,3 +1,26 @@
+1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (gnome_close_panel): Implement the close-the-panel
+	functionality. 
+
+	* gscreen.c (x_panel_destroy): Implement the gnome mode way of
+	destroying the panel. 
+
+	* gview.c (view_status): Add cacheing of the information status,
+	to avoid excessive flicker.  It would be better if GtkLabel did
+	not flicker though.
+	(scrollbar_moved): Scroll correctly.  We now use
+	view_move_backward and view_move_forward to adjust the scrollbar
+	contents.  This displays the scrollbar correctly.
+
+	* gwidget.c (x_listbox_select_nth): This may be invoked before the
+	widget has been created, work around this problem. 
+
+	* gscreen.c (show_dir): Set the title bar for the window to the
+	current directoy.  Reported by both Mike and Elliot. 
+
+	* layout: Updated to the new hotlist dialog box. 
+
 1998-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtrans.c (create_transparent_text_window): Destroy the cursor

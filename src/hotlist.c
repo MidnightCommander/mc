@@ -907,7 +907,7 @@ static int add_new_group_input (char *header, char *label, char **result)
     { quick_button, 10, 80, 1, 0, N_("&Append"), 0, B_APPEND, 0, 0,
 	  XV_WLAY_DONTCARE, "button-append" },
     { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input" },
-    { quick_label,  3, 80, 2, 0, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
+    { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, XV_WLAY_DONTCARE, "label" },
     { 0 } };
     
     int len;

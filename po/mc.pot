@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-15 15:30:40-0500\n"
+"Date: 1998-04-15 20:44:15-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -773,7 +773,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: edit/editwidget.c:916 gnome/gview.c:286 gnome/gview.c:310 src/view.c:1991
+#: edit/editwidget.c:916 gnome/gview.c:298 gnome/gview.c:322 src/view.c:1991
 msgid "Search"
 msgstr ""
 
@@ -785,7 +785,7 @@ msgstr ""
 msgid "PullDn"
 msgstr ""
 
-#: edit/editwidget.c:920 gnome/gview.c:281 src/help.c:824 src/main.c:1673 src/view.c:1980 src/view.c:2000
+#: edit/editwidget.c:920 gnome/gview.c:293 src/help.c:824 src/main.c:1673 src/view.c:1980 src/view.c:2000
 msgid "Quit"
 msgstr ""
 
@@ -841,7 +841,7 @@ msgstr ""
 msgid "Flag"
 msgstr ""
 
-#: gnome/gview.c:311 src/achown.c:366
+#: gnome/gview.c:323 src/achown.c:366
 msgid "Mode"
 msgstr ""
 
@@ -865,7 +865,7 @@ msgid ""
 " %s "
 msgstr ""
 
-#: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333 src/chown.c:256 src/chown.c:260 src/panelize.c:298 src/user.c:623
+#: src/achown.c:647 src/achown.c:651 src/chmod.c:329 src/chmod.c:333 src/chown.c:256 src/chown.c:260 src/panelize.c:301 src/user.c:623
 msgid " Oops... "
 msgstr ""
 
@@ -1035,7 +1035,7 @@ msgstr ""
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:851 src/find.c:662
+#: src/boxes.c:851 src/find.c:664
 msgid "Stopped"
 msgstr ""
 
@@ -1391,57 +1391,61 @@ msgstr ""
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1251
+#: src/cmd.c:1246
+msgid " Could not chdir to %s "
+msgstr ""
+
+#: src/cmd.c:1253
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1257
+#: src/cmd.c:1259
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1267
+#: src/cmd.c:1269
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1268
+#: src/cmd.c:1270
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1275
+#: src/cmd.c:1277
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1275
+#: src/cmd.c:1277
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1286
+#: src/cmd.c:1288
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1287
+#: src/cmd.c:1289
 msgid ""
 " Enter the file system name where you want to run the\n"
 "  undelete file system on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1379
+#: src/cmd.c:1381
 msgid "Show directory sizes"
 msgstr ""
 
-#: src/cmd.c:1379 src/panelize.c:456
+#: src/cmd.c:1381 src/panelize.c:459
 msgid "Pipe close failed"
 msgstr ""
 
-#: src/cmd.c:1392
+#: src/cmd.c:1394
 msgid "Cannot invoke du command."
 msgstr ""
 
-#: src/cmd.c:1403
+#: src/cmd.c:1405
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1405
+#: src/cmd.c:1410
 msgid " Setup "
 msgstr ""
 
@@ -1589,7 +1593,7 @@ msgstr ""
 msgid "Deleting"
 msgstr ""
 
-#: gnome/glayout.c:267 gnome/gview.c:309 src/file.c:562
+#: gnome/glayout.c:267 gnome/gview.c:321 src/file.c:562
 msgid "File"
 msgstr ""
 
@@ -2026,31 +2030,31 @@ msgstr ""
 msgid "Find File"
 msgstr ""
 
-#: src/find.c:422
+#: src/find.c:424
 msgid "Grepping in %s"
 msgstr ""
 
-#: src/find.c:460
+#: src/find.c:462
 msgid " Find/read "
 msgstr ""
 
-#: src/find.c:460
+#: src/find.c:462
 msgid " Problem reading from child "
 msgstr ""
 
-#: src/find.c:504
+#: src/find.c:506
 msgid "Finished"
 msgstr ""
 
-#: src/find.c:524 src/view.c:1470
+#: src/find.c:526 src/view.c:1470
 msgid "Searching %s"
 msgstr ""
 
-#: src/find.c:662 src/find.c:779
+#: src/find.c:664 src/find.c:781
 msgid "Searching"
 msgstr ""
 
-#: src/find.c:754
+#: src/find.c:756
 msgid "Find file"
 msgstr ""
 
@@ -3024,43 +3028,43 @@ msgstr ""
 
 #. SCO_FLAVOR
 #. SCO_FLAVOR
-#: gnome/glayout.c:240 src/panelize.c:194 src/panelize.c:456
+#: gnome/glayout.c:240 src/panelize.c:197 src/panelize.c:459
 msgid "External panelize"
 msgstr ""
 
-#: src/panelize.c:205
+#: src/panelize.c:208
 msgid "Command"
 msgstr ""
 
-#: src/panelize.c:219 src/panelize.c:275 src/panelize.c:345 src/panelize.c:366
+#: src/panelize.c:222 src/panelize.c:278 src/panelize.c:348 src/panelize.c:369
 msgid "Other command"
 msgstr ""
 
-#: src/panelize.c:259
+#: src/panelize.c:262
 msgid " Add to external panelize "
 msgstr ""
 
-#: src/panelize.c:260
+#: src/panelize.c:263
 msgid " Enter command label: "
 msgstr ""
 
-#: src/panelize.c:299
+#: src/panelize.c:302
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
 
-#: src/panelize.c:348
+#: src/panelize.c:351
 msgid "Find rejects after patching"
 msgstr ""
 
-#: src/panelize.c:349
+#: src/panelize.c:352
 msgid "Find *.orig after patching"
 msgstr ""
 
-#: src/panelize.c:350
+#: src/panelize.c:353
 msgid "Find SUID and SGID programs"
 msgstr ""
 
-#: src/panelize.c:401
+#: src/panelize.c:404
 msgid "Cannot invoke command."
 msgstr ""
 
@@ -3120,7 +3124,7 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1192 src/screen.c:661
+#: gnome/gscreen.c:1193 src/screen.c:661
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3132,7 +3136,7 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:199 gnome/gscreen.c:363 src/screen.c:2189 src/screen.c:2223
+#: gnome/glayout.c:199 gnome/gscreen.c:364 src/screen.c:2189 src/screen.c:2223
 msgid "View"
 msgstr ""
 
@@ -3338,15 +3342,15 @@ msgstr ""
 msgid "File: %s"
 msgstr ""
 
-#: gnome/gview.c:110 src/view.c:709
+#: gnome/gview.c:122 src/view.c:709
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: gnome/gview.c:112 src/view.c:711
+#: gnome/gview.c:124 src/view.c:711
 msgid "Col %d"
 msgstr ""
 
-#: gnome/gview.c:115 src/view.c:715
+#: gnome/gview.c:127 src/view.c:715
 msgid "%s bytes"
 msgstr ""
 
@@ -3380,7 +3384,7 @@ msgstr ""
 msgid "Ascii"
 msgstr ""
 
-#: gnome/gview.c:303 src/view.c:1981
+#: gnome/gview.c:315 src/view.c:1981
 msgid "Hex"
 msgstr ""
 
@@ -3404,7 +3408,7 @@ msgstr ""
 msgid "UnWrap"
 msgstr ""
 
-#: gnome/gview.c:295 src/view.c:1988
+#: gnome/gview.c:307 src/view.c:1988
 msgid "Wrap"
 msgstr ""
 
@@ -3647,7 +3651,7 @@ msgstr ""
 msgid "Link"
 msgstr ""
 
-#: gnome/gdesktop.c:913 gnome/gscreen.c:359
+#: gnome/gdesktop.c:913 gnome/gscreen.c:360
 msgid "Properties"
 msgstr ""
 
@@ -3655,7 +3659,7 @@ msgstr ""
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1033 gnome/gscreen.c:315
+#: gnome/gdesktop.c:1033 gnome/gscreen.c:316
 msgid "Enter extra arguments:"
 msgstr ""
 
@@ -3964,123 +3968,123 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:314
+#: gnome/gscreen.c:315
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:361
+#: gnome/gscreen.c:362
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:362
+#: gnome/gscreen.c:363
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:364
+#: gnome/gscreen.c:365
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:366
+#: gnome/gscreen.c:367
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:367
+#: gnome/gscreen.c:368
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:368
+#: gnome/gscreen.c:369
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:376
+#: gnome/gscreen.c:377
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gscreen.c:377
+#: gnome/gscreen.c:378
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:378
+#: gnome/gscreen.c:379
 msgid "Delete..."
 msgstr ""
 
-#: gnome/gscreen.c:1000
+#: gnome/gscreen.c:1001
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1002
+#: gnome/gscreen.c:1003
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1004
+#: gnome/gscreen.c:1005
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1006
+#: gnome/gscreen.c:1007
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1008
+#: gnome/gscreen.c:1009
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1010
+#: gnome/gscreen.c:1011
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1012
+#: gnome/gscreen.c:1013
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1014
+#: gnome/gscreen.c:1015
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1017
+#: gnome/gscreen.c:1018
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1019
+#: gnome/gscreen.c:1020
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1021
+#: gnome/gscreen.c:1022
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1023
+#: gnome/gscreen.c:1024
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1025
+#: gnome/gscreen.c:1026
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1027
+#: gnome/gscreen.c:1028
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1029
+#: gnome/gscreen.c:1030
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1031
+#: gnome/gscreen.c:1032
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1033
+#: gnome/gscreen.c:1034
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1158
+#: gnome/gscreen.c:1159
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1168
+#: gnome/gscreen.c:1169
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1238
+#: gnome/gscreen.c:1239
 msgid "Filter"
 msgstr ""
 
@@ -4088,51 +4092,51 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: gnome/gview.c:279
+#: gnome/gview.c:291
 msgid "Goto line"
 msgstr ""
 
-#: gnome/gview.c:279
+#: gnome/gview.c:291
 msgid "Jump to a specified line number"
 msgstr ""
 
-#: gnome/gview.c:280
+#: gnome/gview.c:292
 msgid "Monitor file"
 msgstr ""
 
-#: gnome/gview.c:280
+#: gnome/gview.c:292
 msgid "Monitor file growing"
 msgstr ""
 
-#: gnome/gview.c:281
+#: gnome/gview.c:293
 msgid "Terminate the viewer"
 msgstr ""
 
-#: gnome/gview.c:286
+#: gnome/gview.c:298
 msgid "String search"
 msgstr ""
 
-#: gnome/gview.c:287
+#: gnome/gview.c:299
 msgid "Regexp search"
 msgstr ""
 
-#: gnome/gview.c:287
+#: gnome/gview.c:299
 msgid "Regular expression search"
 msgstr ""
 
-#: gnome/gview.c:289
+#: gnome/gview.c:301
 msgid "Search again..."
 msgstr ""
 
-#: gnome/gview.c:289
+#: gnome/gview.c:301
 msgid "Continue searching"
 msgstr ""
 
-#: gnome/gview.c:295
+#: gnome/gview.c:307
 msgid "Wrap the text"
 msgstr ""
 
-#: gnome/gview.c:301
+#: gnome/gview.c:313
 msgid "Formatted"
 msgstr ""
 

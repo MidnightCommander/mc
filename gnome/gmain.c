@@ -275,7 +275,10 @@ x_destroy_dlg (Dlg_head *h)
 {
 	if (!(h->grided & DLG_NO_TED))
 		gtk_grab_remove (GTK_WIDGET (GTK_BIN (h->wdata)->child));
-	gtk_widget_destroy (GTK_WIDGET(h->wdata));
+	if (h->wdata){
+		gtk_widget_destroy (GTK_WIDGET(h->wdata));
+		h->wdata = 0;
+	}
 }
 
 void

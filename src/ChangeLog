@@ -1,3 +1,28 @@
+1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (GT): Assign two spaces for the minimum size of the
+	"type" field for the GNOME edition.  This gives some extra space
+	for the icon that gets displayed.
+
+	* dlg.c (remove_widget): New function:  used to remove a widget
+	from an existing Dlg_head;
+	(destroy_widget): Destroy a specific Widget.
+	(add_widgetl): Extended to deal with the fact that a running
+	Dlg_head can become empty.
+
+	* panelize.c (l_call): Update the input line every time the user
+	selects the entry with the mouse (pretty common in the gnome
+	edition). 
+
+	* hotlist.c (add_new_group_input): Removed an extra field that was
+	causing problems. 
+
+	* find.c (find_parameters): Tree button is gone for gnome until we
+	get the tree function working on gnome. 
+
+	* cmd.c (save_setup_cmd): Per Elliot's suggestion, do not pop up a
+	dialog box to inform the user about the saved setup.
+
 1998-04-15  Pavel Machek <pavel@elf.ucw.cz>
 
 	* cmd.c: Report failed chdir attempts. 

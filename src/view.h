@@ -169,6 +169,8 @@ void view_add_string    (WView *view, char *s);
 void view_gotoyx        (WView *view, int r, int c);
 void view_set_color     (WView *view, int font);
 void view_display_clean (WView *view, int h, int w);
+void view_move_backward (WView *view, int i);
+void view_move_forward  (WView *view, int i);
 
 #ifdef PORT_HAS_VIEW_FREEZE
 void view_freeze (WView *view);

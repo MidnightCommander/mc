@@ -127,7 +127,7 @@ int panel_event (Gpm_Event *event, WPanel *panel);
 #   define x_create_panel(x,y,z) 1;
 #   define x_panel_load_index(p,x)
 #   define x_panel_select_item(a,b,c)
-
+#   define x_panel_destroy(p)
 
 void
 set_colors (WPanel *panel)
@@ -399,6 +399,12 @@ string_file_nuid (file_entry *fe, int len)
     return buffer;
 }
 
+#ifdef HAVE_GNOME
+#    define GT 2
+#else
+#    define GT 1
+#endif
+
 static struct {
     char *id;
     int  min_size;
@@ -411,7 +417,7 @@ static struct {
 } formats [] = {
 { "name",  12, 1, J_LEFT,  N_("Name"),       1, string_file_name,       (sortfn *) sort_name },
 { "size",  7,  0, J_RIGHT, N_("Size"),       1, string_file_size,       (sortfn *) sort_size },
-{ "type",  1,  0, J_LEFT,     "",           1, string_file_type,       (sortfn *) sort_type },
+{ "type",  GT, 0, J_LEFT,     "",            1, string_file_type,       (sortfn *) sort_type },
 { "mtime", 12, 0, J_RIGHT, N_("MTime"),      1, string_file_mtime,      (sortfn *) sort_time },
 { "bsize", 7,  0, J_RIGHT, N_("Size"),       1, string_file_size_brief, (sortfn *) sort_size },
 { "perm",  10, 0, J_LEFT,  N_("Permission"), 1, string_file_permission, NULL },
@@ -902,8 +908,9 @@ panel_destroy (WPanel *p)
     char *name = panel_save_name (p);
 
     panel_save_setup (p, name);
+    x_panel_destroy (p);
     clean_dir (&p->dir, p->count);
-
+    
 /* save and clean history */
     if (p->dir_history){
 	Hist *current, *old;

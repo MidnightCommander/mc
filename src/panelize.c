@@ -102,7 +102,8 @@ static struct panelize{
 static char* panelize_title = N_(" External panelize ");
 
 #ifndef HAVE_X
-static void panelize_refresh (void)
+static void
+panelize_refresh (void)
 {
     attrset (COLOR_NORMAL);
     dlg_erase (panelize_dlg);
@@ -116,7 +117,8 @@ static void panelize_refresh (void)
 }
 #endif
 
-static INLINE void update_command ()
+static void
+update_command ()
 {
     if (l_panelize->pos != last_listitem) {
     	last_listitem = l_panelize->pos;
@@ -127,7 +129,8 @@ static INLINE void update_command ()
     }
 }
 
-static int panelize_callback (Dlg_head * h, int Par, int Msg)
+static int
+panelize_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
 #ifndef HAVE_X    
@@ -148,7 +151,7 @@ static int panelize_callback (Dlg_head * h, int Par, int Msg)
 
 static int l_call (void *data)
 {
-    return 1;
+	return listbox_nothing;
 }
 
 static void init_panelize (void)
@@ -301,7 +304,7 @@ void external_panelize (void)
     }
 
     init_panelize ();
-
+    
     /* display file info */
     attrset (SELECTED_COLOR);
 

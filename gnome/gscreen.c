@@ -1418,4 +1418,9 @@ x_reset_sort_labels (WPanel *panel)
 	panel_switch_new_display_mode (panel);
 }
 
-
+/* Releases all of the X resources allocated */
+void
+x_panel_destroy (WPanel *panel)
+{
+	gtk_widget_destroy (GTK_WIDGET (panel->xwindow));
+}

@@ -631,7 +631,7 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     
     if (start_line > 1 && !error){
 	get_byte (view, 0);
-	move_forward (view, start_line - 1);
+	view_move_forward (view, start_line - 1);
     }
     view->edit_cursor = view->first;
     view->file_dirty =  0;
@@ -1214,8 +1214,8 @@ move_backward2 (WView *view, long current, int lines)
     return p;
 }
 
-static void
-move_backward (WView *view, int i)
+void
+view_move_backward (WView *view, int i)
 {
     view->search_start = view->start_display =
 	move_backward2 (view, view->start_display, i);
@@ -1256,8 +1256,8 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     return view->bottom_first;
 }
 
-static void
-move_forward (WView *view, int i)
+void
+view_move_forward (WView *view, int i)
 {
     view->start_display = move_forward2 (view, view->start_display, i, 0);
     if (!view->reading_pipe && view->start_display > get_bottom_first (view, 0, 0))
@@ -1309,7 +1309,7 @@ move_right (WView *view)
             view->edit_cursor : view->last_byte - 1;
         if (view->edit_cursor >= view->last) {
            view->edit_cursor -= view->bytes_per_line;
-           move_forward(view, 1);
+           view_move_forward(view, 1);
         }
     } else
     if (--view->start_col > 0)
@@ -1332,7 +1332,7 @@ move_left (WView *view)
             view->first : view->edit_cursor;
         if (view->edit_cursor < view->start_display) {
            view->edit_cursor += view->bytes_per_line;
-           move_backward(view, 1);
+           view_move_backward(view, 1);
         }
     } else
     if (++view->start_col > 0)
@@ -1852,7 +1852,7 @@ goto_line (WView *view)
     if (line){
 	if (*line){
 	    move_to_top (view);
-	    move_forward (view, atoi (line) - 1);
+	    view_move_forward (view, atoi (line) - 1);
 	}
 	free (line);
     }
@@ -2103,7 +2103,7 @@ view_handle_key (WView *view, int c)
     if (check_left_right_keys (view, c))
 	return 1;
     
-    if (check_movement_keys (c, 1, vheight, view, (movefn) move_backward, (movefn) move_forward,
+    if (check_movement_keys (c, 1, vheight, view, (movefn) view_move_backward, (movefn) view_move_forward,
 			     (movefn) move_to_top, (movefn) move_to_bottom)){
 	return 1;
     }
@@ -2152,20 +2152,20 @@ view_handle_key (WView *view, int c)
     case 'j':
     case '\n':
     case 'e':
-    	move_forward (view, 1);
+    	view_move_forward (view, 1);
     	return 1;
     	
     case 'd':
-        move_forward (view, vheight / 2);
+        view_move_forward (view, vheight / 2);
         return 1;
         
     case 'u':
-        move_backward (view, vheight / 2);
+        view_move_backward (view, vheight / 2);
         return 1;
     	
     case 'k':
     case 'y':
-        move_backward (view, 1);
+        view_move_backward (view, 1);
         return 1;
         
     case 'l':
@@ -2174,7 +2174,7 @@ view_handle_key (WView *view, int c)
         
     case ' ':
     case 'f':
-        move_forward (view, vheight - 1);
+        view_move_forward (view, vheight - 1);
         return 1;
 
     case '!':
@@ -2186,15 +2186,15 @@ view_handle_key (WView *view, int c)
 	return 1;
 	
     case 'b':
-    	move_backward (view, vheight - 1);
+    	view_move_backward (view, vheight - 1);
     	return 1;
         
     case KEY_IC:
-        move_backward (view, 2);
+        view_move_backward (view, 2);
         return 1;
         
     case KEY_DC:
-        move_forward (view, 2);
+        view_move_forward (view, 2);
         return 1;
 
     case 'm':
@@ -2252,17 +2252,17 @@ view_event (WView *view, Gpm_Event *event, int *result)
 	}
 	if (event->y < view->widget.lines / 3){
 	    if (mouse_move_pages_viewer)
-	    	move_backward (view, view->widget.lines / 2 - 1);
+	    	view_move_backward (view, view->widget.lines / 2 - 1);
 	    else
-	    	move_backward (view, 1);
+	    	view_move_backward (view, 1);
 	    *result = MOU_REPEAT;
 	    return 1;
 	}
 	else if (event->y > 2 * vheight /3){
 	    if (mouse_move_pages_viewer)
-	    	move_forward (view, vheight / 2 - 1);
+	    	view_move_forward (view, vheight / 2 - 1);
 	    else
-	    	move_forward (view, 1);
+	    	view_move_forward (view, 1);
 	    *result = MOU_REPEAT; 
 	    return 1;
 	}

@@ -173,7 +173,8 @@ get_panel_widget (int index)
  * does.  I can not remember which problem the original routine was trying to address
  * when I did the "New {Left|Rigth} Panel" sections.
  */
-void save_panel_types (void)
+void
+save_panel_types (void)
 {
 	GList *p;
 	
@@ -185,6 +186,7 @@ void save_panel_types (void)
 }
 
 void configure_box (void);
+
 GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
@@ -202,7 +204,8 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("Select group"),      N_("Selects a group of files"), select_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Unselect group"),    N_("Un-selects a group of marked files"), select_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Reverse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
-	{ GNOME_APP_UI_SEPARATOR },	
+	{ GNOME_APP_UI_SEPARATOR },
+	{ GNOME_APP_UI_ITEM, N_("Close"),             N_("Close this panel"), gnome_close_panel },
 	{ GNOME_APP_UI_ITEM, N_("Exit"),              N_("Exit program"), gnome_quit_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_EXIT },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
@@ -287,6 +290,12 @@ gnome_init_panels ()
 }
 
 static void
+gnome_close_panel_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
+{
+	gnome_close_panel (widget, panel);
+}
+
+static void
 panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
 	/* Avoid unnecessary code execution */
@@ -319,7 +328,10 @@ create_container (Dlg_head *h, char *name)
 			    "enter_notify_event",
 			    GTK_SIGNAL_FUNC (panel_enter_event),
 			    panel);
-	
+	gtk_signal_connect (GTK_OBJECT (app),
+			    "delete_event",
+			    GTK_SIGNAL_FUNC (gnome_close_panel_event),
+			    panel);
 	/* Ultra nasty hack follows:
 	 * I am setting the panel->widget.wdata value here before the
 	 * panel X stuff gets created in the INIT message section of the

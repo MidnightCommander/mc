@@ -305,6 +305,9 @@ x_listbox_select_nth (WListbox *l, int nth)
 	
 	if (inside)
 		return;
+
+	if (!l->widget.wdata)
+		return;
 	
 	inside = 1;
 	clist = GTK_CLIST (l->widget.wdata);
@@ -338,6 +341,7 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 		inside = 0;
 		return;
 	}
+
 	
 	if (event->type == GDK_2BUTTON_PRESS){
 		switch (l->action){
@@ -357,8 +361,10 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 			}
 		}
 	}
+
+	/* Send an artificial DLG_POST_KEY */
 	if (event->type = GDK_BUTTON_PRESS){
-		
+		(*l->widget.parent->callback)(l->widget.parent, 0, DLG_POST_KEY);
 	}
 	inside = 0;
 }
@@ -386,7 +392,7 @@ x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 		text [0] = p->text;
 		gtk_clist_append (GTK_CLIST (listbox), text);
 	}
-	
+	x_listbox_select_nth (l, l->pos);
 	return 1;
 }
 

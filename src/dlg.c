@@ -279,11 +279,19 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 	    Widget_Item *point = where->current;
 
 	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
-	    
-	    where->current->next = point->next;
-	    where->current->prev = point;
-	    point->next->prev = where->current;
-	    point->next = where->current;
+
+	    if (point){
+		    where->current->next = point->next;
+		    where->current->prev = point;
+		    point->next->prev = where->current;
+		    point->next = where->current;
+	    } else {
+		    where->current->next = where->current;
+		    where->first = where->current;
+		    where->current->prev = where->first;
+		    where->last = where->current;
+		    where->first->next = where->last;
+	    }
     } else {
 	    back = where->current;
 	    where->current = (Widget_Item *) malloc (sizeof (Widget_Item));
@@ -315,6 +323,40 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 #endif
     }
     return (where->count - 1);
+}
+
+int remove_widget (Dlg_head *h, void *what)
+{
+    Widget_Item *first, *p;
+    
+    first = p = h->current;
+    
+    do {
+	if (p->widget == what){
+	    /* Remove links to this Widget_Item */
+	    p->prev->next = p->next;
+	    p->next->prev = p->prev;
+	    
+	    /* Make sure h->current is always valid */
+	    if (p == h->current){
+		h->current = h->current->next;
+		if (h->current == p)
+		    h->current = 0;
+	    }
+	    h->count--;
+	    free (p);
+	    return;
+	}
+	p = p->next;
+    } while (p != first);
+}
+
+int destroy_widget (Widget *w)
+{
+    send_message (w->parent, w, WIDGET_DESTROY, 0);
+    if (w->destroy)
+	w->destroy (w);
+    free (w);
 }
 
 int add_widget (Dlg_head *where, void *what)
