@@ -10,8 +10,9 @@
 #   - Generic comments added by Gettext  (white)
 #   - C-style format modifiers,
 #      as in c.syntax                    (brightgreen)
-#   + Messages marked as "fuzzy"         (red)
-#   + Untranslated messages              (red)
+#   - Messages marked as "fuzzy"         (brightred)
+#   - Untranslated messages              (brightred)
+#   - Unused messages                    (red)
 #
 # Author: David Martin <dmartina@excite.es>
 # August 17, 2001
@@ -29,7 +30,7 @@ context linestart #: \n white/26
 context linestart #, \n white/26
     keyword c-format yellow/24
 
-context linestart #~ \n gray/4
+context linestart #~ \n red/19
 
 context linestart # \n brown/22
     spellcheck

@@ -1,3 +1,8 @@
+2002-07-08  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/perl.syntax: Highlight text after __END__ as a comment.
+	* syntax/po.syntax: Avoid gray color, which is hard to see.
+
 2002-07-05  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/dos.syntax: Add more commands.
