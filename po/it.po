@@ -1588,15 +1588,15 @@ msgstr "Vai alla linea specificata"
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
-msgstr "_Monitorizza file"
+msgstr "_Controlla file"
 
 #: gnome/gview.c:309
 msgid "Monitor file growing"
-msgstr "Controlla la mod. dimensione file"
+msgstr "Controlla dimensione file"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
-msgstr "Cerca un'espressione regolare."
+msgstr "Cerca espr. regolare"
 
 #: gnome/gview.c:317
 msgid "Regular expression search"
@@ -1604,7 +1604,7 @@ msgstr "Cerca un'espressione regolare"
 
 #: gnome/gview.c:326
 msgid "_Wrap"
-msgstr "Envolver"
+msgstr "_A capo"
 
 #: gnome/gview.c:327
 msgid "Wrap the text"
@@ -2628,7 +2628,7 @@ msgstr "Niente"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
-msgstr "Formattazione dinamica paragrafi"
+msgstr "Paragrafi dinamici"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
@@ -2637,46 +2637,46 @@ msgstr "A capo automatico"
 #. 2
 #: gtkedit/editoptions.c:74
 msgid "Word wrap line length : "
-msgstr "Lunghezza linea del a capo automatico: "
+msgstr "Auto a capo colonna : "
 
 #. 4
 #: gtkedit/editoptions.c:80
 msgid "Tab spacing : "
-msgstr "Spaziatura tabulatori: "
+msgstr "Spaziatura tab : "
 
 #: gtkedit/editoptions.c:88
 msgid "synta&X highlighting"
-msgstr "Sintassi Evidenziata"
+msgstr "&Sintassi Evidenziata"
 
 #. 7
 #: gtkedit/editoptions.c:94
 msgid "confir&M before saving"
-msgstr "Conferma prima di salvare"
+msgstr "Conferma &Prima di salvare"
 
 #. 8
 #: gtkedit/editoptions.c:97
 msgid "fill tabs with &Spaces"
-msgstr "Riempie i tabulatori di spazi"
+msgstr "&Riempie i tabulatori di spazi"
 
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr "A capo autoindenta"
+msgstr "A &Capo autoindenta"
 
 #. 10
 #: gtkedit/editoptions.c:103
 msgid "&Backspace through tabs"
-msgstr "Backspace attraverso i tab"
+msgstr "&Backspace attraverso i tab"
 
 #. 11
 #: gtkedit/editoptions.c:106
 msgid "&Fake half tabs"
-msgstr "Imbroglia i mezzi tab"
+msgstr "&Imbroglia i mezzi tab"
 
 #. 13
 #: gtkedit/editoptions.c:112
 msgid "Wrap mode"
-msgstr "Envolver"
+msgstr "Modalità a capo"
 
 #. 15
 #: gtkedit/editoptions.c:118
@@ -2690,7 +2690,7 @@ msgstr " Opzioni editor"
 #. Not essential to translate
 #: gtkedit/editwidget.c:317
 msgid "Error initialising editor.\n"
-msgstr "Errore nell'inizializzazione dell'editor.\n"
+msgstr "Errore nell'inizializzazione editor.\n"
 
 #: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
 #: src/main.c:1715 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
