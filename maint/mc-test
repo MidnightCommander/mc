@@ -84,7 +84,7 @@ EOF
 
 while test $# -ne 0; do
 	case "$1" in
-		-config)		shift; . "$1"; shift;;
+		-config)		shift; case "$1" in /*) . "$1";; *) . "./$1";; esac; shift;;
 		-basedir)		shift; mc_basedir="$1"; shift;;
 		-cvs-repository)	shift; mc_cvs_repository="$1"; shift;;
 		-cvs-module)		shift; mc_cvs_module="$1"; shift;;
