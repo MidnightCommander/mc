@@ -1,3 +1,13 @@
+2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c: Allow username in URL (/#smb:[user@]machine) and
+	reformat changed functions.
+	(smbfs_get_host_and_username): Fix comment.
+	(smbfs_fill_names): Add username@ before hostname.
+	(smbfs_open_link): Use IPC$ if share is empty.
+	(smbfs_get_path): Pass remote_path to smbfs_open_link().
+	(smbfs_stat): Copy username@ to server_url if passed.
+
 2002-10-07  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* ftpfs.c (linear_abort): Add a timeout after which a reconnect
@@ -75,7 +85,7 @@
 
 2002-09-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* smbfs.c: Undef USE_NCURSES - no needs to include *curces.h.
+	* smbfs.c: Undef USE_NCURSES - no needs to include *curses.h.
 	(smbfs_loaddir): Fix warning.
 
 2002-09-21  Pavel Roskin  <proski@gnu.org>

@@ -323,7 +323,8 @@ smbfs_fill_names (vfs *me, void (*func)(char *))
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 	if (smbfs_connections [i].cli) {
 	    path = g_strconcat (URL_HEADER,
-		smbfs_connections[i].host, 
+		smbfs_connections[i].user, "@",
+		smbfs_connections[i].host,
 		"/", smbfs_connections[i].service,
 		NULL);
 	    (*func)(path);
@@ -845,30 +846,10 @@ smbfs_symlink (vfs *me, char *n1, char *n2)
 }
 
 /* Extract the hostname and username from the path */
-/* path is in the form: hostname:user/remote-dir */
-#if 0
-static char *
-smbfs_get_host_and_username
-(char **path, char **host, char **user, int *port, char **pass)
-{
-/*	char *p, *ret;	*/
-	char *ret;
-
-    ret = vfs_split_url (*path, host, user, port, pass, SMB_PORT, 0);
-
-#if 0
-	if ((p = strchr(*path, '@')))	/* user:pass@server */
-		*path = ++p;		/* don't want user:pass@ in path */
-	if ((p = strchr(ret, '@')))	/* user:pass@server */
-		ret = ++p;		/* don't want user:pass@ in path */
-#endif
-
-	return ret;
-}
-#else
+/* path is in the form: [user@]hostname/share/remote-dir */
 #define smbfs_get_host_and_username(path, host, user, port, pass) \
 	vfs_split_url (*path, host, user, port, pass, SMB_PORT, 0)
-#endif
+
 /***************************************************** 
 	return a connection to a SMB server
 	current_bucket needs to be set before calling
@@ -1031,150 +1012,147 @@ smbfs_get_free_bucket ()
 /* This routine keeps track of open connections */
 /* Returns a connected socket to host */
 static smbfs_connection *
-smbfs_open_link(char *host, char *path, const char *user, int *port, char *this_pass)
+smbfs_open_link (char *host, char *path, const char *user, int *port,
+		 char *this_pass)
 {
     int i;
     smbfs_connection *bucket;
     pstring service;
     struct in_addr *dest_ip = NULL;
 
-	DEBUG(3, ("smbfs_open_link(host:%s, path:%s)\n", host, path));
+    DEBUG (3, ("smbfs_open_link(host:%s, path:%s)\n", host, path));
 
-	if (strcmp(host, path) == 0)	/* if host & path are same: */
-		pstrcpy(service, IPC);		/* setup for browse */
-	else {	/* get share name from path, path starts with server name */
-		char *p;
-		if ((p = strchr(path, '/')))	/* get share aka				*/
-			pstrcpy(service, ++p);	/* service name from path		*/
-		else
-			pstrcpy(service, "");
-		/* now check for trailing directory/filenames	*/
-		p = strchr(service, '/');
-		if (p)
-			*p = 0;				/* cut off dir/files: sharename only */
+    if (strcmp (host, path) == 0)	/* if host & path are same: */
+	pstrcpy (service, IPC);		/* setup for browse */
+    else {			/* get share name from path, path starts with server name */
+	char *p;
+	if ((p = strchr (path, '/')))	/* get share aka                            */
+	    pstrcpy (service, ++p);	/* service name from path               */
+	else
+	    pstrcpy (service, "");
+	/* now check for trailing directory/filenames   */
+	p = strchr (service, '/');
+	if (p)
+	    *p = 0;		/* cut off dir/files: sharename only */
+	if (!*service)
+	    pstrcpy (service, IPC);	/* setup for browse */
+	DEBUG (6, ("smbfs_open_link: service from path:%s\n", service));
+    }
 
-		DEBUG(6, ("smbfs_open_link: service from path:%s\n", service));
-	}
-
-	if (got_user)
-		user = username;	/* global from getenv */
+    if (got_user)
+	user = username;	/* global from getenv */
 
     /* Is the link actually open? */
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
-		if (!smbfs_connections[i].cli)
-		    continue;
-		if ((strcmp (host, smbfs_connections [i].host) == 0) &&
-		    (strcmp (user, smbfs_connections [i].user) == 0) &&
-		    (strcmp (service, smbfs_connections [i].service) == 0)) {
-			int retries = 0;
-			BOOL inshare = (*host != 0 && *path != 0 && strchr(path, '/'));
-			/* check if this connection has died */
-			while (!chkpath(smbfs_connections[i].cli, "\\", !inshare)) {
-				if (!reconnect(&smbfs_connections[i], &retries))
-					return 0;
-			}
-			DEBUG(6, ("smbfs_open_link: returning smbfs_connection[%d]\n", i));
-			current_bucket = &smbfs_connections[i];
-			smbfs_connections [i].last_use = time(NULL);
-		    return &smbfs_connections [i];
-		}
-		/* connection not found, find if we have ip for new connection */
-		if (strcmp (host, smbfs_connections [i].host) == 0)
-			dest_ip = &smbfs_connections[i].cli->dest_ip;
+	if (!smbfs_connections[i].cli)
+	    continue;
+	if ((strcmp (host, smbfs_connections[i].host) == 0) &&
+	    (strcmp (user, smbfs_connections[i].user) == 0) &&
+	    (strcmp (service, smbfs_connections[i].service) == 0)) {
+	    int retries = 0;
+	    BOOL inshare = (*host != 0 && *path != 0 && strchr (path, '/'));
+	    /* check if this connection has died */
+	    while (!chkpath (smbfs_connections[i].cli, "\\", !inshare)) {
+		if (!reconnect (&smbfs_connections[i], &retries))
+		    return 0;
+	    }
+	    DEBUG (6, ("smbfs_open_link: returning smbfs_connection[%d]\n", i));
+	    current_bucket = &smbfs_connections[i];
+	    smbfs_connections[i].last_use = time (NULL);
+	    return &smbfs_connections[i];
+	}
+	/* connection not found, find if we have ip for new connection */
+	if (strcmp (host, smbfs_connections[i].host) == 0)
+	    dest_ip = &smbfs_connections[i].cli->dest_ip;
     }
 
-	/* make new connection */
+    /* make new connection */
     bucket = smbfs_get_free_bucket ();
-	bucket->name_type = 0x20;
+    bucket->name_type = 0x20;
     bucket->home = 0;
-	bucket->port = *port;
-	bucket->have_ip = False;
-	if (dest_ip) {
-		bucket->have_ip = True;
-		bucket->dest_ip = *dest_ip;
-	}
-	current_bucket = bucket;
+    bucket->port = *port;
+    bucket->have_ip = False;
+    if (dest_ip) {
+	bucket->have_ip = True;
+	bucket->dest_ip = *dest_ip;
+    }
+    current_bucket = bucket;
 
-	bucket->user = g_strdup(user);
-	bucket->service = g_strdup (service);
+    bucket->user = g_strdup (user);
+    bucket->service = g_strdup (service);
 
-	if (!(*host)) {		/* if blank host name, browse for servers */
-		if (!get_master_browser(&host))	/* set host to ip of master browser */
-			return 0;		/* couldnt find master browser? */
-		g_free (host);
-		bucket->host = g_strdup("");	/* blank host means master browser */
-	} else
-		bucket->host = g_strdup(host);
+    if (!(*host)) {		/* if blank host name, browse for servers */
+	if (!get_master_browser (&host))	/* set host to ip of master browser */
+	    return 0;		/* could not find master browser? */
+	g_free (host);
+	bucket->host = g_strdup ("");	/* blank host means master browser */
+    } else
+	bucket->host = g_strdup (host);
 
-	if (!bucket_set_authinfo (bucket,
-				  0,      /* domain currently not used */
-				  user, 
-				  this_pass, 
-				  1))
-		return 0;
+    if (!bucket_set_authinfo (bucket, 0,	/* domain currently not used */
+			      user, this_pass, 1))
+	return 0;
 
-	/* connect to share */
-    while (!(bucket->cli = smbfs_do_connect(host, service))) {
+    /* connect to share */
+    while (!(bucket->cli = smbfs_do_connect (host, service))) {
 
 	if (my_errno != EPERM)
-            return 0;
-	message_1s (1, MSG_ERROR,
-		_(" Authentication failed "));
+	    return 0;
+	message_1s (1, MSG_ERROR, _(" Authentication failed "));
 
-        /* authentication failed, try again */
+	/* authentication failed, try again */
 	authinfo_remove (bucket->host, bucket->service);
-	if (!bucket_set_authinfo (bucket,
-				  bucket->domain,
-				  bucket->user, 
-				  0, 
-                                  0))
-		return 0;
+	if (!bucket_set_authinfo (bucket, bucket->domain, bucket->user, 0, 0))
+	    return 0;
 
     }
 
     smbfs_open_connections++;
-    DEBUG(3, ("smbfs_open_link:smbfs_open_connections: %d\n",
-		smbfs_open_connections));
+    DEBUG (3, ("smbfs_open_link:smbfs_open_connections: %d\n",
+	       smbfs_open_connections));
     return bucket;
 }
 
 static char *
-smbfs_get_path(smbfs_connection **sc, char *path)
+smbfs_get_path (smbfs_connection ** sc, char *path)
 {
-	char *user, *host, *remote_path, *pass;
-	int port = SMB_PORT;
+    char *user, *host, *remote_path, *pass;
+    int port = SMB_PORT;
 
-	DEBUG(3, ("smbfs_get_path(%s)\n", path));
+    DEBUG (3, ("smbfs_get_path(%s)\n", path));
     if (strncmp (path, URL_HEADER, HEADER_LEN))
-        return NULL;
+	return NULL;
     path += HEADER_LEN;
 
-	if (*path == '/')	/* '/' leading server name */
-		path++;			/* probably came from server browsing */
+    if (*path == '/')		/* '/' leading server name */
+	path++;			/* probably came from server browsing */
 
-	if ((remote_path = smbfs_get_host_and_username(
-		&path, &host, &user, &port, &pass)))  
-		if ((*sc = smbfs_open_link (host, path, user, &port, pass)) == NULL){
-			g_free (remote_path);
-			remote_path = NULL;
-		}
+    if ((remote_path =
+	 smbfs_get_host_and_username (&path, &host, &user, &port, &pass)))
+	if ((*sc =
+	     smbfs_open_link (host, remote_path, user, &port, pass)) == NULL) {
+	    g_free (remote_path);
+	    remote_path = NULL;
+	}
     g_free (host);
     g_free (user);
-    if (pass) wipe_password (pass);
+    if (pass)
+	wipe_password (pass);
 
-    if (!remote_path) return NULL;
+    if (!remote_path)
+	return NULL;
 
     /* NOTE: tildes are deprecated. See ftpfs.c */
     {
-        int f = !strcmp( remote_path, "/~" );
-	    if (f || !strncmp( remote_path, "/~/", 3 )) {
-			char *s;
-	        s = concat_dir_and_file( (*sc)->home, remote_path +3-f );
-			g_free (remote_path);
-		return s;
-		}
+	int f = !strcmp (remote_path, "/~");
+	if (f || !strncmp (remote_path, "/~/", 3)) {
+	    char *s;
+	    s = concat_dir_and_file ((*sc)->home, remote_path + 3 - f);
+	    g_free (remote_path);
+	    return s;
 	}
-	return remote_path;
+    }
+    return remote_path;
 }
 
 #if 0
@@ -1457,95 +1435,100 @@ loaddir(vfs *me, const char *path)
 }
 
 static int
-smbfs_stat (vfs *me, char *path, struct stat *buf)
+smbfs_stat (vfs * me, char *path, struct stat *buf)
 {
-	char *remote_dir;
-	smbfs_connection *sc;
-	pstring server_url;
-	char *service, *pp;
-	const char *p;
+    smbfs_connection *sc;
+    pstring server_url;
+    char *service, *pp;
+    const char *p;
 
-	DEBUG(3, ("smbfs_stat(path:%s)\n", path));
+    DEBUG (3, ("smbfs_stat(path:%s)\n", path));
 
-#if 0
-	if (p = strchr(path, '@'))	/* user:pass@server */
-		path = ++p;		/* don't want user:pass@ in path */
-#endif
+    if (!current_info) {
+	DEBUG (1, ("current_info = NULL: "));
+	if (loaddir (me, path) < 0)
+	    return -1;
+    }
 
-	if (!current_info) {
-		DEBUG(1, ("current_info = NULL: "));
-		if (loaddir(me, path) < 0)
-			return -1;
+    /* check if stating server */
+    p = path;
+    if (strncmp (p, URL_HEADER, HEADER_LEN)) {
+	DEBUG (1, ("'%s' doesnt start with '%s' (length %d)\n",
+		   p, URL_HEADER, HEADER_LEN));
+	return -1;
+    }
+
+    p += HEADER_LEN;
+    if (*p == '/')
+	p++;
+
+    pp = strchr (p, '/');	/* advance past next '/' */
+
+    pstrcpy (server_url, URL_HEADER);
+    if (pp) {
+    	char *t = strchr (p, '@');
+	if (t && t < pp) {	/* user@server */
+	    *t = 0;
+	    pstrcat (server_url, p);
+	    pstrcat (server_url, "@");
+	    *t = '@';
 	}
+    }
+    pstrcat (server_url, current_bucket->host);
 
-	pstrcpy(server_url, URL_HEADER);
-	pstrcat(server_url, current_bucket->host);
-
-	/* check if stating server */
-	p = path;
-	if (strncmp(p, URL_HEADER, HEADER_LEN)) {
-		DEBUG(1, ("'%s' doesnt start with '%s' (length %d)\n",
-			p, URL_HEADER, HEADER_LEN));
+    if (!pp) {
+	if (!current_info->server_list) {
+	    if (loaddir (me, path) < 0)
 		return -1;
 	}
+	return fake_server_stat (server_url, path, buf);
+    }
+    if (!strchr (++pp, '/')) {
+	return fake_share_stat (server_url, path, buf);
+    }
 
-	p += HEADER_LEN;
-	if (*p == '/')
-		p++;
-	pp = strchr(p, '/');	/* advance past next '/' */
-	if (!pp) {
-		if (!current_info->server_list) {
-			if (loaddir(me, path) < 0)
-				return -1;
-		}
-		return fake_server_stat(server_url, path, buf);
-	}
-	if (!strchr(++pp, '/')) {
-		return fake_share_stat(server_url, path, buf);
-	}
+    /* stating inside share at this point */
+    if (!(service = smbfs_get_path (&sc, path)))  /* connects if necessary */
+	return -1;
+    {
+	int hostlen = strlen (current_bucket->host);
+	char *pp = service + strlen (service) - hostlen;
+	char *sp = server_url + strlen (server_url) - hostlen;
 
-	/* stating inside share at this point */
-	if (!(remote_dir = smbfs_get_path (&sc, path))) /* connects if necessary */
-		return -1;
-	g_free (remote_dir);
-	{
-		int hostlen = strlen(current_bucket->host);
-		char *pp = path + strlen(path)-hostlen;
-		char *sp = server_url + strlen(server_url)-hostlen;
-
-		if (strcmp(sp, pp) == 0) {
-			/* make server name appear as directory */
-			DEBUG(1, ("smbfs_stat: showing server as directory\n"));
-			memset(buf, 0, sizeof(struct stat));
-			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
-    		return 0;
-		}
+	if (strcmp (sp, pp) == 0) {
+	    /* make server name appear as directory */
+	    DEBUG (1, ("smbfs_stat: showing server as directory\n"));
+	    memset (buf, 0, sizeof (struct stat));
+	    buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+	    g_free (service);
+	    return 0;
 	}
-	/* check if current_info is in share requested */
-	p = service = g_strdup(p);
-	pp = strchr(p, '/');
-	if (pp) {
-		p = ++pp;	/* advance past server name */
-		pp = strchr(p, '/');
+    }
+    /* check if current_info is in share requested */
+    p = service;
+    pp = strchr (p, '/');
+    if (pp) {
+	p = ++pp;		/* advance past server name */
+	pp = strchr (p, '/');
+    }
+    if (pp)
+	*pp = 0;		/* cut off everthing after service name */
+    else
+	p = IPC;		/* browsing for services */
+    pp = current_info->dirname;
+    if (*pp == '/')
+	pp++;
+    if (strncmp (p, pp, strlen (p)) != 0) {
+	DEBUG (6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
+	if (loaddir (me, path) < 0) {
+	    g_free (service);
+	    return -1;
 	}
-	if (pp)
-		*pp = 0;	/* cut off everthing after service name */
-	else
-		p = IPC;	/* browsing for services */
-	pp = current_info->dirname;
-	if (*pp == '/');
-		pp++;
-	if (strncmp(p, pp, strlen(p)) != 0) {
-		DEBUG(6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
-		if (loaddir(me, path) < 0) {
-			g_free (service);
-			return -1;
-		}
-		DEBUG(6, ("loaded dir: '%s'\n", current_info->dirname));
-	}
-	g_free(service);
-	/* stat dirs & files under shares now */
-	return get_stat_info(sc, path, buf);
+	DEBUG (6, ("loaded dir: '%s'\n", current_info->dirname));
+    }
+    g_free (service);
+    /* stat dirs & files under shares now */
+    return get_stat_info (sc, path, buf);
 }
 
 #define smbfs_lstat smbfs_stat	/* no symlinks on smb filesystem? */
