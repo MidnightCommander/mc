@@ -525,13 +525,16 @@ void selection_send (XSelectionRequestEvent * rq)
 	 * On some systems, the Atom typedef is 64 bits wide.
 	 * We need to have a typedef that is exactly 32 bits wide,
 	 * because a format of 64 is not allowed by the X11 protocol.
+	 *
+	 * XXX: yes, but Xlib requires that you pass it 64 bits for 32bit
+	 * quantities on 64 bit archs.
 	 */
-	typedef CARD32 Atom32;
+	    /* typedef CARD32 Atom32; */
 
-	Atom32 target_list[2];
+	Atom target_list[2];
 
-	target_list[0] = (Atom32) xa_targets;
-	target_list[1] = (Atom32) XA_STRING;
+	target_list[0] = xa_targets;
+	target_list[1] = XA_STRING;
 
 	XChangeProperty (CDisplay, rq->requestor, rq->property,
 		xa_targets, 8 * sizeof (target_list[0]), PropModeReplace,
