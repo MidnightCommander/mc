@@ -1,5 +1,3 @@
-/* {{{ Copyright notice */
-
 /* Concurrent shell support for the Midnight Commander
    Copyright (C) 1994, 1995 Dugan Porter
 
@@ -17,12 +15,8 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/* }}} */
-
 #include <config.h>
 #ifdef HAVE_SUBSHELL_SUPPORT
-
-/* {{{ Declarations */
 
 #ifndef _GNU_SOURCE
 #   define _GNU_SOURCE 1
@@ -53,7 +47,7 @@
 #include "tty.h"	/* LINES */
 #include "panel.h"	/* cpanel */
 #include "wtools.h"	/* query_dialog() */
-#include "main.h"	/* update_prompt() */
+#include "main.h"	/* do_update_prompt() */
 #include "cons.saver.h"	/* handle_console() */
 #include "key.h"	/* XCTRL */
 #include "subshell.h"
@@ -76,9 +70,6 @@ static void synchronize (void);
 static int pty_open_master (char *pty_name);
 static int pty_open_slave (const char *pty_name);
 static int resize_tty (int fd);
-
-/* }}} */
-/* {{{ Definitions */
 
 #ifndef STDIN_FILENO
 #    define STDIN_FILENO 0
@@ -127,9 +118,6 @@ char *subshell_prompt = NULL;
 /* For pipes */
 enum {READ=0, WRITE=1};
 
-
-/* Local variables */
-
 static char *pty_buffer;	/* For reading/writing on the subshell's pty */
 static int pty_buffer_size;	/* The buffer grows as needed */
 static int subshell_pipe[2];	/* To pass CWD info from the subshell to MC */
@@ -160,22 +148,6 @@ static struct termios raw_mode;
 /* FIXME: try to figure out why this had to become global */
 static int prompt_pos;
 
-/* }}} */
-
-#ifdef HAVE_GRANTPT
-#    define SYNC_PTY_SIDES
-#else
-#    define SYNC_PTY_SIDES
-#endif
-
-#undef SYNC_PTY_SIDES
-
-#ifdef SYNC_PTY_SIDES
-/* Handler for SIGUSR1 (used below), does nothing but accept the signal */
-static void sigusr1_handler (int sig)
-{
-}
-#endif
 
 /*
  *  Prepare child process to running the shell and run it.
@@ -195,7 +167,7 @@ static void init_subshell_child (const char *pty_name)
 	
     setsid ();  /* Get a fresh terminal session */
 
-    /* {{{ Open the slave side of the pty: again */
+    /* Open the slave side of the pty: again */
     pty_slave = pty_open_slave (pty_name);
 
     /* This must be done before closing the master side of the pty, */
@@ -209,13 +181,7 @@ static void init_subshell_child (const char *pty_name)
 
     close (subshell_pty);
 
-#ifdef SYNC_PTY_SIDES
-    /* Give our parent process (MC) the go-ahead */
-    kill (getppid (), SIGUSR1);
-#endif
-
-    /* }}} */
-    /* {{{ Make sure that it has become our controlling terminal */
+    /* Make sure that it has become our controlling terminal */
 
     /* Redundant on Linux and probably most systems, but just in case: */
 
@@ -223,8 +189,7 @@ static void init_subshell_child (const char *pty_name)
     ioctl (pty_slave, TIOCSCTTY, 0);
 #endif
 
-    /* }}} */
-    /* {{{ Configure its terminal modes and window size */
+    /* Configure its terminal modes and window size */
 
     /* Set up the pty with the same termios flags as our own tty, plus  */
     /* TOSTOP, which keeps background processes from writing to the pty */
@@ -240,8 +205,7 @@ static void init_subshell_child (const char *pty_name)
     /* size of the real terminal as calculated by ncurses, if possible */
     resize_tty (pty_slave);
 
-    /* }}} */
-    /* {{{ Set up the subshell's environment and init file name */
+    /* Set up the subshell's environment and init file name */
 
     /* It simplifies things to change to our home directory here, */
     /* and the user's startup file may do a `cd' command anyway   */
@@ -273,14 +237,9 @@ static void init_subshell_child (const char *pty_name)
 
 	    break;
 
-	case TCSH:
-	    init_file = ".mc/tcshrc";
-	    if (access (init_file, R_OK) == -1)
-		init_file += 3;
-	break;
-
-	case ZSH:
-	    break;
+	/* TODO: Find a way to pass initfile to TCSH and ZSH */
+	case TCSH: case ZSH:
+      	    break;
 
 	default:
 	    fprintf (stderr, __FILE__": unimplemented subshell type %d\n",
@@ -288,8 +247,7 @@ static void init_subshell_child (const char *pty_name)
 	    _exit (FORK_FAILURE);
     }
 
-    /* }}} */
-    /* {{{ Attach all our standard file descriptors to the pty */
+    /* Attach all our standard file descriptors to the pty */
 
     /* This is done just before the fork, because stderr must still	 */
     /* be connected to the real tty during the above error messages; */
@@ -299,8 +257,7 @@ static void init_subshell_child (const char *pty_name)
     dup2 (pty_slave, STDOUT_FILENO);
     dup2 (pty_slave, STDERR_FILENO);
 
-    /* }}} */
-    /* {{{ Execute the subshell at last */
+    /* Execute the subshell at last */
 
     close (subshell_pipe[READ]);
     close (pty_slave);  /* These may be FD_CLOEXEC, but just in case... */
@@ -312,23 +269,19 @@ static void init_subshell_child (const char *pty_name)
 	    break;
 
         case TCSH:
-	    execl (shell, "tcsh", NULL);  /* What's the -rcfile equivalent? */
+	    execl (shell, "tcsh", NULL);
 	    break;
 
         case ZSH:
-	    /* change from "+Z" to "-Z" by Michael Bramer
-	     * (Debian-mc-maintainer) <grisu@debian.org> from a patch from
-	     * Radovan Garabik <garabik@center.fmph.uniba.sk>
-	     */
-	    execl (shell, "zsh", "-Z", NULL);
+	    /* Use -g to exclude cmds beginning with space from history
+	     * and -Z to use the line editor on non-interactive term */
+	    execl (shell, "zsh", "-Z", "-g", NULL);
 
 	    break;
     }
 
     /* If we get this far, everything failed miserably */
     _exit (FORK_FAILURE);
-
-    /* }}} */
 }
 
 
@@ -377,8 +330,6 @@ check_sid ()
 #endif				/* HAVE_GETSID */
 
 
-/* {{{ init_subshell */
-
 /*
  *  Fork the subshell, and set up many, many things.
  *
@@ -390,10 +341,9 @@ check_sid ()
 
 void init_subshell (void)
 {
-    /* {{{ Local variables */
-
     /* This must be remembered across calls to init_subshell() */
     static char pty_name[BUF_SMALL];
+    char precmd[BUF_SMALL];
     int pty_slave = -1;
 
 #ifdef HAVE_GETSID
@@ -408,22 +358,15 @@ void init_subshell (void)
     }
 #endif				/* HAVE_GETSID */
     
-#ifdef SYNC_PTY_SIDES
-	/* Used to wait for a SIGUSR1 signal from the subprocess */
-	sigset_t sigusr1_mask, old_mask;
-#endif
-
-    /* }}} */
-
     /* Take the current (hopefully pristine) tty mode and make */
     /* a raw mode based on it now, before we do anything else with it */
     init_raw_mode ();
 
     if (subshell_pty == 0)  /* First time through */
     {
-	/* {{{ Find out what type of shell we have */
+	/* Find out what type of shell we have */
 
-	if (strstr (shell, "/zsh"))
+	if (strstr (shell, "/zsh") || getenv("ZSH_VERSION"))
 	    subshell_type = ZSH;
 	else if (strstr (shell, "/tcsh"))
 	    subshell_type = TCSH;
@@ -435,8 +378,7 @@ void init_subshell (void)
 	    return;
 	}
 
-	/* }}} */
-	/* {{{ Open a pty for talking to the subshell */
+	/* Open a pty for talking to the subshell */
 
 	/* FIXME: We may need to open a fresh pty each time on SVR4 */
 
@@ -457,15 +399,12 @@ void init_subshell (void)
 	    return;
 	}
 
-
-	/* }}} */
-	/* {{{ Initialise the pty's I/O buffer */
+	/* Initialise the pty's I/O buffer */
 
 	pty_buffer_size = INITIAL_PTY_BUFFER_SIZE;
 	pty_buffer = (char *) g_malloc (pty_buffer_size);
 
-	/* }}} */
-	/* {{{ Create a pipe for receiving the subshell's CWD */
+	/* Create a pipe for receiving the subshell's CWD */
 
 	if (subshell_type == TCSH)
 	{
@@ -496,21 +435,9 @@ void init_subshell (void)
 		use_subshell = FALSE;
 		return;
 	    }
-
-	/* }}} */
     }
 
-    /* {{{ Define a handler for the sigusr1 signal */
-
-#ifdef SYNC_PTY_SIDES
-	sigemptyset (&sigusr1_mask);
-	sigaddset (&sigusr1_mask, SIGUSR1);
-	sigprocmask (SIG_BLOCK, &sigusr1_mask, &old_mask);
-	signal (SIGUSR1, sigusr1_handler);
-#endif
-
-    /* }}} */
-    /* {{{ Fork the subshell */
+    /* Fork the subshell */
 
     subshell_alive = TRUE;
     subshell_stopped = FALSE;
@@ -524,8 +451,6 @@ void init_subshell (void)
 	exit (1);
     }
 
-   /* }}} */
-
     if (subshell_pid == 0)  /* We are in the child process */
     {
 	init_subshell_child (pty_name);
@@ -536,57 +461,30 @@ void init_subshell (void)
 	close(pty_slave);
     }
 
-#ifdef SYNC_PTY_SIDES
-	sigsuspend (&old_mask);
-	signal (SIGUSR1, SIG_DFL);
-	sigprocmask (SIG_SETMASK, &old_mask, NULL);
-	/* ...before installing our handler for SIGCHLD. */
-#endif
-
-#if 0
-    /* {{{ Install our handler for SIGCHLD */
-
-    init_sigchld ();
-
-    /* We could have received the SIGCHLD signal for the subshell 
-     * before installing the init_sigchld */
-    pid = waitpid (subshell_pid, &status, WUNTRACED | WNOHANG);
-    if (pid == subshell_pid){
-	use_subshell = FALSE;
-	return;
-    }
-
-    /* }}} */
-#endif
-
-    /* {{{ Set up `precmd' or equivalent for reading the subshell's CWD */
+    /* Set up `precmd' or equivalent for reading the subshell's CWD */
 
     switch (subshell_type)
     {
-	char precmd[BUF_SMALL];
-
-	case BASH:
+    case BASH:
 	g_snprintf (precmd, sizeof (precmd), " PROMPT_COMMAND='pwd>&%d;kill -STOP $$'\n",
-		 subshell_pipe[WRITE]);
-	goto write_it;
-
-	case ZSH:
-	g_snprintf (precmd, sizeof (precmd), "precmd(){ pwd>&%d;kill -STOP $$ }\n",
-		 subshell_pipe[WRITE]);
-	goto write_it;
-
-	case TCSH:
+		    subshell_pipe[WRITE]);
+	break;
+	
+    case ZSH:
+	g_snprintf (precmd, sizeof (precmd), " precmd(){ pwd>&%d;kill -STOP $$ }\n",
+		    subshell_pipe[WRITE]);
+	break;
+	
+    case TCSH:
 	g_snprintf (precmd, sizeof (precmd),
 		    "set echo_style=both;"
 		    "alias precmd 'echo $cwd:q >>%s;kill -STOP $$'\n",
 		    tcsh_fifo);
-
-	write_it:
-	write (subshell_pty, precmd, strlen (precmd));
+	break;
     }
+    write (subshell_pty, precmd, strlen (precmd));
 
-    /* }}} */
-    /* {{{ Wait until the subshell has started up and processed the command */
+    /* Wait until the subshell has started up and processed the command */
 
     subshell_state = RUNNING_COMMAND;
     enable_interrupt_key ();
@@ -596,11 +494,8 @@ void init_subshell (void)
     disable_interrupt_key ();
     if (!subshell_alive)
 	use_subshell = FALSE;  /* Subshell died instantly, so don't use it */
-
-    /* }}} */
 }
 
-/* }}} */
 
 static void init_raw_mode ()
 {
@@ -627,15 +522,11 @@ static void init_raw_mode ()
     }
 }
 
-/* {{{ invoke_subshell */
 
 int invoke_subshell (const char *command, int how, char **new_dir)
 {
-    /* {{{ Make the MC terminal transparent */
-
+    /* Make the MC terminal transparent */
     tcsetattr (STDOUT_FILENO, TCSANOW, &raw_mode);
-
-    /* }}} */
     
     /* Make the subshell change to MC's working directory */
     if (new_dir)
@@ -676,13 +567,9 @@ int invoke_subshell (const char *command, int how, char **new_dir)
     return quit;
 }
 
-/* }}} */
-/* {{{ read_subshell_prompt */
 
 int read_subshell_prompt (void)
 {
-    /* {{{ Local variables */
-
     static int prompt_size = INITIAL_PROMPT_SIZE;
     int bytes = 0, i, rc = 0;
     struct timeval timeleft = {0, 0};
@@ -690,8 +577,6 @@ int read_subshell_prompt (void)
     fd_set tmp;
     FD_ZERO (&tmp);
     FD_SET (subshell_pty, &tmp);
-
-    /* }}} */
 
     if (subshell_prompt == NULL)  /* First time through */
     {
@@ -703,8 +588,7 @@ int read_subshell_prompt (void)
     while (subshell_alive &&
 	   (rc = select (subshell_pty + 1, &tmp, NULL, NULL, &timeleft)))
     {
-	/* {{{ Check for `select' errors */
-
+	/* Check for `select' errors */
 	if (rc == -1) {
 	    if (errno == EINTR)
 		continue;
@@ -715,11 +599,9 @@ int read_subshell_prompt (void)
 	    }
 	}
 
-	/* }}} */
-
 	bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
 
-	/* {{{ Extract the prompt from the shell output */
+	/* Extract the prompt from the shell output */
 
 	for (i=0; i<bytes; ++i)
 	    if (pty_buffer[i] == '\n' || pty_buffer[i] == '\r'){
@@ -735,8 +617,6 @@ int read_subshell_prompt (void)
 	    }
 
 	subshell_prompt[prompt_pos] = '\0';
-
-	/* }}} */
     }
     if (rc == 0 && bytes == 0)
 	return FALSE;
@@ -785,7 +665,6 @@ int exit_subshell (void)
     return quit;
 }
 
-/* }}} */
 
 /*
  * Carefully quote directory name to allow entering any directory safely,
@@ -871,8 +750,6 @@ subshell_name_quote (const char *s)
 }
 
 
-
-/* {{{ do_subshell_chdir */
 /* If it actually changed the directory it returns true */
 void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
 {
@@ -918,12 +795,10 @@ void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     /* like /usr////lib/../bin, or the strcmp() above will fail */
 }
 
-/* }}} */
-/* {{{ subshell_get_console_attributes */
 
 void subshell_get_console_attributes (void)
 {
-    /* {{{ Get our current terminal modes */
+    /* Get our current terminal modes */
 
     if (tcgetattr (STDOUT_FILENO, &shell_mode))
     {
@@ -931,16 +806,11 @@ void subshell_get_console_attributes (void)
 	use_subshell = FALSE;
 	return;
     }
-
-    /* }}} */
 }
 
-/* }}} */
-/* {{{ sigchld_handler */
 
 /* Figure out whether the subshell has stopped, exited or been killed */
 /* Possibly modifies: `subshell_alive', `subshell_stopped' and `quit' */
-
 void
 sigchld_handler (int sig)
 {
@@ -991,15 +861,10 @@ sigchld_handler (int sig)
 #endif
 }
 
-/* }}} */
-
-/* {{{ feed_subshell */
 
 /* Feed the subshell our keyboard input until it says it's finished */
-
 static int feed_subshell (int how, int fail_on_error)
 {
-    /* {{{ Local variables */
     fd_set read_set;	/* For `select' */
     int maxfdp;
     int bytes;		/* For the return value from `read' */
@@ -1007,7 +872,6 @@ static int feed_subshell (int how, int fail_on_error)
     
     struct timeval wtime; /* Maximum time we wait for the subshell */
     struct timeval *wptr;
-    /* }}} */
 
     /* we wait up to 10 seconds if fail_on_error, forever otherwise */
     wtime.tv_sec = 10;
@@ -1018,7 +882,7 @@ static int feed_subshell (int how, int fail_on_error)
 	if (!subshell_alive)
 	    return FALSE;
 
-	/* {{{ Prepare the file-descriptor set and call `select' */
+	/* Prepare the file-descriptor set and call `select' */
 
 	FD_ZERO (&read_set);
 	FD_SET (subshell_pty, &read_set);
@@ -1038,10 +902,9 @@ static int feed_subshell (int how, int fail_on_error)
 	    perror ("\n"__FILE__": select (FD_SETSIZE, &read_set...)");
 	    exit (1);
 	}
-	/* }}} */
 
 	if (FD_ISSET (subshell_pty, &read_set))
-	    /* {{{ Read from the subshell, write to stdout */
+	    /* Read from the subshell, write to stdout */
 
 	    /* This loop improves performance by reducing context switches
                by a factor of 20 or so... unfortunately, it also hangs MC
@@ -1065,10 +928,8 @@ static int feed_subshell (int how, int fail_on_error)
 		    write (STDOUT_FILENO, pty_buffer, bytes);
 	    }
 
-	    /* }}} */
-
 	else if (FD_ISSET (subshell_pipe[READ], &read_set))
-	    /* {{{ Read the subshell's CWD and capture its prompt */
+	    /* Read the subshell's CWD and capture its prompt */
 
 	    {
 		bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN+1);
@@ -1091,11 +952,8 @@ static int feed_subshell (int how, int fail_on_error)
 		}
 	    }
 
-	    /* }}} */
-
 	else if (FD_ISSET (STDIN_FILENO, &read_set))
-	    /* {{{ Read from stdin, write to the subshell */
-
+	    /* Read from stdin, write to the subshell */
 	    {
 		bytes = read (STDIN_FILENO, pty_buffer, pty_buffer_size);
 		if (bytes <= 0)
@@ -1119,17 +977,12 @@ static int feed_subshell (int how, int fail_on_error)
 	    } else {
 		return FALSE;
 	    }
-
-	    /* }}} */
     }
 }
 
-/* }}} */
-/* {{{ synchronize */
 
 /* Wait until the subshell dies or stops.  If it stops, make it resume.  */
 /* Possibly modifies the globals `subshell_alive' and `subshell_stopped' */
-
 static void synchronize (void)
 {
     sigset_t sigchld_mask, old_mask;
@@ -1158,12 +1011,11 @@ static void synchronize (void)
     /* We can't do any better without modifying the shell(s) */
 }
 
-/* }}} */
-/* {{{ pty opening functions */
+/* pty opening functions */
 
 #ifdef SCO_FLAVOR
 
-/* {{{ SCO version of pty_open_master */
+/* SCO version of pty_open_master */
 
 static int pty_open_master (char *pty_name)
 {
@@ -1194,8 +1046,7 @@ static int pty_open_master (char *pty_name)
     return -1;  /* Ran out of pty devices */
 }
 
-/* }}} */
-/* {{{ SCO version of pty_open_slave */
+/* SCO version of pty_open_slave */
 
 static int pty_open_slave (const char *pty_name)
 {
@@ -1214,11 +1065,9 @@ static int pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 
-/* }}} */
-
 #elif HAVE_GRANTPT /* !HAVE_SCO */
 
-/* {{{ System V version of pty_open_master */
+/* System V version of pty_open_master */
 
 static int pty_open_master (char *pty_name)
 {
@@ -1250,9 +1099,7 @@ static int pty_open_master (char *pty_name)
     return pty_master;
 }
 
-/* }}} */
-/* {{{ System V version of pty_open_slave */
-
+/* System V version of pty_open_slave */
 static int pty_open_slave (const char *pty_name)
 {
     int pty_slave = open (pty_name, O_RDWR);
@@ -1296,12 +1143,9 @@ static int pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 
-/* }}} */
-
 #else /* !HAVE_SCO && !HAVE_GRANTPT */
 
-/* {{{ BSD version of pty_open_master */
-
+/* BSD version of pty_open_master */
 static int pty_open_master (char *pty_name)
 {
     int pty_master;
@@ -1334,9 +1178,7 @@ static int pty_open_master (char *pty_name)
     return -1;  /* Ran out of pty devices */
 }
 
-/* }}} */
-/* {{{ BSD version of pty_open_slave */
-
+/* BSD version of pty_open_slave */
 static int pty_open_slave (const char *pty_name)
 {
     int pty_slave;
@@ -1354,20 +1196,5 @@ static int pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 
-/* }}} */
-
 #endif /* !HAVE_SCO && !HAVE_GRANTPT */
-
-/* }}} */
-
 #endif /* HAVE_SUBSHELL_SUPPORT */
-
-/* {{{ Emacs local variables */
-
-/*
-  Cause emacs to enter folding mode for this file:
-  Local variables:
-  end:
-*/
-
-/* }}} */

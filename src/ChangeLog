@@ -1,3 +1,11 @@
+2003-03-22  Adam Byrtek  <alpha@debian.org>
+
+	* subshell.c: Remove dead code (SYNC_PTY_SIDES).
+	(init_subshell_child): Remove dead code (initfile for TCSH).
+	(init_subshell): Use ZSH_VERSION environment variable to detect
+	ZSH.  Use -g option to zsh to hide entries beginning with space
+	from history.  Add space before ZSH precmd to hide it.
+
 2003-03-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (get_line_at): Return unreversed line for backward
@@ -24,7 +32,7 @@
 	* key.c: Use fputs() instead of fprintf().
 	(func_XOpenDisplay) [HAVE_GMODULE]: Move to init_key_x11().
 	(get_modifier) [__QNXNTO__]: Use g_snprintf() instead of unsafe
-	sprintf(). 
+	sprintf().
 
 2003-03-10  Pavel Roskin  <proski@gnu.org>
 
