@@ -210,7 +210,7 @@ vfs_s_entry *vfs_s_automake(vfs *me, vfs_s_inode *dir, char *path, int flags)
 vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
 {
     unsigned int pseg;
-    vfs_s_entry* ent = NULL;
+    vfs_s_entry *ent = NULL;
     int found;
     char *p;
     p = strdup (path);
@@ -235,7 +235,7 @@ vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int f
 	    ent = vfs_s_automake(me, root, path, flags);
 	if (!ent) ERRNOR (ENOENT, NULL);
 	path += pseg;
-	if (!vfs_s_resolve_symlink(me, ent, p, follow)) {
+	if (!(ent = vfs_s_resolve_symlink(me, ent, p, follow))) {
 	    free (p);
 	    return NULL;
 	}
