@@ -1026,8 +1026,7 @@ is_idle (void)
 #endif
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
-    select (maxfdp, &select_set, 0, 0, &timeout);
-    return !FD_ISSET (0, &select_set);
+    return (select (maxfdp + 1, &select_set, 0, 0, &timeout) <= 0);
 }
 
 

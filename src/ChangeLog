@@ -1,3 +1,8 @@
+2003-01-27  Arpi  <arpi@mplayerhq.hu>
+
+	* key.c (is_idle): Correct maximal file descriptor and return
+	value.
+
 2003-01-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* util.h (app_text): Remove declaration - it became static.
