@@ -1,6 +1,6 @@
 1998-12-30  Jeff Garzik  <jgarzik@pobox.com>
 
-	* gprop.c: s/g_copy_strings/g_strconcat/
+	* gprop.c, gpopup.c: s/g_copy_strings/g_strconcat/
 
 1998-12-30  Jonathan Blandford  <jrb@redhat.com>
 

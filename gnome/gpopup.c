@@ -91,7 +91,7 @@ desktop_icon_properties (GtkWidget *widget, desktop_icon_info *dii)
 	int retval;
 	char *path;
 	
-	path = g_copy_strings (getenv("HOME"), "/desktop/", dii->filename, NULL);
+	path = g_strconcat (getenv("HOME"), "/desktop/", dii->filename, NULL);
 	retval = item_properties (dii->dicon, path, dii);
 	g_free(path);
 	if (retval)
