@@ -747,7 +747,6 @@ static void
 desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
 	in_desktop_dnd = 0;
-	printf ("!!!!!!!! drag end!\n");
 	destroy_shaped_dnd_windows ();
 }
 
@@ -906,12 +905,15 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 	/* 1. Drag and drop functionality */
 	connect_drop_signals (di->widget, di);
 	gtk_widget_dnd_drop_set (di->widget, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
-
+	
 	/* 2. Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (di->widget), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
 
 	if (show)
 		gtk_widget_show (di->widget);
+
+	/* lower the window */
+	gdk_window_lower (di->widget->window);
 }
 
 /* Pops up the icon properties pages */
