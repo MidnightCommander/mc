@@ -879,7 +879,7 @@ ftpfs_initconn (struct vfs_class *me, struct vfs_s_super *super)
 {
     struct sockaddr_in data_addr;
     int data;
-    int len = sizeof(data_addr);
+    socklen_t len = sizeof(data_addr);
     struct protoent *pe;
 
     pe = getprotobyname ("tcp");
@@ -929,7 +929,8 @@ ftpfs_open_data_connection (struct vfs_class *me, struct vfs_s_super *super, con
 		      const char *remote, int isbinary, int reget)
 {
     struct sockaddr_in from;
-    int s, j, data, fromlen = sizeof(from);
+    int s, j, data;
+    socklen_t fromlen = sizeof(from);
     
     if ((s = ftpfs_initconn (me, super)) == -1)
         return -1;

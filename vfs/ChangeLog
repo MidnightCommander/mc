@@ -1,3 +1,8 @@
+2004-10-27  Roland Illig  <roland.illig@gmx.de>
+
+	* ftpfs.c (ftpfs_initconn): Replace int with socklen_t where
+	appropriate. (ftpfs_open_data_connection): Likewise.
+
 2004-10-27  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* tar.c tar_read_header(): q should not point to a static string.
