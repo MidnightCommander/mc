@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2002-12-26 11:46-0500\n"
+"POT-Creation-Date: 2002-12-26 16:32-0500\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -214,11 +214,11 @@ msgstr " Блок слишком велик, вам может не удастся откатить эту операцию "
 msgid "O&ne"
 msgstr "&Один"
 
-#: edit/editcmd.c:1107 src/file.c:2253 src/filegui.c:539
+#: edit/editcmd.c:1107 src/file.c:2241 src/filegui.c:539
 msgid "A&ll"
 msgstr "&Все"
 
-#: edit/editcmd.c:1109 src/file.c:2190 src/filegui.c:227
+#: edit/editcmd.c:1109 src/file.c:2178 src/filegui.c:227
 msgid "&Skip"
 msgstr "П&ропустить"
 
@@ -323,13 +323,13 @@ msgstr " Файл был изменен, сохранить при выходе? "
 msgid "Cancel quit"
 msgstr "Прервать выход"
 
-#: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1860 src/file.c:2252
+#: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
 #: src/filegui.c:544 src/hotlist.c:1029 src/main.c:627 src/screen.c:1951
 #: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Да"
 
-#: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1860 src/file.c:2252
+#: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
 #: src/filegui.c:543 src/hotlist.c:1029 src/main.c:627 src/screen.c:1952
 #: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&No"
@@ -845,7 +845,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Фоновый процесс:"
 
-#: src/background.c:275 src/file.c:2188
+#: src/background.c:275 src/file.c:2176
 msgid " Background process error "
 msgstr " Ошибка фонового процесса "
 
@@ -1812,7 +1812,7 @@ msgstr ""
 " Невозможно скопировать циклическую символическую ссылку \n"
 " `%s' "
 
-#: src/file.c:972 src/file.c:2022 src/tree.c:705
+#: src/file.c:972 src/file.c:2015 src/tree.c:705
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1964,23 +1964,23 @@ msgstr " с исходным шаблоном:"
 msgid " to:"
 msgstr " в:"
 
-#: src/file.c:1844
+#: src/file.c:1843
 msgid " Cannot operate on \"..\"! "
 msgstr " Эту операцию невозможно выполнить на \"..\"! "
 
-#: src/file.c:1914
+#: src/file.c:1907
 msgid " Sorry, I could not put the job in background "
 msgstr " Извините, сделать это в фоновом режиме невозможно "
 
-#: src/file.c:2190 src/view.c:476
+#: src/file.c:2178 src/view.c:476
 msgid "&Retry"
 msgstr "По&вторить"
 
-#: src/file.c:2191 src/file.c:2254 src/filegui.c:224 src/filegui.c:535
+#: src/file.c:2179 src/file.c:2242 src/filegui.c:224 src/filegui.c:535
 msgid "&Abort"
 msgstr "&Прервать"
 
-#: src/file.c:2243
+#: src/file.c:2231
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -1990,7 +1990,7 @@ msgstr ""
 "   Каталог не пуст.    \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2245
+#: src/file.c:2233
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2000,11 +2000,11 @@ msgstr ""
 "   Фоновый процесс: каталог не пуст \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2247
+#: src/file.c:2235
 msgid " Delete: "
 msgstr " Удалить: "
 
-#: src/file.c:2253 src/filegui.c:537
+#: src/file.c:2241 src/filegui.c:537
 msgid "Non&e"
 msgstr "ни &Одного"
 
