@@ -1,3 +1,8 @@
+2001-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* main.h: Use "ifdef HAVE_GNOME", not "if HAVE_GNOME". Fix the
+	order of conditionals and put comments on endifs.
+
 2001-06-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c [HAVE_CHARSET]: Include selcodepage.h.

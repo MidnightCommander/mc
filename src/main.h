@@ -74,7 +74,7 @@ extern int display_codepage;
 #else
 extern int eight_bit_clean;
 extern int full_eight_bits;
-#endif
+#endif /* !HAVE_CHARSET */
 
 extern int confirm_view_dir;
 extern int fast_refresh;
@@ -106,7 +106,7 @@ extern char search_buffer [256];
 extern char cmd_buf [512];
 extern char *cmdline_geometry;
 
-#if HAVE_GNOME
+#ifdef HAVE_GNOME
 #define MENU_PANEL get_current_panel ()
 #define SELECTED_IS_PANEL 1
 #else
@@ -114,7 +114,7 @@ extern char *cmdline_geometry;
 extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
-#endif
+#endif /* !HAVE_GNOME */
 
 /* Useful macros to avoid too much typing */
 #define cpanel get_current_panel()
@@ -186,7 +186,7 @@ extern WMenu      *the_menubar;
 
 extern Dlg_head *midnight_dlg;
 
-#endif
+#endif /* WANT_WIDGETS */
 
 void edition_pre_exec (void);
 void edition_post_exec (void);
@@ -199,8 +199,7 @@ void exec_shell (void);
 #    define MC_BASE ""
 #else
 #    define MC_BASE "/.mc/"
-#endif
-#endif
+#endif /* !OS2_NT */
 
 /* Back hack to define the following routines only if the client code
  * has included panel.h
@@ -213,5 +212,7 @@ void directory_history_add   (WPanel *panel, char *s);
 int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
 void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
 int  midnight_callback       (struct Dlg_head *h, int id, int msg);
-#endif
-#endif
+#endif /* !PANEL_DEFS_DONE */
+#endif /* __PANEL_H */
+
+#endif /* !__MAIN_H */
