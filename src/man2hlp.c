@@ -629,8 +629,6 @@ handle_link (char *buffer)
 	} else {
 	    current_link = &links;
 	}
-	while (*buffer == ' ')
-	    buffer++;
 	current_link->linkname = strdup (buffer);
 	current_link->filename = c_in;
 	current_link->line = in_row;
