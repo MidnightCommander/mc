@@ -46,6 +46,8 @@ vfs_s_inode *vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat
     ino->ent = NULL;
     ino->flags = 0;
     ino->st.st_nlink = 0;
+    ino->st.st_ino = MEDATA->inode_counter++;
+    ino->st.st_dev = MEDATA->rdev;
 
     super->fd_usage++;
     total_inodes++;
@@ -146,8 +148,8 @@ struct stat *vfs_s_default_stat (vfs *me, mode_t mode)
     mode &= ~myumask;
 
     st.st_mode = mode;
-    st.st_ino = MEDATA->inode_counter++;
-    st.st_dev = MEDATA->rdev;
+    st.st_ino = 0;
+    st.st_dev = 0;
     st.st_rdev = 0;
     st.st_uid = getuid ();
     st.st_gid = getgid ();

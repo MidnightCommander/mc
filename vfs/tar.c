@@ -119,6 +119,8 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     root->st.st_mode = mode;
     root->u.tar.data_offset = -1;
     root->st.st_nlink++;
+    root->st.st_dev = MEDATA->rdev++;
+
     vfs_s_add_dots (me, root, NULL);
     archive->root = root;
 
