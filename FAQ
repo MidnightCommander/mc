@@ -71,32 +71,35 @@ Frequently Asked Questions
           + 7.6 Why aren't the contents of ftp panel updated?
           + 7.7 What kind of proxy server works with Midnight Commander?
 
-     * 8 Other common problems
+     * 8 Internal editor
           + 8.1 How do I get the internal editor to work?
-          + 8.2 Is there any way to 'bookmark' favorite ftp-fs links?
-          + 8.3 Why I keep getting: "There is no disk in the drive.
-            Please insert a disk into drive D:"?
-          + 8.4 When I start Midnight Commander, nothing happens!
-          + 8.5 When I try pasting to the internal editor, it indents
+          + 8.2 When I try pasting to the internal editor, it indents
             the amount of indenting increases with each line!
+          + 8.3 Is it possible to use Colorer for syntax highlighting?
 
-     * 9 Development
-          + 9.1 Who has written Midnight Commander?
-          + 9.2 Do I dare to use a development version?
-          + 9.3 How can I report a bug/request for a feature?
-          + 9.4 How can I join the development?
+     * 9 Other common problems
+          + 9.1 Is there any way to 'bookmark' favorite ftp-fs links?
+          + 9.2 Why I keep getting: "There is no disk in the drive.
+            Please insert a disk into drive D:"?
+          + 9.3 When I start Midnight Commander, nothing happens!
 
-     * 10 More information
-          + 10.1 This document didn't answer my question. Where else can
+     * 10 Development
+          + 10.1 Who has written Midnight Commander?
+          + 10.2 Do I dare to use a development version?
+          + 10.3 How can I report a bug/request for a feature?
+          + 10.4 How can I join the development?
+
+     * 11 More information
+          + 11.1 This document didn't answer my question. Where else can
             I look for an answer?
-          + 10.2 What mailing lists are there for Midnight Commander?
-          + 10.3 Where should I look on the World Wide Web for MC stuff?
-          + 10.4 Are the mailing lists archived anywhere?
+          + 11.2 What mailing lists are there for Midnight Commander?
+          + 11.3 Where should I look on the World Wide Web for MC stuff?
+          + 11.4 Are the mailing lists archived anywhere?
 
-     * 11 Legal issues
-          + 11.1 Authorship
-          + 11.2 Feedback is invited
-          + 11.3 Disclaimer and copyright
+     * 12 Legal issues
+          + 12.1 Authorship
+          + 12.2 Feedback is invited
+          + 12.3 Disclaimer and copyright
 
 
 1 Getting started
@@ -733,14 +736,30 @@ enough?
    And please don't forget that "make install" overwrites
    $prefix/lib/mc/mc.ext.
 
-8.2 Is there any way to 'bookmark' favorite ftp-fs links?
+8.2 When I try pasting to the internal editor, it indents the amount of
+indenting increases with each line!
+
+   Either turn of 'Return does autoindent' in the editor options or
+   update GNU Midnight Commander to version 4.6.0 or above - it doesn't
+   autoindent when you are holding Shift.
+
+8.3 Is it possible to use Colorer for syntax highlighting?
+
+   Yes if you submit the patch.  There are no legal problems with it
+   because it's licensed under GPL now.  The homepage of Colorer is
+   http://colorer.sourceforge.net/
+
+
+9 Other common problems
+
+9.1 Is there any way to 'bookmark' favorite ftp-fs links?
 
    Use the directory hotlist.  Just press control-backslash.  If your
    national keyboard layout doesn't have backslash key, just press the
    control key with the key which is the backslash key in the English
    keyboard layout.
 
-8.3 Why I keep getting: "There is no disk in the drive. Please insert a disk
+9.3 Why I keep getting: "There is no disk in the drive. Please insert a disk
 into drive D:"?
 
    This is a known bug of the native Windows port.  MC looks its
@@ -752,7 +771,7 @@ into drive D:"?
    Midnight Commander configuration files with the MCHOME environment
    variable.
 
-8.4 When I start Midnight Commander, nothing happens!
+9.3 When I start Midnight Commander, nothing happens!
 
    First, invoke MC without subshell support: "mc -u". If this helps
    check the shell you are using.  Subshell support works best with
@@ -775,17 +794,10 @@ into drive D:"?
    server is unreachable (e.g. it's firewalled), this can also cause a
    delay at startup.  Unset DISPLAY to see if that's the case.
 
-8.5 When I try pasting to the internal editor, it indents the amount of
-indenting increases with each line!
 
-   Either turn of 'Return does autoindent' in the editor options or
-   update GNU Midnight Commander to version 4.6.0 or above - it doesn't
-   autoindent when you are holding Shift.
+10 Development
 
-
-9 Development
-
-9.1 Who has written Midnight Commander?
+10.1 Who has written Midnight Commander?
 
    Midnight Commander was started by Miguel de Icaza and he is the
    maintainer of the package. Other authors have joined the project
@@ -827,14 +839,14 @@ indenting increases with each line!
      * Jon Stevens
      * Adam Tla/lka
 
-9.2 Do I dare to use a development version?
+10.2 Do I dare to use a development version?
 
    That's up to you to decide.  Development versions may have nasty bugs
    at some points of time.  It's up to you to judge whether the new
    features and fixes for the bugs you know outweigh the risk of unknown
    bugs.
 
-9.3 How can I report a bug/request for a feature?
+10.3 How can I report a bug/request for a feature?
 
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
@@ -865,7 +877,7 @@ indenting increases with each line!
             Usually it is "limit coredumpsize unlimited" or "ulimit
             coredumpsize" or "ulimit -c unlimited".
 
-9.4 How can I join the development?
+10.4 How can I join the development?
 
    To join the development just code the feature you want to add and send
    your patch for inclusion. Email address is mc-devel@gnome.org.
@@ -878,9 +890,9 @@ indenting increases with each line!
    have to reject your patches in order to avoid copyright problems.
 
 
-10 More information
+11 More information
 
-10.1 This document didn't answer my question. Where else can I look for an
+11.1 This document didn't answer my question. Where else can I look for an
 answer?
 
    Read messages from the Discussion (mailing list archive) or read the
@@ -892,7 +904,7 @@ answer?
    If you still can't find an answer, post your question to the Midnight
    Commander mailing list. Its address is mc@gnome.org.
 
-10.2 What mailing lists are there for Midnight Commander?
+11.2 What mailing lists are there for Midnight Commander?
 
    Following mailing lists discuss about Midnight Commander:
 
@@ -906,32 +918,32 @@ answer?
           To subscribe visit
           http://mail.gnome.org/mailman/listinfo/mc-devel/
 
-10.3 Where should I look on the World Wide Web for MC stuff?
+11.3 Where should I look on the World Wide Web for MC stuff?
 
    There is a WWW page for Midnight Commander. The URL is:
 
      http://www.ibiblio.org/mc/
 
-10.4 Are the mailing lists archived anywhere?
+11.4 Are the mailing lists archived anywhere?
 
    The mc and mc-devel lists are archived on the World Wide Web. There are
    links to the archives on the mailing list pages (see 10.2).
 
 
-11 Legal issues
+12 Legal issues
 
-11.1 Authorship
+12.1 Authorship
 
    Questions and Answers was written by Janne Kukonlehto.  Parts of it
    originate from Ian Jackson, Miguel de Icaza, Dugan Porter, Norbert
    Warmuth and Paul Sheer.
 
-11.2 Feedback is invited
+12.2 Feedback is invited
 
    Send your comments about this document and GNU Midnight Commander to
    mc@gnome.org
 
-11.3 Disclaimer and copyright
+12.3 Disclaimer and copyright
 
    Note that this document is provided as is. The information in it is
    not warranted to be correct; you use it at your own risk.
