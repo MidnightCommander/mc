@@ -117,6 +117,7 @@ static char *Reset_Color_String;
 static int Is_Color_Terminal = 0;
 
 static int Linux_Console;
+static int QANSI_Console;
 
 /* It is crucial that JMAX_COLORS must be less than 128 since the high bit
  * is used to indicate a character from the ACS (alt char set).  The exception
@@ -727,12 +728,25 @@ void SLtt_goto_rc(int r, int c)
 		  if (Cursor_c == c) return;
 		  if (Cursor_c == c + 1)
 		    {
-		       s = buf;
-		       *s++ = '\b'; *s = 0;
-		       s = buf;
+                       /* cursor movement optimizations, like backspace
+			  doesn't work as needed on qansi-m consoles when 
+			  current table is not a G0, so we'll disable it. */
+                       if (!QANSI_Console)
+                       {
+		          s = buf;
+		          *s++ = '\b'; *s = 0;
+		          s = buf;
+                       }
+                       else
+                       {
+                          /* do the generic cursor positioning,
+			     without an optimization */
+                          s = NULL;
+                       }
 		    }
 	       }
-	     else if (c == 0)
+	     else if ((c == 0) && (!QANSI_Console)) /* the same things 
+				    for the qansi-m console limitation */
 	       {
 		  s = buf;
 		  if ((Cursor_Set != 1) || (Cursor_c != 0)) *s++ = '\r';
@@ -746,8 +760,9 @@ void SLtt_goto_rc(int r, int c)
 	       }
 	     /* Will fail on VMS */
 #ifndef VMS
-	     else if (SLtt_Newline_Ok && (Cursor_Set == 1) &&
-		      (Cursor_c >= c) && (c + 3 > Cursor_c))
+	     else if ((SLtt_Newline_Ok && (Cursor_Set == 1) &&
+		      (Cursor_c >= c) && (c + 3 > Cursor_c)) &&
+		      (!QANSI_Console))
 	       {
 		  s = buf;
 		  while (n--) *s++ = '\n';
@@ -2125,6 +2140,8 @@ int SLtt_initialize (char *term)
 		    || !strncmp(term, "con", 3)
 # endif
 		    );
+
+   QANSI_Console = !strncmp (term, "qansi-m", 7);
 
    t = term;
 

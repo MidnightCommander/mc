@@ -1,3 +1,9 @@
+2004-09-26  Mike Gorchak  <mike@malva.ua> 
+
+	* sldisplay.c (SLtt_goto_rc): Disable cursor movement optimizations
+	for qansi-m consoles. Needed on QNX Neutrino.
+	(SLtt_initialize): Init QANSI_Console variable.
+
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
 	* slsignal.c (SLsystem): Replaced NULL with (char *) NULL in
