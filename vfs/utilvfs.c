@@ -50,11 +50,11 @@
  * ftp://joe@foo.edu:11321/private
  * ftp://joe:password@foo.se
  *
- * Returns malloc()ed host, user and pass they are present.
+ * Returns g_malloc()ed host, user and pass they are present.
  * If the user is empty, e.g. ftp://@roxanne/private, and URL_ALLOW_ANON
  * is not set, then the current login name is supplied.
  *
- * Return value is a malloc()ed string with the pathname relative to the
+ * Return value is a g_malloc()ed string with the pathname relative to the
  * host.
  */
 
