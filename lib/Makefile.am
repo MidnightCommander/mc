@@ -4,6 +4,7 @@ suppbindir = $(mclibdir)/bin
 tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
 
+LOCALIZED_HELP = mc.hlp.hu
 LIBFILES_OUT = mc.ext mc-gnome.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.it mc.hint.pl \
 	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc
@@ -23,7 +24,7 @@ suppbin_SCRIPTS = mc.csh mc.sh
 desktop_DATA = startup.links README.desktop
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
-mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_OUT)
+mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \

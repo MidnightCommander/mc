@@ -1,3 +1,13 @@
+2001-01-08  Szabolcs Ban <shooby@gnome.hu>
+
+	* lib/mc.hlp.hu: Added Hungarian help file from
+	  tothb1@freemail.hu, Janos.Zana@elfiz2.kee.hu,
+	  maci@integrity.hu, mfh47@freemail.hu
+	* lib/Makefile.am: Added LOCALIZED_HELP for further
+	  mc.hlp l10ns
+	* src/cmd.c, src/dlg.c, src/tree.c, src/view.c,
+	  gtkedit/editcmd.c: I18n of mc.hlp
+
 2000-12-29  Szabolcs Ban <shooby@gnome.hu>
 
 	* doc/mc.1.in: Corrected badly formatted link...

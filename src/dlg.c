@@ -650,7 +650,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	break;
 
     case KEY_F(1):
-        hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
+        hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
 	interactive_display (hlpfile, h->help_ctx);
         g_free (hlpfile);
 	do_refresh ();

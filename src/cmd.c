@@ -1203,7 +1203,7 @@ void other_symlink_cmd (void)
 
 void help_cmd (void)
 {
-   char *hlpfile = concat_dir_and_file (mc_home, "mc.hlp");
+   char *hlpfile = concat_dir_and_file (mc_home, _("mc.hlp"));
    interactive_display (hlpfile, "[main]");
    g_free (hlpfile);
 }
