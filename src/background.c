@@ -132,7 +132,7 @@ do_background (struct FileOpContext *ctx, char *info)
 	close (1);
 	close (2);
 
-	if ((nullfd = open ("/dev/null", O_RDONLY)) != -1) {
+	if ((nullfd = open ("/dev/null", O_RDWR)) != -1) {
 	    while (dup2 (nullfd, 0) == -1 && errno == EINTR);
 	    while (dup2 (nullfd, 1) == -1 && errno == EINTR);
 	    while (dup2 (nullfd, 2) == -1 && errno == EINTR);
