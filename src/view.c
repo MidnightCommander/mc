@@ -2318,40 +2318,56 @@ view_handle_key (WView *view, int c)
 
 /* Both views */
 static int
-view_event (WView *view, Gpm_Event *event, int *result)
+view_event (WView * view, Gpm_Event * event, int *result)
 {
     *result = MOU_NORMAL;
-    if (event->type & (GPM_DOWN|GPM_DRAG)){
-    	if (!view->wrap_mode){
-    	    if (event->x < view->widget.cols / 4){
-    	    	move_left (view);
-    	    	*result = MOU_REPEAT;
-    	    	return 1;
-    	    }
-    	    if (event->x > 3 * vwidth / 4){
-    	    	move_right (view);
-    	    	*result = MOU_REPEAT;
-    	    	return 1;
-    	    }
+
+    /* We are not interested in the release events */
+    if (!(event->type & (GPM_DOWN | GPM_DRAG)))
+	return 0;
+
+    /* Wheel events */
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	view_move_backward (view, 2);
+	return 1;
+    }
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	view_move_forward (view, 2);
+	return 1;
+    }
+
+    /* Scrolling left and right */
+    if (!view->wrap_mode) {
+	if (event->x < view->widget.cols / 4) {
+	    move_left (view);
+	    goto processed;
 	}
-	if (event->y < view->widget.lines / 3){
-	    if (mouse_move_pages_viewer)
-	    	view_move_backward (view, view->widget.lines / 2 - 1);
-	    else
-	    	view_move_backward (view, 1);
-	    *result = MOU_REPEAT;
-	    return 1;
-	}
-	else if (event->y > 2 * vheight /3){
-	    if (mouse_move_pages_viewer)
-	    	view_move_forward (view, vheight / 2 - 1);
-	    else
-	    	view_move_forward (view, 1);
-	    *result = MOU_REPEAT; 
-	    return 1;
+	if (event->x > 3 * vwidth / 4) {
+	    move_right (view);
+	    goto processed;
 	}
     }
+
+    /* Scrolling up and down */
+    if (event->y < view->widget.lines / 3) {
+	if (mouse_move_pages_viewer)
+	    view_move_backward (view, view->widget.lines / 2 - 1);
+	else
+	    view_move_backward (view, 1);
+	goto processed;
+    } else if (event->y > 2 * vheight / 3) {
+	if (mouse_move_pages_viewer)
+	    view_move_forward (view, vheight / 2 - 1);
+	else
+	    view_move_forward (view, 1);
+	goto processed;
+    }
+
     return 0;
+
+  processed:
+    *result = MOU_REPEAT;
+    return 1;
 }
 
 /* Real view only */
