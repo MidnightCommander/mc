@@ -990,55 +990,6 @@ static void string_initial(char **s,char *v)
     string_init(s,v);
 }
 
-/***************************************************************************
-Initialise the sDefault parameter structure.
-***************************************************************************/
-static void init_locals(void)
-{
-  /* choose defaults depending on the type of printing */
-  switch (sDefault.iPrinting)
-    {
-    case PRINT_BSD:
-    case PRINT_AIX:
-    case PRINT_LPRNG:
-    case PRINT_PLP:
-      string_initial(&sDefault.szLpqcommand,"lpq -P%p");
-      string_initial(&sDefault.szLprmcommand,"lprm -P%p %j");
-      string_initial(&sDefault.szPrintcommand,"lpr -r -P%p %s");
-      break;
-
-    case PRINT_SYSV:
-    case PRINT_HPUX:
-      string_initial(&sDefault.szLpqcommand,"lpstat -o%p");
-      string_initial(&sDefault.szLprmcommand,"cancel %p-%j");
-      string_initial(&sDefault.szPrintcommand,"lp -c -d%p %s; rm %s");
-#ifdef HPUX
-      string_initial(&sDefault.szQueuepausecommand, "disable %p");
-      string_initial(&sDefault.szQueueresumecommand, "enable %p");
-#else /* SYSV */
-      string_initial(&sDefault.szLppausecommand,"lp -i %p-%j -H hold");
-      string_initial(&sDefault.szLpresumecommand,"lp -i %p-%j -H resume");
-      string_initial(&sDefault.szQueuepausecommand, "lpc stop %p");
-      string_initial(&sDefault.szQueueresumecommand, "lpc start %p");
-#endif /* SYSV */
-      break;
-
-    case PRINT_QNX:
-      string_initial(&sDefault.szLpqcommand,"lpq -P%p");
-      string_initial(&sDefault.szLprmcommand,"lprm -P%p %j");
-      string_initial(&sDefault.szPrintcommand,"lp -r -P%p %s");
-      break;
-
-    case PRINT_SOFTQ:
-      string_initial(&sDefault.szLpqcommand,"qstat -l -d%p");
-      string_initial(&sDefault.szLprmcommand,"qstat -s -j%j -c");
-      string_initial(&sDefault.szPrintcommand,"lp -d%p -s %s; rm %s");
-      string_initial(&sDefault.szLppausecommand,"qstat -s -j%j -h");
-      string_initial(&sDefault.szLpresumecommand,"qstat -s -j%j -r");
-      break;
-      
-    }
-}
 #else
 #define init_locals()
 #endif /* 0 */
@@ -1119,7 +1070,6 @@ static char *lp_string(char *s)
 
 FN_GLOBAL_STRING(lp_logfile,&Globals.szLogFile)
 FN_GLOBAL_STRING(lp_configfile,&Globals.szConfigFile)
-FN_GLOBAL_STRING(lp_smb_passwd_file,&Globals.szSMBPasswdFile)
 FN_GLOBAL_STRING(lp_serverstring,&Globals.szServerString)
 FN_GLOBAL_STRING(lp_printcapname,&Globals.szPrintcapname)
 FN_GLOBAL_STRING(lp_lockdir,&Globals.szLockDir)
@@ -1128,8 +1078,6 @@ FN_GLOBAL_STRING(lp_defaultservice,&Globals.szDefaultService)
 FN_GLOBAL_STRING(lp_msg_command,&Globals.szMsgCommand)
 FN_GLOBAL_STRING(lp_hosts_equiv,&Globals.szHostsEquiv)
 FN_GLOBAL_STRING(lp_auto_services,&Globals.szAutoServices)
-FN_GLOBAL_STRING(lp_passwd_program,&Globals.szPasswdProgram)
-FN_GLOBAL_STRING(lp_passwd_chat,&Globals.szPasswdChat)
 FN_GLOBAL_STRING(lp_passwordserver,&Globals.szPasswordServer)
 FN_GLOBAL_STRING(lp_name_resolve_order,&Globals.szNameResolveOrder)
 FN_GLOBAL_STRING(lp_workgroup,&Globals.szWorkGroup)
@@ -1206,7 +1154,6 @@ FN_GLOBAL_BOOL(lp_nis_home_map,&Globals.bNISHomeMap)
 static FN_GLOBAL_BOOL(lp_time_server,&Globals.bTimeServer)
 #endif /* 0 */
 FN_GLOBAL_BOOL(lp_bind_interfaces_only,&Globals.bBindInterfacesOnly)
-FN_GLOBAL_BOOL(lp_unix_password_sync,&Globals.bUnixPasswdSync)
 FN_GLOBAL_BOOL(lp_passwd_chat_debug,&Globals.bPasswdChatDebug)
 FN_GLOBAL_BOOL(lp_ole_locking_compat,&Globals.bOleLockingCompat)
 FN_GLOBAL_BOOL(lp_nt_smb_support,&Globals.bNTSmbSupport)
@@ -1219,24 +1166,16 @@ FN_GLOBAL_BOOL(lp_restrict_anonymous,&Globals.bRestrictAnonymous)
 FN_GLOBAL_INTEGER(lp_os_level,&Globals.os_level)
 FN_GLOBAL_INTEGER(lp_max_ttl,&Globals.max_ttl)
 FN_GLOBAL_INTEGER(lp_max_wins_ttl,&Globals.max_wins_ttl)
-FN_GLOBAL_INTEGER(lp_min_wins_ttl,&Globals.max_wins_ttl)
-FN_GLOBAL_INTEGER(lp_max_open_files,&Globals.max_open_files)
+FN_GLOBAL_INTEGER(lp_min_wins_ttl,&Globals.min_wins_ttl)
 FN_GLOBAL_INTEGER(lp_maxxmit,&Globals.max_xmit)
 FN_GLOBAL_INTEGER(lp_maxmux,&Globals.max_mux)
 FN_GLOBAL_INTEGER(lp_passwordlevel,&Globals.pwordlevel)
 FN_GLOBAL_INTEGER(lp_usernamelevel,&Globals.unamelevel)
 FN_GLOBAL_INTEGER(lp_readsize,&Globals.ReadSize)
-#if 0
-FN_GLOBAL_INTEGER(lp_shmem_size,&Globals.shmem_size)
-#endif
 FN_GLOBAL_INTEGER(lp_deadtime,&Globals.deadtime)
 FN_GLOBAL_INTEGER(lp_maxprotocol,&Globals.maxprotocol)
 FN_GLOBAL_INTEGER(lp_security,&Globals.security)
 FN_GLOBAL_INTEGER(lp_maxdisksize,&Globals.maxdisksize)
-#if 0
-FN_GLOBAL_INTEGER(lp_lpqcachetime,&Globals.lpqcachetime)
-FN_GLOBAL_INTEGER(lp_syslog,&Globals.syslog)
-#endif
 FN_GLOBAL_INTEGER(lp_client_code_page,&Globals.client_code_page)
 #if 0
 static FN_GLOBAL_INTEGER(lp_announce_as,&Globals.announce_as)
@@ -1294,9 +1233,6 @@ FN_LOCAL_STRING(lp_mangled_map,szMangledMap)
 FN_LOCAL_STRING(lp_veto_files,szVetoFiles)
 FN_LOCAL_STRING(lp_hide_files,szHideFiles)
 FN_LOCAL_STRING(lp_veto_oplocks,szVetoOplockFiles)
-#if 0
-FN_LOCAL_STRING(lp_driverlocation,szPrinterDriverLocation)
-#endif
 FN_LOCAL_BOOL(lp_revalidate,bRevalidate)
 FN_LOCAL_BOOL(lp_casesensitive,bCaseSensitive)
 FN_LOCAL_BOOL(lp_preservecase,bCasePreserve)
@@ -1719,6 +1655,7 @@ static BOOL service_ok(int iService)
    return (bRetval);
 }
 
+#if 0
 static struct file_lists {
   struct file_lists *next;
   char *name;
@@ -1759,7 +1696,7 @@ static void add_to_file_list(char *fname)
 
 }
 
-#if 0
+
 /*******************************************************************
 check if a config file has changed date
 ********************************************************************/
@@ -1790,6 +1727,8 @@ BOOL lp_file_list_changed(void)
   }
   return(False);
 }
+#else
+#define add_to_file_list(x)
 #endif /* 0 */
 
 /***************************************************************************

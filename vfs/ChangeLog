@@ -1,3 +1,12 @@
+2005-03-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/param/loadparm.c: Remove init_locals(), lp_smb_passwd_file(),
+	lp_passwd_program(), lp_passwd_chat(), lp_unix_password_sync(),
+	lp_max_open_files(), lp_shmem_size(), lp_lpqcachetime(),
+	lp_syslog(), lp_driverlocation().
+	(file_lists): Commented out.
+	(add_to_file_list): Comment out and make a do nothing macro.
+
 2005-03-29  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (cpio_find_head): Fix for logical error that can cause
