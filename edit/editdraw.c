@@ -110,11 +110,11 @@ edit_status (WEdit *edit)
         fname_len = preferred_fname_len;
 
     if (fname_len + gap + status_len + right_gap >= w) {
-    	if (preferred_fname_len + gap + status_len + right_gap >= w)
-    	    fname_len = preferred_fname_len;
-    	else
+	if (preferred_fname_len + gap + status_len + right_gap >= w)
+	    fname_len = preferred_fname_len;
+	else
             fname_len = w - (gap + status_len + right_gap);
-    	fname = name_trunc (fname, fname_len);
+	fname = name_trunc (fname, fname_len);
     }
 
     widget_move (edit, 0, 0);

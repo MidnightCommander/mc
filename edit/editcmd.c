@@ -1182,7 +1182,7 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     quick_widgets[5].text = label_text->str;
 
     {
-    	int retval;
+	int retval;
 	QuickDialog Quick_input =
 	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
 	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
@@ -1533,12 +1533,12 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, edit
 	    }
 	}
     } else {
- 	*len = strlen ((const char *) exp);
+	*len = strlen ((const char *) exp);
 	if (replace_case) {
 	    for (p = start; p <= last_byte - l; p++) {
- 		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
+		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
 		    for (f = 0, q = 0; q < l && f < 1; q++)
- 			if ((*get_byte) (data, q + p) != (unsigned char)exp[q])
+			if ((*get_byte) (data, q + p) != (unsigned char)exp[q])
 			    f = 1;
 		    if (f == 0)
 			return p;
@@ -1758,9 +1758,9 @@ edit_replace_cmd (WEdit *edit, int again)
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
-    	g_free (saved1), saved1 = NULL;
-    	g_free (saved2), saved2 = NULL;
-    	g_free (saved3), saved3 = NULL;
+	g_free (saved1), saved1 = NULL;
+	g_free (saved2), saved2 = NULL;
+	g_free (saved3), saved3 = NULL;
 	return;
     }
 

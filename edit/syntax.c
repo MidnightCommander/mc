@@ -260,7 +260,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 static inline const char *xx_strchr (const unsigned char *s, int c)
 {
     while (*s >= '\005' && *s != (unsigned char) c) {
-    	s++;
+	s++;
     }
     return (const char *) s;
 }
@@ -490,10 +490,10 @@ static int read_one_line (char **line, FILE * f)
 	g_string_append_c (p, c);
     }
     if (r != 0) {
-    	*line = p->str;
-    	g_string_free (p, FALSE);
+	*line = p->str;
+	g_string_free (p, FALSE);
     } else {
-    	g_string_free (p, TRUE);
+	g_string_free (p, TRUE);
     }
     return r;
 }
@@ -655,7 +655,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
     int argc;
     int i, j;
     int alloc_contexts = MAX_CONTEXTS,
-    	alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
+	alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
 	max_alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
 
     args[0] = 0;
@@ -784,7 +784,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 
 	    alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
 	    if (++num_contexts >= alloc_contexts) {
-	    	struct context_rule **tmp;
+		struct context_rule **tmp;
 
 		alloc_contexts += 128;
 		tmp = g_realloc (r, alloc_contexts * sizeof (struct context_rule *));
@@ -839,7 +839,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 	    check_not_a;
 
 	    if (++num_words >= alloc_words_per_context) {
-	    	struct key_word **tmp;
+		struct key_word **tmp;
 
 		alloc_words_per_context += 1024;
 
