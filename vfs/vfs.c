@@ -1445,7 +1445,6 @@ int vfs_parse_filemode (char *p)
 	case 's': res |= 0010 | S_ISGID; break;
         case 'l': /* Solaris produces these */
 	case 'S': res |= S_ISGID; break;
-        case 'l': break;  /* ignore mandatory locking, dunno what to do with this*/
 	case '-': break;
 	default: return -1;
     }
