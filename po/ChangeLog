@@ -1,3 +1,9 @@
+1999-07-21  Vincent Renardias <vincent@ldsol.com>
+
+	* fr.po: integrated big proof-reading patch
+	from  Thibaut Cousin <cousin@clrhp04.in2p3.fr>.
+	* completed translation: 1357 translated messages.
+
 1999-07-04  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 	* Added walloon language (wa.po)
