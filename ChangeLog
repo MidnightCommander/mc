@@ -1,3 +1,8 @@
+1999-02-02  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* new_icons/gnome-core.png: New icon for core files. Someone 
+	please add the code part :)
+
 Mon Feb  1 01:28:19 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* configure.in: Add check against setuid() and setreuid() functions.
