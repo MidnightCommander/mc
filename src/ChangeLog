@@ -1,3 +1,7 @@
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
+	* ext.c: Improved message formatting.
+
 2005-02-06  Roland Illig  <roland.illig@gmx.de>
 
 	* widget.h: Added a new function button_get_text.
