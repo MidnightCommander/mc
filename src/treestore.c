@@ -134,9 +134,9 @@ tree_store_init (void)
 {
 	ts.tree_first = 0;
 	ts.tree_last = 0;
-	ts.check_name_stack = 0;
 	ts.refcount++;
-
+	ts.check_name = NULL;
+	
 	return &ts;
 }
 
@@ -501,11 +501,10 @@ void
 tree_store_remove_entry (char *name)
 {
 	tree_entry *current, *base, *old;
-	int len;
-	char *check_name;
+	int len, base_sublevel;
 	
 	g_return_if_fail (name != NULL);
-	g_return_if_fail (ts.check_name_stack != NULL);
+	g_return_if_fail (ts.check_name != NULL);
 	
 	/* Miguel Ugly hack */
 	if (name [0] == PATH_SEP && name [1] == 0)
@@ -516,7 +515,10 @@ tree_store_remove_entry (char *name)
 	if (!base)
 		return;	/* Doesn't exist */
 
-	check_name = ts.check_name_stack->data;
+	if (ts.check_name [0] == PATH_SEP && ts.check_name [1] == 0)
+		base_sublevel = base->sublevel;
+	else
+		base_sublevel = base->sublevel + 1;
 
 	len = strlen (base->name);
 	current = base->next;
@@ -540,24 +542,21 @@ tree_store_mark_checked (const char *subname)
 	char *name;
 	tree_entry *current, *base;
 	int flag = 1, len;
-	char *check_name;
-
 	if (!ts.loaded)
 		return;
 
-	g_return_if_fail (ts.check_name_stack != NULL);
-
-	check_name = ts.check_name_stack->data;
-
+	if (ts.check_name == NULL)
+		return;
+	
 	/* Calculate the full name of the subdirectory */
 	if (subname [0] == '.' &&
 	    (subname [1] == 0 || (subname [1] == '.' && subname [2] == 0)))
 		return;
-	if (check_name [0] == PATH_SEP && check_name [1] == 0)
+	if (ts.check_name [0] == PATH_SEP && ts.check_name [1] == 0)
 		name = g_strconcat (PATH_SEP_STR, subname, NULL);
 	else
-		name = concat_dir_and_file (check_name, subname);
-
+		name = concat_dir_and_file (ts.check_name, subname);
+	
 	/* Search for the subdirectory */
 	current = ts.check_start;
 	while (current && (flag = pathcmp (current->name, name)) < 0)
@@ -566,7 +565,7 @@ tree_store_mark_checked (const char *subname)
 	if (flag != 0){
 		/* Doesn't exist -> add it */
 		current = tree_store_add_entry (name);
-		tree_store_notify_add (current);
+		ts.add_queue = g_list_prepend (ts.add_queue, g_strdup (name));
 	}
 	g_free (name);
 
@@ -591,11 +590,11 @@ tree_store_start_check (char *path)
 {
 	tree_entry *current, *retval;
 	int len;
-	char *check_name;
 
 	if (!ts.loaded)
 		return NULL;
 
+	g_assert (ts.check_name == NULL);
 	ts.check_start = NULL;
 
 	/* Search for the start of subdirectories */
@@ -610,23 +609,22 @@ tree_store_start_check (char *path)
 			return NULL;
 
 		current = tree_store_add_entry (path);
-		ts.check_name_stack = g_slist_prepend (ts.check_name_stack, g_strdup (path));
+		ts.check_name = g_strdup (path);
 
 		return current;
 	}
 
-	ts.check_name_stack = g_slist_prepend (ts.check_name_stack, g_strdup (path));
-
+	ts.check_name = g_strdup (path);
+	
 	retval = current;
 
 	/* Mark old subdirectories for delete */
 	ts.check_start = current->next;
-	check_name = ts.check_name_stack->data;
-	len = strlen (check_name);
-
+	len = strlen (ts.check_name);
+	
 	current = ts.check_start;
 	while (current
-	       && strncmp (current->name, check_name, len) == 0
+	       && strncmp (current->name, ts.check_name, len) == 0
 	       && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1)){
 		current->mark = 1;
 		current = current->next;
@@ -650,21 +648,19 @@ tree_store_end_check (void)
 {
 	tree_entry *current, *old;
 	int len;
-	char *check_name;
-	GSList *stack_head;
-
+	GList *the_queue, *l;
+	
 	if (!ts.loaded)
 		return;
 
-	g_return_if_fail (ts.check_name_stack != NULL);
-
+	g_assert (ts.check_name != NULL);
+	
 	/* Check delete marks and delete if found */
-	check_name = ts.check_name_stack->data;
-	len = strlen (check_name);
-
+	len = strlen (ts.check_name);
+	
 	current = ts.check_start;
 	while (current
-	       && strncmp (current->name, check_name, len) == 0
+	       && strncmp (current->name, ts.check_name, len) == 0
 	       && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1)){
 		old = current;
 		current = current->next;
@@ -672,10 +668,19 @@ tree_store_end_check (void)
 			remove_entry (old);
 	}
 
-	g_free (ts.check_name_stack->data);
-	stack_head = ts.check_name_stack;
-	ts.check_name_stack = g_slist_remove_link (ts.check_name_stack, stack_head);
-	g_slist_free_1 (stack_head);
+	/* get the stuff in the scan order */
+	ts.add_queue = g_list_reverse (ts.add_queue);
+	the_queue = ts.add_queue;
+	ts.add_queue = NULL;
+	g_free (ts.check_name);
+	ts.check_name = NULL;
+	
+	for (l = the_queue; l; l = l->next){
+		tree_store_notify_add (l->data);
+		g_free (l->data);
+	}
+	
+	g_list_free (the_queue);
 }
 
 tree_entry *
