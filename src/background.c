@@ -195,7 +195,8 @@ real_message_1s (enum OperationMode mode, int *flags, char *title, const char *s
 }
 
 static void
-real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2)
+real_message_2s (enum OperationMode mode, int *flags, char *title,
+		 const char *str1, const char *str2)
 {
     if (mode == Background)
 	title = background_title (title);
@@ -207,7 +208,8 @@ real_message_2s (enum OperationMode mode, int *flags, char *title, char *str1, c
 }
 
 static void
-real_message_3s (enum OperationMode mode, int *flags, char *title, char *str1, char *str2, const char *str3)
+real_message_3s (enum OperationMode mode, int *flags, char *title,
+		 const char *str1, const char *str2, const char *str3)
 {
     if (mode == Background)
 	title = background_title (title);
@@ -498,7 +500,7 @@ message_1s (int flags, char *title, const char *str1)
 }
 
 void
-message_2s (int flags, char *title, char *str1, char *str2)
+message_2s (int flags, char *title, const char *str1, const char *str2)
 {
     if (we_are_background)
 	parent_call ((void *)real_message_2s, NULL, 4, sizeof (flags), &flags,
@@ -509,7 +511,8 @@ message_2s (int flags, char *title, char *str1, char *str2)
 }
 
 void
-message_3s (int flags, char *title, char *str1, char *str2, const char *str3)
+message_3s (int flags, char *title, const char *str1,
+	    const char *str2, const char *str3)
 {
     if (we_are_background)
 	parent_call ((void *)real_message_3s, NULL, 3, sizeof (flags), &flags,
@@ -542,13 +545,14 @@ message_1s (int flags, char *title, const char *str1)
 }
 
 void
-message_2s (int flags, char *title, char *str1, char *str2)
+message_2s (int flags, char *title, const char *str1, const char *str2)
 {
     message (flags, title, str1, str2);
 }
 
 void
-message_3s (int flags, char *title, char *str1, char *str2, const char *str3)
+message_3s (int flags, char *title, const char *str1,
+	    const char *str2, const char *str3)
 {
     message (flags, title, str1, str2, str3);
 }
@@ -565,7 +569,7 @@ input_dialog_help (char *header, char *text, char *help, char *def_text)
 /* {{{ Functions shared between background and foreground */
 
 void
-message_1s1d (int flags, char *title, char *str, int d)
+message_1s1d (int flags, char *title, const char *str, int d)
 {
     char *p = g_strdup_printf (str, d);
     message_1s (flags, title, p);

@@ -1,5 +1,12 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* background.c (real_message_2s): Declare arguments "const" when
+	possible.
+	(real_message_3s): Likewise.
+	* wtools.c (message): Likewise.
+	* background.h: Change declarations to match.
+	* dialog.h: Likewise.
+
 	* boxes.c [HAVE_GNOME]: Disable unused code.
 	* find.c [HAVE_GNOME]: Likewise.
 	* complete.c [HAVE_GNOME]: Likewise.

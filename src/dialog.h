@@ -8,7 +8,7 @@
 #else
 #define MSG_ERROR "Error: "
 #endif
-Dlg_head *message (int error, char *header, char *text, ...);
+Dlg_head *message (int error, char *header, const char *text, ...);
 
 int query_dialog (char *header, char *text, int flags, int count, ...);
 
