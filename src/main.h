@@ -1,15 +1,10 @@
 #ifndef __MAIN_H
 #define __MAIN_H
 /* Toggling functions */
-void toggle_eight_bit (void);
-void toggle_clean_exec (void);
+void toggle_fast_reload (void);
+void toggle_mix_all_files (void);
 void toggle_show_backup (void);
 void toggle_show_hidden (void);
-void toggle_show_mini_status (void);
-void toggle_align_extensions (void);
-void toggle_mix_all_files (void);
-void toggle_fast_reload (void);
-void toggle_confirm_delete (void);
 
 enum {
     RP_NOCLEAR,

@@ -58,7 +58,6 @@
 char app_text [] = "Midnight-Commander";
 
 int easy_patterns = 1;
-int align_extensions = 1;
 int tilde_trunc = 1;
 
 #ifndef VFS_STANDALONE
@@ -546,33 +545,6 @@ char *extension (char *filename)
 	    return d+1;
     }
     return "";
-}
-
-/* This routine uses the fact that x is at most 14 chars or so */
-char *split_extension (char *x, int pad)
-{
-    return x;
-
-    /* Buggy code 
-    if (!align_extensions)
-	return x;
-
-    if (strlen (x) >= pad)
-	return x;
-    
-    if ((ext = extension (x)) == x || *ext == 0)
-	return x;
-
-    strcpy (xbuf, x);
-    for (i = strlen (x); i < pad; i++)
-	xbuf [i] = ' ';
-    xbuf [pad] = 0;
-
-    l = strlen (ext);
-    for (i = 0; i < l; i++)
-	xbuf [pad-i] = *(ext+l-i-1);
-    for (i = xbuf + (ext - x); i < 
-    return xbuf; */
 }
 
 int get_int (char *file, char *key, int def)

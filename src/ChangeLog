@@ -1,5 +1,10 @@
 2002-01-17  Pavel Roskin  <proski@gnu.org>
 
+	* main.h: Remove dead declarations.
+	* setup.c: Remove defunct extension alignment support.
+	* util.c: Likewise.
+	* util.h: Likewise.
+
 	* main.c: Remove unused toggle_* functions.
 
 	* dir.c: Show backups by default.

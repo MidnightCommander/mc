@@ -160,7 +160,6 @@ static const struct {
     { "pause_after_run", &pause_after_run },
     { "shell_patterns", &easy_patterns },
     { "auto_save_setup", &auto_save_setup },
-    { "align_extensions", &align_extensions },
     { "auto_menu", &auto_menu },
     { "use_internal_view", &use_internal_view },
     { "use_internal_edit", &use_internal_edit },

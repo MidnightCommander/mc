@@ -24,7 +24,6 @@ char *string_perm (mode_t mode_bits);
 char *strip_password (char *path, int has_prefix);
 char *strip_home_and_password(char *dir);
 char *extension (char *);
-char *split_extension (char *, int pad);
 char *concat_dir_and_file (const char *dir, const char *file);
 char *unix_error_string (int error_num);
 char *skip_separators (char *s);
@@ -39,8 +38,6 @@ int  set_nonblocking (int fd);
 
 char *x_basename (char *s);
 char *g_readlink (char *path);
-
-extern int align_extensions;
 
 /* Profile managing functions */
 int set_int (char *, char *, int);
