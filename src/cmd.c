@@ -637,7 +637,7 @@ static int check_for_default(char *default_file, char *file)
 	}
 	create_op_win (OP_COPY, 0);
         file_mask_defaults ();
-	copy_file_file (default_file, file, 1, &count, &bytes);
+	copy_file_file (default_file, file, 1, &count, &bytes, 1);
 	destroy_op_win ();
     }
     return 0;
