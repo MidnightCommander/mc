@@ -1,5 +1,9 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_quit_cmd): Don't use strcmp on the result of
+	gtk_dialog_cauldron() since it's NULL if the dialog has been
+	closed without using buttons.
+
 	* edit.c (edit_execute_cmd): Put time format to a variable to
 	avoid gcc warning about Y2K issues with %c in strftime().
 

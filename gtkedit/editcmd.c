@@ -2416,12 +2416,12 @@ void edit_quit_cmd (WEdit * edit)
 	char *r;
 	r = gtk_dialog_cauldron (_ (" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
 				     _ (" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
-	if (!strcmp (r, GNOME_STOCK_BUTTON_YES)) {
+	if (r == GNOME_STOCK_BUTTON_YES) {
 	    edit_push_markers (edit);
 	    edit_set_markers (edit, 0, 0, 0, 0);
 	    if (!edit_save_cmd (edit))
 		return;
-	} else if (!strcmp (r, GNOME_STOCK_BUTTON_NO)) {
+	} else if (r == GNOME_STOCK_BUTTON_NO) {
 	    if (edit->delete_file)
 		unlink (catstrs (edit->dir, edit->filename, 0));
 	} else {
