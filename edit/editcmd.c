@@ -2174,7 +2174,8 @@ int edit_sort_cmd (WEdit * edit)
 /* if block is 1, a block must be highlighted and the shell command
    processes it. If block is 0 the shell command is a straight system
    command, that just produces some output which is to be inserted */
-void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
+void 
+edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 {
     long start_mark, end_mark;
     struct stat s;
@@ -2182,46 +2183,55 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     FILE *script_home = NULL;
     FILE *script_src = NULL;
     FILE *block_file = NULL;
+    char *o = NULL;
+    char *h = NULL;
+    char *b = NULL;
+    char *e = NULL;
 
-    char *o = catstrs (mc_home, shell_cmd, 0);   /* original source script */
-    char *h = catstrs (home_dir, EDIT_DIR, shell_cmd, 0); /* home script */
-    char *b = catstrs (home_dir, BLOCK_FILE, 0); /* block file */
-    char *e = catstrs (home_dir, ERROR_FILE, 0); /* error file */
-    
-    if (! (script_home = fopen (h, "r"))) {
-	if (! (script_home = fopen (h, "w"))) {
-	    edit_error_dialog ("",
-            get_sys_error (catstrs (_ ("Error create script:"), h, 0)));
-            return;
-	} else {
-	    if (! (script_src = fopen (o, "r"))) {
-                fclose (script_home); unlink (h);
-	        edit_error_dialog ("",
-                get_sys_error (catstrs (_ ("Error read script:"), o, 0)));
-                return;
-            } else {    
-                while (fgets(buf, sizeof(buf), script_src))
-		    fputs (buf, script_home);
-                if (fclose(script_home)) {
-	            edit_error_dialog ("",
-                    get_sys_error (catstrs (_ ("Error close script:"), h, 0)));
-                    return;
-                } else {
-                    chmod (h, 0700);
-	            edit_error_dialog ("",
-                    get_sys_error (catstrs (_ ("Script created:"), h, 0)));
-                }
-	    }
-        }
+    o = g_strconcat (mc_home, shell_cmd, 0);	/* original source script */
+    h = g_strconcat (home_dir, EDIT_DIR, shell_cmd, 0);	/* home script */
+    b = g_strconcat (home_dir, BLOCK_FILE, 0);	/* block file */
+    e = g_strconcat (home_dir, ERROR_FILE, 0);	/* error file */
+
+    if (!(script_home = fopen (h, "r"))) {
+	if (!(script_home = fopen (h, "w"))) {
+	    edit_error_dialog ("", get_sys_error (g_strconcat
+						  (_
+						   ("Error create script:"),
+						   h, 0)));
+	    goto err;
+	}
+	if (!(script_src = fopen (o, "r"))) {
+	    fclose (script_home);
+	    unlink (h);
+	    edit_error_dialog ("", get_sys_error (g_strconcat
+						  (_("Error read script:"),
+						   o, 0)));
+	    goto err;
+	}
+	while (fgets (buf, sizeof (buf), script_src))
+	    fputs (buf, script_home);
+	if (fclose (script_home)) {
+	    edit_error_dialog ("", get_sys_error (g_strconcat
+						  (_
+						   ("Error close script:"),
+						   h, 0)));
+	    goto err;
+	}
+	chmod (h, 0700);
+	edit_error_dialog ("", get_sys_error (g_strconcat
+					      (_("Script created:"), h,
+					       0)));
     }
-    if (block) { /* for marked block run indent formatter */
+    if (block) {		/* for marked block run indent formatter */
 	if (eval_marks (edit, &start_mark, &end_mark)) {
 	    edit_error_dialog (_("Process block"),
-		_(" You must first highlight a block of text. "));
-	    return;
+			       _
+			       (" You must first highlight a block of text. "));
+	    goto err;
 	}
-        edit_save_block (edit, b, start_mark, end_mark);
-        
+	edit_save_block (edit, b, start_mark, end_mark);
+
 	/*
 	 * Run script.
 	 * Initial space is to avoid polluting bash history.
@@ -2230,9 +2240,9 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	 *   $2 - file containing the current block.
 	 *   $3 - file where error messages should be put.
 	 */
-	execute (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ", 
-			  edit->filename, " ", home_dir, BLOCK_FILE, " ", 
-			  home_dir, ERROR_FILE, NULL));
+	execute (g_strconcat (" ", home_dir, EDIT_DIR, shell_cmd, " ",
+			      edit->filename, " ", home_dir, BLOCK_FILE,
+			      " ", home_dir, ERROR_FILE, NULL));
 
     } else {
 	/*
@@ -2240,32 +2250,42 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	 * Arguments:
 	 *   $1 - name of the edited file.
 	 */
-	execute (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
-			  edit->filename, NULL));
+	execute (g_strconcat (" ", home_dir, EDIT_DIR, shell_cmd, " ",
+			      edit->filename, NULL));
     }
 
     edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
 
-    /* insert result block */ 
+    /* insert result block */
     if (block) {
 	if (mc_stat (e, &s) == 0) {
 	    if (!s.st_size) {	/* no error messages */
 		if (edit_block_delete_cmd (edit))
-		    return;
+		    goto err;
 		edit_insert_file (edit, b);
 	    } else {
 		edit_insert_file (edit, e);
 	    }
 	} else {
 	    edit_error_dialog ("",
-            get_sys_error (catstrs (_ ("Error trying to stat file:"), e, 0)));
+			       get_sys_error (g_strconcat
+					      (_
+					       ("Error trying to stat file:"),
+					       e, 0)));
 	    edit->force |= REDRAW_COMPLETELY;
 	}
 	if ((block_file = fopen (b, "w")))
 	    fclose (block_file);
-	return;
+	goto err;
     }
+
+  err:
+    g_free (o);
+    g_free (h);
+    g_free (b);
+    g_free (e);
+
     return;
 }
 
