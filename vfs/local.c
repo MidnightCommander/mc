@@ -91,13 +91,24 @@ local_opendir (vfs *me, char *dirname)
 static int
 local_telldir (void *data)
 {
+#ifdef HAVE_TELLDIR
     return telldir( *(DIR **) data );
+#else
+ #warning "Native telldir() not available, emulation not implemented"
+    abort();
+    return 0; /* for dumb compilers */
+#endif /* !HAVE_TELLDIR */
 }
 
 static void
 local_seekdir (void *data, int offset)
 {
+#ifdef HAVE_SEEKDIR
     seekdir( *(DIR **) data, offset );
+#else
+ #warning "Native seekdir() not available, emulation not implemented"
+    abort();
+#endif /* !HAVE_SEEKDIR */
 }
 
 static void *

@@ -1,3 +1,9 @@
+2001-06-19  Pavel Roskin  <proski@gnu.org>
+
+	* local.c (local_telldir): Warn and abort if telldir() is not
+	available.
+	(local_seekdir): Warn and abort if seekdir() is not available.
+
 2001-06-18  Pavel Roskin  <proski@gnu.org>
 
 	* tcputil.c (sig_pipe): Use the same declaration with one int
