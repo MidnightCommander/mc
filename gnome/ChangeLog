@@ -1,3 +1,20 @@
+1999-03-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmount.c (setup_devices): Use new tigert icon.
+
+	* gdesktop.c (do_mount_umount): Use g_readlink here.
+
+	* gpopup2.c (handle_eject): Small tuning.  And use g_readlink :-).
+
+	* gmount.c (mount_point_to_device): New function.  Mapes a mount
+	point to its device.  Required since we are now using the mount
+	point (as this is not ambiguous) as the key for the devices and
+	the eject command needs the device name, not the mount point.
+
+	* gdesktop.c (desktop_icon_info_open): First try to see if
+	filename is mountable.  Then do the directory tests and the file
+	launching tests.  Fixes mount-by-double click.
+
 1999-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* glayout.c (save_panel_types): Do not save the setup of a desktop

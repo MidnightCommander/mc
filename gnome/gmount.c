@@ -213,6 +213,29 @@ get_mountable_devices (void)
 	return list;
 }
 
+char *
+mount_point_to_device (char *mount_point)
+{
+	FILE *f;
+	struct mntent *mnt;
+	
+	f = setmntent ("/etc/fstab", "r");
+	if (f == NULL)
+		return NULL;
+
+	while ((mnt = getmntent (f))){
+		if (strcmp (mnt->mnt_dir, mount_point) == 0){
+			char *v;
+			
+			v = g_strdup (mnt->mnt_fsname);
+			endmntent (f);
+			return v;
+		}
+	}
+	endmntent (f);
+	return NULL;
+}
+
 #else
 
 char *
@@ -233,6 +256,11 @@ is_block_device_mounted (char *mount_point)
 	return TRUE;
 }
 
+char *
+mount_point_to_device (char *mount_point)
+{
+	return NULL;
+}
 #endif
 
 
@@ -360,7 +388,7 @@ setup_devices (void)
 		} else if (dit->type == TYPE_NFS){
 			release_format = TRUE;
 			format = g_strdup_printf (_("NFS dir %s"), dit->mount_point);
-			icon = "i-blockdev.png";
+			icon = "i-nfs.png";
 			count = nfs_count++;
 		} else {
 			format = _("Device %d");

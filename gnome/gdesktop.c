@@ -982,7 +982,7 @@ do_mount_umount (char *filename, gboolean is_mount)
 	static char *mount_command;
 	static char *umount_command;
 	char *op;
-	char buffer [128];
+	char *buffer;
 	int count;
 	
 	if (is_mount){
@@ -995,10 +995,9 @@ do_mount_umount (char *filename, gboolean is_mount)
 		op = umount_command;
 	}
 
-	count = readlink (filename, buffer, sizeof (buffer));
-	if (count == -1)
+	buffer = g_readlink (filename);
+	if (buffer == NULL)
 		return FALSE;
-	buffer [count] = 0;
 	
 	if (op){
 		char *command;
@@ -1013,8 +1012,10 @@ do_mount_umount (char *filename, gboolean is_mount)
 			close_error_pipe (0, 0);
 		pclose (f);
 		
+		g_free (buffer);
 		return TRUE;
 	}
+	g_free (buffer);
 	return FALSE;
 }
 
@@ -1061,13 +1062,17 @@ gboolean
 do_eject (char *filename)
 {
 	char *eject_command = find_command (eject_known_locations);
-	char *command;
+	char *command, *device;
 	FILE *f;
 
 	if (!eject_command)
 		return FALSE;
 
-	command = g_strconcat (eject_command, " ", filename, NULL);
+	device = mount_point_to_device (filename);
+	if (!device)
+		return;
+	
+	command = g_strconcat (eject_command, " ", device, NULL);
 	open_error_pipe ();
 	f = popen (command, "r");
 	if (f == NULL)
@@ -1102,6 +1107,9 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 {
 	char *filename;
 	file_entry *fe;
+	int is_mounted;
+	char *point;
+	int launch = FALSE;
 
 	if (dii->url){
 		gnome_url_show (dii->url);
@@ -1115,24 +1123,20 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		return;
 	}
 
-	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
-		new_panel_at (filename);
-	else {
-		int is_mounted;
-		char *point;
-		int launch = FALSE;
-
-		if (is_mountable (filename, fe, &is_mounted, &point)){
-			if (!is_mounted){
-				if (try_to_mount (filename, fe))
-					launch = TRUE;
-			} else
+	if (is_mountable (filename, fe, &is_mounted, &point)){
+		if (!is_mounted){
+			if (try_to_mount (filename, fe))
 				launch = TRUE;
-
-			if (launch)
-				new_panel_at (point);
-			g_free (point);
-		} else {
+		} else
+			launch = TRUE;
+		
+		if (launch)
+			new_panel_at (point);
+		g_free (point);
+	} else {
+		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
+			new_panel_at (filename);
+		else {
 			int size;
 			char *buf;
 

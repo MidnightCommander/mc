@@ -116,7 +116,6 @@ assign_other (void)
 	for (p = containers; p; p = p->next)
 		if (p->data != current_panel_ptr){
 			other_panel_ptr = p->data;
-			printf ("PANEL: Found another other\n");
 			break;
 		}
 }

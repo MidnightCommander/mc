@@ -612,12 +612,23 @@ static void
 handle_eject (GtkWidget *widget, WPanel *panel)
 {
 	char *full_name;
-
+	char *lname;
+	
 	g_assert (is_a_desktop_panel (panel));
 
 	full_name = get_full_filename (panel);
-	do_mount_umount (full_name, FALSE);
-	do_eject (full_name);
+	lname = g_readlink (full_name);
+	if (!lname){
+		g_free (full_name);
+		return;
+	}
+
+	if (is_block_device_mounted (lname))
+		do_mount_umount (full_name, FALSE);
+	
+	do_eject (lname);
+
+	g_free (lname);
 	g_free (full_name);
 }
 

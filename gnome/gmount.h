@@ -14,7 +14,8 @@
 void gmount_setup_devices (void);
 void desktop_cleanup_devices (void);
 
-char     *is_block_device_mountable (char *devname);
-gboolean  is_block_device_mounted   (char *devname);
+char     *is_block_device_mountable (char *mount_point);
+gboolean  is_block_device_mounted   (char *mount_point);
+char     *mount_point_to_device     (char *mount_point);
 
 #endif

@@ -103,6 +103,7 @@ ICONS = 			\
 	i-executable.png	\
 	i-fifo.png		\
 	i-floppy.png		\
+	i-nfs.png		\
 	i-printer.png		\
 	i-regular.png		\
 	i-sock.png		\
