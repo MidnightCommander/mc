@@ -2318,7 +2318,7 @@ find_buttonbar (Dlg_head *h)
 {
     WButtonBar *bb;
 
-    bb = (WButtonBar *) find_widget_type (h, buttonbar_callback);
+    bb = (WButtonBar *) find_widget_type (h, (callback_fn) buttonbar_callback);
     return bb;
 }
 

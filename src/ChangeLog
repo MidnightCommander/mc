@@ -1,3 +1,11 @@
+2004-09-03  Pavel S. Shirshov <pavelsh@mail.ru>
+
+	* menu.c (destroy_menu): Fix warnings.
+	* view.c (view_adjust_size): Likewise.
+	* widget.c (find_buttonbar): Likewise.
+
+        Based on patch from Jakub Jelinek  <jakub@redhat.com>
+
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
 	* color.c (try_alloc_color_pair (ncurses)): Added const qualifier
