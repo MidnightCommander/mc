@@ -229,63 +229,41 @@ set_idle_proc (Dlg_head *d, int enable)
 	d->flags &= ~DLG_WANT_IDLE;
 }
 
-/* add component to dialog buffer */
-int add_widget (Dlg_head *where, void *what)
+/*
+ * Insert widget to dialog before current widget and make the new widget
+ * current.  Return widget number.
+ */
+int
+add_widget (Dlg_head *h, void *w)
 {
-    Widget_Item *back;
-    Widget      *widget = (Widget *) what;
+    Widget_Item *new_item;
+    Widget *widget = (Widget *) w;
 
-    /* Don't accept 0 widgets, this could be from widgets that could not */
-    /* initialize properly */
-    if (!what)
-	return 0;
+    /* Don't accept 0 widgets, and running dialogs */
+    if (!widget || h->running)
+	abort ();
 
-    widget->x += where->x;
-    widget->y += where->y;
+    widget->x += h->x;
+    widget->y += h->y;
+    widget->parent = h;
 
-    if (where->running){
-	    Widget_Item *point = where->current;
+    new_item = g_new (Widget_Item, 1);
+    new_item->dlg_id = h->count++;
+    new_item->widget = widget;
 
-	    where->current = g_new (Widget_Item, 1);
-
-	    if (point){
-		    where->current->next = point->next;
-		    where->current->prev = point;
-		    point->next->prev = where->current;
-		    point->next = where->current;
-	    } else {
-		    where->current->next = where->current;
-		    where->first = where->current;
-		    where->current->prev = where->first;
-		    where->first->next = where->current;
-	    }
+    if (h->current) {
+	new_item->next = h->current;
+	new_item->prev = h->current->prev;
+	h->current->prev->next = new_item;
+	h->current->prev = new_item;
     } else {
-	    back = where->current;
-	    where->current = g_new (Widget_Item, 1);
-	    if (back){
-		    back->prev = where->current;
-		    where->current->next = back;
-	    } else {
-		    where->current->next = where->current;
-		    where->first = where->current;
-	    }
-
-	    where->current->prev = where->first;
-	    where->first->next = where->current;
-
+	new_item->prev = new_item;
+	new_item->next = new_item;
+	h->first = new_item;
     }
-    where->current->dlg_id = where->count;
-    where->current->widget = what;
-    where->current->widget->parent = where;
 
-    where->count++;
-
-    /* If the widget is inserted in a running dialog */
-    if (where->running) {
-	send_message (widget, WIDGET_INIT, 0);
-	send_message (widget, WIDGET_DRAW, 0);
-    }
-    return (where->count - 1);
+    h->current = new_item;
+    return new_item->dlg_id;
 }
 
 /* broadcast a message to all the widgets in a dialog that have

@@ -1,5 +1,9 @@
 2003-09-11  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (add_widget): New, safer implementation.  Don't rely on
+	the position of the first widget.  Disable insertion into
+	running dialogs - it's unused and cannot be tested.
+
 	* boxes.c (symlink_dialog): Add "OK" and "Cancel" buttons.
 	Don't translate strings, it's done in quick_dialog().
 	Reported by Ali Akcaagac <aliakc@web.de>
