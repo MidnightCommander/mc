@@ -769,15 +769,16 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	GnomeDesktopEntry *dentry;
 
 	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
-	dentry->name    = g_strdup (short_name);
-	dentry->comment = NULL;
-	dentry->tryexec = NULL;
-	dentry->exec    = g_strdup (pathname);
-	dentry->icon    = gnome_unconditional_pixmap_file ("gnome-folder.png");
-	dentry->docpath = NULL;
-	dentry->type    = g_strdup ("Directory");
+	dentry->name     = g_strdup (short_name);
+	dentry->comment  = NULL;
+	dentry->tryexec  = NULL;
+	dentry->exec     = g_strdup (pathname);
+	dentry->icon     = gnome_unconditional_pixmap_file ("gnome-folder.png");
+	dentry->docpath  = NULL;
+	dentry->type     = g_strdup ("Directory");
 	dentry->location = g_strdup (dentry_path);
-
+	dentry->geometry = NULL;
+	
 	gnome_desktop_entry_save (dentry);
 	desktop_load_from_dentry (dentry);
 }

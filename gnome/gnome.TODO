@@ -1,5 +1,4 @@
 All:
-- Intenrationalization
 - It crashes
 - It leaks objects.
 - argp handling.
