@@ -1,3 +1,10 @@
+1998-11-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (display_mini_info): Use g_strdup_printf() to make it
+	i18n-ize nicely.
+	(panel_create_filter): Use _(), not N_().
+	(x_create_panel): Likewise.
+
 1998-11-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_create_panel): Add panel view.  Put the views

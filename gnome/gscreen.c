@@ -1368,7 +1368,7 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
 	/* Control+Shift = LINK */
-	if ((event->state & (GDK_SHIFT_MASK|GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK|GDK_CONTROL_MASK))
+	if ((event->state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) == (GDK_SHIFT_MASK | GDK_CONTROL_MASK))
 		action = GDK_ACTION_LINK;
 	else if (event->state & (GDK_SHIFT_MASK))
 		action = GDK_ACTION_MOVE;
@@ -1886,22 +1886,23 @@ display_mini_info (WPanel *panel)
 {
 	GtkLabel *label = GTK_LABEL (panel->ministatus);
 
-	if (panel->searching){
-		char *str = copy_strings (N_("Search: "), panel->search_buffer, NULL);
-		
-		gtk_label_set (label, str);
-		free (str);
+	if (panel->searching) {
+		char *buf;
+
+		buf = g_strdup_printf (_("Search: %s"), panel->search_buffer);
+		gtk_label_set (label, buf);
+		g_free (buf);
 		return;
 	}
 
 	if (panel->marked){
-		char buffer [120];
-		
-		sprintf (buffer, N_(" %s bytes in %d file%s"),
-			 size_trunc_sep (panel->total), panel->marked,
-			 panel->marked == 1 ? "" : "s");
-		
-		gtk_label_set (label, buffer);
+		char *buf;
+
+		buf = g_strdup_printf ((panel->marked == 1) ? _("%s bytes in %d file") : _("%s bytes in %d files"),
+				       size_trunc_sep (panel->total),
+				       panel->marked);
+		gtk_label_set (label, buf);
+		g_free (buf);
 		return;
 	}
 
@@ -1921,7 +1922,7 @@ display_mini_info (WPanel *panel)
 			gtk_label_set (label, str);
 			free (str);
 		} else 
-			gtk_label_set (label, N_("<readlink failed>"));
+			gtk_label_set (label, _("<readlink failed>"));
 		return;
 	}
 
@@ -1972,7 +1973,7 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 	gtk_box_pack_start (GTK_BOX (ihbox), arrow, TRUE, TRUE, 0);
 	gtk_widget_show (arrow);
 
-	label = gtk_label_new (N_("Filter"));
+	label = gtk_label_new (_("Filter"));
 	gtk_box_pack_start (GTK_BOX (ihbox), label, TRUE, TRUE, 0);
 	gtk_widget_show (label);
 
@@ -2120,7 +2121,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	back_p = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_BACK);
 	fwd_p  = gnome_stock_pixmap_widget_new (panel->xwindow, GNOME_STOCK_MENU_FORWARD);
 	
-	panel->up_b    = gtk_button_new_with_label ("up");
+	panel->up_b    = gtk_button_new_with_label (_("Up"));
 	panel->back_b   = gtk_button_new ();
 	panel->fwd_b    = gtk_button_new ();
 	gtk_container_add (GTK_CONTAINER (panel->back_b), back_p);

@@ -136,9 +136,11 @@ popup_open (GtkWidget *widget, gpointer data)
 		g_assert (pfi->panel != NULL);
 
 		do_panel_cd (pfi->panel, pfi->filename, cd_exact);
+	} else if (is_exe (s.st_mode)) {
+		/* FIXME: execute */
+	} else {
+		/* FIXME: get default program and launch it with this file */
 	}
-
-	/* FIXME: add other cases */
 }
 
 static void

@@ -70,7 +70,6 @@ find_panel_owning_window (GdkDragContext *context)
 {
 	GList *list;
 	WPanel *panel;
-	GdkWindowPrivate *wp, *lwp;
 	GtkWidget *source_widget;
 
 	source_widget = gtk_drag_get_source_widget (context);
