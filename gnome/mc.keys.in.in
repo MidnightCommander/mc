@@ -128,6 +128,9 @@ application/x-deb:
 	fm-open=%cd %p#deb
 	fm-view=%view{ascii} dpkg-deb -c %f
 	icon-filename=@icondir@/gnome-pack-deb.png
+
+application/x-slp:
+	icon-filename=@icondir@/gnome-pack-slp.png
 	
 application/x-zoo:
 	fm-open=%cd %p#uzoo
