@@ -684,13 +684,8 @@ main (int argc, char **argv)
     c_in = c_man;
 
     /* Repeat for each input line */
-    while (!feof (f_man)) {
+    while (fgets (buffer, BUFFER_SIZE, f_man)) {
 	char *input_line;	/* Input line without initial "\&" */
-
-	/* Read a line */
-	if (!fgets (buffer, BUFFER_SIZE, f_man)) {
-	    break;
-	}
 
 	if (buffer[0] == '\\' && buffer[1] == '&')
 	    input_line = buffer + 2;

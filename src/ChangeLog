@@ -1,12 +1,16 @@
 2003-01-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* man2hlp.c (main): Use fgets() return value in while loop
+	instead of feof() because end-of-file indicator can be false on
+	error.
+
 	* man2hlp.c (handle_command): Fix possible buffer overflow.
 	(handle_link): Likewise.
 
 2002-12-27  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c (setup_panels): Revert unnecessary part of the
-	previous patch.  Call load_hint regardless of message_visible.
+	previous patch.  Call load_hint() regardless of message_visible.
 	Reported by Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
 
 	* key.c (correct_key_code): Don't call get_modifier() for normal
