@@ -45,5 +45,4 @@
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)
 
-void port_shutdown_extra_fds(void);
 void x_flush_events (void);
