@@ -390,7 +390,7 @@ get_default_icon (file_entry *fe)
 	if (S_ISFIFO (mode))
 		return iset_fifo;
 
-	if (is_exe (mode))
+	if (!S_ISLNK (mode) && is_exe (mode))
 		return iset_executable;
 
 	if (!strcmp (fe->fname, "core") || !strcmp (extension (fe->fname), "core"))
