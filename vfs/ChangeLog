@@ -1,3 +1,7 @@
+2002-12-01  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/Makefile.am: Add uzip to EXTFS_OUT.
+
 2002-11-16  Pavel Roskin  <proski@gnu.org>
 
 	* mcserv.c (do_classic_auth): Restore support for shadow

@@ -26,6 +26,7 @@ EXTFS_OUT = 			\
 	lslR 			\
 	ucpio 			\
 	urar 			\
+	uzip 			\
 	uzoo 			\
 	ftplist 		\
 	uar 			\
