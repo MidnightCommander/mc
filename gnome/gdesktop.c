@@ -542,6 +542,145 @@ drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manua
 	return;
 }
 
+static char **
+drops_from_event (GdkEventDropDataAvailable *event, int *argc)
+{
+	int count, i, len;
+	int arguments;
+	char *p, **argv;
+
+	/* Count the number of file names received */
+	count = event->data_numbytes;
+	p = event->data;
+	arguments = 0;
+	while (count){
+		arguments++;
+		len = strlen (p) + 1;
+		count -= len;
+		p += len;
+	}
+
+	/* Create the exec vector with all of the filenames */
+	argv = (char **) xmalloc (sizeof (char *) * arguments + 1, "arguments");
+	count = event->data_numbytes;
+	p = event->data;
+	i = 0;
+	do {
+		len = 1 + strlen (p);
+		count -= len;
+		argv [i++] = p;
+		p += len;
+	} while (count);
+	argv [i] = 0;
+	*argc = i;
+	
+	return argv;
+}
+
+/*
+ * destroys a desktop_icon_t structure and anything that was held there,
+ * including the desktop widget. 
+ */
+static void
+desktop_release_desktop_icon_t (desktop_icon_t *di)
+{
+	if (di->dentry){
+		gnome_desktop_entry_free (di->dentry);
+	} else {
+		free (di->pathname);
+		di->pathname = 0;
+	}
+
+	if (di->widget){
+		gtk_widget_destroy (di->widget);
+		di->widget = 0;
+	}
+	free (di);
+}
+
+static int
+remove_directory (char *path)
+{
+	int i;
+
+	if (confirm_delete){
+		char *buffer;
+		
+		if (know_not_what_am_i_doing)
+			query_set_sel (1);
+		buffer = copy_strings (_("Do you want to delete "), path, "?", NULL);
+		i = query_dialog (_("Delete"), buffer,
+				  D_ERROR, 2, _("&Yes"), _("&No"));
+		free (buffer);
+		if (i != 0)
+			return 0;
+	}
+	create_op_win (OP_DELETE, 0);
+	erase_dir (path);
+	destroy_op_win ();
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	return 1;
+}
+
+/*
+ * Removes an icon from the desktop and kills the ~/desktop file associated with it
+ */
+static void
+desktop_icon_remove (desktop_icon_t *di)
+{
+	desktop_icons = g_list_remove (desktop_icons, di);
+
+	if (di->dentry == NULL){
+		/* launch entry */
+		mc_unlink (di->pathname);
+	} else {
+		/* a .destop file or a directory */
+		/* Remove the .desktop */
+		mc_unlink (di->dentry->location);
+		
+		if (strcmp (di->dentry->type, "Directory") == 0){
+			struct stat s;
+
+			if (mc_lstat (di->dentry->exec[0], &s) == 0){
+				if (S_ISLNK (s.st_mode))
+					mc_unlink (di->dentry->exec[0]);
+				else 
+					if (!remove_directory (di->dentry->exec[0]))
+						return;
+			}
+		}
+	}
+	desktop_release_desktop_icon_t (di);
+}
+
+static void
+drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
+{
+	struct stat s;
+	char *r;
+	char **drops;
+	int drop_count;
+	
+	/* try to stat it, if it fails, remove it from desktop */
+	if (!mc_stat (di->dentry->exec [0], &s) == 0){
+		desktop_icon_remove (di);
+		return;
+	}
+
+	drops = drops_from_event (event, &drop_count);
+	
+	r = regex_command (di->pathname, "Drop", drops, 0);
+	if (r && strcmp (r, "Success") == 0){
+		free (drops);
+		return;
+	}
+	
+	if (is_exe (s.st_mode))
+		gnome_desktop_entry_launch_with_args (di->dentry, drop_count, drops);
+	
+	free (drops);
+}
+
 static void
 url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
@@ -550,7 +689,6 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 	int len;
 	int is_directory = 0;
 
-	printf ("URL dropped\n");
 	/* if DI is set to zero, then it is a drop on the root window */
 	if (di)
 		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
@@ -565,16 +703,8 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 		return;
 	}
 
-	printf ("Arguments to non-directory (FIXME: needs to be implemented):\n");
-	count = event->data_numbytes;
-	p = event->data;
-	do {
-		len = 1 + strlen (event->data);
-		count -= len;
-		printf ("[%s], ", p);
-		p += len;
-	} while (count);
-	printf ("\nReceiving: %s %d\n", (char *) event->data, (int) event->data_numbytes);
+	/* Last case: regular desktop stuff */
+	drop_on_launch_entry (widget, event, di);
 }
 
 static void
@@ -769,82 +899,6 @@ desktop_icon_make_draggable (desktop_icon_t *di)
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (desktop_icon_drag_request), di);
 	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (desktop_icon_drag_start), di);
 	gtk_signal_connect (obj, "drag_end_event", GTK_SIGNAL_FUNC (desktop_icon_drag_end), di);
-}
-
-/*
- * destroys a desktop_icon_t structure and anything that was held there,
- * including the desktop widget. 
- */
-static void
-desktop_release_desktop_icon_t (desktop_icon_t *di)
-{
-	if (di->dentry){
-		gnome_desktop_entry_free (di->dentry);
-	} else {
-		free (di->pathname);
-		di->pathname = 0;
-	}
-
-	if (di->widget){
-		gtk_widget_destroy (di->widget);
-		di->widget = 0;
-	}
-	free (di);
-}
-
-static int
-remove_directory (char *path)
-{
-	int i;
-
-	if (confirm_delete){
-		char *buffer;
-		
-		if (know_not_what_am_i_doing)
-			query_set_sel (1);
-		buffer = copy_strings (_("Do you want to delete "), path, "?", NULL);
-		i = query_dialog (_("Delete"), buffer,
-				  D_ERROR, 2, _("&Yes"), _("&No"));
-		free (buffer);
-		if (i != 0)
-			return 0;
-	}
-	create_op_win (OP_DELETE, 0);
-	erase_dir (path);
-	destroy_op_win ();
-	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-	return 1;
-}
-
-/*
- * Removes an icon from the desktop and kills the ~/desktop file associated with it
- */
-static void
-desktop_icon_remove (desktop_icon_t *di)
-{
-	desktop_icons = g_list_remove (desktop_icons, di);
-
-	if (di->dentry == NULL){
-		/* launch entry */
-		mc_unlink (di->pathname);
-	} else {
-		/* a .destop file or a directory */
-		/* Remove the .desktop */
-		mc_unlink (di->dentry->location);
-		
-		if (strcmp (di->dentry->type, "Directory") == 0){
-			struct stat s;
-
-			if (mc_lstat (di->dentry->exec[0], &s) == 0){
-				if (S_ISLNK (s.st_mode))
-					mc_unlink (di->dentry->exec[0]);
-				else 
-					if (!remove_directory (di->dentry->exec[0]))
-						return;
-			}
-		}
-	}
-	desktop_release_desktop_icon_t (di);
 }
 
 /* Called by the pop up menu: removes the icon from the desktop */
@@ -1076,18 +1130,15 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	GnomeDesktopEntry *dentry;
 
 	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
+	memset (dentry, 0, sizeof (GnomeDesktopEntry));
 	dentry->name     = g_strdup (short_name);
-	dentry->comment  = NULL;
-	dentry->tryexec  = NULL;
-	dentry->exec_length = 0;
 	dentry->exec     = (char **) malloc (2 * sizeof (char *));
 	dentry->exec[0]  = g_strdup (pathname);
 	dentry->exec[1]  = NULL;
+	dentry->exec_length = 1;
 	dentry->icon     = gnome_unconditional_pixmap_file ("gnome-folder.png");
-	dentry->docpath  = NULL;
 	dentry->type     = g_strdup ("Directory");
 	dentry->location = g_strdup (dentry_path);
-	dentry->geometry = NULL;
 	
 	gnome_desktop_entry_save (dentry);
 	desktop_load_from_dentry (dentry);
@@ -1148,75 +1199,32 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 	return FALSE;
 }
 
-static char **
-drops_from_event (GdkEventDropDataAvailable *event)
-{
-	int count, i, len;
-	int arguments;
-	char *p, **argv;
-
-	/* Count the number of file names received */
-	count = event->data_numbytes;
-	p = event->data;
-	arguments = 0;
-	while (count){
-		arguments++;
-		len = strlen (p) + 1;
-		count -= len;
-		p += len;
-	}
-
-	/* Create the exec vector with all of the filenames */
-	argv = (char **) xmalloc (sizeof (char *) * arguments + 1, "arguments");
-	count = event->data_numbytes;
-	p = event->data;
-	i = 0;
-	do {
-		len = 1 + strlen (p);
-		count -= len;
-		argv [i++] = p;
-		p += len;
-	} while (count);
-	argv [i] = 0;
-
-	return argv;
-}
-
 static void
-drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
+desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_name)
 {
-	struct stat s;
-	char *r;
-	char **drops;
-	
-	/* try to stat it, if it fails, remove it from desktop */
-	if (!mc_stat (di->pathname, &s) == 0){
-		desktop_icon_remove (di);
-		return;
-	}
-
-	drops = drops_from_event (event);
-	
-	r = regex_command (di->pathname, "Drop", drops, 0);
-	if (strcmp (r, "Success") == 0){
-		free (drops);
-		return;
-	}
-	
-	if (is_exe (s.st_mode))
-		exec_direct (di->pathname, drops);
-	
-	free (drops);
-}
-
-static void
-desktop_create_launch_entry (char *pathname, char *short_name)
-{
+	GnomeDesktopEntry *dentry;
 	GtkWidget *window;
 	desktop_icon_t *di;
 	char *icon;
+	struct stat s;
 
-	icon = get_desktop_icon (pathname);
+	stat (pathname, &s);
+	dentry = xmalloc (sizeof (GnomeDesktopEntry), "launch_entry");
+	memset (dentry, 0, sizeof (GnomeDesktopEntry));
+	
+	dentry->name     = short_name;
+	dentry->exec     = (char **) malloc (2 * sizeof (char *));
+	dentry->exec[0]  = g_strdup (pathname);
+	dentry->exec[1]  = NULL;
+	dentry->exec_length = 1;
+	dentry->icon     = get_desktop_icon (short_name);
+	dentry->type     = g_strdup ("File");
+	dentry->location = g_strdup (desktop_file);
+	dentry->terminal = 1;
+	
+	gnome_desktop_entry_save (dentry);
+	desktop_load_from_dentry (dentry);
+#if 0
 	window = my_create_transparent_text_window (icon, x_basename (pathname));
 	g_free (icon);
 	if (!window)
@@ -1240,6 +1248,7 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 			    GTK_SIGNAL_FUNC (drop_on_launch_entry), di);
 
 	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+#endif
 }
 
 static int 
@@ -1283,7 +1292,7 @@ desktop_setup_icon (char *filename, char *full_pathname)
 			
 			desktop_version = copy_strings (full_pathname, ".desktop", NULL);
 			if (!exist_file (desktop_version) && !desktop_pathname_loaded (full_pathname))
-				desktop_create_launch_entry (full_pathname, filename);
+				desktop_create_launch_entry (desktop_version, full_pathname, filename);
 			free (desktop_version);
 		}
 	}

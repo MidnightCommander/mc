@@ -223,14 +223,14 @@ Z       Extract compressed tar files to subdirectories
 	  echo $1|egrep -q "\.tar.gz$" && EXT=tar_gz
 	  echo $1|egrep -q "\.tgz$"    && EXT=tgz
 	  echo $1|egrep -q "\.tpz$"    && EXT=tpz
-	  echo %f|egrep -q "\.tar.Z$"    && EXT=tar_Z
-	  echo %f|egrep -q "\.tar.z$"    && EXT=tar_z
+	  echo $1|egrep -q "\.tar.Z$"    && EXT=tar_Z
+	  echo $1|egrep -q "\.tar.z$"    && EXT=tar_z
           case $EXT in
             tar_gz) D="`basename $1 .tar.gz`";;
             tgz)    D="`basename $1 .tgz`";;
             tpz)    D="`basename $1 .tpz`";;
-            tar_Z)  D="`basename %f .tar.Z`";;
-            tar_z)  D="`basename %f .tar.z`";;
+            tar_Z)  D="`basename $1 .tar.Z`";;
+            tar_z)  D="`basename $1 .tar.z`";;
           esac
           mkdir $D; (cd $D && tar xvzof ../$1)||echo tag $1 >>$MC_CONTROL_FILE
 	  shift

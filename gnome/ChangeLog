@@ -1,8 +1,18 @@
 1998-05-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gprop.c (change_icon): Test for gp, as the combobox emits the
+	"changed" signal when shutting down.  Great.
+
 	* gdesktop.c (desktop_reload): Missing mc_closedir
 	(desktop_setup_icon): Fix memory leak.
 	(get_desktop_icon): Fix memory leak.
+	(desktop_create_directory_entry): Set the size of the exec
+	vector. 
+	(desktop_create_launch_entry): Same.
+
+	We now create launch entries instead of trying to support
+	regular dropped stuff on the desktop, this makes things easier and
+	more consistent.
 
 1998-05-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 

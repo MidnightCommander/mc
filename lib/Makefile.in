@@ -14,7 +14,8 @@ INSTALL_DATA = @INSTALL_DATA@
 
 DISTLIB = Makefile.in mc.menu mc.ext.in tdiff xnc.hlp xterm.ti \
 	vt100.ti ansi.ti linux.ti tdiff ncurses.h mc.hint mc.lib xterm.tcap \
-	xterm.ad README.xterm mc.sh mc.csh mcserv.init mcserv.pamd tkmc.wmconfig
+	xterm.ad README.xterm mc.sh mc.csh mcserv.init mcserv.pamd tkmc.wmconfig \
+	mc.ext.in.qnx.diff mc.menu.qnx.diff
 
 all:
 

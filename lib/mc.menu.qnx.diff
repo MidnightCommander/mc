@@ -1,0 +1,53 @@
+--- mc.menu	Mon May 18 13:27:26 1998
++++ mc.menu.qnx	Mon May 18 13:25:01 1998
+@@ -179,7 +179,11 @@
+ 
+ =+ f \.tar\.gz$ | f \.tar\.z$ | f \.tgz$ | f \.tpz$ | f \.tar\.Z$ & t r
+ x       Extract the contents of a compressed tar file
+-	tar xzvf %f
++	gzip -dc %f | tar xvf -
++
++=+ f \.tar\.F$ & t r
++x       Extract the contents of a compressed tar file
++	freeze -dc %f | tar xvf -
+ 
+ = t r
+ + ! t t
+@@ -212,7 +216,16 @@
+           tar_Z)  D="`basename %f .tar.Z`";;
+           tar_z)  D="`basename %f .tar.z`";;
+         esac
+-        mkdir $D; cd $D && tar xvzof ../%f
++        mkdir $D; cd $D && (gzip -dc ../%f | tar xvof -)
++
+++ f \.tar.F$ & t r & ! t t
++z       Extract compressed tar file to subdirectory
++        unset D
++	echo %f|egrep -q "\.tar.F$" && EXT=tar_F
++        case $EXT in
++          tar_F) D="`basename %f .tar.F`";;
++        esac
++        mkdir $D; cd $D && (freeze -dc ../%f | tar xvof -)
+ 
+ + t t
+ Z       Extract compressed tar files to subdirectories
+@@ -225,13 +238,18 @@
+ 	  echo $1|egrep -q "\.tpz$"    && EXT=tpz
+ 	  echo $1|egrep -q "\.tar.Z$"    && EXT=tar_Z
+ 	  echo $1|egrep -q "\.tar.z$"    && EXT=tar_z
++	  echo $1|egrep -q "\.tar.F$"    && EXT=tar_F
+           case $EXT in
+             tar_gz) D="`basename $1 .tar.gz`";;
+             tgz)    D="`basename $1 .tgz`";;
+             tpz)    D="`basename $1 .tpz`";;
+             tar_Z)  D="`basename $1 .tar.Z`";;
+             tar_z)  D="`basename $1 .tar.z`";;
++            tar_F)  D="`basename $1 .tar.F`";;
++          esac
++          case $EXT in
++            tar_gz|tgz|tpz|tar_Z|tar_z) mkdir $D; (cd $D && (gzip -dc ../$1 | tar xvof -))||echo tag $1 >>$MC_CONTROL_FILE;;
++            tar_F)                      mkdir $D; (cd $D && (freeze -dc ../$1 | tar xvof -))||echo tag $1 >>$MC_CONTROL_FILE;;
+           esac
+-          mkdir $D; (cd $D && tar xvzof ../$1)||echo tag $1 >>$MC_CONTROL_FILE
+ 	  shift
+         done

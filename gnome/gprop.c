@@ -414,8 +414,9 @@ change_icon (GtkEntry *entry, GpropGeneral *gp)
 
 	filename = gtk_entry_get_text (entry);
 
-	if (g_file_exists (filename))
+	if (g_file_exists (filename) && gp->icon_pixmap){
 		gnome_pixmap_load_file (GNOME_PIXMAP (gp->icon_pixmap), gtk_entry_get_text (entry));
+	}
 }
 
 GpropGeneral *

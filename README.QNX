@@ -1,0 +1,322 @@
+Midnight Commander for QNX
+--------------------------
+
+1. Compiling
+2. Running 'mc' under QNX
+3. List of modifications on mc-4.1.33
+4. TODO
+5. Contact information
+
+1. Compiling
+------------
+
+1.1 Make utility
+----------------
+
+Use 'gmake'. (This is the default 'make' under QNX 4.23+). [The old 'qmake'
+can not handle the makefiles in the mc-source.]
+
+1.2 Configuring
+---------------
+
+If you don't have an installed TCP/IP development kit, you have to 'hide'
+the library file 'socket3r.lib' (can be installed by e.g. Watcom C 10.6)
+in /usr/lib or /usr/watcom/10.6/usr/lib, because the existence of this file
+will confuse 'configure': it will erranously assume you have the complete
+TCP/IP development kit (with headers) and will enable compiling of the
+network-related VFS code (not only tarfs).
+[A patch would be required in the configure-script to check the existence
+of the TCP/IP-related headers also...]
+
+Use '--disable-nls' option, if you don't have the binary utilities of
+GNU 'gettext' package (e.g. 'msgfmt'). ['--with-included-gettext' doesn't
+really work in 4.1.33, there are configuration/compiling problems...]
+
+1.3 Compiler
+------------
+
+It is adviced to use Watcom C 10.6+ to compile the source, because older
+compilers (e.g. 9.52) do not support some convenient/required features.
+[e.g. 'ar'-compatible 'wlib',...]
+
+1.4 "No prototype found for '<function>'" warnings
+--------------------------------------------------
+
+It is adviced to use high warning level (e.g. 'CFLAGS="-w4" ./configure'),
+when compiling the source, because Watcom C uses a special parameter passing
+convention for functions with fixed number of arguments only. So if the
+compiler doesn't see the correct prototype of a function with variable
+number of arguments (like printf()), it will produce a warning about the
+missing prototype, but generates function call code according to the special
+parameter passing convention, not the required CDECL convention (it is used
+by default for functions with variable number of arguments). So the calling
+convention of the function call code and the function code itself will not
+match! So you MUST provide the correct prototype for function with variable
+number of arguments! (Or you can force using the stack-based calling
+convention as a default, if you have the stack-call-conv version of all of the
+required libraries ('<name>3s.lib')...[Watcom C 10.6 required!])
+
+[The latest release version (4.1.33/qnx) is checked against these types of
+missing prototypes...]
+
+1.5 Tested configuration
+------------------------
+
+QNX 4.24
+Watcom C 10.6 (release version, no newer beta patches)
+Photon 1.12
+no TCP/IP development kit (-> VFS: tarfs only!)
+mc-4.1.33, mc-4.1.34
+
+2. Running 'mc' under QNX
+-------------------------
+
+Using 'qnx*' terminals:
+
+  You can not use your keyboard correctly, if you disable the "Full 8 bits
+  input" feature in the 'Options|Display bits...' dialog.
+
+  On 'qnx*' terminals 'mc' will run in black and white mode by default,
+  because these types of terminals use non-ANSI-compatible color sequences.
+
+Accessing remote nodes via the native QNX-network:
+
+  [The problem exists under the older versions of 'mc' only...]
+  If directory panels can not handle '//<node-id>' prefix in directory names,
+  use directory links in order to access remote nodes on the native QNX
+  network:
+
+        mkdir /net
+        ln -sf //1/ /net/1
+        ...
+
+Extension and menu files:
+
+  Default 'tar' uses 'stderr' (and not 'stdout' as its 'normal' output with
+  '-t' option.
+  
+  Default 'tar' is not a GNU 'tar', so does not understand '-z' option.
+
+Special key-mappings:
+
+  Restrictions of the META-? as Alt-? functionality:
+  [META-? as ESC-? will always work!!!]
+
+    Alt-TAB   -> Ctrl-TAB    (Alt-TAB reserved in Photon [1.12+])
+    Alt-ENTER -> Ctrl-ENTER  ('qnx*' terminals only)
+  
+    Alt-<uppercase letter>: doesn't work
+
+'qansi*' terminals:
+
+  Problem [QNX 4.23+ only]: screen corruption (strange line-drawing character
+  set handling) on 'qansi*' terminals, if linked with mc/Slang/terminfo
+  terminal management. (Older versions of QNX and Slang/termcap not affected.)
+
+  This problem is solved, see the comments in slang/sldisply.c about
+  SLTT_TRANSP_ACS_PATCH and QNX_QANSI_SLANG_COMPAT_ACS!
+
+other terminals:
+
+  I have tested 'mc' under QNX on 'qnx*' and 'qansi*' terminals only. 
+  
+toggle panels on/off (CTRL-o):
+
+  Currently not supported, but could be implemented later...
+
+3. List of modifications on mc-4.1.33/mc-4.1.34
+-----------------------------------------------
+
+edit/
+
+ syntax.c: (4.1.33 only, fixed in 4.1.34)
+
+   line 100,191: WCC 10.6 doesn't like "<label>: }" contruct ("no statement
+   after the label"), modified to "<label>: /*nop*/; }".
+
+lib/
+
+  mc.menu:
+
+    'Z' on 'tar.Z' and 'tar.z' files: '%f' -> '$1'.
+
+  mc.ext.in.qnx.diff:
+  mc.menu.qnx.diff:
+
+    QNX: modified 'mc.ext.in'. [tar -t: output to stderr,...]
+    QNX: modified 'mc.menu'. [tar is not GNU tar: doesn't know '-z',...]
+
+    Support for '*.tar.F': 'freeze'-compressed tar files...
+    
+    (No automatic install implemented: patches must be applied before
+    running 'configure' [->mc.ext.in.qnx.diff!]; this patch can be not
+    only QNX-specific...) 
+
+  Makefile.in:
+
+    'mc.ext.in.qnx.diff' and 'mc.menu.qnx.diff' added to DISTLIB.
+
+slang/
+
+  sldisply.c:
+
+    SLTT_TRANSP_ACS_PATCH dependant code:
+
+    The problem: some terminals (e.g. QNX/qansi*) map the whole upper half of
+    the ASCII table to the lower half, when alt-char-set is activated with
+    the smacs/as string-sequence. This means, that if 0 <= ch < 128 written
+    to the terminal, it will be translated to (ch+128) automatically by the
+    terminal: so not only the line-drawing characters can be written, when
+    the alt-char-set is activated. It implicitly means, that space, NL, CR,
+    etc. characters (exactly: anything besides the "standard" line drawing
+    characters) can not be written directly to the terminal, when the
+    alt-char-set is activated, because writing these characters doesn't cause
+    an implicit/temporary switching-back to the standard char-set!
+   
+    The original code in SLang assumes that space, NL, CR, etc. can be
+    printed when alt-char-set is activated. If SLTT_TRANSP_ACS_PATCH is
+    defined, the modified code will not use this assumption.
+    [Remark: the patch-code is not the most exact solution, but works...]
+
+    QNX_QANSI_SLANG_COMPAT_ACS_PATCH dependant code:
+
+    A more OS/terminal-specific solution for the problem mentioned above
+    (->SLTT_TRANSP_ACS_PATCH).
+  
+    If QNX_QANSI_SLANG_COMPAT_ACS is defined, the default smacs/sa, rmacs/ae,
+    acsc/ac [and sgr/sa, if it would be used!] command sequences will be
+    replaced internally with the "old style" (pre-QNX 4.23) sequences in case
+    of QNX/qansi terminals. Using these optional command sequences the terminal
+    remains compatible with the original SLang code (without using the
+    workaround-code enabled by defining SLTT_TRANSP_ACS_PATCH).
+   
+    Remark:
+
+    Currently SLTT_TRANSP_ACS_PATCH is not auto-configured by 'configure'.
+    (Must be manually defined...)
+
+    There is some (QNX-specific) auto-configuration hand-coded in the source:
+
+        #ifdef SLTT_TRANSP_ACS_PATCH
+        # if defined(__QNX__) && defined(QNX_QANSI_SLANG_COMPAT_ACS)
+        #  undef SLTT_TRANSP_ACS_PATCH
+        # endif
+        #else
+        # if defined(__QNX__) && !defined(QNX_QANSI_SLANG_COMPAT_ACS)
+        #  define QNX_QANSI_SLANG_COMPAT_ACS 1
+        # endif
+        #endif
+
+  slutty.c:
+
+    "newtty.c_iflag &= ~(ECHO | INLCR | ICRNL);"
+
+    ECHO(0x08) is a c_lflag bit, it means PARMRK(0x08) in c_iflag. (!?!)
+
+src/
+
+  file.c:
+
+    'do_reget' can be extern if (USE_VFS && USE_NETCODE), not if (USE_VFS).
+
+  find.c:
+
+    search_content():
+    
+    variable 'i' "must be" 'int', not 'char'. ["i == -1": (buggy?) WCC 10.6
+    doesn't convert automatically (int)(-1) to (char)(-1) (GCC does), so
+    "comparison result always 0" warning produced. It is cleaner to define
+    'i' as 'int', than cast '-1' to 'char', because 'read()' returns 'int'.]
+    
+  key.c:
+
+    init_key():
+
+    Call load_xtra_key_defines() and clear 'use_8th_bit_as_meta' by default
+    under QNX, if a 'qnx*' terminal detected. (A saved config file (mc.ini)
+    can override it later...)
+
+  key.h:
+
+    Declare load_xtra_key_defines().
+
+  keyxdef.c:
+
+    Provides a method to define some platform-specific additional key
+    mappings. (e.g. QNX terminals can handle most of META-? combinations as
+    ALT-?...)
+    
+    (Currently not listed in doc/FILES...)
+
+  layout.c:
+
+    TIOCGWINSZ must be available (<sys/ioctl.h> included), because window-
+    resizing code doesn't work, if not defined.
+
+  main.c:
+
+    print_usage(): reserved name in the QNX run-time library!
+    print_usage() -> print_mc_usage()
+
+  mouse.c:
+
+    QNX: ncurses 1.9.8a ported to QNX doesn't provide the 'SP' pointer as a
+    global symbol in the library, so the keyok() emulation currently can not
+    be used under QNX (4.24 & Watcom C 10.6 release version).
+
+  slint.c:
+
+    QNX: 'qansi*' terminals added to the color_terminals[] list.
+    
+  subshell.c:
+  utilunix.c:
+
+    QNX: include <unix.h> to get prototype for exec*()!!!
+    [See README.QNX/Section 1.4!]
+    
+  Makefile.in:
+
+    'keyxdef' module added to SRCS and OBJS.
+
+vfs/
+
+  Makefile.in:
+
+    'install' target: 'mcserv' not installed, if net-code not enabled
+    by 'configure'.
+
+<mc-src-root>/
+
+  README.QNX:
+
+    QNX-specific notes...
+  
+  configure (line 3369):
+  configure.in (line 88):
+
+    (mc-4.1.34 only)
+    'test x$CCOPTS = x;' => 'test "x$CCOPTS" = x;'
+
+  Makefile.in:
+
+    README.QNX added to DISTMAIN.
+    
+4. TODO
+-------
+
+Because of limited time and resources now I can define a 'wish list' only:
+(maybe somebody in the QNX community can help...)
+
+subshell support with panel switch on/off ?
+mouse under Photon (with qnxm, qansi-m terminals) ?
+...
+
+5. Contact information
+----------------------
+
+Please report QNX-specific bugs and comments via e-mail to: gt_cosy@usa.net
+
+
+-------------
+Tamasi Gyorgy
+-------------

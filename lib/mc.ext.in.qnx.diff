@@ -1,0 +1,39 @@
+--- mc.ext.in	Fri May 15 08:26:45 1998
++++ mc.ext.in.qnx	Mon May 18 13:22:28 1998
+@@ -105,26 +105,32 @@
+ 
+ regex/\.t([gp]?z|ar\.g?[zZ])$
+ 	Open=%cd tar:%d/%p/
+-	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
++	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf - 2>&1
+ 	Extract=gzip -dc %f 2>/dev/null | tar xf -
+ 	Icon=compressed.xpm
+ 
+ regex/\.tar\.bz$
+ #	Open=%cd tar:%d/%p/
+-	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf -
++	View=%view{ascii} bzip -dc %f 2>/dev/null | tar tvvf - 2>&1
+ 	Extract=bzip -dc %f 2>/dev/null | tar xf -
+ 	Icon=compressed.xpm
+ 
+ regex/\.tar\.bz2$
+ 	Open=%cd tar:%d/%p/
+-	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
++	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf - 2>&1
+ 	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
+ 	Icon=compressed.xpm
+ 
++regex/\.tar\.F$
++#	Open=%cd tar:%d/%p/
++	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf - 2>&1
++	Extract=freeze -dc %f 2>/dev/null | tar xf -
++	Icon=compressed.xpm
++
+ # .tar
+ shell/.tar
+ 	Open=%cd tar:%d/%p/
+-	View=%view{ascii} tar tvvf %f
++	View=%view{ascii} tar tvvf %f 2>&1
+ 	Extract=tar xf %f
+ 	Icon=tar.xpm
+ 

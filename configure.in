@@ -85,7 +85,7 @@ if test x$GCC = xyes; then
 fi
 
 dnl Debug mode is turned ON for now
-if test x$CCOPTS = x; then
+if test "x$CCOPTS" = x; then
     CCOPTS='-g'
 fi
 
