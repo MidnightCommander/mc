@@ -2021,10 +2021,11 @@ ask_file_mask:
 	easy_patterns = 1;
 	source_mask = convert_pattern (source_mask, match_file, 1);
 	source_easy_patterns = easy_patterns;
-    }
+        error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
+        free (source_mask);
+    } else
+        error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
 
-    error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
-    free (source_mask);
     if (error) {
 	message_3s (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		 orig_mask, error);

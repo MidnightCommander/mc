@@ -1,3 +1,8 @@
+Fri Apr 10 10:35:06 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* file.c (file_mask_dialog): When the shell patterns option was
+	off source_mask was freed twice.
+
 1998-04-10  Marc Ewing  <marc@redhat.com>
 
 	* panel.h: added up_b
