@@ -132,11 +132,13 @@ get_operation (int x, int y)
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
 
+#if 0
+		/* Not yet implemented the Link bits, so better to not show what we dont have */
 		item = gtk_menu_item_new_with_label (_("Link"));
 		gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC(set_option), (void *) OPER_LINK);
 		gtk_menu_append (GTK_MENU (menu), item);
 		gtk_widget_show (item);
-
+#endif
 		gtk_signal_connect (GTK_OBJECT (menu), "hide", GTK_SIGNAL_FUNC(option_menu_gone), 0);
 	} 
 
@@ -222,6 +224,17 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 	char *p   = event->data;
 	int len;
 
+	switch (operation){
+	case OPER_COPY:
+		create_op_win (OP_COPY, 0);
+		break;
+		
+	case OPER_MOVE:
+		create_op_win (OP_MOVE, 0);
+		break;
+	}
+	file_mask_defaults ();
+	
 	do {
 		char *tmpf;
 		
@@ -230,12 +243,9 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 		
 		switch (operation){
 		case OPER_COPY:
-			create_op_win (OP_COPY, 0);
-			file_mask_defaults ();
 			tmpf = concat_dir_and_file (dest, x_basename (p));
 			copy_file_file (p, tmpf, 1);
 			free (tmpf);
-			destroy_op_win ();
 			break;
 			
 		case OPER_MOVE:
@@ -244,7 +254,6 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 			tmpf = concat_dir_and_file (dest, x_basename (p));
 			move_file_file (p, tmpf);
 			free (tmpf);
-			destroy_op_win ();
 			break;
 
 			
@@ -252,6 +261,25 @@ perform_drop_manually (int operation, GdkEventDropDataAvailable *event, char *de
 		p += len;
 	} while (count > 0);
 	
+	destroy_op_win ();
+}
+
+void
+drop_on_panel (int requestor_id, char *dest)
+{
+	WPanel *source_panel;
+	int x, y;
+	
+	gdk_window_get_pointer (NULL, &x, &y, NULL);
+	operation = get_operation (x, y);
+	
+	source_panel = find_panel_owning_window_id (requestor_id);
+	
+	if (source_panel)
+		perform_drop_on_panel (source_panel, operation, dest);
+	else
+		perform_drop_manually (operation, event, dest);
+	return;
 }
 
 static void
@@ -264,18 +292,7 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 	int operation;
 
 	if (is_directory){
-		WPanel *source_panel;
-		int x, y;
-
-		gdk_window_get_pointer (NULL, &x, &y, NULL);
-		operation = get_operation (x, y);
-
-		source_panel = find_panel_owning_window_id (event->requestor);
-		
-		if (source_panel)
-			perform_drop_on_panel (source_panel, operation, di->dentry->exec);
-		else
-			perform_drop_manually (operation, event, di->dentry->exec);
+		drop_on_panel (event->requestor, di->dentry->exec);
 		return;
 	}
 		

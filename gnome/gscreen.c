@@ -678,21 +678,29 @@ panel_drop_enter (GtkWidget *widget, GdkEvent *event)
 static void
 panel_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailable *data, WPanel *panel)
 {
-	printf ("Drop data available!\n");
+	/* Sigh, the DropDataAvailable does not provide the location where the drag
+	 * happened, so for now, the only thing we can do is ask gdk to tell us
+	 * where the pointer is, even if it bears little resemblance with the
+	 * actual spot where the drop happened.
+	 * 
+	 * FIXME: gtk+ needs fixing here. 
+	 */
+
+	drop_on_panel (data->requestor, panel->cwd);
 }
 
 /* Workaround for the CList that is not adding its clist-window to the DND windows */
 static void
 fixed_gtk_widget_dnd_drop_set (GtkCList *clist, int drop_enable, char **drop_types, int count, int is_destructive)
 {
-	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drop_types, count, is_destructive);
+/*	gtk_widget_dnd_drop_set (GTK_WIDGET (clist), drop_enable, drop_types, count, is_destructive); */
 	gdk_window_dnd_drop_set (clist->clist_window, drop_enable, drop_types, count, is_destructive);
 }
 
 static void
 fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_accept_list, int numtypes)
 {
-	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes);
+/*	gtk_widget_dnd_drag_set (GTK_WIDGET (clist), drag_enable, type_accept_list, numtypes); */
 	gdk_window_dnd_drag_set (clist->clist_window, drag_enable, type_accept_list, numtypes);
 }
 
@@ -718,8 +726,10 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	if (drag_directory && drag_directory_ok){
 		gtk_widget_show (drag_directory_ok);
 		gtk_widget_show (drag_directory);
+#if 0
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
-		drag_directory_ok->window, &hotspot);
+					drag_directory_ok->window, &hotspot);
+#endif
 	}
 	
 	/* DND: Drag setup */

@@ -1,3 +1,18 @@
+Thu Mar  5 23:54:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (drop_on_panel): New function;  Used by the directory
+	icons and by regular panels to support drag targets;
+
+	* gscreen.c (panel_drop_data_available): Performs the drop action
+	on a panel.  It needs fixing, as the DropDataAvailabelEvent does
+	not provide any information as to where the drop actually
+	happened. 
+
+	(fixed_gtk_widget_dnd_drag_set, fixed_gtk_widget_dnd_drop_set):
+	Only set the main window of the clist to be the source/target of
+	the drag and drop code.  The little square at the end did not make
+	much sense as a drop/drag spot.
+	
 Wed Mar  4 22:43:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtools.c (query_dialog): Rewritten to use the MC dialog/widget code. 
