@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-15 15:00-0600\n"
+"POT-Creation-Date: 1999-02-15 15:29-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:593 gnome/gcmd.c:634 gnome/gcmd.c:639 gnome/gcmd.c:643
-#: gnome/gscreen.c:2550
+#: gnome/gscreen.c:2565
 msgid "Show all files"
 msgstr ""
 
@@ -594,84 +594,88 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: gnome/gprefs.c:96
+#: gnome/gprefs.c:78
 msgid "Show backup files"
 msgstr ""
 
-#: gnome/gprefs.c:100
+#: gnome/gprefs.c:82
 msgid "Show hidden files"
 msgstr ""
 
-#: gnome/gprefs.c:104
+#: gnome/gprefs.c:86
 msgid "Mix files and directories"
 msgstr ""
 
-#: gnome/gprefs.c:108
+#: gnome/gprefs.c:90
 msgid "Use shell patterns instead of regular expressions"
 msgstr ""
 
-#: gnome/gprefs.c:117
+#: gnome/gprefs.c:99
 msgid "Confirm when deleting file"
 msgstr ""
 
-#: gnome/gprefs.c:121
+#: gnome/gprefs.c:103
 msgid "Confirm when overwriting files"
 msgstr ""
 
-#: gnome/gprefs.c:125
+#: gnome/gprefs.c:107
 msgid "Confirm when executing files"
 msgstr ""
 
-#: gnome/gprefs.c:129
+#: gnome/gprefs.c:111
 msgid "Show progress while operations are being performed"
 msgstr ""
 
-#: gnome/gprefs.c:138
-msgid "VFS Timeout :"
+#: gnome/gprefs.c:120
+msgid "VFS Timeout:"
 msgstr ""
 
-#: gnome/gprefs.c:139 gnome/gprefs.c:164
+#: gnome/gprefs.c:121 gnome/gprefs.c:146
 msgid "Seconds"
 msgstr ""
 
-#: gnome/gprefs.c:142
-msgid "Anonymous FTP password :"
+#: gnome/gprefs.c:124
+msgid "Anonymous FTP password:"
 msgstr ""
 
-#: gnome/gprefs.c:146
+#: gnome/gprefs.c:128
 msgid "Always use FTP proxy"
 msgstr ""
 
-#: gnome/gprefs.c:155
+#: gnome/gprefs.c:137
 msgid "Fast directory reload"
 msgstr ""
 
-#: gnome/gprefs.c:159
+#: gnome/gprefs.c:141
 msgid "Compute totals before copying files"
 msgstr ""
 
-#: gnome/gprefs.c:163
+#: gnome/gprefs.c:145
 msgid "FTP directory cache timeout :"
 msgstr ""
 
-#: gnome/gprefs.c:167
+#: gnome/gprefs.c:149
 msgid "Allow customization of icons in icon view"
 msgstr ""
 
-#: gnome/gprefs.c:176
+#: gnome/gprefs.c:158
 msgid "File display"
 msgstr ""
 
-#: gnome/gprefs.c:180
+#: gnome/gprefs.c:162
 msgid "Confirmation"
 msgstr ""
 
-#: gnome/gprefs.c:184
+#: gnome/gprefs.c:166
 msgid "VFS"
 msgstr ""
 
-#: gnome/gprefs.c:188
+#: gnome/gprefs.c:170
 msgid "Caching"
+msgstr ""
+
+#: gnome/gprefs.c:447
+msgid "Preferences"
 msgstr ""
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
@@ -763,7 +767,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2343
+#: gnome/gprop.c:521 gnome/gscreen.c:2352
 msgid "Icon"
 msgstr ""
 
@@ -870,67 +874,75 @@ msgstr ""
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2343
+#: gnome/gscreen.c:2352
 msgid "Switch view to an Icon view"
 msgstr ""
 
-#: gnome/gscreen.c:2345
+#: gnome/gscreen.c:2354
 msgid "Brief"
 msgstr ""
 
-#: gnome/gscreen.c:2345
+#: gnome/gscreen.c:2354
 msgid "Switch view to show just file name and type"
 msgstr ""
 
-#: gnome/gscreen.c:2347
+#: gnome/gscreen.c:2356
 msgid "Detailed"
 msgstr ""
 
-#: gnome/gscreen.c:2347
+#: gnome/gscreen.c:2356
 msgid "Switch view to show detailed file statistics"
 msgstr ""
 
-#: gnome/gscreen.c:2349
+#: gnome/gscreen.c:2358
 msgid "Custom"
 msgstr ""
 
-#: gnome/gscreen.c:2349
+#: gnome/gscreen.c:2358
 msgid "Switch view to show custom determined statistics."
 msgstr ""
 
-#: gnome/gscreen.c:2354
+#: gnome/gscreen.c:2366
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2354
+#: gnome/gscreen.c:2366
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2356
+#: gnome/gscreen.c:2368
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2356
+#: gnome/gscreen.c:2368
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2370
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2370
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2361
+#: gnome/gscreen.c:2373 src/tree.c:1020
+msgid "Rescan"
+msgstr ""
+
+#: gnome/gscreen.c:2373
+msgid "Rescan the current directory"
+msgstr ""
+
+#: gnome/gscreen.c:2376
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2361
+#: gnome/gscreen.c:2376
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2495
+#: gnome/gscreen.c:2510
 msgid "Location:"
 msgstr ""
 
@@ -1099,7 +1111,7 @@ msgstr ""
 msgid " Save as "
 msgstr ""
 
-#: gtkedit/editcmd.c:501 gtkedit/editcmd.c:2594
+#: gtkedit/editcmd.c:501 gtkedit/editcmd.c:2602
 msgid " Error trying to save file. "
 msgstr ""
 
@@ -1354,89 +1366,89 @@ msgstr ""
 msgid " &No "
 msgstr ""
 
-#: gtkedit/editcmd.c:2434 gtkedit/editcmd.c:2509
+#: gtkedit/editcmd.c:2442 gtkedit/editcmd.c:2517
 msgid " Copy to clipboard "
 msgstr ""
 
-#: gtkedit/editcmd.c:2434 gtkedit/editcmd.c:2456 gtkedit/editcmd.c:2509
-#: gtkedit/editcmd.c:2522
+#: gtkedit/editcmd.c:2442 gtkedit/editcmd.c:2464 gtkedit/editcmd.c:2517
+#: gtkedit/editcmd.c:2530
 msgid " Unable to save to file. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2456 gtkedit/editcmd.c:2522
+#: gtkedit/editcmd.c:2464 gtkedit/editcmd.c:2530
 msgid " Cut to clipboard "
 msgstr ""
 
-#: gtkedit/editcmd.c:2544 gtkedit/editcmd.c:2548 gtkedit/editcmd.c:2553
-#: gtkedit/editcmd.c:2556 src/view.c:1857
+#: gtkedit/editcmd.c:2552 gtkedit/editcmd.c:2556 gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2564 src/view.c:1857
 msgid " Goto line "
 msgstr ""
 
-#: gtkedit/editcmd.c:2544 gtkedit/editcmd.c:2548 gtkedit/editcmd.c:2553
-#: gtkedit/editcmd.c:2556
+#: gtkedit/editcmd.c:2552 gtkedit/editcmd.c:2556 gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2564
 msgid " Enter line: "
 msgstr ""
 
-#: gtkedit/editcmd.c:2577 gtkedit/editcmd.c:2594
+#: gtkedit/editcmd.c:2585 gtkedit/editcmd.c:2602
 msgid " Save Block "
 msgstr ""
 
-#: gtkedit/editcmd.c:2628
+#: gtkedit/editcmd.c:2636
 msgid " Insert File "
 msgstr ""
 
-#: gtkedit/editcmd.c:2643
+#: gtkedit/editcmd.c:2651
 msgid " Insert file "
 msgstr ""
 
-#: gtkedit/editcmd.c:2643
+#: gtkedit/editcmd.c:2651
 msgid " Error trying to insert file. "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2663
+#: gtkedit/editcmd.c:2671
 msgid " Sort block "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2663 gtkedit/editcmd.c:2717
+#: gtkedit/editcmd.c:2671 gtkedit/editcmd.c:2725
 msgid " You must first highlight a block of text. "
 msgstr ""
 
-#: gtkedit/editcmd.c:2670
+#: gtkedit/editcmd.c:2678
 msgid " Run Sort "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2672
+#: gtkedit/editcmd.c:2680
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 
-#: gtkedit/editcmd.c:2683 gtkedit/editcmd.c:2689
+#: gtkedit/editcmd.c:2691 gtkedit/editcmd.c:2697
 msgid " Sort "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2685
+#: gtkedit/editcmd.c:2693
 msgid " Error trying to execute sort command "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2691
+#: gtkedit/editcmd.c:2699
 msgid " Sort returned non-zero: "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2715 gtkedit/editcmd.c:2745
+#: gtkedit/editcmd.c:2723 gtkedit/editcmd.c:2753
 msgid " Process block "
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2747
+#: gtkedit/editcmd.c:2755
 msgid " Error trying to stat file "
 msgstr ""
 
-#: gtkedit/editcmd.c:2817
+#: gtkedit/editcmd.c:2825
 msgid " Mail "
 msgstr ""
 
@@ -3714,56 +3726,56 @@ msgstr ""
 msgid "Thank you for using GNU Midnight Commander"
 msgstr ""
 
-#: src/main.c:2235
+#: src/main.c:2236
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr ""
 
-#: src/main.c:2236
+#: src/main.c:2237
 msgid " and the Linux console"
 msgstr ""
 
-#: src/main.c:2331
+#: src/main.c:2332
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2538
+#: src/main.c:2539
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2549
+#: src/main.c:2550
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2675
+#: src/main.c:2676
 msgid "Geometry for the window"
 msgstr ""
 
-#: src/main.c:2675
+#: src/main.c:2676
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2677
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2677
+#: src/main.c:2678
 msgid "Force activation even if a server is already running"
 msgstr ""
 
-#: src/main.c:2949
+#: src/main.c:2950
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3023
+#: src/main.c:3024
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3024
+#: src/main.c:3025
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4067,10 +4079,6 @@ msgstr ""
 msgid ""
 " Can't chdir to \"%s\" \n"
 " %s "
-msgstr ""
-
-#: src/tree.c:1020
-msgid "Rescan"
 msgstr ""
 
 #: src/tree.c:1022

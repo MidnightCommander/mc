@@ -170,8 +170,6 @@ CORBA_SOURCES = 		\
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
-$(CORBA_SOURCES): $(CORBA_GENERATED)
-
 FileManager-impl.c: FileManager.h
 
 EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	gimp.image.desktop 
