@@ -1,3 +1,16 @@
+1999-09-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* gtkdtree.c (gtk_dtree_class_init): Sigh.  Create a new signal,
+	called "possibly_ungrab", used to request the client to ungrab the
+	mouse at the proper time.  This is required because the stupid
+	clist button press handler grabs the mouse, and we don't want that.
+	(gtk_dtree_select_row): Emit the possibly_ungrab signal here.
+
+	* gscreen.c (panel_tree_drag_motion): Set the
+	panel->drag_tree_dragging_over flag.
+	(panel_tree_drag_leave): Unset said flag.
+	(panel_tree_possibly_ungrab): Ungrab the mouse here.
+
 1999-09-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gcorba.c (Window_close): Fixed typo in cast.
@@ -16,7 +29,7 @@
 1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_uid_group_change): Fix more
-	broken code. 
+	broken code.
 
 1999-09-09  Federico Mena Quintero  <federico@redhat.com>
 

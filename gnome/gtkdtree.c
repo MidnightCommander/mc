@@ -35,6 +35,7 @@ enum {
 	DIRECTORY_CHANGED,
 	SCAN_BEGIN,
 	SCAN_END,
+	POSSIBLY_UNGRAB,
 	LAST_SIGNAL
 };
 
@@ -237,6 +238,12 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 
 	if (dtree->removing_rows)
 		return;
+
+	/* Ask for someone to ungrab the mouse, as the stupid clist grabs it on
+	 * button press.  We cannot do it unconditionally because we don't want
+	 * to knock off a DnD grab.
+	 */
+	gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[POSSIBLY_UNGRAB], NULL);
 
 	scan_begin (dtree);
 
@@ -601,16 +608,23 @@ gtk_dtree_class_init (GtkDTreeClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE,
 				0);
+	gtk_dtree_signals[POSSIBLY_UNGRAB] =
+		gtk_signal_new ("possibly_ungrab",
+				GTK_RUN_FIRST, object_class->type,
+				GTK_SIGNAL_OFFSET (GtkDTreeClass, possibly_ungrab),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE,
+				0);
 
 	gtk_object_class_add_signals (object_class, gtk_dtree_signals, LAST_SIGNAL);
 
-	object_class->destroy        = gtk_dtree_destroy;
+	object_class->destroy = gtk_dtree_destroy;
 
-	widget_class->size_allocate  = gtk_dtree_size_allocate;
+	widget_class->size_allocate = gtk_dtree_size_allocate;
 
 	ctree_class->tree_select_row = gtk_dtree_select_row;
-	ctree_class->tree_expand     = gtk_dtree_expand;
-	ctree_class->tree_collapse   = gtk_dtree_collapse;
+	ctree_class->tree_expand = gtk_dtree_expand;
+	ctree_class->tree_collapse = gtk_dtree_collapse;
 }
 
 static void

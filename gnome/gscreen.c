@@ -1310,29 +1310,29 @@ panel_create_file_list (WPanel *panel)
 	g_free (titles);
 
 	gtk_signal_connect_after (GTK_OBJECT (sw), "size_allocate",
-				  (GtkSignalFunc) panel_file_list_size_allocate_hook,
+				  GTK_SIGNAL_FUNC (panel_file_list_size_allocate_hook),
 				  panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "select_row",
-			    (GtkSignalFunc) panel_file_list_select_row,
+			    GTK_SIGNAL_FUNC (panel_file_list_select_row),
 			    panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "unselect_row",
-			    (GtkSignalFunc) panel_file_list_unselect_row,
+			    GTK_SIGNAL_FUNC (panel_file_list_unselect_row),
 			    panel);
 
 	/* Connect to the flist signals */
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "row_popup_menu",
-			    (GtkSignalFunc) panel_file_list_row_popup_menu,
+			    GTK_SIGNAL_FUNC (panel_file_list_row_popup_menu),
 			    panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "empty_popup_menu",
-			    (GtkSignalFunc) panel_file_list_empty_popup_menu,
+			    GTK_SIGNAL_FUNC (panel_file_list_empty_popup_menu),
 			    panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "open_row",
-			    (GtkSignalFunc) panel_file_list_open_row,
+			    GTK_SIGNAL_FUNC (panel_file_list_open_row),
 			    panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "start_drag",
-			    (GtkSignalFunc) panel_file_list_start_drag,
+			    GTK_SIGNAL_FUNC (panel_file_list_start_drag),
 			    panel);
 
 	/* Set up drag and drop */
@@ -1790,6 +1790,22 @@ panel_tree_scan_end (GtkWidget *widget, gpointer data)
 	set_cursor (data, GDK_TOP_LEFT_ARROW);
 }
 
+/* Handler for the possibly_ungrab signal of the dtree widget */
+static void
+panel_tree_possibly_ungrab (GtkWidget *widget, gpointer data)
+{
+	WPanel *panel;
+
+	panel = data;
+
+	/* The stupid clist button press handler grabs the mouse.  We will get
+	 * called when the user presses the mouse on the tree, so we ungrab it.
+	 * Also, we have to make sure we don't knock away a DnD grab.
+	 */
+	if (!panel->drag_tree_dragging_over)
+		gdk_pointer_ungrab (GDK_CURRENT_TIME);
+}
+
 /* Callback for the drag_begin signal of the tree */
 static void
 panel_tree_drag_begin (GtkWidget *widget, GdkDragContext *context, gpointer data)
@@ -2004,6 +2020,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 	dtree = GTK_DTREE (widget);
 	panel = data;
 
+	panel->drag_tree_dragging_over = TRUE;
 	panel_setup_drag_scroll (panel, x, y,
 				 panel_tree_scrolling_is_desirable,
 				 panel_tree_scroll);
@@ -2092,6 +2109,7 @@ panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *context, guint time, g
 
 	panel = data;
 
+	panel->drag_tree_dragging_over = FALSE;
 	panel_cancel_drag_scroll (panel);
 
 	if (panel->drag_tree_timeout_id != 0) {
@@ -2178,11 +2196,13 @@ panel_create_tree_view (WPanel *panel)
 	/* DTree signals */
 
 	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
-			    (GtkSignalFunc) panel_chdir, panel);
+			    GTK_SIGNAL_FUNC (panel_chdir), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "scan_begin",
-			    (GtkSignalFunc) panel_tree_scan_begin, panel);
+			    GTK_SIGNAL_FUNC (panel_tree_scan_begin), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "scan_end",
-			    (GtkSignalFunc) panel_tree_scan_end, panel);
+			    GTK_SIGNAL_FUNC (panel_tree_scan_end), panel);
+	gtk_signal_connect (GTK_OBJECT (tree), "possibly_ungrab",
+			    GTK_SIGNAL_FUNC (panel_tree_possibly_ungrab), panel);
 
 	/* Set up drag source */
 

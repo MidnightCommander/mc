@@ -76,7 +76,7 @@ typedef struct format_e {
 typedef struct {
     Widget   widget;
     dir_list dir;		/* Directory contents */
-    
+
     int      list_type;		/* listing type (was view_type) */
     int      active;		/* If panel is currently selected */
     char     cwd [MC_MAXPATHLEN];/* Current Working Directory */
@@ -108,7 +108,7 @@ typedef struct {
     format_e *status_format;    /* Mini status format */
 
     int      format_modified;	/* If the format was changed this is set */
-    
+
     char     *panel_name;	/* The panel name */
     struct   stat dir_stat;	/* Stat of current dir: used by execute () */
 
@@ -118,15 +118,15 @@ typedef struct {
     int	     total_width;
     int	     ascent;
     int	     descent;
-    
+
     int      searching;
     char     search_buffer [256];
-   
+
     void     *port_ui;		/* UI stuff specific to each GUI port */
 
 #ifdef HAVE_GNOME
     /* These are standard GtkWidgets */
-	
+
     void *xwindow;		/* The toplevel window */
 
     void *table;
@@ -171,6 +171,9 @@ typedef struct {
     int drag_tree_row;
     int drag_tree_timeout_id;
     file_entry *drag_tree_fe;
+
+    /* Whether the user is dragging something over the tree */
+    int drag_tree_dragging_over;
 
     void *panel_listbox;	/* container for the list */
     int is_a_desktop_panel;

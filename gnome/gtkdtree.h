@@ -44,6 +44,7 @@ typedef struct {
 	void (* directory_changed) (GtkDTree *dtree, char *directory);
 	void (* scan_begin) (GtkDTree *dtree);
 	void (* scan_end) (GtkDTree *dtree);
+	void (* possibly_ungrab) (GtkDTree *dtree);
 } GtkDTreeClass;
 
 guint      gtk_dtree_get_type           (void);

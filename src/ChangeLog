@@ -1,3 +1,8 @@
+1999-09-13  Federico Mena Quintero  <federico@redhat.com>
+
+	* panel.h (WPanel): Added a new field that indicates whether the
+	user is dragging something over the tree.
+
 1999-08-31  Federico Mena Quintero  <federico@redhat.com>
 
 	* main.c: In the GNOME version, we want cd_symlinks to be FALSE.
