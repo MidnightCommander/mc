@@ -74,9 +74,11 @@ static char *displays [LIST_TYPES] = {
     N_("&Full file list"),
     N_("&Brief file list"),
     N_("&Long file list"),
-    N_("&User defined:"),
-    N_("&Icon view"),
+    N_("&User defined:")
 };
+
+/* Index in displays[] for "user defined" */
+#define USER_TYPE 3
 
 static int user_hotkey = 'u';
 
@@ -171,7 +173,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
 	button_start = DISPLAY_X - l - 5;
 
 	/* get hotkey of user-defined format string */
-	cp = strchr (displays[LIST_TYPES - 1], '&');
+	cp = strchr (displays[USER_TYPE], '&');
 	if (cp != NULL && *++cp != '\0')
 	    user_hotkey = tolower (*cp);
 
@@ -205,7 +207,7 @@ display_init (int radio_sel, char *init_text, int _check_status,
     add_widget (dd, user);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 5, LIST_TYPES - 1, displays, 1, "radio");
+    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1, "radio");
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }

@@ -1,5 +1,8 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* main.h: Remove all references to icons.
+	* panel.h: Likewise.  Adjust all dependencies.
+
 	* hotlist.c (load_hotlist): Remove compatibility code with
 	hotlist files created by ancient versions of mc.
 

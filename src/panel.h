@@ -7,14 +7,13 @@
 #include "util.h"
 #include "widget.h"	/* for history loading and saving */
 
-#define LIST_TYPES	5
+#define LIST_TYPES	4
 
 enum list_types {
     list_full,			/* Name, size, perm/date */
     list_brief,			/* Name */
     list_long,			/* Like ls -l */
-    list_user,			/* User defined */
-    list_icons			/* iconic display */
+    list_user			/* User defined */
 };
 
 enum view_modes {
@@ -92,7 +91,6 @@ typedef struct {
     int      split;		/* Split panel to allow two columns */
     int      is_panelized;	/* Flag: special filelisting, can't reload */
     int      frame_size;	/* half or full frame */
-    int      icons_per_row;     /* Icon view; how many icons displayed per row */
     sortfn   *sort_type;	/* Sort type */
     char     *filter;		/* File name filter */
 

@@ -92,10 +92,6 @@ set_colors (WPanel *panel)
     attrset (NORMAL_COLOR);
 }
 
-#ifndef ICONS_PER_ROW
-#    define ICONS_PER_ROW(x) 1
-#endif
-
 /* Delete format string, it is a linked list */
 static void
 delete_format (format_e *format)
@@ -1523,7 +1519,7 @@ unselect_item (WPanel *panel)
 }
 
 static void
-do_move_down (WPanel *panel)
+move_down (WPanel *panel)
 {
     if (panel->selected+1 == panel->count)
 	return;
@@ -1544,7 +1540,7 @@ do_move_down (WPanel *panel)
 }
 
 static void
-do_move_up (WPanel *panel)
+move_up (WPanel *panel)
 {
     if (panel->selected == 0)
 	return;
@@ -1558,46 +1554,6 @@ do_move_up (WPanel *panel)
 	paint_dir (panel);
     }
     select_item (panel);
-}
-
-static void
-move_rel (WPanel *panel, int rel)
-{
-    unselect_item (panel);
-
-    if (rel < 0){
-	if (panel->selected + rel < 0)
-	    panel->selected = 0;
-	else
-	    panel->selected = panel->selected + rel;
-    } else {
-	if (panel->selected + rel >= panel->count)
-	    panel->selected = panel->count - 1;
-	else
-	    panel->selected = panel->selected + rel;
-    }
-    select_item (panel);
-}
-
-/*                           */
-/* Panel key binded commands */
-/*                           */
-static void
-move_up (WPanel *panel)
-{
-    if (panel->list_type == list_icons){
-	move_rel (panel, -ICONS_PER_ROW (panel));
-    } else
-	do_move_up (panel);
-}
-
-static void
-move_down (WPanel *panel)
-{
-    if (panel->list_type == list_icons){
-	move_rel (panel, ICONS_PER_ROW (panel));
-    } else
-	do_move_down (panel);
 }
 
 /* Changes the selection by lines (may be negative) */
@@ -1640,31 +1596,21 @@ move_selection (WPanel *panel, int lines)
 static int
 move_left (WPanel *panel, int c_code)
 {
-    if (panel->list_type == list_icons){
-	do_move_up (panel);
+    if (panel->split) {
+	move_selection (panel, -llines (panel));
 	return 1;
-    } else {
-	if (panel->split){
-	    move_selection (panel, -llines (panel));
-	    return 1;
-	} else
-	    return maybe_cd (c_code, 0);
-    }
+    } else
+	return maybe_cd (c_code, 0);
 }
 
 static int
 move_right (WPanel *panel, int c_code)
 {
-    if (panel->list_type == list_icons){
-	do_move_down (panel);
+    if (panel->split) {
+	move_selection (panel, llines (panel));
 	return 1;
-    } else {
-	if (panel->split){
-	    move_selection (panel, llines (panel));
-	    return 1;
-	} else
-	    return maybe_cd (c_code, 1);
-    }
+    } else
+	return maybe_cd (c_code, 1);
 }
 
 static void
@@ -1941,7 +1887,7 @@ start_search (WPanel *panel)
 	if (panel->selected+1 == panel->count)
 	    panel->selected = 0;
 	else
-	    do_move_down (panel);
+	    move_down (panel);
 	do_search (panel, 0);
     } else {
 	panel->searching = 1;

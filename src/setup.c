@@ -100,7 +100,6 @@ static const struct {
     { "brief", list_brief },
     { "long",  list_long  },
     { "user",  list_user  },
-    { "icons", list_icons },
     { 0, 0 }
 };
 
@@ -394,9 +393,6 @@ panel_load_setup (WPanel *panel, char *section)
 	    panel->list_type = list_types [i].list_type;
 	    break;
 	}
-
-    if (panel->list_type == list_icons)
-        panel->list_type = list_full;
 
     /* User formats */
     if (panel->user_format){

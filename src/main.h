@@ -70,7 +70,6 @@ extern int confirm_delete;
 extern int confirm_execute;
 extern int confirm_exit;
 extern int confirm_overwrite;
-extern int iconify_on_exec;
 extern int force_colors;
 extern int boot_current_is_left;
 extern int acs_vline;
