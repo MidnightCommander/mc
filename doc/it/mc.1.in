@@ -2628,9 +2628,8 @@ Completamenti di nomefile, nomeutente, variabili e nomehost funzionano
 su tutte le righe di ingresso, il completamento dei comandi invece è 
 specifico della riga di comando.
 Se il completamento è ambiguo (ci sono più possibilità differenti),
-MC emette un suono e l'azione seguente, a seconda delle impostazioni 
+MC emette un suono e l'azione seguente dipenderà a seconda delle impostazioni 
 dell'opzione
-MC beeps and the following action depends on the setting of the
 .I Completamento: visualizza tutto
 nella finestra
 .\"LINK2"
