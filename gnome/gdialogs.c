@@ -273,6 +273,7 @@ FileProgressStatus
 file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 {
         FileOpContextUI *ui;
+        gfloat per;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
 
@@ -284,12 +285,12 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
         if (ui->aborting)
                 return FILE_ABORT;
+        per = ( done / total <= 1.0) ? done / total : 1.0;
 
-        if (total == 0.0)
+        if (total <= 0.0)
                 gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), 0.0);
         else
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog),
-                                         (gfloat) done/(gfloat) total);
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), per);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
