@@ -1,12 +1,16 @@
 2002-02-05  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Don't use defunct ncurses_version.
+	Reported by Thomas Dickey <dickey@herndon4.his.com>
+	Set force_ncurses whenever --with-ncurses is used.  If set,
+	suppress checks for S-Lang and fail is ncurses is not found.
+
 	* configure.in: Introduce a new variable screen_type that is
 	either "slang" or "ncurses" without additional text.  Use it
 	instead of screen_manager whenever possible.  Fix text in
 	AC_NCURSES call, use m4 quotes and move shell quotes into the
 	macro.
 	* acinclude.m4: Likewise.
-	Reported by Thomas Dickey <dickey@herndon4.his.com>
 
 2002-01-28  Petr Kozelka  <pkozelka@email.cz>
 

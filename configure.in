@@ -333,7 +333,8 @@ esac
 
 AC_ARG_WITH(ncurses,
 	[--with-ncurses[=base-dir]    Compile with ncurses/locate base dir],
-	[if test x$withval = xyes
+	[force_ncurses=true
+	if test x$withval = xyes
 	then
 		search_ncurses=true
 	else
@@ -517,24 +518,26 @@ AC_ARG_WITH(efence,
 	mem_debug="Electric Fence"
 fi])
 
-slang_check_lib=true
-slang_term=""
-slang_use_system_installed_lib=false
-AC_CHECK_LIB(slang,SLang_init_tty,
-	[AC_CHECK_HEADERS(slang.h)
-	if test x$ac_cv_header_slang_h = xyes
-	then
-             slang_use_system_installed_lib=true
-	     slang_check_lib=false
-        else
-	     AC_CHECK_HEADERS(slang/slang.h)
-	     if test x$ac_cv_header_slang_slang_h = xyes
-	     then
-		 slang_use_system_installed_lib=true
-		 slang_check_lib=false
-	     fi
-	fi
-])
+if test -z "$force_ncurses"; then
+	slang_check_lib=true
+	slang_term=""
+	slang_use_system_installed_lib=false
+	AC_CHECK_LIB(slang,SLang_init_tty,
+		[AC_CHECK_HEADERS(slang.h)
+		if test x$ac_cv_header_slang_h = xyes
+		then
+	             slang_use_system_installed_lib=true
+		     slang_check_lib=false
+	        else
+		     AC_CHECK_HEADERS(slang/slang.h)
+		     if test x$ac_cv_header_slang_slang_h = xyes
+		     then
+			 slang_use_system_installed_lib=true
+			 slang_check_lib=false
+		     fi
+		fi
+	])
+fi
 
 AC_ARG_WITH(terminfo,
         [--with-terminfo            SLANG: Force usage of terminfo],[
@@ -636,13 +639,17 @@ then
 	       [renamed ncurses in /usr/include/ncurses])
 fi
 
+if test "x$screen_type" != xncurses && test -n "$force_ncurses"; then
+    AC_MSG_ERROR([Could not find ncurses])
+fi
+
 
 dnl Ncurses specific checks
 dnl
 dnl If ncurses exports the ESCDELAY variable it should be set to 0
 dnl or you'll have to press Esc three times to dismiss a dialog box.
 dnl
-if test -n "$ncurses_version"; then
+if test "x$screen_type" = xncurses; then
   save_LIBS="$LIBS"
   LIBS="$MCLIBS $LIBS"
   AC_CACHE_CHECK([for ESCDELAY variable],
