@@ -1,6 +1,9 @@
 Before 4.6.2
 ============
 
+Due to problems in the VFS, files are not written back after being edited
+over VFS with an external editor.
+
 Allow pathnames starting with spaces in vfs/extfs.
 
 Hide the passwords when displaying mcvfs path names.
