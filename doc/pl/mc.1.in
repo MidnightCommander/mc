@@ -123,7 +123,7 @@ katalogu otwartego w panelu nieaktywnym
 (nie martw siê, zawsze zostaniesz poproszony o
 potwierdzenie takiej operacji). W celu zasiêgniêcia szerszych informacji zajrzyj
 do dzia³ów
-.BR "Panele katalogów" , " Lewe i prawe menu" oraz " Menu plików" .
+.BR "Panele katalogów" , " Lewe i prawe menu " oraz " Menu plików" .
 .PP
 Mo¿esz wywo³ywaæ dowolne komendy systemowe po prostu wpisuj±c je. Wszystko co
 piszesz pojawia siê w linii poleceñ i po naci¶niêciu klawisza Enter zostanie
@@ -192,7 +192,9 @@ samych przypisañ klawiszy co wersja GNU edytora Emacs.
 Jest wiele sekcji mówi±cych o klawiszach. Ta nastêpuj±ca jest najwa¿niejsza.
 .PP
 Sekcja
+.\"LINK2"
 .I Menu plików
+.\"File Menu"
 opisuje skróty klawiszowe do komend pojawiaj±cych siê w menu plików. Ta sekcja
 zawiera funkcjê klawiszy. Wiêkszo¶æ z tych komend wywo³uje jak±¶ akcjê przede
 wszystkim na jednym lub kilku wybranych plikach.
@@ -1068,7 +1070,7 @@ przemieszczanie.
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Edycja rozszerzeñ pliów (Extension File Edit)"
-Ta komenda wywo³a twój edytor na plik ~/.mc/ext. Format tego pliku jest
+Ta komenda wywo³a twój edytor na plik ~/.mc/bindings. Format tego pliku jest
 nastêpuj±cy (zmieni³ siê on pocz±wszy od wersji 3.0):
 .PP
 Wszystkie linie zaczynaj±ce siê od #, lub puste, nie s± brane pod uwagê.
@@ -1545,10 +1547,9 @@ ftp poniewa¿ ka¿da operacja bêdzie wymagaæ kolejnych zapytañ do serwera.
 .PP
 Ponadto mo¿esz zdefiniowaæ serwer proxy dla transferów ftp i skonfigurowaæ
 Midnight Commandera tak, aby zawsze go u¿ywa³. Zobacz sekcjê
-System plików FTP (FTP File
-System) po wiêcej szczegó³ów.
+System plików FTP (FTP File System) po wiêcej szczegó³ów.
 .PP
-.\"NODE "    Virtual FS"
+.\"NODE "    Layout"
 .SH "    Wygl±d (Layout)"
 Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
 zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
@@ -2750,7 +2751,7 @@ Mo¿liwymi klawiszami symboli s±:
 .PP
 .nf
 f0 do f20     Klawisze funkcyjne f0-f20
-bs	      backspace
+bs            backspace
 home          klawisz home
 end           klawisz end
 up            strza³ka w górê
@@ -2793,7 +2794,7 @@ Plik pomocy dla programu.
 .IP
 Standardowy plik rozszerzeñ plików.
 .PP
-~/.mc/ext
+~/.mc/bindings
 .IP
 W³asny plik u¿ytkownika, konfiguruje podgl±d i edycje plików. Ma wy¿szy
 priorytet ni¿ plik systemowy.
