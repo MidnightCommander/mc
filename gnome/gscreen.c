@@ -103,8 +103,11 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 void
 x_panel_update_marks (WPanel *panel)
 {
-	gtk_widget_set_sensitive (panel->fwd_b, panel->dir_history->next ? 1 : 0);
-	gtk_widget_set_sensitive (panel->back_b, panel->dir_history->prev ? 1 : 0);
+	int ff = panel->dir_history->next ? 1 : 0;
+	int bf = panel->dir_history->prev ? 1 : 0;
+
+	gtk_widget_set_sensitive (panel->fwd_b, ff);
+	gtk_widget_set_sensitive (panel->back_b, bf);
 }
 
 void
@@ -1215,16 +1218,22 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 	return fhbox;
 }
 
-void
+static void
 panel_back (GtkWidget *button, WPanel *panel)
 {
 	directory_history_prev (panel);
 }
 
-void
+static void
 panel_fwd (GtkWidget *button, WPanel *panel)
 {
 	directory_history_next (panel);
+}
+
+static void
+panel_up (GtkWidget *button, WPanel *panel)
+{
+	do_panel_cd (panel, "..", cd_exact);
 }
 
 void
@@ -1249,12 +1258,15 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/* buttons */
 	back_p = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_BACK);
 	fwd_p  = gnome_stock_pixmap_widget_new (very_top, GNOME_STOCK_MENU_FORWARD);
+	
+	panel->up_b    = gtk_button_new_with_label ("up");
 	panel->back_b   = gtk_button_new ();
 	panel->fwd_b    = gtk_button_new ();
 	gtk_container_add (GTK_CONTAINER (panel->back_b), back_p);
 	gtk_container_add (GTK_CONTAINER (panel->fwd_b), fwd_p);
 	gtk_signal_connect (GTK_OBJECT (panel->back_b), "clicked", GTK_SIGNAL_FUNC(panel_back), panel);
 	gtk_signal_connect (GTK_OBJECT (panel->fwd_b), "clicked", GTK_SIGNAL_FUNC(panel_fwd), panel);
+	gtk_signal_connect (GTK_OBJECT (panel->up_b), "clicked", GTK_SIGNAL_FUNC(panel_up), panel);
 	panel_update_marks (panel);
 	
 	/* ministatus */
@@ -1265,6 +1277,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	status_line = gtk_hbox_new (0, 0);
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->back_b, 0, 0, 2);
+	gtk_box_pack_start (GTK_BOX (status_line), panel->up_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->fwd_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 5);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);

@@ -137,13 +137,13 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 
 	if (!wp->dnd_drag_enabled)
 		return;
+#if 0
 	if (!gdk_dnd.drag_perhaps)
 		return;
 	if (gdk_dnd.dnd_grabbed)
 		return;
 	if (gdk_dnd.drag_really)
 		return;
-	
 	gdk_dnd_drag_addwindow (window);
 	gdk_dnd_drag_begin (window);
 	XGrabPointer (gdk_display, wp->xwindow, False,
@@ -151,9 +151,39 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 		      GrabModeAsync, GrabModeAsync, gdk_root_window,
 		      None, CurrentTime);
 	gdk_dnd.dnd_grabbed = TRUE;
-	gdk_dnd.drag_perhaps = 1;
 	gdk_dnd.drag_really = 1;
 	gdk_dnd_display_drag_cursor (x, y, FALSE, TRUE);
+#endif
+	gdk_dnd.real_sw = wp;
+	gdk_dnd.dnd_drag_start.x = x;
+	gdk_dnd.dnd_drag_start.y = y;
+	gdk_dnd.drag_perhaps = 1;
+          if(gdk_dnd.drag_startwindows)
+            {
+              g_free(gdk_dnd.drag_startwindows);
+              gdk_dnd.drag_startwindows = NULL;
+            }
+          gdk_dnd.drag_numwindows = gdk_dnd.drag_really = 0;
+          gdk_dnd.dnd_grabbed = FALSE;
+	{
+           /* Set motion mask for first DnD'd window, since it
+               will be the one that is actually dragged */
+            XWindowAttributes dnd_winattr;
+            XSetWindowAttributes dnd_setwinattr;
+
+            /* We need to get motion events while the button is down, so
+               we can know whether to really start dragging or not... */
+            XGetWindowAttributes(gdk_display, (Window)wp->xwindow,
+                                 &dnd_winattr);
+            
+            wp->dnd_drag_savedeventmask = dnd_winattr.your_event_mask;
+            dnd_setwinattr.event_mask = 
+              wp->dnd_drag_eventmask = ButtonMotionMask | ButtonPressMask | ButtonReleaseMask |
+                        EnterWindowMask | LeaveWindowMask;
+            XChangeWindowAttributes(gdk_display, wp->xwindow,
+                                    CWEventMask, &dnd_setwinattr);
+        }
+
 }
 
 static int operation_value;
@@ -488,17 +518,21 @@ destroy_shaped_dnd_windows (void)
 }
 
 /* As Elliot can not be bothered to fix his DnD code in Gdk and it is an absolute mess */
-static int in_desktop_dnd;
+/* static int in_desktop_dnd; */
 
 static void
 desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
 	char *fname;
 
+	g_print("!!!!! desktop_icon_drag_start");
+#if 0
 	if (in_desktop_dnd)
 		return;
-	
+
 	in_desktop_dnd = 1;
+#endif
+
 	/* This should not happen, as the drag end routine should destroy those widgets */
 	destroy_shaped_dnd_windows ();
 
@@ -523,8 +557,10 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 static void
 desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
+#if 0
 	in_desktop_dnd = 0;
-	printf ("drag end!\n");
+#endif
+	printf ("!!!!!!!! drag end!\n");
 	destroy_shaped_dnd_windows ();
 }
 

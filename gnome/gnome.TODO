@@ -11,9 +11,6 @@ Desktop:
 Panels:
 
 - Global bindings (some shortcuts are not implemented)
-- Add a nifty toolbar:
-	- Back/Forward/History buttons are trivial to implement 
-	  with the new history code from Paul Sheer.
 - Split view.
 - External panelize hangs
 
