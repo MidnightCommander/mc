@@ -128,6 +128,23 @@ void execute_hooks (Hook *hook_list);
 void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
 int hook_present (Hook *hook_list, void (*hook_fn)(void *));
 
+
+/* Position saving and restoring */
+
+/* file where positions are stored */
+#define MC_FILEPOS ".mc/filepos"
+/* temporary file */
+#define MC_FILEPOS_TMP ".mc/filepos.tmp"
+/* maximum entries in MC_FILEPOS */
+#define MC_FILEPOS_ENTRIES 1024
+/* Load position for the given filename */
+void load_file_position (char *filename, long *line, long *column);
+/* Save position for the given filename */
+void save_file_position (char *filename, long line, long column);
+
+
+/* OS specific defines */
+
 #ifdef NATIVE_WIN32
 #    define PATH_SEP '\\'
 #    define PATH_SEP_STR "\\"
