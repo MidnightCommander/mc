@@ -189,11 +189,10 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	AC_DEFINE(MOUNTED_GETMNTINFO)
 	AC_MSG_CHECKING([if struct statfs has f_fstypename])
 	AC_CACHE_VAL(fu_cv_sys_mounted_f_fstypename,
-	  [
-	    AC_EGREP_HEADER(f_type;, sys/mount.h, ok=yes, ok=)
-	    test -n "$ok" \
-		&& fu_cv_sys_mounted_f_fstypename=yes \
-		|| fu_cv_sys_mounted_f_fstypename=no
+	  [AC_EGREP_HEADER([f_fstypename],
+			   [sys/mount.h],
+			   [fu_cv_sys_mounted_f_fstypename=yes],
+			   [fu_cv_sys_mounted_f_fstypename=no])
 	  ])
 	AC_MSG_RESULT([$fu_cv_sys_mounted_f_fstypename])
         if test $fu_cv_sys_mounted_f_fstypename = yes; then

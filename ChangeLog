@@ -1,5 +1,9 @@
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (AC_GET_FS_INFO): Fix checking for f_fstypename
+	in struct statfs.
+	Reported by Libor Motyèka <libor.motycka@ortex.cz>.
+
 	* acinclude.m4 (AC_GET_FS_INFO): Warn only once that the list of
 	mounted filesystems cannot be read. Don't define NO_INFOMOUNT.
 	Define HAVE_INFOMOUNT_LIST if a any suitable function has been
