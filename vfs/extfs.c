@@ -44,9 +44,11 @@
 #include "utilvfs.h"
 #include "../src/dialog.h"
 #include "../src/main.h"	/* For shell_execute */
+#include "xdirentry.h"
 #include "vfs.h"
 #include "extfs.h"
 
+#undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
 
 static struct entry *

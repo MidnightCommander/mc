@@ -1,3 +1,8 @@
+2001-02-20  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c: Include xdirentry.h. Undefine ERRNOR before
+	redefining it.
+
 2001-02-19  Pavel Roskin  <proski@gnu.org>
 
 	* shared_tar_ext.c (__find_entry): Make sure that the parent is a
