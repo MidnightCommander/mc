@@ -1,3 +1,9 @@
+2004-11-16  Andrew V. Samoilov  <andrew@email.zp.ua>
+
+	* syntax.c (get_args): Use "argc" to check "args" size.
+	(edit_read_syntax_rules): Add new parameter "argc" (size of the
+	"args" buffer) to prevent buffer overflow.
+
 2004-11-10  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* editdraw.c (edit_status): Don't output extra characters on the

@@ -564,8 +564,8 @@ static char *convert (char *s)
 
 static void get_args (char *l, char **args, int *argc)
 {
-    *argc = 0;
-    for (;;) {
+    int i;
+    for (i = 1; i < *argc; i++) {
 	char *p = l;
 	while (*p && whiteness (*p))
 	    p++;
@@ -574,11 +574,10 @@ static void get_args (char *l, char **args, int *argc)
 	for (l = p + 1; *l && !whiteness (*l); l++);
 	if (*l)
 	    *l++ = '\0';
-	*args = convert (p);
-	(*argc)++;
-	args++;
+	*args++ = convert (p);
     }
-    *args = 0;
+    *args = (char *) NULL;
+    *argc = i;
 }
 
 #define free_args(x)
@@ -639,7 +638,7 @@ static FILE *open_include_file (const char *filename)
 
 /* returns line number on error */
 static int
-edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
+edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int argc)
 {
     FILE *g = 0;
     char *fg, *bg;
@@ -650,7 +649,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
     int save_line = 0, line = 0;
     struct context_rule **r, *c = 0;
     int num_words = -1, num_contexts = -1;
-    int argc, result = 0;
+    int result = 0;
     int i, j;
     int alloc_contexts = MAX_CONTEXTS,
     	alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
@@ -1036,8 +1035,8 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 		int line_error;
 		char *syntax_type;
 	      found_type:
-		syntax_type =  args[2];
-		line_error = edit_read_syntax_rules (edit, g ? g : f, args);
+		syntax_type = args[2];
+		line_error = edit_read_syntax_rules (edit, g ? g : f, args, 1024);
 		if (line_error) {
 		    if (!error_file_name)	/* an included file */
 			result = line + line_error;
