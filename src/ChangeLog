@@ -1,5 +1,7 @@
 2002-09-24  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (panel_event): Implement support for mouse wheel.
+
 	* view.c (display): Fix wrapping of tabs.
 	Reported by Arpad Biro <biro_arpad@yahoo.com>
 

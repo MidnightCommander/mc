@@ -14,8 +14,6 @@ Add support for mouse wheel with gpm.
 
 Recheck all mouse handlers, make sure that they check button number.
 
-Make mouse wheel work on the panels.
-
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 

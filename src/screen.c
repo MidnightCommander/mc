@@ -2282,16 +2282,29 @@ panel_event (Gpm_Event *event, WPanel *panel)
 
     int my_index;
 
+    /* Mouse wheel events */
+    if ((event->buttons & GPM_B_UP) && (event->type & GPM_DOWN)) {
+	prev_page (panel);
+	return MOU_NORMAL;
+    }
+    if ((event->buttons & GPM_B_DOWN) && (event->type & GPM_DOWN)) {
+	next_page (panel);
+	return MOU_NORMAL;
+    }
+
+    /* "<" button */
     if (event->type & GPM_DOWN && event->x == 1 + 1 && event->y == 0 + 1) {
 	directory_history_prev (panel);
 	return MOU_NORMAL;
     }
 
+    /* ">" button */
     if (event->type & GPM_DOWN && event->x == panel->widget.cols - 2 + 1 && event->y == 0 + 1) {
 	directory_history_next (panel);
 	return MOU_NORMAL;
     }
 
+    /* "v" button */
     if (event->type & GPM_DOWN && event->x == panel->widget.cols - 3 + 1 && event->y == 0 + 1) {
 	directory_history_list (panel);
 	return MOU_NORMAL;
