@@ -76,8 +76,8 @@ typedef struct {
 
 extern sort_orders_t sort_orders [SORT_TYPES_TOTAL];
 
-int link_isdir (file_entry *);
-int if_link_is_exe (char *full_name, file_entry *file);
+int link_isdir (const file_entry *);
+int if_link_is_exe (const char *full_name, const file_entry *file);
 
 extern int show_backups;
 extern int show_dot_files;

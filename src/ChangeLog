@@ -1,3 +1,10 @@
+2003-10-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* dir.c (if_link_is_exe): Check mc_stat() return value.
+	Make full_name and file_entry const.
+	(link_isdir): Make file_entry const.
+	* dir.h: Adjust declarations.
+
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
 	* view.c (view_handle_editkey): Fix prototype.

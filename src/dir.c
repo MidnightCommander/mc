@@ -477,7 +477,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
 	return set_zero_dir (list);
     }
     tree_store_start_check (path);
-    for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
+    while ((dp = mc_readdir (dirp))) {
 	status =
 	    handle_dirent (list, filter, dp, &st, next_free, &link_to_dir,
 			   &stale_link);
@@ -506,9 +506,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
     } else {
-	tree_store_end_check ();
-	mc_closedir (dirp);
-	return set_zero_dir (list);
+	next_free = set_zero_dir (list);
     }
 
     mc_closedir (dirp);
@@ -517,7 +515,7 @@ do_load_dir (char *path, dir_list *list, sortfn *sort, int reverse,
 }
 
 int
-link_isdir (file_entry *file)
+link_isdir (const file_entry *file)
 {
     if (file->f.link_to_dir)
 	return 1;
@@ -526,12 +524,11 @@ link_isdir (file_entry *file)
 }
 
 int
-if_link_is_exe (char *full_name, file_entry *file)
+if_link_is_exe (const char *full_name, const file_entry *file)
 {
     struct stat b;
 
-    if (S_ISLNK (file->st.st_mode)) {
-	mc_stat (full_name, &b);
+    if (S_ISLNK (file->st.st_mode) && !mc_stat (full_name, &b)) {
 	return is_exe (b.st_mode);
     } else
 	return 1;
@@ -632,9 +629,7 @@ do_reload_dir (char *path, dir_list *list, sortfn *sort, int count,
 	 * we copied one.
 	 */
 	if (marked_cnt > 0) {
-	    file_entry *p;
-	    if (NULL !=
-		(p = g_hash_table_lookup (marked_files, dp->d_name))) {
+	    if ((g_hash_table_lookup (marked_files, dp->d_name))) {
 		list->list[next_free].f.marked = 1;
 		marked_cnt--;
 	    }
