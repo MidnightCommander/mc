@@ -22,7 +22,7 @@ EDITSRC = edit.c editcmd.c editdraw.c \
 	editwidget.c gtkedit.c gtkeditkey.c \
 	mousemark.c propfont.c syntax.c wordproc.c \
 	edit.h editcmddef.h global.h gtkedit.h \
-	libgettext.h lkeysym.h mousemark.h xdnd.h
+	libgettext.h lkeysym.h mousemark.h xdnd.h editmenu.c
 
 EDITOBJS = edit.o editcmd.o editdraw.o \
 	editwidget.o gtkedit.o gtkeditkey.o \
