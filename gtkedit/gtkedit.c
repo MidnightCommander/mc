@@ -54,13 +54,16 @@ void edit_move_to_prev_col (WEdit * edit, long p);
 int edit_load_file_from_filename (WEdit *edit, char *exp);
 static void gtk_edit_set_selection (GtkEditable * editable, gint start, gint end);
 
-
 guchar gtk_edit_font_width_per_char[256];
 int gtk_edit_option_text_line_spacing;
 int gtk_edit_option_font_ascent;
 int gtk_edit_option_font_descent;
 int gtk_edit_option_font_mean_width;
 int gtk_edit_fixed_font;
+
+#if defined NEVER_DEFINED_ONLY_A_HACK
+const char *txt = _("&Dismiss");
+#endif
 
 static void clear_focus_area (GtkEdit *edit, gint area_x, gint area_y, gint area_width, gint area_height)
 {
