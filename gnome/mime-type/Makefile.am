@@ -1,6 +1,6 @@
 INCLUDES = -I. -I$(srcdir) 				\
 	-I$(top_srcdir)/intl -I$(top_builddir)/intl	\
-	-I$(srcdir)/../../control-center		\
+	-I$(srcdir)/../../libcapplet		\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"	\
 	-I$(includedir) $(GNOME_INCLUDEDIR)
 
@@ -11,9 +11,9 @@ mime_type_capplet_SOURCES = mime-type-capplet.c\
 	edit-window.h mime-info.c mime-info.h \
 	new-mime-window.h new-mime-window.c
 
-mime_type_capplet_LDADD = ../../control-center/libcapplet.la \
+mime_type_capplet_LDADD = ../../libcapplet/libcapplet.la \
 			     $(GNOME_LIBS) $(ORBIT_LIBS) \
-			     $(GNOMEUI_LIBS) $(INTLLIBS)
+			     $(GNOMEUI_LIBS) $(GNOME_LIBDIR) $(INTLLIBS)
 
 EXTRA_DIST = \
 	mime-type.desktop
