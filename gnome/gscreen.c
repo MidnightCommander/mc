@@ -536,7 +536,7 @@ typedef struct {
  */
 common_menu_t common_panel_actions [] = {
 	{ N_("Copy..."),         (context_menu_callback) copy_cmd },
-	{ N_("Rename/move.."),   (context_menu_callback) ren_cmd },
+	{ N_("Rename/move..."),  (context_menu_callback) ren_cmd },
 	{ N_("Delete..."),       (context_menu_callback) delete_cmd },
 	{ NULL, NULL }
 };

@@ -276,7 +276,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("View"),              N_("View file"), panel_action_view },
 	{ GNOME_APP_UI_ITEM, N_("View raw"),          N_("View the file without further processing"),panel_action_view_unfiltered},
 	{ GNOME_APP_UI_SEPARATOR },	
-	{ GNOME_APP_UI_ITEM, N_("Select group by pattern..."),   N_("Selects a group of files"), select_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Select group by pattern..."),   N_("Select a group of files"), select_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Unselect group by pattern..."), N_("Un-selects a group of marked files"), unselect_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Reverse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
 	{ GNOME_APP_UI_SEPARATOR },

@@ -122,8 +122,7 @@ msgstr " Makro ausführen "
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:133 edit/editcmd.c:624 edit/editcmd.c:629
 msgid " Press macro hotkey: "
-msgstr ""
-
+msgstr " Drücken Sie eine Makro-Taste: "
 #: edit/edit_key_translator.c:144
 msgid " Insert Literal "
 msgstr ""
@@ -162,7 +161,7 @@ msgstr " Fehler beim Speichern der Datei. "
 #. This heads the delete macro error dialog box
 #: edit/editcmd.c:543 edit/editcmd.c:551 edit/editcmd.c:576
 msgid " Delete macro "
-msgstr ""
+msgstr " Makro löschen "
 
 #. 'Open' = load temp file
 #: edit/editcmd.c:545
@@ -902,7 +901,7 @@ msgstr "Beenden"
 
 #: src/fixhlp.c:173
 msgid "Usage: fixhlp <width> <tocname>\n"
-msgstr ""
+msgstr "Syntax: fixhlp <breite> <index>\n"
 
 #: src/fixhlp.c:178
 msgid "fixhlp: Cannot open toc for writing"
@@ -1675,11 +1674,11 @@ msgstr "&Links"
 
 #: src/dir.c:68
 msgid "N&GID"
-msgstr ""
+msgstr "N&GID"
 
 #: src/dir.c:69
 msgid "N&UID"
-msgstr ""
+msgstr "N&UID"
 
 #: src/dir.c:70
 msgid "&Owner"
@@ -3166,16 +3165,16 @@ msgstr ""
 
 #: src/main.c:1886
 msgid "Thank you for using GNU Midnight Commander"
-msgstr ""
+msgstr "Vielen Dank für die Benutzung des GNU Midnight Commander"
 
 #: src/main.c:2248
 #, c-format
 msgid "with mouse support on xterm%s.\n"
-msgstr ""
+msgstr "mit Maus-UnterstÜtzung für xterm%s.\n"
 
 #: src/main.c:2249
 msgid " and the Linux console"
-msgstr ""
+msgstr " und der Linux-Konsole"
 
 #: src/main.c:2342
 msgid "The TERM environment variable is unset!\n"
@@ -4178,11 +4177,11 @@ msgstr "Datei ohne weitere Bearbeitung anzeigen"
 
 #: gnome/glayout.c:279
 msgid "Select group by pattern..."
-msgstr ""
+msgstr "Gruppen zum Muster anzeigen..."
 
 #: gnome/glayout.c:279
-msgid "Selects a group of files"
-msgstr ""
+msgid "Select a group of files"
+msgstr "Dateien auswählen"
 
 #: gnome/glayout.c:280
 msgid "Unselect group by pattern..."
@@ -4194,15 +4193,15 @@ msgstr ""
 
 #: gnome/glayout.c:281
 msgid "Reverse selection"
-msgstr ""
+msgstr "Umgekehrte Auswahl"
 
 #: gnome/glayout.c:281
 msgid "Reverses the list of tagged files"
-msgstr ""
+msgstr "Kehrt die Liste der ausgewählten Dateien um"
 
 #: gnome/glayout.c:283
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: gnome/glayout.c:283
 msgid "Close this panel"
@@ -4210,15 +4209,15 @@ msgstr ""
 
 #: gnome/glayout.c:284
 msgid "Exit"
-msgstr ""
+msgstr "Beenden"
 
 #: gnome/glayout.c:284
 msgid "Exit program"
-msgstr ""
+msgstr "Programm beenden"
 
 #: gnome/glayout.c:290
 msgid "Display mode..."
-msgstr ""
+msgstr "Anzeigemodus..."
 
 #: gnome/glayout.c:290
 msgid "Set the display mode for the panel"
@@ -4226,11 +4225,11 @@ msgstr ""
 
 #: gnome/glayout.c:291
 msgid "Sort order..."
-msgstr ""
+msgstr "Sortierung..."
 
 #: gnome/glayout.c:291
 msgid "Changes the sort order of the files"
-msgstr ""
+msgstr "Ändert die Sortierung der Dateien"
 
 #: gnome/glayout.c:292
 msgid "Filter..."
@@ -4246,55 +4245,55 @@ msgstr ""
 
 #: gnome/glayout.c:296
 msgid "Network link..."
-msgstr ""
+msgstr "Netzwerkverbindung..."
 
 #: gnome/glayout.c:296
 msgid "Connect to a remote machine"
-msgstr ""
+msgstr "Verbinung zu entferntem Rechner aufbauen"
 
 #: gnome/glayout.c:297
 msgid "FTP link..."
-msgstr ""
+msgstr "FTP-Verbindung"
 
 #: gnome/glayout.c:297
 msgid "Connect to a remote machine with FTP"
-msgstr ""
+msgstr "Zu einem entfernten Rechner per FTP verbinden"
 
 #: gnome/glayout.c:303
 msgid "Confirmation..."
-msgstr ""
+msgstr "Bestätigung..."
 
 #: gnome/glayout.c:303
 msgid "Confirmation settings"
-msgstr ""
+msgstr "Bestätigungs-Einstellungen"
 
 #: gnome/glayout.c:304
 msgid "Options..."
-msgstr ""
+msgstr "Einstellungen..."
 
 #: gnome/glayout.c:304
 msgid "Global option settings"
-msgstr ""
+msgstr "Globale Einsellungen"
 
 #: gnome/glayout.c:307
 msgid "Virtual FS..."
-msgstr ""
+msgstr "Virtuelles FS..."
 
 #: gnome/glayout.c:307
 msgid "Virtual File System settings"
-msgstr ""
+msgstr "Einstellungen fürs Virtuelle Dateisystem"
 
 #: gnome/glayout.c:310
 msgid "Save setup"
-msgstr ""
+msgstr "Einstellungen speichern"
 
 #: gnome/glayout.c:315
 msgid "Find..."
-msgstr ""
+msgstr "Suchen.."
 
 #: gnome/glayout.c:315
 msgid "Locate files on disk"
-msgstr ""
+msgstr "Datei auf der Festplatte finden"
 
 #: gnome/glayout.c:316
 msgid "Hotlist..."
@@ -4302,7 +4301,7 @@ msgstr ""
 
 #: gnome/glayout.c:316
 msgid "List of favorite sites"
-msgstr ""
+msgstr "Beliebteste Rechner"
 
 #: gnome/glayout.c:317
 msgid "Compare panels..."
@@ -4322,7 +4321,7 @@ msgstr ""
 
 #: gnome/glayout.c:320
 msgid "List of active virtual file systems"
-msgstr ""
+msgstr "Aktive virtuelle Dateisysteme"
 
 #: gnome/glayout.c:323
 msgid "Undelete files (ext2fs only)..."
@@ -4330,106 +4329,106 @@ msgstr ""
 
 #: gnome/glayout.c:323
 msgid "Recover deleted files"
-msgstr ""
+msgstr "Gelöschte Dateien wiederherstellen"
 
 #: gnome/glayout.c:326
 msgid "Background jobs..."
-msgstr ""
+msgstr "Hintergrundtätigkeiten..."
 
 #: gnome/glayout.c:326
 msgid "List of background operations"
-msgstr ""
+msgstr "Hintergrund Aktivitäten"
 
 #: gnome/glayout.c:332
 msgid "Arrange icons"
-msgstr ""
+msgstr "Piktogramme anordnen"
 
 #: gnome/glayout.c:332
 msgid "Arranges the icons on the desktop"
-msgstr ""
+msgstr "Piktogramme auf dem Desktop anordnen"
 
 #: gnome/glayout.c:338
 msgid "About"
-msgstr ""
+msgstr "Über"
 
 #: gnome/glayout.c:338
 msgid "Information on this program"
-msgstr ""
+msgstr "Informationen über das Programm"
 
 #: gnome/glayout.c:346
 msgid "Window"
-msgstr ""
+msgstr "Fenster"
 
 #: gnome/glayout.c:347
 msgid "Commands"
-msgstr ""
+msgstr "Befehle"
 
 #: gnome/glayout.c:348
 msgid "Options"
-msgstr ""
+msgstr "Einstellungen"
 
 #: gnome/glayout.c:349
 msgid "Desktop"
-msgstr ""
+msgstr "Desktop"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
-msgstr ""
+msgstr "Dateiname"
 
 #: gnome/gprop.c:67
 msgid "Full name: "
-msgstr ""
+msgstr "Kompletter Name: "
 
 #: gnome/gprop.c:119
 msgid "Command:"
-msgstr ""
+msgstr "Befehl:"
 
 #: gnome/gprop.c:129
 msgid "Use terminal"
-msgstr ""
+msgstr "Terminal benutzen"
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
-msgstr ""
+msgstr "Dateimodus (Zugriffrechte)"
 
 #: gnome/gprop.c:259
 msgid "Current mode: "
-msgstr ""
+msgstr "Aktueller Modus: "
 
 #. Headings
 #: gnome/gprop.c:272
 msgid "Read"
-msgstr ""
+msgstr "Lesen"
 
 #: gnome/gprop.c:273
 msgid "Write"
-msgstr ""
+msgstr "Schreiben"
 
 #: gnome/gprop.c:274
 msgid "Exec"
-msgstr ""
+msgstr "Ausführen"
 
 #: gnome/gprop.c:275
 msgid "Special"
-msgstr ""
+msgstr "Besonders"
 
 #. Permissions
 #: gnome/gprop.c:279
 msgid "User"
-msgstr ""
+msgstr "User"
 
 #: gnome/gprop.c:281
 msgid "Other"
-msgstr ""
+msgstr "Other"
 
 #. Special
 #: gnome/gprop.c:285
 msgid "Set UID"
-msgstr ""
+msgstr "UID setzen"
 
 #: gnome/gprop.c:286
 msgid "Set GID"
-msgstr ""
+msgstr "GID setzen"
 
 #: gnome/gprop.c:287
 msgid "Sticky"
@@ -4437,27 +4436,27 @@ msgstr ""
 
 #: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
-msgstr ""
+msgstr "<Unbekannt>"
 
 #: gnome/gprop.c:495
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: gnome/gprop.c:506
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 #: gnome/gprop.c:522
 msgid "Icon"
-msgstr ""
+msgstr "Piktogramm"
 
 #: gnome/gprop.c:536
 msgid "Select icon"
-msgstr ""
+msgstr "Piktogramm aussuchen"
 
 #: gnome/gscreen.c:465
 msgid " Open with..."
-msgstr ""
+msgstr "Öffnen mit..."
 
 #: gnome/gscreen.c:514 gnome/gscreen.c:515
 msgid "Properties"
@@ -4465,124 +4464,124 @@ msgstr ""
 
 #: gnome/gscreen.c:517 gnome/gscreen.c:518
 msgid "Open"
-msgstr ""
+msgstr "Öffnen"
 
 #: gnome/gscreen.c:519
 msgid "Open with"
-msgstr ""
+msgstr "Öffnen mit"
 
 #: gnome/gscreen.c:521
 msgid "View unfiltered"
-msgstr ""
+msgstr "Ungefiltert betrachten"
 
 #: gnome/gscreen.c:523
 msgid "Link..."
-msgstr ""
+msgstr "Link..."
 
 #: gnome/gscreen.c:524
 msgid "Symlink..."
-msgstr ""
+msgstr "Symbolischer Link..."
 
 #: gnome/gscreen.c:525
 msgid "Edit symlink..."
-msgstr ""
+msgstr "Symbolischer Link bearbeiten..."
 
 #: gnome/gscreen.c:539
-msgid "Rename/move.."
-msgstr ""
+msgid "Rename/move..."
+msgstr "Umbenennen/Verschieben..."
 
 #: gnome/gscreen.c:1450
 msgid "All files"
-msgstr ""
+msgstr "Alle Dateien"
 
 #: gnome/gscreen.c:1452
 msgid "Archives and compressed files"
-msgstr ""
+msgstr "Archive und komprimierte Dateien"
 
 #: gnome/gscreen.c:1454
 msgid "RPM/DEB files"
-msgstr ""
+msgstr "RPM/DEB Dateien"
 
 #: gnome/gscreen.c:1456
 msgid "Text/Document files"
-msgstr ""
+msgstr "Textdateien"
 
 #: gnome/gscreen.c:1458
 msgid "HTML and SGML files"
-msgstr ""
+msgstr "HTML- und SGML-Dateien"
 
 #: gnome/gscreen.c:1460
 msgid "Postscript and PDF files"
-msgstr ""
+msgstr "Postscript- und PDF-Dateien"
 
 #: gnome/gscreen.c:1462
 msgid "Spreadsheet files"
-msgstr ""
+msgstr "Tabellenkalkulationsdateien"
 
 #: gnome/gscreen.c:1464
 msgid "Image files"
-msgstr ""
+msgstr "Bilddateien"
 
 #: gnome/gscreen.c:1467
 msgid "Video/animation files"
-msgstr ""
+msgstr "Video/animierte Dateien"
 
 #: gnome/gscreen.c:1469
 msgid "Audio files"
-msgstr ""
+msgstr "Audiodateien"
 
 #: gnome/gscreen.c:1471
 msgid "C program files"
-msgstr ""
+msgstr "C Programme"
 
 #: gnome/gscreen.c:1473
 msgid "C++ program files"
-msgstr ""
+msgstr "C++ Programme"
 
 #: gnome/gscreen.c:1475
 msgid "Objective-C program files"
-msgstr ""
+msgstr "Objective-C Programme"
 
 #: gnome/gscreen.c:1477
 msgid "Scheme program files"
-msgstr ""
+msgstr "Scheme Programme"
 
 #: gnome/gscreen.c:1479
 msgid "Assembler program files"
-msgstr ""
+msgstr "Assembler Programme"
 
 #: gnome/gscreen.c:1481
 msgid "Misc. program files"
-msgstr ""
+msgstr "Verschiedene Programme"
 
 #: gnome/gscreen.c:1483
 msgid "Font files"
-msgstr ""
+msgstr "Schriftdateien"
 
 #: gnome/gscreen.c:1608
 msgid "Search: "
-msgstr ""
+msgstr "Suchen: "
 
 #: gnome/gscreen.c:1618
 #, c-format
 msgid " %s bytes in %d file%s"
-msgstr ""
+msgstr " %s Bytes in %d Dateien"
 
 #: gnome/gscreen.c:1693
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: gnome/gtools.c:48
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #: gnome/gview.c:284
 msgid "Goto line"
-msgstr ""
+msgstr "Spring zu Zeile"
 
 #: gnome/gview.c:284
 msgid "Jump to a specified line number"
-msgstr ""
+msgstr "Springe zur angegebenen Zeilennummer"
 
 #: gnome/gview.c:285
 msgid "Monitor file"
@@ -4594,60 +4593,60 @@ msgstr ""
 
 #: gnome/gview.c:286
 msgid "Terminate the viewer"
-msgstr ""
+msgstr "Berachter beenden"
 
 #: gnome/gview.c:291
 msgid "String search"
-msgstr ""
+msgstr "Suchen"
 
 #: gnome/gview.c:292
 msgid "Regexp search"
-msgstr ""
+msgstr "Regexp Suche"
 
 #: gnome/gview.c:292
 msgid "Regular expression search"
-msgstr ""
+msgstr "Suche nach regulärem Ausdruck"
 
 #: gnome/gview.c:294
 msgid "Search again..."
-msgstr ""
+msgstr "Suche wiederholen..."
 
 #: gnome/gview.c:294
 msgid "Continue searching"
-msgstr ""
+msgstr "Suche fortführen"
 
 #: gnome/gview.c:300
 msgid "Wrap the text"
-msgstr ""
+msgstr "Text umbrechen"
 
 #: gnome/gview.c:306
 msgid "Formatted"
-msgstr ""
+msgstr "Formatiert"
 
 #: gnome/gwidget.c:92
 msgid "ok"
-msgstr ""
+msgstr "ok"
 
 #: gnome/gwidget.c:94
 msgid "cancel"
-msgstr ""
+msgstr "abbrechen"
 
 #: gnome/gwidget.c:96
 msgid "help"
-msgstr ""
+msgstr "hilfe"
 
 #: gnome/gwidget.c:98
 msgid "yes"
-msgstr ""
+msgstr "ja"
 
 #: gnome/gwidget.c:100
 msgid "no"
-msgstr ""
+msgstr "nein"
 
 #: gnome/gwidget.c:102
 msgid "exit"
-msgstr ""
+msgstr "beenden"
 
 #: gnome/gwidget.c:104
 msgid "abort"
-msgstr ""
+msgstr "abbrechen"
