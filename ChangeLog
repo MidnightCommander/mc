@@ -1,3 +1,8 @@
+2002-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* doc/mc.1.in (Keys): Document S-<chr>.
+	* doc/ru/mc.1.in: Likewise.
+
 2002-10-31  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/diff.syntax: Revert highlighting for trailing spaces

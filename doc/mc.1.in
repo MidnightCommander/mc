@@ -205,6 +205,8 @@ M-<chr> means hold the Meta or Alt key down while typing <chr>. If
 there is no Meta or Alt key, type ESC, release it, then type the
 character <chr>.
 .PP
+S-<chr> means hold the Shift key down while typing <chr>.
+.PP
 All input lines in the Midnight Commander use an approximation to
 the GNU Emacs editor's key bindings.
 .PP
