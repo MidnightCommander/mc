@@ -539,6 +539,7 @@ dnl
 mx=""
 gmcdep=""
 libgtkedit=""
+xvers="none"
 
 AC_SUBST(insticons)
 GNOME_INIT_HOOK([

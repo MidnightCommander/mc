@@ -1,5 +1,7 @@
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: resurrect definition of xvers
+
 	* VERSION.in: removed
 	* Makefile.in: don't do anything with VERSION.in and VERSION
 	Take mc.spec from builddir, not srcdir
