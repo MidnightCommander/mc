@@ -179,11 +179,7 @@ A stat() wrapper that will deal with 64 bit filesizes.
 
 int sys_stat(const char *fname,SMB_STRUCT_STAT *sbuf)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OFF64_T) && defined(HAVE_STAT64)
-  return stat64(fname, sbuf);
-#else
   return stat(fname, sbuf);
-#endif
 }
 
 /*******************************************************************
@@ -192,11 +188,7 @@ int sys_stat(const char *fname,SMB_STRUCT_STAT *sbuf)
 
 int sys_fstat(int fd,SMB_STRUCT_STAT *sbuf)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OFF64_T) && defined(HAVE_FSTAT64)
-  return fstat64(fd, sbuf);
-#else
   return fstat(fd, sbuf);
-#endif
 }
 
 /*******************************************************************
@@ -205,11 +197,7 @@ int sys_fstat(int fd,SMB_STRUCT_STAT *sbuf)
 
 int sys_lstat(const char *fname,SMB_STRUCT_STAT *sbuf)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OFF64_T) && defined(HAVE_LSTAT64)
-  return lstat64(fname, sbuf);
-#else
   return lstat(fname, sbuf);
-#endif
 }
 
 /*******************************************************************
@@ -218,11 +206,7 @@ int sys_lstat(const char *fname,SMB_STRUCT_STAT *sbuf)
 
 int sys_ftruncate(int fd, SMB_OFF_T offset)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OFF64_T) && defined(HAVE_FTRUNCATE64)
-  return ftruncate64(fd, offset);
-#else
   return ftruncate(fd, offset);
-#endif
 }
 
 /*******************************************************************
@@ -231,11 +215,7 @@ int sys_ftruncate(int fd, SMB_OFF_T offset)
 
 SMB_OFF_T sys_lseek(int fd, SMB_OFF_T offset, int whence)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OFF64_T) && defined(HAVE_LSEEK64)
-  return lseek64(fd, offset, whence);
-#else
   return lseek(fd, offset, whence);
-#endif
 }
 
 /*******************************************************************
@@ -244,13 +224,7 @@ SMB_OFF_T sys_lseek(int fd, SMB_OFF_T offset, int whence)
 
 int sys_fseek(FILE *fp, SMB_OFF_T offset, int whence)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(LARGE_SMB_OFF_T) && defined(HAVE_FSEEK64)
-  return fseek64(fp, offset, whence);
-#elif defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(LARGE_SMB_OFF_T) && defined(HAVE_FSEEKO64)
-  return fseeko64(fp, offset, whence);
-#else
   return fseek(fp, offset, whence);
-#endif
 }
 
 /*******************************************************************
@@ -259,13 +233,7 @@ int sys_fseek(FILE *fp, SMB_OFF_T offset, int whence)
 
 SMB_OFF_T sys_ftell(FILE *fp)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(LARGE_SMB_OFF_T) && defined(HAVE_FTELL64)
-  return (SMB_OFF_T)ftell64(fp);
-#elif defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(LARGE_SMB_OFF_T) && defined(HAVE_FTELLO64)
-  return (SMB_OFF_T)ftello64(fp);
-#else
   return (SMB_OFF_T)ftell(fp);
-#endif
 }
 
 /*******************************************************************
@@ -274,15 +242,7 @@ SMB_OFF_T sys_ftell(FILE *fp)
 
 int sys_creat(const char *path, mode_t mode)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_CREAT64)
-  return creat64(path, mode);
-#else
-  /*
-   * If creat64 isn't defined then ensure we call a potential open64.
-   * JRA.
-   */
   return sys_open(path, O_WRONLY | O_CREAT | O_TRUNC, mode);
-#endif
 }
 
 /*******************************************************************
@@ -291,11 +251,7 @@ int sys_creat(const char *path, mode_t mode)
 
 int sys_open(const char *path, int oflag, mode_t mode)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_OPEN64)
-  return open64(path, oflag, mode);
-#else
   return open(path, oflag, mode);
-#endif
 }
 
 /*******************************************************************
@@ -304,11 +260,7 @@ int sys_open(const char *path, int oflag, mode_t mode)
 
 FILE *sys_fopen(const char *path, const char *type)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_FOPEN64)
-  return fopen64(path, type);
-#else
   return fopen(path, type);
-#endif
 }
 
 #if defined(HAVE_MMAP)
@@ -319,11 +271,7 @@ FILE *sys_fopen(const char *path, const char *type)
 
 void *sys_mmap(void *addr, size_t len, int prot, int flags, int fd, SMB_OFF_T offset)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(LARGE_SMB_OFF_T) && defined(HAVE_MMAP64)
-  return mmap64(addr, len, prot, flags, fd, offset);
-#else
   return mmap(addr, len, prot, flags, fd, offset);
-#endif
 }
 
 #endif /* HAVE_MMAP */
@@ -334,11 +282,7 @@ void *sys_mmap(void *addr, size_t len, int prot, int flags, int fd, SMB_OFF_T of
 
 SMB_STRUCT_DIRENT *sys_readdir(DIR *dirp)
 {
-#if defined(HAVE_EXPLICIT_LARGEFILE_SUPPORT) && defined(HAVE_READDIR64)
-  return readdir64(dirp);
-#else
   return readdir(dirp);
-#endif
 }
 
 /*******************************************************************
