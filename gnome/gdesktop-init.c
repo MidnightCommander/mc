@@ -155,6 +155,7 @@ gdesktop_links_init (void)
 		gnome_metadata_set (link_name, "icon-filename", strlen (icon) + 1, icon);
 		g_free (icon);
 	}
+	gnome_metadata_set (link_name, "icon-caption", strlen (_("Trash")) + 1, _("Trash"));
 	g_free (link_name);
 
 	/* Create custom links */
