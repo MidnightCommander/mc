@@ -1,17 +1,22 @@
 All:
-- It crashes
+
 - It leaks objects.
 - argp handling.
 - Session management
 
 Desktop:
+
 - Add special destkop entries ("Network neighborhood")
 
 Panels:
+
 - Global bindings (some shortcuts are not implemented)
-- Add a nifty toolbar
+- Add a nifty toolbar:
+	- Back/Forward/History buttons are trivial to implement 
+	  with the new history code from Paul Sheer.
 - Split view.
 - External panelize hangs
+
 
 Viewer:
 
@@ -23,9 +28,11 @@ Viewer:
 - Debug monitor
 
 Widgets:
+
 - Push history
 - Use Gnome File Entry where possible.
 
 DND:
+
 - Get sopwith to fix the random motion of his dnd icons.
 - Check the purify stuff.

@@ -1083,4 +1083,5 @@ stop_desktop (void)
 
 		desktop_release_desktop_icon_t (di);
 	}
+	image_cache_destroy ();
 }

@@ -8,6 +8,7 @@
 #include <gnome.h>
 #include <string.h>
 #include "gdesktop.h"
+#include "gcache.h"
 #include <gdk/gdkx.h>
 /* The spacing between the cute little icon and the text */
 #define SPACING 2
@@ -249,11 +250,12 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	GtkWidget *window;
 	GdkImlibImage *im;
 	static GdkCursor *cursor;
-	
+
 	if (!g_file_exists (file))
 		return NULL;
-	
-	im = gdk_imlib_load_image (file);
+
+
+	im = image_cache_load_image (file);
 	if (!im)
 		return NULL;
 
@@ -271,8 +273,6 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
 
 	set_window_text (window, im, text);
-
-	gdk_imlib_destroy_image (im);
 
 	if (!cursor)
 		cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW); /* FIXME: this is never freed */
@@ -292,7 +292,7 @@ make_transparent_window (char *file)
 	if (!g_file_exists (file))
 		return NULL;
 
-	im = gdk_imlib_load_image (file);
+	im = image_cache_load_image (file);
 	if (!im)
 		return NULL;
 
