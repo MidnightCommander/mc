@@ -3049,7 +3049,7 @@ msgstr "&Mostra bit..."
 
 #: src/main.c:1250
 msgid "learn &Keys..."
-msgstr "&Impara Tasti..."
+msgstr "&Impara tasti..."
 
 #: src/main.c:1253
 msgid "&Virtual FS..."
