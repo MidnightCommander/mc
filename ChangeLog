@@ -1,3 +1,8 @@
+2001-10-12  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for *.xcf files (native GIMP
+	format).
+
 2001-10-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* lib/mc.menu: Use "case" instead of non-portable "egrep -q".
