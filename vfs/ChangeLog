@@ -1,6 +1,11 @@
+2002-06-25  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Add protection against NULL strings to all is_*()
+	functions.
+
 2002-06-21  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* smbfs.c: Undefine PACKAGE_BUGREPORT, PACKAGE_NAME, 
+	* smbfs.c: Undefine PACKAGE_BUGREPORT, PACKAGE_NAME,
 	PACKAGE_STRING, PACKAGE_TARNAME and PACKAGE_VERSION
 	before including "samba/include/config.h" to prevent warnings.
 	(smbfs_init): Set DEBUGLEVEL to 0.
@@ -17,7 +22,7 @@
 
 	* Makefile.am (SAMBA_DIST): Remove tests/ftruncate.c
 	* samba/tests/ftruncate.c: Removed.
-	* samba/configure.in: Don't check if ftruncate() can 
+	* samba/configure.in: Don't check if ftruncate() can
 	extend a file.
 
 2002-06-06  Andrew V. Samoilov  <kai@cmail.ru>
@@ -38,7 +43,7 @@
 2002-05-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* xdirentry.h (vfs_s_fh.u.ftp): Add append field.
-	(vfs_s_data.file_store): Change second argument 
+	(vfs_s_data.file_store): Change second argument
 	to (vfs_s_fh *fh).
 	* direntry.c (vfs_s_close): Adjust.
 	* fish.c (file_store): Likewise.

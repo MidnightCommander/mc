@@ -1382,18 +1382,25 @@ vfs_split_text (char *p)
 static int
 is_num (int idx)
 {
-    if (!columns [idx] || columns [idx][0] < '0' || columns [idx][0] > '9')
+    char *column = columns[idx];
+
+    if (!column || column[0] < '0' || column[0] > '9')
 	return 0;
+
     return 1;
 }
 
 static int
-is_dos_date(char *str)
+is_dos_date (char *str)
 {
-    if (strlen(str) == 8 && str[2] == str[5] && strchr("\\-/", (int)str[2]) != NULL)
-	return (1);
+    if (!str)
+	return 0;
 
-    return (0);
+    if (strlen (str) == 8 && str[2] == str[5]
+	&& strchr ("\\-/", (int) str[2]) != NULL)
+	return 1;
+
+    return 0;
 }
 
 static int
@@ -1402,12 +1409,15 @@ is_week (char *str, struct tm *tim)
     static const char *week = "SunMonTueWedThuFriSat";
     char *pos;
 
-    if((pos=strstr(week, str)) != NULL){
-        if(tim != NULL)
-	    tim->tm_wday = (pos - week)/3;
-	return (1);
+    if (!str)
+	return 0;
+
+    if ((pos = strstr (week, str)) != NULL) {
+	if (tim != NULL)
+	    tim->tm_wday = (pos - week) / 3;
+	return 1;
     }
-    return (0);    
+    return 0;
 }
 
 static int
@@ -1415,13 +1425,16 @@ is_month (char *str, struct tm *tim)
 {
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     char *pos;
-    
-    if((pos=strstr(month, str)) != NULL){
-        if(tim != NULL)
-	    tim->tm_mon = (pos - month)/3;
-	return (1);
+
+    if (!str)
+	return 0;
+
+    if ((pos = strstr (month, str)) != NULL) {
+	if (tim != NULL)
+	    tim->tm_mon = (pos - month) / 3;
+	return 1;
     }
-    return (0);
+    return 0;
 }
 
 static int
@@ -1429,41 +1442,47 @@ is_time (char *str, struct tm *tim)
 {
     char *p, *p2;
 
-    if ((p=strchr(str, ':')) && (p2=strrchr(str, ':'))) {
+    if (!str)
+	return 0;
+
+    if ((p = strchr (str, ':')) && (p2 = strrchr (str, ':'))) {
 	if (p != p2) {
-    	    if (sscanf (str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min, &tim->tm_sec) != 3)
-		return (0);
-	}
-	else {
+	    if (sscanf
+		(str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min,
+		 &tim->tm_sec) != 3)
+		return 0;
+	} else {
 	    if (sscanf (str, "%2d:%2d", &tim->tm_hour, &tim->tm_min) != 2)
-		return (0);
+		return 0;
 	}
-    }
-    else 
-        return (0);
-    
-    return (1);
+    } else
+	return 0;
+
+    return 1;
 }
 
-static int is_year(char *str, struct tm *tim)
+static int is_year (char *str, struct tm *tim)
 {
     long year;
 
-    if (strchr(str,':'))
-        return (0);
+    if (!str)
+	return 0;
 
-    if (strlen(str)!=4)
-        return (0);
+    if (strchr (str, ':'))
+	return 0;
 
-    if (sscanf(str, "%ld", &year) != 1)
-        return (0);
+    if (strlen (str) != 4)
+	return 0;
+
+    if (sscanf (str, "%ld", &year) != 1)
+	return 0;
 
     if (year < 1900 || year > 3000)
-        return (0);
+	return 0;
 
     tim->tm_year = (int) (year - 1900);
 
-    return (1);
+    return 1;
 }
 
 /*
