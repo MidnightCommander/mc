@@ -30,8 +30,6 @@ struct WEdit {
     int num_widget_lines;
     int num_widget_columns;
 
-    int have_frame;
-
     char *filename;		/* Name of the file */
 
     /* dynamic buffers and cursor position for editor: */
@@ -53,15 +51,12 @@ struct WEdit {
     long curs_row;		/* row position of cursor on the screen */
     long curs_col;		/* column position on screen */
     int force;			/* how much of the screen do we redraw? */
-    unsigned char overwrite;
-    unsigned char modified;	/* has the file been changed?: 1 if char inserted or
-				   deleted at all since last load or save */
-    unsigned char locked;	/* 1 if lock is held on current file */
-    unsigned char screen_modified;	/* has the file been changed since the last screen draw? */
-    int delete_file;		/* Has the file been created by the editor?  Delete
-				   it at end of editing when it hasn't been modified 
-				   or saved */
-    unsigned char highlight;
+    int overwrite:1;		/* Overwrite on type mode (as opposed to insert) */
+    int modified:1;		/* File has been modified and needs saving */
+    int locked:1;		/* We hold lock on current file */
+    int screen_modified:1;	/* File has been changed since the last screen draw */
+    int delete_file:1;		/* New file, needs to be deleted unless modified */
+    int highlight:1;		/* There is a selected block */
     long prev_col;		/* recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
     long curs_line;		/* line number of the cursor. */
@@ -88,7 +83,7 @@ struct WEdit {
     unsigned long stack_size;
     unsigned long stack_size_mask;
     unsigned long stack_bottom;
-    int stack_disable;		/* If not 0, don't save events in the undo stack */
+    int stack_disable:1;	/* If not 0, don't save events in the undo stack */
 
     struct stat stat1;		/* Result of mc_fstat() on the file */
 

@@ -1,3 +1,8 @@
+2003-07-08  Pavel Roskin  <proski@gnu.org>
+
+	* edit-widget.h: Stop misusing "unsigned char" for boolean.
+	Eliminate have_frame - it's unused.  Adjust all dependencies.
+
 2003-06-14  Pavel Roskin  <proski@gnu.org>
 
 	* editkeys.c: Leave only distinct entries in cooledit_key_map

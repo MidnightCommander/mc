@@ -90,14 +90,14 @@ edit_status (WEdit *edit)
 {
     int w, i, t;
     char *s;
-    w = edit->widget.cols - (edit->have_frame * 2);
+    w = edit->widget.cols;
     s = g_malloc (w + 16);
     if (w < 4)
 	w = 4;
     memset (s, ' ', w);
     attrset (SELECTED_COLOR);
     if (w > 4) {
-	widget_move (edit, edit->have_frame, edit->have_frame);
+	widget_move (edit, 0, 0);
 	if (edit->filename) {
 	    i = w > 24 ? 18 : w - 6;
 	    i = i < 13 ? 13 : i;

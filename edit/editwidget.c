@@ -287,8 +287,7 @@ edit_labels (WEdit *edit)
     edit_my_define (h, 6, _("Move"), cmd_F6, edit);
     edit_my_define (h, 7, _("Search"), cmd_F7, edit);
     edit_my_define (h, 8, _("Delete"), cmd_F8, edit);
-    if (!edit->have_frame)
-	edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
+    edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
     edit_my_define (h, 10, _("Quit"), cmd_F10, edit);
 
     redraw_labels (h);
