@@ -4866,7 +4866,7 @@ msgstr ""
 "Du kjører GNOME Midnight Commander som root. \n"
 "\n"
 "Du vil ikke være beskyttet fra å gjøre betydelig skade mot\n"
-systemet ditt hvis du fortsetter."
+"systemet ditt hvis du fortsetter."
 
 #: src/main.c:3073
 msgid " Notice "

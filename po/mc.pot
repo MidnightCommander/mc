@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-18 19:56-0500\n"
+"POT-Creation-Date: 1999-03-19 12:09-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,13 @@ msgstr ""
 msgid " Emacs key: "
 msgstr ""
 
-#: edit/edit_key_translator.c:133
+#: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
 msgid " Execute Macro "
 msgstr ""
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:133 gtkedit/editcmd.c:707 gtkedit/editcmd.c:716
+#: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
+#: gtkedit/editcmd.c:707 gtkedit/editcmd.c:716
 msgid " Press macro hotkey: "
 msgstr ""
 
@@ -78,7 +79,7 @@ msgstr ""
 msgid "Ignore case sensitivity."
 msgstr ""
 
-#: gnome/gcmd.c:281 src/chmod.c:150 src/screen.c:425
+#: gnome/gcmd.c:281 gnome/gcustom-layout.c:42 src/chmod.c:150 src/screen.c:425
 msgid "Name"
 msgstr ""
 
@@ -86,7 +87,8 @@ msgstr ""
 msgid "File Type"
 msgstr ""
 
-#: gnome/gcmd.c:294 src/screen.c:426 src/screen.c:427
+#: gnome/gcmd.c:294 gnome/gcustom-layout.c:46 src/screen.c:426
+#: src/screen.c:427
 msgid "Size"
 msgstr ""
 
@@ -131,11 +133,12 @@ msgstr ""
 msgid "Preset Commands"
 msgstr ""
 
-#: gnome/gcmd.c:563
+#. add add/remove buttons in center
+#: gnome/gcmd.c:563 gnome/gcustom-layout.c:181
 msgid "Add"
 msgstr ""
 
-#: gnome/gcmd.c:567
+#: gnome/gcmd.c:567 gnome/gcustom-layout.c:182
 msgid "Remove"
 msgstr ""
 
@@ -173,12 +176,81 @@ msgstr ""
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:732 gnome/gpopup.c:53
+#: gnome/gcmd.c:732
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:733 gnome/gpopup.c:54
+#: gnome/gcmd.c:733
 msgid "Enter extra arguments:"
+msgstr ""
+
+#: gnome/gcustom-layout.c:35
+msgid "Access Time"
+msgstr ""
+
+#: gnome/gcustom-layout.c:36
+msgid "Creation Time"
+msgstr ""
+
+#. Group
+#: gnome/gcustom-layout.c:37 gnome/gnome-file-property-dialog.c:776
+#: gnome/gnome-file-property-dialog.c:940 gnome/gprop.c:280 gnome/gprop.c:405
+#: src/screen.c:439
+msgid "Group"
+msgstr ""
+
+#: gnome/gcustom-layout.c:38
+msgid "Group ID"
+msgstr ""
+
+#: gnome/gcustom-layout.c:39
+msgid "Inode Number"
+msgstr ""
+
+#: gnome/gcustom-layout.c:40 src/achown.c:378
+msgid "Mode"
+msgstr ""
+
+#: gnome/gcustom-layout.c:41
+msgid "Modification Time"
+msgstr ""
+
+#: gnome/gcustom-layout.c:43
+msgid "Number of Hard Links"
+msgstr ""
+
+#. Owner
+#: gnome/gcustom-layout.c:44 gnome/gnome-file-property-dialog.c:925
+#: gnome/gprop.c:390 src/screen.c:438
+msgid "Owner"
+msgstr ""
+
+#: gnome/gcustom-layout.c:45 src/screen.c:432
+msgid "Permission"
+msgstr ""
+
+#: gnome/gcustom-layout.c:47
+msgid "Size (short)"
+msgstr ""
+
+#: gnome/gcustom-layout.c:48
+msgid "Type"
+msgstr ""
+
+#: gnome/gcustom-layout.c:49
+msgid "User ID"
+msgstr ""
+
+#: gnome/gcustom-layout.c:140
+msgid "Possible Columns"
+msgstr ""
+
+#: gnome/gcustom-layout.c:160
+msgid "Displayed Columns"
+msgstr ""
+
+#: gnome/gcustom-layout.c:299
+msgid "Custom View"
 msgstr ""
 
 #: gnome/gdesktop.c:420 gnome/gdesktop.c:2070
@@ -664,65 +736,294 @@ msgstr ""
 msgid "File/New/Directory..."
 msgstr ""
 
-#: gnome/gpopup.c:252 gnome/gpopup.c:255
-msgid "Properties"
+#. we set the file part
+#: gnome/gnome-file-property-dialog.c:170
+msgid "Full Name: "
 msgstr ""
 
-#: gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
-#: src/screen.c:2311 src/screen.c:2341
-msgid "Delete"
+#: gnome/gnome-file-property-dialog.c:178
+msgid "File Name"
 msgstr ""
 
-#: gnome/gpopup.c:256
-msgid "Mount device"
+#: gnome/gnome-file-property-dialog.c:201
+msgid "File Type: "
 msgstr ""
 
-#: gnome/gpopup.c:257
-msgid "Unmount device"
+#: gnome/gnome-file-property-dialog.c:207
+msgid "File Type: Symbolic Link"
 msgstr ""
 
-#: gnome/gpopup.c:258
-msgid "Eject device"
+#: gnome/gnome-file-property-dialog.c:212
+msgid "Target Name: INVALID LINK"
 msgstr ""
 
-#: gnome/gpopup.c:260 gnome/gpopup.c:261
+#: gnome/gnome-file-property-dialog.c:215
+msgid "Target Name: "
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:220
+msgid "File Type: Directory"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:222
+msgid "File Type: Character Device"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:224
+msgid "File Type: Block Device"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:226
+msgid "File Type: Socket"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:228
+msgid "File Type: FIFO"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:238
+#: gnome/gnome-file-property-dialog.c:242
+#: gnome/gnome-file-property-dialog.c:248
+msgid "File Size: "
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:238
+msgid " bytes"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:242
+msgid " KBytes  ("
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:243
+#: gnome/gnome-file-property-dialog.c:249
+msgid " bytes)"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:248
+msgid " MBytes  ("
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:256
+msgid "File Size: N/A"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:267
+msgid "File Created on: "
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:276
+msgid "Last Modified on: "
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:285
+msgid "Last Accessed on: "
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:303
+msgid "URL:"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:310
+msgid "Caption:"
+msgstr ""
+
+#. we do open first
+#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
 msgid "Open"
 msgstr ""
 
-#: gnome/gpopup.c:262
-msgid "Open with"
+#: gnome/gnome-file-property-dialog.c:479
+msgid "Use default Open action"
 msgstr ""
 
-#: gnome/gpopup.c:263 src/screen.c:2306 src/screen.c:2336
+#: gnome/gnome-file-property-dialog.c:489
+msgid "Drop Action"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
+#: src/screen.c:2306 src/screen.c:2336
 msgid "View"
 msgstr ""
 
-#: gnome/gpopup.c:264
-msgid "View unfiltered"
+#: gnome/gnome-file-property-dialog.c:502
+msgid "Use default Drop action"
 msgstr ""
 
-#: gnome/gpopup.c:265 src/screen.c:2307 src/screen.c:2337 src/view.c:1991
+#: gnome/gnome-file-property-dialog.c:504
+msgid "Use default View action"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
+#: src/screen.c:2307 src/screen.c:2337 src/view.c:1991
 msgid "Edit"
 msgstr ""
 
-#: gnome/gpopup.c:267
-msgid "Move/rename..."
+#: gnome/gnome-file-property-dialog.c:523
+msgid "Use default Edit action"
 msgstr ""
 
-#: gnome/gpopup.c:268
+#: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
+msgid "Icon"
+msgstr ""
+
+#. We must be a file or a link to a file.
+#: gnome/gnome-file-property-dialog.c:611
+msgid "File Actions"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:616
+msgid "Open action"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:617
+msgid "Needs terminal to run"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:742
+msgid "File Permissions"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:753 gnome/gprop.c:259
+msgid "Current mode: "
+msgstr ""
+
+#. Headings
+#: gnome/gnome-file-property-dialog.c:768 gnome/gprop.c:272
+msgid "Read"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:769 gnome/gprop.c:273
+msgid "Write"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:770 gnome/gprop.c:274
+msgid "Exec"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:771 gnome/gprop.c:275
+msgid "Special"
+msgstr ""
+
+#. Permissions
+#: gnome/gnome-file-property-dialog.c:775 gnome/gprop.c:279
+msgid "User"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:777 gnome/gprop.c:281
+msgid "Other"
+msgstr ""
+
+#. Special
+#: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:285
+msgid "Set UID"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:782 gnome/gprop.c:286
+msgid "Set GID"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:287
+msgid "Sticky"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1074
+msgid "URL"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1077
+msgid "Statistics"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1083
+msgid "Options"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1086
+msgid "Permissions"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1089
+msgid " Properties"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1140
+msgid "You entered an invalid username"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1185
+msgid "You must rename your file to something"
+msgstr ""
+
+#: gnome/gnome-file-property-dialog.c:1191
+msgid "You cannot rename a file to something containing a '/' character"
+msgstr ""
+
+#. the first label
+#: gnome/gnome-open-dialog.c:379
+msgid "Select an application to open \""
+msgstr ""
+
+#: gnome/gnome-open-dialog.c:390
+msgid "Select a file to run with"
+msgstr ""
+
+#. the file tree
+#: gnome/gnome-open-dialog.c:401
+msgid "Applications"
+msgstr ""
+
+#: gnome/gnome-open-dialog.c:417
+msgid "Program to run"
+msgstr ""
+
+#: gnome/gpopup2.c:188
+msgid "Mount device"
+msgstr ""
+
+#: gnome/gpopup2.c:189
+msgid "Unmount device"
+msgstr ""
+
+#: gnome/gpopup2.c:190
+msgid "Eject device"
+msgstr ""
+
+#: gnome/gpopup2.c:193
+msgid "Open with..."
+msgstr ""
+
+#: gnome/gpopup2.c:195
+msgid "View Unfiltered"
+msgstr ""
+
+#: gnome/gpopup2.c:198
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gpopup.c:270
-msgid "Link..."
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1070 src/screen.c:2311
+#: src/screen.c:2341
+msgid "Delete"
 msgstr ""
 
-#: gnome/gpopup.c:271
+#: gnome/gpopup2.c:200
+msgid "Move..."
+msgstr ""
+
+#: gnome/gpopup2.c:201
+msgid "Hard Link..."
+msgstr ""
+
+#: gnome/gpopup2.c:202
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:272
-msgid "Edit symlink..."
+#: gnome/gpopup2.c:203
+msgid "Edit Symlink..."
+msgstr ""
+
+#: gnome/gpopup2.c:205
+msgid "Properties..."
 msgstr ""
 
 #: gnome/gprefs.c:81
@@ -833,61 +1134,8 @@ msgstr ""
 msgid "File mode (permissions)"
 msgstr ""
 
-#: gnome/gprop.c:259
-msgid "Current mode: "
-msgstr ""
-
-#. Headings
-#: gnome/gprop.c:272
-msgid "Read"
-msgstr ""
-
-#: gnome/gprop.c:273
-msgid "Write"
-msgstr ""
-
-#: gnome/gprop.c:274
-msgid "Exec"
-msgstr ""
-
-#: gnome/gprop.c:275
-msgid "Special"
-msgstr ""
-
-#. Permissions
-#: gnome/gprop.c:279
-msgid "User"
-msgstr ""
-
-#. Group
-#: gnome/gprop.c:280 gnome/gprop.c:405 src/screen.c:439
-msgid "Group"
-msgstr ""
-
-#: gnome/gprop.c:281
-msgid "Other"
-msgstr ""
-
-#. Special
-#: gnome/gprop.c:285
-msgid "Set UID"
-msgstr ""
-
-#: gnome/gprop.c:286
-msgid "Set GID"
-msgstr ""
-
-#: gnome/gprop.c:287
-msgid "Sticky"
-msgstr ""
-
 #: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
-msgstr ""
-
-#. Owner
-#: gnome/gprop.c:390 src/screen.c:438
-msgid "Owner"
 msgstr ""
 
 #: gnome/gprop.c:494
@@ -896,10 +1144,6 @@ msgstr ""
 
 #: gnome/gprop.c:505
 msgid "Title"
-msgstr ""
-
-#: gnome/gprop.c:521
-msgid "Icon"
 msgstr ""
 
 #: gnome/gprop.c:535
@@ -2206,10 +2450,6 @@ msgstr ""
 
 #: src/achown.c:376
 msgid "Flag"
-msgstr ""
-
-#: src/achown.c:378
-msgid "Mode"
 msgstr ""
 
 #: src/achown.c:383
@@ -4626,10 +4866,6 @@ msgstr ""
 
 #: src/screen.c:431
 msgid "CTime"
-msgstr ""
-
-#: src/screen.c:432
-msgid "Permission"
 msgstr ""
 
 #: src/screen.c:433
