@@ -1,3 +1,7 @@
+2001-07-23  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Fix description of mc.lib.  Fix broken links.
+
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* Make.common.in: Move all defines ...

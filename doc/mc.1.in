@@ -2069,7 +2069,7 @@ displayed by the Midnight Commander is the same prompt that you are
 currently using in your shell.
 .PP
 The
-.\"LINK2
+.\"LINK2"
 OPTIONS
 .\"OPTIONS"
 section has more information on how you can control the subshell code.
@@ -3045,7 +3045,7 @@ with the contents of the selected directory.
 The Midnight Commander provides a way to fix your system terminal
 database without requiring root privileges.  The Midnight Commander
 searches in the system initialization file (the mc.lib file located in
-the Midnight Commander library directory) or in the ~/.mc/ini file
+the Midnight Commander library directory) and in the ~/.mc/ini file
 for the section "terminal:your-terminal-name" and then for the section
 "terminal:general", each line of the section contains a key symbol
 that you want to define, followed by an equal sign and the definition
@@ -3107,15 +3107,17 @@ file.  They override the contents of the system wide files if present.
 @prefix@/lib/mc/mc.ini
 .IP
 The default system-wide setup for the Midnight Commander, used only if
-the user lacks his own ~/.mc/ini file.
+the user doesn't have his own ~/.mc/ini file.
 .PP
 @prefix@/lib/mc/mc.lib
 .IP
-Global settings for the Midnight Commander.  Settings in this file are
-global to any Midnight Commander, it is useful to define site-global
-.\"LINK2
-terminal settings.
+Global settings for the Midnight Commander.  Settings in this file
+affect all users, whether they have ~/.mc/ini or not, as long as
+~/.mc/ini doesn't override them.  Currently, only
+.\"LINK2"
+terminal settings
 .\"Terminal databases"
+are loaded from mc.lib.
 .PP
 ~/.mc/ini
 .IP
