@@ -1347,6 +1347,14 @@ msgstr "&Пользовательский"
 msgid "&System Wide"
 msgstr "&Общесистемный"
 
+#: src/cmd.c:641
+msgid "Syntax file edit"
+msgstr "Правка файла синтаксиса"
+
+#: src/cmd.c:642
+msgid " Which syntax file you want to edit? "
+msgstr " Какой файл синтаксиса Вы хотите редактировать? "
+
 #: src/cmd.c:642
 msgid " Menu edit "
 msgstr " Правка файла меню "
@@ -2145,6 +2153,27 @@ msgid "yes"
 msgstr "да"
 
 #: src/filegui.c:397
+#: src/filegui.c:348
+#, c-format
+msgid "ETA %d:%02d.%02d"
+msgstr ""
+
+#: src/filegui.c:370
+#, c-format
+msgid "%.2f MB/s"
+msgstr ""
+
+#: src/filegui.c:372
+#, c-format
+msgid "%.2f KB/s"
+msgstr ""
+
+#: src/filegui.c:374
+#, c-format
+msgid "%ld B/s"
+msgstr ""
+
+#: src/filegui.c:397
 msgid "File"
 msgstr "Файл"
 
@@ -2580,7 +2609,7 @@ msgstr "Нет информации об узле"
 #: src/info.c:126
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "Своб. место: %d (%d%%) из %d"
+msgstr "Своб. место: %s (%d%%) из %s"
 
 #: src/info.c:129
 msgid "No space information"
@@ -3038,6 +3067,10 @@ msgstr "Файл &меню"
 #: src/main.c:1226
 msgid "Menu edi&Tor edit"
 msgstr "Правка меню редактора"
+
+#: src/main.c:1206
+msgid "&Syntax file edit"
+msgstr "Файл синтаксиса"
 
 #: src/main.c:1232
 msgid "&Configuration..."
@@ -4402,7 +4435,7 @@ msgstr ""
 #. This can be considered archive inconsistency
 #: vfs/cpio.c:453
 #, c-format
-msgid "%s contains duplicit entries! Skiping!"
+msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s содержит сдвоенные записи! Пропущено!"
 
 #: vfs/cpio.c:520
@@ -4924,10 +4957,10 @@ msgstr "Внутренняя ошибка:"
 
 #: vfs/vfs.c:1848
 #, c-format
-msgid "%s: %s: %s %3d%% (%lu bytes transfered)"
+msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 
 #: vfs/vfs.c:1849
 #, c-format
-msgid "%s: %s: %s %lu bytes transfered"
+msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu байт перенесено"
