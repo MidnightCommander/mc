@@ -1,7 +1,11 @@
 1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* i-symlink.png: Flipped the image around, since we are putting
+	the little icons on the lower-right corner.
+	* i-stalled.png: Likewise.
+
 	* gicon.c (gicon_get_filename_for_icon): Doh, use image_hash here.
-	
+
 1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gicon.c: Lots of changes to support the little symlink/stalled
