@@ -1,3 +1,8 @@
+2002-10-13  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h: Remove tar_gzipped_memlimit.
+	From Christian Laubscher <christian.laubscher@tiscalinet.ch>
+
 2002-10-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (fake_share_stat): Make sure share exists by

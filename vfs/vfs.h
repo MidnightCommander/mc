@@ -153,7 +153,6 @@
     char *vfs_get_current_dir (void);
 
     extern int vfs_timeout;
-    extern int tar_gzipped_memlimit;
 
     void vfs_stamp (vfs *, vfsid);
     void vfs_rmstamp (vfs *, vfsid, int);
