@@ -1,3 +1,10 @@
+2005-02-08  Roland Illig  <roland.illig@gmx.de>
+
+	* widget.h: Moved constants to the appropriate places (just
+	before the variable they will be used with).
+	* widget.c: HISTORY_FILE_NAME was not needed in widget.h,
+	so it has been made private to this file.
+
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
 	* unixcompat.h: Emit warnings for the fallback case of the

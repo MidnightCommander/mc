@@ -3,16 +3,8 @@
 
 #include "dialog.h"		/* Widget */
 
-#define C_BOOL		1
-#define C_CHANGE	2
-
 /* Please note that the first element in all the widgets is a     */
 /* widget variable of type Widget.  We abuse this fact everywhere */
-
-#define HIDDEN_BUTTON		0
-#define NARROW_BUTTON		1
-#define NORMAL_BUTTON		2
-#define DEFPUSH_BUTTON		3
 
 /* button callback */
 typedef int (*bcback) (int);
@@ -21,6 +13,11 @@ typedef struct WButton {
     Widget widget;
     int action;			/* what to do when pressed */
     int selected;		/* button state */
+
+#define HIDDEN_BUTTON		0
+#define NARROW_BUTTON		1
+#define NORMAL_BUTTON		2
+#define DEFPUSH_BUTTON		3
     unsigned int flags;		/* button flags */
     char *text;			/* text of button */
     int hotkey;			/* hot KEY */
@@ -39,6 +36,9 @@ typedef struct WRadio {
 
 typedef struct WCheck {
     Widget widget;
+
+#define C_BOOL			0x0001
+#define C_CHANGE		0x0002
     unsigned int state;		/* check button state */
     char *text;			/* text of check button */
     int hotkey;                 /* hot KEY */
@@ -77,7 +77,6 @@ typedef struct {
 
 /* For history load-save functions */
 #define INPUT_LAST_TEXT ((char *) 2)
-#define HISTORY_FILE_NAME ".mc/history"
 
 typedef struct {
     Widget widget;

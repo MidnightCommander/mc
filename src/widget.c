@@ -44,6 +44,8 @@
 #include "wtools.h"	/* For common_dialog_repaint() */
 #include "main.h"	/* for `slow_terminal' */
 
+#define HISTORY_FILE_NAME ".mc/history"
+
 static int button_event (Gpm_Event *event, WButton *b);
 
 int quote = 0;
