@@ -690,37 +690,33 @@ tree_mkdir_cmd (WTree *tree)
 static void
 tree_rmdir_cmd (WTree *tree)
 {
-    char old_dir [MC_MAXPATHLEN];
     off_t count = 0;
     double bytes = 0;
     FileOpContext *ctx;
 
-    if (tree->selected_ptr){
-	if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
-	    return;
-	if (mc_chdir (PATH_SEP_STR))
-	    return;
-	if (confirm_delete){
-	    char *buf;
-	    int result;
-
-	    buf = g_strdup_printf (_("  Delete %s?  "), tree->selected_ptr->name);
-	    result = query_dialog (_(" Delete "), buf, 3, 2, _("&Yes"), _("&No"));
-	    g_free (buf);
-	    if (result != 0){
-		return;
-	    }
-	}
-
-	ctx = file_op_context_new ();
-	file_op_context_create_ui (ctx, OP_DELETE, FALSE);
-	if (erase_dir (ctx, tree->selected_ptr->name, &count, &bytes) == FILE_CONT)
-	    tree_forget_cmd (tree);
-	file_op_context_destroy (ctx);
-	mc_chdir (old_dir);
+    if (!tree->selected_ptr)
 	return;
-    } else
-	return;
+
+    if (confirm_delete) {
+	char *buf;
+	int result;
+
+	buf =
+	    g_strdup_printf (_("  Delete %s?  "),
+			     tree->selected_ptr->name);
+	result =
+	    query_dialog (_(" Delete "), buf, 3, 2, _("&Yes"), _("&No"));
+	g_free (buf);
+	if (result != 0)
+	    return;
+    }
+
+    ctx = file_op_context_new ();
+    file_op_context_create_ui (ctx, OP_DELETE, FALSE);
+    if (erase_dir (ctx, tree->selected_ptr->name, &count, &bytes) ==
+	FILE_CONT)
+	tree_forget_cmd (tree);
+    file_op_context_destroy (ctx);
 }
 
 static void set_navig_label (WTree *tree);
