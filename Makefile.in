@@ -122,13 +122,13 @@ distcopy:
 	for I in $(alldirs); do \
 	    cd $$I ; \
 	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
-            cd ..; done
-	make -C po
+	    cd ..; done
+	cd po; $(MAKE) || exit 1; cd ..;
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
 	cp po/POTFILES.in ../mc-$(VERSION)/po;
 	cp po/*.po po/*.gmo po/mc.pot po/stamp-cat-id po/cat-id-tbl.c ../mc-$(VERSION)/po;
 	(cd ..; tar cvf - mc-$(VERSION) | \
-	gzip -f9 > mc-$(VERSION).tar.gz); \
+	gzip -f9 > mc-$(VERSION).tar.gz)
 
 dist: configure config.h.in distdirs distcopy
 
