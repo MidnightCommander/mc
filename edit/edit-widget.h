@@ -116,6 +116,7 @@ struct editor_widget {
 
 /* macro stuff */
     int macro_i;		/* -1 if not recording index to macro[] otherwise */
+    int macro_depth;		/* depth of the macro recursion */
     struct macro macro[MAX_MACRO_LENGTH];
 };
 

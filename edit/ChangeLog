@@ -1,5 +1,11 @@
 2002-10-20  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Add new field macro_depth to control depth of
+	macro recursion.
+	* edit.c (edit_execute_macro): Make static.  Increment
+	macro_depth on entry, decrement on exit, don't allow it to be
+	too large.
+
 	* wordproc.c (line_start): Remove incorrect optimization abusing
 	static varaibles.  Internal formatting should be usable now.
 

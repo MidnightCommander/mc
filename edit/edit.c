@@ -1920,7 +1920,7 @@ static void check_and_wrap_line (WEdit * edit)
     }
 }
 
-void edit_execute_macro (WEdit * edit, struct macro macro[], int n);
+static void edit_execute_macro (WEdit *edit, struct macro macro[], int n);
 
 int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch)
 {
@@ -2586,14 +2586,22 @@ int edit_execute_command (WEdit * edit, int command, int char_for_insertion)
     return r;
 }
 
-void edit_execute_macro (WEdit * edit, struct macro macro[], int n)
+static void
+edit_execute_macro (WEdit *edit, struct macro macro[], int n)
 {
     int i = 0;
+
+    if (edit->macro_depth++ > 256) {
+	edit_error_dialog (_(" Error "), _("Macro recursion is too deep"));
+	edit->macro_depth--;
+	return;
+    }
     edit->force |= REDRAW_PAGE;
     for (; i < n; i++) {
 	edit_execute_cmd (edit, macro[i].command, macro[i].ch);
     }
     edit_update_screen (edit);
+    edit->macro_depth--;
 }
 
 /* User edit menu, like user menu (F2) but only in editor. */
