@@ -1,3 +1,8 @@
+2000-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: mc.hlp now depends on man2hlp.c instead of
+	man2hlp - this avoids some rebuilds of mc.hlp
+
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* mc.hlp: removed. It's a derived file
