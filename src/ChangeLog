@@ -1,5 +1,8 @@
 2001-07-17  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (get_current_wd): Remove.  It's obsoleted by
+	g_get_current_dir() from glib.
+
 	* ext.c (exec_extension): Add the `rm' command to the end of
 	temporary scripts so that they erase themselves.
 

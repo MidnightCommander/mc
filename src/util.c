@@ -897,29 +897,6 @@ char *strip_ctrl_codes (char *s)
 
 #endif /* VFS_STANDALONE */
 
-/*
- * Ok, on systems running glibc, getcwd does not use popen pwd on
- * Linux at least
- */
-#ifdef __GLIBC__
-#  ifdef linux
-#     undef HAVE_GETWD
-#  endif
-#endif
-
-/* getwd is better than getcwd, the later uses a popen ("pwd"); */
-char *get_current_wd (char *buffer, int size)
-{
-    char *p;
-
-#ifdef HAVE_GETWD
-    p = (char *) getwd (buffer);
-#else
-    p = getcwd (buffer, size);
-#endif
-    return p;
-}
-
 #define CHECK(x) if (x == -1) return 0;
 
 static long
