@@ -25,6 +25,7 @@ static void
 gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, const gchar *mime)
 {
 	GtkWidget *msg_dialog = NULL;
+	GtkWidget *hack_widget;
 	gchar *msg;
 	gchar *fix = NULL;
 	if (!strcmp (action, "x-gnome-app-info")) {
@@ -63,11 +64,12 @@ gmc_unable_to_execute_dlg (gchar *fname, const gchar *command, gchar *action, co
 					    GNOME_STOCK_BUTTON_OK,
 					    NULL);
 	/* Kids, don't try this at home */
-	/* this is pretty evil... <-: 
+	/* this is pretty evil... <-:  */
 	hack_widget = GNOME_DIALOG (msg_dialog)->vbox;
-	hack_widget = GTK_WIDGET (GTK_BOX (hack_widget)->children->data);
+	hack_widget = ((GtkBoxChild *) GTK_BOX (hack_widget)->children->data)->widget;
+	hack_widget = ((GtkBoxChild *) GTK_BOX (hack_widget)->children->next->data)->widget;
 	gtk_label_set_line_wrap (GTK_LABEL (hack_widget), TRUE);
-	*/
+
 	gnome_dialog_run_and_close (GNOME_DIALOG (msg_dialog));
 	g_free (msg);
 	
