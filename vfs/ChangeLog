@@ -1,3 +1,7 @@
+2001-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* samba/acconfig.h: Only leave symbols required by Autoconf-2.52.
+
 2001-09-17  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Manually expand macros for mc_stat(), mc_lstat() and
