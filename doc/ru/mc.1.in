@@ -1563,8 +1563,10 @@ A	Dump the currently selected file
 	od -c %f
 
 B	Edit a bug report and send it to root
-	vi /tmp/mail.$$
-	mail -s "Midnight Commander bug" root < /tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	vi $I
+	mail -s "Midnight Commander bug" root < $I
+	rm -f $I
 
 M	Read mail
 	emacs -f rmail

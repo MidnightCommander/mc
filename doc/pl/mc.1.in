@@ -1174,8 +1174,10 @@ A	Wyrzuæ aktualny plik.
 	od -c %f
 
 B	Stwórz raport o b³êdzie i wy¶lij do roota.
-	vi ~/tmp/mail.$$
-	mail -s "B³±d Midnight Commandera" root < ~/tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	vi $I
+	mail -s "B³±d Midnight Commandera" root < $I
+	rm -f $I
 
 M	Przeczytaj pocztê.
 	emacs -f rmail

@@ -1375,8 +1375,10 @@ A	Vuelca el contenido del archivo seleccionado
 	od -c %f
 
 B	Edita un informe de errores y lo envía al superusuario
-	vi /tmp/mail.$$
-	mail -s "Error Midnight Commander" root < /tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	vi $I
+	mail -s "Error Midnight Commander" root < $I
+	rm -f $I
 
 M	Lee al correo
 	emacs -f rmail

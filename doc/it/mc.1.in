@@ -1390,8 +1390,10 @@ A	Mostra un dump del file correntemente selezionato
 	od -c %f
 
 B	Modifica un rapporto bachi e lo spedisce a root
-	vi /tmp/mail.$$
-	mail -s "Midnight Commander bug" root < /tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	vi $I
+	mail -s "Midnight Commander bug" root < $I
+	rm -f $I
 
 M	Legge la posta
 	emacs -f rmail

@@ -1381,8 +1381,10 @@ A       A kiválasztott fájlok listázása oktális formában
         od -c %f
 
 B       A hiba leírás szerkesztése és elküldése a root-nak
-        vi /tmp/mail.$$
-        mail -s "Midnight Commander bug" root < /tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+        vi $I
+        mail -s "Midnight Commander bug" root < $I
+	rm -f $I
 
 M       Levél olvasás
         emacs -f rmail

@@ -1383,8 +1383,10 @@ A	Истреса садржај тренутно изабране датотеке
 	od -c %f
 
 B	Уређује пријаву грешке и шаље је администратору
-	vi /tmp/mail.$$
-	mail -s "Грешка у поноћном нареднику" root < /tmp/mail.$$
+	I=`mktemp ${MC_TMPDIR:-/tmp}/mail.XXXXXX` || exit 1
+	vi $I
+	mail -s "Грешка у поноћном нареднику" root < $I
+	rm -f $I
 
 M	Чита пошту
 	emacs -f rmail
