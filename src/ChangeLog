@@ -1,3 +1,15 @@
+Mon May 17 07:37:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* subshell.c (pty_open_master): use getpt () if available to open
+	the master side of the pty. getpt () is a glibc extension and is 
+	needed when glibc 2.1.x is used with a (linux) kernel without unix98
+	style ptys (if there is no /dev/ptmx getpt falls back to bsd style 
+	ptys).
+
+	* filegui.c (check_progress_buttons): Don't update the Gpm mouse 
+	cursor when we check for events. It causes a flickering cursor on a 
+	different virtual console.
+
 1999-05-12  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cons.saver.c (main): change cons.saver so it can be run without

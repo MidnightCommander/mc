@@ -1094,8 +1094,15 @@ static int pty_open_master (char *pty_name)
     char *slave_name;
     int pty_master;
 
+
+#ifdef HAVE_GETPT
+    /* getpt () is a GNU extension (glibc 2.1.x) */
+    pty_master = getpt ();
+#else
     strcpy (pty_name, "/dev/ptmx");
-    if ((pty_master = open (pty_name, O_RDWR)) == -1
+    pty_master = open (pty_name, O_RDWR)
+#endif 
+    if (pty_master == -1
 	|| grantpt (pty_master) == -1		  /* Grant access to slave */
 	|| unlockpt (pty_master) == -1		  /* Clear slave's lock flag */
 	|| !(slave_name = ptsname (pty_master)))  /* Get slave's name */

@@ -169,6 +169,11 @@ AC_CHECK_FUNCS(memset memcpy tcsetattr tcgetattr cfgetospeed)
 AC_CHECK_FUNCS(sigaction sigemptyset sigprocmask sigaddset)
 AC_CHECK_FUNCS(sysconf setuid setreuid)
 
+dnl
+dnl getpt is a GNU Extension (glibc 2.1.x)
+dnl
+AC_CHECK_FUNCS(getpt)
+
 SHADOWLIB=
 if test x$system = xLinux; then
 AC_CHECK_LIB(shadow,pw_encrypt,[
