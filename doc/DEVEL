@@ -34,12 +34,12 @@ o  This code is distributed under the GNU General Public License and
 * Code structure.
 
    The program uses extensively the dialog manager written by Radek
-   Doulik.  To understand how the dialog manager works, please read
-   the dlg.c and dlg.h.  You will find the basic widgets in the file
-   widget.c and the widget.h file.  If you understand this two files,
-   you are done.  The files option.c and boxes.c contain some examples
-   of how the dialog manager functions are used.  For a more complete
-   example, take a look at the main.c file.
+   Doulik.  To understand how the dialog manager works, please read the
+   dialog.c and dialog.h.  You will find the basic widgets in the files
+   widget.c and widget.h.  If you understand these files, you are done. 
+   The files option.c and boxes.c contain some examples of how the
+   dialog manager functions are used.  For a more complete example, take
+   a look at the main.c file.
 
    The file util.c has a lot of utility functions.  Get familiar with
    them, they are very simple. 
@@ -106,6 +106,54 @@ compatible with Slang.
 
 
 * The Dialog manager and the Widgets
+
+The Dialog manager and the Widget structure are implemented in
+src/dialog.c.  Everything shown on screen is a dialog.  Dialogs contain
+widgets, but not everything on screen is a widget.  Dialogs can draw
+themselves.
+
+Dialogs are connected into a singly linked list using "parent" field. 
+Currently active dialog is saved in current_dlg variable.  The toplevel
+dialog has parent NULL.  Usually it's midnight_dlg.
+
+            parent                  parent
+current_dlg ------->another dialog-- ... -->midnight_dlg
+
+When the screen needs to be refreshed, every dialog asks its parent to
+refresh first, and then refreshes itself.
+
+A dialog is created by create_dlg().  Then it's populated by widgets
+using add_widget().  Then the dialog is run by calling run_dlg(), which
+returns the id of the button selected by the user.  Finally, the dialog
+is destroyed by calling destroy_dlg().
+
+Widgets are placed to a doubly linked circular list.  Each widget has
+previous and next widget.
+
+        prev   next         prev   next
+widget1 <---------> widget2 <---------> widget3
+   ^                                       ^
+   -----------------------------------------
+   next                                 prev
+
+Pressing Tab moves focus to the "next" widget, pressing Shift-Tab moves
+focus to "prev".  The tab order is equal to the add order except some
+old code that use the reverse order by setting DLG_REVERSE flag in
+create_dlg() call.  Please don't use reverse order in the new code.
+
+The initial widget to get focus can be selected by calling
+dlg_select_widget().
+
+When creating a dialog, you may want to use a callback that would
+intercept some dialog events.  However, many widgets will do the right
+thing by default, so some dialogs can work just fine without callbacks.
+
+There are also widget events, which are sent by the dialog to individual
+widgets.  Some widgets also have user callbacks.
+
+To create your own widget, use init_widget().  In this case, you must
+provide a callback function.  Please note that it's not the same as the
+user callback in some widgets.
 
 ** Button widget
 
