@@ -1,3 +1,8 @@
+2002-08-20  David Martin  <dmartina@excite.com>
+
+	* doc/es/mc.1.in: Minor changes.
+	* doc/es/xnc.hlp: Likewise.
+
 2002-08-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* mc.spec.in: Add /usr/lib/mc/mc.charsets and

@@ -615,11 +615,18 @@ lista las acciones más generales y que no guardan relación con
 la selección actual de ficheros.
 .PP
 .\"NODE "  Left and Right Menus"
-.SH "  Menús Izquierdo y Derecho"
+.SH "  Menús Izquierdo y Derecho (Arriba y Abajo)"
 La presentación de los paneles de directorio puede ser cambiada desde los menús
 .B "Izquierdo"
 y
-.B "Derecho".
+.B "Derecho"
+.B ("Arriba"
+y
+.B "Abajo"
+si hemos elegido la disposición horizontal de paneles en las opciones de
+.\"LINK2"
+presentación).
+.\"Layout"
 .PP
 .\"NODE "    Listing Mode..."
 .SH "    Modo de Listado..."
@@ -779,7 +786,7 @@ desde el
 Menú de Opciones
 .\"Options Menu"
 (opción
-.B "Mezcla todos los archivos"
+.B "Mezcla todos los ficheros"
 ).
 .PP
 .\"NODE "    Filter..."
@@ -802,13 +809,13 @@ Panelización externa
 para más información).
 .PP
 .\"NODE "  File Menu"
-.SH "  Menú de Archivo"
+.SH "  Menú de Fichero"
 Midnight Commander utiliza las teclas de función
 .I F1
 -
 .I F10
 como atajos de teclado
-para los comandos que aparecen en menú de archivo. Las secuencias de escape para las
+para los comandos que aparecen en el menú de fichero. Las secuencias de escape para las
 Fkeys son características de terminfo desde kf1 hasta kf10. En terminales sin
 soporte de teclas de función, podemos conseguir la misma funcionalidad
 pulsando la tecla
@@ -821,7 +828,7 @@ y
 .I F10
 respectivamente).
 .PP
-El menú de Archivo posee los siguientes comandos (atajos de teclado entre paréntesis):
+El menú de Fichero posee los siguientes comandos (atajos de teclado entre paréntesis):
 .PP
 .B Ayuda
 (
@@ -1076,14 +1083,14 @@ realiza la salida de ese programa al panel actual.
 .PP
 El comando
 .\"LINK2"
-Edición del archivo de extensiones
+Edición del fichero de extensiones
 .\"Extension File Edit"
 nos permite especificar los programas a ejecutar para intentar
 ejecutar, ver, editar y realizar un montón de cosas sobre ficheros
 con ciertas extensiones (terminaciones de fichero). Por ejemplo, asociar la extensión
 de los ficheros de audio de SUN (.au) con el programa reproductor adecuado. El comando
 .\"LINK2"
-Edición del archivo de extensiones
+Edición del fichero de extensiones
 .\"Extension File Edit"
 podría ser usado para editar el menú de usuario (el cual aparece pulsando F2).
 .PP
@@ -1095,7 +1102,7 @@ a ese directorio.
 .PP
 Hay dos modos de invocar el árbol. El comando de árbol de directorios
 está disponible desde el menú Comando. El otro modo es seleccionar la vista en árbol
-desde el menú Izquyierdo o Derecho.
+desde el menú Izquierdo o Derecho.
 .PP
 Para evitar largos retardos Midnight Commander crea la figura de árbol
 escaneando solamente un pequeño subconjunto de todos los directorios. Si
@@ -1275,7 +1282,7 @@ comando cd interno.
 .\"The cd internal command"
 .PP
 .\"NODE "    Extension File Edit"
-.SH "    Edicion del Archivo de Extensiones"
+.SH "    Edicion del Fichero de Extensiones"
 Esto invocará nuestro editor con el fichero ~/.mc/ext. El formato de
 este fichero es como sigue (el formato fue cambiado con la versión 3.0):
 .PP
@@ -1349,7 +1356,7 @@ en segundo plano). Podemos parar, reiniciar y eliminar procesos en segundo plano
 aquí.
 .PP
 .\"NODE "    Menu File Edit"
-.SH "    Edicion del Archivo de Menú"
+.SH "    Edicion del Fichero de Menú"
 El menú de usuario es un menú de acciones útiles que puede ser personalizado
 por el usuario. Cuando accedemos al menú de usuario se utiliza, si existe,
 el fichero .mc.menu del directorio actual, pero sólo si es propiedad del
@@ -1414,18 +1421,18 @@ comenzar desde la primera columna con un carácter '='. Si la condición es
 verdadera, la entrada del menú será la entrada por defecto.
 .PP
 .nf
-Sintaxs condicional: 	= <sub-cond>
+Sintaxis condicional: 	= <sub-cond>
   o:			= <sub-cond> | <sub-cond> ...
   o:			= <sub-cond> & <sub-cond> ...
 
 Sub-condición es una de las siguientes:
 
-  f <patrón>		¿ el fichero actual encaja con el patrón?
-  F <patrón>		¿ otro fichero encaja con el patrón?
-  d <patrón>		¿ el directorio actual encaja con el patrón?
-  D <patrón>		¿ otro directorio encaja con el patrón?
-  t <tipo>		¿ fichero actual de tipo <tipo>?
-  T <tipo>		¿ otro fichero de tipo <tipo>?
+  f <patrón>		¿el fichero actual encaja con el patrón?
+  F <patrón>		¿otro fichero encaja con el patrón?
+  d <patrón>		¿el directorio actual encaja con el patrón?
+  D <patrón>		¿otro directorio encaja con el patrón?
+  t <tipo>		¿fichero actual es de tipo <tipo>?
+  T <tipo>		¿otro fichero es de tipo <tipo>?
   ! <sub-cond>		niega el resultado de la sub-condición
 .fi
 .PP
@@ -1441,9 +1448,9 @@ Tipo es uno o más de los siguientes caracteres:
   r	fichero regular
   d	directorio
   l	enlace
-  c	carácter especial
-  b	bloque special
-  f	cola (fifo)
+  c	dispositivo tipo carácter
+  b	dispositivo tipo bloque
+  f	tubería (fifo)
   s	socket
   x	ejecutable
   t	marcado (tagged)
@@ -1470,7 +1477,7 @@ He aquí un ejemplo de uso de condiciones:
 .PP
 .nf
 = f *.tar.gz | f *.tgz & t n
-L	Lista el contenido de un archivo tar comprimido
+L	Lista el contenido de un fichero tar comprimido
 	gzip -cd %f | tar xvf -
 .fi
 .PP
@@ -1525,7 +1532,7 @@ El comando
 Opciones del VFS
 .\"Virtual FS"
 Sobreimpresiona un diálogo desde el cual podemos especificar algunas opciones relacionadas
-con VFS (Sistema de Archivos Virtual).
+con VFS (Sistema de Ficheros Virtual).
 .PP
 El comando
 .\"LINK2"
@@ -1575,7 +1582,7 @@ la barra de selección se desplaza hacia abajo.
 Si está activa, muestra una línea de información de estado en la parte inferior
 de los paneles sobre el ítem actualmente seleccionado.
 .PP
-.I Mezclar todos los archivos.
+.I Mezclar todos los ficheros.
 Cuando esta opción está habilitada, todos los ficheros y directorios son mostrados mezclados
 juntos. Si la opción está desactivada, los directorios (y enlaces a los mismos)
 son mostrados al principio de la lista, y el resto de ficheros a continuación.
@@ -1900,16 +1907,16 @@ Ficheros marcados en el panel inactivo.
 y
 .I "%U"
 .IP
-Similar a las macros %t y %T, salvo que los ficheros son
-desmarcados. Podemos usar esta macro sólo una vez por cada entrada del menú
-de archivo o del fichero de extensiones, puesto que la siguiente vez no serán ya tagged
-ficheros marcados.
+Similar a las macros %t y %T, salvo que los ficheros quedan desmarcados.
+Sólo se puede emplear esta macro una vez por cada entrada del fichero de menú
+o fichero de extensiones, puesto que para la siguiente vez no quedaría ningún
+fichero marcado.
 .PP
 .I "%s"
 y
 .I "%S"
 .IP
-Los ficheros seleccionados: Los ficheros marcados si los hay. Si no el
+Ficheros seleccionados: Los ficheros marcados si los hay y si no el
 fichero actual.
 .PP
 .I "%q"
@@ -2071,11 +2078,11 @@ rápida para este comando es C-x o.
 .PP
 .\"NODE "Advanced Chown"
 .SH "Cambiar Dueño y Permisos"
-Cambiar Dueño y Permisos combina 
+Cambiar Dueño y Permisos combina
 .\"LINK2"
 Cambiar Dueño
 .\"Chown"
-y 
+y
 .\"LINK2"
 Cambiar Permisos
 .\"Chmod"
@@ -2336,7 +2343,7 @@ Intercambia entre los diferentes modos de regla: desactivado, arriba, abajo.
 Es posible adiestrar al visor de ficheros sobre cómo mostrar un fichero, mírese
 la sección
 .\"LINK2"
-Editar Archivo de Extensiones.
+Editar Fichero de Extensiones.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor de Ficheros Interno"
@@ -2541,7 +2548,7 @@ Ejemplos:
     /ftp/GCC/gcc-2.7.0.tar#utar
 .fi
 .PP
-En éste último se indica la ruta completa hasta el archivo tar.
+En este último se indica la ruta completa hasta el fichero tar.
 .PP
 .\"NODE "  FTP File System"
 .SH "  Sistema de ficheros FTP (ftpfs)"
@@ -2605,10 +2612,10 @@ la caché es configurable en el cuadro de diálogo del
 .\"LINK2"
 Sistema de Ficheros Virtual (VFS).
 .\"Virtual File System"
-Esto tiene un efecto curioso: si cambiamos algo en un directorio, no será verá
-reflejado en el listado hasta que se fuerce la recarga de la caché con la tecla
-C-r. Esto es una prestación útil (si creemos que es un defecto, pensemos en
-manipular ficheros al otro lado del Atlántico con ftpfs).
+Esto tiene un efecto curioso: si cambiamos algo en un directorio, no se verá
+reflejado en el listado hasta que se fuerce un refresco de la caché con la tecla
+C-r. No se trata de un fallo, sino de una utilidad; pensemos en lo pesado
+que es manipular ficheros con ftpfs sobre una conexión lenta.
 .PP
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Sistema de ficheros de envío FIcheros por SHell (fish)"
@@ -2716,9 +2723,9 @@ Ejemplos:
 .fi
 .PP
 .\"NODE "  Undelete File System"
-.SH "  Sistema de Archivos de Recuperación"
+.SH "  Sistema de ficheros de Recuperación"
 En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
-las facilidades de recuperación de archivos de ext2fs, tendremos el sistema de ficheros
+las facilidades de recuperación de ficheros de ext2fs, tendremos el sistema de ficheros
 recuperables accesible.
 La recuperación de ficheros borrados está disponible sólo en los sistemas de ficheros ext2. El
 sistema de ficheros recuperable es sólo un interface de la librería ext2fs con:
