@@ -2237,7 +2237,7 @@ buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
 	    return 1;
 	widget_move (&bb->widget, 0, 0);
 	attrset (DEFAULT_COLOR);
-	printw ("%-*s", bb->widget.cols - 1, "");
+	printw ("%-*s", bb->widget.cols, "");
 	for (i = 0; i < COLS/8 && i < 10; i++){
 	    widget_move (&bb->widget, 0, i*8);
 	    attrset (DEFAULT_COLOR);

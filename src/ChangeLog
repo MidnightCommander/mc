@@ -1,5 +1,9 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (buttonbar_callback): Fix a bug that prevented the
+	last byte from being redrawn.
+	Reported by David Martin <dmartina@excite.com>
+
 	* layout.c (setup_panels): Make the button bar 0 lines high if
 	it's invisible, so that mouse click on the history button works
 	with invisible button bar.
