@@ -899,6 +899,7 @@ directory_history_add (WPanel * panel, char *s)
     if (!panel->dir_history) {
 	panel->dir_history = g_new0 (Hist, 1);
 	panel->dir_history->text = g_strdup (s);
+	strip_password (panel->dir_history->text, 1);
 	return;
     }
     if (!strcmp (panel->dir_history->text, s))
@@ -914,7 +915,8 @@ directory_history_add (WPanel * panel, char *s)
     }
     panel->dir_history = panel->dir_history->next;
     panel->dir_history->text = g_strdup (s);
-    
+    strip_password (panel->dir_history->text, 1);
+
     panel_update_marks (panel);
 }
 

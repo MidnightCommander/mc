@@ -321,27 +321,57 @@ char *string_perm (mode_t mode_bits)
     return mode;
 }
 
-static char *
-strip_password (char *path)
+/* p: string which might contain an url with a password (this parameter is
+      modified in place).
+   has_prefix = 0: The first parameter is an url without a prefix
+                   (user[:pass]@]machine[:port][remote-dir). Delete
+                   the password.
+   has_prefix = 1: Search p for known url prefixes. If found delete
+                   the password from the url. 
+                   Cavevat: only the first url is found
+*/ 
+char *
+strip_password (char *p, int has_prefix)
 {
+    static struct {
+	char *name;
+        size_t len;
+    } prefixes[] = { {"/#ftp:", 6},
+		     {"/#mc:", 5},
+		     {"ftp://", 6}
+    };
     char *at, *inner_colon, *dir;
+    int i;
+    char *result = p;
     
-    if ((dir = strchr (path, PATH_SEP)) != NULL)
-	*dir = '\0';
-    /* search for any possible user */
-    at = strchr (path, '@');
+    for (i = 0; i < sizeof (prefixes)/sizeof (prefixes[0]); i++) {
+	char *q;
 
-    /* We have a username */
-    if (at) {
-        *at = 0;
-        inner_colon = strchr (path, ':');
-	*at = '@';
-        if (inner_colon)
-            strcpy (inner_colon, at);
+	if (has_prefix) {
+	    if((q = strstr (p, prefixes[i].name)) == 0)
+	       continue;
+            else
+	        p = q + prefixes[i].len;
+       	};
+
+        if ((dir = strchr (p, PATH_SEP)) != NULL)
+   	    *dir = '\0';
+        /* search for any possible user */
+        at = strchr (p, '@');
+
+        /* We have a username */
+        if (at) {
+            *at = 0;
+            inner_colon = strchr (p, ':');
+  	    *at = '@';
+            if (inner_colon)
+                strcpy (inner_colon, at);
+        }
+        if (dir)
+	    *dir = PATH_SEP;
+	break;
     }
-    if (dir)
-	*dir = PATH_SEP;
-    return (path);
+    return (result);
 }
 
 char *strip_home_and_password(char *dir)
@@ -354,17 +384,11 @@ char *strip_home_and_password(char *dir)
 	return newdir;
     } 
 
-    /* We do not strip homes in /#ftp tree, I do not like ~'s there (see ftpfs.c why) */
-#define STRIP( name ) \
-    if (strstr( dir, name )) { \
-        strcpy (newdir, dir); \
-	strip_password ( strstr( newdir, name ) + strlen(name) ); \
-        return newdir; \
-    }
-    STRIP( "/#ftp:" );
-    STRIP( "/#mc:" );
-
-    return dir;
+    /* We do not strip homes in /#ftp tree, I do not like ~'s there 
+       (see ftpfs.c why) */
+    strcpy (newdir, dir);
+    strip_password (newdir, 1);
+    return newdir;
 }
 
 static char *maybe_start_group (char *d, int do_group, int *was_wildcard)

@@ -20,6 +20,7 @@ char *size_trunc (long int size);
 char *size_trunc_sep (long int size);
 int  is_exe (mode_t mode);
 char *string_perm (mode_t mode_bits);
+char *strip_password (char *path, int has_prefix);
 char *strip_home_and_password(char *dir);
 char *extension (char *);
 char *split_extension (char *, int pad);

@@ -1,3 +1,22 @@
+Wed Feb  3 22:27:04 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* util.c (strip_password): Extented to find the url in the first 
+	parameter. The second parameter tells whether it should search the
+	url (indicated by known prefixes) in the first parameter or whether 
+	the first parameter is a url without a prefix ("ftp://", "/#ftp:", 
+	"/#mc:").
+
+	* main.c (directory_history_add): Strip the password (if any) from 
+	the freshly added value.
+
+	* widget.c (push_history): ditto. There's a ugly special casing
+	necessary for the network and ftp link dialogs (urls are entered
+	with out prefix).
+
+	* widget.c (history_put): Restrict read and write access to the 
+	history file to the owner (Just in case I forgot to strip passwords
+	somewhere).
+
 Mon Feb  1 00:43:15 1999  Timur Bakeyev <mc@bat.ru>
 
 	* screen.c (to_buffer): Code of the function rewritten, as a side

@@ -1,3 +1,9 @@
+Mon Feb  1 19:32:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (insert_dots): renamed from insert_dot. We have to 
+	insert ".." as well or directories from ftp servers which don't 
+	list "." and ".." are displayed with an additional "/".
+
 Mon Feb  1 02:55:07 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* tcputil.c: One more my bug with '\0' -> NULL. Oops..

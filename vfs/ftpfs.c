@@ -1242,8 +1242,8 @@ get_path (struct connection **bucket, char *path)
     return s_get_path (bucket, path, "/#ftp:");
 }
 
-/* Inserts an entry for "." into the linked list. Ignore any errors
-   because "." isn't important (as fas as you don't try to save a
+/* Inserts an entry for "." (and "..") into the linked list. Ignore any 
+   errors because "." isn't important (as fas as you don't try to save a
    file in the root dir of the ftp server).
    Actually the dot is needed when stating the root directory, e.g.
    mc_stat ("/ftp#localhost", &buf). Down the call tree _get_file_entry
@@ -1251,26 +1251,32 @@ get_path (struct connection **bucket, char *path)
    before searching for a fileentry. Whithout "." in the linked list
    this search fails.  -- Norbert. */
 static void
-insert_dot (struct linklist *file_list, struct connection *bucket)
+insert_dots (struct linklist *file_list, struct connection *bucket)
 {
     struct direntry *fe;
-    static char buffer[] = "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .";
+    int i;
+    char buffer[][58] = { 
+          "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .",
+          "drwxrwxrwx   1 0        0            1024 Jan  1  1970 .."
+    };
 
-    fe = malloc(sizeof(struct direntry));
-    if (fe == NULL)
-	return;
-    if (vfs_parse_ls_lga (buffer, &fe->s, &fe->name, &fe->linkname)) {
-	fe->freshly_created = 0;
-	fe->count = 1;
-	fe->local_filename = fe->remote_filename = NULL;
-	fe->l_stat = NULL;
-	fe->bucket = bucket;
-	(fe->s).st_ino = bucket->__inode_counter++;
+    for (i = 0; i < 2; i++ ) {
+        fe = malloc(sizeof(struct direntry));
+        if (fe == NULL)
+	    return;
+        if (vfs_parse_ls_lga (buffer[i], &fe->s, &fe->name, &fe->linkname)) {
+	    fe->freshly_created = 0;
+	    fe->count = 1;
+	    fe->local_filename = fe->remote_filename = NULL;
+	    fe->l_stat = NULL;
+	    fe->bucket = bucket;
+	    (fe->s).st_ino = bucket->__inode_counter++;
 
-	if (!linklist_insert(file_list, fe))
-	    free(fe);
-    } else
-	free (fe);
+	    if (!linklist_insert(file_list, fe))
+	        free(fe);
+        } else
+	    free (fe);
+    }
 }
 
 static struct dir *
@@ -1286,6 +1292,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     struct dir *dcache;
     int got_intr = 0;
     int dot_found = 0;
+    int dot_dot_found = 0;
     int has_spaces = (strchr (remote_path, ' ') != NULL);
 
     canonicalize_pathname (remote_path);
@@ -1443,7 +1450,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         goto fallback;
 
     if (!dot_found)
-	insert_dot (file_list, bucket);
+	insert_dots (file_list, bucket);
 
     if (!linklist_insert(qdcache(bucket), dcache)) {
 	my_errno = ENOMEM;
