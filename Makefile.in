@@ -20,7 +20,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		VERSION mcfn_install.in Make.common.in README.PC \
 		mc.spec mc.spec.in Specfile README.QNX VERSION.in \
 		mkinstalldirs autogen.sh ABOUT-NLS gettext.m4 \
-		config.guess config.sub
+		config.guess config.sub README.smbfs
 
 all: 
 	@for dir in @INTLSUB@ ${codedirs} @POSUB@; do \
