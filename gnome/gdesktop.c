@@ -920,6 +920,52 @@ do_mount_umount (char *filename, gboolean is_mount)
 	return FALSE;
 }
 
+static char *eject_known_locations [] = {
+	"/usr/bin/eject",
+	"/sbin/eject",
+	"/bin/eject",
+	NULL
+};
+
+/*
+ * Returns whether the device is ejectable
+ *
+ * Right now the test only checks if this system has the eject
+ * command
+ */
+gboolean 
+is_ejectable (char *filename)
+{
+	if (find_command (eject_known_locations))
+		return TRUE;
+	else
+		return FALSE;
+}
+
+/*
+ * Ejects the device pointed by filename
+ */
+gboolean
+do_eject (char *filename)
+{
+	char *eject_command = find_command (eject_known_locations);
+	char *command;
+	FILE *f;
+	
+	if (!eject_command)
+		return;
+	command = g_strconcat (eject_command, " ", filename, NULL);
+	open_error_pipe ();
+	f = popen (command, "r");
+	if (f == NULL)
+		close_error_pipe (1, _("While running the eject command"));
+	else
+		close_error_pipe (0, 0);
+	pclose (f);
+
+	return TRUE;
+}
+
 static gboolean
 try_to_mount (char *filename, file_entry *fe)
 {
