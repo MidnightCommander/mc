@@ -4,6 +4,7 @@ syntax_DATA =			\
 	Syntax			\
 	ada95.syntax		\
 	c.syntax		\
+	cs.syntax		\
 	changelog.syntax	\
 	diff.syntax		\
 	dos.syntax		\

@@ -77,6 +77,9 @@ include php.syntax
 file ..\*\\.(java|JAVA|Java|jav)$ Java\sProgram
 include java.syntax
 
+file ..\*\\.(cs|CS)$ C\#\sProgram
+include cs.syntax
+
 file ..\*\\.(js|JS)$ JavaScript\sProgram
 include js.syntax
 

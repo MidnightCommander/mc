@@ -1,3 +1,9 @@
+2003-02-27  Juan C. Olivares  <juancri@TAGnet.org>
+
+	* syntax/cs.syntax: New file.
+	* syntax/Syntax: Add cs.syntax.
+	* syntax/Makefile.am: Likewise.
+
 2003-02-27  Marco Ciampa  <ciampix@libero.it>
 
 	* doc/it/mc.1.in: updated manual with -e switch description.
