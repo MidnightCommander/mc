@@ -561,13 +561,16 @@ do_search (struct Dlg_head *h)
 		    g_snprintf (buffer, sizeof (buffer), _("Searching %s"), name_trunc (directory, FIND2_X_USE));
 		    status_update (buffer);
 	    }
-	    dirp = mc_opendir (directory);
+	    /* mc_stat should not be called after mc_opendir
+	       because vfs_s_opendir modifies the st_nlink
+	    */
 	    mc_stat (directory, &tmp_stat);
 	    subdirs_left = tmp_stat.st_nlink - 2;
 	    /* Commented out as unnecessary
 	       if (subdirs_left < 0)
 	       subdirs_left = MAXINT;
 	    */
+	    dirp = mc_opendir (directory);
 	}
 	dp = mc_readdir (dirp);
     }

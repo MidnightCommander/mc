@@ -1,3 +1,23 @@
+1999-04-25  Sergei Ivanov <svivanov@pdmi.ras.ru>
+
+	* find.c: The origin of the bug is in the function do_search (file
+	find.c).  It limits the number of subdirectories to scan by the
+	number stat.st_nlink-2, or infinite if st_nlink<2. On tar vfs,
+	st_nlink is always 1, so it should be the second case.
+
+	But before doing stat, do_search does opendir. And opendir on tar
+	vfs (vfs_s_opendir in vfs/direntry.c) increases the st_nlink value
+	in the stat data! So mc_stat called after mc_opendir on tar vfs
+	returns st_nlink==2 instead of 1. This is interpreted as if the
+	directory had no subdirs, thus subdirs are not searched in.
+
+	Changing the order of calls to mc_stat and mc_opendir fixes the
+	problem.
+	
+1999-03-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* setup.c (save_setup): Only save this if there is a current panel
+
 Wed Apr 21 21:47:15 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ext.c (exec_extension): Use tempnam instead of tmpnam (AIX doesn't
@@ -22,6 +42,7 @@ Wed Apr 21 20:19:45 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (main): call (init|done)_textmode_x11_support
 
+>>>>>>> 1.297
 Sat Apr 17 13:04:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* view.c (do_view_init): Enable viewing of files with negative
