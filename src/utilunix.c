@@ -604,99 +604,120 @@ int mc_doublepclose (int pipe, pid_t pid)
 	Trailing `/'s are removed.
 	Non-leading `../'s and trailing `..'s are handled by removing
 	portions of the path. */
-char *canonicalize_pathname (char *path)
+char *
+canonicalize_pathname (char *path)
 {
-    int i, start;
-    char stub_char;
+    char *p, *s;
+    int len;
 
-    if (!*path)
+    if (!path[0] || !path[1])
 	return path;
 
-    stub_char = (*path == PATH_SEP) ? PATH_SEP : '.';
-
-    /* Walk along path looking for things to compact. */
-    i = 0;
-    while (path[i]) {
-
-	while (path[i] && path[i] != PATH_SEP)
-	    i++;
-
-	start = i++;
-
-	/* If we didn't find any slashes, then there is nothing left to do. */
-	if (!path[start])
-	    break;
-
-#if defined(__QNX__) && !defined(__QNXNTO__)
-	/*
-	   ** QNX accesses the directories of nodes on its peer-to-peer
-	   ** network (Qnet) by prefixing their directories with "//[nid]".
-	   ** We don't want to collapse two '/'s if they're at the start
-	   ** of the path, followed by digits, and ending with a '/'.
-	 */
-	if (start == 0 && path[1] == PATH_SEP) {
-	    char *p = path + 2;
-	    char *q = strchr (p, PATH_SEP);
-
-	    if (q > p) {
-		*q = 0;
-		if (!strcspn (p, "0123456789")) {
-		    start = q - path;
-		    i = start + 1;
-		}
-		*q = PATH_SEP;
-	    }
+    /* Collapse multiple slashes */
+    p = path;
+    while (*p) {
+	if (p[0] == PATH_SEP && p[1] == PATH_SEP) {
+	    s = p + 1;
+	    while (*(++s) == PATH_SEP);
+	    strcpy (p + 1, s);
 	}
-#endif
+	p++;
+    }
 
-	/* Handle multiple `/'s in a row. */
-	while (path[i] == PATH_SEP)
-	    i++;
+    /* Collapse "/./" -> "/" */
+    p = path;
+    while (*p) {
+	if (p[0] == PATH_SEP && p[1] == '.' && p[2] == PATH_SEP)
+	    strcpy (p, p + 2);
+	else
+	    p++;
+    }
 
-	if ((start + 1) != i) {
-	    strcpy (path + start + 1, path + i);
-	    i = start + 1;
+    /* Remove trailing slashes */
+    p = path + strlen (path) - 1;
+    while (p > path && *p == PATH_SEP)
+	*p-- = 0;
+
+    /* Remove leading "./" */
+    if (path[0] == '.' && path[1] == PATH_SEP) {
+	if (path[2] == 0) {
+	    path[1] = 0;
+	    return path;
+	} else {
+	    strcpy (path, path + 2);
 	}
+    }
 
-	/* Check for trailing `/'. */
-	if (start && !path[i]) {
-	  zero_last:
-	    path[--i] = '\0';
-	    break;
-	}
-
-	/* Check for `../', `./' or trailing `.' by itself. */
-	if (path[i] == '.') {
-	    /* Handle trailing `.' by itself. */
-	    if (!path[i + 1])
-		goto zero_last;
-
-	    /* Handle `./'. */
-	    if (path[i + 1] == PATH_SEP) {
-		strcpy (path + i, path + i + 1);
-		i = start;
-		continue;
-	    }
-
-	    /* Handle `../' or trailing `..' by itself. 
-	       Remove the previous ?/ part with the exception of
-	       ../, which we should leave intact. */
-	    if (path[i + 1] == '.'
-		&& (path[i + 2] == PATH_SEP || !path[i + 2])) {
-		while (--start > -1 && path[start] != PATH_SEP);
-		if (!strncmp (path + start + 1, "../", 3))
-		    continue;
-		strcpy (path + start + 1, path + i + 2);
-		i = start;
-		continue;
+    /* Remove trailing "/" or "/." */
+    len = strlen (path);
+    if (len < 2)
+	return path;
+    if (path[len - 1] == PATH_SEP) {
+	path[len - 1] = 0;
+    } else {
+	if (path[len - 1] == '.' && path[len - 2] == PATH_SEP) {
+	    if (len == 2) {
+		path[1] = 0;
+		return path;
+	    } else {
+		path[len - 2] = 0;
 	    }
 	}
     }
 
-    if (!*path) {
-	*path = stub_char;
-	path[1] = '\0';
+    /* Collapse "/.." with the previous part of path */
+    p = path;
+    while (p[0] && p[1] && p[2]) {
+	if ((p[0] != PATH_SEP || p[1] != '.' || p[2] != '.')
+	    || (p[3] != PATH_SEP && p[3] != 0)) {
+	    p++;
+	    continue;
+	}
+
+	/* search for the previous token */
+	s = p - 1;
+	while (s >= path && *s != PATH_SEP)
+	    s--;
+
+	s++;
+
+	/* If the previous token is "..", we cannot collapse it */
+	if (s[0] == '.' && s[1] == '.' && s + 2 == p) {
+	    p += 3;
+	    continue;
+	}
+
+	if (p[3] != 0) {
+	    if (s == path && *s == PATH_SEP) {
+		/* "/../foo" -> "/foo" */
+		strcpy (s + 1, p + 4);
+	    } else {
+		/* "token/../foo" -> "foo" */
+		strcpy (s, p + 4);
+	    }
+	    p = (s > path) ? s - 1 : s;
+	    continue;
+	}
+
+	/* trailing ".." */
+	if (s == path) {
+	    /* "token/.." -> "." */
+	    if (path[0] != PATH_SEP) {
+		path[0] = '.';
+	    }
+	    path[1] = 0;
+	} else {
+	    /* "foo/token/.." -> "foo" */
+	    if (s == path + 1)
+		s[0] = 0;
+	    else
+		s[-1] = 0;
+	    break;
+	}
+
+	return path;
     }
+
     return path;
 }
 

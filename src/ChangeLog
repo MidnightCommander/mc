@@ -1,3 +1,10 @@
+2003-03-10  Pavel Roskin  <proski@gnu.org>
+
+	* utilunix.c (canonicalize_pathname): Clean rewrite from
+	scratch.  The old implementation had memory problems with "/.."
+	and didn't actually strip the leading "./" from path.  Remove
+	support for obsolete Qnet paths.
+
 2003-03-05  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c (init_subshell_child): Set environment variable
