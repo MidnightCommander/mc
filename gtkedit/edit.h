@@ -661,7 +661,7 @@ extern int gtk_edit_fixed_font;
 
 #    else
 
-#        define WIN_MESSAGES edit->widget->mainid, 20, 20
+#        define WIN_MESSAGES edit->widget ? edit->widget->mainid : CRoot, 20, 20
 
 #    endif
 
