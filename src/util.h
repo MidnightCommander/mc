@@ -46,19 +46,6 @@ int get_int (char *, char *, int);
 char *load_file (char *filename);
 char *load_mc_home_file (const char *filename, char ** allocated_filename);
 
-#include "fs.h"
-#ifndef S_ISLNK
-#   define S_ISLNK(x) (((x) & S_IFLNK) == S_IFLNK)
-#endif
-
-#ifndef S_ISSOCK
-#   ifdef S_IFSOCK
-#       define S_ISSOCK(x) (((x) & S_IFSOCK) == S_IFSOCK)
-#   else
-#       define S_ISSOCK(x) 0
-#   endif
-#endif
-
 /* uid/gid managing */
 void init_groups (void);
 void destroy_groups (void);

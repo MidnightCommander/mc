@@ -11,7 +11,9 @@
 #ifdef _OS_NT
 #  include <windows.h>
 #  include <io.h>
-#  include <direct.h>
+#ifdef _MSC_VER
+#    include <direct.h> /* from mkdir() */
+#endif
 #endif
 
 #ifdef HAVE_SYS_PARAM_H

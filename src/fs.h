@@ -2,11 +2,55 @@
 
 #ifndef __FS_H
 #define __FS_H
+
 #include <sys/types.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
 #include <sys/stat.h>
+
+
+/* Replacement for permission bits missing in sys/stat.h */
+#ifndef S_IFLNK
+#   define S_IFLNK 0
+#endif
+
+#ifndef S_ISLNK
+#   define S_ISLNK(x) (((x) & S_IFLNK) == S_IFLNK)
+#endif
+
+#ifndef S_IFSOCK
+#   define S_IFSOCK 0
+#endif
+
+#ifndef S_ISSOCK
+#   define S_ISSOCK(x) (((x) & S_IFSOCK) == S_IFSOCK)
+#endif
+
+#ifndef S_IFFIFO
+#   define S_IFFIFO 0
+#endif
+
+#ifndef S_ISFIFO
+#   define S_ISFIFO(x) (((x) & S_IFFIFO) == S_IFFIFO)
+#endif
+
+#ifndef S_IFCHR
+#   define S_IFCHR 0
+#endif
+
+#ifndef S_ISCHR
+#   define S_ISCHR(x) (((x) & S_IFCHR) == S_IFCHR)
+#endif
+
+#ifndef S_IFBLK
+#   define S_IFBLK 0
+#endif
+
+#ifndef S_ISBLK
+#   define S_ISBLK(x) (((x) & S_IFBLK) == S_IFBLK)
+#endif
+
 
 #ifndef MAXPATHLEN
 #   define MC_MAXPATHLEN 4096
@@ -40,4 +84,4 @@
 #   endif /* HAVE_NDIR_H */
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
 
-#endif
+#endif /* !__FS_H */
