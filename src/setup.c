@@ -244,9 +244,11 @@ static struct {
     { "editor_syntax_highlighting", &option_syntax_highlighting },
 #endif
 
-#ifndef HAVE_GNOME
+#ifdef HAVE_GNOME
+    { "tree_panel_visible", &tree_panel_visible },
+#else
     { "nice_rotating_dash", &nice_rotating_dash },
-    { "horizontal_split", &horizontal_split },
+    { "horizontal_split",   &horizontal_split },
 #endif
     { 0, 0 }
 };

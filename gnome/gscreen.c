@@ -38,6 +38,9 @@
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
 
+/* Whether to display the tree view on the left */
+int tree_panel_visible = -1;
+
 /* The pixmaps */
 #include "directory.xpm"
 #include "link.xpm"
@@ -2050,14 +2053,24 @@ create_and_setup_pane (WPanel *panel)
 	GtkWidget *pane;
 	GtkWidget *tree = panel->tree;
 	GdkFont *tree_font = tree->style->font;
+	int size;
 
 	pane = gtk_hpaned_new ();
 
+	if (tree_panel_visible == -1)
+		 size = 20 * gdk_string_width (tree_font, "W");
+	else {
+		if (tree_panel_visible)
+			size = tree_panel_visible;
+		else
+			size = 0;
+	}
+	
 	/*
 	 * Hack: set the default startup size for the pane without
 	 * using _set_usize which would set the minimal size
 	 */
-	GTK_PANED (pane)->child1_size = 20 * gdk_string_width (tree_font, "W");
+	GTK_PANED (pane)->child1_size = size;
 	GTK_PANED (pane)->position_set = TRUE;
 
 	gtk_widget_show (pane);
@@ -2158,6 +2171,20 @@ button_switch_to_custom_listing (WPanel *panel)
 	return button_switch_to (listing_custom_xpm, GTK_SIGNAL_FUNC (do_switch_to_custom_listing), panel);
 }
 
+static void
+tree_size_allocate (GtkWidget *widget, GtkAllocation *allocation, WPanel *panel)
+{
+	GtkWidget *tree = panel->tree;
+	GdkFont *tree_font = tree->style->font;
+	
+	if (allocation->width <= 0){
+		tree_panel_visible = 0;
+	} else {
+		tree_panel_visible = allocation->width;
+	}
+	save_setup ();
+}
+
 void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
@@ -2220,7 +2247,9 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 */
 	panel->pane = create_and_setup_pane (panel);
 	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree_scrolled_window);
-
+	gtk_signal_connect (GTK_OBJECT (panel->tree_scrolled_window), "size_allocate",
+			    GTK_SIGNAL_FUNC (tree_size_allocate), panel);
+	
 	/*
 	 * Filter
 	 */
