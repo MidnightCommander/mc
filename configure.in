@@ -194,8 +194,6 @@ AC_FUNC_MMAP
 AC_FUNC_ALLOCA
 AC_FUNC_STRCOLL
 
-AC_PATH_XTRA
-
 dnl
 dnl X11 support.
 dnl
@@ -210,6 +208,7 @@ textmode_x11_support="no"
 AC_ARG_WITH(tm-x-support,
 	[--with-tm-x-support        Try getting events from X Window System],
 	[if test x$withval = xyes; then
+		AC_PATH_XTRA
 		MCCFLAGS="$X_CFLAGS"
 		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
 		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT, 1,

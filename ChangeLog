@@ -1,5 +1,8 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Only check for X if --with-tm-x-support has been
+	specified.
+
 	* configure.in: Add check for sys/ioctl.h.
 
 	* configure.in: Use AC_FUNC_STRCOLL instead of generic test.
