@@ -2638,18 +2638,18 @@ static struct argp_option argp_options [] = {
     { "background",	'B', NULL, 0, N_("[DEVEL-ONLY: Debug the background code]"), 0 },
 #endif
 #if defined(HAVE_SLANG) && defined(OS2_NT)
-    { "createcmdfile",	'S', NULL, 0, N_("Create command file to set default directory upon exit."), 1 },
+    { "createcmdfile",	'S', "CMDFILE", , 0, N_("Create command file to set default directory upon exit."), 1 },
 #endif			     
     { "color",          'c', NULL, 0, N_("Force color mode."), 0 },
-    { "colors", 	'C', NULL, 0, N_("Specify colors (use --help-colors to get a list)."), 1 },
+    { "colors", 	'C', "COLORS", 0, N_("Specify colors (use --help-colors to get a list)."), 1 },
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "dbgsubshell", 	'X', NULL, 0, N_("[DEVEL-ONLY: Debug the subshell."), 0 },
 #endif
-    { "edit", 		'e', NULL, 0, N_("Startup the internal editor."), 1 },
+    { "edit", 		'e', "EDIT", 0, N_("Startup the internal editor."), 1 },
     { "help", 		'h', NULL, 0, N_("Shows this help message."), 0 },
     { "help-colors",	'H', NULL, 0, N_("Help on how to specify colors."), 0 },
 #ifdef USE_NETCODE
-    { "ftplog", 	'l', NULL, 0, N_("Log ftpfs commands to the file."), 1 },
+    { "ftplog", 	'l', "FTPLOG", 0, N_("Log ftpfs commands to the file."), 1 },
 #endif
     { "libdir", 	'f', NULL, 0, N_("Prints out the configured paths."), 0 },
     { NULL, 		'm', NULL, OPTION_HIDDEN, NULL, 0 },

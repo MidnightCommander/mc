@@ -558,3 +558,8 @@ display_mini_info (WPanel *panel)
 {
 	/* FIXME: implement */
 }
+
+void
+x_panel_destroy (WPanel *panel)
+{
+}
