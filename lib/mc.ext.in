@@ -228,10 +228,10 @@ include/image
 
 ### Sound files ###
 
-regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU])$
+regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU]|[sS][mM][pP]|[aA][iI][fF][fF]|[sS][nN][dD])$
        Open=if [ "$DISPLAY" = "" ]; then play %f; else (xmms -e %f 1>/dev/null 2>&1 &); fi
 
-regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM])$
+regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|[uU][lL][tT]|[fF][aA][rR])$
        Open=mikmod %f
        #Open=tracker %f
 
