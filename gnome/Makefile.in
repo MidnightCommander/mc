@@ -256,7 +256,7 @@ install_gmc: all
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
-	$(INSTALL_DATA) $(srcdir)/mc.metadata $(DESTDIR)$(datadir)/metadata
+	$(INSTALL_DATA) mc.metadata $(DESTDIR)$(datadir)/metadata
 
 uninstall: 
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)gmc
