@@ -5,6 +5,9 @@
 2004-11-09  Jindrich Novy  <jnovy@redhat.com>
 
 	* filegui.c (file_mask_dialog): Fix memory leak.
+	* hotlist.c (add_new_entry_cmd): Filter out a possible password
+	dialogs.
+	(add2hotlist_cmd): Likewise.
 
 2004-11-07  Leonard den Ottolander <leonard * den ottolander nl>
 

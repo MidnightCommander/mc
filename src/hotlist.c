@@ -49,6 +49,7 @@
 #include "hotlist.h"
 #include "key.h"		/* KEY_M_CTRL */
 #include "command.h"		/* cmdline */
+#include "glibcompat.h"		/* g_strlcpy for glib < 2.0 */
 
 #define UX		5
 #define UY		2
@@ -905,13 +906,17 @@ static void add_new_entry_cmd (void)
     int ret;
 
     /* Take current directory as default value for input fields */
-    title = url = current_panel->cwd;
+    url = strip_password (g_strdup(current_panel->cwd), 1);
+    title = g_strdup (url);
 
     ret = add_new_entry_input (_("New hotlist entry"), _("Directory label"),
 			       _("Directory path"), "[Hotlist]", &title, &url);
 
-    if (!ret || !title || !*title || !url || !*url)
+    if (!ret || !title || !*title || !url || !*url) {
+	g_free (title);
+	g_free (url);
 	return;
+    }
 
     if (ret == B_ENTER || ret == B_APPEND)
 	add2hotlist (title, url, HL_TYPE_ENTRY, 2);
@@ -919,6 +924,9 @@ static void add_new_entry_cmd (void)
 	add2hotlist (title, url, HL_TYPE_ENTRY, 1);
 
     hotlist_state.modified = 1;
+
+    g_free (title);
+    g_free (url);
 }
 
 static int add_new_group_input (const char *header, const char *label, char **result)
@@ -1004,14 +1012,19 @@ void add2hotlist_cmd (void)
     char *prompt, *label;
     const char *cp = _("Label for \"%s\":");
     int l = strlen (cp);
+    static char label_string[MC_MAXPATHLEN+1];
 
-    prompt = g_strdup_printf (cp, name_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
-    label = input_dialog (_(" Add to hotlist "), prompt, current_panel->cwd);
+    g_strlcpy(label_string, current_panel->cwd, MC_MAXPATHLEN+1);
+    strip_password (label_string, 1);
+
+    prompt = g_strdup_printf (cp, path_trunc (current_panel->cwd, COLS-2*UX-(l+8)));
+    label = input_dialog (_(" Add to hotlist "), prompt, label_string);
     g_free (prompt);
+
     if (!label || !*label)
 	return;
 
-    add2hotlist (label,g_strdup (current_panel->cwd), HL_TYPE_ENTRY, 0);
+    add2hotlist (label, g_strdup (label_string), HL_TYPE_ENTRY, 0);
     hotlist_state.modified = 1;
 }
 
