@@ -2,13 +2,44 @@
 
 Contents:
 ---------
-  Intro text
+  Requirments
+  GNOME edition requirments
+  Features
   Midnight Commander editions
   Where to get more information
   The Midnight Commander
   Mini-docs
   Obtaining the Midnight Commander
   Reporting problems.
+
+This version of the Midnight Commander comes with two interfaces: a
+graphical one for the GNOME desktop (http://www.gnome.org) and a text
+mode interface (the same old user interface we have had for a long
+time). 
+
+Most of the engine is shared between both versions, but they come with
+radically different interfaces:  the GNOME version is aimed to be a
+simple to use tool for novice users.
+
+Requirments
+-----------
+
+To compile the GNU Midnight Commander you need at least to have a copy
+of the glib library, this library is available in ftp://ftp.gtk.org/pub/gtk.
+
+GNOME edition requirements
+--------------------------
+
+Optionally, if you want to compile the GNOME edition, you need to
+install the GNOME libraries and its dependencies.
+
+The GNOME libraries are available in:
+
+    ftp://ftp.gnome.org/pub/GNOME/sources/gnome-libs
+
+
+Features
+--------
 
 This is version 4 of the Midnight Commander, a free Norton Commander
 Clone with many useful features. The Midnight Commander comes with
@@ -83,16 +114,6 @@ It is feature packed:
 	on the fly, coloring mail messages and more.
 
 
-Midnight Commander editions:
-----------------------------
-
-The Midnight Commander may be compiled into three different editions:
-the text mode edition, the Tk edition and the XView edition.  Please
-note that currently the only supported edition is the text mode
-edition.  The Tk and XView editions are included with the tar file but
-are not finished and thus not supported.
-
-
 Where to get more information:
 ------------------------------
 
@@ -125,6 +146,8 @@ Help develop and enhance free software.
 
 Mini-documentation:
 -------------------
+
+These are hints for the text mode edition:
 
 o Use the F-Keys for invoking the commands in the function key bar.
   If your terminal doesn't support F-keys, you can use the <ESC digit>
