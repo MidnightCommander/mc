@@ -39,7 +39,7 @@
 
 2003-02-22  Pavel Roskin  <proski@gnu.org>
 
-	* configure.in: Add --with-glib12 option to confugure to force
+	* configure.in: Add --with-glib12 option to configure to force
 	using glib 1.2.x.
 
 2003-02-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
