@@ -308,11 +308,11 @@ msgstr "solo &Parole intere"
 
 #: edit/editcmd.c:1106 edit/editcmd.c:1183 src/find.c:141
 msgid "case &Sensitive"
-msgstr "controllare &Maiuscole/minuscole"
+msgstr "controllo &Maiuscole/minuscole"
 
 #: edit/editcmd.c:1110
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Inserire ordine di sostituzione argomenti es. 3,2,1,4 "
+msgstr " Ordine di sostituzione degli argomenti es. 3,2,1,4 "
 
 #: edit/editcmd.c:1114
 msgid " Enter replacement string:"

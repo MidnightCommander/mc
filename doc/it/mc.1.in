@@ -2524,7 +2524,7 @@ sostituzione a scanf e printf); evidenziazione di testo maiuscolo-freccia
 MSW-MAC (solo per la console Linux); scambio tra inserimento-rimpiazzo e
 un'opzionale flusso di blocchi di testo attraverso comandi shell come indent.
 .PP
-L'editor è molto semplice da usare e non richiede apprendimanto.
+L'editor è molto semplice da usare e non richiede apprendimento.
 Per vedere cosa fanno i tasti, basta consultare il menu a
 discesa appropriato. Gli altri tasti sono: maiusc + tasti freccia
 produce la selezione del testo.
@@ -2589,76 +2589,81 @@ nella maniera seguente:
 (%d,%d,%d)
  Immettere stringa di sostituzione
 mele %d arance %d
- Immettere ordine di sostituzione argomenti
+ Ordine di sostituzione degli argomenti
 3,2
 .fi
 .PP
 L'ultima riga specifica che il terzo ed il secondo numero
 devono essere usati al posto del primo e del secondo.
 .PP
-It is advisable to use this feature with Prompt on replace on, because
-a match is thought to be found whenever the number of arguments found
-matches the number given, which is not always a real match. Scanf also
-treats whitespace as being elastic.  Note that the scanf format % is
-very useful for scanning strings, and whitespace.
+E' consigliabile usare questa caratteristica con l'opzione 'Chiedi sempre'
+abilitata, dato che una corrispondenza viene considerata valida quando
+il numero degli argomenti dati corrisponde al numero dato, che non è sempre
+una reale corrispondenza. Scanf tratta anche gli spazi come elastici. Notare 
+che il formato % è molto uttile per scansionare stringhe, e spazi.
 .PP
-The editor also displays non-us characters (160+). When editing
-binary files, you should set 
-.B display bits
-to 7 bits in the options menu to keep the spacing clean.
+L'editor visualizza snche caratteri non-americani (160+). Quando si modifica
+file binari, si dovrebbe impostare
+.B mostra bit
+a 7 bit nel menu opzioni, per mantenere la spaziatura pulita.
 .PP
-.SH "Completion"
-Let the Midnight Commander type for you.
+.\"NODE "Completion"
+.SH "Completamento"
+Ovvero lascia che il Midnight Commander scriva per te.
 .PP
-Attempt to perform completion on the text before current position. MC
-attempts completion treating the text as variable (if the text begins with
+Tentativi per eseguire un completamento del testo prima della posizione
+corrente. MC tenta il completamento trattando il testo come una variabile
+(se il testo comincia con $
 .B $
-), username (if the text begins with 
+), nomeutente (se il testo comincia con
 .B ~
-), hostname (if the text
-begins with 
+), nomehost (se il testo comincia con
 .B @
-) or command (if you are on the command line in the
-position where you might type a command, possible completions then include
-shell reserved words and shell builtin commands as well) in turn. If none
-of these produces a match, filename completion is attempted.
+) o comando (se si è sulla riga di comando nell'atto di battere un comando, 
+allora possibili completamenti includerebbero parole riservate e comandi 
+integrati della shell). Se nessuno di questi produce una corrispondenza, 
+viene tentato un completamento del nome del file.
 .PP
-Filename, username, variable and hostname completion works on all input
-lines, command completion is command line specific.
-If the completion is ambiguous (there are more different possibilities),
+Completamenti di nomefile, nomeutente, variabili e nomehost funzionano
+su tutte le righe di ingresso, il completamento dei comandi invece è 
+specifico della riga di comando.
+Se il completamento è ambiguo (ci sono più possibilità differenti),
+MC emette un suono e l'azione seguente, a seconda delle impostazioni 
+dell'opzione
 MC beeps and the following action depends on the setting of the
-.I Complete: show all
-option in the
+.I Completamento: visualizza tutto
+nella finestra
 .\"LINK2"
-Configuration
+Configurazione
 .\"Configuration"
-dialog. If it is enabled, a list of all
-possibilities pops up next to the current position and you can select with
-the arrow keys and
-.B Enter
-the correct entry. You can also type the first letters in which the
-possibilities differ to move to a subset of all possibilities and complete
-as much as possible. If you press
+ . Se è abilitata, un elenco di tutte le possibilità viene mostrato vicino 
+alla posizione corrente per poter selezionare con i tasti freccia e
+.B Invio
+la voce corretta. Si può anche battere le prime lettere nelle quali le varie
+possibilità differiscono per muoversi in un sottoinsieme di tutte le 
+possibilità e completare il più possibile. Se si preme nuovamente
 .B M-Tab
-again, only the subset will be shown in the listbox, otherwise the first
-item which matches all the previous characters will be highlighted. As soon
-as there is no ambiguity, dialog disappears, but you can hide it by
-canceling keys 
+ , verrà mostrato solo il sottoinsieme nella finestra dell'elenco, altrimenti
+la prima voce che corrisponde a tutti i caratteri precedenti verrà evidenziata.
+Non appena non c'è più ambiguità, la finestra scompare, ma la si può nascondere
+con i tasti di cancellamento
 .B Esc,
 .B F10
-and left and right arrow keys. If
+e i tasti di freccia sinistra e destra. Se
 .\"LINK2"
-Complete: show all
+Completamento: visualizza tutto
 .\"Configuration"
-is disabled, the dialog pops up only if you press
+è disabilitato, la finestra viene mostrata solo se si preme 
 .B M-Tab
-for the second time, for the first time MC just beeps.
+una seconda volta; la prima volta MC emette solo un suono.
 .PP
-.SH "Virtual File System"
-The Midnight Commander is provided with a code layer to access the
-file system; this code layer is known as the virtual file system
-switch.  The virtual file system switch allows the Midnight Commander
-to manipulate files not located on the Unix file system.
+.\"NODE "Virtual File System"
+.SH "File System Virtuale"
+Il Midnight Commander è provvisto di uno strato di codice per 
+accedere al file system; questo strato di codice è conosciuto anche
+con il nome di switch di file system virtuale. Lo switch del file system
+virtuale permette al Midnight Commander di manipolare file non all'interno
+di un file system di tipo Unix.
 .PP
 Currently the Midnight Commander is packaged with some Virtual File
 Systems (VFS): the local file system, used for accessing the regular
