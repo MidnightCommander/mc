@@ -1,3 +1,8 @@
+2002-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: Set samba_libsamba_a_SOURCES to an empty value
+	to override the default.
+
 2002-05-22  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* fish.c (fish_fh_open): Generate fh->ino->localname

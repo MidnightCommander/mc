@@ -90,6 +90,8 @@ else
 libvfs_mc_a_SOURCES = $(NONETFILES)
 endif
 
+samba_libsamba_a_SOURCES =
+
 if MCSERV_INSTALL
 sbin_PROGRAMS = mcserv
 else
