@@ -9,7 +9,7 @@ Questions and Answers
           + 1.2 Does it run on my machine?
           + 1.3 Does it work with my terminal?
           + 1.4 What else do I need to run MC?
-          + 1.5 Is Midnight Commander PD? Copyrighted?
+          + 1.5 Is Midnight Commander Public Domain?  Copyrighted?
           + 1.6 Where can I get Midnight Commander?
           + 1.7 I don't have FTP access. Where can I get MC?
      * 2 Keyboard
@@ -25,7 +25,7 @@ Questions and Answers
      * 3 Mouse
           + 3.1 How do I enable mouse support?
           + 3.2 How do I cut and paste text with mouse?
-          + 3.3 How do I get the extension dependant pop-up menu to
+          + 3.3 How do I get the extension dependent pop-up menu to
             pop up?
      * 4 Display
           + 4.1 Why do I keep getting "Terminal not powerful enough for
@@ -63,13 +63,10 @@ Questions and Answers
           + 7.7 What kind of proxy server works with Midnight Commander?
      * 8 Other common problems
           + 8.1 How do I get the internal editor to work?
-          + 8.2 Why doesn't "mcedit newfile" work?
-          + 8.3 Is there any way to 'bookmark' favourite ftp-fs links?
-          + 8.4 When copying the directories lose their original date,
-            uid and gid!
-          + 8.5 Why I keep getting: "There is no disk in the drive.
+          + 8.2 Is there any way to 'bookmark' favorite ftp-fs links?
+          + 8.3 Why I keep getting: "There is no disk in the drive.
             Please insert a disk into drive D:"?
-          + 8.6 When I start Midnight Commander, nothing happens!
+          + 8.4 When I start Midnight Commander, nothing happens!
      * 9 Development
           + 9.1 Who has written Midnight Commander?
           + 9.2 Do I dare to use a development version?
@@ -81,7 +78,7 @@ Questions and Answers
           + 10.2 What mailing lists are there for Midnight Commander?
           + 10.3 Where should I look on the World Wide Web for MC stuff?
           + 10.4 Are the mailing lists archived anywhere?
-     * 11 Administrivia
+     * 11 Legal issues
           + 11.1 Authorship
           + 11.2 Feedback is invited
           + 11.3 Disclaimer and copyright
@@ -131,7 +128,7 @@ Questions and Answers
      * i386-*-os2
    
    Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
-   C++, Cygwin32 and Mingw32.
+   C++, RSX and Mingw32.
    
 1.3 Does it work with my terminal?
 
@@ -150,7 +147,8 @@ Questions and Answers
    and OS/2 is incomplete - you should be prepared to fix things.
 
    To compile any edition you need to have GLib installed. It's available
-   at ftp://ftp.gtk.org/pub/gtk/.
+   at ftp://ftp.gtk.org/pub/gtk/.  Only GLib versions 1.2.x will be
+   currently detected.
    
    If you want to use mouse on the Linux console you need the gpm daemon
    from ftp://ftp.systemy.it/pub/develop/. You need nothing extra to use
@@ -165,7 +163,7 @@ Questions and Answers
    You can get it along with other curses libraries, too, but results may
    not be pretty or even usable.
 
-1.5 Is Midnight Commander PD? Copyrighted?
+1.5 Is Midnight Commander Public Domain? Copyrighted?
 
    Midnight Commander is under GNU Public License which basically means
    that you may freely copy, change and distribute it, but that you may
@@ -184,8 +182,8 @@ Questions and Answers
    
 1.7 I don't have FTP access. Where can I get MC?
 
-   Most Linux CD-ROMs include Midnight Commander. For example,
-   Debian, Mandrake, Red Hat, Slackware and SuSE.
+   Most GNU/Linux distributions include GNU Midnight Commander. For
+   example, Debian, Mandrake, Red Hat, Slackware and SuSE.
    
 2 Keyboard
 
@@ -209,7 +207,7 @@ Questions and Answers
    
 2.2 Why don't function keys (or some other key) work?
 
-   Your terminfo or termcap database has missing or incorrect definations
+   Your terminfo or termcap database has missing or incorrect definitions
    for function keys. Type "mc -V" to see what terminal database is being
    used. If the result is "using the S-Lang library with terminfo
    database" you should install one of the enhanced terminfo databases
@@ -239,7 +237,7 @@ Questions and Answers
    
 2.3 How do I use function keys F11 to F20?
 
-   These can mapped to function keys F1 to F10 with Shift held. eg.
+   These can mapped to function keys F1 to F10 with Shift held. e.g.
    function key F13 can be activated by pressing Shift-F3. You can define
    the keys this way in the Options menu. The convention for PC keyboards
    is that F11-20 always means Shift with F1-10
@@ -302,9 +300,9 @@ Questions and Answers
    
 3.2 How do I cut and paste text with mouse?
 
-   Hold down shift key while using mouse to cut'n'paste.
+   Hold down shift key while using mouse to cut and paste.
    
-3.3 How do I get the extension dependant pop-up menu to pop up?
+3.3 How do I get the extension dependent pop-up menu to pop up?
 
    You need a GNOME edition. Normal MC (text-mode edition) doesn't
    support this feature yet.
@@ -337,11 +335,11 @@ Questions and Answers
      
 4.2 Why don't line drawing characters work?
 
-   Since version 4.0.13 there's the commandline option -a to force use of
+   Since version 4.0.13 there's the command line option -a to force use of
    +, |, - for line drawing (only available when compiled with S-Lang).
    Use this -a option if any of the suggestions below doesn't help.
    
-   In general, there are three subcases:
+   In general, there are three cases:
      * Lines are shown as ASCII characters like this
 
       +---------+
@@ -369,11 +367,11 @@ Questions and Answers
     2. Your terminal might not support line drawing characters. Vt100
        compatible terminals, rxvt, xterm and color_xterm do support them.
     3. Your terminfo or termcap database might have missing or incorrect
-       definations for line drawing characters. Set the acsc variable in
+       definitions for line drawing characters. Set the acsc variable in
        the terminfo database like this:
        acsc=a\376k\277l\332m\300j\331n\305w\302v\301u\264t\303q\304x\263h
        \2600\333
-       Don't forget issue 'tic' command. This supposes you are using pc
+       Don't forget issue 'tic' command. This supposes you are using PC
        character set. The octal values might be different for other
        character sets. If you are using termcap instead of terminfo, you
        should modify above solution appropriately.
@@ -434,7 +432,7 @@ Questions and Answers
    color. You might want to upgrade to a terminal which compatible with
    the ANSI color sequences.
    
-   If your terminal goes compelety black, see the next question.
+   If your terminal goes completely black, see the next question.
    
    More detailed answer:
    
@@ -608,8 +606,8 @@ enough?
    means you haven't got ftp, zip or tar support on Windows 95/NT and
    OS/2.
    
-   This chapter describes the behaviour of the 4.1.x versions of the
-   Midnight Commander. The behaviour of the 4.5.x versions is somewhat
+   This chapter describes the behavior of the 4.1.x versions of the
+   Midnight Commander. The behavior of the 4.5.x versions is somewhat
    different. More on that when the 4.5.x versions get more stable.
    
 7.1 How can I see the contents of a tar archive?
@@ -617,7 +615,7 @@ enough?
    If you use keyboard just move the selection bar on the tar file and
    press enter.
    
-   If you use mouse just doubleclick on the tar file.
+   If you use mouse just double-click on the tar file.
    
    If these procedures don't work, your .mc.ext file is faulty. Replace
    it with one from the MC source distribution.
@@ -698,7 +696,7 @@ enough?
    elsewhere in the mc.ext file.
    
    Make sure that you edit the correct mc.ext file. The Midnight
-   Commander first checks the existance of $HOME/.mc.ext. If this file is
+   Commander first checks the existence of $HOME/.mc.ext. If this file is
    missing MC will use $prefix/lib/mc/mc.ext instead ($prefix can be
    changed with configure before compilation and it defaults to
    /usr/local).
@@ -711,47 +709,26 @@ enough?
    And please don't forget that "make install" overwrites
    $prefix/lib/mc/mc.ext.
    
-8.2 Why doesn't "mcedit newfile" work?
-
-   This is a known bug.
-   
-   If the newfile doesn't exist, mcedit fails.
-   
-   Start mcedit with no parameters, this will create a blank file. Then
-   save the file with whatever name you like.
-   
-   This bug has been fixed since 4.1.17.
-   
-8.3 Is there any way to 'bookmark' favourite ftp-fs links?
+8.2 Is there any way to 'bookmark' favorite ftp-fs links?
 
    Use the directory hotlist. Just press control-backslash. If your
    national keyboard layout doesn't have backslash key, just press the
    control key with the key which is the backslash key in the English
    keyboard layout.
    
-8.4 When copying the directories lose their original date, uid and gid!
-
-   This is a known bug. At moment only files preserve their original
-   settings when copying, not directories.
-   
-   Uid and gid is fixed since 4.0.1. "Preserve UIDs/GIDs" in the copy
-   dialog needs to be checked and you must be root.
-   
-   Date problem is fixed since 4.0.13.
-   
-8.5 Why I keep getting: "There is no disk in the drive. Please insert a disk
+8.3 Why I keep getting: "There is no disk in the drive. Please insert a disk
 into drive D:"?
 
    This is a known bug of the Windows 95/NT and OS/2 ports. MC looks its
    configuration files from the D:\MC directory and if the D: drive is a
    removable drive (like a CD ROM drive) and there is no disk in drive
-   you get this message everytime you try to do anything.
+   you get this message every time you try to do anything.
    
    Since version 4.0.6 you can specify the actual location of the
    Midnight Commander configuration files with the MCHOME environment
    variable.
    
-8.6 When I start Midnight Commander, nothing happens!
+8.4 When I start Midnight Commander, nothing happens!
 
    First, invoke MC without subshell support: "mc -u". If this helps
    check the shell you are using. Subshell support works best with bash
@@ -768,13 +745,13 @@ into drive D:"?
    
    This problem can also be caused by gpm as noted by Luis Espinoza:
    
-     In regards to why midnight commander does nothing when invoked. I
+     In regards to why Midnight Commander does nothing when invoked. I
      recently had the same problem. At the same time gpm was not loading
      properly with my patched kernel (now 2.0.33 from 2.0.30).
      Downloading version 1.13 of gpm, and got it working :-) MC still
      appeared locked.... However moving the mouse, brought MC to life.
      The mouse I am using is a Kensington Expert Mouse (Trackball).
-     
+
 9 Development
 
 9.1 Who has written Midnight Commander?
@@ -823,7 +800,7 @@ into drive D:"?
 
    I am afraid you have to answer to this question yourself. Development
    versions seldom cause data loss but they have usually got many bugs.
-   It's up to you to judge whether new features outweight the bugs.
+   It's up to you to judge whether new features outweigh the bugs.
    
 9.3 How can I report a bug/request for a feature?
 
@@ -907,7 +884,7 @@ answer?
    The mc and mc-devel lists are archived on the World Wide Web. There are
    links to the archives on the mailing list pages (see 10.2).
    
-11 Administrivia
+11 Legal issues
 
 11.1 Authorship
 

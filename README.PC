@@ -12,11 +12,11 @@ Midnight Commander for Win32 and OS/2
 Yes, Midnight Commander can be compiled for Win32 (Microsoft Windows 95, 98 and
 NT) and OS/2. It has many bugs, but is quite stable now. Maybe you can help as
 a beta tester or as a programmer. In either case you would like subscribe to
-mc-devel list (see readme files in main doc on how to do this) and contact us.
+mc-devel list (see README files in main doc on how to do this) and contact us.
 Please note, that Midnight Commander remains primarily a file manager for
 UNIX-like systems, so recent changes may occasionally break something.
 You should not expect that it will work on your system better than file
-managers written natively for your OS.
+managers written specifically for your OS.
 
 1. Compiling
 ------------
@@ -26,17 +26,17 @@ managers written natively for your OS.
 If you really want to enjoy free software under your non-free OS, you should
 try free compilers. Three of them are supported: EMX (OS/2), RSX and Mingw32
 (Win32). RSX is based on EMX, and can also cross-compile for OS/2 under
-Windows. Mingw32 is concieved as a free clone for Microsoft Visual C++.
-Please note, that all above compiler are based on GCC (GNU C compiler), but
+Windows. Mingw32 is conceived as a free clone for Microsoft Visual C++.
+Please note, that all above compiler are based on gcc (GNU C compiler), but
 use different libraries.
-CygWin32 is not (yet) powerful enough to compile Windows-specipic portion of
+Cygwin is not (yet) powerful enough to compile Windows-specific portion of
 the Midnight Commander, but you may try to compile MC using UNIX configuration
 files. As you can easily imagine, resulting binary will need termcap or
 terminfo and use ANSI-sequences for output which is probably not what you want.
 You may also try non-free compilers. Microsoft Visual C++ (4.0 and above),
-Borland C++ (both for Win32 and OS/2) and IBC CSet are supported. "Supported"
+Borland C++ (both for Win32 and OS/2) and IBM CSet are supported. "Supported"
 means merely that there are specific makefiles for those compilers, but it
-does not even assume that you will compile MC using them out-of-box.
+does not even assume that you will compile MC by them out-of-box.
 
 1.2. General issues
 -------------------
@@ -72,13 +72,13 @@ X11 ports are not supported.
 Changes in the main code are enclosed in #ifdef _OS_NT, __os2__  or OS2_NT
 blocks.
 
-In some cases we supressed code. This is temporal (so that mc can compile). In
+In some cases we suppressed code. This is temporal (so that mc can compile). In
 the future we will provide fake or true interfaces for these features.
    - Links: creation and information on links are not supported. We
             should provide a fake interface for the local filesystem and
             a true one for networked.
    - GID/UID queries (get_user, owner, preserve UID/GID on copy, ...).
-   - TERMinals: all the code directly done with terminals must be supressed.
+   - TERMinals: all the code directly done with terminals must be suppressed.
    - Signals: deleted. Should support the native ones.
    - pipes: had some trouble in ext.c and with error_pipes but soon will be
             fixed.
@@ -90,8 +90,8 @@ There are several files with so many changes that they have been moved to pc/
 subdirectory. Some of them are common for Win32 and OS/2, some of them are
 system-specific. System-specific files bear a clear mark in their names
 (for example, dirent_nt.c)
-Our intension should be, however, to make most code system-independent. This
-would increase code reuseabilibity and maintainability :-)
+Our intention should be, however, to make most code system-independent. This
+would increase code reuse and maintainability :-)
 See pc/ subdirectory for further details.
 
 3. Authors and maintainers

@@ -1,5 +1,13 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* AUTHORS: Update and spell check.
+	* FAQ: Likewise.
+	* INSTALL: Likewise.
+	* INSTALL.FAST: Likewise.
+	* NEWS: Likewise.
+	* README.PC: Likewise.
+	* README.QNX: Likewise.
+
 	* configure.in: Add check for stropts.h.
 
 2001-08-23  Pavel Roskin  <proski@gnu.org>

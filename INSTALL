@@ -156,7 +156,7 @@ better than everything else),
      is available, otherwise it will use the termcap database.  At
      compile time, you may force the use the terminal database with
      the `--with-termcap' and `--with-terminfo' options (both options
-     automaticaly turn `--with-included-slang' on).
+     automatically turn `--with-included-slang' on).
 
 `--with-ncurses[=directory]'
      Use this flag (either with or without the =directory part), if
@@ -205,7 +205,7 @@ value that `configure' would choose:
      have it, `cp' otherwise.
 
    For these variables, any value given in the environment is added to
-the value that `configure' desides to use:
+the value that `configure' decides to use:
 
  - Variable: LIBS
      Libraries to link with, in the form `-lfoo -lbar...'.
@@ -298,10 +298,10 @@ Midnight Commander is written in a portable manner and uses GNU Autoconf
 for configuration, so it is expected to compile without changes on many
 other operating systems.
 
-You will need GNU C (or an ANSI C Compiler) and glib library to compile
-the source.  The Midnight Commander now comes with the S-Lang screen
-manager, a fast screen manager, so don't need to worry about screen
-libraries.
+You will need GNU C (or an ANSI C Compiler) and glib library version
+1.2.x to compile the source.  The Midnight Commander now comes with the
+S-Lang screen manager, a fast screen manager, so don't need to worry
+about screen libraries.
 
 If you insist on using ncurses, it's recommended to use ncurses 4.1 and
 above, since the older versions don't support resizing of the xterm
@@ -381,6 +381,10 @@ o GLib
   Midnight Commander requires GLib.  You can get GLib from
 
   ftp://ftp.gtk.org/pub/gtk/
+
+  Note that only versions 1.2.x are supported.  Older versions won't
+  even be detected.  Newer versions won't be detected either - they use a
+  new package system that is not supported yet by GNU Midnight Commander.
 
 o In the past the Midnight Commander required the ncurses library to
   build, now it's optional.  You can get ncurses from

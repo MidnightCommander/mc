@@ -1,18 +1,30 @@
 Version 4.5.55
 
-- Mostly bugfixes and portability fixes.  QNX Neutrino support.
+- Mostly bugfixes and portability fixes.  Making things work as they
+  were meant to work.
 
 - Text edition improvements.
-	- Ctrl-O suported in the viewer and editor.
-	- Better terminal support.
+	- Ctrl-O supported in the viewer and editor.
+	- Better terminal support.  Should not need "Learn Keys" on rxvt
+	  and xterm in most cases.
 
 - GNOME edition improvements.
 	- Find dialog rewritten.
-	- Editor askes whether to save file when it's closed.
+	- Editor and viewer ask whether to save modified file when
+	  closed from window manager.
+
+- Editor.
+	- New syntax rules - S-Lang, PO files, Octave.
+	- Alt-B goes to matching bracket.
+
+- Portability improvements.
+	- Should compile out-of-box on Cygwin and QNX Neutrino.
+	- Can be compiled by BSD make.
+	- Subshell and VFS code are safer and more portable.
 
 - Experimental features (disabled by default).
 	- Charset conversion support.
-	- Large (64-bit) file supportr on 32-bit systems.
+	- Large (64-bit) file support on 32-bit systems.
 
 
 Version 4.5
@@ -34,7 +46,7 @@ Version 3.5
 
 - Tk enhancements.
 	- New built in GUI designer to help developers modify the look
-	  of the program at run time (no penaly for users).
+	  of the program at run time (no penalty for users).
 	- Many dialog boxes now work.
 	- Right button now pops up a context sensitive action menu.
 	- Added many visual enhancements.
@@ -50,7 +62,7 @@ Version 3.5
 	  delete, cut, paste; key for key undo; file insertion; macro
 	  definition; regular expression search and replace (and our
 	  own scanf-printf search and replace); shift-arrow MSW-MAC
-	  text highlighting (for the linux console only);
+	  text highlighting (for the Linux console only);
 	  insert-overwrite toggle; and an option to pipe text blocks
 	  through shell commands like indent.  
 
@@ -59,13 +71,13 @@ Version 3.5
 	  mcedit is a link to mc which bring it up in editor mode. 
 
 - FTP File system
-	- Many fixes and enhacements, better support for proxy
+	- Many fixes and enhancements, better support for proxy
 	  machines.
 	- Now we support both active and passive opens.
 	- Estimated time of arrival for ftp transfers.
 	- stalled detection.
 	- Much better support for proxies.
-	- ftp URL's now allow a password to be provided.
+	- ftp URLs now allow a password to be provided.
 
 - ext2fs Undelete File system
 	- Minor enhancements.
@@ -150,7 +162,7 @@ This has been finished:
 
 - Enhanced ftpfs:
   - Displays progress bars.
-  - Supports netware and windows nt servers
+  - Supports Netware and Windows NT servers
   - Better support for symlinked files.
   - Handles those warez sites file names.
   - Increase the directory cache timeout.
@@ -161,7 +173,7 @@ This has been finished:
 - Subshell fixes (it should not hang any longer).
   - Fixes prompt handling for zsh and tcsh users.
   - Fixes variable expansion for tcsh (now you may edit files).
-  - Rewrote the sync code between the parend and child, should not hang
+  - Rewrote the sync code between the parent and child, should not hang
     any longer.
 - Better command completion.
 - Keypad handling enhanced:
@@ -320,16 +332,16 @@ Now users are able to define their own display
 - Viewer: 
      Goto line command,
      horizontal scrolling,
-     on the fly uncompression (and we don't eat unneeded cycles of CPU),
+     on the fly decompression (and we don't eat unneeded cycles of CPU),
      allow non gunzip operation.
 
 - Internal move command:
 
   Now, we don't rely anymore on system commands in /bin, so the
-  program is more robust and is much faster.  Bunchs of code come
+  program is more robust and is much faster.  Bunches of code come
   from the GNU fileutils.
 
-- The Tree view and normal views allows wrapped incremental searchs of
+- The Tree view and normal views allows wrapped incremental searches of
   file names.
 
 - Mask rename:
@@ -358,7 +370,7 @@ Now users are able to define their own display
 
   On old Linux systems, only b&w is supported, on newer Linux systems
   (1.1.67 and newer), we also support color screen save/restore and
-  cursos positions.
+  cursor positions.
 
 - 8 bit clean support.
 
@@ -370,7 +382,7 @@ Now users are able to define their own display
 
 - New memory allocation debugger.
 
-  During testing time, we used a powerfull memory allocation debugger,
+  During testing time, we used a powerful memory allocation debugger,
   so the program will not eat all your memory, and will make a good use of
   your memory.  
 

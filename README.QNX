@@ -1,5 +1,5 @@
-Midnight Commander for QNX
---------------------------
+Midnight Commander for QNX (not QNX Neutrino)
+---------------------------------------------
 
 1. Compiling
 2. Running 'mc' under QNX
@@ -22,7 +22,7 @@ can not handle the makefiles in the mc-source.]
 If you don't have an installed TCP/IP development kit, you have to 'hide'
 the library file 'socket3r.lib' (can be installed by e.g. Watcom C 10.6)
 in /usr/lib or /usr/watcom/10.6/usr/lib, because the existence of this file
-will confuse 'configure': it will erranously assume you have the complete
+will confuse 'configure': it will erroneously assume you have the complete
 TCP/IP development kit (with headers) and will enable compiling of the
 network-related VFS code (not only tarfs).
 [A patch would be required in the configure-script to check the existence
@@ -35,14 +35,14 @@ really work in 4.1.33, there are configuration/compiling problems...]
 1.3 Compiler
 ------------
 
-It is adviced to use Watcom C 10.6+ to compile the source, because older
+It is advised to use Watcom C 10.6+ to compile the source, because older
 compilers (e.g. 9.52) do not support some convenient/required features.
 [e.g. 'ar'-compatible 'wlib',...]
 
 1.4 "No prototype found for '<function>'" warnings
 --------------------------------------------------
 
-It is adviced to use high warning level (e.g. 'CFLAGS="-w4" ./configure'),
+It is advised to use high warning level (e.g. 'CFLAGS="-w4" ./configure'),
 when compiling the source, because Watcom C uses a special parameter passing
 convention for functions with fixed number of arguments only. So if the
 compiler doesn't see the correct prototype of a function with variable
@@ -131,7 +131,7 @@ edit/
 
  syntax.c: (4.1.33 only, fixed in 4.1.34)
 
-   line 100,191: WCC 10.6 doesn't like "<label>: }" contruct ("no statement
+   line 100,191: WCC 10.6 doesn't like "<label>: }" construct ("no statement
    after the label"), modified to "<label>: /*nop*/; }".
 
 lib/
@@ -156,7 +156,7 @@ slang/
 
   sldisply.c:
 
-    SLTT_TRANSP_ACS_PATCH dependant code:
+    SLTT_TRANSP_ACS_PATCH dependent code:
 
     The problem: some terminals (e.g. QNX/qansi*) map the whole upper half of
     the ASCII table to the lower half, when alt-char-set is activated with
@@ -174,7 +174,7 @@ slang/
     defined, the modified code will not use this assumption.
     [Remark: the patch-code is not the most exact solution, but works...]
 
-    QNX_QANSI_SLANG_COMPAT_ACS_PATCH dependant code:
+    QNX_QANSI_SLANG_COMPAT_ACS_PATCH dependent code:
 
     A more OS/terminal-specific solution for the problem mentioned above
     (->SLTT_TRANSP_ACS_PATCH).
