@@ -346,7 +346,7 @@ sospesa usando questo trucco, non si sarà in grado di eseguire altri
 programmi dal Midnight Commander finchè non si terminerà l'applicazione
 sospesa.
 .PP
-./"NODE "  Directory Panels"
+.\"NODE "  Directory Panels"
 .SH "  Pannelli Directory"
 Questa sezione elenca i tasti che operano sui pannelli directory. 
 Se si desidera sapere come cambiare la visualizzazione dei pannelli,
@@ -3206,12 +3206,12 @@ applications menu.
 Questo programma è distribuito sotto i termini della Licenza Generale
 GNU come pubblicata dalla Free Software Foundation. Vedere l'aiuto integrato
 per i dettagli sulla licenza e sulla mancanza di garanzie.
-./"NODE "AVAILABILITY"
+.\"NODE "AVAILABILITY"
 .SH "REPERIBILITA'"
 L'ultima versione di questo programma si trova su
 ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ e sui
 mirror elencati sul sito GNOME http://www.gnome.org/.
-./"NODE "SEE ALSO"
+.\"NODE "SEE ALSO"
 .SH "VEDERE ANCHE"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
