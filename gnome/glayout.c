@@ -382,7 +382,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	GNOMEUIINFO_MENU_OPEN_ITEM(gnome_open_files, NULL),
 /*	GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },*/
 	GNOMEUIINFO_ITEM_STOCK(N_("_Copy..."), N_("Copy files"), copy_cmd, GNOME_STOCK_PIXMAP_COPY),
-	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_REMOVE),
+	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_TRASH),
         GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move files"), ren_cmd),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE(N_("Show directory sizes"), N_("Shows the disk space used by each directory"), dirsizes_cmd),
