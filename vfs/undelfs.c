@@ -279,7 +279,7 @@ void com_err (const char *str, long err_code, const char *s2, ...)
 }
 
 static void *
-undelfs_opendir (struct vfs_class *me, char *dirname)
+undelfs_opendir (struct vfs_class *me, const char *dirname)
 {
     char *file, *f;
     
@@ -608,7 +608,7 @@ undelfs_fstat (void *vfs_info, struct stat *buf)
 }
 
 static int
-undelfs_chdir(struct vfs_class *me, char *path)
+undelfs_chdir(struct vfs_class *me, const char *path)
 {
     char *file, *f;
     int fd;
