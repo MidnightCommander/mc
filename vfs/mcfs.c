@@ -1119,8 +1119,6 @@ MMAPNULL
 };
 
 
-/* FIXME: This part should go to another c module, perhaps tcp.c */
-
 static void mcfs_free_bucket (int bucket)
 {
     g_free (mcfs_connections [bucket].host);
@@ -1157,6 +1155,5 @@ void tcp_invalidate_socket (int sock)
 {
      mcfs_invalidate_socket (sock);
 }
-/* FIXME end: 'cause it is used not only by mcfs */
 
 #endif	/* WITH_MCFS */
