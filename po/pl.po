@@ -99,15 +99,15 @@ msgstr "Rozmiar"
 
 #: gnome/gcmd.c:238
 msgid "Time Last Accessed"
-msgstr ""
+msgstr "Czas ostatniego dostêpu"
 
 #: gnome/gcmd.c:244
 msgid "Time Last Modified"
-msgstr ""
+msgstr "czas ostatniej modyfikacji"
 
 #: gnome/gcmd.c:250
 msgid "Time Last Changed"
-msgstr ""
+msgstr "czas ostatniej zmiany"
 
 #: gnome/gcmd.c:264
 msgid "Reverse the order."
@@ -145,7 +145,7 @@ msgstr "Komendy"
 
 #: gnome/gcmd.c:494
 msgid "Add"
-msgstr ""
+msgstr "Dodaj"
 
 #: gnome/gcmd.c:498
 #, fuzzy
@@ -210,7 +210,7 @@ msgstr ""
 
 #: gnome/gdesktop.c:1519
 msgid "Trashcan"
-msgstr ""
+msgstr "¦mietnik"
 
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop.c:1549
@@ -225,11 +225,11 @@ msgstr ""
 
 #: gnome/gdialogs.c:58
 msgid "To: "
-msgstr ""
+msgstr "Do: "
 
 #: gnome/gdialogs.c:59
 msgid "Copying from: "
-msgstr ""
+msgstr "Kopiuje z: "
 
 #: gnome/gdialogs.c:60
 #, fuzzy
@@ -259,7 +259,7 @@ msgstr " Nie mo¿na nadpisaæ pliku \"%s\" %s "
 #: gnome/gdialogs.c:380
 #, fuzzy
 msgid "Overwrite:"
-msgstr "Nadpisz"
+msgstr "Nadpisz:"
 
 #: gnome/gdialogs.c:387
 #, fuzzy
@@ -279,7 +279,7 @@ msgstr "Wszystkie pliki"
 #: gnome/gdialogs.c:448
 #, fuzzy
 msgid "File Exists"
-msgstr " Plik istnieje "
+msgstr "Plik istnieje"
 
 #: gnome/gdialogs.c:454
 #, fuzzy, c-format
@@ -289,7 +289,7 @@ msgstr "Docelowy plik \"%s\" ju¿ istnieje!"
 #: gnome/gdialogs.c:461
 #, fuzzy
 msgid "Replace it?"
-msgstr " Zast±p "
+msgstr "Zast±piæ ?"
 
 #: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
 #: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
@@ -307,7 +307,7 @@ msgstr "Animacja"
 
 #: gnome/gdialogs.c:556
 msgid "Find Destination Folder"
-msgstr ""
+msgstr "Znajd¼ folder docelowy"
 
 #: gnome/gdialogs.c:561
 #, fuzzy
@@ -342,7 +342,7 @@ msgstr "zachowaj &Atrybuty"
 
 #: gnome/gdialogs.c:608
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr ""
+msgstr "Zachowaj atrybuty i UID/GID jezeli jest to mo¿liwe"
 
 #: gnome/gdialogs.c:613
 #, fuzzy
@@ -3944,7 +3944,7 @@ msgstr " &Plik "
 
 #: src/main.c:1334
 msgid " &Command "
-msgstr ""
+msgstr " &Komendy "
 
 #: src/main.c:1335
 msgid " &Options "
@@ -4096,7 +4096,7 @@ msgstr "wzorce &Pow³oki"
 
 #: src/option.c:90
 msgid "Compute &Totals"
-msgstr ""
+msgstr "&Podlicz wszystko"
 
 #: src/option.c:91
 msgid "&Verbose operation"
@@ -4181,8 +4181,7 @@ msgstr " Wpisz etyketê komendy: "
 
 #: src/panelize.c:301
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr ""
-" Nie mogê uruchamiaæ zewnêtrznego panelowania na nie lokalnym katalogu "
+msgstr " Nie mogê uruchamiaæ zewnêtrznego panelowania na nie lokalnym katalogu "
 
 #: src/panelize.c:351
 msgid "Find *.orig after patching"
