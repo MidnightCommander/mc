@@ -348,12 +348,12 @@ reload_desktop_icons (int xpos, int ypos)
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
 	char *desktop_url;
-	
+
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
 		message (FALSE,
 			 _("Warning"),
-			 _("Could not open %s; will not have initial desktop icons"),
+			 _("Could not open %s; will not have desktop icons"),
 			 desktop_directory);
 		return;
 	}
@@ -379,7 +379,23 @@ reload_desktop_icons (int xpos, int ypos)
 
 		l = icon_exists_in_list (all_icons, dirent->d_name);
 		if (l) {
-			all_icons = g_list_remove_link (all_icons, l);
+			GdkImlibImage *im;
+			file_entry *fe;
+
+			/* Reload the icon for this file, as it may have changed */
+
+			full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
+			fe = file_entry_from_file (full_name);
+			im = gicon_get_icon_for_file_speed (desktop_directory, fe, FALSE);
+			file_entry_free (fe);
+			g_free (full_name);
+
+			dii = l->data;
+			desktop_icon_set_icon (dii->dicon, im);
+
+			/* Leave the icon in the desktop by removing it from the list */
+
+			all_icons = g_list_remove_link (all_icons, l); 
 			continue;
 		}
 
@@ -388,7 +404,7 @@ reload_desktop_icons (int xpos, int ypos)
 
 		if (!gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url))
 			desktop_url = NULL;
-		
+
 		if (have_pos) {
 			dii = desktop_icon_info_new (dirent->d_name, desktop_url, FALSE, x, y);
 			gtk_widget_show (dii->dicon);
@@ -400,7 +416,7 @@ reload_desktop_icons (int xpos, int ypos)
 			fau = g_new (file_and_url_t, 1);
 			fau->filename = g_strdup (dirent->d_name);
 			fau->url = g_strdup (desktop_url);
-			
+
 			need_position_list = g_slist_prepend (need_position_list, fau);
 		}
 
@@ -435,7 +451,7 @@ reload_desktop_icons (int xpos, int ypos)
 
 	for (sl = need_position_list; sl; sl = sl->next) {
 		file_and_url_t *fau = sl->data;
-		
+
 		dii = desktop_icon_info_new (fau->filename, fau->url, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 

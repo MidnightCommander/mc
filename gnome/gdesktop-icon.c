@@ -401,7 +401,14 @@ desktop_icon_reshape (DesktopIcon *dicon)
 			       "y2", (double) icon_height,
 			       NULL);
 
-	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text), 0, icon_height + SPACING);
+	if (dicon->width <= DESKTOP_SNAP_X)
+		gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text),
+					    0,
+					    icon_height + SPACING);
+	else
+		gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text),
+					    (dicon->width - DESKTOP_SNAP_X) / 2,
+					    icon_height + SPACING);
 
 	/* Create and set the window shape */
 

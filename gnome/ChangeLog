@@ -1,3 +1,12 @@
+1999-01-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (reload_desktop_icons): Reload the icon image for a
+	file that already exists in the desktop, because it may have
+	changed.
+
+	* gdesktop-icon.c (desktop_icon_reshape): Center the text
+	correctly if the user is using huge icons.
+
 Mon Feb  1 00:49:18 1999  Timur Bakeyev <mc@bat.ru>
 
 	* gscreen.c (panel_configure_file_list): Add central justification,
