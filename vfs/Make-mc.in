@@ -40,6 +40,7 @@ VFSSRCS = \
 	fish.c 			\
 	direntry.c		\
 	local.c 		\
+	local.h			\
 	mcfs.c			\
 	names.c 		\
 	mcserv.c 		\

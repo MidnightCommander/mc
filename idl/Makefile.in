@@ -12,7 +12,7 @@ INSTALL_DATA = @INSTALL_DATA@
 # Distribution variables
 #
 
-DISTFILES = FileManager.idl
+DISTFILES = FileManager.idl Makefile.in
 
 all:
 

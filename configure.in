@@ -1284,8 +1284,7 @@ if test x$srcdir != x; then
 	cp $srcdir/VERSION VERSION
 	mkdir nt
 	mkdir os2
-	cp $srcdir/nt/Makefile nt/Makefile
-	cp $srcdir/os2/Makefile os2/Makefile
+	cp $srcdir/pc/Makefile nt/Makefile
     fi
 fi
 

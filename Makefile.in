@@ -75,8 +75,8 @@ uninstall:
 cross TAGS clean depend dep:
 	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
 
-Makefile: 
-	$(SHELL) config.status
+Makefile: Makefile.in config.status
+	CONFIG_FILES=Makefile CONFIG_HEADERS= $(SHELL) config.status
 
 config.status: 
 	if test -x config.status; then config.status --recheck; \
@@ -118,16 +118,18 @@ distcopy:
 
 dist: configure config.h.in distcopy
 
-check:
-	tar xzvf ../mc-$(VERSION)
-	cd mc-$(VERSION)
-	mkdir =build
-	mkdir =install
-	cd =build
-	../configure --prefix=../=install
-	make
-	make install
-	echo 
+check: Makefile
+	rm -rf ../mc-$(VERSION)
+	tar xzvf ../mc-$(VERSION).tar.gz
+	mkdir mc-$(VERSION)/=build
+	mkdir mc-$(VERSION)/=inst
+	dc_install_base=`cd mc-$(VERSION)/=inst && pwd`; \
+	cd mc-$(VERSION)/=build \
+	  && ../configure --srcdir=.. --prefix=$$dc_install_base \
+	  && $(MAKE) \
+	  && make install \
+	  && make dist
+	-rm -rf mc-$(VERSION)
 
 distcheck: dist check
 	@echo ***********************************
