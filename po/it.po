@@ -1927,11 +1927,11 @@ msgstr "&Tutti"
 
 #: gtkedit/editcmd.c:1194 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
-msgstr "Ignora"
+msgstr "&Ignora"
 
 #: gtkedit/editcmd.c:1196
 msgid "&Replace"
-msgstr "Sostituisci"
+msgstr "&Sostituisci"
 
 #: gtkedit/editcmd.c:1202 gtkedit/editcmd.c:1670
 msgid " Replace with: "
@@ -1947,15 +1947,15 @@ msgstr "&Espressione scanf"
 
 #: gtkedit/editcmd.c:1238
 msgid "replace &All"
-msgstr "sostituisci tutto"
+msgstr "sostituisci &Tutto"
 
 #: gtkedit/editcmd.c:1240
 msgid "pr&Ompt on replace"
-msgstr "chiedi a &Ogni sostituzione"
+msgstr "&Chiedi sempre"
 
 #: gtkedit/editcmd.c:1242 gtkedit/editcmd.c:1323
 msgid "&Backwards"
-msgstr "Indietro"
+msgstr "&Indietro"
 
 #: gtkedit/editcmd.c:1244 gtkedit/editcmd.c:1325
 msgid "&Regular expression"
@@ -1963,23 +1963,23 @@ msgstr "espressione &Regolare"
 
 #: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1327
 msgid "&Whole words only"
-msgstr "solo parole intere"
+msgstr "solo &Parole intere"
 
 #: gtkedit/editcmd.c:1248 gtkedit/editcmd.c:1329
 msgid "case &Sensitive"
-msgstr "controlla maiuscole/minuscole"
+msgstr "controllare &Maiuscole/minuscole"
 
 #: gtkedit/editcmd.c:1252
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Inserisci l'ordine dell'argomento di sostituzione es. 3,2,1,4 "
+msgstr " Ordine dell'argomento di sostituzione es. 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1256
 msgid " Enter replacement string:"
-msgstr " Inserisci stringa di sostituzione:"
+msgstr " Inserire stringa di sostituzione:"
 
 #: gtkedit/editcmd.c:1260 gtkedit/editcmd.c:1333 src/view.c:2003
 msgid " Enter search string:"
-msgstr " Inserisci stringa di ricerca"
+msgstr " Inserire stringa di ricerca"
 
 #. Heads the 'Replace' dialog box
 #: gtkedit/editcmd.c:1279 gtkedit/editcmd.c:1583 gtkedit/editcmd.c:1670
