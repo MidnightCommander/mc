@@ -1,5 +1,7 @@
 2001-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* key.c: Remove support for BUGGY_CURSES.
+
 	* tty.h: Remove support for old curses and GNOME.
 	* global.h: Likewise.
 

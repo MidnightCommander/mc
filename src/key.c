@@ -481,19 +481,11 @@ int get_key_code (int no_delay)
 
  nodelay_try_again:
     if (no_delay) {
-#ifdef BUGGY_CURSES
-        wtimeout(stdscr, 500);
-#else
         nodelay (stdscr, TRUE);
-#endif
     }
     c = xgetch ();
     if (no_delay) {
-#ifdef BUGGY_CURSES
-        notimeout (stdscr, TRUE);
-#else
         nodelay (stdscr, FALSE);
-#endif
         if (c == ERR) {
             if (this != NULL && parent != NULL && 
                 parent->action == MCKEY_ESCAPE && old_esc_mode) {
@@ -827,20 +819,12 @@ static int xgetch_second (void)
 
     timeout.tv_sec = ESCMODE_TIMEOUT / 1000000;
     timeout.tv_usec = ESCMODE_TIMEOUT % 1000000;
-#ifdef BUGGY_CURSES
-    wtimeout(stdscr, 500);
-#else
     nodelay (stdscr, TRUE);
-#endif
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
     select (FD_SETSIZE, &Read_FD_Set, NULL, NULL, &timeout);
     c = xgetch ();
-#ifdef BUGGY_CURSES
-    notimeout (stdscr, TRUE);
-#else
     nodelay (stdscr, FALSE);
-#endif
     return c;
 }
 
@@ -885,11 +869,7 @@ char *learn_key (void)
         endtime.tv_usec -= 1000000;
         endtime.tv_sec++;
     }
-#ifdef BUGGY_CURSES
-    wtimeout(stdscr, 500);
-#else
     nodelay (stdscr, TRUE);
-#endif
     for (;;) {
         while ((c = xgetch ()) == ERR) {
             GET_TIME (timeout);
@@ -909,11 +889,7 @@ char *learn_key (void)
 	learn_store_key (buffer, &p, c);
     }
     keypad(stdscr, TRUE);
-#ifdef BUGGY_CURSES
-    notimeout (stdscr, TRUE);
-#else
     nodelay (stdscr, FALSE);
-#endif
     *p = 0;
     return g_strdup (buffer);
 }
