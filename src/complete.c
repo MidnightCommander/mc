@@ -797,8 +797,8 @@ static int insert_text (WInput *in, char *text, int len)
     }
     if (strlen (in->buffer)+1 < in->current_max_len){
     	if (len > 0){
-	    int i, l = strlen (&in->buffer [end]);
-	    for (i = l + 1; i >= 0; i--)
+	    int i = strlen (&in->buffer [end]);
+	    for (; i >= 0; i--)
 	        in->buffer [end + len + i] = in->buffer [end + i];
 	} else if (len < 0){
 	    char *p = in->buffer + end + len, *q = in->buffer + end;
