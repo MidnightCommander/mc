@@ -74,7 +74,7 @@ difficulties.
 
 Currently the Win32 port only can use S-Lang included in this
 distribution (see slang/ subdirectory).  This is a subset of S-Lang
-0.99.38 distribution with some bugfixes and MC-specific code changes.
+distribution with some bugfixes and MC-specific code changes.
 
 
 1.4 Features and Limitations
