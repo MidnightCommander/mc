@@ -1,5 +1,9 @@
 1999-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gicon.c (get_icon_set): Use iset->filename (which is a
+	strdup()ed string) instead of filename as a key in the hash table,
+	since the user will very likely free filename.
+
 	* gdialogs.c (symlink_dialog): Finished implementing the new
 	symlink dialog.
 

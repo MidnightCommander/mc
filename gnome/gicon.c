@@ -141,7 +141,7 @@ get_icon_set (const char *filename)
 
 	/* Insert the icon information into the hash tables */
 
-	g_hash_table_insert (name_hash, (char *) filename, iset);
+	g_hash_table_insert (name_hash, iset->filename, iset);
 	g_hash_table_insert (image_hash, iset->plain, iset);
 
 	return iset;
