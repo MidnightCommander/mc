@@ -2017,18 +2017,22 @@ static void
 chdir_other_panel (WPanel *panel)
 {
     char *new_dir;
+    char *sel_entry = NULL;
     
     if (get_other_type () != view_listing) {
 	set_display_type (get_other_index (), view_listing);
     }
 
-    if (!S_ISDIR (panel->dir.list [panel->selected].st.st_mode))
+    if (!S_ISDIR (panel->dir.list [panel->selected].st.st_mode)) {
         new_dir = concat_dir_and_file (panel->cwd, "..");
-    else
+	sel_entry = strrchr(panel->cwd, PATH_SEP);
+    } else
         new_dir = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
     change_panel ();
     do_cd (new_dir, cd_exact);
+    if (sel_entry)
+	try_to_select (current_panel, sel_entry);
     change_panel ();
  
     move_down (panel);

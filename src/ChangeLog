@@ -1,20 +1,26 @@
+2005-03-28  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (chdir_other_panel): When used on a file entry, move
+	selection on the inactive panel to select the entry for the
+	current directory on the active panel.
+
 2005-03-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * keyxdef.c: Constify struct qnx_key_define_s typedef.
+	* keyxdef.c: Constify struct qnx_key_define_s typedef.
 
 2005-03-25  Mike Gorchak  <mike@malva.ua>
 
-        * key.c (get_modifier): Fixed dynamic loading of the Photon library for
-        shift keys, only current version of libph used now.
-        (qansi_key_defines): Swapped Gray '-' and '+' codes definitions, due to
-        fixed bugs in the QNX6's console driver.
+	* key.c (get_modifier): Fixed dynamic loading of the Photon library for
+	shift keys, only current version of libph used now.
+	(qansi_key_defines): Swapped Gray '-' and '+' codes definitions, due to
+	fixed bugs in the QNX6's console driver.
 
 2005-03-23  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-        * util.c (load_file_position): Fix mcedit position save bug. Read a
-        number after ';'.
+	* util.c (load_file_position): Fix mcedit position save bug. Read a
+	number after ';'.
 
-        From Christian Hamar  <krics@linuxforum.hu>
+	From Christian Hamar  <krics@linuxforum.hu>
 
 2005-03-21  Pavel Roskin  <proski@gnu.org>
 
