@@ -124,7 +124,7 @@ static char translate_character( iconv_t cd, char c )
     char outbuf[4], *obuf;
     size_t ibuflen, obuflen, count;
 
-    char *ibuf = &c; 
+    ICONV_CONST char *ibuf = &c; 
     obuf = outbuf;
     ibuflen = 1; obuflen = 4;
 

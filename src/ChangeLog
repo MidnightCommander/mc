@@ -1,6 +1,7 @@
 2002-01-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* dir.c (handle_dirent): Use MSG_ERROR.
+	* charsets.c (translate_character): Use ICONV_CONST.
 
 2002-01-22  Pavel Roskin  <proski@gnu.org>
 
