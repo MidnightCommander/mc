@@ -28,6 +28,7 @@ static GdkImlibImage *icon_view_symlink;
 static GdkImlibImage *icon_view_regular;
 static GdkImlibImage *icon_view_core;
 static GdkImlibImage *icon_view_sock;
+static GdkImlibImage *icon_view_fifo;
 static GdkImlibImage *icon_view_char_dev;
 static GdkImlibImage *icon_view_block_dev;
 static GdkImlibImage *icon_view_stalled;
@@ -66,6 +67,7 @@ gicon_init (void)
 	icon_view_regular    = gicon_stock_load	("i-regular.png");
 	icon_view_core       = gicon_stock_load	("i-core.png");
 	icon_view_sock       = gicon_stock_load	("i-sock.png");
+	icon_view_fifo       = gicon_stock_load ("i-fifo.png");
 	icon_view_char_dev   = gicon_stock_load	("i-chardev.png");
 	icon_view_block_dev  = gicon_stock_load	("i-blockdev.png");
 	icon_view_stalled    = gicon_stock_load ("i-stalled.png");
@@ -77,6 +79,7 @@ gicon_init (void)
 	    icon_view_regular    == NULL ||
 	    icon_view_core       == NULL ||
 	    icon_view_sock       == NULL ||
+	    icon_view_fifo       == NULL ||
 	    icon_view_char_dev   == NULL ||
 	    icon_view_block_dev  == NULL ||
 	    icon_view_stalled    == NULL){
@@ -155,7 +158,7 @@ gnome_file_entry_color (file_entry *fe)
 		return icon_view_block_dev;
 
 	if (S_ISFIFO (mode))
-		return icon_view_sock;
+		return icon_view_fifo;
 
 	if (is_exe (mode))
 		return icon_view_executable;

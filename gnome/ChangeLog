@@ -1,5 +1,13 @@
 1999-02-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* Makefile.in (ICONS): Added i-fifo.png to the list of icons.
+
+	* gicon.c (gicon_init): Load the proper FIFO and socket icons.
+	(gnome_file_entry_color): Return the proper icon for FIFOs.
+
+	* i-fifo.png: Added this file, and made i-sock.png be the right
+	image (thanks, Tigert!).
+
 	* gscreen.c (ILIST_FROM_SW): New macro to extract the icon list
 	from the scrolled window.
 	(panel_create_icon_display): Create a scrolled window and put the

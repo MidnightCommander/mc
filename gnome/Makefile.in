@@ -93,6 +93,7 @@ ICONS = 			\
 	i-regular.png		\
 	i-core.png		\
 	i-sock.png		\
+	i-fifo.png		\
 	i-chardev.png		\
 	i-blockdev.png		\
 	i-stalled.png
