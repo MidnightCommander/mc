@@ -1214,8 +1214,9 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return p - 1;
 	}
 	c = edit_get_byte (edit, p);
-	if (c == '\r')
-	    continue;
+	/* '\r' is shown as ^M, so we must advance 2 characters */
+	if (c == '\r') 
+	    col += 2;
 	else
 	if (c == '\t')
 	    col += TAB_SIZE - col % TAB_SIZE;

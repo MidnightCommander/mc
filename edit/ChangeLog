@@ -1,5 +1,10 @@
 2002-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (edit_move_forward3): Show '\r' as ^M.
+	* editdraw.c (edit_draw_this_line): Likewise.  Use MOD_ABNORMAL
+	attribute.
+	From Alexander Varakin <avarakin00@hotmail.com>
+
 	* edit.h: Remove all references to O_TEXT, USE_O_TEXT and
 	MY_O_TEXT.
 

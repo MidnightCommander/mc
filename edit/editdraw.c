@@ -300,6 +300,12 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 			*(p++) = c;
 		    break;
 		case '\r':
+		    /* Display '\r' as ^M, just like vi does */
+		    *(p++) = '^';
+		    *p |= (256 * MOD_ABNORMAL);
+		    *(p++) = 'M';
+		    *p |= (256 * MOD_ABNORMAL);
+		    col += 2;
 		    break;
 		default:
 #ifdef HAVE_CHARSET
