@@ -5,6 +5,6 @@ mc ()
 	MC=$HOME/.mc/tmp/mc-$$
 	@prefix@/bin/mc -P "$@" > "$MC"
 	cd "`cat $MC`"
-	rm "$MC"
+	rm -r "$MC"
         unset MC;
 }

@@ -1,3 +1,8 @@
+2000-09-24  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.sh.in: remove temporary file non-interactively
+	* doc/mc.1.in: updated example for mc.sh
+
 2000-09-23  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: mc.spec included to noinst_DATA so that "make all"
