@@ -49,7 +49,7 @@ no)
 esac])
 AC_FUNC_MMAP
 
-if test x$ALL_LINGUAS = x; then
+if test "x$ALL_LINGUAS" = x; then
 ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko lv nl no pl pt_BR ro ru sk sl sv uk ta tr wa zh_TW zh_CN.GB2312"
 fi
 
