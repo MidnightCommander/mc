@@ -1,3 +1,8 @@
+2002-09-26  Pavel Roskin  <proski@gnu.org>
+
+	* sfs.c (sfs_init): Parametrize sfs.ini to allow reuse of the
+	messages in other places.
+
 2002-09-25  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_parse_filemode): Fix parsing for filenames that

@@ -330,7 +330,8 @@ static int sfs_init (vfs *me)
 	    }
 
 	if (!semi){
-	    fprintf (stderr, _("Warning: Invalid line in sfs.ini:\n%s\n"), key);
+	    fprintf (stderr, _("Warning: Invalid line in %s:\n%s\n"),
+		     "sfs.ini", key);
 	    continue;
 	}
 
@@ -341,7 +342,8 @@ static int sfs_init (vfs *me)
 	    case '2': flags |= F_2; break;
 	    case 'R': flags |= F_NOLOCALCOPY; break;
 	    default:
-	      fprintf (stderr, _("Warning: Invalid flag %c in sfs.ini:\n%s\n"), *c, key);
+		fprintf (stderr, _("Warning: Invalid flag %c in %s:\n%s\n"),
+			 *c, "sfs.ini", key);
 	    }	    
 	    c++;
 	}
