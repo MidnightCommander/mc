@@ -1,3 +1,8 @@
+2004-08-18  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* background.c (do_background): Use O_RDWR when opening 
+	the file '/dev/null' for replacement standard streams. 
+
 2004-08-17  Pavel Shirshov  <pavelsh@mail.ru>
 
 	* utilunix.c (mc_tmpdir): Check return value of getpwuid()
