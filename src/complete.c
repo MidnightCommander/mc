@@ -994,6 +994,11 @@ complete_engine (WInput *in, int what_to_do)
 	    } else
 	        beep ();
         }
+	/* FIXME: evil evil evil.  We do not go into the query completion engine
+	 * because we do not have a Gtk dialog for it.  Gtk-ted does not like
+	 * this; if we enable this code, it will crash.
+	 */
+#ifndef HAVE_GNOME
     	if ((what_to_do & DO_QUERY) && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
     	    int x, y, w, h;
@@ -1052,6 +1057,10 @@ complete_engine (WInput *in, int what_to_do)
     	    if (i == B_USER)
     	    	return 1;
     	}
+#else
+	if (what_to_do & DO_QUERY)
+	    beep ();
+#endif
     } else
     	beep ();
     return 0;

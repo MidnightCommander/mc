@@ -23,7 +23,7 @@ get_gtk_widget (Widget_Item *p)
 
 	if (GNOME_IS_ENTRY (w))
 		return (gnome_entry_gtk_entry ((GnomeEntry *)(w)));
-	else 
+	else
 		return (GTK_WIDGET (p->widget->wdata));
 }
 
@@ -75,7 +75,7 @@ gbutton_callback (GtkWidget *w, void *data)
 
 	if (b->callback)
 		stop = (*b->callback)(b->action, b->callback_data);
-	
+
 	if (!b->callback || stop){
 		h->ret_value = b->action;
 		dlg_stop (h);
@@ -86,7 +86,7 @@ char *
 stock_from_text (char *text)
 {
 	char *stock;
-		
+
 	if ( g_strcasecmp (text, _("ok")) == 0)
 		stock = GNOME_STOCK_BUTTON_OK;
 	else if ( g_strcasecmp (text, _("cancel")) == 0)
@@ -118,7 +118,7 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 
 	if (stock){
 		button = gnome_stock_button (stock);
-	} else 
+	} else
 		button = gtk_button_new_with_label (b->text);
 
 	if (b->flags == DEFPUSH_BUTTON){
@@ -129,7 +129,7 @@ x_create_button (Dlg_head *h, widget_data parent, WButton *b)
 	tag = gtk_signal_connect (GTK_OBJECT(button), "clicked", (GtkSignalFunc) gbutton_callback, b);
 	gtk_object_set_data (GTK_OBJECT (button), "click-signal-tag", (void *) tag);
 	b->widget.wdata = (widget_data) button;
-		
+
 	return 1;
 }
 
@@ -156,11 +156,11 @@ x_radio_focus_item (WRadio *radio)
 {
 	GList  *children = GTK_BOX (radio->widget.wdata)->children;
 	int    i;
-	
+
 	for (i = 0; i < radio->count; i++){
 		if (i == radio->pos){
 			GtkBoxChild *bc = (GtkBoxChild *) children->data;
-			
+
 			gtk_widget_grab_focus (GTK_WIDGET (bc->widget));
 			break;
 		}
@@ -173,7 +173,7 @@ x_radio_toggle (WRadio *radio)
 {
 	GList  *children = GTK_BOX (radio->widget.wdata)->children;
 	int    i;
-	
+
 	for (i = 0; i < radio->count; i++){
 		GtkBoxChild *bc = (GtkBoxChild *) children->data;
 
@@ -216,7 +216,7 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
         vbox = gtk_vbox_new (0, 0);
 	for (i = 0; i < r->count; i++){
 		char *text = remove_hotkey (_(r->texts [i]));
-		
+
 		if (i == 0){
 			w = gtk_radio_button_new_with_label (NULL, text);
 			r->first_gtk_radio = w;
@@ -230,7 +230,7 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), w);
 	}
 	gtk_widget_show_all (vbox);
-			    
+
 	r->widget.wdata = (widget_data) vbox;
 
 	return 1;
@@ -311,13 +311,13 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	gtk_entry_set_text (entry, in->buffer);
 	gtk_editable_select_region (GTK_EDITABLE (entry), 0, -1);
 	gtk_entry_set_position (entry, in->point);
-	
+
 	gtk_signal_connect (GTK_OBJECT (entry), "button_press_event",
 			    GTK_SIGNAL_FUNC (entry_click), in);
 
 	gtk_signal_connect (GTK_OBJECT (entry), "button_release_event",
 			    GTK_SIGNAL_FUNC (entry_release), in);
-	
+
 	gtk_signal_connect (GTK_OBJECT (entry), "changed",
 			    GTK_SIGNAL_FUNC (wentry_changed), in);
 	return 1;
@@ -332,7 +332,7 @@ x_update_input (WInput *in)
 	GtkEntry   *entry;
 	char       *text;
 	int        draw = 0;
-	
+
 	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
 	if (!in->widget.wdata)
 		return;
@@ -360,19 +360,13 @@ x_update_input (WInput *in)
 	if (text && strcmp (text, in->buffer)){
 		gtk_entry_set_text (entry, in->buffer);
 		draw = 1;
-	}      
+	}
 
 	if (GTK_EDITABLE (entry)->current_pos != in->point){
 		gtk_entry_set_position (entry, in->point);
 		draw = 1;
 	}
 
-	/* Unblock the signal handler */
-	gtk_signal_handler_unblock_by_func (
-		GTK_OBJECT (entry),
-		GTK_SIGNAL_FUNC(wentry_changed), in);
-
-	
 	if (draw){
 #ifdef USE_GNOME_ENTRY
 		gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
@@ -382,6 +376,11 @@ x_update_input (WInput *in)
 		gtk_editable_changed (GTK_EDITABLE (entry));
 		gtk_widget_queue_draw (GTK_WIDGET (entry));
 	}
+
+	/* Unblock the signal handler */
+	gtk_signal_handler_unblock_by_func (
+		GTK_OBJECT (entry),
+		GTK_SIGNAL_FUNC(wentry_changed), in);
 }
 
 /* Listboxes */
@@ -396,20 +395,20 @@ x_listbox_select_nth (WListbox *l, int nth)
 {
 	static int inside;
 	GtkCList *clist;
-	
+
 	if (inside)
 		return;
 
 	if (!l->widget.wdata)
 		return;
-	
+
 	inside = 1;
 	clist = GTK_CLIST (listbox_pull (l->widget.wdata));
-	
+
 	gtk_clist_select_row (clist, nth, 0);
 	if (gtk_clist_row_is_visible (clist, nth) != GTK_VISIBILITY_FULL)
 		gtk_clist_moveto (clist, nth, 0, 0.5, 0.0);
-	
+
 	inside = 0;
 }
 
@@ -430,24 +429,24 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 	inside = 1;
 
 	listbox_select_by_number (l, row);
-	
+
 	if (!event){
 		inside = 0;
 		return;
 	}
 
-	
+
 	if (event->type == GDK_2BUTTON_PRESS){
 		switch (l->action){
 		case listbox_nothing:
 			break;
-			
+
 		case listbox_finish:
 			h->running   = 0;
 			h->ret_value = B_ENTER;
 			gtk_main_quit ();
 			return;
-			
+
 		case listbox_cback:
 			if ((*l->cback)(l) == listbox_finish){
 				gtk_main_quit ();
@@ -470,11 +469,11 @@ x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 	GtkRequisition req;
 	WLEntry *p;
 	int i;
-	
+
 	listbox = gtk_clist_new (1);
 	sw = gtk_scrolled_window_new (NULL, NULL);
 	gtk_container_add (GTK_CONTAINER (sw), listbox);
-	
+
 	gtk_clist_set_selection_mode (GTK_CLIST (listbox), GTK_SELECTION_BROWSE);
 	gtk_widget_size_request (listbox, &req);
 	gtk_widget_set_usize (listbox, req.width, req.height + 20*8);
@@ -485,7 +484,7 @@ x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 
 	g_warning ("FIXME: actually compute the real size of the listbox");
 	l->height = 8;
-	
+
 	for (p = l->list, i = 0; i < l->count; i++, p = p->next){
 		char *text [1];
 
@@ -510,7 +509,7 @@ x_list_insert (WListbox *l, WLEntry *p, WLEntry *e)
 			break;
 		p = p->next;
 		pos++;
-	} 
+	}
 
 	if (p != e){
 		printf ("x_list_insert: should not happen!\n");
@@ -555,7 +554,7 @@ buttonbar_clicked (GtkWidget *widget, WButtonBar *bb)
 	GtkBox *box = GTK_BOX (widget->parent);
 	GList *children = box->children;
 	int i;
-	
+
 	/* Find out which button we are (number) */
 	for (i = 0; children; children = children->next, i++){
 		if (((GtkBoxChild *)children->data)->widget == widget){
@@ -575,7 +574,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 #if 0
 	int i;
 #endif
-	
+
 	hbox = gtk_hbox_new (0, 0);
 #if 0
 	for (i = 0; i < 10; i++){

@@ -1,3 +1,8 @@
+1999-06-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gwidget.c (x_update_input): Unblock the changed signal *after*
+	we call gtk_editable_changed().
+
 1999-06-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.[ch]: Removed the background hack for desktop

@@ -1,3 +1,9 @@
+1999-06-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* complete.c (complete_engine): Put an #ifndef HAVE_GNOME around
+	the completion/query engine.  Make the Gnome version just beep
+	instead.  We do not have the completion/query engine for Gtk.
+
 1999-06-09  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cmd.c (configure_panel_listing): no more code duplication
