@@ -1,8 +1,6 @@
 Before 4.6.0-pre2
 =================
 
-Redirect stderr from the extfs list operation.
-
 Finish work on position saving.
 
 get_byte() in view.c produces warnings in Valgrind.
