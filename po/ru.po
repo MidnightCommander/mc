@@ -3250,7 +3250,7 @@ msgstr "Смена &каталога по ссылкам"
 
 #: src/option.c:66
 msgid "l&Ynx-like motion"
-msgstr "Навигация в стиле l&Ynx"
+msgstr "Навигация в стиле l&ynx"
 
 #: src/option.c:67
 msgid "rotatin&G dash"
