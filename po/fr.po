@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc VERSION\n"
-"POT-Creation-Date: 1998-06-07 19:36+0200\n"
+"POT-Creation-Date: 1998-06-20 16:07+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@waw.com>\n"
 "Language-Team: Vincent Renardias <vincent@waw.com>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid " Could not set source routing (%s)"
 msgstr " Impossible d'utiliser le routage par la source (%s)"
 
-#: vfs/ftpfs.c:2783 vfs/ftpfs.c:2798
+#: vfs/ftpfs.c:2782 vfs/ftpfs.c:2797
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -62,7 +62,7 @@ msgid " No "
 msgstr " Non "
 
 #: vfs/mcfs.c:178
-msgid " The remote server is running on stange port. Giving up.\n"
+msgid " The remote server is running on strange port. Giving up.\n"
 msgstr " Le serveur distant utilise un port étrange. J'abandonne.\n"
 
 #: vfs/mcfs.c:190
@@ -219,7 +219,7 @@ msgstr " Voulez-vous vraiment enregistrer? : "
 msgid " Save file "
 msgstr " Enregistrer fichier "
 
-#: edit/editcmd.c:695 edit/editwidget.c:993 src/view.c:1992
+#: edit/editcmd.c:695 edit/editwidget.c:993 src/view.c:1993
 msgid "Save"
 msgstr "Sauver"
 
@@ -271,8 +271,8 @@ msgid " Replace "
 msgstr " Remplacer "
 
 #. Heads the 'Search' dialog box
-#: edit/editcmd.c:1119 edit/editcmd.c:1295 edit/editcmd.c:1951 src/view.c:1474
-#: src/view.c:1564 src/view.c:1686 src/view.c:1885 src/view.c:1917
+#: edit/editcmd.c:1119 edit/editcmd.c:1295 edit/editcmd.c:1951 src/view.c:1475
+#: src/view.c:1565 src/view.c:1687 src/view.c:1886 src/view.c:1918
 msgid " Search "
 msgstr " Rechercher "
 
@@ -403,14 +403,14 @@ msgstr "Annuler quitter"
 #: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:628
 #: gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2691
 #: src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040
-#: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
+#: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:411
 msgid "&Yes"
 msgstr "&Oui"
 
 #: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:628
 #: gnome/gdesktop.c:1204 src/cmd.c:248 src/file.c:2365 src/file.c:2690
 #: src/file.c:2881 src/hotlist.c:1027 src/main.c:826 src/screen.c:2040
-#: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:410
+#: src/subshell.c:701 src/subshell.c:727 src/tree.c:1195 src/view.c:411
 msgid "&No"
 msgstr "&Non"
 
@@ -447,7 +447,7 @@ msgstr " Impossible de sauver dans un fichier. "
 msgid " Cut to clipboard "
 msgstr " Couper vers le presse-papiers "
 
-#: edit/editcmd.c:2228 edit/editcmd.c:2230 src/view.c:1857
+#: edit/editcmd.c:2228 edit/editcmd.c:2230 src/view.c:1858
 msgid " Goto line "
 msgstr " Aller à la ligne "
 
@@ -685,7 +685,7 @@ msgstr "Présentation..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: edit/editmenu.c:262 edit/editmenu.c:271 edit/editmenu.c:388 src/chmod.c:174
-#: src/chown.c:131 src/main.c:1343
+#: src/chown.c:131
 msgid " File "
 msgstr " Fichier "
 
@@ -697,11 +697,11 @@ msgstr " Editer "
 msgid " Sear/Repl "
 msgstr " Cherch/Rempl "
 
-#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438 src/main.c:1344
+#: edit/editmenu.c:265 edit/editmenu.c:274 edit/editmenu.c:438
 msgid " Command "
 msgstr " Commande "
 
-#: edit/editmenu.c:266 edit/editmenu.c:275 src/main.c:1345
+#: edit/editmenu.c:266 edit/editmenu.c:275
 msgid " Options "
 msgstr " Options "
 
@@ -865,7 +865,7 @@ msgid "Error initialising editor.\n"
 msgstr "Erreur lors de l'initialisation de l'éditeur.\n"
 
 #: edit/editwidget.c:992 gnome/glayout.c:350 src/help.c:812 src/main.c:1674
-#: src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1987
+#: src/screen.c:2256 src/screen.c:2290 src/tree.c:1451 src/view.c:1988
 msgid "Help"
 msgstr "Aide"
 
@@ -886,7 +886,7 @@ msgstr "Copier"
 msgid "Move"
 msgstr "Déplacer"
 
-#: edit/editwidget.c:998 gnome/gview.c:291 gnome/gview.c:315 src/view.c:2000
+#: edit/editwidget.c:998 gnome/gview.c:291 gnome/gview.c:315 src/view.c:2001
 msgid "Search"
 msgstr "Chercher"
 
@@ -900,7 +900,7 @@ msgid "PullDn"
 msgstr "Menu"
 
 #: edit/editwidget.c:1002 gnome/gview.c:286 src/help.c:824 src/main.c:1677
-#: src/view.c:1989 src/view.c:2009
+#: src/view.c:1990 src/view.c:2010
 msgid "Quit"
 msgstr "Quitter"
 
@@ -926,7 +926,7 @@ msgstr ""
 #: src/boxes.c:466 src/boxes.c:645 src/boxes.c:766 src/boxes.c:819
 #: src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1997 src/find.c:158
 #: src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:372
-#: src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410
+#: src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:411
 #: src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr "&Annuler"
@@ -2372,7 +2372,7 @@ msgstr ""
 msgid "Finished"
 msgstr "Terminé"
 
-#: src/find.c:527 src/view.c:1474
+#: src/find.c:527 src/view.c:1475
 #, c-format
 msgid "Searching %s"
 msgstr "Recherche de %s"
@@ -3090,20 +3090,32 @@ msgid "&Save setup"
 msgstr "enregi&Strer la configuration"
 
 #: src/main.c:1338 src/main.c:1340
-msgid " Left "
-msgstr " Gauche "
+msgid " &Left "
+msgstr " &Gauche "
 
 #: src/main.c:1340
-msgid " Above "
-msgstr " Au dessus "
+msgid " &Above "
+msgstr " &Au dessus "
+
+#: src/main.c:1343
+msgid " &File "
+msgstr " &Fichier "
+
+#: src/main.c:1344
+msgid " &Command "
+msgstr " &Commande "
+
+#: src/main.c:1345
+msgid " &Options "
+msgstr " &Options "
 
 #: src/main.c:1348 src/main.c:1350
-msgid " Right "
-msgstr " Droite "
+msgid " &Right "
+msgstr " &Droite "
 
 #: src/main.c:1350
-msgid " Below "
-msgstr " En dessous "
+msgid " &Below "
+msgstr " &En dessous "
 
 #: src/main.c:1411
 msgid " Information "
@@ -3505,7 +3517,7 @@ msgstr ""
 msgid "View"
 msgstr "Voir"
 
-#: src/screen.c:2259 src/screen.c:2293 src/view.c:1996
+#: src/screen.c:2259 src/screen.c:2293 src/view.c:1997
 msgid "Edit"
 msgstr "Editer"
 
@@ -3659,41 +3671,41 @@ msgstr " Echec du tube "
 msgid " Dup failed "
 msgstr ""
 
-#: src/view.c:407
+#: src/view.c:408
 msgid ""
 "File: \n"
 "\n"
 "    "
 msgstr ""
 
-#: src/view.c:408
+#: src/view.c:409
 msgid ""
 "\n"
 "\n"
 "has been modified, do you want to save the changes?\n"
 msgstr ""
 
-#: src/view.c:410
+#: src/view.c:411
 msgid " Save changes "
 msgstr " Enregistrer les changements "
 
-#: src/view.c:452
+#: src/view.c:453
 msgid " Can't spawn child program "
 msgstr ""
 
-#: src/view.c:462
+#: src/view.c:463
 msgid " Empty output from child filter "
 msgstr ""
 
-#: src/view.c:468
+#: src/view.c:469
 msgid " Could not open file "
 msgstr " Impossible d'ouvrir le fichier "
 
-#: src/view.c:486
+#: src/view.c:487
 msgid " Can't open file \""
 msgstr " Impossible d'ouvrir le fichier \""
 
-#: src/view.c:494
+#: src/view.c:495
 msgid ""
 " Can't stat file \n"
 " "
@@ -3701,111 +3713,112 @@ msgstr ""
 " Impossible d'ouvrir %s \n"
 " %s "
 
-#: src/view.c:500
+#: src/view.c:501
 msgid " Can't view: not a regular file "
 msgstr ""
 
-#: src/view.c:520
+#: src/view.c:521
 msgid " Can not fetch local copy "
 msgstr ""
 
-#: src/view.c:707
+#: src/view.c:708
 #, c-format
 msgid "File: %s"
 msgstr "Fichier: %s "
 
-#: gnome/gview.c:119 src/view.c:712
+#: gnome/gview.c:119 src/view.c:713
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Décalage 0x%08x"
 
-#: gnome/gview.c:121 src/view.c:714
+#: gnome/gview.c:121 src/view.c:715
 #, c-format
 msgid "Col %d"
 msgstr "Col %d"
 
-#: gnome/gview.c:125 src/view.c:718
+#: gnome/gview.c:125 src/view.c:719
 #, c-format
 msgid "%s bytes"
 msgstr "%s octets"
 
-#: src/view.c:723
+#: src/view.c:724
 msgid "  [grow]"
 msgstr ""
 
-#: src/view.c:1564 src/view.c:1686
+#: src/view.c:1565 src/view.c:1687
 msgid " Search string not found "
 msgstr " Chaine non trouvée "
 
-#: src/view.c:1725
+#: src/view.c:1726
 msgid " Invalid regular expression "
 msgstr " Expression régulière invalide "
 
-#: src/view.c:1855
+#: src/view.c:1856
 #, c-format
 msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
-msgstr " Le numéro de la ligne courante est %d.\n"
+msgstr ""
+" Le numéro de la ligne courante est %d.\n"
 " Entrez le nouveau numéro de ligne:"
 
-#: src/view.c:1885
+#: src/view.c:1886
 msgid " Enter regexp:"
 msgstr " Entrez l'expression régulière:"
 
-#: src/view.c:1917
+#: src/view.c:1918
 msgid " Enter search string:"
 msgstr " Entrez le texte à rechercher:"
 
-#: src/view.c:1990
+#: src/view.c:1991
 msgid "Ascii"
 msgstr "Ascii"
 
-#: gnome/gview.c:308 src/view.c:1990
+#: gnome/gview.c:308 src/view.c:1991
 msgid "Hex"
 msgstr "Héxa"
 
-#: src/view.c:1991
+#: src/view.c:1992
 msgid "Line"
 msgstr "Ligne"
 
-#: src/view.c:1992
+#: src/view.c:1993
 msgid "RxSrch"
 msgstr "CherchER"
 
-#: src/view.c:1995
+#: src/view.c:1996
 msgid "EdText"
 msgstr ""
 
-#: src/view.c:1995
+#: src/view.c:1996
 msgid "EdHex"
 msgstr ""
 
-#: src/view.c:1997
+#: src/view.c:1998
 msgid "UnWrap"
 msgstr ""
 
-#: gnome/gview.c:300 src/view.c:1997
+#: gnome/gview.c:300 src/view.c:1998
 msgid "Wrap"
 msgstr "Césure"
 
-#: src/view.c:2000
+#: src/view.c:2001
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2003
+#: src/view.c:2004
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:2003
+#: src/view.c:2004
 msgid "Parse"
 msgstr "Analyser"
 
-#: src/view.c:2007
+#: src/view.c:2008
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2007
+#: src/view.c:2008
 msgid "Format"
 msgstr "Format"
 
@@ -4585,4 +4598,3 @@ msgstr "quitter"
 #: gnome/gwidget.c:104
 msgid "abort"
 msgstr "arréter"
-
