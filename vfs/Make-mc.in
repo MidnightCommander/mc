@@ -29,7 +29,7 @@ AR = @AR@
 @USE_SAMBA_FS_FALSE@SMB_NETFILES =
 NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o $(SMB_NETFILES)
 
-SAMBA_DIST_TOPLEVEL =		\
+SAMBA_DIST =			\
 	Makefile.in		\
 	acconfig.h		\
 	aclocal.m4		\
@@ -37,78 +37,68 @@ SAMBA_DIST_TOPLEVEL =		\
 	configure.in		\
 	configure		\
 	internals.doc		\
-	parsing.doc
-
-SAMBA_DIST_INCLUDE =		\
-	byteorder.h		\
-	charset.h		\
-	client.h		\
-	config.h.in		\
-	dlinklist.h		\
-	includes.h		\
-	kanji.h			\
-	local.h			\
-	nameserv.h		\
-	ntdomain.h		\
-	nterr.h			\
-	proto.h			\
-	rpc_dce.h		\
-	rpc_lsa.h		\
-	rpc_misc.h		\
-	rpc_netlogon.h		\
-	rpc_reg.h		\
-	rpc_samr.h		\
-	rpc_secdes.h		\
-	rpc_srvsvc.h		\
-	rpc_wkssvc.h		\
-	rpcclient.h		\
-	smb.h			\
-	stamp-h.in		\
-	trans2.h		\
-	version.h
-
-SAMBA_DIST_LIB =		\
-	charcnv.c		\
-	charset.c		\
-	debug.c			\
-	doscalls.c		\
-	genrand.c		\
-	getsmbpass.c		\
-	interface.c		\
-	kanji.c			\
-	md4.c			\
-	netmask.c		\
-	signal.c		\
-	slprintf.c		\
-	system.c		\
-	time.c			\
-	username.c		\
-	util.c			\
-	util_file.c		\
-	util_sock.c		\
-	util_str.c		\
-	util_unistr.c
-
-SAMBA_DIST_LIBSMB =		\
-	clientgen.c		\
-	namequery.c		\
-	nmblib.c		\
-	nterr.c			\
-	pwd_cache.c		\
-	smbdes.c		\
-	smbencrypt.c		\
-	smberr.c
-
-SAMBA_DIST_PARAM =		\
-	loadparm.c		\
-	params.c
-
-SAMBA_DIST_TESTS =		\
-	README			\
-	ftruncate.c		\
-	getgroups.c		\
-	summary.c		\
-	trivial.c
+	parsing.doc		\
+	include/byteorder.h	\
+	include/charset.h	\
+	include/client.h	\
+	include/config.h.in	\
+	include/dlinklist.h	\
+	include/includes.h	\
+	include/kanji.h		\
+	include/local.h		\
+	include/nameserv.h	\
+	include/ntdomain.h	\
+	include/nterr.h		\
+	include/proto.h		\
+	include/rpc_dce.h	\
+	include/rpc_lsa.h	\
+	include/rpc_misc.h	\
+	include/rpc_netlogon.h	\
+	include/rpc_reg.h	\
+	include/rpc_samr.h	\
+	include/rpc_secdes.h	\
+	include/rpc_srvsvc.h	\
+	include/rpc_wkssvc.h	\
+	include/rpcclient.h	\
+	include/smb.h		\
+	include/stamp-h.in	\
+	include/trans2.h	\
+	include/version.h	\
+	lib/charcnv.c		\
+	lib/charset.c		\
+	lib/debug.c		\
+	lib/doscalls.c		\
+	lib/genrand.c		\
+	lib/getsmbpass.c	\
+	lib/interface.c		\
+	lib/kanji.c		\
+	lib/md4.c		\
+	lib/netmask.c		\
+	lib/signal.c		\
+	lib/slprintf.c		\
+	lib/system.c		\
+	lib/time.c		\
+	lib/username.c		\
+	lib/util.c		\
+	lib/util_file.c		\
+	lib/util_sock.c		\
+	lib/util_str.c		\
+	lib/util_unistr.c	\
+	libsmb/clientgen.c	\
+	libsmb/namequery.c	\
+	libsmb/nmblib.c		\
+	libsmb/nterr.c		\
+	libsmb/pwd_cache.c	\
+	libsmb/smbdes.c		\
+	libsmb/smbencrypt.c	\
+	libsmb/smberr.c		\
+	param/loadparm.c	\
+	param/params.c		\
+	tests/README		\
+	tests/ftruncate.c	\
+	tests/getgroups.c	\
+	tests/summary.c		\
+	tests/trivial.c
 
 NONETFILES = 			\
 	cpio.o			\
@@ -265,23 +255,8 @@ distdir:
 	mkdir $(distdir)/samba/libsmb
 	mkdir $(distdir)/samba/param
 	mkdir $(distdir)/samba/tests
-	for I in $(SAMBA_DIST_TOPLEVEL); do \
-	  cp -p $(srcdir)/samba/$$I $(distdir)/samba \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_INCLUDE); do \
-	  cp -p $(srcdir)/samba/include/$$I $(distdir)/samba/include \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_LIB); do \
-	  cp -p $(srcdir)/samba/lib/$$I $(distdir)/samba/lib \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_LIBSMB); do \
-	  cp -p $(srcdir)/samba/libsmb/$$I $(distdir)/samba/libsmb \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_PARAM); do \
-	  cp -p $(srcdir)/samba/param/$$I $(distdir)/samba/param \
-	  || exit 1; done
-	for I in $(SAMBA_DIST_TESTS); do \
-	  cp -p $(srcdir)/samba/tests/$$I $(distdir)/samba/tests \
+	for I in $(SAMBA_DIST); do \
+	  cp -p $(srcdir)/samba/$$I $(distdir)/samba/$$I \
 	  || exit 1; done
 	
 depend dep: mcdep
