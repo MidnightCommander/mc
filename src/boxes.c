@@ -546,15 +546,18 @@ static int new_display_codepage;
 static WLabel *cplabel;
 static WCheck *inpcheck;
 
-static int sel_charset_button( int action, void *param )
+static int
+sel_charset_button (int action)
 {
     char *cpname, buf[64];
-    new_display_codepage = select_charset( new_display_codepage, 1 );
+    new_display_codepage = select_charset (new_display_codepage, 1);
     cpname = (new_display_codepage < 0)
-	     ? _("Other 8 bit")
-	     : codepages[ new_display_codepage ].name;
-    g_snprintf( buf, sizeof (buf), "%-27s", cpname ); /* avoid strange bug with label repainting */
-    label_set_text( cplabel, buf );
+	? _("Other 8 bit")
+	: codepages[new_display_codepage].name;
+
+    /* avoid strange bug with label repainting */
+    g_snprintf (buf, sizeof (buf), "%-27s", cpname);
+    label_set_text (cplabel, buf);
     return 0;
 }
 
@@ -571,12 +574,12 @@ init_disp_bits_box (void)
 		    "[Display bits]", _(" Display bits "), DLG_CENTER);
 
     add_widget (dbits_dlg,
-		label_new (3, 4, _("Input / display codepage:"), NULL));
+		label_new (3, 4, _("Input / display codepage:")));
 
     cpname = (new_display_codepage < 0)
 	? _("Other 8 bit")
 	: codepages[new_display_codepage].name;
-    cplabel = label_new (4, 4, cpname, NULL);
+    cplabel = label_new (4, 4, cpname);
     add_widget (dbits_dlg, cplabel);
 
     add_widget (dbits_dlg,
@@ -587,8 +590,7 @@ init_disp_bits_box (void)
 			    0));
 
     inpcheck =
-	check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"),
-		   NULL);
+	check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"));
     add_widget (dbits_dlg, inpcheck);
 
     cpname = _("&Select");
@@ -613,19 +615,20 @@ display_bits_box (void)
     if (dbits_dlg->ret_value == B_ENTER) {
 	char *errmsg;
 	display_codepage = new_display_codepage;
-	errmsg = init_translation_table( source_codepage, display_codepage );
+	errmsg =
+	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg)
-	    message( 1, MSG_ERROR, "%s", errmsg );
+	    message (1, MSG_ERROR, "%s", errmsg);
 #ifndef HAVE_SLANG
-	meta( stdscr, display_codepage != 0 );
+	meta (stdscr, display_codepage != 0);
 #else
-	SLsmg_Display_Eight_Bit
-	    = (display_codepage != 0 && display_codepage != 1) ? 128 : 160;
+	SLsmg_Display_Eight_Bit = (display_codepage != 0
+				   && display_codepage != 1) ? 128 : 160;
 #endif
-	use_8th_bit_as_meta = ! (inpcheck->state & C_BOOL);
-    }    
-    destroy_dlg( dbits_dlg );
-    repaint_screen();
+	use_8th_bit_as_meta = !(inpcheck->state & C_BOOL);
+    }
+    destroy_dlg (dbits_dlg);
+    repaint_screen ();
 }
 
 #endif /* HAVE_CHARSET */
@@ -1074,9 +1077,9 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     in_password->is_password = 1;
     add_widget (auth_dlg, in_password);
 
-    add_widget (auth_dlg, label_new (7, 3, labs[2], "label-passwd"));
-    add_widget (auth_dlg, label_new (5, 3, labs[1], "label-user"));
-    add_widget (auth_dlg, label_new (3, 3, labs[0], "label-domain"));
+    add_widget (auth_dlg, label_new (7, 3, labs[2]));
+    add_widget (auth_dlg, label_new (5, 3, labs[1]));
+    add_widget (auth_dlg, label_new (3, 3, labs[0]));
 
     run_dlg (auth_dlg);
 

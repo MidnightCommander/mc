@@ -180,7 +180,7 @@ init_listmode (char *oldlistformat)
     for (i = 0; i < LABELS; i++) {
 	pname =
 	    label_new (listmode_labels[i].y, listmode_labels[i].x,
-		       listmode_labels[i].text, NULL);
+		       listmode_labels[i].text);
 	add_widget (listmode_dlg, pname);
     }
 
@@ -190,10 +190,10 @@ init_listmode (char *oldlistformat)
     add_widget (listmode_dlg,
 		button_new (UY + 13, UX + 34, B_PLUS, NORMAL_BUTTON, "&+",
 			    bplus_cback));
-    radio_itemwidth = radio_new (UY + 9, UX + 22, 3, s_itemwidth, 1, NULL);
+    radio_itemwidth = radio_new (UY + 9, UX + 22, 3, s_itemwidth, 1);
     add_widget (listmode_dlg, radio_itemwidth);
     radio_itemwidth = 0;
-    radio_justify = radio_new (UY + 5, UX + 22, 3, s_justify, 1, NULL);
+    radio_justify = radio_new (UY + 5, UX + 22, 3, s_justify, 1);
     add_widget (listmode_dlg, radio_justify);
     radio_justify->sel = 1;
 
@@ -224,10 +224,10 @@ init_listmode (char *oldlistformat)
     /* add listbox to the dialogs */
     add_widget (listmode_dlg, l_listmode);
 
-    radio_columns = radio_new (UY + 1, UX + 32, 2, s_columns, 1, NULL);
+    radio_columns = radio_new (UY + 1, UX + 32, 2, s_columns, 1);
     add_widget (listmode_dlg, radio_columns);
     radio_columns->sel = format_columns;
-    radio_genwidth = radio_new (UY + 1, UX + 2, 2, s_genwidth, 1, NULL);
+    radio_genwidth = radio_new (UY + 1, UX + 2, 2, s_genwidth, 1);
     add_widget (listmode_dlg, radio_genwidth);
     radio_genwidth->sel = format_width;
 

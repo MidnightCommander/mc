@@ -1,3 +1,8 @@
+2003-09-01  Pavel Roskin  <proski@gnu.org>
+
+	* boxes.c: Fix GUI code for some non-default configurations.
+	* listmode.c: Likewise.
+
 2003-08-31  Pavel Roskin  <proski@gnu.org>
 
 	* widget.h (button_new): Remove unused extra argument.  Adjust
