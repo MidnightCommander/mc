@@ -1,3 +1,12 @@
+1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* configure.in (REGEX_O): Always include regex.o as the code we
+	are using in gmc is not using regcomp/regexec, but the internal
+	Emacs API.  
+
+	* src/regex.c: Do not compile the POSIX compatibility code, as we
+	do not use it.
+
 Tue Dec 29 15:49:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* doc/mc.sgml, mc1.in (Color section): minor polishing

@@ -154,11 +154,6 @@ Let me check for an incompatible regcomp in HP-UX before making this
 the default
 
 REGEX_O="regex.o"
-AC_CHECK_FUNCS(regcomp)
-if test x$ac_cv_func_regcomp = xyes; then
-    REGEX_O=""
-fi
-
 AC_SUBST(REGEX_O)
 
 dnl Missing structure components

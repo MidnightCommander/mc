@@ -5168,7 +5168,7 @@ re_exec (s)
 
 /* POSIX.2 functions.  Don't define these for Emacs.  */
 
-#ifndef emacs
+#if 0
 
 /* regcomp takes a regular expression as a string and compiles it.
 
