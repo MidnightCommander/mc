@@ -290,8 +290,10 @@ static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, 
 			_rule.border = RULE_ON_LEFT_BORDER;
 			_rule._context = count;
 			if (!r->between_delimiters)
-			    if (!_rule.keyword)
+			    if (!_rule.keyword) {
 				_rule.context = count;
+				contextchanged = 1;
+			    }
 			break;
 		    }
 		}

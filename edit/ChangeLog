@@ -1,3 +1,8 @@
+2002-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (apply_rules_going_right): Recheck keyword rules when
+	a keyword is found on the left border of a context.
+
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (edit_get_syntax_color): Return colorpair index, not
