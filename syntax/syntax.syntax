@@ -13,9 +13,9 @@ context default
     keyword wholeleft whole\t brightcyan/17
     keyword whole wh\oleleft brightcyan/17
     keyword whole wh\oleright brightcyan/17
-    keyword whole lin\[e\]start brightcyan/17
-    keyword whole linestart \[\s\t\]c\ontext\[\t\s\]exclusive brightred/18
-    keyword whole linestart \[\s\t\]c\ontext\[\t\s\]default brightred/18
+    keyword whole lin\estart brightcyan/17
+    keyword whole linestart \[\s\t\]context\[\t\s\]exclusive brightred/18
+    keyword whole linestart \[\s\t\]context\[\t\s\]default brightred/18
     keyword whole linestart \[\s\t\]context brightred/18
     keyword whole wh\olechars\[\t\s\]left brightcyan/17
     keyword whole wh\olechars\[\t\s\]right brightcyan/17
