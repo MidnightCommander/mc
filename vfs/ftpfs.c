@@ -1163,7 +1163,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     }
 
     if (sock == -1)
-	goto error_3;
+	goto fallback;
 
 #ifdef OLD_READ
 #define close_this_sock(x,y) fclose (x)
@@ -1238,19 +1238,8 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     }
     close_this_sock(fp, sock);
     disable_interrupt_key();
-    if ( (get_reply (qsock (bucket), NULL, 0) != COMPLETE) || (file_list->next == file_list)) {
-        if (bucket->__inode_counter == 0 && !bucket->strict_rfc959_list_cmd) {
-            /* It's our first attempt to get a directory listing from this
-               server (UNIX style LIST command) */
-            bucket->strict_rfc959_list_cmd = 1;
-    	    free(dcache->remote_path);
-            free(dcache);
-            linklist_destroy(file_list, direntry_destructor);
-            return retrieve_dir (bucket, remote_path, resolve_symlinks);
-        }
-	my_errno = EACCES;
-	goto error_3;
-    }
+    if ( (get_reply (qsock (bucket), NULL, 0) != COMPLETE) || (file_list->next == file_list))
+        goto fallback;
     if (!linklist_insert(qdcache(bucket), dcache)) {
 	my_errno = ENOMEM;
         goto error_3;
@@ -1275,6 +1264,23 @@ error_3:
     free(dcache);
     linklist_destroy(file_list, direntry_destructor);
     print_vfs_message("ftpfs: failed");
+    return NULL;
+
+fallback:
+    if (bucket->__inode_counter == 0 && (!bucket->strict_rfc959_list_cmd)) {
+        /* It's our first attempt to get a directory listing from this
+	server (UNIX style LIST command) */
+        bucket->strict_rfc959_list_cmd = 1;
+	free(dcache->remote_path);
+	free(dcache);
+	linklist_destroy(file_list, direntry_destructor);
+	return retrieve_dir (bucket, remote_path, resolve_symlinks);
+    }
+    my_errno = EACCES;
+    free(dcache->remote_path);
+    free(dcache);
+    linklist_destroy(file_list, direntry_destructor);
+    print_vfs_message("ftpfs: failed; nowhere to fallback to");
     return NULL;
 }
 
