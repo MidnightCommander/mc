@@ -483,7 +483,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			break;
 
 		case 3:
-			gpopup_do_popup ((GdkEventButton *) event, panel, row, panel->dir.list[row].fname);
+			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, row, panel->dir.list[row].fname);
 			break;
 		}
 
@@ -1133,7 +1133,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 		if (event->button.button != 3)
 			return;
 		
-		gpopup_do_popup ((GdkEventButton *) event, panel, index, panel->dir.list[index].fname);
+		gpopup_do_popup ((GdkEventButton *) event, panel, NULL, index, panel->dir.list[index].fname);
 		return;
 		
 	case GDK_2BUTTON_PRESS:

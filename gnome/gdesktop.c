@@ -48,19 +48,6 @@
 #define DESKTOP_DIR_NAME "desktop"
 
 
-/* This structure defines the information carried by a desktop icon */
-struct desktop_icon_info {
-	GtkWidget *dicon;		/* The desktop icon widget */
-	int x, y;			/* Position in the desktop */
-	int slot;			/* Index of the slot the icon is in, or -1 for none */
-	char *filename;			/* The file this icon refers to (relative to the desktop_directory) */
-	int selected : 1;		/* Is the icon selected? */
-	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
-	int finishing_selection : 1;	/* Flag set while we are releasing
-					 * button after selecting in the text
-					 */
-};
-
 struct layout_slot {
 	int num_icons;		      /* Number of icons in this slot */
 	GList *icons;		      /* The list of icons in this slot */
@@ -696,7 +683,7 @@ do_popup_menu (struct desktop_icon_info *dii, GdkEventButton *event)
 
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
-	if (gpopup_do_popup (event, NULL, 0, filename) != -1)
+	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
 		reload_desktop_icons (FALSE, 0, 0); /* bleah */
 
 	g_free (filename);

@@ -80,6 +80,44 @@ panel_action_edit (GtkWidget *widget, WPanel *panel)
 }
 
 static void
+desktop_icon_view(GtkWidget *widget, desktop_icon_info *dii)
+{
+  g_warning("NYI");
+}
+
+/* Pops up the icon properties pages */
+void
+desktop_icon_properties (GtkWidget *widget, desktop_icon_info *dii)
+{
+  int retval;
+  char *path;
+
+  path = g_copy_strings(getenv("HOME"), "/desktop/", dii->filename, NULL);
+  retval = item_properties (dii->dicon, path, dii);
+  g_free(path);
+  if(retval)
+    reread_cmd(); /* Lame. Slow. Works. */
+}
+
+void
+desktop_icon_execute (GtkWidget *ignored, desktop_icon_info *dii)
+{
+  char *path;
+  /* Ultra lame-o execute.  This should be replaced by the fixed regexp_command
+   * invocation 
+   */
+  
+  path = g_copy_strings(getenv("HOME"), "/desktop/", dii->filename, NULL);
+
+  if (g_file_test(path, G_FILE_TEST_ISDIR))
+    new_panel_at (path);
+  else 
+    gnome_desktop_entry_launch (path);
+
+  g_free(path);
+}
+
+static void
 panel_action_properties (GtkWidget *widget, WPanel *panel)
 {
 	file_entry *fe = &panel->dir.list [panel->selected];
@@ -92,19 +130,19 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-dicon_move (GtkWidget *widget, char *filename)
+dicon_move (GtkWidget *widget, desktop_icon_info *dii)
 {
 	g_warning ("Implement this function!");
 }
 
 static void
-dicon_copy (GtkWidget *widget, char *filename)
+dicon_copy (GtkWidget *widget, desktop_icon_info *dii)
 {
 	g_warning ("Implement this function!");
 }
 
 static void
-dicon_delete (GtkWidget *widget, char *filename)
+dicon_delete (GtkWidget *widget, desktop_icon_info *dii)
 {
 	g_warning ("Implement this function!");
 }
@@ -177,14 +215,10 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
  */
 static struct action file_actions[] = {
 	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (GtkSignalFunc) panel_action_properties },
-#if 0
 	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) desktop_icon_properties },
-#endif
 	{ "",                    F_SINGLE,   	    	  	 NULL },
 	{ N_("Open"),            F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open },
-#if 0
 	{ N_("Open"),            F_DICON | F_ALL, 	  	 (GtkSignalFunc) desktop_icon_execute },
-#endif
 	{ N_("Open with"),       F_PANEL | F_ALL,      	  	 (GtkSignalFunc) panel_action_open_with },
 	{ N_("View"),            F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view },
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view_unfiltered },  
@@ -221,7 +255,9 @@ static GnomeUIInfo desktop_icon_actions[] = {
  * items should be inserted.
  */
 static int
-create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
+create_actions (GtkWidget *menu, WPanel *panel,
+		desktop_icon_info *dii,
+		int panel_row, char *filename)
 {
 	gpointer closure;
 	struct action *action;
@@ -231,7 +267,7 @@ create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
 		GNOMEUIINFO_END
 	};
 
-	closure = panel ? (gpointer) panel : (gpointer) filename;
+	closure = panel ? (gpointer) panel : (gpointer) dii;
 
 	pos = 0;
 	
@@ -241,7 +277,7 @@ create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
 		if (!panel && (action->flags & F_PANEL))
 			continue;
 
-		if (panel && (action->flags & F_DICON))
+		if (!dii && (action->flags & F_DICON))
 			continue;
 
 		/* Items with F_ALL bypass any other condition */
@@ -367,7 +403,9 @@ mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
  * regexp_command() actions.
  */
 static void
-create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename, int insert_pos)
+create_regexp_actions (GtkWidget *menu, WPanel *panel,
+		       desktop_icon_info *dii,
+		       int panel_row, char *filename, int insert_pos)
 {
 	gpointer closure, regex_closure;
 	GnomeUIInfo *a_uiinfo;
@@ -387,7 +425,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 		regex_closure = filename;
 	} else {
 		a_uiinfo = desktop_icon_actions;
-		closure = filename;
+		closure = dii;
 		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	}
@@ -476,18 +514,23 @@ get_active_index (GtkMenu *menu)
  * be set to NULL.
  */
 int
-gpopup_do_popup (GdkEventButton *event, WPanel *from_panel, int panel_row, char *filename)
+gpopup_do_popup (GdkEventButton *event,
+		 WPanel *from_panel,
+		 struct desktop_icon_info *dii,
+		 int panel_row,
+		 char *filename)
 {
 	GtkWidget *menu;
 	int pos;
 	guint id;
 
 	g_return_val_if_fail (event != NULL, -1);
-	g_return_val_if_fail (from_panel != NULL || filename != NULL, -1);
+	g_return_val_if_fail (from_panel != NULL || dii != NULL || filename != NULL, -1);
 
 	menu = gtk_menu_new ();
 
-	/* Connect to the deactivation signal to be able to quit our modal main loop */
+	/* Connect to the deactivation signal to be able to quit our
+           modal main loop */
 
 	id = gtk_signal_connect (GTK_OBJECT (menu), "deactivate",
 				 (GtkSignalFunc) menu_shell_deactivated,
@@ -495,8 +538,10 @@ gpopup_do_popup (GdkEventButton *event, WPanel *from_panel, int panel_row, char 
 
 	/* Fill the menu */
 
-	pos = create_actions (menu, from_panel, panel_row, filename);
-	create_regexp_actions (menu, from_panel, panel_row, filename, pos);
+	pos = create_actions (menu, from_panel, dii,
+			      panel_row, filename);
+	create_regexp_actions (menu, from_panel, dii,
+			       panel_row, filename, pos);
 
 	/* Run it */
 

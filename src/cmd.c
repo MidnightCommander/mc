@@ -249,7 +249,7 @@ static void do_view_cmd (WPanel *panel, int normal)
     
     /* Directories are viewed by changing to them */
     if (S_ISDIR (selection (panel)->buf.st_mode) ||
-	link_isdir (selection (panel))){
+	link_isdir (selection (panel))) {
 	if (confirm_view_dir && (panel->marked || panel->dirs_marked)){
 	    if (query_dialog (_(" CD "), _("Files tagged, want to cd?"),
 			      0, 2, _("&Yes"), _("&No")) == 1){

@@ -32,7 +32,18 @@ void desktop_init (void);
 /* Shuts the desktop down by destroying the desktop icons. */
 void desktop_destroy (void);
 
-
+/* This structure defines the information carried by a desktop icon */
+typedef struct desktop_icon_info {
+	GtkWidget *dicon;		/* The desktop icon widget */
+	int x, y;			/* Position in the desktop */
+	int slot;			/* Index of the slot the icon is in, or -1 for none */
+	char *filename;			/* The file this icon refers to (relative to the desktop_directory) */
+	int selected : 1;		/* Is the icon selected? */
+	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
+	int finishing_selection : 1;	/* Flag set while we are releasing
+					 * button after selecting in the text
+					 */
+} desktop_icon_info;
 
 
 
