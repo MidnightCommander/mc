@@ -1,5 +1,8 @@
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (input_callback) [HAVE_X]: Disable Ctrl-q - it
+	doesn't work.
+
 	* file.c (panel_get_file): Use g_assert_not_reached().
 	* key.c (xgetch_second): Make static.
 

@@ -1650,6 +1650,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 	return x_create_input (h, h->wdata, in);
 
     case WIDGET_KEY:
+#ifndef HAVE_X
 	if (Par == XCTRL('q')){
 	    int v;
 	    
@@ -1658,6 +1659,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 	    quote = 0;
 	    return v;
 	}
+#endif /* !HAVE_X */
 	if (Par == KEY_UP || Par == KEY_DOWN ||
 	    Par == ESC_CHAR || Par == KEY_F(10) ||
 	    Par == XCTRL('g'))
@@ -1678,7 +1680,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
     case WIDGET_CURSOR:
 	widget_move (&in->widget, 0, in->point - in->first_shown);
 	return 1;
-#endif
+#endif /* !HAVE_X */
 	
     }
     return default_proc (h, Msg, Par);
