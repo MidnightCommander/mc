@@ -1,3 +1,8 @@
+2001-09-15  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.1.in: Fix location of mcedit files.
+	* doc/mcedit.1.in: Likewise.  Remove obsolete technical details.
+
 2001-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Don't check for ncurses version and for keyok()

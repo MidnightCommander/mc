@@ -2495,7 +2495,7 @@ like by pressing that key. The macro is executed when you press
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
 commands go into the file 
-.B .cedit/cooledit.macros
+.B .mc/cedit/cooledit.macros
  in your home directory. You can delete a macro by deleting the
 appropriate line in this file.
 .PP
@@ -2508,7 +2508,7 @@ code or another). This is controlled by the
 file
 .B @prefix@/lib/mc/edit.indent.rc
 which is copied to
-.B .cedit/edit.indent.rc
+.B .mc/cedit/edit.indent.rc
 in your home directory the first time you use it.
 .PP
 You can use scanf search and replace to search and replace
