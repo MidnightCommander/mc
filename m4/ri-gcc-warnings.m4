@@ -75,8 +75,8 @@ if test x"$GCC" = x"yes"; then
   fi
 
   CPPFLAGS="$CPPFLAGS $ri_cppflags"
-  CFLAGS="$CFLAGS $ri_bothflags $ri_cflags"
-  CXXFLAGS="$CXXFLAGS $ri_bothflags $ri_cxxflags"
+  CFLAGS="$ri_bothflags $ri_cflags $CFLAGS"
+  CXXFLAGS="$ri_bothflags $ri_cxxflags $CXXFLAGS"
 fi
 
 ])])
