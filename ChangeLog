@@ -1,5 +1,9 @@
 2000-09-23  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/Makefile.am: Fixed *clean targets. Use temporary
+	directory for document processing. Comment changes. gmc.ps and
+	gmc.pdf now generated from gmc.dvi.
+
 	* configure: Always include Make.common as file, otherwise
 	"make distclean" breaks.
 	* edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
