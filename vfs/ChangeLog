@@ -1,3 +1,7 @@
+Mon Nov 16 16:39:39 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* vfs.c (vfs_parse_ls_lga): Report unrecognized lines.
+
 Thu Nov 12 11:28:48 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* extfs/rpm: Fix to display files belonging to users with

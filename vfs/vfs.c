@@ -1479,8 +1479,6 @@ int vfs_parse_filedate(int idx, time_t *t)
     return idx;
 }
 
-#define free_and_return(x) { free (p_copy); return (x); }
-
 int
 vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
@@ -1491,13 +1489,14 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
+    p_copy = strdup (p);
     if ((i = vfs_parse_filetype(*(p++))) == -1)
-        return 0;
+        goto error;
 
     s->st_mode = i;
     if (*p == '['){
 	if (strlen (p) <= 8 || p [8] != ']')
-	    return 0;
+	    goto error;
 	/* Should parse here the Notwell permissions :) */
 	if (S_ISDIR (s->st_mode))
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IXUSR | S_IXGRP | S_IXOTH);
@@ -1506,17 +1505,16 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	p += 9;
     } else {
 	if ((i = vfs_parse_filemode(p)) ==-1)
-	    return 0;
+	    goto error;
         s->st_mode |= i;
 	p += 9;
     }
 	
-    p_copy = strdup (p);
     num_cols = vfs_split_text (p);
 
     s->st_nlink = atol (columns [0]);
     if (s->st_nlink <= 0)
-        free_and_return (0);
+        goto error;
 
     if (!is_num (1))
 	s->st_uid = finduid (columns [1]);
@@ -1530,7 +1528,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
             columns [idx][2] == '-' && columns [idx][5] == '-'))
             break;
     if (idx == 6 || (idx == 5 && !S_ISCHR (s->st_mode) && !S_ISBLK (s->st_mode)))
-        free_and_return (0);
+        goto error;
     if (idx < 5){
         char *p = strchr(columns [idx - 1], ',');
         if (p && p[1] >= '0' && p[1] <= '9')
@@ -1549,19 +1547,19 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)){
         char *p;
 	if (!is_num (idx2))
-	    free_and_return (0);
+	    goto error;
 #ifdef HAVE_ST_RDEV
 	s->st_rdev = (atol (columns [idx2]) & 0xff) << 8;
 #endif
 	if (isconc){
 	    p = strchr (columns [idx2], ',');
 	    if (!p || p [1] < '0' || p [1] > '9')
-	        free_and_return (0);
+	        goto error;
 	    p++;
 	} else {
 	    p = columns [idx2 + 1];
 	    if (!is_num (idx2+1))
-	        free_and_return (0);
+	        goto error;
 	}
 	
 #ifdef HAVE_ST_RDEV
@@ -1570,7 +1568,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	s->st_size = 0;
     } else {
 	if (!is_num (idx2))
-	    free_and_return (0);
+	    goto error;
 	
 	s->st_size = (size_t) atol (columns [idx2]);
 #ifdef HAVE_ST_RDEV
@@ -1580,7 +1578,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 
     idx = vfs_parse_filedate(idx, &s->st_mtime);
     if (!idx)
-        free_and_return (0);
+        goto error;
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
     s->st_dev = 0;
@@ -1644,7 +1642,13 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	if (linkname)
 	    *linkname = NULL;
     }
-    free_and_return (1);
+    free (p_copy);
+    return 1;
+
+error:
+    message_1s (1, "Could not parse:", p_copy);
+    free (p_copy);
+    return 0;
 }
 
 void
