@@ -748,9 +748,7 @@ static void *mcfs_readdir (void *info)
     cached_lstat_info = &mcfs_info->current->my_stat;
     mcfs_info->current = mcfs_info->current->next;
 
-#ifndef DIRENT_LENGTH_COMPUTED
-    mcfs_readdir_data.dent.d_namlen = strlen (mcfs_readdir_data.dent.d_name);
-#endif
+    compute_namelen (&mcfs_readdir_data.dent);
     
     return &mcfs_readdir_data;
 }

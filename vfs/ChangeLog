@@ -1,3 +1,10 @@
+2002-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_readdir): Use compute_namelen().
+	* extfs.c (s_readdir): Likewise.
+	* mcfs.c (mcfs_readdir): Likewise.
+	* smbfs.c (smbfs_readdir): Likewise.
+
 2002-08-14  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h [!USE_VFS]: Declare mc_setctl as static inline function

@@ -759,9 +759,7 @@ smbfs_readdir (void *info)
     pstrcpy (dirent_dest, smbfs_info->current->text);
     smbfs_info->current = smbfs_info->current->next;
 
-#ifndef DIRENT_LENGTH_COMPUTED
-    smbfs_readdir_data.dent.d_namlen = strlen (smbfs_readdir_data.dent.d_name);
-#endif
+    compute_namelen(&smbfs_readdir_data.dent);
 
     return &smbfs_readdir_data; 
 }

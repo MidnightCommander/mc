@@ -896,9 +896,7 @@ static void * s_readdir (void *data)
 
     strcpy (&(dir.dir.d_name [0]), (*info)->name);
     
-#ifndef DIRENT_LENGTH_COMPUTED
-    dir.d_namlen = strlen (dir.dir.d_name);
-#endif
+    compute_namelen (&dir.dir);
     *info = (*info)->next_in_dir;
     
     return (void *)&dir;

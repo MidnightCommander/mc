@@ -632,9 +632,7 @@ vfs_s_readdir (void *data)
     else
 	vfs_die ("Null in structure-can not happen");
 
-#ifndef DIRENT_LENGTH_COMPUTED
-    dir.d_namlen = strlen (dir.dir.d_name);
-#endif
+    compute_namelen(&dir.dir);
     info->cur = info->cur->next;
     
     return (void *)&dir;
