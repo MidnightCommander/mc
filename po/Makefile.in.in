@@ -183,7 +183,7 @@ mostlyclean:
 clean: mostlyclean
 
 distclean: clean
-	rm -f Makefile Makefile.in POTFILES *.mo $(srcdir)/*.gmo *.msg *.cat *.cat.m
+	rm -f Makefile Makefile.in POTFILES *.mo *.msg *.cat *.cat.m
 
 maintainer-clean: distclean
 	@echo "This command is intended for maintainers to use;"
@@ -193,7 +193,8 @@ maintainer-clean: distclean
 distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
 
 # Only maintainers want to run update-po
-dist distdir: $(DISTFILES) @MAINT@ update-po
+dist distdir: @MAINT@ update-po
+	$(MAKE) $(DISTFILES)
 	dists="$(DISTFILES)"; \
 	for file in $$dists; do \
 	  ln $(srcdir)/$$file $(distdir) 2> /dev/null \
