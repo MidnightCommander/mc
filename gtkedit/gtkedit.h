@@ -57,8 +57,8 @@ struct _GtkEdit
   GdkGC *gc;
   GdkColor color[256];
   int color_last_pixel;
-  void (*destroy_me) (void *);
-  void *destroy_me_user_data;
+  void (*destroy_me) (GtkWidget *);
+  GtkWidget *destroy_me_user_data;
   struct editor_widget *editor;
   gulong options;
   gint timer;
