@@ -294,7 +294,7 @@ void tk_end_frame ();
 void x_set_dialog_title (Dlg_head *h, char *title);
 
 /* The inner workings of run_dlg, exported for the Tk and XView toolkits */
-void dlg_key_event (Dlg_head *h, int d_key);
+int  dlg_key_event (Dlg_head *h, int d_key);
 void update_cursor (Dlg_head *h);
 
 #ifdef HAVE_X

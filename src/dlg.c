@@ -700,7 +700,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     return handled;
 }
 
-void dlg_key_event (Dlg_head *h, int d_key)
+int dlg_key_event (Dlg_head *h, int d_key)
 {
     int handled;
     
@@ -730,6 +730,8 @@ void dlg_key_event (Dlg_head *h, int d_key)
 	if (!handled)
 	    dialog_handle_key (h, d_key);
 	(*h->callback) (h, d_key, DLG_POST_KEY);
+
+	return handled;
     }
 }
 
