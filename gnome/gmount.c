@@ -134,9 +134,6 @@ is_block_device_mountable (char *mount_point)
 	struct mntent *mnt;
 	char *retval = NULL;
 	
-	if (getuid () == 0)
-		return NULL;
-	
 	f = setmntent ("/etc/fstab", "r");
 	if (f == NULL)
 		return NULL;
@@ -152,6 +149,11 @@ is_block_device_mountable (char *mount_point)
 				continue;
 		}
 		
+		if (getuid () == 0){
+			retval = g_strdup (mnt->mnt_dir);
+			break;
+		}
+	
 		if (option_has_user (mnt->mnt_opts)){
 			retval = g_strdup (mnt->mnt_dir);
 			break;
