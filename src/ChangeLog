@@ -2,6 +2,12 @@
 
 	* complete.c (insert_text): Fix buffer overflow.
 
+	* cmd.[ch] [USE_INTERNAL_EDIT] (edit_syntax_cmd:) New dialog
+	to edit Syntax Highlighting definitions file. 
+	* main.c (CmdMenu) [USE_INTERNAL_EDIT]: Add 'Syntax file edit'
+	entry.
+	(process_args): Print mc's library directory to stdout.
+
 2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* man2hlp.c (handle_command): Handle backslash quoting

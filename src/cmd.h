@@ -39,6 +39,7 @@ void quick_view_cmd (void);
 void tree_view_cmd (void);
 void ext_cmd (void);
 void menu_edit_cmd (int select);
+void edit_syntax_cmd (void);
 void quick_chdir_cmd (void);
 void compare_dirs_cmd (void);
 void history_cmd (void);

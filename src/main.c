@@ -1202,7 +1202,8 @@ static menu_entry CmdMenu [] = {
     { ' ', N_("&Extension file edit"),          'E', ext_cmd },
     { ' ', N_("&Menu file edit"),               'M', menu_edit_cmd },
 #ifdef USE_INTERNAL_EDIT
-    {' ',  N_("Menu edi&Tor edit"),		'T', edit_user_menu_cmd}
+    {' ',  N_("Menu edi&Tor edit"),		'T', edit_user_menu_cmd},
+    {' ',  N_("&Syntax file edit"),		'S', edit_syntax_cmd}
 #endif /* USE_INTERNAL_EDIT */
 };
 
@@ -2320,7 +2321,7 @@ process_args (int c, const char *option_arg)
 	break;
 		
     case 'f':
-	fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
+	printf (_("Library directory for the Midnight Commander: %s\n"), mc_home);
 	finish_program = 1;
 	break;
 		
