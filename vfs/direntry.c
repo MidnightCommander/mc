@@ -787,7 +787,13 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
     fh->linear = 0;
 
     if (IS_LINEAR(flags)) {
-	fh->linear = LS_LINEAR_CLOSED;
+	if (MEDATA->linear_start) {
+	    print_vfs_message (_("Starting linear transfer..."));
+	    if (!MEDATA->linear_start (me, fh, 0)){
+		g_free(fh);
+		return NULL;
+	    }
+	}
     } else if ((MEDATA->fh_open) && (MEDATA->fh_open (me, fh, flags, mode))){
 	    g_free(fh);
 	    return NULL;
@@ -813,12 +819,6 @@ vfs_s_read (void *fh, char *buffer, int count)
 {
     int n;
     vfs *me = FH_SUPER->me;
-    
-    if (FH->linear == LS_LINEAR_CLOSED){
-        print_vfs_message (_("Starting linear transfer..."));
-	if (!MEDATA->linear_start (me, FH, 0))
-	    return -1;
-    }
 
     if (FH->linear == LS_LINEAR_CLOSED)
         vfs_die ("linear_start() did not set linear_state!");

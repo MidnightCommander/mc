@@ -1,3 +1,8 @@
+2002-05-17  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* direntry.c (vfs_s_read): Move MEDATA->linear_start() ...
+	* (vfs_s_open): ... here.
+
 2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* Makefile.am (noinst_LIBRARIES): Add samba/libsamba.a
