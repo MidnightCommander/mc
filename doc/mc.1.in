@@ -684,7 +684,7 @@ format. It displays the size of the files and for directories it just
 shows SUB-DIR or UP--DIR.
 .TP
 .B type
-displays a one character field type.  This character is similar to
+displays a one character wide type field.  This character is similar to
 what is displayed by ls with the -F flag -
 .B *
 for executable files,
@@ -877,8 +877,8 @@ preprocessing to the file.
 .PP
 .B Filtered View (M-!)
 .PP
-this command prompts for a command
-and it's arguments (the argument defaults to the currently selected
+This command prompts for a command
+and its arguments (the argument defaults to the currently selected
 file name), the output from such command is shown in the internal file
 viewer.
 .PP
@@ -1752,7 +1752,7 @@ but after that it will show help.  The same applies to the arrow keys.
 The Tab key should be working always.
 .PP
 If some keys do not work properly then you won't see OK appear after
-pressing that key.  Then you may want to redefine it.  Do it by pressing
+pressing one of these.  Then you may want to redefine it.  Do it by pressing
 the button with the name of that key (either by the mouse or by Enter
 or Space after selecting the button with Tab or arrows).  Then a message
 box will appear asking you to press that key.  Do it and wait until the
@@ -1935,7 +1935,7 @@ For example you could set your
 .B CDPATH
 variable to ~/src:/usr/src, allowing you to change your directory to
 any of the directories inside the ~/src and /usr/src directories, from
-any place in the file system by using it's relative name (for example
+any place in the file system by using its relative name (for example
 cd linux could take you to /usr/src/linux).
 .\"NODE "  Macro Substitution"
 .SH "  Macro Substitution"
@@ -2212,7 +2212,7 @@ directory or whether would you like to copy their content.
 Dive into subdirs tells what to do if in the target
 directory exists a directory with the same name as the
 file/directory being copied. The default action is to copy
-it's content into that directory, by enabling this
+its content into that directory, by enabling this
 you can copy the source directory into that directory.
 Perhaps an example will help:
 .PP
@@ -2311,7 +2311,7 @@ Some internal details about the viewer: On systems that provide the
 mmap(2) system call, the program maps the file instead of loading it;
 if the system does not provide the mmap(2) system call or the file
 matches an action that requires a filter, then the viewer will use
-it's growing buffers, thus loading only those parts of the file that
+its growing buffers, thus loading only those parts of the file that
 you actually access (this includes compressed files).
 .PP
 Here is a listing of the actions associated with each key that the
@@ -2500,7 +2500,7 @@ number are to be used in place of the first and second.
 It is advisable to use this feature with Prompt on replace on, because
 a match is thought to be found whenever the number of arguments found
 matches the number given, which is not always a real match. Scanf also
-treats whitespace as being elastic.  Note that the scanf format % is
+treats whitespace as being elastic.  Note that the scanf format %[ is
 very useful for scanning strings, and whitespace.
 .PP
 The editor also displays non-us characters (160+). When editing
@@ -2544,7 +2544,7 @@ again, only the subset will be shown in the listbox, otherwise the first
 item which matches all the previous characters will be highlighted. As soon
 as there is no ambiguity, dialog disappears, but you can hide it by
 canceling keys
-.B Esc,
+.BR Esc ,
 .B F10
 and left and right arrow keys. If
 .\"LINK2"
@@ -2709,7 +2709,7 @@ machine as that user, otherwise it will use your login name.
 .PP
 The
 .I port
-element is used when the remote machine running on a special port
+element is used when the remote server is running on a special port
 (see the mcserv(8) manual page for more information about ports);
 finally, if the
 .I remote-dir
@@ -2756,15 +2756,17 @@ directory to it using the cd command to a path name that looks like this:
 .I /#smb:[user@]machine[/service][/remote-dir]
 .PP
 The
-.I user, service
+.IR user ,
+.I service
 and
 .I remote-dir
 elements are optional.
 The
-.I user, domain
+.IR user ,
+.I domain
 and
 .I password
-can be specified in input dialog.
+can be specified in an input dialog.
 .PP
 Examples:
 .PP
@@ -3038,7 +3040,7 @@ and unused keys everywhere).
 .\"NODE "FILES"
 .SH "FILES"
 The program will retrieve all of its information relative to the
-MC_DATADIR environment variable, if this variable is not set, then it will
+MC_DATADIR environment variable; if this variable is not set, then it will
 fall back to the @prefix@/share/mc directory.
 .PP
 .I @prefix@/share/mc/mc.hlp
