@@ -132,7 +132,6 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/plain-gmc
 # %{prefix}/bin/gmc-client ?
 %{prefix}/lib/mc/layout
-%{prefix}/lib/mc/mc-gnome.ext
 %{prefix}/share/gnome/help/gmc/*
 %{prefix}/share/idl/*
 %{prefix}/share/mime-info/mc.keys
@@ -144,6 +143,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Mon Feb 26 2001 Pavel Roskin <proski@gnu.org>
+- Remove mc-gnome.ext.
+
 * Thu Jan 11 2001 Pavel Roskin <proski@gnu.org>
 - Include mcview.
 
