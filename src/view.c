@@ -516,7 +516,7 @@ set_view_init_error (WView *view, const char *msg)
 
 /* return values: NULL for success, else points to error message */
 static char *
-init_growing_view (WView *view, char *name, char *filename)
+init_growing_view (WView *view, const char *name, const char *filename)
 {
     char *err_msg = NULL;
 
@@ -605,7 +605,7 @@ load_view_file (WView *view, int fd)
 
 /* Return zero on success, -1 on failure */
 static int
-do_view_init (WView *view, char *_command, const char *_file,
+do_view_init (WView *view, const char *_command, const char *_file,
 	      int start_line)
 {
     char *error = 0;
@@ -758,7 +758,7 @@ view_update_bytes_per_line (WView *view)
 /* Both views */
 /* Return zero on success, -1 on failure */
 int
-view_init (WView *view, char *_command, const char *_file, int start_line)
+view_init (WView *view, const char *_command, const char *_file, int start_line)
 {
     if (!view->view_active || strcmp (_file, view->filename)
 	|| altered_magic_flag)
@@ -2623,7 +2623,7 @@ view_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 
 /* Real view only */
 int
-view (char *_command, const char *_file, int *move_dir_p, int start_line)
+view (const char *_command, const char *_file, int *move_dir_p, int start_line)
 {
     int error;
     WView *wview;

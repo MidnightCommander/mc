@@ -1,5 +1,11 @@
 2003-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* view.c (view_init): Constify "_command" argument.
+	(view): Likewise.
+	(do_view_init): Likewise.
+	(init_growing_view): Constify "name" and "filename" args.
+	* view.h: Fix declarations and comment.
+
 	* user.c (execute_menu_command: Fix rare segmentation violation
 	if last line in menu file contain space(s) only and no trailing
 	newline.

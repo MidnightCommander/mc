@@ -6,15 +6,15 @@ typedef struct WView WView;
 
 /* Creation/initialization of a new view widget */
 WView *view_new (int y, int x, int cols, int lines, int is_panel);
-int view_init (WView *view, char *_command, const char *_file,
+int view_init (WView *view, const char *_command, const char *_file,
 	       int start_line);
 
 void view_update_bytes_per_line (WView *view);
 
-/* Command: view a file, if _command != NULL we use popen on _command */
-/* move direction should be apointer that will hold the direction in which the user */
-/* wants to move (-1 previous file, 1 next file, 0 do nothing) */
-int view (char *_command, const char *_file, int *move_direction,
+/* Command: view a _file, if _command != NULL we use popen on _command */
+/* move direction should be a pointer that will hold the direction in which */
+/* the user wants to move (-1 previous file, 1 next file, 0 do nothing) */
+int view (const char *_command, const char *_file, int *move_direction,
 	  int start_line);
 
 extern int mouse_move_pages_viewer;
