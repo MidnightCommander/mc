@@ -747,7 +747,7 @@ msgstr "Opzioni globali"
 
 #: gnome/glayout.c:418
 msgid "_Find File..."
-msgstr "Trova _File"
+msgstr "_Cerca File"
 
 #: gnome/glayout.c:418
 msgid "Locate files on disk"
@@ -772,7 +772,7 @@ msgstr "Esegui un Comando"
 
 #: gnome/glayout.c:425
 msgid "_Run Command in panel..."
-msgstr "Esegui comando nel pannello"
+msgstr "_Esegui comando nel pannello"
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
@@ -800,7 +800,7 @@ msgstr "Ri-legge dispositivi"
 
 #: gnome/glayout.c:461 gnome/glayout.c:471
 msgid "_Layout"
-msgstr "Aspetto"
+msgstr "As_petto"
 
 #: gnome/glayout.c:462 gnome/glayout.c:472
 msgid "_Commands"
