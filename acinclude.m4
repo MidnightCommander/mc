@@ -684,17 +684,14 @@ dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
 dnl
 AC_DEFUN([MC_WITH_SLANG], [
     with_screen=slang
-    ac_save_MCLIBS="$MCLIBS"
 
     dnl Check the header
-    if test x$with_screen = xslang; then
-	slang_h_found=
-	AC_CHECK_HEADERS([slang.h slang/slang.h],
-			 [slang_h_found=yes; break])
+    slang_h_found=
+    AC_CHECK_HEADERS([slang.h slang/slang.h],
+		     [slang_h_found=yes; break])
 
-	if test -z "$slang_h_found"; then
-	    with_screen=mcslang
-	fi
+    if test -z "$slang_h_found"; then
+	with_screen=mcslang
     fi
 
     dnl Check if the installed S-Lang library uses termcap
@@ -705,31 +702,30 @@ AC_DEFUN([MC_WITH_SLANG], [
 		  [Define to use S-Lang library installed on the system])
 	ac_save_LIBS="$LIBS"
 	LIBS="$LIBS -lslang"
-	AC_TRY_LINK([ 
-	#ifdef HAVE_SLANG_SLANG_H
-	#include <slang/slang.h>
-	#else
-	#include <slang.h>
-	#endif],
-	[SLtt_get_terminfo();
-	SLtt_tgetflag("");], 
-	[LIBS="$ac_save_LIBS"],
-	[LIBS="$ac_save_LIBS"; MC_USE_TERMCAP
-	 ac_save_MCLIBS="$MCLIBS"])
-        _MC_WITH_XSLANG
-    fi
+	AC_TRY_LINK([
+		     #ifdef HAVE_SLANG_SLANG_H
+		     #include <slang/slang.h>
+		     #else
+		     #include <slang.h>
+		     #endif
+		    ],
+		    [SLtt_get_terminfo(); SLtt_tgetflag("");],
+		    [LIBS="$ac_save_LIBS"],
+		    [LIBS="$ac_save_LIBS"; MC_USE_TERMCAP])
 
-    if test x$with_screen = xslang; then
-	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
-		     [with_screen=mcslang], ["$MCLIBS"])
-    fi
-
-    dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
-    m4_if([$1], strict, ,
-	  [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
-			[AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
+	dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
+	m4_if([$1], strict, ,
+	      [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
+	    		    [AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
 it doesn't work well])
-			with_screen=mcslang])])
+	      with_screen=mcslang])])
+
+	dnl Check the library
+	if test x$with_screen = xslang; then
+	    AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
+			 [with_screen=mcslang], ["$MCLIBS"])
+	fi
+    fi
 
     m4_if([$1], strict,
 	[if test $with_screen != slang; then
@@ -738,9 +734,7 @@ it doesn't work well])
 	[MC_WITH_MCSLANG]
     )
 
-    if test x$with_screen != xslang; then
-	MCLIBS="$ac_save_MCLIBS"
-    fi
+    _MC_WITH_XSLANG
 ])
 
 

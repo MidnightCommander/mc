@@ -1,15 +1,66 @@
-After version 4.6.0.
+Version 4.6.1-pre2.
 
-Add --with-glib12 option to configure to force using glib 1.2.x.
-Add --disable-background option to disable background support.
-Background support now uses pipes instead of UNIX sockets.
-libX11 is loaded dynamically using gmodule if possible.
-Screen saving is now supported on FreeBSD console.
-Support for SCO UNIX has been removed.
-User is warned if one mc is run from another.
-VFS supports iso9660 images.
-New translations: Mongolian, Serbian and Lithuanian.
+Release candidate for 4.6.1.
 
+- Security.
+	- Fixed CAN-2004-0226 (buffer overflows).
+	- Fixed CAN-2004-0231 (unsafe temporary file and directory creation).
+	- Fixed CAN-2004-0232 (format string vulnerablities).
+	- cons.saver does not need to be setuid-root on Linux.
+	- Hiding of FTP passwords.
+
+- Portability.
+	- PC port has been removed.
+	- Support for SCO UNIX has been removed.
+	- Improve support for QNX Neutrino.
+
+- Core functionality.
+	- Use 8bit input as default.
+	- Better support for '@' in FTP usernames.
+	- Better large file support (int -> off_t)
+	- Add gnome, rxvt and xterm-new terminals (keyword copy for mc.lib).
+	- Make the find dialog more responsive while scanning through large files.
+	- Add implementation to cons.handler for FreeBSD 4.x and 5.x.
+	- Screen saving is now supported on FreeBSD console.
+	- Hide temporary commands from history.
+	- Add --with-glib12 option to configure to force using glib 1.2.x.
+	- Add --disable-background option to disable background support.
+	- Background support now uses pipes instead of UNIX sockets.
+	- libX11 is loaded dynamically using gmodule if possible.
+	- User is warned if one mc is run from another.
+
+- Screen libraries.
+	- Add many boundary check into internal slang library.
+	- Internal slang upgrade to 1.4.9.
+	- Increased maximum screen size to 512 x 512.
+	- Add support for qansi-m terminals.
+
+- Editor.
+	- Fix bugs for mcedit compiled with ncurses.
+	- New status string format in mcedit.
+	- Support for large syntax files.
+	- Temporarily disable safe save and backups on remote VFS because it doesn't work.
+	- Enable user menu in mcedit.
+	- Add syntax file for the ASP.NET technology.
+	- Add syntax file for the Eiffel programming language.
+	- Add syntax file for the Ruby programming language.
+	- Add syntax file for the C# programming language.
+	- Upgrade php.syntax file.
+	- Improve sql.syntax file.
+	- Improve perl.syntax.
+	- Improve diff.syntax.
+	- Improve makefile.syntax.
+
+- VFS.
+	- Full audit of quoting of parameters in vfs scripts (CAN-2004-0494).
+	- Fixed CAN-2003-1023 (stack overflow in vfs_s_resolve_symlink).
+	- Various fixes in tar.c.
+	- VFS supports iso9660 images.
+
+- Translations.
+	- New translations: Mongolian, Serbian and Lithuanian.
+	- Updated translations: Ukrainian, Italian, Hungarian.
+ 
 Version 4.6.0.
 
 - Core functionality.
