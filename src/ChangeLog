@@ -1,3 +1,24 @@
+1999-09-19  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* user.c (check_patterns): char* is used instead of char [] in sizeof
+
+	* util.c (string_perm): prefix named pipes by 'p' and not by `s'
+
+1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* mad.c, mad.h, util.c, util.h: Move mad-functions from util.[ch]
+	to mad.[ch]
+
+	* option.c: Include files reordered in order to make it compile with
+	--with-debug 
+
+	* mad.c (mad_init): New function. Initialize debug FILE pointer to
+	stderr (moved to a function because not on every system stderr is
+	a constant).
+	(mad_set_debug): added const qualifier
+
+	* main.c (main): call mad_init
+
 1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* widget.[ch] (input_new): added const qualifier

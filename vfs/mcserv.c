@@ -1311,35 +1311,5 @@ void vfs_die( char *m )
 {
     fprintf (stderr, m);
 	exit (1);
-    }
-#ifdef HAVE_MAD
-char * mad_strconcat (const char *first, ...)
-{
-    va_list ap;
-    long len;
-    char *data, *result;
-
-    if (!first)
-	return 0;
-    
-    len = strlen (first) + 1;
-    va_start (ap, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	len += strlen (data);
-
-    result = g_malloc (len);
-    
-    va_end (ap);
-
-    va_start (ap, first);
-    strcpy (result, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	strcat (result, data);
-
-    va_end (ap);
-
-    return result;
 }
-#endif /* HAVE_MAD */
+

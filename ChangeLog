@@ -1,3 +1,25 @@
+1999-09-19  David Martin <dmartina@usa.net>
+
+	* gtkedit/editcmd.c (edit_print_string): Use unsigned char so that 
+	8 bit chars from strftime get displayed when inserting date.
+
+	* lib/mc.ext.in: Add entries for bzip2 compressed pages as used in 
+	Mandrake 6.0. The generic entry for bzip2 moved to the end of the 
+	file to avoid interferences. In this one I changed the extension check 
+	to a type check (as used for gzip) which might give problems in some 
+	systems.
+
+	* configure.in: Use -Tlatin1 to format man pages when available and 
+	"view" 8 bit chars.
+
+1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* gtkedit/edit.h: Include file reordering to make it compile with
+	--with-debug
+
+	* gtkedit/editcmd.c (menu_save_mode_cmd): calculate dialog width
+	dependent on lenght of translated strings to display.
+
 1999-09-16  Owen Taylor  <otaylor@redhat.com>
 
 	* Remove the magicdev autoconf test in favor of just

@@ -582,19 +582,26 @@ fi
 AC_SUBST(MANDOC)
 
 dnl
-dnl Check if nroff accepts -Tascii
+dnl Check if nroff accepts -Tlatin1 or -Tascii
 dnl
 if $HAVE_nroff; then
-    AC_MSG_CHECKING(If nroff accepts -Tascii)
+    AC_MSG_CHECKING(if nroff accepts -Tlatin1 or -Tascii)
     AC_CACHE_VAL(ac_cv_nroff_tascii, [
-    nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
+    nroff -Tlatin1 < /dev/null > /dev/null 2>&1 /dev/null
     if test $? = 0
     then
-	ac_cv_nroff_tascii=" -Tascii"
+	ac_cv_nroff_tascii=" -Tlatin1"
         AC_MSG_RESULT(yes)
     else
-	ac_cv_nroff_tascii=""
-        AC_MSG_RESULT(no)
+        nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
+        if test $? = 0
+        then
+	    ac_cv_nroff_tascii=" -Tascii"
+            AC_MSG_RESULT(yes)
+        else
+    	    ac_cv_nroff_tascii=""
+    	    AC_MSG_RESULT(no)
+	fi
     fi
     ])
 fi

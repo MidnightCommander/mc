@@ -5590,7 +5590,7 @@ msgstr ""
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Érvénytelen shell minta defininíció \"%c\". "
 
 #: src/user.c:394

@@ -5592,7 +5592,7 @@ msgstr ""
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Chybná definice vzoru shellu \"%c\". "
 
 #: src/user.c:394

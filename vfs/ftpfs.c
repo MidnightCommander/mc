@@ -1817,7 +1817,7 @@ static int ftpfs_rmdir (vfs *me, char *path)
     return send_ftp_command(path, "RMD %s", OPT_FLUSH);
 }
 
-void ftpfs_set_debug (char *file)
+void ftpfs_set_debug (const char *file)
 {
     logfile = fopen (file, "w+");
 }

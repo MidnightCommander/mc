@@ -127,21 +127,6 @@ shell/.tar
 	Extract=tar xf %f
 	Icon=tar.xpm
 
-# bzipped
-regex/\.bz$
-	Open=bzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip %f
-	Icon=compressed.xpm
-
-regex/\.bz2$
-	Open=bzip2 -dc %f | %var{PAGER:more}
-	View=%view{ascii} bzip2 -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
-	Uncompress=bunzip2 %f
-	Icon=compressed.xpm
-
 # Programs
 shell/rm
 	Open=if test ! -d ~/.trash; then mkdir ~/.trash; fi; I=%{Enter file to be safely deleted}; if test -n "$I"; then mv -f -b -V numbered %q ~/.trash; fi
@@ -369,8 +354,18 @@ shell/.ms
 
 # Manual page - compressed
 regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.g?[Zz]$
-	Open=gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
-	View=%view{ascii,nroff} gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Open=gzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} gzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Icon=man.xpm
+
+regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz$
+	Open=bzip -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} bzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	Icon=man.xpm
+
+regex/([^0-9]|^[^\.]*)\.([1-9][a-z]?|n)\.bz2$
+	Open=bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@ | %var{PAGER:more}
+	View=%view{ascii,nroff} bzip2 -dc %f | nroff @TROFFASCII@ @MANDOC@
 	Icon=man.xpm
 
 regex/(read\.?me$)|(README)
@@ -464,20 +459,6 @@ type/mail
 	Open=elm -f %f
 	Icon=mail.xpm
 	View=%view{ascii} mcmfmt < %f
-
-# gzipped
-type/gzip
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Uncompress=gunzip %f
-	Icon=compressed.xpm
-
-type/compress
-	Open=gzip -dc %f | %var{PAGER:more}
-	View=%view{ascii} gzip -dc %f 2>/dev/null
-	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
-	Icon=compressed.xpm
 
 # Makefile
 regex/[Mm]akefile
@@ -581,6 +562,35 @@ shell/.mp3
 regex/\.trpm$
 	Open=%cd trpm:%p
 	View=%view{ascii} rpm -qivl --scripts `basename %p .trpm`
+
+# gzipped
+type/gzip
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
+	Uncompress=gunzip %f
+	Icon=compressed.xpm
+
+# bzipped
+type/bzip2
+	Open=bzip2 -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip2 -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; bzip2 -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip2 -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
+	Uncompress=bunzip2 %f
+	Icon=compressed.xpm
+
+type/bzip
+	Open=bzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} bzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; bzip -cd %f >/tmp/bzed.$I && %var{EDITOR:vi} /tmp/bzed.$I && bzip -c /tmp/bzed.$I > %f; rm -f /tmp/bzed.$I
+	Uncompress=bunzip %f
+	Icon=compressed.xpm
+
+type/compress
+	Open=gzip -dc %f | %var{PAGER:more}
+	View=%view{ascii} gzip -dc %f 2>/dev/null
+	Edit=I=`date +%%s`; export I; gzip -cd %f >/tmp/gzed.$I && %var{EDITOR:vi} /tmp/gzed.$I && gzip -c /tmp/gzed.$I > %f; rm -f /tmp/gzed.$I
+	Icon=compressed.xpm
 
 # Default target for anything not described above
 default/*

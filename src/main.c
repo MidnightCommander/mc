@@ -2949,6 +2949,7 @@ main (int argc, char *argv [])
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);
     textdomain ("mc");
+    mad_init ();
 #if 0
     /* This is here to debug startup stuff */
     {

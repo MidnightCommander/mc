@@ -1,3 +1,10 @@
+1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (ftpfs_set_debug), vfs.h: added const qualifier.
+
+	* mcserv.c: removed definition of mad_strconcat which is also
+	in mad.c.
+
 1999-09-17  Federico Mena Quintero  <federico@redhat.com>
 
 	* smbfs.c: #define NO_CONFIG_H before including the samba

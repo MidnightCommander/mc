@@ -5575,7 +5575,7 @@ msgstr ""
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr " 無效的系統殼萬用字元定義 \"%c\". "
 
 #: src/user.c:394

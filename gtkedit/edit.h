@@ -115,6 +115,7 @@
 
 #else
 
+#    include "src/global.h"
 #    include "src/main.h"		/* for char *shell */
 #    include "src/mad.h"
 #    include "src/dlg.h"
@@ -122,7 +123,6 @@
 #    include "src/color.h"
 #    include "src/dialog.h"
 #    include "src/mouse.h"
-#    include "src/global.h"
 #    include "src/help.h"
 #    include "src/key.h"
 #    include "src/wtools.h"		/* for QuickWidgets */

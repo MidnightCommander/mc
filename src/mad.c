@@ -66,11 +66,17 @@ typedef struct {
 } mad_mem_area;
 
 static mad_mem_area mem_areas [MAD_MAX_AREAS];
-static FILE *memlog = stderr;
+static FILE *memlog;
 
 void *watch_free_pointer = 0;
 
-void mad_set_debug (char *file)
+void 
+mad_init (void)
+{
+    memlog = stderr;
+}
+
+void mad_set_debug (const char *file)
 {
     if((memlog=fopen (file, "w+")) == NULL)
 	memlog = stderr;
@@ -297,4 +303,64 @@ void mad_finalize (char *file, int line)
 #endif
 }
 
+char *
+mad_strconcat (const char *first, ...)
+{
+    va_list ap;
+    long len;
+    char *data, *result;
+
+    if (!first)
+	return 0;
+    
+    len = strlen (first) + 1;
+    va_start (ap, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	len += strlen (data);
+
+    result = g_malloc (len);
+    
+    va_end (ap);
+
+    va_start (ap, first);
+    strcpy (result, first);
+
+    while ((data = va_arg (ap, char *)) != 0)
+	strcat (result, data);
+
+    va_end (ap);
+
+    return result;
+}
+
+/* This two functions grabbed from GLib's gstrfuncs.c */
+char*
+mad_strdup_vprintf (const char *format, va_list args1)
+{
+  char *buffer;
+  va_list args2;
+
+  G_VA_COPY (args2, args1);
+
+  buffer = g_new (char, g_printf_string_upper_bound (format, args1));
+
+  vsprintf (buffer, format, args2);
+  va_end (args2);
+
+  return buffer;
+}
+
+char*
+mad_strdup_printf (const char *format, ...)
+{
+  char *buffer;
+  va_list args;
+
+  va_start (args, format);
+  buffer = g_strdup_vprintf (format, args);
+  va_end (args);
+
+  return buffer;
+}
 #endif /* HAVE_MAD */

@@ -180,7 +180,7 @@ struct utimbuf {
     void vfs_fill_names (void (*)(char *));
     char *vfs_translate_url (char *);
 
-    void ftpfs_set_debug (char *file);
+    void ftpfs_set_debug (const char *file);
 #ifdef USE_NETCODE
     void ftpfs_hint_reread(int reread);
     void ftpfs_flushdir(void);

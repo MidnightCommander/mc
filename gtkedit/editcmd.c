@@ -326,7 +326,6 @@ int edit_save_file (WEdit * edit, const char *filename)
  */
 void menu_save_mode_cmd (void)
 {
-#define DLG_X 38
 #define DLG_Y 10
     static char *str_result;
     static int save_mode_new;
@@ -337,29 +336,52 @@ void menu_save_mode_cmd (void)
 	N_("Do backups -->")};
     static QuickWidget widgets[] =
     {
-	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
+	{quick_button, 18, 0, 7, DLG_Y, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "c"},
-	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
+	{quick_button, 6, 0, 7, DLG_Y, N_("&Ok"), 0,
 	 B_ENTER, 0, 0, XV_WLAY_DONTCARE, "o"},
-	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
+	{quick_input, 23, 0, 5, DLG_Y, 0, 9,
 	 0, 0, &str_result, XV_WLAY_DONTCARE, "i"},
-	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
+	{quick_label, 23, 0, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, XV_WLAY_DONTCARE, "savemext"},
-	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
+	{quick_radio, 4, 0, 3, DLG_Y, "", 3,
 	 0, &save_mode_new, str, XV_WLAY_DONTCARE, "t"},
 	{0}};
     static QuickDialog dialog =
 /* NLS ? */
-    {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
+    {0, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      "esm", widgets};
     static int i18n_flag = 0;
 
     if (!i18n_flag) {
         int i;
+	int maxlen = 0;
+	int dlg_x;
+	int l1;
+
+	/* Ok/Cancel buttons */
+	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
+	maxlen = max (maxlen, l1);
         
-        for (i = 0; i < 3; i++ )
+        for (i = 0; i < 3; i++ ) {
             str[i] = _(str[i]);
+	    maxlen = max (maxlen, strlen (str[i]) + 7);
+	}
         i18n_flag = 1;
+
+        dlg_x = maxlen + strlen (_(widgets[3].text)) + 5 + 1;
+        widgets[2].hotkey_pos = strlen (_(widgets[3].text)); /* input field length */
+        dlg_x = min (COLS, dlg_x);
+	dialog.xlen = dlg_x;
+
+        i = (dlg_x - l1)/3;
+	widgets[1].relative_x = i;
+	widgets[0].relative_x = i + strlen (_(widgets[1].text)) + i + 4;
+
+	widgets[2].relative_x = widgets[3].relative_x = maxlen + 2;
+
+	for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
+		widgets[i].x_divisions = dlg_x;
     }
 
     widgets[2].text = option_backup_ext;
@@ -2828,7 +2850,7 @@ int edit_print_string (WEdit * e, const char *s)
 {
     int i = 0;
     while (s[i])
-	edit_execute_cmd (e, -1, s[i++]);
+	edit_execute_cmd (e, -1, (unsigned char) s[i++]);
     e->force |= REDRAW_COMPLETELY;
     edit_update_screen (e);
     return i;

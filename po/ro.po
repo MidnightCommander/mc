@@ -5707,7 +5707,7 @@ msgstr " Nu pot scrie în fiºierul destinaşie local "
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr ""
 
 #: src/user.c:394

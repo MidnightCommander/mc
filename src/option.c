@@ -26,9 +26,8 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
+#include "global.h"
 #include "tty.h"
-#include "mad.h"
-#include "util.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

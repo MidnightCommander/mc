@@ -5594,7 +5594,7 @@ msgstr ""
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr " \"%c\"는 알수 없는 명령해석기 패턴입니다. "
 
 #: src/user.c:394

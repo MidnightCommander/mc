@@ -211,7 +211,7 @@ CLIENTOBJS = 			\
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
-$(MAGICDEV_GENERATED): magicdev.idl
+$(MAGICDEV_GENERATED): $(srcdir)/magicdev.idl
 	orbit-idl `gnome-config --cflags idl` --noskels $(srcdir)/magicdev.idl
 
 FileManager-impl.c: FileManager.h

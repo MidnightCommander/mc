@@ -328,7 +328,7 @@ char *string_perm (mode_t mode_bits)
     if (ismode (mode_bits, S_IFBLK)) mode [0] = 'b';
     if (ismode (mode_bits, S_ISVTX)) mode [9] = (mode [9] == 'x') ? 't' : 'T';
     if (ismode (mode_bits, S_IFLNK)) mode [0] = 'l';
-    if (ismode (mode_bits, S_IFIFO)) mode [0] = 's';
+    if (ismode (mode_bits, S_IFIFO)) mode [0] = 'p';
 #endif
     return mode;
 }
@@ -1271,64 +1271,3 @@ concat_dir_and_file (const char *dir, const char *file)
 	return  g_strconcat (dir, PATH_SEP_STR, file, NULL);
 }
 
-#ifdef HAVE_MAD
-char *mad_strconcat (const char *first, ...)
-{
-    va_list ap;
-    long len;
-    char *data, *result;
-
-    if (!first)
-	return 0;
-    
-    len = strlen (first) + 1;
-    va_start (ap, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	len += strlen (data);
-
-    result = g_malloc (len);
-    
-    va_end (ap);
-
-    va_start (ap, first);
-    strcpy (result, first);
-
-    while ((data = va_arg (ap, char *)) != 0)
-	strcat (result, data);
-
-    va_end (ap);
-
-    return result;
-}
-
-/* This two functions grabbed from GLib's gstrfuncs.c */
-char*
-mad_strdup_vprintf (const char *format, va_list args1)
-{
-  char *buffer;
-  va_list args2;
-
-  G_VA_COPY (args2, args1);
-
-  buffer = g_new (char, g_printf_string_upper_bound (format, args1));
-
-  vsprintf (buffer, format, args2);
-  va_end (args2);
-
-  return buffer;
-}
-
-char*
-mad_strdup_printf (const char *format, ...)
-{
-  char *buffer;
-  va_list args;
-
-  va_start (args, format);
-  buffer = g_strdup_vprintf (format, args);
-  va_end (args);
-
-  return buffer;
-}
-#endif /* HAVE_MAD */

@@ -41,16 +41,6 @@ char *g_readlink (char *path);
 
 extern int align_extensions;
 
-#ifdef HAVE_MAD
-char *mad_strconcat (const char *first, ...);
-char *mad_strdup_printf (const char *format, ...);
-char *mad_strdup_vprintf (const char *format, va_list args);
-
-#define g_strconcat		mad_strconcat
-#define g_strdup_printf		mad_strdup_printf
-#define g_strdup_vprintf	mad_strdup_vprintf
-#endif
-
 /* Profile managing functions */
 int set_int (char *, char *, int);
 int get_int (char *, char *, int);

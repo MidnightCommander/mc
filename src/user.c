@@ -246,19 +246,19 @@ char *expand_format (char c, int quote)
     return g_strdup ("");
 }
 
-/* Checks for shell patterns defination */
+/* Checks for shell patterns definition */
 char *check_patterns (char *p)
 {
-    const char *def_name = "shell_patterns=";
+    static const char def_name [] = "shell_patterns=";
     int value;
 
-    if (strncmp (p, def_name, sizeof (def_name)) == 0){
-	p += strlen (def_name);
+    if (strncmp (p, def_name, sizeof (def_name) - 1) == 0){
+	p += sizeof (def_name) - 1;
 	value = *p++ - '0';
 	if (value == 0 || value == 1)
 	    easy_patterns = value;
 	else
-	    message (1, MSG_ERROR, _(" Invalid shell pattern defination \"%c\". "), value + '0');
+	    message (1, MSG_ERROR, _(" Invalid shell pattern definition \"%c\". "), value + '0');
     }
     while (*p == '\n' || *p == '\t' || *p == ' ') p++;
     return p;

@@ -5628,7 +5628,7 @@ msgstr "Impossible d'écrire dans le fichier %s :\n"
 
 #: src/user.c:261
 #, c-format
-msgid " Invalid shell pattern defination \"%c\". "
+msgid " Invalid shell pattern definition \"%c\". "
 msgstr "Définition d'un motif de shell invalide \"%c\". "
 
 #: src/user.c:394
