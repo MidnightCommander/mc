@@ -1,3 +1,7 @@
+Fri Sep 11 15:27:59 1998  Pavel Machek <pavel@ucw.cz>
+
+	* screen.c: make cd .. from extfs file highlight it
+
 Tue Sep  8 13:10:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* autogen.sh: Don't destroy aclocal.m4 if "macros" directory
