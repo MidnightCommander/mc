@@ -12,8 +12,8 @@ mime_type_capplet_SOURCES = mime-type-capplet.c\
 	new-mime-window.h new-mime-window.c
 
 mime_type_capplet_LDADD = ../../control-center/libcapplet.la \
-			     $(GNOME_LIBDIR) $(ORB_LIBS) \
-			     $(GNOMEUI_LIBS) $(INTLLIBS) -lgnorba
+			     $(GNOME_LIBS) $(ORBIT_LIBS) \
+			     $(GNOMEUI_LIBS) $(INTLLIBS)
 
 EXTRA_DIST = \
 	mime-type.desktop
