@@ -1117,7 +1117,7 @@ msgstr "Filstorlek: inte tillgänglig"
 
 #: gnome/gnome-file-property-dialog.c:277
 msgid "File Created on: "
-msgstr "Filen skapades den: "
+msgstr "Filen skapades: "
 
 #: gnome/gnome-file-property-dialog.c:281
 #: gnome/gnome-file-property-dialog.c:290
