@@ -1,3 +1,7 @@
+2004-10-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* myslang.h: Check USE_INCLUDED_SLANG properly.
+
 2004-10-11  Roland Illig  <roland.illig@gmx.de>
 
 	* utilunix.c (close_error_pipe): Fixed possible invalid memory access
