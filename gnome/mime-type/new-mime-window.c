@@ -1,6 +1,7 @@
 #include "new-mime-window.h"
-
+#include "capplet-widget.h"
 static GtkWidget *add_dialog = NULL;
+extern GtkWidget *capplet;
 
 /*Public functions */
 void
@@ -17,7 +18,7 @@ launch_new_mime_window (void)
 	GtkWidget *table;
 	
         add_dialog = gnome_dialog_new (_("Add Mime Type"), GNOME_STOCK_BUTTON_OK, GNOME_STOCK_BUTTON_CANCEL, NULL);
-	label = gtk_label_new (_("Add a new Mime Type\n\nFor example: image/png"));
+	label = gtk_label_new (_("Add a new Mime Type\nFor example:  image/tiff; text/x-scheme"));
 	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
@@ -88,7 +89,13 @@ launch_new_mime_window (void)
         gtk_widget_show_all (GNOME_DIALOG (add_dialog)->vbox);
         switch (gnome_dialog_run (GNOME_DIALOG (add_dialog))) {
         case 0:
-                
+		capplet_widget_state_changed (CAPPLET_WIDGET (capplet),
+					      TRUE);
+                add_new_mime_type (gtk_entry_get_text (GTK_ENTRY (mime_entry)),
+				   gtk_entry_get_text (GTK_ENTRY (ext_entry)),
+				   gtk_entry_get_text (GTK_ENTRY (regex1_entry)),
+				   gtk_entry_get_text (GTK_ENTRY (regex2_entry)));
+				   
         case 1:
                 gtk_widget_destroy (add_dialog);
         default:;

@@ -11,6 +11,5 @@ void launch_edit_window (MimeInfo *mi);
 void initialize_main_win_vals (void);
 void hide_edit_window (void);
 void show_edit_window (void);
-void edit_clicked (void);
 
 #endif

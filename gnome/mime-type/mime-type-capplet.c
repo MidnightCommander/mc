@@ -38,11 +38,13 @@ static void
 try_callback ()
 {
         write_user_keys ();
+        write_user_mime ();
 }
 static void
 revert_callback ()
 {
         write_initial_keys ();
+        write_initial_mime ();
         discard_mime_info ();
         initialize_main_win_vals ();
 }

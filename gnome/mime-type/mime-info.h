@@ -13,5 +13,4 @@ void set_mime_key_value (gchar *mime_type, gchar *key, gchar *value);
 const char * local_mime_get_value (const char *mime_type, char *key);
 void write_user_keys (void);
 void write_initial_keys (void);
-
 #endif

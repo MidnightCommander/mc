@@ -14,6 +14,11 @@
 #include "mime-data.h"
 #include "mime-info.h"
 #include "new-mime-window.h"
+#include <sys/stat.h>
+#include <unistd.h>
+#include <errno.h>
+
+
 /* Prototypes */
 static void mime_fill_from_file (const char *filename, gboolean init_user);
 static void mime_load_from_dir (const char *mime_info_dir, gboolean system_dir);
@@ -57,7 +62,7 @@ add_to_key (char *mime_type, char *def, GHashTable *table)
 	char *s, *p, *ext;
 	int used;
 	MimeInfo *info;
-        
+
 	info = g_hash_table_lookup (table, (const void *) mime_type);
 	if (info == NULL) {
 		info = g_malloc (sizeof (MimeInfo));
@@ -341,3 +346,121 @@ init_mime_type (void)
 	g_free (mime_info_dir);
         init_mime_info ();
 }
+void
+add_new_mime_type (gchar *mime_type, gchar *ext, gchar *regexp1, gchar *regexp2)
+{
+        gchar *temp;
+        MimeInfo *mi;
+        /* first we make sure that the information is good */
+
+        /* passed check, now we add it. */
+        if (ext) {
+                temp = g_strconcat ("ext: ", ext, NULL);
+                add_to_key (mime_type, temp, user_mime_types);
+                mi = (MimeInfo *) g_hash_table_lookup (user_mime_types, mime_type);
+                mi->ext_readable[0] = g_strdup (ext);
+                g_free (temp);
+        }
+        if (regexp1) {
+                temp = g_strconcat ("regex: ", regexp1, NULL);
+                add_to_key (mime_type, temp, user_mime_types);
+                g_free (temp);
+        }
+        if (regexp2) {
+                temp = g_strconcat ("regex,2: ", regexp2, NULL);
+                add_to_key (mime_type, temp, user_mime_types);
+                g_free (temp);
+        }
+}
+static void
+write_mime_foreach (gpointer mime_type, gpointer info, gpointer data)
+{
+	gchar *buf;
+	MimeInfo *mi = (MimeInfo *) info;
+        g_print ("in write_mime_foreach:%s:\n", (gchar *) mime_type);
+	fwrite ((char *) mi->mime_type, 1, strlen ((char *) mi->mime_type), (FILE *) data);
+	fwrite ("\n", 1, 1, (FILE *) data);
+        if (mi->ext_readable[0]) {
+                fwrite ("\text: ", 1, strlen ("\text: "), (FILE *) data);
+                fwrite (mi->ext_readable[0], 1,
+                        strlen (mi->ext_readable[0]),
+                        (FILE *) data);
+                fwrite ("\n", 1, 1, (FILE *) data);
+        }
+        if (mi->regex_readable[0]) {
+                fwrite ("\tregex: ", 1, strlen ("\tregex: "), (FILE *) data);
+                fwrite (mi->regex_readable[0], 1,
+                        strlen (mi->regex_readable[0]),
+                        (FILE *) data);
+                fwrite ("\n", 1, 1, (FILE *) data);
+        }
+        if (mi->regex_readable[1]) {
+                fwrite ("\tregex,2: ", 1, strlen ("\tregex,2: "), (FILE *) data);
+                fwrite (mi->regex_readable[1], 1,
+                        strlen (mi->regex_readable[1]),
+                        (FILE *) data);
+                fwrite ("\n", 1, 1, (FILE *) data);
+        }
+        fwrite ("\n", 1, 1, (FILE *) data);
+}
+
+static void
+run_error (gchar *message)
+{
+	GtkWidget *error_box;
+
+	error_box = gnome_message_box_new (
+		message,
+		GNOME_MESSAGE_BOX_ERROR,
+		GNOME_STOCK_BUTTON_OK,
+		NULL);
+	gnome_dialog_run_and_close (GNOME_DIALOG (error_box));
+}
+static void
+write_mime (GHashTable *hash)
+{
+	struct stat s;
+	gchar *dirname, *filename;
+	FILE *file;
+	GtkWidget *error_box;
+
+	dirname = g_concat_dir_and_file (gnome_util_user_home (), ".gnome/mime-info");
+	if ((stat (dirname, &s) < 0) || !(S_ISDIR (s.st_mode))){
+		if (errno == ENOENT) {
+			if (mkdir (dirname, S_IRWXU) < 0) {
+				run_error ("We are unable to create the directory\n"
+					   "~/.gnome/mime-info\n\n"
+					   "We will not be able to save the state.");
+				return;
+			}
+		} else {
+			run_error ("We are unable to access the directory\n"
+				   "~/.gnome/mime-info\n\n"
+				   "We will not be able to save the state.");
+			return;
+		}
+	}
+	filename = g_concat_dir_and_file (dirname, "user.mime");
+        
+        remove (filename);
+	file = fopen (filename, "w");
+	if (file == NULL) {
+		run_error (_("Cannot create the file\n~/.gnome/mime-info/user.mime\n\n"
+			     "We will not be able to save the state"));
+		return;
+	}
+	g_hash_table_foreach (hash, write_mime_foreach, file);
+	g_hash_table_foreach (hash, write_mime_foreach, file);
+	fclose (file);
+}
+
+void write_user_mime (void)
+{
+        write_mime (user_mime_types);
+}
+
+void write_initial_mime (void)
+{
+        write_mime (initial_user_mime_types);
+}
+
