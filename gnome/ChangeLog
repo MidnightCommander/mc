@@ -1,5 +1,7 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* gtkflist.c: Include <gtkflist.c> for abs().
+
 	* gdesktop-icon.c: Reorder includes - local after system.
 	* gdesktop-prefs.c: Likewise.
 	* gsession.c: Likewise.
