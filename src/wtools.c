@@ -606,7 +606,7 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     len = max (strlen (header), msglen (text, &lines)) + 4;
     len = max (len, 64);
 
-    if (strncmp (text, _("Password:"), strlen (_("Password")) == 0){
+    if (strncmp (text, _("Password:"), strlen (_("Password"))) == 0){
 	quick_widgets [INPUT_INDEX].value = 1;
 	tk_name[3]=0;
     } else {

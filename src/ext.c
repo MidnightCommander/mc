@@ -422,7 +422,10 @@ file as an example of how to write it.\n\
     }
     mc_stat (filename, &mystat);
     
-    regex_command_title = NULL;
+    if (regex_command_title){
+	free (regex_command_title);
+	regex_command_title = NULL;
+    }
     old_patterns = easy_patterns;
     easy_patterns = 0; /* Real regular expressions are needed :) */
     include_target = NULL;

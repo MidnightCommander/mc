@@ -220,6 +220,7 @@ get_desktop_icon (char *pathname)
 	/* Try the GNOME icon */
 	if (fname){
 		full_fname = gnome_unconditional_pixmap_file (fname);
+		free (fname);
 		if (exist_file (full_fname))
 			return full_fname;
 		g_free (full_fname);
@@ -654,7 +655,7 @@ desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, deskto
 		drop_x = event->drop_coords.x - root_icon_drag_hotspot.x;
 		drop_y = event->drop_coords.y - root_icon_drag_hotspot.y;
 		
-		/* Icon dropped on root.  We take care of it */
+	/* Icon dropped on root.  We take care of it */
 		printf ("Dropped at %d %d\n", drop_x, drop_y);
 		
 		if (di->grid_x != -1)
@@ -1272,7 +1273,7 @@ desktop_setup_icon (char *filename, char *full_pathname)
 			else
 				desktop_create_directory_entry (dir_full, full_pathname, filename);
 		}
-
+		free (dir_full);
 	} else {
 		if (strstr (filename, ".desktop")){
 			if (!desktop_pathname_loaded (full_pathname))
@@ -1322,7 +1323,8 @@ desktop_reload (char *desktop_dir)
 		desktop_setup_icon (dent->d_name, full);
 		free (full);
 	}
-
+	mc_closedir (dir);
+	
 	/* Show all of the widgets */
 	for (l = desktop_icons; l; l = l->next){
 		desktop_icon_t *di = l->data;
