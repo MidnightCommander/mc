@@ -4,8 +4,6 @@
    Copyright (C) 1994 Janne Kukonlehto <jtklehto@stekt.oulu.fi>
    Original idea from Unix Interactive Tools version 3.2b (tty.c)
    This code requires root privileges.
-   You may want to make the cons.saver setuid root.
-   The code should be safe even if it is setuid but who knows?
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -21,13 +19,15 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* This code does _not_ need to be setuid root. However, it needs
-   read/write access to /dev/vcsa* (which is priviledged
-   operation). You should create user vcsa, make cons.saver setuid
-   user vcsa, and make all vcsa's owned by user vcsa.
-
-   Seeing other peoples consoles is bad thing, but believe me, full
-   root is even worse. */
+/* cons.saver is run by MC to save and restore screen contents on Linux
+   virtual console.  This is done by using file /dev/vcsaN or /dev/vcc/aN,
+   where N is the number of the virtual console.
+   In a properly set up system, /dev/vcsaN should become accessible
+   by the user when the user logs in on the corresponding console
+   /dev/ttyN or /dev/vc/N.  In this case, cons.saver doesn't need to be
+   suid root.  However, if /dev/vcsaN is not accessible by the user,
+   cons.saver can be made setuid root - this program is designed to be
+   safe even in this case.  */
 
 #include <config.h>
 #include <sys/types.h>
@@ -50,15 +50,6 @@
 #define cmd_input 0
 #define cmd_output 1
 
-/* Meaning of console_flag:
-   -1 == to be detected,
-   0  == not a console or Linux < 1.1.92
-   1  == obsolete, not used
-   2  == obsolete, not used
-   3  == is a console, Linux >= 1.1.92 (color, use /dev/vcsa$num
-   */
-static signed char console_flag = -1;
-static char *tty_name;
 static int console_minor = 0;
 static char *buffer = NULL;
 static int buffer_size = 0;
@@ -66,23 +57,31 @@ static int columns, rows;
 static int vcs_fd;
 
 
-static void tty_getsize (int console_fd)
+/*
+ * Get window size for the given terminal.
+ * Return 0 for success, -1 otherwise.
+ */
+static int tty_getsize (int console_fd)
 {
     struct winsize winsz;
 
     winsz.ws_col = winsz.ws_row = 0;
     ioctl (console_fd, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row){
+    if (winsz.ws_col && winsz.ws_row) {
 	columns = winsz.ws_col;
 	rows    = winsz.ws_row;
-    } else {
-	/* Never happens (I think) */
-	columns = 80;
-	rows = 25;
-	console_flag = 0;
+	return 0;
     }
+
+    return -1;
 }
 
+/*
+ * Do various checks to make sure that the supplied filename is
+ * a suitable tty device.  If check_console is set, check that we
+ * are dealing with a Linux virtual console.
+ * Return 0 for success, -1 otherwise.
+ */
 static int check_file (char *filename, int check_console)
 {
     int fd;
@@ -129,11 +128,14 @@ static int check_file (char *filename, int check_console)
     return -1;
 }
 
-/* Detect console. Return 0 if successful, -1 otherwise.  */
-/* Because the name of the tty is supplied by the user and this
-   can be a setuid program a lot of checks has to done to avoid
-   creating a security hole */
-static int detect_console (void)
+/*
+ * Check if the supplied filename is a Linux virtual console.
+ * Return 0 if successful, -1 otherwise.
+ * Since the tty name is supplied by the user and cons.saver can be
+ * a setuid program, many checks have to be done to prevent possible
+ * security compromise.
+ */
+static int detect_console (char *tty_name)
 {
     char console_name [16];
     static char vcs_name [16];
@@ -143,6 +145,13 @@ static int detect_console (void)
     console_fd = check_file (tty_name, 1);
     if (console_fd == -1)
 	return -1;
+
+    if (tty_getsize (console_fd) == -1) {
+	close (console_fd);
+	return -1;
+    }
+
+    close (console_fd);
 
     /*
      * Only allow /dev/ttyMINOR and /dev/vc/MINOR where MINOR is the minor
@@ -175,15 +184,10 @@ static int detect_console (void)
 	vcs_fd = check_file (vcs_name, 0);
     }
 
-    if (vcs_fd != -1){
-	console_flag = 3;
-	tty_getsize (console_fd);
-	close (console_fd);
-	return 0;
-    }
+    if (vcs_fd == -1)
+	return -1;
 
-    close (console_fd);
-    return -1;
+    return 0;
 }
 
 static void save_console (void)
@@ -235,7 +239,10 @@ int main (int argc, char **argv)
 {
     unsigned char action = 0;
     int stderr_fd;
-    
+
+    /* 0 - not a console, 3 - supported Linux console */
+    signed char console_flag = 0;
+
     /*
      * Make sure stderr points to a valid place
      */
@@ -256,7 +263,6 @@ int main (int argc, char **argv)
     if (argc != 2){
 	/* Wrong number of arguments */
 
-	console_flag = 0;
 	write (cmd_output, &console_flag, 1);
 	return 3;
     }
@@ -264,14 +270,12 @@ int main (int argc, char **argv)
     /* Lose the control terminal */
     setsid ();
     
-    /* Check that the argument is a legal console */
-    tty_name = argv [1];
-
-    if (detect_console () == -1){
+    /* Check that the argument is a Linux console */
+    if (detect_console (argv [1]) == -1) {
 	/* Not a console -> no need for privileges */
 	setuid (getuid ());
-	console_flag = 0;
     } else {
+	console_flag = 3;
 	/* Allocate buffer for screen image */
 	buffer_size = 4 + 2 * columns * rows;
 	buffer = (char*) malloc (buffer_size);
@@ -298,7 +302,7 @@ int main (int argc, char **argv)
 	    break;
 	} /* switch (action) */
 		
-	/* Inform the invoker that command is handled */
+	/* Inform the invoker that command has been handled */
 	write (cmd_output, &console_flag, 1);
     } /* while (read ...) */
 
