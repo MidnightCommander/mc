@@ -378,8 +378,8 @@ gmc_char_grid_draw (GtkWidget *widget, GdkRectangle *area)
 
 		/* Offset the area because the window does not fill thea allocation */
 
-		area->x -= widget->allocation.x + (widget->allocation.width - cgrid->char_width * cgrid->width) / 2;
-		area->y -= widget->allocation.y + (widget->allocation.height - cgrid->char_height * cgrid->height) / 2;
+		area->x -= (widget->allocation.width - cgrid->char_width * cgrid->width) / 2;
+		area->y -= (widget->allocation.height - cgrid->char_height * cgrid->height) / 2;
 
 		w_area.x = 0;
 		w_area.y = 0;
