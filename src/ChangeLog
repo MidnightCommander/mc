@@ -1,5 +1,8 @@
 2002-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (mini_info_separator): Revert last patch.  The bug is
+	in Red Hat 8.0 S-Lang.
+
 	* screen.c (mini_info_separator): The separator was one
 	character too long.
 	(show_dir): Remove obsolete linux_unicode hack.

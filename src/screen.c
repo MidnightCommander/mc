@@ -686,10 +686,10 @@ mini_info_separator (WPanel *panel)
     widget_move (&panel->widget, llines (panel) + 2, 1);
 #ifdef HAVE_SLANG
     attrset (NORMAL_COLOR);
-    hline (ACS_HLINE, panel->widget.cols - 3);
+    hline (ACS_HLINE, panel->widget.cols - 2);
 #else
     hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
-	   panel->widget.cols - 3);
+	   panel->widget.cols - 2);
 #endif				/* !HAVE_SLANG */
 }
 
