@@ -2,11 +2,11 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 
-AC_INIT([GNU mc], [4.6.0-pre1a], [mc-devel@gnome.org])
-AC_PREREQ([2.52])
-AC_CONFIG_SRCDIR([src/main.c])
-AC_CONFIG_AUX_DIR([config])
-AM_INIT_AUTOMAKE
+AC_INIT([GNU Midnight Commander], [], [mc-devel@gnome.org])
+AC_PREREQ(2.52)
+AC_CONFIG_SRCDIR(src/main.c)
+AC_CONFIG_AUX_DIR(config)
+AM_INIT_AUTOMAKE(mc, 4.6.0-pre1a)
 
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
@@ -691,6 +691,10 @@ AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
+
+dnl Version for the RedHat package, without dashes
+RH_VERSION=`echo $VERSION | sed 's/-//'`
+AC_SUBST(RH_VERSION)
 
 if test "x$SAMBAFILES" != x; then
   AC_CONFIG_SUBDIRS([vfs/samba])
