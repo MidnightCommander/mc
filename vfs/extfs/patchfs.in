@@ -31,9 +31,9 @@ sub datetime
     # in case of problems fall back to 0 in unix time
     # note: str2time interprets some wrong values (eg. " ") as 'today'
     if ($parsedates && defined (my $t=str2time($_[0]))) {
-	return timef($t)
+	return timef($t);
     }
-    return timef(0);
+    return timef(time);
 }
 
 # print message on stderr and exit
