@@ -1,5 +1,7 @@
 2001-09-19  Pavel Roskin  <proski@gnu.org>
 
+	* lib/edit.spell.rc: Try aspell before resorting to ispell.
+
 	* syntax/php.syntax: Replace with a better implementation by
 	Max Schedriviy <max@tavrida.net>
 

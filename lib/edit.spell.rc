@@ -5,4 +5,8 @@
 #       $2 - highlight block file name
 #	$3 - error file name
 
-ispell "$2" 2>"$3"
+if aspell </dev/null >/dev/null 2>&1; then
+  aspell -c "$2" 2>"$3"
+else
+  ispell "$2" 2>"$3"
+fi
