@@ -401,7 +401,7 @@ close_error_pipe (int error, char *text)
 	if (len == 0) return 0;	/* Nothing to show */
 
 	/* Show message from pipe */
-	message (error, title, msg);
+	message (error, title, "%s", msg);
     } else {
 	/* Show given text and possible message from pipe */
 	message (error, title, " %s \n %s ", text, msg);
@@ -435,9 +435,9 @@ void check_error_pipe (void)
 	close (error_pipe[0]);
     }
     if (len > 0)
-        message (0, _(" Warning "), error);
+        message (0, _(" Warning "), "%s", error);
 }
-#endif
+#endif /* !VFS_STANDALONE */
 
 static struct sigaction ignore, save_intr, save_quit, save_stop;
 

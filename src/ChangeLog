@@ -1,3 +1,9 @@
+2002-07-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+		* utilunix.c (close_error_pipe): Use "%s" in message () to 
+		prevent possible crash.
+		(check_error_pipe): Likewise.
+
 2002-06-27  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (do_enter_on_file_entry): Process associations before
