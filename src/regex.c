@@ -50,6 +50,10 @@
 #  include <sys/types.h>
 # endif
 
+#ifndef HAVE_WCTYPE_H
+#define HAVE_WCTYPE_H 0
+#endif
+
 # define WIDE_CHAR_SUPPORT (HAVE_WCTYPE_H && HAVE_WCHAR_H && HAVE_BTOWC)
 
 /* For platform which support the ISO C amendement 1 functionality we
