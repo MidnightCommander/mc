@@ -180,9 +180,11 @@ string_file_name (file_entry *fe, char *buffer, size_t bufsize)
 {
     size_t i;
     char c;
+    const char *fe_fname_trunc;
 
+    fe_fname_trunc = name_trunc (fe->fname, bufsize - 1);
     for (i = 0; i < bufsize - 1; i++) {
-	c = fe->fname[i];
+	c = fe_fname_trunc[i];
 	if (!c)
 	    break;
 	if (!is_printable(c))
@@ -339,7 +341,7 @@ string_file_perm_octal (file_entry *fe, char *buffer, size_t bufsize)
 static void
 string_file_nlinks (file_entry *fe, char *buffer, size_t bufsize)
 {
-    g_snprintf (buffer, bufsize, "%16d", (int) fe->st.st_nlink);
+    g_snprintf (buffer, bufsize, "%d", (int) fe->st.st_nlink);
 }
 
 /* inode */

@@ -1,3 +1,9 @@
+2005-02-11  Roland Illig  <roland.illig@gmx.de>
+
+	* screen.c (string_file_name): Fixed the displaying of long file
+	names. The bug had been introduced by me on 2005-02-08.
+	* screen.c (string_file_nlinks): Likewise.
+
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
 	* dialog.c: Marked unused parameters. Now dlg_broadcast_msg_to
