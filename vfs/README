@@ -1,3 +1,17 @@
+NOTE: Although vfs has been meant to be implemented as a separate
+entity redistributable under the LGPL in its current implementation it
+uses GPLed code from src/. So there are two possibilities if you want
+to use vfs:
+
+1. Distribute your copy of vfs under the GPL. Then you can freely
+include the GPLed functions from the rest of the mc source code.
+
+2. Distribute your copy of vfs under the LGPL. Then you cannot include
+the functions outside the vfs subdirectory. You must then either
+rewrite them or work around them in other ways.
+
+========================================================================
+
 Hi!
 
 I'm midnight commander's vfs layer. Before you start hacking me,

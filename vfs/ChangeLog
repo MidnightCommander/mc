@@ -1,3 +1,10 @@
+2004-10-23  Roland Illig  <roland.illig@gmx.de>
+
+	* README: Add explanation for using GPL licensed code from
+	src/ in vfs.
+
+	From Leonard den Ottolander and Roland Illig.
+
 2004-10-21  Roland Illig  <roland.illig@gmx.de>
 
 	* mcfs.c: Add INADDR_NONE definition for SunOS.
