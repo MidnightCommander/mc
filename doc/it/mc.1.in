@@ -907,8 +907,8 @@ se l'opzione, "Usa Editor interno" è stata impostata.
 Mostra una finestra di dialogo con destinazione predefinita alla
 directory del pannello non selezionato, che copia il file selezionato (o
 i file marcati, se c'e n'è almeno uno) sulla directory specificata dall'utente
-nella finestra di dialogo. Durante questo processo è possibile
-premere C-c o ESC per abortire l'operazione. Per i dettagli
+nella finestra di dialogo. Durante il processo è possibile
+premere C-c o ESC per abortire l'operazione. Per maggiori dettagli
 sulla maschera sorgente (che sarà normalmente * o ^\\(.*\\)$ a seconda
 dell'impostazione di 'pattern della shell') o sui caratteri jolly sulla destinazione
 vedere
@@ -955,60 +955,60 @@ sulla riga di mini-stato se
 è abilitata. Usare i collegamenti simbolici se si vuole evitare la confusione
 che creano i collegamenti fisici.
 .PP
-.B Rename/Move (F6)
+.B Rinomina/Sposta (F6)
 .PP
-Pop up an input dialog that defaults to the directory in the
-non-selected panel and moves the currently selected file (or the
-tagged files if there is at least one tagged file) to the directory
-specified by the user in the input dialog. During the process, you
-can press C-c or ESC to abort the operation. For more details look at Copy
-operation above, most of the things are quite similar.
+Mostra una finestra di dialogo con destinazione predefinita alla
+directory del pannello non selezionato, che sposta il file selezionato (o
+i file marcati, se c'e n'è almeno uno) sulla directory specificata dall'utente
+nella finestra di dialogo. Durante il processo è possibile
+premere C-c o ESC per abortire l'operazione. Per maggiori dettagli vedere la
+sezione precedente Copia, dato che il comando è molto simile.
 .PP
-On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing M-b in the dialog
-box). The 
+In alcuni sistemi è possibile eseguire la copia in background cliccando
+sul bottone background (o premendo M-b nella finestra di dialogo). Il
+comando 
 .\"LINK2"
-Background Jobs
+Processi in background
 .\"Background jobs"
-is used to control the background process.
+è utile per controllarne l'andamento.
 .PP
-.B Mkdir (F7)
+.B Crea Directory (F7)
 .PP
-Pop up an input dialog and creates the directory specified.
+Mostra una finestra di dialogo che crea la directory specificata.
 .PP
-.B Delete (F8)
+.B Elimina (F8)
 .PP
-Delete the currently selected file or the tagged files in the
-currently selected panel. During the process, you can press C-c or
-ESC to abort the operation.
+Cancella il file correntemente selezionato o i file marcati nel 
+pannello corrente. Durante il processo è possibile premere C-c 
+o ESC per abortire l'operazione.
 .PP
-.B Quick cd (M-c)
-Use the
+.B Cambia Dir veloce (M-c)
+Usare il comando
 .\"LINK2"
-quick cd
+Cambia Dir veloce
 .\"Quick cd"
-command if you have full command line and want to cd somewhere.
+se si vuole cambiare directory corrente e si ha la riga di comando occupata.
 .PP
-.B Select group (+)
+.B Seleziona gruppo (+)
 .PP
-This is used to select (tag) a group of files. The Midnight Commander
-will prompt for a regular expression describing the group. When
-.I Shell Patterns 
-are enabled, the regular expression is much like the filename globbing
-in the shell (* standing for zero or more characters and ?  standing
-for one character). If
-.I Shell Patterns
-is off, then the tagging of files is done with normal regular
-expressions (see ed (1)).
+Viene utilizzato per selezionare (marcare) un gruppo di file. Il
+Midnight Commander richiedera un'espressione regolare per descrivere il
+gruppo; se l'opzione
+.I pattern della shell
+è abilitata, l'espressione regolare è simile al file globbing nella shell
+(* significa zero o più caratteri e ? significa un carattere). Se l'opzione
+.I pattern della shell
+è disabilitata, allora la selezione dei file viene eseguita con le normali
+espressioni regolari (vedere ed (1)).
 .PP
-To mark directories instead of files, the expression must start or end
-with a '/'.
+Per selezionare directory invece di file, l'espressione deve cominciare
+o finire con una '/'.
 .PP
-.B Unselect group (\\\\)
+.B De-seleziona gruppo (\\\\)
 .PP
-Used to unselect a group of files. This is the opposite of the
-.I "Select group"
-command.
+Usata per deselezionare un gruppo di file. E' l'opposto di del comando
+.I "Seleziona gruppo"
+ .
 .PP
 .B Uscita (F10, Maiusc-F10)
 .PP
@@ -1093,67 +1093,68 @@ Modifica file menu
 .\"Menu File Edit"
 serve a modificare il menu utente (che appare premendo F2).
 .PP
-.SH "    Directory Tree"
-The Directory Tree command shows a tree figure of the directories. You
-can select a directory from the figure and the Midnight Commander will
-change to that directory.
+.\"NODE "    Directory Tree"
+.SH "    Albero Directory"
+Il comando albero directory mostra una rappresentazione ad albero delle
+directory. Selezionando una directory dalla rappresentazione il 
+Midnight Commander cambierà a quella directory.
 .PP
-There are two ways to invoke the tree. The real directory tree command
-is available from Commands menu. The other way is to select tree view
-from the Left or Right menu.
+Ci sono due modi di invocare l'albero. Il vero comando di albero directory
+è accessibile dal menu Comandi. L'altro modo è di selezionare la vista ad
+albero dai menu Sinistra o Destra.
 .PP
-To get rid of long delays the Midnight Commander creates the tree
-figure by scanning only a small subset of all the directories. If the
-directory which you want to see is missing, move to its parent
-directory and press C-r (or F2).
+Per evitare i lunghi ritardi il Midnight Commander crea la rappresentazione ad 
+albero scansionando solo una piccola porzione di tutte le directory.
+Se manca la directory che si vuole visualizzare, spostarsi sulla sua directory 
+genitrice e premere C-r (o F2).
 .PP
-You can use the following keys:
+E' possibile utilizzare i tasti seguenti:
 .PP
+Sono accettati i
 .\"LINK2"
-General movement keys
+Tasti Generali di movimento 
 .\"General Movement Keys"
-are accepted.
+ .
 .PP
-.B Enter.
-In the directory tree, exits the directory tree and changes to this
-directory in the current panel. In the tree view, changes to this
-directory in the other panel and stays in tree view mode in the
-current panel.
+.B Invio.
+Nell'albero directory, esce dall'albero della directory e lo cambia
+alla directory corrente nel pannello selezionato. Nella vista ad albero,
+cambia a questa directory nell'altro pannello e rimane nella modalità
+vista ad albero in quello corrente.
 .PP
-.B C-r, F2 (Rescan).
-Rescan this directory. Use this when the tree figure is out of date:
-it is missing subdirectories or shows some subdirectories which don't
-exist any more.
+.B C-r, F2 (Ricarica).
+Ricarica la directory. Usare questo comando quando la rappresentazione ad
+albero non è aggiornata: mancano directory o mostra alcune sottodirectory
+che non esistono più.
 .PP
-.B F3 (Forget).
-Delete this directory from the tree figure. Use this to remove clutter
-from the figure. If you want the directory back to the tree figure
-press F2 in its parent directory. 
+.B F3 (Scorda).
+Cancella questa directory dalla rappresentazione ad albero. Usare questo
+comando per eliminare la confusione dal'albero. Se si vuole nuovamente
+visualizzare l'albero completo premere F2 nella sua directory genitrice.
 .PP
-.B F4 (Static/Dynamic).
-Toggle between the dynamic navigation mode (default) and the static
-navigation mode.
+.B F4 (Statico/Dynamico).
+Cambia tra modo di navigazione dinamico (predefinito) e statico.
 .PP
-In the static navigation mode you can use the Up and Down keys to
-select a directory. All known directories are shown.
+Nella navigazione statica si usano i tasti Su e Giu per 
+selezionare la directory. Tutte le directory conosciute vengono mostrate.
 .PP
-In the dynamic navigation mode you can use the Up and Down keys to
-select a sibling directory, the Left key to move to the parent
-directory, and the Right key to move to a child directory. Only the
-parent, sibling and children directories are shown, others are left
-out. The tree figure changes dynamically as you traverse.
+Nella navigazione dinamica si usano i tasti Su e Giu per selezionare
+una directory sorella, il tasto Sinistra sposta sulla directory genitrice
+e il tasto Destra sposta sulla directory figlia. Solo i parenti, sorelle
+e figlie, vengono mostrate; le altre sono tralasciate. La rappresentazione
+ad albero cambia dinamicamente come la si attraversa.
 .PP
-.B F5 (Copy).
-Copy the directory.
+.B F5 (Copia).
+Copia la directory.
 .PP
-.B F6 (RenMov).
-Move the directory.
+.B F6 (RinSpo).
+Sposta la directory.
 .PP
-.B F7 (Mkdir).
-Make a new directory below this directory.
+.B F7 (CreDir).
+Crea una nuova directory sotto questa directory.
 .PP
-.B F8 (Delete).
-Delete this directory from the file system.
+.B F8 (CancDir).
+Cancella questa directory dal file system.
 .PP
 .B C-s, M-s.
 Search the next directory matching the search string. If there is

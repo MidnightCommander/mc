@@ -3897,15 +3897,15 @@ msgstr "Dinamico"
 
 #: src/tree.c:1020
 msgid "Rescan"
-msgstr "Aggiorna"
+msgstr "Ricarica"
 
 #: src/tree.c:1022
 msgid "Forget"
-msgstr "Dimentica"
+msgstr "Scorda"
 
 #: src/tree.c:1035
 msgid "Rmdir"
-msgstr "Elimina"
+msgstr "CancDir"
 
 #: src/treestore.c:353
 #, c-format
