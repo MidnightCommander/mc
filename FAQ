@@ -214,9 +214,9 @@ Questions and Answers
      http://www.tuxedo.org/~esr/terminfo/
      ftp://dickey.his.com/ncurses/
 
-   You can select whether Midnight Commander will use terminfo or termcap
-   database by giving --with-terminfo or --with-termcap option to the
-   configure. Default is terminfo if found, otherwise termcap.
+   You can force Midnight Commander to use the termcap database by
+   giving --with-termcap option to the configure script.  The default
+   is to use terminfo.
 
    If you don't have permissions to edit terminal databases you can use
    Learn keys feature of Midnight Commander instead. Press Esc 9 o k and

@@ -634,12 +634,6 @@ fi
 rm -f conftest*]
 )
 
-AC_DEFUN([AC_USE_TERMINFO], [
-	AC_DEFINE(SLANG_TERMINFO, 1, [Define to use S-Lang with terminfo])
-	AC_MSG_NOTICE([using SLang screen manager/terminfo])
-	slang_term=" with terminfo"
-])
-
 AC_DEFUN([AC_USE_TERMCAP], [
 	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap library])
@@ -669,25 +663,23 @@ AC_DEFUN([AC_WITH_SLANG], [
 	    #endif], [
 	    SLtt_get_terminfo();
 	    SLtt_tgetflag("");], 
-	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
+	    [LIBS="$ac_save_LIBS"],
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
 	    screen_manager="SLang"
 	fi
 	if $slang_check_lib
 	then
-	    use_terminfo=false
+	    use_terminfo=
 	    for dir in 	/usr/lib /usr/share/lib /usr/local/lib /lib \
 			/usr/local/share /usr/share
 	    do
 		if test -d $dir/terminfo; then
-		use_terminfo=true; 
+		use_terminfo=yes
 		break
 		fi
 	    done
-	    if $use_terminfo; then
-		AC_USE_TERMINFO
-	    else
+	    if test -z "$use_terminfo"; then
 		AC_USE_TERMCAP
 	    fi
         fi]

@@ -494,15 +494,6 @@ if test "x$screen_type" != xncurses; then
 	])
 fi
 
-AC_ARG_WITH(terminfo,
-        [--with-terminfo            SLANG: Force usage of terminfo],[
-	if test x$withval = xyes; then
-		AC_USE_TERMINFO
-		slang_check_lib=false
-		slang_use_system_installed_lib=false
-	fi]
-)
-
 AC_ARG_WITH(termcap,
 	[--with-termcap             SLANG: Force usage of termcap],[
 	if test x$withval = xyes; then

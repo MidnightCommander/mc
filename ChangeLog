@@ -1,3 +1,12 @@
+2002-09-07  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Eliminate --with-terminfo option, which was
+	essentially equivalent to --with-included-slang and didn't force
+	anything.
+	* acinclude.m4 (AC_USE_TERMINFO): Remove.
+	* INSTALL: Adjust to match.
+	* FAQ: Likewise.
+
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Fix USE_VFS_NET conditional.  Don't substitute

@@ -149,11 +149,10 @@ better than everything else),
      on your system it will be used if possible.  You can force usage of
      the included S-Lang with the `--with-included-slang' option.
 
-     This option will usually try to use the terminfo database if it
-     is available, otherwise it will use the termcap database.  At
-     compile time, you may force the use the terminal database with
-     the `--with-termcap' and `--with-terminfo' options (both options
-     automatically turn `--with-included-slang' on).
+     S-Lang tries to use the terminfo database if it's available,
+     otherwise it uses the termcap database.  At the compile time, you
+     may force using the termcap database by using the option
+     `--with-termcap', which also enables `--with-included-slang'.
 
 `--with-ncurses[=directory]'
      Use this flag (either with or without the =directory part), if
