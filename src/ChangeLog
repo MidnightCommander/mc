@@ -1,5 +1,15 @@
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
+	* global.h: Provide fallbacks for getuid(), getgid(), geteuid()
+	and getegid().
+	* fs.h: Fully trust HAVE_DIRENT_H.
+	* complete.c: Don't include dirent.h directly, fs.h takes care
+	of it.
+	* file.c: Likewise.
+	* filegui.c: Likewise.
+	* main.c: Likewise.
+	* treestore.c: Likewise.
+
 	* global.h [!__GNUC__]: Define __attribute__ with one argument.
 
 2002-01-20  Pavel Roskin  <proski@gnu.org>

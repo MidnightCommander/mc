@@ -54,7 +54,20 @@
 #include <glib.h>
 
 #ifndef __GNUC__
-#define __attribute__(x)
+#  define __attribute__(x)
+#endif
+
+#ifndef HAVE_GETUID
+#  define getuid() 0
+#endif
+#ifndef HAVE_GETGID
+#  define getgid() 0
+#endif
+#ifndef HAVE_GETEUID
+#  define geteuid() getuid()
+#endif
+#ifndef HAVE_GETEGID
+#  define getegid() getgid()
 #endif
 
 #include "fs.h"

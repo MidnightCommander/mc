@@ -37,27 +37,6 @@
 #   include <unistd.h>
 #endif
 
-/* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-#   include <dirent.h>
-#   define NLENGTH(dirent) (strlen ((dirent)->d_name))
-#else
-#   define dirent direct
-#   define NLENGTH(dirent) ((dirent)->d_namlen)
-
-#   ifdef HAVE_SYS_NDIR_H
-#       include <sys/ndir.h>
-#   endif /* HAVE_SYS_NDIR_H */
-
-#   ifdef HAVE_SYS_DIR_H
-#       include <sys/dir.h>
-#   endif /* HAVE_SYS_DIR_H */
-
-#   ifdef HAVE_NDIR_H
-#       include <ndir.h>
-#   endif /* HAVE_NDIR_H */
-#endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
-
 #include <errno.h>
 #include <ctype.h>
 #include <fcntl.h>	/* For O_RDWR */

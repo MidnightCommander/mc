@@ -61,7 +61,6 @@
 #define WITH_FULL_PATHS 1
 
 #include <sys/types.h>
-#include <dirent.h>
 #include <stdio.h>
 
 #include <errno.h>

@@ -15,12 +15,8 @@
 #endif
 
 /* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-# ifdef NEEDS_LOCAL_DIRENT_H
-#   include "dirent.h"
-# else
+#ifdef HAVE_DIRENT_H
 #   include <dirent.h>
-# endif
 #   define NLENGTH(dirent) (strlen ((dirent)->d_name))
 #   define DIRENT_LENGTH_COMPUTED 1
 #else
