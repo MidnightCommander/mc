@@ -351,7 +351,7 @@ quit_view (GtkWidget *widget, GdkEvent *event, WView *view)
 }
 	   
 int
-view (char *_command, char *_file, int *move_dir_p, int start_line)
+view (char *_command, const char *_file, int *move_dir_p, int start_line)
 {
 	Dlg_head   *our_dlg;
 	GtkWidget  *toplevel, *status, *scrollbar, *hbox;

@@ -1,3 +1,8 @@
+2000-04-23  JP Rosevear  <jpr@arcavia.com>
+
+	* gview.c (view): Constify file parameter to match prototype and fix
+	build problem.
+
 2000-04-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* gcmd.c (gnome_open_terminal_with_cmd): Allow translating of
