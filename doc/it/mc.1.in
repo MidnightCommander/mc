@@ -2780,42 +2780,40 @@ Esempi:
     /ftp/GCC/gcc-2.7.0.tar#utar
 .fi
 .PP
-The latter specifies the full path of the tar archive.
-.SH "  FIle transfer over SHell filesystem"
+L'ultima specifica il percorso completo dell'archivio tar.
+.\"NODE "  FIle transfer over SHell filesystem"
+.SH "  Trasferimento di File su Filesystem di Shell (FISH)"
 .PP
-The fish file system is a network based file system that allows you to
-manipulate the files in a remote machine as if they were local. To use
-this, the other side has to either run fish server, or has to have
-bash-compatible shell.
+Il file system fish è un file system basato sulla rete che permette di
+manipolare i file di una macchina remota come fossero locali. Per usarlo
+l'altra parte deve avere un server fish o avere una shell compatibile
+bash.
 .PP
-To connect to a remote machine, you just need to chdir
-into a special directory which name is in the following
-format:
+Per collegarsi ad una macchina remota, basta solo fare cd
+in una speciale directory il cui nome ha il seguente formato:
 .PP
 .nf
-/#sh:[user@]machine[:options]/[remote-dir]
+/#sh:[utente@]macchina[:opzioni]/[dir-remota]
 .fi
-The 
-.I user, 
-.I options
-and 
-.I remote-dir
-elements are optional. If
-you specify the 
-.I user
-element then the Midnight Commander
-will try to logon on the remote machine as that user,
-otherwise it will use your login name.
+Gli elementi
+.I utente, 
+.I opzioni
+e
+.I dir-remota
+sono opzionali. Se si specifica l'elemento 
+.I utente
+alloral il Midnight Commander tenterà di connettersi alla macchina remota
+con quell'utente, altrimenti userà il nome di login.
 .PP
-The 
-.I options
-are 'C' - use compression and 'rsh' use rsh instead
-of ssh. If the 
-.I remote-dir
-element is present, your current directory on the remote machine will
-be set to this one.
+Le  
+.I opzioni
+sono 'C' - usa la compressione e 'rsh' per usare rsh invece 
+di ssh. Se l'elemento
+.I dir-remota
+è presente, la directory corrente sulla macchina remota sarà impostatata 
+a questo valore.
 .PP
-Examples:
+Esempi:
 .PP
 .nf
     /#sh:onlyrsh.mx:r/linux/local
@@ -2823,42 +2821,44 @@ Examples:
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
 .PP
-.SH "  Network File System"
-The Midnight Commander file system is a network base file system that
-allows you to manipulate the files in a remote machine as if they
-were local.  To use this, the remote machine must be running the
-mcserv(8) server program.
+.\"NODE "  Network File System"
+.SH "  File System di Rete"
+Il file system di rete del Midnight Commander è un file system basato 
+sulla rete che permette di manipolare i file su di una macchina remota
+come se fossero locali. Per usarlo, sulla macchina remota deve essere
+in esecuzione il programma server mcserv(8).
 .PP
-To connect to a remote machine, you just need to chdir into a special
-directory which name is in the following format:
+Per connettersi ad una macchina remota, basta solo fare cd
+in una speciale directory il cui nome ha il seguente formato:
 .PP
-.I /#mc:[user@]machine[:port][remote-dir]
+.I /#mc:[utente@]macchina[:porta][dir-remota]
 .PP
-The
-.I user, port
-and
-.I remote-dir
-elements are optional.  If you specify the 
-.I user
-element then the Midnight Commander will try to logon on the remote
-machine as that user, otherwise it will use your login name.
+Gli elementi
+.I utente, porta
+e
+.I dir-remota
+sono opzionali. Se si specifica l'elemento
+.I utente
+alloral il Midnight Commander tenterà di connettersi alla macchina remota
+con quell'utente, altrimenti userà il nome di login.
 .PP
-The 
-.I port
-element is used when the remote machine running on a special port
-(see the mcserv(8) manual page for more information about ports);
-finally, if the
-.I remote-dir
-element is present, your current directory on the remote machine will
-be set to this one.
+L'elemento
+.I porta
+viene usato quando la macchina remota usa una porta speciale;
+(vedere la magina man mcserv(8) per ulteriori informazioni sulle porte);
+infine se l'elemento
+.I dir-remota
+è presente, la directory corrente sulla macchina remota sarà impostatata 
+a questo valore.
 .PP
-Examples:
+Esempi:
 .PP
 .nf
     /#mc:ftp.nuclecu.unam.mx/linux/local
     /#mc:joe@foo.edu:11321/private
 .fi
 .PP
+.\"NODE "  Undelete File System"
 .SH "  Undelete File System"
 On Linux systems, if you asked configure to use the ext2fs undelete
 facilities, you will have the undelete file system available.
