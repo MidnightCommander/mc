@@ -52,6 +52,39 @@
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 
+#define J_LEFT 		1
+#define J_RIGHT		2
+#define J_CENTER	3
+
+#define IS_FIT(x)	((x) & 0x0004)
+#define MAKE_FIT(x)	((x) | 0x0004)
+#define HIDE_FIT(x)	((x) & 0x0003)
+
+#define J_LEFT_FIT	5
+#define J_RIGHT_FIT	6
+#define J_CENTER_FIT	7
+
+#define NORMAL		0
+#define SELECTED	1
+#define MARKED		2
+#define MARKED_SELECTED	3
+#define STATUS		5
+
+/*
+ * This describes a format item.  The parse_display_format routine parses
+ * the user specified format and creates a linked list of format_e structures.
+ */
+typedef struct format_e {
+    struct format_e *next;
+    int    requested_field_len;
+    int    field_len;
+    int    just_mode;
+    int    expand;
+    const char *(*string_fn)(file_entry *, int len);
+    char   *title;
+    char   *id;
+} format_e;
+
 /* If true, show the mini-info on the panel */
 int show_mini_info = 1;
 
@@ -1181,7 +1214,6 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    if (formats [i].use_in_gui)
 	    	items++;
 
-	    darr->use_in_gui          = formats [i].use_in_gui;
             darr->requested_field_len = formats [i].min_size;
             darr->string_fn           = formats [i].string_fn;
 	    if (formats [i].title [0])
@@ -1241,8 +1273,6 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
     }
 
     *res_total_cols = total_cols;
-    if (home)
-	home->items = items;
     return home;
 }
 

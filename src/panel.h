@@ -7,6 +7,10 @@
 #include "util.h"
 #include "widget.h"	/* for history loading and saving */
 
+#define selection(p) (&(p->dir.list[p->selected]))
+#define other_panel get_other_panel()
+#define DEFAULT_USER_FORMAT "half type name | size | perm"
+
 #define LIST_TYPES	4
 
 enum list_types {
@@ -29,46 +33,7 @@ enum panel_display_enum {
     frame_half			/* half screen frame */
 };
 
-#define J_LEFT 		1
-#define J_RIGHT		2
-#define J_CENTER	3
-
-#define IS_FIT(x)	((x) & 0x0004)
-#define MAKE_FIT(x)	((x) | 0x0004)
-#define HIDE_FIT(x)	((x) & 0x0003)
-
-#define J_LEFT_FIT	5
-#define J_RIGHT_FIT	6
-#define J_CENTER_FIT	7
-
-#define NORMAL		0
-#define SELECTED	1
-#define MARKED		2
-#define MARKED_SELECTED	3
-#define STATUS		5
-
-/*
- * This describes a format item.  The parse_display_format routine parses
- * the user specified format and creates a linked list of format_e structures.
- *
- * parse_display_format computes the actual field allocations if
- * the COMPUTE_FORMAT_ALLOCATIONs define is set.  MC frontends that are
- * just interested in the parsed display format should not set this define.
- */
-typedef struct format_e {
-    struct format_e *next;
-    int    requested_field_len;
-    int    field_len;
-    int    just_mode;
-    int    expand;
-    const char *(*string_fn)(file_entry *, int len);
-    char   *title;
-    char   *id;
-
-    /* first format_e has the number of items */
-    int    items;
-    int    use_in_gui;
-} format_e;
+struct format_e;
 
 typedef struct {
     Widget   widget;
@@ -100,31 +65,19 @@ typedef struct {
     char     *user_format;      	/* User format */
     char     *user_status_format[LIST_TYPES];/* User format for status line */
 
-    format_e *format;		/* Display format */
-    format_e *status_format;    /* Mini status format */
+    struct   format_e *format;		/* Display format */
+    struct   format_e *status_format;    /* Mini status format */
 
     int      format_modified;	/* If the format was changed this is set */
 
     char     *panel_name;	/* The panel name */
     struct   stat dir_stat;	/* Stat of current dir: used by execute () */
 
-    char     *gc;
-    void     *font;
-    int	     item_height;
-    int	     total_width;
-    int	     ascent;
-    int	     descent;
-
     int      searching;
     char     search_buffer [256];
-
-    void     *port_ui;		/* UI stuff specific to each GUI port */
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);
-void panel_set_size (WPanel *panel, int x1, int y1, int x2, int y2);
-void paint_paint (WPanel *panel);
-void panel_refresh (WPanel *panel);
 void panel_clean_dir (WPanel *panel);
 
 extern int torben_fj_mode;
@@ -132,25 +85,7 @@ extern int permission_mode;
 extern int filetype_mode;
 extern int show_mini_info;
 extern int panel_scroll_pages;
-
-#define selection(p) (&(p->dir.list [p->selected]))
-
 extern int fast_reload;
-extern int extra_info;
-
-/*#define ITEMS(p) ((p)->view_type == view_brief ? (p)->lines *2 : (p)->lines)
-*/
-/* The return value of panel_reload */
-#define CHANGED 1
-
-#define PANEL_ISVIEW(p) (p->view_type == view_brief || \
-			 p->view_type == view_full  || \
-			 p->view_type == view_long  || \
-			 p->view_type == view_user  || \
-			 p->view_type == view_tree)
-
-#define RP_ONLY_PAINT 0
-#define RP_SETPOS 1
 
 void paint_panel          (WPanel *panel);
 void panel_reload         (WPanel *panel);
@@ -158,10 +93,6 @@ void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 
-extern void paint_info_panel (WPanel *);
-extern void paint_quick_view_panel (WPanel *);
-void info_frame (WPanel *panel);
-extern WPanel *the_info_panel;
 void panel_update_contents (WPanel *panel);
 void panel_update_cols (Widget *widget, int frame_size);
 int set_panel_formats (WPanel *p);
@@ -169,17 +100,12 @@ int set_panel_formats (WPanel *p);
 WPanel *get_current_panel (void);
 WPanel *get_other_panel (void);
 
-#define other_panel get_other_panel()
-
 extern WPanel *left_panel;
 extern WPanel *right_panel;
 extern WPanel *current_panel;
 
 void try_to_select (WPanel *panel, char *name);
 
-#define DEFAULT_USER_FORMAT "half type name | size | perm"
-
-/* This were in main: */
 void unmark_files (WPanel *panel);
 void select_item (WPanel *panel);
 
@@ -189,10 +115,8 @@ void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int index, int val);
 void do_file_mark (WPanel *panel, int index, int val);
 
-sortfn *get_sort_fn (char *name);
-
-void directory_history_next (WPanel * panel);
-void directory_history_prev (WPanel * panel);
-void directory_history_list (WPanel * panel);
+void directory_history_next (WPanel *panel);
+void directory_history_prev (WPanel *panel);
+void directory_history_list (WPanel *panel);
 
 #endif	/* __PANEL_H */

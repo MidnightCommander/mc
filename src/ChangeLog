@@ -1,5 +1,9 @@
 2002-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* panel.h: Remove all unused definitions.  Make format_e an
+	opaque structure by moving it ...
+	* screen.c: ... here.
+
 	* screen.c (display_mini_info): Make static.
 	(the_info_panel): Remove.
 
