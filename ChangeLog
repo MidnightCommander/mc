@@ -1,5 +1,9 @@
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
+	* edit/edit_key_translator.c (cooledit_key_map): Use Ctrl-O for
+	subshell, not for "Open file...".
+	(emacs_key_map): Likewise.
+
 	* README: Changes from Frederic L. W. Meunier <0@pervalidus.net>
 
 2001-08-10  Pavel Roskin  <proski@gnu.org>

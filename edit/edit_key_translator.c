@@ -47,7 +47,7 @@
      KEY_PPAGE, CK_Page_Up, KEY_NPAGE, CK_Page_Down, KEY_LEFT, CK_Left,
      KEY_RIGHT, CK_Right, KEY_UP, CK_Up, KEY_DOWN, CK_Down, ALT ('\t'), CK_Return, ALT ('\n'), CK_Return,
      KEY_HOME, CK_Home, KEY_END, CK_End, '\t', CK_Tab, XCTRL ('u'), CK_Undo, KEY_IC, CK_Toggle_Insert,
-     XCTRL ('o'), CK_Load, KEY_F (3), CK_Mark, KEY_F (13), CK_Column_Mark, KEY_F (5), CK_Copy,
+     XCTRL ('o'), CK_Shell, KEY_F (3), CK_Mark, KEY_F (13), CK_Column_Mark, KEY_F (5), CK_Copy,
      KEY_F (6), CK_Move, KEY_F (8), CK_Remove, KEY_F (12), CK_Save_As,
      KEY_F (2), CK_Save, XCTRL ('n'), CK_New,
      XCTRL ('l'), CK_Refresh, ESC_CHAR, CK_Exit, KEY_F (10), CK_Exit,
@@ -70,7 +70,7 @@
      KEY_PPAGE, CK_Page_Up, KEY_NPAGE, CK_Page_Down, KEY_LEFT, CK_Left,
      KEY_RIGHT, CK_Right, KEY_UP, CK_Up, KEY_DOWN, CK_Down, ALT ('\t'), CK_Return, ALT ('\n'), CK_Return,
      KEY_HOME, CK_Home, KEY_END, CK_End, '\t', CK_Tab, XCTRL ('u'), CK_Undo, KEY_IC, CK_Toggle_Insert,
-     XCTRL ('o'), CK_Load, KEY_F (3), CK_Mark, KEY_F (13), CK_Column_Mark, KEY_F (5), CK_Copy,
+     XCTRL ('o'), CK_Shell, KEY_F (3), CK_Mark, KEY_F (13), CK_Column_Mark, KEY_F (5), CK_Copy,
      KEY_F (6), CK_Move, KEY_F (8), CK_Remove, KEY_F (12), CK_Save_As,
      KEY_F (2), CK_Save, ALT ('p'), CK_Paragraph_Format,
 
