@@ -1,3 +1,7 @@
+2000-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Added an explicit rule for man2hlp.
+
 2000-09-26  Pavel Roskin  <proski@gnu.org>
 
 	* listmode.c, listmode.h, main.c: Consistently using define

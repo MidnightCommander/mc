@@ -76,6 +76,9 @@ check:
 mc: $(OBJS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
+man2hlp: man2hlp.o
+	$(CC) $(LDFLAGS) man2hlp.o -o man2hlp
+
 mcmfmt: mfmt.o
 	$(CC) $(LDFLAGS) mfmt.o -o mcmfmt 
 
