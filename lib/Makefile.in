@@ -38,8 +38,10 @@ distclean:
 	for I in $(LIBFILES_OUT); do $(RMF) $(srcdir)/$$I; done
 
 install:
-	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
+	for I in $(LIBFILES_CONST); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(libdir)/$$I; done
+	for I in $(LIBFILES_OUT); \
+	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(libdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 

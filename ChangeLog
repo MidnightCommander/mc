@@ -1,3 +1,10 @@
+Sun Dec 13 15:26:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Makefile.in (target installdirs): create $(DESTDIR)$(idldir) 
+
+	* lib/Makefile.in (target install): install $(LIBFILES_OUT) from the 
+	builddir
+
 1998-12-08  Tuomas Kuosmanen  <tigert@gimp.org>
 
         * new_icons/gnome-image-[lots].png: I added some icons for file

@@ -59,6 +59,7 @@ installdirs:
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
 	$(mcsrcdir)/xmkdir $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
+	$(mcsrcdir)/xmkdir $(DESTDIR)$(idldir)
 
 mcfninstall:
 	-/bin/sh ./mcfn_install
