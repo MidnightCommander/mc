@@ -15,6 +15,11 @@
 	* samba/lib/util.c (set_filelen): Likewise.
 	(setbuffer): Likewise.
 
+	* Makefile.am (SAMBA_DIST): Remove tests/ftruncate.c
+	* samba/tests/ftruncate.c: Removed.
+	* samba/configure.in: Don't check if ftruncate() can 
+	extend a file.
+
 2002-06-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_read_oldc_head): Use char[] for buf instead

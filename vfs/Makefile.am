@@ -170,7 +170,6 @@ SAMBA_DIST =			\
 	param/loadparm.c	\
 	param/params.c		\
 	tests/README		\
-	tests/ftruncate.c	\
 	tests/getgroups.c	\
 	tests/summary.c		\
 	tests/trivial.c
