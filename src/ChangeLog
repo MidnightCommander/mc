@@ -1,3 +1,9 @@
+2002-08-04  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c: Assume that SIGTSTP and SIGCONT are always
+	defined.  This is now checked in configure.  Otherwise
+	synchronize() would hang until subshell exits.
+
 2002-08-01  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c: Unconditionally enable finalization code that was
