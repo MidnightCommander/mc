@@ -1,6 +1,8 @@
 [Desktop Entry]
 Name=Image
+Name[de]=Grafik
 Comment=Create a new Image
+Comment[de]=Eine neue Grafik erzeugen
 TryExec=gimp
 Exec=gimp
 Icon=gnome-gimp.png
