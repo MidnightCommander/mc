@@ -22,10 +22,15 @@
 #define _GTK_EDIT_C
 
 #include <config.h>
-#include <gnome.h>
 #include <ctype.h>
 #include <string.h>
 #include <pwd.h>
+
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+
+#include <gnome.h>
 #include <gdk/gdkkeysyms.h>
 #include <gtk/gtkmain.h>
 #include <gtk/gtkselection.h>

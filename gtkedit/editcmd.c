@@ -1424,6 +1424,9 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
 #else
 
+#undef B_ENTER
+#undef B_CANCEL
+
 #define B_ENTER 0
 #define B_SKIP_REPLACE 1
 #define B_REPLACE_ALL 2

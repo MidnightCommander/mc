@@ -1,5 +1,10 @@
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* gtkedit.c: Include <sys/param.h> if present - it should always
+	be included before <glib.h> to avoid redefining MIN and MAX.
+	* editcmd.c [!MIDNIGHT]: Undefine B_ENTER and B_CANCEL before
+	redefining them.
+
 	* edit.h: Include <sys/param.h> if present.  Include Gtk+
 	headers as system headers.
 	* gtkedit.c: Include Gtk+ headers as system headers.
