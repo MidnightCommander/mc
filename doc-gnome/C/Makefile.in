@@ -344,8 +344,7 @@ all:
 index.html:
 
 gmc.html: gmc/gmc.html
-	-cp gmc/gmc.html .
-	-ln -s gmc.html index.html
+	-cp gmc/index.html .
 
 gmc/gmc.html: $(SGML_FILES)
 	-db2html gmc.sgml

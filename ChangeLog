@@ -1,3 +1,8 @@
+1999-09-08  Kjartan Maraas  <kmaraas@online.no>
+
+	* doc-gnome/*: Shiny new docs from users-guide.
+	All synced up.
+	
 1999-09-03  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* configure.in: added 'nl' to ALL_LINGUAS, it was missing.
