@@ -284,8 +284,12 @@ static key_define_t xterm_key_defines [] = {
     { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "[5B",  MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "[5C",  MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_LEFT,  ESC_STR "[5D",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_UP,    ESC_STR "[6A", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN,  ESC_STR "[6B", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT, ESC_STR "[6C", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT,  ESC_STR "[6D", MCKEY_NOACTION },
 
-    /* newer gnome-terminal */
+    /* gnome-terminal - application mode */
     { KEY_M_CTRL  | KEY_UP,    ESC_STR "O5A",  MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_DOWN,  ESC_STR "O5B",  MCKEY_NOACTION },
     { KEY_M_CTRL  | KEY_RIGHT, ESC_STR "O5C",  MCKEY_NOACTION },
