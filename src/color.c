@@ -410,7 +410,7 @@ mc_init_pair (int index, CTYPE foreground, CTYPE background)
 }
 
 int
-try_alloc_color_pair (char *fg, char *bg)
+try_alloc_color_pair (const char *fg, const char *bg)
 {
     int fg_index, bg_index;
     int bold_attr;

@@ -1,5 +1,10 @@
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
+	* color.c (try_alloc_color_pair (ncurses)): Added const qualifier
+	to the arguments.
+
+2004-09-02  Roland Illig  <roland.illig@gmx.de>
+
 	* man2hlp.c (handle_link): Reverted the last change because
 	glib-1.2 does not know g_strlcpy.
 
