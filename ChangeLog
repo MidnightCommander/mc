@@ -1,3 +1,8 @@
+2004-12-10  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* autogen.sh: Comment workaround for Automake 1.5. It's not working
+	for Automake 1.9.
+
 2004-12-07  Roland Illig  <roland.illig@gmx.de>
 
 	* syntax/Makefile.am: Don't install syntax highlighting files if

@@ -90,7 +90,8 @@ test -f configure || \
   { echo "autoconf failed to generate configure" 2>&1; exit 1; }
 
 # Workaround for Automake 1.5 to ensure that depcomp is distributed.
-$AUTOMAKE -a src/Makefile
+# Uncomment this for Automake 1.5
+#$AUTOMAKE -a src/Makefile
 $AUTOMAKE -a
 test -f Makefile.in || \
   { echo "automake failed to generate Makefile.in" 2>&1; exit 1; }
