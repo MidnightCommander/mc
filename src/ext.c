@@ -53,33 +53,34 @@ static char *data = NULL;
 void
 flush_extension_file (void)
 {
-    if (data){
-        g_free (data);
-        data = NULL;
+    if (data) {
+	g_free (data);
+	data = NULL;
     }
 
 }
 
-typedef char *(*quote_func_t)(const char *name, int i);
+typedef char *(*quote_func_t) (const char *name, int i);
 
 static void
-exec_extension (const char *filename, const char *data, int *move_dir, int start_line)
+exec_extension (const char *filename, const char *data, int *move_dir,
+		int start_line)
 {
     char *file_name;
-    int  cmd_file_fd;
+    int cmd_file_fd;
     FILE *cmd_file;
-    int  expand_prefix_found = 0;
-    int  parameter_found = 0;
-    char prompt [80];
-    int  run_view = 0;
-    int  def_hex_mode = default_hex_mode, changed_hex_mode = 0;
-    int  def_nroff_flag = default_nroff_flag, changed_nroff_flag = 0;
-    int  written_nonspace = 0;
-    int  is_cd = 0;
-    char buffer [1024];
+    int expand_prefix_found = 0;
+    int parameter_found = 0;
+    char prompt[80];
+    int run_view = 0;
+    int def_hex_mode = default_hex_mode, changed_hex_mode = 0;
+    int def_nroff_flag = default_nroff_flag, changed_nroff_flag = 0;
+    int written_nonspace = 0;
+    int is_cd = 0;
+    char buffer[1024];
     char *p = 0;
     char *localcopy = NULL;
-    int  do_local_copy;
+    int do_local_copy;
     time_t localmtime = 0;
     struct stat mystat;
     quote_func_t quote_func = name_quote;
@@ -88,7 +89,7 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
     g_return_if_fail (data != NULL);
 
     /* Avoid making a local copy if we are doing a cd */
-    if (!vfs_file_is_local(filename))
+    if (!vfs_file_is_local (filename))
 	do_local_copy = 1;
     else
 	do_local_copy = 0;
@@ -99,29 +100,30 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
      * Sometimes it's not needed (e.g. for %cd and %view commands),
      * but it's easier to create it anyway.
      */
-    cmd_file_fd = mc_mkstemps(&file_name, "mcext", SCRIPT_SUFFIX);
+    cmd_file_fd = mc_mkstemps (&file_name, "mcext", SCRIPT_SUFFIX);
 
-    if (cmd_file_fd == -1){
-	message (1, MSG_ERROR, _(" Cannot create temporary command file \n %s "),
+    if (cmd_file_fd == -1) {
+	message (1, MSG_ERROR,
+		 _(" Cannot create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
     fputs ("#! /bin/sh\n", cmd_file);
 
-    prompt [0] = 0;
-    for (;*data && *data != '\n'; data++){
-	if (parameter_found){
-	    if (*data == '}'){
+    prompt[0] = 0;
+    for (; *data && *data != '\n'; data++) {
+	if (parameter_found) {
+	    if (*data == '}') {
 		char *parameter;
 		parameter_found = 0;
 		parameter = input_dialog (_(" Parameter "), prompt, "");
-		if (!parameter){
+		if (!parameter) {
 		    /* User canceled */
 		    fclose (cmd_file);
 		    unlink (file_name);
 		    if (localcopy) {
-		        mc_ungetlocalcopy (filename, localcopy, 0);
+			mc_ungetlocalcopy (filename, localcopy, 0);
 		    }
 		    g_free (file_name);
 		    return;
@@ -132,41 +134,41 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 	    } else {
 		int len = strlen (prompt);
 
-		if (len < sizeof (prompt) - 1){
-		    prompt [len] = *data;
-		    prompt [len+1] = 0;
+		if (len < sizeof (prompt) - 1) {
+		    prompt[len] = *data;
+		    prompt[len + 1] = 0;
 		}
 	    }
-	} else if (expand_prefix_found){
+	} else if (expand_prefix_found) {
 	    expand_prefix_found = 0;
 	    if (*data == '{')
 		parameter_found = 1;
 	    else {
-	    	int i = check_format_view (data);
+		int i = check_format_view (data);
 		char *v;
 
-	    	if (i){
-	    	    data += i - 1;
-	    	    run_view = 1;
-	    	} else if ((i = check_format_cd (data)) > 0) {
-	    	    is_cd = 1;
+		if (i) {
+		    data += i - 1;
+		    run_view = 1;
+		} else if ((i = check_format_cd (data)) > 0) {
+		    is_cd = 1;
 		    quote_func = fake_name_quote;
 		    do_local_copy = 0;
-	    	    p = buffer;
-	    	    data += i - 1;
-		} else if ((i = check_format_var (data, &v)) > 0 && v){
+		    p = buffer;
+		    data += i - 1;
+		} else if ((i = check_format_var (data, &v)) > 0 && v) {
 		    fputs (v, cmd_file);
 		    g_free (v);
 		    data += i;
-	        } else {
+		} else {
 		    char *text;
 
-		    if (*data == 'f'){
-			if (do_local_copy){
+		    if (*data == 'f') {
+			if (do_local_copy) {
 			    localcopy = mc_getlocalcopy (filename);
 			    if (localcopy == NULL) {
-				fclose(cmd_file);
-				unlink(file_name);
+				fclose (cmd_file);
+				unlink (file_name);
 				g_free (file_name);
 				return;
 			    }
@@ -177,30 +179,30 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 			    text = (*quote_func) (filename, 0);
 			}
 		    } else
-		        text = expand_format (NULL, *data, !is_cd);
+			text = expand_format (NULL, *data, !is_cd);
 		    if (!is_cd)
-		        fputs (text, cmd_file);
+			fputs (text, cmd_file);
 		    else {
-		    	strcpy (p, text);
-		    	p = strchr (p, 0);
+			strcpy (p, text);
+			p = strchr (p, 0);
 		    }
 		    g_free (text);
 		    written_nonspace = 1;
-	        }
+		}
 	    }
 	} else {
 	    if (*data == '%')
 		expand_prefix_found = 1;
 	    else {
-	        if (*data != ' ' && *data != '\t')
-	            written_nonspace = 1;
-	        if (is_cd)
-	            *(p++) = *data;
-	        else
+		if (*data != ' ' && *data != '\t')
+		    written_nonspace = 1;
+		if (is_cd)
+		    *(p++) = *data;
+		else
 		    fputc (*data, cmd_file);
 	    }
 	}
-    } /* for */
+    }				/* for */
 
     /* Make sure that the file removes itself when it finishes */
     fprintf (cmd_file, "\n/bin/rm -f %s\n", file_name);
@@ -214,48 +216,49 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 	chmod (file_name, S_IRWXU);
     }
 
-    if (run_view){
-    	altered_hex_mode = 0;
-    	altered_nroff_flag = 0;
-    	if (def_hex_mode != default_hex_mode)
-    	    changed_hex_mode = 1;
-    	if (def_nroff_flag != default_nroff_flag)
-    	    changed_nroff_flag = 1;
+    if (run_view) {
+	altered_hex_mode = 0;
+	altered_nroff_flag = 0;
+	if (def_hex_mode != default_hex_mode)
+	    changed_hex_mode = 1;
+	if (def_nroff_flag != default_nroff_flag)
+	    changed_nroff_flag = 1;
 
-    	/* If we've written whitespace only, then just load filename
+	/* If we've written whitespace only, then just load filename
 	 * into view
 	 */
-    	if (written_nonspace)
-    	    view (file_name, filename, move_dir, start_line);
-    	else
-    	    view (0, filename, move_dir, start_line);
-    	if (changed_hex_mode && !altered_hex_mode)
-    	    default_hex_mode = def_hex_mode;
-    	if (changed_nroff_flag && !altered_nroff_flag)
-    	    default_nroff_flag = def_nroff_flag;
-    	repaint_screen ();
+	if (written_nonspace)
+	    view (file_name, filename, move_dir, start_line);
+	else
+	    view (0, filename, move_dir, start_line);
+	if (changed_hex_mode && !altered_hex_mode)
+	    default_hex_mode = def_hex_mode;
+	if (changed_nroff_flag && !altered_nroff_flag)
+	    default_nroff_flag = def_nroff_flag;
+	repaint_screen ();
     } else if (is_cd) {
-    	char *q;
-    	*p = 0;
-    	p = buffer;
+	char *q;
+	*p = 0;
+	p = buffer;
 /*	while (*p == ' ' && *p == '\t')
  *	    p++;
  */
 	/* Search last non-space character. Start search at the end in order
 	   not to short filenames containing spaces. */
-    	q = p + strlen (p) - 1;
-    	while (q >= p && (*q == ' ' || *q == '\t'))
-    	    q--;
-    	q[1] = 0;
-    	do_cd (p, cd_parse_command);
+	q = p + strlen (p) - 1;
+	while (q >= p && (*q == ' ' || *q == '\t'))
+	    q--;
+	q[1] = 0;
+	do_cd (p, cd_parse_command);
     } else {
 	shell_execute (file_name, EXECUTE_INTERNAL);
 	if (console_flag) {
 	    handle_console (CONSOLE_SAVE);
 	    if (output_lines && keybar_visible) {
 		show_console_contents (output_start_y,
-				       LINES-keybar_visible-output_lines-1,
-				       LINES-keybar_visible-1);
+				       LINES - keybar_visible -
+				       output_lines - 1,
+				       LINES - keybar_visible - 1);
 
 	    }
 	}
@@ -264,8 +267,9 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 	g_free (file_name);
     }
     if (localcopy) {
-        mc_stat (localcopy, &mystat);
-        mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
+	mc_stat (localcopy, &mystat);
+	mc_ungetlocalcopy (filename, localcopy,
+			   localmtime != mystat.st_mtime);
     }
 }
 
@@ -277,7 +281,7 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 
 /*
  * Run the "file" command on the local file.
- * Return 1 if the data is valid, 0 otherwise.
+ * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 static int
 get_file_type_local (char *filename, char *buf, int buflen)
@@ -298,11 +302,13 @@ get_file_type_local (char *filename, char *buf, int buflen)
 	pclose (f);
 #ifdef SCO_FLAVOR
 	/*
-	   **       SCO 3.2 does has a buggy pclose(), so
-	   **       <command> become zombie (alex)
+	 **       SCO 3.2 does has a buggy pclose(), so
+	 **       <command> become zombie (alex)
 	 */
 	waitpid (-1, NULL, WNOHANG);
 #endif				/* SCO_FLAVOR */
+    } else {
+	return -1;
     }
 
     return (read_bytes > 0);
@@ -312,7 +318,7 @@ get_file_type_local (char *filename, char *buf, int buflen)
 #ifdef FILE_STDIN
 /*
  * Read file through VFS and feed is to the "file" command.
- * Return 1 if the data is valid, 0 otherwise.
+ * Return 1 if the data is valid, 0 otherwise, -1 for fatal errors.
  */
 static int
 get_file_type_pipe (char *filename, char *buf, int buflen)
@@ -328,17 +334,21 @@ get_file_type_pipe (char *filename, char *buf, int buflen)
 	 * sources. Tell me if any other file uses larger
 	 * chunk from beginning
 	 */
-	pipehandle = mc_doublepopen
-	    (remotehandle, 8192, &p, "file", "file", "-", NULL);
+	pipehandle =
+	    mc_doublepopen (remotehandle, 8192, &p, "file", "file", "-",
+			    NULL);
 	if (pipehandle != -1) {
 	    int i;
-	    while ((i = read (pipehandle, buf
-			      + read_bytes, buflen - 1 - read_bytes)) > 0)
+	    while ((i =
+		    read (pipehandle, buf + read_bytes,
+			  buflen - 1 - read_bytes)) > 0)
 		read_bytes += i;
 	    mc_doublepclose (pipehandle, p);
 	    buf[read_bytes] = 0;
 	}
 	mc_close (remotehandle);
+    } else {
+	return -1;
     }
 
     return (read_bytes > 0);
@@ -374,20 +384,22 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	*have_type = 1;
 
 	if (islocal) {
-	    got_data = get_file_type_local (filename, content_string,
-					    sizeof (content_string));
+	    got_data =
+		get_file_type_local (filename, content_string,
+				     sizeof (content_string));
 	} else
 #ifdef FILE_STDIN
 	{
-	    got_data = get_file_type_pipe (filename, content_string,
-					   sizeof (content_string));
+	    got_data =
+		get_file_type_pipe (filename, content_string,
+				    sizeof (content_string));
 	}
 #else
 	    /* Cannot use pipe, must make a local copy, not yet supported */
 	    return 0;
 #endif				/* !FILE_STDIN */
 
-	if (got_data) {
+	if (got_data > 0) {
 	    char *pp;
 
 	    /* Paranoid termination */
@@ -417,8 +429,13 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 	}
     }
 
-    if (content_string && content_string[0] &&
-	regexp_match (ptr, content_string + content_shift, match_normal)) {
+    if (got_data == -1) {
+	return -1;
+    }
+
+    if (content_string && content_string[0]
+	&& regexp_match (ptr, content_string + content_shift,
+			 match_normal)) {
 	found = 1;
     }
 
@@ -430,7 +447,9 @@ regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
  *
  * This function returns:
  *
- * 1 if it ran some command or 0 otherwise.
+ * -1 for a failure or user interrupt
+ * 0 if no command was run
+ * 1 if some command was run
  *
  * If action == "View" then a parameter is checked in the form of "View:%d",
  * if the value for %d exists, then the viewer is started up at that line number.
@@ -441,6 +460,7 @@ regex_command (char *filename, char *action, int *move_dir)
     char *p, *q, *r, c;
     int file_len = strlen (filename);
     int found = 0;
+    int error_flag = 0;
     int ret = 0;
     int old_patterns;
     struct stat mystat;
@@ -475,8 +495,8 @@ regex_command (char *filename, char *action, int *move_dir)
 	    return 0;
 
 	if (!strstr (data, "default/")) {
-	    if (!strstr (data, "regex/") && !strstr (data, "shell/") &&
-		!strstr (data, "type/")) {
+	    if (!strstr (data, "regex/") && !strstr (data, "shell/")
+		&& !strstr (data, "type/")) {
 		g_free (data);
 		data = NULL;
 		if (mc_user_ext) {
@@ -549,9 +569,9 @@ regex_command (char *filename, char *action, int *move_dir)
 	    c = *q;
 	    *q = 0;
 	    if (include_target) {
-		if ((strncmp (p, "include/", 8) == 0) &&
-		    (strncmp (p + 8, include_target, include_target_len) ==
-		     0))
+		if ((strncmp (p, "include/", 8) == 0)
+		    && (strncmp (p + 8, include_target, include_target_len)
+			== 0))
 		    found = 1;
 	    } else if (!strncmp (p, "regex/", 6)) {
 		p += 6;
@@ -574,9 +594,13 @@ regex_command (char *filename, char *action, int *move_dir)
 			found = 1;
 		}
 	    } else if (!strncmp (p, "type/", 5)) {
+		int res;
 		p += 5;
-		found =
-		    regex_check_type (filename, file_len, p, &have_type);
+		res = regex_check_type (filename, file_len, p, &have_type);
+		if (res == 1)
+		    found = 1;
+		if (res == -1)
+		    error_flag = 1;	/* leave it if file cannot be opened */
 	    } else if (!strncmp (p, "default/", 8)) {
 		found = 1;
 	    }
@@ -589,7 +613,7 @@ regex_command (char *filename, char *action, int *move_dir)
 	    q = strchr (p, '\n');
 	    if (q == NULL)
 		q = strchr (p, 0);
-	    if (found) {
+	    if (found && !error_flag) {
 		r = strchr (p, '=');
 		if (r != NULL) {
 		    c = *r;
@@ -645,5 +669,7 @@ regex_command (char *filename, char *action, int *move_dir)
 	}
     }
     easy_patterns = old_patterns;
+    if (error_flag)
+	return -1;
     return ret;
 }

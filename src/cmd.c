@@ -111,69 +111,74 @@ get_a_panel (WPanel *panel)
  *               always invokes the internal viewer.
  *   internal:   If set uses the internal viewer, otherwise an external viewer.
  */
-int view_file_at_line (char *filename, int plain_view, int internal, int start_line)
+int
+view_file_at_line (char *filename, int plain_view, int internal,
+		   int start_line)
 {
     static char *viewer = 0;
     int move_dir = 0;
 
 
     if (plain_view) {
-        int changed_hex_mode = 0;
-        int changed_nroff_flag = 0;
-        int changed_magic_flag = 0;
-    
-        altered_hex_mode = 0;
-        altered_nroff_flag = 0;
-        altered_magic_flag = 0;
-        if (default_hex_mode)
-            changed_hex_mode = 1;
-        if (default_nroff_flag)
-            changed_nroff_flag = 1;
-        if (default_magic_flag)
-            changed_magic_flag = 1;
-        default_hex_mode = 0;
-        default_nroff_flag = 0;
-        default_magic_flag = 0;
-        view (0, filename, &move_dir, start_line);
-        if (changed_hex_mode && !altered_hex_mode)
-            default_hex_mode = 1;
-        if (changed_nroff_flag && !altered_nroff_flag)
-            default_nroff_flag = 1;
-        if (changed_magic_flag && !altered_magic_flag)
-            default_magic_flag = 1;
-        repaint_screen ();
-        return move_dir;
+	int changed_hex_mode = 0;
+	int changed_nroff_flag = 0;
+	int changed_magic_flag = 0;
+
+	altered_hex_mode = 0;
+	altered_nroff_flag = 0;
+	altered_magic_flag = 0;
+	if (default_hex_mode)
+	    changed_hex_mode = 1;
+	if (default_nroff_flag)
+	    changed_nroff_flag = 1;
+	if (default_magic_flag)
+	    changed_magic_flag = 1;
+	default_hex_mode = 0;
+	default_nroff_flag = 0;
+	default_magic_flag = 0;
+	view (0, filename, &move_dir, start_line);
+	if (changed_hex_mode && !altered_hex_mode)
+	    default_hex_mode = 1;
+	if (changed_nroff_flag && !altered_nroff_flag)
+	    default_nroff_flag = 1;
+	if (changed_magic_flag && !altered_magic_flag)
+	    default_magic_flag = 1;
+	repaint_screen ();
+	return move_dir;
     }
-    if (internal){
-	char view_entry [BUF_TINY];
+    if (internal) {
+	char view_entry[BUF_TINY];
 
 	if (start_line != 0)
-	    g_snprintf (view_entry, sizeof (view_entry), "View:%d", start_line);
+	    g_snprintf (view_entry, sizeof (view_entry), "View:%d",
+			start_line);
 	else
 	    strcpy (view_entry, "View");
-	
-	if (!regex_command (filename, view_entry, &move_dir)){
+
+	if (regex_command (filename, view_entry, &move_dir) == 0) {
 	    view (0, filename, &move_dir, start_line);
 	    repaint_screen ();
 	}
     } else {
 	char *localcopy;
-	
-	if (!viewer){
+
+	if (!viewer) {
 	    viewer = getenv ("PAGER");
 	    if (!viewer)
 		viewer = "view";
 	}
 	/* The file may be a non local file, get a copy */
-	if (!vfs_file_is_local (filename)){
+	if (!vfs_file_is_local (filename)) {
 	    localcopy = mc_getlocalcopy (filename);
-	    if (localcopy == NULL){
-		message (1, MSG_ERROR, _(" Can not fetch a local copy of %s "), filename);
+	    if (localcopy == NULL) {
+		message (1, MSG_ERROR,
+			 _(" Can not fetch a local copy of %s "),
+			 filename);
 		return 0;
 	    }
 	    execute_internal (viewer, localcopy);
 	    mc_ungetlocalcopy (filename, localcopy, 0);
-	} else 
+	} else
 	    execute_internal (viewer, filename);
     }
     return move_dir;
@@ -313,23 +318,26 @@ do_edit (const char *what)
     do_edit_at_line (what, 1);
 }
 
-void edit_cmd (WPanel *panel)
+void
+edit_cmd (WPanel *panel)
 {
-    panel = get_a_panel(panel);
-    if (!regex_command (selection (panel)->fname, "Edit", 0))
-        do_edit (selection (panel)->fname);
+    panel = get_a_panel (panel);
+    if (regex_command (selection (panel)->fname, "Edit", 0) == 0)
+	do_edit (selection (panel)->fname);
 }
 
-void edit_cmd_new (WPanel *panel)
+void
+edit_cmd_new (WPanel *panel)
 {
     do_edit ("");
 }
 
 /* Invoked by F5.  Copy, default to the other panel.  */
-void copy_cmd (void)
+void
+copy_cmd (void)
 {
     save_cwds_stat ();
-    if (panel_operate (cpanel, OP_COPY, NULL, TRUE)){
+    if (panel_operate (cpanel, OP_COPY, NULL, TRUE)) {
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }

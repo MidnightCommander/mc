@@ -1,5 +1,10 @@
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c (get_file_type_local): Return -1 for fatal errors.
+	(get_file_type_pipe): Likewise.
+	(regex_command): Likewise.  Adjust all callers.
+	From Jindrich Makovicka <makovick@KMLinux.fjfi.cvut.cz>
+
 	* dlg.c (frontend_run_dlg): Allow terminating the dialog from
 	the idle handler.
 	From Jindrich Makovicka <makovick@KMLinux.fjfi.cvut.cz>

@@ -1910,7 +1910,7 @@ do_enter_on_file_entry (file_entry *fe)
     }
 
     /* Try associated command */
-    if (regex_command (fe->fname, "Open", 0))
+    if (regex_command (fe->fname, "Open", 0) != 0)
 	return 1;
 
     /* Check if the file is executable */
@@ -1925,26 +1925,29 @@ do_enter_on_file_entry (file_entry *fe)
     if (vfs_current_is_local ())
 #endif
     {
-        char *tmp = name_quote (fe->fname, 0);
-        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
-        g_free (tmp);
-        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
-					       _(" Do you really want to execute? "),
-					       0, 2, _("&Yes"), _("&No")) == 0))
-            execute (cmd);
-	    g_free (cmd);
+	char *tmp = name_quote (fe->fname, 0);
+	char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+	g_free (tmp);
+	if (!confirm_execute
+	    ||
+	    (query_dialog
+	     (_(" The Midnight Commander "),
+	      _(" Do you really want to execute? "), 0, 2, _("&Yes"),
+	      _("&No")) == 0))
+	    execute (cmd);
+	g_free (cmd);
     }
 #ifdef USE_VFS
     else {
 	char *tmp;
 
-	tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
+	tmp = concat_dir_and_file (vfs_get_current_dir (), fe->fname);
 	if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
 	    /* Execution on this filesysten is not implemented */
 	    message (1, _(" Warning "), _(" No action taken "));
-	    g_free (tmp);
+	g_free (tmp);
     }
-#endif /* USE_VFS */
+#endif				/* USE_VFS */
 
     return 1;
 }
