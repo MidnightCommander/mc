@@ -164,7 +164,7 @@ static unsigned char *
 do_transform_source (FileOpContext *ctx, unsigned char *source)
 {
     size_t j, k, l, len;
-    unsigned char *fnsource = x_basename (source);
+    unsigned const char *fnsource = x_basename (source);
     int next_reg;
     enum CaseConvs case_conv = NO_CONV;
     static unsigned char fntarget[MC_MAXPATHLEN];

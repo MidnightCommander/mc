@@ -2013,7 +2013,7 @@ handle_args (int argc, char *argv[])
 {
     char *tmp;
     poptContext ctx;
-    char *base;
+    const char *base;
     int c;
 
     ctx =
