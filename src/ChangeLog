@@ -1,3 +1,8 @@
+2002-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* tty.h: Use standard autoconf defines to determine which
+	ncurses header to include.  Eliminate RENAMED_NCURSES.
+
 2002-07-10  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c: Cast argument for GUINT_TO_POINTER to int to fix

@@ -23,12 +23,12 @@ int got_interrupt (void);
 #endif
 
 #ifdef USE_NCURSES
-    /* This is required since ncurses 1.8.6 and newer changed the name of */
-    /* the include files (July 1994) */
-#    ifdef RENAMED_NCURSES
-#        include <curses.h>
-#    else
+#    ifdef HAVE_NCURSES_CURSES_H
+#        include <ncurses/curses.h>
+#    elif HAVE_NCURSES_H
 #        include <ncurses.h>
+#    else
+#        include <curses.h>
 #    endif
 #endif /* USE_NCURSES */
 
