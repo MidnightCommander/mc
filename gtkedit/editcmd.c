@@ -1477,13 +1477,13 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     char *s;
     s = gtk_dialog_cauldron (
 				"Search", GTK_CAULDRON_TOPLEVEL,
-				" ( (Enter search text)d | %Egxf )xf / ( ( %Cd // %Cd // %Cd ) || ( %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
+				" ( (Enter search text)d | %Eogxf )xf / ( ( %Cd // %Cd // %Cd ) || ( %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
 				search_text, "search",
-				"Whole word", &replace_whole,
-				"Case sensitive", &replace_case,
-				"Regular expression", &replace_regexp,
-				"Backwards", &replace_backwards,
-				"Scanf expression", &replace_scanf,
+				"&Whole word", &replace_whole,
+				"Case &sensitive", &replace_case,
+				"&Regular expression", &replace_regexp,
+				"&Backwards", &replace_backwards,
+				"Scanf &expression", &replace_scanf,
 				GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL
 	);
@@ -1497,17 +1497,17 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     char *s;
     s = gtk_dialog_cauldron (
 				"Search", GTK_CAULDRON_TOPLEVEL,
-				" ( (Enter search text)d | %Egxf )xf / ( (Enter replace text)d | %Egxf )xf / ( (Enter argument order)d | %Egxf )xf / ( ( %Cd // %Cd // %Cd // %Cd ) || ( %Cd // %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
+				" ( (Enter search text)d | %Eogxf )xf / ( (Enter replace text)d | %Egxf )xf / ( (Enter argument order)d | %Egxf )xf / ( ( %Cd // %Cd // %Cd // %Cd ) || ( %Cd // %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
 				search_text, "search",
 				replace_text, "replace",
 				arg_order, "arg_order",
-				"Whole word", &replace_whole,
-				"Case sensitive", &replace_case,
-				"Regular expression", &replace_regexp,
-				"Backwards", &replace_backwards,
-				"Prompt on replace", &replace_prompt,
-				"Replace all", &replace_all,
-				"Scanf expression", &replace_scanf,
+				"&Whole word", &replace_whole,
+				"Case &sensitive", &replace_case,
+				"&Regular expression", &replace_regexp,
+				"&Backwards", &replace_backwards,
+				"Pr&ompt on replace", &replace_prompt,
+				"Replace &all", &replace_all,
+				"Scanf &expression", &replace_scanf,
 				GNOME_STOCK_BUTTON_OK,
 				GNOME_STOCK_BUTTON_CANCEL
 	);
