@@ -840,7 +840,9 @@ fi],
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi])
 
+AM_CONDITIONAL(USE_VFS, [test -n "$LIBVFS"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test "x$SAMBAFILES" != x])
+AM_CONDITIONAL(INCLUDED_SLANG, [test -n "$LIBSLANG"])
 
 AC_OUTPUT([
 Make.common 

@@ -1,3 +1,7 @@
+2001-08-25  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: New conditionals USE_VFS and INCLUDED_SLANG.
+
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* extraconf.h: Remove all references to HAVE_X.
