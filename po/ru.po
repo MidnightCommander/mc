@@ -3247,6 +3247,18 @@ msgstr "Невозможно исполнить команду."
 msgid "Pipe close failed"
 msgstr "Сбой закрытия канала"
 
+#: src/popt.c:547
+msgid "missing argument"
+msgstr "отсутствует аргумент"
+
+#: src/popt.c:549
+msgid "unknown option"
+msgstr "неизвестный ключ"
+
+#: src/popt.c:555
+msgid "invalid numeric value"
+msgstr "неверное числовое значение"
+
 #: src/popthelp.c:31
 msgid "Show this help message"
 msgstr "Показать это сообщение помощи"
@@ -3262,10 +3274,6 @@ msgstr "АРГ"
 #: src/popthelp.c:179
 msgid "Usage:"
 msgstr "Используйте:"
-
-#: src/popthelp.c:197
-msgid "[OPTION...]"
-msgstr "[ПАРАМЕТР...]"
 
 #: src/screen.c:173
 msgid "UP--DIR"
