@@ -1246,7 +1246,6 @@ AC_OUTPUT([
 Make.common 
 Makefile 
 mc.spec
-VERSION
 doc/Makefile 
 doc-gnome/Makefile
 doc-gnome/C/Makefile
