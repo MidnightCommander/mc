@@ -60,14 +60,35 @@ x_focus_view (WView *view)
 }
 
 void
-view_status (WView *view)
-{
-}
-
-void 
 view_percent (WView *view, int p, int w)
 {
-	printf ("Should update view percent\n");
+    int percent;
+    char buffer [40];
+    
+    percent = (view->s.st_size == 0 || view->last_byte == view->last) ? 100 :
+        (p > (INT_MAX/100) ?
+         p / (view->s.st_size / 100) :
+	 p * 100 / view->s.st_size);
+
+    sprintf (buffer, "%3d%%", percent);
+    gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
+}
+
+void
+view_status (WView *view)
+{
+	char buffer [80];
+
+	if (view->hex_mode)
+		sprintf (buffer, "Offset 0x$08x", view->edit_cursor);
+	else
+		sprintf (buffer, "Col %d", -view->start_col);
+	gtk_label_set (GTK_LABEL (view->gtk_offset), buffer);
+
+	sprintf (buffer, "%s bytes", size_trunc (view->s.st_size));
+	gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
+
+	gtk_label_set (GTK_LABEL (view->gtk_flags), view->growing_buffer ? "[grow]" : "");
 }
 
 void
@@ -126,10 +147,48 @@ gnome_view_callback (struct Dlg_head *h, int id, int msg)
 }
 
 static GtkWidget *
-gview_status (void)
+my_test (void)
+{
+	GtkWidget *frame;
+
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	gtk_container_add (GTK_CONTAINER (frame), gtk_label_new ("Hello Wordl!"));
+	return frame;
+}
+
+static GtkWidget *
+prepare_status (GtkWidget *s)
+{
+	GtkWidget *frame, *label;
+
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
+	label = gtk_label_new ("");
+	gtk_container_add (GTK_CONTAINER (frame), label);
+	gtk_box_pack_start_defaults (GTK_BOX (s), frame);
+	
+	return label;
+}
+
+static GtkWidget *
+gview_status (WView *view)
 {
 	GtkWidget *s;
-	return gtk_label_new ("doobie doo");
+
+	s = gtk_hbox_new (0, 0);
+	view->gtk_fname   = prepare_status (s);
+	view->gtk_offset  = prepare_status (s);
+	view->gtk_bytes   = prepare_status (s);
+	view->gtk_flags   = prepare_status (s);
+	view->gtk_percent = prepare_status (s);
+
+	gtk_label_set (GTK_LABEL (view->gtk_fname),
+		       view->filename ? view->filename : view->command ? view->command : "");
+	
+	GTK_BOX (s)->spacing = 2;
+	
+	return s;
 }
 
 int
@@ -150,7 +209,6 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	
 	toplevel = GTK_WIDGET (our_dlg->wdata);
 	vbox   = GTK_VBOX (gtk_vbox_new (0, 0));
-	status = gview_status ();
 	
 	gtk_window_set_policy (GTK_WINDOW (toplevel), TRUE, TRUE, TRUE);
 	gtk_container_add (GTK_CONTAINER (toplevel), GTK_WIDGET (vbox));
@@ -158,6 +216,7 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	gtk_window_set_title (GTK_WINDOW (toplevel),
 			      _command ? _command : _file);
 	wview = view_new (0, 0, 80, 25, 0);
+	status = gview_status (wview);
 	
 	add_widget (our_dlg, wview);
 	

@@ -1,5 +1,9 @@
-Wed Mar 11 15:28:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Thu Mar 12 00:08:06 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gview.c (view_percent): Added status display.
 	
+Wed Mar 11 22:35:02 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
 	* gwidget.c (entry_release): Now the WEntrys track the current
 	selection.p
 	(x_update_input): Repaint the widget after changing the position.
@@ -9,7 +13,16 @@ Wed Mar 11 15:28:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	signal when filling it up, which changes the current selection
 	(and thus some routines that invoke the reload panel option
 	fail). 
+	
+	(create_popup_submenu): Implement context sensitive menus (regular
+	files, and symlinks).
+	
+	(panel_realized): Use a different icon when we are dragging a
+	group of files.
 
+	(panel_artificial_drag_start): Add Elliot's Artificial drag start
+	support.
+	
 1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (gmc_char_grid_get_size): New public function.

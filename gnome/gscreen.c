@@ -14,6 +14,7 @@
 #include "fs.h"
 #include "x.h"
 #include <gdk/gdkprivate.h>
+#include <gdk/gdkx.h>
 #include "dir.h"
 #include "panel.h"
 #include "command.h"
@@ -49,8 +50,18 @@ static char *drop_types [] = { "url:ALL" };
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
-GtkWidget *drag_directory = NULL;
+/* GtkWidgets with the shaped windows for dragging */
+GtkWidget *drag_directory    = NULL;
 GtkWidget *drag_directory_ok = NULL;
+GtkWidget *drag_multiple     = NULL;
+GtkWidget *drag_multiple_ok  = NULL;
+
+typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
+
+#define F_ALL         1
+#define F_REGULAR     2
+#define F_SYMLINK     4
+#define F_SINGLE      8
 
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
@@ -60,10 +71,7 @@ repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 void
 show_dir (WPanel *panel)
 {
-	GList *list;
-
-	list = g_list_alloc ();
-	g_list_append (list, panel->cwd);
+	gtk_label_set (GTK_LABEL (panel->current_dir), panel->cwd);
 }
 
 static void
@@ -304,45 +312,36 @@ panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 	view_simple_cmd (panel);
 }
 
-void
-panel_action_copy (GtkWidget *widget, WPanel *panel)
-{
-}
+static struct {
+	char *text;
+	int  flags;
+	context_menu_callback callback;
+} file_actions [] = {
+	{ "Info",            0, NULL },
+	{ "",                0, NULL },
+	{ "Open",            F_ALL, panel_action_open },
+	{ "Open with",       F_ALL, panel_action_open_with },
+	{ "View",            F_ALL, panel_action_view },
+	{ "View unfiltered", F_ALL, panel_action_view_unfiltered },  
+	{ "",                0, NULL },
+	{ "Link...",         F_REGULAR | F_SINGLE, (context_menu_callback) link_cmd },
+	{ "Symlink...",      F_SINGLE, (context_menu_callback) symlink_cmd },
+	{ "Edit symlink...", F_SYMLINK,  (context_menu_callback) edit_symlink_cmd },
+	{ NULL, 0, NULL },
+};
 
-void
-panel_action_rename (GtkWidget *widget, WPanel *panel)
-{
-}
-
-void
-panel_action_delete (GtkWidget *widget, WPanel *panel)
-{
-}
-
-typedef void (*context_menu_callback)(GtkWidget *, WPanel *);
-	
 static struct {
 	char *text;
 	context_menu_callback callback;
-} file_actions [] = {
-	{ "Info",            NULL },
-	{ "",                NULL },
-	{ "Open",            panel_action_open },
-	{ "Open with",       panel_action_open_with },
-	{ "View",            panel_action_view },
-	{ "View unfiltered", panel_action_view_unfiltered },  
-	{ "",                NULL },
+} common_actions [] = {
 	{ "Copy...",         (context_menu_callback) copy_cmd },
 	{ "Rename/move..",   (context_menu_callback) ren_cmd },
 	{ "Delete...",       (context_menu_callback) delete_cmd },
-	{ "Link...",         (context_menu_callback) link_cmd },
-	{ "Symlink...",      (context_menu_callback) symlink_cmd },
-	{ "Edit symlink...", (context_menu_callback) edit_symlink_cmd },
-	{ NULL, NULL },
+	{ NULL, NULL }
 };
-	
+
 static GtkWidget *
-create_popup_submenu (WPanel *panel, char *filename)
+create_popup_submenu (WPanel *panel, int row, char *filename)
 {
 	static int submenu_translated;
 	GtkWidget *menu;
@@ -357,6 +356,32 @@ create_popup_submenu (WPanel *panel, char *filename)
 	for (i = 0; file_actions [i].text; i++){
 		GtkWidget *item;
 
+		/* Items with F_ALL bypass any other condition */
+		if (!(file_actions [i].flags & F_ALL)){
+
+			/* Items with F_SINGLE require that no marked files exist */
+			if (file_actions [i].flags & F_SINGLE){
+				if (panel->marked)
+					break;
+			}
+
+			/* Items with F_REGULAR do not accept any strange file types */
+			if (file_actions [i].flags & F_REGULAR){
+				struct stat *s = &panel->dir.list [row].buf;
+				
+				if (S_ISLNK (panel->dir.list [row].f.link_to_dir))
+					break;
+				if (S_ISSOCK (s->st_mode) || S_ISCHR (s->st_mode) ||
+				    S_ISFIFO (s->st_mode) || S_ISBLK (s->st_mode))
+					break;
+			}
+
+			/* Items with F_SYMLINK only operate on symbolic links */
+			if (file_actions [i].flags & F_SYMLINK){
+				if (!S_ISLNK (panel->dir.list [row].buf.st_mode))
+					break;
+			}
+		}
 		if (*file_actions [i].text)
 			item = gtk_menu_item_new_with_label (file_actions [i].text);
 		else
@@ -398,7 +423,17 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 {
 	GtkWidget *item;
 	char *p, *q;
-	int c;
+	int c, i;
+
+	for (i = 0; common_actions [i].text; i++){
+		GtkWidget *item;
+
+		item = gtk_menu_item_new_with_label (common_actions [i].text);
+		gtk_widget_show (item);
+		gtk_signal_connect (GTK_OBJECT (item), "activate",
+				    GTK_SIGNAL_FUNC (common_actions [i].callback), panel);
+		gtk_menu_append (GTK_MENU (menu), item);
+	}
 	
 	p = regex_command (filename, NULL, NULL, NULL);
 	if (!p)
@@ -431,7 +466,7 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 }
 
 static void
-file_popup (GdkEvent *event, WPanel *panel, char *filename)
+file_popup (GdkEvent *event, WPanel *panel, int row, char *filename)
 {
 	GtkWidget *menu = gtk_menu_new ();
 	GtkWidget *submenu;
@@ -441,7 +476,7 @@ file_popup (GdkEvent *event, WPanel *panel, char *filename)
 	gtk_widget_show (item);
 	gtk_menu_append (GTK_MENU (menu), item);
 
-	submenu = create_popup_submenu (panel, filename);
+	submenu = create_popup_submenu (panel, row, filename);
 	gtk_menu_item_set_submenu (GTK_MENU_ITEM (item), submenu);
 	
 	file_popup_add_context (GTK_MENU (menu), panel, filename);
@@ -482,7 +517,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			break;
 
 		case 3:
-			file_popup (event, panel, panel->dir.list[row].fname);
+			file_popup (event, panel, row, panel->dir.list[row].fname);
 			break;
 
 		default:
@@ -725,28 +760,82 @@ fixed_gtk_widget_dnd_drag_set (GtkCList *clist, int drag_enable, gchar **type_ac
 static void
 panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
-	printf ("Drag starting\n");
+	GdkPoint hotspot = { 5, 5 };
 
+	printf ("Drag starting\n");
+	if (panel->marked){
+		if (drag_multiple && drag_multiple_ok){
+			gdk_dnd_set_drag_shape (drag_multiple->window, &hotspot,
+						drag_multiple_ok->window, &hotspot);
+			gtk_widget_show (drag_multiple);
+			gtk_widget_show (drag_multiple_ok);
+		}
+			
+	} else {
+		if (drag_directory && drag_directory_ok)
+			gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
+						drag_directory_ok->window, &hotspot);	
+			gtk_widget_show (drag_directory_ok);
+			gtk_widget_show (drag_directory);
+	}
+
+}
+
+static void
+gdk_dnd_drag_begin (GdkWindow *initial_window)
+{
+  GdkEventDragBegin tev;
+  tev.type = GDK_DRAG_BEGIN;
+  tev.window = initial_window;
+  tev.u.allflags = 0;
+  tev.u.flags.protocol_version = DND_PROTOCOL_VERSION;
+
+  gdk_event_put ((GdkEvent *) &tev);
+}
+
+static void
+panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event, WPanel *panel)
+{
+	GdkWindowPrivate *wp = (GdkWindowPrivate *) window->clist_window;
+
+	if (!wp->dnd_drag_enabled)
+		return;
+	if (!(gdk_dnd.drag_perhaps || gdk_dnd.drag_really))
+		return;
+
+	gdk_dnd_drag_addwindow (window->clist_window);
+	gdk_dnd_drag_begin (window->clist_window);
+	XGrabPointer (gdk_display, wp->xwindow, False,
+		      ButtonMotionMask | ButtonPressMask | ButtonReleaseMask,
+		      GrabModeAsync, GrabModeAsync, gdk_root_window,
+		      None, CurrentTime);
+	gdk_dnd.dnd_grabbed = TRUE;
+	gdk_dnd.drag_perhaps = 1;
+	gdk_dnd.drag_really = 1;
+	gdk_dnd_display_drag_cursor (event->x, event->y, FALSE, TRUE);
 }
 
 static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
 {
-	GdkPoint hotspot = { 5, 5 };
 	GtkObject *obj = GTK_OBJECT (file_list);
+	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
 		drag_directory = make_transparent_window ("directory-ok.xpm");
-
+	
 	if (!drag_directory_ok)
 		drag_directory_ok = make_transparent_window ("directory.xpm");
+	
+	if (!drag_multiple)
+		drag_multiple = make_transparent_window ("multi.xpm");
+	
+	if (!drag_multiple_ok)
+		drag_multiple_ok = make_transparent_window ("multi-ok.xpm");
 
-	if (drag_directory && drag_directory_ok){
-		gtk_widget_show (drag_directory_ok);
-		gtk_widget_show (drag_directory);
+	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
-					drag_directory_ok->window, &hotspot);
-	}
+					drag_directory_ok->window, &hotspot);	
 	
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event",
@@ -766,6 +855,9 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	gtk_signal_connect (obj, "drop_data_available_event",
 			    GTK_SIGNAL_FUNC (panel_drop_data_available), panel);
 
+	/* Artificial way of getting drag to start without leaving the widget boundary */
+	gtk_signal_connect (obj, "motion_notify_event",
+			    GTK_SIGNAL_FUNC (panel_artificial_drag_start), panel);
 	fixed_gtk_widget_dnd_drop_set (GTK_CLIST (file_list), TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
@@ -823,11 +915,7 @@ panel_switch_new_display_mode (WPanel *panel)
 static GtkWidget *
 panel_create_cwd (WPanel *panel)
 {
-	GtkWidget *option_menu;
-
-	option_menu = gtk_combo_new ();
-	
-	return option_menu;
+	return gtk_label_new ("");
 }
 
 static void
@@ -923,7 +1011,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	status_line = gtk_hbox_new (0, 0);
 	gtk_widget_show (status_line);
 	
-	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 0, 0, 0);
+	gtk_box_pack_start (GTK_BOX (status_line), panel->current_dir, 1, 1, 0);
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
 
 	panel->status = statusbar = gtk_label_new ("");

@@ -91,6 +91,11 @@ typedef struct {
 #ifdef HAVE_GNOME
     int  current_x, current_y;	/* Current x,y position */
     int  color;			/* Current color */
+    void *gtk_fname;		/* filename widget */
+    void *gtk_offset;		/* offset widget */
+    void *gtk_bytes;		/* bytes */
+    void *gtk_flags;		/* flags (growing) */
+    void *gtk_percent;		/* percent */
 #endif
 	
     int  move_dir;		/* return value from widget:  
