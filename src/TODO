@@ -127,7 +127,7 @@
 
   - Use RPCbind on SVR4, this currently will be left for 3.5
 
-  - Optimize the mcfs read and write code: make the code ouput 8k
+  - Optimize the mcfs read and write code: make the code output 8k
     blocks all the time (if we have called mc_hint_readall) and probe
     the input for a possible cancel.
 
