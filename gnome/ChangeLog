@@ -8,6 +8,8 @@
 	panels that have unreachable directories.
 	(WindowFactory_get_windows_by_directory): New method to get a
 	sequence of all the panels that are showing the specified directory.
+	(Desktop_rescan): New method to rescan the desktop.
+	(Desktop_rescan_devices): New method to rescan the mountable devices.
 
 	* gmc.gnorba: Fixed the GOAD IDs to be something non-ad-hoc.
 	Added the Desktop interface.
