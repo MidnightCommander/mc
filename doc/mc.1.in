@@ -608,6 +608,12 @@ Command Menu
 lists the actions which are more general and bear no relation to the
 currently selected file or the tagged files.
 .PP
+The
+.\"LINK2"
+Options Menu
+.\"Options Menu"
+lists the actions which allow you to customize the Midnight Commander.
+.PP
 .SH "  Left and Right Menus"
 The outlook of the directory panels can be changed from the
 .B "Left"
