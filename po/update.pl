@@ -64,7 +64,7 @@ if ($LANG=~/^-(.)*/){
 
         $a="find ../ -type f -print | egrep '.*\\.(c|y|cc|c++|h|gob)' ";
 
-        open(BUF2, "POTFILES.in") || die "update.pl:  there's not POTFILES.in!!!\n";
+        open(BUF2, "POTFILES.in") || die "update.pl:  there is no POTFILES.in!!!\n";
         print "Searching for missing _(\" \") entries...\n";
         open(BUF1, "$a|");
 
@@ -160,7 +160,7 @@ elsif(-s "$LANG.po"){
 }
 
 else{
-    print "update.pl:  sorry $LANG.po does not exist!\n";
+    print "update.pl:  sorry, $LANG.po doesn't exist!\n";
     print "Try `update.pl --help' for more information.\n";    
     exit;
 }
