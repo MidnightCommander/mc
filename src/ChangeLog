@@ -10,10 +10,10 @@
 
 2005-03-25  Mike Gorchak  <mike@malva.ua>
 
-	* key.c (get_modifier): Fixed dynamic loading of the Photon library for
-	shift keys, only current version of libph used now.
-	(qansi_key_defines): Swapped Gray '-' and '+' codes definitions, due to
-	fixed bugs in the QNX6's console driver.
+	* key.c (get_modifier): Fixed dynamic loading of the Photon
+	library for shift keys, only current version of libph used now.
+	(qansi_key_defines): Swapped Gray '-' and '+' codes definitions,
+	due to fixed bugs in the QNX6's console driver.
 
 2005-03-23  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
@@ -38,7 +38,7 @@
 	directory.  Remove incorrect comment.
 
 	* achown.c (update_permissions): Partly revert recent changes
-	because they cause infinite recusion.
+	because they cause infinite recursion.
 
 2005-03-10  Roland Illig  <roland.illig@gmx.de>
 
@@ -57,22 +57,22 @@
 
 2005-01-29  Miguel de Icaza  <miguel@novell.com>
 
-	* utilunix.c (init_groups): Added support for getgrouplist patch
-	from Stefan Gohmann <gohmann@univention.de>.
+	* utilunix.c (init_groups): Added support for getgrouplist().
+	Patch from Stefan Gohmann <gohmann@univention.de>.
 
 2005-02-23  Roland Illig  <roland.illig@gmx.de>
 
-	* tty.h: Moved the function printwstr to slint.c, because the
+	* tty.h: Moved the function printwstr() to slint.c, because the
 	SunPro compiler does not eliminate unused inline functions.
-	* slint.c: printwstr has been moved to here.
+	* slint.c: printwstr() has been moved to here.
 	* unixcompat.h: Only include <sys/sysmacros.h> if we're on AIX,
 	as Solaris defines the macros twice---once in <sys/mkdev.h>,
 	and once in <sys/sysmacros.h>.
 
 2005-02-23  Roland Illig  <roland.illig@gmx.de>
 
-	* screen.c: Changed the return type of ilog10 to unsigned int
-	and adjusted some variables in format_device_number.
+	* screen.c: Changed the return type of ilog10() to unsigned int
+	and adjusted some variables in format_device_number().
 
 2005-02-22  Roland Illig  <roland.illig@gmx.de>
 
@@ -96,7 +96,7 @@
 2005-02-12  Roland Illig  <roland.illig@gmx.de>
 
 	* screen.c: Reverted my changes from 2005-02-08 (except the
-	maybe_cd calls) to not confuse the upcoming UTF-8 patches.
+	maybe_cd() calls) to not confuse the upcoming UTF-8 patches.
 
 2005-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
@@ -110,11 +110,11 @@
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
-	* dialog.c: Marked unused parameters. Now dlg_broadcast_msg_to
+	* dialog.c: Marked unused parameters. Now dlg_broadcast_msg_to()
 	does what the comment above it says.
 	* main.c (maybe_cd): Removed unused parameter.
 	* main.h: Likewise.
-	* screen.c: Marked unused parameters. Updated use of maybe_cd.
+	* screen.c: Marked unused parameters. Updated use of maybe_cd().
 	* cons.handler.c: Marked unused parameters.
 	* dir.c: Likewise.
 	* find.c: Likewise.
@@ -135,14 +135,14 @@
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
 	* screen.c (string_file_*): Don't use static buffers.
-	* screen.c (format_file): Provide a buffer for the string_file_*
+	* screen.c (format_file): Provide a buffer for the string_file_*()
 	functions.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
-	* widget.h: Renamed define_label to buttonbar_set_label. Renamed
+	* widget.h: Renamed define_label() to buttonbar_set_label(). Renamed
 	define_label_data to buttonbar_set_label_data. Renamed
-	redraw_labels to buttonbar_redraw.
+	redraw_labels() to buttonbar_redraw().
 	* widget.c: Likewise.
 	* help.c, main.c, screen.c, tree.v, view.c: Likewise.
 	* util.h: Added macro str_cmp to allow syntactically nice string
