@@ -1,5 +1,8 @@
 2001-07-05  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (midnight_callback): Don't handle any events except
+	Ctrl-x combinations on DLG_KEY event if the menu is active.
+
 	* main.c (load_prompt): Don't change prompt if midnight_dlg is
 	not the current dialog.
 

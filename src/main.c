@@ -1994,7 +1994,11 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 	    
 #ifndef HAVE_X
-	if (id == KEY_F(10) && !the_menubar->active){
+	/* FIXME: should handle all menu shortcuts before this point */
+	if (the_menubar->active)
+	    break;
+
+	if (id == KEY_F(10)){
 	    quit_cmd ();
 	    return MSG_HANDLED;
 	}
