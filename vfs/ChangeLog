@@ -1,3 +1,7 @@
+2002-12-08  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/uar.in: Fix "copyin" command.
+
 2002-12-06  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c (extfs_open): Don't run "copyout" if the file just has

@@ -36,7 +36,11 @@ mcarfs_copyout ()
 
 mcarfs_copyin ()
 {
-    $XAR r $1 $2 > $3
+    TMPDIR=/tmp/mctmpdir-uar.$$
+    mkdir $TMPDIR || exit 1
+    name=`basename $2`
+    (cd $TMPDIR && cp -f $3 $name && $XAR r $1 $name)
+    rm -rf $TMPDIR    
 }
 
 mcarfs_rm ()
