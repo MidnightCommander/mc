@@ -18,6 +18,7 @@
 #include "gscreen.h"
 #include "ext.h"
 #include <gdk/gdkx.h>
+#include <gdk/gdkprivate.h>
 
 /* Types of desktop icons:
  *
@@ -64,13 +65,15 @@ static void desktop_reload (char *desktop_dir);
 /* The list with the filenames we have actually loaded */
 static GList *desktop_icons;
 
+#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
+
 /*
  * If the dentry is zero, then no information from the on-disk .desktop file is used
  * In this case, we probably will have to store the geometry for a file somewhere
  * else.
  */
 static void
-desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
+desktop_icon_set_position (desktop_icon_t *di)
 {
 	static int x, y = 10;
 	static int current_x, current_y;
@@ -93,8 +96,8 @@ desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
 		x = current_x;
 		y = current_y;
 
-		gtk_widget_size_request (widget, &widget->requisition);
-		current_y += widget->requisition.height + 8;
+		gtk_widget_size_request (di->widget, &di->widget->requisition);
+		current_y += di->widget->requisition.height + 8;
 		if (current_y > gdk_screen_height ()){
 			current_x += 0;
 			current_y = 0;
@@ -102,7 +105,76 @@ desktop_icon_set_position (desktop_icon_t *di, GtkWidget *widget)
 	}
 	di->x = x;
 	di->y = y;
-	gtk_widget_set_uposition (widget, 6 + x, y);
+	gtk_widget_set_uposition (di->widget, 6 + x, y);
+}
+
+/*
+ * Returns the icon associated with the given file name, or app.xpm
+ * if no icon is defined for this application
+ */
+static char *
+get_desktop_icon (char *pathname)
+{
+	char *fname, *full_fname;
+
+	fname = regex_command (x_basename (pathname), "Icon", 0, 0);
+
+	/* Try the GNOME icon */
+	full_fname = gnome_unconditional_pixmap_file (fname);
+	if (exist_file (full_fname))
+		return full_fname;
+	g_free (full_fname);
+
+	/* Try a mc icon */
+	full_fname = concat_dir_and_file (ICONDIR, fname);
+	if (exist_file (full_fname))
+		return full_fname;
+
+	free (full_fname);
+	
+	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
+}
+
+/*
+ * Hackisigh routine taken from GDK
+ */
+static void
+gdk_dnd_drag_begin (GdkWindow *initial_window)
+{
+  GdkEventDragBegin tev;
+  tev.type = GDK_DRAG_BEGIN;
+  tev.window = initial_window;
+  tev.u.allflags = 0;
+  tev.u.flags.protocol_version = DND_PROTOCOL_VERSION;
+
+  gdk_event_put ((GdkEvent *) &tev);
+}
+
+void
+artificial_drag_start (GdkWindow *window, int x, int y)
+{
+	GdkWindowPrivate *wp = (GdkWindowPrivate *) window;
+
+	if (!wp->dnd_drag_enabled)
+		return;
+	if (!gdk_dnd.drag_perhaps)
+		return;
+	if (gdk_dnd.dnd_grabbed)
+		return;
+	if (gdk_dnd.drag_really)
+		return;
+	
+	printf ("Pushing artificial drag\n");
+	gdk_dnd_drag_addwindow (window);
+	gdk_dnd_drag_begin (window);
+	XGrabPointer (gdk_display, wp->xwindow, False,
+		      ButtonMotionMask | ButtonPressMask | ButtonReleaseMask,
+		      GrabModeAsync, GrabModeAsync, gdk_root_window,
+		      None, CurrentTime);
+	gdk_dnd.dnd_grabbed = TRUE;
+	gdk_dnd.drag_perhaps = 1;
+	gdk_dnd.drag_really = 1;
+	gdk_dnd_display_drag_cursor (x, y, FALSE, TRUE);
 }
 
 static int operation_value;
@@ -292,6 +364,9 @@ drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manua
 	
 	operation = get_operation (event->timestamp, event->coords.x, event->coords.y);
 
+	if (operation == -1)
+		return;
+	
 	/* Optimization: if we are dragging from the same process, we can
 	 * display a nicer status bar.
 	 */
@@ -311,7 +386,7 @@ drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manua
 }
 
 static void
-drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
+url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
 	char *p;
 	int count;
@@ -346,6 +421,15 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 }
 
 static void
+drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
+{
+	if (strcmp (event->data_type, "icon/root") == 0){
+		printf ("ICON DROPPED ON ROOT!\n");
+	} else
+		url_dropped (widget, event, di);
+}
+
+static void
 connect_drop_signals (GtkWidget *widget, desktop_icon_t *di)
 {
 	GtkObject *o = GTK_OBJECT (widget);
@@ -376,98 +460,18 @@ dentry_properties (desktop_icon_t *di)
 	printf ("Edit this widget properties\n");
 }
 
-static int
-dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
-{
-	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
-		dentry_execute (di);
-		return TRUE;
-	}
-
-	if (event->type == GDK_BUTTON_PRESS && event->button == 3){
-		desktop_icon_context_popup (event, di);
-		return TRUE;
-	}
-	return FALSE;
-}
-		
-char *drop_types [] = {
-	"text/plain",
-	"url:ALL",
-};
-
-#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
-
-GtkWidget *
-my_create_transparent_text_window (char *file, char *text, int extra_events)
-{
-	GtkWidget *w;
-
-	w = create_transparent_text_window (file, text, extra_events);
-	if (!w){
-		static char *default_pix;
-
-		if (!default_pix){
-			default_pix = gnome_unconditional_pixmap_file ("launcher-program.xpm");
-		}
-		w = create_transparent_text_window (default_pix, text, extra_events);
-		if (!w)
-			return NULL;
-	}
-	return w;
-}
-
+/* Pops up the icon properties pages */
 static void
-desktop_load_from_dentry (GnomeDesktopEntry *dentry)
+icon_properties (GtkWidget *widget, desktop_icon_t *di)
 {
-	desktop_icon_t *di;
-	GtkWidget *window;
-	char      *icon_label;
-
-	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec);
-	if (dentry->icon)
-		window = my_create_transparent_text_window (dentry->icon, icon_label, GDK_BUTTON_PRESS_MASK);
-	else {
-		static char *default_icon_path;
-		static char exists;
-		
-		if (!default_icon_path){
-			default_icon_path = gnome_unconditional_pixmap_file ("launcher-program.xpm");
-			if (g_file_exists (default_icon_path))
-				exists = 1;
-		}
-
-		if (exists)
-			window = my_create_transparent_text_window (default_icon_path, icon_label, GDK_BUTTON_PRESS_MASK);
-		else {
-			window = gtk_window_new (GTK_WINDOW_POPUP);
-			gtk_widget_set_usize (window, 20, 20);
-		}
-	}
-	if (!window)
-		return;
-	
-	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
-	di->dentry   = dentry;
-	di->widget   = window;
-	di->pathname = dentry->location;
-		
-	desktop_icon_set_position (di, window);
-	
-	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
-	
-	/* Setup the widget to make it useful: */
-
-	/* 1. Drag and drop functionality */
-	connect_drop_signals (window, di);
-	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
-	
-	/* 2. Double clicking executes the command */
-	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
-
-	gtk_widget_show (window);
+	printf ("Sorry, no property pages yet\n");
+	gtk_main_quit ();
 }
 
+/*
+ * destroys a desktop_icon_t structure and anything that was held there,
+ * including the desktop widget. 
+ */
 static void
 desktop_release_desktop_icon_t (desktop_icon_t *di)
 {
@@ -486,97 +490,124 @@ desktop_release_desktop_icon_t (desktop_icon_t *di)
 }
 
 static void
-desktop_load_dentry (char *filename)
+start_icon_drag (GtkWidget *wi, GdkEventMotion *event)
 {
-	GnomeDesktopEntry  *dentry;
+	printf ("MOTION NOTIF!\n");
+	artificial_drag_start (wi->window, event->x, event->y);
+}
+
+GdkPoint root_icon_drag_hotspot = { 15, 15 };
+
+static void
+desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, desktop_icon_t *di)
+{
+	printf ("Drag type: %s\n", event->data_type);
 	
-	dentry = gnome_desktop_entry_load (filename);
+	if (strcmp (event->data_type, "url:ALL") == 0){
+		gdk_window_dnd_data_set (widget->window, (GdkEvent *)event, di->pathname, strlen (di->pathname) + 1);
+	} else {
+		int drop_x, drop_y;
 
-	if (!dentry)
-		return;
+		drop_x = event->drop_coords.x - root_icon_drag_hotspot.x;
+		drop_y = event->drop_coords.y - root_icon_drag_hotspot.y;
+		
+		/* Icon dropped on root.  We take care of it */
+		printf ("Dropped at %d %d\n", drop_x, drop_y);
+		gtk_widget_set_uposition (di->widget, drop_x, drop_y);
+		if (di->dentry){
+			char buffer [40];
 
-	desktop_load_from_dentry (dentry);
+			sprintf (buffer, "%d,%d", drop_x, drop_y);
+			if (di->dentry->geometry)
+				g_free (di->dentry->geometry);
+			di->dentry->geometry = g_strdup (buffer);
+			gnome_desktop_entry_save (di->dentry);
+		}
+	}
+}
+
+static GtkWidget *root_drag_ok_window;
+static GtkWidget *root_drag_not_ok_window;
+
+static void
+destroy_shaped_dnd_windows (void)
+{
+	if (root_drag_not_ok_window){
+		gtk_widget_destroy (root_drag_not_ok_window);
+		root_drag_not_ok_window = 0;
+	}
+	
+	if (root_drag_ok_window){
+		gtk_widget_destroy (root_drag_ok_window);
+		root_drag_ok_window = 0;
+	}
 }
 
 static void
-desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_name)
+desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
-	GnomeDesktopEntry *dentry;
+	char *fname;
 
-	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
-	dentry->name    = g_strdup (short_name);
-	dentry->comment = NULL;
-	dentry->tryexec = NULL;
-	dentry->exec    = g_strdup (pathname);
-	dentry->icon    = gnome_unconditional_pixmap_file ("gnome-folder.png");
-	dentry->docpath = NULL;
-	dentry->type    = g_strdup ("Directory");
-	dentry->location = g_strdup (dentry_path);
+	/* This should not happen, as the drag end routine should destroy those widgets */
+	destroy_shaped_dnd_windows ();
+	
+	if (di->dentry)
+		fname = strdup (di->dentry->icon);
+	else
+		fname = get_desktop_icon (di->pathname);
+		
+	if (fname){
+		/* FIXME: we are using the same icon for ok and not ok drags */
+		root_drag_ok_window     = make_transparent_window (fname);
+		root_drag_not_ok_window = make_transparent_window (fname);
+		
+		gdk_dnd_set_drag_shape (root_drag_ok_window->window, &root_icon_drag_hotspot,
+					root_drag_not_ok_window->window, &root_icon_drag_hotspot);
+		gtk_widget_show (root_drag_not_ok_window);
+		gtk_widget_show (root_drag_ok_window);
 
-	gnome_desktop_entry_save (dentry);
-	desktop_load_from_dentry (dentry);
+		free (fname);
+	}
+}
+
+static void
+desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
+{
+	printf ("drag end!\n");
+	destroy_shaped_dnd_windows ();
 }
 
 /*
- * Returns the icon associated with the given file name, or app.xpm
- * if no icon is defined for this application
+ * Bind the signals so that we can make this icon draggable
  */
-static char *
-get_desktop_icon (char *pathname)
-{
-	char *fname, *full_fname;
-
-	fname = regex_command (x_basename (pathname), "Icon", 0, 0);
-
-	/* Try the GNOME icon */
-	full_fname = gnome_unconditional_pixmap_file (fname);
-	if (exist_file (full_fname))
-		return full_fname;
-	g_free (full_fname);
-
-	/* Try a mc icon */
-	full_fname = concat_dir_and_file (ICONDIR, fname);
-	if (exist_file (full_fname))
-		return full_fname;
-
-	free (full_fname);
-	
-	return gnome_unconditional_pixmap_file ("launcher-program.xpm");
-}
-
-static int
-file_is_executable (char *path)
-{
-	struct stat s;
-
-	if (mc_stat (path, &s) == -1)
-		return 0;
-	
-	if (is_exe (s.st_mode))
-		return 1;
-	return 0;
-
-}
-
-/* Pops up the icon properties pages */
 static void
-icon_properties (GtkWidget *widget, desktop_icon_t *di)
+desktop_icon_make_draggable (desktop_icon_t *di)
 {
-	printf ("Sorry, no property pages yet\n");
-	gtk_main_quit ();
+	GtkObject *obj = GTK_OBJECT (di->widget);
+	char *drag_types [] = { "icon/root", "url:ALL" };
+
+	/* To artificially start up drag and drop */
+	gtk_signal_connect (obj, "motion_notify_event", GTK_SIGNAL_FUNC (start_icon_drag), di);
+	gtk_widget_dnd_drag_set (di->widget, TRUE, drag_types, ELEMENTS (drag_types));
+
+	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (desktop_icon_drag_request), di);
+	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (desktop_icon_drag_start), di);
+	gtk_signal_connect (obj, "drag_end_event", GTK_SIGNAL_FUNC (desktop_icon_drag_end), di);
 }
 
+/*
+ * Removes an icon from the desktop and kills the ~/desktop file associated with it
+ */
 static void
 desktop_icon_remove (desktop_icon_t *di)
 {
 	desktop_icons = g_list_remove (desktop_icons, di);
 
 	mc_unlink (di->pathname);
-	gtk_widget_destroy (di->widget);
 	desktop_release_desktop_icon_t (di);
 }
 
-/* Removes the icon from the desktop */
+/* Called by the pop up menu: removes the icon from the desktop */
 static void
 icon_delete (GtkWidget *widget, desktop_icon_t *di)
 {
@@ -615,6 +646,156 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 }
 
 static int
+dentry_button_click (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
+{
+	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
+		dentry_execute (di);
+		return TRUE;
+	}
+
+	if (event->type == GDK_BUTTON_PRESS && event->button == 3){
+		desktop_icon_context_popup (event, di);
+		return TRUE;
+	}
+	return FALSE;
+}
+		
+char *drop_types [] = {
+	"text/plain",
+	"url:ALL",
+};
+
+char *root_drop_types [] = {
+	"icon/root",
+	"url:ALL"
+};
+
+GtkWidget *
+my_create_transparent_text_window (char *file, char *text)
+{
+	GtkWidget *w;
+	int events = GDK_BUTTON_PRESS_MASK | GDK_BUTTON1_MOTION_MASK;
+	
+	w = create_transparent_text_window (file, text, events);
+	if (!w){
+		static char *default_pix;
+
+		if (!default_pix){
+			default_pix = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+		}
+		w = create_transparent_text_window (default_pix, text, events);
+		if (!w)
+			return NULL;
+	}
+	return w;
+}
+
+static void
+desktop_load_from_dentry (GnomeDesktopEntry *dentry)
+{
+	desktop_icon_t *di;
+	GtkWidget *window;
+	char      *icon_label;
+
+	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec);
+	if (dentry->icon)
+		window = my_create_transparent_text_window (dentry->icon, icon_label);
+	else {
+		static char *default_icon_path;
+		static char exists;
+		
+		if (!default_icon_path){
+			default_icon_path = gnome_unconditional_pixmap_file ("launcher-program.xpm");
+			if (g_file_exists (default_icon_path))
+				exists = 1;
+		}
+
+		if (exists)
+			window = my_create_transparent_text_window (default_icon_path, icon_label);
+		else {
+			window = gtk_window_new (GTK_WINDOW_POPUP);
+			gtk_widget_set_usize (window, 20, 20);
+		}
+	}
+	if (!window)
+		return;
+	
+	di = xmalloc (sizeof (desktop_icon_t), "desktop_load_entry");
+	di->dentry   = dentry;
+	di->widget   = window;
+	di->pathname = dentry->location;
+		
+	desktop_icon_set_position (di);
+	desktop_icon_make_draggable (di);
+	
+	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
+	
+	/* Setup the widget to make it useful: */
+
+	/* 1. Drag and drop functionality */
+	connect_drop_signals (window, di);
+	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	
+	/* 2. Double clicking executes the command */
+	gtk_signal_connect (GTK_OBJECT (window), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
+
+	gtk_widget_show (window);
+}
+
+/*
+ * Loads a .desktop file from FILENAME for the desktop.
+ */
+static void
+desktop_load_dentry (char *filename)
+{
+	GnomeDesktopEntry  *dentry;
+	
+	dentry = gnome_desktop_entry_load (filename);
+
+	if (!dentry)
+		return;
+
+	desktop_load_from_dentry (dentry);
+}
+
+/*
+ * Creates a new DIRECTORY/.directory file which is just a .dekstop
+ * on directories.   And then loads it into the desktop
+ */
+static void
+desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_name)
+{
+	GnomeDesktopEntry *dentry;
+
+	dentry = xmalloc (sizeof (GnomeDesktopEntry), "dcde");
+	dentry->name    = g_strdup (short_name);
+	dentry->comment = NULL;
+	dentry->tryexec = NULL;
+	dentry->exec    = g_strdup (pathname);
+	dentry->icon    = gnome_unconditional_pixmap_file ("gnome-folder.png");
+	dentry->docpath = NULL;
+	dentry->type    = g_strdup ("Directory");
+	dentry->location = g_strdup (dentry_path);
+
+	gnome_desktop_entry_save (dentry);
+	desktop_load_from_dentry (dentry);
+}
+
+static int
+file_is_executable (char *path)
+{
+	struct stat s;
+
+	if (mc_stat (path, &s) == -1)
+		return 0;
+	
+	if (is_exe (s.st_mode))
+		return 1;
+	return 0;
+
+}
+
+static int
 desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 {
 	if (event->type == GDK_2BUTTON_PRESS && event->button == 1){
@@ -644,8 +825,8 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 	return FALSE;
 }
 
-static void
-drop_on_executable (desktop_icon_t *di, GdkEventDropDataAvailable *event)
+static char **
+drops_from_event (GdkEventDropDataAvailable *event)
 {
 	int count, i, len;
 	int arguments;
@@ -675,25 +856,34 @@ drop_on_executable (desktop_icon_t *di, GdkEventDropDataAvailable *event)
 	} while (count);
 	argv [i] = 0;
 
-	/* invoke */
-	exec_direct (di->pathname, argv);
+	return argv;
 }
 
 static void
 drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
 	struct stat s;
-
+	char *r;
+	char **drops;
+	
 	/* try to stat it, if it fails, remove it from desktop */
 	if (!mc_stat (di->pathname, &s) == 0){
 		desktop_icon_remove (di);
 		return;
 	}
+
+	drops = drops_from_event (event);
 	
-	if (is_exe (s.st_mode)){
-		drop_on_executable (di, event);
+	r = regex_command (di->pathname, "Drop", drops, 0);
+	if (strcmp (r, "Success") == 0){
+		free (drops);
 		return;
 	}
+	
+	if (is_exe (s.st_mode))
+		exec_direct (di->pathname, drops);
+	
+	free (drops);
 }
 
 static void
@@ -704,7 +894,7 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	char *icon;
 
 	icon = get_desktop_icon (pathname);
-	window = my_create_transparent_text_window (icon, x_basename (pathname), GDK_BUTTON_PRESS_MASK);
+	window = my_create_transparent_text_window (icon, x_basename (pathname));
 	g_free (icon);
 	if (!window)
 		return;
@@ -714,8 +904,9 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 	di->widget = window;
 	di->pathname = strdup (pathname);
 
-	desktop_icon_set_position (di, window);
-
+	desktop_icon_set_position (di);
+	desktop_icon_make_draggable (di);
+	
 	desktop_icons = g_list_prepend (desktop_icons, (gpointer) di);
 
 	/* Double clicking executes the command, single clicking brings up context menu */
@@ -726,7 +917,7 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 			    GTK_SIGNAL_FUNC (drop_on_launch_entry), di);
 
 	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
-	
+
 	gtk_widget_show (window);
 }
 
@@ -851,7 +1042,7 @@ desktop_root (void)
 	rw = gnome_rootwin_new ();
 	connect_drop_signals (rw, NULL);
 	gtk_widget_realize (rw);
-	gtk_widget_dnd_drop_set (rw, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	gtk_widget_dnd_drop_set (rw, TRUE, root_drop_types, ELEMENTS (root_drop_types), FALSE);
 	gtk_widget_show (rw);
 	root_window = GNOME_ROOTWIN (rw);
 }
@@ -870,4 +1061,18 @@ start_desktop (void)
 	desktop_root ();
 	desktop_reload (desktop_directory);
 }
- 
+
+/*
+ * shutdown the desktop
+ */
+void
+stop_desktop (void)
+{
+	GList *p;
+
+	for (p = desktop_icons; p; p = p->next){
+		desktop_icon_t *di = p->data;
+
+		desktop_release_desktop_icon_t (di);
+	}
+}

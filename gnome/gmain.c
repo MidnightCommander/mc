@@ -358,5 +358,8 @@ create_panels (void)
 	
 	set_current_panel (0);
 	run_dlg (h);
+
+	/* shutdown gnome specific bits of midnight commander */
+	stop_desktop ();
 }
 

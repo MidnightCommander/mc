@@ -1,3 +1,22 @@
+Wed Mar 18 20:35:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_create_launch_entry): Support for the "Drop"
+	target in mc.ext now. 
+
+	* Add support for dragging the icons on the desktop.
+
+	(desktop_icon_make_draggable): new function.
+	(drop_from_event): simplify.
+	(my_create_transparent_text_window): Get the motion notify event.
+	(drops_from_event): create a vector based on thge drop event.
+	(drop_cb): splitted, call url_drop for regular drops, otherwise it
+	is a icon drop.
+	(artificial_drag_start): new routine, used now by gscreen.c and
+	gdesktop.c 
+	(drop_on_directory): Check result value of operation.
+	(desktop_icon_set_position): sane interface.
+	(stop_desktop): Flush all of our state to disk. 
+	
 1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c: Removed tests for the gprop stuff.

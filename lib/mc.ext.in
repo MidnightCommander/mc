@@ -468,7 +468,7 @@ type/PDF
 type/executable
 	Open=./%f
 	View=%view
-	Drop=./%f %q
+	Drop=%f %q
 	Execute in XTerm=xterm -e ./%f &
 	View Required Libraries=%view{ascii} ldd %f
 	Strip binary=strip %f

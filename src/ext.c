@@ -73,8 +73,36 @@ flush_extension_file (void)
    
 }
 
+typedef char *(*quote_func_t)(const char *name, int i);
+
+static char *
+quote_block (quote_func_t quote_func, char **quoting_block)
+{
+	char **p = quoting_block;
+	char *result = 0;
+	char *tail   = 0;
+	int current_len = 0;
+
+	for (p = quoting_block; *p; p++){
+		int  temp_len;
+		char *temp = quote_func (*p, 0);
+
+		temp_len = strlen (temp);
+		current_len += temp_len + 2;
+		result = realloc (result, current_len);
+		if (!tail)
+			tail = result;
+		strcpy (tail, temp);
+		strcat (tail, " ");
+		tail += temp_len + 1;
+		free (temp);
+	}
+	
+	return result;
+}
+	     
 static void
-exec_extension (char *filename, char *data, char *drops, int *move_dir, int start_line)
+exec_extension (char *filename, char *data, char **drops, int *move_dir, int start_line)
 {
     char *file_name;
     FILE *cmd_file;
@@ -92,7 +120,7 @@ exec_extension (char *filename, char *data, char *drops, int *move_dir, int star
     time_t localmtime = 0;
     struct stat mystat;
     int    do_local_copy;
-    char * (*quote_func)(const char *name, int i) = name_quote;
+    quote_func_t quote_func = name_quote;
 
     /* Avoid making a local copy if we are doing a cd */
     if (!vfs_file_is_local(filename))
@@ -178,8 +206,7 @@ exec_extension (char *filename, char *data, char *drops, int *move_dir, int star
 			    text = (*quote_func) (filename, 0);
 			}
 		    } else if (*data == 'q') {
-			    /* FIXME: currently broken */
-/*		        text = (*quote_func) (drops, 0); */
+			text = quote_block (quote_func, drops);
 		    } else
 		        text = expand_format (*data, !is_cd);
 		    if (!is_cd)
@@ -618,8 +645,6 @@ match_file_output:
     	                if (p < q) { 
 			    char *filename_copy = strdup (filename);
 			    
-			    /* FIXME: drops is passed from an incompatible pointer type */
-
 			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number);
 			    free (filename_copy);
 			    

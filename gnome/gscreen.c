@@ -13,8 +13,6 @@
 #include <stdlib.h>		/* atoi */
 #include "fs.h"
 #include "x.h"
-#include <gdk/gdkprivate.h>
-#include <gdk/gdkx.h>
 #include "dir.h"
 #include "panel.h"
 #include "command.h"
@@ -690,14 +688,11 @@ panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel
 	int  len;
 	GdkWindowPrivate *clist_window = (GdkWindowPrivate *) (GTK_WIDGET (widget)->window);
 	GdkWindowPrivate *clist_areaw  = (GdkWindowPrivate *) (GTK_CLIST (widget)->clist_window);
-		
-	printf ("Drag request!\n");
-	printf ("Drag [%s] request!\n", event->data_type);
+
 	
 	if ((strcmp (event->data_type, "text/plain") == 0) ||
 	    (strcmp (event->data_type, "url:ALL")    == 0)){
 		data = panel_build_selected_file_list (panel, &len);
-		printf ("Data: %s\n", (char *) data);
 		
 		if (clist_window->dnd_drag_accepted)
 			gdk_window_dnd_data_set ((GdkWindow *)clist_window, (GdkEvent *) event, data, len);
@@ -765,7 +760,6 @@ panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
 	GdkPoint hotspot = { 15, 15 };
 
-	printf ("Drag starting\n");
 	if (panel->marked){
 		if (drag_multiple && drag_multiple_ok){
 			gdk_dnd_set_drag_shape (drag_multiple->window, &hotspot,
@@ -785,37 +779,9 @@ panel_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 }
 
 static void
-gdk_dnd_drag_begin (GdkWindow *initial_window)
+panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event)
 {
-  GdkEventDragBegin tev;
-  tev.type = GDK_DRAG_BEGIN;
-  tev.window = initial_window;
-  tev.u.allflags = 0;
-  tev.u.flags.protocol_version = DND_PROTOCOL_VERSION;
-
-  gdk_event_put ((GdkEvent *) &tev);
-}
-
-static void
-panel_artificial_drag_start (GtkCList *window, GdkEventMotion *event, WPanel *panel)
-{
-	GdkWindowPrivate *wp = (GdkWindowPrivate *) window->clist_window;
-
-	if (!wp->dnd_drag_enabled)
-		return;
-	if (!(gdk_dnd.drag_perhaps || gdk_dnd.drag_really))
-		return;
-
-	gdk_dnd_drag_addwindow (window->clist_window);
-	gdk_dnd_drag_begin (window->clist_window);
-	XGrabPointer (gdk_display, wp->xwindow, False,
-		      ButtonMotionMask | ButtonPressMask | ButtonReleaseMask,
-		      GrabModeAsync, GrabModeAsync, gdk_root_window,
-		      None, CurrentTime);
-	gdk_dnd.dnd_grabbed = TRUE;
-	gdk_dnd.drag_perhaps = 1;
-	gdk_dnd.drag_really = 1;
-	gdk_dnd_display_drag_cursor (event->x, event->y, FALSE, TRUE);
+	artificial_drag_start (window->clist_window, event->x, event->y);
 }
 
 static GtkWidget *
