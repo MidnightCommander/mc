@@ -1,5 +1,7 @@
 2000-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: REGEX_O variable removed - always use our regex
+
 	* configure.in: MCFGR variable removed
 
 2000-09-12  Pavel Roskin  <proski@gnu.org>

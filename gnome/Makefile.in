@@ -139,7 +139,7 @@ OOBJS = dlg.o screen.o widget.o wtools.o boxes.o		\
 	panelize.o hotlist.o background.o dir.o util.o		\
 	win.o color.o profile.o user.o ext.o setup.o		\
 	subshell.o terms.o fsusage.o mountlist.o		\
-	@REGEX_O@ complete.o command.o				\
+	regex.o complete.o command.o				\
 	cmd.o utilunix.o xslint.o gdialogs.o filenot.o		\
 	fileopctx.o treestore.o
 

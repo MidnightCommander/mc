@@ -149,13 +149,6 @@ AC_HEADER_DIRENT
 AC_SHORT_D_NAME_LEN
 AC_HEADER_STDC
 
-
-#Let me check for an incompatible regcomp in HP-UX before making this
-#the default
-
-REGEX_O="regex.o"
-AC_SUBST(REGEX_O)
-
 dnl Missing structure components
 AC_STRUCT_ST_BLKSIZE
 AC_STRUCT_ST_BLOCKS
