@@ -1,3 +1,8 @@
+2002-10-12  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Redirect stderr from "links" to suppress a
+	warning if it's not found.
+
 2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* doc/mc.1.in (SMB File System): Username is allowed in
