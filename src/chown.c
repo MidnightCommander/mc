@@ -42,7 +42,6 @@
 #include "main.h"
 #include "chown.h"
 #include "wtools.h"		/* For init_box_colors */
-#include "../vfs/vfs.h"
 
 #define UX		5
 #define UY		2

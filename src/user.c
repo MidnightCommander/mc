@@ -36,7 +36,6 @@
 
 #include "edit/edit.h"		/* BLOCK_FILE */
 #include "edit/edit-widget.h"	/* WEdit */
-#include "../vfs/vfs.h"
 
 /* For the simple listbox manager */
 #include "dlg.h"

@@ -37,7 +37,6 @@
 #include "profile.h"
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
-#include "../vfs/vfs.h"
 #include "mountlist.h"
 #include "win.h"		/* xterm_flag */
 

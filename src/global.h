@@ -132,7 +132,12 @@ struct timeval {
 #include "util.h"
 
 #include "textconf.h"
+
+#ifdef USE_VFS
 #include "../vfs/vfs.h"
+#else
+#include "vfsdummy.h"
+#endif
 
 extern char *home_dir;
 

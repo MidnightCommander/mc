@@ -52,7 +52,6 @@
 #include "selcodepage.h"
 #endif
 
-#include "../vfs/vfs.h"		/* vfs_timeout */
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
 #endif

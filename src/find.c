@@ -43,7 +43,6 @@
 #include "wtools.h"
 #include "cmd.h"		/* view_file_at_line */
 #include "boxes.h"
-#include "../vfs/vfs.h"
 
 /* Size of the find parameters window */
 #define FIND_Y 14

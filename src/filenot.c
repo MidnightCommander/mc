@@ -26,7 +26,6 @@
 #include <string.h>
 #include <errno.h>
 #include "global.h"
-#include "../vfs/vfs.h"
 
 static char *
 get_absolute_name (char *file)

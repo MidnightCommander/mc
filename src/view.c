@@ -49,7 +49,6 @@
 #include "layout.h"
 #include "setup.h"
 #include "wtools.h"		/* For query_set_sel() */
-#include "../vfs/vfs.h"
 #include "dir.h"
 #include "panel.h"		/* Needed for current_panel and other_panel */
 #include "win.h"

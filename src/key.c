@@ -38,7 +38,6 @@
 #include "main.h"
 #include "win.h"
 #include "cons.saver.h"
-#include "../vfs/vfs.h"
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
 #ifdef HAVE_GMODULE

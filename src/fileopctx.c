@@ -25,7 +25,6 @@
 
 #include "global.h"
 #include "fileopctx.h"
-#include "../vfs/vfs.h"
 
 
 /**

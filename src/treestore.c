@@ -42,7 +42,6 @@
 
 #include "global.h"
 #include "treestore.h"
-#include "../vfs/vfs.h"
 #include "profile.h"
 #include "setup.h"
 
