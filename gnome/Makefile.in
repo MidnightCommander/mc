@@ -6,12 +6,12 @@ rootdir = $(srcdir)/..
 
 GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
 CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@ -I. -I$(rootdir)/src
-CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) $(GNOMEDEFS)
+CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) $(GNOMEDEFS)
 LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
 DEFS = $(XDEFS)
 LIBS = $(XLIBS) @TERMNET@ 
-EXTRALIBS = @LVFS@ -lgtkedit @LINTL@
+EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
@@ -204,11 +204,11 @@ mx: checklinks
 	@echo -----------------------------------------------------------
 	@touch mx
 
-plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) libgtkedit.a
+	$(CC) -o plain-gmc $(NORMALOBJS) $(OBJS) $(EXTRALIBS) $(LDFLAGS) $(LIBS) 
 
-corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) @LIBSLANG@ libgtkedit.a
-	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(CORBA_LDFLAGS) -L../vfs -L../slang -L../gtkedit $(EXTRALIBS) $(LIBS) 
+corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) libgtkedit.a
+	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS) 
 
 mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' < mc.keys.in > mc.keys.tmp \
@@ -221,11 +221,6 @@ mc.keys.in: mc.keys.in.in Makefile.in ../config.status
 	cd ../vfs; $(MAKE) @LIBVFS@
 @PCENTRULE@	-$(RMF) @LIBVFS@
 @PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
-
-libmcslang.a:
-	cd ../slang; $(MAKE) libmcslang.a
-@PCENTRULE@	-$(RMF) libmcslang.a
-@PCENTRULE@	$(LN_S) ../slang/libmcslang.a .
 
 libgtkedit.a:
 	cd ../gtkedit; $(MAKE) libgtkedit.a
@@ -255,7 +250,7 @@ TAGS: $(GNOMESRCS)
 	etags $(GNOMESRCS)
 
 clean:
-	$(RMF) plain-gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a libmcslang.a
+	$(RMF) plain-gmc corba-gmc *.o core a.out mx @LIBVFS@ libgtkedit.a
 
 realclean: clean
 	$(RMF) .depend
@@ -276,19 +271,18 @@ install: install_@mx@
 install_:
 
 install_mx: all 
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(icondir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(libdir)
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(bindir)
-	$(mcsrcdir)/xmkdir $(gnewdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(icondir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(libdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(datadir)/mime-info
+	$(MKINSTALLDIRS) $(DESTDIR)$(corbadir)
+	$(MKINSTALLDIRS) $(gnewdir)
 	$(INSTALL_PROGRAM) plain-gmc $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
 	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
-	$(mcsrcdir)/xmkdir $(DESTDIR)$(corbadir)
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
 uninstall: 

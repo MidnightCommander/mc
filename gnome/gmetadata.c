@@ -6,8 +6,8 @@
  */
 
 #include <config.h>
-#include <libgnome/libgnome.h>
 #include "global.h"
+#include <libgnome/libgnome.h>
 #include "gmetadata.h"
 #include <sys/stat.h>
 #include "../vfs/vfs.h"

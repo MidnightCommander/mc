@@ -4,16 +4,16 @@
  * Written by Miguel de Icaza
  */
 #include <config.h>
-#include "myslang.h"
+#include "global.h"
 #include <gnome.h>
 #include <gdk/gdkkeysyms.h>
 #include <string.h>
-#include "global.h"
 #include "gconf.h"
 #include "dlg.h"
 #undef HAVE_LIBGPM
 #include "mouse.h"
 #include "key.h"
+#include "myslang.h"
 #include "widget.h"
 #include "wtools.h"
 #include "dialog.h"

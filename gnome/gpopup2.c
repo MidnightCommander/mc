@@ -12,15 +12,16 @@
  */
 
 #include <config.h>
+#include "global.h"
 #include <gnome.h>
-#include "../vfs/vfs.h"
 #include "panel.h"
 #include "cmd.h"
 #include "dialog.h"
 #include "ext.h"
+#include "main.h"
+#include "../vfs/vfs.h"
 #include "gpageprop.h"
 #include "gpopup.h"
-#include "main.h"
 #include "gnome-file-property-dialog.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 

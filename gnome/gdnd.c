@@ -9,6 +9,7 @@
 #include <config.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include "global.h"
 #include "file.h"
 #include "fileopctx.h"
 #include "main.h"
