@@ -34,6 +34,7 @@
 #include "gpopup.h"
 #include "gcliplabel.h"
 #include "gblist.h"
+#include "gicon.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
 
@@ -1656,6 +1657,7 @@ panel_create_tree_view (WPanel *panel)
 	GtkWidget *tree;
 
 	tree = gtk_dtree_new ();
+	
 	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
 			    GTK_SIGNAL_FUNC (panel_chdir), panel);
 

@@ -521,8 +521,12 @@ gtk_dtree_new (void)
 {
 	GtkWidget *widget;
 	
+	gtk_widget_push_visual (gdk_imlib_get_visual ());
+	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	widget = gtk_type_new (GTK_TYPE_DTREE);
 	gtk_dtree_construct (GTK_DTREE (widget));
+	gtk_widget_pop_colormap ();
+	gtk_widget_pop_visual ();
 
 	return widget;
 }
