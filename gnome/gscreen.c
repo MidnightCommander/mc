@@ -125,7 +125,7 @@ panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 
 /*
  * Update the status of the back and forward history buttons.
- * Called from the generic code 
+ * Called from the generic code
  */
 void
 x_panel_update_marks (WPanel *panel)
@@ -135,7 +135,7 @@ x_panel_update_marks (WPanel *panel)
 
 	if (!panel->fwd_b)
 		return;
-	
+
 	gtk_widget_set_sensitive (panel->fwd_b, ff);
 	gtk_widget_set_sensitive (panel->back_b, bf);
 }
@@ -160,11 +160,11 @@ panel_fill_panel_list (WPanel *panel)
 
 	/* which column holds the type information */
 	type_col = -1;
-	
+
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 		format_e *format = panel->format;
-		
+
 		for (col = 0; format; format = format->next){
 			if (!format->use_in_gui)
 			    continue;
@@ -172,7 +172,7 @@ panel_fill_panel_list (WPanel *panel)
 			if (type_col == -1)
 				if (strcmp (format->id, "type") == 0)
 					type_col = col;
-			
+
 			if (!format->string_fn)
 				texts [col] = "";
 			else
@@ -204,10 +204,10 @@ panel_fill_panel_icons (WPanel *panel)
 	const int selected  = panel->selected;
 	int i;
 	GdkImlibImage *image;
-	
+
 	gnome_icon_list_freeze (icons);
 	gnome_icon_list_clear (icons);
-	
+
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 
@@ -221,7 +221,7 @@ panel_fill_panel_icons (WPanel *panel)
 }
 
 /*
- * Invoked from the generic code to fill the display 
+ * Invoked from the generic code to fill the display
  */
 void
 x_fill_panel (WPanel *panel)
@@ -233,7 +233,7 @@ x_fill_panel (WPanel *panel)
 
 	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
 
-	gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd); 
+	gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd);
 
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (panel->tree), panel);
 }
@@ -243,7 +243,7 @@ gmc_panel_set_size (int index, int boot)
 {
 	Widget *w;
 	WPanel *p;
-	
+
 	w = (Widget *) get_panel_widget (index);
 	p = (WPanel *) w;
 	w->cols = 40;
@@ -281,7 +281,7 @@ x_select_item (WPanel *panel)
 {
 	if (panel->list_type == list_icons){
 		GnomeIconList *list = GNOME_ICON_LIST (panel->icons);
-		
+
 		do_file_mark (panel, panel->selected, 1);
 		display_mini_info (panel);
 		gnome_icon_list_select_icon (list, panel->selected);
@@ -294,15 +294,15 @@ x_select_item (WPanel *panel)
 	} else {
 		GtkCList *clist = CLIST_FROM_SW (panel->list);
 		int color, marked;
-		
+
 		if (panel->dir.list [panel->selected].f.marked)
 			marked = 1;
 		else
 			marked = 0;
-		
+
 		color = file_compute_color (marked ? MARKED_SELECTED : SELECTED, &panel->dir.list [panel->selected]);
 		panel_file_list_set_row_colors (CLIST_FROM_SW (panel->list), panel->selected, color);
-		
+
 		/* Make it visible */
 		if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL)
 			gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
@@ -454,7 +454,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		internal_select_item (file_list, panel, row);
 		return;
 	}
-	
+
 	switch (event->type) {
 	case GDK_BUTTON_RELEASE:
 		printf ("1\n");
@@ -469,7 +469,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 			/* fallback if shift-click is pressed */
 			do_file_mark_range (panel, row, current_selection);
 			break;
-			
+
 		case 2:
 			do_file_mark (panel, row, !panel->dir.list[row].f.marked);
 			break;
@@ -513,7 +513,7 @@ panel_file_list_size_allocate_hook (GtkWidget *sw, GtkAllocation *allocation, WP
 	gtk_signal_handler_block_by_data (GTK_OBJECT (sw), panel);
 	panel_file_list_configure_contents (sw, panel, allocation->width, allocation->height);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (sw), panel);
-	
+
 	panel_file_list_compute_lines (GTK_SCROLLED_WINDOW (sw), panel, allocation->height);
 }
 
@@ -522,13 +522,13 @@ panel_file_list_column_callback (GtkWidget *widget, int col, WPanel *panel)
 {
 	format_e *format;
 	int i;
-	
+
 	for (i = 0, format = panel->format; format; format = format->next){
 		if (!format->use_in_gui)
 			continue;
 		if (i == col){
 			sortfn *sorting_routine;
-			
+
 			sorting_routine = get_sort_fn (format->id);
 			if (!sorting_routine)
 				return;
@@ -590,7 +590,7 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 	/* Configure the CList */
 
 	gtk_clist_set_selection_mode (GTK_CLIST (file_list), GTK_SELECTION_SINGLE);
-	
+
 	for (i = 0, format = panel->format; format; format = format->next) {
 		GtkJustification just;
 
@@ -602,14 +602,14 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 			just = GTK_JUSTIFY_LEFT;
 		else
 			just = GTK_JUSTIFY_RIGHT;
-		
+
 		gtk_clist_set_column_justification (GTK_CLIST (file_list), i, just);
 		i++;
 	}
 
 	/* Configure the scrolbars */
 	adjustment = GTK_OBJECT (gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
-	gtk_signal_connect_after (adjustment, "value_changed", 
+	gtk_signal_connect_after (adjustment, "value_changed",
 				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
 }
 
@@ -626,7 +626,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 		int cwdlen = strlen (panel->cwd) + 1;
 		int filelen = strlen ("file:");
 		int seplen  = strlen ("\r\n");
-		
+
 		/* first pass, compute the length */
 		total_len = 0;
 		for (i = 0; i < panel->count; i++)
@@ -654,7 +654,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 
 		uri = copy_strings ("file:", fullname, NULL);
 		free (fullname);
-		
+
 		*file_list_len = strlen (uri) + 1;
 		return uri;
 	}
@@ -677,7 +677,7 @@ panel_drag_data_get (GtkWidget        *widget,
 	int len;
 	char *data;
 	GList *files;
-			
+
 	data = panel_build_selected_file_list (panel, &len);
 
 	switch (info){
@@ -733,7 +733,7 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
 	char *dir;
 	int idx;
-	
+
 	idx = gnome_icon_list_get_icon_at (gil, x, y);
 	if (idx == -1)
 		dir = g_strdup (panel->cwd);
@@ -771,7 +771,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 	GtkCList *clist = GTK_CLIST (widget);
 	char *dir;
 	int row;
-	
+
 	if (gtk_clist_get_selection_info (clist, x, y, &row, NULL) == 0)
 		dir = g_strdup (panel->cwd);
 	else {
@@ -780,7 +780,7 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 		if (S_ISDIR (panel->dir.list [row].buf.st_mode) ||
 		    panel->dir.list [row].f.link_to_dir)
 			dir = concat_dir_and_file (panel->cwd, panel->dir.list [row].fname);
-		else 
+		else
 			dir = g_strdup (panel->cwd);
 	}
 
@@ -810,7 +810,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	GtkCTreeNode *node;
 	int row, col;
 	char *path;
-	
+
 	if (!gtk_clist_get_selection_info (GTK_CLIST (dtree), x, y, &row, &col))
 		return;
 
@@ -821,7 +821,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	path = gtk_dtree_get_row_path (dtree, node, 0);
 
 	gdnd_drop_on_directory (context, selection_data, path);
-		
+
 	g_free (path);
 }
 
@@ -845,7 +845,7 @@ static int
 panel_clist_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
 {
 	panel->maybe_start_drag = event->button;
-	
+
 	panel->click_x = event->x;
 	panel->click_y = event->y;
 
@@ -870,18 +870,18 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 
 	if (panel->maybe_start_drag == 3)
 		return FALSE;
-	
+
 	if ((abs (event->x - panel->click_x) < 4) ||
 	    (abs (event->y - panel->click_y) < 4))
 		return FALSE;
-	
+
 	list = gtk_target_list_new (drag_types, ELEMENTS (drag_types));
 
 	context = gtk_drag_begin (widget, list,
 				  GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_LINK | GDK_ACTION_ASK,
 				  panel->maybe_start_drag, (GdkEvent *) event);
 	gtk_drag_set_icon_default (context);
-	
+
 	return FALSE;
 }
 
@@ -975,7 +975,7 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_end",
 			    GTK_SIGNAL_FUNC (panel_drag_end), panel);
-	
+
 	return sw;
 }
 
@@ -992,7 +992,7 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 	if (!event)
 		return;
-	
+
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3) {
@@ -1050,7 +1050,7 @@ load_imlib_icons (void)
 
 	if (loaded)
 		return;
-	
+
 	loaded = 1;
 }
 
@@ -1076,7 +1076,7 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 		panel->maybe_start_drag = 0;
 	else
 		panel->maybe_start_drag = event->button;
-	
+
 	panel->click_x = event->x;
 	panel->click_y = event->y;
 	return FALSE;
@@ -1164,7 +1164,7 @@ panel_switch_new_display_mode (WPanel *panel)
 	panel->list = panel_create_file_list (panel);
 	gtk_widget_destroy (old_list);
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_widget_show (panel->list);
@@ -1376,20 +1376,20 @@ display_mini_info (WPanel *panel)
 	if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
 		char *link, link_target [MC_MAXPATHLEN];
 		int  len;
-		
+
 		link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 		len = mc_readlink (link, link_target, MC_MAXPATHLEN);
 		free (link);
-		
+
 		if (len > 0){
 			char *str;
 
 			link_target [len] = 0;
 			/* FIXME: Links should be handled differently */
 			/* str = copy_strings ("-> ", link_target, NULL); */
-			gtk_label_set (label, " "); 
+			gtk_label_set (label, " ");
 			   /*free (str); */
-		} else 
+		} else
 			gtk_label_set (label, _("<readlink failed>"));
 		return;
 	}
@@ -1480,7 +1480,7 @@ tree_drag_open_directory (gpointer data)
 	GtkCTreeNode *node;
 	int row, col;
 	int r;
-	
+
 	r = gtk_clist_get_selection_info (
 		GTK_CLIST (panel->tree),
 		GTK_DTREE (panel->tree)->drag_motion_x,
@@ -1489,7 +1489,7 @@ tree_drag_open_directory (gpointer data)
 
 	if (!r)
 		return FALSE;
-	
+
 	node = gtk_ctree_node_nth (GTK_CTREE (panel->tree), row);
 	if (!node)
 		return FALSE;
@@ -1547,7 +1547,7 @@ panel_tree_scroll (gpointer data)
 	GtkAdjustment *va;
 
 	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
-	
+
 	if (GTK_DTREE (panel->tree)->drag_motion_y < 10)
 		gtk_adjustment_set_value (va, va->value - va->step_increment);
 	else{
@@ -1556,7 +1556,7 @@ panel_tree_scroll (gpointer data)
 	return TRUE;
 }
 
-/** 
+/**
  * panel_tree_drag_motion:
  *
  * This routine is invoked by GTK+ when an item is being dragged on
@@ -1569,7 +1569,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	GtkDTree *dtree = GTK_DTREE (widget);
 	WPanel *panel = data;
 	int r, row, col;
-	
+
         if (dtree->timer_id != -1){
 		gtk_timeout_remove (dtree->timer_id);
 		dtree->timer_id = -1;
@@ -1582,7 +1582,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 		dtree->timer_id = gtk_timeout_add (60, panel_tree_scroll, data);
 		return TRUE;
 	}
-	
+
 	r = gtk_clist_get_selection_info (
 		GTK_CLIST (widget), x, y, &row, &col);
 
@@ -1622,7 +1622,7 @@ panel_tree_drag_begin (GtkWidget *widget, GdkDragContext *context, WPanel *panel
 	panel->dragging = 1;
 	dtree->drag_dir = g_strdup (dtree->current_path);
 	printf ("This is the directory being dragged: %s\n", dtree->current_path);
-	
+
 }
 
 /**
@@ -1665,7 +1665,7 @@ panel_tree_drag_data_get (GtkWidget *widget, GdkDragContext *context,
 	}
 }
 
-/** 
+/**
  * panel_create_tree_view:
  *
  * Create and initializes the GtkDTree widget for being used in the
@@ -1677,7 +1677,7 @@ panel_create_tree_view (WPanel *panel)
 	GtkWidget *tree;
 
 	tree = gtk_dtree_new ();
-	gtk_ctree_set_line_style (GTK_CTREE (tree), GTK_CTREE_LINES_SOLID);
+	gtk_ctree_set_line_style (GTK_CTREE (tree), GTK_CTREE_LINES_DOTTED);
         gtk_ctree_set_expander_style (GTK_CTREE (tree), GTK_CTREE_EXPANDER_SQUARE);
         gtk_ctree_set_indent (GTK_CTREE (tree), 10);
 
@@ -1701,18 +1701,18 @@ panel_create_tree_view (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_tree_drag_end), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_data_get), panel);
-			    
+
 	/* Make directories draggable */
 	gtk_drag_source_set (GTK_WIDGET (tree), GDK_BUTTON1_MASK,
 			     drag_types, ELEMENTS (drag_types),
 			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
-	
+
 	/* Mouse is being moved over ourselves */
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_motion",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_leave",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_leave), panel);
-	
+
 	return tree;
 }
 
@@ -1728,7 +1728,7 @@ create_and_setup_pane (WPanel *panel)
 	GtkWidget *pane;
 	GtkWidget *tree = panel->tree;
 	GdkFont *tree_font = tree->style->font;
-	
+
 	pane = gtk_hpaned_new ();
 
 	/*
@@ -1737,7 +1737,7 @@ create_and_setup_pane (WPanel *panel)
 	 */
 	GTK_PANED (pane)->child1_size = 20 * gdk_string_width (tree_font, "W");
 	GTK_PANED (pane)->position_set = TRUE;
-	
+
 	gtk_widget_show (pane);
 
 	return pane;
@@ -1770,7 +1770,7 @@ button_switch_to (char **icon, GtkSignalFunc fn, void *closure)
 	pix = gnome_pixmap_new_from_xpm_d (icon);
 	gtk_container_add (GTK_CONTAINER (button), pix);
 	gtk_signal_connect (GTK_OBJECT (button), "clicked", fn, closure);
-			    
+
 	return button;
 }
 
@@ -1815,9 +1815,9 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	GtkWidget *frame, *cwd, *back_p, *fwd_p, *up_p;
 	GtkWidget *hbox, *evbox, *dock;
 	GtkWidget *display, *table_frame;
-		
+
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
-	
+
 	panel->table = gtk_table_new (2, 1, 0);
 
 	/*
@@ -1830,14 +1830,14 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->tree = panel_create_tree_view (panel);
 	gtk_container_add (GTK_CONTAINER (panel->tree_scrolled_window), panel->tree);
 	gtk_widget_show_all (panel->tree_scrolled_window);
-	
+
 	/*
 	 * Icon and Listing display
 	 */
 	panel->icons = panel_create_icon_display (panel);
 	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
 	gtk_widget_show (panel->scrollbar);
-	
+
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
 	gtk_widget_ref (panel->list);
@@ -1852,7 +1852,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 */
 	panel->pane = create_and_setup_pane (panel);
 	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree_scrolled_window);
-	
+
 	/*
 	 * Filter
 	 */
@@ -1862,7 +1862,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * Current Working directory
 	 */
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
-	
+
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
 
@@ -1882,10 +1882,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (panel->fwd_b), "clicked", GTK_SIGNAL_FUNC(panel_fwd), panel);
 	gtk_signal_connect (GTK_OBJECT (panel->up_b), "clicked", GTK_SIGNAL_FUNC(panel_up), panel);
 	panel_update_marks (panel);
-	
+
 
 	/*
-	 * Here we make the toolbars 
+	 * Here we make the toolbars
 	 */
 	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
 	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
@@ -1918,8 +1918,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_container_add(GTK_CONTAINER(dock),status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_POS_TOP, 1, 0, 0, FALSE);
 	gtk_widget_show_all (dock);
-	
-	
+
+
 	/*
 	 * ministatus
 	 */
@@ -1959,10 +1959,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_frame_set_shadow_type (GTK_FRAME (table_frame), GTK_SHADOW_IN);
 	gtk_widget_show (table_frame);
 	gtk_container_add (GTK_CONTAINER (table_frame), panel->view_table);
-	
+
 	/* Add both the icon view and the listing view */
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->icons, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->scrollbar, 1, 2, 0, 1,
@@ -1970,18 +1970,18 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_table_attach (GTK_TABLE (panel->view_table), panel->list, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_widget_show (display);
 
 	gtk_table_attach (GTK_TABLE (panel->table), panel->pane, 0, 1, 1, 2,
-			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 
 	gtk_paned_add2 (GTK_PANED (panel->pane), table_frame);
-	
+
 #if 0
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
@@ -2011,12 +2011,12 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
-	
+
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
-	
+
 	panel->widget.wdata = (widget_data) panel->table;
-	
+
 	/* Now, insert our table in our parent */
 	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
 	gtk_widget_show (vbox);
@@ -2046,7 +2046,7 @@ char *
 get_nth_panel_name (int num)
 {
     static char buffer [20];
-    
+
     if (!num)
         return "New Left Panel";
     else if (num == 1)
@@ -2061,14 +2061,14 @@ void
 load_hint (void)
 {
 	char *hint;
-	
+
 	if ((hint = get_random_hint ())){
 		if (*hint)
 			set_hintbar (hint);
 		free (hint);
 	} else
 		set_hintbar ("The GNOME File Manager " VERSION);
-	
+
 }
 
 void
@@ -2105,6 +2105,3 @@ x_panel_destroy (WPanel *panel)
 {
 	gtk_widget_destroy (GTK_WIDGET (panel->xwindow));
 }
-
-
-

@@ -1,5 +1,10 @@
 1998-12-11  Matt Wilson  <msw@redhat.com>
 
+	* gscreen.c: The solid lines in the tree are kinda harsh.  Replace
+	them with soothing dotted lines.
+
+1998-12-11  Matt Wilson  <msw@redhat.com>
+
 	* dir-open.xpm, dir-close.xpm: Away with the tacky yellow folders -
 	I like these brown ones from tigert better.
 
@@ -11,7 +16,7 @@
 
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
-	* gscreen.c gdesktop.c gdnd.h: enable dragging locale files 
+	* gscreen.c gdesktop.c gdnd.h: enable dragging locale files
 	into Netscape.
 
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -76,7 +81,7 @@
 
 	* gdesktop.c (editing_started): Grab on the window for the
 	icon, not on the canvas, so we can properly detect
-	clicks elsewhere. 
+	clicks elsewhere.
 
 	(icon_button_release_after): When the user stops selecting,
 	regrab the pointer.
@@ -159,7 +164,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gscreen.c (panel_icon_list_select_icon): Middle button opens a
 	new panel on a directory.
-	
+
 1998-12-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c: Moved the old DnD cruft to olddnd.c to keep it there
@@ -179,10 +184,10 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 1998-12-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gtkdtree.c (gtk_dtree_new): Use imlib's visual and colormap. 
+	* gtkdtree.c (gtk_dtree_new): Use imlib's visual and colormap.
 
 	* gscreen.c (panel_create_tree_view): Use the colormap and visual
-	from imlib when creating the DTree, 
+	from imlib when creating the DTree,
 
 1998-12-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -258,7 +263,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 1998-12-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (load_imlib_icons): Make it use the new gicon files. 
+	* gscreen.c (load_imlib_icons): Make it use the new gicon files.
 
 	* gicon.c, gicon.h: New files: they keep an image cache and
 	provide the right icon to use based on the filename.  They use the
@@ -266,7 +271,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 	keys for per-image icons.
 
 	* gdialogs.c (file_mask_dialog): Commented the help messages until
-	the warnings are figured out. 
+	the warnings are figured out.
 
 1998-12-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -298,7 +303,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gblist.c (blist_select_row): Warning fixes.
 
-	* olddnd.c: Moved the old DND code here for reference purposes. 
+	* olddnd.c: Moved the old DND code here for reference purposes.
 
 	* gscreen.c: Made the tree a drag source.
 
@@ -357,7 +362,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 	queue an open-directory event.
 
 	(panel_tree_scroll): Scroll the tree when the drag pointer is in
-	one of the boundaries of the tree. 
+	one of the boundaries of the tree.
 
 	(panel_tree_scrolling_is_desirable): new function to figure out if
 	it is a good plan to scroll the tree view instead of opening it.
@@ -429,8 +434,8 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* Makefile.in: now handles gdialogs*
 
-	* gdialogs.h: 
-	* gdialogs.c:Added new files -- takes the place of ../src/filegui.* 
+	* gdialogs.h:
+	* gdialogs.c:Added new files -- takes the place of ../src/filegui.*
 
 1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -466,9 +471,9 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 1998-11-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_update_input): Use gtk_editable_changed on the entry.
-	(x_create_listbox): Fix more CList api change. 
+	(x_create_listbox): Fix more CList api change.
 	* gscreen.c (CLIST_FROM_SW): Adapt to new GtkScrolledWindow
-	inheritance. 
+	inheritance.
 
 1998-11-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -477,7 +482,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gdesktop.c (check_window_in_one_panel): Provide better error
 	messages here for debugging purposes.
-	
+
 	Disable stubs for filegui.c until they are actually implemented.
 	I need to debug stuff.
 
@@ -491,7 +496,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	Put the ministatus inside an hbox, and use
 	gtk_container_set_resize_mode in this hbox to stop any queue
-	events from being propagated up in the hierachy of widgets 
+	events from being propagated up in the hierachy of widgets
 
 	This kills all of the CList/GnomeIconList/Scrollbar/Toolbar
 	flickering now.
@@ -500,7 +505,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gtree.c: More work on gtree.  It is basically ready to stick
 	into gmc-window.c/mc  I just need to know when you are ready
-	Federico. 
+	Federico.
 
 1998-11-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -531,7 +536,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 1998-11-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_list_insert): Make it work with the new CList
-	policies. 
+	policies.
 
 1998-11-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -613,7 +618,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 1998-11-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gdesktop.c (editing_started): 
+	* gdesktop.c (editing_started):
 	(editing_stopped): New functions to install and remove
 	pointer/keyboard grabs while icons are being edited,
 	respectively.
@@ -682,7 +687,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 	* gscreen.c (panel_icon_list_button_release): Remove unused
 	variable.
 
-	Provide hand written CList-start drag code 
+	Provide hand written CList-start drag code
 
 1998-10-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -768,25 +773,25 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_select_item): Force a canvas update when an icon
-	has been selected. 
+	has been selected.
 
 1998-10-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_drag_data_get): New routine to provide data
 	with the new DnD protocol.
-	
+
 	* gmain.c (dialog_key_pressed): If an icon has the focus, then do
 	not process any of our events.
 	Only stop the signal if we actually handled the event.
-	(dialog_key_pressed): 
+	(dialog_key_pressed):
 
 1998-10-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (panel_icon_renamed): Add support for renaming files. 
+	* gscreen.c (panel_icon_renamed): Add support for renaming files.
 
 1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c: Use the new icon list. 
+	* gscreen.c: Use the new icon list.
 
 1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -835,7 +840,7 @@ Wed Aug 19 19:45:16 EDT 1998 The Rasterman <raster@redhat.com>
 1998-06-22  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 
 	* gwidget.c: Don't call gtk_entry_scroll_adjust, it is a private member
-	
+
 1998-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (drop_cb): Mhm.  Negotiation of the drop type was not
@@ -871,7 +876,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (entry_release): Enhanced our marked handler for input
-	lines. 
+	lines.
 
 	* gdesktop.c (desktop_create_directory_entry): Fix, make a
 	g_strdup copy of the name. Fixes bug report #78.
@@ -881,26 +886,26 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c: Move the New window menu entry from ``Window'' to
-	``File''. 
+	``File''.
 
 	* gwidget.c (x_unfocus_widget): Fix wartning.
 
 	* glayout.c (set_hintbar): Call flush events after setting the
-	hintbar. 
+	hintbar.
 
 1998-05-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_create_input): Disable the use of the GNOME entries
 	for now, as they are very slow.  We need to figure out what is
-	wrong with this.  
+	wrong with this.
 
 	With this change, dialog boxes close quickly instead of taking
-	ages to close. 
+	ages to close.
 
 	* gscreen.c, gdesktop.c (file_popup_add_context, file_popup):
 	Share the context menu code in gdesktop.c and gscreen.c.  The
 	desktop pop up menus now include all of the stuff that would have
-	appeared in the Panel. 
+	appeared in the Panel.
 
 	* gdesktop.c (desktop_icon_remove): Remove the file associated
 	with this desktop entry if it is on the ~/desktop directory.
@@ -909,7 +914,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gscreen.c (load_dnd_icons): Remove the code and the icons that
 	we had here privately.  Use new gnome-stock functionality
-	instead. 
+	instead.
 
 1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -918,10 +923,10 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	New drag request type:  file:ALL.  If the user is looking at a
 	remote site, and the target application does not have VFS support
 	it should not list url:ALL but file:ALL as the accepted drop
-	type. 
+	type.
 
 	This will make copies of the remote files and pass the files to
-	the application.  
+	the application.
 
 1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -946,7 +951,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gprop.c (perm_owner_new): Forget about history for now.
 
 	* gpageprop.c (item_properties), gprop.c: Add executable editing
-	(command, and terminal).  Save the dentry after modification 
+	(command, and terminal).  Save the dentry after modification
 
 1998-05-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -957,7 +962,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	(desktop_setup_icon): Fix memory leak.
 	(get_desktop_icon): Fix memory leak.
 	(desktop_create_directory_entry): Set the size of the exec
-	vector. 
+	vector.
 	(desktop_create_launch_entry): Same.
 
 	We now create launch entries instead of trying to support
@@ -972,7 +977,7 @@ Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (create_popup_submenu): Use continue, not break on
-	this loop. 
+	this loop.
 
 Sat May 16 02:29:51 1998  Tom Tromey  <tromey@cygnus.com>
 
@@ -1009,7 +1014,7 @@ Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtrans.c (set_window_text): draw pixmaps without transparency
-	correctly. 
+	correctly.
 
 1998-05-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1023,33 +1028,33 @@ Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	(x_create_panel): Change in the approach:  we create both of the
 	widget views at creation time and we now carefully show every
 	component.  I attach everything to the table, but not necesarly
-	show it. 
+	show it.
 
 	* gblist.c (blist_select_row): New widget derived from GtkClist.
 	replace select_row and unselect_row with null functions, as the
-	gmc code takes care of the rest. 
+	gmc code takes care of the rest.
 
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_drag_start): Do not attempt to use
 	icons if we could not load the images for the icon.
 
-	* gwidget.c (x_update_input): Keep the cursor always visible. 
+	* gwidget.c (x_update_input): Keep the cursor always visible.
 
-	* gview.c (view): Use a buttonbar widget. 
+	* gview.c (view): Use a buttonbar widget.
 
 	* gwidget.c (buttonbar_clicked): Provide a trivial implementation
-	of the buttonbar that only responds to key sequences. 
+	of the buttonbar that only responds to key sequences.
 
 	* gmain.c (dialog_panel_callback): Call midnight_callback to get
 	the main bindings working.
 
 	* gdesktop.c (perform_drop_manually): Use p to walk the dropped
-	data.  This is an important bug fix. 
+	data.  This is an important bug fix.
 
 	* gmain.c (idle_destroy_window), main.c: Session management now
 	supports not showing a toplevel window (in case all of the windows
-	were closed). 
+	were closed).
 
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1063,9 +1068,9 @@ Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	more than one panel at once.  This is not a gmc bug, it appears to
 	be an Imlib/gtk/gdk interaction.  I am for now creating one panel
 	in the main program execution thread and the rest during the idle
-	handler. 
-	
-	(session_save_state): Added session management support. 
+	handler.
+
+	(session_save_state): Added session management support.
 
 1998-04-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1074,10 +1079,10 @@ Thu May 14 02:02:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 1998-04-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gdesktop.c: Finish desktop_icon_remove implementation. 
+	* gdesktop.c: Finish desktop_icon_remove implementation.
 
 	* glayout.c (update_panels): GNOME specific Implementation of the
-	update_panels routine. 
+	update_panels routine.
 
 Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
@@ -1087,15 +1092,15 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c (layout_panel_gone): Removed debugging information.
-	Renamed "Panel" to "Window" to make it less confusing to users. 
+	Renamed "Panel" to "Window" to make it less confusing to users.
 	Moved the "New window" from the "File" menu to the "Window" menu.
 
 	* gmain.c (dialog_panel_callback): Walk the list of panels to
-	determine to which panel the activated widget belongs. 
+	determine to which panel the activated widget belongs.
 
 1998-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gwidget.c (x_create_radio): Fix the WRadio widgets. 
+	* gwidget.c (x_create_radio): Fix the WRadio widgets.
 
 1998-04-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1116,10 +1121,10 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gwidget.c (x_dialog_stop): Only call gtk_main_quit if this
 	dialog did not inlcude the DLG_GNOME_APP flag, as those windows
 	did not launch a gtk_main event loop.
-	
+
 	* gcmd.c: Try various terminal programs in the PATH before giving
-	up 
-	
+	up
+
 	* glayout.c: Unselect command is unselect_cmd, not select_cmd
 
 	* gcmd.c (gnome_quit_cmd): Add quit confirmation.
@@ -1143,10 +1148,10 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	not display the special Hotkey specificator.
 
 	* gcmd.c (gnome_close_panel): Implement the close-the-panel
-	functionality. 
+	functionality.
 
 	* gscreen.c (x_panel_destroy): Implement the gnome mode way of
-	destroying the panel. 
+	destroying the panel.
 
 	* gview.c (view_status): Add cacheing of the information status,
 	to avoid excessive flicker.  It would be better if GtkLabel did
@@ -1156,12 +1161,12 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	contents.  This displays the scrollbar correctly.
 
 	* gwidget.c (x_listbox_select_nth): This may be invoked before the
-	widget has been created, work around this problem. 
+	widget has been created, work around this problem.
 
 	* gscreen.c (show_dir): Set the title bar for the window to the
-	current directoy.  Reported by both Mike and Elliot. 
+	current directoy.  Reported by both Mike and Elliot.
 
-	* layout: Updated to the new hotlist dialog box. 
+	* layout: Updated to the new hotlist dialog box.
 
 1998-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1173,7 +1178,7 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gview.c (x_init_view): Initialize view->sadj.
 
 	* gdesktop.c (start_desktop): use destkop_load instead of
-	desktop_reload. 
+	desktop_reload.
 	(desktop_load): This reloads + shows every widget on the
 	desktop_icons list.
 
@@ -1190,16 +1195,16 @@ Tue Apr 28 06:52:24 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Fri Apr 12 02:40:41 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* gwidget.c (x_create_input): return 1 if the widget has been 
+	* gwidget.c (x_create_input): return 1 if the widget has been
 	initialized manually (there was no return value)
-	
+
 	(x_create_buttonbar): to few arguments to sprintf (button number
 	was missing); return a value.
 
 1998-04-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_create_panel): Added back and forward buttons.  I
-	need a "Home" icon too. 
+	need a "Home" icon too.
 
 	* gwidget.c (x_create_input): Make the selection if the input has
 	not yet been touched.
@@ -1207,16 +1212,16 @@ Fri Apr 12 02:40:41 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gscreen.c (panel_action_open): If opening an item fails, try
 	panel_action_open_with.
 
-	* gview.c: Implement the viewer scrollbar. 
+	* gview.c: Implement the viewer scrollbar.
 
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_drop_data_available): Reload the panel contents
-	upon a drop. 
+	upon a drop.
 
 	* gmain.c (gnome_dlg_send_destroy): Hide the widgets just before
 	they are going to get destroyed, to avoid the shutdown
-	flickering. 
+	flickering.
 	(x_destroy_dlg_start): New routine/hook invoked when the destroy
 	has just started
 	(x_set_idle): Cancel the idle handlers properly.
@@ -1234,7 +1239,7 @@ Fri Apr 12 02:40:41 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gcache.c: Added an Image cache for all of the imlib-loaded
 	images to avoid destroying/reloading the images.
-	
+
 	* gdesktop.c, gtrans.c: Use the image cache.
 
 1998-03-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -1246,10 +1251,10 @@ Fri Apr 12 02:40:41 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 1998-03-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (x_fill_panel): Colors are properly displayed now. 
+	* gscreen.c (x_fill_panel): Colors are properly displayed now.
 
 	Use the clipped labels.
-	
+
 	* gcliplabel.c, gcliplabel.h: Derived label that does label
 	clipping (it does not request the allocation for the whole string,
 	but settles with whatever is provided in the size_allocation).
@@ -1268,7 +1273,7 @@ Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 1998-03-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
-	* gdesktop.c (icon_properties): 
+	* gdesktop.c (icon_properties):
 	* gpageprop.c (item_properties): Modified to accept dentry title
 	changes as well.
 	(item_properties): Fixed base and fname confusion in call to
@@ -1294,7 +1299,7 @@ Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gscreen.c (display_mini_info): Implement mini status. 
+	* gscreen.c (display_mini_info): Implement mini status.
 
 1998-03-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1312,7 +1317,7 @@ Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* gpageprop.c (item_properties): Insert icon control if appropriate.
 
-	* gprop.c (gprop_icon_new): 
+	* gprop.c (gprop_icon_new):
 	(gprop_icon_get_data): Renamed from gprop_dir_*().
 
 	* gscreen.c (panel_action_properties): Re-reads panel only if necessary.
@@ -1324,8 +1329,8 @@ Mon Mar 23 01:40:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* gpageprop.c: #include "../vfs/vfs.h".
 	#include "dialog.h".
 
-	* gprop.c (gprop_dir_new): 
-	(gprop_perm_new): 
+	* gprop.c (gprop_dir_new):
+	(gprop_perm_new):
 	(gprop_general_new): Connect to the destroy signal of the toplevel
 	widget and destroy the Gprop structure on the callback.
 
@@ -1338,14 +1343,14 @@ Wed Mar 18 22:32:53 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_action_properties): Make Federico's
 	page-properties code functional.
-	 
+
 	* gpageprop.c: New file, implements most of the page properties on
-	top of the gprop.c code. 
+	top of the gprop.c code.
 
 Wed Mar 18 20:35:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_create_launch_entry): Support for the "Drop"
-	target in mc.ext now. 
+	target in mc.ext now.
 
 	* Add support for dragging the icons on the desktop.
 
@@ -1356,11 +1361,11 @@ Wed Mar 18 20:35:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(drop_cb): splitted, call url_drop for regular drops, otherwise it
 	is a icon drop.
 	(artificial_drag_start): new routine, used now by gscreen.c and
-	gdesktop.c 
+	gdesktop.c
 	(drop_on_directory): Check result value of operation.
 	(desktop_icon_set_position): sane interface.
-	(stop_desktop): Flush all of our state to disk. 
-	
+	(stop_desktop): Flush all of our state to disk.
+
 1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c: Removed tests for the gprop stuff.
@@ -1378,19 +1383,19 @@ Wed Mar 18 20:35:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	* glayout.c: Put gnome_about_cmd as a callback for the About menu item.
 
 Tue Mar 17 22:40:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-	
+
 	* gdesktop.c (desktop_setup_icon): Lots of changes to accomodate
 	dropping icons on the root window.
-	
+
 	(do_symlinks): Implement symlink action.
 
 	(icon_delete, desktop_icon_context_popup): Implement icon context
-	menus.  only deleting an icon is working right now. 
+	menus.  only deleting an icon is working right now.
 
 	* gscreen.c: Load the drag and drop icons from the installation
 	directory.
-	
-	* Makefile.in (install_gmc): Install our icons. 
+
+	* Makefile.in (install_gmc): Install our icons.
 
 Tue Mar 17 02:38:37 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1414,7 +1419,7 @@ Sat Mar 14 17:13:26 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (gnome_dlg_send_destroy): New signal handler for
 	"delete_event".  I return TRUE (ie, do not kill this window), and
-	manually queue que destruction of this window. 
+	manually queue que destruction of this window.
 
 	* gtools.c (query_dialog): Do not allow resizing; do not destroy
 	the dialog ourselves, this is properly handled by dlg.c now
@@ -1428,11 +1433,11 @@ Fri Mar 13 16:01:28 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtools.c: Implement the non-modal version of the message
 	routine.
-	
+
 	* gview.c: Create a GnomeApp widget to contain the viewer.
 
 	* gmain.c (xtoolkit_create_dialog): Add a new mode where the
-	container window is a GNOME_APP window. 
+	container window is a GNOME_APP window.
 
 1998-03-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1454,13 +1459,13 @@ Thu Mar 12 22:11:23 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	* gwidget.c (listbox_select): Fix for the listbox selection with
 	the mouse.
 	(x_create_button): Use stock pixmaps.
-	
+
 	* gcmd.c: Moved all of the _cmd routines from glayout to this
 	place.
 	(save_panel_types): Provide GNOME implementation.
-	
+
 	* glayout.c: New and improved menu layout.  Use stock pixmaps.
-	
+
 1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (gmc_char_grid_draw): Someone teach me how to
@@ -1488,28 +1493,28 @@ Thu Mar 12 22:11:23 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 Thu Mar 12 00:08:06 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gview.c (view_percent): Added status display.
-	
+
 Wed Mar 11 22:35:02 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (entry_release): Now the WEntrys track the current
 	selection.p
 	(x_update_input): Repaint the widget after changing the position.
-	
+
 	* gscreen.c (x_fill_panel): Remember the selected item on the
 	panel before filling it up, as gtk_clist emits a select_item
 	signal when filling it up, which changes the current selection
 	(and thus some routines that invoke the reload panel option
-	fail). 
-	
+	fail).
+
 	(create_popup_submenu): Implement context sensitive menus (regular
 	files, and symlinks).
-	
+
 	(panel_realized): Use a different icon when we are dragging a
 	group of files.
 
 	(panel_artificial_drag_start): Add Elliot's Artificial drag start
 	support.
-	
+
 1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (gmc_char_grid_get_size): New public function.
@@ -1530,16 +1535,16 @@ Tue Mar 10 23:46:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_adjust_top_file): We no longer adjust the top
 	displayed filename.
-	
+
 	(panel_build_selected_file_list): Fix for the transfered data.
-	
+
 	(panel_drop_data_available): Now drop support uses the new
 	coords.x and coords.y fields from the DropDataAvailableEvent to
 	find out which directory receives the drop.
 
 	* glayout.c: added: configure_box, configure_vfs
 	(get_other_type): Return the correct value.
-	
+
 1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (panel_file_list_size_allocate_hook): Now we
@@ -1564,7 +1569,7 @@ Tue Mar 10 00:10:32 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_drop_data_available): Now drop support uses the
 	new coords.x and coords.y fields from the DropDataAvailableEvent
-	to find out which directory receives the drop. 
+	to find out which directory receives the drop.
 
 	* gwidget.c (x_radio_focus_item): Add support for focusing radio
 	buttons.
@@ -1575,7 +1580,7 @@ Mon Mar  9 15:12:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(dlg_key_event): Support for backtab.
 
 	* gwidget.c: highlight properly the focused radio entry.
-	
+
 	* gmain.c (x_init_dlg): After setting up the X widget, set the
 	Gtk focus to h->current;
 
@@ -1596,25 +1601,25 @@ Fri Mar  6 20:50:19 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	all of the pending X events.
 
 	(x_set_idle): Implement idle functions, now the find command works
-	properly. 
-	
+	properly.
+
 	* gwidget.c (x_create_radio): Connect to the "toggled" signal to
 	keep track of the radio button.
 
 	(listbox_select): callback for the select and double click
-	actions. 
+	actions.
 	(x_update_input): This can be invoked before the
 	widget X resources have been allocated.  Take care of this.
 
 	(x_create_input): update the cursor position as well.
 
 	(x_list_insert, x_create_listbox, x_list_delete_nth,
-	x_listbox_select_nth): implement the Listbox widget. 
+	x_listbox_select_nth): implement the Listbox widget.
 
-	* gconf.h:  New configuration options: 
+	* gconf.h:  New configuration options:
 	PORT_HAS_PANEL_ADJUST_TOP_FILE and
 	PORT_HAS_PANEL_RESET_SORT_LABELS
-	
+
 1998-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmain.c (get_color): Make it use GdkColorContext correctly.
@@ -1636,13 +1641,13 @@ Thu Mar  5 23:54:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	* gscreen.c (panel_drop_data_available): Performs the drop action
 	on a panel.  It needs fixing, as the DropDataAvailabelEvent does
 	not provide any information as to where the drop actually
-	happened. 
+	happened.
 
 	(fixed_gtk_widget_dnd_drag_set, fixed_gtk_widget_dnd_drop_set):
 	Only set the main window of the clist to be the source/target of
 	the drag and drop code.  The little square at the end did not make
 	much sense as a drop/drag spot.
-	
+
 1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmain.h: Added prototype for x_filter_changed().
@@ -1652,7 +1657,7 @@ Thu Mar  5 23:54:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 Wed Mar  4 22:43:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gtools.c (query_dialog): Rewritten to use the MC dialog/widget code. 
+	* gtools.c (query_dialog): Rewritten to use the MC dialog/widget code.
 
 	* gutil.c (my_system), acconfig.h: By default gnome will not have
 	a subshell (at least for now) and will now exec everything
@@ -1663,12 +1668,12 @@ Wed Mar  4 22:43:00 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	programming psycologists.  It was a huge mistake.
 
 	* gdesktop.c: Use the new icon/text display routine from
-	Federico. 
+	Federico.
 
 Tue Mar  3 21:03:52 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (x_destroy_dlg): Call gtk_grab_remove when destroying
-	the dialog. 
+	the dialog.
 
 	* gmain.c (x_focus_widget): Handle special case of toplevels.
 
@@ -1676,4 +1681,3 @@ Tue Mar  3 21:03:52 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Some hackish changes to work around idempotence bugs
 	in gtk_clist_select_row().
-
