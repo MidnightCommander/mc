@@ -117,9 +117,9 @@ int view_init (WView *view, char *_command, char *_file, int start_line);
 int view_file (char *filename, int normal, int internal);
 
 /* Internal view routines */
-void view_status        (WView *);
-void view_percent       (WView *, int, int);
-void view_update        (WView *view);
+void view_status        (WView *, gboolean update_gui);
+void view_percent       (WView *, int p, int w, gboolean update_gui);
+void view_update        (WView *view, gboolean update_gui);
 void view_labels        (WView *view);
 int view_event          (WView *view, Gpm_Event *event,int *result);
 void toggle_wrap_mode   (WView *);

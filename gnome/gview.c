@@ -76,11 +76,11 @@ scrollbar_moved (GtkAdjustment *adj, WView *view)
 
 	/* To force a display */
 	view->dirty = max_dirt_limit + 1;
-	view_update (view);
+	view_update (view, 0);
 }
 
 void
-view_percent (WView *view, int p, int w)
+view_percent (WView *view, int p, int w, gboolean update_gui)
 {
     int percent;
     char buffer [40];
@@ -94,6 +94,9 @@ view_percent (WView *view, int p, int w)
     if (strcmp (buffer, GTK_LABEL (view->gtk_percent)->label))
 	    gtk_label_set (GTK_LABEL (view->gtk_percent), buffer);
 
+    if (!update_gui)
+	    return;
+    
     if (view->sadj){
 	    GtkAdjustment *adj = GTK_ADJUSTMENT (view->sadj);
 	    
@@ -105,14 +108,13 @@ view_percent (WView *view, int p, int w)
 		    gtk_signal_emit_by_name (GTK_OBJECT (adj), "changed");
 	    }
 	    if ((int) adj->value != view->start_display){
-		    printf ("Value=%g s=%d\n", adj->value, view->start_display);
 		    gtk_adjustment_set_value (adj, view->start_display);
 	    }
     }
 }
 
 void
-view_status (WView *view)
+view_status (WView *view, gboolean update_gui)
 {
 	char buffer [80];
 	
@@ -128,9 +130,9 @@ view_status (WView *view)
 		gtk_label_set (GTK_LABEL (view->gtk_bytes), buffer);
 
 	if (view->hex_mode)
-		view_percent (view, view->edit_cursor - view->first, 0);
+		view_percent (view, view->edit_cursor - view->first, 0, update_gui);
 	else
-		view_percent (view, view->start_display - view->first, 0);
+		view_percent (view, view->start_display - view->first, 0, update_gui);
 }
 
 void

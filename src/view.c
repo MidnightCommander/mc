@@ -352,7 +352,7 @@ put_editkey (WView *view, unsigned char key)
         node->value = byte_val;
     }
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
     move_right (view);
 }
 
@@ -645,7 +645,7 @@ view_init (WView *view, char *_command, char *_file, int start_line)
 
 #ifndef HAVE_X
 void
-view_percent (WView *view, int p, int w)
+view_percent (WView *view, int p, int w, gboolean update_gui)
 {
     int percent;
 
@@ -665,7 +665,7 @@ view_percent (WView *view, int p, int w)
 }
 
 void
-view_status (WView *view)
+view_status (WView *view, gboolean update_gui)
 {
     int w = view->widget.cols - (view->have_frame * 2);
     int i;
@@ -695,9 +695,9 @@ view_status (WView *view)
 	}
         if (w - i > 4)
             if (view->hex_mode)
-                view_percent (view, view->edit_cursor - view->first, w);
+                view_percent (view, view->edit_cursor - view->first, w, update_gui);
             else
-	        view_percent (view, view->start_display - view->first, w);
+	        view_percent (view, view->start_display - view->first, w, update_gui);
     }
     attrset (SELECTED_COLOR);
 }
@@ -1010,14 +1010,14 @@ view_place_cursor (WView *view)
 }
 
 void
-view_update (WView *view)
+view_update (WView *view, gboolean update_gui)
 {
     static int dirt_limit = 1;
 
     if (view->dirty > dirt_limit){
 	/* Too many updates skipped -> force a update */
 	display (view);
-	view_status (view);
+	view_status (view, update_gui);
 	view->dirty = 0;
 	/* Raise the update skipping limit */
 	dirt_limit++;
@@ -1028,14 +1028,14 @@ view_update (WView *view)
 	if (is_idle ()){
 	    /* We have time to update the screen properly */
 	    display (view);
-	    view_status (view);
+	    view_status (view, update_gui);
 	    view->dirty = 0;
 	    if (dirt_limit > 1)
 		dirt_limit--;
 	} else {
 	    /* We are busy -> skipping full update,
 	       only the status line is updated */
-	    view_status (view);
+	    view_status (view, update_gui);
 	}
 	/* Here we had a refresh, if fast scrolling does not work
 	   restore the refresh, although this should not happen */
@@ -1499,7 +1499,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	if (p >= update_activate){
 	    update_activate += update_steps;
 	    if (verbose){
-		view_percent (view, p, w);
+		view_percent (view, p, w, TRUE);
 		mc_refresh ();
 	    }
 	    if (got_interrupt ())
@@ -1587,7 +1587,7 @@ block_search (WView *view, char *buffer, int len)
 	if (e >= update_activate){
 	    update_activate += update_steps;
 	    if (verbose){
-		view_percent (view, e, w);
+		view_percent (view, e, w, TRUE);
 		mc_refresh ();
 	    }
 	    if (got_interrupt ())
@@ -1743,7 +1743,7 @@ static void do_regexp_search (void *xview, char *regexp)
     search (view, regexp, regexp_view_search);
     /* Had a refresh here */
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 static void do_normal_search (void *xview, char *text)
@@ -1757,7 +1757,7 @@ static void do_normal_search (void *xview, char *text)
 	search (view, text, icase_search_p);
     /* Had a refresh here */
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 /* }}} */
@@ -1789,7 +1789,7 @@ void toggle_wrap_mode (WView *view)
         }
         view_labels (view);
         view->dirty++;
-        view_update (view);
+        view_update (view, TRUE);
 		return;
     } 
     view->wrap_mode = 1 - view->wrap_mode;
@@ -1805,7 +1805,7 @@ void toggle_wrap_mode (WView *view)
     }
     view_labels (view);
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 /* Both views */
@@ -1830,7 +1830,7 @@ toggle_hex_mode (WView *view)
     get_bottom_first (view, 1, 1);
     view_labels (view);
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 /* Both views */
@@ -1864,7 +1864,7 @@ goto_line (WView *view)
     }
     view->dirty++;
     view->wrap_mode = saved_wrap_mode;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 /* Both views */
@@ -1956,7 +1956,7 @@ change_viewer (WView *view)
             g_free (t);
         view_labels (view);
         view->dirty++;
-        view_update (view);
+        view_update (view, TRUE);
     }
 }
 
@@ -1967,7 +1967,7 @@ change_nroff (WView *view)
     altered_nroff_flag = 1;
     view_labels (view);
     view->dirty++;
-    view_update (view);
+    view_update (view, TRUE);
 }
 
 /* Real view only */
@@ -2286,7 +2286,7 @@ real_view_event (Gpm_Event *event, void *x)
     int result;
     
     if (view_event ((WView *) x, event, &result))
-    	view_update ((WView *) x);
+    	view_update ((WView *) x, TRUE);
     return result;
 }
 
@@ -2397,7 +2397,7 @@ view_hook (void *v)
     
     view_init (view, 0, panel->dir.list [panel->selected].fname, 0);
     display (view);
-    view_status (view);
+    view_status (view, TRUE);
 }
 
 static int
@@ -2417,7 +2417,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
 	
     case WIDGET_DRAW:
 	display (view);
-	view_status (view);
+	view_status (view, TRUE);
 	break;
 
     case WIDGET_CURSOR:
@@ -2430,7 +2430,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
 	if (view->view_quit)
 	    dlg_stop (h);
 	else {
-	    view_update (view);
+	    view_update (view, TRUE);
 	}
 	return i;
 
@@ -2439,7 +2439,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
 	view->bottom_first = -1;
 	move_to_bottom (view);
 	display (view);
-	view_status (view);
+	view_status (view, TRUE);
 	sleep (1);
 	return 1;
 	

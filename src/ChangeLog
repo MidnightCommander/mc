@@ -1,3 +1,9 @@
+1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* view.c (view_percent, view_update): Take an extra argument:
+	update_gui, which controls whether we want to update the displayed
+	region in the GUI version.
+
 1999-02-25  Owen Taylor  <otaylor@redhat.com>
 
 	* fileopctx.h file.c: Moved recursive delete query

@@ -1,5 +1,8 @@
 1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gview.c (scrollbar_moved): Call view update here, with
+	update_gui = FALSE.
+
 	* gdesktop.c (desktop_icon_info_open): Add needs terminal support.
 
 	* gnome-file-property-dialog.c (create_settings_pane): Add Needs
