@@ -1,5 +1,11 @@
 2004-08-21  Pavel S. Shirshov  <pavelsh@mail.ru>
 
+	* extfs/urar.in: Fix non-POSIX constructs.
+
+	From Koblinger Egmont <egmont uhulinux hu>
+
+2004-08-21  Pavel S. Shirshov  <pavelsh@mail.ru>
+
 	* extfs/rpm: Modified workaround for spaces and single quotes 
 	in the path name.
 
