@@ -357,7 +357,7 @@ To tag files you may use the Insert key (the kich1 terminfo sequence)
 or the C-t (Control-t) sequence. To untag files, just retag a tagged
 file.
 .PP
-.B M-g, M-h (or M-r), M-j.
+.B M-g, M-r, M-j.
 Used to select the top file in a panel, the middle file and the bottom one,
 respectively.
 .PP

@@ -357,7 +357,7 @@ Para marcar ficheros (y/o directorios) como seleccionados podemos usar la tecla 
 (La secuencia kich1 de terminfo) o la combinación C-t (Control-t). Para deseleccionar
 ficheros, basta con repetir la operación sobre los ficheros y/o directorios antes marcados.
 .PP
-.B M-g, M-h (o M-r), M-j.
+.B M-g, M-r, M-j.
 Usadas para seleccionar el fichero superior en un panel, el fichero central y el inferior del
 panel, respectivamente.
 .PP
