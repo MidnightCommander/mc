@@ -559,7 +559,7 @@ completion_matches (char *text, CompletionFunction entry_function)
         /* If only one match, just use that. */
         if (matches == 1){
 	    match_list[0] = match_list[1];
-	    match_list[1] = (char *)NULL;
+	    match_list[1] = NULL;
         } else {
             int j;
             
