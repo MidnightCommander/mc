@@ -141,6 +141,11 @@ incomplete, use `configure --help' to get the full list):
      but support for 64-bit offsets is available.  May be useful for
      slow processors and embedded systems.
 
+`--enable-charset'
+     This option adds support for selecting character set of the text in
+     the internal viewer and editor and converting it on the fly.  The
+     implementation of this option is currently incomplete.
+
 You may also tell configure which screen library you want to use with
 the Midnight Commander.  The configure script will use S-Lang as
 default, and prefers an already installed S-Lang library over the
