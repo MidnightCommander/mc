@@ -120,14 +120,34 @@ gtk_dtree_insert_node (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 static gboolean
 gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int level)
 {
+	GtkCTreeNode *phantom;
 	tree_scan  *dir;
 	tree_entry *dirent;
+        struct stat dir_stat;
 	
 	g_assert (path);
 	g_assert (parent);
 	g_assert (dtree);
 
+        if (mc_stat (path, &dir_stat)){
+		return FALSE;
+        }
+        if (!S_ISDIR(dir_stat.st_mode))
+		return FALSE;
+
 	dtree->loading_dir++;
+
+
+        phantom = gtk_dtree_contains (dtree, parent, "PHANTOM");        
+        if (!level) {
+		dirent = tree_store_whereis (path);
+		if (!phantom && (!dirent  || (dirent && !dirent->scanned)))
+			if (dir_stat.st_nlink > 2 || strncmp(path,"/afs",4)==0)
+				gtk_dtree_insert_node (dtree, parent, "PHANTOM");
+		dtree->loading_dir--;
+		return TRUE;
+        }
+
 	dir = tree_store_opendir (path);
 	if (!dir){
 		dtree->loading_dir--;
@@ -155,6 +175,11 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 	tree_store_closedir (dir);
 	dtree->loading_dir--;
+	if (phantom != NULL && level) {
+		dtree->removing_rows = 1;
+		gtk_ctree_remove_node (GTK_CTREE (dtree), phantom);
+		dtree->removing_rows = 0;
+	}
 	
 	return TRUE;
 }
