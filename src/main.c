@@ -3025,7 +3025,7 @@ int main (int argc, char *argv [])
        calls any define_sequence */
     init_key ();
 
-#if defined(PORT_WANTS_ARGP) && !defined(HAVE_GNOME)
+#ifndef HAVE_GNOME
     handle_args (argc, argv);
 #endif
     
