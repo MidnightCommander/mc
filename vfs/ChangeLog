@@ -1,5 +1,9 @@
 2004-01-22  Pavel Roskin  <proski@gnu.org>
 
+	* mcserv.c: Use HAVE_CRYPT instead of USE_CRYPT.  Remove
+	references to HAVE_LIBCRYPT and HAVE_LIBCRYPT_I.  Reported by
+	Christian Laubscher <christian.laubscher@tiscalinet.ch>
+
 	* samba/configure.in: Rename to ...
 	* samba/configure.ac: ... this.  Adjust dependencies.
 

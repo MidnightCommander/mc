@@ -86,10 +86,6 @@
 #    include <crypt.h>
 #endif				/* !HAVE_CRYPT_H */
 
-#if defined(HAVE_LIBCRYPT) || defined(HAVE_LIBCRYPT_I)
-#    define USE_CRYPT
-#endif
-
 #ifdef HAVE_SHADOW_H
 #    include <shadow.h>
 #else
@@ -886,7 +882,7 @@ do_ftp_auth (char *username, char *password)
     return 0;
 }
 
-#ifdef USE_CRYPT
+#ifdef HAVE_CRYPT
 static int
 do_classic_auth (char *username, char *password)
 {
@@ -920,7 +916,7 @@ do_classic_auth (char *username, char *password)
     endpwent ();
     return ret;
 }
-#endif				/* USE_CRYPT */
+#endif				/* HAVE_CRYPT */
 #endif				/* !HAVE_PAM */
 
 /* Try to authenticate the user based on:
@@ -947,7 +943,7 @@ do_auth (char *username, char *password)
 	auth = 1;
     else
 #endif
-#ifdef USE_CRYPT
+#ifdef HAVE_CRYPT
     if (do_classic_auth (username, password))
 	auth = 1;
     else
