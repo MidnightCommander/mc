@@ -1020,11 +1020,11 @@ msgstr "Кодування вводу/показу:"
 msgid "&Select"
 msgstr "&Вибрати"
 
-#: src/boxes.c:743
+#: src/boxes.c:713
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "Використовувати ~/.&netrc"
 
-#: src/boxes.c:747
+#: src/boxes.c:717
 msgid "&Always use ftp proxy"
 msgstr "&Завжди використовувати прокс╕ для FTP"
 
