@@ -1,3 +1,9 @@
+1999-08-30  Miguel de Icaza  <miguel@gnu.org>
+
+	* ftpfs.c (insert_dots): Use g_new here.
+
+	* shared_ftpfs_fish.c: Style fixes and small fixes
+
 1999-09-22  Bjorn Eriksson <mdeans@algonet.se>
 
 	* extfs/uzip.in: Better handling of zip-archives that contain files 

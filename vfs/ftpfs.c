@@ -1276,7 +1276,7 @@ insert_dots (struct linklist *file_list, struct connection *bucket)
     };
 
     for (i = 0; i < 2; i++ ) {
-        fe = malloc(sizeof(struct direntry));
+        fe = g_new (struct direntry, 1);
         if (fe == NULL)
 	    return;
         if (vfs_parse_ls_lga (buffer[i], &fe->s, &fe->name, &fe->linkname)) {
@@ -1288,9 +1288,9 @@ insert_dots (struct linklist *file_list, struct connection *bucket)
 	    (fe->s).st_ino = bucket->__inode_counter++;
 
 	    if (!linklist_insert(file_list, fe))
-	        free(fe);
+	        g_free(fe);
         } else
-	    free (fe);
+	    g_free (fe);
     }
 }
 

@@ -308,11 +308,15 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		fmode = S_ISLNK(ent->s.st_mode)
 		    ? ent->l_stat->st_mode
 		    : ent->s.st_mode;
-		if (S_ISDIR(fmode)) ERRNOR (EISDIR, NULL);
-		if (!S_ISREG(fmode)) ERRNOR (EPERM, NULL);
-		if ((flags & O_EXCL) && (flags & O_CREAT)) ERRNOR (EEXIST, NULL);
+		if (S_ISDIR(fmode))
+			ERRNOR (EISDIR, NULL);
+		if (!S_ISREG(fmode))
+			ERRNOR (EPERM, NULL);
+		if ((flags & O_EXCL) && (flags & O_CREAT))
+			ERRNOR (EEXIST, NULL);
 		if (ent->remote_filename == NULL)
-		    if (!(ent->remote_filename = g_strdup(file_name))) ERRNOR (ENOMEM, NULL);
+		    if (!(ent->remote_filename = g_strdup(file_name)))
+			    ERRNOR (ENOMEM, NULL);
 		if (ent->local_filename == NULL || 
 		    !ent->local_stat.st_mtime || 
 		    stat (ent->local_filename, &sb) < 0 || 
@@ -354,8 +358,8 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	int handle;
 
 	ent = g_new (struct direntry, 1);
-	ent->freshly_created = 0;
 	if (ent == NULL) ERRNOR (ENOMEM, NULL);
+	ent->freshly_created = 0;
 	ent->count = 1;
 	ent->linkname = NULL;
 	ent->l_stat = NULL;
@@ -363,11 +367,11 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	ent->name = g_strdup(p);
 	ent->remote_filename = g_strdup(file_name);
 	ent->local_filename = tempnam (NULL, X "fs");
-	if (!ent->name && !ent->remote_filename && !ent->local_filename) {
+	if (!ent->name || !ent->remote_filename || !ent->local_filename) {
 	    direntry_destructor(ent);
 	    ERRNOR (ENOMEM, NULL);
 	}
-        handle = creat(ent->local_filename, 0700);
+        handle = open (ent->local_filename, O_CREAT | O_EXCL | O_RDWR | O_TRUNC, 0700);
 	if (handle == -1) {
 	    my_errno = EIO;
 	    goto error;
