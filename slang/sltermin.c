@@ -321,7 +321,7 @@ char *SLtt_tigetent (char *term)
 # define UNTIC_COMMENT(x)
 #endif
 
-typedef struct 
+typedef const struct
 {
    char name[3];
    int offset;
