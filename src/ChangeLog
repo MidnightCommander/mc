@@ -1,3 +1,10 @@
+2000-02-04 "David H.Martin" <dmartina@usa.net> 
+	
+        * src/widget.c (input_new): Change NULL to empty strings and avoid
+	  crashing when string functions are called.
+        * src/boxes.c (configure_vfs): Remove local change to empty string.
+        * src/setup.c (load setup): Load anonymous password     
+
 2000-02-03 Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* setup.c (load_setup): call ftpfs_init_passwd to avoid segfault

@@ -609,6 +609,7 @@ load_setup (void)
     }
 #ifdef USE_NETCODE
     ftpfs_proxy_host = do_load_string ("Misc", "ftp_proxy_host", "gate");
+    ftpfs_anonymous_passwd = do_load_string ("Misc", "ftpfs_password", "user@mc");
 #endif
     boot_current_is_left =
 	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);

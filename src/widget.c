@@ -1748,6 +1748,10 @@ input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
 	    in->history = history_get (tkname);
 	}
     }
+    
+    if (!def_text)
+	def_text="";
+    
     if (def_text == INPUT_LAST_TEXT) {
 	def_text = "";
 	if (in->history)

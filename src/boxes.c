@@ -694,7 +694,7 @@ configure_vfs (void)
     g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
     confvfs_widgets[5].text = buffer3;
     confvfs_widgets[7].text = ftpfs_anonymous_passwd;
-    confvfs_widgets[2].text = ftpfs_proxy_host ? ftpfs_proxy_host : "";
+    confvfs_widgets[2].text = ftpfs_proxy_host;
 #endif
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
