@@ -1,3 +1,7 @@
+2000-08-04  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* util-alone.c (message_1s1d): added missing function
+
 2000-08-03  Pavel Roskin  <proski@gnu.org>
 
 	* undelfs.h: Removed

@@ -188,6 +188,15 @@ message_3s( int i, char *c1, char *c2, char *c3, const char *c4 )
     box_puts (buf);
 }
 
+void message_1s1d (int flags, char *title, char *str, int d)
+{
+    char buf [4096];
+    
+    snprintf (buf, sizeof (buf), "%s %d", str, d);
+    box_puts (buf);
+}
+
+
 void vfs_init( void );
 void ftpfs_init_passwd( void );
 
