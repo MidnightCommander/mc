@@ -1,23 +1,19 @@
-# GNU Midnight Commander hungarian translation
+# mc hu.po
+# Copyright (C) 1999 Free Software Foundation, Inc.
+# Shooby Ban <bansz@szif.hu>, 1999.
 # Hungarian translation by Kádár András <kadara.inf.bme.hu> and 
 # Tamas Fejos <tms@rt.dunaferr.hu>
+#
 msgid ""
 msgstr ""
-"POT-Creation-Date: 1999-06-21 18:02+0200\n"
-"Content-Type: text/plain; charset=ISO8859-2\n"
-"Date: 1998-07-5 22:16:12-0100\n"
+"Project-Id-Version: control-center 4.5.31\n"
+"POT-Creation-Date: 1999-05-19 14:40+0200\n"
+"Last-Translator: Shooby Ban <bansz@szif.hu>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
 "From: Tamas FEJOS +36-25-404-573 <tms@rt.dunaferr.hu>\n"
-"Xgettext-Options: --default-domain=mc --directory=.. --add-comments "
-"--keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
-"Files: vfs/ftpfs.c vfs/mcfs.c edit/edit.c edit/edit_key_translator.c "
-"edit/editcmd.c edit/editmenu.c edit/editoptions.c edit/editwidget.c "
-"src/fixhlp.c src/achown.c src/background.c src/boxes.c src/chmod.c "
-"src/chown.c src/cmd.c src/command.c src/dialog.c src/dir.c src/ext.c "
-"src/file.c src/find.c src/help.c src/hotlist.c src/info.c src/layout.c "
-"src/learn.c src/main.c src/menu.c src/option.c src/panelize.c src/screen.c "
-"src/subshell.c src/tree.c src/user.c src/util.c src/utilunix.c src/view.c "
-"src/win.c src/wtools.c gnome/gcmd.c gnome/gdesktop.c gnome/glayout.c "
-"gnome/gprop.c gnome/gscreen.c gnome/gtools.c gnome/gview.c gnome/gwidget.c\n"
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
@@ -51,7 +47,7 @@ msgstr "A Midnight Commander csapat"
 
 #: gnome/gcmd.c:111
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr ""
+msgstr "hibalista: http://bugs.gnome.org, vagy használd a gnome-bug-ot"
 
 #: gnome/gcmd.c:123
 msgid "GNU Midnight Commander"
@@ -89,19 +85,19 @@ msgstr "Hossz"
 
 #: gnome/gcmd.c:293
 msgid "Time Last Accessed"
-msgstr ""
+msgstr "Utolsó elérés ideje"
 
 #: gnome/gcmd.c:299
 msgid "Time Last Modified"
-msgstr ""
+msgstr "Utolsó módosítás ideje"
 
 #: gnome/gcmd.c:305
 msgid "Time Last Changed"
-msgstr ""
+msgstr "Utolsó változás ideje"
 
 #: gnome/gcmd.c:319
 msgid "Reverse the order."
-msgstr ""
+msgstr "Fordított rendezés."
 
 #: gnome/gcmd.c:384
 msgid "Enter name."
@@ -166,10 +162,14 @@ msgid ""
 "For example:\n"
 "*.png will show just png images"
 msgstr ""
+"Írj be egy szûrõt a panelben történõ megjelenítéshez.\n "
+"\n"
+"Például:\n"
+"*.png csak a png fájlokat fogja mutatni"
 
 #: gnome/gcmd.c:692
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr ""
+msgstr "Írj be egy reguláris kifejezést a panelben szûrt megjelenítéshez."
 
 #: gnome/gcmd.c:752
 msgid " Open with..."
@@ -194,10 +194,14 @@ msgid ""
 "For example:\n"
 "*.png will select all png images"
 msgstr ""
+"Írj be egy szûrõt a panelben történõ kijelöléshez.\n "
+"\n"
+"Például:\n"
+"*.png csak a png fájlokat fogja kijelölni"
 
 #: gnome/gcmd.c:852
 msgid "Enter a regular expression here to select files in the panel view with."
-msgstr ""
+msgstr "Írj be egy reguláris kifejezést a panelben szûrt megjelenítéshez."
 
 #: gnome/gcmd.c:898 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
@@ -205,11 +209,11 @@ msgstr "  Hibás reguláris kifejezés  "
 
 #: gnome/gcmd.c:943
 msgid "Creating a desktop link"
-msgstr ""
+msgstr "Egy új munkalap link készítése"
 
 #: gnome/gcmd.c:944
 msgid "Enter the URL:"
-msgstr ""
+msgstr "Írd be az URL-t:"
 
 #: gnome/gcustom-layout.c:36
 msgid "Access Time"
@@ -232,7 +236,7 @@ msgstr "Csoport ID"
 
 #: gnome/gcustom-layout.c:40
 msgid "Inode Number"
-msgstr ""
+msgstr "Inode szám"
 
 #: gnome/gcustom-layout.c:41 src/achown.c:378
 msgid "Mode"
@@ -244,7 +248,7 @@ msgstr "Módosítás ideje"
 
 #: gnome/gcustom-layout.c:44
 msgid "Number of Hard Links"
-msgstr ""
+msgstr "Linkek száma"
 
 #. Owner
 #: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:925
@@ -270,15 +274,15 @@ msgstr "Felhasználó ID"
 
 #: gnome/gcustom-layout.c:144
 msgid "Possible Columns"
-msgstr ""
+msgstr "Lehetséges oszlopok"
 
 #: gnome/gcustom-layout.c:164
 msgid "Displayed Columns"
-msgstr ""
+msgstr "Megjelenített oszlopok"
 
 #: gnome/gcustom-layout.c:306
 msgid "Custom View"
-msgstr ""
+msgstr "Beállított nézet"
 
 #: gnome/gdesktop.c:425 gnome/gdesktop.c:2081 gnome/gmount.c:321
 msgid "Warning"
@@ -287,21 +291,20 @@ msgstr "Figyelem"
 #: gnome/gdesktop.c:426
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
-msgstr ""
+msgstr "Nem tudom megnyitni '%s'-t, nem lesznek munkaasztal ikonok"
 
 #: gnome/gdesktop.c:1043
 msgid "While running the mount/umount command"
-msgstr ""
+msgstr "A mount/umount program futása közben"
 
 #: gnome/gdesktop.c:1112
 msgid "While running the eject command"
-msgstr ""
+msgstr "Az eject program futása közben"
 
 #: gnome/gdesktop.c:1296 gnome/gicon.c:154 gnome/gtools.c:46
 msgid "Error"
 msgstr "Hiba"
 
-# TMS
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop.c:2077
 msgid "Home directory"
@@ -310,7 +313,8 @@ msgstr "Saját könyvtár"
 #: gnome/gdesktop.c:2082
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-msgstr ""
+msgstr "Nem tudok szimlinket készíteni %s-rõl %s-re, nem lesz saját"
+" könyvtár ikon."
 
 #: gnome/gdesktop.c:2427
 msgid ""
@@ -320,6 +324,11 @@ msgid ""
 "\n"
 "We are unable to set the background."
 msgstr ""
+"Nem találom a fájlt:\n"
+"background-properties-capplet\n"
+"a keresési útvonaladban.\n"
+"\n"
+"Nem tudom beállítani a hátteret."
 
 #: gnome/gdesktop.c:2450 gnome/glayout.c:361
 msgid "_Terminal"
@@ -327,7 +336,7 @@ msgstr "_Terminál"
 
 #: gnome/gdesktop.c:2450 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
-msgstr ""
+msgstr "Egy új terminált indítson az aktuális könyvtárban"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/gdesktop.c:2452 gnome/glayout.c:363
@@ -348,7 +357,7 @@ msgstr "Új URL link létrehozása"
 
 #: gnome/gdesktop.c:2454
 msgid "_Launcher..."
-msgstr ""
+msgstr "I_ndító..."
 
 #: gnome/gdesktop.c:2454
 msgid "Creates a new launcher"
@@ -364,7 +373,7 @@ msgstr "Új ablak készítése"
 
 #: gnome/gdesktop.c:2465
 msgid "Recreate Desktop Shortcuts"
-msgstr ""
+msgstr "Készítsd el újra a munkaasztal-linkeket"
 
 #: gnome/gdesktop.c:2466 gnome/glayout.c:454
 msgid "Rescan Desktop"
@@ -372,15 +381,15 @@ msgstr "Munkaasztal újraolvasása"
 
 #: gnome/gdesktop.c:2467
 msgid "Configure Background Image"
-msgstr ""
+msgstr "Háttérkép beállítása"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
-msgstr ""
+msgstr "Címzett: "
 
 #: gnome/gdialogs.c:61
 msgid "Copying from: "
-msgstr ""
+msgstr "Másolás honnan: "
 
 #: gnome/gdialogs.c:62
 msgid "Deleting file: "
@@ -395,10 +404,12 @@ msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
+"A fájlok, melyeket megadtál másolásra, már megvannak a célkönyvtárban "
+"is. Kérlek mondd meg, mit tegyek."
 
 #: gnome/gdialogs.c:398
 msgid "Prompt me before overwriting any file."
-msgstr ""
+msgstr "Jelezd, mielõtt felülírnál egy fájlt."
 
 #: gnome/gdialogs.c:405
 msgid "Don't overwrite any files."
@@ -450,7 +461,6 @@ msgstr "Cél"
 msgid "Find Destination Folder"
 msgstr "Célmappa keresése"
 
-# TMS
 #: gnome/gdialogs.c:597
 msgid "Copy as a background process"
 msgstr "Háttér folyamatként másolás"
@@ -472,6 +482,8 @@ msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
+"Ezt kiválasztva a fájlokat a szimbolikus linkeket követve fog másolni,"
+"nem a linkeket."
 
 #: gnome/gdialogs.c:642
 msgid "Preserve file attributes."
@@ -479,7 +491,7 @@ msgstr "Fájl attribútumokat õrizd meg."
 
 #: gnome/gdialogs.c:647
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr ""
+msgstr "Az UID/GID-et megtartja, ha lehetséges"
 
 #: gnome/gdialogs.c:653
 msgid "Recursively copy subdirectories."
@@ -487,7 +499,7 @@ msgstr "A könyvtárak rekurzív másolása."
 
 #: gnome/gdialogs.c:658
 msgid "If set, this will copy the directories recursively"
-msgstr ""
+msgstr "Ha be van állítva, a könyvtárakat rekurzívan másolja"
 
 #: gnome/gdialogs.c:767
 #, c-format
@@ -500,19 +512,17 @@ msgstr ""
 "\n"
 "A könyvtár nem üres. Töröljem rekurzívan?"
 
-# TMS
 #: gnome/gdialogs.c:776 src/file.c:2228
 msgid " Delete: "
 msgstr " Töröl: "
 
-# TMS eddig tartott az en forditasom
 #: gnome/gdialogs.c:780
 msgid "Do the same for the rest"
 msgstr "Csináld ezt a többivel"
 
 #: gnome/gdialogs.c:863
 msgid "Move Progress"
-msgstr ""
+msgstr "A mozgatás folyamatban"
 
 #: gnome/gdialogs.c:866
 msgid "Copy Progress"
@@ -557,12 +567,10 @@ msgstr "Létezõ fájlnév (ahova a szimlink mutatni fog):"
 msgid "Symbolic link filename:"
 msgstr "Szimbolikus link neve:"
 
-# TMS
 #: gnome/gdnd.c:52
 msgid "_Move here"
 msgstr "_Mozgasd ide"
 
-# TMS
 #: gnome/gdnd.c:53
 msgid "_Copy here"
 msgstr "Má_sold ide"
@@ -587,40 +595,40 @@ msgstr ""
 
 #: gnome/gicon.c:154
 msgid "Default set of icons not found, please check your installation"
-msgstr ""
+msgstr "Alapértelmezett ikoncsoportot nem találtam, ellenõrizd a "
+"telepítést, kérlek"
 
-# TMS
 #: gnome/glayout.c:41
 msgid "_Icon View"
 msgstr "_Ikon nézet"
 
 #: gnome/glayout.c:42 gnome/glayout.c:58
 msgid "Switch view to an icon display"
-msgstr ""
+msgstr "Ikon nézetre kapcsolja az ablakot"
 
 #: gnome/glayout.c:44
 msgid "_Brief View"
-msgstr ""
+msgstr "_Rövid nézet"
 
 #: gnome/glayout.c:45 gnome/glayout.c:61
 msgid "Switch view to show just file name and type"
-msgstr ""
+msgstr "Rövid nézetre kapcsolja az ablakot"
 
 #: gnome/glayout.c:47
 msgid "_Detailed View"
-msgstr ""
+msgstr "_Részletes nézet"
 
 #: gnome/glayout.c:48 gnome/glayout.c:64
 msgid "Switch view to show detailed file statistics"
-msgstr ""
+msgstr "Részletes nézetre kapcsolja az ablakot"
 
 #: gnome/glayout.c:50
 msgid "_Custom View"
-msgstr ""
+msgstr "_Beállított nézet"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr ""
+msgstr "Beállított nézetre kapcsolja az ablakot"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -663,6 +671,13 @@ msgid ""
 "\n"
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
+"A fájlmenedzser és a munkaasztal kezelõ most megáll\n"
+"\n"
+"Ha szeretnéd újraindítani, a panelrõl indítsd el a Fájlkezelõt, vagy\n"
+"UNIX parancssorból futtathatod a 'gmc' paranccsal."
+"\n"
+"Nyomd meg az OK gombot, hogy megállítsd az alkalmazást, vagy a "
+"mégsem gombot a folytatáshoz."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:384 gnome/gscreen.c:2233
@@ -695,7 +710,7 @@ msgstr "Könyvtárak mérete"
 
 #: gnome/glayout.c:388
 msgid "Shows the disk space used by each directory"
-msgstr ""
+msgstr "A könyvtárak által foglalt területet mutatja"
 
 #: gnome/glayout.c:395
 msgid "Select _All"
@@ -703,7 +718,7 @@ msgstr "Mindent ki_jelöl"
 
 #: gnome/glayout.c:395
 msgid "Select all files in the current Panel"
-msgstr ""
+msgstr "Minden fájlt kijelöl a panelon"
 
 #: gnome/glayout.c:397
 msgid "_Select Files..."
@@ -768,7 +783,7 @@ msgstr "_Mime tÍpusok szerkesztése..."
 
 #: gnome/glayout.c:421
 msgid "Edits the MIME type bindings"
-msgstr ""
+msgstr "Szerkeszti a MIME típus hozzárendeléseket"
 
 #: gnome/glayout.c:423
 msgid "_Run Command..."
@@ -784,7 +799,7 @@ msgstr "_Panelben futtass egy parancsot..."
 
 #: gnome/glayout.c:425
 msgid "Run a command and put the results in a panel"
-msgstr ""
+msgstr "Futtat egy parancsot, a kimenetét megjeleníti a panelon"
 
 #: gnome/glayout.c:435
 msgid "_Background jobs..."
@@ -800,11 +815,11 @@ msgstr "Kilép"
 
 #: gnome/glayout.c:438
 msgid "Terminates the file manager and the desktop"
-msgstr ""
+msgstr "A fájlmenedzsert és a munkaasztalkezelõt megállítja"
 
 #: gnome/glayout.c:453
 msgid "Rescan System Devices"
-msgstr ""
+msgstr "A rendszereszközök újraellenõrzése"
 
 #: gnome/glayout.c:461 gnome/glayout.c:471
 msgid "_Layout"
@@ -833,6 +848,10 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
+"A GNOME fájlkezelõt épp rendszergazdaként futtatod.\n"
+"\n"
+"Mint root, a rendszeredet tönkreteheted, ha ügyetlen vagy, és a "
+"fájlkezelõ ebben nem fog megakadályozni."
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
@@ -849,11 +868,11 @@ msgstr "Fájl típus: "
 
 #: gnome/gnome-file-property-dialog.c:207
 msgid "File Type: Symbolic Link"
-msgstr ""
+msgstr "Fájltípus: Szimbolikus link"
 
 #: gnome/gnome-file-property-dialog.c:212
 msgid "Target Name: INVALID LINK"
-msgstr ""
+msgstr "Cél neve: NEM JÓ LINK"
 
 #: gnome/gnome-file-property-dialog.c:215
 msgid "Target Name: "
@@ -934,7 +953,7 @@ msgstr "Megnéz"
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
-msgstr ""
+msgstr "Használd az alapértelmezett nézetet"
 
 #: gnome/gnome-file-property-dialog.c:439
 msgid "Select an Icon"
@@ -947,19 +966,19 @@ msgstr "Megnyitás"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr ""
+msgstr "Használd az alapértelmezett megnyitást"
 
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Drop Action"
-msgstr ""
+msgstr "Elejtés akció"
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
-msgstr ""
+msgstr "Használd az alapértelmezett elejtést"
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr ""
+msgstr "Az alapértelmezett nézet akció"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
 #: src/screen.c:2367 src/screen.c:2397 src/view.c:2036
@@ -968,7 +987,7 @@ msgstr "Szerk"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
-msgstr ""
+msgstr "Az alapértelmezett szerkesztés akció"
 
 #: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
 msgid "Icon"
@@ -1060,20 +1079,20 @@ msgstr "Tulajdonságok"
 
 #: gnome/gnome-file-property-dialog.c:1140
 msgid "You entered an invalid username"
-msgstr ""
+msgstr "Nem megfelelõ felhasználónevet írtál be"
 
 #: gnome/gnome-file-property-dialog.c:1185
 msgid "You must rename your file to something"
-msgstr ""
+msgstr "Át kell nevezned a fájlodat valamire"
 
 #: gnome/gnome-file-property-dialog.c:1191
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr ""
+msgstr "Nem nevezheted át a fájlodat olyan névre, amiben van '/'"
 
 #. the first label
 #: gnome/gnome-open-dialog.c:383
 msgid "Select an application to open \""
-msgstr ""
+msgstr "Válassz egy alkalmazást hogy megnyisd \""
 
 #: gnome/gnome-open-dialog.c:394
 msgid "Select a file to run with"
@@ -1090,17 +1109,16 @@ msgstr "Indítandó program"
 
 #: gnome/gpopup2.c:188
 msgid "Mount device"
-msgstr ""
+msgstr "Eszköz beillesztése"
 
 #: gnome/gpopup2.c:189
 msgid "Unmount device"
-msgstr ""
+msgstr "Eszköz lecsatolása"
 
 #: gnome/gpopup2.c:190
 msgid "Eject device"
-msgstr ""
+msgstr "Lemez kiadása"
 
-# TMS innen
 #: gnome/gpopup2.c:193
 msgid "Open with..."
 msgstr "Megnyitás másként..."
@@ -1168,15 +1186,15 @@ msgstr "Megerõsítés az indítás elõtt"
 
 #: gnome/gprefs.c:121
 msgid "Show progress while operations are being performed"
-msgstr ""
+msgstr "Mutasd a sávot amíg a mûvelet tart"
 
 #: gnome/gprefs.c:130
 msgid "VFS Timeout:"
-msgstr ""
+msgstr "VFS idõtúllépés:"
 
 #: gnome/gprefs.c:131 gnome/gprefs.c:156
 msgid "Seconds"
-msgstr ""
+msgstr "másodperc"
 
 #: gnome/gprefs.c:134
 msgid "Anonymous FTP password:"
@@ -1192,7 +1210,7 @@ msgstr "Gyors könyvtárlista újraolvasás"
 
 #: gnome/gprefs.c:151
 msgid "Compute totals before copying files"
-msgstr ""
+msgstr "Számolja ki az 'totál'-t másolás elõtt"
 
 #: gnome/gprefs.c:155
 msgid "FTP directory cache timeout :"
@@ -1200,11 +1218,11 @@ msgstr "FTPfs cache elévülési idõ:"
 
 #: gnome/gprefs.c:159
 msgid "Allow customization of icons in icon view"
-msgstr ""
+msgstr "Az ikonok beállítását engedélyezi ikon nézetben"
 
 #: gnome/gprefs.c:167
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Árnyékolt ikonok használata"
 
 #: gnome/gprefs.c:171
 msgid "Auto place icons"
@@ -1212,7 +1230,7 @@ msgstr "Ikonok elrendezése"
 
 #: gnome/gprefs.c:175
 msgid "Snap icons to grid"
-msgstr ""
+msgstr "Ikonok rácsra feszítése"
 
 #: gnome/gprefs.c:184
 msgid "File display"
@@ -1236,7 +1254,7 @@ msgstr "Munkaasztal"
 
 #: gnome/gprefs.c:479
 msgid "Preferences"
-msgstr ""
+msgstr "Beállítások"
 
 #: gnome/gprop.c:58 gnome/gprop.c:75
 msgid "Filename"
@@ -1280,7 +1298,7 @@ msgstr "Ikon kiválasztása"
 
 #: gnome/gscreen.c:1448
 msgid "Reloads the current directory"
-msgstr ""
+msgstr "Újraolvassa az aktuális könyvtárat"
 
 #: gnome/gscreen.c:1450
 msgid "New _Directory..."
@@ -1542,27 +1560,28 @@ msgstr " A fájlt nem lehet megnyitni "
 #: gnome/gmount.c:322
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
+msgstr "Nem tudom elkészíteni a %s szimlinket %s-rõl, nem lesz ilyen "
+"munkaasztal ikon."
 
 #: gnome/gmount.c:374 gnome/gmount.c:389
 #, c-format
 msgid "CD-ROM %d"
-msgstr ""
+msgstr "CDROM: %d"
 
 #: gnome/gmount.c:379
 #, c-format
 msgid "Floppy %d"
-msgstr ""
+msgstr "Floppy: %d"
 
 #: gnome/gmount.c:385
 #, c-format
 msgid "Disk %d"
-msgstr ""
+msgstr "Lemez: %d"
 
 #: gnome/gmount.c:395
 #, c-format
 msgid "NFS dir %s"
-msgstr ""
+msgstr "NFS könyvtár: %s"
 
 #: gnome/gmount.c:399
 #, c-format
@@ -1616,7 +1635,7 @@ msgstr " Biztonsági mentés "
 
 #: gtkedit/editcmd.c:336
 msgid "Do backups -->"
-msgstr ""
+msgstr "Nincs visszaállítás -->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1182
@@ -1637,7 +1656,7 @@ msgstr "Kiterjesztés:"
 #. NLS ?
 #: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
-msgstr ""
+msgstr " Szerkesztés mentési mód "
 
 #: gtkedit/editcmd.c:476
 msgid " Save As "
@@ -1859,6 +1878,8 @@ msgid ""
 "You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
 "\"Enter...order\""
 msgstr ""
+"Beírhatsz egy reguláris kifejezést %s-el (nem \\1, \\2 mint a sed-ben)"
+"majd használd az 'Írd be..rendezési'"
 
 #: gtkedit/editcmd.c:1359
 msgid " Enter argument (or substring) order : "
@@ -1870,6 +1891,8 @@ msgid ""
 "Enter the order of replacement of your scanf format specifiers or regexp "
 "substrings"
 msgstr ""
+"Írd be a rendezési elvet a scanf formátumú vagy reguláris kifejezés "
+"helyett"
 
 #. The following are check boxes
 #: gtkedit/editcmd.c:1369
@@ -2095,7 +2118,7 @@ msgstr " E-mail "
 
 #: gtkedit/editcmd.c:2869
 msgid " Copies to"
-msgstr ""
+msgstr " Másolatok"
 
 #: gtkedit/editcmd.c:2873
 msgid " Subject"
@@ -2103,15 +2126,15 @@ msgstr " Téma"
 
 #: gtkedit/editcmd.c:2877
 msgid " To"
-msgstr ""
+msgstr " Címzett"
 
 #: gtkedit/editcmd.c:2879
 msgid " mail -s <subject> -c <cc> <to>"
-msgstr ""
+msgstr " mail -s <téma> -c <másodcímzett> <címzett>"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
-msgstr ""
+msgstr "Intuitív"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
@@ -2137,36 +2160,36 @@ msgstr " Sortörésnél sor hossza:"
 #. 4
 #: gtkedit/editoptions.c:80
 msgid "Tab spacing : "
-msgstr ""
+msgstr "Tab közök: "
 
 #: gtkedit/editoptions.c:88
 msgid "synta&X highlighting"
-msgstr ""
+msgstr "Szinta&Xis kiemelés"
 
 #. 7
 #: gtkedit/editoptions.c:94
 msgid "confir&M before saving"
-msgstr ""
+msgstr "&Megerõsítés mentés elõtt"
 
 #. 8
 #: gtkedit/editoptions.c:97
 msgid "fill tabs with &Spaces"
-msgstr ""
+msgstr "tab-ok kitölté&Se szóközökkel"
 
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr ""
+msgstr "az ente&R indentál"
 
 #. 10
 #: gtkedit/editoptions.c:103
 msgid "&Backspace through tabs"
-msgstr ""
+msgstr "&Backspace tabokat ugrik"
 
 #. 11
 #: gtkedit/editoptions.c:106
 msgid "&Fake half tabs"
-msgstr ""
+msgstr "&Fél tab-ok mutatása"
 
 #. 13
 #: gtkedit/editoptions.c:112
@@ -2232,6 +2255,14 @@ msgid ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+"   Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"            Felhasználóbarát szövegszerkesztõ \n"
+"              a Midnight Commanderhez írva.\n"
+
 
 #: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
 msgid "&Open/load...     C-o"
@@ -2279,7 +2310,7 @@ msgstr "&Kijelölés be/ki   F3"
 
 #: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
 msgid "&Mark Columns    S-F3"
-msgstr ""
+msgstr "&Oszlopok kijelölése"
 
 #: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
 msgid "toggle &Ins/overw Ins"
@@ -2564,7 +2595,7 @@ msgstr "Bekezdés formázása\tM-p"
 
 #: gtkedit/editmenu.c:459
 msgid "Refresh display\tC-l"
-msgstr ""
+msgstr "Képernyõ frissítése\tC-l"
 
 #. Tool hint
 #: gtkedit/editmenu.c:462
@@ -2573,7 +2604,7 @@ msgstr "Makrók és belsõ parancsok"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
-msgstr ""
+msgstr "&Mésgem"
 
 #: gtkedit/gtkedit.c:66
 msgid " Enter file name: "
@@ -2581,16 +2612,18 @@ msgstr " Írd be a fájlnevet: "
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-msgstr ""
+msgstr "Árvíztûrõ tükörfúrógép"
 
 #: gtkedit/gtkedit.c:802
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
+"gtkedit.c: a HOME környezeti változó nincs beállítva és nincs passwd "
+"bejegyzés - leállok\n"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
-msgstr ""
+msgstr "Töröld a szerkesztõ puffert"
 
 #: gtkedit/gtkedit.c:1295
 msgid "Insert File"
@@ -2606,7 +2639,7 @@ msgstr "Fájlba másol"
 
 #: gtkedit/gtkedit.c:1297
 msgid "copy a block to a file"
-msgstr ""
+msgstr "másold a blokkot fájlba"
 
 #: gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
@@ -2623,13 +2656,12 @@ msgstr " Fájl elérési hiba "
 #: gtkedit/syntax.c:1345
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr ""
+msgstr " Hiba a %s fájl %d. sorában "
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
 msgstr "&Oké"
 
-# TMS
 #: src/achown.c:73
 msgid "S&kip"
 msgstr "&Kihagy"
@@ -2646,7 +2678,6 @@ msgstr "tulaj"
 msgid "group"
 msgstr "csoport"
 
-# TMS
 #: src/achown.c:366
 msgid "other"
 msgstr "többiek"
@@ -2701,12 +2732,10 @@ msgstr " A Haladó chown parancs nem alkalmazható nem valódi fájlrendszeren "
 msgid " I can't run the Advanced Chown command on a tarfs "
 msgstr " A Haladó chown parancs nem alkalmazható tar archívumban "
 
-# TMS
 #: src/background.c:181
 msgid "Background process:"
 msgstr "Háttér folyamat:"
 
-# TMS
 #: src/background.c:287 src/file.c:2173
 msgid " Background process error "
 msgstr " Háttér folyamat hiba  "
@@ -2731,7 +2760,6 @@ msgstr ""
 " A háttérmunka processz több argumentumot vár, mint amennyit \n"
 " kezelni tudunk. \n"
 
-# TMS
 #: src/boxes.c:63
 msgid " Listing mode "
 msgstr " Listázási mód "
@@ -2752,7 +2780,6 @@ msgstr "Ré&szletes lista"
 msgid "&User defined:"
 msgstr "&Felhasználói:"
 
-# TMS
 #: src/boxes.c:72
 msgid "&Icon view"
 msgstr "&Ikon nézet"
@@ -2813,7 +2840,6 @@ msgstr "&7 bites"
 msgid "F&ull 8 bits input"
 msgstr "8 bites &bevitel"
 
-# TMS
 #: src/boxes.c:476
 msgid " Display bits "
 msgstr " Karakter ábrázolás "
@@ -2842,12 +2868,10 @@ msgstr "VFS elévülési idõ:"
 msgid " Virtual File System Setting "
 msgstr " Virtuális fájlrendszer beállítások"
 
-# TMS
 #: src/boxes.c:740
 msgid "Quick cd"
 msgstr "Gyors könyvtár váltás"
 
-# TMS
 #. want cd like completion
 #: src/boxes.c:745
 msgid "cd"
@@ -2889,7 +2913,6 @@ msgstr "futtat/belép a többieknek"
 msgid "write by others"
 msgstr "írás a többieknek"
 
-# TMS
 #: src/chmod.c:97
 msgid "read by others"
 msgstr "olvasás a többieknek"
@@ -2970,7 +2993,6 @@ msgstr "Változtatás: SPACE"
 msgid "an option, ARROW KEYS"
 msgstr "Mozgás:      nyilak"
 
-# TMS
 #: src/chmod.c:173
 msgid "to move between options"
 msgstr "Kijelölés:   T vagy Ins"
@@ -3274,6 +3296,8 @@ msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
+" Írd be az eszközt /dev/ nélkül fájlok\n"
+" visszatörléséhez itt: (F1 - részletek)"
 
 #: src/cmd.c:1401
 msgid " Setup saved to ~/"
@@ -3372,7 +3396,7 @@ msgstr "&Csoport"
 #: src/dir.c:386
 #, c-format
 msgid "File exists but can not be stat-ed: %s %s"
-msgstr ""
+msgstr "A fájl létezik, vagy nem lehet stat-olni: %s %s"
 
 #: src/dir.c:662
 msgid "Unknown"
@@ -3384,6 +3408,8 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
+"Nem tudok egyedi fájlnevet létrehozni\n"
+" %s "
 
 #: src/ext.c:138 src/user.c:518
 #, c-format
@@ -3439,17 +3465,14 @@ msgstr ""
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext a most használt fájl."
 
-# TMS
 #: src/file.c:154 src/tree.c:640
 msgid " Copy "
 msgstr " Másol "
 
-# TMS
 #: src/file.c:155 src/tree.c:678
 msgid " Move "
 msgstr " Mozgat "
 
-# TMS
 #: src/file.c:156 src/tree.c:746
 msgid " Delete "
 msgstr " Töröl "
@@ -3759,7 +3782,6 @@ msgstr ""
 msgid " Internal error: get_file \n"
 msgstr " Belsõ hiba: get_file \n"
 
-# TMS 
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
 #. * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -3773,7 +3795,6 @@ msgstr " Belsõ hiba: get_file \n"
 msgid "1Copy"
 msgstr "'1Másol"
 
-# TMS
 #: src/file.c:1661
 msgid "1Move"
 msgstr "1Mozgat"
@@ -3798,7 +3819,7 @@ msgid "%o %f \"%s\"%e"
 msgstr ""
 
 #: src/file.c:1680
-#, fuzzy, c-format
+#, c-format
 msgid "%o %d %f%e"
 msgstr ""
 
@@ -3810,7 +3831,6 @@ msgstr "fájl"
 msgid "files"
 msgstr "állományok"
 
-# TMS
 #: src/file.c:1684
 msgid "directory"
 msgstr "könyvtár"
@@ -3908,7 +3928,6 @@ msgstr "az összes könyvtárat "
 msgid " Recursive Delete "
 msgstr " Rekurzív törlés "
 
-# TMS
 #: src/file.c:2249
 msgid " Background process: Recursive Delete "
 msgstr " Háttér folyamat: Rekurzív törlés "
@@ -3980,7 +3999,6 @@ msgstr "Forrás fájl dátuma: %s, hossza %d"
 msgid " File exists "
 msgstr " A fájl már létezik "
 
-# TMS
 #: src/filegui.c:693
 msgid " Background process: File exists "
 msgstr " Háttér folyamat: A fájl már létezik "
@@ -4134,7 +4152,7 @@ msgstr "Fájl szerkesztése"
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
-msgstr ""
+msgstr "Küldd a végeredményt a panelba"
 
 #: src/fixhlp.c:171
 msgid "Usage: fixhlp <width> <tocname>\n"
@@ -4328,7 +4346,6 @@ msgstr "MC nem tudott a következõ fájlba írni: ~/"
 msgid " file, your old hotlist entries were not deleted"
 msgstr ", a régi könyvjelzõid megmaradtak"
 
-# TMS
 #: src/hotlist.c:1431
 msgid "You have ~/"
 msgstr "Van külön ~/"
@@ -4951,11 +4968,11 @@ msgstr "[CSAK FEJLESZTÕKNEK: hibakeresõ mód a háttérmunkákhoz]"
 
 #: src/main.c:2667
 msgid "Request to run in color mode"
-msgstr ""
+msgstr "Színes módban futtatás kérése"
 
 #: src/main.c:2669
 msgid "Specifies a color configuration"
-msgstr ""
+msgstr "A színkonfigurációt írja le"
 
 #: src/main.c:2674
 msgid "Edits one file"
@@ -4963,11 +4980,11 @@ msgstr "Egy fájl szerkesztése"
 
 #: src/main.c:2678
 msgid "Displays this help message"
-msgstr ""
+msgstr "Ezt a súgót írja ki"
 
 #: src/main.c:2681
 msgid "Displays a help screen on how to change the color scheme"
-msgstr ""
+msgstr "Súgót mutat arról, hogy cseréld a színsémát ki"
 
 #: src/main.c:2684
 msgid "Log ftp dialog to specified file"
@@ -4975,11 +4992,11 @@ msgstr "Ftp naplózása a fájlba"
 
 #: src/main.c:2691
 msgid "Obsolete"
-msgstr ""
+msgstr "Elavult"
 
 #: src/main.c:2693
 msgid "Requests to run in black and white"
-msgstr ""
+msgstr "Fekete-fehér módú futtatást kér"
 
 #: src/main.c:2695
 msgid "Disable mouse support in text version"
@@ -4991,7 +5008,7 @@ msgstr "Belsõ shell támogatás kikapcsolása"
 
 #: src/main.c:2702
 msgid "Prints working directory at program exit"
-msgstr ""
+msgstr "A munkakönyvtár kiíratása program kilépéskor"
 
 #: src/main.c:2704
 msgid "Resets soft keys on HP terminals"
@@ -4999,31 +5016,31 @@ msgstr ""
 
 #: src/main.c:2706
 msgid "To run on slow terminals"
-msgstr ""
+msgstr "Futás lassú terminálokon"
 
 #: src/main.c:2709
 msgid "Use stickchars to draw"
-msgstr ""
+msgstr "Pálcikák használata rajzoláshoz"
 
 #: src/main.c:2713
 msgid "Enables subshell support (default)"
-msgstr ""
+msgstr "burok használata (alapértelmezett)"
 
 #: src/main.c:2718
 msgid "Tries to use termcap instead of terminfo"
-msgstr ""
+msgstr "Megpróbálja a termcap-t használni terminfo helyett"
 
 #: src/main.c:2722
 msgid "Displays the current version"
-msgstr ""
+msgstr "A verziót írja ki"
 
 #: src/main.c:2724
 msgid "Launches the file viewer on a file"
-msgstr ""
+msgstr "Listázót (viewer) indít egy fájlon"
 
 #: src/main.c:2726
 msgid "Forces xterm features"
-msgstr ""
+msgstr "Xterm tulajdonságok kényszerítése"
 
 #: src/main.c:2728
 msgid "Geometry for the window"
@@ -5039,7 +5056,8 @@ msgstr "Indításkor nem nyit meg ablakot"
 
 #: src/main.c:2731
 msgid "Display the directory that holds the .links startup files and exit"
-msgstr ""
+msgstr "Kilistázza a könyvtárat, ami a .links indítófájlokat tartalmazza, "
+"majd kilép"
 
 #: src/main.c:3022
 msgid ""
@@ -5113,7 +5131,7 @@ msgstr "&Shell kifejezések"
 
 #: src/option.c:90
 msgid "Compute &Totals"
-msgstr ""
+msgstr "'&Totálok' számítása"
 
 #: src/option.c:91
 msgid "&Verbose operation"
@@ -5224,7 +5242,7 @@ msgstr "Ennek a súgónak megjelenítése"
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
-msgstr ""
+msgstr "Rövid használati utasítás"
 
 #: src/screen.c:399
 msgid "MTime"
@@ -5269,7 +5287,8 @@ msgstr "Ismeretlen elem a formátumban:"
 
 #: src/screen.c:1432
 msgid "User suplied format looks invalid, reverting to default."
-msgstr ""
+msgstr "Felhasználó által megadott formátum nem helyes, alapértelmezést "
+"állítok be"
 
 #: src/screen.c:2094 src/screen.c:2134
 msgid " Do you really want to execute? "
@@ -5277,7 +5296,7 @@ msgstr " Biztosan futtatni akarod? "
 
 #: src/screen.c:2106 src/screen.c:2149
 msgid " No action taken "
-msgstr ""
+msgstr " Nincs hozzárendelve akció "
 
 #: src/screen.c:2369 src/screen.c:2399 src/tree.c:1017
 msgid "RenMov"
@@ -5430,7 +5449,7 @@ msgstr " Nem helyi könyvtárban nem lehet parancsot kiadni "
 #: src/user.c:724
 #, c-format
 msgid " Empty file %s "
-msgstr ""
+msgstr " Üres fájl: %s "
 
 #. Create listbox
 #: src/user.c:733
@@ -5814,28 +5833,28 @@ msgstr "Nem sikerült a(z) %s archívumot megnyitni\n"
 
 #: vfs/extfs.c:300 vfs/extfs.c:320
 msgid "Inconsistent extfs archive"
-msgstr ""
+msgstr "Nem konzisztens extfs archív"
 
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
-msgstr ""
+msgstr "Bocs, nem tudok jelszóellenõrzött kapcsolatot létesíteni most."
 
 #: vfs/ftpfs.c:326
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr ""
+msgstr "ftpfs: Lecsatlakozás %s-rõl"
 
 #: vfs/ftpfs.c:377
 msgid " FTP: Password required for "
-msgstr ""
+msgstr "FTP: Jelszó szükséges: "
 
 #: vfs/ftpfs.c:409
 msgid " Proxy: Password required for "
-msgstr ""
+msgstr "Proxy: Jelszó szükséges: "
 
 #: vfs/ftpfs.c:435
 msgid "ftpfs: sending proxy login name"
-msgstr ""
+msgstr "ftpfs: proxy felhasználói név küldése"
 
 #: vfs/ftpfs.c:439
 msgid "ftpfs: sending proxy user password"
@@ -5843,16 +5862,16 @@ msgstr "ftpfs: a proxy felhasználó jelszó küldése"
 
 #: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
-msgstr ""
+msgstr "ftpfs: proxy autentikáció sikeres"
 
 #: vfs/ftpfs.c:447
 #, c-format
 msgid "ftpfs: connected to %s"
-msgstr ""
+msgstr "ftpfs: csatlakozva: "
 
 #: vfs/ftpfs.c:464
 msgid "ftpfs: sending login name"
-msgstr ""
+msgstr "ftpfs: belépési név küldése"
 
 #: vfs/ftpfs.c:469
 msgid "ftpfs: sending user password"
@@ -5865,60 +5884,60 @@ msgstr "ftpfs: bejelentkezve"
 #: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr ""
+msgstr "ftpfs: Hibás belépés %s felhasználóval"
 
 #: vfs/ftpfs.c:521
 #, c-format
 msgid " Could not set source routing (%s)"
-msgstr ""
+msgstr " Nem tudom a routing forrását beállítani (%s)"
 
 #: vfs/ftpfs.c:650
 msgid "ftpfs: Invalid host name."
-msgstr ""
+msgstr "ftpfs: Rossz szervernév."
 
 #: vfs/ftpfs.c:670
 msgid "ftpfs: Invalid host address."
-msgstr ""
+msgstr "ftpfs: Rossz szervercím."
 
 #: vfs/ftpfs.c:695
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr ""
+msgstr "ftpfs: csatlakozás %s szerverre"
 
 #: vfs/ftpfs.c:705
 msgid "ftpfs: connection interrupted by user"
-msgstr ""
+msgstr "ftpfs: csatlakozás megszakítva"
 
 #: vfs/ftpfs.c:707
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr ""
+msgstr "ftpfs: csatlakozás nem sikerült: %s"
 
 #: vfs/ftpfs.c:791
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr ""
+msgstr "%d másodperc az újra próbálkozásig (Ctrl-C megállít)"
 
 #: vfs/ftpfs.c:985
 msgid "ftpfs: could not setup passive mode for source routing"
-msgstr ""
+msgstr "ftpfs: nem tudom a szervert passzív módba állítani"
 
 #: vfs/ftpfs.c:995
 msgid "ftpfs: could not setup passive mode"
-msgstr ""
+msgstr "ftpfs: nem tudom beállítani a passzív módot"
 
 #: vfs/ftpfs.c:1066
 msgid "ftpfs: aborting transfer."
-msgstr ""
+msgstr "ftpfs: átvitel megszakítása."
 
 #: vfs/ftpfs.c:1068
 #, c-format
 msgid "ftpfs: abort error: %s"
-msgstr ""
+msgstr "ftpfs: megszakítási hiba: %s"
 
 #: vfs/ftpfs.c:1073
 msgid "ftpfs: abort failed"
-msgstr ""
+msgstr "ftpfs: megszakítás sikertelen"
 
 #: vfs/ftpfs.c:1160 vfs/ftpfs.c:1339
 msgid "ftpfs: CWD failed."
@@ -5926,7 +5945,7 @@ msgstr "ftpfs: CWD nem sikerült."
 
 #: vfs/ftpfs.c:1170 vfs/ftpfs.c:1177
 msgid "ftpfs: couldn't resolve symlink"
-msgstr ""
+msgstr "ftpfs: nem tudom a szimlinket értelmezni"
 
 #: vfs/ftpfs.c:1231
 msgid "Resolving symlink..."
@@ -5935,24 +5954,24 @@ msgstr "Szimlink feloldása..."
 #: vfs/ftpfs.c:1333
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-msgstr ""
+msgstr "ftpfs: %s FTP könytár olvasása (ne használd a UNIX ls parancsot)"
 
 #: vfs/ftpfs.c:1335
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
-msgstr ""
+msgstr "ftpfs: %s FTP könyvtár olvasása"
 
 #: vfs/ftpfs.c:1351
 msgid "ftpfs: FAIL"
-msgstr ""
+msgstr "ftpfs: HIBA"
 
 #: vfs/ftpfs.c:1442
 msgid "ftpfs: reading FTP directory interrupt by user"
-msgstr ""
+msgstr "ftpfs: FTP könyvtár olvasása a felhasználó által megszakítva"
 
 #: vfs/ftpfs.c:1472
 msgid "ftpfs: got listing"
-msgstr ""
+msgstr "ftpfs: listázva"
 
 #: vfs/ftpfs.c:1485
 msgid "ftpfs: failed"
@@ -5960,18 +5979,20 @@ msgstr "ftpfs: nem sikerült"
 
 #: vfs/ftpfs.c:1529
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr ""
+msgstr "ftpfs: hiba: nincs hova visszalépni"
 
 #: vfs/ftpfs.c:1593
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr ""
+msgstr "ftpfs: fájl feltöltése %d (%s)"
 
 #: vfs/ftpfs.c:2029 vfs/ftpfs.c:2044
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
 msgstr ""
+"a ~/.netrc nem megfelelõ jogokkal rendelkezik.\n"
+"Töröld ki a jelszót, vagy állítsd át a jogokat."
 
 #: vfs/mcfs.c:154
 msgid " MCFS "
@@ -5979,7 +6000,7 @@ msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
-msgstr ""
+msgstr " A szerver nem támogatja ezt a verziót"
 
 #: vfs/mcfs.c:171
 msgid ""
@@ -5987,6 +6008,9 @@ msgid ""
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
+" A távoli szerver nem fut a rendszer porton \n"
+" jelszóval kell belépned, de az információk nem \n"
+" lesznek biztonságban a másik oldalon. Folytassam? \n"
 
 #: vfs/mcfs.c:174
 msgid " Yes "
@@ -5998,11 +6022,11 @@ msgstr " Nem "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr ""
+msgstr " A szerver furcsa porton fut. Feladom.\n"
 
 #: vfs/mcfs.c:188
 msgid " MCFS Password required "
-msgstr ""
+msgstr "MCFS jelszó szükséges"
 
 #: vfs/mcfs.c:202
 msgid " Invalid password "
@@ -6010,7 +6034,7 @@ msgstr " Rossz jelszó "
 
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
-msgstr ""
+msgstr " Túl sok nyitott kapcsolat"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6018,14 +6042,16 @@ msgid ""
 "Couldn't open tar archive\n"
 "%s"
 msgstr ""
+"Nem tudom megnyitni a tar archívot\n"
+"%s"
 
 #: vfs/tar.c:284
 msgid "Unexpected EOF on archive file"
-msgstr ""
+msgstr "Nincs fájlvég az archívban"
 
 #: vfs/tar.c:339 vfs/tar.c:346
 msgid "Inconsistent tar archive"
-msgstr ""
+msgstr "Nem konzisztens tar archív"
 
 #: vfs/tar.c:411
 #, c-format
@@ -6034,247 +6060,6 @@ msgid ""
 "%s\n"
 "doesn't look like a tar archive."
 msgstr ""
-
-#~ msgid "Always to memory"
-#~ msgstr "Mindig memóriába"
-
-#~ msgid "If size less than:"
-#~ msgstr "Ha rövidebb, mint:"
-
-#~ msgid "Gzipped tar archive extract:"
-#~ msgstr "Gzip-elt tar kicsomagolása:"
-
-#~ msgid " Mkdir "
-#~ msgstr " Új könyvtár "
-
-#~ msgid " Symlink "
-#~ msgstr " A(z) "
-
-#~ msgid "Cannot invoke du command."
-#~ msgstr "Nem sikerült a `du' parancs futtatása."
-
-#~ msgid ""
-#~ " Cannnot chmod target file \"%s\" \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Nem sikerült a(z) \"%s\" célfájl jogainak átállítása (chmod) \n"
-#~ " %s "
-
-#~ msgid " Can't open target file "
-#~ msgstr " Nem sikerült a célfájl megnyitása "
-
-#~ msgid " Can't write to local target file "
-#~ msgstr " Nem sikerült a helyi célfájlba írni "
-
-#~ msgid "&Continue"
-#~ msgstr "F&olytat"
-
-#~ msgid "Other options"
-#~ msgstr "Egyéb beállítások"
-
-#~ msgid "Highlight..."
-#~ msgstr "Kiemelés..."
-
-#~ msgid "Panel split"
-#~ msgstr "Panelek felosztása"
-
-#~ msgid "Create command file to set default directory upon exit."
-#~ msgstr ""
-#~ "Parancs fájlt hoz létre kilépéskor az aktuális könyvtár beállítására."
-
-#~ msgid "Force color mode."
-#~ msgstr "Színes mód."
-
-#~ msgid "Specify colors (use --help-colors to get a list)."
-#~ msgstr "Színek megadása (további infó --help-colors kapcsolóval)."
-
-#~ msgid "[DEVEL-ONLY: Debug the subshell."
-#~ msgstr "[CSAK FEJLESZTÕKNEK: hibakeresõ mód a subshellhez]"
-
-#~ msgid "Startup the internal editor."
-#~ msgstr "Belsõ szövegszerkeszõ indításkor."
-
-#~ msgid "Help on how to specify colors."
-#~ msgstr "Segítség a színek megadásához."
-
-#~ msgid "Prints out the configured paths."
-#~ msgstr "Beállított elérési utak kiírása."
-
-#~ msgid "Force black and white display."
-#~ msgstr "Fekete-fehér mód."
-
-#~ msgid "Force the concurrent subshell mode"
-#~ msgstr "Párhuzamos al-shell mód."
-
-#~ msgid "Disable the concurrent subshell mode."
-#~ msgstr "Párhuzamos al-shell mód kikapcsolása."
-
-#~ msgid "Force subshell execution."
-#~ msgstr "Futtatás al-shellben "
-
-#~ msgid "At exit, print the last working directory."
-#~ msgstr "Kilépéskor kiírja az aktuális könyvtárat."
-
-#~ msgid ""
-#~ "Reset softkeys (HP terminals only) to their terminfo/termcap default."
-#~ msgstr ""
-#~ "A HP terminál \"soft\" billentyûit a terminfo/termcap szerint állítja be."
-
-#~ msgid "Disables verbose operation (for slow terminals)."
-#~ msgstr "Kevesebb mûveletinformáció (lassú terminálokhoz)."
-
-#~ msgid "Use simple symbols for line drawing."
-#~ msgstr "Egyszerû vonalrajzoló karaktereket használ."
-
-#~ msgid "Activate support for the TERMCAP variable."
-#~ msgstr "Támogatás a TERMCAP környezeti változóhoz."
-
-#~ msgid "Report versionand configuration options."
-#~ msgstr "Verzió és beállítások kiírása."
-
-#~ msgid "Start up into the viewer mode."
-#~ msgstr "Indításkor fájlnézõ mód."
-
-#~ msgid "Force xterm mouse support and screen save/restore"
-#~ msgstr "Egértámogatás és képernyõváltás támogatása xterm-ben."
-
-#~ msgid "[this dir] [other dir]"
-#~ msgstr "[this dir] [other dir]"
-
-#~ msgid "Pause after run..."
-#~ msgstr "Futtatás után vár..."
-
-#~ msgid "|"
-#~ msgstr "|"
-
-#~ msgid " Can not fetch local copy "
-#~ msgstr " Lokális másolat nem készíthetõ "
-
-#~ msgid "Ok"
-#~ msgstr "Oké"
-
-#~ msgid "Link"
-#~ msgstr "Link"
-
-#~ msgid "Do you want to delete "
-#~ msgstr "Akarod törölni "
-
-#~ msgid "Opens a new window"
-#~ msgstr "Új ablakot nyit"
-
-#~ msgid "Rename/Move..."
-#~ msgstr "Átnevez/Mozgat..."
-
-#~ msgid "Delete files from disk"
-#~ msgstr "Állományok törlése lemezrõl"
-
-#~ msgid "View raw"
-#~ msgstr "Nyers nézet"
-
-#~ msgid "View the file without further processing"
-#~ msgstr "Állomány megtekintése további feldolgozás nélkül"
-
-#~ msgid "Select group by pattern..."
-#~ msgstr "Csoport kiválasztása mintával..."
-
-#~ msgid "Unselect group by pattern..."
-#~ msgstr "Csoport kiválasztás visszavonása mintával..."
-
-# TMS - ez eleg sután hangzik, de egyenlore ez van
-#~ msgid "Un-selects a group of marked files"
-#~ msgstr "Kijelölt állományok csoportjának kiválásztásának megszüntetése "
-
-#~ msgid "Close"
-#~ msgstr "Bezár"
-
-#~ msgid "Close this panel"
-#~ msgstr "Ezen panel bezárása"
-
-#~ msgid "Exit program"
-#~ msgstr "Programból kilép"
-
-#~ msgid "Display mode..."
-#~ msgstr "Megjelenítési mód..."
-
-# TMS innentol eleg TMS forditas van, sajna gnome-om nincs, nem tudtam
-# TMS kiprobalni, keresd es javitsd a hibakat
-#~ msgid "Changes the sort order of the files"
-#~ msgstr "Az állományok rendezési sorrendjének változtatása"
-
-#~ msgid "Network link..."
-#~ msgstr "Hálózati kapcsolat..."
-
-#~ msgid "Connect to a remote machine"
-#~ msgstr "Távoli géphez kapcsolódás"
-
-#~ msgid "FTP link..."
-#~ msgstr "FTP kapcsolat..."
-
-#~ msgid "Connect to a remote machine with FTP"
-#~ msgstr "Távoli géphez kapcsolódás FTP-vel"
-
-#~ msgid "Confirmation..."
-#~ msgstr "Megerõsítés..."
-
-#~ msgid "Options..."
-#~ msgstr "Beállítások..."
-
-#~ msgid "Virtual FS..."
-#~ msgstr "Virtuális fájlrendszer..."
-
-#~ msgid "Virtual File System settings"
-#~ msgstr "Virtuális fájlrendszer beállítások"
-
-#~ msgid "Save setup"
-#~ msgstr "Beállítások elmentése"
-
-#~ msgid "Find..."
-#~ msgstr "Keresés..."
-
-#~ msgid "Hotlist..."
-#~ msgstr "Gyorslista..."
-
-#~ msgid "List of favorite sites"
-#~ msgstr "Kedvenc helyek listája"
-
-#~ msgid "Compare panel contents"
-#~ msgstr "Panel tartalmának összehasonlítása"
-
-#~ msgid "External panelize..."
-#~ msgstr "Parancskimenet panelba..."
-
-#~ msgid "Active VFS list..."
-#~ msgstr "Aktív VFS-ek..."
-
-#~ msgid "List of active virtual file systems"
-#~ msgstr "Aktív virtuális fájlrendszerek listája"
-
-#~ msgid "Undelete files (ext2fs only)..."
-#~ msgstr "Visszatörlés (csak ext2 fájlrendszeren)..."
-
-#~ msgid "Recover deleted files"
-#~ msgstr "Törölt állományok visszaállítása"
-
-#~ msgid "Information on this program"
-#~ msgstr "Információk errõl a programról"
-
-#~ msgid "Window"
-#~ msgstr "Ablak"
-
-#~ msgid "Open with"
-#~ msgstr "Megnyitás másként"
-
-#~ msgid "Rename/move.."
-#~ msgstr "Átnevez/Mozgat.."
-
-#~ msgid "Filter"
-#~ msgstr "Szûrõ"
-
-#~ msgid "Terminate the viewer"
-#~ msgstr "Nézõke befejezése"
-
-#~ msgid "String search"
-#~ msgstr "Sztring keresés"
-
-#~ msgid "Continue searching"
-#~ msgstr "Keresés folytatása"
+"Hmm...\n"
+"%s\n"
+"nem úgy néz ki, mint egy tar archív."
