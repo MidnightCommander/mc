@@ -1730,7 +1730,7 @@ input_event (Gpm_Event *event, WInput *in)
 } 
 
 WInput *
-input_new (int y, int x, int color, int len, char *def_text, char *tkname)
+input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;

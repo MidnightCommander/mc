@@ -1041,6 +1041,8 @@ void wipe_password (char *passwd)
 {
     char *p = passwd;
     
+    if (!p)
+	return;
     for (;*p ; p++)
         *p = 0;
     g_free (passwd);

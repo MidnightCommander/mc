@@ -1,3 +1,45 @@
+1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* smbfs.c (various places): Store filenames in memory with the unix
+	character set and convert it back to the dos character set when 
+	filenames are passed back to the samba server. If samba is configured 
+	correctly this will fix the problems with filenames which contain 
+	national characters.
+
+	(bucket_set_authinfo): Set domain, username and password which will
+	be used to log on and authenticate against the samba server and remember
+	this information on a host/share basis. If set use PASSWD to get the
+	password. If already authenticated against the host and share use this 
+	information. If already authenticated against host and IPC$ use this
+	information. If neither of the former is true ask the user how to
+	log on.
+
+	(authinfo_get_authinfo_from_user): New function. Query the user for
+	domain, username and password to use for authentication.
+
+	(authinfo_free): New function. Free memory in authentication structure.
+	
+	(authinfo_free_all): New function. Free the list used to remember
+	authentication information.
+	
+	(authinfo_compare_host_and_share, authinfo_compare_host): New functions.
+	Helper functions used to search the authentication list.
+	
+	(authinfo_add): New function. Add one authentication entry to the 
+	authlist.
+	
+	(authinfo_remove): New function. Remove one entry from the authlist.
+
+	(free_bucket): Free memory associated with one bucket.
+	
+	(smbfs_get_free_bucket): Initialize the complete connection array 
+	with 0. Free the memory allocated for a bucket and initialize the
+	bucket before reusing it.
+	
+	(smbfs_open_link): use new functions to get authentication information
+	
+	(get_stat_info, smbfs_stat): remove unused variables.
+
 1999-08-31  Federico Mena Quintero  <federico@redhat.com>
 
 	* extfs/uzip.in: Handle filenames with spaces better.  Thanks to

@@ -1,3 +1,9 @@
+1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* widget.[ch] (input_new): added const qualifier
+
+	* util.c (wipe_password): Check for NULL.
+
 1999-09-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* treestore.c: Removed tree_store_destroy(), renamed

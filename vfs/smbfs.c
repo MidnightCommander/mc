@@ -22,9 +22,16 @@
 /* Namespace: exports smbfs_vfs_ops, tcp_invalidate_socket */
 #include <stdio.h>
 #include <sys/types.h>
+
+#include "../config.h"
 #include "samba/include/config.h"
+/* don't load crap in "samba/include/includes.h" we don't use and which 
+   confilcts with definitions in other includes */
+#undef HAVE_LIBREADLINE
 #include "samba/include/includes.h"
+
 #include <string.h>
+#include <errno.h>
 
 #include "../src/global.h"
 
@@ -35,6 +42,9 @@
 #include "smbfs.h"
 #include "tcputil.h"
 #include "../src/dialog.h"
+#include "../src/widget.h"
+#include "../src/color.h"
+#include "../src/wtools.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
 char *IPC = "IPC$";
@@ -47,7 +57,6 @@ uint32 err;
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
 static pstring myhostname;
-static pstring workgroup;
 mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
@@ -60,11 +69,12 @@ static struct _smbfs_connection {
 	struct cli_state *cli;
 	struct in_addr dest_ip;
 	BOOL have_ip;
-	pstring password;
-	pstring service;	/* share name */
-    char *host;			/* server name */
+	char *host;			/* server name */
+	char *service;			/* share name */
+	char *domain;
 	char *user;
 	char *home;
+	char *password;
 	int port;
 	int name_type;
 	time_t	last_use;
@@ -80,6 +90,278 @@ typedef struct {
 	off_t nread;
 	uint16 attr;
 } smbfs_handle;
+
+struct authinfo {
+    char *host;
+    char *share;
+    char *domain;
+    char *user;
+    char *password;
+/*	struct timeval timestamp;*/
+};
+
+GSList *auth_list;
+
+static struct authinfo *
+authinfo_get_authinfo_from_user (const char *host, 
+                                 const char *share, 
+                                 const char *domain, 
+                                 const char *user)
+{
+    static int dialog_x = 44;
+    int dialog_y = 12;
+    struct authinfo *return_value;
+    static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password: ")};
+    static char* buts[] = {N_("&Ok"), N_("&Cancel")};
+    static int ilen = 30, istart = 14;
+    static int b0 = 3, b2 = 30;
+    char *title;
+    WInput *in_password;
+    WInput *in_user;
+    WInput *in_domain;
+    Dlg_head *auth_dlg;
+
+#ifdef ENABLE_NLS
+    static int i18n_flag = 0;
+    
+    if (!i18n_flag)
+    {
+        register int i = sizeof(labs)/sizeof(labs[0]);
+        int l1, maxlen = 0;
+        
+        while (i--)
+        {
+            l1 = strlen (labs [i] = _(labs [i]));
+            if (l1 > maxlen)
+                maxlen = l1;
+        }
+        i = maxlen + ilen + 7;
+        if (i > dialog_x)
+            dialog_x = i;
+        
+        for (i = sizeof(buts)/sizeof(buts[0]), l1 = 0; i--; )
+        {
+            l1 += strlen (buts [i] = _(buts [i]));
+        }
+        l1 += 15;
+        if (l1 > dialog_x)
+            dialog_x = l1;
+
+        ilen = dialog_x - 7 - maxlen; /* for the case of very long buttons :) */
+        istart = dialog_x - 3 - ilen;
+        
+        b2 = dialog_x - (strlen(buts[1]) + 6);
+        
+        i18n_flag = 1;
+    }
+    
+#endif /* ENABLE_NLS */
+
+    if (!domain)
+    domain = "";
+    if (!user)
+    user = "";
+
+    auth_dlg = create_dlg (0, 0, dialog_y, dialog_x, dialog_colors,
+                       common_dialog_callback, "[Smb Authinfo]", "smbauthinfo",
+                       DLG_CENTER | DLG_GRID);
+
+    title = g_strdup_printf (_("Password for \\\\%s\\%s"), host, share);
+    x_set_dialog_title (auth_dlg, title);
+    g_free (title);
+
+    in_user  = input_new (5, istart, INPUT_COLOR, ilen, user, "auth_name");
+    add_widgetl (auth_dlg, in_user, XV_WLAY_BELOWOF);
+
+    in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain");
+    add_widgetl (auth_dlg, in_domain, XV_WLAY_NEXTCOLUMN);
+    add_widgetl (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
+                 buts[1], 0 ,0, "cancel"), XV_WLAY_RIGHTOF);
+    add_widgetl (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
+                 buts[0], 0, 0, "ok"), XV_WLAY_CENTERROW);
+
+    in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password");
+    in_password->completion_flags = 0;
+    in_password->is_password = 1;
+    add_widgetl (auth_dlg, in_password, XV_WLAY_BELOWOF);
+
+    add_widgetl (auth_dlg, label_new (7, 3, labs[2], "label-passwd"), XV_WLAY_BELOWOF);
+    add_widgetl (auth_dlg, label_new (5, 3, labs[1], "label-user"), XV_WLAY_BELOWOF);
+    add_widgetl (auth_dlg, label_new (3, 3, labs[0], "label-domain"), XV_WLAY_NEXTCOLUMN);
+
+    run_dlg (auth_dlg);
+
+    switch (auth_dlg->ret_value) {
+    case B_CANCEL:
+        return_value = 0;
+        break;
+    default:
+        return_value = g_new (struct authinfo, 1);
+        if (return_value) {
+            return_value->host = g_strdup (host);
+            return_value->share = g_strdup (share);
+            return_value->domain = g_strdup (in_domain->buffer);
+            return_value->user = g_strdup (in_user->buffer);
+            return_value->password = g_strdup (in_password->buffer);
+        }
+    }
+
+    destroy_dlg (auth_dlg);
+             
+    return return_value;
+}
+
+static void 
+authinfo_free (struct authinfo const *a)
+{
+    g_free (a->host);
+    g_free (a->share);
+    g_free (a->domain);
+    g_free (a->user);
+    wipe_password (a->password);
+}
+
+static void
+authinfo_free_all ()
+{
+    if (auth_list) {
+        g_slist_foreach (auth_list, (GFunc)authinfo_free, 0);
+        g_slist_free (auth_list);
+        auth_list = 0;
+    }
+}
+
+static gint
+authinfo_compare_host_and_share (gconstpointer _a, gconstpointer _b)
+{
+    struct authinfo const *a = (struct authinfo const *)_a;
+    struct authinfo const *b = (struct authinfo const *)_b;
+
+    if (!a->host || !a->share || !b->host || !b->share)
+        return 1;
+    if (strcmp (a->host, b->host) != 0)
+        return 1;
+    if (strcmp (a->share, b->share) != 0)
+        return 1;
+    return 0;
+}
+
+static gint
+authinfo_compare_host (gconstpointer _a, gconstpointer _b)
+{
+    struct authinfo const *a = (struct authinfo const *)_a;
+    struct authinfo const *b = (struct authinfo const *)_b;
+
+    if (!a->host || !b->host)
+        return 1;
+    if (strcmp (a->host, b->host) != 0)
+        return 1;
+    if (strcmp (a->share, IPC) != 0)
+        return 1;
+    return 0;
+}
+
+static void
+authinfo_add (const char *host, const char *share, const char *domain,
+              const char *user, const char *password)
+{
+    struct authinfo *auth = g_new (struct authinfo, 1);
+    
+    if (!auth)
+        return;
+
+    /* Don't check for NULL, g_strdup already does. */
+    auth->host = g_strdup (host);
+    auth->share = g_strdup (share);
+    auth->domain = g_strdup (domain);
+    auth->user = g_strdup (user);
+    auth->password = g_strdup (password);
+    auth_list = g_slist_prepend (auth_list, auth);
+}
+
+static void
+authinfo_remove (const char *host, const char *share)
+{
+    struct authinfo data;
+    struct authinfo *auth;
+    GSList *list;
+
+    data.host = g_strdup (host);
+    data.share = g_strdup (share);
+    list = g_slist_find_custom (auth_list, 
+                                &data, 
+                                authinfo_compare_host_and_share);
+    g_free (data.host);
+    g_free (data.share);
+    if (!list)
+        return;
+    auth = list->data;
+    auth_list = g_slist_remove (auth_list, auth);
+    authinfo_free (auth);
+}
+
+/* Set authentication information in bucket. Return 1 if successful, else 0 */
+/* Information in auth_list overrides user if pass is NULL. */
+/* bucket->host and bucket->service must be valid. */
+static int
+bucket_set_authinfo (smbfs_connection *bucket, 
+        const char *domain, const char *user, const char *pass,
+        int fallback_to_host)
+{
+    struct authinfo data;
+    struct authinfo *auth;
+    GSList *list;
+
+    if (domain && user && pass) {
+        g_free (bucket->domain);
+        g_free (bucket->user);
+        g_free (bucket->password);
+        bucket->domain = g_strdup (domain);
+        bucket->user = g_strdup (user);
+        bucket->password = g_strdup (pass);
+        authinfo_remove (bucket->host, bucket->service);
+        authinfo_add (bucket->host, bucket->service,
+                  domain, user, pass);
+        return 1;
+    }
+
+    data.host = bucket->host;
+    data.share = bucket->service;
+    list = g_slist_find_custom (auth_list, &data, authinfo_compare_host_and_share);
+    if (!list && fallback_to_host)
+        list = g_slist_find_custom (auth_list, &data, authinfo_compare_host);
+    if (list) {
+        auth = list->data;
+        bucket->domain = g_strdup (auth->domain);
+        bucket->user = g_strdup (auth->user);
+        bucket->password = g_strdup (auth->password);
+        return 1;
+    }
+
+    if (got_pass) {
+        bucket->domain = g_strdup (lp_workgroup ());
+        bucket->user = g_strdup (got_user ? username : user);
+        bucket->password = g_strdup (password);
+        return 1;
+    }
+
+    auth = authinfo_get_authinfo_from_user (bucket->host, 
+                                bucket->service,
+                                (domain ? domain : lp_workgroup ()),
+                                user);
+    if (auth) {
+        g_free (bucket->domain);
+        g_free (bucket->user);
+        g_free (bucket->password);
+        bucket->domain = g_strdup (auth->domain);
+        bucket->user = g_strdup (auth->user);
+        bucket->password = g_strdup (auth->password);
+        authinfo_remove (bucket->host, bucket->service);
+        auth_list = g_slist_prepend (auth_list, auth);
+        return 1;
+    }
+    return 0;
+}
 
 void
 smbfs_set_debug(int arg)
@@ -108,8 +390,6 @@ smbfs_init(vfs *me)
 		DEBUG(0, ("Can't load %s - run testparm to debug it\n", servicesf));
 
     codepage_initialise(lp_client_code_page());
-    pstrcpy(workgroup,lp_workgroup());
-	DEBUG(3, ("workgroup: %s\n", workgroup));
 
     load_interfaces();
     myumask = umask(0);
@@ -144,6 +424,7 @@ smbfs_fill_names (vfs *me, void (*func)(char *))
 }
 
 #define CNV_LANG(s) dos_to_unix(s,False)
+#define GNAL_VNC(s) unix_to_dos(s,False)
 /* does same as do_get() in client.c */
 /* called from vfs.c:1080, count = buffer size */
 static int
@@ -223,7 +504,7 @@ browsing_helper(const char *name, uint32 type, const char *comment)
 	fstring typestr;
 	dir_entry *new_entry;
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_strdup (name);
+    new_entry->text = dos_to_unix (g_strdup (name), 1);
 
     new_entry->next = 0;
 
@@ -265,7 +546,7 @@ loaddir_helper(file_info *finfo, const char *mask)
 		return;	/* dont bother with hidden files, "~$" screws up mc */
 
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_strdup(finfo->name);
+    new_entry->text = dos_to_unix (g_strdup(finfo->name), 1);
 
     new_entry->next = 0;
 
@@ -333,6 +614,7 @@ convert_path(char **remote_file, gboolean trailing_asterik)
     p = *remote_file = g_strconcat (my_remote, 
 							        trailing_asterik ? "/*" : "", 
 								    0);
+    unix_to_dos (*remote_file, 1);
     while ((p = strchr(p, '/')))
         *p = '\\';
 	return 0;
@@ -343,7 +625,7 @@ server_browsing_helper(const char *name, uint32 m, const char *comment)
 {
 	dir_entry *new_entry;
 	new_entry = g_new (dir_entry, 1);
-    new_entry->text = g_strdup (name);
+    new_entry->text = dos_to_unix (g_strdup (name), 1);
 
     new_entry->next = 0;
 
@@ -380,7 +662,7 @@ reconnect(smbfs_connection *conn, int *retries) {
    	if (!(conn->cli = do_connect(host, conn->service))) {
 		my_errno = cli_error(conn->cli, NULL, &err, NULL);
 		message_2s (1, MSG_ERROR,
-			" reconnect to %s failed\n ", conn->host);
+			_(" reconnect to %s failed\n "), conn->host);
 		g_free(host);
 		return False;
 	}
@@ -420,6 +702,7 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 	char *p;
 	
 	fstrcpy(path2,path);
+        unix_to_dos (path2, 1);
 	trim_string(path2,NULL,"\\");
 	if (!*path2) *path2 = '\\';
 	
@@ -510,7 +793,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 		if (!strcmp(smbfs_info->path, URL_HEADER)) {
 			DEBUG(6, ("smbfs_loaddir: browsing %s\n", IPC));
 			/* browse for servers */
-			if (!cli_NetServerEnum(smbfs_info->conn->cli, workgroup,
+			if (!cli_NetServerEnum(smbfs_info->conn->cli, smbfs_info->conn->domain,
 				SV_TYPE_ALL, server_browsing_helper))
 					return 0;
 			else
@@ -765,7 +1048,7 @@ do_connect (char *server, char *share)
 	if (!cli_session_setup(c, current_bucket->user, 
 			       current_bucket->password, strlen(current_bucket->password),
 			       current_bucket->password, strlen(current_bucket->password),
-			       workgroup)) {
+			       current_bucket->workgroup)) {
 		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1,("session setup failed: %s\n", cli_errstr(c)));
 		return NULL;
@@ -817,6 +1100,18 @@ get_master_browser(char **host)
 
 static int smbfs_get_free_bucket_init = 1;
 
+static void 
+free_bucket (smbfs_connection *bucket)
+{
+	g_free (bucket->host);
+	g_free (bucket->service);
+	g_free (bucket->domain);
+	g_free (bucket->user);
+	wipe_password (bucket->password);
+	g_free (bucket->home);
+	bzero (bucket, sizeof (smbfs_connection));
+}
+
 static smbfs_connection *
 smbfs_get_free_bucket ()
 {
@@ -825,7 +1120,7 @@ smbfs_get_free_bucket ()
     if (smbfs_get_free_bucket_init) {
 		smbfs_get_free_bucket_init = 0;
 		for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
-	    	smbfs_connections [i].cli = 0;
+	    	bzero (&smbfs_connections[i], sizeof (smbfs_connection));
     }
     for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
 		if (!smbfs_connections [i].cli) return &smbfs_connections [i];
@@ -840,6 +1135,7 @@ smbfs_get_free_bucket ()
 			}
 		}
 		cli_shutdown(smbfs_connections[oldest].cli);
+		free_bucket (&smbfs_connections[oldest]);
 		return &smbfs_connections[oldest];
 	}
 
@@ -882,7 +1178,7 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
     if (smbfs_get_free_bucket_init) {
         smbfs_get_free_bucket_init = 0;
         for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++)
-	    	smbfs_connections [i].cli = 0;
+	    	bzero (&smbfs_connections[i], sizeof (smbfs_connection));
     } else for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 		if (!smbfs_connections[i].cli)
 		    continue;
@@ -919,10 +1215,7 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 	current_bucket = bucket;
 
 	bucket->user = g_strdup(user);
-	if (got_pass)
-		pstrcpy(bucket->password, password);	/* global from getenv */
-	else
-		pstrcpy(bucket->password, this_pass);
+	bucket->service = g_strdup (service);
 
 	if (!strlen(host)) {	/* if blank host name, browse for servers */
 		if (!get_master_browser(&host))	/* set host to ip of master browser */
@@ -931,10 +1224,32 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 	} else
 		bucket->host = g_strdup(host);
 
-	/* connect to share */
-    if (!(bucket->cli = do_connect(host, service)))
+	if (!bucket_set_authinfo (bucket,
+				  0,      /* domain not currently not used */
+				  user, 
+				  this_pass, 
+				  1))
 		return 0;
-	pstrcpy(bucket->service, service);
+
+	/* connect to share */
+    for ( ;; ) {
+        if (bucket->cli = do_connect(host, service))
+		break;
+	if (my_errno != EPERM)
+            return 0;
+	message_1s (1, MSG_ERROR,
+		" Authentication failed ");
+
+        /* authentication failed, try again */
+	authinfo_remove (bucket->host, bucket->service);
+	if (!bucket_set_authinfo (bucket,
+				  bucket->domain,
+				  bucket->user, 
+				  0, 
+                                  0))
+		return 0;
+
+    }
 
     smbfs_open_connections++;
     DEBUG(3, ("smbfs_open_link:smbfs_open_connections: %d\n",
@@ -1081,8 +1396,7 @@ statfile_helper(file_info *finfo, const char *mask)
 {
 	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
 	single_entry = g_new (dir_entry, 1);
-    single_entry->text = g_new0 (char, strlen(finfo->name)+1);
-	pstrcpy(single_entry->text, finfo->name);
+	single_entry->text = dos_to_unix (g_strdup (finfo->name), 1);
 
     single_entry->next = 0;
 	single_entry->my_stat.st_size = finfo->size;
@@ -1158,7 +1472,9 @@ static int
 get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 {
 	char *p, *mpp;
+#if 0
 	dir_entry *dentry = current_info->entries;
+#endif
 	char *mypath;
 	mpp = mypath = g_strdup(path);
 
@@ -1287,8 +1603,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	char *remote_dir;
 	smbfs_connection *sc;
 	pstring server_url;
-	char *server, *service, *p, *mypath, *pp;
-	BOOL no_share = False;
+	char *service, *p, *mypath, *pp;
 
 	DEBUG(3, ("smbfs_stat(path:%s)\n", path));
 
@@ -1478,6 +1793,7 @@ smbfs_free (vfsid id)
 {
 	DEBUG(3, ("smbfs_free(%d)\n", (int)id));
     /* FIXME: Should not be empty */
+	authinfo_free_all ();
 }
 
 /* Gives up on a socket and reopnes the connection, the child own the socket
