@@ -33,7 +33,7 @@ the setting that would be set by the user for the NN locale.
 
 Executable programs will be executed like this:
 
-	program --desktop-dir DESKTOPDIR
+	program --desktop-dir=DESKTOPDIR
 
 Where DESKTOPDIR is the user's desktop directory.
 
