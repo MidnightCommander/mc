@@ -832,6 +832,9 @@ static int fish_unlink (struct vfs_class *me, const char *path)
 static int fish_mkdir (struct vfs_class *me, const char *path, mode_t mode)
 {
     PREFIX
+
+    (void) mode;
+
     g_snprintf(buf, sizeof(buf),
             "#MKD /%s\n"
 	    "mkdir /%s 2>/dev/null\n"
