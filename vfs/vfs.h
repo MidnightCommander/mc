@@ -33,9 +33,13 @@ struct utimbuf {
     typedef void * vfsid;
 
     struct vfs_stamping;
-    
-    typedef struct vfs {
-        struct vfs *next;
+
+/* Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
+(RelianUNIX), where it is bad idea to define struct vfs. That system
+mas include called <sys/vfs.h>, which contains things like vfs_t.
+ */
+    typedef struct vfs_struct {
+        struct vfs_struct *next;
         char  *name;		/* "FIles over SHell" */
         int   flags;
 #define F_EXEC 1

@@ -1,3 +1,7 @@
+Tue Oct 13 12:42:10 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* vfs.h (vfs_struct): renamed to avoid namespace conflict
+
 Mon Oct 12 22:42:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* sfs.c: reuse mmap from local.c
