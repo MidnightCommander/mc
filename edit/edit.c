@@ -328,38 +328,34 @@ static int
 check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
-    int flags;
-    int stat_ok = 0;
 
-    /* Try stat first to prevent getting stuck on pipes */
-    if (mc_stat ((char *) filename, st) == 0) {
-	stat_ok = 1;
+    /* Try opening an existing file */
+    file = mc_open (filename, O_NONBLOCK | O_RDONLY | O_BINARY, 0666);
+
+    if (file < 0) {
+	/*
+	 * Try creating the file.  O_EXCL prevents following broken links
+	 * and opening existing files.
+	 */
+	file =
+	    mc_open (filename,
+		     O_NONBLOCK | O_RDONLY | O_BINARY | O_CREAT | O_EXCL,
+		     0666);
+	if (file < 0) {
+	    edit_error_dialog (_("Error"),
+			       get_sys_error (catstrs
+					      (_
+					       (" Cannot open file for reading: "),
+					       filename, " ", 0)));
+	    return 1;
+	} else {
+	    /* New file, delete it if it's not modified or saved */
+	    edit->delete_file = 1;
+	}
     }
 
-    /* Only regular files are allowed */
-    if (stat_ok && !S_ISREG (st->st_mode)) {
-	edit_error_dialog (_("Error"),
-			   catstrs (_(" Not an ordinary file: "), filename,
-				    " ", 0));
-	return 1;
-    }
-
-    /* Open the file, create it if (and only if!) needed */
-    flags = O_RDONLY | O_CREAT | O_BINARY;
-    if (!stat_ok)
-	flags |= O_EXCL;
-
-    if ((file = mc_open (filename, flags, 0666)) < 0) {
-	edit_error_dialog (_("Error"),
-			   get_sys_error (catstrs
-					  (_
-					   (" Cannot open file for reading: "),
-					   filename, " ", 0)));
-	return 1;
-    }
-
-    /* If the file has just been created, we don't have valid stat yet, so do it now */
-    if (!stat_ok && mc_fstat (file, st) < 0) {
+    /* Check what we have opened */
+    if (mc_fstat (file, st) < 0) {
 	mc_close (file);
 	edit_error_dialog (_("Error"),
 			   get_sys_error (catstrs
@@ -368,22 +364,34 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 					   filename, " ", 0)));
 	return 1;
     }
+
+    /* We want to open regular files only */
+    if (!S_ISREG (st->st_mode)) {
+	mc_close (file);
+	edit_error_dialog (_("Error"),
+			   catstrs (_(" Not an ordinary file: "), filename,
+				    " ", 0));
+	return 1;
+    }
+
     mc_close (file);
 
-    /* If it's a new file, delete it if it's not modified or saved */
-    if (!stat_ok && st->st_size == 0) {
-	edit->delete_file = 1;
+    /*
+     * Don't delete non-empty files.
+     * O_EXCL should prevent it, but let's be on the safe side.
+     */
+    if (st->st_size > 0) {
+	edit->delete_file = 0;
     }
 
     if (st->st_size >= SIZE_LIMIT) {
-	/* The file-name is printed after the ':' */
+	mc_close (file);
 	edit_error_dialog (_("Error"),
 			   catstrs (_(" File is too large: "), filename,
-				    _
-				    (" \n Increase edit.h:MAXBUF and recompile the editor. "),
 				    0));
 	return 1;
     }
+
     return 0;
 }
 

@@ -1,5 +1,9 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (check_file_access): Use non-blocking open() followed
+	by fstat() to avoid race conditions.  Don't ask users to
+	recompile the editor.
+
 	* edit.c (edit_reload): Don't initialize edit->macro_i, because
 	edit_init() takes care of it.
 	* editwidget.c (edit): Likewise.
