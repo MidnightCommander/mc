@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.54a\n"
 "POT-Creation-Date: 2001-07-19 12:44+0200\n"
-"PO-Revision-Date: 2001-07-22 11:10+0200\n"
+"PO-Revision-Date: 2001-07-23 15:50+0200\n"
 "Last-Translator: Stanislav Brabec <utx@penguin.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -595,7 +595,7 @@ msgstr "Chránit symbolické odkazy "
 
 #: gnome/gdialogs.c:650
 msgid "Follow links."
-msgstr "Následovat linky."
+msgstr "Následovat odkazy."
 
 #: gnome/gdialogs.c:656
 msgid ""
@@ -737,7 +737,7 @@ msgstr "V¹ímat si velikosti písmen"
 
 #: gnome/gfind.c:114 src/find.c:148
 msgid "Start at:"
-msgstr "Zaèni v:"
+msgstr "Zaèít v:"
 
 #: gnome/gfind.c:114 src/find.c:148
 msgid "Filename:"
@@ -749,7 +749,7 @@ msgstr "Obsah: "
 
 #: gnome/gfind.c:125 src/find.c:203
 msgid "Find File"
-msgstr "Hledej soubor"
+msgstr "Najít soubor"
 
 #: gnome/gfind.c:325 src/find.c:398
 #, c-format
@@ -771,7 +771,7 @@ msgstr "Hotovo"
 #: gnome/gfind.c:420 src/find.c:500 src/view.c:1527
 #, c-format
 msgid "Searching %s"
-msgstr "Hledám %s"
+msgstr "Hledá se %s"
 
 #: gnome/gfind.c:553 gnome/gfind.c:588
 msgid "Suspend"
@@ -791,7 +791,7 @@ msgstr "Hledání"
 
 #: gnome/gfind.c:582 src/find.c:745
 msgid "Find file"
-msgstr "Hledat soubor"
+msgstr "Najít soubor"
 
 #. The buttons
 #: gnome/gfind.c:586
@@ -800,7 +800,7 @@ msgstr "Pøejít do tohoto adresáøe"
 
 #: gnome/gfind.c:587
 msgid "Search again"
-msgstr "Hledej znovu"
+msgstr "Hledat znovu"
 
 #: gnome/gfind.c:593
 msgid "View this file"
@@ -880,7 +880,7 @@ msgstr ""
 "Nezapomìòte, ¾e pokud ukonèíte správce souborù, pøeru¹íte také\n"
 "zpracování událostí na Plo¹e.\n"
 "\n"
-"Jste si opravdu jist(a)?"
+"Jste si opravdu jisti?"
 
 #: gnome/glayout.c:325
 msgid ""
@@ -1005,7 +1005,7 @@ msgstr "Nastavení filtrování jmen souborù"
 
 #: gnome/glayout.c:428
 msgid "_Find File..."
-msgstr "_Hledat soubor..."
+msgstr "_Najít soubor..."
 
 #: gnome/glayout.c:428
 msgid "Locate files on disk"
@@ -1864,7 +1864,7 @@ msgstr " Nelze zjistit délku/práva k souboru: "
 
 #: gtkedit/edit.c:400
 msgid " Not an ordinary file: "
-msgstr " To není obyèejný soubor: "
+msgstr " Toto není obyèejný soubor: "
 
 #: gtkedit/edit.c:406
 msgid " File is too large: "
@@ -1876,7 +1876,7 @@ msgid ""
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
 " \n"
-" Zvy¹ edit.hf:MAXBUF a pøekompiluj editor. "
+" Zvy¹te edit.hf:MAXBUF a pøekompilujte editor. "
 
 #: gtkedit/edit.c:2601
 msgid "User menu available only in mcedit invoked from mc"
@@ -1995,7 +1995,7 @@ msgstr " Makro "
 #. Input line for a single key press follows the ':'
 #: gtkedit/editcmd.c:736
 msgid " Press the macro's new hotkey: "
-msgstr " Stiskni novou hotkey pro makro: "
+msgstr " Stisknìte novou hotkey pro makro: "
 
 #. This heads the 'Save Macro' dialog box
 #: gtkedit/editcmd.c:755
@@ -2115,7 +2115,7 @@ msgstr " Zadejte náhradní text:"
 
 #: gtkedit/editcmd.c:1281 gtkedit/editcmd.c:1354 src/view.c:1996
 msgid " Enter search string:"
-msgstr " Zadej hledaný text:"
+msgstr " Zadejte hledaný text:"
 
 #. Heads the 'Replace' dialog box
 #: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1604 gtkedit/editcmd.c:1693
@@ -2134,7 +2134,7 @@ msgstr " Hledat "
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1422
 msgid " Enter search text : "
-msgstr " Zadej hledaný text : "
+msgstr " Zadejte hledaný text : "
 
 #: gtkedit/editcmd.c:1429
 msgid " Enter replace text : "
@@ -2194,12 +2194,12 @@ msgstr "Pozor: Hledání pozpátku mù¾e být pomalé"
 
 #: gtkedit/editcmd.c:1484
 msgid " Prompt on replace "
-msgstr " Ptej se pøed nahrazením "
+msgstr " Ptát se pøed nahrazením "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1486
 msgid "Ask before making each replacement"
-msgstr " Ptej se pøed ka¾dým nahrazením"
+msgstr " Ptát se pøed ka¾dým nahrazením"
 
 #: gtkedit/editcmd.c:1488
 msgid " Replace all "
@@ -2301,7 +2301,7 @@ msgstr " Soubor byl zmìnìn, ulo¾it pøi odchodu? "
 
 #: gtkedit/editcmd.c:2433
 msgid "Cancel quit"
-msgstr "Zru¹ odchod"
+msgstr "Zru¹it odchod"
 
 #: gtkedit/editcmd.c:2433 src/cmd.c:245 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
@@ -2348,19 +2348,19 @@ msgstr " Jdi na øádek "
 #: gtkedit/editcmd.c:2779 gtkedit/editcmd.c:2783 gtkedit/editcmd.c:2788
 #: gtkedit/editcmd.c:2791
 msgid " Enter line: "
-msgstr " Zadej èíslo øádku: "
+msgstr " Zadejte èíslo øádku: "
 
 #: gtkedit/editcmd.c:2812 gtkedit/editcmd.c:2825
 msgid " Save Block "
-msgstr " Ulo¾ blok "
+msgstr " Ulo¾it blok "
 
 #: gtkedit/editcmd.c:2837
 msgid " Insert File "
-msgstr " Vlo¾ soubor "
+msgstr " Vlo¾it soubor "
 
 #: gtkedit/editcmd.c:2850
 msgid " Insert file "
-msgstr " Vlo¾ soubor "
+msgstr " Vlo¾it soubor "
 
 #: gtkedit/editcmd.c:2850
 msgid " Error trying to insert file. "
@@ -2368,7 +2368,7 @@ msgstr " Chyba pøi vkládání souboru. "
 
 #: gtkedit/editcmd.c:2869
 msgid " Sort block "
-msgstr " Setøiï blok "
+msgstr " Setøídit blok "
 
 #: gtkedit/editcmd.c:2869 gtkedit/editcmd.c:2953
 msgid " You must first highlight a block of text. "
@@ -2579,7 +2579,7 @@ msgstr "zaèít zaznamenávat &Makro     C-r"
 
 #: gtkedit/editmenu.c:223 gtkedit/editmenu.c:246
 msgid "&Finish record macro...  C-r"
-msgstr "&Ukonèi záznam makra...       C-r"
+msgstr "&Ukonèit záznam makra...      C-r"
 
 #: gtkedit/editmenu.c:224
 msgid "&Execute macro...   C-a, KEY"
@@ -2710,11 +2710,11 @@ msgstr "Zapomenout zálo¾ky"
 
 #: gtkedit/editmenu.c:435
 msgid "Toggle insert/overwrite\tIns"
-msgstr "Pøepni vkládání/pøepisování\tIns"
+msgstr "Pøepnout vkládání/pøepisování\tIns"
 
 #: gtkedit/editmenu.c:437
 msgid "Copy block to cursor\tF5"
-msgstr "Zkopíruj blok ke kurzoru\tF5"
+msgstr "Zkopírovat blok ke kurzoru\tF5"
 
 #: gtkedit/editmenu.c:438
 msgid "Move block to cursor\tF6"
@@ -2940,7 +2940,7 @@ msgstr "Ulo¾it pod souèasným jménem"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
-msgstr "Zapni/vypni oznaèování textu"
+msgstr "Zapnout/vypnout oznaèování textu"
 
 #: gtkedit/gtkedit.c:1249
 msgid "Find and replace strings/regular expressions"
@@ -2992,7 +2992,7 @@ msgstr "Vlo¾it text ze souboru"
 
 #: gtkedit/gtkedit.c:1299
 msgid "Copy to file"
-msgstr "Zkopíruj do souboru"
+msgstr "Zkopírovat do souboru"
 
 #: gtkedit/gtkedit.c:1299
 msgid "copy a block to a file"
@@ -3210,7 +3210,7 @@ msgstr "&Pozpátku"
 
 #: src/boxes.c:282 src/find.c:142
 msgid "case sensi&tive"
-msgstr "v¹ímat si velikos&ti písmen"
+msgstr "v¹ímat si velikos&Ti písmen"
 
 #: src/boxes.c:283
 msgid "Sort order"
@@ -3526,7 +3526,7 @@ msgstr "Vytvoøit nový adresáø"
 
 #: src/cmd.c:388
 msgid " Enter directory name:"
-msgstr " Zadej jméno adresáøe:"
+msgstr " Zadejte jméno adresáøe:"
 
 #: src/cmd.c:452
 msgid " Filter "
@@ -4419,11 +4419,11 @@ msgstr "Cílový soubor \"%s\" u¾ existuje!"
 
 #: src/filegui.c:561
 msgid "if &Size differs"
-msgstr "jestli¾e se &Délky li¹í"
+msgstr "jestli¾e se délky &Li¹í"
 
 #: src/filegui.c:564
 msgid "&Update"
-msgstr "&Aktualizace"
+msgstr "akt&Ualizace"
 
 #: src/filegui.c:566
 msgid "Overwrite all targets?"
@@ -4431,7 +4431,7 @@ msgstr "Pøepsat v¹echny soubory?"
 
 #: src/filegui.c:568
 msgid "&Reget"
-msgstr "&Navázat"
+msgstr "naváza&T"
 
 #: src/filegui.c:569
 msgid "ap&Pend"
@@ -4467,7 +4467,7 @@ msgstr "zachovat &Atributy"
 #. &op_preserve
 #: src/filegui.c:773
 msgid "follow &Links"
-msgstr "následovat &Odkazy"
+msgstr "nás&Ledovat odkazy"
 
 #. &file_mask_op_follow_links
 #: src/filegui.c:775
@@ -4484,12 +4484,12 @@ msgstr "&Na pozadí"
 
 #: src/filegui.c:806
 msgid "&Stable Symlinks"
-msgstr "&Stabilní symlinky"
+msgstr "&Stabilní symbolické odkazy"
 
 #. &file_mask_stable_symlinks
 #: src/filegui.c:808
 msgid "&Dive into subdir if exists"
-msgstr "&Ponoø se do adresáøe kdy¾ existuje"
+msgstr "&Ponoøit se do existujících adresáøù"
 
 #: src/filegui.c:967
 #, c-format
@@ -4983,7 +4983,7 @@ msgstr " Tuto klávesu nelze akceptovat "
 #: src/learn.c:121
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Zadal(a) jste \"%s\""
+msgstr " Zadali jste \"%s\""
 
 #: src/learn.c:168
 msgid "OK"
@@ -5036,7 +5036,7 @@ msgstr ""
 " Program Midnight Commander nemù¾e zmìnit adresáø na\n"
 " ten, který mu oznámil shell.  Je to pravdìpodobnì \n"
 " proto, ¾e byl tento adresáø smazán nebo také proto,\n"
-" ¾e jste se to tohoto adresáøe pøepnul(a) pomocí su."
+" ¾e jste se do tohoto adresáøe pøepnuli pomocí su."
 
 #: src/main.c:794
 msgid "Press any key to continue..."
@@ -5253,7 +5253,7 @@ msgstr "upravit u¾ivatelské &Menu"
 
 #: src/main.c:1367
 msgid "Menu edi&Tor edit"
-msgstr "Úpravy &souboru s menu"
+msgstr "Úpravy &Souboru s menu"
 
 #: src/main.c:1373
 msgid "&Configuration..."
@@ -5759,7 +5759,7 @@ msgstr ""
 
 #: src/panelize.c:350
 msgid "Find *.orig after patching"
-msgstr "Nalézt v¹echny soubory .orig"
+msgstr "Najít v¹echny soubory *.orig"
 
 #: src/panelize.c:351
 msgid "Find SUID and SGID programs"
@@ -6272,7 +6272,7 @@ msgid ""
 " Enter the new line number:"
 msgstr ""
 " Aktuální èíslo øádku je %d.\n"
-" Zadej nové èíslo øádku:"
+" Zadejte nové èíslo øádku:"
 
 #: src/view.c:1921
 #, c-format
@@ -6281,7 +6281,7 @@ msgid ""
 " Enter the new address:"
 msgstr ""
 " Aktuální adresa: 0x%lx.\n"
-" Zadej novou adresu:"
+" Zadejte novou adresu:"
 
 #: src/view.c:1923
 msgid " Goto Address "
@@ -6289,7 +6289,7 @@ msgstr " Jít na adresu "
 
 #: src/view.c:1954
 msgid " Enter regexp:"
-msgstr " Zadej regulární výraz:"
+msgstr " Zadejte regulární výraz:"
 
 #: src/view.c:2077
 msgid "Ascii"
