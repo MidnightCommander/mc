@@ -1,5 +1,7 @@
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
+	* slvideo.c: Include _slang.h, not slang.h.
+
 	* slos2tty.c: Remove since OS/2 is no longer supported.
 	* Makefile.am (EXTRASRC): Remove slos2tty.c.
 

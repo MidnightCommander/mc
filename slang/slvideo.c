@@ -51,7 +51,7 @@
 #endif
 
 #include <dos.h>
-#include "slang.h"
+#include "_slang.h"
 
 #ifdef GO32_VIDEO
 # define HAS_SAVE_SCREEN
