@@ -540,7 +540,7 @@ static int search_tree (WTree *tree, char *text)
 
 static void tree_do_search (WTree *tree, int key)
 {
-    int l;
+    size_t l;
 
     l = strlen (tree->search_buffer);
     if (l && (key == KEY_BACKSPACE))
@@ -856,7 +856,13 @@ tree_start_search (WTree *tree)
     }
 }
 
-static const key_map tree_keymap [] = {
+typedef void (*tree_key_action) (WTree *);
+typedef struct {
+    int key_code;
+    tree_key_action fn;
+} tree_key_map;
+
+static const tree_key_map tree_keymap [] = {
     { XCTRL('n'), move_down    },
     { XCTRL('p'), move_up      },
     { KEY_DOWN,   move_down    },
