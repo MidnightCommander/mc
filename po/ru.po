@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
 "POT-Creation-Date: 2000-06-17 19:33+0000\n"
-"PO-Revision-Date: 2000-06-17 19:35+00:00\n"
+"PO-Revision-Date: 2000-08-19 17:01+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -3857,7 +3857,7 @@ msgstr ", ftpfs"
 
 #: src/features.inc:28
 msgid " (proxies: hsc proxy)"
-msgstr ""
+msgstr " (прокси: hsc прокси)"
 
 #: src/features.inc:30
 msgid ", mcfs"
