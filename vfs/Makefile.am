@@ -118,19 +118,8 @@ SAMBA_DIST =			\
 	include/kanji.h		\
 	include/local.h		\
 	include/nameserv.h	\
-	include/ntdomain.h	\
 	include/nterr.h		\
 	include/proto.h		\
-	include/rpc_dce.h	\
-	include/rpc_lsa.h	\
-	include/rpc_misc.h	\
-	include/rpc_netlogon.h	\
-	include/rpc_reg.h	\
-	include/rpc_samr.h	\
-	include/rpc_secdes.h	\
-	include/rpc_srvsvc.h	\
-	include/rpc_wkssvc.h	\
-	include/rpcclient.h	\
 	include/smb.h		\
 	include/stamp-h.in	\
 	include/trans2.h	\

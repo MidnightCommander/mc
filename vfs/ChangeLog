@@ -1,3 +1,12 @@
+2003-08-30  Pavel Roskin  <proski@gnu.org>
+
+	* samba/include/smb.h: Remove unneeded includes.
+	* samba/include/ntdomain.h: Remove, it's unused.
+	* samba/include/rpc*.h: Likewise.
+	* samba/lib/util_unistr.c: Remove unused code.
+	* samba/include/proto.h: Regenerate.
+	* Makefile.am: Remove unused Samba headers.
+
 2003-08-29  Pavel Roskin  <proski@gnu.org>
 
 	* samba/lib/system.c: Remove all unused code.

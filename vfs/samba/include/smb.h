@@ -1698,8 +1698,6 @@ extern int unix_ERR_code;
 		 __FILE__, __LINE__)), smb_panic("assert failed")))
 #define SMB_ASSERT_ARRAY(a,n) SMB_ASSERT((sizeof(a)/sizeof((a)[0])) >= (n))
 
-#include "ntdomain.h"
-
 /* A netbios name structure. */
 struct nmb_name {
   char         name[17];
@@ -1708,7 +1706,6 @@ struct nmb_name {
 };
 
 #include "client.h"
-#include "rpcclient.h"
 
 /*
  * Size of new password account encoding string. DO NOT CHANGE.
