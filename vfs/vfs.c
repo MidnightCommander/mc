@@ -1790,7 +1790,7 @@ error:
 
       if (++errorcount < 5) {
 	message_1s (1, _("Could not parse:"), p_copy);
-      } else if (errorcount == 5)
+      } else if (errorcount >= 5)
 	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
     }
 

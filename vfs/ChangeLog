@@ -1,3 +1,12 @@
+2000-04-15  Timur Bakeyev  <mc@bat.ru>
+
+	* ftpfs.c (netrc_next): "const char * keywords" is pretty nice.
+	
+	* ftpfs.c (dir_load): At last, found place, that broke handling
+	directories with spaces in name. Problem was in prepending "/"
+	to "." for current directory. Which was, obviously, wrong. Hacked
+	to make just "LIST -la ." instead.
+
 2000-04-12  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/lslR.in: Patch by tnovak@ipex.cz: allow spaces in filenames

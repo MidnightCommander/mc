@@ -222,7 +222,7 @@ my_get_host_and_username (char *path, char **host, char **user, int *port, char 
 static int
 get_reply (vfs *me, int sock, char *string_buf, int string_len)
 {
-    char answer[1024];
+    char answer[BUF_1K];
     int i;
     
     for (;;) {
@@ -357,7 +357,7 @@ login_server (vfs *me, vfs_s_super *super, char *netrcpass)
     char *op;
     char *name;			/* login user name */
     int  anon = 0;
-    char reply_string[255];
+    char reply_string[BUF_MEDIUM];
 
     SUP.isbinary = TYPE_UNKNOWN;    
     if (netrcpass)
@@ -833,7 +833,7 @@ dir_uptodate(vfs *me, vfs_s_inode *ino)
 static char *
 ftpfs_get_current_directory (vfs *me, vfs_s_super *super)
 {
-    char buf[4096], *bufp, *bufq;
+    char buf[BUF_8K], *bufp, *bufq;
 
     if (command (me, super, NONE, "PWD") == COMPLETE &&
         get_reply(me, SUP.sock, buf, sizeof(buf)) == COMPLETE) {
@@ -1181,7 +1181,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     vfs_s_entry *ent;
     vfs_s_super *super = dir->super;
     int sock, has_symlinks = 0, num_entries = 0;
-    char buffer[8192];
+    char buffer[BUF_8K];
+    
     int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);
 
     print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path, 
@@ -1190,8 +1191,9 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
     if (cd_first) {
         char *p;
-    
+
         p = translate_path (me, super, remote_path);
+
         if (ftpfs_chdir_internal (me, super, p) != COMPLETE) {
 	    g_free (p);
             my_errno = ENOENT;
@@ -1207,7 +1209,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     if (SUP.strict == RFC_STRICT) 
         sock = open_data_connection (me, super, "LIST", 0, TYPE_ASCII, 0);
     else if (cd_first)
-        sock = open_data_connection (me, super, "LIST -la", ".", TYPE_ASCII, 0);
+	/* Dirty hack to avoid autoprepending / to . */
+        sock = open_data_connection (me, super, "LIST -la .", 0, TYPE_ASCII, 0);
     else {
 	/* Trailing "/." is necessary if remote_path is a symlink
            but don't generate "//." */
@@ -1726,7 +1729,7 @@ static int netrc_next (void)
 {
     char *p;
     int i;
-    static const char const * keywords [] = { "default", "machine", 
+    static const char * keywords [] = { "default", "machine", 
         "login", "password", "passwd", "account", "macdef" };
 
     while (1) {
@@ -1825,11 +1828,12 @@ int lookup_netrc (char *host, char **login, char **pass)
 	while ((keyword = netrc_next ()) > 2) {
 	    switch (keyword) {
 		case 3:
-		    if (netrc_next ())
+		    if (netrc_next ()) {
 			if (*login == NULL)
 			    *login = g_strdup (buffer);
 			else if (strcmp (*login, buffer))
 			    keyword = 20;
+		    }
 		    break;
 		case 4:
 		case 5:
