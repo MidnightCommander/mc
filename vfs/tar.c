@@ -341,11 +341,10 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	}
 
 	if (header->header.linkflag == LF_LINK) {
-	    parent = vfs_s_find_inode (me, archive->root, current_link_name, LINK_NO_FOLLOW, 0);
-	    if (parent == NULL) {
+	    inode = vfs_s_find_inode (me, archive->root, current_link_name, LINK_NO_FOLLOW, 0);
+	    if (inode == NULL) {
 	        message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
-	        inode = parent;
 		entry = vfs_s_new_entry(me, p, inode);
 		vfs_s_insert_entry(me, parent, entry);
 		g_free (current_link_name);
