@@ -2341,159 +2341,164 @@ Due esempi:
 Se la maschera sorgente è "*.tar.gz", la destinazione è "/bla/*.tgz" e
 il file da copiare è "foo.tar.gz", la copia sarà "foo.tgz" in "/bla".
 .PP
-Supponiamo si voglia scambiare il base e l'estensione cosicché "file.c"
-divenga "c.file" e così via. La maschera sorgente per questo sarà "*.*" 
-e la destinazione sarà "\\2.\\1".
+Supponiamo si voglia scambiare la base e l'estensione di un file cosicché 
+"file.c" divenga "c.file" e così via. La maschera sorgente per questa
+operazione sarà "*.*" e la destinazione sarà "\\2.\\1".
 .PP
 .B "Usa i modelli della shell, opzione disabilitata"
 .PP
-When the shell patterns option is off the MC doesn't do automatic
-grouping anymore. You must use '\\(...\\)' expressions in the source
-mask to specify meaning for the wildcards in the target mask. This is
-more flexible but also requires more typing. Otherwise target masks
-are similar to the situation when the shell patterns option is on.
+Quando l'opzione dei modelli della shell è disabilitata, MC non
+esegue più il raggruppamento automatico. E' necessario usare 
+espressioni tipo '\\(...\\)' nella maschera sorgente per dare significato
+ai caratteri jolly nella maschera obbiettivo. Altrimenti le maschere
+obbiettivo si trovano nella situazione di quando i modelli della shell
+sono abilitati.
 .PP
-Two examples:
+Due esempi:
 .PP
-If the source mask is "^\\(.*\\)\\.tar\\.gz$", the destination is
-"/bla/*.tgz" and the file to be copied is "foo.tar.gz", the copy
-will be "/bla/foo.tgz".
+Se la maschera sorgente è "^\\(.*\\)\\.tar\\.gz$", la destinazione è
+"/bla/*.tgz" e il file da copiare è "foo.tar.gz", la copia sarà
+"/bla/foo.tgz".
 .PP
-Let's suppose you want to swap basename and extension so that "file.c"
-will become "c.file" and so on. The source mask for this is
-"^\\(.*\\)\\.\\(.*\\)$" and the destination is "\\2.\\1".
+Supponiamo si voglio scambiare la base e l'estensione di un file cosicchè
+"file.c" divenga "c.file" e così via. La maschera sorgente per questa 
+operazione sarà "^\\(.*\\)\\.\\(.*\\)$" e la destinazione sarà "\\2.\\1".
 .PP
-.B "Case Conversions"
+.B "Conversioni Maiuscole/Minuscole"
 .PP
-You can also change the case of the filenames.  If you use '\\u'
-or '\\l' in the target mask, the next character will be converted to
-uppercase or lowercase correspondingly.
+E' anche possibile cambiare tra maiuscole e minuscole i caratteri dei file. 
+Se si usa '\\u' o '\\l' nella maschera obbiettivo, il carattere successivo
+sarà convertito rispettivamente in maiuscolo o minuscolo.
 .PP
-If you use '\\U' or '\\L' in the target mask, the next characters will
-be converted to uppercase or lowercase correspondingly up to the
-next '\\E' or next '\\U', '\\L' or the end of the file name.
+Se si usa '\\U' o '\\L' nella maschera obbiettivo, il caratteri successivi
+saranno convertiti rispettivamente in maiuscolo o minuscolo fino alla
+prossima corrispondenza di '\\E' o '\\U', '\\L' o alla fine del nome del file.
 .PP
-The '\\u' and '\\l' are stronger than '\\U' and '\\L'.
+Notare che '\\u' e '\\l' sono più forti di '\\U' e '\\L'.
 .PP
-For example, if the source mask is '*' (shell patterns on) or '^\\(.*\\)$'
-(shell patterns off) and the target mask is '\\L\\u*' the file names
-will be converted to have initial upper case and otherwise lower case.
+Per esempio, se la maschera sorgente è '*' (modelli della shell abilitati)
+o '^\\(.*\\)$' (modelli della shell disabilitati) e la maschera obbiettivo
+è '\\L\\u*' i nomi dei file saranno convertiti ad avere maiuscola iniziale
+ed il resto minuscolo.
 .PP
-You can also use '\\' as a quote character. For example, '\\\\' is 
-a backslash and '\\*' is an asterisk.
+Si può usare '\\' come carattere di protezione. Per esempio, '\\\\' è
+una barra retroversa e '\\*' è un asterisco.
 .PP
-.SH "Internal File Viewer"
-The internal file viewer provides two display modes: ASCII and hex.
-To toggle between modes, use the F4 key.  If you have the GNU gzip
-program installed, it will be used to automatically decompress the
-files on demand.
+.\"NODE "Internal File Viewer"
+.SH "Visualizzatore di File Interno"
+Il visualizzatore di file interno fornisce due modalità di visualizzazione:
+ASCII e esadecimale. Per passare da una modalità all'altra, usare il tasto F4.
+Se si ha il programma GNU gzip installato, esso verrà usato automaticamente
+per decomprimere i file al volo.
 .PP
-The viewer will try to use the best method provided by your system or
-the file type to display the information.  The internal file viewer
-will interpret some string sequences to set the bold and underline
-attributes, thus making a pretty display of your files.  
+Il visualizzatore tenterà di usare il metodo migliore fornito dal sistema
+o a seconda del tipo di file, per mostrare le informazioni. Il visualizzatore
+interno interpreterà alcune sequenze di stringa per impostare gli attributi
+di grassetto e sottolineato, per mostrare al meglio i file.
 .PP
-When in hex mode, the search function accepts text in quotes and
-constant numbers.  Text in quotes is matched exactly after removing
-the quotes.  Each number matches one byte.  You can mix quoted text
-with constants like this:
+In modalità esadecimale, la funzione di ricerca accetta testo protetto e
+costanti numeriche. Il testo protetto viene confrontato esattamente dopo
+la rimozione della protezione. Ogni numero rappresenta un byte. E' possibile
+mescolare testo protetto con costanti come nell'esempio:
 .PP
 .nf
-"String" -1 0xBB 012 "more text"
+"Stringa" -1 0xBB 012 "ancora testo"
 .fi
 .PP
-Note that 012 is an octal number.  -1 is converted to 0xFF.
+Notare che 012 è un numero ottale. -1 viene convertito in 0xFF.
 .PP
-Some internal details about the viewer: On systems that provide the
-mmap(2) system call, the program maps the file instead of loading it;
-if the system does not provide the mmap(2) system call or the file
-matches an action that requires a filter, then the viewer will use
-it's growing buffers, thus loading only those parts of the file that
-you actually access (this includes compressed files).
+Alcuni dettagli interni circa il visualizzatore: su sistemi che forniscono
+la chiamata di sistema mmap(2), il programma mappa il file invece di caricarlo;
+se il sistema non fornisce la chiamata di sistema mmap(2) o il file
+corrisponde ad un'azione che abbisogna di un filtro, allora il visualizzatore
+userà i buffer di accrescimanto (growing), caricando perciò solo le parti
+del file su cui vi si accede (inclusi i file compressi).
 .PP
-Here is a listing of the actions associated with each key that the
-Midnight Commander handles in the internal file viewer.
+Ecco un'elenco di azioni associate ad ogni tasto che il Midnight Commander
+gestisce nel visualizzatore di file interno.
 .PP
 .B F1
-Invoke the builtin hypertext help viewer.
+Invoca il visualizzatore ipertestuale dell'aiuto.
 .PP
 .B F2
-Toggle the wrap mode.
+Abilita/disabilita la funzione di a capo automatico.
 .PP
 .B F4
-Toggle the hex mode.
+Abilita/disabilita la modalità esadecimale.
 .PP
 .B F5
-Goto line.  This will prompt you for a line number and will display
-that line.
+Vai alla linea. Questo comando richiederà un numero di linea e mostrerà
+quella linea.
 .PP
 .B F6, /. 
-Regular expression search.
+Ricerca tramite espressione regolare.
 .PP
 .B ?,
-Reverse regular expression search.
+Ricerca in ordine inverso, tramite espressione regolare.
 .PP
 .B F7
-Normal search / hex mode search.
+Ricerca normale / ricerca in modalità esadecimale.
 .PP
 .B C-s, F17, n.
-Start normal search if there was no previous search expression else
-find next match.
+Inizia una ricerca normale, se non c'era già un'espressione di 
+ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B C-r.
-Start reverse search if there was no previous search expression else
-find next match.
+Inizia una ricerca normale in ordine inverso, se non c'era già un'espressione
+di ricerca, altrimenti trova la prossima occorrenza.
 .PP
 .B F8
-Toggle Raw/Parsed mode: This will show the file as found on disk or if
-a processing filter has been specified in the mc.ext file, then the
-output from the filter. Current mode is always the other than written
-on the button label, since on the button is the mode which you enter
-by that key.
+Cambia tra modalità Normale/Filtrata: questo mostrerà il file come si
+trova su disco o se è stato specificato un filtro nel file mc.ext, come
+esce dal filtro. La modalità corrente è sempre quella diversa da quella
+mostrata dall'etichetta del tasto, dato che il bottone rappresenta la
+modalità nella quale si entra premendolo.
 .PP
 .B F9
-Toggle the format/unformat mode: when format mode is on the viewer
-will interpret some string sequences to show bold and underline with
-different colors. Also, on button label is the other mode than current.
+Cambia tra modalità non formattata e formattata: quando la modalità è
+formattata, il visualizzatore interpreterà alcune sequenze di stringa
+per rappresentare il grassetto e il sottolineato con colori diversi.
+Anche per questa funzione, l'etichetta sul tasto rappresenta la modalità
+non corrente.
 .PP
 .B F10, Esc.
-Exit the internal file viewer.
+Esce dal visualizzatore di file interno.
 .PP
-.B next-page, space, C-v.
-Scroll one page forward.
+.B pagina-giù, spazio, C-v.
+Sfoglia di una pagina in avanti.
 .PP
-.B prev-page, M-v, C-b, backspace.
-Scroll one page backward.
+.B pagina-sù, M-v, C-b, backspace.
+Sfoglia di una pagina indietro.
 .PP
-.B down-key
-Scroll one line forward.
+.B freccia-in-basso
+Si sposta di una riga in avanti.
 .PP
 .B up-key
-Scroll one line backward.
+Si sposta di una riga indietro.
 .PP
 .B C-l
-Refresh the screen.
+Ridisegna lo schermo.
 .PP
 .B C-o
-Switch to the subshell and show the command screen.
+Passa alla subshell e mostra la schermata dei comandi.
 .PP
 .B !
-Like C-o, but run a new shell if the subshell is not running.
+Come C-o, ma esegue una nuova shell se la subshell non sta andando.
 .PP
 .B "[n] m"
-Set the mark n.
+Imposta l'indice n.
 .PP
 .B "[n] r"
-Jump to the mark n.
+Salta all' indice n.
 .PP
 .B C-f
-Jump to the next file.
+Salta al file successivo.
 .PP
 .B C-b 
-Jump to the previous file.
+Salta al file precedente.
 .PP
 .B M-r 
-Toggle the ruler.
+Abilita/disabilita il righello.
 .PP
 It's possible to instruct the file viewer how to display a file, look
 at the 
