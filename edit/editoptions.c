@@ -121,7 +121,7 @@ edit_options_dialog (void)
     };
 
     QuickDialog Quick_options =
-	{ OPT_DLG_W, OPT_DLG_H, -1, 0, N_(" Editor options "), "", 0 };
+	{ OPT_DLG_W, OPT_DLG_H, -1, 0, N_(" Editor options "), "", 0, 0 };
 
     if (!i18n_flag) {
 	i18n_translate_array (key_emu_str);

@@ -390,7 +390,7 @@ void menu_save_mode_cmd (void)
 	NULL_QuickWidget};
     static QuickDialog dialog =
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
-     widgets};
+     widgets, 0};
     static int i18n_flag = 0;
 
     if (!i18n_flag) {
@@ -1194,7 +1194,7 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     {
 	QuickDialog Quick_input =
 	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
-	 "[Input Line Keys]", 0 /*quick_widgets */ };
+	 "[Input Line Keys]", 0 /*quick_widgets */, 0 };
 
 	Quick_input.widgets = quick_widgets;
 
@@ -1271,7 +1271,7 @@ edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char
     {
 	QuickDialog Quick_input =
 	{REPLACE_DLG_WIDTH, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
-	 "[Input Line Keys]", 0 /*quick_widgets */ };
+	 "[Input Line Keys]", 0 /*quick_widgets */, 0};
 
 	Quick_input.widgets = quick_widgets;
 
@@ -1336,7 +1336,7 @@ edit_search_dialog (WEdit * edit, char **search_text)
     {
 	QuickDialog Quick_input =
 	{SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
-	 "[Input Line Keys]", 0 /*quick_widgets */ };
+	 "[Input Line Keys]", 0 /*quick_widgets */, 0};
 
 	Quick_input.widgets = quick_widgets;
 
@@ -2560,7 +2560,7 @@ void edit_mail_dialog (WEdit * edit)
 
     QuickDialog Quick_input =
     {50, MAIL_DLG_HEIGHT, -1, 0, N_(" Mail "),
-     "[Input Line Keys]", 0};
+     "[Input Line Keys]", 0, 0};
 
     QuickWidget quick_widgets[] =
     {
