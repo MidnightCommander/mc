@@ -179,6 +179,7 @@ typedef struct Widget {
 #define  W_WANT_CURSOR       4
 #define  W_WANT_IDLE         8
 #define  W_IS_INPUT         16
+#define  W_PANEL_HIDDEN     32
 
 typedef struct Widget_Item {
     int dlg_id;
