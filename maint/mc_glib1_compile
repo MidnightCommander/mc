@@ -40,7 +40,7 @@ if test -f glist.c; then : ; else
 fi
 
 rm -rf "$GLIB_INSTDIR"
-./configure --disable-shared --prefix="$GLIB_INSTDIR" || exit 1
+./configure --disable-shared --with-glib12 --prefix="$GLIB_INSTDIR" || exit 1
 make all || exit 1
 make install || exit 1
 
