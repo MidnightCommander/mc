@@ -6,6 +6,8 @@
  * This defines whole class of filesystems which contain single file
  * inside. It is somehow similar to extfs, except that extfs makes
  * whole virtual trees and we do only single virtual files. 
+ *
+ * Namespace: exports vfs_sfs_ops, shell (FIXME)
  */
 
 #include <config.h>
@@ -24,6 +26,7 @@
 
 #include "vfs.h"
 
+/* This is needed, or libvfs.so will lack symbol shell. Should look up who requires it */
 char *shell = "/bin/sh";
 
 struct cachedfile {
@@ -87,7 +90,7 @@ static int vfmake( vfs *me, char *name, char *cache )
     }
     free( name );
 
-    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, pad)) {
+    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, "/bin/sh", pad)) {
 	return -1;
     }
 
@@ -107,7 +110,7 @@ static char *redirect( vfs *me, char *name )
 	    (uptodate( cur->name, cur->cache )))
 	  /* FIXME: when not uptodate, we might want to kill cache
 	   * file immediately, not to wait until timeout. */ {
-	    vfs_stamp( &sfs_vfs_ops, cur );
+	    vfs_stamp( &vfs_sfs_ops, cur );
 	    return cur->cache;
 	}
 	cur = cur->next;
@@ -122,7 +125,7 @@ static char *redirect( vfs *me, char *name )
 	cur->next = head;
 	head = cur;
 
-	vfs_add_noncurrent_stamps (&sfs_vfs_ops, (vfsid) head, NULL);
+	vfs_add_noncurrent_stamps (&vfs_sfs_ops, (vfsid) head, NULL);
 	vfs_rm_parents (NULL);
 
 	return cache;
@@ -268,25 +271,15 @@ static void sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_change
 {
 }
 
-#ifdef HAVE_MMAP
-static caddr_t sfs_mmap (vfs *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
-{
-    int fd = * (int *)data;
-
-    return mmap (addr, len, prot, flags, fd, offset);
-}
-
-static int sfs_munmap (vfs *me, caddr_t addr, size_t len, void *data)
-{
-    return munmap (addr, len);
-}
-#endif
-
 extern int local_close (void *data);
 extern int local_read (void *data, char *buffer, int count);
 extern int local_fstat (void *data, struct stat *buf);
 extern int local_errno (vfs *me);
 extern int local_lseek (void *data, off_t offset, int whence);
+#ifdef HAVE_MMAP
+extern caddr_t local_mmap (vfs *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset);
+extern int local_munmap (vfs *me, caddr_t addr, size_t len, void *data);
+#endif
 
 static int sfs_init (vfs *me)
 {
@@ -369,7 +362,7 @@ static int sfs_which (vfs *me, char *path)
     return -1;
 }
 
-vfs sfs_vfs_ops = {
+vfs vfs_sfs_ops = {
     NULL,	/* This is place of next pointer */
     "Signle file filesystems",
     F_EXEC,	/* flags */
@@ -420,12 +413,12 @@ vfs sfs_vfs_ops = {
     
     NULL,
     NULL,
-    
     NULL,
     NULL
+
 #ifdef HAVE_MMAP
-    ,sfs_mmap,
-    sfs_munmap
+    ,local_mmap,
+    local_munmap
 #endif
 };
 

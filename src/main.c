@@ -906,18 +906,6 @@ directory_history_add (WPanel * panel, char *s)
     panel_update_marks (panel);
 }
 
-/* Translate ftp://user:password@host/directory to 
-              /#ftp:user:password@host/directory.
- */
-static char *
-translate_url_to_new_syntax (const char *p)
-{
-    if (strncmp (p, "ftp://", 6) == 0)
-        return copy_strings ("/#ftp:", p + 6, 0);
-    else
-        return strdup (p);
-}
-
 /*
  *  If we moved to the parent directory move the selection pointer to
  *  the old directory name; If we leave VFS dir, remove FS specificator.
@@ -949,7 +937,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     struct vfs_stamping *parent;
 #endif    
     olddir = strdup (panel->cwd);
-    translated_url = new_dir = translate_url_to_new_syntax (new_dir);
+    translated_url = new_dir = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
     
@@ -1463,7 +1451,7 @@ translated_mc_chdir (char *dir)
 {
 	char *newdir;
 
-	newdir = translate_url_to_new_syntax (dir);
+	newdir = vfs_translate_url (dir);
 	mc_chdir (newdir);
 	free (newdir);
 }

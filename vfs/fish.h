@@ -11,16 +11,17 @@ struct direntry
     char *local_filename;
     int local_is_temp:1;
     int freshly_created:1;
-    int linear:1;
     struct stat local_stat;
     char *remote_filename;
     struct stat s;
     struct stat *l_stat;
     struct connection *bucket;
 
-    int tmp_reget;
-
     int got, total;	/* Bytes transfered / bytes need to be transfered */
+    int linear_state;
+#define LS_NONLIN 0		/* Not using linear access at all */
+#define LS_LINEAR_CLOSED 1	/* Using linear access, but not open, yet */
+#define LS_LINEAR_OPEN 2	/* Using linear access, open */
 };
 
 struct dir

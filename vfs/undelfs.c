@@ -672,7 +672,7 @@ undelfs_free(vfsid id)
     undelfs_shutdown ();
 }
 
-vfs undelfs_vfs_ops = {
+vfs vfs_undelfs_ops = {
     NULL,	/* This is place of next pointer */
     "Undelete filesystem for ext2",
     0,	/* flags */

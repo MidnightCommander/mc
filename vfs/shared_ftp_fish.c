@@ -1,6 +1,7 @@
 /*
  * Shared code between the fish.c and the ftp.c file systems
  *
+ * Namespace pollution: X_hint_reread, X_flushdir.
  */
 static int         store_file           (struct direntry *fe);
 static int         retrieve_file        (struct direntry *fe);
@@ -10,7 +11,7 @@ static struct dir *retrieve_dir         (struct connection *bucket,
 					 int resolve_symlinks);
 static void	   my_forget		(char *path);
 
-static int         linear_start         (struct direntry *fe);
+static int         linear_start         (struct direntry *fe, int from);
 static int         linear_read          (struct direntry *fe, void *buf, int len);
 static void        linear_close         (struct direntry *fe);
 
@@ -73,10 +74,6 @@ direntry_destructor (void *data)
     struct direntry *fe = data;
     
     fe->count--;
-    if ((fe->tmp_reget == 1 && fe->local_filename)){
-	unlink (fe->local_filename);
-	fe->tmp_reget = 0;
-    }
 	
     if (fe->count > 0)
         return;
@@ -176,7 +173,7 @@ flush_all_directory(struct connection *bucket)
     linklist_delete_all(qdcache(bucket), dir_destructor);
 }
 
-void X_fill_names (vfs *me, void (*func)(char *))
+static void X_fill_names (vfs *me, void (*func)(char *))
 {
     struct linklist *lptr;
     char   *path_name;
@@ -335,8 +332,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 		        if (IS_LINEAR(flags)) {
 		            ent->local_is_temp = 0;
 		            ent->local_filename = NULL;
-		            if (!linear_start (ent))
-		                return NULL;
+			    ent->linear_state = LS_LINEAR_CLOSED;
 		            return ent;
 		        }
 		        if (!retrieve_file(ent))
@@ -355,7 +351,6 @@ _get_file_entry(struct connection *bucket, char *file_name,
 
 	ent = xmalloc(sizeof(struct direntry), "struct direntry");
 	ent->freshly_created = 0;
-	ent->tmp_reget = 0;
 	if (ent == NULL) ERRNOR (ENOMEM, NULL);
 	ent->count = 1;
 	ent->linkname = NULL;
@@ -448,7 +443,7 @@ get_file_entry(char *path, int op, int flags)
     free(remote_path);
 #if 0
     if (op & DO_FREE_RESOURCE)
-	vfs_add_noncurrent_stamps (&X_vfs_ops, (vfsid) bucket, NULL);
+	vfs_add_noncurrent_stamps (&vfs_X_ops, (vfsid) bucket, NULL);
 #endif
     return fe;
 }
@@ -487,8 +482,8 @@ static void *s_open (vfs *me, char *file, int flags, int mode)
 	free(fp);
         return NULL;
     }
-    fe->linear = IS_LINEAR(flags);
-    if (!fe->linear) {
+    fe->linear_state = IS_LINEAR(flags);
+    if (!fe->linear_state) {
         fp->local_handle = open(fe->local_filename, flags, mode);
         if (fp->local_handle < 0) {
 	    free(fp);
@@ -512,7 +507,16 @@ static int s_read (void *data, char *buffer, int count)
     int n;
     
     fp = data;
-    if (fp->fe->linear)
+    if (fp->fe->linear_state == LS_LINEAR_CLOSED) {
+        print_vfs_message ("Starting linear transfer...");
+	if (!linear_start (fp->fe, 0))
+	    return -1;
+    }
+
+    if (fp->fe->linear_state == LS_LINEAR_CLOSED)
+        vfs_die ("linear_start() did not set linear_state!");
+
+    if (fp->fe->linear_state == LS_LINEAR_OPEN)
         return linear_read (fp->fe, buffer, count);
         
     n = read (fp->local_handle, buffer, count);
@@ -525,6 +529,9 @@ static int s_write (void *data, char *buf, int nbyte)
 {
     struct filp *fp;
     int n;
+
+    if (fp->fe->linear_state)
+        vfs_die ("You may not write to linear file");
     
     fp = data;
     n = write (fp->local_handle, buf, nbyte);
@@ -545,7 +552,7 @@ static int s_close (void *data)
 	if (normal_flush)
 	    flush_all_directory(fp->fe->bucket);
     }
-    if (fp->fe->linear)
+    if (fp->fe->linear_state == LS_LINEAR_OPEN)
         linear_close(fp->fe);
     if (fp->local_handle >= 0)
         close(fp->local_handle);
@@ -598,7 +605,7 @@ static void *s_opendir (vfs *me, char *dirname)
     dirp->dcache->count++;
     return (void *)dirp;
 error_return:
-    vfs_add_noncurrent_stamps (&X_vfs_ops, (vfsid) bucket, NULL);
+    vfs_add_noncurrent_stamps (&vfs_X_ops, (vfsid) bucket, NULL);
     free(remote_path);
     free(dirp);
     return NULL;
@@ -720,7 +727,7 @@ static int s_chdir (vfs *me, char *path)
     qcdir(bucket) = remote_path;
     bucket->cwd_defered = 1;
     
-    vfs_add_noncurrent_stamps (&X_vfs_ops, (vfsid) bucket, NULL);
+    vfs_add_noncurrent_stamps (&vfs_X_ops, (vfsid) bucket, NULL);
     return 0;
 }
 
@@ -728,6 +735,16 @@ static int s_lseek (void *data, off_t offset, int whence)
 {
     struct filp *fp = data;
 
+    if (fp->fe->linear_state == LS_LINEAR_OPEN)
+        vfs_die ("You promissed not to seek!");
+    if (fp->fe->linear_state == LS_LINEAR_CLOSED) {
+        print_vfs_message ("Preparing reget...");
+        if (whence != SEEK_SET)
+	    vfs_die ("You may not do such seek on linear file");
+	if (!linear_start (fp->fe, offset))
+	    return -1;
+	return offset;
+    }
     return lseek(fp->local_handle, offset, whence);
 }
 
@@ -795,7 +812,7 @@ static void s_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
     }
 }
 
-void
+static void
 X_done(vfs *me)
 {
     linklist_destroy(connections_list, connection_destructor);
@@ -807,7 +824,8 @@ X_done(vfs *me)
 
 static int retrieve_file(struct direntry *fe)
 {
-    int total, tmp_reget = 0; /* do_reget; -- I think it can not work: pavel@ucw.cz */
+    /* If you want reget, you'll have to open file with O_LINEAR */
+    int total = 0;
     char buffer[8192];
     int local_handle, n;
     int stat_size = fe->s.st_size;
@@ -823,12 +841,11 @@ static int retrieve_file(struct direntry *fe)
 	goto error_4;
     }
 
-    if (!linear_start (fe))
+    if (!linear_start (fe, 0))
         goto error_3;
 
     /* Clear the interrupt status */
     enable_interrupt_key ();
-    total = (tmp_reget > 0) ? tmp_reget : 0;
     
     while (1) {
 	if ((n = linear_read(fe, buffer, sizeof(buffer))) < 0)
@@ -837,7 +854,7 @@ static int retrieve_file(struct direntry *fe)
 	    break;
 
 	total += n;
-	print_vfs_stats (X, "Getting file", fe->remote_filename, total, stat_size);
+	vfs_print_stats (X, "Getting file", fe->remote_filename, total, stat_size);
 
         while (write(local_handle, buffer, n) < 0) {
 	    if (errno == EINTR) {
@@ -858,9 +875,6 @@ static int retrieve_file(struct direntry *fe)
 
     if (stat (fe->local_filename, &fe->local_stat) < 0)
         fe->local_stat.st_mtime = 0;
-    
-    if (tmp_reget > 0)
-	fe->tmp_reget = 1;
     
     return 1;
 error_1:

@@ -2053,13 +2053,17 @@ do_enter (WPanel *panel)
 	        free (cmd);
 	    } 
 #ifdef USE_VFS	    	    
-	    else if (vfs_current_is_extfs ()) {
-	        char *tmp = vfs_get_current_dir();
-	        char *tmp2;
+	    else {
+	      /* if (vfs_current_is_extfs ()) - I see no reason why
+                 filesystems other than extfs could not implement same
+                 call...                              -- pavel@ucw.cz*/
+	        char *tmp;
 
-		tmp2 = concat_dir_and_file (tmp, selection (panel)->fname);
-	        extfs_run(tmp2);
-	        free (tmp2);
+		tmp = concat_dir_and_file (vfs_get_current_dir(), selection (panel)->fname);
+		if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
+		    message (1, _(" Warning "), _(" No action taken "));
+
+	        free (tmp);
 	    }
 #endif /* USE_VFS */	    
 	    return 1;
@@ -2290,7 +2294,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 #endif
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0){
-	    message (1, " Error ", " Can't chdir to %s \n %s ",
+	    message (1, _(" Error "), _(" Can't chdir to %s \n %s "),
 		     panel->cwd, unix_error_string (errno));
 	} else
 	    subshell_chdir (panel->cwd);

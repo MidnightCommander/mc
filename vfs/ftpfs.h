@@ -11,14 +11,16 @@ struct direntry
     char *local_filename, *remote_filename;
     int local_is_temp:1;
     int freshly_created:1;
-    int linear:1;		/* Did they promiss not to seek? */
-    int tmp_reget;
     struct stat local_stat;
     struct stat s;
     struct stat *l_stat;
     struct connection *bucket;
 
     int data_sock;		/* For linear_ operations */
+    int linear_state;
+#define LS_NONLIN 0		/* Not using linear access at all */
+#define LS_LINEAR_CLOSED 1	/* Using linear access, but not open, yet */
+#define LS_LINEAR_OPEN 2	/* Using linear access, open */
 };
 
 struct dir

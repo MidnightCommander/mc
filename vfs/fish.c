@@ -27,6 +27,8 @@
  * Syntax of path is: /#sh:user@host[:Cr]/path
  *	where C means you want compressed connection,
  *	and r means you want to use rsh
+ *
+ * Namespace: fish_vfs_ops exported.
  */
    
 #include <config.h>
@@ -63,7 +65,6 @@
 #include <sys/param.h>
 
 #include "../src/mem.h"
-#define WANT_PARSE_LS_LGA
 #include "vfs.h"
 #include "tcputil.h"
 #include "../src/util.h"
@@ -111,7 +112,7 @@ static char *get_path (struct connection **bucket, char *path);
 
 static char *my_get_host_and_username (char *path, char **host, char **user, int *flags, char **pass)
 {
-    return get_host_and_username (path, host, user, flags, 0, 0, pass);
+    return vfs_get_host_and_username (path, host, user, flags, 0, 0, pass);
 }
 
 static int decode_reply (char *s, int was_garbage)
@@ -369,7 +370,7 @@ static void my_forget (char *path)
 
 #define X "fish"
 #define X_myname "/#sh:"
-#define X_vfs_ops fish_vfs_ops
+#define vfs_X_ops vfs_fish_ops
 #define X_fill_names fish_fill_names
 #define X_hint_reread fish_hint_reread
 #define X_flushdir fish_flushdir
@@ -500,17 +501,17 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
 	case 'S': fe->s.st_size = atoi(buffer+1); break;
 	case 'P': {
 	              int i;
-		      if ((i = parse_filetype(buffer[1])) ==-1)
+		      if ((i = vfs_parse_filetype(buffer[1])) ==-1)
 			  break;
 		      fe->s.st_mode = i;
-		      if ((i = parse_filemode(buffer+2)) ==-1)
+		      if ((i = vfs_parse_filemode(buffer+2)) ==-1)
 			  break;
 		      fe->s.st_mode |= i;
 	          }
 	          break;
 	case 'd': {
-		      split_text(buffer+1);
-		      if (!parse_filedate(0, &fe->s.st_ctime))
+		      vfs_split_text(buffer+1);
+		      if (!vfs_parse_filedate(0, &fe->s.st_ctime))
 			  break;
 		      fe->s.st_atime = fe->s.st_mtime = fe->s.st_ctime;
 		  }
@@ -633,14 +634,16 @@ error_return:
     return 0;
 }
 
-static int linear_start(struct direntry *fe)
+static int linear_start(struct direntry *fe, int offset)
 {
+    if (offset)
+        ERRNOR (EOPNOTSUPP, 0);
     fe->local_stat.st_mtime = 0;
     if (command(fe->bucket, WANT_STRING, 
 		"#RETR %s\nls -l %s | ( read var1 var2 var3 var4 var5 var6; echo $var5 ); echo '### 100'; cat %s; echo '### 200'\n", 
 		fe->remote_filename, fe->remote_filename, fe->remote_filename )
 	!= PRELIM) ERRNOR (EACCES, 0);
-
+    fe->linear_state = LS_LINEAR_OPEN;
     fe->got = 0;
     fe->total = atoi(reply_str);
     return 1;
@@ -691,14 +694,21 @@ linear_close (struct direntry *fe)
         linear_abort(fe);
 }
 
-int fish_ctl (void *data, int ctlop, int arg)
+static int
+fish_ctl (void *data, int ctlop, int arg)
 {
     struct filp *fp = data;
     switch (ctlop) {
         case MCCTL_IS_NOTREADY:
 	    {
-	        int v = select_on_two (qsockr(fp->fe->bucket), 0);
-		
+	        int v;
+
+		if (!fp->fe->linear_state)
+		    vfs_die ("You may not do this");
+		if (fp->fe->linear_state == LS_LINEAR_CLOSED)
+		    return 0;
+
+		v = select_on_two (qsockr(fp->fe->bucket), 0);
 		if (((v < 0) && (errno == EINTR)) || v == 0)
 		    return 1;
 		return 0;
@@ -715,14 +725,14 @@ send_fish_command(struct connection *bucket, char *cmd, int flags)
     int flush_directory_cache = (flags & OPT_FLUSH) && (normal_flush > 0);
 
     r = command (bucket, WAIT_REPLY, cmd);
-    vfs_add_noncurrent_stamps (&fish_vfs_ops, (vfsid) bucket, NULL);
+    vfs_add_noncurrent_stamps (&vfs_fish_ops, (vfsid) bucket, NULL);
     if (r != COMPLETE) ERRNOR (EPERM, -1);
     if (flush_directory_cache)
 	flush_all_directory(bucket);
     return 0;
 }
 
-int
+static int
 fish_init (vfs *me)
 {
     connections_list = linklist_init();
@@ -743,7 +753,8 @@ fish_init (vfs *me)
     free(remote_path); \
     return send_fish_command(bucket, buf, flags);
 
-int fish_chmod (vfs *me, char *path, int mode)
+static int
+fish_chmod (vfs *me, char *path, int mode)
 {
     PREFIX
     sprintf(buf, "#CHMOD %4.4o %s\nchmod %4.4o %s; echo '### 000'\n", 
@@ -753,7 +764,7 @@ int fish_chmod (vfs *me, char *path, int mode)
 }
 
 #define FISH_OP(name, chk, string) \
-int fish_##name (vfs *me, char *path1, char *path2) \
+static int fish_##name (vfs *me, char *path1, char *path2) \
 { \
     char buf[120]; \
     char *remote_path1 = NULL, *remote_path2 = NULL; \
@@ -775,7 +786,8 @@ FISH_OP(rename, XTEST, "#RENAME %s %s\nmv %s %s; echo '*** 000'" );
 FISH_OP(link,   XTEST, "#LINK %s %s\nln %s %s; echo '*** 000'" );
 FISH_OP(symlink,     , "#SYMLINK %s %s\nln -s %s %s; echo '*** 000'" );
 
-int fish_chown (vfs *me, char *path, int owner, int group)
+static int
+fish_chown (vfs *me, char *path, int owner, int group)
 {
     char *sowner, *sgroup;
     PREFIX
@@ -814,7 +826,7 @@ static int fish_rmdir (vfs *me, char *path)
     POSTFIX(OPT_FLUSH);
 }
 
-vfs fish_vfs_ops = {
+vfs vfs_fish_ops = {
     NULL,	/* This is place of next pointer */
     "FIles tranferred over SHell",
     F_EXEC,	/* flags */
@@ -867,8 +879,6 @@ vfs fish_vfs_ops = {
     fish_rmdir,
     fish_ctl,
     s_setctl
-#ifdef HAVE_MMAP
-    , NULL,
-    NULL
-#endif
+
+MMAPNULL
 };

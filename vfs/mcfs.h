@@ -47,5 +47,3 @@ enum {
     MC_PASS
 
 };
-
-extern char *mcfs_current_dir;

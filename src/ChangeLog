@@ -1,3 +1,14 @@
+Mon Oct 12 22:47:53 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* file.c (copy_file_file): MCCTL_SETREMOTECOPY is no longer used
+	
+	* file.c (copy_file_file): do_reget is now correctly done using
+ 	open()/lseek() pair
+
+Wed Oct  7 22:20:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* file.c: Ask user if (s)he wants to delete incomplete file
+
 Sun Oct 11 20:21:20 1998  Peter Kleiweg <kleiweg@let.rug.nl>
 
 	* mfmt.c (main): When there are an even number of empty lines 

@@ -96,17 +96,17 @@ struct utimbuf {
     } vfs;
 
     /* Other file systems */
-    extern vfs local_vfs_ops;
-    extern vfs tarfs_vfs_ops;
+    extern vfs vfs_local_ops;
+    extern vfs vfs_tarfs_ops;
 
-    extern vfs ftpfs_vfs_ops;
-    extern vfs fish_vfs_ops;
-    extern vfs mcfs_vfs_ops;
+    extern vfs vfs_ftpfs_ops;
+    extern vfs vfs_fish_ops;
+    extern vfs vfs_mcfs_ops;
     
-    extern vfs extfs_vfs_ops;
-    extern vfs sfs_vfs_ops;
+    extern vfs vfs_extfs_ops;
+    extern vfs vfs_sfs_ops;
 
-    extern vfs undelfs_vfs_ops;
+    extern vfs vfs_undelfs_ops;
 
     struct vfs_stamping {
         vfs *v;
@@ -128,8 +128,10 @@ struct utimbuf {
     char *vfs_canon (char *path);
     char *mc_get_current_wd (char *buffer, int bufsize);
     int vfs_current_is_local (void);
+#if 0
     int vfs_current_is_extfs (void);
     int vfs_current_is_tarfs (void);
+#endif
     int vfs_file_is_local (char *name);
     int vfs_file_is_ftp (char *filename);
     char *vfs_get_current_dir (void);
@@ -142,12 +144,9 @@ struct utimbuf {
     void vfs_free_resources(char *path);
     void vfs_timeout_handler ();
     int vfs_timeouts ();
-    void vfs_force_expire (char *pathname);
 
     void vfs_fill_names (void (*)(char *));
-
-    /* Required for the vfs_canon routine */
-    char *tarfs_analysis (char *inname, char **archive, int is_dir);
+    char *vfs_translate_url (char *);
 
     void ftpfs_set_debug (char *file);
 #ifdef USE_NETCODE
@@ -257,7 +256,6 @@ struct utimbuf {
 #   define mc_rmdir rmdir
 #   define is_special_prefix(x) 0
 #   define vfs_type(x) (vfs *)(NULL)
-#   define vfs_setup_wd()
 #   define vfs_init()
 #   define vfs_shut()
 #   define vfs_canon(p) strdup (canonicalize_pathname(p))
@@ -292,17 +290,19 @@ struct utimbuf {
 
 #define mc_errno errno
 
-#ifdef WANT_PARSE_LS_LGA
-int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname);
-int split_text (char *p);
-int parse_filetype (char c);
-int parse_filemode (char *p);
-int parse_filedate(int idx, time_t *t);
-#endif
+/* These functions are meant for use by vfs modules */
+
+extern int vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname);
+extern int vfs_split_text (char *p);
+extern int vfs_parse_filetype (char c);
+extern int vfs_parse_filemode (char *p);
+extern int vfs_parse_filedate(int idx, time_t *t);
+
 extern void vfs_die (char *msg);
 extern char *vfs_get_password (char *msg);
-
-void print_vfs_stats (char *fs_name, char *action, char *file_name, int have, int need);
+extern char *vfs_get_host_and_username (char *path, char **host, char **user, int *port,
+					int default_port, int default_is_anon, char **pass);
+extern void vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need);
 
 #define MCCTL_SETREMOTECOPY	0
 #define MCCTL_ISREMOTECOPY	1
@@ -312,14 +312,7 @@ void print_vfs_stats (char *fs_name, char *action, char *file_name, int have, in
 #define MCCTL_REMOVELOCALCOPY   5
 #define MCCTL_IS_NOTREADY	6
 #define MCCTL_FORGET_ABOUT	7
-
-/* Return codes from the ${fs}_ctl routine */
-
-#define MCERR_TARGETOPEN	-1    /* Can't open target file */
-#define MCERR_READ		-2    /* Read error on source file */
-#define MCERR_WRITE		-3    /* Write error on target file */
-#define MCERR_FINISH		-4    /* Finished transfer */
-#define MCERR_DATA_ON_STDIN     -5    /* Data waiting on stdin to be processed */
+#define MCCTL_EXTFS_RUN		8
 
 extern int vfs_flags;
 extern uid_t vfs_uid;
@@ -354,7 +347,7 @@ extern void mc_vfs_done( void );
 #define NO_LINEAR(a) a
 #else
 #define O_LINEAR O_APPEND
-#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))
+#define IS_LINEAR(a) ((a) == (O_RDONLY | O_LINEAR))	/* Return only 0 and 1 ! */
 #define NO_LINEAR(a) (((a) == (O_RDONLY | O_LINEAR)) ? O_RDONLY : (a))
 #endif
 
@@ -364,6 +357,10 @@ extern void mc_vfs_done( void );
  *     	a) to read file linearily from beggining to the end
  *	b) not to open another file before you close this one
  *		(this will likely go away in future)
+ *	as a special gift, you may
+ *	c) lseek() immediately after open(), giving ftpfs chance to
+ *	   reget. Be warned that this lseek() can fail, and you _have_
+ *         to handle that gratefully.
  *
  * O_LINEAR allows filesystems not to create temporary file in some
  * cases (ftp transfer).				-- pavel@ucw.cz

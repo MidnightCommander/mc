@@ -110,13 +110,7 @@
 
 /* }}} */
 
-#if USE_VFS && USE_NETCODE
-extern
-#else
-static
-#endif
-
-int do_reget;
+static int do_reget;
 
 /* rcsid [] = "$Id$" */
 int verbose = 1;
@@ -718,36 +712,25 @@ free_linklist (struct link **linklist)
     *linklist = NULL;
 }
 
+int 
+is_in_linklist (struct link *lp, char *path, struct stat *sb)
+{
+   ino_t ino = sb->st_ino;
+   dev_t dev = sb->st_dev;
 #ifdef USE_VFS
-int 
-is_in_linklist (struct link *lp, char *path, struct stat *sb)
-{
-   ino_t ino = sb->st_ino;
-   dev_t dev = sb->st_dev;
    vfs *vfs = vfs_type (path);
-   
-   while (lp) {
-      if (lp->vfs == vfs && lp->ino == ino && lp->dev == dev )
-          return 1;
-      lp = lp->next;
-   }
-   return 0;
-}
-#else
-int 
-is_in_linklist (struct link *lp, char *path, struct stat *sb)
-{
-   ino_t ino = sb->st_ino;
-   dev_t dev = sb->st_dev;
-   
-   while (lp) {
-      if (lp->ino == ino && lp->dev == dev )
-          return 1;
-      lp = lp->next;
-   }
-   return 0;
-}
 #endif
+   
+   while (lp) {
+#ifdef USE_VFS
+      if (lp->vfs == vfs)
+#endif
+	  if (lp->ino == ino && lp->dev == dev )
+	      return 1;
+      lp = lp->next;
+   }
+   return 0;
+}
 
 /* Returns 0 if the inode wasn't found in the cache and 1 if it was found
    and a hardlink was succesfully made */
@@ -761,8 +744,10 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
     struct stat link_stat;
     char *p;
 
+#if 1	/* What will happen if we kill this line? mc_link() will fail on this and it is right behaivour... */
     if (vfs_file_is_ftp (src_name))
         return 0;
+#endif
     for (lp = linklist; lp != NULL; lp = lp -> next)
         if (lp->vfs == my_vfs && lp->ino == ino && lp->dev == dev){
             if (!mc_stat (lp->name, &link_stat) && link_stat.st_ino == ino &&
@@ -776,7 +761,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
             	    }
             	}
             }
-            /* FIXME: Announce we couldn't make the hardlink */
+	    message_1s(1, MSG_ERROR, _(" Could not make the hardlink "));
             return 0;
         }
     lp = (struct link *) xmalloc (sizeof (struct link) + strlen (src_name) 
@@ -905,6 +890,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
        A single goto label is much easier to handle than a bunch of gotos ;-). */ 
     unsigned resources = 0; 
 
+    do_reget = 0; /* FIXME: We should not be using global variables! */
     return_status = FILE_RETRY;
 
     if (show_source (src_path) == FILE_ABORT
@@ -949,10 +935,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 
 	/* Should we replace destination? */
 	if (ask_overwrite) {
-	    if (vfs_file_is_ftp (src_path))
-		do_reget = -1;
-	    else
-		do_reget = 0;
+	    do_reget = 0;
 		    
 	    return_status = query_replace (dst_path, &sb, &sb2);
 	    if (return_status != FILE_CONT)
@@ -1010,10 +993,6 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
         }
     }
     
-    if (!do_append && !vfs_file_is_local (src_path) && vfs_file_is_local (dst_path)){
-	mc_setctl (src_path, MCCTL_SETREMOTECOPY, dst_path);
-    }
-
     gettimeofday (&tv_transfer_start, (struct timezone *) NULL);
 
  retry_src_open:
@@ -1027,6 +1006,12 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
     }
 
     resources |= 1;
+    if (do_reget) {
+        if (mc_lseek (src_desc, do_reget, SEEK_SET) != do_reget) {
+	    message_1s (1, _(" Warning "), _(" Reget failed, about to overwrite file "));
+	    do_reget = do_append = 0;
+	}
+    }
     
  retry_src_fstat:
     if (mc_fstat (src_desc, &sb)){
@@ -1080,7 +1065,6 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 
     buf = (char *) xmalloc (buf_size, "copy_file_file");
 
-
     eta_secs = 0.0;
     bps = 0;
     return_status = show_file_progress (0, file_size);
@@ -1090,7 +1074,7 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 
     {
 	struct timeval tv_current, tv_last_update, tv_last_input;
-        int    i, size, secs, update_secs;
+        int    secs, update_secs;
 	long   dt;
 	char   *stalled_msg;
 
@@ -1208,7 +1192,10 @@ ret:
 	
     if (resources & 4) {
         /* Remove short file */
-	mc_unlink (dst_path);
+        int result;
+        result = query_dialog ("Copy", _("Incomplete file was retrieved. Keep it?"), D_ERROR, 2, _("&Delete"), _("&Keep"));
+	if (!result)
+	    mc_unlink (dst_path);
     } else if (resources & (2|8)) {
         /* no short file and destination file exists */
 #ifndef OS2_NT 
@@ -1513,11 +1500,6 @@ move_file_file (char *s, char *d)
 	}
 
 	if (confirm_overwrite){
-	    if (vfs_file_is_ftp (s))
-		do_reget = -1;
-	    else
-		do_reget = 0;
-	    
 	    return_status = query_replace (d, &src_stats, &dst_stats);
 	    if (return_status != FILE_CONT)
 		return return_status;
@@ -2350,8 +2332,8 @@ panel_operate (void *source_panel, int operation, char *thedefault)
 
 	/* If we are the parent */
 	if (v == 1){
-	    vfs_force_expire (panel->cwd);
-	    vfs_force_expire (dest);
+	    mc_setctl (panel->cwd, MCCTL_FORGET_ABOUT, NULL);
+	    mc_setctl (dest,       MCCTL_FORGET_ABOUT, NULL);
 	    return 0;
 	}
     }
@@ -2745,7 +2727,7 @@ init_replace (enum OperationMode mode)
     /* "this target..." widgets */
     tk_new_frame (replace_dlg, "p.");
 	if (!S_ISDIR (d_stat->st_mode)){
-		if ((do_reget == -1 && d_stat->st_size && s_stat->st_size > d_stat->st_size))
+		if ((d_stat->st_size && s_stat->st_size > d_stat->st_size))
 			ADD_RD_BUTTON(7);
 
 		ADD_RD_BUTTON(8);
@@ -2792,7 +2774,7 @@ real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_sta
 	    return FILE_CONT;
 	
     case REPLACE_REGET:
-	do_reget = _d_stat->st_size;
+	do_reget = _d_stat->st_size;	/* Carefull: we fall through and set do_append */
 	
     case REPLACE_APPEND:
         do_append = 1;

@@ -1,3 +1,28 @@
+Mon Oct 12 22:42:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* sfs.c: reuse mmap from local.c
+
+	* ftpfs.c, fish.c, shared_ftp_fish.c: horrible reget hack removed,
+ 	and replaced with open(,O_LINEAR); lseek() combination
+
+Sun Oct 11 01:44:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* mcfs.c (open_tcp_link): Moved: it used to be in utilvfs.c, but
+ 	as it deals with portmapper, it is probably usefull for mcfs
+
+	* vfs.h (MCERR_*): these are no longer needed
+
+	* vfs.c (vfs_translate_url): translating of url's moved to vfs
+ 	code
+
+	* all around: trying to reduce namespace pollution. All special
+ 	functions (like extfs_run) should be done using mc_setctl()
+ 	interface. At the end, all non-static functions in vfs layer
+ 	should begin with vfs_ and should be declared in vfs.h (however
+ 	that goal is far away).
+
+	* all over the code: replace X_vfs_ops to vfs_X_ops
+	
 Mon Oct  5 20:11:01 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c: added stat to avoid hiding files by naming them

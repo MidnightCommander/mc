@@ -18,6 +18,8 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+/* Namespace: vfs_tarfs_ops, tar_gzipped_memlimit */
+
 #include <config.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -50,7 +52,7 @@
 int tar_gzipped_memlimit = 1*1024*1024;
 
 /* used to rotate the dash */
-int dash_number = 0;
+static int dash_number = 0;
 
 #define	isodigit(c)	( ((c) >= '0') && ((c) <= '7') )
 /*
@@ -58,7 +60,7 @@ int dash_number = 0;
  *
  * Result is -1 if the field is invalid (all blank, or nonoctal).
  */
-long from_oct (int digs, char *where)
+static long from_oct (int digs, char *where)
 {
     register long value;
 
@@ -85,7 +87,7 @@ static struct stat hstat;		/* Stat struct corresponding */
 static char *current_file_name, *current_link_name;
 static struct entry *find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 
-void tarfs_fill_names (vfs *me, void (*func)(char *))
+static void tarfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct archive *a = first_archive;
     char *name;
@@ -718,7 +720,7 @@ static int read_header (struct archive *archive, int tard)
  * Main loop for reading an archive.
  * Returns 0 on success, -1 on error.
  */
-int read_tar_archive (char *name, struct archive **pparc)
+static int read_tar_archive (char *name, struct archive **pparc)
 {
     int status = 3;		/* Initial status at start of archive */
     int prev_status;
@@ -800,12 +802,12 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 			return NULL;
 /* Has the cached archive been changed on the disk? */
 	    if (parc->tarstat.st_mtime < stat_buf.st_mtime) { /* Yes, reload! */
-		(*tarfs_vfs_ops.free) ((vfsid) parc);
-		vfs_rmstamp (&tarfs_vfs_ops, (vfsid) parc, 0);
+		(*vfs_tarfs_ops.free) ((vfsid) parc);
+		vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc, 0);
 		break;
 	    }
 		    /* Hasn't been modified, give it a new timeout */
-	    vfs_stamp (&tarfs_vfs_ops, (vfsid) parc);
+	    vfs_stamp (&vfs_tarfs_ops, (vfsid) parc);
 	    goto return_success;
 	}
     if (do_not_open)
@@ -814,7 +816,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
         result = read_tar_archive (archive_name, &parc);
     if (result == -1) ERRNOR (EIO, NULL);
     v = vfs_type (archive_name);
-    if (v == &local_vfs_ops) {
+    if (v == &vfs_local_ops) {
 	parent = NULL;
     } else {
 	parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
@@ -822,7 +824,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	parent->next = 0;
 	parent->id = (*v->getid) (v, archive_name, &(parent->parent));
     }
-    vfs_add_noncurrent_stamps (&tarfs_vfs_ops, (vfsid) parc, parent);
+    vfs_add_noncurrent_stamps (&vfs_tarfs_ops, (vfsid) parc, parent);
     vfs_rm_parents (parent);
 return_success:
     *archive = parc;
@@ -918,7 +920,7 @@ static void *tar_open (vfs *me, char *file, int flags, int mode)
     entry->inode->is_open++;
 
      /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (&tarfs_vfs_ops, (vfsid) archive, 1);
+    vfs_rmstamp (&vfs_tarfs_ops, (vfsid) archive, 1);
     archive->fd_usage++;
     return tar_info;
 }
@@ -978,7 +980,7 @@ static int tar_close (void *data)
         vfs *v;
         
 	v = vfs_type (file->archive->name);
-	if (v == &local_vfs_ops) {
+	if (v == &vfs_local_ops) {
 	    parent = NULL;
 	} else {
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
@@ -986,7 +988,7 @@ static int tar_close (void *data)
 	    parent->next = 0;
 	    parent->id = (*v->getid) (v, file->archive->name, &(parent->parent));
 	}
-        vfs_add_noncurrent_stamps (&tarfs_vfs_ops, (vfsid) (file->archive), parent);
+        vfs_add_noncurrent_stamps (&vfs_tarfs_ops, (vfsid) (file->archive), parent);
 	vfs_rm_parents (parent);
     }
     (file->entry->inode->is_open)--;
@@ -1151,12 +1153,7 @@ static void tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_change
    since it will be freed when tar archive will be freed */
 }
 
-int tarfs_init(vfs *me)
-{
-    return 1;
-}
-
-vfs tarfs_vfs_ops =
+vfs vfs_tarfs_ops =
 {
     NULL,	/* This is place of next pointer */
     "TApe aRchiver decompressor",
@@ -1164,7 +1161,7 @@ vfs tarfs_vfs_ops =
     "utar",	/* prefix */
     NULL,	/* data */
     0,		/* errno */
-    tarfs_init,
+    NULL,
     NULL,
     tarfs_fill_names,
     NULL,
@@ -1210,8 +1207,6 @@ vfs tarfs_vfs_ops =
     NULL,
     NULL,
     NULL
-#ifdef HAVE_MMAP
-    , NULL,
-    NULL
-#endif    
+
+MMAPNULL
 };

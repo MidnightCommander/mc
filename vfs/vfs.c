@@ -23,6 +23,9 @@
  * strings you pass to them. This is acutally ok as you strdup what
  * you are passing to them, anyway; still, beware.  */
 
+/* Namespace: exports *many* functions with vfs_ prefix; exports
+   parse_ls_lga and friends which do not have that prefix. */
+
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
@@ -50,9 +53,8 @@
 #include "../src/dialog.h"
 #endif
 #include "vfs.h"
-#include "mcfs.h"
+#include "extfs.h"		/* FIXME: we should not know anything about our modules */
 #include "names.h"
-#include "extfs.h"
 #ifdef USE_NETCODE
 #   include "tcputil.h"
 #endif
@@ -65,8 +67,8 @@ int vfs_flags = 0;    /* Flags */
 extern int cd_symlinks; /* Defined in main.c */
 
 /* They keep track of the current directory */
-static vfs *current_vfs = &local_vfs_ops;
-char *current_dir = NULL;
+static vfs *current_vfs = &vfs_local_ops;
+static char *current_dir = NULL;
 
 /*
  * FIXME: this is broken. It depends on mc not crossing border on month!
@@ -98,7 +100,7 @@ static int get_bucket (void)
     return 0; /* Shut up, stupid gcc */
 }
 
-static vfs *vfs_list = &local_vfs_ops;	/* It _has_ to be the first */
+static vfs *vfs_list = &vfs_local_ops;	/* It _has_ to be the first */
 
 #define FOR_ALL_VFS for (vfs=vfs_list; vfs; vfs=vfs->next) 
 
@@ -118,7 +120,7 @@ vfs *vfs_type_from_op (char *path)
 {
     vfs *vfs;
     FOR_ALL_VFS {
-        if (vfs == &local_vfs_ops)	/* local catches all */ 
+        if (vfs == &vfs_local_ops)	/* local catches all */ 
 	    return NULL;
         if (vfs->which) {
 	    if ((*vfs->which) (vfs, path) != -1)
@@ -133,9 +135,8 @@ vfs *vfs_type_from_op (char *path)
     return NULL; /* shut up stupid gcc */
 }
 
-int path_magic( char *path )
+static int path_magic( char *path )
 {
-    int res;
     struct stat buf;
 
     if (vfs_flags & FL_ALWAYS_MAGIC)
@@ -182,7 +183,7 @@ vfs *vfs_split (char *path, char **inpath, char **op)
     return ret;
 }
 
-vfs*
+vfs *
 vfs_rosplit (char *path)
 {
     char *semi = strrchr (path, '#');
@@ -209,7 +210,7 @@ vfs *vfs_type (char *path)
 {
     vfs *vfs = vfs_rosplit(path);
     if (!vfs)
-        vfs = &local_vfs_ops;
+        vfs = &vfs_local_ops;
     return vfs;
 }
 
@@ -226,7 +227,7 @@ int vfs_timeouts ()
 
 void vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
-    if (v != &local_vfs_ops && id != (vfsid)-1){
+    if (v != &vfs_local_ops && id != (vfsid)-1){
         struct vfs_stamping *stamp, *st1;
         
         for (stamp = stamps; stamp != NULL; st1 = stamp, stamp = stamp->next)
@@ -599,50 +600,6 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 
 #define ISSLASH(a) (!a || (a == '/'))
 
-void
-vfs_kill_dots (char *path, char *local)
-{
-    char *s = path, *t = local;
-    char *last_slash = path;
-    
-    *t++ = *s++;
-    while (1){
-	if (ISSLASH (*s)){
-	    if (*last_slash != '/')
-		vfs_die ("/ not there.\n");
-	    
-	    if (ISSLASH (last_slash [1]))
-		t--;
-	    
-	    if (last_slash [1] == '.'){
-		if (ISSLASH(last_slash [2]))
-		    t -= 2;
-		if ((last_slash [2] == '.') && (ISSLASH (last_slash [3]))){
-		    t -= 4;
-		    while ((t >= local) && (*t != '/'))
-			t--;
-		}
-	    }
-	    last_slash = s;
-	}
-	
-	if (t <= local){
-	    *local = '/';
-	    t = local;
-	}
-	if (!*s)
-	    break;
-	*t++ = *s++;
-	*t = 0;
-    }	
-    *t = 0;
-    if (!(*local)){
-	local [0] = '/';
-	local [1] = 0;
-    }
-}
-
-
 char *vfs_canon (char *path)
 {
     if (*path == '~'){ /* Tilde expansion */
@@ -759,7 +716,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
     }
     
     if ((*oldvfs->nothingisopen) (oldvfsid)){
-	if (oldvfs == &extfs_vfs_ops && ((extfs_archive *) oldvfsid)->name == 0){
+	if (oldvfs == &vfs_extfs_ops && ((extfs_archive *) oldvfsid)->name == 0){
 	    /* Free the resources immediatly when we leave a mtools fs
 	       ('cd a:') instead of waiting for the vfs-timeout */
 	    (oldvfs->free) (oldvfsid);
@@ -772,7 +729,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 		stamp->id == (vfsid) - 1 ||
 		!(*stamp->v->nothingisopen) (stamp->id))
 		break;
-	    if (stamp->v == &extfs_vfs_ops && ((extfs_archive *) stamp->id)->name == 0){
+	    if (stamp->v == &vfs_extfs_ops && ((extfs_archive *) stamp->id)->name == 0){
 		(stamp->v->free) (stamp->id);
 		vfs_rmstamp (stamp->v, stamp->id, 0);
 	    } else
@@ -860,18 +817,21 @@ int mc_chdir (char *path)
 
 int vfs_current_is_local (void)
 {
-    return current_vfs == &local_vfs_ops;
+    return current_vfs == &vfs_local_ops;
 }
 
+#if 0
+/* External world should not do differences between VFS-s */
 int vfs_current_is_extfs (void)
 {
-    return current_vfs == &extfs_vfs_ops;
+    return current_vfs == &vfs_extfs_ops;
 }
 
 int vfs_current_is_tarfs (void)
 {
-    return current_vfs == &tarfs_vfs_ops;
+    return current_vfs == &vfs_tarfs_ops;
 }
+#endif
 
 int vfs_file_is_local (char *filename)
 {
@@ -880,7 +840,7 @@ int vfs_file_is_local (char *filename)
     filename = vfs_canon (filename);
     vfs = vfs_type (filename);
     free (filename);
-    return vfs == &local_vfs_ops;
+    return vfs == &vfs_local_ops;
 }
 
 int vfs_file_is_ftp (char *filename)
@@ -891,7 +851,7 @@ int vfs_file_is_ftp (char *filename)
     filename = vfs_canon (filename);
     vfs = vfs_type (filename);
     free (filename);
-    return vfs == &ftpfs_vfs_ops;
+    return vfs == &vfs_ftpfs_ops;
 #else
     return 0;
 #endif
@@ -902,7 +862,7 @@ char *vfs_get_current_dir (void)
     return current_dir;
 }
 
-void vfs_setup_wd (void)
+static void vfs_setup_wd (void)
 {
     current_dir = strdup ("/");
     if (!(vfs_flags & FL_NO_CWDSETUP))
@@ -919,7 +879,7 @@ MC_NAMEOP (rmdir, (char *path), (vfs, vfs_name (path)))
 MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, vfs_name (path), mode, dev))
 
 #ifdef HAVE_MMAP
-struct mc_mmapping {
+static struct mc_mmapping {
     caddr_t addr;
     void *vfs_info;
     vfs *vfs;
@@ -982,7 +942,7 @@ char *mc_def_getlocalcopy (vfs *vfs, char *filename)
     fdin = mc_open (filename, O_RDONLY);
     if (fdin == -1)
         return NULL;
-    tmp = tmpnam(NULL);
+    tmp = tempnam (NULL, "mclocalcopy");
     fdout = creat (tmp, 0600); 		/* FIXME: What about symlink attack ? */
     if (fdout == -1){
         mc_close (fdin);
@@ -1098,21 +1058,21 @@ void vfs_init (void)
     current_mon  = t->tm_mon;
     current_year = t->tm_year;
 
-    /* We do not want to register local_vfs_ops */
+    /* We do not want to register vfs_local_ops */
 
 #ifdef USE_NETCODE
     tcp_init();
-    vfs_register (&ftpfs_vfs_ops);
-    vfs_register (&mcfs_vfs_ops);
+    vfs_register (&vfs_ftpfs_ops);
+    vfs_register (&vfs_mcfs_ops);
 #endif
 
-    vfs_register (&fish_vfs_ops);
-    vfs_register (&extfs_vfs_ops);
-    vfs_register (&sfs_vfs_ops);
-    vfs_register (&tarfs_vfs_ops);
+    vfs_register (&vfs_fish_ops);
+    vfs_register (&vfs_extfs_ops);
+    vfs_register (&vfs_sfs_ops);
+    vfs_register (&vfs_tarfs_ops);
 
 #ifdef USE_EXT2FSLIB
-    vfs_register (&undelfs_vfs_ops);
+    vfs_register (&vfs_undelfs_ops);
 #endif
 
     vfs_setup_wd ();
@@ -1185,7 +1145,7 @@ void vfs_fill_names (void (*func)(char *))
 static char *columns [MAXCOLS];	/* Points to the string in column n */
 static int   column_ptr [MAXCOLS]; /* Index from 0 to the starting positions of the columns */
 
-int split_text (char *p)
+int vfs_split_text (char *p)
 {
     char *original = p;
     int  numcols;
@@ -1254,7 +1214,7 @@ static int is_year(char *str, struct tm *tim)
 where "2904 1234" is filename. Well, this code decodes it as year :-(.
  */
 
-int parse_filetype (char c)
+int vfs_parse_filetype (char c)
 {
     switch (c){
         case 'd': return S_IFDIR; 
@@ -1272,7 +1232,7 @@ int parse_filetype (char c)
     }
 }
 
-int parse_filemode (char *p)
+int vfs_parse_filemode (char *p)
 {	/* converts rw-rw-rw- into 0666 */
     int res = 0;
     switch (*(p++)){
@@ -1329,7 +1289,7 @@ int parse_filemode (char *p)
     return res;
 }
 
-int parse_filedate(int idx, time_t *t)
+int vfs_parse_filedate(int idx, time_t *t)
 {	/* This thing parses from idx in columns[] array */
     static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     static char *week = "SunMonTueWedThuFriSat";
@@ -1407,7 +1367,7 @@ int parse_filedate(int idx, time_t *t)
 }
 
 #define free_and_return(x) { free (p_copy); return (x); }
-int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
+int vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
     int idx, idx2, num_cols, isconc = 0;
     int i;
@@ -1416,7 +1376,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
-    if ((i = parse_filetype(*(p++))) == -1)
+    if ((i = vfs_parse_filetype(*(p++))) == -1)
         return 0;
 
     s->st_mode = i;
@@ -1430,14 +1390,14 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    s->st_mode |= (S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR);
 	p += 9;
     } else {
-	if ((i = parse_filemode(p)) ==-1)
+	if ((i = vfs_parse_filemode(p)) ==-1)
 	    return 0;
         s->st_mode |= i;
 	p += 9;
     }
 	
     p_copy = strdup (p);
-    num_cols = split_text (p);
+    num_cols = vfs_split_text (p);
 
     s->st_nlink = atol (columns [0]);
     if (s->st_nlink <= 0)
@@ -1503,7 +1463,7 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 #endif
     }
 
-    idx = parse_filedate(idx, &s->st_mtime);
+    idx = vfs_parse_filedate(idx, &s->st_mtime);
     if (!idx)
         free_and_return (0);
     /* Use resulting time value */
@@ -1573,12 +1533,6 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 }
 
 void
-vfs_force_expire (char *pathname)
-{
-    mc_setctl( pathname, MCCTL_FORGET_ABOUT, NULL );
-}
-
-void
 vfs_die (char *m)
 {
     message_1s (1, "Internal error:", m);
@@ -1586,7 +1540,7 @@ vfs_die (char *m)
 }
 
 void
-print_vfs_stats (char *fs_name, char *action, char *file_name, int have, int need)
+vfs_print_stats (char *fs_name, char *action, char *file_name, int have, int need)
 {
     if (need) 
         print_vfs_message ("%s: %s: %s %3d%% (%ld bytes transfered)", 
@@ -1603,3 +1557,14 @@ vfs_get_password (char *msg)
     return (char *) input_dialog (msg, _("Password:"), "");
 }
 #endif
+
+/* Returns vfs path corresponding to given url. If passed string is
+ * not recognized as url, strdup(url) is returned.  */
+char *
+vfs_translate_url (char *url)
+{
+    if (strncmp (url, "ftp://", 6) == 0)
+        return copy_strings ("/#ftp:", url + 6, 0);
+    else
+        return strdup (url);
+}

@@ -3,6 +3,8 @@
  * redundancy, so code is maintainable, again.
  *
  * 1998 Pavel Machek
+ *
+ * Namespace: no pollution.
  */
 
 static char *get_path (char *inname, struct archive **archive, int is_dir,

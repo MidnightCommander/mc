@@ -251,6 +251,8 @@ void chown_cmd (void)
     gid_t new_group;
     char  buffer [15];
 
+#if 0
+    /* Please no */
     if (!vfs_current_is_local ()) {
 	if (vfs_current_is_extfs ()) {
 	    message (1, _(" Oops... "),
@@ -262,6 +264,7 @@ void chown_cmd (void)
 	    return;
 	}
     }
+#endif
 
     do {			/* do while any files remaining */
 	init_chown ();

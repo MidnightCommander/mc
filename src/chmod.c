@@ -324,6 +324,9 @@ void chmod_cmd (void)
     int i;
     struct stat sf_stat;
 
+#if 0
+    /* Don't do things like this: you do not want to enumerate all
+       filesystems that can not support chmod, here. */
     if (!vfs_current_is_local ()) {
 	if (vfs_current_is_extfs ()) {
 	    message (1, _(" Oops... "),
@@ -335,6 +338,7 @@ void chmod_cmd (void)
 	    return;
 	}
     }
+#endif
 
     do {			/* do while any files remaining */
 	init_chmod ();

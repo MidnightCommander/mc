@@ -18,6 +18,8 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
+/* Namespace: exports only vfs_extfs_ops */
+
 #include <config.h>
 #include <stdio.h>
 #include <ctype.h>
@@ -42,7 +44,6 @@
 #include "../src/mem.h"
 #include "../src/mad.h"
 #include "../src/main.h"	/* For shell_execute */
-#define WANT_PARSE_LS_LGA
 #include "vfs.h"
 #include "extfs.h"
 
@@ -61,7 +62,7 @@ static char *extfs_prefixes [MAXEXTFS];
 static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
 
-void extfs_fill_names (vfs *me, void (*func)(char *))
+static void extfs_fill_names (vfs *me, void (*func)(char *))
 {
     struct archive *a = first_archive;
     char *name;
@@ -261,7 +262,7 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
  * Main loop for reading an archive.
  * Returns 0 on success, -1 on error.
  */
-int read_archive (int fstype, char *name, struct archive **pparc)
+static int read_archive (int fstype, char *name, struct archive **pparc)
 {
     FILE *extfsd;
     char *buffer;
@@ -276,7 +277,7 @@ int read_archive (int fstype, char *name, struct archive **pparc)
     buffer = xmalloc (4096, "Extfs: buffer");
     while (fgets (buffer, 4096, extfsd) != NULL) {
         current_link_name = NULL;
-        if (parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name)) {
+        if (vfs_parse_ls_lga (buffer, &hstat, &current_file_name, &current_link_name)) {
             struct entry *entry, *pent;
             struct inode *inode;
             char *p, *q, *cfn = current_file_name;
@@ -421,7 +422,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
  /* This is not too secure - in some cases (/#mtools) files created
     under user a are probably visible to everyone else since / usually
     has permissions 755 */
-	        vfs_stamp (&extfs_vfs_ops, (vfsid) parc);
+	        vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
 		goto return_success;
 	    }
 	}
@@ -431,7 +432,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 
     if (archive_name){
 	v = vfs_type (archive_name);
-	if (v == &local_vfs_ops) {
+	if (v == &vfs_local_ops) {
 	    parent = NULL;
 	} else {
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
@@ -439,7 +440,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	    parent->next = 0;
 	    parent->id = (*v->getid) (v, archive_name, &(parent->parent));
 	}
-	vfs_add_noncurrent_stamps (&extfs_vfs_ops, (vfsid) parc, parent);
+	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) parc, parent);
 	vfs_rm_parents (parent);
     }
  return_success:
@@ -554,6 +555,9 @@ static char *get_archive_name (struct archive *archive)
 	return archive_name;
 }
 
+/* FIXME: we really should not have non-static procedures - it
+ * pollutes namespace.  */
+
 void extfs_run (char *file)
 {
     struct archive *archive;
@@ -634,7 +638,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     extfs_info->local_handle = local_handle;
 
     /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (&extfs_vfs_ops, (vfsid) archive, 1);
+    vfs_rmstamp (&vfs_extfs_ops, (vfsid) archive, 1);
     archive->fd_usage++;
     return extfs_info;
 }
@@ -695,7 +699,7 @@ static int extfs_close (void *data)
         struct vfs_stamping *parent;
         vfs *v;
         
-	if (!file->archive->name || !*file->archive->name || (v = vfs_type (file->archive->name)) == &local_vfs_ops) {
+	if (!file->archive->name || !*file->archive->name || (v = vfs_type (file->archive->name)) == &vfs_local_ops) {
 	    parent = NULL;
 	} else {
 	    parent = xmalloc (sizeof (struct vfs_stamping), "vfs stamping");
@@ -703,7 +707,7 @@ static int extfs_close (void *data)
 	    parent->next = 0;
 	    parent->id = (*v->getid) (v, file->archive->name, &(parent->parent));
 	}
-        vfs_add_noncurrent_stamps (&extfs_vfs_ops, (vfsid) (file->archive), parent);
+        vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive), parent);
 	vfs_rm_parents (parent);
     }
 	
@@ -939,11 +943,6 @@ static int extfs_which (vfs *me, char *path)
     return -1;
 }
 
-static char *extfs_get_prefix (int idx)
-{
-    return extfs_prefixes [idx];
-}
-
 static void extfs_done (vfs *me)
 {
     int i;
@@ -956,7 +955,16 @@ static void extfs_done (vfs *me)
     extfs_current_dir = 0;
 }
 
-vfs extfs_vfs_ops = {
+static int extfs_setctl (vfs *me, char *path, int ctlop, char *arg)
+{
+    if (ctlop == MCCTL_EXTFS_RUN) {
+        extfs_run (path);
+	return 1;
+    }
+    return 0;
+}
+
+vfs vfs_extfs_ops = {
     NULL,	/* This is place of next pointer */
     "Extended filesystems",
     F_EXEC,	/* flags */
@@ -1009,7 +1017,7 @@ vfs extfs_vfs_ops = {
     NULL,		/* mkdir */
     NULL,
     NULL,
-    NULL
+    extfs_setctl
 
 MMAPNULL
 };

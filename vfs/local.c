@@ -241,14 +241,14 @@ static void local_ungetlocalcopy (vfs *me, char *path, char *local, int has_chan
 }
 
 #ifdef HAVE_MMAP
-static caddr_t local_mmap (vfs *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
+caddr_t local_mmap (vfs *me, caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
 {
     int fd = * (int *)data;
 
     return mmap (addr, len, prot, flags, fd, offset);
 }
 
-static int local_munmap (vfs *me, caddr_t addr, size_t len, void *data)
+int local_munmap (vfs *me, caddr_t addr, size_t len, void *data)
 {
     return munmap (addr, len);
 }
@@ -259,7 +259,7 @@ static int local_which(vfs *me, char *path)
     return 0;		/* Every path which other systems do not like is expected to be ours */
 }
 
-vfs local_vfs_ops = {
+vfs vfs_local_ops = {
     NULL,	/* This is place of next pointer */
     "Local filesystem",
     0,		/* flags */

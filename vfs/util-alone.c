@@ -1,5 +1,9 @@
 /*
+ * Author: 1998 Pavel Machek <pavel@ucw.cz>
+ *
  * This is for making midnight commander's vfs stuff compile stand-alone
+ *
+ * Namespace pollution: horrible
  */
 
 #include <config.h>
@@ -145,7 +149,7 @@ print_vfs_message (char *msg, ...)
     va_list args;
 
     va_start  (args,msg);
-    vsnprintf (buf, sizeof (buf), msg, args);
+    vsnprintf (buf, sizeof (buf)-1, msg, args);
     info_puts (buf);
     va_end    (args);
 }
@@ -184,7 +188,8 @@ message_2s (int i, char *c1, char *c2, char *c3)
     box_puts (buf );
 }
 
-void message_3s( int i, char *c1, char *c2, char *c3, const char *c4 )
+void
+message_3s( int i, char *c1, char *c2, char *c3, const char *c4 )
 {
     char buf [4096];
     
