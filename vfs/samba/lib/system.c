@@ -288,7 +288,7 @@ SMB_STRUCT_DIRENT *sys_readdir(DIR *dirp)
 /*******************************************************************
 The wait() calls vary between systems
 ********************************************************************/
-
+#if 0
 int sys_waitpid(pid_t pid,int *status,int options)
 {
 #ifdef HAVE_WAITPID
@@ -297,7 +297,7 @@ int sys_waitpid(pid_t pid,int *status,int options)
   return wait4(pid, status, options, NULL);
 #endif /* HAVE_WAITPID */
 }
-
+#endif
 /*******************************************************************
 system wrapper for getwd
 ********************************************************************/

@@ -2,6 +2,9 @@
 
 	* samba/libsmb/clientgen.c (cli_send_tconX): Add missed 
 	unix_to_dos() call.
+	(cli_printjob_del): Commented out.
+	(cli_print_queue): Ditto.
+	* samba/lib/system.c (sys_waitpid): Ditto.
 
 2002-07-29  Andrew V. Samoilov  <kai@cmail.ru>
 

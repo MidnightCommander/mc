@@ -2782,7 +2782,7 @@ BOOL cli_establish_connection(struct cli_state *cli,
 	return True;
 }
 
-
+#if 0
 /****************************************************************************
   cancel a print job
   ****************************************************************************/
@@ -2819,7 +2819,6 @@ int cli_printjob_del(struct cli_state *cli, int job)
 
 	return ret;
 }
-
 
 /****************************************************************************
 call fn() on each entry in a print queue
@@ -2891,6 +2890,7 @@ int cli_print_queue(struct cli_state *cli,
 
 	return i;
 }
+#endif
 
 /****************************************************************************
 check for existance of a dir
