@@ -5,6 +5,7 @@ To compile MC from CVS, the following software is required:
 
 Autoconf (recent stable version)
 Automake (recent stable version)
+Perl (recent stable version)
 Gettext 0.10.38 and above, but not 0.11.x (the later has a very
 aggressive gettextize and a new tool, autopoint, which doesn't seem to
 be ready yet).
