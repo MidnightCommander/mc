@@ -69,6 +69,10 @@ static int force_expiration = 0;
 #define WANT_STRING 0x02
 static char reply_str [80];
 
+static int
+command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
+    __attribute__ ((format (printf, 4, 5)));
+
 static int decode_reply (char *s, int was_garbage)
 {
     int code;
@@ -104,7 +108,8 @@ static int get_reply (vfs *me, int sock, char *string_buf, int string_len)
 
 #define SUP super->u.fish
 
-static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
+static int
+command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
     char *str;
@@ -478,21 +483,26 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
     /* Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null ) */
 
     print_vfs_message(_("fish: store %s: sending command..."), name );
+    /*
+     * FIXME: Limit size to unsigned long for now.
+     * Files longer than 4096 * ULONG_MAX are not supported.
+     */
     if (command (me, super, WAIT_REPLY,
-		 "#STOR %d /%s\n"
+		 "#STOR %lu /%s\n"
 		 "> \"/%s\"\n"
 		 "echo '### 001'\n"
 		 "(\n"
-		   "dd bs=4096 count=%d\n"
-		   "dd bs=%d count=1\n"
+		   "dd bs=4096 count=%lu\n"
+		   "dd bs=%lu count=1\n"
 		 ") 2>/dev/null | (\n"
 		   "cat > \"/%s\"\n"
 		   "cat > /dev/null\n"
 		 "); echo '### 200'\n",
 	      /* ")\n"                       Why can't it be like this?
 	         "echo '### 200'\n", */
-		 s.st_size, name, name,
-		 s.st_size / 4096, s.st_size % 4096, name)
+		 (unsigned long) s.st_size, name, name,
+		 (unsigned long) (s.st_size >> 12),
+		 ((unsigned long) s.st_size) & (4096 - 1), name)
 	!= PRELIM) 
         ERRNOR(E_REMOTE, -1);
 

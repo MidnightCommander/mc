@@ -1,3 +1,11 @@
+2001-10-19  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c (command): Declare with the printf attribute to enable
+	warnings in gcc.
+	(file_store): Cast all expressions with file sizes to unsigned
+	long.  This should fix uploading when large file support is on.
+	File size is limited to 4096 * ULONG_MAX for now.
+
 2001-10-18  Andrew V. Samoilov  <kai@cmail.ru
 
 	* samba/configure.in: Don't check readline.h, history.h and
