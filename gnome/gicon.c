@@ -223,7 +223,10 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 		if (fe->f.stalled_link)
 			return icon_view_stalled;
 
+		/* BEtter effect; do not use the symlink icon */
+#if 0
 		return icon_view_symlink;
+#endif
 	}
 
 	/*
@@ -236,7 +239,7 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 		if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
 			image = gdk_imlib_inlined_png_to_image (buf, size);
 			
-			free (buf);
+			g_free (buf);
 			
 			if (image)
 				return image;
@@ -248,7 +251,7 @@ gicon_get_icon_for_file_speed (file_entry *fe, gboolean do_quick)
 		if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
 			image = gicon_get_by_filename (buf);
 
-			free (buf);
+			g_free (buf);
 			
 			if (image)
 				return image;

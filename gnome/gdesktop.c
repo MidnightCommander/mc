@@ -1112,7 +1112,7 @@ desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSe
 	 */
 	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0){
 		/*action_drop (filename, buf, context, data);*/ /* Fixme: i'm undefined */
-		free (buf);
+		g_free (buf);
 		goto out;
 	}
 
@@ -1132,10 +1132,39 @@ desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSe
 	}
 
 	/*
-	 * 4. Executable.  Try metadata keys for "open" and mime type for "open"
+	 * 4. Executable.  Try metadata keys for "open".
 	 */
 	if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe)){
+		GList *names, *l;
+		int len, i;
+		char **drops;
+
+		/* Convert the list of filenames into an array of char */
+		names = gnome_uri_list_extract_uris (data->data);
+		len = g_list_length (names);
+		drops = (char **) g_malloc (sizeof (char *) * (len+1));
+
+		for (l = names, i = 0; i < len; i++, l = l->next){
+			char *text = l->data;
+			
+			if (strncmp (text, "file:", 5) == 0)
+				text += 5;
+
+			drops [i] = text;
+		}
+		drops [i] = NULL;
 		
+		if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
+			exec_extension (filename, buf, drops, NULL, 0);
+			goto out2;
+		}
+		exec_extension (filename, "%f %q", drops, NULL, 0);
+
+		g_free (drops);
+	out2:
+		gnome_uri_list_free_strings (names);
+		g_free (buf);
+
 	}
 
 out:

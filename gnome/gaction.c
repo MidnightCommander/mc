@@ -34,13 +34,13 @@ gmc_open_filename (char *fname, GList *args)
 
 	if (gnome_metadata_get (fname, "fm-open", &size, &buf) == 0){
 		gmc_execute (fname, buf);
-		free (buf);
+		g_free (buf);
 		return 1;
 	}
 
 	if (gnome_metadata_get (fname, "open", &size, &buf) == 0){
 		gmc_execute (fname, buf);
-		free (buf);
+		g_free (buf);
 		return 1;
 	}
 
@@ -85,13 +85,13 @@ gmc_view (char *filename, int start_line)
 
 	if (gnome_metadata_get (filename, "fm-view", &size, &buf) == 0){
 		gmc_run_view (filename, buf);
-		free (buf);
+		g_free (buf);
 		return 1;
 	}
 
 	if (gnome_metadata_get (filename, "view", &size, &buf) == 0){
 		gmc_run_view (filename, buf);
-		free (buf);
+		g_free (buf);
 		return 1;
 	}
 

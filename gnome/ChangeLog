@@ -1,5 +1,11 @@
 1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_drop_uri_list): Implement
+	drops-on-executable. 
+
+	* gmetadata.c, gaction.c, gdesktop.c, gicon.c: Use g_free instead
+	of free to follow the convention in gnome-metadata.c
+
 	* gtools.c (query_dialog): Fix the new version of this.  It was
 	overwriting memory all over.
 

@@ -81,6 +81,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	g_slist_foreach (allocated, g_free, NULL);
 	g_slist_free (allocated);
+	g_free (buttons);
+	
 	return result;
 }
 
