@@ -1,3 +1,9 @@
+Thu Feb 18 08:14:22 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* es.po: Updated with the version sent by David Martin 
+	<dmartina@usa.net> on Feb 14. Now messages from editmenu.c
+	included as gtkedit/editmenu has been added to POTFILES.in.
+
 1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* da.po: Fixed a syntax error in the .po file.
