@@ -1925,15 +1925,17 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	
 
 #ifdef HAVE_GNOME
-	/* FIXME: we need to determine if this dialog is actually needed. */
-	/* We need to pre-copy all the files and see if there are any 
-	 * over-writes.  Ugh, this sounds yucky.  )-: */
-	if (policy_over_write_necessary) {
-		if (file_progress_query_replace_policy (TRUE) == FILE_ABORT)
-			goto clean_up;
-		else
-			/* this will initialize some variables */
-			file_progress_query_replace_policy (FALSE);
+	if (operation != OP_DELETE){
+    	    /* FIXME: we need to determine if this dialog is actually needed. */
+    	    /* We need to pre-copy all the files and see if there are any 
+    	     * over-writes.  Ugh, this sounds yucky.  )-: */
+    	    if (policy_over_write_necessary) {
+    		    if (file_progress_query_replace_policy (TRUE) == FILE_ABORT)
+    			    goto clean_up;
+    		    else
+    			    /* this will initialize some variables */
+    			    file_progress_query_replace_policy (FALSE);
+    	    }
 	}
 #endif
 	/* We now have ETA in all cases */
