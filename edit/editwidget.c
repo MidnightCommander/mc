@@ -155,7 +155,6 @@ int
 edit (const char *_file, int line)
 {
     static int made_directory = 0;
-    int framed = 0;
     Dlg_head *edit_dlg;
     WButtonBar *edit_bar;
 
@@ -187,28 +186,24 @@ edit (const char *_file, int line)
 
     edit_bar = buttonbar_new (1);
 
-    if (!framed) {
-	switch (edit_key_emulation) {
-	case EDIT_KEY_EMULATION_NORMAL:
-	    edit_init_menu_normal ();	/* editmenu.c */
-	    break;
-	case EDIT_KEY_EMULATION_EMACS:
-	    edit_init_menu_emacs ();	/* editmenu.c */
-	    break;
-	}
-	edit_menubar = menubar_new (0, 0, COLS, EditMenuBar, N_menus);
+    switch (edit_key_emulation) {
+    case EDIT_KEY_EMULATION_NORMAL:
+	edit_init_menu_normal ();	/* editmenu.c */
+	break;
+    case EDIT_KEY_EMULATION_EMACS:
+	edit_init_menu_emacs ();	/* editmenu.c */
+	break;
     }
+    edit_menubar = menubar_new (0, 0, COLS, EditMenuBar, N_menus);
     add_widget (edit_dlg, wedit);
 
-    if (!framed)
-	add_widget (edit_dlg, edit_menubar);
+    add_widget (edit_dlg, edit_menubar);
 
     add_widget (edit_dlg, edit_bar);
 
     run_dlg (edit_dlg);
 
-    if (!framed)
-	edit_done_menu ();	/* editmenu.c */
+    edit_done_menu ();		/* editmenu.c */
 
     destroy_dlg (edit_dlg);
 
