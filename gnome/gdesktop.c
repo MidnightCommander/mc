@@ -500,7 +500,7 @@ do_symlinks (GdkEventDropDataAvailable *event, char *dest)
 
 	do {
 		char *full_dest_name;
-		len = 1 + strlen (event->data);
+		len = 1 + strlen (p);
 		count -= len;
 
 		full_dest_name = concat_dir_and_file (dest, x_basename (p));
