@@ -507,17 +507,6 @@ file_progress_show_deleting (FileOpContext *ctx, char *s)
     return check_progress_buttons (ctx);
 }
 
-static int
-replace_callback (struct Dlg_head *h, int Id, int Msg)
-{
-    switch (Msg){
-    case DLG_DRAW:
-	dialog_repaint (h, ERROR_COLOR, ERROR_COLOR);
-	break;
-    }
-    return 0;
-}
-
 #define X_TRUNC 52
 
 /*
@@ -629,7 +618,8 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
     replace_colors [2] = ERROR_COLOR;
     replace_colors [3] = COLOR_NORMAL;
     
-    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, replace_colors, replace_callback,
+    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, replace_colors,
+				  common_dialog_callback,
 				  "[ Replace ]", "replace", DLG_CENTER);
     
     x_set_dialog_title (ui->replace_dlg,

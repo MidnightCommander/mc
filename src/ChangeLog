@@ -1,5 +1,10 @@
 2002-08-30  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (common_dialog_repaint): Use colors specific to the
+	current dialog, not fixed colors for "normal" dialogs.
+	* filegui.c (replace_callback): Eliminate, use
+	common_dialog_callback() instead.
+
 	* filegui.c (file_op_context_create_ui): Use
 	common_dialog_callback().  Set title to the operation name.
 	(op_win_callback): Remove, it's unused.

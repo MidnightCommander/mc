@@ -72,7 +72,7 @@ dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 void
 common_dialog_repaint (struct Dlg_head *h)
 {
-    dialog_repaint (h, COLOR_NORMAL, COLOR_HOT_NORMAL);
+    dialog_repaint (h, NORMALC, HOT_NORMALC);
 }
 
 int
