@@ -358,7 +358,8 @@ static int cpio_read_crc_head(vfs *me, vfs_s_super *super)
 	      &hd.c_nlink,  &hd.c_mtime, &hd.c_filesize,
 	      &hd.c_dev, &hd.c_devmin, &hd.c_rdev, &hd.c_rdevmin,
 	      &hd.c_namesize, &hd.c_chksum) < 14) {
-	message_2s(1, MSG_ERROR, _("Corrupt cpio header encountered in\n%s"), super->name);
+	message_2s(1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+		   super->name);
 	return STATUS_FAIL;
     }
 

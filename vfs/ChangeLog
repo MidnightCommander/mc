@@ -1,5 +1,7 @@
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* cpio.c (cpio_read_crc_head): Undo change in the error message.
+
 	* ftpfs.c: Replace bzero and bcopy with memset and memcpy.
 	* mcfs.c: Likewise.
 	* mcserv.c: Likewise.
