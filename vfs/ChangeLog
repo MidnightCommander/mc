@@ -1,3 +1,37 @@
+Thu Oct 22 22:24:44 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* README: added. If you are using emacs or hacking libvfs, please
+ 	read this one.
+
+	* direntry.{c,h}: new library created, so that same entry/inode
+ 	code does not have to be copied in every handler
+
+	* tar.c: converted to use direntry.c library
+
+	* ftpfs.c: small updates to make code look nicer
+	
+Mon Oct 19 19:40:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.h (&more): killed ERRNOR() from vfs.h and put it into files
+ 	which actually need it.
+
+	* extfs.c: extfs_current_dir killed - it was unneccessary.
+
+	* mcfs.c (mcfs_get_path): It is possible for path not to begin
+ 	with /#mc:, for example if user does /etc/#mc:. (It is not
+ 	correct, of course). Return error, but do not vfs_die().
+
+Sun Oct 18 23:48:00 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* lib/mc.ext.in: cpio support fixed. It was broken since time we
+ 	started to do #ext syntax.
+
+Sat Oct 17 20:43:20 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c (mc_open): die() if open is unsupported. If filesytem does
+ 	not support open, it is probably stupid typo, so we want bug to be
+ 	fixed.
+
 Thu Oct 22 20:30:28 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink, retrieve_dir): Don't timeout and

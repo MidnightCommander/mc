@@ -75,6 +75,8 @@
 #    define MAXHOSTNAMELEN 64
 #endif
 
+#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
+
 /*
  * Reply codes.
  */
@@ -582,7 +584,7 @@ store_file(struct direntry *fe)
 
     fstat(local_handle, &s);
 
-    /* Use this as stor: ( dd block ; dd malyblock ) | ( cat > file; cat > /dev/null ) */
+    /* Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null ) */
 
     print_vfs_message("FISH: store: sending command..." );
     if (command (fe->bucket, WAIT_REPLY, 

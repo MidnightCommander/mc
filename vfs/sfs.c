@@ -7,8 +7,10 @@
  * inside. It is somehow similar to extfs, except that extfs makes
  * whole virtual trees and we do only single virtual files. 
  *
- * Namespace: exports vfs_sfs_ops, shell (FIXME)
- */
+ * If you want to gunzip something, you should open it with #ugz
+ * suffix, DON'T try to gunzip it yourself.
+ *
+ * Namespace: exports vfs_sfs_ops, shell (FIXME) */
 
 #include <config.h>
 #include <errno.h>
@@ -97,7 +99,6 @@ static int vfmake( vfs *me, char *name, char *cache )
     return 0; /* OK */
 }
 
-#define CUR (*cur)
 static char *redirect( vfs *me, char *name )
 {
     struct cachedfile *cur = head;
@@ -131,7 +132,6 @@ static char *redirect( vfs *me, char *name )
 	return cache;
     } else {
         free(xname);
-	fprintf( stderr, "vfmake failed\n" );
     }
     return "/I_MUST_NOT_EXIST";
 }
@@ -194,6 +194,7 @@ static int sfs_readlink (vfs *me, char *path, char *buf, int size)
     return readlink (path, buf, size);
 }
 
+#define CUR (*cur)
 static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 {	/* FIXME: what should I do? */
     vfs *v;
@@ -234,6 +235,7 @@ static void sfs_free (vfsid id)
     struct cachedfile *which = (struct cachedfile *) id;
     struct cachedfile **cur = &head;
 
+    message_1s(1, "%s", "Freeing sfs file" );
     unlink( CUR->cache );
     while (CUR) {
         if (CUR == which)

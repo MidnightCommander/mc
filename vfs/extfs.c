@@ -47,6 +47,8 @@
 #include "vfs.h"
 #include "extfs.h"
 
+#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
+
 static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 static int extfs_which (vfs *me, char *path);
@@ -54,8 +56,6 @@ static int extfs_which (vfs *me, char *path);
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
 static struct stat hstat;		/* Stat struct corresponding */
-static char *current_file_name, *current_link_name;
-static char *extfs_current_dir;
 
 #define MAXEXTFS 32
 static char *extfs_prefixes [MAXEXTFS];
@@ -267,6 +267,8 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
     FILE *extfsd;
     char *buffer;
     struct archive *current_archive;
+    char *current_file_name, *current_link_name;
+
 
     if ((extfsd = open_archive (fstype, name, &current_archive)) == NULL) {
         message_3s (1, MSG_ERROR, _("Couldn't open %s archive\n%s"), 
@@ -752,9 +754,6 @@ static int extfs_chdir (vfs *me, char *path)
         entry->inode->archive->name, "#", extfs_prefixes [entry->inode->archive->fstype], 
 	"/", q, NULL);
     my_errno = 0;
-    if (extfs_current_dir)
-	free (extfs_current_dir);
-    extfs_current_dir = res;
     return 0;
 }
 
@@ -950,9 +949,6 @@ static void extfs_done (vfs *me)
     for (i = 0; i < extfs_no; i++ )
 	free (extfs_prefixes [i]);
     extfs_no = 0;
-    if (extfs_current_dir)
-	free (extfs_current_dir);
-    extfs_current_dir = 0;
 }
 
 static int extfs_setctl (vfs *me, char *path, int ctlop, char *arg)

@@ -37,7 +37,7 @@ struct utimbuf {
 /*
  * Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
  * (RelianUNIX), where it is bad idea to define struct vfs. That system
- * umust include called <sys/vfs.h>, which contains things like vfs_t.
+ * has include called <sys/vfs.h>, which contains things like vfs_t.
  */
 
     typedef struct _vfs vfs;
@@ -48,7 +48,7 @@ struct utimbuf {
         int   flags;
 #define F_EXEC 1
 #define F_NET 2
-        char  *prefix;		/* "#fish:" */
+        char  *prefix;		/* "fish:" */
         void  *data;		/* this is for filesystem's own use */
         int   verrno;           /* can't use errno because glibc2 might define errno as function */
 
@@ -350,8 +350,6 @@ extern void mc_vfs_init( void );
 extern void mc_vfs_done( void );
 #endif
 
-#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
-
 #define O_ALL (O_CREAT | O_EXCL | O_NOCTTY | O_NDELAY | O_SYNC | O_WRONLY | O_RDWR | O_RDONLY)
 /* Midnight commander code should _not_ use other flags than those
    listed above and O_APPEND */
@@ -390,5 +388,7 @@ extern void mc_vfs_done( void );
 #else
 #define MMAPNULL
 #endif
+
+#define DIR_SEP_CHAR '/'
 
 #endif /* __VFS_H */

@@ -386,7 +386,7 @@ mc_open (char *file, int flags, ...)
     va_end (ap);
     
     if (!vfs->open)
-	return -1;
+	vfs_die ("VFS must support open.\n");
 
     info = (*vfs->open) (vfs, file, flags, mode);	/* open must be supported */
     free (file);
@@ -1224,7 +1224,6 @@ vfs_shut (void)
     
     if (current_dir)
 	free (current_dir);
-
 
     for (vfs=vfs_list; vfs; vfs=vfs->next)
         if (vfs->done)

@@ -92,6 +92,7 @@
 #    define MAXHOSTNAMELEN 64
 #endif
 
+#define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
 #define UPLOAD_ZERO_LENGTH_FILE
 
 static int my_errno;
@@ -369,38 +370,17 @@ login_server (struct connection *bucket, char *netrcpass)
 #if defined(HSC_PROXY)
 	if (qproxy(bucket)) {
 	    print_vfs_message("ftpfs: sending proxy login name");
-	    if (command (bucket, 1, "USER %s", proxyname) == CONTINUE) {
-		print_vfs_message("ftpfs: sending proxy user password");
-		if (command (bucket, 1, "PASS %s", proxypass) == COMPLETE)
-		    {
-			print_vfs_message("ftpfs: proxy authentication succeeded");
-			if (command (bucket, 1, "SITE %s", qhost(bucket)+1) ==
-			    COMPLETE) {
-			    print_vfs_message("ftpfs: connected to %s", qhost(bucket)+1);
-			}
-			else {
-			    bucket->failed_on_login = 1;
-			    /* my_errno = E; */
-			    if (proxypass)
-				wipe_password (proxypass);
-    			    wipe_password (pass);
-			    free (proxyname);
-			    free (name);
-			    return 0;
-			}
-		    }
-		else {
-		    bucket->failed_on_login = 1;
-		    /* my_errno = E; */
-		    if (proxypass)
-			wipe_password (proxypass);
-		    wipe_password (pass);
-		    free (proxyname);
-		    free (name);
-		    return 0;
-		}
-	    }
-	    else {
+	    if (command (bucket, 1, "USER %s", proxyname) != CONTINUE)
+		goto proxyfail;
+	    print_vfs_message("ftpfs: sending proxy user password");
+	    if (command (bucket, 1, "PASS %s", proxypass) != COMPLETE)
+		goto proxyfail;
+	    print_vfs_message("ftpfs: proxy authentication succeeded");
+	    if (command (bucket, 1, "SITE %s", qhost(bucket)+1) != COMPLETE)
+		goto proxyfail;
+	    print_vfs_message("ftpfs: connected to %s", qhost(bucket)+1);
+	    if (0) {
+	    proxyfail:
 		bucket->failed_on_login = 1;
 		/* my_errno = E; */
 		if (proxypass)
@@ -408,7 +388,7 @@ login_server (struct connection *bucket, char *netrcpass)
 		wipe_password (pass);
 		free (proxyname);
 		free (name);
-		return 0;
+		ERRNOR (EPERM, 0);
 	    }
 	    if (proxypass)
 		wipe_password (proxypass);
@@ -437,19 +417,14 @@ login_server (struct connection *bucket, char *netrcpass)
 		wipe_password (bucket->password);
 	    bucket->password = 0;
 	    
-	    /* This matches the end of the code below, just to make it
-	     * obvious to the optimizer
-	     */
-	    wipe_password (pass);
-	    free (name);
-	    return 0;
+	    goto login_fail;
 	}
     }
     print_vfs_message ("ftpfs: Login incorrect for user %s ", quser(bucket));
-    my_errno = EPERM;
+login_fail:
     wipe_password (pass);
     free (name);
-    return 0;
+    ERRNOR (EPERM, 0);
 }
 
 #ifdef HAVE_SETSOCKOPT
@@ -1487,7 +1462,7 @@ ftpfs_init_passwd(void)
 	return;
 
     if ((passwd_info = getpwuid (geteuid ())) == NULL)
-	p = "guest";
+	p = "unknown";
     else
 	p = passwd_info->pw_name;
     gethostname(hostname, sizeof(hostname));

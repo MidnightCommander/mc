@@ -2,6 +2,8 @@
  * Large portions of tar.c & extfs.c were nearly same. I killed this 
  * redundancy, so code is maintainable, again.
  *
+ * Actually, tar no longer uses this code :-).
+ *
  * 1998 Pavel Machek
  *
  * Namespace: no pollution.

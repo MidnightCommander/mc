@@ -363,9 +363,8 @@ static char *mcfs_get_path (mcfs_connection **mc, char *path)
     int    port;
 
     /* An absolute path name, try to determine connection socket */
-    if (strncmp (path, "/#mc:", 5)) {
-        vfs_die( "Mcfs: this should not happen.\n" );
-    }
+    if (strncmp (path, "/#mc:", 5))
+        return NULL;
     path += 5;
 
     /* Port = 0 means that open_tcp_link will try to contact the
@@ -1078,9 +1077,8 @@ my_forget (char *path)
     char *host, *user, *pass, *p;
     int  port, i, vers;
 
-    if (strncmp (path, "/#mc:", 5)) {
-        vfs_die( "Mcfs: this should not happen.\n" );
-    }
+    if (strncmp (path, "/#mc:", 5))
+        return NULL;
     path += 5;
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
