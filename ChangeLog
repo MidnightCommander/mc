@@ -1,3 +1,8 @@
+2002-11-10  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for uintptr_t.  Needed to compile regex.c
+	on MacOS X.  Reported by Wim Rijnders <wimrijnders@home.nl>
+
 2002-11-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax/ada95.syntax: Highlight "then" and "else".
