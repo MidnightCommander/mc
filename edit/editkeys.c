@@ -318,6 +318,12 @@ edit_translate_key (WEdit *edit, unsigned int x_keycode, long x_key,
     case KEY_M_CTRL | KEY_NPAGE:
 	command = CK_End_Of_Text;
 	goto fin;
+    case KEY_M_CTRL | KEY_HOME:
+	command = CK_Beginning_Of_Text;
+	goto fin;
+    case KEY_M_CTRL | KEY_END:
+	command = CK_End_Of_Text;
+	goto fin;
     case KEY_M_CTRL | KEY_UP:
 	command = CK_Scroll_Up;
 	goto fin;

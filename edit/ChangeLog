@@ -1,5 +1,8 @@
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
+	* editkeys.c (edit_translate_key): Treat Ctrl-Home and Ctrl-End
+	like Ctrl-PgUp and Ctrl-PgDown respectively.
+
 	* edit_key_translator.c: Rename to ...
 	* editkeys.c: ... this.
 	* edit.c (edit_translate_key): Move to editkeys.c.
