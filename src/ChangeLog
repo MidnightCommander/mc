@@ -10,6 +10,7 @@
 	* tree.c (tree_copy): Likewise.
 	* cmd.c (help_cmd): Likewise.
 	(get_random_hint): Use load_mc_home_file().
+	From Andrew V. Samoilov.
 
 2001-06-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
