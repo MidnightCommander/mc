@@ -446,6 +446,9 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 #ifdef S_IFIFO
     case S_IFIFO:
 #endif
+#ifdef S_IFNAM
+    case S_IFNAM:
+#endif
 	if ((st->st_size != 0) && (st->st_rdev == 0x0001)) {
 	    st->st_rdev = (unsigned) st->st_size;
 	    st->st_size = 0;
