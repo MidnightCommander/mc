@@ -89,6 +89,10 @@ What to do with this?
 #define INADDR_NONE 0xffffffff
 #endif
 
+#define RFC_AUTODETECT 0
+#define RFC_DARING 1
+#define RFC_STRICT 2
+
 
 static int my_errno;
 static int code;

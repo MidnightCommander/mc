@@ -37,8 +37,6 @@ struct vfs_s_entry {
     struct vfs_s_inode *dir;	/* Directory we are in - needed for invalidating directory when file in it changes */
     char *name;			/* Name of this entry */
     struct vfs_s_inode *ino;	/* ... and its inode */
-/*  int magic; */
-#define ENTRY_MAGIC 0x014512563
 };
 
 struct vfs_s_inode {
@@ -66,8 +64,6 @@ struct vfs_s_inode {
 	    struct timeval timestamp;
 	} ftp;
     } u;
-/*  int magic; */
-#define INODE_MAGIC 0x93451656
 };
 
 struct vfs_s_super {
@@ -110,9 +106,6 @@ struct vfs_s_super {
 				   "LIST -la <path>"; use "CWD <path>"/
 				   "LIST" instead */
 	    int control_connection_buzy;
-#define RFC_AUTODETECT 0
-#define RFC_DARING 1
-#define RFC_STRICT 2
 	} ftp;
 	struct {
 	    int fd;
@@ -122,8 +115,6 @@ struct vfs_s_super {
 	    struct defer_inode *defered;	/* List of inodes for which another entries may appear */
 	} cpio;
     } u;
-/*  int magic; */
-#define SUPER_MAGIC 0x915ac312
 };
 
 struct vfs_s_fh {
@@ -140,8 +131,6 @@ struct vfs_s_fh {
 	    int sock, append;
 	} ftp;
     } u;
-/*  int magic; */
-#define FH_MAGIC 0x91324682
 };
 
 struct vfs_s_data {

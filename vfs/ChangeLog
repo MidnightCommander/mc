@@ -1,3 +1,8 @@
+2003-10-16  Pavel Roskin  <proski@gnu.org>
+
+	* xdirentry.h: Remove magic numbers.  Move some constants ...
+	* ftpfs.c: ... here.
+
 2003-10-15  Pavel Roskin  <proski@gnu.org>
 
 	* samba/lib/doscalls.c: Remove.  Remove all references to it.
