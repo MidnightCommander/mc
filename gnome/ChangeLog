@@ -1,3 +1,8 @@
+2000-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Don't use $< in explicit rules - this should fix
+	non-GNU makes. Removed GNOME_IDLDIR - it wasn't used.
+
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Compile our own mad.o. Don't link object files.

@@ -19,7 +19,6 @@ EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
-GNOME_IDLDIR = @GNOME_IDLDIR@
 
 PIXMAPS =			\
 	dev.xpm			\
@@ -232,10 +231,10 @@ DISTGNOME = \
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 
 main-corba.o: main.c
-	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
+	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) main.c -o main-corba.o
 
 gmount-corba.o: gmount.c
-	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o gmount-corba.o
+	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $(srcdir)/gmount.c -o gmount-corba.o
 
 gcorba.o: gcorba.c $(CORBA_GENERATED)
 gmount.o: gmount.c $(MAGICDEV_GENERATED)
