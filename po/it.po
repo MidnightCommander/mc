@@ -1476,7 +1476,7 @@ msgstr " coll. simbolico relativo: %s "
 
 #: src/cmd.c:1278
 msgid " Enter machine name (F1 for details): "
-msgstr " Inserire nome macchina (F1 per help e dettagli): "
+msgstr " Inserire nome macchina (F1 per aiuto e dettagli): "
 
 #: src/cmd.c:1305
 #, c-format
@@ -3583,7 +3583,7 @@ msgstr "Chiusura pipe fallita"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
-msgstr "Mostra questo messaggio di help."
+msgstr "Mostra questo messaggio di aiuto."
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
