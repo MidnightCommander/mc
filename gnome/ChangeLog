@@ -1,3 +1,17 @@
+1999-09-08  Federico Mena Quintero  <federico@redhat.com>
+
+	* gcorba.c: Major re-arrangement and beautifying.  Use nicer and
+	shorter identifier names.
+	(WindowFactory_rescan_directory): New method to rescan all the
+	panels that pertain to the specified directory.
+	(WindowFactory_close_invalid_windows): New method to close all the
+	panels that have unreachable directories.
+	(WindowFactory_get_windows_by_directory): New method to get a
+	sequence of all the panels that are showing the specified directory.
+
+	* gmc.gnorba: Fixed the GOAD IDs to be something non-ad-hoc.
+	Added the Desktop interface.
+
 1999-09-06  Federico Mena Quintero  <federico@redhat.com>
 
 	* gtkdtree.c (gtk_dtree_size_allocate): Do the "visibility" test

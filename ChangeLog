@@ -1,3 +1,9 @@
+1999-09-08  Federico Mena Quintero  <federico@redhat.com>
+
+	* idl/FileManager.idl: Changed names, and put everything under a
+	FileManager module.  Added a Desktop interface and some methods to
+	the WindowFactory interface.
+
 1999-09-08  Kjartan Maraas  <kmaraas@online.no>
 
 	* doc-gnome/*: Shiny new docs from users-guide.

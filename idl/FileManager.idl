@@ -1,15 +1,30 @@
 #include <gnome-factory.idl>
 
 module GNOME {
-  exception POSIX_ERROR { string errorstr; };
+	module FileManager {
+		exception POSIX_ERROR { string errorstr; };
 
-  interface FileManagerWindow {
-    /* not much yet */
-    oneway void close();
-  };
+		interface Desktop {
+			void rescan ();
+			void rescan_devices ();
+		};
 
-  interface FileManagerFactory : GenericFactory {
-    FileManagerWindow create_window(in string dir)
-      raises (POSIX_ERROR);
-  };
+		interface Window {
+			/* not much yet */
+			oneway void close ();
+		};
+
+		interface WindowFactory : ::GNOME::GenericFactory {
+			typedef sequence<Window> WindowSeq;
+
+			/* This is the desktop object */
+			readonly attribute Desktop the_desktop;
+
+			Window create_window (in string dir)
+				raises (POSIX_ERROR);
+			void rescan_directory (in string dir);
+			void close_invalid_windows ();
+			WindowSeq get_windows_by_directory (in string dir);
+		};
+	};
 };

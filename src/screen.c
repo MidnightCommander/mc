@@ -1018,6 +1018,7 @@ panel_new (char *panel_name)
     panel->drag_tree_row = -1;
     panel->is_a_desktop_panel = FALSE;
     panel->id = panel_id++;
+    panel->servant = NULL;
 #endif
 
     panel->panel_name = g_strdup (panel_name);

@@ -1,11 +1,17 @@
-[gmc_filemanager_factory]
+[IDL:GNOME:FileManager:WindowFactory:1.0]
 type=exe
-repo_id=IDL:GNOME/FileManagerFactory:1.0 IDL:GNOME/GenericFactory:1.0
-description=GNOME Midnight Commander
+repo_id=IDL:GNOME/FileManager/WindowFactory:1.0 IDL:GNOME/GenericFactory:1.0
+description=Directory window factory
 location_info=gmc
 
-[gmc_filemanager_window]
+[IDL:GNOME:FileManager:Window:1.0]
 type=factory
-repo_id=IDL:GNOME/FileManagerWindow:1.0
-description=File manager window
-location_info=gmc_filemanager_factory
+repo_id=IDL:GNOME/FileManager/Window:1.0
+description=Directory window
+location_info=IDL:GNOME:FileManager:WindowFactory:1.0
+
+[IDL:GNOME:FileManager:Desktop:1.0]
+type=factory
+repo_id=IDL:GNOME/FileManager/Desktop:1.0
+description=Desktop
+location_info=IDL:GNOME:FileManager:WindowFactory:1.0

@@ -174,6 +174,9 @@ typedef struct {
 
     void *panel_listbox;	/* container for the list */
     int is_a_desktop_panel;
+
+    /* CORBA servant */
+    void *servant;
 #endif
 } WPanel;
 
