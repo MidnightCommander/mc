@@ -40,6 +40,7 @@
  * host.
  */
 
+#ifdef USE_NETCODE
 char *
 vfs_split_url (const char *path, char **host, char **user, int *port,
 	       char **pass, int default_port, int flags)
@@ -128,6 +129,7 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     g_free (pcopy);
     return retval;
 }
+#endif				/* USE_NETCODE */
 
 /*
  * Look up a user or group name from a uid/gid, maintaining a cache.

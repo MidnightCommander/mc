@@ -19,6 +19,7 @@ BASICFILES = 			\
 	local.c 		\
 	tar.c			\
 	sfs.c			\
+	utilvfs.c		\
 	vfs.c
 
 VFSHDRS = 			\
@@ -43,8 +44,7 @@ if USE_UNDEL_FS
 UNDEL_FILES = $(UNDELFILES)
 endif
 
-NETFILES = tcputil.c fish.c ftpfs.c mcfs.c mcfsutil.c utilvfs.c \
-	$(SMB_NETFILES)
+NETFILES = tcputil.c fish.c ftpfs.c mcfs.c mcfsutil.c $(SMB_NETFILES)
 
 NONETFILES = $(BASICFILES) $(UNDEL_FILES)
 
