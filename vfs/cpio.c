@@ -29,7 +29,7 @@
 /* #include "utilvfs.h" */
 
 #include "../src/dialog.h"
-#include "cpio.h"
+//#include "cpio.h"
 #include "names.h"
 
 enum {
