@@ -42,7 +42,7 @@ AC_DEFUN([MC_EXTFS_CHECKS], [
     AC_PATH_PROG([UNZIP], [unzip], [/usr/bin/unzip])
     AC_CACHE_CHECK([for zipinfo code in unzip], [mc_cv_have_zipinfo],
 	[mc_cv_have_zipinfo=no
-	if $UNZIP -Z </dev/null 2>&1 >/dev/null; then
+	if $UNZIP -Z </dev/null >/dev/null 2>&1; then
 	    mc_cv_have_zipinfo=yes
 	fi])
     if test "x$mc_cv_have_zipinfo" = xyes; then
