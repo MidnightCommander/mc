@@ -1,5 +1,7 @@
 2001-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* gcmd.c (gnome_about_cmd): Update copyright years.
+
 	* application.x-gnumeric.desktop: Remove, it's unused.
 	* gimp.image.desktop: Likewise.
 	* Makefile.in: Remove references to *.desktop files.
