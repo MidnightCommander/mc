@@ -9,19 +9,9 @@
 
 lib_LTLIBRARIES = libvfs.la
 
-BUILT_SOURCES = mad.c mad.h
-
 libvfsincludedir=$(includedir)/vfs
 
 libvfsinclude_HEADERS=vfs.h
-
-EXTRA_DIST = mc-src/mad.c mc-src/mad.h
-
-mad.c: mc-src/mad.c
-	$(LN_S) $(srcdir)/mc-src/mad.c mad.c
-
-mad.h: mc-src/mad.h
-	$(LN_S) $(srcdir)/mc-src/mad.h mad.h
 
 libvfs_la_SOURCES = \
 	container.c 		\
