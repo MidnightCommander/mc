@@ -266,20 +266,30 @@ Menu EditMenuBar[N_menus];
 
 void edit_init_menu_normal (void)
 {
-    EditMenuBar[0] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu));
-    EditMenuBar[1] = create_menu (_(" Edit "), EditMenu, menu_entries (EditMenu));
-    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenu, menu_entries (SearReplMenu));
-    EditMenuBar[3] = create_menu (_(" Command "), CmdMenu, menu_entries (CmdMenu));
-    EditMenuBar[4] = create_menu (_(" Options "), OptMenu, menu_entries (OptMenu));
+    EditMenuBar[0] = create_menu (_(" File "), FileMenu, menu_entries (FileMenu),
+				    "[Internal File Editor]");
+    EditMenuBar[1] = create_menu (_(" Edit "), EditMenu, menu_entries (EditMenu),
+				    "[Internal File Editor]");
+    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenu, menu_entries (SearReplMenu),
+				    "[Internal File Editor]");
+    EditMenuBar[3] = create_menu (_(" Command "), CmdMenu, menu_entries (CmdMenu),
+				    "[Internal File Editor]");
+    EditMenuBar[4] = create_menu (_(" Options "), OptMenu, menu_entries (OptMenu),
+				    "[Internal File Editor]");
 }
 
 void edit_init_menu_emacs (void)
 {
-    EditMenuBar[0] = create_menu (_(" File "), FileMenuEmacs, menu_entries (FileMenuEmacs));
-    EditMenuBar[1] = create_menu (_(" Edit "), EditMenuEmacs, menu_entries (EditMenuEmacs));
-    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenuEmacs, menu_entries (SearReplMenuEmacs));
-    EditMenuBar[3] = create_menu (_(" Command "), CmdMenuEmacs, menu_entries (CmdMenuEmacs));
-    EditMenuBar[4] = create_menu (_(" Options "), OptMenuEmacs, menu_entries (OptMenuEmacs));
+    EditMenuBar[0] = create_menu (_(" File "), FileMenuEmacs, menu_entries (FileMenuEmacs),
+				    "[Internal File Editor]");
+    EditMenuBar[1] = create_menu (_(" Edit "), EditMenuEmacs, menu_entries (EditMenuEmacs),
+				    "[Internal File Editor]");
+    EditMenuBar[2] = create_menu (_(" Sear/Repl "), SearReplMenuEmacs, menu_entries (SearReplMenuEmacs),
+				    "[Internal File Editor]");
+    EditMenuBar[3] = create_menu (_(" Command "), CmdMenuEmacs, menu_entries (CmdMenuEmacs),
+				    "[Internal File Editor]");
+    EditMenuBar[4] = create_menu (_(" Options "), OptMenuEmacs, menu_entries (OptMenuEmacs),
+				    "[Internal File Editor]");
 }
 
 void edit_done_menu (void)
