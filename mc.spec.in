@@ -74,11 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 %config /etc/profile.d/*
 %{_prefix}/share/mc/cedit.menu
 %{_prefix}/share/mc/edit.indent.rc
+%{_prefix}/share/mc/edit.spell.rc
 %{_prefix}/share/mc/extfs/*
 %{_prefix}/share/mc/mc.ext
 %{_prefix}/share/mc/mc.lib
 %{_prefix}/share/mc/mc.menu
-%{?_with_charset: %{_prefix}/share/mc/mc.charsets}
+%{?_with_charset:%config %{_prefix}/share/mc/mc.charsets}
 
 %{_prefix}/share/mc/mc.hint*
 %{_prefix}/share/mc/mc.hlp*
@@ -93,6 +94,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Mon Sep 23 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
+- Restore %config for %{_prefix}/share/mc/mc.charsets.
+- Restore %{_prefix}/share/mc/edit.spell.rc.
+
 * Sat Sep 21 2002 Pavel Roskin <proski@gnu.org>
 - Use FHS-compliant paths.
 - Drop %config from files under /usr/share - users are not supposed to
