@@ -1,3 +1,13 @@
+2001-05-28  Pavel Roskin  <proski@gnu.org>
+
+	* color.c (init_colors) [HAVE_SLANG]: Use SLtt_set_color() to
+	associate the default colors with DEFAULT_COLOR_INDEX. The old
+	code would unset alternative charset without making S-Lang aware
+	of it.
+	Thanks to John E. Davis <davis@space.mit.edu>
+	* widget.c (update_input) [HAVE_SLANG]: Revert last change - it
+	is not needed now.
+
 2001-05-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c: Correct some comments after #endif

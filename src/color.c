@@ -294,15 +294,12 @@ void init_colors (void)
 #endif
 
 #if defined HAVE_SLANG && !defined(HAS_DIRECT_COLOR_ACCESS)
-	if (use_colors) { /* Hack to make COLOR_PAIR(DEFAULT_COLOR_INDEX) 
-                             be the default fg/bg of the terminal */
-	    char *Norm_Vid = SLtt_tgetstr ("me");
-	    
-	    if (Norm_Vid == NULL)
-	        Norm_Vid = SLtt_tgetstr ("se");
-	    if (Norm_Vid == NULL)
-	        Norm_Vid = "\033[0m";
-	    SLtt_set_color_esc (DEFAULT_COLOR_INDEX, Norm_Vid);
+	if (use_colors) { /* We are relying on undocumented feature of
+			     S-Lang to make COLOR_PAIR(DEFAULT_COLOR_INDEX)
+			     the default fg/bg of the terminal.
+			     Hopefully, future versions of S-Lang will
+			     document this feature. */
+	    SLtt_set_color (DEFAULT_COLOR_INDEX, NULL, NULL, NULL);
 	}
 #endif	
 
