@@ -432,12 +432,14 @@ library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
 [QueryBox]
+Query boxes
 
 In the query dialog box you can use the arrow keys or the
 first letter to select an item or click with the mouse on
 the button.
 
 [How to use help]
+How to use help
 
 You can use the cursor keys or mouse to navigate in the
 help viewer.
