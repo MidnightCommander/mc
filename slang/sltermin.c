@@ -1147,7 +1147,7 @@ char *SLtt_tigetent (char *s)
    return (char *) _SLtt_tigetent (s);
 }
 
-extern char *SLtt_tigetstr (const char *s, char **p)
+extern char *SLtt_tigetstr (char *s, char **p)
 {
    if (p == NULL)
      return NULL;

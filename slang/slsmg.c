@@ -220,7 +220,7 @@ static int point_visible (int col_too)
 		   && (This_Col < Start_Col + Screen_Cols))));
 }
 
-void SLsmg_write_string (const char *str)
+void SLsmg_write_string (char *str)
 {
    SLsmg_write_nchars (str, strlen (str));
 }
@@ -302,7 +302,7 @@ static unsigned char Alt_Char_Set[129];/* 129th is used as a flag */
 int SLsmg_Display_Eight_Bit = 128;
 #endif
 
-void SLsmg_write_nchars (const char *str, unsigned int n)
+void SLsmg_write_nchars (char *str, unsigned int n)
 {
    register SLsmg_Char_Type *p, old, neew, color;
    unsigned char ch;
@@ -1177,7 +1177,7 @@ SLsmg_Char_Type SLsmg_char_at (void)
    return 0;
 }
 
-void SLsmg_vprintf (const char *fmt, va_list ap)
+void SLsmg_vprintf (char *fmt, va_list ap)
 {
    char buf[1024];
 
@@ -1187,7 +1187,7 @@ void SLsmg_vprintf (const char *fmt, va_list ap)
    SLsmg_write_string (buf);
 }
 
-void SLsmg_printf (const char *fmt, ...)
+void SLsmg_printf (char *fmt, ...)
 {
    va_list ap;
    unsigned int len;
