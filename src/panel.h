@@ -115,7 +115,7 @@ typedef struct {
 
     void     *port_ui;		/* UI stuff specific to each GUI port */
 
-#Ifdef HAVE_GNOME
+#ifdef HAVE_GNOME
     /* These are standard GtkWidgets */
 	
     void *xwindow;		/* The toplevel window */
