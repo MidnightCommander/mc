@@ -2,6 +2,11 @@
 
 	* achown.c (get_ownership): Simplified the code. Now it is
 	more independent of the WButton internals.
+	* achown.c (get_ownership): Renamed to update_ownership.
+	* achown.c (update_permissions): Update the permission widgets
+	without accessing WButton->text directly.
+	* achown.c (print_flags): Use update_permissions.
+	* achown.c (chown_info_update): Likewise.
 
 2005-02-05  Roland Illig  <roland.illig@gmx.de>
 

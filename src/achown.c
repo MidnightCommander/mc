@@ -68,12 +68,12 @@ static struct {
     { B_CANCEL, NORMAL_BUTTON, 4, 53, N_("&Cancel") },
     { B_ENTER,  DEFPUSH_BUTTON,4, 40, N_("&Set") },
     { B_SKIP,   NORMAL_BUTTON, 4, 23, N_("S&kip") },
-    { B_SETALL, NORMAL_BUTTON, 4, 0, N_("Set &all")},
+    { B_SETALL, NORMAL_BUTTON, 4,  0, N_("Set &all")},
     { B_ENTER,  NARROW_BUTTON, 0, 47, ""},
     { B_ENTER,  NARROW_BUTTON, 0, 29, ""},
-    { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
-    { B_ENTER,  NARROW_BUTTON, 0, 11, "   "},
-    { B_ENTER,  NARROW_BUTTON, 0, 3, "   "}
+    { B_ENTER,  NARROW_BUTTON, 0, 19, ""},
+    { B_ENTER,  NARROW_BUTTON, 0, 11, ""},
+    { B_ENTER,  NARROW_BUTTON, 0,  3, ""}
 };
 
 static WButton *b_att[3];	/* permission */
@@ -92,7 +92,7 @@ static int current_file;
 static int single_set;
 static char *fname;
 
-static void get_ownership (void)
+static void update_ownership (void)
 {
     button_set_text (b_user, get_owner (sf_stat->st_uid));
     button_set_text (b_group, get_group (sf_stat->st_gid));
@@ -135,6 +135,17 @@ static void set_perm_by_flags (char *s, int f_p)
 	else
 	    s[i] = (ch_cmode & (1 << (8 - f_p - i))) ? ch_perm[i] : '-';
     }
+}
+
+static void update_permissions (void)
+{
+    char flags[] = "---";
+    set_perm_by_flags (flags, 0);
+    button_set_text (b_att[0], flags);
+    set_perm_by_flags (flags, 3);
+    button_set_text (b_att[1], flags);
+    set_perm_by_flags (flags, 6);
+    button_set_text (b_att[2], flags);
 }
 
 static umode_t get_perm (char *s, int base)
@@ -187,9 +198,7 @@ static void print_flags (void)
 	addch (ch_flags [i+6]);
     }
 
-    set_perm_by_flags (b_att[0]->text, 0);
-    set_perm_by_flags (b_att[1]->text, 3);
-    set_perm_by_flags (b_att[2]->text, 6);
+    update_permissions ();
 
     for (i = 0; i < 15; i++){
 	dlg_move (ch_dlg, BY+1, 35+i);
@@ -368,9 +377,7 @@ static void chown_info_update (void)
     printw ("%12o", get_mode ());
     
     /* permissions */
-    set_perm_by_flags (b_att[0]->text, 0);
-    set_perm_by_flags (b_att[1]->text, 3);
-    set_perm_by_flags (b_att[2]->text, 6);
+    update_permissions ();
 }
 
 static void b_setpos (int f_pos) {
