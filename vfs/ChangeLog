@@ -1,3 +1,8 @@
+1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+
+	* Make-mc.in: $SAMBAFILES -> @SAMBAFILES@ in the rule
+ 	as well as the dependencies.
+
 1999-06-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* smbfs.c 	(get_remote_stat): Change debug level.

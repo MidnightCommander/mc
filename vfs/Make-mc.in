@@ -203,7 +203,7 @@ $(SAMBAFILES):
 
 libvfs-mc.a: $(VFSOBJS) @SAMBAFILES@
 	$(RMF) $@
-	$(AR) cr $@ $(VFSOBJS) $(SAMBAFILES)
+	$(AR) cr $@ $(VFSOBJS) @SAMBAFILES@
 	-$(RANLIB) $@
 
 showlibdep:
