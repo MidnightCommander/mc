@@ -1,3 +1,8 @@
+1999-02-25  Owen Taylor  <otaylor@redhat.com>
+
+	* fileopctx.h file.c: Moved recursive delete query
+	dialog into gdialogs.c for GNOME.
+
 1999-02-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c: Moved FileCopyMode here (thanks to Wolfgang Scherer for

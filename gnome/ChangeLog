@@ -1,5 +1,10 @@
 1999-02-25 Owen Taylor  <otaylor@redhat.com>
 
+	* gdialogs.c (file_delete_query_recursive): GNOME
+	replacement for recursive delete query dialog.
+
+1999-02-25 Owen Taylor  <otaylor@redhat.com>
+
 	* gprefs.c gcustom-layout.[ch]: Add a new page to
 	the preferences dialog to allow the user to change
 	the columns in the custom view.

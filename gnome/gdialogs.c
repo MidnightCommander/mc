@@ -706,6 +706,75 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         return dest_dir;
 }
 
+int
+file_delete_query_recursive (FileOpContext *ctx, enum OperationMode mode, gchar *s)
+{
+        GtkWidget *dialog;
+        GtkWidget *togglebutton;
+        gchar *title;
+        gchar *msg;
+        gint button;
+        gboolean rest_same;
+
+        if (ctx->recursive_result < RECURSIVE_ALWAYS) {
+                msg = g_strdup_printf(_("%s\n\nDirectory not empty. Delete it recursively?"), name_trunc (s, 80));
+                dialog = gnome_message_box_new (msg,
+                                                GNOME_MESSAGE_BOX_QUESTION,
+                                                GNOME_STOCK_BUTTON_YES,
+                                                GNOME_STOCK_BUTTON_NO,
+                                                GNOME_STOCK_BUTTON_CANCEL,
+                                                NULL);
+                g_free (msg);
+                
+                title = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", NULL);
+                gtk_window_set_title (GTK_WINDOW (dialog), title);
+                g_free (title);
+
+                togglebutton = gtk_check_button_new_with_label (_("Do the same for the rest"));
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox),
+                                    togglebutton, FALSE, FALSE, 0);
+                gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
+                
+                gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+                
+                button = gnome_dialog_run (GNOME_DIALOG (dialog));
+                rest_same = GTK_TOGGLE_BUTTON (togglebutton)->active;
+
+                gtk_widget_destroy (dialog);
+                
+                switch (button) {
+                case 0:
+                        ctx->recursive_result = rest_same ? RECURSIVE_ALWAYS : RECURSIVE_YES;
+                        break;
+                case 1:
+                        ctx->recursive_result = rest_same ? RECURSIVE_NEVER : RECURSIVE_NO;
+                        break;
+                case 2:
+                        ctx->recursive_result = RECURSIVE_ABORT;
+                        break;
+                default:
+                }
+                
+                if (ctx->recursive_result != RECURSIVE_ABORT)
+                        do_refresh ();
+        }
+                
+        switch (ctx->recursive_result){
+        case RECURSIVE_YES:
+        case RECURSIVE_ALWAYS:
+                return FILE_CONT;
+                
+        case RECURSIVE_NO:
+        case RECURSIVE_NEVER:
+                return FILE_SKIP;
+                
+        case RECURSIVE_ABORT:
+                
+        default:
+                return FILE_ABORT;
+        }
+}
+
 static void
 cancel_cb (GtkWidget *widget, gpointer data)
 {

@@ -120,6 +120,14 @@ typedef enum {
 	FILE_ABORT
 } FileProgressStatus;
 
+typedef enum {
+    RECURSIVE_YES,
+    RECURSIVE_NO,
+    RECURSIVE_ALWAYS,
+    RECURSIVE_NEVER,
+    RECURSIVE_ABORT
+} FileCopyMode;
+
 /* First argument passed to real functions */
 enum OperationMode {
     Foreground,

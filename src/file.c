@@ -156,14 +156,6 @@ char *op_names [3] = {
 	N_(" Delete ")
 };
 
-typedef enum {
-    RECURSIVE_YES,
-    RECURSIVE_NO,
-    RECURSIVE_ALWAYS,
-    RECURSIVE_NEVER,
-    RECURSIVE_ABORT
-} FileCopyMode;
-
 static int recursive_erase (FileOpContext *ctx, char *s,
 			    long *progress_count, double *progress_bytes);
 
@@ -1749,6 +1741,10 @@ panel_operate_generate_prompt (WPanel* panel, int operation, int only_one,
 #ifdef HAVE_GNOME
 extern FileProgressStatus file_progress_query_replace_policy (FileOpContext *ctx,
 							      gboolean dialog_needed);
+extern int                file_delete_query_recursive        (FileOpContext *ctx,
+							      enum OperationMode mode,
+							      gchar         *s);
+
 #endif
 
 /**
@@ -2180,10 +2176,12 @@ files_error (char *format, char *file1, char *file2)
     return do_file_error (cmd_buf);
 }
 
+#ifndef HAVE_GNOME
 static int
 real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 {
-    char *confirm, *text;
+    char *confirm, *textb;
+    gchar *text;
 
     if (ctx->recursive_result < RECURSIVE_ALWAYS){
 	char *msg =
@@ -2236,6 +2234,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	return FILE_ABORT;
     }
 }
+#endif
 
 #ifdef WITH_BACKGROUND
 static int
@@ -2250,10 +2249,17 @@ do_file_error (char *str)
 static int
 query_recursive (FileOpContext *ctx, char *s)
 {
+#ifdef HAVE_GNOME
+    if (we_are_background)
+	return parent_call (file_delete_query_recursive, ctx, 1, strlen (s), s);
+    else
+	return file_delete_query_recursive (ctx, Foreground, s);
+#else    
     if (we_are_background)
 	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
     else
 	return real_query_recursive (ctx, Foreground, s);
+#endif    
 }
 
 static int
