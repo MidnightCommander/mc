@@ -203,7 +203,6 @@
 	int mc_link     (const char *name1, const char *name2);
         int mc_mknod    (char *, int, int);
 	int mc_rename   (const char *original, const char *target);
-	int mc_write    (int fd, char *buf, int nbyte);
         int mc_rmdir    (char *path);
         int mc_mkdir    (char *path, mode_t mode);
 
@@ -318,7 +317,7 @@ extern int vfs_parse_filetype (char c);
 extern int vfs_parse_filemode (const char *p);
 extern int vfs_parse_filedate(int idx, time_t *t);
 
-extern void vfs_die (char *msg);
+extern void vfs_die (const char *msg);
 extern char *vfs_get_password (char *msg);
 
 /* Flags for vfs_split_url() */

@@ -31,7 +31,6 @@
 #include "win.h"
 #include "key.h"	/* For mi_getch() */
 
-extern int is_right;
 int menubar_visible = 1;	/* This is the new default */
 
 static void

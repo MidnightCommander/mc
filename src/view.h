@@ -10,7 +10,6 @@ int view_init (WView *view, char *_command, const char *_file,
 	       int start_line);
 
 void view_update_bytes_per_line (WView *view);
-int view_file (char *filename, int normal, int internal);
 
 /* Command: view a file, if _command != NULL we use popen on _command */
 /* move direction should be apointer that will hold the direction in which the user */

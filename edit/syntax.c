@@ -497,8 +497,6 @@ static void get_args (char *l, char **args, int *argc)
 #define check_a {if(!*a){result=line;break;}}
 #define check_not_a {if(*a){result=line;break;}}
 
-int try_alloc_color_pair (char *fg, char *bg);
-
 static int
 this_try_alloc_color_pair (char *fg, char *bg)
 {

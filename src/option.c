@@ -48,8 +48,6 @@ static int r_but;
 
 #define TOGGLE_VARIABLE 0
 
-extern int use_internal_edit;
-
 static int first_width, second_width;
 static char *title1, *title2, *title3;
 

@@ -39,8 +39,6 @@ extern int file_op_compute_totals;
 
 /* Query routines */
 
-extern int background_wait;
-
 int is_wildcarded (char *p);
 void compute_dir_size (char *dirname, off_t *ret_marked, double *ret_total);
 

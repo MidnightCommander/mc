@@ -83,19 +83,7 @@ int source_route = 0;
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
 
-/* Ugly hack in order to distinguish between left and right panel in menubar */
-int is_right;
-#define MENU_PANEL_IDX  (is_right ? 1 : 0)
 
-
-/* view_file (filename, normal, internal)
- *
- * Inputs:
- *   filename:   The file name to view
- *   plain_view: If set does not do any fancy pre-processing (no filtering) and
- *               always invokes the internal viewer.
- *   internal:   If set uses the internal viewer, otherwise an external viewer.
- */
 int
 view_file_at_line (char *filename, int plain_view, int internal,
 		   int start_line)
@@ -169,6 +157,14 @@ view_file_at_line (char *filename, int plain_view, int internal,
     return move_dir;
 }
 
+/* view_file (filename, plain_view, internal)
+ *
+ * Inputs:
+ *   filename:   The file name to view
+ *   plain_view: If set does not do any fancy pre-processing (no filtering) and
+ *               always invokes the internal viewer.
+ *   internal:   If set uses the internal viewer, otherwise an external viewer.
+ */
 int
 view_file (char *filename, int plain_view, int internal)
 {

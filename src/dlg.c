@@ -59,8 +59,6 @@ static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
-    extern int slow_terminal;
-
     if (slow_terminal){
 	slow_box (h, y, x, ys, xs);
 	return;

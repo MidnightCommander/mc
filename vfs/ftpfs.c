@@ -107,8 +107,6 @@ int ftpfs_first_cd_then_ls;
 /* Use the ~/.netrc */
 int use_netrc = 1;
 
-extern char *home_dir;
-
 /* Anonymous setup */
 char *ftpfs_anonymous_passwd = NULL;
 int ftpfs_directory_timeout = 900;
@@ -153,7 +151,7 @@ static char reply_str [80];
 
 static char *ftpfs_get_current_directory (vfs *me, vfs_s_super *super);
 static int ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path);
-static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
+static int command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 static int ftpfs_open_socket (vfs *me, vfs_s_super *super);
 static int login_server (vfs *me, vfs_s_super *super, const char *netrcpass);
@@ -313,7 +311,7 @@ reconnect (vfs *me, vfs_s_super *super)
 }
 
 static int
-command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
+command (vfs *me, vfs_s_super *super, int wait_reply, const char *fmt, ...)
 {
     va_list ap;
     char *str, *fmt_str;

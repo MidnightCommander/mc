@@ -47,7 +47,6 @@ extern int clear_before_exec;
 extern int mou_auto_repeat;
 extern char *other_dir;
 extern int mouse_move_pages;
-extern int mouse_move_pages_viewer;
 
 #ifdef HAVE_CHARSET
 extern int source_codepage;
@@ -79,16 +78,16 @@ extern int searching;
 extern int vfs_use_limit;
 extern int alternate_plus_minus;
 extern int only_leading_plus_minus;
-extern int ftpfs_directory_timeout;
 extern int output_starts_shell;
 extern int midnight_shutdown;
 extern char search_buffer [256];
 extern char cmd_buf [512];
 extern char *cmdline_geometry;
 
-/* The menu panels */
+/* Ugly hack in order to distinguish between left and right panel in menubar */
 extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
+#define MENU_PANEL_IDX  (is_right ? 1 : 0)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
 typedef void (*key_callback) ();
@@ -161,7 +160,6 @@ void edition_post_exec (void);
 
 void done_menu (void);
 void init_menu (void);
-void exec_shell (void);
 
 #ifdef NATIVE_WIN32
 #    define MC_BASE ""

@@ -45,10 +45,7 @@
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"
 #include "main.h"
-#include "../vfs/vfs.h"
 #include "panelize.h"
-
-void do_external_panelize (char *command);
 
 #define UX		5
 #define UY		2

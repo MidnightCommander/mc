@@ -54,12 +54,8 @@
 #   include "tcputil.h"
 #endif
 
-extern int get_other_type (void);
-
 int vfs_timeout = 60; /* VFS timeout in seconds */
 static int vfs_flags = 0;    /* Flags */
-
-extern int cd_symlinks; /* Defined in main.c */
 
 /* They keep track of the current directory */
 static vfs *current_vfs = &vfs_local_ops;
@@ -1794,7 +1790,7 @@ error:
 }
 
 void
-vfs_die (char *m)
+vfs_die (const char *m)
 {
     message_1s (1, _("Internal error:"), m);
     exit (1);

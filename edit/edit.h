@@ -315,8 +315,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 
 #define color_palette(x) win->color[x].pixel
 
-extern char *home_dir;
-
 #define NUM_SELECTION_HISTORY 64
 
 #ifndef MAX_PATH_LEN

@@ -83,7 +83,6 @@ int if_link_is_exe (char *full_name, file_entry *file);
 
 extern int show_backups;
 extern int show_dot_files;
-extern int show_backups;
 extern int mix_all_files;
 
 #endif	/* __DIR_H */

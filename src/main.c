@@ -118,6 +118,9 @@ struct WMenu *the_menubar;
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
 
+/* Set if the command is being run from the "Right" menu */
+int is_right;
+
 /* Set when main loop should be terminated */
 volatile int quit = 0;
 

@@ -71,7 +71,6 @@ static int slinterrupt;
 static int no_slang_delay;
 
 /* {{{  Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK, */
-extern unsigned int SLang_Input_Buffer_Len;
 extern unsigned char SLang_Input_Buffer [];
 #if SLANG_VERSION >= 10000
 extern unsigned int _SLsys_getkey (void);
@@ -172,9 +171,6 @@ got_interrupt (void)
 void
 slang_init (void)
 {
-    extern int SLtt_Blink_Mode;
-    extern int SLtt_Has_Alt_Charset;
-    extern int force_ugly_line_drawing;
     struct sigaction act, oact;
     
     SLtt_get_terminfo ();
