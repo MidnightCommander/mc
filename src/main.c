@@ -1128,8 +1128,9 @@ load_prompt (int fd, void *unused)
 {
     if (!read_subshell_prompt (QUIETLY))
 	return 0;
-    
-    if (command_prompt){
+
+    /* Don't actually change the prompt if it's invisible */
+    if (current_dlg == midnight_dlg && command_prompt){
 	int  prompt_len;
 
 	prompt = strip_ctrl_codes (subshell_prompt);
@@ -1147,10 +1148,8 @@ load_prompt (int fd, void *unused)
 	 * get_event channels, the prompt updating does not take place
 	 * automatically: force a cursor update and a screen refresh
 	 */
-	if (current_dlg == midnight_dlg){
-	    update_cursor (midnight_dlg);
-	    mc_refresh ();
-	}
+	update_cursor (midnight_dlg);
+	mc_refresh ();
     }
     update_prompt = 1;
     return 0;
