@@ -403,6 +403,13 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
     else
 	*h_size = tar_from_oct (1 + 12, header->header.size);
 
+    /*
+     * Skip over directory snapshot info records that
+     * are stored in incremental tar archives.
+     */
+    if (header->header.linkflag == LF_DUMPDIR)
+	return STATUS_SUCCESS;
+
     header->header.arch_name[NAMSIZ - 1] = '\0';
     if (header->header.linkflag == LF_LONGNAME
 	|| header->header.linkflag == LF_LONGLINK) {

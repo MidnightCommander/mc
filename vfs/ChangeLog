@@ -1,3 +1,8 @@
+2004-12-01  Pavel Tsekov <ptsekov@gmx.net>
+
+	* tar.c (tar_read_header): Skip over records containing
+        incremental tar specific info.
+
 2004-11-29  Jindrich Novy  <jnovy@redhat.com>
 
 	* direntry.c (vfs_s_readlink): Correctly calculate link length.
