@@ -582,17 +582,19 @@ static void prev_node_cmd (Dlg_head *h)
     help_callback (h, DLG_DRAW, 0);
 }
 
-static int md_callback (Widget *w, int msg, int par)
+static int
+md_callback (Widget *w, int msg, int par)
 {
     return default_proc (msg, par);
 }
 
-static Widget *mousedispatch_new (int y, int x, int yl, int xl)
+static Widget *
+mousedispatch_new (int y, int x, int yl, int xl)
 {
     Widget *w = g_new (Widget, 1);
 
-    init_widget (w, y, x, yl, xl,
-		 (callback_fn) md_callback, 0, (mouse_h)  help_event);
+    init_widget (w, y, x, yl, xl, (callback_fn) md_callback,
+		 (mouse_h) help_event);
 
     return w;
 }

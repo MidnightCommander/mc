@@ -1,5 +1,8 @@
 2003-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove restroy callback.  Widgets should use
+	WIDGET_DESTROY.  Adjust all dependencies.
+
 	* dlg.c: Don't supply ID of the current widget with any
 	callbacks.  It's mostly useless and can be found by the
 	callback.

@@ -284,14 +284,6 @@ view_done (WView *view)
 
 static void view_hook (void *);
 
-static void
-view_destroy (WView *view)
-{
-    view_done (view);
-    if (view->have_frame)
-	delete_hook (&select_file_hook, view_hook);
-}
-
 static int
 get_byte (WView *view, unsigned int byte_index)
 {
@@ -2701,17 +2693,17 @@ view_callback (WView *view, int msg, int par)
 	    add_hook (&select_file_hook, view_hook, view);
 	else
 	    view_labels (view);
-	break;
+	return 1;
 
     case WIDGET_DRAW:
 	display (view);
 	view_status (view, TRUE);
-	break;
+	return 1;
 
     case WIDGET_CURSOR:
 	if (view->hex_mode)
 	    view_place_cursor (view);
-	break;
+	return 1;
 
     case WIDGET_KEY:
 	i = view_handle_key ((WView *) view, par);
@@ -2735,8 +2727,15 @@ view_callback (WView *view, int msg, int par)
 	view_labels (view);
 	return 1;
 
+    case WIDGET_DESTROY:
+	view_done (view);
+	if (view->have_frame)
+	    delete_hook (&select_file_hook, view_hook);
+	return 1;
+
+    default:
+	return default_proc (msg, par);
     }
-    return default_proc (msg, par);
 }
 
 WView *
@@ -2746,7 +2745,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
 
     init_widget (&view->widget, y, x, lines, cols,
 		 (callback_fn) view_callback,
-		 (destroy_fn) view_destroy,
 		 (mouse_h) real_view_event);
 
     view->hex_mode = default_hex_mode;

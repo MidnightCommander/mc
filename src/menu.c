@@ -470,10 +470,6 @@ menubar_event    (Gpm_Event *event, WMenu *menubar)
     return MOU_NORMAL;
 }
 
-static void menubar_destroy (WMenu *menubar)
-{
-}
-
 /*
  * Properly space menubar items. Should be called when menubar is created
  * and also when widget width is changed (i.e. upon xterm resize).
@@ -538,7 +534,7 @@ menubar_new (int y, int x, int cols, Menu *menu[], int items)
 
     init_widget (&menubar->widget, y, x, 1, cols,
 		 (callback_fn) menubar_callback,
-		 (destroy_fn) menubar_destroy, (mouse_h) menubar_event);
+		 (mouse_h) menubar_event);
     menubar->menu = menu;
     menubar->active = 0;
     menubar->dropped = 0;

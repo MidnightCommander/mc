@@ -118,15 +118,13 @@ void dlg_erase (Dlg_head *h)
 
 void
 init_widget (Widget *w, int y, int x, int lines, int cols,
-	     callback_fn callback, destroy_fn destroy,
-	     mouse_h mouse_handler)
+	     callback_fn callback, mouse_h mouse_handler)
 {
     w->x = x;
     w->y = y;
     w->cols = cols;
     w->lines = lines;
     w->callback = callback;
-    w->destroy = destroy;
     w->mouse = mouse_handler;
     w->parent = 0;
 
@@ -836,8 +834,6 @@ destroy_dlg (Dlg_head *h)
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
     c = h->current;
     for (i = 0; i < h->count; i++){
-	if (c->widget->destroy)
-	    c->widget->destroy (c->widget);
 	c = c->next;
 	if (h->current){
 	    g_free (h->current->widget);
@@ -878,7 +874,6 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
 	    /* First kill the widget */
 	    new->parent  = h;
 	    send_message (old, WIDGET_DESTROY, 0);
-	    (*old->destroy) (old);
 
 	    /* We insert the new widget */
 	    p->widget = new;

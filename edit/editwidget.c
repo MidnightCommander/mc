@@ -190,7 +190,7 @@ edit (const char *_file, int line)
 		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
-		 (callback_fn) edit_callback, (destroy_fn) edit_clean,
+		 (callback_fn) edit_callback,
 		 (mouse_h) edit_mouse_event);
 
     widget_want_cursor (wedit->widget, 1);
@@ -343,6 +343,9 @@ static int edit_callback (WEdit *e, int msg, int par)
 	return 1;
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET, e->curs_col + e->start_col);
+	return 1;
+    case WIDGET_DESTROY:
+	edit_clean (e);
 	return 1;
     }
     return default_proc (msg, par);

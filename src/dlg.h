@@ -93,9 +93,6 @@ typedef struct Dlg_head {
 } Dlg_head;
 
 
-/* Call when the widget is destroyed */
-typedef void (*destroy_fn)(void *widget);
-
 /* Widget callback */
 typedef int (*callback_fn)(void *widget, int Msg, int Par);
 
@@ -105,7 +102,6 @@ typedef struct Widget {
     int cols, lines;
     int options;
     callback_fn callback;  /* The callback function */
-    destroy_fn destroy;
     mouse_h mouse;
     struct Dlg_head *parent;
 } Widget;
@@ -166,8 +162,7 @@ void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
-		  callback_fn callback, destroy_fn destroy,
-		  mouse_h mouse_handler);
+		  callback_fn callback, mouse_h mouse_handler);
 
 /* Default callback for dialogs */
 cb_ret_t default_dlg_callback (Dlg_head *h, dlg_msg_t msg, int parm);

@@ -954,8 +954,7 @@ panel_new (const char *panel_name)
 
     /* No know sizes of the panel at startup */
     init_widget (&panel->widget, 0, 0, 0, 0, (callback_fn)
-		 panel_callback, (destroy_fn) panel_destroy,
-		 (mouse_h) panel_event);
+		 panel_callback, (mouse_h) panel_event);
 
     /* We do not want the cursor */
     widget_want_cursor (panel->widget, 0);
@@ -2183,12 +2182,9 @@ panel_callback (WPanel *panel, int msg, int par)
     Dlg_head *h = panel->widget.parent;
 
     switch (msg){
-    case WIDGET_INIT:
-	return 1;
-
     case WIDGET_DRAW:
 	paint_panel (panel);
-	break;
+	return 1;
 
     case WIDGET_FOCUS:
 	current_panel = panel;
@@ -2230,9 +2226,14 @@ panel_callback (WPanel *panel, int msg, int par)
 
     case WIDGET_KEY:
 	return panel_key (panel, par);
-	break;
+
+    case WIDGET_DESTROY:
+	panel_destroy (panel);
+	return 1;
+
+    default:
+	return default_proc (msg, par);
     }
-    return default_proc (msg, par);
 }
 
 void

@@ -217,19 +217,15 @@ static void info_hook (void *data)
     info_show_info (info);
 }
 
-static void info_destroy (WInfo *info)
+static int
+info_callback (WInfo *info, int msg, int par)
 {
-    delete_hook (&select_file_hook, info_hook);
-}
-
-static int info_callback (WInfo *info, int msg, int par)
-{
-    switch (msg){
+    switch (msg) {
 
     case WIDGET_INIT:
 	add_hook (&select_file_hook, info_hook, info);
 	info->ready = 0;
-	break;
+	return 1;
 
     case WIDGET_DRAW:
 	info_hook (info);
@@ -238,8 +234,13 @@ static int info_callback (WInfo *info, int msg, int par)
 
     case WIDGET_FOCUS:
 	return 0;
+
+    case WIDGET_DESTROY:
+	delete_hook (&select_file_hook, info_hook);
+
+    default:
+	return default_proc (msg, par);
     }
-    return default_proc (msg, par);
 }
 			   
 WInfo *info_new ()
@@ -247,8 +248,7 @@ WInfo *info_new ()
     WInfo *info = g_new (WInfo, 1);
 
     init_widget (&info->widget, 0, 0, 0, 0, (callback_fn)
-		 info_callback, (destroy_fn) info_destroy,
-		 (mouse_h) info_event);
+		 info_callback, (mouse_h) info_event);
 
     /* We do not want the cursor */
     widget_want_cursor (info->widget, 0);

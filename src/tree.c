@@ -1056,12 +1056,19 @@ tree_callback (WTree *tree, int msg, int par)
 
 	/* FIXME: Should find a better way of changing the color of the
 	   selected item */
+
     case WIDGET_UNFOCUS:
 	tree->active = 0;
 	show_tree (tree);
 	return 1;
+
+    case WIDGET_DESTROY:
+	tree_destroy (tree);
+	return 1;
+
+    default:
+	return default_proc (msg, par);
     }
-    return default_proc (msg, par);
 }
 
 WTree *
@@ -1070,8 +1077,7 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     WTree *tree = g_new (WTree, 1);
 
     init_widget (&tree->widget, y, x, lines, cols,
-		 (callback_fn) tree_callback, (destroy_fn) tree_destroy,
-		 (mouse_h) event_callback);
+		 (callback_fn) tree_callback, (mouse_h) event_callback);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 
