@@ -1,3 +1,8 @@
+1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gpageprop.c (item_properties), gprop.c: Add executable editing
+	(command, and terminal).  Save the dentry after modification 
+
 1998-05-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gprop.c (change_icon): Test for gp, as the combobox emits the

@@ -57,5 +57,12 @@ typedef struct {
 GpropGeneral *gprop_general_new (char *title, char *icon_filename);
 void gprop_general_get_data (GpropGeneral *gp, char **title, char **icon_filename);
 
+typedef struct {
+	GtkWidget *top;
+	GtkWidget *entry;
+	GtkWidget *check;
+} GpropExec;
+
+GpropExec *gprop_exec_new (GnomeDesktopEntry *dentry);
 
 #endif

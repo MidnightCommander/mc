@@ -20,6 +20,7 @@ label_new (char *text, double xalign, double yalign)
 	label = gtk_label_new (text);
 	gtk_misc_set_alignment (GTK_MISC (label), xalign, yalign);
 	gtk_widget_show (label);
+
 	return label;
 }
 
@@ -91,7 +92,58 @@ gprop_filename_get_data (GpropFilename *gp, char **filename)
 	}
 }
 
-/***** Permissions *****/
+/* Executable */
+GpropExec *
+gprop_exec_new (GnomeDesktopEntry *dentry)
+{
+	GpropExec *ge;
+	GtkWidget *frame, *table;
+	char *s;
+	
+	ge = g_new (GpropExec, 1);
+	ge->top = gtk_vbox_new (FALSE, 6);
+
+	frame = gtk_frame_new (_("Command"));
+	gtk_box_pack_start (GTK_BOX (ge->top), frame, FALSE, FALSE, 0);
+	gtk_widget_show (frame);
+	
+	table = gtk_table_new (0, 0, 0);
+	gtk_container_border_width (GTK_CONTAINER (table), 6);
+	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
+	gtk_table_set_col_spacings (GTK_TABLE (table), 6);
+	gtk_container_add (GTK_CONTAINER (frame), table);
+
+	gtk_table_attach (GTK_TABLE (table), label_new (_("Command:"), 0.0, 0.5),
+			  0, 1, 0, 1,
+			  GTK_FILL, GTK_FILL, 0, 0);
+	
+	ge->entry = gnome_entry_new ("gprop_filename_entry");
+	s = gnome_config_assemble_vector (dentry->exec_length, (const char * const *) dentry->exec);
+	gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (ge->entry))), s);
+	g_free (s);
+	gtk_table_attach (GTK_TABLE (table), ge->entry,
+			  1, 2, 0, 1, 0, 0, 0, 0);
+	ge->check = gtk_check_button_new_with_label (_("Use terminal"));
+	GTK_TOGGLE_BUTTON (ge->check)->active = dentry->terminal ? 1 : 0;
+	gtk_table_attach (GTK_TABLE (table), ge->check,
+			  1, 2, 1, 2, 0, 0, 0, 0);
+	gtk_widget_show_all (ge->top);
+	return ge;
+}
+
+void
+gprop_exec_get_data (GpropExec *ge, GnomeDesktopEntry *dentry)
+{
+	GtkEntry *entry;
+
+	entry = GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (ge->entry)));
+	gnome_string_array_free (dentry->exec);
+	gnome_config_make_vector (gtk_entry_get_text (entry),
+				  &dentry->exec_length, &dentry->exec);
+	dentry->terminal = GTK_TOGGLE_BUTTON (ge->check)->active;
+}
+	      
+/***** permissions *****/
 
 static umode_t
 perm_get_umode (GpropPerm *gp)

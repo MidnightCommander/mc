@@ -55,6 +55,7 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	GpropFilename *name;
 	GpropPerm     *perm;
 	GpropGeneral  *gene;
+	GpropExec     *exec;
 	GtkDialog     *toplevel;
 
 	umode_t        new_mode;
@@ -88,11 +89,14 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	if (di && di->dentry) {
 		gene = gprop_general_new (di->dentry->name, di->dentry->icon);
 		gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
+		
+		exec = gprop_exec_new (di->dentry);
+		gtk_box_pack_start (GTK_BOX (vbox), exec->top, FALSE, FALSE, 0);
+	} else {
+		name = gprop_filename_new (fname, base);
+		gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
 	}
-
-	name = gprop_filename_new (fname, base);
-	gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
-
+	
 	perm = gprop_perm_new (s.st_mode, get_owner (s.st_uid), get_group (s.st_gid));
 
 	/* Pack them into nice notebook */
@@ -183,33 +187,37 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 
 	/* Check and change filename */
 
-	gprop_filename_get_data (name, &new_name);
+	if (di && di->dentry){
+		gprop_exec_get_data (exec, di->dentry);
+	} else {
+		gprop_filename_get_data (name, &new_name);
 
-	if (strchr (new_name, '/'))
-		message (1, "Error", "The new name includes the `/' character");
-	else if (strcmp (new_name, base) != 0) {
-		char *base = x_basename (fname);
-		char save = *base;
-		char *full_target;
-
-		*base = 0;
-		full_target = concat_dir_and_file (fname, new_name);
-		*base = save;
-
-		create_op_win (OP_MOVE, 0);
-		file_mask_defaults ();
-		move_file_file (fname, full_target);
-		destroy_op_win ();
-
-		if (di) {
-			free (di->pathname);
-			di->pathname = full_target;
-		} else
-			free (full_target);
-		
-		retval |= GPROP_FILENAME;
+		if (strchr (new_name, '/'))
+			message (1, "Error", "The new name includes the `/' character");
+		else if (strcmp (new_name, base) != 0) {
+			char *base = x_basename (fname);
+			char save = *base;
+			char *full_target;
+			
+			*base = 0;
+			full_target = concat_dir_and_file (fname, new_name);
+			*base = save;
+			
+			create_op_win (OP_MOVE, 0);
+			file_mask_defaults ();
+			move_file_file (fname, full_target);
+			destroy_op_win ();
+			
+			if (di) {
+				free (di->pathname);
+				di->pathname = full_target;
+			} else
+				free (full_target);
+			
+			retval |= GPROP_FILENAME;
+		}
 	}
-
+	
 	/* Check and change title and icon -- change is handled by caller */
 
 	if (di && di->dentry) {
@@ -231,6 +239,5 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	}
 
 	gtk_widget_destroy (GTK_WIDGET (toplevel));
-
 	return retval;
 }

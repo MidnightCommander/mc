@@ -494,9 +494,9 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	file_entry *fe = &panel->dir.list [panel->selected];
 	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
 	
-	if (item_properties (GTK_WIDGET (panel->list), full_name, NULL) != 0)
+	if (item_properties (GTK_WIDGET (panel->list), full_name, NULL) != 0){
 		reread_cmd ();
-	
+	}
 	free (full_name);
 }
 
