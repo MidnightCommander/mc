@@ -581,7 +581,7 @@ this_try_alloc_color_pair (char *fg, char *bg)
 
 static char *error_file_name = 0;
 
-static FILE *open_include_file (char *filename)
+static FILE *open_include_file (const char *filename)
 {
     FILE *f;
 
@@ -604,14 +604,15 @@ static FILE *open_include_file (char *filename)
 }
 
 /* returns line number on error */
-static int edit_read_syntax_rules (WEdit * edit, FILE * f)
+static int
+edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 {
     FILE *g = 0;
     char *fg, *bg;
     char last_fg[32] = "", last_bg[32] = "";
     char whole_right[512];
     char whole_left[512];
-    char *args[1024], *l = 0;
+    char *l = 0;
     int save_line = 0, line = 0;
     struct context_rule **r, *c = 0;
     int num_words = -1, num_contexts = -1;
@@ -668,13 +669,17 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    check_a;
 	    if (!strcmp (*a, "left")) {
 		a++;
-		strcpy (whole_left, *a);
+		strncpy (whole_left, *a, sizeof (whole_left) - 1);
+		whole_left[sizeof (whole_left) - 1] = 0;
 	    } else if (!strcmp (*a, "right")) {
 		a++;
-		strcpy (whole_right, *a);
+		strncpy (whole_right, *a, sizeof (whole_right) - 1);
+		whole_right[sizeof (whole_right) - 1] = 0;
 	    } else {
-		strcpy (whole_left, *a);
-		strcpy (whole_right, *a);
+		strncpy (whole_left, *a, sizeof (whole_left) - 1);
+		whole_left[sizeof (whole_left) - 1] = 0;
+		strncpy (whole_right, *a, sizeof (whole_right) - 1);
+		whole_right[sizeof (whole_right) - 1] = 0;
 	    }
 	    a++;
 	    check_not_a;
@@ -835,8 +840,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    for (j = 1; c->keyword[j]; j++)
 		*p++ = c->keyword[j]->first;
 	    *p = '\0';
-	    c->keyword_first_chars = g_malloc0 (strlen (first_chars) + 2);
-	    strcpy (c->keyword_first_chars, first_chars);
+	    c->keyword_first_chars = g_strdup (first_chars);
 	}
     }
 
@@ -881,7 +885,10 @@ void edit_free_syntax_rules (WEdit * edit)
 }
 
 /* returns -1 on file error, line number on error in file syntax */
-static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file, char *editor_file, char *first_line, char *type)
+static int
+edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
+		       const char *editor_file, const char *first_line,
+		       const char *type)
 {
     FILE *f;
     regex_t r;
@@ -950,7 +957,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 	    if (q) {
 		int line_error;
 	      found_type:
-		line_error = edit_read_syntax_rules (edit, f);
+		line_error = edit_read_syntax_rules (edit, f, args);
 		if (line_error) {
 		    if (!error_file_name)	/* an included file */
 			result = line + line_error;
