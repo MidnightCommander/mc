@@ -78,7 +78,7 @@ else
   # Ugly way to parse the instructions gettexize gives us.
   m4files="`cat tmpout | sed -n -e '/^Please/,/^from/s/^  *//p'`"
   fromdir=`cat tmpout | sed -n -e '/^Please/,/^from/s/^from the \([^ ]*\) .*$/\1/p'`
-  rm tmpout
+  rm -f tmpout
   rm -rf gettext.m4
   mkdir gettext.m4
   for i in $m4files; do
