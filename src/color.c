@@ -234,6 +234,29 @@ static void configure_colors (void)
 int attr_pairs [MAX_PAIRS];
 #endif
 
+static void
+load_dialog_colors (void)
+{
+    dialog_colors [0] = COLOR_NORMAL;
+    dialog_colors [1] = COLOR_FOCUS;
+    dialog_colors [2] = COLOR_HOT_NORMAL;
+    dialog_colors [3] = COLOR_HOT_FOCUS;
+}
+
+#ifdef HAVE_X
+void
+init_colors (void)
+{
+	int i;
+	
+	use_colors = 1;
+	start_color ();
+	configure_colors ();
+	for (i = 0; i < ELEMENTS (color_map); i++)
+	    init_pair (i+1, color_map_fg(i), color_map_bg(i));
+	load_dialog_colors ();
+}
+#else
 void init_colors (void)
 {
     int i;
@@ -283,12 +306,9 @@ void init_colors (void)
 #endif
 	}
     }
-
-    dialog_colors [0] = COLOR_NORMAL;
-    dialog_colors [1] = COLOR_FOCUS;
-    dialog_colors [2] = COLOR_HOT_NORMAL;
-    dialog_colors [3] = COLOR_HOT_FOCUS;
+    load_dialog_colors ();
 }
+#endif
 
 void toggle_color_mode (void)
 {

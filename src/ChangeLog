@@ -1,3 +1,8 @@
+1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* color.c (init_colors): Provide X-only version of color
+	initialization. 
+
 Thu May 14 01:56:11 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* configure.in: Don't add -lintl to LIBS when included gettext is
