@@ -262,6 +262,7 @@ static void
 entry_click (GtkWidget *widget, GdkEvent *event, WInput *in)
 {
 	dlg_select_widget (in->widget.parent, in);
+	in->first = 0;
 }
 
 static void
