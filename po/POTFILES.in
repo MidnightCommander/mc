@@ -6,6 +6,7 @@ gnome/gdialogs.c
 gnome/gdnd.c
 gnome/gicon.c
 gnome/glayout.c
+gnome/gmain.c
 gnome/gnome-file-property-dialog.c
 gnome/gnome-open-dialog.c
 gnome/gpopup2.c
