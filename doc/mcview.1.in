@@ -1,0 +1,96 @@
+.TH mcview 1 "19 January 2003"
+.SH NAME
+mcview \- Internal file viewer of GNU Midnight Commander.
+.SH USAGE
+.B mcview
+[-bcCdfhstVx?] file
+.SH DESCRIPTION
+.LP
+mcview is a link to
+.BR mc ,
+the main GNU Midnight Commander executable.  Executing GNU Midnight
+Commander under this name requests staring the internal viewer and
+opening the
+.I file
+specified on the command line.
+.SH OPTIONS
+.TP
+.I "\-b"
+Force black and white display.
+.TP
+.I "\-c"
+Force color mode on terminals where
+.B mcview
+defaults to black and white.
+.TP
+.I "\-C <keyword>=<FGcolor>,<BGcolor>:<keyword>= ..."
+Specify a different color set.  See the
+.B Colors
+section in mc(1) for more information.
+.TP
+.I "\-d"
+Disable mouse support.
+.TP
+.I "\-f"
+Display the compiled-in search paths for Midnight Commander files.
+.TP
+.I "\-t"
+Used only if the code was compiled with S-Lang and terminfo: it makes
+the Midnight Commander use the value of the
+.B TERMCAP
+variable for the terminal information instead of the information on
+the system wide terminal database
+.TP
+.I "\-V"
+Displays the version of the program.
+.TP
+.I "\-x"
+Forces xterm mode.  Used when running on xterm-capable terminals (two
+screen modes, and able to send mouse escape sequences).
+.PP
+.SH COLORS
+The default colors may be changed by appending to the
+.B MC_COLOR_TABLE
+environment variable.  Foreground and background colors pairs may be
+specified for example with:
+.PP
+.nf
+MC_COLOR_TABLE="$MC_COLOR_TABLE:\\
+normal=lightgray,black:\\
+selected=black,green"
+.fi
+.PP
+.SH FILES
+@prefix@/share/mc/mc.hlp
+.IP
+The help file for the program.
+.PP
+.I @prefix@/share/mc/mc.ini
+.IP
+The default system-wide setup for GNU Midnight Commander, used only if
+the user's own ~/.mc/ini file is missing.
+.PP
+.I @prefix@/share/mc/mc.lib
+.IP
+Global settings for the Midnight Commander.  Settings in this file
+affect all users, whether they have ~/.mc/ini or not.
+.PP
+$HOME/.mc/ini
+.IP
+User's own setup.  If this file is present, the setup is loaded from
+here instead of the system-wide startup file.
+.PP
+.SH LICENSE
+This program is distributed under the terms of the GNU General Public
+License as published by the Free Software Foundation.  See the built-in
+help of the Midnight Commander for details on the License and the lack
+of warranty.
+.SH AVAILABILITY
+The latest version of this program can be found at
+ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
+mirrors listed on the GNOME site http://www.gnome.org/.
+.SH SEE ALSO
+mc(1), mcedit(1)
+.PP
+.SH BUGS
+Bugs should be reported to mc-devel@gnome.org

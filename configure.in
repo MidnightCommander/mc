@@ -594,7 +594,7 @@ vfs/extfs/urar
 vfs/extfs/uzip
 vfs/extfs/uzoo
 
-doc/mc.1 doc/mcedit.1 doc/mcserv.8
+doc/mc.1 doc/mcedit.1 doc/mcview.1 doc/mcserv.8
 doc/es/mc.1 doc/es/Makefile
 doc/hu/mc.1 doc/hu/Makefile
 doc/it/mc.1 doc/it/Makefile
