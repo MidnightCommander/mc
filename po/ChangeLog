@@ -1,3 +1,8 @@
+2000-04-17  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* cs.po: patch from rebel@penguin.cz: make shortcuts more like in
+	english version
+
 2000-04-16  Pablo Saratxaga <pablo@mandrakesoft.com>
 
         * da.po: Updated Danish file

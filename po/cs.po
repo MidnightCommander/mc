@@ -2,6 +2,7 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Pavel Machek <pavel@ucw.cz>, 1998, 1999.
 # David ©auer <davids@penguin.cz>, 1999.
+# Michal ©vec <rebel@penguin.cz>, 2000.
 #
 msgid ""
 msgstr ""
@@ -4923,11 +4924,11 @@ msgstr "re¾im &Výpisu..."
 
 #: src/main.c:1238 src/main.c:1262
 msgid "&Quick view     C-x q"
-msgstr "&Rychloprohlí¾eè   C-x q"
+msgstr "&Rychlé prohlí¾ení  C-x q"
 
 #: src/main.c:1239 src/main.c:1263
 msgid "&Info           C-x i"
-msgstr "&Informace         C-x i"
+msgstr "&Informace          C-x i"
 
 #: src/main.c:1242 src/main.c:1266
 msgid "&Sort order..."
@@ -4939,11 +4940,11 @@ msgstr "&Filtr.."
 
 #: src/main.c:1247 src/main.c:1271
 msgid "&Network link..."
-msgstr "sí»ové spo&Jení..."
+msgstr "sí»ové spoje&Ní..."
 
 #: src/main.c:1248 src/main.c:1272
 msgid "FT&P link..."
-msgstr "F&TP spojení..."
+msgstr "FT&P spojení..."
 
 #: src/main.c:1250 src/main.c:1274
 msgid "SM&B link..."
@@ -4955,19 +4956,19 @@ msgstr "&Disk...\tM-d"
 
 #: src/main.c:1257 src/main.c:1281
 msgid "&Rescan         C-r"
-msgstr "&Znovu naèíst      C-r"
+msgstr "&Znovu naèíst       C-r"
 
 #: src/main.c:1285
 msgid "&User menu          F2"
-msgstr "u¾ivate&Lské menu         F2"
+msgstr "&U¾ivatelské menu         F2"
 
 #: src/main.c:1286
 msgid "&View               F3"
-msgstr "pro&Hlí¾et                F3"
+msgstr "pro&Hlédnout              F3"
 
 #: src/main.c:1287
 msgid "Vie&w file...         "
-msgstr "vi&Dìt soubor... "
+msgstr "prohlé&Dnout soubor..."
 
 #: src/main.c:1288
 msgid "&Filtered view     M-!"
@@ -4983,15 +4984,15 @@ msgstr "&Kopie                    F5"
 
 #: src/main.c:1291
 msgid "c&Hmod           C-x c"
-msgstr "zmìna &práv               C-x c"
+msgstr "zmìna &Práv               C-x c"
 
 #: src/main.c:1293
 msgid "&Link            C-x l"
-msgstr "Vyrobit &odkaz            C-x l"
+msgstr "vyrobit &Odkaz            C-x l"
 
 #: src/main.c:1294
 msgid "&SymLink         C-x s"
-msgstr "Vyrobit &symb. odkaz      C-x s"
+msgstr "vyrobit &Symb. odkaz      C-x s"
 
 #: src/main.c:1295
 msgid "edit s&Ymlink  C-x C-s"
@@ -4999,7 +5000,7 @@ msgstr "uprav s&Ymb. odkaz        C-x C-s"
 
 #: src/main.c:1296
 msgid "ch&Own           C-x o"
-msgstr "zmìna &vlastníka          C-x o"
+msgstr "zmìna &Vlastníka          C-x o"
 
 #: src/main.c:1297
 msgid "&Advanced chown       "
@@ -5007,15 +5008,15 @@ msgstr "&Zmìna práv/vlastníka  "
 
 #: src/main.c:1299
 msgid "&Rename/Move        F6"
-msgstr "pøesun/pøejmenova&T       F6"
+msgstr "pøesun/pøe&Jmenovat       F6"
 
 #: src/main.c:1300
 msgid "&Mkdir              F7"
-msgstr "&Nový adresáø             F7"
+msgstr "nový &Adresáø             F7"
 
 #: src/main.c:1301
 msgid "&Delete             F8"
-msgstr "s&mazat                   F8"
+msgstr "s&Mazat                   F8"
 
 #: src/main.c:1302
 msgid "&Quick cd          M-c"
@@ -5027,19 +5028,19 @@ msgstr "oznaè&It skupinu          M-+"
 
 #: src/main.c:1305
 msgid "u&Nselect group    M-\\"
-msgstr "odznaèit sk&Upinu         M-\\"
+msgstr "odz&Naèit skupinu         M-\\"
 
 #: src/main.c:1306
 msgid "reverse selec&Tion M-*"
-msgstr "p&Rohodit oznaèení        M-*"
+msgstr "prohodi&T oznaèení        M-*"
 
 #: src/main.c:1308
 msgid "e&Xit              F10"
-msgstr "Konec                    F10"
+msgstr "kon&Ec                    F10"
 
 #: src/main.c:1318
 msgid "&Directory tree"
-msgstr "&Strom adresáøù"
+msgstr "strom a&Dresáøù"
 
 #: src/main.c:1320
 msgid "&Find file            M-?"
@@ -5047,15 +5048,15 @@ msgstr "&Najít soubor                       M-?"
 
 #: src/main.c:1321
 msgid "s&Wap panels          C-u"
-msgstr "&Prohodit panely                    C-u"
+msgstr "prohodit panel&Y                    C-u"
 
 #: src/main.c:1322
 msgid "switch &Panels on/off C-o"
-msgstr "Panely &ano/ne                      C-o"
+msgstr "&Panely ano/ne                      C-o"
 
 #: src/main.c:1323
 msgid "&Compare directories  C-x d"
-msgstr "po&Rovnat adresáøe                  C-x d"
+msgstr "porovna&T adresáøe                  C-x d"
 
 #: src/main.c:1324
 msgid "e&Xternal panelize    C-x !"
@@ -5071,15 +5072,15 @@ msgstr "&Historie pøíkazù"
 
 #: src/main.c:1328
 msgid "di&Rectory hotlist    C-\\"
-msgstr "ho&Tlist adresáøù                   C-\\"
+msgstr "hotlist ad&Resáøù                   C-\\"
 
 #: src/main.c:1330
 msgid "&Active VFS list      C-x a"
-msgstr "Seznam aktivních &VFS               C-x a"
+msgstr "seznam &Aktivních VFS               C-x a"
 
 #: src/main.c:1333
 msgid "&Background jobs      C-x j"
-msgstr "úloh&Y na pozadí                    C-x j"
+msgstr "úlohy &Bì¾ící na pozadí             C-x j"
 
 #: src/main.c:1337
 msgid "&Undelete files (ext2fs only)"
@@ -5087,11 +5088,11 @@ msgstr "&Obnovit smazané soubory (pouze ext2fs)"
 
 #: src/main.c:1340
 msgid "&Listing format edit"
-msgstr "&Upravit formát výpisu"
+msgstr "upravit formát &Výpisu"
 
 #: src/main.c:1342
 msgid "&Extension file edit"
-msgstr "&Upravit akce k pøíponám"
+msgstr "upravit akc&E k pøíponám"
 
 #: src/main.c:1343
 msgid "&Menu file edit"
@@ -5103,11 +5104,11 @@ msgstr "kon&Figurace..."
 
 #: src/main.c:1350
 msgid "c&Onfirmation..."
-msgstr "&Potvrzování..."
+msgstr "p&Otvrzování..."
 
 #: src/main.c:1351
 msgid "&Display bits..."
-msgstr "&7/8bitù display..."
+msgstr "Nastavení &Zobrazení..."
 
 #: src/main.c:1353
 msgid "learn &Keys..."
@@ -5119,7 +5120,7 @@ msgstr "&Virtuální FS..."
 
 #: src/main.c:1359
 msgid "&Save setup"
-msgstr "&Ulo¾it nastavení"
+msgstr "ulo¾it na&Stavení"
 
 #: src/main.c:1375 src/main.c:1377
 msgid " &Left "
