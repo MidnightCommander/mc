@@ -42,7 +42,7 @@ struct layout_slot {
 
 int desktop_use_shaped_icons = TRUE;
 int desktop_auto_placement = FALSE;
-int desktop_snap_icons = FALSE;
+int desktop_snap_icons = TRUE;
 
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
@@ -126,39 +126,74 @@ static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *
 					       int xpos, int ypos);
 
 
-/* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
- * it.  "Free" means it either has zero icons in it, or it has the minimum number of icons of all
- * the slots.
+/* Convenience function to figure out the slot corresponding to an (x, y) position */
+static void
+get_slot_from_pos (int x, int y, int *u, int *v)
+{
+	*u = (x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
+	*v = (y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y;
+}
+
+/* Looks for a free slot in the layout_slots array and returns the coordinates
+ * that coorespond to it.  "Free" means it either has zero icons in it, or it
+ * has the minimum number of icons of all the slots.  Returns the number of
+ * icons in the sought spot (ideally 0).
  */
+static int
+auto_pos (int start_slot, int end_slot, int *slot)
+{
+	int min, min_slot;
+	int i;
+	int val;
+
+	min = layout_slots[start_slot].num_icons;
+	min_slot = start_slot;
+
+	for (i = start_slot; i < end_slot; i++) {
+		val = layout_slots[i].num_icons;
+
+		if (val < min || val == 0) {
+			min = val;
+			min_slot = i;
+			if (val == 0)
+				break;
+		}
+	}
+
+	*slot = min_slot;
+	return min;
+}
+
+/* Looks for free space in the icon grid, scanning it in column-wise order */
 static void
 get_icon_auto_pos (int *x, int *y)
 {
-	int min, min_x, min_y;
+	int start, end;
 	int u, v;
-	int val;
+	int val1, val2;
+	int slot1, slot2;
+	int slot;
 
-	min = l_slots (0, 0).num_icons;
-	min_x = min_y = 0;
+	get_slot_from_pos (*x, *y, &u, &v);
+	start = u * layout_rows + v;
+	end = layout_rows * layout_cols;
 
-	for (u = 0; u < layout_cols; u++)
-		for (v = 0; v < layout_rows; v++) {
-			val = l_slots (u, v).num_icons;
+	/* Look forwards until the end of the grid.  If we could not find an
+	 * empty spot, find the second best.
+	 */
 
-			if (val == 0) {
-				/* Optimization: if it is zero, return immediately */
+	val1 = auto_pos (start, end, &slot1);
 
-				*x = u * DESKTOP_SNAP_X;
-				*y = v * DESKTOP_SNAP_Y;
-				return;
-			} else if (val < min) {
-				min = val;
-				min_x = u;
-				min_y = v;
-			}
-		}
+	if (val1 == 0)
+		slot = slot1;
+	else {
+		val2 = auto_pos (0, start, &slot2);
+		if (val2 < val1)
+			slot = slot2;
+	}
 
-	*x = min_x * DESKTOP_SNAP_X;
-	*y = min_y * DESKTOP_SNAP_Y;
+	*x = (slot / layout_rows) * DESKTOP_SNAP_X;
+	*y = (slot % layout_rows) * DESKTOP_SNAP_Y;
 }
 
 /* Snaps the specified position to the icon grid.  It looks for the closest free spot on the grid,
@@ -236,8 +271,7 @@ desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 
 	/* Increase the number of icons in the corresponding slot */
 
-	u = (xpos + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
-	v = (ypos + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_Y;
+	get_slot_from_pos (xpos, ypos, &u, &v);
 
 	dii->slot = u * layout_rows + v;
 	layout_slots[dii->slot].num_icons++;
@@ -333,6 +367,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
 	char *desktop_url, *caption;
+	int orig_xpos, orig_ypos;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -442,11 +477,29 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 
 	need_position_list = g_slist_reverse (need_position_list);
 
+	orig_xpos = orig_ypos = 0;
+
 	for (sl = need_position_list; sl; sl = sl->next) {
 		file_and_url_t *fau = sl->data;
 
-		if (!user_pos)
+		if (user_pos && sl == need_position_list) {
+			/* If we are on the first icon, place it "by hand".
+			 * Else, use automatic placement based on the position
+			 * of the first icon of the series.
+			 */
+			if (desktop_auto_placement) {
+				xpos = ypos = 0;
+				get_icon_auto_pos (&xpos, &ypos);
+			} else if (desktop_snap_icons)
+				get_icon_snap_pos (&xpos, &ypos);
+
+			orig_xpos = xpos;
+			orig_ypos = ypos;
+		} else {
+			xpos = orig_xpos;
+			ypos = orig_ypos;
 			get_icon_auto_pos (&xpos, &ypos);
+		}
 
 		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, xpos, ypos);
 		gtk_widget_show (dii->dicon);

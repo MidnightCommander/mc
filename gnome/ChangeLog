@@ -1,3 +1,11 @@
+1999-02-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (reload_desktop_icons): Take auto-positioning and
+	snap-positioning into account.  This is the right thing to do.
+	(get_icon_auto_pos): Do auto-positioning in two steps, first from
+	the requested position to the end of the slot array, then from
+	slot zero forwards if required.
+
 1999-02-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcmd.c (gnome_open_terminal_with_cmd): New routine, based on the
