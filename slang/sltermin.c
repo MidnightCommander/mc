@@ -235,7 +235,7 @@ char *SLtt_tigetent (char *term)
    char *tidir; 
    int i;
    FILE *fp = NULL;
-   char file[256];
+   char *file;
    Terminfo_Type *ti;
 
    if (
@@ -269,8 +269,14 @@ char *SLtt_tigetent (char *term)
 	tidir = Terminfo_Dirs[i];
 	if (tidir != NULL)
 	  {
-	     g_snprintf (file, sizeof (file), "%s/%c/%s", tidir, *term, term);
-	     if (NULL != (fp = open_terminfo (file, ti))) break;
+             file = SLMALLOC (strlen (tidir) + 3 + strlen (term) + 1);
+             if (!file)
+                continue;
+             sprintf (file, "%s/%c/%s", tidir, *term, term);
+             fp = open_terminfo (file, ti);
+             SLFREE (file);
+             if (fp)
+                break;
 	  }
 	i++;
      }

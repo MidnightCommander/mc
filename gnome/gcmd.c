@@ -63,19 +63,25 @@ void
 gnome_open_terminal_with_cmd (const char *command)
 {
 	char *p;
-	
-	if (!(p = gnome_is_program_in_path ("gnome-terminal")))
+	int quote_all = 0;
+		
+	if (!(p = gnome_is_program_in_path ("gnome-terminal"))){
 		if (!(p = gnome_is_program_in_path ("dtterm")))
 			if (!(p = gnome_is_program_in_path ("nxterm")))
 				if (!(p = gnome_is_program_in_path ("color-xterm")))
 					if (!(p = gnome_is_program_in_path ("rxvt")))
 						p = gnome_is_program_in_path ("xterm");
+	} else
+		quote_all = 1;
 
 	if (p){
 		if (command){
 			char *q;
-			
-			q = g_strconcat (p, " -e ", command, NULL);
+
+			if (quote_all)
+				q = g_strconcat (p, " -e '", command, "'", NULL);
+			else
+				q = g_strconcat (p, " -e ", command, NULL);
 			my_system (EXECUTE_AS_SHELL, shell, q);
 			g_free (q);
 		} else

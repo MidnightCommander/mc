@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-08 22:28-0600\n"
+"POT-Creation-Date: 1999-03-09 12:45-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,129 +39,129 @@ msgstr ""
 msgid " There is no other panel to compare contents to "
 msgstr ""
 
-#: gnome/gcmd.c:106
+#: gnome/gcmd.c:112
 msgid "GNU Midnight Commander"
 msgstr ""
 
-#: gnome/gcmd.c:109
+#: gnome/gcmd.c:115
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:121 src/main.c:844 src/screen.c:2047
+#: gnome/gcmd.c:127 src/main.c:844 src/screen.c:2047
 msgid " The Midnight Commander "
 msgstr ""
 
-#: gnome/gcmd.c:122 src/main.c:845
+#: gnome/gcmd.c:128 src/main.c:845
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
-#: src/file.c:2195 src/filegui.c:573 src/hotlist.c:1035 src/main.c:846
+#: gnome/gcmd.c:129 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: src/file.c:2193 src/filegui.c:573 src/hotlist.c:1035 src/main.c:846
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
 msgid "&Yes"
 msgstr ""
 
-#: gnome/gcmd.c:123 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
-#: src/file.c:2195 src/filegui.c:572 src/hotlist.c:1035 src/main.c:846
+#: gnome/gcmd.c:129 gtkedit/editcmd.c:2246 src/cmd.c:251 src/file.c:1813
+#: src/file.c:2193 src/filegui.c:572 src/hotlist.c:1035 src/main.c:846
 #: src/screen.c:2049 src/subshell.c:701 src/subshell.c:727 src/tree.c:755
 #: src/view.c:404
 msgid "&No"
 msgstr ""
 
-#: gnome/gcmd.c:220
+#: gnome/gcmd.c:226
 msgid "Sort By"
 msgstr ""
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:225
+#: gnome/gcmd.c:231
 msgid "Ignore case sensitivity."
 msgstr ""
 
-#: gnome/gcmd.c:233 src/chmod.c:150 src/screen.c:425
+#: gnome/gcmd.c:239 src/chmod.c:150 src/screen.c:425
 msgid "Name"
 msgstr ""
 
-#: gnome/gcmd.c:240
+#: gnome/gcmd.c:246
 msgid "File Type"
 msgstr ""
 
-#: gnome/gcmd.c:246 src/screen.c:426 src/screen.c:427
+#: gnome/gcmd.c:252 src/screen.c:426 src/screen.c:427
 msgid "Size"
 msgstr ""
 
-#: gnome/gcmd.c:252
+#: gnome/gcmd.c:258
 msgid "Time Last Accessed"
 msgstr ""
 
-#: gnome/gcmd.c:258
+#: gnome/gcmd.c:264
 msgid "Time Last Modified"
 msgstr ""
 
-#: gnome/gcmd.c:264
+#: gnome/gcmd.c:270
 msgid "Time Last Changed"
 msgstr ""
 
-#: gnome/gcmd.c:278
+#: gnome/gcmd.c:284
 msgid "Reverse the order."
 msgstr ""
 
-#: gnome/gcmd.c:340
+#: gnome/gcmd.c:346
 msgid "Enter name."
 msgstr ""
 
-#: gnome/gcmd.c:346
+#: gnome/gcmd.c:352
 msgid "Enter label for command:"
 msgstr ""
 
-#: gnome/gcmd.c:441
+#: gnome/gcmd.c:447
 msgid "Find all core files"
 msgstr ""
 
-#: gnome/gcmd.c:444 src/panelize.c:350
+#: gnome/gcmd.c:450 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr ""
 
-#: gnome/gcmd.c:486
+#: gnome/gcmd.c:492
 msgid "Run Command"
 msgstr ""
 
 #. Frame 1
-#: gnome/gcmd.c:491
+#: gnome/gcmd.c:497
 msgid "Preset Commands"
 msgstr ""
 
-#: gnome/gcmd.c:508
+#: gnome/gcmd.c:514
 msgid "Add"
 msgstr ""
 
-#: gnome/gcmd.c:512
+#: gnome/gcmd.c:518
 msgid "Remove"
 msgstr ""
 
 #. Frame 2
-#: gnome/gcmd.c:520
+#: gnome/gcmd.c:526
 msgid "Run this Command"
 msgstr ""
 
-#: gnome/gcmd.c:527
+#: gnome/gcmd.c:533
 msgid "Command: "
 msgstr ""
 
-#: gnome/gcmd.c:588
+#: gnome/gcmd.c:594
 msgid "Set Filter"
 msgstr ""
 
-#: gnome/gcmd.c:593 gnome/gcmd.c:634 gnome/gcmd.c:639 gnome/gcmd.c:643
+#: gnome/gcmd.c:599 gnome/gcmd.c:640 gnome/gcmd.c:645 gnome/gcmd.c:649
 #: gnome/gscreen.c:2600
 msgid "Show all files"
 msgstr ""
 
-#: gnome/gcmd.c:600
+#: gnome/gcmd.c:606
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:616
+#: gnome/gcmd.c:622
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -169,15 +169,15 @@ msgid ""
 "*.gif will show just gif images"
 msgstr ""
 
-#: gnome/gcmd.c:618
+#: gnome/gcmd.c:624
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:675 gnome/gpopup.c:53
+#: gnome/gcmd.c:681 gnome/gpopup.c:53
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:676 gnome/gpopup.c:54
+#: gnome/gcmd.c:682 gnome/gpopup.c:54
 msgid "Enter extra arguments:"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgid ""
 "Directory not empty. Delete it recursively?"
 msgstr ""
 
-#: gnome/gdialogs.c:729 src/file.c:2190
+#: gnome/gdialogs.c:729 src/file.c:2188
 msgid " Delete: "
 msgstr ""
 
@@ -1116,11 +1116,11 @@ msgstr ""
 msgid "help"
 msgstr ""
 
-#: gnome/gwidget.c:96 src/file.c:2214
+#: gnome/gwidget.c:96 src/file.c:2212
 msgid "yes"
 msgstr ""
 
-#: gnome/gwidget.c:98 src/file.c:2212
+#: gnome/gwidget.c:98 src/file.c:2210
 msgid "no"
 msgstr ""
 
@@ -2142,7 +2142,7 @@ msgstr ""
 msgid "Background process:"
 msgstr ""
 
-#: src/background.c:284 src/file.c:2135
+#: src/background.c:284 src/file.c:2133
 msgid " Background process error "
 msgstr ""
 
@@ -3192,68 +3192,68 @@ msgstr ""
 msgid " Sorry, I could not put the job in background "
 msgstr ""
 
-#: src/file.c:1946 src/file.c:2051
+#: src/file.c:1947 src/file.c:2049
 msgid " Internal failure "
 msgstr ""
 
-#: src/file.c:1946 src/file.c:2051
+#: src/file.c:1947 src/file.c:2049
 msgid " Unknown file operation "
 msgstr ""
 
-#: src/file.c:1965
+#: src/file.c:1966
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
 
-#: src/file.c:2136 src/filegui.c:263
+#: src/file.c:2134 src/filegui.c:263
 msgid "&Skip"
 msgstr ""
 
-#: src/file.c:2136
+#: src/file.c:2134
 msgid "&Retry"
 msgstr ""
 
-#: src/file.c:2136 src/file.c:2197 src/filegui.c:260 src/filegui.c:562
+#: src/file.c:2134 src/file.c:2195 src/filegui.c:260 src/filegui.c:562
 msgid "&Abort"
 msgstr ""
 
-#: src/file.c:2188
+#: src/file.c:2186
 msgid ""
 "\n"
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2189
+#: src/file.c:2187
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2196
+#: src/file.c:2194
 msgid "a&ll"
 msgstr ""
 
-#: src/file.c:2196 src/filegui.c:565
+#: src/file.c:2194 src/filegui.c:565
 msgid "non&E"
 msgstr ""
 
-#: src/file.c:2206
+#: src/file.c:2204
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr ""
 
-#: src/file.c:2208
+#: src/file.c:2206
 msgid "all the directories "
 msgstr ""
 
-#: src/file.c:2210
+#: src/file.c:2208
 msgid " Recursive Delete "
 msgstr ""
 
-#: src/file.c:2211
+#: src/file.c:2209
 msgid " Background process: Recursive Delete "
 msgstr ""
 
@@ -4965,7 +4965,7 @@ msgstr ""
 msgid "NumLock on keypad"
 msgstr ""
 
-#: src/wtools.c:587 vfs/vfs.c:1760
+#: src/wtools.c:587 vfs/vfs.c:1762
 msgid "Password:"
 msgstr ""
 

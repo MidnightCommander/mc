@@ -454,7 +454,12 @@ void init_subshell (void)
 	    break;
 
 	    case ZSH:
-	    execl (shell, "zsh", "+Z", NULL);
+	    /* change from "+Z" to "-Z" by Michael Bramer
+	     * (Debian-mc-maintainer) <grisu@debian.org> from a patch from
+	     * Radovan Garabik <garabik@center.fmph.uniba.sk>
+	     */
+	    execl (shell, "zsh", "-Z", NULL);
+
 	    break;
 	}
 
