@@ -631,7 +631,7 @@ label_new (int y, int x, const char *text, char *tkname)
 {
     WLabel *l = g_new (WLabel, 1);
 
-    init_widget (&l->widget, y, x, 1, 1,
+    init_widget (&l->widget, y, x, 1, text ? strlen (text) : 0,
 		 (callback_fn) label_callback,
 		 (destroy_fn) label_destroy, NULL, tkname);
     l->text = text ? g_strdup (text) : 0;

@@ -1,5 +1,8 @@
 2001-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c (label_new): Set initial width of the widget based on
+	the initial text.
+
 	* view.c (hex_search): Don't use sscanf() to search for quoted
 	strings - use strchr instead.
 
