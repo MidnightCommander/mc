@@ -184,7 +184,8 @@ char *unix2dos_format(char *str,BOOL overwrite)
           for (p = str; *p; p++) *p = unix2dos[(unsigned char)*p];
           return str;
       } else {
-          for (p = str, dp = cvtbuf; *p; p++,dp++) *dp = unix2dos[(unsigned char)*p];
+	  for (p = str, dp = cvtbuf; *p && dp < &(cvtbuf[sizeof(cvtbuf) - 1]); p++,dp++)
+	      *dp = unix2dos[(unsigned char)*p];
           *dp = 0;
           return cvtbuf;
       }
@@ -204,7 +205,8 @@ char *dos2unix_format(char *str, BOOL overwrite)
           for (p = str; *p; p++) *p = dos2unix[(unsigned char)*p];
           return str;
       } else {
-          for (p = str, dp = cvtbuf; *p; p++,dp++) *dp = dos2unix[(unsigned char)*p];
+	  for (p = str, dp = cvtbuf; *p && dp < &(cvtbuf[sizeof(cvtbuf) - 1]); p++,dp++)
+	     *dp = dos2unix[(unsigned char)*p];
           *dp = 0;
           return cvtbuf;
       }
