@@ -87,7 +87,6 @@ char *canonicalize_pathname (char *);
 
 /* Misc Unix functions */
 char *get_current_wd (char *buffer, int size);
-const char *mc_tmpdir (void);
 int my_mkdir (char *s, mode_t mode);
 int my_rmdir (char *s);
 
@@ -99,7 +98,7 @@ void remove_dash (void);
 extern const char app_text [];
 
 /* Creating temporary files safely */
-void init_tmpdir(void);
+const char *mc_tmpdir (void);
 int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
 
 enum {
