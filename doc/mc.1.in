@@ -103,7 +103,7 @@ By default, the second line from the bottom of the screen is the
 shell command line, and the bottom line shows the function key labels.
 The topmost line is the
 .\"LINK2"
-menu bar line.
+menu bar line\&.
 .\"Menu Bar"
 The menu bar line may not be visible, but appears if you click the
 topmost line with the mouse or press the F9 key.
@@ -116,7 +116,7 @@ directory of the unselected panel as a destination (don't worry, they
 always ask you for confirmation first). For more information, see the
 sections on the
 .\"LINK2"
-Directory Panels,
+Directory Panels\&,
 .\"Directory Panels"
 the
 .\"LINK2"
@@ -124,7 +124,7 @@ Left and Right Menus
 .\"Left and Right Menus"
 and the
 .\"LINK2"
-File Menu.
+File Menu\&.
 .\"File Menu"
 .PP
 You can execute system commands from the Midnight Commander by simply
@@ -174,7 +174,7 @@ Help Viewer
 .\"Contents"
 and the
 .\"LINK2"
-Directory Tree.
+Directory Tree\&.
 .\"Directory Tree"
 .PP
 The default auto repeat rate for the mouse buttons is 400
@@ -308,7 +308,7 @@ command.
 .B M-!,
 Executes the Filtered view command, described in the
 .\"LINK2"
-view command.
+view command\&.
 .\"Internal File Viewer"
 .PP
 .B M-?,
@@ -344,7 +344,7 @@ This section lists the keys which operate on the directory panels. If
 you want to know how to change the appearance of the panels take a
 look at the section on
 .\"LINK2"
-Left and Right Menus.
+Left and Right Menus\&.
 .\"Left and Right Menus"
 .PP
 .B Tab, C-i.
@@ -836,7 +836,7 @@ The File menu has the following commands (keyboard shortcuts in parentheses):
 .PP
 Invokes the built-in hypertext help viewer. Inside the
 .\"LINK2"
-help viewer,
+help viewer\&,
 .\"Contents"
 you can use the Tab key to select the next link and the Enter key to
 follow that link. The keys Space and Backspace are used to move
@@ -847,7 +847,7 @@ list of accepted keys.
 .PP
 Invoke the
 .\"LINK2"
-user menu.
+user menu\&.
 .\"Menu File Edit"
 The user menu provides an easy way to provide users with a menu and
 add extra features to the Midnight Commander.
@@ -897,7 +897,7 @@ about source mask (which will be usually either * or ^\\(.*\\)$ depending
 on setting of Use shell patterns) and possible wildcards in the destination
 see
 .\"LINK2"
-Mask copy/rename.
+Mask copy/rename\&.
 .\"Mask Copy/Rename"
 .PP
 On some systems, it is possible to do the copy in the background by
@@ -1010,7 +1010,7 @@ pops up a small dialog, where you enter everything you would enter after
 on the command line and then you press enter. This features all the things
 that are already in the
 .\"LINK2"
-internal cd command.
+internal cd command\&.
 .\"The cd internal command"
 .\"NODE "  Command Menu"
 .SH "  Command Menu"
@@ -1054,8 +1054,8 @@ The
 .\"LINK2"
 External panelize
 .\"External panelize"
-allows you to execute an external program, and
-make the output of that program the contents of the current panel.
+allows you to execute an external program, and make the output of that
+program the contents of the current panel.
 .PP
 .\"LINK2"
 Extension file edit
@@ -1156,7 +1156,7 @@ Exit the directory tree. Do not change the directory.
 The mouse is supported. A double-click behaves like Enter. See
 also the section on
 .\"LINK2"
-mouse support.
+mouse support\&.
 .\"Mouse Support"
 .\"NODE "    Find File"
 .SH "    Find File"
@@ -1310,7 +1310,7 @@ should be:
 .I command
 is any one-line shell command, with the simple
 .\"LINK2"
-macro substitution.
+macro substitution\&.
 .\"Macro Substitution"
 .PP
 Target are evaluated from top to bottom (order is thus important).
@@ -1346,7 +1346,7 @@ copied to a temporary file in the temporary directory (usually
 normal shell constructs in the menus. Also simple macro substitution
 takes place before executing the menu code. For more information, see
 .\"LINK2"
-macro substitution.
+macro substitution\&.
 .\"Macro Substitution"
 .PP
 Here is a sample mc.menu file:
@@ -1626,7 +1626,7 @@ If no editor is specified,
 .B vi
 is used.  See the section on the
 .\"LINK2"
-internal file editor.
+internal file editor\&.
 .\"Internal File Editor"
 .PP
 .I Use internal viewer.
@@ -1638,7 +1638,7 @@ If no pager is specified, the
 .B view
 command is used.  See the section on the
 .\"LINK2"
-internal file viewer.
+internal file viewer\&.
 .\"Internal File Viewer"
 .PP
 .I Complete: show all.
@@ -1698,7 +1698,7 @@ and
 .I file types
 are highlighted with special
 .\"LINK2"
-Colors.
+Colors\&.
 .\"Colors"
 If permission highlighting is enabled, the parts of the
 .I perm
@@ -1869,7 +1869,7 @@ If you press Enter over a file that is not executable, the Midnight
 Commander checks the extension of the selected file against the
 extensions in the
 .\"LINK2"
-Extensions File.
+Extensions File\&.
 .\"Extension File Edit"
 If a match is found then the code associated with that extension is
 executed. A very simple
@@ -1917,11 +1917,11 @@ cd linux could take you to /usr/src/linux).
 .SH "  Macro Substitution"
 When accessing a
 .\"LINK2"
-user menu,
+user menu\&,
 .\"Menu File Edit"
 or executing an
 .\"LINK2"
-extension dependent command,
+extension dependent command\&,
 .\"Extension File Edit"
 or running a command from the command line input,
 a simple macro substitution takes place.
@@ -2005,7 +2005,7 @@ This is a special macro that is used to change the current directory
 to the directory specified in front of it.  This is used primarily as
 an interface to the
 .\"LINK2"
-Virtual File System.
+Virtual File System\&.
 .\"Virtual File System"
 .PP
 .I "%view"
@@ -2898,7 +2898,7 @@ is used for selected hyperlink.
 Special highlight colors determine how files are displayed
 when file highlighting is enabled (see the section on
 .\"LINK2"
-Layout).
+Layout\&).
 .\"Layout"
 .I directory
 is used for directories or symbolic links to directories;
@@ -3031,7 +3031,7 @@ name in the panel.
 If this variable is on (the default) it will spawn the file command to
 match the file types listed on the
 .\"LINK2"
-mc.ext file.
+mc.ext file\&.
 .\"Extension File Edit"
 .PP
 .I xterm_mode
