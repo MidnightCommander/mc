@@ -572,7 +572,7 @@ load_no_proxy_list (void)
     mc_file = concat_dir_and_file (mc_home, "mc.no_proxy");
     if (exist_file (mc_file) &&
 	(npf = fopen (mc_file, "r"))) {
-	while (fgets (s, sizeof(s), npf) || !(feof (npf) || ferror (npf))) {
+	while (fgets (s, sizeof (s), npf)) {
 	    if (!(p = strchr (s, '\n'))) {	/* skip bogus entries */ 
 		while ((c = fgetc (npf)) != EOF && c != '\n')
 		    ;
@@ -891,7 +891,7 @@ setup_passive (vfs *me, vfs_s_super *super, int my_socket, struct sockaddr_in *s
 {
     int xa, xb, xc, xd, xe, xf;
     char n [6];
-    char *c = reply_str;
+    char *c;
     
     if (command (me, super, WAIT_REPLY | WANT_STRING, "PASV") != COMPLETE)
 	return 0;
@@ -927,23 +927,28 @@ initconn (vfs *me, vfs_s_super *super)
     int data, len = sizeof(data_addr);
     struct protoent *pe;
 
-    getsockname(SUP.sock, (struct sockaddr *) &data_addr, &len);
+    pe = getprotobyname ("tcp");
+    if (pe == NULL)
+	ERRNOR (EIO, -1);
+again:
+    getsockname (SUP.sock, (struct sockaddr *) &data_addr, &len);
     data_addr.sin_port = 0;
     
-    pe = getprotobyname("tcp");
-    if (pe == NULL)
-	    ERRNOR (EIO, -1);
     data = socket (AF_INET, SOCK_STREAM, pe->p_proto);
     if (data < 0)
-	    ERRNOR (EIO, -1);
+	ERRNOR (EIO, -1);
 
-    if (SUP.use_passive_connection){
-	if ((SUP.use_passive_connection = setup_passive (me, super, data, &data_addr)))
+    if (SUP.use_passive_connection) {
+	if (setup_passive (me, super, data, &data_addr))
 	    return data;
 
 	SUP.use_source_route = 0;
 	SUP.use_passive_connection = 0;
 	print_vfs_message (_("ftpfs: could not setup passive mode"));
+
+	/* data or data_addr may be damaged by setup_passive */
+	close (data);
+	goto again;
     }
 
     /* If passive setup fails, fallback to active connections */
@@ -959,14 +964,14 @@ initconn (vfs *me, vfs_s_super *super)
 		     a[2], a[3], p[0], p[1]) == COMPLETE)
 	    return data;
     }
-    close(data);
+    close (data);
     my_errno = EIO;
     return -1;
 }
 
 static int
-open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote, 
-		int isbinary, int reget)
+open_data_connection (vfs *me, vfs_s_super *super, const char *cmd,
+		      const char *remote, int isbinary, int reget)
 {
     struct sockaddr_in from;
     int s, j, data, fromlen = sizeof(from);
@@ -995,11 +1000,12 @@ open_data_connection (vfs *me, vfs_s_super *super, char *cmd, char *remote,
 	data = s;
     else {
 	data = accept (s, (struct sockaddr *)&from, &fromlen);
-	close(s);
 	if (data < 0) {
 	    my_errno = errno;
+	    close (s);
 	    return -1;
 	}
+	close (s);
     } 
     disable_interrupt_key();
     return data;
@@ -1208,7 +1214,7 @@ resolve_symlink(vfs *me, vfs_s_super *super, vfs_s_inode *dir)
 #endif
 
 static int
-dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
+dir_load (vfs *me, vfs_s_inode *dir, char *remote_path)
 {
     vfs_s_entry *ent;
     vfs_s_super *super = dir->super;
@@ -1219,8 +1225,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     char buffer[BUF_8K];
     int cd_first;
     
-    cd_first = ftpfs_first_cd_then_ls || (strchr (remote_path, ' ') != NULL)
-	|| (SUP.strict == RFC_STRICT);
+    cd_first = ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT)
+	|| (strchr (remote_path, ' ') != NULL);
 
 again:
     print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,

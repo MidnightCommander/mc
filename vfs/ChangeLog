@@ -1,3 +1,11 @@
+2003-07-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (load_no_proxy_list): Fix infinitive loop if ferror().
+	(initconn): Reset variables if setup_passive() fails.
+	(open_data_connection): Set my_errno to errno before close()
+	syscall.
+	(dir_load): Optimize cd_first calculation.
+
 2003-06-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/lslR.in: Portability fixes.
