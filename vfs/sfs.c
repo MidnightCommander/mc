@@ -69,6 +69,8 @@ static int vfmake (vfs *me, char *name, char *cache)
         name = mc_getlocalcopy (name);
     else 
         name = g_strdup (name);
+    if (!name)
+	return -1;
     s = sfs_command[w];
 #define COPY_CHAR if (t-pad>10200) return -1; else *t++ = *s;
 #define COPY_STRING(a) if ((t-pad)+strlen(a)>10200) return -1; else { strcpy (t, a); t+= strlen(a); }
@@ -221,7 +223,8 @@ static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
 
     {
         char *path2 = g_strdup (path);
-	v = vfs_split (path2, NULL, NULL);
+	v = vfs_split (path2, NULL, NULL);	/* Strip suffix which led to this being sfs */
+	v = vfs_split (path2, NULL, NULL);	/* ... and learn whoever was the parent system */
 	id = (*v->getid) (v, path2, &par);
 	g_free (path2);
     }
