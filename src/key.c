@@ -49,12 +49,12 @@
 
 #ifdef __linux__
 #    if defined(__GLIBC__) && (__GLIBC__ < 2)
-#        include <linux/termios.h>	/* This is needed for TIOCLINUX */
+#        include <linux/termios.h>	/* TIOCLINUX */
 #    else
 #        include <termios.h>
 #    endif
 #    include <sys/ioctl.h>
-#endif
+#endif				/* __linux__ */
 
 #ifdef __QNXNTO__
 #	include <sys/dcmd_chr.h>

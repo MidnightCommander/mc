@@ -871,7 +871,8 @@ void subshell_get_console_attributes (void)
 /* Figure out whether the subshell has stopped, exited or been killed */
 /* Possibly modifies: `subshell_alive', `subshell_stopped' and `quit' */
 
-void sigchld_handler (int sig)
+void
+sigchld_handler (int sig)
 {
     int status;
     pid_t pid;
@@ -879,10 +880,9 @@ void sigchld_handler (int sig)
     pid = waitpid (subshell_pid, &status, WUNTRACED | WNOHANG);
 
     if (pid == subshell_pid) {
-	/* {{{ Figure out what has happened to the subshell */
+	/* Figure out what has happened to the subshell */
 
-	if (WIFSTOPPED (status))
-	{
+	if (WIFSTOPPED (status)) {
 	    if (WSTOPSIG (status) == SIGSTOP) {
 		/* The subshell has received a SIGSTOP signal */
 		subshell_stopped = TRUE;
@@ -890,39 +890,35 @@ void sigchld_handler (int sig)
 		/* The user has suspended the subshell.  Revive it */
 		kill (subshell_pid, SIGCONT);
 	    }
-	}
-	else  /* The subshell has either exited normally or been killed */
-	{
+	} else {
+	    /* The subshell has either exited normally or been killed */
 	    subshell_alive = FALSE;
 	    delete_select_channel (subshell_pty);
 	    if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
-		quit |= SUBSHELL_EXIT;  /* Exited normally */
+		quit |= SUBSHELL_EXIT;	/* Exited normally */
 	}
-
-	/* }}} */
     }
-
-#if defined(linux) || defined(__linux__)
+#ifdef __linux__
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
-    
+
     if (pid == cons_saver_pid) {
 
 	if (WIFSTOPPED (status))
 	    /* Someone has stopped cons.saver - restart it */
 	    kill (pid, SIGCONT);
-	else
-	{
+	else {
 	    /* cons.saver has died - disable confole saving */
 	    handle_console (CONSOLE_DONE);
 	    console_flag = 0;
 	}
 
     }
-#endif /* linux || __linux__ */
-    /* If we get here, some other child exited; ignore it */
-#  ifdef __EMX__				/* Need to report */
-    pid = wait(&status);
-#  endif
+#endif				/* __linux__ */
+
+    /* If we got here, some other child exited; ignore it */
+#ifdef __EMX__			/* Need to report */
+    pid = wait (&status);
+#endif
 }
 
 /* }}} */
@@ -1197,7 +1193,7 @@ static int pty_open_slave (const char *pty_name)
 	return -1;
     }
 
-#if !defined(__osf__) && !defined(linux) && !defined(__linux__)
+#if !defined(__osf__) && !defined(__linux__)
 #if defined (I_FIND) && defined (I_PUSH)
     if (!ioctl (pty_slave, I_FIND, "ptem"))
 	if (ioctl (pty_slave, I_PUSH, "ptem") == -1)
@@ -1225,7 +1221,7 @@ static int pty_open_slave (const char *pty_name)
 	}
 #endif /* sgi || __sgi */
 #endif /* I_FIND && I_PUSH */
-#endif /* __osf__ || linux || __linux__ */
+#endif /* __osf__ || __linux__ */
 
     return pty_slave;
 }

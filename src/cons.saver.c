@@ -1,4 +1,4 @@
-#if defined(linux) || defined(__linux__)
+#ifdef __linux__
 
 /* General purpose Linux console screen save/restore server
    Copyright (C) 1994 Janne Kukonlehto <jtklehto@stekt.oulu.fi>
@@ -315,4 +315,4 @@ int main (int argc, char **argv)
 
  #error "The Linux console screen saver works only on Linux"
 
-#endif /* #ifdef linux */
+#endif /* __linux__ */

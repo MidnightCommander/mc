@@ -2060,7 +2060,7 @@ OS_Setup (void)
 static void
 sigchld_handler_no_subshell (int sig)
 {
-#if defined(linux) || defined(__linux__)
+#ifdef __linux__
     int pid, status;
 
     if (!console_flag)
@@ -2086,9 +2086,9 @@ sigchld_handler_no_subshell (int sig)
 	    console_flag = 0;
 	}
     }
-#endif				/* linux || __linux__ */
+#endif				/* __linux__ */
 
-    /* If we get here, some other child exited; ignore it */
+    /* If we got here, some other child exited; ignore it */
 }
 
 void
