@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-12 20:02-0600\n"
+"POT-Creation-Date: 1999-03-14 18:17-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:420 gnome/gdesktop.c:2072
+#: gnome/gdesktop.c:420 gnome/gdesktop.c:2067
 msgid "Warning"
 msgstr ""
 
@@ -203,45 +203,45 @@ msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2068
+#: gnome/gdesktop.c:2063
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2073
+#: gnome/gdesktop.c:2068
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2402 gnome/glayout.c:355
+#: gnome/gdesktop.c:2397 gnome/glayout.c:355
 msgid "_Terminal"
 msgstr ""
 
-#: gnome/gdesktop.c:2402 gnome/glayout.c:355
+#: gnome/gdesktop.c:2397 gnome/glayout.c:355
 msgid "Launch a new terminal in the current directory"
 msgstr ""
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2404 gnome/glayout.c:357
+#: gnome/gdesktop.c:2399 gnome/glayout.c:357
 msgid "_Directory..."
 msgstr ""
 
-#: gnome/gdesktop.c:2404 gnome/glayout.c:357
+#: gnome/gdesktop.c:2399 gnome/glayout.c:357
 msgid "Creates a new directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2412 gnome/glayout.c:440
+#: gnome/gdesktop.c:2407 gnome/glayout.c:440
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2413
+#: gnome/gdesktop.c:2408
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2415
+#: gnome/gdesktop.c:2410
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2416 gnome/glayout.c:443
+#: gnome/gdesktop.c:2411 gnome/glayout.c:443
 msgid "Rescan Desktop"
 msgstr ""
 
