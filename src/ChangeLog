@@ -1,3 +1,8 @@
+2001-06-26  Pavel Roskin  <proski@gnu.org>
+
+	* xslint.c: Remove.
+	* Makefile.in (SRCS): Remove xslint.c.
+
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (ctrl_pressed): Don't limit functionality to Linux.

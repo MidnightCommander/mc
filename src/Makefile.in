@@ -26,7 +26,7 @@ INSTALL_DATA = @INSTALL_DATA@
 SRCS =	dir.c util.c main.c screen.c dialog.c key.c keyxdef.c menu.c	\
 	file.c win.c color.c help.c find.c profile.c user.c view.c	\
 	ext.c mouse.c setup.c dlg.c option.c info.c			\
-	tree.c widget.c chmod.c mad.c xcurses.c xslint.c		\
+	tree.c widget.c chmod.c mad.c xcurses.c				\
 	wtools.c cons.handler.c chown.c subshell.c terms.c boxes.c	\
 	hotlist.c achown.c layout.c fsusage.c mountlist.c regex.c	\
 	complete.c slint.c command.c cmd.c panelize.c learn.c		\
