@@ -556,7 +556,7 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 			/* Items with F_SINGLE require that no marked files exist */
 			if (file_actions [i].flags & F_SINGLE){
 				if (panel->marked)
-					break;
+					continue;
 			}
 
 			/* Items with F_NOTDIR requiere that the selection is not a directory */
@@ -564,10 +564,10 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 				struct stat *s = &panel->dir.list [row].buf;
 
 				if (panel->dir.list [row].f.link_to_dir)
-					break;
+					continue;
 				
 				if (S_ISDIR (s->st_mode))
-					break;
+					continue;
 			}
 			
 			/* Items with F_REGULAR do not accept any strange file types */
@@ -575,16 +575,16 @@ create_popup_submenu (WPanel *panel, int row, char *filename)
 				struct stat *s = &panel->dir.list [row].buf;
 				
 				if (S_ISLNK (panel->dir.list [row].f.link_to_dir))
-					break;
+					continue;
 				if (S_ISSOCK (s->st_mode) || S_ISCHR (s->st_mode) ||
 				    S_ISFIFO (s->st_mode) || S_ISBLK (s->st_mode))
-					break;
+					continue;
 			}
 
 			/* Items with F_SYMLINK only operate on symbolic links */
 			if (file_actions [i].flags & F_SYMLINK){
 				if (!S_ISLNK (panel->dir.list [row].buf.st_mode))
-					break;
+					continue;
 			}
 		}
 		if (*file_actions [i].text)
