@@ -1,3 +1,9 @@
+2002-12-19  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: Fix patch size calculation.  Use bytes to
+	count size in bytes, not characters (in multibyte encodings char
+	can be two or more bytes wide).
+
 2002-12-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/patchfs.in: Don't rely on tell() - it doesn't always

@@ -4,7 +4,9 @@
 # 
 # extfs to handle patches in unified diff format
 
+use bytes;
 use strict;
+use POSIX;
 
 # standard binaries
 my $bzip = "bzip2";
@@ -45,7 +47,7 @@ sub error
 sub list
 {
     my ($archive)=(quotemeta $_[0]);
-    my ($state,$pos,$npos,$time);
+    my ($state,$pos,$len,$time);
     my ($f,$fsrc,$fdst,$prefix);
 
     # use uid and gid from file
@@ -54,17 +56,14 @@ sub list
     import Date::Parse if ($parsedates);
     
     # state==1 means diff contents, state==0 means comments
-    $state = 1; $f = '';
-    my $cpos = 0;
+    $state=1; $len=0; $f='';
     while (<I>) {
-	$cpos += length;
 	if (/^--- /) {
 	    # parse diff header
 	    if ($state==1) {
-		$npos = $cpos - length;
-		printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
+		printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
 		  if $f;
-		$pos=$npos;
+		$len=0;
 	    }
 	    $state=1;
 
@@ -110,15 +109,13 @@ sub list
 
 	} elsif ($state==1 && !/^([+\- \n]|@@)/) {
 	    # start of comments, end of diff contents
-	    $npos = $cpos - length;
-	    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
+	    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
 	      if $f;
-	    $pos=$npos;
-	    $state=0;
+	    $state=$len=0;
 	}
+	$len+=length;
     }
-    $npos = $cpos;
-    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
+    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $len, datetime($time), $prefix, $f
       if $f;
 }
 
