@@ -1,23 +1,19 @@
-/*  xdnd.c, xdnd.h - C program library for handling the Xdnd protocol
- *  Copyright (C) 1998 Paul Sheer
- *  Permission is hereby granted to study, compile, copy, modify, publish,
- *  distribute and sell (the "Activities") the files xdnd.c and xdnd.h
- *  (the "Code") subject to the following conditions:
- *    1. Modification of the Code is not done against the impetus of 
- *       development of the Xdnd protocol via community involvement.
- *       1.1 This means that all modifications to the Code must be
- *           revealed to the copyright holder, along with a clear
- *           explanation of the modifications.
- *       1.2 All authors that use the Code in their application
- *           programs, must report such use to the copyright holder.
- *    2. The Code must remain intact with this copyright notice.
- *    3. The Code is provided without warranty.
- *    4. In as far as there is positive intension on the part of
- *       the author/s and copyright holder, no liability will be held
- *       against them out of damages incidental or consequential to
- *       the Activities.
- *  Permission is limited to the Activities only.
- *  The copyright holder may be reached by email at <psheer@obsidian.co.za>
+/* xdnd.c, xdnd.h - C program library for handling the Xdnd protocol
+   Copyright (C) 1998 Paul Sheer
+
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  
  */
 
 #ifndef _X_DND_H

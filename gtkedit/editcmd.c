@@ -1476,7 +1476,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 {
     char *s;
     s = gtk_dialog_cauldron (
-				"Search", GTK_CAULDRON_TOPLEVEL,
+				"Search", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 				" ( (Enter search text)d | %Eogxf )xf / ( ( %Cd // %Cd // %Cd ) || ( %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
 				search_text, "search",
 				"&Whole word", &replace_whole,
@@ -1496,7 +1496,7 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
 {
     char *s;
     s = gtk_dialog_cauldron (
-				"Search", GTK_CAULDRON_TOPLEVEL,
+				"Search", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 				" ( (Enter search text)d | %Eogxf )xf / ( (Enter replace text)d | %Egxf )xf / ( (Enter argument order)d | %Egxf )xf / ( ( %Cd // %Cd // %Cd // %Cd ) || ( %Cd // %Cd // %Cd )xf )xf / ( %Bxfgrq || %Bxfgq )f",
 				search_text, "search",
 				replace_text, "replace",
@@ -1525,7 +1525,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     if (replace_prompt) {
 	char *s;
 	s = gtk_dialog_cauldron (
-				    "Replace", GTK_CAULDRON_TOPLEVEL,
+				    "Replace", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 		  " ( (Replace with:)d %Ld )xf / ( %Bxfrq || %Bxfq || %Bxfq || %Bxfgq )f",
 				    replace_text,
 				    "Replace", "Skip", "Replace All",
@@ -2217,7 +2217,7 @@ void edit_quit_cmd (WEdit * edit)
     if (edit->modified) {
 #ifdef GTK
 	char *r;
-	r = gtk_dialog_cauldron (_ (" Quit "), GTK_CAULDRON_TOPLEVEL, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
+	r = gtk_dialog_cauldron (_ (" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
 				     _ (" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
 	if (!strcmp (r, GNOME_STOCK_BUTTON_YES)) {
 	    edit_push_markers (edit);
