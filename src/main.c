@@ -2527,10 +2527,11 @@ main (int argc, char *argv[])
     /* On NT, home_dir is malloced */
     g_free (home_dir);
 #endif
-    if (last_wd_file && !print_last_revert && !edit_one_file
-	&& !view_one_file) {
-	int last_wd_fd = open (last_wd_file, O_WRONLY | O_CREAT | O_EXCL,
-			       S_IRUSR | S_IWUSR);
+    if (last_wd_file && last_wd_string && !print_last_revert
+	&& !edit_one_file && !view_one_file) {
+	int last_wd_fd =
+	    open (last_wd_file, O_WRONLY | O_CREAT | O_TRUNC | O_EXCL,
+		  S_IRUSR | S_IWUSR);
 
 	if (last_wd_fd != -1) {
 	    write (last_wd_fd, last_wd_string, strlen (last_wd_string));

@@ -1,3 +1,10 @@
+2002-11-01  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (main): Use O_TRUNC when opening the file to write the
+	last working directory.  Fix segmentation fault when exiting
+	while on VFS.
+	* util.c (mc_mkstemps): Use O_TRUNC to open temporary files.
+
 2002-10-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (normal_search) [HAVE_CHARSET]: Fix segmentation fault
