@@ -964,9 +964,9 @@ AC_ARG_WITH(netrc,
 undelfs_o=""
 AC_DEFUN(AC_EXT2_UNDEL, [
   GNOME_UNDELFS_CHECKS
-  if test "$ext2fs_undel" = xyes; then
+  if test "$ext2fs_undel" = yes; then
      AC_MSG_RESULT(With ext2fs file recovery code)
-     vfs_flags="$vfs_flags, undelfs"
+     vfs_flags="${vfs_flags}, undelfs"
      undelfs_o="undelfs.o"
      LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
   else
