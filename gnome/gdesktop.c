@@ -799,8 +799,11 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	dest = g_concat_dir_and_file (desktop_directory, new_name);
 
 	if (mc_rename (source, dest) == 0) {
+		gnome_metadata_delete (dest);
+		gnome_metadata_rename (source, dest);
 		g_free (dii->filename);
 		dii->filename = g_strdup (new_name);
+		desktop_reload_icons (FALSE, 0, 0);
 		retval = TRUE;
 	} else
 		retval = FALSE; /* FIXME: maybe pop up a warning/query dialog? */
@@ -825,6 +828,7 @@ text_changed_url (GnomeIconTextItem *iti, gpointer data)
 	fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
 	new_text = gnome_icon_text_item_get_text (iti);
 	gnome_metadata_set (fullname, "icon-caption", strlen (new_text) + 1, new_text);
+	desktop_reload_icons (FALSE, 0, 0);
 
 	return TRUE;
 }
