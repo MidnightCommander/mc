@@ -1,3 +1,7 @@
+Tue Jul  6 11:22:40 1999  Timur I. Bakeyev  <mc@bat.ru>
+
+	* samba/include/config.h: Removed. Should be generated.
+
 Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Make-mc.in(XCPPFLAGS): Add necessary paths to allow compile sambafs
