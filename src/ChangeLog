@@ -1,3 +1,8 @@
+2002-11-01  Andrew W. Nosenko  <awn@bcs.zp.ua>
+
+	* boxes.c (configure_vfs): Ask whether passive connections
+	should be used.
+
 2002-11-01  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (main): Use O_TRUNC when opening the file to write the

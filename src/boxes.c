@@ -688,8 +688,8 @@ tree_box (char *current_dir)
 #ifdef USE_VFS
 
 #if defined(USE_NETCODE)
-#define VFSY 15
-#define VFS_WIDGETBASE 8
+#define VFSY 16
+#define VFS_WIDGETBASE 9
 #else
 #define VFSY 8
 #define VFS_WIDGETBASE 0
@@ -704,6 +704,7 @@ static char *ret_passwd;
 static char *ret_directory_timeout;
 static char *ret_ftp_proxy;
 static int ret_use_netrc;
+static int ret_ftpfs_use_passive_connections;
 #endif
 
 static QuickWidget confvfs_widgets [] = {
@@ -712,6 +713,8 @@ static QuickWidget confvfs_widgets [] = {
 { quick_button,   12, VFSX,    VFSY - 3, VFSY, N_("&OK"),
       0, B_ENTER, 0, 0, "button-ok" },
 #if defined(USE_NETCODE)
+{ quick_checkbox,  4, VFSX, 11, VFSY, N_("Use &passive mode"), 0, 0,
+      &ret_ftpfs_use_passive_connections, 0, "check-use-passive-mode" },
 { quick_checkbox,  4, VFSX, 10, VFSY, N_("&Use ~/.netrc"), 0, 0,
       &ret_use_netrc, 0, "check-use-netrc" },
 { quick_input,     4, VFSX, 9, VFSY, "", 48, 0, 0, &ret_ftp_proxy,
@@ -754,10 +757,11 @@ configure_vfs (void)
     confvfs_widgets [3 + VFS_WIDGETBASE].text = buffer2;
 #if defined(USE_NETCODE)
     ret_use_netrc = use_netrc;
+    ret_ftpfs_use_passive_connections = ftpfs_use_passive_connections;
     g_snprintf(buffer3, sizeof (buffer3), "%i", ftpfs_directory_timeout);
-    confvfs_widgets[6].text = buffer3;
-    confvfs_widgets[8].text = ftpfs_anonymous_passwd;
-    confvfs_widgets[3].text = ftpfs_proxy_host;
+    confvfs_widgets[7].text = buffer3;
+    confvfs_widgets[9].text = ftpfs_anonymous_passwd;
+    confvfs_widgets[4].text = ftpfs_proxy_host;
 #endif
 
     if (quick_dialog (&confvfs_dlg) != B_CANCEL) {
@@ -773,6 +777,7 @@ configure_vfs (void)
 	ftpfs_proxy_host = ret_ftp_proxy;
 	ftpfs_directory_timeout = atoi(ret_directory_timeout);
 	use_netrc = ret_use_netrc;
+	ftpfs_use_passive_connections = ret_ftpfs_use_passive_connections;
 	g_free (ret_directory_timeout);
 #endif
     }
