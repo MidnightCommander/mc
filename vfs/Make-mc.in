@@ -51,6 +51,7 @@ VFSSRCS = \
 	tcputil.c		\
 	undelfs.c 		\
 	utilvfs.c		\
+	util-alone.c		\
 	vfs.c
 
 VFSHDRS = 			\
@@ -64,6 +65,7 @@ VFSHDRS = 			\
 	tcputil.h 		\
 	utilvfs.h		\
 	vfs.h			\
+	util-alone.h		\
 	xdirentry.h
 
 VFSOBJS = $(NONETFILES) @NETFILES@
