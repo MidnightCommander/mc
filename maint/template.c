@@ -24,9 +24,7 @@
 # include <config.h>
 #endif
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <...>
+#include <System Headers> /* see maint/headers.txt for details */
 
 #include "../src/global.h"
 #include "..."
