@@ -1,3 +1,8 @@
+2001-06-17  David Martin  <dmartina@excite.es>
+
+	* hotlist.c (init_movelist): Don't assume English word ordering
+	in the title.
+
 2001-06-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* wtools.c (message): Possible buffer overflow fixed.

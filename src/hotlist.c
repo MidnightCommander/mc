@@ -628,8 +628,8 @@ static void init_hotlist (int list_type)
 static void init_movelist (int list_type, struct hotlist *item)
 {
     int i;
-    char *hdr = g_strconcat (_("Moving "), item->label, NULL);
-	int movelist_cols = init_i18n_stuff (list_type, COLS - 6);
+    char *hdr = g_strdup_printf (_("Moving %s"), item->label);
+    int movelist_cols = init_i18n_stuff (list_type, COLS - 6);
 
     do_refresh ();
 
