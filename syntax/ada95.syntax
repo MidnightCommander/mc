@@ -22,11 +22,11 @@ context default
 	keyword :	brightgreen/6
 	keyword (	brightgreen/6
 	keyword )	brightgreen/6
-	keyword +	brightgreen/6
+	keyword \+	brightgreen/6
 	keyword -	brightgreen/6
 	keyword /	brightgreen/6
-	keyword *	brightgreen/6
-	keyword **	brightgreen/6
+	keyword \*	brightgreen/6
+	keyword \*\*	brightgreen/6
 	keyword #	brightgreen/6
 	keyword =>	brightgreen/6
 	keyword ,	brightgreen/6

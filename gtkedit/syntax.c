@@ -1220,7 +1220,7 @@ char *syntax_text[] = {
 "file ..\\*\\\\.(pp|PP|pas|PAS)$ Pascal\\sProgram",
 "include pascal.syntax",
 "",
-"file ..\\*\\\\.(ada|adb|ADA|ADB)$ Ada\\sProgram",
+"file ..\\*\\\\.(ada|adb|ads|ADA|ADB|ADS)$ Ada\\sProgram",
 "include ada95.syntax",
 "",
 "file ..\\*\\\\.tex$ LaTeX\\s2.09\\sDocument",

@@ -18,7 +18,6 @@ ALLSYNTAX =			\
 	c.syntax		\
 	changelog.syntax	\
 	diff.syntax		\
-	diffc.syntax		\
 	fortran.syntax		\
 	html.syntax		\
 	java.syntax		\
