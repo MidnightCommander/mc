@@ -15,7 +15,9 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+*/
 
+/*
    Implements the hypertext file viewer.
    The hypertext file is a file that may have one or more nodes.  Each
    node ends with a ^D character and starts with a bracket, then the
@@ -37,10 +39,12 @@
 */
 
 #include <config.h>
+
+#include <errno.h>
 #include <stdio.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <errno.h>
 
 #include "global.h"
 #include "tty.h"

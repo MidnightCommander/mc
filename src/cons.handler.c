@@ -17,17 +17,15 @@
 
 #include <config.h>
 
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
-#include <sys/types.h>
 #include <signal.h>
 #include <stdio.h>
 
+#include <sys/types.h>
 #ifdef __FreeBSD__
-#include <sys/consio.h>
-#include <sys/ioctl.h>
-#endif				/* __FreeBSD__ */
+#  include <sys/consio.h>
+#  include <sys/ioctl.h>
+#endif
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"

@@ -16,31 +16,31 @@
  */
 
 #include <config.h>
+
 #ifdef HAVE_SUBSHELL_SUPPORT
 
 #ifndef _GNU_SOURCE
 #   define _GNU_SOURCE 1
 #endif
 
+#include <ctype.h>
 #include <stdio.h>      
-#include <stdlib.h>	/* For errno, putenv, etc.	      */
-#include <errno.h>	/* For errno on SunOS systems	      */
-#include <termios.h>	/* tcgetattr(), struct termios, etc.  */
-#include <sys/types.h>	/* Required by unistd.h below	      */
-#ifdef HAVE_SYS_IOCTL_H
-#   include <sys/ioctl.h> /* For ioctl() (surprise, surprise) */
-#endif
-#include <string.h>	/* strstr(), strcpy(), etc.	      */
-#include <signal.h>	/* sigaction(), sigprocmask(), etc.   */
-#include <sys/stat.h>	/* Required by dir.h & panel.h below  */
-#include <ctype.h>	/* isalnum() */
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+#include <signal.h>
 
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>	/* For pipe, fork, setsid, access etc */
+#include <sys/types.h>
+#ifdef HAVE_SYS_IOCTL_H
+#  include <sys/ioctl.h>
 #endif
+#ifdef HAVE_TERMIOS_H
+#include <termios.h>
+#endif
+#include <unistd.h>
 
 #ifdef HAVE_STROPTS_H
-#   include <stropts.h> /* For I_PUSH */
+#  include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
 #include "global.h"

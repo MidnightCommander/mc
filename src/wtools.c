@@ -23,9 +23,10 @@
  */
 
 #include <config.h>
-#include <string.h>
-#include <stdio.h>
+
 #include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 
 #include "global.h"
 #include "tty.h"

@@ -1,3 +1,7 @@
+2005-02-08  Roland Illig  <roland.illig@gmx.de>
+
+	* *.c: Reordered header inclusion.
+
 2005-02-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ext.c (regex_command): Eliminate g_string_*().

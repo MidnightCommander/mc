@@ -20,24 +20,19 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include <locale.h>
 
+#include <ctype.h>
+#include <errno.h>
+#include <locale.h>
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <sys/types.h>
-
 #include <sys/stat.h>
+#include <unistd.h>
 
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-
-#include <errno.h>
-#include <ctype.h>
-#include <signal.h>
-
-/* Program include files */
 #include "global.h"
 #include "tty.h"
 #include "dir.h"
@@ -65,6 +60,7 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
+#include "roland.h"
 
 /* Listbox for the command history feature */
 #include "widget.h"
@@ -916,7 +912,8 @@ static menu_entry OptMenu[] = {
     {' ', N_("&Virtual FS..."), 'V', configure_vfs},
 #endif				/* !USE_VFS */
     {' ', "", ' ', 0},
-    {' ', N_("&Save setup"), 'S', save_setup_cmd}
+    {' ', N_("&Save setup"), 'S', save_setup_cmd},
+    {' ', N_("Rolands test"), 'R', roland_cmd}
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)

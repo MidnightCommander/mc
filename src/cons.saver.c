@@ -34,15 +34,19 @@
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE
 #endif
-#include <fcntl.h>
-#include <unistd.h>
-#include <termios.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <fcntl.h>
+#ifdef HAVE_TERMIOS_H
+#include <termios.h>
+#endif
+#include <unistd.h>
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"

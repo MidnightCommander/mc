@@ -22,8 +22,10 @@
 */
 
 #include <config.h>
+
 #include <errno.h>
 #include <string.h>
+
 #include "global.h"		/* home_dir */
 #include "tty.h"
 #include "widget.h"		/* WInput */

@@ -17,12 +17,13 @@
  */
 
 #include <config.h>
-#include <stdio.h>	/* read, printf */
-#include <sys/types.h>
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
+
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"	/* move, addch */

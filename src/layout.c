@@ -20,14 +20,14 @@
  */
 
 #include <config.h>
+
+#include <signal.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#if HAVE_TERMIOS_H
-#    include <termios.h>
-#endif
      /*
       * If TIOCGWINSZ supported, make it available here, because window-
       * resizing code depends on it...
@@ -35,10 +35,10 @@
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
+#ifdef HAVE_TERMIOS_H
+#include <termios.h>
 #endif
-#include <signal.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"		/* COLS */

@@ -19,11 +19,11 @@
 /* based */
 
 #include <config.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
+
 #include <stdio.h>
+
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"

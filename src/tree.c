@@ -27,9 +27,10 @@
 
    */
 #include <config.h>
-#include <string.h>
+
 #include <errno.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "global.h"
 #include "tty.h"

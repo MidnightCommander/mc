@@ -42,19 +42,15 @@
 /* {{{ Include files */
 
 #include <config.h>
-/* Hack: the vfs code should not rely on this */
-#define WITH_FULL_PATHS 1
-
-#include <sys/types.h>
-#include <stdio.h>
 
 #include <errno.h>
 #include <ctype.h>
+#include <stdio.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
+
+#include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "setup.h"		/* verbose */
@@ -71,6 +67,9 @@
 #include "util.h"               /* strip_password() */
 
 /* }}} */
+
+/* Hack: the vfs code should not rely on this */
+#define WITH_FULL_PATHS 1
 
 /* This structure describes the UI and internal data required by a file
  * operation context.

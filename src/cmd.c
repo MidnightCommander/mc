@@ -20,23 +20,19 @@
 
 #include <config.h>
 
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-
+#include <errno.h>
 #include <stdio.h>
+#include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <string.h>
-#include <errno.h>
-
-#ifdef USE_NETCODE
-#include <netdb.h>
-#endif
-
 #ifdef HAVE_MMAP
 #   include <sys/mman.h>
 #endif
+#ifdef USE_NETCODE
+#include <netdb.h>
+#endif
+#include <unistd.h>
 
 #include "global.h"
 #include "cmd.h"		/* Our definitions */

@@ -20,8 +20,9 @@
 #include <config.h>
 
 #ifdef HAVE_CHARSET
-#include <stdlib.h>
+
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "global.h"
 #include "dialog.h"

@@ -2,17 +2,15 @@
    file accompanying popt source distributions, available from 
    ftp://ftp.redhat.com/pub/code/popt */
 
-#ifdef HAVE_CONFIG_H
-#include "config.h"
-#endif
+#include <config.h>
 
 #include "poptalloca.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef HAVE_UNISTD_H
-#  include <unistd.h>
-#endif
+#include <unistd.h>
+
 #ifdef __NeXT
 /* access macros are not declared in non posix mode in unistd.h -
  don't try to use posix on NeXTstep 3.3 ! */ 

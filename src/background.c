@@ -25,16 +25,15 @@
 
 #ifdef WITH_BACKGROUND
 
-#include <stdarg.h>
-#include <sys/types.h>
 #include <errno.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
-#include <sys/stat.h>
-#include <signal.h>	/* kill() */
-#include <string.h>
+#include <signal.h>
+#include <stdarg.h>
 #include <stdio.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "background.h"

@@ -25,13 +25,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>		/* On Solaris, FD_SET invokes memset(3) */
+
+#include <sys/types.h>
+#include <sys/time.h>
 #include <sys/wait.h>
-#include <unistd.h>
 #ifdef HAVE_SYS_SELECT_H
 #  include <sys/select.h>
 #endif
+#include <unistd.h>
 
-#include <pipethrough.h>
+#include "pipethrough.h"
 
 #define PIPE_RD 0
 #define PIPE_WR 1

@@ -15,13 +15,12 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
 
-#include <sys/types.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <sys/types.h>
 
 /* This header needs to be included before sys/mount.h on *BSD */
 #ifdef HAVE_SYS_PARAM_H

@@ -23,8 +23,10 @@
  */
 
 #include <config.h>
-#include <string.h>
+
 #include <errno.h>
+#include <string.h>
+
 #include "global.h"
 
 static char *

@@ -39,18 +39,15 @@
 /* {{{ Include files */
 
 #include <config.h>
-/* Hack: the vfs code should not rely on this */
-#define WITH_FULL_PATHS 1
+
+#include <ctype.h>
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
 
 #include <sys/types.h>
-#include <stdio.h>
-#include <errno.h>
-#include <ctype.h>
-#include <string.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif				/* HAVE_UNISTD_H */
 #include <sys/stat.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"
@@ -77,6 +74,9 @@
 #include "../vfs/vfs-impl.h"
 
 /* }}} */
+
+/* Hack: the vfs code should not rely on this */
+#define WITH_FULL_PATHS 1
 
 int verbose = 1;
 

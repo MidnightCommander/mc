@@ -23,8 +23,11 @@
  */
 
 #include <config.h>
+
+#include <string.h>
+
 #include <glib.h>
-#include <string.h>	/* strlcpy() */
+
 #include "glibcompat.h"
 
 #if GLIB_MAJOR_VERSION < 2
@@ -36,7 +39,6 @@
  */
 
 #ifdef HAVE_STRLCPY
-/* Use the native ones, if available; they might be implemented in assembly */
 gsize
 g_strlcpy (gchar       *dest,
 	   const gchar *src,

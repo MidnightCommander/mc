@@ -18,6 +18,7 @@
  */
 
 #include <config.h>
+
 #include <stdio.h>
 
 #include "global.h"

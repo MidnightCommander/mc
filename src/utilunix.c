@@ -22,22 +22,23 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include <stdio.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-#include <signal.h>		/* struct sigaction */
-#include <limits.h>		/* INT_MAX */
-#include <sys/stat.h>
-#include <sys/param.h>		/* for MAXPATHLEN */
-#include <stdarg.h>
-#include <errno.h>		/* errno */
-#include <string.h>
+
 #include <ctype.h>
+#include <errno.h>
+#include <limits.h>
+#include <signal.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
+#include <unistd.h>
 
 #include "global.h"
 #include "execute.h"

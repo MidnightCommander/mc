@@ -22,16 +22,17 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include <stdio.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-#include <limits.h>		/* INT_MAX */
-#include <sys/stat.h>
-#include <stdarg.h>
-#include <string.h>
+
 #include <ctype.h>
+#include <limits.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "global.h"
 #include "profile.h"

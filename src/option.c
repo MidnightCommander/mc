@@ -17,14 +17,13 @@
  */
 
 #include <config.h>
-#include <string.h>
+
 #include <stdio.h>
-/* Needed for the extern declarations of integer parameters */
+#include <string.h>
+
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
+#include <unistd.h>
 
 #include "global.h"
 #include "tty.h"
