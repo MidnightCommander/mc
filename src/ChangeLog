@@ -1,5 +1,7 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* cons.handler.c: Include "global.h" for exit().
+
 	* Makefile.in: Add dependencies between mc and static libraries
 	in the source tree.
 

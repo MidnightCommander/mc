@@ -26,6 +26,7 @@ signed char console_flag = 0;
 #if defined(linux) || defined(__linux__)
 
 #include "tty.h"
+#include "global.h"
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
