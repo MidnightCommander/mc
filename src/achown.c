@@ -309,7 +309,7 @@ do_enter_key (Dlg_head * h, int f_pos)
 	    }
 	    if (ok) {
 		ch_flags[f_pos + 6] = '+';
-		get_ownership ();
+		update_ownership ();
 	    }
 	    dlg_focus (h);
 	    if (ok)
@@ -676,7 +676,7 @@ chown_advanced_cmd (void)
 
 	chown_refresh ();
 	
-	get_ownership ();
+	update_ownership ();
 
 	/* game can begin */
 	run_dlg (ch_dlg);
