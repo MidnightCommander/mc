@@ -19,6 +19,7 @@ Changes made after 4.6.0-pre1.
 - When using support for setting the last working directory of mc in the
   parent shell, "mc" is now an alias in all shells, not a function.
 - Behavior of Alt-O is more intuitive now.
+- Internal editor now saves the cursor position in the file.
 
 
 Version 4.6.0-pre1.
