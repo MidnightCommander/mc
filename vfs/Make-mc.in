@@ -335,12 +335,16 @@ distclean:
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	$(RMF) $(srcdir)/Makefile
 
-install: @mcserv@ install.extfs
-	-(if test x@mcserv@ != x; then \
-	    $(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv; \
-	fi)
+install: install_@mcserv@ install.extfs
+
+install_:
+
+install_mcserv:
+	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
+	$(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 install.extfs:
+	$(MKINSTALLDIRS) $(DESTDIR)$(extfsdir)
 	for I in $(EXTFS_MISC); do \
 	    $(INSTALL_DATA) $(srcdir)/extfs/$$I \
 	          $(DESTDIR)$(extfsdir)/$$I; \

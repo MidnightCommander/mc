@@ -1,6 +1,11 @@
+2000-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* Make-mc.in: don't ignore error installing mcserv.
+	Create directories before installing into them.
+
 2000-08-18  Pavel Roskin  <proski@gnu.org>
 
-	* Makefile.in: adjusted lists of distributed files.
+	* Make-mc.in: adjusted lists of distributed files.
 	Makefile rebuilding fixed.
 
 2000-08-08  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
