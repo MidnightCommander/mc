@@ -1,3 +1,8 @@
+2005-01-19  Jindrich Novy  <jnovy@redhat.com>
+
+	* main.c (_do_panel_cd): Delete leading spaces from URL
+	before vfs_translate_url() call.
+
 2005-01-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* subshell.c (subshell_name_quote): Eliminate sprintf(d, "%c", ...).

@@ -567,15 +567,17 @@ _do_panel_cd (WPanel *panel, const char *new_dir, enum cd_enum cd_type)
     char temp[MC_MAXPATHLEN];
     char *translated_url;
 
+    if (cd_type == cd_parse_command) {
+	while (*new_dir == ' ')
+	    new_dir++;
+    }
+
     olddir = g_strdup (panel->cwd);
     new_dir = translated_url = vfs_translate_url (new_dir);
 
     /* Convert *new_path to a suitable pathname, handle ~user */
 
     if (cd_type == cd_parse_command) {
-	while (*new_dir == ' ')
-	    new_dir++;
-
 	if (!strcmp (new_dir, "-")) {
 	    strcpy (temp, panel->lwd);
 	    new_dir = temp;
