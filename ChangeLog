@@ -1,5 +1,10 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: remove any manupulations with top_srcdir.
+	Don't change CPPGLAGS when the internal editor is enabled,
+	instead do it ...
+	* edit/Makefile.in, gtkedit/Makefile.in: ... here
+
 	* configure.in, Make.common.in, doc/Makefile.in,
 	edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
 	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: rootdir

@@ -7,9 +7,6 @@ AM_INIT_AUTOMAKE(mc, 4.5.51)
 AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 
-top_srcdir=`dirname $0`
-AC_SUBST(top_srcdir)
-
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
 include_additional_path="/usr/local/include /usr/contrib/include /opt/gnu/include"
@@ -936,7 +933,6 @@ AC_DEFUN(AC_WITH_EDIT, [
 	LIBEDIT_A="libedit.a"
 	MCEDIT="mcedit"
 	LEDIT="-ledit"
-	CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
 	EDIT_msg="yes"
 	AC_MSG_RESULT(will call internal editor)
 ])
