@@ -1264,6 +1264,7 @@ slang/Makefile
 edit/Makefile 
 gtkedit/Makefile 
 new_icons/Makefile 
+icons/Makefile
 
 lib/mc.ext
 lib/mc-gnome.ext

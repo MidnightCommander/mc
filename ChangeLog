@@ -1,3 +1,8 @@
+1998-12-08  Christopher Blizzard  <blizzard@appliedtheory.com>
+
+	* configure.in (builddir): Add icons/Makefile to AC_OUTPUT so that
+ 	the build will still work.  (Has this been replaced by new_icons?)
+
 Tue Dec  1 11:58:55 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* doc/mc.1.in, mc.sgml: added my name to list ov authors
