@@ -1,5 +1,9 @@
 2002-12-06  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.c (extfs_open): Don't run "copyout" if the file just has
+	been created or O_TRUNC is given in the flags.
+	Reported by Adam Byrtek 'alpha' <alpha@irc.pl>
+
 	* extfs/uar.in: Implement "copyin" and "rm" commands.
 
 2002-12-06  Andrew V. Samoilov  <sav@bcs.zp.ua>

@@ -658,8 +658,8 @@ extfs_open (vfs * me, char *file, int flags, int mode)
 	    return NULL;
 	close (local_handle);
 
-	if (extfs_cmd (" copyout ", archive, entry, local_filename)
-	    && !created) {
+	if (!created && !(flags & O_TRUNC)
+	    && extfs_cmd (" copyout ", archive, entry, local_filename)) {
 	    unlink (local_filename);
 	    free (local_filename);
 	    my_errno = EIO;
