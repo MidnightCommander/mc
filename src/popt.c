@@ -395,7 +395,8 @@ int poptParseArgvString(char * s, int * argcPtr, char *** argvPtr) {
     }
 
     if (strlen(argv[argc])) {
-	argc++, buf++;
+	argc++;
+	buf++;
     }
 
     argv2 = malloc(argc * sizeof(*argv) + (buf - bufStart));
