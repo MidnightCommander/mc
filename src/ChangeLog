@@ -1,3 +1,8 @@
+2005-02-06  Roland Illig  <roland.illig@gmx.de>
+
+	* achown.c (get_ownership): Simplified the code. Now it is
+	more independent of the WButton internals.
+
 2005-02-05  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h (msglen): Converted from a function to a procedure.

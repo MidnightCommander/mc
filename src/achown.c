@@ -69,8 +69,8 @@ static struct {
     { B_ENTER,  DEFPUSH_BUTTON,4, 40, N_("&Set") },
     { B_SKIP,   NORMAL_BUTTON, 4, 23, N_("S&kip") },
     { B_SETALL, NORMAL_BUTTON, 4, 0, N_("Set &all")},
-    { B_ENTER,  NARROW_BUTTON, 0, 47, "               "},
-    { B_ENTER,  NARROW_BUTTON, 0, 29, "               "},
+    { B_ENTER,  NARROW_BUTTON, 0, 47, ""},
+    { B_ENTER,  NARROW_BUTTON, 0, 29, ""},
     { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},
     { B_ENTER,  NARROW_BUTTON, 0, 11, "   "},
     { B_ENTER,  NARROW_BUTTON, 0, 3, "   "}
@@ -93,15 +93,9 @@ static int single_set;
 static char *fname;
 
 static void get_ownership (void)
-{				/* set buttons  - ownership */
-    const char *name_t;
-
-    name_t = name_trunc (get_owner (sf_stat->st_uid), 15);
-    memset (b_user->text, ' ', 15);
-    strncpy (b_user->text, name_t, strlen (name_t));
-    name_t = name_trunc (get_group (sf_stat->st_gid), 15);
-    memset (b_group->text, ' ', 15);
-    strncpy (b_group->text, name_t, strlen (name_t));
+{
+    button_set_text (b_user, get_owner (sf_stat->st_uid));
+    button_set_text (b_group, get_group (sf_stat->st_gid));
 }
 
 
