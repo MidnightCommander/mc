@@ -539,10 +539,12 @@ have_charset=
 if test "x$enable_charset" = xyes; then
   if test "x$am_cv_func_iconv" != xyes; then
     AC_MSG_WARN([Cannot enable charset support because iconv function is missing])
+    charset_msg="no"
   else
     AC_DEFINE(HAVE_CHARSET, 1,
 	      [Define to enable charset selection and conversion])
     have_charset=yes
+    charset_msg="yes"
   fi
 fi
 
@@ -652,4 +654,5 @@ Configuration:
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}
   Internal editor:            ${edit_msg}
+  Support for charset:        ${charset_msg}
 "
