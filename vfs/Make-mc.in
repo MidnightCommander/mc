@@ -220,14 +220,14 @@ mostlyclean:
 	if test -f samba/Makefile; then \
 	  (cd samba && $(MAKE) mostlyclean); \
 	else :;	fi
-	rm -f *.o core a.out
+	rm -f *.o core a.out $(VFSSOOBJS)
 
 clean: mostlyclean
 	(cd extfs && $(MAKE) clean)
 	if test -f samba/Makefile; then \
 	  (cd samba && $(MAKE) clean); \
 	else :;	fi
-	rm -f mcserv *.a
+	rm -f mcserv *.a *.so
 
 distclean: clean
 	(cd extfs && $(MAKE) distclean)

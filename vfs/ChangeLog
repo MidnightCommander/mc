@@ -1,3 +1,23 @@
+2001-05-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* Make-mc.in (mostlyclean): Remove $(VFSSOOBJS).
+	(clean): Remove *.so.
+
+	* smbfs.c: Include utilvfs.h instead of ../config.h, ../src/main.h,
+	../src/tty.h and ../src/global.h.
+
+	(password, username): Made static.
+	(is_error): Commented out.
+	(loaddir_helper): Don't ignore hidden files, style fixes.
+	(browsing_helper): typestr declared as char *, fstrcpy replaced by =.
+
+	(do_connect): Call cli_shutdown () and authinfo_remove () if
+	cli_session_setup () fails. It is not good idea to remember
+	wrong username/password.
+
+	(smbfs_free_dir): Nested between #ifdef SMBFS_FREE_DIR ... #endif.
+	(smbfs_readdir): #ifdef SMBFS_FREE_DIR used instead of C comment.
+
 2001-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* sfs.c (redirect): Don't free the filename after failed
