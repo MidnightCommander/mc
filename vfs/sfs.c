@@ -58,25 +58,50 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     char pad[10240];
     char *s, *t = pad;
     int was_percent = 0;
+    char *pname;	/* name of parent archive */
+    char *pqname;	/* name of parent archive, quoted */
 
-    vfs_split (name, &inpath, &op);
+    pname = g_strdup (name);
+    vfs_split (pname, &inpath, &op);
     if ((w = (*me->which) (me, op)) == -1)
 	vfs_die ("This cannot happen... Hopefully.\n");
 
-    if ((sfs_flags[w] & F_1) || (!strcmp (name, "/")));
-    else
+    if (!(sfs_flags[w] & F_1) && strcmp (pname, "/")) {
+	g_free (pname);
 	return -1;
+    }
+
     /*    if ((sfs_flags[w] & F_2) || (!inpath) || (!*inpath)); else return -1; */
     if (!(sfs_flags[w] & F_NOLOCALCOPY)) {
-	s = mc_getlocalcopy (name);
-	if (!s)
+	s = mc_getlocalcopy (pname);
+	if (!s) {
+	    g_free (pname);
 	    return -1;
-	name = name_quote (s, 0);
+	}
+	pqname = name_quote (s, 0);
 	g_free (s);
-    } else
-	name = name_quote (name, 0);
-#define COPY_CHAR if (t-pad>sizeof(pad)) { return -1; } else *t++ = *s;
-#define COPY_STRING(a) if ((t-pad)+strlen(a)>sizeof(pad)) { return -1; } else { strcpy (t, a); t+= strlen(a); }
+    } else {
+	pqname = name_quote (pname, 0);
+    }
+    g_free (pname);
+
+#define COPY_CHAR \
+    if (t-pad>sizeof(pad)) { \
+	g_free (pqname); \
+	return -1; \
+    } \
+    else \
+	*t++ = *s;
+
+#define COPY_STRING(a) \
+    if ((t-pad)+strlen(a)>sizeof(pad)) { \
+	g_free (pqname); \
+	return -1; \
+    } else { \
+	strcpy (t, a); \
+	t+= strlen(a); \
+    }
+
     for (s = sfs_command[w]; *s; s++) {
 	if (was_percent) {
 
@@ -85,7 +110,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 
 	    switch (*s) {
 	    case '1':
-		ptr = name;
+		ptr = pqname;
 		break;
 	    case '2':
 		ptr = op + strlen (sfs_prefix[w]);
@@ -106,6 +131,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
 	}
     }
 
+    g_free (pqname);
     open_error_pipe ();
     if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
 	close_error_pipe (1, NULL);

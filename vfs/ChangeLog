@@ -1,3 +1,12 @@
+2003-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_split): Deconstify.
+	* direntry.c (vfs_s_get_path_mangle): Likewise.  "mangle" is in
+	the name for a reason.  Use vfs_s_get_path() instead where the
+	path should be preserved.
+	* extfs.c (extfs_get_path_mangle): Likewise.
+	* sfs.c (sfs_vfmake): Protect against changes in vfs_split().
+
 2003-11-13  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Constify chdir() and opendir() methods.  Adjust all

@@ -109,7 +109,7 @@ void vfs_init (void);
 void vfs_shut (void);
 
 struct vfs_class *vfs_get_class (const char *path);
-struct vfs_class *vfs_split (const char *path, char **inpath, char **op);
+struct vfs_class *vfs_split (char *path, char **inpath, char **op);
 char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);

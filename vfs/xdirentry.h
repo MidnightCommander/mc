@@ -178,7 +178,7 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
 /* outside interface */
 void vfs_s_init_class (struct vfs_class *vclass,
 		       struct vfs_s_subclass *sub);
-char *vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
+char *vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 			     struct vfs_s_super **archive, int flags);
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);
 char *vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino);

@@ -423,12 +423,12 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 }
 
 /*
- * Returns path inside argument. Returned char* is inside inname, which is
- * mangled by this operation (so you must not free its return value).
+ * Dissect the path and create corresponding superblock.  Note that inname
+ * can be changed and the result may point inside the original string.
  */
 static char *
-extfs_get_path_mangle (const char *inname, struct archive **archive,
-		       int is_dir, int do_not_open)
+extfs_get_path_mangle (char *inname, struct archive **archive, int is_dir,
+		       int do_not_open)
 {
     char *local, *op;
     const char *archive_name;
@@ -476,9 +476,14 @@ extfs_get_path_mangle (const char *inname, struct archive **archive,
     return local;
 }
 
+
+/*
+ * Dissect the path and create corresponding superblock.
+ * The result should be freed.
+ */
 static char *
 extfs_get_path (const char *inname, struct archive **archive, int is_dir,
-	  int do_not_open)
+		int do_not_open)
 {
     char *buf = g_strdup (inname);
     char *res = extfs_get_path_mangle (buf, archive, is_dir, do_not_open);
@@ -489,7 +494,8 @@ extfs_get_path (const char *inname, struct archive **archive, int is_dir,
     return res2;
 }
 
-/* Returns allocated path (without leading slash) inside the archive  */
+
+/* Return allocated path (without leading slash) inside the archive  */
 static char *extfs_get_path_from_entry (struct entry *entry)
 {
     struct list {
@@ -658,7 +664,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     int local_handle;
     int created = 0;
 
-    if ((q = extfs_get_path_mangle (file, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path (file, &archive, 0, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL && (flags & O_CREAT)) {
@@ -666,6 +672,8 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 	entry = extfs_find_entry (archive->root_entry, q, 0, 1);
 	created = (entry != NULL);
     }
+
+    g_free (q);
     if (entry == NULL)
 	return NULL;
     if ((entry = extfs_resolve_symlinks (entry)) == NULL)
@@ -861,9 +869,10 @@ static void * extfs_opendir (struct vfs_class *me, const char *dirname)
     struct entry *entry;
     struct entry **info;
 
-    if ((q = extfs_get_path_mangle (dirname, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path (dirname, &archive, 1, 0)) == NULL)
 	return NULL;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
+    g_free (q);
     if (entry == NULL)
     	return NULL;
     if ((entry = extfs_resolve_symlinks (entry)) == NULL)
@@ -1071,21 +1080,23 @@ static int extfs_rmdir (struct vfs_class *me, char *path)
     return 0;
 }
 
-static int extfs_chdir (struct vfs_class *me, const char *path)
+static int
+extfs_chdir (struct vfs_class *me, const char *path)
 {
     struct archive *archive;
     char *q;
     struct entry *entry;
 
     my_errno = ENOTDIR;
-    if ((q = extfs_get_path_mangle (path, &archive, 1, 0)) == NULL)
+    if ((q = extfs_get_path (path, &archive, 1, 0)) == NULL)
 	return -1;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
+    g_free (q);
     if (!entry)
-    	return -1;
+	return -1;
     entry = extfs_resolve_symlinks (entry);
     if ((!entry) || (!S_ISDIR (entry->inode->mode)))
-    	return -1;
+	return -1;
     my_errno = 0;
     return 0;
 }

@@ -424,10 +424,13 @@ vfs_s_free_super (struct vfs_class *me, struct vfs_s_super *super)
     g_free(super);
 }
 
-/* ------------------------------------------------------------------------= */
 
+/*
+ * Dissect the path and create corresponding superblock.  Note that inname
+ * can be changed and the result may point inside the original string.
+ */
 char *
-vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
+vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 		       struct vfs_s_super **archive, int flags)
 {
     char *local, *op;
@@ -479,14 +482,20 @@ vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
     return local;
 }
 
+
+/*
+ * Dissect the path and create corresponding superblock.
+ * The result should be freed.
+ */
 static char *
-vfs_s_get_path (struct vfs_class *me, const char *inname, struct vfs_s_super **archive, int flags)
+vfs_s_get_path (struct vfs_class *me, const char *inname,
+		struct vfs_s_super **archive, int flags)
 {
-    char *buf = g_strdup( inname );
+    char *buf = g_strdup (inname);
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
     if (res)
-        res = g_strdup(res);
-    g_free(buf);
+	res = g_strdup (res);
+    g_free (buf);
     return res;
 }
 
@@ -538,7 +547,7 @@ vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
     struct vfs_s_inode *ino;
     char *q;
 
-    if (!(q = vfs_s_get_path_mangle (me, name, &super, 0)))
+    if (!(q = vfs_s_get_path (me, name, &super, 0)))
 	return NULL;
 
     ino =
@@ -552,6 +561,7 @@ vfs_s_inode_from_path (struct vfs_class *me, const char *name, int flags)
 			      flags & FL_FOLLOW ? LINK_FOLLOW :
 			      LINK_NO_FOLLOW,
 			      FL_DIR | (flags & ~FL_FOLLOW));
+    g_free (q);
     return ino;
 }
 
@@ -688,7 +698,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     char *q;
     struct vfs_s_inode *ino;
 
-    if ((q = vfs_s_get_path_mangle (me, file, &super, 0)) == NULL)
+    if ((q = vfs_s_get_path (me, file, &super, 0)) == NULL)
 	return NULL;
     ino = vfs_s_find_inode (me, super, q, LINK_FOLLOW, FL_NONE);
     if (ino && ((flags & (O_CREAT | O_EXCL)) == (O_CREAT | O_EXCL)))
@@ -700,8 +710,10 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	int tmp_handle;
 
 	/* If the filesystem is read-only, disable file creation */
-	if (!(flags & O_CREAT) || !(me->write))
+	if (!(flags & O_CREAT) || !(me->write)) {
+	    g_free (q);
 	    return NULL;
+	}
 
 	split_dir_name (me, q, &dirname, &name, &save);
 	/* FIXME: check if vfs_s_find_inode returns NULL */
@@ -712,11 +724,15 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	ino = ent->ino;
 	vfs_s_insert_entry (me, dir, ent);
 	tmp_handle = vfs_mkstemps (&ino->localname, me->name, name);
-	if (tmp_handle == -1)
+	if (tmp_handle == -1) {
+	    g_free (q);
 	    return NULL;
+	}
 	close (tmp_handle);
 	was_changed = 1;
     }
+
+    g_free (q);
 
     if (S_ISDIR (ino->st.st_mode))
 	ERRNOR (EISDIR, NULL);

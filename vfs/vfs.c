@@ -214,7 +214,7 @@ path_magic (const char *path)
  * want to free neither *inpath nor *op
  */
 struct vfs_class *
-vfs_split (const char *path, char **inpath, char **op)
+vfs_split (char *path, char **inpath, char **op)
 {
     char *semi;
     char *slash;
