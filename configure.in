@@ -2,14 +2,9 @@ dnl
 dnl Configure.in file for the Midnight Commander
 dnl
 AC_INIT(create_vcs)
-AC_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(mc, 4.5.51)
+AM_CONFIG_HEADER(config.h)
 
-PACKAGE=mc
-VERSION=4.5.51
-AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
-AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
-AC_SUBST(VERSION)
-AC_SUBST(PACKAGE)
 top_srcdir=`dirname $0`
 AC_SUBST(top_srcdir)
 
@@ -1262,6 +1257,7 @@ gtkedit/Makefile
 syntax/Makefile
 new_icons/Makefile 
 icons/Makefile
+pc/Makefile
 
 lib/mc.ext
 lib/mc-gnome.ext

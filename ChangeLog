@@ -1,5 +1,14 @@
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in, doc-gnome/Makefile.in, pc/Makefile: converted
+	to ...
+	* Makefile.am, doc-gnome/Makefile.am, pc/Makefile.am: ... this
+	* Make.common.in: support for "distdir" for compatability
+	with Automake-generated makefiles
+	* autogen.sh: run automake. Force cache - it is off by default
+	in autoconf 2.49a, but it's still handy for maintainers
+	* configure.in: adapted for Automake
+
 	* AUTHORS: new file
 
 2000-08-23  Pavel Roskin  <proski@gnu.org>

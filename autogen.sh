@@ -18,10 +18,11 @@ else
 	fi
 fi
 autoheader || exit 1
-autoconf  || exit 1
+autoconf || exit 1
+automake -a || exit 1
 cd vfs/samba || exit 1
 autoheader || exit 1
 autoconf || exit 1
 ) || exit 1
 
-$srcdir/configure --enable-maintainer-mode $*
+$srcdir/configure --cache-file=config.cache --enable-maintainer-mode "$@"
