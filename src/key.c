@@ -44,7 +44,7 @@
 #include "cons.saver.h"
 #include "../vfs/vfs.h"
 
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
 #include <X11/Xlib.h>
 #endif
 
@@ -72,7 +72,6 @@ int old_esc_mode = 0;
 
 int use_8th_bit_as_meta = 1;
 
-#ifndef HAVE_X
 typedef struct key_def {
     char ch;			/* Holds the matching char code */
     int code;			/* The code returned, valid if child == NULL */
@@ -85,14 +84,12 @@ typedef struct key_def {
 
 /* This holds all the key definitions */
 static key_def *keys = 0;
-#endif
 
 static int input_fd;
 static fd_set select_set;
 static int disabled_channels = 0; /* Disable channels checking */
 int xgetch_second (void);
 
-#ifndef PORT_HAS_FILE_HANDLERS
 /* File descriptor monitoring add/remove routines */
 typedef struct SelectList {
     int fd;
@@ -101,7 +98,7 @@ typedef struct SelectList {
     struct SelectList *next;
 } SelectList;
 
-SelectList *select_list = 0;
+static SelectList *select_list = 0;
 
 void add_select_channel (int fd, select_fn callback, void *info)
 {
@@ -160,7 +157,6 @@ static void check_selects (fd_set *select_set)
 	if (FD_ISSET (p->fd, select_set))
 	    (*p->callback)(p->fd, p->info);
 }
-#endif
 
 void channels_down (void)
 {
@@ -181,8 +177,7 @@ typedef struct {
     int action;
 } key_define_t;
 
-#ifndef HAVE_X
-key_define_t mc_bindings [] = {
+static key_define_t mc_bindings [] = {
     { KEY_END,    ESC_STR ">", MCKEY_NOACTION },
     { KEY_HOME,   ESC_STR "<", MCKEY_NOACTION },
 
@@ -194,7 +189,7 @@ key_define_t mc_bindings [] = {
 };
 
 /* Broken terminfo and termcap databases on xterminals */
-key_define_t xterm_key_defines [] = {
+static key_define_t xterm_key_defines [] = {
     { KEY_F(1),   ESC_STR "OP",   MCKEY_NOACTION },
     { KEY_F(2),   ESC_STR "OQ",   MCKEY_NOACTION },
     { KEY_F(3),   ESC_STR "OR",   MCKEY_NOACTION },
@@ -212,25 +207,22 @@ key_define_t xterm_key_defines [] = {
     { 0, 0, MCKEY_NOACTION },
 };
 
-key_define_t mc_default_keys [] = {
+static key_define_t mc_default_keys [] = {
     { ESC_CHAR,	ESC_STR, MCKEY_ESCAPE },
     { ESC_CHAR, ESC_STR ESC_STR, MCKEY_NOACTION },
     { 0, 0, MCKEY_NOACTION },
 };
-#endif
 
 static void
 define_sequences (key_define_t *kd)
 {
-#ifndef HAVE_X
     int i;
     
     for (i = 0; kd [i].code; i++)
 	define_sequence(kd [i].code, kd [i].seq, kd [i].action);
-#endif	
 }
 
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
 Display *display;
 Window w;
 
@@ -247,7 +239,6 @@ init_textmode_x11_support (void)
    calls any define_sequence */
 void init_key (void)
 {
-#ifndef HAVE_X
     char *term = (char *) getenv ("TERM");
     
     /* This has to be the first define_sequence */
@@ -281,21 +272,17 @@ void init_key (void)
 	use_8th_bit_as_meta = 0;
     }
 #endif /* __QNX__ */
-#endif /* !HAVE_X */
 }
 
 /* This has to be called after SLang_init_tty/slint_init */
 void init_key_input_fd (void)
 {
-#ifndef HAVE_X
 #ifdef HAVE_SLANG
     input_fd = SLang_TT_Read_FD;
 #endif
-#endif /* !HAVE_X */
 }
 
 
-#ifndef HAVE_X
 static void
 xmouse_get_event (Gpm_Event *ev)
 {
@@ -384,11 +371,9 @@ static int push_char (int c)
     *seq_append = 0;
     return 1;
 }
-#endif /* !HAVE_X */
 
 void define_sequence (int code, char *seq, int action)
 {
-#ifndef HAVE_X
     key_def *base;
 
     if (strlen (seq) > sizeof (seq_buffer)-1)
@@ -420,12 +405,9 @@ void define_sequence (int code, char *seq, int action)
 	}
     }
     keys = create_sequence (seq, code, action);
-#endif    
 }
 
-#ifndef HAVE_X
 static int *pending_keys;
-#endif
 
 static int
 correct_key_code (int c)
@@ -455,7 +437,6 @@ correct_key_code (int c)
 
 int get_key_code (int no_delay)
 {
-#ifndef HAVE_X
     int c;
     static key_def *this = NULL, *parent;
     static struct timeval esctime = { -1, -1 };
@@ -620,12 +601,8 @@ int get_key_code (int no_delay)
     }
     this = NULL;
     return correct_key_code (c);
-#else
-    return ERR;
-#endif /* HAVE_X */
 }
 
-#ifndef PORT_HAS_FILE_HANDLERS
 /* If set timeout is set, then we wait 0.1 seconds, else, we block */
 static void
 try_channels (int set_timeout)
@@ -656,7 +633,6 @@ try_channels (int set_timeout)
     }
 }
 
-#ifndef HAVE_X
 /* Workaround for System V Curses vt100 bug */
 static int getch_with_delay (void)
 {
@@ -678,16 +654,13 @@ static int getch_with_delay (void)
     /* Success -> return the character */
     return c;
 }
-#endif /* !HAVE_X */
 
 #ifndef HAVE_LIBGPM
 #define gpm_flag 0
 #endif
-#endif /* !HAVE_FILE_HANDLERS */
 
 extern int max_dirt_limit;
 
-#ifndef HAVE_X
 /* Returns a character read from stdin with appropriate interpretation */
 /* Also takes care of generated mouse events */
 /* Returns EV_MOUSE if it is a mouse event */
@@ -816,15 +789,7 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 
     return c;
 }
-#else
-/* X11 version of the get_event routine */
-int get_event (Gpm_Event *event, int redo_event, int block)
-{
-    return EV_NONE;
-}
-#endif
 
-#ifndef PORT_HAS_GETCH
 /* Returns a key press, mouse events are discarded */
 int mi_getch ()
 {
@@ -861,9 +826,7 @@ int xgetch_second (void)
 #endif
     return c;
 }
-#endif
 
-#ifndef HAVE_X
 static void
 learn_store_key (char *buffer, char **p, int c)
 {
@@ -956,7 +919,6 @@ application_keypad_mode (void)
     }
 }
 
-#endif /* !HAVE_X */
 
 /* A function to check if we're idle.
    Currently checks only for key presses.
@@ -980,7 +942,7 @@ int is_idle (void)
 int
 get_modifier (void)
 {
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (display) {
         Window root, child;
         int root_x, root_y;
@@ -1028,7 +990,6 @@ ctrl_pressed ()
 }
 
 #ifdef HAVE_MAD
-#ifndef HAVE_X
 
 void k_dispose (key_def *k)
 {
@@ -1059,14 +1020,13 @@ void done_key ()
 {
 }
 
-#endif /* HAVE_X */
 #endif /* HAVE_MAD */
 
-#if defined (HAVE_TEXTMODE_X11_SUPPORT) && !defined (HAVE_X)
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
 void
 done_textmode_x11_support (void)
 {
     if (display)
 	XCloseDisplay (display);
 }
-#endif
+#endif /* HAVE_TEXTMODE_X11_SUPPORT */

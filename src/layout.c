@@ -185,9 +185,7 @@ static char *layout_title, *title1, *title2, *title3, *output_lines_label;
 static WButton *bleft_widget, *bright_widget;
 
 /* Declarations for static functions */
-#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
 static void low_level_change_screen_size (void);
-#endif /* PORT_NEEDS_CHANGE_SCREEN_SIZE */
 
 static void _check_split (void)
 {
@@ -277,7 +275,6 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 {
     switch (Msg){
     case DLG_DRAW:
-#ifndef HAVE_X
     	/*When repainting the whole dialog (e.g. with C-l) we have to
     	  update everything*/
    	old_first_panel_size = -1;
@@ -312,15 +309,12 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 		printw ("%02d", _output_lines);
 	    }
 	}
-#endif
 	break;
 
     case DLG_POST_KEY:
 	_filetype_mode = check_options [8].widget->state & C_BOOL;
 	_permission_mode = check_options [7].widget->state & C_BOOL;
-#ifndef HAVE_X
 	_equal_split = check_options [6].widget->state & C_BOOL;
-#endif
 	_menubar_visible = check_options [5].widget->state & C_BOOL;
 	_command_prompt = check_options [4].widget->state & C_BOOL;
 	_keybar_visible = check_options [2].widget->state & C_BOOL;
@@ -461,7 +455,6 @@ static void init_layout (void)
 		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0, "s"));
     add_widget (layout_dlg,
 		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0, "o"));
-#ifndef HAVE_X
     if (console_flag){
 	add_widget (layout_dlg,
 		    button_new (9, 12 + first_width, B_MINUS, NARROW_BUTTON, "&-",
@@ -470,7 +463,6 @@ static void init_layout (void)
 		    button_new (9, 7 + first_width, B_PLUS, NARROW_BUTTON, "&+", 
 			bplus_cback, 0, NULL));
     }
-#endif    
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options[i].tkname
 
@@ -491,38 +483,32 @@ static void init_layout (void)
     _keybar_visible = keybar_visible;
     _message_visible = message_visible;
     _xterm_hintbar = xterm_hintbar;
-#ifndef HAVE_X
     bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0, ">");
     add_widget (layout_dlg, bright_widget);
     bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0, "<");
     add_widget (layout_dlg, bleft_widget);
     check_options [6].widget = check_new (5, 6, XTRACT(6));
-#endif
     old_first_panel_size = -1;
     old_horizontal_split = -1;
     old_output_lines     = -1;
     
     _first_panel_size = first_panel_size;
     _output_lines = output_lines;
-#ifndef HAVE_X
     add_widget (layout_dlg, check_options [6].widget);
     radio_widget = radio_new (3, 6, 2, s_split_direction, 1, "r");
     add_widget (layout_dlg, radio_widget);
     radio_widget->sel = horizontal_split;
-#endif
 }
 
 void layout_change (void)
 {
     setup_panels ();
     layout_do_change = 0;
-#ifndef HAVE_X
     /* re-init the menu, because perhaps there was a change in the way 
 	how the panel are split (horizontal/vertical). */
     done_menu();
     init_menu();
     menubar_arrange(the_menubar);
-#endif
 }
 
 void layout_cmd (void)
@@ -538,12 +524,10 @@ void layout_cmd (void)
 	for (i = 0; check_options [i].text; i++)
 	    if (check_options [i].widget)
 		*check_options [i].variable = check_options [i].widget->state & C_BOOL;
-#ifndef HAVE_X		
 	horizontal_split = radio_widget->sel;
 	first_panel_size = _first_panel_size;
 	output_lines = _output_lines;
 	layout_do_change = 1;
-#endif	
     }
     if (result == B_EXIT){
 	save_layout ();
@@ -578,7 +562,6 @@ int panel_event    (Gpm_Event *event, WPanel *panel);
 int menu_bar_event (Gpm_Event *event, void *);
 extern char *prompt;
 
-#ifndef HAVE_X
 #ifdef HAVE_SLANG
 void init_curses ()
 {
@@ -615,6 +598,7 @@ void init_curses (void)
     init_colors ();
 }
 #endif /* ! HAVE_SLANG */
+
 void done_screen ()                                                      
 {                                                                               
     if (!(quit & SUBSHELL_EXIT))                                                
@@ -625,14 +609,6 @@ void done_screen ()
 	shut_mouse ();                                                          
     keypad (stdscr, FALSE);                                                     
 }                                                                               
-#else
-void init_curses ()
-{
-}
-void done_screen ()
-{
-}
-#endif /* HAVE_X */
 
 static void
 panel_do_cols (int index)
@@ -647,28 +623,6 @@ panel_do_cols (int index)
 	    view_update_bytes_per_line ((WView *) panels [index].widget);
     }
 }
-
-#ifdef HAVE_X
-void
-setup_panels (void)
-{
-    Widget *w = panels [0].widget;
-
-    winput_set_origin (&cmdline->input, 0, 60);
-
-    /* Only needed by the startup code */
-    if (panels [0].type == view_listing){
-	x_panel_set_size (0);
-    }
-    
-    if (panels [1].type == view_listing){
-	x_panel_set_size (1);
-    }
-
-    load_hint ();
-}
-
-#else
 
 void setup_panels (void)
 {
@@ -751,19 +705,15 @@ void setup_panels (void)
     
     load_hint ();
 }
-#endif
 
 void flag_winch (int dummy)
 {
-#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
     low_level_change_screen_size ();
-#endif /* PORT_NEEDS_CHANGE_SCREEN_SIZE */
     winch_flag = 1;
 }
 
 void edit_adjust_size (Dlg_head * h);
 
-#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
 static void
 low_level_change_screen_size (void)
 {
@@ -831,7 +781,6 @@ void change_screen_size (void)
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
     winch_flag = 0;
 }
-#endif /* HAVE_X */
 
 static int ok_to_refresh = 1;
 
@@ -845,13 +794,10 @@ void use_dash (int flag)
 
 void set_hintbar(char *str) 
 {
-#ifndef HAVE_X
     if (xterm_flag && xterm_hintbar) {
 	fprintf (stdout, "\33]0;mc - %s\7", str);
 	fflush (stdout);
-    } else
-#endif
-    {
+    } else {
         label_set_text (the_hint, str);
         if (ok_to_refresh > 0)
 	    refresh();
@@ -888,7 +834,6 @@ void print_vfs_message (char *msg, ...)
 
 void rotate_dash (void)
 {
-#ifndef HAVE_X
     static char rotating_dash [] = "|/-\\";
     static int pos = 0;
 
@@ -901,12 +846,10 @@ void rotate_dash (void)
     addch (rotating_dash [pos]);
     mc_refresh ();
     pos++;
-#endif
 }
 
 void remove_dash (void)
 {
-#ifndef HAVE_X
     if (!nice_rotating_dash)
 	return;
 
@@ -920,7 +863,6 @@ void remove_dash (void)
     
     move (0, COLS-1);
     addch (' ');
-#endif    
 }
 
 char *get_nth_panel_name (int num)

@@ -66,7 +66,7 @@ static int  history_ptr;	/* For the history queue */
 static char *main_node;		/* The main node */
 static char *last_shown = 0;	/* Last byte shown in a screen */
 static int end_of_node = 0;	/* Flag: the last character of the node shown? */
-char *currentpoint, *startpoint;
+static char *currentpoint, *startpoint;
 static char *selected_item;
 
 /* The widget variables */
@@ -90,7 +90,7 @@ static int inside_link_area = 0;
 static int help_callback (struct Dlg_head *h, int id, int msg);
 
 #ifdef HAS_ACS_AS_PCCHARS
-struct {
+static struct {
     int acscode;
     int pccode;
 } acs2pc_table [] = {
@@ -769,7 +769,6 @@ interactive_display (char *filename, char *node)
 	return;
     }
 
-#ifndef HAVE_X
     if (help_lines > LINES - 4)
 	help_lines = LINES - 4;
 
@@ -779,7 +778,6 @@ interactive_display (char *filename, char *node)
     /* allow us to process the tab key */
     whelp->raw = 1;
 
-#endif    
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = startpoint = main_node + 1;
 
@@ -789,7 +787,6 @@ interactive_display (char *filename, char *node)
 	history [history_ptr].link = selected_item;
     }
 
-#ifndef HAVE_X
     help_bar = buttonbar_new (keybar_visible);
     help_bar->widget.y -= whelp->y;
     help_bar->widget.x -= whelp->x;
@@ -816,8 +813,5 @@ interactive_display (char *filename, char *node)
     run_dlg (whelp);
     interactive_display_finish ();
     destroy_dlg (whelp);
-#else
-    x_interactive_display ();
-#endif
 }
 

@@ -1338,12 +1338,6 @@ char *get_random_hint (void)
     return result;
 }
 
-#ifndef USE_VFS
-#ifdef USE_NETCODE
-#undef USE_NETCODE
-#endif
-#endif
-
 #ifdef USE_NETCODE
 
 static char *machine_str = N_(" Enter machine name (F1 for details): ");

@@ -41,14 +41,13 @@
 
 /* Have we called the init_my_statfs routine? */
 static int initialized;
-struct my_statfs myfs_stats;
+static struct my_statfs myfs_stats;
 
 static int info_event (Gpm_Event *event, WInfo *info)
 {
     return 0;
 }
 
-#ifndef HAVE_X
 static void info_box (Dlg_head *h, WInfo *info)
 {
     standend ();
@@ -58,7 +57,6 @@ static void info_box (Dlg_head *h, WInfo *info)
     draw_double_box (h, info->widget.y,  info->widget.x,
 	             info->widget.lines, info->widget.cols);
 }
-#endif
 
 static void
 info_show_info (WInfo *info)
@@ -68,7 +66,6 @@ info_show_info (WInfo *info)
     
     struct stat buf;
 
-#ifndef HAVE_X
     if (!is_idle ())
 	return;
 
@@ -79,9 +76,8 @@ info_show_info (WInfo *info)
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
     /* .ado: info->widget.x has wrong value (==0) on NT and OS/2, why? */
-#if !defined(OS2_NT)
+#ifndef OS2_NT
     hline (ACS_HLINE|NORMAL_COLOR, info->widget.x-2);
-#endif
 #endif
     if (get_current_type () != view_listing)
 	return;
@@ -97,7 +93,6 @@ info_show_info (WInfo *info)
 	    return;
 #endif
     
-#ifndef HAVE_X
     /* Print only lines which fit */
     
     if(!i18n_adjust) {
@@ -211,9 +206,6 @@ info_show_info (WInfo *info)
     case 0:
 	;
     } /* switch */
-#else /* HAVE_X */
-    x_show_info (info, &myfs_stats, &buf);
-#endif
 }
 
 static void info_hook (void *data)
@@ -243,17 +235,12 @@ static int info_callback (Dlg_head *h, WInfo *info, int msg, int par)
     case WIDGET_INIT:
 	add_hook (&select_file_hook, info_hook, info);
 	info->ready = 0;
-#ifdef HAVE_X
-	x_create_info (h, h->wdata, info);
-#endif
 	break;
 
-#ifndef HAVE_X		  
     case WIDGET_DRAW:
 	info_hook (info);
 	info_show_info (info);
 	return 1;
-#endif	
 
     case WIDGET_FOCUS:
 	return 0;

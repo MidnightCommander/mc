@@ -115,12 +115,6 @@ struct {
     { B_ALL,    NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
-#ifdef HAVE_X
-static void chmod_toggle_select (void)
-{
-}
-
-#else
 static void chmod_toggle_select (void)
 {
     int Id = ch_dlg->current->dlg_id - BUTTONS + single_set * 2;
@@ -170,7 +164,6 @@ static void chmod_refresh (void)
     dlg_move (ch_dlg, TY + 3, TX);
     addstr (_("and T or INS to mark"));
 }
-#endif
 
 static int chmod_callback (Dlg_head *h, int Par, int Msg)
 {
@@ -196,11 +189,10 @@ static int chmod_callback (Dlg_head *h, int Par, int Msg)
 	    return 1;
 	}
 	break;
-#ifndef HAVE_X
+
     case DLG_DRAW:
 	chmod_refresh ();
 	break;
-#endif
     }
     return 0;
 }

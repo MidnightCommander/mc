@@ -893,7 +893,6 @@ void sigchld_handler (int sig)
 	/* }}} */
     }
 
-#ifndef HAVE_X
 #ifndef SCO_FLAVOR
     pid = waitpid (cons_saver_pid, &status, WUNTRACED | WNOHANG);
     
@@ -916,7 +915,6 @@ void sigchld_handler (int sig)
 	/* }}} */
     }
 #endif /* ! SCO_FLAVOR */
-#endif /* ! HAVE_X */
     /* If we get here, some other child exited; ignore it */
 #  ifdef __EMX__				/* Need to report */
     pid = wait(&status);

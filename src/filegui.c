@@ -144,10 +144,8 @@ typedef struct {
 /* Replace dialog: color set */
 static int replace_colors [4];
 
-#ifndef HAVE_X
 /* Used to save the hint line */
 static int last_hint_line;
-#endif
 
 /* File operate window sizes */
 #define WX 62
@@ -208,13 +206,11 @@ static int
 op_win_callback (struct Dlg_head *h, int id, int msg)
 {
     switch (msg){
-#ifndef HAVE_X    
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
 	draw_box (h, 1, 2, h->lines-2, h->cols-4);
 	return 1;
-#endif
     }
     return 0;
 }
@@ -252,11 +248,9 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
     ui->op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
 			     op_win_callback, "", "opwin", DLG_CENTER);
 
-#ifndef HAVE_X
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
 	the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines+1;
-#endif
 
     x_set_dialog_title (ui->op_dlg, "");
 
@@ -303,9 +297,7 @@ file_op_context_destroy_ui (FileOpContext *ctx)
 	    g_free (ui);
     }
 
-#ifndef HAVE_X
 	    the_hint->widget.y = last_hint_line;
-#endif
 
     ctx->ui = NULL;
 }
@@ -461,11 +453,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
 /* }}} */
 
-#ifndef HAVE_X
 #define truncFileString(ui, s) name_trunc (s, ui->eta_extra + 47)
-#else
-#define truncFileString(ui, s) s
-#endif
 
 FileProgressStatus
 file_progress_show_source (FileOpContext *ctx, char *s)
@@ -543,22 +531,15 @@ file_progress_show_deleting (FileOpContext *ctx, char *s)
 static int
 replace_callback (struct Dlg_head *h, int Id, int Msg)
 {
-#ifndef HAVE_X
-
     switch (Msg){
     case DLG_DRAW:
 	dialog_repaint (h, ERROR_COLOR, ERROR_COLOR);
 	break;
     }
-#endif
     return 0;
 }
 
-#ifdef HAVE_X
-#define X_TRUNC 128
-#else
 #define X_TRUNC 52
-#endif
 
 /*
  * FIXME: probably it is better to replace this with quick dialog machinery,

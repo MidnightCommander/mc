@@ -59,8 +59,6 @@ static int r_but;
 
 extern int use_internal_edit;
 
-int dummy;
-
 static int OX = 33, first_width = 27, second_width = 27;
 static char *configure_title, *title1, *title2, *title3;
 
@@ -75,11 +73,7 @@ static struct {
    {N_("cd follows lin&Ks"),  &cd_symlinks,       TOGGLE_VARIABLE,       0, "cd-follow" },
    {N_("advanced cho&Wn"),    &advanced_chfns,    TOGGLE_VARIABLE,       0, "achown" },
    {N_("l&Ynx-like motion"),  &navigate_with_arrows,TOGGLE_VARIABLE,     0, "lynx" },
-#ifdef HAVE_GNOME
-   {N_("Animation"),          &dummy,             TOGGLE_VARIABLE,       0, "dummy" },
-#else
    {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
-#endif
    {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
    {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
    {N_("use internal ed&It"), &use_internal_edit, TOGGLE_VARIABLE,       0, "edit-int" },
@@ -108,7 +102,6 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 {
     switch (Msg) {
     case DLG_DRAW:
-#ifndef HAVE_X    
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
 	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
@@ -125,7 +118,6 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 	addstr (title2);
 	dlg_move (h, PY, PX+1);
 	addstr (title1);
-#endif
 	break;
 
     case DLG_END:
@@ -228,9 +220,7 @@ static void init_configure (void)
 
     pause_radio = radio_new (RY+1, RX+2, 3, pause_options, 1, "pause-radio");
     pause_radio->sel = pause_after_run;
-#ifndef HAVE_GNOME
     add_widget (conf_dlg, pause_radio);
-#endif
     for (i = 0; i < 6; i++){
 	check_options [i+13].widget = check_new (PY + (6-i), PX+2,
 						  XTRACT(i+13));

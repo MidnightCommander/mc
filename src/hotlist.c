@@ -154,7 +154,6 @@ void add_new_group_cmd (void);
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
-#ifndef HAVE_X
 static void hotlist_refresh (Dlg_head *dlg)
 {
     dialog_repaint (dlg, COLOR_NORMAL, COLOR_HOT_NORMAL);
@@ -165,7 +164,6 @@ static void hotlist_refresh (Dlg_head *dlg)
     if (!hotlist_state.moving)
 	draw_box (dlg, dlg->lines-8, 5, 3, dlg->cols - (UX*2));
 }
-#endif
 
 /* If current->data is 0, then we are dealing with a VFS pathname */
 static INLINE void update_path_name ()
@@ -183,14 +181,12 @@ static INLINE void update_path_name ()
 	    else
 		text = _("Subgroup - press ENTER to see list");
 	    
-#ifndef HAVE_X
 	    p = g_strconcat (" ", current_group->label, " ", NULL);
 	    if (!hotlist_state.moving)
 		label_set_text (pname_group, name_trunc (p, dlg->cols - (UX*2+4)));
 	    else
 		label_set_text (movelist_group, name_trunc (p, dlg->cols - (UX*2+4)));
 	    g_free (p);
-#endif
 	} else {
 	    text = list->current->text;
 	}
@@ -330,9 +326,6 @@ static int hotlist_button_callback (int action, void *data)
 		}
 	    listbox_remove_list (l_hotlist);
 	    fill_listbox ();
-#ifdef HAVE_X
-	    x_listbox_select_nth (l_hotlist, 0);
-#endif
 	    repaint_screen ();
 	    hotlist_state.modified = 1;
 	    return 0;
@@ -385,9 +378,6 @@ static int hotlist_button_callback (int action, void *data)
 	listbox_remove_list (list);
 	current_group = current_group->up;
 	fill_listbox ();
-#ifdef HAVE_X
-	x_listbox_select_nth (list, 0);
-#endif
 	return 0;
 	break;
 	}
@@ -402,19 +392,15 @@ static int hotlist_button_callback (int action, void *data)
 static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
-#ifndef HAVE_X    
     case DLG_DRAW:
 	hotlist_refresh (h);
 	break;
-#endif	
 
     case DLG_UNHANDLED_KEY:
 	switch (Par) {
 	case '\n':
-#ifndef HAVE_X    
 	    if (ctrl_pressed())
 		goto l1;
-#endif	
 	case KEY_ENTER:
 	case KEY_RIGHT:
 	    if (hotlist_button_callback (B_ENTER, 0)) {
@@ -618,7 +604,6 @@ static void init_hotlist (int list_type)
      */
     pname = label_new (UY-11+LINES, UX+2, "", "the-lab");
     add_widget (hotlist_dlg, pname);
-#ifndef HAVE_X
     if (!hotlist_state.moving) {
 	add_widget (hotlist_dlg, label_new (UY-12+LINES, UX+1, _(" Directory path "), NULL));
 
@@ -626,7 +611,6 @@ static void init_hotlist (int list_type)
 	pname_group = label_new (UY, UX+1, _(" Directory label "), NULL);
 	add_widget (hotlist_dlg, pname_group);
     }
-#endif
     /* get new listbox */
     l_hotlist = listbox_new (UY + 1, UX + 1, COLS-2*UX-8, LINES-14, listbox_cback, l_call, "listbox");
 
@@ -668,10 +652,8 @@ static void init_movelist (int list_type, struct hotlist *item)
     /* We add the labels.  We are interested in the last one,
      * that one will hold the path name label
      */
-#ifndef HAVE_X
     movelist_group = label_new (UY, UX+1, _(" Directory label "), NULL);
     add_widget (movelist_dlg, movelist_group);
-#endif
     /* get new listbox */
     l_movelist = listbox_new (UY + 1, UX + 1, 
 		movelist_dlg->cols - 2*UX - 2, movelist_dlg->lines - 8,

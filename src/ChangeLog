@@ -1,3 +1,24 @@
+2001-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* achown.c: Make global variables static if possible. Remove now
+	useless preprocessor directives, since this file is now used in
+	the text edition only.
+	* boxes.c: Remove useless ifdefs.
+	[USE_VFS]: Don't undef USE_NETCODE - it's done in extraconf.h.
+	* cmd.c [USE_VFS]: Don't undef USE_NETCODE.
+	* chmod.c: Remove useless ifdefs.
+	* filegui.c: Likewise.
+	* hotlist.c: Likewise.
+	* info.c: Likewise.
+	* layout.c: Likewise.
+	* listmode.c: Likewise.
+	* option.c: Likewise.
+	* subshell.c: Likewise.
+	* help.c: Remove useless ifdefs. Make global variables static if
+	possible.
+	* key.c: Likewise.
+	* learn.c: Likewise.
+
 2001-06-04  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* charsets.c (load_codepages_list): Lines in mc.charset beginning

@@ -104,7 +104,6 @@ struct {
     { UY+13, UX+22, "Item width:" }
 };
 
-#ifndef HAVE_X
 static void listmode_refresh (void)
 {
     attrset (COLOR_NORMAL);
@@ -115,7 +114,6 @@ static void listmode_refresh (void)
     draw_box (listmode_dlg, UY + 4, UX, 11, 18);
     draw_box (listmode_dlg, UY + 4, UX+20, 11, 43);
 }
-#endif
 
 static int bplus_cback (int action, void *data)
 {
@@ -130,14 +128,14 @@ static int bminus_cback (int action, void *data)
 static int listmode_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
-#ifndef HAVE_X    
+
     case DLG_DRAW:
 	listmode_refresh ();
 	break;
-#endif	
 
     case DLG_POST_KEY:
 	/* fall */
+
     case DLG_INIT:
 	attrset (COLOR_NORMAL);
 	dlg_move (h, UY+13, UX+35);

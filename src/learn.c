@@ -51,7 +51,7 @@
 
 #define BUTTONS 	2
 
-struct {
+static struct {
     int ret_cmd, flags, y, x;
 	unsigned int hotkey;
     char *text;
@@ -73,7 +73,6 @@ static int learnok;
 static int learnchanged;
 static char* learn_title = N_(" Learn keys ");
 
-#ifndef HAVE_X
 static void learn_refresh (void)
 {
     attrset (COLOR_NORMAL);
@@ -85,7 +84,6 @@ static void learn_refresh (void)
     dlg_move (learn_dlg, 1, (learn_dlg->cols - strlen (learn_title)) / 2);
     addstr (learn_title);
 }
-#endif
 
 static int learn_button (int action, void *param)
 {
@@ -344,9 +342,7 @@ void learn_keys (void)
     alternate_plus_minus = 1; /* don't translate KP_ADD, KP_SUBTRACT and
                                  KP_MULTIPLY to '+', '-' and '*' in
                                  correct_key_code */
-#ifndef HAVE_X
     application_keypad_mode ();
-#endif
     init_learn ();
 
     run_dlg (learn_dlg);
@@ -354,11 +350,8 @@ void learn_keys (void)
     old_esc_mode = save_old_esc_mode;
     alternate_plus_minus = save_alternate_plus_minus;
 
-#ifndef HAVE_X
     if (!alternate_plus_minus)
         numeric_keypad_mode ();
-
-#endif
     
     switch (learn_dlg->ret_value) {
     case B_ENTER:

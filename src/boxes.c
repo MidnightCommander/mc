@@ -77,7 +77,6 @@ static int user_hotkey = 'u';
 static int
 display_callback (struct Dlg_head *h, int id, int Msg)
 {
-#ifndef HAVE_X
     switch (Msg){
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
@@ -126,7 +125,6 @@ display_callback (struct Dlg_head *h, int id, int Msg)
 	    return MSG_HANDLED;
 	}
     }
-#endif    
     return MSG_NOT_HANDLED;
 }
 
@@ -203,11 +201,7 @@ display_init (int radio_sel, char *init_text,
     add_widget (dd, user);
     input_set_point (user, 0);
 
-#ifdef PORT_HAS_ICON_VIEW
-    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1, "radio");
-#else
     my_radio = radio_new (3, 5, LIST_TYPES-1, displays, 1, "radio");
-#endif
     my_radio->sel = my_radio->pos = current_mode;
     add_widget (dd, my_radio);
 }
@@ -449,8 +443,6 @@ confirm_box ()
     }
 }
 
-#ifndef HAVE_GNOME
-
 #define DISPY 11
 #define DISPX 46
 
@@ -532,12 +524,10 @@ display_bits_box ()
 
     eight_bit_clean = new_mode < 2;
     full_eight_bits = new_mode == 0;
-#ifndef HAVE_X
 #ifndef HAVE_SLANG
     meta (stdscr, eight_bit_clean);
 #else
     SLsmg_Display_Eight_Bit = full_eight_bits ? 128 : 160;
-#endif
 #endif
     use_8th_bit_as_meta = !new_meta;
 }
@@ -597,13 +587,6 @@ tree (char *current_dir)
     destroy_dlg (dlg);
     return val;
 }
-#endif /* !HAVE_GNOME */
-
-#ifndef USE_VFS
-#ifdef USE_NETCODE
-#undef USE_NETCODE
-#endif
-#endif
 
 #ifdef USE_VFS
 
@@ -761,7 +744,6 @@ cd_dialog (void)
 	return 0;
 }
 
-#ifndef HAVE_GNOME
 void
 symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 {
@@ -793,7 +775,6 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
         *ret_existing = NULL;
     }
 }
-#endif
 
 #ifdef WITH_BACKGROUND
 #define B_STOP   B_USER+1
