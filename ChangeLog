@@ -1,3 +1,10 @@
+2004-10-12  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* syntax/sql.syntax: Improve sql.syntax file and added several
+	keywords.
+
+	From Karel Zak
+
 2004-10-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* acinclude.m4 (MC_WITH_MCSLANG): Set screen_type to mcslang.

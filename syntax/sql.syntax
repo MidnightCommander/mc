@@ -2,6 +2,7 @@
 # by Walery Studennikov <despair@sama.ru>
 
 context default 
+    keyword whole ABORT yellow
     keyword whole ABSOLUTE yellow
     keyword whole ACTION yellow
     keyword whole ADA yellow
@@ -23,6 +24,7 @@ context default
     keyword whole BIGINT yellow
     keyword whole BIT yellow
     keyword whole BIT_LENGTH yellow
+    keyword whole BLOB yellow
     keyword whole BOTH yellow
     keyword whole BY yellow
     keyword whole CASCADE yellow
@@ -31,9 +33,9 @@ context default
     keyword whole CAST yellow
     keyword whole CATALOG yellow
     keyword whole CHAR yellow
-    keyword whole CHAR_LENGTH yellow
     keyword whole CHARACTER yellow
     keyword whole CHARACTER_LENGTH yellow
+    keyword whole CHAR_LENGTH yellow
     keyword whole CHECK yellow
     keyword whole CLOSE yellow
     keyword whole COALESCE yellow
@@ -44,7 +46,6 @@ context default
     keyword whole CONNECT yellow
     keyword whole CONNECTION yellow
     keyword whole CONSTRAINT yellow
-    keyword whole Constraint yellow
     keyword whole CONSTRAINTS yellow
     keyword whole CONTINUE yellow
     keyword whole COPY yellow
@@ -57,6 +58,7 @@ context default
     keyword whole CURRENT_TIMESTAMP yellow
     keyword whole CURRENT_USER yellow
     keyword whole CURSOR yellow
+    keyword whole Constraint yellow
     keyword whole DATABASE yellow
     keyword whole DATE yellow
     keyword whole DATETIME yellow
@@ -82,6 +84,7 @@ context default
     keyword whole ENCODING yellow
     keyword whole END yellow
     keyword whole END-EXEC yellow
+    keyword whole ENUM yellow
     keyword whole ESCAPE yellow
     keyword whole EXCEPT yellow
     keyword whole EXCEPTION yellow
@@ -138,8 +141,13 @@ context default
     keyword whole LIKE yellow
     keyword whole LOCAL yellow
     keyword whole LOCK yellow
+    keyword whole LONGBLOB yellow
+    keyword whole LONGTEXT yellow
     keyword whole LOOP yellow
     keyword whole MATCH yellow
+    keyword whole MEDIUMBLOB yellow
+    keyword whole MEDIUMINT yellow
+    keyword whole MEDIUMTEXT yellow
     keyword whole MINUTE yellow
     keyword whole MODULE yellow
     keyword whole MONTH yellow
@@ -173,11 +181,11 @@ context default
     keyword whole PREPARE yellow
     keyword whole PRESERVE yellow
     keyword whole PRIMARY yellow
-    keyword whole Primary yellow
     keyword whole PRIOR yellow
     keyword whole PRIVILEGES yellow
     keyword whole PROCEDURE yellow
     keyword whole PUBLIC yellow
+    keyword whole Primary yellow
     keyword whole READ yellow
     keyword whole REAL yellow
     keyword whole REFERENCES yellow
@@ -207,6 +215,7 @@ context default
     keyword whole SUBSTRING yellow
     keyword whole SYSTEM_USER yellow
     keyword whole TABLE yellow
+    keyword whole TABLESPACE yellow
     keyword whole TEMPLATE yellow
     keyword whole TEMPORARY yellow
     keyword whole TEXT yellow
@@ -215,13 +224,17 @@ context default
     keyword whole TIMESTAMP yellow
     keyword whole TIMEZONE_HOUR yellow
     keyword whole TIMEZONE_MINUTE yellow
+    keyword whole TINYBLOB yellow
     keyword whole TINYINT yellow
+    keyword whole TINYTEXT yellow
     keyword whole TO yellow
     keyword whole TRAILING yellow
     keyword whole TRANSACTION yellow
     keyword whole TRANSLATION yellow
+    keyword whole TRIGGER yellow
     keyword whole TRIM yellow
     keyword whole TRUE yellow
+    keyword whole TYPE yellow
     keyword whole UNION yellow
     keyword whole UNIQUE yellow
     keyword whole UNKNOWN yellow
@@ -245,6 +258,7 @@ context default
     keyword whole YEAR yellow
     keyword whole ZONE yellow
 											    
+    keyword whole abort yellow
     keyword whole absolute yellow
     keyword whole action yellow
     keyword whole ada yellow
@@ -266,6 +280,7 @@ context default
     keyword whole bigint yellow
     keyword whole bit yellow
     keyword whole bit_length yellow
+    keyword whole blob yellow
     keyword whole both yellow
     keyword whole by yellow
     keyword whole cascade yellow
@@ -325,6 +340,7 @@ context default
     keyword whole encoding yellow
     keyword whole end yellow
     keyword whole end-exec yellow
+    keyword whole enum yellow
     keyword whole escape yellow
     keyword whole except yellow
     keyword whole exception yellow
@@ -381,8 +397,13 @@ context default
     keyword whole like yellow
     keyword whole local yellow
     keyword whole lock yellow
+    keyword whole longblob yellow
+    keyword whole longtext yellow
     keyword whole loop yellow
     keyword whole match yellow
+    keyword whole mediumblob yellow
+    keyword whole mediumint yellow
+    keyword whole mediumtext yellow
     keyword whole minute yellow
     keyword whole module yellow
     keyword whole month yellow
@@ -450,6 +471,7 @@ context default
     keyword whole substring yellow
     keyword whole system_user yellow
     keyword whole table yellow
+    keyword whole tablespace yellow
     keyword whole template yellow
     keyword whole temporary yellow
     keyword whole text yellow
@@ -458,13 +480,17 @@ context default
     keyword whole timestamp yellow
     keyword whole timezone_hour yellow
     keyword whole timezone_minute yellow
+    keyword whole tinyblob yellow
     keyword whole tinyint yellow
+    keyword whole tinytext yellow
     keyword whole to yellow
     keyword whole trailing yellow
     keyword whole transaction yellow
     keyword whole translation yellow
+    keyword whole trigger yellow
     keyword whole trim yellow
     keyword whole true yellow
+    keyword whole type yellow
     keyword whole union yellow
     keyword whole unique yellow
     keyword whole unknown yellow
@@ -507,17 +533,50 @@ context default
     keyword . white
 
 # PostgreSQL specific
+    keyword AGGREGATE yellow
+    keyword CHECKPOINT yellow
+    keyword CLUSTER yellow
+    keyword CONVERSION yellow
+    keyword LISTEN yellow
+    keyword NOTIFY yellow
+    keyword OPERATOR yellow
+    keyword REINDEX yellow
+    keyword SAVEPOINT yellow
+    keyword UNLISTEN yellow
+    keyword VACUUM yellow
+
+    keyword aggregate yellow
+    keyword checkpoint yellow
+    keyword cluster yellow
+    keyword conversion yellow
+    keyword listen yellow
+    keyword notify yellow
+    keyword operator yellow
+    keyword reindex yellow
+    keyword savepoint yellow
+    keyword unlisten yellow
+    keyword vacuum yellow
+
     keyword CREATEDB white
-    keyword NOCREATEDB white
     keyword CREATEUSER white
+    keyword NOCREATEDB white
     keyword NOCREATEUSER white
     keyword PASSWORD white
     keyword SYSID white
-    
+
+    keyword createdb white
+    keyword createuser white
+    keyword nocreatedb white
+    keyword nocreateuser white
+    keyword password white
+    keyword sysid white
+
+    keyword currval white
     keyword nextval white
     keyword pg_database white
     keyword pg_group white
     keyword pg_shadow white
+    keyword setval white
     keyword stdin white
 
 # PostgreSQL sequences 
@@ -539,7 +598,10 @@ context exclusive /\* \*/ brown
     spellcheck
 
 context ' ' green
+    keyword \\' green
+
 context " " green
+    keyword \\" green
 
 # Beckticks are used to escape reserved words in MySQL
 context ` ` cyan
