@@ -223,7 +223,7 @@ open_archive (int fstype, char *name, struct archive **pparc)
 	tmp = name_quote (name, 0);
     }
 
-    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
     cmd =
 	g_strconcat (mc_extfsdir, extfs_prefixes[fstype], " list ",
 		     local_name ? local_name : tmp, NULL);
@@ -235,7 +235,7 @@ open_archive (int fstype, char *name, struct archive **pparc)
     g_free (cmd);
     if (result == NULL) {
 	close_error_pipe (1, NULL);
-	if (local_name != NULL && uses_archive)
+	if (local_name)
 	    mc_ungetlocalcopy (name, local_name, 0);
 	return NULL;
     }
@@ -405,9 +405,8 @@ read_archive (int fstype, char *name, struct archive **pparc)
 static char *get_path (char *inname, struct archive **archive, int is_dir,
     int do_not_open);
 
-/*
- * Return path inside argument.  Returned char* is inside inname, which is mangled
- * by this operation, so don't free the return value.
+/* Returns path inside argument. Returned char* is inside inname, which is
+ * mangled by this operation (so you must not free it's return value).
  */
 static char *
 get_path_mangle (char *inname, struct archive **archive, int is_dir,
@@ -601,7 +600,8 @@ extfs_cmd (const char *extfs_cmd, struct archive *archive,
     return retval;
 }
 
-static void extfs_run (char *file)
+static void
+extfs_run (char *file)
 {
     struct archive *archive;
     char *p, *q, *archive_name, *mc_extfsdir;
@@ -611,19 +611,20 @@ static void extfs_run (char *file)
 	return;
     q = name_quote (p, 0);
     g_free (p);
-    
-    archive_name = name_quote (get_archive_name(archive), 0);
-    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
-    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype], 
-                        " run ", archive_name, " ", q, NULL);
+
+    archive_name = name_quote (get_archive_name (archive), 0);
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR);
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes[archive->fstype],
+		       " run ", archive_name, " ", q, NULL);
     g_free (mc_extfsdir);
     g_free (archive_name);
     g_free (q);
-    shell_execute(cmd, 0);
-    g_free(cmd);
+    shell_execute (cmd, 0);
+    g_free (cmd);
 }
 
-static void *extfs_open (vfs *me, char *file, int flags, int mode)
+static void *
+extfs_open (vfs * me, char *file, int flags, int mode)
 {
     struct pseudofile *extfs_info;
     struct archive *archive;
@@ -631,7 +632,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     struct entry *entry;
     int local_handle;
     int created = 0;
-    
+
     if ((q = get_path_mangle (file, &archive, 0, 0)) == NULL)
 	return NULL;
     entry = find_entry (archive->root_entry, q, 0, 0);
@@ -641,36 +642,37 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	created = (entry != NULL);
     }
     if (entry == NULL)
-    	return NULL;
+	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
 	return NULL;
 
-    if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, NULL);
+    if (S_ISDIR (entry->inode->mode))
+	ERRNOR (EISDIR, NULL);
 
     if (entry->inode->local_filename == NULL) {
+	char *local_filename;
 
-	int handle;
-	handle = mc_mkstemps (&entry->inode->local_filename, "extfs", NULL);
+	local_handle = mc_mkstemps (&local_filename, "extfs", NULL);
 
-	if (handle == -1)
+	if (local_handle == -1)
 	    return NULL;
-	close (handle);
+	close (local_handle);
 
-	/* FIXME: should not need it if O_TRUNK is present in flags */
-	if (extfs_cmd
-	    (" copyout ", archive, entry, entry->inode->local_filename)
+	if (extfs_cmd (" copyout ", archive, entry, local_filename)
 	    && !created) {
-	    free (entry->inode->local_filename);
-	    entry->inode->local_filename = NULL;
+	    unlink (local_filename);
+	    free (local_filename);
 	    my_errno = EIO;
 	    return NULL;
 	}
+	entry->inode->local_filename = local_filename;
     }
 
-    local_handle = open (entry->inode->local_filename, NO_LINEAR(flags),
+    local_handle = open (entry->inode->local_filename, NO_LINEAR (flags),
 			 mode);
-    if (local_handle == -1) ERRNOR (EIO, NULL);
-    
+    if (local_handle == -1)
+	ERRNOR (EIO, NULL);
+
     extfs_info = g_new (struct pseudofile, 1);
     extfs_info->archive = archive;
     extfs_info->entry = entry;
@@ -1265,15 +1267,17 @@ static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chang
 }
 
 
-#include "../src/profile.h"
 static int extfs_init (vfs *me)
 {
     FILE *cfg;
     char *mc_extfsini;
 
-    mc_extfsini = concat_dir_and_file (mc_home, "extfs/extfs.ini");
+    mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
 
+    /* We may not use vfs_die() message or message_1s or similar,
+     * UI is not initialized at this time and message would not
+     * appear on screen. */
     if (!cfg) {
 	fprintf(stderr, _("Warning: file %s not found\n"), mc_extfsini);
 	g_free (mc_extfsini);
@@ -1293,9 +1297,6 @@ static int extfs_init (vfs *me)
 	 */
 
 	if (*key == '[') {
-	/* We may not use vfs_die() message or message_1s or similar,
-         * UI is not initialized at this time and message would not
-	 * appear on screen. */
 	    fprintf(stderr, "Warning: You need to update your %s file.\n",
 		    mc_extfsini);
 	    fclose(cfg);

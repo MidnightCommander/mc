@@ -1,3 +1,8 @@
+2002-12-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs.c: Don't include ../src/profile.h.
+	(extfs_open): Remove local_filename if copyout fails.
+
 2002-12-05  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.h: Remove "extfsstat" from struct archive - it's unused
@@ -28,10 +33,11 @@
 
 2002-12-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* extfs.c (open_archive): Use open_error_pipe() and close_error_pipe()
-	to prevent stderr from extfs scripts pollute the screen.
-	(extfs_cmd): New function to run extfs scripts and handle stderr in one
-	place.
+	* extfs.c (open_archive): Use open_error_pipe() and
+	close_error_pipe() to prevent stderr from extfs scripts pollute
+	the screen.
+	(extfs_cmd): New function to run extfs scripts and handle stderr
+	in one place.
 	(extfs_open): Use extfs_cmd().
 	(extfs_close): Likewise.
 	(extfs_unlink): Likewise.
