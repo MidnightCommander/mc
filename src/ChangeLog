@@ -1,3 +1,10 @@
+Mon Feb  7 11:44:23 2000  Dan Winship  <danw@helixcode.com>
+
+	* mountlist.c: use a better feature test for distinguishing
+	old-style 4.4BSD getmntinfo from new-style 4.4BSD getmntinfo.
+	(NetBSD defines MOUNT_UFS, etc, but as strings rather than
+	integers.)
+
 2000-02-04 "David H.Martin" <dmartina@usa.net> 
 	
         * src/widget.c (input_new): Change NULL to empty strings and avoid

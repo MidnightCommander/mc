@@ -84,13 +84,6 @@ void free (void *ptr);
 #include <sys/vfs.h>
 #endif
 
-/* 4.4BSD2 derived systems */
-#if defined(__bsdi__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__FreeBSD__)
-#  ifndef MOUNT_UFS
-#    define xBSD
-#  endif
-#endif
-
 /* void error (void);  FIXME -- needed? */
 
 #ifdef DOLPHIN
@@ -124,7 +117,7 @@ static int xatoi (char *cp)
 }
 #endif				/* MOUNTED_GETMNTENT1.  */
 
-#if defined (MOUNTED_GETMNTINFO) && !defined (xBSD)
+#if defined (MOUNTED_GETMNTINFO) && !defined (HAVE_F_FSTYPENAME)
 static char *fstype_to_string (short t)
 {
     switch (t) {
@@ -241,7 +234,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	    me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
 	    me->me_devname = strdup (fsp->f_mntfromname);
 	    me->me_mountdir = strdup (fsp->f_mntonname);
-#ifdef xBSD
+#ifdef HAVE_F_FSTYPENAME
 	    me->me_type = strdup (fsp->f_fstypename);
 #else
 	    me->me_type = fstype_to_string (fsp->f_type);

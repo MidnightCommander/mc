@@ -69,13 +69,6 @@ void free (void *ptr);
 #include <sys/vfs.h>
 #endif
 
-/* 4.4BSD2 derived systems */
-#if defined(__bsdi__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__FreeBSD__)
-#  ifndef MOUNT_UFS
-#    define xBSD
-#  endif
-#endif
-
 /* void error (void);  FIXME -- needed? */
 
 #ifdef DOLPHIN

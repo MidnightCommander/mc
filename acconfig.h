@@ -43,6 +43,7 @@
 #undef STAT_STATFS3_OSF1
 #undef STAT_STATFS4
 #undef STAT_STATVFS
+#undef HAVE_F_FSTYPENAME
 
 /* Define umode_t if your system does not provide it */
 #undef umode_t

@@ -727,10 +727,20 @@ AC_DEFUN(AC_GET_FS_INFO, [
       if test $fu_cv_sys_mounted_getmntinfo = yes; then
 	list_mounted_fs=found
 	AC_DEFINE(MOUNTED_GETMNTINFO)
+	AC_MSG_CHECKING([if struct statfs has f_fstypename])
+	AC_CACHE_VAL(fu_cv_sys_mounted_f_fstypename,
+	  [
+	    AC_EGREP_HEADER(f_type;, sys/mount.h, ok=yes, ok=)
+	    test -n "$ok" \
+		&& fu_cv_sys_mounted_f_fstypename=yes \
+		|| fu_cv_sys_mounted_f_fstypename=no
+	  ])
+	AC_MSG_RESULT($fu_cv_sys_mounted_f_fstypename)
+        if test $fu_cv_sys_mounted_f_fstypename = yes; then
+	  AC_DEFINE(HAVE_F_FSTYPENAME)
+	fi
       fi
     fi
-
-    # FIXME: add a test for netbsd-1.1 here
 
     if test -z "$list_mounted_fs"; then
       # Ultrix
