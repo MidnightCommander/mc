@@ -497,7 +497,7 @@ file_compute_color (int attr, file_entry *fe)
 
 /* Formats the file number file_index of panel in the buffer dest */
 static void
-format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int isstatus)
+format_file (char *dest, int limit, WPanel *panel, int file_index, int width, int attr, int isstatus)
 {
     int      color, length, empty_line;
     char     *txt;
@@ -534,6 +534,10 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
+	    if (len + (cdest - dest) > limit)
+		len = limit - (cdest - dest);
+	    if (len <= 0)
+		break;
 	    cdest = to_buffer (cdest, format->just_mode, len, txt);
 	    length += len;
 
@@ -597,7 +601,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
 	    widget_move (&panel->widget, file_index - panel->top_file + 2, 1);
     }
 
-    format_file (buffer, panel, file_index, width, attr, isstatus);
+    format_file (buffer, sizeof(buffer), panel, file_index, width, attr, isstatus);
 
     if (!isstatus && panel->split){
 	if (second_column)

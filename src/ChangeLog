@@ -1,3 +1,10 @@
+2002-02-05  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (format_file): Add a new parameter (size of the
+	output buffer) to prevent buffer overflow on very wide
+	terminals.
+	From Thomas Dickey <dickey@herndon4.his.com>
+
 2002-02-04  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* util.c [!HAVE_TRUNCATE] (truncate): Close fd if my_ftruncate
