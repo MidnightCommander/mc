@@ -212,6 +212,7 @@ dnl
 AC_TYPE_MODE_T
 AC_CHECK_TYPE(umode_t, int)
 AC_CHECK_TYPE(off_t, long)
+AC_CHECK_TYPE(socklen_t, int)
 AC_TYPE_PID_T
 AC_TYPE_UID_T
 AC_CHECK_TYPE(nlink_t, unsigned int)

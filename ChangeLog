@@ -1,3 +1,7 @@
+2004-10-27  Roland Illig  <roland.illig@gmx.de>
+
+	* configure.ac: Add check for type socklen_t.
+
 2004-10-27  Juan C. Olivares <juancri@juancri.com>
 
 	* syntax/aspx.syntax: Add syntax file for ASP.NET.
