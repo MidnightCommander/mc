@@ -154,7 +154,7 @@ void destroy_dlg          (Dlg_head *h);
 		          
 void widget_set_size      (Widget *widget, int x1, int y1, int x2, int y2);
 
-void dlg_broadcast_msg    (Dlg_head *h, int message, int reverse);
+void dlg_broadcast_msg    (Dlg_head *h, widget_msg_t message, int reverse);
 
 void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, mouse_h mouse_handler);

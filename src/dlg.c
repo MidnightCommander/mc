@@ -44,7 +44,8 @@ Dlg_head *current_dlg = 0;
 /* A hook list for idle events */
 Hook *idle_hook = 0;
 
-static void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags);
+static void dlg_broadcast_msg_to (Dlg_head * h, widget_msg_t message,
+				  int reverse, int flags);
 
 static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
@@ -267,12 +268,13 @@ add_widget (Dlg_head *h, void *w)
  * the options set to flags.
  */
 static void
-dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
+dlg_broadcast_msg_to (Dlg_head *h, widget_msg_t message, int reverse,
+		      int flags)
 {
     Widget *p, *first, *wi;
 
     if (!h->current)
-	    return;
+	return;
 
     if (reverse)
 	first = p = h->current->prev;
@@ -290,7 +292,8 @@ dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 }
 
 /* broadcast a message to all the widgets in a dialog */
-void dlg_broadcast_msg (Dlg_head *h, int message, int reverse)
+void
+dlg_broadcast_msg (Dlg_head *h, widget_msg_t message, int reverse)
 {
     dlg_broadcast_msg_to (h, message, reverse, ~0);
 }

@@ -1,3 +1,8 @@
+2003-10-07  Pavel Roskin  <proski@gnu.org>
+
+	* dlg.c (dlg_broadcast_msg): Use widget_msg_t type.
+	(dlg_broadcast_msg_to): Likewise.
+
 2003-09-29  Koblinger Egmont  <egmont@uhulinux.hu>
 
 	* main.c (copy_other_pathname): Trailing slash in not always
