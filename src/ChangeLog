@@ -1,5 +1,9 @@
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c (init_curses) [HAVE_SLANG]: Don't call
+	SLtt_get_terminfo(), it's already called in slang_init().
+	* main.c (init_xterm_support): Free term_entry.
+
 	* subshell.c (subshell_switch_key): Make static const.
 
 	* key.c (correct_key_code): Strip or add modifier information

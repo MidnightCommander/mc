@@ -549,9 +549,9 @@ static void check_split (void)
 }
 
 #ifdef HAVE_SLANG
-void init_curses ()
+void
+init_curses ()
 {
-    SLtt_get_terminfo ();
 #ifndef HAS_ACS_AS_PCCHARS
     if (force_ugly_line_drawing)
 	SLtt_Has_Alt_Charset = 0;
