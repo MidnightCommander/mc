@@ -13,10 +13,10 @@
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.40\n"
+"Project-Id-Version: mc 4.5.46\n"
 "POT-Creation-Date: 2000-05-15 23:10+0000\n"
-"PO-Revision-Date: 2000-05-15 23:19+00:00\n"
-"Last-Translator: Evgeny Bulgakov <bgav@netvision.net.il>\n"
+"PO-Revision-Date: 2000-05-19 19:06+00:00\n"
+"Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=koi8\n"
@@ -992,9 +992,8 @@ msgid ""
 "File Manager will not stop you from doing it."
 msgstr ""
 "Вы используете диспетчер файлов GNOME с привилегиями root. \n"
-"\n"
-"Как root, вы можете случайно повредить вашу систему.Диспетчер файлов GNOME "
-"не сможет помешать вам в этом."
+"Как root, вы можете случайно повредить вашу систему.\n"
+"Диспетчер файлов GNOME не сможет помешать вам в этом."
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1275,7 +1274,7 @@ msgstr " Свойства"
 #: gnome/gnome-file-property-dialog.c:1164
 #: gnome/gnome-file-property-dialog.c:1175
 msgid "You entered an invalid username"
-msgstr "Вы ввели неверное имя пользователя"
+msgstr "Введено неверное имя пользователя"
 
 #: gnome/gnome-file-property-dialog.c:1220
 msgid "You must rename your file to something"
@@ -1773,9 +1772,8 @@ msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
 #. Not essential to translate
 #: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
-#, fuzzy
 msgid "Error trying to stat file:"
-msgstr " Ошибка получения атрибутов файла "
+msgstr "Ошибка получения атрибутов файла:"
 
 #: gtkedit/editcmd.c:298
 msgid " Error writing to pipe: "
@@ -3293,7 +3291,7 @@ msgstr "Отметить &все"
 
 #: src/chmod.c:152
 msgid "Permissions (Octal)"
-msgstr "Доступ (восьмеричн.)"
+msgstr "Доступ (восьмеричный)"
 
 #: src/chmod.c:154
 msgid "Owner name"
@@ -3321,7 +3319,7 @@ msgstr "опций, КЛАВИШИ-СТРЕЛКИ - "
 
 #: src/chmod.c:173
 msgid "to move between options"
-msgstr "перемещения между опций"
+msgstr "перемещения между опциями"
 
 #: src/chmod.c:175
 msgid "and T or INS to mark"
@@ -3657,7 +3655,7 @@ msgstr ""
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
-msgstr " Вы не можете выполнять команды на не локальных файловых системах"
+msgstr " Невозможно выполнять команды на не локальных файловых системах"
 
 #: src/dialog.c:56
 msgid ""
@@ -3863,11 +3861,11 @@ msgstr "Используя "
 
 #: src/features.inc:51
 msgid "system-installed "
-msgstr "установленный в системе "
+msgstr "установленную в системе "
 
 #: src/features.inc:53
 msgid "S-lang library with "
-msgstr "S-lang библиотека с "
+msgstr "S-lang библиотеку с "
 
 #: src/features.inc:56
 msgid "terminfo"
@@ -3879,19 +3877,19 @@ msgstr "termcap"
 
 #: src/features.inc:61
 msgid "an unknown terminal"
-msgstr "неизвестный терминал"
+msgstr "неизвестной терминальной"
 
 #: src/features.inc:64
 msgid " database"
-msgstr " база данных"
+msgstr " базой данных"
 
 #: src/features.inc:67
 msgid "the ncurses library"
-msgstr "библиотека ncurses"
+msgstr "библиотеку ncurses"
 
 #: src/features.inc:69
 msgid "some unknown curses library"
-msgstr "некоторые неизвестные библиотеки curses"
+msgstr "некоторую неизвестную библиотеки curses"
 
 #: src/features.inc:74
 msgid "With subshell support: "
@@ -4835,7 +4833,7 @@ msgid ""
 msgstr ""
 "Вы можете выбрать между\n"
 "\n"
-"  Удалить - удалить элементы старого справочника из ~/"
+"  Удалить    - удалить элементы старого справочника из ~/"
 
 #: src/hotlist.c:1437
 msgid ""
@@ -4843,7 +4841,7 @@ msgid ""
 "           the same question next time\n"
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
-"  Сохранить - сохранить ваши старые элементы; в следующий раз\n"
+"  Сохранить  - сохранить ваши старые элементы; в следующий раз\n"
 "              этот вопрос будет повторен\n"
 "  Объединить - добавить старые элементы в группу \"Entries from ~/"
 
@@ -5426,7 +5424,7 @@ msgstr ""
 
 #: src/main.c:2500
 msgid "-b, --nocolor      Force black and white display.\n"
-msgstr "-b, --nocolor  Использовать черно-белое изображение.\n"
+msgstr "-b, --nocolor      Использовать черно-белое изображение.\n"
 
 #: src/main.c:2502
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
@@ -5438,14 +5436,14 @@ msgid ""
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
-"-c, --color      Использовать цветной режим.\n"
-"-C, --colors     Указать цвета (используйте --help-colors, чтобы получить "
+"-c, --color        Использовать цветной режим.\n"
+"-C, --colors       Указать цвета (используйте --help-colors, чтобы получить "
 "список).\n"
-"-d, --nomouse    Отключить поддержку мыши.\n"
+"-d, --nomouse      Отключить поддержку мыши.\n"
 
 #: src/main.c:2508
 msgid "-e, --edit         Startup the internal editor.\n"
-msgstr "-e, --edit   Запуск встроенного редактора.\n"
+msgstr "-e, --edit         Запуск встроенного редактора.\n"
 
 #: src/main.c:2510
 msgid ""
@@ -5457,19 +5455,17 @@ msgid ""
 msgstr ""
 "-f, --libdir       Печать настроенных путей.\n"
 "-h, --help         Показать эту инструкцию.\n"
-"-k, --resetsoft    Сбросить запрограммированные клавиши (только "
-"HP-терминалы) до исходных \n"
-"terminfo/termcap\n"
-"                   значений.\n"
+"-k, --resetsoft    Сбросить программируемые клавиши (только HP-терминалы)\n"
+"                   до исходных terminfo/termcap значений.\n"
 
 #: src/main.c:2515
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr "-l, --ftplog файл   Записывать команды ftpfs в файл.\n"
+msgstr "-l, --ftplog файл  Записывать команды ftpfs в файл.\n"
 
 #: src/main.c:2518
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
-"-M, --memory файл  [ТОЛЬКО для РАЗРАБОТЧИКОВ: Запись Сумасшедших сообщений в "
+"-M, --memory файл  [ТОЛЬКО для РАЗРАБОТЧИКОВ: Запись сообщений MAD в "
 "файл.]\n"
 
 #: src/main.c:2520
@@ -5483,7 +5479,7 @@ msgstr ""
 
 #: src/main.c:2523
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
-msgstr "-t, --termcap      Активировать поддержку переменных TERMCAP.\n"
+msgstr "-t, --termcap      Активировать поддержку переменной TERMCAP.\n"
 
 #: src/main.c:2526
 msgid ""
@@ -5505,8 +5501,8 @@ msgid ""
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
 "-v, --view fname    Запуск в режиме просмотра файла.\n"
-"\"-V, --version      Сообщить версию и параметры настройки.\n"
-"\"-x, --xterm        Поддержка мыши в xterm и сохранения/восстановления экрана.\n"
+"\"-V, --version     Сообщить версию и параметры настройки.\n"
+"\"-x, --xterm       Поддержка мыши в xterm и сохранения/восстановления экрана.\n"
 "+число              число - номер начальной строки для редактора.\n"
 
 #: src/main.c:2538
@@ -5573,7 +5569,7 @@ msgstr "Редактирует один файл"
 
 #: src/main.c:2713
 msgid "Displays this help message"
-msgstr "Отображает это сообщение помощи"
+msgstr "Отображзить это справочное сообщение"
 
 #: src/main.c:2716
 msgid "Displays a help screen on how to change the color scheme"
@@ -5601,7 +5597,7 @@ msgstr "Отключить поддержку встроенной командной оболочки"
 
 #: src/main.c:2737
 msgid "Prints working directory at program exit"
-msgstr "Печатает рабочий каталог по завершении программы"
+msgstr "Печатать рабочий каталог при выходе из программы"
 
 #: src/main.c:2739
 msgid "Resets soft keys on HP terminals"
@@ -5621,15 +5617,15 @@ msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
 #: src/main.c:2753
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Пытается использовать termcaps вместо terminfo"
+msgstr "Попытаться использовать termcap вместо terminfo"
 
 #: src/main.c:2757
 msgid "Displays the current version"
-msgstr "Отображает текущую версию"
+msgstr "Отобразить текущую версию"
 
 #: src/main.c:2759
 msgid "Launches the file viewer on a file"
-msgstr "Запускает файловый просмотрщик для файла"
+msgstr "Запускает программу просмотра для файла"
 
 #: src/main.c:2761
 msgid "Forces xterm features"
@@ -6863,7 +6859,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr " Сбой идентификация "
+msgstr " Сбой идентификации "
 
 #: vfs/smbfs.c:1738
 #, c-format
@@ -6976,7 +6972,7 @@ msgstr " при вызове ext2_block_iterate %d "
 
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
-msgstr " нехватило памяти при переоткрытии массива "
+msgstr " не хватило памяти при переоткрытии массива "
 
 #: vfs/undelfs.c:246
 #, c-format
@@ -6985,7 +6981,7 @@ msgstr " при сканировании inode %d "
 
 #: vfs/undelfs.c:270
 msgid " Ext2lib error "
-msgstr " Ext2lib ошибка "
+msgstr " Сбой Ext2lib "
 
 #: vfs/undelfs.c:297
 #, c-format
