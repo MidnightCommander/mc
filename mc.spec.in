@@ -10,7 +10,7 @@ Version:   %ver
 Release:   %rel
 Copyright: GPL
 Group:     System Environment/Shells
-Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
+Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Requires:  mc-common >= %{PACKAGE_VERSION}

@@ -1,5 +1,13 @@
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
+	* INSTALL: Update download locations for MC, rxvt, gpm, ncurses.
+	Add download location for glib.
+	* mc.spec.in: Likewise.
+	* doc/LSM: Likewise.
+	* doc/mc.1.in: Likewise.
+	* doc/mcedit.1.in: Likewise.
+	* src/ext.c: Don't mention download location for MC.
+
 	* FAQ: Update status of Tk, XView. and GNOME editions. Update
 	homepage of gpm.
 

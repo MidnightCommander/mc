@@ -409,15 +409,21 @@ o Terminal database
   If you want to run mc on xterm/color_xterm/ansi_xterm (not rxvt), then
   you might read lib/README.xterm for further information.
 
+o glib
+
+  Midnight Commander requires glib.  You can get glib from
+
+  ftp://ftp.gtk.org/pub/gtk/
+
 o In the past the Midnight Commander required the NCurses library to
   build, now it's optional.  You can get Ncurses from
 
-  ftp.gnu.org:/pub/gnu
-  ftp.clark.net:/pub/dickey/ncurses
+  ftp://ftp.gnu.org/pub/gnu/ncurses/
+  ftp://dickey.his.com/ncurses/
 
 o The GPM Mouse Server is available at:
 
-  iride.unipv.it:/pub/gpm
+  ftp://ftp.systemy.it/pub/develop/
 
 o The X Windows System libraries are only used if you are going to
   build the X11 versions of the program.  Please note that this code

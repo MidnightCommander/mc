@@ -3146,9 +3146,9 @@ This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation. See the built-in
 help for details on the License and the lack of warranty.
 .SH AVAILABILITY
-The latest version of this program can be found at ftp.nuclecu.unam.mx
-in the directory /linux/local and from Europe at sunsite.mff.cuni.cz in the
-directory /GNU/mc and at ftp.teuto.de in the directory /lmb/mc. 
+The latest version of this program can be found at 
+ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
+mirrors listed on the GNOME site http://www.gnome.org/.
 .SH SEE ALSO
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).

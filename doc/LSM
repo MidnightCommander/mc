@@ -28,11 +28,7 @@ Author:         borsenkow.msk@sni.de            (Andrej Borsenkow)
 
 Maintained-by:  miguel@roxanne.nuclecu.unam.mx  (Miguel de Icaza)
 
-Primary-site:   sunsite.unc.edu /pub/Linux/utils/file/managers/mc
-                1200k mc-4.1.tar.gz
-
-Alternate-site: ftp.nuclecu.unam.mx /linux/local
-                1200k mc-4.1.tar.gz
+Primary-site:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/
 
 Platforms:      alpha-dec-osf, alpha-linux, hppa-hp-hpux, ix86-bsdi,
                 ix86-freebsd, ix86-linux, ix86-os2, ix86-sco,
@@ -44,13 +40,11 @@ Platforms:      alpha-dec-osf, alpha-linux, hppa-hp-hpux, ix86-bsdi,
 
                     If mouse support is required on the
                 Linux console, then the GPM mouse server.
-                (available at iride.unipv.it:/pub/gpm)
-                (ftp.nuclecu.unam.mx:/linux/local)
+                (available at ftp://ftp.systemy.it/pub/develop/)
 
                     It is also preferable to use Rxvt as an X
                 Terminal if you are using mc under X.
-                (available at ftp.math.fu-berlin.de:/pub/rxvt)
-                (ftp.nuclecu.unam.mx:/linux/local)
+                (available at http://www.rxvt.org/)
 
 Copying-policy: GPL
 

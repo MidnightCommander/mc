@@ -418,8 +418,7 @@ check_stock_mc_ext:
 _("mc.ext file has changed\n\
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
-Midnight Commander package or in case you don't\n\
-have any, get it from ftp://ftp.nuclecu.unam.mx."), NULL);
+Midnight Commander package."), NULL);
 	            message (1, msg, msg2);
                     g_free (msg);
                     g_free (msg2);
