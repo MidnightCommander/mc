@@ -1450,8 +1450,8 @@ icons/Makefile
 
 lib/mc.ext
 mcfn_install
-vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR
-vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar
+vfs/extfs/ftplist vfs/extfs/uzip vfs/extfs/uzoo vfs/extfs/lslR
+vfs/extfs/ulha vfs/extfs/ucpio vfs/extfs/deb vfs/extfs/urar vfs/extfs/uar
 
 doc/mc.1 doc/mcedit.1 doc/mcserv.8
 
