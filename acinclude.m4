@@ -698,8 +698,6 @@ AC_DEFUN([MC_WITH_SLANG], [
     if test x$with_screen = xslang; then
 	screen_type=slang
 	screen_msg="S-Lang library (installed on the system)"
-	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
-		  [Define to use S-Lang library installed on the system])
 	ac_save_LIBS="$LIBS"
 	LIBS="$LIBS -lslang"
 	AC_TRY_LINK([
@@ -732,6 +730,11 @@ it doesn't work well])
 	    fi],
 	    [MC_WITH_MCSLANG]
 	)
+    fi
+
+    if test x$with_screen = xslang; then
+	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
+		  [Define to use S-Lang library installed on the system])
     fi
 
     _MC_WITH_XSLANG

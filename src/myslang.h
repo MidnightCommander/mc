@@ -1,7 +1,7 @@
 #ifndef MC_MYSLANG_H
 #define MC_MYSLANG_H
 
-#if defined(USE_INCLUDED_SLANG) || !defined (HAVE_SYSTEM_SLANG)
+#ifndef HAVE_SYSTEM_SLANG
 #    include "../slang/include/slang.h"
 #else
 #ifdef HAVE_SLANG_SLANG_H

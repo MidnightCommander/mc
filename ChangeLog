@@ -1,11 +1,19 @@
+2005-03-19  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_WITH_SLANG): Define HAVE_SYSTEM_SLANG after
+	all fallbacks so it shows whether we are using system S-Lang.
+	* configure.ac: Remove USE_INCLUDED_SLANG, since it's now fully
+	dependent on HAVE_SLANG and HAVE_SYSTEM_SLANG.
+	* src/myslang.h: Likewise.
+
 2005-03-18  Mike Gorchak  <mike@malva.ua>
 
-        * syntax/assembler.syntax: Add syntax file for the x86 assembler.
-        * syntax/povray.syntax: Add syntax file for the POVRay.
-        * syntax/Syntax: Add syntax file for x86 assembler and POVRay.
-        * syntax/Makefile.am: Likewise.
-        * mc.qpg.in: Likewise.
-        * NEWS: Likewise.
+	* syntax/assembler.syntax: Add syntax file for the x86 assembler.
+	* syntax/povray.syntax: Add syntax file for the POVRay.
+	* syntax/Syntax: Add syntax file for x86 assembler and POVRay.
+	* syntax/Makefile.am: Likewise.
+	* mc.qpg.in: Likewise.
+	* NEWS: Likewise.
 
 2005-03-14  Leonard den Ottolander  <leonard * den ottolander nl>
 
