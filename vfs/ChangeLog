@@ -1,3 +1,12 @@
+2001-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c (free_archive): Use `exit' instead of `logout' - the
+	later fails under non-login shells.
+	(pipeopen): Redirect stderr of ssh to /dev/null.
+	From Rich Roth:
+	(dir_load): Redirect stderr of ls to /dev/null.
+	(linear_start): Likewise.
+
 2001-05-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* Make-mc.in (mostlyclean): Remove $(VFSSOOBJS).

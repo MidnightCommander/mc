@@ -138,7 +138,7 @@ free_archive (vfs *me, vfs_s_super *super)
 {
     if ((SUP.sockw != -1) || (SUP.sockr != -1)){
 	print_vfs_message (_("fish: Disconnecting from %s"), super->name?super->name:"???");
-	command(me, super, NONE, "#BYE\nlogout\n");
+	command(me, super, NONE, "#BYE\nexit\n");
 	close(SUP.sockw);
 	close(SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
@@ -172,7 +172,8 @@ pipeopen(vfs_s_super *super, char *path, char *argv[])
 	close(fileset1[0]); close(fileset1[1]);
 	close(1); close(2);
 	dup(fileset2[1]);
-	dup(fileset2[1]);
+	/* stderr to /dev/null */
+	open ("/dev/null", O_WRONLY);
 	close(fileset2[0]); close(fileset2[1]);
 	execvp(path, argv);
 	vfs_die("Exec failed.");
@@ -358,12 +359,12 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
     command(me, super, NONE,
 	    "#LIST /%s\n"
-	    "ls -lLa \"/%s\" | grep '^[^cbt]' | (\n"
+	    "ls -lLa \"/%s\" 2>/dev/null | grep '^[^cbt]' | (\n"
 	      "while read p x u g s m d y n; do\n"
 	        "echo \"P$p $u.$g\nS$s\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
 	    ")\n"
-	    "ls -lLa \"/%s\" | grep '^[cb]' | (\n"
+	    "ls -lLa \"/%s\" 2>/dev/null | grep '^[cb]' | (\n"
 	      "while read p x u g a i m d y n; do\n"
 	        "echo \"P$p $u.$g\nE$a$i\nd$m $d $y\n:$n\n\"\n"
 	      "done\n"
@@ -535,7 +536,7 @@ static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
 	return 0;
     offset = command(me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
-		"ls -l \"/%s\" | (\n"
+		"ls -l \"/%s\" 2>/dev/null | (\n"
 		  "read var1 var2 var3 var4 var5 var6\n"
 		  "echo \"$var5\"\n"
 		")\n"
