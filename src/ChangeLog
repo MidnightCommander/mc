@@ -1,5 +1,10 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* chmod.c (stat_file): Eliminate.  Use mc_stat().
+	* chmod.h: Remove unneded code.
+	* chown.h: Likewise.
+	* main.c: Include achown.h.
+
 	* fileopctx.h: Define struct FileOpContext.
 	* background.h: Avoid conditional declarations.
 

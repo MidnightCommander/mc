@@ -75,6 +75,7 @@
 
 #include "chmod.h"
 #include "chown.h"
+#include "achown.h"
 
 #ifdef WITH_SMBFS
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */

@@ -617,7 +617,7 @@ static void apply_advanced_chowns (struct stat *sf)
     do {
 	fname = next_file ();
 
-	if (!stat_file (fname, sf))
+	if (mc_stat (fname, sf) != 0)
 	    break;
 	ch_cmode = sf->st_mode;
 	if (mc_chmod (fname, get_mode ()) == -1)
@@ -646,7 +646,7 @@ chown_advanced_cmd (void)
 	else
 	    fname = selection (cpanel)->fname;	/* single file */
 
-	if (!stat_file (fname, sf_stat)){	/* get status of file */
+	if (mc_stat (fname, sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
 	    break;
 	}

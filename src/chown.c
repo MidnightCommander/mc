@@ -255,7 +255,7 @@ chown_cmd (void)
 	else
 	    fname = selection (cpanel)->fname;	        /* single file */
 	
-	if (!stat_file (fname, &sf_stat)){	/* get status of file */
+	if (mc_stat (fname, &sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
 	    break;
 	}

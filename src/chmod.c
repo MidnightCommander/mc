@@ -219,14 +219,6 @@ init_chmod (void)
     return ch_dlg;
 }
 
-int stat_file (char *filename, struct stat *st)
-{
-    if (mc_stat (filename, st))
-	return 0;
-
-    return 1;
-}
-
 static void chmod_done (void)
 {
     if (need_update)
@@ -262,7 +254,7 @@ static void apply_mask (struct stat *sf)
 
     do {
 	fname = next_file ();
-	if (!stat_file (fname, sf))
+	if (mc_stat (fname, sf) != 0)
 	    return;
 	c_stat = sf->st_mode;
 
@@ -285,7 +277,7 @@ void chmod_cmd (void)
 	else
 	    fname = selection (cpanel)->fname;	/* single file */
 
-	if (!stat_file (fname, &sf_stat)){	/* get status of file */
+	if (mc_stat (fname, &sf_stat) != 0) {	/* get status of file */
 	    destroy_dlg (ch_dlg);
 	    break;
 	}
