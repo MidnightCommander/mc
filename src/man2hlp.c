@@ -65,10 +65,10 @@ static struct node *cnode;	/* Current node */
 
 /*
  * Read in blocks of reasonable size and make sure we read everything.
- * Failure to read everything is an error.
+ * Failure to read everything is an error, indicated by returning 0.
  */
 static size_t
-persistent_fread (void *data, size_t len, FILE * stream)
+persistent_fread (void *data, size_t len, FILE *stream)
 {
     size_t count;
     size_t bytes_done = 0;
@@ -82,7 +82,7 @@ persistent_fread (void *data, size_t len, FILE * stream)
 	count = fread (ptr, 1, count, stream);
 
 	if (count <= 0)
-	    return -1;
+	    return 0;
 
 	bytes_done += count;
 	ptr += count;
@@ -93,10 +93,10 @@ persistent_fread (void *data, size_t len, FILE * stream)
 
 /*
  * Write in blocks of reasonable size and make sure we write everything.
- * Failure to write everything is an error.
+ * Failure to write everything is an error, indicated by returning 0.
  */
 static size_t
-persistent_fwrite (const void *data, size_t len, FILE * stream)
+persistent_fwrite (const void *data, size_t len, FILE *stream)
 {
     size_t count;
     size_t bytes_done = 0;
@@ -110,7 +110,7 @@ persistent_fwrite (const void *data, size_t len, FILE * stream)
 	count = fwrite (ptr, 1, count, stream);
 
 	if (count <= 0)
-	    return -1;
+	    return 0;
 
 	bytes_done += count;
 	ptr += count;
@@ -147,7 +147,7 @@ fopen_check (const char *filename, const char *flags)
 
 /* Do fclose(), exit if it fails */
 static void
-fclose_check (FILE * f)
+fclose_check (FILE *f)
 {
     int ret;
 
@@ -330,9 +330,9 @@ handle_node (char *buffer, int is_sh)
 	    if (!is_sh || !node) {
 		/* Start a new section, but omit empty section names */
 		if (*buffer) {
-			fprintf (f_out, "%c[%s]", CHAR_NODE_END, buffer);
-			col++;
-			newline ();
+		    fprintf (f_out, "%c[%s]", CHAR_NODE_END, buffer);
+		    col++;
+		    newline ();
 		}
 
 		/* Add section to the linked list */
@@ -456,8 +456,7 @@ handle_tp_ip (char *buffer, int is_tp)
     if (is_tp) {
 	tp_flag = 1;
 	indentation = 0;
-    }
-    else
+    } else
 	indentation = 8;
 }
 
@@ -482,7 +481,8 @@ handle_command (char *buffer)
     } else if (strcmp (buffer, ".\\\"LINK2\"") == 0) {
 	/* Next two input lines form a link */
 	link_flag = 2;
-    } else if ((strcmp (buffer, ".PP") == 0) || (strcmp (buffer, ".P") == 0)
+    } else if ((strcmp (buffer, ".PP") == 0)
+	       || (strcmp (buffer, ".P") == 0)
 	       || (strcmp (buffer, ".LP") == 0)) {
 	indentation = 0;
 	/* End of paragraph */
@@ -575,7 +575,7 @@ handle_command (char *buffer)
 	/* There is no memmove on some systems */
 	char warn_str[BUFFER_SIZE];
 	strcpy (warn_str, "Warning: unsupported command ");
-	strncat (warn_str, buffer, sizeof(warn_str));
+	strncat (warn_str, buffer, sizeof (warn_str));
 	print_error (warn_str);
 	return;
     }
@@ -583,7 +583,7 @@ handle_command (char *buffer)
 
 static struct links {
     char *linkname;		/* Section name */
-    int  line;			/* Input line in ... */
+    int line;			/* Input line in ... */
     const char *filename;
     struct links *next;
 } links, *current_link;
@@ -722,7 +722,7 @@ main (int argc, char **argv)
 	    if (tp_flag == 1) {
 		tp_flag = 2;
 	    } else {
-	        tp_flag = 0;
+		tp_flag = 0;
 		indentation = 8;
 		if (col >= indentation)
 		    newline ();
@@ -849,7 +849,7 @@ main (int argc, char **argv)
     if (!outfile_buffer)
 	return 1;
 
-    if (persistent_fread (outfile_buffer, file_end, f_out) < 0) {
+    if (!persistent_fread (outfile_buffer, file_end, f_out)) {
 	perror (c_out);
 	return 1;
     }
@@ -861,14 +861,14 @@ main (int argc, char **argv)
     f_out = fopen_check (c_out, "w");
 
     /* Write part after the "Contents" node */
-    if (persistent_fwrite
-	(outfile_buffer + cont_start, file_end - cont_start, f_out) < 0) {
+    if (!persistent_fwrite
+	(outfile_buffer + cont_start, file_end - cont_start, f_out)) {
 	perror (c_out);
 	return 1;
     }
 
     /* Write part before the "Contents" node */
-    if (persistent_fwrite (outfile_buffer, cont_start, f_out) < 0) {
+    if (!persistent_fwrite (outfile_buffer, cont_start, f_out)) {
 	perror (c_out);
 	return 1;
     }

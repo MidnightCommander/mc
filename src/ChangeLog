@@ -1,5 +1,9 @@
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
+	* file.c (panel_operate): Warning fix.
+	* cmd.c (compare_dirs_cmd): Likewise.
+	* man2hlp.c: Warning fixes.  size_t can be unsigned.
+
 	* file.c (panel_get_file): Make static.
 	* filegui.h: Eliminate use of WANT_WIDGETS.
 	* setup.h: Likewise.

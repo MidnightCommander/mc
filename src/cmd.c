@@ -873,22 +873,32 @@ compare_dir (WPanel *panel, WPanel *other, enum CompareMode mode)
     } /* for (i ...) */
 }
 
-void compare_dirs_cmd (void)
+void
+compare_dirs_cmd (void)
 {
-    enum CompareMode thorough_flag = compare_quick;
+    int choice;
+    enum CompareMode thorough_flag;
 
-    thorough_flag = query_dialog (_(" Compare directories "), _(" Select compare method: "),
-				  0, 3, _("&Quick"), _("&Size only"), _("&Thorough"), _("&Cancel"));
-    if (thorough_flag < 0 || thorough_flag > 2)
+    choice =
+	query_dialog (_(" Compare directories "),
+		      _(" Select compare method: "), 0, 3, _("&Quick"),
+		      _("&Size only"), _("&Thorough"), _("&Cancel"));
+
+    if (choice < 0 || choice > 2)
 	return;
-    if (get_current_type () == view_listing &&
-	get_other_type () == view_listing){
+    else
+	thorough_flag = choice;
+
+    if (get_current_type () == view_listing
+	&& get_other_type () == view_listing) {
 	compare_dir (cpanel, opanel, thorough_flag);
 	compare_dir (opanel, cpanel, thorough_flag);
 	paint_panel (cpanel);
 	paint_panel (opanel);
     } else {
-	message (1, MSG_ERROR, _(" Both panels should be on the listing view mode to use this command "));
+	message (1, MSG_ERROR,
+		 _(" Both panels should be on the "
+		   "listing view mode to use this command "));
     }
 }
 

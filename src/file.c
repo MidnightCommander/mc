@@ -1858,11 +1858,6 @@ panel_operate (void *source_panel, FileOperation operation,
 	    return 0;
 	}
 
-    if (operation < OP_COPY || operation > OP_DELETE) {
-	file_op_context_destroy (ctx);
-	return 0;
-    }
-
     /* Generate confirmation prompt */
     source =
 	panel_operate_generate_prompt (panel, operation, only_one,
