@@ -4,6 +4,8 @@ gmc_helpdir = $(datadir)/gnome/help/gmc/C
 
 gmc_help_DATA = index.html topic.dat
 
+noinst_SCRIPTS = mkhtml
+
 SGML_FILES = gmc.sgml
 
 EXTRA_DIST = topic.dat $(SGML_FILES)
@@ -13,23 +15,18 @@ CLEANFILES = gmc.dvi gmc.ps gmc.pdf gmc.rtf
 DISTCLEANFILES = gmc.sgm
 
 $(srcdir)/index.html: @MAINT@ $(SGML_FILES)
-@MAINT@	fullsrcdir=`cd $(srcdir) >/dev/null 2>&1 && pwd` && \
-@MAINT@	db2html $$fullsrcdir/gmc.sgml && \
-@MAINT@	  rm -f $(srcdir)/*.html $(srcdir)/*.css && \
-@MAINT@	  mv gmc/*.html gmc/*.css $(srcdir)
-@MAINT@	rm -rf gmc
+@MAINT@	cd $(srcdir) && $(SHELL) $(srcdir)/mkhtml
 
 dist-hook: $(srcdir)/index.html
-	cp $(srcdir)/*.html $(srcdir)/*.css $(distdir)
+	cp $(srcdir)/*.html $(distdir)
 
 install-data-local: $(srcdir)/index.html
-	for file in $(srcdir)/*.html $(srcdir)/*.css; do \
+	for file in $(srcdir)/*.html; do \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(gmc_helpdir) || exit 1; \
 	done
 
 uninstall-local: $(srcdir)/index.html
 	rm -f $(DESTDIR)$(gmc_helpdir)/*.html
-	rm -f $(DESTDIR)$(gmc_helpdir)/*.css
 
 dvi-local: gmc.dvi
 
@@ -41,7 +38,7 @@ dvi-local: gmc.dvi
 # maybe future versions of docbook will be more consistent.
 gmc.dvi: $(srcdir)/gmc.sgml
 	mkdir tmpdvi
-	cp $(srcdir)/gmc.sgml tmpdvi
+	cp -f $(srcdir)/gmc.sgml tmpdvi
 	db2dvi tmpdvi/gmc.sgml
 	if test -f tmpdvi/gmc.dvi; then \
 	  mv -f tmpdvi/gmc.dvi gmc.dvi; \
@@ -50,7 +47,7 @@ gmc.dvi: $(srcdir)/gmc.sgml
 
 gmc.rtf: $(srcdir)/gmc.sgml
 	mkdir tmprtf
-	cp $(srcdir)/gmc.sgml tmprtf
+	cp -f $(srcdir)/gmc.sgml tmprtf
 	db2rtf tmprtf/gmc.sgml
 	if test -f tmprtf/gmc.rtf; then \
 	  mv -f tmprtf/gmc.rtf gmc.rtf; \

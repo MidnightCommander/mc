@@ -1,5 +1,9 @@
 2001-05-19  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/mkhtml: New file. Create HTML files from gmc.sgml.
+	* doc-gnome/C/Makefile.am: Don't handle *.css - there are none
+	with DocBook 4.1. Never use `cp' without `-f'. Use mkhtml.
+
 	* doc-gnome/C/gmc.sgml: Use DTD DocBook V4.1. Fix duplicate
 	index entry "Moving files".
 

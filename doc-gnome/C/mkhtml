@@ -1,0 +1,32 @@
+#! /bin/sh
+
+# Forget portability - this is a script for maintainers only.
+# In fact, it's only known to run on RedHat Linux 7.1.
+# HTML files are included with the distribution, so it's not a big deal.
+
+# Exit on errors.
+set -e
+
+# Some cleanup
+rm -rf gmc gmc.junk
+
+# Complicated bootstrap process - create empty genindex.sgml first,
+# then generate it and then html files again.
+echo >genindex.sgml
+
+# Java wrapper doesn't seem to have any sane way for passing extra options
+# to the jade command. It doesn't honor the environment variables either.
+# Fortunately, there is an undocumented "-l" option (perhaps intended for
+# something else).
+jw -l "-V html-index=1" -f docbook -b html -o gmc gmc.sgml
+
+# collateindex.pl may not have /usr/bin/perl on the first line.
+perl /usr/bin/collateindex.pl gmc/HTML.index >genindex.sgml
+
+# Now process all with the right genindex.sgml
+rm -rf gmc
+jw -f docbook -b html -o gmc gmc.sgml
+
+# Move the output to the current directory
+mv gmc/* .
+rm -rf gmc
