@@ -608,7 +608,7 @@ void unselect_cmd (void)
 
 /* Check if the file exists */
 /* If not copy the default */
-static int check_for_default(char *default_file, char *file)
+int check_for_default(char *default_file, char *file)
 {
     struct stat s;
     long   count = 0;

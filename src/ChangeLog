@@ -1,3 +1,8 @@
+2001-09-11  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (check_for_default): Make accessible from other files.
+	* cmd.h: Declare check_for_default().
+
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c: Use HAVE_TERMIOS_H and HAVE_SYS_IOCTL_H more
