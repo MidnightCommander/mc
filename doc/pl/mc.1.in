@@ -2148,12 +2148,6 @@ binarny, powiniene¶ ustawiæ opcjê
 .B display bits
 do 7 bitów w menu opcji, aby utrzymaæ przejrzysto¶æ odstêpów miêdzy znakami.
 .PP
-Zobacz równie¿ plik
-.B README.edit
-W drzewie ¼ród³owym po wiêcej informacji. [osobi¶cie bardzo polecam
-wbudowany edytor - ten manual zosta³ przet³umaczony w³a¶nie przy jego
-u¿yciu ;)) - przy. t³umacza].
-.PP
 Zobacz sekcjê Polskie znaki, aby poznaæ szczegó³y na temat u¿ywania
 polskich znaków w Midnight Commanderze.
 .PP
@@ -2862,7 +2856,7 @@ W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
 pozosta³o jeszcze do zrobienia.
 .PP
 Je¶li chcesz zg³osiæ k³opoty z programem [b³êdy w nim],
-wy¶lij e-mail [po angielsku], na adres mc-bugs@roxanne.nuclecu.unam.mx.
+wy¶lij e-mail [po angielsku], na adres mc-devel@gnome.org.
 .PP
 Do zg³oszenia b³êdu do³±cz opis problemu, versjê programu, którego u¿ywasz
 (wy¶wietla j± mc -V), system operacyjny, na którym pracujesz i je¶li program
