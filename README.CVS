@@ -22,6 +22,6 @@ This command can take a while.
 The next version, mc-4.6.0, is expected to be released using the latest
 versions of the GNU tools, which are currently:
 
-Autoconf 2.54
+Autoconf 2.56
 Automake 1.7.1
 Gettext 0.11.5
