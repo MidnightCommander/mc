@@ -1,3 +1,8 @@
+1998-11-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (text_changed): Doh.  Set the new filename of the
+	desktop icon info structure.
+
 1998-11-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (text_changed): We rename the files when the text

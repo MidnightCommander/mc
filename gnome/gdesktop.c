@@ -5,6 +5,26 @@
  * Authors: Federico Mena <federico@nuclecu.unam.mx>
  *          Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
+
+/*
+ * TO-DO list for the desktop;
+ *
+ * - Put an InputOnly window over icons to be able to select them even if the user clicks on
+ *   the transparent area.
+ *
+ * - DnD from file windows to icons.
+ *
+ * - DnD from icons to desktop (move icon).
+ *
+ * - DnD from icons to windows.
+ *
+ * - DnD from icons to icons (file->directory or file->executable).
+ *
+ * - Popup menus for icons.
+ *
+ * - Select icons with rubberband on the root window.
+ *
+ */
 #if 1
 #include <config.h>
 #include "fs.h"
@@ -18,7 +38,7 @@
 /* use grid? */
 int icons_snap_to_grid = 1;
 
-/* Name of the user's desktop directory (i.e. ~/Desktop) */
+/* Name of the user's desktop directory (i.e. ~/desktop) */
 #define DESKTOP_DIR_NAME "desktop"
 
 
@@ -370,6 +390,7 @@ static int
 text_changed (GnomeIconTextItem *iti, gpointer data)
 {
 	struct desktop_icon_info *dii;
+	char *new_name;
 	char *source;
 	char *dest;
 	int retval;
@@ -377,11 +398,14 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	dii = data;
 
 	source = g_concat_dir_and_file (desktop_directory, dii->filename);
-	dest = g_concat_dir_and_file (desktop_directory, gnome_icon_text_item_get_text (iti));
+	new_name = gnome_icon_text_item_get_text (iti);
+	dest = g_concat_dir_and_file (desktop_directory, new_name);
 
-	if (mc_rename (source, dest) == 0)
+	if (mc_rename (source, dest) == 0) {
+		g_free (dii->filename);
+		dii->filename = g_strdup (new_name);
 		retval = TRUE;
-	else
+	} else
 		retval = FALSE; /* FIXME: maybe pop up a warning/query dialog? */
 
 	g_free (source);
@@ -577,7 +601,6 @@ load_initial_desktop_icons (void)
 
 		have_pos = meta_get_icon_pos (full_name, &x, &y);
 		desktop_icon_info_new (dirent->d_name, !have_pos, x, y);
-		printf (have_pos ? "%s: %d %d\n" : "%s: no pos\n", full_name, x, y);
 
 		g_free (full_name);
 	}
@@ -621,7 +644,6 @@ save_icons_pos (void)
 			dii = l->data;
 
 			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-			printf ("%s: %d %d\n", filename, dii->x, dii->y);
 			meta_set_icon_pos (filename, dii->x, dii->y);
 			g_free (filename);
 		}
