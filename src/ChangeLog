@@ -1,3 +1,15 @@
+2001-10-29  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* charsets.c (load_codepages_list): Use glib memory allocation
+	functions.
+	(free_codepages_list) [HAVE_MAD]: New function to release
+	memory allocated in load_codepages_list.
+	* charsets.h: Declare free_codepages_list.
+
+	* main.c [HAVE_CHARSET]: Include charsets.h.
+	(main) [HAVE_MAD && HAVE_CHARSET]: Call free_codepages_list.
+	(program_name): Commented out.
+
 2001-10-26  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* key.c (push_char): Fix buffer length calculation.

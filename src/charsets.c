@@ -40,7 +40,7 @@ int load_codepages_list(void)
 	    ++n_codepages;
     rewind( f );
 
-    codepages = calloc( n_codepages + 1, sizeof(struct codepage_desc) );
+    codepages = g_new0 ( struct codepage_desc, n_codepages + 1 );
 
     for( n_codepages = 0; fgets( buf, sizeof buf, f ); ) {
 	/* split string into id and cpname */
@@ -65,18 +65,18 @@ int load_codepages_list(void)
 	    goto fail;
 
 	if (strcmp (buf, "default") == 0) {
-	    default_codepage = strdup (p);
+	    default_codepage = g_strdup (p);
 	    continue;
 	}
 
-	codepages[n_codepages].id = strdup( buf  );
-	codepages[n_codepages].name = strdup( p );
+	codepages[n_codepages].id = g_strdup( buf  );
+	codepages[n_codepages].name = g_strdup( p );
 	++n_codepages;
     }
 
     if (default_codepage) {
 	display_codepage = get_codepage_index (default_codepage);
-	free (default_codepage);
+	g_free (default_codepage);
     }
 
     result = n_codepages;
@@ -84,6 +84,22 @@ fail:
     fclose( f );
     return result;
 }
+
+#ifdef HAVE_MAD
+void free_codepages_list (void)
+{
+    if (n_codepages > 0) {
+	int i;
+	for (i = 0; i < n_codepages; i++) {
+	    g_free (codepages[i].id);
+	    g_free (codepages[i].name);
+	}
+	n_codepages = 0;
+	g_free (codepages);
+	codepages = 0;
+    }
+}
+#endif /* HAVE_MAD */
 
 #define OTHER_8BIT "Other_8_bit"
 

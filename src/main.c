@@ -117,6 +117,10 @@
 
 #include "../vfs/vfs.h"
 
+#ifdef	HAVE_CHARSET
+#include "charsets.h"
+#endif  /* HAVE_CHARSET */
+
 #include "popt.h"
 
 /* "$Id$" */
@@ -260,8 +264,10 @@ Dlg_head *midnight_dlg;
 /* We need to paint it after CONSOLE_RESTORE, see: load_prompt */
 int update_prompt = 0;
 
+#if 0
 /* The name which was used to invoke mc */
 char *program_name;
+#endif
 
 /* The home directory */
 char *home_dir;
@@ -2854,6 +2860,9 @@ main (int argc, char *argv [])
 
 #ifdef HAVE_MAD
     done_key ();
+#ifdef HAVE_CHARSET
+    free_codepages_list ();
+#endif
 #endif
 
     mad_finalize (__FILE__, __LINE__);
