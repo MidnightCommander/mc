@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.54a\n"
 "POT-Creation-Date: 2001-07-19 12:44+0200\n"
-"PO-Revision-Date: 2001-07-23 15:50+0200\n"
+"PO-Revision-Date: 2001-07-24 21:27+0200\n"
 "Last-Translator: Stanislav Brabec <utx@penguin.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -2079,7 +2079,7 @@ msgstr " Potvrdit náhradu "
 
 #: gtkedit/editcmd.c:1257 gtkedit/editcmd.c:1342
 msgid "scanf &Expression"
-msgstr "&Výraz pro scanf"
+msgstr "výraz pro &Scanf"
 
 #: gtkedit/editcmd.c:1259
 msgid "replace &All"
@@ -2087,11 +2087,11 @@ msgstr "Nahradit &V¹e"
 
 #: gtkedit/editcmd.c:1261
 msgid "pr&Ompt on replace"
-msgstr "vý&zva pøed nahrazením "
+msgstr "&Dotaz na nahrazení "
 
 #: gtkedit/editcmd.c:1263 gtkedit/editcmd.c:1344
 msgid "&Backwards"
-msgstr "&Zpátky"
+msgstr "&Pozpátku"
 
 #: gtkedit/editcmd.c:1265 gtkedit/editcmd.c:1346
 msgid "&Regular expression"
@@ -2107,7 +2107,7 @@ msgstr "v¹ímat si velikos&Ti písmen"
 
 #: gtkedit/editcmd.c:1273
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Zadejte poøadí argumentù (tøeba 3,2,1,4) "
+msgstr " Zadejte poøadí argumentù (napø. 3,2,1,4) "
 
 #: gtkedit/editcmd.c:1277
 msgid " Enter replacement string:"
@@ -2194,7 +2194,7 @@ msgstr "Pozor: Hledání pozpátku mù¾e být pomalé"
 
 #: gtkedit/editcmd.c:1484
 msgid " Prompt on replace "
-msgstr " Ptát se pøed nahrazením "
+msgstr " Dotaz na nahrazení "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1486
