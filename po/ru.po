@@ -13,7 +13,7 @@
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.46\n"
+"Project-Id-Version: mc 4.5.50\n"
 "POT-Creation-Date: 2000-06-17 19:33+0000\n"
 "PO-Revision-Date: 2000-06-17 19:35+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
@@ -991,7 +991,8 @@ msgid ""
 "File Manager will not stop you from doing it."
 msgstr ""
 "Вы используете диспетчер файлов GNOME с привилегиями root. \n"
-"Как root, вы можете случайно повредить вашу систему.\n"
+"\n"
+"Как root, вы можете случайно повредить вашу систему. \n"
 "Диспетчер файлов GNOME не сможет помешать вам в этом."
 
 #: gnome/gmount.c:218
@@ -3910,7 +3911,7 @@ msgstr "библиотеку ncurses"
 
 #: src/features.inc:69
 msgid "some unknown curses library"
-msgstr "некоторую неизвестную библиотеки curses"
+msgstr "некоторую неизвестную библиотеку curses"
 
 #: src/features.inc:74
 msgid "With subshell support: "
@@ -4863,7 +4864,7 @@ msgid ""
 "  Merge  - add old entries to hotlist as group \"Entries from ~/"
 msgstr ""
 "  Сохранить  - сохранить ваши старые элементы; в следующий раз\n"
-"              этот вопрос будет повторен\n"
+"               этот вопрос будет повторен\n"
 "  Объединить - добавить старые элементы в группу \"Entries from ~/"
 
 #: src/hotlist.c:1443
@@ -5458,8 +5459,7 @@ msgid ""
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
 "-c, --color        Использовать цветной режим.\n"
-"-C, --colors       Указать цвета (используйте --help-colors, чтобы получить "
-"список).\n"
+"-C, --colors       Указать цвета (см. --help-colors, чтобы получить список).\n"
 "-d, --nomouse      Отключить поддержку мыши.\n"
 
 #: src/main.c:2508
@@ -5522,11 +5522,10 @@ msgid ""
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
-"-v, --view fname    Запуск в режиме просмотра файла.\n"
-"\"-V, --version     Сообщить версию и параметры настройки.\n"
-"\"-x, --xterm       Поддержка мыши в xterm и сохранения/восстановления "
-"экрана.\n"
-"+число              число - номер начальной строки для редактора.\n"
+"-v, --view fname   Запуск в режиме просмотра файла.\n"
+"-V, --version      Сообщить версию и параметры настройки.\n"
+"-x, --xterm        Поддержка мыши в xterm и сохранения/восстановления экрана.\n"
+"+число             число - номер начальной строки для редактора.\n"
 
 #: src/main.c:2538
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
@@ -5592,7 +5591,7 @@ msgstr "Редактирует один файл"
 
 #: src/main.c:2713
 msgid "Displays this help message"
-msgstr "Отображзить это справочное сообщение"
+msgstr "Отобразить это справочное сообщение"
 
 #: src/main.c:2716
 msgid "Displays a help screen on how to change the color scheme"
@@ -5901,10 +5900,15 @@ msgstr "UID"
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:661
+#: src/screen.c:662
 #, c-format
-msgid "  %s bytes in %d file%s"
-msgstr "  %s байт в %d файлах %s"
+msgid "  %s bytes in %d file"
+msgstr "  %s байт в %d файле"
+
+#: src/screen.c:662
+#, c-format
+msgid "  %s bytes in %d files"
+msgstr "  %s байт в %d файлах"
 
 #: src/screen.c:1325
 msgid "Unknow tag on display format: "
@@ -6029,7 +6033,7 @@ msgstr " Ошибка формата в файле Расширений файлов"
 
 #: src/user.c:138
 msgid " The %%var macro does not have a default "
-msgstr " Максрос %%var не имеет значений по умолчанию"
+msgstr " Макрос %%var не имеет значений по умолчанию"
 
 #: src/user.c:139
 msgid " The %%var macros does not have a variable "
