@@ -3,7 +3,7 @@
 
    Written: 1994, 1996 Janne Kukonlehto
             1997 Norbert Warmuth
-            1996 Miguel de Icaza
+            1996, 1999 Miguel de Icaza
 	    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -27,18 +27,8 @@
 
    */
 #include <config.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#include <fcntl.h>
-#include <sys/param.h>
-#include <sys/stat.h>
-#include <errno.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>	/* For free() and atoi() */
 #include <string.h>
+#include <errno.h>
 #include "tty.h"
 #include "mad.h"
 #include "global.h"
@@ -57,9 +47,6 @@
 #include "tree.h"
 #include "cmd.h"
 #include "../vfs/vfs.h"
-#ifdef OS2_NT
-#   include <io.h>
-#endif
 
 extern int command_prompt;
 
@@ -73,16 +60,6 @@ static int tree_callback (Dlg_head *h, WTree *tree, int msg, int par);
 #define tcallback (callback_fn) tree_callback
 
 /* "$Id$" */
-
-/* Returns number of common characters */
-static inline int str_common (char *s1, char *s2)
-{
-    int result = 0;
-
-    while (*s1++ == *s2++)
-	result++;
-    return result;
-}
 
 static tree_entry *back_ptr (tree_entry *ptr, int *count)
 {
@@ -108,185 +85,14 @@ static tree_entry *forw_ptr (tree_entry *ptr, int *count)
     return ptr;
 }
 
-/* The directory names are arranged in a single linked list in the same
-   order as they are displayed. When the tree is displayed the expected
-   order is like this:
-        /
-        /bin
-        /etc
-        /etc/X11
-        /etc/rc.d
-        /etc.old/X11
-        /etc.old/rc.d
-        /usr
-       
-   i.e. the required collating sequence when comparing two directory names is 
-        '\0' < PATH_SEP < all-other-characters-in-encoding-order
-   
-    Since strcmp doesn't fulfil this requirement we use pathcmp when
-    inserting directory names into the list. The meaning of the return value 
-    of pathcmp and strcmp are the same (an integer less than, equal to, or 
-    greater than zero if p1 is found to be less than, to match, or be greater 
-    than p2.
- */
-static int
-pathcmp (const char *p1, const char *p2)
-{
-    for ( ;*p1 == *p2; p1++, p2++)
-        if (*p1 == '\0' )
-    	    return 0;
-	    
-    if (*p1 == '\0')
-        return -1;
-    if (*p2 == '\0')
-        return 1;
-    if (*p1 == PATH_SEP)
-        return -1;
-    if (*p2 == PATH_SEP)
-        return 1;
-    return (*p1 - *p2);
-}
-
-/* Searches for specified directory */
-static tree_entry *whereis (WTree *tree, char *name)
-{
-    tree_entry *current = tree->tree_first;
-    int flag = -1;
-
-#if 0
-    if (tree->tree_last){
-	flag = strcmp (tree->tree_last->name, name);
-	if (flag <= 0){
-	    current = tree->tree_last;
-	} else if (tree->selected_ptr){
-	    flag = strcmp (tree->selected_ptr->name, name);
-	    if (flag <= 0){
-		current = tree->selected_ptr;
-	    }
-	}
-    }
-#endif
-    while (current && (flag = pathcmp (current->name, name)) < 0)
-	current = current->next;
-
-    if (flag == 0)
-	return current;
-    else
-	return NULL;
-}
-
 /* Add a directory to the list of directories */
 tree_entry *tree_add_entry (WTree *tree, char *name)
 {
-    int flag = -1;
-    tree_entry *current = tree->tree_first;
-    tree_entry *old = NULL;
-    tree_entry *new;
-    int i, len;
-    int submask = 0;
-
+    tree_entry entry;
     if (!tree)
 	return 0;
     
-    if (tree->tree_last && tree->tree_last->next)
-	abort ();
-#if 0
-    if (tree->tree_last){
-	flag = strcmp (tree->tree_last->name, name);
-	if (flag <= 0){
-	    current = tree->tree_last;
-	    old = current->prev;
-	} else if (tree->selected_ptr){
-	    flag = strcmp (tree->selected_ptr->name, name);
-	    if (flag <= 0){
-		current = tree->selected_ptr;
-		old = current->prev;
-	    }
-	}
-    }
-#endif
-    /* Search for the correct place */
-    while (current && (flag = pathcmp (current->name, name)) < 0){
-	old = current;
-	current = current->next;
-    }
-    
-    if (flag == 0)
-	return current; /* Already in the list */
-
-    /* Not in the list -> add it */
-    new = xmalloc (sizeof (tree_entry), "tree, tree_entry");
-    if (!current){
-	/* Append to the end of the list */
-	if (!tree->tree_first){
-	    /* Empty list */
-	    tree->tree_first = new;
-	    new->prev = NULL;
-	} else {
-	    old->next = new;
-	    new->prev = old;
-	}
-	new->next = NULL;
-	tree->tree_last = new;
-    } else {
-	/* Insert in to the middle of the list */
-	new->prev = old;
-	if (old){
-	    /* Yes, in the middle */
-	    new->next = old->next;
-	    old->next = new;
-	} else {
-	    /* Nope, in the beginning of the list */
-	    new->next = tree->tree_first;
-	    tree->tree_first = new;
-	}
-	new->next->prev = new;
-    }
-    /* tree_count++; */
-
-    /* Calculate attributes */
-    new->name = strdup (name);
-    len = strlen (new->name);
-    new->sublevel = 0;
-    for (i = 0; i < len; i++)
-	if (new->name [i] == PATH_SEP){
-	    new->sublevel++;
-	    new->subname = new->name + i + 1;
-	}
-    if (new->next)
-	submask = new->next->submask;
-    else
-	submask = 0;
-    submask |= 1 << new->sublevel;
-    submask &= (2 << new->sublevel) - 1;
-    new->submask = submask;
-    new->mark = 0;
-
-    /* Correct the submasks of the previous entries */
-    current = new->prev;
-    while (current && current->sublevel > new->sublevel){
-	current->submask |= 1 << new->sublevel;
-	current = current->prev;
-    }
-
-    /* The entry has now been added */
-
-    if (new->sublevel > 1){
-	/* Let's check if the parent directory is in the tree */
-	char *parent = strdup (new->name);
-	int i;
-
-	for (i = strlen (parent) - 1; i > 1; i--){
-	    if (parent [i] == PATH_SEP){
-		parent [i] = 0;
-		tree_add_entry (tree, parent);
-		break;
-	    }
-	}
-	free (parent);
-    }
-
-    return new;
+    return tree_store_add_entry (name);
 }
 
 #if 0
@@ -300,16 +106,16 @@ static tree_entry *tree_append_entry (WTree *tree, char *name)
     /* We assume the directory is not yet in the list */
 
     new = xmalloc (sizeof (tree_entry), "tree, tree_entry");
-    if (!tree->tree_first){
+    if (!tree->store->tree_first){
         /* Empty list */
-        tree->tree_first = new;
+        tree->store->tree_first = new;
         new->prev = NULL;
     } else {
         tree->tree_last->next = new;
         new->prev = tree->tree_last;
     }
     new->next = NULL;
-    tree->tree_last = new;
+    tree->store->tree_last = new;
 
     /* Calculate attributes */
     new->name = strdup (name);
@@ -337,306 +143,71 @@ static tree_entry *tree_append_entry (WTree *tree, char *name)
 }
 #endif
 
-static void remove_entry (WTree *tree, tree_entry *entry)
+void
+remove_callback (tree_entry *entry, void *data)
 {
-    tree_entry *current = entry->prev;
-    long submask = 0;
+	WTree *tree = data;
 
-    if (tree->selected_ptr == entry){
-	if (tree->selected_ptr->next)
-	    tree->selected_ptr = tree->selected_ptr->next;
-	else
-	    tree->selected_ptr = tree->selected_ptr->prev;
-    }
-
-    /* Correct the submasks of the previous entries */
-    if (entry->next)
-	submask = entry->next->submask;
-    while (current && current->sublevel > entry->sublevel){
-	submask |= 1 << current->sublevel;
-	submask &= (2 << current->sublevel) - 1;
-	current->submask = submask;
-	current = current->prev;
-    }
-
-    /* Unlink the entry from the list */
-    if (entry->prev)
-	entry->prev->next = entry->next;
-    else
-	tree->tree_first = entry->next;
-    if (entry->next)
-	entry->next->prev = entry->prev;
-    else
-	tree->tree_last = entry->prev;
-    /* tree_count--; */
-
-    /* Free the memory used by the entry */
-    free (entry->name);
-    free (entry);
+	if (tree->selected_ptr == entry){
+		if (tree->selected_ptr->next)
+			tree->selected_ptr = tree->selected_ptr->next;
+		else
+			tree->selected_ptr = tree->selected_ptr->prev;
+	}
 }
 
 void tree_remove_entry (WTree *tree, char *name)
 {
-    tree_entry *current, *base, *old;
-    int len, base_sublevel;
-
-    /* Miguel Ugly hack */
-    if (name [0] == PATH_SEP && name [1] == 0)
-	return;
-    /* Miguel Ugly hack end */
-    
-    base = whereis (tree, name);
-    if (!base)
-	return;	/* Doesn't exist */
-    if (tree->check_name [0] == PATH_SEP && tree->check_name [1] == 0)
-	base_sublevel = base->sublevel;
-    else
-	base_sublevel = base->sublevel + 1;
-    len = strlen (base->name);
-    current = base->next;
-    while (current
-	   && strncmp (current->name, base->name, len) == 0
-	   && (current->name[len] == '\0' || current->name[len] == PATH_SEP)){
-	old = current;
-	current = current->next;
-	remove_entry (tree, old);
-    }
-    remove_entry (tree, base);
+    tree_store_remove_entry (name);
 }
 
 void tree_destroy (WTree *tree)
 {
-    tree_entry *current, *old;
 
     save_tree (tree);
-    current = tree->tree_first;
-    while (current){
-	old = current;
-	current = current->next;
-	free (old->name);
-	free (old);
-    }
+    tree_store_destroy ();
+    
     if (tree->tree_shown){
 	free (tree->tree_shown);
 	tree->tree_shown = 0;
     }
-    tree->selected_ptr = tree->tree_first = tree->tree_last = NULL;
-}
-
-/* Mark the subdirectories of the current directory for delete */
-void start_tree_check (WTree *tree)
-{
-    tree_entry *current;
-    int len;
-
-    if (!tree)
-	tree = (WTree *) find_widget_type (current_dlg, tcallback);
-    if (!tree)
-	return;
-    
-    /* Search for the start of subdirectories */
-    mc_get_current_wd (tree->check_name, MC_MAXPATHLEN);
-    tree->check_start = NULL;
-    current = whereis (tree, tree->check_name);
-    if (!current){
-	/* Cwd doesn't exist -> add it */
-	current = tree_add_entry (tree, tree->check_name);
-	return;
-    }
-
-    /* Mark old subdirectories for delete */
-    tree->check_start = current->next;
-    len = strlen (tree->check_name);
-
-    current = tree->check_start;
-    while (current
-	   && strncmp (current->name, tree->check_name, len) == 0
-	   && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1)){
-	current->mark = 1;
-	current = current->next;
-    }
-}
-
-/* This subdirectory exists -> clear deletion mark */
-void do_tree_check (WTree *tree, const char *subname)
-{
-    char *name;
-    tree_entry *current, *base;
-    int flag = 1, len;
-
-    /* Calculate the full name of the subdirectory */
-    if (subname [0] == '.' &&
-	(subname [1] == 0 || (subname [1] == '.' && subname [2] == 0)))
-	return;
-    if (tree->check_name [0] == PATH_SEP && tree->check_name [1] == 0)
-	name = copy_strings (PATH_SEP_STR, subname, 0);
-    else
-	name = concat_dir_and_file (tree->check_name, subname);
-
-    /* Search for the subdirectory */
-    current = tree->check_start;
-    while (current && (flag = pathcmp (current->name, name)) < 0)
-	current = current->next;
-    
-    if (flag != 0)
-	/* Doesn't exist -> add it */
-	current = tree_add_entry (tree, name);
-    free (name);
-
-    /* Clear the deletion mark from the subdirectory and its children */
-    base = current;
-    if (base){
-	len = strlen (base->name);
-	base->mark = 0;
-	current = base->next;
-	while (current
-	       && strncmp (current->name, base->name, len) == 0
-	       && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1)){
-	    current->mark = 0;
-	    current = current->next;
-	}
-    }
-}
-
-/* Tree check searchs a tree widget in the current dialog and
- * if it finds it, it calls do_tree_check on the subname
- */
-void tree_check (const char *subname)
-{
-    WTree *tree;
-
-    tree = (WTree *) find_widget_type (current_dlg, tcallback);
-    if (!tree)
-	return;
-    do_tree_check (tree, subname);
-}
-
-
-/* Delete subdirectories which still have the deletion mark */
-void end_tree_check (WTree *tree)
-{
-    tree_entry *current, *old;
-    int len;
-
-    if (!tree)
-	tree = (WTree *) find_widget_type (current_dlg, tcallback);
-    if (!tree)
-	return;
-    
-    /* Check delete marks and delete if found */
-    len = strlen (tree->check_name);
-
-    current = tree->check_start;
-    while (current
-	   && strncmp (current->name, tree->check_name, len) == 0
-	   && (current->name[len] == '\0' || current->name[len] == PATH_SEP || len == 1)){
-	old = current;
-	current = current->next;
-	if (old->mark)
-	    remove_entry (tree, old);
-    }
+    tree->selected_ptr = NULL;
 }
 
 /* Loads the .mc.tree file */
 void load_tree (WTree *tree)
 {
     char *filename;
-    FILE *file;
-    char name [MC_MAXPATHLEN], oldname[MC_MAXPATHLEN];
-    char *different;
-    int len, common;
-
-    filename = concat_dir_and_file (home_dir, MC_TREE);
-    file = fopen (filename, "r");
-    free (filename);
-    if (!file){
-	/* No new tree file -> let's try the old file */
-	filename = concat_dir_and_file (home_dir, MC_TREE);
-	file = fopen (filename, "r");
-	free (filename);
-    }
+    int v;
     
-    if (file){
-	/* File open -> read contents */
-	oldname [0] = 0;
-	while (fgets (name, MC_MAXPATHLEN, file)){
-	    len = strlen (name);
-	    if (name [len - 1] == '\n'){
-		name [--len] = 0;
-	    }
-#ifdef OS2_NT
-            /* .ado: Drives for NT and OS/2 */
-            if ((len > 2)         && 
-                 isalpha(name[0]) && 
-                 (name[1] == ':') && 
-                 (name[2] == '\\')) {
-        		tree_add_entry (tree, name);
-        		strcpy (oldname, name);
-            } else
-#endif
-            /* UNIX Version */
-	    if (name [0] != PATH_SEP){
-		/* Clear-text decompression */
-		char *s = strtok (name, " ");
+    filename = concat_dir_and_file (home_dir, MC_TREE);
+    v = tree_store_load (filename);
+    free (filename);
 
-		if (s){
-		    common = atoi (s);
-		    different = strtok (NULL, "");
-		    if (different){
-			strcpy (oldname + common, different);
-			tree_add_entry (tree, oldname);
-		    }
-		}
-	    } else {
-		tree_add_entry (tree, name);
-		strcpy (oldname, name);
-	    }
-	}
-	fclose (file);
-    }
-    if (!tree->tree_first){
-	/* Nothing loaded -> let's add some standard directories */
-	tree_add_entry (tree, PATH_SEP_STR);
-	tree->selected_ptr = tree->tree_first;
-	tree_rescan_cmd (tree);
-	tree_add_entry (tree, home_dir);
-	tree_chdir (tree, home_dir);
-	tree_rescan_cmd (tree);
+    tree->selected_ptr = tree->store->tree_first;
+    
+    if (!v){
+	    tree_store_add_entry (home_dir);
+	    tree_chdir (tree, home_dir);
+	    tree_store_rescan (home_dir);
     }
 }
 
 /* Save the .mc.tree file */
 void save_tree (WTree *tree)
 {
-    tree_entry *current;
+    int error;
     char *filename;
-    FILE *file;
-    int i, common;
-
+    
     filename = concat_dir_and_file (home_dir, MC_TREE);
-    file = fopen (filename, "w");
+    error = tree_store_save (filename);
     free (filename);
-    if (!file){
+
+    if (error){
 	fprintf (stderr, _("Can't open the %s file for writing:\n%s\n"), MC_TREE,
-		 unix_error_string (errno));
+		 unix_error_string (error));
 	return;
     }
-
-    current = tree->tree_first;
-    while (current){
-	if (current->prev && (common = str_common (current->prev->name, current->name)) > 2)
-	    /* Clear-text compression */
-	    i = fprintf (file, "%d %s\n", common, current->name + common);
-	else
-	    i = fprintf (file, "%s\n", current->name);
-	if (i == EOF){
-	    fprintf (stderr, _("Can't write to the %s file:\n%s\n"), MC_TREE,
-		 unix_error_string (errno));
-	    break;
-	}
-	current = current->next;
-    }
-    fclose (file);
 }
 
 static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
@@ -697,12 +268,12 @@ void show_tree (WTree *tree)
 					      "tree, show_tree");
     for (i = 0; i < tree_lines; i++)
 	tree->tree_shown [i] = NULL;
-    if (tree->tree_first)
-	topsublevel = tree->tree_first->sublevel;
+    if (tree->store->tree_first)
+	topsublevel = tree->store->tree_first->sublevel;
     else
 	topsublevel = 0;
     if (!tree->selected_ptr){
-	tree->selected_ptr = tree->tree_first;
+	tree->selected_ptr = tree->store->tree_first;
 	tree->topdiff = 0;
     }
     current = tree->selected_ptr;
@@ -915,7 +486,7 @@ int tree_move_to_parent (WTree *tree)
 	tree->topdiff--;
     }
     if (!current)
-	current = tree->tree_first;
+	current = tree->store->tree_first;
     tree->selected_ptr = current;
     check_focus (tree);
     return tree->selected_ptr != old;
@@ -923,13 +494,13 @@ int tree_move_to_parent (WTree *tree)
 
 void tree_move_to_top (WTree *tree)
 {
-    tree->selected_ptr = tree->tree_first;
+    tree->selected_ptr = tree->store->tree_first;
     tree->topdiff = 0;
 }
 
 void tree_move_to_bottom (WTree *tree)
 {
-    tree->selected_ptr = tree->tree_last;
+    tree->selected_ptr = tree->store->tree_last;
     tree->topdiff = tlines (tree) - 3 - 1;
 }
 
@@ -937,7 +508,7 @@ void tree_chdir (WTree *tree, char *dir)
 {
     tree_entry *current;
 
-    current = whereis (tree, dir);
+    current = tree_store_whereis (dir);
     if (current){
 	tree->selected_ptr = current;
 	check_focus (tree);
@@ -1019,7 +590,7 @@ int search_tree (WTree *tree, char *text)
 	}
 	current = current->next;
 	if (!current){
-	    current = tree->tree_first;
+	    current = tree->store->tree_first;
 	    wrapped = 1;
 	}
 	tree->topdiff++;
@@ -1052,26 +623,13 @@ static void tree_do_search (WTree *tree, int key)
 
 void tree_rescan_cmd (WTree *tree)
 {
-    DIR *dirp;
-    struct dirent *dp;
-    struct stat buf;
     char old_dir [MC_MAXPATHLEN];
 
     if (!tree->selected_ptr || !mc_get_current_wd (old_dir, MC_MAXPATHLEN) ||
 	mc_chdir (tree->selected_ptr->name))
 	return;
-    
-    start_tree_check (tree);
-    dirp = opendir (".");
-    if (dirp){
-	for (dp = readdir (dirp); dp; dp = readdir (dirp)){
-	    lstat (dp->d_name, &buf);
-	    if (S_ISDIR (buf.st_mode))
-		do_tree_check (tree, dp->d_name);
-	}
-	closedir (dirp);
-    }
-    end_tree_check (tree);
+
+    tree_store_rescan (tree->selected_ptr->name);
     mc_chdir (old_dir);
 }
 
@@ -1081,15 +639,6 @@ int tree_forget_cmd (WTree *tree)
 	tree_remove_entry (tree, tree->selected_ptr->name);
     return 1;
 }
-
-#if 0
-static int toggle_nav_mode (void)
-{
-    tree_navigation_flag = 1 - tree_navigation_flag;
-
-    return 1;
-}
-#endif
 
 void tree_copy (WTree *tree, char *default_dest)
 {
@@ -1220,18 +769,6 @@ tree_rmdir_cmd (WTree *tree)
 	return;
 }
 
-#if 0
-static int
-tree_quit_cmd (void)
-{
-    /*
-       FIXME
-    return done = 1;
-    */
-    return 1;
-}
-#endif
-
 static void set_navig_label (Dlg_head *h);
 
 static void
@@ -1350,7 +887,7 @@ start_search (WTree *tree)
 
     if (tree->searching){
     
-	if (tree->selected_ptr == tree->tree_last)
+	if (tree->selected_ptr == tree->store->tree_last)
 	    tree_move_to_top(tree);
 	else {
 	/* set navigation mode temporarily to 'Static' because in 
@@ -1523,9 +1060,11 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
 		 (destroy_fn) tree_destroy, (mouse_h) event_callback, NULL);
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
+
+    tree->store = tree_store_init ();
+    tree_store_add_entry_remove_hook (remove_callback, tree);
     tree->tree_shown = 0;
     tree->search_buffer [0] = 0;
-    tree->tree_first = tree->tree_last = 0;
     tree->topdiff = tree->widget.lines / 2;
     tree->searching = 0;
     tree->done = 0;

@@ -1,3 +1,23 @@
+1999-01-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* dir.c (handle_dirent): Use the tree_store now.
+	(handle_path): ditto.
+	(do_load_dir): ditto.
+	(do_load_dir): ditto.
+	(do_reload_dir): ditto.
+	(do_reload_dir): ditto.
+
+	* treestore.c (tree_store_save): New file
+	(encode): New routine used to encode pathnames in a safe way that
+	are saved to the mc/.tree file.
+	(decode): New routine, used to decode the pathnames we encoded in
+	the step above.  Aint love grand?
+
+	* tree.c (load_tree): Kill dead code.
+
+	Moved all of the tree store information into a new file:
+	treestore.  To be reused by the Gnome code.
+	
 1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
 
 	* popt.c: OS/2 and Windows NT portability fix.

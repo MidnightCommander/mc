@@ -380,7 +380,7 @@ int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
     }
 
     if (S_ISDIR (buf1->st_mode))
-	tree_check (dp->d_name);
+	tree_store_mark_checked (dp->d_name);
     
     /* A link to a file or a directory? */
     *link_to_dir = 0;
@@ -422,7 +422,7 @@ int handle_path (dir_list *list, char *path,
         return 0;
 
     if (S_ISDIR (buf1->st_mode))
-	tree_check (path);
+	tree_store_mark_checked (path);
     
     /* A link to a file or a directory? */
     *link_to_dir = 0;
@@ -455,7 +455,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
     struct stat   buf;
     int dotdot_found = 0;
 
-    start_tree_check (NULL);
+    tree_store_start_check ();
     
     dirp = mc_opendir (".");
     if (!dirp){
@@ -491,7 +491,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	return set_zero_dir (list);
     
     mc_closedir (dirp);
-    end_tree_check (NULL);
+    tree_store_end_check ();
     return next_free;
 }
 
@@ -551,7 +551,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     int		  tmp_len;  /* For optimisation */
     int 	  dotdot_found = 0; 
 
-    start_tree_check (NULL);
+    tree_store_start_check ();
     dirp = mc_opendir (".");
     if (!dirp) {
  	clean_dir (list, count);
@@ -613,7 +613,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	    rotate_dash ();
     }
     mc_closedir (dirp);
-    end_tree_check (NULL);
+    tree_store_end_check ();
     if (next_free) {
 	if (!dotdot_found)
 	    add_dotdot_to_list (list, next_free++);
