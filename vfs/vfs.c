@@ -201,7 +201,7 @@ vfs_strip_suffix_from_filename (const char *filename)
     return p;
 }
 
-static int
+static inline int
 path_magic (const char *path)
 {
     struct stat buf;
@@ -260,7 +260,7 @@ vfs_split (char *path, char **inpath, char **op)
 }
 
 static struct vfs_class *
-_vfs_get_class (const char *path)
+_vfs_get_class (char *path)
 {
     char *semi;
     char *slash;
@@ -289,11 +289,13 @@ _vfs_get_class (const char *path)
 }
 
 struct vfs_class *
-vfs_get_class (const char *path)
+vfs_get_class (const char *pathname)
 {
     struct vfs_class *vfs;
+    char *path = g_strdup (pathname);
 
-    vfs = _vfs_get_class(path);
+    vfs = _vfs_get_class (path);
+    g_free (path);
 
     if (!vfs)
 	vfs = localfs_class;
@@ -556,7 +558,7 @@ int mc_fstat (int handle, struct stat *buf) {
 
 /*
  * Return current directory.  If it's local, reread the current directory
- * from the OS.  You must g_strdup whatever this function returns.
+ * from the OS.  You must g_strdup() whatever this function returns.
  */
 static const char *
 _vfs_get_cwd (void)
@@ -633,7 +635,7 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 }
 
 /*
- * remove //, /./ and /../, local should point to big enough buffer
+ * remove //, /./ and /../
  */
 
 #define ISSLASH(a) (!a || (a == '/'))
@@ -816,8 +818,10 @@ mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
     fdin = -1;
     if (i == -1)
 	goto fail;
-    if (close (fdout) == -1)
+    if (close (fdout) == -1) {
+	fdout = -1;
 	goto fail;
+    }
 
     if (mc_stat (filename, &mystat) != -1) {
 	chmod (tmp, mystat.st_mode);
@@ -825,9 +829,9 @@ mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
     return tmp;
 
   fail:
-    if (fdout)
+    if (fdout != -1)
 	close (fdout);
-    if (fdin)
+    if (fdin != -1)
 	mc_close (fdin);
     g_free (tmp);
     return NULL;
@@ -936,7 +940,7 @@ vfs_init (void)
 #endif /* WITH_SMBFS */
 #ifdef WITH_MCFS
     init_mcfs ();
-#endif /* WITH_SMBFS */
+#endif /* WITH_MCFS */
 #endif /* USE_NETCODE */
 
     vfs_setup_wd ();

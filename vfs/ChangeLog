@@ -3,6 +3,13 @@
         * smbfs.c (smbfs_open_readwrite): Comment out flags games,
         it is cli_open() headache.
 
+	* vfs.c (mc_def_getlocalcopy): Don't close fd -1.
+	(_vfs_get_class): Make path "char *" instead of
+	"const char *" because it write to path.
+
+	(vfs_get_class): Use g_strdup()/g_free() to do "pathname"
+	really "const char *".
+
 2004-10-23  Roland Illig  <roland.illig@gmx.de>
 
 	* README: Add explanation for using GPL licensed code from
