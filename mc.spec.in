@@ -1,10 +1,11 @@
-# Conditional build:
+# Conditional build (replace "#%-" with "#" to enable):
 #
-#%define _with_ncurses 1	# use ncurses
-#%define _with_included_slang 1	# use included S-Lang library
-#%define _with_charset 1	# enable experimental code for charset conversion
-#%define _with_samba 1		# enable SMB/CIFS virtual file system
-#%define _with_ext2undel 1	# compile with ext2 undelete code [if available]
+#%-define _with_ncurses		 1 # use ncurses
+#%-define _with_included_slang	 1 # use included S-Lang library
+#%-define _with_charset		 1 # enable code for charset conversion
+#%-define _with_samba		 1 # enable SMB/CIFS virtual file system
+#%-define _with_ext2undel	 1 # compile with ext2 undelete code
+#%-define _without_x		 1 # avoid dependency on X11 libraries
 
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
@@ -47,7 +48,8 @@ CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 %{?_with_included_slang: --with-screen=mcslang} \
 %{?_with_charset: --enable-charset} \
 %{?_with_samba: --with-samba} \
-%{?_with_ext2undel: --with-ext2undel}
+%{?_with_ext2undel: --with-ext2undel} \
+%{?_without_x: --without-x}
 
 make
 
@@ -99,6 +101,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Tue Dec 24 2002 Pavel Roskin <proski@gnu.org>
+- Work around bug in rpm 4.1 that expands defines in comments.
+- Handle --without-x.
+
 * Mon Nov 04 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Handle --with ext2undel.
 
