@@ -15,20 +15,20 @@ Unix-like operating systems.
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
 .TP
-.I "\-a"
+.I \-a, \-\-stickchars
 Disable usage of graphic characters for line drawing.
 .TP
-.I "\-b"
+.I \-b, \-\-nocolor
 Force black and white display.
 .TP
-.I "\-c"
+.I \-c, \-\-color
 Force color mode, please check the section
 .\"LINK2"
 Colors
 .\"Colors"
 for more information.
 .TP
-.I "\-C arg"
+.I \-C arg, \-\-colors=arg
 Specify a different color set in the command line.  The format of arg is
 documented in the
 .\"LINK2"
@@ -36,25 +36,25 @@ Colors
 .\"Colors"
 section.
 .TP
-.I "\-d"
+.I \-d, \-\-nomouse
 Disable mouse support.
 .TP
-.I "\-e [file]"
+.I \-e [file], \-\-edit[=file]
 Start the internal editor.  If the file is specified, open it on
 startup.  See also
 .BR "mcedit (1)" .
 .TP
-.I "\-f"
+.I \-f, \-\-datadir
 Display the compiled-in search paths for Midnight Commander files.
 .TP
-.I "\-k"
+.I \-k, \-\-resetsoft
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.
 .TP
-.I "\-l file"
+.I \-l file, \-\-ftplog=file
 Save the ftpfs dialog with the server in file.
 .TP
-.I "\-P file"
+.I \-P file, \-\-printwd=file
 Print the last working directory to the specified file.  This option is
 not meant to be used directly.  Instead, it's used from a special shell
 script that automatically changes the current directory of the shell to
@@ -66,35 +66,35 @@ the last directory the Midnight Commander was in.  Source the file
 .B mc
 as an alias to the appropriate shell script.
 .TP
-.I "\-s"
+.I \-s, \-\-slow
 Turn on the slow terminal mode, in this mode the program will not
 draw expensive line drawing characters and will toggle verbose mode
 off.
 .TP
-.I "\-t"
+.I \-t, \-\-termcap
 Used only if the code was compiled with Slang and terminfo: it makes
 the Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
 the system wide terminal database
 .TP
-.I "\-u"
+.I \-u, \-\-nosubshell
 Disable use of the concurrent shell (only makes sense if the Midnight
 Commander has been built with concurrent shell support).
 .TP
-.I "\-U"
+.I \-U, \-\-subshell
 Enable use of the concurrent shell support (only makes sense if the
 Midnight Commander was built with the subshell support set as an
 optional feature).
 .TP
-.I "\-v file"
+.I \-v file, \-\-view=file
 Start the internal viewer to view the specified file.  See also
 .BR "mcview (1)" .
 .TP
-.I "\-V"
+.I \-V, \-\-version
 Display the version of the program.
 .TP
-.I "\-x"
+.I \-x, \-\-xterm
 Force xterm mode.  Used when running on xterm-capable terminals (two
 screen modes, and able to send mouse escape sequences).
 .PP
