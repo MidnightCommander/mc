@@ -63,7 +63,7 @@ lock_build_name (char *fname)
     if (gethostname (host, BUF_SIZE - 1) == -1)
 	*host = '\0';
 
-    return g_strdup_printf ("%s@%s.%d", user, host, getpid ());
+    return g_strdup_printf ("%s@%s.%d", user, host, (int) getpid ());
 }
 
 /* Extract pid from user@host.domain.pid string */
@@ -147,7 +147,7 @@ edit_lock_file (char *fname)
 		g_strdup_printf (_
 				 ("File \"%s\" is already being edited\n"
 				  "User: %s\nProcess ID: %d"), fname,
-				 lockinfo->who, lockinfo->pid);
+				 lockinfo->who, (int) lockinfo->pid);
 	    /* TODO: Implement "Abort" - needs to rewind undo stack */
 	    switch (edit_query_dialog2
 		    (_("File locked"), msg, _("&Grab lock"),
