@@ -160,6 +160,13 @@ static Ansi_Color_Type Ansi_Color_Map[JMAX_COLORS] =
      {RGB(0, 1, 0, 1, 1, 1), SLTT_REV_MASK, NULL}
 };
 
+static int Is_Color_BGR = 0; /* 0 if least significant bit is blue, not red */
+#define COLOR_ARG(color) (Is_Color_BGR ? RGB_to_BGR[color] : color)
+static int RGB_to_BGR[] =
+{
+     0, 4, 2, 6, 1, 5, 3, 7
+};
+
 static char *Color_Fg_Str = "\033[3%dm";
 static char *Color_Bg_Str = "\033[4%dm";
 static char *Default_Color_Fg_Str = "\033[39m";
@@ -1315,7 +1322,7 @@ static void write_attributes (SLtt_Char_Type fgbg)
 	     if (fg0 == SLSMG_COLOR_DEFAULT)
 	       tt_write_string (Default_Color_Fg_Str);
 	     else
-	       tt_printf (Color_Fg_Str, fg0, 0);
+	       tt_printf (Color_Fg_Str, COLOR_ARG(fg0), 0);
 	  }
 
 	if (unknown_attributes
@@ -1324,7 +1331,7 @@ static void write_attributes (SLtt_Char_Type fgbg)
 	     if (bg0 == SLSMG_COLOR_DEFAULT)
 	       tt_write_string (Default_Color_Bg_Str);
 	     else
-	       tt_printf (Color_Bg_Str, bg0, 0);
+	       tt_printf (Color_Bg_Str, COLOR_ARG(bg0), 0);
 	  }
      }
 
@@ -2320,6 +2327,7 @@ int SLtt_initialize (char *term)
      {
 	Color_Fg_Str = SLtt_tgetstr ("Sf");   /* setf */
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
+	Is_Color_BGR = 1;
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)

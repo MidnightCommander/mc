@@ -1,3 +1,9 @@
+2002-10-25  Pavel Roskin  <proski@gnu.org>
+
+	* sldisply.c: Patch to swap blue and red colors for setf/setb
+	capabilities.  Needed on QNX Neutrino.
+	Reported by Pavel Shirshov <pavelsh@mail.ru>
+
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* include/jdmacros.h: Define SLMEMSET and SLMEMCPY
