@@ -1,3 +1,8 @@
+2001-08-17  David Martin <dmartina@excite.es>
+
+	* es.po: Update.
+	* es_ES.po: Likewise.
+
 2001-08-17  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
@@ -43,7 +48,7 @@
 2001-07-18  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: Add gnome/gfind.c.
@@ -89,7 +94,7 @@
 2001-05-29  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2001-05-26  Pavel Roskin  <proski@gnu.org>
 
 	* ru.po: Update. Fix all fuzzy translations.
@@ -102,7 +107,7 @@
 
 	* POTFILES.in: Added some missing files.
 	* no.po: Updated Norwegian translation.
-	
+
 2001-05-21  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* hu.po,zh_*: fixed syntax errors and multibyte errors
@@ -127,7 +132,7 @@
 2001-04-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2001-03-26  Gediminas Paulauskas <menesis@delfi.lt>
 
 	* lv.po: added Latvian translation by
@@ -135,13 +140,13 @@
 
 2001-03-24  Fatih Demir <kabalak@gtranslator.org>
 
-	* tr.po: Committed fullfilled and finished 
+	* tr.po: Committed fullfilled and finished
 		Turkish translation by Nilgün.
 
 2001-03-09  Carlos Perelló Marín <carlos@gnome-db.org>
 
-        * es.po, es_ES.po: Update Spanish translation by
-          David Martin <dmartina@excite.es>
+	* es.po, es_ES.po: Update Spanish translation by
+	  David Martin <dmartina@excite.es>
 
 2001-03-08  Christophe Merlet  <redfox@eikonex.org>
 
@@ -166,7 +171,7 @@
 
 2001-02-15  Szabolcs Ban  <shooby@gnome.hu>
 
-        * hu.po: Fixes by Szabolcs Szasz <sz@szasz.hu>
+	* hu.po: Fixes by Szabolcs Szasz <sz@szasz.hu>
 
 2001-02-13  Christophe Merlet  <redfox@eikonex.org>
 
@@ -185,13 +190,13 @@
 
 2001-01-24  Szabolcs Ban  <shooby@gnome.hu>
 
-        * hu.po: Tons of fixes by Andras and Emese (spelling,
-          terminology, headers)
+	* hu.po: Tons of fixes by Andras and Emese (spelling,
+	  terminology, headers)
 
 2001-01-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian (bokmål) translation.
-	
+
 2001-01-08  Szabolcs Ban <shooby@gnome.hu>
 
 	* hu.po: Updated, added mc.hlp.hu
@@ -206,7 +211,7 @@
 
 2000-12-27  Fatih Demir	<kabalak@gmx.net>
 
-	* tr.po: Committed updated 
+	* tr.po: Committed updated
 		Turkish translation.
 
 2000-12-26  Szabolcs Ban <shooby@gnome.hu>
@@ -220,11 +225,11 @@
 2000-12-11  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-12-05  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2000-12-03  Kai Lahmann <kl@linuxfaqs.de>
 
 	* de.po: UPdated German translation
@@ -233,9 +238,9 @@
 
 	* pl.po: Updated Polish translation
 
-2000-11-13  Szabolcs BAN <shooby@gnome.hu>           
+2000-11-13  Szabolcs BAN <shooby@gnome.hu>
 
-        * hu.po: Updated from Szabolcs Szasz.
+	* hu.po: Updated from Szabolcs Szasz.
 
 2000-11-10  Robert Brady  <robert@suse.co.uk>
 
@@ -244,7 +249,7 @@
 2000-11-07  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-11-04  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.
@@ -252,11 +257,11 @@
 2000-11-04  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2000-10-29  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2000-10-29  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* pl.po: Updated Polish translation.
@@ -273,7 +278,7 @@
 2000-10-25  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-10-21  Zbigniew Chyla  <cyba@gnome.pl>
 
 	* pl.po: Updated Polish translation.
@@ -285,7 +290,7 @@
 2000-10-18  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2000-10-09  Akira TAGOH  <tagoh@gnome.gr.jp>
 
 	* ja.po: Updated Japanese translation.
@@ -331,11 +336,11 @@
 2000-09-04  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Updated Swedish translation.
-	
+
 2000-09-02  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: src/features.inc renamed to src/features.c
@@ -351,7 +356,7 @@
 2000-08-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in.in: DESTDIR should only be honored in "install"
@@ -360,15 +365,15 @@
 2000-08-05  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
-2000-07-29  Fatih Demir  <kabalak@gmx.net> 
 
-        * tr.po: Updated the Turkish translation.
+2000-07-29  Fatih Demir  <kabalak@gmx.net>
+
+	* tr.po: Updated the Turkish translation.
 
 2000-07-20  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-07-19  Martin Norbdck  <d95mback@dtek.chalmers.se>
 
 	* sv.po: Updated Swedish translation.
@@ -392,7 +397,7 @@
 2000-06-22  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-06-17  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.
@@ -400,7 +405,7 @@
 2000-05-28  Kjartan Maraas  <kmaraas@gnu.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-05-26  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.
@@ -424,7 +429,7 @@
 2000-05-16  Kjartan Maraas  <kmaraas@gnu.org>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-05-16  Yukihiro Nakai <nakai@gnome.gr.jp>
 
 	* ja.po: Update from Akira TAGOH.
@@ -465,16 +470,16 @@
 2000-05-07  Kenneth Christiansen  <kenneth@gnome.dk>
 
 	* update.sh: Updated update.sh to support
-          merging, --help, easier porting to new
-          packages, et al
-	
+	  merging, --help, easier porting to new
+	  packages, et al
+
 2000-05-07  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.
 
 2000-04-29  Pablo Saratxaga <pablo@mandrakesoft.com>
-        
-        * wa.po: small fixes
+
+	* wa.po: small fixes
 
 2000-04-20 Martin Norbdck  <d95mback@dtek.chalmers.se>
 
@@ -483,7 +488,7 @@
 2000-04-19  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-04-18  Fatih Demir	<kabalak@gmx.net>
 
 	* tr.po : A little bit more strings & no crashes any more ..
@@ -495,7 +500,7 @@
 
 2000-04-16  Pablo Saratxaga <pablo@mandrakesoft.com>
 
-        * da.po: Updated Danish file
+	* da.po: Updated Danish file
 
 2000-04-14  Yukihiro Nakai <nakai@gnome.gr.jp>
 
@@ -504,15 +509,15 @@
 2000-04-04  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.
-	
+
 2000-03-18  Zbigniew Chyla  <chyla@buy.pl>
 
 	* pl.po: Updated translation.
 
 2000-02-24  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
-	* POTFILES.in: src/features.inc and vfs/cpio.c added. 
-		Patch by Andrew V. Samoilov <sav@bcs.zp.ua>                
+	* POTFILES.in: src/features.inc and vfs/cpio.c added.
+		Patch by Andrew V. Samoilov <sav@bcs.zp.ua>
 
 2000-02-19  Kjartan Maraas  <kmaraas@online.no>
 
@@ -524,7 +529,7 @@
 
 2000-01-31  Yuan-Chung Cheng <platin@linux.org.tw>
 
-        * zh_CN.GB2312.po: Added po file from TurboLinux Chinese Develop Team.
+	* zh_CN.GB2312.po: Added po file from TurboLinux Chinese Develop Team.
 
 2000-01-26  Yukihiro Nakai <nakai@gnome.gr.jp>
 
@@ -558,8 +563,8 @@
 
 1999-12-12 Sergey Panov <sipan@mit.edu>
 
-        * ru.po: Updated translation
-        from Evgeny Bulgakov <bgav@netvision.net.il>
+	* ru.po: Updated translation
+	from Evgeny Bulgakov <bgav@netvision.net.il>
 
 1999-12-01  Kjartan Maraas  <kmaraas@online.no>
 
@@ -577,7 +582,7 @@
 1999-11-13  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.
-	
+
 1999-11-11  Pavel Machek  <pavel@ucw.cz>
 
 	* sk.po: Added translation by ondrejj@saltar.shadow.sk
@@ -592,36 +597,36 @@
 
 1999-10-31  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Updated translation
-        from Evgeny Bulgakov <bgav@netvision.net.il>
+	* ru.po: Updated translation
+	from Evgeny Bulgakov <bgav@netvision.net.il>
 
 1999-10-31  Martin Norb~k  <norpan@bigfoot.com>
 
-        * sv.po: updated translations
+	* sv.po: updated translations
 
 1999-10-29  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Corrections
-        from Evgeny Bulgakov <bgav@netvision.net.il>
+	* ru.po: Corrections
+	from Evgeny Bulgakov <bgav@netvision.net.il>
 
 1999-10-24  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Updated translation
-        from Evgeny Bulgakov <bgav@netvision.net.il>
+	* ru.po: Updated translation
+	from Evgeny Bulgakov <bgav@netvision.net.il>
 
 1999-10-19  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Heavily updated translation 
-        from Evgeny Bulgakov <bgav@netvision.net.il>
+	* ru.po: Heavily updated translation
+	from Evgeny Bulgakov <bgav@netvision.net.il>
 
 1999-10-15  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Updates from Andrej Samoilov  <sav@sav.bcs.zp.ua>
+	* ru.po: Updates from Andrej Samoilov  <sav@sav.bcs.zp.ua>
 
 1999-10-06  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.
-	
+
 1999-10-06  David Martin <dmartina@usa.net>
 
 	* POTFILES.in: added gdeskdop-init.c
@@ -645,7 +650,7 @@
 
 	* ro.po: Updated Romanian translation from Dan
 	Damian <dand@dnttm.ro>.
-	
+
 1999-09-28  Richard Hult  <rhult@hem2.passagen.se>
 
 	* sv.po: Even more updates.
@@ -655,7 +660,7 @@
 	* sv.po: Updated translation.
 
 1999-09-27  Zbigniew Chyla  <chyla@alice.ci.pwr.wroc.pl>
-         
+
 	* pl.po: Added translation.
 
 1999-09-24  Richard Hult  <rhult@hem2.passagen.se>
@@ -669,7 +674,7 @@
 1999-09-23  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated Norwegian translation.
-	
+
 1999-09-23  Jorge Godoy	 <godoy@conectiva.com.br>
 
 	* pt_BR.po: Added pt_BR translation.
@@ -687,13 +692,13 @@
 	* Updated fr.po for mc-4.5.39:
 	  < 1375 translated messages, 14 fuzzy translations, 4 untranslated messages.
 	  > 1393 translated messages.
-	
+
 1999-09-20  Kjartan Maraas  <kmaraas@online.no>
 
 	* da.po: Updated Danish translation from Kenneth Christiansen
 	<kenneth@ripen.dk>
 	* no.po: Updated Norwegian translation.
-	
+
 1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* *.po: s/defination/definition/
@@ -714,7 +719,7 @@
 1999-09-14  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 1999-09-09  Federico Mena Quintero  <federico@redhat.com>
 
 	* POTFILES.in: Added gnome/gmc-client.c.
@@ -740,7 +745,7 @@
 1999-09-01  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 1999-08-31  Federico Mena Quintero  <federico@redhat.com>
 
 	* es.po es_ES.po: Updates from David Martin
@@ -755,7 +760,7 @@
 
 	* da.po: Updated Danish translation from Birger Langkjer
 	<birger.langkjer@image.dk>
-	
+
 1999-08-30  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 	* wa.po: updated walloon language file from
@@ -777,7 +782,7 @@
 1999-08-14  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 1999-08-13  Pablo Saratxaga <srtxg@chanae.alphanet.ch>
 
 	* wa.po: updated walloon language file
@@ -795,7 +800,7 @@
 
 	* es.po: Added new strings with latest editor changes. Added
 	strings in gaction.c. Merged with a new mc.pot after the changes
-	in POTFILES.in. 
+	in POTFILES.in.
 
 1999-08-01  David Martin <dmartina@usa.net>
 
@@ -826,7 +831,7 @@
 1999-07-01  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 1999-06-24  David Martin <dmartina@mailexcite.com>
 
 	* es.po: Updated Spanish translations
@@ -838,7 +843,7 @@
 1999-06-21  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Finished translation. To be audited.
-	
+
 1999-06-14  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* cs.po: Updated translation from David Sauer <davids@penguin.cz>
@@ -853,12 +858,12 @@
 
 1999-06-04  Sergey Panov  <sipan@mit.edu>
 
-        * ru.po: Updated translation.
+	* ru.po: Updated translation.
 
 1999-05-11  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 
 	* Updated es.po and es_ES.po
@@ -886,7 +891,7 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 1999-03-28  Kjartan Maraas  <kmaraas@online.no>
 
 	* no.po: Updated translation.
-	
+
 1999-03-22  David Martin <dmartina@mailexcite.com>
 
 	* es.po: Updated.
@@ -898,7 +903,7 @@ Wed May  5 07:15:12 1999  David Martin <dmartina@usa.net>
 1999-03-19  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* no.po: Updated translation.
-	
+
 Fri Mar 19 06:32:36 1999  David Martin <dmartina@usa.net>
 
 	* es.po: update
@@ -913,9 +918,9 @@ Wed Mar 10 22:05:46 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 1999-03-08 Sergey Panov <sipan@mit.edu>
 
-        * POTFILES.in: add gnome/gcustom-layout.c file
+	* POTFILES.in: add gnome/gcustom-layout.c file
 
-        * ru.po: update
+	* ru.po: update
 
 Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
@@ -924,14 +929,14 @@ Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 1999-02-18  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* no.po: Updated translation.
-	
+
 Thu Feb 18  1999  Sergey Panov  <sipan@mit.edu>
 
 	* ru.po: an update which was long overdue.
-	
+
 Thu Feb 18 08:14:22 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* es.po: Updated with the version sent by David Martin 
+	* es.po: Updated with the version sent by David Martin
 	<dmartina@usa.net> on Feb 14. Now messages from editmenu.c
 	included as gtkedit/editmenu has been added to POTFILES.in.
 
@@ -941,7 +946,7 @@ Thu Feb 18 08:14:22 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Tue Feb 16 20:46:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* es.po: Update es.po with the version sent by David Martin 
+	* es.po: Update es.po with the version sent by David Martin
 	<dmartina@usa.net> on Feb 14. Removed messages from editmenu.c
 	first (this needs fixing).
 
@@ -965,15 +970,15 @@ Mon Nov  9 00:48:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 1998-10-25  Kjartan Maraas  <kmaraas@fib.hl.no>
 
 	* no.po: Added norwegian translation.
-	
+
 Sun May 31 22:02:33 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* it.po: deleted additional "\n" in one msgstr
 
 Wed May 13 12:24:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* Makefile.in.in: Don't depend on VPATH when checking the 
-	dependencies of the target all-yes (instead prefix cat-id-tbl.c 
+	* Makefile.in.in: Don't depend on VPATH when checking the
+	dependencies of the target all-yes (instead prefix cat-id-tbl.c
 	with $(src)).
 
 1998-05-03  David Martin <mozart.usal.es>
