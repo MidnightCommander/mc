@@ -1,5 +1,8 @@
 2001-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Fix opening info pages on VFS.  Modernize
+	entries for compressed cpio archives.
+
 	* lib/mc.ext.in: Comment changes.  Remove rules for programs -
 	they were only used in obsolete frontends.  Don't ever use %view
 	without commands - it's slower and loses user settings, e.g.

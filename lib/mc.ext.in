@@ -160,10 +160,10 @@ regex/\.(te?xi|texinfo)$
 
 # GNU Info page
 type/^Info\ text
-	Open=info --directory %d -f %p
+	Open=info -f %f
 
 shell/.info
-	Open=info --directory %d -f %p
+	Open=info -f %f
 
 # Manual page
 # Exception - .so libraries are not manual pages
@@ -450,15 +450,15 @@ regex/\.[rR]([aA][rR]|[0-9][0-9])$
 
 # cpio
 shell/.cpio.Z
-	Open=%cd %d/%p#ucpio/
+	Open=%cd %p#ucpio
 	View=%view{ascii} compress -dc '%f' | cpio -ictv
 	Extract=compress -dc '%f' | cpio -ic
 shell/.cpio.gz
-	Open=%cd %d/%p#ucpio/
+	Open=%cd %p#ucpio
 	View=%view{ascii} gzip -dc '%f' | cpio -ictv
 	Extract=gzip -dc '%f' | cpio -ic
 shell/.cpio
-	Open=%cd %d/%p#ucpio/
+	Open=%cd %p#ucpio
 	View=%view{ascii} cat '%f' | cpio -ictv
 	Extract=cat '%f' | cpio -ic
 
