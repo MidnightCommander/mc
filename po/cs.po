@@ -2839,12 +2839,17 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Nelze èíst roury k ispellu. \n"
+" Zkontrolujte, je-li ispell v $PATH a pracuje s pøepínaèem -a. \n"
+" Jako alternativu lze zakázat kontrolu z menu Nastavení. "
 
 #: gtkedit/syntax.c:1078
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
+" Chyba pøi ètení z ispellu. \n"
+" Ispell je restartován. "
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
 msgid " Load Syntax Rules "
