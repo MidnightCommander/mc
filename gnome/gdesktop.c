@@ -484,11 +484,18 @@ destroy_shaped_dnd_windows (void)
 	}
 }
 
+/* As Elliot can not be bothered to fix his DnD code in Gdk and it is an absolute mess */
+static int in_desktop_dnd;
+
 static void
 desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
 	char *fname;
 
+	if (in_desktop_dnd)
+		return;
+	
+	in_desktop_dnd = 1;
 	/* This should not happen, as the drag end routine should destroy those widgets */
 	destroy_shaped_dnd_windows ();
 
@@ -506,7 +513,6 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 					root_drag_not_ok_window->window, &root_icon_drag_hotspot);
 		gtk_widget_show (root_drag_not_ok_window);
 		gtk_widget_show (root_drag_ok_window);
-
 		free (fname);
 	}
 }
@@ -514,6 +520,7 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 static void
 desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
+	in_desktop_dnd = 0;
 	printf ("drag end!\n");
 	destroy_shaped_dnd_windows ();
 }
