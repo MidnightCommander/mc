@@ -766,6 +766,13 @@ view_display_clean (WView *view, int height, int width)
 
 #define STATUS_LINES 1
 
+typedef enum {
+    MARK_NORMAL = 0,
+    MARK_SELECTED = 1,
+    MARK_CURSOR = 2,
+    MARK_CHANGED = 3
+} mark_t;
+
 /* Shows the file pointed to by *start_display on view_win */
 static long
 display (WView * view)
@@ -776,7 +783,7 @@ display (WView * view)
     int height, width;
     unsigned long from;
     int c;
-    int boldflag = 0;
+    mark_t boldflag = MARK_NORMAL;
     struct hexedit_change_node *curr = view->change_list;
 
     height = view->widget.lines - frame_shift;
@@ -854,14 +861,14 @@ display (WView * view)
 		if (curr && from == curr->offset) {
 		    c = curr->value;
 		    curr = curr->next;
-		    boldflag = 3;
+		    boldflag = MARK_CHANGED;
 		    attrset (VIEW_UNDERLINED_COLOR);
 		} else
 		    c = (unsigned char) get_byte (view, from);
 
 		if (view->found_len && from >= view->search_start
 		    && from < view->search_start + view->found_len) {
-		    boldflag = 1;
+		    boldflag = MARK_SELECTED;
 		    attrset (MARKED_COLOR);
 		}
 		/* Display the navigation cursor */
@@ -870,7 +877,7 @@ display (WView * view)
 			view->cursor_row = row;
 			view->cursor_col = col;
 		    }
-		    boldflag = 2;
+		    boldflag = MARK_CURSOR;
 		    attrset (view->view_side ==
 			     view_side_left ? VIEW_UNDERLINED_COLOR :
 			     MARKED_SELECTED_COLOR);
@@ -883,11 +890,11 @@ display (WView * view)
 		view_add_string (view, hex_buff);
 		col += 3;
 		/* Turn off the cursor or changed byte highlighting here */
-		if (boldflag > 1)
+		if (boldflag == MARK_CURSOR || boldflag == MARK_CHANGED)
 		    attrset (NORMAL_COLOR);
 		if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line) {
 		    /* Turn off the search highlighting */
-		    if (boldflag == 1
+		    if (boldflag == MARK_SELECTED
 			&& from ==
 			view->search_start + view->found_len - 1)
 			attrset (NORMAL_COLOR);
@@ -901,13 +908,13 @@ display (WView * view)
 		    view_add_one_vline ();
 		    col += 2;
 
-		    if (boldflag
+		    if (boldflag != MARK_NORMAL
 			&& from ==
 			view->search_start + view->found_len - 1)
 			attrset (MARKED_COLOR);
 
 		}
-		if (boldflag
+		if (boldflag != MARK_NORMAL
 		    && from < view->search_start + view->found_len - 1
 		    && bytes != view->bytes_per_line - 1) {
 		    view_gotoyx (view, row, col);
@@ -924,27 +931,30 @@ display (WView * view)
 		if (!is_printable (c))
 		    c = '.';
 		switch (boldflag) {
-		default:
+		case MARK_NORMAL:
 		    break;
-		case 1:
+		case MARK_SELECTED:
 		    attrset (MARKED_COLOR);
-		    goto setcursor;
-		case 2:
-		    attrset (MARKED_SELECTED_COLOR);
-		    goto setcursor;
-		case 3:
-		    attrset (VIEW_UNDERLINED_COLOR);
-
-		  setcursor:
+		    break;
+		case MARK_CURSOR:
 		    if (view->view_side == view_side_right) {
+			/* Our side is active */
 			view->cursor_col = text_start + bytes;
 			view->cursor_row = row;
+			attrset (VIEW_UNDERLINED_COLOR);
+		    } else {
+			/* Other side is active */
+			attrset (MARKED_SELECTED_COLOR);
 		    }
+		    break;
+		case MARK_CHANGED:
+		    attrset (VIEW_UNDERLINED_COLOR);
+		    break;
 		}
 		view_add_character (view, c);
 
-		if (boldflag) {
-		    boldflag = 0;
+		if (boldflag != MARK_NORMAL) {
+		    boldflag = MARK_NORMAL;
 		    attrset (NORMAL_COLOR);
 		}
 	    }
@@ -986,7 +996,7 @@ display (WView * view)
 			col = width;
 		    }
 		    col--;
-		    boldflag = 1;
+		    boldflag = MARK_SELECTED;
 		    if (c_prev == '_' && c_next != '_')
 			attrset (VIEW_UNDERLINED_COLOR);
 		    else
@@ -996,7 +1006,7 @@ display (WView * view)
 	    }
 	    if (view->found_len && from >= view->search_start
 		&& from < view->search_start + view->found_len) {
-		boldflag = 1;
+		boldflag = MARK_SELECTED;
 		attrset (SELECTED_COLOR);
 	    }
 	    if (col >= frame_shift - view->start_col
@@ -1013,8 +1023,8 @@ display (WView * view)
 		view_add_character (view, c);
 	    }
 	    col++;
-	    if (boldflag) {
-		boldflag = 0;
+	    if (boldflag != MARK_NORMAL) {
+		boldflag = MARK_NORMAL;
 		attrset (NORMAL_COLOR);
 	    }
 

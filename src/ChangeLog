@@ -1,5 +1,8 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (display): Use enum for boldflag values.  Fix cursor
+	highlighting for the ASCII part of the hex editor.
+
 	* layout.c (init_curses) [!HAVE_SLANG]: Add support for
 	stickchars - fill acs_map[] with ASCII approximations.
 	* main.c [!HAVE_SLANG]: Enable --stickchars (-a) for ncurses.
