@@ -55,7 +55,6 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole awk cyan/14
     keyword whole basename cyan/14
     keyword whole bash cyan/14
-    keyword whole basnemae cyan/14
     keyword whole bg_backup cyan/14
     keyword whole bg_restore cyan/14
     keyword whole bsh cyan/14
@@ -205,7 +204,6 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole awk cyan/14
     keyword whole basename cyan/14
     keyword whole bash cyan/14
-    keyword whole basnemae cyan/14
     keyword whole bg_backup cyan/14
     keyword whole bg_restore cyan/14
     keyword whole bsh cyan/14

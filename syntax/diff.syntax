@@ -24,3 +24,6 @@ context linestart RCS\s \n brown/12
 context linestart retrieving\s \n brown/12
 context linestart Only\s \n yellow/24 black/0
 context linestart Common\s \n yellow/24 black/0
+context linestart File\s \n yellow/24 black/0
+context linestart Files\s \n yellow/24 black/0
+context linestart Binary\s \n yellow/24 black/0

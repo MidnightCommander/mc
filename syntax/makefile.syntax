@@ -4,6 +4,7 @@ context default
     keyword ${*} brightgreen/16
     keyword whole linestart include magenta
     keyword whole linestart ifdef magenta
+    keyword whole linestart ifndef magenta
     keyword whole linestart endif magenta
     keyword whole linestart if magenta
     keyword whole linestart ifeq magenta

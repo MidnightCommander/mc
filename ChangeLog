@@ -1,3 +1,11 @@
+2000-05-30  Pavel Roskin  <pavel_roskin@geociiities.com>
+
+	* syntax/diff.syntax: Highlight lines beginning with "File",
+	"Files"	and "Binary"
+	* syntax/makefile.syntax: Highlight "ifndef"
+	* syntax/sh.syntax: Don't highlight "basnemae" ("basename" is
+	highlighted)
+
 2000-05-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* lib/mc.ext.in: More changes by rebel@atrey: he forgot to begin
