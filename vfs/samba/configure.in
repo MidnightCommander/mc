@@ -59,8 +59,7 @@ AC_CHECK_HEADERS(sys/mount.h sys/vfs.h sys/fs/s5param.h sys/filsys.h termios.h t
 AC_CHECK_HEADERS(sys/termio.h sys/statfs.h sys/dustat.h sys/statvfs.h stdarg.h sys/sockio.h)
 AC_CHECK_HEADERS(netinet/tcp.h netinet/in_systm.h netinet/in_ip.h)
 AC_CHECK_HEADERS(sys/security.h security/pam_appl.h)
-AC_CHECK_HEADERS(stropts.h poll.h readline.h history.h readline/readline.h)
-AC_CHECK_HEADERS(readline/history.h sys/capability.h syscall.h sys/syscall.h)
+AC_CHECK_HEADERS(stropts.h poll.h sys/capability.h syscall.h sys/syscall.h)
 AC_CHECK_HEADERS(sys/acl.h sys/cdefs.h glob.h)
 
 AC_CHECK_SIZEOF(int,cross)
@@ -124,14 +123,6 @@ AC_CHECK_FUNCS(crypt)
 if test x"$ac_cv_func_crypt" = x"no"; then
     AC_CHECK_LIB(crypt, crypt, [LIBS="$LIBS -lcrypt";
 	AC_DEFINE(HAVE_CRYPT)])
-fi
-
-
-###############################################
-# test for where we get readline() from
-if test "$ac_cv_header_readline_h" = "yes" ||
-   test "$ac_cv_header_readline_readline_h" = "yes"; then
-  AC_CHECK_LIB(readline,readline)
 fi
 
 

@@ -1,3 +1,8 @@
+2001-10-18  Andrew V. Samoilov  <kai@cmail.ru
+
+	* samba/configure.in: Don't check readline.h, history.h and
+	libreadline.
+
 2001-10-16  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/libsmb/clientgen.c (cli_RNetShareEnum): Fix Win2k 
