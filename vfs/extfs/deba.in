@@ -6,102 +6,9 @@
 #
 # deba
 
-sub bt
-{
-    my ($dt) = @_;
-    my (@time);
-    @time = localtime($dt);
-    $bt = sprintf "%02d-%02d-%d %02d:%02d", $time[4] + 1, $time[3],
-		  $time[5] + 1900, $time[2], $time[1];
-    return $bt;
-}
-
-
-sub ft
-{
-    my ($f) = @_;
-    return "d" if -d $f;
-    return "l" if -l $f;
-    return "p" if -p $f;
-    return "S" if -S $f;
-    return "b" if -b $f;
-    return "c" if -c $f;
-    return "-";
-}
-
-sub fm
-{
-    my ($n) = @_;
-    my ($m);
-
-    if( $n & 0400 ) {
-       $m .= "r";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 0200 ) {
-       $m .= "w";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 04000 ) {
-       $m .= "s";
-    } elsif( $n & 0100 ) {
-       $m .= "x";
-    } else {
-       $m .= "-";
-    }
-
-    if( $n & 0040 ) {
-       $m .= "r";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 0020 ) {
-       $m .= "w";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 02000 ) {
-       $m .= "s";
-    } elsif( $n & 0010 ) {
-       $m .= "x";
-    } else {
-       $m .= "-";
-    }
-
-    if( $n & 0004 ) {
-       $m .= "r";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 0002 ) {
-       $m .= "w";
-    } else {
-       $m .= "-";
-    }
-    if( $n & 01000 ) {
-       $m .= "t";
-    } elsif( $n & 0001 ) {
-       $m .= "x";
-    } else {
-       $m .= "-";
-    }
-
-    return $m;
-}
-
-sub ls {
-    my ($file) = @_;
-    my @stat = stat($file);
-    # mode, nlink, uid, gid, size, mtime, filename
-    printf "%s%s %d %d %d %d %s CONTENTS%s\n", ft($file), fm($stat[2] & 07777),
-    $stat[3], $stat[4], $stat[5], $stat[7], bt($stat[9]), $file;
-}
-
 sub list
 {
-       my($archive)=@_;
+       my($archive) = map { s/([^\w\/.+-])/\\$1/g } @_;
        chop($date=`LC_ALL=C date "+%b %d %Y %H:%M"`);
        chop($info_size=`apt-cache show $archive | wc -c`);
        $install_size=length($pressinstall);
@@ -120,7 +27,7 @@ sub list
 
 sub copyout
 {
-       my($archive,$filename,$destfile)=@_;
+       my($archive,$filename,$destfile) = map { s/([^\w\/.+-])/\\$1/g } @_;
 
        if($filename eq "INFO") {
            system("apt-cache show $archive > $destfile");
@@ -143,7 +50,7 @@ sub copyout
 
 sub run
 {
-       my($archive,$filename)=@_;
+       my($archive,$filename) = map { s/([^\w\/.+-])/\\$1/g } @_;
        if($filename eq "INSTALL") {
            system("apt-get install $archive");
        } elsif($filename eq "UPGRADE") {

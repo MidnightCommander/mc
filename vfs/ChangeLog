@@ -1,5 +1,13 @@
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/deba.in (bt): deleted. (ft): deleted. (fm): deleted.
+	(ls): deleted. (list): correctly quoted shell command arguments.
+	(copyout): likewise. (run): likewise.
+	
+	From Leonard den Ottolander <leonard@den.ottolander.nl>
+
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
+
 	* smbfs.c: Modified smbfs_convert_path based on a patch sent by
 	Andrew V. Samoilov. Adjusted the calls to smbfs_convert_path.
 	Simplified string handling by using free_after from src/util.h.
