@@ -473,7 +473,9 @@ create_prop_box (PrefsDlg *dlg)
         PrefsPage *cur_page;
 
 	dlg->prop_box = gnome_property_box_new ();
-	gnome_dialog_set_parent (GNOME_DIALOG (dlg->prop_box), GTK_WINDOW (dlg->panel->xwindow));
+	if (dlg->panel)
+		gnome_dialog_set_parent (GNOME_DIALOG (dlg->prop_box), 
+					 GTK_WINDOW (dlg->panel->xwindow));
 	gtk_window_set_modal (GTK_WINDOW (dlg->prop_box), TRUE);
 	gtk_window_set_title (GTK_WINDOW (dlg->prop_box), _("Preferences"));
 
@@ -488,8 +490,10 @@ create_prop_box (PrefsDlg *dlg)
 	dlg->desktop_prefs = desktop_prefs_new (GNOME_PROPERTY_BOX (dlg->prop_box));
 	dlg->desktop_prefs_page = i++;
 
-	dlg->custom_layout = custom_layout_create_page (GNOME_PROPERTY_BOX (dlg->prop_box),
-							dlg->panel);
+	if (dlg->panel)
+		dlg->custom_layout = custom_layout_create_page (
+			GNOME_PROPERTY_BOX (dlg->prop_box), dlg->panel);
+
 	dlg->custom_layout_page = i;
 
         gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
@@ -499,7 +503,8 @@ create_prop_box (PrefsDlg *dlg)
 }
 
 void
-gnome_configure_box (GtkWidget *widget, WPanel *panel)
+gnome_configure_box_with_desktop (GtkWidget *widget, WPanel *panel, 
+				  gboolean desktop)
 {
 	static PrefsDlg dlg;
 
@@ -507,5 +512,17 @@ gnome_configure_box (GtkWidget *widget, WPanel *panel)
         dlg.prefs_pages = prefs_pages;
 
         create_prop_box (&dlg);
+
+	if (desktop)
+		gtk_notebook_set_page (
+			GTK_NOTEBOOK (GNOME_PROPERTY_BOX (
+				dlg.prop_box)->notebook),
+			dlg.desktop_prefs_page);
         gtk_widget_show (dlg.prop_box);
+}
+
+void
+gnome_configure_box (GtkWidget *widget, WPanel *panel)
+{
+	gnome_configure_box_with_desktop (widget, panel, FALSE);
 }

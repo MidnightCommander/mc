@@ -224,6 +224,9 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		else {
 			win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 			gtk_window_set_position (GTK_WINDOW (win), GTK_WIN_POS_MOUSE);
+#ifdef HAVE_GNOME_WINDOW_ICON
+			gnome_window_icon_set_from_default (GTK_WINDOW (win));
+#endif
 		}
 	} else
 		win = 0;
@@ -268,6 +271,9 @@ xtoolkit_get_main_dialog (Dlg_head *h)
 	GtkWidget *win;
 
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+#ifdef HAVE_GNOME_WINDOW_ICON
+	gnome_window_icon_set_from_default (GTK_WINDOW (win));
+#endif
 	return (widget_data) win;
 }
 
@@ -278,6 +284,9 @@ x_create_panel_container (int which)
 	GtkWidget *win;
 
 	win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+#ifdef HAVE_GNOME_WINDOW_ICON
+	gnome_window_icon_set_from_default (GTK_WINDOW (win));
+#endif
 	return (widget_data) 0;
 }
 

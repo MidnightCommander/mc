@@ -1,3 +1,26 @@
+2000-06-20  Jacob Berkman  <jacob@helixcode.com>
+
+	* gtkdtree.c (gtk_dtree_construct): 
+	* gscreen.c (panel_create_tree_view): don't set the tree's line
+	style
+
+	* gprefs.[ch] (create_prop_box): only set the parent if the parent
+	exists
+	(create_prop_box): only show the custom tab if we have a parent
+	panel
+	(gnome_configure_box_with_desktop): add a param for optionally
+	doing the desktop prefs
+	(gnome_configure_box): wrap the other function
+
+	* gdesktop.c (set_desktop_icons): show icon properties
+	(desktop_popup_items): add an item to configure icons
+
+2000-05-06  Jacob Berkman  <jacob@helixcode.com>
+
+	* gmain.c (xtoolkit_get_main_dialog):
+	(xtoolkit_create_dialog): 
+	(x_create_panel_container): set the default icon
+
 2000-06-16  Jonathan Blandford  <jrb@redhat.com>
 
 	* gpopup2.c (handle_empty_trash): Finished trash can.  Now I just

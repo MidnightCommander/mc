@@ -776,7 +776,7 @@ gtk_dtree_construct (GtkDTree *dtree)
 	gtk_clist_set_column_auto_resize (clist, 0, TRUE);
 	gtk_clist_columns_autosize (clist);
 
-	gtk_ctree_set_line_style (ctree, GTK_CTREE_LINES_DOTTED);
+	/*gtk_ctree_set_line_style (ctree, GTK_CTREE_LINES_DOTTED);*/
 	gtk_clist_set_reorderable (GTK_CLIST (ctree), FALSE);
 
 	gdk_dtree_load_pixmaps (dtree);

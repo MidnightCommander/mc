@@ -2838,6 +2838,12 @@ set_background_image (GtkWidget *widget, gpointer data)
 	}
 }
 
+static void
+set_desktop_icons (GtkWidget *widget, gpointer data)
+{
+	gnome_configure_box_with_desktop (NULL, NULL, TRUE);
+}
+
 /* Callback from menus to create a terminal.  If the user creates a terminal
  * from the desktop, he usually wants the cwd to be his home directory, not the
  * desktop directory.
@@ -2884,6 +2890,7 @@ GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Recreate Default _Icons"), NULL, handle_recreate_default_icons),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Configure _Background Image"), NULL, set_background_image),
+	GNOMEUIINFO_ITEM_NONE (N_("Des_ktop Properties"), NULL, set_desktop_icons),
 	GNOMEUIINFO_END
 };
 

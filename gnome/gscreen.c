@@ -2151,8 +2151,8 @@ panel_create_tree_view (WPanel *panel)
 	GtkWidget *tree;
 
 	tree = gtk_dtree_new ();
-	gtk_ctree_set_line_style (GTK_CTREE (tree), GTK_CTREE_LINES_DOTTED);
-        gtk_ctree_set_expander_style (GTK_CTREE (tree), GTK_CTREE_EXPANDER_SQUARE);
+	/*gtk_ctree_set_line_style (GTK_CTREE (tree), GTK_CTREE_LINES_DOTTED);*/
+        /*gtk_ctree_set_expander_style (GTK_CTREE (tree), GTK_CTREE_EXPANDER_SQUARE);*/
         gtk_ctree_set_indent (GTK_CTREE (tree), 10);
 
 	/* DTree signals */
