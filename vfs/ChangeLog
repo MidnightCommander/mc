@@ -1,3 +1,8 @@
+Tue Aug 11 15:25:52 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+
+	* extfs/rpm: Fix for buggy "cut" on HP-UX 10.20 which ignores
+	lines without enf-of-line.
+
 1998-08-07  Timur Bakeyev (timur@comtat.ru)
 
 	* tar.c (read_header): Support for linkflag on BSDI tar (pax), it

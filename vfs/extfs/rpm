@@ -19,7 +19,7 @@ mcrpmfs_list ()
     fi
     FILEPREF="-r--r--r--   1 root     root    "
     DESC=`rpm -qip $1`
-    DATE=`rpm -qp --qf "%{BUILDTIME:date}" $1 | cut -c 5-11,21-24`
+    DATE=`rpm -qp --qf "%{BUILDTIME:date}\n" $1 | cut -c 5-11,21-24`
     HEADERSIZE=`echo "$DESC" | wc -c`
     echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
