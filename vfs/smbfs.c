@@ -2,9 +2,10 @@
    
    Copyright (C) 1995, 1996, 1997 The Free Software Foundation
 
-   Written by Wayne Roberts
-    <wroberts1@home.com>
-   
+   Written by Wayne Roberts <wroberts1@home.com>
+
+   $Id$
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -422,7 +423,18 @@ smbfs_init(vfs *me)
 static void
 smbfs_fill_names (vfs *me, void (*func)(char *))
 {
-	DEBUG(3, ("smbfs_fill_names()\n"));
+    int i;
+    char *path;
+    for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
+	if (smbfs_connections [i].cli) {
+	    path = g_strconcat (URL_HEADER,
+		smbfs_connections[i].host, 
+		"/", smbfs_connections[i].service,
+		NULL);
+	    (*func)(path);
+	    g_free (path);
+	}
+    }
 }
 
 #define CNV_LANG(s) dos_to_unix(s,False)
@@ -773,8 +785,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 	int servlen = strlen(smbfs_info->conn->service);
 	char *p;
 /*	int retries = 0;	*/
-	char *my_dirname = g_strdup(smbfs_info->dirname);
-	p = my_dirname;
+	char *my_dirname = smbfs_info->dirname;
 
 	DEBUG(3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
 	first_direntry = TRUE;
@@ -809,6 +820,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 		}
 		goto done;
 	}
+	p = my_dirname = g_strdup (my_dirname);
 	/* do regular directory listing */
 	if(strncmp(smbfs_info->conn->service, my_dirname+1, servlen) == 0) {
 		/* strip share name from dir */
@@ -821,20 +833,22 @@ smbfs_loaddir (opendir_info *smbfs_info)
 	DEBUG(6, ("smbfs_loaddir: cli->share: %s\n", smbfs_info->conn->cli->share));
 	DEBUG(6, ("smbfs_loaddir: calling cli_list with mask %s\n", my_dirname));
 	/* do file listing: cli_list returns number of files */
-    if (cli_list(
+	if (cli_list(
 		smbfs_info->conn->cli, my_dirname, attribute, loaddir_helper) < 0) {
 		/* cli_list returns -1 if directory empty or cannot read socket */
 		my_errno = cli_error(smbfs_info->conn->cli, NULL, &err, NULL);
+		g_free (p);
 		return 0;
 	}
-	if (strlen(my_dirname) == 0)
+	if (*(my_dirname) == 0)
 		smbfs_info->dirname = smbfs_info->conn->service;
-	g_free(p);
-/*    do_dskattr();	*/
+	g_free (p);
+/*	do_dskattr();	*/
 
 done:
 /*	current_info->parent = smbfs_info->dirname;	*/
-    smbfs_info->current = smbfs_info->entries;
+
+	smbfs_info->current = smbfs_info->entries;
 	return 1; /* 1 = ok */
 }
 
@@ -1575,7 +1589,7 @@ smbfs_chdir (vfs *me, char *path)
 }
 
 static int 
-loaddir(vfs *me, char *path)
+loaddir(vfs *me, const char *path)
 {
 	void *info;
 	char *mypath, *p;
@@ -1604,7 +1618,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	char *remote_dir;
 	smbfs_connection *sc;
 	pstring server_url;
-	char *service, *p, *mypath, *pp;
+	char *service, *p, *pp;
 
 	DEBUG(3, ("smbfs_stat(path:%s)\n", path));
 
@@ -1623,32 +1637,30 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	pstrcat(server_url, current_bucket->host);
 
 	/* check if stating server */
-	p = mypath = g_strdup(path);
+	p = path;
 	if (strncmp(p, URL_HEADER, HEADER_LEN)) {
 		DEBUG(1, ("'%s' doesnt start with '%s' (length %d)\n",
 			p, URL_HEADER, HEADER_LEN));
 		return -1;
-	} else
-		p += HEADER_LEN;
+	}
+
+	p += HEADER_LEN;
 	if (*p == '/')
 		p++;
 	if (!strchr(p, '/')) {
-		g_free(mypath);
 		if (!current_info->server_list) {
 			if (loaddir(me, path) < 0)
 				return -1;
 		}
 		return fake_server_stat(server_url, path, buf);
 	}
-	if (strlen(p) == 0)
-		DEBUG(1, ("zero length p, mypath:'%s'", mypath));
+	if (*(p) == 0)
+		DEBUG(1, ("zero length p, path:'%s'", path));
 	p = strchr(p, '/');	/* advance past next '/' */
 	p++;
 	if (!strchr(p, '/')) {
-		g_free(mypath);
 		return fake_share_stat(server_url, path, buf);
 	}
-	g_free(mypath);
 
 	/* stating inside share at this point */
     if (!(remote_dir = smbfs_get_path (&sc, path))) /* connects if necessary */

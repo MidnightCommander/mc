@@ -532,7 +532,7 @@ void sort_query_replies(char *data, int n, struct in_addr ip);
 
 /*The following definitions come from  libsmb/nterr.c  */
 
-char *get_nt_error_msg(uint32 nt_code);
+const char *get_nt_error_msg(uint32 nt_code);
 
 /*The following definitions come from  libsmb/passchange.c  */
 

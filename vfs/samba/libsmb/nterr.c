@@ -520,12 +520,9 @@ nt_err_code_struct const nt_errs[] =
 /*****************************************************************************
  returns an NT error message.  not amazingly helpful, but better than a number.
  *****************************************************************************/
-char *get_nt_error_msg(uint32 nt_code)
+const char *get_nt_error_msg(uint32 nt_code)
 {
-	static pstring msg;
 	int idx = 0;
-
-	pstrcpy(msg, "Unknown NT error");
 
         nt_code &= 0xFFFF;
 
@@ -533,11 +530,10 @@ char *get_nt_error_msg(uint32 nt_code)
 	{
 		if (nt_errs[idx].nt_errcode == nt_code)
 		{
-			pstrcpy(msg, nt_errs[idx].nt_errstr);
-			return msg;
+			return nt_errs[idx].nt_errstr;
 		}
 		idx++;
 	}
-	return msg;
+	return NULL;
 }
 
