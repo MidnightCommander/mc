@@ -1,3 +1,8 @@
+2002-07-30  Pavel Roskin  <proski@gnu.org>
+
+	* ext.c (regex_command): Additional check to prevent reading
+	unallocated memory when matching "shell/".  Found by Valgrind.
+
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
 	* setup.c: Eliminate all PORT* macros.

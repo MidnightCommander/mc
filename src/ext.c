@@ -472,9 +472,9 @@ file as an example of how to write it.\n\
 	            found = 1;
 	    } else if (!strncmp (p, "shell/", 6)) {
 	        p += 6;
-	        if (*p == '.') {
-	            if (!strncmp (p, filename + file_len - (q - p),
-	                q - p))
+	        if (*p == '.' && file_len >= (q - p)) {
+	            if (file_len >= (q - p) &&
+			 !strncmp (p, filename + file_len - (q - p), q - p))
 	                found = 1;
 	        } else {
 	            if (q - p == file_len && !strncmp (p, filename, q - p))
