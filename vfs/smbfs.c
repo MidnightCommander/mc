@@ -720,48 +720,38 @@ smbfs_free_dir (dir_entry *de)
 }
 #endif
 
-/* Explanation:
- * On some operating systems (Slowaris 2 for example)
- * the d_name member is just a char long (Nice trick that break everything,
- * so we need to set up some space for the filename.
- */
-static struct {
-    struct dirent dent;
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-    char extra_buffer [MC_MAXPATHLEN];
-#endif
-} smbfs_readdir_data;
-
 
 /* The readdir routine loads the complete directory */
 /* It's too slow to ask the server each time */
 /* It now also sends the complete lstat information for each file */
 static void *
-smbfs_readdir (void *info)
+smbfs_readdir(void *info)
 {
-    static char * const dirent_dest = &(smbfs_readdir_data.dent.d_name [0]);
-    opendir_info  *smbfs_info = (opendir_info *) info;
+    static union vfs_dirent smbfs_readdir_data;
+    static char *const dirent_dest = smbfs_readdir_data.dent.d_name;
+    opendir_info *smbfs_info = (opendir_info *) info;
 
     DEBUG(4, ("smbfs_readdir(%s)\n", smbfs_info->dirname));
-	
+
     if (!smbfs_info->entries)
-	    if (!smbfs_loaddir (smbfs_info))
-			return NULL;
+	if (!smbfs_loaddir(smbfs_info))
+	    return NULL;
 
     if (smbfs_info->current == 0) {	/* reached end of dir entries */
-		DEBUG(3, ("smbfs_readdir: smbfs_info->current = 0\n"));
+	DEBUG(3, ("smbfs_readdir: smbfs_info->current = 0\n"));
 #ifdef	SMBFS_FREE_DIR
-	    smbfs_free_dir (smbfs_info->entries);
-	    smbfs_info->entries = 0;
+	smbfs_free_dir(smbfs_info->entries);
+	smbfs_info->entries = 0;
 #endif
-	    return NULL;
+	return NULL;
     }
-    pstrcpy (dirent_dest, smbfs_info->current->text);
+    strncpy(dirent_dest, smbfs_info->current->text, MC_MAXPATHLEN);
+    dirent_dest[MC_MAXPATHLEN] = 0;
     smbfs_info->current = smbfs_info->current->next;
 
     compute_namelen(&smbfs_readdir_data.dent);
 
-    return &smbfs_readdir_data; 
+    return &smbfs_readdir_data;
 }
 
 static int

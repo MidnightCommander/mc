@@ -710,46 +710,38 @@ static void mcfs_free_dir (dir_entry *de)
     g_free (de);
 }
 
-/* Explanation:
- * On some operating systems (Slowaris 2 for example)
- * the d_name member is just a char long (Nice trick that break everything,
- * so we need to set up some space for the filename.
- */
-static struct {
-    struct dirent dent;
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-    char extra_buffer [MC_MAXPATHLEN];
-#endif
-} mcfs_readdir_data;
+static union vfs_dirent mcfs_readdir_data;
 
 /* The readdir routine loads the complete directory */
 /* It's too slow to ask the server each time */
 /* It now also sends the complete lstat information for each file */
 static struct stat *cached_lstat_info;
-static void *mcfs_readdir (void *info)
+
+static void *mcfs_readdir(void *info)
 {
-    opendir_info  *mcfs_info;
+    opendir_info *mcfs_info;
     char *dirent_dest;
 
     mcfs_info = (opendir_info *) info;
 
     if (!mcfs_info->entries)
-	if (!mcfs_loaddir (mcfs_info))
+	if (!mcfs_loaddir(mcfs_info))
 	    return NULL;
 
-    if (mcfs_info->current == 0){
+    if (mcfs_info->current == 0) {
 	cached_lstat_info = 0;
-	mcfs_free_dir (mcfs_info->entries);
+	mcfs_free_dir(mcfs_info->entries);
 	mcfs_info->entries = 0;
 	return NULL;
     }
-    dirent_dest = &(mcfs_readdir_data.dent.d_name [0]);
-    strcpy (dirent_dest, mcfs_info->current->text);
+    dirent_dest = mcfs_readdir_data.dent.d_name;
+    strncpy(dirent_dest, mcfs_info->current->text, MC_MAXPATHLEN);
+    dirent_dest[MC_MAXPATHLEN] = 0;
     cached_lstat_info = &mcfs_info->current->my_stat;
     mcfs_info->current = mcfs_info->current->next;
 
-    compute_namelen (&mcfs_readdir_data.dent);
-    
+    compute_namelen(&mcfs_readdir_data.dent);
+
     return &mcfs_readdir_data;
 }
 

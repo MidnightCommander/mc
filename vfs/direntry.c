@@ -613,29 +613,25 @@ vfs_s_opendir (vfs *me, char *dirname)
 }
 
 void *
-vfs_s_readdir (void *data)
+vfs_s_readdir(void *data)
 {
-    static struct {
-	struct dirent dir; 
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-	char extra_buffer [MC_MAXPATHLEN];
-#endif
-    } dir;
-
+    static union vfs_dirent dir;
     struct dirhandle *info = (struct dirhandle *) data;
 
     if (!(info->cur))
-    	return NULL;
+	return NULL;
 
-    if (info->cur->name)
-	strcpy (&(dir.dir.d_name [0]), info->cur->name);
-    else
-	vfs_die ("Null in structure-can not happen");
+    if (info->cur->name) {
+	strncpy(dir.dent.d_name, info->cur->name, MC_MAXPATHLEN);
+	dir.dent.d_name[MC_MAXPATHLEN] = 0;
+    } else {
+	vfs_die("Null in structure-can not happen");
+    }
 
-    compute_namelen(&dir.dir);
+    compute_namelen(&dir.dent);
     info->cur = info->cur->next;
-    
-    return (void *)&dir;
+
+    return (void *) &dir;
 }
 
 int

@@ -880,25 +880,21 @@ static void * s_opendir (vfs *me, char *dirname)
     return info;
 }
 
-static void * s_readdir (void *data)
+static void * s_readdir(void *data)
 {
     static union vfs_dirent dir;
-    int namelen;
-
     struct entry **info = (struct entry **) data;
 
     if (!*info)
-    	return NULL;
+	return NULL;
 
-    namelen = min (strlen ((*info)->name), MC_MAXPATHLEN);
+    strncpy(dir.dent.d_name, (*info)->name, MC_MAXPATHLEN);
+    dir.dent.d_name[MC_MAXPATHLEN] = 0;
 
-    strncpy (dir.dent.d_name, (*info)->name, namelen);
-    dir.dent.d_name[namelen] = 0;
-    
-    compute_namelen (&dir.dent);
+    compute_namelen(&dir.dent);
     *info = (*info)->next_in_dir;
-    
-    return (void *)&dir;
+
+    return (void *) &dir;
 }
 
 static int s_telldir (void *data)

@@ -319,41 +319,31 @@ quit_opendir:
     return 0;
 }
 
-/* Explanation:
- * On some operating systems (Slowaris 2 for example)
- * the d_name member is just a char long (Nice trick that break everything,
- * so we need to set up some space for the filename.
- */
-static struct {
-    struct dirent dent;
-#ifdef NEED_EXTRA_DIRENT_BUFFER
-    char extra_buffer [MC_MAXPATHLEN];
-#endif
-} undelfs_readdir_data;
 
 static void *
-undelfs_readdir (void *vfs_info)
+undelfs_readdir(void *vfs_info)
 {
+    static union vfs_dirent undelfs_readdir_data;
     char *dirent_dest;
-    
-    if (vfs_info != fs){
-	message_1s (1, undelfserr, _(" vfs_info is not fs! "));
+
+    if (vfs_info != fs) {
+	message_1s(1, undelfserr, _(" vfs_info is not fs! "));
 	return NULL;
     }
     if (readdir_ptr == num_delarray)
 	return NULL;
-    dirent_dest = (char *) &(undelfs_readdir_data.dent.d_name [0]);
+    dirent_dest = undelfs_readdir_data.dent.d_name;
     if (readdir_ptr < 0)
-	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%s", readdir_ptr == -2 ? "." : "..");
+	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%s",
+		   readdir_ptr == -2 ? "." : "..");
     else
 	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%ld:%d",
-		 (long)delarray [readdir_ptr].ino,
-		 delarray [readdir_ptr].num_blocks);
+		   (long) delarray[readdir_ptr].ino,
+		   delarray[readdir_ptr].num_blocks);
     readdir_ptr++;
-    
-#if 0
-    undelfs_readdir_data.dent.d_namlen = strlen (undelfs_readdir_data.dent.d_name);
-#endif
+
+    compute_namelen(&undelfs_readdir_data.dent);
+
     return &undelfs_readdir_data;
 }
 
