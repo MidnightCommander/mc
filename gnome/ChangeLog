@@ -1,5 +1,11 @@
 1998-12-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_new): Do not stat the file, as we
+	do not need that information anymore.
+	(setup_icon_dnd_source): Moved the DnD-as-source code to here.
+	(setup_icon_dnd_dest): New function to set up an icon as a DnD
+	destination.
+
 	* gdesktop.c (desktop_icon_info_place): Doh, do not place icons
 	past the edge of the *whole* screen :-)
 	(dnd_press_x dnd_press_y): New variables to store the cursor

@@ -66,7 +66,7 @@ struct layout_slot {
 
 int desktop_use_shaped_icons = TRUE;
 int desktop_auto_placement = FALSE;
-int desktop_snap_icons = TRUE;
+int desktop_snap_icons = FALSE;
 
 /* The computed name of the user's desktop directory */
 static char *desktop_directory;
@@ -85,21 +85,26 @@ static struct layout_slot *layout_slots;
 /* The last icon to be selected */
 static struct desktop_icon_info *last_selected_icon;
 
-/* Drag and drop sources and targets for the desktop */
+/* Drag and drop sources and targets */
 
-static GtkTargetEntry dnd_sources[] = {
+static GtkTargetEntry dnd_icon_sources[] = {
 	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST },
 	{ "text/plain", 0, TARGET_TEXT_PLAIN }
 };
 
-static GtkTargetEntry dnd_targets[] = {
+static GtkTargetEntry dnd_icon_targets[] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST }
+};
+
+static GtkTargetEntry dnd_desktop_targets[] = {
 	{ "application/mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST }
 };
 
-static int dnd_nsources = sizeof (dnd_sources) / sizeof (dnd_sources[0]);
-static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
+static int dnd_icon_nsources = sizeof (dnd_icon_sources) / sizeof (dnd_icon_sources[0]);
+static int dnd_icon_ntargets = sizeof (dnd_icon_targets) / sizeof (dnd_icon_targets[0]);
+static int dnd_desktop_ntargets = sizeof (dnd_desktop_targets) / sizeof (dnd_desktop_targets[0]);
 
 /* Proxy window for DnD on the root window */
 static GtkWidget *dnd_proxy_window;
@@ -819,6 +824,98 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 	}
 }
 
+/* Set up a desktop icon as a DnD source */
+static void
+setup_icon_dnd_source (struct desktop_icon_info *dii)
+{
+	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
+			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
+			     dnd_icon_sources,
+			     dnd_icon_nsources,
+			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
+
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
+			    (GtkSignalFunc) button_press,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_begin",
+			    (GtkSignalFunc) drag_begin,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_get",
+			    GTK_SIGNAL_FUNC (drag_data_get),
+			    dii);
+}
+
+static void
+icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
+			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
+{
+	struct desktop_icon_info *dii;
+	char *filename;
+	file_entry *fe;
+
+	printf ("Here!\n");
+
+	dii = user_data;
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+
+	fe = file_entry_from_file (filename);
+	if (!fe)
+		return; /* eek */
+
+	switch (info) {
+	case TARGET_URI_LIST:
+		if (fe->f.link_to_dir)
+			gdnd_drop_on_directory (context, data, desktop_directory);
+		else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
+			; /* FIXME: launch with the dropped files as arguments */
+		else
+			g_assert_not_reached ();
+
+		break;
+
+	default:
+		break;
+	}
+}
+
+/* Set up a desktop icon as a DnD destination */
+static void
+setup_icon_dnd_dest (struct desktop_icon_info *dii)
+{
+	char *filename;
+	file_entry *fe;
+	int actions;
+
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+	fe = file_entry_from_file (filename);
+	g_free (filename);
+
+	if (!fe)
+		return; /* eek */
+
+	if (fe->f.link_to_dir)
+		actions = GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK;
+	else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
+		actions = GDK_ACTION_COPY;
+	else
+		actions = 0;
+
+	file_entry_free (fe);
+
+	if (!actions)
+		return;
+
+	gtk_drag_dest_set (DESKTOP_ICON (dii->dicon)->canvas,
+			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
+			   dnd_icon_targets,
+			   dnd_icon_ntargets,
+			   actions);
+
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_received",
+			    GTK_SIGNAL_FUNC (icon_drag_data_received),
+			    dii);
+}
+
 /* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
  * If auto_pos is false, it will use the specified coordinates for the icon.  Else, it will use
  * auto- positioning trying to start at the specified coordinates.  It does not show the icon.
@@ -829,18 +926,10 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	struct desktop_icon_info *dii;
 	char *full_name;
 	char *icon_name;
-	struct stat s;
-
-	full_name = g_concat_dir_and_file (desktop_directory, filename);
-
-	if (mc_lstat (full_name, &s) != 0) {
-		g_warning ("Could not stat %s; will not use a desktop icon", full_name);
-		g_free (full_name);
-		return NULL;
-	}
 
 	/* Create the icon structure */
 
+	full_name = g_concat_dir_and_file (desktop_directory, filename);
 	icon_name = gmeta_get_icon_for_file (full_name);
 
 	dii = g_new (struct desktop_icon_info, 1);
@@ -878,23 +967,10 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 			    (GtkSignalFunc) editing_stopped,
 			    dii);
 
-	/* Connect the DnD signals */
+	/* Prepare the DnD functionality for this icon */
 
-	gtk_drag_source_set (DESKTOP_ICON (dii->dicon)->canvas,
-			     GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
-			     dnd_sources,
-			     dnd_nsources,
-			     GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
-
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
-			    (GtkSignalFunc) button_press,
-			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_begin",
-			    (GtkSignalFunc) drag_begin,
-			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "drag_data_get",
-			    GTK_SIGNAL_FUNC (drag_data_get),
-			    dii);
+	setup_icon_dnd_source (dii);
+	setup_icon_dnd_dest (dii);
 
 	/* Place the icon and append it to the list */
 
@@ -1129,8 +1205,8 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 
 /* Callback used when the root window receives a drop */
 static void
-drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
-		    GtkSelectionData *data, guint info, guint time, gpointer user_data)
+desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
+			    GtkSelectionData *data, guint info, guint time, gpointer user_data)
 {
 	int retval;
 	gint dx, dy;
@@ -1170,11 +1246,13 @@ setup_desktop_dnd (void)
 
 	gtk_drag_dest_set (dnd_proxy_window,
 			   GTK_DEST_DEFAULT_MOTION | GTK_DEST_DEFAULT_DROP,
-			   dnd_targets, dnd_ntargets,
+			   dnd_desktop_targets,
+			   dnd_desktop_ntargets,
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
 	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_data_received",
-			    GTK_SIGNAL_FUNC (drag_data_received), NULL);
+			    GTK_SIGNAL_FUNC (desktop_drag_data_received),
+			    NULL);
 }
 
 /**
