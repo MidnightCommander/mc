@@ -74,8 +74,13 @@ static int no_slang_delay;
 /* {{{  Copied from ../slang/slgetkey.c, removed the DEC_8Bit_HACK, */
 extern unsigned int SLang_Input_Buffer_Len;
 extern unsigned char SLang_Input_Buffer [];
+#if SLANG_VERSION >= 10000
+extern unsigned int _SLsys_getkey (void);
+extern int _SLsys_input_pending (int);
+#else
 extern unsigned int SLsys_getkey (void);
 extern int SLsys_input_pending (int);
+#endif
 
 static unsigned int SLang_getkey2 (void)
 {
@@ -92,7 +97,11 @@ static unsigned int SLang_getkey2 (void)
 		(char *) (SLang_Input_Buffer + 1), imax);
 	return(ch);
      }
-   else return(SLsys_getkey ());
+#if SLANG_VERSION >= 10000
+   else return(_SLsys_getkey ());
+#else
+   else return(SLsys_getkey());
+#endif
 }
 
 static int SLang_input_pending2 (int tsecs)
@@ -100,9 +109,11 @@ static int SLang_input_pending2 (int tsecs)
    int n;
    unsigned char c;
    if (SLang_Input_Buffer_Len) return (int) SLang_Input_Buffer_Len;
-   
+#if SLANG_VERSION >= 10000  
+   n = _SLsys_input_pending (tsecs);
+#else
    n = SLsys_input_pending (tsecs);
-   
+#endif
    if (n <= 0) return 0;
    
    c = (unsigned char) SLang_getkey2 ();

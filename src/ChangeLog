@@ -1,3 +1,14 @@
+Sun Apr 26 00:21:12 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* slint.c: Applied the patch from Bill Nottingham <wen1@cec.wustl.edu> 
+	to make it link against SLang >=1.0. 
+	I reviewed the diffs to the part of SLang we use and there are no 
+	further changes to MC necessary (one function's return value
+	changed it's meaning but we don't use this return value).
+
+	* configure.in: Undone the change which prevented linkage against
+	SLang >=1.0
+
 Sat Apr 25 13:41:43 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* edit.h, syntax.h: some optimisations to improve syntax
