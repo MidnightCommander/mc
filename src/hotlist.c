@@ -37,25 +37,19 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
-#include "win.h"
-#include "color.h"
+#include "tty.h"		/* COLS */
+#include "color.h"		/* dialog_colors */
 #include "dlg.h"
 #include "widget.h"
-#include "dialog.h"		/* For do_refresh() */
+#include "dialog.h"		/* do_refresh() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories hotlist */
-
-#include "../vfs/vfs.h"
-/* Needed for the extern declarations of integer parameters */
-#include "wtools.h"
-#include "dir.h"
-#include "panel.h"		/* Needed for the externs */
-#include "file.h"
-#include "main.h"
+#include "wtools.h"		/* QuickDialog */
+#include "panel.h"		/* cpanel */
+#include "main.h"		/* repaint_screen */
 #include "hotlist.h"
-#include "key.h"
-#include "command.h"
+#include "key.h"		/* ctrl_pressed */
+#include "command.h"		/* cmdline */
 
 #define UX		5
 #define UY		2

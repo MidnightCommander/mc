@@ -45,7 +45,6 @@
 #include "main.h"		/* For the confirm_* variables */
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
-#include "fileopctx.h"
 #include "background.h"
 
 #ifdef HAVE_CHARSET

@@ -46,7 +46,6 @@
 #include "key.h"	/* For mi_getch() */
 #include "tree.h"
 #include "cmd.h"
-#include "../vfs/vfs.h"
 
 extern int command_prompt;
 

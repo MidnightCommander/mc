@@ -41,7 +41,7 @@
 #include <signal.h>
 
 #include "global.h"
-#include "tty.h"
+#include "tty.h"		/* COLS */
 #include "win.h"
 #include "color.h"
 #include "key.h"
@@ -60,7 +60,6 @@
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "panel.h"		/* The Panel widget */
-#include "file.h"
 #include "cons.saver.h"
 #include "layout.h"
 #include "info.h"		/* The Info widget */

@@ -38,7 +38,6 @@
 /* Needed for the extern declarations of integer parameters */
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
-#include "file.h"
 #include "chmod.h"
 #include "main.h"
 #include "chown.h"

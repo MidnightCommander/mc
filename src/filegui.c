@@ -72,29 +72,20 @@
 #include <sys/stat.h>
 
 #include "global.h"
-#include "tty.h"
-#include "eregex.h"
-#include "setup.h"
-#include "dialog.h"
-/* Needed by query_replace */
-#include "color.h"
-#include "win.h"
-#include "dlg.h"
+#include "setup.h"		/* verbose */
+#include "dialog.h"		/* do_refresh */
+#include "color.h"		/* dialog_colors */
+#include "dlg.h"		/* B_ENTER */
+#include "background.h"		/* message_3s */
+#include "widget.h"		/* WLabel */
 #define WANT_WIDGETS
-#include "widget.h"		/* Note the sequence */
-#include "main.h"		/* WANT_WIDGETS-> we get the the_hint def */
-#include "layout.h"
-#include "wtools.h"
-
-/* Needed for current_panel, other_panel and WTree */
-#include "dir.h"
-#include "panel.h"
-#include "file.h"
+#include "main.h"		/* the_hint */
+#include "wtools.h"		/* QuickDialog */
+#include "panel.h"		/* cpanel */
+#include "file.h"		/* is_wildcarded */
 #include "filegui.h"
-#include "fileopctx.h"
-#include "tree.h"
-#include "key.h"
-#include "../vfs/vfs.h"
+#include "fileopctx.h"		/* FILE_CONT */
+#include "key.h"		/* get_event */
 
 /* }}} */
 

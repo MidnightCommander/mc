@@ -37,9 +37,8 @@
 #include "main.h"
 #include "profile.h"		/* For sync_profiles */
 
-#include "dir.h"
 #include "panel.h"		/* Needed for the externs */
-#include "file.h"
+#include "file.h"		/* safe_delete */
 #include "layout.h"		/* For nice_rotating_dash */
 #include "option.h"
 static Dlg_head *conf_dlg;

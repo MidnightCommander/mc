@@ -32,7 +32,7 @@
 /* Needed for the extern declarations of integer parameters */
 #define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "global.h"
-#include "tty.h"
+#include "tty.h"		/* attrset() */
 #include "win.h"
 #include "color.h"
 #include "dlg.h"
@@ -42,9 +42,8 @@
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */
 #include "dir.h"
-#include "panel.h"		/* Needed for the externs */
-#include "file.h"
-#include "main.h"
+#include "panel.h"		/* cpanel */
+#include "main.h"		/* repaint_screen */
 #include "panelize.h"
 
 #define UX		5

@@ -48,11 +48,9 @@
 #include "color.h"
 #include "dialog.h"
 #include "menu.h"
-#include "file.h"
 #include "panel.h"
 #include "main.h"
 #include "win.h"
-#include "user.h"
 #include "mouse.h"
 #include "option.h"
 #include "tree.h"
@@ -61,12 +59,12 @@
 #include "key.h"		/* For init_key() and mi_getch() */
 #include "setup.h"		/* save_setup() */
 #include "profile.h"		/* free_profiles() */
-#include "boxes.h"
+#include "boxes.h"		/* sort_box() */
 #include "layout.h"
 #include "cmd.h"		/* Normal commands */
 #include "hotlist.h"
 #include "panelize.h"
-#include "learn.h"
+#include "learn.h"		/* learn_keys() */
 #include "listmode.h"
 #include "background.h"
 #include "ext.h"		/* For flush_extension_file() */
@@ -83,8 +81,6 @@
 #ifdef NATIVE_WIN32
 #    include "drive.h"
 #endif
-
-#include "../vfs/vfs.h"
 
 #ifdef WITH_SMBFS
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */

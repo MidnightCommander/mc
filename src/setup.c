@@ -26,7 +26,7 @@
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
-#include "tree.h"
+#include "tree.h"		/* xtree_mode */
 #include "profile.h"
 #define WANT_WIDGETS
 #include "setup.h"
@@ -39,13 +39,12 @@
 #include "menu.h"		/* menubar_visible declaration */
 #include "win.h"		/* lookup_key */
 #include "cmd.h"
-#include "file.h"
+#include "file.h"		/* safe_delete */
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #endif
 
-#include "../vfs/vfs.h"
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
 #endif

@@ -39,11 +39,9 @@
 
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
-#include "file.h"
 #include "chmod.h"
 #include "main.h"
 #include "achown.h"
-#include "../vfs/vfs.h"
 
 #define BX		5
 #define BY		6
