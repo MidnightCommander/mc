@@ -825,7 +825,7 @@ history_get (char *input_name)
 	if (!*this_entry)
 	    break;
 
-	hist = g_list_append (hist, g_strdup (this_entry));
+	hist = list_append_unique (hist, g_strdup (this_entry));
     }
     g_free (profile);
 
