@@ -1,5 +1,8 @@
 2001-02-08  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Undo previous fix. Don't run "make clean" in
+	samba/ if samba/Makefile is missing.
+
 	* Make-mc.in: Don't run "make clean" in samba/ as samba/Makefile
 	may be missing. Clean using the rule from samba/Makefile.in.
 

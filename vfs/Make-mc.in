@@ -260,7 +260,9 @@ mostlyclean:
 
 clean: mostlyclean
 	(cd extfs; $(MAKE) clean)
-	(cd samba; rm -f core */*~ *~ */*.o */*.po */*.po32 */*.so bin/*)
+	if test -f samba/Makefile; then \
+	  (cd samba; make clean); \
+	else :;	fi
 	rm -f mcserv *.a
 
 distclean: clean
