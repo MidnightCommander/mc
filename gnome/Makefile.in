@@ -168,7 +168,7 @@ FileManager-impl.c: FileManager.h
 EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in	
 
 DISTGNOME = \
-	Makefile.in $(EXTRA_DIST) $(CORBA_SOURCES) \
+	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
 	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS)
 
 .c.o:
