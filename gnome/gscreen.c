@@ -909,8 +909,10 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 
 	path = gtk_dtree_get_row_path (dtree, node, 0);
 	fe = file_entry_from_file (path);
-	if (!fe)
+	if (!fe) {
+		g_free (path);
 		return; /* eeeek */
+	}
 
 	reload = gdnd_perform_drop (context, selection_data, path, fe);
 
@@ -1071,6 +1073,7 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 	GtkWidget *source_widget;
 	gint idx;
 	file_entry *fe;
+	char *full_name;
 
 	panel = data;
 
@@ -1101,13 +1104,18 @@ panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gin
 	else
 		fe = &panel->dir.list[idx];
 
+	full_name = fe ? g_concat_dir_and_file (panel->cwd, fe->fname) : panel->cwd;
+
 	action = gdnd_validate_action (context,
 				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
-				       panel->cwd,
+				       full_name,
 				       fe,
 				       fe ? fe->f.marked : FALSE);
+
+	if (full_name != panel->cwd)
+		g_free (full_name);
 
 	gdk_drag_status (context, action, time);
 
@@ -1202,6 +1210,7 @@ panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x,
 	GtkWidget *source_widget;
 	int idx;
 	file_entry *fe;
+	char *full_name;
 
 	panel = data;
 
@@ -1218,13 +1227,18 @@ panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x,
 	idx = gnome_icon_list_get_icon_at (GNOME_ICON_LIST (widget), x, y);
 	fe = (idx == -1) ? NULL : &panel->dir.list[idx];
 
+	full_name = fe ? g_concat_dir_and_file (panel->cwd, fe->fname) : panel->cwd;
+
 	action = gdnd_validate_action (context,
 				       FALSE,
 				       source_widget != NULL,
 				       source_widget == widget,
-				       panel->cwd,
+				       full_name,
 				       fe,
 				       fe ? fe->f.marked : FALSE);
+
+	if (full_name != panel->cwd)
+		g_free (full_name);
 
 	gdk_drag_status (context, action, time);
 	return TRUE;
@@ -1995,7 +2009,6 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 	GtkWidget *source_widget;
 	char *row_path;
 	int on_drag_row;
-	char *parent_dir, *p;
 
 	dtree = GTK_DTREE (widget);
 	panel = data;
@@ -2046,13 +2059,6 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 			panel->drag_tree_row = row;
 		}
 
-		/* Compute the parent directory of the file entry */
-
-		parent_dir = g_strdup (row_path);
-		p = strrchr (parent_dir, PATH_SEP);
-		g_assert (p != NULL);
-		p[1] = 0;
-
 		/* Validate the action */
 
 		gdnd_find_panel_by_drag_context (context, &source_widget);
@@ -2071,11 +2077,10 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *context, int x, int y
 					       FALSE,
 					       source_widget != NULL,
 					       source_widget == widget,
-					       parent_dir,
+					       row_path,
 					       panel->drag_tree_fe,
 					       on_drag_row);
 
-		g_free (parent_dir);
 		g_free (row_path);
 	} else {
 		panel->drag_tree_row = -1;

@@ -28,7 +28,7 @@ GdkAtom dnd_target_atoms[TARGET_NTARGETS];
 
 /**
  * gdnd_init:
- * 
+ *
  * Initializes the dnd_target_atoms array by interning the DnD target atom names.
  **/
 void
@@ -194,7 +194,7 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 			} else {
 				long count = 0;
 				double bytes = 0;
-					
+
 				if (S_ISDIR (s.st_mode)) {
 					if (action == GDK_ACTION_COPY)
 						copy_dir_dir (ctx,
@@ -301,41 +301,38 @@ drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
 /* Drop stuff on a non-directory file.  This uses metadata and MIME as well. */
 static int
 drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
-	      char *directory, file_entry *dest_fe)
+	      char *dest_full_name, file_entry *dest_fe)
 {
 	int size;
 	char *buf;
 	const char *mime_type;
-	char *full_name;
 	int retval;
 	GList *names, *l;
 	int len, i;
 	char **drops;
 
-
 	retval = FALSE; /* assume we cannot drop */
-	full_name = g_concat_dir_and_file (directory, dest_fe->fname);
 
 	/* Convert the data list into an array of strings */
-	
+
 	names = gnome_uri_list_extract_uris (selection_data->data);
 	len = g_list_length (names);
 	drops = g_new (char *, len + 1);
-	
+
 	for (l = names, i = 0; i < len; i++, l = l->next) {
 		char *text = l->data;
-		
+
 		if (strncmp (text, "file:", 5) == 0)
 			text += 5;
-		
+
 		drops[i] = text;
 	}
 	drops[i] = NULL;
 
 	/* 1. Try to use a metadata-based drop action */
 
-	if (gnome_metadata_get (full_name, "drop-action", &size, &buf) == 0) {
-		exec_extension (full_name, buf, drops, NULL, 0, 0);
+	if (gnome_metadata_get (dest_full_name, "drop-action", &size, &buf) == 0) {
+		exec_extension (dest_full_name, buf, drops, NULL, 0, 0);
 		g_free (buf);
 		retval = TRUE;
 		goto out;
@@ -343,13 +340,13 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 
 	/* 2. Try a drop action from the MIME-type */
 
-	mime_type = gnome_mime_type_or_default (full_name, NULL);
+	mime_type = gnome_mime_type_or_default (dest_full_name, NULL);
 	if (mime_type) {
 		const char *action;
 
 		action = gnome_mime_get_value (mime_type, "drop-action");
 		if (action) {
-			exec_extension (full_name, action, drops, NULL, 0, 0);
+			exec_extension (dest_full_name, action, drops, NULL, 0, 0);
 			retval = TRUE;
 			goto out;
 		}
@@ -357,13 +354,13 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 
 	/* 3. If executable, try metadata keys for "open" */
 
-	if (is_exe (dest_fe->buf.st_mode) && if_link_is_exe (directory, dest_fe)) {
+	if (is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_full_name, dest_fe)) {
 		/* FIXME: handle the case for Netscape URLs */
 
-		if (gnome_metadata_get (full_name, "open", &size, &buf) == 0)
-			exec_extension (full_name, buf, drops, NULL, 0, 0);
+		if (gnome_metadata_get (dest_full_name, "open", &size, &buf) == 0)
+			exec_extension (dest_full_name, buf, drops, NULL, 0, 0);
 		else
-			exec_extension (full_name, "%f %q", drops, NULL, 0, 0);
+			exec_extension (dest_full_name, "%f %q", drops, NULL, 0, 0);
 
 		g_free (buf);
 
@@ -374,19 +371,18 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
  out:
 	g_free (drops);
 	gnome_uri_list_free_strings (names);
-	g_free (full_name);
 	return retval;
 }
 
 int
 gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
-		   char *directory, file_entry *dest_fe)
+		   char *dest_full_name, file_entry *dest_fe)
 {
 	GdkDragAction action;
 
 	g_return_val_if_fail (context != NULL, FALSE);
 	g_return_val_if_fail (selection_data != NULL, FALSE);
-	g_return_val_if_fail (directory != NULL, FALSE);
+	g_return_val_if_fail (dest_full_name != NULL, FALSE);
 	g_return_val_if_fail (dest_fe != NULL, FALSE);
 
 	/* Get action */
@@ -399,18 +395,18 @@ gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
 		action = context->action;
 
 	if (S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir)
-		return drop_on_directory (context, selection_data, action, directory);
+		return drop_on_directory (context, selection_data, action, dest_full_name);
 	else
-		return drop_on_file (context, selection_data, directory, dest_fe);
+		return drop_on_file (context, selection_data, dest_full_name, dest_fe);
 }
 
 /**
  * gdnd_drag_context_has_target:
  * @context: The context to query for a target type
  * @type: The sought target type
- * 
+ *
  * Tests whether the specified drag context has a target of the specified type.
- * 
+ *
  * Return value: TRUE if the context has the specified target type, FALSE
  * otherwise.
  **/
@@ -432,10 +428,10 @@ gdnd_drag_context_has_target (GdkDragContext *context, TargetType type)
  * gdnd_find_panel_by_drag_context:
  * @context: The context by which to find a panel.
  * @source_widget: The source widget is returned here.
- * 
+ *
  * Looks in the list of panels for the one that corresponds to the specified
  * drag context.
- * 
+ *
  * Return value: The sought panel, or NULL if no panel corresponds to the
  * context.
  **/
@@ -477,22 +473,22 @@ gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **source_wid
  * @same_source: If same_process, then whether the source and dest widgets are the same.
  * @dest: The destination file entry, or NULL if dropping on empty space.
  * @dest_selected: If dest is non-NULL, whether it is selected or not.
- * 
+ *
  * Computes the final drag action based on the suggested action of the specified
  * context and conditions.
- * 
+ *
  * Return value: The computed action, meant to be passed to gdk_drag_action().
  **/
 GdkDragAction
 gdnd_validate_action (GdkDragContext *context,
 		      int on_desktop, int same_process, int same_source,
-		      char *directory, file_entry *dest_fe, int dest_selected)
+		      char *dest_full_name, file_entry *dest_fe, int dest_selected)
 {
 	int on_directory;
 	int on_exe;
 
 	g_return_val_if_fail (context != NULL, 0);
-	g_return_val_if_fail (directory != NULL, 0);
+	g_return_val_if_fail (dest_full_name != NULL, 0);
 
 	/* If we are dragging a desktop icon onto the desktop or onto a selected
 	 * desktop icon, unconditionally specify MOVE.
@@ -506,7 +502,7 @@ gdnd_validate_action (GdkDragContext *context,
 
 	if (dest_fe) {
 		on_directory = S_ISDIR (dest_fe->buf.st_mode) || dest_fe->f.link_to_dir;
-		on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (directory, dest_fe);
+		on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_full_name, dest_fe);
 	}
 
 	if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {

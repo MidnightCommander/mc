@@ -1,7 +1,19 @@
+1999-08-27  Federico Mena Quintero  <federico@redhat.com>
+
+	* ext.c (quote_block): How did this ever work?  People, if you
+	realloc() things, don't keep pointers to stuff inside the original
+	block.
+
+	* screen.c (do_enter_on_file_entry): Pass in the full name to
+	if_link_is_exe().
+
+	* dir.[ch] (if_link_is_exe): Take in the full name, not the directory
+	and the file entry.
+
 1999-08-15  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* cmd.c (guess_message_value): New function. Determine locale used
-	for messages 
+	for messages
 
 	(get_random_hint): use guess_message_value
 
@@ -18,12 +30,12 @@
 1999-08-08  David Martin <dmartina@usa.net>
 
 	* menu.c: (create_menu): Adjust "#ifdef ENABLE_NLS" so that menus
-	get the right size even when NLS is disabled. 	
+	get the right size even when NLS is disabled.
 
 1999-08-06  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* screen.c (string_file_[amc]time): These three functions use 
-	file_date which returns a pointer to a static buffer. In the 
+	* screen.c (string_file_[amc]time): These three functions use
+	file_date which returns a pointer to a static buffer. In the
 	Gnome edition this buffer has to be coppied to a static buffer
  	which isn't used in the other two functions (Fix Bug #1766).
 
@@ -58,9 +70,9 @@
 
 1999-08-01  David Martin <dmartina@usa.net>
 
-	* menu.c (create_menu, menubar_drop_compute, menubar_paint_idx): 
+	* menu.c (create_menu, menubar_drop_compute, menubar_paint_idx):
 	Discount '&' for hotkeys when checking menu widths to avoid the
-	extra blank space. 
+	extra blank space.
 	Moved this accounting from the drawing to the creating function.
 
 	* widget.c: Translate History box tittle.
@@ -102,7 +114,7 @@
 
 	* cmd.c (quick_view_cmd): Change panel when the file we want to
 	view isn't in the current panel (prevents a "file not found"
-	error). 
+	error).
 
 	* menu.c (menubar_execute): De-activate the menubar previous to
 	invoking the callback. This is needed to make change_panel in
@@ -110,7 +122,7 @@
 	i.e. dlg_one_down|up don't change anything).
 
 	* view.c (do_view_init): improved error handling w.r.t quick view
-	(mc used to dump core when the file to view couldn't be opened). 
+	(mc used to dump core when the file to view couldn't be opened).
 
 1999-06-22  David Martin <dmartina@usa.net>
 
@@ -119,11 +131,11 @@
 
 Fri Jun 18 11:29:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* user.c (user_menu_cmd): Allow national characters as hotkeys. 
+	* user.c (user_menu_cmd): Allow national characters as hotkeys.
 	Don't dump core when the menu file contains only empty lines
 
-	* view.c (search, block_search): Use the correct column for the 
-	percent display while searching. 
+	* view.c (search, block_search): Use the correct column for the
+	percent display while searching.
 
 1999-06-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -159,13 +171,13 @@ Fri Jun 18 11:29:56 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Mon May 17 07:37:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* subshell.c (pty_open_master): use getpt () if available to open
-	the master side of the pty. getpt () is a glibc extension and is 
+	the master side of the pty. getpt () is a glibc extension and is
 	needed when glibc 2.1.x is used with a (linux) kernel without unix98
-	style ptys (if there is no /dev/ptmx getpt falls back to bsd style 
+	style ptys (if there is no /dev/ptmx getpt falls back to bsd style
 	ptys).
 
-	* filegui.c (check_progress_buttons): Don't update the Gpm mouse 
-	cursor when we check for events. It causes a flickering cursor on a 
+	* filegui.c (check_progress_buttons): Don't update the Gpm mouse
+	cursor when we check for events. It causes a flickering cursor on a
 	different virtual console.
 
 1999-05-12  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
@@ -177,7 +189,7 @@ Mon May 17 07:37:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	Distribution maintainers please take this text as idea of what you
 	should do to make your system more secure.
-	
+
 1999-05-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cmd.c (view_file_at_line): gmc_view never fails, so we handle
@@ -216,7 +228,7 @@ Tue Apr 27 20:31:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	Changing the order of calls to mc_stat and mc_opendir fixes the
 	problem.
-	
+
 1999-03-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* setup.c (save_setup): Only save this if there is a current panel
@@ -234,11 +246,11 @@ Wed Apr 21 20:40:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Wed Apr 21 20:19:45 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* key.c (get_modifier): Query the state of the modifier keys when 
+	* key.c (get_modifier): Query the state of the modifier keys when
 	running inside a terminal emulation under X11.
 
 	* key.c (init_textmode_x11_support, done_textmode_x11_support): new
-	functions, only used in the text edition. Connect to and disconnect 
+	functions, only used in the text edition. Connect to and disconnect
 	from the X Server when DISPLAY is set.
 
 	* key.h: added prototypes for the new functions
@@ -248,7 +260,7 @@ Wed Apr 21 20:19:45 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Sat Apr 17 13:04:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* view.c (do_view_init): Enable viewing of files with negative
-	st_size (This reverts parts of a patch I commited recently. Miguel 
+	st_size (This reverts parts of a patch I commited recently. Miguel
 	provided a better fix for this issue).
 
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -301,11 +313,11 @@ Tue Apr 13 07:14:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slint.c (getch): Quit MC when SLang_getkey returns an error. Looking
 	at the code that's only the case when we read EOF from stdin.
-	
-	This fixes the problem where MC consumes a lot of cpu time while 
+
+	This fixes the problem where MC consumes a lot of cpu time while
 	reading EOF from stdin in a tight loop. This situation arises when the
 	terminal line/connection drops without MC being sent SIGHUP.
- 	
+
 Tue Apr 13 07:13:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slint.c (SLang_input_pending2): don't store SLANG_GETKEY_ERROR (int)
@@ -345,7 +357,7 @@ Tue Apr 13 07:13:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* info.c (text out of box and locale layout).
 
 	* util.c: If gmc uses strftime() why mc doesn't?
-	
+
 	* view.c: a) Tune status line so it does fit in a Quick View Panel
 	b) Let Hex View resize cleanly. I think it's fixed for panel
 	re-split and SIGWINCH signal in xterm. gmc still fails. There was
@@ -406,7 +418,7 @@ Tue Apr 13 07:13:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* util.c (is_printable): Character 155 is non printable even when 
+	* util.c (is_printable): Character 155 is non printable even when
 	full eight bit output is enabled (on the linux console 155 is
 	interpreted as "ESC [").
 
@@ -425,7 +437,7 @@ Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c (process_special_dirs): Free memory here.
-	
+
 	Fix test: Skip only "." and "..", before it could skip "?.".
 
 1999-03-22  David Martin <dmartina@mailexcite.com>
@@ -436,7 +448,7 @@ Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Mon Mar 22 02:05:28 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* screen.c (file_entry_color): Dropped. Code went to file_compute_color.
-	
+
 	* screen (format_file): Add check, that avoids reported error, when
 	long file list -> quick view -> brief file list gives core dump.
 
@@ -484,7 +496,7 @@ Thu Mar 18 16:09:09 1999  Timur Bakeyev  <mc@bat.ru>
 1999-03-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dlg.c (dlg_select_nth_widget): Handle the case where h->current
-	points to NULL.  
+	points to NULL.
 
 1999-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -549,7 +561,7 @@ Wed Mar 10 22:21:19 1999  David Martin <dmartina@usa.net>
 	can you see if this change is correct from your point of view?
 
 	* cmd.c (edit_symlink_cmd): Small fix to improve the messages
-	printed. 
+	printed.
 
 Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
@@ -557,7 +569,7 @@ Tue Mar  2 22:54:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Tue Mar  2 22:28:39 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* main.c (panel_clean_dir): New function: reset all counters of a 
+	* main.c (panel_clean_dir): New function: reset all counters of a
 	WPanel and clean directory list.
 
 	* various places: Use panel_clean_dir instead of clean_dir whenever
@@ -592,7 +604,7 @@ Mon Mar  1 00:18:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* treestore.c (process_special_dirs): New function.
 	(should_skip_directory): Load the settings from the global
-	special.dirs file and from the 
+	special.dirs file and from the
 
 	* util.c: Test for glibc/linux and if so, do not use getwd, but
 	getcwd as on this system it is better than popen ("pwd").
@@ -615,7 +627,7 @@ Mon Mar  1 00:18:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* treestore.c (tree_store_rescan): Add code to skip scanning
 	specially slow directories (/afs, /coda, /...).  It is of course,
-	configurable. 
+	configurable.
 
 	* setup.c: Export the profile_name setup routine.
 
@@ -635,13 +647,13 @@ Tue Feb 16 21:18:08 1999  David Martin <dmartina@usa.net>
 
 Sun Feb 14 02:59:09 1999  Timur Bakeyev  <mc@bat.ru>
 
-	* utilunix.c (my_system): Fix the order of preferenses, as setuid 
+	* utilunix.c (my_system): Fix the order of preferenses, as setuid
 	more desirable on BSD systems. Terminate execl[p]() with NULL, as
 	this is formally correct.
 
 1999-02-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* dir.c (do_load_dir): Added missing calls to tree_store_end_check. 
+	* dir.c (do_load_dir): Added missing calls to tree_store_end_check.
 
 	* find.c (add_to_list): Pass the data pointer as well.
 
@@ -668,7 +680,7 @@ Fri Feb 12 06:36:58 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* view.c (search): Provide GNOME specific code for the search progress
 
-	* treestore.c: Add a new hook system to hint a tree freeze/thaw. 
+	* treestore.c: Add a new hook system to hint a tree freeze/thaw.
 
 	* setup.c: In the GNOME version, we do not show the dot files by default.
 
@@ -707,12 +719,12 @@ Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* Makefile.in: Change calls to xmkdir to mkinstalldirs - this is more
 	GNU-like :)
-	
+
 	* xmkdir removed - we have mkinstalldirs.
 
 1999-02-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* cmd.c (view_other_cmd): Do not use \r in translatable strings. 
+	* cmd.c (view_other_cmd): Do not use \r in translatable strings.
 
 1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -737,20 +749,20 @@ Wed Feb  3 23:55:54 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Wed Feb  3 22:27:04 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* util.c (strip_password): Extented to find the url in the first 
+	* util.c (strip_password): Extented to find the url in the first
 	parameter. The second parameter tells whether it should search the
-	url (indicated by known prefixes) in the first parameter or whether 
-	the first parameter is a url without a prefix ("ftp://", "/#ftp:", 
+	url (indicated by known prefixes) in the first parameter or whether
+	the first parameter is a url without a prefix ("ftp://", "/#ftp:",
 	"/#mc:").
 
-	* main.c (directory_history_add): Strip the password (if any) from 
+	* main.c (directory_history_add): Strip the password (if any) from
 	the freshly added value.
 
 	* widget.c (push_history): ditto. There's a ugly special casing
 	necessary for the network and ftp link dialogs (urls are entered
 	with out prefix).
 
-	* widget.c (history_put): Restrict read and write access to the 
+	* widget.c (history_put): Restrict read and write access to the
 	history file to the owner (Just in case I forgot to strip passwords
 	somewhere).
 
@@ -761,7 +773,7 @@ Mon Feb  1 00:43:15 1999  Timur Bakeyev <mc@bat.ru>
 	got twins with _FIT suffix, which tries to fit name in the field with-
 	out truncation (uses name_trunc()). This unifies behaviour of CList
 	variants and text-bases widgets.
-	
+
 	* screen.c: Remove HAVE_GNOME wrappers around string_file_[name|owner|
 	group]() - not necessary, to_buffer() doing this work.
 
@@ -769,7 +781,7 @@ Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* hotlist.c (add_new_entry_input, add_new_group_input): Make the
 	quick_widget arrays static and various changes needed because they
-	are now static. add_widgets_i18n recalculates button positions 
+	are now static. add_widgets_i18n recalculates button positions
 	which get lost when the quick_widget arrays are non static.
 
 	* screen.c (to_buffer): nul terminate string when using strncpy
@@ -783,7 +795,7 @@ Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	only called once from file.c, and the global cmd_buf was being
 	passed in).
 	(panel_operate): Do not pass cmd_buf to
-	panel_operate_generate_prompt().  
+	panel_operate_generate_prompt().
 	Thanks to Alexander Savelyev <fano@vcom.kiev.ua> for noticing this.
 
 1999-01-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -801,23 +813,23 @@ Sun Jan 31 19:49:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 
 	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
-	g_strdup()/g_free() routings. Also, copy_strings() replaced by 
-	g_strconcat(), strcasecmp() -> g_strcasecmp(),and sprintf() by 
+	g_strdup()/g_free() routings. Also, copy_strings() replaced by
+	g_strconcat(), strcasecmp() -> g_strcasecmp(),and sprintf() by
 	g_snprintf().
-	
+
 	* Some sequences of malloc()/sprintf() changed to g_strdup_printf().
-	
+
 	* mad.[ch]: Modified, to work with new GLib's memory managment. Fixed
 	a missing #undef for tempnam, which caused dead loop. Add several new
 	functions to emulate GLib memory managment.
-	
+
 	*main.c, mad.[ch]: Add a new switch  "-M", which allows to redirect MAD
 	messages to the file.
-	
+
 	* util.[ch], utilunix.c: Modified, deleted our variants of strcasecmp()
 	and strdup() - we have g_ equivalences. Remove get_full_name() - it is
 	similar to concat_dir_and_file(). Some other tricks with g_* functions.
-	
+
 	* global.h: Modified, extended. Now it is main memory mangment include -
 	i.e. all inclusions of <stdlib.h>, <malloc.h>, <glib.h>, "fs.h", "mem.h",
 	"util.h" and "mad.h" done there. This elimanates problem with proper or-
@@ -830,7 +842,7 @@ Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 1999-01-25  Alexander Savelyev <fano@vcom.kiev.ua>
 
 	* ext.c (exec_extension): Always use /bin/sh.  Not the user
-	shell. 
+	shell.
 
 1999-01-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -841,7 +853,7 @@ Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 	additions to the treestore.
 
 	* tree.c (tree_destroy): Remove the callback hook when we go
-	away. 
+	away.
 
 1999-01-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -860,7 +872,7 @@ Wed Jan 27 03:17:44 1999  Timur Bakeyev <mc@bat.ru>
 
 Thu Jan 21 01:11:24 1999  Timur Bakeyev <mc@bat.ru>
 
-	* mad.[ch], util.[ch]: commit changes, that allow coexist (temporary) 
+	* mad.[ch], util.[ch]: commit changes, that allow coexist (temporary)
 	GLib'ed VFS and not still converted MC itself.
 
 1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
@@ -872,7 +884,7 @@ Tue Jan 19 05:28:04 1999  Timur Bakeyev <mc@bat.ru>
 
 	* ext.c, filenot.c, main.c, screen.c, treestore.c: add missed #include's
 	and moved glib.h so, it follows "fs.h", but preceed "util.h" and "mad.h".
-	There were conflicts during compilation with MAD and GLibed vfs. 
+	There were conflicts during compilation with MAD and GLibed vfs.
 
 Mon Jan 18 21:23:29 1999 Paul Sheer <psheer@obsidian.co.za>
 
@@ -979,7 +991,7 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 
 	Moved all of the tree store information into a new file:
 	treestore.  To be reused by the Gnome code.
-	
+
 1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
 
 	* popt.c: OS/2 and Windows NT portability fix.
@@ -1056,7 +1068,7 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 	disabling the repainting of the screen contents.
 
 	* hotlist.c (done_hotlist): The hotlist might not be loaded
-	anymore. 
+	anymore.
 
 1999-01-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1072,10 +1084,10 @@ Sun Jan 10 02:18:33 1999  Timur Bakeyev <mc@bat.ru>
 
 	* main.c (main): Removed old, unused code.
 	(setup_panels_and_run_mc): Register the corba server here, not
-	before, as the program is not ready to accept any commands yet. 
+	before, as the program is not ready to accept any commands yet.
 
 	* screen.c (panel_set_sort_order): New routine to set the sorting
-	mode.  
+	mode.
 	(panel_re_sort): New routine to force a resort on a panel.
 
 	* main.c (sort_cmd): Use the new routines.
@@ -1099,8 +1111,8 @@ Tue Dec 29 16:34:02 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	for OP_DELETE).
 
 	(panel_operate_flags): Don't compute panel totals for OP_MOVE.
-	When moving files on the same filesystem computing totals might 
-	last much longer than the actual move operation. 
+	When moving files on the same filesystem computing totals might
+	last much longer than the actual move operation.
 
 	(various places): adpations for the above changes.
 
@@ -1114,10 +1126,10 @@ Mon Dec 28 20:22:59 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* color.c, text.c: Added color "stalledlink" which is used for
 	stalled symbolic links. Formerly "viewunderline" was used for
 	this (IMO bad because function and name didn't match).
-	According to the man page the color keyword for executable files 
-	is `executable' and not `execute' -- changed. 
+	According to the man page the color keyword for executable files
+	is `executable' and not `execute' -- changed.
 
-	* color.c, color.h: When using SLang some color indexes are not 
+	* color.c, color.h: When using SLang some color indexes are not
 	freely choosable (DEFAULT_COLOR clashed with A_BOLD_REVERSE).
 	Solved by adding holes in color_map.
 
@@ -1125,7 +1137,7 @@ Mon Dec 28 20:22:59 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Sat Dec 26 09:53:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* layout.c: include sys/ioctl.h to get definition of TIOCGWINSZ 
+	* layout.c: include sys/ioctl.h to get definition of TIOCGWINSZ
 	(fixes problem with screen resize).
 
 Fri Dec 25 20:19:57 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -1164,15 +1176,15 @@ Thu Dec 24 18:42:52 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	selection and computes sizes only for marked directories. Possible
 	improvement: add a dialog (or C-C?) to abort computation.
 
-	* dir.h (file_entry), panel.h (WPanel): Made the dirsizes computed 
+	* dir.h (file_entry), panel.h (WPanel): Made the dirsizes computed
 	flag a per file flag.
 
-	* dir.c, find.c, panelize.c, screen.c: Adapted to new file_entry and 
+	* dir.c, find.c, panelize.c, screen.c: Adapted to new file_entry and
 	WPanel structure.
 
 	* features.inc: Deleted DUSUM information
 
-	* mc.hlp: remade because of changes in doc/mc.1.in	
+	* mc.hlp: remade because of changes in doc/mc.1.in
 
 1998-12-22  Jonathan Blandford  <jrb@redhat.com>
 
@@ -1189,7 +1201,7 @@ Mon Dec 21 22:39:35 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* main.c (handle_args): In the Gnome edition don't parse the
  	options a second time.
 
-	* boxes.c (configure_vfs), setup.c: Deleted obsolete options. 
+	* boxes.c (configure_vfs), setup.c: Deleted obsolete options.
 	tar.gz files are now always unzipped to a temporary file on disk.
 
 Mon Dec 21 14:28:55 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -1201,7 +1213,7 @@ Mon Dec 21 14:28:55 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	correct error message when you don't have permission to create a
 	directory.
 
-	* mountlist.c: Deleted function prototypes for strdup and strstr, 
+	* mountlist.c: Deleted function prototypes for strdup and strstr,
 	they might conflict with definitions in the system header files.
 
 Wed Dec 16 14:41:15 1998  Paul Sheer <psheer@obsidian.co.za>
@@ -1214,9 +1226,9 @@ Wed Dec 16 06:27:00 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* screen.c (Xtry_to_select): Don't select a similar file when
 	"name" can't be found in the panel (when deleting files the
 	selection jumpped from the deleted "file" to a directory which
-	started with the same character as "file", annoying). 
+	started with the same character as "file", annoying).
 	Strip known vfs suffixes from "name" before trying to select
-	(I think Timur made this suggestion a few months ago). Know the 
+	(I think Timur made this suggestion a few months ago). Know the
 	vfs is mature enough to do this.
 
 1998-12-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -1270,7 +1282,7 @@ Mon Nov 30 21:10:30 1998  Pavel Machek  <pavel@bug.ucw.cz>
 	outside of bounds.
 
 	* main.c: The bar2 is gone as well.
-	
+
 Tue Dec  8 19:19:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* cmd.c (dirsizes_cmd): Fixed possible buffer overflow
@@ -1305,20 +1317,20 @@ Tue Dec  8 19:19:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* cmd.c, tree.c: Updated to the new file.c api.
 
 	* file.c: (copy_file_file, copy_dir_dir, move_file_file,
-	move_dir_dir): Updated to work with the new updating stuff. 
+	move_dir_dir): Updated to work with the new updating stuff.
 
 	* setup.c: New configuration option to compute the totals to be
-	transfered. 
+	transfered.
 
 	* file.c (compute_dir_size, panel_compute_totals): New routines to
 	compute the total ammount of information that is going to be
-	transfered. 
+	transfered.
 
 1998-12-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* ext.h: GNOME edition uses a different set of .ext files. 
+	* ext.h: GNOME edition uses a different set of .ext files.
 
-	* lib/mc-gnome.ext.in: New file with GNOME-specific bindings. 
+	* lib/mc-gnome.ext.in: New file with GNOME-specific bindings.
 
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1331,11 +1343,11 @@ Tue Dec  8 19:19:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* main.c (main): Removed crufty init_sigfatal code.
 
 	* cmd.c (do_link): More slang dependecies are fixed for the X
-	ports. 
+	ports.
 
 	* keys.h (enum): Moved key definitions here.
 
-	* tty.h: MOve towards slang freedom for the GNOME port. 
+	* tty.h: MOve towards slang freedom for the GNOME port.
 
 1998-12-01  Jonathan Blandford  <jrb@redhat.com>
 
@@ -1361,7 +1373,7 @@ Wed Nov 25 22:16:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* dlg.c (dlg_try_hotkey): Removed unused declaration of input_event.
 	(dlg_key_event): Return 1 if handled the tab key.
 
-	* filegui.h: Added prototypes for file_progress_show_{source,target,deleting}().	
+	* filegui.h: Added prototypes for file_progress_show_{source,target,deleting}().
 
 Sun Nov 22 22:30:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
@@ -1371,7 +1383,7 @@ Sun Nov 22 22:30:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	(including cond.m4 from automake-1.3b).
 
 	Fixed OBJ_DIR handling.
-	
+
 Sun Nov 15 00:37:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* mad.c (mad_tempnam): needed wrapper for tempnam added
@@ -1382,7 +1394,7 @@ Sun Nov 15 00:37:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* filegui.c: New file.  We keep all of the user interface code for
 	the text edition in this file now.  This should be a per-GUI port
-	file. 
+	file.
 
 1998-11-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -1426,7 +1438,7 @@ Sun Oct 18 22:56:17 1998  Pavel Machek  <pavel@bug.ucw.cz>
  	we are doing behind his back
 
 	* view.c: fix indentation, fallback to read whole file if mmap fails.
-	
+
 1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* setup.c: #ifdef'ed out stuff in the menus that will get changed
@@ -1435,8 +1447,8 @@ Sun Oct 18 22:56:17 1998  Pavel Machek  <pavel@bug.ucw.cz>
 1998-10-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* layout.c (print_vfs_message): Use g_snprintf instead of
-	vnsprintf. 
-	
+	vnsprintf.
+
 
 1998-10-30  Sung-Hyun Nam  <namsh@lgic.co.kr>
 
@@ -1445,7 +1457,7 @@ Sun Oct 18 22:56:17 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 Mon Oct 26 00:31:53 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* configure.in, Make.common.in: Split CPPFLAGS into CPPFLAGS and 
+	* configure.in, Make.common.in: Split CPPFLAGS into CPPFLAGS and
 	MCCPPFLAGS. The last one contains references to variables which are
 	not available in every Makefile.in (namely intl/Makefile.in). Without
 	the split `-I ' was passed to the compiler (the compiler on DU 4.0
@@ -1479,7 +1491,7 @@ Fri Oct 16 12:10:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 Mon Oct 12 22:47:53 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* file.c (copy_file_file): MCCTL_SETREMOTECOPY is no longer used
-	
+
 	* file.c (copy_file_file): do_reget is now correctly done using
  	open()/lseek() pair
 
@@ -1489,8 +1501,8 @@ Wed Oct  7 22:20:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 Sun Oct 11 20:21:20 1998  Peter Kleiweg <kleiweg@let.rug.nl>
 
-	* mfmt.c (main): When there are an even number of empty lines 
-	between messages, all goes well, but when the number of empty 
+	* mfmt.c (main): When there are an even number of empty lines
+	between messages, all goes well, but when the number of empty
 	lines between messages is odd, the program fails.
 
 Sun Oct 11 20:11:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -1506,15 +1518,15 @@ Mon Oct  5 21:33:14 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 Mon Oct  5 19:59:56 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (translate_url_to_new_syntax): Translate ftp:// to an
-	absolute path instead of a relative path (fix to "hotlist" bug 
-	reported by Andrej). This means we drop the "return to last dir" 
+	absolute path instead of a relative path (fix to "hotlist" bug
+	reported by Andrej). This means we drop the "return to last dir"
 	feature for ftpfs (when leaving ftpfs with ".." returns to the
 	directory visited before entering the ftpfs).
 
 Sat Oct  3 00:54:23 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* gtkedit/Makefile.in (EDITOBJS): removed one wrong \\ (line 
-	continuation) 
+	* gtkedit/Makefile.in (EDITOBJS): removed one wrong \\ (line
+	continuation)
 
 Thu Oct  1 18:43:34 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -1546,7 +1558,7 @@ Mon Sep 28 21:55:13 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* find.c: Changed hotkey of the continue-button (both Chdir and
 	Continue used `C').
 
-	* Makefile.in: search config.status in builddir and not in rootdir, 
+	* Makefile.in: search config.status in builddir and not in rootdir,
 	i.e. make it compile for builddir != srcdir
 
 Wed Sep 23 14:06:44 1998  Pavel Machek <pavel@atrey.karlin.mff.cuni.cz>
@@ -1582,8 +1594,8 @@ Tue Sep 15 21:52:00 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Tue Sep 15 20:51:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* setup.c: save and restore new global variable/option 
-	ftp_use_unix_list_options	
+	* setup.c: save and restore new global variable/option
+	ftp_use_unix_list_options
 
 Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
 
@@ -1602,13 +1614,13 @@ Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
         deleted files.
 
 Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
-	
-	* screen.c: Xtry_to_select() Remove extfs hack to the main.c. Change 
+
+	* screen.c: Xtry_to_select() Remove extfs hack to the main.c. Change
 	for() cycle to the x_basename() call (Thanks to Pavel Roskin).
 	Add (key_callback) do_enter() to prevent warnings.
-	
+
 	* main.c: Rename cd_try_to_select() to the get_parent_dir_name(). Now
-	it process VFS postfixes too. Reduced number of loops against prev hack. 
+	it process VFS postfixes too. Reduced number of loops against prev hack.
 
 Fri Sep 11 15:27:59 1998  Pavel Machek <pavel@ucw.cz>
 
@@ -1663,11 +1675,11 @@ Fri Jul 31 09:04:35 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* main.c (translated_mc_chdir): Quick hack to make the old
 	url-like pathnames to be used on the command line.
-	
+
 1998-06-22  T.E.Dickey <dickey@clark.net>
 
 	* keyxdef.c: Fix for compiling with ncurses.
-	
+
 Fri Jul 24 00:44:37 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* mc-local.m4 (AC_STRUCT_LINGER): Moved into macros/linger.m4.
@@ -1703,12 +1715,12 @@ Wed Jul 15 00:41:01 1998    Paul Sheer  <psheer@obsidian.co.za>
  	'gnome_init'.
 
 Wed Jun 18   Pavel Machek  <pavel@ucw.cz>
-	
+
 	* i18n.h: we do not want i18n in case of compiling standalone
 	libvfs.so.
 
 Fri Jun  5 23:34:20 1998  Timur I. Bakeyev <timur@comtat.kazan.ru>
-	
+
 	* screen.c (file_entry_color): take care about BSD core dumps
 	which have names program.core instead of core
 
@@ -1719,13 +1731,13 @@ Mon Jun  1 15:41:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	(_do_panel_cd): First translate the path if necessary. This makes
 	it possible to enter ftp://host on the commandline and in the
-	directory hotlist. We might need to move the translation code 
-	to the vfs layer if there are other places where we want to enter 
+	directory hotlist. We might need to move the translation code
+	to the vfs layer if there are other places where we want to enter
 	ftp://host.
 
 Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov <lav@yars.free.net>
 
-	* configure.in: allowed to use `configure --with-included-gettext' 
+	* configure.in: allowed to use `configure --with-included-gettext'
 	on systems (like solaris) that have their own libintl
 
 1998-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -1753,18 +1765,18 @@ Sun May 31 10:23:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
 Fri May 29 15:41:19 1998  Alexander V. Lukyanov <lav@yars.free.net>
 
 	* widget.c (update_input): this patch allows entering 8-bit
-	characters in input fields without screwing attributes. (the 
+	characters in input fields without screwing attributes. (the
 	same old sign extension...)
 
 Wed May 27 22:23:48 1998  Ed Cogburn <ecogburn@greene.xtn.net>
-	
-	* lib/xterm.ti: The 'xterm-color' definition needs 'sgr0'. The tic 
-	program from ncurses 4.2 doesn't like the xterm.ti file that comes 
+
+	* lib/xterm.ti: The 'xterm-color' definition needs 'sgr0'. The tic
+	program from ncurses 4.2 doesn't like the xterm.ti file that comes
 	with mc.
 
 Wed May 27 15:29:01 1998  Alexander V. Lukyanov <lav@yars.free.net>
 
-	* key.c (get_key_code): characters with high bit set were input 
+	* key.c (get_key_code): characters with high bit set were input
 	as 0x80 char when use_8th_bit_as_meta was set
 
 1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -1775,7 +1787,7 @@ Wed May 27 15:29:01 1998  Alexander V. Lukyanov <lav@yars.free.net>
 
 Mon May 25 23:32:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* editdraw.c (print_to_widget): Ifdef'd SLang specific code in order 
+	* editdraw.c (print_to_widget): Ifdef'd SLang specific code in order
 	to make it compile with ncurses. Syntax highlighting in the
 	internal editor is already disabled when SLang isn't used.
 
@@ -1790,17 +1802,17 @@ Sun May 24 02:45:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Sat May 23 22:29:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* file.c (check_dir_is_empty): New function which takes a path and 
+	* file.c (check_dir_is_empty): New function which takes a path and
 	returns -1 on error, 1 if there are no entries besides "." and
 	".."  in the directory path points to, 0 else. This function
 	actually opens and reads the directory and doesn't do tricks we
 	used to do with rmdir.
-	
+
 	* file.c (erase_dir, erase_dir_iff_empty): Use check_dir_is_empty
-	to detect non empty directories. The old code tried to remove the 
+	to detect non empty directories. The old code tried to remove the
 	directory and decided on errno whether the failure of rmdir was
 	caused by a non empty directory or whether there was a different
-	error. 
+	error.
 	Unfortunatly not every filesystem sets errno to EDIRNOTEMPTY if
 	you try to delete a non empty directory. Namely the linux user
 	space nfs server sets errno to EIO, Suns nfs server sets it to
@@ -1817,7 +1829,7 @@ Sat May 23 22:29:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	not GNU tar: doesn't know '-z'); support for '*.tar.F':
 	'freeze'-compressed tar files [No automatic configure/install
 	implemented: patches must be applied before running 'configure'
-	(mc.ext.in.qnx.diff: this patch can be not only QNX-specific...)] 
+	(mc.ext.in.qnx.diff: this patch can be not only QNX-specific...)]
 
 	* lib/Makefile.in: 'mc.ext.in.qnx.diff' and 'mc.menu.qnx.diff' added
 	to DISTLIB.
@@ -1930,7 +1942,7 @@ Sat May 23 22:29:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* <mc-root>/Makefile.in: README.QNX added to DISTMAIN.
 
 Thu May 21 00:09:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
-	
+
 	* menu.c (menubar_event): Don't set menubar->selected to the
 	invalid value -1. Fix for the bug reported by root@liepa.soften.ktu.lt
 
@@ -1940,7 +1952,7 @@ Thu May 21 00:09:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
 Wed May 20 16:27:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* widget.c (history_put): input line history was defunct because
-	there was an #ifndef where an #ifdef should be. 
+	there was an #ifndef where an #ifdef should be.
 	Btw. PORT_WIDGET_WANTS_HISTORY seems incomplete because a lot of
 	history code is included even when this define is undefined.
 
@@ -1952,7 +1964,7 @@ Wed May 20 16:27:56 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-19  Alexander Lukyanov <lav@yars.free.net>
 
 	* Makefile.in: Distirbution fix so that people are not forced to
-	install gettext. 
+	install gettext.
 
 1998-05-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1977,7 +1989,7 @@ Mon May 18 22:24:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* color.c (init_colors): Provide X-only version of color
-	initialization. 
+	initialization.
 
 Thu May 14 01:56:11 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
@@ -2000,14 +2012,14 @@ Tue May 12 17:45:49 1998  <psheer@obsidian.co.za>
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* setup.c (panel_load_setup): On non-icon editions, fall back to
-	list_full 
+	list_full
 
 Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* widget.c (handle_char): Don't try to to delete default text in
 	input widget more than once. Right after MC's start copy_filename
 	(ESC Enter) failed because a flag wasn't cleared while characters
-	were stuffed into the commandline (Andrej reported this bug). 
+	were stuffed into the commandline (Andrej reported this bug).
 
 	* main.c (copy_readlink): usr mc_readlink instead of readlink
 
@@ -2016,15 +2028,15 @@ Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	change in setup.c).
 
 	(copy_dir_dir): Activated the previously uncommented code which
-	implements "Dive into subdirs". Even when there's no case where we 
-	actually would like that behaviour it is a documented feature. 
-	Though I don't wanted to change the default behavour. Hence the 
+	implements "Dive into subdirs". Even when there's no case where we
+	actually would like that behaviour it is a documented feature.
+	Though I don't wanted to change the default behavour. Hence the
 	option change.
-	
+
 	(file_mask_defaults): set dive_into_subdirs
 
-	(file_mask_dialog): Fix for debian Bug #20727: Move operation with 
-	"[ ] Dive into subdir if exists" and destination filename not 
+	(file_mask_dialog): Fix for debian Bug #20727: Move operation with
+	"[ ] Dive into subdir if exists" and destination filename not
 	wildcarded. If destination is an existing directory then files
 	will be moved into this directory. If destination is not an
 	existing directory then src file will be renamed (one file
@@ -2032,8 +2044,8 @@ Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	selected).
 
 	(file_mask_dialog): made the option "Using shell patterns" local
-	to the current copy/move operation, i.e. this option is always 
-	initialized with the global options's value. Previously it affected 
+	to the current copy/move operation, i.e. this option is always
+	initialized with the global options's value. Previously it affected
 	the global Options/Configuration/shell Patterns.
 	Another possiblilty would be to make the global option a default
 	option on startup and keep changes in the copy/move dialog
@@ -2042,8 +2054,8 @@ Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* setup.c: Don't save and load options which can be changed
 	outside the options menu. For example I don't like that
 	preserve_uid_gid and dive_into_subdirs from the copy/move dialog
-	are saved and restored (strange, what about the other options from 
-	this dialog?). 
+	are saved and restored (strange, what about the other options from
+	this dialog?).
 	It would be much cleaner to make these option read-only. This way
 	one could edit ~/.mc/ini to provide default option setting on
 	startup and "Save setup" wouldn't have side effects outside the
@@ -2051,20 +2063,20 @@ Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Sun May 10 13:24:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* doc/mc.1.in, doc/mc.sgml, mc.hlp: Updated to reflect new default 
+	* doc/mc.1.in, doc/mc.sgml, mc.hlp: Updated to reflect new default
 	for dive into subdirs.
 
 Sun May 10 13:21:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* edit/syntax.c: Disable debug messages on stderr.
-	
+
 	* edit/edit.h: Added missing _()
 
 1998-05-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* layout.c (flag_winch): Propagate the window change to the slave
 	pty even when not running our event loop.  The resize_subshell
-	routine is thread safe. 
+	routine is thread safe.
 
 	* dlg.c (update_cursor, dlg_broadcast_msg_to): Do not send
 	messages if no widgets are on the Dlg_head, this happens now with
@@ -2080,9 +2092,9 @@ Wed May  6 13:46:37 1998 Paul Sheer  <psheer@obsidian.co.za>
 
 	* main.c (ctl_x_cmd): Implement ctl-x handling as a state of the
 	key press events.  Drop the usage of mi_getch to acomplish this
-	task. 
+	task.
 	(midnight_callback): Deal with the current map depending on the
-	c-x state. 
+	c-x state.
 
 Mon May  4 10:21:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
@@ -2090,7 +2102,7 @@ Mon May  4 10:21:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	passed to message_1s; fixed small memory leak
 
 	* widget.c (button_callback): WIDGET_CURSOR: make cursor position
-	dependend from button type (fixes the off by one bug in advanced 
+	dependend from button type (fixes the off by one bug in advanced
 	changeown).
 
 	* file.c (copy_file_file): Schedule deletion of short target file
@@ -2100,7 +2112,7 @@ Mon May  4 10:21:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-05-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* boxes.c (task_cb): Use kill, not INT, as we are catching INT in
-	the program. 
+	the program.
 
 Sat May  2 14:07:05 1998 Paul Sheer  <psheer@obsidian.co.za>
 
@@ -2132,23 +2144,23 @@ Thu Apr 30 12:23:50 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	window size is now controlled by preprocessor symbol RESIZABLE_MENUBAR
 	(now it's off by default, as requested in mailing list). If it is off,
 	menubar items are separated with fixed number of spaces (3).
-	
+
 	* src/layout.c, edit/editwidget.c: calls to menubar_arrange ifdef'ed
 
 
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (parse_an_arg): GNOME edition keeps track of various
-	--geometry and various directories passed. 
+	--geometry and various directories passed.
 
 1998-04-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (update_panels): Great API simplification.  update_panels
 	only cares about the contents of the current panel, every other
 	panel keeps the current selection (this was the behaviour
-	anyways). 
+	anyways).
 
-	update_panels can be provided in a per-port fashion as well. 
+	update_panels can be provided in a per-port fashion as well.
 
 Wed Apr 29 03:06:09 1998  Paul Sheer  <psheer@obsidian.co.za>
 
@@ -2161,7 +2173,7 @@ Tue Apr 28 06:11:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* view.c (toggle_wrap_mode, toggle_hex_mode): Force recalculation
 	of bottom_first (we mustn't use an already calculated and cached
-	value because it is invalid for the new mode and the End key would 
+	value because it is invalid for the new mode and the End key would
 	not move to the end of the file).
 
 	* configure.in: Renamed the option `--with-our-slang' to
@@ -2175,21 +2187,21 @@ Tue Apr 28 06:11:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	view_simple_cmd got broken when the default magic flag in view.c
 	was changed from 0 to 1.
 
-	* view.c (do_view_init, goto_line): Set wrap mode temporary off 
-	to make goto line number work, i.e. `line number' now always means 
+	* view.c (do_view_init, goto_line): Set wrap mode temporary off
+	to make goto line number work, i.e. `line number' now always means
 	line number in file and not line number on screen (in wrap mode
 	one long line wrapped once is displayed in two lines on the screen).
 	That's important when the viewer is invoked from the find file
 	dialog to display even in wrap mode approxiamtly the part of the
 	file where we found the content we searched for.
- 	
+
 	(move_forward2): In wrap mode lines were sometimes counted wrong
 	causing cursor up to move more than one line.
-	
+
 	(move_backward2): Fixed the movement in wrap mode.
-	
+
 	(change_viewer): Always re-init viewer when we have a filename,
-	i. e. if the viewer is invoked with simple_view_cmd then we can switch 
+	i. e. if the viewer is invoked with simple_view_cmd then we can switch
 	with the F8 key between unprocessed file content und uncompressed
 	file content.
 	(view_init): re-init view also when magic flag was altered
@@ -2205,9 +2217,9 @@ Tue Apr 28 06:11:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Sun Apr 26 00:21:12 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* slint.c: Applied the patch from Bill Nottingham <wen1@cec.wustl.edu> 
-	to make it link against SLang >=1.0. 
-	I reviewed the diffs to the part of SLang we use and there are no 
+	* slint.c: Applied the patch from Bill Nottingham <wen1@cec.wustl.edu>
+	to make it link against SLang >=1.0.
+	I reviewed the diffs to the part of SLang we use and there are no
 	further changes to MC necessary (one function's return value
 	changed it's meaning but we don't use this return value).
 
@@ -2221,7 +2233,7 @@ Sat Apr 25 13:41:43 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 1998-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* color.h: Move the CTYPE definition 
+	* color.h: Move the CTYPE definition
 
 Fri Apr 24 16:43:25 1998  Paul Sheer  <psheer@obsidian.co.za>
 
@@ -2268,7 +2280,7 @@ Fri Apr 24 14:54:06 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* configure.in: Don't try to link MC against SLang >= 1.0. I will 
+	* configure.in: Don't try to link MC against SLang >= 1.0. I will
 	remove this restriction when I'm sure that it's save to use the new
 	version (the documentation to SLang mentions some changes of
 	return values).
@@ -2278,7 +2290,7 @@ Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* file.h: Added prototype for copy_dir_dir.
 
 	* file.c (real_do_file_error): use the proper flags, this is not a
-	D_INSERT dialog box, for what it is worth.  Important bug fix.  
+	D_INSERT dialog box, for what it is worth.  Important bug fix.
 
 	* utilunix.c (get_owner): Declare.
 
@@ -2300,20 +2312,20 @@ Mon Apr 20 01:32:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* panelize.c (l_call): Update the input line every time the user
 	selects the entry with the mouse (pretty common in the gnome
-	edition). 
+	edition).
 
 	* hotlist.c (add_new_group_input): Removed an extra field that was
-	causing problems. 
+	causing problems.
 
 	* find.c (find_parameters): Tree button is gone for gnome until we
-	get the tree function working on gnome. 
+	get the tree function working on gnome.
 
 	* cmd.c (save_setup_cmd): Per Elliot's suggestion, do not pop up a
 	dialog box to inform the user about the saved setup.
 
 1998-04-15  Pavel Machek <pavel@elf.ucw.cz>
 
-	* cmd.c: Report failed chdir attempts. 
+	* cmd.c: Report failed chdir attempts.
 
 Wed Apr 15 10:48:41 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
@@ -2333,7 +2345,7 @@ Wed Apr 15 10:48:41 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* find.c (do_search): Do not use undefined order of evaluation.
 
-	* user.c: Do not use undefined order of evaluation. 
+	* user.c: Do not use undefined order of evaluation.
 
 	* dlg.c (init_dlg): Do init the default return value.
 
@@ -2349,7 +2361,7 @@ Sun Apr 12 02:48:26 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 Sun Apr 12 02:24:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* text.c (edition_post_exec), cmd.c (view_other_cmd): Don't change 
+	* text.c (edition_post_exec), cmd.c (view_other_cmd): Don't change
 	the keypad mode when we don't use the alternate plus minus. Pavel
 	forgot an if-clause when he replaced the escape sequences (or
 	another point of view: I forgot one if-clause at different place).
@@ -2378,7 +2390,7 @@ Fri Apr 10 10:35:06 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* main.c (main): Sigh.  This was hard. I added support for argp.
 	Right now we support both argp for the GNOME edition and popt for
 	the other editions.  I will remove popt support in the future and
-	only keep argp. 
+	only keep argp.
 
 	* dlg.c (add_widgetl): Adding widgets to an already running dialog
 	had some flaws.  Fix this.
@@ -2389,22 +2401,22 @@ Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* src/widget.c: new function introduced, button_scan_hotkey();
 	button_new() and button_set_text() fixed to use mentioned function.
-	
-	* src/key.[ch], src/dlg.c: changes to make recognition of ESC char as 
+
+	* src/key.[ch], src/dlg.c: changes to make recognition of ESC char as
 	ALT(c) possible for 8-bit chars. (By replacing 'A'/'Z' comparisons with
 	call to isalpha() in the way proposed by Norbert).
 
 	* src/boxes.c: changes to display box i18n
-	
+
 	* src/learn.c: changes to learn key dialog i18n
 
 1998-04-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* main.c (update_one_panel_widget): New routine: Updates a panel
-	based on the widget, not the index.  Used by the GUI versions. 
+	based on the widget, not the index.  Used by the GUI versions.
 
 	* find.c (find_file): Cancel idle tasks before we destroy the find
-	dialog. 
+	dialog.
 
 	* dlg.c (destroy_dlg): Call x_destroy_dlg_start, a new hook that
 	is invoked to allow the frontend code to prepare for dialog
@@ -2415,7 +2427,7 @@ Wed Apr  8 11:15:29 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 1998-04-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* wtools.c (quick_callback): Process DLG_KEY events on X. 
+	* wtools.c (quick_callback): Process DLG_KEY events on X.
 
 	* utilunix.c (max_open_files): new routine;  Used to figure out
 	the number of available file descriptors.
@@ -2425,13 +2437,13 @@ Sat Apr  4 00:16:49 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	* src/layout.c: changes to layout dialog box i18n
 
 	* src/option.c: changes to configure box i18n
-	
+
 	* src/cmd.c: added N_() macro for machine_str
-	
+
 	* src/wtools.c (real_input_dialog_help): ok/cancel buttons are places
 	symmetrically spaced relatively to center of the box. It produces
 	nicer appearance with i18n (IMO :)
-	
+
 	* src/boxes.c (confirm_box): i18n stuff added.
 
 Mon Apr  6 07:48:22 1998  Pavel Roskin <pavel_roskin@geocities.com>
@@ -2442,44 +2454,44 @@ Fri Apr  3 05:23:20 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* configure.in: ALL_LINGUAS test added, to allow specify list
 	of languages to be installed by setting env variable before
-	configure. If it is empty, it defaults to full list.    
+	configure. If it is empty, it defaults to full list.
 
 	* src/menu.h menu_entry.{hot_pos, is_dupped} dropped
-	
-	* src/menu.c: consistency fixes: pull-down menu items are now 
-	accessible either with arrow keys or with hotkeys, denoted with & 
+
+	* src/menu.c: consistency fixes: pull-down menu items are now
+	accessible either with arrow keys or with hotkeys, denoted with &
 	(and highlighted). (key combinations, placed to the right of items
 	intended to be used from outside the menus). Freeing menu entries
 	removed as it no longer needed
-	
+
 	* src/main.c, edit/editmenu.c: menubar init code is changed to conform
 	above fixes.
-	
-	* edit/edit.h: use of "Cancel" in error_dialogs replaced with 
+
+	* edit/edit.h: use of "Cancel" in error_dialogs replaced with
 	"Dismiss", to avoid collisions in translation of "Cancel" in other
 	places with this case.
-	
+
 	* src/boxes.c: select_format() and it's support removed, as it is
 	obsoleted by input line history feature. display_init()/display_callback
 	fixed to suite i18n changes. sort_box() - alike.
-	
+
 	* src/option.c: pause_options added &'s and gettext calls to expand
 	statically assigned values.
 
 	* src/widget.c: (radio_callback) hotkey recognition is changed to
 	&-notation, rather than simple uppercase.
-	
+
 	* src/dlg.c: (dlg_try_hotkey) plain symbol comparison replaced with
 	call to isalpha(), this fixes errorneous exit from input line, when
 	button hotkey is 8-bit NLS char.
 
 Fri Apr  3 12:23:28 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* TODO: Removed obsolete entries: Similar entries in tree view 
-	are displayed correct; user specific files has been moved 
+	* TODO: Removed obsolete entries: Similar entries in tree view
+	are displayed correct; user specific files has been moved
 	to ~/.mc/
-	Added: Check what to do with menubar_arrange/destroy_menu stubs 
-	in tk/tkmenu.c; the interal editor (not portet yet) adds entries 
+	Added: Check what to do with menubar_arrange/destroy_menu stubs
+	in tk/tkmenu.c; the interal editor (not portet yet) adds entries
 	to the wrong menubar
 
 Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
@@ -2490,7 +2502,7 @@ Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* main.c (main): Use the two new functions from key.c
 
 	* main.c, screen.c: Moved all file selection keys from the default
-	keymap to the keymap for panels in listing mode. 
+	keymap to the keymap for panels in listing mode.
 	Changed *_selection_cmd to *_selection_cmd_panel in panel_keymap
 	(functions in panel_keymap get a WPanel * as first parameter,
 	i.e. the indirection with cpanel isn't necessary).
@@ -2507,11 +2519,11 @@ Wed Apr  1 00:15:30 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* learn.c (learn_keys): Turn alternate_plus_minus temporarily on
 	to avoid translation of KP_ADD, KP_SUBTRACT and KP_MULTIPLY in
-	correct_key_code/make sure keypad is in application mode (makes it 
+	correct_key_code/make sure keypad is in application mode (makes it
 	possible to learn this keys).
 
 	* cmd.c (reverse_selection_cmd_panel): New function (renamed from
-	reverse_selection_cmd, takes a WPanel * as parameter, references to 
+	reverse_selection_cmd, takes a WPanel * as parameter, references to
 	cpanel changed to panel/the passed parameter).
 	reverse_selection_cmd now simply calls this function with cpanel.
 	This pair was missing among the *_selection_cmd* functions.
@@ -2536,15 +2548,15 @@ Sun Mar 29 23:02:09 1998 Alex Tkachenko <alex@bcs.zp.ua>
 	* src/menu.[ch]: new member to menu_entry (hot_pos) introduced to make
 	internationalized version of menu use externally defined hotkeys
 	(denoted with preceding &). create_menu() fixed to load intl text of
-	the entries. Some fixes around menu.c to enable usage of reloaded 
+	the entries. Some fixes around menu.c to enable usage of reloaded
 	hotkeys.
-	
+
 	* main.c, editmenu.c: menu initialization code fixed to conform new
 	menu structure. editmenu init code includes N_(..) now.
-	
+
 	* menu.c, layout.c, editwidget.c: bar menu items displacement is made
 	dynamically upon initialization and window size changes. Mouse event
-	processing is fixed accordingly. 
+	processing is fixed accordingly.
 
 Sat Mar 28 13:18:36 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
@@ -2571,7 +2583,7 @@ Wed Mar 25 19:05:31 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* view.c (view_done): Set monitor off before deleting the view
 	file dialog.
 
-	* subshell.c (init_subshell): Added ':q' to $cwd in the precmd for 
+	* subshell.c (init_subshell): Added ':q' to $cwd in the precmd for
 	tcsh. It preventes command and filename substitution (e.g. for
 	a directory named "[word] words")
 
@@ -2584,7 +2596,7 @@ Mon Mar 23 18:06:10 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* All over the src/ directory: Internationalization changes.
 
 	* background.c: Avoid buffer over-runs and reduce number of
-	internationalization strings. 
+	internationalization strings.
 
 Mon Mar 23 14:04:07 1998  Philippe De Muyter  <phdm@macqel.be>
 
@@ -2596,15 +2608,15 @@ Mon Mar 23 08:17:55 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* src/main.c: mcedit can be named mce or mcedit.exe - only
 	3 first letters are significant. The same for mcview.
 	Console is always saved in do_execute() if it was saved there.
-	
+
 	* src/util.h: STRNOMP introduced (strncmp on unix and strnicmp
 	on OS2_NT)
-	
+
 	* slang/slgetkey.c: SLang_getkey() and SLang_input_pending()
 	enabled for OS2_NT
-	
+
 	* myslang.h: using fast one_vline() and one_hline() for OS2_NT
-	
+
 Mon Mar 23 00:47:51 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* autogen.sh: added support for builddir != srcdir
@@ -2625,17 +2637,17 @@ Fri Mar 20 17:51:01 1998  Norbert Warmuth  <k3190@fh-sw.de>
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c: Remove KEY_DC forever.  This should have never been
-	here. 
+	here.
 
 Wed Mar 18 22:08:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* achown.c (do_enter_key): call endgrent, endpwent.
-	
+
 	* chown.c (init_chown): call endgrent, endpwent.
 
 Tue Mar 17 23:58:40 1998  Pavel Machek <pavel@elf.ucw.cz>
 
-	* src/file.c: Fix for the case where the disk gets full. 
+	* src/file.c: Fix for the case where the disk gets full.
 
 Tue Mar 16 18:35:53 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 
@@ -2653,7 +2665,7 @@ Sat Feb 21 16:46:49 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* src/subshell.c: failed to grantpt on SVR4 due to zero-initialized
 	subshell_pid. sigaction handler for SIGCHLD does waitpid(subshell_pid,
-	...) and when subshell_pid == 0 it steals the zombie from grantpt(3) 
+	...) and when subshell_pid == 0 it steals the zombie from grantpt(3)
 	which does fork/exec/waitpid for suid program to set the permissions on
 	pty. It's enough to initialize it to 1 or -2.
 
@@ -2679,10 +2691,10 @@ Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* util.c: DO not test for arguments that do not make sense under
 	Windows NT.
 
-	* file.c: utime.h always included for Windows NT port. 
+	* file.c: utime.h always included for Windows NT port.
 
-	* view.c: Events are flushed only if the ports supports it. 
-	
+	* view.c: Events are flushed only if the ports supports it.
+
 Mon Mar 16 12:30:39 1998  Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* hotlist.c: Defaults on the hotlist add-current and new-entry is
@@ -2704,7 +2716,7 @@ Fri Mar 13 18:10:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	WInput + the history patches from Paul.  Use the GNOME-entry
 	history, as this makes it easier to deal with the filter button on
 	the panel.
-	
+
 	* setup.c (save_panel_types): Do not use if running on the gnome
 	edition.   This need a lot of fixing for making this work with
 	gnome and session management.
@@ -2713,18 +2725,18 @@ Fri Mar 13 18:10:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	create_panels in gnome edition does all this.
 
 	(setup_mc):  Skip part of the setup.
-	
+
 	(do_execute): Do not Execute any of the pause code after
 	run for gnome.
-	
+
 Wed Mar 12 17:46:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* screen.c (chdir_other_panel, chdir_to_readlink): Use passed
 	panel instead of cpanel (removed mixed use of panel and cpanel).
 
-	* main.c, screen.c: Deleted F13 from the default keymap, added F13 
+	* main.c, screen.c: Deleted F13 from the default keymap, added F13
 	and F14 to the panel's keymap (the keymap for panels in listing
-	mode). These two keys are only useful for panels in listing mode. 
+	mode). These two keys are only useful for panels in listing mode.
 	It seems there are even more candidates for such a move. Especially
 	select_cmd and unselect_cmd which appeared recently for the GNOME
 	edition in screen.c act unexpected for panels in tree-mode.
@@ -2748,23 +2760,23 @@ Wed Mar 11 19:02:48 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	view_add_character, view_add_string, view_gotoyx, view_set_color,
 	view_display_clean.  Now all of them take a WView argument (which
 	is ignored in the macro for the text edition).  This is to support
-	multiple open views at once. 
+	multiple open views at once.
 
 	* boxes.c (symlink_dialog): Enable ok/cancel buttons for the Gnome edition.
 
 	* cmd.c (link_cmd, symlink_cmd): Provide the filename to operate
-	on. 
+	on.
 
 Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cmd.c (unselect_cmd_panel, select_cmd_panel): To avoid races on
 	the X11 version, these routines now take a panel argument at
-	invocation time. 
+	invocation time.
 
 	* widget.c (radio_callback): Call x_radio_focus for FOCUS/UNFOCUS
-	events. 
+	events.
 	(button_callback): Fallback to default_msg on WIDGET_FOCUS
-	messages. 
+	messages.
 
 1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -2797,16 +2809,16 @@ Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel_roskin@geocities.com>
         2 arguments
 
         * vfs/tcputil,c, vfs/utilvfs.c: signal.h was includes twice.
-	
+
         * vfs/Makefile.in: undelfs.h is not used and should disapper
-	
+
         * slang/slos2tty.c: new file, copied from SLang-0.99.38,
         needed for OS/2 port
-	
+
         * slang/Makefile.in: added slos2tty.c
-	
+
         * vfs/extfs/README: annoying spell errors corrected
-	
+
         * src/main.c: --termcap disabled for OS2_NT because it doesn't
         (and cannot) work. ARCH_FLAGS is not needed anymore.
 
@@ -2821,12 +2833,12 @@ Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 Fri Mar  6 19:29:54 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* find.c: Simplify header files: use the fs.h include file. 
+	* find.c: Simplify header files: use the fs.h include file.
 
 	(use x_flush_events).
-	
+
 	* screen.c (string_file_name): In GNOME, the CList widget does the
-	filename truncation, so we do not do it here. 
+	filename truncation, so we do not do it here.
 
 	(panel_new): Initialize all of the wpanel contents to zero.  This
 	will is required by the GNOME X ports (to figure out if a field
@@ -2851,7 +2863,7 @@ Wed Mar  4 14:49:55 1998  Norbert Warmuth <k3190@fh-sw.de>
 	* Makefile.in: renamed all references of mc.1 to mc.1.in
 
 	* find.c (locate_egrep): Don't use an absolute path if egrep isn't
-	found at the usual places. Then execvp will search the directories 
+	found at the usual places. Then execvp will search the directories
 	passed in the environment PATH variable (a little bit slower but
 	better than a defunct find content).
 
@@ -2861,40 +2873,40 @@ Wed Mar  4 14:49:55 1998  Norbert Warmuth <k3190@fh-sw.de>
 Tue Mar  3 20:00:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c (get_file): Take a panel argument.  I am pretty sure that
-	this is broken for the case where we are copying from a WTree. 
+	this is broken for the case where we are copying from a WTree.
 
 	(panel_operate): take a panel argument instead of defaulting to
-	cpanel.  
+	cpanel.
 
 Mon Mar  2 15:54:55 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* dlg.c (create_dlg): Set running to 0 on creation;  
+	* dlg.c (create_dlg): Set running to 0 on creation;
 	(add_widgetl): do widget initialization if the dialog is already
-	running when this dialog box is created. 
+	running when this dialog box is created.
 
 Mon Mar  2 12:11:37 1998  Norbert Warmuth <k3190@fh-sw.de>
 
-	* vfs/ftpfs.c (changetype): Removed the hack which always forced 
+	* vfs/ftpfs.c (changetype): Removed the hack which always forced
 	sending the command "TYPE I" when changing to binary transfer mode
-	was requested even when MC thought the connection was already in 
-	binary mode (bucket->isbinary == 1). The correct fix is now in 
+	was requested even when MC thought the connection was already in
+	binary mode (bucket->isbinary == 1). The correct fix is now in
 	login_server.
 
 	* vfs/ftpfs.c (login_server): Set the transfer mode stored in
 	the bucket to UNKNOWN (the bucket might be reused and the old
-	transfer mode isn't valid any longer). 
+	transfer mode isn't valid any longer).
 
 	* screen.c (panel_key): Cleanup: deleted if-clause with -1 (EV_NONE)
-	which isn't delivered to widgets by the dialog manager; always 
-	return 1 when key was handled; removed the function keys from the 
-	panel's keymap (the function keys are always handled by the 
-	buttonbar); don't eat characters below ' ' (C-l and Shift-F3 now 
-	work even when quick search was started); characters between 32 and 
-	255 start quick search if there is no commandline (no C-s necessary 
+	which isn't delivered to widgets by the dialog manager; always
+	return 1 when key was handled; removed the function keys from the
+	panel's keymap (the function keys are always handled by the
+	buttonbar); don't eat characters below ' ' (C-l and Shift-F3 now
+	work even when quick search was started); characters between 32 and
+	255 start quick search if there is no commandline (no C-s necessary
 	to start search).
 
 	* tree.c (tree_key): likewise
-	
+
 Tue Feb 24 18:37:36 1998  Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* subshell.c: Set subshell_pid to 1 on startup
@@ -2907,10 +2919,10 @@ Fri Feb 13 19:59:39 1998  Alexander Savelyev <fano@VCom.kiev.ua>
 	(imho).
 
 	(ftpfs_connection_close): Do not use WAIT_REPLY, closes
-	connections faster. 
+	connections faster.
 
-	(open_data_connection): implement the reget command. 
-	
+	(open_data_connection): implement the reget command.
+
 	* boxes.c: bigger VFS dialog box.
 
 	* file.c (init_replace): Add support for copying files only if the
@@ -2927,7 +2939,7 @@ Wed Feb 11 20:08:50 1998  Norbert Warmuth <k3190@fh-sw.de>
 Fri Jan 30 16:43:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dlg.c (create_dlg): Now we pass the flags parameter to the
-	create_dialog routine. 
+	create_dialog routine.
 
 	* tkmain.c (xtoolkit_create_dialog): Check for the grided value
 
@@ -2945,7 +2957,7 @@ Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel_roskin@geocities.com>
         system. Obsolete #ifdef's removed.
 
         * edit/editwidget.c: ansi standard violation removed
-	
+
         * nt/Makefile.NT: default SLang directory is now ../slang. Most
         of SLang sources are no more compiled for MC.
 
@@ -2970,13 +2982,13 @@ Fri Jan 23 07:19:18 1998  Pavel Roskin <pavel_roskin@geocities.com>
         is defined
 
         * nt/Makefile.NT: text.c is added
-        
+
 	* nt/Makefile.VC4: "-debug" switch for linker is not used for
         release version
 
         * src/screen.c (show_dir): double lines are no more used by NT and
         OS/2 ports.
-	
+
         * src/wtools.c (real_input_dialog_help): layout of input dialog for
         XView port is corrected
 
@@ -2995,20 +3007,20 @@ Wed Jan 21 14:01:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 Wed Jan 21 11:58:39 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
 
 	* ftpfs.c (retrieve_dir): Avoid compiler warning by testing
-	explicitly the value. 
-	
+	explicitly the value.
+
         screen.c (format_file): color not initialized when we met
         empty_line.
 
 Wed Jan 21 11:28:21 1998  Alex Tkachenko  <alex@bcs.zp.ua>
 
 	* cmd.c, utilunix.c: cosmetic changes to reduce compiler warnings
-	
+
 	* utilunix.c (my_system): small fix for SCO zombies moved here;
 	now it returns WEXITSTATUS(status) instead of status itself. While
 	missing it may not hurt on i.e., linux, on SCO it gives incorrect
 	value.
-	
+
 	* vfs/extfs.c system() calls replaced with my_system() call; this
 	allows a greater degree of control - fixes SCO system() return value
 	processing. Notice: plain replacement system() with WEXITSTATUS(system)
@@ -3033,19 +3045,19 @@ Sun Jan 18 13:47:37 1998  Sung-Hyun Nam <namsh@lgic.co.kr>
 Fri Jan 16 16:19:59 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* screen.c (format_file): Do not invoke the file_compute_color
-	routine for empty lines. 
+	routine for empty lines.
 
 	* gmain.c: Color scheme for Gnome
 
 	* gscreen.c: Color setup now allocated the GdkColor *.
-	
+
 	* color.c: Moved the default color setting to a per-port
 	location (text.c for the text mode edition);  new color
 	configuration: core;  Fixed the case where the color spec was
-	buggy and we kept on a infinite loop; 
+	buggy and we kept on a infinite loop;
 
 Fri Jan 16 13:47:13 1998  Pavel Roskin <pavel_roskin@geocities.com>
-	
+
 	* nt/drive.nt.c, nt/chmod.nt.c: Updated button_new and check_new
 	calls
 

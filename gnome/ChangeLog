@@ -1,3 +1,23 @@
+1999-08-26  Federico Mena Quintero  <federico@redhat.com>
+
+	* gscreen.c (panel_clist_drag_motion): Pass the full name to
+	gdnd_validate_action().
+	(panel_icon_list_drag_motion): Likewise.
+	(panel_tree_drag_motion): Likewise.
+
+	* gdnd.c (gdnd_perform_drop): Renamed the "directory" argument to
+	"dest_full_name" for clarity.
+	(gdnd_validate_action): Likewise.  Pass in the full name to
+	if_link_is_exe().
+	(drop_on_file): Do not compute the full name, since we are already
+	get it from the caller.
+	(drop_on_file): Pass in the full name to if_link_is_exe().
+
+	* gscreen.c (panel_tree_drag_data_received): Free the pathname.
+
+	* gdesktop.c (icon_drag_data_received): Pass the full name of the
+	file to gdnd_perform_drop(), not just the desktop directory.
+
 1999-08-23  Federico Mena Quintero  <federico@redhat.com>
 
 	* gdesktop-prefs.[ch]: New files that handle the desktop

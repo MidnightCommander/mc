@@ -2044,7 +2044,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 			return;
 		}
 
-		if (gdnd_perform_drop (context, data, desktop_directory, fe))
+		if (gdnd_perform_drop (context, data, full_name, fe))
 			desktop_reload_icons (FALSE, 0, 0);
 
 		file_entry_free (fe);
