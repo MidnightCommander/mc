@@ -2790,7 +2790,7 @@ init_corba_with_args (int *argc, char **argv, poptContext *ctx)
 
 #ifndef HAVE_CORBA
 void
-corba_create_window (const char *startup_dir)
+corba_create_window (char *startup_dir)
 {
 	/* nothing */
 }
