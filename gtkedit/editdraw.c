@@ -41,8 +41,26 @@ void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
     int i;
 #endif
     char t[160];		/* 160 just to be sure */
-/* The field lengths just prevents the status line from shortening to much */
-sprintf (t,"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %c %d %xH",
+    char byte_str[16];
+
+    /*
+     * If we are at the end of file, print <EOF>,
+     * otherwise print the current character as is (if printable),
+     * as decimal and as hex.
+     */
+    if (edit->curs1 < edit->last_byte) {
+	char cur_byte = edit_get_byte (edit, edit->curs1);
+	snprintf(byte_str, sizeof(byte_str), "%c %3d %2xH",
+		 isprint(cur_byte) ? cur_byte : '.',
+		 cur_byte,
+		 cur_byte);
+    } else {
+	strcpy(byte_str, "<EOF>");
+    }
+
+    /* The field lengths just prevent the status line from shortening to much */
+    snprintf (t, sizeof(t),
+	"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %s",
 	edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
 	edit->modified ? 'M' : '-',
         edit->macro_i < 0 ? '-' : 'R',
@@ -56,11 +74,7 @@ sprintf (t,"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %c %d %xH",
         
         edit->curs1,
 	edit->last_byte, 
-        
-        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : '?',
-        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : -1,
-        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : -1
-        );
+	byte_str);
 #ifdef MIDNIGHT
     sprintf (s, "%.*s", w + 1, t);
     i = strlen (s);
