@@ -19,6 +19,10 @@ case `echo $1 |sed 's/^.*\.//'` in
     # http://astyle.sourceforge.net/
         astyle --style=java --mode=java "$2"
     ;;
+    htm|html|HTM|HTML)
+    # http://www.w3.org/People/Raggett/tidy/
+        tidy -q -m -ascii -wrap 80 "$2"
+    ;;
     *)
     #ftp://alpha.gnu.org/gnu/fetish/textutils-2.0.tar.gz
         fmt "$2" >"$2.tmp" && rm -f "$2" && mv -f "$2.tmp" "$2"

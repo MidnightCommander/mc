@@ -1,5 +1,8 @@
 2002-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* lib/edit.indent.rc: Use tidy to format HTML.
+	From David Martin <dmartina@excite.com>
+
 	* lib/cedit.menu: Remove all references to the error file.
 	* lib/edit.indent.rc: Likewise.
 	* lib/edit.spell.rc: Likewise.
