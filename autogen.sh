@@ -7,6 +7,7 @@
 : ${AUTOMAKE=automake}
 : ${ACLOCAL=aclocal}
 : ${GETTEXTIZE=gettextize}
+: ${AUTOPOINT=autopoint}
 
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
@@ -30,37 +31,11 @@ fi
 
 rm -rf intl
 if test $gettext_ver -ge 01100; then
-  $GETTEXTIZE --copy --force --intl --no-changelog >tmpout || exit 1
-  if test -e Makefile.am~; then
-     rm -rf Makefile.am
-     mv Makefile.am~ Makefile.am
+  if test $gettext_ver -lt 01105; then
+    echo "Upgrage gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
+    exit 1
   fi
-  if test -e configure.in~ ; then
-    rm -rf configure.in
-    mv configure.in~ configure.in
-  fi
-  for i in po/Rules-quot po/boldquot.sed po/en@boldquot.header \
-	   po/en@quot.header po/insert-header.sin po/quot.sed \
-	   po/remove-potcdate.sin po/Makefile.in.in
-  do
-    if diff -s $i $i~ >/dev/null 2>&1 ; then
-      mv $i~ $i
-    fi
-  done
-  # Does we need po/Makevars.in and family for gettext 0.11 ?
-  if test ! -e po/Makevars; then
-    cat > po/Makevars <<\EOF
-# Usually the message domain is the same as the package name.
-DOMAIN = $(PACKAGE)
-
-# These two variables depend on the location of this directory.
-subdir = po
-top_builddir = ../config
-
-# These options get passed to xgettext.
-XGETTEXT_OPTIONS = --keyword=_ --keyword=N_
-EOF
-  fi
+  $AUTOPOINT || exit 1
 else
   $GETTEXTIZE --copy --force >tmpout || exit 1
   if test -e po/ChangeLog~; then
