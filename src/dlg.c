@@ -48,13 +48,10 @@ Dlg_head *current_dlg = 0;
 /* A hook list for idle events */
 Hook *idle_hook = 0;
 
-#ifndef PORT_HAS_SET_IDLE
-#    define x_set_idle(d,x)
-#endif
-
-#ifndef PORT_HAS_DIALOG_STOP
+#ifndef HAVE_X
+#   define x_set_idle(d,x)
 #   define x_dialog_stop(d)
-#endif
+#endif /* HAVE_X */
 
 #ifdef HAVE_X
 void widget_erase (Widget *w)
@@ -891,7 +888,7 @@ void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 	dlg_key_event (h, key);
 }
 
-#ifndef PORT_HAS_FRONTEND_RUN_DLG
+#ifndef HAVE_X
 static inline void
 frontend_run_dlg (Dlg_head *h)
 {
@@ -924,7 +921,7 @@ frontend_run_dlg (Dlg_head *h)
 	dlg_process_event (h, d_key, &event);
     }
 }
-#endif /* PORT_HAS_FRONTEND_RUN_DLG */
+#endif /* HAVE_X */
 
 /* Standard run dialog routine
  * We have to keep this routine small so that we can duplicate it's
@@ -934,7 +931,11 @@ frontend_run_dlg (Dlg_head *h)
 void run_dlg (Dlg_head *h)
 {
     init_dlg (h);
+#ifdef HAVE_X
+    gtkrundlg_event (h);
+#else
     frontend_run_dlg (h);
+#endif /* !HAVE_X */
     dlg_run_done (h);
 }
 
@@ -1062,11 +1063,11 @@ int dlg_select_nth_widget (Dlg_head *h, int n)
     return dlg_select_widget (h, w->widget);
 }
 
-#ifndef PORT_HAS_DIALOG_TITLE
+#ifndef HAVE_X
 void
 x_set_dialog_title (Dlg_head *h, const char *title)
 {
   h->title = g_strdup (title);
 }
-#endif
+#endif /* !HAVE_X */
 

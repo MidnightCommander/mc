@@ -1,5 +1,7 @@
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c: Remove dependency on definitions in gconf.h.
+
 	* widget.c (input_callback) [HAVE_X]: Disable Ctrl-q - it
 	doesn't work.
 
