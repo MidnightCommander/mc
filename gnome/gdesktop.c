@@ -7,14 +7,16 @@
  */
 #if 1
 #include <config.h>
+#include "fs.h"
 #include <gnome.h>
 #include "dialog.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
 #include "gmetadata.h"
-#include "fs.h"
 #include "../vfs/vfs.h"
 
+/* use grid? */
+int icons_snap_to_grid = 1;
 
 /* Name of the user's desktop directory (i.e. ~/Desktop) */
 #define DESKTOP_DIR_NAME "desktop"
@@ -501,8 +503,6 @@ enum {
 /* The X11 root window */
 static GnomeRootWin *root_window;
 
-/* use grid? */
-int icons_snap_to_grid = 1;
 
 /* The full name of the desktop directory ~/desktop */
 char *desktop_directory;

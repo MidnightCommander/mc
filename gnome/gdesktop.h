@@ -23,6 +23,9 @@ extern int desktop_use_shaped_icons;		/* Whether to use shaped icons or not (for
 extern int desktop_auto_placement;		/* Whether to auto-place icons or not (user placement) */
 extern int desktop_snap_icons;			/* Whether to snap icons to the grid or not */
 
+extern int want_transparent_icons;
+extern int want_transparent_text;
+extern int icons_snap_to_grid;
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
 void desktop_init (void);
@@ -130,8 +133,6 @@ void desktop_icon_delete     (GtkWidget *widget, desktop_icon_t *di);
 
 /* Pops up the context sensitive menu for a WPanel or a desktop_icon_t */
 void file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename);
-
-extern int icons_snap_to_grid;
 
 #endif
 
