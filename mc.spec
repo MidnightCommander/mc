@@ -1,7 +1,12 @@
+# Note that this is NOT a relocatable package
+%define ver      4.1.30
+%define rel      SNAP
+%define prefix   /usr
+
 Summary:   Midnight Commander visual shell
 Name:      mc
-Version:   4.1.30
-Release:   1
+Version:   %ver
+Release:   %rel
 Copyright: GPL
 Group:     Shells
 Source0:   ftp://peyote-asesino.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
@@ -22,9 +27,20 @@ Requires: mc
 Group:    X11/Shells
 %description -n tkmc
 Midnight Commander is a visual shell much like a file manager, only with
-way more features.  It is tk X window wersion. It's coolest feature is the
+way more features.  This is the Tk X window version.
+It's coolest feature is the
 ability to ftp, view tar, zip files and poke into RPMs for specific files.
 The tk version of Midnight Commander is not yet finished though. :-(
+ 
+%package -n gmc
+Summary:  Midnight Commander visual shell (GNOME version)
+Requires: mc
+Group:    X11/Shells
+%description -n gmc
+Midnight Commander is a visual shell much like a file manager, only with
+way more features.  This is the GNOME version. It's coolest feature is the
+ability to ftp, view tar, zip files and poke into RPMs for specific files.
+The GNOME version of Midnight Commander is not yet finished though. :-(
  
 %package -n mcserv
 Summary:  Midnight Commander file server
@@ -39,20 +55,26 @@ Midnight file system (currently, only the Midnight Commander file manager).
 %setup
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
-	--prefix=/usr \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./autogen.sh \
+	--prefix=%{prefix} \
 	--with-tk \
+	--with-gnome \
 	--without-debug
 
-make
+if [ "$SMP" != "" ]; then
+  (make "MAKE=make -k -j $SMP"; exit 0)
+  make
+else
+  make
+fi
 (cd tk; make tkmc)
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d,X11/wmconfig}
 
-make prefix=$RPM_BUILD_ROOT/usr install
-(cd icons; make prefix=$RPM_BUILD_ROOT/usr install_icons)
+make prefix=$RPM_BUILD_ROOT%{prefix} install
+(cd icons; make prefix=$RPM_BUILD_ROOT%{prefix} install_icons)
 install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
 
 install lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
@@ -70,33 +92,45 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/chkconfig --del mcserv
 
 %files
-%attr(-, root, root)   %doc FAQ COPYING NEWS README
-%attr(755, root, root) /usr/bin/mc
-%attr(755, root, root) /usr/bin/mcedit
-%attr(755, root, root) /usr/bin/mcmfmt
-%attr(644, root, root) /usr/lib/mc/mc.ext
-%attr(644, root, root) /usr/lib/mc/mc.hint
-%attr(644, root, root) /usr/lib/mc/mc.hlp
-%attr(644, root, root) /usr/lib/mc/mc.lib
-%attr(644, root, root) /usr/lib/mc/mc.menu
-%attr(755, root, root) /usr/lib/mc/bin/cons.saver
-%attr(755, root, root) /usr/lib/mc/extfs/*
-%attr(644, root, man)  /usr/man/man1/*
-%attr(755, root, root) %config /etc/profile.d/
-%attr(755, root, root) %dir /usr/lib/mc/
-%attr(755, root, root) %dir /usr/lib/mc/bin
-%attr(755, root, root) %dir /usr/lib/mc/extfs
+%defattr(-, root, root)
+
+%doc FAQ COPYING NEWS README
+/usr/bin/mc
+/usr/bin/mcedit
+/usr/bin/mcmfmt
+/usr/lib/mc/mc.ext
+/usr/lib/mc/mc.hint
+/usr/lib/mc/mc.hlp
+/usr/lib/mc/mc.lib
+/usr/lib/mc/mc.menu
+/usr/lib/mc/bin/cons.saver
+/usr/lib/mc/extfs/*
+/usr/man/man1/*
+%config /etc/profile.d/*
+%dir /usr/lib/mc
+%dir /usr/lib/mc/bin
+%dir /usr/lib/mc/extfs
 
 %files -n mcserv
-%attr(644, root, root) %config /etc/pam.d/mcserv
-%attr(755, root, root) %config /etc/rc.d/init.d/mcserv
-%attr(644, root, man)  /usr/man/man8/mcserv.8
-%attr(755, root, root) /usr/bin/mcserv
+%defattr(-, root, root)
+
+%config /etc/pam.d/mcserv
+%config /etc/rc.d/init.d/mcserv
+%attr(-, -, man)  /usr/man/man8/mcserv.8
+/usr/bin/mcserv
 
 %files -n tkmc
-%attr(755, root, root) /usr/bin/tkmc
-%attr(644, root, root) /usr/lib/mc/*.tcl
-%attr(644, root, root) %config(missingok) /etc/X11/wmconfig/tkmc
+%defattr(-, root, root)
+
+/usr/bin/tkmc
+/usr/lib/mc/*.tcl
+%config(missingok) /etc/X11/wmconfig/tkmc
+
+%files -n gmc
+%defattr(-, root, root)
+
+/usr/bin/gmc
+
 
 %changelog
 * Tue Dec 23 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>

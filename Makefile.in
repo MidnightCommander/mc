@@ -16,8 +16,8 @@ INSTALL_DATA = @INSTALL_DATA@
 DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
 		config.h.in aclocal.m4 acconfig.h VERSION mcfn_install.in \
-		Make.common.in README.NT mc.spec.in mc.spec README.OS2 \
-		VERSION.in NLS mkinstalldirs
+		Make.common.in README.NT mc.spec Specfile \
+		README.OS2 VERSION.in NLS mkinstalldirs
 
 all: 
 	@for dir in ${unixdirs}; do \
@@ -109,7 +109,7 @@ distdirs:
 	mkdir ../mc-$(VERSION)/edit;
 
 distcopy:
-	sed "s/@VERSION@/$(VERSION)/" mc.spec.in > mc.spec
+	sed -e "s/^%define ver .*$/%define ver      $(VERSION)/; s/%define rel .*$/^%define rel      1/" mc.spec > Specfile
 	sed "s/@VERSION@/$(VERSION)/" VERSION.in > VERSION
 	cp $(DISTMAIN) ../mc-$(VERSION);
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
