@@ -498,8 +498,6 @@ AC_ARG_WITH(subshell,
 AC_MSG_RESULT([$result])
 subshell="$result"
 
-AC_DEFINE(REGEX_MALLOC, 1, [Define to make regex use malloc(), not alloca()])
-
 if test "x$screen_type" != xncurses; then
 	slang_check_lib=true
 	slang_term=""
