@@ -461,35 +461,27 @@ regex_command (const char *filename, const char *action, int *move_dir)
 		    home_error = 1;
 		    goto check_stock_mc_ext;
 		} else {
-		    GString *msg1 = g_string_new (NULL);
-		    GString *msg2 = g_string_new (NULL);
-
-		    g_string_sprintf (msg1, _(" %s%s file error"),
-			mc_home, MC_LIB_EXT);
-		    g_string_sprintf (msg2, _("The format of the %smc.ext "
+		    char *title =
+			g_strdup_printf (_(" %s%s file error"),
+			    mc_home, MC_LIB_EXT);
+		    message (1, title, _("The format of the %smc.ext "
 			"file has changed with version 3.0.  It seems that "
 			"the installation failed.  Please fetch a fresh "
 			"copy from the Midnight Commander package."),
 			mc_home);
-		    message (1, msg1->str, "%s", msg2->str);
-		    g_string_free (msg1, TRUE);
-		    g_string_free (msg2, TRUE);
+		    g_free (title);
 		    return 0;
 		}
 	    }
 	}
 	if (home_error) {
-	    GString *title = g_string_new (NULL);
-	    GString *text = g_string_new (NULL);
-
-	    g_string_sprintf (title, _(" ~/%s file error "), MC_USER_EXT);
-	    g_string_sprintf (text, _("The format of the ~/%s file has "
+	    char *title =
+		g_strdup_printf (_(" ~/%s file error "), MC_USER_EXT);
+	    message (1, title, _("The format of the ~/%s file has "
 		"changed with version 3.0.  You may either want to copy "
 		"it from %smc.ext of use that file as an example of how "
-		"to write it."), MC_USER_EXT, mc_home, mc_home);
-	    message (1, title->str, "%s", text->str);
-	    g_string_free (title, TRUE);
-	    g_string_free (text, TRUE);
+		"to write it."), MC_USER_EXT, mc_home);
+	    g_free (title);
 	}
     }
     mc_stat (filename, &mystat);
