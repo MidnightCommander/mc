@@ -1835,6 +1835,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 
 #define xtoolkit_panel_setup()
 
+/* Show current directory in the xterm title */
 void
 update_xterm_title_path (void)
 {
@@ -1851,6 +1852,8 @@ update_xterm_title_path (void)
 	g_free (p);
     }
 }
+
+/* Load new hint and display it. */
 void
 load_hint (void)
 {
