@@ -20,12 +20,12 @@ AR = @AR@
 #
 # VFS code
 #
-NETFILES   = tcputil.o ftpfs.o mcfs.o utilvfs.o
+NETFILES   = tcputil.o fish.o ftpfs.o mcfs.o utilvfs.o
 NONETFILES = local.o vfs.o tar.o sfs.o names.o container.o extfs.o \
 	@undelfs_o@
 
 VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c sfs.c names.c shared.c \
-	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c
+	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c fish.c
 
 VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 	extfs.h
@@ -44,7 +44,7 @@ EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)
 # Commands to build standalone version (.so)
 #
 
-VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
+VFSSOOBJS = tcputil.so fish.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so \
 	tar.so sfs.so names.so container.so extfs.so util-alone.so \
 	util.sor utilunix.sor
 

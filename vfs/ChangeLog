@@ -1,8 +1,15 @@
+Tue Sep 15 00:42:15 1998  Yimur Bakeyev <mc@bat.ru>
+
+	* vfs.h: add vfs_split() declaration, to make sfs.c happy.
+
+	* Make-mc.in, Makefile.am: Updated to include fish.c
+
 1998-09-14  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* sfs.c (sfs_free): assignment operator was used to check for equality
 
 Fri Sep 11 22:36:38 1998  Pavel Machek <pavel@ucw.cz>
+
 	* sfs.c: memory leak fixed
 
 	* vfs.c: split parse_ls_lga into more functions

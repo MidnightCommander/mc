@@ -18,7 +18,7 @@ mad.h: mc-src/mad.h
 	$(LN_S) $< $@
 
 libvfs_la_SOURCES = callback.h container.c container.h extfs.c extfs.h \
-ftpfs.c ftpfs.h libvfs.c local.c mad.c mad.h mcfs.c mcfs.h mcserv.c \
+ftpfs.c ftpfs.h fish.c libvfs.c local.c mad.c mad.h mcfs.c mcfs.h mcserv.c \
 names.c names.h shared.c tar.c tar.h sfs.c tcputil.c tcputil.h undelfs.c \
 undelfs.h util-alone.c util-alone.h utilvfs.c vfs.c vfs.h
 

@@ -111,6 +111,7 @@ struct utimbuf {
 
     extern int vfs_type_absolute;
     vfs *vfs_type (char *path);
+    vfs *vfs_split (char *path, char **inpath, char **op);
     vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par);
     void vfs_rm_parents (struct vfs_stamping *stamp);
     char *vfs_path (char *path);
