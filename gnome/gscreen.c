@@ -1363,7 +1363,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/* Now, insert our table in our parent */
 	gtk_container_add (GTK_CONTAINER (vbox), panel->table);
 
-	gtk_widget_show_all (gtk_widget_get_toplevel (panel->table));
+	if (!(panel->widget.options & W_PANEL_HIDDEN))
+		gtk_widget_show_all (gtk_widget_get_toplevel (panel->table));
 			     
 	if (!pixmaps_ready){
 		if (!GTK_WIDGET_REALIZED (panel->list))

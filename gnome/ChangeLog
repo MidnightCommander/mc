@@ -1,3 +1,9 @@
+1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (idle_destroy_window), main.c: Session management now
+	supports not showing a toplevel window (in case all of the windows
+	were closed). 
+
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtrans.c (make_transparent_window): Put hack back.

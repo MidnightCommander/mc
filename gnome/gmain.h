@@ -8,6 +8,7 @@ int xtoolkit_init (int *argc, char *argv []);
 int xtoolkit_end (void);
 
 extern Dlg_head *desktop_dlg;
+extern int nowindows;
 
 /* Required by the standard code */
 widget_data xtoolkit_create_dialog   (Dlg_head *h, int with_grid);
@@ -30,7 +31,8 @@ int  translate_gdk_keysym_to_curses (GdkEventKey *event);
 void gnome_init_panels ();
 void set_current_panel (int index);
 void bind_gtk_keys (GtkWidget *w, Dlg_head *h);
-void new_panel_at (char *dir);
+WPanel *new_panel_at (char *dir);
+WPanel *new_panel_with_geometry_at (char *dir, char *geometry);
 void layout_panel_gone (WPanel *panel);
 
 struct gmc_color_pairs_s {

@@ -439,7 +439,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	return panel;
 }
 
-void
+WPanel *
 new_panel_with_geometry_at (char *dir, char *geometry)
 {
 	WPanel *panel;
@@ -449,12 +449,14 @@ new_panel_with_geometry_at (char *dir, char *geometry)
 	add_widget (desktop_dlg, panel);
 	set_new_current_panel (panel);
 	x_flush_events ();
+
+	return panel;
 }
 
-void
+WPanel *
 new_panel_at (char *dir)
 {
-	new_panel_with_geometry_at (dir, NULL);
+	return new_panel_with_geometry_at (dir, NULL);
 }
 
 void

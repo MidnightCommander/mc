@@ -413,24 +413,34 @@ idle_create_panel (void *data)
 	return 0;
 }
 
+static int
+idle_destroy_window (void *data)
+{
+	WPanel *panel = data;
+
+	gnome_close_panel (GTK_WIDGET (panel->widget.wdata), panel);
+	return 0;
+}
+
 /*
  * wrapper for new_panel_with_geometry_at.
  * first invocation is called directly, further calls use
  * the idle handler
  */
-static void
+static WPanel *
 create_one_panel (char *dir, char *geometry)
 {
 	static int first = 1;
 	
 	if (first){
-		new_panel_with_geometry_at (dir, geometry);
 		first = 0;
+		return new_panel_with_geometry_at (dir, geometry);
 	} else {
 		dir_and_geometry *dg = g_new (dir_and_geometry, 1);
 		dg->dir = dir;
 		dg->geometry = geometry;
 		gtk_idle_add (idle_create_panel, dg);
+		return NULL;
 	}
 }
 
@@ -446,7 +456,8 @@ create_panels (void)
 {
 	GList *p, *g;
 	char  *geo;
-	
+	WPanel *panel;
+
 	start_desktop ();
 	cmdline = command_new (0, 0, 0);
 	the_hint = label_new (0, 0, 0, NULL);
@@ -465,9 +476,16 @@ create_panels (void)
 				geo = NULL;
 			create_one_panel (p->data, geo);
 		}
-	} else 
-		create_one_panel (".", geometry_list ? geometry_list->data : NULL);
+		panel = NULL;
+	} else {
+		char *geometry = geometry_list ? geometry_list->data : NULL;
+		panel = create_one_panel (".", geometry);
 
+		if (nowindows){
+			gtk_idle_add (idle_destroy_window, panel);
+			panel->widget.options |= W_PANEL_HIDDEN;
+		}
+	}
 	g_list_free (directory_list);
 	g_list_free (geometry_list);
 
@@ -516,6 +534,12 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 		argv [i++] = buffer;
 		free_list = g_list_append (free_list, buffer);
 	}
+
+	/* If no windows were open */
+	if (i == 1){
+		argv [i++] = "--nowindows";
+	}
+	
 	argv [i] = NULL;
 	gnome_client_set_clone_command (client, i, argv);
 	gnome_client_set_restart_command (client, i, argv);
