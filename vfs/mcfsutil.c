@@ -50,9 +50,6 @@
 #define CHECK_SIG_PIPE(sock) if (got_sigpipe) \
      { tcp_invalidate_socket (sock); return got_sigpipe = 0; }
 
-extern void tcp_invalidate_socket (int);
-extern void vfs_die (char *);
-
 /* Reads a block on dest for len bytes from sock */
 /* Returns a boolean indicating the success status */
 int

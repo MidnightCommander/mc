@@ -1335,7 +1335,7 @@ main (int argc, char *argv[])
 
 /* FIXME: This function should not be used in mcserv */
 void
-vfs_die (char *m)
+vfs_die (const char *m)
 {
     fputs (m, stderr);
     exit (1);

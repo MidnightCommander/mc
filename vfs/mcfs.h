@@ -1,3 +1,6 @@
+#ifndef __MCFS_H
+#define __MCFS_H
+
 #define mcserver_port 9876
 
 /* This number was registered for program "mcfs" with rpc@Sun.COM */
@@ -35,9 +38,9 @@ enum {
     /* Control commands */
     MC_LOGIN,
     MC_QUIT,
-    
-    MC_UTIME,           /* it has to go here for compatibility with old
-			   servers/clients. sigh ... */
+
+    MC_UTIME,			/* it has to go here for compatibility with old
+				   servers/clients. sigh ... */
 
     MC_INVALID_PASS = 0x1000,
     MC_NEED_PASSWORD,
@@ -45,5 +48,8 @@ enum {
     MC_VERSION_OK,
     MC_VERSION_MISMATCH,
     MC_PASS
-
 };
+
+extern void tcp_invalidate_socket (int);
+
+#endif				/* __MCFS_H */

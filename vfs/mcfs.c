@@ -1221,7 +1221,6 @@ static int
 mcfs_invalidate_socket (int sock)
 {
     int i, j = -1;
-    extern int mc_chdir (char *);
 
     for (i = 0; i < MCFS_MAX_CONNECTIONS; i++)
 	if (mcfs_connections[i].sock == sock) {
