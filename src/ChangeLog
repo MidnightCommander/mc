@@ -1,3 +1,10 @@
+2000-06-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* panel.h, util.[ch] (struct WPanel, size_trunc, size_trunc_sep): size
+	parameters and WPanel.total field became double, thus, total size 
+	of selected files/directories is shown in the mini status correctly 
+	when it exceeds 2 GB.
+
 2000-05-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* slint.c (init_pair): segfault fixed when mcedit -b called

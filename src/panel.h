@@ -102,7 +102,7 @@ typedef struct {
     int      count;		/* Number of files in dir structure */
     int      marked;		/* Count of marked files */
     int      dirs_marked;	/* Count of marked directories */
-    long int total;		/* Bytes in marked files */
+    double   total;		/* Bytes in marked files */
     int      top_file;		/* The file showed on the top of the panel */
     int      selected;		/* Index to the selected file */
     int      reverse;		/* Show listing in reverse? */

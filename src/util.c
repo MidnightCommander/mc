@@ -236,10 +236,10 @@ char *name_trunc (char *txt, int trunc_len)
     if (txt_len <= trunc_len)
 	strcpy (x, txt);
     else if (tilde_trunc){
-	int y = trunc_len % 2;
-	strncpy (x, txt, (trunc_len/2)+y);
-	strncpy (x+(trunc_len/2)+y, txt+txt_len-(trunc_len/2), trunc_len/2);
-	x [(trunc_len/2)+y] = '~';
+	int y = (trunc_len/2) + (trunc_len % 2);
+	strncpy (x, txt, y);
+	strncpy (x+y, txt+txt_len-(trunc_len/2), trunc_len/2);
+	x [y] = '~';
     } else {
 	strncpy (x, txt, trunc_len-1);
 	x [trunc_len-1] = '>';
@@ -251,7 +251,7 @@ char *name_trunc (char *txt, int trunc_len)
     return x;
 }
 
-char *size_trunc (long int size)
+char *size_trunc (double size)
 {
     static char x [BUF_TINY];
     long int divisor = 1;
@@ -265,11 +265,11 @@ char *size_trunc (long int size)
 	    xtra = "Mb";
 	}
     }
-    g_snprintf (x, sizeof (x), "%ld%s", (size/divisor), xtra);
+    g_snprintf (x, sizeof (x), "%.0f%s", (size/divisor), xtra);
     return x;
 }
 
-char *size_trunc_sep (long int size)
+char *size_trunc_sep (double size)
 {
     static char x [60];
     int  count;
@@ -506,7 +506,7 @@ char *extension (char *filename)
 {
     char *d;
 
-    if (!strlen (filename))
+    if (!(*filename))
 	return "";
     
     d = filename + strlen (filename) - 1;
