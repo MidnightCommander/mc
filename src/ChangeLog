@@ -1,3 +1,7 @@
+Mon Apr  6 07:48:22 1998 Pavel Roskin <pavel@absolute.spb.su>
+
+	* Makefile.in: "make dist" works with bash 1.x again
+
 Fri Apr  3 05:23:20 1998 Alex Tkachenko <alex@bcs.zp.ua>
 
 	* configure.in: ALL_LINGUAS test added, to allow specify list
