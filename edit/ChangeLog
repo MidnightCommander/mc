@@ -1,5 +1,7 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (edit_execute_cmd): Fool gcc to prevent Y2K warning.
+
 	* editwidget.c (edit_adjust_size): Use find_buttonbar().
 
 2002-11-11  Pavel Roskin  <proski@gnu.org>

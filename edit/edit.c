@@ -2427,7 +2427,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	    time_t t;
 #ifdef HAVE_STRFTIME
 	    char s[1024];
-	    static const char time_format[] = "%c";
+	    /* fool gcc to prevent a Y2K warning */
+	    char time_format[] = "_c";
+	    time_format[0] = '%';
 #endif
 	    time (&t);
 #ifdef HAVE_STRFTIME
