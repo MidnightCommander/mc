@@ -31,6 +31,9 @@ Load subshell prompt when it's ready.
 
 Eliminate all pipes in subshell.c, run pwd after kill.
 
+real_input_dialog_help() shouldn't use translated strings in the section
+names in .mc/history.
+
 Make xnc.hlp a text file.  Make it easier to translate the manual.
 
 Hard links in cpio have 0 length (if easy to fix).
