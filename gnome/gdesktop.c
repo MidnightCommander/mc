@@ -1,10 +1,175 @@
-/*
- * Controls the desktop contents
- * (C) 1998 the Free Software Foundation
+/* Desktop management for the Midnight Commander
  *
- * Authors: Miguel de Icaza (miguel@gnu.org)
- *          Federico Mena (federico@nuclecu.unam.mx)
+ * Copyright (C) 1998 The Free Software Foundation
+ *
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
+#if 0
+#include <config.h>
+#include <gnome.h>
+#include "gdesktop.h"
+#include "../vfs/vfs.h"
+
+
+/* Name of the user's desktop directory (i.e. ~/Desktop) */
+#define DESKTOP_DIR_NAME "desktop"
+
+
+/* This structure defines the information carried by a desktop icon */
+struct desktop_icon_info {
+	GtkWidget *dicon;	/* The desktop icon widget */
+	int x, y;		/* Position in the desktop */
+	char *filename;		/* The file this icon refers to */
+	int selected : 1;	/* Is the icon selected? */
+};
+
+
+/* Should use a shaped window for icons?  If not, use a solid square. */
+int desktop_use_shaped_icons = TRUE;
+
+/* The computed name of the user's desktop directory */
+static char *desktop_directory;
+
+/* Layout information:  number of rows/columns for the layout slots, and the array of slots */
+static int layout_cols;
+static int layout_rows;
+static int *layout_slots;
+
+/* The list of desktop icons */
+static GList *desktop_icons;
+
+
+/* Creates a new desktop icon.  The filename is the pruned filename inside the desktop directory.
+ * If auto_pos is true, then the function will look for a place to position the icon automatically,
+ * else it will use the specified coordinates.
+ */
+static void
+desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
+{
+	
+}
+
+/* Creates the layout information array */
+static void
+create_layout_info (void)
+{
+	layout_cols = gdk_screen_width () / DESKTOP_SNAP_X;
+	layout_rows = gdk_screen_height () / DESKTOP_SNAP_Y;
+	layout_slots = g_new0 (int, layout_cols * layout_rows);
+}
+
+/* Check that the user's desktop directory exists, and if not, create it with a symlink to the
+ * user's home directory so that an icon will be displayed.
+ */
+static void
+create_desktop_dir (void)
+{
+	char *home_link_name;
+
+	desktop_directory = g_concat_dir_and_file (gnome_user_home_dir, DESKTOP_DIR_NAME);
+
+	if (!g_file_exists (desktop_directory)) {
+		/* Create the directory */
+
+		mkdir (desktop_directory, 0777);
+
+		/* Create the link to the user's home directory so that he will have an icon */
+
+		home_link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
+
+		if (mc_symlink (gnome_user_home_dir, home_link_name) != 0) {
+			message (FALSE,
+				 _("Warning"),
+				 _("Could not symlink %s to %s; will not have initial desktop icons."),
+				 gnome_user_home_dir, home_link_name);
+			g_free (home_link_name);
+			return;
+		}
+
+		g_free (home_link_name);
+	}
+}
+
+/* Reads the ~/Desktop directory and creates the initial desktop icons */
+static void
+load_initial_desktop_icons (void)
+{
+	struct dirent *dirent;
+	DIR *dir;
+	int have_pos, x, y;
+
+	dir = mc_opendir (desktop_directory);
+	if (!dir) {
+		message (FALSE,
+			 _("Warning"),
+			 _("Could not open %s; will not have initial desktop icons"),
+			 desktop_directory);
+		return;
+	}
+
+	while ((dirent = mc_readdir (dir)) != NULL) {
+		if (((dirent->d_name[0] == '.') && (dirent->d_name[1] == 0))
+		    || ((dirent->d_name[0] == '.') && (dirent->d_name[1] == '.') && (dirent->d_name[2] == 0)))
+			continue;
+
+		desktop_icon_info_new (dirent->d_name, TRUE, 0, 0);
+	}
+
+	mc_closedir (dir);
+}
+
+/**
+ * desktop_init
+ *
+ * Initializes the desktop by setting up the default icons (if necessary), setting up drag and drop,
+ * and other miscellaneous tasks.
+ */
+void
+desktop_init (void)
+{
+	create_layout_info ();
+	create_desktop_dir ();
+	load_initial_desktop_icons ();
+}
+
+/** desktop_destroy
+ *
+ * Shuts the desktop down by destroying the desktop icons.
+ */
+void
+desktop_destroy (void)
+{
+	GList *list;
+
+	/* Destroy the desktop icons */
+
+	for (list = desktop_icons; list; list = list->next)
+		desktop_icon_info_free (dii->data);
+
+	g_list_free (desktop_icons);
+	desktop_icons = NULL;
+
+	/* Cleanup */
+
+	g_free (layout_slots);
+	layout_slots = NULL;
+	layout_cols = 0;
+	layout_rows = 0;
+
+	g_free (desktop_directory);
+	desktop_directory = NULL;
+}
+
+
+
+
+
+
+
+
+#else
+
 #include <config.h>
 #include <gnome.h>
 #include "gdesktop-icon.h"
@@ -1485,3 +1650,5 @@ stop_desktop (void)
 	}
 	image_cache_destroy ();
 }
+
+#endif

@@ -1,3 +1,10 @@
+1998-10-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmetadata.[ch]: New files with functions to handle all metadata
+	issues -- fetching icons, icon positions, etc.
+
+	* Makefile.in: Added gmetadata.[ch] to the list of sources.
+
 1998-10-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (create_window_shape): Use shaped icons only

@@ -1,5 +1,39 @@
-#ifndef _GDESKTOP_H
-#define _GDESKTOP_H
+/* Desktop management for the Midnight Commander
+ *
+ * Copyright (C) 1998 The Free Software Foundation
+ *
+ * Authors: Federico Mena <federico@nuclecu.unam.mx>
+ *          Miguel de Icaza <miguel@nuclecu.unam.mx>
+ */
+
+#ifndef GDESKTOP_H
+#define GDESKTOP_H
+
+#if 0
+
+
+/* Snap granularity for desktop icons -- maybe these should be calculated in terms of the font size? */
+#define DESKTOP_SNAP_X 80
+#define DESKTOP_SNAP_Y 80
+
+
+/* Configuration options for the desktop */
+
+extern int desktop_use_shaped_icons;		/* Specifies whether to use shaped icons or not (for slow X servers) */
+
+
+/* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
+void desktop_init (void);
+
+/* Shuts the desktop down by destroying the desktop icons. */
+void desktop_destroy (void);
+
+
+
+
+
+
+#else
 
 #define MC_LIB_DESKTOP "mc.desktop"
 
@@ -70,5 +104,7 @@ void desktop_icon_delete     (GtkWidget *widget, desktop_icon_t *di);
 void file_popup (GdkEventButton *event, void *WPanel_pointer, void *desktop_icon_t_pointer, int row, char *filename);
 
 extern int icons_snap_to_grid;
+
+#endif
 
 #endif
