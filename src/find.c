@@ -101,6 +101,7 @@ static GtkWidget *g_clist;
 static GtkWidget *g_start_stop;
 static GtkWidget *g_start_stop_label;
 static GtkWidget *g_view, *g_edit;
+static GtkWidget *g_panelize;
 static int current_row;
 static int idle_tag;
 static int stop;
@@ -690,6 +691,15 @@ find_do_again (void)
 }
 
 static void
+find_do_panelize (void)
+{
+	gtk_idle_remove (idle_tag);
+	idle_tag = 0;
+	stop = B_PANELIZE;
+	gtk_main_quit ();}
+
+
+static void
 find_start_stop (void)
 {
 
@@ -747,7 +757,8 @@ setup_gui (void)
 	
 	g_view = gtk_button_new_with_label (_("View this file"));
 	g_edit = gtk_button_new_with_label (_("Edit this file"));
-					    
+	g_panelize = gtk_button_new_with_label (_("Send the results to a Panel"));
+	
 	box = gtk_hbox_new (TRUE, GNOME_PAD);
 	gtk_box_pack_start (GTK_BOX (box), b1, 0, 1, 0);
 	gtk_box_pack_start (GTK_BOX (box), b2, 0, 1, 0);
@@ -782,6 +793,8 @@ setup_gui (void)
 		GTK_OBJECT (b2), "clicked", GTK_SIGNAL_FUNC (find_do_again), NULL);
 	gtk_signal_connect (
 		GTK_OBJECT (g_start_stop), "clicked", GTK_SIGNAL_FUNC (find_start_stop), NULL);
+	gtk_signal_connect (
+		GTK_OBJECT (g_panelize), "clicked", GTK_SIGNAL_FUNC (find_do_panelize), NULL);
 
 	/*
 	 * View/edit buttons
@@ -808,7 +821,8 @@ setup_gui (void)
 			    g_status_label, TRUE, TRUE, GNOME_PAD_SMALL);
 	
 	gtk_widget_show_all (g_find_dlg);
-	gtk_widget_hide (box2);
+	gtk_widget_hide (find_do_view);
+	gtk_widget_hide (find_do_edit);
 }
 
 static int

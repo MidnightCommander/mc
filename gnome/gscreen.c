@@ -78,10 +78,6 @@ GtkWidget *drag_multiple     = NULL;
 GtkWidget *drag_multiple_ok  = NULL;
 
 
-#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
-#define ILIST_FROM_SW(panel_list) GNOME_ICON_LIST (GTK_BIN (panel_list)->child)
-
-
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 {

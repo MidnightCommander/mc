@@ -75,6 +75,37 @@ gmc_open_filename (char *fname, GList *args)
 }
 
 int
+gmc_edit_filename (char *fname)
+{
+	const char *mime_type;
+	const char *cmd;
+	char *buf;
+	int size;
+
+	if (gnome_metadata_get (fname, "edit", &size, &buf) == 0){
+		gmc_execute (fname, buf);
+		g_free (buf);
+		return 1;
+	}
+
+	mime_type = gnome_mime_type_or_default (fname, NULL);
+	if (!mime_type)
+		return 0;
+	
+		
+	cmd = gnome_mime_get_value (mime_type, "edit");
+	
+	if (cmd){
+		gmc_execute (fname, cmd);
+		return 1;
+	}
+	
+	do_edit (fname);
+	return 0;
+}
+
+
+int
 gmc_open (file_entry *fe)
 {
 	return gmc_open_filename (fe->fname, NULL);

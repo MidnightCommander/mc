@@ -37,7 +37,9 @@
 #define PORT_LIST_MODE_NAME              "gnome_list_mode"
 #define PORT_LIST_MODE_DEFAULT           "icons"
 
-#define ICONS_PER_ROW(x) (gnome_icon_list_get_items_per_line (GNOME_ICON_LIST(x->icons)))
+#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
+#define ILIST_FROM_SW(panel_list) GNOME_ICON_LIST (GTK_BIN (panel_list)->child)
+#define ICONS_PER_ROW(x) (gnome_icon_list_get_items_per_line (GNOME_ICON_LIST(ILIST_FROM_SW(x->icons))))
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

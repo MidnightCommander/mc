@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-10 18:27-0600\n"
+"POT-Creation-Date: 1999-02-11 20:35-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,7 +153,7 @@ msgid "Set Filter"
 msgstr ""
 
 #: gnome/gcmd.c:578 gnome/gcmd.c:619 gnome/gcmd.c:624 gnome/gcmd.c:628
-#: gnome/gscreen.c:2570
+#: gnome/gscreen.c:2512
 msgid "Show all files"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:350 gnome/gdesktop.c:1566
+#: gnome/gdesktop.c:350 gnome/gdesktop.c:1534
 msgid "Warning"
 msgstr ""
 
@@ -190,16 +190,16 @@ msgstr ""
 msgid "Could not open %s; will not have desktop icons"
 msgstr ""
 
-#: gnome/gdesktop.c:1532
+#: gnome/gdesktop.c:1500
 msgid "Trashcan"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1562
+#: gnome/gdesktop.c:1530
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:1567
+#: gnome/gdesktop.c:1535
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -545,51 +545,51 @@ msgstr ""
 msgid "File/New/Directory..."
 msgstr ""
 
-#: gnome/gpopup.c:222 gnome/gpopup.c:223
+#: gnome/gpopup.c:226 gnome/gpopup.c:227
 msgid "Properties"
 msgstr ""
 
-#: gnome/gpopup.c:225 gnome/gpopup.c:226
+#: gnome/gpopup.c:229 gnome/gpopup.c:230
 msgid "Open"
 msgstr ""
 
-#: gnome/gpopup.c:227
+#: gnome/gpopup.c:231
 msgid "Open with"
 msgstr ""
 
-#: gnome/gpopup.c:228 src/screen.c:2287 src/screen.c:2317
+#: gnome/gpopup.c:232 src/screen.c:2287 src/screen.c:2317
 msgid "View"
 msgstr ""
 
-#: gnome/gpopup.c:229
+#: gnome/gpopup.c:233
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:230 src/screen.c:2288 src/screen.c:2318 src/view.c:1996
+#: gnome/gpopup.c:234 src/screen.c:2288 src/screen.c:2318 src/view.c:1996
 msgid "Edit"
 msgstr ""
 
-#: gnome/gpopup.c:232
+#: gnome/gpopup.c:236
 msgid "Link..."
 msgstr ""
 
-#: gnome/gpopup.c:233
+#: gnome/gpopup.c:237
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:234
+#: gnome/gpopup.c:238
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gpopup.c:241 gnome/gpopup.c:252
+#: gnome/gpopup.c:245 gnome/gpopup.c:256
 msgid "Move/rename..."
 msgstr ""
 
-#: gnome/gpopup.c:242 gnome/gpopup.c:253
+#: gnome/gpopup.c:246 gnome/gpopup.c:257
 msgid "Copy..."
 msgstr ""
 
-#: gnome/gpopup.c:243 gnome/gpopup.c:255 gtkedit/editwidget.c:1067
+#: gnome/gpopup.c:247 gnome/gpopup.c:259 gtkedit/editwidget.c:1067
 #: src/screen.c:2292 src/screen.c:2322
 msgid "Delete"
 msgstr ""
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2340
+#: gnome/gprop.c:521 gnome/gscreen.c:2305
 msgid "Icon"
 msgstr ""
 
@@ -771,164 +771,164 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1612
+#: gnome/gscreen.c:1577
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1614
+#: gnome/gscreen.c:1579
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1616
+#: gnome/gscreen.c:1581
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1618
+#: gnome/gscreen.c:1583
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1620
+#: gnome/gscreen.c:1585
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1622
+#: gnome/gscreen.c:1587
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1624
+#: gnome/gscreen.c:1589
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1626
+#: gnome/gscreen.c:1591
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1629
+#: gnome/gscreen.c:1594
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1631
+#: gnome/gscreen.c:1596
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1633
+#: gnome/gscreen.c:1598
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1635
+#: gnome/gscreen.c:1600
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1637
+#: gnome/gscreen.c:1602
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1639
+#: gnome/gscreen.c:1604
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1641
+#: gnome/gscreen.c:1606
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1643
+#: gnome/gscreen.c:1608
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1645
+#: gnome/gscreen.c:1610
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1772
+#: gnome/gscreen.c:1737
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1782
+#: gnome/gscreen.c:1747
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1782
+#: gnome/gscreen.c:1747
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1808 src/screen.c:677
+#: gnome/gscreen.c:1773 src/screen.c:677
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1862
+#: gnome/gscreen.c:1827
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2340
+#: gnome/gscreen.c:2305
 msgid "Switch view to an Icon view"
 msgstr ""
 
-#: gnome/gscreen.c:2342
+#: gnome/gscreen.c:2307
 msgid "Brief"
 msgstr ""
 
-#: gnome/gscreen.c:2342
+#: gnome/gscreen.c:2307
 msgid "Switch view to show just file name and type"
 msgstr ""
 
-#: gnome/gscreen.c:2344
+#: gnome/gscreen.c:2309
 msgid "Detailed"
 msgstr ""
 
-#: gnome/gscreen.c:2344
+#: gnome/gscreen.c:2309
 msgid "Switch view to show detailed file statistics"
 msgstr ""
 
-#: gnome/gscreen.c:2346
+#: gnome/gscreen.c:2311
 msgid "Custom"
 msgstr ""
 
-#: gnome/gscreen.c:2346
+#: gnome/gscreen.c:2311
 msgid "Switch view to show custom determined statistics."
 msgstr ""
 
-#: gnome/gscreen.c:2351
+#: gnome/gscreen.c:2316
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2351
+#: gnome/gscreen.c:2316
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2353
+#: gnome/gscreen.c:2318
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2353
+#: gnome/gscreen.c:2318
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2355
+#: gnome/gscreen.c:2320
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2355
+#: gnome/gscreen.c:2320
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2323
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2323
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2515
+#: gnome/gscreen.c:2457
 msgid "Location:"
 msgstr ""
 
 #: gnome/gtools.c:104 src/boxes.c:138 src/boxes.c:278 src/boxes.c:378
 #: src/boxes.c:466 src/boxes.c:646 src/boxes.c:728 src/boxes.c:783
-#: src/boxes.c:894 src/filegui.c:807 src/find.c:151 src/layout.c:369
+#: src/boxes.c:894 src/filegui.c:807 src/find.c:171 src/layout.c:369
 #: src/option.c:144 src/wtools.c:289 src/wtools.c:561
 msgid "&Ok"
 msgstr ""
@@ -1538,7 +1538,7 @@ msgstr ""
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:856 src/filegui.c:790
-#: src/find.c:151 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
+#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:370 src/learn.c:59 src/option.c:145 src/panelize.c:86
 #: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:559
 #: src/wtools.c:640
@@ -1778,7 +1778,7 @@ msgstr ""
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:833 src/find.c:671
+#: src/boxes.c:833 src/find.c:716 src/find.c:957
 msgid "Stopped"
 msgstr ""
 
@@ -2855,86 +2855,115 @@ msgid ""
 " %s "
 msgstr ""
 
-#: src/find.c:115
+#: src/find.c:130
 msgid "&Suspend"
 msgstr ""
 
-#: src/find.c:116
+#: src/find.c:131
 msgid "Con&tinue"
 msgstr ""
 
-#: src/find.c:117
+#: src/find.c:132
 msgid "&Chdir"
 msgstr ""
 
-#: src/find.c:118
+#: src/find.c:133
 msgid "&Again"
 msgstr ""
 
-#: src/find.c:119
+#: src/find.c:134
 msgid "&Quit"
 msgstr ""
 
-#: src/find.c:120 src/panelize.c:89
+#: src/find.c:135 src/panelize.c:89
 msgid "Pane&lize"
 msgstr ""
 
-#: src/find.c:121
+#: src/find.c:136
 msgid "&View - F3"
 msgstr ""
 
-#: src/find.c:122
+#: src/find.c:137
 msgid "&Edit - F4"
 msgstr ""
 
-#: src/find.c:150
+#: src/find.c:170
 msgid "Start at:"
 msgstr ""
 
-#: src/find.c:150
+#: src/find.c:170
 msgid "Filename:"
 msgstr ""
 
-#: src/find.c:150
+#: src/find.c:170
 msgid "Content: "
 msgstr ""
 
-#: src/find.c:151 src/main.c:1199 src/main.c:1220
+#: src/find.c:171 src/main.c:1199 src/main.c:1220
 msgid "&Tree"
 msgstr ""
 
-#: src/find.c:203
+#: src/find.c:223
 msgid "Find File"
 msgstr ""
 
-#: src/find.c:430
+#: src/find.c:452
 #, c-format
 msgid "Grepping in %s"
 msgstr ""
 
-#: src/find.c:468
+#: src/find.c:490
 msgid " Find/read "
 msgstr ""
 
-#: src/find.c:468
+#: src/find.c:490
 msgid " Problem reading from child "
 msgstr ""
 
-#: src/find.c:515
+#: src/find.c:537
 msgid "Finished"
 msgstr ""
 
-#: src/find.c:539 src/view.c:1465
+#: src/find.c:561 src/view.c:1465
 #, c-format
 msgid "Searching %s"
 msgstr ""
 
-#: src/find.c:671 src/find.c:788
+#: src/find.c:714 src/find.c:754
+msgid "Suspend"
+msgstr ""
+
+#: src/find.c:714
+msgid "Restart"
+msgstr ""
+
+#: src/find.c:716 src/find.c:818 src/find.c:957 src/find.c:1053
 msgid "Searching"
 msgstr ""
 
-#: src/find.c:763
+#: src/find.c:747 src/find.c:1028
 msgid "Find file"
+msgstr ""
+
+#. The buttons
+#: src/find.c:752
+msgid "Change to this directory"
+msgstr ""
+
+#: src/find.c:753
+msgid "Search again"
+msgstr ""
+
+#: src/find.c:758
+msgid "View this file"
+msgstr ""
+
+#: src/find.c:759
+msgid "Edit this file"
+msgstr ""
+
+#: src/find.c:760
+msgid "Send the results to a Panel"
 msgstr ""
 
 #: src/fixhlp.c:171

@@ -77,7 +77,10 @@ panel_action_view_unfiltered (GtkWidget *widget, WPanel *panel)
 static void
 panel_action_edit (GtkWidget *widget, WPanel *panel)
 {
-	edit_cmd (panel);
+	char *full = g_concat_dir_and_file (panel->cwd, selection (panel)->fname);
+	
+	gmc_edit_filename (full);
+	g_free (full);
 }
 
 /* Pops up the icon properties pages */
@@ -395,7 +398,8 @@ mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
 {
 	char *action;
 	int movedir;
-	char *key, *mime_type, *val;
+	char *key;
+	const char *mime_type, *val;;
 	action = get_label_text (item);
 
 	key = gtk_object_get_user_data (GTK_OBJECT (item));
@@ -419,7 +423,7 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 	GnomeUIInfo *a_uiinfo;
 	int i;
 	GtkSignalFunc regex_callback;
-	char *mime_type;
+	const char *mime_type;
 	GList *keys, *l;
 	GnomeUIInfo uiinfo[] = {
 		{ 0 },
