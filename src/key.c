@@ -338,18 +338,19 @@ void init_key (void)
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
     define_sequences (mc_default_keys);
-    
+
     /* Terminfo on irix does not have some keys */
-    if ((!strncmp (term, "iris-ansi", 9)) || (!strncmp (term, "xterm", 5)))
+    if (term && 
+        ((!strncmp (term, "iris-ansi", 9)) || (!strncmp (term, "xterm", 5))))
 	define_sequences (xterm_key_defines);
-    
+
     define_sequences (mc_bindings);
     
     /* load some additional keys (e.g. direct Alt-? support) */
     load_xtra_key_defines();
     
 #ifdef __QNX__
-    if (strncmp(term, "qnx", 3) == 0){
+    if (term && strncmp (term, "qnx", 3) == 0) {
 	/* Modify the default value of use_8th_bit_as_meta: we would
 	 * like to provide a working mc for a newbie who knows nothing
 	 * about [Options|Display bits|Full 8 bits input]...

@@ -1,3 +1,7 @@
+2003-05-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	key.c (init_key): Fix crash if TERM is unset.
+
 2003-05-29  Koblinger Egmont  <egmont@uhulinux.hu>
 
 	* ext.c (regex_check_type): Recognize and skip "/dev/stdin:"
