@@ -653,9 +653,9 @@ menu_file_own(char* path)
 }
 
 /*
-    if edit_widget = pointer then it is file menu from cool edit
-    if edit_widget = NULL then routine is invoke from file menu of mc.
-*/
+ * If edit_widget is NULL then we are called from the mc menu,
+ * otherwise we are called from the mcedit menu.
+ */
 void user_menu_cmd (WEdit *edit_widget)
 {
     char *p;
