@@ -18,7 +18,7 @@
 
 
 /**
- * meta_get_icon_for_file
+ * gmeta_get_icon_for_file
  * @filename:	The name of the file to get the icon for.
  *
  * Computes the name of the file that holds the icon for the specified file.  The
@@ -28,7 +28,7 @@
  * Returns the icon's file name.
  */
 char *
-meta_get_icon_for_file (char *filename)
+gmeta_get_icon_for_file (char *filename)
 {
 	int size;
 	char *buf;
@@ -52,7 +52,7 @@ meta_get_icon_for_file (char *filename)
 }
 
 /**
- * meta_get_icon_pos
+ * gmeta_get_icon_pos
  * @filename:	The file under ~/desktop for which to get the icon position
  * @x:		The x position will be stored here.  Must be non-NULL.
  * @y:		The y position will be stored here.  Must be non-NULL.
@@ -60,10 +60,10 @@ meta_get_icon_for_file (char *filename)
  * Checks if the specified file has an icon position associated to it.  If so, returns TRUE and
  * fills in the x and y values.  Otherwise it returns FALSE and x and y are not modified.
  *
- * Icon position information is expected to be saved using the meta_set_icon_pos() function.
+ * Icon position information is expected to be saved using the gmeta_set_icon_pos() function.
  */
 int
-meta_get_icon_pos (char *filename, int *x, int *y)
+gmeta_get_icon_pos (char *filename, int *x, int *y)
 {
 	int size;
 	char *buf;
@@ -87,16 +87,16 @@ meta_get_icon_pos (char *filename, int *x, int *y)
 }
 
 /**
- * meta_set_icon_pos
+ * gmeta_set_icon_pos
  * @filename:	The file for which to save icon position information
  * @x:		X position of the icon
  * @y:		Y position of the icon
  *
  * Saves the icon position information for the specified file.  This is expected to be read back
- * using the meta_get_icon_pos() function.
+ * using the gmeta_get_icon_pos() function.
  */
 void
-meta_set_icon_pos (char *filename, int x, int y)
+gmeta_set_icon_pos (char *filename, int x, int y)
 {
 	char buf[100];
 

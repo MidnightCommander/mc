@@ -471,7 +471,7 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	/* Create the icon structure */
 
-	icon_name = meta_get_icon_for_file (full_name);
+	icon_name = gmeta_get_icon_for_file (full_name);
 
 	dii = g_new (struct desktop_icon_info, 1);
 	dii->dicon = desktop_icon_new (icon_name, filename);
@@ -597,7 +597,7 @@ load_initial_desktop_icons (void)
 
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 
-		have_pos = meta_get_icon_pos (full_name, &x, &y);
+		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
 		desktop_icon_info_new (dirent->d_name, !have_pos, x, y);
 
 		g_free (full_name);
@@ -642,7 +642,7 @@ save_icons_pos (void)
 			dii = l->data;
 
 			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-			meta_set_icon_pos (filename, dii->x, dii->y);
+			gmeta_set_icon_pos (filename, dii->x, dii->y);
 			g_free (filename);
 		}
 }
@@ -689,7 +689,94 @@ desktop_destroy (void)
 
 
 
+#if 1
+/* Stubs for filegui.h */
 
+#include "file.h"
+#include "panel.h"
+
+FileProgressStatus
+file_progress_show_source (char *path)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_show_target (char *path)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_show_deleting (char *path)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_show (long done, long total)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_show_count (long done, long total)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_show_bytes (long done, long total)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+FileProgressStatus
+file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat, struct stat *_d_stat)
+{
+	g_warning ("Implement this function!\n");
+	return FILE_CONT;
+}
+
+void
+file_progress_set_stalled_label (char *stalled_msg)
+{
+	g_warning ("Implement this function!\n");
+}
+
+char *
+panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int only_one, struct stat* src_stat)
+{
+	g_warning ("Implement this function!\n");
+	return NULL;
+}
+
+char *
+file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_one, int *do_background)
+{
+	g_warning ("Implement this function!\n");
+	return NULL;
+}
+
+void
+create_op_win (FileOperation op, int with_eta)
+{
+	g_warning ("Implement this function!\n");
+}
+
+void
+destroy_op_win (void)
+{
+	g_warning ("Implement this function!\n");
+}
+
+#endif
 
 
 #else

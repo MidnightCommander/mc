@@ -97,7 +97,7 @@ typedef void (*context_menu_callback)(GtkWidget *, void *);
 
 static void panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width, int height);
 
-#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_SCROLLED_WINDOW (panel_list)->viewport)
+#define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_SCROLLED_WINDOW (panel_list)->child)
 
 
 void
@@ -465,7 +465,7 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	} else
 		shrink_space = 0;
 
-	clist = GTK_CLIST (GTK_SCROLLED_WINDOW (sw)->viewport);
+	clist = CLIST_FROM_SW (sw);
 
 	gtk_clist_freeze (clist);
 
@@ -860,7 +860,7 @@ panel_file_list_compute_lines (GtkScrolledWindow *sw, WPanel *panel, int height)
 
 		lost_pixels = scrollbar_space + scrollbar_width;
 	}
-	panel->widget.lines = (height-lost_pixels) / (GTK_CLIST (sw->viewport)->row_height + CELL_SPACING);
+	panel->widget.lines = (height-lost_pixels) / (CLIST_FROM_SW (sw)->row_height + CELL_SPACING);
 }
 
 static void

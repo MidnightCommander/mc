@@ -1,3 +1,10 @@
+1998-11-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* dlg.c (dlg_try_hotkey): Removed unused declaration of input_event.
+	(dlg_key_event): Return 1 if handled the tab key.
+
+	* filegui.h: Added prototypes for file_progress_show_{source,target,deleting}().	
+
 Sun Nov 22 22:30:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* autogen.sh: replaced "cat *.m4" with a call to aclocal. Concatenate

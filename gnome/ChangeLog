@@ -1,3 +1,14 @@
+1998-11-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c: Put in a bunch of stubs for the functions in
+	filegui.h.  These will be removed as the dialogs get
+	custom-written for Gnome.
+
+	* gmetadata.[ch]: Changed the function names to "gmeta_*".
+
+	* gscreen.c (CLIST_FROM_SW): Use scrolled_window->child, as
+	viewport is obsolete.
+
 1998-11-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.in (OOBJS): Do not link ../src/filegui.o.  GMC does not

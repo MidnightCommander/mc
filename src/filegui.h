@@ -8,6 +8,9 @@ FileProgressStatus file_progress_check_buttons (void);
 FileProgressStatus file_progress_show          (long done, long total);
 FileProgressStatus file_progress_show_count    (long done, long total);
 FileProgressStatus file_progress_show_bytes    (long done, long total);
+FileProgressStatus file_progress_show_source   (char *path);
+FileProgressStatus file_progress_show_target   (char *path);
+FileProgressStatus file_progress_show_deleting (char *path);
 FileProgressStatus file_progress_real_query_replace (enum OperationMode mode,
 						     char *destname,
 						     struct stat *_s_stat,

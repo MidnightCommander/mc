@@ -642,7 +642,6 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     Widget_Item *hot_cur;
     Widget_Item *previous;
     int    handled, c;
-    extern input_event ();
     
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
@@ -733,6 +732,7 @@ int dlg_key_event (Dlg_head *h, int d_key)
 
 	return handled;
     }
+    return 1;
 }
 
 static INLINE int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
