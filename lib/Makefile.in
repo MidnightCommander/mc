@@ -54,9 +54,9 @@ distclean:
 
 install:
 	for I in $(LIBFILES_CONST); \
-	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(libdir)/$$I; done
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(mclibdir)/$$I; done
 	for I in $(LIBFILES_OUT); \
-	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(libdir)/$$I; done
+	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(mclibdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 	$(MKINSTALLDIRS) $(DESTDIR)$(confdir)
@@ -67,11 +67,11 @@ install:
 
 uninstall:
 	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
-	do $(RMF) $(DESTDIR)$(libdir)/$$I; done
+	do $(RMF) $(DESTDIR)$(mclibdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(RMF) $(DESTDIR)$(tidir)/$$I; done
 	-rmdir $(DESTDIR)$(tidir)
-	-rmdir $(DESTDIR)$(libdir)
+	-rmdir $(DESTDIR)$(mclibdir)
 
 distcopy:
 	$(CP) $(DISTLIB) ../../mc-$(VERSION)/lib

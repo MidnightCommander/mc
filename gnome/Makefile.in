@@ -289,7 +289,7 @@ install_:
 install_mx: all 
 	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(icondir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(libdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(mclibdir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(datadir)/mime-info
 	$(MKINSTALLDIRS) $(DESTDIR)$(corbadir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(gnewdir)
@@ -297,7 +297,7 @@ install_mx: all
 	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
-	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(libdir)/layout
+	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(mclibdir)/layout
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
@@ -307,7 +307,7 @@ uninstall:
 	for I in $(ICONS); \
 	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
-	-$(RMF) $(DESTDIR)$(libdir)/layout
+	-$(RMF) $(DESTDIR)$(mclibdir)/layout
 	-$(RMF) $(DESTDIR)$(datadir)/mime-info/mc.keys
 	-rmdir $(DESTDIR)$(datadir)/mime-info
 	-$(RMF) $(gnewdir)

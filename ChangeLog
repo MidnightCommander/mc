@@ -1,3 +1,8 @@
+Fri Mar 26 19:16:38 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* */Makefie.*: fixed several missed conversions from libdir to
+	mclibdir. (Should be automake'd, really)
+
 1999-03-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Make.common.in: There were conflicting definitions of mclibdir
@@ -6,7 +11,7 @@
 
 	* doc/Makefile.in: Use mcsrclibdir where appropriate.
 
-on Mar 22 03:00:15 1999  Timur Bakeyev  <mc@bat.ru>
+Mon Mar 22 03:00:15 1999  Timur Bakeyev  <mc@bat.ru>
 	
 	* edit/syntax.c: Remove extra "|"  in "file ..\*\\.(pp|PP|pas|PAS|)$ \
 	Pascal Program" (Heh, second time :)

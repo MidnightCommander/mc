@@ -45,18 +45,18 @@ config.h.in: configure.in acconfig.h
 
 install: installdirs
 	@for I in $(unixdirs); do cd $$I; $(MAKE) DESTDIR=$(DESTDIR) $@ || exit 1; cd ..; done
-	$(INSTALL_DATA) $(srcdir)/FAQ $(DESTDIR)$(libdir)/FAQ
+	$(INSTALL_DATA) $(srcdir)/FAQ $(DESTDIR)$(mclibdir)/FAQ
 	$(INSTALL_PROGRAM) mcfn_install $(DESTDIR)$(suppbindir)/mcfn_install
 	chmod +x $(DESTDIR)$(suppbindir)/mcfn_install
 	@echo "Please verify that the configuration values are correctly"
-	@echo "set in the mc.ext file in $(libdir)"
+	@echo "set in the mc.ext file in $(mclibdir)"
 
 install.create_vcs:
 	$(INSTALL_PROGRAM) $(srcdir)/create_vcs $(DESTDIR)$(suppbindir)/create_vcs
 	if test x$(DESTDIR) = x; then $(SHELL) $(srcdir)/create_vcs; fi
 
 installdirs:
-	$(MKINSTALLDIRS) $(DESTDIR)$(bindir) $(DESTDIR)$(libdir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(bindir) $(DESTDIR)$(mclibdir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
@@ -67,10 +67,10 @@ mcfninstall:
 
 uninstall:
 	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
-	-$(RMF) $(DESTDIR)$(libdir)/FAQ
+	-$(RMF) $(DESTDIR)$(mclibdir)/FAQ
 	-$(RMF) $(DESTDIR)$(suppbindir)/mcfn_install
 	-rmdir $(DESTDIR)$(suppbindir)
-	-rmdir $(DESTDIR)$(libdir)
+	-rmdir $(DESTDIR)$(mclibdir)
 	@echo Midnight Commander uninstalled
 
 cross TAGS clean depend dep:

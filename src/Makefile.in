@@ -132,7 +132,7 @@ distclean:
 install: mc mcmfmt @saver@
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
 	$(INSTALL_PROGRAM) mcmfmt $(DESTDIR)$(bindir)/$(binprefix)mcmfmt
-	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(libdir)/$(libprefix)mc.hlp 
+	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/$(libprefix)mc.hlp 
 
 install.saver: cons.saver
 	$(INSTALL_PROGRAM) -m 4755 cons.saver $(DESTDIR)$(suppbindir)/cons.saver
@@ -141,7 +141,7 @@ uninstall:
 	$(RMF) $(bindir)/$(binprefix)mc
 	$(RMF) $(bindir)/$(binprefix)mcmfmt
 	$(RMF) $(bindir)/$(binprefix)cons.saver
-	$(RMF) $(libdir)/$(libprefix)mc.hlp
+	$(RMF) $(mclibdir)/$(libprefix)mc.hlp
 
 distcopy: $(srcdir)/mc.hlp
 	$(CP) $(DISTFILES) ../../mc-$(VERSION)/src
