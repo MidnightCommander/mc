@@ -87,7 +87,7 @@ typedef struct Dlg_head {
     int flags;			/* User flags */
     const char *help_ctx;	/* Name of the help entry */
     const int *color;		/* Color set */
-    const char *title;		/* Title of the dialog */
+    /*notconst*/ char *title;	/* Title of the dialog */
 
     /* Set and received by the user */
     int ret_value;		/* Result of run_dlg() */
@@ -221,7 +221,7 @@ void dlg_select_widget     (Dlg_head *h, void *widget);
 void dlg_one_up            (Dlg_head *h);
 void dlg_one_down          (Dlg_head *h);
 int  dlg_focus             (Dlg_head *h);
-Widget *find_widget_type   (Dlg_head *h, void *callback);
+Widget *find_widget_type   (Dlg_head *h, callback_fn callback);
 void dlg_select_by_id (Dlg_head *h, int id);
 
 /* Redraw all dialogs */
