@@ -1,3 +1,7 @@
+2000-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: src/features.inc renamed to src/features.c
+
 2000-08-19  Valek Filippov  <frob@df.ru>
 
 	* ru.po: updated russian translation.

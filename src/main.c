@@ -122,6 +122,7 @@
 #include "command.h"
 #include "wtools.h"
 #include "complete.h"		/* For the free_completion */
+#include "features.h"
 
 #include "chmod.h"
 #include "chown.h"
@@ -2278,33 +2279,6 @@ do_nc (void)
     done_mc_profile ();
 }
 
-#include "features.inc"
-
-static void
-version (int verbose)
-{
-    char *str;    
-
-    fprintf (stderr, "The Midnight Commander %s\n", VERSION);
-    if (!verbose)
-	return;
-    
-#ifndef HAVE_X
-    fprintf (stderr, status_mouse_support ?
-	    _("with mouse support on xterm and the Linux console.\n") :
-	    _("with mouse support on xterm.\n"));
-#endif /* HAVE_X */
-    for (verbose = 0; features [verbose]; verbose++) 
-    	fprintf (stderr, _(features [verbose]));
-
-    str = guess_message_value (1);
-    fprintf (stderr, "%s\n", str);
-    g_free (str);
-
-    if (print_last_wd)
-	write (stdout_fd, ".", 1);
-}
-
 #if defined (_OS_NT)
 /* Windows NT code */
 #define CONTROL_FILE "\\mc.%d.control"
@@ -2493,6 +2467,7 @@ init_sigchld (void)
 #endif
 #endif
 
+#ifndef HAVE_X
 static void
 print_mc_usage (void)
 {
@@ -2576,6 +2551,7 @@ print_color_usage (void)
 	     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 	     "   brightcyan, lightgray and white\n\n"));
 }
+#endif /* !HAVE_X */
 
 static void
 probably_finish_program (void)
@@ -2596,6 +2572,7 @@ static void
 process_args (int c, const char *option_arg)
 {
     switch (c) {
+#ifndef HAVE_X
     case 'V':
 	version (1);
 	finish_program = 1;
@@ -2607,6 +2584,7 @@ process_args (int c, const char *option_arg)
 	force_colors = 1;
 #endif
 	break;
+#endif /* !HAVE_X */
 		
     case 'f':
 	fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
@@ -2668,13 +2646,13 @@ process_args (int c, const char *option_arg)
 #endif
 	break;
 	    
+#ifndef HAVE_X
     case 'H':
 	print_color_usage ();
 	finish_program = 1;
 	break;
 	    
     case 'h':
-#ifndef PORT_WANTS_ARGP
 	print_mc_usage ();
 	finish_program = 1;
 #endif

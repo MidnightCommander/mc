@@ -1,5 +1,8 @@
 #ifndef __CMD_H
 #define __CMD_H
+
+#include "panel.h"
+
 void netlink_cmd (void);
 void ftplink_cmd (void);
 void smblink_cmd (void);

@@ -18,6 +18,7 @@
 #include "widget.h"
 #include "main.h"
 #include "cons.saver.h"
+#include "features.h"
 
 char *default_edition_colors =
 "normal=lightgray,blue:"

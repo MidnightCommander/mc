@@ -77,6 +77,7 @@
 #include "setup.h"
 #include "x.h"
 #include "profile.h"
+#include "features.h"
 
 #define MIDNIGHT
 #include "../vfs/vfs.h"

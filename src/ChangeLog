@@ -1,3 +1,15 @@
+2000-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* main.c [HAVE_X]: print_mc_usage() and print_color_usage()
+	removed.
+	version() moved to ...
+	* features.inc: ... here, renamed to features.c
+	* main.h: status_using_ncurses moved to ...
+	* features.h: ... here
+	* cmd.c, text.c: include "features.h"
+	* cmd.h: include "panel.h"
+	* Makefile.in: changed to use features.h and features.c
+
 2000-08-22  Pavel Roskin  <proski@gnu.org>
 
 	* main.c [HAVE_GNOME]: disable chmod and chown - they were

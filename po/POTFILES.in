@@ -39,7 +39,7 @@ src/command.c
 src/dialog.c
 src/dir.c
 src/ext.c
-src/features.inc
+src/features.c
 src/file.c
 src/filegui.c
 src/find.c
