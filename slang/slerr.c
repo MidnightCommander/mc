@@ -35,7 +35,7 @@ void SLang_doerror (char *error)
    
    str = "Slang/Midnight Commander unknown error";
 
-   sprintf(err, "S-Lang Error: %s", str);
+   g_snprintf(err, sizeof (err), "S-Lang Error: %s", str);
    
    if (SLang_Error_Routine == NULL)
      {

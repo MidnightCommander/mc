@@ -1781,7 +1781,7 @@ void SLtt_get_terminfo (void)
    	     SLtt_set_term_vtxxx (&vt102);
 	     return;
 	  }
-	sprintf (err_buf, "Unknown terminal: %s\n\
+	g_snprintf (err_buf, sizeof (err_buf), "Unknown terminal: %s\n\
 Check the TERM environment variable.\n\
 Also make sure that the terminal is defined in the terminfo database.\n\
 Alternatively, set the TERMCAP environment variable to the desired\n\

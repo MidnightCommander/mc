@@ -25,7 +25,7 @@ SLANGOBJS = 	sldisply.o slerr.o slsmg.o slutty.o \
 # Distribution variables
 #
 
-DISTSLANG = 	Makefile.in README $(SLANGSRCS) $(SLANGHDRS)
+DISTSLANG = 	Makefile.in ChangeLog README $(SLANGSRCS) $(SLANGHDRS)
 
 all: @LIBSLANG@
 

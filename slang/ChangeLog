@@ -1,0 +1,10 @@
+Sun Feb 14 01:05:42 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* sldisply.c (SLtt_get_terminfo): use g_snprintf instead of
+	sprintf
+
+	* slsmg.c (SLsmg_printf): ditto
+
+	* sltermin.c (SLtt_tigetent): ditto
+
+

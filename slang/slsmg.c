@@ -189,7 +189,7 @@ void SLsmg_printf (char *fmt, ...)
    va_list ap;
 
    va_start(ap, fmt);
-   (void) vsprintf(p, fmt, ap);
+   (void) g_vsnprintf(p, sizeof (p), fmt, ap);
    va_end(ap);
    
    SLsmg_write_string (p);
@@ -947,7 +947,7 @@ void SLsmg_vprintf (char *fmt, va_list ap)
 {
    char p[1000];
    
-   (void) vsprintf(p, fmt, ap);
+   (void) g_vsnprintf(p, sizeof (p), fmt, ap);
    
    SLsmg_write_string (p);
 }

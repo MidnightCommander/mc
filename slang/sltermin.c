@@ -269,7 +269,7 @@ char *SLtt_tigetent (char *term)
 	tidir = Terminfo_Dirs[i];
 	if (tidir != NULL)
 	  {
-	     sprintf (file, "%s/%c/%s", tidir, *term, term);
+	     g_snprintf (file, sizeof (file), "%s/%c/%s", tidir, *term, term);
 	     if (NULL != (fp = open_terminfo (file, ti))) break;
 	  }
 	i++;
