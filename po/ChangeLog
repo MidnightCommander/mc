@@ -1,3 +1,7 @@
+2001-09-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ru.po: Fix some smbfs messages. Sync src/screen.c original message.
+
 2001-09-02  Abel Cheung  <maddog@linux.org.hk>
 
 	* zh_TW.Big5.po: Rename to ......

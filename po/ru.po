@@ -5757,7 +5757,7 @@ msgid "GID"
 msgstr "GID"
 
 #: src/screen.c:1310
-msgid "Unknow tag on display format: "
+msgid "Unknown tag on display format: "
 msgstr "Неизвестный тег в формате отображения: "
 
 #: src/screen.c:1436
@@ -6872,12 +6872,12 @@ msgstr " Сбой идентификации "
 #: vfs/smbfs.c:1590
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr " %s создает каталог %s "
+msgstr " %s при создании каталога %s "
 
 #: vfs/smbfs.c:1613
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " %s удаляет каталог %s "
+msgstr " %s при удалении каталога %s "
 
 #: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
@@ -6892,7 +6892,7 @@ msgstr " %s при удалении файла %s с удаленной машины "
 #: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s переименовывает файлы\n"
+msgstr " %s при переименовывании файлов\n"
 
 #: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
