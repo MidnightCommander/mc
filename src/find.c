@@ -993,6 +993,7 @@ do_find (void)
 	if (v == B_PANELIZE){
 	    if (dir_and_file_set){
 	        try_to_select (cpanel, NULL);
+		panel_re_sort (cpanel);
 	        paint_panel (cpanel);
 	    }
 	    break;
