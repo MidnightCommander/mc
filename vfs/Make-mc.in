@@ -82,6 +82,7 @@ EXTFS_IN    = 			\
 	ftplist.in 		\
 	uar.in 			\
 	ulha.in 		\
+	uha.in			\
 	uzip.in
 
 EXTFS_OUT = 			\
@@ -93,6 +94,7 @@ EXTFS_OUT = 			\
 	ftplist 		\
 	uar 			\
 	ulha 			\
+	uha			\
 	uzip
 
 EXTFSSTUFF = $(EXTFS_MISC) $(EXTFS_CONST) $(EXTFS_IN)

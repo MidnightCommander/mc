@@ -1,3 +1,7 @@
+Mon Mar 22 02:00:16 1999  Valery Kornienkov <vlk@st.simbirsk.su>
+
+	* extfs/uha.in: Add support for ha archives.
+
 1999-03-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* vfs.c (vfs_parse_ls_lga): Handle stupid servers that send n_link
