@@ -624,48 +624,47 @@ dlg_try_hotkey (Dlg_head *h, int d_key)
     return handled;
 }
 
-static int
+static void
 dlg_key_event (Dlg_head *h, int d_key)
 {
     int handled;
 
     if (!h->current)
-	return 0;
+	return;
 
     /* TAB used to cycle */
-    if (!(h->flags & DLG_WANT_TAB)
-	&& (d_key == '\t' || d_key == KEY_BTAB)) {
-	if (d_key == '\t')
+    if (!(h->flags & DLG_WANT_TAB)) {
+	if (d_key == '\t') {
 	    dlg_one_down (h);
-	else
+	    return;
+	} else if (d_key == KEY_BTAB) {
 	    dlg_one_up (h);
-    } else {
-
-	/* first can dlg_callback handle the key */
-	handled = (*h->callback) (h, DLG_KEY, d_key);
-
-	/* next try the hotkey */
-	if (!handled)
-	    handled = dlg_try_hotkey (h, d_key);
-
-	if (handled)
-	    (*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
-
-	/* not used - then try widget_callback */
-	if (!handled)
-	    handled = callback (h) (h->current, WIDGET_KEY, d_key);
-
-	/* not used- try to use the unhandled case */
-	if (!handled)
-	    handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
-
-	if (!handled)
-	    dialog_handle_key (h, d_key);
-	(*h->callback) (h, DLG_POST_KEY, d_key);
-
-	return handled;
+	    return;
+	}
     }
-    return 1;
+
+    /* first can dlg_callback handle the key */
+    handled = (*h->callback) (h, DLG_KEY, d_key);
+
+    /* next try the hotkey */
+    if (!handled)
+	handled = dlg_try_hotkey (h, d_key);
+
+    if (handled)
+	(*h->callback) (h, DLG_HOTKEY_HANDLED, 0);
+
+    /* not used - then try widget_callback */
+    if (!handled)
+	handled = callback (h) (h->current, WIDGET_KEY, d_key);
+
+    /* not used- try to use the unhandled case */
+    if (!handled)
+	handled = (*h->callback) (h, DLG_UNHANDLED_KEY, d_key);
+
+    if (!handled)
+	dialog_handle_key (h, d_key);
+
+    (*h->callback) (h, DLG_POST_KEY, d_key);
 }
 
 static inline int

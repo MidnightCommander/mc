@@ -1,5 +1,7 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* dialog.c (dlg_key_event): Simplify logic, return void.
+
 	* dialog.c: Remove duplication between two chains of dialogs.
 	* dialog.h (struct Dlg_head): Add "fullscreen" field, remove
 	"refresh_pushed", rename "previous_dialog" to "parent".
