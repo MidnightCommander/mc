@@ -1,5 +1,8 @@
 2001-12-31  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: convert to ...
+	* Makefile.am: ... this.
+
 	* Makefile.am: rename to ...
 	* Make-alone.am: ... this.  Automake 1.5b doesn't allow Makefile
 	and Makefile.am to coexist peacefully unless the former is
