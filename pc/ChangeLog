@@ -1,8 +1,9 @@
 2002-07-01  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* util_nt.c (check_error_pipe): Use "%s" in message () to 
+	* util_nt.c: Eliminate C++ comments everywhere.
+	(check_error_pipe): Use "%s" in message () to
 	prevent possible crash.
-	(close_error_pipe): Likewise.  Don't use C++ comment.
+	(close_error_pipe): Likewise.
 
 2002-06-04  Andrew V. Samoilov  <kai@cmail.ru>
 

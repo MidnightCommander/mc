@@ -595,23 +595,23 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 
     pid_t pid;
 
-	// Create the pipes
+	/* Create the pipes */
 	if(_pipe(pipe0, 8192, O_BINARY | O_NOINHERIT) == -1)
    	    exit (1);
 	if(_pipe(pipe1, 8192, O_BINARY | O_NOINHERIT) == -1)
    	    exit (1);
-	// Duplicate stdin/stdout handles (next line will close original)
+	/* Duplicate stdin/stdout handles (next line will close original) */
 	std_sav[0] = _dup(_fileno(stdin));
 	std_sav[1] = _dup(_fileno(stdout));
-	// Duplicate read end of pipe0 to stdin handle
+	/* Duplicate read end of pipe0 to stdin handle */
 	if(_dup2(pipe0[0], _fileno(stdin)) != 0)
    	    exit (1);
-	// Duplicate write end of pipe1 to stdout handle
+	/* Duplicate write end of pipe1 to stdout handle */
 	if(_dup2(pipe1[1], _fileno(stdout)) != 0)
    	    exit (1);
-	// Close original read end of pipe0
+	/* Close original read end of pipe0 */
 	close(pipe0[0]);
-	// Close original write end of pipe1
+	/* Close original write end of pipe1 */
 	close(pipe1[1]);
 
 	va_start (ap, command);
@@ -622,17 +622,17 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 		break;
 	}
 	va_end (ap);
-	// Spawn process
-	pid = spawnvp(P_NOWAIT,command, args);// argv[1], (const char* const*)&argv[1]);
+	/* Spawn process */
+	pid = spawnvp(P_NOWAIT,command, args);/* argv[1], (const char* const*)&argv[1]); */
 	if(!pid)
    	    exit (1);
-	// Duplicate copy of original stdin back into stdin
+	/* Duplicate copy of original stdin back into stdin */
 	if(_dup2(std_sav[0], _fileno(stdin)) != 0)
    	    exit (1);
-	// Duplicate copy of original stdout back into stdout
+	/* Duplicate copy of original stdout back into stdout */
 	if(_dup2(std_sav[1], _fileno(stdout)) != 0)
    	    exit (1);
-	// Close duplicate copy of original stdout  and stdin    
+	/* Close duplicate copy of original stdout  and stdin */ 
 	close(std_sav[0]);
 	close(std_sav[1]);
 
