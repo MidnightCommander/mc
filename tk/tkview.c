@@ -30,6 +30,7 @@
 #include "view.h"
 #include "tkmain.h"
 
+void
 x_init_view (WView *view)
 {
     view->status_shown = 0;
