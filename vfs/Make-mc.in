@@ -123,8 +123,12 @@ install.extfs:
 	    $(INSTALL_DATA) $(srcdir)/extfs/$$I \
 	          $(DESTDIR)$(libdir)/extfs/$$I; \
 	done
-	for I in $(EXTFS_CONST) $(EXTFS_OUT); do \
+	for I in $(EXTFS_CONST) ; do \
 	    $(INSTALL_PROGRAM) $(srcdir)/extfs/$$I \
+	             $(DESTDIR)$(libdir)/extfs/$$I; \
+	done
+	for I in $(EXTFS_OUT) ; do \
+	    $(INSTALL_PROGRAM) $(builddir)/vfs/extfs/$$I \
 	             $(DESTDIR)$(libdir)/extfs/$$I; \
 	done
 

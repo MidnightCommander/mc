@@ -1,3 +1,9 @@
+1998-07-31  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
+
+	* Make-mc.in (install.extfs): Splitted install of $(EXTFS_CONST)
+	and $(EXTFS_OUT) because the first must be installed from
+	$(srcdir) and the second from $(builddir).
+
 Fri Jul 24 00:22:30 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* Make-mc.in (DISTVFS): Changed Makefile.in to Make-mc.in.
