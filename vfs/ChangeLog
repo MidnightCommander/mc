@@ -1,3 +1,8 @@
+Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
+
+	* Make-mc.in(XCPPFLAGS): Add necessary paths to allow compile sambafs
+	when builddir != srcdir. Removed some junk after not coherent patching.
+	
 1999-07-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Make-mc.in (distcopy): Added a bunch of new lists of files for
