@@ -38,7 +38,7 @@ get_action (void)
 	menu = gnome_popup_menu_new (actions);
 	a = gnome_popup_menu_do_popup_modal (menu, NULL, NULL, NULL, NULL);
 
-	switch (action) {
+	switch (a) {
 	case 0:
 		action = GDK_ACTION_MOVE;
 		break;

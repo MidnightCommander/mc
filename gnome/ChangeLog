@@ -1,3 +1,7 @@
+1998-12-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdnd.c (get_action): Typo fix.
+
 1998-12-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (load_imlib_icons): Make it use the new gicon files. 
@@ -5,7 +9,7 @@
 	* gicon.c, gicon.h: New files: they keep an image cache and
 	provide the right icon to use based on the filename.  They use the
 	GNOME metadata to fecth the "icon-filename" and "icon-inline-png"
-	keys.
+	keys for per-image icons.
 
 	* gdialogs.c (file_mask_dialog): Commented the help messages until
 	the warnings are figured out. 
