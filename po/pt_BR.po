@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
 "POT-Creation-Date: 2000-07-12 12:41-0300\n"
 "PO-Revision-Date: 1999-11-01 14:25-02:00\n"
-"Last-Translator: Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>\n"
+"Last-Translator: E. A. Tacão <tacao@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
@@ -118,9 +118,9 @@ msgstr " Não há nenhum outro painel para comparar o conteúdo "
 
 # src/file.c:342
 #: gnome/gcmd.c:86
-#, fuzzy
+#
 msgid " Could not start a terminal "
-msgstr " Impossível fazer a ligação (direta) "
+msgstr " Impossível iniciar um terminal"
 
 # gnome/gcmd.c:127 src/main.c:844 src/screen.c:2053
 #: gnome/gcmd.c:101
@@ -527,9 +527,9 @@ msgstr "Org_anizar ícones"
 
 # gnome/glayout.c:56
 #: gnome/gdesktop.c:2885
-#, fuzzy
+#
 msgid "_Tidy Icons"
-msgstr "Ícones"
+msgstr "Ícones Lim_pos"
 
 # gnome/gdesktop.c:2413
 #: gnome/gdesktop.c:2886
@@ -555,9 +555,9 @@ msgid "Configure _Background Image"
 msgstr "Configura Imagem de _Fundo"
 
 #: gnome/gdesktop.c:2893
-#, fuzzy
+#
 msgid "Des_ktop Properties"
-msgstr "Propriedates da Área de Trabalho"
+msgstr "Propriedades da Á_rea de Trabalho"
 
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
@@ -854,10 +854,9 @@ msgstr ""
 
 # gnome/gicon.c:154
 #: gnome/gicon.c:282
-#, fuzzy
+#
 msgid "Default set of icons not found, check your installation"
-msgstr ""
-"Conjunto de ícones padrão não encontrado, por favor verifique a instalação"
+msgstr "Conjunto de ícones padrão não encontrado, por favor verifique a instalação"
 
 # gnome/glayout.c:40
 #: gnome/glayout.c:41
@@ -1317,7 +1316,7 @@ msgstr "Arquivo Criado em: "
 #: gnome/gnome-file-property-dialog.c:290
 #: gnome/gnome-file-property-dialog.c:299
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr ""
+msgstr "%a, %b %d %Y,  %I:%M:%S %p"
 
 # gnome/gcmd.c:306
 #: gnome/gnome-file-property-dialog.c:286
@@ -1555,7 +1554,7 @@ msgstr "Ejetar Dispositivo"
 
 #: gnome/gpopup2.c:283
 msgid "Empty Trash"
-msgstr ""
+msgstr "Esvaziar Lixeira"
 
 # gnome/gcmd.c:732 gnome/gpopup.c:53
 #: gnome/gpopup2.c:286
@@ -1574,9 +1573,9 @@ msgstr "Copiar..."
 
 # gnome/gdialogs.c:834
 #: gnome/gpopup2.c:292
-#, fuzzy
+#
 msgid "Move to Trash"
-msgstr "Movendo"
+msgstr "Mover para a Lixeira"
 
 # gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
 # src/screen.c:2297 src/screen.c:2327
@@ -1632,7 +1631,7 @@ msgstr "Utilizar máscaras ao invés de expressões regulares"
 
 #: gnome/gprefs.c:108
 msgid "Determine file types from file content instead of extensions"
-msgstr ""
+msgstr "Determinar tipos dos arquivos através do conteúdo em vez de extensões"
 
 # gnome/gprefs.c:102
 #: gnome/gprefs.c:117
@@ -1786,11 +1785,11 @@ msgstr "Cria um novo diretório aqui"
 
 #: gnome/gscreen.c:1437
 msgid "Empty _Trash"
-msgstr ""
+msgstr "Esvaziar _Lixeira"
 
 #: gnome/gscreen.c:1437
 msgid "Empties the Trash"
-msgstr ""
+msgstr "Esvazia a Lixeira"
 
 # gnome/gscreen.c:1809
 #: gnome/gscreen.c:1653
@@ -2028,7 +2027,7 @@ msgstr "Não é possível acessar a área de trabalho\n"
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
-msgstr ""
+msgstr "Tipo de arranjo desconhecido '%s'\n"
 
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
@@ -2055,13 +2054,13 @@ msgstr "Reexamina os ícones da área de trabalho"
 
 # gnome/glayout.c:394
 #: gnome/gmc-client.c:214
-#, fuzzy
+#
 msgid "Arrange the desktop icons"
-msgstr "Reexamina os ícones da área de trabalho"
+msgstr "Organiza os ícones da área de trabalho"
 
 #: gnome/gmc-client.c:215
 msgid "name | type | size | atime | mtime | ctime"
-msgstr ""
+msgstr "nome | tipo | tam. | atime | mtime | ctime"
 
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
@@ -2088,21 +2087,21 @@ msgstr " Falha ao abrir arquivo para leitura: "
 
 # src/find.c:490
 #: gtkedit/edit.c:318
-#, fuzzy
+#
 msgid " Error reading from pipe: "
-msgstr " Problema ao ler filho "
+msgstr " Problema lendo do pipe:"
 
 # gtkedit/edit.c:129 gtkedit/edit.c:231
 #: gtkedit/edit.c:323
-#, fuzzy
+#
 msgid " Failed trying to open pipe for reading: "
-msgstr " Falha ao abrir arquivo para leitura: "
+msgstr " Falha ao abrir pipe para leitura: "
 
 # gtkedit/editcmd.c:2768
 #: gtkedit/edit.c:337
-#, fuzzy
+#
 msgid " Error reading file: "
-msgstr " Erro ao testar o arquivo "
+msgstr " Erro lendo arquivo:"
 
 # gtkedit/edit.c:238
 #: gtkedit/edit.c:386
@@ -2130,26 +2129,26 @@ msgstr ""
 
 #: gtkedit/edit.c:2571
 msgid "User menu avalaible only in mcedit invoked from mc"
-msgstr ""
+msgstr "Menu do usuário disponível apenas em mcedit chamado por mc"
 
 # gtkedit/editcmd.c:2768
 #. Not essential to translate
 #: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
-#, fuzzy
+#
 msgid "Error trying to stat file:"
-msgstr " Erro ao testar o arquivo "
+msgstr " Erro tentando executar stat no arquivo:"
 
 # gtkedit/editcmd.c:2768
 #: gtkedit/editcmd.c:298
-#, fuzzy
+#
 msgid " Error writing to pipe: "
-msgstr " Erro ao testar o arquivo "
+msgstr " Erro escrevendo no pipe:"
 
 # gtkedit/edit.c:129 gtkedit/edit.c:231
 #: gtkedit/editcmd.c:304
-#, fuzzy
+#
 msgid " Failed trying to open pipe for writing: "
-msgstr " Falha ao abrir arquivo para leitura: "
+msgstr " Falha ao abrir apipe para escrita:"
 
 # gtkedit/editcmd.c:335
 #: gtkedit/editcmd.c:379
@@ -2545,19 +2544,19 @@ msgstr "  Substitui Tudo "
 # gtkedit/editcmd.c:1578
 #. Tool hint
 #: gtkedit/editcmd.c:1470
-#, fuzzy
+#
 msgid "Replace repeatedly"
-msgstr "Substituir Tudo"
+msgstr "Substituir repetidamente"
 
 #: gtkedit/editcmd.c:1474
-#, fuzzy
+#
 msgid " Bookmarks "
-msgstr "Descarregar Favoritos"
+msgstr " Favoritos"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1476 gtkedit/editcmd.c:1477
 msgid "Create bookmarks at all lines found"
-msgstr ""
+msgstr "Criar favoritos em todas as linhas encontradas"
 
 # gtkedit/editcmd.c:1405
 #: gtkedit/editcmd.c:1480
@@ -2633,7 +2632,7 @@ msgstr " Expressão de procura não encontrada "
 #: gtkedit/editcmd.c:2308
 #, c-format
 msgid " %d finds made, %d bookmarks added "
-msgstr ""
+msgstr " %d buscas encontradas, %d favoritos adicionados"
 
 # gtkedit/editcmd.c:2233 gtkedit/editcmd.c:2248 gtkedit/editcmd.c:2251
 #. Confirm 'Quit' dialog box
@@ -2790,23 +2789,23 @@ msgstr " Ordenamento retornou um erro: "
 
 #: gtkedit/editcmd.c:2881
 msgid "Error create script:"
-msgstr ""
+msgstr "Erro ao criar script:"
 
 #: gtkedit/editcmd.c:2887
 msgid "Error read script:"
-msgstr ""
+msgstr "Erro ao ler script:"
 
 #: gtkedit/editcmd.c:2894
 msgid "Error close script:"
-msgstr ""
+msgstr "Erro ao fechar script:"
 
 #: gtkedit/editcmd.c:2899
 msgid "Script created:"
-msgstr ""
+msgstr "Script criado:"
 
 # gtkedit/editcmd.c:2736 gtkedit/editcmd.c:2766
 #: gtkedit/editcmd.c:2906
-#, fuzzy
+#
 msgid "Process block"
 msgstr " Processar bloco "
 
@@ -2902,9 +2901,9 @@ msgstr "copiar para &Arquivo C-f"
 
 # src/main.c:1258
 #: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
-#, fuzzy
+#
 msgid "&User menu...     F11"
-msgstr "Menu de &Usuário   F2"
+msgstr "Menu de &Usuário...   F11"
 
 # gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
 #: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
@@ -2993,7 +2992,7 @@ msgstr "Ir para a linha...      M-l"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
-msgstr ""
+msgstr "ir para o Colchete correspondente   M-b"
 
 # gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
 #: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
@@ -3047,9 +3046,9 @@ msgstr "orde&Nar                M-t"
 
 # gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#, fuzzy
+#
 msgid "E&xternal Formatter      F19"
-msgstr "'indentar' &C Formatador F19"
+msgstr "Formatador E&xterno   F19"
 
 # gtkedit/editmenu.c:215
 #: gtkedit/editmenu.c:232
@@ -3260,7 +3259,7 @@ msgstr "Ir para a linha...\tM-l"
 
 #: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
-msgstr ""
+msgstr "Ir ao colchete correspondente\tM-b"
 
 # gtkedit/editmenu.c:445
 #: gtkedit/editmenu.c:469
@@ -4221,15 +4220,15 @@ msgstr "&Todo o sistema"
 
 # src/cmd.c:667
 #: src/cmd.c:664
-#, fuzzy
+#
 msgid " Menu edit "
-msgstr "Editar menu de arquivo"
+msgstr " Editar menu"
 
 # src/cmd.c:668
 #: src/cmd.c:665
-#, fuzzy
+#
 msgid " Which menu file will you edit ? "
-msgstr " Que menu de arquivo quer editar? "
+msgstr " Que arquivo de menu quer editar? "
 
 # src/cmd.c:670
 #: src/cmd.c:667
@@ -4368,14 +4367,14 @@ msgid " relative symlink: %s "
 msgstr " Ligação simbólica relativa: %s "
 
 #: src/cmd.c:1260
-#, fuzzy
+#
 msgid "Using default locale"
-msgstr "Usa opção padrão para Largar"
+msgstr "Usando localização padrão"
 
 #: src/cmd.c:1262
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
-msgstr ""
+msgstr "Usando local \"%s\" (da variável de ambiente %s)"
 
 # src/cmd.c:1283
 #: src/cmd.c:1348
@@ -4552,9 +4551,9 @@ msgstr "&Grupo"
 
 # src/dir.c:386
 #: src/dir.c:386
-#, fuzzy, c-format
+#, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
-msgstr "Arquivo existe, mas não pode ser testado: %s %s"
+msgstr "Arquivo '%s' existe, mas não pode ser testado via stat: %s"
 
 # src/dir.c:662
 #: src/dir.c:657
@@ -4611,6 +4610,11 @@ msgid ""
 "Midnight Commander package or in case you don't\n"
 "have any, get it from ftp://ftp.nuclecu.unam.mx."
 msgstr ""
+"Arquivo mc.ext foi alterado na\n"
+"versão 3.0. Parece que a instalação\n"
+"faihou. Por favor consiga uma nova cópia do pacote\n"
+"Midnight Commander ou baixe de\n"
+"ftp://ftp.nuclecu.unam.mx."
 
 # src/ext.c:417
 #: src/ext.c:432
@@ -4648,127 +4652,127 @@ msgstr "mc.ext será utilizado nesse momento"
 
 # gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
 #: src/features.inc:8
-#, fuzzy
+#
 msgid "Edition: "
-msgstr " Editar "
+msgstr "Edição:"
 
 # gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
 #: src/features.inc:11
-#, fuzzy
+#
 msgid "XView"
-msgstr "Visualizar"
+msgstr "XView"
 
 #: src/features.inc:13
 msgid "Tk"
-msgstr ""
+msgstr "Tk"
 
 # gnome/gprop.c:259
 #: src/features.inc:16
-#, fuzzy
+#
 msgid "text mode"
-msgstr "Modo Atual: "
+msgstr "modo texto"
 
 #: src/features.inc:18
 msgid " with X11 support to read modifiers"
-msgstr ""
+msgstr "com suporte X11 para ler modificadores"
 
 # src/boxes.c:674
 #: src/features.inc:24
-#, fuzzy
+#
 msgid "Virtual File System: tarfs, extfs"
-msgstr " Configuração do Sistema de arquivos virtual "
+msgstr "Sistema de arquivos virtual: tarfs, extfs"
 
 #: src/features.inc:26
 msgid ", ftpfs"
-msgstr ""
+msgstr ", ftpfs"
 
 #: src/features.inc:28
 msgid " (proxies: hsc proxy)"
-msgstr ""
+msgstr " (proxies: hsc proxy)"
 
 #: src/features.inc:30
 msgid ", mcfs"
-msgstr ""
+msgstr ", mcfs"
 
 #: src/features.inc:32
 msgid " (with termnet support)"
-msgstr ""
+msgstr " (with suporte a termnet)"
 
 #: src/features.inc:35
 msgid ", smbfs"
-msgstr ""
+msgstr ", smbfs"
 
 #: src/features.inc:39
 msgid ", undelfs"
-msgstr ""
+msgstr ", undelfs"
 
 #: src/features.inc:45
 msgid "With builtin Editor\n"
-msgstr ""
+msgstr "Com Editor embutido\n"
 
 # src/hotlist.c:663
 #: src/features.inc:48
-#, fuzzy
+#
 msgid "Using "
-msgstr "Movendo "
+msgstr "Usando"
 
 #: src/features.inc:51
 msgid "system-installed "
-msgstr ""
+msgstr "instalado no sistema"
 
 #: src/features.inc:53
 msgid "S-lang library with "
-msgstr ""
+msgstr "Biblioteca S-lang com "
 
 # gnome/gprop.c:129
 #: src/features.inc:56
-#, fuzzy
+#
 msgid "terminfo"
-msgstr "Utilizar Terminal"
+msgstr "terminfo"
 
 #: src/features.inc:59
 msgid "termcap"
-msgstr ""
+msgstr "termcap"
 
 # src/main.c:2691
 #: src/features.inc:61
-#, fuzzy
+#
 msgid "an unknown terminal"
-msgstr "Para execução em terminais lentos"
+msgstr "um terminal desconhecido"
 
 #: src/features.inc:64
 msgid " database"
-msgstr ""
+msgstr " banco de dados"
 
 #: src/features.inc:67
 msgid "the ncurses library"
-msgstr ""
+msgstr "a biblioteca ncurses"
 
 #: src/features.inc:69
 msgid "some unknown curses library"
-msgstr ""
+msgstr "alguma biblioteca curses desconhecida"
 
 # src/main.c:2683
 #: src/features.inc:74
-#, fuzzy
+#
 msgid "With subshell support: "
-msgstr "Desabilita suporte à sub interpretadores de comandos"
+msgstr "Com suporte à subinterpretadores de comandos"
 
 # gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
 #: src/features.inc:76
-#, fuzzy
+#
 msgid "optional"
-msgstr "Opções"
+msgstr "opcional"
 
 #: src/features.inc:78
 msgid "as default"
-msgstr ""
+msgstr "como padrão"
 
 # gnome/glayout.c:424
 #: src/features.inc:84
-#, fuzzy
+#
 msgid "With support for background operations\n"
-msgstr "Lista de operações em segundo plano..."
+msgstr "Com suporte a operações em segundo plano\n"
 
 # src/file.c:154 src/tree.c:649
 #: src/file.c:154 src/tree.c:639
@@ -6435,7 +6439,7 @@ msgstr "&Ativar lista VFS     C-x a"
 
 #: src/main.c:1339
 msgid "Fr&ee VFSs now"
-msgstr ""
+msgstr "&Limpar VFSs agora"
 
 # src/main.c:1306
 #: src/main.c:1342
@@ -6464,9 +6468,9 @@ msgstr "Editar &Menu de arquivo"
 
 # src/cmd.c:667
 #: src/main.c:1354
-#, fuzzy
+#
 msgid "Menu edi&Tor edit"
-msgstr "Editar menu de arquivo"
+msgstr "Editar Edi&tor de Menu"
 
 # src/main.c:1321
 #: src/main.c:1359
@@ -6558,20 +6562,20 @@ msgstr "Obrigado por utilizar o Midnight Commander"
 
 # src/main.c:2253
 #: src/main.c:2290
-#, fuzzy
+#
 msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "com suporte à mouse no xterm%s.\n"
+msgstr "com suporte à mouse no xterm e no console Linux.\n"
 
 # src/main.c:2253
 #: src/main.c:2291
-#, fuzzy
+#
 msgid "with mouse support on xterm.\n"
-msgstr "com suporte à mouse no xterm%s.\n"
+msgstr "com suporte a mouse no xterm.\n"
 
 # src/main.c:2349
 #: src/main.c:2392
 msgid "The TERM environment variable is unset!\n"
-msgstr "A variável de ambiente TERM não foi definida\n"
+msgstr "A variável de ambiente TERM não foi definida!\n"
 
 #: src/main.c:2498
 msgid ""
@@ -6580,18 +6584,23 @@ msgid ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
+"Uso:\n"
+"\n"
+"mc [sinalizadores] [este_dir] [outro dir_painel]\n"
+"\n"
+""
 
 #: src/main.c:2501
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
-msgstr ""
+msgstr "-a, --stickchars   Força uso de +, -, | para desenho de linhas.\n"
 
 #: src/main.c:2503
 msgid "-b, --nocolor      Force black and white display.\n"
-msgstr ""
+msgstr "-b, --nocolor      Força display preto e branco.\n"
 
 #: src/main.c:2505
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-msgstr ""
+msgstr "-B, --background   [APENAS DESENVOLVIMENTO: Depura o código em segundo plano]\n"
 
 #: src/main.c:2507
 msgid ""
@@ -6599,10 +6608,14 @@ msgid ""
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
 msgstr ""
+"-c, --color        Força modo de cores.\n"
+"-C, --colors       Especifica cores (use --help-colors para obter uma lista).\n"
+"-d, --nomouse      Desabilita suporte a mouse.\n"
+""
 
 #: src/main.c:2511
 msgid "-e, --edit         Startup the internal editor.\n"
-msgstr ""
+msgstr "-e, --edit         Inicia o editor interno.\n"
 
 #: src/main.c:2513
 msgid ""
@@ -6612,29 +6625,39 @@ msgid ""
 "terminfo/termcap\n"
 "                   default.\n"
 msgstr ""
+"-f, --libdir       Imprime caminhos configurados.\n"
+"-h, --help         Mostra esta mensagem de ajuda.\n"
+"-k, --resetsoft    Reinicializa softkeys (apenas terminais HP) a seus padrões terminfo/termcap\n"
+"\n"
+""
 
 #: src/main.c:2518
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
-msgstr ""
+msgstr "-l, --ftplog file  Registra comandos ftpfs no arquivo.\n"
 
 #: src/main.c:2521
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
-msgstr ""
+msgstr "-M, --memory arquivo  [APENAS DESENVOLVIMENTO: Registra mensagens ESTRANHAS no arquivo.]\n"
 
 #: src/main.c:2523
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
+"-P, --printwd      Na saída, imprime o último diretório utilizado.\n"
+"-s, --slow         Desabilita operação detalhada (para terminais lentos).\n"
+""
 
 #: src/main.c:2526
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
-msgstr ""
+msgstr "-t, --termcap      Ativa suporte à variável TERMCAP.\n"
 
 #: src/main.c:2529
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
+"-S, --createcmdile Cria arquivo de comando para definir diretório padrão quando da saída.\n"
+""
 
 #: src/main.c:2532
 msgid ""
@@ -6642,6 +6665,10 @@ msgid ""
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
 msgstr ""
+"-u, --nosubshell   Desabilita o modo de subinterpretador paralelo.\n"
+"-U, --subshell     Força o modo de subinterpretador paralelo.\n"
+"-r, --forceexec    Força a execução do subinterpretador.\n"
+""
 
 #: src/main.c:2536
 msgid ""
@@ -6650,10 +6677,15 @@ msgid ""
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
+"-v, --view fname   Inicia no modo do visualizador.\n"
+"-V, --version      Mostra a versão e opções de configuração.\n"
+"-x, --xterm        Força o suporte a mouse no xterm e salvamento/restauração de tela.\n"
+"+num               num é o número de linha inicial do arquivo para `mcedit'.\n"
+""
 
 #: src/main.c:2541
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-msgstr ""
+msgstr "-X, --dbgsubshell  [APENAS DESENVOLVIMENTO: Depura o subinterpretador].\n"
 
 #: src/main.c:2543
 msgid ""
@@ -6661,6 +6693,10 @@ msgid ""
 "Please send any bug reports (including the output of `mc -V')\n"
 "to mc-bugs@nuclecu.unam.mx\n"
 msgstr ""
+"\n"
+"Por favor envie qualquer relatório de problemas (incluindo a saída de 'mn - V')\n"
+"a mc-bugs@nuclecu.unam.mx\n"
+""
 
 #: src/main.c:2559
 msgid ""
@@ -6682,6 +6718,24 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"--colors PAL-CHAVE={FRENTE},{FUNDO}\n"
+"\n"
+"{FRENTE} e {FUNDO} podem ser omitidos, e o default será usado\n"
+"\n"
+"Palavras-chave:\n"
+"   Global:       errors, reverse, gauge, input\n"
+"   Arquivos     : normal, selected, marked, markselect\n"
+"   Diálogos    : dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Menus:        menu, menuhot, menusel, menuhotsel\n"
+"   Ajuda:        helpnormal, helpitalic, helplink, helpslink\n"
+"   Tipos de arq.:directory, execute, link, device, special, core\n"
+"\n"
+"Cores:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray and white\n"
+"\n"
+""
 
 # src/main.c:2556
 #: src/main.c:2608
@@ -6814,13 +6868,13 @@ msgstr "Nenhuma janela aberta ao iniciar"
 
 # gnome/glayout.c:394
 #: src/main.c:2768
-#, fuzzy
+#
 msgid "No desktop icons"
-msgstr "Reexamina os ícones da área de trabalho"
+msgstr "Sem ícones na área de trabalho"
 
 #: src/main.c:2769
 msgid "Look more like traditional gmc"
-msgstr ""
+msgstr "Parecer mais com o gmc tradicional"
 
 #: src/main.c:2771
 msgid "Display the directory that holds the .links startup files and exit"
@@ -7055,11 +7109,11 @@ msgstr "Mostra uma breve explanação sobre o uso"
 
 #: src/screen.c:227
 msgid "SUB-DIR"
-msgstr ""
+msgstr "SUB-DIR"
 
 #: src/screen.c:227
 msgid "UP--DIR"
-msgstr ""
+msgstr "UP--DIR"
 
 # src/screen.c:429
 #: src/screen.c:417
@@ -7243,15 +7297,15 @@ msgstr ""
 
 #: src/user.c:137
 msgid " Format error on file Extensions File "
-msgstr ""
+msgstr " Erro no formato do arquivo de extensões"
 
 #: src/user.c:138
 msgid " The %%var macro does not have a default "
-msgstr ""
+msgstr " A macro %%var não tem um padrão"
 
 #: src/user.c:139
 msgid " The %%var macros does not have a variable "
-msgstr ""
+msgstr " A macro %%var não tem uma variável"
 
 # src/user.c:261
 #: src/user.c:273
@@ -7305,7 +7359,7 @@ msgstr ""
 #: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
-msgstr ""
+msgstr " Nenhuma entrada apropriada encontrada em %s "
 
 # src/user.c:712
 #. Create listbox
@@ -7802,12 +7856,12 @@ msgstr "NumLock no teclado numérico"
 
 # vfs/extfs.c:266
 #: vfs/cpio.c:141 vfs/cpio.c:157
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Couldn't open cpio archive\n"
 "%s"
 msgstr ""
-"Impossível abrir arquivo %s\n"
+"Impossível abrir arquivo cpio\n"
 "%s"
 
 #: vfs/cpio.c:224
@@ -7816,6 +7870,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
+"Final prematuro do arquivo cpio\n"
+"%s"
 
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
@@ -7823,16 +7879,22 @@ msgid ""
 "Corrupt cpio header encountered in\n"
 "%s"
 msgstr ""
+"Cabeçalho cpio corrompido encontrado em\n"
+"%s"
 
 # vfs/tar.c:339 vfs/tar.c:346
 #: vfs/cpio.c:427
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
 "%s\n"
 "in cpio archive\n"
 "%s"
-msgstr "Arquivo inconsistente"
+msgstr ""
+"Links físicos inconsistentes de\n"
+"%s\n"
+"no arquivo cpio\n"
+"%s"
 
 #. In case entry is already there
 #. This shouldn't happen! (well, it can happen if there is a record for a
@@ -7842,46 +7904,48 @@ msgstr "Arquivo inconsistente"
 #: vfs/cpio.c:450
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
-msgstr ""
+msgstr "%s contém entradas duplicadas! Ignorando!"
 
 # vfs/tar.c:284
 #: vfs/cpio.c:517
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Unexpected end of file\n"
 "%s"
-msgstr "Fim de arquivo inesperado"
+msgstr ""
+"Fim de arquivo inesperado\n"
+"%s"
 
 #: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
-msgstr ""
+msgstr "Cache de dir expirou para %s"
 
 # src/hotlist.c:639
 #: vfs/direntry.c:431 vfs/direntry.c:434
-#, fuzzy
+#
 msgid " Direntry warning "
-msgstr " Caminho do diretório "
+msgstr " Aviso de entrada de diretório "
 
 #: vfs/direntry.c:431
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
-msgstr ""
+msgstr "Super ino_usage é %d,  falha de memória"
 
 #: vfs/direntry.c:434
 msgid "Super has want_stale set"
-msgstr ""
+msgstr "Super tem want_stale configurada"
 
 #: vfs/direntry.c:812
-#, fuzzy
+#
 msgid "Starting linear transfer..."
-msgstr "Abortando transferência..."
+msgstr "Iniciando transferência linear..."
 
 # gnome/gdialogs.c:60
 #: vfs/direntry.c:957
-#, fuzzy
+#
 msgid "Getting file"
-msgstr "Apagando arquivo: "
+msgstr "Obtendo arquivo"
 
 # vfs/extfs.c:266
 #: vfs/extfs.c:270
@@ -7914,9 +7978,9 @@ msgstr "Desculpe, impossível fazer autenticação de senha no momento."
 
 # vfs/mcfs.c:188
 #: vfs/fish.c:233
-#, fuzzy
+#
 msgid " fish: Password required for "
-msgstr "FTP: Senha requerida para "
+msgstr " fish: Senha requerida para"
 
 #: vfs/fish.c:242
 msgid "fish: Sending password..."
@@ -7967,7 +8031,7 @@ msgstr "peixe: guardando %s %d (%d)"
 
 #: vfs/fish.c:509
 msgid "zeros"
-msgstr ""
+msgstr "zeros"
 
 #: vfs/fish.c:556
 msgid "Aborting transfer..."
@@ -8097,17 +8161,17 @@ msgid "Resolving symlink..."
 msgstr "Resolvendo ligações simbólicas..."
 
 #: vfs/ftpfs.c:1180
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
-msgstr "ftpfs: Lendo diretório FTP %s..."
+msgstr "ftpfs: Lendo diretório FTP %s... %s%s"
 
 #: vfs/ftpfs.c:1181
 msgid "(strict rfc959)"
-msgstr ""
+msgstr "(strict rfc959)"
 
 #: vfs/ftpfs.c:1182
 msgid "(chdir first)"
-msgstr ""
+msgstr "(chdir first)"
 
 # src/utilunix.c:392
 #: vfs/ftpfs.c:1279
@@ -8181,24 +8245,20 @@ msgstr " Senha inválida "
 
 # src/tree.c:692
 #: vfs/mcfs.c:235
-#, fuzzy, c-format
+#, c-format
 msgid " Can't locate hostname: %s "
-msgstr ""
-" Não foi possível testar o destino \n"
-" %s "
+msgstr " Impossível localizar máquina: %s "
 
 # src/screen.c:2312
 #: vfs/mcfs.c:253
-#, fuzzy, c-format
+#, c-format
 msgid " Can't create socket: %s "
-msgstr ""
-" Impossível mudar diretório ativo para %s \n"
-" %s "
+msgstr " Impossível criar soquete: %s"
 
 #: vfs/mcfs.c:259
-#, fuzzy, c-format
+#, c-format
 msgid " Can't connect to server: %s "
-msgstr "ftpfs: conexão para o servidor falhou: %s"
+msgstr " Impossível conectar ao servidor: %s"
 
 # vfs/mcfs.c:322
 #: vfs/mcfs.c:324
@@ -8208,7 +8268,7 @@ msgstr " Muitas conexões abertas "
 #. This is place of next pointer
 #: vfs/mcfs.c:1127
 msgid "Midnight Commander's private remote filesystem"
-msgstr ""
+msgstr "Sistema de arquivos remotos privados do Midnight Commander"
 
 # gnome/gprop.c:119
 #: vfs/smbfs.c:116
@@ -8241,19 +8301,19 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr ""
+msgstr " Falha na autenticação"
 
 # src/cmd.c:1076
 #: vfs/smbfs.c:1738
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr " %s mkdir'ing %s "
+msgstr " %s executando mkdir em %s "
 
 # src/cmd.c:1076
 #: vfs/smbfs.c:1759
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " %s rmdir'ing %s "
+msgstr " %s executando rmdir em %s "
 
 # src/file.c:1193
 #: vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
@@ -8301,31 +8361,29 @@ msgstr ""
 
 # src/boxes.c:70
 #: vfs/vfs.c:1139
-#, fuzzy
+#
 msgid "Changes to file lost"
-msgstr "Lista &Longa"
+msgstr "Alterações no arquivo perdidas"
 
 # gnome/gdnd.c:191
 #: vfs/vfs.c:1781
-#, fuzzy
+#
 msgid "Could not parse:"
-msgstr ""
-"Não foi possível iniciar %s\n"
-"%s"
+msgstr "Não foi possível verificar:"
 
 #: vfs/vfs.c:1783
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "Mais erros de verificação serão ignorados."
 
 #: vfs/vfs.c:1783
 msgid "(sorry)"
-msgstr ""
+msgstr "(perdão)"
 
 # src/file.c:1541
 #: vfs/vfs.c:1794
-#, fuzzy
+#
 msgid "Internal error:"
-msgstr "Erro interno: get_file \n"
+msgstr "Erro interno:"
 
 #: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
@@ -8338,74 +8396,76 @@ msgstr "%s: %s: %s %ld bytes transferidos"
 
 # src/ext.c:417
 #: vfs/undelfs.c:81
-#, fuzzy
+#
 msgid " undelfs: error "
-msgstr " erro de arquivo "
+msgstr " undelfs: erro "
 
 #: vfs/undelfs.c:184
 msgid " not enough memory "
-msgstr ""
+msgstr " memória insuficiente"
 
 #: vfs/undelfs.c:189
 msgid " while allocating block buffer "
-msgstr ""
+msgstr " alocando buffer de blocos"
 
 #: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
-msgstr ""
+msgstr " open_inode_scan: %d "
 
 #: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
-msgstr ""
+msgstr " iniciando varredura de inodes %d "
 
 #: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
+msgstr "undelfs: carregando informação de arquivos excluídos inodes %d"
 
 #: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr ""
+msgstr " chamando ext2_block_iterate %d "
 
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
-msgstr ""
+msgstr " sem memória durante a realocação do vetor "
 
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
-msgstr ""
+msgstr " executando a varredura do inode %d"
 
 # src/ext.c:417
 #: vfs/undelfs.c:270
-#, fuzzy
+#
 msgid " Ext2lib error "
-msgstr " erro de arquivo "
+msgstr " Erro Ext2lib"
 
 # src/view.c:460
 #: vfs/undelfs.c:297
-#, fuzzy, c-format
+#, c-format
 msgid " Could not open file %s "
-msgstr " Impossível abrir arquivo"
+msgstr " Impossível abrir arquivo %s"
 
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
-msgstr ""
+msgstr "undelfs: lendo mapa de bits do inode..."
 
 # src/cmd.c:1307
 #: vfs/undelfs.c:303
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
-msgstr " Não é possível mudar o diretório para %s "
+msgstr ""
+" Impossível carregar mapa de bits do inode de: \n"
+" %s \n"
 
 #: vfs/undelfs.c:306
 msgid "undelfs: reading block bitmap..."
-msgstr ""
+msgstr "undelfs: lendo mapa de bits do bloco..."
 
 #: vfs/undelfs.c:309
 #, c-format
@@ -8413,41 +8473,43 @@ msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
 msgstr ""
+" Impossível carregar mapa de bits do bloco de: \n"
+" %s \n"
 
 #: vfs/undelfs.c:315
 msgid "undelfs: done."
-msgstr ""
+msgstr "undelfs: feito."
 
 # src/file.c:1997 src/file.c:2081
 #: vfs/undelfs.c:318
-#, fuzzy
+#
 msgid "undelfs: failure"
-msgstr " Falha interna "
+msgstr "undelfs: falha"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
-msgstr ""
+msgstr " vfs_info não é fs! "
 
 #: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
-msgstr ""
+msgstr " Execute chdir para extrair arquivos primeiro"
 
 #: vfs/undelfs.c:521
 msgid " while iterating over blocks "
-msgstr ""
+msgstr " iterando sobre blocos"
 
 # src/view.c:460
 #: vfs/undelfs.c:626
-#, fuzzy, c-format
+#, c-format
 msgid " Could not open file: %s "
-msgstr " Impossível abrir arquivo"
+msgstr " Impossível abrir arquivo: %s"
 
 # src/main.c:1310
 #. This is place of next pointer
 #: vfs/undelfs.c:684
-#, fuzzy
+#
 msgid "Undelete filesystem for ext2"
-msgstr "&Recuperar arquivos (apenas ext2fs)"
+msgstr "Recuperar sistema de arquivos pata ext2"
 
 # gnome/glayout.c:391
 msgid "New _File..."
