@@ -370,26 +370,6 @@ try_to_select (WPanel *panel, char *name)
     display_mini_info (panel);
 }
 
-/*
- * cd_try_to_select:
- *
- *  If we moved to the parent directory move the selection pointer to
- *  the old directory name
- */
-void
-cd_try_to_select (WPanel *panel)
-{
-    char *p, *q;
-    int i, j = 4;
-
-    if (strlen (panel->lwd) > strlen (panel->cwd)
-	&& strncmp (panel->cwd, panel->lwd, strlen (panel->cwd)) == 0
-	&& strchr (panel->lwd + strlen (panel->cwd) + 1, PATH_SEP) == 0)
-	try_to_select (panel, panel->lwd);
-    else
-	try_to_select (panel, NULL);
-}
-
 void
 reload_panelized (WPanel *panel)
 {
@@ -938,6 +918,30 @@ translate_url_to_new_syntax (const char *p)
         return strdup (p);
 }
 
+/*
+ *  If we moved to the parent directory move the selection pointer to
+ *  the old directory name; If we leave VFS dir, remove FS specificator.
+ *  Warn: This code spoils lwd string.
+ */
+char*
+get_parent_dir_name (char *cwd, char *lwd)
+{
+char *p, *q;
+
+    if (strlen (lwd) > strlen (cwd))
+	if((p=strrchr(lwd, PATH_SEP)) && !strncmp(cwd, lwd, p-lwd)){
+#ifdef USE_VFS
+	    if((q=strrchr(p, '#')) != 0){
+		/* Here we need proper VFS function */
+		if(!strcmp(q+1, "utar") || extfs_which(q+1) >= 0 || sfs_which(q+1) >= 0)
+		    *q = '\0';
+	    }
+#endif /* USE_VFS */
+	return p;
+	}
+    return NULL;
+}
+
 /* Changes the current panel directory */
 int
 _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
@@ -986,7 +990,6 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
     vfs_rm_parents (parent);
 #endif
-    free (olddir);
 
     subshell_chdir (panel->cwd);
 
@@ -1000,9 +1003,12 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     panel->dirs_marked = 0;
     panel->total = 0;
     panel->searching = 0;
-    cd_try_to_select (panel);
+    try_to_select (panel, get_parent_dir_name(panel->cwd, olddir));
     load_hint ();
     panel_update_contents (panel);
+    
+    free (olddir);
+
     return 1;
 }
 

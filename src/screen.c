@@ -814,9 +814,6 @@ paint_panel (WPanel *panel)
     mini_info_separator (panel);
 }
 
-/*
- * This is used to select xyzzy after you asked for cd .. in xyzzy/ subdir. 
- */
 void
 Xtry_to_select (WPanel *panel, char *name)
 {
@@ -831,25 +828,14 @@ Xtry_to_select (WPanel *panel, char *name)
     }
 
     /* We only want the last component of the directory */
-    for (subdir = name + strlen (name) - 1; subdir >= name; subdir--){
-	if (*subdir == PATH_SEP){
-	    subdir++;
-	    break;
-	}
-    }
+    subdir = x_basename(name);
+    
     if (subdir < name)
 	subdir = name;
-
+    
     /* Search that subdirectory, if found select it */
     for (i = 0; i < panel->count; i++){
-        char c, *s = panel->dir.list [i].fname;
-	if (strncmp (subdir, s, strlen(s)))
-	    continue;
-
-	c = subdir[ strlen(s) ];
-	/* This ugly hack is for returning from extfs archive: now
-           that archive will be highlighted when you cd .. from it. */
-	if ((c!=0) && (c!='#'))
+	if (strcmp (subdir, panel->dir.list [i].fname))
 	    continue;
 
 	if (i != panel->selected){
@@ -2146,8 +2132,8 @@ static key_map panel_keymap [] = {
     { KEY_UP, 	move_up },
 
     /* The action button :-) */
-    { '\n',       do_enter },
-    { KEY_ENTER,  do_enter },
+    { '\n',       (key_callback) do_enter },
+    { KEY_ENTER,  (key_callback) do_enter },
 
     { KEY_IC,     mark_file },
     { KEY_HOME,	  move_home },

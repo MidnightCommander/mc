@@ -1,3 +1,12 @@
+Sat Sep 12 02:59:43 1998  Timur Bakeyev <mc@bat.ru>
+	
+	* screen.c: Xtry_to_select() Remove extfs hack to the main.c. Change 
+	for() cycle to the x_basename() call (Thanks to Pavel Roskin).
+	Add (key_callback) do_enter() to prevent warnings.
+	
+	* main.c: Rename cd_try_to_select() to the get_parent_dir_name(). Now
+	it process VFS postfixes too. Reduced number of loops against prev hack. 
+
 Fri Sep 11 15:27:59 1998  Pavel Machek <pavel@ucw.cz>
 
 	* screen.c: make cd .. from extfs file highlight it
