@@ -16,7 +16,6 @@ gnome/gnome-file-property-dialog.c
 gnome/gnome-open-dialog.c
 gnome/gpopup2.c
 gnome/gprefs.c
-gnome/gprop.c
 gnome/gscreen.c
 gnome/gtools.c
 gnome/gview.c
