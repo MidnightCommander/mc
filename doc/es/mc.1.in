@@ -874,9 +874,9 @@ preprocesamiento del archivo.
 .B Ver filtrado (
 .I M-! )
 .PP
-Este comando pregunta por un comando y sus argumentos (el argumento por defecto
-es el nombre del archivo actualmente seleccionado), la salida de ese comando es mostrada en
-el visor de archivos interno.
+El comando con los argumentos indicados se ejecuta, y la salida se
+muestra usando el visor de archivos interno. Como argumento se ofrece,
+por defecto, el nombre seleccionado en el panel.
 .PP
 .B Editar (
 .I F4 )
@@ -2223,21 +2223,27 @@ estos caracteres especiales. Por ejemplo, '\\\\' es
 una contrabarra y '\\*' es un asterisco.
 .\"NODE "Internal File Viewer"
 .SH "Visor de Archivos Interno"
-El visor de archivos interno posee dos modos de pantalla: ASCII y hexadecimal.
-Para intercambiar entre modos, usaremos la tecla F4. Si tenemos el programa GNU gzip
-instalado, se usará automáticamente para descomprimir los archivos
-según se necesite.
+El visor de archivos interno ofrece dos modos de presentación: ASCII y
+hexadecimal. Para alternar entre ambos modos, se emplea la tecla F4.
 .PP
-El visor intentará usar el mejor método posible en nuestro sistema o
-el tipo de archivo para mostrar la información. El visor interno de archivos
-interpretará algunas secuencias de cadenas para activar los atributos
-de negrita y subrayado, para conseguir una apariencia mejor de nuestros archivos.
+El visor intenta usar el mejor método disponible en el sistema, según
+el tipo de archivo, para mostrar información. Los archivos comprimidos
+se descomprimen automáticamente si los programas correspondientes (GNU
+gzip ó bzip2) están instalados en el sistema. El propio visor es capaz
+de interpretar ciertas secuencias de caracteres que se emplean para
+activar los atributos de negrita y subrayado, mejorando la presentación
+de los archivos.
 .PP
-En modo hexadecimal, la función de búsqueda acepta texto entre comillas
-así como constantes hexadecimales.
+En modo hexadecimal, la función de búsqueda admite texto entre comillas o
+valores numéricos. El texto entrecomillado se busca tal cual (retirando
+las comillas) y cada número se corresponde a un byte. Unos y otros se
+pueden entremezclar como en:
 .PP
-Podemos intercalar ambas al mismo tiempo como sigue: "Cadena" 0xFE 0xBB
-"más texto". Todo texto entre constantes y comillas será ignorado.
+.nf
+"Cadena" -1 0xBB 012 "otro texto"
+.fi
+.PP
+Nótese que 012 es un número octal y -1 se convierte en 0xFF.
 .PP
 Algunos detalles internos del visualizador: En sistemas con acceso a la llamada
 del sistema mmap(2), el programa mapea el archivo en vez de cargarlo;
