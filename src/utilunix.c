@@ -274,8 +274,10 @@ int my_system (int flags, const char *shell, const char *command)
 	return -1;
     }
     if (pid == 0){
-	sigaction (SIGINT,  &save_intr, NULL);
-	sigaction (SIGQUIT, &save_quit, NULL);
+	signal (SIGINT, SIG_DFL);
+	signal (SIGQUIT, SIG_DFL);
+	signal (SIGTSTP, SIG_DFL);
+	signal (SIGCHLD, SIG_DFL);
 
 #if 0
 	prepare_environment ();
@@ -496,7 +498,6 @@ int mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
     case 0: {
 	    sigaction (SIGINT, &save_intr, NULL);
 	    sigaction (SIGQUIT, &save_quit, NULL);
-
 	    switch (pid = fork ()) {
 	    	case -1:
 	    	    closepipes ();

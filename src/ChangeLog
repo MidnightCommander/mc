@@ -1,3 +1,7 @@
+1999-04-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* utilunix.c (my_system): Set up default signal handlers for childs.
+
 Tue Apr 13 07:14:10 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slint.c (getch): Quit MC when SLang_getkey returns an error. Looking
