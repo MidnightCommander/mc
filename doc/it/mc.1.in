@@ -3191,24 +3191,27 @@ is present it is used instead of the home or system-wide
 applications menu.
 .PP
 .\"SKIP_SECTION"
-.SH "LICENSE"
-This program is distributed under the terms of the GNU General Public
-License as published by the Free Software Foundation. See the built-in
-help for details on the License and the lack of warranty.
-.SH "AVAILABILITY"
-The latest version of this program can be found at 
-ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
-mirrors listed on the GNOME site http://www.gnome.org/.
-.SH "SEE ALSO"
+.SH "LICENZA"
+Questo programma è distribuito sotto i termini della Licenza Generale
+GNU come pubblicata dalla Free Software Foundation. Vedere l'aiuto integrato
+per i dettagli sulla licenza e sulla mancanza di garanzie.
+./"NODE "AVAILABILITY"
+.SH "DISPONIBILITA'"
+L'ultima versione di questo programma si trova su
+ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ e sui
+mirror elencati sul sito GNOME http://www.gnome.org/.
+./"NODE "SEE ALSO"
+.SH "VEDERE ANCHE"
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
 .nf
-The Midnight Commander page on the World Wide Web:
+La pagina Web del The Midnight Commander:
 	http://www.gnome.org/mc/
 .fi
 .PP
-.SH "AUTHORS"
+.\"NODE "AUTHORS"
+.SH "AUTORI"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
 (jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
 Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
@@ -3216,21 +3219,21 @@ Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
 (mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
 Norbert Warmuth (nwarmuth@privat.circular.de), 
 Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
-(psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) and Pavel Roskin
-(proski@gnu.org) are the developers of this package.
-Alessandro Rubini (rubini@ipvvis.unipv.it) has been especially helpful
-debugging and enhancing the program's mouse support, John Davis
-(davis@space.mit.edu) also made his S-Lang library available to us
-under the GPL and answered my questions about it, and the following
-people have contributed code and many bug fixes (in alphabetical
-order):
+(psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) e Pavel Roskin
+(proski@gnu.org) sono gli sviluppatori di questo pacchetto.
+Alessandro Rubini (rubini@ipvvis.unipv.it) ha dato un notevole
+contribuito nella correzione e nel miglioramento del supporto del
+mouse nel programma, John Davis (davis@space.mit.edu) ha reso
+disponibile la sua libreria S-lang sotto la licenza GPL e ha risposto
+alle mie domande su di essa; le seguenti persone hanno contribuito
+al codice e in molte correzioni (in ordine alfabetico):
 .PP
 Adam Tla/lka (atlka@sunrise.pg.gda.pl),
 alex@bcs.zp.ua (Alex I. Tkachenko), Antonio Palama,
 DOS port (palama@posso.dm.unipi.it), Erwin van Eijk
 (wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
 Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
-(root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
+(root@dolphin.csudh.edu), Juan Francisco Grigera, port su piattaforma Win32
 (j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
 Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
 (mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
@@ -3241,15 +3244,16 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
-.SH "BUGS"
-See the file TODO in the distribution for information on what
-remains to be done.
+.\"NODE "BUGS"
+.SH "BACHI"
+Vedere il file TODO nella distribuzione per informazioni su
+quello che rimane ancora da fare.
 .PP
-If you want to report a problem with the program, please send mail to
-this address: mc-devel@gnome.org.
+Se si vuole fare un rapporto di un problema nel programma, prego spedire
+un messaggio di post a questo indirizzo: mc-devel@gnome.org.
 .PP
-Provide a detailed description of the bug, the version of the program
-you are running (mc -V display this information), the operating system
-you are running the program on and if the program crashes, we would
-appreciate a stack trace.
+Nel rapporto è necessario fornire una descrizione dettagliata del baco, 
+la versione del programma (mc -v mostra quest'informazione), il sistema 
+operativo su cui si sta facendo girare il programma e, se il programma 
+va in crash, è gradita una traccia dello stack.
 
