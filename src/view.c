@@ -1308,26 +1308,29 @@ move_backward2 (WView *view, offset_type current, int lines)
     	} else {
     	    view->edit_cursor %= view->bytes_per_line;
     	}
-    	if (current >= lines * view->bytes_per_line) {
-    	    current -= lines * view->bytes_per_line;
-    	} else {
-    	    current %= view->bytes_per_line;
+    	if (current > view->edit_cursor) {
+    	    /* cursor is out-of-view -- adjust the view */
+            if (current >= lines * view->bytes_per_line) {
+                current -= lines * view->bytes_per_line;
+            } else {
+                current %= view->bytes_per_line;
+            }
     	}
-    	return current;
+        return current;
     } else {
-    	if (current == view->first)
-    	    return current;
+        if (current == view->first)
+            return current;
 
         if (view->wrap_mode)
             return move_backward2_textmode_wrap (view, current, lines);
 
         /* There is one virtual '\n' at the end,
          * so that the last line is shown */
-	if (current == view->last_byte && get_byte (view, current - 1) != '\n')
+        if (current == view->last_byte && get_byte (view, current - 1) != '\n')
             lines--;
         while (current > view->first && get_byte(view, current - 1) != '\n')
             current--;
-	while (lines > 0) {
+        while (lines > 0) {
             if (current > view->first)
                 current--;
             lines--;
