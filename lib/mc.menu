@@ -26,23 +26,23 @@ shell_patterns=0
         info
 
 = t d
-3       Make a release of the current subdirectory (tar.gz)
-	Pwd=`basename %d /`
-	echo -n "Name of the distribution file (without extension) [$Pwd]: "
+3       Compress the current subdirectory (tar.gz)
+	Pwd=`basename "%d" /`
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
 	read tar
-        if [ "$tar"x = x ]; then tar=$Pwd; fi
-	cd .. && tar chf - $Pwd | gzip -f9 > $tar.tar.gz
-	echo ../${tar}.tar.gz created.
-#       tar=%{Name of the distribution file (without extension)}
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | gzip -f9 > "$tar.tar.gz" && \
+	echo "../$tar.tar.gz created."
 
-4       Make a release of the current subdirectory (tar.bz2)
+4       Compress the current subdirectory (tar.bz2)
 	Pwd=`basename %d /`
-	echo -n "Name of the distribution file (without extension) [$Pwd]: "
+	echo -n "Name of the compressed file (without extension) [$Pwd]: "
 	read tar
-        if [ "$tar"x = x ]; then tar=$Pwd; fi
-	cd .. && tar chf - $Pwd | bzip2 -f --repetitive-best > $tar.tar.bz2
-	echo ../${tar}.tar.bz2 created.
-#       tar=%{Name of the distribution file (without extension)}
+        if [ "$tar"x = x ]; then tar="$Pwd"; fi
+	cd .. && \
+	tar cf - "$Pwd" | bzip2 -f --repetitive-best > "$tar.tar.bz2" && \
+	echo "../$tar.tar.bz2 created."
 
 = f \.c$ & t r
 + f \.c$ & t r & ! t t
