@@ -1,4 +1,4 @@
-2004-09-03  Andrew V. Samoilov  <andrew@email.zp.ua>
+2004-09-17  Andrew V. Samoilov  <andrew@email.zp.ua>
 
 	* editcmd.c (edit_replace_prompt) [HAVE_CHARSET]: Warning hack.
 
@@ -6,7 +6,7 @@
 
 	* editwidget.c (edit_adjust_size): Fix warnings.
 	(edit_dialog_callback): Likewise.
-	edit.c (menu_save_mode_cmd): Likewise.
+	* edit.c (menu_save_mode_cmd): Likewise.
 
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
 
