@@ -2154,8 +2154,7 @@ view_handle_key (WView *view, int c)
 
 #ifdef HAVE_CHARSET
     if (c >= 128 && c <= 255) {
- 	int ch = conv_input[ c & 0xFF ];
- 	c = (c & 0xFF00) | ch;
+ 	c = conv_input[ c ];
     }
 #endif
 

@@ -1,3 +1,8 @@
+2001-08-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (view_handle_key) [HAVE_CHARSET]: Remove unneeded
+	statements.
+
 2001-08-19  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c [HAVE_X]: Disable unused code.
