@@ -1867,8 +1867,6 @@ setup_post (void)
 {
     setup_sigwinch ();
     
-    init_uid_gid_cache ();
-
 #ifndef HAVE_X
     if (baudrate () < 9600 || slow_terminal){
 	verbose = 0;

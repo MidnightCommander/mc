@@ -161,19 +161,8 @@ typedef struct {
     char *string;
 } int_cache;
 
-int_cache uid_cache [UID_CACHE_SIZE];
-int_cache gid_cache [GID_CACHE_SIZE];
-
-void init_uid_gid_cache (void)
-{
-    int i;
-
-    for (i = 0; i < UID_CACHE_SIZE; i++)
-	uid_cache [i].string = 0;
-
-    for (i = 0; i < GID_CACHE_SIZE; i++)
-	 gid_cache [i].string = 0;
-}
+static int_cache uid_cache [UID_CACHE_SIZE];
+static int_cache gid_cache [GID_CACHE_SIZE];
 
 static char *i_cache_match (int id, int_cache *cache, int size)
 {

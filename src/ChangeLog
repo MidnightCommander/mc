@@ -1,5 +1,10 @@
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* utilunix.c (uid_cache): Make static.
+	(gid_cache): Likewise.
+	(init_uid_gid_cache): Remove.
+	* main.c (setup_post): Don't call init_uid_gid_cache().
+
 	* main.c (default_map) [HAVE_X]: Disable Alt-T.
 	* cmd.c [HAVE_X]: Eliminate set_basic_panel_listing_to() and
 	toggle_listing_cmd().
