@@ -1,5 +1,8 @@
 2002-12-08  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c (edit_move_to_column): Remove, use
+	edit_move_to_prev_col() instead.
+
 	* edit.c: Commit the rest of the position saving code.
 	(edit_load_position): New function, load position.
 	(edit_save_position): New function, save position.

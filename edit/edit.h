@@ -216,7 +216,6 @@ int edit_printf (WEdit * e, const char *fmt, ...)
     __attribute__ ((format (printf, 2, 3)));
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
-void edit_move_to_column (WEdit * e, long column);
 void edit_move_display (WEdit * e, long line);
 void edit_word_wrap (WEdit * edit);
 unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);

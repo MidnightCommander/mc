@@ -106,6 +106,8 @@ static char *option_chars_move_whole_word =
 
 static int push_action_disabled = 0;
 
+static void edit_move_to_prev_col (WEdit *edit, long p);
+
 #ifndef NO_INLINE_GETBYTE
 
 int edit_get_byte (WEdit * edit, long byte_index)
@@ -419,7 +421,8 @@ edit_load_position (WEdit *edit)
     g_free (filename);
 
     edit_move_to_line (edit, line - 1);
-    edit_move_to_column (edit, column);
+    edit->prev_col = column;
+    edit_move_to_prev_col (edit, edit_bol (edit, edit->curs1));
     edit_move_display (edit, line - (edit->num_widget_lines / 2));
 }
 
@@ -1563,19 +1566,6 @@ void edit_move_to_line (WEdit * e, long line)
 	edit_move_up (e, e->curs_line - line, 0);
     else
 	edit_move_down (e, line - e->curs_line, 0);
-    edit_scroll_screen_over_cursor (e);
-}
-
-/* move cursor to column 'column' */
-void
-edit_move_to_column (WEdit *e, long column)
-{
-    long p;			/* new cursor position */
-
-    p = min (edit_bol (e, e->curs1) + column, edit_eol (e, e->curs1));
-    edit_cursor_move (e, p - e->curs1);
-    e->search_start = e->curs1;
-    e->prev_col = edit_get_col (e);
     edit_scroll_screen_over_cursor (e);
 }
 
