@@ -1,8 +1,12 @@
+2003-03-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cons.handler.c (set_attr) [__FreeBSD__]: Eliminate cmd array.
+
 2003-03-05  Max Khon  <fjoe@iclub.nsu.ru>
 
 	* cons.handler.c (console_init) [__FreeBSD__]: Fix the amount of
 	allocated memory.
-	(console_save) [__FreeBSD__]: Doen't exit on error, just return.
+	(console_save) [__FreeBSD__]: Doesn't exit on error, just return.
 
 2003-03-05  Pavel Roskin  <proski@gnu.org>
 
