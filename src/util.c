@@ -756,9 +756,9 @@ char * _icase_search (char *text, char *data, int *lng)
 }
 
 /* The basename routine */
-char *x_basename (char *s)
+const char *x_basename (const char *s)
 {
-    char  *where;
+    const char  *where;
     return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 

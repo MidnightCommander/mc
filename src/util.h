@@ -29,7 +29,8 @@ char *convert_controls (char *s);
 void wipe_password (char *passwd);
 char *diff_two_paths (char *first, char *second);
 
-char *x_basename (char *s);
+/* Returns the basename of fname. The result is a pointer into fname. */
+const char *x_basename (const char *fname);
 
 /* Profile managing functions */
 int set_int (char *, char *, int);
