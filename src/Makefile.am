@@ -1,6 +1,5 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
-AM_CPPFLAGS = -DLIBDIR=\""$(mclibdir)/"\" \
-	-DCONFDIR=\""$(sysconfdir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+AM_CPPFLAGS = -DLIBDIR=\""$(mclibdir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
 mclibdir = $(libdir)/mc
 suppbindir = $(mclibdir)/bin
