@@ -386,7 +386,7 @@
         </screenshot>
       </figure>
     </sect1>
-    <sect1 id="gmcfileprops"
+    <sect1 id="gmcfileprops">
       <title>File Properties and Actions</title>
       <para>
         <indexterm id="idx-a48">
@@ -668,7 +668,7 @@
           </listitem>
         </itemizedlist>
       </sect2>
-      <sect2 id="gmcprefs-VFS"
+      <sect2 id="gmcprefs-VFS">
         <title>VFS</title>
         <figure>
          <title>VFS Preferences</title>

@@ -1,3 +1,8 @@
+2000-10-03  Pavel Roskin  <proski@gnu.org>
+
+	* doc-gnome/C/gmc.sgml: DTD changed to "PNG Variant V1.1"
+	to allow <legalnotice>. Unclosed tags fixed.
+
 2000-09-30  Pavel Roskin  <proski@gnu.org>
 
 	* mc.spec.in: New package mc-common. Use DESTDIR instead of
