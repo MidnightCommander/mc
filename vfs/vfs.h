@@ -22,11 +22,9 @@ struct utimbuf {
 #ifdef VFS_STANDALONE
 #undef USE_EXT2FSLIB
 #else
-#define BROKEN_PATHS
+#undef BROKEN_PATHS
 /*
- * We should really only allow /#ftp/ tree to export ftp, but midnight's users may 
- * like to be able to cd .. to get back where there were before ftp. How to solve?
- * Ok, we'll allow /any/path/#ftp/ to access ftp tree. Broken, yes.
+ * Define this to allow /any/path/#ftp/ to access ftp tree. Broken, yes.
  */ 
 #endif
 

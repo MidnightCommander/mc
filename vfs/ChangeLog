@@ -1,3 +1,8 @@
+Tue Oct  6 15:34:22 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* vfs.h: disable BROKEN_PATHS by default. See if you can live
+ 	without cd .. from ftp tree putting you to last directory.
+
 Sat Oct  3 14:28:57 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink): fixed cut'n paste error in my last
