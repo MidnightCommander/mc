@@ -2,9 +2,9 @@
 
 	* edit.h (catstrs): Changed the return type to "const char *".
 	* editcmd.c (catstrs): Likewise.
-	* edit.c (user_menu): Added const qualifiers.
-	* editcmd.c: Likewise.
+	* editcmd.c: Added const qualifiers.
 	* syntax.c: Don't use catstrs anymore.
+	* edit.c (user_menu): Likewise.
 
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 

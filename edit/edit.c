@@ -2641,7 +2641,7 @@ user_menu (WEdit * edit)
     int nomark;
     struct stat status;
     long start_mark, end_mark;
-    const char *block_file = catstrs (home_dir, BLOCK_FILE, (char *) NULL);
+    char *block_file = concat_dir_and_file (home_dir, BLOCK_FILE);
     int rc = 0;
 
     nomark = eval_marks (edit, &start_mark, &end_mark);
@@ -2653,7 +2653,7 @@ user_menu (WEdit * edit)
 
     if (mc_stat (block_file, &status) != 0 || !status.st_size) {
 	/* no block messages */
-	return;
+	goto cleanup;
     }
 
     if (!nomark) {
@@ -2672,5 +2672,7 @@ user_menu (WEdit * edit)
 
     edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
-    return;
+
+cleanup:
+    g_free (block_file);
 }
