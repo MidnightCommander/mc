@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
 "POT-Creation-Date: 2003-02-05 12:58-0500\n"
-"PO-Revision-Date: 2002-04-11 16:36+0300\n"
+"PO-Revision-Date: 2003-05-31 18:18+0300\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -439,6 +439,24 @@ msgstr " Вставити л╕терал "
 #: edit/editkeys.c:257
 msgid " Press any key: "
 msgstr " Натисн╕ть будь яку клав╕шу: "
+
+#: edit/editlock.c:125
+#, c-format
+msgid "File %s is locked by lock %s"
+msgstr "Файл %s блоковано замком %s"
+
+#: edit/editlock.c:129
+msgid "File locked"
+msgstr "Файл блоковано"
+ 
+#: edit/editmenu.c:62
+#: edit/editlock.c:129
+msgid "&Grab lock"
+msgstr "Захватити замок"
+
+#: edit/editlock.c:130
+msgid "&Ignore lock"
+msgstr "Игнорувати замок"
 
 #: edit/editmenu.c:53
 msgid " About "
@@ -3363,6 +3381,16 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "Не вдалося в╕дкрити ╕менований канал %s\n"
 
+#: src/subshell.c:320
+msgid ""
+"GNU Midnight Commander is already\n"
+"running on this terminal.\n"
+"Subshell support will be disabled."
+msgstr ""
+"╤нший Midnight Commander вже працю╓\n"
+"на цьому терминал╕. Вбудовану командну\n"
+"оболонку буде вимикнуто."
+
 #: src/subshell.c:703
 msgid " The shell is still active. Quit anyway? "
 msgstr " Оболонка все ще активна. Все-таки вийти? "
@@ -4018,45 +4046,45 @@ msgstr "Неузгоджений арх╕в extfs"
 #: vfs/fish.c:144
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: В╕д'╓днуюсь в╕д %s"
+msgstr "fish: в╕д'╓днуюсь в╕д %s"
 
 #: vfs/fish.c:222
 msgid "fish: Waiting for initial line..."
-msgstr "fish: Чекаю початковий рядок..."
+msgstr "fish: чекаю початковий рядок..."
 
 #: vfs/fish.c:232
 msgid "Sorry, we cannot do password authenticated connections for now."
-msgstr "Вибачте, ми не можемо зараз створювати з'╓днання авторизован╕ паролем."
+msgstr "Вибачте, зараз неможливо створювати з'╓днання, авторизован╕ паролем."
 
 #: vfs/fish.c:237
 msgid " fish: Password required for "
-msgstr " fish: Вимага╓ться пароль для "
+msgstr " fish: вимага╓ться пароль для "
 
 #: vfs/fish.c:246
 msgid "fish: Sending password..."
-msgstr "fish: В╕дсилаю пароль..."
+msgstr "fish: в╕дсилаю пароль..."
 
 #: vfs/fish.c:252
 msgid "fish: Sending initial line..."
-msgstr "fish: В╕дсилаю початковий рядок..."
+msgstr "fish: в╕дсилаю початковий рядок..."
 
 #: vfs/fish.c:262
 msgid "fish: Handshaking version..."
-msgstr "fish: Домовляюсь про верс╕ю..."
+msgstr "fish: домовляюсь про верс╕ю..."
 
 #: vfs/fish.c:272
 msgid "fish: Setting up current directory..."
-msgstr "fish: Встановлюю поточний каталог..."
+msgstr "fish: встановлюю поточний каталог..."
 
 #: vfs/fish.c:274
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: З'╓днався, домашн╕й каталог %s."
+msgstr "fish: з'╓днався, домашн╕й каталог %s."
 
 #: vfs/fish.c:352
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Читаю каталог %s..."
+msgstr "fish: читаю каталог %s..."
 
 #: vfs/fish.c:455 vfs/ftpfs.c:1325 vfs/undelfs.c:310
 #, c-format
@@ -4101,11 +4129,11 @@ msgstr "Перенесення усп╕шно припинене."
 #: vfs/ftpfs.c:378
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: В╕д'╓днання в╕д %s"
+msgstr "ftpfs: в╕д'╓днання в╕д %s"
 
 #: vfs/ftpfs.c:432
 msgid " FTP: Password required for "
-msgstr " FTP: Вимага╓ться пароль для "
+msgstr " FTP: вимага╓ться пароль для "
 
 #: vfs/ftpfs.c:466
 msgid "ftpfs: sending login name"
@@ -4115,6 +4143,20 @@ msgstr "ftpfs: в╕дсилаю ╕м'я користувача"
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: в╕дсилаю пароль користувача"
 
+#: vfs/ftpfs.c:480
+#, c-format
+msgid "FTP: Account required for user %s"
+msgstr "FTP: вимага╓ться рахунок для користувача %s"
+
+#: vfs/ftpfs.c:482
+msgid "Account:"
+msgstr "Рахунок:"
+ 
+#: vfs/ftpfs.c:476
+#: vfs/ftpfs.c:486
+msgid "ftpfs: sending user account"
+msgstr "ftpfs: в╕дсилаю рахунок користувача"
+
 #: vfs/ftpfs.c:476
 msgid "ftpfs: logged in"
 msgstr "ftpfs: заре╓стрований"
@@ -4122,7 +4164,7 @@ msgstr "ftpfs: заре╓стрований"
 #: vfs/ftpfs.c:491
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
-msgstr "ftpfs: Помилка ре╓страц╕╖ користувача %s "
+msgstr "ftpfs: помилка ре╓страц╕╖ користувача %s "
 
 #: vfs/ftpfs.c:523
 #, c-format
@@ -4131,11 +4173,11 @@ msgstr " Не вдалося встановити маршрутизац╕ю для джерела (%s)"
 
 #: vfs/ftpfs.c:645
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Неправильна назва системи."
+msgstr "ftpfs: неправильна назва системи."
 
 #: vfs/ftpfs.c:663
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Неправильна адреса системи."
+msgstr "ftpfs: неправильна адреса системи."
 
 #: vfs/ftpfs.c:686
 #, c-format
