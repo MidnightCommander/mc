@@ -55,6 +55,18 @@ SAMBAFILES=         \
     samba/libsmb/nterr.o    \
     samba/libsmb/smberr.o
 
+SAMBA_DIST_TOPLEVEL =		\
+	Makefile.in		\
+	aclocal.m4		\
+	architecture.doc	\
+	configure.in		\
+	internals.doc		\
+	parsing.doc		\
+	samba-files		\
+	smbadduser		\
+	acconfig.h		\
+
+
 NONETFILES = 			\
 	container.o		\
 	direntry.o		\
@@ -251,8 +263,23 @@ uninstall:
 distcopy:
 	$(CP) $(DISTVFS) ../../mc-$(VERSION)/vfs
 	mkdir ../../mc-$(VERSION)/vfs/extfs
-	cd extfs; $(CP) $(EXTFSSTUFF) ../../../mc-$(VERSION)/vfs/extfs
+	(cd extfs; $(CP) $(EXTFSSTUFF) ../../../mc-$(VERSION)/vfs/extfs)
+	mkdir ../../mc-$(VERSION)/vfs/samba
+	mkdir ../../mc-$(VERSION)/vfs/samba/include
+	mkdir ../../mc-$(VERSION)/vfs/samba/lib
+	mkdir ../../mc-$(VERSION)/vfs/samba/libsmb
+	mkdir ../../mc-$(VERSION)/vfs/samba/ubiqx
+	mkdir ../../mc-$(VERSION)/vfs/samba/tests
+	mkdir ../../mc-$(VERSION)/vfs/samba/param
 
+	(cd samba; $(CP) $(SAMBA_DIST_TOPLEVEL) ../../../mc-$(VERSION)/vfs/samba)
+	(cd samba; $(CP) include/* ../../../mc-$(VERSION)/vfs/samba/include)
+	(cd samba; $(CP) lib/*.[ch] ../../../mc-$(VERSION)/vfs/samba/lib)
+	(cd samba; $(CP) libsmb/*.[ch] ../../../mc-$(VERSION)/vfs/samba/libsmb)
+	(cd samba; $(CP) ubiqx/*.[ch] ../../../mc-$(VERSION)/vfs/samba/ubiqx)
+	(cd samba; $(CP) tests/* ../../../mc-$(VERSION)/vfs/samba/tests)
+	(cd samba; $(CP) param/* ../../../mc-$(VERSION)/vfs/samba/param)
+	
 depend dep: mcdep
 
 fastdeploc:
