@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-02-19 23:39+0100\n"
+"POT-Creation-Date: 2002-03-18 08:24+0100\n"
 "PO-Revision-Date: 2001-09-30 20:25GMT+1\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italiano (use this)<tp@lists.linux.it> <it@li.org>\n"
@@ -69,10 +69,10 @@ msgstr "&Chiudi"
 
 #. 1
 #: edit/edit.h:360 edit/editcmd.c:335 edit/editcmd.c:1091 edit/editcmd.c:1172
-#: edit/editcmd.c:2345 edit/editmenu.c:37 edit/editoptions.c:69
+#: edit/editcmd.c:2341 edit/editmenu.c:37 edit/editoptions.c:69
 #: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
 #: src/boxes.c:616 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
-#: src/filegui.c:797 src/find.c:151 src/layout.c:366 src/option.c:135
+#: src/filegui.c:797 src/find.c:154 src/layout.c:366 src/option.c:135
 #: src/wtools.c:522
 msgid "&Ok"
 msgstr "&Ok"
@@ -120,11 +120,11 @@ msgstr "Fai i backup -->"
 
 #. 0
 #: edit/editcmd.c:333 edit/editcmd.c:1033 edit/editcmd.c:1089
-#: edit/editcmd.c:1170 edit/editcmd.c:2343 edit/editoptions.c:66
+#: edit/editcmd.c:1170 edit/editcmd.c:2339 edit/editoptions.c:66
 #: pc/chmod.c:116 src/achown.c:71 src/boxes.c:145 src/boxes.c:279
 #: src/boxes.c:376 src/boxes.c:467 src/boxes.c:613 src/boxes.c:751
-#: src/boxes.c:1056 src/chmod.c:107 src/chown.c:77 src/cmd.c:834
-#: src/filegui.c:780 src/find.c:151 src/hotlist.c:123 src/hotlist.c:501
+#: src/boxes.c:1056 src/chmod.c:107 src/chown.c:76 src/cmd.c:834
+#: src/filegui.c:780 src/find.c:154 src/hotlist.c:123 src/hotlist.c:501
 #: src/hotlist.c:791 src/hotlist.c:888 src/layout.c:367 src/learn.c:59
 #: src/option.c:136 src/panelize.c:73 src/view.c:398 src/wtools.c:101
 #: src/wtools.c:352 src/wtools.c:520
@@ -145,7 +145,7 @@ msgstr " Salva con nome "
 
 #. Warning message with a query to continue or cancel the operation
 #: edit/editcmd.c:424 edit/editcmd.c:713 edit/editcmd.c:738 edit/editcmd.c:885
-#: edit/editcmd.c:983 src/file.c:593 src/help.c:314 src/main.c:624
+#: edit/editcmd.c:983 src/file.c:592 src/help.c:314 src/main.c:624
 #: src/screen.c:1388 src/screen.c:2001 src/selcodepage.c:75
 #: src/selcodepage.c:92 src/subshell.c:719 src/subshell.c:745
 #: src/utilunix.c:363 src/utilunix.c:367 src/utilunix.c:387 src/utilunix.c:438
@@ -171,7 +171,7 @@ msgstr "Annulla"
 msgid " Save as "
 msgstr " Salva come..."
 
-#: edit/editcmd.c:445 edit/editcmd.c:2101
+#: edit/editcmd.c:445 edit/editcmd.c:2097
 msgid " Error trying to save file. "
 msgstr " Errore nel salvataggio del file. "
 
@@ -307,7 +307,7 @@ msgstr "espressione &Regolare"
 msgid "&Whole words only"
 msgstr "solo &Parole intere"
 
-#: edit/editcmd.c:1105 edit/editcmd.c:1182 src/find.c:144
+#: edit/editcmd.c:1105 edit/editcmd.c:1182 src/find.c:147
 msgid "case &Sensitive"
 msgstr "controllare &Maiuscole/minuscole"
 
@@ -323,13 +323,14 @@ msgstr " Inserire stringa di sostituzione:"
 msgid " Enter search string:"
 msgstr " Inserire stringa di ricerca"
 
-#: edit/editcmd.c:1136 edit/editcmd.c:1770 edit/editcmd.c:1801
-#: edit/editcmd.c:1803
+#: edit/editcmd.c:1136 edit/editcmd.c:1769 edit/editcmd.c:1799
+#: edit/editcmd.c:1801
 msgid " Replace "
 msgstr " Sostituisci "
 
-#: edit/editcmd.c:1200 edit/editcmd.c:1881 edit/editcmd.c:1883
-#: edit/editcmd.c:1911 src/view.c:1463 src/view.c:1542 src/view.c:1662
+#. in response to number of bookmarks added because of string being found %d times
+#: edit/editcmd.c:1200 edit/editcmd.c:1877 edit/editcmd.c:1879
+#: edit/editcmd.c:1907 src/view.c:1463 src/view.c:1542 src/view.c:1662
 #: src/view.c:1674 src/view.c:1890 src/view.c:1932
 msgid " Search "
 msgstr " Cerca "
@@ -342,154 +343,153 @@ msgstr ""
 "conversioni "
 
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1772
+#: edit/editcmd.c:1771
 msgid " Error in replacement format string. "
 msgstr " Errore nella sostituzione della stringa. "
 
-#: edit/editcmd.c:1800
+#: edit/editcmd.c:1799
 #, c-format
 msgid " %ld replacements made. "
 msgstr " eseguite %ld sostituzioni. "
 
-#: edit/editcmd.c:1803 edit/editcmd.c:1883 edit/editcmd.c:1911
+#: edit/editcmd.c:1801 edit/editcmd.c:1879 edit/editcmd.c:1907
 msgid " Search string not found. "
 msgstr " Testo non trovato "
 
-#. in response to number of bookmarks added because of string being found %d times
-#: edit/editcmd.c:1880
+#: edit/editcmd.c:1877
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d ricerche fatte, %d segnalibri aggiunti "
 
-#: edit/editcmd.c:1929
+#: edit/editcmd.c:1925
 msgid " Quit "
 msgstr " Esci "
 
-#: edit/editcmd.c:1929
+#: edit/editcmd.c:1925
 msgid " File was modified, Save with exit? "
 msgstr " Il file è stato modificato. Lo salvo uscendo? "
 
-#: edit/editcmd.c:1929
+#: edit/editcmd.c:1925
 msgid "Cancel quit"
 msgstr "Annulla uscita"
 
-#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: edit/editcmd.c:1925 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:563 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
 #: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:398
 msgid "&Yes"
 msgstr " &Sì"
 
-#: edit/editcmd.c:1929 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: edit/editcmd.c:1925 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:562 src/hotlist.c:1012 src/main.c:774 src/screen.c:1988
 #: src/subshell.c:720 src/subshell.c:746 src/tree.c:755 src/view.c:398
 msgid "&No"
 msgstr "&No"
 
-#: edit/editcmd.c:2036
+#: edit/editcmd.c:2032
 msgid " Copy to clipboard "
 msgstr " Copia nella clipboard "
 
-#: edit/editcmd.c:2036 edit/editcmd.c:2049
+#: edit/editcmd.c:2032 edit/editcmd.c:2045
 msgid " Unable to save to file. "
 msgstr " impossibile salvare il file. "
 
-#: edit/editcmd.c:2049
+#: edit/editcmd.c:2045
 msgid " Cut to clipboard "
 msgstr " Taglia nella clipboard "
 
-#: edit/editcmd.c:2069 src/view.c:1837
+#: edit/editcmd.c:2065 src/view.c:1837
 msgid " Goto line "
 msgstr " Vai alla linea "
 
-#: edit/editcmd.c:2069
+#: edit/editcmd.c:2065
 msgid " Enter line: "
 msgstr " Linea: "
 
-#: edit/editcmd.c:2088 edit/editcmd.c:2101
+#: edit/editcmd.c:2084 edit/editcmd.c:2097
 msgid " Save Block "
 msgstr " Salva blocco evidenziato "
 
-#: edit/editcmd.c:2113
+#: edit/editcmd.c:2109
 msgid " Insert File "
 msgstr " Inserisci file "
 
-#: edit/editcmd.c:2126
+#: edit/editcmd.c:2122
 msgid " Insert file "
 msgstr "Inserisci file "
 
-#: edit/editcmd.c:2126
+#: edit/editcmd.c:2122
 msgid " Error trying to insert file. "
 msgstr " Errore nell'inserimento del file "
 
-#: edit/editcmd.c:2143
+#: edit/editcmd.c:2139
 msgid " Sort block "
 msgstr " Ordina "
 
-#: edit/editcmd.c:2143 edit/editcmd.c:2227
+#: edit/editcmd.c:2139 edit/editcmd.c:2223
 msgid " You must first highlight a block of text. "
 msgstr " Seleziona prima una parte di testo "
 
-#: edit/editcmd.c:2150
+#: edit/editcmd.c:2146
 msgid " Run Sort "
 msgstr " Ordina il testo "
 
-#: edit/editcmd.c:2151
+#: edit/editcmd.c:2147
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Inserisci opzioni di ordinamento (man sort) separate da spazi: "
 
-#: edit/editcmd.c:2162 edit/editcmd.c:2167
+#: edit/editcmd.c:2158 edit/editcmd.c:2163
 msgid " Sort "
 msgstr " Ordina "
 
-#: edit/editcmd.c:2163
+#: edit/editcmd.c:2159
 msgid " Error trying to execute sort command "
 msgstr " Errore nell'esecuzione del comando `sort' "
 
-#: edit/editcmd.c:2168
+#: edit/editcmd.c:2164
 msgid " Sort returned non-zero: "
 msgstr " Il `sort' è uscito con valore non-zero "
 
-#: edit/editcmd.c:2201
+#: edit/editcmd.c:2197
 msgid "Error create script:"
 msgstr "Errore creazione script:"
 
-#: edit/editcmd.c:2207
+#: edit/editcmd.c:2203
 msgid "Error read script:"
 msgstr "Errore lettura script:"
 
-#: edit/editcmd.c:2214
+#: edit/editcmd.c:2210
 msgid "Error close script:"
 msgstr "Errore chiusura script:"
 
-#: edit/editcmd.c:2219
+#: edit/editcmd.c:2215
 msgid "Script created:"
 msgstr "Script creato:"
 
-#: edit/editcmd.c:2226
+#: edit/editcmd.c:2222
 msgid "Process block"
 msgstr "Elabora blocco"
 
-#: edit/editcmd.c:2269
+#: edit/editcmd.c:2265
 msgid "Error trying to stat file:"
 msgstr "Errore nel provare lo stat del file:"
 
-#: edit/editcmd.c:2338
+#: edit/editcmd.c:2334
 msgid " Mail "
 msgstr " Posta "
 
-#: edit/editcmd.c:2349
+#: edit/editcmd.c:2345
 msgid " Copies to"
 msgstr " Copie a"
 
-#: edit/editcmd.c:2353
+#: edit/editcmd.c:2349
 msgid " Subject"
 msgstr " Soggetto"
 
-#: edit/editcmd.c:2357
+#: edit/editcmd.c:2353
 msgid " To"
 msgstr " A"
 
-#: edit/editcmd.c:2359
+#: edit/editcmd.c:2355
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <soggetto> -c <cc> <a>"
 
@@ -692,7 +692,7 @@ msgid "&Layout..."
 msgstr "&Aspetto..."
 
 #: edit/editmenu.c:276 edit/editmenu.c:285 pc/chmod.c:171 src/chmod.c:151
-#: src/chown.c:127
+#: src/chown.c:126
 msgid " File "
 msgstr " File "
 
@@ -798,7 +798,7 @@ msgstr "Marca"
 msgid "Replac"
 msgstr "Sostit"
 
-#: edit/editwidget.c:239 src/file.c:771 src/screen.c:2226 src/tree.c:1024
+#: edit/editwidget.c:239 src/file.c:770 src/screen.c:2226 src/tree.c:1024
 msgid "Copy"
 msgstr "Copia"
 
@@ -852,7 +852,7 @@ msgstr "Nascosto"
 msgid "System"
 msgstr "di Sistema"
 
-#: pc/chmod.c:119 src/achown.c:72 src/chmod.c:108 src/chown.c:78
+#: pc/chmod.c:119 src/achown.c:72 src/chmod.c:108 src/chown.c:77
 msgid "&Set"
 msgstr "&Imposta"
 
@@ -868,7 +868,7 @@ msgstr "&Imp. marc."
 msgid "&Marked all"
 msgstr "M&od. marc."
 
-#: pc/chmod.c:131 src/achown.c:74 src/chmod.c:112 src/chown.c:81
+#: pc/chmod.c:131 src/achown.c:74 src/chmod.c:112 src/chown.c:80
 msgid "Set &all"
 msgstr "I. &Tutti"
 
@@ -892,7 +892,7 @@ msgstr "Nome gruppo"
 msgid " Chmod command "
 msgstr " Comando Chmod "
 
-#: pc/chmod.c:169 src/chmod.c:149 src/chown.c:117
+#: pc/chmod.c:169 src/chmod.c:149 src/chown.c:116
 msgid " Permission "
 msgstr " Permessi "
 
@@ -975,8 +975,8 @@ msgstr ""
 " Impossibile eseguire chown su \"%s\" \n"
 " %s "
 
-#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:217
-#: src/chown.c:324
+#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:216
+#: src/chown.c:323
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -1158,7 +1158,7 @@ msgstr "Nome file esistente (sul quale punta il coll. simbolico):"
 msgid "Running "
 msgstr "Attivo "
 
-#: src/boxes.c:922 src/find.c:712
+#: src/boxes.c:922 src/find.c:720
 msgid "Stopped"
 msgstr "Sospeso "
 
@@ -1253,44 +1253,44 @@ msgstr "imposta GID"
 msgid "set user ID on execution"
 msgstr "imposta UID"
 
-#: src/chown.c:79
+#: src/chown.c:78
 msgid "Set &users"
 msgstr "Imposta &utenti"
 
-#: src/chown.c:80
+#: src/chown.c:79
 msgid "Set &groups"
 msgstr "Setta &gruppi"
 
-#: src/chown.c:109
+#: src/chown.c:108
 msgid " Name "
 msgstr " Nome file "
 
-#: src/chown.c:111
+#: src/chown.c:110
 msgid " Owner name "
 msgstr " Nome propriet. "
 
-#: src/chown.c:113 src/chown.c:125
+#: src/chown.c:112 src/chown.c:124
 msgid " Group name "
 msgstr " Nome gruppo "
 
-#: src/chown.c:115
+#: src/chown.c:114
 msgid " Size "
 msgstr " Dimensione "
 
-#: src/chown.c:121
+#: src/chown.c:120
 msgid " Chown command "
 msgstr " Comando Chown "
 
-#: src/chown.c:123
+#: src/chown.c:122
 msgid " User name "
 msgstr " Nome utente "
 
-#: src/chown.c:186
+#: src/chown.c:185
 msgid "<Unknown user>"
 msgstr "<Utente ignoto>"
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:187
+#: src/chown.c:186
 msgid "<Unknown group>"
 msgstr "<Gruppo ignoto>"
 
@@ -1347,7 +1347,7 @@ msgstr " Setta espressione per filtrare i file in base al nome "
 msgid " Select "
 msgstr " Seleziona "
 
-#: src/cmd.c:518 src/cmd.c:569
+#: src/cmd.c:518 src/cmd.c:569 src/find.c:269
 msgid "  Malformed regular expression  "
 msgstr " Espressione regolare malformata "
 
@@ -1765,12 +1765,12 @@ msgstr ""
 " Non trovo le informazioni sul file \"%s\" \n"
 " %s "
 
-#: src/file.c:517
+#: src/file.c:516
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' e `%s' sono lo stesso file. "
 
-#: src/file.c:554
+#: src/file.c:553
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1779,7 +1779,7 @@ msgstr ""
 " Non posso creare il file speciale \"%s\" \n"
 " %s "
 
-#: src/file.c:563 src/file.c:781
+#: src/file.c:562 src/file.c:780
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1788,7 +1788,7 @@ msgstr ""
 " Non posso cambiare il proprietario/gruppo del file: \"%s\" \n"
 " %s "
 
-#: src/file.c:571 src/file.c:796
+#: src/file.c:570 src/file.c:796
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1797,7 +1797,7 @@ msgstr ""
 " Non posso cambiare proprietario/gruppo del file \"%s\" \n"
 " %s "
 
-#: src/file.c:583
+#: src/file.c:582
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1806,11 +1806,11 @@ msgstr ""
 " Non posso aprire il file sorgente \"%s\" \n"
 " %s"
 
-#: src/file.c:593
+#: src/file.c:592
 msgid " Reget failed, about to overwrite file "
 msgstr " Reget ha fallito, sto riscrivendo il file "
 
-#: src/file.c:599
+#: src/file.c:598
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1819,7 +1819,7 @@ msgstr ""
 " Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
 " %s "
 
-#: src/file.c:620
+#: src/file.c:619
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1828,7 +1828,7 @@ msgstr ""
 " Non posso creare il file \"%s\" \n"
 " %s "
 
-#: src/file.c:634
+#: src/file.c:633
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1837,7 +1837,7 @@ msgstr ""
 "  Non posso ottenere informazioni sul file sorgente: \"%s\" \n"
 " %s"
 
-#: src/file.c:665
+#: src/file.c:664
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1846,7 +1846,7 @@ msgstr ""
 " Il file \"%s\" non ha permessi in lettura  \n"
 " %s"
 
-#: src/file.c:695
+#: src/file.c:694
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1855,11 +1855,11 @@ msgstr ""
 " Non posso scrivere il file \"%s\" \n"
 " %s"
 
-#: src/file.c:714
+#: src/file.c:713
 msgid "(stalled)"
 msgstr "(in attesa)"
 
-#: src/file.c:752
+#: src/file.c:751
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1868,7 +1868,7 @@ msgstr ""
 " Non posso chiudere il file sorgente \"%s\" \n"
 " %s"
 
-#: src/file.c:761
+#: src/file.c:760
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1877,15 +1877,15 @@ msgstr ""
 " Non posso chiudere il file di destinazione \"%s\" \n"
 " %s"
 
-#: src/file.c:771
+#: src/file.c:770
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Il file recuperato è incompleto. Lo vuoi tenere?"
 
-#: src/file.c:772
+#: src/file.c:771
 msgid "&Delete"
 msgstr "Elimina"
 
-#: src/file.c:772 src/hotlist.c:1410
+#: src/file.c:771 src/hotlist.c:1410
 msgid "&Keep"
 msgstr "Mantenere"
 
@@ -2170,6 +2170,26 @@ msgstr "no"
 msgid "yes"
 msgstr "si"
 
+#: src/filegui.c:348
+#, c-format
+msgid "ETA %d:%02d.%02d"
+msgstr "ETA %d:%02d.%02d"
+
+#: src/filegui.c:370
+#, c-format
+msgid "%.2f MB/s"
+msgstr "%.2f MB/s"
+
+#: src/filegui.c:372
+#, c-format
+msgid "%.2f KB/s"
+msgstr "%.2f KB/s"
+
+#: src/filegui.c:374
+#, c-format
+msgid "%ld B/s"
+msgstr "%ld B/s"
+
 #: src/filegui.c:396
 msgid "File"
 msgstr "File"
@@ -2273,7 +2293,7 @@ msgstr "Link statici"
 msgid "&Dive into subdir if exists"
 msgstr "Scansiona dir ricorsivamente "
 
-#: src/filegui.c:959
+#: src/filegui.c:960
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2314,45 +2334,45 @@ msgstr "&Visualizza - F3"
 msgid "&Edit - F4"
 msgstr "&Modifica - F4"
 
-#: src/find.c:150
+#: src/find.c:153
 msgid "Start at:"
 msgstr "Inizia a:"
 
-#: src/find.c:150
+#: src/find.c:153
 msgid "Filename:"
 msgstr "Nome file:"
 
-#: src/find.c:150
+#: src/find.c:153
 msgid "Content: "
 msgstr "Contenuto: "
 
-#: src/find.c:151 src/main.c:1099 src/main.c:1123
+#: src/find.c:154 src/main.c:1099 src/main.c:1123
 msgid "&Tree"
 msgstr "&Albero"
 
-#: src/find.c:205
+#: src/find.c:208
 msgid "Find File"
 msgstr " Trova file "
 
-#: src/find.c:436
+#: src/find.c:451
 #, c-format
 msgid "Grepping in %s"
 msgstr "Cercando in %s"
 
-#: src/find.c:514
+#: src/find.c:522
 msgid "Finished"
 msgstr "Terminato"
 
-#: src/find.c:538 src/view.c:1463
+#: src/find.c:546 src/view.c:1463
 #, c-format
 msgid "Searching %s"
 msgstr "Cercando %s"
 
-#: src/find.c:712 src/find.c:808
+#: src/find.c:720 src/find.c:816
 msgid "Searching"
 msgstr "Cercando"
 
-#: src/find.c:783
+#: src/find.c:791
 msgid "Find file"
 msgstr "Trova file"
 
@@ -4434,16 +4454,16 @@ msgstr ""
 "Inattesa fine del file\n"
 "%s"
 
-#: vfs/direntry.c:303
+#: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Cache dir scaduta per %s"
 
-#: vfs/direntry.c:820
+#: vfs/direntry.c:818
 msgid "Starting linear transfer..."
 msgstr "Inizio trasferimento lineare..."
 
-#: vfs/direntry.c:964
+#: vfs/direntry.c:963
 msgid "Getting file"
 msgstr "Ottenuto file "
 
