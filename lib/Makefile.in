@@ -47,6 +47,7 @@ install:
 	do $(INSTALL_DATA) $(builddir)/lib/$$I $(DESTDIR)$(libdir)/$$I; done
 	for I in $(TIFILES); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
+	$(MKINSTALLDIRS) $(DESTDIR)$(confdir)
 	$(INSTALL_DATA) $(srcdir)/mc.global $(DESTDIR)$(confdir)
 
 uninstall:
