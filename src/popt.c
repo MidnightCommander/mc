@@ -41,7 +41,9 @@ void poptSetExecPath(poptContext con, const char * path, int allowAbsolute) {
     con->execAbsolute = allowAbsolute;
 }
 
-static void invokeCallbacks(poptContext con, const struct poptOption * table,
+static void invokeCallbacks(poptContext con,
+			    enum poptCallbackReason reason,
+			    const struct poptOption * table,
 			    int post) {
     const struct poptOption * opt = table;
     poptCallbackType cb;
