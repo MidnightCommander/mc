@@ -1,3 +1,7 @@
+2000-10-04  Pavel Roskin  <proski@gnu.org>
+
+	* user.c (expand_format): Fixed processing of "%s".
+
 2000-09-30  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Added an explicit rule for man2hlp.

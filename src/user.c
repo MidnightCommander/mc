@@ -208,8 +208,6 @@ char *expand_format (char c, int quote)
     case 'b': return strip_ext((*quote_func) (fname, 0));
     case 'x': return (*quote_func) (extension(fname), 0);
     case 'd': return (*quote_func) (panel->cwd, 0);
-    case 's': if (!panel->marked)
-		return (*quote_func) (fname, 0);
     case 'i': /* indent equal number cursor position in line */
         if (s_editwidget)
 	        return g_strnfill (s_editwidget->curs_col, ' ');
@@ -229,6 +227,8 @@ char *expand_format (char c, int quote)
 	if (menu)
 	    return (*quote_func) (menu, 0);
 	break;
+    case 's': if (!panel->marked)
+		return (*quote_func) (fname, 0);
 
 	/* Fall through */
 
