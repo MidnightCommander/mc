@@ -2,7 +2,7 @@
 
 	* gdialogs.c (file_mask_dialog): Sigh, disabled background
 	operations, since they are completely hosed.  Re-aligned the
-	widgets in the dialog.
+	widgets in the dialog.  BUGFIX: GNOME bug tracker #1412, #1416.
 
 1999-08-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
