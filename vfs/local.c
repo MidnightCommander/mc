@@ -342,7 +342,9 @@ init_localfs (void)
     vfs_local_ops.ungetlocalcopy = local_ungetlocalcopy;
     vfs_local_ops.mkdir = local_mkdir;
     vfs_local_ops.rmdir = local_rmdir;
+#ifdef HAVE_MMAP
     vfs_local_ops.mmap = local_mmap;
     vfs_local_ops.munmap = local_munmap;
+#endif
     vfs_register_class (&vfs_local_ops);
 }
