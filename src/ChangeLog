@@ -1,3 +1,10 @@
+2001-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* charsets.c (load_codepages_list): Print a warning if
+	mc.charset cannot be opened.
+	* setup.c (load_setup) [HAVE_CHARSET]: Remove all popup messages
+	because it's to early to use them - ncurses would crash.
+
 2001-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* util.c (strip_ctrl_codes): Rewrite using pointers.  Fix

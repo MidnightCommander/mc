@@ -55,7 +55,6 @@
 #endif
 
 #ifdef HAVE_CHARSET
-#include "dialog.h"
 #include "charsets.h"
 #endif
 
@@ -650,9 +649,7 @@ load_setup (void)
 #endif
 
 #ifdef HAVE_CHARSET
-    if ( load_codepages_list() <= 0 ) {
-	message( 1, MSG_ERROR, _("Cannot load %s/%s"), mc_home, CHARSETS_INDEX );
-    } else {
+    if ( load_codepages_list() > 0 ) {
 	char cpname[128];
 	load_string( "Misc", "display_codepage", "",
 		     cpname, sizeof(cpname) );
@@ -661,12 +658,7 @@ load_setup (void)
     }
 
     init_printable_table( display_codepage );
-    {
-	char *errmsg = init_translation_table( source_codepage,
-					       display_codepage );
-	if (errmsg)
-	    message( 1, MSG_ERROR, "%s", errmsg );
-    }
+    init_translation_table( source_codepage, display_codepage );
 #endif
 }
 
