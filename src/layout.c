@@ -779,7 +779,7 @@ low_level_change_screen_size (void)
 	LINES = winsz.ws_row;
 #endif
 #ifdef HAVE_SUBSHELL_SUPPORT
-	    resize_subshell ();
+	resize_subshell ();
 #endif
     }
 #endif /* TIOCGWINSZ && !SCO_FLAVOR */
@@ -860,22 +860,19 @@ void print_vfs_message (char *msg, ...)
     char str [128];
 
     va_start (ap, msg);
-    
-    g_vsnprintf (str, 126, msg, ap);
+
+    g_vsnprintf (str, sizeof (str), msg, ap);
     va_end (ap);
-    
+
     if (midnight_shutdown)
 	return;
 
     if (!message_visible || !the_hint || !the_hint->widget.parent) {
-        int i;
 
 	if (!nice_rotating_dash || (ok_to_refresh <= 0))
 	    return;
 	move (0, 0);
-	printw (str);
-	for (i=strlen(str); i<COLS-1; i++)
-	    printw (" ");
+	printw ("%-*s", COLS-1, str);
 	mc_refresh ();
 	return;
     }
@@ -955,7 +952,7 @@ void set_display_type (int num, int type)
     Widget *new_widget, *old_widget;
     WPanel  *the_other_panel;
 
-    x =y = cols = lines = 0;
+    x = y = cols = lines = 0;
     old_widget = 0;
     if (num >= MAX_VIEWS){
 	fprintf (stderr, "Could not allocate more that %d views\n", MAX_VIEWS);
