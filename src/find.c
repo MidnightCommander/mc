@@ -139,7 +139,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     int return_value;
     char *temp_dir;
     WCheck *case_sense;
-    static char* case_label = N_("case sensi&tive");
+    static char* case_label = N_("case &Sensitive");
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
