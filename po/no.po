@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-09-20 20:36+0200\n"
+"POT-Creation-Date: 1999-09-23 20:39+0200\n"
 "PO-Revision-Date: 1999-09-20 20:38+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -206,7 +206,7 @@ msgid "Set Filter"
 msgstr "Sett filter"
 
 #: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
-#: gnome/gscreen.c:2489
+#: gnome/gscreen.c:2416
 msgid "Show all files"
 msgstr "Vis alle filer"
 
@@ -343,7 +343,7 @@ msgstr "Synlige kolonner"
 msgid "Custom View"
 msgstr "Egendefinert visning"
 
-#: gnome/gdesktop.c:521 gnome/gdesktop.c:2208 gnome/gmount.c:390
+#: gnome/gdesktop.c:521 gnome/gmount.c:389
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -352,30 +352,19 @@ msgstr "Advarsel"
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kunne ikke åpne %s; vil ikke ha skrivebordsikoner"
 
-#: gnome/gdesktop.c:1179
+#: gnome/gdesktop.c:1176
 msgid "While running the mount/umount command"
 msgstr "Under kjøring av mount/umount kommandoen"
 
-#: gnome/gdesktop.c:1248
+#: gnome/gdesktop.c:1245
 msgid "While running the eject command"
 msgstr "Under kjøring av eject kommandoen"
 
-#: gnome/gdesktop.c:1432 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1429 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Feil"
 
-#. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2204
-msgid "Home directory"
-msgstr "Hjemmekatalog"
-
-#: gnome/gdesktop.c:2209
-#, c-format
-msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-msgstr ""
-"Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
-
-#: gnome/gdesktop.c:2592
+#: gnome/gdesktop.c:2588
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -389,80 +378,84 @@ msgstr ""
 "\n"
 "Kan ikke sette bakgrunnen."
 
-#: gnome/gdesktop.c:2615 gnome/glayout.c:362
+#: gnome/gdesktop.c:2611 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2615 gnome/glayout.c:363
+#: gnome/gdesktop.c:2611 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Starter en ny terminal i aktiv katalog"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2617 gnome/glayout.c:365
+#: gnome/gdesktop.c:2613 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "Katalog..."
 
-#: gnome/gdesktop.c:2617 gnome/glayout.c:366
+#: gnome/gdesktop.c:2613 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Oppretter en ny katalog"
 
-#: gnome/gdesktop.c:2618
+#: gnome/gdesktop.c:2614
 msgid "URL L_ink..."
 msgstr "URL-snarve_i..."
 
-#: gnome/gdesktop.c:2618
+#: gnome/gdesktop.c:2614
 msgid "Creates a new URL link"
 msgstr "Oppretter en ny URL-snarvei"
 
-#: gnome/gdesktop.c:2619
+#: gnome/gdesktop.c:2615
 msgid "_Launcher..."
 msgstr "_Oppstarter..."
 
-#: gnome/gdesktop.c:2619
+#: gnome/gdesktop.c:2615
 msgid "Creates a new launcher"
 msgstr "Oppretter en ny oppstarter"
 
-#: gnome/gdesktop.c:2625
+#: gnome/gdesktop.c:2621
 msgid "By _Name"
 msgstr "Etter _navn"
 
-#: gnome/gdesktop.c:2626
+#: gnome/gdesktop.c:2622
 msgid "By File _Type"
 msgstr "Etter _filtype"
 
-#: gnome/gdesktop.c:2627
+#: gnome/gdesktop.c:2623
 msgid "By _Size"
 msgstr "Etter _størrelse"
 
-#: gnome/gdesktop.c:2628
+#: gnome/gdesktop.c:2624
 msgid "By Time Last _Accessed"
 msgstr "Etter tid for siste _aksess"
 
-#: gnome/gdesktop.c:2629
+#: gnome/gdesktop.c:2625
 msgid "By Time Last _Modified"
 msgstr "Etter tid for siste _modifikasjon"
 
-#: gnome/gdesktop.c:2630
+#: gnome/gdesktop.c:2626
 msgid "By Time Last _Changed"
 msgstr "Etter tid for siste _endring"
 
-#: gnome/gdesktop.c:2638 gnome/glayout.c:462
+#: gnome/gdesktop.c:2634 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Plasser ikonene"
 
-#: gnome/gdesktop.c:2639
+#: gnome/gdesktop.c:2635
 msgid "Create _New Window"
 msgstr "Opprett _nytt vindu"
 
+#: gnome/gdesktop.c:2637 gnome/glayout.c:464
+msgid "Rescan _Desktop Directory"
+msgstr "Oppdater skrivebor_dskatalogen"
+
+#: gnome/gdesktop.c:2638 gnome/glayout.c:465
+msgid "Rescan De_vices"
+msgstr "Oppdater en_heter"
+
+#: gnome/gdesktop.c:2639 gnome/glayout.c:466
+msgid "Recreate Default _Icons"
+msgstr "Lag standard_ikonene på nytt"
+
 #: gnome/gdesktop.c:2641
-msgid "Rescan Desktop De_vices"
-msgstr "Oppdater skri_vebordsenhetene"
-
-#: gnome/gdesktop.c:2642 gnome/glayout.c:465
-msgid "Rescan _Desktop"
-msgstr "Oppdater skrivebor_det"
-
-#: gnome/gdesktop.c:2643
 msgid "Configure _Background Image"
 msgstr "Konfigurer _bakgrunnsbilde"
 
@@ -795,7 +788,7 @@ msgid "Creates a new file in this directory"
 msgstr "Oppretter en ny fil i denne katalogen"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:389 gnome/gscreen.c:2156
+#: gnome/glayout.c:389 gnome/gscreen.c:2085
 msgid "_Copy..."
 msgstr "Kopier..."
 
@@ -803,7 +796,7 @@ msgstr "Kopier..."
 msgid "Copy files"
 msgstr "Kopier filer"
 
-#: gnome/glayout.c:390 gnome/gscreen.c:2157
+#: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
 msgstr "Slett..."
 
@@ -811,7 +804,7 @@ msgstr "Slett..."
 msgid "Delete files"
 msgstr "Slett filer"
 
-#: gnome/glayout.c:391 gnome/gscreen.c:2158
+#: gnome/glayout.c:391 gnome/gscreen.c:2087
 msgid "_Move..."
 msgstr "Flytt..."
 
@@ -867,7 +860,7 @@ msgstr "Søk"
 msgid "Search for a file in the current Panel"
 msgstr "Søk etter en fil i det aktive panelet"
 
-#: gnome/glayout.c:411 gnome/gscreen.c:1497
+#: gnome/glayout.c:411 gnome/gscreen.c:1415
 msgid "_Rescan Directory"
 msgstr "Oppdate_r kataloginnholdet"
 
@@ -940,35 +933,31 @@ msgstr "Avslutt"
 msgid "Terminates the file manager and the desktop"
 msgstr "Terminerer filbehandleren og skrivebordet"
 
-#: gnome/glayout.c:464
-msgid "Recreate Desktop _Shortcuts"
-msgstr "Lag _skrivebordsnarveiene på nytt"
-
-#: gnome/glayout.c:472 gnome/glayout.c:483
+#: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Settings"
 msgstr "_Innstillinger"
 
-#: gnome/glayout.c:473 gnome/glayout.c:484
+#: gnome/glayout.c:474 gnome/glayout.c:485
 msgid "_Layout"
 msgstr "_Utseende"
 
-#: gnome/glayout.c:474 gnome/glayout.c:485
+#: gnome/glayout.c:475 gnome/glayout.c:486
 msgid "_Commands"
 msgstr "_Kommandoer"
 
-#: gnome/glayout.c:475
+#: gnome/glayout.c:476
 msgid "_Desktop"
 msgstr "S_krivebord"
 
-#: gnome/glayout.c:476 gnome/glayout.c:486
+#: gnome/glayout.c:477 gnome/glayout.c:487
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: gnome/glayout.c:626
+#: gnome/glayout.c:627
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
-#: gnome/gmain.c:563
+#: gnome/gmain.c:554
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -980,37 +969,37 @@ msgstr ""
 "Som root kan du påføre systemet ditt stor skade hvis du ikke er forsiktig, "
 "og GNOME filbehandleren vil ikke hindre deg i å gjøre dette."
 
-#: gnome/gmount.c:226
+#: gnome/gmount.c:225
 msgid "Could not open the /etc/fstab file"
 msgstr " Kunne ikke åpne /etc/fstab filen"
 
-#: gnome/gmount.c:391
+#: gnome/gmount.c:390
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr ""
 "Kunne ikke lage symlenke fra %s til %s; får ikke et slikt skrivebordsikon."
 
-#: gnome/gmount.c:447
+#: gnome/gmount.c:446
 #, c-format
 msgid "CD-ROM %d"
 msgstr "CD-ROM %d"
 
-#: gnome/gmount.c:459
+#: gnome/gmount.c:458
 #, c-format
 msgid "Floppy %d"
 msgstr "Diskett %d"
 
-#: gnome/gmount.c:465
+#: gnome/gmount.c:464
 #, c-format
 msgid "Disk %d"
 msgstr "Disk %d"
 
-#: gnome/gmount.c:470
+#: gnome/gmount.c:469
 #, c-format
 msgid "NFS dir %s"
 msgstr "NFS katalog %s"
 
-#: gnome/gmount.c:474
+#: gnome/gmount.c:473
 #, c-format
 msgid "Device %d"
 msgstr "Enhet %d"
@@ -1262,21 +1251,21 @@ msgstr "Du må gi filen din et nytt navn"
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Du kan ikke gi nytt navn til noe som inneholde tegnet '/'"
 
-#: gnome/gnome-open-dialog.c:384
+#: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
 msgstr "Velg en applikasjon som \"%s\" skal åpnes med."
 
-#: gnome/gnome-open-dialog.c:394
+#: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
 msgstr "Velg en fil å starte med"
 
 #. the file tree
-#: gnome/gnome-open-dialog.c:405
+#: gnome/gnome-open-dialog.c:406
 msgid "Applications"
 msgstr "Applikasjoner"
 
-#: gnome/gnome-open-dialog.c:421
+#: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
 msgstr "Program som skal kjøres"
 
@@ -1453,98 +1442,98 @@ msgstr "Tittel"
 msgid "Select icon"
 msgstr "Velg ikon"
 
-#: gnome/gscreen.c:1497
+#: gnome/gscreen.c:1415
 msgid "Reloads the current directory"
 msgstr "Leser aktiv katalog på nytt"
 
-#: gnome/gscreen.c:1499
+#: gnome/gscreen.c:1417
 msgid "New _Directory..."
 msgstr "Ny _Katalog..."
 
-#: gnome/gscreen.c:1499
+#: gnome/gscreen.c:1417
 msgid "Creates a new directory here"
 msgstr "Oppretter en ny katalog her"
 
-#: gnome/gscreen.c:1501
+#: gnome/gscreen.c:1419
 msgid "New _File..."
 msgstr "Ny _fil..."
 
-#: gnome/gscreen.c:1501
+#: gnome/gscreen.c:1419
 msgid "Creates a new file here"
 msgstr "Oppretter en ny fil her"
 
-#: gnome/gscreen.c:1702
+#: gnome/gscreen.c:1620
 #, c-format
 msgid "Search: %s"
 msgstr "Søk: %s"
 
-#: gnome/gscreen.c:1712
+#: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes i %d fil"
 
-#: gnome/gscreen.c:1712
+#: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes i %d filer"
 
-#: gnome/gscreen.c:1738 src/screen.c:688
+#: gnome/gscreen.c:1656 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
-#: gnome/gscreen.c:2156
+#: gnome/gscreen.c:2085
 msgid "Copy directory"
 msgstr "Kopier katalog"
 
-#: gnome/gscreen.c:2157
+#: gnome/gscreen.c:2086
 msgid "Delete directory"
 msgstr "Slett katalog"
 
-#: gnome/gscreen.c:2158
+#: gnome/gscreen.c:2087
 msgid "Rename or move directory"
 msgstr "Omdøp eller flytt katalog"
 
-#: gnome/gscreen.c:2316
+#: gnome/gscreen.c:2245
 msgid "Back"
 msgstr "Tilbake"
 
-#: gnome/gscreen.c:2316
+#: gnome/gscreen.c:2245
 msgid "Go to the previously visited directory"
 msgstr "Gå til tidligere vist katalog"
 
-#: gnome/gscreen.c:2318
+#: gnome/gscreen.c:2247
 msgid "Up"
 msgstr "Opp"
 
-#: gnome/gscreen.c:2318
+#: gnome/gscreen.c:2247
 msgid "Go up a level in the directory heirarchy"
 msgstr "Gå opp ett nivå i kataloghierarkiet"
 
-#: gnome/gscreen.c:2320
+#: gnome/gscreen.c:2249
 msgid "Forward"
 msgstr "Fram"
 
-#: gnome/gscreen.c:2320
+#: gnome/gscreen.c:2249
 msgid "Go to the next directory"
 msgstr "Gå til neste katalog"
 
-#: gnome/gscreen.c:2323 src/tree.c:1010
+#: gnome/gscreen.c:2252 src/tree.c:1010
 msgid "Rescan"
 msgstr "Oppdater"
 
-#: gnome/gscreen.c:2323
+#: gnome/gscreen.c:2252
 msgid "Rescan the current directory"
 msgstr "Oppdater aktiv katalog"
 
-#: gnome/gscreen.c:2326
+#: gnome/gscreen.c:2255
 msgid "Home"
 msgstr "Hjem"
 
-#: gnome/gscreen.c:2326
+#: gnome/gscreen.c:2255
 msgid "Go to your home directory"
 msgstr "Gå til din hjemmekatalog"
 
-#: gnome/gscreen.c:2467
+#: gnome/gscreen.c:2395
 msgid "Location:"
 msgstr "Plassering:"
 
@@ -6455,3 +6444,13 @@ msgstr "%s: %s: %s %3d%% (%ld bytes overført)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes overført"
+
+#~ msgid "Home directory"
+#~ msgstr "Hjemmekatalog"
+
+#~ msgid "Could not symlink %s to %s; will not have initial home desktop icon."
+#~ msgstr ""
+#~ "Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
+
+#~ msgid "Rescan _Desktop"
+#~ msgstr "Oppdater skrivebor_det"
