@@ -13,8 +13,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2001-10-03 18:46+0200\n"
-"PO-Revision-Date: 2001-10-03 18:48+0200\n"
+"POT-Creation-Date: 2001-10-08 18:55+0200\n"
+"PO-Revision-Date: 2001-10-08 19:24+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -108,10 +108,8 @@ msgstr "Snabbspara"
 
 #: edit/editcmd.c:337
 msgid "Safe save "
-msgstr "Spara "
+msgstr "Säkert sparande "
 
-# snabb spara är osäker men spara då är allt sparat så att säga
-# säker är standard IMHO
 #: edit/editcmd.c:338
 msgid "Do backups -->"
 msgstr "Gör backup -->"
@@ -692,7 +690,7 @@ msgstr "&Generellt..."
 
 #: edit/editmenu.c:254 edit/editmenu.c:263
 msgid "&Save mode..."
-msgstr "&Spara läge..."
+msgstr "&Sparläge..."
 
 #: edit/editmenu.c:256 edit/editmenu.c:265 src/main.c:1240
 msgid "&Layout..."
@@ -750,7 +748,7 @@ msgstr "Linjelängd vid radbrytning : "
 #. 4
 #: edit/editoptions.c:78
 msgid "Tab spacing : "
-msgstr "Tabstorlek : "
+msgstr "Flikstorlek: "
 
 #: edit/editoptions.c:86
 msgid "synta&X highlighting"
@@ -769,13 +767,12 @@ msgstr "fyll tabbar med &Mellanslag"
 #. 9
 #: edit/editoptions.c:98
 msgid "&Return does autoindent"
-msgstr "&Enter gör automatisk indentering"
+msgstr "&Retur gör automatiska indrag"
 
-# får plats?
 #. 10
 #: edit/editoptions.c:101
 msgid "&Backspace through tabs"
-msgstr "&Backspace raderar tabbar"
+msgstr "&Backspace växlar mellan flikar"
 
 #. 11
 #: edit/editoptions.c:104
@@ -2869,7 +2866,7 @@ msgstr ""
 " som underskalet påstår att du befinner dig i.     \n"
 " En tänkbar förklaring är att du har raderat din   \n"
 " arbetskatalog, eller gett dig själv extra         \n"
-" rättigheter mha \"su\" kommandot?                   "
+" rättigheter mha \"su\"-kommandot?                 "
 
 #: src/main.c:723
 msgid "Press any key to continue..."
@@ -3436,8 +3433,8 @@ msgid ""
 " files have been moved now\n"
 msgstr ""
 " Konfigurationsfilerna till Midnight Commander \n"
-" sparas numera i ~/.mc katalogen. Filerna har  \n"
-" flyttats\n"
+" sparas numera i ~/.mc-katalogen. Filerna har  \n"
+" flyttats nu\n"
 
 #: src/option.c:72
 msgid "safe de&Lete"
@@ -4421,7 +4418,7 @@ msgstr "Numlock, numeriska"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: src/wtools.c:570 vfs/vfs.c:1854
+#: src/wtools.c:570 vfs/vfs.c:1863
 msgid "Password:"
 msgstr "Lösenord:"
 
@@ -4984,27 +4981,27 @@ msgstr " Kan inte öppna fil: %s "
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
 
-#: vfs/vfs.c:1815
+#: vfs/vfs.c:1824
 msgid "Could not parse:"
 msgstr "Kunde inte tolka:"
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1826
 msgid "More parsing errors will be ignored."
 msgstr "Resten av tolkningsfelen ignoreras."
 
-#: vfs/vfs.c:1817
+#: vfs/vfs.c:1826
 msgid "(sorry)"
 msgstr "(tyvärr)"
 
-#: vfs/vfs.c:1828
+#: vfs/vfs.c:1837
 msgid "Internal error:"
 msgstr " Internt fel:"
 
-#: vfs/vfs.c:1838
+#: vfs/vfs.c:1847
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes överförda)"
 
-#: vfs/vfs.c:1839
+#: vfs/vfs.c:1848
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes överförda"

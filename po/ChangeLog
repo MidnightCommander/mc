@@ -1,3 +1,8 @@
+2001-10-08  Christian Rose  <menthos@menthos.com>
+
+	* sv.po: Fixed some bad language problems. Thanks to
+	Göran Weinholt <weinholt@linux.nu> for noticing.
+
 2001-10-07  Artis Trops <hornet@navigators.lv>
 
 	* lv.po: Updated Latvian translation.
