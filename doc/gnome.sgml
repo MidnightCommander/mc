@@ -94,7 +94,7 @@
 	<title>Introduction</title>
 	<para>This section describes the various window manager classes that have
        been set on the windows and dialogs that gmc uses. It is intended to aid
-       you in customizing your enviornment.</para>
+       you in customizing your environment.</para>
 	<para>Where possible we have provided some example window manager 
        configuration file snippets.</para>
       </sect2>

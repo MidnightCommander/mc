@@ -123,7 +123,7 @@ int altered_nroff_flag = 0;
 
 /* "$Id$" */
 
-static char hex_char[] = "0123456789ABCDEF";
+static const char hex_char[] = "0123456789ABCDEF";
 
 /* }}} */
 /* {{{ Clean-up functions */
@@ -1362,8 +1362,8 @@ move_left (WView *view)
             if (view->nib_shift == 0)
                 return;
         } 
-        view->edit_cursor = (--view->edit_cursor < view->first) ?
-            view->first : view->edit_cursor;
+        if (view->edit_cursor > view->first)
+	    --view->edit_cursor;
         if (view->edit_cursor < view->start_display) {
            view->edit_cursor += view->bytes_per_line;
            view_move_backward(view, 1);
