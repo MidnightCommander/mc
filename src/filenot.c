@@ -12,6 +12,7 @@
 #include <string.h>
 #include <malloc.h>
 #include "util.h"
+#include "mad.h"
 #include <errno.h>
 #include "../vfs/vfs.h"
 

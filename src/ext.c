@@ -34,11 +34,14 @@
 #include <malloc.h>
 #include <string.h>
 #include <errno.h>
-#include "mad.h"
+
 #include "user.h"
 #include "main.h"
 #include "fs.h"
+
+#include <glib.h>
 #include "util.h"
+#include "mad.h"
 #include "dialog.h"
 #include "global.h"
 #include "ext.h"
@@ -52,7 +55,6 @@
 #ifdef SCO_FLAVOR
 #include <sys/wait.h>
 #endif /* SCO_FLAVOR */
-#include <glib.h>
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;

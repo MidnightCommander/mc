@@ -84,6 +84,8 @@
 #    include "gcorba.h"
 #endif
 
+#include <glib.h>
+
 /* Program include files */
 #include "x.h"
 #include "mad.h"
@@ -138,7 +140,6 @@
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
 
-#include <glib.h>
 #include "popt.h"
 
 /* "$Id$" */

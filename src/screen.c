@@ -31,6 +31,8 @@
 #endif
 /*#include "mc.h"*/
 
+#include <glib.h>
+
 #include "mem.h"
 #include "mad.h"
 #include "global.h"
@@ -54,7 +56,6 @@
 #include "widget.h"
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
-#include <glib.h>
 #ifdef NEEDS_DRIVE_H
 # include "drive.h"
 #endif

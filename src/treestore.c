@@ -47,6 +47,7 @@
 #include "fs.h"
 #include "../vfs/vfs.h"
 #include "util.h"
+#include "mad.h"
 #include "treestore.h"
 #ifdef OS2_NT
 #   include <io.h>

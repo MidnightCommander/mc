@@ -1,3 +1,9 @@
+Tue Jan 19 05:28:04 1999  Timur Bakeyev <mc@bat.ru>
+
+	* ext.c, filenot.c, main.c, screen.c, treestore.c: add missed #include's
+	and moved glib.h so, it follows "fs.h", but preceed "util.h" and "mad.h".
+	There were conflicts during compilation with MAD and GLibed vfs. 
+
 Mon Jan 18 21:23:29 1999 Paul Sheer <psheer@obsidian.co.za>
 
 	* cmd.c: update_panels (UP_OPTIMIZE, UP_KEEPSEL); instead
