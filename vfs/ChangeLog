@@ -1,3 +1,12 @@
+2002-02-19  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c (extfs_open): Only create a new entry if it has not
+	been found and O_CREAT is set.  Consider file as changed only
+	if it has been successfully created.
+	(extfs_getlocalcopy): Open file only for reading.  This prevents
+	marking file as changed.  Actually use the has_changed argument.
+	Reported by Nerijus Baliunas <nerijus@users.sourceforge.net>
+
 2002-02-12  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/lslR.in: Fix parsing of old entries (with year number).

@@ -607,11 +607,16 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     char *mc_extfsdir;
     struct entry *entry;
     int local_handle;
-    const int do_create = (flags & O_ACCMODE) != O_RDONLY;
+    int created = 0;
     
     if ((q = get_path_mangle (file, &archive, 0, 0)) == NULL)
 	return NULL;
-    entry = find_entry (archive->root_entry, q, 0, do_create);
+    entry = find_entry (archive->root_entry, q, 0, 0);
+    if (entry == NULL && (flags & O_CREAT)) {
+	/* Create new entry */
+	entry = find_entry (archive->root_entry, q, 0, 1);
+	created = (entry != NULL);
+    }
     if (entry == NULL)
     	return NULL;
     if ((entry = my_resolve_symlinks (entry)) == NULL)
@@ -642,7 +647,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	g_free (q);
 	g_free (mc_extfsdir);
 	g_free (archive_name);
-        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd) && !do_create){
+        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd) && !created){
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             g_free (cmd);
@@ -658,7 +663,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     extfs_info = g_new (struct pseudofile, 1);
     extfs_info->archive = archive;
     extfs_info->entry = entry;
-    extfs_info->has_changed = do_create;
+    extfs_info->has_changed = created;
     extfs_info->local_handle = local_handle;
 
     /* i.e. we had no open files and now we have one */
@@ -1308,12 +1313,13 @@ static char *extfs_getlocalcopy (vfs *me, char *path)
 static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
     struct pseudofile *fp = 
-        (struct pseudofile *) extfs_open (me, path, O_WRONLY, 0);
+        (struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);
     
     if (fp == NULL)
         return 0;
     if (!strcmp (fp->entry->inode->local_filename, local)) {
         fp->archive->fd_usage--;
+        fp->has_changed |= has_changed;
         extfs_close ((void *) fp);
         return 0;
     } else {
