@@ -1817,7 +1817,7 @@ msgstr "Uporabni¹ki menu je dostopen le kadar je mcedit pognan iz mc-ja"
 
 #: gtkedit/edit.c:2792 gtkedit/editcmd.c:2940
 msgid "Error trying to stat file:"
-msgstr "Napak ob poskusu poizvedbe stanja datoteke:"
+msgstr "Napaka ob poskusu poizvedbe stanja datoteke:"
 
 #: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1821
 msgid "mc.hlp"
@@ -3618,7 +3618,7 @@ msgstr " relativna simbolièna povezava: %s "
 
 #: src/cmd.c:1263
 msgid "Using default locale"
-msgstr "Uporabljam privzet 'locale' (lokalizacijske nastavitve)"
+msgstr "Uporabljam privzet 'locale' (krajevne nastavitve)"
 
 #: src/cmd.c:1265
 #, c-format
@@ -6719,7 +6719,7 @@ msgstr "ftpfS: po¹iljam geslo posredniku"
 
 #: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
-msgstr "ftpfs: avtentikacija posrednika uspela"
+msgstr "ftpfs: avtentifikacija posrednika uspela"
 
 #: vfs/ftpfs.c:438
 #, c-format
