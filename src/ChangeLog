@@ -1,5 +1,13 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (view_other_cmd): Don't check use_mouse_p before calling
+	init_mouse() and shut_mouse(), since those functions decide
+	themselves what to do.
+	* layout.c (done_screen): Likewise.
+	* main.c (setup_mc): Likewise.
+	* text.c (edition_post_exec): Likewise.
+	(edition_pre_exec): Likewise.
+
 	* user.h: Fix location of the home editor menu.
 	Reported by David Martin <dmartina@excite.es>
 

@@ -1780,8 +1780,7 @@ static void setup_mc (void)
     if (baudrate () < 9600 || slow_terminal){
 	verbose = 0;
     }
-    if (use_mouse_p)
-	init_mouse ();
+    init_mouse ();
 
     midnight_colors [0] = 0;
     midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
