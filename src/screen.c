@@ -89,8 +89,7 @@ static void
 set_colors (WPanel *panel)
 {
     standend ();
-    if (hascolors)
-	attrset (NORMAL_COLOR);
+    attrset (NORMAL_COLOR);
 }
 
 #ifndef ICONS_PER_ROW

@@ -3,7 +3,6 @@
 
 void init_colors (void);
 
-extern int hascolors;
 extern int use_colors;
 extern int disable_colors;
 

@@ -51,8 +51,7 @@ static int info_event (Gpm_Event *event, WInfo *info)
 static void info_box (Dlg_head *h, WInfo *info)
 {
     standend ();
-    if (hascolors)
-	attrset (NORMAL_COLOR);
+    attrset (NORMAL_COLOR);
     widget_erase (&info->widget);
     draw_double_box (h, info->widget.y,  info->widget.x,
 	             info->widget.lines, info->widget.cols);

@@ -25,9 +25,6 @@
 
 /* "$Id$" */
 
-/* To avoid excessive calls to ncurses' has_colors () */
-int   hascolors = 0;
-
 /* Set to force black and white display at program startup */
 int   disable_colors = 0;
 
@@ -248,6 +245,10 @@ void init_colors (void)
 {
     int i;
     
+    int hascolors;
+
+    /* FIXME: if S-Lang is used, this function must be called regardless
+       of whether we are interested in its result */
     hascolors = has_colors ();
 
     if (!disable_colors && hascolors){
