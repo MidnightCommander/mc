@@ -405,13 +405,6 @@ AC_TRY_RUN([#include "${srcdir-.}/tests/trivial.c"],
 	   AC_MSG_ERROR([cant find test code. Aborting config]),
 	   AC_MSG_WARN([cannot run when cross-compiling]))
 
-AC_CACHE_CHECK([for ftruncate extend],samba_cv_HAVE_FTRUNCATE_EXTEND,[
-AC_TRY_RUN([#include "${srcdir-.}/tests/ftruncate.c"],
-           samba_cv_HAVE_FTRUNCATE_EXTEND=yes,samba_cv_HAVE_FTRUNCATE_EXTEND=no,samba_cv_HAVE_FTRUNCATE_EXTEND=cross)])
-if test x"$samba_cv_HAVE_FTRUNCATE_EXTEND" = x"yes"; then
-    AC_DEFINE(HAVE_FTRUNCATE_EXTEND, 1, [Define if ftruncate() can extend a file])
-fi
-
 AC_CACHE_CHECK([for broken getgroups],samba_cv_HAVE_BROKEN_GETGROUPS,[
 AC_TRY_RUN([#include "${srcdir-.}/tests/getgroups.c"],
            samba_cv_HAVE_BROKEN_GETGROUPS=yes,samba_cv_HAVE_BROKEN_GETGROUPS=no,samba_cv_HAVE_BROKEN_GETGROUPS=cross)])
