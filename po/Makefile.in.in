@@ -191,7 +191,9 @@ maintainer-clean: distclean
 	rm -f $(GMOFILES)
 
 distdir = ../$(PACKAGE)-$(VERSION)/$(subdir)
-dist distdir: update-po $(DISTFILES)
+
+# Only maintainers want to run update-po
+dist distdir: $(DISTFILES) @MAINT@ update-po
 	dists="$(DISTFILES)"; \
 	for file in $$dists; do \
 	  ln $(srcdir)/$$file $(distdir) 2> /dev/null \
