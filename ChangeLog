@@ -1,5 +1,7 @@
 2001-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* acconfig.h: Remove all unused symbols.
+
 	* lib/ncurses.h: Remove.
 	* lib/Makefile.am: Remove ncurses.h.
 

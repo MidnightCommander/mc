@@ -40,12 +40,6 @@
 #undef STAT_STATVFS
 #undef HAVE_F_FSTYPENAME
 
-/* Define umode_t if your system does not provide it */
-#undef umode_t
-
-/* Define nlink_t if your system does not provide it */
-#undef nlink_t
-
 /* Is the program using the GPM library? */
 #undef HAVE_LIBGPM
 
@@ -64,26 +58,11 @@
 /* Found some version of curses that we're going to use */
 #undef HAS_CURSES
 
-/* Are you using other type of curses? */
-#undef OTHER_CURSES
-
 /* Is the subshell the default or optional? */
 #undef SUBSHELL_OPTIONAL
 
-/* Use SunOS SysV curses? */
-#undef USE_SUNOS_CURSES
-
-/* Use old BSD curses? */
-#undef USE_BSD_CURSES
-
-/* Use SystemV curses? */
-#undef USE_SYSV_CURSES
-
 /* Use Ncurses? */
 #undef USE_NCURSES
-
-/* If you Curses does not have color define this one */
-#undef NO_COLOR_CURSES
 
 /* Support the Midnight Commander Virtual File System? */
 #undef USE_VFS
@@ -108,9 +87,6 @@
 /* Define this one if you want termnet support */
 #undef USE_TERMNET
 
-/* Defined if you have the file command */
-#undef HAVE_FILECMD
-
 /* Defined if you have shadow passwords on Linux */
 #undef LINUX_SHADOW
 
@@ -126,17 +102,8 @@
 /* Link in ext2fs code for delfs experimental file system */
 #undef USE_EXT2FSLIB
 
-/* Define if you have putenv routine */
-#undef HAVE_PUTENV
-
-/* Define if you have isascii */
-#undef HAVE_ISASCII
-
 /* Define if your system uses PAM for auth stuff */
 #undef HAVE_PAM
-
-/* Define if you have the pmap_getmaps function */
-#undef HAVE_PMAP_GETMAPS
 
 /* Define if you have the get_process_stats function and have to use that instead of gettimeofday  */
 #undef HAVE_GET_PROCESS_STATS
@@ -144,28 +111,10 @@
 /* Define if you want to call the internal routine edit() for the editor */
 #undef USE_INTERNAL_EDIT
 
-/* Define if your system has socketpair */
-#undef HAVE_SOCKETPAIR
-
-/* Do we have posix signals? */
-#undef HAVE_SIGACTION
-#undef HAVE_SIGPROCMASK
-#undef HAVE_SIGEMPTYSET
-#undef HAVE_SIGADDSET
-
 /* Version of ncurses */
 #undef NCURSES_970530
 
-#undef HAVE_STPCPY
-
-#undef ENABLE_NLS
-#undef HAVE_CATGETS
-#undef HAVE_GETTEXT
-#undef HAVE_LC_MESSAGES
-
 #undef WITH_SMBFS
-
-#undef HAVE_GNOME_WINDOW_ICON
 
 @BOTTOM@
 
