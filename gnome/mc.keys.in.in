@@ -143,6 +143,33 @@ application/x-tex:
 	flags.latex.flags=needsterminal
 	icon-filename=@icondir@/gnome-tex.png
 
+audio/basic:
+	icon-filename=@icondir@/gnome-audio-basic.png
+
+audio/midi:
+	icon-filename=@icondir@/gnome-audio-midi.png
+
+audio/x-ulaw:
+	icon-filename=@icondir@/gnome-audio-ulaw.png
+
+audio/x-aiff:
+	icon-filename=@icondir@/gnome-audio-x-aiff.png
+
+audio/x-mod:
+	icon-filename=@icondir@/gnome-audio-x-mod.png
+
+audio/x-mp3:
+	icon-filename=@icondir@/gnome-audio-x-mp3.png
+
+audio/x-pn-realaudio:
+	icon-filename=@icondir@/gnome-audio-x-pn-realaudio.png
+
+audio/x-voc:
+	icon-filename=@icondir@/gnome-audio-x-voc.png
+
+audio/x-wav:
+	icon-filename=@icondir@/gnome-audio-x-wav.png
+
 audio/*:
 	icon-filename=@icondir@/gnome-audio.png
 	open=esdplay %f

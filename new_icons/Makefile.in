@@ -52,6 +52,15 @@ ALLICONS =						\
 	gnome-textfile.png				\
 	gnome-tex.png					\
 	gnome-audio.png					\
+	gnome-audio-basic.png				\
+	gnome-audio-midi.png				\
+	gnome-audio-ulaw.png				\
+	gnome-audio-x-aiff.png				\
+	gnome-audio-x-mod.png				\
+	gnome-audio-x-mp3.png				\
+	gnome-audio-x-pn-realaudio.png			\
+	gnome-audio-x-voc.png				\
+	gnome-audio-x-wav.png				\
 	gnome-image-psd.png				\
 	gnome-image-xcf.png
 
