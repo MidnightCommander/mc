@@ -1,6 +1,8 @@
 1999-09-21  Federico Mena Quintero  <federico@redhat.com>
 
 	* dlg.c (init_dlg): Walk the list of widgets only if it exists.
+	(dlg_broadcast_msg_to): Use safer list-walking code for if someone
+	inserts a widget inside the message broadcast.
 
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
 

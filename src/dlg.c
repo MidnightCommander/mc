@@ -34,7 +34,7 @@
 #include "dlg.h"
 #include "dialog.h"	/* For push_refresh() and pop_refresh() */
 #include "layout.h"
-#include "main.h"	
+#include "main.h"
 
 /* This is the current frame, used to group Tk packings */
 char *the_frame = "";
@@ -80,12 +80,12 @@ static void slow_box (Dlg_head *h, int y, int x, int ys, int xs)
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs)
 {
     extern int slow_terminal;
-	
+
     if (slow_terminal){
 	slow_box (h, y, x, ys, xs);
 	return;
     }
-    
+
 #ifndef HAVE_SLANG
     waddc (h, y, x, ACS_ULCORNER);
     hline (ACS_HLINE, xs - 2);
@@ -161,7 +161,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 	abort ();
     }
     /* Almost all widgets want to put the cursor in a suitable place */
-    w->options = W_WANT_CURSOR; 
+    w->options = W_WANT_CURSOR;
 }
 
 int default_proc (Dlg_head *h, int Msg, int Par)
@@ -173,20 +173,20 @@ int default_proc (Dlg_head *h, int Msg, int Par)
 
     case WIDGET_INIT:		/* We could tell if something went wrong */
 	return 1;
-	
+
     case WIDGET_KEY:
 	return 0;		/* Didn't use the key */
-	
+
     case WIDGET_FOCUS:		/* We accept FOCUSes */
 	if (h->current)
 	    x_focus_widget (h->current);
 	return 1;
-	
+
     case WIDGET_UNFOCUS:	/* We accept loose FOCUSes */
 	if (h->current)
 	    x_unfocus_widget (h->current);
 	return 1;
-	
+
     case WIDGET_DRAW:
 	return 1;
 
@@ -229,7 +229,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 	x1 = (COLS-cols)/2;
     }
 #endif
-    
+
     if ((flags & DLG_TRYUP) && (y1 > 3))
 	y1 -= 2;
 
@@ -258,10 +258,10 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
         new_d->wdata = xtoolkit_create_dialog (new_d, flags);
     else
     	new_d->wdata = xtoolkit_get_main_dialog (new_d);
-#endif    
+#endif
     return (new_d);
 }
-		      
+
 void set_idle_proc (Dlg_head *d, int state)
 {
     d->send_idle_msg = state;
@@ -276,7 +276,7 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 
     /* Only used by Tk */
     widget->frame = the_frame;
-    
+
     widget->layout = layout;
     /* Don't accept 0 widgets, this could be from widgets that could not */
     /* initialize properly */
@@ -313,16 +313,16 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
 		    where->current->next = where->current;
 		    where->first = where->current;
 	    }
-	    
+
 	    where->current->prev = where->first;
 	    where->last = where->current;
 	    where->first->next = where->last;
-	    
+
     }
     where->current->dlg_id = where->count;
     where->current->widget = what;
     where->current->widget->parent = where;
-    
+
     where->count++;
 
     /* If the widget is inserted in a running dialog */
@@ -342,7 +342,7 @@ int remove_widget (Dlg_head *h, void *what)
 
     if (!h->current)
 	    return 0;
-    
+
     first = p = h->current;
 
     do {
@@ -350,7 +350,7 @@ int remove_widget (Dlg_head *h, void *what)
 	    /* Remove links to this Widget_Item */
 	    p->prev->next = p->next;
 	    p->next->prev = p->prev;
-	    
+
 	    /* Make sure h->current is always valid */
 	    if (p == h->current){
 		h->current = h->current->next;
@@ -390,11 +390,11 @@ int send_message (Dlg_head *h, Widget *w, int msg, int par)
  */
 void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
-    Widget_Item *p, *first;
+    Widget_Item *p, *first, *wi;
 
     if (!h->current)
 	    return;
-		    
+
     if (reverse)
 	first = p = h->current->prev;
     else
@@ -407,13 +407,14 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 	first = p = h->current->next;
 #endif
     do {
-/*	if (p->widget->options & flags) */
-	    send_message (h, p->widget, message, 0);
-
 	if (reverse)
 	    p = p->prev;
 	else
 	    p = p->next;
+
+	wi = p;
+/*	if (p->widget->options & flags) */
+	    send_message (h, wi->widget, message, 0);
     } while (first != p);
 }
 
@@ -427,7 +428,7 @@ int dlg_focus (Dlg_head *h)
 {
     if (!h->current)
         return 0;
-    
+
     if (send_message (h, h->current->widget, WIDGET_FOCUS, 0)){
 	(*h->callback) (h, h->current->dlg_id, DLG_FOCUS);
 	return 1;
@@ -439,7 +440,7 @@ int dlg_unfocus (Dlg_head *h)
 {
     if (!h->current)
         return 0;
-    
+
     if (send_message (h, h->current->widget, WIDGET_UNFOCUS, 0)){
 	(*h->callback) (h, h->current->dlg_id, DLG_UNFOCUS);
 	return 1;
@@ -453,16 +454,16 @@ static void select_a_widget (Dlg_head *h, int down)
 
     if (!h->current)
        return;
-    
+
     if (!down)
 	direction = !direction;
-    
+
     do {
 	if (direction)
 	    h->current = h->current->next;
 	else
 	    h->current = h->current->prev;
-	
+
 	(*h->callback) (h, h->current->dlg_id, DLG_ONE_DOWN);
     } while (!dlg_focus (h));
 }
@@ -490,7 +491,7 @@ Widget *find_widget_type (Dlg_head *h, callback_fn signature)
 	return 0;
     if (!h->current)
 	return 0;
-    
+
     w = 0;
     for (i = 0, item = h->current; i < h->count; i++, item = item->next){
 	if (item->widget->callback == signature){
@@ -509,11 +510,11 @@ void dlg_one_up (Dlg_head *h)
 
     if (!old)
         return;
-    
+
     /* If it accepts unFOCUSion */
     if (!dlg_unfocus(h))
 	return;
-    
+
     select_a_widget (h, 0);
     if (dlg_overlap (old->widget, h->current->widget)){
 	send_message (h, h->current->widget, WIDGET_DRAW, 0);
@@ -528,11 +529,11 @@ void dlg_one_down (Dlg_head *h)
     old = h->current;
     if (!old)
         return;
-		
+
     if (!dlg_unfocus (h))
 	return;
 
-    select_a_widget (h, 1); 
+    select_a_widget (h, 1);
     if (dlg_overlap (old->widget, h->current->widget)){
 	send_message (h, h->current->widget, WIDGET_DRAW, 0);
 	send_message (h, h->current->widget, WIDGET_FOCUS, 0);
@@ -543,7 +544,7 @@ int dlg_select_widget (Dlg_head *h, void *w)
 {
     if (!h->current)
        return 0;
-	       
+
     if (dlg_unfocus (h)){
 	while (h->current->widget != w)
 	    h->current = h->current->next;
@@ -562,7 +563,7 @@ int send_message_to (Dlg_head *h, Widget *w, int msg, int par)
 
     if (!h->current)
         return 0;
-    
+
     v = 0;
     for (i = 0; i < h->count; i++){
 	if (w == (void *) p->widget){
@@ -584,7 +585,7 @@ void update_cursor (Dlg_head *h)
 	send_message (h, h->current->widget, WIDGET_CURSOR, 0);
     else {
 	Widget_Item *p = h->current;
-    
+
 	do {
 	    if (p->widget->options & W_WANT_CURSOR)
 		if ((*p->widget->callback)(h, p->widget, WIDGET_CURSOR, 0)){
@@ -604,7 +605,7 @@ void dlg_redraw (Dlg_head *h)
     (h->callback)(h, 0, DLG_DRAW);
 
     dlg_broadcast_msg (h, WIDGET_DRAW, 1);
-    
+
     update_cursor (h);
 }
 
@@ -616,7 +617,7 @@ void dlg_refresh (void *parameter)
 void dlg_stop (Dlg_head *h)
 {
     h->running = 0;
-    x_dialog_stop (h);	
+    x_dialog_stop (h);
 }
 
 static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
@@ -628,7 +629,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case KEY_UP:
 	dlg_one_up (h);
 	break;
-	
+
     case KEY_RIGHT:
     case KEY_DOWN:
 	dlg_one_down (h);
@@ -658,7 +659,7 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
 	doupdate ();
 #endif
 	break;
-	
+
     case '\n':
     case KEY_ENTER:
 	h->ret_value = B_ENTER;
@@ -684,7 +685,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 
     if (!h->current)
         return 0;
-    
+
     /*
      * Explanation: we don't send letter hotkeys to other widgets if
      * the currently selected widget is an input line
@@ -694,7 +695,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 		if(d_key < 255 && isalpha(d_key))
 			return 0;
     }
-    
+
     /* If it's an alt key, send the message */
     c = d_key & ~ALT(0);
     if (d_key & ALT(0) && c < 255 && isalpha(c))
@@ -704,27 +705,27 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
 	/* .ado: fix problem with file_permission under Win95 */
     if (d_key == 0) return 0;
 #endif
-	
+
     handled = 0;
     if (h->current->widget->options & W_WANT_HOTKEY)
 	handled = callback (h) (h, h->current->widget, WIDGET_HOTKEY, d_key);
-    
+
     /* If not used, send hotkey to other widgets */
     if (handled)
 	return handled;
-    
+
     hot_cur = h->current;
-    
+
     /* send it to all widgets */
     do {
 	if (hot_cur->widget->options & W_WANT_HOTKEY)
 	    handled |= (*hot_cur->widget->callback)
 		(h, hot_cur->widget, WIDGET_HOTKEY, d_key);
-	
+
 	if (!handled)
 	    hot_cur = hot_cur->next;
     } while (h->current != hot_cur && !handled);
-	
+
     if (!handled)
 	return 0;
 
@@ -732,7 +733,7 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     previous = h->current;
     if (!dlg_unfocus (h))
 	return handled;
-    
+
     h->current = hot_cur;
     if (!dlg_focus (h)){
 	h->current = previous;
@@ -747,7 +748,7 @@ int dlg_key_event (Dlg_head *h, int d_key)
 
     if (!h->current)
         return 0;
-    
+
     /* TAB used to cycle */
     if (!h->raw && (d_key == '\t' || d_key == KEY_BTAB))
 	if (d_key == '\t')
@@ -755,22 +756,22 @@ int dlg_key_event (Dlg_head *h, int d_key)
         else
 	    dlg_one_up (h);
     else {
-	
+
 	/* first can dlg_callback handle the key */
 	handled = (*h->callback) (h, d_key, DLG_KEY);
 
 	/* next try the hotkey */
 	if (!handled)
 	    handled = dlg_try_hotkey (h, d_key);
-	
+
 	/* not used - then try widget_callback */
 	if (!handled)
 	    handled |= callback (h)(h, h->current->widget, WIDGET_KEY, d_key);
-	
+
 	/* not used- try to use the unhandled case */
 	if (!handled)
 	    handled |= (*h->callback) (h, d_key, DLG_UNHANDLED_KEY);
-	
+
 	if (!handled)
 	    dialog_handle_key (h, d_key);
 	(*h->callback) (h, d_key, DLG_POST_KEY);
@@ -799,8 +800,8 @@ static INLINE int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
 	Widget *widget = item->widget;
 
 	item = item->next;
-	
-	if (!((x > widget->x) && (x <= widget->x+widget->cols) 
+
+	if (!((x > widget->x) && (x <= widget->x+widget->cols)
 	    && (y > widget->y) && (y <= widget->y+widget->lines)))
 	    continue;
 
@@ -834,27 +835,27 @@ void init_dlg (Dlg_head *h)
 	refresh_mode = REFRESH_COVERS_ALL;
     else
 	refresh_mode = REFRESH_COVERS_PART;
-    
+
 #endif
     push_refresh (dlg_refresh, h, refresh_mode);
     h->refresh_pushed = 1;
-    
+
     /* Initialize direction */
     if (!h->direction)
 	h->current =  h->first;
-	
+
     if (h->initfocus != NULL)
         h->current = h->initfocus;
 
     h->previous_dialog = current_dlg;
     current_dlg = h;
-    
+
     /* Initialize the mouse status */
     h->mouse_status = 0;
 
     /* Redraw the screen */
     dlg_redraw (h);
-    
+
     while (!dlg_focus (h) && h->current)
 	h->current = h->current->next;
 
@@ -889,7 +890,7 @@ void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
 	else
 	    return;
     }
-    
+
     if (key == EV_MOUSE)
 	h->mouse_status = dlg_mouse_event (h, event);
     else
@@ -913,7 +914,7 @@ frontend_run_dlg (Dlg_head *h)
 	if (is_idle ()){
 	    if (idle_hook)
 		execute_hooks (idle_hook);
-	    
+
 	    while (h->send_idle_msg && is_idle ()){
 		(*h->callback) (h, 0, DLG_IDLE);
 	    }
@@ -950,7 +951,7 @@ destroy_dlg (Dlg_head *h)
     Widget_Item *c;
 
     if (h->refresh_pushed)
-	pop_refresh (); 
+	pop_refresh ();
 
     x_destroy_dlg_start (h);
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
@@ -997,13 +998,13 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
 
     if (!h->current)
         return;
-    
+
     do {
 	if (p->widget == old){
 
 	    if (old == h->current->widget)
 		should_focus = 1;
-	    
+
 	    /* We found the widget */
 	    /* First kill the widget */
 	    new->focused = old->focused;
@@ -1031,7 +1032,7 @@ void widget_redraw (Dlg_head *h, Widget_Item *w)
 
     if (!h->current)
         return;
-    
+
     h->current = w;
     (*w->widget->callback)(h, h->current->widget, WIDGET_DRAW, 0);
     h->current = save;

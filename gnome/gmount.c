@@ -141,7 +141,6 @@ option_has_user (char *str)
 static gboolean
 option_has_owner (struct mntent *mnt)
 {
-	char *p;
 	struct stat st;
 
 	if (strstr (mnt->mnt_opts, "owner") == NULL)

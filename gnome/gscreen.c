@@ -2332,10 +2332,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Current Working directory
 	 */
+	
 	cwd = panel_create_cwd (h, panel, &panel->current_dir);
-
-	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
-	h->current = h->current->prev;
 
 	/*
 	 * We go through a lot of pain, wrestling with gnome_app* and gmc's @#$&*#$ internal structure and
@@ -2385,8 +2383,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
 	gtk_box_pack_start (GTK_BOX (status_line),
                             gtk_label_new (_("Location:")), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (status_line),
-                            cwd, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (status_line), cwd, TRUE, TRUE, 0);
 
 	dock =  gnome_dock_item_new ("gmc-toolbar1",
                                      (GNOME_DOCK_ITEM_BEH_EXCLUSIVE

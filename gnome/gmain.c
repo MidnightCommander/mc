@@ -495,19 +495,7 @@ non_corba_create_panels (char *startup_dir)
 				  dialog_panel_callback, "[panel]", "midnight", DLG_NO_TED);
 
 	session_load ();
-#if 0
-	/* The following is a hack.  We have to have at least one panel for
-	 * run_dlg() to be happy.  So we destroy it in the idle loop if we
-	 * didn't need it in the first place.  This idle function is to be run
-	 * at a higher priority than the one used in session_load().
-	 */
-
-	panel = new_panel_at (startup_dir);
-	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, idle_destroy_panel, panel);
-	panel->widget.options |= W_PANEL_HIDDEN;
-#endif
 	run_dlg (desktop_dlg);
-
 	desktop_destroy ();
 }
 
