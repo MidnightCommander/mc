@@ -191,25 +191,25 @@ install: @mcserv@ install.extfs
 install.extfs:
 	for I in $(EXTFS_MISC); do \
 	    $(INSTALL_DATA) $(srcdir)/extfs/$$I \
-	          $(DESTDIR)$(libdir)/extfs/$$I; \
+	          $(DESTDIR)$(extfsdir)/$$I; \
 	done
 	for I in $(EXTFS_CONST) ; do \
 	    $(INSTALL_PROGRAM) $(srcdir)/extfs/$$I \
-	             $(DESTDIR)$(libdir)/extfs/$$I; \
+	             $(DESTDIR)$(extfsdir)/$$I; \
 	done
 	for I in $(EXTFS_OUT) ; do \
 	    $(INSTALL_PROGRAM) $(builddir)/vfs/extfs/$$I \
-	             $(DESTDIR)$(libdir)/extfs/$$I; \
+	             $(DESTDIR)$(extfsdir)/$$I; \
 	done
 
 uninstall:
 	for I in $(EXTFS_MISC); do \
-	    $(RMF) $(DESTDIR)$(libdir)/extfs/$$I; \
+	    $(RMF) $(DESTDIR)$(extfsdir)/$$I; \
 	done
 	for I in $(EXTFS_CONST) $(EXTFS_OUT); do \
-	    $(RMF) $(DESTDIR)$(libdir)/extfs/$$I; \
+	    $(RMF) $(DESTDIR)$(extfsdir)/$$I; \
 	done
-	-rmdir $(DESTDIR)$(libdir)/extfs
+	-rmdir $(DESTDIR)$(extfsdir)
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 distcopy:
