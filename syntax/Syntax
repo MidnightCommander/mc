@@ -99,6 +99,9 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
+file ..\*\\.spec$ RPM\sSpecfile
+include spec.syntax
+
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
 

@@ -27,6 +27,7 @@ syntax_DATA =			\
 	sh.syntax		\
 	smalltalk.syntax	\
 	slang.syntax		\
+	spec.syntax		\
 	sql.syntax		\
 	swig.syntax		\
 	tcl.syntax		\
