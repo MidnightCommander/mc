@@ -170,7 +170,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     }
 
     if (filename)
-	if ((file = mc_open (filename, O_RDONLY)) == -1) {
+	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
 /* The file-name is printed after the ':' */
 	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 1;
@@ -369,7 +369,7 @@ int edit_insert_file (WEdit * edit, const char *filename)
 	int i, file, blocklen;
 	long current = edit->curs1;
 	unsigned char *buf;
-	if ((file = mc_open (filename, O_RDONLY)) == -1)
+	if ((file = mc_open (filename, O_RDONLY | O_BINARY )) == -1)
 	    return 0;
 	buf = malloc (TEMP_BUF_LEN);
 	while ((blocklen = mc_read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
@@ -404,7 +404,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     }
 
     /* Open the file, create it if needed */
-    if ((file = mc_open (filename, O_RDONLY | O_CREAT, 0666)) < 0) {
+    if ((file = mc_open (filename, O_RDONLY | O_CREAT | O_BINARY, 0666)) < 0) {
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
 	return 1;
     }

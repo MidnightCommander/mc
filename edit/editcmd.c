@@ -200,7 +200,7 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (!*filename)
 	return 0;
 
-    if ((fd = mc_open (filename, O_WRONLY)) == -1) {
+    if ((fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
 	/*
 	 * The file does not exists yet, so no safe save or
 	 * backup are necessary.
@@ -237,7 +237,7 @@ int edit_save_file (WEdit * edit, const char *filename)
     mc_chmod (savename, edit->stat1.st_mode);
     mc_chown (savename, edit->stat1.st_uid, edit->stat1.st_gid);
 
-    if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
+    if ((fd = mc_open (savename, O_CREAT | O_WRONLY | O_TRUNC | O_BINARY ,
 		    edit->stat1.st_mode)) == -1)
 	goto error_save;
 
@@ -428,7 +428,7 @@ int edit_save_as_cmd (WEdit * edit)
 	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
 		int file;
 		different_filename = 1;
-		if ((file = mc_open ((char *) exp, O_RDONLY)) != -1) {	/* the file exists */
+		if ((file = mc_open ((char *) exp, O_RDONLY | O_BINARY)) != -1) {	/* the file exists */
 		    mc_close (file);
 		    if (edit_query_dialog2 (_(" Warning "), 
 		    _(" A file already exists with this name. "), 
@@ -1974,11 +1974,15 @@ unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l)
 }
 
 /* save block, returns 1 on success */
-int edit_save_block (WEdit * edit, const char *filename, long start, long finish)
+int
+edit_save_block (WEdit * edit, const char *filename, long start,
+		 long finish)
 {
     int len, file;
 
-    if ((file = mc_open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
+    if ((file =
+	 mc_open ((char *) filename, O_CREAT | O_WRONLY | O_TRUNC,
+		  S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH | O_BINARY)) == -1)
 	return 0;
 
     if (column_highlighting) {

@@ -1,3 +1,9 @@
+2002-09-23  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Use O_BINARY when opening files.
+	* editcmd.c: Likewise.
+	From Alexander Varakin <avarakin00@hotmail.com>
+
 2002-09-20  Pavel Roskin  <proski@gnu.org>
 
 	* editwidget.c (edit_event): Add support for mouse wheel events.
