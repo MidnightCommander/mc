@@ -436,10 +436,11 @@ static char *maybe_end_group (char *d, int do_group, int *was_wildcard)
 char *convert_pattern (char *pattern, int match_type, int do_group)
 {
     char *s, *d;
-    static char new_pattern [100];
+    char *new_pattern;
     int was_wildcard = 0;
 
     if (easy_patterns){
+	new_pattern = malloc (sizeof (char) * strlen (pattern) * 4); /* times 4 to be safe */
 	d = new_pattern;
 	if (match_type == match_file)
 	    *d++ = '^';
@@ -474,7 +475,7 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
 	*d = 0;
 	return new_pattern;
     } else
-	return pattern;
+	return strdup (pattern);
 }
 
 int regexp_match (char *pattern, char *string, int match_type)
@@ -490,9 +491,11 @@ int regexp_match (char *pattern, char *string, int match_type)
 	    free (old_pattern);
 	}
 	pattern = convert_pattern (pattern, match_type, 0);
-	if (regcomp (&r, pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS))
+	if (regcomp (&r, pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
+	    free (pattern);
 	    return -1;
-	old_pattern = strdup (pattern);
+	}
+	old_pattern = pattern;
 	old_type = match_type;
     }
     rval = !regexec (&r, string, 0, NULL, 0);

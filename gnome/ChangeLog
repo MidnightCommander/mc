@@ -1,3 +1,8 @@
+1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (filter_item_activate): Make it convert the glob
+	pattern to a regexp if appropriate.
+
 Sat Mar 14 17:13:26 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (gnome_dlg_send_destroy): New signal handler for

@@ -1,3 +1,12 @@
+1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* util.c (convert_pattern): Now the internal buffer is malloc()ed
+	instead of being static.  This is required for long patterns.
+	(regexp_match): Free the pattern after calling convert_pattern().
+
+	* file.c (file_mask_dialog): Free the source_mask after calling
+	convert_pattern().
+
 Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel@absolute.spb.su>
 
 	* cmd.c: Internal edit is used by default. vi may be

@@ -935,65 +935,45 @@ panel_change_filter (GtkWidget *entry, WPanel *panel)
 
 /* FIXME: for now, this list is hardcoded.  We want a way to let the user configure it. */
 
-/* FIXME!!!  fill in regexps */
-
 static struct filter_item {
 	char *text;
 	char *glob;
-	char *regexp;
 } filter_items [] = {
 	{ "All files",
-	  "*",
-	  "." },
+	  "*" },
 	{ "Archives and compressed files",
-	  "*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)",
-	  "." },
+	  "*.(tar|gz|tgz|taz|zip|lha|zoo|pak|sit|arc|arj|rar|huf|lzh)" },
 	{ "RPM/DEB files",
-	  "*.(rpm|deb)",
-	  "." },
+	  "*.(rpm|deb)" },
 	{ "Text/Document files",
-	  "*.(txt|tex|doc|rtf)",
-	  "." },
+	  "*.(txt|tex|doc|rtf)" },
 	{ "HTML and SGML files",
-	  "*.{html|htm|sgml|sgm",
-	  "." },
+	  "*.(html|htm|sgml|sgm)" },
 	{ "Postscript and PDF files",
-	  "*.(ps|pdf)",
-	  "." },
+	  "*.(ps|pdf)" },
 	{ "Spreadsheet files",
-	  "*.(xls|wks|wk1)",
-	  "." },
+	  "*.(xls|wks|wk1)" },
 	{ "Image files",
 	  "*.(png|jpg|jpeg|xcf|gif|tif|tiff|xbm|xpm|pbm|pgm|ppm|tga|rgb|iff|lbm|ilbm|"
-	  "bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits)",
-	  "." },
+	  "bmp|pcx|pic|pict|psd|gbr|pat|ico|fig|cgm|rle|fits)" },
 	{ "Video/animation files",
-	  "*.(mpg|mpeg|mov|avi|fli|flc|flh|flx|dl)",
-	  "." },
+	  "*.(mpg|mpeg|mov|avi|fli|flc|flh|flx|dl)" },
 	{ "Audio files",
-	  "*.(au|wav|mp3|snd|mod|s3m|ra)",
-	  "." },
+	  "*.(au|wav|mp3|snd|mod|s3m|ra)" },
 	{ "C program files",
-	  "*.[ch]",
-	  "." },
+	  "*.[ch]" },
 	{ "C++ program files",
-	  "*.(cc|C|cpp|cxx|h|H)",
-	  "." },
+	  "*.(cc|C|cpp|cxx|h|H)" },
 	{ "Objective-C program files",
-	  "*.[mh]",
-	  "." },
+	  "*.[mh]" },
 	{ "Scheme program files",
-	  "*.scm",
-	  "." },
+	  "*.scm" },
 	{ "Assembler program files",
-	  "*.(s|S|asm)",
-	  "." },
+	  "*.(s|S|asm)" },
 	{ "Misc. program files",
-	  "*.(awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)",
-	  "." },
+	  "*.(awk|sed|lex|l|y|sh|idl|pl|py|am|in|f|el|bas|pas|java|sl|p|m4|tcl|pov)" },
 	{ "Font files",
-	  "*.(pfa|pfb|afm|ttf|fon|pcf|pcf.gz|spd)",
-	  "." }
+	  "*.(pfa|pfb|afm|ttf|fon|pcf|pcf.gz|spd)" }
 };
 
 static GtkWidget *filter_menu;
@@ -1003,6 +983,7 @@ filter_item_select (GtkWidget *widget, gpointer data)
 {
 	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
 
+	/* FIXME: the hintbar resizes horribly and screws the panel */
 /*	set_hintbar (easy_patterns ? fi->glob : fi->regexp); */
 }
 
@@ -1017,8 +998,20 @@ filter_item_activate (GtkWidget *widget, gpointer data)
 {
 	struct filter_item *fi = gtk_object_get_user_data (GTK_OBJECT (widget));
 	WPanel *panel = data;
+	int tmp;
+	char *pattern;
 
-	set_panel_filter_to (panel, g_strdup (easy_patterns ? fi->glob : fi->regexp));
+	if (easy_patterns)
+		pattern = g_strdup (fi->glob);
+	else {
+		/* This is sort of a hack to force convert_pattern() to actually convert the thing */
+
+		easy_patterns = 1;
+		pattern = convert_pattern (fi->glob, match_file, 0);
+		easy_patterns = 0;
+	}
+
+	set_panel_filter_to (panel, pattern);
 }
 
 static void

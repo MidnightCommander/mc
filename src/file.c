@@ -2025,6 +2025,7 @@ ask_file_mask:
     }
 
     error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
+    free (source_mask);
     if (error) {
 	message_3s (1, " Error ", "Invalid source pattern `%s' \n %s ",
 		 orig_mask, error);
