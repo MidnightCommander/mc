@@ -1,3 +1,8 @@
+2002-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sh.syntax: Fix highlighting of "<<-EOF".
+	Reported by Andrew V. Samoilov <sav@bcs.zp.ua>
+
 2002-08-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax/sh.syntax: Highlight alias, bg, eval, exec, export, fg,
