@@ -1,3 +1,7 @@
+1999-09-13  Miguel de Icaza  <miguel@gnu.org>
+
+	* glayout.c: Add C-w for sopwith.
+
 1999-09-13  Federico Mena Quintero  <federico@redhat.com>
 
 	* gtkdtree.c (scan_subtree): Do not set the current path here,

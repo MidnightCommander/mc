@@ -392,7 +392,9 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE(N_("Show directory sizes"), N_("Shows the disk space used by each directory"), dirsizes_cmd),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_WINDOW_ITEM(gnome_close_panel, NULL),
+	{ GNOME_APP_UI_ITEM, N_("Close window"), N_("Closes this window"),
+	  gnome_close_panel, NULL, NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_PIXMAP_CLOSE,
+	  'w', GDK_CONTROL_MASK, NULL },
         GNOMEUIINFO_END
 };
 
