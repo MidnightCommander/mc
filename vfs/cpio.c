@@ -612,8 +612,12 @@ static struct vfs_s_data cpiofs_data = {
 
     vfs_s_find_entry_tree,
     NULL,
+    NULL,
+    NULL,
+
+    NULL,
+    NULL,
     NULL
-    /* ??? */
 };
 
 vfs vfs_cpiofs_ops = {

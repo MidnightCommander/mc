@@ -513,6 +513,11 @@ static struct vfs_s_data tarfs_data = {
 
     vfs_s_find_entry_tree,
     NULL,
+    NULL,
+    NULL,
+
+    NULL,
+    NULL,
     NULL
 };
 

@@ -1,5 +1,8 @@
 2002-11-11  Pavel Roskin  <proski@gnu.org>
 
+	* cpio.c (cpiofs_data): Warning fix in initization.
+	* tar.c (tarfs_data): Likewise.
+
 	* vfs.c: Leave only necessary includes from ../src.
 
 2002-11-10  Pavel Roskin  <proski@gnu.org>
