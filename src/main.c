@@ -60,7 +60,6 @@
 #include "listmode.h"
 #include "execute.h"
 #include "ext.h"		/* For flush_extension_file() */
-#include "roland.h"
 
 /* Listbox for the command history feature */
 #include "widget.h"
@@ -687,6 +686,9 @@ directory_history_list (WPanel *panel)
 int
 load_prompt (int fd, void *unused)
 {
+    (void) fd;
+    (void) unused;
+
     if (!read_subshell_prompt ())
 	return 0;
 
@@ -720,11 +722,11 @@ load_prompt (int fd, void *unused)
 
 /* Used to emulate Lynx's entering leaving a directory with the arrow keys */
 int
-maybe_cd (int char_code, int move_up_dir)
+maybe_cd (int move_up_dir)
 {
     if (navigate_with_arrows) {
 	if (!cmdline->buffer[0]) {
-	    if (!move_up_dir) {
+	    if (move_up_dir) {
 		do_cd ("..", cd_exact);
 		return 1;
 	    }
@@ -912,8 +914,7 @@ static menu_entry OptMenu[] = {
     {' ', N_("&Virtual FS..."), 'V', configure_vfs},
 #endif				/* !USE_VFS */
     {' ', "", ' ', 0},
-    {' ', N_("&Save setup"), 'S', save_setup_cmd},
-    {' ', N_("Rolands test"), 'R', roland_cmd}
+    {' ', N_("&Save setup"), 'S', save_setup_cmd}
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
@@ -1811,9 +1812,10 @@ sigchld_handler_no_subshell (int sig)
 	    console_flag = 0;
 	}
     }
+    /* If we got here, some other child exited; ignore it */
 #endif				/* __linux__ */
 
-    /* If we got here, some other child exited; ignore it */
+    (void) sig;
 }
 
 static void
@@ -2096,7 +2098,7 @@ handle_args (int argc, char *argv[])
  */
 
 static int
-do_mc_filename_rename (const char *mc_dir, const char *o_name, const char *n_name)
+do_mc_filename_rename (const char *o_name, const char *n_name)
 {
     char *full_o_name = concat_dir_and_file (home_dir, o_name);
     char *full_n_name = g_strconcat (home_dir, MC_BASE, n_name, (char *) NULL);
@@ -2118,14 +2120,14 @@ compatibility_move_mc_files (void)
     if (stat (mc_dir, &s) && (errno == ENOENT)
 	&& (mkdir (mc_dir, 0777) != -1)) {
 
-	move = do_mc_filename_rename (mc_dir, ".mc.ini", "ini");
-	move += do_mc_filename_rename (mc_dir, ".mc.hot", "hotlist");
-	move += do_mc_filename_rename (mc_dir, ".mc.ext", "bindings");
-	move += do_mc_filename_rename (mc_dir, ".mc.menu", "menu");
-	move += do_mc_filename_rename (mc_dir, ".mc.bashrc", "bashrc");
-	move += do_mc_filename_rename (mc_dir, ".mc.inputrc", "inputrc");
-	move += do_mc_filename_rename (mc_dir, ".mc.tcshrc", "tcshrc");
-	move += do_mc_filename_rename (mc_dir, ".mc.tree", "Tree");
+	move = do_mc_filename_rename (".mc.ini", "ini");
+	move += do_mc_filename_rename (".mc.hot", "hotlist");
+	move += do_mc_filename_rename (".mc.ext", "bindings");
+	move += do_mc_filename_rename (".mc.menu", "menu");
+	move += do_mc_filename_rename (".mc.bashrc", "bashrc");
+	move += do_mc_filename_rename (".mc.inputrc", "inputrc");
+	move += do_mc_filename_rename (".mc.tcshrc", "tcshrc");
+	move += do_mc_filename_rename (".mc.tree", "Tree");
     }
     g_free (mc_dir);
     return move;
