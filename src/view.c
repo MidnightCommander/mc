@@ -378,15 +378,14 @@ save_edit_changes (WView *view)
 		}
 		node = node->next;
 	    }
-	    close (fp);
+	    if (fp != -1)
+		close (fp);
 	}
 
 	if (fp == -1) {
 	    fp = query_dialog (_(" Save file "),
 			       _(" Error trying to save file. "), 
-			       2, 2, _("&Retry"), _("&Cancel"));
-	    if (fp == 0)
-		fp = -1;
+			       2, 2, _("&Retry"), _("&Cancel")) - 1;
 	}
     } while (fp == -1);
 
@@ -418,7 +417,7 @@ view_ok_to_quit (WView *view)
 }
 
 static char *
-set_view_init_error (WView *view, char *msg)
+set_view_init_error (WView *view, const char *msg)
 {
     view->growing_buffer = 0;
     view->reading_pipe   = 0;
@@ -458,7 +457,7 @@ init_growing_view (WView * view, char *name, char *filename)
 	    view->stdfile = NULL;
 	    /* Avoid two messages.  Message from stderr has priority.  */
 	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
-		err_msg = (" Empty output from child filter ");
+		err_msg = _(" Empty output from child filter ");
 	    return set_view_init_error (view, err_msg);
 	}
     } else {
@@ -1963,13 +1962,17 @@ normal_search (WView *view, int direction)
 #endif
 
     exp = input_dialog (_("Search"), _(" Enter search string:"), exp);
-    if ((!exp)){
+
+    if ((!exp) || (!*exp)){
+	if (exp)
+	    g_free (exp);
+#ifdef HAVE_CHARSET
+	if (old && *old)
+	    convert_from_input (old);
+#endif
 	return;
     }
-    if ((!*exp)){
-	g_free (exp);
-	return;
-    }
+
     if (old)
 	g_free (old);
     old = exp;
