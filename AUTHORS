@@ -1,4 +1,10 @@
+THE E-MAIL ADDRESSES LISTED HERE SHOULD NOT BE USED TO SEND QUESTIONS TO
+THE DEVELOPERS.  ALL QUESTIONS ABOUT THE PROJECT SHOULD BE SENT TO THE
+MAILING LISTS, AS DESCRIBED IN THE README FILE.
+
+
 Authors of GNU Midnight Commander:
+==================================
 
 Andrej Borsenkow <borsenkow.msk@sni.de>
 Andrew V. Samoilov <kai@cmail.ru>
@@ -15,7 +21,63 @@ Pavel Machek <pavel@ucw.cz>
 Pavel Roskin <proski@gnu.org>
 Radek Doulik <rodo@ucw.cz>
 
-See the documentation for the list of the key contributors.
 
-No questions about this software should ever be sent to the authors.
-The questions should be sent to the mailing list mc@gnome.org
+Contributors:
+=============
+
+Adam Byrtek <alpha@debian.org>
+
+Alexander Serkov <serkov@ukrpost.net>
+Console saving on FreeBSD.
+
+Alessandro Rubini <rubini@ipvvis.unipv.it>
+Mouse support.
+
+Alexander Dong <ado@software-ag.de>
+OS/2 port.
+
+Adam Tla/lka <atlka@sunrise.pg.gda.pl>
+
+Alex I. Tkachenko <alex@bcs.zp.ua>
+SCO UNIX support.
+
+Antonio Palama, DOS port <palama@posso.dm.unipi.it>
+DOS port.
+
+Erwin van Eijk <wabbit@corner.iaf.nl>
+
+Gerd Knorr <kraxel@cs.tu-berlin.de>
+Jean-Daniel Luiset <luiset@cih.hcuge.ch>
+
+Jon Stevens <root@dolphin.csudh.edu>
+
+Juan Francisco Grigera <j-grigera@usa.net>
+Win32 port.
+
+Juan Jose Ciarlante <jjciarla@raiz.uncu.edu.ar>
+
+Ilya Rybkin <rybkin@rouge.phys.lsu.edu>
+
+John Davis <davis@space.mit.edu>
+Wrote S-Lang library and answered questions about it.
+
+Marcelo Roccasalva <mfroccas@raiz.uncu.edu.ar>
+
+Massimo Fontanelli <MC8737@mclink.it>
+
+Sergey Ya. Korshunoff <root@seyko.msk.su>
+
+Thomas Pundt <pundtt@math.uni-muenster.de>
+
+Timur Bakeyev <timur@goff.comtat.kazan.su>
+
+Tomasz Cholewo <tjchol01@mecca.spd.louisville.edu>
+
+Torben Fjerdingstad <torben.fjerdingstad@uni-c.dk>
+
+Vadim Sinolitis <vvs@nsrd.npi.msu.su>
+
+Walery Studennikov <despair@sama.ru>
+Charset conversion support.
+
+Wim Osterholt <wim@djo.wtm.tudelft.nl>
