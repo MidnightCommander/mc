@@ -57,7 +57,7 @@ int option_edit_bottom_extreme = 0;
 const char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
 char *option_backup_ext = "~";
 
-/*
+/*-
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
  *
@@ -83,8 +83,6 @@ char *option_backup_ext = "~";
  *           _
  * This_is_some_file
  * fin.
- *
- *
  */
 
 
@@ -137,7 +135,6 @@ edit_load_file_fast (WEdit *edit, const char *filename)
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
     if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
-	/* The file-name is printed after the ':' */
 	GString *errmsg = g_string_new(NULL);
 	g_string_sprintf(errmsg, _(" Cannot open %s for reading "), filename);
 	edit_error_dialog (_("Error"), get_sys_error (errmsg->str));
@@ -171,16 +168,9 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 static const struct edit_filters {
     const char *read, *write, *extension;
 } all_filters[] = {
-
-    {
-	"bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2"
-    },
-    {
-	"gzip -cd %s 2>&1", "gzip > %s", ".gz"
-    },
-    {
-	"gzip -cd %s 2>&1", "gzip > %s", ".Z"
-    }
+    { "bzip2 -cd %s 2>&1",  "bzip2 > %s",  ".bz2" },
+    { "gzip -cd %s 2>&1",   "gzip > %s",   ".gz"  },
+    { "gzip -cd %s 2>&1",   "gzip > %s",   ".Z"   }
 };
 
 /* Return index of the filter or -1 is there is no appropriate filter */
@@ -363,7 +353,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 cleanup:
     (void) mc_close (file);
     if (errmsg) {
-    	edit_error_dialog (_("Error"), errmsg->str);
+	edit_error_dialog (_("Error"), errmsg->str);
 	g_string_free (errmsg, TRUE);
 	return 1;
     }
