@@ -1411,3 +1411,24 @@ save_file_position (const char *filename, long line, long column)
     g_free (tmp);
     g_free (fn);
 }
+
+extern const char *
+cstrcasestr (const char *haystack, const char *needle)
+{
+    const unsigned char *uhaystack = (const unsigned char *) haystack;
+    const unsigned char *uneedle = (const unsigned char *) needle;
+    const unsigned char *hptr;
+    size_t i, needle_len;
+
+    needle_len = strlen(needle);
+    for (hptr = uhaystack; *hptr != '\0'; hptr++) {
+	for (i = 0; i < needle_len; i++) {
+	    if (toupper(hptr[i]) != toupper(uneedle[i]))
+		goto next_try;
+    	}
+    	return hptr;
+    next_try:
+        (void) 0;
+    }
+    return NULL;
+}

@@ -6,6 +6,10 @@
 	* view.c: Cleaned up the code. Added error handling for the
 	growing buffer case.
 	* util.c (extension): Simplified the code.
+	* util.c (cstrcasestr): Added a function to search for a
+	substring ignoring case.
+	* util.h: Added cstrcasestr.
+	* find.c: Added plaintext search mode.
 
 2004-12-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 

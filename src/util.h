@@ -6,6 +6,8 @@
 
 /* String managing functions */
 
+extern const char *cstrcasestr (const char *haystack, const char *needle);
+
 void str_replace(char *s, char from, char to);
 int  is_printable (int c);
 int  msglen (const char *text, int *lines);

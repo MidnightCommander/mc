@@ -44,7 +44,7 @@
 #include "key.h"
 
 /* Size of the find parameters window */
-#define FIND_Y 14
+#define FIND_Y 15
 static int FIND_X = 50;
 
 /* Size of the find window */
@@ -75,10 +75,13 @@ static WInput *in_start;	/* Start path */
 static WInput *in_name;		/* Pattern to search */
 static WInput *in_with;		/* Text inside filename */
 static WCheck *case_sense;	/* "case sensitive" checkbox */
+static WCheck *find_regex_cbox;	/* [x] find regular expression */
 
 static int running = 0;		/* nice flag */
 static char *find_pattern;	/* Pattern to search */
-static char *content_pattern;	/* pattern to search inside files */
+static char *content_pattern;	/* pattern to search inside files; if
+				   find_regex_flag is true, it contains the
+				   regex pattern, else the search string. */
 static int count;		/* Number of files displayed */
 static int matches;		/* Number of matches */
 static int is_start;		/* Status of the start/stop toggle button */
@@ -135,6 +138,7 @@ static void get_list_info (char **file, char **dir) {
 static regex_t *r; /* Pointer to compiled content_pattern */
  
 static int case_sensitive = 1;
+static gboolean find_regex_flag = TRUE;
 
 /*
  * Callback for the parameter dialog.
@@ -147,7 +151,8 @@ find_parm_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 
     switch (msg) {
     case DLG_VALIDATE:
-	if ((h->ret_value != B_ENTER) || !in_with->buffer[0])
+	if ((h->ret_value != B_ENTER) || !in_with->buffer[0]
+	    || !(find_regex_cbox->state & C_BOOL))
 	    return MSG_HANDLED;
 
 	flags = REG_EXTENDED | REG_NOSUB;
@@ -245,11 +250,14 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		    DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,
-		button_new (11, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
+		button_new (12, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
     add_widget (find_dlg,
-		button_new (11, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
+		button_new (12, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
     add_widget (find_dlg,
-		button_new (11, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+		button_new (12, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+
+    find_regex_cbox = check_new (10, 3, find_regex_flag, _("Regular expression"));
+    add_widget (find_dlg, find_regex_cbox);
 
     case_sense = check_new (9, 3, case_sensitive, case_label);
     add_widget (find_dlg, case_sense);
@@ -282,6 +290,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     case B_TREE:
 	temp_dir = g_strdup (in_start->buffer);
 	case_sensitive = case_sense->state & C_BOOL;
+	find_regex_flag = find_regex_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
@@ -308,6 +317,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	}
 
 	case_sensitive = case_sense->state & C_BOOL;
+	find_regex_flag = find_regex_cbox->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern = g_strdup (in_name->buffer);
@@ -517,6 +527,8 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	int has_newline;
 	char *p;
 	int found = 0;
+	typedef const char * (*search_fn) (const char *, const char *);
+	search_fn search_func;
 
 	if (resuming) {
 	    /* We've been previously suspended, start from the previous position */
@@ -525,14 +537,24 @@ search_content (Dlg_head *h, const char *directory, const char *filename)
 	    pos = last_pos;
 	}
 
+	search_func = (case_sensitive) ? (search_fn) strstr : cstrcasestr;
+	
 	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline)) && (ret_val == 0)){
 	    if (found == 0){	/* Search in binary line once */
+	    	if (find_regex_flag) {
 		if (regexec (r, p, 1, 0, 0) == 0){
 		    g_free (p);
 		    p = g_strdup_printf ("%d:%s", line, filename);
 		    find_add_match (h, directory, p);
 		    found = 1;
 		}
+	    	} else {
+	    	    if (search_func (p, content_pattern) != NULL) {
+	    	    	char *match = g_strdup_printf("%d:%s", line, filename);
+			find_add_match (h, directory, match);
+			found = TRUE;
+	    	    }
+	    	}
 	    }
 	    if (has_newline){
 		line++;
@@ -1035,7 +1057,7 @@ do_find (void)
 	v = find_file (start_dir, pattern, content, &dirname, &filename);
 	g_free (start_dir);
 	g_free (pattern);
-	if (r)
+	if (find_regex_flag && r)
 	    regfree (r);
 	
 	if (v == B_ENTER){
