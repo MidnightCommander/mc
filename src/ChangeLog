@@ -1,5 +1,6 @@
 2002-10-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* Makefile.am (man2hlp_LDADD): Set to $(GLIB_LIBS).
 	* man2hlp.c: Report about stale links.
 
 2002-10-13  Pavel Roskin  <proski@gnu.org>

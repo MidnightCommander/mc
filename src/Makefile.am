@@ -13,6 +13,7 @@ AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 endif
 
 noinst_PROGRAMS = man2hlp
+man2hlp_LDADD = $(GLIB_LIBS)
 
 mcmfmt_SOURCES = mfmt.c
 
