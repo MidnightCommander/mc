@@ -1,3 +1,8 @@
+2003-11-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cpio.c (cpio_create_entry): Fix possible buffer underflow
+	and memory leak.
+
 2003-11-08  Pavel Roskin  <proski@gnu.org>
 
 	* gc.c: Make getid(), nothingisopen() and free() methods

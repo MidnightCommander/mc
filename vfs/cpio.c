@@ -436,8 +436,8 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 	}
     }
 
-    while (name[strlen (name) - 1] == PATH_SEP)
-	name[strlen (name) - 1] = 0;
+    for (tn = name + strlen (name) - 1; tn >= name && *tn == PATH_SEP; tn--)
+	*tn = 0;
     if ((tn = strrchr (name, PATH_SEP))) {
 	*tn = 0;
 	root = vfs_s_find_inode (me, super, name, LINK_FOLLOW, FL_MKDIR);
@@ -491,6 +491,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
 	    if (mc_read (super->u.arch.fd, inode->linkname, stat->st_size)
 		< stat->st_size) {
 		inode->linkname[0] = 0;
+		g_free (name);
 		return STATUS_EOF;
 	    }
 	    inode->linkname[stat->st_size] = 0;	/* Linkname stored without terminating \0 !!! */
