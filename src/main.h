@@ -42,22 +42,6 @@ extern int use_internal_view;
 extern int use_internal_edit;
 extern char *view_one_file;
 extern char *edit_one_file;
-#ifdef USE_INTERNAL_EDIT
-extern int edit (const char *file, int line);
-extern int option_word_wrap_line_length;
-extern int edit_key_emulation;
-extern int option_tab_spacing;
-extern int option_fill_tabs_with_spaces;
-extern int option_return_does_auto_indent;
-extern int option_backspace_through_tabs;
-extern int option_fake_half_tabs;
-extern int option_save_mode;
-extern int option_backup_ext_int;
-extern int option_auto_para_formatting;
-extern int option_typewriter_wrap;
-extern int edit_confirm_save;
-extern int option_syntax_highlighting;
-#endif	/* ! USE_INTERNAL_EDIT */
 extern int fast_reload_w;
 extern int clear_before_exec;
 extern int mou_auto_repeat;

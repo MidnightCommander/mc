@@ -50,6 +50,11 @@
 #   include "../vfs/ftpfs.h"
 #endif
 
+#ifdef USE_INTERNAL_EDIT
+#   include "../edit/edit.h"
+#endif
+
+
 /* "$Id$" */
 
 extern char *find_ignore_dirs;

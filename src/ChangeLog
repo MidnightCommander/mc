@@ -1,5 +1,9 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.h [USE_INTERNAL_EDIT]: Don't include declarations from
+	edit.h.
+	* setup.c [USE_INTERNAL_EDIT]: Include edit.h.
+
 	* boxes.h: Remove user_format.
 	* boxes.c: Make more variables static, remove all extern
 	declarations.
