@@ -30,8 +30,7 @@ make distcheck >test1.out 2>test1.err
 
 echo "Checking the configuration with maximal code coverage"
 make distcheck with_screen=mcslang enable_charset=yes with_samba=yes \
-     with_tm_x_support=yes with_mcfs=yes with_included_gettext=yes \
-     >test2.out 2>test2.err
+     with_mcfs=yes with_included_gettext=yes >test2.out 2>test2.err
 
 echo "Checking the configuration with minimal code coverage"
 make distcheck enable_largefile=no enable_nls=no with_vfs=no \
