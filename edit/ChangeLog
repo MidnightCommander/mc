@@ -1,6 +1,11 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
-	* (edit_init): Move file loading to ...
+	* edit.c (edit_load_file): Merge edit_open_file().  Disable fast
+	loading on non-local VFS because the file size can be wrong.
+	(init_dynamic_edit_buffers): Split into edit_init_buffers() and
+	edit_load_file_fast().
+
+	* edit.c (edit_init): Move file loading to ...
 	(edit_load_file): ... a separate function.
 
 	* edit.c (init_dynamic_edit_buffers): Remove unused code to

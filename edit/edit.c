@@ -127,52 +127,49 @@ int edit_get_byte (WEdit * edit, long byte_index)
 #endif
 
 
-/* 
-   The edit_open_file function uses init_dynamic_edit_buffers to load
-   the file.  This is unnecessary since you can just as well fopen the
-   file and insert the characters one by one.  The real reason for
-   init_dynamic_edit_buffers (besides allocating the buffers) is
-   optimization - it uses raw block reads and inserts large chunks at a
-   time, so it's much faster at loading files.  We may not want to use
-   it if we are reading from pipe or doing CRLF->LF translation.
- */
-
-/* Initialization routines */
-
 /*
- * Load file OR text into buffers.  Set cursor to the beginning of file.
- * Return 1 on error.
+ * Initialize the buffers for an empty files.
  */
-static int
-init_dynamic_edit_buffers (WEdit *edit, const char *filename)
+static void
+edit_init_buffers (WEdit *edit)
 {
-    long buf;
-    int j, file = -1, buf2;
+    int j;
 
     for (j = 0; j <= MAXBUFF; j++) {
 	edit->buffers1[j] = NULL;
 	edit->buffers2[j] = NULL;
     }
 
-    if (filename)
-	if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
-	    /* The file-name is printed after the ':' */
-	    edit_error_dialog (_("Error"),
-			       get_sys_error (catstrs
-					      (_
-					       (" Cannot open file for reading: "),
-					       filename, " ", 0)));
-	    return 1;
-	}
     edit->curs1 = 0;
-    edit->curs2 = edit->last_byte;
+    edit->curs2 = 0;
+    edit->buffers2[0] = g_malloc (EDIT_BUF_SIZE);
+}
 
+/*
+ * Load file OR text into buffers.  Set cursor to the beginning of file.
+ * Return 1 on error.
+ */
+static int
+edit_load_file_fast (WEdit *edit, const char *filename)
+{
+    long buf, buf2;
+    int file = -1;
+
+    edit->curs2 = edit->last_byte;
     buf2 = edit->curs2 >> S_EDIT_BUF_SIZE;
 
-    edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
+    if ((file = mc_open (filename, O_RDONLY | O_BINARY)) == -1) {
+	/* The file-name is printed after the ':' */
+	edit_error_dialog (_("Error"),
+			   get_sys_error (catstrs
+					  (_
+					   (" Cannot open file for reading: "),
+					   filename, " ", 0)));
+	return 1;
+    }
 
-    if (!filename)
-	return 0;
+    if (!edit->buffers2[buf2])
+	edit->buffers2[buf2] = g_malloc (EDIT_BUF_SIZE);
 
     mc_read (file,
 	     (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE -
@@ -180,7 +177,9 @@ init_dynamic_edit_buffers (WEdit *edit, const char *filename)
 	     edit->curs2 & M_EDIT_BUF_SIZE);
 
     for (buf = buf2 - 1; buf >= 0; buf--) {
-	edit->buffers2[buf] = g_malloc (EDIT_BUF_SIZE);
+	/* edit->buffers2[0] is already allocated */
+	if (!edit->buffers2[buf])
+	    edit->buffers2[buf] = g_malloc (EDIT_BUF_SIZE);
 	mc_read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
     }
 
@@ -207,6 +206,7 @@ static const struct edit_filters {
     }
 };
 
+/* Return index of the filter or -1 is there is no appropriate filter */
 static int edit_find_filter (const char *filename)
 {
     int i, l;
@@ -261,6 +261,7 @@ edit_insert_stream (WEdit * edit, FILE * f)
     }
     return i;
 }
+
 long edit_write_stream (WEdit * edit, FILE * f)
 {
     long i;
@@ -271,6 +272,16 @@ long edit_write_stream (WEdit * edit, FILE * f)
 }
 
 #define TEMP_BUF_LEN 1024
+
+/*
+   The edit_load_file function uses edit_load_file_fast to load the
+   file.  This is unnecessary since you can just as well fopen the file
+   and insert the characters one by one.  The real reason for
+   edit_load_file_fast is optimization - it uses raw block reads and
+   inserts large chunks at a time, so it's much faster at loading files. 
+   We may not want to use it if we are reading from pipe or doing
+   CRLF->LF translation.
+ */
 
 /* inserts a file at the cursor, returns 1 on success */
 int edit_insert_file (WEdit * edit, const char *filename)
@@ -378,31 +389,6 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
     return 0;
 }
 
-/* returns 1 on error */
-static int
-edit_open_file (WEdit *edit, const char *filename)
-{
-    struct stat st;
-    if (!filename || !*filename) {
-	edit->last_byte = 0;
-	filename = 0;
-    } else {
-	int r;
-	r = check_file_access (edit, filename, &st);
-	if (r)
-	    return 1;
-	edit->stat1 = st;
-#ifndef CR_LF_TRANSLATION
-	edit->last_byte = st.st_size;
-#else
-/* going to read the file into the buffer later byte by byte */
-	edit->last_byte = 0;
-	filename = 0;
-#endif
-    }
-    return init_dynamic_edit_buffers (edit, filename);
-}
-
 /*
  * Open the file and load it into the buffers, either directly or using
  * a filter.  Return 0 on success, 1 on error.
@@ -410,31 +396,53 @@ edit_open_file (WEdit *edit, const char *filename)
 static int
 edit_load_file (WEdit *edit)
 {
-    int use_filter = 0;
+    int fast_load = 1;
 
-    if (edit_find_filter (edit->filename) < 0) {
-#ifdef CR_LF_TRANSLATION
-	use_filter = 1;
-#endif
-	if (edit_open_file (edit, edit->filename)) {
-	    return 1;
-	}
-    } else {
-	use_filter = 1;
-	if (edit_open_file (edit, 0)) {
-	    return 1;
-	}
+    /* Cannot do fast load if a filter is used */
+    if (edit_find_filter (edit->filename) >= 0)
+	fast_load = 0;
+
+    /*
+     * VFS may report file size incorrectly, and slow load is not a big
+     * deal considering overhead in VFS.
+     */
+    if (!vfs_current_is_local ()) {
+	fast_load = 0;
     }
 
-    if (use_filter) {
-	push_action_disabled = 1;
-	if (check_file_access (edit, edit->filename, &(edit->stat1))
-	    || !edit_insert_file (edit, edit->filename)) {
-	    edit_clean (edit);
+    /*
+     * FIXME: line end translation should disable fast loading as well
+     * Consider doing fseek() to the end and ftell() for the real size.
+     */
+
+    if (*edit->filename) {
+	/* If we are dealing with a real file, check that it exists */
+	if (check_file_access (edit, edit->filename, &edit->stat1))
 	    return 1;
+    } else {
+	/* nothing to load */
+	fast_load = 0;
+    }
+
+    edit_init_buffers (edit);
+
+    if (fast_load) {
+	edit->last_byte = edit->stat1.st_size;
+	edit_load_file_fast (edit, edit->filename);
+    } else {
+	edit->last_byte = 0;
+    }
+
+    if (!fast_load) {
+	if (*edit->filename) {
+	    push_action_disabled = 1;
+	    if (!edit_insert_file (edit, edit->filename)) {
+		edit_clean (edit);
+		return 1;
+	    }
+	    /* FIXME: this should be an unmodification() function */
+	    push_action_disabled = 0;
 	}
-	/* FIXME: this should be an unmodification() function */
-	push_action_disabled = 0;
     } else {
 	/* If fast load was used, the number of lines wasn't calculated */
 	edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
