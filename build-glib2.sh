@@ -46,7 +46,7 @@ get_file() {
   curl --remote-name "$1" || \
   wget --passive-ftp "$1" || \
   wget "$1" || \
-  ftp "$1" || \
+  ftp "$1" </dev/null || \
   exit 1
 }
 
