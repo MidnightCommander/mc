@@ -1,5 +1,9 @@
 2002-09-26  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c (get_file_type_local): Make static.
+	(get_file_type_pipe): Likewise.
+	* util.c (check_patterns): Likewise.
+
 	* file.c (copy_file_file): Eliminate the complex scheme with
 	"resources".  Set src_desc, dest_desc to -1 initially and use
 	their values to see if they need to be closed.  Track status of

@@ -9,7 +9,6 @@ char *expand_format (WEdit *edit_widget, char c, int quote);
 int check_format_view (const char *);
 int check_format_var (const char *, char **);
 int check_format_cd (const char *);
-char *check_patterns (char*);
 
 #ifdef NATIVE_WIN32
 #   define CEDIT_LOCAL_MENU     "cedit.mnu"

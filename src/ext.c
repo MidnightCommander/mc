@@ -279,7 +279,7 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
  * Run the "file" command on the local file.
  * Return 1 if the data is valid, 0 otherwise.
  */
-int
+static int
 get_file_type_local (char *filename, char *buf, int buflen)
 {
     int read_bytes = 0;
@@ -314,7 +314,7 @@ get_file_type_local (char *filename, char *buf, int buflen)
  * Read file through VFS and feed is to the "file" command.
  * Return 1 if the data is valid, 0 otherwise.
  */
-int
+static int
 get_file_type_pipe (char *filename, char *buf, int buflen)
 {
     int read_bytes = 0;
