@@ -48,6 +48,7 @@ mccpiofs_copyout ()
 # $3 is a name of a file within the system (to add from or extract to)
 {
     TMPDIR=/tmp/mctmpdir.$$
+# FIXME: TMP RACE: when mkdir fails, we go there, anyway
     mkdir $TMPDIR
     cd $TMPDIR
     uni_cat "$1" | cpio -icumd "$2" 2>/dev/null

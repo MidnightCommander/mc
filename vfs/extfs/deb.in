@@ -107,6 +107,7 @@ sub mcdebfs_run
 	}
 	else
 	{
+# FIXME: TMP RACE
 		$tmpcmd="/tmp/mcdebfs.run.$$";
 		&mcdebfs_copyout($archive, $filename, $tmpcmd);
 		system("chmod u+x $tmpcmd");
