@@ -4,7 +4,7 @@ dnl Adjust the CPPFLAGS, CFLAGS and CXXFLAGS for various GCC versions
 
 AC_DEFUN([ri_GCC_WARNINGS],
   [AC_ARG_ENABLE([gcc-warnings],
-    [AS_HELP_STRING([--enable-gcc-warnings[[[[=error]]]]],
+    [AC_HELP_STRING([--enable-gcc-warnings[[[[=error]]]]],
                     [enable additional gcc warning flags])],
 [
 if test x"$GCC" = x"yes"; then
