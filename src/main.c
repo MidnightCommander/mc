@@ -1241,9 +1241,6 @@ static const key_map ctl_x_map[] = {
 #ifdef WITH_BACKGROUND
     {'j', jobs_cmd},
 #endif				/* WITH_BACKGROUND */
-#ifdef HAVE_SETSOCKOPT
-    {'%', source_routing},
-#endif				/* HAVE_SETSOCKOPT */
     {0, 0}
 };
 

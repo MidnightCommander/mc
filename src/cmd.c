@@ -78,9 +78,6 @@
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
 
-/* Source routing destination */
-int source_route = 0;
-
 /* If set, use the builtin editor */
 int use_internal_edit = 1;
 
@@ -1194,28 +1191,6 @@ void smblink_cmd (void)
 	     "[SMB File System]", "/#smb:", 0);
 }
 #endif /* WITH_SMBFS */
-
-#ifdef HAVE_SETSOCKOPT
-void source_routing (void)
-{
-    char *source;
-    struct hostent *hp;
-    
-    source = input_dialog (_(" Socket source routing setup "),
-			   _(" Enter host name to use as a source routing hop: "),
-			   "");
-    if (!source)
-	return;
-
-    hp = gethostbyname (source);
-    g_free (source);
-    if (!hp){
-	message (1, _(" Host name "), _(" Error while looking up IP address "));
-	return;
-    }
-    source_route = *((int *)hp->h_addr);
-}
-#endif /* HAVE_SETSOCKOPT */
 #endif /* USE_NETCODE */
 
 #ifdef USE_EXT2FSLIB
