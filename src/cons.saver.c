@@ -161,17 +161,16 @@ char *detect_console (void)
     int  xlen;
     
     /* Must be console */
-    /* Handle the case for /dev/tty?? */
-    if (tty_name[len-5] == 't')
+    /* Handle the case for /dev/tty?? and /dev/vc/??  */
+    if (tty_name[len-5] == 't' || tty_name[len-5] == 'v')
 	xlen = len - 1;
     else
 	xlen = len;
 
-    /* General: /dev/ttyn */
+    /* General: /dev/ttyn  and /dev/vc/n  */
     if (tty_name[xlen - 5] != '/' ||
-	tty_name[xlen - 4] != 't' ||
-	tty_name[xlen - 3] != 't' ||
-	tty_name[xlen - 2] != 'y' ||
+	! (strncmp(tty_name+xlen-4,"tty",3) == 0 ||
+	   strncmp(tty_name+xlen-4,"vc/",3) == 0) ||
 	!isdigit(tty_name[xlen - 1]) ||
 	!isdigit(tty_name[len - 1]))
 	return "Doesn't look like console";
