@@ -1,5 +1,9 @@
 2003-02-18  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (list_append_unique): Free removed links.
+	* utilunix.c (destroy_groups): Use g_tree_foreach() instead of
+	obsolete g_tree_traverse().
+
 	* util.c (list_append_unique): Traverse the list backwards.
 	Otherwise the list was lost when the current link was removed.
 
