@@ -688,7 +688,7 @@ vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
 
     path2 = g_strdup(path);
     if (!(ino = vfs_s_inode_from_path (me, path2, flag))) {
-	if (!(ino = vfs_s_inode_from_path (me, path, flag|FL_DIR))) {
+        if ((!path) || (*path) || !(ino = vfs_s_inode_from_path (me, path, flag|FL_DIR))) {	/* Seems we have problem: vfs_s_inode_from_path on directories always succeeds. This is *hack* to make / directory of ftp archive statable */
 	    g_free(path2);
 	    return -1;
 	}
