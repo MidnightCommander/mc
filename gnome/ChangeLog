@@ -1,3 +1,20 @@
+1998-12-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c: Moved the old DnD cruft to olddnd.c to keep it there
+	for reference purposes.
+
+	* gmetadata.c: Removed the gmeta_get_icon_for_file() function, as
+	it is obsoleted by gicon_get_icon_for_file().
+
+	* gdesktop.c (desktop_icon_info_new): Made it use
+	gicon_get_icon_for_file().
+
+	* gdesktop-icon.c (set_icon): Now we handle things internally
+	using an imlib image, not a filename.
+	(desktop_icon_new): Now takes an imlib image for the icon instead
+	of a filename.
+	(desktop_icon_set_icon): Likewise.
+
 1998-12-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_new): Use imlib's visual and colormap. 

@@ -180,23 +180,14 @@ desktop_icon_realize (GtkWidget *widget)
 			       NULL);
 }
 
-/* Sets the icon from the specified image file.  Does not re-create the window shape for the desktop
+/* Sets the icon from the specified image.  Does not re-create the window shape for the desktop
  * icon.
  */
 static void
-set_icon (DesktopIcon *dicon, char *image_file)
+set_icon (DesktopIcon *dicon, GdkImlibImage *im)
 {
-	GdkImlibImage *im, *old_im;
+	GdkImlibImage *old_im;
 	GtkArg arg;
-
-	/* Load the new image */
-
-	if (!g_file_exists (image_file))
-		return;
-
-	im = gdk_imlib_load_image (image_file);
-	if (!im)
-		return;
 
 	/* Destroy the old image if it exists */
 
@@ -242,7 +233,7 @@ set_text (DesktopIcon *dicon, char *text)
 
 /**
  * desktop_icon_new
- * @image_file:	Name of the image file that contains the icon.
+ * @image:	Imlib image with the icon.
  * @text:	Text to use for the icon.
  *
  * Creates a new desktop icon widget with the specified icon image and text.  The icon has to be
@@ -251,16 +242,16 @@ set_text (DesktopIcon *dicon, char *text)
  * Returns the newly-created desktop icon widget.
  */
 GtkWidget *
-desktop_icon_new (char *image_file, char *text)
+desktop_icon_new (GdkImlibImage *image, char *text)
 {
 	DesktopIcon *dicon;
 
-	g_return_val_if_fail (image_file != NULL, NULL);
+	g_return_val_if_fail (image != NULL, NULL);
 	g_return_val_if_fail (text != NULL, NULL);
 
 	dicon = gtk_type_new (desktop_icon_get_type ());
 
-	set_icon (dicon, image_file);
+	set_icon (dicon, image);
 	set_text (dicon, text);
 	desktop_icon_reshape (dicon);
 
@@ -270,18 +261,18 @@ desktop_icon_new (char *image_file, char *text)
 /**
  * desktop_icon_set_icon
  * @dicon:	The desktop icon to set the icon for
- * @image_file:	Name of the image file that contains the icon
+ * @image:	Imlib image with the icon.
  *
- * Sets a new icon for an existing desktop icon.  If the file does not exist, it does nothing.
+ * Sets a new icon for an existing desktop icon.
  */
 void
-desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
+desktop_icon_set_icon (DesktopIcon *dicon, GdkImlibImage *image)
 {
 	g_return_if_fail (dicon != NULL);
 	g_return_if_fail (IS_DESKTOP_ICON (dicon));
-	g_return_if_fail (image_file != NULL);
+	g_return_if_fail (image != NULL);
 
-	set_icon (dicon, image_file);
+	set_icon (dicon, image);
 	desktop_icon_reshape (dicon);
 }
 

@@ -52,11 +52,11 @@ struct _DesktopIconClass {
 /* Standard Gtk function */
 GtkType desktop_icon_get_type (void);
 
-/* Creates a new desktop icon from the specified image file, and with the specified title */
-GtkWidget *desktop_icon_new (char *image_file, char *text);
+/* Creates a new desktop icon from the specified image, and with the specified title */
+GtkWidget *desktop_icon_new (GdkImlibImage *image, char *text);
 
-/* Sets the icon from the specified file name */
-void desktop_icon_set_icon (DesktopIcon *dicon, char *image_file);
+/* Sets the icon from the specified image */
+void desktop_icon_set_icon (DesktopIcon *dicon, GdkImlibImage *image);
 
 /* Sets the icon's text */
 void desktop_icon_set_text (DesktopIcon *dicon, char *text);

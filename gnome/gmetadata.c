@@ -13,43 +13,8 @@
 #include "../vfs/vfs.h"
 
 
-#define ICON_FILENAME "icon-filename"
 #define ICON_POSITION "icon-position"
 
-
-/**
- * gmeta_get_icon_for_file
- * @filename:	The name of the file to get the icon for.
- *
- * Computes the name of the file that holds the icon for the specified file.  The
- * resulting string is guaranteed to be non-NULL.  You have to free this string
- * on your own.
- *
- * Returns the icon's file name.
- */
-char *
-gmeta_get_icon_for_file (char *filename)
-{
-	int size;
-	char *buf;
-	struct stat s;
-	int retval;
-
-	g_return_val_if_fail (filename != NULL, NULL);
-
-	if (gnome_metadata_get (filename, ICON_FILENAME, &size, &buf) != 0) {
-		/* Return a default icon */
-
-		retval = mc_stat (filename, &s);
-
-		if (!retval && S_ISDIR (s.st_mode))
-			return gnome_unconditional_pixmap_file ("gnome-folder.png");
-		else
-			return gnome_unconditional_pixmap_file ("gnome-unknown.png");
-	}
-
-	return buf;
-}
 
 /**
  * gmeta_get_icon_pos
