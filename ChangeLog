@@ -1,5 +1,9 @@
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
+	* edit/Makefile.in: Don't link headers, add extra includes
+	to CPPFLAGS instead. Put links to the build directory.
+	Remove the hack with "mx" - it is not needed anymore.
+
 	* configure.in: remove any manupulations with top_srcdir.
 	Don't change CPPGLAGS when the internal editor is enabled,
 	instead do it ...

@@ -5,7 +5,8 @@ VPATH = @srcdir@
 @MCFG@@MCF@
 
 CFLAGS = $(XCFLAGS)
-CPPFLAGS = $(XCPPFLAGS) -I$(top_srcdir)
+CPPFLAGS = $(XCPPFLAGS) -I$(top_srcdir) -I$(top_srcdir)/edit \
+	-I$(top_srcdir)/gtkedit
 LDFLAGS = $(XLDFLAGS) 
 DEFS = $(XDEFS)
 LIBS = @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ $(XLIB)
@@ -19,6 +20,9 @@ AR = @AR@
 #
 
 EDITSRC = edit_key_translator.c
+
+EDITLINKS = edit.c editcmd.c editwidget.c editdraw.c editmenu.c wordproc.c \
+	  syntax.c editoptions.c bookmark.c
 
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 	  syntax.o editoptions.o bookmark.o
@@ -36,25 +40,12 @@ Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
 check:
 	@echo no tests are supplied.
 
-checklinks:
-	@if test -f $(top_srcdir)/edit/edit.c; then echo ok; \
-	else $(MAKE) sourcelinks; fi
-	@if test -f $(top_srcdir)/edit/bookmark.c; then echo ok; \
-	else $(MAKE) sourcelinks; fi
+$(EDITLINKS):
+	for i in $(EDITLINKS); do \
+		$(LN_S) $(top_srcdir)/gtkedit/$$i . || exit 1; \
+	done
 
-sourcelinks:
-	-cd $(top_srcdir)/edit ; $(LN_S) ../gtkedit/*.[ch] . >/dev/null 2>&1 ; true
-
-cleansourcelinks:
-	-if test -f $(top_srcdir)/edit/edit.c; then \
-	    cd $(top_srcdir)/edit; find . -lname '*.[ch]' | xargs $(RM); \
-	fi
-
-libedit.a: checklinks
-	$(MAKE) mx
-	touch mx
-
-mx: $(EDITOBJS)
+libedit.a: $(EDITOBJS)
 	$(RMF) libedit.a
 	$(AR) cr libedit.a $(EDITOBJS)
 	-$(RANLIB) libedit.a
@@ -74,14 +65,14 @@ TAGS: $(EDITSRC)
 	etags $(EDITSRC)
 
 clean:
-	$(RMF) *.o core a.out libedit.a mx
+	$(RMF) *.o core a.out libedit.a $(EDITLINKS)
 
 realclean: clean
 	$(RMF) .depend
 	$(RMF) TAGS
 	$(RMF) *~
 
-distclean: cleansourcelinks
+distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
 	$(RMF) $(srcdir)/core $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
