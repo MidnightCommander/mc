@@ -12,7 +12,7 @@
 #include <ctype.h>
 #include "mime-data.h"
 #include "mime-info.h"
-
+#include "edit-window.h"
 /* Prototypes */
 static void try_callback ();
 static void revert_callback ();
@@ -24,28 +24,29 @@ GtkWidget *capplet;
 static void
 try_callback ()
 {
-        g_print ("testing...\n");
         write_user_keys ();
 }
 static void
 revert_callback ()
 {
-
+        write_initial_keys ();
+        discard_mime_info ();
+        initialize_main_win_vals ();
 }
 static void
 ok_callback ()
 {
-
+        write_user_keys ();
 }
 static void
 cancel_callback ()
 {
-
+        write_initial_keys ();
 }
 static void
 help_callback ()
 {
-
+        /* Sigh... empty as always */
 }
 static void
 init_mime_capplet ()
@@ -60,13 +61,11 @@ init_mime_capplet ()
         gtk_box_pack_start (GTK_BOX (vbox), get_mime_clist (), TRUE, TRUE, 0);
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
-        button = gtk_button_new_with_label (_("Remove"));
-        gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-        button = gtk_button_new_with_label (_("Add"));
-        gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
         button = gtk_button_new_with_label (_("Edit"));
         gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	gtk_widget_show_all (capplet);
+        gtk_signal_connect (GTK_OBJECT (button), "clicked",
+                            edit_clicked, NULL);
+        gtk_widget_show_all (capplet);
         gtk_signal_connect(GTK_OBJECT(capplet), "try",
                            GTK_SIGNAL_FUNC(try_callback), NULL);
         gtk_signal_connect(GTK_OBJECT(capplet), "revert",
@@ -75,6 +74,10 @@ init_mime_capplet ()
                            GTK_SIGNAL_FUNC(ok_callback), NULL);
         gtk_signal_connect(GTK_OBJECT(capplet), "cancel",
                            GTK_SIGNAL_FUNC(cancel_callback), NULL);
+        gtk_signal_connect(GTK_OBJECT(capplet), "page_hidden",
+                           GTK_SIGNAL_FUNC(hide_edit_window), NULL);
+        gtk_signal_connect(GTK_OBJECT(capplet), "page_shown",
+                           GTK_SIGNAL_FUNC(show_edit_window), NULL);
         gtk_signal_connect(GTK_OBJECT(capplet), "help",
                            GTK_SIGNAL_FUNC(help_callback), NULL);
 }

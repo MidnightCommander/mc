@@ -22,6 +22,8 @@ static char *get_priority (char *def, int *priority);
 /* Global variables */
 static char *current_lang;
 static GHashTable *mime_types = NULL;
+static GtkWidget *clist = NULL;
+
 /* Initialization functions */
 static char *
 get_priority (char *def, int *priority)
@@ -208,7 +210,7 @@ mime_load_from_dir (const char *mime_info_dir, gboolean system_dir)
 	closedir (dir);
 }
 static void
-add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer clist)
+add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
 {
         /* we also finalize the MimeInfo structure here, now that we're done
          * loading it */
@@ -249,8 +251,8 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer clist)
         text[0] = ((MimeInfo *) mi)->mime_type;
         text[1] = extension->str;
 
-        row = gtk_clist_insert (GTK_CLIST (clist), 1, text);
-        gtk_clist_set_row_data (GTK_CLIST (clist), row, mi);
+        row = gtk_clist_insert (GTK_CLIST (cl), 1, text);
+        gtk_clist_set_row_data (GTK_CLIST (cl), row, mi);
         g_string_free (extension, TRUE);
 }
 
@@ -272,14 +274,18 @@ void
 edit_clicked ()
 {
         MimeInfo *mi;
-        
-        /*mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (widget), row);*/
+        gint row;
+
+        if (GTK_CLIST (clist)->selection)
+                row = GINT_TO_POINTER ((GTK_CLIST (clist)->selection)->data);
+        mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
+        if (mi)
+                launch_edit_window (mi);
 }
 
 GtkWidget *
 get_mime_clist ()
 {
-	GtkWidget *clist;
         GtkWidget *retval;
         gchar *titles[2];
 
@@ -294,10 +300,12 @@ get_mime_clist ()
                             "select_row",
                             GTK_SIGNAL_FUNC (selected_row_callback),
                             NULL);
+        gtk_clist_set_selection_mode (GTK_CLIST (clist), GTK_SELECTION_BROWSE);
         gtk_clist_set_auto_sort (GTK_CLIST (clist), TRUE);
-        g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
+        if (clist)
+                g_hash_table_foreach (mime_types, (GHFunc) add_mime_vals_to_clist, clist);
         gtk_clist_columns_autosize (GTK_CLIST (clist));
-
+        gtk_clist_select_row (GTK_CLIST (clist), 0, 0);
         gtk_container_add (GTK_CONTAINER (retval), clist);
         return retval;
 }

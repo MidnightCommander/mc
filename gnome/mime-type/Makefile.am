@@ -6,7 +6,9 @@ INCLUDES = -I. -I$(srcdir) 				\
 
 bin_PROGRAMS = mime-type-capplet
 
-mime_type_capplet_SOURCES = mime-type-capplet.c mime-data.c edit-window.c mime-info.c
+mime_type_capplet_SOURCES = mime-type-capplet.c\
+	mime-data.h mime-data.c edit-window.c\
+	edit-window.h mime-info.c mime-info.h
 
 mime_type_capplet_LDADD = ../../control-center/libcapplet.la \
 			     $(GNOME_LIBDIR) $(ORB_LIBS) \

@@ -8,5 +8,8 @@
 #include "mime-data.h"
 
 void launch_edit_window (MimeInfo *mi);
-
+void initialize_main_win_vals ();
+void hide_edit_window ();
+void show_edit_window ();
+void edit_clicked ();
 #endif
