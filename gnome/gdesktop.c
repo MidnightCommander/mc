@@ -804,8 +804,41 @@ set_icon_wmclass (DesktopIconInfo *dii)
 	XFree (h);
 }
 
-/*
- * Callback used when an icon's text changes.  We must validate the
+/* Renames a file using a file operation context */
+static int
+try_rename (char *source, char *dest)
+{
+	FileOpContext *ctx;
+	struct stat s;
+	long count;
+	double bytes;
+	int retval;
+
+	if (mc_lstat (source, &s) != 0)
+		return FILE_ABORT;
+
+	ctx = file_op_context_new ();
+	file_op_context_create_ui (ctx, OP_MOVE, FALSE);
+
+	count = 1;
+	bytes = s.st_size;
+
+	retval = move_file_file (ctx, source, dest, &count, &bytes);
+	file_op_context_destroy (ctx);
+
+	return retval;
+}
+
+/* Removes the Gtk and Gdk grabs that are present when editing a desktop icon */
+static void
+remove_editing_grab (DesktopIconInfo *dii)
+{
+	gtk_grab_remove (dii->dicon);
+	gdk_pointer_ungrab (GDK_CURRENT_TIME);
+	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
+}
+
+/* Callback used when an icon's text changes.  We must validate the
  * rename and return the appropriate value.  The desktop icon info
  * structure is passed in the user data.
  */
@@ -821,6 +854,7 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	int retval;
 
 	dii = data;
+	remove_editing_grab (dii);
 
 	source = g_concat_dir_and_file (desktop_directory, dii->filename);
 	new_name = gnome_icon_text_item_get_text (iti);
@@ -830,9 +864,23 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 
 		dest = g_concat_dir_and_file (desktop_directory, new_name);
 
-		if (mc_rename (source, dest) == 0) {
-			gnome_metadata_delete (dest);
-			gnome_metadata_rename (source, dest);
+		if (try_rename (source, dest) == FILE_CONT) {
+			GList *icons;
+			GList *l;
+
+			/* See if there was an icon for the new name.  If so,
+			 * destroy it first; desktop_reload_icons() will not be
+			 * happy if two icons have the same filename.
+			 */
+
+			icons = get_all_icons ();
+			l = icon_exists_in_list (icons, new_name);
+			if (l)
+				desktop_icon_info_destroy (l->data);
+
+			g_list_free (icons);
+
+			/* Set the new name */
 
 			g_free (dii->filename);
 			dii->filename = g_strdup (new_name);
@@ -928,10 +976,7 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	DesktopIconInfo *dii;
 
 	dii = data;
-
-	gtk_grab_remove (dii->dicon);
-	gdk_pointer_ungrab (GDK_CURRENT_TIME);
-	gdk_keyboard_ungrab (GDK_CURRENT_TIME);
+	remove_editing_grab (dii);
 
 	/* Re-enable drags from this icon */
 
