@@ -1,27 +1,38 @@
+# Syntax highlighting rules for syntax highlighting rules
+
+# Use \[\] at the end of keywords to suppress their special meaning
+
+wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.\\[]{}
+
 context default
-    keyword whole linestart \[\s\t\]spellcheck yellow/24
-    keyword whole linestart \[\s\t\]keyword yellow/24
-    keyword whole whole\[\t\s\]l\inestart brightcyan/17
-    keyword whole whole\[\t\s\]l\inestart brightcyan/17
-    keyword whole wh\oleleft\[\t\s\]l\inestart brightcyan/17
-    keyword whole wh\oleright\[\t\s\]l\inestart brightcyan/17
-    keyword whole l\inestart\[\t\s\]wh\ole
-    keyword whole l\inestart\[\t\s\]wh\ole
-    keyword whole l\inestart\[\t\s\]wh\oleleft
-    keyword whole l\inestart\[\t\s\]wh\oleright
-    keyword wholeleft whole\s brightcyan/17
-    keyword wholeleft whole\t brightcyan/17
-    keyword whole wh\oleleft brightcyan/17
-    keyword whole wh\oleright brightcyan/17
-    keyword whole lin\estart brightcyan/17
-    keyword whole linestart \[\s\t\]context\[\t\s\]exclusive brightred/18
-    keyword whole linestart \[\s\t\]context\[\t\s\]default brightred/18
-    keyword whole linestart \[\s\t\]context brightred/18
-    keyword whole wh\olechars\[\t\s\]left brightcyan/17
-    keyword whole wh\olechars\[\t\s\]right brightcyan/17
-    keyword whole wh\olechars brightcyan/17
-    keyword whole linestart file brightgreen/6
-    keyword whole linestart include brightred/18
+# Invalid combinations, not highlighted
+    keyword whole linestart\[\t\s\]whole
+    keyword whole linestart\[\t\s\]whole
+    keyword whole linestart\[\t\s\]wholeleft
+    keyword whole linestart\[\t\s\]wholeright
+
+# Combinations below are valid
+    keyword whole whole\[\t\s\]linestart brightcyan/17
+    keyword whole whole\[\t\s\]linestart brightcyan/17
+    keyword whole wholeleft\[\t\s\]linestart brightcyan/17
+    keyword whole wholeright\[\t\s\]linestart brightcyan/17
+    keyword whole whole\[\] brightcyan/17
+    keyword whole wholeleft\[\] brightcyan/17
+    keyword whole wholeright\[\] brightcyan/17
+    keyword whole linestart\[\] brightcyan/17
+
+    keyword whole wholechars\[\t\s\]left brightcyan/17
+    keyword whole wholechars\[\t\s\]right brightcyan/17
+    keyword whole wholechars\[\] brightcyan/17
+
+    keyword whole spellcheck\[\] yellow/24
+    keyword whole keyword\[\] yellow/24
+    keyword whole context\[\t\s\]exclusive brightred/18
+    keyword whole context\[\t\s\]default brightred/18
+    keyword whole context\[\] brightred/18
+
+    keyword whole linestart file\[\] brightgreen/6
+    keyword whole linestart include\[\] brightred/18
 
     keyword whole 0 lightgray/0	blue/26
     keyword whole 1 lightgray/1	blue/26
