@@ -1,3 +1,8 @@
+2001-06-26  Pavel Roskin  <proski@gnu.org>
+
+	* gkey.c: Include the contents of xslint.c.
+	* Makefile.in (OOBJS): Remove xslint.o.
+
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* gcorba.h (poa): Declare extern.
@@ -157,7 +162,7 @@
 	* gdesktop.c (should_hide_nautilus_file): New function, used to
 	decide if things should be hidden (handles nautilus home key,
 	trash key, and .nautilus-metafile.xml for now)
-	
+
 	(desktop_reload_icons): Hook up above function.
 
 	* gdesktop-init.c (migrate): New function to help migrate metadata
@@ -174,7 +179,7 @@
 
 2001-04-06  Miguel de Icaza  <miguel@ximian.com>
 
-	* gdesktop.c (do_rescan): Added automatic desktop reloading. 
+	* gdesktop.c (do_rescan): Added automatic desktop reloading.
 
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
@@ -228,7 +233,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 	breaks compilation on glibc2.1 systems because glibc includes
 	src/features.h instead of it's own features.h. Run `make
 	cleansourcelinks; make sourcelinks' in case mc doesn't find it's
-	include files. 
+	include files.
 
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
@@ -268,7 +273,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 
 2000-06-20  Jacob Berkman  <jacob@helixcode.com>
 
-	* gtkdtree.c (gtk_dtree_construct): 
+	* gtkdtree.c (gtk_dtree_construct):
 	* gscreen.c (panel_create_tree_view): don't set the tree's line
 	style
 
@@ -286,7 +291,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 2000-05-06  Jacob Berkman  <jacob@helixcode.com>
 
 	* gmain.c (xtoolkit_get_main_dialog):
-	(xtoolkit_create_dialog): 
+	(xtoolkit_create_dialog):
 	(x_create_panel_container): set the default icon
 
 2000-06-16  Jonathan Blandford  <jrb@redhat.com>
@@ -305,7 +310,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 
 2000-05-24  Arik Devens <arik@helixcode.com> and Ian Peters <itp@helixcode.com>
 
-	* gdesktop-init.c (desktop_load_init_from): don't crash on 
+	* gdesktop-init.c (desktop_load_init_from): don't crash on
 	recreating icons, iterating over NULL pointer.
 
 2000-05-15 Andrew Post <apost@cbmi.upmc.edu>

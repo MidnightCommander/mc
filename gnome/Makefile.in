@@ -117,7 +117,7 @@ OOBJS = dlg.o screen.o widget.o wtools.o			\
 	panelize.o background.o dir.o util.o			\
 	win.o color.o profile.o user.o ext.o setup.o		\
 	regex.o complete.o					\
-	cmd.o utilunix.o xslint.o filenot.o			\
+	cmd.o utilunix.o filenot.o				\
 	fileopctx.o treestore.o mad.o
 
 CORBAOBJS = 			\

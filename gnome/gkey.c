@@ -79,3 +79,20 @@ delete_select_channel (int fd)
 		g_warning ("could not find closure for %d\n", fd);
 	}
 }
+
+void
+enable_interrupt_key(void)
+{
+}
+   
+void
+disable_interrupt_key(void)
+{
+}
+
+/* FIXME: We could provide a better way of doing this */
+int
+got_interrupt (void)
+{
+    return 0;
+}
