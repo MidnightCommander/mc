@@ -4,139 +4,20 @@
  *
  */
 #include <config.h>
-#include <locale.h>
 
-#ifdef _OS_NT
-#    include <windows.h>
+#ifdef HAVE_X
+#error This file is for text-mode editions only.
 #endif
 
-#ifdef __os2__
-#    define INCL_DOS
-#    define INCL_DOSFILEMGR
-#    define INCL_DOSERRORS
-#    include <os2.h>
-#    include <io.h>
-#    include <direct.h>
-#endif
-
-#include "tty.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/param.h>
 
-#include <sys/stat.h>
-
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
-#endif
-
-/* unistd.h defines _POSIX_VERSION on POSIX.1 systems. */
-#if defined(HAVE_DIRENT_H) || defined(_POSIX_VERSION)
-#   include <dirent.h>
-#   define NLENGTH(dirent) (strlen ((dirent)->d_name))
-#else
-#   define dirent direct
-#   define NLENGTH(dirent) ((dirent)->d_namlen)
-
-#   ifdef HAVE_SYS_NDIR_H
-#       include <sys/ndir.h>
-#   endif /* HAVE_SYS_NDIR_H */
-
-#   ifdef HAVE_SYS_DIR_H
-#       include <sys/dir.h>
-#   endif /* HAVE_SYS_DIR_H */
-
-#   ifdef HAVE_NDIR_H
-#       include <ndir.h>
-#   endif /* HAVE_NDIR_H */
-#endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
-
-#if HAVE_SYS_WAIT_H
-#   include <sys/wait.h>	/* For waitpid() */
-#endif
-
-#include <errno.h>
-#ifndef OS2_NT
-#    include <pwd.h>
-#endif
-#include <ctype.h>
-#include <fcntl.h>	/* For O_RDWR */
-#include <signal.h>
-
-/* Program include files */
-#include "mad.h"
-#include "dir.h"
-#include "color.h"
-#include "global.h"
-#include "util.h"
-#include "dialog.h"
-#include "menu.h"
-#include "file.h"
-#include "panel.h"
 #define WANT_WIDGETS
-#include "main.h"
 #include "win.h"
-#include "user.h"
-#include "mem.h"
-#include "mouse.h"
-#include "option.h"
-#include "tree.h"
-#include "cons.saver.h"
-#include "subshell.h"
-#include "key.h"	/* For init_key() and mi_getch() */
-#include "setup.h"	/* save_setup() */
-#include "profile.h"	/* free_profiles() */
-#include "boxes.h"
-#include "layout.h"
-#include "cmd.h"		/* Normal commands */
-#include "hotlist.h"
-#include "panelize.h"
-#ifndef __os2__
-#    include "learn.h"
-#endif
-#include "listmode.h"
-#include "background.h"
-#include "dirhist.h"
-#include "ext.h"	/* For flush_extension_file() */
-
-/* Listbox for the command history feature */
+#include "tty.h"
+#include "key.h"
 #include "widget.h"
-#include "command.h"
-#include "wtools.h"
-#include "complete.h"		/* For the free_completion */
-
-#include "chmod.h"
-#include "chown.h"
-
-#ifdef OS2_NT
-#    include <drive.h>
-#endif
-
-#include "../vfs/vfs.h"
-#include "../vfs/extfs.h"
-
-#ifdef HAVE_XVIEW
-#   include "../xv/xvmain.h"
-#endif
-
-#ifdef HAVE_TK
-#   include "tkmain.h"
-#endif
-
-#include "popt.h"
-
-#ifndef MAP_FILE
-#define MAP_FILE 0
-#endif
-
-#ifndef USE_VFS
-#ifdef USE_NETCODE
-#undef USE_NETCODE
-#endif
-#endif
-
+#include "main.h"
+#include "cons.saver.h"
 
 char *default_edition_colors =
 "normal=lightgray,blue:"
@@ -145,23 +26,18 @@ char *default_edition_colors =
 "markselect=yellow,cyan:"
 "errors=white,red:"
 "menu=white,cyan:"
-"reverse=black,white:"
-"dnormal=black,white:"
+"reverse=black,lightgray:"
+"dnormal=black,lightgray:"
 "dfocus=black,cyan:"
-#if defined(__os2__)
-"dhotnormal=magenta,white:"	/* .ado: yellow */
-"dhotfocus=magenta,cyan:"
-#else
-"dhotnormal=yellow,white:"
+"dhotnormal=yellow,lightgray:"
 "dhotfocus=yellow,cyan:"
-#endif
 "viewunderline=brightred,blue:"
 "menuhot=yellow,cyan:"
 "menusel=white,black:"
 "menuhotsel=yellow,black:"
-"helpnormal=black,white:"
-"helpitalic=red,white:"
-"helpbold=blue,white:"
+"helpnormal=black,lightgray:"
+"helpitalic=red,lightgray:"
+"helpbold=blue,lightgray:"
 "helplink=black,cyan:"
 "helpslink=yellow,blue:"
 "gauge=white,black:"

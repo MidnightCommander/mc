@@ -250,15 +250,16 @@
 #ifdef _OS_NT
 #   undef mc_rmdir
 #   undef mc_rename
-#   undef mc_mkdir
+#endif
+
+#ifdef OS2_NT
 #   undef mc_ctl
 #   undef mc_unlink
 #   define mc_ctl(a,b,c) 0
-#endif
-
-/* .ado: OS2 and NT */
-#if defined(OS2_NT)
-#   define mc_mkdir(a,b) mkdir(a)
+#   ifndef __EMX__
+#      undef mc_mkdir
+#      define mc_mkdir(a,b) mkdir(a)
+#   endif
 #endif
 
 #endif /* USE_VFS */

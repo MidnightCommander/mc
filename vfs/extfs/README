@@ -25,7 +25,7 @@ prefix=space_separated_extensions
 e.g.
 zip=.zip .ZIP
 
-The second one my require some your knowledges of shell/c programming:
+The second one may require some your knowledge of shell/c programming:
 You have to create a program (with executable permissions) prefix in
 $(libdir)/extfs (in our example $(libdir)/extfs/zip).
 

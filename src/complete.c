@@ -166,12 +166,6 @@ char *filename_completion_function (char *text, int state)
 	    strcat (tmp, PATH_SEP_STR);
 	    strcat (tmp, entry->d_name);
 	    canonicalize_pathname (tmp);
-#ifdef OS2_NT
-	    if (!stat (tmp, &tempstat)){
-		if (tempstat.st_mode & S_IEXEC)
-		    isexec = 1;
-	    }
-#else
 	    /* Unix version */
 	    if (!stat (tmp, &tempstat)){
 	    	uid_t my_uid = getuid ();
@@ -186,7 +180,6 @@ char *filename_completion_function (char *text, int state)
 	                isexec = 1;
 	        }
 	    }
-#endif
 	    free (tmp);
 	}
 	switch (look_for_executables)
@@ -284,7 +277,7 @@ char *username_completion_function (char *text, int state)
 }
 
 extern char **environ;
-#endif /* _OS_NT */
+#endif /* OS2_NT */
 
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */

@@ -183,6 +183,8 @@ void tell_parent (int msg);
 #    define PATH_SEP_STR "\\"
 #    define PATH_ENV_SEP ';'
 #    define OS_SORT_CASE_SENSITIVE_DEFAULT 0
+#    define STRCOMP stricmp
+#    define MC_ARCH_FLAGS REG_ICASE
      char *get_default_shell (void);
      char *get_default_editor (void);
      int lstat (const char* pathname, struct stat *buffer);
@@ -192,6 +194,8 @@ void tell_parent (int msg);
 #    define PATH_ENV_SEP ':'
 #    define get_default_editor() "vi"
 #    define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+#    define STRCOMP strcmp
+#    define MC_ARCH_FLAGS 0
 #endif
 
 /* GNOME provides the internationalization code as well */

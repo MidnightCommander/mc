@@ -477,17 +477,6 @@ char *convert_pattern (char *pattern, int match_type, int do_group)
 	return pattern;
 }
 
-/* 1 if string matches
-   0 if string doesn't match
-   -1 if error in pattern */
-#ifdef OS2_NT
-#  define STRCOMP stricmp
-#  define MC_ARCH_FLAGS REG_ICASE
-#else
-#  define STRCOMP strcmp
-#  define MC_ARCH_FLAGS 0
-#endif
-
 int regexp_match (char *pattern, char *string, int match_type)
 {
     static regex_t r;

@@ -2426,14 +2426,8 @@ init_sigchld (void)
 
 #endif /* _OS_NT, __os2__, UNIX */
 
-#ifdef HAVE_SLANG
-#ifdef OS2_NT
-#define ARCH_FLAGS "S:"
-    static
-#else
-    extern
-#endif
-    int SLtt_Try_Termcap;
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
+    extern int SLtt_Try_Termcap;
 #endif
 
 static struct poptOption argumentTable[] = {
@@ -2472,7 +2466,7 @@ static struct poptOption argumentTable[] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U' },
 #endif
-#ifdef HAVE_SLANG
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
     { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0 },
 #endif
     { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
@@ -2481,8 +2475,6 @@ static struct poptOption argumentTable[] = {
 
     { NULL, 		0,			0, NULL, 0 }
 };
-
-#define ARCH_FLAGS ""
 
 static void
 print_usage (void)
@@ -2510,7 +2502,7 @@ print_usage (void)
     "                   default.\n"
     "-P, --printwd      At exit, print the last working directory.\n"
     "-s, --slow         Disables verbose operation (for slow terminals).\n"
-#ifdef HAVE_SLANG
+#if defined(HAVE_SLANG) && !defined(OS2_NT)
     "-t, --termcap      Activate support for the TERMCAP variable.\n"
 #endif
 #ifdef USE_NETCODE
@@ -2829,34 +2821,14 @@ int main (int argc, char *argv [])
     init_sigfatals ();
     
     /* This variable is used by the subshell */
-#if defined _OS_NT
-    home_dir = copy_strings (getenv ("HOMEDRIVE"), getenv ("HOMEPATH"), NULL);
-    /* we need to malloc something (we free(home_dir)) */
-    if (!home_dir) {
-	home_dir = malloc(MAX_PATH);
-	GetWindowsDirectory(home_dir, MAX_PATH);
-    }
-#elif defined(__os2__)
-    drv      = getenv ("HOMEDRIVE");
-    drv_path = getenv ("HOMEPATH");
-
-    if ((!drv) || (!drv_path)){
-        char *p;
-        home_dir = getenv("USER_INI");
-        if (!home_dir) {
-            message(1, "Error", "HOMEDRIVE and HOMEPATH must be set!");
-            return -1;
-        } else {
-            p = strstr(home_dir, "OS2.INI");
-            *(--p) = (char) 0;
-        } 
-    } else {
-        home_dir = copy_strings (drv, drv_path, NULL);
-    }
-#else
     home_dir = getenv ("HOME");
-    home_dir = home_dir ? home_dir : PATH_SEP_STR;
+    if (!home_dir) {
+#ifndef OS2_NT
+    home_dir = PATH_SEP_STR;
+#else
+    home_dir = mc_home; /* LIBDIR, calculated in OS_Setup() */
 #endif
+    }
 
     compatibility_move_mc_files ();
     

@@ -13,7 +13,7 @@ AR = @AR@
 
 SLANGSRCS = 	sldisply.c slerr.c slsmg.c slutty.c slgetkey.c slmemcpy.c \
 		slmemset.c sltermin.c sltoken.c slsignal.c \
-		slvideo.c slw32tty.c
+		slvideo.c slw32tty.c slos2tty.c
 
 SLANGHDRS = slang.h _slang.h sl-feat.h jdmacros.h
 

@@ -42,7 +42,6 @@
 #include <termnet.h>
 #endif
 
-#include <signal.h>
 #include <errno.h>
 #include "tcputil.h"
 #include "../src/dialog.h"	/* for message () */

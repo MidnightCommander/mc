@@ -37,7 +37,6 @@
 #include <termnet.h>
 #endif
 
-#include <signal.h>
 #include <errno.h>
 
 #ifndef test_get_host_and_username
