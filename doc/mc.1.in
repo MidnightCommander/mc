@@ -3292,35 +3292,8 @@ The Midnight Commander page on the World Wide Web:
 .fi
 .\"NODE "AUTHORS"
 .SH "AUTHORS"
-Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
-(jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred Leeflang
-(fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es), Jakub Jelinek
-(jj@sunsite.mff.cuni.cz), Ching Hui (mr854307@cs.nthu.edu.tw), Andrej
-Borsenkow (borsenkow.msk@sni.de), Norbert Warmuth
-(nwarmuth@privat.circular.de), Mauricio Plaza
-(mok@roxanne.nuclecu.unam.mx), Paul Sheer (psheer@icon.co.za), Pavel
-Machek (pavel@ucw.cz) and Pavel Roskin (proski@gnu.org) are the
-developers of this package.  Alessandro Rubini (rubini@ipvvis.unipv.it)
-has been especially helpful debugging and enhancing the program's mouse
-support, John Davis (davis@space.mit.edu) also made his S-Lang library
-available to us under the GPL and answered my questions about it, and
-the following people have contributed code and many bug fixes (in
-alphabetical order):
-.PP
-Adam Tla/lka (atlka@sunrise.pg.gda.pl), alex@bcs.zp.ua (Alex I.
-Tkachenko), Antonio Palama, DOS port (palama@posso.dm.unipi.it), Erwin
-van Eijk (wabbit@corner.iaf.nl), Gerd Knorr (kraxel@cs.tu-berlin.de),
-Jean-Daniel Luiset (luiset@cih.hcuge.ch), Jon Stevens
-(root@dolphin.csudh.edu), Juan Francisco Grigera, Win32 port
-(j-grigera@usa.net), Juan Jose Ciarlante (jjciarla@raiz.uncu.edu.ar),
-Ilya Rybkin (rybkin@rouge.phys.lsu.edu), Marcelo Roccasalva
-(mfroccas@raiz.uncu.edu.ar), Massimo Fontanelli (MC8737@mclink.it),
-Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
-(pundtt@math.uni-muenster.de), Timur Bakeyev
-(timur@goff.comtat.kazan.su), Tomasz Cholewo
-(tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
-(torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
-and Wim Osterholt (wim@djo.wtm.tudelft.nl).
+Authors and contributors are listed in the AUTHORS file in the source
+distribution.
 .\"NODE "BUGS"
 .SH "BUGS"
 See the file TODO in the distribution for information on what remains to
