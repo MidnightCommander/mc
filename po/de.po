@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.x\n"
-"POT-Creation-Date: 2001-08-20 23:36+0200\n"
+"POT-Creation-Date: 2001-08-24 04:10-0400\n"
 "PO-Revision-Date: 2001-08-20 23:34+0200\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -1697,7 +1697,7 @@ msgstr "Ort:"
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/edit.h:511 gtkedit/editcmd.c:415
-#: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3105
+#: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3104
 #: gtkedit/editmenu.c:45 gtkedit/editoptions.c:69 src/boxes.c:145
 #: src/boxes.c:279 src/boxes.c:379 src/boxes.c:470 src/boxes.c:617
 #: src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056 src/filegui.c:805
@@ -1847,7 +1847,7 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Benutzermenü ist nur in von mc aus aufgerufenem mcedit verfügbar"
 
-#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3023
+#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3022
 msgid "Error trying to stat file:"
 msgstr "Fehler beim stat()-Zugriff auf Datei:"
 
@@ -1877,7 +1877,7 @@ msgstr "Backups machen -->"
 
 #. 0
 #: gtkedit/editcmd.c:413 gtkedit/editcmd.c:1231 gtkedit/editcmd.c:1290
-#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3103 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:66
 #: src/achown.c:73 src/boxes.c:146 src/boxes.c:280 src/boxes.c:377
 #: src/boxes.c:468 src/boxes.c:614 src/boxes.c:751 src/boxes.c:1056
 #: src/chmod.c:109 src/chown.c:80 src/cmd.c:870 src/filegui.c:788
@@ -1904,8 +1904,8 @@ msgstr " Speichern Unter "
 #: gtkedit/editcmd.c:581 gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 #: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179 src/file.c:619 src/help.c:314
 #: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
-#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:744
-#: src/subshell.c:770 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:742
+#: src/subshell.c:768 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
 #: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Warnung "
@@ -2273,13 +2273,13 @@ msgstr "Abbrechen quit"
 
 #: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr "&Ja"
 
 #: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "&Nein"
 
@@ -2382,23 +2382,23 @@ msgstr "Skript erzeugt:"
 msgid "Process block"
 msgstr "Block verarbeiten"
 
-#: gtkedit/editcmd.c:3098
+#: gtkedit/editcmd.c:3097
 msgid " Mail "
 msgstr " Mail "
 
-#: gtkedit/editcmd.c:3109
+#: gtkedit/editcmd.c:3108
 msgid " Copies to"
 msgstr " Kopien an"
 
-#: gtkedit/editcmd.c:3113
+#: gtkedit/editcmd.c:3112
 msgid " Subject"
 msgstr " Betreff"
 
-#: gtkedit/editcmd.c:3117
+#: gtkedit/editcmd.c:3116
 msgid " To"
 msgstr " An"
 
-#: gtkedit/editcmd.c:3119
+#: gtkedit/editcmd.c:3118
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <betreff> -c <cc> <an>"
 
@@ -5829,24 +5829,24 @@ msgstr ""
 "Bildschirmgröße %dx%d wird nicht unterstützt.\n"
 "Überprüfen Sie die TERM-Umgebungsvariable.\n"
 
-#: src/subshell.c:451
+#: src/subshell.c:449
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Kann benannte Pipe %s nicht öffnen\n"
 
-#: src/subshell.c:744
+#: src/subshell.c:742
 msgid " The shell is still active. Quit anyway? "
 msgstr " die Shell ist immer noch aktiv.  Trotzdem beenden? "
 
-#: src/subshell.c:770
+#: src/subshell.c:768
 msgid " There are stopped jobs."
 msgstr " Es sind noch angehaltene Befehle vorhanden."
 
-#: src/subshell.c:771
+#: src/subshell.c:769
 msgid " Quit anyway? "
 msgstr " Trotzdem beenden? "
 
-#: src/subshell.c:884
+#: src/subshell.c:882
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Warnung: Kann nicht in %s wechseln.\n"

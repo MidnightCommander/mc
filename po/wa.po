@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2001-05-21 19:06+0200\n"
+"POT-Creation-Date: 2001-08-24 04:10-0400\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -20,25 +20,25 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit_key_translator.c:126
+#: edit/edit_key_translator.c:127
 msgid " Emacs key: "
 msgstr " Tape di Emacs: "
 
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
+#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
 msgid " Execute Macro "
 msgstr " Enonder Macro "
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-#: gtkedit/editcmd.c:763 gtkedit/editcmd.c:772
+#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
+#: gtkedit/editcmd.c:803 gtkedit/editcmd.c:812
 msgid " Press macro hotkey: "
 msgstr " Tchôkî sol Tape Rascoûrti pol Macro: "
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:160
 msgid " Insert Literal "
 msgstr " Sititchî literål "
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:160
 msgid " Press any key: "
 msgstr " Tchôkî tot l' minme li kéne tape: "
 
@@ -94,129 +94,121 @@ msgstr "aspougnî"
 msgid "view"
 msgstr "vey"
 
-#: gnome/gcmd.c:50
-msgid " There is no other panel to compare contents to "
-msgstr " I gn a pont d' ôte panea po rmete çu k' i gn a dvins "
-
-#: gnome/gcmd.c:86
+#: gnome/gcmd.c:62
 msgid " Could not start a terminal "
 msgstr " Dji n' a savu enonder on terminå "
 
-#: gnome/gcmd.c:101
+#: gnome/gcmd.c:77
 msgid "The Midnight Commander Team"
 msgstr "L' Ekipe di Midnight Commander"
 
-#: gnome/gcmd.c:103
+#: gnome/gcmd.c:79
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "rapoirter les bugs a: http://bugs.gnome.org, ou eployîz gnome-bug"
 
-#: gnome/gcmd.c:115 gnome/gmc-window.c:68
+#: gnome/gcmd.c:91
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:118 gnome/gmc-window.c:71
+#: gnome/gcmd.c:94
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "Li modeye GNOME do manaedjeu di fitchîs Midnight Commander."
 
-#: gnome/gcmd.c:291
+#: gnome/gcmd.c:267
 msgid "Sort By"
 msgstr "Relire So"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:296
+#: gnome/gcmd.c:272
 msgid "Ignore case sensitivity."
 msgstr "Grande lete = pitite lete."
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:275
 msgid "Sort files by "
 msgstr "Relire les fitchîs so "
 
-#: gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:146 src/screen.c:413
+#: gnome/gcmd.c:280 gnome/gcustom-layout.c:41 src/chmod.c:139 src/screen.c:407
 msgid "Name"
 msgstr "No"
 
-#: gnome/gcmd.c:311
+#: gnome/gcmd.c:287
 msgid "File Type"
 msgstr "Sôrt do Fitchî"
 
-#: gnome/gcmd.c:317 gnome/gcustom-layout.c:45 src/screen.c:414
-#: src/screen.c:415
+#: gnome/gcmd.c:293 gnome/gcustom-layout.c:45 src/screen.c:408
+#: src/screen.c:409
 msgid "Size"
 msgstr "Grandeu"
 
-#: gnome/gcmd.c:323
+#: gnome/gcmd.c:299
 msgid "Time Last Accessed"
 msgstr "Dierinne Feye Eployî"
 
-#: gnome/gcmd.c:329
+#: gnome/gcmd.c:305
 msgid "Time Last Modified"
 msgstr "Dierinne Feye Aspougnî"
 
-#: gnome/gcmd.c:335
+#: gnome/gcmd.c:311
 msgid "Time Last Changed"
 msgstr "Dierinne Feye Candjî"
 
-#: gnome/gcmd.c:349
+#: gnome/gcmd.c:325
 msgid "Reverse the order."
 msgstr "Å Rvier"
 
-#: gnome/gcmd.c:396
+#: gnome/gcmd.c:372
 msgid "Enter name."
 msgstr "Intrez No."
 
-#: gnome/gcmd.c:402
+#: gnome/gcmd.c:378
 msgid "Enter label for command:"
 msgstr "Intrez Etikete pol Comande:"
 
-#: gnome/gcmd.c:507
+#: gnome/gcmd.c:484
 msgid "Find all core files"
 msgstr "Trover tos les fitchîs core"
 
-#: gnome/gcmd.c:510 src/panelize.c:349
+#: gnome/gcmd.c:487 src/panelize.c:349
 msgid "Find rejects after patching"
 msgstr "Trover les sacwè nén prijhes på patch"
 
-#: gnome/gcmd.c:555
+#: gnome/gcmd.c:532
 msgid "Run Command"
 msgstr "Enonder Comande"
 
 #. Frame 1
-#: gnome/gcmd.c:560
+#: gnome/gcmd.c:537
 msgid "Preset Commands"
 msgstr "Apontyî Comandes"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:577 gnome/gcustom-layout.c:183
+#: gnome/gcmd.c:554 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "Radjouter"
 
-#: gnome/gcmd.c:581 gnome/gcustom-layout.c:184
+#: gnome/gcmd.c:558 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "Bodjî"
 
 #. Frame 2
-#: gnome/gcmd.c:589
+#: gnome/gcmd.c:566
 msgid "Run this Command"
 msgstr "Enonder cisse comande"
 
-#: gnome/gcmd.c:596
+#: gnome/gcmd.c:573
 msgid "Command: "
 msgstr "Comande: "
 
-#: gnome/gcmd.c:716
+#: gnome/gcmd.c:694
 msgid "Set Filter"
 msgstr "Mete ene passete"
 
-#: gnome/gcmd.c:721 gnome/gcmd.c:762 gnome/gcmd.c:767 gnome/gcmd.c:771
-#: gnome/gscreen.c:2445
+#: gnome/gcmd.c:699 gnome/gcmd.c:740 gnome/gcmd.c:745 gnome/gcmd.c:749
+#: gnome/gscreen.c:2484
 msgid "Show all files"
 msgstr "Mostrer tos les fitchîs"
 
-#: gnome/gcmd.c:728
-msgid "."
-msgstr "."
-
-#: gnome/gcmd.c:744
+#: gnome/gcmd.c:722
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -228,27 +220,27 @@ msgstr ""
 "Metans:\n"
 "*.png ni vos mosterrè ki les imådjes png"
 
-#: gnome/gcmd.c:746
+#: gnome/gcmd.c:724
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "Intrez ene erûleye ratoûrneure (regexp) po passer les fitchîs è panea."
 
-#: gnome/gcmd.c:806
+#: gnome/gcmd.c:784
 msgid " Open with..."
 msgstr " Drovi avou..."
 
-#: gnome/gcmd.c:807
+#: gnome/gcmd.c:785
 msgid "Enter extra arguments:"
 msgstr "Diner des årgumints did pus:"
 
-#: gnome/gcmd.c:877
+#: gnome/gcmd.c:855
 msgid "Desktop entry properties"
 msgstr "Prôpietés po ciste intreye do scribanne"
 
-#: gnome/gcmd.c:903
+#: gnome/gcmd.c:881
 msgid "Select File"
 msgstr "Tchwezi Fitchî"
 
-#: gnome/gcmd.c:911
+#: gnome/gcmd.c:889
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -260,19 +252,19 @@ msgstr ""
 "Metans:\n"
 "*.png ni pudrè ki les imådjes png"
 
-#: gnome/gcmd.c:913
+#: gnome/gcmd.c:891
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Dinez ene erûleye ratoûrneure (regexp) po relire les fitchîs è panea."
 
-#: gnome/gcmd.c:959 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:937 src/cmd.c:551 src/cmd.c:604
 msgid "  Malformed regular expression  "
 msgstr " Erûleye ratoûrneure må adjinçneye "
 
-#: gnome/gcmd.c:1002
+#: gnome/gcmd.c:979
 msgid "Creating a desktop link"
 msgstr "Dji fwai on loyén so li scribanne"
 
-#: gnome/gcmd.c:1003
+#: gnome/gcmd.c:980
 msgid "Enter the URL:"
 msgstr "Intrez li hårdeye (URL):"
 
@@ -285,8 +277,8 @@ msgid "Creation Time"
 msgstr "Moumint fwait"
 
 #. Group
-#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:788
-#: gnome/gnome-file-property-dialog.c:957 src/screen.c:427
+#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:780
+#: gnome/gnome-file-property-dialog.c:949 src/screen.c:421
 msgid "Group"
 msgstr "Hopê"
 
@@ -298,7 +290,7 @@ msgstr "ID do hopê"
 msgid "Inode Number"
 msgstr "Limerô d' Inode"
 
-#: gnome/gcustom-layout.c:39 src/achown.c:378
+#: gnome/gcustom-layout.c:39 src/achown.c:361
 msgid "Mode"
 msgstr "Môde"
 
@@ -311,12 +303,12 @@ msgid "Number of Hard Links"
 msgstr "Nombe di deurs Loyéns"
 
 #. Owner
-#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:942
-#: src/screen.c:426
+#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:934
+#: src/screen.c:420
 msgid "Owner"
 msgstr "Da"
 
-#: gnome/gcustom-layout.c:44 src/screen.c:420
+#: gnome/gcustom-layout.c:44 src/screen.c:414
 msgid "Permission"
 msgstr "Permission"
 
@@ -344,28 +336,63 @@ msgstr "Håyneyès colones"
 msgid "Custom View"
 msgstr "Håyner a vosse môde"
 
-#: gnome/gdesktop.c:679 gnome/gmount.c:385
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:146
+msgid "Home directory"
+msgstr "Ridant måjhon"
+
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr ""
+
+#. Icon position
+#: gnome/gdesktop-prefs.c:240
+msgid "Icon position"
+msgstr "Eplaeçmint del imådjete"
+
+#. Snap and placement
+#: gnome/gdesktop-prefs.c:256
+msgid "Automatic icon placement"
+msgstr "Plaeçmint åtomatike des imådjetes"
+
+#: gnome/gdesktop-prefs.c:260
+msgid "Snap icons to grid"
+msgstr "Claper les imådjetes so ene grile"
+
+#: gnome/gdesktop-prefs.c:275
+msgid "Use shaped icons"
+msgstr "Eployî des imådjetes di totes les cognes"
+
+#: gnome/gdesktop-prefs.c:279
+msgid "Use shaped text"
+msgstr "Eployi tecse metu è cogne"
+
+#: gnome/gdesktop-prefs.c:333
+msgid "Desktop"
+msgstr "Scribanne"
+
+#: gnome/gdesktop.c:680 gnome/gmount.c:383
 msgid "Warning"
 msgstr "Advertixhmint"
 
-#: gnome/gdesktop.c:680
+#: gnome/gdesktop.c:681
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Dji n' a savu drovi %s; gn årè nole imådjete so li scribanne"
 
-#: gnome/gdesktop.c:1412
+#: gnome/gdesktop.c:1413
 msgid "While running the mount/umount command"
 msgstr "Come dj' enondeve li cmande monter/dismonter"
 
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1482
 msgid "While running the eject command"
 msgstr "Come dj' enondeve li cmande \"foû\""
 
-#: gnome/gdesktop.c:1665 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1666 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Aroke"
 
-#: gnome/gdesktop.c:2917
+#: gnome/gdesktop.c:2930
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -379,130 +406,95 @@ msgstr ""
 "\n"
 "Dji n' vos såreu mete on fond."
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:365
+#: gnome/gdesktop.c:2959 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "_Terminå"
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:366
+#: gnome/gdesktop.c:2959 gnome/glayout.c:362
 msgid "Launch a new terminal in the current directory"
 msgstr "Enonder on novea terminå è ci ridant chal"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2948 gnome/glayout.c:368
+#: gnome/gdesktop.c:2961 gnome/glayout.c:364
 msgid "_Directory..."
 msgstr "_Ridant..."
 
-#: gnome/gdesktop.c:2948 gnome/glayout.c:369
+#: gnome/gdesktop.c:2961 gnome/glayout.c:365
 msgid "Creates a new directory"
 msgstr "Fé on novea ridant"
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2962
 msgid "URL L_ink..."
 msgstr "_Hårdeye (loyén URL)..."
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2962
 msgid "Creates a new URL link"
 msgstr "Fé ene novele hårdeye"
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2963
 msgid "_Launcher..."
 msgstr "_Enondrece..."
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2963
 msgid "Creates a new launcher"
 msgstr "Fé ene novele enondrece"
 
-#: gnome/gdesktop.c:2956
+#: gnome/gdesktop.c:2969
 msgid "By _Name"
 msgstr "_No"
 
-#: gnome/gdesktop.c:2957
+#: gnome/gdesktop.c:2970
 msgid "By File _Type"
 msgstr "_Sôrt do Fitchî"
 
-#: gnome/gdesktop.c:2958
+#: gnome/gdesktop.c:2971
 msgid "By _Size"
 msgstr "_Grandeu"
 
-#: gnome/gdesktop.c:2959
+#: gnome/gdesktop.c:2972
 msgid "By Time Last _Accessed"
 msgstr "Dierinne Feye _Eployî"
 
-#: gnome/gdesktop.c:2960
+#: gnome/gdesktop.c:2973
 msgid "By Time Last _Modified"
 msgstr "Dierinne Feye _Aspougnî"
 
-#: gnome/gdesktop.c:2961
+#: gnome/gdesktop.c:2974
 msgid "By Time Last _Changed"
 msgstr "Dierinne Feye _Candjî"
 
-#: gnome/gdesktop.c:2969 gnome/glayout.c:465
+#: gnome/gdesktop.c:2982 gnome/glayout.c:461
 msgid "_Arrange Icons"
 msgstr "_Arindjî les imådjetes"
 
-#: gnome/gdesktop.c:2970
+#: gnome/gdesktop.c:2983
 #, fuzzy
 msgid "_Tidy Icons"
 msgstr "Imådjetes"
 
-#: gnome/gdesktop.c:2971
+#: gnome/gdesktop.c:2984
 msgid "Create _New Window"
 msgstr "Fé on _novea purnea"
 
-#: gnome/gdesktop.c:2973 gnome/glayout.c:467
+#: gnome/gdesktop.c:2986 gnome/glayout.c:463
 msgid "Rescan _Desktop Directory"
 msgstr "Rilére li Ridant do _Scribanne"
 
-#: gnome/gdesktop.c:2974 gnome/glayout.c:468
+#: gnome/gdesktop.c:2987 gnome/glayout.c:464
 msgid "Rescan De_vices"
 msgstr "Rilére les _Éndjins"
 
-#: gnome/gdesktop.c:2975 gnome/glayout.c:469
+#: gnome/gdesktop.c:2988 gnome/glayout.c:465
 msgid "Recreate Default _Icons"
 msgstr "Rifé les _Rascoûrtis so li Scribanne"
 
-#: gnome/gdesktop.c:2977
+#: gnome/gdesktop.c:2990
 msgid "Configure _Background Image"
 msgstr "Apontyî l' Imådje di _Fond"
 
-#: gnome/gdesktop.c:2978
+#: gnome/gdesktop.c:2991
 msgid "Des_ktop Properties"
 msgstr "Prôpietés do _scribanne"
-
-#. Icon position
-#: gnome/gdesktop-prefs.c:242
-msgid "Icon position"
-msgstr "Eplaeçmint del imådjete"
-
-#. Snap and placement
-#: gnome/gdesktop-prefs.c:258
-msgid "Automatic icon placement"
-msgstr "Plaeçmint åtomatike des imådjetes"
-
-#: gnome/gdesktop-prefs.c:262
-msgid "Snap icons to grid"
-msgstr "Claper les imådjetes so ene grile"
-
-#: gnome/gdesktop-prefs.c:277
-msgid "Use shaped icons"
-msgstr "Eployî des imådjetes di totes les cognes"
-
-#: gnome/gdesktop-prefs.c:281
-msgid "Use shaped text"
-msgstr "Eployi tecse metu è cogne"
-
-#: gnome/gdesktop-prefs.c:335
-msgid "Desktop"
-msgstr "Scribanne"
-
-#. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:146
-msgid "Home directory"
-msgstr "Ridant måjhon"
-
-#: gnome/gdesktop-init.c:158
-msgid "Trash"
-msgstr ""
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -565,40 +557,40 @@ msgstr "Li fitchî såme egzisteye dedja: %s"
 msgid "Replace it?"
 msgstr "Mete el plaece?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
-#: src/file.c:802 src/screen.c:2386 src/screen.c:2416 src/tree.c:1016
+#: gnome/gdialogs.c:569 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1259
+#: src/file.c:802 src/screen.c:2418 src/tree.c:1023
 msgid "Copy"
 msgstr "Copyî"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
+#: gnome/gdialogs.c:573 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1261
 msgid "Move"
 msgstr "Bodjî"
 
-#: gnome/gdialogs.c:583
+#: gnome/gdialogs.c:590
 msgid "Destination"
 msgstr "Ariveye"
 
-#: gnome/gdialogs.c:597
+#: gnome/gdialogs.c:604
 msgid "Find Destination Folder"
 msgstr "Trover li fitchî d' ariveye"
 
-#: gnome/gdialogs.c:611
+#: gnome/gdialogs.c:618
 msgid "Copy as a background process"
 msgstr "Copyî dins ene bouye di fond"
 
-#: gnome/gdialogs.c:629
+#: gnome/gdialogs.c:636
 msgid "Advanced Options"
 msgstr "Tchûzes po les spepieus"
 
-#: gnome/gdialogs.c:633
+#: gnome/gdialogs.c:640
 msgid "Preserve symlinks"
 msgstr "Wårder les loyéns simbolikes"
 
-#: gnome/gdialogs.c:643
+#: gnome/gdialogs.c:650
 msgid "Follow links."
 msgstr "Shure les loyéns"
 
-#: gnome/gdialogs.c:649
+#: gnome/gdialogs.c:656
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
@@ -606,23 +598,23 @@ msgstr ""
 "Si vos tchwezxhoz  çouci, vos copeyroz les fitchîs ki les loyéns simbolikes "
 "sont loyîs après, eyèt nén seulmint les loyéns."
 
-#: gnome/gdialogs.c:654
+#: gnome/gdialogs.c:661
 msgid "Preserve file attributes."
 msgstr "Wårder les atributs do fitchîs."
 
-#: gnome/gdialogs.c:660
+#: gnome/gdialogs.c:667
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "Wårder les permissions, l' UID eyèt li GID si possibe"
 
-#: gnome/gdialogs.c:666
+#: gnome/gdialogs.c:673
 msgid "Recursively copy subdirectories."
 msgstr "Copyî tos les ridants efants"
 
-#: gnome/gdialogs.c:673
+#: gnome/gdialogs.c:680
 msgid "If set, this will copy the directories recursively"
 msgstr "Si çouchal est metu, tos les ridants efants seront copyîs"
 
-#: gnome/gdialogs.c:780
+#: gnome/gdialogs.c:787
 #, c-format
 msgid ""
 "%s\n"
@@ -633,60 +625,77 @@ msgstr ""
 "\n"
 "Li ridant n' est nén vûde. El fåt-i disfacer avou tos ses efants?"
 
-#: gnome/gdialogs.c:790 src/file.c:2248
+#: gnome/gdialogs.c:797 src/file.c:2247
 msgid " Delete: "
 msgstr " Disfacer: "
 
-#: gnome/gdialogs.c:794
+#: gnome/gdialogs.c:801
 msgid "Do the same for the rest"
 msgstr "Fé li minme po li rmanant"
 
-#: gnome/gdialogs.c:877
+#: gnome/gdialogs.c:885
 msgid "Move Progress"
 msgstr "Avançmint do bodjaedje"
 
-#: gnome/gdialogs.c:880
+#: gnome/gdialogs.c:888
 msgid "Copy Progress"
 msgstr "Avançmint do copiaedje"
 
-#: gnome/gdialogs.c:883
+#: gnome/gdialogs.c:891
 msgid "Delete Progress"
 msgstr "Avançmint do disfaçaedje"
 
-#: gnome/gdialogs.c:939
+#: gnome/gdialogs.c:947
 msgid "File "
 msgstr "Li fitchî "
 
-#: gnome/gdialogs.c:943
+#: gnome/gdialogs.c:951
 msgid "is "
 msgstr "est "
 
-#: gnome/gdialogs.c:946
+#: gnome/gdialogs.c:954
 msgid "done."
 msgstr "fwait."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:581 vfs/vfs.c:1817
+#: gnome/gdialogs.c:1015 src/wtools.c:570 vfs/vfs.c:1821
 msgid "Password:"
 msgstr "Secret:"
 
-#: gnome/gdialogs.c:1007
+#: gnome/gdialogs.c:1015
 msgid "Password"
 msgstr "Secret"
 
 #. Create the dialog
-#: gnome/gdialogs.c:1039
+#: gnome/gdialogs.c:1047
 msgid "Symbolic Link"
 msgstr "Loyén Simbolike"
 
-#: gnome/gdialogs.c:1055 src/boxes.c:785
+#: gnome/gdialogs.c:1063 src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
 msgstr "No do fitchî k' egzisteye dedja (li loyén simbolike va loyî après):"
 
-#: gnome/gdialogs.c:1069 src/boxes.c:783
+#: gnome/gdialogs.c:1077 src/boxes.c:890
 msgid "Symbolic link filename:"
 msgstr "No do fitchî loyén simbolike:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Domain:"
+msgstr "Domaine:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Username:"
+msgstr "No di l' ûzeu:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Password: "
+msgstr "Secret: "
+
+#: gnome/gdialogs.c:1122 src/boxes.c:1110
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Mot di passe po \\\\%s\\%s"
 
 #: gnome/gdnd.c:53
 msgid "_Move here"
@@ -713,6 +722,91 @@ msgid ""
 msgstr ""
 "Dji n' sai enonder li foncsion stat %s\n"
 "%s"
+
+#: gnome/gfind.c:115
+#, fuzzy
+msgid "Case sensitive"
+msgstr " Grandès <> ptitès letes "
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Start at:"
+msgstr "Ataker a:"
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Filename:"
+msgstr "No do fitchî:"
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Content: "
+msgstr "Ådvins:"
+
+#. Create dialog
+#: gnome/gfind.c:131 src/find.c:203
+msgid "Find File"
+msgstr "Trover Fitchî"
+
+#: gnome/gfind.c:335 src/find.c:398
+#, c-format
+msgid "Grepping in %s"
+msgstr "Dji cwîr dins %s"
+
+#: gnome/gfind.c:372 src/find.c:435
+msgid " Find/read "
+msgstr " Trover/Lére "
+
+#: gnome/gfind.c:372 src/find.c:435
+msgid " Problem reading from child "
+msgstr " Yåk ni va nén cwand dji saye di lére dins l' efant "
+
+#: gnome/gfind.c:409 src/find.c:476
+msgid "Finished"
+msgstr "Fwait"
+
+#: gnome/gfind.c:430 src/find.c:500 src/view.c:1528
+#, c-format
+msgid "Searching %s"
+msgstr "Dji cwîr %s"
+
+#: gnome/gfind.c:552 gnome/gfind.c:589
+msgid "Suspend"
+msgstr "Djoker"
+
+#: gnome/gfind.c:552
+msgid "Restart"
+msgstr "Renonder"
+
+#: gnome/gfind.c:554 src/boxes.c:922 src/find.c:674
+msgid "Stopped"
+msgstr "Djoké"
+
+#: gnome/gfind.c:554 gnome/gfind.c:654 src/find.c:674 src/find.c:770
+msgid "Searching"
+msgstr "Dji cwîr"
+
+#: gnome/gfind.c:583 src/find.c:745
+msgid "Find file"
+msgstr "Trover fitchî"
+
+#. The buttons
+#: gnome/gfind.c:587
+msgid "Change to this directory"
+msgstr "Potchî dins ci ridant chal"
+
+#: gnome/gfind.c:588
+msgid "Search again"
+msgstr "Cweri eco ene feye"
+
+#: gnome/gfind.c:594
+msgid "View this file"
+msgstr "Loukî ci fitchî chal"
+
+#: gnome/gfind.c:595
+msgid "Edit this file"
+msgstr "Aspougnî ci fitchî chal"
+
+#: gnome/gfind.c:596
+msgid "Send the results to a Panel"
+msgstr "Evoyî li rezultat dins on panea"
 
 #: gnome/gicon.c:282
 msgid "Default set of icons not found, check your installation"
@@ -768,11 +862,11 @@ msgstr "Sipepieus"
 msgid "Custom"
 msgstr "Ramîdré"
 
-#: gnome/glayout.c:300
+#: gnome/glayout.c:294
 msgid "Enter command to run"
 msgstr "Tapez ene comande a-z enonder"
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:312
 msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
 "also terminate the GNOME desktop handler.\n"
@@ -784,7 +878,7 @@ msgstr ""
 "\n"
 "Estoz-ve sheur ki vos voloz moussî foû?"
 
-#: gnome/glayout.c:330
+#: gnome/glayout.c:325
 msgid ""
 "The file manager and the desktop handler are now terminating\n"
 "\n"
@@ -798,270 +892,281 @@ msgstr ""
 "Si vos voloz renonder onk ou l' ôte, vos l' poloz fé a pårti\n"
 " do scriftôr, oudôbén vos poloz taper li cmande UNIX 'gmc'."
 
-#: gnome/glayout.c:370
+#: gnome/glayout.c:366
 msgid "_File..."
 msgstr "_Fitchî..."
 
-#: gnome/glayout.c:371
+#: gnome/glayout.c:367
 msgid "Creates a new file in this directory"
 msgstr "Fé on novea fitchî dvins ci ridant"
 
 # _Copyî is the normal way, but we alreadi have _Clôre on the same menu
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:392 gnome/gscreen.c:2111
+#: gnome/glayout.c:388 gnome/gscreen.c:2115
 msgid "_Copy..."
 msgstr "C_opyî..."
 
-#: gnome/glayout.c:392
+#: gnome/glayout.c:388
 msgid "Copy files"
 msgstr "Copyî des fitchîs"
 
 # _Disfacer is the normal way; but we already have _Drovi on the same menu
-#: gnome/glayout.c:393 gnome/gscreen.c:2112
+#: gnome/glayout.c:389 gnome/gscreen.c:2116
 msgid "_Delete..."
 msgstr "Di_sfacer..."
 
-#: gnome/glayout.c:393
+#: gnome/glayout.c:389
 msgid "Delete files"
 msgstr "Disfacer des fitchîs"
 
-#: gnome/glayout.c:394 gnome/gscreen.c:2113
+#: gnome/glayout.c:390 gnome/gscreen.c:2117
 msgid "_Move..."
 msgstr "_Bodjî..."
 
-#: gnome/glayout.c:394
+#: gnome/glayout.c:390
 msgid "Rename or move files"
 msgstr "Rilomer ou bodjî des fitchîs"
 
-#: gnome/glayout.c:396
+#: gnome/glayout.c:392
 msgid "Show directory sizes"
 msgstr "_Mostrer li grandeu des ridants"
 
-#: gnome/glayout.c:396
+#: gnome/glayout.c:392
 msgid "Shows the disk space used by each directory"
 msgstr "Mostrer cbén di plaece ki les ridants purdèt sol deure plake"
 
-#: gnome/glayout.c:398
+#: gnome/glayout.c:394
 msgid "Close window"
 msgstr "Clôre li purnea"
 
-#: gnome/glayout.c:398
+#: gnome/glayout.c:394
 msgid "Closes this window"
 msgstr "Clôre ci purnea chal"
 
-#: gnome/glayout.c:405
+#: gnome/glayout.c:401
 msgid "Select _All"
 msgstr "Tchwezi _Totafwait"
 
-#: gnome/glayout.c:405
+#: gnome/glayout.c:401
 msgid "Select all files in the current Panel"
 msgstr "Tchwezi tos les fitchîs è ci panea chal"
 
-#: gnome/glayout.c:407
+#: gnome/glayout.c:403
 msgid "_Select Files..."
 msgstr "Tchwezi les _Fitchîs..."
 
-#: gnome/glayout.c:407
+#: gnome/glayout.c:403
 msgid "Select a group of files"
 msgstr "Tchwezi on hopê di fitchîs"
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:404
 msgid "_Invert Selection"
 msgstr "Tchwezi çu ki n' esteut _nén tchwezi"
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:404
 msgid "Reverses the list of tagged files"
 msgstr "Tchwezi les fitchîs ki n' sont nén tchwezi pol moumint"
 
-#: gnome/glayout.c:411 gtkedit/editwidget.c:1143 src/view.c:2070
+#: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2090
 msgid "Search"
 msgstr "Cweri"
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:407
 msgid "Search for a file in the current Panel"
 msgstr "Cweri après on fitchî è ci panea chal"
 
-#: gnome/glayout.c:414 gnome/gscreen.c:1426 gnome/gscreen.c:1437
+#: gnome/glayout.c:410 gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "_Rescan Directory"
 msgstr "_Rilére li Ridant"
 
-#: gnome/glayout.c:414
+#: gnome/glayout.c:410
 msgid "Rescan the directory contents"
 msgstr "Rilére çu k' i gn a è ci ridant chal"
 
-#: gnome/glayout.c:424
+#: gnome/glayout.c:420
 msgid "_Sort By..."
 msgstr "Re_lire so..."
 
-#: gnome/glayout.c:424
-msgid "Confirmation settings"
-msgstr "Racertinaedje di l' apontiaedje"
+#: gnome/glayout.c:420
+#, fuzzy
+msgid "Filename sort order"
+msgstr "Ôrde po relire"
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:421
 msgid "_Filter View..."
 msgstr "Vey _Passete..."
 
-#: gnome/glayout.c:425
-msgid "Global option settings"
-msgstr "Apontiaedje globå"
+#: gnome/glayout.c:421
+#, fuzzy
+msgid "Filename filtering settings"
+msgstr "Racertinaedje di l' apontiaedje"
 
-#: gnome/glayout.c:432
+#: gnome/glayout.c:428
 msgid "_Find File..."
 msgstr "_Trover Fitchî..."
 
-#: gnome/glayout.c:432
+#: gnome/glayout.c:428
 msgid "Locate files on disk"
 msgstr "Trover des fitchîs ene sawice avå li plake"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:435
+#: gnome/glayout.c:431
 msgid "_Edit mime types..."
 msgstr "Candjî les sôrts _MIME..."
 
-#: gnome/glayout.c:435
+#: gnome/glayout.c:431
 msgid "Edits the MIME type bindings"
 msgstr "Candjî les loyaedjes après des sôrts mime"
 
-#: gnome/glayout.c:437
+#: gnome/glayout.c:433
 msgid "_Run Command..."
 msgstr "Enonder _Comande..."
 
-#: gnome/glayout.c:437
+#: gnome/glayout.c:433
 msgid "Runs a command"
 msgstr "Po-z enonder ene comande"
 
-#: gnome/glayout.c:439
+#: gnome/glayout.c:435
 msgid "_Run Command in panel..."
 msgstr "Enonder Comande è _Panea..."
 
-#: gnome/glayout.c:439
+#: gnome/glayout.c:435
 msgid "Run a command and put the results in a panel"
 msgstr "Enonder ene comande eyèt mete les rezultats dins on panea"
 
-#: gnome/glayout.c:449
+#: gnome/glayout.c:445
 msgid "_Background jobs..."
 msgstr "_Bezognes di fonds..."
 
-#: gnome/glayout.c:449
+#: gnome/glayout.c:445
 msgid "List of background operations"
 msgstr "Djîveye des bezognes di fond"
 
-#: gnome/glayout.c:452
+#: gnome/glayout.c:448
 msgid "Exit"
 msgstr "Moussî foû"
 
-#: gnome/glayout.c:452
+#: gnome/glayout.c:448
 msgid "Terminates the file manager and the desktop"
 msgstr "Arester li manaedjeu di fitchîs eyèt li scribanne"
 
-#: gnome/glayout.c:476 gnome/glayout.c:487
+#: gnome/glayout.c:472 gnome/glayout.c:483
 msgid "_Settings"
 msgstr ""
 
-#: gnome/glayout.c:477 gnome/glayout.c:488
+#: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Layout"
 msgstr "A_djinçmint"
 
-#: gnome/glayout.c:478 gnome/glayout.c:489
+#: gnome/glayout.c:474 gnome/glayout.c:485
 msgid "_Commands"
 msgstr "_Comandes"
 
-#: gnome/glayout.c:479
+#: gnome/glayout.c:475
 msgid "_Desktop"
 msgstr "_Scribanne"
 
-#: gnome/glayout.c:480 gnome/glayout.c:490 gnome/gmc-window.c:121
+#: gnome/glayout.c:476 gnome/glayout.c:486
 msgid "_Help"
 msgstr "_Aide"
 
-#: gnome/glayout.c:629
-msgid "File/New/Directory..."
-msgstr "Fitchî/Novea/Ridant..."
+#: gnome/gmain.c:551
+#, fuzzy
+msgid "Don't show this window again"
+msgstr "Clôre ci purnea chal"
 
-#: gnome/gmain.c:563
+#: gnome/gmain.c:553
+#, fuzzy
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
-"As root, you can damage your system if you are not careful, and the GNOME "
-"File Manager will not stop you from doing it."
+"As root, you can damage your system, and the File Manager will not stop "
+"you.\n"
+"Your manual explains how to add a non-privileged user account to the "
+"system.\n"
 msgstr ""
 "Vos eployîz li manaedjeu di fitchîs di GNOME come root.\n"
 "\n"
 "Come root,vos pôrîz mete vosse sistinme cu dzeu cu dzo èt li\n"
 "manaedjeu di fitchîs di GNOME ni vos espaitchrè nén del fé!"
 
-#: gnome/gmc-window.c:69
-msgid "Copyright (C) 1998 The Free Software Foundation"
+#: gnome/gmc-client.c:26
+msgid "Could not contact the file manager\n"
 msgstr ""
 
-#: gnome/gmc-window.c:81
-msgid "Open _new window"
-msgstr "Drovî on _novea purnea"
+#: gnome/gmc-client.c:45
+msgid "Could not get the desktop\n"
+msgstr ""
 
-#: gnome/gmc-window.c:86
-msgid "_Close this window"
-msgstr "_Clôre ci purnea chal"
+#: gnome/gmc-client.c:142
+#, c-format
+msgid "Unknown arrange type `%s'\n"
+msgstr ""
 
-#: gnome/gmc-window.c:88
-msgid "E_xit"
-msgstr "Moussî _foû"
+#: gnome/gmc-client.c:206
+msgid "Create window showing the specified directory"
+msgstr ""
 
-#: gnome/gmc-window.c:95
-msgid "_Listing view"
-msgstr "Vey è _djîvéye"
+#: gnome/gmc-client.c:206 gnome/gmc-client.c:208
+msgid "DIRECTORY"
+msgstr "RIDANT"
 
-#: gnome/gmc-window.c:96
-msgid "_Icon view"
-msgstr "Vey a _imådjetes"
+#: gnome/gmc-client.c:208
+msgid "Rescan the specified directory"
+msgstr "Rilére li ridant specifié"
 
-#: gnome/gmc-window.c:102
-msgid "Display _tree view"
-msgstr "Vey come on åbe"
+#: gnome/gmc-client.c:210
+msgid "Rescan the desktop icons"
+msgstr "Rilére les imådjetes do scribanne"
 
-#: gnome/gmc-window.c:112
-msgid "_About the Midnight Commander..."
-msgstr "Å _dfait di Midnight Commander..."
+#: gnome/gmc-client.c:212
+msgid "Rescan the desktop device icons"
+msgstr "Rilére les imådjetes d' éndjins do scribanne"
 
-#: gnome/gmc-window.c:119
-msgid "_File"
-msgstr "_Fitchî"
+#: gnome/gmc-client.c:214
+msgid "Arrange the desktop icons"
+msgstr "Arindjî les imådjetes do scribanne"
 
-#: gnome/gmc-window.c:120
-msgid "_View"
-msgstr "_Vey"
+#: gnome/gmc-client.c:215
+msgid "name | type | size | atime | mtime | ctime"
+msgstr "no | sôrte | grandeu | atime | mtime | ctime"
 
-#: gnome/gmount.c:218
+#: gnome/gmc-client.c:217
+msgid "Close windows whose directories cannot be reached"
+msgstr "Clôre les purneas cwand les ridants ni polèt nén esse lejhus"
+
+#: gnome/gmount.c:216
 msgid "Could not open the /etc/fstab file"
 msgstr "Dji n' a savu drovi li fitchî /ets/fstab"
 
-#: gnome/gmount.c:386
+#: gnome/gmount.c:384
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr ""
 "Dji n' a savu fé on loyén simbolike di %s a %s; vos n' åroz nole imådjete po "
 "cist éndjin so vosse sicribanne."
 
-#: gnome/gmount.c:444
+#: gnome/gmount.c:441
 #, c-format
 msgid "CD-ROM %d"
 msgstr "CD-ROM %d"
 
-#: gnome/gmount.c:456
+#: gnome/gmount.c:453
 #, c-format
 msgid "Floppy %d"
 msgstr "Plakete %d"
 
-#: gnome/gmount.c:462
+#: gnome/gmount.c:459
 #, c-format
 msgid "Disk %d"
 msgstr "Plake %d"
 
-#: gnome/gmount.c:467
+#: gnome/gmount.c:464
 #, c-format
 msgid "NFS dir %s"
 msgstr "Ridant NFS %s"
 
-#: gnome/gmount.c:471
+#: gnome/gmount.c:468
 #, c-format
 msgid "Device %d"
 msgstr "Éndjin %d"
@@ -1075,249 +1180,253 @@ msgstr "No etir: "
 msgid "File Name"
 msgstr "No do Fitchî"
 
-#: gnome/gnome-file-property-dialog.c:204
-#: gnome/gnome-file-property-dialog.c:210
+#: gnome/gnome-file-property-dialog.c:202
 msgid "File Type: "
 msgstr "Sôrt do Fitchî: "
 
-#: gnome/gnome-file-property-dialog.c:217
+#: gnome/gnome-file-property-dialog.c:209
 msgid "File Type: Symbolic Link"
 msgstr "Sôrt do fitchî: Loyén simbolike"
 
-#: gnome/gnome-file-property-dialog.c:222
+#: gnome/gnome-file-property-dialog.c:214
 msgid "Target Name: INVALID LINK"
 msgstr "No del Såme: LOYÉN NÉN VALÅBE"
 
-#: gnome/gnome-file-property-dialog.c:225
+#: gnome/gnome-file-property-dialog.c:217
 msgid "Target Name: "
 msgstr "No del Såme: "
 
-#: gnome/gnome-file-property-dialog.c:230
+#: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Directory"
 msgstr "Sôrt do fitchî: Ridant"
 
-#: gnome/gnome-file-property-dialog.c:232
+#: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Character Device"
 msgstr "Sôrt do fitchî: Éndjin Caractere"
 
-#: gnome/gnome-file-property-dialog.c:234
+#: gnome/gnome-file-property-dialog.c:226
 msgid "File Type: Block Device"
 msgstr "Sôrt do fitchî: Éndjin Bloc"
 
-#: gnome/gnome-file-property-dialog.c:236
+#: gnome/gnome-file-property-dialog.c:228
 msgid "File Type: Socket"
 msgstr "Sôrt do fitchî: Soket"
 
-#: gnome/gnome-file-property-dialog.c:238
+#: gnome/gnome-file-property-dialog.c:230
 msgid "File Type: FIFO"
 msgstr "Sôrt do Fitchî: FIFO"
 
-#: gnome/gnome-file-property-dialog.c:248
-#: gnome/gnome-file-property-dialog.c:252
-#: gnome/gnome-file-property-dialog.c:258
+#: gnome/gnome-file-property-dialog.c:240
+#: gnome/gnome-file-property-dialog.c:244
+#: gnome/gnome-file-property-dialog.c:250
 msgid "File Size: "
 msgstr "Grandeu do Fitchî: "
 
-#: gnome/gnome-file-property-dialog.c:248
+#: gnome/gnome-file-property-dialog.c:240
 msgid " bytes"
 msgstr " bytes"
 
-#: gnome/gnome-file-property-dialog.c:252
+#: gnome/gnome-file-property-dialog.c:244
 msgid " KBytes  ("
 msgstr " KBytes  ("
 
-#: gnome/gnome-file-property-dialog.c:253
-#: gnome/gnome-file-property-dialog.c:259
+#: gnome/gnome-file-property-dialog.c:245
+#: gnome/gnome-file-property-dialog.c:251
 msgid " bytes)"
 msgstr " bytes)"
 
-#: gnome/gnome-file-property-dialog.c:258
+#: gnome/gnome-file-property-dialog.c:250
 msgid " MBytes  ("
 msgstr " MBytes  ("
 
 # N/A = not applicable?
-#: gnome/gnome-file-property-dialog.c:266
+#: gnome/gnome-file-property-dialog.c:258
 msgid "File Size: N/A"
 msgstr "Grandeu do fitchî: N/A"
 
-#: gnome/gnome-file-property-dialog.c:277
+#: gnome/gnome-file-property-dialog.c:269
 msgid "File Created on: "
 msgstr "Fitchî fwait li: "
 
-#: gnome/gnome-file-property-dialog.c:281
-#: gnome/gnome-file-property-dialog.c:290
-#: gnome/gnome-file-property-dialog.c:299
+#: gnome/gnome-file-property-dialog.c:273
+#: gnome/gnome-file-property-dialog.c:282
+#: gnome/gnome-file-property-dialog.c:291
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
 msgstr ""
 
-#: gnome/gnome-file-property-dialog.c:286
+#: gnome/gnome-file-property-dialog.c:278
 msgid "Last Modified on: "
 msgstr "Candjî pol dierinne feye li: "
 
-#: gnome/gnome-file-property-dialog.c:295
+#: gnome/gnome-file-property-dialog.c:287
 msgid "Last Accessed on: "
 msgstr "Eployî pol dierinne feye li: "
 
-#: gnome/gnome-file-property-dialog.c:313
+#: gnome/gnome-file-property-dialog.c:305
 msgid "URL:"
 msgstr "Hårdeye:"
 
-#: gnome/gnome-file-property-dialog.c:320
+#: gnome/gnome-file-property-dialog.c:312
 msgid "Caption:"
 msgstr "Rascegne:"
 
-#: gnome/gnome-file-property-dialog.c:397
-#: gnome/gnome-file-property-dialog.c:499
+#: gnome/gnome-file-property-dialog.c:389
+#: gnome/gnome-file-property-dialog.c:491
 msgid "Drop Action"
 msgstr "Bodjaedje"
 
-#: gnome/gnome-file-property-dialog.c:398
+#: gnome/gnome-file-property-dialog.c:390
 msgid "Use default Drop Action options"
 msgstr "Eployî les prémetuwes tchûzes di bodjaedje"
 
-#: gnome/gnome-file-property-dialog.c:413
-#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:286
-#: src/screen.c:2384 src/screen.c:2414
+#: gnome/gnome-file-property-dialog.c:405
+#: gnome/gnome-file-property-dialog.c:493 gnome/gpopup2.c:286
+#: src/screen.c:2416
 msgid "View"
 msgstr "Vey"
 
-#: gnome/gnome-file-property-dialog.c:414
+#: gnome/gnome-file-property-dialog.c:406
 msgid "Use default View options"
 msgstr "Eployî les premetuwès tchûzes po loukî"
 
-#: gnome/gnome-file-property-dialog.c:449
+#: gnome/gnome-file-property-dialog.c:441
 msgid "Select an Icon"
 msgstr "Tchwezi ene imådjete"
 
 #. we do open first
-#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup2.c:277
+#: gnome/gnome-file-property-dialog.c:471 gnome/gpopup2.c:277
 msgid "Open"
 msgstr "Drovi"
 
-#: gnome/gnome-file-property-dialog.c:489
+#: gnome/gnome-file-property-dialog.c:481
 msgid "Use default Open action"
 msgstr "Eployî li prémetu drovaedje"
 
-#: gnome/gnome-file-property-dialog.c:512
+#: gnome/gnome-file-property-dialog.c:504
 msgid "Use default Drop action"
 msgstr "Eployî li prémetu bodjaedje"
 
-#: gnome/gnome-file-property-dialog.c:514
+#: gnome/gnome-file-property-dialog.c:506
 msgid "Use default View action"
 msgstr "Eployî li prémetuwe tchûze po loukî"
 
-#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:288
-#: src/screen.c:2385 src/screen.c:2415 src/view.c:2066
+#: gnome/gnome-file-property-dialog.c:515 gnome/gpopup2.c:288
+#: src/screen.c:2417 src/view.c:2086
 msgid "Edit"
 msgstr "Aspougnî"
 
-#: gnome/gnome-file-property-dialog.c:533
+#: gnome/gnome-file-property-dialog.c:525
 msgid "Use default Edit action"
 msgstr "Eployî li prémetu aspougnaedje"
 
-#: gnome/gnome-file-property-dialog.c:587
+#: gnome/gnome-file-property-dialog.c:579
 msgid "Icon"
 msgstr "Imådjete"
 
 #. We must be a file or a link to a file.
-#: gnome/gnome-file-property-dialog.c:621
+#: gnome/gnome-file-property-dialog.c:613
 msgid "File Actions"
 msgstr "Ovraedjes so les Fitchîs"
 
-#: gnome/gnome-file-property-dialog.c:626
+#: gnome/gnome-file-property-dialog.c:618
 msgid "Open action"
 msgstr "Drovaedje"
 
-#: gnome/gnome-file-property-dialog.c:627
+#: gnome/gnome-file-property-dialog.c:619
 msgid "Needs terminal to run"
 msgstr "Ni s' sait enonder ki dins on terminå"
 
-#: gnome/gnome-file-property-dialog.c:753
+#: gnome/gnome-file-property-dialog.c:745
 msgid "File Permissions"
 msgstr "Permissions pol fitchî"
 
-#: gnome/gnome-file-property-dialog.c:764
+#: gnome/gnome-file-property-dialog.c:756
 msgid "Current mode: "
 msgstr "Môde do moumint: "
 
 #. Headings
-#: gnome/gnome-file-property-dialog.c:780
+#: gnome/gnome-file-property-dialog.c:772
 msgid "Read"
 msgstr "Lére"
 
-#: gnome/gnome-file-property-dialog.c:781
+#: gnome/gnome-file-property-dialog.c:773
 msgid "Write"
 msgstr "Sicrire"
 
-#: gnome/gnome-file-property-dialog.c:782
+#: gnome/gnome-file-property-dialog.c:774
 msgid "Exec"
 msgstr "Enonder"
 
-#: gnome/gnome-file-property-dialog.c:783
+#: gnome/gnome-file-property-dialog.c:775
 msgid "Special"
 msgstr "Spéciå"
 
 #. Permissions
-#: gnome/gnome-file-property-dialog.c:787
+#: gnome/gnome-file-property-dialog.c:779
 msgid "User"
 msgstr "Ûzeu"
 
-#: gnome/gnome-file-property-dialog.c:789
+#: gnome/gnome-file-property-dialog.c:781
 msgid "Other"
 msgstr "Ôte"
 
 #. Special
-#: gnome/gnome-file-property-dialog.c:793
+#: gnome/gnome-file-property-dialog.c:785
 msgid "Set UID"
 msgstr "Mete UID"
 
-#: gnome/gnome-file-property-dialog.c:794
+#: gnome/gnome-file-property-dialog.c:786
 msgid "Set GID"
 msgstr "Mete GID"
 
-#: gnome/gnome-file-property-dialog.c:795
+#: gnome/gnome-file-property-dialog.c:787
 msgid "Sticky"
 msgstr "Aclapé"
 
-#: gnome/gnome-file-property-dialog.c:917
+#: gnome/gnome-file-property-dialog.c:909
 #, c-format
 msgid "<Unknown> (%d)"
 msgstr "<Nén cnoxhu> (%d)"
 
-#: gnome/gnome-file-property-dialog.c:931
+#: gnome/gnome-file-property-dialog.c:923
 msgid "File ownership"
 msgstr "Da kî li fitchî"
 
-#: gnome/gnome-file-property-dialog.c:1097
+#: gnome/gnome-file-property-dialog.c:1089
 msgid "URL"
 msgstr "Hårdeye"
 
-#: gnome/gnome-file-property-dialog.c:1100
+#: gnome/gnome-file-property-dialog.c:1092
 msgid "Statistics"
 msgstr "Statistikes"
 
-#: gnome/gnome-file-property-dialog.c:1106
+#: gnome/gnome-file-property-dialog.c:1098
 msgid "Options"
 msgstr "Tchûzes"
 
-#: gnome/gnome-file-property-dialog.c:1109
+#: gnome/gnome-file-property-dialog.c:1101
 msgid "Permissions"
 msgstr "Permissions"
 
-#: gnome/gnome-file-property-dialog.c:1112
+#: gnome/gnome-file-property-dialog.c:1104
 msgid " Properties"
 msgstr " Prôpietés"
 
-#: gnome/gnome-file-property-dialog.c:1164
-#: gnome/gnome-file-property-dialog.c:1175
+#: gnome/gnome-file-property-dialog.c:1156
+#: gnome/gnome-file-property-dialog.c:1167
 msgid "You entered an invalid username"
 msgstr "Ci no d' ûzeu la n' est nén valåbe"
 
-#: gnome/gnome-file-property-dialog.c:1220
+#: gnome/gnome-file-property-dialog.c:1187
+#, fuzzy
+msgid "You entered an invalid group name"
+msgstr "Ci no d' ûzeu la n' est nén valåbe"
+
+#: gnome/gnome-file-property-dialog.c:1210
 msgid "You must rename your file to something"
 msgstr "Vos dvoz rlomer vosse fitchî"
 
-#: gnome/gnome-file-property-dialog.c:1226
+#: gnome/gnome-file-property-dialog.c:1216
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "I n' pout gn avu nou '/' dvins li novea no di vosse fitchî"
 
@@ -1371,8 +1480,8 @@ msgstr "Copyî..."
 msgid "Move to Trash"
 msgstr "Mete è batch"
 
-#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1144 src/screen.c:2389
-#: src/screen.c:2419
+#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1263
+#: src/screen.c:2421
 msgid "Delete"
 msgstr "Disfacer"
 
@@ -1432,162 +1541,163 @@ msgstr "Racertiner cwand c' est ki vos enondez des fitchîs"
 msgid "Show progress while operations are being performed"
 msgstr "Mostrer l' avançmint a fait ki l' ovraedje si fwait"
 
-#: gnome/gprefs.c:138
+#: gnome/gprefs.c:139
 msgid "VFS Timeout:"
 msgstr "Tins a ratinde po VFS:"
 
-#: gnome/gprefs.c:139 gnome/gprefs.c:164
+#: gnome/gprefs.c:140 gnome/gprefs.c:167
 msgid "Seconds"
 msgstr "Segondes"
 
-#: gnome/gprefs.c:142
+#: gnome/gprefs.c:143
 msgid "Anonymous FTP password:"
 msgstr "Secret po FTP anonime:"
 
-#: gnome/gprefs.c:146
+#: gnome/gprefs.c:147
 msgid "Always use FTP proxy"
 msgstr "Tofer eployî on proxy FTP"
 
-#: gnome/gprefs.c:155
+#: gnome/gprefs.c:157
 msgid "Fast directory reload"
 msgstr "Ritcherdjî les ridants abeye"
 
-#: gnome/gprefs.c:159
+#: gnome/gprefs.c:161
 msgid "Compute totals before copying files"
 msgstr "Cârculer les totås dvant do copyî les fitchîs"
 
-#: gnome/gprefs.c:163
+#: gnome/gprefs.c:166
 msgid "FTP directory cache timeout :"
 msgstr "Tins a ratinde pol muchete do ridant FTP :"
 
-#: gnome/gprefs.c:167
+#: gnome/gprefs.c:171
 msgid "Allow customization of icons in icon view"
 msgstr ""
 "Leyî amîdrer les imådjetes a s' môde cwand les fitchîs sont prezintés a "
 "imådjetes"
 
-#: gnome/gprefs.c:176
+#: gnome/gprefs.c:180
 msgid "File display"
 msgstr "Håynaedje des fitchîs"
 
-#: gnome/gprefs.c:180
+#: gnome/gprefs.c:184
 msgid "Confirmation"
 msgstr "Racertinaedje"
 
-#: gnome/gprefs.c:184
+#: gnome/gprefs.c:189
 msgid "VFS"
 msgstr "VFS"
 
-#: gnome/gprefs.c:188
+#: gnome/gprefs.c:194
 msgid "Caching"
 msgstr "Muchaedje"
 
-#: gnome/gprefs.c:480
+#: gnome/gprefs.c:486
 msgid "Preferences"
 msgstr "Preferinces"
 
-#: gnome/gscreen.c:1426 gnome/gscreen.c:1437
+#: gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "Reloads the current directory"
 msgstr "Ritcherdjî li ridant do moumint"
 
-#: gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "New _Directory..."
 msgstr "Novea _Ridant..."
 
-#: gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "Creates a new directory here"
 msgstr "Fé on novea ridant droci"
 
-#: gnome/gscreen.c:1435
+#: gnome/gscreen.c:1421
 msgid "Empty _Trash"
 msgstr ""
 
-#: gnome/gscreen.c:1435
+#: gnome/gscreen.c:1421
 msgid "Empties the Trash"
 msgstr ""
 
-#: gnome/gscreen.c:1651
+#: gnome/gscreen.c:1654
 #, c-format
 msgid "Search: %s"
 msgstr "Cachî après: %s"
 
-#: gnome/gscreen.c:1661 src/screen.c:663
+#: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes è fitchî %d"
 
-#: gnome/gscreen.c:1661 src/screen.c:663
+#: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes è fitchî %d"
 
-#: gnome/gscreen.c:1687 src/screen.c:689
+#: gnome/gscreen.c:1690 src/screen.c:684
 msgid "<readlink failed>"
 msgstr "<readlink a fwait berwete>"
 
-#: gnome/gscreen.c:2111
+#: gnome/gscreen.c:2115
 msgid "Copy directory"
 msgstr "Copyî ridant"
 
-#: gnome/gscreen.c:2112
+#: gnome/gscreen.c:2116
 msgid "Delete directory"
 msgstr "Disfacer ridant"
 
-#: gnome/gscreen.c:2113
+#: gnome/gscreen.c:2117
 msgid "Rename or move directory"
 msgstr "Rilomer ou bodjî l' ridant"
 
-#: gnome/gscreen.c:2271
+#: gnome/gscreen.c:2310
 msgid "Back"
 msgstr "Èn Erî"
 
-#: gnome/gscreen.c:2271
+#: gnome/gscreen.c:2310
 msgid "Go to the previously visited directory"
 msgstr "Eraler å ridant wice ki vos estîz dvant ci chal"
 
-#: gnome/gscreen.c:2273
+#: gnome/gscreen.c:2312
 msgid "Up"
 msgstr "Dizeu"
 
-#: gnome/gscreen.c:2273
+#: gnome/gscreen.c:2312
 msgid "Go up a level in the directory hierarchy"
 msgstr "Rimonter on schayon pus hôt sol schåle des ridants"
 
-#: gnome/gscreen.c:2275
+#: gnome/gscreen.c:2314
 msgid "Forward"
 msgstr "Èn Avant"
 
-#: gnome/gscreen.c:2275
+#: gnome/gscreen.c:2314
 msgid "Go to the next directory"
 msgstr "Potchî è ridant d' après"
 
-#: gnome/gscreen.c:2278 src/tree.c:1012
+#: gnome/gscreen.c:2317 src/tree.c:1019
 msgid "Rescan"
 msgstr "Rilére"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2317
 msgid "Rescan the current directory"
 msgstr "Rilére li ridant do moumint"
 
-#: gnome/gscreen.c:2281
+#: gnome/gscreen.c:2320
 msgid "Home"
 msgstr "Måjhon"
 
-#: gnome/gscreen.c:2281
+#: gnome/gscreen.c:2320
 msgid "Go to your home directory"
 msgstr "Eraler a vosse ridant måjhon"
 
-#: gnome/gscreen.c:2424
+#: gnome/gscreen.c:2463
 msgid "Location:"
 msgstr "Eplaeçmint:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/edit.h:502 gtkedit/editcmd.c:393
-#: gtkedit/editcmd.c:1243 gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3025
-#: gtkedit/editmenu.c:44 gtkedit/editoptions.c:69 src/boxes.c:138
-#: src/boxes.c:276 src/boxes.c:376 src/boxes.c:466 src/boxes.c:645
-#: src/boxes.c:880 src/filegui.c:824 src/find.c:175 src/layout.c:375
-#: src/option.c:143 src/wtools.c:290 src/wtools.c:557 vfs/smbfs.c:118
+#: gnome/gtools.c:105 gtkedit/edit.h:511 gtkedit/editcmd.c:415
+#: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3104
+#: gtkedit/editmenu.c:45 gtkedit/editoptions.c:69 src/boxes.c:145
+#: src/boxes.c:279 src/boxes.c:379 src/boxes.c:470 src/boxes.c:617
+#: src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056 src/filegui.c:805
+#: src/find.c:149 src/layout.c:369 src/option.c:135 src/wtools.c:284
+#: src/wtools.c:546
 msgid "&Ok"
 msgstr "I &Va"
 
@@ -1596,62 +1706,62 @@ msgstr "I &Va"
 msgid "Offset 0x%08lx"
 msgstr ""
 
-#: gnome/gview.c:138 src/view.c:724
+#: gnome/gview.c:138 src/view.c:734
 #, c-format
 msgid "Col %d"
 msgstr "Col %d"
 
-#: gnome/gview.c:142 src/view.c:728
+#: gnome/gview.c:142 src/view.c:738
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#: gnome/gview.c:306
+#: gnome/gview.c:308
 msgid "_Goto line"
 msgstr "_Potchî al Roye"
 
-#: gnome/gview.c:307
+#: gnome/gview.c:309
 msgid "Jump to a specified line number"
 msgstr "Potchî a té ou té limerô di roye"
 
-#: gnome/gview.c:309
+#: gnome/gview.c:311
 msgid "_Monitor file"
 msgstr "_Tini li fitchî a gogne"
 
-#: gnome/gview.c:309
+#: gnome/gview.c:311
 msgid "Monitor file growing"
 msgstr "Tini a gogne li crexhince do fitchî"
 
-#: gnome/gview.c:316
+#: gnome/gview.c:318
 msgid "Regexp search"
 msgstr "Cweraedje avou erûleye ratoûrneure"
 
-#: gnome/gview.c:317
+#: gnome/gview.c:319
 msgid "Regular expression search"
 msgstr "Cweraedje avou ene erûleye ratoûrneure (regular expression)"
 
-#: gnome/gview.c:326
+#: gnome/gview.c:328
 msgid "_Wrap"
 msgstr "_Côper"
 
-#: gnome/gview.c:327
+#: gnome/gview.c:329
 msgid "Wrap the text"
 msgstr "Côper li texe"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:330
+#: gnome/gview.c:332
 msgid "_Parsed view"
 msgstr "Vey _Relî"
 
-#: gnome/gview.c:333
+#: gnome/gview.c:335
 msgid "_Formatted"
 msgstr "_Adjinçné"
 
-#: gnome/gview.c:335
+#: gnome/gview.c:337
 msgid "_Hex"
 msgstr "_Hex"
 
-#: gnome/gview.c:341
+#: gnome/gview.c:343
 msgid "_Search"
 msgstr "_Cweraedje"
 
@@ -1667,11 +1777,11 @@ msgstr "rinoncî"
 msgid "help"
 msgstr "aidance"
 
-#: gnome/gwidget.c:101 src/file.c:2272
+#: gnome/gwidget.c:101 src/file.c:2271
 msgid "yes"
 msgstr "oyi"
 
-#: gnome/gwidget.c:103 src/file.c:2270
+#: gnome/gwidget.c:103 src/file.c:2269
 msgid "no"
 msgstr "neni"
 
@@ -1683,89 +1793,44 @@ msgstr "moussî foû"
 msgid "abort"
 msgstr "si djoker"
 
-#: gnome/gmc-client.c:26
-msgid "Could not contact the file manager\n"
-msgstr ""
-
-#: gnome/gmc-client.c:45
-msgid "Could not get the desktop\n"
-msgstr ""
-
-#: gnome/gmc-client.c:142
-#, c-format
-msgid "Unknown arrange type `%s'\n"
-msgstr ""
-
-#: gnome/gmc-client.c:206
-msgid "Create window showing the specified directory"
-msgstr ""
-
-#: gnome/gmc-client.c:206 gnome/gmc-client.c:208
-msgid "DIRECTORY"
-msgstr "RIDANT"
-
-#: gnome/gmc-client.c:208
-msgid "Rescan the specified directory"
-msgstr "Rilére li ridant specifié"
-
-#: gnome/gmc-client.c:210
-msgid "Rescan the desktop icons"
-msgstr "Rilére les imådjetes do scribanne"
-
-#: gnome/gmc-client.c:212
-msgid "Rescan the desktop device icons"
-msgstr "Rilére les imådjetes d' éndjins do scribanne"
-
-#: gnome/gmc-client.c:214
-msgid "Arrange the desktop icons"
-msgstr "Arindjî les imådjetes do scribanne"
-
-#: gnome/gmc-client.c:215
-msgid "name | type | size | atime | mtime | ctime"
-msgstr "no | sôrte | grandeu | atime | mtime | ctime"
-
-#: gnome/gmc-client.c:217
-msgid "Close windows whose directories cannot be reached"
-msgstr "Clôre les purneas cwand les ridants ni polèt nén esse lejhus"
-
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:151 gtkedit/edit.c:320 gtkedit/edit.c:325 gtkedit/edit.c:339
-#: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
-#: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
-#: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2041 gtkedit/editwidget.c:1024
-#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: gtkedit/edit.c:156 gtkedit/edit.c:325 gtkedit/edit.c:330 gtkedit/edit.c:344
+#: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
+#: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:327
+#: gtkedit/editcmd.c:333 gtkedit/editcmd.c:2093 gtkedit/editwidget.c:1024
+#: src/dir.c:427 src/wtools.c:216
 msgid " Error "
 msgstr " Aroke "
 
-#: gtkedit/edit.c:151 gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381
+#: gtkedit/edit.c:156 gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386
 msgid " Failed trying to open file for reading: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovi li fitchî po lére: "
 
-#: gtkedit/edit.c:320
+#: gtkedit/edit.c:325
 msgid " Error reading from pipe: "
 msgstr " Yåk ni va nén cwand dji saye di lére del bûze: "
 
-#: gtkedit/edit.c:325
+#: gtkedit/edit.c:330
 msgid " Failed trying to open pipe for reading: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
 
-#: gtkedit/edit.c:339
+#: gtkedit/edit.c:344
 msgid " Error reading file: "
 msgstr " Yåk n' a nén stî come dji sayîve di lére li fitchî: "
 
-#: gtkedit/edit.c:388
+#: gtkedit/edit.c:393
 msgid " Cannot get size/permissions info on file: "
 msgstr " Dji n' sai obtni li grandeus ou les permissions pol fitchî: "
 
-#: gtkedit/edit.c:395
+#: gtkedit/edit.c:400
 msgid " Not an ordinary file: "
 msgstr " Çouchal, ci n' est nén on fitchî ôrdinaire: "
 
-#: gtkedit/edit.c:401
+#: gtkedit/edit.c:406
 msgid " File is too large: "
 msgstr " Li fitchî est trop grand: "
 
-#: gtkedit/edit.c:402
+#: gtkedit/edit.c:407
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -1773,157 +1838,155 @@ msgstr ""
 " \n"
 " Agrandixhox edit.h:MAXBUF èt s' ricopilez l' aspougneu. "
 
-#: gtkedit/edit.c:2594
+#: gtkedit/edit.c:2601
 msgid "User menu available only in mcedit invoked from mc"
 msgstr ""
 
-#: gtkedit/edit.c:2792 gtkedit/editcmd.c:2943
+#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3022
 msgid "Error trying to stat file:"
 msgstr "Yåk n' a nén stî come dji sayîve di fé on stat sol fitchî:"
 
-#: gtkedit/edit.h:501 gtkedit/gtkedit.c:67
+#: gtkedit/edit.h:510 gtkedit/gtkedit.c:71
 msgid "&Dismiss"
 msgstr "&Rinoncî"
 
-#: gtkedit/editcmd.c:168 src/cmd.c:1206 src/tree.c:654 src/view.c:1810
-msgid "mc.hlp"
-msgstr "mc.hlp"
-
-#: gtkedit/editcmd.c:305
+#: gtkedit/editcmd.c:327
 msgid " Error writing to pipe: "
 msgstr " Yåk n' a nén stî come dji sayîve di scrire èl bûze: "
 
-#: gtkedit/editcmd.c:311
+#: gtkedit/editcmd.c:333
 msgid " Failed trying to open pipe for writing: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
-#: gtkedit/editcmd.c:386
+#: gtkedit/editcmd.c:408
 msgid "Quick save "
 msgstr "Schaper al vole "
 
-#: gtkedit/editcmd.c:387
+#: gtkedit/editcmd.c:409
 msgid "Safe save "
 msgstr "Schaper a såvrité "
 
-#: gtkedit/editcmd.c:388
+#: gtkedit/editcmd.c:410
 msgid "Do backups -->"
 msgstr "Fé des copeyes di såvrité -->"
 
 #. 0
-#: gtkedit/editcmd.c:391 gtkedit/editcmd.c:1191 gtkedit/editcmd.c:1241
-#: gtkedit/editcmd.c:1326 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:66
-#: src/achown.c:71 src/boxes.c:139 src/boxes.c:277 src/boxes.c:374
-#: src/boxes.c:464 src/boxes.c:643 src/chmod.c:110 src/chown.c:79
-#: src/cmd.c:861 src/filegui.c:807 src/find.c:175 src/hotlist.c:134
-#: src/hotlist.c:795 src/hotlist.c:892 src/layout.c:376 src/learn.c:59
-#: src/option.c:144 src/panelize.c:86 src/view.c:399 src/wtools.c:113
-#: src/wtools.c:380 src/wtools.c:555 vfs/smbfs.c:118
+#: gtkedit/editcmd.c:413 gtkedit/editcmd.c:1231 gtkedit/editcmd.c:1290
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:66
+#: src/achown.c:73 src/boxes.c:146 src/boxes.c:280 src/boxes.c:377
+#: src/boxes.c:468 src/boxes.c:614 src/boxes.c:751 src/boxes.c:1056
+#: src/chmod.c:109 src/chown.c:80 src/cmd.c:870 src/filegui.c:788
+#: src/find.c:149 src/hotlist.c:134 src/hotlist.c:504 src/hotlist.c:792
+#: src/hotlist.c:889 src/layout.c:370 src/learn.c:59 src/option.c:136
+#: src/panelize.c:83 src/view.c:410 src/wtools.c:107 src/wtools.c:374
+#: src/wtools.c:544
 msgid "&Cancel"
 msgstr "&Rinoncî"
 
-#: gtkedit/editcmd.c:397
+#: gtkedit/editcmd.c:419
 msgid "Extension:"
 msgstr "Cawete:"
 
 # (Edit + Save) mode / Edit (Save mode)???
-#: gtkedit/editcmd.c:403
+#: gtkedit/editcmd.c:425
 msgid " Edit Save Mode "
 msgstr " Môde Aspougnî Schaper "
 
-#: gtkedit/editcmd.c:527
+#: gtkedit/editcmd.c:567
 msgid " Save As "
 msgstr " Schaper èt rlomer "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
-#: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:311 src/file.c:619
-#: src/help.c:314 src/main.c:715 src/screen.c:1441 src/screen.c:2114
-#: src/screen.c:2164 src/subshell.c:741 src/subshell.c:767 src/utilunix.c:382
-#: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
+#: gtkedit/editcmd.c:581 gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179 src/file.c:619 src/help.c:314
+#: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:742
+#: src/subshell.c:768 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
+#: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Advertixhmint "
 
-#: gtkedit/editcmd.c:542
+#: gtkedit/editcmd.c:582
 msgid " A file already exists with this name. "
 msgstr " I gn a ddja on fitchî lomé insi. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:544
+#: gtkedit/editcmd.c:584
 msgid "Overwrite"
 msgstr "Sipotchî"
 
-#: gtkedit/editcmd.c:544 gtkedit/editcmd.c:611 gtkedit/editcmd.c:839
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
-#: gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:584 gtkedit/editcmd.c:651 gtkedit/editcmd.c:879
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
+#: gtkedit/editcmd.c:1733
 msgid "Cancel"
 msgstr "Rinoncî"
 
-#: gtkedit/editcmd.c:563
+#: gtkedit/editcmd.c:603
 msgid " Save as "
 msgstr " Schaper eyèt rlomer "
 
-#: gtkedit/editcmd.c:563 gtkedit/editcmd.c:2785
+#: gtkedit/editcmd.c:603 gtkedit/editcmd.c:2865
 msgid " Error trying to save file. "
 msgstr " Yåk n' a nén stî come dji sayîve di schaper li fitchî. "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:681 gtkedit/editcmd.c:689 gtkedit/editcmd.c:714
+#: gtkedit/editcmd.c:721 gtkedit/editcmd.c:729 gtkedit/editcmd.c:754
 msgid " Delete macro "
 msgstr " Disfacer macro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:683
+#: gtkedit/editcmd.c:723
 msgid " Error trying to open temp file "
 msgstr " Yåk n' a nén stî come dji sayîve di drovi on fitchî temp "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:691 gtkedit/editcmd.c:752 gtkedit/editcmd.c:821
+#: gtkedit/editcmd.c:731 gtkedit/editcmd.c:792 gtkedit/editcmd.c:861
 msgid " Error trying to open macro file "
 msgstr " Yåk n' a nén stî come dji sayîve di drovi on fitchî macro "
 
-#: gtkedit/editcmd.c:715
+#: gtkedit/editcmd.c:755
 msgid " Error trying to overwrite macro file "
 msgstr " Yåk n' a nén stî come dji sayîve di spotchî li fitchî macro "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:731
+#: gtkedit/editcmd.c:771
 msgid " Macro "
 msgstr " Macro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:733
+#: gtkedit/editcmd.c:773
 msgid " Press the macro's new hotkey: "
 msgstr " Tchôkî li novele tape rascoûrti pol macro: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:752
+#: gtkedit/editcmd.c:792
 msgid " Save macro "
 msgstr " Schaper li macro "
 
-#: gtkedit/editcmd.c:762 gtkedit/editcmd.c:770
+#: gtkedit/editcmd.c:802 gtkedit/editcmd.c:810
 msgid " Delete Macro "
 msgstr " Disfacer li macro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:820
+#: gtkedit/editcmd.c:860
 msgid " Load macro "
 msgstr " Tcherdjî li macro "
 
-#: gtkedit/editcmd.c:834 gtkedit/editcmd.c:836
+#: gtkedit/editcmd.c:874 gtkedit/editcmd.c:876
 msgid " Confirm save file? : "
 msgstr " Racertiner ki vos voloz bén schaper li fitchî? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:879
 msgid " Save file "
 msgstr " Schaper Fitchî "
 
-#: gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2062
+#: gtkedit/editcmd.c:879 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1256
+#: src/view.c:2082
 msgid "Save"
 msgstr "Schaper"
 
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1931,113 +1994,114 @@ msgstr ""
 " Li texe do moumint a stî candjî mins nén schapé. \n"
 " Si vos tcheryîz pus lon, les candjmints seront pierdus. "
 
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
 msgid "Continue"
 msgstr "Continouwer"
 
-#: gtkedit/editcmd.c:896
+#: gtkedit/editcmd.c:936
 msgid " Load "
 msgstr " Tcherdjî "
 
-#: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Li blo est lådje; s' il astchait, vos n' såroz disfé cist bezogne. "
 
-#: gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1179
 msgid " Continue "
 msgstr " Continouwer "
 
-#: gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1179
 msgid " Cancel "
 msgstr " Rinoncî "
 
-#: gtkedit/editcmd.c:1193
+#: gtkedit/editcmd.c:1233
 msgid "o&Ne"
 msgstr "&onk"
 
-#: gtkedit/editcmd.c:1195 src/filegui.c:584
+#: gtkedit/editcmd.c:1235 src/filegui.c:565
 msgid "al&L"
 msgstr "&Tertos"
 
-#: gtkedit/editcmd.c:1197 src/file.c:2194 src/filegui.c:266
+#: gtkedit/editcmd.c:1237 src/file.c:2193 src/filegui.c:260
 msgid "&Skip"
 msgstr "&Passer"
 
-#: gtkedit/editcmd.c:1199
+#: gtkedit/editcmd.c:1239
 msgid "&Replace"
 msgstr "&Mete el Plaece"
 
-#: gtkedit/editcmd.c:1205 gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1733
 msgid " Replace with: "
 msgstr " Mete çouchal el plaece: "
 
-#: gtkedit/editcmd.c:1209
+#: gtkedit/editcmd.c:1258
 msgid " Confirm replace "
 msgstr " Racertiner li discandje "
 
-#: gtkedit/editcmd.c:1245 gtkedit/editcmd.c:1330
+#: gtkedit/editcmd.c:1294 gtkedit/editcmd.c:1379
 msgid "scanf &Expression"
 msgstr "scanf sol &Ratoûrneure"
 
-#: gtkedit/editcmd.c:1247
+#: gtkedit/editcmd.c:1296
 msgid "replace &All"
 msgstr "mete el plaece tot &costé"
 
-#: gtkedit/editcmd.c:1249
+#: gtkedit/editcmd.c:1298
 msgid "pr&Ompt on replace"
 msgstr "&Dimander cwè divant do discandjî"
 
-#: gtkedit/editcmd.c:1251 gtkedit/editcmd.c:1332
+#: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1381
 msgid "&Backwards"
 msgstr "È&n erî"
 
-#: gtkedit/editcmd.c:1253 gtkedit/editcmd.c:1334
+#: gtkedit/editcmd.c:1302 gtkedit/editcmd.c:1383
 msgid "&Regular expression"
 msgstr "Erûle&ye Ratoûrneure"
 
-#: gtkedit/editcmd.c:1255 gtkedit/editcmd.c:1336
+#: gtkedit/editcmd.c:1304 gtkedit/editcmd.c:1385
 msgid "&Whole words only"
 msgstr "Rén &ki des mots etirs"
 
-#: gtkedit/editcmd.c:1257 gtkedit/editcmd.c:1338
+#: gtkedit/editcmd.c:1306 gtkedit/editcmd.c:1387 src/find.c:142
 msgid "case &Sensitive"
 msgstr "Grandès <> ptitès letes"
 
-#: gtkedit/editcmd.c:1261
+#: gtkedit/editcmd.c:1310
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Dinez l' ôrde des årgumints di discandje, metans: 3, 2, 1, 4 "
 
-#: gtkedit/editcmd.c:1265
+#: gtkedit/editcmd.c:1314
 msgid " Enter replacement string:"
 msgstr " Dinez li tchinne pol discandje:"
 
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1981
+#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:1391 src/view.c:1997
 msgid " Enter search string:"
 msgstr " Dinez li tchinne a cweri après:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1288 gtkedit/editcmd.c:1592 gtkedit/editcmd.c:1681
-#: gtkedit/editcmd.c:2224 gtkedit/editcmd.c:2255 gtkedit/editcmd.c:2257
+#: gtkedit/editcmd.c:1337 gtkedit/editcmd.c:1644 gtkedit/editcmd.c:1733
+#: gtkedit/editcmd.c:2292 gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2325
 msgid " Replace "
 msgstr " Mete el plaece "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1586 gtkedit/editcmd.c:2323
-#: gtkedit/editcmd.c:2325 gtkedit/editcmd.c:2353 src/view.c:1507
-#: src/view.c:1604 src/view.c:1727 src/view.c:1945 src/view.c:1981
+#: gtkedit/editcmd.c:1405 gtkedit/editcmd.c:1638 gtkedit/editcmd.c:2403
+#: gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433 src/view.c:1528
+#: src/view.c:1625 src/view.c:1727 src/view.c:1739 src/view.c:1955
+#: src/view.c:1997
 msgid " Search "
 msgstr " Cweri "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1410
+#: gtkedit/editcmd.c:1462
 msgid " Enter search text : "
 msgstr " Tchinne a cweri après: "
 
-#: gtkedit/editcmd.c:1417
+#: gtkedit/editcmd.c:1469
 msgid " Enter replace text : "
 msgstr " Tchinne a mete el plaece: "
 
-#: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
+#: gtkedit/editcmd.c:1472 gtkedit/editcmd.c:1473
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2046,12 +2110,12 @@ msgstr ""
 "Vos poloz dner des sortchinnes come erûleyès ratoûrneures avou %s\n"
 "(nén \\1, \\2 come dins sed); adon, eployîz \"Dinez...sortchinne)\""
 
-#: gtkedit/editcmd.c:1423
+#: gtkedit/editcmd.c:1475
 msgid " Enter argument (or substring) order : "
 msgstr "Dinez l' ôrde des årgumints (ou sortchinne) : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1427 gtkedit/editcmd.c:1428
+#: gtkedit/editcmd.c:1479 gtkedit/editcmd.c:1480
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2060,19 +2124,19 @@ msgstr ""
 "di scanf ou les sortchinnes regexp, eg 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1433
+#: gtkedit/editcmd.c:1485
 msgid " Whole words only "
 msgstr " Mots etirs seulmint "
 
-#: gtkedit/editcmd.c:1435
+#: gtkedit/editcmd.c:1487
 msgid " Case sensitive "
 msgstr " Grandès <> ptitès letes "
 
-#: gtkedit/editcmd.c:1438
+#: gtkedit/editcmd.c:1490
 msgid " Regular expression "
 msgstr " Erûleye ratoûrneure "
 
-#: gtkedit/editcmd.c:1439 gtkedit/editcmd.c:1440
+#: gtkedit/editcmd.c:1491 gtkedit/editcmd.c:1492
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2080,49 +2144,49 @@ msgstr ""
 "Loukî el pådje man di regex po savu cmint-ce\n"
 "k' on-z adjinçneye ene erûleye ratoûrneure"
 
-#: gtkedit/editcmd.c:1448
+#: gtkedit/editcmd.c:1500
 msgid " Backwards "
 msgstr " Èn erî "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1450 gtkedit/editcmd.c:1451
+#: gtkedit/editcmd.c:1502 gtkedit/editcmd.c:1503
 msgid "Warning: Searching backward can be slow"
 msgstr "Advertixhmint: li rcweraedje èn erî pout esse londjin"
 
-#: gtkedit/editcmd.c:1472
+#: gtkedit/editcmd.c:1524
 msgid " Prompt on replace "
 msgstr " Dimandez cwè pol discandje "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1474
+#: gtkedit/editcmd.c:1526
 msgid "Ask before making each replacement"
 msgstr "Dimander cwè a tchaeke côp dvant do fé ene discandje"
 
-#: gtkedit/editcmd.c:1476
+#: gtkedit/editcmd.c:1528
 msgid " Replace all "
 msgstr " Mete el plaece tot costé "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1478
+#: gtkedit/editcmd.c:1530
 msgid "Replace repeatedly"
 msgstr "Mete el plaece pus d' ene feye"
 
 #  Flush chal = vûdî evoye?
-#: gtkedit/editcmd.c:1482
+#: gtkedit/editcmd.c:1534
 msgid " Bookmarks "
 msgstr " Rimårkes "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1484 gtkedit/editcmd.c:1485
+#: gtkedit/editcmd.c:1536 gtkedit/editcmd.c:1537
 msgid "Create bookmarks at all lines found"
 msgstr "Fé des rimårkes po totès les lenes di troveyes"
 
-#: gtkedit/editcmd.c:1488
+#: gtkedit/editcmd.c:1540
 msgid " Scanf expression "
 msgstr " Ratoûrneure scanf "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1490
+#: gtkedit/editcmd.c:1542
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
@@ -2131,31 +2195,31 @@ msgstr ""
 "loukî el pådje man di scanf"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1515
+#: gtkedit/editcmd.c:1567
 msgid "Begin search, Enter"
 msgstr "Ataker a cweri, Intreye"
 
-#: gtkedit/editcmd.c:1516
+#: gtkedit/editcmd.c:1568
 msgid "Abort this dialog, Esc"
 msgstr "Rinoncî a cisse divize, Esc"
 
-#: gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:1733 gtkedit/gtkedit.c:1258
 msgid "Replace"
 msgstr "Mete el Plaece"
 
-#: gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:1733
 msgid "Skip"
 msgstr "Passer Hute"
 
-#: gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:1733
 msgid "Replace all"
 msgstr "Mete el plaece tot costé"
 
-#: gtkedit/editcmd.c:1681
+#: gtkedit/editcmd.c:1733
 msgid "Replace one"
 msgstr "Mete el plaece ene feye"
 
-#: gtkedit/editcmd.c:2041
+#: gtkedit/editcmd.c:2093
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
@@ -2163,31 +2227,31 @@ msgstr ""
 "conviertixhmints "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2226
+#: gtkedit/editcmd.c:2294
 msgid " Error in replacement format string. "
 msgstr " Li tchinne di discandje est må fwaite "
 
-#: gtkedit/editcmd.c:2254
+#: gtkedit/editcmd.c:2322
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld discandjes di fwaites. "
 
-#: gtkedit/editcmd.c:2257 gtkedit/editcmd.c:2325 gtkedit/editcmd.c:2353
+#: gtkedit/editcmd.c:2325 gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433
 msgid " Search string not found. "
 msgstr " Dji n' a nén trové li tchinne a cweri. "
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2322
+#: gtkedit/editcmd.c:2402
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr ""
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2378 gtkedit/editcmd.c:2393 gtkedit/editcmd.c:2396
+#: gtkedit/editcmd.c:2458 gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2476
 msgid " Quit "
 msgstr " Cwiter "
 
-#: gtkedit/editcmd.c:2379 gtkedit/editcmd.c:2397
+#: gtkedit/editcmd.c:2459 gtkedit/editcmd.c:2477
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -2195,153 +2259,152 @@ msgstr ""
 " Li texe do moumint a stî candjî mins nén schapé. \n"
 " El fåt-i schaper tot moussant foû? "
 
-#: gtkedit/editcmd.c:2393
+#: gtkedit/editcmd.c:2473
 msgid " File was modified, Save with exit? "
 msgstr " Li fitchî a stî candjî. El fåt-i schaper tot moussant foû? "
 
-#: gtkedit/editcmd.c:2393
+#: gtkedit/editcmd.c:2473
 msgid "Cancel quit"
 msgstr "Rinoncî a moussî foû"
 
-#: gtkedit/editcmd.c:2393 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:590 src/hotlist.c:1016 src/main.c:870 src/screen.c:2151
-#: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:399
+#: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
+#: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr "&Oyi"
 
-#: gtkedit/editcmd.c:2393 src/cmd.c:245 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:589 src/hotlist.c:1016 src/main.c:870 src/screen.c:2151
-#: src/subshell.c:742 src/subshell.c:768 src/tree.c:747 src/view.c:399
+#: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
+#: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "&Neni"
 
-#: gtkedit/editcmd.c:2397
+#: gtkedit/editcmd.c:2477
 msgid " &Cancel quit "
 msgstr " &Rinoncî a moussî foû "
 
-#: gtkedit/editcmd.c:2397
+#: gtkedit/editcmd.c:2477
 msgid " &Yes "
 msgstr " &Oyi "
 
-#: gtkedit/editcmd.c:2397
+#: gtkedit/editcmd.c:2477
 msgid " &No "
 msgstr " &Neni "
 
-#: gtkedit/editcmd.c:2629 gtkedit/editcmd.c:2704
+#: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2784
 msgid " Copy to clipboard "
 msgstr " Copyî è tchapea emacralé "
 
-#: gtkedit/editcmd.c:2629 gtkedit/editcmd.c:2651 gtkedit/editcmd.c:2704
-#: gtkedit/editcmd.c:2717
+#: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2784
+#: gtkedit/editcmd.c:2797
 msgid " Unable to save to file. "
 msgstr " Dji n' a savu schaper çoula dins on fitchî. "
 
-#: gtkedit/editcmd.c:2651 gtkedit/editcmd.c:2717
+#: gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2797
 msgid " Cut to clipboard "
 msgstr " Côper evoye è tchapea emacralé "
 
-#: gtkedit/editcmd.c:2739 gtkedit/editcmd.c:2743 gtkedit/editcmd.c:2748
-#: gtkedit/editcmd.c:2751 src/view.c:1892
+#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
+#: gtkedit/editcmd.c:2831 src/view.c:1902
 msgid " Goto line "
 msgstr " Potchî al roye "
 
-#: gtkedit/editcmd.c:2739 gtkedit/editcmd.c:2743 gtkedit/editcmd.c:2748
-#: gtkedit/editcmd.c:2751
+#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
+#: gtkedit/editcmd.c:2831
 msgid " Enter line: "
 msgstr " Diner roye: "
 
-#: gtkedit/editcmd.c:2772 gtkedit/editcmd.c:2785
+#: gtkedit/editcmd.c:2852 gtkedit/editcmd.c:2865
 msgid " Save Block "
 msgstr " Schaper li blo "
 
-#: gtkedit/editcmd.c:2797
+#: gtkedit/editcmd.c:2877
 msgid " Insert File "
 msgstr " Sitichî on fitchî "
 
-#: gtkedit/editcmd.c:2810
+#: gtkedit/editcmd.c:2890
 msgid " Insert file "
 msgstr " Sitichî on fitchî "
 
-#: gtkedit/editcmd.c:2810
+#: gtkedit/editcmd.c:2890
 msgid " Error trying to insert file. "
 msgstr " Yåk n' a nén stî come dji sayîve di stitchî on fitchî. "
 
-#: gtkedit/editcmd.c:2829
+#: gtkedit/editcmd.c:2909
 msgid " Sort block "
 msgstr " Relire li blo "
 
-#: gtkedit/editcmd.c:2829 gtkedit/editcmd.c:2913
+#: gtkedit/editcmd.c:2909 gtkedit/editcmd.c:2993
 msgid " You must first highlight a block of text. "
 msgstr " Po cmincî vos dvoz mete è valeur on blo di texe. "
 
-#: gtkedit/editcmd.c:2836
+#: gtkedit/editcmd.c:2916
 msgid " Run Sort "
 msgstr " Relire "
 
-#: gtkedit/editcmd.c:2837
+#: gtkedit/editcmd.c:2917
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " Dinez les tchûzes pol relîjhaedje (loukî el pådje man) avou on blanc inte: "
 
-#: gtkedit/editcmd.c:2848 gtkedit/editcmd.c:2853
+#: gtkedit/editcmd.c:2928 gtkedit/editcmd.c:2933
 msgid " Sort "
 msgstr " Relire "
 
-#: gtkedit/editcmd.c:2849
+#: gtkedit/editcmd.c:2929
 msgid " Error trying to execute sort command "
 msgstr " Yåk n' a nén stî come dji sayîve di relire "
 
-#: gtkedit/editcmd.c:2854
+#: gtkedit/editcmd.c:2934
 msgid " Sort returned non-zero: "
 msgstr " Li relîjhaedje a revoyî yåk d' ôte ki zérô "
 
-#: gtkedit/editcmd.c:2887
+#: gtkedit/editcmd.c:2967
 msgid "Error create script:"
 msgstr ""
 
-#: gtkedit/editcmd.c:2893
+#: gtkedit/editcmd.c:2973
 msgid "Error read script:"
 msgstr ""
 
-#: gtkedit/editcmd.c:2900
+#: gtkedit/editcmd.c:2980
 msgid "Error close script:"
 msgstr ""
 
-#: gtkedit/editcmd.c:2905
+#: gtkedit/editcmd.c:2985
 msgid "Script created:"
 msgstr ""
 
-#: gtkedit/editcmd.c:2912
+#: gtkedit/editcmd.c:2992
 #, fuzzy
 msgid "Process block"
 msgstr " Aspougnî li blo "
 
 # Viebe ou no?
-#: gtkedit/editcmd.c:3018
+#: gtkedit/editcmd.c:3097
 msgid " Mail "
 msgstr " Emile "
 
-#: gtkedit/editcmd.c:3029
+#: gtkedit/editcmd.c:3108
 msgid " Copies to"
 msgstr " Copyî po "
 
-#: gtkedit/editcmd.c:3033
+#: gtkedit/editcmd.c:3112
 msgid " Subject"
 msgstr " Sudjet"
 
-#: gtkedit/editcmd.c:3037
+#: gtkedit/editcmd.c:3116
 msgid " To"
 msgstr " Po"
 
-#: gtkedit/editcmd.c:3039
+#: gtkedit/editcmd.c:3118
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-#: gtkedit/editmenu.c:62
+#: gtkedit/editmenu.c:63
 msgid " Word wrap "
 msgstr " Côper les mots "
 
-#. Not essential to translate
 #: gtkedit/editmenu.c:64
 msgid " Enter line length, 0 for off: "
 msgstr " Dinez li longueu del roye, 0 po dismetu: "
@@ -2369,8 +2432,9 @@ msgstr ""
 "             pol Midnight Commander.\n"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
-msgid "&Open/load...     C-o"
-msgstr "&Drovi/tcherdjî...     C-o"
+#, fuzzy
+msgid "&Open file..."
+msgstr "Drovi avou..."
 
 #: gtkedit/editmenu.c:129
 msgid "&New              C-n"
@@ -2532,13 +2596,13 @@ msgstr "&Djenerå...  "
 msgid "&Save mode..."
 msgstr "Môde &Schapaedje..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1366
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1374
 msgid "&Layout..."
 msgstr "arindj&mint del pådje..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
-#: src/chmod.c:160 src/chown.c:130
+#: src/chmod.c:153 src/chown.c:131
 msgid " File "
 msgstr " Fitchî "
 
@@ -2798,226 +2862,216 @@ msgstr " Tchûzes po l' aspougneu "
 msgid "Error initialising editor.\n"
 msgstr "Yåk n' a nén stî come dj' enondéve l' aspougneu.\n"
 
-#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:802
-#: src/main.c:1737 src/screen.c:2382 src/screen.c:2412 src/tree.c:1010
-#: src/view.c:2055
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1255 src/help.c:811
+#: src/main.c:1723 src/screen.c:2414 src/tree.c:1017 src/view.c:2075
 msgid "Help"
 msgstr "Aide"
 
-#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
+#: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1257
 msgid "Mark"
 msgstr "Marker"
 
-#: gtkedit/editwidget.c:1140
+#: gtkedit/editwidget.c:1142
 msgid "Replac"
 msgstr "Discandjî"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1739
+#: gtkedit/editwidget.c:1148 src/main.c:1725
 msgid "PullDn"
 msgstr "Djus"
 
-#. gtk_edit_menu
-#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:814
-#: src/main.c:1740 src/view.c:2057 src/view.c:2079
+#: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1267 src/help.c:823
+#: src/main.c:1726 src/view.c:2077 src/view.c:2099
 msgid "Quit"
 msgstr "Cwiter"
 
-#: gtkedit/gtkedit.c:68
+#: gtkedit/gtkedit.c:72
 msgid " Enter file name: "
 msgstr " No do fitchî: "
 
-#: gtkedit/gtkedit.c:113
+#: gtkedit/gtkedit.c:117
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr ""
 "Mi trûte a les balzins, co pés ki l' grîjhe cawe di m' pôve fayé vexhå !"
 
-#: gtkedit/gtkedit.c:804
+#: gtkedit/gtkedit.c:806
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 "gtkedit.c: li variåbe d' inviron'mint HOME n' est nén metuwe èt gn a nole "
 "intreye passwd - dji lai ouve\n"
 
-#: gtkedit/gtkedit.c:1248
+#: gtkedit/gtkedit.c:1255
 msgid "Interactive help browser"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1256
 msgid "Save to current file name"
 msgstr "Schaper avou l' no do fitchî do moumint"
 
-#: gtkedit/gtkedit.c:1250
+#: gtkedit/gtkedit.c:1257
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1251
-msgid "Replc"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1251
+#: gtkedit/gtkedit.c:1258
 msgid "Find and replace strings/regular expressions"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1252
+#: gtkedit/gtkedit.c:1259
 msgid "Copy highlighted block to cursor position"
 msgstr "Copyî li blo al plaece do curseur"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1261
 msgid "Move highlighted block to cursor position"
 msgstr "Bodjî li blo al plaece do curseur"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1262
 msgid "Find"
 msgstr "Trover"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1262
 msgid "Find strings/regular expressions"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1256
-msgid "Dlete"
-msgstr "Disf"
-
-#: gtkedit/gtkedit.c:1256
+#: gtkedit/gtkedit.c:1263
 msgid "Delete highlighted text"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1738 src/screen.c:2383 src/screen.c:2413
+#: gtkedit/gtkedit.c:1265 src/main.c:1724 src/screen.c:2415
 msgid "Menu"
 msgstr "Menu"
 
-#: gtkedit/gtkedit.c:1257
+#: gtkedit/gtkedit.c:1265
 msgid "Pull down menu"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1258
+#: gtkedit/gtkedit.c:1267
 msgid "Exit editor"
 msgstr "Moussî foû di l' aspougneu"
 
-#: gtkedit/gtkedit.c:1292
+#: gtkedit/gtkedit.c:1301
 msgid "Clear the edit buffer"
 msgstr "Vûdî li tampon d' aspougnaedje"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1306
 msgid "Insert File"
 msgstr "Sititchî on fitchî"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1306
 msgid "Insert text from a file"
 msgstr "Sititchî do texe foû d' on fitchî"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1308
 msgid "Copy to file"
 msgstr "Copyî dins on fitchî"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1308
 msgid "copy a block to a file"
 msgstr "Copyî on blo dins on fitchî"
 
-#: gtkedit/gtkedit.c:1339
+#: gtkedit/gtkedit.c:1348
 msgid "Search/Replace"
 msgstr "Cweri/Discandjî"
 
-#: gtkedit/syntax.c:1074 gtkedit/syntax.c:1083 gtkedit/syntax.c:1092
-#: gtkedit/syntax.c:1101
+#: gtkedit/syntax.c:1081 gtkedit/syntax.c:1090 gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1108
 msgid " Spelling Message "
 msgstr ""
 
-#: gtkedit/syntax.c:1074
+#: gtkedit/syntax.c:1081
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1083
+#: gtkedit/syntax.c:1090
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1092
+#: gtkedit/syntax.c:1099
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1101
+#: gtkedit/syntax.c:1108
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 #, fuzzy
 msgid " Load Syntax Rules "
 msgstr " Tcherdjî fitchî emantchaedje "
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
 " Your old rule file has been saved with a .OLD extension. "
 msgstr ""
 
-#: gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
+#: gtkedit/syntax.c:1537 gtkedit/syntax.c:1544
 msgid " Load syntax file "
 msgstr " Tcherdjî fitchî emantchaedje "
 
-#: gtkedit/syntax.c:1518
+#: gtkedit/syntax.c:1537
 msgid " File access error "
 msgstr " Aroke po-z eployî li fitchî "
 
-#: gtkedit/syntax.c:1524
+#: gtkedit/syntax.c:1543
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Aroke è fitchî %s al roye %d "
 
-#: src/achown.c:72 src/chmod.c:111 src/chown.c:80
+#: src/achown.c:74 src/chmod.c:110 src/chown.c:81
 msgid "&Set"
 msgstr "&Mete"
 
-#: src/achown.c:73
+#: src/achown.c:75
 msgid "S&kip"
 msgstr "Pa&sser Hute"
 
-#: src/achown.c:74 src/chmod.c:115 src/chown.c:83
+#: src/achown.c:76 src/chmod.c:114 src/chown.c:84
 msgid "Set &all"
 msgstr "Mete &Totafwait"
 
-#: src/achown.c:362 src/achown.c:369
+#: src/achown.c:345 src/achown.c:352
 msgid "owner"
 msgstr "da"
 
-#: src/achown.c:364 src/achown.c:371
+#: src/achown.c:347 src/achown.c:354
 msgid "group"
 msgstr "hopê"
 
-#: src/achown.c:366
+#: src/achown.c:349
 msgid "other"
 msgstr "ôte"
 
-#: src/achown.c:374
+#: src/achown.c:357
 msgid "On"
 msgstr "Metu"
 
-#: src/achown.c:376
+#: src/achown.c:359
 msgid "Flag"
 msgstr "Drapea"
 
-#: src/achown.c:383
+#: src/achown.c:366
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d di %d"
 
-#: src/achown.c:391
+#: src/achown.c:374
 msgid " Chown advanced command "
 msgstr " Comande chown avanceye "
 
-#: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:278
-#: src/chmod.c:363
+#: src/achown.c:609 src/achown.c:625 src/achown.c:671 src/chmod.c:269
+#: src/chmod.c:338
 #, c-format
 msgid ""
 " Couldn't chmod \"%s\" \n"
@@ -3026,8 +3080,8 @@ msgstr ""
 " Dji n' sai fé on chmod \"%s\" \n"
 " %s "
 
-#: src/achown.c:634 src/achown.c:649 src/achown.c:712 src/chown.c:223
-#: src/chown.c:345
+#: src/achown.c:614 src/achown.c:629 src/achown.c:675 src/chown.c:224
+#: src/chown.c:331
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -3036,40 +3090,27 @@ msgstr ""
 " Dji n' sai fé on chown \"%s\" \n"
 " %s "
 
-#: src/achown.c:666 src/achown.c:670 src/chmod.c:313 src/chmod.c:317
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:299 src/user.c:661
-msgid " Oops... "
-msgstr " Way!... "
-
-#: src/achown.c:667
-msgid " I can't run the Advanced Chown command on an extfs "
-msgstr " Dji n' såreu enonder li cmande Advanced Chown so èn extfs "
-
-#: src/achown.c:671
-msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr " Dji n' sareu enonder li cmande Advanced Chown so on tarfs "
-
-#: src/background.c:181
+#: src/background.c:184
 msgid "Background process:"
 msgstr "Porcessus di fond:"
 
-#: src/background.c:279 src/file.c:2193
+#: src/background.c:282 src/file.c:2192
 msgid " Background process error "
 msgstr " Aroke è processus di fond \""
 
-#: src/background.c:282
+#: src/background.c:285
 msgid " Child died unexpectedly "
 msgstr " L' efant a moru tot d' on côp "
 
-#: src/background.c:284
+#: src/background.c:287
 msgid " Unknown error in child "
 msgstr " Aroke nén cnoxhuwe dins l' efant "
 
-#: src/background.c:299
+#: src/background.c:302
 msgid " Background protocol error "
 msgstr " Aroke è protocole di fond "
 
-#: src/background.c:300
+#: src/background.c:303
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -3077,309 +3118,315 @@ msgstr ""
 " Li processus di fond nos a evoyî ene dimande po-z avu did pus\n"
 " d' årgumint ki çu ki dji såreu travayî avou. \n"
 
-#: src/boxes.c:63
+#: src/boxes.c:72
 msgid " Listing mode "
 msgstr " Cogne del djîveye "
 
-#: src/boxes.c:68
+#: src/boxes.c:77
 msgid "&Full file list"
 msgstr "Djîveye e&tire des fitchîs"
 
-#: src/boxes.c:69
+#: src/boxes.c:78
 msgid "&Brief file list"
 msgstr "&Coûte djîveye des fitchîs"
 
-#: src/boxes.c:70
+#: src/boxes.c:79
 msgid "&Long file list"
 msgstr "&Longue djîveye des fitchîs"
 
-#: src/boxes.c:71
+#: src/boxes.c:80
 msgid "&User defined:"
 msgstr "A vosse &Môde:"
 
-#: src/boxes.c:72
+#: src/boxes.c:81
 msgid "&Icon view"
 msgstr "Vey &Imådjetes"
 
-#: src/boxes.c:137
+#: src/boxes.c:144
 msgid "user &Mini status"
 msgstr "&Mini statut ûzeu"
 
-#: src/boxes.c:186
+#: src/boxes.c:193
 msgid "Listing mode"
 msgstr "Môde djîvéye"
 
-#: src/boxes.c:278
+#: src/boxes.c:281
 msgid "&Reverse"
 msgstr "Å&rvier"
 
-#: src/boxes.c:279 src/find.c:168
+#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "grandès <> ptitès letes"
 
-#: src/boxes.c:280
+#: src/boxes.c:283
 msgid "Sort order"
 msgstr "Ôrde po relire"
 
-#: src/boxes.c:379
+#: src/boxes.c:382
 msgid " confirm &Exit "
 msgstr " racertiner ki vos voloz bén &moussî foû "
 
-#: src/boxes.c:381
+#: src/boxes.c:384
 msgid " confirm e&Xecute "
 msgstr " racertiner ki vos voloz bén &enonder yåk "
 
-#: src/boxes.c:383
+#: src/boxes.c:386
 msgid " confirm o&Verwrite "
 msgstr " racertiner ki vos voloz bén &spotchî yåk "
 
-#: src/boxes.c:385
+#: src/boxes.c:388
 msgid " confirm &Delete "
 msgstr " racertiner ki vos voloz bén &disfacer yåk "
 
-#: src/boxes.c:391
+#: src/boxes.c:394
 msgid " Confirmation "
 msgstr " Racertinaedje "
 
 # Full?
-#: src/boxes.c:461
+#: src/boxes.c:465
 msgid "Full 8 bits output"
 msgstr "Sôrteye 8 bits"
 
-#: src/boxes.c:461
+#: src/boxes.c:465
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:461
+#: src/boxes.c:465
 msgid "7 bits"
 msgstr "7 bits"
 
 #  Pocwè "full"?
-#: src/boxes.c:468
+#: src/boxes.c:472 src/boxes.c:620
 msgid "F&ull 8 bits input"
 msgstr "I&ntreye 8 bits etire"
 
-#: src/boxes.c:476
+#: src/boxes.c:480 src/boxes.c:601
 msgid " Display bits "
 msgstr " Håyner bits "
 
-#: src/boxes.c:650
+#: src/boxes.c:585 src/selcodepage.c:48
+#, fuzzy
+msgid "Other 8 bit"
+msgstr "Ôte"
+
+#: src/boxes.c:604
+msgid "Input / display codepage:"
+msgstr ""
+
+#: src/boxes.c:623
+#, fuzzy
+msgid "&Select"
+msgstr " Tchwezi "
+
+#: src/boxes.c:758
 msgid "&Always use ftp proxy"
 msgstr "&Tofer eployî on proxy ftp"
 
-#: src/boxes.c:652
+#: src/boxes.c:760
 msgid "sec"
 msgstr "seg."
 
-#: src/boxes.c:656
+#: src/boxes.c:764
 msgid "ftpfs directory cache timeout:"
 msgstr "Tins a ratinde pol muchete do ridant ftpfs"
 
-#: src/boxes.c:660
+#: src/boxes.c:768
 msgid "ftp anonymous password:"
 msgstr "secret po ftp anonime:"
 
-#: src/boxes.c:667
+#: src/boxes.c:775
 msgid "Timeout for freeing VFSs:"
 msgstr "Tins a ratinde po delîberer les VFS:"
 
-#: src/boxes.c:673
+#: src/boxes.c:781
 msgid " Virtual File System Setting "
 msgstr " Apontiaedje do forveyu sistinme di fitchîs "
 
-#: src/boxes.c:732
+#: src/boxes.c:840
 msgid "Quick cd"
 msgstr "Abeye cd"
 
 #. want cd like completion
-#: src/boxes.c:737
+#: src/boxes.c:845
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:778
+#: src/boxes.c:885
 msgid "Symbolic link"
 msgstr "Loyén simbolike"
 
-#: src/boxes.c:815
+#: src/boxes.c:921
 msgid "Running "
 msgstr "Èn alaedje "
 
-#: src/boxes.c:816 src/find.c:724 src/find.c:965
-msgid "Stopped"
-msgstr "Djoké"
-
-#: src/boxes.c:877
+#: src/boxes.c:983
 msgid "&Stop"
 msgstr "&Håwe"
 
-#: src/boxes.c:878
+#: src/boxes.c:984
 msgid "&Resume"
 msgstr "&Rataker"
 
-#: src/boxes.c:879
+#: src/boxes.c:985
 msgid "&Kill"
 msgstr "&Touwer"
 
-#: src/boxes.c:918
+#: src/boxes.c:1024
 msgid "Background Jobs"
 msgstr "Bezognes di fond"
 
-#: src/chmod.c:91
+#: src/charsets.c:33 vfs/extfs.c:1337 vfs/sfs.c:301
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr ""
+
+#: src/charsets.c:174 src/charsets.c:187
+#, fuzzy, c-format
+msgid "Cannot translate from %s to %s"
+msgstr ""
+" Dji n' sai fé on stat sol fitchî \"%s\" \n"
+" %s "
+
+#: src/chmod.c:90
 msgid "execute/search by others"
 msgstr "enonder/cweri påzès ôtes"
 
-#: src/chmod.c:92
+#: src/chmod.c:91
 msgid "write by others"
 msgstr "sicrire påzès ôtes"
 
-#: src/chmod.c:93
+#: src/chmod.c:92
 msgid "read by others"
 msgstr "lére påzès ôtes"
 
-#: src/chmod.c:94
+#: src/chmod.c:93
 msgid "execute/search by group"
 msgstr "enonder/cweri på hopê"
 
-#: src/chmod.c:95
+#: src/chmod.c:94
 msgid "write by group"
 msgstr "lére på hopê"
 
-#: src/chmod.c:96
+#: src/chmod.c:95
 msgid "read by group"
 msgstr "sicrire på hopê"
 
-#: src/chmod.c:97
+#: src/chmod.c:96
 msgid "execute/search by owner"
 msgstr "enonder/cweri pa prôpietaire"
 
-#: src/chmod.c:98
+#: src/chmod.c:97
 msgid "write by owner"
 msgstr "sicrire pa prôpietaire"
 
-#: src/chmod.c:99
+#: src/chmod.c:98
 msgid "read by owner"
 msgstr "lére pa prôpietaire"
 
-#: src/chmod.c:100
+#: src/chmod.c:99
 msgid "sticky bit"
 msgstr "bit aclapé"
 
-#: src/chmod.c:101
+#: src/chmod.c:100
 msgid "set group ID on execution"
 msgstr "mete l' ID pol hopê a l' enondaedje"
 
-#: src/chmod.c:102
+#: src/chmod.c:101
 msgid "set user ID on execution"
 msgstr "mete l' ID po l' ûzeu a l' enondaedje"
 
-#: src/chmod.c:112
+#: src/chmod.c:111
 msgid "C&lear marked"
 msgstr "&Waester li mårke"
 
-#: src/chmod.c:113
+#: src/chmod.c:112
 msgid "S&et marked"
 msgstr "M&ete li mårke"
 
-#: src/chmod.c:114
+#: src/chmod.c:113
 msgid "&Marked all"
 msgstr "&Mårker tot"
 
-#: src/chmod.c:148
+#: src/chmod.c:141
 msgid "Permissions (Octal)"
 msgstr "Permissions (Octal)"
 
-#: src/chmod.c:150
+#: src/chmod.c:143
 msgid "Owner name"
 msgstr "No do prôpietaire"
 
-#: src/chmod.c:152
+#: src/chmod.c:145
 msgid "Group name"
 msgstr "No do hopê"
 
-#: src/chmod.c:156
+#: src/chmod.c:149
 msgid " Chmod command "
 msgstr " Comande Chmod "
 
-#: src/chmod.c:158 src/chown.c:120
+#: src/chmod.c:151 src/chown.c:121
 msgid " Permission "
 msgstr " Permission "
 
-#: src/chmod.c:165
+#: src/chmod.c:158
 msgid "Use SPACE to change"
 msgstr "Eployîz ESPÅCE po candjî"
 
-#: src/chmod.c:167
+#: src/chmod.c:160
 msgid "an option, ARROW KEYS"
 msgstr "ene tchûze, les FLETCHES"
 
-#: src/chmod.c:169
+#: src/chmod.c:162
 msgid "to move between options"
 msgstr "po bodjî d' ene tchûze a l' ôte"
 
-#: src/chmod.c:171
+#: src/chmod.c:164
 msgid "and T or INS to mark"
 msgstr "eyèt T ou INS po mårker"
 
-#: src/chmod.c:229
+#: src/chmod.c:220
 msgid "Chmod command"
 msgstr "Comande Chmod"
 
-#: src/chmod.c:314
-msgid " I can't run the Chmod command on an extfs "
-msgstr " Dji n' såreu fé on chmod so on extfs"
-
-#: src/chmod.c:318
-msgid " I can't run the Chmod command on a tarfs "
-msgstr " Dji n' såreu enonder li cmande Chmod so on tarfs "
-
-#: src/chown.c:81
+#: src/chown.c:82
 msgid "Set &users"
 msgstr "Mate les û&zeus"
 
-#: src/chown.c:82
+#: src/chown.c:83
 msgid "Set &groups"
 msgstr "Mate les &hopês"
 
-#: src/chown.c:112
+#: src/chown.c:113
 msgid " Name "
 msgstr " No "
 
-#: src/chown.c:114
+#: src/chown.c:115
 msgid " Owner name "
 msgstr " No do prôpietaire "
 
-#: src/chown.c:116 src/chown.c:128
+#: src/chown.c:117 src/chown.c:129
 msgid " Group name "
 msgstr " No do hopê "
 
-#: src/chown.c:118
+#: src/chown.c:119
 msgid " Size "
 msgstr " Grandeu "
 
-#: src/chown.c:124
+#: src/chown.c:125
 msgid " Chown command "
 msgstr " Comande chown "
 
-#: src/chown.c:126
+#: src/chown.c:127
 msgid " User name "
 msgstr " No di l' ûzeu "
 
-#: src/chown.c:192
+#: src/chown.c:193
 msgid "<Unknown user>"
 msgstr "<Ûzeu nén cnoxhu>"
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:193
+#: src/chown.c:194
 msgid "<Unknown group>"
 msgstr "<Hopê nén cnoxhu>"
-
-#: src/chown.c:261
-msgid " I can't run the Chown command on an extfs "
-msgstr " Dji n' såreu enonder li cmande chown so èn extfs "
-
-#: src/chown.c:265
-msgid " I can't run the Chown command on a tarfs "
-msgstr " Dji n' såreu enonder li cmande chown so èn tarfs "
 
 #: src/cmd.c:194
 #, c-format
@@ -3394,7 +3441,7 @@ msgstr " CD "
 msgid "Files tagged, want to cd?"
 msgstr "Essegne metuwe so les fitchîs, voloz-ve fé on cd?"
 
-#: src/cmd.c:250 src/cmd.c:714 src/cmd.c:734
+#: src/cmd.c:250 src/cmd.c:724 src/cmd.c:743
 msgid "Could not change directory"
 msgstr "Dji n' sai candjî di ridant"
 
@@ -3422,89 +3469,89 @@ msgstr "Fé on novea Ridant"
 msgid " Enter directory name:"
 msgstr " No do ridant:"
 
-#: src/cmd.c:449
+#: src/cmd.c:452
 msgid " Filter "
 msgstr " Passete "
 
-#: src/cmd.c:449
+#: src/cmd.c:453
 msgid " Set expression for filtering filenames"
 msgstr " Diner ene ratoûrneure po passer les nos di fitchîs"
 
-#: src/cmd.c:515
+#: src/cmd.c:523
 msgid " Select "
 msgstr " Tchwezi "
 
-#: src/cmd.c:567
+#: src/cmd.c:577
 msgid " Unselect "
 msgstr " Distchwezi "
 
-#: src/cmd.c:641
+#: src/cmd.c:651
 msgid "Extension file edit"
 msgstr "Aspougnî les cawetes di fitchîs"
 
-#: src/cmd.c:642
+#: src/cmd.c:652
 msgid " Which extension file you want to edit? "
 msgstr " Kénès cawetes di fitchîs voloz-ve aspougnî? "
 
-#: src/cmd.c:643
+#: src/cmd.c:653
 msgid "&User"
 msgstr "&Ûzeu"
 
-#: src/cmd.c:643 src/cmd.c:671
+#: src/cmd.c:653 src/cmd.c:681
 msgid "&System Wide"
 msgstr "&Tot avå li Sistinme"
 
-#: src/cmd.c:668
+#: src/cmd.c:678
 msgid " Menu edit "
 msgstr " Aspougnî menu "
 
-#: src/cmd.c:669
+#: src/cmd.c:679
 msgid " Which menu file will you edit ? "
 msgstr " Ké fitchî menu voloz-ve aspougnî? "
 
-#: src/cmd.c:671
+#: src/cmd.c:681
 msgid "&Local"
 msgstr "&Locå"
 
-#: src/cmd.c:671
+#: src/cmd.c:681
 msgid "&Home"
 msgstr "&Måjhon"
 
-#: src/cmd.c:860
+#: src/cmd.c:869
 msgid " Compare directories "
 msgstr " Rimete les ridants "
 
-#: src/cmd.c:860
+#: src/cmd.c:869
 msgid " Select compare method: "
 msgstr " Tchwezi li manire di rmete: "
 
-#: src/cmd.c:861
+#: src/cmd.c:870
 msgid "&Quick"
 msgstr "A&beye"
 
-#: src/cmd.c:861
+#: src/cmd.c:870
 msgid "&Size only"
 msgstr "Rén ki li &Grandeu"
 
-#: src/cmd.c:861
+#: src/cmd.c:870
 msgid "&Thorough"
 msgstr "E&tir"
 
-#: src/cmd.c:871
+#: src/cmd.c:880
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 " Les deus paneas dvèt esse veyus a môde di djîveye por vos savu eployî cisse "
 "comande "
 
-#: src/cmd.c:886
+#: src/cmd.c:894
 msgid " The command history is empty "
 msgstr " I gn a rén è l' istwere des cmandes "
 
-#: src/cmd.c:892
+#: src/cmd.c:900
 msgid " Command history "
 msgstr " Istwere des cmandes "
 
-#: src/cmd.c:932
+#: src/cmd.c:940
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -3512,121 +3559,117 @@ msgstr ""
 " Ci n' est nén on xterm ni ene conzole di Linux; \n"
 " dji n' såreu discandjî les paneas. "
 
-#: src/cmd.c:971
+#: src/cmd.c:975
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Tapez 'exit' po-z eraler a Midnight Commander"
 
-#: src/cmd.c:1027
-#, c-format
-msgid ""
-" Couldn't stat %s \n"
-" %s "
-msgstr ""
-" Dji n' sai fé on %s \n"
-" %s "
-
-#: src/cmd.c:1036 src/cmd.c:1038
+#: src/cmd.c:1023 src/cmd.c:1025
 msgid " Link "
 msgstr " Loyén "
 
-#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1708
+#: src/cmd.c:1024 src/cmd.c:1161 src/file.c:1707
 msgid " to:"
 msgstr " a:"
 
-#: src/cmd.c:1048
+#: src/cmd.c:1035
 #, c-format
 msgid " link: %s "
 msgstr " loyén: %s "
 
-#: src/cmd.c:1081
+#: src/cmd.c:1062
 #, c-format
 msgid " symlink: %s "
 msgstr " loyén simbolike: %s "
 
-#: src/cmd.c:1135
+#: src/cmd.c:1117
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr "'%s' e-st on loyén simbolike après:  "
 
-#: src/cmd.c:1140
+#: src/cmd.c:1122
 msgid " Edit symlink "
 msgstr " Aspougnî li loyén simbolike "
 
-#: src/cmd.c:1145
+#: src/cmd.c:1127
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " aspougnî li loyén simbolike, dji n' sai waester %s: %s "
 
-#: src/cmd.c:1149
+#: src/cmd.c:1131
 #, c-format
 msgid " edit symlink: %s "
 msgstr " aspougnî loyén simbolike : %s "
 
-#: src/cmd.c:1176
+#: src/cmd.c:1143
+#, fuzzy, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "Loyén simbolike"
+
+#: src/cmd.c:1161
 msgid " Link symbolically "
 msgstr " Fé on loyén simbolike "
 
-#: src/cmd.c:1177
+#: src/cmd.c:1162
 msgid " Relative symlink "
 msgstr " Loyén simbolike relatif "
 
-#: src/cmd.c:1188
+#: src/cmd.c:1173
 #, c-format
 msgid " relative symlink: %s "
 msgstr " loyén simbolike relatif: %s "
 
-#: src/cmd.c:1263
+#: src/cmd.c:1246
 msgid "Using default locale"
 msgstr "Eployî li prémetuwe locåle"
 
-#: src/cmd.c:1265
+#: src/cmd.c:1248
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "Dj' eploye li locåle «%s» (del variåbe d' evironmint %s)"
 
-#: src/cmd.c:1351
+#: src/cmd.c:1310
 msgid " Enter machine name (F1 for details): "
 msgstr " Intrer li no di l' éndjole (F1 po ndè savu did pus): "
 
-#: src/cmd.c:1378
+#: src/cmd.c:1337
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Dji n' a savu fé on chdir viè %s "
 
-#: src/cmd.c:1385 src/widget.c:1151
+#: src/cmd.c:1344 src/widget.c:1151
 msgid " Link to a remote machine "
 msgstr " Loyén après ene éndjole å lon "
 
-#: src/cmd.c:1391 src/widget.c:1152
+#: src/cmd.c:1350 src/widget.c:1152
 msgid " FTP to machine "
 msgstr " FTP après ene éndjole "
 
-#: src/cmd.c:1397 src/widget.c:1153
+#: src/cmd.c:1356 src/widget.c:1153
 msgid " SMB link to machine "
 msgstr " raloyaedje SMB so ene éndjole "
 
-#: src/cmd.c:1407
+#: src/cmd.c:1366
 msgid " Socket source routing setup "
 msgstr " Apontiyî l' aminaedje do soûrdant do soket "
 
 # hop???
-#: src/cmd.c:1408
+#: src/cmd.c:1367
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1416
+#: src/cmd.c:1375
 msgid " Host name "
 msgstr " No do lodjeu "
 
-#: src/cmd.c:1416
+#: src/cmd.c:1375
 msgid " Error while looking up IP address "
 msgstr " Yåk n' a nén stî come dji waitîve après l' adresse IP "
 
-#: src/cmd.c:1427
+#: src/cmd.c:1386
 msgid " Undelete files on an ext2 file system "
 msgstr " Disrafacer des fitchîs so on sistinme di fitchî ext2 "
 
-#: src/cmd.c:1428
+#: src/cmd.c:1387
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3634,15 +3677,15 @@ msgstr ""
 " Intrer l' éndjin (sins li /dev/) ki vos voloz disrafacer\n"
 "   des fitchîs dsu: (F1 po ndè savu did pus)"
 
-#: src/cmd.c:1478
+#: src/cmd.c:1439
 msgid " Setup saved to ~/"
 msgstr " Apontiaedje schapé dins ~/"
 
-#: src/cmd.c:1483
+#: src/cmd.c:1441
 msgid " Setup "
 msgstr " Apontiaedje "
 
-#: src/command.c:170
+#: src/command.c:171
 #, c-format
 msgid ""
 " Cannot chdir to '%s' \n"
@@ -3651,7 +3694,7 @@ msgstr ""
 " Dji n' sai fé on chdir viè '%s' \n"
 " %s "
 
-#: src/command.c:198
+#: src/command.c:199
 msgid " You can not execute commands on non-local filesystems"
 msgstr ""
 " Vos n' poloz nén mete èn oûve des cmande so on sistinme di fitchî nén locå"
@@ -3724,16 +3767,16 @@ msgstr "&Da"
 msgid "&Group"
 msgstr "&Hopê"
 
-#: src/dir.c:396
+#: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Li fitchî «%s» egzisteye mins dji n' sai fé on stat dissu: %s"
 
-#: src/dir.c:667
+#: src/dir.c:698
 msgid "Unknown"
 msgstr "Nén cnoxhu"
 
-#: src/ext.c:146 src/user.c:546
+#: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -3742,25 +3785,19 @@ msgstr ""
 " Dji n' sai fé on passant fitchî di cmande \n"
 " %s "
 
-#: src/ext.c:161 src/user.c:568
+#: src/ext.c:164 src/user.c:579
 msgid " Parameter "
 msgstr " Pondant "
 
-#: src/ext.c:311
-msgid " Cannot execute commands on a Virtual File System directory "
-msgstr ""
-" Dji n' sai enonder des cmandes dins on ridant k' est so on forveyu sistinme "
-"di fitchîs "
-
-#: src/ext.c:411
+#: src/ext.c:416
 msgid " file error"
 msgstr " aroke è fitchî"
 
-#: src/ext.c:412
+#: src/ext.c:417
 msgid "Format of the "
 msgstr " Li cogne do fitchî "
 
-#: src/ext.c:414
+#: src/ext.c:419
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -3768,15 +3805,15 @@ msgid ""
 "Midnight Commander package."
 msgstr ""
 
-#: src/ext.c:428
+#: src/ext.c:433
 msgid " file error "
 msgstr " aroke è fitchî "
 
-#: src/ext.c:429
+#: src/ext.c:434
 msgid "Format of the ~/"
 msgstr "Li cogne do fitchî ~/"
 
-#: src/ext.c:429
+#: src/ext.c:434
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3786,7 +3823,7 @@ msgstr ""
 "avou li modeye 3.0. Vos l' duvrîz seye-t i \n"
 "copyî foû di "
 
-#: src/ext.c:431
+#: src/ext.c:436
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3794,124 +3831,19 @@ msgstr ""
 "mc.ext, seye-t i eployî ci fitchî la\n"
 "come egzimpe por vos vey comint-ce k' on s' î prind.\n"
 
-#: src/ext.c:433
+#: src/ext.c:438
 msgid "mc.ext will be used for this moment."
 msgstr "Nos nos siervrans di mc.ext pol moumint."
 
-#: src/textconf.c:12
-msgid "Edition: "
-msgstr "Aspougnaedje: "
-
-#: src/textconf.c:13
-msgid "text mode"
-msgstr "môde tecsse"
-
-#: src/textconf.c:15
-msgid " with X11 support to read modifiers"
-msgstr ""
-
-#: src/textconf.c:20
-msgid "Virtual File System: tarfs, extfs"
-msgstr "Forveyu sistinme di fitchîs: tarfs, extfs"
-
-#: src/textconf.c:22
-msgid ", ftpfs"
-msgstr ", ftpfs"
-
-#: src/textconf.c:24
-msgid " (proxies: hsc proxy)"
-msgstr ""
-
-#: src/textconf.c:26
-msgid ", mcfs"
-msgstr ", mcfs"
-
-#: src/textconf.c:28
-msgid " (with termnet support)"
-msgstr " (avou sopoirt termnet)"
-
-#: src/textconf.c:31
-msgid ", smbfs"
-msgstr ", smbfs"
-
-#: src/textconf.c:35
-msgid ", undelfs"
-msgstr ", undelfs"
-
-#: src/textconf.c:41
-msgid "With builtin Editor\n"
-msgstr ""
-
-#: src/textconf.c:44
-msgid "Using "
-msgstr "Dj' eploye "
-
-#: src/textconf.c:47
-msgid "system-installed "
-msgstr ""
-
-#: src/textconf.c:49
-msgid "S-lang library with "
-msgstr "lîvreye S-lang avou "
-
-#: src/textconf.c:52
-msgid "terminfo"
-msgstr "terminfo"
-
-#: src/textconf.c:55
-msgid "termcap"
-msgstr "termcap"
-
-#: src/textconf.c:57
-msgid "an unknown terminal"
-msgstr "on terminå nén cnoxhu"
-
-#: src/textconf.c:60
-msgid " database"
-msgstr " båze di dneyes"
-
-#: src/textconf.c:63
-msgid "the ncurses library"
-msgstr "li lîvreye ncurses"
-
-#: src/textconf.c:65
-msgid "some unknown curses library"
-msgstr "ene lîvreye curses nén cnoxhuwe"
-
-#: src/textconf.c:70
-msgid "With subshell support: "
-msgstr ""
-
-#: src/textconf.c:72
-#, fuzzy
-msgid "optional"
-msgstr "Tchûzes"
-
-#: src/textconf.c:74
-msgid "as default"
-msgstr "prémetu"
-
-#: src/textconf.c:80
-msgid "With support for background operations\n"
-msgstr "Avou sopoirt po les bouyes di fond\n"
-
-#: src/textconf.c:84
-msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "avou sopoirt soris dins xterm èt li conzôle Linux.\n"
-
-#: src/textconf.c:86
-msgid "with mouse support on xterm.\n"
-msgstr "avou sopoirt soris dins xterm.\n"
-
-#: src/file.c:154 src/tree.c:639
+#: src/file.c:154 src/tree.c:640
 msgid " Copy "
 msgstr " Copyî "
 
-#: src/file.c:155 src/tree.c:677
+#: src/file.c:155 src/tree.c:681
 msgid " Move "
 msgstr " Bodjî "
 
-#: src/file.c:156 src/tree.c:747
+#: src/file.c:156 src/tree.c:754
 msgid " Delete "
 msgstr " Disfacer "
 
@@ -4093,7 +4025,7 @@ msgstr "Dj' a rapexhî on fitchî nén etir. El fåt-i wårder?"
 msgid "&Delete"
 msgstr "&Disfacer"
 
-#: src/file.c:803 src/hotlist.c:1424
+#: src/file.c:803 src/hotlist.c:1421
 msgid "&Keep"
 msgstr "&Wårder"
 
@@ -4223,10 +4155,6 @@ msgstr ""
 " Dji n' sai waester li ridant \"%s\" \n"
 " %s "
 
-#: src/file.c:1559
-msgid " Internal error: get_file \n"
-msgstr " Divintrinne aroke: get_file \n"
-
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
 #. * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -4236,15 +4164,15 @@ msgstr " Divintrinne aroke: get_file \n"
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Copy"
 msgstr "1Copyî"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Move"
 msgstr "1Bodjî"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Delete"
 msgstr "1Disfacer"
 
@@ -4257,75 +4185,75 @@ msgstr "1Disfacer"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1696
+#: src/file.c:1695
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1698
+#: src/file.c:1697
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1701
+#: src/file.c:1700
 #, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-#: src/file.c:1703
+#: src/file.c:1702
 #, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:515
+#: src/file.c:1706 vfs/fish.c:518
 msgid "file"
 msgstr "fitchî"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "files"
 msgstr "fitchîs"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directory"
 msgstr "ridant"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directories"
 msgstr "ridants"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid "files/directories"
 msgstr "fitchîs/ridants"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid " with source mask:"
 msgstr " avou li masse soûrdant:"
 
-#: src/file.c:1860
+#: src/file.c:1859
 msgid " Cannot operate on \"..\"! "
 msgstr " Dji n' sai ovrer so \"..\"! "
 
-#: src/file.c:1879 src/screen.c:2104
+#: src/file.c:1878 src/screen.c:2103
 msgid "Yes"
 msgstr "Oyi"
 
-#: src/file.c:1879 src/screen.c:2104
+#: src/file.c:1878 src/screen.c:2103
 msgid "No"
 msgstr "Neni"
 
-#: src/file.c:1932
+#: src/file.c:1931
 msgid " Sorry, I could not put the job in background "
 msgstr " Dji rgrete, dji n' sai mete ci bezogne la è fond "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Internal failure "
 msgstr " Divintrinne aroke "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Unknown file operation "
 msgstr " Dji n' conoxhe nén cist ovraedje la so les fitchîs "
 
-#: src/file.c:2033
+#: src/file.c:2032
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -4334,15 +4262,15 @@ msgstr ""
 " Li såme \"%s\" doet esse on ridant \n"
 " %s "
 
-#: src/file.c:2194
+#: src/file.c:2193
 msgid "&Retry"
 msgstr "&Rissayî"
 
-#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:579
+#: src/file.c:2193 src/file.c:2254 src/filegui.c:258 src/filegui.c:560
 msgid "&Abort"
 msgstr "Ri&noncî"
 
-#: src/file.c:2246
+#: src/file.c:2245
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -4352,7 +4280,7 @@ msgstr ""
 "   Li ridant n' est nén vûde.   \n"
 "   El fåt-i disfacer avou tos ses efants? "
 
-#: src/file.c:2247
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -4362,134 +4290,134 @@ msgstr ""
 "   Bezogne di fond: li ridant n' est nén vûde \n"
 "   El fåt-i disfacer avou tos ses efants? "
 
-#: src/file.c:2254
+#: src/file.c:2253
 msgid "a&ll"
 msgstr "&Tertos"
 
-#: src/file.c:2254 src/filegui.c:582
+#: src/file.c:2253 src/filegui.c:563
 msgid "non&E"
 msgstr "&Nouk"
 
-#: src/file.c:2264
+#: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Tapez 'oyi' si vos voloz disfacer PO DO BON "
 
-#: src/file.c:2266
+#: src/file.c:2265
 msgid "all the directories "
 msgstr "tos les ridants "
 
-#: src/file.c:2268
+#: src/file.c:2267
 msgid " Recursive Delete "
 msgstr " Disfacer les Efants "
 
-#: src/file.c:2269
+#: src/file.c:2268
 msgid " Background process: Recursive Delete "
 msgstr " Bezogne di fond: Disfacer avou ses efants "
 
-#: src/filegui.c:412
+#: src/filegui.c:404
 msgid "File"
 msgstr "fitchî"
 
-#: src/filegui.c:435
+#: src/filegui.c:427
 msgid "Count"
 msgstr "Conter"
 
-#: src/filegui.c:456
+#: src/filegui.c:448
 msgid "Bytes"
 msgstr "Bytes"
 
-#: src/filegui.c:493
+#: src/filegui.c:481
 msgid "Source"
 msgstr "Soûrdant"
 
-#: src/filegui.c:516
+#: src/filegui.c:504
 msgid "Target"
 msgstr "Såme"
 
-#: src/filegui.c:538
+#: src/filegui.c:526
 msgid "Deleting"
 msgstr "Dji disface"
 
-#: src/filegui.c:577
+#: src/filegui.c:558
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Li fitchî såme \"%s\" egzisteye dedja!"
 
-#: src/filegui.c:580
+#: src/filegui.c:561
 msgid "if &Size differs"
 msgstr "si li &grandeu n' est nén li minme"
 
-#: src/filegui.c:583
+#: src/filegui.c:564
 msgid "&Update"
 msgstr "&Mete a djoû"
 
-#: src/filegui.c:585
+#: src/filegui.c:566
 msgid "Overwrite all targets?"
 msgstr "Sipotchî totes les såmes"
 
-#: src/filegui.c:587
+#: src/filegui.c:568
 msgid "&Reget"
 msgstr "&Rapexhî"
 
-#: src/filegui.c:588
+#: src/filegui.c:569
 msgid "ap&Pend"
 msgstr "ra&djouter å coron"
 
-#: src/filegui.c:591
+#: src/filegui.c:572
 msgid "Overwrite this target?"
 msgstr "Sipotchî cisse såme chal?"
 
-#: src/filegui.c:593
+#: src/filegui.c:574
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Date såme: %s, grandeu %d"
 
-#: src/filegui.c:595
+#: src/filegui.c:576
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Date soûrdant: %s, grandeu %d"
 
-#: src/filegui.c:677
+#: src/filegui.c:658
 msgid " File exists "
 msgstr " Li fitchî egzisteye dedja "
 
-#: src/filegui.c:678
+#: src/filegui.c:659
 msgid " Background process: File exists "
 msgstr " Bezogne di fond: li fitchî egzisteye dedja "
 
 #. follow symlinks and preserve Attributes must be the first
-#: src/filegui.c:790
+#: src/filegui.c:771
 msgid "preserve &Attributes"
 msgstr "wårder les &Atributs"
 
 #. &op_preserve
-#: src/filegui.c:792
+#: src/filegui.c:773
 msgid "follow &Links"
 msgstr "shure les &Loyéns"
 
 #. &file_mask_op_follow_links
-#: src/filegui.c:794
+#: src/filegui.c:775
 msgid "to:"
 msgstr "a:"
 
-#: src/filegui.c:795
+#: src/filegui.c:776
 msgid "&Using shell patterns"
 msgstr "Dji m' &sieve des modeles do shell"
 
-#: src/filegui.c:816
+#: src/filegui.c:797
 msgid "&Background"
 msgstr "&Fond"
 
-#: src/filegui.c:825
+#: src/filegui.c:806
 msgid "&Stable Symlinks"
 msgstr "&Stocaesse loyéns simbolikes"
 
 #. &file_mask_stable_symlinks
-#: src/filegui.c:827
+#: src/filegui.c:808
 msgid "&Dive into subdir if exists"
 msgstr "&Plonker ezès ridants efants, s' i gn a"
 
-#: src/filegui.c:986
+#: src/filegui.c:967
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -4498,116 +4426,41 @@ msgstr ""
 "Li modele soûrdant n' est nén valåbe `%s' \n"
 " %s "
 
-#: src/find.c:128
+#: src/find.c:105
 msgid "&Suspend"
 msgstr "Mete a &Djok"
 
-#: src/find.c:129
+#: src/find.c:106
 msgid "Con&tinue"
 msgstr "&Tcheryî"
 
-#: src/find.c:130
+#: src/find.c:107
 msgid "&Chdir"
 msgstr "&Chdir"
 
-#: src/find.c:131
+#: src/find.c:108
 msgid "&Again"
 msgstr "&Eco on côp"
 
-#: src/find.c:132
+#: src/find.c:109
 msgid "&Quit"
 msgstr "&Cwiter"
 
-#: src/find.c:133 src/panelize.c:89
+#: src/find.c:110 src/panelize.c:86
 msgid "Pane&lize"
 msgstr "Mete è &Panea"
 
-#: src/find.c:134
+#: src/find.c:111
 msgid "&View - F3"
 msgstr "&Loukî - F3"
 
-#: src/find.c:135
+#: src/find.c:112
 msgid "&Edit - F4"
 msgstr "&Aspougnî - F4"
 
-#: src/find.c:174
-msgid "Start at:"
-msgstr "Ataker a:"
-
-#: src/find.c:174
-msgid "Filename:"
-msgstr "No do fitchî:"
-
-#: src/find.c:174
-msgid "Content: "
-msgstr "Ådvins:"
-
-#: src/find.c:175 src/main.c:1252 src/main.c:1276
+#: src/find.c:149 src/main.c:1260 src/main.c:1284
 msgid "&Tree"
 msgstr "Å&be"
-
-#: src/find.c:231
-msgid "Find File"
-msgstr "Trover Fitchî"
-
-#: src/find.c:458
-#, c-format
-msgid "Grepping in %s"
-msgstr "Dji cwîr dins %s"
-
-#: src/find.c:495
-msgid " Find/read "
-msgstr " Trover/Lére "
-
-#: src/find.c:495
-msgid " Problem reading from child "
-msgstr " Yåk ni va nén cwand dji saye di lére dins l' efant "
-
-#: src/find.c:542
-msgid "Finished"
-msgstr "Fwait"
-
-#: src/find.c:566 src/view.c:1507
-#, c-format
-msgid "Searching %s"
-msgstr "Dji cwîr %s"
-
-#: src/find.c:722 src/find.c:762
-msgid "Suspend"
-msgstr "Djoker"
-
-#: src/find.c:722
-msgid "Restart"
-msgstr "Renonder"
-
-#: src/find.c:724 src/find.c:826 src/find.c:965 src/find.c:1061
-msgid "Searching"
-msgstr "Dji cwîr"
-
-#: src/find.c:755 src/find.c:1036
-msgid "Find file"
-msgstr "Trover fitchî"
-
-#. The buttons
-#: src/find.c:760
-msgid "Change to this directory"
-msgstr "Potchî dins ci ridant chal"
-
-#: src/find.c:761
-msgid "Search again"
-msgstr "Cweri eco ene feye"
-
-#: src/find.c:766
-msgid "View this file"
-msgstr "Loukî ci fitchî chal"
-
-#: src/find.c:767
-msgid "Edit this file"
-msgstr "Aspougnî ci fitchî chal"
-
-#: src/find.c:768
-msgid "Send the results to a Panel"
-msgstr "Evoyî li rezultat dins on panea"
 
 #: src/help.c:275
 msgid ""
@@ -4629,7 +4482,7 @@ msgstr " Dji n' trove nou nuk [Ådvins] è fitchî d' aidance "
 msgid " Help "
 msgstr " Aide "
 
-#: src/help.c:762 src/user.c:679
+#: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -4638,16 +4491,16 @@ msgstr ""
 " Dji n' sai drovi li fitchî %s \n"
 " %s "
 
-#: src/help.c:767
+#: src/help.c:779
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " Dji n' trove nén li nuk %s è fitchî d' aidance "
 
-#: src/help.c:804
+#: src/help.c:813
 msgid "Index"
 msgstr "Index"
 
-#: src/help.c:806
+#: src/help.c:815
 msgid "Prev"
 msgstr "Divant"
 
@@ -4655,15 +4508,15 @@ msgstr "Divant"
 msgid "&Move"
 msgstr "&Bodjî"
 
-#: src/hotlist.c:129 src/hotlist.c:1424 src/panelize.c:88 src/wtools.c:377
+#: src/hotlist.c:129 src/hotlist.c:1421 src/panelize.c:85 src/wtools.c:371
 msgid "&Remove"
 msgstr "&Waester"
 
-#: src/hotlist.c:130 src/hotlist.c:799 src/hotlist.c:896
+#: src/hotlist.c:130 src/hotlist.c:796 src/hotlist.c:893
 msgid "&Append"
 msgstr "&Mete å coron"
 
-#: src/hotlist.c:131 src/hotlist.c:797 src/hotlist.c:894
+#: src/hotlist.c:131 src/hotlist.c:794 src/hotlist.c:891
 msgid "&Insert"
 msgstr "&Sititchî"
 
@@ -4691,61 +4544,62 @@ msgstr "Ca&ndjî A"
 msgid "Subgroup - press ENTER to see list"
 msgstr "Hopê efant - tchôkîz so ENTER po vey li djîveye"
 
-#: src/hotlist.c:603
+#: src/hotlist.c:590
 msgid "Active VFS directories"
 msgstr "Ovrants ridants VFS"
 
-#: src/hotlist.c:603
+#: src/hotlist.c:590
 msgid "Directory hotlist"
 msgstr "Ridant pol Djîveye Rascoûrti"
 
-#: src/hotlist.c:621
+#: src/hotlist.c:607
 msgid " Directory path "
 msgstr " Tchimin do ridant "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:624 src/hotlist.c:670
+#: src/hotlist.c:610 src/hotlist.c:654
 msgid " Directory label "
 msgstr " Etikete do ridant "
 
-#: src/hotlist.c:645
-msgid "Moving "
+#: src/hotlist.c:630
+#, fuzzy, c-format
+msgid "Moving %s"
 msgstr "Dji bodje"
 
-#: src/hotlist.c:873
+#: src/hotlist.c:870
 msgid "New hotlist entry"
 msgstr "Novele intreye el djîveye rascoûrti"
 
-#: src/hotlist.c:873
+#: src/hotlist.c:870
 msgid "Directory label"
 msgstr "No do ridant"
 
-#: src/hotlist.c:873
+#: src/hotlist.c:870
 msgid "Directory path"
 msgstr "Tchimin viè li ridant"
 
-#: src/hotlist.c:954
+#: src/hotlist.c:951
 msgid " New hotlist group "
 msgstr " Novea hopê el djîveye rascoûrti "
 
-#: src/hotlist.c:954
+#: src/hotlist.c:951
 msgid "Name of new group"
 msgstr "No do novea hopê"
 
-#: src/hotlist.c:969
+#: src/hotlist.c:966
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Etikete po \"%s\":"
 
-#: src/hotlist.c:973
+#: src/hotlist.c:970
 msgid " Add to hotlist "
 msgstr " Radjouter el djîveye rascoûrti "
 
-#: src/hotlist.c:1010
+#: src/hotlist.c:1007
 msgid " Remove: "
 msgstr " Waester: "
 
-#: src/hotlist.c:1014
+#: src/hotlist.c:1011
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -4755,52 +4609,52 @@ msgstr ""
 " Li hopê n' est nén vûde.\n"
 " El fåt-i waester?"
 
-#: src/hotlist.c:1359
+#: src/hotlist.c:1356
 msgid " Top level group "
 msgstr " Hopê do pus hôt livea "
 
-#: src/hotlist.c:1375
+#: src/hotlist.c:1372
 msgid "Hotlist is now kept in file ~/"
 msgstr "Asteure, li djîveye rascoûrti si trove è fitchî ~/"
 
-#: src/hotlist.c:1377
+#: src/hotlist.c:1374
 msgid "MC will load hotlist from ~/"
 msgstr "MC va tcherdjî li djîveye rascoûrti foû di ~/"
 
-#: src/hotlist.c:1379
+#: src/hotlist.c:1376
 msgid "and then delete [Hotlist] section there"
 msgstr "adon, i disfaçrè li pårteye [Hotlist]"
 
-#: src/hotlist.c:1381 src/hotlist.c:1400 src/hotlist.c:1423 src/hotlist.c:1448
+#: src/hotlist.c:1378 src/hotlist.c:1397 src/hotlist.c:1420 src/hotlist.c:1445
 msgid " Hotlist Load "
 msgstr " Dji tchedje li djîveye rascoûrti "
 
-#: src/hotlist.c:1397 src/hotlist.c:1445
+#: src/hotlist.c:1394 src/hotlist.c:1442
 msgid "MC was unable to write ~/"
 msgstr "MC n' a savu scrire li fitchî ~/"
 
-#: src/hotlist.c:1398
+#: src/hotlist.c:1395
 msgid " file, your old hotlist entries were not deleted"
 msgstr ""
 "Do côp, vos vîyès intreyes el djîveye rascoûrti n' ont nén stî disfaceyes"
 
-#: src/hotlist.c:1412
+#: src/hotlist.c:1409
 msgid "You have ~/"
 msgstr "Vos avoz li fitchî ~/"
 
-#: src/hotlist.c:1412
+#: src/hotlist.c:1409
 msgid " file and [Hotlist] section in ~/"
 msgstr " eyèt ene pårteye [Hotlist] divins ~/"
 
-#: src/hotlist.c:1413
+#: src/hotlist.c:1410
 msgid "Your ~/"
 msgstr "Vosse ~/"
 
-#: src/hotlist.c:1413
+#: src/hotlist.c:1410
 msgid " most probably was created\n"
 msgstr " a stî fwait dandjureu\n"
 
-#: src/hotlist.c:1414
+#: src/hotlist.c:1411
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -4808,7 +4662,7 @@ msgstr ""
 "avou ene vîye modeye è disvelopmint di MC\n"
 "èt il est pus a djoû ki ~/"
 
-#: src/hotlist.c:1415
+#: src/hotlist.c:1412
 msgid ""
 " entries\n"
 "\n"
@@ -4816,7 +4670,7 @@ msgstr ""
 " intreyes\n"
 "\n"
 
-#: src/hotlist.c:1416
+#: src/hotlist.c:1413
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4826,7 +4680,7 @@ msgstr ""
 "\n"
 "  Waester - waester les vîyès intreyes foû del djîveye rascoûrti ~/"
 
-#: src/hotlist.c:1418
+#: src/hotlist.c:1415
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -4837,114 +4691,114 @@ msgstr ""
 "  Maxhî    - radjouter les vîyès intreyes al djîveye rascoûrti come "
 "\"Intreyes di ~/"
 
-#: src/hotlist.c:1424
+#: src/hotlist.c:1421
 msgid "&Merge"
 msgstr "&Maxhî"
 
-#: src/hotlist.c:1436
+#: src/hotlist.c:1433
 msgid " Entries from ~/"
 msgstr " Intreyes foû di ~/"
 
-#: src/hotlist.c:1446
+#: src/hotlist.c:1443
 msgid " file your old hotlist entries were not deleted"
 msgstr " fitchî les vîyès intreyes del djîveye n' ont nén stî disfaceyes"
 
-#: src/info.c:78
+#: src/info.c:76
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:104
+#: src/info.c:100
 #, c-format
 msgid "File:       %s"
 msgstr "Fitchî:       %s"
 
-#: src/info.c:117
+#: src/info.c:113
 #, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr "Libes nuks %d (%d%%) so %d"
 
-#: src/info.c:123
+#: src/info.c:119
 msgid "No node information"
 msgstr "Nole informåcion sol nuk"
 
-#: src/info.c:128
+#: src/info.c:124
 msgid "Free space "
 msgstr "Libe sitindeye "
 
-#: src/info.c:130
+#: src/info.c:126
 #, c-format
 msgid " (%d%%) of "
 msgstr " (%d%%) so "
 
-#: src/info.c:134
+#: src/info.c:130
 msgid "No space information"
 msgstr "Nole informåcion so li stindeye"
 
-#: src/info.c:138
+#: src/info.c:134
 #, c-format
 msgid "Type:      %s "
 msgstr "Sôrt:      %s "
 
-#: src/info.c:138
+#: src/info.c:134
 msgid "non-local vfs"
 msgstr "vfs nén locå"
 
-#: src/info.c:144
+#: src/info.c:140
 #, c-format
 msgid "Device:    %s"
 msgstr "Éndjin:    %s"
 
-#: src/info.c:148
+#: src/info.c:144
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Sistinme di fitchîs: %s"
 
-#: src/info.c:153
+#: src/info.c:149
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Eployî:  %s"
 
-#: src/info.c:157
+#: src/info.c:153
 #, c-format
 msgid "Modified:  %s"
 msgstr "Candjî:  %s"
 
-#: src/info.c:161
+#: src/info.c:157
 #, c-format
 msgid "Created:   %s"
 msgstr "Fwait:   %s"
 
-#: src/info.c:174
+#: src/info.c:170
 msgid "Size:      "
 msgstr "Grandeu"
 
-#: src/info.c:177
+#: src/info.c:173
 #, c-format
 msgid " (%d blocks)"
 msgstr " (%d blos)"
 
-#: src/info.c:183
+#: src/info.c:179
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Da:     %s/%s"
 
-#: src/info.c:188
+#: src/info.c:184
 #, c-format
 msgid "Links:     %d"
 msgstr "Loyéns:     %d"
 
-#: src/info.c:192
+#: src/info.c:188
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Môde:      %s (%04o)"
 
-#: src/info.c:197
+#: src/info.c:193
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Eplaeçmint:  %Xh:%Xh"
 
-#: src/info.c:207
+#: src/info.c:203
 msgid "File:       None"
 msgstr "Fitchî:       Pont"
 
@@ -4993,32 +4847,32 @@ msgstr "pe&Rmissions"
 msgid "&File types"
 msgstr "Sôrts di &Fitchîs"
 
-#: src/layout.c:377 src/learn.c:60 src/learn.c:179 src/option.c:145
+#: src/layout.c:371 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "&Schaper"
 
 #. length of line with '<' '>' buttons
-#: src/layout.c:385
+#: src/layout.c:379
 msgid " Layout "
 msgstr " Adjinçmint "
 
-#: src/layout.c:386
+#: src/layout.c:380
 msgid " Panel split "
 msgstr " Pårti panea "
 
-#: src/layout.c:387
+#: src/layout.c:381
 msgid " Highlight... "
 msgstr " Mete è Valeur... "
 
-#: src/layout.c:388 src/option.c:156
+#: src/layout.c:382 src/option.c:148
 msgid " Other options "
 msgstr " Ôtès tchûzes "
 
-#: src/layout.c:389
+#: src/layout.c:383
 msgid "output lines"
 msgstr "fé rexhe royes"
 
-#: src/layout.c:456
+#: src/layout.c:450
 msgid "Layout"
 msgstr "Adjinçmint"
 
@@ -5026,11 +4880,11 @@ msgstr "Adjinçmint"
 msgid " Learn keys "
 msgstr " Aprinde des tapes "
 
-#: src/learn.c:93
+#: src/learn.c:91
 msgid " Teach me a key "
 msgstr " Apurdoz-me ene tape "
 
-#: src/learn.c:94
+#: src/learn.c:92
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -5052,20 +4906,20 @@ msgstr ""
 "Si vos voloz spiter foû, tchôkîz on côp so Escape\n"
 "èt ratindoz eto."
 
-#: src/learn.c:122
+#: src/learn.c:126
 msgid " Cannot accept this key "
 msgstr " Dji n' vou nén di cisse tape la "
 
-#: src/learn.c:123
+#: src/learn.c:127
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " Vos avoz tapé \"%s\""
 
-#: src/learn.c:170
+#: src/learn.c:174
 msgid "OK"
 msgstr "I Va"
 
-#: src/learn.c:177
+#: src/learn.c:181
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -5073,11 +4927,11 @@ msgstr ""
 "Dj' a l' ideye ki totes vos tapes rotèt ddja \n"
 "a môde di djin. Clapant, edon?"
 
-#: src/learn.c:179
+#: src/learn.c:183
 msgid "&Discard"
 msgstr "&Taper la hatch èt match"
 
-#: src/learn.c:183
+#: src/learn.c:187
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -5085,26 +4939,26 @@ msgstr ""
 "Clapant! Li båze di doneyes po vosse terminå est pår fwaite!\n"
 "Totes vos tapes rotèt a l' ideye."
 
-#: src/learn.c:267
+#: src/learn.c:271
 msgid "Learn keys"
 msgstr "Aprinde des tapes"
 
-#: src/learn.c:300
+#: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr ""
 "Tchôkîz totes les tapes k' on v' dit vaici. On côp ki c' est fwait, waitîz"
 
-#: src/learn.c:302
+#: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr ""
 "les kénès tapes ni sont nén mårkeyes avou 'I Va'. Tchôkîz sol bår d' espåce "
 "so les mankantès"
 
-#: src/learn.c:304
+#: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tape, ou bén clitchîz avou vosse soris pol defini. Bodjî avou Tab."
 
-#: src/main.c:716
+#: src/main.c:719
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -5116,148 +4970,148 @@ msgstr ""
 " disfacé l' ovrant ridant, oudôbén v's avoz-ve diné \n"
 " des novelès permissions po moussî avou li cmande \"su\"? "
 
-#: src/main.c:791
+#: src/main.c:794
 msgid "Press any key to continue..."
 msgstr "Tchôkîz so tot l' minme li kéne tape po tcheryî pus lon..."
 
-#: src/main.c:841
+#: src/main.c:844
 msgid " The shell is already running a command "
 msgstr "Li shell est ddja k' il enonde ene comande "
 
-#: src/main.c:868 src/screen.c:2102 src/screen.c:2149
+#: src/main.c:873 src/screen.c:2101 src/screen.c:2148
 msgid " The Midnight Commander "
 msgstr " Li Midnight Commander "
 
-#: src/main.c:869
+#: src/main.c:874
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Voloz moussî foû po do bon do Midnight Commander? "
 
-#: src/main.c:1237
+#: src/main.c:1248
 msgid " Listing format edit "
 msgstr " Candjî l' cogne del djîveye "
 
-#: src/main.c:1237
+#: src/main.c:1248
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Li novea môde est «%s» "
 
-#: src/main.c:1249 src/main.c:1273
+#: src/main.c:1257 src/main.c:1281
 msgid "&Listing mode..."
 msgstr "Môde &Djîveye..."
 
-#: src/main.c:1250 src/main.c:1274
+#: src/main.c:1258 src/main.c:1282
 msgid "&Quick view     C-x q"
 msgstr "&Vey al vole     C-x q"
 
-#: src/main.c:1251 src/main.c:1275
+#: src/main.c:1259 src/main.c:1283
 msgid "&Info           C-x i"
 msgstr "&Info           C-x i"
 
-#: src/main.c:1254 src/main.c:1278
+#: src/main.c:1262 src/main.c:1286
 msgid "&Sort order..."
 msgstr "Ôrde po &Relire..."
 
-#: src/main.c:1256 src/main.c:1280
+#: src/main.c:1264 src/main.c:1288
 msgid "&Filter..."
 msgstr "&Passete..."
 
-#: src/main.c:1259 src/main.c:1283
+#: src/main.c:1267 src/main.c:1291
 msgid "&Network link..."
 msgstr "&Loyén Rantoele???"
 
-#: src/main.c:1260 src/main.c:1284
+#: src/main.c:1268 src/main.c:1292
 msgid "FT&P link..."
 msgstr "Loyén &FTP..."
 
-#: src/main.c:1262 src/main.c:1286
+#: src/main.c:1270 src/main.c:1294
 msgid "SM&B link..."
 msgstr "Loyén SM&B..."
 
-#: src/main.c:1267 src/main.c:1291
+#: src/main.c:1275 src/main.c:1299
 msgid "&Drive...       M-d"
 msgstr "&Léjheu...      M-d"
 
-#: src/main.c:1269 src/main.c:1293
+#: src/main.c:1277 src/main.c:1301
 msgid "&Rescan         C-r"
 msgstr "&Rilére         C-r"
 
-#: src/main.c:1297
+#: src/main.c:1305
 msgid "&User menu          F2"
 msgstr "Menu di l' &Ûzeu         F2"
 
-#: src/main.c:1298
+#: src/main.c:1306
 msgid "&View               F3"
 msgstr "&Vey                    F3"
 
-#: src/main.c:1299
+#: src/main.c:1307
 msgid "Vie&w file...         "
 msgstr "Vey& fitchî...            "
 
-#: src/main.c:1300
+#: src/main.c:1308
 msgid "&Filtered view     M-!"
 msgstr "Vey avou ene &Passete  M-!"
 
-#: src/main.c:1301
+#: src/main.c:1309
 msgid "&Edit               F4"
 msgstr "&Aspougnî               F4"
 
-#: src/main.c:1302
+#: src/main.c:1310
 msgid "&Copy               F5"
 msgstr "&Copyî               F5"
 
-#: src/main.c:1303
+#: src/main.c:1311
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
 
-#: src/main.c:1305
+#: src/main.c:1313
 msgid "&Link            C-x l"
 msgstr "&Loyén            C-x l"
 
-#: src/main.c:1306
+#: src/main.c:1314
 msgid "&SymLink         C-x s"
 msgstr "Loyén &Simbolike         C-x s"
 
-#: src/main.c:1307
+#: src/main.c:1315
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "candjî lo&yén simbolike  C-x C-s"
 
-#: src/main.c:1308
+#: src/main.c:1316
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
-#: src/main.c:1309
+#: src/main.c:1317
 msgid "&Advanced chown       "
 msgstr "chown &Avancî       "
 
-#: src/main.c:1311
+#: src/main.c:1319
 msgid "&Rename/Move        F6"
 msgstr "&Rilomes/bodjî        F6"
 
-#: src/main.c:1312
+#: src/main.c:1320
 msgid "&Mkdir              F7"
 msgstr "&Mkdir              F7"
 
-#: src/main.c:1313
+#: src/main.c:1321
 msgid "&Delete             F8"
 msgstr "&Disfacer             F8"
 
-#: src/main.c:1314
+#: src/main.c:1322
 msgid "&Quick cd          M-c"
 msgstr "cd al &Vole          M-c"
 
-#: src/main.c:1316
+#: src/main.c:1324
 msgid "select &Group      M-+"
 msgstr "tchwezi &Hopê     M-+"
 
-#: src/main.c:1317
+#: src/main.c:1325
 msgid "u&Nselect group    M-\\"
 msgstr "di&Stchwezi hopê    M-\\"
 
-#: src/main.c:1318
+#: src/main.c:1326
 msgid "reverse selec&Tion M-*"
 msgstr "reverse selec&Tion M-*"
 
-#: src/main.c:1320
+#: src/main.c:1328
 msgid "e&Xit              F10"
 msgstr "moussî &Foû             F10"
 
@@ -5265,132 +5119,132 @@ msgstr "moussî &Foû             F10"
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1329
+#: src/main.c:1337
 msgid "&Directory tree"
 msgstr "&Brantches do ridant"
 
-#: src/main.c:1330
+#: src/main.c:1338
 msgid "&Find file            M-?"
 msgstr "&Trover Fitchî          M-?"
 
-#: src/main.c:1331
+#: src/main.c:1339
 msgid "s&Wap panels          C-u"
 msgstr "discandjî les &Paneas   C-u"
 
-#: src/main.c:1332
+#: src/main.c:1340
 msgid "switch &Panels on/off C-o"
 msgstr "mostrer/catchî les &Paneas C-o"
 
-#: src/main.c:1333
+#: src/main.c:1341
 msgid "&Compare directories  C-x d"
 msgstr "ri&mete des ridants    C-x d"
 
-#: src/main.c:1334
+#: src/main.c:1342
 msgid "e&Xternal panelize    C-x !"
 msgstr ""
 
-#: src/main.c:1335
+#: src/main.c:1343
 msgid "show directory s&Izes"
 msgstr "mostrer grandeu des r&Idants"
 
-#: src/main.c:1337
+#: src/main.c:1345
 msgid "command &History"
 msgstr "ist&were des cmandes"
 
-#: src/main.c:1338
+#: src/main.c:1346
 msgid "di&Rectory hotlist    C-\\"
 msgstr "djîveye rascoûrti des &Ridants    C-\\"
 
-#: src/main.c:1340
+#: src/main.c:1348
 msgid "&Active VFS list      C-x a"
 msgstr ""
 
-#: src/main.c:1341
+#: src/main.c:1349
 msgid "Fr&ee VFSs now"
 msgstr ""
 
-#: src/main.c:1344
+#: src/main.c:1352
 msgid "&Background jobs      C-x j"
 msgstr "&Bouyes di fond      C-x j"
 
-#: src/main.c:1348
+#: src/main.c:1356
 msgid "&Undelete files (ext2fs only)"
 msgstr "Disra&Facer des fitchîs (seulmint ext2fs)"
 
-#: src/main.c:1351
+#: src/main.c:1359
 msgid "&Listing format edit"
 msgstr ""
 
-#: src/main.c:1356
+#: src/main.c:1364
 msgid "&Extension file edit"
 msgstr ""
 
-#: src/main.c:1357
+#: src/main.c:1365
 msgid "&Menu file edit"
 msgstr ""
 
-#: src/main.c:1359
+#: src/main.c:1367
 #, fuzzy
 msgid "Menu edi&Tor edit"
 msgstr "Aspougnî fitchî menu"
 
-#: src/main.c:1365
+#: src/main.c:1373
 msgid "&Configuration..."
 msgstr "&Apontiaedje..."
 
-#: src/main.c:1367
+#: src/main.c:1375
 msgid "c&Onfirmation..."
 msgstr "Ra&certiner..."
 
-#: src/main.c:1368
+#: src/main.c:1376
 msgid "&Display bits..."
 msgstr ""
 
-#: src/main.c:1370
+#: src/main.c:1378
 msgid "learn &Keys..."
 msgstr "a&Prinde des tapes..."
 
-#: src/main.c:1373
+#: src/main.c:1381
 msgid "&Virtual FS..."
 msgstr ""
 
-#: src/main.c:1376
+#: src/main.c:1384
 msgid "&Save setup"
 msgstr "&Schaper l' apontiaedje"
-
-#: src/main.c:1392 src/main.c:1394
-msgid " &Left "
-msgstr " &Hintche "
 
 #: src/main.c:1394
 msgid " &Above "
 msgstr " Diz&eu "
 
-#: src/main.c:1397
+#: src/main.c:1394
+msgid " &Left "
+msgstr " &Hintche "
+
+#: src/main.c:1396
 msgid " &File "
 msgstr " &Fitchî "
 
-#: src/main.c:1398
+#: src/main.c:1397
 msgid " &Command "
 msgstr " &Comande "
 
-#: src/main.c:1399
+#: src/main.c:1398
 msgid " &Options "
 msgstr " &Tchûzes "
 
-#: src/main.c:1401 src/main.c:1403
-msgid " &Right "
-msgstr " &Droete "
-
-#: src/main.c:1403
+#: src/main.c:1399
 msgid " &Below "
 msgstr " Diz&o "
 
-#: src/main.c:1458
+#: src/main.c:1399
+msgid " &Right "
+msgstr " &Droete "
+
+#: src/main.c:1448
 msgid " Information "
 msgstr " Informåcion "
 
-#: src/main.c:1459
+#: src/main.c:1449
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5398,11 +5252,11 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1946
+#: src/main.c:1934
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Merci di vos siervi do GNU Midnight Commander"
 
-#: src/main.c:2379
+#: src/main.c:2373
 msgid "The TERM environment variable is unset!\n"
 msgstr "Li variåve d' inviron'mint TERM n' est nén metuwe!\n"
 
@@ -5495,7 +5349,7 @@ msgid ""
 "to mc-devel@gnome.org\n"
 msgstr ""
 
-#: src/main.c:2547
+#: src/main.c:2546
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5516,131 +5370,131 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/main.c:2599
+#: src/main.c:2598
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Ridant del lîvreye po li Midnight Commander: %s\n"
 
-#: src/main.c:2613
+#: src/main.c:2612
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr "Li tchûze -m e-st aviyeye. Waitîz a Display Bits... è menu Tchûzes\n"
 
-#: src/main.c:2690
+#: src/main.c:2671
 msgid "Use to debug the background code"
 msgstr ""
 
-#: src/main.c:2696
+#: src/main.c:2677
 msgid "Request to run in color mode"
 msgstr "Fé roter è coleurs"
 
-#: src/main.c:2698
+#: src/main.c:2679
 msgid "Specifies a color configuration"
 msgstr "Dire avou kénès coleurs"
 
-#: src/main.c:2703
+#: src/main.c:2686
 msgid "Edits one file"
 msgstr "Aspougne on fitchî"
 
-#: src/main.c:2707
+#: src/main.c:2691
 msgid "Displays this help message"
 msgstr "Mostere ci messaedje d' aide chal"
 
-#: src/main.c:2710
+#: src/main.c:2694
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Po v' mostrer comint-ce k' on candje l' arindjmint des coleurs"
 
-#: src/main.c:2713
+#: src/main.c:2697
 msgid "Log ftp dialog to specified file"
 msgstr ""
 
-#: src/main.c:2720
+#: src/main.c:2704
 msgid "Obsolete"
 msgstr "Vî vî"
 
-#: src/main.c:2722
+#: src/main.c:2706
 msgid "Requests to run in black and white"
 msgstr "Fé roter è noer èt blanc"
 
-#: src/main.c:2724
+#: src/main.c:2708
 msgid "Disable mouse support in text version"
 msgstr "Ni nén sopoirter li soris dvins li modeye texe"
 
-#: src/main.c:2727
+#: src/main.c:2711
 msgid "Disables subshell support"
 msgstr ""
 
-#: src/main.c:2731
+#: src/main.c:2715
 msgid "Prints working directory at program exit"
 msgstr "Håyner li ridant do moumint å moumint ki vos moussîz foû"
 
-#: src/main.c:2733
+#: src/main.c:2717
 msgid "Resets soft keys on HP terminals"
 msgstr ""
 
-#: src/main.c:2735
+#: src/main.c:2719
 msgid "To run on slow terminals"
 msgstr "Po-aler so des londjins terminås"
 
-#: src/main.c:2738
+#: src/main.c:2722
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2742
+#: src/main.c:2726
 msgid "Enables subshell support (default)"
 msgstr ""
 
-#: src/main.c:2747
+#: src/main.c:2731
 msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
-#: src/main.c:2751
+#: src/main.c:2735
 msgid "Displays the current version"
 msgstr "Håyenye li modeye do moumint"
 
-#: src/main.c:2753
+#: src/main.c:2737
 msgid "Launches the file viewer on a file"
 msgstr "Enonder li håyneu di fitchî so on fitchî"
 
-#: src/main.c:2755
+#: src/main.c:2739
 msgid "Forces xterm features"
 msgstr ""
 
-#: src/main.c:2757
+#: src/main.c:2741
 msgid "Geometry for the window"
 msgstr "Djometreye do purnea"
 
-#: src/main.c:2757
+#: src/main.c:2741
 msgid "GEOMETRY"
 msgstr "DJOMETREYE"
 
-#: src/main.c:2758
+#: src/main.c:2742
 msgid "No windows opened at startup"
 msgstr "I gn a nou purnea ki s' a drovu a l' enondeye"
 
-#: src/main.c:2759
+#: src/main.c:2743
 msgid "No desktop icons"
 msgstr "Nole imådjetes pol scribanne"
 
-#: src/main.c:2760
+#: src/main.c:2744
 msgid "Look more like traditional gmc"
 msgstr "Raviser pus å vî gmc"
 
-#: src/main.c:2762
+#: src/main.c:2746
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ""
 
-#: src/main.c:3089
+#: src/main.c:3069
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3170
+#: src/main.c:3156
 msgid " Notice "
 msgstr " Advertixhmint "
 
-#: src/main.c:3171
+#: src/main.c:3157
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5650,144 +5504,144 @@ msgstr ""
 " sont-st asteure è ridant ~/.mc; les fitchîs \n"
 " ont stî bodjîs\n"
 
-#: src/option.c:74
+#: src/option.c:72
 msgid "safe de&Lete"
 msgstr "disf&Acer a såvrité"
 
-#: src/option.c:75
+#: src/option.c:73
 msgid "cd follows lin&Ks"
 msgstr "cd shû&T les loyéns"
 
-#: src/option.c:76
+#: src/option.c:74
 msgid "advanced cho&Wn"
 msgstr "cho&Wn avancî"
 
-#: src/option.c:77
+#: src/option.c:75
 msgid "l&Ynx-like motion"
 msgstr "bodjî come dins l&Ynx"
 
-#: src/option.c:79
-msgid "Animation"
-msgstr ""
-
-#: src/option.c:81
+#: src/option.c:76
 msgid "rotatin&G dash"
 msgstr ""
 
-#: src/option.c:83
+#: src/option.c:77
 msgid "co&Mplete: show all"
 msgstr ""
 
-#: src/option.c:84
+#: src/option.c:78
 msgid "&Use internal view"
 msgstr ""
 
-#: src/option.c:85
+#: src/option.c:79
 msgid "use internal ed&It"
 msgstr ""
 
-#: src/option.c:86
+#: src/option.c:80
 msgid "auto m&Enus"
 msgstr ""
 
-#: src/option.c:87
+#: src/option.c:81
 msgid "&Auto save setup"
 msgstr ""
 
-#: src/option.c:88
+#: src/option.c:82
 msgid "shell &Patterns"
 msgstr ""
 
-#: src/option.c:89
+#: src/option.c:83
 msgid "Compute &Totals"
 msgstr ""
 
-#: src/option.c:90
+#: src/option.c:84
 msgid "&Verbose operation"
 msgstr ""
 
-#: src/option.c:91
+#: src/option.c:85
 msgid "&Fast dir reload"
 msgstr ""
 
-#: src/option.c:92
+#: src/option.c:86
 msgid "mi&X all files"
 msgstr ""
 
-#: src/option.c:93
+#: src/option.c:87
 msgid "&Drop down menus"
 msgstr ""
 
-#: src/option.c:94
+#: src/option.c:88
 msgid "ma&Rk moves down"
 msgstr ""
 
-#: src/option.c:95
+#: src/option.c:89
 msgid "show &Hidden files"
 msgstr "mostrer &Fitchîs catchîs"
 
-#: src/option.c:96
+#: src/option.c:90
 msgid "show &Backup files"
 msgstr "mostrer les &Copeyes di såvrité"
 
-#: src/option.c:103
+#: src/option.c:97
 msgid "&Never"
 msgstr "&Måy"
 
-#: src/option.c:104
+#: src/option.c:98
 msgid "on dumb &Terminals"
 msgstr "so les mouwês &Terminås"
 
-#: src/option.c:105
+#: src/option.c:99
 msgid "alwa&Ys"
 msgstr "to&Fer"
 
 #. Similar code is in layout.c (init_layout())
-#: src/option.c:153
+#: src/option.c:145
 msgid " Configure options "
 msgstr " Apontyî les Tchûzes "
 
-#: src/option.c:154
+#: src/option.c:146
 msgid " Panel options "
 msgstr " Tchûzes pol panea "
 
-#: src/option.c:155
+#: src/option.c:147
 msgid " Pause after run... "
 msgstr " Si djoker après avu enondé... "
 
-#: src/option.c:207
+#: src/option.c:199
 msgid "Configure options"
 msgstr "Apontyî les tchûzes"
 
-#: src/panelize.c:87
+#: src/panelize.c:84
 msgid "&Add new"
 msgstr "R&adjouter novea"
 
-#: src/panelize.c:99
+#: src/panelize.c:100
 msgid " External panelize "
 msgstr " Difoûtrins paneas "
 
-#: src/panelize.c:194 src/panelize.c:457
+#: src/panelize.c:191 src/panelize.c:457
 msgid "External panelize"
 msgstr "Difoûtrins paneas"
 
-#: src/panelize.c:204
+#: src/panelize.c:201
 msgid "Command"
 msgstr "Comande"
 
-#: src/panelize.c:218 src/panelize.c:275 src/panelize.c:346 src/panelize.c:367
+#: src/panelize.c:215 src/panelize.c:274 src/panelize.c:346 src/panelize.c:367
 msgid "Other command"
 msgstr "Ôtès cmandes"
 
-#: src/panelize.c:259
+#: src/panelize.c:258
 msgid " Add to external panelize "
 msgstr ""
 
-#: src/panelize.c:260
+#: src/panelize.c:259
 msgid " Enter command label: "
 msgstr ""
 
-#: src/panelize.c:300
+#: src/panelize.c:298 src/user.c:671
+msgid " Oops... "
+msgstr " Way!... "
+
+#: src/panelize.c:299
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
 
@@ -5815,71 +5669,63 @@ msgstr "Mostrer ci messaedje d' aide ci"
 msgid "Display brief usage message"
 msgstr "Mostrer on ptit messaedje po savu cmint fé"
 
-#: src/screen.c:227
+#: src/screen.c:221
 msgid "SUB-DIR"
 msgstr ""
 
-#: src/screen.c:227
+#: src/screen.c:221
 msgid "UP--DIR"
 msgstr ""
 
-#: src/screen.c:417
+#: src/screen.c:411
 msgid "MTime"
 msgstr "MTime"
 
-#: src/screen.c:418
+#: src/screen.c:412
 msgid "ATime"
 msgstr "ATime"
 
-#: src/screen.c:419
+#: src/screen.c:413
 msgid "CTime"
 msgstr "CTime"
 
-#: src/screen.c:421
+#: src/screen.c:415
 msgid "Perm"
 msgstr ""
 
-#: src/screen.c:422
+#: src/screen.c:416
 msgid "Nl"
 msgstr ""
 
-#: src/screen.c:423
+#: src/screen.c:417
 msgid "Inode"
 msgstr "Inode"
 
-#: src/screen.c:424
+#: src/screen.c:418
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:425
+#: src/screen.c:419
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:1315
+#: src/screen.c:1310
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:1441
+#: src/screen.c:1436
 msgid "User suplied format looks invalid, reverting to default."
 msgstr ""
 
-#: src/screen.c:2103 src/screen.c:2150
+#: src/screen.c:2102 src/screen.c:2149
 msgid " Do you really want to execute? "
 msgstr " Voloz-ve enonder po do bon? "
 
-#: src/screen.c:2114 src/screen.c:2164
+#: src/screen.c:2113 src/screen.c:2163
 msgid " No action taken "
 msgstr " Rén di fwait "
 
-#: src/screen.c:2387 src/screen.c:2417 src/tree.c:1018
-msgid "RenMov"
-msgstr "RenMov"
-
-#: src/screen.c:2388 src/screen.c:2418 src/tree.c:1022
-msgid "Mkdir"
-msgstr "Mkdir"
-
-#: src/screen.c:2404 src/tree.c:868
+#: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -5888,29 +5734,173 @@ msgstr ""
 " Dji n' sai fé on chdir dins \"%s\" \n"
 " %s "
 
-#: src/subshell.c:451
+#: src/screen.c:2419 src/tree.c:1025
+msgid "RenMov"
+msgstr "RenMov"
+
+#: src/screen.c:2420 src/tree.c:1029
+msgid "Mkdir"
+msgstr "Mkdir"
+
+#: src/selcodepage.c:33
+msgid " Choose input codepage "
+msgstr ""
+
+#: src/selcodepage.c:37
+msgid "-  < No translation >"
+msgstr ""
+
+#: src/selcodepage.c:75
+msgid ""
+"Midnight Commander was compiled without iconv support,\n"
+"so charsets recoding feature is not available!"
+msgstr ""
+
+#: src/selcodepage.c:92
+msgid ""
+"To use this feature select your codepage in\n"
+"Setup / Display Bits dialog!\n"
+"Do not forget to save options."
+msgstr ""
+
+#: src/slint.c:199
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+
+#: src/subshell.c:449
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Dji n' sai drovi li lomeye bûze %s\n"
 
-#: src/subshell.c:741
+#: src/subshell.c:742
 msgid " The shell is still active. Quit anyway? "
 msgstr " Li shell est co èn alaedje. Voloz-ve tot l' minme moussî foû? "
 
-#: src/subshell.c:767
+#: src/subshell.c:768
 msgid " There are stopped jobs."
 msgstr " I gn a des bouyes d' aresteyes."
 
-#: src/subshell.c:768
+#: src/subshell.c:769
 msgid " Quit anyway? "
 msgstr " Fåt-i moussî foû tot l' minme? "
 
-#: src/subshell.c:833
+#: src/subshell.c:882
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Advertixhmint: dji n' sai candjî dins %s.\n"
 
-#: src/tree.c:192
+#: src/textconf.c:12
+msgid "Edition: "
+msgstr "Aspougnaedje: "
+
+#: src/textconf.c:13
+msgid "text mode"
+msgstr "môde tecsse"
+
+#: src/textconf.c:15
+msgid " with X11 support to read modifiers"
+msgstr ""
+
+#: src/textconf.c:20
+msgid "Virtual File System: tarfs, extfs"
+msgstr "Forveyu sistinme di fitchîs: tarfs, extfs"
+
+#: src/textconf.c:22
+msgid ", ftpfs"
+msgstr ", ftpfs"
+
+#: src/textconf.c:24
+msgid " (proxies: hsc proxy)"
+msgstr ""
+
+#: src/textconf.c:26
+msgid ", mcfs"
+msgstr ", mcfs"
+
+#: src/textconf.c:28
+msgid " (with termnet support)"
+msgstr " (avou sopoirt termnet)"
+
+#: src/textconf.c:31
+msgid ", smbfs"
+msgstr ", smbfs"
+
+#: src/textconf.c:35
+msgid ", undelfs"
+msgstr ", undelfs"
+
+#: src/textconf.c:41
+msgid "With builtin Editor\n"
+msgstr ""
+
+#: src/textconf.c:47
+msgid "Using system-installed S-Lang library"
+msgstr ""
+
+#: src/textconf.c:49
+#, fuzzy
+msgid "Using S-Lang library"
+msgstr "lîvreye S-lang avou "
+
+#: src/textconf.c:55
+msgid "with terminfo database"
+msgstr ""
+
+#: src/textconf.c:57
+#, fuzzy
+msgid "with termcap database"
+msgstr " båze di dneyes"
+
+#: src/textconf.c:59
+#, fuzzy
+msgid "with an unknown terminal database"
+msgstr "on terminå nén cnoxhu"
+
+#: src/textconf.c:63
+#, fuzzy
+msgid "Using the ncurses library"
+msgstr "li lîvreye ncurses"
+
+#: src/textconf.c:65
+#, fuzzy
+msgid "Using old curses library"
+msgstr "ene lîvreye curses nén cnoxhuwe"
+
+#: src/textconf.c:72
+msgid "With optional subshell support"
+msgstr ""
+
+#: src/textconf.c:74
+msgid "With subshell support as default"
+msgstr ""
+
+#: src/textconf.c:80
+msgid "With support for background operations\n"
+msgstr "Avou sopoirt po les bouyes di fond\n"
+
+#: src/textconf.c:84
+#, fuzzy
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "avou sopoirt soris dins xterm èt li conzôle Linux.\n"
+
+#: src/textconf.c:86
+#, fuzzy
+msgid "With mouse support on xterm\n"
+msgstr "avou sopoirt soris dins xterm.\n"
+
+#: src/textconf.c:89
+msgid "With multiple codepages support\n"
+msgstr ""
+
+#: src/textconf.c:101
+#, fuzzy, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander"
+
+#: src/tree.c:194
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -5919,49 +5909,49 @@ msgstr ""
 "Dji n' sai drovi li fitchî %s po scrire divins:\n"
 "%s\n"
 
-#: src/tree.c:637
+#: src/tree.c:638
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "Copyî li ridant \"%s\" dins:"
 
-#: src/tree.c:675
+#: src/tree.c:679
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "Bodjî li ridant \"%s\" dins:"
 
-#: src/tree.c:682
+#: src/tree.c:689
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
 " %s "
 msgstr ""
 
-#: src/tree.c:688
+#: src/tree.c:695
 msgid " The destination isn't a directory "
 msgstr " L' ariveye n' est nén on ridant "
 
-#: src/tree.c:746
+#: src/tree.c:753
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Disfacer %s?  "
 
-#: src/tree.c:778
+#: src/tree.c:785
 msgid "Static"
 msgstr "Staté"
 
-#: src/tree.c:778
+#: src/tree.c:785
 msgid "Dynamc"
 msgstr "Bodjant"
 
-#: src/tree.c:1014
+#: src/tree.c:1021
 msgid "Forget"
 msgstr "Rovyî"
 
-#: src/tree.c:1027
+#: src/tree.c:1034
 msgid "Rmdir"
 msgstr "Rmdir"
 
-#: src/treestore.c:360
+#: src/treestore.c:361
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -5970,46 +5960,46 @@ msgstr ""
 "Dji n' sai scrire è fitchî %s :\n"
 "%s\n"
 
-#: src/user.c:137
+#: src/user.c:139
 msgid " Format error on file Extensions File "
 msgstr ""
 
-#: src/user.c:138
+#: src/user.c:140
 #, c-format
-msgid " The %%var macro does not have a default "
+msgid " The %%var macro has no default "
 msgstr ""
 
-#: src/user.c:139
+#: src/user.c:141
 #, c-format
-msgid " The %%var macros does not have a variable "
+msgid " The %%var macro has no variable "
 msgstr ""
 
-#: src/user.c:273
+#: src/user.c:285
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr ""
 
-#: src/user.c:426
+#: src/user.c:438
 msgid " Debug "
 msgstr " Disbuguer "
 
-#: src/user.c:435
+#: src/user.c:447
 msgid " ERROR: "
 msgstr " AROKE: "
 
-#: src/user.c:439
+#: src/user.c:451
 msgid " True:  "
 msgstr " Veur:  "
 
-#: src/user.c:441
+#: src/user.c:453
 msgid " False: "
 msgstr " Fås:  "
 
-#: src/user.c:637
+#: src/user.c:648
 msgid " Warning -- ignoring file "
 msgstr " Advertixhmint -- dji passe hute do fitchî "
 
-#: src/user.c:638
+#: src/user.c:649
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6019,43 +6009,43 @@ msgstr ""
 "divins.\n"
 "Do côp, si vos vos è siervoz, ça pôreut esse dandjureu..."
 
-#: src/user.c:662
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Dji n' sai enonder des programes a pårti d' on ridant nén locå "
 
-#: src/user.c:760
+#: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr ""
 
 #. Create listbox
-#: src/user.c:766
+#: src/user.c:776
 msgid " User menu "
 msgstr " Menu di l' ûzeu "
 
-#: src/util.c:232
+#: src/util.c:244
 msgid "name_trunc: too big"
 msgstr "name_trunc: trop grand"
 
 #. strftime() format string for recent dates
-#: src/util.c:600 src/util.c:625
+#: src/util.c:682 src/util.c:708
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:601 src/util.c:623
+#: src/util.c:683 src/util.c:706
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:382
+#: src/utilunix.c:370
 msgid " Pipe failed "
 msgstr " Li bûze a fwait berwete "
 
-#: src/utilunix.c:386
+#: src/utilunix.c:374
 msgid " Dup failed "
 msgstr " Dup a fwait berwete "
 
-#: src/view.c:396
+#: src/view.c:407
 msgid ""
 "File: \n"
 "\n"
@@ -6065,7 +6055,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:397
+#: src/view.c:408
 msgid ""
 "\n"
 "\n"
@@ -6075,27 +6065,27 @@ msgstr ""
 "\n"
 "a stî candjî. Voloz-ve schaper les candjmints?\n"
 
-#: src/view.c:399
+#: src/view.c:410
 msgid " Save changes "
 msgstr " Schaper les candjmints "
 
-#: src/view.c:441
+#: src/view.c:452
 msgid " Cannot spawn child program "
 msgstr ""
 
-#: src/view.c:450
+#: src/view.c:461
 msgid " Empty output from child filter "
 msgstr ""
 
-#: src/view.c:455
+#: src/view.c:466
 msgid " Could not open file "
 msgstr " Dji n' sai drovi li fitchî "
 
-#: src/view.c:470
+#: src/view.c:481
 msgid " Cannot open file \""
 msgstr " Dji n' sai drovi li fitchî \""
 
-#: src/view.c:477
+#: src/view.c:488
 msgid ""
 " Cannot stat file \n"
 " "
@@ -6103,11 +6093,11 @@ msgstr ""
 " Dji n' sai fé on stat sol fitchî \n"
 " "
 
-#: src/view.c:483
+#: src/view.c:494
 msgid " Cannot view: not a regular file "
 msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 
-#: src/view.c:564
+#: src/view.c:574
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -6116,7 +6106,7 @@ msgstr ""
 " Dji n' sai drovi \"%s\"\n"
 " %s "
 
-#: src/view.c:573
+#: src/view.c:583
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -6125,34 +6115,39 @@ msgstr ""
 " Dji n' sai fé on stat so \"%s\"\n"
 " %s "
 
-#: src/view.c:708
+#: src/view.c:718
 #, c-format
 msgid "File: %s"
 msgstr "Fitchî: %s"
 
-#: src/view.c:722
+#: src/view.c:732
 #, c-format
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: src/view.c:733
+#: src/view.c:743
 msgid "  [grow]"
 msgstr "  [grandit]"
 
-#: src/view.c:1497
+#: src/view.c:1518
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Dji cwir après `%s'"
 
-#: src/view.c:1604 src/view.c:1727
+#: src/view.c:1625 src/view.c:1739
 msgid " Search string not found "
 msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
 
-#: src/view.c:1766
+#: src/view.c:1727
+#, fuzzy
+msgid "Invalid hex search expression"
+msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
+
+#: src/view.c:1778
 msgid " Invalid regular expression "
 msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
 
-#: src/view.c:1890
+#: src/view.c:1900
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6161,7 +6156,7 @@ msgstr ""
 " Li roye do moumint a li limerô %d.\n"
 " Intrez li novea limerô del roye:"
 
-#: src/view.c:1912
+#: src/view.c:1922
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6170,67 +6165,67 @@ msgstr ""
 " L' adresse do moumint est 0x%lx.\n"
 " Intrez li novele adresse:"
 
-#: src/view.c:1914
+#: src/view.c:1924
 msgid " Goto Address "
 msgstr " Potchî al Adresse "
 
-#: src/view.c:1945
+#: src/view.c:1955
 msgid " Enter regexp:"
 msgstr " Intrez l' erûleye ratoûrneure:"
 
-#: src/view.c:2058
+#: src/view.c:2078
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2058
+#: src/view.c:2078
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2059
+#: src/view.c:2079
 msgid "Goto"
 msgstr ""
 
-#: src/view.c:2059
+#: src/view.c:2079
 msgid "Line"
 msgstr "Roye"
 
-#: src/view.c:2062
+#: src/view.c:2082
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2065
+#: src/view.c:2085
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2065
+#: src/view.c:2085
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2067
+#: src/view.c:2087
 msgid "UnWrap"
 msgstr ""
 
-#: src/view.c:2067
+#: src/view.c:2087
 msgid "Wrap"
 msgstr ""
 
-#: src/view.c:2070
+#: src/view.c:2090
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2073
+#: src/view.c:2093
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:2073
+#: src/view.c:2093
 msgid "Parse"
 msgstr ""
 
-#: src/view.c:2077
+#: src/view.c:2097
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2077
+#: src/view.c:2097
 msgid "Format"
 msgstr ""
 
@@ -6240,200 +6235,200 @@ msgstr " Istwere "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
-#: src/win.c:224
+#: src/win.c:215
 msgid "Function key 1"
 msgstr "F1"
 
-#: src/win.c:225
+#: src/win.c:216
 msgid "Function key 2"
 msgstr "F2"
 
-#: src/win.c:226
+#: src/win.c:217
 msgid "Function key 3"
 msgstr "F3"
 
-#: src/win.c:227
+#: src/win.c:218
 msgid "Function key 4"
 msgstr "F4"
 
-#: src/win.c:228
+#: src/win.c:219
 msgid "Function key 5"
 msgstr "F5"
 
-#: src/win.c:229
+#: src/win.c:220
 msgid "Function key 6"
 msgstr "F6"
 
-#: src/win.c:230
+#: src/win.c:221
 msgid "Function key 7"
 msgstr "F7"
 
-#: src/win.c:231
+#: src/win.c:222
 msgid "Function key 8"
 msgstr "F8"
 
-#: src/win.c:232
+#: src/win.c:223
 msgid "Function key 9"
 msgstr "F9"
 
-#: src/win.c:233
+#: src/win.c:224
 msgid "Function key 10"
 msgstr "F10"
 
-#: src/win.c:234
+#: src/win.c:225
 msgid "Function key 11"
 msgstr "F11"
 
-#: src/win.c:235
+#: src/win.c:226
 msgid "Function key 12"
 msgstr "F12"
 
-#: src/win.c:236
+#: src/win.c:227
 msgid "Function key 13"
 msgstr "F13"
 
-#: src/win.c:237
+#: src/win.c:228
 msgid "Function key 14"
 msgstr "F14"
 
-#: src/win.c:238
+#: src/win.c:229
 msgid "Function key 15"
 msgstr "F15"
 
-#: src/win.c:239
+#: src/win.c:230
 msgid "Function key 16"
 msgstr "F16"
 
-#: src/win.c:240
+#: src/win.c:231
 msgid "Function key 17"
 msgstr "F17"
 
-#: src/win.c:241
+#: src/win.c:232
 msgid "Function key 18"
 msgstr "F18"
 
-#: src/win.c:242
+#: src/win.c:233
 msgid "Function key 19"
 msgstr "F19"
 
-#: src/win.c:243
+#: src/win.c:234
 msgid "Function key 20"
 msgstr "F20"
 
-#: src/win.c:244
+#: src/win.c:235
 msgid "Backspace key"
 msgstr "Backspace"
 
-#: src/win.c:245
+#: src/win.c:236
 msgid "End key"
 msgstr "End"
 
-#: src/win.c:246
+#: src/win.c:237
 msgid "Up arrow key"
 msgstr "Fletche copete"
 
-#: src/win.c:247
+#: src/win.c:238
 msgid "Down arrow key"
 msgstr "Fletche valeye"
 
-#: src/win.c:248
+#: src/win.c:239
 msgid "Left arrow key"
 msgstr "Fletche hintche"
 
-#: src/win.c:249
+#: src/win.c:240
 msgid "Right arrow key"
 msgstr "Fletche droete"
 
-#: src/win.c:250
+#: src/win.c:241
 msgid "Home key"
 msgstr "Home"
 
-#: src/win.c:251
+#: src/win.c:242
 msgid "Page Down key"
 msgstr "Pådje copete"
 
-#: src/win.c:252
+#: src/win.c:243
 msgid "Page Up key"
 msgstr "Pådje valeye"
 
-#: src/win.c:253
+#: src/win.c:244
 msgid "Insert key"
 msgstr "Insert"
 
-#: src/win.c:254
+#: src/win.c:245
 msgid "Delete key"
 msgstr "Delete"
 
-#: src/win.c:255
+#: src/win.c:246
 msgid "Completion/M-tab"
 msgstr ""
 
-#: src/win.c:256
+#: src/win.c:247
 msgid "+ on keypad"
 msgstr ""
 
-#: src/win.c:257
+#: src/win.c:248
 msgid "- on keypad"
 msgstr ""
 
-#: src/win.c:258
+#: src/win.c:249
 msgid "* on keypad"
 msgstr ""
 
 #. From here on, these won't be shown in Learn keys (no space)
-#: src/win.c:260
+#: src/win.c:251
 msgid "Left arrow keypad"
 msgstr ""
 
-#: src/win.c:261
+#: src/win.c:252
 msgid "Right arrow keypad"
 msgstr ""
 
-#: src/win.c:262
+#: src/win.c:253
 msgid "Up arrow keypad"
 msgstr ""
 
-#: src/win.c:263
+#: src/win.c:254
 msgid "Down arrow keypad"
 msgstr ""
 
-#: src/win.c:264
+#: src/win.c:255
 msgid "Home on keypad"
 msgstr ""
 
-#: src/win.c:265
+#: src/win.c:256
 msgid "End on keypad"
 msgstr ""
 
-#: src/win.c:266
+#: src/win.c:257
 msgid "Page Down keypad"
 msgstr ""
 
-#: src/win.c:267
+#: src/win.c:258
 msgid "Page Up keypad"
 msgstr ""
 
-#: src/win.c:268
+#: src/win.c:259
 msgid "Insert on keypad"
 msgstr ""
 
-#: src/win.c:269
+#: src/win.c:260
 msgid "Delete on keypad"
 msgstr ""
 
-#: src/win.c:270
+#: src/win.c:261
 msgid "Enter on keypad"
 msgstr ""
 
-#: src/win.c:271
+#: src/win.c:262
 msgid "Slash on keypad"
 msgstr ""
 
-#: src/win.c:272
+#: src/win.c:263
 msgid "NumLock on keypad"
 msgstr ""
 
-#: vfs/cpio.c:141 vfs/cpio.c:157
+#: vfs/cpio.c:142 vfs/cpio.c:158
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -6482,261 +6477,243 @@ msgid ""
 "%s"
 msgstr ""
 
-#: vfs/direntry.c:301
+#: vfs/direntry.c:303
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr ""
 
-#: vfs/direntry.c:431 vfs/direntry.c:434
-msgid " Direntry warning "
-msgstr " Avertixhmint direntry "
-
-#: vfs/direntry.c:431
-#, c-format
-msgid "Super ino_usage is %d, memory leak"
-msgstr ""
-
-#: vfs/direntry.c:434
-msgid "Super has want_stale set"
-msgstr ""
-
-#: vfs/direntry.c:816
+#: vfs/direntry.c:820
 msgid "Starting linear transfer..."
 msgstr ""
 
-#: vfs/direntry.c:960
+#: vfs/direntry.c:964
 msgid "Getting file"
 msgstr "Aberwetant l' fitchî"
 
-#: vfs/extfs.c:268
+#: vfs/extfs.c:298
 #, c-format
 msgid ""
 "Couldn't open %s archive\n"
 "%s"
 msgstr ""
 
-#: vfs/extfs.c:300 vfs/extfs.c:320
+#: vfs/extfs.c:330 vfs/extfs.c:349
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#: vfs/fish.c:140
+#: vfs/fish.c:142
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Dji m' disraloye di %s"
 
-#: vfs/fish.c:218
+#: vfs/fish.c:221
 msgid "fish: Waiting for initial line..."
 msgstr ""
 
-#: vfs/fish.c:228
+#: vfs/fish.c:231
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
 
-#: vfs/fish.c:233
+#: vfs/fish.c:236
 msgid " fish: Password required for "
 msgstr " fish: Secret dmandé po "
 
-#: vfs/fish.c:242
+#: vfs/fish.c:245
 msgid "fish: Sending password..."
 msgstr "fish: dj' evoye li scret di l' ûzeu..."
 
-#: vfs/fish.c:248
+#: vfs/fish.c:251
 msgid "fish: Sending initial line..."
 msgstr ""
 
-#: vfs/fish.c:258
+#: vfs/fish.c:261
 msgid "fish: Handshaking version..."
 msgstr ""
 
-#: vfs/fish.c:262
+#: vfs/fish.c:265
 msgid "fish: Setting up current directory..."
 msgstr ""
 
-#: vfs/fish.c:264
+#: vfs/fish.c:267
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Raloyi, måjhon %s."
 
-#: vfs/fish.c:353
+#: vfs/fish.c:356
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Dji lé li ridant FTP %s..."
 
-#: vfs/fish.c:457
+#: vfs/fish.c:460
 msgid "fish: failed"
 msgstr "fish: berwete"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:477
+#: vfs/fish.c:480
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr ""
 
-#: vfs/fish.c:502
+#: vfs/fish.c:505
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#: vfs/fish.c:514
+#: vfs/fish.c:517
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr ""
 
-#: vfs/fish.c:515
+#: vfs/fish.c:518
 msgid "zeros"
 msgstr ""
 
-#: vfs/fish.c:562
+#: vfs/fish.c:565
 msgid "Aborting transfer..."
 msgstr ""
 
-#: vfs/fish.c:571
+#: vfs/fish.c:574
 msgid "Error reported after abort."
 msgstr ""
 
-#: vfs/fish.c:573
+#: vfs/fish.c:576
 msgid "Aborted transfer would be successful."
 msgstr ""
 
-#: vfs/ftpfs.c:312
+#: vfs/ftpfs.c:313
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Dji m' disraloye di %s"
 
-#: vfs/ftpfs.c:370
+#: vfs/ftpfs.c:371
 msgid " FTP: Password required for "
 msgstr " FTP: Secret dmandé po "
 
-#: vfs/ftpfs.c:399
+#: vfs/ftpfs.c:400
 msgid " Proxy: Password required for "
 msgstr " Proxy: Secret dmandé po "
 
-#: vfs/ftpfs.c:425
+#: vfs/ftpfs.c:426
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: dj' evoye li no di login proxy"
 
-#: vfs/ftpfs.c:429
+#: vfs/ftpfs.c:430
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: dj' evoye li scret proxy"
 
-#: vfs/ftpfs.c:433
+#: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
 msgstr ""
 
-#: vfs/ftpfs.c:437
+#: vfs/ftpfs.c:438
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: raloyî a %s"
 
-#: vfs/ftpfs.c:454
+#: vfs/ftpfs.c:455
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: dj' evoye li no di login"
 
-#: vfs/ftpfs.c:459
+#: vfs/ftpfs.c:460
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: dj' evoye li scret di l' ûzeu"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:465
 msgid "ftpfs: logged in"
 msgstr "ftpfs: moussî dvins"
 
-#: vfs/ftpfs.c:479
+#: vfs/ftpfs.c:480
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: måva login po l' ûzeu %s "
 
-#: vfs/ftpfs.c:511
+#: vfs/ftpfs.c:512
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr ""
 
-#: vfs/ftpfs.c:636
+#: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: måva no di lodjeu."
 
-#: vfs/ftpfs.c:656
+#: vfs/ftpfs.c:657
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: mwaijhe adresse di lodjeu."
 
-#: vfs/ftpfs.c:679
+#: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: dji m' raloye a %s"
 
-#: vfs/ftpfs.c:689
+#: vfs/ftpfs.c:690
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: disraloyî pa l' ûzeu"
 
-#: vfs/ftpfs.c:691
+#: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: dj' a fwait berwete come dji m' raloyîve å sierveu: %s"
 
-#: vfs/ftpfs.c:732
+#: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Dji rawåde divant do rataker... %d (Control-C po rnoncî)"
 
-#: vfs/ftpfs.c:918
+#: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr ""
 
-#: vfs/ftpfs.c:994
+#: vfs/ftpfs.c:995
 msgid "ftpfs: aborting transfer."
 msgstr ""
 
-#: vfs/ftpfs.c:996
+#: vfs/ftpfs.c:997
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr ""
 
-#: vfs/ftpfs.c:1001
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr ""
 
-#: vfs/ftpfs.c:1090 vfs/ftpfs.c:1192
+#: vfs/ftpfs.c:1091 vfs/ftpfs.c:1193
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD a fwait berwete."
 
-#: vfs/ftpfs.c:1100 vfs/ftpfs.c:1107
+#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
 msgstr ""
 
-#: vfs/ftpfs.c:1158
+#: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
 msgstr ""
 
-#: vfs/ftpfs.c:1180
+#: vfs/ftpfs.c:1181
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Dji lé li ridant FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1182
 msgid "(strict rfc959)"
 msgstr ""
 
-#: vfs/ftpfs.c:1182
+#: vfs/ftpfs.c:1183
 msgid "(chdir first)"
 msgstr ""
 
-#: vfs/ftpfs.c:1306
+#: vfs/ftpfs.c:1307
 msgid "ftpfs: failed"
 msgstr "ftpfs: berwete"
 
-#: vfs/ftpfs.c:1316
+#: vfs/ftpfs.c:1317
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#: vfs/ftpfs.c:1379
+#: vfs/ftpfs.c:1380
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr ""
 
-#. This is place of next pointer
-#: vfs/ftpfs.c:1684
-msgid "File Transfer Protocol (ftp)"
-msgstr ""
-
-#: vfs/ftpfs.c:1797
+#: vfs/ftpfs.c:1812
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6796,118 +6773,77 @@ msgstr "Dji n' pout m' raloyi å sierveu: %s"
 msgid " Too many open connections "
 msgstr ""
 
-#. This is place of next pointer
-#: vfs/mcfs.c:1123
-msgid "Midnight Commander's private remote filesystem"
+#: vfs/sfs.c:329
+#, c-format
+msgid ""
+"Warning: Invalid line in sfs.ini:\n"
+"%s\n"
 msgstr ""
 
-#: vfs/smbfs.c:117
-msgid "Domain:"
-msgstr "Domaine:"
-
-#: vfs/smbfs.c:117
-msgid "Username:"
-msgstr "No di l' ûzeu:"
-
-#: vfs/smbfs.c:117
-msgid "Password: "
-msgstr "Secret: "
-
-#: vfs/smbfs.c:172
+#: vfs/sfs.c:340
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "Mot di passe po \\\\%s\\%s"
+msgid ""
+"Warning: Invalid flag %c in sfs.ini:\n"
+"%s\n"
+msgstr ""
 
-#: vfs/smbfs.c:678
+#: vfs/smbfs.c:527
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
 
-#: vfs/smbfs.c:1256
+#: vfs/smbfs.c:1098
 msgid " Authentication failed "
 msgstr ""
 
-#: vfs/smbfs.c:1749
+#: vfs/smbfs.c:1590
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s fjhant on mkdir %s "
 
-#: vfs/smbfs.c:1770
+#: vfs/smbfs.c:1613
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s fjhant on rmdir %s "
 
-#: vfs/smbfs.c:1875 vfs/smbfs.c:1895 vfs/smbfs.c:1956
+#: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
 msgstr ""
 
-#: vfs/smbfs.c:1979
+#: vfs/smbfs.c:1805
+#, fuzzy, c-format
+msgid " %s removing remote file %s "
+msgstr "  %s fitchîs ki restèt\n"
+
+#: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
 msgstr "  %s fitchîs ki restèt\n"
 
-#. This is place of next pointer
-#: vfs/smbfs.c:2005
-msgid "netbios over tcp/ip"
-msgstr "netbios so tcp/ip"
-
-#: vfs/tar.c:80 vfs/tar.c:97
+#: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
 msgid ""
 "Couldn't open tar archive\n"
 "%s"
 msgstr ""
 
-#: vfs/tar.c:280
+#: vfs/tar.c:281
 msgid "Unexpected EOF on archive file"
 msgstr ""
 
-#: vfs/tar.c:332 vfs/tar.c:339
+#: vfs/tar.c:333 vfs/tar.c:340
 msgid "Inconsistent tar archive"
 msgstr ""
 
-#: vfs/tar.c:409
+#: vfs/tar.c:410
 #, c-format
 msgid ""
 "Hmm,...\n"
 "%s\n"
 "doesn't look like a tar archive."
-msgstr ""
-
-#: vfs/vfs.c:1144
-msgid "Changes to file lost"
-msgstr "Les candjmints do fitchî ont stî perdus"
-
-#: vfs/vfs.c:1779
-#, fuzzy
-msgid "Could not parse:"
-msgstr ""
-"Dji n' sai enonder li foncsion stat %s\n"
-"%s"
-
-#: vfs/vfs.c:1781
-msgid "More parsing errors will be ignored."
-msgstr ""
-
-#: vfs/vfs.c:1781
-msgid "(sorry)"
-msgstr "(mande escuzes)"
-
-#: vfs/vfs.c:1791
-msgid "Internal error:"
-msgstr "Divintrinne aroke:"
-
-#: vfs/vfs.c:1801
-#, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr ""
-
-#: vfs/vfs.c:1802
-#, c-format
-msgid "%s: %s: %s %ld bytes transfered"
 msgstr ""
 
 #: vfs/undelfs.c:81
@@ -7007,10 +6943,144 @@ msgstr ""
 msgid " Could not open file: %s "
 msgstr " Dji n' sai drovi li fitchî: %s "
 
-#. This is place of next pointer
-#: vfs/undelfs.c:684
-msgid "Undelete filesystem for ext2"
-msgstr "Sistinme di fitchîs disrafaçabe po ext2fs"
+#: vfs/vfs.c:1146
+msgid "Changes to file lost"
+msgstr "Les candjmints do fitchî ont stî perdus"
+
+#: vfs/vfs.c:1782
+#, fuzzy
+msgid "Could not parse:"
+msgstr ""
+"Dji n' sai enonder li foncsion stat %s\n"
+"%s"
+
+#: vfs/vfs.c:1784
+msgid "More parsing errors will be ignored."
+msgstr ""
+
+#: vfs/vfs.c:1784
+msgid "(sorry)"
+msgstr "(mande escuzes)"
+
+#: vfs/vfs.c:1795
+msgid "Internal error:"
+msgstr "Divintrinne aroke:"
+
+#: vfs/vfs.c:1805
+#, c-format
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr ""
+
+#: vfs/vfs.c:1806
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr ""
+
+#~ msgid " There is no other panel to compare contents to "
+#~ msgstr " I gn a pont d' ôte panea po rmete çu k' i gn a dvins "
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "Global option settings"
+#~ msgstr "Apontiaedje globå"
+
+#~ msgid "File/New/Directory..."
+#~ msgstr "Fitchî/Novea/Ridant..."
+
+#~ msgid "Open _new window"
+#~ msgstr "Drovî on _novea purnea"
+
+#~ msgid "_Close this window"
+#~ msgstr "_Clôre ci purnea chal"
+
+#~ msgid "E_xit"
+#~ msgstr "Moussî _foû"
+
+#~ msgid "_Listing view"
+#~ msgstr "Vey è _djîvéye"
+
+#~ msgid "_Icon view"
+#~ msgstr "Vey a _imådjetes"
+
+#~ msgid "Display _tree view"
+#~ msgstr "Vey come on åbe"
+
+#~ msgid "_About the Midnight Commander..."
+#~ msgstr "Å _dfait di Midnight Commander..."
+
+#~ msgid "_File"
+#~ msgstr "_Fitchî"
+
+#~ msgid "_View"
+#~ msgstr "_Vey"
+
+#~ msgid "mc.hlp"
+#~ msgstr "mc.hlp"
+
+#~ msgid "&Open/load...     C-o"
+#~ msgstr "&Drovi/tcherdjî...     C-o"
+
+#~ msgid "Dlete"
+#~ msgstr "Disf"
+
+#~ msgid " I can't run the Advanced Chown command on an extfs "
+#~ msgstr " Dji n' såreu enonder li cmande Advanced Chown so èn extfs "
+
+#~ msgid " I can't run the Advanced Chown command on a tarfs "
+#~ msgstr " Dji n' sareu enonder li cmande Advanced Chown so on tarfs "
+
+#~ msgid " I can't run the Chmod command on an extfs "
+#~ msgstr " Dji n' såreu fé on chmod so on extfs"
+
+#~ msgid " I can't run the Chmod command on a tarfs "
+#~ msgstr " Dji n' såreu enonder li cmande Chmod so on tarfs "
+
+#~ msgid " I can't run the Chown command on an extfs "
+#~ msgstr " Dji n' såreu enonder li cmande chown so èn extfs "
+
+#~ msgid " I can't run the Chown command on a tarfs "
+#~ msgstr " Dji n' såreu enonder li cmande chown so èn tarfs "
+
+#~ msgid ""
+#~ " Couldn't stat %s \n"
+#~ " %s "
+#~ msgstr ""
+#~ " Dji n' sai fé on %s \n"
+#~ " %s "
+
+#~ msgid " Cannot execute commands on a Virtual File System directory "
+#~ msgstr ""
+#~ " Dji n' sai enonder des cmandes dins on ridant k' est so on forveyu "
+#~ "sistinme di fitchîs "
+
+#~ msgid "Using "
+#~ msgstr "Dj' eploye "
+
+#~ msgid "terminfo"
+#~ msgstr "terminfo"
+
+#~ msgid "termcap"
+#~ msgstr "termcap"
+
+#, fuzzy
+#~ msgid "optional"
+#~ msgstr "Tchûzes"
+
+#~ msgid "as default"
+#~ msgstr "prémetu"
+
+#~ msgid " Internal error: get_file \n"
+#~ msgstr " Divintrinne aroke: get_file \n"
+
+#~ msgid " Direntry warning "
+#~ msgstr " Avertixhmint direntry "
+
+#~ msgid "netbios over tcp/ip"
+#~ msgstr "netbios so tcp/ip"
+
+#~ msgid "Undelete filesystem for ext2"
+#~ msgstr "Sistinme di fitchîs disrafaçabe po ext2fs"
 
 #~ msgid "Filename"
 #~ msgstr "No do fitchî"

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc CVS-20010429\n"
-"POT-Creation-Date: 2001-04-29 18:25+0900\n"
+"POT-Creation-Date: 2001-08-24 04:10-0400\n"
 "PO-Revision-Date: 2001-04-29 18:31+0900\n"
 "Last-Translator: Akira TAGOH <tagoh@gnome.gr.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
@@ -14,25 +14,25 @@ msgstr ""
 "Content-Type: text/plain; charset=euc-jp\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit_key_translator.c:126
+#: edit/edit_key_translator.c:127
 msgid " Emacs key: "
 msgstr " Emacsキー: "
 
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
+#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
 msgid " Execute Macro "
 msgstr " マクロを実行 "
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-#: gtkedit/editcmd.c:763 gtkedit/editcmd.c:772
+#: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
+#: gtkedit/editcmd.c:803 gtkedit/editcmd.c:812
 msgid " Press macro hotkey: "
 msgstr " マクロホットキーを押して下さい: "
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:160
 msgid " Insert Literal "
 msgstr " 文字を入力してください "
 
-#: edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:160
 msgid " Press any key: "
 msgstr " キーを押してください: "
 
@@ -97,129 +97,121 @@ msgstr "編集"
 msgid "view"
 msgstr "表示"
 
-#: gnome/gcmd.c:50
-msgid " There is no other panel to compare contents to "
-msgstr " コンテンツを比較するパネルが他にありません "
-
-#: gnome/gcmd.c:86
+#: gnome/gcmd.c:62
 msgid " Could not start a terminal "
 msgstr " ターミナルを起動できませんでした "
 
-#: gnome/gcmd.c:101
+#: gnome/gcmd.c:77
 msgid "The Midnight Commander Team"
 msgstr "The Midnight Commander Team"
 
-#: gnome/gcmd.c:103
+#: gnome/gcmd.c:79
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "バグレポート: http://bugs.gnome.org/ または gnome-bug "
 
-#: gnome/gcmd.c:115 gnome/gmc-window.c:68
+#: gnome/gcmd.c:91
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:118 gnome/gmc-window.c:71
+#: gnome/gcmd.c:94
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "Midnight Commanderファイル・マネージャ GNOMEエディション"
 
-#: gnome/gcmd.c:291
+#: gnome/gcmd.c:267
 msgid "Sort By"
 msgstr "ソート..."
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:296
+#: gnome/gcmd.c:272
 msgid "Ignore case sensitivity."
 msgstr "大文字・小文字を無視する."
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:275
 msgid "Sort files by "
 msgstr "ファイルの並べ替え"
 
-#: gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
+#: gnome/gcmd.c:280 gnome/gcustom-layout.c:41 src/chmod.c:139 src/screen.c:407
 msgid "Name"
 msgstr "名前"
 
-#: gnome/gcmd.c:311
+#: gnome/gcmd.c:287
 msgid "File Type"
 msgstr "ファイルタイプ"
 
-#: gnome/gcmd.c:317 gnome/gcustom-layout.c:45 src/screen.c:414
-#: src/screen.c:415
+#: gnome/gcmd.c:293 gnome/gcustom-layout.c:45 src/screen.c:408
+#: src/screen.c:409
 msgid "Size"
 msgstr "サイズ"
 
-#: gnome/gcmd.c:323
+#: gnome/gcmd.c:299
 msgid "Time Last Accessed"
 msgstr "最終アクセス時刻"
 
-#: gnome/gcmd.c:329
+#: gnome/gcmd.c:305
 msgid "Time Last Modified"
 msgstr "最終更新時刻"
 
-#: gnome/gcmd.c:335
+#: gnome/gcmd.c:311
 msgid "Time Last Changed"
 msgstr "最終変更時刻"
 
-#: gnome/gcmd.c:349
+#: gnome/gcmd.c:325
 msgid "Reverse the order."
 msgstr "順番を逆に並べる"
 
-#: gnome/gcmd.c:396
+#: gnome/gcmd.c:372
 msgid "Enter name."
 msgstr "名前を入力してください"
 
-#: gnome/gcmd.c:402
+#: gnome/gcmd.c:378
 msgid "Enter label for command:"
 msgstr "コマンドのラベルを入力:"
 
-#: gnome/gcmd.c:507
+#: gnome/gcmd.c:484
 msgid "Find all core files"
 msgstr "全coreファイルを検索"
 
-#: gnome/gcmd.c:510 src/panelize.c:349
+#: gnome/gcmd.c:487 src/panelize.c:349
 msgid "Find rejects after patching"
 msgstr "パッチを当てた後のrejectファイルを検索"
 
-#: gnome/gcmd.c:555
+#: gnome/gcmd.c:532
 msgid "Run Command"
 msgstr "コマンド実行"
 
 #. Frame 1
-#: gnome/gcmd.c:560
+#: gnome/gcmd.c:537
 msgid "Preset Commands"
 msgstr "プレセット・コマンド"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:577 gnome/gcustom-layout.c:183
+#: gnome/gcmd.c:554 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "追加"
 
-#: gnome/gcmd.c:581 gnome/gcustom-layout.c:184
+#: gnome/gcmd.c:558 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "削除"
 
 #. Frame 2
-#: gnome/gcmd.c:589
+#: gnome/gcmd.c:566
 msgid "Run this Command"
 msgstr "このコマンドを実行"
 
-#: gnome/gcmd.c:596
+#: gnome/gcmd.c:573
 msgid "Command: "
 msgstr "コマンド: "
 
-#: gnome/gcmd.c:716
+#: gnome/gcmd.c:694
 msgid "Set Filter"
 msgstr "フィルタの設定"
 
-#: gnome/gcmd.c:721 gnome/gcmd.c:762 gnome/gcmd.c:767 gnome/gcmd.c:771
-#: gnome/gscreen.c:2447
+#: gnome/gcmd.c:699 gnome/gcmd.c:740 gnome/gcmd.c:745 gnome/gcmd.c:749
+#: gnome/gscreen.c:2484
 msgid "Show all files"
 msgstr "全てのファイルを表示"
 
-#: gnome/gcmd.c:728
-msgid "."
-msgstr "."
-
-#: gnome/gcmd.c:744
+#: gnome/gcmd.c:722
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -231,27 +223,27 @@ msgstr ""
 "例:\n"
 "『*.png』ではPNG画像のみを表示するようになります"
 
-#: gnome/gcmd.c:746
+#: gnome/gcmd.c:724
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "パネルに表示するファイルのフィルタは正規表現を入力してください"
 
-#: gnome/gcmd.c:806
+#: gnome/gcmd.c:784
 msgid " Open with..."
 msgstr "アプリケーションと開く"
 
-#: gnome/gcmd.c:807
+#: gnome/gcmd.c:785
 msgid "Enter extra arguments:"
 msgstr "補助的な引数を入力してください:"
 
-#: gnome/gcmd.c:877
+#: gnome/gcmd.c:855
 msgid "Desktop entry properties"
 msgstr "デスクトップ・エントリ・プロパティ"
 
-#: gnome/gcmd.c:903
+#: gnome/gcmd.c:881
 msgid "Select File"
 msgstr "ファイルを選択してください"
 
-#: gnome/gcmd.c:911
+#: gnome/gcmd.c:889
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -263,19 +255,19 @@ msgstr ""
 "例:\n"
 "『*.png』ではPNG画像のみを選択するようになります"
 
-#: gnome/gcmd.c:913
+#: gnome/gcmd.c:891
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "パネルで選択するファイルのフィルタの正規表現を入力してください"
 
-#: gnome/gcmd.c:959 src/cmd.c:547 src/cmd.c:598
+#: gnome/gcmd.c:937 src/cmd.c:551 src/cmd.c:604
 msgid "  Malformed regular expression  "
 msgstr "  おかしな正規表現です  "
 
-#: gnome/gcmd.c:1002
+#: gnome/gcmd.c:979
 msgid "Creating a desktop link"
 msgstr "デスクトップにリンクを作成"
 
-#: gnome/gcmd.c:1003
+#: gnome/gcmd.c:980
 msgid "Enter the URL:"
 msgstr "URLを入力:"
 
@@ -288,9 +280,8 @@ msgid "Creation Time"
 msgstr "作成時刻"
 
 #. Group
-#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:788
-#: gnome/gnome-file-property-dialog.c:957 gnome/gprop.c:280 gnome/gprop.c:405
-#: src/screen.c:427
+#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:780
+#: gnome/gnome-file-property-dialog.c:949 src/screen.c:421
 msgid "Group"
 msgstr "グループ"
 
@@ -302,7 +293,7 @@ msgstr "グループID"
 msgid "Inode Number"
 msgstr "Iノード番号"
 
-#: gnome/gcustom-layout.c:39 src/achown.c:378
+#: gnome/gcustom-layout.c:39 src/achown.c:361
 msgid "Mode"
 msgstr "モード"
 
@@ -315,12 +306,12 @@ msgid "Number of Hard Links"
 msgstr "ハードリンク数"
 
 #. Owner
-#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:942
-#: gnome/gprop.c:390 src/screen.c:426
+#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:934
+#: src/screen.c:420
 msgid "Owner"
 msgstr "所有者"
 
-#: gnome/gcustom-layout.c:44 src/screen.c:420
+#: gnome/gcustom-layout.c:44 src/screen.c:414
 msgid "Permission"
 msgstr "アクセス権"
 
@@ -348,28 +339,63 @@ msgstr "表示する情報"
 msgid "Custom View"
 msgstr "カスタム表示"
 
-#: gnome/gdesktop.c:679 gnome/gmount.c:385
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:146
+msgid "Home directory"
+msgstr "ホームディレクトリ"
+
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr "ゴミ箱"
+
+#. Icon position
+#: gnome/gdesktop-prefs.c:240
+msgid "Icon position"
+msgstr "アイコンの位置"
+
+#. Snap and placement
+#: gnome/gdesktop-prefs.c:256
+msgid "Automatic icon placement"
+msgstr "アイコンの自動整列"
+
+#: gnome/gdesktop-prefs.c:260
+msgid "Snap icons to grid"
+msgstr "アイコンをグリッドに揃える"
+
+#: gnome/gdesktop-prefs.c:275
+msgid "Use shaped icons"
+msgstr "シェイプアイコンを使用"
+
+#: gnome/gdesktop-prefs.c:279
+msgid "Use shaped text"
+msgstr "シェイプテキストを使用"
+
+#: gnome/gdesktop-prefs.c:333
+msgid "Desktop"
+msgstr "デスクトップ"
+
+#: gnome/gdesktop.c:680 gnome/gmount.c:383
 msgid "Warning"
 msgstr "警告"
 
-#: gnome/gdesktop.c:680
+#: gnome/gdesktop.c:681
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "%sを開けません; デスクトップアイコンがありません"
 
-#: gnome/gdesktop.c:1412
+#: gnome/gdesktop.c:1413
 msgid "While running the mount/umount command"
 msgstr "mount/umount 実行中"
 
-#: gnome/gdesktop.c:1481
+#: gnome/gdesktop.c:1482
 msgid "While running the eject command"
 msgstr "eject 実行中"
 
-#: gnome/gdesktop.c:1665 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1666 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "エラー"
 
-#: gnome/gdesktop.c:2917
+#: gnome/gdesktop.c:2930
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -383,129 +409,94 @@ msgstr ""
 "\n"
 "背景を設定できません."
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:366
+#: gnome/gdesktop.c:2959 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "端末(_T)"
 
-#: gnome/gdesktop.c:2946 gnome/glayout.c:367
+#: gnome/gdesktop.c:2959 gnome/glayout.c:362
 msgid "Launch a new terminal in the current directory"
 msgstr "現在のディレクトリで端末を起動"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2948 gnome/glayout.c:369
+#: gnome/gdesktop.c:2961 gnome/glayout.c:364
 msgid "_Directory..."
 msgstr "ディレクトリ(_D)..."
 
-#: gnome/gdesktop.c:2948 gnome/glayout.c:370
+#: gnome/gdesktop.c:2961 gnome/glayout.c:365
 msgid "Creates a new directory"
 msgstr "ディレクトリを作成する"
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2962
 msgid "URL L_ink..."
 msgstr "URLリンク(_i)..."
 
-#: gnome/gdesktop.c:2949
+#: gnome/gdesktop.c:2962
 msgid "Creates a new URL link"
 msgstr "新規URLリンクを作成する"
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2963
 msgid "_Launcher..."
 msgstr "ランチャ(_L)..."
 
-#: gnome/gdesktop.c:2950
+#: gnome/gdesktop.c:2963
 msgid "Creates a new launcher"
 msgstr "ランチャを作成する"
 
-#: gnome/gdesktop.c:2956
+#: gnome/gdesktop.c:2969
 msgid "By _Name"
 msgstr "名前(_N)"
 
-#: gnome/gdesktop.c:2957
+#: gnome/gdesktop.c:2970
 msgid "By File _Type"
 msgstr "ファイルタイプ(_T)"
 
-#: gnome/gdesktop.c:2958
+#: gnome/gdesktop.c:2971
 msgid "By _Size"
 msgstr "サイズ(_S)"
 
-#: gnome/gdesktop.c:2959
+#: gnome/gdesktop.c:2972
 msgid "By Time Last _Accessed"
 msgstr "最終アクセス時刻(_A)"
 
-#: gnome/gdesktop.c:2960
+#: gnome/gdesktop.c:2973
 msgid "By Time Last _Modified"
 msgstr "最終更新時刻(_M)"
 
-#: gnome/gdesktop.c:2961
+#: gnome/gdesktop.c:2974
 msgid "By Time Last _Changed"
 msgstr "最終変更時刻(_C)"
 
-#: gnome/gdesktop.c:2969 gnome/glayout.c:466
+#: gnome/gdesktop.c:2982 gnome/glayout.c:461
 msgid "_Arrange Icons"
 msgstr "アイコンの整列(_A)"
 
-#: gnome/gdesktop.c:2970
+#: gnome/gdesktop.c:2983
 msgid "_Tidy Icons"
 msgstr "アイコンの整理(_T)"
 
-#: gnome/gdesktop.c:2971
+#: gnome/gdesktop.c:2984
 msgid "Create _New Window"
 msgstr "新規ウィンドウの作成(_N)"
 
-#: gnome/gdesktop.c:2973 gnome/glayout.c:468
+#: gnome/gdesktop.c:2986 gnome/glayout.c:463
 msgid "Rescan _Desktop Directory"
 msgstr "デスクトップの再走査(_D)"
 
-#: gnome/gdesktop.c:2974 gnome/glayout.c:469
+#: gnome/gdesktop.c:2987 gnome/glayout.c:464
 msgid "Rescan De_vices"
 msgstr "デバイスの再走査(_v)"
 
-#: gnome/gdesktop.c:2975 gnome/glayout.c:470
+#: gnome/gdesktop.c:2988 gnome/glayout.c:465
 msgid "Recreate Default _Icons"
 msgstr "デフォルトアイコンの再作成(_I)"
 
-#: gnome/gdesktop.c:2977
+#: gnome/gdesktop.c:2990
 msgid "Configure _Background Image"
 msgstr "背景画像を設定(_B)"
 
-#: gnome/gdesktop.c:2978
+#: gnome/gdesktop.c:2991
 msgid "Des_ktop Properties"
 msgstr "デスクトップのプロパティ(_k)"
-
-#. Icon position
-#: gnome/gdesktop-prefs.c:242
-msgid "Icon position"
-msgstr "アイコンの位置"
-
-#. Snap and placement
-#: gnome/gdesktop-prefs.c:258
-msgid "Automatic icon placement"
-msgstr "アイコンの自動整列"
-
-#: gnome/gdesktop-prefs.c:262
-msgid "Snap icons to grid"
-msgstr "アイコンをグリッドに揃える"
-
-#: gnome/gdesktop-prefs.c:277
-msgid "Use shaped icons"
-msgstr "シェイプアイコンを使用"
-
-#: gnome/gdesktop-prefs.c:281
-msgid "Use shaped text"
-msgstr "シェイプテキストを使用"
-
-#: gnome/gdesktop-prefs.c:335
-msgid "Desktop"
-msgstr "デスクトップ"
-
-#. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop-init.c:146
-msgid "Home directory"
-msgstr "ホームディレクトリ"
-
-#: gnome/gdesktop-init.c:158
-msgid "Trash"
-msgstr "ゴミ箱"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -568,63 +559,63 @@ msgstr "移動/コピー先のファイルは既に存在します: %s"
 msgid "Replace it?"
 msgstr "上書きしますか?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
-#: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
+#: gnome/gdialogs.c:569 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1259
+#: src/file.c:802 src/screen.c:2418 src/tree.c:1023
 msgid "Copy"
 msgstr "コピー"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
+#: gnome/gdialogs.c:573 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1261
 msgid "Move"
 msgstr "移動"
 
-#: gnome/gdialogs.c:583
+#: gnome/gdialogs.c:590
 msgid "Destination"
 msgstr "目的場所"
 
-#: gnome/gdialogs.c:597
+#: gnome/gdialogs.c:604
 msgid "Find Destination Folder"
 msgstr "目的場所のフォルダを検索"
 
-#: gnome/gdialogs.c:611
+#: gnome/gdialogs.c:618
 msgid "Copy as a background process"
 msgstr "バックグラウンドプロセスとしてコピー"
 
-#: gnome/gdialogs.c:629
+#: gnome/gdialogs.c:636
 msgid "Advanced Options"
 msgstr "詳細オプション"
 
-#: gnome/gdialogs.c:633
+#: gnome/gdialogs.c:640
 msgid "Preserve symlinks"
 msgstr "シンボリック情報を保持する"
 
-#: gnome/gdialogs.c:643
+#: gnome/gdialogs.c:650
 msgid "Follow links."
 msgstr "リンクを追いかける"
 
-#: gnome/gdialogs.c:649
+#: gnome/gdialogs.c:656
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
 "リンク先の実体をコピーしないでシンボリックリンクポインタ情報のみをコピーする"
 
-#: gnome/gdialogs.c:654
+#: gnome/gdialogs.c:661
 msgid "Preserve file attributes."
 msgstr "ファイル属性情報を保持する"
 
-#: gnome/gdialogs.c:660
+#: gnome/gdialogs.c:667
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "アクセス権やユーザID/グループID情報を可能なら保持する"
 
-#: gnome/gdialogs.c:666
+#: gnome/gdialogs.c:673
 msgid "Recursively copy subdirectories."
 msgstr "サブディレクトリを再帰的にコピーする"
 
-#: gnome/gdialogs.c:673
+#: gnome/gdialogs.c:680
 msgid "If set, this will copy the directories recursively"
 msgstr "セットするとディレクトリを再帰的にコピーします"
 
-#: gnome/gdialogs.c:780
+#: gnome/gdialogs.c:787
 #, c-format
 msgid ""
 "%s\n"
@@ -635,60 +626,77 @@ msgstr ""
 "\n"
 "ディレクトリが空ではありません. 再帰的に削除しますか?"
 
-#: gnome/gdialogs.c:790 src/file.c:2248
+#: gnome/gdialogs.c:797 src/file.c:2247
 msgid " Delete: "
 msgstr " 削除:"
 
-#: gnome/gdialogs.c:794
+#: gnome/gdialogs.c:801
 msgid "Do the same for the rest"
 msgstr "残りも同様に処理を続ける"
 
-#: gnome/gdialogs.c:877
+#: gnome/gdialogs.c:885
 msgid "Move Progress"
 msgstr "移動中"
 
-#: gnome/gdialogs.c:880
+#: gnome/gdialogs.c:888
 msgid "Copy Progress"
 msgstr "コピー中"
 
-#: gnome/gdialogs.c:883
+#: gnome/gdialogs.c:891
 msgid "Delete Progress"
 msgstr "削除中"
 
-#: gnome/gdialogs.c:939
+#: gnome/gdialogs.c:947
 msgid "File "
 msgstr "ファイル "
 
-#: gnome/gdialogs.c:943
+#: gnome/gdialogs.c:951
 msgid "is "
 msgstr " "
 
-#: gnome/gdialogs.c:946
+#: gnome/gdialogs.c:954
 msgid "done."
 msgstr "を処理しました"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1811
+#: gnome/gdialogs.c:1015 src/wtools.c:570 vfs/vfs.c:1821
 msgid "Password:"
 msgstr "パスワード:"
 
-#: gnome/gdialogs.c:1007
+#: gnome/gdialogs.c:1015
 msgid "Password"
 msgstr "パスワード"
 
 #. Create the dialog
-#: gnome/gdialogs.c:1039
+#: gnome/gdialogs.c:1047
 msgid "Symbolic Link"
 msgstr "リンク"
 
-#: gnome/gdialogs.c:1055 src/boxes.c:801
+#: gnome/gdialogs.c:1063 src/boxes.c:892
 msgid "Existing filename (filename symlink will point to):"
 msgstr "存在するファイル名(リンクのポイント先):"
 
-#: gnome/gdialogs.c:1069 src/boxes.c:799
+#: gnome/gdialogs.c:1077 src/boxes.c:890
 msgid "Symbolic link filename:"
 msgstr "リンクファイル名:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Domain:"
+msgstr "ドメイン:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Username:"
+msgstr "ユーザ名:"
+
+#: gnome/gdialogs.c:1115 src/boxes.c:1055
+msgid "Password: "
+msgstr "パスワード:"
+
+#: gnome/gdialogs.c:1122 src/boxes.c:1110
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "\\\\%s\\%sのパスワード"
 
 #: gnome/gdnd.c:53
 msgid "_Move here"
@@ -716,64 +724,149 @@ msgstr ""
 "%sをstatできません\n"
 "%s"
 
+#: gnome/gfind.c:115
+#, fuzzy
+msgid "Case sensitive"
+msgstr "大文字・小文字を区別 "
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Start at:"
+msgstr "開始場所:"
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Filename:"
+msgstr "ファイル名:"
+
+#: gnome/gfind.c:121 src/find.c:148
+msgid "Content: "
+msgstr "内容:"
+
+#. Create dialog
+#: gnome/gfind.c:131 src/find.c:203
+msgid "Find File"
+msgstr "ファイル検索"
+
+#: gnome/gfind.c:335 src/find.c:398
+#, c-format
+msgid "Grepping in %s"
+msgstr "%s で検索中"
+
+#: gnome/gfind.c:372 src/find.c:435
+msgid " Find/read "
+msgstr " 検索/読み込み "
+
+#: gnome/gfind.c:372 src/find.c:435
+msgid " Problem reading from child "
+msgstr " 子プロセスからの結果読み込みに問題がありました"
+
+#: gnome/gfind.c:409 src/find.c:476
+msgid "Finished"
+msgstr "終了"
+
+#: gnome/gfind.c:430 src/find.c:500 src/view.c:1528
+#, c-format
+msgid "Searching %s"
+msgstr "%sを検索中"
+
+#: gnome/gfind.c:552 gnome/gfind.c:589
+msgid "Suspend"
+msgstr "中断"
+
+#: gnome/gfind.c:552
+msgid "Restart"
+msgstr "再開"
+
+#: gnome/gfind.c:554 src/boxes.c:922 src/find.c:674
+msgid "Stopped"
+msgstr "停止中"
+
+#: gnome/gfind.c:554 gnome/gfind.c:654 src/find.c:674 src/find.c:770
+msgid "Searching"
+msgstr "検索"
+
+#: gnome/gfind.c:583 src/find.c:745
+msgid "Find file"
+msgstr "ファイル検索"
+
+#. The buttons
+#: gnome/gfind.c:587
+msgid "Change to this directory"
+msgstr "このディレクトリを変更"
+
+#: gnome/gfind.c:588
+msgid "Search again"
+msgstr "再検索"
+
+#: gnome/gfind.c:594
+msgid "View this file"
+msgstr "このファイルを表示"
+
+#: gnome/gfind.c:595
+msgid "Edit this file"
+msgstr "このファイルを編集"
+
+#: gnome/gfind.c:596
+msgid "Send the results to a Panel"
+msgstr "パネルへ結果を送る"
+
 #: gnome/gicon.c:282
 msgid "Default set of icons not found, check your installation"
 msgstr ""
 "標準のアイコンセットが見つかりません, インストールの仕方を確認してください"
 
-#: gnome/glayout.c:41
+#: gnome/glayout.c:40
 msgid "_Icon View"
 msgstr "アイコン表示(_I)"
 
-#: gnome/glayout.c:42 gnome/glayout.c:58
+#: gnome/glayout.c:41 gnome/glayout.c:57
 msgid "Switch view to an icon display"
 msgstr "アイコン表示に切替える"
 
-#: gnome/glayout.c:44
+#: gnome/glayout.c:43
 msgid "_Brief View"
 msgstr "簡易表示(_B)"
 
-#: gnome/glayout.c:45 gnome/glayout.c:61
+#: gnome/glayout.c:44 gnome/glayout.c:60
 msgid "Switch view to show just file name and type"
 msgstr "ファイル名とタイプのみの表示に切替える"
 
-#: gnome/glayout.c:47
+#: gnome/glayout.c:46
 msgid "_Detailed View"
 msgstr "詳細表示(_D)"
 
-#: gnome/glayout.c:48 gnome/glayout.c:64
+#: gnome/glayout.c:47 gnome/glayout.c:63
 msgid "Switch view to show detailed file statistics"
 msgstr "詳細なファイル情報の表示に切替える"
 
-#: gnome/glayout.c:50
+#: gnome/glayout.c:49
 msgid "_Custom View"
 msgstr "カスタム表示(_C)"
 
-#: gnome/glayout.c:51 gnome/glayout.c:67
+#: gnome/glayout.c:50 gnome/glayout.c:66
 msgid "Switch view to show user-defined statistics"
 msgstr "ユーザ定義表示に切替える"
 
-#: gnome/glayout.c:57
+#: gnome/glayout.c:56
 msgid "Icons"
 msgstr "アイコン"
 
-#: gnome/glayout.c:60
+#: gnome/glayout.c:59
 msgid "Brief"
 msgstr "簡易"
 
-#: gnome/glayout.c:63
+#: gnome/glayout.c:62
 msgid "Detailed"
 msgstr "詳細"
 
-#: gnome/glayout.c:66
+#: gnome/glayout.c:65
 msgid "Custom"
 msgstr "カスタム"
 
-#: gnome/glayout.c:301
+#: gnome/glayout.c:294
 msgid "Enter command to run"
 msgstr "実行コマンドを入力してください"
 
-#: gnome/glayout.c:319
+#: gnome/glayout.c:312
 msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
 "also terminate the GNOME desktop handler.\n"
@@ -785,7 +878,7 @@ msgstr ""
 "\n"
 "本当に終了してもよろしいですか?"
 
-#: gnome/glayout.c:331
+#: gnome/glayout.c:325
 msgid ""
 "The file manager and the desktop handler are now terminating\n"
 "\n"
@@ -801,924 +894,201 @@ msgstr ""
 "\n"
 "了解を押すと終了します. 利用を継続するならキャンセルを押してください."
 
-#: gnome/glayout.c:371
+#: gnome/glayout.c:366
 msgid "_File..."
 msgstr "ファイル(_F)..."
 
-#: gnome/glayout.c:372
+#: gnome/glayout.c:367
 msgid "Creates a new file in this directory"
 msgstr "このディレクトリに新しいファイルを作成します"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:393 gnome/gscreen.c:2113
+#: gnome/glayout.c:388 gnome/gscreen.c:2115
 msgid "_Copy..."
 msgstr "コピー(_C)..."
 
-#: gnome/glayout.c:393
+#: gnome/glayout.c:388
 msgid "Copy files"
 msgstr "ファイルをコピーする"
 
-#: gnome/glayout.c:394 gnome/gscreen.c:2114
+#: gnome/glayout.c:389 gnome/gscreen.c:2116
 msgid "_Delete..."
 msgstr "削除(_D)..."
 
-#: gnome/glayout.c:394
+#: gnome/glayout.c:389
 msgid "Delete files"
 msgstr "ファイルを削除する"
 
-#: gnome/glayout.c:395 gnome/gscreen.c:2115
+#: gnome/glayout.c:390 gnome/gscreen.c:2117
 msgid "_Move..."
 msgstr "移動(_M)..."
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:390
 msgid "Rename or move files"
 msgstr "ファイルの移動または名前変更"
 
-#: gnome/glayout.c:397
+#: gnome/glayout.c:392
 msgid "Show directory sizes"
 msgstr "ディレクトリサイズを表示"
 
-#: gnome/glayout.c:397
+#: gnome/glayout.c:392
 msgid "Shows the disk space used by each directory"
 msgstr "各ディレクトリでディスク空き容量を表示"
 
-#: gnome/glayout.c:399
+#: gnome/glayout.c:394
 msgid "Close window"
 msgstr "ウィンドウを閉じる"
 
-#: gnome/glayout.c:399
+#: gnome/glayout.c:394
 msgid "Closes this window"
 msgstr "このウィンドウを閉じる"
 
-#: gnome/glayout.c:406
+#: gnome/glayout.c:401
 msgid "Select _All"
 msgstr "全選択(_A)"
 
-#: gnome/glayout.c:406
+#: gnome/glayout.c:401
 msgid "Select all files in the current Panel"
 msgstr "現在のパネルの全ファイルを選択する"
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:403
 msgid "_Select Files..."
 msgstr "ファイル選択(_S)..."
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:403
 msgid "Select a group of files"
 msgstr "ファイルのグループを選択"
 
-#: gnome/glayout.c:409
+#: gnome/glayout.c:404
 msgid "_Invert Selection"
 msgstr "選択反転(_I)"
 
-#: gnome/glayout.c:409
+#: gnome/glayout.c:404
 msgid "Reverses the list of tagged files"
 msgstr "ファイルスイッチの一覧を反転する"
 
-#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2075
+#: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2090
 msgid "Search"
 msgstr "検索"
 
-#: gnome/glayout.c:412
+#: gnome/glayout.c:407
 msgid "Search for a file in the current Panel"
 msgstr "現在のパネルでのファイルを検索"
 
-#: gnome/glayout.c:415 gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/glayout.c:410 gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "_Rescan Directory"
 msgstr "ディレクトリを再走査(_R)"
 
-#: gnome/glayout.c:415
+#: gnome/glayout.c:410
 msgid "Rescan the directory contents"
 msgstr "ディレクトリ内容を再走査する"
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:420
 msgid "_Sort By..."
 msgstr "ソート(_S)..."
 
-#: gnome/glayout.c:425
-msgid "Confirmation settings"
-msgstr "設定の確認"
+#: gnome/glayout.c:420
+#, fuzzy
+msgid "Filename sort order"
+msgstr "並び変える"
 
-#: gnome/glayout.c:426
+#: gnome/glayout.c:421
 msgid "_Filter View..."
 msgstr "フィルタ表示(_F)..."
 
-#: gnome/glayout.c:426
-msgid "Global option settings"
-msgstr "全般のオプション設定"
+#: gnome/glayout.c:421
+#, fuzzy
+msgid "Filename filtering settings"
+msgstr "設定の確認"
 
-#: gnome/glayout.c:433
+#: gnome/glayout.c:428
 msgid "_Find File..."
 msgstr "ファイル検索(_F)..."
 
-#: gnome/glayout.c:433
+#: gnome/glayout.c:428
 msgid "Locate files on disk"
 msgstr "ディスク上のファイル場所"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:436
+#: gnome/glayout.c:431
 msgid "_Edit mime types..."
 msgstr "MIME形式の編集(_E)..."
 
-#: gnome/glayout.c:436
+#: gnome/glayout.c:431
 msgid "Edits the MIME type bindings"
 msgstr "MIME形式のバインドを編集する"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:433
 msgid "_Run Command..."
 msgstr "コマンド実行(_R)..."
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:433
 msgid "Runs a command"
 msgstr "コマンドを実行する"
 
-#: gnome/glayout.c:440
+#: gnome/glayout.c:435
 msgid "_Run Command in panel..."
 msgstr "パネル中でコマンドを実行(_R)..."
 
-#: gnome/glayout.c:440
+#: gnome/glayout.c:435
 msgid "Run a command and put the results in a panel"
 msgstr "コマンドを実行してパネルに結果を表示します"
 
-#: gnome/glayout.c:450
+#: gnome/glayout.c:445
 msgid "_Background jobs..."
 msgstr "バックグラウンドジョブ(_B)..."
 
-#: gnome/glayout.c:450
+#: gnome/glayout.c:445
 msgid "List of background operations"
 msgstr "バックグラウンド操作の一覧"
 
-#: gnome/glayout.c:453
+#: gnome/glayout.c:448
 msgid "Exit"
 msgstr "終了する"
 
-#: gnome/glayout.c:453
+#: gnome/glayout.c:448
 msgid "Terminates the file manager and the desktop"
 msgstr "ファイル・マネージャとデスクトップの終了"
 
-#: gnome/glayout.c:477 gnome/glayout.c:488
+#: gnome/glayout.c:472 gnome/glayout.c:483
 msgid "_Settings"
 msgstr "設定(_S)"
 
-#: gnome/glayout.c:478 gnome/glayout.c:489
+#: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Layout"
 msgstr "レイアウト(_L)"
 
-#: gnome/glayout.c:479 gnome/glayout.c:490
+#: gnome/glayout.c:474 gnome/glayout.c:485
 msgid "_Commands"
 msgstr "コマンド(_C)"
 
-#: gnome/glayout.c:480
+#: gnome/glayout.c:475
 msgid "_Desktop"
 msgstr "デスクトップ(_D)"
 
-#: gnome/glayout.c:481 gnome/glayout.c:491 gnome/gmc-window.c:121
+#: gnome/glayout.c:476 gnome/glayout.c:486
 msgid "_Help"
 msgstr "ヘルプ(_H)"
 
-#: gnome/glayout.c:630
-msgid "File/New/Directory..."
-msgstr "ファイル/新規/ディレクトリ..."
+#: gnome/gmain.c:551
+#, fuzzy
+msgid "Don't show this window again"
+msgstr "このウィンドウを閉じる"
 
-#: gnome/gmain.c:563
+#: gnome/gmain.c:553
+#, fuzzy
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
-"As root, you can damage your system if you are not careful, and the GNOME "
-"File Manager will not stop you from doing it."
+"As root, you can damage your system, and the File Manager will not stop "
+"you.\n"
+"Your manual explains how to add a non-privileged user account to the "
+"system.\n"
 msgstr ""
 "root として GNOMEファイルマネージャを動かそうとしています\n"
 "\n"
 "root で実行すると, 不注意でシステムを破壊してしまいます. GNOMEファイルマネー"
 "ジャは破壊行為を止めるようなことはしません"
-
-#: gnome/gmc-window.c:69
-msgid "Copyright (C) 1998 The Free Software Foundation"
-msgstr "Copyright (C) 1998 The Free Software Foundation"
-
-#: gnome/gmc-window.c:81
-msgid "Open _new window"
-msgstr "新規ウィンドウを開く(_N)"
-
-#: gnome/gmc-window.c:86
-msgid "_Close this window"
-msgstr "このウィンドウを閉じる(_C)"
-
-#: gnome/gmc-window.c:88
-msgid "E_xit"
-msgstr "終了(_x)"
-
-#: gnome/gmc-window.c:95
-msgid "_Listing view"
-msgstr "一覧表示(_L)"
-
-#: gnome/gmc-window.c:96
-msgid "_Icon view"
-msgstr "アイコン表示(_I)"
-
-#: gnome/gmc-window.c:102
-msgid "Display _tree view"
-msgstr "ツリー表示(_t)"
-
-#: gnome/gmc-window.c:112
-msgid "_About the Midnight Commander..."
-msgstr "The Midnight Commander について(_A)..."
-
-#: gnome/gmc-window.c:119
-msgid "_File"
-msgstr "ファイル(_F)"
-
-#: gnome/gmc-window.c:120
-msgid "_View"
-msgstr "表示(_V)"
-
-#: gnome/gmount.c:218
-msgid "Could not open the /etc/fstab file"
-msgstr "ファイル /etc/fstab を開けません"
-
-#: gnome/gmount.c:386
-#, c-format
-msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr "%s を %s へリンクできません; このデバイスのアイコンは表示できません"
-
-#: gnome/gmount.c:444
-#, c-format
-msgid "CD-ROM %d"
-msgstr "CD-ROM %d"
-
-#: gnome/gmount.c:456
-#, c-format
-msgid "Floppy %d"
-msgstr "フロッピー %d"
-
-#: gnome/gmount.c:462
-#, c-format
-msgid "Disk %d"
-msgstr "ディスク %d"
-
-#: gnome/gmount.c:467
-#, c-format
-msgid "NFS dir %s"
-msgstr "NFSディレクトリ %s"
-
-#: gnome/gmount.c:471
-#, c-format
-msgid "Device %d"
-msgstr "デバイス %d"
-
-#. we set the file part
-#: gnome/gnome-file-property-dialog.c:171
-msgid "Full Name: "
-msgstr "フルパス名: "
-
-#: gnome/gnome-file-property-dialog.c:179
-msgid "File Name"
-msgstr "ファイル名"
-
-#: gnome/gnome-file-property-dialog.c:204
-#: gnome/gnome-file-property-dialog.c:210
-msgid "File Type: "
-msgstr "ファイル形式: "
-
-#: gnome/gnome-file-property-dialog.c:217
-msgid "File Type: Symbolic Link"
-msgstr "ファイル形式: シンボリックリンク"
-
-#: gnome/gnome-file-property-dialog.c:222
-msgid "Target Name: INVALID LINK"
-msgstr "目的先の名前: おかしなリンク"
-
-#: gnome/gnome-file-property-dialog.c:225
-msgid "Target Name: "
-msgstr "目的先の名前: "
-
-#: gnome/gnome-file-property-dialog.c:230
-msgid "File Type: Directory"
-msgstr "ファイル形式: ディレクトリ"
-
-#: gnome/gnome-file-property-dialog.c:232
-msgid "File Type: Character Device"
-msgstr "ファイル形式: キャラクタ型デバイス"
-
-#: gnome/gnome-file-property-dialog.c:234
-msgid "File Type: Block Device"
-msgstr "ファイル形式: ブロック型デバイス"
-
-#: gnome/gnome-file-property-dialog.c:236
-msgid "File Type: Socket"
-msgstr "ファイル形式: ソケット"
-
-#: gnome/gnome-file-property-dialog.c:238
-msgid "File Type: FIFO"
-msgstr "ファイル形式: FIFO"
-
-#: gnome/gnome-file-property-dialog.c:248
-#: gnome/gnome-file-property-dialog.c:252
-#: gnome/gnome-file-property-dialog.c:258
-msgid "File Size: "
-msgstr "ファイルサイズ: "
-
-#: gnome/gnome-file-property-dialog.c:248
-msgid " bytes"
-msgstr " バイト"
-
-#: gnome/gnome-file-property-dialog.c:252
-msgid " KBytes  ("
-msgstr "キロバイト ("
-
-#: gnome/gnome-file-property-dialog.c:253
-#: gnome/gnome-file-property-dialog.c:259
-msgid " bytes)"
-msgstr " バイト)"
-
-#: gnome/gnome-file-property-dialog.c:258
-msgid " MBytes  ("
-msgstr "メガバイト ("
-
-#: gnome/gnome-file-property-dialog.c:266
-msgid "File Size: N/A"
-msgstr "ファイルサイズ: N/A"
-
-#: gnome/gnome-file-property-dialog.c:277
-msgid "File Created on: "
-msgstr "ファイル作成日付: "
-
-#: gnome/gnome-file-property-dialog.c:281
-#: gnome/gnome-file-property-dialog.c:290
-#: gnome/gnome-file-property-dialog.c:299
-msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr "%a, %b %d %Y,  %I:%M:%S %p"
-
-#: gnome/gnome-file-property-dialog.c:286
-msgid "Last Modified on: "
-msgstr "最終更新日付: "
-
-#: gnome/gnome-file-property-dialog.c:295
-msgid "Last Accessed on: "
-msgstr "最終アクセス日付: "
-
-#: gnome/gnome-file-property-dialog.c:313
-msgid "URL:"
-msgstr "URL:"
-
-#: gnome/gnome-file-property-dialog.c:320
-msgid "Caption:"
-msgstr "キャプション:"
-
-#: gnome/gnome-file-property-dialog.c:397
-#: gnome/gnome-file-property-dialog.c:499
-msgid "Drop Action"
-msgstr "ドロップ処理"
-
-#: gnome/gnome-file-property-dialog.c:398
-msgid "Use default Drop Action options"
-msgstr "標準で用意されたドロップ処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:413
-#: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
-#: src/screen.c:2395 src/screen.c:2425
-msgid "View"
-msgstr "表示"
-
-#: gnome/gnome-file-property-dialog.c:414
-msgid "Use default View options"
-msgstr "標準で用意された表示処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:449
-msgid "Select an Icon"
-msgstr "アイコンを選択"
-
-#. we do open first
-#: gnome/gnome-file-property-dialog.c:479 gnome/gpopup2.c:278
-msgid "Open"
-msgstr "開く"
-
-#: gnome/gnome-file-property-dialog.c:489
-msgid "Use default Open action"
-msgstr "標準で用意されたオープン処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:512
-msgid "Use default Drop action"
-msgstr "標準で用意されたドロップ処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:514
-msgid "Use default View action"
-msgstr "標準で用意された表示処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2071
-msgid "Edit"
-msgstr "編集"
-
-#: gnome/gnome-file-property-dialog.c:533
-msgid "Use default Edit action"
-msgstr "デフォルトの編集処理を行う"
-
-#: gnome/gnome-file-property-dialog.c:587 gnome/gprop.c:521
-msgid "Icon"
-msgstr "アイコン"
-
-#. We must be a file or a link to a file.
-#: gnome/gnome-file-property-dialog.c:621
-msgid "File Actions"
-msgstr "ファイル処理"
-
-#: gnome/gnome-file-property-dialog.c:626
-msgid "Open action"
-msgstr "オープン処理"
-
-#: gnome/gnome-file-property-dialog.c:627
-msgid "Needs terminal to run"
-msgstr "実行に端末を必要とする"
-
-#: gnome/gnome-file-property-dialog.c:753
-msgid "File Permissions"
-msgstr "ファイル・アクセス権"
-
-#: gnome/gnome-file-property-dialog.c:764 gnome/gprop.c:259
-msgid "Current mode: "
-msgstr "現在のモード: "
-
-#. Headings
-#: gnome/gnome-file-property-dialog.c:780 gnome/gprop.c:272
-msgid "Read"
-msgstr "読み込み"
-
-#: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:273
-msgid "Write"
-msgstr "書き込み"
-
-#: gnome/gnome-file-property-dialog.c:782 gnome/gprop.c:274
-msgid "Exec"
-msgstr "実行"
-
-#: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:275
-msgid "Special"
-msgstr "特殊"
-
-#. Permissions
-#: gnome/gnome-file-property-dialog.c:787 gnome/gprop.c:279
-msgid "User"
-msgstr "ユーザ"
-
-#: gnome/gnome-file-property-dialog.c:789 gnome/gprop.c:281
-msgid "Other"
-msgstr "他人"
-
-#. Special
-#: gnome/gnome-file-property-dialog.c:793 gnome/gprop.c:285
-msgid "Set UID"
-msgstr "このユーザ権限を固定(Set UID)"
-
-#: gnome/gnome-file-property-dialog.c:794 gnome/gprop.c:286
-msgid "Set GID"
-msgstr "このグループ権限を固定(Set GID)"
-
-#: gnome/gnome-file-property-dialog.c:795 gnome/gprop.c:287
-msgid "Sticky"
-msgstr "スティッキー"
-
-#: gnome/gnome-file-property-dialog.c:917
-#, c-format
-msgid "<Unknown> (%d)"
-msgstr "<不明> (%d)"
-
-#: gnome/gnome-file-property-dialog.c:931
-msgid "File ownership"
-msgstr "ファイル所有権"
-
-#: gnome/gnome-file-property-dialog.c:1097
-msgid "URL"
-msgstr "URL"
-
-#: gnome/gnome-file-property-dialog.c:1100
-msgid "Statistics"
-msgstr "統計"
-
-#: gnome/gnome-file-property-dialog.c:1106
-msgid "Options"
-msgstr "オプション"
-
-#: gnome/gnome-file-property-dialog.c:1109
-msgid "Permissions"
-msgstr "アクセス権"
-
-#: gnome/gnome-file-property-dialog.c:1112
-msgid " Properties"
-msgstr " プロパティ"
-
-#: gnome/gnome-file-property-dialog.c:1164
-#: gnome/gnome-file-property-dialog.c:1175
-msgid "You entered an invalid username"
-msgstr "おかしなユーザ名が入力されました"
-
-#: gnome/gnome-file-property-dialog.c:1220
-msgid "You must rename your file to something"
-msgstr "名前を入力してください"
-
-#: gnome/gnome-file-property-dialog.c:1226
-msgid "You cannot rename a file to something containing a '/' character"
-msgstr "文字 '/' を含む名前に変更することはできません"
-
-#: gnome/gnome-open-dialog.c:385
-#, c-format
-msgid "Select an application to open \"%s\" with."
-msgstr "\"%s\"を開くアプリケーションを選択してください"
-
-#: gnome/gnome-open-dialog.c:395
-msgid "Select a file to run with"
-msgstr "ファイルを選択してください"
-
-#. the file tree
-#: gnome/gnome-open-dialog.c:406
-msgid "Applications"
-msgstr "アプリケーション"
-
-#: gnome/gnome-open-dialog.c:422
-msgid "Program to run"
-msgstr "実行するプログラム"
-
-#: gnome/gpopup2.c:280
-msgid "Mount device"
-msgstr "マウント"
-
-#: gnome/gpopup2.c:281
-msgid "Unmount device"
-msgstr "マウント解除"
-
-#: gnome/gpopup2.c:282
-msgid "Eject device"
-msgstr "取り出し"
-
-#: gnome/gpopup2.c:283
-msgid "Empty Trash"
-msgstr "ゴミ箱を空にする"
-
-#: gnome/gpopup2.c:286
-msgid "Open with..."
-msgstr "コマンドで開く..."
-
-#: gnome/gpopup2.c:288
-msgid "View Unfiltered"
-msgstr "フィルタせずに表示"
-
-#: gnome/gpopup2.c:291
-msgid "Copy..."
-msgstr "コピー..."
-
-#: gnome/gpopup2.c:292
-msgid "Move to Trash"
-msgstr "ゴミ箱へ移動する"
-
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
-#: src/screen.c:2430
-msgid "Delete"
-msgstr "削除"
-
-#: gnome/gpopup2.c:294
-msgid "Move..."
-msgstr "移動..."
-
-#: gnome/gpopup2.c:295
-msgid "Hard Link..."
-msgstr "ハードリンク..."
-
-#: gnome/gpopup2.c:296
-msgid "Symlink..."
-msgstr "シンボリックリンク..."
-
-#: gnome/gpopup2.c:297
-msgid "Edit Symlink..."
-msgstr "シンボリックリンク編集"
-
-#: gnome/gpopup2.c:299
-msgid "Properties..."
-msgstr "プロパティ..."
-
-#: gnome/gprefs.c:92
-msgid "Show backup files"
-msgstr "バックアップファイルを見る"
-
-#: gnome/gprefs.c:96
-msgid "Show hidden files"
-msgstr "隠しファイルを見る"
-
-#: gnome/gprefs.c:100
-msgid "Mix files and directories"
-msgstr "ファイルとディレクトリを混在して表示"
-
-#: gnome/gprefs.c:104
-msgid "Use shell patterns instead of regular expressions"
-msgstr "正規表現のかわりにシェルパターンを用いる"
-
-#: gnome/gprefs.c:108
-msgid "Determine file types from file content instead of extensions"
-msgstr "拡張子の代わりにファイル内容からファイルタイプを決定する"
-
-#: gnome/gprefs.c:117
-msgid "Confirm when deleting file"
-msgstr "ファイル削除時に確認をとる"
-
-#: gnome/gprefs.c:121
-msgid "Confirm when overwriting files"
-msgstr "ファイル上書き時に確認をとる"
-
-#: gnome/gprefs.c:125
-msgid "Confirm when executing files"
-msgstr "ファイル実行時に確認をとる"
-
-#: gnome/gprefs.c:129
-msgid "Show progress while operations are being performed"
-msgstr "操作が処理されている間にその経過を表示"
-
-#: gnome/gprefs.c:138
-msgid "VFS Timeout:"
-msgstr "VFS タイムアウト:"
-
-#: gnome/gprefs.c:139 gnome/gprefs.c:164
-msgid "Seconds"
-msgstr "秒"
-
-#: gnome/gprefs.c:142
-msgid "Anonymous FTP password:"
-msgstr "Anonymous FTPパスワード:"
-
-#: gnome/gprefs.c:146
-msgid "Always use FTP proxy"
-msgstr "必ずFTPプロキシを利用する"
-
-#: gnome/gprefs.c:155
-msgid "Fast directory reload"
-msgstr "高速ディレクトリ再読み込み"
-
-#: gnome/gprefs.c:159
-msgid "Compute totals before copying files"
-msgstr "ファイルをコピーする前に合計数を計算する"
-
-#: gnome/gprefs.c:163
-msgid "FTP directory cache timeout :"
-msgstr "FTPディレクトリキャッシュタイムアウト :"
-
-#: gnome/gprefs.c:167
-msgid "Allow customization of icons in icon view"
-msgstr "アイコン表示でアイコンのカスタムを許可する"
-
-#: gnome/gprefs.c:176
-msgid "File display"
-msgstr "ファイル表示"
-
-#: gnome/gprefs.c:180
-msgid "Confirmation"
-msgstr "確認"
-
-#: gnome/gprefs.c:184
-msgid "VFS"
-msgstr "VFS"
-
-#: gnome/gprefs.c:188
-msgid "Caching"
-msgstr "キャッシュ"
-
-#: gnome/gprefs.c:480
-msgid "Preferences"
-msgstr "設定"
-
-#: gnome/gprop.c:58 gnome/gprop.c:75
-msgid "Filename"
-msgstr "ファイル名"
-
-#: gnome/gprop.c:67
-msgid "Full name: "
-msgstr "フルネーム:"
-
-#: gnome/gprop.c:109 src/panelize.c:204
-msgid "Command"
-msgstr "コマンド"
-
-#: gnome/gprop.c:119
-msgid "Command:"
-msgstr "コマンド:"
-
-#: gnome/gprop.c:129
-msgid "Use terminal"
-msgstr "端末を用いる"
-
-#: gnome/gprop.c:248
-msgid "File mode (permissions)"
-msgstr "ファイルモード(アクセス権)"
-
-#: gnome/gprop.c:321 gnome/gprop.c:347
-msgid "<Unknown>"
-msgstr "<不明>"
-
-#: gnome/gprop.c:494
-msgid "General"
-msgstr "一般"
-
-#: gnome/gprop.c:505
-msgid "Title"
-msgstr "題名"
-
-#: gnome/gprop.c:535
-msgid "Select icon"
-msgstr "アイコン選択"
-
-#: gnome/gscreen.c:1428 gnome/gscreen.c:1439
-msgid "Reloads the current directory"
-msgstr "現在のディレクトリを再読み込み"
-
-#: gnome/gscreen.c:1430 gnome/gscreen.c:1441
-msgid "New _Directory..."
-msgstr "新規ディレクトリ(_D)..."
-
-#: gnome/gscreen.c:1430 gnome/gscreen.c:1441
-msgid "Creates a new directory here"
-msgstr "新規ディレクトリを作成する"
-
-#: gnome/gscreen.c:1437
-msgid "Empty _Trash"
-msgstr "ゴミ箱を空にする(_T)"
-
-#: gnome/gscreen.c:1437
-msgid "Empties the Trash"
-msgstr "ゴミ箱を空にする"
-
-#: gnome/gscreen.c:1653
-#, c-format
-msgid "Search: %s"
-msgstr "検索: %s"
-
-#: gnome/gscreen.c:1663 src/screen.c:663
-#, c-format
-msgid "%s bytes in %d file"
-msgstr "%s バイト %d ファイル"
-
-#: gnome/gscreen.c:1663 src/screen.c:663
-#, c-format
-msgid "%s bytes in %d files"
-msgstr "%s バイト %d ファイル"
-
-#: gnome/gscreen.c:1689 src/screen.c:689
-msgid "<readlink failed>"
-msgstr "<リンク読みだしに失敗>"
-
-#: gnome/gscreen.c:2113
-msgid "Copy directory"
-msgstr "ディレクトリをコピー"
-
-#: gnome/gscreen.c:2114
-msgid "Delete directory"
-msgstr "ディレクトリを削除"
-
-#: gnome/gscreen.c:2115
-msgid "Rename or move directory"
-msgstr "ファイルの移動または名前変更"
-
-#: gnome/gscreen.c:2273
-msgid "Back"
-msgstr "戻る"
-
-#: gnome/gscreen.c:2273
-msgid "Go to the previously visited directory"
-msgstr "前のディレクトリに戻る"
-
-#: gnome/gscreen.c:2275
-msgid "Up"
-msgstr "上"
-
-#: gnome/gscreen.c:2275
-msgid "Go up a level in the directory hierarchy"
-msgstr "一つ上のディレクトリ階層へ移動"
-
-#: gnome/gscreen.c:2277
-msgid "Forward"
-msgstr "次へ"
-
-#: gnome/gscreen.c:2277
-msgid "Go to the next directory"
-msgstr "次のディレクトリへ進む"
-
-#: gnome/gscreen.c:2280 src/tree.c:1010
-msgid "Rescan"
-msgstr "再走査"
-
-#: gnome/gscreen.c:2280
-msgid "Rescan the current directory"
-msgstr "現在のディレクトリを再走査する"
-
-#: gnome/gscreen.c:2283
-msgid "Home"
-msgstr "ホーム"
-
-#: gnome/gscreen.c:2283
-msgid "Go to your home directory"
-msgstr "ホームディレクトリへ移動する"
-
-#: gnome/gscreen.c:2426
-msgid "Location:"
-msgstr "場所:"
-
-#. 1
-#: gnome/gtools.c:105 gtkedit/edit.h:502 gtkedit/editcmd.c:393
-#: gtkedit/editcmd.c:1243 gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3023
-#: gtkedit/editmenu.c:44 gtkedit/editoptions.c:69 src/boxes.c:138
-#: src/boxes.c:276 src/boxes.c:376 src/boxes.c:464 src/boxes.c:644
-#: src/boxes.c:726 src/boxes.c:781 src/boxes.c:896 src/filegui.c:824
-#: src/find.c:173 src/layout.c:375 src/option.c:143 src/wtools.c:290
-#: src/wtools.c:563 vfs/smbfs.c:118
-msgid "&Ok"
-msgstr "はい(&O)"
-
-#: gnome/gview.c:136
-#, c-format
-msgid "Offset 0x%08lx"
-msgstr "オフセット 0x%08lx"
-
-#: gnome/gview.c:138 src/view.c:724
-#, c-format
-msgid "Col %d"
-msgstr "列 %d"
-
-#: gnome/gview.c:142 src/view.c:728
-#, c-format
-msgid "%s bytes"
-msgstr "%sバイト"
-
-#: gnome/gview.c:306
-msgid "_Goto line"
-msgstr "行移動(_G)"
-
-#: gnome/gview.c:307
-msgid "Jump to a specified line number"
-msgstr "指定した行へ移動"
-
-#: gnome/gview.c:309
-msgid "_Monitor file"
-msgstr "ファイル監視(_M)"
-
-#: gnome/gview.c:309
-msgid "Monitor file growing"
-msgstr "ファイルの増大を監視する"
-
-#: gnome/gview.c:316
-msgid "Regexp search"
-msgstr "正規表現検索"
-
-#: gnome/gview.c:317
-msgid "Regular expression search"
-msgstr "正規表現で検索する"
-
-#: gnome/gview.c:326
-msgid "_Wrap"
-msgstr "折り返し(_W)"
-
-#: gnome/gview.c:327
-msgid "Wrap the text"
-msgstr "テキストを折り返す"
-
-#. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:330
-msgid "_Parsed view"
-msgstr "走査表示(_P)"
-
-#: gnome/gview.c:333
-msgid "_Formatted"
-msgstr "整形(_F)"
-
-#: gnome/gview.c:335
-msgid "_Hex"
-msgstr "16進数(_H)"
-
-#: gnome/gview.c:341
-msgid "_Search"
-msgstr "検索(_S)"
-
-#: gnome/gwidget.c:95
-msgid "ok"
-msgstr "了解"
-
-#: gnome/gwidget.c:97
-msgid "cancel"
-msgstr "キャンセル"
-
-#: gnome/gwidget.c:99
-msgid "help"
-msgstr "ヘルプ"
-
-#: gnome/gwidget.c:101 src/file.c:2272
-msgid "yes"
-msgstr "はい"
-
-#: gnome/gwidget.c:103 src/file.c:2270
-msgid "no"
-msgstr "いいえ"
-
-#: gnome/gwidget.c:105
-msgid "exit"
-msgstr "終了"
-
-#: gnome/gwidget.c:107
-msgid "abort"
-msgstr "中断"
 
 #: gnome/gmc-client.c:26
 msgid "Could not contact the file manager\n"
@@ -1765,200 +1135,850 @@ msgstr "名前 | ファイルタイプ | サイズ | アクセス時刻 | 更新時刻 | 変更時刻"
 msgid "Close windows whose directories cannot be reached"
 msgstr "アクセスできないディレクトリのウインドウを閉じる"
 
+#: gnome/gmount.c:216
+msgid "Could not open the /etc/fstab file"
+msgstr "ファイル /etc/fstab を開けません"
+
+#: gnome/gmount.c:384
+#, c-format
+msgid "Could not symlink %s to %s; will not have such a desktop device icon."
+msgstr "%s を %s へリンクできません; このデバイスのアイコンは表示できません"
+
+#: gnome/gmount.c:441
+#, c-format
+msgid "CD-ROM %d"
+msgstr "CD-ROM %d"
+
+#: gnome/gmount.c:453
+#, c-format
+msgid "Floppy %d"
+msgstr "フロッピー %d"
+
+#: gnome/gmount.c:459
+#, c-format
+msgid "Disk %d"
+msgstr "ディスク %d"
+
+#: gnome/gmount.c:464
+#, c-format
+msgid "NFS dir %s"
+msgstr "NFSディレクトリ %s"
+
+#: gnome/gmount.c:468
+#, c-format
+msgid "Device %d"
+msgstr "デバイス %d"
+
+#. we set the file part
+#: gnome/gnome-file-property-dialog.c:171
+msgid "Full Name: "
+msgstr "フルパス名: "
+
+#: gnome/gnome-file-property-dialog.c:179
+msgid "File Name"
+msgstr "ファイル名"
+
+#: gnome/gnome-file-property-dialog.c:202
+msgid "File Type: "
+msgstr "ファイル形式: "
+
+#: gnome/gnome-file-property-dialog.c:209
+msgid "File Type: Symbolic Link"
+msgstr "ファイル形式: シンボリックリンク"
+
+#: gnome/gnome-file-property-dialog.c:214
+msgid "Target Name: INVALID LINK"
+msgstr "目的先の名前: おかしなリンク"
+
+#: gnome/gnome-file-property-dialog.c:217
+msgid "Target Name: "
+msgstr "目的先の名前: "
+
+#: gnome/gnome-file-property-dialog.c:222
+msgid "File Type: Directory"
+msgstr "ファイル形式: ディレクトリ"
+
+#: gnome/gnome-file-property-dialog.c:224
+msgid "File Type: Character Device"
+msgstr "ファイル形式: キャラクタ型デバイス"
+
+#: gnome/gnome-file-property-dialog.c:226
+msgid "File Type: Block Device"
+msgstr "ファイル形式: ブロック型デバイス"
+
+#: gnome/gnome-file-property-dialog.c:228
+msgid "File Type: Socket"
+msgstr "ファイル形式: ソケット"
+
+#: gnome/gnome-file-property-dialog.c:230
+msgid "File Type: FIFO"
+msgstr "ファイル形式: FIFO"
+
+#: gnome/gnome-file-property-dialog.c:240
+#: gnome/gnome-file-property-dialog.c:244
+#: gnome/gnome-file-property-dialog.c:250
+msgid "File Size: "
+msgstr "ファイルサイズ: "
+
+#: gnome/gnome-file-property-dialog.c:240
+msgid " bytes"
+msgstr " バイト"
+
+#: gnome/gnome-file-property-dialog.c:244
+msgid " KBytes  ("
+msgstr "キロバイト ("
+
+#: gnome/gnome-file-property-dialog.c:245
+#: gnome/gnome-file-property-dialog.c:251
+msgid " bytes)"
+msgstr " バイト)"
+
+#: gnome/gnome-file-property-dialog.c:250
+msgid " MBytes  ("
+msgstr "メガバイト ("
+
+#: gnome/gnome-file-property-dialog.c:258
+msgid "File Size: N/A"
+msgstr "ファイルサイズ: N/A"
+
+#: gnome/gnome-file-property-dialog.c:269
+msgid "File Created on: "
+msgstr "ファイル作成日付: "
+
+#: gnome/gnome-file-property-dialog.c:273
+#: gnome/gnome-file-property-dialog.c:282
+#: gnome/gnome-file-property-dialog.c:291
+msgid "%a, %b %d %Y,  %I:%M:%S %p"
+msgstr "%a, %b %d %Y,  %I:%M:%S %p"
+
+#: gnome/gnome-file-property-dialog.c:278
+msgid "Last Modified on: "
+msgstr "最終更新日付: "
+
+#: gnome/gnome-file-property-dialog.c:287
+msgid "Last Accessed on: "
+msgstr "最終アクセス日付: "
+
+#: gnome/gnome-file-property-dialog.c:305
+msgid "URL:"
+msgstr "URL:"
+
+#: gnome/gnome-file-property-dialog.c:312
+msgid "Caption:"
+msgstr "キャプション:"
+
+#: gnome/gnome-file-property-dialog.c:389
+#: gnome/gnome-file-property-dialog.c:491
+msgid "Drop Action"
+msgstr "ドロップ処理"
+
+#: gnome/gnome-file-property-dialog.c:390
+msgid "Use default Drop Action options"
+msgstr "標準で用意されたドロップ処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:405
+#: gnome/gnome-file-property-dialog.c:493 gnome/gpopup2.c:286
+#: src/screen.c:2416
+msgid "View"
+msgstr "表示"
+
+#: gnome/gnome-file-property-dialog.c:406
+msgid "Use default View options"
+msgstr "標準で用意された表示処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:441
+msgid "Select an Icon"
+msgstr "アイコンを選択"
+
+#. we do open first
+#: gnome/gnome-file-property-dialog.c:471 gnome/gpopup2.c:277
+msgid "Open"
+msgstr "開く"
+
+#: gnome/gnome-file-property-dialog.c:481
+msgid "Use default Open action"
+msgstr "標準で用意されたオープン処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:504
+msgid "Use default Drop action"
+msgstr "標準で用意されたドロップ処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:506
+msgid "Use default View action"
+msgstr "標準で用意された表示処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:515 gnome/gpopup2.c:288
+#: src/screen.c:2417 src/view.c:2086
+msgid "Edit"
+msgstr "編集"
+
+#: gnome/gnome-file-property-dialog.c:525
+msgid "Use default Edit action"
+msgstr "デフォルトの編集処理を行う"
+
+#: gnome/gnome-file-property-dialog.c:579
+msgid "Icon"
+msgstr "アイコン"
+
+#. We must be a file or a link to a file.
+#: gnome/gnome-file-property-dialog.c:613
+msgid "File Actions"
+msgstr "ファイル処理"
+
+#: gnome/gnome-file-property-dialog.c:618
+msgid "Open action"
+msgstr "オープン処理"
+
+#: gnome/gnome-file-property-dialog.c:619
+msgid "Needs terminal to run"
+msgstr "実行に端末を必要とする"
+
+#: gnome/gnome-file-property-dialog.c:745
+msgid "File Permissions"
+msgstr "ファイル・アクセス権"
+
+#: gnome/gnome-file-property-dialog.c:756
+msgid "Current mode: "
+msgstr "現在のモード: "
+
+#. Headings
+#: gnome/gnome-file-property-dialog.c:772
+msgid "Read"
+msgstr "読み込み"
+
+#: gnome/gnome-file-property-dialog.c:773
+msgid "Write"
+msgstr "書き込み"
+
+#: gnome/gnome-file-property-dialog.c:774
+msgid "Exec"
+msgstr "実行"
+
+#: gnome/gnome-file-property-dialog.c:775
+msgid "Special"
+msgstr "特殊"
+
+#. Permissions
+#: gnome/gnome-file-property-dialog.c:779
+msgid "User"
+msgstr "ユーザ"
+
+#: gnome/gnome-file-property-dialog.c:781
+msgid "Other"
+msgstr "他人"
+
+#. Special
+#: gnome/gnome-file-property-dialog.c:785
+msgid "Set UID"
+msgstr "このユーザ権限を固定(Set UID)"
+
+#: gnome/gnome-file-property-dialog.c:786
+msgid "Set GID"
+msgstr "このグループ権限を固定(Set GID)"
+
+#: gnome/gnome-file-property-dialog.c:787
+msgid "Sticky"
+msgstr "スティッキー"
+
+#: gnome/gnome-file-property-dialog.c:909
+#, c-format
+msgid "<Unknown> (%d)"
+msgstr "<不明> (%d)"
+
+#: gnome/gnome-file-property-dialog.c:923
+msgid "File ownership"
+msgstr "ファイル所有権"
+
+#: gnome/gnome-file-property-dialog.c:1089
+msgid "URL"
+msgstr "URL"
+
+#: gnome/gnome-file-property-dialog.c:1092
+msgid "Statistics"
+msgstr "統計"
+
+#: gnome/gnome-file-property-dialog.c:1098
+msgid "Options"
+msgstr "オプション"
+
+#: gnome/gnome-file-property-dialog.c:1101
+msgid "Permissions"
+msgstr "アクセス権"
+
+#: gnome/gnome-file-property-dialog.c:1104
+msgid " Properties"
+msgstr " プロパティ"
+
+#: gnome/gnome-file-property-dialog.c:1156
+#: gnome/gnome-file-property-dialog.c:1167
+msgid "You entered an invalid username"
+msgstr "おかしなユーザ名が入力されました"
+
+#: gnome/gnome-file-property-dialog.c:1187
+#, fuzzy
+msgid "You entered an invalid group name"
+msgstr "おかしなユーザ名が入力されました"
+
+#: gnome/gnome-file-property-dialog.c:1210
+msgid "You must rename your file to something"
+msgstr "名前を入力してください"
+
+#: gnome/gnome-file-property-dialog.c:1216
+msgid "You cannot rename a file to something containing a '/' character"
+msgstr "文字 '/' を含む名前に変更することはできません"
+
+#: gnome/gnome-open-dialog.c:385
+#, c-format
+msgid "Select an application to open \"%s\" with."
+msgstr "\"%s\"を開くアプリケーションを選択してください"
+
+#: gnome/gnome-open-dialog.c:395
+msgid "Select a file to run with"
+msgstr "ファイルを選択してください"
+
+#. the file tree
+#: gnome/gnome-open-dialog.c:406
+msgid "Applications"
+msgstr "アプリケーション"
+
+#: gnome/gnome-open-dialog.c:422
+msgid "Program to run"
+msgstr "実行するプログラム"
+
+#: gnome/gpopup2.c:279
+msgid "Mount device"
+msgstr "マウント"
+
+#: gnome/gpopup2.c:280
+msgid "Unmount device"
+msgstr "マウント解除"
+
+#: gnome/gpopup2.c:281
+msgid "Eject device"
+msgstr "取り出し"
+
+#: gnome/gpopup2.c:282
+msgid "Empty Trash"
+msgstr "ゴミ箱を空にする"
+
+#: gnome/gpopup2.c:285
+msgid "Open with..."
+msgstr "コマンドで開く..."
+
+#: gnome/gpopup2.c:287
+msgid "View Unfiltered"
+msgstr "フィルタせずに表示"
+
+#: gnome/gpopup2.c:290
+msgid "Copy..."
+msgstr "コピー..."
+
+#: gnome/gpopup2.c:291
+msgid "Move to Trash"
+msgstr "ゴミ箱へ移動する"
+
+#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1263
+#: src/screen.c:2421
+msgid "Delete"
+msgstr "削除"
+
+#: gnome/gpopup2.c:293
+msgid "Move..."
+msgstr "移動..."
+
+#: gnome/gpopup2.c:294
+msgid "Hard Link..."
+msgstr "ハードリンク..."
+
+#: gnome/gpopup2.c:295
+msgid "Symlink..."
+msgstr "シンボリックリンク..."
+
+#: gnome/gpopup2.c:296
+msgid "Edit Symlink..."
+msgstr "シンボリックリンク編集"
+
+#: gnome/gpopup2.c:298
+msgid "Properties..."
+msgstr "プロパティ..."
+
+#: gnome/gprefs.c:92
+msgid "Show backup files"
+msgstr "バックアップファイルを見る"
+
+#: gnome/gprefs.c:96
+msgid "Show hidden files"
+msgstr "隠しファイルを見る"
+
+#: gnome/gprefs.c:100
+msgid "Mix files and directories"
+msgstr "ファイルとディレクトリを混在して表示"
+
+#: gnome/gprefs.c:104
+msgid "Use shell patterns instead of regular expressions"
+msgstr "正規表現のかわりにシェルパターンを用いる"
+
+#: gnome/gprefs.c:108
+msgid "Determine file types from file content instead of extensions"
+msgstr "拡張子の代わりにファイル内容からファイルタイプを決定する"
+
+#: gnome/gprefs.c:117
+msgid "Confirm when deleting file"
+msgstr "ファイル削除時に確認をとる"
+
+#: gnome/gprefs.c:121
+msgid "Confirm when overwriting files"
+msgstr "ファイル上書き時に確認をとる"
+
+#: gnome/gprefs.c:125
+msgid "Confirm when executing files"
+msgstr "ファイル実行時に確認をとる"
+
+#: gnome/gprefs.c:129
+msgid "Show progress while operations are being performed"
+msgstr "操作が処理されている間にその経過を表示"
+
+#: gnome/gprefs.c:139
+msgid "VFS Timeout:"
+msgstr "VFS タイムアウト:"
+
+#: gnome/gprefs.c:140 gnome/gprefs.c:167
+msgid "Seconds"
+msgstr "秒"
+
+#: gnome/gprefs.c:143
+msgid "Anonymous FTP password:"
+msgstr "Anonymous FTPパスワード:"
+
+#: gnome/gprefs.c:147
+msgid "Always use FTP proxy"
+msgstr "必ずFTPプロキシを利用する"
+
+#: gnome/gprefs.c:157
+msgid "Fast directory reload"
+msgstr "高速ディレクトリ再読み込み"
+
+#: gnome/gprefs.c:161
+msgid "Compute totals before copying files"
+msgstr "ファイルをコピーする前に合計数を計算する"
+
+#: gnome/gprefs.c:166
+msgid "FTP directory cache timeout :"
+msgstr "FTPディレクトリキャッシュタイムアウト :"
+
+#: gnome/gprefs.c:171
+msgid "Allow customization of icons in icon view"
+msgstr "アイコン表示でアイコンのカスタムを許可する"
+
+#: gnome/gprefs.c:180
+msgid "File display"
+msgstr "ファイル表示"
+
+#: gnome/gprefs.c:184
+msgid "Confirmation"
+msgstr "確認"
+
+#: gnome/gprefs.c:189
+msgid "VFS"
+msgstr "VFS"
+
+#: gnome/gprefs.c:194
+msgid "Caching"
+msgstr "キャッシュ"
+
+#: gnome/gprefs.c:486
+msgid "Preferences"
+msgstr "設定"
+
+#: gnome/gscreen.c:1412 gnome/gscreen.c:1423
+msgid "Reloads the current directory"
+msgstr "現在のディレクトリを再読み込み"
+
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
+msgid "New _Directory..."
+msgstr "新規ディレクトリ(_D)..."
+
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
+msgid "Creates a new directory here"
+msgstr "新規ディレクトリを作成する"
+
+#: gnome/gscreen.c:1421
+msgid "Empty _Trash"
+msgstr "ゴミ箱を空にする(_T)"
+
+#: gnome/gscreen.c:1421
+msgid "Empties the Trash"
+msgstr "ゴミ箱を空にする"
+
+#: gnome/gscreen.c:1654
+#, c-format
+msgid "Search: %s"
+msgstr "検索: %s"
+
+#: gnome/gscreen.c:1664 src/screen.c:658
+#, c-format
+msgid "%s bytes in %d file"
+msgstr "%s バイト %d ファイル"
+
+#: gnome/gscreen.c:1664 src/screen.c:658
+#, c-format
+msgid "%s bytes in %d files"
+msgstr "%s バイト %d ファイル"
+
+#: gnome/gscreen.c:1690 src/screen.c:684
+msgid "<readlink failed>"
+msgstr "<リンク読みだしに失敗>"
+
+#: gnome/gscreen.c:2115
+msgid "Copy directory"
+msgstr "ディレクトリをコピー"
+
+#: gnome/gscreen.c:2116
+msgid "Delete directory"
+msgstr "ディレクトリを削除"
+
+#: gnome/gscreen.c:2117
+msgid "Rename or move directory"
+msgstr "ファイルの移動または名前変更"
+
+#: gnome/gscreen.c:2310
+msgid "Back"
+msgstr "戻る"
+
+#: gnome/gscreen.c:2310
+msgid "Go to the previously visited directory"
+msgstr "前のディレクトリに戻る"
+
+#: gnome/gscreen.c:2312
+msgid "Up"
+msgstr "上"
+
+#: gnome/gscreen.c:2312
+msgid "Go up a level in the directory hierarchy"
+msgstr "一つ上のディレクトリ階層へ移動"
+
+#: gnome/gscreen.c:2314
+msgid "Forward"
+msgstr "次へ"
+
+#: gnome/gscreen.c:2314
+msgid "Go to the next directory"
+msgstr "次のディレクトリへ進む"
+
+#: gnome/gscreen.c:2317 src/tree.c:1019
+msgid "Rescan"
+msgstr "再走査"
+
+#: gnome/gscreen.c:2317
+msgid "Rescan the current directory"
+msgstr "現在のディレクトリを再走査する"
+
+#: gnome/gscreen.c:2320
+msgid "Home"
+msgstr "ホーム"
+
+#: gnome/gscreen.c:2320
+msgid "Go to your home directory"
+msgstr "ホームディレクトリへ移動する"
+
+#: gnome/gscreen.c:2463
+msgid "Location:"
+msgstr "場所:"
+
+#. 1
+#: gnome/gtools.c:105 gtkedit/edit.h:511 gtkedit/editcmd.c:415
+#: gtkedit/editcmd.c:1292 gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3104
+#: gtkedit/editmenu.c:45 gtkedit/editoptions.c:69 src/boxes.c:145
+#: src/boxes.c:279 src/boxes.c:379 src/boxes.c:470 src/boxes.c:617
+#: src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056 src/filegui.c:805
+#: src/find.c:149 src/layout.c:369 src/option.c:135 src/wtools.c:284
+#: src/wtools.c:546
+msgid "&Ok"
+msgstr "はい(&O)"
+
+#: gnome/gview.c:136
+#, c-format
+msgid "Offset 0x%08lx"
+msgstr "オフセット 0x%08lx"
+
+#: gnome/gview.c:138 src/view.c:734
+#, c-format
+msgid "Col %d"
+msgstr "列 %d"
+
+#: gnome/gview.c:142 src/view.c:738
+#, c-format
+msgid "%s bytes"
+msgstr "%sバイト"
+
+#: gnome/gview.c:308
+msgid "_Goto line"
+msgstr "行移動(_G)"
+
+#: gnome/gview.c:309
+msgid "Jump to a specified line number"
+msgstr "指定した行へ移動"
+
+#: gnome/gview.c:311
+msgid "_Monitor file"
+msgstr "ファイル監視(_M)"
+
+#: gnome/gview.c:311
+msgid "Monitor file growing"
+msgstr "ファイルの増大を監視する"
+
+#: gnome/gview.c:318
+msgid "Regexp search"
+msgstr "正規表現検索"
+
+#: gnome/gview.c:319
+msgid "Regular expression search"
+msgstr "正規表現で検索する"
+
+#: gnome/gview.c:328
+msgid "_Wrap"
+msgstr "折り返し(_W)"
+
+#: gnome/gview.c:329
+msgid "Wrap the text"
+msgstr "テキストを折り返す"
+
+#. Can not use this one yet, as it destroys the viewer, need to fix that
+#: gnome/gview.c:332
+msgid "_Parsed view"
+msgstr "走査表示(_P)"
+
+#: gnome/gview.c:335
+msgid "_Formatted"
+msgstr "整形(_F)"
+
+#: gnome/gview.c:337
+msgid "_Hex"
+msgstr "16進数(_H)"
+
+#: gnome/gview.c:343
+msgid "_Search"
+msgstr "検索(_S)"
+
+#: gnome/gwidget.c:95
+msgid "ok"
+msgstr "了解"
+
+#: gnome/gwidget.c:97
+msgid "cancel"
+msgstr "キャンセル"
+
+#: gnome/gwidget.c:99
+msgid "help"
+msgstr "ヘルプ"
+
+#: gnome/gwidget.c:101 src/file.c:2271
+msgid "yes"
+msgstr "はい"
+
+#: gnome/gwidget.c:103 src/file.c:2269
+msgid "no"
+msgstr "いいえ"
+
+#: gnome/gwidget.c:105
+msgid "exit"
+msgstr "終了"
+
+#: gnome/gwidget.c:107
+msgid "abort"
+msgstr "中断"
+
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:151 gtkedit/edit.c:320 gtkedit/edit.c:325 gtkedit/edit.c:339
-#: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
-#: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
-#: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2039 gtkedit/editwidget.c:1024
-#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: gtkedit/edit.c:156 gtkedit/edit.c:325 gtkedit/edit.c:330 gtkedit/edit.c:344
+#: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
+#: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:327
+#: gtkedit/editcmd.c:333 gtkedit/editcmd.c:2093 gtkedit/editwidget.c:1024
+#: src/dir.c:427 src/wtools.c:216
 msgid " Error "
 msgstr " エラー "
 
-#: gtkedit/edit.c:151 gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381
+#: gtkedit/edit.c:156 gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386
 msgid " Failed trying to open file for reading: "
 msgstr "ファイルの読みだしでオープンに失敗しました: "
 
-#: gtkedit/edit.c:320
+#: gtkedit/edit.c:325
 msgid " Error reading from pipe: "
 msgstr " パイプからの読み込みエラー: "
 
-#: gtkedit/edit.c:325
+#: gtkedit/edit.c:330
 msgid " Failed trying to open pipe for reading: "
 msgstr "読みだし用のパイプのオープンに失敗しました: "
 
-#: gtkedit/edit.c:339
+#: gtkedit/edit.c:344
 msgid " Error reading file: "
 msgstr " ファイル読み込みエラー: "
 
-#: gtkedit/edit.c:388
+#: gtkedit/edit.c:393
 msgid " Cannot get size/permissions info on file: "
 msgstr "ファイルの大きさ・パーミッションの情報を取得できませんでした: "
 
-#: gtkedit/edit.c:395
+#: gtkedit/edit.c:400
 msgid " Not an ordinary file: "
 msgstr "普通のファイルではありません: "
 
-#: gtkedit/edit.c:401
+#: gtkedit/edit.c:406
 msgid " File is too large: "
 msgstr "ファイルが大きすぎます: "
 
-#: gtkedit/edit.c:402
+#: gtkedit/edit.c:407
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr "edit.h の MAXBUF を増やしてエディタを再コンパイルしてください"
 
-#: gtkedit/edit.c:2594
+#: gtkedit/edit.c:2601
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "mc から呼び出される mcedit でだけ利用可能なユーザメニューです"
 
-#: gtkedit/edit.c:2792 gtkedit/editcmd.c:2941
+#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3022
 msgid "Error trying to stat file:"
 msgstr " ファイルの stat 試行中のエラー:"
 
-#: gtkedit/edit.h:501 gtkedit/gtkedit.c:67
+#: gtkedit/edit.h:510 gtkedit/gtkedit.c:71
 msgid "&Dismiss"
 msgstr "消去(&D)"
 
-#: gtkedit/editcmd.c:168 src/cmd.c:1212 src/tree.c:654 src/view.c:1815
-msgid "mc.hlp"
-msgstr "mc.hlp"
-
-#: gtkedit/editcmd.c:305
+#: gtkedit/editcmd.c:327
 msgid " Error writing to pipe: "
 msgstr " パイプへの書き出しエラー: "
 
-#: gtkedit/editcmd.c:311
+#: gtkedit/editcmd.c:333
 msgid " Failed trying to open pipe for writing: "
 msgstr "書き込み用のパイプのオープンに失敗しました: "
 
-#: gtkedit/editcmd.c:386
+#: gtkedit/editcmd.c:408
 msgid "Quick save "
 msgstr "クイックセーブ "
 
-#: gtkedit/editcmd.c:387
+#: gtkedit/editcmd.c:409
 msgid "Safe save "
 msgstr "セーフセーブ "
 
-#: gtkedit/editcmd.c:388
+#: gtkedit/editcmd.c:410
 msgid "Do backups -->"
 msgstr "バックアップする →"
 
 #. 0
-#: gtkedit/editcmd.c:391 gtkedit/editcmd.c:1191 gtkedit/editcmd.c:1241
-#: gtkedit/editcmd.c:1326 gtkedit/editcmd.c:3021 gtkedit/editoptions.c:66
-#: src/achown.c:71 src/boxes.c:139 src/boxes.c:277 src/boxes.c:374
-#: src/boxes.c:462 src/boxes.c:642 src/boxes.c:725 src/boxes.c:779
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:867 src/filegui.c:807
-#: src/find.c:173 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
-#: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:399 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
-#: vfs/smbfs.c:118
+#: gtkedit/editcmd.c:413 gtkedit/editcmd.c:1231 gtkedit/editcmd.c:1290
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:66
+#: src/achown.c:73 src/boxes.c:146 src/boxes.c:280 src/boxes.c:377
+#: src/boxes.c:468 src/boxes.c:614 src/boxes.c:751 src/boxes.c:1056
+#: src/chmod.c:109 src/chown.c:80 src/cmd.c:870 src/filegui.c:788
+#: src/find.c:149 src/hotlist.c:134 src/hotlist.c:504 src/hotlist.c:792
+#: src/hotlist.c:889 src/layout.c:370 src/learn.c:59 src/option.c:136
+#: src/panelize.c:83 src/view.c:410 src/wtools.c:107 src/wtools.c:374
+#: src/wtools.c:544
 msgid "&Cancel"
 msgstr "キャンセル(&C)"
 
-#: gtkedit/editcmd.c:397
+#: gtkedit/editcmd.c:419
 msgid "Extension:"
 msgstr "拡張子: "
 
-#: gtkedit/editcmd.c:403
+#: gtkedit/editcmd.c:425
 msgid " Edit Save Mode "
 msgstr "保存方法を変更 "
 
-#: gtkedit/editcmd.c:527
+#: gtkedit/editcmd.c:567
 msgid " Save As "
 msgstr " 別名で保存 "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
-#: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:315 src/file.c:619
-#: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:721 src/subshell.c:747 src/utilunix.c:382
-#: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
+#: gtkedit/editcmd.c:581 gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179 src/file.c:619 src/help.c:314
+#: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:742
+#: src/subshell.c:768 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
+#: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " 警告 "
 
-#: gtkedit/editcmd.c:542
+#: gtkedit/editcmd.c:582
 msgid " A file already exists with this name. "
 msgstr "同名のファイルが存在します"
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:544
+#: gtkedit/editcmd.c:584
 msgid "Overwrite"
 msgstr "上書き"
 
-#: gtkedit/editcmd.c:544 gtkedit/editcmd.c:611 gtkedit/editcmd.c:839
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
-#: gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:584 gtkedit/editcmd.c:651 gtkedit/editcmd.c:879
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
+#: gtkedit/editcmd.c:1733
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: gtkedit/editcmd.c:563
+#: gtkedit/editcmd.c:603
 msgid " Save as "
 msgstr " 別名で保存 "
 
-#: gtkedit/editcmd.c:563 gtkedit/editcmd.c:2783
+#: gtkedit/editcmd.c:603 gtkedit/editcmd.c:2865
 msgid " Error trying to save file. "
 msgstr "ファイルの保存時にエラーが発生しました"
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:681 gtkedit/editcmd.c:689 gtkedit/editcmd.c:714
+#: gtkedit/editcmd.c:721 gtkedit/editcmd.c:729 gtkedit/editcmd.c:754
 msgid " Delete macro "
 msgstr " マクロを削除 "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:683
+#: gtkedit/editcmd.c:723
 msgid " Error trying to open temp file "
 msgstr " テンポラリ・ファイルを開くのにエラーが発生しました "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:691 gtkedit/editcmd.c:752 gtkedit/editcmd.c:821
+#: gtkedit/editcmd.c:731 gtkedit/editcmd.c:792 gtkedit/editcmd.c:861
 msgid " Error trying to open macro file "
 msgstr "マクロ・ファイルを開くのにエラーが発生しました "
 
-#: gtkedit/editcmd.c:715
+#: gtkedit/editcmd.c:755
 msgid " Error trying to overwrite macro file "
 msgstr "マクロファイルを上書きしようとしてエラーが発生しました "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:731
+#: gtkedit/editcmd.c:771
 msgid " Macro "
 msgstr " マクロ "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:733
+#: gtkedit/editcmd.c:773
 msgid " Press the macro's new hotkey: "
 msgstr "マクロの新しいホットキーを押してください: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:752
+#: gtkedit/editcmd.c:792
 msgid " Save macro "
 msgstr " マクロを保存 "
 
-#: gtkedit/editcmd.c:762 gtkedit/editcmd.c:770
+#: gtkedit/editcmd.c:802 gtkedit/editcmd.c:810
 msgid " Delete Macro "
 msgstr " マクロを削除 "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:820
+#: gtkedit/editcmd.c:860
 msgid " Load macro "
 msgstr " マクロを読み込む "
 
-#: gtkedit/editcmd.c:834 gtkedit/editcmd.c:836
+#: gtkedit/editcmd.c:874 gtkedit/editcmd.c:876
 msgid " Confirm save file? : "
 msgstr "ファイルを保存して良いですか? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:879
 msgid " Save file "
 msgstr " ファイル保存 "
 
-#: gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2067
+#: gtkedit/editcmd.c:879 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1256
+#: src/view.c:2082
 msgid "Save"
 msgstr "保存"
 
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1966,113 +1986,114 @@ msgstr ""
 "テキストに変更が加えられていますが保存されていません。\n"
 "変更を破棄して続けます。"
 
-#: gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
 msgid "Continue"
 msgstr "継続"
 
-#: gtkedit/editcmd.c:896
+#: gtkedit/editcmd.c:936
 msgid " Load "
 msgstr " 読み込み "
 
-#: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "大きなブロックです。この操作はやり直せないかもしれません"
 
-#: gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1179
 msgid " Continue "
 msgstr " 継続 "
 
-#: gtkedit/editcmd.c:1139
+#: gtkedit/editcmd.c:1179
 msgid " Cancel "
 msgstr " キャンセル "
 
-#: gtkedit/editcmd.c:1193
+#: gtkedit/editcmd.c:1233
 msgid "o&Ne"
 msgstr "一つ(&N)"
 
-#: gtkedit/editcmd.c:1195 src/filegui.c:584
+#: gtkedit/editcmd.c:1235 src/filegui.c:565
 msgid "al&L"
 msgstr "全部(&L)"
 
-#: gtkedit/editcmd.c:1197 src/file.c:2194 src/filegui.c:266
+#: gtkedit/editcmd.c:1237 src/file.c:2193 src/filegui.c:260
 msgid "&Skip"
 msgstr "スキップ(&S)"
 
-#: gtkedit/editcmd.c:1199
+#: gtkedit/editcmd.c:1239
 msgid "&Replace"
 msgstr "置換(&R)"
 
-#: gtkedit/editcmd.c:1205 gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1733
 msgid " Replace with: "
 msgstr " 置き換える文字列: "
 
-#: gtkedit/editcmd.c:1209
+#: gtkedit/editcmd.c:1258
 msgid " Confirm replace "
 msgstr " 確認置換 "
 
-#: gtkedit/editcmd.c:1245 gtkedit/editcmd.c:1330
+#: gtkedit/editcmd.c:1294 gtkedit/editcmd.c:1379
 msgid "scanf &Expression"
 msgstr "scanf 形式(&E)"
 
-#: gtkedit/editcmd.c:1247
+#: gtkedit/editcmd.c:1296
 msgid "replace &All"
 msgstr "全て置き換える(&A)"
 
-#: gtkedit/editcmd.c:1249
+#: gtkedit/editcmd.c:1298
 msgid "pr&Ompt on replace"
 msgstr "置換時にプロンプト(&O)"
 
-#: gtkedit/editcmd.c:1251 gtkedit/editcmd.c:1332
+#: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1381
 msgid "&Backwards"
 msgstr "後方(&B)"
 
-#: gtkedit/editcmd.c:1253 gtkedit/editcmd.c:1334
+#: gtkedit/editcmd.c:1302 gtkedit/editcmd.c:1383
 msgid "&Regular expression"
 msgstr "正規表現(&R)"
 
-#: gtkedit/editcmd.c:1255 gtkedit/editcmd.c:1336
+#: gtkedit/editcmd.c:1304 gtkedit/editcmd.c:1385
 msgid "&Whole words only"
 msgstr "単語のみ(&W)"
 
-#: gtkedit/editcmd.c:1257 gtkedit/editcmd.c:1338
+#: gtkedit/editcmd.c:1306 gtkedit/editcmd.c:1387 src/find.c:142
 msgid "case &Sensitive"
 msgstr "大文字・小文字を区別(&S)"
 
-#: gtkedit/editcmd.c:1261
+#: gtkedit/editcmd.c:1310
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr "置換の引数の順番を入力してください (例) 3,2,1,4 "
 
-#: gtkedit/editcmd.c:1265
+#: gtkedit/editcmd.c:1314
 msgid " Enter replacement string:"
 msgstr "置換文字列を入力してください:"
 
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1986
+#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:1391 src/view.c:1997
 msgid " Enter search string:"
 msgstr "検索文字列を入力してください:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1288 gtkedit/editcmd.c:1592 gtkedit/editcmd.c:1679
-#: gtkedit/editcmd.c:2222 gtkedit/editcmd.c:2253 gtkedit/editcmd.c:2255
+#: gtkedit/editcmd.c:1337 gtkedit/editcmd.c:1644 gtkedit/editcmd.c:1733
+#: gtkedit/editcmd.c:2292 gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2325
 msgid " Replace "
 msgstr " 置換 "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1586 gtkedit/editcmd.c:2321
-#: gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351 src/view.c:1512
-#: src/view.c:1609 src/view.c:1732 src/view.c:1950 src/view.c:1986
+#: gtkedit/editcmd.c:1405 gtkedit/editcmd.c:1638 gtkedit/editcmd.c:2403
+#: gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433 src/view.c:1528
+#: src/view.c:1625 src/view.c:1727 src/view.c:1739 src/view.c:1955
+#: src/view.c:1997
 msgid " Search "
 msgstr " 検索 "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1410
+#: gtkedit/editcmd.c:1462
 msgid " Enter search text : "
 msgstr "検索テキストを入力してください : "
 
-#: gtkedit/editcmd.c:1417
+#: gtkedit/editcmd.c:1469
 msgid " Enter replace text : "
 msgstr "置換テキストを入力してください : "
 
-#: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
+#: gtkedit/editcmd.c:1472 gtkedit/editcmd.c:1473
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2081,12 +2102,12 @@ msgstr ""
 "正規表現の部分文字列を %s で入力できます\n"
 "(sed のように \\1 や \\2 ではありません) それから \"引数の〜入力\" を使います"
 
-#: gtkedit/editcmd.c:1423
+#: gtkedit/editcmd.c:1475
 msgid " Enter argument (or substring) order : "
 msgstr "引数 (あるいは部分文字列) の順番を入力 : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1427 gtkedit/editcmd.c:1428
+#: gtkedit/editcmd.c:1479 gtkedit/editcmd.c:1480
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2095,19 +2116,19 @@ msgstr ""
 "入力してください (例) 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1433
+#: gtkedit/editcmd.c:1485
 msgid " Whole words only "
 msgstr "単語のみ "
 
-#: gtkedit/editcmd.c:1435
+#: gtkedit/editcmd.c:1487
 msgid " Case sensitive "
 msgstr "大文字・小文字を区別 "
 
-#: gtkedit/editcmd.c:1438
+#: gtkedit/editcmd.c:1490
 msgid " Regular expression "
 msgstr "正規表現 "
 
-#: gtkedit/editcmd.c:1439 gtkedit/editcmd.c:1440
+#: gtkedit/editcmd.c:1491 gtkedit/editcmd.c:1492
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2115,48 +2136,48 @@ msgstr ""
 "正規表現の書き方については\n"
 "正規表現のマニュアルを読んでください"
 
-#: gtkedit/editcmd.c:1448
+#: gtkedit/editcmd.c:1500
 msgid " Backwards "
 msgstr "後方 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1450 gtkedit/editcmd.c:1451
+#: gtkedit/editcmd.c:1502 gtkedit/editcmd.c:1503
 msgid "Warning: Searching backward can be slow"
 msgstr "警告: 後方検索には時間がかかります"
 
-#: gtkedit/editcmd.c:1472
+#: gtkedit/editcmd.c:1524
 msgid " Prompt on replace "
 msgstr "置換時に確認 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1474
+#: gtkedit/editcmd.c:1526
 msgid "Ask before making each replacement"
 msgstr "置換するごとに尋ねる"
 
-#: gtkedit/editcmd.c:1476
+#: gtkedit/editcmd.c:1528
 msgid " Replace all "
 msgstr "全部置換する "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1478
+#: gtkedit/editcmd.c:1530
 msgid "Replace repeatedly"
 msgstr "繰り返し置換"
 
-#: gtkedit/editcmd.c:1482
+#: gtkedit/editcmd.c:1534
 msgid " Bookmarks "
 msgstr " ブックマーク "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1484 gtkedit/editcmd.c:1485
+#: gtkedit/editcmd.c:1536 gtkedit/editcmd.c:1537
 msgid "Create bookmarks at all lines found"
 msgstr "全ての行で見つけたブックマークを作成"
 
-#: gtkedit/editcmd.c:1488
+#: gtkedit/editcmd.c:1540
 msgid " Scanf expression "
 msgstr "Scanf 形式 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1490
+#: gtkedit/editcmd.c:1542
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
@@ -2165,61 +2186,61 @@ msgstr ""
 "scanf のマニュアルを参照"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1515
+#: gtkedit/editcmd.c:1567
 msgid "Begin search, Enter"
 msgstr "検索の開始, ENTER"
 
-#: gtkedit/editcmd.c:1516
+#: gtkedit/editcmd.c:1568
 msgid "Abort this dialog, Esc"
 msgstr "このダイアログを中断, ESC"
 
-#: gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:1733 gtkedit/gtkedit.c:1258
 msgid "Replace"
 msgstr "置換"
 
-#: gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:1733
 msgid "Skip"
 msgstr "スキップ"
 
-#: gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:1733
 msgid "Replace all"
 msgstr "すべて置換"
 
-#: gtkedit/editcmd.c:1679
+#: gtkedit/editcmd.c:1733
 msgid "Replace one"
 msgstr "一つ置換"
 
-#: gtkedit/editcmd.c:2039
+#: gtkedit/editcmd.c:2093
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr "おかしな正規表現、あるいは scanf 形式です。変換が多すぎます "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2224
+#: gtkedit/editcmd.c:2294
 msgid " Error in replacement format string. "
 msgstr "置換形式文字列にエラー"
 
-#: gtkedit/editcmd.c:2252
+#: gtkedit/editcmd.c:2322
 #, c-format
 msgid " %ld replacements made. "
 msgstr "%ld 個置換しました"
 
-#: gtkedit/editcmd.c:2255 gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351
+#: gtkedit/editcmd.c:2325 gtkedit/editcmd.c:2405 gtkedit/editcmd.c:2433
 msgid " Search string not found. "
 msgstr "検索文字列が見付かりませんでした"
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2320
+#: gtkedit/editcmd.c:2402
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d 個発見し， %d 個のブックマークを追加しました "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2376 gtkedit/editcmd.c:2391 gtkedit/editcmd.c:2394
+#: gtkedit/editcmd.c:2458 gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2476
 msgid " Quit "
 msgstr " 終了 "
 
-#: gtkedit/editcmd.c:2377 gtkedit/editcmd.c:2395
+#: gtkedit/editcmd.c:2459 gtkedit/editcmd.c:2477
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -2227,151 +2248,150 @@ msgstr ""
 "現在のテキストに変更が加えられていますが、保存していません。\n"
 "保存して終了しますか?"
 
-#: gtkedit/editcmd.c:2391
+#: gtkedit/editcmd.c:2473
 msgid " File was modified, Save with exit? "
 msgstr "ファイルに変更が加えられています。保存して終了しますか?"
 
-#: gtkedit/editcmd.c:2391
+#: gtkedit/editcmd.c:2473
 msgid "Cancel quit"
 msgstr "終了を中止"
 
-#: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:590 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
+#: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
+#: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr "はい(&Y)"
 
-#: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:589 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
+#: gtkedit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
+#: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "いいえ(&N)"
 
-#: gtkedit/editcmd.c:2395
+#: gtkedit/editcmd.c:2477
 msgid " &Cancel quit "
 msgstr " 終了を中止(&C) "
 
-#: gtkedit/editcmd.c:2395
+#: gtkedit/editcmd.c:2477
 msgid " &Yes "
 msgstr " はい(&Y) "
 
-#: gtkedit/editcmd.c:2395
+#: gtkedit/editcmd.c:2477
 msgid " &No "
 msgstr " いいえ(&N) "
 
-#: gtkedit/editcmd.c:2627 gtkedit/editcmd.c:2702
+#: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2784
 msgid " Copy to clipboard "
 msgstr " クリップボードへコピー "
 
-#: gtkedit/editcmd.c:2627 gtkedit/editcmd.c:2649 gtkedit/editcmd.c:2702
-#: gtkedit/editcmd.c:2715
+#: gtkedit/editcmd.c:2709 gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2784
+#: gtkedit/editcmd.c:2797
 msgid " Unable to save to file. "
 msgstr " ファイル保存ができませんでした "
 
-#: gtkedit/editcmd.c:2649 gtkedit/editcmd.c:2715
+#: gtkedit/editcmd.c:2731 gtkedit/editcmd.c:2797
 msgid " Cut to clipboard "
 msgstr " クリップボードへ切り出し "
 
-#: gtkedit/editcmd.c:2737 gtkedit/editcmd.c:2741 gtkedit/editcmd.c:2746
-#: gtkedit/editcmd.c:2749 src/view.c:1897
+#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
+#: gtkedit/editcmd.c:2831 src/view.c:1902
 msgid " Goto line "
 msgstr " 指定行へ移動 "
 
-#: gtkedit/editcmd.c:2737 gtkedit/editcmd.c:2741 gtkedit/editcmd.c:2746
-#: gtkedit/editcmd.c:2749
+#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2823 gtkedit/editcmd.c:2828
+#: gtkedit/editcmd.c:2831
 msgid " Enter line: "
 msgstr " 行番号を入力してください: "
 
-#: gtkedit/editcmd.c:2770 gtkedit/editcmd.c:2783
+#: gtkedit/editcmd.c:2852 gtkedit/editcmd.c:2865
 msgid " Save Block "
 msgstr " ブロックを保存 "
 
-#: gtkedit/editcmd.c:2795
+#: gtkedit/editcmd.c:2877
 msgid " Insert File "
 msgstr " ファイルを挿入 "
 
-#: gtkedit/editcmd.c:2808
+#: gtkedit/editcmd.c:2890
 msgid " Insert file "
 msgstr " ファイルを挿入 "
 
-#: gtkedit/editcmd.c:2808
+#: gtkedit/editcmd.c:2890
 msgid " Error trying to insert file. "
 msgstr " ファイルを挿入しようとしてエラーが発生しました "
 
-#: gtkedit/editcmd.c:2827
+#: gtkedit/editcmd.c:2909
 msgid " Sort block "
 msgstr " ブロックで並べ替え "
 
-#: gtkedit/editcmd.c:2827 gtkedit/editcmd.c:2911
+#: gtkedit/editcmd.c:2909 gtkedit/editcmd.c:2993
 msgid " You must first highlight a block of text. "
 msgstr " まずテキストブロックをハイライトする必要があります "
 
-#: gtkedit/editcmd.c:2834
+#: gtkedit/editcmd.c:2916
 msgid " Run Sort "
 msgstr "ソートを実行 "
 
-#: gtkedit/editcmd.c:2835
+#: gtkedit/editcmd.c:2917
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " ソートのオプション (マニュアル参照) を空白で区切って入力してください: "
 
-#: gtkedit/editcmd.c:2846 gtkedit/editcmd.c:2851
+#: gtkedit/editcmd.c:2928 gtkedit/editcmd.c:2933
 msgid " Sort "
 msgstr " ソート "
 
-#: gtkedit/editcmd.c:2847
+#: gtkedit/editcmd.c:2929
 msgid " Error trying to execute sort command "
 msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
 
-#: gtkedit/editcmd.c:2852
+#: gtkedit/editcmd.c:2934
 msgid " Sort returned non-zero: "
 msgstr " ソートコマンドがゼロ以外の返り値: "
 
-#: gtkedit/editcmd.c:2885
+#: gtkedit/editcmd.c:2967
 msgid "Error create script:"
 msgstr "スクリプト作成でエラー:"
 
-#: gtkedit/editcmd.c:2891
+#: gtkedit/editcmd.c:2973
 msgid "Error read script:"
 msgstr "スクリプト読み込みでエラー:"
 
-#: gtkedit/editcmd.c:2898
+#: gtkedit/editcmd.c:2980
 msgid "Error close script:"
 msgstr "スクリプトクローズエラー:"
 
-#: gtkedit/editcmd.c:2903
+#: gtkedit/editcmd.c:2985
 msgid "Script created:"
 msgstr "スクリプトは作成されました:"
 
-#: gtkedit/editcmd.c:2910
+#: gtkedit/editcmd.c:2992
 msgid "Process block"
 msgstr "プロセスブロック"
 
-#: gtkedit/editcmd.c:3016
+#: gtkedit/editcmd.c:3097
 msgid " Mail "
 msgstr " メイル "
 
-#: gtkedit/editcmd.c:3027
+#: gtkedit/editcmd.c:3108
 msgid " Copies to"
 msgstr " コピー"
 
-#: gtkedit/editcmd.c:3031
+#: gtkedit/editcmd.c:3112
 msgid " Subject"
 msgstr " 件名"
 
-#: gtkedit/editcmd.c:3035
+#: gtkedit/editcmd.c:3116
 msgid " To"
 msgstr " To"
 
-#: gtkedit/editcmd.c:3037
+#: gtkedit/editcmd.c:3118
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-#: gtkedit/editmenu.c:62
+#: gtkedit/editmenu.c:63
 msgid " Word wrap "
 msgstr " 単語折り返し "
 
-#. Not essential to translate
 #: gtkedit/editmenu.c:64
 msgid " Enter line length, 0 for off: "
 msgstr " 行の長さを入力してください (0 でオフ): "
@@ -2399,8 +2419,9 @@ msgstr ""
 "            ユーザに親切なエディタです\n"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
-msgid "&Open/load...     C-o"
-msgstr "開く(&O)...             C-o"
+#, fuzzy
+msgid "&Open file..."
+msgstr "コマンドで開く..."
 
 #: gtkedit/editmenu.c:129
 msgid "&New              C-n"
@@ -2562,13 +2583,13 @@ msgstr "一般(&G)...   "
 msgid "&Save mode..."
 msgstr "保存方法(&S)..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1369
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1374
 msgid "&Layout..."
 msgstr "レイアウト(&L)..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
-#: src/chmod.c:164 src/chown.c:130
+#: src/chmod.c:153 src/chown.c:131
 msgid " File "
 msgstr " ファイル "
 
@@ -2826,131 +2847,121 @@ msgstr " エディタ・オプション "
 msgid "Error initialising editor.\n"
 msgstr "エディタの初期化にエラーが起こりました.\n"
 
-#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
-#: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2060
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1255 src/help.c:811
+#: src/main.c:1723 src/screen.c:2414 src/tree.c:1017 src/view.c:2075
 msgid "Help"
 msgstr "ヘルプ"
 
-#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
+#: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1257
 msgid "Mark"
 msgstr "マーク"
 
-#: gtkedit/editwidget.c:1140
+#: gtkedit/editwidget.c:1142
 msgid "Replac"
 msgstr "置換"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1737
+#: gtkedit/editwidget.c:1148 src/main.c:1725
 msgid "PullDn"
 msgstr "PullDn"
 
-#. gtk_edit_menu
-#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1738 src/view.c:2062 src/view.c:2084
+#: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1267 src/help.c:823
+#: src/main.c:1726 src/view.c:2077 src/view.c:2099
 msgid "Quit"
 msgstr "終了"
 
-#: gtkedit/gtkedit.c:68
+#: gtkedit/gtkedit.c:72
 msgid " Enter file name: "
 msgstr " ファイル名を入力して下さい: "
 
-#: gtkedit/gtkedit.c:113
+#: gtkedit/gtkedit.c:117
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr "いろはにほへとちりぬるを"
 
-#: gtkedit/gtkedit.c:804
+#: gtkedit/gtkedit.c:806
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 "gtkedit.c: 環境変数HOMEの設定がなく、パスワードエントリもありません - 中断し"
 "ます\n"
 
-#: gtkedit/gtkedit.c:1248
+#: gtkedit/gtkedit.c:1255
 msgid "Interactive help browser"
 msgstr "対話型ヘルプブラウザ"
 
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1256
 msgid "Save to current file name"
 msgstr "現在のファイル名で保存"
 
-#: gtkedit/gtkedit.c:1250
+#: gtkedit/gtkedit.c:1257
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "マーカーのOn/Offを切替てテキストをハイライトする"
 
-#: gtkedit/gtkedit.c:1251
-msgid "Replc"
-msgstr "置換"
-
-#: gtkedit/gtkedit.c:1251
+#: gtkedit/gtkedit.c:1258
 msgid "Find and replace strings/regular expressions"
 msgstr "文字列・正規表現を検索し置換"
 
-#: gtkedit/gtkedit.c:1252
+#: gtkedit/gtkedit.c:1259
 msgid "Copy highlighted block to cursor position"
 msgstr "ハイライトされたブロックを現在位置へコピー"
 
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1261
 msgid "Move highlighted block to cursor position"
 msgstr "ハイライトされたブロックを現在位置へ移動"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1262
 msgid "Find"
 msgstr "検索"
 
-#: gtkedit/gtkedit.c:1255
+#: gtkedit/gtkedit.c:1262
 msgid "Find strings/regular expressions"
 msgstr "文字列・正規表現検索"
 
-#: gtkedit/gtkedit.c:1256
-msgid "Dlete"
-msgstr "削除"
-
-#: gtkedit/gtkedit.c:1256
+#: gtkedit/gtkedit.c:1263
 msgid "Delete highlighted text"
 msgstr "ハイライトしたテキストを削除"
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1736 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1265 src/main.c:1724 src/screen.c:2415
 msgid "Menu"
 msgstr "メニュ"
 
-#: gtkedit/gtkedit.c:1257
+#: gtkedit/gtkedit.c:1265
 msgid "Pull down menu"
 msgstr "プルダウンメニュー"
 
-#: gtkedit/gtkedit.c:1258
+#: gtkedit/gtkedit.c:1267
 msgid "Exit editor"
 msgstr "エディタを終了"
 
-#: gtkedit/gtkedit.c:1292
+#: gtkedit/gtkedit.c:1301
 msgid "Clear the edit buffer"
 msgstr "エディタ・バッファを消去"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1306
 msgid "Insert File"
 msgstr "ファイル挿入"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1306
 msgid "Insert text from a file"
 msgstr "ファイルからテキストを挿入"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1308
 msgid "Copy to file"
 msgstr "ファイルへコピー"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1308
 msgid "copy a block to a file"
 msgstr "ブロックをファイルヘコピー"
 
-#: gtkedit/gtkedit.c:1339
+#: gtkedit/gtkedit.c:1348
 msgid "Search/Replace"
 msgstr "検索/置換"
 
-#: gtkedit/syntax.c:1074 gtkedit/syntax.c:1083 gtkedit/syntax.c:1092
-#: gtkedit/syntax.c:1101
+#: gtkedit/syntax.c:1081 gtkedit/syntax.c:1090 gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1108
 msgid " Spelling Message "
 msgstr "スペル関連メッセージ"
 
-#: gtkedit/syntax.c:1074
+#: gtkedit/syntax.c:1081
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2960,7 +2971,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1083
+#: gtkedit/syntax.c:1090
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2970,7 +2981,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1092
+#: gtkedit/syntax.c:1099
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2980,7 +2991,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1101
+#: gtkedit/syntax.c:1108
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
@@ -2988,11 +2999,11 @@ msgstr ""
 "ispell からの読みだし中にエラーが発生しました。\n"
 "ispell を再起動します"
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid " Load Syntax Rules "
 msgstr " 構文ルールをロード "
 
-#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
+#: gtkedit/syntax.c:1389 gtkedit/syntax.c:1391
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -3002,62 +3013,62 @@ msgstr ""
 " 新しいルールファイルはインストールされています \n"
 " 古いルールファイルは .OLD 拡張子をつけて保存されています "
 
-#: gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
+#: gtkedit/syntax.c:1537 gtkedit/syntax.c:1544
 msgid " Load syntax file "
 msgstr " 文法ファイルをロード "
 
-#: gtkedit/syntax.c:1518
+#: gtkedit/syntax.c:1537
 msgid " File access error "
 msgstr " ファイルアクセスエラー "
 
-#: gtkedit/syntax.c:1524
+#: gtkedit/syntax.c:1543
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " ファイル %s の %d 行目でエラー "
 
-#: src/achown.c:72 src/chmod.c:115 src/chown.c:80
+#: src/achown.c:74 src/chmod.c:110 src/chown.c:81
 msgid "&Set"
 msgstr "設定(&S)"
 
-#: src/achown.c:73
+#: src/achown.c:75
 msgid "S&kip"
 msgstr "スキップ(&k)"
 
-#: src/achown.c:74 src/chmod.c:119 src/chown.c:83
+#: src/achown.c:76 src/chmod.c:114 src/chown.c:84
 msgid "Set &all"
 msgstr "すべて設定(&a)"
 
-#: src/achown.c:362 src/achown.c:369
+#: src/achown.c:345 src/achown.c:352
 msgid "owner"
 msgstr "所有者"
 
-#: src/achown.c:364 src/achown.c:371
+#: src/achown.c:347 src/achown.c:354
 msgid "group"
 msgstr "グループ"
 
-#: src/achown.c:366
+#: src/achown.c:349
 msgid "other"
 msgstr "その他"
 
-#: src/achown.c:374
+#: src/achown.c:357
 msgid "On"
 msgstr "オン"
 
-#: src/achown.c:376
+#: src/achown.c:359
 msgid "Flag"
 msgstr "フラグ"
 
-#: src/achown.c:383
+#: src/achown.c:366
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d (%d 中)"
 
-#: src/achown.c:391
+#: src/achown.c:374
 msgid " Chown advanced command "
 msgstr " Chown上級コマンド "
 
-#: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:282
-#: src/chmod.c:367
+#: src/achown.c:609 src/achown.c:625 src/achown.c:671 src/chmod.c:269
+#: src/chmod.c:338
 #, c-format
 msgid ""
 " Couldn't chmod \"%s\" \n"
@@ -3066,8 +3077,8 @@ msgstr ""
 " chmod \"%s\"をchmodできません \n"
 " %s "
 
-#: src/achown.c:634 src/achown.c:649 src/achown.c:712 src/chown.c:223
-#: src/chown.c:345
+#: src/achown.c:614 src/achown.c:629 src/achown.c:675 src/chown.c:224
+#: src/chown.c:331
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -3076,40 +3087,27 @@ msgstr ""
 " chmod \"%s\"をchownできません \n"
 " %s "
 
-#: src/achown.c:666 src/achown.c:670 src/chmod.c:317 src/chmod.c:321
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:299 src/user.c:671
-msgid " Oops... "
-msgstr " あうう... "
-
-#: src/achown.c:667
-msgid " I can't run the Advanced Chown command on an extfs "
-msgstr " extfs では上級 Chown コマンドを実行できません "
-
-#: src/achown.c:671
-msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr " tarfs では上級 Chwon コマンドを実行できません "
-
-#: src/background.c:181
+#: src/background.c:184
 msgid "Background process:"
 msgstr "バックグラウンド処理:"
 
-#: src/background.c:277 src/file.c:2193
+#: src/background.c:282 src/file.c:2192
 msgid " Background process error "
 msgstr " バックグラウンド処理エラー "
 
-#: src/background.c:280
+#: src/background.c:285
 msgid " Child died unexpectedly "
 msgstr " 子プロセスが死んでしまいました "
 
-#: src/background.c:282
+#: src/background.c:287
 msgid " Unknown error in child "
 msgstr " 子プロセスの不明なエラー"
 
-#: src/background.c:297
+#: src/background.c:302
 msgid " Background protocol error "
 msgstr " バックグラウンド・プロトコルのエラー "
 
-#: src/background.c:298
+#: src/background.c:303
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -3117,350 +3115,356 @@ msgstr ""
 "バックグラウンド・プロセスが引数を要求してきましたので\n"
 "処理します\n"
 
-#: src/boxes.c:63
+#: src/boxes.c:72
 msgid " Listing mode "
 msgstr " 一覧方法 "
 
-#: src/boxes.c:68
+#: src/boxes.c:77
 msgid "&Full file list"
 msgstr "詳細なファイル一覧(&F)"
 
-#: src/boxes.c:69
+#: src/boxes.c:78
 msgid "&Brief file list"
 msgstr "短いファイル一覧(&B)"
 
-#: src/boxes.c:70
+#: src/boxes.c:79
 msgid "&Long file list"
 msgstr "長いファイル一覧(&L)"
 
-#: src/boxes.c:71
+#: src/boxes.c:80
 msgid "&User defined:"
 msgstr "ユーザ定義(&U):"
 
-#: src/boxes.c:72
+#: src/boxes.c:81
 msgid "&Icon view"
 msgstr "アイコン表示(&I)"
 
-#: src/boxes.c:137
+#: src/boxes.c:144
 msgid "user &Mini status"
 msgstr "ユーザミニステータス(&M)"
 
-#: src/boxes.c:186
+#: src/boxes.c:193
 msgid "Listing mode"
 msgstr "一覧形式"
 
-#: src/boxes.c:278
+#: src/boxes.c:281
 msgid "&Reverse"
 msgstr "反転(&R)"
 
-#: src/boxes.c:279 src/find.c:166
+#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "大文字・小文字を区別(&t)"
 
-#: src/boxes.c:280
+#: src/boxes.c:283
 msgid "Sort order"
 msgstr "並び変える"
 
-#: src/boxes.c:379
+#: src/boxes.c:382
 msgid " confirm &Exit "
 msgstr " 終了を確認(&E) "
 
-#: src/boxes.c:381
+#: src/boxes.c:384
 msgid " confirm e&Xecute "
 msgstr " 実行を確認(&X) "
 
-#: src/boxes.c:383
+#: src/boxes.c:386
 msgid " confirm o&Verwrite "
 msgstr " 上書きを確認(&V) "
 
-#: src/boxes.c:385
+#: src/boxes.c:388
 msgid " confirm &Delete "
 msgstr " 削除を確認(&D) "
 
-#: src/boxes.c:391
+#: src/boxes.c:394
 msgid " Confirmation "
 msgstr " 確認 "
 
-#: src/boxes.c:459
+#: src/boxes.c:465
 msgid "Full 8 bits output"
 msgstr "8 ビット出力"
 
-#: src/boxes.c:459
+#: src/boxes.c:465
 msgid "ISO 8859-1"
 msgstr "ISO 8850-1"
 
-#: src/boxes.c:459
+#: src/boxes.c:465
 msgid "7 bits"
 msgstr "7 ビット"
 
-#: src/boxes.c:466
+#: src/boxes.c:472 src/boxes.c:620
 msgid "F&ull 8 bits input"
 msgstr "8 ビット入力(&u)"
 
-#: src/boxes.c:474
+#: src/boxes.c:480 src/boxes.c:601
 msgid " Display bits "
 msgstr " 表示ビット数 "
 
-#: src/boxes.c:649
+#: src/boxes.c:585 src/selcodepage.c:48
+#, fuzzy
+msgid "Other 8 bit"
+msgstr "他人"
+
+#: src/boxes.c:604
+msgid "Input / display codepage:"
+msgstr ""
+
+#: src/boxes.c:623
+#, fuzzy
+msgid "&Select"
+msgstr " 選択 "
+
+#: src/boxes.c:758
 msgid "&Always use ftp proxy"
 msgstr "常に ftp プロキシを使う(&A)"
 
-#: src/boxes.c:651
+#: src/boxes.c:760
 msgid "sec"
 msgstr "秒"
 
-#: src/boxes.c:655
+#: src/boxes.c:764
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs ディレクトリキャッシュの保存時間:"
 
-#: src/boxes.c:659
+#: src/boxes.c:768
 msgid "ftp anonymous password:"
 msgstr "ftp anonymous パスワード:"
 
-#: src/boxes.c:666
+#: src/boxes.c:775
 msgid "Timeout for freeing VFSs:"
 msgstr "VFSを解放するタイムアウト:"
 
-#: src/boxes.c:672
+#: src/boxes.c:781
 msgid " Virtual File System Setting "
 msgstr " 仮想ファイルシステムの設定 "
 
-#: src/boxes.c:738
+#: src/boxes.c:840
 msgid "Quick cd"
 msgstr "クイックcd"
 
 #. want cd like completion
-#: src/boxes.c:743
+#: src/boxes.c:845
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:794
+#: src/boxes.c:885
 msgid "Symbolic link"
 msgstr "シンボリッリンク"
 
-#: src/boxes.c:831
+#: src/boxes.c:921
 msgid "Running "
 msgstr "実行中 "
 
-#: src/boxes.c:832 src/find.c:721 src/find.c:962
-msgid "Stopped"
-msgstr "停止中"
-
-#: src/boxes.c:893
+#: src/boxes.c:983
 msgid "&Stop"
 msgstr "停止(&S)"
 
-#: src/boxes.c:894
+#: src/boxes.c:984
 msgid "&Resume"
 msgstr "再開(&R)"
 
-#: src/boxes.c:895
+#: src/boxes.c:985
 msgid "&Kill"
 msgstr "強制終了(&K)"
 
-#: src/boxes.c:934
+#: src/boxes.c:1024
 msgid "Background Jobs"
 msgstr "バックグラウンドジョブ"
 
-#: src/chmod.c:95
+#: src/charsets.c:33 vfs/extfs.c:1337 vfs/sfs.c:301
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr ""
+
+#: src/charsets.c:174 src/charsets.c:187
+#, fuzzy, c-format
+msgid "Cannot translate from %s to %s"
+msgstr ""
+" ファイル \"%s\" を stat できません\n"
+"  %s "
+
+#: src/chmod.c:90
 msgid "execute/search by others"
 msgstr "他人が実行・検索できる"
 
-#: src/chmod.c:96
+#: src/chmod.c:91
 msgid "write by others"
 msgstr "他人が書ける"
 
-#: src/chmod.c:97
+#: src/chmod.c:92
 msgid "read by others"
 msgstr "他人が読める"
 
-#: src/chmod.c:98
+#: src/chmod.c:93
 msgid "execute/search by group"
 msgstr "グループで実行・検索できる"
 
-#: src/chmod.c:99
+#: src/chmod.c:94
 msgid "write by group"
 msgstr "グループで書ける"
 
-#: src/chmod.c:100
+#: src/chmod.c:95
 msgid "read by group"
 msgstr "グループで読める"
 
-#: src/chmod.c:101
+#: src/chmod.c:96
 msgid "execute/search by owner"
 msgstr "所有者が実行・検索できる"
 
-#: src/chmod.c:102
+#: src/chmod.c:97
 msgid "write by owner"
 msgstr "所有者が書ける"
 
-#: src/chmod.c:103
+#: src/chmod.c:98
 msgid "read by owner"
 msgstr "所有者が読める"
 
-#: src/chmod.c:104
+#: src/chmod.c:99
 msgid "sticky bit"
 msgstr "スティッキービット"
 
-#: src/chmod.c:105
+#: src/chmod.c:100
 msgid "set group ID on execution"
 msgstr "実行時にグループIDを設定"
 
-#: src/chmod.c:106
+#: src/chmod.c:101
 msgid "set user ID on execution"
 msgstr "実行時にユーザIDを設定"
 
-#: src/chmod.c:116
+#: src/chmod.c:111
 msgid "C&lear marked"
 msgstr "マークをクリア(&l)"
 
-#: src/chmod.c:117
+#: src/chmod.c:112
 msgid "S&et marked"
 msgstr "マークを設定(&e)"
 
-#: src/chmod.c:118
+#: src/chmod.c:113
 msgid "&Marked all"
 msgstr "全マーク(&M)"
 
-#: src/chmod.c:152
+#: src/chmod.c:141
 msgid "Permissions (Octal)"
 msgstr "パーミッション(8進数)"
 
-#: src/chmod.c:154
+#: src/chmod.c:143
 msgid "Owner name"
 msgstr "所有者名"
 
-#: src/chmod.c:156
+#: src/chmod.c:145
 msgid "Group name"
 msgstr "グループ名"
 
-#: src/chmod.c:160
+#: src/chmod.c:149
 msgid " Chmod command "
 msgstr " chmod コマンド "
 
-#: src/chmod.c:162 src/chown.c:120
+#: src/chmod.c:151 src/chown.c:121
 msgid " Permission "
 msgstr " パーミッション "
 
-#: src/chmod.c:169
+#: src/chmod.c:158
 msgid "Use SPACE to change"
 msgstr "オプションの変更は"
 
-#: src/chmod.c:171
+#: src/chmod.c:160
 msgid "an option, ARROW KEYS"
 msgstr "スペースで,オプションの"
 
-#: src/chmod.c:173
+#: src/chmod.c:162
 msgid "to move between options"
 msgstr "移動は矢印で,"
 
-#: src/chmod.c:175
+#: src/chmod.c:164
 msgid "and T or INS to mark"
 msgstr "TあるいはINSでマーク"
 
-#: src/chmod.c:233
+#: src/chmod.c:220
 msgid "Chmod command"
 msgstr "chmod コマンド"
 
-#: src/chmod.c:318
-msgid " I can't run the Chmod command on an extfs "
-msgstr " extfs では chmod コマンドを実行できません "
-
-#: src/chmod.c:322
-msgid " I can't run the Chmod command on a tarfs "
-msgstr " tarfs では chmod コマンドを実行できません "
-
-#: src/chown.c:81
+#: src/chown.c:82
 msgid "Set &users"
 msgstr "ユーザを設定(&u)"
 
-#: src/chown.c:82
+#: src/chown.c:83
 msgid "Set &groups"
 msgstr "グループを設定(&g)"
 
-#: src/chown.c:112
+#: src/chown.c:113
 msgid " Name "
 msgstr " 名前 "
 
-#: src/chown.c:114
+#: src/chown.c:115
 msgid " Owner name "
 msgstr " 所有者名 "
 
-#: src/chown.c:116 src/chown.c:128
+#: src/chown.c:117 src/chown.c:129
 msgid " Group name "
 msgstr " グループ名 "
 
-#: src/chown.c:118
+#: src/chown.c:119
 msgid " Size "
 msgstr " 大きさ "
 
-#: src/chown.c:124
+#: src/chown.c:125
 msgid " Chown command "
 msgstr " chown コマンド "
 
-#: src/chown.c:126
+#: src/chown.c:127
 msgid " User name "
 msgstr " ユーザ名 "
 
-#: src/chown.c:192
+#: src/chown.c:193
 msgid "<Unknown user>"
 msgstr "<不明なユーザ>"
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:193
+#: src/chown.c:194
 msgid "<Unknown group>"
 msgstr "<不明なグループ>"
 
-#: src/chown.c:261
-msgid " I can't run the Chown command on an extfs "
-msgstr " extfs では chown コマンドを実行できません "
-
-#: src/chown.c:265
-msgid " I can't run the Chown command on a tarfs "
-msgstr " tarfs では chown を実行できません "
-
-#: src/cmd.c:198
+#: src/cmd.c:194
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " %s のローカルコピーにアクセスできません "
 
-#: src/cmd.c:248
+#: src/cmd.c:244
 msgid " CD "
 msgstr " CD "
 
-#: src/cmd.c:248
+#: src/cmd.c:244
 msgid "Files tagged, want to cd?"
 msgstr "ファイルはタグ付られています。cd しますか?"
 
-#: src/cmd.c:254 src/cmd.c:721 src/cmd.c:740
+#: src/cmd.c:250 src/cmd.c:724 src/cmd.c:743
 msgid "Could not change directory"
 msgstr "ディレクトリを変更できません"
 
-#: src/cmd.c:283
+#: src/cmd.c:279
 msgid " View file "
 msgstr " ファイルを見る "
 
-#: src/cmd.c:283
+#: src/cmd.c:279
 msgid " Filename:"
 msgstr " ファイル名:"
 
-#: src/cmd.c:300
+#: src/cmd.c:296
 msgid " Filtered view "
 msgstr " フィルタされた一覧 "
 
-#: src/cmd.c:300
+#: src/cmd.c:296
 msgid " Filter command and arguments:"
 msgstr " フィルタコマンドと引数:"
 
-#: src/cmd.c:392
+#: src/cmd.c:388
 msgid "Create a new Directory"
 msgstr "新規ディレクトリの作成"
 
-#: src/cmd.c:392
+#: src/cmd.c:388
 msgid " Enter directory name:"
 msgstr " ディレクトリ名を入力:"
 
-#: src/cmd.c:453
+#: src/cmd.c:452
 msgid " Filter "
 msgstr " フィルタ "
 
@@ -3468,80 +3472,80 @@ msgstr " フィルタ "
 msgid " Set expression for filtering filenames"
 msgstr " ファイル名のフィルタの形式を設定"
 
-#: src/cmd.c:519
+#: src/cmd.c:523
 msgid " Select "
 msgstr " 選択 "
 
-#: src/cmd.c:571
+#: src/cmd.c:577
 msgid " Unselect "
 msgstr " 選択解除 "
 
-#: src/cmd.c:645
+#: src/cmd.c:651
 msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
 
-#: src/cmd.c:646
+#: src/cmd.c:652
 msgid " Which extension file you want to edit? "
 msgstr " どの拡張ファイルを編集しますか? "
 
-#: src/cmd.c:647
+#: src/cmd.c:653
 msgid "&User"
 msgstr "ユーザ(&U)"
 
-#: src/cmd.c:647 src/cmd.c:676
+#: src/cmd.c:653 src/cmd.c:681
 msgid "&System Wide"
 msgstr "システム全体(&S)"
 
-#: src/cmd.c:673
+#: src/cmd.c:678
 msgid " Menu edit "
 msgstr " メニューの編集 "
 
-#: src/cmd.c:674
+#: src/cmd.c:679
 msgid " Which menu file will you edit ? "
 msgstr " どのメニューファイルを編集しますか? "
 
-#: src/cmd.c:676
+#: src/cmd.c:681
 msgid "&Local"
 msgstr "ローカル(&L)"
 
-#: src/cmd.c:676
+#: src/cmd.c:681
 msgid "&Home"
 msgstr "ホーム(&H)"
 
-#: src/cmd.c:866
+#: src/cmd.c:869
 msgid " Compare directories "
 msgstr " ディレクトリを比較 "
 
-#: src/cmd.c:866
+#: src/cmd.c:869
 msgid " Select compare method: "
 msgstr " 比較方法を選んでください: "
 
-#: src/cmd.c:867
+#: src/cmd.c:870
 msgid "&Quick"
 msgstr "クイック(&Q)"
 
-#: src/cmd.c:867
+#: src/cmd.c:870
 msgid "&Size only"
 msgstr "大きさのみ(&S)"
 
-#: src/cmd.c:867
+#: src/cmd.c:870
 msgid "&Thorough"
 msgstr "通しで(&T)"
 
-#: src/cmd.c:877
+#: src/cmd.c:880
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 " このコマンドを使うには,両パネルとも一覧表示モードでなければなりません "
 
-#: src/cmd.c:891
+#: src/cmd.c:894
 msgid " The command history is empty "
 msgstr " コマンドの履歴は空です "
 
-#: src/cmd.c:897
+#: src/cmd.c:900
 msgid " Command history "
 msgstr " コマンドの履歴 "
 
-#: src/cmd.c:939
+#: src/cmd.c:940
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -3549,120 +3553,116 @@ msgstr ""
 " xterm または Linux コンソールではありません; \n"
 " パネルをトグルできません"
 
-#: src/cmd.c:978
+#: src/cmd.c:975
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "`exit' と入力すれば Midnight Commander へ戻ります"
 
-#: src/cmd.c:1033
-#, c-format
-msgid ""
-" Couldn't stat %s \n"
-" %s "
-msgstr ""
-" %s を stat できません \n"
-" %s "
-
-#: src/cmd.c:1042 src/cmd.c:1044
+#: src/cmd.c:1023 src/cmd.c:1025
 msgid " Link "
 msgstr " リンク "
 
-#: src/cmd.c:1043 src/cmd.c:1182 src/file.c:1708
+#: src/cmd.c:1024 src/cmd.c:1161 src/file.c:1707
 msgid " to:"
 msgstr " to:"
 
-#: src/cmd.c:1054
+#: src/cmd.c:1035
 #, c-format
 msgid " link: %s "
 msgstr " リンク: %s "
 
-#: src/cmd.c:1087
+#: src/cmd.c:1062
 #, c-format
 msgid " symlink: %s "
 msgstr " シンボリックリンク: %s "
 
-#: src/cmd.c:1141
+#: src/cmd.c:1117
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " シンボリックリンク `%s' のリンク先: "
 
-#: src/cmd.c:1146
+#: src/cmd.c:1122
 msgid " Edit symlink "
 msgstr " シンボリックリンクの編集 "
 
-#: src/cmd.c:1151
+#: src/cmd.c:1127
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " シンボリックリンクの編集, %sを削除できません: %s "
 
-#: src/cmd.c:1155
+#: src/cmd.c:1131
 #, c-format
 msgid " edit symlink: %s "
 msgstr " シンボリックリンクの編集: %s "
 
-#: src/cmd.c:1182
+#: src/cmd.c:1143
+#, fuzzy, c-format
+msgid "`%s' is not a symbolic link"
+msgstr "シンボリッリンク"
+
+#: src/cmd.c:1161
 msgid " Link symbolically "
 msgstr " シンボリックリンクを張る "
 
-#: src/cmd.c:1183
+#: src/cmd.c:1162
 msgid " Relative symlink "
 msgstr " 相対的シンボリックリンク "
 
-#: src/cmd.c:1194
+#: src/cmd.c:1173
 #, c-format
 msgid " relative symlink: %s "
 msgstr " 相対的シンボリックリンク: %s "
 
-#: src/cmd.c:1269
+#: src/cmd.c:1246
 msgid "Using default locale"
 msgstr "デフォルトロカールを利用"
 
-#: src/cmd.c:1271
+#: src/cmd.c:1248
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "ロカール \"%s\" を利用します (環境変数 %s より)"
 
-#: src/cmd.c:1357
+#: src/cmd.c:1310
 msgid " Enter machine name (F1 for details): "
 msgstr " マシン名を入力してください(詳細はF1キー): "
 
-#: src/cmd.c:1384
+#: src/cmd.c:1337
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " ディレクトリを%sへ変更できません "
 
-#: src/cmd.c:1391 src/widget.c:1161
+#: src/cmd.c:1344 src/widget.c:1151
 msgid " Link to a remote machine "
 msgstr " リモート・マシンへのリンク "
 
-#: src/cmd.c:1397 src/widget.c:1162
+#: src/cmd.c:1350 src/widget.c:1152
 msgid " FTP to machine "
 msgstr " マシンへのFTP "
 
-#: src/cmd.c:1403 src/widget.c:1163
+#: src/cmd.c:1356 src/widget.c:1153
 msgid " SMB link to machine "
 msgstr " マシンへのSMBリンク "
 
-#: src/cmd.c:1413
+#: src/cmd.c:1366
 msgid " Socket source routing setup "
 msgstr " ソケットのソースルーティング設定 "
 
-#: src/cmd.c:1414
+#: src/cmd.c:1367
 msgid " Enter host name to use as a source routing hop: "
 msgstr " ソースルーティングの hop に使うホストの名前を入力してください: "
 
-#: src/cmd.c:1422
+#: src/cmd.c:1375
 msgid " Host name "
 msgstr " ホスト名 "
 
-#: src/cmd.c:1422
+#: src/cmd.c:1375
 msgid " Error while looking up IP address "
 msgstr " IPアドレスを見付ける際のエラー "
 
-#: src/cmd.c:1433
+#: src/cmd.c:1386
 msgid " Undelete files on an ext2 file system "
 msgstr " ext2ファイルシステムでのファイル削除のやり直し "
 
-#: src/cmd.c:1434
+#: src/cmd.c:1387
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3670,15 +3670,15 @@ msgstr ""
 " ファイルを復活させるデバイスのデバイス名 (/dev/ は省く) を\n"
 " 入力してください: (F1 で詳細)"
 
-#: src/cmd.c:1484
+#: src/cmd.c:1439
 msgid " Setup saved to ~/"
 msgstr " 設定は ~/ へ保存されました"
 
-#: src/cmd.c:1489
+#: src/cmd.c:1441
 msgid " Setup "
 msgstr " 設定 "
 
-#: src/command.c:170
+#: src/command.c:171
 #, c-format
 msgid ""
 " Cannot chdir to '%s' \n"
@@ -3687,7 +3687,7 @@ msgstr ""
 " ディレクトリを'%s'へ変更できません\n"
 " %s "
 
-#: src/command.c:198
+#: src/command.c:199
 msgid " You can not execute commands on non-local filesystems"
 msgstr " 非ローカルのファイルシステム上ではコマンドを実行できません"
 
@@ -3764,25 +3764,16 @@ msgstr "所有者(&O)"
 msgid "&Group"
 msgstr "グループ(&G)"
 
-#: src/dir.c:396
+#: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "ファイル '%s' は存在しますが stat-ed できません: %s"
 
-#: src/dir.c:667
+#: src/dir.c:698
 msgid "Unknown"
 msgstr "不明"
 
-#: src/ext.c:143 src/user.c:544
-#, c-format
-msgid ""
-" Cannot generate unique filename \n"
-" %s "
-msgstr ""
-" 一意なファイル名を生成できません \n"
-" %s "
-
-#: src/ext.c:150 src/user.c:556
+#: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -3791,29 +3782,25 @@ msgstr ""
 " 一時的なコマンド・ファイルを作成できません \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:578
+#: src/ext.c:164 src/user.c:579
 msgid " Parameter "
 msgstr " パラメータ "
 
-#: src/ext.c:315
-msgid " Cannot execute commands on a Virtual File System directory "
-msgstr " 仮想ファイルシステムのディレクトリでコマンドは実行できません "
-
-#: src/ext.c:415
+#: src/ext.c:416
 msgid " file error"
 msgstr " ファイルエラー"
 
-#: src/ext.c:416
+#: src/ext.c:417
 msgid "Format of the "
 msgstr "Format of the "
 
-#: src/ext.c:418
+#: src/ext.c:419
+#, fuzzy
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
 "failed. Please fetch a fresh new copy from the\n"
-"Midnight Commander package or in case you don't\n"
-"have any, get it from ftp://ftp.nuclecu.unam.mx."
+"Midnight Commander package."
 msgstr ""
 "mc.ext ファイルはバージョン 3.0 になって\n"
 "変更されました．インストールに失敗したようです．\n"
@@ -3851,119 +3838,15 @@ msgstr ""
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext をとりあえず使います。"
 
-#: src/textconf.c:12
-msgid "Edition: "
-msgstr "Edition: "
-
-#: src/textconf.c:13
-msgid "text mode"
-msgstr "テキストモード"
-
-#: src/textconf.c:15
-msgid " with X11 support to read modifiers"
-msgstr "X11 テキストモードサポート"
-
-#: src/textconf.c:20
-msgid "Virtual File System: tarfs, extfs"
-msgstr "仮想ファイルシステム: tarfs, extfs"
-
-#: src/textconf.c:22
-msgid ", ftpfs"
-msgstr ", ftpfs"
-
-#: src/textconf.c:24
-msgid " (proxies: hsc proxy)"
-msgstr " (proxies: hsc proxy)"
-
-#: src/textconf.c:26
-msgid ", mcfs"
-msgstr ", mcfs"
-
-#: src/textconf.c:28
-msgid " (with termnet support)"
-msgstr " (termnet サポート)"
-
-#: src/textconf.c:31
-msgid ", smbfs"
-msgstr ", smbfs"
-
-#: src/textconf.c:35
-msgid ", undelfs"
-msgstr ", undelfs"
-
-#: src/textconf.c:41
-msgid "With builtin Editor\n"
-msgstr "内蔵エディタ使用\n"
-
-#: src/textconf.c:44
-msgid "Using "
-msgstr "Using "
-
-#: src/textconf.c:47
-msgid "system-installed "
-msgstr "system-installed "
-
-#: src/textconf.c:49
-msgid "S-lang library with "
-msgstr "S-lang library with "
-
-#: src/textconf.c:52
-msgid "terminfo"
-msgstr "terminfo"
-
-#: src/textconf.c:55
-msgid "termcap"
-msgstr "termcap"
-
-#: src/textconf.c:57
-msgid "an unknown terminal"
-msgstr "見知らぬ端末"
-
-#: src/textconf.c:60
-msgid " database"
-msgstr " database"
-
-#: src/textconf.c:63
-msgid "the ncurses library"
-msgstr "the ncurses library"
-
-#: src/textconf.c:65
-msgid "some unknown curses library"
-msgstr "いくつかの見知らぬ curses library"
-
-#: src/textconf.c:70
-msgid "With subshell support: "
-msgstr "サブシェルのサポート: "
-
-#: src/textconf.c:72
-msgid "optional"
-msgstr "オプション"
-
-#: src/textconf.c:74
-msgid "as default"
-msgstr "デフォルト"
-
-#: src/textconf.c:80
-msgid "With support for background operations\n"
-msgstr "バックグラウンド操作のサポート\n"
-
-#: src/textconf.c:84
-msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "xterm と Linux コンソールによるマウスサポート有り\n"
-
-#: src/textconf.c:86
-msgid "with mouse support on xterm.\n"
-msgstr "xterm によるマウスサポート有り\n"
-
-#: src/file.c:154 src/tree.c:639
+#: src/file.c:154 src/tree.c:640
 msgid " Copy "
 msgstr " コピー "
 
-#: src/file.c:155 src/tree.c:677
+#: src/file.c:155 src/tree.c:681
 msgid " Move "
 msgstr " 移動 "
 
-#: src/file.c:156 src/tree.c:745
+#: src/file.c:156 src/tree.c:754
 msgid " Delete "
 msgstr " 削除 "
 
@@ -4141,7 +4024,7 @@ msgstr "ファイルを完全に取得できませんでした。保存しますか?"
 msgid "&Delete"
 msgstr "削除(&D)"
 
-#: src/file.c:803 src/hotlist.c:1428
+#: src/file.c:803 src/hotlist.c:1421
 msgid "&Keep"
 msgstr "保存(&K)"
 
@@ -4271,10 +4154,6 @@ msgstr ""
 " ディレクトリ \"%s\" を削除できません\n"
 " %s "
 
-#: src/file.c:1559
-msgid " Internal error: get_file \n"
-msgstr " 内部エラー: get_file \n"
-
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
 #. * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -4284,15 +4163,15 @@ msgstr " 内部エラー: get_file \n"
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Copy"
 msgstr "1Copy"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Move"
 msgstr "1Move"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Delete"
 msgstr "1Delete"
 
@@ -4305,75 +4184,75 @@ msgstr "1Delete"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1696
+#: src/file.c:1695
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1698
+#: src/file.c:1697
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1701
+#: src/file.c:1700
 #, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-#: src/file.c:1703
+#: src/file.c:1702
 #, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:515
+#: src/file.c:1706 vfs/fish.c:518
 msgid "file"
 msgstr "file"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "files"
 msgstr "files"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directory"
 msgstr "directory"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directories"
 msgstr "directories"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid "files/directories"
 msgstr "files/directories"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid " with source mask:"
 msgstr " with source mask:"
 
-#: src/file.c:1860
+#: src/file.c:1859
 msgid " Cannot operate on \"..\"! "
 msgstr "\"..\" に対して操作できません!"
 
-#: src/file.c:1879 src/screen.c:2115
+#: src/file.c:1878 src/screen.c:2103
 msgid "Yes"
 msgstr "はい"
 
-#: src/file.c:1879 src/screen.c:2115
+#: src/file.c:1878 src/screen.c:2103
 msgid "No"
 msgstr "いいえ"
 
-#: src/file.c:1932
+#: src/file.c:1931
 msgid " Sorry, I could not put the job in background "
 msgstr " ごめんなさい。ジョブをバックグランド処理にできません "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Internal failure "
 msgstr " 内部エラー "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Unknown file operation "
 msgstr " 不明なファイル操作です "
 
-#: src/file.c:2033
+#: src/file.c:2032
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -4382,15 +4261,15 @@ msgstr ""
 " 対象 \"%s\" はディレクトリでなくてはなりません \n"
 " %s "
 
-#: src/file.c:2194
+#: src/file.c:2193
 msgid "&Retry"
 msgstr "再試行(&R)"
 
-#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:579
+#: src/file.c:2193 src/file.c:2254 src/filegui.c:258 src/filegui.c:560
 msgid "&Abort"
 msgstr "中断(&A)"
 
-#: src/file.c:2246
+#: src/file.c:2245
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -4400,7 +4279,7 @@ msgstr ""
 " ディレクトリが空ではありません \n"
 "    再帰的に削除しますか?       "
 
-#: src/file.c:2247
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -4410,134 +4289,134 @@ msgstr ""
 " バックグラウンドプロセス: ディレクトリは空ではありません \n"
 " 再帰的に削除しますか? "
 
-#: src/file.c:2254
+#: src/file.c:2253
 msgid "a&ll"
 msgstr "全部(&l)"
 
-#: src/file.c:2254 src/filegui.c:582
+#: src/file.c:2253 src/filegui.c:563
 msgid "non&E"
 msgstr "なし(&E)"
 
-#: src/file.c:2264
+#: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " 本当に削除してもよい場合は 'yes' と入力してください "
 
-#: src/file.c:2266
+#: src/file.c:2265
 msgid "all the directories "
 msgstr "全ディレクトリ "
 
-#: src/file.c:2268
+#: src/file.c:2267
 msgid " Recursive Delete "
 msgstr " 再帰的削除 "
 
-#: src/file.c:2269
+#: src/file.c:2268
 msgid " Background process: Recursive Delete "
 msgstr " バックグラウンドプロセス: 再帰的削除 "
 
-#: src/filegui.c:412
+#: src/filegui.c:404
 msgid "File"
 msgstr "ファイル"
 
-#: src/filegui.c:435
+#: src/filegui.c:427
 msgid "Count"
 msgstr "カウント"
 
-#: src/filegui.c:456
+#: src/filegui.c:448
 msgid "Bytes"
 msgstr "バイト"
 
-#: src/filegui.c:493
+#: src/filegui.c:481
 msgid "Source"
 msgstr "元"
 
-#: src/filegui.c:516
+#: src/filegui.c:504
 msgid "Target"
 msgstr "ターゲット"
 
-#: src/filegui.c:538
+#: src/filegui.c:526
 msgid "Deleting"
 msgstr "削除"
 
-#: src/filegui.c:577
+#: src/filegui.c:558
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "ターゲットのファイル \"%s\" は既に存在します!"
 
-#: src/filegui.c:580
+#: src/filegui.c:561
 msgid "if &Size differs"
 msgstr "サイズが異なれば(&S)"
 
-#: src/filegui.c:583
+#: src/filegui.c:564
 msgid "&Update"
 msgstr "更新(&U)"
 
-#: src/filegui.c:585
+#: src/filegui.c:566
 msgid "Overwrite all targets?"
 msgstr "すべてのターゲットを上書きしますか?"
 
-#: src/filegui.c:587
+#: src/filegui.c:568
 msgid "&Reget"
 msgstr "再取得(&R)"
 
-#: src/filegui.c:588
+#: src/filegui.c:569
 msgid "ap&Pend"
 msgstr "追加(&P)"
 
-#: src/filegui.c:591
+#: src/filegui.c:572
 msgid "Overwrite this target?"
 msgstr "このターゲットを上書きしますか?"
 
-#: src/filegui.c:593
+#: src/filegui.c:574
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "ターゲットの日時: %s, 大きさ %d"
 
-#: src/filegui.c:595
+#: src/filegui.c:576
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "元の日時: %s, 大きさ %d"
 
-#: src/filegui.c:677
+#: src/filegui.c:658
 msgid " File exists "
 msgstr " ファイルが存在 "
 
-#: src/filegui.c:678
+#: src/filegui.c:659
 msgid " Background process: File exists "
 msgstr " バックグラウンドプロセス: ファイルが存在 "
 
 #. follow symlinks and preserve Attributes must be the first
-#: src/filegui.c:790
+#: src/filegui.c:771
 msgid "preserve &Attributes"
 msgstr "属性を保存する(&A)"
 
 #. &op_preserve
-#: src/filegui.c:792
+#: src/filegui.c:773
 msgid "follow &Links"
 msgstr "リンクをたどる(&L)"
 
 #. &file_mask_op_follow_links
-#: src/filegui.c:794
+#: src/filegui.c:775
 msgid "to:"
 msgstr "to:"
 
-#: src/filegui.c:795
+#: src/filegui.c:776
 msgid "&Using shell patterns"
 msgstr "シェルパターンを使用(&U)"
 
-#: src/filegui.c:816
+#: src/filegui.c:797
 msgid "&Background"
 msgstr "バックグラウンド(&B)"
 
-#: src/filegui.c:825
+#: src/filegui.c:806
 msgid "&Stable Symlinks"
 msgstr "安定シンボリックリンク(&S)"
 
 #. &file_mask_stable_symlinks
-#: src/filegui.c:827
+#: src/filegui.c:808
 msgid "&Dive into subdir if exists"
 msgstr "サブディレクトリが存在すれば入る(&D)"
 
-#: src/filegui.c:986
+#: src/filegui.c:967
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -4546,118 +4425,43 @@ msgstr ""
 "不正な元パターン `%s' \n"
 " %s "
 
-#: src/find.c:127
+#: src/find.c:105
 msgid "&Suspend"
 msgstr "一時停止(&S)"
 
-#: src/find.c:128
+#: src/find.c:106
 msgid "Con&tinue"
 msgstr "続行(&t)"
 
-#: src/find.c:129
+#: src/find.c:107
 msgid "&Chdir"
 msgstr "ディレクトリ移動(&C)"
 
-#: src/find.c:130
+#: src/find.c:108
 msgid "&Again"
 msgstr "もう一度(&A)"
 
-#: src/find.c:131
+#: src/find.c:109
 msgid "&Quit"
 msgstr "終了 (&Q)"
 
-#: src/find.c:132 src/panelize.c:89
+#: src/find.c:110 src/panelize.c:86
 msgid "Pane&lize"
 msgstr "パネル化(&l)"
 
-#: src/find.c:133
+#: src/find.c:111
 msgid "&View - F3"
 msgstr "表示(&V) - F3"
 
-#: src/find.c:134
+#: src/find.c:112
 msgid "&Edit - F4"
 msgstr "編集(&E) - F4"
 
-#: src/find.c:172
-msgid "Start at:"
-msgstr "開始場所:"
-
-#: src/find.c:172
-msgid "Filename:"
-msgstr "ファイル名:"
-
-#: src/find.c:172
-msgid "Content: "
-msgstr "内容:"
-
-#: src/find.c:173 src/main.c:1251 src/main.c:1275
+#: src/find.c:149 src/main.c:1260 src/main.c:1284
 msgid "&Tree"
 msgstr "ツリー(&T)"
 
-#: src/find.c:227
-msgid "Find File"
-msgstr "ファイル検索"
-
-#: src/find.c:455
-#, c-format
-msgid "Grepping in %s"
-msgstr "%s で検索中"
-
-#: src/find.c:492
-msgid " Find/read "
-msgstr " 検索/読み込み "
-
-#: src/find.c:492
-msgid " Problem reading from child "
-msgstr " 子プロセスからの結果読み込みに問題がありました"
-
-#: src/find.c:539
-msgid "Finished"
-msgstr "終了"
-
-#: src/find.c:563 src/view.c:1512
-#, c-format
-msgid "Searching %s"
-msgstr "%sを検索中"
-
-#: src/find.c:719 src/find.c:759
-msgid "Suspend"
-msgstr "中断"
-
-#: src/find.c:719
-msgid "Restart"
-msgstr "再開"
-
-#: src/find.c:721 src/find.c:823 src/find.c:962 src/find.c:1058
-msgid "Searching"
-msgstr "検索"
-
-#: src/find.c:752 src/find.c:1033
-msgid "Find file"
-msgstr "ファイル検索"
-
-#. The buttons
-#: src/find.c:757
-msgid "Change to this directory"
-msgstr "このディレクトリを変更"
-
-#: src/find.c:758
-msgid "Search again"
-msgstr "再検索"
-
-#: src/find.c:763
-msgid "View this file"
-msgstr "このファイルを表示"
-
-#: src/find.c:764
-msgid "Edit this file"
-msgstr "このファイルを編集"
-
-#: src/find.c:765
-msgid "Send the results to a Panel"
-msgstr "パネルへ結果を送る"
-
-#: src/help.c:279
+#: src/help.c:275
 msgid ""
 " Help file format error\n"
 ""
@@ -4665,19 +4469,19 @@ msgstr ""
 " ヘルプファイル形式エラー\n"
 ""
 
-#: src/help.c:318
+#: src/help.c:314
 msgid " Internal bug: Double start of link area "
 msgstr " 内部エラー: リンクエリアを二重起動 "
 
-#: src/help.c:572
+#: src/help.c:568
 msgid " Cannot find node [Contents] in help file "
 msgstr " ヘルプファイルでノード [Contents] を見付けられません "
 
-#: src/help.c:741
+#: src/help.c:737
 msgid " Help "
 msgstr " ヘルプ "
 
-#: src/help.c:766 src/user.c:689
+#: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -4686,114 +4490,115 @@ msgstr ""
 " ファイル %s を開くことができません \n"
 " %s "
 
-#: src/help.c:771
+#: src/help.c:779
 #, c-format
 msgid " Cannot find node %s in help file "
 msgstr " ヘルプファイルでノード %s を見付けることができません "
 
-#: src/help.c:808
+#: src/help.c:813
 msgid "Index"
 msgstr "目次"
 
-#: src/help.c:810
+#: src/help.c:815
 msgid "Prev"
 msgstr "前へ"
 
-#: src/hotlist.c:132
+#: src/hotlist.c:128
 msgid "&Move"
 msgstr "移動(&M)"
 
-#: src/hotlist.c:133 src/hotlist.c:1428 src/panelize.c:88 src/wtools.c:383
+#: src/hotlist.c:129 src/hotlist.c:1421 src/panelize.c:85 src/wtools.c:371
 msgid "&Remove"
 msgstr "削除(&R)"
 
-#: src/hotlist.c:134 src/hotlist.c:803 src/hotlist.c:900
+#: src/hotlist.c:130 src/hotlist.c:796 src/hotlist.c:893
 msgid "&Append"
 msgstr "追加(&A)"
 
-#: src/hotlist.c:135 src/hotlist.c:801 src/hotlist.c:898
+#: src/hotlist.c:131 src/hotlist.c:794 src/hotlist.c:891
 msgid "&Insert"
 msgstr "挿入(&I)"
 
-#: src/hotlist.c:136
+#: src/hotlist.c:132
 msgid "New &Entry"
 msgstr "新規エントリ(&E)"
 
-#: src/hotlist.c:137
+#: src/hotlist.c:133
 msgid "New &Group"
 msgstr "新規グループ(&G)"
 
-#: src/hotlist.c:139
+#: src/hotlist.c:135
 msgid "&Up"
 msgstr "上へ(&U)"
 
-#: src/hotlist.c:140
+#: src/hotlist.c:136
 msgid "&Add current"
 msgstr "追加(&A)"
 
-#: src/hotlist.c:141
+#: src/hotlist.c:137
 msgid "Change &To"
 msgstr "変更(&T)"
 
-#: src/hotlist.c:188
+#: src/hotlist.c:184
 msgid "Subgroup - press ENTER to see list"
 msgstr "サブグループ - ENTER を押せばリストが表示されます"
 
-#: src/hotlist.c:607
+#: src/hotlist.c:590
 msgid "Active VFS directories"
 msgstr "有効な VFS ディレクトリ"
 
-#: src/hotlist.c:607
+#: src/hotlist.c:590
 msgid "Directory hotlist"
 msgstr "ディレクトリホットリスト"
 
-#: src/hotlist.c:625
+#: src/hotlist.c:607
 msgid " Directory path "
 msgstr " ディレクトリのパス "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:628 src/hotlist.c:674
+#: src/hotlist.c:610 src/hotlist.c:654
 msgid " Directory label "
 msgstr " ディレクトリラベル "
 
-#: src/hotlist.c:649
-msgid "Moving "
+#: src/hotlist.c:630
+#, fuzzy, c-format
+msgid "Moving %s"
 msgstr "移動 "
 
-#: src/hotlist.c:877
+#: src/hotlist.c:870
 msgid "New hotlist entry"
 msgstr "新規ホットリストエントリ"
 
-#: src/hotlist.c:877
+#: src/hotlist.c:870
 msgid "Directory label"
 msgstr "ディレクトリラベル"
 
-#: src/hotlist.c:877
+#: src/hotlist.c:870
 msgid "Directory path"
 msgstr "ディレクトリパス"
 
-#: src/hotlist.c:958
+#: src/hotlist.c:951
 msgid " New hotlist group "
 msgstr " 新規ホットリストグループ "
 
-#: src/hotlist.c:958
+#: src/hotlist.c:951
 msgid "Name of new group"
 msgstr "新しいグループの名前"
 
-#: src/hotlist.c:973
+#: src/hotlist.c:966
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "\"%s\" のラベル:"
 
-#: src/hotlist.c:977
+#: src/hotlist.c:970
 msgid " Add to hotlist "
 msgstr " ホットリストへ追加 "
 
-#: src/hotlist.c:1014
+#: src/hotlist.c:1007
 msgid " Remove: "
 msgstr " 削除: "
 
-#: src/hotlist.c:1018
+#: src/hotlist.c:1011
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -4803,57 +4608,57 @@ msgstr ""
 " グループは空ではありません.\n"
 "  削除しますか?"
 
-#: src/hotlist.c:1363
+#: src/hotlist.c:1356
 msgid " Top level group "
 msgstr " トップレベルグループ "
 
-#: src/hotlist.c:1379
+#: src/hotlist.c:1372
 msgid "Hotlist is now kept in file ~/"
 msgstr "ホットリストはファイル ~/"
 
-#: src/hotlist.c:1381
+#: src/hotlist.c:1374
 msgid "MC will load hotlist from ~/"
 msgstr "に保存されました。MCはホットリストを ~/"
 
-#: src/hotlist.c:1383
+#: src/hotlist.c:1376
 msgid "and then delete [Hotlist] section there"
 msgstr "から読み込み、[Hotlist]セクションを削除します"
 
-#: src/hotlist.c:1385 src/hotlist.c:1404 src/hotlist.c:1427 src/hotlist.c:1452
+#: src/hotlist.c:1378 src/hotlist.c:1397 src/hotlist.c:1420 src/hotlist.c:1445
 msgid " Hotlist Load "
 msgstr " ホットリスト読み込み "
 
-#: src/hotlist.c:1401 src/hotlist.c:1449
+#: src/hotlist.c:1394 src/hotlist.c:1442
 msgid "MC was unable to write ~/"
 msgstr "MC はファイル ~/"
 
-#: src/hotlist.c:1402
+#: src/hotlist.c:1395
 msgid " file, your old hotlist entries were not deleted"
 msgstr "に書き込めませんでした。古いホットリストのエントリは削除されません"
 
-#: src/hotlist.c:1416
+#: src/hotlist.c:1409
 msgid "You have ~/"
 msgstr "ファイル ~/"
 
-#: src/hotlist.c:1416
+#: src/hotlist.c:1409
 msgid " file and [Hotlist] section in ~/"
 msgstr "が存在し、ファイル ~/"
 
-#: src/hotlist.c:1417
+#: src/hotlist.c:1410
 msgid "Your ~/"
 msgstr "に[Hotlist]セクションがあります. あなたの ~/"
 
-#: src/hotlist.c:1417
+#: src/hotlist.c:1410
 msgid " most probably was created\n"
 msgstr "はおそらく\n"
 
-#: src/hotlist.c:1418
+#: src/hotlist.c:1411
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
 msgstr "初期開発版の MC で作成され、実際の ~/"
 
-#: src/hotlist.c:1419
+#: src/hotlist.c:1412
 msgid ""
 " entries\n"
 "\n"
@@ -4861,7 +4666,7 @@ msgstr ""
 "のエントリよりも有効であると\n"
 "思われます\n"
 
-#: src/hotlist.c:1420
+#: src/hotlist.c:1413
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4871,7 +4676,7 @@ msgstr ""
 "\n"
 "  削除 - 古いホットリストエントリを削除: ~/"
 
-#: src/hotlist.c:1422
+#: src/hotlist.c:1415
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -4881,114 +4686,114 @@ msgstr ""
 "         質問を表示する\n"
 "  合成 - 古いエントリをグループとして追加 \"Entries from ~/"
 
-#: src/hotlist.c:1428
+#: src/hotlist.c:1421
 msgid "&Merge"
 msgstr "合成(&M)"
 
-#: src/hotlist.c:1440
+#: src/hotlist.c:1433
 msgid " Entries from ~/"
 msgstr " Entries from ~/"
 
-#: src/hotlist.c:1450
+#: src/hotlist.c:1443
 msgid " file your old hotlist entries were not deleted"
 msgstr " に書き込めませんでした。古いホットリストは削除しません"
 
-#: src/info.c:83
+#: src/info.c:76
 #, c-format
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#: src/info.c:109
+#: src/info.c:100
 #, c-format
 msgid "File:       %s"
 msgstr "ファイル:   %s"
 
-#: src/info.c:122
+#: src/info.c:113
 #, c-format
 msgid "Free nodes %d (%d%%) of %d"
 msgstr "空きノード %d (%d%%) of %d"
 
-#: src/info.c:128
+#: src/info.c:119
 msgid "No node information"
 msgstr "ノード情報はありません"
 
-#: src/info.c:133
+#: src/info.c:124
 msgid "Free space "
 msgstr "空き領域   "
 
-#: src/info.c:135
+#: src/info.c:126
 #, c-format
 msgid " (%d%%) of "
 msgstr " (%d%%) of "
 
-#: src/info.c:139
+#: src/info.c:130
 msgid "No space information"
 msgstr "空き領域情報がありません"
 
-#: src/info.c:143
+#: src/info.c:134
 #, c-format
 msgid "Type:      %s "
 msgstr "形式:      %s "
 
-#: src/info.c:143
+#: src/info.c:134
 msgid "non-local vfs"
 msgstr "ローカルでないvfs"
 
-#: src/info.c:149
+#: src/info.c:140
 #, c-format
 msgid "Device:    %s"
 msgstr "デバイス:  %s"
 
-#: src/info.c:153
+#: src/info.c:144
 #, c-format
 msgid "Filesystem: %s"
 msgstr "ファイルシステム: %s"
 
-#: src/info.c:158
+#: src/info.c:149
 #, c-format
 msgid "Accessed:  %s"
 msgstr "アクセス:  %s"
 
-#: src/info.c:162
+#: src/info.c:153
 #, c-format
 msgid "Modified:  %s"
 msgstr "更新:      %s"
 
-#: src/info.c:166
+#: src/info.c:157
 #, c-format
 msgid "Created:   %s"
 msgstr "作成:      %s"
 
-#: src/info.c:179
+#: src/info.c:170
 msgid "Size:      "
 msgstr "サイズ:      "
 
-#: src/info.c:182
+#: src/info.c:173
 #, c-format
 msgid " (%d blocks)"
 msgstr " (%dブロック)"
 
-#: src/info.c:188
+#: src/info.c:179
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "所有者:    %s/%s"
 
-#: src/info.c:193
+#: src/info.c:184
 #, c-format
 msgid "Links:     %d"
 msgstr "リンク数:  %d"
 
-#: src/info.c:197
+#: src/info.c:188
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "モード     %s (%04o)"
 
-#: src/info.c:202
+#: src/info.c:193
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "位置:      %Xh:%Xh"
 
-#: src/info.c:212
+#: src/info.c:203
 msgid "File:       None"
 msgstr "ファイル:   なし"
 
@@ -5036,32 +4841,32 @@ msgstr "パーミッション(&R)"
 msgid "&File types"
 msgstr "ファイルタイプ(&F)"
 
-#: src/layout.c:377 src/learn.c:60 src/learn.c:179 src/option.c:145
+#: src/layout.c:371 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "保存(&S)"
 
 #. length of line with '<' '>' buttons
-#: src/layout.c:385
+#: src/layout.c:379
 msgid " Layout "
 msgstr " レイアウト "
 
-#: src/layout.c:386
+#: src/layout.c:380
 msgid " Panel split "
 msgstr " パネル分割 "
 
-#: src/layout.c:387
+#: src/layout.c:381
 msgid " Highlight... "
 msgstr " ハイライト... "
 
-#: src/layout.c:388 src/option.c:156
+#: src/layout.c:382 src/option.c:148
 msgid " Other options "
 msgstr " その他のオプション "
 
-#: src/layout.c:389
+#: src/layout.c:383
 msgid "output lines"
 msgstr "出力行数"
 
-#: src/layout.c:456
+#: src/layout.c:450
 msgid "Layout"
 msgstr "レイアウト"
 
@@ -5069,11 +4874,11 @@ msgstr "レイアウト"
 msgid " Learn keys "
 msgstr " キーの学習 "
 
-#: src/learn.c:93
+#: src/learn.c:91
 msgid " Teach me a key "
 msgstr " キーを教えて "
 
-#: src/learn.c:94
+#: src/learn.c:92
 #, c-format
 msgid ""
 "Please press the %s\n"
@@ -5094,20 +4899,20 @@ msgstr ""
 "中止するにはエスケープキーを押して待ってく\n"
 "ださい"
 
-#: src/learn.c:122
+#: src/learn.c:126
 msgid " Cannot accept this key "
 msgstr " このキーは受け付けられません"
 
-#: src/learn.c:123
+#: src/learn.c:127
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " \"%s\"を入力しました"
 
-#: src/learn.c:170
+#: src/learn.c:174
 msgid "OK"
 msgstr "良"
 
-#: src/learn.c:177
+#: src/learn.c:181
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -5115,11 +4920,11 @@ msgstr ""
 "すべてのキーは問題なさそうです。\n"
 "すばらしい"
 
-#: src/learn.c:179
+#: src/learn.c:183
 msgid "&Discard"
 msgstr "破棄(&D)"
 
-#: src/learn.c:183
+#: src/learn.c:187
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -5127,23 +4932,23 @@ msgstr ""
 "すばらしい! ターミナルデータベースは完成しました!\n"
 "すべてのキーは動作します"
 
-#: src/learn.c:267
+#: src/learn.c:271
 msgid "Learn keys"
 msgstr "キーの学習"
 
-#: src/learn.c:300
+#: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "ここに表示されているキーをすべて押してください。すべて押したら"
 
-#: src/learn.c:302
+#: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "「良」のマークのないキーをチェックします。そのキーの上でスペー"
 
-#: src/learn.c:304
+#: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "スかマウスを押してキー定義を実行してください。TABで移動できます"
 
-#: src/main.c:715
+#: src/main.c:719
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -5155,276 +4960,280 @@ msgstr ""
 "\"su\" コマンドで特別な権限を行使したのではないで\n"
 "すか?"
 
-#: src/main.c:790
+#: src/main.c:794
 msgid "Press any key to continue..."
 msgstr "なにかキーを押せば続行します..."
 
-#: src/main.c:840
+#: src/main.c:844
 msgid " The shell is already running a command "
 msgstr " シェルはすでにコマンドを実行中です "
 
-#: src/main.c:867 src/screen.c:2113 src/screen.c:2160
+#: src/main.c:873 src/screen.c:2101 src/screen.c:2148
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
-#: src/main.c:868
+#: src/main.c:874
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr "本当にMidnight Commanderを終了させますか?"
 
-#: src/main.c:1236
+#: src/main.c:1248
 msgid " Listing format edit "
 msgstr "リスト形式の編集 "
 
-#: src/main.c:1236
+#: src/main.c:1248
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr "新しいモードは \"%s\" です"
 
-#: src/main.c:1248 src/main.c:1272
+#: src/main.c:1257 src/main.c:1281
 msgid "&Listing mode..."
 msgstr "一覧方法(&L)..."
 
-#: src/main.c:1249 src/main.c:1273
+#: src/main.c:1258 src/main.c:1282
 msgid "&Quick view     C-x q"
 msgstr "簡易表示(&Q)       C-x q"
 
-#: src/main.c:1250 src/main.c:1274
+#: src/main.c:1259 src/main.c:1283
 msgid "&Info           C-x i"
 msgstr "情報(&I)           C-x i"
 
-#: src/main.c:1253 src/main.c:1277
+#: src/main.c:1262 src/main.c:1286
 msgid "&Sort order..."
 msgstr "整列順(&S)..."
 
-#: src/main.c:1255 src/main.c:1279
+#: src/main.c:1264 src/main.c:1288
 msgid "&Filter..."
 msgstr "フィルタ(&F)..."
 
-#: src/main.c:1258 src/main.c:1282
+#: src/main.c:1267 src/main.c:1291
 msgid "&Network link..."
 msgstr "ネットワークリンク(&N)..."
 
-#: src/main.c:1259 src/main.c:1283
+#: src/main.c:1268 src/main.c:1292
 msgid "FT&P link..."
 msgstr "FTP リンク(&P)..."
 
-#: src/main.c:1261 src/main.c:1285
+#: src/main.c:1270 src/main.c:1294
 msgid "SM&B link..."
 msgstr "SMBリンク(&B)..."
 
-#: src/main.c:1266 src/main.c:1290
+#: src/main.c:1275 src/main.c:1299
 msgid "&Drive...       M-d"
 msgstr "ドライブ(&D)... M-d"
 
-#: src/main.c:1268 src/main.c:1292
+#: src/main.c:1277 src/main.c:1301
 msgid "&Rescan         C-r"
 msgstr "再スキャン(&R)     C-r"
 
-#: src/main.c:1297
+#: src/main.c:1305
 msgid "&User menu          F2"
 msgstr "ユーザメニュー(&U)                F2"
 
-#: src/main.c:1298
+#: src/main.c:1306
 msgid "&View               F3"
 msgstr "表示(&V)                          F3"
 
-#: src/main.c:1299
+#: src/main.c:1307
 msgid "Vie&w file...         "
 msgstr "ファイルを表示(&W)...               "
 
-#: src/main.c:1300
+#: src/main.c:1308
 msgid "&Filtered view     M-!"
 msgstr "フィルタリングして表示(&F)       M-!"
 
-#: src/main.c:1301
+#: src/main.c:1309
 msgid "&Edit               F4"
 msgstr "編集(&E)                          F4"
 
-#: src/main.c:1302
+#: src/main.c:1310
 msgid "&Copy               F5"
 msgstr "コピー(&C)                        F5"
 
-#: src/main.c:1303
+#: src/main.c:1311
 msgid "c&Hmod           C-x c"
 msgstr "chmod(&H)                      C-x c"
 
-#: src/main.c:1305
+#: src/main.c:1313
 msgid "&Link            C-x l"
 msgstr "リンク(&L)                     C-x l"
 
-#: src/main.c:1306
+#: src/main.c:1314
 msgid "&SymLink         C-x s"
 msgstr "シンボリックリンク(&S)         C-x s"
 
-#: src/main.c:1307
+#: src/main.c:1315
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "シンボリックリンクの編集(&Y) C-x C-s"
 
-#: src/main.c:1308
+#: src/main.c:1316
 msgid "ch&Own           C-x o"
 msgstr "chown(&O)                      C-x o"
 
-#: src/main.c:1309
+#: src/main.c:1317
 msgid "&Advanced chown       "
 msgstr "上級chown(&A)                       "
 
-#: src/main.c:1311
+#: src/main.c:1319
 msgid "&Rename/Move        F6"
 msgstr "名前変更・移動(&R)                F6"
 
-#: src/main.c:1312
+#: src/main.c:1320
 msgid "&Mkdir              F7"
 msgstr "ディレクトリ作成(&M)              F7"
 
-#: src/main.c:1313
+#: src/main.c:1321
 msgid "&Delete             F8"
 msgstr "削除(&D)                          F8"
 
-#: src/main.c:1314
+#: src/main.c:1322
 msgid "&Quick cd          M-c"
 msgstr "クイックcd(&Q)                   M-c"
 
-#: src/main.c:1316
+#: src/main.c:1324
 msgid "select &Group      M-+"
 msgstr "グループ選択(&G)                 M-+"
 
-#: src/main.c:1317
+#: src/main.c:1325
 msgid "u&Nselect group    M-\\"
 msgstr "グループ選択解除(&N)             M-\\"
 
-#: src/main.c:1318
+#: src/main.c:1326
 msgid "reverse selec&Tion M-*"
 msgstr "選択反転(&N)                     M-*"
 
-#: src/main.c:1320
+#: src/main.c:1328
 msgid "e&Xit              F10"
 msgstr "終了(&X)                         F10"
 
-#: src/main.c:1331
+#. I know, I'm lazy, but the tree widget when it's not running
+#. * as a panel still has some problems, I have not yet finished
+#. * the WTree widget port, sorry.
+#.
+#: src/main.c:1337
 msgid "&Directory tree"
 msgstr "ディレクトリツリー(&D)"
 
-#: src/main.c:1333
+#: src/main.c:1338
 msgid "&Find file            M-?"
 msgstr "ファイル検索(&F)             M-?"
 
-#: src/main.c:1334
+#: src/main.c:1339
 msgid "s&Wap panels          C-u"
 msgstr "パネルを入れ換え(&W)         C-u"
 
-#: src/main.c:1335
+#: src/main.c:1340
 msgid "switch &Panels on/off C-o"
 msgstr "パネルのon/off切替(&P)       C-o"
 
-#: src/main.c:1336
+#: src/main.c:1341
 msgid "&Compare directories  C-x d"
 msgstr "ディレクトリ比較(&C)         C-x d"
 
-#: src/main.c:1337
+#: src/main.c:1342
 msgid "e&Xternal panelize    C-x !"
 msgstr "外部パネル(&X)               C-x !"
 
-#: src/main.c:1338
+#: src/main.c:1343
 msgid "show directory s&Izes"
 msgstr "ディレクトリサイズ表示(&I)"
 
-#: src/main.c:1340
+#: src/main.c:1345
 msgid "command &History"
 msgstr "コマンド履歴(&H)"
 
-#: src/main.c:1341
+#: src/main.c:1346
 msgid "di&Rectory hotlist    C-\\"
 msgstr "ディレクトリホットリスト(&R) C-\\"
 
-#: src/main.c:1343
+#: src/main.c:1348
 msgid "&Active VFS list      C-x a"
 msgstr "アクティブなVFS一覧(&V)      C-x a"
 
-#: src/main.c:1344
+#: src/main.c:1349
 msgid "Fr&ee VFSs now"
 msgstr "VFS を解放"
 
-#: src/main.c:1347
+#: src/main.c:1352
 msgid "&Background jobs      C-x j"
 msgstr "バックグラウンドジョブ(&B)   C-x j"
 
-#: src/main.c:1351
+#: src/main.c:1356
 msgid "&Undelete files (ext2fs only)"
 msgstr "ファイルの復活(&U) (ext2fsのみ)"
 
-#: src/main.c:1354
+#: src/main.c:1359
 msgid "&Listing format edit"
 msgstr "一覧形式編集(&L)"
 
-#: src/main.c:1359
+#: src/main.c:1364
 msgid "&Extension file edit"
 msgstr "拡張ファイルを編集(&E)"
 
-#: src/main.c:1360
+#: src/main.c:1365
 msgid "&Menu file edit"
 msgstr "メニューファイル編集(&M)"
 
-#: src/main.c:1362
+#: src/main.c:1367
 msgid "Menu edi&Tor edit"
 msgstr "メニューエディタで編集(&T)"
 
-#: src/main.c:1368
+#: src/main.c:1373
 msgid "&Configuration..."
 msgstr "設定(&C)..."
 
-#: src/main.c:1370
+#: src/main.c:1375
 msgid "c&Onfirmation..."
 msgstr "確認(&O)..."
 
-#: src/main.c:1371
+#: src/main.c:1376
 msgid "&Display bits..."
 msgstr "表示ビット数(&D)..."
 
-#: src/main.c:1373
+#: src/main.c:1378
 msgid "learn &Keys..."
 msgstr "キーの学習(&K)..."
 
-#: src/main.c:1376
+#: src/main.c:1381
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
 
-#: src/main.c:1379
+#: src/main.c:1384
 msgid "&Save setup"
 msgstr "設定保存(&S)"
 
-#: src/main.c:1395 src/main.c:1397
-msgid " &Left "
-msgstr "左(&L)"
-
-#: src/main.c:1397
+#: src/main.c:1394
 msgid " &Above "
 msgstr "上(&A)"
 
-#: src/main.c:1400
+#: src/main.c:1394
+msgid " &Left "
+msgstr "左(&L)"
+
+#: src/main.c:1396
 msgid " &File "
 msgstr " ファイル(&F) "
 
-#: src/main.c:1401
+#: src/main.c:1397
 msgid " &Command "
 msgstr " コマンド(&C) "
 
-#: src/main.c:1402
+#: src/main.c:1398
 msgid " &Options "
 msgstr " オプション(&O) "
 
-#: src/main.c:1404 src/main.c:1406
-msgid " &Right "
-msgstr " 右(&R) "
-
-#: src/main.c:1406
+#: src/main.c:1399
 msgid " &Below "
 msgstr " 下(&B) "
 
-#: src/main.c:1461
+#: src/main.c:1399
+msgid " &Right "
+msgstr " 右(&R) "
+
+#: src/main.c:1448
 msgid " Information "
 msgstr " 情報 "
 
-#: src/main.c:1462
+#: src/main.c:1449
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5436,15 +5245,15 @@ msgstr ""
 " レクトリの再読込をする必要があります。詳しくはマニュ\n"
 " アルを見てください"
 
-#: src/main.c:1943
+#: src/main.c:1934
 msgid "Thank you for using GNU Midnight Commander"
 msgstr " GNU Midnight Command のご利用、ありがとございました"
 
-#: src/main.c:2376
+#: src/main.c:2373
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
 
-#: src/main.c:2483
+#: src/main.c:2486
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5456,20 +5265,20 @@ msgstr ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 
-#: src/main.c:2486
+#: src/main.c:2489
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   強制的に +, -, | を使ってライン描画をする\n"
 
-#: src/main.c:2488
+#: src/main.c:2491
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      強制的にモノクロ表示する\n"
 
-#: src/main.c:2490
+#: src/main.c:2493
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr ""
 "-B, --background   [開発バージョンのみ: バックグラウンドコードのデバッグ]\n"
 
-#: src/main.c:2492
+#: src/main.c:2495
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5479,11 +5288,11 @@ msgstr ""
 "-C, --colors       色を指定する (--help-colors を使ってリストを得なさい)\n"
 "-d, --nomouse      マウスサポートを無効にする\n"
 
-#: src/main.c:2496
+#: src/main.c:2499
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         内部エディタの起動\n"
 
-#: src/main.c:2498
+#: src/main.c:2501
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5497,17 +5306,17 @@ msgstr ""
 "termcap を\n"
 "                   デフォルトにする\n"
 
-#: src/main.c:2503
+#: src/main.c:2506
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  ftpfs コマンドのログをファイルに出力する\n"
 
-#: src/main.c:2506
+#: src/main.c:2509
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory file  [開発バージョンのみ: MAD メッセージのログをファイルに出力"
 "する]\n"
 
-#: src/main.c:2508
+#: src/main.c:2511
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5515,18 +5324,18 @@ msgstr ""
 "-P, --printwd      終了時，最後の作業ディレクトリを表示する\n"
 "-s, --slow         くどい操作を無視する (ターミナルの速度を落とすため)\n"
 
-#: src/main.c:2511
+#: src/main.c:2514
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      環境変数 TERMCAP に対するサポートを活性化する\n"
 
-#: src/main.c:2514
+#: src/main.c:2517
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile デフォルトディレクトリを終了時に設定するためにコマンドファ"
 "イルを作成する\n"
 
-#: src/main.c:2517
+#: src/main.c:2520
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5536,7 +5345,7 @@ msgstr ""
 "-U, --subshell     同時にサブシェルモードを強制使用する\n"
 "-r, --forceexec    強制的にサブシェルを実行する\n"
 
-#: src/main.c:2521
+#: src/main.c:2524
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5548,11 +5357,11 @@ msgstr ""
 "-x, --xterm        強制的に xterm でマウスをサポートし画面の保存/復元をする\n"
 "+number            number が 'mcedit' のためのファイルの開始行番号になる\n"
 
-#: src/main.c:2526
+#: src/main.c:2529
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [開発バージョンのみ: サブシェルのデバッグ\n"
 
-#: src/main.c:2528
+#: src/main.c:2531
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5562,7 +5371,7 @@ msgstr ""
 "不具合報告を ('mc -V' の出力を含めて) mc-devel@gnome.org\n"
 "まで送ってください\n"
 
-#: src/main.c:2544
+#: src/main.c:2546
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5601,123 +5410,123 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2596
+#: src/main.c:2598
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Midnight Commander のライブラリディレクトリ: %s\n"
 
-#: src/main.c:2610
+#: src/main.c:2612
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "オプション -m は廃止されました。オプションメニューの「表示ビット数...」をご覧"
 "ください\n"
 
-#: src/main.c:2687
+#: src/main.c:2671
 msgid "Use to debug the background code"
 msgstr "バックグラウンドのコードのデバッグに使用"
 
-#: src/main.c:2693
+#: src/main.c:2677
 msgid "Request to run in color mode"
 msgstr "カラーモードでの実行を要求"
 
-#: src/main.c:2695
+#: src/main.c:2679
 msgid "Specifies a color configuration"
 msgstr "カラー設定を指定"
 
-#: src/main.c:2700
+#: src/main.c:2686
 msgid "Edits one file"
 msgstr "ファイルを編集"
 
-#: src/main.c:2704
+#: src/main.c:2691
 msgid "Displays this help message"
 msgstr "このヘルプメッセージを表示"
 
-#: src/main.c:2707
+#: src/main.c:2694
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "カラースキームの変更方法を画面に表示"
 
-#: src/main.c:2710
+#: src/main.c:2697
 msgid "Log ftp dialog to specified file"
 msgstr "ftp の対話記録を指定したファイルに保存"
 
-#: src/main.c:2717
+#: src/main.c:2704
 msgid "Obsolete"
 msgstr "廃止"
 
-#: src/main.c:2719
+#: src/main.c:2706
 msgid "Requests to run in black and white"
 msgstr "白黒モードでの実行を要求"
 
-#: src/main.c:2721
+#: src/main.c:2708
 msgid "Disable mouse support in text version"
 msgstr "テキスト版でのマウスのサポートを無効化"
 
-#: src/main.c:2724
+#: src/main.c:2711
 msgid "Disables subshell support"
 msgstr "サブシェルのサポートを無効化"
 
-#: src/main.c:2728
+#: src/main.c:2715
 msgid "Prints working directory at program exit"
 msgstr "プログラム終了時に作業ディレクトリを表示"
 
-#: src/main.c:2730
+#: src/main.c:2717
 msgid "Resets soft keys on HP terminals"
 msgstr "HPターミナルでソフトウェアキーボードを要求"
 
-#: src/main.c:2732
+#: src/main.c:2719
 msgid "To run on slow terminals"
 msgstr "遅い端末で実行"
 
-#: src/main.c:2735
+#: src/main.c:2722
 msgid "Use stickchars to draw"
 msgstr "stickchars で描画"
 
-#: src/main.c:2739
+#: src/main.c:2726
 msgid "Enables subshell support (default)"
 msgstr "サブシェルのサポート (デフォルト)"
 
-#: src/main.c:2744
+#: src/main.c:2731
 msgid "Tries to use termcap instead of terminfo"
 msgstr "terminfoの代わりにtermcapを試す"
 
-#: src/main.c:2748
+#: src/main.c:2735
 msgid "Displays the current version"
 msgstr "バージョンを表示"
 
-#: src/main.c:2750
+#: src/main.c:2737
 msgid "Launches the file viewer on a file"
 msgstr "ファイルビューアを起動"
 
-#: src/main.c:2752
+#: src/main.c:2739
 msgid "Forces xterm features"
 msgstr "強制的に xterm 機能を使う"
 
-#: src/main.c:2754
+#: src/main.c:2741
 msgid "Geometry for the window"
 msgstr "ウインドウのジオメトリ"
 
-#: src/main.c:2754
+#: src/main.c:2741
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:2755
+#: src/main.c:2742
 msgid "No windows opened at startup"
 msgstr "起動時にウインドウを表示しない"
 
-#: src/main.c:2756
+#: src/main.c:2743
 msgid "No desktop icons"
 msgstr "デスクトップアイコンがない"
 
-#: src/main.c:2757
+#: src/main.c:2744
 msgid "Look more like traditional gmc"
 msgstr "伝統的な gmc に近い外観"
 
-#: src/main.c:2759
+#: src/main.c:2746
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ".links 起動ファイルがあるディレクトリを表示し, 終了"
 
-#: src/main.c:3083
+#: src/main.c:3069
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5725,11 +5534,11 @@ msgstr ""
 "tty をオープンできません. -P フラグを付けずに起動しなくてはなりません.\n"
 "いくつかのシステムでは # `which mc` を実行したほうが良いかもしれません\n"
 
-#: src/main.c:3164
+#: src/main.c:3156
 msgid " Notice "
 msgstr " 注意 "
 
-#: src/main.c:3165
+#: src/main.c:3157
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5739,140 +5548,144 @@ msgstr ""
 " に保存されます。古い設定ファイルは移動しお\n"
 " きました\n"
 
-#: src/option.c:74
+#: src/option.c:72
 msgid "safe de&Lete"
 msgstr "安全な削除処理(&L)"
 
-#: src/option.c:75
+#: src/option.c:73
 msgid "cd follows lin&Ks"
 msgstr "cd はリンクをたどる(&K)"
 
-#: src/option.c:76
+#: src/option.c:74
 msgid "advanced cho&Wn"
 msgstr "上級 chown(&W)"
 
-#: src/option.c:77
+#: src/option.c:75
 msgid "l&Ynx-like motion"
 msgstr "lynx 風動作(&Y)"
 
-#: src/option.c:79
-msgid "Animation"
-msgstr "アニメーション"
-
-#: src/option.c:81
+#: src/option.c:76
 msgid "rotatin&G dash"
 msgstr "ダッシュを回す"
 
-#: src/option.c:83
+#: src/option.c:77
 msgid "co&Mplete: show all"
 msgstr "補間(&M): すべて表示"
 
-#: src/option.c:84
+#: src/option.c:78
 msgid "&Use internal view"
 msgstr "内蔵ビューワを使用(&U)"
 
-#: src/option.c:85
+#: src/option.c:79
 msgid "use internal ed&It"
 msgstr "内蔵エディタを使用(&I)"
 
-#: src/option.c:86
+#: src/option.c:80
 msgid "auto m&Enus"
 msgstr "自動メニュー(&E)"
 
-#: src/option.c:87
+#: src/option.c:81
 msgid "&Auto save setup"
 msgstr "設定の自動保存(&A)"
 
-#: src/option.c:88
+#: src/option.c:82
 msgid "shell &Patterns"
 msgstr "シェルパターン(&P)"
 
-#: src/option.c:89
+#: src/option.c:83
 msgid "Compute &Totals"
 msgstr "合計を計算(&T)"
 
-#: src/option.c:90
+#: src/option.c:84
 msgid "&Verbose operation"
 msgstr "やかましく動作"
 
-#: src/option.c:91
+#: src/option.c:85
 msgid "&Fast dir reload"
 msgstr "高速なディレクトリの再読込"
 
-#: src/option.c:92
+#: src/option.c:86
 msgid "mi&X all files"
 msgstr "すべてのファイルを混ぜる(&X)"
 
-#: src/option.c:93
+#: src/option.c:87
 msgid "&Drop down menus"
 msgstr "ドロップダウンメニュー(&D)"
 
-#: src/option.c:94
+#: src/option.c:88
 msgid "ma&Rk moves down"
 msgstr "マークすると下へ移動(&R)"
 
-#: src/option.c:95
+#: src/option.c:89
 msgid "show &Hidden files"
 msgstr "隠しファイルを表示(&H)"
 
-#: src/option.c:96
+#: src/option.c:90
 msgid "show &Backup files"
 msgstr "バックアップファイルを表示(&B)"
 
-#: src/option.c:103
+#: src/option.c:97
 msgid "&Never"
 msgstr "一時停止しない(&N)"
 
-#: src/option.c:104
+#: src/option.c:98
 msgid "on dumb &Terminals"
 msgstr "ダムターミナル上では停止(&T)"
 
-#: src/option.c:105
+#: src/option.c:99
 msgid "alwa&Ys"
 msgstr "常に停止(&Y)"
 
 #. Similar code is in layout.c (init_layout())
-#: src/option.c:153
+#: src/option.c:145
 msgid " Configure options "
 msgstr " 設定オプション "
 
-#: src/option.c:154
+#: src/option.c:146
 msgid " Panel options "
 msgstr " パネル・オプション "
 
-#: src/option.c:155
+#: src/option.c:147
 msgid " Pause after run... "
 msgstr " 実行後に停止... "
 
-#: src/option.c:207
+#: src/option.c:199
 msgid "Configure options"
 msgstr "設定オプション"
 
-#: src/panelize.c:87
+#: src/panelize.c:84
 msgid "&Add new"
 msgstr "新規追加(&A)"
 
-#: src/panelize.c:99
+#: src/panelize.c:100
 msgid " External panelize "
 msgstr " 外部パネル化 "
 
-#: src/panelize.c:194 src/panelize.c:457
+#: src/panelize.c:191 src/panelize.c:457
 msgid "External panelize"
 msgstr "外部パネル化"
 
-#: src/panelize.c:218 src/panelize.c:275 src/panelize.c:346 src/panelize.c:367
+#: src/panelize.c:201
+msgid "Command"
+msgstr "コマンド"
+
+#: src/panelize.c:215 src/panelize.c:274 src/panelize.c:346 src/panelize.c:367
 msgid "Other command"
 msgstr "その他のコマンド"
 
-#: src/panelize.c:259
+#: src/panelize.c:258
 msgid " Add to external panelize "
 msgstr " 外部パネル化に追加 "
 
-#: src/panelize.c:260
+#: src/panelize.c:259
 msgid " Enter command label: "
 msgstr " コマンドラベルを入力してください: "
 
-#: src/panelize.c:300
+#: src/panelize.c:298 src/user.c:671
+msgid " Oops... "
+msgstr " あうう... "
+
+#: src/panelize.c:299
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr " ローカルにないディレクトリにいる時は外部パネル化を実行できません "
 
@@ -5900,71 +5713,63 @@ msgstr "このヘルプメッセージを表示"
 msgid "Display brief usage message"
 msgstr "短い使い方を表示"
 
-#: src/screen.c:227
+#: src/screen.c:221
 msgid "SUB-DIR"
 msgstr "SUB-DIR"
 
-#: src/screen.c:227
+#: src/screen.c:221
 msgid "UP--DIR"
 msgstr "UP--DIR"
 
-#: src/screen.c:417
+#: src/screen.c:411
 msgid "MTime"
 msgstr "更新時刻"
 
-#: src/screen.c:418
+#: src/screen.c:412
 msgid "ATime"
 msgstr "Acess時刻"
 
-#: src/screen.c:419
+#: src/screen.c:413
 msgid "CTime"
 msgstr "変更時刻"
 
-#: src/screen.c:421
+#: src/screen.c:415
 msgid "Perm"
 msgstr "Perm"
 
-#: src/screen.c:422
+#: src/screen.c:416
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:423
+#: src/screen.c:417
 msgid "Inode"
 msgstr "Iノード"
 
-#: src/screen.c:424
+#: src/screen.c:418
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:425
+#: src/screen.c:419
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:1322
+#: src/screen.c:1310
 msgid "Unknow tag on display format: "
 msgstr "表示形式に見知らぬ tag があります: "
 
-#: src/screen.c:1448
+#: src/screen.c:1436
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "ユーザの指定した形式は不正なようです. デフォルトに戻します"
 
-#: src/screen.c:2114 src/screen.c:2161
+#: src/screen.c:2102 src/screen.c:2149
 msgid " Do you really want to execute? "
 msgstr " 本当に実行しますか? "
 
-#: src/screen.c:2125 src/screen.c:2175
+#: src/screen.c:2113 src/screen.c:2163
 msgid " No action taken "
 msgstr " 何も実行しませんでした "
 
-#: src/screen.c:2398 src/screen.c:2428 src/tree.c:1016
-msgid "RenMov"
-msgstr "RenMov"
-
-#: src/screen.c:2399 src/screen.c:2429 src/tree.c:1020
-msgid "Mkdir"
-msgstr "MkDir"
-
-#: src/screen.c:2415 src/tree.c:866
+#: src/screen.c:2406 src/tree.c:875
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -5973,29 +5778,176 @@ msgstr ""
 "\"%s\" へ chdir できません \n"
 " %s "
 
-#: src/subshell.c:297
+#: src/screen.c:2419 src/tree.c:1025
+msgid "RenMov"
+msgstr "RenMov"
+
+#: src/screen.c:2420 src/tree.c:1029
+msgid "Mkdir"
+msgstr "MkDir"
+
+#: src/selcodepage.c:33
+msgid " Choose input codepage "
+msgstr ""
+
+#: src/selcodepage.c:37
+msgid "-  < No translation >"
+msgstr ""
+
+#: src/selcodepage.c:75
+msgid ""
+"Midnight Commander was compiled without iconv support,\n"
+"so charsets recoding feature is not available!"
+msgstr ""
+
+#: src/selcodepage.c:92
+msgid ""
+"To use this feature select your codepage in\n"
+"Setup / Display Bits dialog!\n"
+"Do not forget to save options."
+msgstr ""
+
+#: src/slint.c:199
+#, c-format
+msgid ""
+"Screen size %dx%d is not supported.\n"
+"Check the TERM environment variable.\n"
+msgstr ""
+
+#: src/subshell.c:449
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "名前付きパイプ %s をオープンできません\n"
 
-#: src/subshell.c:721
+#: src/subshell.c:742
 msgid " The shell is still active. Quit anyway? "
 msgstr "シェルはまだアクティブです.構わずに終了しますか? "
 
-#: src/subshell.c:747
+#: src/subshell.c:768
 msgid " There are stopped jobs."
 msgstr " 中断したままのジョブがあります."
 
-#: src/subshell.c:748
+#: src/subshell.c:769
 msgid " Quit anyway? "
 msgstr " 構わずに終了しますか? "
 
-#: src/subshell.c:813
+#: src/subshell.c:882
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "警告: %s に変更できません.\n"
 
-#: src/tree.c:192
+#: src/textconf.c:12
+msgid "Edition: "
+msgstr "Edition: "
+
+#: src/textconf.c:13
+msgid "text mode"
+msgstr "テキストモード"
+
+#: src/textconf.c:15
+msgid " with X11 support to read modifiers"
+msgstr "X11 テキストモードサポート"
+
+#: src/textconf.c:20
+msgid "Virtual File System: tarfs, extfs"
+msgstr "仮想ファイルシステム: tarfs, extfs"
+
+#: src/textconf.c:22
+msgid ", ftpfs"
+msgstr ", ftpfs"
+
+#: src/textconf.c:24
+msgid " (proxies: hsc proxy)"
+msgstr " (proxies: hsc proxy)"
+
+#: src/textconf.c:26
+msgid ", mcfs"
+msgstr ", mcfs"
+
+#: src/textconf.c:28
+msgid " (with termnet support)"
+msgstr " (termnet サポート)"
+
+#: src/textconf.c:31
+msgid ", smbfs"
+msgstr ", smbfs"
+
+#: src/textconf.c:35
+msgid ", undelfs"
+msgstr ", undelfs"
+
+#: src/textconf.c:41
+msgid "With builtin Editor\n"
+msgstr "内蔵エディタ使用\n"
+
+#: src/textconf.c:47
+#, fuzzy
+msgid "Using system-installed S-Lang library"
+msgstr "system-installed "
+
+#: src/textconf.c:49
+#, fuzzy
+msgid "Using S-Lang library"
+msgstr "S-lang library with "
+
+#: src/textconf.c:55
+msgid "with terminfo database"
+msgstr ""
+
+#: src/textconf.c:57
+#, fuzzy
+msgid "with termcap database"
+msgstr " database"
+
+#: src/textconf.c:59
+#, fuzzy
+msgid "with an unknown terminal database"
+msgstr "見知らぬ端末"
+
+#: src/textconf.c:63
+#, fuzzy
+msgid "Using the ncurses library"
+msgstr "the ncurses library"
+
+#: src/textconf.c:65
+#, fuzzy
+msgid "Using old curses library"
+msgstr "いくつかの見知らぬ curses library"
+
+#: src/textconf.c:72
+#, fuzzy
+msgid "With optional subshell support"
+msgstr "サブシェルのサポート: "
+
+#: src/textconf.c:74
+#, fuzzy
+msgid "With subshell support as default"
+msgstr "サブシェルのサポート: "
+
+#: src/textconf.c:80
+msgid "With support for background operations\n"
+msgstr "バックグラウンド操作のサポート\n"
+
+#: src/textconf.c:84
+#, fuzzy
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "xterm と Linux コンソールによるマウスサポート有り\n"
+
+#: src/textconf.c:86
+#, fuzzy
+msgid "With mouse support on xterm\n"
+msgstr "xterm によるマウスサポート有り\n"
+
+#: src/textconf.c:89
+msgid "With multiple codepages support\n"
+msgstr ""
+
+#: src/textconf.c:101
+#, fuzzy, c-format
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Midnight Commander"
+
+#: src/tree.c:194
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -6004,17 +5956,17 @@ msgstr ""
 "書き出しのために %s をオープンすることができません:\n"
 "%s\n"
 
-#: src/tree.c:637
+#: src/tree.c:638
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr "ディレクトリ \"%s\" をコピー:"
 
-#: src/tree.c:675
+#: src/tree.c:679
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr "ディレクトリ \"%s\" を移動:"
 
-#: src/tree.c:682
+#: src/tree.c:689
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
@@ -6023,32 +5975,32 @@ msgstr ""
 " 対象を stat できませんでした \n"
 " %s "
 
-#: src/tree.c:688
+#: src/tree.c:695
 msgid " The destination isn't a directory "
 msgstr " 対象はディレクトリではありません "
 
-#: src/tree.c:744
+#: src/tree.c:753
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  %s を削除しますか?  "
 
-#: src/tree.c:776
+#: src/tree.c:785
 msgid "Static"
 msgstr "静的"
 
-#: src/tree.c:776
+#: src/tree.c:785
 msgid "Dynamc"
 msgstr "動的"
 
-#: src/tree.c:1012
+#: src/tree.c:1021
 msgid "Forget"
 msgstr "Forget"
 
-#: src/tree.c:1025
+#: src/tree.c:1034
 msgid "Rmdir"
 msgstr "Rmdir"
 
-#: src/treestore.c:360
+#: src/treestore.c:361
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -6057,46 +6009,46 @@ msgstr ""
 "ファイル %s に書き込めません:\n"
 "%s\n"
 
-#: src/user.c:137
+#: src/user.c:139
 msgid " Format error on file Extensions File "
 msgstr "拡張子ファイル上のフォーマットエラーです"
 
-#: src/user.c:138
-#, c-format
-msgid " The %%var macro does not have a default "
+#: src/user.c:140
+#, fuzzy, c-format
+msgid " The %%var macro has no default "
 msgstr " %%var マクロはデフォルトを持っていません "
 
-#: src/user.c:139
-#, c-format
-msgid " The %%var macros does not have a variable "
+#: src/user.c:141
+#, fuzzy, c-format
+msgid " The %%var macro has no variable "
 msgstr " %%var マクロは値を持っていません "
 
-#: src/user.c:273
+#: src/user.c:285
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " 不正なシェルパターン定義です \"%c\". "
 
-#: src/user.c:426
+#: src/user.c:438
 msgid " Debug "
 msgstr " デバッグ "
 
-#: src/user.c:435
+#: src/user.c:447
 msgid " ERROR: "
 msgstr " エラー: "
 
-#: src/user.c:439
+#: src/user.c:451
 msgid " True:  "
 msgstr " 真: "
 
-#: src/user.c:441
+#: src/user.c:453
 msgid " False: "
 msgstr " 偽: "
 
-#: src/user.c:647
+#: src/user.c:648
 msgid " Warning -- ignoring file "
 msgstr " 警告 -- ファイルを無視 "
 
-#: src/user.c:648
+#: src/user.c:649
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6119,29 +6071,29 @@ msgstr " %s に特定のエントリーは見つかりませんでした "
 msgid " User menu "
 msgstr " ユーザー・メニュー "
 
-#: src/util.c:232
+#: src/util.c:244
 msgid "name_trunc: too big"
 msgstr "name_trunc: 大きすぎます"
 
 #. strftime() format string for recent dates
-#: src/util.c:600 src/util.c:625
+#: src/util.c:682 src/util.c:708
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:601 src/util.c:623
+#: src/util.c:683 src/util.c:706
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:382
+#: src/utilunix.c:370
 msgid " Pipe failed "
 msgstr "pipe 失敗 "
 
-#: src/utilunix.c:386
+#: src/utilunix.c:374
 msgid " Dup failed "
 msgstr " dup 失敗 "
 
-#: src/view.c:396
+#: src/view.c:407
 msgid ""
 "File: \n"
 "\n"
@@ -6151,7 +6103,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:397
+#: src/view.c:408
 msgid ""
 "\n"
 "\n"
@@ -6161,37 +6113,37 @@ msgstr ""
 "\n"
 "は変更されました. 変更点を保存しますか?\n"
 
-#: src/view.c:399
+#: src/view.c:410
 msgid " Save changes "
 msgstr " 変更点を保存 "
 
-#: src/view.c:441
+#: src/view.c:452
 msgid " Cannot spawn child program "
 msgstr " 子プロセスを起動できません "
 
-#: src/view.c:450
+#: src/view.c:461
 msgid " Empty output from child filter "
 msgstr " フィルタから空の出力です "
 
-#: src/view.c:455
+#: src/view.c:466
 msgid " Could not open file "
 msgstr " ファイルを開けません "
 
-#: src/view.c:470
+#: src/view.c:481
 msgid " Cannot open file \""
 msgstr " ファイルを開けません \""
 
-#: src/view.c:477
+#: src/view.c:488
 msgid ""
 " Cannot stat file \n"
 " "
 msgstr " ファイルを stat できません \""
 
-#: src/view.c:483
+#: src/view.c:494
 msgid " Cannot view: not a regular file "
 msgstr " 表示できません: 通常ファイルではありません "
 
-#: src/view.c:564
+#: src/view.c:574
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -6200,7 +6152,7 @@ msgstr ""
 " \"%s\" を開くことができません \n"
 " %s "
 
-#: src/view.c:573
+#: src/view.c:583
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -6209,34 +6161,39 @@ msgstr ""
 " \"%s\" をstatできません\n"
 " %s "
 
-#: src/view.c:708
+#: src/view.c:718
 #, c-format
 msgid "File: %s"
 msgstr "ファイル: %s"
 
-#: src/view.c:722
+#: src/view.c:732
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "オフセット 0x%08x"
 
-#: src/view.c:733
+#: src/view.c:743
 msgid "  [grow]"
 msgstr "  [grow]"
 
-#: src/view.c:1502
+#: src/view.c:1518
 #, c-format
 msgid "Searching for `%s'"
 msgstr "`%s'を検索中"
 
-#: src/view.c:1609 src/view.c:1732
+#: src/view.c:1625 src/view.c:1739
 msgid " Search string not found "
 msgstr " 検索文字列が見付かりません "
 
-#: src/view.c:1771
+#: src/view.c:1727
+#, fuzzy
+msgid "Invalid hex search expression"
+msgstr " 不正な正規表現です "
+
+#: src/view.c:1778
 msgid " Invalid regular expression "
 msgstr " 不正な正規表現です "
 
-#: src/view.c:1895
+#: src/view.c:1900
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6245,7 +6202,7 @@ msgstr ""
 " 現在の行番号は %d です.\n"
 " 新しい行番号を入力してください:"
 
-#: src/view.c:1917
+#: src/view.c:1922
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6254,270 +6211,270 @@ msgstr ""
 " 現在のアドレスは0x%lxです.\n"
 " 新しいアドレスを入力してください:"
 
-#: src/view.c:1919
+#: src/view.c:1924
 msgid " Goto Address "
 msgstr " アドレス移動 "
 
-#: src/view.c:1950
+#: src/view.c:1955
 msgid " Enter regexp:"
 msgstr " 正規表現を入力してください:"
 
-#: src/view.c:2063
+#: src/view.c:2078
 msgid "Ascii"
 msgstr "ASCII"
 
-#: src/view.c:2063
+#: src/view.c:2078
 msgid "Hex"
 msgstr "HEX"
 
-#: src/view.c:2064
+#: src/view.c:2079
 msgid "Goto"
 msgstr "移動"
 
-#: src/view.c:2064
+#: src/view.c:2079
 msgid "Line"
 msgstr "行"
 
-#: src/view.c:2067
+#: src/view.c:2082
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2070
+#: src/view.c:2085
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2070
+#: src/view.c:2085
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2072
+#: src/view.c:2087
 msgid "UnWrap"
 msgstr "非折返"
 
-#: src/view.c:2072
+#: src/view.c:2087
 msgid "Wrap"
 msgstr "折返"
 
-#: src/view.c:2075
+#: src/view.c:2090
 msgid "HxSrch"
 msgstr "HxSrch"
 
-#: src/view.c:2078
+#: src/view.c:2093
 msgid "Raw"
 msgstr "Raw"
 
-#: src/view.c:2078
+#: src/view.c:2093
 msgid "Parse"
 msgstr "Parse"
 
-#: src/view.c:2082
+#: src/view.c:2097
 msgid "Unform"
 msgstr "Unform"
 
-#: src/view.c:2082
+#: src/view.c:2097
 msgid "Format"
 msgstr "Format"
 
-#: src/widget.c:993
+#: src/widget.c:983
 msgid " History "
 msgstr "履歴"
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
-#: src/win.c:224
+#: src/win.c:215
 msgid "Function key 1"
 msgstr "Functionキー 1"
 
-#: src/win.c:225
+#: src/win.c:216
 msgid "Function key 2"
 msgstr "Functionキー 2"
 
-#: src/win.c:226
+#: src/win.c:217
 msgid "Function key 3"
 msgstr "Functionキー 3"
 
-#: src/win.c:227
+#: src/win.c:218
 msgid "Function key 4"
 msgstr "Functionキー 4"
 
-#: src/win.c:228
+#: src/win.c:219
 msgid "Function key 5"
 msgstr "Functionキー 5"
 
-#: src/win.c:229
+#: src/win.c:220
 msgid "Function key 6"
 msgstr "Functionキー 6"
 
-#: src/win.c:230
+#: src/win.c:221
 msgid "Function key 7"
 msgstr "Functionキー 7"
 
-#: src/win.c:231
+#: src/win.c:222
 msgid "Function key 8"
 msgstr "Functionキー 8"
 
-#: src/win.c:232
+#: src/win.c:223
 msgid "Function key 9"
 msgstr "Functionキー 9"
 
-#: src/win.c:233
+#: src/win.c:224
 msgid "Function key 10"
 msgstr "Functionキー 10"
 
-#: src/win.c:234
+#: src/win.c:225
 msgid "Function key 11"
 msgstr "Functionキー 11"
 
-#: src/win.c:235
+#: src/win.c:226
 msgid "Function key 12"
 msgstr "Functionキー 12"
 
-#: src/win.c:236
+#: src/win.c:227
 msgid "Function key 13"
 msgstr "Functionキー 13"
 
-#: src/win.c:237
+#: src/win.c:228
 msgid "Function key 14"
 msgstr "Functionキー 14"
 
-#: src/win.c:238
+#: src/win.c:229
 msgid "Function key 15"
 msgstr "Functionキー 15"
 
-#: src/win.c:239
+#: src/win.c:230
 msgid "Function key 16"
 msgstr "Functionキー 16"
 
-#: src/win.c:240
+#: src/win.c:231
 msgid "Function key 17"
 msgstr "Functionキー 17"
 
-#: src/win.c:241
+#: src/win.c:232
 msgid "Function key 18"
 msgstr "Functionキー 18"
 
-#: src/win.c:242
+#: src/win.c:233
 msgid "Function key 19"
 msgstr "Functionキー 19"
 
-#: src/win.c:243
+#: src/win.c:234
 msgid "Function key 20"
 msgstr "Functionキー 20"
 
-#: src/win.c:244
+#: src/win.c:235
 msgid "Backspace key"
 msgstr "Backspaeceキー"
 
-#: src/win.c:245
+#: src/win.c:236
 msgid "End key"
 msgstr "Endキー"
 
-#: src/win.c:246
+#: src/win.c:237
 msgid "Up arrow key"
 msgstr "上矢印"
 
-#: src/win.c:247
+#: src/win.c:238
 msgid "Down arrow key"
 msgstr "下矢印"
 
-#: src/win.c:248
+#: src/win.c:239
 msgid "Left arrow key"
 msgstr "左矢印"
 
-#: src/win.c:249
+#: src/win.c:240
 msgid "Right arrow key"
 msgstr "右矢印"
 
-#: src/win.c:250
+#: src/win.c:241
 msgid "Home key"
 msgstr "Homeキー"
 
-#: src/win.c:251
+#: src/win.c:242
 msgid "Page Down key"
 msgstr "PageDownキー"
 
-#: src/win.c:252
+#: src/win.c:243
 msgid "Page Up key"
 msgstr "PageUpキー"
 
-#: src/win.c:253
+#: src/win.c:244
 msgid "Insert key"
 msgstr "Insertキー"
 
-#: src/win.c:254
+#: src/win.c:245
 msgid "Delete key"
 msgstr "Deleteキー"
 
-#: src/win.c:255
+#: src/win.c:246
 msgid "Completion/M-tab"
 msgstr "Completion/M-tab"
 
-#: src/win.c:256
+#: src/win.c:247
 msgid "+ on keypad"
 msgstr "10キーの +"
 
-#: src/win.c:257
+#: src/win.c:248
 msgid "- on keypad"
 msgstr "10キーの -"
 
-#: src/win.c:258
+#: src/win.c:249
 msgid "* on keypad"
 msgstr "10キーの *"
 
 #. From here on, these won't be shown in Learn keys (no space)
-#: src/win.c:260
+#: src/win.c:251
 msgid "Left arrow keypad"
 msgstr "10キーの 左矢印"
 
-#: src/win.c:261
+#: src/win.c:252
 msgid "Right arrow keypad"
 msgstr "10キーの 右矢印"
 
-#: src/win.c:262
+#: src/win.c:253
 msgid "Up arrow keypad"
 msgstr "10キーの 上矢印"
 
-#: src/win.c:263
+#: src/win.c:254
 msgid "Down arrow keypad"
 msgstr "10キーの 下矢印"
 
-#: src/win.c:264
+#: src/win.c:255
 msgid "Home on keypad"
 msgstr "10キーの Home"
 
-#: src/win.c:265
+#: src/win.c:256
 msgid "End on keypad"
 msgstr "10キーの End"
 
-#: src/win.c:266
+#: src/win.c:257
 msgid "Page Down keypad"
 msgstr "10キーの PageDown"
 
-#: src/win.c:267
+#: src/win.c:258
 msgid "Page Up keypad"
 msgstr "10キーの PageUp"
 
-#: src/win.c:268
+#: src/win.c:259
 msgid "Insert on keypad"
 msgstr "10キーの Insert"
 
-#: src/win.c:269
+#: src/win.c:260
 msgid "Delete on keypad"
 msgstr "10キーの Delete"
 
-#: src/win.c:270
+#: src/win.c:261
 msgid "Enter on keypad"
 msgstr "10キーの Enter"
 
-#: src/win.c:271
+#: src/win.c:262
 msgid "Slash on keypad"
 msgstr "10キーの /"
 
-#: src/win.c:272
+#: src/win.c:263
 msgid "NumLock on keypad"
 msgstr "10キーの NumLock"
 
-#: vfs/cpio.c:141 vfs/cpio.c:157
+#: vfs/cpio.c:142 vfs/cpio.c:158
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -6573,33 +6530,20 @@ msgstr ""
 "予期しない EOF です\n"
 "%s"
 
-#: vfs/direntry.c:301
+#: vfs/direntry.c:303
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "'%s' の Dir キャッシュが終了しました"
 
-#: vfs/direntry.c:431 vfs/direntry.c:434
-msgid " Direntry warning "
-msgstr "Direntry の警告"
-
-#: vfs/direntry.c:431
-#, c-format
-msgid "Super ino_usage is %d, memory leak"
-msgstr "Super ino_usage は %d で，これはメモリリークです"
-
-#: vfs/direntry.c:434
-msgid "Super has want_stale set"
-msgstr "Super has want_stable set"
-
-#: vfs/direntry.c:812
+#: vfs/direntry.c:820
 msgid "Starting linear transfer..."
 msgstr "リニア転送を開始します..."
 
-#: vfs/direntry.c:957
+#: vfs/direntry.c:964
 msgid "Getting file"
 msgstr "ファイル取得中"
 
-#: vfs/extfs.c:268
+#: vfs/extfs.c:298
 #, c-format
 msgid ""
 "Couldn't open %s archive\n"
@@ -6608,228 +6552,223 @@ msgstr ""
 "%s アーカイブを開くことが出来ません\n"
 "%s"
 
-#: vfs/extfs.c:300 vfs/extfs.c:320
+#: vfs/extfs.c:330 vfs/extfs.c:349
 msgid "Inconsistent extfs archive"
 msgstr "不整合な extfs アーカイブです"
 
-#: vfs/fish.c:140
+#: vfs/fish.c:142
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: %s から切断しています"
 
-#: vfs/fish.c:218
+#: vfs/fish.c:221
 msgid "fish: Waiting for initial line..."
 msgstr "fish: 最初の行を待っています..."
 
-#: vfs/fish.c:228
+#: vfs/fish.c:231
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "すいませんが，今のところパスワードを証明することが出来ません"
 
-#: vfs/fish.c:233
+#: vfs/fish.c:236
 msgid " fish: Password required for "
 msgstr "fish: パスワードが必要です "
 
-#: vfs/fish.c:242
+#: vfs/fish.c:245
 msgid "fish: Sending password..."
 msgstr "fish: パスワード送信中..."
 
-#: vfs/fish.c:248
+#: vfs/fish.c:251
 msgid "fish: Sending initial line..."
 msgstr "fish: 最初の行を送信..."
 
-#: vfs/fish.c:258
+#: vfs/fish.c:261
 msgid "fish: Handshaking version..."
 msgstr "fish: バージョンのハンドシェイク..."
 
-#: vfs/fish.c:262
+#: vfs/fish.c:265
 msgid "fish: Setting up current directory..."
 msgstr "fish: カレントディレクトリを設定します..."
 
-#: vfs/fish.c:264
+#: vfs/fish.c:267
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: 接続しました。ホームディレクトリは %s です。"
 
-#: vfs/fish.c:353
+#: vfs/fish.c:356
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: ディレクトリ%sを読み込み中... "
 
-#: vfs/fish.c:457
+#: vfs/fish.c:460
 msgid "fish: failed"
 msgstr "fish: 失敗しました"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:477
+#: vfs/fish.c:480
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: store %s: コマンドを送信中..."
 
-#: vfs/fish.c:502
+#: vfs/fish.c:505
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: 局部読み込みに失敗しました。zeroを送信します"
 
-#: vfs/fish.c:514
+#: vfs/fish.c:517
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: %s を保存中 %d (%d)"
 
-#: vfs/fish.c:515
+#: vfs/fish.c:518
 msgid "zeros"
 msgstr "zeros"
 
-#: vfs/fish.c:562
+#: vfs/fish.c:565
 msgid "Aborting transfer..."
 msgstr "転送を中断します..."
 
-#: vfs/fish.c:571
+#: vfs/fish.c:574
 msgid "Error reported after abort."
 msgstr "中断後にエラーが報告されました"
 
-#: vfs/fish.c:573
+#: vfs/fish.c:576
 msgid "Aborted transfer would be successful."
 msgstr "転送中断に成功しました"
 
-#: vfs/ftpfs.c:310
+#: vfs/ftpfs.c:313
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s から切断中です"
 
-#: vfs/ftpfs.c:368
+#: vfs/ftpfs.c:371
 msgid " FTP: Password required for "
 msgstr " FTP: パスワードが必要です "
 
-#: vfs/ftpfs.c:397
+#: vfs/ftpfs.c:400
 msgid " Proxy: Password required for "
 msgstr " Proxy: パスワードが必要です "
 
-#: vfs/ftpfs.c:423
+#: vfs/ftpfs.c:426
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: proxy のログイン名を送信中"
 
-#: vfs/ftpfs.c:427
+#: vfs/ftpfs.c:430
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: proxy のユーザパスワードを送信中"
 
-#: vfs/ftpfs.c:431
+#: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: proxy の認証が成功しました"
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:438
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: %s に接続しました"
 
-#: vfs/ftpfs.c:452
+#: vfs/ftpfs.c:455
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: ログイン名を送信中"
 
-#: vfs/ftpfs.c:457
+#: vfs/ftpfs.c:460
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: パスワードを送信中"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:465
 msgid "ftpfs: logged in"
 msgstr "ftpfs: ログインしました"
 
-#: vfs/ftpfs.c:477
+#: vfs/ftpfs.c:480
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: ユーザ %s のログインが失敗しました "
 
-#: vfs/ftpfs.c:509
+#: vfs/ftpfs.c:512
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " ソースルーティングに失敗しました (%s)"
 
-#: vfs/ftpfs.c:634
+#: vfs/ftpfs.c:637
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 不正なホスト名です"
 
-#: vfs/ftpfs.c:654
+#: vfs/ftpfs.c:657
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: 不正なホストのアドレスです"
 
-#: vfs/ftpfs.c:677
+#: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: %s へ接続中"
 
-#: vfs/ftpfs.c:687
+#: vfs/ftpfs.c:690
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: ユーザによって接続が断たれました"
 
-#: vfs/ftpfs.c:689
+#: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: サーバへの接続に失敗しました: %s"
 
-#: vfs/ftpfs.c:730
+#: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "再試行するのでお待ちください... %d (Control-C で中止)"
 
-#: vfs/ftpfs.c:916
+#: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: パッシブモードに失敗しました"
 
-#: vfs/ftpfs.c:992
+#: vfs/ftpfs.c:995
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: 転送を中断します"
 
-#: vfs/ftpfs.c:994
+#: vfs/ftpfs.c:997
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: 中断: %s"
 
-#: vfs/ftpfs.c:999
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: 中断に失敗"
 
-#: vfs/ftpfs.c:1088 vfs/ftpfs.c:1187
+#: vfs/ftpfs.c:1091 vfs/ftpfs.c:1193
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD 失敗"
 
-#: vfs/ftpfs.c:1098 vfs/ftpfs.c:1105
+#: vfs/ftpfs.c:1101 vfs/ftpfs.c:1108
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: シンボリックリンクの展開に失敗"
 
-#: vfs/ftpfs.c:1156
+#: vfs/ftpfs.c:1159
 msgid "Resolving symlink..."
 msgstr "シンボリックリンクを展開する..."
 
-#: vfs/ftpfs.c:1175
+#: vfs/ftpfs.c:1181
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: FTPディレクトリ %s を読み込み中... %s%s"
 
-#: vfs/ftpfs.c:1176
+#: vfs/ftpfs.c:1182
 msgid "(strict rfc959)"
 msgstr "(厳密な rfc959)"
 
-#: vfs/ftpfs.c:1177
+#: vfs/ftpfs.c:1183
 msgid "(chdir first)"
 msgstr "(初めに chdir)"
 
-#: vfs/ftpfs.c:1301
+#: vfs/ftpfs.c:1307
 msgid "ftpfs: failed"
 msgstr "ftpfs: 失敗しました"
 
-#: vfs/ftpfs.c:1311
+#: vfs/ftpfs.c:1317
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗しました。フォールバックできません"
 
-#: vfs/ftpfs.c:1374
+#: vfs/ftpfs.c:1380
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: ファイルの保存中 %d (%d)"
 
-#. This is place of next pointer
-#: vfs/ftpfs.c:1679
-msgid "File Transfer Protocol (ftp)"
-msgstr "ファイル転送プロトコル (ftp)"
-
-#: vfs/ftpfs.c:1792
+#: vfs/ftpfs.c:1812
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6894,29 +6833,21 @@ msgstr "サーバに接続できませんでした: %s"
 msgid " Too many open connections "
 msgstr " 接続が多すぎます "
 
-#. This is place of next pointer
-#: vfs/mcfs.c:1123
-msgid "Midnight Commander's private remote filesystem"
-msgstr "Midnight Commander's private remote filesystem"
-
-#: vfs/smbfs.c:117
-msgid "Domain:"
-msgstr "ドメイン:"
-
-#: vfs/smbfs.c:117
-msgid "Username:"
-msgstr "ユーザ名:"
-
-#: vfs/smbfs.c:117
-msgid "Password: "
-msgstr "パスワード:"
-
-#: vfs/smbfs.c:172
+#: vfs/sfs.c:329
 #, c-format
-msgid "Password for \\\\%s\\%s"
-msgstr "\\\\%s\\%sのパスワード"
+msgid ""
+"Warning: Invalid line in sfs.ini:\n"
+"%s\n"
+msgstr ""
 
-#: vfs/smbfs.c:678
+#: vfs/sfs.c:340
+#, c-format
+msgid ""
+"Warning: Invalid flag %c in sfs.ini:\n"
+"%s\n"
+msgstr ""
+
+#: vfs/smbfs.c:527
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6925,36 +6856,36 @@ msgstr ""
 " %s への再接続に失敗しました\n"
 " "
 
-#: vfs/smbfs.c:1256
+#: vfs/smbfs.c:1098
 msgid " Authentication failed "
 msgstr " 認証に失敗しました "
 
-#: vfs/smbfs.c:1749
+#: vfs/smbfs.c:1590
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s: mkdir %s "
 
-#: vfs/smbfs.c:1770
+#: vfs/smbfs.c:1613
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s: rmdir %s "
 
-#: vfs/smbfs.c:1875 vfs/smbfs.c:1895 vfs/smbfs.c:1956
+#: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s: リモートファイル %s を開く際に "
 
-#: vfs/smbfs.c:1979
+#: vfs/smbfs.c:1805
+#, fuzzy, c-format
+msgid " %s removing remote file %s "
+msgstr " %s: リモートファイル %s を開く際に "
+
+#: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s: ファイル名変更中に\n"
 
-#. This is place of next pointer
-#: vfs/smbfs.c:2005
-msgid "netbios over tcp/ip"
-msgstr "NETBIOS オーバー TCP/IP"
-
-#: vfs/tar.c:80 vfs/tar.c:97
+#: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
 msgid ""
 "Couldn't open tar archive\n"
@@ -6963,15 +6894,15 @@ msgstr ""
 "tarアーカイブ%sを\n"
 "開けません"
 
-#: vfs/tar.c:280
+#: vfs/tar.c:281
 msgid "Unexpected EOF on archive file"
 msgstr "予期しないEOFがアーカイブファイルにあります"
 
-#: vfs/tar.c:332 vfs/tar.c:339
+#: vfs/tar.c:333 vfs/tar.c:340
 msgid "Inconsistent tar archive"
 msgstr "tar アーカイブに不整合"
 
-#: vfs/tar.c:409
+#: vfs/tar.c:410
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6981,36 +6912,6 @@ msgstr ""
 "んー,‥‥\n"
 "%s\n"
 "これはtarアーカイブではないようです"
-
-#: vfs/vfs.c:1138
-msgid "Changes to file lost"
-msgstr "紛失したファイルに変更します"
-
-#: vfs/vfs.c:1773
-msgid "Could not parse:"
-msgstr "構文解析が出来ません:"
-
-#: vfs/vfs.c:1775
-msgid "More parsing errors will be ignored."
-msgstr "多くの構文解析エラーがでましたが無視します"
-
-#: vfs/vfs.c:1775
-msgid "(sorry)"
-msgstr "(sorry)"
-
-#: vfs/vfs.c:1785
-msgid "Internal error:"
-msgstr "内部エラー:"
-
-#: vfs/vfs.c:1795
-#, c-format
-msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld バイト転送)"
-
-#: vfs/vfs.c:1796
-#, c-format
-msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld バイト転送しました"
 
 #: vfs/undelfs.c:81
 msgid " undelfs: error "
@@ -7109,7 +7010,190 @@ msgstr " ブロックの終わりまでを繰り返す間に "
 msgid " Could not open file: %s "
 msgstr " ファイル '%s' を開けません "
 
-#. This is place of next pointer
-#: vfs/undelfs.c:684
-msgid "Undelete filesystem for ext2"
-msgstr "ext2 ファイルシステムの復元"
+#: vfs/vfs.c:1146
+msgid "Changes to file lost"
+msgstr "紛失したファイルに変更します"
+
+#: vfs/vfs.c:1782
+msgid "Could not parse:"
+msgstr "構文解析が出来ません:"
+
+#: vfs/vfs.c:1784
+msgid "More parsing errors will be ignored."
+msgstr "多くの構文解析エラーがでましたが無視します"
+
+#: vfs/vfs.c:1784
+msgid "(sorry)"
+msgstr "(sorry)"
+
+#: vfs/vfs.c:1795
+msgid "Internal error:"
+msgstr "内部エラー:"
+
+#: vfs/vfs.c:1805
+#, c-format
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr "%s: %s: %s %3d%% (%ld バイト転送)"
+
+#: vfs/vfs.c:1806
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr "%s: %s: %s %ld バイト転送しました"
+
+#~ msgid " There is no other panel to compare contents to "
+#~ msgstr " コンテンツを比較するパネルが他にありません "
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "Global option settings"
+#~ msgstr "全般のオプション設定"
+
+#~ msgid "File/New/Directory..."
+#~ msgstr "ファイル/新規/ディレクトリ..."
+
+#~ msgid "Copyright (C) 1998 The Free Software Foundation"
+#~ msgstr "Copyright (C) 1998 The Free Software Foundation"
+
+#~ msgid "Open _new window"
+#~ msgstr "新規ウィンドウを開く(_N)"
+
+#~ msgid "_Close this window"
+#~ msgstr "このウィンドウを閉じる(_C)"
+
+#~ msgid "E_xit"
+#~ msgstr "終了(_x)"
+
+#~ msgid "_Listing view"
+#~ msgstr "一覧表示(_L)"
+
+#~ msgid "_Icon view"
+#~ msgstr "アイコン表示(_I)"
+
+#~ msgid "Display _tree view"
+#~ msgstr "ツリー表示(_t)"
+
+#~ msgid "_About the Midnight Commander..."
+#~ msgstr "The Midnight Commander について(_A)..."
+
+#~ msgid "_File"
+#~ msgstr "ファイル(_F)"
+
+#~ msgid "_View"
+#~ msgstr "表示(_V)"
+
+#~ msgid "Filename"
+#~ msgstr "ファイル名"
+
+#~ msgid "Full name: "
+#~ msgstr "フルネーム:"
+
+#~ msgid "Command:"
+#~ msgstr "コマンド:"
+
+#~ msgid "Use terminal"
+#~ msgstr "端末を用いる"
+
+#~ msgid "File mode (permissions)"
+#~ msgstr "ファイルモード(アクセス権)"
+
+#~ msgid "<Unknown>"
+#~ msgstr "<不明>"
+
+#~ msgid "General"
+#~ msgstr "一般"
+
+#~ msgid "Title"
+#~ msgstr "題名"
+
+#~ msgid "Select icon"
+#~ msgstr "アイコン選択"
+
+#~ msgid "mc.hlp"
+#~ msgstr "mc.hlp"
+
+#~ msgid "&Open/load...     C-o"
+#~ msgstr "開く(&O)...             C-o"
+
+#~ msgid "Replc"
+#~ msgstr "置換"
+
+#~ msgid "Dlete"
+#~ msgstr "削除"
+
+#~ msgid " I can't run the Advanced Chown command on an extfs "
+#~ msgstr " extfs では上級 Chown コマンドを実行できません "
+
+#~ msgid " I can't run the Advanced Chown command on a tarfs "
+#~ msgstr " tarfs では上級 Chwon コマンドを実行できません "
+
+#~ msgid " I can't run the Chmod command on an extfs "
+#~ msgstr " extfs では chmod コマンドを実行できません "
+
+#~ msgid " I can't run the Chmod command on a tarfs "
+#~ msgstr " tarfs では chmod コマンドを実行できません "
+
+#~ msgid " I can't run the Chown command on an extfs "
+#~ msgstr " extfs では chown コマンドを実行できません "
+
+#~ msgid " I can't run the Chown command on a tarfs "
+#~ msgstr " tarfs では chown を実行できません "
+
+#~ msgid ""
+#~ " Couldn't stat %s \n"
+#~ " %s "
+#~ msgstr ""
+#~ " %s を stat できません \n"
+#~ " %s "
+
+#~ msgid ""
+#~ " Cannot generate unique filename \n"
+#~ " %s "
+#~ msgstr ""
+#~ " 一意なファイル名を生成できません \n"
+#~ " %s "
+
+#~ msgid " Cannot execute commands on a Virtual File System directory "
+#~ msgstr " 仮想ファイルシステムのディレクトリでコマンドは実行できません "
+
+#~ msgid "Using "
+#~ msgstr "Using "
+
+#~ msgid "terminfo"
+#~ msgstr "terminfo"
+
+#~ msgid "termcap"
+#~ msgstr "termcap"
+
+#~ msgid "optional"
+#~ msgstr "オプション"
+
+#~ msgid "as default"
+#~ msgstr "デフォルト"
+
+#~ msgid " Internal error: get_file \n"
+#~ msgstr " 内部エラー: get_file \n"
+
+#~ msgid "Animation"
+#~ msgstr "アニメーション"
+
+#~ msgid " Direntry warning "
+#~ msgstr "Direntry の警告"
+
+#~ msgid "Super ino_usage is %d, memory leak"
+#~ msgstr "Super ino_usage は %d で，これはメモリリークです"
+
+#~ msgid "Super has want_stale set"
+#~ msgstr "Super has want_stable set"
+
+#~ msgid "File Transfer Protocol (ftp)"
+#~ msgstr "ファイル転送プロトコル (ftp)"
+
+#~ msgid "Midnight Commander's private remote filesystem"
+#~ msgstr "Midnight Commander's private remote filesystem"
+
+#~ msgid "netbios over tcp/ip"
+#~ msgstr "NETBIOS オーバー TCP/IP"
+
+#~ msgid "Undelete filesystem for ext2"
+#~ msgstr "ext2 ファイルシステムの復元"

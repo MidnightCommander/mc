@@ -1,5 +1,8 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Bump version to 4.5.55.  Release mc-4.5.55.
+	* po/*.po: Regenerate.
+
 	* AUTHORS: Update and spell check.
 	* FAQ: Likewise.
 	* INSTALL: Likewise.
