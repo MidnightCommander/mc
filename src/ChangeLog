@@ -1,3 +1,20 @@
+Wed Mar 11 19:02:48 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* view.c: Lots of changes:  Split the X11 code from the main view
+	program.  This is needed to cleanly support the addition of the
+	Gnome version of the file viewer;
+
+	New names for old functions (just a view_ prefix):
+	view_add_character, view_add_string, view_gotoyx, view_set_color,
+	view_display_clean.  Now all of them take a WView argument (which
+	is ignored in the macro for the text edition).  This is to support
+	multiple open views at once. 
+
+	* boxes.c (symlink_dialog): Enable ok/cancel buttons for the Gnome edition.
+
+	* cmd.c (link_cmd, symlink_cmd): Provide the filename to operate
+	on. 
+
 Tue Mar 10 20:41:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* cmd.c (unselect_cmd_panel, select_cmd_panel): To avoid races on

@@ -2060,7 +2060,6 @@ static key_map panel_keymap [] = {
     { '\\',       unselect_cmd },
     { '-',        unselect_cmd },
     { XCTRL('r'), reread_cmd },
-    { ALT('o'),   view_other_cmd },
 #endif
     
 #ifndef HAVE_X
@@ -2137,7 +2136,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	return 1;
 	
     case WIDGET_DRAW:
-#ifndef HAVE_XVIEW    
+#ifndef HAVE_XVIEW
 	paint_panel (panel);
 #else
 	show_dir (panel);	

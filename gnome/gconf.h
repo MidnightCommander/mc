@@ -20,6 +20,8 @@
 #define PORT_HAS_BACKTAB_CHAR            1
 #define PORT_NOT_FOCUS_SELECT_ITEM       1
 #define PORT_NOT_UNFOCUS_UNSELECT_ITEM   1
+#define PORT_WANTS_VIEW                  1
+#define PORT_HAS_VIEW_FREEZE             1
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

@@ -9,6 +9,7 @@
 #define GMC_CHARGRID_H
 
 
+#include <gdk/gdk.h>
 #include <gtk/gtkwidget.h>
 #include <libgnome/gnome-defs.h>
 
@@ -53,13 +54,10 @@ struct _GmcCharGridClass {
 guint      gmc_char_grid_get_type   (void);
 GtkWidget *gmc_char_grid_new        (void);
 
-void       gmc_char_grid_clear      (GmcCharGrid *cgrid, int x, int y, int width, int height);
-void       gmc_char_grid_put_char   (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel,
-				     char ch);
-void       gmc_char_grid_put_string (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel,
-				     char *str);
-void       gmc_char_grid_put_text   (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel,
-				     char *text, int length);
+void       gmc_char_grid_clear      (GmcCharGrid *cgrid, int x, int y, int width, int height, GdkColor *bg);
+void       gmc_char_grid_put_char   (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char ch);
+void       gmc_char_grid_put_string (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char *str);
+void       gmc_char_grid_put_text   (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char *text, int length);
 
 void       gmc_char_grid_set_font   (GmcCharGrid *cgrid, const char *font_name);
 void       gmc_char_grid_set_size   (GmcCharGrid *cgrid, guint width, guint height);

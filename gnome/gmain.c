@@ -29,6 +29,8 @@ struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 
 char *default_edition_colors =
 "normal=black:"
+"selected=red:"
+"viewunderline=brightred,blue:"
 "directory=blue:"
 "marked=white,seagreen:"
 "execute=slateblue:"

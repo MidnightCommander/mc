@@ -161,6 +161,14 @@ entry_click (GtkWidget *widget, GdkEvent *event, WInput *in)
 	dlg_select_widget (in->widget.parent, in);
 }
 
+static void
+entry_release (GtkEditable *entry, GdkEvent *event, WInput *in)
+{
+	in->point = entry->current_pos;
+	in->mark  = (entry->current_pos == entry->selection_start_pos) ?
+		entry->selection_end_pos : entry->selection_start_pos;
+}
+
 int
 x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 {
@@ -171,8 +179,12 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	in->widget.wdata = (widget_data) entry;
 	gtk_entry_set_text (GTK_ENTRY (entry), in->buffer);
 	gtk_entry_set_position (GTK_ENTRY (entry), in->point);
+	
 	gtk_signal_connect (GTK_OBJECT (entry), "button_press_event",
 			    GTK_SIGNAL_FUNC (entry_click), in);
+
+	gtk_signal_connect (GTK_OBJECT (entry), "button_release_event",
+			    GTK_SIGNAL_FUNC (entry_release), in);
 	return 1;
 }
 
@@ -186,7 +198,9 @@ x_update_input (WInput *in)
 		return;
 	
 	gtk_entry_set_text (entry, in->buffer);
+	printf ("POniendo el putno en %d\n", in->point);
 	gtk_entry_set_position (entry, in->point);
+	gtk_widget_draw (GTK_WIDGET (entry), NULL);
 }
 
 /* Listboxes */

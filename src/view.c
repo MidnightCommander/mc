@@ -25,6 +25,7 @@
 /* }}} */
 /* {{{ Declarations */
 #include <config.h>
+#include "x.h"
 #include <stdio.h>
 #ifdef __os2__
 #    include <io.h>
@@ -49,7 +50,6 @@
 #include <errno.h>
 #include <limits.h>
 #include <sys/param.h>
-
 #include "mem.h"
 #include "mad.h"
 #include "util.h"
@@ -212,10 +212,7 @@ view_destroy (WView *view)
     view_done (view);
     if (view->have_frame)
 	delete_hook (&select_file_hook, view_hook);
-#ifdef HAVE_TK
-    free (view->cache);
-    free (view->color_cache);
-#endif
+    x_destroy_view (view);
 }
 
 static int
@@ -500,13 +497,6 @@ static char *load_view_file (WView *view, char *filename)
 	return set_view_init_error (view, " Can't view: not a regular file ");
     }
 
-#ifdef JUST_FOR_CULTURAL_INFORMATION
-    /* #ifed out because now we have growing buffers :-) */
-    if (view->s.st_size < 1) {
-	close_view_file (view);
-	return set_view_init_error (view, " Can't view empty file ");
-    }
-#endif
     if (view->s.st_size == 0){
 	/* Must be one of those nice files that grow (/proc) */
 	close_view_file (view);
@@ -675,77 +665,9 @@ view_init (WView *view, char *_command, char *_file, int start_line)
 
 /* }}} */
 
-/* {{{ X Window code */
-#ifdef HAVE_TK
-#include "tkmain.h"
-
-/* Accepts the dim command with the width and the height in characters */
-static int
-tk_viewer_callback (ClientData cd, Tcl_Interp *interp, int ac, char *av[])
-{
-    WView *view = (WView *) cd;
-
-    if (av [1][0] != 'd')
-	return TCL_OK;
-    view->widget.cols  = atoi (av [2]);
-    view->widget.lines = atoi (av [3]);
-    return TCL_OK;
-}
-
-void
-x_create_viewer (WView *view)
-{
-    char *cmd;
-    widget_data parent;
-    
-    /* First, check if our parent is ".", if this is the case, then
-     * create a stand alone viewer, otherwise, we create a paneled
-     * version of the viewer
-     */
-    
-    if (view->have_frame){
-	parent = view->widget.wcontainer;
-    } else {
-	parent = view->widget.parent->wdata;
-    }
-    cmd = tk_new_command (parent, view, tk_viewer_callback, 'v');
-    
-    tk_evalf ("newview %d %s %s %s", view->have_frame,
-	      view->have_frame ? (char *) view->widget.wcontainer : "{}",
-	      cmd+1, cmd);
-}
-#else
-#   define x_create_viewer(x)
-#endif
-/* }}} */
-
 /* {{{ Screen update functions */
 
-#ifdef HAVE_TK
-static void
-view_status (WView *view)
-{
-    char *window = wtk_win (view->widget);
-    
-    if (!view->status_shown){
-	view->status_shown = 0;
-
-	tk_evalf ("view_update_info %s {%s} {%d} {%s} {%s}",
-		  window, name_trunc (view->filename ? view->filename:
-				      view->command ? view->command:"", 20),
-		  -view->start_col, size_trunc (view->s.st_size),
-		  view->growing_buffer ? "[grow]":"[]");
-    }
-}
-
-static void
-view_percent (WView *view, int p, int w)
-{
-    fprintf (stderr, "Missing tk view_percent\n");
-}
-
-#else /* HAVE_TK */
-
+#ifndef HAVE_X
 static void
 view_percent (WView *view, int p, int w)
 {
@@ -784,7 +706,7 @@ view_status (WView *view)
             if (view->hex_mode)
                 printw ("Offset 0x%08x", view->edit_cursor);
             else
-    	    printw ("Col %d", -view->start_col);
+		printw ("Col %d", -view->start_col);
     	}
     	if (w > 60){
 	    widget_move (view, view->have_frame, 42);
@@ -799,182 +721,15 @@ view_status (WView *view)
             if (view->hex_mode)
                 view_percent (view, view->edit_cursor - view->first, w);
             else
-	    view_percent (view, view->start_display - view->first, w);
+	        view_percent (view, view->start_display - view->first, w);
     }
     attrset (SELECTED_COLOR);
 }
-#endif HAVE_TK
 
-#ifdef HAVE_TK
-
-#define DEF_COLOR       0
-#define BOLD_COLOR      1
-#define UNDERLINE_COLOR 2
-#define MARK_COLOR      3
-
-/* The major part of the Tk code deals with caching a line (the
- * current one) of text to avoid expensive calls to the Tk text widget
- * callback.
- *
- * We cache all this information on view->cache and the colors on
- * view->color_cache.
- *
- * FIXME: the cache does not know about the contents of the physical
- * text widget (depends on your concept of physical), so if we happen
- * to hit the case where row is decremented in the void display () routine,
- * we will end up with a clean line.
- */
-
-static int current_color;
-
-static void
-set_color (int font)
-{
-    current_color = font;
-}
+#define view_set_color(view,font) attrset (font)
 
 static inline void
-display_clean(WView *view, int h, int w)
-{
-    char *win = wtk_win (view->widget);
-
-    tk_evalf ("cleanview %s.v.view", win);
-}
-
-static void
-add_character (WView *view, int c)
-{
-    view->cache [view->dest] = c;
-    view->color_cache [view->dest] = current_color;
-}
-
-static inline void
-add_string (WView *view, char *s)
-{
-    while (*s)
-	add_character (view, *s++);
-}
-
-static char *
-get_tk_tag_name (int color)
-{
-    /* Those names are the names of the tags in the Tk source */
-    static char *color_tag_names [] = {
-	"normal", "bold", "underline", "mark"
-    };
-
-    return color_tag_names [color];
-}
-
-/*
- * Tk: Flushes the contents of view->cache to the Tk text widget
- *
- * We get the command information and call the command directly
- * to avoid escaping the view->cache contents.
- */
-static void
-flush_line (WView *view)
-{
-    char *win = wtk_win (view->widget);
-    int  row = view->current_line;
-    char *text_name;
-    Tcl_CmdInfo info;
-    int  i, prev_color;
-    char str_row [30];
-    char *av [5];
-    int  len = strlen (view->cache);
-
-    /* Fetch the address and clientData for the view */
-    text_name = copy_strings (win, ".v.view", 0);
-    Tcl_GetCommandInfo (interp, text_name, &info);
-
-    /* Setup arguments to the command:
-     * $win.v.view insert @$row,0 $view->cache
-     */
-    sprintf (str_row, "%d.0", row);
-    i = 0;
-    av [i++] = text_name;
-    av [i++] = "insert";
-    av [i++] = str_row;
-    av [i++] = view->cache;
-
-    /* Call the callback :-) */
-    (*info.proc) (info.clientData, interp, i, av);
-    bzero (view->cache, view->cache_len);
-
-    /* Colorize the line */
-    for (prev_color = 0, i = 0; i < len; i++){
-	int new_color_start;
-	char *color_name;
-	    
-	if (view->color_cache [i] == prev_color)
-	    continue;
-
-	new_color_start = i;
-	
-	prev_color = view->color_cache [i];
-	
-	for (;i < len && view->color_cache [i] == prev_color; i++)
-	    ;
-	
-	color_name = get_tk_tag_name (prev_color);
-	tk_evalf ("%s tag add %s %d.%d %d.%d",
-		  text_name, color_name,
-		  row, new_color_start-1,
-		  row, i);
-    }
-    
-    bzero (view->color_cache, view->cache_len);
-    view->last_col = 0;
-    free (text_name);
-}
-
-/* Tk: Mantains the line cache */
-void
-view_gotoyx (WView *view, int row, int col)
-{
-    if (row != view->current_line){
-	flush_line (view);
-    }
-    view->current_line = row;
-
-    /* In case the user has resized the viewer */
-    if (col > view->cache_len){
-	char *new;
-
-	new = xmalloc (col + 1, "cache");
-	strcpy (new, view->cache);
-	free (view->cache);
-	view->cache = new;
-
-	new = xmalloc (col + 1, "cache");
-	strcpy (new, view->color_cache);
-	free (view->color_cache);
-	view->color_cache = new;
-	
-	view->cache_len = col;
-    }
-
-    view->dest = col;
-    for (; view->last_col+1 < col; view->last_col++){
-	view->cache [view->last_col] = ' ';
-	view->color_cache [view->last_col] = current_color;
-    }
-    view->last_col = col;
-}
-
-#else
-
-#define BOLD_COLOR        MARKED_COLOR
-#define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
-#define MARK_COLOR        SELECTED_COLOR
-#define DEF_COLOR         NORMAL_COLOR
-
-#define set_color(font) attrset (font)
-
-
-static inline void
-display_clean (WView *view, int height, int width)
+view_display_clean (WView *view, int height, int width)
 {
     /* FIXME: Should I use widget_erase only and repaint the box? */
     if (view->have_frame){
@@ -990,10 +745,22 @@ display_clean (WView *view, int height, int width)
 	widget_erase ((Widget *) view);
 }
 
-#define add_character(view,c) addch (c)
-#define add_string(view,s) addstr (s)
-#define view_gotoyx(v,r,c) widget_move (v,r,c)
+#define view_add_character(view,c) addch (c)
+#define view_add_string(view,s)    addstr (s)
+#define view_gotoyx(v,r,c)    widget_move (v,r,c)
+#endif
 
+#ifndef HAVE_TK
+/* Both the text mode and gnome editions use this */
+#define BOLD_COLOR        MARKED_COLOR
+#define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
+#define MARK_COLOR        SELECTED_COLOR
+#define DEF_COLOR         NORMAL_COLOR
+#endif
+
+#ifndef PORT_HAS_VIEW_FREEZE
+#    define view_freeze(view)
+#    define view_thaw(view)
 #endif
 
 /* Shows the file pointed to by *start_display on view_win */
@@ -1001,12 +768,14 @@ static long
 display (WView *view)
 {
 #ifdef HAVE_X
-#   define  frame_shift 0
+#   define frame_shift  0
+#   define STATUS_LINES 0
 #else
     const int frame_shift = view->have_frame;
+#   define STATUS_LINES 1
 #endif
     int col = 0 + frame_shift;
-    int row = 1 + frame_shift;
+    int row = STATUS_LINES + frame_shift;
     int height, width;
     long from;
     int c;
@@ -1016,16 +785,17 @@ display (WView *view)
     height = view->widget.lines - frame_shift;
     width = view->widget.cols - frame_shift;
     from = view->start_display;
-    set_color (DEF_COLOR);
+    view_set_color (view, DEF_COLOR);
 
-    display_clean (view, height, width);
+    view_freeze (view);
+    view_display_clean (view, height, width);
 
     /* Optionally, display a ruler */
     if ((!view->hex_mode) && (ruler)){
 	char r_buff[4];
 	int cl;
 	
-	set_color (BOLD_COLOR);
+	view_set_color (view, BOLD_COLOR);
 	for (c = frame_shift; c < width; c++) {
 	    cl = c-view->start_col;  
 	    if (ruler == 1)
@@ -1038,17 +808,17 @@ display (WView *view)
 	    else
 		if ((cl % 5) == 0)
 		    r_buff[0] = '*'; 
-	    add_character (view, r_buff[0]);
+	    view_add_character (view, r_buff[0]);
 	    if ((cl != 0) && (cl % 10) == 0){
 		sprintf(r_buff, "%03d", cl);
 		if (ruler == 1)
 		    widget_move (view, row + 1, c - 1);
 		else
 		    widget_move (view, row + height - 3, c - 1);
-                add_string (view, r_buff);
+                view_add_string (view, r_buff);
 	    }   
 	}    
-	set_color (DEF_COLOR);
+	view_set_color (view, DEF_COLOR);
 	if (ruler == 1) 
 	    row += 2;
 	else
@@ -1073,7 +843,7 @@ display (WView *view)
             /* Print the hex offset */
             sprintf (hex_buff, "%05X", (int) (from - view->first));
 	    widget_move (view, row, frame_shift);
-            add_string (view, hex_buff);
+            view_add_string (view, hex_buff);
 	    
             /* Hex dump starts from column seven */
             col = 7;
@@ -1087,14 +857,14 @@ display (WView *view)
                     c = curr->value;
                     curr = curr->next;
                     boldflag = 3;
-                    set_color (7);
+                    view_set_color (view, 7);
                 } else
                 c = (unsigned char) get_byte (view, from);
 		
 	    	if (view->found_len && from >= view->search_start
 		    && from < view->search_start + view->found_len){
 	    	    boldflag = 1;
-		    set_color (BOLD_COLOR);
+		    view_set_color (view, BOLD_COLOR);
 	    	}
                 /* Display the navigation cursor */
                 if (from == view->edit_cursor) {
@@ -1103,39 +873,39 @@ display (WView *view)
 			view->cursor_col = col;
 		    }
                     boldflag = 2;
-                    set_color (view->view_side == view_side_left ? 15 : 31);
+                    view_set_color (view, view->view_side == view_side_left ? 15 : 31);
                 }
 
                 /* Print a hex number (sprintf is too slow) */
                 hex_buff [0] = hex_char [(c >> 4)];
                 hex_buff [1] = hex_char [c & 15];
 		view_gotoyx (view, row, col);
-                add_string (view, hex_buff);
+                view_add_string (view, hex_buff);
                 col += 3;
                 /* Turn off the cursor or changed byte highlighting here */
                 if (boldflag > 1)
-                    set_color (DEF_COLOR);
+                    view_set_color (view, DEF_COLOR);
                 if ((bytes & 3) == 3 && bytes + 1 < view->bytes_per_line){
                     /* Turn off the search highlighting */
                     if (boldflag == 1 &&
                             from == view->search_start + view->found_len - 1)
-                        set_color (DEF_COLOR);
+                        view_set_color (view, DEF_COLOR);
 		    
                     /* Hex numbers are printed in the groups of four */
                     /* Groups are separated by a vline */
 		    
-                    add_character (view, ' ');
+                    view_add_character (view, ' ');
                     one_vline ();
 		    view_gotoyx (view, row, col + 1);
                     col += 2;
                     
                     if (boldflag && from==view->search_start+view->found_len-1)
-                    	set_color (BOLD_COLOR);
+                    	view_set_color (view, BOLD_COLOR);
 		    
                 }
                 if (boldflag && from < view->search_start + view->found_len - 1 
                     && bytes != view->bytes_per_line - 1)
-                    add_character (view, ' ');
+                    view_add_character (view, ' ');
 		
                 /* Print the corresponding ascii character */
 		view_gotoyx (view, row, text_start + bytes);
@@ -1146,13 +916,13 @@ display (WView *view)
                     default:
                         break;
                     case 1:
-                        set_color (BOLD_COLOR);
+                        view_set_color (view, BOLD_COLOR);
                         goto setcursor;
                     case 2:
-                        set_color (view->view_side == view_side_left ? 31 : 15);
+                        view_set_color (view, view->view_side == view_side_left ? 31 : 15);
                         goto setcursor;
                     case 3:
-                        set_color (7);
+                        view_set_color (view, 7);
 
                     setcursor:
 		    if (view->view_side == view_side_right){
@@ -1160,11 +930,11 @@ display (WView *view)
 			view->cursor_row = row;
 		    }
 		}
-		add_character (view, c);
+		view_add_character (view, c);
 		
                 if (boldflag){
                     boldflag = 0;
-                    set_color (DEF_COLOR);
+                    view_set_color (view, DEF_COLOR);
                 }
             }
         }
@@ -1204,16 +974,16 @@ display (WView *view)
 		    col--;
 		    boldflag = 1;
 		    if (get_byte (view, from - 1) == '_' && get_byte (view, from + 1) != '_')
-		    	set_color (UNDERLINE_COLOR);
+		    	view_set_color (view, UNDERLINE_COLOR);
 		    else
-		    	set_color (BOLD_COLOR);
+		    	view_set_color (view, BOLD_COLOR);
 		    continue;
 		}
 	    }
 	    if (view->found_len && from >= view->search_start
 		&& from < view->search_start + view->found_len){
 	    	boldflag = 1;
-		set_color (MARK_COLOR);
+		view_set_color (view, MARK_COLOR);
 	    }
        	    if (col >= frame_shift-view->start_col
 		&& col < width-view->start_col)
@@ -1222,12 +992,12 @@ display (WView *view)
        		if (!is_printable (c))
 		    c = '.';
 
-		add_character (view, c);
+		view_add_character (view, c);
        	    } 
 	    col++;
 	    if (boldflag){
 		boldflag = 0;
-		set_color (DEF_COLOR);
+		view_set_color (view, DEF_COLOR);
 	    }
 
 	    /* Very last thing */
@@ -1235,11 +1005,11 @@ display (WView *view)
 		 get_byte (view, from+1);
         }
 #ifdef HAVE_TK
-	/* Tk: This flushes the last line */
 	view_gotoyx (view, view->current_line+1, 0);
 #endif
     }
     view->last = from;
+    view_thaw (view);
     return from;
 }
 
@@ -1709,11 +1479,11 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     update_activate = 0;
 
     for (; ; isatbeg = 1, free (s)){
-#ifdef HAVE_TK
+#ifdef HAVE_X
 	static int count;
 
 	if ((count++ % 32) == 0)
-	    tk_dispatch_all ();
+	    x_flush_events ();
 	if (!d->running)
 	    break;
 #endif
@@ -2532,9 +2302,9 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
     *move_dir_p = 0;
     return !error;
 }
-#else
-Dlg_head   *view_dlg;
+#endif
 
+#ifndef PORT_WANTS_VIEW
 void
 view_adjust_size (Dlg_head *h)
 {
@@ -2548,6 +2318,9 @@ view_adjust_size (Dlg_head *h)
     widget_set_size (&bar->widget, LINES-1, 0, 1, COLS);
 }
 
+/* Only the text mode edition uses this */
+Dlg_head   *view_dlg;
+
 /* Real view only */
 int
 view (char *_command, char *_file, int *move_dir_p, int start_line)
@@ -2556,20 +2329,23 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
     int error;
     WView *wview;
     WButtonBar *bar;
-
+    Dlg_head *our_dlg;
     
     /* Create dialog and widgets, put them on the dialog */
-    view_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
+    our_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
 			   view_mode_callback, "[Internal File Viewer]",
 			   "view",
 			   DLG_NONE);
 
+#ifndef HAVE_X
+    view_dlg = our_dlg;
+#endif
     wview = view_new (0, 0, COLS, LINES-1, 0);
 
     bar  = buttonbar_new (1);
 
-    add_widget (view_dlg, wview);
-    add_widget (view_dlg, bar);
+    add_widget (our_dlg, wview);
+    add_widget (our_dlg, bar);
 
     error = view_init (wview, _command, _file, start_line);
     if (move_dir_p)
@@ -2580,11 +2356,11 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
      * be aware of it
      */
     if (!error){
-	run_dlg (view_dlg);
+	run_dlg (our_dlg);
 	if (move_dir_p)
 	    *move_dir_p = wview->move_dir;
     }
-    destroy_dlg (view_dlg);
+    destroy_dlg (our_dlg);
     
     return !error;
 }
@@ -2673,9 +2449,7 @@ view_callback (Dlg_head *h, WView *v, int msg, int par)
 	return 1;
 	
     case WIDGET_FOCUS:
-#ifdef HAVE_TK
-	tk_evalf ("focus %s.v.view", wtk_win (view->widget));
-#endif
+	x_focus_view (view);
 	view_labels (view);
 	return 1;
 	
@@ -2707,17 +2481,9 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->have_frame = is_panel;
     view->last_byte = -1;
     view->monitor = 0;
-#ifdef HAVE_TK
-    view->status_shown = 0;
-    view->current_line = 1;
-    view->cache_len = 80;
-    view->last_col = 0;
-    view->cache = xmalloc (81, "view->cache");
-    view->color_cache = xmalloc (81, "view->cache");
-    view->direction = 1;
-    bzero (view->cache, 81);
-    view->dest = 0;
-#endif
+    
+    x_init_view (view);
+
     widget_want_cursor (view->widget, 0);
 
     return view;

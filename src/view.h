@@ -87,7 +87,12 @@ typedef struct {
     int  last_col;		/* last column used */
     int  status_shown;		/* Have we show the file information? */
 #endif
-
+	
+#ifdef HAVE_GNOME
+    int  current_x, current_y;	/* Current x,y position */
+    int  color;			/* Current color */
+#endif
+	
     int  move_dir;		/* return value from widget:  
 				 * 0 do nothing
 				 * -1 view previous file
@@ -140,5 +145,33 @@ struct hexedit_change_node {
    long                       offset;
    unsigned char              value;
 };
+
+#ifdef HAVE_TK
+#define DEF_COLOR         0
+#define BOLD_COLOR        1
+#define UNDERLINE_COLOR   2
+#define MARK_COLOR        3
+#endif
+
+#ifdef HAVE_X
+#ifdef WANT_WIDGETS
+void view_add_character (WView *view, int c);
+void view_add_string    (WView *view, char *s);
+void view_gotoyx        (WView *view, int r, int c);
+void view_set_color     (WView *view, int font);
+void view_display_clean (WView *view, int h, int w);
+
+#ifdef PORT_HAS_VIEW_FREEZE
+void view_freeze (WView *view);
+void view_thaw (WView *view);
+#endif
+
+#endif
+#else
+#    define x_init_view(x)
+#    define x_destroy_view(x)
+#    define x_create_viewer(x)
+#    define x_focus_view(x)
+#endif
 
 #endif	/* __VIEW_H */

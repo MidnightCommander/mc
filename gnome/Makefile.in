@@ -27,6 +27,7 @@ GNOMESRCS = 		\
 	gdesktop.c 	\
 	gutil.c		\
 	gtrans.c	\
+	gview.c		\
 	gmc-chargrid.c
 
 GNOMEHDRS = 		\
@@ -54,7 +55,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gkey.o gmain.o gscreen.o gwidget.o gmenu.o ghelp.o ginfo.o \
-	glayout.o gtools.o gdesktop.o gtrans.o gutil.o gmc-chargrid.o
+	glayout.o gtools.o gdesktop.o gtrans.o gutil.o gmc-chargrid.o gview.o
 
 #
 # Distribution variables

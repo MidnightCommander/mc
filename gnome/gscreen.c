@@ -95,6 +95,7 @@ x_fill_panel (WPanel *panel)
 {
 	const int top       = panel->count;
 	const int items     = panel->format->items;
+	const int selected  = panel->selected;
 	GtkCList *cl        = GTK_CLIST (panel->list);
 	int i, col, type_col, color;
 	char  **texts;
@@ -132,6 +133,9 @@ x_fill_panel (WPanel *panel)
 		if (type_col != -1)
 			panel_file_list_set_type_bitmap (cl, i, type_col, color, fe);
 	}
+	/* This is needed as the gtk_clist_append changes selected under us :-( */
+	panel->selected = selected;
+	select_item (panel);
 	gtk_clist_thaw (GTK_CLIST (cl));
 	free (texts);
 }
@@ -332,6 +336,8 @@ static struct {
 	{ "Rename/move..",   (context_menu_callback) ren_cmd },
 	{ "Delete...",       (context_menu_callback) delete_cmd },
 	{ "Link...",         (context_menu_callback) link_cmd },
+	{ "Symlink...",      (context_menu_callback) symlink_cmd },
+	{ "Edit symlink...", (context_menu_callback) edit_symlink_cmd },
 	{ NULL, NULL },
 };
 	
@@ -738,10 +744,8 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	if (drag_directory && drag_directory_ok){
 		gtk_widget_show (drag_directory_ok);
 		gtk_widget_show (drag_directory);
-#if 0
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
 					drag_directory_ok->window, &hotspot);
-#endif
 	}
 	
 	/* DND: Drag setup */

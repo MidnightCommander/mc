@@ -1,3 +1,15 @@
+Wed Mar 11 15:28:45 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+	
+	* gwidget.c (entry_release): Now the WEntrys track the current
+	selection.p
+	(x_update_input): Repaint the widget after changing the position.
+	
+	* gscreen.c (x_fill_panel): Remember the selected item on the
+	panel before filling it up, as gtk_clist emits a select_item
+	signal when filling it up, which changes the current selection
+	(and thus some routines that invoke the reload panel option
+	fail). 
+
 1998-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmc-chargrid.c (gmc_char_grid_get_size): New public function.
@@ -15,8 +27,6 @@
 	monospaced characters.  Just like a crippled-down terminal.
 
 Tue Mar 10 23:46:29 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
-
-	* glayout.c 
 
 	* gscreen.c (x_adjust_top_file): We no longer adjust the top
 	displayed filename.

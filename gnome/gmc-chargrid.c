@@ -19,8 +19,8 @@
 #define ATTRS(cgrid) ((struct attr *) cgrid->attrs)
 
 struct attr {
-	gulong fg;
-	gulong bg;
+	GdkColor *fg;
+	GdkColor *bg;
 };
 
 
@@ -256,6 +256,7 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 	struct attr *attrs;
 	int first;
 	gulong color;
+	gulong ocolor;
 	GdkColor gcolor;
 
 	chars = CHARS (cgrid) + (cgrid->width * y + x);
@@ -269,11 +270,12 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 
 	while (i < width) {
 		first = i;
-		color = attrs[i].bg;
+		ocolor = attrs[i].bg ? attrs[i].bg->pixel : GTK_WIDGET (cgrid)->style->bg[GTK_STATE_NORMAL].pixel;
+		color = ocolor;
 
 		do {
 			i++;
-		} while ((i < width) && (color == attrs[i].bg));
+		} while ((i < width) && (color == ocolor));
 
 		gcolor.pixel = color;
 		gdk_gc_set_foreground (cgrid->gc, &gcolor);
@@ -293,11 +295,12 @@ update_strip (GmcCharGrid *cgrid, int x, int y, int width)
 
 	while (i < width) {
 		first = i;
-		color = attrs[i].fg;
+		ocolor = attrs[i].fg ? attrs[i].fg->pixel : GTK_WIDGET (cgrid)->style->fg[GTK_STATE_NORMAL].pixel;
+		color = ocolor;
 
 		do {
 			i++;
-		} while ((i < width) && (color == attrs[i].fg));
+		} while ((i < width) && (color == ocolor));
 
 		gcolor.pixel = color;
 		gdk_gc_set_foreground (cgrid->gc, &gcolor);
@@ -343,18 +346,19 @@ gmc_char_grid_expose (GtkWidget *widget, GdkEventExpose *event)
 		x2 = (event->area.x + event->area.width) / cgrid->char_width;
 		y2 = (event->area.y + event->area.height) / cgrid->char_height;
 
-		update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1) + 1);
+		update_region (cgrid, x1, y1, (x2 - x1) + 1, (y2 - y1));
 	}
 
 	return FALSE;
 }
 
 void
-gmc_char_grid_clear (GmcCharGrid *cgrid, int x, int y, int width, int height)
+gmc_char_grid_clear (GmcCharGrid *cgrid, int x, int y, int width, int height, GdkColor *bg)
 {
 	int x1, y1, x2, y2;
 	int xx, yy;
 	char *ch;
+	struct attr *attrs;
 
 	g_return_if_fail (cgrid != NULL);
 	g_return_if_fail (GMC_IS_CHAR_GRID (cgrid));
@@ -364,13 +368,28 @@ gmc_char_grid_clear (GmcCharGrid *cgrid, int x, int y, int width, int height)
 	x2 = MIN (x + width, cgrid->width);
 	y2 = MIN (y + height, cgrid->height);
 
-	ch = CHARS (cgrid) + (y1 * cgrid->width + x1);
+	ch = CHARS (cgrid) + (y1 * cgrid->width);
+	attrs = ATTRS (cgrid) + (y1 * cgrid->width);
 
 	for (yy = y1; yy < y2; yy++) {
-		for (xx = x1; xx < x2; xx++)
+		for (xx = x1; xx < x2; xx++) {
 			ch[xx] = ' ';
 
+			if (bg) {
+				if (!attrs[xx].bg)
+					attrs[xx].bg = g_new (GdkColor, 1);
+
+				*attrs[xx].bg = *bg;
+			} else {
+				if (attrs[xx].bg)
+					g_free (attrs[xx].bg);
+
+				attrs[xx].bg = NULL;
+			}
+		}
+
 		ch += cgrid->width;
+		attrs += cgrid->width;
 	}
 
 	if (GTK_WIDGET_DRAWABLE (cgrid) && !cgrid->frozen)
@@ -378,11 +397,12 @@ gmc_char_grid_clear (GmcCharGrid *cgrid, int x, int y, int width, int height)
 }
 
 void
-gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel, char ch)
+gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char ch)
 {
 	char *chars;
 	struct attr *attrs;
-
+	int idx;
+		
 	g_return_if_fail (cgrid != NULL);
 	g_return_if_fail (GMC_IS_CHAR_GRID (cgrid));
 
@@ -390,31 +410,55 @@ gmc_char_grid_put_char (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulon
 	    || (y < 0) || (y >= cgrid->height))
 		return;
 
-	chars = CHARS (cgrid);
-	attrs = ATTRS (cgrid);
+	idx = y * cgrid->width + x;
 
-	chars[y * cgrid->width + x] = ch;
-	attrs[y * cgrid->width + x].fg = fg_pixel;
-	attrs[y * cgrid->width + x].bg = bg_pixel;
+	chars = CHARS (cgrid) + idx;
+	attrs = ATTRS (cgrid) + idx;
+
+	*chars = ch;
+
+	if (fg) {
+		if (!attrs->fg)
+			attrs->fg = g_new (GdkColor, 1);
+
+		*attrs->fg = *fg;
+	} else {
+		if (attrs->fg)
+			g_free (attrs->fg);
+
+		attrs->fg = NULL;
+	}
+
+	if (bg) {
+		if (!attrs->bg)
+			attrs->bg = g_new (GdkColor, 1);
+
+		*attrs->bg = *bg;
+	} else {
+		if (attrs->bg)
+			g_free (attrs->bg);
+
+		attrs->bg = NULL;
+	}
 
 	if (GTK_WIDGET_DRAWABLE (cgrid) && !cgrid->frozen)
 		update_region (cgrid, x, y, 1, 1);
 }
 
 void
-gmc_char_grid_put_string (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel, char *str)
+gmc_char_grid_put_string (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char *str)
 {
 	g_return_if_fail (str != NULL);
 
-	gmc_char_grid_put_text (cgrid, x, y, fg_pixel, bg_pixel, str, strlen (str));
+	gmc_char_grid_put_text (cgrid, x, y, fg, bg, str, strlen (str));
 }
 
 void
-gmc_char_grid_put_text (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulong bg_pixel, char *text, int length)
+gmc_char_grid_put_text (GmcCharGrid *cgrid, int x, int y, GdkColor *fg, GdkColor *bg, char *text, int length)
 {
 	char *chars;
 	struct attr *attrs;
-	int i, pos;
+	int i, pos, idx;
 
 	g_return_if_fail (cgrid != NULL);
 	g_return_if_fail (GMC_IS_CHAR_GRID (cgrid));
@@ -429,8 +473,31 @@ gmc_char_grid_put_text (GmcCharGrid *cgrid, int x, int y, gulong fg_pixel, gulon
 
 	for (i = 0, pos = x; (i < length) && (pos < cgrid->width); i++, pos++) {
 		*chars++ = *text++;
-		attrs->fg = fg_pixel;
-		attrs->bg = bg_pixel;
+
+		if (fg) {
+			if (!attrs->fg)
+				attrs->fg = g_new (GdkColor, 1);
+
+			*attrs->fg = *fg;
+		} else {
+			if (attrs->fg)
+				g_free (attrs->fg);
+
+			attrs->fg = NULL;
+		}
+
+		if (bg) {
+			if (!attrs->bg)
+				attrs->bg = g_new (GdkColor, 1);
+
+			*attrs->bg = *bg;
+		} else {
+			if (attrs->bg)
+				g_free (attrs->bg);
+
+			attrs->bg = NULL;
+		}
+
 		attrs++;
 	}
 
@@ -540,8 +607,8 @@ gmc_char_grid_real_size_changed (GmcCharGrid *cgrid, guint width, guint height)
 
 	for (i = 0; i < (width * height); i++) {
 		chars[i] = ' ';
-		attrs[i].fg = 0;
-		attrs[i].bg = 0;
+		attrs[i].fg = NULL;
+		attrs[i].bg = NULL;
 	}
 
 	gtk_widget_queue_resize (GTK_WIDGET (cgrid));

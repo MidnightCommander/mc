@@ -969,17 +969,18 @@ view_other_cmd (void)
 }
 
 #ifndef OS2_NT
-static void do_link (int symbolic_link)
+static void
+do_link (int symbolic_link, char *fname)
 {
     struct stat s;
     char *dest, *src;
     int  stat_r;
 
     if (!symbolic_link){
-	stat_r = mc_stat (selection (cpanel)->fname, &s);
+	stat_r = mc_stat (fname, &s);
 	if (stat_r != 0){
 	    message (1, " Error ", " Couldn't stat %s \n %s ",
-		     selection (cpanel)->fname, unix_error_string (errno));
+		     fname, unix_error_string (errno));
 	    return;
 	}
 	if (!S_ISREG (s.st_mode))
@@ -987,7 +988,7 @@ static void do_link (int symbolic_link)
     }
     
     if (!symbolic_link){
-        src = copy_strings (" Link ", name_trunc (selection (cpanel)->fname, 46), 
+        src = copy_strings (" Link ", name_trunc (fname, 46), 
             " to:", NULL);
 	dest = input_expand_dialog (" Link ", src, "");
 	free (src);
@@ -998,11 +999,11 @@ static void do_link (int symbolic_link)
 	    return;
 	}
 	save_cwds_stat ();
-	if (-1 == mc_link (selection (cpanel)->fname, dest))
+	if (-1 == mc_link (fname, dest))
 	    message (1, " Error ", " link: %s ", unix_error_string (errno));
     } else {
 #ifdef OLD_SYMLINK_VERSION
-        symlink_dialog (selection (cpanel)->fname, "", &dest, &src);
+        symlink_dialog (fname, "", &dest, &src);
 #else
 	/* suggest the full path for symlink */
         char s[MC_MAXPATHLEN];
@@ -1011,7 +1012,7 @@ static void do_link (int symbolic_link)
         strcpy(s, cpanel->cwd);
         if ( ! ((s[0] == '/') && (s[1] == 0)))
             strcat(s, "/");
-        strcat(s, selection (cpanel)->fname);
+        strcat(s, fname);
 	if (get_other_type () == view_listing)
 	    strcpy(d, opanel->cwd);
 	else
@@ -1045,12 +1046,12 @@ static void do_link (int symbolic_link)
 
 void link_cmd (void)
 {
-    do_link (0);
+    do_link (0, selection (cpanel)->fname);
 }
 
 void symlink_cmd (void)
 {
-    do_link (1);
+    do_link (1, selection (cpanel)->fname);
 }
 
 void edit_symlink_cmd (void)
