@@ -96,7 +96,7 @@ static int vfmake (vfs *me, char *name, char *cache)
     }
     g_free (name);
 
-    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, "/bin/sh", pad)) {
+    if (my_system (EXECUTE_AS_SHELL, "/bin/sh", pad)) {
 	return -1;
     }
 

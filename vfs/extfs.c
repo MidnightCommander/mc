@@ -647,7 +647,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	g_free (q);
 	g_free (mc_extfsdir);
 	g_free (archive_name);
-        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd) && !created){
+        if (my_system (EXECUTE_AS_SHELL, shell, cmd) && !created){
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             g_free (cmd);
@@ -711,7 +711,7 @@ static int extfs_close (void *data)
 	g_free (archive_name);
 	g_free (file_name);
 	g_free (mc_extfsdir);
-	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd))
+	if (my_system (EXECUTE_AS_SHELL, shell, cmd))
 	    errno_code = EIO;
 	g_free (cmd);
 	{
@@ -1051,7 +1051,7 @@ static int extfs_unlink (vfs *me, char *file)
     g_free (q);
     g_free (mc_extfsdir);
     g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
         g_free (cmd);
         my_errno = EIO;
         return -1;
@@ -1093,7 +1093,7 @@ static int extfs_mkdir (vfs *me, char *path, mode_t mode)
     g_free (q);
     g_free (mc_extfsdir);
     g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
 	g_free (cmd);
 	my_errno = EIO;
 	remove_entry (entry);
@@ -1133,7 +1133,7 @@ static int extfs_rmdir (vfs *me, char *path)
     g_free (q);
     g_free (mc_extfsdir);
     g_free (archive_name);
-    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+    if (my_system (EXECUTE_AS_SHELL, shell, cmd)){
         g_free (cmd);
         my_errno = EIO;
         return -1;
