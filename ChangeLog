@@ -1,3 +1,10 @@
+2002-08-21  Pavel Roskin  <proski@gnu.org>
+
+	Release mc-4.6.0-pre1.
+
+	* configure.in: Bump version to 4.6.0-pre1.
+	* po/*.po: Regenerate.
+
 2002-08-20  David Martin  <dmartina@excite.com>
 
 	* doc/es/mc.1.in: Minor changes.
