@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2003-03-04 14:11+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-03-04 11:45-0500\n"
 "PO-Revision-Date: 2003-03-03 11:07+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
@@ -2359,7 +2360,7 @@ msgstr "Мөчирт мэдээлэл алга"
 #: src/info.c:125
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "%s дэхь чөлөөт зай: %s (%d%%)"
+msgstr "%3$s дэхь чөлөөт зай: %1$s (%2$d%%)"
 
 #: src/info.c:128
 msgid "No space information"
@@ -3294,12 +3295,12 @@ msgstr "Бүлэг"
 #: src/screen.c:656
 #, c-format
 msgid "%s bytes in %d file"
-msgstr "%d файлд %s байт"
+msgstr "%2$d файлд %1$s байт"
 
 #: src/screen.c:656
 #, c-format
 msgid "%s bytes in %d files"
-msgstr "%d файлууд %s байт"
+msgstr "%2$d файлууд %1$s байт"
 
 #: src/screen.c:682
 msgid "<readlink failed>"
@@ -4281,8 +4282,8 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Анхаар: %s д алдаатай флаг %c :\n"
-"%s\n"
+"Анхаар: %2$s д алдаатай флаг %1$c :\n"
+"%3$s\n"
 
 #: vfs/smbfs.c:574
 #, c-format
