@@ -433,7 +433,7 @@ shell/.xpm
 	Icon=xpm.xpm
 
 include/image-options
-	Set root window to this image=ee -root %f &
+	Set root window to this image=ee --root %f &
 	Display this file=ee %f &
 
 # Sound files
