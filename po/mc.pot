@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-07 14:10:02-0500\n"
+"Date: 1998-05-09 18:40:09-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -810,7 +810,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/achown.c:72 src/boxes.c:139 src/boxes.c:274 src/boxes.c:371 src/boxes.c:458 src/boxes.c:637 src/boxes.c:758 src/boxes.c:811 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1956 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: src/achown.c:72 src/boxes.c:144 src/boxes.c:279 src/boxes.c:376 src/boxes.c:463 src/boxes.c:642 src/boxes.c:763 src/boxes.c:816 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1956 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr ""
 
@@ -916,157 +916,161 @@ msgstr ""
 msgid "&Full file list"
 msgstr ""
 
-#: src/boxes.c:70
+#: src/boxes.c:71
 msgid "&Brief file list"
 msgstr ""
 
-#: src/boxes.c:70
+#: src/boxes.c:72
 msgid "&Long file list"
 msgstr ""
 
-#: src/boxes.c:71
+#: src/boxes.c:73
 msgid "&User defined:"
 msgstr ""
 
-#: src/boxes.c:137
+#: src/boxes.c:75
+msgid "&Icon view"
+msgstr ""
+
+#: src/boxes.c:142
 msgid "user &Mini status"
 msgstr ""
 
 #. WITH_BACKGROUND
-#: gnome/gtools.c:130 src/boxes.c:138 src/boxes.c:273 src/boxes.c:373 src/boxes.c:460 src/boxes.c:639 src/boxes.c:759 src/boxes.c:813 src/boxes.c:924 src/file.c:1973 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
+#: gnome/gtools.c:130 src/boxes.c:143 src/boxes.c:278 src/boxes.c:378 src/boxes.c:465 src/boxes.c:644 src/boxes.c:764 src/boxes.c:818 src/boxes.c:929 src/file.c:1973 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
 msgid "&Ok"
 msgstr ""
 
-#: src/boxes.c:186
+#: src/boxes.c:191
 msgid "Listing mode"
 msgstr ""
 
-#: src/boxes.c:275
+#: src/boxes.c:280
 msgid "&Reverse"
 msgstr ""
 
-#: src/boxes.c:276
+#: src/boxes.c:281
 msgid "case sensi&tive"
 msgstr ""
 
-#: src/boxes.c:277
+#: src/boxes.c:282
 msgid "Sort order"
 msgstr ""
 
-#: src/boxes.c:376
+#: src/boxes.c:381
 msgid " confirm &Exit "
 msgstr ""
 
-#: src/boxes.c:378
+#: src/boxes.c:383
 msgid " confirm e&Xecute "
 msgstr ""
 
-#: src/boxes.c:380
+#: src/boxes.c:385
 msgid " confirm o&Verwrite "
 msgstr ""
 
-#: src/boxes.c:382
+#: src/boxes.c:387
 msgid " confirm &Delete "
 msgstr ""
 
-#: src/boxes.c:388
+#: src/boxes.c:393
 msgid " Confirmation "
 msgstr ""
 
-#: src/boxes.c:455
+#: src/boxes.c:460
 msgid "Full 8 bits output"
 msgstr ""
 
-#: src/boxes.c:455
+#: src/boxes.c:460
 msgid "ISO 8859-1"
 msgstr ""
 
-#: src/boxes.c:455
+#: src/boxes.c:460
 msgid "7 bits"
 msgstr ""
 
-#: src/boxes.c:462
+#: src/boxes.c:467
 msgid "F&ull 8 bits input"
 msgstr ""
 
-#: src/boxes.c:470
+#: src/boxes.c:475
 msgid " Display bits "
 msgstr ""
 
-#: src/boxes.c:634
+#: src/boxes.c:639
 msgid "Always to memory"
 msgstr ""
 
-#: src/boxes.c:634
+#: src/boxes.c:639
 msgid "If size less than:"
 msgstr ""
 
-#: src/boxes.c:644
+#: src/boxes.c:649
 msgid "&Always use ftp proxy"
 msgstr ""
 
-#: src/boxes.c:646
+#: src/boxes.c:651
 msgid "sec"
 msgstr ""
 
-#: src/boxes.c:650
+#: src/boxes.c:655
 msgid "ftpfs directory cache timeout:"
 msgstr ""
 
-#: src/boxes.c:654
+#: src/boxes.c:659
 msgid "ftp anonymous password:"
 msgstr ""
 
-#: src/boxes.c:661
+#: src/boxes.c:666
 msgid "Gzipped tar archive extract:"
 msgstr ""
 
-#: src/boxes.c:667
+#: src/boxes.c:672
 msgid "Timeout for freeing VFSs:"
 msgstr ""
 
-#: src/boxes.c:673
+#: src/boxes.c:678
 msgid " Virtual File System Setting "
 msgstr ""
 
-#: src/boxes.c:771
+#: src/boxes.c:776
 msgid "Quick cd"
 msgstr ""
 
 #. want cd like completion
-#: src/boxes.c:776
+#: src/boxes.c:781
 msgid "cd"
 msgstr ""
 
-#: src/boxes.c:831
+#: src/boxes.c:836
 msgid "Symbolic link filename:"
 msgstr ""
 
-#: src/boxes.c:833
+#: src/boxes.c:838
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: src/boxes.c:862
+#: src/boxes.c:867
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:863 src/find.c:664
+#: src/boxes.c:868 src/find.c:664
 msgid "Stopped"
 msgstr ""
 
-#: src/boxes.c:921
+#: src/boxes.c:926
 msgid "&Stop"
 msgstr ""
 
-#: src/boxes.c:922
+#: src/boxes.c:927
 msgid "&Resume"
 msgstr ""
 
-#: src/boxes.c:923
+#: src/boxes.c:928
 msgid "&Kill"
 msgstr ""
 
-#: src/boxes.c:962
+#: src/boxes.c:967
 msgid "Background Jobs"
 msgstr ""
 
@@ -3204,7 +3208,7 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1288 src/screen.c:667
+#: gnome/gscreen.c:1466 src/screen.c:667
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3216,7 +3220,7 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:274 gnome/gscreen.c:452 src/screen.c:2207 src/screen.c:2241
+#: gnome/glayout.c:274 gnome/gscreen.c:494 src/screen.c:2207 src/screen.c:2241
 msgid "View"
 msgstr ""
 
@@ -3728,7 +3732,7 @@ msgstr ""
 msgid "Do you want to delete "
 msgstr ""
 
-#: gnome/gdesktop.c:1008 gnome/gscreen.c:448
+#: gnome/gdesktop.c:1008 gnome/gscreen.c:490
 msgid "Properties"
 msgstr ""
 
@@ -3736,7 +3740,7 @@ msgstr ""
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1128 gnome/gscreen.c:400
+#: gnome/gdesktop.c:1128 gnome/gscreen.c:442
 msgid "Enter extra arguments:"
 msgstr ""
 
@@ -3752,7 +3756,7 @@ msgstr ""
 msgid "Opens a terminal"
 msgstr ""
 
-#: gnome/glayout.c:269 gnome/gscreen.c:467
+#: gnome/glayout.c:269 gnome/gscreen.c:509
 msgid "Copy..."
 msgstr ""
 
@@ -3776,7 +3780,7 @@ msgstr ""
 msgid "Creates a new folder"
 msgstr ""
 
-#: gnome/glayout.c:272 gnome/gscreen.c:469
+#: gnome/glayout.c:272 gnome/gscreen.c:511
 msgid "Delete..."
 msgstr ""
 
@@ -4073,115 +4077,115 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:399
+#: gnome/gscreen.c:441
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:450
+#: gnome/gscreen.c:492
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:451
+#: gnome/gscreen.c:493
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:453
+#: gnome/gscreen.c:495
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:455
+#: gnome/gscreen.c:497
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:456
+#: gnome/gscreen.c:498
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:457
+#: gnome/gscreen.c:499
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:468
+#: gnome/gscreen.c:510
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:1096
+#: gnome/gscreen.c:1274
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1098
+#: gnome/gscreen.c:1276
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1100
+#: gnome/gscreen.c:1278
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1102
+#: gnome/gscreen.c:1280
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1104
+#: gnome/gscreen.c:1282
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1106
+#: gnome/gscreen.c:1284
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1108
+#: gnome/gscreen.c:1286
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1110
+#: gnome/gscreen.c:1288
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1113
+#: gnome/gscreen.c:1291
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1115
+#: gnome/gscreen.c:1293
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1117
+#: gnome/gscreen.c:1295
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1119
+#: gnome/gscreen.c:1297
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1121
+#: gnome/gscreen.c:1299
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1123
+#: gnome/gscreen.c:1301
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1125
+#: gnome/gscreen.c:1303
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1127
+#: gnome/gscreen.c:1305
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1129
+#: gnome/gscreen.c:1307
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1254
+#: gnome/gscreen.c:1432
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1264
+#: gnome/gscreen.c:1442
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1334
+#: gnome/gscreen.c:1517
 msgid "Filter"
 msgstr ""
 

@@ -33,6 +33,7 @@
 #define PORT_HAS_RADIO_TOGGLE            1
 #define PORT_DOES_BACKGROUND_EXEC        1
 #define PORT_HAS_UPDATE_PANELS           1
+#define PORT_HAS_ICON_VIEW               1
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

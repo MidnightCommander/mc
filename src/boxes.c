@@ -50,6 +50,7 @@
 #include "tree.h"
 #include "layout.h"		/* for get_nth_panel_name proto */
 #include "background.h"		/* for background definitions */
+#include "x.h"
 
 static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
@@ -67,8 +68,13 @@ static char* display_title = N_(" Listing mode ");
 /* Controls whether the array strings have been translated */
 static int i18n_displays_flag;
 static char *displays [LIST_TYPES] = {
-    N_("&Full file list"), N_("&Brief file list"), N_("&Long file list"),
-    N_("&User defined:")
+    N_("&Full file list"),
+    N_("&Brief file list"),
+    N_("&Long file list"),
+    N_("&User defined:"),
+#ifdef PORT_HAS_ICON_VIEW
+    N_("&Icon view")
+#endif
 };
 
 static int user_hotkey = 'u';

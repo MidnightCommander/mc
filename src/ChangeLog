@@ -1,3 +1,8 @@
+1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* setup.c (panel_load_setup): On non-icon editions, fall back to
+	list_full 
+
 Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* widget.c (handle_char): Don't try to to delete default text in

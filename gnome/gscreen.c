@@ -1561,14 +1561,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
-	panel->list_type = list_icons;
-	printf ("\n\n          ***  NOTICE  ***\n\n\n"
-		"   You are running a version of GNOME/mc with a hardcoded\n"
-		"   value for running in the under-development icon-view mode.\n"
-		"   To fix this you have to edit gnome/gscreen.c around line %d \n"
-		"   and remove the line that reads: panel->list_type = list_icons\n\n"
-		"   You can alternatively wait for me to finish this.\n", __LINE__ -6);
-
 	panel->icons = panel_create_icon_display (panel);
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
@@ -1721,7 +1713,18 @@ paint_frame (WPanel *panel)
 void
 x_reset_sort_labels (WPanel *panel)
 {
-	panel_switch_new_display_mode (panel);
+	if (panel->list_type == list_icons){
+		if (panel->icons)
+			gtk_widget_show (panel->icons);
+		if (panel->list)
+			gtk_widget_hide (panel->list);
+	} else {
+		panel_switch_new_display_mode (panel);
+		if (panel->list)
+			gtk_widget_show (panel->list);
+		if (panel->icons)
+			gtk_widget_hide (panel->icons);
+	}
 }
 
 /* Releases all of the X resources allocated */

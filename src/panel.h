@@ -5,7 +5,7 @@
 #include "dlg.h"
 #include "widget.h"	/* for history loading and saving */
 
-#define LIST_TYPES	4
+#define LIST_TYPES	5
 
 enum list_types {
     list_full,			/* Name, size, perm/date */
