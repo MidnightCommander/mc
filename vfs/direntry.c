@@ -798,7 +798,7 @@ vfs_s_read (void *fh, char *buffer, int count)
 }
 
 static int
-vfs_s_write (void *fh, char *buffer, int count)
+vfs_s_write (void *fh, const char *buffer, int count)
 {
     int n;
     struct vfs_class *me = FH_SUPER->me;

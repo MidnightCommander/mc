@@ -358,14 +358,14 @@ smbfs_read (void *data, char *buffer, int count)
 }
 
 static int
-smbfs_write (void *data, char *buf, int nbyte)
+smbfs_write (void *data, const char *buf, int nbyte)
 {
     smbfs_handle *info = (smbfs_handle *) data;
 	int n;
 
 	DEBUG(3, ("smbfs_write(fnum:%d, nread:%d, nbyte:%d)\n",
 		info->fnum, (int)info->nread, nbyte));
-	n = cli_write(info->cli, info->fnum, 0, buf, info->nread, nbyte);
+	n = cli_write(info->cli, info->fnum, 0, const_cast(char *, buf), info->nread, nbyte);
 	if (n > 0)
 		info->nread += n;
     return n;

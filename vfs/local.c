@@ -165,7 +165,7 @@ local_symlink (struct vfs_class *me, char *n1, char *n2)
 }
 
 static int
-local_write (void *data, char *buf, int nbyte)
+local_write (void *data, const char *buf, int nbyte)
 {
     int fd;
     int n;

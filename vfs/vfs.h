@@ -33,7 +33,7 @@ struct vfs_class {
 		   int mode);
     int (*close) (void *vfs_info);
     int (*read) (void *vfs_info, char *buffer, int count);
-    int (*write) (void *vfs_info, /*FIXME:const*/ char *buf, int count);
+    int (*write) (void *vfs_info, const char *buf, int count);
 
     void *(*opendir) (struct vfs_class *me, const char *dirname);
     void *(*readdir) (void *vfs_info);

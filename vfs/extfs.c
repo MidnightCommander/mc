@@ -996,7 +996,7 @@ static int extfs_chmod (struct vfs_class *me, char *path, int mode)
     return 0;
 }
 
-static int extfs_write (void *data, char *buf, int nbyte)
+static int extfs_write (void *data, const char *buf, int nbyte)
 {
     struct pseudofile *file = (struct pseudofile *)data;
 

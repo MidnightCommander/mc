@@ -566,7 +566,7 @@ mcfs_read (void *data, char *buffer, int count)
 }
 
 static int
-mcfs_write (void *data, char *buf, int nbyte)
+mcfs_write (void *data, const char *buf, int nbyte)
 {
     mcfs_handle *info = (mcfs_handle *) data;
     mcfs_connection *mc;
