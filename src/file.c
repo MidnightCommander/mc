@@ -1581,18 +1581,6 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
     return NULL;
 }
 
-int
-is_wildcarded (char *p)
-{
-    for (; *p; p++) {
-	if (*p == '*')
-	    return 1;
-	else if (*p == '\\' && p[1] >= '1' && p[1] <= '9')
-	    return 1;
-    }
-    return 0;
-}
-
 /**
  * compute_dir_size:
  *

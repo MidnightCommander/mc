@@ -1,3 +1,8 @@
+2002-12-07  Pavel Roskin  <proski@gnu.org>
+
+	* file.c (is_wildcarded): Move ...
+	* filegui.c: ... here.  Make static.
+
 2002-12-01  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (do_edit_at_line): Set line to 0 to allow the editor to

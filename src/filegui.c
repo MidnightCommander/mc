@@ -82,7 +82,6 @@
 #include "main.h"		/* the_hint */
 #include "wtools.h"		/* QuickDialog */
 #include "panel.h"		/* cpanel */
-#include "file.h"		/* is_wildcarded */
 #include "filegui.h"
 #include "fileopctx.h"		/* FILE_CONT */
 #include "key.h"		/* get_event */
@@ -787,6 +786,18 @@ static QuickWidget fmd_widgets[] = {
      0 /* &dive_into_subdirs */ , 0, "dive"},
     {0}
 };
+
+static int
+is_wildcarded (char *p)
+{
+    for (; *p; p++) {
+	if (*p == '*')
+	    return 1;
+	else if (*p == '\\' && p[1] >= '1' && p[1] <= '9')
+	    return 1;
+    }
+    return 0;
+}
 
 void
 fmd_init_i18n (int force)
