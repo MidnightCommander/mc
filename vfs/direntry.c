@@ -997,10 +997,9 @@ vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
  * the cache will be removed when the archive is closed.
  */
 static int
-vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
-		      int has_changed)
+vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path,
+		      const char *local, int has_changed)
 {
-    g_free (local);
     return 0;
 }
 

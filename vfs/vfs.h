@@ -72,7 +72,7 @@ struct vfs_class {
 
     char *(*getlocalcopy) (struct vfs_class *me, const char *filename);
     int (*ungetlocalcopy) (struct vfs_class *me, const char *filename,
-			   char *local, int has_changed);
+			   const char *local, int has_changed);
 
     int (*mkdir) (struct vfs_class *me, char *path, mode_t mode);
     int (*rmdir) (struct vfs_class *me, char *path);

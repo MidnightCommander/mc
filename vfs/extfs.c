@@ -191,7 +191,7 @@ static void extfs_free_archive (struct archive *archive)
         mc_stat (archive->local_name, &my);
         mc_ungetlocalcopy (archive->name, archive->local_name, 
             archive->local_stat.st_mtime != my.st_mtime);
-        /* ungetlocalcopy frees local_name for us */
+        /* mc_ungetlocalcopy() frees local_name for us */
     }
     if (archive->name)
 	g_free (archive->name);
@@ -1254,8 +1254,8 @@ extfs_getlocalcopy (struct vfs_class *me, const char *path)
 }
 
 static int
-extfs_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
-		      int has_changed)
+extfs_ungetlocalcopy (struct vfs_class *me, const char *path,
+		      const char *local, int has_changed)
 {
     struct pseudofile *fp =
 	(struct pseudofile *) extfs_open (me, path, O_RDONLY, 0);

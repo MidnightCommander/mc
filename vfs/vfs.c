@@ -1081,7 +1081,7 @@ mc_getlocalcopy (const char *pathname)
 
 static int
 mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
-		       char *local, int has_changed)
+		       const char *local, int has_changed)
 {
     int fdin = -1, fdout = -1, i;
     if (has_changed) {
@@ -1114,7 +1114,6 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
 	}
     }
     unlink (local);
-    g_free (local);
     return 0;
 
   failed:
@@ -1124,7 +1123,6 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
     if (fdin != -1)
 	close (fdin);
     unlink (local);
-    g_free (local);
     return -1;
 }
 
@@ -1139,6 +1137,7 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
             mc_def_ungetlocalcopy (vfs, path, local, has_changed);
     g_free (path);
+    g_free (local);
     return return_value;
 }
 
