@@ -5859,7 +5859,7 @@ msgstr "Sto risolvendo il collegamenti simbolici..."
 #: vfs/ftpfs.c:1323
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-msgstr "ftpds: Lettura directory  FTP %s... (non uso le opszioni ls UNIX)"
+msgstr "ftpds: Lettura directory  FTP %s... (opzioni ls UNIX non usate)"
 
 #: vfs/ftpfs.c:1325
 #, c-format
