@@ -235,7 +235,7 @@ toggle_panels (void)
 		     _("Type `exit' to return to the Midnight Commander"));
 	    fprintf (stderr, "\n\r\n\r");
 
-	    my_system (EXECUTE_AS_SHELL, shell, NULL);
+	    my_system (EXECUTE_INTERNAL, shell, NULL);
 	} else
 	    get_key_code (0);
     }

@@ -919,7 +919,7 @@ view_other_cmd (void)
 {
     static int message_flag = TRUE;
 
-    if (!xterm_flag && !console_flag && !use_subshell) {
+    if (!xterm_flag && !console_flag && !use_subshell && !output_starts_shell) {
 	if (message_flag)
 	    message (1, MSG_ERROR,
 		     _(" Not an xterm or Linux console; \n"

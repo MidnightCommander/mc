@@ -1,3 +1,11 @@
+2004-09-12  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* execute.c (toggle_panels): Fix error. show_output_starts_shell=1
+	is not working
+	* cmd.c (view_other_cmd): Likewise.
+
+	From Petr Hadraba <hadrabap@volny.cz>
+
 2004-09-10  Jakub Jelinek  <jakub@redhat.com>
 
 	* view.c (get_byte): Fix avoid dying if file is too large 
