@@ -1,3 +1,7 @@
+2004-11-02  Roland Illig  <roland.illig@gmx.de>
+
+	* ftpfs.c: Add fallback to type int if socklen_t is not provided.
+
 2004-11-01  Andriy Gritsenko <andrej * rep kiev ua>
 
 	* tar.c (tar_read_header): Fix pathname canonicalization.
