@@ -181,7 +181,7 @@ msgid ""
 msgstr ""
 "Inserisci qui un filtro per i files nella vista pannello.\n"
 "\n"
-"Per esempio:\n" 
+"Per esempio:" 
 
 #: gnome/gcmd.c:604
 msgid "Enter a Regular Expression to filter files in the panel view."
