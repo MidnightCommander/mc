@@ -225,7 +225,11 @@ EXTFS_IN    = 			\
 	uzip.in
 
 EXTFS_OUT = 			\
+	apt			\
 	deb 			\
+	deba			\
+	debd			\
+	dpkg			\
 	lslR 			\
 	ucpio 			\
 	urar 			\
