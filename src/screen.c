@@ -308,7 +308,7 @@ string_file_perm_octal (file_entry *fe, int len)
 {
     static char buffer [10];
 
-    g_snprintf (buffer, sizeof (buffer), "0%06o", fe->st.st_mode);
+    g_snprintf (buffer, sizeof (buffer), "0%06lo", (unsigned long) fe->st.st_mode);
     return buffer;
 }
 
