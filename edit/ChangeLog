@@ -1,5 +1,8 @@
 2002-11-29  Pavel Roskin  <proski@gnu.org>
 
+	* editoptions.c (edit_options_dialog): Add "Save file position"
+	option, make "Syntax highlighting" unconditional.
+
 	* edit.c: First part of the position saving code.
 	(edit_move_to_column): New function.
 
