@@ -859,7 +859,7 @@ int get_compression_type (int fd)
     unsigned char magic[4];
 
     /* Read the magic signature */
-    if (mc_read (fd, &magic[0], 4) != 4)
+    if (mc_read (fd, (char *) magic, 4) != 4)
 	return COMPRESSION_NONE;
 
     /* GZIP_MAGIC and OLD_GZIP_MAGIC */
@@ -872,7 +872,7 @@ int get_compression_type (int fd)
 	&& magic[3] == 004) {
 	/* Read compression type */
 	mc_lseek (fd, 8, SEEK_SET);
-	if (mc_read (fd, &magic[0], 2) != 2)
+	if (mc_read (fd, (char *) magic, 2) != 2)
 	    return COMPRESSION_NONE;
 
 	/* Gzip can handle only deflated (8) or stored (0) files */

@@ -1,6 +1,8 @@
 2003-01-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* util.h (app_text): Remove declaration - it became static.
+	* util.c (get_compression_type): Cast magic to char * to
+	fix compilation on AIX.
 	* mountlist.c (read_filesystem_list) [MOUNTED_GETMNTENT1]:
 	Check for MOUNTED is defined to fix compilation on AIX.
 	Reported by Alexander Varakin <avarakin00@hotmail.com>.
