@@ -272,9 +272,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
      
 #define get_sys_error(s) (s)
 
-#define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
-#define edit_get_save_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
-     
 #define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
 
 #define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, _("&OK"))

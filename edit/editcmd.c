@@ -39,6 +39,9 @@
 #include "src/wtools.h"		/* message() */
 #include "src/charsets.h"
 
+#define edit_get_load_file(f,h) input_dialog (h, _(" Enter file name: "), f)
+#define edit_get_save_file(f,h) input_dialog (h, _(" Enter file name: "), f)
+
 /* globals: */
 
 /* search and replace: */
@@ -407,13 +410,14 @@ void edit_split_filename (WEdit * edit, const char *f)
 /* Here we want to warn the users of overwriting an existing file,
    but only if they have made a change to the filename */
 /* returns 1 on success */
-int edit_save_as_cmd (WEdit * edit)
+int
+edit_save_as_cmd (WEdit *edit)
 {
-/* This heads the 'Save As' dialog box */
+    /* This heads the 'Save As' dialog box */
     char *exp = 0;
     int different_filename = 0;
 
-    exp = edit_get_save_file (edit->dir, edit->filename, _(" Save As "));
+    exp = edit_get_save_file (edit->filename, _(" Save As "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 
     if (exp) {
@@ -422,15 +426,17 @@ int edit_save_as_cmd (WEdit * edit)
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
-	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
+	    if (strcmp (catstrs (edit->dir, edit->filename, 0), exp)) {
 		int file;
 		different_filename = 1;
-		if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1) {	/* the file exists */
+		if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1) {
+		    /* the file exists */
 		    mc_close (file);
-		    if (edit_query_dialog2 (_("Warning"), 
-		    _(" A file already exists with this name. "), 
-/* Push buttons to over-write the current file, or cancel the operation */
-		    _("Overwrite"), _("Cancel"))) {
+		    /* Overwrite the current file or cancel the operation */
+		    if (edit_query_dialog2
+			(_("Warning"),
+			 _(" A file already exists with this name. "),
+			 _("Overwrite"), _("Cancel"))) {
 			edit->force |= REDRAW_COMPLETELY;
 			g_free (exp);
 			return 0;
@@ -441,14 +447,16 @@ int edit_save_as_cmd (WEdit * edit)
 		edit_split_filename (edit, exp);
 		g_free (exp);
 		edit->modified = 0;
-	        edit->delete_file = 0;
+		edit->delete_file = 0;
 		if (different_filename && !edit->explicit_syntax)
 		    edit_load_syntax (edit, 0, 0);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
 		g_free (exp);
-		edit_error_dialog (_(" Save As "), get_sys_error (_(" Error trying to save file. ")));
+		edit_error_dialog (_(" Save As "),
+				   get_sys_error (_
+						  (" Error trying to save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
@@ -734,18 +742,23 @@ edit_load_file_from_filename (WEdit * edit, char *exp)
     return 0;
 }
 
-int edit_load_cmd (WEdit * edit)
+int
+edit_load_cmd (WEdit *edit)
 {
     char *exp;
 
     if (edit->modified) {
-	if (edit_query_dialog2 (_ ("Warning"), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	if (edit_query_dialog2
+	    (_("Warning"),
+	     _(" Current text was modified without a file save. \n"
+	       " Continue discards these changes. "), _("Continue"),
+	     _("Cancel"))) {
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	}
     }
 
-    exp = edit_get_load_file (edit->dir, edit->filename, _ (" Load "));
+    exp = edit_get_load_file (edit->filename, _(" Load "));
 
     if (exp) {
 	if (*exp)
@@ -2109,14 +2122,17 @@ void edit_goto_cmd (WEdit *edit)
     }
 }
 
-/*returns 1 on success */
-int edit_save_block_cmd (WEdit * edit)
+/* Return 1 on success */
+int
+edit_save_block_cmd (WEdit *edit)
 {
     long start_mark, end_mark;
     char *exp;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
-    exp = edit_get_save_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _ (" Save Block "));
+    exp =
+	edit_get_save_file (catstrs (home_dir, CLIP_FILE, 0),
+			    _(" Save Block "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2129,7 +2145,9 @@ int edit_save_block_cmd (WEdit * edit)
 		return 1;
 	    } else {
 		g_free (exp);
-		edit_error_dialog (_ (" Save Block "), get_sys_error (_ (" Error trying to save file. ")));
+		edit_error_dialog (_(" Save Block "),
+				   get_sys_error (_
+						  (" Error trying to save file. ")));
 	    }
 	}
     }
@@ -2142,9 +2160,8 @@ int edit_save_block_cmd (WEdit * edit)
 int
 edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp =
-	edit_get_load_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0),
-			    _(" Insert File "));
+    char *exp = edit_get_load_file (catstrs (home_dir, CLIP_FILE, 0),
+				    _(" Insert File "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {

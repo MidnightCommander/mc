@@ -1,5 +1,9 @@
 2002-11-30  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (edit_get_save_file): Remove first argument, it's
+	unused.
+	(edit_get_save_file): Likewise.
+
 	* syntax.c: Make structures key_word, context_rule and
 	_syntax_marker opaque.
 
