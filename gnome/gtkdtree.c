@@ -1,5 +1,5 @@
 /*
- * GtkDTree: A directory tree view 
+ * GtkDTree: A directory tree view
  *
  * Original version by Daniel Lacroix (LACROIX@wanadoo.fr)
  *
@@ -38,7 +38,7 @@ enum {
 	LAST_SIGNAL
 };
 
-static guint gtk_dtree_signals [LAST_SIGNAL] = { 0 };
+static guint gtk_dtree_signals[LAST_SIGNAL] = { 0 };
 
 char *
 gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
@@ -68,11 +68,11 @@ gtk_dtree_get_row_path (GtkDTree *dtree, GtkCTreeNode *row, gint column)
 		row = GTK_CTREE_ROW (row)->parent;
 	} while (row);
 
-	if (path [0] && path [1]){
+	if (path[0] && path[1]) {
 		int l = strlen (path);
-		
-		if (path [l-1] == '/')
-			path [l-1] = 0;
+
+		if (path[l - 1] == '/')
+			path[l - 1] = 0;
 	}
 	return path;
 }
@@ -88,7 +88,7 @@ gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 
 	node = GTK_CTREE_ROW (parent)->children;
 
-	for (; node && GTK_CTREE_ROW (node)->parent == parent;){
+	for (; node && GTK_CTREE_ROW (node)->parent == parent;) {
 		char *s;
 
 		gtk_ctree_node_get_pixtext (GTK_CTREE (dtree), node, 0, &s, NULL, NULL, NULL);
@@ -105,9 +105,9 @@ gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 static GtkCTreeNode *
 gtk_dtree_insert_node (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 {
-	char *texts [1];
+	char *texts[1];
 
-	texts [0] = text;
+	texts[0] = text;
 
 	return gtk_ctree_insert_node (GTK_CTREE (dtree), parent, NULL,
 				      texts, TREE_SPACING,
@@ -130,7 +130,7 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	g_assert (parent);
 	g_assert (dtree);
 
-        if (mc_stat (path, &dir_stat)){
+        if (mc_stat (path, &dir_stat)) {
 		return FALSE;
         }
         if (!S_ISDIR(dir_stat.st_mode))
@@ -149,14 +149,14 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 		return TRUE;
         }
 #endif
-	
+
 	dir = tree_store_opendir (path);
-	if (!dir){
+	if (!dir) {
 		dtree->loading_dir--;
 		return FALSE;
 	}
 
-	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
+	while ((dirent = tree_store_readdir (dir)) != NULL) {
 		GtkCTreeNode *sibling;
 		char *text;
 
@@ -226,8 +226,6 @@ scan_subtree (GtkDTree *dtree, GtkCTreeNode *row)
 
 	dtree->loading_dir--;
 	scan_end (dtree);
-
-	return TRUE;
 }
 
 static void
@@ -254,7 +252,7 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	scan_subtree (dtree, row);
 
 	if (!dtree->internal)
-		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals [DIRECTORY_CHANGED],
+		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[DIRECTORY_CHANGED],
 				 dtree->current_path);
 
 	scan_end (dtree);
@@ -271,10 +269,10 @@ gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 
 	node = GTK_CTREE_ROW (parent)->children;
 
-	while (node){
+	while (node) {
 		char *text;
 
-		if (GTK_CTREE_ROW (node)->parent == parent){
+		if (GTK_CTREE_ROW (node)->parent == parent) {
 			gtk_ctree_node_get_pixtext (
 				GTK_CTREE (dtree), node, 0, &text,
 				NULL, NULL, NULL);
@@ -309,7 +307,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	npath = g_strdup ("/");
 
 	dtree->internal = 1;
-	while ((current = strtok (s, "/")) != NULL){
+	while ((current = strtok (s, "/")) != NULL) {
 		char *full_path;
 		GtkCTreeNode *node;
 
@@ -319,13 +317,13 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 		npath = full_path;
 
 		node = gtk_dtree_lookup_dir (dtree, current_node, current);
-		if (!node){
+		if (!node) {
 			gtk_dtree_load_path (dtree, full_path, current_node, 1);
 
 			node = gtk_dtree_lookup_dir (dtree, current_node, current);
 		}
 
-		if (node){
+		if (node) {
 			gtk_ctree_expand (GTK_CTREE (dtree), node);
 			current_node = node;
 		} else
@@ -333,19 +331,19 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
 	}
         g_free (npath);
 
-	if (current_node){
+	if (current_node) {
 		gtk_ctree_select (GTK_CTREE (dtree), current_node);
-		if (gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node) != GTK_VISIBILITY_FULL){
+		if (gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node)
+		    != GTK_VISIBILITY_FULL)
 			gtk_ctree_node_moveto (GTK_CTREE (dtree), current_node, 0, 0.5, 0.0);
-		}
-
 	}
-	if (dtree->current_path){
+
+	if (dtree->current_path) {
 		g_free (dtree->current_path);
 		dtree->current_path = g_strdup (path);
 	}
 
-	if (dtree->requested_path){
+	if (dtree->requested_path) {
 		g_free (dtree->requested_path);
 		dtree->requested_path = NULL;
 	}
@@ -361,7 +359,7 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
  * @path:  The path we want loaded into the tree
  *
  * Attemps to open all of the tree notes until
- * path is reached.  It takes a fully qualified 
+ * path is reached.  It takes a fully qualified
  * pathname.
  *
  * Returns: TRUE if it succeeded, otherwise, FALSE
@@ -406,7 +404,7 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	if (!dtree->requested_path)
 		return;
 
-	if (strcmp (dtree->current_path, dtree->requested_path) == 0){
+	if (strcmp (dtree->current_path, dtree->requested_path) == 0) {
 		g_free (dtree->requested_path);
 		dtree->requested_path = NULL;
 		return;
@@ -477,13 +475,13 @@ entry_removed_callback (tree_entry *tree, void *data)
 	copy = dirname = g_strdup (tree->name);
 	copy++;
 	current_node = dtree->root_node;
-	while ((current = strtok (copy, "/")) != NULL){
+	while ((current = strtok (copy, "/")) != NULL) {
 		current_node = gtk_dtree_lookup_dir (dtree, current_node, current);
 		if (!current_node)
 			break;
 		copy = NULL;
 	}
-	if (current == NULL && current_node){
+	if (current == NULL && current_node) {
 		dtree->removing_rows = 1;
 		gtk_ctree_remove_node (GTK_CTREE (data), current_node);
 		dtree->removing_rows = 0;
@@ -513,13 +511,13 @@ entry_added_callback (char *dirname, void *data)
 	copy++;
 	current_node = dtree->root_node;
 	npath = g_strdup ("/");
-	while ((current = strtok (copy, "/")) != NULL){
+	while ((current = strtok (copy, "/")) != NULL) {
 		full_path = g_concat_dir_and_file (npath, current);
 		g_free (npath);
 		npath = full_path;
 
 		new_node = gtk_dtree_lookup_dir (dtree, current_node, current);
-		if (!new_node){
+		if (!new_node) {
 			GtkCTreeNode *sibling;
 
 			sibling = gtk_dtree_insert_node (dtree, current_node, current);
@@ -567,7 +565,7 @@ gtk_dtree_destroy (GtkObject *object)
 
 	if (dtree->requested_path)
 		g_free (dtree->requested_path);
-	
+
 	(GTK_OBJECT_CLASS (parent_class))->destroy (object);
 }
 
@@ -617,7 +615,7 @@ gtk_dtree_class_init (GtkDTreeClass *klass)
 static void
 gtk_dtree_load_root_tree (GtkDTree *dtree)
 {
-	char *root_dir [1] = { "/" };
+	char *root_dir[1] = { "/" };
 
 	g_assert (dtree);
 
@@ -642,8 +640,8 @@ gtk_dtree_load_root_tree (GtkDTree *dtree)
 
 	/* Set current_path to "/" */
 	dtree->current_path = g_malloc (2);
-	dtree->current_path [0] = '/';
-	dtree->current_path [1] = 0;
+	dtree->current_path[0] = '/';
+	dtree->current_path[1] = 0;
 
 	/* Select root node */
 	gtk_ctree_select (GTK_CTREE (dtree), dtree->root_node);
@@ -652,7 +650,7 @@ gtk_dtree_load_root_tree (GtkDTree *dtree)
 }
 
 static void
-gtk_dtree_load_pixmap (char *pix [], GdkPixmap **pixmap, GdkBitmap **bitmap)
+gtk_dtree_load_pixmap (char *pix[], GdkPixmap **pixmap, GdkBitmap **bitmap)
 {
 	GdkImlibImage *image;
 
@@ -696,7 +694,7 @@ gtk_dtree_save_tree (void)
 static void
 gtk_dtree_dirty_notify (int state)
 {
-	if (dirty_tag != -1){
+	if (dirty_tag != -1) {
 		if (state)
 			return;
 		else {
@@ -750,7 +748,7 @@ gtk_dtree_construct (GtkDTree *dtree)
 
 	gdk_dtree_load_pixmaps (dtree);
 	gtk_dtree_load_root_tree (dtree);
-	
+
 }
 
 GtkWidget *
@@ -794,11 +792,11 @@ gtk_dtree_get_type (void)
  * @dtree: A tree
  * @node: The presumed ancestor node
  * @child: The presumed child node
- * 
+ *
  * Tests whether a node is an ancestor of a child node.  This does this in
  * O(height of child), instead of O(number of children in node), like GtkCTree
  * does.
- * 
+ *
  * Return value: TRUE if the node is an ancestor of the child, FALSE otherwise.
  **/
 gboolean

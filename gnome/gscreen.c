@@ -27,6 +27,7 @@
 #include "dir.h"
 #include "dialog.h"
 #include "setup.h"
+#include "file.h"
 #include "fileopctx.h"
 #include "gdesktop.h"
 #include "gdnd.h"
@@ -1431,20 +1432,54 @@ queue_reread_cmd (gpointer data)
 	return FALSE;
 }
 
+/* Renames a file using a file operation context.  Returns FILE_CONT on success. */
+int
+rename_file_with_context (char *source, char *dest)
+{
+	FileOpContext *ctx;
+	struct stat s;
+	long count;
+	double bytes;
+	int retval;
+
+	if (mc_lstat (source, &s) != 0)
+		return FILE_ABORT;
+
+	ctx = file_op_context_new ();
+	file_op_context_create_ui (ctx, OP_MOVE, FALSE);
+
+	count = 1;
+	bytes = s.st_size;
+
+	retval = move_file_file (ctx, source, dest, &count, &bytes);
+	file_op_context_destroy (ctx);
+
+	return retval;
+}
+
 static int
 panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 {
 	char *source;
+	char *fullname;
+	int retval;
 
-	source = panel->dir.list [index].fname;
-	if (mc_rename (source, dest) == 0){
+	source = g_concat_dir_and_file (cpanel->cwd, panel->dir.list [index].fname);
+	fullname = g_concat_dir_and_file (cpanel->cwd, dest);
+
+	if (rename_file_with_context (source, dest) == FILE_CONT) {
 		g_free (panel->dir.list [index].fname);
 		panel->dir.list [index].fname = g_strdup (dest);
 
 		gtk_idle_add (queue_reread_cmd, NULL);
-		return TRUE;
+		retval = TRUE;
 	} else
-		return FALSE;
+		retval = FALSE;
+
+	g_free (source);
+	g_free (fullname);
+
+	return retval;
 }
 
 /* Callback for rescanning the cwd */

@@ -915,31 +915,6 @@ set_icon_wmclass (DesktopIconInfo *dii)
 	XFree (h);
 }
 
-/* Renames a file using a file operation context */
-static int
-try_rename (char *source, char *dest)
-{
-	FileOpContext *ctx;
-	struct stat s;
-	long count;
-	double bytes;
-	int retval;
-
-	if (mc_lstat (source, &s) != 0)
-		return FILE_ABORT;
-
-	ctx = file_op_context_new ();
-	file_op_context_create_ui (ctx, OP_MOVE, FALSE);
-
-	count = 1;
-	bytes = s.st_size;
-
-	retval = move_file_file (ctx, source, dest, &count, &bytes);
-	file_op_context_destroy (ctx);
-
-	return retval;
-}
-
 /* Removes the Gtk and Gdk grabs that are present when editing a desktop icon */
 static void
 remove_editing_grab (DesktopIconInfo *dii)
@@ -975,7 +950,7 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 
 		dest = g_concat_dir_and_file (desktop_directory, new_name);
 
-		if (try_rename (source, dest) == FILE_CONT) {
+		if (rename_file_with_context (source, dest) == FILE_CONT) {
 			GList *icons;
 			GList *l;
 

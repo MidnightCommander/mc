@@ -1,5 +1,11 @@
 1999-08-13  Federico Mena Quintero  <federico@redhat.com>
 
+	* gscreen.c (rename_file_with_context): Moved the try_rename()
+	function from gdesktop.c over to here, and renamed it for general
+	use.
+	(panel_icon_renamed): Use rename_file_with_context().  BUGFIX:
+	GNOME bug tracker #1582.
+
 	* gscreen.c (panel_fill_panel_list): Select or unselect the rows
 	as appropriate, not just select them.  This is needed because the
 	clist changes the selection under us when appending rows.

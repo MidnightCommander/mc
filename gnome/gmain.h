@@ -47,6 +47,7 @@ void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
 void gnome_check_super_user (void);
 gint create_new_menu_from (char *file, GtkWidget *shell, gint pos);
+int rename_file_with_context (char *source, char *dest);
 
 /*
  * stuff from gaction.c

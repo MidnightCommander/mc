@@ -20,12 +20,12 @@ typedef struct {
 
 	char         *drag_dir;
         GList        *auto_expanded_nodes;
-	
+
 	GtkCTreeNode *root_node;	/* root node */
 	GtkCTreeNode *last_node;	/* last visited node */
 
 	/* Pixmaps for showing directories */
-	GdkPixmap *pixmap_open;	
+	GdkPixmap *pixmap_open;
 	GdkPixmap *pixmap_close;
 
 	/* Masks */
@@ -40,7 +40,7 @@ typedef struct {
 
 typedef struct {
 	GtkCTreeClass parent_class;
-	
+
 	void (* directory_changed) (GtkDTree *dtree, char *directory);
 	void (* scan_begin) (GtkDTree *dtree);
 	void (* scan_end) (GtkDTree *dtree);
