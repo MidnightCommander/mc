@@ -35,12 +35,17 @@ WPanel *new_panel_at (char *dir);
 WPanel *new_panel_with_geometry_at (char *dir, char *geometry);
 void layout_panel_gone (WPanel *panel);
 void gtkrundlg_event (Dlg_head *h);
-int gmc_open (file_entry *fe);
-int gmc_open_filename (char *fname, GList *args);
-int gmc_edit_filename (char *fname);
-int gmc_view (char *filename, int start_line);
+
 void x_show_info (WInfo *info, struct my_statfs *s, struct stat *b);
 void x_create_info (Dlg_head *h, widget_data parent, WInfo *info);
+
+/*
+ * stuff from gaction.c
+ */
+int gmc_open          (file_entry *fe);
+int gmc_open_filename (char *fname, GList *args);
+int gmc_edit_filename (char *fname);
+int gmc_view          (char *filename, int start_line);
 
 void gmc_window_setup_from_panel (GnomeDialog *dialog, WPanel *panel);
 

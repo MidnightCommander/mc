@@ -1091,9 +1091,21 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 				new_panel_at (point);
 			g_free (point);
 		} else {
-			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe))
-				my_system (EXECUTE_AS_SHELL, shell, filename);
-			else
+			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe)){
+				int needs_terminal = 0;
+				int size;
+				char *buf;
+				
+				if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
+					needs_terminal = strstr (buf, "needsterminal") != 0;
+					
+					g_free (buf);
+				}
+				if (needs_terminal)
+					gnome_open_terminal_with_cmd (filename);
+				else
+					my_system (EXECUTE_AS_SHELL, shell, filename);
+			} else
 				gmc_open_filename (filename, NULL);
 		}
 	}

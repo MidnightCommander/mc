@@ -97,7 +97,7 @@ quote_block (quote_func_t quote_func, char **quoting_block)
 }
 	     
 void
-exec_extension (const char *filename, const char *data, char **drops, int *move_dir, int start_line)
+exec_extension (const char *filename, const char *data, char **drops, int *move_dir, int start_line, int needs_term)
 {
     char *file_name;
     int  cmd_file_fd;
@@ -274,7 +274,14 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     	q[1] = 0;
     	do_cd (p, cd_parse_command);
     } else {
+#ifdef HAVE_GNOME
+	if (needs_term)
+            gnome_open_terminal_with_cmd (file_name);
+	else
+	    shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
+#else
 	shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
+#endif
 	if (console_flag)
 	{
 	    handle_console (CONSOLE_SAVE);
@@ -653,7 +660,7 @@ match_file_output:
     	                if (p < q) { 
 			    char *filename_copy = g_strdup (filename);
 			    
-			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number);
+			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number, 0);
 			    g_free (filename_copy);
 			    
     	                    to_return = "Success";

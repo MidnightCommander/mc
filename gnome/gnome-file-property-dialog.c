@@ -604,6 +604,14 @@ create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
 	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	table = generate_actions_box (fp_dlg);
 	gtk_container_add (GTK_CONTAINER (frame), table);
+
+        frame = gtk_frame_new (_("Open action"));
+	fp_dlg->needs_terminal_check = gtk_check_button_new_with_label (_("Needs terminal to run"));
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (fp_dlg->needs_terminal_check),
+				      fp_dlg->needs_terminal);
+	gtk_container_add (GTK_CONTAINER (frame), fp_dlg->needs_terminal_check);
+	
+	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
 	return vbox;
 }
 
@@ -945,7 +953,7 @@ static void
 init_metadata (GnomeFilePropertyDialog *fp_dlg)
 {
 	gint size;
-	char *mime_type;
+	char *mime_type, *str;
 	gchar link_name[MC_MAXPATHLEN];
 	gint n;
 	gchar *file_name, *desktop_url;
@@ -957,6 +965,15 @@ init_metadata (GnomeFilePropertyDialog *fp_dlg)
 	gnome_metadata_get (fp_dlg->file_name, "edit", &size, &fp_dlg->edit);
 	gnome_metadata_get (fp_dlg->file_name, "drop-target", &size, &fp_dlg->drop_target);
 
+	/*
+	 * Fetch the needs-terminal setting
+	 */
+	if (gnome_metadata_get (fp_dlg->file_name, "flags", &size, &str) == 0){
+		fp_dlg->needs_terminal = strstr (str, "needsterminal") != 0;
+		g_free (str);
+	} else
+		fp_dlg->needs_terminal = 0;  
+	
 	/* Mime stuff */
 	file_name = fp_dlg->file_name;
 	if (S_ISLNK (fp_dlg->st.st_mode)) {
@@ -1276,7 +1293,61 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 		gnome_metadata_set (fpd->file_name, "icon-caption",
 				    strlen (new_caption)+1, new_caption);
 	}
-		
+
+	/*
+	 * "Needs terminal" check button
+	 *
+	 * This piece of code is more complex than it should, as the "flags"
+	 * metadata value is actually a list of comma separated flags.  So
+	 * we need to edit this list when removing the "needsterminal" flag.
+	 */
+	{
+		int toggled = 0 != GTK_TOGGLE_BUTTON (fpd->needs_terminal_check)->active;
+		int size;
+		char *buf;
+
+		if (gnome_metadata_get (fpd->file_name, "flags", &size, &buf) == 0){
+			char *p;
+			
+			p = strstr (buf, "needsterminal");
+			if (toggled){
+				if (!p){
+					p = g_strconcat (buf, ",needsterminal", NULL);
+					gnome_metadata_set (fpd->file_name, "flags", strlen (p)+1, p);
+					g_free (p);
+				}
+			} else {
+				if (p){
+					char *p1, *p2;
+
+					if (p != buf){
+						p1 = g_malloc (p - buf + 1);
+						strncpy (p1, buf, p - buf);
+						p1 [p - buf ] = 0;
+					} else
+						p1 = g_strdup ("");
+
+					p += strlen ("needsterminal");
+
+					p2 = g_strconcat (p1, p, NULL);
+					if (strcmp (p2, ",") == 0)
+						gnome_metadata_remove (fpd->file_name, "flags");
+					else
+						gnome_metadata_set (fpd->file_name, "flags",
+								    strlen (p2)+1, p2);
+					g_free (p2);
+					g_free (p1);
+					
+				}
+			}
+		} else {
+			if (toggled){
+				gnome_metadata_set (fpd->file_name, "flags",
+						    sizeof ("needsterminal"), "needsterminal");
+			} 
+		}
+	}
+	
 	if (!fpd->can_set_icon)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */

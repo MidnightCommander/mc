@@ -18,9 +18,9 @@
 #include "../vfs/vfs.h"
 
 static void
-gmc_execute (const char *fname, const char *buf)
+gmc_execute (const char *fname, const char *buf, int needs_terminal)
 {
-	exec_extension (fname, buf, NULL, NULL, 0);
+	exec_extension (fname, buf, NULL, NULL, 0, needs_terminal);
 }
 
 int
@@ -30,20 +30,36 @@ gmc_open_filename (char *fname, GList *args)
 	const char *cmd;
 	char *buf;
 	int size;
+	int needs_terminal = 0;
 
+	mime_type = gnome_mime_type_or_default (fname, NULL);
+
+	/*
+	 * We accept needs_terminal as -1, which means our caller
+	 * did not want to do the work
+	 */
+	if (gnome_metadata_get (fname, "flags", &size, &buf) == 0){
+		needs_terminal = (strstr (buf, "needsterminal") != 0);
+		g_free (buf);
+	} else if (mime_type){
+		const char *flags;
+		
+		flags = gnome_mime_type_or_default (mime_type, "flags");
+		needs_terminal = (strstr (flags, "needsterminal") != 0);
+	}
+	
 	if (gnome_metadata_get (fname, "fm-open", &size, &buf) == 0){
-		gmc_execute (fname, buf);
+		gmc_execute (fname, buf, needs_terminal);
 		g_free (buf);
 		return 1;
 	}
 
 	if (gnome_metadata_get (fname, "open", &size, &buf) == 0){
-		gmc_execute (fname, buf);
+		gmc_execute (fname, buf, needs_terminal);
 		g_free (buf);
 		return 1;
 	}
 
-	mime_type = gnome_mime_type_or_default (fname, NULL);
 	if (!mime_type)
 		return 0;
 	
@@ -51,13 +67,13 @@ gmc_open_filename (char *fname, GList *args)
 	cmd = gnome_mime_get_value (mime_type, "fm-open");
 	
 	if (cmd){
-		gmc_execute (fname, cmd);
+		gmc_execute (fname, cmd, needs_terminal);
 		return 1;
 	}
 	
 	cmd = gnome_mime_get_value (mime_type, "open");
 	if (cmd){
-		gmc_execute (fname, cmd);
+		gmc_execute (fname, cmd, needs_terminal);
 		return 1;
 	}
 
@@ -85,7 +101,7 @@ gmc_edit_filename (char *fname)
 	int on_terminal;
 
 	if (gnome_metadata_get (fname, "edit", &size, &buf) == 0){
-		gmc_execute (fname, buf);
+		gmc_execute (fname, buf, 0);
 		g_free (buf);
 		return 1;
 	}
@@ -95,7 +111,7 @@ gmc_edit_filename (char *fname)
 		cmd = gnome_mime_get_value (mime_type, "edit");
 	
 		if (cmd){
-			gmc_execute (fname, cmd);
+			gmc_execute (fname, cmd, 0);
 			return 1;
 		}
 	}
@@ -123,7 +139,7 @@ gmc_edit_filename (char *fname)
 	} else {
 		char *cmd = g_strconcat (editor, " %s", NULL);
 		
-		gmc_execute (fname, cmd);
+		gmc_execute (fname, cmd, 0);
 		g_free (cmd);
 	}
 
@@ -141,7 +157,7 @@ gmc_open (file_entry *fe)
 static void
 gmc_run_view (const char *filename, const char *buf)
 {
-	exec_extension (filename, buf, NULL, NULL, 0);
+	exec_extension (filename, buf, NULL, NULL, 0, 0);
 }
 
 int

@@ -1,9 +1,20 @@
+1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_open): Add needs terminal support.
+
+	* gnome-file-property-dialog.c (create_settings_pane): Add Needs
+	terminal check box
+
+1999-02-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gaction.c (gmc_open_filename): Add support for needsterminal.
+
+	* gscreen.c: Add New Folder option to the panel popup.
+
 1999-02-25 Owen Taylor  <otaylor@redhat.com>
 
 	* gdialogs.c (file_delete_query_recursive): GNOME
 	replacement for recursive delete query dialog.
-
-1999-02-25 Owen Taylor  <otaylor@redhat.com>
 
 	* gprefs.c gcustom-layout.[ch]: Add a new page to
 	the preferences dialog to allow the user to change

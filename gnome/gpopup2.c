@@ -179,10 +179,12 @@ static void
 mime_action_callback (GtkWidget *widget, gpointer data)
 {
 	char *filename;
-	char *key;
-	char *mime_type;
-	char *value;
-
+	char *key, *buf;
+	const char *mime_type;
+	const char *value;
+	int needs_terminal = 0;
+	int size;
+	
 	filename = data;
 	key = gtk_object_get_user_data (GTK_OBJECT (widget));
 
@@ -192,8 +194,25 @@ mime_action_callback (GtkWidget *widget, gpointer data)
 	mime_type = gnome_mime_type_or_default (filename, NULL);
 	g_assert (mime_type != NULL);
 
+	/*
+	 * Find out if we need to run this in a terminal
+	 */
+	if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
+		needs_terminal = strstr (buf, "needsterminal") != 0;
+		g_free (buf);
+	} else {
+		char *flag_key;
+		const char *flags;
+		
+		flag_key = g_strconcat ("flags.", key, "flags", NULL);
+		flags = gnome_mime_get_value (filename, flag_key);
+		g_free (flag_key);
+		if (flags)
+			needs_terminal = strstr (flags, "needsterminal") != 0;
+	}
+	
 	value = gnome_mime_get_value (mime_type, key);
-	exec_extension (filename, value, NULL, NULL, 0);
+	exec_extension (filename, value, NULL, NULL, 0, needs_terminal);
 }
 
 /* Creates the menu items for actions based on the MIME type of the selected

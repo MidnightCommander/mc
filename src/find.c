@@ -821,8 +821,8 @@ setup_gui (void)
 			    g_status_label, TRUE, TRUE, GNOME_PAD_SMALL);
 	
 	gtk_widget_show_all (g_find_dlg);
-	gtk_widget_hide (GTK_WIDGET (find_do_view));
-	gtk_widget_hide (GTK_WIDGET (find_do_edit));
+	gtk_widget_hide (GTK_WIDGET (g_view));
+	gtk_widget_hide (GTK_WIDGET (g_edit));
 }
 
 static int

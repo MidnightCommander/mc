@@ -483,19 +483,35 @@ mime_command_from_panel (GtkMenuItem *item, WPanel *panel)
 static void
 mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
 {
-	char *action;
-	int movedir;
-	char *key;
-	const char *mime_type, *val;;
-	action = get_label_text (item);
+	char *action, *buf;
+	int movedir, size;
+	char *key, *flag_key;
+	const char *mime_type, *val, *flags;
+	int needs_terminal = 0;
 
+	action = get_label_text (item);
+	
 	key = gtk_object_get_user_data (GTK_OBJECT (item));
 	mime_type = gnome_mime_type_or_default (filename, NULL);
 	if (!mime_type)
 		return;
+
+	/*
+	 * Find out if we need to run this in a terminal
+	 */
+	if (gnome_metadata_get (filename, "flags", &size, &buf) == 0){
+		needs_terminal = strstr (flags, "needsterminal") != 0;
+		g_free (buf);
+	} else {
+		flag_key = g_strconcat ("flags.", key, "flags", NULL);
+		flags = gnome_mime_get_value (filename, flag_key);
+		g_free (flag_key);
+		if (flags)
+			needs_terminal = strstr (flags, "needsterminal") != 0;
+	}
 	
 	val = gnome_mime_get_value (mime_type, key);
-	exec_extension (filename, val, NULL, NULL, 0);
+	exec_extension (filename, val, NULL, NULL, 0, needs_terminal);
 }
 
 /* Create the menu items common to files from panel window and desktop icons, and also the items for

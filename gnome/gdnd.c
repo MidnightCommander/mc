@@ -371,9 +371,9 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 		drops[i] = NULL;
 
 		if (gnome_metadata_get (full_name, "open", &size, &buf) == 0)
-			exec_extension (full_name, buf, drops, NULL, 0);
+			exec_extension (full_name, buf, drops, NULL, 0, 0);
 		else
-			exec_extension (full_name, "%f %q", drops, NULL, 0);
+			exec_extension (full_name, "%f %q", drops, NULL, 0, 0);
 
 		g_free (drops);
 		gnome_uri_list_free_strings (names);

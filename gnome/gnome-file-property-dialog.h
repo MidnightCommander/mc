@@ -70,6 +70,7 @@ struct _GnomeFilePropertyDialog
 	GtkWidget *button;
 	GtkWidget *desktop_entry;
 	GtkWidget *caption_entry;
+	GtkWidget *needs_terminal_check;
 	
 	gchar *fm_open;
 	gchar *fm_view;
@@ -84,6 +85,8 @@ struct _GnomeFilePropertyDialog
 	gchar *caption;
 	
 	gboolean can_set_icon;
+	gboolean needs_terminal;
+	
 	GdkImlibImage *im;
 
 	/* Private Data */

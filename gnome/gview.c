@@ -105,6 +105,7 @@ view_percent (WView *view, int p, int w)
 		    gtk_signal_emit_by_name (GTK_OBJECT (adj), "changed");
 	    }
 	    if ((int) adj->value != view->start_display){
+		    printf ("Value=%g s=%d\n", adj->value, view->start_display);
 		    gtk_adjustment_set_value (adj, view->start_display);
 	    }
     }

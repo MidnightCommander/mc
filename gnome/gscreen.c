@@ -31,6 +31,7 @@
 #include "gtkdtree.h"
 #include "gpageprop.h"
 #include "gpopup.h"
+#include "gcmd.h"
 #include "gcliplabel.h"
 #include "gicon.h"
 #include "../vfs/vfs.h"
@@ -1450,6 +1451,8 @@ handle_rescan_directory (GtkWidget *widget, gpointer data)
 static GnomeUIInfo file_list_popup_items[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Directory"), N_("Reloads the current directory"),
 			       handle_rescan_directory),
+	GNOMEUIINFO_ITEM_NONE (N_("New folder"), N_("Creates a new folder here"),
+			       gnome_mkdir_cmd),
 	GNOMEUIINFO_END
 };
 

@@ -1,35 +1,9 @@
 New task list:
 
-	- Use notebook to hold CLIst/IconList on the main windown
-
-	- Put stuff inside a frame to make it look shrunken
-
-	- Menu option to toggle tree on/off.
-
-	- Make the tree faster (cache loaded directories)
-	
 	- Add focus management to the tree
 
-	- tree should not move the selected menu item when
-	  auto-expanding/collapsing.
-
-	- Auto-expand, and the timeout need to be optional
- 	  (and possibly disabled by default)
-	
 	- Options - "Show hidden files" needs to work for
   	  the tree as well as for the icon list.
-
-	- Right button on icon list (not on icon) should also
-	  bring up menu. Should have back-forward (like
-   	  Netscape, create folder, etc... Eventually 
-	  Explorer style "create new word document" would
-   	  be nice). Rubber banding is silly.
-
-	- Dragging within icon list should reorder or do
-	  nothing. Copying is silly. (But can be done
-	  on ACTION_ASK)
-
-	- Add to the gnome-panel mime-type support
 
 	- Drop the MC event handling off for the main window.
 
@@ -39,80 +13,21 @@ New task list:
 
 	- Dynamic thumbnail generation
 
-Federico:
-
-	- Make the popup menus work on the desktop
-
-	- Root window stuff.
-
 Other features requested:
 
-	- Make the default action on drop configurable.
-
-	- Remove extra space on the panels (the in-between
-	  icons)
-
-	- Remove the bottom scrollabar on the views.
-
-	- Status line uses too much space, it might be fixed
-	  by changing it to merge both status in a single
-	  status line.
-
-	[   Status        | 0 bytes in nnnnnnn ]
-	   ^		    ^
-	   |		    + miniinfo.
-	   |
-	   print_vfs_message
-	  
-	- The input line and the navigations icons should be part of an
-	  expert mode.
-
-	- Layout of dialog boxes suck.
-
-	- Add help button to dialog boxes.
-
-	- Add an advanced/simple checkbox.
-
-	- All of the configuration pages should be in a single
-	  GnomePropertyBox.
-
-	- Optional "hidden menu" option.
-
-	- Fix the progress dialog box to be nicer.
-
-	- Adding more things to the toolbar.
-
-	- Dialogs are popping in the wrong place, this should be fixed
-	  by using:
-
-		gtk_window_position (GDK_WINDOW_POSITION)
-
-	- Entering compressed tar files crashes the program.
-
-	- Substructure notify is taking too much time of processing
-	  I need to a dd a filter and discard everything non-ClientMessage
-	  that is sent to the wroot window.
-
-	
-IMPORTANTE:
-
-file actions dont cause panels to be refreshed automatically
+	- Copy/Move/Delete operations on the treeview.
 
 EXTENSIONS:
 
 - Add special destkop entries ("Network neighborhood")
+
 - In the find-file results, it would be nice if 'chdir' popped up a new
   panel instead of changing the directory of the present one (optionally).
+
 - (Cool but low priority) it would be nice if 'Arrange icons'
   were configurable to allow stacking the icons along a particular edge
   OR if gmc could automatically find areas of free screen (i.e. no windows
   on them) and then place icons there.
-
-Panels:
-
-- Global bindings (some shortcuts are not implemented)
-- Split view.
-
 
 Viewer:
 

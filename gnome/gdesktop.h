@@ -44,7 +44,6 @@ typedef struct {
 	char *url;			/* URL this icon points to */
 	int selected : 1;		/* Is the icon selected? */
 	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
-	int requires_terminal : 1;      /* True if this requires a terminal to run */
 } DesktopIconInfo;
 
 void desktop_icon_info_open      (DesktopIconInfo *dii);
