@@ -82,7 +82,7 @@
 #endif
 
 /* Maxlimit for skipping updates */
-int max_dirt_limit = 
+static int max_dirt_limit = 
 #ifdef OS2_NT
 0;
 #else
@@ -90,10 +90,6 @@ int max_dirt_limit =
 #endif
 
 extern Hook *idle_hook;
-
-/* Our callback */
-static int view_callback (Dlg_head *h, WView *view, int msg, int par);
-static int regexp_view_search (WView *view, char *pattern, char *string, int match_type);
 
 /* If set, show a ruler */
 static int ruler = 0;
@@ -108,7 +104,7 @@ int have_fast_cpu = 0;
 int global_wrap_mode = 1;
 
 int default_hex_mode = 0;
-int default_hexedit_mode = 0;
+static int default_hexedit_mode = 0;
 int default_magic_flag = 1;
 int default_nroff_flag = 1;
 int altered_hex_mode = 0;
@@ -119,6 +115,15 @@ int altered_nroff_flag = 0;
 /* "$Id$" */
 
 static const char hex_char[] = "0123456789ABCDEF";
+
+/* Our callback */
+static int view_callback (Dlg_head *h, WView *view, int msg, int par);
+
+static int regexp_view_search (WView *view, char *pattern, char *string, int match_type);
+static void view_move_forward  (WView *view, int i);
+static void view_labels (WView *view);
+static void set_monitor (WView *view, int set_on);
+static void view_update (WView *view, gboolean update_gui);
 
 /* }}} */
 /* {{{ Clean-up functions */
@@ -391,7 +396,7 @@ save_edit_changes (WView *view)
     free_change_list (view);
 }
 
-int
+static int
 view_ok_to_quit (WView *view)
 {
     int r;
@@ -663,7 +668,7 @@ view_init (WView *view, char *_command, const char *_file, int start_line)
 
 /* {{{ Screen update functions */
 
-void
+static void
 view_percent (WView *view, int p, int w, gboolean update_gui)
 {
     int percent;
@@ -683,7 +688,7 @@ view_percent (WView *view, int p, int w, gboolean update_gui)
     printw ("%3d%%", percent);
 }
 
-void
+static void
 view_status (WView *view, gboolean update_gui)
 {
     static int i18n_adjust=0;
@@ -1046,7 +1051,7 @@ view_place_cursor (WView *view)
     widget_move (&view->widget, view->cursor_row, view->cursor_col + shift);
 }
 
-void
+static void
 view_update (WView *view, gboolean update_gui)
 {
     static int dirt_limit = 1;
@@ -1227,7 +1232,7 @@ move_backward2 (WView *view, unsigned long current, int lines)
     return p > view->first ? p : view->first;
 }
 
-void
+static void
 view_move_backward (WView *view, int i)
 {
     view->search_start = view->start_display =
@@ -1269,7 +1274,7 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     return view->bottom_first;
 }
 
-void
+static void
 view_move_forward (WView *view, int i)
 {
     view->start_display = move_forward2 (view, view->start_display, i, 0);
@@ -1440,10 +1445,10 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 /** Search status optmizations **/
 
 /* The number of bytes between percent increments */
-int  update_steps;
+static int  update_steps;
 
 /* Last point where we updated the status */
-long update_activate;
+static long update_activate;
 
 static void
 search_update_steps (WView *view)
@@ -1780,7 +1785,7 @@ static void view_help_cmd (void)
 }
 
 /* Both views */
-void toggle_wrap_mode (WView *view)
+static void toggle_wrap_mode (WView *view)
 {
     if (view->hex_mode) {
         if (view->growing_buffer != 0) {
@@ -1814,7 +1819,7 @@ void toggle_wrap_mode (WView *view)
 }
 
 /* Both views */
-void
+static void
 toggle_hex_mode (WView *view)
 {
     view->hex_mode = 1 - view->hex_mode;
@@ -1839,7 +1844,7 @@ toggle_hex_mode (WView *view)
 }
 
 /* Ascii view */
-void
+static void
 goto_line (WView *view)
 {
     char *line, prompt [BUF_SMALL];
@@ -1929,7 +1934,7 @@ regexp_search (WView *view, int direction)
     view->last_search = do_regexp_search;
 }
 
-void
+static void
 regexp_search_cmd (WView *view)
 {
     regexp_search (view, 1);
@@ -1970,7 +1975,7 @@ normal_search (WView *view, int direction)
     view->last_search = do_normal_search;
 }
 
-void
+static void
 normal_search_cmd (WView *view)
 {
     normal_search (view, 1);
@@ -2003,7 +2008,7 @@ change_viewer (WView *view)
     }
 }
 
-void
+static void
 change_nroff (WView *view)
 {
     view->viewer_nroff_flag = !view->viewer_nroff_flag;
@@ -2022,7 +2027,7 @@ view_quit_cmd (WView *view)
 }
 
 /* Both views */
-void
+static void
 view_labels (WView *view)
 {
     Dlg_head *h = view->widget.parent;
@@ -2070,7 +2075,7 @@ check_left_right_keys (WView *view, int c)
     return 1;
 }
 
-void
+static void
 set_monitor (WView *view, int set_on)
 {
     int old = view->monitor;
@@ -2087,7 +2092,7 @@ set_monitor (WView *view, int set_on)
     }
 }
 
-void
+static void
 continue_search (WView *view)
 {
     if (view->last_search){
@@ -2306,7 +2311,7 @@ view_handle_key (WView *view, int c)
 }
 
 /* Both views */
-int
+static int
 view_event (WView *view, Gpm_Event *event, int *result)
 {
     *result = MOU_NORMAL;

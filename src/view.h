@@ -96,28 +96,6 @@ int view_init (WView *view, char *_command, const char *_file, int start_line);
 void view_update_bytes_per_line(WView *view);
 int view_file (char *filename, int normal, int internal);
 
-/* Internal view routines */
-void view_status        (WView *, gboolean update_gui);
-void view_percent       (WView *, int p, int w, gboolean update_gui);
-void view_update        (WView *view, gboolean update_gui);
-void view_labels        (WView *view);
-int view_event          (WView *view, Gpm_Event *event,int *result);
-void toggle_wrap_mode   (WView *);
-void toggle_hex_mode    (WView *);
-void goto_line          (WView *);
-void regexp_search_cmd  (WView *);
-void normal_search_cmd  (WView *);
-void continue_search    (WView *);
-void change_nroff       (WView *view);
-void set_monitor        (WView *view, int set_on);
-void view_move_forward  (WView *view, int i);
-void view_move_backward (WView *view, int i);
-void view_add_one_vline (void);
-void view_add_character (WView *view, int c);
-void view_add_string    (WView *view, char *s);
-void view_gotoyx        (WView *view, int r, int c);
-void view_set_color     (WView *view, int font);
-int view_ok_to_quit     (WView *view);
 #endif /* WANT_WIDGETS */
 
 /* Command: view a file, if _command != NULL we use popen on _command */
