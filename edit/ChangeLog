@@ -1,3 +1,8 @@
+2002-03-18  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Use eregex.h, not regex.h.
+	From Alexander Varakin <avarakin00@hotmail.com>
+
 2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* editcmd.c (edit_replace_cmd): Eliminate fin_string
