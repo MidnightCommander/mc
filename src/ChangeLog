@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (load_hint): Don't hardcode copyright years.  Use a
+	translated message.
+
 	* main.c (midnight_callback): Avoid calling the default DLG_DRAW
 	handler.  From David Martin <dmartina@excite.com>
 

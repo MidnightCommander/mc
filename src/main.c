@@ -1807,25 +1807,29 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 
 #define xtoolkit_panel_setup()
 
-void load_hint (void)
+void
+load_hint (void)
 {
     char *hint;
 
     if (!the_hint->widget.parent)
 	return;
-	
-    if (!message_visible && (!xterm_flag || !xterm_hintbar)){
-        label_set_text (the_hint, 0);
+
+    if (!message_visible && (!xterm_flag || !xterm_hintbar)) {
+	label_set_text (the_hint, 0);
 	return;
     }
 
-    if ((hint = get_random_hint ())){
+    if ((hint = get_random_hint ())) {
 	if (*hint)
 	    set_hintbar (hint);
 	g_free (hint);
     } else {
-	set_hintbar ("The Midnight Commander " VERSION
-			" (C) 1995-1997 the Free Software Foundation");
+	char text[BUF_SMALL];
+
+	g_snprintf (text, sizeof (text), _("GNU Midnight Commander %s\n"),
+		    VERSION);
+	set_hintbar (text);
     }
 }
 
