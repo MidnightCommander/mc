@@ -1,3 +1,9 @@
+1998-12-08  Tuomas Kuosmanen  <tigert@gimp.org>
+
+        * new_icons/gnome-image-[lots].png: I added some icons for file
+	types (image) there - someone please tell me what the correct
+	location and naming convention is and I will try to follow that. :)
+
 1998-12-08  Christopher Blizzard  <blizzard@appliedtheory.com>
 
 	* configure.in (builddir): Add icons/Makefile to AC_OUTPUT so that
