@@ -385,7 +385,7 @@ init_key_x11 (void)
    calls any define_sequence */
 void init_key (void)
 {
-    char *term = (char *) getenv ("TERM");
+    const char *term = getenv ("TERM");
     
     /* This has to be the first define_sequence */
     /* So, we can assume that the first keys member has ESC */
