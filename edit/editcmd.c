@@ -2109,9 +2109,12 @@ int edit_save_block_cmd (WEdit * edit)
 
 
 /* returns 1 on success */
-int edit_insert_file_cmd (WEdit * edit)
+int
+edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp = edit_get_load_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _ (" Insert File "));
+    char *exp =
+	edit_get_load_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0),
+			    _(" Insert File "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
 	if (!*exp) {
@@ -2124,7 +2127,9 @@ int edit_insert_file_cmd (WEdit * edit)
 		return 1;
 	    } else {
 		g_free (exp);
-		edit_error_dialog (_ (" Insert file "), get_sys_error (_ (" Error trying to insert file. ")));
+		edit_error_dialog (_(" Insert File "),
+				   get_sys_error (_
+						  (" Error trying to insert file. ")));
 	    }
 	}
     }
