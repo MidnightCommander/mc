@@ -1,5 +1,8 @@
 2002-08-14  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (do_load_dir): Fix leaking of file descriptors - always
+	call mc_closedir() before return.
+
 	* main.c (do_execute) [!HAVE_SUBSHELL_SUPPORT]: Compile fix.
 
 	* view.c (display): Use only declared color pairs to fix hex

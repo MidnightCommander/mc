@@ -483,6 +483,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
 	    continue;
 	if (status == -1){
 	    tree_store_end_check ();
+	    mc_closedir (dirp);
 	    return next_free;
 	}
 	list->list [next_free].fnamelen = NLENGTH (dp);
@@ -505,6 +506,7 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive, char
 	do_sort (list, sort, next_free-1, reverse, case_sensitive);
     } else {
 	tree_store_end_check ();
+	mc_closedir (dirp);
 	return set_zero_dir (list);
     }
 
