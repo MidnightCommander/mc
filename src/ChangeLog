@@ -1,3 +1,9 @@
+2003-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* user.c (execute_menu_command: Fix rare segmentation violation
+	if last line in menu file contain space(s) only and no trailing
+	newline.
+
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
 	* listmode.c: Use groupboxes.

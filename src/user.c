@@ -578,6 +578,8 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 		break;
 	    while (*commands == ' ' || *commands == '\t')
 	        commands++;
+	    if (*commands == 0)
+		break;
 	}
 	col++;
 	if (*commands == '\n')
