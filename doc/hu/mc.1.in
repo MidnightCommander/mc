@@ -9,13 +9,11 @@ mc \- Fájlkezelõ Unix típusú rendszerekhez
 [\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "LEÍRÁS"
-.LP
 A Midnight Commander Unix típusú operációs rendszerekhez készített
 könyvtár böngészõ és filekezelõ eszköz
 .\".\"DONT_SPLIT"
 .\"NODE "OPTIONS"
 .SH "OPCIÓK"
-.TP
 .I "\-a"
 A kereteket és vonalakat egyszerûsített karakterekkel rajzolja ki
 .TP
@@ -395,31 +393,28 @@ használhatod (a kich1 terminfo kombináció), vagy a C-t
 újra ki kell jelölni a kijelölt fájlt.
 .PP
 .B M-g, M-r, M-j
-A panel legfelsõ, középsõ és
-alsó fájljának kiválasztásához használd sorban a megfelelõ
-billentyû-kombinációt. Linuxban M-h a "history" bekapcsolására
-szolgál.
+A panel legfelsõ, középsõ és alsó fájljának kiválasztásához használd
+sorban a megfelelõ billentyû-kombinációt. Linuxban M-h a "history"
+bekapcsolására szolgál.
 .PP
 .B C-s, M-s
-Elindítja a fájl keresést a könyvtár listában.
-Amikor a keresés aktív, a billentyûlenyomások hozzáadódnak
-a keresett szöveghez a parancssorban. Ha a
+Elindítja a fájl keresést a könyvtár listában.  Amikor a keresés
+aktív, a billentyûlenyomások hozzáadódnak a keresett szöveghez a
+parancssorban. Ha a
 .I Mini fájlinfó
-opció engedélyezve van, a keresõ szöveg a
-mini-fájlinfó sorban jelenik meg. Amikor gépelsz, a mini
-kiválasztó sáv átlép a következõ fájlra, amely a
-begépelt szöveggel egyezik. A
+opció engedélyezve van, a keresõ szöveg a mini-fájlinfó sorban jelenik
+meg. Amikor gépelsz, a mini kiválasztó sáv átlép a következõ fájlra,
+amely a begépelt szöveggel egyezik. A
 .IR backspace ,
 vagy a
 .I DEL
-gombokat használhatod a gépelési hibák javítására. Ha a C-s
-gombokat használod újra, új keresés kezdhetõ.
+gombokat használhatod a gépelési hibák javítására. Ha a C-s gombokat
+használod újra, új keresés kezdhetõ.
 .PP
 .B M-t
-Vált a jelenlegi lista megjelenítési módról a
-következõ megjelenítési módra. Ezzel gyorsan át tudsz
-váltani a hosszú listáról a rendezett listára és a
-felhasználó által definiált listázási módra.
+Vált a jelenlegi lista megjelenítési módról a következõ megjelenítési
+módra. Ezzel gyorsan át tudsz váltani a hosszú listáról a rendezett
+listára és a felhasználó által definiált listázási módra.
 .PP
 .B C-\\\\ (control-backslash)
 Megjeleníti a
@@ -429,27 +424,24 @@ Könyvjelzõket
 és átvált a kiválasztott könyvtárra.
 .PP
 .B + \ (plusz)
-Ez használható a fájlok csoportjainak
-kiválasztásához (kijelöléséhez). A Midnight Commander
-megjelenít egy ablakot a jelölendõ csoport pontos
+Ez használható a fájlok csoportjainak kiválasztásához (kijelöléséhez). A
+Midnight Commander megjelenít egy ablakot a jelölendõ csoport pontos
 kiterjesztésének megadásához. Ha a
 .I Shell kifejezések
-opció engedélyezve van, csak a pontos kiterjesztések
-használhatók a shell-ben kiterjesztésként (* jelent egy,
-vagy több karaktert, a ? egyetlen karaktert). Ha a
-.IR Shell kifejezések -et
+opció engedélyezve van, csak a pontos kiterjesztések használhatók
+a shell-ben kiterjesztésként (* jelent egy, vagy több karaktert, a
+? egyetlen karaktert). Ha a
+.IR "Shell kifejezések" -et
 kikapcsolva tartjuk, a fájlok kijelölésére a normál kifejezések
 használhatóak (lásd
 .IR "ed (1)" ).
 .PP
-Ha a kifejezés törtjellel (slash-sel="/") kezdõdik, vagy
-végzõdik, akkor ez egész könyvtárakat választ ki, beleértve
-annak fájljait.
+Ha a kifejezés törtjellel (slash-sel="/") kezdõdik, vagy végzõdik,
+akkor ez egész könyvtárakat választ ki, beleértve annak fájljait.
 .PP
 .B \\\\ (backslash).
-Használd a "\\" gombot a fájlcsoportok
-kiválasztásának megszüntetéséhez. Ez a Plusz gomb
-ellentettje.
+Használd a "\\" gombot a fájlcsoportok kiválasztásának
+megszüntetéséhez. Ez a Plusz gomb ellentettje.
 .PP
 .B crsr up, C-p
 Az elõzõ panel-bejegyzésre mozgatja a kiválasztó sávot.
@@ -836,9 +828,9 @@ szóló részt további információkért.
 .B "Gyorsnézõke"
 Ebben a módban a panel átvált
 .\"LINK2"
-Belsõ fájlnézõre
+Belsõ fájlnézõre,
 .\"Internal File Viewer"
-, amely megjeleníti a jelenleg
+amely megjeleníti a jelenleg
 kiválasztott fájl tartalmát, ha a panelt választod ki (a tab
 billentyûvel, vagy az egérrel), elérhetõvé válnak a fájlnézõ
 parancsai.
@@ -1103,67 +1095,60 @@ A "Panelok ki-be" parancs megmutatja az utolsó shell parancs
 kimenetét. Ez csak xterm-en, Linux-on és SCO konzolon
 mûködik.
 .PP
-A Könyvtár összehasonlítás (C-x d) parancs összehasonlítja
-a könyvtár paneleket egymással. Ilyenkor használható a
-Másol (F5) parancs a panelek azonossá tételére. Ennek
-három formája van. A gyors változat csak a fájlok méretét,
-és dátumát vizsgálja meg. Az alapos változat teljesen,
-byte-ról byte-ra végzi el a vizsgálatot. Az alapos változat
-nem használható, ha a gép nem támogatja az mmap(2)
-rendszerhívást. A 'Csak fájlhossz' szerinti változat csak
-a fájlméretet hasonlítja össze és nem ellenõrzi le
-a dátumukat.
+A Könyvtár összehasonlítás (C-x d) parancs összehasonlítja a könyvtár
+paneleket egymással. Ilyenkor használható a Másol (F5) parancs a panelek
+azonossá tételére. Ennek három formája van. A gyors változat csak a fájlok
+méretét, és dátumát vizsgálja meg. Az alapos változat teljesen, byte-ról
+byte-ra végzi el a vizsgálatot. Az alapos változat nem használható,
+ha a gép nem támogatja az mmap(2) rendszerhívást. A 'Csak fájlhossz'
+szerinti változat csak a fájlméretet hasonlítja össze és nem ellenõrzi
+le a dátumukat.
 .PP
-A Parancssor elõzmények parancs megmutatja a begépelt
-parancsok listáját. Az itt kiválasztott parancs átmásolódik
-a parancssorba. A Parancssor elõzmények a M-p, vagy a M-n
-begépelésével is elérhetõ.
+A Parancssor elõzmények parancs megmutatja a begépelt parancsok
+listáját. Az itt kiválasztott parancs átmásolódik a parancssorba. A
+Parancssor elõzmények a M-p, vagy a M-n begépelésével is elérhetõ.
 .PP
 A
 .\"LINK2"
-Könyvjelzõk (C-\)
+Könyvjelzõk (C-\\)
 .\"Hotlist"
-parancs felveszi a
-jelenlegi könyvtárat a gyakran használt könyvtárak közé.
+parancs felveszi a jelenlegi könyvtárat a gyakran használt könyvtárak
+közé.
 .PP
 A
 .\"LINK2"
 Parancskimenet panel
 .\"External panelize"
-lehetõvé teszi
-számodra külsõ parancsok futtatását, majd a program
+lehetõvé teszi számodra külsõ parancsok futtatását, majd a program
 tartalmát a jellegi panelbe teszi.
 .PP
 A
 .\"LINK2"
 Társítások
 .\"Extension File Edit"
-lehetõvé teszik számodra a
-futtatandó programok meghatározását, a kiválasztott fájl
-kiterjesztésének (fájlnév vége) megfelelõen akkor, ha
-futtatod, megtekinted a tartalmát, átszerkeszted vagy más
-egyéb dolgot szeretnél vele csinálni. A
+lehetõvé teszik számodra a futtatandó programok meghatározását, a
+kiválasztott fájl kiterjesztésének (fájlnév vége) megfelelõen akkor, ha
+futtatod, megtekinted a tartalmát, átszerkeszted vagy más egyéb dolgot
+szeretnél vele csinálni. A
 .\"LINK2"
 Menu editor edit
 .\"Menu File Edit"
-parancs a felhasználói menü
-szerkesztésére használható (ami az F2 lenyomásával
-elérhetõ).
+parancs a felhasználói menü szerkesztésére használható (ami az F2
+lenyomásával elérhetõ).
 .\"NODE "    Directory Tree"
 .SH "    Könyvtárfa"
-A Könyvtárfa parancs fa formában mutatja meg a könyvtárakat.
-Ebbõl a listából kiválaszthatsz egy könyvtárat és a Midnight
-Commander abba a könyvtárba lép át.
+A Könyvtárfa parancs fa formában mutatja meg a könyvtárakat. Ebbõl a
+listából kiválaszthatsz egy könyvtárat és a Midnight Commander abba a
+könyvtárba lép át.
 .PP
-Két lehetõség van a fa megjelenítésére. Az igazi könyvtárfa
-parancs elérhetõ a Parancsok menübõl. A másik mód a Bal,
-vagy a Jobb menüben a fa nézet kiválasztása.
+Két lehetõség van a fa megjelenítésére. Az igazi könyvtárfa parancs
+elérhetõ a Parancsok menübõl. A másik mód a Bal, vagy a Jobb menüben a
+fa nézet kiválasztása.
 .PP
-A Midnight Commander a fa nézet készítéséhez csak minden
-könyvtár belsõ beállításait szkenneli le, így magszabadít
-téged a hosszú várakozástól. Ha megtalálod a megtekinteni
-kívánt könyvtárat, menj rá a szülökönyvtárára és nyomd le a
-C-r-t (vagy az F2-t).
+A Midnight Commander a fa nézet készítéséhez csak minden könyvtár belsõ
+beállításait szkenneli le, így magszabadít téged a hosszú várakozástól. Ha
+megtalálod a megtekinteni kívánt könyvtárat, menj rá a szülökönyvtárára
+és nyomd le a C-r-t (vagy az F2-t).
 .PP
 A következõ gombokat használhatod:
 .PP
@@ -1172,36 +1157,31 @@ A következõ gombokat használhatod:
 .\"General Movement Keys"
 .PP
 .B Enter.
-A Könyvtárfánál kilép a Könyvtárfából és a
-jelenlegi panelben átváltja a könyvtárat. Fa nézetben átvált
-erre a könyvtárra a másik panelben és a jelenlegi panelben
-marad a fa nézet.
+A Könyvtárfánál kilép a Könyvtárfából és a jelenlegi panelben átváltja
+a könyvtárat. Fa nézetben átvált erre a könyvtárra a másik panelben és
+a jelenlegi panelben marad a fa nézet.
 .PP
 .B C-r, F2 (Újraolvasás).
-Újraolvassa ezt a könyvtárat. Ezt
-akkor használd, ha a fa nézet aktualitását vesztette: ez
-megkeresi a belsõ könyvtárakat és megmutat néhány belsõ
-könyvtárat, amely eddig nem létezett.
+Újraolvassa ezt a könyvtárat. Ezt akkor használd, ha a fa nézet
+aktualitását vesztette: ez megkeresi a belsõ könyvtárakat és megmutat
+néhány belsõ könyvtárat, amely eddig nem létezett.
 .PP
 .B F3 (Elfelejt).
-Törli ezt a könyvtárat a fa nézetbõl. Ezt
-az összevisszaság eltüntetésére használhatod a fa nézetben.
-Ha vissza akarsz tenni egy könyvtárat a fa nézetbe, nyomd le
-az F2-t a szülõ könyvtáron állva.
+Törli ezt a könyvtárat a fa nézetbõl. Ezt az összevisszaság eltüntetésére
+használhatod a fa nézetben.  Ha vissza akarsz tenni egy könyvtárat a fa
+nézetbe, nyomd le az F2-t a szülõ könyvtáron állva.
 .PP
 .B F4 (Statikus-Dinamikus).
-Vált a dinamikus
-(alapértelmezett) és a statikus böngészõ mód között.
+Vált a dinamikus (alapértelmezett) és a statikus böngészõ mód között.
 .PP
-A statikus böngészõ módban a Fel és Le gombokat használhatod
-a könyvtár kiválasztására. Minden ismert könyvtár látható.
+A statikus böngészõ módban a Fel és Le gombokat használhatod a könyvtár
+kiválasztására. Minden ismert könyvtár látható.
 .PP
-A dinamikus böngészõ módban a Fel és Le gombokat a testvér
-könyvtárak kiválasztására, a Bal gombot a szülõ könyvtárra
-való lépéshez és a Jobb gombot az alárendelt könyvtárra
-lépéshez. Csak a szülõ, a testvér és az alárendelt könyvtár
-látható, a többi nem. A fa nézet a dinamikus váltáshoz
-használhatod.
+A dinamikus böngészõ módban a Fel és Le gombokat a testvér könyvtárak
+kiválasztására, a Bal gombot a szülõ könyvtárra való lépéshez és a Jobb
+gombot az alárendelt könyvtárra lépéshez. Csak a szülõ, a testvér és
+az alárendelt könyvtár látható, a többi nem. A fa nézet a dinamikus
+váltáshoz használhatod.
 .PP
 .B F5 (Másolás).
 A könyvtárat másolja.
@@ -2159,9 +2139,8 @@ fájlok.
 .PP
 .I "%cd"
 .IP
-Ez a speciális makro, ami arra használható, hogy a
-jelenlegi könyvtárat lecserélhessük az elõtte levõ könyvtárra.
-Ezt elsõsorban a
+Ez a speciális makro, ami arra használható, hogy a jelenlegi könyvtárat
+lecserélhessük az elõtte levõ könyvtárra. Ezt elsõsorban a
 .\"LINK2"
 Csatolt fájlrendszernél
 .\"Virtual File System"
