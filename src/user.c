@@ -568,6 +568,7 @@ execute_menu_command (WEdit *edit_widget, const char *commands)
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
+    fputs ("#! /bin/sh\n", cmd_file);
     commands++;
     
     for (col = 0; *commands; commands++){

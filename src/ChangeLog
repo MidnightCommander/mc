@@ -1,3 +1,8 @@
+2004-01-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* user.c (execute_menu_command): Put /bin/sh in the beginning of
+	the script.
+
 2004-01-22  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (display_mini_info): Correctly fill the space after
