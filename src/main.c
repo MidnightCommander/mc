@@ -164,8 +164,10 @@ WPanel *right_panel;
 /* The pointer to the tree */
 WTree *the_tree;
 
+#ifndef HAVE_X
 /* The Menubar */
 WMenu *the_menubar;
+#endif /* HAVE_X */
 
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
@@ -1362,12 +1364,12 @@ static menu_entry OptMenu [] = {
     { ' ', N_("&Layout..."),           'L', layout_cmd },
     { ' ', N_("c&Onfirmation..."),     'O', confirm_box },
     { ' ', N_("&Display bits..."),     'D', display_bits_box },
-#if !defined(HAVE_X) && !defined(OS2_NT)
+#ifndef OS2_NT
     { ' ', N_("learn &Keys..."),       'K', learn_keys },
-#endif
+#endif /* !OS2_NT */
 #ifdef USE_VFS    
     { ' ', N_("&Virtual FS..."),       'V', configure_vfs },
-#endif
+#endif /* !USE_VFS */
     { ' ', "", ' ', 0 }, 
     { ' ', N_("&Save setup"),          'S', save_setup_cmd }
 };
@@ -1375,32 +1377,22 @@ static menu_entry OptMenu [] = {
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
 Menu MenuBar [5];
-#ifndef HAVE_X
 static Menu MenuBarEmpty [5];
-#endif
 
 void
 init_menu (void)
 {
     int i;
 
-#ifdef HAVE_X    
-    MenuBar [0] = create_menu (_(" &Left "), PanelMenu, menu_entries (PanelMenu));
-#else
     MenuBar [0] = create_menu ( horizontal_split ? _(" &Above ") : _(" &Left "), 
                                 PanelMenu, menu_entries (PanelMenu));
-#endif
     MenuBar [1] = create_menu (_(" &File "), FileMenu, menu_entries (FileMenu));
     MenuBar [2] = create_menu (_(" &Command "), CmdMenu, menu_entries (CmdMenu));
     MenuBar [3] = create_menu (_(" &Options "), OptMenu, menu_entries (OptMenu));
-#ifdef HAVE_X
-    MenuBar [4] = create_menu (_(" &Right "), RightMenu, menu_entries (PanelMenu));
-#else
     MenuBar [4] = create_menu (horizontal_split ? _(" &Below ") : _(" &Right "), 
 			       RightMenu, menu_entries (PanelMenu));
     for (i = 0; i < 5; i++)
 	MenuBarEmpty [i] = create_menu (MenuBar [i]->name, 0, 0);
-#endif /* HAVE_X */
 }
 
 void
@@ -1410,9 +1402,7 @@ done_menu (void)
 
     for (i = 0; i < 5; i++){
 	destroy_menu (MenuBar [i]);
-#ifndef HAVE_X
 	destroy_menu (MenuBarEmpty [i]);
-#endif
     }
 }
     
@@ -1942,8 +1932,10 @@ static void done_mc ()
 #endif /* !HAVE_X */
     done_screen ();
     vfs_add_current_stamps ();
+#ifndef HAVE_X
     if (xterm_flag && xterm_hintbar)
         set_hintbar(_("Thank you for using GNU Midnight Commander"));
+#endif /* !HAVE_X */
 }
 
 /* This should be called after destroy_dlg since panel widgets
@@ -2000,6 +1992,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 			}
 	}
 	    
+#ifndef HAVE_X
 	if (id == KEY_F(10) && !the_menubar->active){
 	    quit_cmd ();
 	    return MSG_HANDLED;
@@ -2008,13 +2001,11 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (id == '\t')
 	    free_completions (input_w (cmdline));
 
-#ifndef HAVE_X
 	/* On Linux, we can tell the difference */
 	if (id == '\n' && ctrl_pressed ()){
 	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}
-#endif /* HAVE_X */
 
 	if (id == '\n' && input_w (cmdline)->buffer [0]){
 	    send_message_to (h, (Widget *) cmdline, WIDGET_KEY, id);
@@ -2061,6 +2052,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    }   
 	} 
 	break;
+#endif /* HAVE_X */
 
     case DLG_HOTKEY_HANDLED:
 	if (get_current_type () == view_listing)

@@ -1,5 +1,11 @@
 2001-06-06  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (done_mc) [HAVE_X]: Don't use xterm_flag.
+	(midnight_callback) [HAVE_X]: Don't handle any keys except
+	Ctrl-x sequences.
+	Remove useless preprocessor conditionals.
+	* win.c [HAVE_X]: Disable unused functions.
+
 	* file.c: Add comments after every endif.
 	[HAVE_GNOME] [!WITH_BACKGROUND]: Fix compilation.
 
