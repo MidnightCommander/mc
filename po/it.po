@@ -3,6 +3,8 @@
 # Copyright (C) 1998 Free Software Foundation, Inc.
 # Giuliano Natali <diaolin@diaolin.com>, 1998.
 # Marco Ciampa <ciampix@libero.it>, 1999, 2000, 2001, 2002, 2003.
+# Contributors: 
+# Yuri <yuri@sociol.unimi.it>
 #
 msgid ""
 msgstr ""
@@ -101,7 +103,7 @@ msgstr "Fai i salvataggi -->"
 #: src/hotlist.c:906 src/layout.c:361 src/learn.c:60 src/option.c:146
 #: src/panelize.c:70 src/view.c:476 src/wtools.c:57 src/wtools.c:396
 msgid "&Cancel"
-msgstr "&Cancella"
+msgstr "&Annulla"
 
 #: edit/editcmd.c:371
 msgid "Extension:"
@@ -113,7 +115,7 @@ msgstr " Modifica modo salvataggio"
 
 #: edit/editcmd.c:443 edit/editcmd.c:480
 msgid " Save As "
-msgstr " Salva con nome "
+msgstr " Salva come "
 
 #: edit/editcmd.c:460 edit/editcmd.c:747 edit/editcmd.c:775 edit/editcmd.c:934
 #: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:466
@@ -146,15 +148,15 @@ msgstr " Elimina macro "
 
 #: edit/editcmd.c:583
 msgid " Cannot open temp file "
-msgstr " Errore nell'apertura del file temporaneo "
+msgstr " Impossibile aprirefile temporaneo "
 
 #: edit/editcmd.c:591 edit/editcmd.c:652 edit/editcmd.c:709
 msgid " Cannot open macro file "
-msgstr " Errore nell'apertura del file delle macro "
+msgstr " Impossibile aprire il file delle macro "
 
 #: edit/editcmd.c:615
 msgid " Cannot overwrite macro file "
-msgstr " Errore sovrascrivendo il file delle macro "
+msgstr " Impossibile sovrascrivere il file delle macro "
 
 #: edit/editcmd.c:631 edit/editcmd.c:652
 msgid " Save macro "
@@ -174,7 +176,7 @@ msgstr " Carica macro "
 
 #: edit/editcmd.c:721
 msgid " Confirm save file? : "
-msgstr " Conferma salvataggio file?: "
+msgstr " Conferma salvataggio file? "
 
 #: edit/editcmd.c:723 src/view.c:474
 msgid " Save file "
@@ -914,7 +916,7 @@ msgstr "&Sovrascrittura "
 
 #: src/boxes.c:382
 msgid " confirm &Delete "
-msgstr "Elimin&azione "
+msgstr "E&liminazione "
 
 #: src/boxes.c:388 src/cmd.c:241
 msgid " Confirmation "
@@ -934,7 +936,7 @@ msgstr "7 bit"
 
 #: src/boxes.c:467 src/boxes.c:591
 msgid "F&ull 8 bits input"
-msgstr "Accetta in &Ingresso 8 bit"
+msgstr "Accetta in &ingresso 8 bit"
 
 #: src/boxes.c:475 src/boxes.c:572
 msgid " Display bits "
@@ -1493,7 +1495,7 @@ msgstr "Data di &modifica"
 
 #: src/dir.c:54
 msgid "&Access time"
-msgstr "Data di &accesso"
+msgstr "Data di a&ccesso"
 
 #: src/dir.c:55
 msgid "&Change time"
@@ -2178,7 +2180,7 @@ msgstr "Contenuto: "
 
 #: src/find.c:177 src/main.c:959 src/main.c:986
 msgid "&Tree"
-msgstr "&Albero"
+msgstr "A&lbero"
 
 #: src/find.c:225 src/find.c:803
 msgid "Find File"
@@ -3100,7 +3102,7 @@ msgstr "Menu a&utomatici"
 
 #: src/option.c:69
 msgid "&Auto save setup"
-msgstr "&Autosalva configurazione"
+msgstr "Autosalva &configurazione"
 
 #: src/option.c:70
 msgid "shell &Patterns"
