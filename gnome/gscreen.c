@@ -201,8 +201,18 @@ panel_fill_panel_list (WPanel *panel)
 	int i, col, type_col, color;
 	int width, p;
 	char  **texts;
+	GtkAdjustment *va;
+	double clist_v_pos;
 
 	texts = g_new (char *, items + 1);
+
+	/* CList doesn't restore its vertical scroll position when its cleared,
+	 * so we need to do it manually.
+	 */
+
+	/* Save the vertical position */
+	va = scrolled_window_get_vadjustment (panel->list);
+	clist_v_pos = va->value;
 
 	gtk_clist_freeze (GTK_CLIST (cl));
 	gtk_clist_clear (GTK_CLIST (cl));
@@ -266,6 +276,9 @@ panel_fill_panel_list (WPanel *panel)
 
 		gtk_clist_set_column_width (cl, i, width);
 	}
+
+	/* Now restore the clist's vertical position */
+	gtk_adjustment_set_value (va, clist_v_pos);
 
 	gtk_clist_thaw (GTK_CLIST (cl));
 }
