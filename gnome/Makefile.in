@@ -212,7 +212,7 @@ DISTGNOME_NEW = \
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
 	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) $(DISTGNOME_NEW) \
-	gmc-window.c gmc-window.h
+	$(CLIENTSRCS) gmc-window.c gmc-window.h
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
