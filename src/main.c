@@ -2347,8 +2347,10 @@ OS_Setup ()
     if (!shell || !*shell)
 	shell = "/bin/sh";
 
+#ifndef HAVE_GNOME
     g_snprintf (control_file, sizeof (control_file), CONTROL_FILE, getpid ());
     my_putenv ("MC_CONTROL_FILE", control_file);
+#endif
     
     /* This is the directory, where MC was installed, on Unix this is LIBDIR */
     /* and can be overriden by the MC_LIBDIR environment variable */
