@@ -1,3 +1,7 @@
+2003-02-23  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+
+	* lib/mc.ext.in: Add entry for QNX Neutrino packages.
+
 2003-02-22  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* acinclude.m4 [AC_G_MODULE_SUPPORTED]: New macro.

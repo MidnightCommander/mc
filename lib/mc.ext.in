@@ -397,6 +397,11 @@ regex/\.tar\.F$
 	# Open=%cd %p#utar
 	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
 
+# .qpr/.qpk - QNX Neutrino package installer files 
+regex/\.(qp[rk])$
+	Open=%cd %p#utar
+	View=%view{ascii} gzip -dc %f 2>/dev/null | tar tvvf -
+
 # tar
 regex/\.(tar|TAR)$
 	Open=%cd %p#utar
