@@ -1,3 +1,7 @@
+1999-11-11  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* main.c, cmd.c: add possibility to free VFS now
+
 1999-11-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* layout.c: always display status line. It contains vital
