@@ -24,7 +24,7 @@
 # endif
 #endif /* __watcomc__ */
 
-#if defined(unix) || defined(__unix)
+#if defined(unix) || defined(__unix) || defined (_AIX)
 # ifndef __unix__
 #  define __unix__ 1
 # endif

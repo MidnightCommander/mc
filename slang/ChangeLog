@@ -1,3 +1,8 @@
+2004-10-27  Nerijus Baliunas  <nerijus@users.sourceforge.net>
+
+	* include/slang.h: Define __unix__ if _AIX is defined.
+	Needed on AIX.
+
 2004-10-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sldisply.c (tt_sprintf): Add missed break.
