@@ -13,8 +13,7 @@ endif
 LOCALIZED_HELP = mc.hlp.hu
 LIBFILES_OUT = mc.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.it mc.hint.pl \
-	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc \
-	$(LIBFILES_ADD)
+	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc
 
 noinst_DATA = \
 	xnc.hlp			\
@@ -30,7 +29,7 @@ suppbin_SCRIPTS = mc.csh mc.sh
 desktop_DATA = startup.links README.desktop
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
-mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_OUT) $(LOCALIZED_HELP)
+mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \

@@ -1,3 +1,8 @@
+2001-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.am: Make compatible with Automake 1.4 - remove
+	conditional variables from EXTRA_DIST.
+
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
 	* edit/edit_key_translator.c [HAVE_CHARSET]: Add charset
