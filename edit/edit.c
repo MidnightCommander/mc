@@ -1765,17 +1765,32 @@ static void edit_delete_to_line_begin (WEdit * edit)
     }
 }
 
-void edit_delete_line (WEdit * edit)
+void
+edit_delete_line (WEdit *edit)
 {
-    int c;
-    do {
-	c = edit_delete (edit);
-    } while (c != '\n' && c);
-    do {
-	c = edit_backspace (edit);
-    } while (c != '\n' && c);
-    if (c)
-	edit_insert (edit, '\n');
+    /*
+     * Delete right part of the line.
+     * Note that edit_get_byte() returns '\n' when byte position is
+     *   beyond EOF.
+     */
+    while (edit_get_byte (edit, edit->curs1) != '\n') {
+	(void) edit_delete (edit);
+    }
+
+    /*
+     * Delete '\n' char.
+     * Note that edit_delete() will not corrupt anything if called while
+     *   cursor position is EOF.
+     */
+    (void) edit_delete (edit);
+
+    /*
+     * Delete left part of the line.
+     * Note, that edit_get_byte() returns '\n' when byte position is < 0.
+     */
+    while (edit_get_byte (edit, edit->curs1 - 1) != '\n') {
+	(void) edit_backspace (edit);
+    };
 }
 
 static void insert_spaces_tab (WEdit * edit, int half)

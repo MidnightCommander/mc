@@ -1,3 +1,9 @@
+2002-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* exit.c (edit_delete_line): Don't remove and restore the
+	preceding newline.  Don't treat binary zero as newline.
+	From Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
+
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
 	* *.c: Fix all global functions without declarations - declare,
