@@ -1,3 +1,8 @@
+2002-10-22  Pavel Roskin  <proski@gnu.org>
+
+	* myslang.h: Add a replacement for addch(), which expects a
+	wchar_t argument in patched S-Lang on Red Hat 8.0.
+
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (print_mc_usage): Remove unnecessary newline.

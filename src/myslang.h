@@ -101,7 +101,23 @@ int has_colors (void);
 #define COLS SLtt_Screen_Cols
 #define LINES SLtt_Screen_Rows
 #define standend() SLsmg_normal_video()
+
+#ifdef UTF8
+/*
+ * Patched S-Lang in Red Hat 8.0 expects wchar_t as the argument to addch()
+ * Avoid conversion by using SLsmg_write_nchars(), which takes char*
+ */
+#undef addch
+static inline void
+mc_addch (char c)
+{
+    SLsmg_write_nchars (&c, 1);
+}
+#define addch(c) mc_addch(c)
+#else
 #define addch(c) SLsmg_write_char(c)
+#endif
+
 #define addstr(s) SLsmg_write_string(s)
 #define refresh() SLsmg_refresh()
 #define mvaddstr(y, x, s) SLsmg_gotorc(y, x); SLsmg_write_string(s)
