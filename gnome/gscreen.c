@@ -436,6 +436,7 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 
 	char_width = gdk_string_width (sw->style->font, "xW") / 2;
 	width = main_width - lost_pixels;
+
 	extra_pixels  = width % char_width;
 	usable_pixels = width - extra_pixels;
 	total_columns = usable_pixels / char_width;
@@ -853,14 +854,12 @@ static void
 panel_file_list_compute_lines (GtkScrolledWindow *sw, WPanel *panel, int height)
 {
 	int lost_pixels = 0;
-	
 	if (GTK_WIDGET_VISIBLE (sw->hscrollbar)) {
 		int scrollbar_width = GTK_WIDGET (sw->hscrollbar)->requisition.width;
 		int scrollbar_space = GTK_SCROLLED_WINDOW_CLASS (GTK_OBJECT (sw)->klass)->scrollbar_spacing;
 
 		lost_pixels = scrollbar_space + scrollbar_width;
 	}
-
 	panel->widget.lines = (height-lost_pixels) / (GTK_CLIST (sw->viewport)->row_height + CELL_SPACING);
 }
 

@@ -1,3 +1,12 @@
+1998-11-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (session_save_state): Use gnome_geometry_string.
+
+1998-11-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_file_list_compute_lines): Quick hack to get mc
+	to compile with the new CList.
+
 1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.in: Removed gtrans.c from the list of sources.

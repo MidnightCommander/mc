@@ -575,14 +575,13 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 	for (i = 1, l = containers; l; l = l->next){
 		PanelContainer *pc = l->data;
 		int x, y, w, h;
-		char *buffer = g_malloc (32);
+		char *geom;
 
-		gdk_window_get_origin (GTK_WIDGET (pc->panel->widget.wdata)->window, &x, &y);
-		gdk_window_get_size   (GTK_WIDGET (pc->panel->widget.wdata)->window, &w, &h);
-		sprintf (buffer, "%dx%d+%d+%d", w, h, x, y);
+		geom = gnome_geometry_string (GTK_WIDGET (pc->panel->widget.wdata)->window);
+		
 		argv [i++] = pc->panel->cwd;
 		argv [i++] = "--geometry";
-		argv [i++] = buffer;
+		argv [i++] = geom;
 		free_list = g_list_append (free_list, buffer);
 	}
 
