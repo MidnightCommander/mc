@@ -11,6 +11,7 @@ config.status
 config.sub
 configure
 gettext.m4
+intl
 install-sh
 mc.spec
 mcfn_install
