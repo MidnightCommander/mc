@@ -71,6 +71,8 @@ mczipfs_copyout ()
     $XUNZIP -p $1 $2 > $3 2>/dev/null
 }
 
+umask 077
+
 case "$1" in
   list) mczipfs_list $2; exit 0;;
   copyout) mczipfs_copyout $2 $3 $4; exit 0;;

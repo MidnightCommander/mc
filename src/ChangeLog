@@ -1,3 +1,13 @@
+Wed Dec 16 06:27:00 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* screen.c (Xtry_to_select): Don't select a similar file when
+	"name" can't be found in the panel (when deleting files the
+	selection jumpped from the deleted "file" to a directory which
+	started with the same character as "file", annoying). 
+	Strip known vfs suffixes from "name" before trying to select
+	(I think Timur made this suggestion a few months ago). Know the 
+	vfs is mature enough to do this.
+
 1998-12-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dir.c (link_isdir): Remove unused variable.

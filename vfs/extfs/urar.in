@@ -40,6 +40,7 @@ mcrarfs_copyout ()
 {
     $UNRAR p -c- -inul $1 $2 > $3 2>/dev/null
 }
+umask 077
 
 case "$1" in
   list) mcrarfs_list $2; exit 0;;

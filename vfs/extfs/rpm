@@ -162,6 +162,7 @@ mcrpmfs_run ()
 LC_ALL=C
 export LC_ALL
 
+umask 077
 case "$1" in
   list) mcrpmfs_list "$2"; exit 0;;
   copyout) mcrpmfs_copyout "$2" "$3" "$4"; exit 0;;

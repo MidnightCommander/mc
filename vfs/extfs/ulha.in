@@ -135,6 +135,8 @@ mc_lha_fs_run()
 
 
 # The main routine
+umask 077
+
 case "$1" in
    list) mc_lha_fs_list $2; exit $?;;
    copyout) mc_lha_fs_copyout $2 $3 $4; exit $?;;

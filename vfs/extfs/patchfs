@@ -61,6 +61,7 @@ case $type in
     *) exit 1
 esac
 
+umask 077
 case "$1" in
     list) patchfs_list $2; exit 0;;
     copyout) patchfs_copyout $2 $3 $4; exit 0;;

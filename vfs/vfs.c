@@ -146,6 +146,37 @@ vfs_type_from_op (char *path)
     return NULL; /* shut up stupid gcc */
 }
 
+/* Strip known vfs suffixes from a filename (possible improvement: strip
+   suffix from last path component). 
+   Returns a malloced string which has to be freed. */
+char *
+vfs_strip_suffix_from_filename (char *filename)
+{
+    vfs *vfs;
+    char *semi;
+    char *p;
+
+    if (!filename) vfs_die( "vfs_strip_suffix_from_path got NULL: impossible" );
+    
+    p = strdup (filename);
+    if (!(semi = strrchr (p, '#')))
+	return p;
+
+    for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
+        if (vfs->which) {
+	    if ((*vfs->which) (vfs, semi + 1) == -1)
+		continue;
+	    *semi = '\0'; /* Found valid suffix */
+	    return p;
+	}
+	if (!strncmp (semi + 1, vfs->prefix, strlen (vfs->prefix))) {
+	    *semi = '\0'; /* Found valid suffix */
+	    return p;
+        }
+    }
+    return p;
+}
+
 static int
 path_magic (char *path)
 {

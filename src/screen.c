@@ -831,47 +831,32 @@ do_select (WPanel *panel, int i)
 void
 Xtry_to_select (WPanel *panel, char *name)
 {
-    int i, best = -1, bestl = -1;
+    int i;
     char *subdir;
-    
+
     if (!name) {
         do_select(panel, 0);
 	return;
     }
 
     /* We only want the last component of the directory */
-    subdir = x_basename(name);
-    
-    if (subdir < name)
-	subdir = name;
-    
+    subdir = x_basename (name);
+
+    subdir = vfs_strip_suffix_from_filename (subdir);
+
     /* Search that subdirectory, if found select it */
     for (i = 0; i < panel->count; i++){
-        char *s = panel->dir.list [i].fname;
-        int l = strlen (s);
-	if (strncmp (subdir, s, l))
-	    continue;
-
-        if (l == strlen(subdir)){
-	    /* Complete match, hilight */
+	if (strcmp (subdir, panel->dir.list [i].fname) == 0) {
 	    do_select (panel, i);
+            free (subdir);
 	    return;
-	}
-        if (bestl > l)
-	    continue;
-        bestl = l;
-	best = i;
-    }
-
-    if (best != -1) {
-      /* Try to select longest inclusive match - good for vfs */
-       do_select (panel, best);
-       return;
+        }
     }
 
     /* Try to select a file near the file that is missing */
     if (panel->selected >= panel->count)
         do_select (panel, panel->count-1);
+    free (subdir);
 }
 
 #ifndef PORT_HAS_PANEL_UPDATE_COLS

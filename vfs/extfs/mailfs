@@ -105,6 +105,8 @@ if (/gzip/) {
     exit 1 unless (open IN, "<$mbox_name");
 }
 
+umask 077;
+
 if($cmd eq "list") { &mailfs_list; exit 0; }
 elsif($cmd eq "copyout") { &mailfs_copyout(@ARGV); exit 0; }
 

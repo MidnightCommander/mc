@@ -130,6 +130,8 @@ version of it. There is no special upgrade option. Install always works.
 
 EOInstall
 
+umask 077;
+
 if($ARGV[0] eq "list") { shift; &mcdebfs_list(@ARGV); exit 0; }
 elsif($ARGV[0] eq "copyout") { shift; &mcdebfs_copyout(@ARGV); exit 0; }
 elsif($ARGV[0] eq "run") { shift; &mcdebfs_run(@ARGV); exit 0; }

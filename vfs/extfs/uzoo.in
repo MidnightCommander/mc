@@ -59,6 +59,9 @@ else
   trap 'rm -f $SYMLINK' 0 1 2 3 5 13 15
   $2=$SYMLINK
 fi
+
+umask 077
+
 case "$1" in
   list) mczoofs_list $2; exit $?;;
   copyout) mczoofs_copyout $2 $3 $4; exit $?;;

@@ -60,6 +60,7 @@ mccpiofs_copyout ()
 #
 # main
 #
+    umask 077
 
     case "$1" in
     list)   mccpiofs_list $2

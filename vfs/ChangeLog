@@ -1,3 +1,12 @@
+Wed Dec 16 06:36:42 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* vfs.c (vfs_strip_suffix_from_filename): New function which strips
+	known vfs suffixes from a filename and returns a malloced string
+	which has to be freed. Possible improvement: strip vfs suffix from
+	last path component.
+
+	* extfs/*: added "umask 077" to every script.
+
 Tue Dec 15 16:41:50 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* extfs.c (extfs_open), sfs.c (redirect): create files 0600 and

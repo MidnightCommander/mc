@@ -26,6 +26,7 @@ mcarjfs_copyout ()
 $ARJ p $1 $2 2> $3 > /dev/null
 }
 
+umask 077
 case "$1" in
   list) mcarjfs_list $2; exit 0;;
   copyout) mcarjfs_copyout $2 $3 $4; exit 0;;

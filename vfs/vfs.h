@@ -148,6 +148,7 @@ struct utimbuf {
     vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par);
     void vfs_rm_parents (struct vfs_stamping *stamp);
     char *vfs_path (char *path);
+    char *vfs_strip_suffix_from_filename (char *filename);
     char *vfs_canon (char *path);
     char *mc_get_current_wd (char *buffer, int bufsize);
     int vfs_current_is_local (void);
@@ -240,6 +241,7 @@ struct utimbuf {
 #   define vfs_current_is_tarfs() 0
 #   define vfs_current_is_extfs() 0
 #   define vfs_path(x) x
+#   define vfs_strip_suffix_from_filename (x) strdup(x)
 #   define mc_close close
 #   define mc_read read
 #   define mc_write write
