@@ -40,6 +40,12 @@
 #undef STAT_STATVFS
 #undef HAVE_F_FSTYPENAME
 
+/* Define umode_t if your system does not provide it */
+#undef umode_t
+
+/* Define nlink_t if your system does not provide it */
+#undef nlink_t
+
 /* Is the program using the GPM library? */
 #undef HAVE_LIBGPM
 
@@ -107,6 +113,9 @@
 
 /* Define if you have the get_process_stats function and have to use that instead of gettimeofday  */
 #undef HAVE_GET_PROCESS_STATS
+
+/* Define if your system has socket() */
+#undef HAVE_SOCKET
 
 /* Define if you want to call the internal routine edit() for the editor */
 #undef USE_INTERNAL_EDIT

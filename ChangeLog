@@ -1,3 +1,8 @@
+2001-09-06  Timur Bakeyev <mc@bat.ru>
+
+	* acconfig.h: Brought back couple of symbols, that are still necessary
+	due reference to them from configure.in.
+
 2001-09-04  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/changelog.syntax: Fix highlighting of functions.  Relax
