@@ -1,3 +1,9 @@
+2004-02-04  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (edit_execute_key_command): Return void, the result is
+	never used.
+	(edit_execute_cmd): Likewise.
+
 2003-12-24  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* syntax.c (edit_read_syntax_rules): Fix crash if syntax file

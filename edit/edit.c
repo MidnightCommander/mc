@@ -2101,22 +2101,20 @@ static void edit_goto_matching_bracket (WEdit *edit)
  * command to the editor.  Note that the screen wouldn't update
  * automatically.  Either of command or char_for_insertion must be
  * passed as -1.  Commands are executed, and char_for_insertion is
- * inserted at the cursor.  0 is returned if the command is an undefined
- * macro, 1 otherwise.
+ * inserted at the cursor.
  */
-int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
+void edit_execute_key_command (WEdit *edit, int command, int char_for_insertion)
 {
-    int r;
     if (command == CK_Begin_Record_Macro) {
 	edit->macro_i = 0;
 	edit->force |= REDRAW_CHAR_ONLY | REDRAW_LINE;
-	return command;
+	return;
     }
     if (command == CK_End_Record_Macro && edit->macro_i != -1) {
 	edit->force |= REDRAW_COMPLETELY;
 	edit_save_macro_cmd (edit, edit->macro, edit->macro_i);
 	edit->macro_i = -1;
-	return command;
+	return;
     }
     if (edit->macro_i >= 0 && edit->macro_i < MAX_MACRO_LENGTH - 1) {
 	edit->macro[edit->macro_i].command = command;
@@ -2126,34 +2124,33 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
     if (command != CK_Undo)
 	edit_push_key_press (edit);
 
-    r = edit_execute_cmd (edit, command, char_for_insertion);
+    edit_execute_cmd (edit, command, char_for_insertion);
     if (column_highlighting)
 	edit->force |= REDRAW_PAGE;
-
-    return r;
 }
 
 static const char * const shell_cmd[] = SHELL_COMMANDS_i
 
-/* 
+/*
    This executes a command at a lower level than macro recording.
    It also does not push a key_press onto the undo stack. This means
    that if it is called many times, a single undo command will undo
    all of them. It also does not check for the Undo command.
-   Returns 0 if the command is a macro that was not found, 1
-   otherwise.
  */
-int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
+void
+edit_execute_cmd (WEdit *edit, int command, int char_for_insertion)
 {
-    int result = 1;
     edit->force |= REDRAW_LINE;
+
+    /* The next key press will unhighlight the found string, so update
+     * the whole page */
     if (edit->found_len || column_highlighting)
-/* the next key press will unhighlight the found string, so update whole page */
 	edit->force |= REDRAW_PAGE;
 
     if (command / 100 == 6) {	/* a highlight command like shift-arrow */
 	column_highlighting = 0;
-	if (!edit->highlight || (edit->mark2 != -1 && edit->mark1 != edit->mark2)) {
+	if (!edit->highlight
+	    || (edit->mark2 != -1 && edit->mark1 != edit->mark2)) {
 	    edit_mark_cmd (edit, 1);	/* clear */
 	    edit_mark_cmd (edit, 0);	/* marking on */
 	}
@@ -2164,15 +2161,16 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->highlight = 0;
     }
 
-/* first check for undo */
+    /* first check for undo */
     if (command == CK_Undo) {
 	edit_do_undo (edit);
 	edit->found_len = 0;
 	edit->prev_col = edit_get_col (edit);
 	edit->search_start = edit->curs1;
-	return 1;
+	return;
     }
-/* An ordinary key press */
+
+    /* An ordinary key press */
     if (char_for_insertion >= 0) {
 	if (edit->overwrite) {
 	    if (edit_get_byte (edit, edit->curs1) != '\n')
@@ -2188,7 +2186,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->prev_col = edit_get_col (edit);
 	edit->search_start = edit->curs1;
 	edit_find_bracket (edit);
-	return 1;
+	return;
     }
     switch (command) {
     case CK_Begin_Page:
@@ -2212,7 +2210,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->force |= REDRAW_CHAR_ONLY;
     }
 
-/* basic cursor key commands */
+    /* basic cursor key commands */
     switch (command) {
     case CK_BackSpace:
 	if (option_backspace_through_tabs && is_in_indent (edit)) {
@@ -2403,11 +2401,15 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Next_Bookmark:
 	if (edit->book_mark) {
 	    struct _book_mark *p;
-	    p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
+	    p = (struct _book_mark *) book_mark_find (edit,
+						      edit->curs_line);
 	    if (p->next) {
 		p = p->next;
-		if (p->line >= edit->start_line + edit->num_widget_lines || p->line < edit->start_line)
-		    edit_move_display (edit, p->line - edit->num_widget_lines / 2);
+		if (p->line >= edit->start_line + edit->num_widget_lines
+		    || p->line < edit->start_line)
+		    edit_move_display (edit,
+				       p->line -
+				       edit->num_widget_lines / 2);
 		edit_move_to_line (edit, p->line);
 	    }
 	}
@@ -2415,13 +2417,17 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Prev_Bookmark:
 	if (edit->book_mark) {
 	    struct _book_mark *p;
-	    p = (struct _book_mark *) book_mark_find (edit, edit->curs_line);
+	    p = (struct _book_mark *) book_mark_find (edit,
+						      edit->curs_line);
 	    while (p->line == edit->curs_line)
 		if (p->prev)
 		    p = p->prev;
 	    if (p->line >= 0) {
-		if (p->line >= edit->start_line + edit->num_widget_lines || p->line < edit->start_line)
-		    edit_move_display (edit, p->line - edit->num_widget_lines / 2);
+		if (p->line >= edit->start_line + edit->num_widget_lines
+		    || p->line < edit->start_line)
+		    edit_move_display (edit,
+				       p->line -
+				       edit->num_widget_lines / 2);
 		edit_move_to_line (edit, p->line);
 	    }
 	}
@@ -2552,53 +2558,21 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Shell:
 	view_other_cmd ();
 	break;
-
-/* These commands are not handled and must be handled by the user application */
-#if 0
-    case CK_Sort:
-    case CK_Mail:
-    case CK_Find_File:
-    case CK_Ctags:
-    case CK_Terminal:
-    case CK_Terminal_App:
-    case CK_ExtCmd:
-#endif
-    case CK_Complete:
-    case CK_Cancel:
-    case CK_Save_Desktop:
-    case CK_New_Window:
-    case CK_Cycle:
-    case CK_Save_And_Quit:
-    case CK_Check_Save_And_Quit:
-    case CK_Run_Another:
-    case CK_Debug_Start:
-    case CK_Debug_Stop:
-    case CK_Debug_Toggle_Break:
-    case CK_Debug_Clear:
-    case CK_Debug_Next:
-    case CK_Debug_Step:
-    case CK_Debug_Back_Trace:
-    case CK_Debug_Continue:
-    case CK_Debug_Enter_Command:
-    case CK_Debug_Until_Curser:
-	result = 0;
-	break;
-    case CK_Menu:
-	result = 0;
+    default:
 	break;
     }
 
-/* CK_Pipe_Block */
+    /* CK_Pipe_Block */
     if ((command / 1000) == 1)	/* a shell command */
 	edit_block_process_cmd (edit, shell_cmd[command - 1000], 1);
     if (command > CK_Macro (0) && command <= CK_Last_Macro) {	/* a macro command */
 	struct macro m[MAX_MACRO_LENGTH];
 	int nm;
-	if ((result = edit_load_macro_cmd (edit, m, &nm, command - 2000)))
+	if (edit_load_macro_cmd (edit, m, &nm, command - 2000))
 	    edit_execute_macro (edit, m, nm);
     }
 
-/* keys which must set the col position, and the search vars */
+    /* keys which must set the col position, and the search vars */
     switch (command) {
     case CK_Find:
     case CK_Find_Again:
@@ -2606,8 +2580,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Replace_Again:
     case CK_Complete_Word:
 	edit->prev_col = edit_get_col (edit);
-	return 1;
-	break;
+	return;
     case CK_Up:
     case CK_Up_Highlight:
     case CK_Down:
@@ -2631,8 +2604,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
 	edit_find_bracket (edit);
-	return 1;
-	break;
+	return;
     default:
 	edit->found_len = 0;
 	edit->prev_col = edit_get_col (edit);
@@ -2652,7 +2624,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	    edit->force |= REDRAW_PAGE;
 	}
     }
-    return result;
 }
 
 

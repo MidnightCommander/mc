@@ -211,7 +211,8 @@ void edit_date_cmd (WEdit * edit);
 void edit_goto_cmd (WEdit * edit);
 int eval_marks (WEdit * edit, long *start_mark, long *end_mark);
 void edit_status (WEdit * edit);
-int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion);
+void edit_execute_key_command (WEdit *edit, int command,
+			       int char_for_insertion);
 void edit_update_screen (WEdit * edit);
 int edit_print_string (WEdit * e, const char *s);
 void edit_move_to_line (WEdit * e, long line);
@@ -255,7 +256,7 @@ void edit_mail_dialog (WEdit *edit);
 void format_paragraph (WEdit *edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
-int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
+void edit_execute_cmd (WEdit *edit, int command, int char_for_insertion);
 
 #define get_sys_error(s) (s)
 
