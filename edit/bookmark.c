@@ -20,8 +20,21 @@
    02111-1307, USA.
  */
 
-
 #include <config.h>
+
+#include <ctype.h>
+#include <errno.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
+#include "../src/global.h"
+
 #include "edit.h"
 #include "edit-widget.h"
 

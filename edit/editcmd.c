@@ -26,6 +26,20 @@
 #include <config.h>
 #include <ctype.h>
 
+#include <stdio.h>
+#include <stdarg.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+#include <ctype.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <errno.h>
+
+#include <stdlib.h>
+
+#include "../src/global.h"
+
 #include "edit.h"
 #include "editlock.h"
 #include "editcmddef.h"

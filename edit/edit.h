@@ -23,22 +23,6 @@
 #ifndef MC_EDIT_H
 #define MC_EDIT_H
 
-#include <stdio.h>
-#include <stdarg.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
-#include <string.h>
-#include <ctype.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <errno.h>
-
-#include <stdlib.h>
-
-#include "../src/global.h"
-
 #define N_menus 5
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	(1 << 0)

@@ -1,3 +1,8 @@
+2005-02-22  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.h: Removed unnecessary #include directives ...
+	* *.c: ... and added them here.
+
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
 	* editdraw.c: Renamed redraw_labels to buttonbar_redraw.

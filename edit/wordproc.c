@@ -19,6 +19,23 @@
  */
 
 #include <config.h>
+
+#include <stdio.h>
+#include <stdarg.h>
+#include <sys/types.h>
+#ifdef HAVE_UNISTD_H
+#    include <unistd.h>
+#endif
+#include <string.h>
+#include <ctype.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <errno.h>
+
+#include <stdlib.h>
+
+#include "../src/global.h"
+
 #include "edit.h"
 #include "edit-widget.h"
 
