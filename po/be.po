@@ -160,7 +160,7 @@ msgid "Cancel"
 msgstr "Адмена"
 
 #: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
-msgid " Error trying to save file. "
+msgid " Cannot save file. "
 msgstr " Памылка пры захаваньні файлу "
 
 #: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
@@ -168,15 +168,15 @@ msgid " Delete macro "
 msgstr " Выдаліць макрас "
 
 #: edit/editcmd.c:543
-msgid " Error trying to open temp file "
+msgid " Cannot open temp file "
 msgstr " Памылка пры адкрыцьці часовага файлу "
 
 #: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
-msgid " Error trying to open macro file "
+msgid " Cannot open macro file "
 msgstr " Памылка пры адкрыцьці файлу макрасаў "
 
 #: edit/editcmd.c:575
-msgid " Error trying to overwrite macro file "
+msgid " Cannot overwrite macro file "
 msgstr " Памылка пры перазапісу файлу макрасаў "
 
 #: edit/editcmd.c:591 edit/editcmd.c:612
@@ -376,7 +376,7 @@ msgid " Insert File "
 msgstr " Уставіць файл "
 
 #: edit/editcmd.c:2132
-msgid " Error trying to insert file. "
+msgid " Cannot insert file. "
 msgstr " Памылка пры ўстаўцы файлу. "
 
 #: edit/editcmd.c:2149
@@ -400,7 +400,7 @@ msgid " Sort "
 msgstr " Сартаваньне "
 
 #: edit/editcmd.c:2169
-msgid " Error trying to execute sort command "
+msgid " Cannot execute sort command "
 msgstr " Памылка пры выкананьні каманды sort "
 
 #: edit/editcmd.c:2174

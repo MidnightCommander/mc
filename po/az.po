@@ -167,7 +167,7 @@ msgid "Cancel"
 msgstr "Ləğv Et"
 
 #: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
-msgid " Error trying to save file. "
+msgid " Cannot save file. "
 msgstr " Faylı qeyd edərkən xəta oldu . "
 
 #: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
@@ -175,15 +175,15 @@ msgid " Delete macro "
 msgstr " Makronu sil "
 
 #: edit/editcmd.c:543
-msgid " Error trying to open temp file "
+msgid " Cannot open temp file "
 msgstr " Müvəqqəti faylı açarkən xəta oldu "
 
 #: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
-msgid " Error trying to open macro file "
+msgid " Cannot open macro file "
 msgstr " Makro faylını açarkən xəta oldu "
 
 #: edit/editcmd.c:575
-msgid " Error trying to overwrite macro file "
+msgid " Cannot overwrite macro file "
 msgstr " Makro faylının üstünə yazarken xəta oldu "
 
 #: edit/editcmd.c:591 edit/editcmd.c:612
@@ -383,7 +383,7 @@ msgid " Insert File "
 msgstr " Faylı daxil et "
 
 #: edit/editcmd.c:2132
-msgid " Error trying to insert file. "
+msgid " Cannot insert file. "
 msgstr " Faylı daxil edərkən xəta oldu. "
 
 #: edit/editcmd.c:2149
@@ -407,7 +407,7 @@ msgid " Sort "
 msgstr " Süz "
 
 #: edit/editcmd.c:2169
-msgid " Error trying to execute sort command "
+msgid " Cannot execute sort command "
 msgstr " Süzmə əmri işə salınarkən xəta oldu "
 
 #: edit/editcmd.c:2174

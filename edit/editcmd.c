@@ -454,7 +454,7 @@ edit_save_as_cmd (WEdit *edit)
 		g_free (exp);
 		edit_error_dialog (_(" Save As "),
 				   get_sys_error (_
-						  (" Error trying to save file. ")));
+						  (" Cannot save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
@@ -555,7 +555,7 @@ edit_delete_macro (WEdit * edit, int k)
 /* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
 /* 'Open' = load temp file */
-		 get_sys_error (_(" Error trying to open temp file ")));
+		 get_sys_error (_(" Cannot open temp file ")));
 	return 1;
     }
     f = edit_open_macro_file ("r");
@@ -563,7 +563,7 @@ edit_delete_macro (WEdit * edit, int k)
 /* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
 /* 'Open' = load temp file */
-		get_sys_error (_(" Error trying to open macro file ")));
+		get_sys_error (_(" Cannot open macro file ")));
 	fclose (g);
 	return 1;
     }
@@ -587,7 +587,7 @@ edit_delete_macro (WEdit * edit, int k)
     if (rename (catstrs (home_dir, TEMP_FILE, 0), catstrs (home_dir, MACRO_FILE, 0)) == -1) {
 /* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
-	   get_sys_error (_(" Error trying to overwrite macro file ")));
+	   get_sys_error (_(" Cannot overwrite macro file ")));
 	return 1;
     }
     if (saved_macros_loaded)
@@ -624,7 +624,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	    return 1;
 	} else
 /* This heads the 'Save Macro' dialog box */
-	    edit_error_dialog (_(" Save macro "), get_sys_error (_(" Error trying to open macro file ")));
+	    edit_error_dialog (_(" Save macro "), get_sys_error (_(" Cannot open macro file ")));
     }
     return 0;
 }
@@ -681,7 +681,7 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
     } else
 /* This heads the 'Load Macro' dialog box */
 	edit_error_dialog (_(" Load macro "),
-		get_sys_error (_(" Error trying to open macro file ")));
+		get_sys_error (_(" Cannot open macro file ")));
     return 0;
 }
 
@@ -2145,7 +2145,7 @@ edit_save_block_cmd (WEdit *edit)
 		g_free (exp);
 		edit_error_dialog (_(" Save Block "),
 				   get_sys_error (_
-						  (" Error trying to save file. ")));
+						  (" Cannot save file. ")));
 	    }
 	}
     }
@@ -2174,7 +2174,7 @@ edit_insert_file_cmd (WEdit *edit)
 		g_free (exp);
 		edit_error_dialog (_(" Insert File "),
 				   get_sys_error (_
-						  (" Error trying to insert file. ")));
+						  (" Cannot insert file. ")));
 	    }
 	}
     }
@@ -2211,7 +2211,7 @@ int edit_sort_cmd (WEdit * edit)
     if (e) {
 	if (e == -1 || e == 127) {
 	    edit_error_dialog (_(" Sort "), 
-	    get_sys_error (_(" Error trying to execute sort command ")));
+	    get_sys_error (_(" Cannot execute sort command ")));
 	} else {
 	    char q[8];
 	    sprintf (q, "%d ", e);

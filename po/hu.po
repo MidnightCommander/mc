@@ -168,7 +168,7 @@ msgid "Cancel"
 msgstr "Mégsem"
 
 #: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
-msgid " Error trying to save file. "
+msgid " Cannot save file. "
 msgstr " Hiba történt a fájl mentésekor. "
 
 #: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
@@ -176,15 +176,15 @@ msgid " Delete macro "
 msgstr " Makró törlése "
 
 #: edit/editcmd.c:543
-msgid " Error trying to open temp file "
+msgid " Cannot open temp file "
 msgstr " Nem sikerült az ideiglenes fájlt megnyitni "
 
 #: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
-msgid " Error trying to open macro file "
+msgid " Cannot open macro file "
 msgstr " Nem sikerült a makrófájlt megnyitni "
 
 #: edit/editcmd.c:575
-msgid " Error trying to overwrite macro file "
+msgid " Cannot overwrite macro file "
 msgstr " Nem sikerült felülírni a makrófájlt "
 
 #: edit/editcmd.c:591 edit/editcmd.c:612
@@ -385,7 +385,7 @@ msgid " Insert File "
 msgstr " Fájl beszúrása "
 
 #: edit/editcmd.c:2132
-msgid " Error trying to insert file. "
+msgid " Cannot insert file. "
 msgstr " Nem sikerült a fájl beszúrása. "
 
 #: edit/editcmd.c:2149
@@ -409,7 +409,7 @@ msgid " Sort "
 msgstr " Rendezés "
 
 #: edit/editcmd.c:2169
-msgid " Error trying to execute sort command "
+msgid " Cannot execute sort command "
 msgstr " Nem sikerült a 'sort' futtatása "
 
 #: edit/editcmd.c:2174

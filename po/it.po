@@ -166,7 +166,7 @@ msgid "Cancel"
 msgstr "Annulla"
 
 #: edit/editcmd.c:456 edit/editcmd.c:2147 src/view.c:475
-msgid " Error trying to save file. "
+msgid " Cannot save file. "
 msgstr " Errore nel salvataggio del file. "
 
 #: edit/editcmd.c:555 edit/editcmd.c:563 edit/editcmd.c:588 edit/editcmd.c:635
@@ -174,15 +174,15 @@ msgid " Delete macro "
 msgstr " Elimina macro "
 
 #: edit/editcmd.c:557
-msgid " Error trying to open temp file "
+msgid " Cannot open temp file "
 msgstr " Errore nell'apertura del file temporaneo "
 
 #: edit/editcmd.c:565 edit/editcmd.c:626 edit/editcmd.c:683
-msgid " Error trying to open macro file "
+msgid " Cannot open macro file "
 msgstr " Errore nell'apertura del file delle macro "
 
 #: edit/editcmd.c:589
-msgid " Error trying to overwrite macro file "
+msgid " Cannot overwrite macro file "
 msgstr " Errore sovrascrivendo il file delle macro "
 
 #: edit/editcmd.c:605 edit/editcmd.c:626
@@ -385,7 +385,7 @@ msgid " Insert File "
 msgstr " Inserisci file "
 
 #: edit/editcmd.c:2176
-msgid " Error trying to insert file. "
+msgid " Cannot insert file. "
 msgstr " Errore nell'inserimento del file "
 
 #: edit/editcmd.c:2193
@@ -409,7 +409,7 @@ msgid " Sort "
 msgstr " Ordina "
 
 #: edit/editcmd.c:2213
-msgid " Error trying to execute sort command "
+msgid " Cannot execute sort command "
 msgstr " Errore nell'esecuzione del comando `sort' "
 
 #: edit/editcmd.c:2218

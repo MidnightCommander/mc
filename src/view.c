@@ -472,7 +472,7 @@ save_edit_changes (WView *view)
 
 	if (fp == -1) {
 	    fp = query_dialog (_(" Save file "),
-			       _(" Error trying to save file. "),
+			       _(" Cannot save file. "),
 			       2, 2, _("&Retry"), _("&Cancel")) - 1;
 	}
     } while (fp == -1);

@@ -166,7 +166,7 @@ msgid "Cancel"
 msgstr "Cancel·la"
 
 #: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
-msgid " Error trying to save file. "
+msgid " Cannot save file. "
 msgstr " S'ha produït un error en intentar desar el fitxer. "
 
 #: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
@@ -174,15 +174,15 @@ msgid " Delete macro "
 msgstr " Suprimeix la macro "
 
 #: edit/editcmd.c:543
-msgid " Error trying to open temp file "
+msgid " Cannot open temp file "
 msgstr " S'ha produït un error en obrir un fitxer temporal "
 
 #: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
-msgid " Error trying to open macro file "
+msgid " Cannot open macro file "
 msgstr " S'ha produït un error en obrir el fitxer de macros "
 
 #: edit/editcmd.c:575
-msgid " Error trying to overwrite macro file "
+msgid " Cannot overwrite macro file "
 msgstr " S'ha produït un error en sobreescriure el fitxer de macros "
 
 #: edit/editcmd.c:591 edit/editcmd.c:612
@@ -383,7 +383,7 @@ msgid " Insert File "
 msgstr " Insereix el fitxer "
 
 #: edit/editcmd.c:2132
-msgid " Error trying to insert file. "
+msgid " Cannot insert file. "
 msgstr " S'ha produït un error en provar d'inserir el fitxer. "
 
 #: edit/editcmd.c:2149
@@ -408,7 +408,7 @@ msgid " Sort "
 msgstr " Ordena "
 
 #: edit/editcmd.c:2169
-msgid " Error trying to execute sort command "
+msgid " Cannot execute sort command "
 msgstr " S'ha produït un error en executar la comanda \"ordena\" "
 
 #: edit/editcmd.c:2174
