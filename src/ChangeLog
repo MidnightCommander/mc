@@ -5,6 +5,8 @@
 	redraw_labels to buttonbar_redraw.
 	* widget.c: Likewise.
 	* help.c, main.c, screen.c, tree.v, view.c: Likewise.
+	* util.h: Added macro str_cmp to allow syntactically nice string
+	comparison.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 

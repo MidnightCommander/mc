@@ -246,4 +246,7 @@ free_after (char *result, char *string_to_free)
 	return result;
 }
 
+/* usage: str_cmp ("foo", !=, "bar") */
+#define str_cmp(a,rel,b) (strcmp ((a), (b)) rel 0)
+
 #endif
