@@ -24,7 +24,7 @@ msgstr " Зб╕й при спроб╕ в╕дкрити файл для читання: "
 
 #: edit/edit.c:353
 msgid " Error reading from pipe: "
-msgstr " Помилка читання з канала: "
+msgstr " Помилка читання з каналу: "
 
 #: edit/edit.c:358
 msgid " Failed trying to open pipe for reading: "
@@ -333,7 +333,7 @@ msgstr " Пошук "
 #: edit/editcmd.c:1572
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
-msgstr " Неправильний ре╜улярний вираз або у scanf-формат╕ багато перетворень"
+msgstr " Неправильний регулярний вираз або у scanf-формат╕ багато перетворень"
 
 #. "Invalid regexp string or scanf string"
 #: edit/editcmd.c:1771
@@ -1342,7 +1342,7 @@ msgstr " В╕дм╕тити групу "
 
 #: src/cmd.c:518 src/cmd.c:569 src/find.c:269
 msgid "  Malformed regular expression  "
-msgstr "  Ре╜улярний вираз сформовано нев╕рно  "
+msgstr "  Регулярний вираз сформовано нев╕рно  "
 
 #: src/cmd.c:542
 msgid " Unselect "
@@ -1921,7 +1921,7 @@ msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
-" Призначення \"%s\" повино бути каталогом \n"
+" Призначення \"%s\" повинно бути каталогом \n"
 " %s "
 
 #: src/file.c:929
@@ -3081,7 +3081,7 @@ msgstr "Редагувати файл &синтаксису"
 
 #: src/main.c:1212
 msgid "&Configuration..."
-msgstr "&Конф╕╜урац╕я..."
+msgstr "&Конф╕гурац╕я..."
 
 #: src/main.c:1214
 msgid "c&Onfirmation..."
@@ -3205,7 +3205,7 @@ msgid ""
 "terminfo/termcap\n"
 "                   default.\n"
 msgstr ""
-"-f, --libdir       Надрукувати сконф╕╜урован╕ шляхи.\n"
+"-f, --libdir       Надрукувати сконф╕гурован╕ шляхи.\n"
 "-h, --help         Показати це дов╕дкове пов╕домлення.\n"
 "-k, --resetsoft    Скинути програмован╕ клав╕ш╕ (лише HP-терм╕нали)\n"
 "                   до значень у terminfo/termcap.\n"
@@ -3225,7 +3225,7 @@ msgid ""
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
 msgstr ""
 "-P, --printwd      Друкувати останн╕й робочий каталог при виход╕.\n"
-"-s, --slow         Вимка╓ багатосл╕вн╕ операц╕╖ (для пов╕льних терм╕нал╕в).\n"
+"-s, --slow         Вимика╓ багатосл╕вн╕ операц╕╖ (для пов╕льних терм╕нал╕в).\n"
 
 #: src/main.c:2246
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
@@ -3256,9 +3256,9 @@ msgid ""
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
 "-v, --view fname   Запуск у режим╕ перегляду файлу.\n"
-"-V, --version      Пов╕домити верс╕ю ╕ параметри конф╕╜урац╕╖.\n"
+"-V, --version      Пов╕домити верс╕ю ╕ параметри конф╕гурац╕╖.\n"
 "-x, --xterm        П╕дтримка миш╕ у xterm ╕ збереження/в╕дновлення екрану.\n"
-"+число             число - номер початковго рядка для редактора.\n"
+"+число             число - номер початкового рядка для редактора.\n"
 
 #: src/main.c:2260
 msgid ""
@@ -3292,7 +3292,7 @@ msgid ""
 msgstr ""
 "--colors КЛЮЧ={ПЕРЕД},{ТЛО}\n"
 "\n"
-"{ПЕРЕД} ╕ {ТЛО} можуна опустити, тод╕ буде використано типов╕ значення\n"
+"{ПЕРЕД} ╕ {ТЛО} можна опустити, тод╕ буде використано типов╕ значення\n"
 "\n"
 "Ключ╕:\n"
 "   Глобальн╕:    errors, reverse, gauge, input\n"
@@ -3362,7 +3362,7 @@ msgstr "Вимкнути п╕дтримку миш╕ у текстов╕й верс╕╖"
 
 #: src/main.c:2414
 msgid "Disables subshell support"
-msgstr "Вимка╓ п╕дтримку п╕доболонки"
+msgstr "Вимика╓ п╕дтримку п╕доболонки"
 
 #: src/main.c:2418
 msgid "Prints working directory at program exit"
@@ -3418,7 +3418,7 @@ msgid ""
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
 msgstr ""
-" Файли конф╕╜урац╕╖ Midnight Commander \n"
+" Файли конф╕гурац╕╖ Midnight Commander \n"
 " тепер збер╕гаються у каталоз╕ ~/.mc, стар╕ \n"
 " файли зараз туди перенесено\n"
 
@@ -3436,7 +3436,7 @@ msgstr "Розширена команда cho&wn"
 
 #: src/option.c:75
 msgid "l&Ynx-like motion"
-msgstr "Нав╕╜ац╕я у стил╕ l&ynx"
+msgstr "Нав╕гац╕я у стил╕ l&ynx"
 
 #: src/option.c:76
 msgid "rotatin&G dash"
@@ -3444,7 +3444,7 @@ msgstr "Обе&pтовий ╕ндикатор"
 
 #: src/option.c:77
 msgid "co&Mplete: show all"
-msgstr "Доп&овненя: показувати ус╕"
+msgstr "Доп&овнення: показувати ус╕"
 
 #: src/option.c:78
 msgid "&Use internal view"
@@ -3513,7 +3513,7 @@ msgstr "&Завжди"
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:145
 msgid " Configure options "
-msgstr " Параметри конф╕╜урац╕╖ "
+msgstr " Параметри конф╕гурац╕╖ "
 
 #: src/option.c:146
 msgid " Panel options "
@@ -3525,7 +3525,7 @@ msgstr " Пауза п╕сля виконання... "
 
 #: src/option.c:199
 msgid "Configure options"
-msgstr "Параметри конф╕╜урац╕╖"
+msgstr "Параметри конф╕гурац╕╖"
 
 #: src/panelize.c:74
 msgid "&Add new"
@@ -3582,7 +3582,7 @@ msgstr "Не вда╓ться викликати команду."
 
 #: src/panelize.c:442
 msgid "Pipe close failed"
-msgstr "Зб╕й закриття канала"
+msgstr "Зб╕й закриття каналу"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
@@ -3739,7 +3739,7 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
-"Розм╕р екрану %dxd% не п╕дтриму╓ться.\n"
+"Розм╕р екрану %dx%d не п╕дтриму╓ться.\n"
 "Перев╕рте зм╕нну середовища TERM.\n"
 
 #: src/subshell.c:426
@@ -3814,7 +3814,7 @@ msgstr "з базою termcap"
 
 #: src/textconf.c:49
 msgid "with an unknown terminal database"
-msgstr "з нев╕домою базаою терм╕нал╕в"
+msgstr "з нев╕домою базою терм╕нал╕в"
 
 #: src/textconf.c:53
 msgid "Using the ncurses library"
@@ -4097,11 +4097,11 @@ msgstr " Така стр╕чка не знайдена "
 
 #: src/view.c:1662
 msgid "Invalid hex search expression"
-msgstr " Неправильний ш╕снадцятковий вираз"
+msgstr " Неправильний ш╕стнадцятковий вираз"
 
 #: src/view.c:1713
 msgid " Invalid regular expression "
-msgstr " Неправильний ре╜улярний вираз "
+msgstr " Неправильний регулярний вираз "
 
 #: src/view.c:1835
 #, c-format
@@ -4127,7 +4127,7 @@ msgstr " Перейти на адресу "
 
 #: src/view.c:1890
 msgid " Enter regexp:"
-msgstr " Введ╕ть ре╜улярний вираз:"
+msgstr " Введ╕ть регулярний вираз:"
 
 #: src/view.c:2013
 msgid "Ascii"
@@ -4135,7 +4135,7 @@ msgstr "Текст"
 
 #: src/view.c:2013
 msgid "Hex"
-msgstr "Ш╕снадц."
+msgstr "Ш╕стнадц."
 
 #: src/view.c:2014
 msgid "Goto"
@@ -4346,7 +4346,7 @@ msgstr "Дод. стр╕лка вгору"
 
 #: src/win.c:227
 msgid "Down arrow keypad"
-msgstr "Дод. ст╕лка вниз"
+msgstr "Дод. стр╕лка вниз"
 
 #: src/win.c:228
 msgid "Home on keypad"
@@ -4478,7 +4478,7 @@ msgstr "Неузгоджений арх╕в extfs"
 #: vfs/fish.c:147
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: В╕д╓днуюсь в╕д %s"
+msgstr "fish: В╕д'╓днуюсь в╕д %s"
 
 #: vfs/fish.c:226
 msgid "fish: Waiting for initial line..."
@@ -4535,7 +4535,7 @@ msgstr "fish: Зб╕й локального читання, в╕дсилаються нул╕"
 #: vfs/fish.c:525
 #, c-format
 msgid "fish: storing %s %d (%lu)"
-msgstr "fish: збереження %s %d (%d)"
+msgstr "fish: збереження %s %d (%lu)"
 
 #: vfs/fish.c:526
 msgid "zeros"
@@ -4603,7 +4603,7 @@ msgstr "ftpfs: Помилка ре╓страц╕╖ користувача %s "
 #: vfs/ftpfs.c:545
 #, c-format
 msgid " Could not set source routing (%s)"
-msgstr " Не вдалося встановити маршуртизац╕ю для джерела (%s)"
+msgstr " Не вдалося встановити маршрутизац╕ю для джерела (%s)"
 
 #: vfs/ftpfs.c:670
 msgid "ftpfs: Invalid host name."
@@ -4806,7 +4806,7 @@ msgstr " %s видаля╓ в╕ддалений файл %s "
 #: vfs/smbfs.c:1864
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s перейменовання файл╕в\n"
+msgstr " %s перейменування файл╕в\n"
 
 #: vfs/tar.c:81 vfs/tar.c:98
 #, c-format
@@ -4967,1788 +4967,3 @@ msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 msgid "%s: %s: %s %lu bytes transfered"
 msgstr "%s: %s: %s %lu байт перенесено"
 
-#~ msgid " &Cancel quit "
-#~ msgstr "&В╕дм╕нити вих╕д"
-
-#~ msgid " &No "
-#~ msgstr " &Н╕ "
-
-#~ msgid " &Yes "
-#~ msgstr " &Так "
-
-#~ msgid " (%d%%) of "
-#~ msgstr " (%d%%) з "
-
-#~ msgid " Backwards "
-#~ msgstr " Назад "
-
-#~ msgid " Bookmarks "
-#~ msgstr " Закладки "
-
-#~ msgid ""
-#~ " Can't chdir to \"%s\" \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться перейти у \"%s\" \n"
-#~ " %s "
-
-#~ msgid ""
-#~ " Can't chdir to '%s' \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться перейти у \"%s\" \n"
-#~ " %s "
-
-#~ msgid " Can't connect to server: %s "
-#~ msgstr "Не вда╓ться з'╓днатися з сервером: %s "
-
-#~ msgid " Can't create socket: %s "
-#~ msgstr " Не вда╓ться створити гн╕здо: %s "
-
-#~ msgid ""
-#~ " Can't create temporary command file \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться створити тимчасовий командний файл \n"
-#~ " %s "
-
-#~ msgid " Can't execute commands on a Virtual File System directory "
-#~ msgstr " Не вда╓ться виконати команду у каталоз╕ В╕ртуально╖ Файлово╖ Системи"
-
-#~ msgid ""
-#~ " Can't generate unique filename \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться сформувати ун╕кальну назву файлу \n"
-#~ " %s "
-
-#~ msgid " Can't locate hostname: %s "
-#~ msgstr " Не вда╓ться знайти назву машини: %s"
-
-#~ msgid ""
-#~ " Can't open \"%s\"\n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться в╕дкрити \"%s\"\n"
-#~ " %s "
-
-#~ msgid " Can't open file \""
-#~ msgstr " Не вда╓ться в╕дкрити файл \""
-
-#~ msgid ""
-#~ " Can't open file %s \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться в╕дкрити файл %s \n"
-#~ " %s "
-
-#~ msgid " Can't operate on \"..\"! "
-#~ msgstr " Не вда╓ться виконати вказану операц╕ю над \"..\"! "
-
-#~ msgid " Can't spawn child program "
-#~ msgstr " Не вда╓ться створити процес-нащадок "
-
-#~ msgid ""
-#~ " Can't stat \"%s\"\n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться отримати властивост╕ \"%s\"\n"
-#~ " %s "
-
-#~ msgid ""
-#~ " Can't stat file \n"
-#~ " "
-#~ msgstr ""
-#~ " Не вда╓ться отримати властивост╕ файлу \n"
-#~ " "
-
-#~ msgid ""
-#~ " Can't stat the destination \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вда╓ться отримати властивост╕ призначення \n"
-#~ " %s "
-
-#~ msgid " Can't view: not a regular file "
-#~ msgstr " Перегляд неможливий: не звичайний файл "
-
-#~ msgid " Cannot open file \""
-#~ msgstr " Не вда╓ться в╕дкрити файл \""
-
-#~ msgid ""
-#~ " Cannot stat file \n"
-#~ " "
-#~ msgstr ""
-#~ " Не вда╓ться отримати властивост╕ файла \n"
-#~ " "
-
-#~ msgid " Case sensitive "
-#~ msgstr " Враховувати ре╜╕стр "
-
-#~ msgid " Could not start a terminal "
-#~ msgstr " Не вдалося запустити терм╕нал "
-
-#~ msgid ""
-#~ " Couldn't stat %s \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Не вдалося отримати властивост╕ для %s \n"
-#~ " %s "
-
-#~ msgid ""
-#~ " Current text was modified without a file save. \n"
-#~ " Save with exit? "
-#~ msgstr ""
-#~ " Поточний текст було зм╕нено ╕ не збережено. \n"
-#~ " Зберегти при виход╕? "
-
-#~ msgid " Direntry warning "
-#~ msgstr "Попередження елемента каталога"
-
-#~ msgid " Enter argument (or substring) order : "
-#~ msgstr " Введ╕ть порядок аргумент╕в (чи п╕дстр╕чок): "
-
-#~ msgid " Enter file name: "
-#~ msgstr " Введ╕ть назву файлу: "
-
-#~ msgid " Enter replace text : "
-#~ msgstr " Введ╕ть текст для зам╕ни : "
-
-#~ msgid " Enter search text : "
-#~ msgstr " Введ╕ть текст для пошуку : "
-
-#~ msgid ""
-#~ " Error reading from ispell. \n"
-#~ " Ispell is being restarted. "
-#~ msgstr ""
-#~ " Помилка читання з ispell. \n"
-#~ " Перезапуск ispell. "
-
-#~ msgid ""
-#~ " Fail trying to open ispell pipes. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Невдала спроба в╕дкрити канали ispell. \n"
-#~ " Перев╕рте, чи ispell доступний через PATH ╕ працю╓ з ключом -a. \n"
-#~ " Можна також вимкнути перев╕рку орфограф╕╖ у меню Параметри. "
-
-#~ msgid ""
-#~ " Fail trying to open ispell program. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Невдала спроба запустити програму ispell. \n"
-#~ " Перев╕рте, чи ispell доступний через PATH ╕ працю╓ з ключом -a. \n"
-#~ " Можна також вимкнути перев╕рку орфограф╕╖ у меню Параметри. "
-
-#~ msgid ""
-#~ " Fail trying to read ispell pipes. \n"
-#~ " Check that it is in your path and works with the -a option. \n"
-#~ " Alternatively, disable spell checking from the Options menu. "
-#~ msgstr ""
-#~ " Невдала спроба читання з канал╕в ispell. \n"
-#~ " Перев╕рте, чи ispell доступний через PATH ╕ працю╓ з ключом -a. \n"
-#~ " Можна також вимкнути перев╕рку орфограф╕╖ у меню Параметри. "
-
-#~ msgid " Find/read "
-#~ msgstr " Знайти/прочитати "
-
-#~ msgid " I can't run the Advanced Chown command on a tarfs "
-#~ msgstr " Не вда╓ться запустити розширену команду chown на tarfs "
-
-#~ msgid " I can't run the Advanced Chown command on an extfs "
-#~ msgstr " Не вда╓ться запустити розширену команду chown на extfs "
-
-#~ msgid " I can't run the Chmod command on a tarfs "
-#~ msgstr " Не вда╓ться запустити команду chmod на tarfs "
-
-#~ msgid " I can't run the Chmod command on an extfs "
-#~ msgstr " Не вда╓ться запустити команду chmod на extfs "
-
-#~ msgid " I can't run the Chown command on a tarfs "
-#~ msgstr " Не вда╓ться запустити команду chown на tarfs "
-
-#~ msgid " I can't run the Chown command on an extfs "
-#~ msgstr " Не вда╓ться запустити команду chown на extfs "
-
-#~ msgid " Internal error: get_file \n"
-#~ msgstr " Внутр╕шня помилка: get_file \n"
-
-#~ msgid " KBytes  ("
-#~ msgstr " Кбайт  ("
-
-#~ msgid " Load Syntax Rules "
-#~ msgstr " Завантаження синтаксичних правил "
-
-#~ msgid " MBytes  ("
-#~ msgstr " Мбайт  ("
-
-#~ msgid " Open with..."
-#~ msgstr " В╕дкрити за допомогою..."
-
-#~ msgid " Problem reading from child "
-#~ msgstr " Проблеми з читанням виводу нащадка "
-
-#~ msgid " Prompt on replace "
-#~ msgstr " П╕дтвердження на зам╕ну "
-
-#~ msgid " Properties"
-#~ msgstr " Властивост╕"
-
-#~ msgid " Regular expression "
-#~ msgstr " Ре╜улярний вираз "
-
-#~ msgid " Replace all "
-#~ msgstr " Зам╕нити вс╕ "
-
-#~ msgid " Scanf expression "
-#~ msgstr " Вираз scanf "
-
-#~ msgid " Spelling Message "
-#~ msgstr " Пов╕домлення орфограф╕чно╖ перев╕рки "
-
-#~ msgid " Srch/Replce "
-#~ msgstr " Пошук/Зам╕на "
-
-#~ msgid " There is no other panel to compare contents to "
-#~ msgstr " Нема ╕ншо╖ панел╕ для пор╕вняння вм╕сту "
-
-#~ msgid " Whole words only "
-#~ msgstr " Лише повн╕ слова "
-
-#~ msgid ""
-#~ " Your syntax rule file is outdated \n"
-#~ " A new rule file is being installed. \n"
-#~ " Your old rule file has been saved with a .OLD extension. "
-#~ msgstr ""
-#~ " Ваш файл синтаксичних правил застар╕в \n"
-#~ " Новий файл правил встановлю╓ться. \n"
-#~ " Ваш старий файл правил збережений з розширенням .OLD. "
-
-#~ msgid " bytes"
-#~ msgstr " байт"
-
-#~ msgid " bytes)"
-#~ msgstr " байт)"
-
-#~ msgid " with X11 support to read modifiers"
-#~ msgstr " з п╕дтримкою X11 для читання модиф╕катор╕в"
-
-#~ msgid ""
-#~ "\".\n"
-#~ "\n"
-#~ "To fix this error, bring up this file's properties and change the default "
-#~ "%s-action."
-#~ msgstr ""
-#~ "\".\n"
-#~ "\n"
-#~ "Для виправлення, в╕дкрийте д╕алог властивостей файлу ╕ зм╕н╕ть типову д╕ю "
-#~ "для %s."
-
-#~ msgid ""
-#~ "\".\n"
-#~ "\n"
-#~ "To fix this, bring up the mime-properties editor in the GNOME Control "
-#~ "Center, and edit the default %s-action for \"%s\"."
-#~ msgstr ""
-#~ "\".\n"
-#~ "\n"
-#~ "Для виправлення, запуст╕ть редактор mime-властивостей у Центр╕ Керування "
-#~ "GNOME, ╕ виправте типову д╕ю %s для \"%s\"."
-
-#~ msgid "%a, %b %d %Y,  %I:%M:%S %p"
-#~ msgstr "%a, %b %d %Y,  %I:%M:%S %p"
-
-#~ msgid "%o %d %f%e"
-#~ msgstr "%o ц╕ %f (%d шт.) %e"
-
-#~ msgid "%o %f \"%s\"%e"
-#~ msgstr "%o %f \"%s\"%e"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "\n"
-#~ "Directory not empty. Delete it recursively?"
-#~ msgstr ""
-#~ "%s\n"
-#~ "\n"
-#~ "Каталог не порожн╕й. Видалити його рекурсивно?"
-
-#~ msgid "&Open/load...     C-o"
-#~ msgstr "&В╕дкрити файл...      C-o"
-
-#~ msgid "."
-#~ msgstr "."
-
-#~ msgid "<Unknown>"
-#~ msgstr "<Нев╕домий>"
-
-#~ msgid "<Unknown> (%d)"
-#~ msgstr "<Нев╕домий> (%d)"
-
-#~ msgid "Abort this dialog, Esc"
-#~ msgstr "Перервати цей д╕алог, Esc"
-
-#~ msgid "Access Time"
-#~ msgstr "Час доступу"
-
-#~ msgid "Add"
-#~ msgstr "Додати"
-
-#~ msgid "Advanced Options"
-#~ msgstr "Додатков╕ параметри"
-
-#~ msgid "All files."
-#~ msgstr "Вс╕ файли."
-
-#~ msgid "Allow customization of icons in icon view"
-#~ msgstr "Дозволити настройку п╕ктограм у режим╕ перегляду п╕ктограм"
-
-#~ msgid ""
-#~ "Allows entering of a C format string,\n"
-#~ "see the scanf man page"
-#~ msgstr ""
-#~ "Дозволя╓ задавати стр╕чку у формат╕ мови C,\n"
-#~ "дивись кер╕вництво функц╕╖ scanf (man scanf)"
-
-#~ msgid "Always use FTP proxy"
-#~ msgstr "Завжди використовувати FTP прокс╕"
-
-#~ msgid "Animation"
-#~ msgstr "Ан╕мац╕я"
-
-#~ msgid "Anonymous FTP password:"
-#~ msgstr "Пароль анон╕много FTP:"
-
-#~ msgid "Applications"
-#~ msgstr "Програми"
-
-#~ msgid "Arrange the desktop icons"
-#~ msgstr "Впорядкувати п╕ктограми робочого столу"
-
-#~ msgid "Ask before making each replacement"
-#~ msgstr "Питати п╕дтвердження на кожну зам╕ну"
-
-#~ msgid "Automatic icon placement"
-#~ msgstr "Автоматичне розм╕щення"
-
-#~ msgid "Back"
-#~ msgstr "Назад"
-
-#~ msgid "Begin search, Enter"
-#~ msgstr "Почати пошук, Enter"
-
-#~ msgid "Brief"
-#~ msgstr "Корот."
-
-#~ msgid "By File _Type"
-#~ msgstr "За типом файла"
-
-#~ msgid "By Time Last _Accessed"
-#~ msgstr "За часом останнього доступу"
-
-#~ msgid "By Time Last _Changed"
-#~ msgstr "За часом останньо╖ зм╕ни вузла"
-
-#~ msgid "By Time Last _Modified"
-#~ msgstr "За часом останньо╖ зм╕ни"
-
-#~ msgid "By _Name"
-#~ msgstr "За назвою"
-
-#~ msgid "By _Size"
-#~ msgstr "За розм╕ром"
-
-#~ msgid "CD-ROM %d"
-#~ msgstr "CD-ROM %d"
-
-#~ msgid "Caching"
-#~ msgstr "Кешування"
-
-#~ msgid ""
-#~ "Can't open the %s file for writing:\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Не вда╓ться в╕дкрити файл %s на запис:\n"
-#~ "%s\n"
-
-#~ msgid ""
-#~ "Can't write to the %s file:\n"
-#~ "%s\n"
-#~ msgstr ""
-#~ "Не вда╓ться записати у файл %s:\n"
-#~ "%s\n"
-
-#~ msgid "Cancel drag"
-#~ msgstr "Скасувати перенесення"
-
-#~ msgid "Caption:"
-#~ msgstr "Заголовок:"
-
-#~ msgid "Change to this directory"
-#~ msgstr "Перейти у цей каталог"
-
-#~ msgid "Clear the edit buffer"
-#~ msgstr "Очистити буфер редагування"
-
-#~ msgid "Close window"
-#~ msgstr "Закрити в╕кно"
-
-#~ msgid "Close windows whose directories cannot be reached"
-#~ msgstr "Закрити в╕кна для недосяжних каталог╕в"
-
-#~ msgid "Closes this window"
-#~ msgstr "Закрива╓ це в╕кно"
-
-#~ msgid "Command:"
-#~ msgstr "Команда:"
-
-#~ msgid "Command: "
-#~ msgstr "Команда: "
-
-#~ msgid "Compute totals before copying files"
-#~ msgstr "Обчислювати загальний розм╕р перед коп╕юванням файл╕в"
-
-#~ msgid "Configure _Background Image"
-#~ msgstr "Сконф╕╜урувати фоновий малюнок"
-
-#~ msgid "Confirm when deleting file"
-#~ msgstr "на видалення файлу"
-
-#~ msgid "Confirm when executing files"
-#~ msgstr "на запуск файл╕в"
-
-#~ msgid "Confirm when overwriting files"
-#~ msgstr "на зам╕щення файл╕в"
-
-#~ msgid "Confirmation"
-#~ msgstr "П╕дтвердження"
-
-#~ msgid "Confirmation settings"
-#~ msgstr "Встановити п╕дтвердження"
-
-#~ msgid "Copy Progress"
-#~ msgstr "Поступ коп╕ювання"
-
-#~ msgid "Copy as a background process"
-#~ msgstr "Скоп╕ювати у фоновому процес╕"
-
-#~ msgid "Copy block to clipbrd\tC-Ins"
-#~ msgstr "Скоп╕ювати блок у буфер обм╕ну\tC-Ins"
-
-#~ msgid "Copy block to cursor\tF5"
-#~ msgstr "Скоп╕ювати блок у позиц╕ю\tF5"
-
-#~ msgid "Copy directory"
-#~ msgstr "Скоп╕ювати каталог"
-
-#~ msgid "Copy files"
-#~ msgstr "Скоп╕ювати файли"
-
-#~ msgid "Copy highlighted block to cursor position"
-#~ msgstr "Скоп╕ювати в╕дм╕чений блок у позиц╕ю курсора"
-
-#~ msgid "Copy to file"
-#~ msgstr "Скоп╕ювати у файл"
-
-#~ msgid "Copy to file...\tC-f"
-#~ msgstr "Скоп╕ювати у файл...\tC-f"
-
-#~ msgid "Copy..."
-#~ msgstr "Скоп╕ювати..."
-
-#~ msgid "Copying from: "
-#~ msgstr "Коп╕ювання з: "
-
-#~ msgid "Could not contact the file manager\n"
-#~ msgstr "Не вдалося зв'язатися з диспетчером файл╕в\n"
-
-#~ msgid "Could not get the desktop\n"
-#~ msgstr "Не вдалося отримати ст╕л\n"
-
-#~ msgid "Could not open %s; will not have desktop icons"
-#~ msgstr "Не вдалося в╕дкрити %s; не буде п╕ктограм на робочому стол╕"
-
-#~ msgid "Could not open the /etc/fstab file"
-#~ msgstr "Не вдалося в╕дкрити файл /etc/fstab"
-
-#~ msgid ""
-#~ "Could not stat %s\n"
-#~ "%s"
-#~ msgstr ""
-#~ "Не вдалося отримати властивост╕ %s\n"
-#~ "%s"
-
-#~ msgid ""
-#~ "Could not symlink %s to %s; will not have such a desktop device icon."
-#~ msgstr ""
-#~ "Не вдалося створити посилання %s до %s. Не буде п╕ктограми на робочому стол╕."
-
-#~ msgid "Create _New Window"
-#~ msgstr "Створити нове в╕кно"
-
-#~ msgid "Create bookmarks at all lines found"
-#~ msgstr "Створити закладку на кожному знайденому рядку"
-
-#~ msgid "Create window showing the specified directory"
-#~ msgstr "Створити в╕кно, яке показу╓ вказаний каталог"
-
-#~ msgid "Creates a new URL link"
-#~ msgstr "Створити нове посилання на URL"
-
-#~ msgid "Creates a new directory"
-#~ msgstr "Створити новий каталог"
-
-#~ msgid "Creates a new directory here"
-#~ msgstr "Створю╓ тут новий каталог"
-
-#~ msgid "Creates a new file in this directory"
-#~ msgstr "Створити новий файл у цьому каталоз╕"
-
-#~ msgid "Creates a new launcher"
-#~ msgstr "Створити новий запускач"
-
-#~ msgid "Creating a desktop link"
-#~ msgstr "Створити посилання на ст╕льниц╕"
-
-#~ msgid "Creation Time"
-#~ msgstr "Час створення"
-
-#~ msgid "Current mode: "
-#~ msgstr "Поточн╕ права: "
-
-#~ msgid "Custom"
-#~ msgstr "Нетипово"
-
-#~ msgid "Custom View"
-#~ msgstr "Нетиповий вигляд"
-
-#~ msgid "Cut block to clipbrd\tS-Del"
-#~ msgstr "Вир╕зати блок у буфер обм╕ну\tS-Del"
-
-#~ msgid "DIRECTORY"
-#~ msgstr "КАТАЛОГ"
-
-#~ msgid "Default set of icons not found, check your installation"
-#~ msgstr ""
-#~ "Стандартний наб╕р п╕ктограм не знайдений, перев╕рте в╕рн╕сть встановлення"
-
-#~ msgid "Delete Progress"
-#~ msgstr "Поступ видалення"
-
-#~ msgid "Delete block\tF8/C-Del"
-#~ msgstr "Видалити блок\tF8/C-Del"
-
-#~ msgid "Delete directory"
-#~ msgstr "Видалити каталог"
-
-#~ msgid "Delete files"
-#~ msgstr "Видалити файли"
-
-#~ msgid "Delete highlighted text"
-#~ msgstr "Видалити п╕дсв╕чений текст"
-
-#~ msgid "Delete macro...\t"
-#~ msgstr "Видалити макрос...\t"
-
-#~ msgid "Deleting file: "
-#~ msgstr "Видалення файлу: "
-
-#~ msgid "Des_ktop Properties"
-#~ msgstr "Властивост╕ ст╕льниц╕"
-
-#~ msgid "Desktop"
-#~ msgstr "Ст╕льниця"
-
-#~ msgid "Desktop entry properties"
-#~ msgstr "Властивост╕ елемента ст╕льниц╕"
-
-#~ msgid "Destination"
-#~ msgstr "Призначення"
-
-#~ msgid "Detailed"
-#~ msgstr "Детально"
-
-#~ msgid "Determine file types from file content instead of extensions"
-#~ msgstr "Визначати типи файл╕в за ╖х вм╕стом, а не за розширенням"
-
-#~ msgid "Device %d"
-#~ msgstr "Пристр╕й %d"
-
-#~ msgid "Disk %d"
-#~ msgstr "Диск %d"
-
-#~ msgid "Disk operations and file indexing/searching"
-#~ msgstr "Дисков╕ операц╕╖ ╕ пошук/╕ндексування файл╕в"
-
-#~ msgid "Display _tree view"
-#~ msgstr "Дерево"
-
-#~ msgid "Display the directory that holds the .links startup files and exit"
-#~ msgstr "Показати каталог з╕ стартовими файлами (.links) ╕ вийти"
-
-#~ msgid "Displayed Columns"
-#~ msgstr "Показан╕ стовпц╕"
-
-#~ msgid "Dlete"
-#~ msgstr "Видалити"
-
-#~ msgid "Do the same for the rest"
-#~ msgstr "Для решти також"
-
-#~ msgid "Don't overwrite any files."
-#~ msgstr "Не зам╕щувати файли."
-
-#~ msgid "Drop Action"
-#~ msgstr "Д╕я для кидання"
-
-#~ msgid "E_xit"
-#~ msgstr "Вих╕д"
-
-#~ msgid "Edit Symlink..."
-#~ msgstr "Виправити символьне посилання..."
-
-#~ msgid "Edit this file"
-#~ msgstr "Редагувати цей файл"
-
-#~ msgid "Edition: "
-#~ msgstr "Редакц╕я: "
-
-#~ msgid "Edits the MIME type bindings"
-#~ msgstr "Редагу╓ прив'язки тип╕в MIME"
-
-#~ msgid "Eject device"
-#~ msgstr "Висунути пристр╕й"
-
-#~ msgid "Empties the Trash"
-#~ msgstr "Очищу╓ см╕тник"
-
-#~ msgid "Empty Trash"
-#~ msgstr "Очистити см╕тник"
-
-#~ msgid "Empty _Trash"
-#~ msgstr "Очистити см╕тник"
-
-#~ msgid "Enter a Regular Expression to filter files in the panel view."
-#~ msgstr "Введ╕ть ре╜улярний вираз для ф╕льтрування файл╕в на панел╕."
-
-#~ msgid ""
-#~ "Enter a filter here for files in the panel view.\n"
-#~ "\n"
-#~ "For example:\n"
-#~ "*.png will show just png images"
-#~ msgstr ""
-#~ "Задайте ф╕льтр для файл╕в на панел╕.\n"
-#~ "\n"
-#~ "Наприклад:\n"
-#~ "*.png покаже лише png-файли"
-
-#~ msgid ""
-#~ "Enter a filter here to select files in the panel view with.\n"
-#~ "\n"
-#~ "For example:\n"
-#~ "*.png will select all png images"
-#~ msgstr ""
-#~ "Задайте ф╕льтр для в╕дм╕тки файл╕в на панел╕.\n"
-#~ "\n"
-#~ "Наприклад:\n"
-#~ "*.png в╕дм╕тить вс╕ png-файли"
-
-#~ msgid ""
-#~ "Enter a regular expression here to select files in the panel view with."
-#~ msgstr "Введ╕ть ре╜улярний вираз для в╕дм╕тки файл╕в на панел╕."
-
-#~ msgid "Enter command to run"
-#~ msgstr "Введ╕ть команду для запуску"
-
-#~ msgid "Enter extra arguments:"
-#~ msgstr "Введ╕ть додатков╕ аргументи:"
-
-#~ msgid "Enter label for command:"
-#~ msgstr "Введ╕ть м╕тку для команди:"
-
-#~ msgid "Enter name."
-#~ msgstr "Введ╕ть ╕м'я."
-
-#~ msgid "Enter the URL:"
-#~ msgstr "Введ╕ть URL:"
-
-#~ msgid ""
-#~ "Enter the order of replacement of your scanf\n"
-#~ "format specifiers or regexp substrings, eg 3,1,2"
-#~ msgstr ""
-#~ "Введ╕ть порядок зам╕ни ваших специф╕катор╕в формату scanf\n"
-#~ "або п╕дстр╕чок regexp, наприклад 3,1,2"
-
-#~ msgid "Error"
-#~ msgstr "Помилка"
-
-#~ msgid "Error initialising editor.\n"
-#~ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
-
-#~ msgid "Exec"
-#~ msgstr "Виконання"
-
-#~ msgid "Execute macro...\tC-a, KEY"
-#~ msgstr "Виконати макрос...\tC-a, КЛАВ╤ША"
-
-#~ msgid "Exit"
-#~ msgstr "Вийти"
-
-#~ msgid "Exit editor"
-#~ msgstr "Вийти з редактора"
-
-#~ msgid "FTP directory cache timeout :"
-#~ msgstr "Зв╕льняти кеш каталог╕в FTP через:"
-
-#~ msgid "Fast directory reload"
-#~ msgstr "Швидке перезавантаження каталогу"
-
-#~ msgid "File "
-#~ msgstr "Файл "
-
-#~ msgid "File Actions"
-#~ msgstr "Д╕╖ над файлом"
-
-#~ msgid "File Created on: "
-#~ msgstr "Файл створений у: "
-
-#~ msgid "File Exists"
-#~ msgstr "Файл ╕сну╓"
-
-#~ msgid "File Name"
-#~ msgstr "Назва файлу"
-
-#~ msgid "File Permissions"
-#~ msgstr "Права доступу до файлу"
-
-#~ msgid "File Size: "
-#~ msgstr "Розм╕р файла: "
-
-#~ msgid "File Size: N/A"
-#~ msgstr "Розм╕р файлу: Н/Д"
-
-#~ msgid "File Type"
-#~ msgstr "Типом файлу"
-
-#~ msgid "File Type: "
-#~ msgstr "Тип файла: "
-
-#~ msgid "File Type: Block Device"
-#~ msgstr "Тип файла: Блочний пристр╕й"
-
-#~ msgid "File Type: Character Device"
-#~ msgstr "Тип файла: Символьний пристр╕й"
-
-#~ msgid "File Type: Directory"
-#~ msgstr "Тип файла: Каталог"
-
-#~ msgid "File Type: FIFO"
-#~ msgstr "Тип файла: FIFO"
-
-#~ msgid "File Type: Socket"
-#~ msgstr "Тип файла: Socket"
-
-#~ msgid "File Type: Symbolic Link"
-#~ msgstr "Тип файла: Символьне посилання"
-
-#~ msgid "File display"
-#~ msgstr "Показ файлу"
-
-#~ msgid "File mode (permissions)"
-#~ msgstr "Режим файлу (права доступу)"
-
-#~ msgid "File ownership"
-#~ msgstr "Належн╕сть файлу"
-
-#~ msgid "File/New/Directory..."
-#~ msgstr "Файл/Новий/Каталог..."
-
-#~ msgid "Filename"
-#~ msgstr "Назва файлу"
-
-#~ msgid "Files Exist"
-#~ msgstr "Файли ╕снують"
-
-#~ msgid "Files only if size differs."
-#~ msgstr "Лише файли з р╕зним розм╕ром."
-
-#~ msgid "Find"
-#~ msgstr "Знайти"
-
-#~ msgid "Find Destination Folder"
-#~ msgstr "Знайти каталог м╕сця призначення"
-
-#~ msgid "Find all core files"
-#~ msgstr "Знайти уc╕ файли core"
-
-#~ msgid "Find and replace strings/regular expressions"
-#~ msgstr "Знайти ╕ зам╕нити стр╕чку/ре╜улярн╕ вирази"
-
-#~ msgid "Find strings/regular expressions"
-#~ msgstr "Знайти стр╕чки/ре╜улярн╕ вирази"
-
-#~ msgid "Finish record macro...\tC-r"
-#~ msgstr "Зак╕нчити запис макросу...\tC-r"
-
-#~ msgid "Floppy %d"
-#~ msgstr "Дискета %d"
-
-#~ msgid "Flush book marks"
-#~ msgstr "Видалити закладки"
-
-#~ msgid "Follow links."
-#~ msgstr "╤ти за посиланнями."
-
-#~ msgid "Format paragraph\tM-p"
-#~ msgstr "Форматувати абзац\tM-p"
-
-#~ msgid "Forward"
-#~ msgstr "Вперед"
-
-#~ msgid "Free space "
-#~ msgstr "В╕ль. диск "
-
-#~ msgid "Full Name: "
-#~ msgstr "Повне ╕м'я: "
-
-#~ msgid "Full name: "
-#~ msgstr "Повне ╕м'я: "
-
-#~ msgid "GEOMETRY"
-#~ msgstr "ГЕОМЕТР╤Я"
-
-#~ msgid "General"
-#~ msgstr "Загальн╕"
-
-#~ msgid "Geometry for the window"
-#~ msgstr "Геометр╕я в╕кна"
-
-#~ msgid "Global option settings"
-#~ msgstr "Значення глобальних параметр╕в"
-
-#~ msgid "Go to the next directory"
-#~ msgstr "Перейти у наступний каталог"
-
-#~ msgid "Go to the previously visited directory"
-#~ msgstr "Перейти у попередн╕й каталог"
-
-#~ msgid "Go to your home directory"
-#~ msgstr "Перейти у персональний каталог"
-
-#~ msgid "Go up a level in the directory hierarchy"
-#~ msgstr "Перейти на один р╕вень угору у дерев╕ каталог╕в"
-
-#~ msgid "Goto line...\tM-l"
-#~ msgstr "Перейти на рядок...\tM-l"
-
-#~ msgid "Goto matching bracket\tM-b"
-#~ msgstr "Перейти до парно╖ дужки\tM-b"
-
-#~ msgid "Group ID"
-#~ msgstr "ID групи"
-
-#~ msgid "Hard Link..."
-#~ msgstr "Жорстке посилання..."
-
-#~ msgid "Home"
-#~ msgstr "Дом╕вка"
-
-#~ msgid "Home directory"
-#~ msgstr "Домашн╕й каталог"
-
-#~ msgid "Hotlist is now kept in file ~/"
-#~ msgstr "Дов╕дник збережений у файл╕ ~/"
-
-#~ msgid "Icon"
-#~ msgstr "П╕ктограма"
-
-#~ msgid "Icon position"
-#~ msgstr "Розм╕щення п╕ктограм"
-
-#~ msgid "Icons"
-#~ msgstr "П╕ктограми"
-
-#~ msgid "If set, this will copy the directories recursively"
-#~ msgstr "Рекурсивно коп╕ювати каталоги"
-
-#~ msgid "Ignore case sensitivity."
-#~ msgstr "Без врахування ре╜╕стру."
-
-#~ msgid "Inode Number"
-#~ msgstr "Номер i-вузла"
-
-#~ msgid "Insert File"
-#~ msgstr "Вставити файл"
-
-#~ msgid "Insert date/time\tC-d"
-#~ msgstr "Вставити дату/час\tC-d"
-
-#~ msgid "Insert file...\tF15"
-#~ msgstr "Вставити файл...\tF15"
-
-#~ msgid "Insert text from a file"
-#~ msgstr "Вставити текст з файлу"
-
-#~ msgid "Interactive help browser"
-#~ msgstr "╤нтерактивний переглядач дов╕дки"
-
-#~ msgid "Jump to a specified line number"
-#~ msgstr "Перейти на рядок з вказаним номером"
-
-#~ msgid "Last Accessed on: "
-#~ msgstr "В╕дкривали востанн╓: "
-
-#~ msgid "Last Modified on: "
-#~ msgstr "Зм╕нювали востанн╓: "
-
-#~ msgid "Launch a new terminal in the current directory"
-#~ msgstr "Запустити новий терм╕нал у поточному каталоз╕"
-
-#~ msgid "List of background operations"
-#~ msgstr "Список фонових операц╕й"
-
-#~ msgid "Locate files on disk"
-#~ msgstr "Знайти файли на диску"
-
-#~ msgid "Location:"
-#~ msgstr "Розташування:"
-
-#~ msgid "Look more like traditional gmc"
-#~ msgstr "Б╕льш схожий на традиц╕йний вигляд gmc."
-
-#~ msgid "MC will load hotlist from ~/"
-#~ msgstr "MC завантажить список каталог╕в з ~/"
-
-#~ msgid "Macros and internal commands"
-#~ msgstr "Макроси та вмонтован╕ команди"
-
-#~ msgid "Manipulating blocks of text"
-#~ msgstr "Операц╕╖ над блоками тексту"
-
-#~ msgid "Midnight Commander's private remote filesystem"
-#~ msgstr "Приватна в╕ддалена файлова система Midnight Commander"
-
-#~ msgid "Mix files and directories"
-#~ msgstr "Файли ╕ каталоги разом"
-
-#~ msgid "Modification Time"
-#~ msgstr "Час зм╕ни"
-
-#~ msgid "Monitor file growing"
-#~ msgstr "Сл╕дкувати за ростом файлу"
-
-#~ msgid "Mount device"
-#~ msgstr "Змонтувати пристр╕й"
-
-#~ msgid "Move Progress"
-#~ msgstr "Поступ перенесення"
-
-#~ msgid "Move block to cursor\tF6"
-#~ msgstr "Перенести блок до курсора\tF6"
-
-#~ msgid "Move highlighted block to cursor position"
-#~ msgstr "Перенести в╕дм╕чений блок у позиц╕ю курсора"
-
-#~ msgid "Move to Trash"
-#~ msgstr "Перенести у см╕тник"
-
-#~ msgid "Move..."
-#~ msgstr "Перенести..."
-
-#~ msgid "NFS dir %s"
-#~ msgstr "NFS каталог %s"
-
-#~ msgid "Needs terminal to run"
-#~ msgstr "Запустити у терм╕нал╕"
-
-#~ msgid "New\tC-n"
-#~ msgstr "Новий\tC-n"
-
-#~ msgid "New _Directory..."
-#~ msgstr "Новий каталог..."
-
-#~ msgid "Next book mark\tC-M-Down"
-#~ msgstr "Наступна закладка\tC-M-Down"
-
-#~ msgid "No"
-#~ msgstr "Н╕"
-
-#~ msgid "No desktop icons"
-#~ msgstr "Без п╕ктограм на ст╕льниц╕"
-
-#~ msgid "No windows opened at startup"
-#~ msgstr "Не в╕дкривати в╕кна при завантаженн╕"
-
-#~ msgid ""
-#~ "Notice that if you choose to terminate the file manager, you will\n"
-#~ "also terminate the GNOME desktop handler.\n"
-#~ "\n"
-#~ "Are you sure you want to exit?"
-#~ msgstr ""
-#~ "Увага! Якщо ви завершите роботу диспетчера файл╕в, то ви\n"
-#~ "також завершите роботу обробника ст╕льниц╕ GNOME.\n"
-#~ "\n"
-#~ "Ви д╕йсно хочете вийти?"
-
-#~ msgid "Number of Hard Links"
-#~ msgstr "Число жорстких посилань"
-
-#~ msgid "Offset 0x%08lx"
-#~ msgstr "Зм╕щення 0x%08lx"
-
-#~ msgid "Older files."
-#~ msgstr "Стар╕ш╕ файли."
-
-#~ msgid "Open"
-#~ msgstr "В╕дкрити"
-
-#~ msgid "Open _new window"
-#~ msgstr "В╕дкрити нове в╕кно"
-
-#~ msgid "Open action"
-#~ msgstr "Д╕я в╕дкриття"
-
-#~ msgid "Open with..."
-#~ msgstr "В╕дкрити за допомогою..."
-
-#~ msgid "Open...\tC-o"
-#~ msgstr "В╕дкрити...\tC-o"
-
-#~ msgid "Options"
-#~ msgstr "Параметри"
-
-#~ msgid "Overwrite:"
-#~ msgstr "Зам╕стити:"
-
-#~ msgid "Password"
-#~ msgstr "Пароль"
-
-#~ msgid "Paste block from clipbrd\tS-Ins"
-#~ msgstr "Вставити блок з буферу обм╕ну\tS-Ins"
-
-#~ msgid "Permissions"
-#~ msgstr "Права"
-
-#~ msgid "Possible Columns"
-#~ msgstr "Можлив╕ стовпц╕"
-
-#~ msgid "Preferences"
-#~ msgstr "Налаштування"
-
-#~ msgid "Preserve file attributes."
-#~ msgstr "Збер╕гати атрибути файл╕в."
-
-#~ msgid "Preserve symlinks"
-#~ msgstr "Збер╕гати символьн╕ посилання"
-
-#~ msgid "Preserves the permissions and the UID/GID if possible"
-#~ msgstr "Збер╕гати права та UID/GID, якщо це можливо"
-
-#~ msgid "Preset Commands"
-#~ msgstr "Напередзадан╕ команди"
-
-#~ msgid "Previous book mark\tC-M-Up"
-#~ msgstr "Попередня закладка\tC-M-Up"
-
-#~ msgid "Program to run"
-#~ msgstr "Програма для запуску"
-
-#~ msgid "Prompt me before overwriting any file."
-#~ msgstr "Попереджувати перед зам╕щенням будь якого файлу."
-
-#~ msgid "Properties..."
-#~ msgstr "Властивост╕..."
-
-#~ msgid "Pull down menu"
-#~ msgstr "Спадаюче меню"
-
-#~ msgid "Recreate Default _Icons"
-#~ msgstr "Перестаорити стандартн╕ п╕ктограми"
-
-#~ msgid "Recursively copy subdirectories."
-#~ msgstr "Рекурсивно коп╕ювати п╕дкаталоги."
-
-#~ msgid "Refresh display\tC-l"
-#~ msgstr "Перемалювати екран\tC-l"
-
-#~ msgid "Regexp search"
-#~ msgstr "Пошук за ре╜. виразом"
-
-#~ msgid "Regular expression search"
-#~ msgstr "Пошук за ре╜улярним виразом"
-
-#~ msgid "Reloads the current directory"
-#~ msgstr "Перевантажу╓ поточний каталог"
-
-#~ msgid "Remove"
-#~ msgstr "Видалити"
-
-#~ msgid "Rename or move directory"
-#~ msgstr "Перенести чи перейменувати каталог"
-
-#~ msgid "Rename or move files"
-#~ msgstr "Перенести чи перейменувати файли"
-
-#~ msgid "Replace"
-#~ msgstr "Зам╕нити"
-
-#~ msgid "Replace again\tF14"
-#~ msgstr "Зам╕нити знову\tF14"
-
-#~ msgid "Replace all"
-#~ msgstr "Зам╕нити все"
-
-#~ msgid "Replace it?"
-#~ msgstr "Зам╕нити?"
-
-#~ msgid "Replace one"
-#~ msgstr "Зам╕нити одне"
-
-#~ msgid "Replace repeatedly"
-#~ msgstr "Зам╕нити ще раз"
-
-#~ msgid "Replace...\tF4"
-#~ msgstr "Зам╕на...\tF4"
-
-#~ msgid "Replc"
-#~ msgstr "Зам╕на"
-
-#~ msgid "Rescan De_vices"
-#~ msgstr "Пересканувати список пристро╖в"
-
-#~ msgid "Rescan _Desktop Directory"
-#~ msgstr "Пересканувати каталог ст╕льниц╕"
-
-#~ msgid "Rescan the current directory"
-#~ msgstr "Пересканувати поточний каталог"
-
-#~ msgid "Rescan the desktop device icons"
-#~ msgstr "Пересканувати п╕ктограми пристро╖в"
-
-#~ msgid "Rescan the desktop icons"
-#~ msgstr "Пересканувати п╕ктограми ст╕льниц╕"
-
-#~ msgid "Rescan the directory contents"
-#~ msgstr "Пересканувати вм╕ст каталога"
-
-#~ msgid "Rescan the specified directory"
-#~ msgstr "Пересканувати вказаний каталог"
-
-#~ msgid "Restart"
-#~ msgstr "Перезапуск"
-
-#~ msgid "Reverse the order."
-#~ msgstr "У зворотньому порядоку."
-
-#~ msgid "Reverses the list of tagged files"
-#~ msgstr "╤нвертувати в╕дм╕тку на файлах"
-
-#~ msgid "Run Command"
-#~ msgstr "Виконати команду"
-
-#~ msgid "Run a command and put the results in a panel"
-#~ msgstr "Виконати команду ╕ пом╕стити результат на панель"
-
-#~ msgid "Run this Command"
-#~ msgstr "Виконати цю команду"
-
-#~ msgid "Runs a command"
-#~ msgstr "Викону╓ команду"
-
-#~ msgid "S-lang library with "
-#~ msgstr "S-lang б╕бл╕отеку з "
-
-#~ msgid "Save\tF2"
-#~ msgstr "Зберегти\tF2"
-
-#~ msgid "Save as...\tF12"
-#~ msgstr "Зберегти як...\tF12"
-
-#~ msgid "Save to current file name"
-#~ msgstr "Зберегти у файл з поточною назвою"
-
-#~ msgid "Search again"
-#~ msgstr "Шукати знову"
-
-#~ msgid "Search again\tF17"
-#~ msgstr "Шукати знову\tF17"
-
-#~ msgid "Search for a file in the current Panel"
-#~ msgstr "Шукати файл на поточн╕й панел╕"
-
-#~ msgid "Search for and replace text"
-#~ msgstr "Шукати ╕ зам╕нювати текст"
-
-#~ msgid "Search...\tF7"
-#~ msgstr "Пошук...\tF7"
-
-#~ msgid "Search/Replace"
-#~ msgstr "Пошук/Зам╕на"
-
-#~ msgid "Search: %s"
-#~ msgstr "Пошук: %s"
-
-#~ msgid "Searching for `%s'"
-#~ msgstr "Шукаю \"%s\""
-
-#~ msgid "Seconds"
-#~ msgstr "секунд"
-
-#~ msgid ""
-#~ "See the regex man page for how\n"
-#~ "to compose a regular expression"
-#~ msgstr ""
-#~ "Дивись кер╕вництво regex (man 7 regex), щоб\n"
-#~ "взнати правила написання ре╜улярних вираз╕в"
-
-#~ msgid "Select File"
-#~ msgstr "В╕дм╕тити файл"
-
-#~ msgid "Select _All"
-#~ msgstr "В╕дм╕тити все"
-
-#~ msgid "Select a file to run with"
-#~ msgstr "Вибер╕ть файл для запуску з"
-
-#~ msgid "Select a group of files"
-#~ msgstr "В╕дм╕тити групу файл╕в"
-
-#~ msgid "Select all files in the current Panel"
-#~ msgstr "В╕дм╕тити вс╕ файли на поточн╕й панел╕"
-
-#~ msgid "Select an Icon"
-#~ msgstr "Вибрати п╕ктограму"
-
-#~ msgid "Select an application to open \"%s\" with."
-#~ msgstr "Вибер╕ть програму для в╕дкриття нею \"%s\"."
-
-#~ msgid "Select icon"
-#~ msgstr "Вибрати п╕ктограму"
-
-#~ msgid ""
-#~ "Selecting this will copy the files that symlinks point to instead of just "
-#~ "copying the link."
-#~ msgstr ""
-#~ "Вибравши це, ви скоп╕ю╓те файли, на як╕ вказують символьн╕ посилання, "
-#~ "зам╕сть того, щоб просто скоп╕ювати посилання."
-
-#~ msgid "Selection history\tM-Ins"
-#~ msgstr "╤стор╕я вибору\tM-Ins"
-
-#~ msgid "Send the results to a Panel"
-#~ msgstr "Переслати результат на панель"
-
-#~ msgid "Set Filter"
-#~ msgstr "Встановити ф╕льтр"
-
-#~ msgid "Set GID"
-#~ msgstr "Встановити GID"
-
-#~ msgid "Set UID"
-#~ msgstr "Встановити UID"
-
-#~ msgid "Show all files"
-#~ msgstr "Показувати вс╕ файли"
-
-#~ msgid "Show backup files"
-#~ msgstr "Показувати резервн╕ файли"
-
-#~ msgid "Show directory sizes"
-#~ msgstr "Показувати розм╕ри каталог╕в"
-
-#~ msgid "Show hidden files"
-#~ msgstr "Показувати прихован╕ файли"
-
-#~ msgid "Show progress while operations are being performed"
-#~ msgstr "Показувати ╕ндикатор поступу п╕д час виконання операц╕й"
-
-#~ msgid "Shows the disk space used by each directory"
-#~ msgstr "Показу╓ розм╕р, який займа╓ кожен каталог"
-
-#~ msgid "Size (short)"
-#~ msgstr "Розм╕р (коротко)"
-
-#~ msgid "Skip"
-#~ msgstr "Пропустити"
-
-#~ msgid "Snap icons to grid"
-#~ msgstr "П╕др╕вняти п╕ктограми"
-
-#~ msgid ""
-#~ "Some of the files you are trying to copy already exist in the destination "
-#~ "folder.  Please select the action to be performed."
-#~ msgstr ""
-#~ "Деяк╕ з файл╕в, як╕ ви намага╓тесь скоп╕ювати, вже знаходяться у "
-#~ "каталоз╕призначення. Вибер╕ть, будь ласка, одну з запропонованих д╕й."
-
-#~ msgid "Sort By"
-#~ msgstr "Сортувати за"
-
-#~ msgid "Sort files by "
-#~ msgstr "Сортувати файли за "
-
-#~ msgid "Special"
-#~ msgstr "Спец╕альн╕"
-
-#~ msgid "Start record macro\tC-r"
-#~ msgstr "Розпочати запис макросу\tC-r"
-
-#~ msgid "Statistics"
-#~ msgstr "Статистика"
-
-#~ msgid "Sticky"
-#~ msgstr "Закр╕плений"
-
-#~ msgid "Super ino_usage is %d, memory leak"
-#~ msgstr "Super ino_usage -- %d, втрата пам'ят╕"
-
-#~ msgid "Suspend"
-#~ msgstr "Призупинити"
-
-#~ msgid "Switch view to an icon display"
-#~ msgstr "Велик╕ п╕ктограми"
-
-#~ msgid "Switch view to show detailed file statistics"
-#~ msgstr "Детальний опис файл╕в"
-
-#~ msgid "Switch view to show just file name and type"
-#~ msgstr "Назва ╕ тип файл╕в"
-
-#~ msgid "Switch view to show user-defined statistics"
-#~ msgstr "Визначений користувачем опис файл╕в"
-
-#~ msgid "Symbolic Link"
-#~ msgstr "Символьне посилання"
-
-#~ msgid "Symlink..."
-#~ msgstr "Символьне посилання..."
-
-#~ msgid "Target Name: "
-#~ msgstr "Назва ц╕л╕: "
-
-#~ msgid "Target Name: INVALID LINK"
-#~ msgstr "Назва ц╕л╕: НЕПРАВИЛЬНЕ ПОСИЛАННЯ"
-
-#~ msgid "Terminates the file manager and the desktop"
-#~ msgstr "Закрива╓ диспетчер файл╕в ╕ робочий ст╕л"
-
-#~ msgid "The GNOME edition of the Midnight Commander file manager."
-#~ msgstr "Редакц╕я менеджера файл╕в Midnight Commander для GNOME."
-
-#~ msgid "The Midnight Commander Team"
-#~ msgstr "Команда розробник╕в Midnight Commander"
-
-#~ msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-#~ msgstr "The Quick Brown Fox Jumps Over The Lazy Dog"
-
-#~ msgid ""
-#~ "The file manager and the desktop handler are now terminating\n"
-#~ "\n"
-#~ "If you want to start up again the desktop handler or the file manager\n"
-#~ "you can launch it from the Panel, or you can run the UNIX command `gmc'\n"
-#~ "\n"
-#~ "Press OK to terminate the application, or cancel to continue using it."
-#~ msgstr ""
-#~ "Диспетчер файл╕в ╕ обробник робочого столу закриваються.\n"
-#~ "\n"
-#~ "Якщо ви хочете знову запустити обробник робочого столу або диспетчер\n"
-#~ "файл╕в, ви можете запустити ╖х з Панел╕ або з допомогою команди `gmc'\n"
-#~ "\n"
-#~ "Натисн╕ть Гаразд для закриття програм або В╕дм╕нити для продовження "
-#~ "роботи."
-
-#~ msgid "The target file already exists: %s"
-#~ msgstr "Ц╕льовий  файл \"%s\" вже ╕сну╓!"
-
-#~ msgid "Time Last Accessed"
-#~ msgstr "Часом останнього доступу"
-
-#~ msgid "Time Last Changed"
-#~ msgstr "Часом останньо╖ зм╕ни вузла"
-
-#~ msgid "Time Last Modified"
-#~ msgstr "Часом останньо╖ зм╕ни"
-
-#~ msgid "Title"
-#~ msgstr "Заголовок"
-
-#~ msgid "To: "
-#~ msgstr "У: "
-
-#~ msgid "Toggle In/Off invisible marker to highlight text"
-#~ msgstr "Вмк/Вимк невидиму м╕тку для п╕дсв╕тки тексту"
-
-#~ msgid "Toggle book mark\tC-M-Ins"
-#~ msgstr "Встановити закладку\tC-M-Ins"
-
-#~ msgid "Toggle insert/overwrite\tIns"
-#~ msgstr "Режим вставки/зам╕щення\tIns"
-
-#~ msgid "Toggle mark\tF3"
-#~ msgstr "В╕дм╕тка блоку\tF3"
-
-#~ msgid "Toggle mark columns\tC-b"
-#~ msgstr "В╕дм╕тка стовпц╕в\tC-b"
-
-#~ msgid "Type"
-#~ msgstr "Тип"
-
-#~ msgid "URL"
-#~ msgstr "URL"
-
-#~ msgid "URL L_ink..."
-#~ msgstr "Посилання на URL..."
-
-#~ msgid "URL:"
-#~ msgstr "URL:"
-
-#~ msgid ""
-#~ "Unable to %s\n"
-#~ "\"%s\"\n"
-#~ "with the command:\n"
-#~ "\"%s\"%s"
-#~ msgstr ""
-#~ "Не можу %s\n"
-#~ "\"%s\"\n"
-#~ "командою:\n"
-#~ "\"%s\"%s"
-
-#~ msgid ""
-#~ "Unable to execute\n"
-#~ "\"%s\".\n"
-#~ "\n"
-#~ "Please check it to see if it points to a valid command."
-#~ msgstr ""
-#~ "Не можу виконати\n"
-#~ "\"%s\".\n"
-#~ "\n"
-#~ "Перев╕рте, будь ласка, чи вказу╓ це посилання на в╕рну команду."
-
-#~ msgid ""
-#~ "Unable to locate the file:\n"
-#~ "background-properties-capplet\n"
-#~ "in your path.\n"
-#~ "\n"
-#~ "We are unable to set the background."
-#~ msgstr ""
-#~ "Не можу знайти файл:\n"
-#~ "background-properties-capplet\n"
-#~ "у каталогах, вказаних у зм╕нн╕й PATH.\n"
-#~ "\n"
-#~ "Не можу встановити фонове зображення."
-
-#~ msgid "Undelete filesystem for ext2"
-#~ msgstr "В╕дновлення файлово╖ системи для ext2"
-
-#~ msgid "Undo\tC-BackSpace"
-#~ msgstr "В╕дкат\tC-BackSpace"
-
-#~ msgid "Unknown arrange type `%s'\n"
-#~ msgstr "Нев╕домий тип впорядкування - \"%s\"\n"
-
-#~ msgid "Unmount device"
-#~ msgstr "Розмонтувати пристр╕й"
-
-#~ msgid "Up"
-#~ msgstr "Угору"
-
-#~ msgid "Use default Drop Action options"
-#~ msgstr "Типов╕ параметри для Кинути"
-
-#~ msgid "Use default Drop action"
-#~ msgstr "Типова д╕я для Кинути"
-
-#~ msgid "Use default Edit action"
-#~ msgstr "Типова д╕я для Редагування"
-
-#~ msgid "Use default Open action"
-#~ msgstr "Типова д╕я для В╕дкриття"
-
-#~ msgid "Use default View action"
-#~ msgstr "Типова д╕я для Перегляду"
-
-#~ msgid "Use default View options"
-#~ msgstr "Типов╕ параметри для Перегляду"
-
-#~ msgid "Use shaped icons"
-#~ msgstr "Вир╕зан╕ п╕ктограми"
-
-#~ msgid "Use shaped text"
-#~ msgstr "Вир╕заний текст"
-
-#~ msgid "Use shell patterns instead of regular expressions"
-#~ msgstr "Використовувати шаблони оболонки зам╕сть ре╜улярних вираз╕в"
-
-#~ msgid "Use terminal"
-#~ msgstr "Використовувати терм╕нал"
-
-#~ msgid "User"
-#~ msgstr "Користувач"
-
-#~ msgid "User ID"
-#~ msgstr "ID користувача"
-
-#~ msgid "Using "
-#~ msgstr "Використовуючи "
-
-#~ msgid "Using default locale"
-#~ msgstr "Використовую типову локаль"
-
-#~ msgid "Using locale \"%s\" (from environment variable %s)"
-#~ msgstr "Використовуючи locale \"%s\" (з╕ зм╕нно╖ середовища %s)"
-
-#~ msgid "VFS"
-#~ msgstr "ВФС"
-
-#~ msgid "VFS Timeout:"
-#~ msgstr "Час зв╕льнення ВФС:"
-
-#~ msgid "View Unfiltered"
-#~ msgstr "Неф╕льтрований перегляд"
-
-#~ msgid "View this file"
-#~ msgstr "Переглянути цей файл"
-
-#~ msgid "Warning"
-#~ msgstr "Попередження"
-
-#~ msgid "Warning: Searching backward can be slow"
-#~ msgstr "Попередження: Зворотн╕й пошук може бути пов╕льним"
-
-#~ msgid "While running the eject command"
-#~ msgstr "При виконанн╕ команди eject"
-
-#~ msgid "While running the mount/umount command"
-#~ msgstr "При виконанн╕ команди mount/umount"
-
-#~ msgid "Wrap the text"
-#~ msgstr "Вир╕внювати текст"
-
-#~ msgid "Write"
-#~ msgstr "Запис"
-
-#~ msgid "Yes"
-#~ msgstr "Так"
-
-#~ msgid ""
-#~ "You are running the GNOME File Manager as root.\n"
-#~ "\n"
-#~ "As root, you can damage your system if you are not careful, and the GNOME "
-#~ "File Manager will not stop you from doing it."
-#~ msgstr ""
-#~ "Ви використову╓те диспетчер файл╕в GNOME з прив╕леями root. \n"
-#~ "\n"
-#~ "Як root, ви можете випадково пошкодити вашу систему ╕Менеджер файл╕в "
-#~ "GNOME не буде зупиняти вас в╕д цього."
-
-#~ msgid ""
-#~ "You can enter regexp substrings with %s\n"
-#~ "(not \\1, \\2 like sed) then use \"Enter...order\""
-#~ msgstr ""
-#~ "Ви можете ввести ре╜улярний вираз з %s\n"
-#~ "(не \\1, \\2 як у sed), пот╕м \"Ввести...порядок\""
-
-#~ msgid "You cannot rename a file to something containing a '/' character"
-#~ msgstr "Ви не можете використовувати символ '/' у назв╕ файлу"
-
-#~ msgid "You entered an invalid username"
-#~ msgstr "Ви ввели неправильне ╕м'я користувача"
-
-#~ msgid "You must rename your file to something"
-#~ msgstr "Ви повинн╕ перейменувати файл"
-
-#~ msgid "_About the Midnight Commander..."
-#~ msgstr "Про Midnight Commander..."
-
-#~ msgid "_Arrange Icons"
-#~ msgstr "Вир╕вняти п╕ктограми"
-
-#~ msgid "_Background jobs..."
-#~ msgstr "Фонов╕ завдання... "
-
-#~ msgid "_Brief View"
-#~ msgstr "Короткий"
-
-#~ msgid "_Close this window"
-#~ msgstr "Закрити це в╕кно"
-
-#~ msgid "_Commands"
-#~ msgstr "Команди"
-
-#~ msgid "_Copy here"
-#~ msgstr "Коп╕ювати сюди"
-
-#~ msgid "_Copy..."
-#~ msgstr "Коп╕ювати..."
-
-#~ msgid "_Custom View"
-#~ msgstr "Спец╕альний"
-
-#~ msgid "_Delete..."
-#~ msgstr "Видалити..."
-
-#~ msgid "_Desktop"
-#~ msgstr "Ст╕льниця"
-
-#~ msgid "_Detailed View"
-#~ msgstr "Повний"
-
-#~ msgid "_Directory..."
-#~ msgstr "Каталог..."
-
-#~ msgid "_Edit mime types..."
-#~ msgstr "Виправити типи mime..."
-
-#~ msgid "_File"
-#~ msgstr "Файл"
-
-#~ msgid "_File..."
-#~ msgstr "Файл..."
-
-#~ msgid "_Filter View..."
-#~ msgstr "Виб╕рковий перегляд..."
-
-#~ msgid "_Find File..."
-#~ msgstr "Знайти файл..."
-
-#~ msgid "_Formatted"
-#~ msgstr "Форматований"
-
-#~ msgid "_Goto line"
-#~ msgstr "Перейти на рядок"
-
-#~ msgid "_Help"
-#~ msgstr "Дов╕дка"
-
-#~ msgid "_Hex"
-#~ msgstr "Ш╕снадцятковий"
-
-#~ msgid "_Icon View"
-#~ msgstr "П╕ктограми"
-
-#~ msgid "_Icon view"
-#~ msgstr "П╕ктограми"
-
-#~ msgid "_Invert Selection"
-#~ msgstr "╤нвертувати в╕дм╕чення"
-
-#~ msgid "_Launcher..."
-#~ msgstr "Кнопка запуску..."
-
-#~ msgid "_Layout"
-#~ msgstr "Макет"
-
-#~ msgid "_Link here"
-#~ msgstr "Послатися сюди"
-
-#~ msgid "_Listing view"
-#~ msgstr "Cписок файл╕в"
-
-#~ msgid "_Monitor file"
-#~ msgstr "Сл╕дкувати за файлом"
-
-#~ msgid "_Move here"
-#~ msgstr "Перенести сюди"
-
-#~ msgid "_Move..."
-#~ msgstr "Перенести..."
-
-#~ msgid "_Parsed view"
-#~ msgstr "Роз╕браний"
-
-#~ msgid "_Rescan Directory"
-#~ msgstr "Переглянути каталог"
-
-#~ msgid "_Run Command in panel..."
-#~ msgstr "Вив╕д команди на панель..."
-
-#~ msgid "_Run Command..."
-#~ msgstr "Виконати..."
-
-#~ msgid "_Search"
-#~ msgstr "Пошук"
-
-#~ msgid "_Select Files..."
-#~ msgstr "В╕дм╕тити файли..."
-
-#~ msgid "_Settings"
-#~ msgstr "Установки"
-
-#~ msgid "_Sort By..."
-#~ msgstr "Сортувати за..."
-
-#~ msgid "_Terminal"
-#~ msgstr "Терм╕нал"
-
-#~ msgid "_View"
-#~ msgstr "Перегляд"
-
-#~ msgid "_Wrap"
-#~ msgstr "Переноси"
-
-#~ msgid "abort"
-#~ msgstr "припинити"
-
-#~ msgid "and then delete [Hotlist] section there"
-#~ msgstr "а пот╕м видал╕ть там секц╕ю [Hotlist]"
-
-#~ msgid "as default"
-#~ msgstr "як типове"
-
-#~ msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-#~ msgstr ""
-#~ "пов╕домляйте про помилки на: http://bugs.gnome.org, або через gnome-bug"
-
-#~ msgid "cancel"
-#~ msgstr "скасувати"
-
-#~ msgid "copy a block to a file"
-#~ msgstr "Коп╕ювати блок у файл"
-
-#~ msgid "done."
-#~ msgstr "завершено."
-
-#~ msgid "edit"
-#~ msgstr "редагувати"
-
-#~ msgid "exit"
-#~ msgstr "вих╕д"
-
-#~ msgid ""
-#~ "gtkedit.c: HOME environment variable not set and no passwd entry - "
-#~ "aborting\n"
-#~ msgstr ""
-#~ "gtkedit.c: Зм╕нна середовища HOME не встановлена ╕ в╕дсутн╕й запис\n"
-#~ "у /etc/passwd - припиняю роботу\n"
-
-#~ msgid "help"
-#~ msgstr "дов╕дка"
-
-#~ msgid "is "
-#~ msgstr " "
-
-#~ msgid "name | type | size | atime | mtime | ctime"
-#~ msgstr "назва | тип | розм╕р | доступ | зм╕на | створення"
-
-#~ msgid "ok"
-#~ msgstr "гаразд"
-
-#~ msgid "open"
-#~ msgstr "в╕дкрити"
-
-#~ msgid "optional"
-#~ msgstr "додатково"
-
-#~ msgid "termcap"
-#~ msgstr "termcap"
-
-#~ msgid "terminfo"
-#~ msgstr "terminfo"
-
-#~ msgid "text mode"
-#~ msgstr "текстовий режим"
-
-#~ msgid "view"
-#~ msgstr "переглянути"
