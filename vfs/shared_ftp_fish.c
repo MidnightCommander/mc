@@ -46,7 +46,7 @@ get_line (int sock, char *buf, int buf_len, char term)
     int i, status;
     char c;
 
-    for (i = 0; i < buf_len; i++, buf++) {
+    for (i = 0; i < buf_len - 1; i++, buf++) {
 	if (read(sock, buf, sizeof(char)) <= 0)
 	    return 0;
 	if (logfile){

@@ -1089,12 +1089,13 @@ resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
     struct linklist *flist;
     struct direntry *fe, *fel;
     char tmp[MC_MAXPATHLEN];
+    int depth;
     
     dir->symlink_status = FTPFS_RESOLVING_SYMLINKS;
     for (flist = dir->file_list->next; flist != dir->file_list; flist = flist->next) {
         /* flist->data->l_stat is alread initialized with 0 */
         fel = flist->data;
-        if (S_ISLNK(fel->s.st_mode)) {
+        if (S_ISLNK(fel->s.st_mode) && fel->linkname) {
   	    if (fel->linkname[0] == '/') {
 		if (strlen (fel->linkname) >= MC_MAXPATHLEN)
 		    continue;
@@ -1107,7 +1108,7 @@ resolve_symlink_without_ls_options(struct connection *bucket, struct dir *dir)
                    strcat (tmp, "/");
                 strcat (tmp + 1, fel->linkname);
 	    }
-	    for ( ;; ) {
+	    for ( depth = 0; depth < 100; depth++) { /* depth protects against recursive symbolic links */
 		canonicalize_pathname (tmp);
                 fe = _get_file_entry(bucket, tmp, 0, 0);
                 if (fe) {

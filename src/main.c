@@ -2518,6 +2518,9 @@ print_mc_usage (void)
 #ifdef HAVE_SUBSHELL_SUPPORT
     "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 #endif
+    "\n"
+    "Please send any bug reports (including the output of `mc -V')\n"
+    "to mc-bugs@nuclecu.unam.mx\n"
     );
 }
 
@@ -3156,7 +3159,7 @@ main (int argc, char *argv [])
 #   ifndef HAVE_X
     if (console_flag)
 	handle_console (CONSOLE_DONE);
-    putchar ('\r');  /* Hack to make shell's prompt start at left of screen */
+    putchar ('\n');  /* Hack to make shell's prompt start at left of screen */
 #   endif
 
 #ifdef _OS_NT

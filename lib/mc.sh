@@ -1,6 +1,8 @@
 mc ()
 {
-	MC=/tmp/mc$$-"$RANDOM"
+        mkdir -p ~/.mc/tmp 2> /dev/null
+	chmod 700 ~/.mc/tmp
+	MC=~/.mc/tmp/mc$$-"$RANDOM"
 	/usr/bin/mc -P "$@" > "$MC"
 	cd "`cat $MC`"
 	rm "$MC"

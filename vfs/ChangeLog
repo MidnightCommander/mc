@@ -1,3 +1,14 @@
+1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* shared_ftp_fish.c (get_line): Fixed off by one error ('\0' might
+	have been written one slot past the supplied character array).
+
+	* ftpfs.c (resolve_symlink_without_ls_options): Don't dump core on
+	strange symlinks (ls -la doesn't reveal where the symlink points to
+	and ls -lLa doesn't resolve the symlink either)
+
+	Added protection against recursive symbolic links.
+	
 1999-08-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* smbfs.c: added missing include file

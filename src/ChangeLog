@@ -1,3 +1,8 @@
+1999-08-30  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* main.c (print_mc_usage): Print the bug reporting address.
+	(main): Put prompt in a new line at termination.
+
 1999-08-27  Federico Mena Quintero  <federico@redhat.com>
 
 	* ext.c (quote_block): How did this ever work?  People, if you
