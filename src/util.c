@@ -117,18 +117,24 @@ trim (char *s, char *d, int len)
 {
     int source_len;
 
-    if (len < 3) {
-	len = max (len, 0);
-	memset (d, '.', len);
-	d[len] = 0;
-	return d;
-    }
+    /* Sanity check */
+    len = max (len, 0);
 
     source_len = strlen (s);
     if (source_len > len) {
-	memset (d, '.', 3);
-	strcpy (d + 3, s + 3 + source_len - len);
+	/* Cannot fit the whole line */
+	if (len <= 3) {
+	    /* We only have room for the dots */
+	    memset (d, '.', len);
+	    d[len] = 0;
+	    return d;
+	} else {
+	    /* Begin with ... and add the rest of the source string */
+	    memset (d, '.', 3);
+	    strcpy (d + 3, s + 3 + source_len - len);
+	}
     } else
+	/* We can copy the whole line */
 	strcpy (d, s);
     return d;
 }
