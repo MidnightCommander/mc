@@ -554,7 +554,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
 	    break;
     	if ((t = write (SUP.sockw, buffer, n)) != n) {
 	    if (t == -1) {
-		me->verrno = errno
+		me->verrno = errno;
 	    } else { 
 		me->verrno = EIO;
 	    }
