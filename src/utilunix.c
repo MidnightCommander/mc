@@ -711,6 +711,9 @@ putenv (char *string)
 char *
 mc_realpath (const char *path, char resolved_path[])
 {
+#ifdef	USE_SYSTEM_REALPATH
+    return realpath (path, resolved_path);
+#else
     char copy_path[PATH_MAX];
     char link_path[PATH_MAX];
     char got_path[PATH_MAX];
@@ -821,4 +824,5 @@ mc_realpath (const char *path, char resolved_path[])
     *new_path = '\0';
     strcpy (resolved_path, got_path);
     return resolved_path;
+#endif	/* USE_SYSTEM_REALPATH */
 }

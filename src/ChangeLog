@@ -3,6 +3,8 @@
 	* find.c: Implement non-recursive 'Find file' feature.
 	Original patch by Andrew Borodin <aborodin@vmail.ru> .
 
+	* utilunix.c (mc_realpath) [USE_SYSTEM_REALPATH]: Use realpath().
+
 2005-02-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* utilunix.c (init_groups): Use glib memory allocation functions.
