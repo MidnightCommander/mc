@@ -1,4 +1,4 @@
-# Modified from C highlight file by Juan C. Olivares <juancri@TAGnet.org>
+# Modified from C highlight file by Juan C. Olivares <juancri@juancri.com>
 
 context default
     
@@ -50,6 +50,7 @@ context default
     keyword whole out yellow
     keyword whole override yellow
     keyword whole params yellow
+    keyword whole partial yellow
     keyword whole private brightred
     keyword whole protected yellow
     keyword whole public brightred
@@ -81,7 +82,9 @@ context default
     keyword whole virtual yellow
     keyword whole void yellow
     keyword whole volatile yellow
+    keyword whole where yellow
     keyword whole while yellow
+    keyword whole yield yellow
 
     
     keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta
