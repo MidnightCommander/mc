@@ -1259,12 +1259,12 @@ parse_display_format (WPanel *panel, char *format, char **error, int isstatus, i
 	    darr->expand              = formats [i].expands;
 	    darr->just_mode 	      = formats [i].default_just;
 	    
-	    if (set_justify)
+	    if (set_justify) {
 		if (IS_FIT(darr->just_mode))
 		    darr->just_mode = MAKE_FIT(justify);
 		else
 		    darr->just_mode = justify;
-		
+	    }
 	    found = 1;
 
 	    format = skip_separators (format);
@@ -2046,12 +2046,65 @@ start_search (WPanel *panel)
 	mc_refresh ();
     }
 }
-
+/* This procedure was getting really messy with all the rewriting and ifdef's
+ * so I just splet them out.  -jrb */
+#ifdef HAVE_GNOME
+extern void set_cursor_busy (WPanel *panel);
+extern void set_cursor_normal (WPanel *panel);
 int
 do_enter_on_file_entry (file_entry *fe)
 {
-#ifdef HAVE_GNOME
-#endif
+ 	gint retval;
+	
+	set_cursor_busy (cpanel);
+	/* Can we change dirs? */
+	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
+		do_cd (fe->fname, cd_exact);
+		set_cursor_normal (cpanel);
+		return 1;
+	}
+	/* do metadata/mime stuff tell us anything? */
+	if (gmc_open (fe) != 0) {
+		set_cursor_normal (cpanel);
+		return 1;
+	}
+	/* can we change dirs? */
+	if (is_exe (fe->buf.st_mode) && if_link_is_exe (cpanel->cwd, fe)) {
+#ifdef USE_VFS	    
+		if (vfs_current_is_local ()) 
+#endif	    
+		{
+			char *tmp = name_quote (fe->fname, 0);
+			char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+			if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
+							       _(" Do you really want to execute? "),
+							       0, 2, _("Yes"), _("No")) == 0))
+				execute (cmd);
+			g_free (tmp);
+			g_free (cmd);
+		} 
+#ifdef USE_VFS	    	    
+		else {
+			char *tmp;
+			
+			tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
+			if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
+				message (1, _(" Warning "), _(" No action taken "));
+			g_free (tmp);
+		}
+#endif /* USE_VFS */	    
+		set_cursor_normal (cpanel);
+		return 1;
+	}
+	/* looks like we couldn't open it.  Let's ask the user */
+	retval = gmc_open_with (fe->fname);
+	set_cursor_normal (cpanel);
+	return retval;
+}	
+#else
+int
+do_enter_on_file_entry (file_entry *fe)
+{
     if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
 	do_cd (fe->fname, cd_exact);
 	return 1;
@@ -2087,14 +2140,6 @@ do_enter_on_file_entry (file_entry *fe)
 	    return 1;
 	} else {
 
-#ifdef HAVE_GNOME
-	if (gmc_open (fe) == 0) {
-		return gmc_open_with (fe->fname);
-	} else {
-		return 0;
-	}
-	
-#else
 	    char *p;
 
 	    p = regex_command (fe->fname, "Open", NULL, 0);
@@ -2102,11 +2147,10 @@ do_enter_on_file_entry (file_entry *fe)
 		    return 1;
 	    else
 		    return 0;
-#endif
 	}
     }
 }	
-
+#endif /* else not HAVE_GNOME */
 int
 do_enter (WPanel *panel)
 {

@@ -183,7 +183,10 @@ gmc_edit (char *fname)
 	int on_terminal;
 
 	if (gnome_metadata_get (fname, "edit", &size, &buf) == 0){
-		gmc_execute (fname, buf, 0);
+		if (gmc_check_exec_string (buf))
+			gmc_execute (fname, buf, 0);
+		else
+			gmc_unable_to_execute_dlg (fname, buf, "edit", NULL);
 		g_free (buf);
 		return 1;
 	}
@@ -193,7 +196,10 @@ gmc_edit (char *fname)
 		cmd = gnome_mime_get_value (mime_type, "edit");
 	
 		if (cmd){
-			gmc_execute (fname, cmd, 0);
+			if (gmc_check_exec_string (cmd))
+				gmc_execute (fname, cmd, 0);
+			else
+				gmc_unable_to_execute_dlg (fname, cmd, "edit", mime_type);
 			return 1;
 		}
 	}
@@ -318,11 +324,15 @@ gmc_view_command (gchar *filename)
 int
 gmc_view (char *filename, int start_line)
 {
-	char *cmd;
-
+	gchar *cmd;
+	const gchar *mime_type;
+	mime_type = gnome_mime_type_or_default (filename, NULL);
 	cmd = gmc_view_command (filename);
 	if (cmd) {
-		gmc_run_view (filename, cmd);
+		if (gmc_check_exec_string (cmd))
+			gmc_run_view (filename, cmd);
+		else
+			gmc_unable_to_execute_dlg (filename, cmd, "view", mime_type);
 		g_free (cmd);
 		return 1;
 	} else

@@ -883,3 +883,30 @@ gnome_select (GtkWidget *widget, WPanel *panel)
     paint_panel (panel);
     g_free (reg_exp);
 }
+void
+set_cursor_busy (WPanel *panel)
+{
+	GdkCursor *cursor;
+
+	if (is_a_desktop_panel (panel))
+		return;
+
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
+	gdk_cursor_destroy (cursor);
+	gdk_flush ();
+
+}
+void
+set_cursor_normal (WPanel *panel)
+{
+	GdkCursor *cursor;
+
+	if (is_a_desktop_panel (panel))
+		return;
+	
+	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
+	gdk_cursor_destroy (cursor);
+	gdk_flush ();
+}

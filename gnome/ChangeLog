@@ -1,3 +1,13 @@
+1999-04-09  Rosanna Yuen  <rwsy@mit.edu>
+
+	* gaction.c (gmc_view): We now have consistant actions everywhere;
+	every time you invoke a file.
+
+1999-04-08  Rosanna Yuen  <rwsy@mit.edu>
+
+	* gcmd.c (set_cursor_normal): new function to set the watch cursor
+	on a panel.
+
 1999-04-08  Jonathan Blandford  <jrb@redhat.com>
 
 	* gaction.c (gmc_unable_to_execute_dlg): 

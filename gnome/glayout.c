@@ -294,7 +294,6 @@ save_panel_types (void)
 			panel_save_setup (pc->panel, pc->panel->panel_name);
 	}
 }
-
 static void
 run_cmd (void)
 {
