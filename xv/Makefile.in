@@ -77,10 +77,10 @@ mx: @LIBVFS@ $(OBJS) @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o mxc $(OBJS) -L../vfs -L../slang -L../edit $(EXTRALIBS) $(LIBS)
 	touch mx
 
-libvfs.a:
-	cd ../vfs; $(MAKE) libvfs.a
-@PCENTRULE@	-$(RMF) libvfs.a
-@PCENTRULE@	$(LN_S) ../vfs/libvfs.a .
+@LIBVFS@:
+	cd ../vfs; $(MAKE) @LIBVFS@
+@PCENTRULE@	-$(RMF) @LIBVFS@
+@PCENTRULE@	$(LN_S) ../vfs/@LIBVFS@ .
 
 libmcslang.a:
 	cd ../slang; $(MAKE) libmcslang.a
@@ -119,7 +119,7 @@ TAGS: $(XVSRCS)
 	etags $(XVSRCS)
 
 clean:
-	$(RMF) @mxc@ *.o core a.out mx libvfs.a libedit.a libmcslang.a
+	$(RMF) @mxc@ *.o core a.out mx @LIBVFS@ libedit.a libmcslang.a
 
 realclean: clean
 	$(RMF) .depend

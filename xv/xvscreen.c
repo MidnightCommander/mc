@@ -1168,7 +1168,7 @@ void xv_panel_split_proc (Xv_Window origview, Xv_Window newview, int pos)
     free (rect);
 }
         
-int x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
+void x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
     Canvas canvas = 
         (Canvas) x_get_parent_object ((Widget *) panel, parent);
@@ -1224,7 +1224,11 @@ int x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
         panel->item_height = 16;
     panel->item_height += 2 * PANELITEMBORDER;
     x_fill_panel (panel);
-    return 1;
+}
+
+void
+x_panel_destroy (WPanel *panel)
+{
 }
 
 void x_panel_set_size (int idx)
@@ -1232,5 +1236,10 @@ void x_panel_set_size (int idx)
 }
 
 void set_attr (int h, int m)
+{
+}
+
+void
+repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 {
 }

@@ -1,3 +1,9 @@
+Thu Sep 17 19:12:25 1998  Pavel Roskin <pavel_roskin@geocities.com>
+
+	* xv/Makefile.in, xv/xvmain.c, xv/xvscreen.c: Minor fixes to
+	make compilation of the XV port possible (currently without
+	viewer).
+
 Thu Sep 17 07:32:23 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in: After creating symlinks invoke another instance of

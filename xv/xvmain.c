@@ -1097,11 +1097,22 @@ x_focus_widget (Widget_Item *p)
 }
 
 void
+x_unfocus_widget (Widget_Item *p)
+{
+}
+
+void
 edition_post_exec (void)
 {
 }
 
 void
 edition_pre_exec  (void)
+{
+}
+
+/* This is only used by the editor, so we provide a dummy implementation */
+void
+try_alloc_color_pair (char *str, char *str2)
 {
 }
