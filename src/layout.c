@@ -812,7 +812,7 @@ void set_hintbar(char *str)
         refresh();
 }
 
-void print_vfs_message (char *msg, ...)
+void print_vfs_message (const char *msg, ...)
 {
     va_list ap;
     char str [128];

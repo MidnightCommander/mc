@@ -100,7 +100,7 @@ void touch_bar      (void);
 void update_xterm_title_path (void);
 void load_hint      (int force);
 
-void print_vfs_message(char *msg, ...)
+void print_vfs_message(const char *msg, ...)
     __attribute__ ((format (printf, 1, 2)));
 
 extern char *prompt;
