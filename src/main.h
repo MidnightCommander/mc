@@ -171,11 +171,11 @@ void done_menu (void);
 void init_menu (void);
 void exec_shell (void);
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #    define MC_BASE ""
 #else
 #    define MC_BASE "/.mc/"
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
 /* Back hack to define the following routines only if the client code
  * has included panel.h

@@ -21,7 +21,7 @@
 #ifdef HAVE_TRACE
 
 #include <stdio.h>
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #include <windows.h>
 #endif
 #include <errno.h>
@@ -96,7 +96,7 @@ void _win32Trace (const char *fmt, ...)
 	va_end(ap);
 	vp = buffer;
 
-#ifdef _OS_NT					/* Write Output to Debug monitor also */
+#ifdef NATIVE_WIN32					/* Write Output to Debug monitor also */
 	OutputDebugString (vp);
 	#if (_MSC_VER > 800)			/* Don't write newline in MSVC++ 1.0, has a dammed bug in Debug Output screen */
 		OutputDebugString ("\n");
@@ -127,7 +127,7 @@ void _win32TraceOff()
 }
 
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 /*
 	void DebugFailedWin32APICall (const char* name, int line, const char* file)
 	Report a System call failure.

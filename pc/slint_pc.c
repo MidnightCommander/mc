@@ -1,4 +1,4 @@
-/* Slang interface to the Midnight Commander for Windows NT and OS/2
+/* Slang interface to the Midnight Commander for Win32
    This emulates some features of ncurses on top of slang
    S-lang is not fully consistent between its Unix and non-Unix versions.
    

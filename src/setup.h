@@ -29,7 +29,7 @@ extern int startup_left_mode;
 extern int startup_right_mode;
 extern int verbose;
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #    define PROFILE_NAME     "mc.ini"
 #    define HOTLIST_FILENAME "mc.hot"
 #else

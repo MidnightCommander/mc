@@ -1015,7 +1015,7 @@ view_other_cmd (void)
     }
 }
 
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
 static void
 do_link (int symbolic_link, char *fname)
 {
@@ -1163,7 +1163,7 @@ void other_symlink_cmd (void)
     g_free (p);
     g_free (r);
 }
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
 void help_cmd (void)
 {

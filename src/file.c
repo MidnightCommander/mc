@@ -459,10 +459,10 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		off_t *progress_count, double *progress_bytes, 
                 int is_toplevel_file)
 {
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     uid_t src_uid = (uid_t) -1;
     gid_t src_gid = (gid_t) -1;
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
     char *buf = NULL;
     int  buf_size = BUF_8K;
     int  src_desc, dest_desc = 0;
@@ -507,17 +507,17 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     }
 
     if (dst_exists){
-	    /* .ado: For OS/2 or NT: no st_ino exists, it is better to just try to
+	    /* .ado: For Win32: no st_ino exists, it is better to just try to
 	     * overwrite the target file
 	     */
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino){
 	    message_3s (1, MSG_ERROR, _(" `%s' and `%s' are the same file. "), src_path, dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
 	/* Should we replace destination? */
 	if (ask_overwrite){
@@ -530,7 +530,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 
     if (!ctx->do_append) {
        /* .ado: OS2 and NT don't have hardlinks */
-#ifndef OS2_NT    
+#ifndef NATIVE_WIN32    
         /* Check the hardlinks */
         if (!ctx->follow_links && sb.st_nlink > 1 && 
 	     check_hardlinks (src_path, dst_path, &sb) == 1){
@@ -545,7 +545,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    return retval;
 	}
 
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
         if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || S_ISFIFO (sb.st_mode)
             || S_ISSOCK (sb.st_mode)){
@@ -557,14 +557,14 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    }
 	    /* Success */
 
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
 	    while (ctx->preserve_uidgid && mc_chown (dst_path, sb.st_uid, sb.st_gid)){
 		temp_status = file_error (_(" Cannot chown target file \"%s\" \n %s "), dst_path);
 		if (temp_status == FILE_RETRY)
 		    continue;
 		return temp_status;
 	    }
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 	    while (ctx->preserve &&
 		(mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) < 0)){
 		temp_status = file_error (_(" Cannot chmod target file \"%s\" \n %s "), dst_path);
@@ -602,10 +602,10 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	goto ret;
     }
     src_mode = sb.st_mode;
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     src_uid = sb.st_uid;
     src_gid = sb.st_gid;
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
     utb.actime = sb.st_atime;
     utb.modtime = sb.st_mtime;
     file_size = sb.st_size;
@@ -773,7 +773,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    mc_unlink (dst_path);
     } else if (resources & (2|8)){
         /* no short file and destination file exists */
-#ifndef OS2_NT 
+#ifndef NATIVE_WIN32 
 	if (!appending && ctx->preserve_uidgid){
     	    while (mc_chown (dst_path, src_uid, src_gid)){
 		temp_status = file_error
@@ -784,7 +784,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		break;
     	    }
 	}
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
      /*
       * .ado: according to the XPG4 standard, the file must be closed before
@@ -940,7 +940,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
     lp->next = dest_dirs;
     dest_dirs = lp;
 
-#ifndef OS2_NT 
+#ifndef NATIVE_WIN32 
     if (ctx->preserve_uidgid){
     retry_dst_chown:
         if (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid)){
@@ -950,7 +950,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	    goto ret;
         }
     }
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
  dont_mkdir:
     /* open the source dir for reading */
@@ -1053,8 +1053,8 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 
     if (mc_lstat (d, &dst_stats) == 0){
 	/* Destination already exists */
-	/* .ado: for OS/2 and NT, no st_ino exists */
-#ifndef OS2_NT
+	/* .ado: for Win32, no st_ino exists */
+#ifndef NATIVE_WIN32
 	if (src_stats.st_dev == dst_stats.st_dev
 	    && src_stats.st_ino == dst_stats.st_ino){
 	    int msize = COLS - 36;
@@ -1072,7 +1072,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 	if (S_ISDIR (dst_stats.st_mode)){
 	    message_2s (1, MSG_ERROR, _(" Cannot overwrite directory `%s' "), d);
 	    do_refresh ();
@@ -1166,7 +1166,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 	move_over = 1;
     } else
 	destdir = concat_dir_and_file (d, x_basename (s));
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     if (sbuf.st_dev == dbuf.st_dev
 	&& sbuf.st_ino == dbuf.st_ino){
 	    int msize = COLS - 36;
@@ -1184,7 +1184,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 
     /* Check if the user inputted an existing dir */
  retry_dst_stat:

@@ -1,4 +1,4 @@
-/* Chmod command for Windows NT and OS/2
+/* Chmod command for Win32
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by

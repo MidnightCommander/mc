@@ -46,7 +46,7 @@
 #include "widget.h"
 #include "../vfs/vfs.h"
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #  include "drive.h"
 #endif
 
@@ -633,7 +633,7 @@ display_mini_info (WPanel *panel)
 
     /* Status resolves links and show them */
     set_colors (panel);
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)){
 	char *link, link_target [MC_MAXPATHLEN];
 	int  len;
@@ -2093,7 +2093,7 @@ static const key_map panel_keymap [] = {
     { ALT('r'),   goto_middle_file }, /* M-r like emacs */
     { ALT('j'),   goto_bottom_file },
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
     { ALT(KEY_F(11)), drive_cmd_a },
     { ALT(KEY_F(12)), drive_cmd_b },
     { ALT('d'),   drive_chg },

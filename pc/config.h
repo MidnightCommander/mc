@@ -1,5 +1,5 @@
 /****************************************************************************
- CONFIG.H -   Midnight Commander Configuration for Win32 and OS/2
+ CONFIG.H -   Midnight Commander Configuration for Win32
 
 
    This program is free software; you can redistribute it and/or modify
@@ -32,7 +32,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#define OS2_NT
+#define NATIVE_WIN32
 
 #define NEEDS_IO_H
 #define NEEDS_DRIVE_H
@@ -52,8 +52,8 @@
 #  ifndef MSWINDOWS
 #    define MSWINDOWS
 #  endif
-#  ifndef _OS_NT
-#    define _OS_NT
+#  ifndef NATIVE_WIN32
+#    define NATIVE_WIN32
 #  endif
 #endif /* MC_NT */
 

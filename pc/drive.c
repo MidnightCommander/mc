@@ -1,4 +1,4 @@
-/* Ch-Drive command for Windows NT and OS/2
+/* Ch-Drive command for Win32
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -62,7 +62,7 @@ static void drive_cmd()
 	int  m_drv;
 
     /* Get drives name and count */
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
     GetLogicalDriveStrings (255, szDrivesAvail);
     for (nDrivesAvail = 0, p = szDrivesAvail; *p; nDrivesAvail++)
 	p+=4;
@@ -131,7 +131,7 @@ static void drive_cmd()
 
 	nNewDrive = drive_dlg->ret_value - B_DRIVE_BASE;
 	drvLetter =  (char) *(szDrivesAvail + (nNewDrive*4));
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 	if (win32_GetPlatform() == OS_WinNT) {	/* Windows NT */
 		rtn = _chdrive(drvLetter - 'A' + 1);
 	} else {				/* Windows 95 */

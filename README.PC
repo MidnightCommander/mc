@@ -74,7 +74,7 @@ Concurrent subshell is not supported.
 
 2.1. Changes to main code
 -------------------------
-Changes in the main code are enclosed in #ifdef _OS_NT blocks.
+Changes in the main code are enclosed in #ifdef NATIVE_WIN32 blocks.
 
 In some cases we suppressed code. This is temporal (so that mc can compile).
 In the future we will provide fake or true interfaces for these features.

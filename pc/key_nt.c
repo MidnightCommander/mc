@@ -19,7 +19,7 @@
     Have trouble with non-US keyboards, "Alt-gr"+keys (API tells CTRL-ALT is pressed)
    */
 #include <config.h>
-#ifndef _OS_NT
+#ifndef NATIVE_WIN32
  #error "This file is for Win32 systems only"
 #else
 
@@ -318,4 +318,4 @@ void application_keypad_mode (void) {}
 void init_mouse (void) {}
 void shut_mouse (void) {}
 
-#endif /* _OS_NT */
+#endif /* NATIVE_WIN32 */

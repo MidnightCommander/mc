@@ -212,8 +212,8 @@ tree_store_load_from(char *name)
 	    name = decode(buffer + 2);
 
 	    len = strlen(name);
-#ifdef OS2_NT
-	    /* .ado: Drives for NT and OS/2 */
+#ifdef NATIVE_WIN32
+	    /* .ado: Drives for Win32 */
 	    if ((len > 2) &&
 		isalpha(name[0]) &&
 		(name[1] == ':') && (name[2] == '\\')) {

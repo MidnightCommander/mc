@@ -25,7 +25,7 @@ int SLang_Ignore_User_Abort = 0;
 # endif
 #endif
 
-#ifdef OS2_NT /* see the replacement in src/slint.c */
+#ifdef NATIVE_WIN32 /* see the replacement in src/slint.c */
 unsigned int SLang_getkey (void)
 {
    unsigned int imax;
@@ -57,7 +57,7 @@ unsigned int SLang_getkey (void)
 #endif
    return(ch);
 }
-#endif /* OS2_NT */
+#endif /* NATIVE_WIN32 */
 
 void SLang_ungetkey_string (unsigned char *s, unsigned int n)
 {
@@ -88,7 +88,7 @@ void SLang_ungetkey (unsigned char ch)
    SLang_ungetkey_string(&ch, 1);
 }
 
-#ifdef OS2_NT /* see the replacement in src/slint.c */
+#ifdef NATIVE_WIN32 /* see the replacement in src/slint.c */
 int SLang_input_pending (int tsecs)
 {
    int n;
@@ -104,7 +104,7 @@ int SLang_input_pending (int tsecs)
    
    return n;
 }
-#endif /* OS2_NT */
+#endif /* NATIVE_WIN32 */
 
 void SLang_flush_input (void)
 {

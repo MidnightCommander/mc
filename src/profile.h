@@ -2,7 +2,7 @@
 #define __PROFILE_H
 /* Prototypes for the profile management functions */
 
-#ifndef _OS_NT
+#ifndef NATIVE_WIN32
 short GetPrivateProfileString (const char * AppName, char * KeyName,
 			       char * Default, char * ReturnedString,
 			       short Size, char * FileName);
@@ -19,7 +19,7 @@ int WritePrivateProfileString (const char * AppName, char * KeyName, char * Stri
 				char * FileName);
 
 int WriteProfileString (const char * AppName, char * KeyName, char * String);
-#endif /* not _OS_NT */
+#endif /* not NATIVE_WIN32 */
 
 void sync_profiles (void);
 

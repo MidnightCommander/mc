@@ -22,7 +22,7 @@
 #include <config.h>
 #include <locale.h>
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #    include <windows.h>
 #endif
 
@@ -81,7 +81,7 @@
 #include "chmod.h"
 #include "chown.h"
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #    include "drive.h"
 #endif
 
@@ -261,8 +261,8 @@ static int print_last_wd = 0;
 static char *last_wd_string;
 static int print_last_revert = 0;
 
-/* On OS/2 and on Windows NT, we need a batch file to do the -P magic */
-#ifdef OS2_NT
+/* On Win32, we need a batch file to do the -P magic */
+#ifdef NATIVE_WIN32
 static char *batch_file_name = 0;
 #endif
 
@@ -968,7 +968,7 @@ static menu_entry PanelMenu [] = {
 #endif
 #endif
     { ' ', "", ' ', 0 },
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
     { ' ', N_("&Drive...       M-d"),       'D', drive_cmd_a },
 #endif
     { ' ', N_("&Rescan         C-r"),       'R', reread_cmd }
@@ -995,7 +995,7 @@ static menu_entry RightMenu [] = {
 #endif
 #endif
     { ' ', "", ' ', 0 },
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
     { ' ', N_("&Drive...       M-d"),    'D', drive_cmd_b },
 #endif
     { ' ', N_("&Rescan         C-r"),    'R', reread_cmd }
@@ -1009,7 +1009,7 @@ static menu_entry FileMenu [] = {
     { ' ', N_("&Edit               F4"), 'E', edit_cmd },
     { ' ', N_("&Copy               F5"), 'C', copy_cmd },
     { ' ', N_("c&Hmod           C-x c"), 'H', chmod_cmd },
-#ifndef OS2_NT				       
+#ifndef NATIVE_WIN32				       
     { ' ', N_("&Link            C-x l"), 'L', link_cmd },
     { ' ', N_("&SymLink         C-x s"), 'S', symlink_cmd },
     { ' ', N_("edit s&Ymlink  C-x C-s"), 'Y', edit_symlink_cmd },
@@ -1074,9 +1074,9 @@ static menu_entry OptMenu [] = {
     { ' ', N_("&Layout..."),           'L', layout_cmd },
     { ' ', N_("c&Onfirmation..."),     'O', confirm_box },
     { ' ', N_("&Display bits..."),     'D', display_bits_box },
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     { ' ', N_("learn &Keys..."),       'K', learn_keys },
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 #ifdef USE_VFS    
     { ' ', N_("&Virtual FS..."),       'V', configure_vfs },
 #endif /* !USE_VFS */
@@ -1415,7 +1415,7 @@ static const key_map ctl_x_map [] = {
     { 't',          copy_current_tagged },
     { XCTRL('t'),   copy_other_tagged },
     { 'c',          chmod_cmd },
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     { 'o',          chown_cmd },
     { 'r',          copy_current_readlink },
     { XCTRL('r'),   copy_other_readlink },
@@ -1423,7 +1423,7 @@ static const key_map ctl_x_map [] = {
     { XCTRL('l'),   other_symlink_cmd },
     { 's',          symlink_cmd },
     { XCTRL('s'),   edit_symlink_cmd },
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
     { 'i',          info_cmd_no_menu },
     { 'q',          quick_cmd_no_menu },
     { 'h',          add2hotlist_cmd },
@@ -1496,7 +1496,7 @@ static const key_map default_map [] = {
 static void setup_sigwinch (void)
 {
 #if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && \
-   !defined(OS2_NT) && defined(SIGWINCH)
+   !defined(NATIVE_WIN32) && defined(SIGWINCH)
     struct sigaction act, oact;
     act.sa_handler = flag_winch;
     sigemptyset (&act.sa_mask);
@@ -1666,8 +1666,8 @@ make_panels_dirty (void)
 	panel_update_contents (opanel);
 }
 
-/* In OS/2 and Windows NT people want to actually type the '\' key frequently */
-#ifdef OS2_NT
+/* In Windows people want to actually type the '\' key frequently */
+#ifdef NATIVE_WIN32
 #   define check_key_backslash(x) 0
 #else
 #   define check_key_backslash(x) ((x) == '\\')
@@ -1954,7 +1954,7 @@ do_nc (void)
     done_mc_profile ();
 }
 
-#if defined (_OS_NT)
+#if defined (NATIVE_WIN32)
 /* Windows NT code */
 
 void
@@ -1974,6 +1974,7 @@ OS_Setup (void)
     mc_home = get_mc_lib_dir ();
 }
 
+/* Nothing to be done on Windows */
 static void
 sigchld_handler_no_subshell (int sig)
 {
@@ -1987,7 +1988,6 @@ init_sigchld (void)
 void
 init_sigfatals (void)
 {
-	/* Nothing to be done on the OS/2, Windows/NT */
 }
 
 
@@ -2077,7 +2077,7 @@ init_sigchld (void)
     }
 }	
 
-#endif /* _OS_NT, UNIX */
+#endif /* NATIVE_WIN32, UNIX */
 
 static void
 print_mc_usage (FILE *stream)
@@ -2087,9 +2087,9 @@ print_mc_usage (FILE *stream)
 	    
     N_("Usage is:\n\n"
        "mc [flags] [this_dir] [other_panel_dir]\n\n"),
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     N_("-a, --stickchars   Force use of +, -, | for line drawing.\n"),
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
     N_("-b, --nocolor      Force black and white display.\n"),
 #ifdef WITH_BACKGROUND
     N_("-B, --background   [DEVEL-ONLY: Debug the background code]\n"),
@@ -2109,10 +2109,10 @@ print_mc_usage (FILE *stream)
 #endif
     N_("-P, --printwd      At exit, print the last working directory.\n"
        "-s, --slow         Disables verbose operation (for slow terminals).\n"),
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
+#if defined(HAVE_SLANG) && !defined(NATIVE_WIN32)
     N_("-t, --termcap      Activate support for the TERMCAP variable.\n"),
 #endif
-#if defined(HAVE_SLANG) && defined(OS2_NT)
+#if defined(HAVE_SLANG) && defined(NATIVE_WIN32)
     N_("-S, --createcmdile Create command file to set default directory upon exit.\n"),
 #endif
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -2206,7 +2206,7 @@ process_args (int c, const char *option_arg)
 	finish_program = 1;
 	break;
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
     case 'S':
 	print_last_wd = 2;
 	batch_file_name = option_arg;
@@ -2239,7 +2239,7 @@ static const struct poptOption argument_table [] = {
     { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0,
       N_("Use to debug the background code") },
 #endif
-#if defined(HAVE_SLANG) && defined(OS2_NT)
+#if defined(HAVE_SLANG) && defined(NATIVE_WIN32)
     { "createcmdfile",	'S', POPT_ARG_STRING, 	NULL, 			 'S' },
 #endif
     { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c',
@@ -2278,15 +2278,15 @@ static const struct poptOption argument_table [] = {
       N_("Resets soft keys on HP terminals") },
     { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0,
       N_("To run on slow terminals") },
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0,
       N_("Use stickchars to draw") },
-#endif /* !OS2_NT */
+#endif /* !NATIVE_WIN32 */
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "subshell", 	'U', POPT_ARG_NONE, 	&use_subshell,		  0,
       N_("Enables subshell support (default)")},
 #endif
-#if defined(HAVE_SLANG) && !defined(OS2_NT)
+#if defined(HAVE_SLANG) && !defined(NATIVE_WIN32)
     { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0,
       N_("Tries to use termcap instead of terminfo") },
 #endif
@@ -2383,7 +2383,7 @@ handle_args (int argc, char *argv [])
  * Previous versions of the program had all of their files in
  * the $HOME, we are now putting them in $HOME/.mc
  */
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #    define compatibility_move_mc_files()
 #else
 
@@ -2437,7 +2437,7 @@ compatibility_move_mc_files (void)
 	do_compatibility_move (mc_dir);
 	g_free (mc_dir);
 }
-#endif	/* OS2_NT */
+#endif	/* NATIVE_WIN32 */
 
 int
 main (int argc, char *argv [])
@@ -2473,7 +2473,7 @@ main (int argc, char *argv [])
 
     /* Used to report the last working directory at program end */
     if (print_last_wd){
-#ifndef OS2_NT	
+#ifndef NATIVE_WIN32	
 	stdout_fd = dup (1);
 	close (1);
 	if (open (ttyname (0), O_RDWR) < 0)
@@ -2587,7 +2587,7 @@ main (int argc, char *argv [])
     if (alternate_plus_minus)
         numeric_keypad_mode ();
 
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
     signal (SIGCHLD, SIG_DFL);  /* Disable the SIGCHLD handler */
 #endif
     
@@ -2595,11 +2595,11 @@ main (int argc, char *argv [])
 	handle_console (CONSOLE_DONE);
     putchar ('\n');  /* Hack to make shell's prompt start at left of screen */
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
     /* On NT, home_dir is malloced */
     g_free (home_dir);
 #endif
-#if defined(OS2_NT)
+#if defined(NATIVE_WIN32)
     if (print_last_wd == 2){
 	FILE *bat_file;
 
@@ -2623,9 +2623,9 @@ main (int argc, char *argv [])
 	g_free (last_wd_string);
     }
 
-#ifndef _OS_NT
+#ifndef NATIVE_WIN32
     g_free (mc_home);
-#endif /* (_OS_NT) */
+#endif /* (NATIVE_WIN32) */
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();

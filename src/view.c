@@ -83,7 +83,7 @@
 
 /* Maxlimit for skipping updates */
 static int max_dirt_limit = 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 0;
 #else
 10;

@@ -542,7 +542,7 @@ execute_menu_command (WEdit *edit_widget, char *commands)
     char prompt [80];
     int  col;
     char *file_name;
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
     char *p;
 #endif
     /* Skip menu entry title line */

@@ -442,7 +442,7 @@ static void show (Dlg_head *h, char *paint_start)
 		    if (c == ' ' || c == '.')
 			addch (c);
 		    else
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
 #ifndef HAVE_SLANG
 			addch (acs_map [c]);
 #else
@@ -450,7 +450,7 @@ static void show (Dlg_head *h, char *paint_start)
 #endif
 #else
 			addch (acs2pc (c));
-#endif /* OS2_NT */
+#endif /* NATIVE_WIN32 */
 		} else
 		    addch (c);
 		col++;

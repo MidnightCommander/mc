@@ -3,7 +3,7 @@
 
 /* Default filenames for the tree */
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #   define MC_TREE "mcn.tre"
 #   define MC_TREE_TMP "mcn.tr~"
 #else

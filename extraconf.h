@@ -25,11 +25,7 @@ the need to embed this logic into configure.in.
 # endif
 #endif
 
-#ifdef _OS_NT
-#    define OS2_NT 1
-#endif
-
-#ifndef OS2_NT
+#ifndef NATIVE_WIN32
 /* some Unices do not define this, and slang requires it: */
 #ifndef unix
 #    define unix

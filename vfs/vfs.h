@@ -296,11 +296,11 @@ static inline int mc_setctl(a,b,c) { return 0; }
 #   define ftpfs_hint_reread(x) do { } while (0)
 #   define ftpfs_flushdir() do { } while (0)
 
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #   undef mc_rmdir
 #endif
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #   undef mc_ctl
 #   undef mc_unlink
 #   define mc_ctl(a,b,c) 0

@@ -75,8 +75,8 @@ my_mkdir (char *s, mode_t mode)
     int result;
 
     result = mc_mkdir (s, mode);
-#ifdef OS2_NT
-    /* .ado: it will be disabled in OS/2 and NT */
+#ifdef NATIVE_WIN32
+    /* .ado: it will be disabled in Win32 */
     /* otherwise crash if directory already exists. */
     return result;
 #endif

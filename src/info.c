@@ -74,8 +74,8 @@ info_show_info (WInfo *info)
     printw (_("Midnight Commander %s"), VERSION);
     attrset (NORMAL_COLOR);
     widget_move (&info->widget, 2, 1);
-    /* .ado: info->widget.x has wrong value (==0) on NT and OS/2, why? */
-#ifndef OS2_NT
+    /* .ado: info->widget.x has wrong value (==0) on Win32, why? */
+#ifndef NATIVE_WIN32
     hline (ACS_HLINE|NORMAL_COLOR, info->widget.x-2);
 #endif
     if (get_current_type () != view_listing)
@@ -86,8 +86,8 @@ info_show_info (WInfo *info)
     
     my_statfs (&myfs_stats, cpanel->cwd);
     buf = cpanel->dir.list [cpanel->selected].buf;
-#ifdef OS2_NT
-    /* .ado: for OS/2 and NT, st_dev must > 0 */
+#ifdef NATIVE_WIN32
+    /* .ado: for Win32, st_dev must > 0 */
     if ((signed char) buf.st_dev < 0)
 	    return;
 #endif

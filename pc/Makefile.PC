@@ -1,6 +1,6 @@
 # Makefile.PC
 #
-# This is the Makefile for Midnight Commander under OS/2 and Windows NT
+# This is the Makefile for Midnight Commander under Win32
 #
 # Written by Dan Nicolaescu 
 # 970423 hacked by Juan f. Grigera 

@@ -128,7 +128,7 @@ void execute_hooks (Hook *hook_list);
 void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
 int hook_present (Hook *hook_list, void (*hook_fn)(void *));
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #    define PATH_SEP '\\'
 #    define PATH_SEP_STR "\\"
 #    define PATH_ENV_SEP ';'

@@ -11,7 +11,7 @@ int check_format_var (const char *, char **);
 int check_format_cd (const char *);
 char *check_patterns (char*);
 
-#ifdef OS2_NT
+#ifdef NATIVE_WIN32
 #   define CEDIT_LOCAL_MENU     "cedit.mnu"
 #   define CEDIT_GLOBAL_MENU    "cedit.mnu"
 #   define CEDIT_HOME_MENU      "cedit.mnu"

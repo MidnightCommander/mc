@@ -16,7 +16,7 @@ int mi_getch (void);
 
 /* Used to get the modifier information          */
 /* Currently, it just works on the Linux console */
-#ifdef _OS_NT
+#ifdef NATIVE_WIN32
 #   ifndef SHIFT_PRESSED
 #   define SHIFT_PRESSED 0x0010
 #   endif

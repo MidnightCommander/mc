@@ -1,7 +1,7 @@
 #
 # This makefile is for making the distribution on Unix
 # You won't be able to compile with this one the Midnight Commander
-# on Windows NT or OS/2
+# on Win32
 #
 # Please read the file README in this directory if you want to compile
 # the Midnight Commander for Windows NT or OS/2
