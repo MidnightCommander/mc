@@ -1,7 +1,7 @@
 2002-05-11  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/configure.in: Add AC_SYS_LARGEFILE.
-	Don't check atexit.
+	Don't check atexit, setreuid, setregid, setegid and setluid.
 
 2002-04-31  Pavel Roskin  <proski@gnu.org>
 
