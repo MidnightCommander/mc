@@ -545,6 +545,7 @@ tree_store_mark_checked (const char *subname)
 	
 	if (!ts.loaded)
 		return;
+	g_return_if_fail (ts.check_name != NULL);
 
 	/* Calculate the full name of the subdirectory */
 	if (subname [0] == '.' &&
