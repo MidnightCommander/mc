@@ -1,5 +1,8 @@
 2002-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c (ftp_split_url): Implement looking up password in
+	.netrc for known user.
+
 	* ftpfs.c (ftp_split_url): Don't expect lookup_netrc() to always
 	return a username.
 	(netrc_has_incorrect_mode): Don't free anything, it can result

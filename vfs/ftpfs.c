@@ -226,10 +226,26 @@ ftp_split_url(char *path, char **host, char **user, int *port, char **pass)
 		       URL_ALLOW_ANON);
 
     if (!*user) {
+	/* Look up user and password in netrc */
 	if (use_netrc)
 	    lookup_netrc (*host, user, pass);
 	if (!*user)
 	    *user = g_strdup ("anonymous");
+    }
+
+    /* Look up password in netrc for known user */
+    if (use_netrc && *user && pass && !*pass) {
+	char *new_user;
+
+	lookup_netrc (*host, &new_user, pass);
+
+	/* If user is different, remove password */
+	if (new_user && strcmp (*user, new_user)) {
+	    g_free (*pass);
+	    *pass = NULL;
+	}
+
+	g_free (new_user);
     }
 
     if (p)
