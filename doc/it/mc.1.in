@@ -1721,10 +1721,8 @@ e non alla directory dov'era il collegamento.
 .I Cancellazione sicura.
 Se quest'opzione è abilitata, la cancellazione non intenzionale dei file
 sarà più difficile. La preimpostazione della finestra di dialogo della
-conferma cambia da "Si" a "No" e la cancellazione delle directory non 
-vuote deve essere confermata immettendo la parola 
-.IR si . 
-Normalmente quest'opzione è disabilitata.
+conferma cambia da "Si" a "No". Normalmente quest'opzione è
+disabilitata.
 .PP
 .\"NODE "    Layout"
 .SH "    Aspetto"

@@ -1688,10 +1688,9 @@ actual aunque hayamos entrado en ese directorio a través de un enlace,
 y no al directorio donde se encontraba el enlace.
 .PP
 .I Precauciones de Borrado.
-Dificulta el borrado accidental de ficheros. La opción por defecto en
-el diálogo de confirmación de borrado se cambia a "No" y el borrado de
-directorios no vacíos exige ser confirmado. Por defecto, esta opción
-está desactivada.
+Dificulta el borrado accidental de ficheros. La opción por defecto en el
+diálogo de confirmación de borrado se cambia a "No". Por defecto, esta
+opción está desactivada.
 .PP
 .\"NODE "    Layout"
 .SH "    Presentación"
