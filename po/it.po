@@ -2089,7 +2089,7 @@ msgid ""
 msgstr ""
 "\n"
 " La directory non è vuota.\n"
-"Cancellarla ricorsivamente?"
+" Cancellarla ricorsivamente?"
 
 #: src/file.c:2128
 msgid ""
@@ -2231,12 +2231,12 @@ msgstr " Processo in background: il file esiste "
 #. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:738
 msgid "preserve &Attributes"
-msgstr "preserva &Attributi"
+msgstr "Mantiene gli &Attributi"
 
 #. &op_preserve
 #: src/filegui.c:740
 msgid "follow &Links"
-msgstr "Segue i &Link"
+msgstr "Segue i co&Llegamenti"
 
 #. &file_mask_op_follow_links
 #: src/filegui.c:742
@@ -2245,7 +2245,7 @@ msgstr "a:"
 
 #: src/filegui.c:743
 msgid "&Using shell patterns"
-msgstr "&Usa modelli shell"
+msgstr "&Usa i modelli della shell"
 
 #: src/filegui.c:764
 msgid "&Background"
@@ -2253,12 +2253,12 @@ msgstr "&Background"
 
 #: src/filegui.c:773
 msgid "&Stable Symlinks"
-msgstr "Link statici"
+msgstr "Collegamenti &Statici"
 
 #. &file_mask_stable_symlinks
 #: src/filegui.c:775
 msgid "&Dive into subdir if exists"
-msgstr "Scansiona dir ricorsivamente "
+msgstr "In una sotto&Dir se esiste già"
 
 #: src/filegui.c:929
 #, c-format
