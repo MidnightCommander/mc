@@ -1,8 +1,6 @@
 #ifndef __COLOR_H
 #define __COLOR_H
 
-void init_colors (void);
-
 extern int use_colors;
 extern int disable_colors;
 
@@ -87,8 +85,9 @@ extern int alarm_colors[4];
 #   define CTYPE int
 #endif
 
+void init_colors (void);
+void done_colors (void);
 void mc_init_pair (int index, CTYPE foreground, CTYPE background);
 int try_alloc_color_pair (char *fg, char *bg);
-void dealloc_color_pairs (void);
 
 #endif /* __COLOR_H */

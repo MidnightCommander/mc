@@ -624,6 +624,7 @@ done_screen ()
     reset_shell_mode ();
     mc_noraw_mode ();
     keypad (stdscr, FALSE);
+    done_colors ();
 }
 
 static void

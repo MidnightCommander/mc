@@ -445,7 +445,7 @@ try_alloc_color_pair (char *fg, char *bg)
 #endif /* !HAVE_SLANG */
 
 void
-dealloc_color_pairs (void)
+done_colors (void)
 {
     struct colors_avail *p, *next;
 

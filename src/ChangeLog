@@ -1,5 +1,11 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* color.c (dealloc_color_pairs): Rename to ...
+	(done_colors): ... this.
+	* layout.c (done_screen): Call done_colors() here ...
+	* slint.c (slang_shutdown): ... but not here, as it's not S-Lang
+	specific.
+
 	* cmd.c: Remove source routing code.
 	* main.c: Likewise.
 

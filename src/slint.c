@@ -251,7 +251,6 @@ slang_shutdown (void)
     slang_shell_mode ();
     do_exit_ca_mode ();
     SLang_reset_tty ();
-    dealloc_color_pairs ();
 
     /* Load the op capability to reset the colors to those that were
      * active when the program was started up
