@@ -155,8 +155,6 @@ void save_file_position (char *filename, long line, long column);
 #define STRNCOMP strncmp
 #define MC_ARCH_FLAGS 0
 
-#include "i18n.h"
-
 /* taken from regex.c: */
 /* Jim Meyering writes:
 

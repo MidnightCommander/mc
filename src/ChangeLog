@@ -1,3 +1,8 @@
+2003-10-26  Pavel Roskin  <proski@gnu.org>
+
+	* i18n.h: Include into global.h.
+	* Makefile.am: Remove i18n.h.
+
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
 	* background.c: Clean up includes.

@@ -50,7 +50,7 @@ SRCS =	achown.c achown.h background.c background.h boxes.c boxes.h	\
 	filegui.h file.h filenot.c fileopctx.c fileopctx.h find.c	\
 	find.h findme.c	findme.h fs.h fsusage.c fsusage.h		\
 	glibcompat.c glibcompat.h global.h help.c help.h hotlist.c	\
-	hotlist.h i18n.h info.c info.h key.c key.h keyxdef.c layout.c	\
+	hotlist.h info.c info.h key.c key.h keyxdef.c layout.c		\
 	layout.h learn.c learn.h listmode.c listmode.h main.c main.h	\
 	menu.c menu.h mountlist.c mountlist.h mouse.c mouse.h myslang.h	\
 	option.c option.h panel.h panelize.c panelize.h poptalloca.h	\
