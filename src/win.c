@@ -234,7 +234,7 @@ key_code_name_t key_name_conv_tab [] = {
     { (int) '\n',    "kpenter",    N_("Enter on keypad") },
     { (int) '/',     "kpslash",    N_("Slash on keypad") },
     { (int) '#',     "kpnumlock",  N_("NumLock on keypad") },
-    { 0, 0 }
+    { 0, 0, 0 }
     };
 
 /* Return the code associated with the symbolic name keyname */
