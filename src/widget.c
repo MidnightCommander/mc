@@ -620,7 +620,7 @@ gauge_callback (WGauge *g, int msg, int parm)
 	if (!g->shown)
 	    printw ("%*s", gauge_len, "");
 	else {
-	    long percentage, columns;
+	    int percentage, columns;
 	    long total = g->max, done = g->current;
 	    
 	    if (total <= 0 || done < 0) {
@@ -1241,8 +1241,7 @@ copy_region (WInput *in, int x_first, int x_last)
     if (last == first)
 	return;
     
-    if (kill_buffer)
-	g_free (kill_buffer);
+    g_free (kill_buffer);
 
     kill_buffer = g_strndup(in->buffer+first,last-first);
 }
@@ -1323,8 +1322,7 @@ yank (WInput *in)
 static void
 kill_line (WInput *in)
 {
-    if (kill_buffer)
-	g_free (kill_buffer);
+    g_free (kill_buffer);
     kill_buffer = g_strdup (&in->buffer [in->point]);
     in->buffer [in->point] = 0;
 }

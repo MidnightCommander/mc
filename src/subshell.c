@@ -659,6 +659,7 @@ exit_subshell (void)
     g_free (subshell_prompt);
     g_free (pty_buffer);
     subshell_prompt = NULL;
+    pty_buffer = NULL;
 
     return quit;
 }

@@ -66,12 +66,9 @@ filename_completion_function (char *text, int state)
     if (!state){
         char *temp;
 
-        if (dirname)
-            g_free (dirname);
-        if (filename) 
-            g_free (filename);
-        if (users_dirname)
-            g_free (users_dirname);
+        g_free (dirname);
+        g_free (filename);
+        g_free (users_dirname);
 
 	if ((*text) && (temp = strrchr (text, PATH_SEP))){
 	    filename = g_strdup (++temp);
@@ -156,18 +153,12 @@ filename_completion_function (char *text, int state)
 	    mc_closedir (directory);
 	    directory = NULL;
 	}
-        if (dirname){
-	    g_free (dirname);
-	    dirname = NULL;
-	}
-        if (filename){
-	    g_free (filename);
-	    filename = NULL;
-	}
-        if (users_dirname){
-	    g_free (users_dirname);
-	    users_dirname = NULL;
-	}
+	g_free (dirname);
+	dirname = NULL;
+	g_free (filename);
+	filename = NULL;
+	g_free (users_dirname);
+	users_dirname = NULL;
         return NULL;
     } else {
         char *temp;
@@ -258,7 +249,7 @@ variable_completion_function (char *text, int state)
 	*temp = '$';
 	if (isbrace)
 	    temp [1] = '{';
-        strncpy (temp + 1 + isbrace, *env_p, p - *env_p);
+	memcpy (temp + 1 + isbrace, *env_p, p - *env_p);
         if (isbrace)
             strcpy (temp + 2 + (p - *env_p), "}");
         else
@@ -433,8 +424,7 @@ command_completion_function (char *text, int state)
 	    words = bash_reserved;
 	    phase = 0;
 	    text_len = strlen (text);
-	    path = getenv ("PATH");
-	    if (path) {
+	    if (!path && (path = getenv ("PATH")) != NULL) {
 		p = path = g_strdup (path);
 		path_end = strchr (p, 0);
 		while ((p = strchr (p, PATH_ENV_SEP))) {
@@ -498,8 +488,8 @@ command_completion_function (char *text, int state)
 
     if (!found) {
 	look_for_executables = 0;
-	if (path)
-	    g_free (path);
+	g_free (path);
+	path = NULL;
 	return NULL;
     }
     if ((p = strrchr (found, PATH_SEP)) != NULL) {
@@ -756,8 +746,7 @@ try_complete (char *text, int *start, int *end, int flags)
     	}
     }
 
-    if (word)
-    	g_free (word);
+    g_free (word);
 
     return matches;
 }
@@ -801,7 +790,7 @@ static int insert_text (WInput *in, char *text, ssize_t len)
 	    	*(p++) = *(q++);
 	    *p = 0;
 	}
-	strncpy (in->buffer + start, text, len - start + end);
+	memcpy (in->buffer + start, text, len - start + end);
 	in->point += len;
 	update_input (in, 1);
 	end += len;

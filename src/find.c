@@ -512,10 +512,8 @@ do_search (struct Dlg_head *h)
 	    mc_closedir (dirp);
 	    dirp = 0;
 	}
-	if (directory) {
-	    g_free (directory);
-	    directory = NULL;
-	}
+	g_free (directory);
+	directory = NULL;
         dp = 0;
 	return 1;
     }
@@ -553,10 +551,7 @@ do_search (struct Dlg_head *h)
 		    break;
 	    } 
 
-	    if (directory) {
-		g_free (directory);
-		directory = NULL;
-	    }
+	    g_free (directory);
 	    directory = tmp;
 
 	    if (verbose){
@@ -630,10 +625,8 @@ init_find_vars (void)
 {
     char *dir;
     
-    if (old_dir){
-	g_free (old_dir);
-	old_dir = 0;
-    }
+    g_free (old_dir);
+    old_dir = 0;
     count = 0;
     matches = 0;
 
@@ -948,10 +941,9 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,
 
     kill_gui ();
     do_search (0);		/* force do_search to release resources */
-    if (old_dir) {
-	g_free (old_dir);
-	old_dir = 0;
-    }
+    g_free (old_dir);
+    old_dir = 0;
+
     return return_value;
 }
 
@@ -984,17 +976,14 @@ do_find (void)
 		    do_cd (filename, cd_exact);
 		select_item (current_panel);
 	    }
-	    if (dirname)  
-		g_free (dirname);
-	    if (filename) 
-		g_free (filename);
+	    g_free (dirname);
+	    g_free (filename);
 	    break;
 	}
-	if (content) 
-	    g_free (content);
+	g_free (content);
 	dir_and_file_set = dirname && filename;
-	if (dirname) g_free (dirname);
-	if (filename) g_free (filename);
+	g_free (dirname);
+	g_free (filename);
 	if (v == B_CANCEL)
 	    break;
 	

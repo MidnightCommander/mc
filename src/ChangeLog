@@ -1,3 +1,28 @@
+2004-09-04  Pavel S. Shirshov <pavelsh@mail.ru>
+
+	* subshell.c (exit_subshell): Prevent unwanted reuse of freed 
+	pty_buffer.
+	* complete.c (variable_completion_function): strncpy()->memcpy()
+	changes are because we know there is no '\0' among the first 
+	length bytes.
+	(insert_text): Likewise.
+	(command_completion_function): Avoid memory leaks.
+	(filename_completion_function): g_free handles NULL argument too,
+	no need for the comparison.
+	(try_complete): Likewise.
+	(command_completion_function): Likewise.
+	(free_completions): Likewise.
+	* widget.c (gauge_callback): Fix for 64-bit arches (%*s len must
+	be int, %3d takes int.
+	(copy_region): g_free handles NULL argument too, no need for 
+	the comparison.
+	(kill_line): Likewise.
+	* find.c (do_search): Likewise.
+	(init_find_vars): Likewise.
+	(do_find): Likewise.
+
+        Based on patch from Jakub Jelinek  <jakub@redhat.com>
+
 2004-09-03  Pavel S. Shirshov <pavelsh@mail.ru>
 
 	* menu.c (destroy_menu): Fix warnings.
