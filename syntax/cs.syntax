@@ -37,7 +37,7 @@ context default
     keyword whole implicit yellow
     keyword whole in yellow
     keyword whole int yellow
-    keyword whole interface yellow
+    keyword whole interface white
     keyword whole internal brightred
     keyword whole is yellow
     keyword whole lock yellow
@@ -70,13 +70,14 @@ context default
     keyword whole throw yellow
     keyword whole true yellow
     keyword whole try yellow
-    keyword whole typeoff yellow
+    keyword whole typeof yellow
     keyword whole uint yellow
     keyword whole ulong yellow
     keyword whole unchecked yellow
     keyword whole unsafe yellow
     keyword whole ushort yellow
     keyword whole using brightcyan
+    keyword whole value yellow
     keyword whole virtual yellow
     keyword whole void yellow
     keyword whole volatile yellow
@@ -94,7 +95,7 @@ context default
     keyword '\\'' brightgreen
     keyword '\\\\' brightgreen
     keyword '\\0' brightgreen
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ\}' brightgreen
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖ×ØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõö÷øùúûüışÿ\}' brightgreen
 
     keyword > yellow
     keyword < yellow
