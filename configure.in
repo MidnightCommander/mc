@@ -341,7 +341,7 @@ AC_ARG_WITH(ncurses,
 ])
 
 AC_ARG_WITH(hsc,
-        [--with-hsc               Compile with support for the HSC firewall],
+        [--with-hsc                 Compile with support for the HSC firewall],
         [if test x$withval = xyes; then
                 AC_DEFINE(HSC_PROXY, 1,
 			  [Define if you want to use the HSC firewall])
@@ -457,7 +457,8 @@ fi
 
 AC_MSG_CHECKING([for subshell support])
 AC_ARG_WITH(subshell,
-	[--with-subshell            If you want to use a concurrent shell],
+	[--with-subshell=optional   To disable concurrent shell by default
+--without-subshell         To disable concurrent shell completely],
 	[result=no
 	if test x$withval = xoptional
 	then

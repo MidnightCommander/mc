@@ -103,7 +103,7 @@ AC_DEFUN([MC_WITH_VFS],[
   smbfs=""
   SAMBAFILES=""
   AC_ARG_WITH(samba,
-  	  [--with-samba	            Support smb virtual file system],[
+  	  [--with-samba	           Support smb virtual file system],[
   	  if test "x$withval" != "xno"; then
   		  AC_DEFINE(WITH_SMBFS, 1, [Define to enable VFS over SMB])
 	          vfs_flags="$vfs_flags, smbfs"
