@@ -1,5 +1,7 @@
 2003-06-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* ext.c (regex_check_type): Fix previous change.
+
 	* ext.c (regex_check_type): Strip tab(s) after "filename:" in
 	file output.
 
