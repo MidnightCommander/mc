@@ -1,5 +1,7 @@
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (view_file_cmd): Use input_expand_dialog().
+
 	* wtools.c (quick_dialog_skip): Perform tilde expansion on input
 	widgets that use cd completion.
 

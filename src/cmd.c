@@ -230,8 +230,8 @@ view_file_cmd (void)
     char *filename;
 
     filename =
-	input_dialog (_(" View file "), _(" Filename:"),
-		      selection (current_panel)->fname);
+	input_expand_dialog (_(" View file "), _(" Filename:"),
+			     selection (current_panel)->fname);
     if (!filename)
 	return;
 
