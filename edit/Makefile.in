@@ -1,6 +1,8 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 @MCFG@@MCF@
 
@@ -31,8 +33,8 @@ DIST = 	Makefile.in $(EDITSRC)
 
 all: @LIBEDIT_A@
 
-Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=edit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && CONFIG_FILES=edit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DMIDNIGHT $<

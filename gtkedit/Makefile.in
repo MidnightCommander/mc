@@ -1,6 +1,8 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 @MCFG@@MCF@
 
@@ -30,8 +32,8 @@ DIST = 	ChangeLog Makefile.in $(EDITSRC)
 
 all: @libgtkedit@
 
-Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=gtkedit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && CONFIG_FILES=gtkedit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DGTK $<

@@ -15,7 +15,6 @@ exec_prefix = @exec_prefix@
 binprefix =
 manprefix =
 
-builddir   = @builddir@
 bindir     = @bindir@
 sysconfdir = @sysconfdir@
 datadir    = @datadir@
@@ -40,7 +39,6 @@ man8dir    = $(mandir)/man8
 man8ext    = 8
 
 # Tools & program stuff
-MKINSTALLDIRS = @MKINSTALLDIRS@
 SEDCMD = @SEDCMD@
 SEDCMD2 = @SEDCMD2@
 @SET_MAKE@
@@ -109,5 +107,7 @@ dummy:
 
 # Added for compatability with Automake
 dvi:
+
+installcheck:
 
 # End of Make.common

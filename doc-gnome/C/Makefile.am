@@ -22,11 +22,11 @@ SGML_FILES = gmc.sgml
 
 EXTRA_DIST = topic.dat $(SGML_FILES) $(DISTFIGS)
 
-$(srcdir)/index.html: $(SGML_FILES)
-	db2html $(srcdir)/gmc.sgml && \
-	  rm -f *.html *.css && \
-	  mv gmc/*.html gmc/*.css $(srcdir)
-	rm -rf gmc
+$(srcdir)/index.html: @MAINT@ $(SGML_FILES)
+@MAINT@	db2html $(srcdir)/gmc.sgml && \
+@MAINT@	  rm -f $(srcdir)/*.html $(srcdir)/*.css && \
+@MAINT@	  mv gmc/*.html gmc/*.css $(srcdir)
+@MAINT@	rm -rf gmc
 
 dist-hook: $(srcdir)/index.html
 	cp $(srcdir)/*.html $(srcdir)/*.css $(distdir)
@@ -35,6 +35,10 @@ install-data-local: $(srcdir)/index.html
 	for file in $(srcdir)/*.html $(srcdir)/*.css; do \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(gmc_helpdir) || exit 1; \
 	done
+
+uninstall-local: $(srcdir)/index.html
+	rm -f $(DESTDIR)$(gmc_helpdir)/*.html
+	rm -f $(DESTDIR)$(gmc_helpdir)/*.css
 
 dvi-local: gmc.dvi
 

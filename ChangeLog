@@ -1,3 +1,14 @@
+2000-09-18  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: Added installcheck to placate "make distcheck"
+	* configure.in, Make.common.in, doc/Makefile.in,
+	edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
+	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: Replacing
+	variable MKINSTALLDIRS and builddir with Automake-compatible
+	mkinstalldirs and top_builddir.
+	* doc-gnome/C/Makefile.am: Only maintainers regenerate html
+	files. Added uninstall-local target.
+
 2000-09-17  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: fixed wrong use of AC_MSG_RESULT inside

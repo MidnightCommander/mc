@@ -1,6 +1,8 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 top_srcdir = $(srcdir)/..
 @MCFG@@MCF@
@@ -102,7 +104,6 @@ GNOMEHDRS =					\
 	gwidget.h
 
 ICONS = 			\
-	directory.xpm		\
 	i-blockdev.png		\
 	i-cdrom.png		\
 	i-chardev.png		\
@@ -219,14 +220,12 @@ EXTRA_DIST =			\
 	gmc.gnorba		\
 	mc.keys.in.in		\
 	gimp.image.desktop	\
-	magicdev.idl
-
-DISTGNOME_NEW = \
-	gimp.image.desktop application.x-gnumeric.desktop
+	magicdev.idl		\
+	application.x-gnumeric.desktop
 
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
-	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) $(DISTGNOME_NEW) \
+	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) \
 	$(CLIENTSRCS) gmc-window.c gmc-window.h
 
 .c.o:
@@ -324,12 +323,12 @@ install: install_@mx@
 install_:
 
 install_mx: all
-	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(icondir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(mclibdir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(datadir)/mime-info
-	$(MKINSTALLDIRS) $(DESTDIR)$(corbadir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(gnewdir)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	$(mkinstalldirs) $(DESTDIR)$(icondir)
+	$(mkinstalldirs) $(DESTDIR)$(mclibdir)
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/mime-info
+	$(mkinstalldirs) $(DESTDIR)$(corbadir)
+	$(mkinstalldirs) $(DESTDIR)$(gnewdir)
 	$(INSTALL_PROGRAM) plain-gmc $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
 	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
 	$(INSTALL_PROGRAM) gmc-client $(DESTDIR)$(bindir)/$(binprefix)gmc-client

@@ -1,6 +1,8 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 SHELL   = @SHELL@
 @MCFG@@MCF@
@@ -60,8 +62,8 @@ DISTFILES = \
 
 all: mc mcmfmt $(srcdir)/mc.hlp @saver_target@ Makefile
 
-Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=src/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && CONFIG_FILES=src/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<

@@ -1,6 +1,8 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 @MCFG@@MCF@
 
@@ -14,12 +16,12 @@ LINUXDOCDIR =	/usr/local/linuxdoc-sgml
 
 all: Makefile
 
-Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=doc/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	cd $(top_builddir) && CONFIG_FILES=doc/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
 
 install:
-	$(MKINSTALLDIRS) $(DESTDIR)$(man1dir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(man8dir)
+	$(mkinstalldirs) $(DESTDIR)$(man1dir)
+	$(mkinstalldirs) $(DESTDIR)$(man8dir)
 	-$(SEDCMD2) < mc.1 > $(DESTDIR)$(man1dir)/$(manprefix)mc.$(manext)
 	-$(SEDCMD2) < mcedit.1 > $(DESTDIR)$(man1dir)/$(manprefix)mcedit.$(manext)
 	-$(SEDCMD2) < mcserv.8 > $(DESTDIR)$(man8dir)/$(manprefix)mcserv.$(man8ext)

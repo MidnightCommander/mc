@@ -5,11 +5,13 @@
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+top_builddir = ..
 
 @MCFG@@MCF@
 
 CFLAGS   = $(XCFLAGS) -D_LARGEFILE64_SOURCE
-CPPFLAGS = $(XCPPFLAGS) -I$(builddir)/vfs -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
+CPPFLAGS = $(XCPPFLAGS) -I. -I$(srcdir)/samba/ubiqx -I$(srcdir)/samba/smbwrapper
 LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
 LIBS     = @LINTL@ @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ @LCRYPT@ $(XLIB)
@@ -209,8 +211,8 @@ VFSHDRS = 			\
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-Makefile: $(srcdir)/Make-mc.in $(builddir)/config.status
-	cd $(builddir) && CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in CONFIG_HEADERS= $(SHELL) ./config.status
+Makefile: $(srcdir)/Make-mc.in $(top_builddir)/config.status
+	cd $(top_builddir) && CONFIG_FILES=vfs/Makefile:vfs/Make-mc.in CONFIG_HEADERS= $(SHELL) ./config.status
 
 
 #
@@ -275,7 +277,7 @@ install: install_@mcserv@ install.extfs
 install_:
 
 install_mcserv:
-	$(MKINSTALLDIRS) $(DESTDIR)$(bindir)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	$(INSTALL_PROGRAM) mcserv $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 install.extfs:
