@@ -83,7 +83,6 @@ typedef struct Dlg_head {
 
     /* Internal flags */
     int running;
-    int send_idle_msg;
     int mouse_status;		/* For the autorepeat status of the mouse */
     int refresh_pushed;		/* Did the dialog actually run? */
 
@@ -141,6 +140,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 
 
 /* The flags: */
+#define DLG_WANT_IDLE   64	/* Dialog wants idle events */
 #define DLG_BACKWARD    32	/* Tab order is reverse to the index order */
 #define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
 #define DLG_HAS_MENUBAR  8	/* GrossHack: Send events on row 1 to a menubar? */
@@ -159,7 +159,7 @@ void dlg_process_event    (Dlg_head *h, int key, Gpm_Event *event);
 void init_dlg             (Dlg_head *h);
 
 /* To activate/deactivate the idle message generation */
-void set_idle_proc        (Dlg_head *d, int state);
+void set_idle_proc        (Dlg_head *d, int enable);
 		          
 void dlg_redraw           (Dlg_head *h);
 void destroy_dlg          (Dlg_head *h);

@@ -1,3 +1,11 @@
+2003-09-07  Pavel Roskin  <proski@gnu.org>
+
+	* dlg.h: Convert send_idle_msg field to a publicly visible flag
+	DLG_WANT_IDLE.
+	* main.c (midnight_callback): Move auto_menu handling to the
+	handler for DLG_IDLE.
+	(do_nc): Request idle events.
+
 2003-09-06  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.c: Fix a bug when DLG_HOTKEY_HANDLED would not be

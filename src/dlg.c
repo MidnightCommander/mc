@@ -240,9 +240,13 @@ create_dlg (int y1, int x1, int lines, int cols, const int *color_set,
     return (new_d);
 }
 
-void set_idle_proc (Dlg_head *d, int state)
+void
+set_idle_proc (Dlg_head *d, int enable)
 {
-    d->send_idle_msg = state;
+    if (enable)
+	d->flags |= DLG_WANT_IDLE;
+    else
+	d->flags &= ~DLG_WANT_IDLE;
 }
 
 /* add component to dialog buffer */
@@ -786,9 +790,8 @@ frontend_run_dlg (Dlg_head *h)
 	    if (idle_hook)
 		execute_hooks (idle_hook);
 
-	    while (h->send_idle_msg && is_idle ()) {
+	    while ((h->flags & DLG_WANT_IDLE) && is_idle ())
 		(*h->callback) (h, 0, DLG_IDLE);
-	    }
 
 	    /* Allow terminating the dialog from the idle handler */
 	    if (!h->running)

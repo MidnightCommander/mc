@@ -1505,16 +1505,19 @@ static int
 midnight_callback (struct Dlg_head *h, int id, int msg)
 {
     int i;
-    static int first_pre_event = 1;
 
     switch (msg) {
 
-    case DLG_PRE_EVENT:
-	make_panels_dirty ();
-	if (auto_menu && first_pre_event) {
+    case DLG_IDLE:
+	/* We only need the first idle event */
+	set_idle_proc (h, 0);
+	if (auto_menu) {
 	    user_file_menu_cmd ();
 	}
-	first_pre_event = 0;
+	return MSG_HANDLED;
+
+    case DLG_PRE_EVENT:
+	make_panels_dirty ();
 	return MSG_HANDLED;
 
     case DLG_KEY:
@@ -1776,7 +1779,7 @@ do_nc (void)
 
     midnight_dlg =
 	create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback,
-		    "[main]", NULL, DLG_HAS_MENUBAR);
+		    "[main]", NULL, DLG_HAS_MENUBAR | DLG_WANT_IDLE);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_maybe_editor_or_viewer ())
