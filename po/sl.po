@@ -1007,7 +1007,7 @@ msgstr "_Zapri to okno"
 
 #: gnome/gmc-window.c:88
 msgid "E_xit"
-msgstr "_Izhod"
+msgstr "Iz_hod"
 
 #: gnome/gmc-window.c:95
 msgid "_Listing view"
@@ -3624,7 +3624,7 @@ msgstr "Uporabljam privzet 'locale' (krajevne nastavitve)"
 #: src/cmd.c:1271
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
-msgstr "Uporabljam 'locale' \"%s\" (iz okolijske spremenljivke %s)"
+msgstr "Uporabljam 'locale' \"%s\" (iz okoljske spremenljivke %s)"
 
 #: src/cmd.c:1357
 msgid " Enter machine name (F1 for details): "
@@ -3826,7 +3826,7 @@ msgstr ""
 "datoteka mc.ext je bila spremenjena\n"
 "z razlièico 3.0. Zdi se, da namestitev\n"
 "ni uspela. Prosim pridobite si sve¾o novo kopijo iz\n"
-"pakeata Polnoènega Poveljnika oz. v pimeru, da ga nimate\n"
+"paketa Polnoènega Poveljnika oz. v pimeru, da ga nimate\n"
 "dobite datoteko na ftp://ftp.nuclecu.unam.mx."
 
 #: src/ext.c:433
@@ -5455,7 +5455,7 @@ msgstr "Hvala, ker ste uporabljali GNU Polnoènega Poveljnika"
 
 #: src/main.c:2376
 msgid "The TERM environment variable is unset!\n"
-msgstr "TERM okolijska spremenljivka ni nastavljena!\n"
+msgstr "TERM okoljska spremenljivka ni nastavljena!\n"
 
 #: src/main.c:2483
 msgid ""
