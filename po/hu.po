@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2001-01-08 20:20+0100\n"
-"PO-Revision-Date: 2001-01-08 12:00+0200\n"
+"POT-Creation-Date: 2001-01-24 15:50+0100\n"
+"PO-Revision-Date: 2001-01-24 15:51+01:00\n"
 "Last-Translator: Szabolcs Szasz <sz@szasz.hu>\n"
 "Language-Team: Hungarian GNOME team <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -623,6 +623,11 @@ msgstr "Munkaasztal"
 #: gnome/gdesktop-init.c:146
 msgid "Home directory"
 msgstr "Saját könyvtár"
+
+# gnome/gpopup2.c:283
+#: gnome/gdesktop-init.c:158
+msgid "Trash"
+msgstr "Kuka"
 
 # gnome/gdialogs.c:60
 #: gnome/gdialogs.c:60
@@ -1803,10 +1808,12 @@ msgid "Compute totals before copying files"
 msgstr "Másolás elõtt összméret-számítás"
 
 # gnome/gprefs.c:163
+# gnome/gprefs.c:163
 #: gnome/gprefs.c:163
 msgid "FTP directory cache timeout :"
-msgstr "FTP könyvtár-cache elévülési idõ:"
+msgstr "FTP könyvtár gyorstárának elévülési idõ:"
 
+# gnome/gprefs.c:167
 # gnome/gprefs.c:167
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
@@ -2317,7 +2324,7 @@ msgstr " Mentés más névvel "
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:864 gtkedit/editcmd.c:889
 #: gtkedit/editcmd.c:1040 gtkedit/editcmd.c:1138 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
+#: src/screen.c:2175 src/subshell.c:706 src/subshell.c:732 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
 msgid " Warning "
 msgstr " Figyelem "
@@ -2671,7 +2678,7 @@ msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
 msgstr ""
-"scanf-kompatibilis formátumleíró használata;\n"
+"scanf-kompatíbilis formátumleíró használata;\n"
 "lásd a scanf man-oldalát"
 
 # gtkedit/editcmd.c:1508
@@ -2766,7 +2773,7 @@ msgstr "Mégse lépünk ki"
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
+#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "&Igen"
 
@@ -2775,7 +2782,7 @@ msgstr "&Igen"
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 #: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:407
+#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "&Nem"
 
@@ -3666,9 +3673,10 @@ msgid ""
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 " Nem sikerült az 'ispell' programot elindítani. \n"
-" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
+" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' kapcsolót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
+# gtkedit/syntax.c:1083
 # gtkedit/syntax.c:1083
 #: gtkedit/syntax.c:1083
 msgid ""
@@ -3677,9 +3685,10 @@ msgid ""
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 " Nem sikerült az 'ispell' programmal kommunikálni. \n"
-" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
+" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' kapcsolót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
+# gtkedit/syntax.c:1092
 # gtkedit/syntax.c:1092
 #: gtkedit/syntax.c:1092
 msgid ""
@@ -3688,9 +3697,10 @@ msgid ""
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 " Nem sikerült az 'ispell' programtól adatot fogadni. \n"
-" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
+" Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' kapcsolót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
+# gtkedit/syntax.c:1101
 # gtkedit/syntax.c:1101
 #: gtkedit/syntax.c:1101
 msgid ""
@@ -3939,10 +3949,12 @@ msgid " Confirmation "
 msgstr " Megerõsítés "
 
 # src/boxes.c:461
+# src/boxes.c:461
 #: src/boxes.c:461
 msgid "Full 8 bits output"
-msgstr "8-bites kijelzés"
+msgstr "8 bites kijelzés"
 
+# src/boxes.c:461
 # src/boxes.c:461
 #: src/boxes.c:461
 msgid "ISO 8859-1"
@@ -3954,14 +3966,16 @@ msgid "7 bits"
 msgstr "7-bites"
 
 # src/boxes.c:468
+# src/boxes.c:468
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
-msgstr "8-bites bevitel"
+msgstr "8 bites bevitel"
 
+# src/boxes.c:476
 # src/boxes.c:476
 #: src/boxes.c:476
 msgid " Display bits "
-msgstr " Képernyõ-bitek "
+msgstr " Képernyõbitek "
 
 # src/boxes.c:651
 #: src/boxes.c:651
@@ -3974,10 +3988,12 @@ msgid "sec"
 msgstr "mp"
 
 # src/boxes.c:657
+# src/boxes.c:657
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
-msgstr "ftpfs könyvtár-cache elévülése: "
+msgstr "ftpfs könyvtár gyorstárának elévülése: "
 
+# src/boxes.c:661
 # src/boxes.c:661
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
@@ -6849,13 +6865,15 @@ msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Midnight Commander rendszerkönyvtár: %s\n"
 
 # src/main.c:2604
+# src/main.c:2610
 #: src/main.c:2610
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"A -m opció elavult. Lásd a 'Képernyõ-bitek'-et a 'Beállítások' menüben!\n"
+"A -m kapcsoló elavult. Lásd a 'Képernyõ-bitek'-et a 'Beállítások' menüben!\n"
 
 # src/main.c:2681
+# src/main.c:2687
 #: src/main.c:2687
 msgid "Use to debug the background code"
 msgstr "Használd ezt a háttérfolyamatok debugolásához."
@@ -6986,15 +7004,17 @@ msgid "Display the directory that holds the .links startup files and exit"
 msgstr "A '.links' inicializációs fájlok könyvtárának kiírása, aztán kilépés."
 
 # src/main.c:3069
+# src/main.c:3077
 #: src/main.c:3077
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
-"Nem sikerült tty-t nyitni. Próbáld a -P opció nélkül futtatni a MC-t.\n"
+"Nem sikerült tty-t nyitni. Próbáld a -P kapcsoló nélkül futtatni a MC-t.\n"
 "néhány rendszeren érdems lehet a `which mc`-t is kipróbálni.\n"
 
 # src/main.c:3147
+# src/main.c:3155
 #: src/main.c:3155
 msgid " Notice "
 msgstr " Megjegyzés "
@@ -7126,15 +7146,17 @@ msgid "alwa&Ys"
 msgstr "Mi&ndig"
 
 # src/option.c:153
+# src/option.c:153
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:153
 msgid " Configure options "
 msgstr " Opciók beállítása "
 
 # src/option.c:154
+# src/option.c:154
 #: src/option.c:154
 msgid " Panel options "
-msgstr " Panel-beállítások "
+msgstr " Panel beállításai "
 
 # src/option.c:155
 #: src/option.c:155
@@ -7308,22 +7330,22 @@ msgid "Couldn't open named pipe %s\n"
 msgstr "Nem sikerült a csõfájl megnyitása: %s\n"
 
 # src/subshell.c:705
-#: src/subshell.c:705
+#: src/subshell.c:706
 msgid " The shell is still active. Quit anyway? "
 msgstr " A háttér-shell még aktív. Mégis kilépünk? "
 
 # src/subshell.c:731
-#: src/subshell.c:731
+#: src/subshell.c:732
 msgid " There are stopped jobs."
 msgstr " Megállított háttérfolyamatok vannak."
 
 # src/subshell.c:732
-#: src/subshell.c:732
+#: src/subshell.c:733
 msgid " Quit anyway? "
 msgstr " Mégis kilépünk? "
 
 # src/subshell.c:785
-#: src/subshell.c:785
+#: src/subshell.c:798
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Figyelem: nem sikerült belépni a \"%s\" könyvtárba.\n"
@@ -8029,11 +8051,13 @@ msgstr ""
 "%s"
 
 # vfs/direntry.c:301
+# vfs/direntry.c:301
 #: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
-msgstr "A könyvtár cache-adatai elévültek: %s"
+msgstr "A könyvtár gyorstárának adatai elévültek: %s"
 
+# vfs/direntry.c:431 vfs/direntry.c:434
 # vfs/direntry.c:431 vfs/direntry.c:434
 #: vfs/direntry.c:431 vfs/direntry.c:434
 msgid " Direntry warning "
@@ -8079,7 +8103,7 @@ msgstr "Inkonzisztens 'extfs' archívum."
 #: vfs/fish.c:140
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: lekapcsolódás a szerverrõl: %s"
+msgstr "fish: lekapcsolódás a kiszolgálóról: %s"
 
 # vfs/fish.c:218
 #: vfs/fish.c:218
@@ -8206,7 +8230,7 @@ msgstr "ftpfs: proxy-azonosítás rendben."
 #: vfs/ftpfs.c:438
 #, c-format
 msgid "ftpfs: connected to %s"
-msgstr "ftpfs: felkapcsolódva a szerverre: %s"
+msgstr "ftpfs: felkapcsolódva a kiszolgálóra: %s"
 
 # vfs/ftpfs.c:457
 #: vfs/ftpfs.c:455
@@ -8249,7 +8273,7 @@ msgstr "ftpfs: hibás gépnév/-cím."
 #: vfs/ftpfs.c:680
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: kapcsolódás a szerverhez: %s"
+msgstr "ftpfs: kapcsolódás a kiszolgálóhoz: %s"
 
 # vfs/ftpfs.c:693
 #: vfs/ftpfs.c:690
@@ -8260,7 +8284,7 @@ msgstr "ftpfs: a kapcsolat a felhasználó kérésére megszakítva"
 #: vfs/ftpfs.c:692
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: nem sikerült a szerverhez kapcsolódni: %s"
+msgstr "ftpfs: nem sikerült a kiszolgálóhoz kapcsolódni: %s"
 
 # vfs/ftpfs.c:736
 #: vfs/ftpfs.c:733
@@ -8358,7 +8382,7 @@ msgstr " MCFS "
 # vfs/mcfs.c:156
 #: vfs/mcfs.c:156
 msgid " The server does not support this version "
-msgstr " A szerver nem támogatja ezt a verziót "
+msgstr " A kiszolgáló nem támogatja ezt a verziót "
 
 # vfs/mcfs.c:173
 #: vfs/mcfs.c:173
@@ -8367,7 +8391,7 @@ msgid ""
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" A távoli szerver nem rendszerporton mûködik. \n"
+" A távoli kiszolgáló nem rendszerporton mûködik. \n"
 " Jelszó kell ugyan a bejelentkezéshez, de a túloldali \n"
 " információk biztonsága kérdéses.  Folytassuk? \n"
 
@@ -8384,7 +8408,7 @@ msgstr " Nem "
 # vfs/mcfs.c:178
 #: vfs/mcfs.c:178
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr " A távoli szerver szokatlan porton mûködik. Feladom...\n"
+msgstr " A távoli kiszolgáló szokatlan porton mûködik. Feladom...\n"
 
 # vfs/mcfs.c:190
 #: vfs/mcfs.c:190
@@ -8412,7 +8436,7 @@ msgstr " Nem sikerült a 'socket' létrehozása: %s "
 #: vfs/mcfs.c:259
 #, c-format
 msgid " Can't connect to server: %s "
-msgstr " Nem sikerült kapcsolódni a szerverhez: %s "
+msgstr " Nem sikerült kapcsolódni a kiszolgálóhoz: %s "
 
 # vfs/mcfs.c:324
 #: vfs/mcfs.c:324
