@@ -1,5 +1,11 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* menu.h (WMenu): Save pointer to the previous widget, not its
+	number.  Adjust all dependencies.
+	* menu.c (menubar_finish): Restore focus on the saved widget.
+	* dlg.c (dlg_item_number): Remove, it's unused now.
+	(dlg_select_nth_widget): Likewise.
+
 	* help.c (interactive_display): User straight widget order.
 
 	* complete.c (complete_engine): Don't need DLG_REVERSE.

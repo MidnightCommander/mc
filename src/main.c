@@ -980,7 +980,7 @@ menu_last_selected_cmd (void)
 {
     the_menubar->active = 1;
     the_menubar->dropped = drop_menus;
-    the_menubar->previous_selection = dlg_item_number (midnight_dlg);
+    the_menubar->previous_widget = midnight_dlg->current->widget;
     dlg_select_widget (midnight_dlg, the_menubar);
 }
 

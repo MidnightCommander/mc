@@ -440,7 +440,7 @@ void edit_done_menu (void)
 
 
 static void
-edit_drop_menu_cmd (WEdit * e, int which)
+edit_drop_menu_cmd (WEdit *e, int which)
 {
     if (edit_menubar->active)
 	return;
@@ -448,12 +448,9 @@ edit_drop_menu_cmd (WEdit * e, int which)
     edit_menubar->dropped = drop_menus;
     if (which >= 0) {
 	edit_menubar->selected = which;
-	edit_menubar->previous_selection = which;
-    } else {
-	edit_menubar->previous_selection =
-	    dlg_item_number (e->widget.parent);
     }
 
+    edit_menubar->previous_widget = e->widget.parent->current->widget;
     dlg_select_widget (e->widget.parent, edit_menubar);
 }
 

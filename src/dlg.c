@@ -837,34 +837,3 @@ void dlg_replace_widget (Dlg_head *h, Widget *old, Widget *new)
 	p = p->next;
     } while (p != h->current);
 }
-
-/* Returns the index of h->current from h->first */
-int dlg_item_number (Dlg_head *h)
-{
-    Widget_Item *p;
-    int i = 0;
-
-    p = h->first;
-
-    do {
-	if (p == h->current)
-	    return i;
-	i++;
-	p = p->next;
-    } while (p != h->first);
-    fprintf (stderr, "Internal error: current not in dialog list\n\r");
-    exit (1);
-}
-
-int dlg_select_nth_widget (Dlg_head *h, int n)
-{
-    Widget_Item *w;
-    int i;
-
-    w = h->first;
-    for (i = 0; i < n; i++)
-	w = w->next;
-
-    return dlg_select_widget (h, w->widget);
-}
-
