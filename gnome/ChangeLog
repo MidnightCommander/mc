@@ -1,3 +1,7 @@
+1998-12-04  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdialogs.c (trim_file_name): better update dialog
+
 1998-12-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (load_desktop_icons): Added arguments that specify

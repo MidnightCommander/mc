@@ -8,11 +8,16 @@
 
 static GtkWidget *op_win = NULL;
 static GtkWidget *fmd_win = NULL;
-static GtkWidget *byte_progress;
-static GtkWidget *op_source_label;
-static GtkWidget *op_target_label;
-static GtkWidget *file_progress;
+static GtkObject *count_prog = NULL;
+static GtkObject *byte_prog = NULL;
+static GtkObject *file_prog = NULL;
+static GtkWidget *file_label = NULL;
+static GtkWidget *op_source_label = NULL;
+static GtkWidget *op_target_label = NULL;
 int op_preserve = 1;
+#define GDIALOG_TO_STRING "To: "
+#define GDIALOG_FROM_STRING "Copying from: "
+#define GDIALOG_PROGRESS_WIDTH 350
 /* Callbacks go here... */
 static void
 fmd_check_box_callback (GtkWidget *widget, gpointer data)
@@ -21,18 +26,86 @@ fmd_check_box_callback (GtkWidget *widget, gpointer data)
                 *((gint*)data) = GTK_TOGGLE_BUTTON (widget)->active;
 }
 
+static gchar *
+trim_file_name (gchar *path, gint length, gint cur_length)
+{
+        static gint dotdotdot = 0;
+        gchar *path_copy = NULL;
+        gint len;
+
+        if (!dotdotdot)
+                dotdotdot = gdk_string_width (op_source_label->style->font, "...");
+        /* Cut the font length of path to length. */
+
+        length -= dotdotdot;
+        len = (gint) ((1.0 - (gfloat) length / (gfloat) cur_length) * strlen (path));
+        
+        /* we guess a starting point */
+        if (gdk_string_width (op_source_label->style->font, path + len) < length) {
+                while (gdk_string_width (op_source_label->style->font, path + len) < length)
+                        len --;
+                len++;
+        } else {
+                while (gdk_string_width (op_source_label->style->font, path + len) > length)
+                        len ++;
+        }
+        path_copy = g_malloc (sizeof (gchar [1 + 3 + strlen (path) - len]));
+        sprintf (path_copy, "...%s", path + len);
+        return path_copy;
+}
+
 FileProgressStatus
 file_progress_show_source (char *path)
 {
-        gtk_label_set (GTK_LABEL (op_source_label), path);
+        static gint from_width = 0;
+        gint path_width;
+        gchar *path_copy = NULL;
+
+        g_return_val_if_fail (op_source_label != NULL, FILE_CONT);
+        g_return_val_if_fail (path != NULL, FILE_CONT);
+
+        if (!from_width) 
+                from_width = gdk_string_width (op_source_label->style->font,
+                                             GDIALOG_FROM_STRING);
+        path_width = gdk_string_width (op_source_label->style->font, path);
+        if (from_width + path_width < GDIALOG_PROGRESS_WIDTH)
+                gtk_label_set (GTK_LABEL (op_source_label), path);
+        else {
+                path_copy = trim_file_name (path, GDIALOG_PROGRESS_WIDTH - from_width, path_width);
+                
+                gtk_label_set (GTK_LABEL (op_source_label), path_copy);
+                g_print ("%d\n", gdk_string_width (op_target_label->style->font,
+                                                   path_copy));
+                g_free (path_copy);
+        }
+
 	return FILE_CONT;
 }
-
 
 FileProgressStatus
 file_progress_show_target (char *path)
 {
-        gtk_label_set(GTK_LABEL (op_target_label), path);
+        static gint to_width = 0;
+        gint path_width;
+        gchar *path_copy = NULL;
+
+        g_return_val_if_fail (op_target_label != NULL, FILE_CONT);
+        g_return_val_if_fail (path != NULL, FILE_CONT);
+
+        if (!to_width) 
+                to_width = gdk_string_width (op_target_label->style->font,
+                                             GDIALOG_TO_STRING);
+        path_width = gdk_string_width (op_target_label->style->font, path);
+        if (to_width + path_width < GDIALOG_PROGRESS_WIDTH)
+                gtk_label_set (GTK_LABEL (op_target_label), path);
+        else {
+                path_copy = trim_file_name (path, GDIALOG_PROGRESS_WIDTH - to_width, path_width);
+                gtk_label_set (GTK_LABEL (op_target_label), path_copy);
+                g_print ("%d\n", gdk_string_width (op_target_label->style->font,
+                                                   path_copy));
+                g_free (path_copy);
+        }
+
 	return FILE_CONT;
 }
 
@@ -46,21 +119,39 @@ file_progress_show_deleting (char *path)
 FileProgressStatus
 file_progress_show (long done, long total)
 {
-	g_warning ("memo: file_progress_show!\ndone\t%d\ntotal\t%d\n", done, total);
+        if (!total)
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (file_prog), 0.0);
+        else
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (file_prog), (gfloat) done/(gfloat) total);
+        
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_count (long done, long total)
 {
-	g_warning ("memo: file_progress_show_count!\ndone\t%d\ntotal\t%d\n", done, total);
+        g_print ("in file_progress_show_count\n");
+        if (!total)
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (count_prog), 0.0);
+        else
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (count_prog),(gfloat) done/(gfloat) total);
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_bytes (long done, long total)
 {
-	g_warning ("memo: file_progress_show_bytes!\ndone\t%d\ntotal\t%d\n", done, total);
+        g_print ("in file_progress_show_bytes\n");
+        if (!total)
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (byte_prog), 0.0);
+        else
+                gtk_progress_bar_update (GTK_PROGRESS_BAR (byte_prog), (gfloat) done/(gfloat) total);
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
 	return FILE_CONT;
 }
 
@@ -74,6 +165,8 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
 void
 file_progress_set_stalled_label (char *stalled_msg)
 {
+        if (!stalled_msg || !*stalled_msg)
+                return;
 	g_warning ("memo: file_progress_set_stalled_label!\nmsg\t%s\n",stalled_msg);
 }
 char *
@@ -265,6 +358,7 @@ create_op_win (FileOperation op, int with_eta)
         GtkWidget *alignment;
         GtkWidget *label;
         GtkWidget *hbox;
+        GtkWidget *prog;
         g_print ("in create_op_win\n");
         switch (op) {
         case OP_MOVE:
@@ -272,30 +366,44 @@ create_op_win (FileOperation op, int with_eta)
                 break;
         case OP_COPY:
                 op_win = gnome_dialog_new ("Copy Progress", GNOME_STOCK_BUTTON_CANCEL, NULL);
+                alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+                hbox = gtk_hbox_new (FALSE, 0);
+                gtk_container_add (GTK_CONTAINER (alignment), hbox);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(GDIALOG_FROM_STRING)), FALSE, FALSE, 0);
+                op_source_label = gtk_label_new ("");
+
+                gtk_box_pack_start (GTK_BOX (hbox), op_source_label, FALSE, FALSE, 0);
+                gtk_box_set_spacing (GTK_BOX (GNOME_DIALOG (op_win)->vbox), GNOME_PAD_SMALL);
+                gtk_container_set_border_width (GTK_CONTAINER (GNOME_DIALOG (op_win)->vbox), GNOME_PAD);
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                                    alignment, FALSE, FALSE, 0);
+                
+                alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+                hbox = gtk_hbox_new (FALSE, 0);
+                gtk_container_add (GTK_CONTAINER (alignment), hbox);
+                gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_(GDIALOG_TO_STRING)), FALSE, FALSE, 0);
+                op_target_label = gtk_label_new ("");
+                gtk_box_pack_start (GTK_BOX (hbox), op_target_label, FALSE, FALSE, 0);
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                                    alignment, FALSE, FALSE, 0);
+
+                alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+                hbox = gtk_hbox_new (FALSE, 0);
+                gtk_container_add (GTK_CONTAINER (alignment), hbox);
+                file_prog = gtk_progress_bar_new ();
+                gtk_box_pack_start (GTK_BOX (hbox), file_prog, FALSE, FALSE, 0);
+                gtk_widget_set_usize (file_prog, GDIALOG_PROGRESS_WIDTH, -1);
+                
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                                    alignment, FALSE, FALSE, 0);
+
                 break;
         case OP_DELETE:
                 op_win = gnome_dialog_new ("Delete Progress", GNOME_STOCK_BUTTON_CANCEL, NULL);
                 break;
         }
 
-        alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
-        hbox = gtk_hbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("Copying from: ")), FALSE, FALSE, 0);
-        op_source_label = gtk_label_new ("");
-        gtk_box_pack_start (GTK_BOX (hbox), op_source_label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
-                            alignment, FALSE, FALSE, 0);
-
-        alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
-        hbox = gtk_hbox_new (FALSE, 0);
-	gtk_container_add (GTK_CONTAINER (alignment), hbox);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("To: ")), FALSE, FALSE, 0);
-        op_target_label = gtk_label_new ("");
-        gtk_box_pack_start (GTK_BOX (hbox), op_target_label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
-                            alignment, FALSE, FALSE, 0);
-        gtk_window_set_modal (GTK_WINDOW (op_win), TRUE);
+        /*done with things */
         gtk_widget_show_all (GNOME_DIALOG (op_win)->vbox);
         gtk_widget_show_now (op_win);
         
