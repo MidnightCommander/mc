@@ -1,5 +1,7 @@
 2002-03-18  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Remove regex.h and regex.c.
+
 	* regex.h: Remove.  We now have complete regex in src.
 	* regex.c: Likewise.
 
