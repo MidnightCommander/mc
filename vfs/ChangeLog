@@ -1,3 +1,24 @@
+2001-08-03  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* utilvfs.c, vfs.h (vfs_split_url): Make path parameter const.
+
+	* xdirentry.h (struct vfs_s_super): Remove u.ftp.result_pending field.
+	* ftpfs.h (struct connection): Remove result_pending field.
+
+	* samba/libsmb/clientgen.c (cli_chkpath): Fix possible buffer overflow.
+	* smbfs.c (new_dir_entry): New function with repeated code from
+	browsing_helper, loaddir_helper and server_browsing_helper.
+	(browsing_helper): Use new_dir_entry.
+	(loaddir_helper): Likewise.
+	(server_browsing_helper): Likewise.
+
+	(cached_lstat_info): Eliminated.
+	(smbfs_readdir): Make dirent_dest static const. 
+	Eliminate cached_lstat_info.
+	(smbfs_open_link): Make user parameter const. Fix memory leak.
+	(fake_server_stat): Make path parameter const. Symplify.
+	(smbfs_fstat): Set my_errno to EFAULT before return.
+
 2001-08-01  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Make it possible to run "make install" before
