@@ -1,5 +1,9 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* textconf.h: Remove status_using_ncurses - it's useless now.
+	Adjust all users.  Call do_exit_ca_mode() and do_enter_ca_mode()
+	even with ncurses.
+
 	* main.c (init_xterm_support): Don't enable xterm_flag just
 	because of "kmous" in terminfo.  Setiing this flag means much
 	more than just mouse support.  Recognize terminals beginning

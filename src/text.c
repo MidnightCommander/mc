@@ -91,11 +91,9 @@ edition_pre_exec (void)
      * screen page: do it now.
      *
      * Do not move this before endwin: in some systems rmcup includes
-     * a call to clear screen, so it will end up clearing the sheel screen.
+     * a call to clear screen, so it will end up clearing the shell screen.
      */
-    if (!status_using_ncurses){
-	do_exit_ca_mode ();
-    }
+    do_exit_ca_mode ();
 }
 
 void

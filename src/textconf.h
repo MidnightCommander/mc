@@ -9,12 +9,6 @@
 #define x_flush_events()
 #define port_shutdown_extra_fds()
 
-#ifdef USE_NCURSES
-#define status_using_ncurses (1)
-#else
-#define status_using_ncurses (0)
-#endif
-
 extern void version (int verbose);
 
 #endif /* __TEXTCONF_H */

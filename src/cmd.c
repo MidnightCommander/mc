@@ -942,8 +942,7 @@ view_other_cmd (void)
 #endif /* HAVE_SLANG */
 	keypad(stdscr, FALSE);
 	endwin ();
-	if (!status_using_ncurses)
-	    do_exit_ca_mode ();
+	do_exit_ca_mode ();
 	mc_raw_mode ();
 	if (console_flag)
 	    restore_console ();
@@ -968,8 +967,7 @@ view_other_cmd (void)
 	if (console_flag)
 	    handle_console (CONSOLE_SAVE);
 
-	if (!status_using_ncurses)
-	    do_enter_ca_mode ();
+	do_enter_ca_mode ();
 
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);

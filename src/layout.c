@@ -578,9 +578,8 @@ void init_curses (void)
      * or you'll have to press Esc three times to dismiss a dialog box.
      */
     ESCDELAY = 0;
-#endif
-    if (!status_using_ncurses)
-	do_enter_ca_mode ();
+#endif /* HAVE_ESCDELAY */
+    do_enter_ca_mode ();
     mc_raw_mode ();
     noecho ();
     keypad (stdscr, TRUE);
