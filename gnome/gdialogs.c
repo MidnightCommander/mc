@@ -105,7 +105,10 @@ file_progress_show_source (FileOpContext *ctx, char *path)
         gchar *path_copy = NULL;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
 
         ui = ctx->ui;
 
@@ -146,7 +149,9 @@ file_progress_show_target (FileOpContext *ctx, char *path)
         gchar *path_copy = NULL;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
 
         ui = ctx->ui;
 
@@ -184,7 +189,10 @@ file_progress_show_deleting (FileOpContext *ctx, char *path)
         gchar *path_copy = NULL;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
 
         ui = ctx->ui;
 
@@ -220,8 +228,11 @@ file_progress_show (FileOpContext *ctx, long done, long total)
         FileOpContextUI *ui;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
 
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
+        
         ui = ctx->ui;
 
         if (ui->aborting)
@@ -241,8 +252,11 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
         FileOpContextUI *ui;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
 
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
+        
         ui = ctx->ui;
 
         if (ui->aborting)
@@ -261,7 +275,10 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
         FileOpContextUI *ui;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
 
         ui = ctx->ui;
 
@@ -326,7 +343,10 @@ file_progress_query_replace_policy (FileOpContext *ctx, gboolean dialog_needed)
         GtkWidget *menu_item;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+        /* ctx->ui might be NULL for background processes */
+        if (ctx->ui == NULL)
+                return FILE_CONT;
 
         ui = ctx->ui;
 
@@ -499,13 +519,16 @@ void
 file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg)
 {
         g_return_if_fail (ctx != NULL);
-        g_return_if_fail (ctx->ui != NULL);
+
+        if (ctx->ui == NULL)
+                return;
 
         if (!stalled_msg || !*stalled_msg)
                 return;
         /* FIXME */
 	g_warning ("FIXME: file_progress_set_stalled_label!\nmsg\t%s\n",stalled_msg);
 }
+
 char *
 file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char *def_text,
                   int only_one, int *do_background)
@@ -879,8 +902,10 @@ file_op_context_destroy_ui (FileOpContext *ctx)
         FileOpContextUI *ui;
 
         g_return_if_fail (ctx != NULL);
-        g_return_if_fail (ctx->ui != NULL);
 
+        if (ctx->ui == NULL)
+                return;
+        
         ui = ctx->ui;
 
         gtk_widget_destroy (ui->op_win);

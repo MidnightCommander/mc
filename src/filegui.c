@@ -178,6 +178,9 @@ check_progress_buttons (FileOpContext *ctx)
     Gpm_Event event;
     FileOpContextUI *ui;
 
+    if (ctx->ui == NULL)
+	    return;
+    
     ui = ctx->ui;
 
     x_flush_events ();
@@ -302,17 +305,19 @@ file_op_context_destroy_ui (FileOpContext *ctx)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
 
-    ui = ctx->ui;
+    if (ctx->ui){
+	    ui = ctx->ui;
 
-    dlg_run_done (ui->op_dlg);
-    destroy_dlg (ui->op_dlg);
+	    dlg_run_done (ui->op_dlg);
+	    destroy_dlg (ui->op_dlg);
+	    g_free (ui);
+    }
+
 #ifndef HAVE_X
-    the_hint->widget.y = last_hint_line;
+	    the_hint->widget.y = last_hint_line;
 #endif
 
-    g_free (ui);
     ctx->ui = NULL;
 }
 
@@ -321,6 +326,9 @@ show_no_bar (FileOpContext *ctx, int n)
 {
     FileOpContextUI *ui;
 
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
+    
     ui = ctx->ui;
 
     if (n >= 0) {
@@ -335,6 +343,9 @@ show_bar (FileOpContext *ctx, int n, long done, long total)
 {
     FileOpContextUI *ui;
 
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
+    
     ui = ctx->ui;
 
     gauge_set_value (ui->progress_gauge[n], (int) total, (int) done);
@@ -349,6 +360,9 @@ file_eta_show (FileOpContext *ctx)
     char eta_buffer [BUF_TINY];
     FileOpContextUI *ui;
 
+    if (ctx->ui == NULL)
+	    return;
+    
     ui = ctx->ui;
 
     if (!ui->showing_eta)
@@ -370,6 +384,9 @@ file_bps_show (FileOpContext *ctx)
 {
     char bps_buffer [BUF_TINY];
     FileOpContextUI *ui;
+
+    if (ctx->ui == NULL)
+	    return;
 
     ui = ctx->ui;
 
@@ -394,7 +411,9 @@ file_progress_show (FileOpContext *ctx, long done, long total)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -415,7 +434,9 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -434,7 +455,9 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -461,7 +484,9 @@ file_progress_show_source (FileOpContext *ctx, char *s)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -492,7 +517,9 @@ file_progress_show_target (FileOpContext *ctx, char *s)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -513,7 +540,9 @@ file_progress_show_deleting (FileOpContext *ctx, char *s)
     FileOpContextUI *ui;
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
-    g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
+
+    if (ctx->ui == NULL)
+	    return FILE_CONT;
 
     ui = ctx->ui;
 
@@ -694,7 +723,9 @@ file_progress_set_stalled_label (FileOpContext *ctx, char *stalled_msg)
     FileOpContextUI *ui;
 
     g_return_if_fail (ctx != NULL);
-    g_return_if_fail (ctx->ui != NULL);
+
+    if (ctx->ui == NULL)
+	    return;
 
     ui = ctx->ui;
 
@@ -710,7 +741,7 @@ file_progress_real_query_replace (FileOpContext *ctx, enum OperationMode mode,
 
     g_return_val_if_fail (ctx != NULL, FILE_CONT);
     g_return_val_if_fail (ctx->ui != NULL, FILE_CONT);
-
+    
     ui = ctx->ui;
 
     if (ui->replace_result < REPLACE_ALWAYS){

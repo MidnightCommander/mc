@@ -945,3 +945,42 @@ int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
 #endif /* ifdef USE_NETCODE */
 #endif /* SCO_FLAVOR */
 #endif /* VFS_STANDALONE */
+
+char *
+g_readlink (char *path)
+{
+	char small_buffer [10];
+	char *str;
+	int n;
+
+	n = readlink (path, small_buffer, sizeof (small_buffer)-1);
+	if (n == -1)
+		return NULL;
+	
+	if (n < sizeof (small_buffer)-1){
+		small_buffer [n] = 0;
+		return g_strdup (small_buffer);
+	}
+
+	for (size = 256; size < 8192; size += 128){
+		str = g_malloc (size);
+
+		n = readlink (path, str, size-1);
+		if (n == -1){
+			g_free (str);
+			return NULL;
+		}
+		
+		if (n < size-1){
+			char *s;
+			
+			size [n] = 0;
+			s = g_strdup (str);
+			g_free (str);
+			return s;
+		}
+		g_free (str);
+	}
+	str [n] = 0;
+	return str;
+}

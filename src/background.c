@@ -147,9 +147,12 @@ do_background (FileOpContext *ctx, char *info)
 	close (2);
 
 	if ((nullfd = open ("/dev/null", O_RDONLY)) != -1){
-	    dup2 (nullfd, 0);
-	    dup2 (nullfd, 1);
-	    dup2 (nullfd, 2);
+	    while (dup2 (nullfd, 0) == -1 && errno == EINTR)
+		    ;
+	    while (dup2 (nullfd, 1) == -1 && errno == EINTR)
+		    ;
+	    while (dup2 (nullfd, 2) == -1 && errno == EINTR)
+		    ;
 	}
 
 	/* To make it obvious if it fails, there is a bug report on this */

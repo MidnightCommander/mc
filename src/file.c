@@ -1890,7 +1890,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
     /* Now, let's do the job */
 
-    file_op_context_create_ui (ctx, operation, 1);
+    if (do_bg)
+	ctx->ui = NULL;
+    else
+        file_op_context_create_ui (ctx, operation, 1);
     
     /* This code is only called by the tree and panel code */
     if (only_one){
@@ -2112,7 +2115,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (we_are_background) {
 	vfs_shut ();
 	tell_parent (MSG_CHILD_EXITING);
-	exit (1);
+	_exit (1);
     } 
 #endif
 

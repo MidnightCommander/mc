@@ -76,6 +76,6 @@ delete_select_channel (int fd)
 		gdk_input_remove (tclosure->tag);
 		 g_free (tclosure);
 	} else {
-		fprintf (stderr, "PANIC: could not find closure for %d\n", fd);
+		g_warning ("could not find closure for %d\n", fd);
 	}
 }

@@ -1,3 +1,13 @@
+1999-03-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* utilunix.c (g_readlink): New function.  Wraps all the nonsense
+	of readlink into a nice routine.
+
+	* filegui.c: Support ui->ctx to be NULL, as file.c will set this
+	to NULL for background operations.
+
+	* background.c (do_background): Handle EINTR in dup2.
+
 Wed Mar 10 22:21:19 1999  David Martin <dmartina@usa.net>
 
 	* util.c (my_putenv): char* was used to store the length of a string

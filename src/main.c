@@ -2642,53 +2642,73 @@ static struct poptOption argument_table [] = {
 	{ NULL, '\0', POPT_ARG_CALLBACK, parse_an_arg, 0},
 #endif
 #ifdef WITH_BACKGROUND
-    { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0 },
+    { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0,
+      N_("Use to debug the background code") },
 #endif
 #if defined(HAVE_SLANG) && defined(OS2_NT)
     { "createcmdfile",	'S', POPT_ARG_STRING, 	NULL, 			 'S' },
 #endif
-    { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c' },
-    { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0 },
+    { "color",          'c', POPT_ARG_NONE, 	NULL, 			 'c',
+      N_("Request to run in color mode") },
+    { "colors", 	'C', POPT_ARG_STRING, 	&command_line_colors, 	 0,
+      N_("Specifies a color configuration") },
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "dbgsubshell", 	'X', POPT_ARG_NONE, 	&debug_subshell, 	 0 },
 #endif
-    { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0 },
+    { "edit", 		'e', POPT_ARG_STRING, 	&edit_one_file, 	 0,
+      N_("Edits one file") },
 
 #ifndef HAVE_GNOME
-    { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h' },
+    { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h',
+      N_("Displays this help message") },
 #endif
-    { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H' },
+    { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H',
+      N_("Displays a help screen on how to change the color scheme") },
 #ifdef USE_NETCODE
-    { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l' },
+    { "ftplog", 	'l', POPT_ARG_STRING, 	NULL, 			 'l',
+      N_("Log ftp dialog to specified file") },
 #endif
 #ifdef HAVE_MAD
-    { "memory", 	'M', POPT_ARG_STRING, 	NULL, 			 'M' },
+    { "memory", 	'M', POPT_ARG_STRING, 	NULL, 			 'M', },
 #endif
     { "libdir", 	'f', POPT_ARG_NONE, 	NULL, 			 'f' },
-    { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm' },
-    { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0 },
-    { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd' },
+    { NULL, 		'm', POPT_ARG_NONE, 	NULL, 			 'm',
+      N_("Obsolete") },
+    { "nocolor", 	'b', POPT_ARG_NONE, 	&disable_colors, 0,
+      N_("Requests to run in black and white") },
+    { "nomouse", 	'd', POPT_ARG_NONE, 	NULL, 			 'd',
+      N_("Disable mouse support in text version") },
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u' },
+    { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u',
+      N_("Disables subshell support") },
     { "forceexec", 	'r', POPT_ARG_NONE, 	NULL, 			 'r' },
 #endif
-    { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0 },
-    { "resetsoft", 	'k', POPT_ARG_NONE, 	&reset_hp_softkeys, 	  0 },
-    { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0 },
+    { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0,
+      N_("Prints working directory at program exit") },
+    { "resetsoft", 	'k', POPT_ARG_NONE, 	&reset_hp_softkeys, 	  0,
+      N_("Resets soft keys on HP terminals") },
+    { "slow", 's', POPT_ARG_NONE, 		&slow_terminal, 	  0,
+      N_("To run on slow terminals") },
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0 },
+    { "stickchars",	'a', 0, 		&force_ugly_line_drawing, 0,
+      N_("Use stickchars to draw") },
 #endif
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U' },
+    { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U',
+      N_("Enables subshell support (default)")},
 #endif
 #if !defined(HAVE_X)
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
-    { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0 },
+    { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0,
+      N_("Tries to use termcap instead of terminfo") },
 #endif
 #endif
-    { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V'},
-    { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0 },
-    { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0},
+    { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V',
+      N_("Displays the current version") },
+    { "view", 		'v', 			POPT_ARG_STRING, &view_one_file, 0,
+      N_("Launches the file viewer on a file") },
+    { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0,
+      N_("Forces xterm features") },
 #ifdef HAVE_GNOME
     { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
     {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},

@@ -1,3 +1,8 @@
+1999-03-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+	
+	* gdialogs.c: Support ui->ctx to be NULL, as file.c will set this
+	to NULL for background operations.
+
 1999-03-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (icon_drag_data_received): Pass the full directory
