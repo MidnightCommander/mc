@@ -309,6 +309,10 @@ static void handle_link (char *buffer)
 	break;
     case 2:
 	/* First part of new format link */
+	/* Bold text or italics text */
+	if (buffer [0] == '.' && (buffer [1] == 'I' || buffer [1] == 'B'))
+	    for (buffer += 2; *buffer == ' ' || *buffer == '\t'; buffer++)
+		;
 	strcpy (old, buffer);
 	link_flag = 3;
 	break;

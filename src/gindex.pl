@@ -3,12 +3,16 @@
 # the warranty are quite big, we leave them at the end of the help file,
 # the index will be consulted quite frequently, so we put it at the beginning. 
 
-if ($#ARGV == 3) {
+$man2hlp = './man2hlp';
+if ($#ARGV == 4) {
+    $Topics = "$ARGV[3]";
+    $man2hlp = "$ARGV[4]";
+} elsif ($#ARGV == 3) {
     $Topics = "$ARGV[3]";
 } elsif ($#ARGV == 2) {
     $Topics = 'Topics:';
 } else {
-    die "Usage: gindex.pl man_file tmpl_file out_file [Topic section header]";
+    die "Usage: gindex.pl man_file tmpl_file out_file [Topic section header] [man2hlp]";
 }
 
 $man_file = "$ARGV[0]";
@@ -16,8 +20,7 @@ $tmpl_file = "$ARGV[1]";
 $out_file = "$ARGV[2]";
 
 $help_width = 58;
-
-open (HELP1, "./man2hlp $help_width $man_file |") or
+open (HELP1, "$man2hlp $help_width $man_file |") or
     die "Cannot open read output of man2hlp: $!\n";;
 @help_file = <HELP1>;
 close (HELP1);

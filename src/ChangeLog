@@ -2,6 +2,8 @@
 
 	* man2hlp.c (handle_command): Handle backslash quoting
 	for .I and .B
+	(handle_link): Strip .B and .I
+	* gindex.pl: Use fifth argument as man2hlp location.
 
 2002-03-20  Andrew V. Samoilov  <kai@cmail.ru>
 
