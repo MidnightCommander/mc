@@ -694,7 +694,7 @@ int edit_delete_macro (WEdit * edit, int k)
 	return 1;
     }
     for (;;) {
-	n = fscanf (f, _("key '%d 0': "), &s);
+	n = fscanf (f, ("key '%d 0': "), &s);
 	if (!n || n == EOF)
 	    break;
 	n = 0;
@@ -702,7 +702,7 @@ int edit_delete_macro (WEdit * edit, int k)
 	    n++;
 	fscanf (f, ";\n");
 	if (s != k) {
-	    fprintf (g, _("key '%d 0': "), s);
+	    fprintf (g, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
 		fprintf (g, "%hd %hd, ", macro[i].command, macro[i].ch);
 	    fprintf (g, ";\n");
@@ -738,7 +738,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	    return 0;
 	f = edit_open_macro_file ("a+");
 	if (f) {
-	    fprintf (f, _("key '%d 0': "), s);
+	    fprintf (f, ("key '%d 0': "), s);
 	    for (i = 0; i < n; i++)
 		fprintf (f, "%hd %hd, ", macro[i].command, macro[i].ch);
 	    fprintf (f, ";\n");
@@ -793,7 +793,7 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 	struct macro dummy;
 	do {
 	    int u;
-	    u = fscanf (f, _("key '%d 0': "), &s);
+	    u = fscanf (f, ("key '%d 0': "), &s);
 	    if (!u || u == EOF)
 		break;
 	    if (!saved_macros_loaded)

@@ -1,5 +1,12 @@
 2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* editcmd.c (edit_delete_macro, edit_(load|save)_macro_cmd): don't
+	translate keywords written to macro file or macro don't work, at least
+	for Cyrillic. Made this as separate commit, so, if it seriously breaks 
+	compatibility it's easy to revert it.
+
+2000-09-15  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
 	* editcmd.c (edit_save_file): fopen()+fwrite()+fclose() replaced
 	by open()+write()+close() to restore possibility to edit files
 	over Midnight Commander's VFSes
