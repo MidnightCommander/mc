@@ -3291,9 +3291,10 @@ Para informar de problemas con el programa, envíar un
 mensaje a la dirección: mc-devel@gnome.org.
 .PP
 Se debe proporcionar una descripción detallada del problema, la
-versión del programa (se obtiene con "mc -V") y el sistema operativo
-utilizados. Si el programa revienta, sería también útil disponer del
-estado de la pila.
+versión del programa (se obtiene con
+.RI ' "mc -V" ')
+y el sistema operativo utilizados. Si el programa revienta, sería
+también útil disponer del estado de la pila.
 .\"NODE "TRANSLATION"
 .SH "TRADUCCIÓN"
 Francisco Gabriel Aroca, 1998. Reformateado y actualizado por David
