@@ -1,3 +1,7 @@
+2001-01-09  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.am: Distribute files listed in LOCALIZED_HELP.
+
 2001-01-08  Szabolcs Ban <shooby@gnome.hu>
 
 	* lib/mc.hlp.hu: Added Hungarian help file from

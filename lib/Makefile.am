@@ -29,6 +29,7 @@ mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_OUT) $(LOCALIZED_HELP)
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
 	$(LIBFILES_CONST) \
+	$(LOCALIZED_HELP) \
 	$(conf_DATA) \
 	$(desktop_DATA) \
 	$(ti_DATA) \
