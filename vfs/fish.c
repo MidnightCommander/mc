@@ -104,12 +104,11 @@ static int fish_get_reply (struct vfs_class *me, int sock, char *string_buf, int
 		*string_buf = 0;
 	    return 4;
 	}
+
 	if (strncmp(answer, "### ", 4)) {
 	    was_garbage = 1;
-	    if (string_buf) {
-	        strncpy(string_buf, answer, string_len - 1);
-		*(string_buf + string_len - 1) = 0;
-	    }
+	    if (string_buf)
+		g_strlcpy(string_buf, answer, string_len);
 	} else return fish_decode_reply(answer+4, was_garbage);
     }
 }

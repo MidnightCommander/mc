@@ -1,3 +1,9 @@
+2004-09-01  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* fish.c (fish_get_reply): Use g_strlcpy instead
+        sequence strncpy(), name[len] = '\0'
+	* vfs.c (mc_get_current_wd): Likewise.
+
 2004-08-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
         * utilvfs.c (vfs_parse_ls_lga): Use atoll()/atof() instead of atol()
