@@ -324,11 +324,13 @@ WindowFactory_get_windows_by_directory (PortableServer_Servant servant,
 	seq->_length = n;
 	seq->_buffer = CORBA_sequence_GNOME_FileManager_Window_allocbuf (n);
 
-	for (l = containers, i = 0; l; l = l->next, i++) {
+	i = 0;
+
+	for (l = containers; l; l = l->next) {
 		pc = l->data;
 
 		if (strcmp (pc->panel->cwd, dir) == 0)
-			seq->_buffer[i] = window_reference_from_panel (pc->panel, ev);
+			seq->_buffer[i++] = window_reference_from_panel (pc->panel, ev);
 	}
 
 	return seq;
