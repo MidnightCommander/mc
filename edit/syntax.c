@@ -1023,7 +1023,7 @@ void edit_free_syntax_rules (WEdit * edit)
 
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
 {
-    *fg = NORMAL_COLOR;
+    *fg = EDITOR_NORMAL_COLOR;
 }
 
 int edit_check_spelling (WEdit * edit)

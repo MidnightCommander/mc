@@ -97,7 +97,7 @@ void edit_status (WEdit * edit)
     s[w] = 0;
 
     printw ("%-*s", w, s);
-    attrset (NORMAL_COLOR);
+    attrset (EDITOR_NORMAL_COLOR);
     free (s);
 }
 

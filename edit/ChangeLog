@@ -1,3 +1,9 @@
+2002-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* editdraw.c (edit_status): Use EDITOR_NORMAL_COLOR instead of
+	NORMAL_COLOR.
+	* syntax.c (edit_get_syntax_color) [!HAVE_SYNTAXH]: Likewise.
+
 2002-06-24  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (check_file_access): Return 1 on all errors, document
