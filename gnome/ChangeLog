@@ -1,3 +1,8 @@
+1999-04-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (gnome_about_cmd): Internationalize about box.  And put
+	the right address for bug reports.
+
 1999-03-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop-icon.c (desktop_icon_realize): Remove the

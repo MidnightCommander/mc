@@ -103,13 +103,22 @@ void
 gnome_about_cmd (void)
 {
         GtkWidget *about;
+	static int translated;
         const gchar *authors[] = {
-		"The Midnight Commander Team",
+		N_("The Midnight Commander Team"),
 		"http://www.gnome.org/mc/",
-		"bug reports: mc-bugs@nuclecu.unam.mx",
+		N_("bug reports: http://bugs.gnome.org, or use gnome-bug"),
 		NULL
 	};
 
+	if (!translated){
+		int i;
+		
+		for (i = 0; authors [i]; i++)
+			authors [i] = _(authors [i]);
+		translated = TRUE;
+	}
+	
         about = gnome_about_new (_("GNU Midnight Commander"), VERSION,
 				 "Copyright 1994-1999 the Free Software Foundation",
 				 authors,
