@@ -2182,8 +2182,10 @@ panel_callback (WPanel *panel, widget_msg_t msg, int parm)
 	current_panel = panel;
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0) {
+	    char *cwd = strip_password (g_strdup (panel->cwd), 1);
 	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
-		     panel->cwd, unix_error_string (errno));
+		     cwd, unix_error_string (errno));
+	    g_free(cwd);
 	} else
 	    subshell_chdir (panel->cwd);
 

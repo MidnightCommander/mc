@@ -788,9 +788,12 @@ do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     feed_subshell (QUIETLY, FALSE);
 
     if (subshell_alive && strcmp (subshell_cwd, current_panel->cwd)
-	&& strcmp (current_panel->cwd, "."))
+	&& strcmp (current_panel->cwd, ".")) {
+	char *cwd = strip_password (g_strdup (current_panel->cwd), 1);
 	fprintf (stderr, _("Warning: Cannot change to %s.\n"),
-		 current_panel->cwd);
+		 cwd);
+	g_free (cwd);
+    }
 
     if (reset_prompt)
 	prompt_pos = 0;

@@ -28,6 +28,11 @@ char *fake_name_quote (const char *c, int quote_percent);
  * Return static buffer, no need to free() it. */
 const char *name_trunc (const char *txt, int trunc_len);
 
+/* path_trunc() is the same as name_trunc() above but
+ * it deletes possible password from path for security
+ * reasons. */
+const char *path_trunc (const char *path, int trunc_len);
+
 /* return a static string representing size, appending "K" or "M" for
  * big sizes.
  * NOTE: uses the same static buffer as size_trunc_sep. */

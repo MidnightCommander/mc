@@ -761,7 +761,7 @@ add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 			   /* should be inserted before first item */
 	new->next = current;
 	current_group->head = new;
-    } else if (pos == 1) { /* befor current */
+    } else if (pos == 1) { /* before current */
 	struct hotlist  *p = current_group->head;
 
 	while (p->next != current)

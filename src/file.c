@@ -1111,8 +1111,8 @@ move_file_file (FileOpContext *ctx, const char *s, const char *d,
 		msize = 40;
 	    msize /= 2;
 
-	    strcpy (st, name_trunc (s, msize));
-	    strcpy (dt, name_trunc (d, msize));
+	    strcpy (st, path_trunc (s, msize));
+	    strcpy (dt, path_trunc (d, msize));
 	    message (1, MSG_ERROR,
 			_(" `%s' and `%s' are the same file "), st, dt);
 	    do_refresh ();
@@ -1229,8 +1229,8 @@ move_dir_dir (FileOpContext *ctx, const char *s, const char *d,
 	    msize = 40;
 	msize /= 2;
 
-	strcpy (st, name_trunc (s, msize));
-	strcpy (dt, name_trunc (d, msize));
+	strcpy (st, path_trunc (s, msize));
+	strcpy (dt, path_trunc (d, msize));
 	message (1, MSG_ERROR,
 		    _(" `%s' and `%s' are the same directory "), st, dt);
 	do_refresh ();
@@ -2157,7 +2157,7 @@ int
 file_error (const char *format, const char *file)
 {
     g_snprintf (cmd_buf, sizeof (cmd_buf), format,
-		name_trunc (file, 30), unix_error_string (errno));
+		path_trunc (file, 30), unix_error_string (errno));
 
     return do_file_error (cmd_buf);
 }
@@ -2169,8 +2169,8 @@ files_error (const char *format, const char *file1, const char *file2)
     char nfile1[16];
     char nfile2[16];
 
-    strcpy (nfile1, name_trunc (file1, 15));
-    strcpy (nfile2, name_trunc (file2, 15));
+    strcpy (nfile1, path_trunc (file1, 15));
+    strcpy (nfile2, path_trunc (file2, 15));
 
     g_snprintf (cmd_buf, sizeof (cmd_buf), format, nfile1, nfile2,
 		unix_error_string (errno));
@@ -2191,7 +2191,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, const char *s
 	      "   Delete it recursively? ")
 	    : _("\n   Background process: Directory not empty \n"
 		"   Delete it recursively? ");
-	text = g_strconcat (_(" Delete: "), name_trunc (s, 30), " ", (char *) NULL);
+	text = g_strconcat (_(" Delete: "), path_trunc (s, 30), " ", (char *) NULL);
 
 	if (safe_delete)
 	    query_set_sel (1);

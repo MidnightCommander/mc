@@ -179,8 +179,10 @@ void do_cd_command (char *cmd)
 	}
     } else
 	if (!examine_cd (&cmd [3])) {
+	    char *d = strip_password (g_strdup (&cmd [3]), 1);
 	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
-		     &cmd [3], unix_error_string (errno));
+		     d, unix_error_string (errno));
+	    g_free (d);
 	    return;
 	}
 }

@@ -244,6 +244,22 @@ name_trunc (const char *txt, int trunc_len)
     return x;
 }
 
+/*
+ * path_trunc() is the same as name_trunc() above but
+ * it deletes possible password from path for security
+ * reasons.
+ */
+const char *
+path_trunc (const char *path, int trunc_len) {
+    const char *ret;
+    char *secure_path = strip_password (g_strdup (path), 1);
+    
+    ret = name_trunc (secure_path, trunc_len);
+    g_free (secure_path);
+    
+    return ret;
+}
+
 const char *size_trunc (double size)
 {
     static char x [BUF_TINY];

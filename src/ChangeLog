@@ -1,3 +1,31 @@
+2004-11-03  Jindrich Novy  <jnovy@redhat.com>
+
+	* subshell.c (do_subshell_chdir): Filter out a possible password from
+	warning dialog.
+
+	* command.c (do_cd_command): Likewise.
+
+	* screen.c (panel_callback): Likewise.
+
+	* util.c (path_trunc): Add function. path_trunc() is the same as 
+	name_trunc(), but it deletes possible password from path for security
+	reasons.
+
+	* util.h: Add functions path_trunc().
+
+	* filegui.c (file_progress_show_target): Filter out a possible password
+	from dialog.
+	(file_progress_show_deleting): Likewise.
+	(file_mask_dialog): Likewise.
+
+	* file.c (move_file_file): Likewise.
+	(move_dir_dir): Likewise.
+	(file_error): Likewise.
+	(files_error): Likewise.
+	(real_query_recursive): Likewise.
+
+	* hotlist.c (add2hotlist): Typo fix.
+
 2004-11-02  Pavel Tsekov  <ptsekov@gmx.net>
 
         * dialog.c (do_select_widget): Walk the whole widgets list looking

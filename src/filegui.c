@@ -68,6 +68,7 @@
 #include "fileopctx.h"		/* FILE_CONT */
 #include "filegui.h"
 #include "key.h"		/* get_event */
+#include "util.h"               /* strip_password() */
 
 /* }}} */
 
@@ -423,7 +424,8 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
 
 /* }}} */
 
-#define truncFileString(ui, s) name_trunc (s, ui->eta_extra + 47)
+#define truncFileString(ui, s)       name_trunc (s, ui->eta_extra + 47)
+#define truncFileStringSecure(ui, s) path_trunc (s, ui->eta_extra + 47)
 
 FileProgressStatus
 file_progress_show_source (FileOpContext *ctx, const char *s)
@@ -472,7 +474,7 @@ file_progress_show_target (FileOpContext *ctx, const char *s)
 
     if (s != NULL) {
 	label_set_text (ui->file_label[1], _("Target"));
-	label_set_text (ui->file_string[1], truncFileString (ui, s));
+	label_set_text (ui->file_string[1], truncFileStringSecure (ui, s));
 	return check_progress_buttons (ctx);
     } else {
 	label_set_text (ui->file_label[1], "");
@@ -494,7 +496,7 @@ file_progress_show_deleting (FileOpContext *ctx, const char *s)
     ui = ctx->ui;
 
     label_set_text (ui->file_label[0], _("Deleting"));
-    label_set_text (ui->file_label[0], truncFileString (ui, s));
+    label_set_text (ui->file_label[0], truncFileStringSecure (ui, s));
     return check_progress_buttons (ctx);
 }
 
@@ -854,6 +856,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     int source_easy_patterns = easy_patterns;
     char *source_mask, *orig_mask, *dest_dir, *tmpdest;
     const char *error;
+    char *def_text_secure;
     struct stat buf;
     int val;
     QuickDialog Quick_input;
@@ -872,6 +875,9 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     fmd_widgets[FMCB22].result = &ctx->stable_symlinks;
     fmd_widgets[FMCB21].result = &ctx->dive_into_subdirs;
 
+    /* filter out a possible password from def_text */
+    def_text_secure = strip_password (g_strdup (def_text), 1);
+
     /* Create the dialog */
 
     ctx->stable_symlinks = 0;
@@ -885,7 +891,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     Quick_input.i18n = 1;
     Quick_input.widgets = fmd_widgets;
     fmd_widgets[FMDI0].text = text;
-    fmd_widgets[FMDI2].text = def_text;
+    fmd_widgets[FMDI2].text = def_text_secure;
     fmd_widgets[FMDI2].str_result = &dest_dir;
     fmd_widgets[FMDI1].str_result = &source_mask;
 
