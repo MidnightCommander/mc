@@ -5,7 +5,7 @@ Yet to be released version 4.6.
 - Large file support enabled by default.
 - Dropped support for the old Curses library.
 - Editor files are now stored in ~/.mc/cedit instead of ~/.cedit
-- New syntax rules - PHP.
+- New syntax rules - PHP, Tcl.
 - File search with contents doesn't use external egrep.
 - Directories with many files are now reloaded much faster.
 - Editor supports word completion.
@@ -14,6 +14,7 @@ Yet to be released version 4.6.
 - Mcfs support can be disabled now. Use configure --without-mcfs.
 - Samba configuration and codepage files locations can be configured.
 - Colors are enabled on all capable terminals when using S-Lang.
+- .netrc support in ftpfs is enabled by default.
 
 Version 4.5.55
 
