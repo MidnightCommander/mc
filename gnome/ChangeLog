@@ -1,5 +1,12 @@
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gnome-file-property-dialog.c (gnome_file_property_dialog_new):
+	When dealing with a symbolic link, check the stat info from the
+	real file, not the link.
+
+	* gscreen.c (panel_tree_drag_data_received): Use path here (which
+	is what is selected on the tree, not panel->cwd).
+
 	* gdesktop.c (desktop_drag_data_received): Simplify.
 
 	* gscreen.c (panel_icon_list_drag_data_received): Pass the full

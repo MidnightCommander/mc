@@ -798,10 +798,16 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 		free_file = FALSE;
 		free_fe = TRUE;
 	} else {
-		file = g_concat_dir_and_file (panel->cwd, panel->dir.list[idx].fname);
 		fe = &panel->dir.list[idx];
 
-		free_file = TRUE;
+		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir){
+			file = g_concat_dir_and_file (panel->cwd, panel->dir.list[idx].fname);
+			free_file = TRUE;
+		} else {
+			file = panel->cwd;
+			free_file = FALSE;
+		}
+		
 		free_fe = FALSE;
 	}
 
@@ -853,10 +859,16 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 	} else {
 		g_assert (row < panel->count);
 
-		file = g_concat_dir_and_file (panel->cwd, panel->dir.list[row].fname);
 		fe = &panel->dir.list[row];
 
-		free_file = TRUE;
+		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir){
+			file = g_concat_dir_and_file (panel->cwd, panel->dir.list[row].fname);
+			free_file = TRUE;
+		} else {
+			file = panel->cwd;
+			free_file = FALSE;
+		}
+		
 		free_fe = FALSE;
 	}
 
@@ -908,7 +920,7 @@ panel_tree_drag_data_received (GtkWidget          *widget,
 	if (!fe)
 		return; /* eeeek */
 
-	gdnd_perform_drop (context, selection_data, panel->cwd, fe);
+	gdnd_perform_drop (context, selection_data, path, fe);
 
 	file_entry_free (fe);
 	g_free (path);

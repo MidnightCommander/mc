@@ -1002,7 +1002,8 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 	GtkWidget *notebook;
 	GtkWidget *new_page;
 	gchar *title_string;
-
+	mode_t mode;
+		
 	g_return_val_if_fail (file_name != NULL, NULL);
 	fp_dlg = gtk_type_new (gnome_file_property_dialog_get_type ());
 
@@ -1013,7 +1014,14 @@ gnome_file_property_dialog_new (gchar *file_name, gboolean can_set_icon)
 		return NULL;
 	}
 
-				
+	mode = fp_dlg->st.st_mode;
+	if (S_ISLNK (mode)){
+		struct stat s;
+
+		if (mc_stat (file_name, &s) != -1)
+			mode = s.st_mode;
+	}
+	
 	if (fp_dlg->st.st_mode & (S_IXUSR | S_IXGRP |S_IXOTH)) {
 		fp_dlg->executable = TRUE;
 	} else {
