@@ -735,10 +735,12 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 		/* FIXME: we are using the same icon for ok and not ok drags */
 		root_drag_ok_window     = make_transparent_window (fname);
 		root_drag_not_ok_window = make_transparent_window (fname);
-		gdk_dnd_set_drag_shape (root_drag_ok_window->window, &root_icon_drag_hotspot,
-					root_drag_not_ok_window->window, &root_icon_drag_hotspot);
-		gtk_widget_show (root_drag_not_ok_window);
-		gtk_widget_show (root_drag_ok_window);
+		if (root_drag_not_ok_window && root_drag_ok_window){
+			gdk_dnd_set_drag_shape (root_drag_ok_window->window, &root_icon_drag_hotspot,
+						root_drag_not_ok_window->window, &root_icon_drag_hotspot);
+			gtk_widget_show (root_drag_not_ok_window);
+			gtk_widget_show (root_drag_ok_window);
+		}
 		free (fname);
 	}
 }

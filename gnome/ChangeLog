@@ -1,5 +1,8 @@
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_drag_start): Do not attempt to use
+	icons if we could not load the images for the icon.
+
 	* gwidget.c (x_update_input): Keep the cursor always visible. 
 
 	* gview.c (view): Use a buttonbar widget. 
