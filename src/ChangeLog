@@ -4479,7 +4479,7 @@
 	and input widgets, then char is greater than 128. They were processed
 	incorrectly. As usual, char != unsigned char problem.
 
-2000-03-03  BjÃ¶rn Eriksson  <mdeans@algonet.se>
+2000-03-03  Björn Eriksson  <mdeans@algonet.se>
 
 	* Similar patches came from Andrew V. Samoilov <sav@bcs.zp.ua>.
 
