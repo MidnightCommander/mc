@@ -1,3 +1,7 @@
+1999-08-19  Federico Mena Quintero  <federico@redhat.com>
+
+	* doc-gnome/C/gmc.sgml: Index fixes.
+
 1999-08-18  Elliot Lee <sopwith@redhat.com>
 
 	* gtkedit/gtkedit.c: Make it build with gcc 2.95, by fixing the non-constant

@@ -42,7 +42,7 @@
     </legalnotice>
   </bookinfo>
   <toc></toc>
-  <chapter id="index">
+  <chapter>
   <title>The GNOME File Manager</title>
   <sect1>
    <title>Introduction</title>

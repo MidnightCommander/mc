@@ -179,7 +179,7 @@ vcs = @vcs@
 
 gmc_helpdir = $(datadir)/gnome/help/gmc/C
 
-gmc_help_DATA =  index.html	gmc.html	topic.dat
+gmc_help_DATA =  index.html	topic.dat
 
 
 SGML_FILES =  	gmc.sgml
@@ -302,12 +302,12 @@ installdirs:
 
 
 mostlyclean-generic:
-	-rm -f index.html gmc.html
-	
+	-rm -f index.html
+
 clean-generic:
 
 distclean-generic:
-	-rm -f Makefile gmc.html $(CONFIG_CLEAN_FILES)
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
 	-rm -rf gmc
 maintainer-clean-generic:
 mostlyclean-am:  mostlyclean-generic
@@ -340,12 +340,12 @@ mostlyclean distclean maintainer-clean
 
 all: 
 
-index.html: gmc.html
+index.html:
 
 gmc.html: gmc/gmc.html
 	-cp gmc/gmc.html .
 	-ln -s gmc.html index.html
-	
+
 gmc/gmc.html: $(SGML_FILES)
 	-db2html gmc.sgml
 
