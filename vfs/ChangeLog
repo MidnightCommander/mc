@@ -2876,11 +2876,11 @@ Mon Nov 30 23:49:11 1998  Pavel Machek  <pavel@bug.ucw.cz>
 Wed Nov 25 23:54:23 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.h: use ENETUNREACH if EREMOTEIO error code is not defined,
-	this is neccessary for Solaris and probably others
+	this is necessary for Solaris and probably others
 
 Mon Nov 23 17:39:33 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
-	* vfs.c (vfs_type_from_op): removing unneccessary code
+	* vfs.c (vfs_type_from_op): removing unnecessary code
 
 Wed Dec  9 12:24:52 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
@@ -2963,7 +2963,7 @@ Sat Nov 21 21:38:08 1998  Pavel Machek  <pavel@bug.ucw.cz>
 Sat Nov  7 20:19:14 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c: Converted g_return_if_fail into vfs_dies(), removed them
-	where unneccessary. I do not see why passing NULL to vfs_add_stamp
+	where unnecessary. I do not see why passing NULL to vfs_add_stamp
 	should be invalid -> removed check.
 
 Mon Nov  2 23:09:55 1998  Pavel Machek  <pavel@bug.ucw.cz>
@@ -3032,7 +3032,7 @@ Mon Oct 19 19:40:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 	* vfs.h (&more): killed ERRNOR() from vfs.h and put it into files
 	which actually need it.
 
-	* extfs.c: extfs_current_dir killed - it was unneccessary.
+	* extfs.c: extfs_current_dir killed - it was unnecessary.
 
 	* mcfs.c (mcfs_get_path): It is possible for path not to begin
 	with /#mc:, for example if user does /etc/#mc:. (It is not
@@ -3284,7 +3284,7 @@ Sun Aug 30 13:19:49 1998  Pavel Machek  <pavel@ucw.cz>
 
 	* undelfs.c: fixed, it has been broken for too long
 
-	* vfs.c, ../src/cmd.c: neccessary minor fixes to make undelfs work
+	* vfs.c, ../src/cmd.c: necessary minor fixes to make undelfs work
 
 	* vfs.c: made more fields in *_vfs_ops optional, cleanup of errno
 	handling in case of NULL in *_vfs_ops.
