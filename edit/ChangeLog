@@ -1,3 +1,8 @@
+2004-10-16  Roland Illig  <roland.illig@gmx.de>
+
+	* syntax.c (read_one_line): Fixed SEGV when reading syntax file
+	with "\r\n" line endings on Unix.
+
 2004-10-11  Leonard den Ottolander  <leonard * den ottolander nl>
 
 	* editcmd.c (regexp_error): Small text fix. 

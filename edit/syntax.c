@@ -456,12 +456,12 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
 /*
    Returns 0 on error/eof or a count of the number of bytes read
    including the newline. Result must be free'd.
+   In case of an error, *line will not be modified.
  */
 static int read_one_line (char **line, FILE * f)
 {
-    char *p;
-    int len = 256, c, r = 0, i = 0;
-    p = g_malloc0 (len);
+    GString *p = g_string_new ("");
+    int c, r = 0;
 
     for (;;) {
 	c = fgetc (f);
@@ -472,23 +472,27 @@ static int read_one_line (char **line, FILE * f)
 		r = 0;
 	    }
 	    break;
-	} else if (c == '\n') {
-	    r = i + 1;		/* extra 1 for the newline just read */
-	    break;
-	} else {
-	    if (i >= len - 1) {
-		char *q;
-		q = g_malloc0 (len * 2);
-		memcpy (q, p, len);
-		syntax_g_free (p);
-		p = q;
-		len *= 2;
-	    }
-	    p[i++] = c;
 	}
+	r++;
+	/* handle all of \r\n, \r, \n correctly. */
+	if (c == '\r') {
+	    if ( (c = fgetc (f)) == '\n')
+		r++;
+	    else
+		ungetc (c, f);
+	    break;
+	}
+	if (c == '\n')
+	    break;
+
+	g_string_append_c (p, c);
     }
-    p[i] = 0;
-    *line = p;
+    if (r != 0) {
+    	*line = p->str;
+    	g_string_free (p, FALSE);
+    } else {
+    	g_string_free (p, TRUE);
+    }
     return r;
 }
 
