@@ -1,41 +1,30 @@
- This is the port of Midnight Commander for OS/2, Windows 95 and Windows NT.
+This is the port of Midnight Commander for Win32.
 
- This port is based on the port for Windows NT by
-    Juan Grigera <grigera@isis.unlp.edu.ar>
-and the port for OS/2 by
-    Alexander Dong <ado@software-ag.de>
-and is currently maintained by
-    Pavel Roskin <proski@gnu.org>
+The original code was contributed by
+Juan Grigera <grigera@isis.unlp.edu.ar>
 
- This port of the Midnight Commander is released under the GNU General
-Public License version 2.0 or any later version. See file COPYING for
-details.
-
- Following compilers are supported:
-    For Windows NT:
-	Makefile.VC4:	Microsoft Visual C++ 4.0 and above
-	Makefile.BC5:	Borland C++ 5.x
-    For OS/2:
-	Makefile.EMX:	EMX/GCC
-	Makefile.BC2:	Borland C++ 2.x
-	Makefile.IBM:	IBM CSet or Visual Age C++
-
- You need GNU make in order to compile mc. Other implementation of
-make will not work! Run
+You need GNU make in order to compile mc.  Other implementation of make
+don't work!  Run
 
 gmake -f Makefile.xxx [RELEASE=1]
 
 where gmake is name of GNU make and Makefile.xxx is the makefile for
-your compiler. You may want to add RELEASE=1 if you want to compile an
+your compiler.  You may want to add RELEASE=1 if you want to compile an
 optimized version without debug information.
- Please note, that not all compilers are equal. You may need to create
-dummy include files or change something in order to be able to compile
-mc. BUT PLEASE DON'T TRY TO INCORPORATE SUCH QUICK HACKS INTO THE
-MC DISTRIBUTION! Try to make your changes work with all other compilers.
- If you add a file, don't forget to add it into FILES statement of
-Makefile in this directory. Otherwise this file will not be copied to
-the distribution.
- This port is not very stable now. See files BUGS and TODO in this
-directory.
 
-Pavel Roskin <proski@gnu.org>
+Following compilers are supported:
+
+Makefile.VC4:  Microsoft Visual C++ 4.0 and above
+Makefile.BC5:  Borland C++ 5.x
+Makefile.RSX:  RSXNT (http://www.mathematik.uni-bielefeld.de/~rainer/)
+Makefile.MIN:  MinGW (http://www.mingw.org/)
+
+Note that "supported" here means only that they used to work in the past
+and the specific makefiles are provided for them!
+
+Please note that the Win32 port is not actively developed.  The code may
+be out-of-date.  You may need to fix the code in order to compile it.
+
+If you add a file, don't forget to add it into Makefile.am, or it will
+be missing from the release.  Note that the release procedure for GNU
+Midnight Commander cannot detect missing files in the Win32 port!
