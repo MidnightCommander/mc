@@ -1472,19 +1472,28 @@ static int is_year(char *str, struct tm *tim)
 int
 vfs_parse_filetype (char c)
 {
-    switch (c){
-        case 'd': return S_IFDIR; 
-        case 'b': return S_IFBLK;
-        case 'c': return S_IFCHR;
-        case 'l': return S_IFLNK;
-        case 's':
-#ifdef IS_IFSOCK /* And if not, we fall through to IFIFO, which is pretty close */
-	          return S_IFSOCK;
+    switch (c) {
+	case 'd': return S_IFDIR; 
+	case 'b': return S_IFBLK;
+	case 'c': return S_IFCHR;
+	case 'l': return S_IFLNK;
+	case 's': /* Socket */
+#ifdef S_IFSOCK
+		return S_IFSOCK;
+#else
+		/* If not supported, we fall through to IFIFO */
+		return S_IFIFO;
 #endif
-        case 'p': return S_IFIFO;
-        case 'm': case 'n':		/* Don't know what these are :-) */
-        case '-': case '?': return S_IFREG;
-        default: return -1;
+	case 'D': /* Solaris door */
+#ifdef S_IFDOOR
+		return S_IFDOOR;
+#else
+		return S_IFIFO;
+#endif
+	case 'p': return S_IFIFO;
+	case 'm': case 'n':		/* Don't know what these are :-) */
+	case '-': case '?': return S_IFREG;
+	default: return -1;
     }
 }
 

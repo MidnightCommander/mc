@@ -1,3 +1,9 @@
+2001-10-07  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_parse_filetype): Fix fallback to fifo if sockets
+	are not supported locally.  Support Solaris doors, also fall
+	back to fifo.
+
 2001-10-02  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* sfc.c (sfs_getid): Don't use vfs_die(), return (vfsid)(-1)
