@@ -3,7 +3,7 @@ dnl Configure.in file for the Midnight Commander
 dnl
 AC_INIT(create_vcs)
 AC_PREREQ(2.13)
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_HOST
 
 AM_INIT_AUTOMAKE(mc, 4.5.51)
 AM_CONFIG_HEADER(config.h)
@@ -41,7 +41,6 @@ AC_HEADER_MAJOR
 AC_C_CONST
 AC_PATH_PROG(AR, ar, ar)
 
-AC_CHECK_PROG(system,uname,`uname`,unknown)
 AC_CHECK_PROGS(X11_WWW,netscape arena Mosaic chimera)
 if test x"$X11_WWW" = x; then
     X11_WWW=lynx
@@ -69,11 +68,11 @@ dnl For A/UX.  Do not move
 dnl
 
 posix_libs=""
-if test $system = A/UX
-then
+case $host_os in
+aux*)
     posix_libs="-lposix"
     AC_DEFINE(_POSIX_SOURCE)
-fi
+esac
 
 AC_PROG_INSTALL
 AC_CHECK_HEADERS(unistd.h string.h memory.h crypt.h grp.h limits.h malloc.h)
@@ -109,24 +108,19 @@ dnl
 AC_CHECK_FUNCS(getpt)
 
 SHADOWLIB=
-if test x$system = xLinux; then
-AC_CHECK_LIB(shadow,pw_encrypt,[
-shadow_header=no
-AC_CHECK_HEADERS(shadow.h)
-if test x$ac_cv_header_shadow_h = xyes; then
-    shadow_header=yes
-else
-AC_CHECK_HEADERS(shadow/shadow.h)
-    if test x$ac_cv_shadow_shadow_h = xyes; then
-        shadow_header=yes
-    fi
-fi
-if test $shadow_header = yes; then
-    AC_DEFINE(LINUX_SHADOW)
-    SHADOWLIB=-lshadow
-fi
-])
-fi
+case $host_os in
+linux*)
+    AC_CHECK_LIB(shadow,pw_encrypt,
+	[shadow_header=yes
+	AC_CHECK_HEADERS(shadow.h,,
+		[AC_CHECK_HEADERS(shadow/shadow.h,,
+			[shadow_header=no])])
+	if test $shadow_header = yes; then
+	    AC_DEFINE(LINUX_SHADOW)
+	    SHADOWLIB=-lshadow
+	fi])
+    ;;
+esac
 AC_SUBST(SHADOWLIB)
 
 NEED_CRYPT_PROTOTYPE=yes
@@ -318,12 +312,14 @@ dnl AC_ARG_WITH(bsd-curses,
 dnl [--with-bsd-curses         Used to compile with bsd curses, not very fancy],
 dnl 	[search_ncurses=false
 dnl	screen_manager="Ultrix/cursesX"
-dnl	if test $system = ULTRIX
-dnl	then
+dnl	case $host_os in
+dnl	ultrix*)
 dnl	    THIS_CURSES=cursesX
-dnl        else
+dnl	    ;;
+dnl	*)
 dnl	    THIS_CURSES=curses
-dnl	fi
+dnl	    ;;
+dnl	esac
 dnl
 dnl	LIBS="$LIBS -l$THIS_CURSES -ltermcap"
 dnl	AC_DEFINE(USE_BSD_CURSES)
@@ -367,9 +363,11 @@ AC_ARG_WITH(vcurses,
 
 mouse_lib="xterm only"
 LGPM=""
-AC_ARG_WITH(gpm-mouse, 
-	[--with-gpm-mouse[=base-dir]  Compile with gpm mouse support],[
-	if test x$withval != xno
+case $host_os in
+linux*)
+    AC_ARG_WITH(gpm-mouse, 
+	[--with-gpm-mouse[=base-dir]  Compile with gpm mouse support (Linux only)],
+	[if test x$withval != xno
 	then
 		if test x$withval != xyes
 		then
@@ -379,19 +377,16 @@ AC_ARG_WITH(gpm-mouse,
 		AC_DEFINE(HAVE_LIBGPM)
 		mouse_lib="GPM and xterm"
 		LGPM="-lgpm"
-	fi
-	],[
-	AC_CHECK_LIB(gpm, Gpm_Repeat,[
-		AC_DEFINE(HAVE_LIBGPM)
+	fi],
+	[AC_CHECK_LIB(gpm, Gpm_Repeat,
+		[AC_DEFINE(HAVE_LIBGPM)
 		mouse_lib="GPM and xterm"
-		LGPM="-lgpm"],[
-		if test $system = Linux
-		then 
-			AC_MSG_WARN([libgpm.a is missing or older than 0.18])
-		fi
-		], $LIBS)
-	]
-)
+		LGPM="-lgpm"],
+		[AC_MSG_WARN([libgpm is missing or older than 0.18])],
+		$LIBS)
+	])
+    ;;
+esac
 AC_SUBST(LGPM)
 
 AC_ARG_WITH(ncurses,
@@ -600,13 +595,15 @@ AC_ARG_WITH(subshell,
 		result="yes"
 	fi],
 	[dnl Default: provide the subshell support on non-ultrix machines
-	if test $system = ULTRIX	
-	then
+	case $host_os in
+	ultrix*)
 		result=no
-	else
+		;;
+	*)
 		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
 		result=yes
-	fi
+		;;
+	esac
 ])
 AC_MSG_RESULT([$result])
 subshell="$result"
@@ -878,8 +875,8 @@ saver_target=""
 vcs=""
 install_saver="no"
 PAMLIBS=""
-if test $system = Linux
-then
+case $host_os in
+linux*)
     saver="install.saver"
     saver_target="cons.saver"
     vcs="install.create_vcs"
@@ -892,8 +889,8 @@ then
 	AC_DEFINE(HAVE_PAM)
 	PAMLIBS="-lpam -ldl"
     ],[],[-ldl])
-
-fi
+    ;;
+esac
 AC_SUBST(saver_target)
 AC_SUBST(saver)
 AC_SUBST(vcs)
@@ -916,25 +913,24 @@ dnl this is required to load certain definitions on some termcaps
 dnl editions (AIX and OSF/1 I seem to remember).
 dnl Note that we avoid using setupterm 
 case $screen_manager in
-changequote(,)dnl
-	[Ss][Ll][Aa][Nn][Gg]*)
-changequote([, ])dnl
-		if test $system = Linux
-		then
-			echo
-		else
-		AC_CHECK_LIB(curses,setupterm,[
-			AC_TRY_COMPILE([
+SLang*)
+	case $host_os in
+	linux*)
+		;;
+	*)
+		AC_CHECK_LIB(curses,setupterm,
+			[AC_TRY_COMPILE([
 #include <curses.h>
 #include <term.h>],[
    if (key_end == parm_insert_line)
  	return 1;
    return 0;
-],[
-			LIBS="$LIBS -lcurses"
-			AC_DEFINE(USE_SETUPTERM)])])
-		fi
-		;;
+],
+			[LIBS="$LIBS -lcurses"
+			AC_DEFINE(USE_SETUPTERM)])
+		])
+	esac
+	;;
 esac
 
 LIBS="$LIBS $posix_libs"

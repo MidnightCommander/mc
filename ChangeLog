@@ -1,3 +1,8 @@
+2001-01-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Use AC_CANONICAL_HOST - "target" is meaningless
+	for MC. Don't rely on the output of uname - use $host_os.
+
 2001-01-11  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Check for ext2 libraries only if VFS is enabled.
