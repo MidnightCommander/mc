@@ -1,6 +1,6 @@
 mc ()
 {
-	MC_PWD_FILE="/tmp/mc-$USER/mc.pwd.$$"
+	MC_PWD_FILE="${TMPDIR-/tmp}/mc-$USER/mc.pwd.$$"
 	@prefix@/bin/mc -P "$MC_PWD_FILE" "$@"
 	if test -r "$MC_PWD_FILE"; then
 		MC_PWD="`cat $MC_PWD_FILE`"
