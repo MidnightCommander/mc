@@ -3,9 +3,9 @@
 
 void user_menu_cmd (void);
 char *expand_format (char, int);
-int check_format_view (char *);
-int check_format_var (char *p, char **v);
-int check_format_cd (char *);
+int check_format_view (const char *);
+int check_format_var (const char *, char **);
+int check_format_cd (const char *);
 char *check_patterns (char*);
 
 #ifdef OS2_NT

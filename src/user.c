@@ -81,9 +81,9 @@ extern char *search_string (char *, char *);
 */
 
 /* Returns how many characters we should advance if %view was found */
-int check_format_view (char *p)
+int check_format_view (const char *p)
 {
-    char *q = p;
+    const char *q = p;
     if (!strncmp (p, "view", 4)){
     	q += 4;
     	if (*q == '{'){
@@ -106,35 +106,30 @@ int check_format_view (char *p)
     	    	q++;
     	}
     	return q - p;
-    } else
-    	return 0;
+    }
+    return 0;
 }
 
-int check_format_cd (char *p)
+int check_format_cd (const char *p)
 {
-    if (!strncmp (p, "cd", 2))
-    	return 3;
-    else
-    	return 0;
+    return (strncmp (p, "cd", 2)) ? 0 : 3;
 }
 
 /* Check if p has a "^var\{var-name\}" */
 /* Returns the number of skipped characters (zero on not found) */
 /* V will be set to the expanded variable name */
-int check_format_var (char *p, char **v)
+int check_format_var (const char *p, char **v)
 {
-    char *q = p;
+    const char *q = p;
     char *var_name;
     char *value;
-    char *dots;
+    const char *dots = 0;
     
     *v = 0;
-    dots = 0;
     if (!strncmp (p, "var{", 4)){
 	for (q += 4; *q && *q != '}'; q++){
 	    if (*q == ':')
 		dots = q+1;
-	    ;
 	}
 	if (!*q)
 	    return 0;
