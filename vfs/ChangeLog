@@ -4,8 +4,7 @@
 	Canonicalize q.
 
 	* extfs/iso9660.in: Fix quoting issues.
-
-	* extfs/trpm: Likewise.
+	* extfs/trpm: Likewise. Put -- before "$1" to stop argument parsing.
 
 2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
