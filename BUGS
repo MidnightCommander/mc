@@ -1,10 +1,11 @@
 Bugzilla: 3436, 3194, 3621, 3244
 
 bugs.gnome.org:
-  Important: 216, 382, 707, etc.
-  Major cosmetic: 272, 487
-  Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597, 781
-  Non-essential: 779?, 448
+  Important: 216, 382, 707, 1006, 1035, etc.
+  Major cosmetic: 272/875, 487, 825, 845, 1845, 899, 923, 1072
+  Minor cosmetic: 55/208, 115, 308, 383, 398, 449, 479, 597, 781,
+		  874, 931, 956/1126, 1022.1, 1045, 1047, 904
+  Non-essential: 779?, 448, 1133, 1121, 1122
 
   216: If you drag a file into a directory that you don't have
        permissions to move the file to, gmc goes boom. (Not sure if
@@ -18,6 +19,12 @@ bugs.gnome.org:
 			   once or twice)
   707: Renaming files doesn't check for clashes
 
+  1006: Try going to 'ftp://ftp.cs.cuc.edu/' and then clicking on the
+        root window. I think the pointer grab stays around or
+        something.
+
   The drop-non-existent-file-from-panel bug.
 
   The "try to view /etc/X11/XF86Config" bug.
+
+  The "drag a file to desktop while holding down Ctrl" bug.
