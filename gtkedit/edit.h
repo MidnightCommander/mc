@@ -396,6 +396,7 @@ void edit_push_markers (WEdit * edit);
 void edit_quit_cmd (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, int again);
+int edit_save_block (WEdit * edit, const char *filename, long start, long finish);
 int edit_save_block_cmd (WEdit * edit);
 int edit_insert_file_cmd (WEdit * edit);
 int edit_insert_file (WEdit * edit, const char *filename);
@@ -431,7 +432,7 @@ void edit_paste_from_X_buf_cmd (WEdit * edit);
 
 void edit_paste_from_history (WEdit *edit);
 
-void edit_split_filename (WEdit * edit, char *name);
+void edit_split_filename (WEdit * edit, const char *name);
 
 #ifdef MIDNIGHT
 #define CWidget Widget

@@ -446,9 +446,9 @@ void edit_set_space_width (int s)
     space_width = s;
 }
 
-#endif
-
 int (*edit_file_is_open) (char *) = 0;
+
+#endif
 
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
@@ -463,6 +463,30 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	edit_set_space_width (FONT_PER_CHAR[' ']);
 #endif
     if (!edit) {
+#ifdef ENABLE_NLS
+	/* 
+	 * Expand option_whole_chars_search by national letters using
+	 * current locale
+	 */
+
+	static char option_whole_chars_search_buf [256];
+
+	if (option_whole_chars_search_buf != option_whole_chars_search) {
+	    int i;
+	    int len = strlen (option_whole_chars_search);
+
+	    strcpy (option_whole_chars_search_buf, option_whole_chars_search);
+
+	    for (i = 1; i <= sizeof (option_whole_chars_search_buf); i++) {
+		if (islower (i) && !strchr (option_whole_chars_search, i)) {
+		    option_whole_chars_search_buf [len++] = i;
+		}
+	    }
+
+	    option_whole_chars_search_buf [len] = 0;
+	    option_whole_chars_search = option_whole_chars_search_buf;
+	}
+#endif	/* ENABLE_NLS */
 	edit = malloc (sizeof (WEdit));
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
@@ -482,12 +506,14 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     f = (char *) filename;
     if (filename) {
 	f = catstrs (dir, filename, 0);
+#ifndef MIDNIGHT
 	if (edit_file_is_open)
 	    if ((*edit_file_is_open) (f)) {
 		if (to_free)
 		    free (edit);
 		return 0;
 	    }
+#endif
     }
     if (edit_find_filter (f) < 0) {
 #ifdef CR_LF_TRANSLATION
@@ -1215,7 +1241,7 @@ long edit_move_forward3 (WEdit * edit, long current, int cols, long upto)
 		return p;
 	}
     }
-    return (float) col;
+    return col;
 }
 #endif
 
@@ -2136,16 +2162,15 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
 
 #ifdef MIDNIGHT
 static const char *shell_cmd[] = SHELL_COMMANDS_i
+void edit_mail_dialog (WEdit * edit);
+
 #else
 static void (*user_commamd) (WEdit *, int) = 0;
 void edit_set_user_command (void (*func) (WEdit *, int))
 {
     user_commamd = func;
 }
-
 #endif
-
-void edit_mail_dialog (WEdit * edit);
 
 /* 
    This executes a command at a lower level than macro recording.
@@ -2277,11 +2302,11 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	    if (option_return_does_auto_indent)
 		edit_auto_indent (edit, 0, 1);
 	    format_paragraph (edit, 0);
-	} else if (option_return_does_auto_indent) {
-	    edit_insert (edit, '\n');
-	    edit_auto_indent (edit, 0, 1);
 	} else {
 	    edit_insert (edit, '\n');
+	    if (option_return_does_auto_indent) {
+		edit_auto_indent (edit, 0, 1);
+	    }
 	}
 	break;
     case CK_Return:
@@ -2543,7 +2568,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 #endif
 	    time (&t);
 #ifdef HAVE_STRFTIME
-	    strftime (s, 1024, "%c", localtime (&t));
+	    strftime (s, sizeof (s), "%c", localtime (&t));
 	    edit_printf (edit, s);
 #else
 	    edit_printf (edit, ctime (&t));
@@ -2566,7 +2591,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
     case CK_User_Menu:
 	if (edit_one_file) {
-	    message (1, MSG_ERROR, _("User menu avalaible only in mcedit invoked from mc"));
+	    message (1, MSG_ERROR, _("User menu available only in mcedit invoked from mc"));
 	    break;
 	}    
 	else

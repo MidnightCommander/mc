@@ -324,22 +324,22 @@ int edit_save_file (WEdit * edit, const char *filename)
 	buf = 0;
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
-	    if (write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) == -1) {
+	    if (write (fd, (char *) edit->buffers1[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
 		close (fd);
 		goto error_save;
 	    }
 	    buf++;
 	}
-	if (write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) == -1) {
+	if (write (fd, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE) != (edit->curs1 & M_EDIT_BUF_SIZE)) {
 	    filelen = -1;
 	} else if (edit->curs2) {
 	    edit->curs2--;
 	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	    if (write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) == -1) {
+	    if (write (fd, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE)) !=  1 + (edit->curs2 & M_EDIT_BUF_SIZE)) {
 		filelen = -1;
 	    } else {
 		while (--buf >= 0) {
-		    if (write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) == -1) {
+		    if (write (fd, (char *) edit->buffers2[buf], EDIT_BUF_SIZE) != EDIT_BUF_SIZE) {
 			filelen = -1;
 			break;
 		    }
@@ -400,7 +400,6 @@ void menu_save_mode_cmd (void)
 	 0, &save_mode_new, str, XV_WLAY_DONTCARE, "t"},
 	{0}};
     static QuickDialog dialog =
-/* NLS ? */
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      "esm", widgets};
     static int i18n_flag = 0;
@@ -424,7 +423,7 @@ void menu_save_mode_cmd (void)
     memcpy ((char *) &option_backup_ext_int, str_result, strlen (option_backup_ext));
 }
 
-void edit_split_filename (WEdit * edit, char *f)
+void edit_split_filename (WEdit * edit, const char *f)
 {
     if (edit->filename)
 	free (edit->filename);
@@ -1188,7 +1187,6 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
     QuickWidget quick_widgets[] =
     {
-/* NLS  for hotkeys? */
 	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
 	 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
 	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("o&Ne"),
@@ -2782,8 +2780,6 @@ int edit_save_block_cmd (WEdit * edit)
 	    } else {
 		free (exp);
 		edit_error_dialog (_ (" Save Block "), get_sys_error (_ (" Error trying to save file. ")));
-		edit->force |= REDRAW_COMPLETELY;
-		return 0;
 	    }
 	}
     }
@@ -2809,8 +2805,6 @@ int edit_insert_file_cmd (WEdit * edit)
 	    } else {
 		free (exp);
 		edit_error_dialog (_ (" Insert file "), get_sys_error (_ (" Error trying to insert file. ")));
-		edit->force |= REDRAW_COMPLETELY;
-		return 0;
 	    }
 	}
     }
@@ -2834,8 +2828,10 @@ int edit_sort_cmd (WEdit * edit)
     }
     edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, 0), start_mark, end_mark);
 
+    exp = old ? old : "";
+
     exp = input_dialog (_(" Run Sort "), 
-    _(" Enter sort options (see manpage) separated by whitespace: "), "");
+    _(" Enter sort options (see manpage) separated by whitespace: "), exp);
 
     if (!exp)
 	return 1;
@@ -2922,14 +2918,13 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	    edit->filename, " ", home_dir, BLOCK_FILE, " ", 
 	    home_dir, ERROR_FILE, 0));
 
-        edit_refresh_cmd (edit);
-
     } else { /* for missing marked block run ... */
 	my_system (0, shell, catstrs (EDIT_DIR, shell_cmd));
-        edit_refresh_cmd (edit);
     }
+
+    edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
-    
+
     /* insert result block */ 
     if (block) {
 	if (stat (e, &s) == 0) {
@@ -3018,12 +3013,10 @@ void edit_mail_dialog (WEdit * edit)
 
     QuickDialog Quick_input =
     {50, MAIL_DLG_HEIGHT, -1, 0, N_(" Mail "),
-/* NLS ? */
      "[Input Line Keys]", "quick_input", 0};
 
     QuickWidget quick_widgets[] =
     {
-/* NLS ? */
 	{quick_button, 6, 10, 9, MAIL_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
 	 0, XV_WLAY_DONTCARE, NULL},
 	{quick_button, 2, 10, 9, MAIL_DLG_HEIGHT, N_("&Ok"), 0, B_ENTER, 0,
