@@ -124,14 +124,15 @@ sub copyout
 
 
 my $tmp;
-$_=`$file $ARGV[1]`;
+my $quoted_name = quotemeta $ARGV[1];
+$_=`$file $quoted_name`;
 if (/bzip/) {
     $tmp=tmpnam();
-    system "$bzcat $ARGV[1] > $tmp";
+    system "$bzcat $quoted_name > $tmp";
     open I, "< $tmp";
 } elsif (/gzip/) {
     $tmp=tmpnam();
-    system "$gzcat $ARGV[1] > $tmp";
+    system "$gzcat $quoted_name > $tmp";
     open I, "< $tmp";
 } else {
     open I, "< $ARGV[1]";
