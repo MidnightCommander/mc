@@ -1,5 +1,11 @@
 2005-01-25  Roland Illig  <roland.illig@gmx.de>
 
+	* unixcompat.h: Provides macros and functions that are missing in
+	some Unix variants.
+	* Makefile.am: Added unixcompat.h.
+
+2005-01-25  Roland Illig  <roland.illig@gmx.de>
+
 	* dialog.h (widget_msg_t): Added WIDGET_RESIZED to inform widgets
 	that they had been resized.
 	* dialog.c (widget_set_size): Send a WIDGET_RESIZED message after
