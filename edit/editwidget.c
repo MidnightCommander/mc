@@ -28,7 +28,7 @@ WMenu *edit_menubar;
 
 int column_highlighting = 0;
 
-static int edit_callback (Dlg_head * h, WEdit * edit, int msg, int par);
+static int edit_callback (WEdit *edit, int msg, int par);
 
 int
 edit_event (WEdit * edit, Gpm_Event * event, int *result)
@@ -323,7 +323,7 @@ void edit_update_screen (WEdit * e)
     edit_render_keypress (e);
 }
 
-static int edit_callback (Dlg_head * h, WEdit * e, int msg, int par)
+static int edit_callback (WEdit *e, int msg, int par)
 {
     switch (msg) {
     case WIDGET_INIT:
@@ -355,5 +355,5 @@ static int edit_callback (Dlg_head * h, WEdit * e, int msg, int par)
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET, e->curs_col + e->start_col);
 	return 1;
     }
-    return default_proc (h, msg, par);
+    return default_proc (msg, par);
 }
