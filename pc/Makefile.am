@@ -12,6 +12,6 @@ EXTRA_DIST = BUGS Makefile.BC2 Makefile.BC5 Makefile.EMX \
 	Makefile.RSX README TODO ChangeLog chmod.c config.h \
 	cons_nt.c cons_os2.c dirent.h dirent_nt.c dirent_os2.c \
 	drive.c drive.h key_nt.c key_os2.c mc.def mc.rc mc_nt.ico \
-	mc_os2.ico slint_pc.c trace_nt.c trace_nt.h util_nt.c \
-	util_os2.c util_win32.c util_win32.h util_winnt.c \
+	mc_os2.ico regex.c regex.h slint_pc.c trace_nt.c trace_nt.h \
+	util_nt.c util_os2.c util_win32.c util_win32.h util_winnt.c \
 	sys/time.h

@@ -1,3 +1,10 @@
+2001-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* regex.c: Add temporarily to fix the build.
+	* regex.h: Likewise.
+	* Makefile.am: Add regex.c and regex.h.
+	From Franco Bez <franco.bez@web.de>
+
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* chmod.c: Remove all occurences of HAVE_X.
