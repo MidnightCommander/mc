@@ -1,3 +1,9 @@
+1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (perm_group_new): Check the return
+	value of getgrgid.
+	(perm_group_new): Do not use a grp if it does not exist.
+
 1999-02-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c (my_app_create_menus): New function, used to create

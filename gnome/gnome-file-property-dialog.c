@@ -826,10 +826,15 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 	if ((fp_dlg->euid == 0) || (fp_dlg->st.st_uid == fp_dlg->euid)) {
 		gentry = gtk_combo_new ();
 		grp = getgrgid (fp_dlg->st.st_gid);
-		if (grp->gr_name)
-			fp_dlg->group_name = g_strdup (grp->gr_name);
-		else {
-			sprintf (grpnum, "%d", (int) grp->gr_gid);
+		if (grp){
+			if (grp->gr_name)
+				fp_dlg->group_name = g_strdup (grp->gr_name);
+			else {
+				sprintf (grpnum, "%d", (int) grp->gr_gid);
+				fp_dlg->group_name = g_strdup (grpnum);
+			}
+		} else {
+			sprintf (grpnum, "%d", (int) fp_dlg->st.st_gid);
 			fp_dlg->group_name = g_strdup (grpnum);
 		}
 
@@ -842,7 +847,11 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 				sprintf (grpnum, "%d", (int) grp->gr_gid);
 				grpname = grpnum;
 			}
+		} else {
+			sprintf (grpnum, "%d", (int) grp->gr_gid);
+			grpname = grpnum;
 		}
+			
 		if (fp_dlg->euid != 0)
 			gtk_editable_set_editable (GTK_EDITABLE (GTK_COMBO (gentry)->entry), FALSE);
 		for (setgrent (); (grp = getgrent ()) != NULL;) {
@@ -876,8 +885,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 		for (templist = list; templist; templist = templist->next) {
 			g_free (templist->data);
 		}
-		grp = getgrgid (fp_dlg->st.st_gid);
-		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), grp->gr_name);
+		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gentry)->entry), grpname);
 		g_list_free (list);
 	} else {
 		/* we're neither so we just put an entry down */
