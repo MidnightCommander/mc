@@ -1498,6 +1498,8 @@ static GnomeUIInfo file_list_popup_items[] = {
 			       handle_rescan_directory),
 	GNOMEUIINFO_ITEM_NONE (N_("New _Directory..."), N_("Creates a new directory here"),
 			       gnome_mkdir_cmd),
+	GNOMEUIINFO_ITEM_NONE (N_("New _File..."), N_("Creates a new file here"),
+			       gnome_newfile_cmd),
 	GNOMEUIINFO_END
 };
 

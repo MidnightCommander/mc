@@ -357,10 +357,15 @@ gnome_launch_mime_editor (void)
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
+
 static GnomeUIInfo gnome_panel_new_menu [] = {
-	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
+	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"),
+			      N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
-	GNOMEUIINFO_ITEM_NONE(N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_Directory..."),
+			      N_("Creates a new directory"), gnome_mkdir_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_File..."),
+			      N_("Creates a new file in this directory"), gnome_newfile_cmd),
 	GNOMEUIINFO_END
 };
 
@@ -715,7 +720,7 @@ copy_uiinfo_widgets (GnomeUIInfo *uiinfo)
 }
 
 WPanel *
-create_container (Dlg_head *h, char *name, char *geometry)
+create_container (Dlg_head *h, const char *name, const char *geometry)
 {
 	PanelContainer *container;
 	WPanel *panel;
@@ -804,7 +809,7 @@ new_panel_with_geometry_at (const char *dir, const char *geometry)
 {
 	WPanel *panel;
 
-	mc_chdir (dir);
+	mc_chdir ((char *) dir);
 	panel = create_container (desktop_dlg, dir, geometry);
 	set_current_panel (panel);
 	add_widget (desktop_dlg, panel);

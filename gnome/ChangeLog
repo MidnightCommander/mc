@@ -1,3 +1,12 @@
+1999-09-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Added it here too.
+
+	* glayout.c: Add File-new option here
+
+	* gcmd.c (gnome_newfile_cmd): Added new routine.  Invoke when you
+	want to create a new file.
+
 1999-09-01  Federico Mena Quintero  <federico@redhat.com>
 
 	* gscreen.c (panel_icon_renamed): Do nothing if the name did not

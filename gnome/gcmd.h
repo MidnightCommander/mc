@@ -16,6 +16,7 @@ void gnome_icon_view_cmd          (GtkWidget *widget, WPanel *panel);
 void gnome_brief_view_cmd         (GtkWidget *widget, WPanel *panel);
 void gnome_detailed_view_cmd      (GtkWidget *widget, WPanel *panel);
 void gnome_custom_view_cmd        (GtkWidget *widget, WPanel *panel);
+void gnome_newfile_cmd            (GtkWidget *widget, WPanel *panel);
 
 typedef enum { 
 	SORT_NAME,

@@ -23,6 +23,7 @@
 #include "dialog.h"
 #include "layout.h"
 #include "gdesktop.h"
+#include "gmain.h"
 #include "../vfs/vfs.h"
 
 static char *panelize_section = "Panelize";
@@ -783,6 +784,13 @@ void
 gnome_mkdir_cmd (GtkWidget *widget, WPanel *panel)
 {
 	mkdir_cmd (panel);
+}
+
+void
+gnome_newfile_cmd (GtkWidget *widget, WPanel *panel)
+{
+	mc_chdir (panel->cwd);
+	gmc_edit ("");
 }
 
 static void

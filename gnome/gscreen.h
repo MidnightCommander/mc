@@ -6,7 +6,7 @@
 extern GnomeUIInfo panel_view_menu_uiinfo[];
 extern GnomeUIInfo panel_view_toolbar_uiinfo[];
 
-WPanel *create_container (Dlg_head *h, char *str, char *geometry);
+WPanel *create_container (Dlg_head *h, const char *str, const char *geometry);
 
 gpointer *copy_uiinfo_widgets (GnomeUIInfo *uiinfo);
 
