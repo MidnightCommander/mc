@@ -39,15 +39,9 @@ dnl
 dnl Internationalization
 dnl
 AM_GNU_GETTEXT
-INTLDEPS=
-LINTL=
 if test "x$USE_INCLUDED_LIBINTL" = xyes; then
     CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl -I\$(top_srcdir)/intl"
-    LINTL='-L$(top_builddir)/intl -lintl'
-    INTLDEPS='$(top_builddir)/intl/libintl.a'
 fi
-AC_SUBST(LINTL)
-AC_SUBST(INTLDEPS)
 
 dnl
 dnl Hack to make extraconf.h visible even if compiling outside srcdir.
