@@ -1,3 +1,21 @@
+2002-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* popt.h: Adjust poptHelpOptions[] declaration.
+
+	* popthelp.c: Replace POPT_ with _ for visible strings.
+	(singleOptionHelp): Eliminate format array.
+	(poptHelpOptions): Make const.
+	(poptPrintHelp): Return width of left column.
+
+	* main.c (print_mc_usage): Use width from poptPrintHelp()
+	for "+number".
+
+2002-10-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* boxes.c (sel_charset_button): Use g_snprintf() instead of
+	sprintf().
+	* charsets.c (init_translation_table): Likewise.
+
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* view.c: Move call to view_update_bytes_per_line() from

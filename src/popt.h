@@ -68,7 +68,7 @@ struct poptAlias {
     char ** argv;		/* must be free()able */
 };
 
-extern struct poptOption poptHelpOptions[];
+extern struct poptOption const poptHelpOptions[];
 #define POPT_AUTOHELP { NULL, '\0', POPT_ARG_INCLUDE_TABLE, poptHelpOptions, \
 			0, "Help options", NULL },
 
@@ -111,7 +111,7 @@ int poptReadDefaultConfig(poptContext con, int useEnv);
 int poptParseArgvString(const char * s, int * argcPtr, char *** argvPtr);
 const char * poptStrerror(const int error);
 void poptSetExecPath(poptContext con, const char * path, int allowAbsolute);
-void poptPrintHelp(poptContext con, FILE * f, int flags);
+int poptPrintHelp(poptContext con, FILE * f, int flags);
 void poptPrintUsage(poptContext con, FILE * f, int flags);
 void poptSetOtherOptionHelp(poptContext con, const char * text);
 const char * poptGetInvocationName(poptContext con);
