@@ -1,3 +1,11 @@
+2002-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* smbfs.c (loaddir_helper): Remove write permissions if file
+	has readonly attribute.  Add execute permissions for directory.
+	Reformat whole function.
+	(server_browsing_helper): Add execute permissions.  Reformat.
+	(browsing_helper): Likewise.
+
 2002-09-10  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Remove BROKEN_PATHS, it's unused.

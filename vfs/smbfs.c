@@ -388,9 +388,9 @@ typedef struct dir_entry {
 } dir_entry;
 
 typedef struct {
-	gboolean server_list;
-	char *dirname;
-	char *path;	/* the dir originally passed to smbfs_opendir */
+    gboolean server_list;
+    char *dirname;
+    char *path;			/* the dir originally passed to smbfs_opendir */
     smbfs_connection *conn;
     dir_entry *entries;
     dir_entry *current;
@@ -424,66 +424,69 @@ new_dir_entry (const char * name)
 
 /* browse for shares on server */
 static void
-browsing_helper(const char *name, uint32 type, const char *comment)
+browsing_helper (const char *name, uint32 type, const char *comment)
 {
-	char *typestr = "";
+    char *typestr = "";
 
-	dir_entry *new_entry = new_dir_entry (name);
+    dir_entry *new_entry = new_dir_entry (name);
 
-	switch (type) {
-		case STYPE_DISKTREE:
-			typestr = "Disk";
-			/*	show this as dir	*/
-			new_entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
-			break;
-		case STYPE_PRINTQ:
-			typestr = "Printer"; break;
-		case STYPE_DEVICE:
-			typestr = "Device"; break;
-		case STYPE_IPC:
-			typestr = "IPC"; break;
-	}
-	DEBUG(3, ("\t%-15.15s%-10.10s%s\n", name, typestr, comment));
-}
-
-static void
-loaddir_helper(file_info *finfo, const char *mask)
-{
-	dir_entry *new_entry;
-	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
-#if 0	/* I want to see dot files */
-	if (finfo->mode & aHIDDEN)
-		return;	/* don't bother with hidden files, "~$" screws up mc */
-#endif
-	new_entry = new_dir_entry (finfo->name);
-
-	new_entry->my_stat.st_size = finfo->size;
-	new_entry->my_stat.st_mtime = finfo->mtime;
-	new_entry->my_stat.st_atime = finfo->atime;
-	new_entry->my_stat.st_ctime = finfo->ctime;
-	new_entry->my_stat.st_uid = finfo->uid;
-	new_entry->my_stat.st_gid = finfo->gid;
-
-
+    switch (type) {
+    case STYPE_DISKTREE:
+	typestr = "Disk";
+	/*      show this as dir        */
 	new_entry->my_stat.st_mode =
-		S_IRUSR|S_IRGRP|S_IROTH|S_IWUSR|S_IWGRP|S_IWOTH;
-								
+	    S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP |
+	    S_IXOTH;
+	break;
+    case STYPE_PRINTQ:
+	typestr = "Printer";
+	break;
+    case STYPE_DEVICE:
+	typestr = "Device";
+	break;
+    case STYPE_IPC:
+	typestr = "IPC";
+	break;
+    }
+    DEBUG (3, ("\t%-15.15s%-10.10s%s\n", name, typestr, comment));
+}
+static void
+loaddir_helper (file_info * finfo, const char *mask)
+{
+    dir_entry *new_entry;
+    time_t t = finfo->mtime;	/* the time is assumed to be passed as GMT */
+#if 0				/* I want to see dot files */
+    if (finfo->mode & aHIDDEN)
+	return;			/* don't bother with hidden files, "~$" screws up mc */
+#endif
+    new_entry = new_dir_entry (finfo->name);
+
+    new_entry->my_stat.st_size = finfo->size;
+    new_entry->my_stat.st_mtime = finfo->mtime;
+    new_entry->my_stat.st_atime = finfo->atime;
+    new_entry->my_stat.st_ctime = finfo->ctime;
+    new_entry->my_stat.st_uid = finfo->uid;
+    new_entry->my_stat.st_gid = finfo->gid;
+
+    new_entry->my_stat.st_mode =
+	S_IRUSR | S_IRGRP | S_IROTH | S_IWUSR | S_IWGRP | S_IWOTH;
+
 /*  if (finfo->mode & aVOLID);	 nothing similar in real world */
-	if (finfo->mode & aDIR)
-		new_entry->my_stat.st_mode |= S_IFDIR;
-	else
-		new_entry->my_stat.st_mode |= S_IFREG;	/* if not dir, regular file? */
+    if (finfo->mode & aDIR)
+	new_entry->my_stat.st_mode |=
+	    S_IFDIR | S_IXUSR | S_IXGRP | S_IXOTH;
+    else
+	new_entry->my_stat.st_mode |= S_IFREG;	/* if not dir, regular file? */
 /*  if (finfo->mode & aARCH);	DOS archive	*/
 /*  if (finfo->mode & aHIDDEN);	like a dot file? */
 /*  if (finfo->mode & aSYSTEM); like a kernel? */
-	if (finfo->mode & aRONLY)
-		new_entry->my_stat.st_mode &= ~(S_IRUSR|S_IRGRP|S_IROTH);
+    if (finfo->mode & aRONLY)
+	new_entry->my_stat.st_mode &= ~(S_IWUSR | S_IWGRP | S_IWOTH);
 
-	DEBUG(3, ("  %-30s%7.7s%8.0f  %s",
-		CNV_LANG(finfo->name),
-		attrib_string(finfo->mode),
-		(double)finfo->size,
-		asctime(LocalTime(&t)))); 
+    DEBUG (3, ("  %-30s%7.7s%8.0f  %s",
+	       CNV_LANG (finfo->name),
+	       attrib_string (finfo->mode),
+	       (double) finfo->size, asctime (LocalTime (&t))));
 }
 
 /* takes "/foo/bar/file" and gives malloced "\\foo\\bar\\file" */
@@ -516,14 +519,15 @@ convert_path(char **remote_file, gboolean trailing_asterik)
 }
 
 static void
-server_browsing_helper(const char *name, uint32 m, const char *comment)
+server_browsing_helper (const char *name, uint32 m, const char *comment)
 {
-	dir_entry *new_entry = new_dir_entry (name);
+    dir_entry *new_entry = new_dir_entry (name);
 
-	/*	show this as dir	*/
-	new_entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
+    /* show this as dir */
+    new_entry->my_stat.st_mode =
+	S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH | S_IXUSR | S_IXGRP | S_IXOTH;
 
-	DEBUG(3, ("\t%-16.16s     %s\n", name, comment));
+    DEBUG (3, ("\t%-16.16s     %s\n", name, comment));
 }
 
 static BOOL
