@@ -28,7 +28,6 @@ VFSHDRS = 			\
 	mcfs.h 			\
 	mcfsutil.h 		\
 	smbfs.h			\
-	tar.h 			\
 	tcputil.h 		\
 	utilvfs.h		\
 	vfs.h			\

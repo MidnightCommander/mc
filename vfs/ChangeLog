@@ -1,5 +1,9 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* tar.h: Merge into tar.c, as it doesn't provide any external
+	interface.
+	* Makefile.am: Remove tar.h.
+
 	* vfs.h: Remove redundant declaration of init_localfs().
 
 	* mcserv.c: Don't use HAVE_CRYPT from extraonf.h.
