@@ -1,7 +1,12 @@
+Sun Feb 14 02:59:09 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* utilunix.c (my_system): Fix the order of preferenses, as setuid 
+	more desirable on BSD systems. Terminate execl[p]() with NULL, as
+	this is formally correct.
+
 1999-02-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* dir.c (do_load_dir): Added missing calls to
-	tree_store_end_check. 
+	* dir.c (do_load_dir): Added missing calls to tree_store_end_check. 
 
 	* find.c (add_to_list): Pass the data pointer as well.
 
