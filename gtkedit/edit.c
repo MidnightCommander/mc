@@ -2797,13 +2797,3 @@ void user_menu (WEdit *edit)
     edit->force |= REDRAW_COMPLETELY;
     return;
 }
-
-void edit_init_file()
-{
-    FILE *f;
-
-    if ((f = fopen (catstrs (home_dir, ERROR_FILE, 0), "w"))) fclose(f);
-    if ((f = fopen (catstrs (home_dir, BLOCK_FILE, 0), "w"))) fclose(f);
-    if ((f = fopen (catstrs (home_dir, TEMP_FILE, 0) , "w"))) fclose(f);
-    return;
-}

@@ -458,7 +458,6 @@ void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
 void user_menu (WEdit *edit);
-void edit_init_file();
 
 #ifdef MIDNIGHT
 

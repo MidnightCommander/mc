@@ -1,3 +1,9 @@
+2001-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (edit_init_file): Remove, it's useless. All the
+	necessary files should be created when needed.
+	* edit.h: Remove declaration of edit_init_file().
+
 2000-11-01  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* editcmd.c (canonicalize_pathname) [GTK]: memory leaking fixed
