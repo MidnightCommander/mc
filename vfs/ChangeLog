@@ -1,3 +1,9 @@
+2002-12-05  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c: Define INADDR_NONE if it's not already defined.
+	Needed for Solaris 9.
+	Reported by Roman Dorokhin <dorokhin@cybermail.net>
+
 2002-12-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c (open_archive): Don't use open_error_pipe() and

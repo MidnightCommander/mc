@@ -85,6 +85,11 @@ What to do with this?
 #define SUP super->u.ftp
 #define FH_SOCK fh->u.ftp.sock
 
+#ifndef INADDR_NONE
+#define INADDR_NONE 0xffffffff
+#endif
+
+
 static int my_errno;
 static int code;
 
