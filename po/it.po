@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.5x\n"
-"POT-Creation-Date: 2001-08-25 20:58+0200\n"
+"POT-Creation-Date: 2001-08-27 23:46+0200\n"
 "PO-Revision-Date: 2001-08-01 10:06+0100\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
@@ -152,8 +152,8 @@ msgstr " Salva con nome "
 #: edit/editcmd.c:581 edit/editcmd.c:905 edit/editcmd.c:930
 #: edit/editcmd.c:1081 edit/editcmd.c:1179 src/file.c:619 src/help.c:314
 #: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
-#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:744
-#: src/subshell.c:770 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:742
+#: src/subshell.c:768 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
 #: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Attenzione "
@@ -517,13 +517,13 @@ msgstr "Annulla uscita"
 
 #: edit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr " &Sì"
 
 #: edit/editcmd.c:2473 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
+#: src/subshell.c:743 src/subshell.c:769 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "&No"
 
@@ -4144,24 +4144,24 @@ msgstr ""
 "Schermo di dimensione %dx%d non supportato.\n"
 "Controllare la variabile ambiente TERM.\n"
 
-#: src/subshell.c:451
+#: src/subshell.c:449
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Non posso aprire la pipe %s\n"
 
-#: src/subshell.c:744
+#: src/subshell.c:742
 msgid " The shell is still active. Quit anyway? "
 msgstr " La shell è ancora attiva. Esco comunque?"
 
-#: src/subshell.c:770
+#: src/subshell.c:768
 msgid " There are stopped jobs."
 msgstr " Esistono processi latenti."
 
-#: src/subshell.c:771
+#: src/subshell.c:769
 msgid " Quit anyway? "
 msgstr " Esco comunque?? "
 
-#: src/subshell.c:884
+#: src/subshell.c:882
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
