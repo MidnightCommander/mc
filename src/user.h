@@ -22,7 +22,7 @@ char *check_patterns (char*);
 #else
 #   define CEDIT_GLOBAL_MENU    "cedit.menu"
 #   define CEDIT_LOCAL_MENU     ".cedit.menu"
-#   define CEDIT_HOME_MENU      ".cedit/menu"
+#   define CEDIT_HOME_MENU      ".mc/cedit/menu"
 #   define MC_GLOBAL_MENU       "mc.menu"
 #   define MC_LOCAL_MENU        ".mc.menu"
 #   define MC_HOME_MENU         ".mc/menu"

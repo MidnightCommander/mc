@@ -1,5 +1,8 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* user.h: Fix location of the home editor menu.
+	Reported by David Martin <dmartina@excite.es>
+
 	* mouse.h: Export xmouse_seq.
 	* mouse.c (init_mouse): Use xmouse_seq instead of hardcoded
 	xterm mouse sequence.
