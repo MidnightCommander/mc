@@ -2453,8 +2453,7 @@ cuts to
 .B cooledit.clip,
 and
 .B Ctrl-Del
-deletes highlighted text. The completion key also does a Return
-with an automatic indent. Mouse highlighting also works, and you
+deletes highlighted text. Mouse highlighting also works, and you
 can override the mouse as usual by holding down the shift key
 while dragging the mouse to let normal terminal mouse highlighting
 work.
