@@ -786,7 +786,7 @@ should_skip_directory (char *dir)
 	}
 
 	for (l = special_dirs; l; l = l->next){
-		if (strcmp (dir, l->data) == 0)
+		if (strncmp (dir, l->data, strlen (l->data)) == 0)
 			return TRUE;
 	}
 	return FALSE;
