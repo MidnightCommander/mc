@@ -283,14 +283,13 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     	q[1] = 0;
     	do_cd (p, cd_parse_command);
     } else {
-#ifdef HAVE_GNOME
+#ifdef HAVE_X
 	if (needs_term)
             gnome_open_terminal_with_cmd (file_name);
 	else
 	    shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
 #else
 	shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
-#endif
 	if (console_flag)
 	{
 	    handle_console (CONSOLE_SAVE);
@@ -302,6 +301,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 
 	    }
 	}
+#endif /* !HAVE_X */
 
 #ifdef OLD_CODE
 	if (vfs_current_is_local ())
