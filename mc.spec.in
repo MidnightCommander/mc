@@ -125,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %config /etc/pam.d/mcserv
 %config /etc/rc.d/init.d/mcserv
-%attr(-, root, man)  %{prefix}/man/man8/mcserv.8
+%attr(-, root, man)  %{prefix}/man/man8/mcserv.8*
 %{prefix}/bin/mcserv
 
 %files -n gmc
@@ -146,6 +146,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Mon Oct 23 2000 Pavel Roskin <proski@gnu.org>
+- Allow mcserv.8 to be gzipped.
+
 * Sat Sep 30 2000 Pavel Roskin <proski@gnu.org>
 - New package mc-common.
 - Use DESTDIR instead of misusing prefix.

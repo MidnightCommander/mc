@@ -1,5 +1,7 @@
 2000-10-23  Pavel Roskin  <proski@gnu.org>
 
+	* mc.spec.in: Allow mcserv.8 to be gzipped.
+
 	* doc-gnome/C/Makefile.am: Workaround for buggy db2html
 	that cannot deal with "./gmc.sgml".
 
