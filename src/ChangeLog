@@ -1,7 +1,13 @@
-1999-02-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* treestore.h: Replaced TreeStore.check_name_list by a GSList, for
-	minimal memory savings.
+	* treestore.c: Revert all of the stack changes.  Now the treestore
+	is again non-re-entrant.  Being re-entrat was only covering up for
+	bugs in other places.
+
+	Now we postpone notifications for additions at
+	tree_store_end_check, not before.
+
+1999-02-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_remove_entry): Removed unused code for
 	base_sublevel computation.

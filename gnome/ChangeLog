@@ -1,3 +1,9 @@
+1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_lookup_dir): Scan the whole tree.
+	Appanrently now the nodes expose are not ordered, but can contain
+	holes and gaps
+
 1999-02-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_insert_node): This function was never

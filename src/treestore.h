@@ -24,7 +24,8 @@ typedef struct {
 	tree_entry *tree_first;     	/* First entry in the list */
 	tree_entry *tree_last;          /* Last entry in the list */
 	tree_entry *check_start;	/* Start of checked subdirectories */
-	GSList     *check_name_stack;
+	char       *check_name;
+	GList      *add_queue;		/* List of strings of added directories */
 	unsigned int loaded : 1;
 	unsigned int dirty : 1;
 } TreeStore;
@@ -54,11 +55,11 @@ void        tree_store_add_entry_remove_hook    (tree_store_remove_fn callback, 
 void        tree_store_remove_entry_remove_hook (tree_store_remove_fn callback);
 
 /*
- * Register/unregister notification functions for "entry_remove"
+ * Register/unregister notification functions for "entry_add"
  */
-typedef void (*tree_store_add_fn)(tree_entry *tree, void *data);
-void        tree_store_add_entry_add_hook    (tree_store_remove_fn callback, void *data);
-void        tree_store_remove_entry_add_hook (tree_store_remove_fn callback);
+typedef void (*tree_store_add_fn)(char *name, void *data);
+void        tree_store_add_entry_add_hook    (tree_store_add_fn callback, void *data);
+void        tree_store_remove_entry_add_hook (tree_store_add_fn callback);
 
 /*
  * Changes in the tree_entry are notified with these
@@ -71,3 +72,4 @@ tree_entry *tree_store_readdir       (tree_scan *scanner);
 void        tree_store_closedir      (tree_scan *scanner);
 
 #endif
+

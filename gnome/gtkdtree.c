@@ -213,16 +213,17 @@ gtk_dtree_lookup_dir (GtkDTree *dtree, GtkCTreeNode *parent, char *dirname)
 
 	node = GTK_CTREE_ROW (parent)->children;
 	
-	while (node && GTK_CTREE_ROW (node)->parent == parent){
+	while (node){
 		char *text;
-		
-		gtk_ctree_node_get_pixtext (
-			GTK_CTREE (dtree), node, 0, &text,
-			NULL, NULL, NULL);
 
-		if (strcmp (dirname, text) == 0)
-			return node;
-
+		if (GTK_CTREE_ROW (node)->parent == parent){
+			gtk_ctree_node_get_pixtext (
+				GTK_CTREE (dtree), node, 0, &text,
+				NULL, NULL, NULL);
+			
+			if (strcmp (dirname, text) == 0)
+				return node;
+		}
 		node = GTK_CTREE_NODE_NEXT (node);
 	}
 
@@ -404,16 +405,17 @@ entry_removed_callback (tree_entry *tree, void *data)
  * into the treestore.  We update the gtkdtree with this new information.
  */
 static void
-entry_added_callback (tree_entry *tree, void *data)
+entry_added_callback (char *dirname, void *data)
 {
 	GtkCTreeNode *current_node, *new_node;
 	GtkDTree *dtree = data;
-	char *dirname, *copy, *current, *npath, *full_path;
+	char *copy, *current, *npath, *full_path;
 
 	if (dtree->loading_dir)
 		return;
-	
-	copy = dirname = g_strdup (tree->name);
+
+	dirname = g_strdup (dirname);
+	copy = dirname;
 	copy++;
 	current_node = dtree->root_node;
 	npath = g_strdup ("/");
