@@ -1,3 +1,8 @@
+2005-02-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* find.c: Implement non-recursive 'Find file' feature.
+	Original patch by Andrew Borodin <aborodin@vmail.ru> .
+
 2005-02-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* utilunix.c (init_groups): Use glib memory allocation functions.

@@ -44,7 +44,7 @@
 #include "key.h"
 
 /* Size of the find parameters window */
-#define FIND_Y 15
+#define FIND_Y 16
 static int FIND_X = 50;
 
 /* Size of the find window */
@@ -139,6 +139,7 @@ static regex_t *r; /* Pointer to compiled content_pattern */
  
 static int case_sensitive = 1;
 static gboolean find_regex_flag = TRUE;
+static int find_recursively = 1;
 
 /*
  * Callback for the parameter dialog.
@@ -191,6 +192,9 @@ find_parameters (char **start_dir, char **pattern, char **content)
     int return_value;
     char *temp_dir;
     static const char *case_label = N_("case &Sensitive");
+    static char *recurs_label = N_("find Re&cursively");
+
+    WCheck *recursively_cbox;
 
     static char *in_contents = NULL;
     static char *in_start_dir = NULL;
@@ -233,6 +237,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
 	i18n_flag = 1;
 	case_label = _(case_label);
+	recurs_label = _(recurs_label);
     }
 #endif				/* ENABLE_NLS */
 
@@ -250,12 +255,16 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		    DLG_CENTER | DLG_REVERSE);
 
     add_widget (find_dlg,
-		button_new (12, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
+		button_new (13, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
     add_widget (find_dlg,
-		button_new (12, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
+		button_new (13, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
     add_widget (find_dlg,
-		button_new (12, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
+		button_new (13, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
+    recursively_cbox =
+	check_new (11, 3, find_recursively, recurs_label);
+     add_widget (find_dlg, recursively_cbox);
+ 
     find_regex_cbox = check_new (10, 3, find_regex_flag, _("&Regular expression"));
     add_widget (find_dlg, find_regex_cbox);
 
@@ -291,6 +300,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 	temp_dir = g_strdup (in_start->buffer);
 	case_sensitive = case_sense->state & C_BOOL;
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
+ 	find_recursively = recursively_cbox->state & C_BOOL;
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0) {
@@ -318,6 +328,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
 
 	case_sensitive = case_sense->state & C_BOOL;
 	find_regex_flag = find_regex_cbox->state & C_BOOL;
+ 	find_recursively = recursively_cbox->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern = g_strdup (in_name->buffer);
@@ -674,7 +685,7 @@ do_search (struct Dlg_head *h)
 	return 1;
     }
 
-    if (subdirs_left && directory) { /* Can directory be NULL ? */
+    if (subdirs_left && find_recursively && directory) { /* Can directory be NULL ? */
 	char *tmp_name = concat_dir_and_file (directory, dp->d_name);
 	if (!mc_lstat (tmp_name, &tmp_stat)
 	    && S_ISDIR (tmp_stat.st_mode)) {
