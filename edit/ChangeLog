@@ -1,6 +1,12 @@
+2003-02-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editmenu.c (OptMenuEmacs): Define as OptMenu.
+	(SearReplMenuEmacs): Define as SearReplMenu.
+	(EditMenuEmacs): Define as EditMenu.
+
 2002-12-28  Pavel Roskin  <proski@gnu.org>
 
-	* (OptMenu): Add "Learn Keys".
+	* editmenu.c (OptMenu): Add "Learn Keys".
 	(OptMenuEmacs): Likewise.
 
 2003-01-27  Andrew V. Samoilov  <sav@bcs.zp.ua>

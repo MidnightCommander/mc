@@ -323,22 +323,7 @@ static menu_entry EditMenu[] =
     {' ', N_("&End           C-PgDn"), 'E', menu_end_cmd}
 };
 
-static menu_entry EditMenuEmacs[] =
-{
-    {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
-    {' ', N_("&Mark Columns    S-F3"), 'T', menu_markcol_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("Toggle &ins/overw Ins"), 'I', menu_ins_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Copy              F5"), 'C', menu_copy_cmd},
-    {' ', N_("&Move              F6"), 'M', menu_move_cmd},
-    {' ', N_("&Delete            F8"), 'D', menu_delete_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Undo             C-u"), 'U', menu_undo_cmd},
-    {' ', "", ' ', 0},
-    {' ', N_("&Beginning     C-PgUp"), 'B', menu_beginning_cmd},
-    {' ', N_("&End           C-PgDn"), 'E', menu_end_cmd}
-};
+#define EditMenuEmacs EditMenu
 
 static menu_entry SearReplMenu[] =
 {
@@ -347,12 +332,7 @@ static menu_entry SearReplMenu[] =
     {' ', N_("&Replace...        F4"), 'R', menu_replace_cmd}
 };
 
-static menu_entry SearReplMenuEmacs[] =
-{
-    {' ', N_("&Search...         F7"), 'S', menu_search_cmd},
-    {' ', N_("Search &again     F17"), 'A', menu_search_again_cmd},
-    {' ', N_("&Replace...        F4"), 'R', menu_replace_cmd}
-};
+#define SearReplMenuEmacs SearReplMenu
 
 static menu_entry CmdMenu[] =
 {
@@ -409,14 +389,7 @@ static menu_entry OptMenu[] =
 #endif				/* !NATIVE_WIN32 */
 };
 
-static menu_entry OptMenuEmacs[] =
-{
-    {' ', N_("&General...  "), 'G', menu_options},
-    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
-#ifndef NATIVE_WIN32
-    {' ', N_("learn &Keys..."), 'K', learn_keys}
-#endif				/* !NATIVE_WIN32 */
-};
+#define OptMenuEmacs OptMenu
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
