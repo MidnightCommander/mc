@@ -1,3 +1,8 @@
+2002-03-18  Pavel Roskin  <proski@gnu.org>
+
+	* find.c (find_parameters): Invert condition when find is case
+	sensitive.
+
 2002-03-04  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* Makefile.am (mc.hlp.ru): Use mc.1 instead of mc.1.in.
@@ -15,7 +20,7 @@
 
 	* gindex.pl: Add optional 4th argument for translated
 	Content section name.
-	
+
 2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* mad.c: Make mem_areas dynamically growing.
@@ -32,7 +37,7 @@
 	(handle_command): Handle '.\"NODE' comment.  Use it for
 	nodename in translated manual pages.
 
-	* gindex.pl: Use [nodename] as user visible section name 
+	* gindex.pl: Use [nodename] as user visible section name
 	only if next line is empty.  Elsewhere use this nonempty line.
 
 	* find.c (find_parameters): Compile content_pattern here.

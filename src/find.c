@@ -260,7 +260,7 @@ find_par_start:
 	if (in_with->buffer [0]){
 	    int flags = REG_EXTENDED|REG_NOSUB;
 
-	    if ((case_sense->state & C_BOOL))
+	    if (!(case_sense->state & C_BOOL))
 		flags |= REG_ICASE;
 
 	    if (regcomp (r, in_with->buffer, flags)) {
