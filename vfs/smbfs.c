@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
+#include <config.h>
 #include "utilvfs.h"
 #include "samba/include/config.h"
 /* don't load crap in "samba/include/includes.h" we don't use and which 
@@ -44,21 +45,21 @@
 #include "../src/wtools.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
-char *IPC = "IPC$";
-char *URL_HEADER = "/#smb:";
+static const char * const IPC = "IPC$";
+static const char * const URL_HEADER = "/#smb:";
 #define HEADER_LEN	6
 
 static int my_errno;
-uint32 err;
+static uint32 err;
 
 /* stuff that is same with each connection */
 extern int DEBUGLEVEL;
 static pstring myhostname;
-mode_t myumask = 0755;
+static mode_t myumask = 0755;
 extern pstring global_myname;
 static int smbfs_open_connections = 0;
-gboolean got_user = FALSE;
-gboolean got_pass = FALSE;
+static gboolean got_user = FALSE;
+static gboolean got_pass = FALSE;
 static pstring password;
 static pstring username;
 
@@ -79,7 +80,7 @@ static struct _smbfs_connection {
 /* unique to each connection */
 
 typedef struct _smbfs_connection smbfs_connection;
-smbfs_connection *current_bucket;
+static smbfs_connection *current_bucket;
 
 typedef struct {
 	struct cli_state *cli;
@@ -97,7 +98,7 @@ struct authinfo {
 /*	struct timeval timestamp;*/
 };
 
-GSList *auth_list;
+static GSList *auth_list;
 
 static struct authinfo *
 authinfo_get_authinfo_from_user (const char *host, 
@@ -498,13 +499,13 @@ typedef struct {
     dir_entry *current;
 } opendir_info;
 
-opendir_info
+static opendir_info
 	*previous_info,
 	*current_info,
 	*current_share_info,
 	*current_server_info;
 
-gboolean first_direntry;
+static gboolean first_direntry;
 /* browse for shares on server */
 static void
 browsing_helper(const char *name, uint32 type, const char *comment)
@@ -1394,15 +1395,22 @@ fake_share_stat(char *server_url, char *path, struct stat *buf)
 }
 
 /* stat a single file, get_remote_stat callback  */
-dir_entry *single_entry;
+static dir_entry *single_entry;
 static void
 statfile_helper(file_info *finfo, const char *mask)
 {
 	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
+
+#if 0 /* single_entry is never freed now. And only my_stat is used */
 	single_entry = g_new (dir_entry, 1);
+
 	single_entry->text = dos_to_unix (g_strdup (finfo->name), 1);
 
-    single_entry->next = 0;
+	single_entry->next = 0;
+#endif
+	if (!single_entry)
+		single_entry = g_new0 (dir_entry, 1);
+
 	single_entry->my_stat.st_size = finfo->size;
 	single_entry->my_stat.st_mtime = finfo->mtime;
 	single_entry->my_stat.st_atime = finfo->atime;
@@ -1410,9 +1418,9 @@ statfile_helper(file_info *finfo, const char *mask)
 	single_entry->my_stat.st_uid = finfo->uid;
 	single_entry->my_stat.st_gid = finfo->gid;
 
-	single_entry->my_stat.st_mode =	S_IRUSR|S_IRGRP|S_IROTH |
-									S_IWUSR|S_IWGRP|S_IWOTH;
-								
+	single_entry->my_stat.st_mode =
+	    S_IRUSR|S_IRGRP|S_IROTH|S_IWUSR|S_IWGRP|S_IWOTH;
+
 /*  if (finfo->mode & aVOLID);	 nothing similar in real world */
 	if (finfo->mode & aDIR)
 		single_entry->my_stat.st_mode |= S_IFDIR;
@@ -1442,9 +1450,9 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 
 	convert_path(&mypath, FALSE);
 
-    if (cli_list(sc->cli, mypath, attribute, statfile_helper) < 1) {
+	if (cli_list(sc->cli, mypath, attribute, statfile_helper) < 1) {
 		my_errno = ENOENT;
-        g_free (mypath);
+		g_free (mypath);
 		return -1;	/* cli_list returns number of files */
 	}
 
@@ -1453,7 +1461,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 /* dont free here, use for smbfs_fstat() */
 /*	g_free(single_entry->text);
 	g_free(single_entry);	*/
-    g_free (mypath);
+	g_free (mypath);
 	return 0;
 }
 
@@ -1495,8 +1503,10 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 #endif
 	if (!single_entry)	/* when found, this will be written too */
 		single_entry = g_new (dir_entry, 1);
-	if (search_dir_entry(current_info->entries, mypath, buf) == 0)
+	if (search_dir_entry(current_info->entries, mypath, buf) == 0) {
+		g_free (mpp);
 		return 0;
+	}
 		/* now try to identify mypath as PARENT dir */
 	{
 		char *mdp;
@@ -1510,11 +1520,9 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		while ((p = strchr(mydir, '/')))
 			mydir++;				/* advance util last '/' */
 		if (strcmp(mydir, mypath) == 0) {	/* fake a stat for ".." */
-			struct stat fake_stat;
-			bzero(&fake_stat, sizeof(struct stat));
-			fake_stat.st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
-			memcpy(buf, &fake_stat, sizeof(struct stat));
-			memcpy(&single_entry->my_stat, &fake_stat, sizeof(struct stat));
+			bzero(buf, sizeof(struct stat));
+			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
 			g_free(mdp);
 			g_free(mpp);
 			DEBUG(1, ("	PARENT:found in %s\n", current_info->dirname));
@@ -1643,11 +1651,8 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		}
 		return fake_server_stat(server_url, path, buf);
 	}
-	if (*(p) == 0)
-		DEBUG(1, ("zero length p, path:'%s'", path));
 	p = strchr(p, '/');	/* advance past next '/' */
-	p++;
-	if (!strchr(p, '/')) {
+	if (!p || !strchr(++p, '/')) {
 		return fake_share_stat(server_url, path, buf);
 	}
 
