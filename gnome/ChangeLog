@@ -1,3 +1,9 @@
+2001-05-25  Pavel Roskin  <proski@gnu.org>
+
+	* gmain.c: Include libgnomeui/gnome-window-icon.h if needed.
+	(gnome_check_super_user): Better warning for root. From Ximian.
+	(idle_destroy_panel): Remove.
+
 2001-05-23  jacob berkman  <jacob@ximian.com>
 
 	* mc.keys.in.in: fix missing trailing @ in audio/x-xi entry

@@ -29,6 +29,10 @@
 #include "cmd.h"
 #include <gdk/gdkx.h>
 
+#ifdef HAVE_GNOME_WINDOW_ICON
+#include <libgnomeui/gnome-window-icon.h>
+#endif
+
 GdkColorContext *mc_cc;
 
 #define MAX_COLOR_PAIRS 40
@@ -476,17 +480,6 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 	return 0;
 }
 
-/* Ugly function to support the hack described in non_corba_create_panels() */
-static gint
-idle_destroy_panel (gpointer data)
-{
-	WPanel *panel;
-
-	panel = data;
-	gnome_close_panel (GTK_WIDGET (panel->widget.wdata), panel);
-	return FALSE;
-}
-
 /* Initializes the desktop and creates the initial panels.  This is to be used
  * when we do not have a CORBA server.
  */
@@ -561,8 +554,10 @@ gnome_check_super_user (void)
 
 	warning_dlg = gnome_message_box_new (
 		_("You are running the GNOME File Manager as root.\n\n"
-		  "As root, you can damage your system if you are not careful, and the "
-		  "GNOME File Manager will not stop you from doing it."),
+		  "As root, you can damage your system, and the "
+		  "File Manager will not stop you.\n"
+		  "Your manual explains how to add a non-privileged user "
+		  "account to the system.\n"),
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_OK, NULL);
 
