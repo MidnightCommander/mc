@@ -1,3 +1,15 @@
+1999-04-29  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* chmod.c (chmod_cmd): Missing _ in _().
+	(chmod_cmd): Added braces around nested if/else.
+
+	* widget.c (is_in_input_map): Added braces around nested if/else.
+	(listbox_remove_current): Likewise.
+
+	* subshell.c (read_subshell_prompt): Likewise.
+
+	* view.c (view_status): Likewise.
+
 Tue Apr 27 20:31:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* util.c (strip_home_and_password): Don't split the path in the
@@ -48,7 +60,6 @@ Wed Apr 21 20:19:45 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* main.c (main): call (init|done)_textmode_x11_support
 
->>>>>>> 1.297
 Sat Apr 17 13:04:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* view.c (do_view_init): Enable viewing of files with negative

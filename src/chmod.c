@@ -322,7 +322,7 @@ void chmod_cmd (void)
 	    return;
 	} else if (vfs_current_is_tarfs ()) {
 	    message (1, _(" Oops... "),
-		     (" I can't run the Chmod command on a tarfs "));
+		     _(" I can't run the Chmod command on a tarfs "));
 	    return;
 	}
     }
@@ -382,11 +382,12 @@ void chmod_cmd (void)
 	    and_mask = ~and_mask;
 
 	    for (i = 0; i < PERMISSIONS; i++) {
-		if (check_perm[i].selected || ch_dlg->ret_value == B_ALL)
+		if (check_perm[i].selected || ch_dlg->ret_value == B_ALL) {
 		    if (check_perm[i].check->state & C_BOOL)
 			or_mask |= check_perm[i].mode;
 		    else
 			and_mask &= ~check_perm[i].mode;
+		}
 	    }
 
 	    apply_mask (&sf_stat);

@@ -632,15 +632,15 @@ int read_subshell_prompt (int how)
     {
 	/* {{{ Check for `select' errors */
 
-	if (rc == -1)
+	if (rc == -1) {
 	    if (errno == EINTR)
 		continue;
-	    else
-	    {
+	    else {
 		tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		perror ("\n"__FILE__": select (FD_SETSIZE, &tmp...)");
 		exit (1);
 	    }
+	}
 
 	/* }}} */
 

@@ -254,7 +254,7 @@ file_progress_show (FileOpContext *ctx, long done, long total)
 FileProgressStatus
 file_progress_show_count (FileOpContext *ctx, long done, long total)
 {
-        static gchar count[14]; /* that's a lot of files... */
+        static gchar count[100];
         FileOpContextUI *ui;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
@@ -268,7 +268,7 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
         if (ui->aborting)
                 return FILE_ABORT;
 
-        snprintf (count, 13, "%d/%d ", done, total);
+        snprintf (count, 100, "%ld/%ld ", done, total);
         gtk_label_set_text (GTK_LABEL (ui->count_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();

@@ -1538,11 +1538,12 @@ is_in_input_map (WInput *in, int c_code)
     int i;
     
     for (i = 0; input_map [i].fn; i++)
-	if (c_code == input_map [i].key_code)
+	if (c_code == input_map [i].key_code) {
 	    if (input_map [i].fn == complete)
 	    	return 2;
 	    else
 	    	return 1;
+	}
     return 0;
 }
 
@@ -1550,10 +1551,10 @@ is_in_input_map (WInput *in, int c_code)
 static void
 port_region_marked_for_delete (WInput *in)
 {
-	if (in->first == 1 && (in->point == in->mark))
-		in->point = strlen (in->buffer);
-	kill_region (in);
-	in->first = 0;
+    if (in->first == 1 && (in->point == in->mark))
+	in->point = strlen (in->buffer);
+    kill_region (in);
+    in->first = 0;
 }
 #else
 static void
@@ -1941,12 +1942,12 @@ listbox_remove_current (WListbox *l, int force)
 #ifdef HAVE_X
     if (l->widget.wdata != (widget_data) NULL) {
         x_listbox_delete_nth (l, l->pos);
-	if (l->count > 1)
+	if (l->count > 1) {
 	    if (l->current->next != l->list)
 		x_listbox_select_nth (l, l->pos);
 	    else if (l->current != l->list)
 		x_listbox_select_nth (l, l->pos - 1);
-	else
+	} else
 	    x_listbox_select_nth (l, 0);
     }
 #endif

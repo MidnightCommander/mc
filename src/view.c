@@ -728,11 +728,18 @@ view_status (WView *view, gboolean update_gui)
 	    if (view->growing_buffer)
 		addstr (_("  [grow]"));
 	}
-        if (w > 26)
+        if (w > 26) {
             if (view->hex_mode)
-                view_percent (view, view->edit_cursor - view->first, view->widget.cols - view->have_frame + 1, update_gui);
+                view_percent (view,
+			      view->edit_cursor - view->first,
+			      view->widget.cols - view->have_frame + 1,
+			      update_gui);
             else
-	        view_percent (view, view->start_display - view->first, view->widget.cols - view->have_frame + 1, update_gui);
+	        view_percent (view,
+			      view->start_display - view->first,
+			      view->widget.cols - view->have_frame + 1,
+			      update_gui);
+	}
     }
     attrset (SELECTED_COLOR);
 }
@@ -2334,8 +2341,6 @@ view_mode_callback (struct Dlg_head *h, int id, int msg)
 void
 view_adjust_size (Dlg_head *h)
 {
-    int cols;
-    
     WView      *view;
     WButtonBar *bar;
 
