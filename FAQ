@@ -695,7 +695,7 @@ MC?
 8.1 When I try pasting to the internal editor, it indents the amount of
 indenting increases with each line!
 
-   Either turn of 'Return does autoindent' in the editor options or
+   Either turn off 'Return does autoindent' in the editor options or
    update GNU Midnight Commander to version 4.6.0 or above - it doesn't
    autoindent when you are holding Shift.
 
