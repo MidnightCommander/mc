@@ -94,6 +94,15 @@ void free (void *ptr);
 #include "gmount.h"
 #include "util.h"
 
+typedef struct {
+	char *devname;
+
+	/* This is just a good guess */
+	enum {
+		TYPE_UNKNOWN,
+		TYPE_CDROM
+	} type;
+} devname_info_t;
 
 static gboolean
 option_has_user (char *str)
@@ -172,8 +181,16 @@ get_mountable_devices (void)
 
 	while ((mnt = getmntent (f))){
 		if (option_has_user (mnt->mnt_opts)){
-			list = g_list_prepend (list, g_strdup (mnt->mnt_fsname));
-			break;
+			devname_info_t *dit;
+			
+			dit = g_new0 (devname_info_t, 1);
+			dit->devname = g_strdup (mnt->mnt_fsname);
+			dit->type = TYPE_UNKNOWN;
+
+			if (strcmp (mnt->mnt_type, "iso9660") == 0)
+				dit->type = TYPE_CDROM;
+			
+			list = g_list_prepend (list, dit);
 		}
 	}
 	endmntent (f);
@@ -244,8 +261,10 @@ static void
 create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon)
 {
 	char *full_name;
+	char *icon_full;
 	char type = 'D';
 
+	icon_full = g_concat_dir_and_file (ICONDIR, icon);
 	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
 	if (mc_symlink (dev_name, full_name) != 0) {
 		message (FALSE,
@@ -256,11 +275,12 @@ create_device_link (char *dev_name, char *short_dev_name, char *caption, char *i
 		return;
 	}
 
-	gnome_metadata_set (full_name, "icon-filename", strlen (icon) + 1, icon);
+	gnome_metadata_set (full_name, "icon-filename", strlen (icon_full) + 1, icon_full);
 	gnome_metadata_set (full_name, "icon-caption", strlen (caption) + 1, caption);
 	gnome_metadata_set (full_name, "is-desktop-device", 1, &type); /* hack a boolean value */
 
 	g_free (full_name);
+	g_free (icon_full);
 }
 
 /* Creates the desktop links to the mountable devices */
@@ -270,13 +290,18 @@ setup_devices (void)
 	GList *list, *l;
 	int floppy_count;
 	int hd_count;
+	int cdrom_count;
 	int generic_count;
 
 	list = get_mountable_devices ();
 
-	floppy_count = hd_count = generic_count = 0;
+	hd_count = 0;
+	cdrom_count = 0;
+	floppy_count = 0;
+	generic_count = 0;
 
 	for (l = list; l; l = l->next) {
+		devname_info_t *dit = l->data;
 		char *dev_name;
 		char *short_dev_name;
 		char *format;
@@ -284,12 +309,15 @@ setup_devices (void)
 		int count;
 		char buffer[128];
 
-		dev_name = l->data;
+		dev_name = dit->devname;
 		short_dev_name = x_basename (dev_name);
 
 		/* Create the format/icon/count.  This could use better heuristics. */
-
-		if (strncmp (short_dev_name, "fd", 2) == 0) {
+		if (dit->type == TYPE_CDROM){
+			format = _("CD-ROM %d");
+			icon = "i-cdrom.png";
+			count = cdrom_count++;
+		} else if (strncmp (short_dev_name, "fd", 2) == 0) {
 			format = _("Floppy %d");
 			icon = "i-floppy.png";
 			count = floppy_count++;
@@ -298,6 +326,10 @@ setup_devices (void)
 			format = _("Disk %d");
 			icon = "i-blockdev.png";
 			count = hd_count++;
+		} else if (strncmp (short_dev_name, "cdrom", 5) == 0){
+			format = _("CD-ROM %d");
+			icon = "i-cdrom.png";
+			count = cdrom_count++;
 		} else {
 			format = _("Device %d");
 			icon = "i-blockdev.png";
@@ -309,7 +341,9 @@ setup_devices (void)
 		/* Create the actual link */
 
 		create_device_link (dev_name, short_dev_name, buffer, icon);
-		g_free (l->data);
+
+		g_free (dit->devname);
+		g_free (dit);
 	}
 
 	g_list_free (list);
