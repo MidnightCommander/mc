@@ -54,10 +54,6 @@
 #include "dlg.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 
-#ifdef HAVE_TK
-#    include "tkmain.h"
-#endif
-
 #define MAXLINKNAME 80
 #define HISTORY_SIZE 20
 #define HELP_WINDOW_WIDTH 62

@@ -721,13 +721,6 @@ cd_dialog (void)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-#ifdef HAVE_TK
-#define INPUT_INDEX 2
-    { quick_button, 0, 1, 0, 1, N_("&Cancel"), 0, B_CANCEL, 0, 0, "cancel" },
-    { quick_button, 0, 1, 0, 1, N_("&Ok"),     0, B_ENTER,  0, 0, "ok" },
-#else
-#define INPUT_INDEX 0
-#endif
     { quick_input,  6, 57, 5, 0, "", 50, 0, 0, 0, "input" },
     { quick_label,  3, 57, 2, 0, "",  0, 0, 0, 0, "label" },
     { 0 } };
@@ -739,31 +732,31 @@ cd_dialog (void)
     Quick_input.title = _("Quick cd");
     Quick_input.help  = "[Quick cd]";
     Quick_input.class = "quick_input";
-    quick_widgets [INPUT_INDEX].text = "";
-    quick_widgets [INPUT_INDEX].value = 2; /* want cd like completion */
-    quick_widgets [INPUT_INDEX+1].text = _("cd");
-    quick_widgets [INPUT_INDEX+1].y_divisions =
-	quick_widgets [INPUT_INDEX].y_divisions = Quick_input.ylen = 5;
+    quick_widgets [0].text = "";
+    quick_widgets [0].value = 2; /* want cd like completion */
+    quick_widgets [1].text = _("cd");
+    quick_widgets [1].y_divisions =
+	quick_widgets [0].y_divisions = Quick_input.ylen = 5;
 
-	len = strlen (quick_widgets [INPUT_INDEX+1].text);
+	len = strlen (quick_widgets [1].text);
 
-	quick_widgets [INPUT_INDEX+1].relative_x = 3;
-	quick_widgets [INPUT_INDEX].relative_x = 
-		quick_widgets [INPUT_INDEX+1].relative_x + len + 1;
+	quick_widgets [1].relative_x = 3;
+	quick_widgets [0].relative_x = 
+		quick_widgets [1].relative_x + len + 1;
 
-    Quick_input.xlen = len + quick_widgets [INPUT_INDEX].hotkey_pos + 7;
-	quick_widgets [INPUT_INDEX].x_divisions =
-		quick_widgets [INPUT_INDEX+1].x_divisions = Quick_input.xlen;
+    Quick_input.xlen = len + quick_widgets [0].hotkey_pos + 7;
+	quick_widgets [0].x_divisions =
+		quick_widgets [1].x_divisions = Quick_input.xlen;
 
     Quick_input.i18n = 1;
     Quick_input.xpos = 2;
     Quick_input.ypos = LINES - 2 - Quick_input.ylen;
-    quick_widgets [INPUT_INDEX].relative_y = 2;
-    quick_widgets [INPUT_INDEX].str_result = &my_str;
+    quick_widgets [0].relative_y = 2;
+    quick_widgets [0].str_result = &my_str;
     
     Quick_input.widgets = quick_widgets;
     if (quick_dialog (&Quick_input) != B_CANCEL){
-	return *(quick_widgets [INPUT_INDEX].str_result);
+	return *(quick_widgets [0].str_result);
     } else
 	return 0;
 }
@@ -774,16 +767,6 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-#undef INPUT_INDEX
-#if defined(HAVE_TK)
-#define INPUT_INDEX 2
-    { quick_button, 0, 1, 0, 1, _("&Cancel"), 0, B_CANCEL, 0, 0,
-	  "cancel" },
-    { quick_button, 0, 1, 0, 1, _("&Ok"), 0, B_ENTER, 0, 0,
-	  "ok" },
-#else
-#define INPUT_INDEX 0
-#endif
     { quick_input,  4, 80, 5, 8, "", 58, 0, 0, 0, "input-1" },
     { quick_label,  4, 80, 4, 8, "", 0, 0, 0, 0, "label-1" },
     { quick_input,  4, 80, 3, 8, "", 58, 0, 0, 0, "input-2" },
@@ -796,13 +779,13 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
     Quick_input.help  = "[File Menu]";
     Quick_input.class = "quick_symlink";
     Quick_input.i18n  = 0;
-    quick_widgets [INPUT_INDEX].text = new;
-    quick_widgets [INPUT_INDEX+1].text = _("Symbolic link filename:");
-    quick_widgets [INPUT_INDEX+2].text = existing;
-    quick_widgets [INPUT_INDEX+3].text = _("Existing filename (filename symlink will point to):");
+    quick_widgets [0].text = new;
+    quick_widgets [1].text = _("Symbolic link filename:");
+    quick_widgets [2].text = existing;
+    quick_widgets [3].text = _("Existing filename (filename symlink will point to):");
     Quick_input.xpos = -1;
-    quick_widgets [INPUT_INDEX].str_result = ret_new;
-    quick_widgets [INPUT_INDEX+2].str_result = ret_existing;
+    quick_widgets [0].str_result = ret_new;
+    quick_widgets [2].str_result = ret_existing;
     
     Quick_input.widgets = quick_widgets;
     if (quick_dialog (&Quick_input) == B_CANCEL){

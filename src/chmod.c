@@ -46,10 +46,6 @@
 #include "chown.h"
 #include "../vfs/vfs.h"
 
-#ifdef HAVE_TK
-#   include "tkmain.h"
-#endif
-
 static int single_set;
 struct Dlg_head *ch_dlg;
 

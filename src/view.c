@@ -767,13 +767,11 @@ view_display_clean (WView *view, int height, int width)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 #endif
 
-#ifndef HAVE_TK
 /* Both the text mode and gnome editions use this */
 #define BOLD_COLOR        MARKED_COLOR
 #define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
 #define MARK_COLOR        SELECTED_COLOR
 #define DEF_COLOR         NORMAL_COLOR
-#endif
 
 #ifndef PORT_HAS_VIEW_FREEZE
 #    define view_freeze(view)
@@ -1030,9 +1028,6 @@ display (WView *view)
 	    if (view->growing_buffer && from+1 == view->last_byte)
 		 get_byte (view, from+1);
         }
-#ifdef HAVE_TK
-	view_gotoyx (view, view->current_line+1, 0);
-#endif
     }
     view->last = from;
     view_thaw (view);

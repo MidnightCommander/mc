@@ -1,5 +1,19 @@
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
+	* TODO: Remove Tk-related entries.
+	* boxes.c [HAVE_TK]: Remove. Don't need INPUT_INDEX anymore.
+	* screen.c [HAVE_TK]: Remove.
+	(panel_event): Made static.
+	* chmod.c [HAVE_TK]: Remove.
+	* cmd.c [HAVE_TK]: Likewise.
+	* help.c [HAVE_TK]: Likewise.
+	* hotlist.c [HAVE_TK]: Likewise.
+	* info.c [HAVE_TK]: Likewise.
+	* view.c [HAVE_TK]: Likewise.
+	* view.h [HAVE_TK]: Likewise.
+	* widget.c [HAVE_TK]: Likewise.
+	* wtools.c [HAVE_TK]: Likewise.
+
 	* TODO: Remove XView-related entries.
 	* menu.h [HAVE_XVIEW]: Remove all XView-related code.
 

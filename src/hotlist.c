@@ -68,10 +68,6 @@
 #include "key.h"
 #include "command.h"
 
-#ifdef HAVE_TK
-#    include "tkwidget.h"
-#endif
-
 #define UX		5
 #define UY		2
 

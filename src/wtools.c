@@ -290,14 +290,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 					  _("&Ok"), 0, 0, NULL));
 
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
-#ifdef HAVE_TK
-	if (flags & D_INSERT){
-	} else
-#endif
-	{
-	    run_dlg (query_dlg);
-	    destroy_dlg (query_dlg);
-	}
+	run_dlg (query_dlg);
+	destroy_dlg (query_dlg);
 #else
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
 	add_widget (query_dlg, button_new(0, 0, 0, HIDDEN_BUTTON, "-", 0, 0, NULL));

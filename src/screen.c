@@ -84,7 +84,7 @@ WPanel *the_info_panel = 0;
 Hook *select_file_hook = 0;
 
 static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
-int panel_event (Gpm_Event *event, WPanel *panel);
+static int panel_event (Gpm_Event *event, WPanel *panel);
 
 #ifndef PORT_HAS_PANEL_ADJUST_TOP_FILE
 #   define x_adjust_top_file(p)
@@ -1503,14 +1503,10 @@ mini_status_format (WPanel *panel)
 int
 ITEMS (WPanel *p)
 {
-#ifdef HAVE_TK
-    return p->widget.lines;
-#else
     if (p->split)
 	return llines (p) * 2;
     else
 	return llines (p);
-#endif
 }
 
 /* This function sets redisplays the selection */
@@ -2511,8 +2507,7 @@ get_sort_fn (char *name)
     return NULL;
 }
 
-/* not static because it's called from Tk's version */
-int
+static int
 panel_event (Gpm_Event *event, WPanel *panel)
 {
     const int lines = panel->count;
@@ -2562,7 +2557,7 @@ panel_event (Gpm_Event *event, WPanel *panel)
 
 #else
 
-int
+static int
 panel_event (Gpm_Event *event, WPanel *panel)
 {
     const int lines = llines (panel);

@@ -385,16 +385,6 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     return default_proc (h, Msg, Par);
 }
 
-#ifdef HAVE_TK
-    static void Radio_destroy (WRadio *r)
-    {
-	x_destroy_cmd (r);
-    }
-#   define radio_destroy (destroy_fn) Radio_destroy
-#else
-#   define radio_destroy 0
-#endif
-
 static int
 radio_event (Gpm_Event *event, WRadio *r)
 {
@@ -430,7 +420,7 @@ radio_new (int y, int x, int count, char **texts, int use_hotkey, char *tkname)
     }
 
     init_widget (&r->widget, y, x, count, max, (callback_fn) radio_callback,
-		 radio_destroy, (mouse_h) radio_event, tkname);
+		 0, (mouse_h) radio_event, tkname);
     r->state = 1;
     r->pos = 0;
     r->sel = 0;
@@ -1594,9 +1584,6 @@ handle_char (WInput *in, int c_code)
 
     v = 0;
 
-#ifdef HAVE_TK    
-    in->inserted_one = 0;
-#endif
     if (quote){
     	free_completions (in);
 	v = insert_char (in, c_code);

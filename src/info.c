@@ -35,11 +35,6 @@
 #include "key.h"		/* is_idle() */
 #include "x.h"
 
-#ifdef HAVE_TK
-#   include "tkmain.h"
-#   include "tkinfo.h"
-#endif
-
 #ifndef VERSION
 #   define VERSION "undefined"
 #endif

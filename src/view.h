@@ -151,13 +151,6 @@ struct hexedit_change_node {
    unsigned char              value;
 };
 
-#ifdef HAVE_TK
-#define DEF_COLOR         0
-#define BOLD_COLOR        1
-#define UNDERLINE_COLOR   2
-#define MARK_COLOR        3
-#endif
-
 #ifdef HAVE_X
 #ifdef WANT_WIDGETS
 void view_add_character (WView *view, int c);

@@ -89,10 +89,6 @@
 #   define MAP_FILE 0
 #endif
 
-#ifdef HAVE_TK
-#    include "tkscreen.h"
-#endif
-
 /* If set and you don't have subshell support,then C-o will give you a shell */
 int output_starts_shell = 0;
 

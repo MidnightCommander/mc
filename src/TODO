@@ -21,51 +21,6 @@
     ii) define a sequence, which is a prefix of other longer and already
         defined sequence
 
-* Tk/mc
-
-  - Add drag and drop.
-
-  - Fix viewer.
-
-  - Fix WInputs (they currently are not very well coordinated with Tk's entry)
-
-  - Fix problem with enter/enter on most dialogs (should be just one enter).
-
-  - Fix the auto-reload dir problem with the little shortcut option.
-
-  - Change the menus for the Tk version.
-
-  - name_trunc the pathname on top of the panels.
- 
-  - Click on the pathname should take you to that directory.
-
-  - Viewer breaks with object libraries prev_color is miss computed.
-
-  - Tk/Winfo: The program should not recompute the file system information
-    for each file, it should keep a cache
-
-  - The control of the buttonbar is broken in Tk, try quick view and
-    then press F3 when focusing the Quick view.  It does not change
-    the labels on the buttonbar.
-
-  - UNLINK the file as soon as the ftpfs gets an error during write.
-	
-  - Port the WTree and WHelp widgets.
-
-  - The current size detection for the widgets will only work if there
-    was a panel before (they assume winfo width/height container does
-    have useful information), I should encapsulate and fix this.
-
-  - Change of the listing mode is broken.
-  
-  - The mini status has not been coded.
-
-  - menubar_arrange, destroy_menu: implement
-
-  - Port the interal editor
-
-  - the interal editor adds it's entries to the wrong menu
-
 * Configuration 
 
 * Documentation
