@@ -386,12 +386,10 @@ static opendir_info
 	*current_server_info;
 
 static gboolean first_direntry;
-/* browse for shares on server */
-static void
-browsing_helper(const char *name, uint32 type, const char *comment)
-{
-	char *typestr = "";
 
+static dir_entry * 
+new_dir_entry (const char * name)
+{
 	dir_entry *new_entry;
 	new_entry = g_new0 (dir_entry, 1);
 	new_entry->text = dos_to_unix (g_strdup (name), 1);
@@ -403,6 +401,17 @@ browsing_helper(const char *name, uint32 type, const char *comment)
 		current_info->current->next = new_entry;
 	}
 	current_info->current = new_entry;
+
+	return new_entry;
+}
+
+/* browse for shares on server */
+static void
+browsing_helper(const char *name, uint32 type, const char *comment)
+{
+	char *typestr = "";
+
+	dir_entry *new_entry = new_dir_entry (name);
 
 	switch (type) {
 		case STYPE_DISKTREE:
@@ -429,16 +438,7 @@ loaddir_helper(file_info *finfo, const char *mask)
 	if (finfo->mode & aHIDDEN)
 		return;	/* don't bother with hidden files, "~$" screws up mc */
 #endif
-	new_entry = g_new0 (dir_entry, 1);
-	new_entry->text = dos_to_unix (g_strdup(finfo->name), 1);
-
-	if (first_direntry) {
-		current_info->entries = new_entry;
-		first_direntry = FALSE;
-	} else {
-		current_info->current->next = new_entry;
-	}
-	current_info->current = new_entry;
+	new_entry = new_dir_entry (finfo->name);
 
 	new_entry->my_stat.st_size = finfo->size;
 	new_entry->my_stat.st_mtime = finfo->mtime;
@@ -501,17 +501,7 @@ convert_path(char **remote_file, gboolean trailing_asterik)
 static void
 server_browsing_helper(const char *name, uint32 m, const char *comment)
 {
-	dir_entry *new_entry;
-	new_entry = g_new0 (dir_entry, 1);
-	new_entry->text = dos_to_unix (g_strdup (name), 1);
-
-	if (first_direntry) {
-		current_info->entries = new_entry;
-		first_direntry = FALSE;
-	} else {
-		current_info->current->next = new_entry;
-	}
-	current_info->current = new_entry;
+	dir_entry *new_entry = new_dir_entry (name);
 
 	/*	show this as dir	*/
 	new_entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
@@ -740,11 +730,10 @@ static struct {
 /* The readdir routine loads the complete directory */
 /* It's too slow to ask the server each time */
 /* It now also sends the complete lstat information for each file */
-static struct stat *cached_lstat_info;
 static void *
 smbfs_readdir (void *info)
 {
-    char *dirent_dest;
+    static char * const dirent_dest = &(smbfs_readdir_data.dent.d_name [0]);
     opendir_info  *smbfs_info = (opendir_info *) info;
 
     DEBUG(4, ("smbfs_readdir(%s)\n", smbfs_info->dirname));
@@ -756,15 +745,12 @@ smbfs_readdir (void *info)
     if (smbfs_info->current == 0) {	/* reached end of dir entries */
 		DEBUG(3, ("smbfs_readdir: smbfs_info->current = 0\n"));
 #ifdef	SMBFS_FREE_DIR
-	    cached_lstat_info = 0;
 	    smbfs_free_dir (smbfs_info->entries);
 	    smbfs_info->entries = 0;
 #endif
 	    return NULL;
     }
-    dirent_dest = &(smbfs_readdir_data.dent.d_name [0]);
     pstrcpy (dirent_dest, smbfs_info->current->text);
-    cached_lstat_info = &smbfs_info->current->my_stat;
     smbfs_info->current = smbfs_info->current->next;
 
 #ifndef DIRENT_LENGTH_COMPUTED
@@ -1029,7 +1015,7 @@ smbfs_get_free_bucket ()
 /* This routine keeps track of open connections */
 /* Returns a connected socket to host */
 static smbfs_connection *
-smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
+smbfs_open_link(char *host, char *path, const char *user, int *port, char *this_pass)
 {
     int i;
     smbfs_connection *bucket;
@@ -1055,7 +1041,7 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 	}
 
 	if (got_user)
-		user = g_strdup(username);	/* global from getenv */
+		user = username;	/* global from getenv */
 
     /* Is the link actually open? */
     if (smbfs_get_free_bucket_init) {
@@ -1215,13 +1201,13 @@ smbfs_opendir (vfs *me, char *dirname)
 }
 
 static int
-fake_server_stat(char *server_url, char *path, struct stat *buf)
+fake_server_stat(char *server_url, const char *path, struct stat *buf)
 {
 	dir_entry *dentry;
 	char *p;
 
-	while ((p = strchr(path, '/')))
-		path++;		/* advance until last '/' */
+	if ((p = strrchr(path, '/')))
+		path = p + 1;		/* advance until last '/' */
 
 	if (!current_info->entries) {
 		if (!smbfs_loaddir(current_info));	/* browse host */
@@ -1875,8 +1861,8 @@ smbfs_fstat (void *data, struct stat *buf)
 	if (single_entry)
 		memcpy(buf, &single_entry->my_stat, sizeof(struct stat));
 	else {	/* single_entry not set up: bug */
+		my_errno = EFAULT;
 		return -EFAULT;
-		my_errno = -EFAULT;
 	}
 	return 0;
 }
