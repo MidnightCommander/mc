@@ -32,8 +32,8 @@ int mc_stat (const char *path, struct stat *buf);
 int mc_lstat (const char *path, struct stat *buf);
 int mc_fstat (int fd, struct stat *buf);
 
-int mc_chmod (const char *path, mode_t mode);
-int mc_chown (const char *path, uid_t owner, gid_t group);
+int mc_chmod (const char *path, int mode);
+int mc_chown (const char *path, int owner, int group);
 int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, int bufsiz);
 int mc_unlink (const char *path);
