@@ -125,12 +125,6 @@ interactive_display (char *filename, char *node)
 }
 
 void
-beep (void)
-{
-	gdk_beep ();
-}
-
-void
 xtoolkit_end (void)
 {
 	/* Do nothing */
