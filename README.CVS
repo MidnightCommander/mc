@@ -16,6 +16,6 @@ Make sure that the tools with the right version are first in PATH.
 The next version, mc-4.6.0, is expected to be released with the
 following tools:
 
-Autoconf 2.53
+Autoconf 2.54
 Automake 1.6.3
 Gettext 0.10.40
