@@ -42,8 +42,8 @@ int dialog_colors [4];
 #   define color_map_fg(n) color_map[n].fg
 #   define color_map_bg(n) color_map[n].bg
 #else
-#   define color_map_fg(n) (color_map[n].fg % COLORS)
-#   define color_map_bg(n) (color_map[n].bg % COLORS)
+#   define color_map_fg(n) (color_map[n].fg & COLOR_WHITE)
+#   define color_map_bg(n) (color_map[n].bg & COLOR_WHITE)
 #endif
 
 struct colorpair {
@@ -397,8 +397,8 @@ try_alloc_color_pair (char *fg, char *bg)
 	get_color (bg, &bg_index);
 
     bold_attr = fg_index & A_BOLD;
-    fg_index = fg_index % COLORS;
-    bg_index = bg_index % COLORS;
+    fg_index = fg_index & COLOR_WHITE;
+    bg_index = bg_index & COLOR_WHITE;
 
     p->index = alloc_color_pair (fg_index, bg_index);
     attr_pairs [p->index] = bold_attr;

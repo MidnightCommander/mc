@@ -1,5 +1,8 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* color.c [USE_NCURSES]: Eliminate division by COLOR, it's 0 in
+	black and white mode.
+
 	* slint.c: Move functions for allocating color pairs ...
 	* color.c: ... here.  Implement ncurses equivalents.  Rename
 	init_pair() to mc_init_pair() and keep tack of max_index with
