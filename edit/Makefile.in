@@ -21,10 +21,9 @@ AR = @AR@
 # Distribution variables
 #
 
-EDITSRC = edit_key_translator.c
-
-EDITLINKS = edit.c editcmd.c editwidget.c editdraw.c editmenu.c wordproc.c \
-	  syntax.c editoptions.c bookmark.c
+EDITSRC = edit_key_translator.c edit.c editcmd.c editwidget.c \
+	editdraw.c editmenu.c wordproc.c syntax.c editoptions.c \
+	bookmark.c
 
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 	  syntax.o editoptions.o bookmark.o
@@ -43,11 +42,6 @@ edit.o: edit_key_translator.c
 
 check:
 	@echo no tests are supplied.
-
-$(EDITLINKS):
-	for i in $(EDITLINKS); do \
-		$(LN_S) $(top_srcdir)/gtkedit/$$i . || exit 1; \
-	done
 
 libedit.a: $(EDITOBJS)
 	rm -f libedit.a
@@ -68,7 +62,6 @@ clean: mostlyclean
 	rm -f libedit.a
 
 distclean: clean
-	rm -f $(EDITLINKS)
 	rm -f TAGS
 	rm -f *~
 	rm -f Makefile
