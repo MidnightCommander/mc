@@ -1,0 +1,48 @@
+regex: \.bmp$
+	icon-filename=@icondir@/gnome-image-bmp.png
+
+regex: \.gif$
+	icon-filename=@icondir@/gnome-image-gif.png
+
+regex: \.ief$
+	icon-filename=@icondir@/gnome-image-ief.png
+
+regex: \.jpeg$
+	icon-filename=@icondir@/gnome-image-jpeg.png
+
+regex: \.pbm$
+	icon-filename=@icondir@/gnome-image-pbm.png
+
+regex: \.pgm$
+	icon-filename=@icondir@/gnome-image-pgm.png
+
+regex: \.png$
+	icon-filename=@icondir@/gnome-image-png.png
+
+regex: \.pnm$
+	icon-filename=@icondir@/gnome-image-pnm.png
+
+regex: \.ppm$
+	icon-filename=@icondir@/gnome-image-ppm.png
+
+regex: \.ras$
+	icon-filename=@icondir@/gnome-image-ras.png
+
+regex: \.rgb$
+	icon-filename=@icondir@/gnome-image-rgb.png
+
+regex: \.tga$
+	icon-filename=@icondir@/gnome-image-tga.png
+
+regex: \.tiff$
+	icon-filename=@icondir@/gnome-image-tiff.png
+
+regex: \.xbm$
+	icon-filename=@icondir@/gnome-image-xbm.png
+
+regex: \.xpm$
+	icon-filename=@icondir@/gnome-image-xpm.png
+
+regex: \.xwd$
+	icon-filename=@icondir@/gnome-image-xwd.png
+

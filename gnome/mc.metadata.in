@@ -6,10 +6,6 @@ regex: \.h$
 	type=x-application-gnome/c-source
 	icon-filename=@icondir@/h.xpm
 
-regex: \.tiff$
-	type=image/tiff
-	icon-filename=@icondir@/tiff.xpm
-
 regex: \.vcf$
 	type=x-application/vcf
 	icon-filename=@icondir@/calendar.xpm
@@ -18,15 +14,8 @@ regex: \.(gz|Z|bz2)$
 	type=x-application/gzip
 	icon-filename=@icondir@/compressed.xpm
 
-regex: \.gif$
-	type=image/gif
-	icon-filename=@icondir@/gif.xpm
-
 regex: \.html$
 	icon-filename=@icondir@/html.xpm
-
-regex: \.jpeg$
-	icon-filename=@icondir@/jpeg.xpm
 
 regex: \.o$
 	icon-filename=@icondir@/o.xpm

@@ -29,7 +29,14 @@ ALLICONS = a.xpm application.xpm binary.xpm bitmap.xpm blackhole.xpm \
 	xbm.xpm xchess.xpm xfig.xpm xman.xpm xmosaic.xpm xpaint.xpm xpm.xpm \
 	zip.xpm zoo.xpm
 
-DECENTICONS = c.xpm h.xpm tiff.xpm 
+#
+# We are using these icons from the above in gnome, remove as new versions
+# are obtained
+#
+DECENTICONS = \
+	c.xpm h.xpm calendar.xpm  compressed.xpm html.xpm o.xpm 	\
+	sound.xpm makefile.xpm word.xpm zip.xpm tex.xpm cc.xpm man.xpm 	\
+	postscript.xpm 
 
 all:
 

@@ -13,7 +13,25 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 DISTICONS = Makefile.in $(ALLICONS)
-ALLICONS = 
+ALLICONS = 			\
+	gnome-image-bmp.png	\
+	gnome-image-generic.png	\
+	gnome-image-gif.png	\
+	gnome-image-ief.png	\
+	gnome-image-jpeg.png	\
+	gnome-image-pbm.png	\
+	gnome-image-pgm.png	\
+	gnome-image-png.png	\
+	gnome-image-pnm.png	\
+	gnome-image-ppm.png	\
+	gnome-image-ras.png	\
+	gnome-image-rgb.png	\
+	gnome-image-tga.png	\
+	gnome-image-tiff.png	\
+	gnome-image-xbm.png	\
+	gnome-image-xpm.png	\
+	gnome-image-xwd.png
+
 
 all:
 
