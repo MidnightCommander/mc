@@ -27,7 +27,7 @@ extern int DEBUGLEVEL;
 
 /* nmbd.c sets this to True. */
 BOOL global_in_nmbd = False;
-
+#if 0
 /****************************************************************************
 interpret a node status response
 ****************************************************************************/
@@ -80,7 +80,7 @@ static void _interpret_node_status(char *p, char *master,char *rname)
   DEBUG(1,("num_good_sends=%d num_good_receives=%d\n",
 	       IVAL(p,20),IVAL(p,24)));
 }
-
+#endif /* 0 */
 
 /****************************************************************************
   do a netbios name query to find someones IP
