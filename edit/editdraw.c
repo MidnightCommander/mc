@@ -464,7 +464,7 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     if (edit->force & REDRAW_COMPLETELY)
-	redraw_labels (edit->widget.parent, (Widget *) edit);
+	redraw_labels (edit->widget.parent);
     render_edit_text (edit, row_start, col_start, row_end, col_end);
     /*
      * edit->force != 0 means a key was pending and the redraw 

@@ -116,13 +116,14 @@ edit_mouse_event (Gpm_Event *event, void *x)
 }
 
 static void
-edit_adjust_size (Dlg_head * h)
+edit_adjust_size (Dlg_head *h)
 {
     WEdit *edit;
     WButtonBar *edit_bar;
 
     edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
-    edit_bar = (WButtonBar *) edit->widget.parent->current->next->widget;
+    edit_bar = find_buttonbar (h);
+
     widget_set_size (&edit->widget, 0, 0, LINES - 1, COLS);
     widget_set_size (&edit_bar->widget, LINES - 1, 0, 1, COLS);
     widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
@@ -222,7 +223,7 @@ edit (const char *_file, int line)
 static void edit_my_define (Dlg_head * h, int idx, char *text,
 			    void (*fn) (WEdit *), WEdit * edit)
 {
-    define_label_data (h, (Widget *) edit, idx, text, (buttonbarfn) fn, edit);
+    define_label_data (h, idx, text, (buttonbarfn) fn, edit);
 }
 
 
@@ -278,23 +279,24 @@ static void cmd_F10 (WEdit * edit)
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (10));
 }
 
-void edit_labels (WEdit * edit)
+void
+edit_labels (WEdit *edit)
 {
     Dlg_head *h = edit->widget.parent;
 
-    edit_my_define (h, 1, _ ("Help"), cmd_F1, edit);
-    edit_my_define (h, 2, _ ("Save"), cmd_F2, edit);
-    edit_my_define (h, 3, _ ("Mark"), cmd_F3, edit);
-    edit_my_define (h, 4, _ ("Replac"), cmd_F4, edit);
-    edit_my_define (h, 5, _ ("Copy"), cmd_F5, edit);
-    edit_my_define (h, 6, _ ("Move"), cmd_F6, edit);
-    edit_my_define (h, 7, _ ("Search"), cmd_F7, edit);
-    edit_my_define (h, 8, _ ("Delete"), cmd_F8, edit);
+    edit_my_define (h, 1, _("Help"), cmd_F1, edit);
+    edit_my_define (h, 2, _("Save"), cmd_F2, edit);
+    edit_my_define (h, 3, _("Mark"), cmd_F3, edit);
+    edit_my_define (h, 4, _("Replac"), cmd_F4, edit);
+    edit_my_define (h, 5, _("Copy"), cmd_F5, edit);
+    edit_my_define (h, 6, _("Move"), cmd_F6, edit);
+    edit_my_define (h, 7, _("Search"), cmd_F7, edit);
+    edit_my_define (h, 8, _("Delete"), cmd_F8, edit);
     if (!edit->have_frame)
-	edit_my_define (h, 9, _ ("PullDn"), edit_menu_cmd, edit);
-    edit_my_define (h, 10, _ ("Quit"), cmd_F10, edit);
+	edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
+    edit_my_define (h, 10, _("Quit"), cmd_F10, edit);
 
-    redraw_labels (h, (Widget *) edit);
+    redraw_labels (h);
 }
 
 
