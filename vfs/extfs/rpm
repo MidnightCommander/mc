@@ -124,7 +124,6 @@ mcrpmfs_list ()
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
 
-    $RPM2CPIO "$1" | cpio -tv --quiet
     echo "$FILEPREF 0 $DATE CONTENTS.cpio"
 }
 
@@ -166,14 +165,7 @@ mcrpmfs_copyout ()
 	INFO/OBSOLETES)		$RPM -qp --qf "[%{OBSOLETENAME} %|OBSOLETEFLAGS?{%{OBSOLETEFLAGS:depflags} %{OBSOLETEVERSION}}:{}|\n]" "$f" > "$3"; exit 0;;
 	CONTENTS.cpio)		$RPM2CPIO "$1" > "$3"; exit 0;;
 	*)
-	    TMPDIR=/tmp/mctmpdir.$$
-	    mkdir $TMPDIR || exit 1
-	    cd $TMPDIR
-	    # Files in RPM version 4 and above start with "./" - try both
-	    $RPM2CPIO "$1" | cpio -iumd --quiet "$2" "./$2" >/dev/null
-	    mv "$2" "$3" 2>/dev/null
-	    cd /
-	    rm -rf $TMPDIR;;
+	    ;;
     esac
 }
 
