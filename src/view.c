@@ -749,7 +749,6 @@ view_display_clean (WView *view, int height, int width)
 #define view_add_string(view,s)    addstr (s)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
 
-/* Both the text mode and gnome editions use this */
 #define BOLD_COLOR        MARKED_COLOR
 #define UNDERLINE_COLOR   VIEW_UNDERLINED_COLOR
 #define MARK_COLOR        SELECTED_COLOR

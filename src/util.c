@@ -64,7 +64,6 @@ int tilde_trunc = 1;
 #ifndef VFS_STANDALONE
 int is_printable (int c)
 {
-#ifndef HAVE_X
     static const unsigned char xterm_printable[] = {
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -99,9 +98,6 @@ int is_printable (int c)
     } else
 	return (c > 31 && c < 127);
 #endif /* !HAVE_CHARSET */
-#else
-    return 1;
-#endif /* HAVE_X */
 }
 
 /* Returns the message dimensions (lines and columns) */

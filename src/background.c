@@ -398,9 +398,7 @@ background_attention (int fd, void *closure)
 
     do_refresh ();
     mc_refresh ();
-#ifndef HAVE_X
     doupdate ();
-#endif /* !HAVE_X */
     return 0;
 }
 

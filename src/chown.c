@@ -93,7 +93,6 @@ static struct {
 { TY+10,TX+2 }
 };
 
-#ifndef HAVE_X
 static void
 chown_refresh (void)
 {
@@ -127,7 +126,6 @@ chown_refresh (void)
     dlg_move (ch_dlg, TY, TX + 1);
     addstr (_(" File "));
 }
-#endif
 
 static char *
 next_file (void)
@@ -142,11 +140,9 @@ static int
 chown_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
-#ifndef HAVE_X
     case DLG_DRAW:
       chown_refresh ();
       break;
-#endif
     }
     return 0;
 }

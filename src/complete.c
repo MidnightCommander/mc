@@ -803,11 +803,9 @@ void free_completions (WInput *in)
     in->completions = NULL;
 }
 
-#ifndef HAVE_GNOME
 static int query_height, query_width;
 static WInput *input;
 static int min_end;
-#endif /* !HAVE_GNOME */
 static int start, end;
 
 static int insert_text (WInput *in, char *text, int len)
@@ -840,7 +838,6 @@ static int insert_text (WInput *in, char *text, int len)
     return len != 0;
 }
 
-#ifndef HAVE_GNOME
 static int query_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
@@ -944,7 +941,6 @@ static int querylist_callback (void *data)
 {
     return 1;
 }
-#endif /* !HAVE_GNOME */
 
 #define DO_INSERTION 1
 #define DO_QUERY     2
@@ -977,7 +973,6 @@ complete_engine (WInput *in, int what_to_do)
 	 * because we do not have a Gtk dialog for it.  Gtk-ted does not like
 	 * this; if we enable this code, it will crash.
 	 */
-#ifndef HAVE_GNOME
     	if ((what_to_do & DO_QUERY) && in->completions [1]) {
     	    int maxlen = 0, i, count = 0;
     	    int x, y, w, h;
@@ -1036,10 +1031,6 @@ complete_engine (WInput *in, int what_to_do)
     	    if (i == B_USER)
     	    	return 1;
     	}
-#else
-	if (what_to_do & DO_QUERY)
-	    beep ();
-#endif
     } else
     	beep ();
     return 0;

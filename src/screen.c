@@ -97,13 +97,10 @@ static int panel_event (Gpm_Event *event, WPanel *panel);
 #    define unfocus_unselect_item(x) unselect_item(x)
 #endif
 
-#ifdef HAVE_X
-#   define set_colors(x)
-#else
-#   define x_create_panel(x,y,z) 1;
-#   define x_panel_load_index(p,x)
-#   define x_panel_select_item(a,b,c)
-#   define x_panel_destroy(p)
+#define x_create_panel(x,y,z) 1;
+#define x_panel_load_index(p,x)
+#define x_panel_select_item(a,b,c)
+#define x_panel_destroy(p)
 
 void
 set_colors (WPanel *panel)
@@ -112,7 +109,6 @@ set_colors (WPanel *panel)
     if (hascolors)
 	attrset (NORMAL_COLOR);
 }
-#endif
 
 #ifndef ICONS_PER_ROW
 #    define ICONS_PER_ROW(x) 1
@@ -131,7 +127,6 @@ delete_format (format_e *format)
      }
 }
 
-#ifndef HAVE_X
 /* This code relies on the default justification!!! */
 static void
 add_permission_string (char *dest, int width, file_entry *fe, int attr, int color, int is_octal)
@@ -162,7 +157,6 @@ add_permission_string (char *dest, int width, file_entry *fe, int attr, int colo
 	addch (dest[i]);
     }
 }
-#endif /* HAVE_X */
 
 /* String representations of various file attributes */
 /* name */
@@ -368,11 +362,7 @@ string_dot (file_entry *fe, int len)
     return ".";
 }
 
-#ifdef HAVE_GNOME
-#    define GT 2
-#else
-#    define GT 1
-#endif
+#define GT 1
 
 static struct {
     char *id;
@@ -527,7 +517,6 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
 	    cdest = to_buffer (cdest, format->just_mode, len, txt);
 	    length += len;
 
-#ifndef HAVE_X
             attrset (color);
 
             if (permission_mode && !strcmp(format->id, "perm"))
@@ -537,17 +526,12 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
             else
 		addstr (old_pos);
 
-#endif
 	} else {
-#ifndef HAVE_X
             if (attr == SELECTED || attr == MARKED_SELECTED)
                 attrset (SELECTED_COLOR);
             else
                 attrset (NORMAL_COLOR);
 	    one_vline ();
-#else
-	    *cdest++ = ' ';
-#endif
 	    length++;
 	}
     }
@@ -555,12 +539,7 @@ format_file (char *dest, WPanel *panel, int file_index, int width, int attr, int
     if (length < width){
 	int still = width - length;
 	while (still--)
-#ifdef HAVE_X
-	    *cdest++ = ' ';
-	*cdest = '\0';
-#else
 	    addch (' ');
-#endif
     }
 }
 
@@ -703,7 +682,7 @@ mini_info_separator (WPanel *panel)
 #else
     hline ((slow_terminal ? '-' : ACS_HLINE) | NORMAL_COLOR,
 	  panel->widget.cols-2);
-#endif
+#endif /* !HAVE_SLANG */
 }
 
 void
@@ -733,7 +712,7 @@ show_dir (WPanel *panel)
                 panel->widget.x + panel->widget.cols - 1, SLSMG_RTEE_CHAR);
         }
     }
-#endif /* have_slang */
+#endif /* HAVE_SLANG */
 
     if (panel->active)
 	attrset (REVERSE_COLOR);
@@ -770,11 +749,7 @@ void
 panel_update_contents (WPanel *panel)
 {
     show_dir (panel);
-#ifdef HAVE_X
-    x_fill_panel (panel);
-#else
     paint_dir (panel);
-#endif
     display_mini_info (panel);
 }
 
@@ -924,9 +899,6 @@ is_a_panel (Widget *w)
 WPanel *
 panel_new (const char *panel_name)
 {
-#ifdef HAVE_GNOME
-    static int panel_id = 0;
-#endif
     WPanel *panel;
     char *section;
     int i, err;
@@ -965,12 +937,6 @@ panel_new (const char *panel_name)
     panel->format	    = 0;
     panel->status_format    = 0;
     panel->format_modified  = 1;
-#ifdef HAVE_GNOME
-    panel->drag_tree_row = -1;
-    panel->is_a_desktop_panel = FALSE;
-    panel->id = panel_id++;
-    panel->servant = NULL;
-#endif
 
     panel->panel_name = g_strdup (panel_name);
     panel->user_format = g_strdup (DEFAULT_USER_FORMAT);
@@ -1479,14 +1445,6 @@ select_item (WPanel *panel)
        top file to decent values before calling select_item, I could
        forget it someday, so it's better to do the actual fitting here */
 
-#ifdef HAVE_X
-    int old_top;
-    old_top = panel->top_file;
-#endif
-
-    if (is_a_desktop_panel (panel))
-	return;
-
     if (panel->top_file < 0){
 	repaint = 1;
 	panel->top_file = 0;
@@ -1520,16 +1478,10 @@ select_item (WPanel *panel)
 	panel->top_file = panel->selected - items + 1;
     }
 
-#ifndef HAVE_X
     if (repaint)
 	paint_panel (panel);
     else
 	repaint_file (panel, panel->selected, 1, 2*selection (panel)->f.marked+1, 0);
-#else
-    if (old_top != panel->top_file)
-	x_adjust_top_file (panel);
-    x_select_item (panel);
-#endif
 
     display_mini_info (panel);
 
@@ -1552,19 +1504,11 @@ unmark_files (WPanel *panel)
     panel->total = 0;
 }
 
-#ifdef HAVE_X
-void
-unselect_item (WPanel *panel)
-{
-    x_unselect_item (panel);
-}
-#else
 void
 unselect_item (WPanel *panel)
 {
     repaint_file (panel, panel->selected, 1, 2*selection (panel)->f.marked, 0);
 }
-#endif
 
 static void
 do_move_down (WPanel *panel)
@@ -1575,7 +1519,6 @@ do_move_down (WPanel *panel)
     unselect_item (panel);
     panel->selected++;
 
-#ifndef HAVE_X
     if (panel->selected - panel->top_file == ITEMS (panel) &&
 	panel_scroll_pages){
 	/* Scroll window half screen */
@@ -1585,7 +1528,6 @@ do_move_down (WPanel *panel)
 	paint_dir (panel);
 	select_item (panel);
     }
-#endif
     select_item (panel);
 }
 
@@ -1597,14 +1539,12 @@ do_move_up (WPanel *panel)
 
     unselect_item (panel);
     panel->selected--;
-#ifndef HAVE_X
     if (panel->selected < panel->top_file && panel_scroll_pages){
 	/* Scroll window half screen */
 	panel->top_file -= ITEMS (panel)/2;
 	if (panel->top_file < 0) panel->top_file = 0;
 	paint_dir (panel);
     }
-#endif
     select_item (panel);
 }
 
@@ -1653,9 +1593,7 @@ static void
 move_selection (WPanel *panel, int lines)
 {
     int new_pos;
-#ifndef HAVE_X
     int adjust = 0;
-#endif
 
     new_pos = panel->selected + lines;
     if (new_pos >= panel->count)
@@ -1667,7 +1605,6 @@ move_selection (WPanel *panel, int lines)
     unselect_item (panel);
     panel->selected = new_pos;
 
-#ifndef HAVE_X
     if (panel->selected - panel->top_file >= ITEMS (panel)){
 	panel->top_file += lines;
 	adjust = 1;
@@ -1685,7 +1622,6 @@ move_selection (WPanel *panel, int lines)
 	    panel->top_file = 0;
 	paint_dir (panel);
     }
-#endif
     select_item (panel);
 }
 
@@ -1743,20 +1679,17 @@ prev_page (WPanel *panel)
 	panel->top_file = 0;
     x_adjust_top_file (panel);
     select_item (panel);
-#ifndef HAVE_X
     paint_dir (panel);
-#endif /* !HAVE_X */
 }
 
 static void
 prev_page_key (WPanel *panel)
 {
-#ifndef HAVE_X
     if (ctrl_pressed ()){
 	do_cd ("..", cd_exact);
-    } else
-#endif /* !HAVE_X */
+    } else {
 	prev_page (panel);
+    }
 }
 
 static void
@@ -1785,21 +1718,18 @@ next_page (WPanel *panel)
 	panel->top_file = panel->count - 1;
     x_adjust_top_file (panel);
     select_item (panel);
-#ifndef HAVE_X
     paint_dir (panel);
-#endif /* !HAVE_X */
 }
 
 static void next_page_key (WPanel *panel)
 {
-#ifndef HAVE_X
     if (ctrl_pressed() &&
 	(S_ISDIR(selection (panel)->buf.st_mode) ||
-	 link_isdir (selection (panel))))
+	 link_isdir (selection (panel)))) {
         do_cd (selection (panel)->fname, cd_exact);
-    else
-#endif /* !HAVE_X */
+    } else {
 	next_page (panel);
+    }
 }
 
 static void
@@ -1853,9 +1783,7 @@ move_home (WPanel *panel)
     panel->top_file = 0;
     panel->selected = 0;
 
-#ifndef HAVE_X
     paint_dir (panel);
-#endif
     select_item (panel);
 }
 
@@ -1879,9 +1807,7 @@ move_end (WPanel *panel)
     }
 
     panel->selected = panel->count-1;
-#ifndef HAVE_X
     paint_dir (panel);
-#endif
     select_item (panel);
 }
 
@@ -2007,9 +1933,8 @@ do_search (WPanel *panel, int c_code)
     }
     if (!found)
 	panel->search_buffer [--l] = 0;
-#ifndef HAVE_X
+
     paint_panel (panel);
-#endif
 }
 
 void
@@ -2028,67 +1953,7 @@ start_search (WPanel *panel)
 	mc_refresh ();
     }
 }
-/* This procedure was getting really messy with all the rewriting and ifdef's
- * so I just splet them out.  -jrb */
-#ifdef HAVE_GNOME
-extern void set_cursor_busy (WPanel *panel);
-extern void set_cursor_normal (WPanel *panel);
-int
-do_enter_on_file_entry (file_entry *fe)
-{
- 	gint retval;
-	char *full_name;
 
-	set_cursor_busy (cpanel);
-	/* Can we change dirs? */
-	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
-		do_cd (fe->fname, cd_exact);
-		set_cursor_normal (cpanel);
-		return 1;
-	}
-	/* do metadata/mime stuff tell us anything? */
-	if (gmc_open (fe) != 0) {
-		set_cursor_normal (cpanel);
-		return 1;
-	}
-	/* can we change dirs? */
-	full_name = concat_dir_and_file (cpanel->cwd, fe->fname);
-	if (is_exe (fe->buf.st_mode) && if_link_is_exe (full_name, fe)) {
-		g_free (full_name);
-#ifdef USE_VFS
-		if (vfs_current_is_local ())
-#endif
-		{
-			char *tmp = name_quote (fe->fname, 0);
-			char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
-			g_free (tmp);
-			if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
-							       _(" Do you really want to execute? "),
-							       0, 2, _("Yes"), _("No")) == 0))
-				execute (cmd);
-			g_free (cmd);
-		}
-#ifdef USE_VFS
-		else {
-			char *tmp;
-
-			tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
-			if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
-				message (1, _(" Warning "), _(" No action taken "));
-			g_free (tmp);
-		}
-#endif /* USE_VFS */
-		set_cursor_normal (cpanel);
-		return 1;
-	}
-
-	g_free (full_name);
-	/* looks like we couldn't open it.  Let's ask the user */
-	retval = gmc_open_with (fe->fname);
-	set_cursor_normal (cpanel);
-	return retval;
-}
-#else
 int
 do_enter_on_file_entry (file_entry *fe)
 {
@@ -2143,14 +2008,13 @@ do_enter_on_file_entry (file_entry *fe)
 	}
     }
 }
-#endif /* else not HAVE_GNOME */
+
 int
 do_enter (WPanel *panel)
 {
     return do_enter_on_file_entry (selection (panel));
 }
 
-#ifndef HAVE_X
 static void
 chdir_other_panel (WPanel *panel)
 {
@@ -2216,7 +2080,6 @@ chdir_to_readlink (WPanel *panel)
 	g_free (new_dir);
     }
 }
-#endif /* !HAVE_X */
 
 static const key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
@@ -2253,11 +2116,9 @@ static const key_map panel_keymap [] = {
     { XCTRL('s'), start_search },	/* C-s like emacs */
     { ALT('s'),   start_search },	/* M-s not like emacs */
     { XCTRL('t'), mark_file },
-#ifndef HAVE_X
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
     { ALT('H'),   directory_history_list },
-#endif /* HAVE_X */
     { KEY_F(13),  view_simple_cmd },
     { KEY_F(14),  edit_cmd_new },
     { ALT('y'),   directory_history_prev },
@@ -2269,23 +2130,6 @@ static const key_map panel_keymap [] = {
     { KEY_KP_SUBTRACT, unselect_cmd_panel },
     { ALT('*'),	  reverse_selection_cmd_panel },
     { KEY_KP_MULTIPLY, reverse_selection_cmd_panel },
-
-
-#ifdef HAVE_GNOME
-    { '+',        select_cmd_panel },
-    { '\\',       unselect_cmd_panel },
-    { '-',        unselect_cmd_panel },
-    { '*',	  reverse_selection_cmd_panel },
-    { XCTRL('r'), reread_cmd },
-    { KEY_F(3),   view_panel_cmd },
-    { KEY_F(4),   edit_panel_cmd },
-    { KEY_F(5),   copy_cmd },
-    { KEY_F(6),   ren_cmd },
-    { KEY_F(7),   mkdir_panel_cmd },
-    { KEY_F(8),   delete_cmd },
-    { KEY_DC,     delete_cmd },
-#endif
-
     { 0, 0 }
 };
 
@@ -2328,9 +2172,7 @@ panel_key (WPanel *panel, int key)
 	    return 1;
 	}
 
-#ifndef HAVE_X
 	if (!command_prompt)
-#endif /* !HAVE_X */
 	{
 	    start_search (panel);
 	    do_search (panel, key);
@@ -2341,20 +2183,15 @@ panel_key (WPanel *panel, int key)
     return 0;
 }
 
-#ifndef HAVE_X
 void user_file_menu_cmd (void) {
     user_menu_cmd (NULL);
 }
-#endif /* !HAVE_X */
 
 static int
 panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 {
     switch (msg){
     case WIDGET_INIT:
-#ifdef HAVE_X
-	x_create_panel (h, h->wdata, panel);
-#endif /* !HAVE_X */
 	return 1;
 
     case WIDGET_DRAW:
@@ -2362,9 +2199,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	break;
 
     case WIDGET_FOCUS:
-#ifndef HAVE_GNOME
 	current_panel = panel;
-#endif
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0){
 	    message (1, MSG_ERROR, _(" Cannot chdir to \"%s\" \n %s "),
@@ -2374,7 +2209,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 
 	show_dir (panel);
 	focus_select_item (panel);
-#ifndef HAVE_X
+
 	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
 	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);
 	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
@@ -2384,7 +2219,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	define_label (h, (Widget *)panel, 7, _("Mkdir"), mkdir_panel_cmd);
 	define_label (h, (Widget *)panel, 8, _("Delete"), delete_cmd);
 	redraw_labels (h, (Widget *)panel);
-#endif
+
 	/* Chain behaviour */
 	default_proc (h, WIDGET_FOCUS, par);
 	return 1;
@@ -2395,15 +2230,9 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	    panel->searching = 0;
 	    display_mini_info (panel);
 	}
-#ifdef HAVE_X
-	show_dir (panel);
-	unfocus_unselect_item (panel);
-	panel->active = 0;
-#else
 	panel->active = 0;
 	show_dir (panel);
 	unselect_item (panel);
-#endif
 	return 1;
 
     case WIDGET_KEY:

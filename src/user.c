@@ -47,10 +47,8 @@
 #define MAX_ENTRIES 16
 #define MAX_ENTRY_LEN 60
 
-#ifndef HAVE_X
 static int debug_flag = 0;
 static int debug_error = 0;
-#endif /* !HAVE_X */
 static char *menu = NULL;
 
 /* Formats defined:
@@ -266,7 +264,6 @@ char *expand_format (WEdit *edit_widget, char c, int quote)
     return g_strdup ("");
 }
 
-#ifndef HAVE_X
 /* Checks for shell patterns definition */
 char *check_patterns (char *p)
 {
@@ -796,4 +793,4 @@ void user_menu_cmd (WEdit *edit_widget)
 	g_free (entries);
     g_free (data);
 }
-#endif /* !HAVE_X */
+

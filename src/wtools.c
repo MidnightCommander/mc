@@ -55,7 +55,6 @@
 void
 dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 {
-#ifndef HAVE_X
     attrset (back);
     dlg_erase (h);
     draw_box (h, 1, 1, h->lines - 2, h->cols - 2);
@@ -64,7 +63,6 @@ dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 	dlg_move (h, 1, (h->cols-strlen (h->title))/2);
 	addstr (h->title);
     }
-#endif
 }
 
 void
@@ -84,11 +82,7 @@ common_dialog_callback (struct Dlg_head *h, int id, int msg)
 /* }}} */
 /* {{{ Listbox utility functions */
 
-#ifdef HAVE_X
-#define listbox_refresh(h)
-#else
 #define listbox_refresh(h)	common_dialog_repaint(h)
-#endif
 
 static int listbox_callback (Dlg_head *h, int id, int msg)
 {
@@ -156,7 +150,6 @@ int run_listbox (Listbox *l)
 
 
 /* {{{ Query Dialog functions */
-#ifndef HAVE_GNOME
 struct text_struct {
     char *text;
     char *header;
@@ -164,7 +157,6 @@ struct text_struct {
 
 static int query_callback (struct Dlg_head *h, int Id, int Msg)
 {
-#ifndef HAVE_X    
     struct text_struct *info;
 
     info = (struct text_struct *) h->data;
@@ -180,7 +172,6 @@ static int query_callback (struct Dlg_head *h, int Id, int Msg)
 	addstr (info->header);
 	break;
     }
-#endif
     return 0;
 }
 
@@ -202,9 +193,6 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     char *cur_name;
     static int query_colors [4];
     static struct text_struct pass;
-#ifdef HAVE_X    
-    static char *buttonnames [10];
-#endif
     
     /* set dialog colors */
     query_colors [0] = (flags & D_ERROR) ? ERROR_COLOR :  Q_UNSELECTED_COLOR;
@@ -279,17 +267,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	/* free used memory */
 	destroy_dlg (query_dlg);
     } else {
-#ifdef HAVE_X
-	add_widget (query_dlg, button_new(0, 0, B_EXIT, NORMAL_BUTTON,
-					  _("&Ok"), 0, 0, NULL));
-
-	add_widget (query_dlg, label_new (2, 3, text, NULL));
-	run_dlg (query_dlg);
-	destroy_dlg (query_dlg);
-#else
 	add_widget (query_dlg, label_new (2, 3, text, NULL));
 	add_widget (query_dlg, button_new(0, 0, 0, HIDDEN_BUTTON, "-", 0, 0, NULL));
-#endif /* HAVE_X */
 	last_query_dlg = query_dlg;
     }
     sel_pos = 0;
@@ -331,7 +310,6 @@ Dlg_head *message (int error, char *header, const char *text, ...)
 	return d;
     return 0;
 }
-#endif
 /* }}} */
 
 /* {{{ The chooser routines */
@@ -392,8 +370,6 @@ void destroy_chooser (Chooser *c)
 /* }}} */
 
 /* {{{ Quick dialog routines */
-
-#ifndef HAVE_X
 
 static int quick_callback (struct Dlg_head *h, int id, int Msg)
 {
@@ -610,7 +586,6 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     } else
 	return 0;
 }
-#endif /* !HAVE_X */
 
 char *input_dialog (char *header, char *text, char *def_text)
 {

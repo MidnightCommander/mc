@@ -1,5 +1,7 @@
 2001-11-14  Pavel Roskin  <proski@gnu.org>
 
+	Fully eliminate all references to HAVE_X and HAVE_GNOME.
+
 	* dir.c (do_sort): Correctly handle the case when there is no
 	".." entry (i.e. panelized mode).
 

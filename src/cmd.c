@@ -1040,16 +1040,7 @@ void link_cmd (void)
 void symlink_cmd (void)
 {
     char *filename = NULL;
-    if (is_a_desktop_panel (cpanel)) {
-        gint i;
-	for (i = 0; i < cpanel->count; i++) 
-		if (cpanel->dir.list [i].f.marked) {
-			filename = cpanel->dir.list [i].fname;
-			break;
-		}
-    } else {
-	    filename = selection (cpanel)->fname;
-    }
+    filename = selection (cpanel)->fname;
 
     if (filename) {
 	do_link (1, filename);
@@ -1064,16 +1055,7 @@ void edit_symlink_cmd (void)
 	int i;
 	char *dest, *q;
 
-	if (is_a_desktop_panel (cpanel)) {
-		gint i;
-		for (i = 0; i < cpanel->count; i++) 
-			if (cpanel->dir.list [i].f.marked) {
-				p = cpanel->dir.list [i].fname;
-				break;
-			}
-	} else {
-		p = selection (cpanel)->fname;
-	}
+	p = selection (cpanel)->fname;
 
 	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
 

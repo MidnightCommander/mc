@@ -34,7 +34,6 @@
 
 /* "$Id$" */
 
-#ifndef HAVE_X
 typedef void (*fnptr)(void);
 
 typedef struct Fkey_Table_List {
@@ -94,7 +93,6 @@ int check_fkeys (int c)
     else
 	return 0;
 }
-#endif /* !HAVE_X */
 
 /* Return values: 0 = not a movement key, 1 = was a movement key */
 int check_movement_keys (int c, int additional, int page_size, void *data,
@@ -165,7 +163,6 @@ int is_abort_char (int c)
 	    c == KEY_F(10));
 }
 
-#ifndef HAVE_X
 void mc_raw_mode (void)
 {
     raw ();
@@ -253,4 +250,3 @@ int lookup_key (char *keyname)
     return 0;
 }
 
-#endif /* !HAVE_X */

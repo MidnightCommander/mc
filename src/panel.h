@@ -9,22 +9,6 @@
 
 #define LIST_TYPES	5
 
-#ifdef HAVE_GNOME
-/* Keep the following in sync with setup.c */
-
-/* Number of columns that each mode requires */
-#define GMC_COLUMNS_BRIEF 2     /* brief view    */
-#define GMC_COLUMNS_DETAILED 4  /* detailed view */
-#define GMC_COLUMNS_CUSTOM 15   /* custom view   */
-#define GMC_COLUMNS (GMC_COLUMNS_BRIEF + GMC_COLUMNS_DETAILED + GMC_COLUMNS_CUSTOM)
-
-/* Default column widths */
-extern int default_column_width[GMC_COLUMNS];
-
-/* custom listing format */
-extern char *default_user_format;
-#endif
-
 enum list_types {
     list_full,			/* Name, size, perm/date */
     list_brief,			/* Name */
@@ -139,67 +123,6 @@ typedef struct {
     char     search_buffer [256];
 
     void     *port_ui;		/* UI stuff specific to each GUI port */
-
-#ifdef HAVE_GNOME
-    /* These are standard GtkWidgets */
-
-    void *xwindow;		/* The toplevel window */
-
-    void *table;
-    void *view_table;
-    void *pane;
-    void *list;
-    void *tree;
-    void *icons;
-    void *notebook;
-    void *status;
-    void *ministatus;
-    void *tree_scrolled_window;
-
-    void *filter_w;		/* A WInput* */
-    void *current_dir;		/* A WInput* */
-    int estimated_total;
-
-    /* default column layout */
-    int column_width[GMC_COLUMNS];
-
-    /* navigation buttons */
-    void *back_b;
-    void *fwd_b;
-    void *up_b;
-
-    /* Used during drag and drop */
-    int maybe_start_drag;
-    int click_x, click_y;
-
-    /* View menu and toolbar items */
-    void **view_menu_items;
-    void **view_toolbar_items;
-
-    int dragging;
-
-    /* Unique numerical ID for session management */
-    int id;
-
-    /* Used for scrolling nicely during drags */
-    int timer_id;
-    int drag_motion_x;
-    int drag_motion_y;
-
-    /* The highlighted row in the tree for drag and drop */
-    int drag_tree_row;
-    int drag_tree_timeout_id;
-    file_entry *drag_tree_fe;
-
-    /* Whether the user is dragging something over the tree */
-    int drag_tree_dragging_over;
-
-    void *panel_listbox;	/* container for the list */
-    int is_a_desktop_panel;
-
-    /* CORBA servant */
-    void *servant;
-#endif
 } WPanel;
 
 WPanel *panel_new (const char *panel_name);
@@ -217,16 +140,8 @@ extern int show_mini_info;
 extern int panel_scroll_pages;
 
 #define selection(p) (&(p->dir.list [p->selected]))
-#ifdef HAVE_GNOME
-#define is_a_desktop_panel(p) ((p->is_a_desktop_panel))
-/* Evil empty trash_hack */
-extern int is_trash_panel;
 
-#else
-#define is_a_desktop_panel(p) FALSE
-#endif
 extern int fast_reload;
-
 extern int extra_info;
 
 /*#define ITEMS(p) ((p)->view_type == view_brief ? (p)->lines *2 : (p)->lines)
@@ -255,7 +170,6 @@ void show_dir             (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 
-/* NOTE: Have to be ifdefed for HAVE_X */
 void x_panel_set_size        (int index);
 void x_create_panel          (Dlg_head *h, widget_data parent, WPanel *panel);
 void x_fill_panel            (WPanel *panel);
@@ -330,7 +244,6 @@ void do_file_mark_range (WPanel *panel, int r1, int r2);
 int do_enter_on_file_entry (file_entry *fe);
 int do_enter (WPanel *panel);
 
-/* NOTE: Have to be ifdefed for HAVE_X */
 void    x_panel_select_item (WPanel *panel, int index, int val);
 void    x_select_item (WPanel *panel);
 void    x_unselect_item (WPanel *panel);

@@ -109,15 +109,10 @@ extern char search_buffer [256];
 extern char cmd_buf [512];
 extern char *cmdline_geometry;
 
-#ifdef HAVE_GNOME
-#define MENU_PANEL get_current_panel ()
-#define SELECTED_IS_PANEL 1
-#else
 /* The menu panels */
 extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL (is_right ? right_panel : left_panel)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
-#endif /* !HAVE_GNOME */
 
 /* Useful macros to avoid too much typing */
 #define cpanel get_current_panel()

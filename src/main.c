@@ -2753,7 +2753,7 @@ main (int argc, char *argv [])
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 
-    /* Don't use subshell in GNOME and when invoked as a viewer or editor */
+    /* Don't use subshell when invoked as a viewer or editor */
     if (edit_one_file || view_one_file)
 	use_subshell = 0;
 

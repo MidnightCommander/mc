@@ -547,12 +547,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    int retval;
 
 	    retval = make_symlink (ctx, src_path, dst_path);
-#ifdef HAVE_GNOME
-	    if (retval == FILE_CONT) {
-		gnome_metadata_delete (dst_path);
-		gnome_metadata_copy (src_path, dst_path);
-	    }
-#endif /* !HAVE_GNOME */
 	    return retval;
 	}
 
@@ -585,10 +579,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		return temp_status;
 	    }
 #endif /* !__os2__ */ 
-#ifdef HAVE_GNOME
-	    gnome_metadata_delete (dst_path);
-	    gnome_metadata_copy (src_path, dst_path);
-#endif /* HAVE_GNOME */
 	    return FILE_CONT;
         }
     }
@@ -631,11 +621,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
        do not create a security hole.  FIXME: You have security hole
        here, btw. Imagine copying to /tmp and symlink attack :-( */
 
-#ifdef HAVE_GNOME
-    if (!ctx->do_append)
-        gnome_metadata_delete (dst_path);
-#endif /* HAVE_GNOME */
-	    
     while ((dest_desc = mc_open (dst_path, O_WRONLY | 
       (ctx->do_append ? O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0){
         return_status = file_error (_(" Cannot create target file \"%s\" \n %s "), dst_path);
@@ -808,10 +793,6 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	}
 #endif /* !OS2_NT */
 
-#ifdef HAVE_GNOME
-	gnome_metadata_delete (dst_path);
-	gnome_metadata_copy (src_path, dst_path);
-#endif /* HAVE_GNOME */
      /*
       * .ado: according to the XPG4 standard, the file must be closed before
       * chmod can be invoked
@@ -911,10 +892,6 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
     	if (move_over){
             if (mc_rename (s, d) == 0){
-#ifdef HAVE_GNOME
-		gnome_metadata_delete (d);
-		gnome_metadata_copy (s, d);
-#endif /* HAVE_GNOME */
 		g_free (parent_dirs);
 		return FILE_CONT;
 	    }
@@ -956,11 +933,6 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	    goto retry_dst_mkdir;
 	goto ret;
     }
-
-#ifdef HAVE_GNOME
-    gnome_metadata_delete (dest_dir);
-    gnome_metadata_copy (s, dest_dir);
-#endif /* HAVE_GNOME */
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
@@ -1075,9 +1047,6 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 {
     struct stat src_stats, dst_stats;
     int return_status = FILE_CONT;
-#ifdef HAVE_GNOME
-    int delete_metadata = TRUE;
-#endif /* HAVE_GNOME */
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
@@ -1133,21 +1102,12 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
     if (!ctx->do_append) {
 	if (S_ISLNK (src_stats.st_mode) && ctx->stable_symlinks) {
 	    if ((return_status = make_symlink (ctx, s, d)) == FILE_CONT) {
-#ifdef HAVE_GNOME
-		gnome_metadata_delete (d);
-		gnome_metadata_rename (s, d);
-		delete_metadata = FALSE;
-#endif /* HAVE_GNOME */
 		goto retry_src_remove;
 	    } else
 		return return_status;
 	}
 
         if (mc_rename (s, d) == 0){
-#ifdef HAVE_GNOME
-	    gnome_metadata_delete (d);
-	    gnome_metadata_rename (s, d);
-#endif /* HAVE_GNOME */
 	    return FILE_CONT;
 	}
     }
@@ -1185,10 +1145,6 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 	    goto retry_src_remove;
 	return return_status;
     }
-#ifdef HAVE_GNOME
-    if (delete_metadata)
-	gnome_metadata_delete (s);
-#endif /* HAVE_GNOME */
     
     if (return_status == FILE_CONT)
         return_status = progress_update_one (ctx,
@@ -1266,10 +1222,6 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 
  retry_rename:
     if (mc_rename (s, destdir) == 0){
-#ifdef HAVE_GNOME
-	gnome_metadata_delete (destdir);
-	gnome_metadata_rename (s, destdir);
-#endif /* HAVE_GNOME */
 	return_status = FILE_CONT;
 	goto ret;
     }
@@ -1350,9 +1302,7 @@ erase_file (FileOpContext *ctx, char *s, off_t *progress_count, double *progress
 	if (return_status != FILE_RETRY)
 	    return return_status;
     }
-#ifdef HAVE_GNOME
-    gnome_metadata_delete (s);
-#endif /* HAVE_GNOME */
+
     if (progress_count)
         return progress_update_one (ctx, progress_count, progress_bytes, buf.st_size,
 				    is_toplevel_file);
@@ -1412,9 +1362,7 @@ recursive_erase (FileOpContext *ctx, char *s, off_t *progress_count, double *pro
 	    goto retry_rmdir;
 	return return_status;
     }
-#ifdef HAVE_GNOME
-    gnome_metadata_delete (s);
-#endif /* HAVE_GNOME */
+
     return FILE_CONT;
 }
 
@@ -1482,9 +1430,7 @@ erase_dir (FileOpContext *ctx, char *s, off_t *progress_count, double *progress_
 	    goto retry_rmdir;
 	return error;
     }
-#ifdef HAVE_GNOME
-    gnome_metadata_delete (s);
-#endif /* HAVE_GNOME */
+
     return FILE_CONT;
 }
 
@@ -1514,9 +1460,7 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
 	    goto retry_rmdir;
 	return error;
     }
-#ifdef HAVE_GNOME
-    gnome_metadata_delete (s);
-#endif /* HAVE_GNOME */
+
     return FILE_CONT;
 }
 
@@ -1673,7 +1617,6 @@ static char *op_names1 [] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
 
 int fmd_xlen = FMD_XLEN;
 
-#ifndef HAVE_GNOME
 /*
  * These are formats for building a prompt. Parts encoded as follows:
  * %o - operation from op_names1
@@ -1687,12 +1630,6 @@ int fmd_xlen = FMD_XLEN;
 static char* one_format  = N_("%o %f \"%s\"%m");
 /* xgettext:no-c-format */
 static char* many_format = N_("%o %d %f%m");
-#else
-/* xgettext:no-c-format */
-static char* one_format  = N_("%o %f \"%s\"%e");
-/* xgettext:no-c-format */
-static char* many_format = N_("%o %d %f%e");
-#endif /* HAVE_GNOME */
 static char* prompt_parts [] =
 {
 	N_("file"), N_("files"), N_("directory"), N_("directories"),
@@ -1798,15 +1735,6 @@ panel_operate_generate_prompt (WPanel* panel, int operation, int only_one,
 	return source;
 }
 
-#ifdef HAVE_GNOME
-extern FileProgressStatus file_progress_query_replace_policy (FileOpContext *ctx,
-							      gboolean dialog_needed);
-extern int                file_delete_query_recursive        (FileOpContext *ctx,
-							      enum OperationMode mode,
-							      gchar         *s);
-
-#endif /* HAVE_GNOME */
-
 /**
  * panel_operate:
  *
@@ -1865,13 +1793,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (operation == OP_DELETE && confirm_delete){
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
-#ifdef HAVE_GNOME
-	i = query_dialog (_(op_names [operation]), cmd_buf,
-			  D_ERROR, 2, _("Yes"), _("No"));
-#else
+
 	i = query_dialog (_(op_names [operation]), cmd_buf,
 			  D_ERROR, 2, _("&Yes"), _("&No"));
-#endif /* !HAVE_GNOME */
+
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
 	    return 0;
@@ -1954,7 +1879,6 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
         file_op_context_create_ui (ctx, operation, 1);
     
     /* This code is only called by the tree and panel code */
-#ifndef HAVE_GNOME
     if (only_one){
 	/* We now have ETA in all cases */
 
@@ -2011,11 +1935,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    }
 	} /* Copy or move operation */
 
-	if (value == FILE_CONT && !(is_a_desktop_panel(panel)))
+	if (value == FILE_CONT)
 	    unmark_files (panel);
     } else {
         /* Many files */
-#endif /* !HAVE_GNOME */
 	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
 	retry_many_dst_stat:
@@ -2099,15 +2022,8 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    if (value == FILE_ABORT)
 		goto clean_up;
 
-#ifdef HAVE_GNOME
-	    /* if panel->selection is -1, then we have a desktop panel. */
-	    if (value == FILE_CONT && !(is_a_desktop_panel(panel)))
-		    do_file_mark (panel, i, 0);
-#else
 	    if (value == FILE_CONT)
 		    do_file_mark (panel, i, 0);
-#endif /* !HAVE_GNOME */
-
 	    
 	    if (file_progress_show_count (ctx, count, ctx->progress_count) == FILE_ABORT)
 		goto clean_up;
@@ -2120,9 +2036,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 	    mc_refresh ();
 	} /* Loop for every file */
-#ifndef HAVE_GNOME
     } /* Many files */
-#endif /* !HAVE_GNOME */
  clean_up:
     /* Clean up */
 
@@ -2225,7 +2139,6 @@ files_error (char *format, char *file1, char *file2)
     return do_file_error (cmd_buf);
 }
 
-#ifndef HAVE_GNOME
 static int
 real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 {
@@ -2283,7 +2196,6 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	return FILE_ABORT;
     }
 }
-#endif /* !HAVE_GNOME */
 
 #ifdef WITH_BACKGROUND
 static int
@@ -2298,17 +2210,10 @@ do_file_error (char *str)
 static int
 query_recursive (FileOpContext *ctx, char *s)
 {
-#ifdef HAVE_GNOME
-    if (we_are_background)
-	return parent_call (file_delete_query_recursive, ctx, 1, strlen (s), s);
-    else
-	return file_delete_query_recursive (ctx, Foreground, s);
-#else    
     if (we_are_background)
 	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
     else
 	return real_query_recursive (ctx, Foreground, s);
-#endif /* !HAVE_GNOME */
 }
 
 static int
@@ -2335,11 +2240,7 @@ do_file_error (char *str)
 static int
 query_recursive (FileOpContext *ctx, char *s)
 {
-#ifdef HAVE_GNOME
-    return file_delete_query_recursive (ctx, Foreground, s);
-#else
     return real_query_recursive (ctx, Foreground, s);
-#endif /* !HAVE_GNOME */
 }
 
 static int
