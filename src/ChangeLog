@@ -1,3 +1,7 @@
+2004-09-14  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* key.c (get_modifier): Recognize keyboard modifiers on Cygwin.
+
 2004-09-12  Pavel Shirshov  <pavelsh@mail.ru>
 
 	* execute.c (toggle_panels): Fix error. show_output_starts_shell=1

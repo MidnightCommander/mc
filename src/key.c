@@ -59,6 +59,11 @@
 #    include <sys/ioctl.h>
 #endif				/* __linux__ */
 
+#ifdef __CYGWIN__
+#    include <termios.h>
+#    include <sys/ioctl.h>
+#endif                         /* __CYGWIN__ */
+
 #ifdef __QNXNTO__
 #	include <dlfcn.h>
 #	include <Ph.h>
@@ -1276,7 +1281,7 @@ get_modifier (void)
 	    result |= KEY_M_SHIFT;
     }
 #endif				/* __QNXNTO__ */
-#ifdef __linux__
+#if defined __linux__ || (defined __CYGWIN__ && defined TIOCLINUX)
     {
 	unsigned char modifiers = 6;
 
