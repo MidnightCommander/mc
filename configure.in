@@ -184,12 +184,6 @@ AC_DEFINE(IS_AIX, 1, [Define if compiling for AIX])
 AC_MSG_RESULT(yes)
 ], [AC_MSG_RESULT(no)])
 
-dnl   
-dnl This hack is here until autoconf adds it
-dnl Needed for Unixware: getmntent is on libgen.a
-dnl
-AC_CHECK_LIB(gen, getmntent, [LIBS="-lgen $LIBS"])
-
 dnl
 dnl This is from GNU fileutils, check aclocal.m4 for more information
 dnl
