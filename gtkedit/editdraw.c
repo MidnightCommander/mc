@@ -103,9 +103,6 @@ void edit_status (WEdit * edit)
 
 #else
 
-#ifndef GTK
-extern int fixed_font;
-#endif
 
 void render_status (CWidget * wdt, int expose);
 
@@ -154,6 +151,7 @@ void edit_status (WEdit * edit)
 	end_mark = start_mark = 0;
     if ((COptionsOf (edit->widget) & EDITOR_NO_TEXT))
 	return;
+    CPushFont ("editor", 0);
     m = edit->stat.st_mode;
     p = edit->filename ? edit->filename : "";
     sprintf (s, "\034%c%s\033\035  \034-%c%c%c%c%c%c%c%c%c\035  \034%s%s%s%c\035  \034\030%02ld\033\035  \034%-4ld+%2ld=\030%4ld\033/%3ld\035  \034*%-5ld/%5ldb=%c%3d\035%c \034\001%ld\033\035",
@@ -183,6 +181,7 @@ void edit_status (WEdit * edit)
     wdt->text = (char *) strdup (s);
     CSetWidgetSize (id, CWidthOf (edit->widget), CHeightOf (wdt));
     render_status (wdt, 0);
+    CPopFont ();
 }
 
 #endif
@@ -220,7 +219,6 @@ int cursor_out_of_screen (WEdit * edit)
 }
 
 #ifndef MIDNIGHT
-extern unsigned char per_char[256];
 int edit_width_of_long_printable (int c);
 #endif
 
@@ -464,8 +462,9 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 
 #else
 
-int edit_mouse_pending (Window win);
 #define edit_draw_this_line edit_draw_this_line_proportional
+
+int option_smooth_scrolling = 0;
 
 static int key_pending (WEdit * edit)
 {
@@ -475,7 +474,7 @@ static int key_pending (WEdit * edit)
 #else
     if (!edit) {
 	flush = line = 0;
-    } else if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw) {
+    } else if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw && !option_smooth_scrolling) {
 /* this flushes the display in logarithmic intervals - so both fast and
    slow machines will get good performance vs nice-refreshing */
 	if ((1 << flush) == ++line) {
@@ -502,12 +501,14 @@ static void edit_draw_this_char (WEdit * edit, long curs, long row)
 }
 
 /* cursor must be in screen for other than REDRAW_PAGE passed in force */
-void render_edit_text (WEdit * edit, long start_row, long start_column, long end_row, long end_column)
+void render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
+		       long end_column)
 {
     long row = 0, curs_row;
     static int prev_curs_row = 0;
     static int prev_start_col = 0;
     static long prev_curs = 0;
+    static long prev_start = -1;
 
 #ifndef MIDNIGHT
     static unsigned long prev_win = 0;
@@ -515,6 +516,8 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 
     int force = edit->force;
     long b;
+
+    CPushFont ("editor", 0);
 
 #ifndef MIDNIGHT
     key_pending (0);
@@ -533,6 +536,60 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 #endif
 	) {
+	int time_division = 5;
+#if 0
+	if (CPending ())
+	    time_division--;
+#endif
+#if !defined(MIDNIGHT) && !defined(GTK)
+	if (prev_start < 0)
+	    prev_start = edit->start_line;
+	if (option_smooth_scrolling && prev_win == CWindowOf (edit->widget) && !edit->screen_modified) {
+	    int i, t;
+	    int pos1, pos2;
+	    i = edit->start_line - prev_start;
+	    if (i <= time_division && i > 0) {
+		edit_draw_proportional (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		for (pos2 = 0, t = 0; t < time_division; t++) {
+		    int move;
+		    pos1 = FONT_PIX_PER_LINE * i * (t + 1) / time_division;
+		    move = pos1 - pos2;
+		    pos2 += move;
+		    XCopyArea (CDisplay, edit->widget->winid, edit->widget->winid, CGC,
+			       EDIT_TEXT_HORIZONTAL_OFFSET,
+			       EDIT_TEXT_VERTICAL_OFFSET + move,
+			       edit->widget->width - EDIT_FRAME_W,
+			       edit->widget->height - EDIT_FRAME_H - move,
+			       EDIT_TEXT_HORIZONTAL_OFFSET, EDIT_TEXT_VERTICAL_OFFSET);
+		    XClearArea (CDisplay, edit->widget->winid, EDIT_TEXT_HORIZONTAL_OFFSET,
+				edit->widget->height - EDIT_FRAME_H +
+				EDIT_TEXT_VERTICAL_OFFSET - move,
+				edit->widget->width - EDIT_FRAME_W, move, 0);
+		    XFlush (CDisplay);
+		    pause ();
+		}
+	    } else if (i >= -time_division && i < 0) {
+		edit_draw_proportional (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+		i = -i;
+		for (pos2 = 0, t = 0; t < time_division; t++) {
+		    int move;
+		    pos1 = FONT_PIX_PER_LINE * i * (t + 1) / time_division;
+		    move = pos1 - pos2;
+		    pos2 += move;
+		    XCopyArea (CDisplay, edit->widget->winid, edit->widget->winid, CGC,
+			       EDIT_TEXT_HORIZONTAL_OFFSET, EDIT_TEXT_VERTICAL_OFFSET,
+			       edit->widget->width - EDIT_FRAME_W,
+			       edit->widget->height - EDIT_FRAME_H -
+			       move, EDIT_TEXT_HORIZONTAL_OFFSET, EDIT_TEXT_VERTICAL_OFFSET + move);
+		    XClearArea (CDisplay, edit->widget->winid, EDIT_TEXT_HORIZONTAL_OFFSET,
+				EDIT_TEXT_VERTICAL_OFFSET,
+				edit->widget->width - EDIT_FRAME_W, move, 0);
+		    XFlush (CDisplay);
+		    pause ();
+		}
+	    }
+	}
+#endif
 	if (!(force & REDRAW_IN_BOUNDS)) {	/* !REDRAW_IN_BOUNDS means to ignore bounds and redraw whole rows */
 	    start_row = 0;
 	    end_row = edit->num_widget_lines - 1;
@@ -569,7 +626,7 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 		    }
 		}
 	    }
-/*          if (force & REDRAW_LINE) {          ---> default */
+/*          if (force & REDRAW_LINE)          ---> default */
 	    b = edit_bol (edit, edit->curs1);
 	    if (curs_row >= start_row && curs_row <= end_row) {
 		if (key_pending (edit))
@@ -632,6 +689,9 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 #endif
 #endif
   exit_render:
+    edit->screen_modified = 0;
+    prev_start = edit->start_line;
+    CPopFont ();
     return;
 }
 
@@ -664,15 +724,17 @@ void edit_render_tidbits (CWidget * wdt)
 
     win = wdt->winid;
     isfocussed = (win == CGetFocus ());
-
     CSetColor (COLOR_FLAT);
-
+#ifdef NEXT_LOOK
+    render_bevel (win, 0, 0, w - 1, h - 1, 1, 1);	/*most outer border bevel */
+#else
     if (isfocussed) {
 	render_bevel (win, 0, 0, w - 1, h - 1, 3, 1);	/*most outer border bevel */
     } else {
 	render_bevel (win, 2, 2, w - 3, h - 3, 1, 1);	/*border bevel */
 	render_bevel (win, 0, 0, w - 1, h - 1, 2, 0);	/*most outer border bevel */
     }
+#endif
 }
 
 #endif
@@ -697,9 +759,9 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 	redraw_labels (edit->widget.parent, (Widget *) edit);
 #else
     if (option_long_whitespace)
-	edit_set_space_width (per_char[' '] * 2);
+	edit_set_space_width (FONT_PER_CHAR[' '] * 2);
     else
-	edit_set_space_width (per_char[' ']);
+	edit_set_space_width (FONT_PER_CHAR[' ']);
 #ifdef GTK
     win = (GtkEdit *) edit->widget;
 #endif
@@ -726,7 +788,6 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 	set_cursor_position (0, 0, 0, 0, 0, 0, 0, 0, 0);
 #endif
 #endif
-
     render_edit_text (edit, row_start, col_start, row_end, col_end);
     if (edit->force)		/* edit->force != 0 means a key was pending and the redraw 
 				   was halted, so next time we must redraw everything in case stuff
@@ -738,8 +799,10 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 #ifdef GTK
     /*  ***************** */
 #else
+#ifndef NEXT_LOOK
 	CSetColor (edit_normal_background_color);
 	CLine (CWindowOf (edit->widget), 3, 3, 3, CHeightOf (edit->widget) - 4);
+#endif	
 #endif
     }
 #endif
@@ -749,6 +812,7 @@ void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_
 void edit_render_expose (WEdit * edit, XExposeEvent * xexpose)
 {
     int row_start, col_start, row_end, col_end;
+    CPushFont ("editor", 0);
     EditExposeRedraw = 1;
     edit->num_widget_lines = (CHeightOf (edit->widget) - EDIT_FRAME_H) / FONT_PIX_PER_LINE;
     edit->num_widget_columns = (CWidthOf (edit->widget) - EDIT_FRAME_W) / FONT_MEAN_WIDTH;
@@ -759,12 +823,15 @@ void edit_render_expose (WEdit * edit, XExposeEvent * xexpose)
 	edit_convert_expose_to_area (xexpose, &row_start, &col_start, &row_end, &col_end);
 	edit_render (edit, 1, row_start, col_start, row_end, col_end);
     }
+    CPopFont ();
     EditExposeRedraw = 0;
 }
 
 void edit_render_keypress (WEdit * edit)
 {
+    CPushFont ("editor", 0);
     edit_render (edit, 0, 0, 0, 0, 0);
+    CPopFont ();
 }
 
 #else

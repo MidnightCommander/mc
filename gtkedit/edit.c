@@ -73,6 +73,8 @@
    Returns '\n' if out of bounds.
  */
 
+static int push_action_disabled = 0;
+
 #ifndef NO_INLINE_GETBYTE
 
 int edit_get_byte (WEdit * edit, long byte_index)
@@ -103,6 +105,25 @@ char *edit_get_buffer_as_text (WEdit * e)
     return t;
 }
 
+
+/* Note on CRLF->LF translation: */
+
+#if MY_O_TEXT
+#error MY_O_TEXT is depreciated. CR_LF_TRANSLATION must be defined which does CR-LF translation internally. See note in source.
+#endif
+
+/* 
+   The edit_open_file (previously edit_load_file) function uses
+   init_dynamic_edit_buffers to load a file. This is unnecessary
+   since you can just as well fopen the file and insert the
+   characters one by one. The real reason for
+   init_dynamic_edit_buffers (besides allocating the buffers) is
+   as an optimisation - it uses raw block reads and inserts large
+   chunks at a time. It is hence extremely fast at loading files.
+   Where we might not want to use it is if we were doing
+   CRLF->LF translation or if we were reading from a pipe.
+ */
+
 /* Initialisation routines */
 
 /* returns 1 on error */
@@ -110,14 +131,6 @@ char *edit_get_buffer_as_text (WEdit * e)
 /* cursor set to start of file */
 int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
 {
- 
-#if defined CR_LF_TRANSLATION
-    /* Variables needed for safe handling of Translation from Microsoft CR/LF EOL to
-       Unix Style LF EOL - Franco */
-    long bytes_wanted,bytes_read,bytes_missing;
-    char *p;
-#endif
- 
     long buf;
     int j, file = -1, buf2;
 
@@ -127,9 +140,9 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
     }
 
     if (filename)
-	if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT)) == -1) {
+	if ((file = open ((char *) filename, O_RDONLY)) == -1) {
 /* The file-name is printed after the ':' */
-	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Failed trying to open file for reading: "), filename, " ", 0)));
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
 	    return 1;
 	}
     edit->curs2 = edit->last_byte;
@@ -138,59 +151,18 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 
     edit->buffers2[buf2] = CMalloc (EDIT_BUF_SIZE);
 
-/*
-_read returns the number of bytes read, 
-which may be less than count if there are fewer than count bytes left in the file 
-or if the file was opened in text mode, 
-in which case each carriage return–linefeed (CR-LF) pair is replaced 
-with a single linefeed character. Only the single linefeed character is counted 
-in the return value. The replacement does not affect the file pointer.
-
-_eof returns 1 if the current position is end of file, or 0 if it is not. 
-A return value of -1 indicates an error; in this case, errno is set to EBADF, 
-which indicates an invalid file handle.
-*/
-    if (filename){
-
-#if defined CR_LF_TRANSLATION
-	bytes_wanted=edit->curs2 & M_EDIT_BUF_SIZE;
-	p = (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE);
-	bytes_read = read (file, p , edit->curs2 & M_EDIT_BUF_SIZE);
-	bytes_missing = bytes_wanted - bytes_read ;
-	while(bytes_missing ){
-		p += bytes_read;
-		bytes_read = read(file,p,bytes_missing);
-		if(bytes_read <= 0) break;
-		bytes_missing -= bytes_read ;
-	}
-#else
+    if (filename) {
 	read (file, (char *) edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), edit->curs2 & M_EDIT_BUF_SIZE);
-#endif
-    }
-    else {
+    } else {
 	memcpy (edit->buffers2[buf2] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE), text, edit->curs2 & M_EDIT_BUF_SIZE);
 	text += edit->curs2 & M_EDIT_BUF_SIZE;
     }
 
     for (buf = buf2 - 1; buf >= 0; buf--) {
 	edit->buffers2[buf] = CMalloc (EDIT_BUF_SIZE);
- 	if (filename){
-#if defined CR_LF_TRANSLATION
-		bytes_wanted = EDIT_BUF_SIZE;
-		p = (char *) edit->buffers2[buf];
-		bytes_read = read (file, p, EDIT_BUF_SIZE);
-		bytes_missing = bytes_wanted - bytes_read ;
-		while(bytes_missing ){
-			p += bytes_read;
-			bytes_read = read(file,p,bytes_missing);
-			if(bytes_read <= 0) break;
-			bytes_missing -= bytes_read ;
-		}
-#else
+	if (filename) {
 	    read (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
-#endif
- 	}
-	else {
+	} else {
 	    memcpy (edit->buffers2[buf], text, EDIT_BUF_SIZE);
 	    text += EDIT_BUF_SIZE;
 	}
@@ -199,81 +171,261 @@ which indicates an invalid file handle.
     edit->curs1 = 0;
     if (file != -1)
 	close (file);
+    return 0;
+}
 
+/* detecting an error on save is easy: just check if every byte has been written. */
+/* detecting an error on read, is not so easy 'cos there is not way to tell
+   whether you read everything or not. */
+/* FIXME: add proper `triple_pipe_open' to read, write and check errors. */
+static struct edit_filters {
+    char *read, *write, *extension;
+} all_filters[] = {
+
+    {
+	"bzip2 -cd %s 2>&1", "bzip2 > %s", ".bz2"
+    },
+    {
+	"gzip -cd %s 2>&1", "gzip > %s", ".gz"
+    },
+    {
+	"compress -cd %s 2>&1", "compress > %s", ".Z"
+    }
+};
+
+static int edit_find_filter (const char *filename)
+{
+    int i, l;
+    if (!filename)
+	return -1;
+    l = strlen (filename);
+    for (i = 0; i < sizeof (all_filters) / sizeof (struct edit_filters); i++) {
+	int e;
+	e = strlen (all_filters[i].extension);
+	if (l > e)
+	    if (!strcmp (all_filters[i].extension, filename + l - e))
+		return i;
+    }
+    return -1;
+}
+
+char *edit_get_filter (const char *filename)
+{
+    int i, l;
+    char *p;
+    i = edit_find_filter (filename);
+    if (i < 0)
+	return 0;
+    l = strlen (filename);
+    p = malloc (strlen (all_filters[i].read) + l + 2);
+    sprintf (p, all_filters[i].read, filename);
+    return p;
+}
+
+char *edit_get_write_filter (char *writename, char *filename)
+{
+    int i, l;
+    char *p;
+    i = edit_find_filter (filename);
+    if (i < 0)
+	return 0;
+    l = strlen (writename);
+    p = malloc (strlen (all_filters[i].write) + l + 2);
+    sprintf (p, all_filters[i].write, writename);
+    return p;
+}
+
+#ifdef CR_LF_TRANSLATION
+/* reads into buffer, replace \r\n with \n */
+long edit_insert_stream (WEdit * edit, FILE * f)
+{
+    int a = -1, b;
+    long i;
+    while ((b = fgetc (f))) {
+	if (a == '\r' && b == '\n') {
+	    edit_insert (edit, '\n');
+	    i++;
+	    a = -1;
+	    continue;
+	} else if (a >= 0) {
+	    edit_insert (edit, a);
+	    i++;
+	}
+	a = b;
+    }
+    if (a >= 0)
+	edit_insert (edit, a);
+    return i;
+}
+/* writes buffer, replaces, replace \n with \r\n */
+long edit_write_stream (WEdit * edit, FILE * f)
+{
+    long i;
+    int c;
+    for (i = 0; i < edit->last_byte; i++) {
+	c = edit_get_byte (edit, i);
+	if (c == '\n') {
+	    if (fputc ('\r', f) < 0)
+		break;
+	    if (fputc ('\n', f) < 0)
+		break;
+	} else {
+	    if (fputc (c, f) < 0)
+		break;
+	}
+    }
+    return i;
+}
+#else
+long edit_insert_stream (WEdit * edit, FILE * f)
+{
+    int c;
+    long i = 0;
+    while ((c = fgetc (f)) >= 0) {
+	edit_insert (edit, c);
+	i++;
+    }
+    return i;
+}
+long edit_write_stream (WEdit * edit, FILE * f)
+{
+    long i;
+    for (i = 0; i < edit->last_byte; i++)
+	if (fputc (edit_get_byte (edit, i), f) < 0)
+	    break;
+    return i;
+}
+#endif
+
+#define TEMP_BUF_LEN 1024
+
+/* inserts a file at the cursor, returns 1 on success */
+int edit_insert_file (WEdit * edit, const char *filename)
+{
+    char *p;
+    if ((p = edit_get_filter (filename))) {
+	FILE *f;
+	long current = edit->curs1;
+	f = (FILE *) popen (p, "r");
+	if (f) {
+	    edit_insert_stream (edit, f);
+	    edit_cursor_move (edit, current - edit->curs1);
+	    if (pclose (f) > 0) {
+		edit_error_dialog (_ (" Error "), catstrs (_ (" Error reading from pipe: "), p, " ", 0));
+		free (p);
+		return 0;
+	    }
+	} else {
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open pipe for reading: "), p, " ", 0)));
+	    free (p);
+	    return 0;
+	}
+	free (p);
+#ifdef CR_LF_TRANSLATION
+    } else {
+	FILE *f;
+	long current = edit->curs1;
+	f = fopen (filename, "r");
+	if (f) {
+	    edit_insert_stream (edit, f);
+	    edit_cursor_move (edit, current - edit->curs1);
+	    if (fclose (f)) {
+		edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Error reading file: "), filename, " ", 0)));
+		return 0;
+	    }
+	} else {
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
+	    return 0;
+	}
+#else
+    } else {
+	int i, file, blocklen;
+	long current = edit->curs1;
+	unsigned char *buf;
+	if ((file = open ((char *) filename, O_RDONLY)) == -1)
+	    return 0;
+	buf = malloc (TEMP_BUF_LEN);
+	while ((blocklen = read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
+	    for (i = 0; i < blocklen; i++)
+		edit_insert (edit, buf[i]);
+	}
+	edit_cursor_move (edit, current - edit->curs1);
+	free (buf);
+	close (file);
+	if (blocklen)
+	    return 0;
+#endif
+    }
+    return 1;
+}
+
+static int check_file_access (WEdit *edit, const char *filename, struct stat *st)
+{
+    int file;
+#if defined(MIDNIGHT) || defined(GTK)
+    if ((file = open ((char *) filename, O_RDONLY)) < 0) {
+	close (creat ((char *) filename, 0666));
+	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (" Fail trying to open the file, ", filename, ", for reading ", 0)));
+	    return 2;
+	}
+    }
+#else
+    if ((file = open ((char *) filename, O_RDONLY)) < 0) {
+	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
+	return 1;
+    }
+#endif
+    if (stat ((char *) filename, st) < 0) {
+	close (file);
+/* The file-name is printed after the ':' */
+	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
+	return 1;
+    }
+    if (S_ISDIR (st->st_mode) || S_ISSOCK (st->st_mode)
+	|| S_ISFIFO (st->st_mode)) {
+	close (file);
+/* The file-name is printed after the ':' */
+	edit_error_dialog (_ (" Error "), catstrs (_ (" Not an ordinary file: "), filename, " ", 0));
+	return 1;
+    }
+    if (st->st_size >= SIZE_LIMIT) {
+	close (file);
+/* The file-name is printed after the ':' */
+	edit_error_dialog (_ (" Error "), catstrs (_ (" File is too large: "), \
+						   filename, _ (" \n Increase edit.h:MAXBUF and recompile the editor. "), 0));
+	return 1;
+    }
+    close (file);
     return 0;
 }
 
 /* returns 1 on error */
-int edit_load_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
+int edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
 {
-    struct stat s;
-    int file;
-
-/* VARS for Lastbyte calculation in TEXT mode FRANCO */
-#if defined CR_LF_TRANSLATION
-    char tmp_buf[1024];
-    long real_size,bytes_read;
-#endif
-
+    struct stat st;
     if (text) {
 	edit->last_byte = text_size;
-	filename = NULL;
+	filename = 0;
     } else {
+	int r;
+	r = check_file_access (edit, filename, &st);
 #if defined(MIDNIGHT) || defined(GTK)
-	if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT )) < 0)
-	{
-		close(creat((char *) filename, 0666));
-		if ((file = open ((char *) filename, O_RDONLY | MY_O_TEXT )) < 0) {
-			edit_error_dialog (_(" Error "), get_sys_error (catstrs (" Fail trying to open the file, ", filename, ", for reading ", 0)));
-			return 1;
-		}
-		edit->delete_file = 1;
-	}
+	if (r == 2)
+	    return edit->delete_file = 1;
+#endif
+	if (r)
+	    return 1;
+	edit->stat = st;
+#ifndef CR_LF_TRANSLATION
+	edit->last_byte = st.st_size;
 #else
-	if ((file = open ((char *) filename, O_RDONLY)) < 0) {
-	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Failed trying to open file for reading: "), filename, " ", 0)));
-	    return 1;
-	}
+/* going to read the file into the buffer later byte by byte */
+	edit->last_byte = 0;
+	filename = 0;
+	text = "";
 #endif
-	if (stat ((char *) filename, &s) < 0) {
-	    close (file);
-/* The file-name is printed after the ':' */
-	    edit_error_dialog (_(" Error "), get_sys_error (catstrs (_(" Cannot get size/permissions info on file: "), filename, " ", 0)));
-	    return 1;
-	}
-	if (S_ISDIR (s.st_mode) || S_ISSOCK (s.st_mode)
-	    || S_ISFIFO (s.st_mode)) {
-	    close (file);
-/* The file-name is printed after the ':' */
-	    edit_error_dialog (_(" Error "), catstrs (_(" Not an ordinary file: "), filename, " ", 0));
-	    return 1;
-	}
-	if (s.st_size >= SIZE_LIMIT) {
-	    close (file);
-/* The file-name is printed after the ':' */
-	    edit_error_dialog (_(" Error "), catstrs (_(" File is too large: "), \
-		filename, _(" \n Increase edit.h:MAXBUF and recompile the editor. "), 0));
-	    return 1;
-	}
-
-/* Lastbyte calculation in TEXT mode FRANCO */
-#if defined CR_LF_TRANSLATION
-	if(file && (!text)){
-		real_size=0;
-		tmp_buf[sizeof (tmp_buf) - 1] = 0;
-		while((bytes_read = read(file,tmp_buf,1024)) > 0){
-			real_size += bytes_read;
-		}
-		s.st_size = real_size;
-	}
-
-#endif
-
-	close (file);
-	edit->last_byte = s.st_size;
-	edit->stat = s;
     }
-
     return init_dynamic_edit_buffers (edit, filename, text);
 }
 
@@ -282,7 +434,6 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 #else
 int space_width;
 extern int option_long_whitespace;
-extern unsigned char per_char[256];
 
 void edit_set_space_width (int s)
 {
@@ -291,25 +442,24 @@ void edit_set_space_width (int s)
 
 #endif
 
+int (*edit_file_is_open) (char *) = 0;
+
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
 WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
 {
     char *f;
     int to_free = 0;
+    int use_filter = 0;
 #ifndef MIDNIGHT
     if (option_long_whitespace)
-	edit_set_space_width (per_char[' '] * 2);
+	edit_set_space_width (FONT_PER_CHAR[' '] * 2);
     else
-	edit_set_space_width (per_char[' ']);
+	edit_set_space_width (FONT_PER_CHAR[' ']);
 #endif
     if (!edit) {
 	edit = malloc (sizeof (WEdit));
 	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
-    }
-    if (!edit) {
-	edit_error_dialog (_(" Error "), _(" Error allocating memory "));
-	return 0;
     }
     memset (&(edit->from_here), 0, (unsigned long) &(edit->to_here) - (unsigned long) &(edit->from_here));
 #ifndef MIDNIGHT
@@ -324,13 +474,32 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     if (!dir)
 	dir = "";
     f = (char *) filename;
-    if (filename)
+    if (filename) {
 	f = catstrs (dir, filename, 0);
-    if (edit_load_file (edit, f, text, text_size)) {
+	if (edit_file_is_open)
+	    if ((*edit_file_is_open) (f)) {
+		if (to_free)
+		    free (edit);
+		return 0;
+	    }
+    }
+    if (edit_find_filter (f) < 0) {
+#ifdef CR_LF_TRANSLATION
+	use_filter = 1;
+#endif
+	if (edit_open_file (edit, f, text, text_size)) {
 /* edit_load_file already gives an error message */
-	if (to_free)
-	    free (edit);
-	return 0;
+	    if (to_free)
+		free (edit);
+	    return 0;
+	}
+    } else {
+	use_filter = 1;
+	if (edit_open_file (edit, 0, "", 0)) {
+	    if (to_free)
+		free (edit);
+	    return 0;
+	}
     }
     edit->force |= REDRAW_PAGE;
     if (filename) {
@@ -338,18 +507,32 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	edit_split_filename (edit, (char *) filename);
     } else {
 	edit->filename = (char *) strdup ("");
-	edit->dir = (char *) strdup(dir);
+	edit->dir = (char *) strdup (dir);
     }
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
     edit->undo_stack = malloc ((edit->stack_size + 10) * sizeof (long));
-    if (!edit->undo_stack) {
-	edit_error_dialog (_(" Error "), _(" Error allocating memory "));
-	if (to_free)
-	    free (edit);
-	return 0;
-    }
     edit->total_lines = edit_count_lines (edit, 0, edit->last_byte);
+    if (use_filter) {
+	struct stat st;
+	push_action_disabled = 1;
+	if (check_file_access (edit, filename, &st)) {
+	    edit_clean (edit);
+	    if (to_free)
+		free (edit);
+	    return 0;
+	}
+	edit->stat = st;
+	if (!edit_insert_file (edit, f)) {
+	    edit_clean (edit);
+	    if (to_free)
+		free (edit);
+	    return 0;
+	}
+/* FIXME: this should be an unmodification() function */
+	push_action_disabled = 0;
+    }
+    edit->modified = 0;
     edit_load_syntax (edit, 0, 0);
     {
 	int fg, bg;
@@ -357,7 +540,6 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     }
     return edit;
 }
-
 
 /* clear the edit struct, freeing everything in it. returns 1 on success */
 int edit_clean (WEdit * edit)
@@ -408,12 +590,20 @@ int edit_renew (WEdit * edit)
 /* returns 1 on success, if returns 0, the edit struct would have been free'd */
 int edit_reload (WEdit * edit, const char *filename, const char *text, const char *dir, unsigned long text_size)
 {
+    WEdit *e;
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
-    edit_clean (edit);
-    if (!edit_init (edit, lines, columns, filename, text, dir, text_size)) {
+    e = malloc (sizeof (WEdit));
+    memset (e, 0, sizeof (WEdit));
+    e->widget = edit->widget;
+    e->macro_i = -1;
+    if (!edit_init (e, lines, columns, filename, text, dir, text_size)) {
+	free (e);
 	return 0;
     }
+    edit_clean (edit);
+    memcpy (edit, e, sizeof (WEdit));
+    free (e);
     return 1;
 }
 
@@ -457,8 +647,6 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, const cha
    tracks scrolling and key actions exactly. (KEY_PRESS is about (2^31) * (2/3) = 1400'000'000)
 
 */
-
-static int push_action_disabled = 0;
 
 void edit_push_action (WEdit * edit, long c,...)
 {
@@ -585,6 +773,7 @@ static inline void edit_modification (WEdit * edit)
 {
     edit->caches_valid = 0;
     edit->modified = 1;
+    edit->screen_modified = 1;
 }
 
 /*
@@ -1054,8 +1243,10 @@ void edit_scroll_upward (WEdit * edit, unsigned long i)
 	edit->start_display = edit_move_backward (edit, edit->start_display, i);
 	edit->force |= REDRAW_PAGE;
 	edit->force &= (0xfff - REDRAW_CHAR_ONLY);
+#ifndef MIDNIGHT
+#endif
     }
-    edit_update_curs_row(edit);
+    edit_update_curs_row (edit);
 }
 
 
@@ -1071,8 +1262,10 @@ void edit_scroll_downward (WEdit * edit, int i)
 	edit->start_display = edit_move_forward (edit, edit->start_display, i, 0);
 	edit->force |= REDRAW_PAGE;
 	edit->force &= (0xfff - REDRAW_CHAR_ONLY);
+#ifndef MIDNIGHT
+#endif
     }
-    edit_update_curs_row(edit);
+    edit_update_curs_row (edit);
 }
 
 void edit_scroll_right (WEdit * edit, int i)
@@ -1192,7 +1385,7 @@ long edit_find_line (WEdit * edit, int line)
     }
     if (m == 0)
 	return edit->line_offsets[j];	/* know the offset exactly */
-    if (m == 1)
+    if (m == 1 && j >= 3)
 	i = j;			/* one line different - caller might be looping, so stay in this cache */
     else
 	i = 3 + (rand () % (N_LINE_CACHES - 3));
@@ -1647,11 +1840,15 @@ void edit_delete_line (WEdit * edit)
 	edit_insert (edit, '\n');
 }
 
-static void insert_spaces_tab (WEdit * edit)
+static void insert_spaces_tab (WEdit * edit, int half)
 {
-    int i = option_tab_spacing;
-    while (i--)
+    int i;
+    edit_update_curs_col (edit);
+    i = ((edit->curs_col / (option_tab_spacing * space_width / (half + 1))) + 1) * (option_tab_spacing * space_width / (half + 1)) - edit->curs_col;
+    while (i > 0) {
 	edit_insert (edit, ' ');
+	i -= space_width;
+    }
 }
 
 static int is_aligned_on_a_tab (WEdit * edit)
@@ -1738,23 +1935,18 @@ static void edit_tab_cmd (WEdit * edit)
 	    /*insert a half tab (usually four spaces) unless there is a
 	       half tab already behind, then delete it and insert a 
 	       full tab. */
-	    if (right_of_four_spaces (edit)) {
+	    if (!option_fill_tabs_with_spaces && right_of_four_spaces (edit)) {
 		for (i = 1; i <= HALF_TAB_SIZE; i++)
 		    edit_backspace (edit);
-		if (option_fill_tabs_with_spaces) {
-		    insert_spaces_tab (edit);
-		} else {
-		    edit_insert (edit, '\t');
-		}
+		edit_insert (edit, '\t');
 	    } else {
-		for (i = 1; i <= HALF_TAB_SIZE; i++)
-		    edit_insert (edit, ' ');
+		insert_spaces_tab (edit, 1);
 	    }
 	    return;
 	}
     }
     if (option_fill_tabs_with_spaces) {
-	insert_spaces_tab (edit);
+	insert_spaces_tab (edit, 0);
     } else {
 	edit_insert (edit, '\t');
     }
@@ -1771,10 +1963,14 @@ static void check_and_wrap_line (WEdit * edit)
     edit_update_curs_col (edit);
 #ifdef MIDNIGHT
     if (edit->curs_col < option_word_wrap_line_length)
-#else
-    if (edit->curs_col < option_word_wrap_line_length * FONT_MEAN_WIDTH)
-#endif
 	return;
+#else
+    CPushFont ("editor", 0);
+    c = FONT_MEAN_WIDTH;
+    CPopFont ();
+    if (edit->curs_col < option_word_wrap_line_length * c)
+	return;
+#endif
     curs = edit->curs1;
     for (;;) {
 	curs--;
@@ -1823,43 +2019,75 @@ void edit_push_key_press (WEdit * edit)
 }
 
 /* this find the matching bracket in either direction, and sets edit->bracket */
-void edit_find_bracket (WEdit * edit)
+static long edit_get_bracket (WEdit * edit, int in_screen, unsigned long furthest_bracket_search)
+{
+    const char *b = "{}{[][()(", *p;
+    int i = 1, a, inc = -1, c, d, n = 0;
+    unsigned long j = 0;
+    long q;
+    edit_update_curs_row (edit);
+    c = edit_get_byte (edit, edit->curs1);
+    p = strchr (b, c);
+/* no limit */
+    if (!furthest_bracket_search)
+	furthest_bracket_search--;
+/* not on a bracket at all */
+    if (!p)
+	return -1;
+/* the matching bracket */
+    d = p[1];
+/* going left or right? */
+    if (strchr ("{[(", c))
+	inc = 1;
+    for (q = edit->curs1 + inc;; q += inc) {
+/* out of buffer? */
+	if (q >= edit->last_byte || q < 0)
+	    break;
+	a = edit_get_byte (edit, q);
+/* don't want to eat CPU */
+	if (j++ > furthest_bracket_search)
+	    break;
+/* out of screen? */
+	if (in_screen) {
+	    if (q < edit->start_display)
+		break;
+/* count lines if searching downward */
+	    if (inc > 0 && a == '\n')
+		if (n++ >= edit->num_widget_lines - edit->curs_row)	/* out of screen */
+		    break;
+	}
+/* count bracket depth */
+	i += (a == c) - (a == d);
+/* return if bracket depth is zero */
+	if (!i)
+	    return q;
+    }
+/* no match */
+    return -1;
+}
+
+static long last_bracket = -1;
+
+static void edit_find_bracket (WEdit * edit)
 {
     if (option_find_bracket) {
-	const char *b = "{}{[][()(", *p;
-	static int last_bracket = -1;
-	int i = 1, a, inc = -1, c, d, n = 0, j = 0;
-	long q;
-
-	edit->bracket = -1;
-	c = edit_get_byte (edit, edit->curs1);
-	p = strchr (b, c);
-	edit_update_curs_row (edit);
-	if (p) {
-	    d = p[1];
-	    if (strchr ("{[(", c))
-		inc = 1;
-	    for (q = edit->curs1 + inc;; q += inc) {
-		if (q >= edit->last_byte || q < edit->start_display || j++ > 10000)
-		    break;
-		a = edit_get_byte (edit, q);
-		if (inc > 0 && a == '\n')
-		    n++;
-		if (n >= edit->num_widget_lines - edit->curs_row)	/* out of screen */
-		    break;
-		i += (a == c) - (a == d);
-		if (!i) {
-		    edit->bracket = q;
-		    break;
-		}
-	    }
-	}
+	edit->bracket = edit_get_bracket (edit, 1, 10000);
 	if (last_bracket != edit->bracket)
 	    edit->force |= REDRAW_PAGE;
 	last_bracket = edit->bracket;
     }
 }
 
+static void edit_goto_matching_bracket (WEdit *edit)
+{
+    long q;
+    q = edit_get_bracket (edit, 0, 0);
+    if (q < 0)
+	return;
+    edit->bracket = edit->curs1;
+    edit->force |= REDRAW_PAGE;
+    edit_cursor_move (edit, q - edit->curs1);
+}
 
 /* this executes a command as though the user initiated it through a key press. */
 /* callback with WIDGET_KEY as a message calls this after translating the key
@@ -2179,6 +2407,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
 
     case CK_Toggle_Bookmark:
+	book_mark_clear (edit, edit->curs_line, BOOK_MARK_FOUND_COLOR);
 	if (book_mark_query_color (edit, edit->curs_line, BOOK_MARK_COLOR))
 	    book_mark_clear (edit, edit->curs_line, BOOK_MARK_COLOR);
 	else
@@ -2186,6 +2415,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
     case CK_Flush_Bookmarks:
 	book_mark_flush (edit, BOOK_MARK_COLOR);
+	book_mark_flush (edit, BOOK_MARK_FOUND_COLOR);
 	edit->force |= REDRAW_PAGE;
 	break;
     case CK_Next_Bookmark:
@@ -2305,12 +2535,17 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
 
     case CK_Date:{
-	    char s[1024];
-
 	    time_t t;
+#ifdef HAVE_STRFTIME
+	    char s[1024];
+#endif
 	    time (&t);
+#ifdef HAVE_STRFTIME
 	    strftime (s, 1024, "%c", localtime (&t));
 	    edit_printf (edit, s);
+#else
+	    edit_printf (edit, ctime (&t));
+#endif
 	    edit->force |= REDRAW_PAGE;
 	    break;
 	}
@@ -2323,6 +2558,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
     case CK_Delete_Macro:
 	edit_delete_macro_cmd (edit);
+	break;
+    case CK_Match_Bracket:
+	edit_goto_matching_bracket (edit);
 	break;
 #ifdef MIDNIGHT
     case CK_Sort:
@@ -2339,6 +2577,8 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Mail:
     case CK_Find_File:
     case CK_Ctags:
+    case CK_Terminal:
+    case CK_Terminal_App:
 #endif
     case CK_Complete:
     case CK_Cancel:

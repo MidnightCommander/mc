@@ -18,7 +18,7 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
    02111-1307, USA.
-*/
+ */
 
 #include <config.h>
 #include "edit.h"
@@ -95,7 +95,7 @@ static void xy (int x, int y, int *x_return, int *y_return)
     edit_translate_xy (x, y, x_return, y_return);
 }
 
-static long cp (WEdit *edit, int x, int y)
+static long cp (WEdit * edit, int x, int y)
 {
     return edit_get_click_pos (edit, x, y);
 }
@@ -122,13 +122,13 @@ static int erange (WEdit * edit, long start, long end, int click)
     return (start <= click && click < end);
 }
 
-static void fin_mark (WEdit *edit)
+static void fin_mark (WEdit * edit)
 {
     if (edit->mark2 < 0)
 	edit_mark_cmd (edit, 0);
 }
 
-static void move_mark (WEdit *edit)
+static void move_mark (WEdit * edit)
 {
     edit_mark_cmd (edit, 1);
     edit_mark_cmd (edit, 0);
@@ -162,12 +162,12 @@ static char *get_block (WEdit * edit, long start_mark, long end_mark, int *type,
     return t;
 }
 
-static void move (WEdit *edit, long click, int y)
+static void move (WEdit * edit, long click, int y)
 {
     edit_cursor_move (edit, click - edit->curs1);
 }
 
-static void dclick (WEdit *edit, XEvent *event)
+static void dclick (WEdit * edit, XEvent * event)
 {
     edit_mark_cmd (edit, 1);
     edit_right_word_move (edit, 1);
@@ -176,7 +176,7 @@ static void dclick (WEdit *edit, XEvent *event)
     release_mark (edit, event);
 }
 
-static void redraw (WEdit *edit, long click)
+static void redraw (WEdit * edit, long click)
 {
     mouse_redraw (edit, click);
 }
@@ -246,7 +246,7 @@ static int insert_drop (WEdit * e, Window from, unsigned char *data, int size, i
 }
 
 static char *mime_majors[2] =
-    {"text", 0};
+{"text", 0};
 
 struct mouse_funcs edit_mouse_funcs =
 {
@@ -269,25 +269,31 @@ struct mouse_funcs edit_mouse_funcs =
     mime_majors
 };
 
-static void render_book_marks (CWidget *w);
+static void render_book_marks (CWidget * w);
 extern int option_editor_bg_normal;
 void edit_tri_cursor (Window win);
 
 /* starting_directory is for the filebrowser */
 CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	   int width, int height, const char *text, const char *filename,
-		const char *starting_directory, unsigned int options, unsigned long text_size)
+		      const char *starting_directory, unsigned int options, unsigned long text_size)
 {
     static int made_directory = 0;
     int extra_space_for_hscroll = 0;
     CWidget *w;
     WEdit *e;
 
+    CPushFont ("editor", 0);
+#ifdef NEXT_LOOK
+    x += NEXT_SPACING;
+    if (options & EDITOR_HORIZ_SCROLL)
+	extra_space_for_hscroll = 21;
+#else
     if (options & EDITOR_HORIZ_SCROLL)
 	extra_space_for_hscroll = 8;
-
+#endif
     wedit = w = CSetupWidget (identifier, parent, x, y,
-			      width + EDIT_FRAME_W, height + EDIT_FRAME_H, C_EDITOR_WIDGET,
+	    width + EDIT_FRAME_W, height + EDIT_FRAME_H, C_EDITOR_WIDGET,
 		   ExposureMask | ButtonPressMask | ButtonReleaseMask | \
 		     KeyPressMask | KeyReleaseMask | ButtonMotionMask | \
 			      PropertyChangeMask | StructureNotifyMask | \
@@ -315,6 +321,7 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     if (!w->editor) {
 /* Not essential to translate */
 	CError (_ ("Error initialising editor.\n"));
+	CPopFont ();
 	return 0;
     }
     w->editor->widget = w;
@@ -323,25 +330,47 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     if (!w->editor) {
 	free (e);
 	CDestroyWidget (w->ident);
+	CPopFont ();
 	return 0;
     }
     e->macro_i = -1;
     e->widget = w;
 
-    set_hint_pos (x + width + EDIT_FRAME_W + WIDGET_SPACING, y + height + EDIT_FRAME_H + WIDGET_SPACING + extra_space_for_hscroll);
-    if (extra_space_for_hscroll) {
-	w->hori_scrollbar = CDrawHorizontalScrollbar (catstrs (identifier, ".hsc", 0), parent,
-		x, y + height + EDIT_FRAME_H, width + EDIT_FRAME_W, 12, 0, 0);
-	CSetScrollbarCallback (w->hori_scrollbar->ident, w->ident, link_hscrollbar_to_editor);
-    }
-    if (!(options & EDITOR_NO_TEXT))
-	CDrawStatus (catstrs (identifier, ".text", 0), parent, x, y + height + 3 + EDIT_FRAME_H + WIDGET_SPACING + extra_space_for_hscroll, width + EDIT_FRAME_W, e->filename);
     if (!(options & EDITOR_NO_SCROLL)) {
 	w->vert_scrollbar = CDrawVerticalScrollbar (catstrs (identifier, ".vsc", 0), parent,
-		x + width + EDIT_FRAME_W + WIDGET_SPACING, y, height + EDIT_FRAME_H, 20, 0, 0);
+						    x + width + EDIT_FRAME_W + WIDGET_SPACING, y, height + EDIT_FRAME_H,
+#ifdef NEXT_LOOK
+						    AUTO_WIDTH,
+#else
+						    20,
+#endif
+						    0, 0);
 	CSetScrollbarCallback (w->vert_scrollbar->ident, w->ident, link_scrollbar_to_editor);
 	w->vert_scrollbar->scroll_bar_extra_render = render_book_marks;
     }
+    set_hint_pos (x + width + EDIT_FRAME_W + WIDGET_SPACING, y + height + EDIT_FRAME_H + WIDGET_SPACING + extra_space_for_hscroll);
+    if (extra_space_for_hscroll) {
+	w->hori_scrollbar = CDrawHorizontalScrollbar (catstrs (identifier, ".hsc", 0), parent,
+		      x, y + height + EDIT_FRAME_H, width + EDIT_FRAME_W,
+#ifdef NEXT_LOOK
+						      AUTO_HEIGHT,
+#else
+						      12,
+#endif
+						      0, 0);
+	CSetScrollbarCallback (w->hori_scrollbar->ident, w->ident, link_hscrollbar_to_editor);
+    }
+    CGetHintPos (0, &y);
+    if (!(options & EDITOR_NO_TEXT)) {
+	CPushFont ("widget", 0);
+#ifdef NEXT_LOOK
+	CDrawStatus (catstrs (identifier, ".text", 0), parent, x, y + WIDGET_SPACING + NEXT_SPACING, width + EDIT_FRAME_W, e->filename);
+#else
+	CDrawStatus (catstrs (identifier, ".text", 0), parent, x, y, width + EDIT_FRAME_W, e->filename);
+#endif
+	CPopFont ();
+    }
+    CPopFont ();
     return w;
 }
 
@@ -362,7 +391,7 @@ static void render_book_marks (CWidget * w)
     for (p = edit->book_mark; p->next; p = p->next);
     for (; p->prev; p = p->prev) {
 	int y = (CWidthOf (w) + 2 * CWidthOf (w) / 3 + 4) + (int) ((double) l * p->line / edit->total_lines);
-	CSetColor (color_palette (p->c & 0xFF));
+	CSetColor (color_palette (((p->c & 0xFF00) >> 8) ? ((p->c & 0xFF00) >> 8) : (p->c & 0xFF)));
 	CLine (CWindowOf (w), 5, y, CWidthOf (w) - 6, y);
     }
 }
@@ -371,6 +400,7 @@ void update_scroll_bars (WEdit * e)
 {
     int i, x1, x2;
     CWidget *scroll;
+    CPushFont ("editor", 0);
     scroll = e->widget->vert_scrollbar;
     if (scroll) {
 	i = e->total_lines - e->start_line + 1;
@@ -406,10 +436,12 @@ void update_scroll_bars (WEdit * e)
 	    EditExposeRedraw = 0;
 	}
     }
+    CPopFont ();
 }
 
 void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click)
 {
+    CPushFont ("editor", 0);
     edit_update_curs_row (edit);
     edit_update_curs_col (edit);
     if (event->type != MotionNotify) {
@@ -422,10 +454,11 @@ void edit_mouse_mark (WEdit * edit, XEvent * event, int double_click)
 	edit->found_len = 0;
     }
     mouse_mark (
-	event,
-	double_click,
-	edit->widget->funcs
-    );
+		   event,
+		   double_click,
+		   edit->widget->funcs
+	);
+    CPopFont ();
 }
 
 void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
@@ -437,6 +470,7 @@ void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * x
 	return;
     if (!e->widget->vert_scrollbar)
 	return;
+    CPushFont ("editor", 0);
     start_line = e->start_line;
     if ((xevent->type == ButtonRelease || xevent->type == MotionNotify) && whichscrbutton == 3) {
 	edit_move_display (e, (double) scrollbar->firstline * e->total_lines / 65535.0 + 1);
@@ -470,13 +504,16 @@ void link_scrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * x
     if (start_line != e->start_line) {
 	e->force |= REDRAW_PAGE | REDRAW_LINE;
 	set_cursor_position (0, 0, 0, 0, 0, 0, 0, 0, 0);
-	if (CCheckWindowEvent (xevent->xany.window, ButtonReleaseMask | ButtonMotionMask, 0))
+	if (CCheckWindowEvent (xevent->xany.window, ButtonReleaseMask | ButtonMotionMask, 0)) {
+	    CPopFont ();
 	    return;
+	}
     }
     if (e->force) {
 	edit_render_keypress (e);
 	edit_status (e);
     }
+    CPopFont ();
 }
 
 void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * xevent, CEvent * cwevent, int whichscrbutton)
@@ -488,6 +525,7 @@ void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * 
 	return;
     if (!e->widget->hori_scrollbar)
 	return;
+    CPushFont ("editor", 0);
     start_col = (-e->start_col);
     if ((xevent->type == ButtonRelease || xevent->type == MotionNotify) && whichscrbutton == 3) {
 	e->start_col = (double) scrollbar->firstline * e->max_column / 65535.0 + 1;
@@ -519,13 +557,16 @@ void link_hscrollbar_to_editor (CWidget * scrollbar, CWidget * editor, XEvent * 
     if (start_col != (-e->start_col)) {
 	e->force |= REDRAW_PAGE | REDRAW_LINE;
 	set_cursor_position (0, 0, 0, 0, 0, 0, 0, 0, 0);
-	if (CCheckWindowEvent (xevent->xany.window, ButtonReleaseMask | ButtonMotionMask, 0))
+	if (CCheckWindowEvent (xevent->xany.window, ButtonReleaseMask | ButtonMotionMask, 0)) {
+	    CPopFont ();
 	    return;
+	}
     }
     if (e->force) {
 	edit_render_keypress (e);
 	edit_status (e);
     }
+    CPopFont ();
 }
 
 /* 
@@ -559,7 +600,7 @@ void selection_send (XSelectionRequestEvent * rq)
 	 * XXX: yes, but Xlib requires that you pass it 64 bits for 32bit
 	 * quantities on 64 bit archs.
 	 */
-	    /* typedef CARD32 Atom32; */
+	/* typedef CARD32 Atom32; */
 
 	Atom target_list[2];
 
@@ -641,6 +682,7 @@ void edit_update_screen (WEdit * e)
     if (!e->force)
 	return;
 
+    CPushFont ("editor", 0);
     edit_scroll_screen_over_cursor (e);
     edit_update_curs_row (e);
     edit_update_curs_col (e);
@@ -656,10 +698,12 @@ void edit_update_screen (WEdit * e)
     } else if (CCheckWindowEvent (e->widget->winid, ButtonPressMask | ButtonReleaseMask | ButtonMotionMask, 0)
 	       || CKeyPending ()) {
 	e->force |= REDRAW_PAGE;
+	CPopFont ();
 	return;
     } else {
 	edit_render_keypress (e);
     }
+    CPopFont ();
 }
 
 extern int space_width;
@@ -959,11 +1003,10 @@ int edit (const char *_file, int line)
     char *text = 0;
 
     if (option_backup_ext_int != -1) {
-	option_backup_ext = malloc (sizeof(int) + 1);
-	option_backup_ext[sizeof(int)] = '\0';
+	option_backup_ext = malloc (sizeof (int) + 1);
+	option_backup_ext[sizeof (int)] = '\0';
 	memcpy (option_backup_ext, (char *) &option_backup_ext_int, sizeof (int));
     }
-
     if (!made_directory) {
 	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
 	made_directory = 1;
@@ -977,7 +1020,7 @@ int edit (const char *_file, int line)
 	text = "";
 
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, "", 0))) {
-	message (1, _(" Error "), get_error_msg (""));
+	message (1, _ (" Error "), get_error_msg (""));
 	return 0;
     }
     wedit->macro_i = -1;
@@ -1090,17 +1133,17 @@ void edit_labels (WEdit * edit)
 {
     Dlg_head *h = edit->widget.parent;
 
-    edit_my_define (h, 1, _("Help"), cmd_F1, edit);
-    edit_my_define (h, 2, _("Save"), cmd_F2, edit);
-    edit_my_define (h, 3, _("Mark"), cmd_F3, edit);
-    edit_my_define (h, 4, _("Replac"), cmd_F4, edit);
-    edit_my_define (h, 5, _("Copy"), cmd_F5, edit);
-    edit_my_define (h, 6, _("Move"), cmd_F6, edit);
-    edit_my_define (h, 7, _("Search"), cmd_F7, edit);
-    edit_my_define (h, 8, _("Delete"), cmd_F8, edit);
+    edit_my_define (h, 1, _ ("Help"), cmd_F1, edit);
+    edit_my_define (h, 2, _ ("Save"), cmd_F2, edit);
+    edit_my_define (h, 3, _ ("Mark"), cmd_F3, edit);
+    edit_my_define (h, 4, _ ("Replac"), cmd_F4, edit);
+    edit_my_define (h, 5, _ ("Copy"), cmd_F5, edit);
+    edit_my_define (h, 6, _ ("Move"), cmd_F6, edit);
+    edit_my_define (h, 7, _ ("Search"), cmd_F7, edit);
+    edit_my_define (h, 8, _ ("Delete"), cmd_F8, edit);
     if (!edit->have_frame)
-	edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
-    edit_my_define (h, 10, _("Quit"), cmd_F10, edit);
+	edit_my_define (h, 9, _ ("PullDn"), edit_menu_cmd, edit);
+    edit_my_define (h, 10, _ ("Quit"), cmd_F10, edit);
 
     redraw_labels (h, (Widget *) edit);
 }
@@ -1123,7 +1166,7 @@ void edit_adjust_size (Dlg_head * h)
     widget_set_size (&edit_menubar->widget, 0, 0, 1, COLS);
 
 #ifdef RESIZABLE_MENUBAR
-	menubar_arrange(edit_menubar);
+    menubar_arrange (edit_menubar);
 #endif
 }
 

@@ -48,6 +48,7 @@ int replace_prompt = 1;
 int replace_whole = 0;
 int replace_case = 0;
 int replace_backwards = 0;
+int search_create_bookmark = 0;
 
 /* queries on a save */
 #ifdef MIDNIGHT
@@ -243,79 +244,122 @@ int my_open (const char *pathname, int flags,...)
 /* returns 0 on error */
 int edit_save_file (WEdit * edit, const char *filename)
 {
-    long buf;
+    char *p;
     long filelen = 0;
-    int file;
-    char *savename = (char *) filename;
-    int this_save_mode;
+    FILE *file;
+    char *savename = 0;
+    int this_save_mode, fd;
 
-    if ((file = open (savename, O_WRONLY)) == -1) {
-	this_save_mode = 0;		/* the file does not exists yet, so no safe save or backup necessary */
+    if (!filename)
+	return 0;
+    if (!*filename)
+	return 0;
+
+    savename = (char *) strdup ((char *) filename);
+
+    if ((fd = open (savename, O_WRONLY)) == -1) {
+	this_save_mode = 0;	/* the file does not exists yet, so no safe save or backup necessary */
     } else {
-	close (file);
+	close (fd);
 	this_save_mode = option_save_mode;
     }
 
     if (this_save_mode > 0) {
-	char *savedir = ".", *slashpos = strrchr (filename, '/');
-	if (slashpos != 0) {
+	char *savedir, *slashpos;
+	savedir = (char *) strdup (".");
+	slashpos = strrchr (filename, '/');
+	if (slashpos) {
+	    free (savedir);
 	    savedir = (char *) strdup (filename);
-	    if (savedir == 0)
-		return 0;
 	    savedir[slashpos - filename + 1] = '\0';
 	}
+	if (savename)
+	    free (savename);
 	savename = (char *) tempnam (savedir, "cooledit");
-	if (slashpos)
-	    free (savedir);
+	free (savedir);
 	if (!savename)
-	    return 0;
+	    goto error_save;
     }
-    if ((file = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT, edit->stat.st_mode)) == -1) {
-	if (this_save_mode > 0)
-	    free (savename);
-	return 0;
-    }
+    if ((file = fopen (savename, "w+")) == 0)
+	goto error_save;
+    chmod (savename, edit->stat.st_mode);
     chown (savename, edit->stat.st_uid, edit->stat.st_gid);
-    buf = 0;
-    while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
-	filelen += write (file, (char *) edit->buffers1[buf], EDIT_BUF_SIZE);
-	buf++;
-    }
-    filelen += write (file, (char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE);
 
-    if (edit->curs2) {
-	edit->curs2--;
-	buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
-	filelen += write (file, (char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE));
-	buf--;
-	while (buf >= 0) {
-	    filelen += write (file, (char *) edit->buffers2[buf], EDIT_BUF_SIZE);
-	    buf--;
-	}
-	edit->curs2++;
-    }
-    close (file);
-
-    if (filelen == edit->last_byte) {
-	if (this_save_mode == 2) {
-	    if (rename (filename, catstrs (filename, option_backup_ext, 0)) == -1) {	/* catstrs free's automatically */
-		free (savename);
-		return 0;
+/* pipe save */
+    if ((p = (char *) edit_get_write_filter (savename, filename))) {
+	fclose (file);
+	file = (FILE *) popen (p, "w");
+	if (file) {
+	    filelen = edit_write_stream (edit, file);
+#if 1
+	    pclose (file);
+#else
+	    if (pclose (file) > 0) {
+		edit_error_dialog (_ (" Error "), catstrs (_ (" Error writing to pipe: "), p, " ", 0));
+		free (p);
+		goto error_save;
 	    }
+#endif
+	} else {
+	    edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open pipe for writing: "), p, " ", 0)));
+	    free (p);
+	    goto error_save;
 	}
-	if (this_save_mode > 0) {
-	    if (rename (savename, filename) == -1) {
-		free (savename);
-		return 0;
-	    }
-	    free (savename);
-	}
-	return 1;
+	free (p);
+#ifdef CR_LF_TRANSLATION
+    } else {			/* optimised save */
+	filelen = edit_write_stream (edit, f);
+	fclose (file);
+#else
     } else {
-	if (this_save_mode > 0)
-	    free (savename);
-	return 0;
+	long buf;
+	buf = 0;
+	filelen = edit->last_byte;
+	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
+	    if (fwrite ((char *) edit->buffers1[buf], EDIT_BUF_SIZE, 1, file) != 1) {
+		filelen = -1;
+		break;
+	    }
+	    buf++;
+	}
+	if (fwrite ((char *) edit->buffers1[buf], edit->curs1 & M_EDIT_BUF_SIZE, 1, file) == -1) {
+	    filelen = -1;
+	} else if (edit->curs2) {
+	    edit->curs2--;
+	    buf = (edit->curs2 >> S_EDIT_BUF_SIZE);
+	    if (fwrite ((char *) edit->buffers2[buf] + EDIT_BUF_SIZE - (edit->curs2 & M_EDIT_BUF_SIZE) - 1, 1 + (edit->curs2 & M_EDIT_BUF_SIZE), 1, file) != 1) {
+		filelen = -1;
+	    } else {
+		buf--;
+		while (buf >= 0) {
+		    if (fwrite ((char *) edit->buffers2[buf], EDIT_BUF_SIZE, 1, file) != 1) {
+			filelen = -1;
+			break;
+		    }
+		    buf--;
+		}
+	    }
+	    edit->curs2++;
+	}
+	fclose (file);
+#endif
     }
+
+    if (filelen != edit->last_byte)
+	goto error_save;
+    if (this_save_mode == 2)
+	if (rename (filename, catstrs (filename, option_backup_ext, 0)) == -1)
+	    goto error_save;
+    if (this_save_mode > 0)
+	if (rename (savename, filename) == -1)
+	    goto error_save;
+    if (savename)
+	free (savename);
+    return 1;
+  error_save:
+    if (savename)
+	free (savename);
+    return 0;
 }
 
 #ifdef MIDNIGHT
@@ -326,6 +370,7 @@ int edit_save_file (WEdit * edit, const char *filename)
  */
 void menu_save_mode_cmd (void)
 {
+#define DLG_X 38
 #define DLG_Y 10
     static char *str_result;
     static int save_mode_new;
@@ -336,52 +381,29 @@ void menu_save_mode_cmd (void)
 	N_("Do backups -->")};
     static QuickWidget widgets[] =
     {
-	{quick_button, 18, 0, 7, DLG_Y, N_("&Cancel"), 0,
+	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "c"},
-	{quick_button, 6, 0, 7, DLG_Y, N_("&Ok"), 0,
+	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
 	 B_ENTER, 0, 0, XV_WLAY_DONTCARE, "o"},
-	{quick_input, 23, 0, 5, DLG_Y, 0, 9,
+	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
 	 0, 0, &str_result, XV_WLAY_DONTCARE, "i"},
-	{quick_label, 23, 0, 4, DLG_Y, N_("Extension:"), 0,
+	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, XV_WLAY_DONTCARE, "savemext"},
-	{quick_radio, 4, 0, 3, DLG_Y, "", 3,
+	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
 	 0, &save_mode_new, str, XV_WLAY_DONTCARE, "t"},
 	{0}};
     static QuickDialog dialog =
 /* NLS ? */
-    {0, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
+    {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      "esm", widgets};
     static int i18n_flag = 0;
 
     if (!i18n_flag) {
         int i;
-	int maxlen = 0;
-	int dlg_x;
-	int l1;
-
-	/* Ok/Cancel buttons */
-	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
-	maxlen = max (maxlen, l1);
         
-        for (i = 0; i < 3; i++ ) {
+        for (i = 0; i < 3; i++ )
             str[i] = _(str[i]);
-	    maxlen = max (maxlen, strlen (str[i]) + 7);
-	}
         i18n_flag = 1;
-
-        dlg_x = maxlen + strlen (_(widgets[3].text)) + 5 + 1;
-        widgets[2].hotkey_pos = strlen (_(widgets[3].text)); /* input field length */
-        dlg_x = min (COLS, dlg_x);
-	dialog.xlen = dlg_x;
-
-        i = (dlg_x - l1)/3;
-	widgets[1].relative_x = i;
-	widgets[0].relative_x = i + strlen (_(widgets[1].text)) + i + 4;
-
-	widgets[2].relative_x = widgets[3].relative_x = maxlen + 2;
-
-	for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
-		widgets[i].x_divisions = dlg_x;
     }
 
     widgets[2].text = option_backup_ext;
@@ -473,7 +495,11 @@ static char *canonicalize_pathname (char *p)
 void edit_split_filename (WEdit * edit, char *longname)
 {
     char *exp, *p;
-    exp = canonicalize_pathname (longname);	/* this ensures a full path */
+#if defined(MIDNIGHT) || defined(GTK)
+    exp = canonicalize_pathname (longname);
+#else
+    exp = pathdup (longname);	/* this ensures a full path */
+#endif
     if (edit->filename)
 	free (edit->filename);
     if (edit->dir)
@@ -844,21 +870,13 @@ int edit_new_cmd (WEdit * edit)
 }
 
 /* returns 1 on error */
-int edit_load_file_from_filename (WEdit *edit, char *exp)
+int edit_load_file_from_filename (WEdit * edit, char *exp)
 {
-    int file;
-    if ((file = open ((char *) exp, O_RDONLY, MY_O_TEXT)) != -1) {
-	close (file);
-	if (!edit_reload (edit, exp, 0, "", 0))
-	    return 1;
-	edit_split_filename (edit, exp);
-	edit->modified = 0;
-	return 0;
-    } else {
-/* Heads the 'Load' file dialog box */
-	edit_error_dialog (_ (" Load "), get_sys_error (_ (" Error trying to open file for reading ")));
-    }
-    return 1;
+    if (!edit_reload (edit, exp, 0, "", 0))
+	return 1;
+    edit_split_filename (edit, exp);
+    edit->modified = 0;
+    return 0;
 }
 
 int edit_load_cmd (WEdit * edit)
@@ -1164,39 +1182,36 @@ int edit_block_delete_cmd (WEdit * edit)
 
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
-    if (replace_prompt) {
-	QuickWidget quick_widgets[] =
-	{
+    QuickWidget quick_widgets[] =
+    {
 /* NLS  for hotkeys? */
-           {quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Cancel"),
-            0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
-           {quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("o&Ne"),
-            0, B_REPLACE_ONE, 0, 0, XV_WLAY_DONTCARE, NULL},
-           {quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("al&L"),
-            0, B_REPLACE_ALL, 0, 0, XV_WLAY_DONTCARE, NULL},
-           {quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Skip"),
-            0, B_SKIP_REPLACE, 0, 0, XV_WLAY_DONTCARE, NULL},
-           {quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Replace"),
-            0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
-           {quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
-	     0, 0, 0, XV_WLAY_DONTCARE, 0},
-	    {0}};
+	{quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Cancel"),
+	 0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
+	{quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("o&Ne"),
+	 0, B_REPLACE_ONE, 0, 0, XV_WLAY_DONTCARE, NULL},
+	{quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("al&L"),
+	 0, B_REPLACE_ALL, 0, 0, XV_WLAY_DONTCARE, NULL},
+	{quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Skip"),
+	 0, B_SKIP_REPLACE, 0, 0, XV_WLAY_DONTCARE, NULL},
+	{quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_ ("&Replace"),
+	 0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
+	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
+	 0, 0, 0, XV_WLAY_DONTCARE, 0},
+	{0}};
 
-	quick_widgets[5].text = catstrs (_(" Replace with: "), replace_text, 0);
+    quick_widgets[4].text = catstrs (_ (" Replace with: "), replace_text, 0);
 
-	{
-	    QuickDialog Quick_input =
-           {CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_(" Confirm replace "),
-	     "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
+    {
+	QuickDialog Quick_input =
+	{CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_ (" Confirm replace "),
+	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
-	    Quick_input.widgets = quick_widgets;
+	Quick_input.widgets = quick_widgets;
 
-	    Quick_input.xpos = xpos;
-	    Quick_input.ypos = ypos;
-	    return quick_dialog (&Quick_input);
-	}
-    } else
-	return 0;
+	Quick_input.xpos = xpos;
+	Quick_input.ypos = ypos;
+	return quick_dialog (&Quick_input);
+    }
 }
 
 void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
@@ -1369,12 +1384,16 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     CState s;
     int xh, yh, h, xb, ys, yc, yb, yr;
     CWidget *m;
+    int text_input_width ;
 
     CBackupState (&s);
     CDisable ("*");
 
     win = CDrawHeadedDialog ("replace", parent, x, y, heading);
     CGetHintPos (&xh, &h);
+#ifdef NEXT_LOOK    
+    xh += NEXT_SPACING ;
+#endif    
 
 /* NLS hotkey ? */
     CIdent ("replace")->position = WINDOW_ALWAYS_RAISED;
@@ -1413,21 +1432,31 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     yb = yh;
     CGetHintPos (0, &yh);
     CGetHintPos (&xb, 0);
-
+#ifdef NEXT_LOOK    
+    xb += NEXT_SPACING ;
+#endif    
     if (option & SEARCH_DIALOG_OPTION_BACKWARDS) {
 	CDrawSwitch ("replace.bkwd", win, xh, yh, replace_backwards, _(" Backwards "), 0);
 /* Tool hint */
 	CSetToolHint ("replace.bkwd", _("Warning: Searching backward can be slow"));
 	CSetToolHint ("replace.bkwd.label", _("Warning: Searching backward can be slow"));
-	yb = yh;
     }
     if (replace_text) {
+	yr = ys;
 	if (option & SEARCH_DIALOG_OPTION_BACKWARDS)
 	    yr = yc;
-	else
-	    yr = ys;
     } else {
-	yr = yb;
+	if (option & SEARCH_DIALOG_OPTION_BACKWARDS) {
+	    if (option & SEARCH_DIALOG_OPTION_BOOKMARK)
+		yr = yb;
+	    else
+		yr = yh;
+	} else {
+	    if (option & SEARCH_DIALOG_OPTION_BOOKMARK)
+		yr = yc;
+	    else
+		yr = yb;
+	}
     }
 
     if (replace_text) {
@@ -1436,6 +1465,15 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
 	CSetToolHint ("replace.pr", _("Ask before making each replacement"));
 	CGetHintPos (0, &yr);
 	CDrawSwitch ("replace.all", win, xb, yr, replace_all, _(" Replace all "), 0);
+/* Tool hint */
+	CSetToolHint ("replace.all", _("Replace repeatedly"));
+	CGetHintPos (0, &yr);
+    }
+    if (option & SEARCH_DIALOG_OPTION_BOOKMARK) {
+	CDrawSwitch ("replace.bkmk", win, xb, yr, search_create_bookmark, _(" Bookmarks "), 0);
+/* Tool hint */
+	CSetToolHint ("replace.bkmk", _("Create bookmarks at all lines found"));
+	CSetToolHint ("replace.bkmk.label", _("Create bookmarks at all lines found"));
 	CGetHintPos (0, &yr);
     }
     CDrawSwitch ("replace.scanf", win, xb, yr, replace_scanf, _(" Scanf expression "), 1);
@@ -1443,20 +1481,43 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     CSetToolHint ("replace.scanf", _("Allows entering of a C format string,\nsee the scanf man page"));
 
     get_hint_limits (&x, &y);
+#ifdef NEXT_LOOK    
+    {
+      int btn_width, x, y ;
+	CGetHintPos (&x, &y);
+	
+	y += NEXT_SPACING * 2 ;
+	x += NEXT_SPACING * 2 ;
+	CTextSize (&btn_width, 0, " Cancel ");
+	btn_width += 4 + BUTTON_RELIEF * 2;
+        x -= (btn_width + NEXT_SPACING) * 2 + NEXT_SPACING;
+
+	CDrawButton ("replace.ok", win, x+btn_width + NEXT_SPACING * 2, y, AUTO_WIDTH, AUTO_HEIGHT, "   Ok   ");
+	CDrawButton ("replace.cancel", win, x, y, AUTO_WIDTH, AUTO_HEIGHT, " Cancel ");
+	CGetHintPos (0, &y);
+	x += (btn_width + NEXT_SPACING) * 2 + NEXT_SPACING;
+	reset_hint_pos (x, y + NEXT_SPACING*2);
+    }
+#else
     CDrawPixmapButton ("replace.ok", win, x - WIDGET_SPACING - TICK_BUTTON_WIDTH, h, PIXMAP_BUTTON_TICK);
+    CDrawPixmapButton ("replace.cancel", win, x - WIDGET_SPACING - TICK_BUTTON_WIDTH, h + WIDGET_SPACING + TICK_BUTTON_WIDTH, PIXMAP_BUTTON_CROSS);
+#endif
 /* Tool hint */
     CSetToolHint ("replace.ok", _("Begin search, Enter"));
-    CDrawPixmapButton ("replace.cancel", win, x - WIDGET_SPACING - TICK_BUTTON_WIDTH, h + WIDGET_SPACING + TICK_BUTTON_WIDTH, PIXMAP_BUTTON_CROSS);
-/* Tool hint */
     CSetToolHint ("replace.cancel", _("Abort this dialog, Esc"));
     CSetSizeHintPos ("replace");
     CMapDialog ("replace");
 
     m = CIdent ("replace");
-    CSetWidgetSize ("replace.sinp", m->width - WIDGET_SPACING * 3 - 4 - TICK_BUTTON_WIDTH, (CIdent ("replace.sinp"))->height);
+#ifdef NEXT_LOOK    
+    text_input_width = m->width - WIDGET_SPACING * 3 - 4 - NEXT_SPACING*2 ;
+#else
+    text_input_width = m->width - WIDGET_SPACING * 3 - 4 - TICK_BUTTON_WIDTH ;
+#endif
+    CSetWidgetSize ("replace.sinp", text_input_width, (CIdent ("replace.sinp"))->height);
     if (replace_text) {
-	CSetWidgetSize ("replace.rinp", m->width - WIDGET_SPACING * 3 - 4 - TICK_BUTTON_WIDTH, (CIdent ("replace.rinp"))->height);
-	CSetWidgetSize ("replace.ainp", m->width - WIDGET_SPACING * 3 - 4 - TICK_BUTTON_WIDTH, (CIdent ("replace.ainp"))->height);
+	CSetWidgetSize ("replace.rinp", text_input_width, (CIdent ("replace.rinp"))->height);
+	CSetWidgetSize ("replace.ainp", text_input_width, (CIdent ("replace.ainp"))->height);
     }
     CFocus (CIdent ("replace.sinp"));
 
@@ -1497,6 +1558,12 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
 		replace_backwards = 0;
 	    }
 
+	    if (option & SEARCH_DIALOG_OPTION_BOOKMARK) {
+		search_create_bookmark = CIdent ("replace.bkmk")->keypressed;
+	    } else {
+		search_create_bookmark = 0;
+	    }
+
 	    break;
 	}
     }
@@ -1507,7 +1574,7 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
 void edit_search_dialog (WEdit * edit, char **search_text)
 {
 /* Heads the 'Search' dialog box */
-    edit_search_replace_dialog (WIN_MESSAGES, search_text, 0, 0, _(" Search "), SEARCH_DIALOG_OPTION_BACKWARDS);
+    edit_search_replace_dialog (WIN_MESSAGES, search_text, 0, 0, _(" Search "), SEARCH_DIALOG_OPTION_BACKWARDS | SEARCH_DIALOG_OPTION_BOOKMARK);
 }
 
 void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
@@ -1571,44 +1638,38 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
 
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
-    if (replace_prompt) {
-	char *s;
-	s = gtk_dialog_cauldron (
-				    "Replace", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
-		  " ( (Replace with:)d %Ld )xf / ( %Bxfrq || %Bxfq || %Bxfq || %Bxfq || %Bxfgq )f",
-				    replace_text,
-				    "Replace", "Skip", "Replace all", "Replace one",
-				    GNOME_STOCK_BUTTON_CANCEL
-	    );
-	if (s == GTK_CAULDRON_ESCAPE || !s || s == GNOME_STOCK_BUTTON_CANCEL)
-	    return B_CANCEL;
-	if (!strcmp (s, "Replace all"))
-	    return B_REPLACE_ALL;
-	if (!strcmp (s, "Replace one"))
-	    return B_REPLACE_ONE;
-	if (!strcmp (s, "Skip"))
-	    return B_SKIP_REPLACE;
-	if (!strcmp (s, "Replace"))
-	    return B_ENTER;
-    }
-    return 0;
+    char *s;
+    s = gtk_dialog_cauldron (
+		    "Replace", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
+				" ( (Replace with:)d %Ld )xf / ( %Bxfrq || %Bxfq || %Bxfq || %Bxfq || %Bxfgq )f",
+				replace_text,
+			 "Replace", "Skip", "Replace all", "Replace one",
+				GNOME_STOCK_BUTTON_CANCEL
+	);
+    if (s == GTK_CAULDRON_ESCAPE || !s || s == GNOME_STOCK_BUTTON_CANCEL)
+	return B_CANCEL;
+    if (!strcmp (s, "Replace all"))
+	return B_REPLACE_ALL;
+    if (!strcmp (s, "Replace one"))
+	return B_REPLACE_ONE;
+    if (!strcmp (s, "Skip"))
+	return B_SKIP_REPLACE;
+    if (!strcmp (s, "Replace"))
+	return B_ENTER;
 }
 
 #else
 
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
-    if (replace_prompt) {
-	int q, x[] =
-	{
-	    B_CANCEL, B_ENTER, B_SKIP_REPLACE, B_REPLACE_ALL, B_REPLACE_ONE, B_CANCEL
-	};
-	q = CQueryDialog (WIN_MESSAGES + (edit->curs_line < 8 ? edit->num_widget_lines / 2 * FONT_PIX_PER_LINE + CYof (edit->widget) : 0),
-			  _ (" Replace "), catstrs (_ (" Replace with: "), replace_text, 0), _ ("Replace"), _ ("Skip"), _ ("Replace all"), _ ("Replace one"), _ ("Cancel"), 0);
-	edit->force |= REDRAW_COMPLETELY;
-	return x[q + 1];
-    }
-    return 0;
+    int q, x[] =
+    {
+	B_CANCEL, B_ENTER, B_SKIP_REPLACE, B_REPLACE_ALL, B_REPLACE_ONE, B_CANCEL
+    };
+    q = CQueryDialog (WIN_MESSAGES + (edit->curs_line < 8 ? edit->num_widget_lines / 2 * FONT_PIX_PER_LINE + CYof (edit->widget) : 0),
+		      _ (" Replace "), catstrs (_ (" Replace with: "), replace_text, 0), _ ("Replace"), _ ("Skip"), _ ("Replace all"), _ ("Replace one"), _ ("Cancel"), 0);
+    edit->force |= REDRAW_COMPLETELY;
+    return x[q + 1];
 }
 
 #endif
@@ -1981,10 +2042,10 @@ void edit_replace_cmd (WEdit * edit, int again)
     char *exp3 = "";
     int replace_yes;
     int replace_continue;
-    int treplace_prompt = replace_prompt;
+    int treplace_prompt = 0;
     int i = 0;
     long times_replaced = 0, last_search;
-    char fin_string[32];
+    char fin_string[64];
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
@@ -2019,6 +2080,7 @@ void edit_replace_cmd (WEdit * edit, int again)
     } else {
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 	edit_replace_dialog (edit, &exp1, &exp2, &exp3);
+	treplace_prompt = replace_prompt;
     }
 
     if (!exp1 || !*exp1) {
@@ -2103,7 +2165,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 		edit_push_key_press (edit);
 
 		switch (edit_replace_prompt (edit, exp2,	/*and prompt 2/3 down */
-					     edit->num_widget_columns / 2 - 39, edit->num_widget_lines * 2 / 3)) {
+					     edit->num_widget_columns / 2 - 33, edit->num_widget_lines * 2 / 3)) {
 		case B_ENTER:
 		    break;
 		case B_SKIP_REPLACE:
@@ -2204,7 +2266,6 @@ void edit_search_cmd (WEdit * edit, int again)
 	}
 	return;
     }
-
     exp = old ? old : exp;
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
@@ -2222,31 +2283,60 @@ void edit_search_cmd (WEdit * edit, int again)
 		free (old);
 	    old = (char *) strdup (exp);
 
-	    if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
-		edit->search_start--;
-
-	    if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
-		edit->search_start++;
-
-	    edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
-		   (int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
-
-	    if (edit->search_start >= 0) {
-		edit->found_start = edit->search_start;
-		edit->found_len = len;
-
-		edit_cursor_move (edit, edit->search_start - edit->curs1);
-		edit_scroll_screen_over_cursor (edit);
-		if (replace_backwards)
-		    edit->search_start--;
-		else
-		    edit->search_start++;
-	    } else if (edit->search_start == -3) {
-		edit->search_start = edit->curs1;
-		regexp_error (edit);
+	    if (search_create_bookmark) {
+		int found = 0, books = 0;
+		int l = 0, l_last = -1;
+		long p, q = 0;
+		for (;;) {
+		    p = edit_find (q, (unsigned char *) exp, &len, edit->last_byte,
+				   (int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
+		    if (p < 0)
+			break;
+		    found++;
+		    l += edit_count_lines (edit, q, p);
+		    if (l != l_last) {
+			book_mark_insert (edit, l, BOOK_MARK_FOUND_COLOR);
+			books++;
+		    }
+		    l_last = l;
+		    q = p + 1;
+		}
+		if (found) {
+		    char fin_string[64];
+/* in response to number of bookmarks added because of string being found %d times */
+		    sprintf (fin_string, _ (" %d finds made, %d bookmarks added "), found, books);
+		    edit_message_dialog (_ (" Search "), fin_string);
+		} else {
+		    edit_error_dialog (_ (" Search "), _ (" Search string not found. "));
+		}
 	    } else {
-		edit->search_start = edit->curs1;
-		edit_error_dialog (_(" Search "), _(" Search string not found. "));
+
+		if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
+		    edit->search_start--;
+
+		if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
+		    edit->search_start++;
+
+		edit->search_start = edit_find (edit->search_start, (unsigned char *) exp, &len, edit->last_byte,
+		(int (*)(void *, long)) edit_get_byte, (void *) edit, 0);
+
+		if (edit->search_start >= 0) {
+		    edit->found_start = edit->search_start;
+		    edit->found_len = len;
+
+		    edit_cursor_move (edit, edit->search_start - edit->curs1);
+		    edit_scroll_screen_over_cursor (edit);
+		    if (replace_backwards)
+			edit->search_start--;
+		    else
+			edit->search_start++;
+		} else if (edit->search_start == -3) {
+		    edit->search_start = edit->curs1;
+		    regexp_error (edit);
+		} else {
+		    edit->search_start = edit->curs1;
+		    edit_error_dialog (_ (" Search "), _ (" Search string not found. "));
+		}
 	    }
 	}
 	free (exp);
@@ -2685,29 +2775,6 @@ int edit_save_block_cmd (WEdit * edit)
     }
     edit->force |= REDRAW_COMPLETELY;
     return 0;
-}
-
-
-/* inserts a file at the cursor, returns 1 on success */
-int edit_insert_file (WEdit * edit, const char *filename)
-{
-    int i, file, blocklen;
-    long current = edit->curs1;
-    unsigned char *buf;
-
-    if ((file = open ((char *) filename, O_RDONLY)) == -1)
-	return 0;
-    buf = malloc (TEMP_BUF_LEN);
-    while ((blocklen = read (file, (char *) buf, TEMP_BUF_LEN)) > 0) {
-	for (i = 0; i < blocklen; i++)
-	    edit_insert (edit, buf[i]);
-    }
-    edit_cursor_move (edit, current - edit->curs1);
-    free (buf);
-    close (file);
-    if (blocklen)
-	return 0;
-    return 1;
 }
 
 

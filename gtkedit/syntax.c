@@ -55,10 +55,19 @@ void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
 
+#ifdef HAVE_MAD
+static void *mad_syntax_malloc (size_t x, char *file, int line)
+#define syntax_malloc(x) mad_syntax_malloc (x, __FILE__, __LINE__)
+#else
 static void *syntax_malloc (size_t x)
+#endif
 {
     void *p;
+#ifdef HAVE_MAD
+    p = mad_alloc (x, file, line);
+#else
     p = malloc (x);
+#endif
     memset (p, 0, x);
     return p;
 }
@@ -327,7 +336,7 @@ static struct syntax_rule edit_get_rule (WEdit * edit, long byte_index)
 	    if (i > (edit->syntax_marker ? edit->syntax_marker->offset + SYNTAX_MARKER_DENSITY : SYNTAX_MARKER_DENSITY)) {
 		struct _syntax_marker *s;
 		s = edit->syntax_marker;
-		edit->syntax_marker = malloc (sizeof (struct _syntax_marker));
+		edit->syntax_marker = syntax_malloc (sizeof (struct _syntax_marker));
 		edit->syntax_marker->next = s;
 		edit->syntax_marker->offset = i;
 		edit->syntax_marker->rule = edit->rule;
@@ -384,11 +393,20 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
    Returns 0 on error/eof or a count of the number of bytes read
    including the newline. Result must be free'd.
  */
+#ifdef HAVE_MAD
+static int mad_read_one_line (char **line, FILE * f, char *file, int line_)
+#define read_one_line(a,b) mad_read_one_line(a,b,__FILE__,__LINE__)
+#else
 static int read_one_line (char **line, FILE * f)
+#endif
 {
     char *p;
     int len = 256, c, r = 0, i = 0;
+#ifdef HAVE_MAD
+    p = mad_syntax_malloc (len, file, line_);
+#else
     p = syntax_malloc (len);
+#endif
     for (;;) {
 	c = fgetc (f);
 	if (c == -1) {
@@ -631,7 +649,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		line = save_line + 1;
 		syntax_free (error_file_name);
 		if (l)
-		    free (l);
+		    syntax_free (l);
 		if (!read_one_line (&l, f))
 		    break;
 	    } else {
@@ -828,7 +846,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 	    for (j = 1; c->keyword[j]; j++)
 		*p++ = c->keyword[j]->first;
 	    *p = '\0';
-	    c->keyword_first_chars = malloc (strlen (first_chars) + 2);
+	    c->keyword_first_chars = syntax_malloc (strlen (first_chars) + 2);
 	    strcpy (c->keyword_first_chars, first_chars);
 	}
     }
@@ -843,7 +861,7 @@ static char *strdupc (char *s, int c)
 {
     char *t;
     int l;
-    strcpy (t = malloc ((l = strlen (s)) + 3), s);
+    strcpy (t = syntax_malloc ((l = strlen (s)) + 3), s);
     t[l] = c;
     t[l + 1] = '\0';
     return t;
@@ -860,11 +878,11 @@ static void edit_syntax_clear_keyword (WEdit * edit, int context, int j)
 	    s->rule.keyword = 0;
 	else if (s->rule.keyword > j)
 	    s->rule.keyword--;
-    free (c->keyword[j]->keyword);
-    free (c->keyword[j]->whole_word_chars_left);
-    free (c->keyword[j]->whole_word_chars_right);
-    free (c->keyword[j]);
-    memcpy (&c->keyword[j], &c->keyword[j + 1], (MAX_WORDS_PER_CONTEXT - j) * sizeof (struct keyword *));
+    syntax_free (c->keyword[j]->keyword);
+    syntax_free (c->keyword[j]->whole_word_chars_left);
+    syntax_free (c->keyword[j]->whole_word_chars_right);
+    syntax_free (c->keyword[j]);
+    memcpy (&c->keyword[j], &c->keyword[j + 1], (MAX_WORDS_PER_CONTEXT - j - 1) * sizeof (struct keyword *));
     strcpy (&c->keyword_first_chars[j], &c->keyword_first_chars[j + 1]);
 }
 
@@ -893,7 +911,7 @@ static int edit_syntax_add_keyword (WEdit * edit, char *keyword, int context, ti
 	}
     }
 /* are we out of space? */
-    if (j >= MAX_WORDS_PER_CONTEXT - 1)
+    if (j >= MAX_WORDS_PER_CONTEXT - 2)
 	return 1;
 /* add the new keyword and date it */
     c->keyword[j + 1] = 0;
@@ -910,7 +928,7 @@ static int edit_syntax_add_keyword (WEdit * edit, char *keyword, int context, ti
     c->keyword[j]->whole_word_chars_right = (char *) strdup ("-'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ¡¢£¤¥¦§§¨©©ª«¬­®®¯°±²³´µ¶¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ");
     c->keyword[j]->time = t;
     s = strdupc (c->keyword_first_chars, c->keyword[j]->first);
-    free (c->keyword_first_chars);
+    syntax_free (c->keyword_first_chars);
     c->keyword_first_chars = s;
     return 0;
 }
@@ -952,12 +970,12 @@ static int edit_check_spelling_at (WEdit * edit, long byte_index)
     if (p2 <= p1)
 	return 0;
 /* create string */
-    q = p = malloc (p2 - p1 + 2);
+    q = p = syntax_malloc (p2 - p1 + 2);
     for (; p1 < p2; p1++)
 	*p++ = edit_get_byte (edit, p1);
     *p = '\0';
     if (q[0] == '-' || strlen ((char *) q) > 40) {	/* if you are using words over 40 characters, you are on your own */
-	free (q);
+	syntax_free (q);
 	return 0;
     }
     time (&t);
@@ -966,7 +984,7 @@ static int edit_check_spelling_at (WEdit * edit, long byte_index)
 	if (!strcmp (c->keyword[j]->keyword, (char *) q)) {
 	    if (c->keyword[j]->time)
 		c->keyword[j]->time = t;
-	    free (q);
+	    syntax_free (q);
 	    return 0;
 	}
     }
@@ -978,11 +996,11 @@ static int edit_check_spelling_at (WEdit * edit, long byte_index)
 	r = fgetc (spelling_pipe_in);
     } while (r == -1 && errno == EINTR);
     if (r == -1) {
-	free (q);
+	syntax_free (q);
 	return 1;
     }
     if (r == '\n') {		/* ispell sometimes returns just blank line if it is given bad characters */
-	free (q);
+	syntax_free (q);
 	return 0;
     }
 /* now read ispell output untill we get two blanks lines - we are not intersted in this part */
@@ -991,7 +1009,7 @@ static int edit_check_spelling_at (WEdit * edit, long byte_index)
     } while (c1 == -1 && errno == EINTR);
     for (;;) {
 	if (c1 == -1) {
-	    free (q);
+	    syntax_free (q);
 	    return 1;
 	}
 	do {
@@ -1003,12 +1021,12 @@ static int edit_check_spelling_at (WEdit * edit, long byte_index)
     }
 /* spelled ok */
     if (r == '*' || r == '+' || r == '-') {
-	free (q);
+	syntax_free (q);
 	return 0;
     }
 /* not spelled ok - so add a syntax keyword for this word */
     edit_syntax_add_keyword (edit, (char *) q, context, t);
-    free (q);
+    syntax_free (q);
     return 0;
 }
 
@@ -1146,7 +1164,7 @@ void edit_free_syntax_rules (WEdit * edit)
     syntax_free (edit->rules);
 }
 
-#define CURRENT_SYNTAX_RULES_VERSION "61"
+#define CURRENT_SYNTAX_RULES_VERSION "62"
 
 char *syntax_text[] = {
 "# syntax rules version " CURRENT_SYNTAX_RULES_VERSION,
@@ -1178,11 +1196,8 @@ char *syntax_text[] = {
 "context default",
 "",
 "",
-"file ..\\*\\\\.diff$ Unified\\sDiff\\sOutput ^diff.\\*(-u|--unified)",
+"file ..\\*\\\\.(diff|rej|patch)$ Diff\\sOutput ^diff",
 "include diff.syntax",
-"",
-"file ..\\*\\\\.diff$ Context\\sDiff\\sOutput ^diff.\\*(-c|--context)",
-"include diffc.syntax",
 "",
 "file ..\\*\\\\.lsm$ LSM\\sFile",
 "include lsm.syntax",
@@ -1216,6 +1231,9 @@ char *syntax_text[] = {
 "",
 "file ..\\*\\\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C\\+\\+\\sProgram",
 "include c.syntax",
+"",
+"file ..\\*\\\\.[fF]$ Fortran\\sProgram",
+"include fortran.syntax",
 "",
 "file ..\\*\\\\.i$ SWIG\\sSource",
 "include swig.syntax",
@@ -1348,9 +1366,9 @@ FILE *upgrade_syntax_file (char *syntax_file)
 	rename (syntax_file, s);
 	unlink (syntax_file);	/* might rename() fail ? */
 #if defined(MIDNIGHT) || defined(GTK)
-	edit_message_dialog (_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. "));
+	edit_message_dialog (" Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
 #else
-	CMessageDialog (0, 20, 20, 0,_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ")); 
+	CMessageDialog (0, 20, 20, 0, " Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
 #endif
 	return upgrade_syntax_file (syntax_file);
     }
@@ -1362,82 +1380,96 @@ FILE *upgrade_syntax_file (char *syntax_file)
 static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file, char *editor_file, char *first_line, char *type)
 {
     FILE *f;
-    regex_t r, r2;
+    regex_t r;
     regmatch_t pmatch[1];
-    char *args[1024], *l;
+    char *args[1024], *l = 0;
     int line = 0;
     int argc;
     int result = 0;
     int count = 0;
-
     f = upgrade_syntax_file (syntax_file);
     if (!f)
 	return -1;
     args[0] = 0;
-
     for (;;) {
 	line++;
+	syntax_free (l);
 	if (!read_one_line (&l, f))
 	    break;
 	get_args (l, args, &argc);
-	if (!args[0]) {
-	} else if (!strcmp (args[0], "file")) {
-	    if (!args[1] || !args[2]) {
-		result = line;
-		break;
-	    }
+	if (!args[0])
+	    continue;
+/* looking for `file ...' lines only */
+	if (strcmp (args[0], "file")) {
+	    free_args (args);
+	    continue;
+	}
+/* must have two args or report error */
+	if (!args[1] || !args[2]) {
+	    result = line;
+	    break;
+	}
+	if (names) {
+/* 1: just collecting a list of names of rule sets */
+	    names[count++] = (char *) strdup (args[2]);
+	    names[count] = 0;
+	} else if (type) {
+/* 2: rule set was explicitly specified by the caller */
+	    if (!strcmp (type, args[2]))
+		goto found_type;
+	} else if (editor_file && edit) {
+/* 3: auto-detect rule set from regular expressions */
+	    int q;
 	    if (regcomp (&r, args[1], REG_EXTENDED)) {
 		result = line;
 		break;
 	    }
-	    if (regcomp (&r2, args[3] ? args[3] : "^nEvEr MaTcH aNyThInG$", REG_EXTENDED)) {
-		result = line;
-		break;
-	    }
-	    if (names) {
-		names[count++] = (char *) strdup (args[2]);
-		names[count] = 0;
-	    } else if (type) {
-		if (!strcmp (type, args[2]))
-		    goto found_type;
-	    } else if (editor_file && edit) {
-		if (!regexec (&r, editor_file, 1, pmatch, 0) || !regexec (&r2, first_line, 1, pmatch, 0)) {
-		    int line_error;
-		  found_type:
-		    line_error = edit_read_syntax_rules (edit, f);
-		    if (line_error) {
-			if (!error_file_name)	/* an included file */
-			    result = line + line_error;
-			else
-			    result = line_error;
-		    } else {
-			syntax_free (edit->syntax_type);
-			edit->syntax_type = (char *) strdup (args[2]);
-/* if there are no rules then turn off syntax highlighting for speed */
-			if (!edit->rules[1])
-			    if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
-				edit_free_syntax_rules (edit);
-				break;
-			    }
-			if (syntax_change_callback)
-#ifdef MIDNIGHT
-			    (*syntax_change_callback) (&edit->widget);
-#else
-			    (*syntax_change_callback) (edit->widget);
-#endif
-		    }
+/* does filename match arg 1 ? */
+	    q = !regexec (&r, editor_file, 1, pmatch, 0);
+	    regfree (&r);
+	    if (!q && args[3]) {
+		if (regcomp (&r, args[3], REG_EXTENDED)) {
+		    result = line;
 		    break;
 		}
+/* does first line match arg 3 ? */
+		q = !regexec (&r, first_line, 1, pmatch, 0);
+		regfree (&r);
+	    }
+	    if (q) {
+		int line_error;
+	      found_type:
+		line_error = edit_read_syntax_rules (edit, f);
+		if (line_error) {
+		    if (!error_file_name)	/* an included file */
+			result = line + line_error;
+		    else
+			result = line_error;
+		} else {
+		    syntax_free (edit->syntax_type);
+		    edit->syntax_type = (char *) strdup (args[2]);
+/* if there are no rules then turn off syntax highlighting for speed */
+		    if (!edit->rules[1])
+			if (!edit->rules[0]->keyword[1] && !edit->rules[0]->spelling) {
+			    edit_free_syntax_rules (edit);
+			    break;
+			}
+/* notify the callback of a change in rule set */
+		    if (syntax_change_callback)
+#ifdef MIDNIGHT
+			(*syntax_change_callback) (&edit->widget);
+#else
+			(*syntax_change_callback) (edit->widget);
+#endif
+		}
+		break;
 	    }
 	}
 	free_args (args);
-	syntax_free (l);
     }
     free_args (args);
     syntax_free (l);
-
     fclose (f);
-
     return result;
 }
 

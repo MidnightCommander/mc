@@ -71,14 +71,14 @@ void edit_wrap_cmd ()
 
 void edit_about_cmd ()
 {
-    edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
-		      _("\n"
+    edit_message_dialog (wedit->mainid, 20, 20, " About ",
+		      "\n"
 		      "                Cooledit  v3.11.5\n"
 		      "\n"
 		      " Copyright (C) 1996 the Free Software Foundation\n"
 		      "\n"
 		      "       A user friendly text editor written\n"
-		      "           for the Midnight Commander.\n")
+		      "           for the Midnight Commander.\n"
 	);
 }
 
@@ -113,6 +113,7 @@ void menu_beginning_cmd (void)		{ menu_cmd (CK_Beginning_Of_Text); }
 void menu_end_cmd (void)		{ menu_cmd (CK_End_Of_Text); }
 void menu_refresh_cmd (void)		{ menu_cmd (CK_Refresh); }
 void menu_goto_line (void)		{ menu_cmd (CK_Goto); }
+void menu_goto_bracket (void)		{ menu_cmd (CK_Match_Bracket); }
 void menu_lit_cmd (void)		{ menu_key (XCTRL ('q')); }
 void menu_format_paragraph (void)	{ menu_cmd (CK_Paragraph_Format); }
 void edit_options_dialog (void);
@@ -201,6 +202,7 @@ static menu_entry SearReplMenuEmacs[] =
 static menu_entry CmdMenu[] =
 {
     {' ', N_("&Goto line...            M-l"), 'G', menu_goto_line},
+    {' ', N_("goto matching &Bracket   M-b"), 'B', menu_goto_bracket},
     {' ', "", ' ', 0},
     {' ', N_("insert &Literal...       C-q"), 'L', menu_lit_cmd},
     {' ', "", ' ', 0},
@@ -223,6 +225,7 @@ static menu_entry CmdMenu[] =
 static menu_entry CmdMenuEmacs[] =
 {
     {' ', N_("&Goto line...            M-l"), 'G', menu_goto_line},
+    {' ', N_("goto matching &Bracket   M-b"), 'B', menu_goto_bracket},
     {' ', "", ' ', 0},
     {' ', N_("insert &Literal...       C-q"), 'L', menu_lit_cmd},
     {' ', "", ' ', 0},
@@ -448,9 +451,10 @@ void CDrawEditMenuButtons (const char *ident, Window parent, Window focus_return
 
     CGetHintPos (&x, &d);
 
-    CDrawMenuButton (catstrs (ident, ".commandmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 11,
+    CDrawMenuButton (catstrs (ident, ".commandmenu", 0), parent, focus_return, x, y, AUTO_WIDTH, AUTO_HEIGHT, 12,
 		     _(" Command "),
 		     _("Goto line...\tM-l"), '~', menu_cmd, (unsigned long) CK_Goto,
+		     _("Goto matching bracket\tM-b"), '~', menu_cmd, (unsigned long) CK_Match_Bracket,
 		     "", ' ', (void *) 0, 0L,
 		     _("Start record macro\tC-r"), '~', menu_cmd, (unsigned long) CK_Begin_Record_Macro,
 		     _("Finish record macro...\tC-r"), '~', menu_cmd, (unsigned long) CK_End_Record_Macro,

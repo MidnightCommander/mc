@@ -88,6 +88,9 @@
 #define CK_Type_Load_Python	418
 #define CK_Find_File		419
 #define CK_Ctags		420
+#define CK_Match_Bracket	421
+#define CK_Terminal		422
+#define CK_Terminal_App		423
 
 /* application control */
 #define CK_Save_Desktop		451

@@ -107,9 +107,9 @@ static long end_paragraph (WEdit * edit, long p, int force)
     return edit_eol (edit, edit_move_forward (edit, edit_bol (edit, edit->curs1), i - edit->curs_line, 0));
 }
 
-static char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
+static unsigned char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
 {
-    char *s, *t;
+    unsigned char *s, *t;
 #if 0
     t = malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
 #else
@@ -129,9 +129,9 @@ static char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
     return t;
 }
 
-static void strip_newlines (char *t, int size)
+static void strip_newlines (unsigned char *t, int size)
 {
-    char *p = t;
+    unsigned char *p = t;
     while (size--) {
 	*p = *p == '\n' ? ' ' : *p;
 	p++;
@@ -152,7 +152,7 @@ static inline int next_tab_pos (int x)
 {
     return x += tab_width - x % tab_width;
 }
-static int line_pixel_length (char *t, long b, int l)
+static int line_pixel_length (unsigned char *t, long b, int l)
 {
     int x = 0, c, xn = 0;
     for (;;) {
@@ -180,7 +180,7 @@ static int line_pixel_length (char *t, long b, int l)
 }
 
 /* find the start of a word */
-static int next_word_start (char *t, int q, int size)
+static int next_word_start (unsigned char *t, int q, int size)
 {
     int i;
     for (i = q;; i++) {
@@ -201,7 +201,7 @@ static int next_word_start (char *t, int q, int size)
 }
 
 /* find the start of a word */
-static int word_start (char *t, int q, int size)
+static int word_start (unsigned char *t, int q, int size)
 {
     int i = q;
     if (t[q] == ' ' || t[q] == '\t')
@@ -220,7 +220,7 @@ static int word_start (char *t, int q, int size)
 }
 
 /* replaces ' ' with '\n' to properly format a paragraph */
-static void format_this (char *t, int size, int indent)
+static void format_this (unsigned char *t, int size, int indent)
 {
     int q = 0, ww;
     strip_newlines (t, size);
@@ -258,7 +258,7 @@ static void replace_at (WEdit * edit, long q, int c)
 void edit_insert_indent (WEdit * edit, int indent);
 
 /* replaces a block of text */
-static void put_paragraph (WEdit * edit, char *t, long p, long q, int indent, int size)
+static void put_paragraph (WEdit * edit, unsigned char *t, long p, long q, int indent, int size)
 {
     long cursor;
     int i, c = 0;
@@ -315,7 +315,7 @@ void format_paragraph (WEdit * edit, int force)
 {
     long p, q;
     int size;
-    char *t;
+    unsigned char *t;
     int indent = 0;
     if (option_word_wrap_line_length < 2)
 	return;

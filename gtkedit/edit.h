@@ -172,6 +172,7 @@
 #define SEARCH_DIALOG_OPTION_NO_REGEX	2
 #define SEARCH_DIALOG_OPTION_NO_CASE	4
 #define SEARCH_DIALOG_OPTION_BACKWARDS	8
+#define SEARCH_DIALOG_OPTION_BOOKMARK	16
 
 #define SYNTAX_FILE "/.cedit/Syntax"
 #define CLIP_FILE "/.cedit/cooledit.clip"
@@ -325,7 +326,9 @@ struct _syntax_marker {
 
 struct _book_mark {
     int line;		/* line number */
-#define BOOK_MARK_COLOR ((0 << 8) | 26)		/* black on white */
+// #define BOOK_MARK_COLOR ((0 << 8) | 26)		/* black on white */
+#define BOOK_MARK_COLOR ((25 << 8) | 5)
+#define BOOK_MARK_FOUND_COLOR ((26 << 8) | 4)
     int c;		/* colour */
     struct _book_mark *next;
     struct _book_mark *prev;
@@ -374,6 +377,7 @@ struct editor_widget {
     unsigned char overwrite;
     unsigned char modified;	/*has the file been changed?: 1 if char inserted or
 				   deleted at all since last load or save */
+    unsigned char screen_modified;	/* has the file been changed since the last screen draw? */
 #if defined(MIDNIGHT) || defined(GTK)
     int delete_file;			/* has the file been created in edit_load_file? Delete
 			           it at end of editing when it hasn't been modified 
@@ -484,7 +488,6 @@ static inline int edit_get_byte (WEdit * edit, long byte_index)
 #endif
 
 char *edit_get_buffer_as_text (WEdit * edit);
-int edit_load_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size);
 int edit_count_lines (WEdit * edit, long current, int upto);
 long edit_move_forward (WEdit * edit, long current, int lines, long upto);
 long edit_move_forward3 (WEdit * edit, long current, int cols, long upto);
@@ -590,6 +593,10 @@ void book_mark_dec (WEdit * edit, int line);
 
 #ifdef MIDNIGHT
 
+#define CPushFont(x,y)
+#define CPopFont()
+#define FIXED_FONT 1
+
 /* put OS2/NT/WIN95 defines here */
 
 #    ifdef USE_O_TEXT
@@ -638,6 +645,9 @@ extern char *edit_init_error_msg;
 #else				/* ! MIDNIGHT */
 
 #    ifdef GTK
+#        define CPushFont(x,y)
+#        define CPopFont()
+#        define FIXED_FONT gtk_edit_fixed_font
 #        define get_sys_error(s) (s)
 
 #        define open mc_open
@@ -676,7 +686,7 @@ extern char *edit_init_error_msg;
 #        define FONT_OFFSET_X 0
 #        define FONT_OFFSET_Y		FONT_BASE_LINE
 
-#        define per_char gtk_edit_font_width_per_char
+#        define FONT_PER_CHAR gtk_edit_font_width_per_char
 
 #        ifndef _GTK_EDIT_C
 extern guchar gtk_edit_font_width_per_char[256];

@@ -37,7 +37,6 @@ struct cache_line {
     cache_type data[CACHE_WIDTH];
 };
 
-extern unsigned char per_char[256];
 
 /* background colors: marked is refers to mouse highlighting, highlighted refers to a found string. */
 extern unsigned long edit_abnormal_color, edit_marked_abnormal_color;
@@ -117,54 +116,54 @@ static inline int convert_to_long_printable (int c, unsigned char *t)
     if (isgraph (c)) {
 	t[0] = c;
 	t[1] = 0;
-	return per_char[c];
+	return FONT_PER_CHAR[c];
     }
     if (c == ' ') {
 	if (option_long_whitespace) {
 	    t[0] = ' ';
 	    t[1] = ' ';
 	    t[2] = 0;
-	    return per_char[' '] + per_char[' '];
+	    return FONT_PER_CHAR[' '] + FONT_PER_CHAR[' '];
 	} else {
 	    t[0] = ' ';
 	    t[1] = 0;
-	    return per_char[' '];
+	    return FONT_PER_CHAR[' '];
 	}
     }
-    if (option_international_characters && per_char[c]) {
+    if (option_international_characters && FONT_PER_CHAR[c]) {
 	t[0] = c;
 	t[1] = 0;
-	return per_char[c];
+	return FONT_PER_CHAR[c];
     }
     if (c > '~') {
 	t[0] = ("0123456789ABCDEF")[c >> 4];
 	t[1] = ("0123456789ABCDEF")[c & 0xF];
 	t[2] = 'h';
 	t[3] = 0;
-	return per_char[t[0]] + per_char[t[1]] + per_char[t[2]];
+	return FONT_PER_CHAR[t[0]] + FONT_PER_CHAR[t[1]] + FONT_PER_CHAR[t[2]];
     }
     t[0] = '^';
     t[1] = c + '@';
     t[2] = 0;
-    return per_char[t[0]] + per_char[t[1]];
+    return FONT_PER_CHAR[t[0]] + FONT_PER_CHAR[t[1]];
 }
 
 /* same as above but just gets the length */
 static inline int width_of_long_printable (int c)
 {
     if (isgraph (c))
-	return per_char[c];
+	return FONT_PER_CHAR[c];
     if (c == ' ') {
 	if (option_long_whitespace)
-	    return per_char[' '] + per_char[' '];
+	    return FONT_PER_CHAR[' '] + FONT_PER_CHAR[' '];
 	else
-	    return per_char[' '];
+	    return FONT_PER_CHAR[' '];
     }
-    if (option_international_characters && per_char[c])
-	return per_char[c];
+    if (option_international_characters && FONT_PER_CHAR[c])
+	return FONT_PER_CHAR[c];
     if (c > '~')
-	return per_char[(unsigned char) ("0123456789ABCDEF")[c >> 4]] + per_char[(unsigned char) ("0123456789ABCDEF")[c & 0xF]] + per_char[(unsigned char) 'h'];
-    return per_char['^'] + per_char[c + '@'];
+	return FONT_PER_CHAR[(unsigned char) ("0123456789ABCDEF")[c >> 4]] + FONT_PER_CHAR[(unsigned char) ("0123456789ABCDEF")[c & 0xF]] + FONT_PER_CHAR[(unsigned char) 'h'];
+    return FONT_PER_CHAR['^'] + FONT_PER_CHAR[c + '@'];
 }
 
 int edit_width_of_long_printable (int c)
@@ -173,7 +172,7 @@ int edit_width_of_long_printable (int c)
 }
 
 /* returns x pixel pos of char at offset *q with x not more than l */
-int calc_text_pos (WEdit * edit, long b, long *q, int l)
+static int calc_text_pos (WEdit * edit, long b, long *q, int l)
 {
     int x = 0, c, xn;
     for (;;) {
@@ -204,7 +203,7 @@ int calc_text_pos (WEdit * edit, long b, long *q, int l)
 
 
 /* calcs pixel length of the line beginning at b up to upto */
-int calc_text_len (WEdit * edit, long b, long upto)
+static int calc_text_len (WEdit * edit, long b, long upto)
 {
     int x = 0, c;
     for (;;) {
@@ -235,13 +234,15 @@ int calc_text_len (WEdit * edit, long b, long upto)
 /* If upto is zero returns index of pixels across from current. */
 long edit_move_forward3 (WEdit * edit, long current, int pixels, long upto)
 {
+    CPushFont ("editor", 0);
     if (upto) {
-	return calc_text_len (edit, current, upto);
+	current = calc_text_len (edit, current, upto);
     } else if (pixels) {
 	long q;
 	calc_text_pos (edit, current, &q, pixels);
-	return q;
+	current = q;
     }
+    CPopFont ();
     return current;
 }
 
@@ -252,7 +253,7 @@ static inline cache_type get_style_fast (WEdit * edit, long q, int c)
 {
     cache_type s = 0;
     unsigned int fg, bg;
-    if (!(isprint (c) || (option_international_characters && per_char[c])))
+    if (!(isprint (c) || (option_international_characters && FONT_PER_CHAR[c])))
 	if (c != '\n' && c != '\t')
 	    s |= MOD_ABNORMAL * 256;
     edit_get_syntax_color (edit, q, (int *) &fg, (int *) &bg);
@@ -279,14 +280,14 @@ static inline cache_type get_style (WEdit * edit, long q, int c, long m1, long m
 	s |= MOD_BOLD * 256;
     if (q >= edit->found_start && q < edit->found_start + edit->found_len)
 	s |= MOD_HIGHLIGHTED * 256;
-    if (!(isprint (c) || (option_international_characters && per_char[c])))
+    if (!(isprint (c) || (option_international_characters && FONT_PER_CHAR[c])))
 	if (c != '\n' && c != '\t')
 	    s |= MOD_ABNORMAL * 256;
     edit_get_syntax_color (edit, q, (int *) &fg, (int *) &bg);
     return s | ((fg & 0xFF) << 24) | ((bg & 0xFF) << 16);
 }
 
-void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int row)
+static void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int row)
 {
     int c;
     cache_type s;
@@ -315,13 +316,13 @@ void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int r
 		q--;
 		goto the_default;
 	    case '\t':
-		if (fixed_font) {
+		if (FIXED_FONT) {
 		    int t;
 		    t = next_tab_pos (x);
 		    t = min (t, x_max);
 		    s = *p;
 		    while (x < t) {
-			x += per_char[' '];
+			x += FONT_PER_CHAR[' '];
 			*p++ = s | ' ';
 		    }
 		} else {
@@ -361,13 +362,13 @@ void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int r
 		    edit->max_column = x;
 		return;
 	    case '\t':
-		if (fixed_font) {
+		if (FIXED_FONT) {
 		    int t;
 		    t = next_tab_pos (x);
 		    t = min (t, x_max);
 		    s = *p;
 		    while (x < t) {
-			x += per_char[' '];
+			x += FONT_PER_CHAR[' '];
 			*p++ = s | ' ';
 		    }
 		} else {
@@ -404,13 +405,13 @@ void convert_text (WEdit * edit, long q, cache_type * p, int x, int x_max, int r
 		    edit->max_column = x;
 		return;
 	    case '\t':
-		if (fixed_font) {
+		if (FIXED_FONT) {
 		    int t;
 		    t = next_tab_pos (x);
 		    t = min (t, x_max);
 		    s = *p;
 		    while (x < t) {
-			x += per_char[' '];
+			x += FONT_PER_CHAR[' '];
 			*p++ = s | ' ';
 		    }
 		} else {
@@ -461,7 +462,7 @@ static inline int next_tab (int x, int scroll_right)
     return next_tab_pos (x - scroll_right - EDIT_TEXT_HORIZONTAL_OFFSET) - x + scroll_right + EDIT_TEXT_HORIZONTAL_OFFSET;
 }
 
-int draw_tab (Window win, int x, int y, cache_type s, int scroll_right)
+static int draw_tab (Window win, int x, int y, cache_type s, int scroll_right)
 {
     int l;
 #ifdef GTK
@@ -476,14 +477,14 @@ int draw_tab (Window win, int x, int y, cache_type s, int scroll_right)
     gdk_draw_rectangle (win->text_area, win->gc, 1, x, y + FONT_OVERHEAD, l, FONT_HEIGHT);
 /* if we printed a cursor: */
     if (s & (MOD_CURSOR * 256))
-	edit_set_cursor (win, x, y, bg.pixel, fg.pixel, per_char[' '], ' ');
+	edit_set_cursor (win, x, y, bg.pixel, fg.pixel, FONT_PER_CHAR[' '], ' ');
 #else
     set_style_color (s, &fg, &bg);
     CSetColor (bg);
     CRectangle (win, x, y + FONT_OVERHEAD, l, FONT_HEIGHT);
 /* if we printed a cursor: */
     if (s & (MOD_CURSOR * 256))
-	edit_set_cursor (win, x, y, bg, fg, per_char[' '], ' ');
+	edit_set_cursor (win, x, y, bg, fg, FONT_PER_CHAR[' '], ' ');
 #endif
     return x + l;
 }
@@ -509,7 +510,7 @@ static inline void draw_space (Window win, int x, int y, cache_type s, int l)
     CRectangle (win, x, y + FONT_OVERHEAD, l, FONT_HEIGHT);
 /* if we printed a cursor: */
     if (s & (MOD_CURSOR * 256))
-	edit_set_cursor (win, x, y, bg, fg, per_char[' '], ' ');
+	edit_set_cursor (win, x, y, bg, fg, FONT_PER_CHAR[' '], ' ');
 #endif
 }
 
@@ -567,7 +568,7 @@ gdk_draw_image_text (GdkDrawable *drawable,
 
 #endif
 
-int draw_string (Window win, int x, int y, cache_type s, unsigned char *text, int length)
+static int draw_string (Window win, int x, int y, cache_type s, unsigned char *text, int length)
 {
 #ifdef GTK
     GdkColor fg, bg;
@@ -584,8 +585,8 @@ int draw_string (Window win, int x, int y, cache_type s, unsigned char *text, in
     underlined = set_style_color (s, &fg, &bg);
     CSetBackgroundColor (bg);
     CSetColor (fg);
-    CImageString (win, x + FONT_OFFSET_X, y + FONT_OFFSET_Y, (char *) text, length);
-    l = CTextWidth (win, (char *) text, length);
+    CImageText (win, x + FONT_OFFSET_X, y + FONT_OFFSET_Y, (char *) text, length);
+    l = CTextWidth ((char *) text, length);
     if (underlined) {
 	int i, h, inc;
 	inc = FONT_MEAN_WIDTH * 2 / 3;
@@ -602,11 +603,11 @@ int draw_string (Window win, int x, int y, cache_type s, unsigned char *text, in
 /* if we printed a cursor: */
 #ifdef GTK
     if (s & (MOD_CURSOR * 256))
-	edit_set_cursor (win, x, y, bg.pixel, fg.pixel, per_char[*text], *text);
+	edit_set_cursor (win, x, y, bg.pixel, fg.pixel, FONT_PER_CHAR[*text], *text);
     return x + gdk_text_width (GTK_WIDGET (win)->style->font, text, length);
 #else
     if (s & (MOD_CURSOR * 256))
-	edit_set_cursor (win, x, y, bg, fg, per_char[*text], *text);
+	edit_set_cursor (win, x, y, bg, fg, FONT_PER_CHAR[*text], *text);
     return x + l;
 #endif
 }
@@ -669,7 +670,7 @@ static void cover_trail (Window win, int x_start, int x_new, int x_old, int y)
 	gdk_draw_rectangle (win->text_area, win->gc, 1, x_new, y + FONT_OVERHEAD, x_old - x_new, FONT_HEIGHT);
 #else
 	CSetColor (edit_normal_background_color);
-	CRectangle (win, x_new, y + FONT_OVERHEAD, x_old - x_new, FONT_HEIGHT + (FONT_OVERHEAD != 0 && !fixed_font));
+	CRectangle (win, x_new, y + FONT_OVERHEAD, x_old - x_new, FONT_HEIGHT + (FONT_OVERHEAD != 0 && !FIXED_FONT));
 #endif
     } else {
 #ifdef GTK
@@ -679,7 +680,7 @@ static void cover_trail (Window win, int x_start, int x_new, int x_old, int y)
 #endif
     }
 /* true type fonts print stuff out of the bounding box (aaaaaaaaarrrgh!!) */
-    if (!fixed_font)
+    if (!FIXED_FONT)
 	if (FONT_OVERHEAD && x_new > EDIT_TEXT_HORIZONTAL_OFFSET)
 #ifdef GTK
 	    gdk_draw_line (win->text_area, win->gc, max (x_start, EDIT_TEXT_HORIZONTAL_OFFSET), y + FONT_HEIGHT + FONT_OVERHEAD, x_new - 1, y + FONT_HEIGHT + FONT_OVERHEAD);
@@ -718,13 +719,16 @@ void edit_draw_proportional (void *data,
     x_max -= 3;
 
 /* if its not the same window, reset the screen rememberer */
-    if (last != win) {
+    if (last != win || !win) {
 	last = win;
 	for (i = 0; i < CACHE_HEIGHT; i++) {
 	    lines[i].x0 = NOT_VALID;
 	    lines[i].x1 = x_max;
 	}
+	if (!win)
+	    return;
     }
+
 /* get point to start drawing */
     x0 = (*calctextpos) (data, b, &q, -scroll_right + x_offset);
 /* q contains the offset in the edit buffer */
@@ -740,7 +744,7 @@ void edit_draw_proportional (void *data,
     if (!EditExposeRedraw) {
 	if (lines[row].x0 == x0 && row < CACHE_HEIGHT) {	/* i.e. also  && lines[row].x0 != NOT_VALID */
 	    ignore_text = get_ignore_length (lines[row].data, line);
-	    if (fixed_font)
+	    if (FIXED_FONT)
 		ignore_trailer = get_ignore_trailer (lines[row].data, line, ignore_text);
 	}
     }
@@ -790,7 +794,7 @@ void edit_draw_proportional (void *data,
 #ifdef GTK
 		    x += gdk_text_width (GTK_WIDGET(win)->style->font, text, i);
 #else
-		    x += CTextWidth (win, (char *) text, i);
+		    x += CTextWidth ((char *) text, i);
 #endif
 	    }
 	}
@@ -833,7 +837,7 @@ void edit_draw_this_line_proportional (WEdit * edit, long b, int row, int start_
 			    (int (*) (void *, long, long *, int)) calc_text_pos,
 			    edit->start_col, CWindowOf (edit->widget),
 			    end_column, b, row, row * FONT_PIX_PER_LINE + EDIT_TEXT_VERTICAL_OFFSET,
-			    EditExposeRedraw ? start_column : 0, per_char[' '] * TAB_SIZE);
+			    EditExposeRedraw ? start_column : 0, FONT_PER_CHAR[' '] * TAB_SIZE);
 }
 
 
@@ -847,7 +851,7 @@ static inline int nroff_printable (int c)
 }
 
 
-int calc_text_pos_str (unsigned char *text, long b, long *q, int l)
+static int calc_text_pos_str (unsigned char *text, long b, long *q, int l)
 {
     int x = 0, c = 0, xn = 0, d;
     for (;;) {
@@ -865,12 +869,12 @@ int calc_text_pos_str (unsigned char *text, long b, long *q, int l)
 	    break;
 	case '\b':
 	    if (d)
-		xn = x - per_char[d];
+		xn = x - FONT_PER_CHAR[d];
 	    break;
 	default:
 	    if (!nroff_printable (c))
 		c = ' ';
-	    xn = x + per_char[c];
+	    xn = x + FONT_PER_CHAR[c];
 	    break;
 	}
 	if (xn > l)
@@ -885,7 +889,9 @@ int calc_text_pos_str (unsigned char *text, long b, long *q, int l)
 int prop_font_strcolmove (unsigned char *str, int i, int column)
 {
     long q;
+    CPushFont ("editor", 0);
     calc_text_pos_str (str, i, &q, column * FONT_MEAN_WIDTH);
+    CPopFont ();
     return q;
 }
 
@@ -896,41 +902,12 @@ int prop_font_strcolmove (unsigned char *str, int i, int column)
    *q and the characters pixel x pos from b is return'ed. */
 int calc_text_pos2 (CWidget * w, long b, long *q, int l)
 {
-    return calc_text_pos_str ((unsigned char *) w->text, b, q, l);
+    int r;
+    CPushFont ("editor", 0);
+    r = calc_text_pos_str ((unsigned char *) w->text, b, q, l);
+    CPopFont ();
+    return r;
 }
-
-/* calcs pixel length of the line beginning at b up to upto */
-int calc_text_len2 (CWidget *w, long b, long upto)
-{
-    int x = 0, c = 0, d;
-    for (;;) {
-	if (b == upto)
-	    return x;
-	d = c;
-	c = w->text[b];
-	switch (c) {
-	case '\n':
-	case '\0':
-	    return x;
-	case '\t':
-	    x = next_tab_pos (x);
-	    break;
-	case '\r':
-	    break;
-	case '\b':
-	    if (d)
-		x -= per_char[d];
-	    break;
-	default:
-	    if (!nroff_printable (c))
-		c = ' ';
-	    x += per_char[c];
-	    break;
-	}
-	b++;
-    }
-}
-
 
 int highlight_this_line;
 
@@ -961,18 +938,18 @@ void convert_text2 (CWidget * w, long q, cache_type *line, int x, int x_max, int
 	    *p++ |= ' ';
 	    if (highlight_this_line) {
 	        q--;
-		x += per_char[' '];
+		x += FONT_PER_CHAR[' '];
 	    } else
 	        return;
 	    break;
 	case '\t':
-	    if (fixed_font) {
+	    if (FIXED_FONT) {
 		int i;
 		i = next_tab_pos (x) - x;
 		x += i;
 		s = *p;
 		while (i > 0) {
-		    i -= per_char[' '];
+		    i -= FONT_PER_CHAR[' '];
 		    *p++ = s | ' ';
 		    *p = 0;
 		}
@@ -986,7 +963,7 @@ void convert_text2 (CWidget * w, long q, cache_type *line, int x, int x_max, int
 	case '\b':
 	    if (d) {
 		--p;
-		x -= per_char[d];
+		x -= FONT_PER_CHAR[d];
 		if (d == '_')
 		    *p |= MOD_ITALIC * 256;
 		else
@@ -998,7 +975,7 @@ void convert_text2 (CWidget * w, long q, cache_type *line, int x, int x_max, int
 		c = ' ';
 		*p |= MOD_ABNORMAL * 256;
 	    }
-	    x += per_char[c];
+	    x += FONT_PER_CHAR[c];
 	    *p &= 0xFFFFFF00UL;
 	    *p |= c;
 	    p++;
