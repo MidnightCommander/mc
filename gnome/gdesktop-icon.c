@@ -8,6 +8,9 @@
 #include <config.h>
 #include <gnome.h>
 #include <sys/stat.h>
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+#include <gdk/gdkx.h>
 #include "gdesktop-icon.h"
 #include "dir.h"
 #include "gdesktop.h"
@@ -104,7 +107,7 @@ desktop_icon_init (DesktopIcon *dicon)
 	/* Set the window policy */
 
 	gtk_window_set_policy (GTK_WINDOW (dicon), TRUE, TRUE, TRUE);
-	gtk_window_set_wmclass (GTK_WINDOW (dicon), "desktop_icon", "gmc");
+
 	/* Create the canvas */
 
 	dicon->canvas = gnome_canvas_new ();
@@ -159,12 +162,6 @@ desktop_icon_realize (GtkWidget *widget)
 
 	gdk_window_set_decorations (widget->window, 0);
 	gdk_window_set_functions (widget->window, 0);
-
-	/* Remove the client leader property so that the window manager will not
-	 * save SM information for icons.
-	 */
-
-	gdk_property_delete (widget->window, gdk_atom_intern ("WM_CLIENT_LEADER", FALSE));
 
 	/* Set the proper GNOME hints */
 	

@@ -783,6 +783,27 @@ file_entry_free (file_entry *fe)
 	g_free (fe);
 }
 
+/* Sets the wmclass and name of a desktop icon to an unique value */
+static void
+set_icon_wmclass (DesktopIconInfo *dii)
+{
+	XClassHint *h;
+
+	g_assert (GTK_WIDGET_REALIZED (dii->dicon));
+
+	h = XAllocClassHint ();
+	if (!h) {
+		g_warning ("XAllocClassHint() failed!");
+		return; /* eek */
+	}
+
+	h->res_name = dii->filename;
+	h->res_class = "gmc-desktop-icon";
+
+	XSetClassHint (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (GTK_WIDGET (dii->dicon)->window), h);
+	XFree (h);
+}
+
 /*
  * Callback used when an icon's text changes.  We must validate the
  * rename and return the appropriate value.  The desktop icon info
@@ -812,8 +833,11 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 		if (mc_rename (source, dest) == 0) {
 			gnome_metadata_delete (dest);
 			gnome_metadata_rename (source, dest);
+
 			g_free (dii->filename);
 			dii->filename = g_strdup (new_name);
+			set_icon_wmclass (dii);
+
 			desktop_reload_icons (FALSE, 0, 0);
 			retval = TRUE;
 		} else
@@ -2002,6 +2026,11 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "selection_stopped",
 			    (GtkSignalFunc) selection_stopped,
 			    dii);
+
+	/* We must set the icon's wmclass and name.  It is already realized (it
+	 * comes out realized from desktop_icon_new()).
+	 */
+	set_icon_wmclass (dii);
 
 	/* Prepare the DnD functionality for this icon */
 
