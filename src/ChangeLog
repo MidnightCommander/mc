@@ -1,3 +1,12 @@
+2002-12-24  Pavel Roskin  <proski@gnu.org>
+
+	* dlg.h: Add new event DLG_VALIDATE.
+	* dlg.c (frontend_run_dlg): Send DLG_VALIDATE.
+	(select_a_widget): Don't send DLG_ONE_DOWN, nobody uses it.
+	* find.c (find_parm_callback): New callback for the parameter
+	dialog.  Don't allow stopping the dialog if the regular
+	expression is invalid.
+
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c (init_curses) [HAVE_SLANG]: Don't call

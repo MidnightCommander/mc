@@ -382,8 +382,6 @@ static void select_a_widget (Dlg_head *h, int down)
 	    h->current = h->current->next;
 	else
 	    h->current = h->current->prev;
-
-	(*h->callback) (h, h->current->dlg_id, DLG_ONE_DOWN);
     } while (!dlg_focus (h));
 }
 
@@ -399,8 +397,9 @@ int dlg_overlap (Widget *a, Widget *b)
 }
 
 
-/* Searches a widget, uses the callback as a signature in the dialog h */
-Widget *find_widget_type (Dlg_head *h, callback_fn signature)
+/* Find the widget with the given callback in the dialog h */
+Widget *
+find_widget_type (Dlg_head *h, callback_fn signature)
 {
     Widget *w;
     Widget_Item *item;
@@ -412,8 +411,8 @@ Widget *find_widget_type (Dlg_head *h, callback_fn signature)
 	return 0;
 
     w = 0;
-    for (i = 0, item = h->current; i < h->count; i++, item = item->next){
-	if (item->widget->callback == signature){
+    for (i = 0, item = h->current; i < h->count; i++, item = item->next) {
+	if (item->widget->callback == signature) {
 	    w = item->widget;
 	    break;
 	}
@@ -812,6 +811,9 @@ frontend_run_dlg (Dlg_head *h)
 	d_key = get_event (&event, h->mouse_status == MOU_REPEAT, 1);
 
 	dlg_process_event (h, d_key, &event);
+
+	if (!h->running)
+	    (*h->callback) (h, 0, DLG_VALIDATE);
     }
 }
 

@@ -69,7 +69,9 @@ char *find_ignore_dirs = 0;
 
 static WInput *in_start;	/* Start path */
 static WInput *in_name;		/* Pattern to search */
-static WInput *in_with;		/* text inside filename */
+static WInput *in_with;		/* Text inside filename */
+static WCheck *case_sense;	/* "case sensitive" checkbox */
+
 static int running = 0;		/* nice flag */
 static char *find_pattern;	/* Pattern to search */
 static char *content_pattern;	/* pattern to search inside files */
@@ -115,6 +117,37 @@ static void get_list_info (char **file, char **dir);
 /* FIXME: r should be local variables */
 static regex_t *r; /* Pointer to compiled content_pattern */
  
+static int case_sensitive = 1;
+
+/*
+ * Callback for the parameter dialog.
+ * Validate regex, prevent closing the dialog if it's invalid.
+ */
+static int
+find_parm_callback (struct Dlg_head *h, int id, int Msg)
+{
+    int flags;
+
+    switch (Msg) {
+    case DLG_VALIDATE:
+	if ((h->ret_value != B_ENTER) || !in_with->buffer[0])
+	    return MSG_HANDLED;
+
+	flags = REG_EXTENDED | REG_NOSUB;
+
+	if (!(case_sense->state & C_BOOL))
+	    flags |= REG_ICASE;
+
+	if (regcomp (r, in_with->buffer, flags)) {
+	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
+	    dlg_select_widget (h, in_with);
+	    h->running = 1;	/* Don't stop the dialog */
+	}
+	return MSG_HANDLED;
+    }
+    return default_dlg_callback (h, id, Msg);
+}
+
 /*
  * find_parameters: gets information from the user
  *
@@ -128,15 +161,11 @@ static regex_t *r; /* Pointer to compiled content_pattern */
  * behavior for the other two parameters.
  *
  */
-
-static int case_sensitive = 1;
-
 static int
 find_parameters (char **start_dir, char **pattern, char **content)
 {
     int return_value;
     char *temp_dir;
-    WCheck *case_sense;
     static char *case_label = N_("case &Sensitive");
 
     static char *in_contents = NULL;
@@ -191,15 +220,20 @@ find_parameters (char **start_dir, char **pattern, char **content)
     if (!in_contents)
 	in_contents = g_strdup ("");
 
-    find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors, NULL,
-			   "[Find File]", _("Find File"), DLG_CENTER);
+    find_dlg =
+	create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
+		    find_parm_callback, "[Find File]", _("Find File"),
+		    DLG_CENTER);
 
-    add_widget (find_dlg, button_new (11, b2, B_CANCEL, NORMAL_BUTTON,
-				      buts[2], 0, 0, "cancel"));
-    add_widget (find_dlg, button_new (11, b1, B_TREE, NORMAL_BUTTON,
-				      buts[1], 0, 0, "tree"));
-    add_widget (find_dlg, button_new (11, b0, B_ENTER, DEFPUSH_BUTTON,
-				      buts[0], 0, 0, "ok"));
+    add_widget (find_dlg,
+		button_new (11, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0, 0,
+			    "cancel"));
+    add_widget (find_dlg,
+		button_new (11, b1, B_TREE, NORMAL_BUTTON, buts[1], 0, 0,
+			    "tree"));
+    add_widget (find_dlg,
+		button_new (11, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0, 0,
+			    "ok"));
 
     case_sense =
 	check_new (9, 3, case_sensitive, case_label, "find-case-check");
@@ -249,19 +283,6 @@ find_parameters (char **start_dir, char **pattern, char **content)
     default:
 	g_free (in_contents);
 	if (in_with->buffer[0]) {
-	    int flags = REG_EXTENDED | REG_NOSUB;
-
-	    if (!(case_sense->state & C_BOOL))
-		flags |= REG_ICASE;
-
-	    if (regcomp (r, in_with->buffer, flags)) {
-		*content = in_contents = NULL;
-		r = 0;
-		message (1, MSG_ERROR,
-			 _("  Malformed regular expression  "));
-		return_value = 0;
-		break;
-	    }
 	    *content = g_strdup (in_with->buffer);
 	    in_contents = g_strdup (*content);
 	} else {

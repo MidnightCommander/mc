@@ -45,22 +45,21 @@ enum {
 
 /* Dialog messages */
 enum {
-    DLG_KEY,			/* Sent on keypress before sending to widget */
-    DLG_INIT,			/* Sent on init */
-    DLG_END,			/* Sent on shutdown */
-    DLG_ACTION,			
-    DLG_DRAW,			/* Sent for updating dialog managed area */
-    DLG_FOCUS,			/* Sent on give focus to a widget */
-    DLG_UNFOCUS,		/* Sent on remove focus from widget */
-    DLG_RESIZE,			/* Sent when the window size changes */
-    DLG_ONE_UP,			/* Sent on selecting next */
-    DLG_ONE_DOWN,		/* Sent on selecting prev */
-    DLG_POST_KEY,		/* Sent after key has been sent */
-    DLG_IDLE,			/* Sent if idle is active */
-    DLG_UNHANDLED_KEY,		/* Send if no widget wanted the key */
-    DLG_HOTKEY_HANDLED,		/* Send if a child got the hotkey */
-    DLG_PRE_EVENT               /* Send before calling get_event */
-} /* Dialog_Messages */;
+    DLG_KEY,			/* Key before sending to widget */
+    DLG_INIT,			/* Initialize dialog */
+    DLG_END,			/* Shut down dialog */
+    DLG_ACTION,			/* State of check- and radioboxes has changed */
+    DLG_DRAW,			/* Draw dialog on screen */
+    DLG_FOCUS,			/* A widget has got focus */
+    DLG_UNFOCUS,		/* A widget has been unfocused */
+    DLG_RESIZE,			/* Window size has changed */
+    DLG_POST_KEY,		/* The key has been handled */
+    DLG_IDLE,			/* The idle state is active */
+    DLG_UNHANDLED_KEY,		/* Key that no widget handled */
+    DLG_HOTKEY_HANDLED,		/* A widget has got the hotkey */
+    DLG_PRE_EVENT,		/* About to get new event */
+    DLG_VALIDATE		/* Dialog is to be closed */
+} /* Dialog_Messages */ ;
 
 
 /* Dialog callback */
