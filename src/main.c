@@ -266,9 +266,6 @@ static int edit_one_file_start_line = 0;
    shut down */
 int midnight_shutdown = 0;
 
-/* Used for keeping track of the original stdout */
-int stdout_fd = 0;
-
 /* The user's shell */
 char *shell;
 
