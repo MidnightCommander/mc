@@ -7,16 +7,16 @@
  *
  */
 #include <config.h>
-#include "treestore.h"
+#include "global.h"
 #include <gnome.h>
-#include "gtkdtree.h"
 #include <sys/types.h>
 #include <dirent.h>
 #include <sys/stat.h>
 #include <unistd.h>
-#include "global.h"
 #include "dir-open.xpm"
 #include "dir-close.xpm"
+#include "treestore.h"
+#include "gtkdtree.h"
 
 #ifdef HACK
 # define mc_opendir opendir
