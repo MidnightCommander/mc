@@ -3,6 +3,11 @@ Before 4.6.0-pre2
 
 Totals are not calculated when operating on a single directory.
 
+When using included S-Lang, don't fill empty areas with spaces (' '),
+because they are copied to the buffer when doing cut and paste.
+
+Alt-P in the editor should return the viewport to the leftmost position.
+
 Recheck and clean up manuals.  Add node names to the English manual.
 
 Check "mc --help-colors" for completeness.
