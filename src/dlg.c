@@ -770,11 +770,12 @@ void init_dlg (Dlg_head *h)
     /* Initialize the mouse status */
     h->mouse_status = MOU_NORMAL;
 
-    /* Redraw the screen */
-    dlg_redraw (h);
-
+    /* Select the first widget that takes focus */
     while (!dlg_focus (h) && h->current)
 	h->current = h->current->next;
+
+    /* Redraw the screen */
+    dlg_redraw (h);
 
     h->ret_value = 0;
     h->running = 1;

@@ -1,5 +1,10 @@
 2002-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (init_dlg): Redraw screen after selecting the focused
+	widget, not before.  The bug affected file progress dialog with
+	verbose operation off.
+	Reported by Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
+
 	* filegui.c (check_progress_buttons): Reinitialize ret_value to
 	avoid old values after events other than selecting a button.
 	Reported by Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
