@@ -1,5 +1,8 @@
 2001-10-05  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Use ogginfo to view *.ogg files.
+	Suggested by Marcel Pol <mpol@gmx.net>
+
 	* lib/mc.ext.in: Use xmms to play *.mp3 under X.  When viewing
 	*.mp3, use "verbose" option to mpg123.  Add support for *.ogg
 	and *.mid files.

@@ -262,7 +262,7 @@ regex/\.(mp3|MP3|Mp3)$
 
 regex/\.(ogg|OGG|Ogg)$
 	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f &); fi
-	View=%view{ascii} ogg123 -v -d null -k -1 %f 2>&1 | sed -n '/^Bitstream/,/^$/p'
+	View=%view{ascii} ogginfo %s
 
 regex/\.(midi?|MIDI?|Midi?)$
 	Open=timidity %f
