@@ -433,11 +433,11 @@ library.  If this is what you want to do, use the GNU
 Library General Public License instead of this License.
 
 [QueryBox]
-Dialoghi di richiesta dati
+Finestre di dialogo di richiesta dati
 
-Nelle finestra di richiesta dati è possibile usare i tasti
-freccia o la prima lettera per selezionare una voce o
-cliccare con il mouse sul bottone.
+Nelle finestre di dialogo di richiesta dati è possibile 
+usare i tasti freccia o la prima lettera per selezionare 
+una voce o cliccare con il mouse sul bottone.
 
 [How to use help]
 Come usare l'aiuto interattivo
