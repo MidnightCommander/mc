@@ -409,41 +409,6 @@ AC_ARG_WITH(hsc,
 ])
 
 dnl
-dnl Check for Gnome
-dnl
-mx=""
-libgtkedit=""
-xvers="none"
-
-GNOME_INIT_HOOK([
-	mx=mx
-	libgtkedit="libgtkedit.a"
-	if test x"$xvers" = xnone; then
-	    xvers="Gnome"
-	else
-	    xvers="Gnome+$xvers"
-	fi
-	gnomeicondir=`gnome-config --datadir`/pixmaps
-
-dnl Check for new enough gnome-libs
-	CFLAGS_save=$CFLAGS
-	LIBS_save=$LIBS
-	CFLAGS=`gnome-config --cflags gnomeui`
-	LIBS=`gnome-config --libs gnomeui`
-
-	AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file,
-			      [AC_DEFINE(HAVE_GNOME_WINDOW_ICON)])
-
-	CFLAGS=$CFLAGS_save
-	LIBS=$LIBS_save
-])
-AC_SUBST(gnomeicondir)
-AC_SUBST(mx)
-AC_SUBST(libgtkedit)
-AC_SUBST(GNOMEGNORBA_LIBS)
-AM_CONDITIONAL(GNOME, [test x"$mx" = xmx])
-
-dnl
 dnl Check for the -mandoc package
 dnl
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
@@ -961,21 +926,13 @@ Make.common
 Makefile 
 mc.spec
 doc/Makefile 
-doc-gnome/Makefile
-doc-gnome/C/Makefile
-doc-gnome/C/figs/Makefile
 vfs/Makefile:vfs/Make-mc.in
 vfs/extfs/Makefile
 lib/Makefile
-gnome/Makefile 
-gnome/mc.keys.in
-idl/Makefile
 src/Makefile
 slang/Makefile 
 edit/Makefile 
-gtkedit/Makefile 
 syntax/Makefile
-new_icons/Makefile 
 pc/Makefile
 
 lib/mc.ext

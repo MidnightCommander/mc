@@ -1,7 +1,6 @@
 ## Process this file with automake to create Makefile.in.
 
-SUBDIRS = intl po vfs slang edit src lib doc syntax pc \
-	gtkedit gnome new_icons idl doc-gnome
+SUBDIRS = intl po vfs slang edit src lib doc syntax pc
 
 ACLOCAL_AMFLAGS = -I macros
 

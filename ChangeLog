@@ -1,5 +1,8 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove all GNOME stuff except GNOME_VFS_CHECKS.
+	* Makefile.am (SUBDIRS): Remove all GNOME-related directories.
+
 	* lib/startup.links: Remove.
 	* lib/README.desktop: Likewise.
 	* lib/Makefile.am: Remove all references to DESKTOP_FILES.
