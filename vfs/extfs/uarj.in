@@ -60,7 +60,7 @@ mcarjfs_list ()
 
 mcarjfs_copyout ()
 {
-    $ARJ p "$1" "$2" > "$3" 2>/dev/null
+    $ARJ e -y "$1" "$2" -jw"$3" >/dev/null 2>/dev/null
 }
 
 
