@@ -16,7 +16,7 @@
 #define B_USER          100
 
 /* Widget messages */
-enum {
+typedef enum {
     WIDGET_INIT,		/* Initialize widget */
     WIDGET_FOCUS,		/* Draw widget in focused state */
     WIDGET_UNFOCUS,		/* Draw widget in unfocused state */
@@ -26,14 +26,12 @@ enum {
     WIDGET_DESTROY,		/* Sent to widget at destruction time */
     WIDGET_CURSOR,		/* Sent to widget to position the cursor */
     WIDGET_IDLE,		/* Send to widgets with options & W_WANT_IDLE*/
-    WIDGET_USER  = 0x100000
+} widget_msg_t;
 
-} /* Widget_Messages */;
-
-enum {
+typedef enum {
     MSG_NOT_HANDLED,
     MSG_HANDLED
-} /* WRET */;
+} cb_ret_t;
 
 /* Widgets are expected to answer to the following messages:
 
@@ -44,7 +42,7 @@ enum {
 */
 
 /* Dialog messages */
-enum {
+typedef enum {
     DLG_KEY,			/* Key before sending to widget */
     DLG_INIT,			/* Initialize dialog */
     DLG_END,			/* Shut down dialog */
@@ -58,7 +56,7 @@ enum {
     DLG_UNHANDLED_KEY,		/* Key that no widget handled */
     DLG_HOTKEY_HANDLED,		/* A widget has got the hotkey */
     DLG_VALIDATE		/* Dialog is to be closed */
-} /* Dialog_Messages */ ;
+} dlg_msg_t;
 
 
 /* Dialog callback */

@@ -1,5 +1,8 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h: Remove WIDGET_USER.  Define new types dlg_msg_t,
+	widget_msg_t and cb_ret_t.
+
 	* dlg.c (find_widget_type): Take pointer to void to avoid casts
 	everywhere.  Adjust all callers.
 
