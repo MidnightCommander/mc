@@ -1,5 +1,8 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* ext.c: (regex_check_type): Further split.  Restore caching
+	broken in the previous commit.
+
 	* ext.c (regex_command): Separate checking for "type/" into ...
 	(regex_check_type): ... this.
 

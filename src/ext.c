@@ -277,104 +277,150 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
 #endif
 
 /*
+ * Run the "file" command on the local file.
+ * Return 1 if the data is valid, 0 otherwise.
+ */
+int
+get_file_type_local (char *filename, char *buf, int buflen)
+{
+    int read_bytes = 0;
+
+    char *tmp = name_quote (filename, 0);
+    char *command = g_strconcat (FILE_CMD, tmp, NULL);
+    FILE *f = popen (command, "r");
+
+    g_free (tmp);
+    g_free (command);
+    if (f != NULL) {
+	read_bytes = (fgets (buf, buflen - 1, f)
+		      != NULL);
+	if (read_bytes == 0)
+	    buf[0] = 0;
+	pclose (f);
+#ifdef SCO_FLAVOR
+	/*
+	   **       SCO 3.2 does has a buggy pclose(), so
+	   **       <command> become zombie (alex)
+	 */
+	waitpid (-1, NULL, WNOHANG);
+#endif				/* SCO_FLAVOR */
+    }
+
+    return (read_bytes > 0);
+}
+
+
+#ifdef FILE_STDIN
+/*
+ * Read file through VFS and feed is to the "file" command.
+ * Return 1 if the data is valid, 0 otherwise.
+ */
+int
+get_file_type_pipe (char *filename, char *buf, int buflen)
+{
+    int read_bytes = 0;
+
+    int pipehandle, remotehandle;
+    pid_t p;
+
+    remotehandle = mc_open (filename, O_RDONLY);
+    if (remotehandle != -1) {
+	/* 8192 is HOWMANY hardcoded value in the file-3.14
+	 * sources. Tell me if any other file uses larger
+	 * chunk from beginning
+	 */
+	pipehandle = mc_doublepopen
+	    (remotehandle, 8192, &p, "file", "file", "-", NULL);
+	if (pipehandle != -1) {
+	    int i;
+	    while ((i = read (pipehandle, buf
+			      + read_bytes, buflen - 1 - read_bytes)) > 0)
+		read_bytes += i;
+	    mc_doublepclose (pipehandle, p);
+	    buf[read_bytes] = 0;
+	}
+	mc_close (remotehandle);
+    }
+
+    return (read_bytes > 0);
+}
+#endif				/* FILE_STDIN */
+
+
+/*
  * Invoke the "file" command on the file and match its output against PTR.
+ * have_type is a flag that is set if we already have tried to determine
+ * the type of that file.
  * Return 1 for match, 0 otherwise.
  */
 static int
-regex_check_type (char *filename, int file_len, char *ptr)
+regex_check_type (char *filename, int file_len, char *ptr, int *have_type)
 {
     int found = 0;
-    int islocal = vfs_file_is_local (filename);
-    int asked_file = 0;		/* Have we asked file for the file contents? */
-    char content_string[2048];
-    int content_shift = 0;
+    int islocal;
 
-#ifdef FILE_STDIN
-    int file_supports_stdin = 1;
-#else
-    int file_supports_stdin = 0;
-#endif
+    /* Following variables are valid if *have_type is 1 */
+    static char content_string[2048];
+    static int content_shift = 0;
+    static int got_data = 0;
 
-    if (islocal || file_supports_stdin) {
-	char *pp;
-	int hasread = use_file_to_check_type;
+    if (!use_file_to_check_type) {
+	return 0;
+    }
 
-	if (asked_file || !use_file_to_check_type)
-	    goto match_file_output;
+    islocal = vfs_file_is_local (filename);
 
-	hasread = 0;
+    if (!*have_type) {
+	/* Don't repeate even unsuccessful checks */
+	*have_type = 1;
+
 	if (islocal) {
-	    char *tmp = name_quote (filename, 0);
-	    char *command = g_strconcat (FILE_CMD, tmp, NULL);
-	    FILE *f = popen (command, "r");
-
-	    g_free (tmp);
-	    g_free (command);
-	    if (f != NULL) {
-		hasread = (fgets (content_string, 2047, f)
-			   != NULL);
-		if (!hasread)
-		    content_string[0] = 0;
-		pclose (f);
-#ifdef SCO_FLAVOR
-		/*
-		   **       SCO 3.2 does has a buggy pclose(), so
-		   **       <command> become zombie (alex)
-		 */
-		waitpid (-1, NULL, WNOHANG);
-#endif				/* SCO_FLAVOR */
-	    }
-	} else {
-#ifdef _OS_NT
-	    message (1, " Win32 ", " Unimplemented file prediction ");
-#else
-	    int pipehandle, remotehandle;
-	    pid_t p;
-
-	    remotehandle = mc_open (filename, O_RDONLY);
-	    if (remotehandle != -1) {
-		/* 8192 is HOWMANY hardcoded value in the file-3.14
-		 * sources. Tell me if any other file uses larger
-		 * chunk from beginning
-		 */
-		pipehandle = mc_doublepopen
-		    (remotehandle, 8192, &p, "file", "file", "-", NULL);
-		if (pipehandle != -1) {
-		    int i;
-		    while ((i = read (pipehandle, content_string
-				      + hasread, 2047 - hasread)) > 0)
-			hasread += i;
-		    mc_doublepclose (pipehandle, p);
-		    content_string[hasread] = 0;
-		}
-		mc_close (remotehandle);
-	    }
-#endif				/* _OS_NT */
+	    got_data = get_file_type_local (filename, content_string,
+					    sizeof (content_string));
+	} else
+#ifdef FILE_STDIN
+	{
+	    got_data = get_file_type_pipe (filename, content_string,
+					   sizeof (content_string));
 	}
-	asked_file = 1;
-      match_file_output:
-	if (hasread) {
+#else
+	    /* Cannot use pipe, must make a local copy, not yet supported */
+	    return 0;
+#endif				/* !FILE_STDIN */
+
+	if (got_data) {
+	    char *pp;
+
+	    /* Paranoid termination */
+	    content_string[sizeof (content_string) - 1] = 0;
+
 	    if ((pp = strchr (content_string, '\n')) != 0)
 		*pp = 0;
+
 	    if (islocal && !strncmp (content_string, filename, file_len)) {
+		/* Skip "filename: " */
 		content_shift = file_len;
 		if (content_string[content_shift] == ':')
 		    for (content_shift++;
 			 content_string[content_shift] == ' ';
 			 content_shift++);
 	    } else if (!islocal
-		       && !strncmp (content_string,
-				    "standard input:", 15)) {
+		       && !strncmp (content_string, "standard input:",
+				    15)) {
+		/* Skip "standard input: " */
 		for (content_shift = 15;
 		     content_string[content_shift] == ' ';
 		     content_shift++);
 	    }
-	    if (content_string &&
-		regexp_match (ptr, content_string +
-			      content_shift, match_normal)) {
-		found = 1;
-	    }
+	} else {
+	    /* No data */
+	    content_string[0] = 0;
 	}
+    }
+
+    if (content_string && content_string[0] &&
+	regexp_match (ptr, content_string + content_shift, match_normal)) {
+	found = 1;
     }
 
     return found;
@@ -402,6 +448,7 @@ regex_command (char *filename, char *action, int *move_dir)
     int view_at_line_number;
     char *include_target;
     int include_target_len;
+    int have_type = 0;		/* Flag used by regex_check_type() */
 
     /* Check for the special View:%d parameter */
     if (strncmp (action, "View:", 5) == 0) {
@@ -524,7 +571,8 @@ file as an example of how to write it.\n\
 		}
 	    } else if (!strncmp (p, "type/", 5)) {
 		p += 5;
-		found = regex_check_type (filename, file_len, p);
+		found =
+		    regex_check_type (filename, file_len, p, &have_type);
 	    } else if (!strncmp (p, "default/", 8)) {
 		found = 1;
 	    }
