@@ -1,5 +1,12 @@
 1998-10-28  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop-icon.c (create_window_shape): Use shaped icons only
+	when the user has selected them.
+	(desktop_icon_reshape): New public function to recompute the shape
+	of the icon.  This should be used when the global
+	desktop_use_shaped_icons flag changes.
+	Added documentation comments to the public functions.
+
 	* Makefile.in: Fixed for gdesktop-icon.
 
 	* gdesktop-icon.[ch]: Renamed from desktop-icon.[ch], per Miguel's

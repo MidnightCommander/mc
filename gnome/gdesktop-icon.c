@@ -2,7 +2,7 @@
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena-Quintero <federico@nuclecu.unam.mx>
+ * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
 #include <config.h>
@@ -23,6 +23,11 @@ static void desktop_icon_realize    (GtkWidget        *widget);
 static GtkWindowClass *parent_class;
 
 
+/**
+ * desktop_icon_get_type
+ *
+ * Returns the Gtk type assigned to the DesktopIcon class.
+ */
 GtkType
 desktop_icon_get_type (void)
 {
@@ -88,7 +93,7 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 	gdk_imlib_render (im, icon_width, icon_height);
 	im_mask = gdk_imlib_move_mask (im);
 
-	if (im_mask) {
+	if (im_mask && desktop_use_shaped_icons) {
 		gdk_draw_pixmap (mask,
 				 mgc,
 				 im_mask,
@@ -116,50 +121,6 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 	gdk_gc_unref (mgc);
 }
 
-/* Resets the positions of the desktop icon's child items and recomputes the window's shape mask */
-static void
-reshape (DesktopIcon *dicon)
-{
-	GtkArg args[2];
-	int icon_width, icon_height;
-	int text_width, text_height;
-	double x1, y1, x2, y2;
-
-	/* Get size of icon image */
-
-	args[0].name = "width";
-	args[1].name = "height";
-	gtk_object_getv (GTK_OBJECT (dicon->icon), 2, args);
-	icon_width = GTK_VALUE_DOUBLE (args[0]);
-	icon_height = GTK_VALUE_DOUBLE (args[0]);
-
-	/* Get size of icon text */
-
-	gnome_canvas_item_get_bounds (dicon->text, &x1, &y1, &x2, &y2);
-
-	text_width = x2 - x1 + 1;
-	text_height = y2 - y1 + 1;
-
-	/* Calculate new size of widget */
-
-	dicon->width = MAX (icon_width, SNAP_X);
-	dicon->height = icon_height + SPACING + text_height;
-
-	/* Set new position of children */
-
-	gnome_canvas_item_set (dicon->icon,
-			       "x", (dicon->width - icon_width) / 2.0,
-			       "y", 0.0,
-			       NULL);
-
-	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text), 0, icon_height + SPACING);
-
-	/* Create and set the window shape */
-
-	gtk_widget_set_usize (GTK_WIDGET (dicon), dicon->width, dicon->height);
-	create_window_shape (dicon, icon_width, icon_height, text_width, text_height);
-}
-
 /* Callback used when the size of the icon text item changes */
 static void
 size_changed (GnomeIconTextItem *text, gpointer data)
@@ -168,7 +129,7 @@ size_changed (GnomeIconTextItem *text, gpointer data)
 
 	dicon = DESKTOP_ICON (data);
 
-	reshape (dicon);
+	desktop_icon_reshape (dicon);
 }
 
 static void
@@ -197,6 +158,7 @@ desktop_icon_init (DesktopIcon *dicon)
 	dicon->text = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (dicon->canvas)),
 					     gnome_icon_text_item_get_type (),
 					     NULL);
+	gnome_icon_text_item_select (GNOME_ICON_TEXT_ITEM (dicon->text), TRUE);
 	dicon->w_changed_id = gtk_signal_connect (GTK_OBJECT (dicon->text), "width_changed",
 						  (GtkSignalFunc) size_changed,
 						  dicon);
@@ -281,7 +243,7 @@ set_text (DesktopIcon *dicon, char *text)
 
 	gnome_icon_text_item_configure (GNOME_ICON_TEXT_ITEM (dicon->text),
 					0, icon_height + SPACING,
-					SNAP_X,
+					DESKTOP_SNAP_X,
 					DESKTOP_ICON_FONT,
 					text,
 					TRUE);
@@ -290,6 +252,16 @@ set_text (DesktopIcon *dicon, char *text)
 	gtk_signal_handler_unblock (GTK_OBJECT (dicon->text), dicon->h_changed_id);
 }
 
+/**
+ * desktop_icon_new
+ * @image_file:	Name of the image file that contains the icon.
+ * @text:	Text to use for the icon.
+ *
+ * Creates a new desktop icon widget with the specified icon image and text.  The icon has to be
+ * positioned at the desired place.
+ *
+ * Returns the newly-created desktop icon widget.
+ */
 GtkWidget *
 desktop_icon_new (char *image_file, char *text)
 {
@@ -302,11 +274,18 @@ desktop_icon_new (char *image_file, char *text)
 
 	set_icon (dicon, image_file);
 	set_text (dicon, text);
-	reshape (dicon);
+	desktop_icon_reshape (dicon);
 
 	return GTK_WIDGET (dicon);
 }
 
+/**
+ * desktop_icon_set_icon
+ * @dicon:	The desktop icon to set the icon for
+ * @image_file:	Name of the image file that contains the icon
+ *
+ * Sets a new icon for an existing desktop icon.  If the file does not exist, it does nothing.
+ */
 void
 desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
 {
@@ -315,9 +294,16 @@ desktop_icon_set_icon (DesktopIcon *dicon, char *image_file)
 	g_return_if_fail (image_file != NULL);
 
 	set_icon (dicon, image_file);
-	reshape (dicon);
+	desktop_icon_reshape (dicon);
 }
 
+/**
+ * desktop_icon_set_text
+ * @dicon:	The desktop icon to set the text for
+ * @text:	The new text to use for the icon's title
+ *
+ * Sets a new title for an existing desktop icon.
+ */
 void
 desktop_icon_set_text (DesktopIcon *dicon, char *text)
 {
@@ -326,5 +312,58 @@ desktop_icon_set_text (DesktopIcon *dicon, char *text)
 	g_return_if_fail (text != NULL);
 
 	set_text (dicon, text);
-	reshape (dicon);
+	desktop_icon_reshape (dicon);
+}
+
+/**
+ * desktop_icon_reshape
+ * @dicon:	The desktop icon whose shape will be recalculated
+ *
+ * Recomputes the window shape for the specified desktop icon.  This needs to be called only when
+ * the global desktop_use_shaped_icons flag changes.
+ */
+void
+desktop_icon_reshape (DesktopIcon *dicon)
+{
+	GtkArg args[2];
+	int icon_width, icon_height;
+	int text_width, text_height;
+	double x1, y1, x2, y2;
+
+	g_return_if_fail (dicon != NULL);
+	g_return_if_fail (IS_DESKTOP_ICON (dicon));
+
+	/* Get size of icon image */
+
+	args[0].name = "width";
+	args[1].name = "height";
+	gtk_object_getv (GTK_OBJECT (dicon->icon), 2, args);
+	icon_width = GTK_VALUE_DOUBLE (args[0]);
+	icon_height = GTK_VALUE_DOUBLE (args[0]);
+
+	/* Get size of icon text */
+
+	gnome_canvas_item_get_bounds (dicon->text, &x1, &y1, &x2, &y2);
+
+	text_width = x2 - x1 + 1;
+	text_height = y2 - y1 + 1;
+
+	/* Calculate new size of widget */
+
+	dicon->width = MAX (icon_width, DESKTOP_SNAP_X);
+	dicon->height = icon_height + SPACING + text_height;
+
+	/* Set new position of children */
+
+	gnome_canvas_item_set (dicon->icon,
+			       "x", (dicon->width - icon_width) / 2.0,
+			       "y", 0.0,
+			       NULL);
+
+	gnome_icon_text_item_setxy (GNOME_ICON_TEXT_ITEM (dicon->text), 0, icon_height + SPACING);
+
+	/* Create and set the window shape */
+
+	gtk_widget_set_usize (GTK_WIDGET (dicon), dicon->width, dicon->height);
+	create_window_shape (dicon, icon_width, icon_height, text_width, text_height);
 }

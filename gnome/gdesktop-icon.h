@@ -2,11 +2,11 @@
  *
  * Copyright (C) 1998 The Free Software Foundation
  *
- * Author: Federico Mena-Quintero <federico@nuclecu.unam.mx>
+ * Author: Federico Mena <federico@nuclecu.unam.mx>
  */
 
-#ifndef DESKTOP_ICON_H
-#define DESKTOP_ICON_H
+#ifndef GDESKTOP_ICON_H
+#define GDESKTOP_ICON_H
 
 #include <libgnome/gnome-defs.h>
 #include <gtk/gtkwindow.h>
@@ -59,6 +59,9 @@ void desktop_icon_set_icon (DesktopIcon *dicon, char *image_file);
 
 /* Sets the icon's text */
 void desktop_icon_set_text (DesktopIcon *dicon, char *text);
+
+/* Makes the desktop icon reshape itself (for when the global desktop_use_shaped_icons flag changes) */
+void desktop_icon_reshape (DesktopIcon *dicon);
 
 
 END_GNOME_DECLS
