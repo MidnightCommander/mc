@@ -1,5 +1,8 @@
 2001-08-10  Pavel Roskin  <proski@gnu.org>
 
+	* FAQ: Eliminate all broken URLs on the MC site.
+	From Frederic L. W. Meunier <0@pervalidus.net>
+
 	* FAQ: Restore information about xterm.
 
 2001-08-08  Pavel Roskin  <proski@gnu.org>

@@ -70,7 +70,6 @@ Questions and Answers
           + 8.5 Why I keep getting: "There is no disk in the drive.
             Please insert a disk into drive D:"?
           + 8.6 When I start Midnight Commander, nothing happens!
-          + 8.7 When I try to view a file MC hangs!
      * 9 Development
           + 9.1 Who has written Midnight Commander?
           + 9.2 Do I dare to use a development version?
@@ -130,8 +129,6 @@ Questions and Answers
      * i386-*-windows-nt-3.51, 4.0
      * i386-*-windows95
      * i386-*-os2
-       
-   See http://www.gnome.org/mc/download.html.
    
    Windows 95/NT port can be compiled with Microsoft Visual C++, Borland
    C++, Cygwin32 and Mingw32.
@@ -184,9 +181,6 @@ Questions and Answers
 1.6 Where can I get Midnight Commander?
 
    The main site is ftp://ftp.gnome.org/pub/GNOME/stable/sources/mc/
-
-   For older versions and precompiled binaries see
-   http://www.gnome.org/mc/download.html
    
 1.7 I don't have FTP access. Where can I get MC?
 
@@ -595,12 +589,12 @@ enough?
    
 6.5 Is there any way to include additional options or hot keys to MC?
 
-   Yes, F2 invokes an user menu which fully configurable. You can add any
-   shell commands to the user menu. See
-   http://www.gnome.org/mc/manual-d.html#8 for more info.
+   Yes, F2 invokes an user menu which fully configurable. You can add
+   any shell commands to the user menu. See the mc(1) man page for more
+   info.
    
-   Another way to add functionality is the external panelize feature. See
-   http://www.gnome.org/mc/manual-d.html#4 for more info.
+   Another way to add functionality is the external panelize feature.
+   See the mc(1) man page for more info.
    
    And finally, you can code any feature you want yourself. MC source
    code is free which means you can change it anyway you want. There are
@@ -781,13 +775,6 @@ into drive D:"?
      appeared locked.... However moving the mouse, brought MC to life.
      The mouse I am using is a Kensington Expert Mouse (Trackball).
      
-8.7 When I try to view a file MC hangs!
-
-   This is known bug. A quick fix is "chmod 666 /dev/tty". For a more
-   complete fix, see http://www.gnome.org/mc/maillist/97-10/98.html.
-   
-   This bug is fixed since 4.1.6.
-   
 9 Development
 
 9.1 Who has written Midnight Commander?
