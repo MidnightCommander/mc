@@ -1,3 +1,8 @@
+2003-04-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* find.c (get_line_at): Strip trailing newline to fix $
+	matching.
+
 2003-03-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* file.c (copy_file_file): Fix data corruption if mc_write()

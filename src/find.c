@@ -394,21 +394,22 @@ find_add_match (Dlg_head *h, char *dir, char *file)
  * has_newline - is there newline ?
  */
 static char *
-get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size, int *has_newline)
+get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
+	     int *has_newline)
 {
     char *buffer = 0;
-    int  buffer_size = 0;
+    int buffer_size = 0;
     char ch = 0;
-    int  i = 0;
+    int i = 0;
 
-    do {
-	if (*pos >= *n_read){
+    for (;;) {
+	if (*pos >= *n_read) {
 	    *pos = 0;
 	    if ((*n_read = mc_read (file_fd, buf, buf_size)) <= 0)
 		break;
 	}
 
-	ch = buf [(*pos)++];
+	ch = buf[(*pos)++];
 	if (ch == 0) {
 	    /* skip possible leading zero(s) */
 	    if (i == 0)
@@ -417,18 +418,20 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size, int *h
 		break;
 	}
 
-	if (i >= buffer_size - 1){
+	if (i >= buffer_size - 1) {
 	    buffer = g_realloc (buffer, buffer_size += 80);
 	}
+	/* Strip newline */
+	if (ch == '\n')
+	    break;
 
-	buffer [i++] = ch;
-
-    } while (ch != '\n');
+	buffer[i++] = ch;
+    }
 
     *has_newline = ch ? 1 : 0;
 
-    if (buffer){
-	buffer [i] = 0;
+    if (buffer) {
+	buffer[i] = 0;
     }
 
     return buffer;
