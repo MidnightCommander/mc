@@ -396,13 +396,14 @@ view_handle_editkey (WView *view, int key)
 
     if (!view->hexedit_text) {
 	/* Hex editing */
+	unsigned int hexvalue = 0;
 
 	if (key >= '0' && key <= '9')
-	    key -= '0';
+	    hexvalue =  0 + (key - '0');
 	else if (key >= 'A' && key <= 'F')
-	    key -= '7';
+	    hexvalue = 10 + (key - 'A');
 	else if (key >= 'a' && key <= 'f')
-	    key -= 'W';
+	    hexvalue = 10 + (key - 'a');
 	else
 	    return MSG_NOT_HANDLED;
 
@@ -412,9 +413,9 @@ view_handle_editkey (WView *view, int key)
 	    byte_val = get_byte (view, view->edit_cursor);
 
 	if (!view->nib_shift) {
-	    byte_val = (byte_val & 0x0f) | (key << 4);
+	    byte_val = (byte_val & 0x0f) | (hexvalue << 4);
 	} else {
-	    byte_val = (byte_val & 0xf0) | (key);
+	    byte_val = (byte_val & 0xf0) | (hexvalue);
 	}
     } else {
 	/* Text editing */
@@ -803,12 +804,6 @@ view_percent (WView *view, int p, int w, gboolean update_gui)
         percent = p / (view->last_byte / 100);
     else
         percent = p * 100 / view->last_byte;
-
-#if 0
-    percent = view->s.st_size == 0 ? 100 :
-	(view->last_byte == view->last ? 100 :
-	 (p) * 100 / view->s.st_size);
-#endif
 
     widget_move (view, view->have_frame, w - 5);
     printw ("%3d%%", percent);
