@@ -187,7 +187,7 @@ edit (const char *_file, int line)
     /* Create a new dialog and add it widgets to it */
     edit_dlg =
 	create_dlg (0, 0, LINES, COLS, NULL, edit_dialog_callback,
-		    "[Internal File Editor]", NULL, DLG_WANT_TAB | DLG_REVERSE);
+		    "[Internal File Editor]", NULL, DLG_WANT_TAB);
 
     init_widget (&(wedit->widget), 0, 0, LINES - 1, COLS,
 		 (callback_fn) edit_callback,
@@ -206,11 +206,10 @@ edit (const char *_file, int line)
 	break;
     }
     edit_menubar = menubar_new (0, 0, COLS, EditMenuBar, N_menus);
-    add_widget (edit_dlg, wedit);
-
-    add_widget (edit_dlg, edit_menubar);
 
     add_widget (edit_dlg, edit_bar);
+    add_widget (edit_dlg, wedit);
+    add_widget (edit_dlg, edit_menubar);
 
     run_dlg (edit_dlg);
 
