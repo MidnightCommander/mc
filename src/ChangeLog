@@ -1,5 +1,8 @@
 2005-03-17  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (chdir_other_panel): Prevent changing current
+	directory.  Remove incorrect comment.
+
 	* achown.c (update_permissions): Partly revert recent changes
 	because they cause infinite recusion.
 

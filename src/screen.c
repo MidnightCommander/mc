@@ -2013,12 +2013,6 @@ do_enter (WPanel *panel)
     return do_enter_on_file_entry (selection (panel));
 }
 
-/*
- * Make the current directory of the current panel also the current
- * directory of the other panel.  Put the other panel to the listing
- * mode if needed.  If the current panel is panelized, the other panel
- * doesn't become panelized.
- */
 static void
 chdir_other_panel (WPanel *panel)
 {
@@ -2033,7 +2027,9 @@ chdir_other_panel (WPanel *panel)
     else
         new_dir = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
-    do_panel_cd (other_panel, new_dir, cd_exact);
+    change_panel ();
+    do_cd (new_dir, cd_exact);
+    change_panel ();
  
     move_down (panel);
 
