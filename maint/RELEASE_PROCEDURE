@@ -1,0 +1,27 @@
+This document describes step by step the release procedure of GNU
+Midnight Commander.
+
+
+Announce the intention to release the next version in both mailing lists
+at least 3 days before the release date, unless it's a security release.
+
+Make sure that all significant user-visible changes are in the NEWS
+file.  Group changes by topics to improve readability.
+
+Review the English version of the manual and fix it if necessary.
+
+Check dates in all manuals and update them if significant changes have
+been done since the previous release.
+
+Make sure that maint/mctest covers most features of the current code and
+run it on a clean working directory.
+
+Review files with stdout and stderr from every build.  Make sure that
+all warnings (if any) are caused by other software and cannot be avoided
+without significant damage to the code.
+
+Upload the resulting tarball and binary packages to login.ibiblio.org.
+
+Change the homepage to mention the new version.
+
+Announce the release in both mailing lists.
