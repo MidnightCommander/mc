@@ -688,7 +688,7 @@ char *
 vfs_canon (const char *path)
 {
     if (!path)
-	vfs_die("Can not canonize NULL");
+	vfs_die("Cannot canonicalize NULL");
 
     /* Tilde expansion */
     if (*path == '~'){ 

@@ -1,3 +1,7 @@
+2001-06-02  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_canon): s/canonize/canonicalize/.
+
 2001-06-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.h: Declare use_netrc, ftpfs_retry_seconds, ftpfs_first_cd_then_ls,
