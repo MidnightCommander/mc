@@ -36,11 +36,11 @@ if ($1 ~ /^l/ ) {
     arrow=""
     linkname=""
 }
-#if ($1 ~ /^d/ )  -- not okay -- this would break empty directories --pavel
-#    next
 
-if (length($1) == 7)
-    $1 = "-rw-r--r--"
+if (length($1) != 10)
+    mode=substr($1, 1, 4) "------"
+else
+    mode=$1
 
 if (nam ~ /^\^/)
     nam=substr(nam, 2)
@@ -49,7 +49,7 @@ if (a[3] < 50)
     a[3] = 2000 + a[3]
 else
     a[3] = 1900 + a[3]
-printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", $1, uid, 0, $4, a[2], a[1], a[3], $9, nam, arrow, linkname
+printf "%s   1 %-8d %-8d %8d %3s %2d %4d %s %s%s%s\n", mode, uid, 0, $4, a[2], a[1], a[3], $9, nam, arrow, linkname
 next
 }
 {
