@@ -2,7 +2,8 @@
  * Controls the desktop contents
  * (C) 1998 the Free Software Foundation
  *
- * Author: Miguel de Icaza (miguel@gnu.org)
+ * Authors: Miguel de Icaza (miguel@gnu.org)
+ *          Federico Mena (federico@nuclecu.unam.mx)
  */
 #include <config.h>
 #include <gnome.h>
@@ -206,7 +207,6 @@ desktop_icon_set_position (desktop_icon_t *di)
 	di->x = x;
 	di->y = y;
 	
-	gdk_window_lower (di->widget->window);
 	gtk_widget_set_uposition (di->widget, x, y);
 }
 
@@ -1074,9 +1074,6 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 #endif
 	if (show)
 		gtk_widget_show (di->widget);
-
-	/* lower the window */
-	gdk_window_lower (di->widget->window);
 }
 
 /* Pops up the icon properties pages */

@@ -1,5 +1,14 @@
 1998-10-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_set_position): Do not lower the
+	window.  The gnome-compliant wm will know what to do with windows
+	on the Desktop layer.
+	(post_setup_desktop_icon): Likewise.
+
+	* desktop-icon.c (create_window_shape): Fetch the mask of the
+	image "by hand", as we cannot rely on the canvas item having
+	created it yet.
+
 	* desktop-icon.c (desktop_icon_realize): Doh.  We need to
 	initialize the gnome_win_hints before we set any of the hints.
 

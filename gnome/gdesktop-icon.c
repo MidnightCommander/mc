@@ -64,6 +64,7 @@ desktop_icon_class_init (DesktopIconClass *class)
 static void
 create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int text_width, int text_height)
 {
+	GdkImlibImage *im;
 	GdkBitmap *mask;
 	GdkBitmap *im_mask;
 	GdkGC *mgc;
@@ -78,21 +79,24 @@ create_window_shape (DesktopIcon *dicon, int icon_width, int icon_height, int te
 	gdk_gc_set_foreground (mgc, &c);
 	gdk_draw_rectangle (mask, mgc, TRUE, 0, 0, dicon->width, dicon->height);
 
-	/* Paint the mask of the image */
-
 	c.pixel = 1;
 	gdk_gc_set_foreground (mgc, &c);
-	
-	im_mask = GNOME_CANVAS_IMAGE (dicon->icon)->mask;
 
-	if (im_mask)
+	/* Paint the mask of the image */
+
+	im = GNOME_CANVAS_IMAGE (dicon->icon)->im;
+	gdk_imlib_render (im, im->rgb_width, im->rgb_height);
+	im_mask = gdk_imlib_move_mask (im);
+
+	if (im_mask) {
 		gdk_draw_pixmap (mask,
 				 mgc,
 				 im_mask,
 				 0, 0,
 				 (dicon->width - icon_width) / 2, 0,
 				 icon_width, icon_height);
-	else
+		gdk_imlib_free_bitmap (im_mask);
+	} else
 		gdk_draw_rectangle (mask, mgc, TRUE,
 				    (dicon->width - icon_width) / 2, 0,
 				    icon_width, icon_height);
@@ -210,12 +214,12 @@ desktop_icon_realize (GtkWidget *widget)
 
 	/* Set the window decorations to none and hints to the appropriate combination */
 
+	gdk_window_set_decorations (widget->window, 0);
+	gdk_window_set_functions (widget->window, 0);
+
 	gnome_win_hints_init ();
 
 	if (gnome_win_hints_wm_exists ()) {
-		gdk_window_set_decorations (widget->window, 0);
-		gdk_window_set_functions (widget->window, 0);
-
 		gnome_win_hints_set_layer (widget, WIN_LAYER_DESKTOP);
 		gnome_win_hints_set_hints (widget,
 					   (WIN_HINTS_SKIP_FOCUS
