@@ -26,29 +26,29 @@ SWITCH: for ( $ARGV[0] ) {
   /mkdir/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mmd $disk:/$ARGV[0] >& /dev/null");
+    system("$mmd $disk:/$ARGV[0] >/dev/null 2>&1");
     exit 0; };
   /rmdir/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mrd $disk:/$ARGV[0] >& /dev/null");
+    system("$mrd $disk:/$ARGV[0] >/dev/null 2>&1");
     exit 0; };
   /rm/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 1;
-    system("$mdel $disk:/$ARGV[0] >& /dev/null");
+    system("$mdel $disk:/$ARGV[0] >/dev/null 2>&1");
     exit 0; };
   /copyout/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 2;
     ( $src, $dest ) = @ARGV;
-    system("$mcopy $disk:/$src $dest >& /dev/null");
+    system("$mcopy $disk:/$src $dest >/dev/null 2>&1");
     exit 0; };
   /copyin/ && do {
     shift; shift;
     exit 1 if scalar(@ARGV) != 2;
     ( $dest, $src ) = @ARGV;
-    system("$mcopy $src $disk:/$dest >& /dev/null");
+    system("$mcopy $src $disk:/$dest >/dev/null 2>&1");
     exit 0; };
   /.*/ && do {                               # an unfamiliar command
     exit 1; };
