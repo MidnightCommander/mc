@@ -51,42 +51,17 @@ Menu create_menu (char *name, menu_entry *entries, int count)
 	if (entries != (menu_entry*) 0)
 	{
 		register menu_entry* mp;
-		register char* cp;
 		for (mp = entries; count--; mp++)
 		{
-			mp->string_dupped = 0;
-			
 			if (mp->text[0] == '\0')
 				continue;
 
-			cp = _(mp->text);
-
-			if (mp->text != cp){
-				char tmpbuf[80]; /* hope it's long enough for menu entries */
-				register char *src = cp, *dest = tmpbuf;
-				while (*src)
-				{
-					if (*src == '&' && *++src)
-					{
-						/* Preserve non-ascii hotkeys */
-						if (mp->hot_key <= 256)
-							mp->hot_key = *src;
-						mp->hot_pos = src-cp-1;
-						continue;
-					}
-					*dest++ = *src++;
-				}
-				*dest = '\0';
-				mp->text = strdup(tmpbuf);
-				mp->string_dupped = 1;
-			} 
+			mp->text = _(mp->text);
 		}
-    }
-    menu->name = _(name);
-#else
-    menu->name = name;
+	}
 #endif /* ENABLE_NLS */
 
+    menu->name = _(name);
 	menu->start_x = 0;
     return menu;
 }
@@ -120,16 +95,24 @@ static void menubar_paint_idx (WMenu *menubar, int idx, int color)
     	hline (slow_terminal ? ' ' : ACS_HLINE, menubar->max_entry_len);
     } else {
 	char *text = menu->entries [idx].text;
-	int  hotkey = menu->entries [idx].hot_key;
-	int hotpos = menu->entries [idx].hot_pos;
 
-        printw ("%c%-s", menu->entries [idx].first_letter, text);
-
-	if (!slow_terminal){
-		widget_move (&menubar->widget, y, x+hotpos+1);
-		attrset (color == MENU_SELECTED_COLOR ?
-			 MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
-		addch (text[hotpos]);
+	addch(menu->entries [idx].first_letter);
+	for (text = menu->entries [idx].text; *text; text++)
+	{
+		if (*text == '&')
+		{
+			++text;
+			menu->entries [idx].hot_key = tolower(*text);
+			if (!slow_terminal)
+			{
+				attrset (color == MENU_SELECTED_COLOR ?
+					MENU_HOTSEL_COLOR : MENU_HOT_COLOR);
+				addch(*text);
+				attrset(color);
+			}
+			continue;
+		}
+		addch(*text);
 	}
     }
     widget_move (&menubar->widget, y, x + 1);
@@ -265,7 +248,7 @@ static int menubar_handle_key (WMenu *menubar, int key)
     int   i;
 
     /* Lowercase */
-    if (key < 256 && ISASCII (key)) /* Linux libc.so.5.x.x bug fix */
+    if (key < 256 && isalpha (key)) /* Linux libc.so.5.x.x bug fix */
 	key = tolower (key);
     
     if (is_abort_char (key)){
@@ -308,36 +291,19 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	const int selected = menubar->selected;
 	const Menu menu = menubar->menu [selected];
 	const int items = menu->count;
-	char l;
-	int m;
+	char m;
 	
 	for (i = 0; i < items; i++){
 	    if (!menu->entries [i].call_back)
 		continue;
 	    
-	    m = menu->entries [i].hot_key;
-	    if (m < 256 && ISASCII (m))
-	        m = tolower (m);
-	    if (key != m)
-		{
-			m = tolower (menu->entries[i].text[menu->entries[i].hot_pos]);
-			if (key != m)
-				continue;
-		}
+		if (key != menu->entries [i].hot_key)
+			continue;
 	    
 	    menubar_execute (menubar, i);
 	    return 1;
 	}
 
-	for (i = 0; i < items; i++){
-	    l = tolower (menu->entries [i].text [0]);
-	    if (l != key)
-		continue;
-	    
-	    menubar_execute (menubar, i);
-	    return 1;
-	}
-	
 	if (key == KEY_ENTER || key == '\n'){
 	    menubar_execute (menubar, menubar->subsel);
 	    return 1;
@@ -527,17 +493,6 @@ menubar_arrange(WMenu* menubar)
 void
 destroy_menu (Menu menu)
 {
-    int i;
-    menu_entry *e;
-    
-    for (i = 0, e = menu->entries; i < menu->count; i++){
-#ifdef ENABLE_NLS
-	    /* Separators are NULLS */
-	if (e->string_dupped)
-	    free (e->text);
-#endif
-	e++;
-    }
     free (menu);
 }
 

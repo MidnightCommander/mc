@@ -8,7 +8,10 @@ PACKAGE=mc
 VERSION=dummy
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "dummy")
-ALL_LINGUAS="fr es"
+
+if test x$ALL_LINGUAS = x; then
+    ALL_LINGUAS="fr es"
+fi
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
@@ -939,7 +942,7 @@ INTLSUB=""
 if test x$USE_NLS = xyes; then
     if test $ac_cv_header_libintl_h = no; then
 	CPPFLAGS="$CPPFLAGS -I\$(builddir)/intl"
-	LIBS="-L\$(builddir)/intl $LIBS"
+	LIBS="-L\$(builddir)/intl -lintl $LIBS"
     fi
     INTLSUB=intl
 fi

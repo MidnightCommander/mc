@@ -106,9 +106,9 @@ static struct {
 static WRadio *pause_radio;
 
 static char *pause_options [3] = {
-    N_("Never"),
-    N_("on dumb Terminals"),
-    N_("alwaYs") };
+    N_("&Never"),
+    N_("on dumb &Terminals"),
+    N_("alwa&Ys") };
 
 static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 {
@@ -144,6 +144,17 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 static void init_configure (void)
 {
     int i;
+	static int i18n_config_flag = 0;
+
+	if (!i18n_config_flag)
+	{
+		i = sizeof(pause_options)/sizeof(char*);
+
+		while (i--)
+			pause_options [i] = _(pause_options [i]);
+
+		i18n_config_flag = 1;
+	}
 
     conf_dlg = create_dlg (0, 0, 19, 64, dialog_colors,
 			   configure_callback, "[Options Menu]",

@@ -418,8 +418,8 @@ char *edit_init_error_msg = NULL;
 
 #    else				/* ! _EDIT_C */
 
-#    define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, "Cancel")
-#    define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, "Ok")
+#    define edit_error_dialog(h,s) query_dialog (h, s, 0, 1, _("&Dismiss"))
+#    define edit_message_dialog(h,s) query_dialog (h, s, 0, 1, _("&Ok"))
 extern char *edit_init_error_msg;
 
 #    endif				/* ! _EDIT_C */

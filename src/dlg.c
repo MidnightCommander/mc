@@ -589,8 +589,8 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
      */
 
     if (h->current->widget->options & W_IS_INPUT){
-	if (d_key >= 'A' && d_key <= 'z')
-	    return 0;
+		if(d_key < 255 && isalpha(d_key))
+			return 0;
     }
     
     /* If it's an alt key, send the message */

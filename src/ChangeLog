@@ -1,3 +1,38 @@
+Fri Apr  3 05:23:20 1998 Alex Tkachenko <alex@bcs.zp.ua>
+
+	* configure.in: ALL_LINGUAS test added, to allow specify list
+	of languages to be installed by setting env variable before
+	configure. If it is empty, it defaults to full list.    
+
+	* src/menu.h menu_entry.{hot_pos, is_dupped} dropped
+	
+	* src/menu.c: consistency fixes: pull-down menu items are now 
+	accessible either with arrow keys or with hotkeys, denoted with & 
+	(and highlighted). (key combinations, placed to the right of items
+	intended to be used from outside the menus). Freeing menu entries
+	removed as it no longer needed
+	
+	* src/main.c, edit/editmenu.c: menubar init code is changed to conform
+	above fixes.
+	
+	* edit/edit.h: use of "Cancel" in error_dialogs replaced with 
+	"Dismiss", to avoid collisions in translation of "Cancel" in other
+	places with this case.
+	
+	* src/boxes.c: select_format() and it's support removed, as it is
+	obsoleted by input line history feature. display_init()/display_callback
+	fixed to suite i18n changes. sort_box() - alike.
+	
+	* src/option.c: pause_options added &'s and gettext calls to expand
+	statically assigned values.
+
+	* src/widget.c: (radio_callback) hotkey recognition is changed to
+	&-notation, rather than simple uppercase.
+	
+	* src/dlg.c: (dlg_try_hotkey) plain symbol comparison replaced with
+	call to isalpha(), this fixes errorneous exit from input line, when
+	button hotkey is 8-bit NLS char.
+
 Fri Apr  3 12:23:28 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* TODO: Removed obsolete entries: Similar entries in tree view 

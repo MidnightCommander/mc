@@ -114,145 +114,144 @@ void menu_options (void)		{ edit_options_dialog (); }
 
 static menu_entry FileMenu[] =
 {
-    {' ', N_("Open/load...     C-o"), 'O', 0, menu_load_cmd},
-    {' ', N_("New              C-n"), 'N', 0, menu_new_cmd},
+    {' ', N_("&Open/load...     C-o"), 'O', menu_load_cmd},
+    {' ', N_("&New              C-n"), 'N', menu_new_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Save              F2"), 'S', 0, menu_save_cmd},
-    {' ', N_("save As...       F12"), 'A', 5, menu_save_as_cmd},
+    {' ', N_("&Save              F2"), 'S', menu_save_cmd},
+    {' ', N_("save &As...       F12"), 'A', menu_save_as_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Insert file...   F15"), 'I', 0, menu_insert_file_cmd},
-    {' ', N_("copy to File...  C-f"), 'F', 8, menu_cut_cmd},
+    {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
+    {' ', N_("copy to &File...  C-f"), 'F', menu_cut_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("aBout...            "), 'B', 1, edit_about_cmd},
+    {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Quit             F10"), 'Q', 0, menu_quit_cmd}
-};
+    {' ', N_("&Quit             F10"), 'Q', menu_quit_cmd}
+ };
 
 static menu_entry FileMenuEmacs[] =
 {
-    {' ', N_("Open/load...     C-o"), 'O', 0, menu_load_cmd},
-    {' ', N_("New            C-x k"), 'N', 0, menu_new_cmd},
+    {' ', N_("&Open/load...     C-o"), 'O', menu_load_cmd},
+    {' ', N_("&New            C-x k"), 'N', menu_new_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Save              F2"), 'S', 0, menu_save_cmd},
-    {' ', N_("save As...       F12"), 'A', 5, menu_save_as_cmd},
+    {' ', N_("&Save              F2"), 'S', menu_save_cmd},
+    {' ', N_("save &As...       F12"), 'A', menu_save_as_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Insert file...   F15"), 'I', 0, menu_insert_file_cmd},
-    {' ', N_("copy to File...     "), 'F', 8, menu_cut_cmd},
+    {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
+    {' ', N_("copy to &File...     "), 'F', menu_cut_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("aBout...            "), 'B', 1, edit_about_cmd},
+    {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Quit             F10"), 'Q', 0, menu_quit_cmd}
+    {' ', N_("&Quit             F10"), 'Q', menu_quit_cmd}
 };
 
 static menu_entry EditMenu[] =
 {
-    {' ', N_("Toggle Mark       F3"), 'T', 0, menu_mark_cmd},
+    {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("toggle Ins/overw Ins"), 'I', 7, menu_ins_cmd},
+    {' ', N_("toggle &Ins/overw Ins"), 'I', menu_ins_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Copy              F5"), 'C', 0, menu_copy_cmd},
-    {' ', N_("Move              F6"), 'M', 0, menu_move_cmd},
-    {' ', N_("Delete            F8"), 'D', 0, menu_delete_cmd},
+    {' ', N_("&Copy              F5"), 'C', menu_copy_cmd},
+    {' ', N_("&Move              F6"), 'M', menu_move_cmd},
+    {' ', N_("&Delete            F8"), 'D', menu_delete_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Undo             C-u"), 'U', 0, menu_undo_cmd},
+    {' ', N_("&Undo             C-u"), 'U', menu_undo_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Beginning     C-PgUp"), 'B', 0, menu_beginning_cmd},
-    {' ', N_("End           C-PgDn"), 'E', 0, menu_end_cmd}
+    {' ', N_("&Beginning     C-PgUp"), 'B', menu_beginning_cmd},
+    {' ', N_("&End           C-PgDn"), 'E', menu_end_cmd}
 };
 
 static menu_entry EditMenuEmacs[] =
 {
-    {' ', N_("Toggle Mark       F3"), 'T', 0, menu_mark_cmd},
+    {' ', N_("&Toggle Mark       F3"), 'T', menu_mark_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("toggle Ins/overw Ins"), 'I', 7, menu_ins_cmd},
+    {' ', N_("toggle &Ins/overw Ins"), 'I', menu_ins_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Copy              F5"), 'C', 0, menu_copy_cmd},
-    {' ', N_("Move              F6"), 'M', 0, menu_move_cmd},
-    {' ', N_("Delete            F8"), 'D', 0, menu_delete_cmd},
+    {' ', N_("&Copy              F5"), 'C', menu_copy_cmd},
+    {' ', N_("&Move              F6"), 'M', menu_move_cmd},
+    {' ', N_("&Delete            F8"), 'D', menu_delete_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Undo             C-u"), 'U', 0, menu_undo_cmd},
+    {' ', N_("&Undo             C-u"), 'U', menu_undo_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Beginning     C-PgUp"), 'B', 0, menu_beginning_cmd},
-    {' ', N_("End           C-PgDn"), 'E', 0, menu_end_cmd}
+    {' ', N_("&Beginning     C-PgUp"), 'B', menu_beginning_cmd},
+    {' ', N_("&End           C-PgDn"), 'E', menu_end_cmd}
 };
 
 static menu_entry SearReplMenu[] =
 {
-    {' ', N_("Search...         F7"), 'S', 0, menu_search_cmd},
-    {' ', N_("search Again     F17"), 'A', 7, menu_search_again_cmd},
-    {' ', N_("Replace...        F4"), 'R', 0, menu_replace_cmd}
+    {' ', N_("&Search...         F7"), 'S', menu_search_cmd},
+    {' ', N_("search &Again     F17"), 'A', menu_search_again_cmd},
+    {' ', N_("&Replace...        F4"), 'R', menu_replace_cmd}
 };
 
 static menu_entry SearReplMenuEmacs[] =
 {
-    {' ', N_("Search...         F7"), 'S', 0, menu_search_cmd},
-    {' ', N_("search Again     F17"), 'A', 7, menu_search_again_cmd},
-    {' ', N_("Replace...        F4"), 'R', 0, menu_replace_cmd}
+    {' ', N_("&Search...         F7"), 'S', menu_search_cmd},
+    {' ', N_("search &Again     F17"), 'A', menu_search_again_cmd},
+    {' ', N_("&Replace...        F4"), 'R', menu_replace_cmd}
 };
 
 static menu_entry CmdMenu[] =
 {
-    {' ', N_("Goto line...            M-l"), 'G', 0, menu_goto_line},
+    {' ', N_("&Goto line...            M-l"), 'G', menu_goto_line},
     {' ', "", ' ', 0},
-    {' ', N_("insert Literal...       C-q"), 'L', 7, menu_lit_cmd},
+    {' ', N_("insert &Literal...       C-q"), 'L', menu_lit_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Refresh screen          C-l"), 'R', 0, menu_refresh_cmd},
+    {' ', N_("&Refresh screen          C-l"), 'R', menu_refresh_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Start record macro      C-r"), 'S', 0, menu_begin_record_cmd},
-    {' ', N_("Finish record macro...  C-r"), 'F', 0, menu_end_record_cmd},
-    {' ', N_("Execute macro...   C-a, KEY"), 'E', 0, menu_exec_macro_cmd},
-    {' ', N_("Delete macro...            "), 'o',11, menu_exec_macro_delete_cmd},
+    {' ', N_("&Start record macro      C-r"), 'S', menu_begin_record_cmd},
+    {' ', N_("&Finish record macro...  C-r"), 'F', menu_end_record_cmd},
+    {' ', N_("&Execute macro...   C-a, KEY"), 'E', menu_exec_macro_cmd},
+    {' ', N_("delete macr&O...            "), 'O', menu_exec_macro_delete_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("insert Date/time           "), 'D', 7, menu_date_cmd},
+    {' ', N_("insert &Date/time           "), 'D', menu_date_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Format paragraph        M-p"), 'a', 4, menu_format_paragraph},
-    {' ', N_("'ispell' Spell Check    C-p"), 'p', 3, menu_ispell_cmd},
-    {' ', N_("Sort...                 M-t"), 't', 3, menu_sort_cmd},
-    {' ', N_("'indent' C Formatter    F19"), 'C', 9, menu_c_form_cmd},
-    {' ', N_("Mail...                    "), 'M', 0, menu_mail_cmd}
+    {' ', N_("format p&Aragraph        M-p"), 'A', menu_format_paragraph},
+    {' ', N_("'ispell' s&Pell check    C-p"), 'P', menu_ispell_cmd},
+    {' ', N_("sor&T...                 M-t"), 'T', menu_sort_cmd},
+    {' ', N_("'indent' &C Formatter    F19"), 'C', menu_c_form_cmd},
+    {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };
 
 static menu_entry CmdMenuEmacs[] =
 {
-    {' ', N_("Goto line...            M-l"), 'G', 0, menu_goto_line},
+    {' ', N_("&Goto line...            M-l"), 'G', menu_goto_line},
     {' ', "", ' ', 0},
-    {' ', N_("insert Literal...       C-q"), 'L', 7, menu_lit_cmd},
+    {' ', N_("insert &Literal...       C-q"), 'L', menu_lit_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Refresh screen          C-l"), 'R', 0, menu_refresh_cmd},
+    {' ', N_("&Refresh screen          C-l"), 'R', menu_refresh_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Start record macro      C-r"), 'S', 0, menu_begin_record_cmd},
-    {' ', N_("Finish record macro...  C-r"), 'F', 0, menu_end_record_cmd},
-    {' ', N_("Execute macro... C-x e, KEY"), 'E', 0, menu_exec_macro_cmd},
-    {' ', N_("Delete macro...            "), 'o',11, menu_exec_macro_delete_cmd},
+    {' ', N_("&Start record macro      C-r"), 'S', menu_begin_record_cmd},
+    {' ', N_("&Finish record macro...  C-r"), 'F', menu_end_record_cmd},
+    {' ', N_("&Execute macro... C-x e, KEY"), 'E', menu_exec_macro_cmd},
+    {' ', N_("delete macr&O...            "), 'o', menu_exec_macro_delete_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("insert Date/time           "), 'D', 7, menu_date_cmd},
+    {' ', N_("insert &Date/time           "), 'D', menu_date_cmd},
     {' ', "", ' ', 0},
-    {' ', N_("Format paragraph        M-p"), 'a', 4, menu_format_paragraph},
-    {' ', N_("'ispell' Spell Check    M-$"), 'P', 3, menu_ispell_cmd},
-    {' ', N_("Sort...                 M-t"), 'T', 3, menu_sort_cmd},
-    {' ', N_("'indent' C Formatter    F19"), 'C', 9, menu_c_form_cmd}
+    {' ', N_("format p&Aragraph        M-p"), 'a', menu_format_paragraph},
+    {' ', N_("'ispell' s&Pell check    M-$"), 'P', menu_ispell_cmd},
+    {' ', N_("sor&T...                 M-t"), 'T', menu_sort_cmd},
+    {' ', N_("'indent' &C Formatter    F19"), 'C', menu_c_form_cmd}
 };
 
 extern void menu_save_mode_cmd (void);
 
 static menu_entry OptMenu[] =
 {
-    {' ', N_("General...  "), 'G', 0, menu_options},
-    {' ', N_("Save mode..."), 'S', 0, menu_save_mode_cmd}
+    {' ', N_("&General...  "), 'G', menu_options},
+    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd}
 #if 0
-    {' ', N_("Layout..."),    'L', 0, menu_layout_cmd}
+    {' ', N_("&Layout..."),    'L', menu_layout_cmd}
 #endif
 };
 
 static menu_entry OptMenuEmacs[] =
 {
-    {' ', N_("General...  "), 'G', 0, menu_options},
-    {' ', N_("Save mode..."), 'S', 0, menu_save_mode_cmd}
+    {' ', N_("&General...  "), 'G', menu_options},
+    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd}
 #if 0
-    {' ', N_("Layout..."),    'L', 0, menu_layout_cmd}
+    {' ', N_("&Layout..."),    'L', menu_layout_cmd}
 #endif
 };
-
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 

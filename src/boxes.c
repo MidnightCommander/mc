@@ -50,8 +50,7 @@
 #include "layout.h"		/* for get_nth_panel_name proto */
 #include "background.h"		/* for background definitions */
 
-#define DISPLAY_X  48
-#define DISPLAY_Y  15
+static int DISPLAY_X = 45, DISPLAY_Y = 14;
 
 static Dlg_head *dd;
 static WRadio *my_radio;
@@ -62,59 +61,16 @@ static int current_mode;
 extern int ftpfs_always_use_proxy;
 
 static char **displays_status;
+static char* display_title = N_(" Listing mode ");
 
 /* Controls whether the array strings have been translated */
 static int i18n_displays_flag;
 static char *displays [LIST_TYPES] = {
-    N_("Full file list"), N_("Brief file list"), N_("Long file list"),
-    N_("User:")
+    N_("&Full file list"), N_("&Brief file list"), N_("&Long file list"),
+    N_("&User defined:")
 };
 
-static char *formats_section = "Formats";
-
-static char *select_format (WInput *i)
-{
-    void     *profile_keys;
-    char     *key;
-    char     *value;
-    int      in_list;
-    Chooser  *my_user_list;
-    WListbox *p;
-
-    my_user_list = new_chooser (DISPLAY_Y - 4, DISPLAY_X - 4, _("Listing Mode..."),
-				CHOOSE_EDITABLE);
-    p = my_user_list->listbox;
-    p->allow_duplicates = 0;
-    
-    in_list = 0;
-    profile_keys = profile_init_iterator (formats_section, profile_name);
-    while (profile_keys){
-	profile_keys = profile_iterator_next (profile_keys, &key, &value);
-	listbox_add_item (p, 0, 0, value, 0);
-    }
-    listbox_add_item (my_user_list->listbox, 0, 0, i->buffer, 0);
-
-    value = 0;
-    if (run_chooser (my_user_list) != B_CANCEL){
-	char     key [2];
-	int      count;
-	WLEntry  *e;
-
-	key [1] = 0;
-	profile_clean_section (formats_section, profile_name);
-	e = p->top;
-	
-	for (count = 0 ; count < p->count; count++, e = e->next){
-	    key [0] = 'A' + count - 1;
-	    WritePrivateProfileString (formats_section, key, e->text,
-				       profile_name);
-	}
-	value = strdup (p->current->text);
-    }
-    
-    destroy_chooser (my_user_list);
-    return value;
-}
+static int user_hotkey = 'u';
 
 static int display_callback (struct Dlg_head *h, int id, int Msg)
 {
@@ -126,16 +82,12 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
-	draw_box (h, 1, 1, DISPLAY_Y-2, DISPLAY_X-2);
+	draw_box (h, 1, 2, DISPLAY_Y-2, DISPLAY_X-4);
 
 	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1, (DISPLAY_X-17)/2);
-	addstr (_(" Listing mode "));
+	dlg_move (h, 1, (DISPLAY_X - strlen(display_title))/2);
+	addstr (display_title);
 	attrset (COLOR_NORMAL);
-	dlg_move (h, 11, 3);
-	addstr (_("On input lines, use C-v to get a listbox"));
-	dlg_move (h, 12, 3);
-	addstr (_("with other formats"));
 	break;
 
     case DLG_UNFOCUS:
@@ -166,22 +118,7 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
 	    }
 	}
 
-	/* Handle the above C-v */
-	if (id == XCTRL('v') &&
-	    ((WInput *) h->current->widget == user ||
-	     (WInput *) h->current->widget == status)){
-	    
-	    input = (WInput *) h->current->widget;
-	    
-	    text = select_format (input);
-	    if (text){
-		assign_text (input, text);
-		input_set_point (input, 0);
-	    }
-	    return MSG_HANDLED;
-	}
-	
-	if ((id|0x20) == 'u' && h->current->widget != (Widget *) user
+	if (tolower(id) == user_hotkey && h->current->widget != (Widget *) user
 	    && h->current->widget != (Widget *) status){
 	    my_radio->sel = 3;
 	    dlg_select_widget (h, my_radio); /* force redraw */
@@ -196,13 +133,49 @@ static int display_callback (struct Dlg_head *h, int id, int Msg)
 static void display_init (int radio_sel, char *init_text,
 			  int _check_status, char ** _status)
 {
+	char* user_mini_status = _("user &Mini status");
+	char* ok_button = _("&Ok");
+	char* cancel_button = _("&Cancel");
+	
+	static int button_start = 30;
+	
     displays_status = _status;
 
     if (!i18n_displays_flag){
-	int i;
+		int i, l, maxlen = 0;
+		char* cp;
 
-	for (i = 0; i < LIST_TYPES; i++)
-	    displays [i] = _(displays [i]);
+ 		display_title = _(display_title);
+		for (i = 0; i < LIST_TYPES; i++)
+		{
+		    displays [i] = _(displays [i]);
+			if ((l = strlen(displays [i])) > maxlen)
+				maxlen = l;
+		}
+
+		i = strlen (ok_button) + 5;
+		l = strlen (cancel_button) + 3;
+		l = max(i, l);
+
+		i = maxlen + l + 16;
+		if (i > DISPLAY_X)
+			DISPLAY_X = i;
+
+		i = strlen (user_mini_status) + 13;
+		if (i > DISPLAY_X)
+			DISPLAY_X = i;
+			
+		i = strlen (display_title) + 8;
+		if (i > DISPLAY_X)
+			DISPLAY_X = i;
+
+		button_start = DISPLAY_X - l - 5;
+		
+		/* get hotkey of user-defined format string */
+		cp = strchr(displays[LIST_TYPES-1],'&');
+		if (cp != NULL && *++cp != '\0')
+			user_hotkey = tolower(*cp);
+
         i18n_displays_flag = 1;
     }
     dd = create_dlg (0, 0, DISPLAY_Y, DISPLAY_X, dialog_colors,
@@ -211,25 +184,27 @@ static void display_init (int radio_sel, char *init_text,
 
     x_set_dialog_title (dd, _("Listing mode"));
     add_widgetl (dd,
-        button_new (4, 32, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "cancel-button"),
+        button_new (4, button_start, B_CANCEL, 
+			NORMAL_BUTTON, cancel_button, 0, 0, "cancel-button"),
 	XV_WLAY_RIGHTOF);
 
     add_widgetl (dd,
-	button_new (3, 32, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "ok-button"),
+		button_new (3, button_start, B_ENTER, 
+			DEFPUSH_BUTTON, ok_button, 0, 0, "ok-button"),
 	 XV_WLAY_CENTERROW);
 
-    status = input_new (9, 8, INPUT_COLOR, 34, _status [radio_sel], "mini-input");
+    status = input_new (10, 9, INPUT_COLOR, DISPLAY_X-14, _status [radio_sel], "mini-input");
     add_widgetl (dd, status, XV_WLAY_RIGHTDOWN);
     input_set_point (status, 0);
 
-    check_status = check_new (8, 4, _check_status, _("user &Mini status"), "mini-status");
+    check_status = check_new (9, 5, _check_status, user_mini_status, "mini-status");
     add_widgetl (dd, check_status, XV_WLAY_NEXTROW);
     
-    user = input_new  (6, 14, INPUT_COLOR, 29, init_text, "user-fmt-input");
+    user = input_new  (7, 9, INPUT_COLOR, DISPLAY_X-14, init_text, "user-fmt-input");
     add_widgetl (dd, user, XV_WLAY_RIGHTDOWN);
     input_set_point (user, 0);
 
-    my_radio = radio_new (3, 4, LIST_TYPES, displays, 1, "radio");
+    my_radio = radio_new (3, 5, LIST_TYPES, displays, 1, "radio");
     my_radio->sel = my_radio->pos = current_mode;
     add_widgetl (dd, my_radio, XV_WLAY_BELOWCLOSE);
 }
@@ -284,16 +259,60 @@ int display_box (WPanel *panel, char **userp, char **minip, int *use_msformat,
     return result;
 }
 
-#define SORT_X 40
-#define SORT_Y 14
+int SORT_X = 40, SORT_Y = 14;
 
 char *sort_orders_names [SORT_TYPES];
 
 sortfn *sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 {
-    int i, r;
+    int i, r, l;
     sortfn *result;
     WCheck *c, *case_sense;
+
+	char* ok_button = _("&Ok");
+	char* cancel_button = _("&Cancel");
+	char* reverse_label = _("&Reverse");
+	char* case_label = _("case sensi&tive");
+	char* sort_title = _("Sort order");
+
+	static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
+
+	if (!i18n_sort_flag)
+	{
+		int maxlen = 0;
+		for (i = SORT_TYPES-1; i >= 0; i--)
+		{
+			sort_orders_names [i] = _(sort_orders [i].sort_name);
+			r = strlen (sort_orders_names [i]);
+			if (r > maxlen)
+				maxlen = r;
+		}
+
+		check_pos = maxlen + 9;
+
+		r = strlen (reverse_label) + 4;
+		i = strlen (case_label) + 4;
+		if (i > r)
+			r = i;
+		
+		l = strlen (ok_button) + 6;
+		i = strlen (cancel_button) + 4;
+		if (i > l)
+			l = i;
+			
+		i = check_pos + max(r,l) + 2;
+
+		if (i > SORT_X)
+			SORT_X = i;
+
+		i = strlen (sort_title) + 6;
+		if (i > SORT_X)
+			SORT_X = i;
+
+		button_pos = SORT_X - l - 2;
+
+		i18n_sort_flag = 1;
+	}
 
     result = 0;
     
@@ -306,22 +325,21 @@ sortfn *sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, common_dialog_callback,
 		     "[Left and Right Menus]", "sort", DLG_CENTER | DLG_GRID);
 		     
-    x_set_dialog_title (dd, _("Sort order"));
+    x_set_dialog_title (dd, sort_title);
 
-    add_widgetl (dd, button_new (8, 23, B_CANCEL, NORMAL_BUTTON, _("&Cancel"), 0, 0, "cancel-button"),
-        XV_WLAY_CENTERROW);
+    add_widgetl (dd, 
+		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON, cancel_button, 
+		0, 0, "cancel-button"), XV_WLAY_CENTERROW);
 
-    add_widgetl (dd, button_new (7, 23, B_ENTER, DEFPUSH_BUTTON, _("&Ok"), 0, 0, "ok-button"),
-	XV_WLAY_RIGHTDOWN);
+    add_widgetl (dd, 
+		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON, ok_button,
+		0, 0, "ok-button"),	XV_WLAY_RIGHTDOWN);
 
-    case_sense = check_new (4, 19, *case_sensitive, _("case sensi&tive"), "case-check");
+    case_sense = check_new (4, check_pos, *case_sensitive, case_label, "case-check");
     add_widgetl (dd, case_sense, XV_WLAY_RIGHTDOWN);
-    c = check_new (3, 19, *reverse, _("&Reverse"), "reverse-check");
+    c = check_new (3, check_pos, *reverse, reverse_label, "reverse-check");
     add_widgetl (dd, c, XV_WLAY_RIGHTDOWN);
 
-    for (i = SORT_TYPES-1; i >= 0; i--){
-	sort_orders_names [i] = sort_orders [i].sort_name;
-    }
     my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1, "radio-1");
     my_radio->sel = my_radio->pos = current_mode;
     

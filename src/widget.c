@@ -82,8 +82,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	return x_create_button (h, h->wdata, b);
 #ifndef	HAVE_XVIEW
     case WIDGET_HOTKEY:
-        if (b->hotkey == Par ||
-	    (b->hotkey >= 'a' && b->hotkey <= 'z' && b->hotkey-32 == Par)){
+        if (b->hotkey == Par ||  toupper(b->hotkey) == Par){
 	    button_callback (h, b, WIDGET_KEY, ' '); /* to make action */
 	    return 1;
 	} else
@@ -282,18 +281,21 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	
 #ifndef HAVE_XVIEW
     case WIDGET_HOTKEY:
-	if (r->upper_letter_is_hotkey){
-	    int  i;
-	    char *s;
-	    
-	    for (i = 0; i < r->count; i++){
-		for (s = r->texts [i]; *s; s++){
-		    if (!(*s >= 'A' && *s <= 'Z' && (0x20|*s) == (0x20|Par)))
-			continue;
-		    r->pos = i;
-		    radio_callback (h, r, WIDGET_KEY, ' '); /* Take action */
-		    return 1;
-		}
+	{
+		int i, lp = tolower(Par);
+		char *cp;
+	    for (i = 0; i < r->count; i++)
+		{
+			cp = strchr(r->texts [i],'&');
+			if (cp != NULL && cp[1] != '\0')
+			{
+				int c = tolower(cp[1]);
+				if (c != lp)
+					continue;
+				r->pos = i;
+				radio_callback (h, r, WIDGET_KEY, ' '); /* Take action */
+				return 1;
+			}
 	    }
 	}
 	return 0;
@@ -344,23 +346,23 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++){
+		register char* cp;
 	    attrset ((i==r->pos && Msg==WIDGET_FOCUS) ? FOCUSC :NORMALC);
 	    widget_move (&r->widget, i, 0);
-	    printw ("(%c) %s", (r->sel == i) ? '*' : ' ', r->texts[i]);
 
-	    /* Draw the hotkey */
-	    if (r->upper_letter_is_hotkey){
-		char *t = r->texts [i];
-
-		while (*t && !(*t >= 'A' && *t <= 'Z'))
-		    t++;
-		if (*t){
-		    widget_move (&r->widget, i, 4+t - r->texts [i]);
-		    attrset ((i==r->pos && Msg==WIDGET_FOCUS)
-			     ? HOT_FOCUSC :HOT_NORMALC);
-		    addch (*t);
+		printw("(%c) ", (r->sel == i) ? '*' : ' ');
+		for (cp =  r->texts[i]; *cp; cp++)
+		{
+			if (*cp == '&')
+			{
+				attrset ((i==r->pos && Msg==WIDGET_FOCUS) 
+					? HOT_FOCUSC : HOT_NORMALC);
+				addch(*++cp);
+				attrset ((i==r->pos && Msg==WIDGET_FOCUS) ? FOCUSC : NORMALC);
+			}
+			else
+				addch(*cp);
 		}
-	    }
 	}
 	return 1;
 	break;

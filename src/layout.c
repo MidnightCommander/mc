@@ -150,7 +150,10 @@ static int height;
 
 static Dlg_head *layout_dlg;
 
-static char *s_split_direction [2] = {"Vertical", "Horizontal"};
+static char *s_split_direction [2] = {
+    N_("&Vertical"), 
+    N_("&Horizontal")
+};
 WRadio *radio_widget;
 
 static struct {
@@ -353,7 +356,17 @@ static int layout_callback (struct Dlg_head *h, int Id, int Msg)
 
 static void init_layout (void)
 {
-    int i;
+    int i = sizeof (s_split_direction) / sizeof(char*) ;
+    static int i18n_layt_flag = 0;
+    
+    if (!i18n_layt_flag)
+    {
+	while (i--)
+	{
+	    s_split_direction [i] = _(s_split_direction [i]);
+	}
+	i18n_layt_flag = 1;
+    }
 
     layout_dlg = create_dlg (0, 0, 15, 58, dialog_colors, layout_callback,
 			     "[Layout]", "layout", DLG_CENTER | DLG_GRID);
