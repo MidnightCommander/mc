@@ -39,6 +39,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
     keyword whole alias yellow/24
+    keyword whole bg yellow/24
     keyword whole break yellow/24
     keyword whole case yellow/24
     keyword whole continue yellow/24
@@ -47,17 +48,22 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole elif yellow/24
     keyword whole else yellow/24
     keyword whole esac yellow/24
+    keyword whole eval yellow/24
     keyword whole exec yellow/24
     keyword whole exit yellow/24
     keyword whole export yellow/24
+    keyword whole fg yellow/24
     keyword whole fi yellow/24
     keyword whole for yellow/24
     keyword whole if yellow/24
     keyword whole in yellow/24
     keyword whole return yellow/24
     keyword whole select yellow/24
+    keyword whole set yellow/24
     keyword whole shift yellow/24
     keyword whole then yellow/24
+    keyword whole umask yellow/24
+    keyword whole unset yellow/24
     keyword whole until yellow/24
     keyword whole while yellow/24
 
@@ -87,7 +93,6 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole echo cyan/14
     keyword whole ed cyan/14
     keyword whole egrep cyan/14
-    keyword whole eval cyan/14
     keyword whole ex cyan/14
     keyword whole false cyan/14
     keyword whole fgrep cyan/14
@@ -261,7 +266,6 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole echo cyan/14
     keyword whole ed cyan/14
     keyword whole egrep cyan/14
-    keyword whole eval cyan/14
     keyword whole ex cyan/14
     keyword whole false cyan/14
     keyword whole fgrep cyan/14

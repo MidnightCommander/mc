@@ -1,3 +1,8 @@
+2002-08-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax/sh.syntax: Highlight alias, bg, eval, exec, export, fg,
+	set, umask and unset like other builtin commands.
+
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Remove check for SIGTSTP, it's not needed for
