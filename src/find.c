@@ -256,7 +256,7 @@ find_parameters (char **start_dir, char **pattern, char **content)
     add_widget (find_dlg,
 		button_new (12, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
-    find_regex_cbox = check_new (10, 3, find_regex_flag, _("Regular expression"));
+    find_regex_cbox = check_new (10, 3, find_regex_flag, _("&Regular expression"));
     add_widget (find_dlg, find_regex_cbox);
 
     case_sense = check_new (9, 3, case_sensitive, case_label);

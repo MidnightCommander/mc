@@ -1,3 +1,7 @@
+2004-12-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* find.c (find_parameters): Use translated string.
+
 2004-12-10  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* command.c (enter): Speed up and simplify.
