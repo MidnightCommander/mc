@@ -97,7 +97,8 @@ void free (void *ptr);
 static gboolean
 option_has_user (char *str)
 {
-	if ((p = strstr (mnt->mnt_opts, "user")) != NULL){
+	char *p;
+	if ((p = strstr (str, "user")) != NULL){
 		if ((p - 2) >= str){
 			if (strncmp (p - 2, "nouser", 6) == 0)
 				return FALSE;
@@ -122,14 +123,14 @@ is_block_device_mountable (char *devname)
 	char *retval = NULL;
 	
 	if (getuid () == 0)
-		return TRUE;
+		return NULL;
 	
 	f = setmntent ("/etc/fstab", "r");
 	if (f == NULL)
-		return FALSE;
+		return NULL;
 
 	while ((mnt = getmntent (f))){
-		if (option_has_user (mnt->mt_opts)){
+		if (option_has_user (mnt->mnt_opts)){
 			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}

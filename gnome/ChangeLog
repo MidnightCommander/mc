@@ -1,3 +1,9 @@
+Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
+
+	* gmount.c: fix obvious typos, use str in option_has_user, fix
+	  mt_opts typo and is_block_device_mountable can't return TRUE nor
+	  FALSE, so it returns NULL
+
 1999-02-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_metadata_change): Fix memory leak.
