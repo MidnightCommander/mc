@@ -1,5 +1,9 @@
 2000-10-09  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: GNOME_M4_FILES renamed to ACLOCAL_M4_SOURCES so
+	that CVS Automake will drop dependencied to the macros that
+	we don't distribute.
+
 	* lib/mc.ext.in: Removed references to icons. Source RPMs
 	grouped to one regex. Removed "Update" for source RPMs, added
 	"Rebuild" instead. Added "Check signature" for all RPMs.
