@@ -402,9 +402,6 @@ void edit_split_filename (WEdit * edit, const char *f)
     if (edit->filename)
 	free (edit->filename);
     edit->filename = (char *) strdup (f);
-    if (edit->dir)
-	free (edit->dir);
-    edit->dir = (char *) strdup ("");
 }
 
 /* Here we want to warn the users of overwriting an existing file,
@@ -426,7 +423,7 @@ edit_save_as_cmd (WEdit *edit)
 	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
-	    if (strcmp (catstrs (edit->dir, edit->filename, 0), exp)) {
+	    if (strcmp (edit->filename, exp)) {
 		int file;
 		different_filename = 1;
 		if ((file = mc_open (exp, O_RDONLY | O_BINARY)) != -1) {
@@ -707,7 +704,7 @@ int edit_save_confirm_cmd (WEdit * edit)
 /* returns 1 on success */
 int edit_save_cmd (WEdit * edit)
 {
-    if (!edit_save_file (edit, catstrs (edit->dir, edit->filename, 0)))
+    if (!edit_save_file (edit, edit->filename))
 	return edit_save_as_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     edit->modified = 0;
@@ -735,7 +732,7 @@ int edit_new_cmd (WEdit * edit)
 static int
 edit_load_file_from_filename (WEdit * edit, char *exp)
 {
-    if (!edit_reload (edit, exp, 0, "", 0))
+    if (!edit_reload (edit, exp, 0, 0))
 	return 1;
     edit_split_filename (edit, exp);
     edit->modified = 0;
@@ -1975,7 +1972,7 @@ void edit_quit_cmd (WEdit * edit)
 	    break;
 	case 2:
 	    if (edit->delete_file)
-		unlink (catstrs (edit->dir, edit->filename, 0));
+		unlink (edit->filename);
 	    break;
 	case 0:
 	case -1:
@@ -1983,7 +1980,7 @@ void edit_quit_cmd (WEdit * edit)
 	}
     }
     else if (edit->delete_file)
-	unlink (catstrs (edit->dir, edit->filename, 0));
+	unlink (edit->filename);
     dlg_stop (edit->widget.parent);
 }
 

@@ -38,7 +38,6 @@ struct WEdit {
     int have_frame;
 
     char *filename;		/* Name of the file */
-    char *dir;			/* current directory */
 
 /* dynamic buffers and cursor position for editor: */
     long curs1;			/*position of the cursor from the beginning of the file. */

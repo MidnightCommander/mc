@@ -178,7 +178,7 @@ edit (const char *_file, int line)
     } else
 	text = "";
 
-    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, "", 0))) {
+    if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, text, 0))) {
 	return 0;
     }
     wedit->macro_i = -1;

@@ -388,9 +388,8 @@ edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned l
 #define space_width 1
 
 /* fills in the edit struct. returns 0 on fail. Pass edit as NULL for this */
-WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, const char *dir, unsigned long text_size)
+WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, const char *text, unsigned long text_size)
 {
-    const char *f;
     int to_free = 0;
     int use_filter = 0;
 
@@ -430,17 +429,11 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     edit->stat1.st_uid = getuid ();
     edit->stat1.st_gid = getgid ();
     edit->bracket = -1;
-    if (!dir)
-	dir = "";
-    f = filename;
-    if (filename) {
-	f = catstrs (dir, filename, 0);
-    }
-    if (edit_find_filter (f) < 0) {
+    if (edit_find_filter (filename) < 0) {
 #ifdef CR_LF_TRANSLATION
 	use_filter = 1;
 #endif
-	if (edit_open_file (edit, f, text, text_size)) {
+	if (edit_open_file (edit, filename, text, text_size)) {
 /* edit_load_file already gives an error message */
 	    if (to_free)
 		g_free (edit);
@@ -456,11 +449,9 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     }
     edit->force |= REDRAW_PAGE;
     if (filename) {
-	filename = catstrs (dir, filename, 0);
 	edit_split_filename (edit, filename);
     } else {
 	edit->filename = (char *) strdup ("");
-	edit->dir = (char *) strdup (dir);
     }
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
@@ -469,7 +460,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
     if (use_filter) {
 	push_action_disabled = 1;
 	if (check_file_access (edit, filename, &(edit->stat1))
-	    || !edit_insert_file (edit, f))
+	    || !edit_insert_file (edit, filename))
 	{
 	    edit_clean (edit);
 	    if (to_free)
@@ -506,8 +497,6 @@ int edit_clean (WEdit * edit)
 	    free (edit->undo_stack);
 	if (edit->filename)
 	    free (edit->filename);
-	if (edit->dir)
-	    free (edit->dir);
 /* we don't want to clear the widget */
 	memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
 
@@ -525,24 +514,16 @@ int edit_renew (WEdit * edit)
 {
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
-    char *dir;
     int retval = 1;
 
-    if (edit->dir)
-	dir = (char *) strdup (edit->dir);
-    else
-	dir = 0;
-
     edit_clean (edit);
-    if (!edit_init (edit, lines, columns, 0, "", dir, 0))
+    if (!edit_init (edit, lines, columns, 0, "", 0))
 	retval = 0;
-    if (dir)
-	free (dir);
     return retval;
 }
 
 /* returns 1 on success, if returns 0, the edit struct would have been free'd */
-int edit_reload (WEdit * edit, const char *filename, const char *text, const char *dir, unsigned long text_size)
+int edit_reload (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
 {
     WEdit *e;
     int lines = edit->num_widget_lines;
@@ -551,7 +532,7 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, const cha
     memset (e, 0, sizeof (WEdit));
     e->widget = edit->widget;
     e->macro_i = -1;
-    if (!edit_init (e, lines, columns, filename, text, dir, text_size)) {
+    if (!edit_init (e, lines, columns, filename, text, text_size)) {
 	g_free (e);
 	return 0;
     }
