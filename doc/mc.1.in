@@ -1305,13 +1305,7 @@ should be:
 .I View
 (F3),
 .I Edit
-(F4),
-.I Drop
-(user drops some files on it) or any other
-user defined name (those will be listed in the extension dependent pop-up
-menu).
-.I Icon
-name is reserved for future use by mc.
+(F4).
 .PP
 .I command
 is any one-line shell command, with the simple

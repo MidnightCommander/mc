@@ -12,7 +12,7 @@ mc \- Entorno visual para sistemas tipo Unix.
 .\"SKIP_SECTION"
 .SH "SINTAXIS"
 .B mc
-[\-abcCdfhPstuUVx?] [\-l registro] [dir1 [dir2]] [-v fichero]
+[\-abcCdfhPstuUVx] [\-l registro] [dir1 [dir2]] [-v fichero]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPCIÓN"
 .LP
@@ -1327,12 +1327,7 @@ debe ser:
 .I View
 (F3),
 .I Edit
-(F4),
-.I Drop
-(el usuario suelta ficheros) o cualquier nombre definido por el usuario
-(estos aparecerán en el menú desplegable dependiendo de la extensión).
-.I Icon
-clave reservada para uso futuro.
+(F4).
 .PP
 .I comando
 es cualquier comando en línea del shell, con

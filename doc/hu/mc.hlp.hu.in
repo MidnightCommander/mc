@@ -1221,11 +1221,7 @@ pedig a következõ:
 Open (ha a felhasználó lenyomja az Enter-t, vagy duplán
 kattint), 
 View (F3), 
-Edit (F4), 
-Drop (a felhasználó eltüntethet néhány fájlt innen), 
-vagy más bármely más, a felhasználó által megadott név 
-(ezeket a kiterjesztés-lista menüben jeleníti meg). 
-Az Icon nevet késõbb megvalósuló célra tartjuk fenn.
+Edit (F4).
 
 command ez bármely egysoros shell parancs lehet, az egyszerû
 Macro Helyettesítõvel.Macro Substitution

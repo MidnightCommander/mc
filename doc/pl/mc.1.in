@@ -6,7 +6,7 @@ mc - wizualny interpetator poleceñ dla systemów Unixopodobnych
 .\"SKIP_SECTION"
 .SH U¯YTKOWANIE
 .B \mc
-[-abcCdfPstuUVx?] [-l log] [kat1 [kat2]] [-v plik]
+[-abcCdfPstuUVx] [-l log] [kat1 [kat2]] [-v plik]
 .\"NODE "DESCRIPTION"
 .SH OPIS
 Midnight Commander jest przeszukiwark± katalogów/mened¿erem plików dla systemów
@@ -1116,9 +1116,7 @@ powinno byæ:
 .I View (Podgl±d)
 (F3),
 .I Edit (Edytuj)
-(F4),
-.I Icon
-nazwa zarezerwowana do u¿ywania przez mc w przysz³o¶ci.
+(F4).
 .PP
 .I command
 jest jak±kolwiek jedn± lini± pow³oki, z zastosowaniem

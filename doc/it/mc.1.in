@@ -22,7 +22,7 @@ mc \- interfaccia visuale per sistemi tipo Unix.
 .\"SKIP_SECTION"
 .SH "USO"
 .B mc
-[\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIZIONE"
 .LP
@@ -1336,15 +1336,9 @@ deve essere:
 .I Open
 (se l'utente preme Invio o fa doppio click), 
 .I View
-(F3), 
+(F3),
 .I Edit
-(F4), 
-.I Drop
-(l'utente scarica alcuni file su di esso) o qualsiasi altro nome definito
-dall'utente (questi saranno elencati nella finestra menu dipendente 
-dall'estensione). 
-.I Icon
-il nome è riservato per usi futuri da mc.
+(F4).
 .PP
 .I command
 è qualsiasi comando shell di una riga, con la semplice
