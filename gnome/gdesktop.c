@@ -46,7 +46,7 @@ int icons_snap_to_grid = 1;
 /* The full name of the desktop directory ~/desktop */
 char *desktop_directory;
 
-static void desktop_reload (char *desktop_dir);
+static void desktop_reload (char *desktop_dir, GdkPoint *drop_position);
 static void desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di);
 
 /* The list with the filenames we have actually loaded */
@@ -594,10 +594,13 @@ drops_from_event (GdkEventDropDataAvailable *event, int *argc)
  * including the desktop widget. 
  */
 static void
-desktop_release_desktop_icon_t (desktop_icon_t *di)
+desktop_release_desktop_icon_t (desktop_icon_t *di, int destroy_dentry)
 {
 	if (di->dentry){
-		gnome_desktop_entry_free (di->dentry);
+		if (destroy_dentry)
+			gnome_desktop_entry_destroy (di->dentry);
+		else
+			gnome_desktop_entry_free (di->dentry);
 	} else {
 		free (di->pathname);
 		di->pathname = 0;
@@ -665,7 +668,7 @@ desktop_icon_remove (desktop_icon_t *di)
 				mc_unlink (di->dentry->exec [0]);
 		}
 	}
-	desktop_release_desktop_icon_t (di);
+	desktop_release_desktop_icon_t (di, 1);
 }
 
 static void
@@ -697,14 +700,6 @@ drop_on_launch_entry (GtkWidget *widget, GdkEventDropDataAvailable *event, deskt
 }
 
 static void
-desktop_create_dentries_at_drop_site (GdkEventDropDataAvailable *event)
-{
-	/* Nothing yet: should create the .desktop files with the location
-	 * at event->coords
-	 */
-}
-
-static void
 url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
 	char *p;
@@ -716,9 +711,10 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 	if (di)
 		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
 	else {
+		char *drop_location;
+
 		drop_on_directory (event, desktop_directory, 1);
-		desktop_create_dentries_at_drop_site (event);
-		desktop_reload (desktop_directory);
+		desktop_reload (desktop_directory, &event->coords);
 		return;
 	}
 	
@@ -731,12 +727,14 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 	drop_on_launch_entry (widget, event, di);
 }
 
-static void
+static int
 drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di)
 {
 	if (strcmp (event->data_type, "icon/root") == 0){
 		printf ("ICON DROPPED ON ROOT!\n");
-	} if (strcmp (event->data_type, "url:ALL") == 0 || (strcmp (event->data_type, "file:ALL") == 0)){
+	} if (strcmp (event->data_type, "url:ALL") == 0 ||
+	      (strcmp (event->data_type, "file:ALL") == 0) ||
+	      (strcmp (event->data_type, "text/plain") == 0)){
 		url_dropped (widget, event, di);
 	} else
 		return FALSE;
@@ -1137,12 +1135,26 @@ desktop_load_dentry (char *filename)
 	desktop_load_from_dentry (dentry);
 }
 
+/* Set the drop position to NULL, we only drop the
+ * first icon on the spot it was dropped, th rest
+ * get auto-layouted.  Perhaps this should be an option.
+ */
+static void
+desktop_setup_geometry_from_point (GnomeDesktopEntry *dentry, GdkPoint **point)
+{
+	char buffer [40];
+
+	sprintf (buffer, "%d,%d", (*point)->x, (*point)->y);
+	dentry->geometry = g_strdup (buffer);
+	*point = NULL;
+}
+
 /*
  * Creates a new DIRECTORY/.directory file which is just a .dekstop
  * on directories.   And then loads it into the desktop
  */
 static void
-desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_name)
+desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_name, GdkPoint **pos)
 {
 	GnomeDesktopEntry *dentry;
 
@@ -1156,6 +1168,8 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	dentry->icon     = gnome_unconditional_pixmap_file ("gnome-folder.png");
 	dentry->type     = g_strdup ("Directory");
 	dentry->location = g_strdup (dentry_path);
+	if (pos && *pos)
+		desktop_setup_geometry_from_point (dentry, pos);
 	
 	gnome_desktop_entry_save (dentry);
 	desktop_load_from_dentry (dentry);
@@ -1217,7 +1231,7 @@ desktop_file_exec (GtkWidget *widget, GdkEventButton *event, desktop_icon_t *di)
 }
 
 static void
-desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_name)
+desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_name, GdkPoint **pos)
 {
 	GnomeDesktopEntry *dentry;
 	GtkWidget *window;
@@ -1238,7 +1252,9 @@ desktop_create_launch_entry (char *desktop_file, char *pathname, char *short_nam
 	dentry->type     = g_strdup ("File");
 	dentry->location = g_strdup (desktop_file);
 	dentry->terminal = 1;
-	
+	if (pos && *pos)
+		desktop_setup_geometry_from_point (dentry, pos);
+		
 	gnome_desktop_entry_save (dentry);
 	desktop_load_from_dentry (dentry);
 #if 0
@@ -1283,7 +1299,7 @@ desktop_pathname_loaded (char *pathname)
 }
 
 static void
-desktop_setup_icon (char *filename, char *full_pathname)
+desktop_setup_icon (char *filename, char *full_pathname, GdkPoint **desired_position)
 {
 	struct stat s;
 
@@ -1297,7 +1313,7 @@ desktop_setup_icon (char *filename, char *full_pathname)
 			if (exist_file (dir_full))
 				desktop_load_dentry (dir_full);
 			else
-				desktop_create_directory_entry (dir_full, full_pathname, filename);
+				desktop_create_directory_entry (dir_full, full_pathname, filename, desired_position);
 		}
 		free (dir_full);
 	} else {
@@ -1309,7 +1325,7 @@ desktop_setup_icon (char *filename, char *full_pathname)
 			
 			desktop_version = copy_strings (full_pathname, ".desktop", NULL);
 			if (!exist_file (desktop_version) && !desktop_pathname_loaded (full_pathname))
-				desktop_create_launch_entry (desktop_version, full_pathname, filename);
+				desktop_create_launch_entry (desktop_version, full_pathname, filename, desired_position);
 			free (desktop_version);
 		}
 	}
@@ -1322,7 +1338,7 @@ desktop_setup_icon (char *filename, char *full_pathname)
  * sylinks to directories;  other programs. 
  */
 static void
-desktop_reload (char *desktop_dir)
+desktop_reload (char *desktop_dir, GdkPoint *drop_position)
 {
 	struct dirent *dent;
 	GList *l;
@@ -1346,7 +1362,8 @@ desktop_reload (char *desktop_dir)
 			continue;
 
 		full = concat_dir_and_file (desktop_dir, dent->d_name);
-		desktop_setup_icon (dent->d_name, full);
+		desktop_setup_icon (dent->d_name, full, &drop_position);
+
 		free (full);
 	}
 	mc_closedir (dir);
@@ -1362,7 +1379,7 @@ desktop_reload (char *desktop_dir)
 static void
 desktop_load (char *desktop_dir)
 {
-	desktop_reload (desktop_dir);
+	desktop_reload (desktop_dir, NULL);
 }
 
 /*
@@ -1387,7 +1404,7 @@ desktop_setup_default (char *desktop_dir)
 	} else 
 		mkdir (desktop_dir, 0777);
 	
-	desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory");
+	desktop_create_directory_entry (desktop_dir_home_link, "~", "Home directory", NULL);
 	free (desktop_dir_home_link);
 	free (mc_desktop_dir);
 }
@@ -1435,7 +1452,7 @@ stop_desktop (void)
 	for (p = desktop_icons; p; p = p->next){
 		desktop_icon_t *di = p->data;
 
-		desktop_release_desktop_icon_t (di);
+		desktop_release_desktop_icon_t (di, 0);
 	}
 	image_cache_destroy ();
 }

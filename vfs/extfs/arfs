@@ -2,29 +2,31 @@
 #
 # Written by    Alex Kuchma <ask@bcs.zp.ua>
 #               Alex Tkachenko <alex@bcs.zp.ua>
+# Updated by    Vitezslav Samel <xsamel00@dcse.fee.vutbr.cz>
 #
-# (C) 1997 The Free Software Foundation.
+# (C) 1997, 1998 The Free Software Foundation.
 #
 #
 XAR=ar
 XUNAR=ar
 XARINFO="ar tv"
+AWK=awk
 
 mcarfs_list ()
 {
-        YEAR=`date | cut -f 6 -d ' '`
-        XUID=`ls -l $1 | cut -c16-24`
-        XGID=`ls -l $1 | cut -c25-33`
-        $XARINFO $1 | awk -v uid=$XUID -v gid=$XGID -v year=$YEAR '
+        YEAR=`date '+%Y'`
+        $XARINFO $1 | @AWK@ -v year=$YEAR '
         {
                 date = $(NF-1)
-                if ( date == year )
-                {   
-                    date = $(NF-2)
+                if(date == year) {   
+                        date = $(NF-2);
                 }
-                perms = substr($1, 1, 9)
-                printf "-%9s 1 %-8s %-8s %8d %s %s %s %s\n", perms, uid, gid, $(NF-5), $(NF-4), $(\
-NF-3), date, $(NF)
+                perms = substr($1, 1, 9);
+                split($2, id, "/");
+                if(NF > 8) {
+                        id[2] = $3;
+                }
+                printf("-%9s 1 %8d %8d %8d %s %s %s %s\n", perms, id[1], id[2], $(NF-5), $(NF-4), $(NF-3), date, $(NF));
         }' 2>/dev/null
 }
 

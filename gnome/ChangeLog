@@ -1,3 +1,16 @@
+1998-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (drop_cb): Mhm.  Negotiation of the drop type was not
+	quite like I expected.  Anyways, fixed a bug: we need to take
+	text/plain drops on the launch icons on the desktop.
+
+1998-06-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_setup_icon): Assign the dentry->geometry
+	from the drop position.   New .desktop files are now placed on the
+	site they were dropped.
+	(drop_cb): Use proper prototype.
+
 Sun May 31 13:19:59 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in: use @LIBVFS@ when referring to libvfs-mc.a (one
