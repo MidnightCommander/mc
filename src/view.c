@@ -1681,20 +1681,24 @@ hex_search (WView *view, char *text)
 {
     char *buffer;		/* Where we hold the information */
     long pos;			/* Where did we found the string */
-    int  i = 0;
     int  block_len = 0;
     int  parse_error = 0;
+
+    if (!*text) {
+	view->found_len = 0;
+	return;
+    }
 
     /* buffer will never be longer that text */
     buffer = g_new (char, strlen (text));
 
     /* First convert the string to a stream of bytes */
-    while (text [i]) {
+    while (*text) {
 	int val;
 	int ptr;
 
 	/* %i matches octal, decimal, and hexadecimal numbers */
-	if (sscanf (text + i, "%i%n", &val, &ptr) > 0) {
+	if (sscanf (text, "%i%n", &val, &ptr) > 0) {
 	    /* Allow signed and unsigned char in the user input */
 	    if (val < -128 || val > 255) {
 		parse_error = 1;
@@ -1702,13 +1706,13 @@ hex_search (WView *view, char *text)
 	    }
 
 	    buffer [block_len++] = (char) val;
-	    i += ptr;
+	    text += ptr;
 	    continue;
 	}
 
 	/* Try quoted string, strip quotes */
-	if (sscanf (text + i, "\"%[^\"]\"%n", buffer + block_len, &ptr) > 0) {
-	    i += ptr;
+	if (sscanf (text, "\"%[^\"]\"%n", buffer + block_len, &ptr) > 0) {
+	    text += ptr;
 	    block_len += ptr - 2;
 	    continue;
 	}
@@ -1719,8 +1723,7 @@ hex_search (WView *view, char *text)
 
     /* No valid bytes in the user input */
     if (block_len <= 0 || parse_error) {
-	if (*text)
-	    message (0, _(" Search "), _("Invalid hex search expression"));
+	message (0, _(" Search "), _("Invalid hex search expression"));
 	g_free (buffer);
 	view->found_len = 0;
 	return;
@@ -1728,6 +1731,8 @@ hex_search (WView *view, char *text)
 
     /* Then start the search */
     pos = block_search (view, buffer, block_len);
+
+    g_free (buffer);
 
     if (pos == -1){
 	message (0, _(" Search "), _(" Search string not found "));
