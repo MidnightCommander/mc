@@ -1,3 +1,7 @@
+2000-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.in: Install mc.sh and mc.csh in $(suppbindir) only
+
 2000-08-08  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: correctly detect make failures in subdirs

@@ -13,7 +13,7 @@ INSTALL_DATA = @INSTALL_DATA@
 #
 
 LIBFILES_IN = mc.ext.in mc-gnome.ext.in
-LIBFILES_OUT = mc.ext mc-gnome.ext mc.csh mc.sh
+LIBFILES_OUT = mc.ext mc-gnome.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc
 SUPPBIN_IN = mc.csh.in mc.sh.in
 SUPPBIN_OUT =  mc.csh mc.sh
