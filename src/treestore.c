@@ -85,10 +85,10 @@ static int str_common (char *s1, char *s2)
         /etc.old/X11
         /etc.old/rc.d
         /usr
-       
+
    i.e. the required collating sequence when comparing two directory names is 
         '\0' < PATH_SEP < all-other-characters-in-encoding-order
-   
+
     Since strcmp doesn't fulfil this requirement we use pathcmp when
     inserting directory names into the list. The meaning of the return value 
     of pathcmp and strcmp are the same (an integer less than, equal to, or 
@@ -129,12 +129,12 @@ tree_store_whereis (char *name)
 		return NULL;
 }
 
-
 TreeStore *
 tree_store_init (void)
 {
 	ts.tree_first = 0;
 	ts.tree_last = 0;
+	ts.check_name_stack = 0;
 	ts.refcount++;
 
 	return &ts;
@@ -466,9 +466,9 @@ remove_entry (tree_entry *entry)
 	tree_entry *current = entry->prev;
 	long submask = 0;
 	tree_entry *ret = NULL;
-	
+
 	tree_store_notify_remove (entry);
-	
+
 	/* Correct the submasks of the previous entries */
 	if (entry->next)
 		submask = entry->next->submask;
@@ -478,17 +478,18 @@ remove_entry (tree_entry *entry)
 		current->submask = submask;
 		current = current->prev;
 	}
-	
+
 	/* Unlink the entry from the list */
 	if (entry->prev)
 		entry->prev->next = entry->next;
 	else
 		ts.tree_first = entry->next;
+
 	if (entry->next)
 		entry->next->prev = entry->prev;
 	else
 		ts.tree_last = entry->prev;
-	
+
 	/* Free the memory used by the entry */
 	g_free (entry->name);
 	g_free (entry);
@@ -500,11 +501,11 @@ void
 tree_store_remove_entry (char *name)
 {
 	tree_entry *current, *base, *old;
-	int len, base_sublevel;
+	int len;
 	char *check_name;
 	
 	g_return_if_fail (name != NULL);
-	g_return_if_fail (ts.check_name_list != NULL);
+	g_return_if_fail (ts.check_name_stack != NULL);
 	
 	/* Miguel Ugly hack */
 	if (name [0] == PATH_SEP && name [1] == 0)
@@ -515,17 +516,13 @@ tree_store_remove_entry (char *name)
 	if (!base)
 		return;	/* Doesn't exist */
 
-	check_name = ts.check_name_list->data;
-	
-	if (check_name [0] == PATH_SEP && check_name [1] == 0)
-		base_sublevel = base->sublevel;
-	else
-		base_sublevel = base->sublevel + 1;
+	check_name = ts.check_name_stack->data;
+
 	len = strlen (base->name);
 	current = base->next;
 	while (current
 	       && strncmp (current->name, base->name, len) == 0
-	       && (current->name[len] == '\0' || current->name[len] == PATH_SEP)){
+	       && (current->name[len] == '\0' || current->name[len] == PATH_SEP)) {
 		old = current;
 		current = current->next;
 		remove_entry (old);
@@ -544,15 +541,14 @@ tree_store_mark_checked (const char *subname)
 	tree_entry *current, *base;
 	int flag = 1, len;
 	char *check_name;
-	
+
 	if (!ts.loaded)
 		return;
 
-	if (ts.check_name_list == NULL)
-		return;
-	
-	check_name = ts.check_name_list->data;
-	
+	g_return_if_fail (ts.check_name_stack != NULL);
+
+	check_name = ts.check_name_stack->data;
+
 	/* Calculate the full name of the subdirectory */
 	if (subname [0] == '.' &&
 	    (subname [1] == 0 || (subname [1] == '.' && subname [2] == 0)))
@@ -561,19 +557,19 @@ tree_store_mark_checked (const char *subname)
 		name = g_strconcat (PATH_SEP_STR, subname, NULL);
 	else
 		name = concat_dir_and_file (check_name, subname);
-	
+
 	/* Search for the subdirectory */
 	current = ts.check_start;
 	while (current && (flag = pathcmp (current->name, name)) < 0)
 		current = current->next;
-	
+
 	if (flag != 0){
 		/* Doesn't exist -> add it */
 		current = tree_store_add_entry (name);
 		tree_store_notify_add (current);
 	}
 	g_free (name);
-	
+
 	/* Clear the deletion mark from the subdirectory and its children */
 	base = current;
 	if (base){
@@ -601,7 +597,7 @@ tree_store_start_check (char *path)
 		return NULL;
 
 	ts.check_start = NULL;
-	
+
 	/* Search for the start of subdirectories */
 	current = tree_store_whereis (path);
 	if (!current){
@@ -612,22 +608,22 @@ tree_store_start_check (char *path)
 
 		if (!S_ISDIR (s.st_mode))
 			return NULL;
-		
+
 		current = tree_store_add_entry (path);
-		ts.check_name_list = g_list_prepend (ts.check_name_list, g_strdup (path));
+		ts.check_name_stack = g_slist_prepend (ts.check_name_stack, g_strdup (path));
 
 		return current;
 	}
 
-	ts.check_name_list = g_list_prepend (ts.check_name_list, g_strdup (path));
-	
+	ts.check_name_stack = g_slist_prepend (ts.check_name_stack, g_strdup (path));
+
 	retval = current;
-	
+
 	/* Mark old subdirectories for delete */
 	ts.check_start = current->next;
-	check_name = ts.check_name_list->data;
+	check_name = ts.check_name_stack->data;
 	len = strlen (check_name);
-	
+
 	current = ts.check_start;
 	while (current
 	       && strncmp (current->name, check_name, len) == 0
@@ -655,17 +651,17 @@ tree_store_end_check (void)
 	tree_entry *current, *old;
 	int len;
 	char *check_name;
-	GList *list_head;
-	
+	GSList *stack_head;
+
 	if (!ts.loaded)
 		return;
 
-	g_return_if_fail (ts.check_name_list);
-	
+	g_return_if_fail (ts.check_name_stack != NULL);
+
 	/* Check delete marks and delete if found */
-	check_name = ts.check_name_list->data;
+	check_name = ts.check_name_stack->data;
 	len = strlen (check_name);
-	
+
 	current = ts.check_start;
 	while (current
 	       && strncmp (current->name, check_name, len) == 0
@@ -676,10 +672,10 @@ tree_store_end_check (void)
 			remove_entry (old);
 	}
 
-	g_free (ts.check_name_list->data);
-	list_head = ts.check_name_list;
-	ts.check_name_list = list_head->next;
-	g_list_free_1 (list_head);
+	g_free (ts.check_name_stack->data);
+	stack_head = ts.check_name_stack;
+	ts.check_name_stack = g_slist_remove_link (ts.check_name_stack, stack_head);
+	g_slist_free_1 (stack_head);
 }
 
 tree_entry *
@@ -765,9 +761,8 @@ tree_store_notify_add (tree_entry *entry)
 {
 	Hook *p = add_entry_hooks;
 	tree_store_add_fn r;
-
 	
-	while (p){
+	while (p) {
 		r = (tree_store_add_fn) p->hook_fn;
 		r (entry, p->hook_data);
 		p = p->next;
@@ -781,7 +776,7 @@ tree_store_opendir (char *path)
 	tree_scan *scan;
 
 	entry = tree_store_whereis (path);
-	if (!entry || (entry && !entry->scanned)){
+	if (!entry || (entry && !entry->scanned)) {
 		entry = tree_store_rescan (path);
 
 		if (!entry)
@@ -790,12 +785,12 @@ tree_store_opendir (char *path)
 
 	if (entry->next == NULL)
 		return NULL;
-	
+
 	scan = g_new (tree_scan, 1);
 	scan->base = entry;
 	scan->current = entry->next;
 	scan->sublevel = entry->next->sublevel;
-	
+
 	scan->base_dir_len = strlen (path);
 	return scan;
 }

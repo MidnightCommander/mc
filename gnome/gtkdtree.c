@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include "dir-open.xpm"
 #include "dir-close.xpm"
+#include "main.h"
 #include "treestore.h"
 #include "gtkdtree.h"
 
@@ -101,19 +102,17 @@ gtk_dtree_contains (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 static GtkCTreeNode *
 gtk_dtree_insert_node (GtkDTree *dtree, GtkCTreeNode *parent, char *text)
 {
-	GtkCTreeNode *sibling;
 	char *texts [1];
 
 	texts [0] = text;
-	
-	sibling = gtk_ctree_insert_node (
-		GTK_CTREE (dtree), parent, NULL,
-		texts, TREE_SPACING,
-		dtree->pixmap_close,
-		dtree->bitmap_close,
-		dtree->pixmap_open,
-		dtree->bitmap_open,
-		FALSE, FALSE);
+
+	return gtk_ctree_insert_node (GTK_CTREE (dtree), parent, NULL,
+				      texts, TREE_SPACING,
+				      dtree->pixmap_close,
+				      dtree->bitmap_close,
+				      dtree->pixmap_open,
+				      dtree->bitmap_open,
+				      FALSE, FALSE);
 }
 
 static gboolean
@@ -136,12 +135,12 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
 		char *text;
-		
+
 		text = x_basename (dirent->name);
 
 		/* Do not insert duplicates */
 		sibling = gtk_dtree_contains (dtree, parent, text);
-		
+
 		if (sibling == NULL)
 			sibling = gtk_dtree_insert_node (dtree, parent, text);
 
@@ -333,7 +332,7 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
 	GtkDTree *dtree = GTK_DTREE (widget);
 	char *request;
-	
+
 	GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
 	if (allocation->width != 0 && allocation->height != 0)
 		dtree->visible = TRUE;
@@ -348,7 +347,7 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 
 	if (!dtree->requested_path)
 		return;
-	
+
 	if (strcmp (dtree->current_path, dtree->requested_path) == 0){
 		g_free (dtree->requested_path);
 		dtree->requested_path = NULL;

@@ -24,7 +24,7 @@ typedef struct {
 	tree_entry *tree_first;     	/* First entry in the list */
 	tree_entry *tree_last;          /* Last entry in the list */
 	tree_entry *check_start;	/* Start of checked subdirectories */
-	GList      *check_name_list;
+	GSList     *check_name_stack;
 	unsigned int loaded : 1;
 	unsigned int dirty : 1;
 } TreeStore;

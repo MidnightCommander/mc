@@ -1,3 +1,8 @@
+1999-02-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_insert_node): This function was never
+	returning the newly-created sibling.
+
 Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 
 	* Makefile.in: Remove references and dependences to/from libslang -

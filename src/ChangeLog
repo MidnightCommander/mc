@@ -1,3 +1,11 @@
+1999-02-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* treestore.h: Replaced TreeStore.check_name_list by a GSList, for
+	minimal memory savings.
+
+	* treestore.c (tree_store_remove_entry): Removed unused code for
+	base_sublevel computation.
+
 Sun Feb  7 06:11:48 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* Makefile.in: Change calls to xmkdir to mkinstalldirs - this is more
