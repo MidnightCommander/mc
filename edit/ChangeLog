@@ -1,5 +1,9 @@
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
+	* editkeys.c: Move key maps to the file scope.  Put common keys
+	to a separate table common_key_map.
+	(edit_translate_key): Remove unused argument x_keycode.
+
 	* editkeys.c (edit_translate_key): Treat Shift-Enter as return
 	without indent.  Useful when pasting multiline text with
 	Shift-button3 or Shift-Insert with autoindent enabled.

@@ -330,7 +330,7 @@ static int edit_callback (WEdit *e, int msg, int par)
 	    int cmd, ch;
 	    if (edit_drop_hotkey_menu (e, par))		/* first check alt-f, alt-e, alt-s, etc for drop menus */
 		return 1;
-	    if (!edit_translate_key (e, 0, par, &cmd, &ch))
+	    if (!edit_translate_key (e, par, &cmd, &ch))
 		return 0;
 	    edit_execute_key_command (e, cmd, ch);
 	    edit_update_screen (e);
