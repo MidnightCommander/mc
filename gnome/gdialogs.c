@@ -8,18 +8,23 @@
 
 static GtkWidget *op_win = NULL;
 static GtkWidget *fmd_win = NULL;
+static GtkWidget *byte_progress;
+static GtkWidget *op_source_label;
+static GtkWidget *op_target_label;
+static GtkWidget *file_progress;
 int op_preserve = 1;
 /* Callbacks go here... */
-void
+static void
 fmd_check_box_callback (GtkWidget *widget, gpointer data)
 {
         if (data)
                 *((gint*)data) = GTK_TOGGLE_BUTTON (widget)->active;
 }
+
 FileProgressStatus
 file_progress_show_source (char *path)
 {
-  	g_warning ("Show source!\n");
+        gtk_label_set (GTK_LABEL (op_source_label), path);
 	return FILE_CONT;
 }
 
@@ -27,35 +32,35 @@ file_progress_show_source (char *path)
 FileProgressStatus
 file_progress_show_target (char *path)
 {
-	g_warning ("memo: file_progress_show_target!\n");
+        gtk_label_set(GTK_LABEL (op_target_label), path);
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_deleting (char *path)
 {
-	g_warning ("memo: file_progress_show_deleting!\n");
+	g_warning ("memo: file_progress_show_deleting!\npath\t%s\n",path);
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show (long done, long total)
 {
-	g_warning ("memo: file_progress_show!\n");
+	g_warning ("memo: file_progress_show!\ndone\t%d\ntotal\t%d\n", done, total);
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_count (long done, long total)
 {
-	g_warning ("memo: file_progress_show_count!\n");
+	g_warning ("memo: file_progress_show_count!\ndone\t%d\ntotal\t%d\n", done, total);
 	return FILE_CONT;
 }
 
 FileProgressStatus
 file_progress_show_bytes (long done, long total)
 {
-	g_warning ("memo: file_progress_show_bytes!\n");
+	g_warning ("memo: file_progress_show_bytes!\ndone\t%d\ntotal\t%d\n", done, total);
 	return FILE_CONT;
 }
 
@@ -69,7 +74,7 @@ file_progress_real_query_replace (enum OperationMode mode, char *destname, struc
 void
 file_progress_set_stalled_label (char *stalled_msg)
 {
-	g_warning ("memo: file_progress_set_stalled_label!\n");
+	g_warning ("memo: file_progress_set_stalled_label!\nmsg\t%s\n",stalled_msg);
 }
 char *
 file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_one, int *do_background)
@@ -81,6 +86,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         GtkWidget *fentry;
         GtkWidget *cbox;
         GtkWidget *icon;
+        int source_easy_patterns = easy_patterns;
         char *source_mask, *orig_mask, *dest_dir;
         const char *error;
         struct stat buf;
@@ -113,7 +119,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         gtk_container_add (GTK_CONTAINER (alignment), label);
         fentry = gnome_file_entry_new ("gmc-copy-file", N_("Find Destination Folder"));
         gnome_file_entry_set_directory (GNOME_FILE_ENTRY (fentry), TRUE);
-        gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)),
+        gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (GNOME_FILE_ENTRY (fentry))),
                             def_text);
         gnome_file_entry_set_default_path (GNOME_FILE_ENTRY (fentry), def_text);
         cbox = gtk_check_button_new_with_label (N_("Copy as a background process"));
@@ -125,7 +131,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         gtk_box_pack_end (GTK_BOX (vbox), cbox, FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 0);
         gtk_box_pack_end (GTK_BOX (vbox), fentry, FALSE, FALSE, 0);
-        gnome_file_entry_set_modal(fentry,TRUE);
+        gnome_file_entry_set_modal(GNOME_FILE_ENTRY (fentry),TRUE);
         
         gtk_box_pack_end (GTK_BOX (vbox), alignment, FALSE, FALSE, 0);
 
@@ -180,7 +186,7 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         }
         dest_dir = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (fentry), TRUE);
         gtk_widget_destroy (fmd_win);
-        
+        easy_patterns = 1;
         if (!dest_dir || !*dest_dir){
                 return NULL;
         }
@@ -201,6 +207,13 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
             umask (i);
             file_mask_umask_kill = i ^ 0777777;
         }
+        source_mask = strdup ("*");
+        orig_mask = source_mask;
+        if (!dest_dir || !*dest_dir){
+                if (source_mask)
+                        free (source_mask);
+                return dest_dir;
+        }
 
         if (!dest_dir){
                 return NULL;
@@ -209,6 +222,21 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
                 g_free (dest_dir);
                 return NULL;
         }
+        if (source_easy_patterns){
+                source_easy_patterns = easy_patterns;
+                easy_patterns = 1;
+                source_mask = convert_pattern (source_mask, match_file, 1);
+                easy_patterns = source_easy_patterns;
+                error = re_compile_pattern (source_mask, strlen (source_mask), &file_mask_rx);
+                free (source_mask);
+        } else
+                error = re_compile_pattern (source_mask, strlen (source_mask), &file_mask_rx);
+        
+        if (error){
+                g_warning ("%s\n",error);
+        }
+        if (orig_mask)
+                free (orig_mask);
         file_mask_dest_mask = strrchr (dest_dir, PATH_SEP);
         if (file_mask_dest_mask == NULL)
                 file_mask_dest_mask = dest_dir;
@@ -234,20 +262,50 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
 void
 create_op_win (FileOperation op, int with_eta)
 {
-        static GtkWidget *byte_progress;
-        static GtkWidget *file_progress;
-        
-        if (!op_win) {
-                op_win = gnome_dialog_new ("FIXME: need a generic title", GNOME_STOCK_BUTTON_CANCEL, NULL);
-                
+        GtkWidget *alignment;
+        GtkWidget *label;
+        GtkWidget *hbox;
+        g_print ("in create_op_win\n");
+        switch (op) {
+        case OP_MOVE:
+                op_win = gnome_dialog_new ("Move Progress", GNOME_STOCK_BUTTON_CANCEL, NULL);
+                break;
+        case OP_COPY:
+                op_win = gnome_dialog_new ("Copy Progress", GNOME_STOCK_BUTTON_CANCEL, NULL);
+                break;
+        case OP_DELETE:
+                op_win = gnome_dialog_new ("Delete Progress", GNOME_STOCK_BUTTON_CANCEL, NULL);
+                break;
         }
+
+        alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+        hbox = gtk_hbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), hbox);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("Copying from: ")), FALSE, FALSE, 0);
+        op_source_label = gtk_label_new ("");
+        gtk_box_pack_start (GTK_BOX (hbox), op_source_label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                            alignment, FALSE, FALSE, 0);
+
+        alignment = gtk_alignment_new (0.0, 0.5, 0, 0);
+        hbox = gtk_hbox_new (FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (alignment), hbox);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (N_("To: ")), FALSE, FALSE, 0);
+        op_target_label = gtk_label_new ("");
+        gtk_box_pack_start (GTK_BOX (hbox), op_target_label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (op_win)->vbox),
+                            alignment, FALSE, FALSE, 0);
+        gtk_window_set_modal (GTK_WINDOW (op_win), TRUE);
+        gtk_widget_show_all (GNOME_DIALOG (op_win)->vbox);
+        gtk_widget_show_now (op_win);
         
 }
 
 void
 destroy_op_win (void)
 {
-        g_warning ("memo: destroy_op_win\n");
+        if (op_win)
+                 gtk_widget_destroy (op_win);
 }
 void
 fmd_init_i18n()
