@@ -216,7 +216,7 @@ static void update_mode (Dlg_head * h)
     attrset (COLOR_NORMAL);
     dlg_move (h, BY + 2, 9);
     printw ("%12o", get_mode ());
-    send_message (h, h->current->widget, WIDGET_FOCUS, 0);
+    send_message (h->current->widget, WIDGET_FOCUS, 0);
 }
 
 static int l_call (void *data)
@@ -459,7 +459,7 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 	    x_toggle ^= (1 << Par);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h, h->current->widget, WIDGET_FOCUS, 0);
+	    send_message (h->current->widget, WIDGET_FOCUS, 0);
 	    break;
 	    
 	case XCTRL ('x'):
@@ -475,7 +475,7 @@ static int advanced_chown_callback (Dlg_head * h, int Par, int Msg)
 	    x_toggle ^= (1 << Par);
 	    update_mode (h);
 	    dlg_broadcast_msg (h, WIDGET_DRAW, 0);
-	    send_message (h, h->current->widget, WIDGET_FOCUS, 0);
+	    send_message (h->current->widget, WIDGET_FOCUS, 0);
 	    break;
 	    
 	case 'x':

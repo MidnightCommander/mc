@@ -191,8 +191,12 @@ void common_dialog_repaint (struct Dlg_head *h);
 
 extern Dlg_head *current_dlg;
 
-int  send_message         (Dlg_head *h, Widget *w, int msg, int par);
-int  send_message_to      (Dlg_head *h, Widget *w, int msg, int par);
+static inline int
+send_message (Widget *w, int Msg, int Par)
+{
+    return (*(w->callback))(w, Msg, Par);
+}
+
 void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
 int  dlg_overlap          (Widget *a, Widget *b);
 void widget_erase         (Widget *);

@@ -358,7 +358,7 @@ find_add_match (Dlg_head *h, char *dir, char *file)
     else
 	listbox_select_last (find_list, 0);
 	/* Updates the current listing */
-	send_message (h, &find_list->widget, WIDGET_DRAW, 0);
+	send_message (&find_list->widget, WIDGET_DRAW, 0);
 	if (p == 7)
 	    mc_refresh ();
 }

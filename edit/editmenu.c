@@ -32,12 +32,12 @@
 
 static void menu_cmd (int i)
 {
-    send_message (wedit->widget.parent, (Widget *) wedit, WIDGET_COMMAND, i);
+    send_message ((Widget *) wedit, WIDGET_COMMAND, i);
 }
 
 static void menu_key (int i)
 {
-    send_message (wedit->widget.parent, (Widget *) wedit, WIDGET_KEY, i);
+    send_message ((Widget *) wedit, WIDGET_KEY, i);
 }
 
 void edit_wrap_cmd (void)

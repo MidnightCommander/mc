@@ -2338,6 +2338,6 @@ redraw_labels (Dlg_head *h)
     if (!bb)
 	return;
 
-    send_message (h, (Widget *) bb, WIDGET_DRAW, 0);
+    send_message ((Widget *) bb, WIDGET_DRAW, 0);
 }
 

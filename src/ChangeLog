@@ -1,5 +1,9 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c (send_message_to): Remove, use send_message() instead.
+	(send_message): Make inline, remove Dlg_head argument.  Change
+	all callers.
+
 	* dlg.h: Remove Dlg_head argument from callback_fn - it's
 	excessive and can be trivially derived from the widget.
 	(default_proc): Remove Dlg_head argument.  Change all callers.

@@ -849,8 +849,7 @@ query_callback (Dlg_head * h, int Par, int Msg)
 							    widget), e1);
 			handle_char (input, Par);
 			end--;
-			send_message (h, h->current->widget,
-				      WIDGET_DRAW, 0);
+			send_message (h->current->widget, WIDGET_DRAW, 0);
 			break;
 		    }
 		    e1 = e1->next;
@@ -906,7 +905,7 @@ query_callback (Dlg_head * h, int Par, int Msg)
 		} while (e != e1);
 		if (need_redraw == 2) {
 		    insert_text (input, last_text, low);
-		    send_message (h, h->current->widget, WIDGET_DRAW, 0);
+		    send_message (h->current->widget, WIDGET_DRAW, 0);
 		} else if (need_redraw == 1) {
 		    h->ret_value = B_ENTER;
 		    dlg_stop (h);

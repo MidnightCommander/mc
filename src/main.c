@@ -1736,7 +1736,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 
 	if (id == '\n' && cmdline->buffer[0]) {
-	    send_message_to (h, (Widget *) cmdline, WIDGET_KEY, id);
+	    send_message ((Widget *) cmdline, WIDGET_KEY, id);
 	    return MSG_HANDLED;
 	}
 
@@ -1790,7 +1790,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (command_prompt) {
 	    int v;
 
-	    v = send_message_to (h, (Widget *) cmdline, WIDGET_KEY, id);
+	    v = send_message ((Widget *) cmdline, WIDGET_KEY, id);
 	    if (v)
 		return v;
 	}
