@@ -153,7 +153,6 @@ extern int extra_info;
 #define RP_SETPOS 1
 
 void paint_panel          (WPanel *panel);
-void display_mini_info    (WPanel *panel);
 void panel_reload         (WPanel *panel);
 
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);

@@ -1,5 +1,8 @@
 2002-11-10  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (display_mini_info): Make static.
+	(the_info_panel): Remove.
+
 	* screen.c (Xtry_to_select): Make static, rename to
 	do_try_to_select().
 

@@ -70,9 +70,6 @@ int permission_mode = 0;
 /* If 1 - then add per file type hilighting */
 int filetype_mode = 1;
 
-/* If we have an info panel, this points to it */
-WPanel *the_info_panel = 0;
-
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
@@ -593,7 +590,7 @@ repaint_file (WPanel *panel, int file_index, int mv, int attr, int isstatus)
     }
 }
 
-void
+static void
 display_mini_info (WPanel *panel)
 {
     if (!show_mini_info)
