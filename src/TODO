@@ -3,9 +3,6 @@ Before 4.6.1
 
 Regression - restore tilde expansion, but do it properly this time.
 
-Regression - vfs_split() modifies first argument, although it's declared
-const.
-
 Crash in VFS code after entering extfs inside extfs and letting both
 expire.
 
