@@ -68,7 +68,7 @@ msgstr ""
 "\".\n"
 "\n"
 "Для исправления, запустите редактор mime-свойств в Центре Управления GNOME, "
-"и исправьте  %s-action(действие) по умолчанию для \"%s\"."
+"и исправьте %s-action(действие) по умолчанию для \"%s\"."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -91,7 +91,7 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
-"Невозможно  %s\n"
+"Невозможно %s\n"
 "\"%s\"\n"
 "командой:\n"
 "\"%s\"%s"
@@ -122,7 +122,7 @@ msgstr "Команда Midnight Commander"
 
 #: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr "сообщать об ошибках: http://bugs.gnome.org, или в gnome-bug"
+msgstr "сообщать об ошибках: http://bugs.gnome.org, или используйте gnome-bug"
 
 #: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
@@ -1769,7 +1769,7 @@ msgstr ""
 
 #: gtkedit/edit.c:2571
 msgid "User menu avalaible only in mcedit invoked from mc"
-msgstr "Меню пользователя доступно только в mcedit запущенном из mc"
+msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
 #. Not essential to translate
 #: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
@@ -2750,7 +2750,7 @@ msgstr "&Цветовыделение синтаксиса"
 #. 7
 #: gtkedit/editoptions.c:92
 msgid "confir&M before saving"
-msgstr "&Подтверждать запись файла"
+msgstr "П&одтверждать запись файла"
 
 #. 8
 #: gtkedit/editoptions.c:95
@@ -3253,7 +3253,7 @@ msgstr "запись для группы"
 
 #: src/chmod.c:100
 msgid "read by group"
-msgstr "чтение для группе"
+msgstr "чтение для группы"
 
 #: src/chmod.c:101
 msgid "execute/search by owner"
@@ -3705,7 +3705,7 @@ msgstr "&Размер"
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr "&Узла"
+msgstr "&Узел"
 
 #. New sort orders
 #: src/dir.c:71
@@ -3735,7 +3735,7 @@ msgstr "&Группа"
 #: src/dir.c:386
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
-msgstr "Файл  '%s' существует, но невозможно получить свойства: %s"
+msgstr "Файл '%s' существует, но невозможно получить свойства: %s"
 
 #: src/dir.c:657
 msgid "Unknown"
@@ -4494,7 +4494,7 @@ msgstr ""
 
 #: src/find.c:130
 msgid "&Suspend"
-msgstr "Приостановить"
+msgstr "При&остановить"
 
 #: src/find.c:131
 msgid "Con&tinue"
@@ -5349,7 +5349,7 @@ msgstr "&Сохранить настройки"
 
 #: src/main.c:1383 src/main.c:1385
 msgid " &Left "
-msgstr " &Левая панель"
+msgstr " &Левая панель "
 
 #: src/main.c:1385
 msgid " &Above "
@@ -5369,7 +5369,7 @@ msgstr " &Настройки "
 
 #: src/main.c:1392 src/main.c:1394
 msgid " &Right "
-msgstr " &Правая панель"
+msgstr " &Правая панель "
 
 #: src/main.c:1394
 msgid " &Below "
@@ -5505,7 +5505,7 @@ msgid ""
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
 "-v, --view fname    Запуск в режиме просмотра файла.\n"
-"\"-V, --version      Сообщить версию и параметры настройки.\\n\"\n"
+"\"-V, --version      Сообщить версию и параметры настройки.\n"
 "\"-x, --xterm        Поддержка мыши в xterm и сохранения/восстановления экрана.\n"
 "+число              число - номер начальной строки для редактора.\n"
 
@@ -5520,7 +5520,7 @@ msgid ""
 "to mc-bugs@nuclecu.unam.mx\n"
 msgstr ""
 "\n"
-"Пожалуйста, посылайте любые сообщения об ошибка (включая вывод 'mc -V')\n"
+"Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-bugs@nuclecu.unam.mx\n"
 
 #: src/main.c:2556
@@ -5553,7 +5553,7 @@ msgstr "Библиотечный каталог Midnight Commander: %s\n"
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"Опция -m устарела. Пожалуйста взгляните на `Биты символов' в меню Настройки\n"
+"Ключ -m устарел. Пожалуйста взгляните на `Биты символов' в меню Настройки\n"
 
 #: src/main.c:2696
 msgid "Use to debug the background code"
@@ -5597,7 +5597,7 @@ msgstr "Отключить поддержку мыши в текстовой версии"
 
 #: src/main.c:2733
 msgid "Disables subshell support"
-msgstr "Отключает поддержку встроенной командной оболочки"
+msgstr "Отключить поддержку встроенной командной оболочки"
 
 #: src/main.c:2737
 msgid "Prints working directory at program exit"
@@ -5617,7 +5617,7 @@ msgstr "Псевдографика для рисования"
 
 #: src/main.c:2748
 msgid "Enables subshell support (default)"
-msgstr "Включает поддержку встроенной командной оболочки (по умолчанию)"
+msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
 #: src/main.c:2753
 msgid "Tries to use termcap instead of terminfo"
@@ -5816,7 +5816,7 @@ msgstr " Введите название команды: "
 
 #: src/panelize.c:301
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr " Невозможно выполнить это команду, будучи в не локальном каталоге "
+msgstr " Невозможно выполнить эту команду, находясь не в локальном каталоге "
 
 #: src/panelize.c:351
 msgid "Find *.orig after patching"
@@ -6564,7 +6564,7 @@ msgstr "fish: Ожидается начальная строка..."
 #: vfs/fish.c:228
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
-"Извините, мы не можем сделать авторизованные паролем соединения сейчас."
+"Извините, невозможно создать авторизованные паролем соединения сейчас."
 
 #: vfs/fish.c:233
 msgid " fish: Password required for "
@@ -6863,7 +6863,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr " Идентификация не удалась "
+msgstr " Сбой идентификация "
 
 #: vfs/smbfs.c:1738
 #, c-format
