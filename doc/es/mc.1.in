@@ -1698,6 +1698,22 @@ el diálogo de confirmación de borrado se cambia a "No" y el borrado de
 directorios no vacíos exige ser confirmado. Por defecto, esta opción
 está desactivada.
 .PP
+.\"NODE "    Layout"
+.SH "    Presentación"
+La ventana de presentación nos da la posibilidad de cambiar la presentación general
+de la pantalla. Podemos configurar si son visibles la Barra de Menú, la línea de comandos,
+la línea de sugerencias de xterm o la Barra de teclas de Función. En la consola Linux o SCO
+podemos especificar cuántas líneas serán mostradas en la ventana de salida.
+.PP
+El resto del área de pantalla se utiliza para los dos paneles de directorio. Podemos
+elegir si disponemos los paneles vertical u horizontalmente. La división puede ser simétrica
+o bien podemos indicar una división asimétrica.
+.PP
+.\"NODE "    Confirmation"
+.SH "    Confirmación"
+En este menú configuramos las opciones de confirmación de eliminación de ficheros,
+sobreescritura, ejecución pulsando intro y salir del programa.
+.PP
 .\"NODE "    Display bits"
 .SH "    Bits de Visualización"
 Esta opción es utilizada para configurar el rango de caracteres visibles en la
@@ -1705,11 +1721,6 @@ pantalla. Esta selección puede ser 7-bits si nuestro terminal/curses soporta
 sólo siete bits de salida, ISO-8859-1 muestra todos los caracteres del mapa
 ISO-8859-1 despliegue de 8 bit para aquellos terminales que puedan
 los 8 bits en toda su extensión.
-.PP
-.\"NODE "    Confirmation"
-.SH "    Confirmación"
-En este menú configuramos las opciones de confirmación de eliminación de ficheros,
-sobreescritura, ejecución pulsando intro y salir del programa.
 .PP
 .\"NODE "    Learn keys"
 .SH "    Aprender teclas"
@@ -1784,17 +1795,6 @@ después. Puesto que la descompresión es lenta, Midnight Commander mantendrá en
 memoria la información durante una catidad de tiempo limitado, después de alcanzado
 el momento, todos los recursos de memoria asociados con el sistema de ficheros
 serán liberados. El período por defecto es de un minuto.
-.PP
-.\"NODE "    Layout"
-.SH "    Presentación"
-La ventana de presentación nos da la posibilidad de cambiar la presentación general
-de la pantalla. Podemos configurar si son visibles la Barra de Menú, la línea de comandos,
-la línea de sugerencias de xterm o la Barra de teclas de Función. En la consola Linux o SCO
-podemos especificar cuántas líneas serán mostradas en la ventana de salida.
-.PP
-El resto del área de pantalla se utiliza para los dos paneles de directorio. Podemos
-elegir si disponemos los paneles vertical u horizontalmente. La división puede ser simétrica
-o bien podemos indicar una división asimétrica.
 .PP
 .\"NODE "    Save Setup"
 .SH "    Guardar Configuración"
