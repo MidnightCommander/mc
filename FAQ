@@ -36,7 +36,7 @@ Questions and Answers
             characters!
           + 4.5 How can I get colors?
           + 4.6 My color_xterm goes completely (or partially) black!
-          + 4.7 Where can I get rxvt?
+          + 4.7 Where can I get xterm or rxvt?
           + 4.8 I got colors working with MC but the other programs don't
             work at all anymore!
           + 4.9 Why are there both terminfo and termcap? Wouldn't one
@@ -511,10 +511,16 @@ Questions and Answers
    your X configuration file is). Or you can replace your non-ANSI
    color_xterm with an ANSI color_xterm.
    
-4.7 Where can I get rxvt?
+4.7 Where can I get xterm or rxvt?
 
-   http://www.rxvt.org/distribution.html
-   
+   xterm is included with the X Window System, so you probably already
+   have it if you have X. This version is not actively maintained, but
+   Thomas Dickey maintains his more advanced version of xterm at
+   ftp://dickey.his.com/xterm/
+
+   rxvt has its own site http://www.rxvt.org/ - get the latest version
+   there.
+
 4.8 I got colors working with MC but the other programs don't work at all
 anymore!
 
