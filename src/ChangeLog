@@ -1,3 +1,7 @@
+1999-03-17  Jonathan Blandford  <jrb@redhat.com>
+
+	* main.c (main): Put in a warning when run as root.
+
 1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* boxes.c (symlink_dialog): Put this inside an "#ifndef

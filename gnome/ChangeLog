@@ -1,3 +1,9 @@
+1999-03-17  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-file-property-dialog.c (generate_icon_sel): I don't know
+	who broke this, but it was a mess.  It now does the right thing,
+	and works...
+
 1999-03-16  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-open-dialog.c (read_directory): We now honor .order files.

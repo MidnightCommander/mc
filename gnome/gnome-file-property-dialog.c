@@ -438,14 +438,11 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	
 	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
 	icon = g_strdup (gicon_get_filename_for_icon (fp_dlg->im));
-	if (icon)
+
+	if (icon == NULL)
 		return retval;
-	
-	if (icon[0]){
-		return retval;
-	}
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (retval), icon);
-	fp_dlg->icon_filename = g_strdup (icon);
+	fp_dlg->icon_filename = icon;
 	return retval;
 }
 

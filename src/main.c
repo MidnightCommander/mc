@@ -3056,7 +3056,19 @@ int main (int argc, char *argv [])
     if (alternate_plus_minus)
         application_keypad_mode ();
 #   endif
-
+/* INSERT ROOT DIALOG HERE */
+#ifdef HAVE_GNOME
+    if (geteuid () == 0) {
+	    GtkWidget *warning_dlg;
+	    warning_dlg = gnome_message_box_new (_("You are running the GNOME Midnight Commander as root. \n\n"
+					   "You will not be protected from severly damaging your system\n"
+					   "if you continue."),
+					   GNOME_MESSAGE_BOX_WARNING,
+					   _("Continue"), GNOME_STOCK_BUTTON_CANCEL, NULL);
+	    if (gnome_dialog_run (GNOME_DIALOG (warning_dlg)) != 0)
+		    exit (0);
+    }
+#endif
     if (show_change_notice){
 	message (1, _(" Notice "),
 		 _(" The Midnight Commander configuration files \n"
