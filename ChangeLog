@@ -5,6 +5,9 @@
 	* syntax/diffc.syntax: removed (obsoleted by diff.syntax)
 	* syntax/Makefile.in: remove diffc.syntax
 
+	* edit/edit_key_translator.c: interpret code 0177 as
+	backspace unless recognized otherwise
+
 2000-02-23  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* gtkedit/editcmd.c (edit_replace_prompt): fix incorrect

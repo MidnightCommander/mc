@@ -59,7 +59,9 @@
      XCTRL ('z'), CK_Word_Left, XCTRL ('x'), CK_Word_Right,
      KEY_F (4), CK_Replace, KEY_F (7), CK_Find, KEY_F (14), CK_Replace_Again,
      XCTRL ('h'), CK_BackSpace, ALT ('l'), CK_Goto, ALT ('L'), CK_Goto, XCTRL ('y'), CK_Delete_Line,
-     KEY_F (17), CK_Find_Again, ALT ('p'), CK_Paragraph_Format, 0};
+     KEY_F (17), CK_Find_Again, ALT ('p'), CK_Paragraph_Format,
+     0177, CK_BackSpace,
+     0, 0};
 
     static long emacs_key_map[] =
     {OUR_BACKSPACE_KEY, CK_BackSpace, OUR_DELETE_KEY, CK_Delete, '\n', CK_Enter,
@@ -97,6 +99,7 @@
      KEY_F (17), CK_Find_Again,
      ALT ('<'), CK_Beginning_Of_Text,
      ALT ('>'), CK_End_Of_Text,
+     0177, CK_BackSpace,
      
      0, 0};
 
