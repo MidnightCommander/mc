@@ -35,7 +35,7 @@ void *profile_init_iterator (char *appname, char *file);
 void *profile_iterator_next (void *s, char **key, char **value);
 
 /* Removes all the definitions from section appname on file */
-void profile_clean_section (char *appname, char *file);
+void profile_clean_section (const char *appname, char *file);
 int profile_has_section (char *section_name, char *profile);
 
 /* Forgets about a .ini file, to disable updating of it */

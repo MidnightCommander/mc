@@ -504,7 +504,7 @@ void *profile_iterator_next (void *s, char **key, char **value)
     return keys;
 }
 
-void profile_clean_section (char *appname, char *file)
+void profile_clean_section (const char *appname, char *file)
 {
     TSecHeader *section;
 

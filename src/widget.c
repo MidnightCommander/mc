@@ -213,7 +213,7 @@ button_scan_hotkey (WButton *b)
 }
 
 WButton *
-button_new (int y, int x, int action, int flags, char *text,
+button_new (int y, int x, int action, int flags, const char *text,
 	    bcback callback)
 {
     WButton *b = g_new (WButton, 1);
@@ -236,7 +236,7 @@ button_new (int y, int x, int action, int flags, char *text,
 }
 
 void
-button_set_text (WButton *b, char *text)
+button_set_text (WButton *b, const char *text)
 {
    g_free (b->text);
     b->text = g_strdup (text);
@@ -356,7 +356,7 @@ radio_event (Gpm_Event *event, WRadio *r)
 }
 
 WRadio *
-radio_new (int y, int x, int count, char **texts, int use_hotkey)
+radio_new (int y, int x, int count, const char **texts, int use_hotkey)
 {
     WRadio *r = g_new (WRadio, 1);
     int i, max, m;
@@ -375,7 +375,7 @@ radio_new (int y, int x, int count, char **texts, int use_hotkey)
     r->pos = 0;
     r->sel = 0;
     r->count = count;
-    r->texts = texts;
+    r->texts = const_cast(char **, texts);
     r->upper_letter_is_hotkey = use_hotkey;
     widget_want_hotkey (r->widget, 1);
     
@@ -456,10 +456,11 @@ check_event (Gpm_Event *event, WCheck *c)
 }
 
 WCheck *
-check_new (int y, int x, int state, char *text)
+check_new (int y, int x, int state, const char *text)
 {
     WCheck *c =  g_new (WCheck, 1);
-    char *s, *t;
+    const char *s;
+    char *t;
     
     init_widget (&c->widget, y, x, 1, strlen (text),
 		 (callback_fn)check_callback,
@@ -547,7 +548,7 @@ label_callback (WLabel *l, int msg, int parm)
 }
 
 void
-label_set_text (WLabel *label, char *text)
+label_set_text (WLabel *label, const char *text)
 {
     int newcols = label->widget.cols;
     
@@ -806,7 +807,7 @@ int num_history_items_recorded = 60;
  */
 
 GList *
-history_get (char *input_name)
+history_get (const char *input_name)
 {
     int i;
     GList *hist;
@@ -841,7 +842,7 @@ history_get (char *input_name)
 }
 
 void
-history_put (char *input_name, GList *h)
+history_put (const char *input_name, GList *h)
 {
     int i;
     char *profile;
@@ -1042,7 +1043,7 @@ input_enable_update (WInput *in)
 #define ELEMENTS(a)    (sizeof(a)/sizeof(a[0]))
 
 int
-push_history (WInput *in, char *text)
+push_history (WInput *in, const char *text)
 {
     static int i18n;
     /* input widget where urls with passwords are entered without any
@@ -1053,7 +1054,7 @@ push_history (WInput *in, char *text)
 	N_(" SMB link to machine ")
     };
     char *t;
-    char *p;
+    const char *p;
     size_t i;
 
     if (!i18n) {
@@ -1330,7 +1331,7 @@ kill_line (WInput *in)
 }
 
 void
-assign_text (WInput *in, char *text)
+assign_text (WInput *in, const char *text)
 {
     free_completions (in);
     g_free (in->buffer);
@@ -1506,7 +1507,7 @@ handle_char (WInput *in, int c_code)
 
 /* Inserts text in input line */
 void
-stuff (WInput *in, char *text, int insert_extra_space)
+stuff (WInput *in, const char *text, int insert_extra_space)
 {
     input_disable_update (in);
     while (*text)
@@ -1599,7 +1600,7 @@ input_event (Gpm_Event * event, WInput * in)
 
 WInput *
 input_new (int y, int x, int color, int len, const char *def_text,
-	   char *histname)
+	   const char *histname)
 {
     WInput *in = g_new (WInput, 1);
     int initial_buffer_len;
@@ -2337,7 +2338,7 @@ define_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
 }
 
 void
-define_label (Dlg_head *h, int idx, char *text, void (*cback) (void))
+define_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
 {
     define_label_data (h, idx, text, (buttonbarfn) cback, 0);
 }

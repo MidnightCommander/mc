@@ -71,7 +71,7 @@ static int current_mode;
 static char **displays_status;
 
 /* Controls whether the array strings have been translated */
-static char *displays [LIST_TYPES] = {
+static const char *displays [LIST_TYPES] = {
     N_("&Full file list"),
     N_("&Brief file list"),
     N_("&Long file list"),
@@ -264,7 +264,7 @@ display_box (WPanel *panel, char **userp, char **minip, int *use_msformat, int n
 
 static int SORT_X = 40, SORT_Y = 14;
 
-static char *sort_orders_names [SORT_TYPES];
+static const char *sort_orders_names [SORT_TYPES];
 
 sortfn *
 sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
@@ -273,11 +273,11 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     sortfn *result;
     WCheck *c, *case_sense;
 
-    char *ok_button = _("&OK");
-    char *cancel_button = _("&Cancel");
-    char *reverse_label = _("&Reverse");
-    char *case_label = _("case sensi&tive");
-    char *sort_title = _("Sort order");
+    const char *ok_button = _("&OK");
+    const char *cancel_button = _("&Cancel");
+    const char *reverse_label = _("&Reverse");
+    const char *case_label = _("case sensi&tive");
+    const char *sort_title = _("Sort order");
 
     static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
 

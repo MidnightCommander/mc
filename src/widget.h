@@ -52,8 +52,8 @@ typedef struct WGauge {
     int current;
 } WGauge;
 
-GList *history_get (char *input_name);
-void history_put (char *input_name, GList *h);
+GList *history_get (const char *input_name);
+void history_put (const char *input_name, GList *h);
 char *show_hist (GList *history, int widget_y, int widget_x);
 
 typedef struct {
@@ -137,11 +137,11 @@ typedef struct {
 } WButtonBar;
 
 /* Constructors */
-WButton *button_new   (int y, int x, int action, int flags, char *text,
+WButton *button_new   (int y, int x, int action, int flags, const char *text,
 		      bcback callback);
-WRadio  *radio_new    (int y, int x, int count, char **text, int use_hotkey);
-WCheck  *check_new    (int y, int x, int state,  char *text);
-WInput  *input_new    (int y, int x, int color, int len, const char *text, char *histname);
+WRadio  *radio_new    (int y, int x, int count, const char **text, int use_hotkey);
+WCheck  *check_new    (int y, int x, int state,  const char *text);
+WInput  *input_new    (int y, int x, int color, int len, const char *text, const char *histname);
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
@@ -153,25 +153,25 @@ cb_ret_t handle_char (WInput *in, int c_code);
 int is_in_input_map (WInput *in, int c_code);
 void update_input (WInput *in, int clear_first);
 void new_input (WInput *in);
-int push_history (WInput *in, char *text);
-void stuff (WInput *in, char *text, int insert_extra_space);
+int push_history (WInput *in, const char *text);
+void stuff (WInput *in, const char *text, int insert_extra_space);
 void input_disable_update (WInput *in);
-void input_set_prompt (WInput *in, int field_len, char *prompt);
+void input_set_prompt (WInput *in, int field_len, const char *prompt);
 void input_enable_update (WInput *in);
 void input_set_point (WInput *in, int pos);
 void input_show_cursor (WInput *in);
-void assign_text (WInput *in, char *text);
+void assign_text (WInput *in, const char *text);
 cb_ret_t input_callback (WInput *in, widget_msg_t msg, int parm);
 
 /* Labels */
-void label_set_text (WLabel *label, char *text);
+void label_set_text (WLabel *label, const char *text);
 
 /* Gauges */
 void gauge_set_value (WGauge *g, int max, int current);
 void gauge_show (WGauge *g, int shown);
 
 /* Buttons */
-void button_set_text (WButton *b, char *text);
+void button_set_text (WButton *b, const char *text);
 
 /* Listbox manager */
 WLEntry *listbox_get_data (WListbox *l, int pos);
@@ -200,10 +200,10 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
 typedef void (*voidfn)(void);
-void define_label (Dlg_head *, int index, char *text, voidfn);
+void define_label (Dlg_head *, int index, const char *text, voidfn);
 void define_label_data (Dlg_head *h, int idx, const char *text,
 			buttonbarfn cback, void *data);
 void redraw_labels (Dlg_head *h);
-void buttonbar_hint (WButtonBar *bb, char *s);
+void buttonbar_hint (WButtonBar *bb, const char *s);
 
 #endif	/* __WIDGET_H */

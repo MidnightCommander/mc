@@ -81,7 +81,7 @@ static struct {
 
 static WRadio *pause_radio;
 
-static char *pause_options [3] = {
+static const char *pause_options [3] = {
     N_("&Never"),
     N_("on dumb &Terminals"),
     N_("Alwa&ys") };

@@ -147,7 +147,7 @@ static int height;
 
 static Dlg_head *layout_dlg;
 
-static char *s_split_direction [2] = {
+static const char *s_split_direction [2] = {
     N_("&Vertical"), 
     N_("&Horizontal")
 };
@@ -155,7 +155,7 @@ static char *s_split_direction [2] = {
 static WRadio *radio_widget;
 
 static struct {
-    char   *text;
+    const char   *text;
     int    *variable;
     WCheck *widget;
 } check_options [] = {
