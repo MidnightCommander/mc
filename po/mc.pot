@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-25 14:13:56-0500\n"
+"Date: 1998-04-27 15:18:09-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"

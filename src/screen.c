@@ -91,7 +91,7 @@ WPanel *the_info_panel = 0;
 /* The hook list for the select file function */
 Hook *select_file_hook = 0;
 
-int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
+static int panel_callback (Dlg_head *h, WPanel *p, int Msg, int Par);
 int panel_event (Gpm_Event *event, WPanel *panel);
 
 #ifndef PORT_HAS_PANEL_ADJUST_TOP_FILE
@@ -205,7 +205,7 @@ file_entry_color (file_entry *fe)
             return (SPECIAL_COLOR);
         else if (is_exe (fe->buf.st_mode))
             return (EXECUTABLE_COLOR);
-	else if (strcmp (fe->fname, "core") == 0)
+	else if (fe->fname && (strcmp (fe->fname, "core") == 0))
 	    return (CORE_COLOR);
     }
     return (NORMAL_COLOR);
@@ -943,6 +943,12 @@ panel_format_modified (WPanel *panel)
 {
     panel->format_modified = 1;
     x_reset_sort_labels (panel);
+}
+
+int
+is_a_panel (Widget *w)
+{
+	return (w->callback == (void *) panel_callback);
 }
 
 void directory_history_add (WPanel * panel, char *s);
@@ -2185,7 +2191,7 @@ panel_key (WPanel *panel, int key)
     return 0;
 }
 
-int
+static int
 panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 {
     switch (msg){

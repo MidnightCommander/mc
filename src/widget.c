@@ -157,7 +157,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 	if (b->hotpos >= 0){
 	    attrset ((b->selected) ? HOT_FOCUSC : HOT_NORMALC);
 	    widget_move (&b->widget, 0, b->hotpos+off);
-	    addch (b->text [b->hotpos]);
+	    addch ((unsigned char)b->text [b->hotpos]);
         }
 	if (Msg == WIDGET_FOCUS)
 	    break;
@@ -356,7 +356,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     case WIDGET_FOCUS:
     case WIDGET_DRAW:
 	for (i = 0; i < r->count; i++){
-		register char* cp;
+		register unsigned char* cp;
 	    attrset ((i==r->pos && Msg==WIDGET_FOCUS) ? FOCUSC :NORMALC);
 	    widget_move (&r->widget, i, 0);
 
@@ -483,7 +483,7 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
 	if (c->hotpos >= 0){
 	    attrset ((Msg == WIDGET_FOCUS) ? HOT_FOCUSC : HOT_NORMALC);
 	    widget_move (&c->widget, 0, + c->hotpos+4);
-	    addch (c->text [c->hotpos]);
+	    addch ((unsigned char)c->text [c->hotpos]);
 	}
 	return 1;
 #endif /* !HAVE_X */

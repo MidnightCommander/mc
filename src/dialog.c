@@ -100,7 +100,7 @@ void my_wputs (int y, int x, char *text)
 	if (p == '\n')
 	    move (++y, x);
 	else 
-	    addch (p);
+	    addch ((unsigned char)p);
     }
 }
 

@@ -359,32 +359,38 @@ dialog_panel_callback (struct Dlg_head *h, int id, int msg)
 {
 	WPanel *p;
 	WInput *in;
-	void *current_widget;	/* The widget.wdata of the current widget */
+	Widget_Item *dh;
+	void *current_widget;	/* The current widget */
 	
 	if (msg == DLG_KEY && id == '\n'){
-		if (h->current->widget->callback == (callback_fn) panel_callback)
-			return 0;
-
-		/* Find out which one of the widgets is the WPanel */
-		p = (WPanel *) find_widget_type (h, (callback_fn) panel_callback);
-		g_return_val_if_fail (p != 0, 0);
-
 		current_widget = (void *) h->current->widget;
 
-		if (current_widget == p->filter_w){
-			in = (WInput *) current_widget;
-			set_panel_filter_to (p, strdup (in->buffer));
-		}
+		if (is_a_panel (current_widget))
+			return 0;
+
+		dh = h->current;
+		do {
+			if (is_a_panel (dh->widget)){
+				WPanel *p = (WPanel *) dh->widget;
+
+				if (current_widget == p->filter_w){
+					in = (WInput *) current_widget;
+					set_panel_filter_to (p, strdup (in->buffer));
+					return MSG_HANDLED;
+				}
 			
-		if (current_widget == p->current_dir){
-			WInput *in = p->current_dir;
+				if (current_widget == p->current_dir){
+					WInput *in = p->current_dir;
 			
-			do_panel_cd (p, in->buffer, cd_parse_command);
-			assign_text (in, p->cwd);
-			update_input (in, 1);
+					do_panel_cd (p, in->buffer, cd_parse_command);
+					assign_text (in, p->cwd);
+					update_input (in, 1);
 			
-			return MSG_HANDLED;
-		}
+					return MSG_HANDLED;
+				}
+			}
+			dh = dh->next;
+		} while (dh != h->current);
 	}
 	return default_dlg_callback (h, id, msg);
 }

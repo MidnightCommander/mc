@@ -1,3 +1,12 @@
+1998-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* glayout.c (layout_panel_gone): Removed debugging information.
+	Renamed "Panel" to "Window" to make it less confusing to users. 
+	Moved the "New window" from the "File" menu to the "Window" menu.
+
+	* gmain.c (dialog_panel_callback): Walk the list of panels to
+	determine to which panel the activated widget belongs. 
+
 1998-04-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_create_radio): Fix the WRadio widgets. 

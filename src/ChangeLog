@@ -1,3 +1,12 @@
+1998-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (is_a_panel): Added a routine to determine if a widget
+	is a panel.
+
+1998-04-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c (file_entry_color): Check if fe->fname has something.
+
 Sun Apr 26 00:21:12 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* slint.c: Applied the patch from Bill Nottingham <wen1@cec.wustl.edu> 

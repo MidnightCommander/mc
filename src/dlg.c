@@ -25,6 +25,7 @@
 #include "tty.h"
 #include <stdarg.h>
 #include "mad.h"
+#include "x.h"
 #include "util.h"
 #include "menu.h"
 #include "global.h"
@@ -37,7 +38,6 @@
 #include "dialog.h"	/* For push_refresh() and pop_refresh() */
 #include "layout.h"
 #include "main.h"	
-#include "x.h"
 
 /* This is the current frame, used to group Tk packings */
 char *the_frame = "";

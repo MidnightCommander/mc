@@ -3,8 +3,7 @@
 #define _MC_I18N_H_
 
 #ifdef HAVE_GNOME
-#    include <libgnome/gnome-defs.h>
-#    include <libgnome/gnome-i18n.h>
+#    include <gnome.h>
 #else
 #    ifdef ENABLE_NLS
 #    	 include <libintl.h>

@@ -70,7 +70,7 @@ mc: $(OBJS) @LIBVFS@ @LIBSLANG@ @LIBEDIT_A@
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
 mfmt: mfmt.o
-	$(CC) mfmt.o -o mfmt 
+	$(CC) $(LDFLAGS) mfmt.o -o mfmt 
 
 mcmfmt: mfmt
 	cp mfmt mcmfmt

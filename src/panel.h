@@ -140,6 +140,8 @@ void paint_paint (WPanel *panel);
 void panel_refresh (WPanel *panel);
 void Xtry_to_select (WPanel *panel, char *name);
 
+int is_a_panel (Widget *);
+
 extern int torben_fj_mode;
 extern int permission_mode;
 extern int filetype_mode;
@@ -252,7 +254,6 @@ void x_panel_select_item (WPanel *panel, int index, int val);
 void x_select_item (WPanel *panel);
 void x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
-int panel_callback (Dlg_head *h, WPanel *panel, int msg, int par);
 void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
 void panel_update_marks (WPanel *panel);
 

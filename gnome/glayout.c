@@ -144,40 +144,31 @@ layout_panel_gone (WPanel *panel)
 		}
 	}
 
-	printf ("PANEL: Going away [%d]\n", len);
 	if (len > 1){
 		containers = g_list_remove (containers, pc_holder);
-		printf ("PANEL: extra panels left\n");
 	}
 
 	/* Check if this is not the current panel */
 	if (current_panel_ptr->panel == panel){
-		printf ("PANEL: was current panel\n");
 		if (other_panel_ptr){
 			current_panel_ptr = other_panel_ptr;
 			assign_other ();
-			printf ("PANEL: setting current to other\n");
 		} else {
 			current_panel_ptr = NULL;
-			printf ("PANEL: No current panel now\n");
 		}
 	} else if (other_panel_ptr->panel == panel){
 	        /* Check if it was the other panel */
-		printf ("PANEL: was the other panel\n");
 		if (len == 1){
 			other_panel_ptr = 0;
-			printf ("PANEL: We are left without other\n");
 		} else 
 			assign_other ();
 	} else {
-		printf ("PANEL: was some other panel\n");
 	}
 
 	if (len == 1){
 		g_free (containers->data);
 		g_list_free (containers);
 		containers = NULL;
-		printf ("PANEL: It was the last one\n");
 	} else
 		g_free (pc_holder);
 }
@@ -273,19 +264,18 @@ void configure_box (void);
 GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("New panel"),         N_("Opens a new panel"), gnome_open_panel },
 	{ GNOME_APP_UI_ITEM, N_("Open Terminal"),     N_("Opens a terminal"), gnome_open_terminal },
 	{ GNOME_APP_UI_SEPARATOR },	
-	{ GNOME_APP_UI_ITEM, N_("Copy"),              N_("Copy files"),       copy_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Rename/Move"),       N_("Rename or move files"), ren_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Mkdir"),             N_("Creates a new folder"), mkdir_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Delete"),            N_("Delete files from disk"), delete_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Copy..."),           N_("Copy files"),       copy_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Rename/Move..."),    N_("Rename or move files"), ren_cmd },
+	{ GNOME_APP_UI_ITEM, N_("New directory..."),  N_("Creates a new folder"), mkdir_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_SEPARATOR },	
 	{ GNOME_APP_UI_ITEM, N_("View"),              N_("View file"), panel_action_view },
 	{ GNOME_APP_UI_ITEM, N_("View raw"),          N_("View the file without further processing"),panel_action_view_unfiltered},
 	{ GNOME_APP_UI_SEPARATOR },	
-	{ GNOME_APP_UI_ITEM, N_("Select group"),      N_("Selects a group of files"), select_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Unselect group"),    N_("Un-selects a group of marked files"), unselect_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Select group by pattern..."),   N_("Selects a group of files"), select_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Unselect group by pattern..."), N_("Un-selects a group of marked files"), unselect_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Reverse selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Close"),             N_("Close this panel"), gnome_close_panel },
@@ -295,6 +285,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_panel_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("New window"),        N_("Opens a new window"), gnome_open_panel },
 	{ GNOME_APP_UI_ITEM, N_("Display mode..."),   N_("Set the display mode for the panel"),  gnome_listing_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Sort order..."),     N_("Changes the sort order of the files"), sort_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Filter..."),         N_("Set a filter for the files"), filter_cmd },
@@ -308,11 +299,11 @@ GnomeUIInfo gnome_panel_panel_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_options_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Confirmation"),      N_("Confirmation settings"), confirm_box },
-	{ GNOME_APP_UI_ITEM, N_("Options"),           N_("Global option settings"), configure_box, NULL, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Confirmation..."),   N_("Confirmation settings"), confirm_box },
+	{ GNOME_APP_UI_ITEM, N_("Options..."),        N_("Global option settings"), configure_box, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP },
 #ifdef USE_VFS
-	{ GNOME_APP_UI_ITEM, N_("Virtual FS"),        N_("Virtual File System settings"), configure_vfs },
+	{ GNOME_APP_UI_ITEM, N_("Virtual FS..."),     N_("Virtual File System settings"), configure_vfs },
 #endif
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("Save setup"),        NULL, save_setup_cmd },
@@ -320,18 +311,18 @@ GnomeUIInfo gnome_panel_options_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_commands_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("Find"),              N_("Locate files on disk"),   find_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Hotlist"),           N_("List of favorite sites"), quick_chdir_cmd },
-	{ GNOME_APP_UI_ITEM, N_("Compare panels"),    N_("Compare panel contents"), gnome_compare_panels },
-	{ GNOME_APP_UI_ITEM, N_("External panelize"), NULL, external_panelize },
+	{ GNOME_APP_UI_ITEM, N_("Find..."),           N_("Locate files on disk"),   find_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Hotlist..."),        N_("List of favorite sites"), quick_chdir_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Compare panels..."), N_("Compare panel contents"), gnome_compare_panels },
+	{ GNOME_APP_UI_ITEM, N_("External panelize..."), NULL, external_panelize },
 #ifdef USE_VFS					  
-	{ GNOME_APP_UI_ITEM, N_("Active VFS list"),   N_("List of active virtual file systems"), reselect_vfs },
+	{ GNOME_APP_UI_ITEM, N_("Active VFS list..."),   N_("List of active virtual file systems"), reselect_vfs },
 #endif						  
 #ifdef USE_EXT2FSLIB
-	{ GNOME_APP_UI_ITEM, N_("Undelete files (ext2fs only)"), N_("Recover deleted files"), undelete_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd },
 #endif
 #ifdef WITH_BACKGROUND
-	{ GNOME_APP_UI_ITEM, N_("Background jobs"),   N_("List of background operations"), jobs_cmd },
+	{ GNOME_APP_UI_ITEM, N_("Background jobs..."),   N_("List of background operations"), jobs_cmd },
 #endif
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
@@ -351,7 +342,7 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 
 GnomeUIInfo gnome_panel_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("File"),     NULL, &gnome_panel_file_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Panel"),    NULL, &gnome_panel_panel_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Window"),    NULL, &gnome_panel_panel_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Commands"), NULL, &gnome_panel_commands_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Options"),  NULL, &gnome_panel_options_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Desktop"),  NULL, &gnome_panel_desktop_menu },
