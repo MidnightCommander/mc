@@ -194,7 +194,7 @@ vfs_s_automake (struct vfs_class *me, struct vfs_s_inode *dir, char *path, int f
 /* If the entry is a symlink, find the entry for its target */
 static struct vfs_s_entry *
 vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
-		       char *path, int follow)
+		       int follow)
 {
     char *linkname;
     char *fullname = NULL;
@@ -238,16 +238,10 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 {
     unsigned int pseg;
     struct vfs_s_entry *ent = NULL;
-    char p[MC_MAXPATHLEN] = "";
-
-    if (strlen(path) >= MC_MAXPATHLEN)
-	return NULL;
 
     canonicalize_pathname (path);
 
     while (root) {
-	int t;
-
 	while (*path == PATH_SEP)	/* Strip leading '/' */
 	    path++;
 
@@ -255,10 +249,6 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 	    return ent;
 
 	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++);
-
-	strcat (p, PATH_SEP_STR);
-	strncpy (p + (t = strlen (p)), path, pseg);
-	p[t + pseg] = '\0';
 
 	for (ent = root->subdir; ent != NULL; ent = ent->next)
 	    if (strlen (ent->name) == pseg
@@ -274,7 +264,7 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 	/* here we must follow leading directories always;
 	   only the actual file is optional */
 	ent =
-	    vfs_s_resolve_symlink (me, ent, p,
+	    vfs_s_resolve_symlink (me, ent,
 				   strchr (path,
 					   PATH_SEP) ? LINK_FOLLOW :
 				   follow);

@@ -1,5 +1,9 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_find_entry_tree): Eliminate buffer of fixed
+	size.  Don't prepare path for vfs_s_resolve_symlink().
+	(vfs_s_resolve_symlink): Remove unused argument "path".
+
 	* direntry.c (vfs_s_add_dots): Remove.  Fix all callers.
 	(vfs_s_free_inode): Remove support for "." and ".." entries.
 	* ftpfs.c (dir_load): Likewise.
