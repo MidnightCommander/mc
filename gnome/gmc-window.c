@@ -64,10 +64,8 @@ about_dialog (GtkWidget *widget, gpointer data)
 		"Bug reports:  mc-bugs@nuclecu.unam.mx",
 		NULL
 	};
-#if 0
+
 	about = gnome_about_new (_("GNU Midnight Commander"), VERSION,
-#endif
-	about = gnome_about_new (_("GNU Midnight Commander"), "1.0",
 				 _("Copyright (C) 1998 The Free Software Foundation"),
 				 authors,
 				 _("The GNOME edition of the Midnight Commander file manager."),
