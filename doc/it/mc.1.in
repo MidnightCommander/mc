@@ -1202,10 +1202,10 @@ albero directory
 .\"Directory Tree"
  . 
 .PP
-Il campo contenuo accetta espressioni regolari simili a egrep(1). That
-means you have to escape characters with a special meaning to egrep with "\\", 
-e.g. if you search for "strcmp (" you will have to input "strcmp \\(" 
-(without the double quotes).
+Il campo contenuo accetta espressioni regolari simili a egrep(1). Ciò
+significa che è necessario proteggere i caratteri con significati speciali per
+egrep con "\\", per esempio se si ricerca "strcmp (" si dovrà immettere 
+"strcmp \\(" (senza le virgolette).
 .PP
 Per far partire la ricerca premere il tasto Ok.
 E' possibile bloccare la ricerca con il tasto Sospende e farla riprendere
@@ -1893,8 +1893,7 @@ caricherà le informazioni dal file di configurazione di sistema
 posizionato in @prefix@/share/mc/mc.ini. Se il file di configurazione di 
 sistema non esiste, MC userà le impostazioni predefinite.
 .PP
-Il comando 
-The
+Il comando
 .I Salva configurazione
 crea il file ~/.mc/ini salvando le impostazioni correnti 
 dei menu
@@ -1965,7 +1964,7 @@ il nome directory speciale '-' così:
 .I Directory CDPATH.
 Se la directory indicata al comando 
 .B cd 
-non è nella directory corrente, il The Midnight Commander userà il
+non è nella directory corrente, il Midnight Commander userà il
 valore della viariabile ambiente
 .B CDPATH
 per cercare la directory in ogniuna delle directory nominate.
@@ -2687,8 +2686,8 @@ e
 sono opzionali. Se si specifica l'elemento 
 .I utente
  , allora il Midnight Commander tenterà di collegarsi alla macchina remota
-gon on the remote come quell'utente, altrimenti userà il vostro nome di
-login. L'elemento opzionale
+come quell'utente, altrimenti userà il vostro nome di login.
+L'elemento opzionale
 .I pass
  , se presente, è la parola d'ordine per la connessione. Quest'ultimo non
 è raccomandabile (e neanche tenere le password nella vostro elenco dei
@@ -3282,7 +3281,7 @@ ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
 .PP
 .nf
-La pagina Web del The Midnight Commander:
+La pagina Web del Midnight Commander:
 	http://www.gnome.org/mc/
 .fi
 .PP
@@ -3318,7 +3317,7 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (timur@goff.comtat.kazan.su), Tomasz Cholewo
 (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
-and Wim Osterholt (wim@djo.wtm.tudelft.nl).
+e Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
 .\"NODE "BUGS"
 .SH "BACHI"
