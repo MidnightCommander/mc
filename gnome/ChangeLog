@@ -1,3 +1,8 @@
+1999-02-04  Jonathan Blandford  <jrb@redhat.com>
+
+	* gnome-file-property-dialog.c (apply_uid_group_change): Bug fix.
+	(apply_metadata_change): Another bug fix.
+
 1999-02-03  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdnd.c (gdnd_validate_action): Show the correct feedback when

@@ -139,12 +139,12 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	direc = g_strdup (fp_dlg->file_name);
 	strrchr (direc, '/')[0] = '\0';
 	fe = file_entry_from_file (fp_dlg->file_name);
-	fp_dlg->im = gicon_get_icon_for_file (direc, fe);
+	fp_dlg->im = gicon_get_icon_for_file_speed (direc, fe, FALSE);
 	g_free (direc);
 	icon = gnome_pixmap_new_from_imlib (fp_dlg->im);
 	gtk_box_pack_start (GTK_BOX (vbox), icon, FALSE, FALSE, 0);
 
-     /* we set the file part */
+	/* we set the file part */
 	gen_string = g_strconcat (_("Full Name: "), fp_dlg->file_name, NULL);
 	label = gtk_label_new (gen_string);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -385,6 +385,7 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	icon = gicon_image_to_name (fp_dlg->im);
 	if (!icon || !icon[0])
 		return retval;
+	g_print ("icon:%s:\n",icon);
 	gnome_icon_entry_set_icon (GNOME_ICON_ENTRY (retval), icon);
 	return retval;
 }
@@ -1027,7 +1028,10 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 	}
 
 	/* now we check the group */
-	new_group_name = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (fpd->group_entry)->entry));
+	/* We are only a combo if we are sensitive, and we only want to check if we are
+	 * sensitive. */
+	if (GTK_WIDGET_IS_SENSITIVE (fpd->group_entry))
+		new_group_name = gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (fpd->group_entry)->entry));
 	
 	if (fpd->group_name && new_group_name && strcmp (fpd->group_name, new_group_name)) {
 		g = getgrnam (new_group_name);
@@ -1087,73 +1091,78 @@ apply_metadata_change (GnomeFilePropertyDialog *fpd)
 	gchar *text;
 	gchar *icon_name;
 
-	if (!GTK_TOGGLE_BUTTON (fpd->open_cbox)->active) {
-		text = gtk_entry_get_text (GTK_ENTRY (fpd->open_entry));
-		if (text && text[0])
-			gnome_metadata_set (fpd->file_name,
-					    "fm-open",
-					    strlen (text) + 1,
-					    text);
-		else
-			gnome_metadata_remove (fpd->file_name,
-					       "fm-open");
-	} else {
-		if (fpd->fm_open)
-			gnome_metadata_remove (fpd->file_name,
-					       "fm-open");
-	}
-	if (fpd->executable) {
-		if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
-			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
+	/* If we don't have an open_cbox, that means we have no metadata
+	 * to set.
+	 */ 
+	if (fpd->open_cbox != NULL) {
+		if (!GTK_TOGGLE_BUTTON (fpd->open_cbox)->active) {
+			text = gtk_entry_get_text (GTK_ENTRY (fpd->open_entry));
 			if (text && text[0])
 				gnome_metadata_set (fpd->file_name,
-						    "drop-target",
+						    "fm-open",
 						    strlen (text) + 1,
 						    text);
 			else
 				gnome_metadata_remove (fpd->file_name,
-						       "drop-target");
+						       "fm-open");
 		} else {
-			if (fpd->drop_target)
+			if (fpd->fm_open)
 				gnome_metadata_remove (fpd->file_name,
-						       "drop-target");
+						       "fm-open");
 		}
-	} else {
-		if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
-			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
-			if (text && text[0])
-				gnome_metadata_set (fpd->file_name,
-						    "fm-view",
-						    strlen (text) + 1,
-						    text);
-			else
-				gnome_metadata_remove (fpd->file_name,
-						       "fm-view");
+		if (fpd->executable) {
+			if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
+				text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
+				if (text && text[0])
+					gnome_metadata_set (fpd->file_name,
+							    "drop-target",
+							    strlen (text) + 1,
+							    text);
+				else
+					gnome_metadata_remove (fpd->file_name,
+							       "drop-target");
+			} else {
+				if (fpd->drop_target)
+					gnome_metadata_remove (fpd->file_name,
+							       "drop-target");
+			}
 		} else {
-			if (fpd->fm_view)
-				gnome_metadata_remove (fpd->file_name,
-						       "fm-view");
-		}
-		if (!GTK_TOGGLE_BUTTON (fpd->prop2_cbox)->active) {
-			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop2_entry));
-			if (text && text[0])
-				gnome_metadata_set (fpd->file_name,
-						    "edit",
-						    strlen (text) + 1,
-						    text);
-			else
-				gnome_metadata_remove (fpd->file_name,
-						       "edit");
-		} else {
-			if (fpd->edit)
-				gnome_metadata_remove (fpd->file_name,
-						       "edit");
+			if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
+				text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
+				if (text && text[0])
+					gnome_metadata_set (fpd->file_name,
+							    "fm-view",
+							    strlen (text) + 1,
+							    text);
+				else
+					gnome_metadata_remove (fpd->file_name,
+							       "fm-view");
+			} else {
+				if (fpd->fm_view)
+					gnome_metadata_remove (fpd->file_name,
+							       "fm-view");
+			}
+			if (!GTK_TOGGLE_BUTTON (fpd->prop2_cbox)->active) {
+				text = gtk_entry_get_text (GTK_ENTRY (fpd->prop2_entry));
+				if (text && text[0])
+					gnome_metadata_set (fpd->file_name,
+							    "edit",
+							    strlen (text) + 1,
+							    text);
+				else
+					gnome_metadata_remove (fpd->file_name,
+							       "edit");
+			} else {
+				if (fpd->edit)
+					gnome_metadata_remove (fpd->file_name,
+							       "edit");
+			}
 		}
 	}
 	if (!fpd->can_set_icon)
 		return 1;
 	/* And finally, we set the metadata on the icon filename */
-	text = gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));
+	text = gnome_icon_entry_get_filename (GNOME_ICON_ENTRY (fpd->button)); /*gtk_entry_get_text (GTK_ENTRY (gnome_icon_entry_gtk_entry (GNOME_ICON_ENTRY (fpd->button))));*/
 	icon_name = gicon_image_to_name (fpd->im);
 	if (text) {
 		if (strcmp (text, icon_name))
