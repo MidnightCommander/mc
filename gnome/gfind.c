@@ -510,24 +510,18 @@ select_row(GtkCList *clist, gint row, gint column, GdkEvent *event, GFindDlg *he
 
 static void find_do_chdir(GtkWidget *widget, GFindDlg *head)
 {
-	gtk_idle_remove(head->idle_tag);
-	head->idle_tag = 0;
 	head->stop = B_ENTER;
 	gtk_main_quit();
 }
 
 static void find_do_again(GtkWidget *widget, GFindDlg *head)
 {
-	gtk_idle_remove(head->idle_tag);
-	head->idle_tag = 0;
 	head->stop = B_AGAIN;
 	gtk_main_quit();
 }
 
 static void find_do_panelize(GtkWidget *widget, GFindDlg *head)
 {
-	gtk_idle_remove(head->idle_tag);
-	head->idle_tag = 0;
 	head->stop = B_PANELIZE;
 	gtk_main_quit();
 }
@@ -537,8 +531,7 @@ static void find_start_stop(GtkWidget *widget, GFindDlg *head)
 {
 
 	if (head->is_start) {
-		head->idle_tag = gtk_idle_add((GtkFunction) do_search,
-						  head);
+		head->idle_tag = gtk_idle_add((GtkFunction) do_search, head);
 	} else {
 		gtk_idle_remove(head->idle_tag);
 		head->idle_tag = 0;
@@ -567,6 +560,14 @@ static void find_do_edit(GtkWidget *widget, GFindDlg *head)
 	get_list_info(head, &file, &dir);
 
 	find_do_view_edit(head, 0, 1, dir, file);
+}
+
+static void find_destroy(GtkWidget *widget, GFindDlg *head)
+{
+	if (head->idle_tag) {
+		gtk_idle_remove(head->idle_tag);
+		head->idle_tag = 0;
+	}
 }
 
 static void setup_gui(GFindDlg *head)
@@ -612,6 +613,9 @@ static void setup_gui(GFindDlg *head)
 	head->stop = B_EXIT;
 	gtk_signal_connect(GTK_OBJECT(head->g_clist), "select_row",
 			   GTK_SIGNAL_FUNC(select_row), head);
+
+	gtk_signal_connect (GTK_OBJECT(head->g_find_dlg), "destroy",
+			   GTK_SIGNAL_FUNC(find_destroy), head);
 
 	/*
 	 * Connect the buttons

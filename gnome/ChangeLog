@@ -1,5 +1,11 @@
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
+	* gfind.c (setup_gui): Register destroy handler.
+	(find_destroy): New function.  Unregister idle task if needed.
+	(find_do_chdir): Don't unregister idle task.
+	(find_do_again): Likewise.
+	(find_do_panelize): Likewise.
+
 	* gfind.c (insert_file) : Join with find_add_match().
 	(find_do_edit): Put g_status_label into a box to work around
 	what appears to be a bug in gtk-1.2.10.
