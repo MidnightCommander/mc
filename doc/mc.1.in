@@ -1314,7 +1314,7 @@ Rules are matched from top to bottom, thus the order is important.  If
 the appropriate action is missing, search continues as if this rule
 didn't match (i.e. if a file matches the first and second entry and View
 action is missing in the first one, then on pressing F3 the View action
-from the second entry will be used.
+from the second entry will be used).
 .I default
 should match all the actions.
 .\"NODE "    Background jobs"
