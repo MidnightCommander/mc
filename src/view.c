@@ -504,7 +504,7 @@ static char *load_view_file (WView *view, int fd)
 
     view->data = (unsigned char*) g_malloc (view->s.st_size);
     if (view->data == NULL
-	|| mc_lseek(view->file,0,0) != 0
+	|| mc_lseek(view->file, 0, SEEK_SET) != 0
 	|| mc_read(view->file, view->data, view->s.st_size) != view->s.st_size){
         if (view->data != NULL)
 	    g_free (view->data);

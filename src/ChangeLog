@@ -1,5 +1,8 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* cons.saver.c: Use SEEK_SET instead of 0 in lseek().
+	* view.c: Likewise.
+
 	* main.c (do_execute): Add newline after "Press any key to
 	continue".
 

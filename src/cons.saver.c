@@ -192,13 +192,13 @@ static int detect_console (char *tty_name)
 
 static void save_console (void)
 {
-    lseek (vcs_fd, 0, 0);
+    lseek (vcs_fd, 0, SEEK_SET);
     read (vcs_fd, buffer, buffer_size);
 }
 
 static void restore_console (void)
 {
-    lseek (vcs_fd, 0, 0);
+    lseek (vcs_fd, 0, SEEK_SET);
     write (vcs_fd, buffer, buffer_size);
 }
 
