@@ -1,3 +1,8 @@
+2002-09-26  Pavel Roskin  <proski@gnu.org>
+
+	* user.c (check_patterns): Ignore invalid shell_patterns and
+	let user see them in the menu.  The error message was too vague.
+
 2002-09-26  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* util.c (mc_mkstemps): Really return NULL in the filename in the

@@ -266,23 +266,30 @@ expand_format (WEdit * edit_widget, char c, int quote)
     return g_strdup ("");
 }
 
-/* Checks for shell patterns definition */
+/*
+ * Check for the "shell_patterns" directive.  If it's found and valid,
+ * interpret it and move the pointer past the directive.  Return the
+ * current pointer.
+ */
 static char *
 check_patterns (char *p)
 {
     static const char def_name[] = "shell_patterns=";
-    int value;
+    char *p0 = p;
 
-    if (strncmp (p, def_name, sizeof (def_name) - 1) == 0) {
-	p += sizeof (def_name) - 1;
-	value = *p++ - '0';
-	if (value == 0 || value == 1)
-	    easy_patterns = value;
-	else
-	    message (1, MSG_ERROR,
-		     _(" Invalid shell pattern definition \"%c\". "),
-		     value + '0');
-    }
+    if (strncmp (p, def_name, sizeof (def_name) - 1) != 0)
+	return p0;
+
+    p += sizeof (def_name) - 1;
+    if (*p == '1')
+	easy_patterns = 1;
+    else if (*p == '0')
+	easy_patterns = 0;
+    else
+	return p0;
+
+    /* Skip spaces */
+    p++;
     while (*p == '\n' || *p == '\t' || *p == ' ')
 	p++;
     return p;
