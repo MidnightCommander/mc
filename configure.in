@@ -728,8 +728,6 @@ lib/mc.ext
 lib/mc.sh
 lib/mc.csh
 
-mcfn_install
-
 vfs/extfs/deb
 vfs/extfs/ftplist
 vfs/extfs/lslR

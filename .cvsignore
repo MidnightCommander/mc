@@ -17,7 +17,6 @@ gettext.m4
 intl
 install-sh
 mc.spec
-mcfn_install
 missing
 mkinstalldirs
 stamp-h

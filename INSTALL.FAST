@@ -9,8 +9,7 @@ don't, take it from ftp://ftp.gtk.org/pub/gtk/v1.2/
    GNU Midnight Commander by default will use the S-Lang screen manager.
 It tries the S-Lang library installed on the system, but if it's not
 found, the included S-Lang sources are used.  It is also possible to
-use ncurses as the screen manager.  Note that syntax highlighting in
-the editor is currently unavailable with ncurses.
+use ncurses as the screen manager.
 
 1. Configure the package for your system.
 
@@ -34,12 +33,11 @@ the editor is currently unavailable with ncurses.
    
 `--with-ncurses[=PATH]'
 	Use the flag without =PATH if you want to compile with ncurses
-	Use this flag with =PATH part, if you want to compile with ncurses
-	and your ncurses is not installed in any of the places configure
-	checks (/usr/include, /usr/include/ncurses, /usr/local/include and
-	/usr/local/include/ncurses). The configure script will append
-	`lib' and `include' to find the libncurses.a and ncurses.h
-	files respectively.
+	Use this flag with =PATH part if you want to compile with
+	ncurses, and your ncurses is not installed in any of the places
+	configure normally checks. The configure script will append
+	`lib' and `include' to find the libncurses.a and ncurses.h files
+	respectively.
 
 `--with-gpm-mouse[=PATH]'
 	Use this flag if your GPM mouse package cannot be detected by the
@@ -62,8 +60,5 @@ restore the screen contents.  If you're making a mc binary distribution
 for other people and want to tar the whole binary later, you may want
 to specify `make install DESTDIR=PATH', which will make PATH the root
 for installation.
-
-3a. Type `make mcfninstall' to get an interactive program check if you
-want to define an useful alias for the Midnight Commander.
 
 4. Type `mc' and enjoy!

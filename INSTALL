@@ -230,9 +230,7 @@ and linked programs in that directory.
 
 6.  GNU Midnight Commander allows you to stay in the last current
 directory after exiting MC.  This is done with a shell function, the man
-page has more information about this.  If you want to let the install
-program make the change to your /etc/profile or your ~/.profile or
-~/.bashrc, then type: `make mcfninstall'.
+page has more information about this.
 
    The file `configure.in' is used to create `configure' by a program
 called `autoconf'.  You only need it if you want to regenerate

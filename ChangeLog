@@ -1,5 +1,9 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* mcfn_install: Remove.  Also remove all references to it.
+	* INSTALL.FAST: Update information about ncurses.
+	From Dmitry Semyonov <Dmitry.Semyonov@oktet.ru>
+
 	* acinclude.m4 (AC_USE_TERMCAP): Add -ltermcap to MCLIBS, not
 	LIBS.
 	* configure.in: Eliminate MCCFLAGS, use CPPFLAGS instead.  Add
