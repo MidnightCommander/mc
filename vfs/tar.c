@@ -643,19 +643,17 @@ init_tarfs (void)
 {
     static struct vfs_s_subclass tarfs_subclass;
 
+    tarfs_subclass.flags = VFS_S_READONLY;
     tarfs_subclass.archive_check = tar_super_check;
     tarfs_subclass.archive_same = tar_super_same;
     tarfs_subclass.open_archive = tar_open_archive;
     tarfs_subclass.free_archive = tar_free_archive;
     tarfs_subclass.fh_open = tar_fh_open;
-    tarfs_subclass.find_entry = vfs_s_find_entry_tree;
 
-    vfs_s_init_class (&vfs_tarfs_ops);
+    vfs_s_init_class (&vfs_tarfs_ops, &tarfs_subclass);
     vfs_tarfs_ops.name = "tarfs";
     vfs_tarfs_ops.prefix = "utar";
-    vfs_tarfs_ops.data = &tarfs_subclass;
     vfs_tarfs_ops.read = tar_read;
-    vfs_tarfs_ops.write = NULL;
     vfs_tarfs_ops.setctl = NULL;
     vfs_register_class (&vfs_tarfs_ops);
 }

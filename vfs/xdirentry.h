@@ -17,6 +17,10 @@
 #define FL_FOLLOW 1
 #define FL_DIR 4
 
+/* For vfs_s_subclass->flags */
+#define VFS_S_REMOTE 1
+#define VFS_S_READONLY 2
+
 
 /* Single connection or archive */
 struct vfs_s_super {
@@ -113,6 +117,7 @@ struct vfs_s_fh {
 struct vfs_s_subclass {
     struct vfs_s_super *supers;
     int inode_counter;
+    int flags;		/* whether the subclass is remove, read-only etc */
     dev_t rdev;
     FILE *logfile;
     int flush;		/* if set to 1, invalidate directory cache */
@@ -164,14 +169,6 @@ struct stat *vfs_s_default_stat (struct vfs_class *me, mode_t mode);
 struct vfs_s_entry *vfs_s_generate_entry (struct vfs_class *me, char *name,
 					  struct vfs_s_inode *parent,
 					  mode_t mode);
-struct vfs_s_entry *vfs_s_find_entry_tree (struct vfs_class *me,
-					   struct vfs_s_inode *root,
-					   char *path, int follow,
-					   int flags);
-struct vfs_s_entry *vfs_s_find_entry_linear (struct vfs_class *me,
-					     struct vfs_s_inode *root,
-					     char *path, int follow,
-					     int flags);
 struct vfs_s_inode *vfs_s_find_inode (struct vfs_class *me,
 				      const struct vfs_s_super *super,
 				      char *path, int follow, int flags);
@@ -179,7 +176,8 @@ struct vfs_s_inode *vfs_s_find_root (struct vfs_class *me,
 				     struct vfs_s_entry *entry);
 
 /* outside interface */
-void vfs_s_init_class (struct vfs_class *vclass);
+void vfs_s_init_class (struct vfs_class *vclass,
+		       struct vfs_s_subclass *sub);
 char *vfs_s_get_path_mangle (struct vfs_class *me, const char *inname,
 			     struct vfs_s_super **archive, int flags);
 void vfs_s_invalidate (struct vfs_class *me, struct vfs_s_super *super);

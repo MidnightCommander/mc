@@ -180,9 +180,6 @@ int mc_mkdir (char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
 int mc_ungetlocalcopy (const char *pathname, char *local, int has_changed);
-char *mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename);
-int mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
-			   char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
 int mc_setctl (char *path, int ctlop, void *arg);
 #ifdef HAVE_MMAP

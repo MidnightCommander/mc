@@ -1007,7 +1007,7 @@ mc_munmap (caddr_t addr, size_t len)
 
 #endif
 
-char *
+static char *
 mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
 {
     char *tmp, *suffix;
@@ -1079,7 +1079,7 @@ mc_getlocalcopy (const char *pathname)
     return result;
 }
 
-int
+static int
 mc_def_ungetlocalcopy (struct vfs_class *vfs, const char *filename,
 		       char *local, int has_changed)
 {

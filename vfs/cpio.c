@@ -445,7 +445,7 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
     } else
 	tn = name;
 
-    entry = vfs_s_find_entry_tree (me, root, tn, LINK_FOLLOW, FL_NONE);	/* In case entry is already there */
+    entry = MEDATA->find_entry (me, root, tn, LINK_FOLLOW, FL_NONE);	/* In case entry is already there */
 
     if (entry) {		/* This shouldn't happen! (well, it can happen if there is a record for a 
 				   file and than a record for a directory it is in; cpio would die with
@@ -593,19 +593,17 @@ init_cpiofs (void)
 {
     static struct vfs_s_subclass cpio_subclass;
 
+    cpio_subclass.flags = VFS_S_READONLY;
     cpio_subclass.archive_check = cpio_super_check;
     cpio_subclass.archive_same = cpio_super_same;
     cpio_subclass.open_archive = cpio_open_archive;
     cpio_subclass.free_archive = cpio_free_archive;
     cpio_subclass.fh_open = cpio_fh_open;
-    cpio_subclass.find_entry = vfs_s_find_entry_tree;
 
-    vfs_s_init_class (&vfs_cpiofs_ops);
+    vfs_s_init_class (&vfs_cpiofs_ops, &cpio_subclass);
     vfs_cpiofs_ops.name = "cpiofs";
     vfs_cpiofs_ops.prefix = "ucpio";
-    vfs_cpiofs_ops.data = &cpio_subclass;
     vfs_cpiofs_ops.read = cpio_read;
-    vfs_cpiofs_ops.write = NULL;
     vfs_cpiofs_ops.setctl = NULL;
     vfs_register_class (&vfs_cpiofs_ops);
 }

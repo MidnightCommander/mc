@@ -1936,12 +1936,12 @@ init_ftpfs (void)
 {
     static struct vfs_s_subclass ftpfs_subclass;
 
+    ftpfs_subclass.flags = VFS_S_REMOTE;
     ftpfs_subclass.archive_same = ftpfs_archive_same;
     ftpfs_subclass.open_archive = ftpfs_open_archive;
     ftpfs_subclass.free_archive = ftpfs_free_archive;
     ftpfs_subclass.fh_open = ftpfs_fh_open;
     ftpfs_subclass.fh_close = ftpfs_fh_close;
-    ftpfs_subclass.find_entry = vfs_s_find_entry_linear;
     ftpfs_subclass.dir_load = ftpfs_dir_load;
     ftpfs_subclass.dir_uptodate = ftpfs_dir_uptodate;
     ftpfs_subclass.file_store = ftpfs_file_store;
@@ -1949,18 +1949,16 @@ init_ftpfs (void)
     ftpfs_subclass.linear_read = ftpfs_linear_read;
     ftpfs_subclass.linear_close = ftpfs_linear_close;
 
-    vfs_s_init_class (&vfs_ftpfs_ops);
+    vfs_s_init_class (&vfs_ftpfs_ops, &ftpfs_subclass);
     vfs_ftpfs_ops.name = "ftpfs";
     vfs_ftpfs_ops.flags = VFSF_NOLINKS;
     vfs_ftpfs_ops.prefix = "ftp:";
-    vfs_ftpfs_ops.data = &ftpfs_subclass;
     vfs_ftpfs_ops.done = &ftpfs_done;
     vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
     vfs_ftpfs_ops.chmod = ftpfs_chmod;
     vfs_ftpfs_ops.chown = ftpfs_chown;
     vfs_ftpfs_ops.unlink = ftpfs_unlink;
     vfs_ftpfs_ops.rename = ftpfs_rename;
-    vfs_ftpfs_ops.getlocalcopy = NULL;
     vfs_ftpfs_ops.mkdir = ftpfs_mkdir;
     vfs_ftpfs_ops.rmdir = ftpfs_rmdir;
     vfs_ftpfs_ops.ctl = ftpfs_ctl;

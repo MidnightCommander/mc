@@ -881,11 +881,11 @@ init_fish (void)
 {
     static struct vfs_s_subclass fish_subclass;
 
+    fish_subclass.flags = VFS_S_REMOTE;
     fish_subclass.archive_same = fish_archive_same;
     fish_subclass.open_archive = fish_open_archive;
     fish_subclass.free_archive = fish_free_archive;
     fish_subclass.fh_open = fish_fh_open;
-    fish_subclass.find_entry = vfs_s_find_entry_linear;
     fish_subclass.dir_load = fish_dir_load;
     fish_subclass.dir_uptodate = fish_dir_uptodate;
     fish_subclass.file_store = fish_file_store;
@@ -893,10 +893,9 @@ init_fish (void)
     fish_subclass.linear_read = fish_linear_read;
     fish_subclass.linear_close = fish_linear_close;
 
-    vfs_s_init_class (&vfs_fish_ops);
+    vfs_s_init_class (&vfs_fish_ops, &fish_subclass);
     vfs_fish_ops.name = "fish";
     vfs_fish_ops.prefix = "sh:";
-    vfs_fish_ops.data = &fish_subclass;
     vfs_fish_ops.fill_names = fish_fill_names;
     vfs_fish_ops.chmod = fish_chmod;
     vfs_fish_ops.chown = fish_chown;
@@ -904,7 +903,6 @@ init_fish (void)
     vfs_fish_ops.link = fish_link;
     vfs_fish_ops.unlink = fish_unlink;
     vfs_fish_ops.rename = fish_rename;
-    vfs_fish_ops.getlocalcopy = NULL;
     vfs_fish_ops.mkdir = fish_mkdir;
     vfs_fish_ops.rmdir = fish_rmdir;
     vfs_fish_ops.ctl = fish_ctl;

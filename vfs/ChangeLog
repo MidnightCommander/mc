@@ -1,3 +1,16 @@
+2003-10-28  Pavel Roskin  <proski@gnu.org>
+
+	* direntry.c (vfs_s_init_class): Improve interface to allow more
+	code reuse.  Change all callers.
+	(vfs_s_getlocalcopy): New implementation.  Don't use
+	mc_def_getlocalcopy().  Use vfs_s_open() to create local copy.
+	(vfs_s_ungetlocalcopy): New function.
+	* xdirentry.h: Add new field "flags" to struct vfs_s_subclass.
+	* extfs.c (extfs_ungetlocalcopy): Don't use
+	mc_def_ungetlocalcopy() in the dead branch.
+	* vfs.c (mc_def_getlocalcopy): Make static.
+	(mc_def_ungetlocalcopy): Likewise.
+
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Constify some arguments for many functions.

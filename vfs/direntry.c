@@ -232,7 +232,7 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
  * Follow > 0: follow links, serves as loop protect,
  *       == -1: do not follow links
  */
-struct vfs_s_entry *
+static struct vfs_s_entry *
 vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 		       char *path, int follow, int flags)
 {
@@ -293,21 +293,24 @@ split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char 
     }
 }
 
-struct vfs_s_entry *
-vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *path, int follow, int flags)
+static struct vfs_s_entry *
+vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
+			 char *path, int follow, int flags)
 {
-    struct vfs_s_entry* ent = NULL;
+    struct vfs_s_entry *ent = NULL;
 
     if (root->super->root != root)
-        vfs_die ("We have to use _real_ root. Always. Sorry." );
+	vfs_die ("We have to use _real_ root. Always. Sorry.");
 
     canonicalize_pathname (path);
 
-    if (!(flags & FL_DIR)){
+    if (!(flags & FL_DIR)) {
 	char *dirname, *name, *save;
 	struct vfs_s_inode *ino;
 	split_dir_name (me, path, &dirname, &name, &save);
-	ino = vfs_s_find_inode (me, root->super, dirname, follow, flags | FL_DIR);
+	ino =
+	    vfs_s_find_inode (me, root->super, dirname, follow,
+			      flags | FL_DIR);
 	if (save)
 	    *save = PATH_SEP;
 	return vfs_s_find_entry_tree (me, ino, name, follow, flags);
@@ -317,7 +320,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *p
 	if (!strcmp (ent->name, path))
 	    break;
 
-    if (ent && (! (MEDATA->dir_uptodate) (me, ent->ino))){
+    if (ent && (!(MEDATA->dir_uptodate) (me, ent->ino))) {
 #if 1
 	print_vfs_message (_("Directory cache expired for %s"), path);
 #endif
@@ -325,12 +328,14 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *p
 	ent = NULL;
     }
 
-    if (!ent){
+    if (!ent) {
 	struct vfs_s_inode *ino;
 
-	ino = vfs_s_new_inode (me, root->super, vfs_s_default_stat (me, S_IFDIR | 0755));
+	ino =
+	    vfs_s_new_inode (me, root->super,
+			     vfs_s_default_stat (me, S_IFDIR | 0755));
 	ent = vfs_s_new_entry (me, path, ino);
-	if ((MEDATA->dir_load) (me, ino, path) == -1){
+	if ((MEDATA->dir_load) (me, ino, path) == -1) {
 	    vfs_s_free_entry (me, ent);
 	    return NULL;
 	}
@@ -340,11 +345,12 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root, char *p
 	    if (!strcmp (ent->name, path))
 		break;
     }
-    if (!ent) 
+    if (!ent)
 	vfs_die ("find_linear: success but directory is not there\n");
 
 #if 0
-    if (!vfs_s_resolve_symlink (me, ent, follow)) return NULL;
+    if (!vfs_s_resolve_symlink (me, ent, follow))
+	return NULL;
 #endif
     return ent;
 }
@@ -354,7 +360,7 @@ vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
 		  char *path, int follow, int flags)
 {
     struct vfs_s_entry *ent;
-    if ((MEDATA->find_entry == vfs_s_find_entry_tree) && (!*path))
+    if (!(MEDATA->flags & VFS_S_REMOTE) && (!*path))
 	return super->root;
     ent = (MEDATA->find_entry) (me, super->root, path, follow, flags);
     if (!ent)
@@ -517,7 +523,8 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
     if (!ino->ent)
 	ERRNOR (EAGAIN, NULL);
 
-    if (MEDATA->find_entry != vfs_s_find_entry_linear) {
+    if (!(MEDATA->flags & VFS_S_REMOTE)) {
+	/* archives */
 	char *newpath;
 	char *path = g_strdup (ino->ent->name);
 	while (1) {
@@ -531,7 +538,7 @@ vfs_s_fullpath (struct vfs_class *me, struct vfs_s_inode *ino)
 	return path;
     }
 
-    /* It must be directory */
+    /* remote systems */
     if ((!ino->ent->dir) || (!ino->ent->dir->ent))
 	return g_strdup (ino->ent->name);
 
@@ -966,16 +973,33 @@ vfs_s_ferrno (struct vfs_class *me)
     return me->verrno;
 }
 
+/* Get local copy of the given file.  We reuse the existing cache.  */
 static char *
 vfs_s_getlocalcopy (struct vfs_class *me, const char *path)
 {
     struct vfs_s_inode *ino;
+    struct vfs_s_fh *fh;
+    char *local;
 
-    ino = vfs_s_inode_from_path (me, path, FL_FOLLOW | FL_NONE);
-    if (!ino->localname)
-	ino->localname = mc_def_getlocalcopy (me, path);
-    /* FIXME: fd_usage++ missing */
-    return g_strdup (ino->localname);
+    fh = vfs_s_open (me, path, O_RDONLY, 0);
+    if (!fh || !fh->ino || !fh->ino->localname)
+	return NULL;
+
+    local = g_strdup (ino->localname);
+    vfs_s_close (fh);
+    return local;
+}
+
+/*
+ * Return the local copy.  Since we are using our cache, we do nothing -
+ * the cache will be removed when the archive is closed.
+ */
+static int
+vfs_s_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
+		      int has_changed)
+{
+    g_free (local);
+    return 0;
 }
 
 static int
@@ -1047,14 +1071,18 @@ vfs_s_free (vfsid id)
     vfs_s_free_super (((struct vfs_s_super *)id)->me, (struct vfs_s_super *)id);
 }
 
+/* Initialize one of our subclasses - fill common functions */
 void
-vfs_s_init_class (struct vfs_class *vclass)
+vfs_s_init_class (struct vfs_class *vclass, struct vfs_s_subclass *sub)
 {
+    vclass->data = sub;
     vclass->fill_names = vfs_s_fill_names;
     vclass->open = vfs_s_open;
     vclass->close = vfs_s_close;
     vclass->read = vfs_s_read;
-    vclass->write = vfs_s_write;
+    if (!(sub->flags & VFS_S_READONLY)) {
+	vclass->write = vfs_s_write;
+    }
     vclass->opendir = vfs_s_opendir;
     vclass->readdir = vfs_s_readdir;
     vclass->closedir = vfs_s_closedir;
@@ -1068,7 +1096,13 @@ vfs_s_init_class (struct vfs_class *vclass)
     vclass->getid = vfs_s_getid;
     vclass->nothingisopen = vfs_s_nothingisopen;
     vclass->free = vfs_s_free;
-    vclass->getlocalcopy = vfs_s_getlocalcopy;
+    if (sub->flags & VFS_S_REMOTE) {
+	sub->find_entry = vfs_s_find_entry_linear;
+    } else {
+	vclass->getlocalcopy = vfs_s_getlocalcopy;
+	vclass->ungetlocalcopy = vfs_s_ungetlocalcopy;
+	sub->find_entry = vfs_s_find_entry_tree;
+    }
     vclass->setctl = vfs_s_setctl;
 }
 

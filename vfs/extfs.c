@@ -1270,7 +1270,7 @@ extfs_ungetlocalcopy (struct vfs_class *me, const char *path, char *local,
     } else {
 	/* Should not happen */
 	extfs_close ((void *) fp);
-	return mc_def_ungetlocalcopy (me, path, local, has_changed);
+	return 0;
     }
 }
 
