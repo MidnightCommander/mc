@@ -27,6 +27,7 @@ MC_PC_DIR=.
 MC_SRC_DIR=../src
 VFS_DIR=../vfs
 MCEDIT_SRC_DIR=../edit
+MCGTKEDIT_SRC_DIR=../edit
 MCEDIT_OBJS_DIR=$(OBJS_DIR)/edit
 SLANG_SRC_DIR=../slang
 SLANG_OBJS_DIR=$(OBJS_DIR)/slang
@@ -77,80 +78,86 @@ $(SLANG_OBJS_DIR)/%.$(OBJ_SUFFIX): $(SLANG_SRC_DIR)/%.c
 $(MCEDIT_OBJS_DIR)/%.$(OBJ_SUFFIX): $(MCEDIT_SRC_DIR)/%.c
 	$(CC) $(MCEDIT_CFLAGS) $(OBJ_PLACE)$@ $<
 
+$(MCEDIT_OBJS_DIR)/%.$(OBJ_SUFFIX) $(MCGTKEDIT_SRC_DIR)/%.c
+	$(CC) -I$(MCGTKEDIT_SRC_DIR) -I$(MCEDIT_SRC_DIR) -I$(MCEDIT_SRC_DIR)/.. $(MCEDIT_CFLAGS) $(OBJ_PLACE)$@ $<
+
 MC_SRCS= \
-	terms.c \
-	user.c \
-	file.c \
-	listmode.c \
-	cmd.c \
-	command.c \
-	help.c \
-	menu.c \
-	view.c \
-	dir.c \
-	info.c \
-	widget.c \
-	option.c \
-	dlg.c \
-	panelize.c \
-	profile.c \
-	util.c \
-	dialog.c \
-	ext.c \
-	color.c \
-	layout.c \
-	setup.c \
-	regex.c \
-	hotlist.c \
-	tree.c \
-	win.c \
-	complete.c \
-	find.c \
-	wtools.c \
-	boxes.c \
-	background.c \
-	main.c \
-	popt.c \
-	text.c \
+	terms.c 	\
+	user.c 		\
+	file.c 		\
+	filegui.c	\
+	filenot.c	\
+	findme.c	\
+	listmode.c 	\
+	cmd.c 		\
+	command.c 	\
+	help.c 		\
+	menu.c 		\
+	view.c 		\
+	dir.c 		\
+	info.c 		\
+	widget.c 	\
+	option.c 	\
+	dlg.c 		\
+	panelize.c 	\
+	profile.c 	\
+	util.c 		\
+	dialog.c 	\
+	ext.c 		\
+	color.c 	\
+	layout.c 	\
+	setup.c 	\
+	regex.c 	\
+	hotlist.c 	\
+	tree.c 		\
+	win.c 		\
+	complete.c 	\
+	find.c 		\
+	wtools.c 	\
+	boxes.c 	\
+	background.c 	\
+	main.c 		\
+	popt.c 		\
+	text.c 		\
 	screen.c
 
 PC_SRCS= \
-	slint_pc.c \
-	chmod.c \
+	slint_pc.c 	\
+	chmod.c 	\
 	drive.c
 
 NT_SRCS= \
-	cons_nt.c \
-	dirent_nt.c \
-	key_nt.c \
-	util_win32.c \
-	util_winnt.c \
+	cons_nt.c 	\
+	dirent_nt.c 	\
+	key_nt.c 	\
+	util_win32.c 	\
+	util_winnt.c 	\
 	util_nt.c
 
 OS2_SRCS= \
-	cons_os2.c \
-	dirent_os2.c \
-	key_os2.c \
+	cons_os2.c 	\
+	dirent_os2.c 	\
+	key_os2.c 	\
 	util_os2.c
 
 SLANG_NT=slw32tty.c
 SLANG_OS2=slos2tty.c
 
-SLANG_SRCS= \
-	slerr.c \
-	slgetkey.c \
-	slsmg.c \
-	slvideo.c \
+SLANG_SRCS= 		\
+	slerr.c 	\
+	slgetkey.c 	\
+	slsmg.c 	\
+	slvideo.c 	\
 	$(SLANG_$(TARGET_OS))
 
-MCEDIT_SRCS= \
-	edit.c \
-	editcmd.c \
-	editdraw.c \
-	editmenu.c \
-	editoptions.c \
-	editwidget.c \
-	syntax.c \
+MCEDIT_SRCS= 		\
+	edit.c 		\
+	editcmd.c 	\
+	editdraw.c 	\
+	editmenu.c 	\
+	editoptions.c 	\
+	editwidget.c 	\
+	syntax.c 	\
 	wordproc.c
 
 SRCS=$(MC_SRCS) $(PC_SRCS) $($(TARGET_OS)_SRCS) $(EXTRA_MC_SRCS)

@@ -5,7 +5,7 @@ AC_INIT(create_vcs)
 AC_CONFIG_HEADER(config.h)
 
 PACKAGE=mc
-VERSION=4.5.5
+VERSION=4.5.6
 AC_DEFINE_UNQUOTED(PACKAGE, "$PACKAGE")
 AC_DEFINE_UNQUOTED(VERSION, "$VERSION")
 AC_SUBST(VERSION)
@@ -144,24 +144,21 @@ if test x$ac_cv_header_malloc_h = xno; then
     echo '/* NeXTStep malloc.h stub */' > $srcdir/malloc.h
 fi
 
-dnl (rx.h)
 AC_HEADER_SYS_WAIT
 AC_HEADER_DIRENT
 AC_SHORT_D_NAME_LEN
 AC_HEADER_STDC
 
-dnl
-dnl Let me check for an incompatible regcomp in HP-UX before making this
-dnl the default
-dnl
-dnl if test x$ac_cv_header_rx_h = xyes; then
-dnl AC_CHECK_FUNCS(regcomp)
-dnl if test x$ac_cv_func_regcomp = xyes; then
-dnl     REGEX_O=""
-dnl fi
-dnl fi
+
+Let me check for an incompatible regcomp in HP-UX before making this
+the default
 
 REGEX_O="regex.o"
+AC_CHECK_FUNCS(regcomp)
+if test x$ac_cv_func_regcomp = xyes; then
+    REGEX_O=""
+fi
+
 AC_SUBST(REGEX_O)
 
 dnl Missing structure components

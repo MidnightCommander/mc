@@ -250,7 +250,6 @@ static void init_chmod (void)
 #define XTRACT(i) BY+chmod_but[i].y-single_set, BX+chmod_but[i].x, \
      chmod_but[i].ret_cmd, chmod_but[i].flags, chmod_but[i].text, 0, 0, NULL
 
-    tk_new_frame (ch_dlg, "b.");
     for (i = 0; i < BUTTONS; i++) {
 	if (i == 2 && single_set)
 	    break;
@@ -260,7 +259,6 @@ static void init_chmod (void)
 
 
 #define XTRACT2(i) 0, check_perm [i].text, NULL
-    tk_new_frame (ch_dlg, "c.");
     for (i = 0; i < PERMISSIONS; i++) {
 	check_perm[i].check = check_new (PY + (PERMISSIONS - i), PX + 2,
 					 XTRACT2 (i));
@@ -417,7 +415,6 @@ void chmod_cmd (void)
 	    check_perm[i].selected = 0;
 	}
 
-	tk_new_frame (ch_dlg, "l.");
 	/* Set the labels */
 	c_fname = name_trunc (fname, 21);
 	add_widget (ch_dlg, label_new (FY+2, FX+2, c_fname, NULL));
@@ -428,7 +425,6 @@ void chmod_cmd (void)
 	sprintf (buffer, "%o", c_stat);
 	statl = label_new (FY+4, FX+2, buffer, NULL);
 	add_widget (ch_dlg, statl);
-	tk_end_frame ();
 	
 	run_dlg (ch_dlg);	/* retrieve an action */
 	

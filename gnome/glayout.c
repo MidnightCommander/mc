@@ -266,6 +266,7 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("_New window"),        N_("Opens a new window"), gnome_open_panel },
+	{ GNOME_APP_UI_ITEM, N_("_New folder"),        N_("Creates a folder"), mkdir_panel_cmd },
 	/* We want to make a new menu entry here... */
 	/* For example: */
 	/* New-> */

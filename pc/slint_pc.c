@@ -19,6 +19,7 @@
 
 #include <config.h>
 #include <stdio.h>
+#include <string.h>
 #include "../src/tty.h"
 #include "../src/mad.h"
 #include "../src/color.h"

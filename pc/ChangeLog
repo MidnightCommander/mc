@@ -1,3 +1,8 @@
+1999-01-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* chmod.c (chmod_cmd): Killed the tk_end_frame and tk_new_frame
+	macros. 
+
 Wed Oct 14 14:51:23 1998  Franco Bez <franco.bez@augsburg.baynet.de>
 
 	* gtkedit/edit.c: Workarround for the CR/LF Translation problem.

@@ -1,3 +1,8 @@
+1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
+
+	* vfs.h (vfs_strip_suffix_from_filename): Typo fix.  Include
+	defines for non-vfs compilation.
+
 Fri Jan  8 20:03:36 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
 
 	* vfs.c (vfs_parse_filedate): I forgot to set got_year in one place 

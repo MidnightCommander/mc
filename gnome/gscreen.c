@@ -1213,8 +1213,6 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
 
-	if (event)
-		printf ("Icon list select icon, event->type= %d %d %d\n", event->type, GDK_BUTTON_PRESS, GDK_2BUTTON_PRESS);
 	if (!event)
 		return;
 

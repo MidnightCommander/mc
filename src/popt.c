@@ -224,7 +224,9 @@ static void execCommand(poptContext con) {
 #ifdef __hpux
     setresuid(getuid(), getuid(),-1);
 #else
+#ifndef OS2_NT
     setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
+#endif
 #endif
 
     execvp(argv[0], argv);

@@ -1,3 +1,7 @@
+1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
+
+	* popt.c: OS/2 and Windows NT portability fix.
+
 1999-01-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c (panel_operate_flags): Only show this dialog box if it is

@@ -241,7 +241,7 @@ struct utimbuf {
 #   define vfs_current_is_tarfs() 0
 #   define vfs_current_is_extfs() 0
 #   define vfs_path(x) x
-#   define vfs_strip_suffix_from_filename (x) strdup(x)
+#   define vfs_strip_suffix_from_filename(x) strdup(x)
 #   define mc_close close
 #   define mc_read read
 #   define mc_write write
@@ -273,7 +273,8 @@ struct utimbuf {
 #   define mc_munmap munmap
 
 #   define mc_ctl(a,b,c) 0
-#   define mc_setctl(a,b,c)
+#   define mc_setctl(a,b,c) 0
+#   define vfs_translate_url strdup(s)
 
 #   define mc_stat stat
 #   define mc_mknod mknod
