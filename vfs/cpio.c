@@ -84,6 +84,7 @@ struct defer_inode {
     struct vfs_s_inode *inode;
 };
 
+/* FIXME: should be off_t instead of int. */
 static int cpio_position;
 
 static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super);
@@ -451,6 +452,8 @@ cpio_create_entry (struct vfs_class *me, struct vfs_s_super *super,
     case S_IFNAM:
 #endif
 	if ((st->st_size != 0) && (st->st_rdev == 0x0001)) {
+	    /* FIXME: representation of major/minor differs between */
+	    /* different operating systems. */
 	    st->st_rdev = (unsigned) st->st_size;
 	    st->st_size = 0;
 	}
