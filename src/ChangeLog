@@ -1,6 +1,8 @@
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-    * achown.c (init_chown_advanced) [ENABLE_NLS]: i18n fix.
+	* achown.c (init_chown_advanced) [ENABLE_NLS]: i18n fix.
+	* user.c (extract_line): Add a new parameter (size of the
+	output buffer) to prevent buffer overflow.
 
 2004-03-05  Pavel Roskin  <proski@gnu.org>
 
@@ -1489,7 +1491,7 @@
 	unused defines.
 	* dlg.c: Adjust declarations for match.
 
-	* wtools.h: Eliminate the_widget filed in QuickWidget.
+	* wtools.h: Eliminate the_widget field in QuickWidget.
 	* wtools.c (quick_callback): Allocate widget table dynamically.
 
 	* dlg.c (widget_redraw): Remove.

@@ -299,13 +299,15 @@ check_patterns (char *p)
 
 /* Copies a whitespace separated argument from p to arg. Returns the
    point after argument. */
-static char *extract_arg (char *p, char *arg)
+static char *extract_arg (char *p, char *arg, int size)
 {
     while (*p && (*p == ' ' || *p == '\t' || *p == '\n'))
 	p++;
                 /* support quote space .mnu */
-    while (*p && (*p != ' ' || *(p-1) == '\\') && *p != '\t' && *p != '\n')
+    while (size > 1 && *p && (*p != ' ' || *(p-1) == '\\') && *p != '\t' && *p != '\n') {
 	*arg++ = *p++;
+	size--;
+    }
     *arg = 0;
     if (!*p || *p == '\n')
 	p --;
@@ -388,29 +390,29 @@ static char *test_condition (WEdit *edit_widget, char *p, int *condition)
 	    p--;
 	    break;
 	case 'f': /* file name pattern */
-	    p = extract_arg (p, arg);
+	    p = extract_arg (p, arg, sizeof (arg));
 	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
 	    break;
 	case 'y': /* syntax pattern */
             if (edit_widget && edit_widget->syntax_type) {
-	        p = extract_arg (p, arg);
+	        p = extract_arg (p, arg, sizeof (arg));
 	        *condition = panel &&
                     regexp_match (arg, edit_widget->syntax_type, match_normal);
 	    }
-                break;
+            break;
 	case 'd':
-	    p = extract_arg (p, arg);
+	    p = extract_arg (p, arg, sizeof (arg));
 	    *condition = panel && regexp_match (arg, panel->cwd, match_file);
 	    break;
 	case 't':
-	    p = extract_arg (p, arg);
+	    p = extract_arg (p, arg, sizeof (arg));
 	    *condition = panel && test_type (panel, arg);
 	    break;
 	case 'x': /* executable */
 	{
 	    struct stat status;
 	    
-	    p = extract_arg (p, arg);
+	    p = extract_arg (p, arg, sizeof (arg));
 	    if (stat (arg, &status) == 0)
 		*condition = is_exe (status.st_mode);
 	    else
