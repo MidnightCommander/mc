@@ -894,7 +894,7 @@ clicking on the background button (or pressing M-b in the dialog
 box).  The 
 .\"LINK2"
 Background Jobs
-.\"Background Jobs"
+.\"Background jobs"
 is used to control the background process.
 .PP
 .B Link (C-x l)
@@ -940,7 +940,7 @@ clicking on the background button (or pressing M-b in the dialog
 box). The 
 .\"LINK2"
 Background Jobs
-.\"Background Jobs"
+.\"Background jobs"
 is used to control the background process.
 .PP
 .B Mkdir (F7)
@@ -1313,6 +1313,7 @@ match (i.e. if a file matches the first and second entry and View action
 is missing in the first one, then on pressing F3 the View action from
 the second entry will be used. default should catch all the actions.
 .PP
+.\"NODE "    Background jobs"
 .SH "    Background Jobs"
 This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the

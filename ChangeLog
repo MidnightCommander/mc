@@ -1,5 +1,9 @@
 2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* doc/mc.1.in: Use nodename `Background jobs' for section
+	`Background Jobs' to reflect user visible Command menu option
+	and src/cmd.c dialog implementation.
+
 	* doc/ru: New directory for Russian manuals.
 	* doc/ru/mc.1.in: Translated mc.1 manual page.  Originally
 	translated by Victor A. Kostromin for mc 4.5.30.  Converted
