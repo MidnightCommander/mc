@@ -220,10 +220,10 @@ sort_size (const file_entry *a, const file_entry *b)
     int ad = MY_ISDIR (a);
     int bd = MY_ISDIR (b);
 
-    if (ad == bd || mix_all_files)
-	return (b->buf.st_size - a->buf.st_size) * reverse;
-    else
-	return bd-ad;
+    if (ad != bd && !mix_all_files)
+	return bd - ad;
+
+    return (2 * (b->buf.st_size > a->buf.st_size) - 1) * reverse;
 }
 
 int
