@@ -9,7 +9,7 @@ mc \- Visual shell for Unix-like systems.
 .SH "DESCRIPTION"
 .LP
 The Midnight Commander is a directory browser/file manager for
-Unix-like operating systems.  
+Unix-like operating systems.
 .\".\"DONT_SPLIT"
 .SH "OPTIONS"
 .TP
@@ -44,7 +44,7 @@ Displays the compiled-in search paths for Midnight Commander files.
 Reset softkeys to their default from the termcap/terminfo
 database. Only useful on HP terminals when the function keys don't work.
 .TP
-.I "-l file" 
+.I "-l file"
 Save the ftpfs dialog with the server in file.
 .TP
 .I "\-P"
@@ -67,7 +67,7 @@ off.
 .TP
 .I "\-t"
 Used only if the code was compiled with Slang and terminfo: it makes
-the Midnight Commander use the value of the 
+the Midnight Commander use the value of the
 .B TERMCAP
 variable for the terminal information instead of the information on
 the system wide terminal database
@@ -181,7 +181,7 @@ milliseconds. This may be changed to other values by editing the
 .\"LINK2"
 \&~/.mc/ini
 .\"Save Setup"
-file and changing the 
+file and changing the
 .I mouse_repeat_rate
 parameter.
 .PP
@@ -192,7 +192,7 @@ text) by holding down the Shift key.
 .SH "Keys"
 Some commands in the Midnight Commander involve the use of the
 .I Control
-(sometimes labeled CTRL or CTL) and the 
+(sometimes labeled CTRL or CTL) and the
 .I Meta
 (sometimes labeled ALT or even Compose) keys. In this manual we will
 use the following abbreviations:
@@ -202,7 +202,7 @@ C-<chr> means hold the Control key while typing the character
 .PP
 M-<chr> means hold the Meta or Alt key down while typing <chr>. If
 there is no Meta or Alt key, type ESC, release it, then type the
-character <chr>. 
+character <chr>.
 .PP
 All input lines in the Midnight Commander use an approximation to
 the GNU Emacs editor's key bindings.
@@ -249,7 +249,7 @@ Here are some keys which don't fall into any of the other categories:
 If there is some text in the command line (the one at the bottom of
 the panels), then that command is executed. If there is no text in the
 command line then if the selection bar is over a directory the
-Midnight Commander does a 
+Midnight Commander does a
 .B chdir(2)
 to the selected directory and reloads the information on the panel;
 if the selection is an executable file then it is executed. Finally,
@@ -290,14 +290,14 @@ Set the other panel display mode to information.
 Set the other panel display mode to quick view.
 .PP
 .B C-x !.
-Execute the 
+Execute the
 .\"LINK2"
 External panelize
 .\"External panelize"
 command.
 .PP
 .B C-x h
-Run the 
+Run the
 .\"LINK2"
 add directory to hotlist
 .\"Hotlist"
@@ -310,7 +310,7 @@ view command.
 .\"Internal File Viewer"
 .PP
 .B M-?,
-Executes the 
+Executes the
 .\"LINK2"
 Find file
 .\"Find File"
@@ -335,7 +335,7 @@ and you will be taken back to the Midnight Commander main screen, to
 return to your application just type C-o.  If you have an application
 suspended by using this trick, you won't be able to execute other
 programs from the Midnight Commander until you terminate the suspended
-application. 
+application.
 .PP
 .SH "  Directory Panels"
 This section lists the keys which operate on the directory panels. If
@@ -358,7 +358,7 @@ file.
 .PP
 .B M-g, M-h (or M-r), M-j.
 Used to select the top file in a panel, the middle file and the bottom one,
-respectively. 
+respectively.
 .PP
 .B C-s, M-s.
 Start a filename search in the directory listing. When the search is
@@ -370,7 +370,7 @@ line. When typing, the selection bar will move to the next file
 starting with the typed letters. The
 .I "backspace"
 or
-.I DEL 
+.I DEL
 keys can be used to correct typing mistakes. If C-s is pressed
 again, the next match is searched for.
 .PP
@@ -380,7 +380,7 @@ mode.  With this it is possible to quickly switch from long listing
 to regular listing and the user defined listing mode.
 .PP
 .B C-\\\\ (control-backslash).
-Show the 
+Show the
 .\"LINK2"
 directory hotlist
 .\"Hotlist"
@@ -389,7 +389,7 @@ and change to the selected directory.
 .B + \ (plus).
 This is used to select (tag) a group of files. The Midnight Commander
 will prompt for a regular expression describing the group. When
-.I Shell Patterns 
+.I Shell Patterns
 are enabled, the regular expression is much like the regular
 expressions in the shell (* standing for zero or more characters and ?
 standing for one character). If
@@ -434,11 +434,11 @@ Only when ran on the Linux console: does a chdir to ".." and to the
 currently selected directory respectively.
 .PP
 .B M-y
-Moves to the previous directory in the history, equivalent 
+Moves to the previous directory in the history, equivalent
 to depressing the '<' with the mouse.
 .PP
 .B M-u
-Moves to the next directory in the history, equivalent 
+Moves to the next directory in the history, equivalent
 to depressing the '>' with the mouse.
 .PP
 .B M-S-h, M-H
@@ -467,7 +467,7 @@ Copy the tagged files (or if there are no tagged files, the selected
 file) of the current panel (C-x t) or of the other panel (C-x C-t) to
 the command line.
 .PP
-.B C-x p, C-x C-p. 
+.B C-x p, C-x C-p.
 The first key sequence copies the current path name to the command
 line, and the second one copies the unselected panel's path name to
 the command line.
@@ -481,7 +481,7 @@ Use these keys to browse through the command history. M-p takes you
 to the last entry, M-n takes you to the next one.
 .PP
 .B M-h.
-Displays the history for the current input line. 
+Displays the history for the current input line.
 .PP
 .SH "  General Movement Keys"
 The help viewer, the file viewer and the directory tree use common
@@ -618,12 +618,21 @@ Options Menu
 .\"Options Menu"
 lists the actions which allow you to customize the Midnight Commander.
 .PP
-.SH "  Left and Right Menus"
+.\"NODE "  Left and Right Menus"
+.SH "  Left and Right (Above and Below) Menus"
 The outlook of the directory panels can be changed from the
 .B "Left"
 and
 .B "Right"
 menus.
+.B ("Above"
+and
+.B "Below"
+when the horizontal panel split is chosen from the
+.\"LINK2"
+Layout
+.\"Layout"
+options dialog).
 .PP
 .SH "    Listing Mode..."
 The listing mode view is used to display a listing of files, there are
@@ -634,7 +643,7 @@ four different listing modes available:
 and
 .B User.
 The full directory view shows the file name, the size of the file and
-the modification time. 
+the modification time.
 .PP
 The brief view shows only the file name and it has two columns
 (therefore showing twice as many files as other views). The long view
@@ -651,7 +660,7 @@ full screen panel respectively.
 .PP
 After the panel size, you may specify the two columns mode on the
 panel, this is done by adding the number "2" to the user format
-string. 
+string.
 .PP
 After this you add the name of the fields with an optional size
 specifier.  This are the available fields you may display:
@@ -740,13 +749,13 @@ the number is followed by the symbol '+', then the size specifies the
 minimum field size, if the program finds out that there is more space
 on the screen, it will then expand this field.
 .PP
-For example, the 
+For example, the
 .B Full
 display corresponds to this format:
 .PP
 half type,name,|,size,|,mtime
 .PP
-And the 
+And the
 .B Long
 display corresponds to this format:
 .PP
@@ -764,15 +773,15 @@ The info view display information related to the currently
 selected file and if possible information about the current file
 system.
 .TP
-.B "Tree" 
+.B "Tree"
 The tree view is quite similar to the
 .\"LINK2"
 directory tree
 .\"Directory Tree"
 feature. See the section about it for more information.
-.TP 
+.TP
 .B "Quick View"
-In this mode, the panel will switch to a reduced 
+In this mode, the panel will switch to a reduced
 .\"LINK2"
 viewer
 .\"Internal File Viewer"
@@ -792,7 +801,7 @@ from the
 .\"LINK2"
 Options menu
 .\"Options Menu"
-(option 
+(option
 .B "Mix all files"
 ).
 .PP
@@ -850,9 +859,9 @@ View the currently selected file. By default this invokes the
 Internal File Viewer
 .\"Internal File Viewer"
 but if the option "Use internal view" is off, it invokes an external
-file viewer specified by the 
-.B PAGER 
-environment variable. If 
+file viewer specified by the
+.B PAGER
+environment variable.  If
 .B PAGER
 is undefined, the "view" command is invoked.  If you use Shift-F3
 instead, the viewer will be invoked without doing any formatting or
@@ -867,11 +876,11 @@ viewer.
 .PP
 .B Edit (F4)
 .PP
-Currently it invokes the 
-.B vi 
+Currently it invokes the
+.B vi
 editor, or the editor specified in the
 .B EDITOR
-environment variable, or the 
+environment variable, or the
 .\"LINK2"
 Internal File Editor
 .\"Internal File Editor"
@@ -886,14 +895,14 @@ directory specified by the user in the input dialog. During this
 process, you can press C-c or ESC to abort the operation. For details
 about source mask (which will be usually either * or ^\\(.*\\)$ depending
 on setting of Use shell patterns) and possible wildcards in the destination
-see 
+see
 .\"LINK2"
 Mask copy/rename.
 .\"Mask Copy/Rename"
 .PP
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing M-b in the dialog
-box).  The 
+box).  The
 .\"LINK2"
 Background Jobs
 .\"Background jobs"
@@ -939,7 +948,7 @@ operation above, most of the things are quite similar.
 .PP
 On some systems, it is possible to do the copy in the background by
 clicking on the background button (or pressing M-b in the dialog
-box). The 
+box).  The
 .\"LINK2"
 Background Jobs
 .\"Background jobs"
@@ -966,7 +975,7 @@ command if you have full command line and want to cd somewhere.
 .PP
 This is used to select (tag) a group of files. The Midnight Commander
 will prompt for a regular expression describing the group. When
-.I Shell Patterns 
+.I Shell Patterns
 are enabled, the regular expression is much like the filename globbing
 in the shell (* standing for zero or more characters and ?  standing
 for one character). If
@@ -991,15 +1000,15 @@ to the last directory you visited with the Midnight Commander, instead
 it will stay at the directory where you started the Midnight Commander.
 .PP
 .SH "    Quick cd"
-This command is useful if you have a full command line and want to 
+This command is useful if you have a full command line and want to
 .\"LINK2"
 cd
 .\"The cd internal command"
 somewhere without having to yank and paste the command line. This command
 pops up a small dialog, where you enter everything you would enter after
-.B cd 
+.B cd
 on the command line and then you press enter. This features all the things
-that are already in the 
+that are already in the
 .\"LINK2"
 internal cd command.
 .\"The cd internal command"
@@ -1016,7 +1025,7 @@ The
 Find file
 .\"Find File"
 command allows you to search for a specific file. The "Swap panels"
-command swaps the contents of the two directory panels. 
+command swaps the contents of the two directory panels.
 .PP
 The "Panels on/off" command shows the output of the last shell
 command. This works only on xterm and on Linux and SCO console.
@@ -1032,16 +1041,16 @@ contents or the date times, it just checks the file size.
 .PP
 The Command history command shows a list of typed commands. The
 selected command is copied to the command line. The command history
-can also be accessed by typing M-p or M-n. 
+can also be accessed by typing M-p or M-n.
 .PP
-The 
+The
 .\"LINK2"
 Directory hotlist (C-\\)
 .\"Hotlist"
 command makes changing of the current directory to often used directories
 faster.
 .PP
-The 
+The
 .\"LINK2"
 External panelize
 .\"External panelize"
@@ -1095,7 +1104,7 @@ exist any more.
 .B F3 (Forget).
 Delete this directory from the tree figure. Use this to remove clutter
 from the figure. If you want the directory back to the tree figure
-press F2 in its parent directory. 
+press F2 in its parent directory.
 .PP
 .B F4 (Static/Dynamic).
 Toggle between the dynamic navigation mode (default) and the static
@@ -1157,11 +1166,11 @@ button you can select the start directory from the
 .\"LINK2"
 directory tree
 .\"Directory Tree"
-figure. 
+figure.
 .PP
 The contents field accepts regular expressions similar to egrep(1). That
-means you have to escape characters with a special meaning to egrep with "\\", 
-e.g. if you search for "strcmp (" you will have to input "strcmp \\(" 
+means you have to escape characters with a special meaning to egrep with "\\",
+e.g. if you search for "strcmp (" you will have to input "strcmp \\("
 (without the double quotes).
 .PP
 You can start the search by pressing the Ok button.
@@ -1183,13 +1192,13 @@ avoid searches on a CDROM or on a NFS directory that is mounted across
 a slow link).
 .PP
 Directories to be skipped should be set on the variable
-.B find_ignore_dirs 
-in the 
-.B Misc 
+.B find_ignore_dirs
+in the
+.B Misc
 section of your ~/.mc/ini file.
 .PP
 Directory components should be separated with a colon, here is an
-example: 
+example:
 .PP
 .nf
 [Misc]
@@ -1202,7 +1211,7 @@ External panelize
 .\"External panelize"
 command for some operations. Find file command is for simple queries
 only, while using External panelize you can do as mysterious searches
-as you would like.  
+as you would like.
 .PP
 .SH "    External panelize"
 The External panelize allows you to execute an external program, and
@@ -1258,16 +1267,16 @@ All lines starting with # or empty lines are thrown away.
 Lines starting in the first column should have following format:
 .PP
 .I keyword/descNL,
-i.e. everything after 
+i.e. everything after
 .I keyword/
-until new line is 
+until new line is
 .I desc
 .PP
-keyword can be: 
+keyword can be:
 .PP
 .I shell
 .IP
-(desc is then any extension (no wildcards), i.e. matches all the files 
+(desc is then any extension (no wildcards), i.e. matches all the files
 *desc . Example: .tar matches *.tar)
 .PP
 .I regex
@@ -1286,25 +1295,25 @@ keyword can be:
 Other lines should start with a space or tab and should be of the format:
 .PP
 .I keyword=commandNL
-(with no spaces around =), where 
+(with no spaces around =), where
 .I keyword
-should be: 
+should be:
 .PP
 .I Open
-(if the user presses Enter or doubleclicks it), 
+(if the user presses Enter or doubleclicks it),
 .I View
-(F3), 
+(F3),
 .I Edit
-(F4), 
+(F4),
 .I Drop
 (user drops some files on it) or any other
 user defined name (those will be listed in the extension dependent pop-up
-menu). 
+menu).
 .I Icon
 name is reserved for future use by mc.
 .PP
 .I command
-is any one-line shell command, with the simple 
+is any one-line shell command, with the simple
 .\"LINK2"
 macro substitution.
 .\"Macro Substitution"
@@ -1320,14 +1329,14 @@ the second entry will be used. default should catch all the actions.
 This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the
 background).  You can stop, restart and kill a background job from
-here. 
+here.
 .PP
 .SH "    Menu File Edit"
 The user menu is a menu of useful actions that can be customized by
 the user. When you access the user menu, the
 file .mc.menu from the current directory is used if it exists,
 but only if it is owned by user or root and is not world-writable.
-If no such file found, ~/.mc/menu is tried in the same way, 
+If no such file found, ~/.mc/menu is tried in the same way,
 and otherwise mc uses the default system-wide menu
 @prefix@/lib/mc/mc.menu.
 .PP
@@ -1371,7 +1380,7 @@ J	Copy current directory to other panel recursively
 K	Make a release of the current subdirectory
 	echo -n "Name of distribution file: "
 	read tar
-	ln -s %d `dirname %d`/$tar 
+	ln -s %d `dirname %d`/$tar
 	cd ..
 	tar cvhf ${tar}.tar $tar
 
@@ -1389,7 +1398,7 @@ true, the menu entry will be the default entry.
 .nf
 Condition syntax: 	= <sub-cond>
   or:			= <sub-cond> | <sub-cond> ...
-  or:			= <sub-cond> & <sub-cond> ... 
+  or:			= <sub-cond> & <sub-cond> ...
 
 Sub-condition is one of following:
 
@@ -1468,8 +1477,8 @@ with '#', space or tab.
 .PP
 .SH "  Options Menu"
 The Midnight Commander has some options that may be toggled on and
-off in several dialogs which are accessible from this menu. Options 
-are enabled if they have an asterisk or "x" in front of them. 
+off in several dialogs which are accessible from this menu. Options
+are enabled if they have an asterisk or "x" in front of them.
 .PP
 The
 .\"LINK2"
@@ -1539,7 +1548,7 @@ either C-t or the Insert key).
 .PP
 .I Drop down menus.
 When this option is enabled, the pull down menus will be activated as
-soon as you press the 
+soon as you press the
 .B F9
 key.  Otherwise, you will only get the menu title, and you will have
 to activate the menu either with the arrow keys or with the hotkeys.
@@ -1593,7 +1602,7 @@ If this option is enabled, the Midnight
 Commander computes total byte sizes and total number of files
 prior to any Copy, Rename and Delete operations. This will
 provide you with a more accurate progress bar at the expense
-of some speed. This option has no effect, if 
+of some speed. This option has no effect, if
 .I Verbose operation
 is disabled.
 .PP
@@ -1619,7 +1628,7 @@ If this option is enabled, the built-in file editor is used to edit
 files. If the option is disabled, the editor specified in the
 .B EDITOR
 environment variable is used.
-If no editor is specified, 
+If no editor is specified,
 .B vi
 is used.  See the section on the
 .\"LINK2"
@@ -1631,7 +1640,7 @@ If this option is enabled, the built-in file viewer is used to view
 files. If the option is disabled, the pager specified in the
 .B PAGER
 environment variable is used.
-If no pager is specified, the 
+If no pager is specified, the
 .B view
 command is used.  See the section on the
 .\"LINK2"
@@ -1640,12 +1649,12 @@ internal file viewer.
 .PP
 .I Complete: show all.
 By default the Midnight Commander
-pops up all possible 
+pops up all possible
 .\"LINK2"
 completions
 .\"Completion"
 if the completion is
-ambiguous if you press 
+ambiguous if you press
 .B M-Tab
 for the second time, for the
 first time it just completes as much as possible and in
@@ -1655,26 +1664,26 @@ possible completions already after the first
 pressing, enable this option.
 .PP
 .I Rotating dash.
-If this option is enabled, the 
+If this option is enabled, the
 Midnight Commander shows a rotating dash in the upper right corner
 as a work in progress indicator.
 .PP
 .I Lynx-like motion.
-If this option is enabled, 
+If this option is enabled,
 you may use the arrows keys to automatically chdir if the
 current selection is a subdirectory and the shell command
 line is empty. By default, this setting is off.
 .PP
 .I Advanced chown.
-If this option is enabled, the 
+If this option is enabled, the
 .\"LINK2"
 Advanced Chown
 .\"Advanced Chown"
-command will be invoked if you run the 
+command will be invoked if you run the
 .\"LINK2"
 Chmod
 .\"Chmod"
-or 
+or
 .\"LINK2"
 Chown
 .\"Chown"
@@ -1690,13 +1699,13 @@ through a link will move you to the current directory's real parent
 and not to the directory where the link was present.
 .PP
 .I Safe delete.
-If this option is enabled, deleting files 
+If this option is enabled, deleting files
 unintentionally will get more difficult. The default
 selection in the confirmation dialog changes from the "Yes"
-to the "No" button and deletion of non empty directories has to be 
-confirmed by entering the word 
+to the "No" button and deletion of non empty directories has to be
+confirmed by entering the word
 .I yes
-\&. 
+\&.
 By default this option is disabled.
 .PP
 .SH "    Display bits"
@@ -1741,23 +1750,23 @@ terminal).  The definitions of the keys that were already working properly
 are not saved.
 .PP
 .SH "    Virtual FS"
-This option gives you control over the settings of the 
+This option gives you control over the settings of the
 .\"LINK2"
-Virtual File System 
+Virtual File System
 .\"Virtual File System"
-information cache.  
+information cache.
 .PP
 The Midnight Commander keeps in memory the information
 related to some of the virtual file systems to speed up
 the access to the files in the file system (for example,
-directory listings fetched from ftp servers). 
+directory listings fetched from ftp servers).
 .PP
-Moreover in order to access the contents of compressed files 
-(for example, compressed tar files) the Midnight Commander 
+Moreover in order to access the contents of compressed files
+(for example, compressed tar files) the Midnight Commander
 has to create a temporary uncompressed file on your disk.
 .PP
 Since both the information in memory and the temporary files on
-disk take up resources, you may want to tune the parameters of 
+disk take up resources, you may want to tune the parameters of
 the cached information to decrease your resource usage or to maximize
 the speed of access to frequently used file systems.
 .PP
@@ -1783,22 +1792,22 @@ timeout, all of the resources associated with the
 file system will be freed. The default timeout is set to
 one minute.
 .PP
-The 
+The
 .\"LINK2"
 FTP File System
 .\"FTP File System"
 keeps the directory listing it fetches from a ftp server
 in a cache.  The cache
-expire time is configurable with the 
+expire time is configurable with the
 .I ftpfs directory cache timeout
-option.  
+option.
 A low value for this
 option may slow down every operation on the ftp file System
 because every operation is accompanied by a query of the
-ftp server. 
+ftp server.
 .PP
-Moreover you can define a proxy host for doing ftp transfers 
-and configure the Midnight Commander to always use the proxy host. 
+Moreover you can define a proxy host for doing ftp transfers
+and configure the Midnight Commander to always use the proxy host.
 See
 the section on
 .\"LINK2"
@@ -1817,16 +1826,16 @@ can specify whether the area is split to the panels in vertical or
 horizontal direction. The split can be equal or you can specify an
 unequal split.
 .PP
-By default all contents of the directory panels are displayed with 
-the same color, but you can specify whether 
-.I permissions 
-and 
+By default all contents of the directory panels are displayed with
+the same color, but you can specify whether
+.I permissions
+and
 .I file types
-are highlighted with special 
+are highlighted with special
 .\"LINK2"
 Colors.
 .\"Colors"
-If permission highlighting is enabled, the parts of the 
+If permission highlighting is enabled, the parts of the
 .I perm
 and
 .I mode
@@ -1837,12 +1846,12 @@ which are valid for the user running Midnight Commander
 are highlighted with the color defined with the
 .I selected
 keyword. If file type highlighting is enabled, files are colored according
-to their file type (e.g. directory, core file, executable, ...). 
+to their file type (e.g. directory, core file, executable, ...).
 .PP
-If the 
+If the
 .I Show Mini-Status
 option is enabled, one line of status
-information about the currently selected item is showed at the bottom 
+information about the currently selected item is showed at the bottom
 of the panels.
 .PP
 .SH "    Save Setup"
@@ -1897,7 +1906,7 @@ macro expansion
 takes place before executing the command.
 .PP
 .SH "  The cd internal command"
-The 
+The
 .I cd
 command is interpreted by the Midnight Commander, it is not passed to
 the command shell for execution.  Thus it may not handle all of the
@@ -1918,10 +1927,10 @@ directory name '-' like this:
 .B cd -
 .PP
 .I CDPATH directories
-If the directory specified to the 
-.B cd 
+If the directory specified to the
+.B cd
 command is not in the current directory, then The Midnight Commander
-uses the value in the environment variable 
+uses the value in the environment variable
 .B CDPATH
 to search for the directory in any of the named directories.
 .PP
@@ -1936,7 +1945,7 @@ cd linux could take you to /usr/src/linux).
 .PP
 When accessing a
 .\"LINK2"
-user menu, 
+user menu,
 .\"Menu File Edit"
 or executing an
 .\"LINK2"
@@ -2018,15 +2027,6 @@ and
 The selected files: The tagged files if there are any. Otherwise the
 current file.
 .PP
-.I "%q"
-.IP
-Dropped files. In all places except in the Drop action of the
-.\"LINK2"
-mc.ext file,
-.\"Extension File Edit"
-this will become a null string, in the Drop action it will be replaced
-with a space separated list of files that were dropped on the file.
-.PP
 .I "%cd"
 .IP
 This is a special macro that is used to change the current directory
@@ -2042,14 +2042,14 @@ This macro is used to invoke the internal viewer.  This macro can be
 used alone, or with arguments.  If you pass any arguments to this
 macro, they should be enclosed in brackets.
 .IP
-The arguments are: 
+The arguments are:
 .I ascii
 to force the viewer into ascii mode;
 .I hex
 to force the viewer into hex mode;
 .I nroff
 to tell the viewer that it should interpret the bold and underline
-sequences of nroff; 
+sequences of nroff;
 .I unformatted
 to tell the viewer to not interpret nroff commands for making the text
 bold or underlined.
@@ -2069,7 +2069,7 @@ doesn't work on the command line yet.
 .IP
 If environment variable
 .I ENV
-is unset, the 
+is unset, the
 .I default
 is substituted.  Otherwise, the value of
 .I ENV
@@ -2077,10 +2077,10 @@ is substituted.
 .PP
 .SH "  The subshell support"
 The subshell support is a compile time option, that works with the
-shells: bash, tcsh and zsh.  
+shells: bash, tcsh and zsh.
 .PP
 When the subshell code is activated the Midnight Commander will
-spawn a concurrent copy of your shell (the one defined in the 
+spawn a concurrent copy of your shell (the one defined in the
 .B SHELL
 variable and if it is not defined, then the one in the /etc/passwd
 file) and run it in a pseudo terminal, instead of invoking a new shell
@@ -2089,12 +2089,12 @@ subshell as if you had typed it.  This also allows you to change the
 environment variables, use shell functions and define aliases that are
 valid until you quit the Midnight Commander.
 .PP
-If you are using 
+If you are using
 .B bash
 you can specify startup
 commands for the subshell in your ~/.mc/bashrc file and
 special keyboard maps in the ~/.mc/inputrc file.
-.B tcsh 
+.B tcsh
 users may specify startup commands in the ~/.mc/tcshrc file.
 .PP
 When the subshell code is used, you can suspend applications at any
@@ -2118,7 +2118,7 @@ files and directories.  It can be invoked with the C-x c key combination.
 .PP
 The Chmod window has two parts -
 .I Permissions
-and 
+and
 .I File
 .PP
 In the File section are displayed the name of the file or directory
@@ -2170,15 +2170,15 @@ The Chown command is used to change the owner/group of a file. The hot
 key for this command is C-x o.
 .PP
 .SH "Advanced Chown"
-The Advanced Chown command is the 
+The Advanced Chown command is the
 .\"LINK2"
 Chmod
 .\"Chmod"
-and 
+and
 .\"LINK2"
 Chown
 .\"Chown"
-command combined into one window. You can change the permissions and 
+command combined into one window. You can change the permissions and
 owner/group of files at once.
 .PP
 .SH "File Operations"
@@ -2234,28 +2234,28 @@ All the files matching the source mask are copied/renamed according to
 the target mask. If there are tagged files, only the tagged files
 matching the source mask are renamed.
 .PP
-There are other option which you can set: 
+There are other options which you can set:
 .PP
-Follow links tells whether make the symlinks and hardlinks in the source 
-directory (recursively in subdirectories) new links in the target 
+Follow links tells whether make the symlinks and hardlinks in the source
+directory (recursively in subdirectories) new links in the target
 directory or whether would you like to copy their content.
 .PP
 Dive into subdirs tells what to do if in the target
 directory exists a directory with the same name as the
 file/directory being copied. The default action is to copy
-it's content into that directory, by enabling this 
-you can copy the source directory into that directory. 
+it's content into that directory, by enabling this
+you can copy the source directory into that directory.
 Perhaps an example will help:
 .PP
 You want to copy content of a directory foo to /bla/foo,
 which is an already existing directory. Normally (when
-Dive is not set), mc would copy it exactly into /bla/foo. 
+Dive is not set), mc would copy it exactly into /bla/foo.
 By enabling this option you will copy the content into /bla/foo/foo,
 because the directory already exists.
 .PP
-Preserve attributes tells whether to preserve the original files' 
-permissions, timestamps and if you are root whether to preserve 
-the original files' UID and GID. If this option is not set the current 
+Preserve attributes tells whether to preserve the original files'
+permissions, timestamps and if you are root whether to preserve
+the original files' UID and GID. If this option is not set the current
 value of the umask will be respected.
 .PP
 .B "Use shell patterns on"
@@ -2313,7 +2313,7 @@ For example, if the source mask is '*' (shell patterns on) or '^\\(.*\\)$'
 (shell patterns off) and the target mask is '\\L\\u*' the file names
 will be converted to have initial upper case and otherwise lower case.
 .PP
-You can also use '\\' as a quote character. For example, '\\\\' is 
+You can also use '\\' as a quote character. For example, '\\\\' is
 a backslash and '\\*' is an asterisk.
 .PP
 .SH "Internal File Viewer"
@@ -2325,7 +2325,7 @@ files on demand.
 The viewer will try to use the best method provided by your system or
 the file type to display the information.  The internal file viewer
 will interpret some string sequences to set the bold and underline
-attributes, thus making a pretty display of your files.  
+attributes, thus making a pretty display of your files.
 .PP
 When in hex mode, the search function accepts text in quotes and
 constant numbers.  Text in quotes is matched exactly after removing
@@ -2361,7 +2361,7 @@ Toggle the hex mode.
 Goto line.  This will prompt you for a line number and will display
 that line.
 .PP
-.B F6, /. 
+.B F6, /.
 Regular expression search.
 .PP
 .B ?,
@@ -2423,30 +2423,30 @@ Jump to the mark n.
 .B C-f
 Jump to the next file.
 .PP
-.B C-b 
+.B C-b
 Jump to the previous file.
 .PP
-.B M-r 
+.B M-r
 Toggle the ruler.
 .PP
 It's possible to instruct the file viewer how to display a file, look
-at the 
+at the
 .\"LINK2"
 Extension File Edit section
 .\"Extension File Edit"
 .SH "Internal File Editor"
 The internal file editor provides most of the features of
-common full screen editors. It is invoked using 
+common full screen editors. It is invoked using
 .B F4
 provided
-the 
+the
 .I use_internal_edit
 option is set in the initialization file. It has an extendable file size
 limit of sixteen megabytes and edits binary files flawlessly.
 .PP
 The features it presently supports are: Block
-copy, move, delete, cut, paste; 
-.I "key for key undo"; 
+copy, move, delete, cut, paste;
+.I "key for key undo";
 pull-down
 menus; file insertion; macro definition; regular expression
 search and replace (and our own scanf-printf search and
@@ -2457,16 +2457,16 @@ to pipe text blocks through shell commands like indent.
 The editor is very easy to use and requires no tutoring.
 To see what keys do what, just consult the appropriate
 pull-down menu. Other keys are: Shift movement
-keys do text highlighting. 
+keys do text highlighting.
 .B Ctrl-Ins
 copies to the file
-.B cooledit.clip and 
+.B cooledit.clip and
 .B Shift-Ins
 pastes from cooledit.clip.
-.B Shift-Del 
-cuts to 
-.B cooledit.clip, 
-and 
+.B Shift-Del
+cuts to
+.B cooledit.clip,
+and
 .B Ctrl-Del
 deletes highlighted text. The completion key also does a Return
 with an automatic indent. Mouse highlighting also works, and you
@@ -2474,17 +2474,17 @@ can override the mouse as usual by holding down the shift key
 while dragging the mouse to let normal terminal mouse highlighting
 work.
 .PP
-To define a macro, press 
+To define a macro, press
 .B Ctrl-R
 and then type out the key
-strokes you want to be executed. Press 
+strokes you want to be executed. Press
 .B Ctrl-R
 again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
 .B Ctrl-A and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
-commands go into the file 
+commands go into the file
 .B .mc/cedit/cooledit.macros
 in your home directory. You can delete a macro by deleting the
 appropriate line in this file.
@@ -2502,17 +2502,17 @@ which is copied to
 in your home directory the first time you use it.
 .PP
 You can use scanf search and replace to search and replace
-a C format string. First take a look at the 
+a C format string. First take a look at the
 .B sscanf
-and 
+and
 .B sprintf
 man pages to see what a format string
 is and how it works. An example is as follows: Suppose you want
 to replace all occurrences of say, an open bracket, three
 comma separated numbers, and a close bracket, with the
-word 
-.I apples, 
-the third number, the word 
+word
+.I apples,
+the third number, the word
 .I oranges
 and then the second number, I would fill in the Replace dialog
 box as follows:
@@ -2536,7 +2536,7 @@ treats whitespace as being elastic.  Note that the scanf format % is
 very useful for scanning strings, and whitespace.
 .PP
 The editor also displays non-us characters (160+). When editing
-binary files, you should set 
+binary files, you should set
 .B display bits
 to 7 bits in the options menu to keep the spacing clean.
 .PP
@@ -2546,10 +2546,10 @@ Let the Midnight Commander type for you.
 Attempt to perform completion on the text before current position. MC
 attempts completion treating the text as variable (if the text begins with
 .B $
-), username (if the text begins with 
+), username (if the text begins with
 .B ~
 ), hostname (if the text
-begins with 
+begins with
 .B @
 ) or command (if you are on the command line in the
 position where you might type a command, possible completions then include
@@ -2576,7 +2576,7 @@ as much as possible. If you press
 again, only the subset will be shown in the listbox, otherwise the first
 item which matches all the previous characters will be highlighted. As soon
 as there is no ambiguity, dialog disappears, but you can hide it by
-canceling keys 
+canceling keys
 .B Esc,
 .B F10
 and left and right arrow keys. If
@@ -2624,7 +2624,7 @@ elements are optional.  If you specify the
 .I user
 element, then the Midnight Commander will try to logon on the remote
 machine as that user, otherwise it will use your login name.  The
-optional 
+optional
 .I pass
 element, if present is the password used for the connection.  This is not
 recommended (nor keeping the password in your hotlist, unless you set the
@@ -2647,11 +2647,11 @@ define the proxy host in the
 .\"LINK2"
 Virtual File System
 .\"Virtual FS"
-dialog box.  
+dialog box.
 .PP
-Another option to set is the 
+Another option to set is the
 .I Always use ftp proxy
-option in the 
+option in the
 .\"LINK2"
 Virtual File System
 .\"Virtual FS"
@@ -2670,7 +2670,7 @@ set the ftpfs_use_passive_connections option in the initialization file.
 The Midnight Commander keeps the directory listing in a cache.  The cache
 expire time is configurable in the
 .\"LINK2"
-Virtual File System 
+Virtual File System
 .\"Virtual FS"
 dialog box.  This has the funny behavior that even if you make changes to a
 directory, they will not be reflected in the directory listing until you
@@ -2688,9 +2688,9 @@ tar file by using the following syntax:
 .PP
 The mc.ext file already provides a shortcut for tar files, this means
 that usually you just point to a tar file and press return to enter
-into the tar file, see the 
+into the tar file, see the
 .\"LINK2"
-Extension File Edit 
+Extension File Edit
 .\"Extension File Edit"
 section for details on how this is done.
 .PP
@@ -2716,22 +2716,22 @@ format:
 .nf
 /#sh:[user@]machine[:options]/[remote-dir]
 .fi
-The 
-.I user, 
+The
+.I user,
 .I options
-and 
+and
 .I remote-dir
 elements are optional. If
-you specify the 
+you specify the
 .I user
 element then the Midnight Commander
 will try to logon on the remote machine as that user,
 otherwise it will use your login name.
 .PP
-The 
+The
 .I options
 are 'C' - use compression and 'rsh' use rsh instead
-of ssh. If the 
+of ssh. If the
 .I remote-dir
 element is present, your current directory on the remote machine will
 be set to this one.
@@ -2759,12 +2759,12 @@ The
 .I user, port
 and
 .I remote-dir
-elements are optional.  If you specify the 
+elements are optional.  If you specify the
 .I user
 element then the Midnight Commander will try to logon on the remote
 machine as that user, otherwise it will use your login name.
 .PP
-The 
+The
 .I port
 element is used when the remote machine running on a special port
 (see the mcserv(8) manual page for more information about ports);
@@ -2800,13 +2800,13 @@ first SCSI disk on Linux, you would use the following path name:
 .fi
 .PP
 It may take a while for the undelfs to load the required information
-before you start browsing files there. 
+before you start browsing files there.
 .PP
 .SH "  SMB File System"
 The smbfs allows you to manipulate files on remote machines with SMB
-(or CIFS) protocol.  These include Windows for Workgroups, 
+(or CIFS) protocol.  These include Windows for Workgroups,
 Windows 9x, Windows NT, Windows 2000 and Samba.
-To actually use it, you may try 
+To actually use it, you may try
 to use the panel command "SMB link..."
 (accessible from the menubar) or you may directly change your current
 directory to it using the cd command to a path name that looks like this:
@@ -2821,7 +2821,7 @@ elements are optional.
 The
 .I username, domain
 and
-.I password 
+.I password
 can be specified in input dialog.
 .PP
 Examples:
@@ -2835,15 +2835,15 @@ Examples:
 The Midnight Commander will try to detect if your terminal supports
 color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
-using the -c and -b flag respectively.  
+using the -c and -b flag respectively.
 .PP
 If the program is compiled with the Slang screen manager instead of
-ncurses, it will also check the variable 
+ncurses, it will also check the variable
 .B COLORTERM,
 if it is set, it has the same effect as the -c flag.
 .PP
 You may specify terminals that always force color mode
-by adding the 
+by adding the
 .I color_terminals
 variable to the Colors
 section of the initialization file. This will prevent the
@@ -2863,11 +2863,11 @@ information in the terminal database.
 .PP
 The Midnight Commander provides a way to change the default colors.
 Currently the colors are configured using the environment variable
-.B MC_COLOR_TABLE 
+.B MC_COLOR_TABLE
 or the Colors section in the initialization file.
 .PP
-In the Colors section, the default color map is loaded from the 
-.I base_color 
+In the Colors section, the default color map is loaded from the
+.I base_color
 variable.  You can specify an alternate color map for a terminal by
 using the terminal name as the key in this section.  Example:
 .PP
@@ -2883,25 +2883,24 @@ The format for the color definition is:
   <keyword>=<foregroundcolor>,<backgroundcolor>:<keyword>= ...
 .fi
 .PP
-The colors are optional, and the keywords are: normal,
-selected, marked, markselect, errors, input, reverse, gauge;
-Menu colors are: menu, menusel, menuhot, menuhotsel;  Dialog colors
-are: dnormal, dfocus, dhotnormal, dhotfocus;  Help colors
-are: helpnormal, helpitalic, helpbold, helplink, helpslink;  
-Viewer color is: viewunderline; Special highlighting colors are: 
-executable, directory, link, device, special, core; Editor colors
-are: editnormal, editbold, editmarked.
+The colors are optional, and the keywords are: normal, selected, marked,
+markselect, errors, input, reverse, gauge.  Menu colors are: menu,
+menusel, menuhot, menuhotsel.  Dialog colors are: dnormal, dfocus,
+dhotnormal, dhotfocus.  Help colors are: helpnormal, helpitalic,
+helpbold, helplink, helpslink.  Viewer color is: viewunderline.  Special
+highlighting colors are: executable, directory, link, device, special,
+core.  Editor colors are: editnormal, editbold, editmarked.
 .PP
-.I input 
+.I input
 determines the color of input lines used in query dialogs.
 .PP
-.I gauge 
+.I gauge
 determines the color of the filled part of the progress bar
 (gauge), which shows how many percent of files were copied
 etc. in a graphical way.
 .PP
 The dialog boxes use the following colors:
-.I dnormal 
+.I dnormal
 is used for the normal text,
 .I dfocus
 is the color used for the currently selected component,
@@ -2927,24 +2926,24 @@ is used for not selected hyperlinks and
 .I helpslink
 is used for selected hyperlink.
 .PP
-Special highlight colors determine how files are displayed 
+Special highlight colors determine how files are displayed
 when file highlighting is enabled (see the section on
 .\"LINK2"
 Layout).
-.\"Layout
+.\"Layout"
 .I directory
-is used for directories or symbolic links to directories; 
+is used for directories or symbolic links to directories;
 .I executable
 for executable files;
 .I link
 is used for symbolic links which are neither stalled nor linked
-to a directory; 
+to a directory;
 .I stalledlink
-is used for stalled symbolic links; 
+is used for stalled symbolic links;
 .I device
-- character and block devices; 
+- character and block devices;
 .I special
-is used for special files, such as pipes and sockets; 
+is used for special files, such as pipes and sockets;
 .I core
 is for core files.
 .PP
@@ -3112,7 +3111,7 @@ set this in the ini file:
 insert=\\e[Op
 .fi
 .PP
-The 
+The
 .I complete
 key symbol represents the escape sequences used to invoke the
 completion process, this is invoked with M-tab, but you can define
@@ -3187,7 +3186,7 @@ This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation. See the built-in
 help for details on the License and the lack of warranty.
 .SH "AVAILABILITY"
-The latest version of this program can be found at 
+The latest version of this program can be found at
 ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ and on the
 mirrors listed on the GNOME site http://www.gnome.org/.
 .SH "SEE ALSO"
@@ -3205,7 +3204,7 @@ Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
 Leeflang (fredl@nebula.ow.org), Dugan Porter (dugan@b011.eunet.es),
 Jakub Jelinek (jj@sunsite.mff.cuni.cz), Ching Hui
 (mr854307@cs.nthu.edu.tw), Andrej Borsenkow (borsenkow.msk@sni.de),
-Norbert Warmuth (nwarmuth@privat.circular.de), 
+Norbert Warmuth (nwarmuth@privat.circular.de),
 Mauricio Plaza (mok@roxanne.nuclecu.unam.mx), Paul Sheer
 (psheer@icon.co.za), Pavel Machek (pavel@ucw.cz) and Pavel Roskin
 (proski@gnu.org) are the developers of this package.
