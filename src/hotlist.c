@@ -267,7 +267,7 @@ static void add_name_to_list (char *path)
 }
 #endif /* !USE_VFS */
 
-static int hotlist_button_callback (int action, void *data)
+static int hotlist_button_callback (int action)
 {
     switch (action) {
     case B_MOVE:
@@ -417,7 +417,7 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 	case '\n':
 	case KEY_ENTER:
 	case KEY_RIGHT:
-	    if (hotlist_button_callback (B_ENTER, 0)) {
+	    if (hotlist_button_callback (B_ENTER)) {
 		h->ret_value = B_ENTER;
 		dlg_stop (h);
 	    };
@@ -425,13 +425,13 @@ static int hotlist_callback (Dlg_head * h, int Par, int Msg)
 	    break;
 	case KEY_LEFT:
 	    if (hotlist_state.type != LIST_VFSLIST )
-    		return !hotlist_button_callback (B_UP_GROUP, 0);
+    		return !hotlist_button_callback (B_UP_GROUP);
 	    else
 		return 0;
 	    break;
 	case KEY_DC:
 	    if (!hotlist_state.moving) {
-		hotlist_button_callback (B_REMOVE, 0);
+		hotlist_button_callback (B_REMOVE);
 		return 1;
 	    }
 	    break;
@@ -489,7 +489,7 @@ static int l_call (void *l)
 		dlg_stop (dlg);
 		return listbox_finish;
 	    } else {
-		hotlist_button_callback (B_ENTER, (void *)0);
+		hotlist_button_callback (B_ENTER);
 		hotlist_callback (dlg, '\n', DLG_POST_KEY);
 		return listbox_nothing;
 	    }
@@ -500,7 +500,7 @@ static int l_call (void *l)
 	}
     }
 
-    hotlist_button_callback (B_UP_GROUP, (void *)0);
+    hotlist_button_callback (B_UP_GROUP);
     hotlist_callback (dlg, 'u', DLG_POST_KEY);
     return listbox_nothing;
 }
@@ -622,7 +622,7 @@ init_hotlist (int list_type)
 				    hotlist_but[i].ret_cmd,
 				    hotlist_but[i].flags,
 				    hotlist_but[i].text,
-				    hotlist_button_callback, 0));
+				    hotlist_button_callback));
     }
 
     /* We add the labels. 
@@ -680,7 +680,7 @@ init_movelist (int list_type, struct hotlist *item)
 				    hotlist_but[i].ret_cmd,
 				    hotlist_but[i].flags,
 				    hotlist_but[i].text,
-				    hotlist_button_callback, 0));
+				    hotlist_button_callback));
     }
 
     /* We add the labels.  We are interested in the last one,

@@ -221,10 +221,10 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op,
 
     add_widget (ui->op_dlg,
 		button_new (BY - minus, WX - 19 + eta_offset, FILE_ABORT,
-			    NORMAL_BUTTON, _("&Abort"), 0, 0));
+			    NORMAL_BUTTON, _("&Abort"), 0));
     add_widget (ui->op_dlg,
 		button_new (BY - minus, 14 + eta_offset, FILE_SKIP,
-			    NORMAL_BUTTON, _("&Skip"), 0, 0));
+			    NORMAL_BUTTON, _("&Skip"), 0));
 
     add_widget (ui->op_dlg, ui->progress_gauge[2] =
 		gauge_new (7, FCOPY_GAUGE_X, 0, 100, 0));
@@ -549,7 +549,7 @@ static struct {
 #define ADD_RD_BUTTON(i)\
 	add_widget (ui->replace_dlg,\
 		button_new (rd_widgets [i].ypos, rd_widgets [i].xpos, rd_widgets [i].value,\
-		NORMAL_BUTTON, rd_widgets [i].text, 0, 0))
+		NORMAL_BUTTON, rd_widgets [i].text, 0))
 
 #define ADD_RD_LABEL(ui,i,p1,p2)\
 	g_snprintf (buffer, sizeof (buffer), rd_widgets [i].text, p1, p2);\

@@ -80,7 +80,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     add_widget (listbox->dlg,
 		button_new (lines+3, (cols/2 + 2) - len/2, 
-		B_CANCEL, NORMAL_BUTTON, cancel_string, 0, 0));
+		B_CANCEL, NORMAL_BUTTON, cancel_string, 0));
     add_widget (listbox->dlg, listbox->list);
     common_dialog_repaint (listbox->dlg);
     return listbox;
@@ -110,7 +110,8 @@ Dlg_head *last_query_dlg;
 static int sel_pos = 0;
 
 /* Used to ask questions to the user */
-int query_dialog (char *header, char *text, int flags, int count, ...)
+int
+query_dialog (char *header, char *text, int flags, int count, ...)
 {
     va_list ap;
     Dlg_head *query_dlg;
@@ -127,18 +128,17 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	query_colors = alarm_colors;
     else
 	query_colors = dialog_colors;
-    
+
     if (header == MSG_ERROR)
 	header = _("Error");
-    
-    if (count > 0){
+
+    if (count > 0) {
 	va_start (ap, count);
-	for (i = 0; i < count; i++)
-	{
-		char* cp = va_arg (ap, char *);
-		win_len += strlen (cp) + 6;
-		if (strchr (cp, '&') != NULL)
-			win_len--;
+	for (i = 0; i < count; i++) {
+	    char *cp = va_arg (ap, char *);
+	    win_len += strlen (cp) + 6;
+	    if (strchr (cp, '&') != NULL)
+		win_len--;
 	}
 	va_end (ap);
     }
@@ -146,25 +146,26 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     /* count coordinates */
     cols = 6 + max (win_len, max (strlen (header), msglen (text, &lines)));
     lines += 4 + (count > 0 ? 2 : 0);
-    xpos = COLS/2 - cols/2;
-    ypos = LINES/3 - (lines-3)/2;
+    xpos = COLS / 2 - cols / 2;
+    ypos = LINES / 3 - (lines - 3) / 2;
 
     /* prepare dialog */
-    query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors, NULL,
-			    "[QueryBox]", header, DLG_BACKWARD);
+    query_dlg =
+	create_dlg (ypos, xpos, lines, cols, query_colors, NULL,
+		    "[QueryBox]", header, DLG_BACKWARD);
 
-    if (count > 0){
+    if (count > 0) {
 
-	cols = (cols-win_len-2)/2+2;
+	cols = (cols - win_len - 2) / 2 + 2;
 	va_start (ap, count);
-	for (i = 0; i < count; i++){
+	for (i = 0; i < count; i++) {
 	    cur_name = va_arg (ap, char *);
-	    xpos = strlen (cur_name)+6;
-		if (strchr(cur_name, '&') != NULL)
-			xpos--;
-	    add_widget (query_dlg, button_new
-			(lines-3, cols, B_USER+i, NORMAL_BUTTON, cur_name,
-			 0, 0));
+	    xpos = strlen (cur_name) + 6;
+	    if (strchr (cur_name, '&') != NULL)
+		xpos--;
+	    add_widget (query_dlg,
+			button_new (lines - 3, cols, B_USER + i,
+				    NORMAL_BUTTON, cur_name, 0));
 	    cols += xpos;
 	    if (i == sel_pos)
 		query_dlg->initfocus = query_dlg->current;
@@ -172,21 +173,22 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	va_end (ap);
 
 	add_widget (query_dlg, label_new (2, 3, text));
-	
+
 	/* run dialog and make result */
 	run_dlg (query_dlg);
-	switch (query_dlg->ret_value){
+	switch (query_dlg->ret_value) {
 	case B_CANCEL:
 	    break;
 	default:
-	    result = query_dlg->ret_value-B_USER;
+	    result = query_dlg->ret_value - B_USER;
 	}
 
 	/* free used memory */
 	destroy_dlg (query_dlg);
     } else {
 	add_widget (query_dlg, label_new (2, 3, text));
-	add_widget (query_dlg, button_new(0, 0, 0, HIDDEN_BUTTON, "-", 0, 0));
+	add_widget (query_dlg,
+		    button_new (0, 0, 0, HIDDEN_BUTTON, "-", 0));
 	last_query_dlg = query_dlg;
     }
     sel_pos = 0;
@@ -316,7 +318,7 @@ quick_dialog_skip (QuickDialog *qd, int nskip)
 		button_new (ypos, xpos, qw->value,
 			    (qw->value ==
 			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-			    I18N (qw->text), 0, 0);
+			    I18N (qw->text), 0);
 	    break;
 
 	    /* We use the hotkey pos as the field length */

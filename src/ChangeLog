@@ -1,5 +1,8 @@
 2003-08-31  Pavel Roskin  <proski@gnu.org>
 
+	* widget.h (button_new): Remove unused extra argument.  Adjust
+	all dependencies.
+
 	* option.c (check_options): Remove tk field.
 	* widget.c: Comment fix to get rid of references to Tk.
 	* wtools.c (real_input_dialog_help): Rename tk_name to histname.

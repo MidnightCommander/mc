@@ -75,7 +75,7 @@ static int learnchanged;
 static char* learn_title = N_("Learn keys");
 
 
-static int learn_button (int action, void *param)
+static int learn_button (int action)
 {
     unsigned char *seq;
     Dlg_head *d = message (D_INSERT | 1, _(" Teach me a key "),
@@ -263,7 +263,7 @@ init_learn (void)
 	add_widget (learn_dlg,
 		    button_new (BY + learn_but[i].y, learn_but[i].x,
 				learn_but[i].ret_cmd, learn_but[i].flags,
-				_(learn_but[i].text), 0, 0));
+				_(learn_but[i].text), 0));
 
     x = UX;
     y = UY;
@@ -281,7 +281,7 @@ init_learn (void)
 	g_snprintf (buffer, sizeof (buffer), "%-16s", _(key->longname));
 	add_widget (learn_dlg, learnkeys[i].button = (Widget *)
 		    button_new (y, x, B_USER + i, NARROW_BUTTON, buffer,
-				learn_button, 0));
+				learn_button));
 	add_widget (learn_dlg, learnkeys[i].label = (Widget *)
 		    label_new (y, x + 19, ""));
 	if (i % 13)

@@ -71,7 +71,7 @@ button_callback (WButton *b, int Msg, int Par)
 	    break;
 
 	if (b->callback)
-	    stop = (*b->callback)(b->action, b->callback_data);
+	    stop = (*b->callback)(b->action);
 	if (!b->callback || stop){
 	    h->ret_value = b->action;
 	    dlg_stop (h);
@@ -204,7 +204,7 @@ button_scan_hotkey(WButton* b)
 
 WButton *
 button_new (int y, int x, int action, int flags, char *text, 
-	    int (*callback)(int, void *), void *callback_data)
+	    int (*callback)(int))
 {
     WButton *b = g_new (WButton, 1);
 
@@ -217,7 +217,6 @@ button_new (int y, int x, int action, int flags, char *text,
     b->selected = 0;
     b->text   = g_strdup (text);
     b->callback = callback;
-    b->callback_data = callback_data;
     widget_want_hotkey (b->widget, 1);
     b->hotkey = 0;
     b->hotpos = -1;

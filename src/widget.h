@@ -20,10 +20,9 @@ typedef struct WButton {
     int selected;		/* button state */
     unsigned int flags;		/* button flags */
     char *text;			/* text of button */
-    int  hotkey;                /* hot KEY */
-    int  hotpos;                /* offset hot KEY char in text */
-    int  (*callback)(int, void*); /* Callback function */
-    void *callback_data;
+    int hotkey;			/* hot KEY */
+    int hotpos;			/* offset hot KEY char in text */
+    int (*callback) (int);	/* Callback function */
 } WButton;
 
 typedef struct WRadio {
@@ -135,7 +134,7 @@ typedef struct {
 
 /* Constructors */
 WButton *button_new   (int y, int x, int action, int flags, char *text, 
-			int (*callback)(int, void *), void *extra);
+			int (*callback)(int));
 WRadio  *radio_new    (int y, int x, int count, char **text, int use_hotkey);
 WCheck  *check_new    (int y, int x, int state,  char *text);
 WInput  *input_new    (int y, int x, int color, int len, const char *text, char *histname);

@@ -184,11 +184,11 @@ display_init (int radio_sel, char *init_text, int _check_status,
 
     add_widget (dd,
 		button_new (4, button_start, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0, 0));
+			    cancel_button, 0));
 
     add_widget (dd,
 		button_new (3, button_start, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0, 0));
+			    ok_button, 0));
 
     status =
 	input_new (10, 9, INPUT_COLOR, DISPLAY_X - 14, _status[radio_sel],
@@ -272,69 +272,67 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
     sortfn *result;
     WCheck *c, *case_sense;
 
-	char* ok_button = _("&OK");
-	char* cancel_button = _("&Cancel");
-	char* reverse_label = _("&Reverse");
-	char* case_label = _("case sensi&tive");
-	char* sort_title = _("Sort order");
+    char *ok_button = _("&OK");
+    char *cancel_button = _("&Cancel");
+    char *reverse_label = _("&Reverse");
+    char *case_label = _("case sensi&tive");
+    char *sort_title = _("Sort order");
 
-	static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
+    static int i18n_sort_flag = 0, check_pos = 0, button_pos = 0;
 
-	if (!i18n_sort_flag)
-	{
-		int maxlen = 0;
-		for (i = SORT_TYPES-1; i >= 0; i--)
-		{
-			sort_orders_names [i] = _(sort_orders [i].sort_name);
-			r = strlen (sort_orders_names [i]);
-			if (r > maxlen)
-				maxlen = r;
-		}
-
-		check_pos = maxlen + 9;
-
-		r = strlen (reverse_label) + 4;
-		i = strlen (case_label) + 4;
-		if (i > r)
-			r = i;
-		
-		l = strlen (ok_button) + 6;
-		i = strlen (cancel_button) + 4;
-		if (i > l)
-			l = i;
-			
-		i = check_pos + max(r,l) + 2;
-
-		if (i > SORT_X)
-			SORT_X = i;
-
-		i = strlen (sort_title) + 6;
-		if (i > SORT_X)
-			SORT_X = i;
-
-		button_pos = SORT_X - l - 2;
-
-		i18n_sort_flag = 1;
+    if (!i18n_sort_flag) {
+	int maxlen = 0;
+	for (i = SORT_TYPES - 1; i >= 0; i--) {
+	    sort_orders_names[i] = _(sort_orders[i].sort_name);
+	    r = strlen (sort_orders_names[i]);
+	    if (r > maxlen)
+		maxlen = r;
 	}
 
+	check_pos = maxlen + 9;
+
+	r = strlen (reverse_label) + 4;
+	i = strlen (case_label) + 4;
+	if (i > r)
+	    r = i;
+
+	l = strlen (ok_button) + 6;
+	i = strlen (cancel_button) + 4;
+	if (i > l)
+	    l = i;
+
+	i = check_pos + max (r, l) + 2;
+
+	if (i > SORT_X)
+	    SORT_X = i;
+
+	i = strlen (sort_title) + 6;
+	if (i > SORT_X)
+	    SORT_X = i;
+
+	button_pos = SORT_X - l - 2;
+
+	i18n_sort_flag = 1;
+    }
+
     result = 0;
-    
+
     for (i = 0; i < SORT_TYPES; i++)
-	if ((sortfn *) (sort_orders [i].sort_fn) == sort_fn){
+	if ((sortfn *) (sort_orders[i].sort_fn) == sort_fn) {
 	    current_mode = i;
 	    break;
 	}
-    
+
     dd = create_dlg (0, 0, SORT_Y, SORT_X, dialog_colors, NULL,
 		     "[Sort Order...]", sort_title, DLG_CENTER);
 
-    add_widget (dd, 
-		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON, cancel_button, 
-		0, 0));
+    add_widget (dd,
+		button_new (10, button_pos, B_CANCEL, NORMAL_BUTTON,
+			    cancel_button, 0));
 
-    add_widget (dd, 
-		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON, ok_button,
-		0, 0));
+    add_widget (dd,
+		button_new (9, button_pos, B_ENTER, DEFPUSH_BUTTON,
+			    ok_button, 0));
 
     case_sense = check_new (4, check_pos, *case_sensitive, case_label);
     add_widget (dd, case_sense);
@@ -343,13 +341,13 @@ sort_box (sortfn *sort_fn, int *reverse, int *case_sensitive)
 
     my_radio = radio_new (3, 3, SORT_TYPES, sort_orders_names, 1);
     my_radio->sel = my_radio->pos = current_mode;
-    
+
     add_widget (dd, my_radio);
     run_dlg (dd);
 
     r = dd->ret_value;
-    if (r != B_CANCEL){
-	result = (sortfn *) sort_orders [my_radio->sel].sort_fn;
+    if (r != B_CANCEL) {
+	result = (sortfn *) sort_orders[my_radio->sel].sort_fn;
 	*reverse = c->state & C_BOOL;
 	*case_sensitive = case_sense->state & C_BOOL;
     } else
@@ -566,36 +564,37 @@ init_disp_bits_box (void)
     char *cpname;
     Dlg_head *dbits_dlg;
 
-    do_refresh();
+    do_refresh ();
 
-    dbits_dlg = create_dlg( 0, 0, DISPY, DISPX, dialog_colors,
-		NULL, "[Display bits]", _(" Display bits "), DLG_CENTER);
+    dbits_dlg =
+	create_dlg (0, 0, DISPY, DISPX, dialog_colors, NULL,
+		    "[Display bits]", _(" Display bits "), DLG_CENTER);
 
-    add_widget( dbits_dlg,
-		label_new( 3, 4, _("Input / display codepage:"), NULL));
+    add_widget (dbits_dlg,
+		label_new (3, 4, _("Input / display codepage:"), NULL));
 
     cpname = (new_display_codepage < 0)
-	     ? _("Other 8 bit")
-	     : codepages[ new_display_codepage ].name;
-    cplabel = label_new( 4, 4, cpname, NULL);
-    add_widget( dbits_dlg, cplabel );
-	
-    add_widget( dbits_dlg,
-		button_new( DISPY - 3, DISPX / 2 + 3, B_CANCEL,
-			    NORMAL_BUTTON, _("&Cancel"), 0, 0, NULL ) );
-    add_widget( dbits_dlg,
-		button_new( DISPY - 3, 7, B_ENTER,
-			    NORMAL_BUTTON, _("&OK"), 0, 0, NULL ) );
+	? _("Other 8 bit")
+	: codepages[new_display_codepage].name;
+    cplabel = label_new (4, 4, cpname, NULL);
+    add_widget (dbits_dlg, cplabel);
 
-    inpcheck = check_new( 6, 4, !use_8th_bit_as_meta,
-			  _("F&ull 8 bits input"), NULL );
-    add_widget( dbits_dlg, inpcheck );
+    add_widget (dbits_dlg,
+		button_new (DISPY - 3, DISPX / 2 + 3, B_CANCEL,
+			    NORMAL_BUTTON, _("&Cancel"), 0));
+    add_widget (dbits_dlg,
+		button_new (DISPY - 3, 7, B_ENTER, NORMAL_BUTTON, _("&OK"),
+			    0));
+
+    inpcheck =
+	check_new (6, 4, !use_8th_bit_as_meta, _("F&ull 8 bits input"),
+		   NULL);
+    add_widget (dbits_dlg, inpcheck);
 
     cpname = _("&Select");
-    add_widget( dbits_dlg,
-		button_new( 4, DISPX - 8 - strlen(cpname) , B_USER,
-			    NORMAL_BUTTON, cpname,
-			    sel_charset_button, 0, NULL ) );
+    add_widget (dbits_dlg,
+		button_new (4, DISPX - 8 - strlen (cpname), B_USER,
+			    NORMAL_BUTTON, cpname, sel_charset_button));
 
     return dbits_dlg;
 }
@@ -886,7 +885,7 @@ jobs_fill_listbox (void)
 }
 	
 static int
-task_cb (int action, void *ignored)
+task_cb (int action)
 {
     TaskList *tl;
     int sig = 0;
@@ -928,7 +927,7 @@ static struct
 	char* name;
 	int xpos;
 	int value;
-	int (*callback)(int, void *);
+	int (*callback)(int);
 } 
 job_buttons [] =
 {
@@ -983,7 +982,7 @@ jobs_cmd (void)
 		add_widget (jobs_dlg, button_new (JOBS_Y-4, 
 			job_buttons [i].xpos, job_buttons [i].value,
 			NORMAL_BUTTON, job_buttons [i].name, 
-			job_buttons [i].callback, 0));
+			job_buttons [i].callback));
 	}
 	
     /* Insert all of task information in the list */
@@ -1066,9 +1065,9 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     in_domain = input_new (3, istart, INPUT_COLOR, ilen, domain, "auth_domain");
     add_widget (auth_dlg, in_domain);
     add_widget (auth_dlg, button_new (9, b2, B_CANCEL, NORMAL_BUTTON,
-                 buts[1], 0 ,0, "cancel"));
+                 buts[1], 0));
     add_widget (auth_dlg, button_new (9, b0, B_ENTER, DEFPUSH_BUTTON,
-                 buts[0], 0, 0, "ok"));
+                 buts[0], 0));
 
     in_password  = input_new (7, istart, INPUT_COLOR, ilen, "", "auth_password");
     in_password->completion_flags = 0;

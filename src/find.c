@@ -226,13 +226,11 @@ find_parameters (char **start_dir, char **pattern, char **content)
 		    DLG_CENTER);
 
     add_widget (find_dlg,
-		button_new (11, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0,
-			    0));
+		button_new (11, b2, B_CANCEL, NORMAL_BUTTON, buts[2], 0));
     add_widget (find_dlg,
-		button_new (11, b1, B_TREE, NORMAL_BUTTON, buts[1], 0, 0));
+		button_new (11, b1, B_TREE, NORMAL_BUTTON, buts[1], 0));
     add_widget (find_dlg,
-		button_new (11, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0,
-			    0));
+		button_new (11, b0, B_ENTER, DEFPUSH_BUTTON, buts[0], 0));
 
     case_sense = check_new (9, 3, case_sensitive, case_label);
     add_widget (find_dlg, case_sense);
@@ -725,7 +723,7 @@ find_callback (struct Dlg_head *h, int id, int Msg)
 
 /* Handles the Stop/Start button in the find window */
 static int
-start_stop (int button, void *extra)
+start_stop (int button)
 {
     running = is_start;
     set_idle_proc (find_dlg, running);
@@ -739,7 +737,7 @@ start_stop (int button, void *extra)
 
 /* Handle view command, when invoked as a button */
 static int
-find_do_view_file (int button, void *extra)
+find_do_view_file (int button)
 {
     view_edit_currently_selected_file (0, 0);
     return 0;
@@ -747,7 +745,7 @@ find_do_view_file (int button, void *extra)
 
 /* Handle edit command, when invoked as a button */
 static int
-find_do_edit_file (int button, void *extra)
+find_do_edit_file (int button)
 {
     view_edit_currently_selected_file (0, 1);
     return 0;
@@ -806,27 +804,27 @@ setup_gui (void)
 
     add_widget (find_dlg,
 		button_new (FIND2_Y - 3, fbuts[7].x, B_VIEW, NORMAL_BUTTON,
-			    fbuts[7].text, find_do_edit_file, find_dlg));
+			    fbuts[7].text, find_do_edit_file));
     add_widget (find_dlg,
 		button_new (FIND2_Y - 3, fbuts[6].x, B_VIEW, NORMAL_BUTTON,
-			    fbuts[6].text, find_do_view_file, find_dlg));
+			    fbuts[6].text, find_do_view_file));
     add_widget (find_dlg,
 		button_new (FIND2_Y - 3, fbuts[5].x, B_PANELIZE,
-			    NORMAL_BUTTON, fbuts[5].text, 0, 0));
+			    NORMAL_BUTTON, fbuts[5].text, 0));
 
     add_widget (find_dlg,
 		button_new (FIND2_Y - 4, fbuts[4].x, B_CANCEL,
-			    NORMAL_BUTTON, fbuts[4].text, 0, 0));
+			    NORMAL_BUTTON, fbuts[4].text, 0));
     stop_button =
 	button_new (FIND2_Y - 4, fbuts[0].x, B_STOP, NORMAL_BUTTON,
-		    fbuts[0].text, start_stop, find_dlg);
+		    fbuts[0].text, start_stop);
     add_widget (find_dlg, stop_button);
     add_widget (find_dlg,
 		button_new (FIND2_Y - 4, fbuts[3].x, B_AGAIN,
-			    NORMAL_BUTTON, fbuts[3].text, 0, 0));
+			    NORMAL_BUTTON, fbuts[3].text, 0));
     add_widget (find_dlg,
 		button_new (FIND2_Y - 4, fbuts[2].x, B_ENTER,
-			    DEFPUSH_BUTTON, fbuts[2].text, 0, 0));
+			    DEFPUSH_BUTTON, fbuts[2].text, 0));
 
     status_label = label_new (FIND2_Y - 6, 4, _("Searching"));
     add_widget (find_dlg, status_label);

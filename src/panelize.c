@@ -164,7 +164,7 @@ init_panelize (void)
 				BX + panelize_but[i].x,
 				panelize_but[i].ret_cmd,
 				panelize_but[i].flags,
-				panelize_but[i].text, 0, 0));
+				panelize_but[i].text, 0));
 
     pname =
 	input_new (UY + 14, UX, INPUT_COLOR, panelize_dlg->cols - 10, "",

@@ -205,7 +205,7 @@ init_chmod (void)
 				    BX + chmod_but[i].x,
 				    chmod_but[i].ret_cmd,
 				    chmod_but[i].flags,
-				    _(chmod_but[i].text), 0, 0));
+				    _(chmod_but[i].text), 0));
     }
 
     for (i = 0; i < PERMISSIONS; i++) {

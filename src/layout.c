@@ -224,7 +224,7 @@ static void update_split (void)
 	printw ("%03d", COLS - _first_panel_size);
 }
 
-static int b2left_cback (int action, void *data)
+static int b2left_cback (int action)
 {
     if (_equal_split){
 	/* Turn equal split off */
@@ -237,7 +237,7 @@ static int b2left_cback (int action, void *data)
     return 0;
 }
 
-static int b2right_cback (int action, void *data)
+static int b2right_cback (int action)
 {
     if (_equal_split){
 	/* Turn equal split off */
@@ -250,14 +250,14 @@ static int b2right_cback (int action, void *data)
     return 0;
 }
 
-static int bplus_cback (int action, void *data)
+static int bplus_cback (int action)
 {
     if (_output_lines < 99)
 	_output_lines++;
     return 0;
 }
 
-static int bminus_cback (int action, void *data)
+static int bminus_cback (int action)
 {
     if (_output_lines > 0)
 	_output_lines--;
@@ -437,18 +437,18 @@ static void init_layout (void)
 		"[Layout]", _("Layout"), DLG_CENTER);
 
     add_widget (layout_dlg,
-		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0, 0));
+		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON, cancel_button, 0));
     add_widget (layout_dlg,
-		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0, 0));
+		button_new (BY, b2, B_EXIT, NORMAL_BUTTON, save_button, 0));
     add_widget (layout_dlg,
-		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0, 0));
+		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON, ok_button, 0));
     if (console_flag){
 	add_widget (layout_dlg,
 		    button_new (9, 12 + first_width, B_MINUS, NARROW_BUTTON, "&-",
-			bminus_cback, 0));
+			bminus_cback));
 	add_widget (layout_dlg,
 		    button_new (9, 7 + first_width, B_PLUS, NARROW_BUTTON, "&+", 
-			bplus_cback, 0));
+			bplus_cback));
     }
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
@@ -470,9 +470,9 @@ static void init_layout (void)
     _keybar_visible = keybar_visible;
     _message_visible = message_visible;
     _xterm_title = xterm_title;
-    bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback, 0);
+    bright_widget = button_new(6, 15, B_2RIGHT, NARROW_BUTTON, "&>", b2right_cback);
     add_widget (layout_dlg, bright_widget);
-    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback, 0);
+    bleft_widget = button_new (6, 9, B_2LEFT, NARROW_BUTTON, "&<", b2left_cback);
     add_widget (layout_dlg, bleft_widget);
     check_options [6].widget = check_new (5, 6, XTRACT(6));
     old_first_panel_size = -1;

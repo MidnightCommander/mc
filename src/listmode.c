@@ -114,13 +114,13 @@ listmode_refresh (Dlg_head * h)
 }
 
 static int
-bplus_cback (int action, void *data)
+bplus_cback (int action)
 {
     return 0;
 }
 
 static int
-bminus_cback (int action, void *data)
+bminus_cback (int action)
 {
     return 0;
 }
@@ -168,10 +168,13 @@ init_listmode (char *oldlistformat)
 	create_dlg (0, 0, 22, 74, dialog_colors, listmode_callback,
 		    listmode_section, "Listing format edit", DLG_CENTER);
 
-#define XTRACT(i) BY+listmode_but[i].y, BX+listmode_but[i].x, listmode_but[i].ret_cmd, listmode_but[i].flags, listmode_but[i].text, 0, 0, NULL
-
     for (i = 0; i < BUTTONS; i++)
-	add_widget (listmode_dlg, button_new (XTRACT (i)));
+	add_widget (listmode_dlg,
+		    button_new (BY + listmode_but[i].y,
+				BX + listmode_but[i].x,
+				listmode_but[i].ret_cmd,
+				listmode_but[i].flags,
+				listmode_but[i].text, 0));
 
     /* We add the labels. */
     for (i = 0; i < LABELS; i++) {
@@ -183,10 +186,10 @@ init_listmode (char *oldlistformat)
 
     add_widget (listmode_dlg,
 		button_new (UY + 13, UX + 37, B_MINUS, NORMAL_BUTTON, "&-",
-			    bminus_cback, 0, NULL));
+			    bminus_cback));
     add_widget (listmode_dlg,
 		button_new (UY + 13, UX + 34, B_PLUS, NORMAL_BUTTON, "&+",
-			    bplus_cback, 0, NULL));
+			    bplus_cback));
     radio_itemwidth = radio_new (UY + 9, UX + 22, 3, s_itemwidth, 1, NULL);
     add_widget (listmode_dlg, radio_itemwidth);
     radio_itemwidth = 0;

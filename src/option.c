@@ -201,15 +201,15 @@ init_configure (void)
 
     add_widget (conf_dlg,
 		button_new (BY, b3, B_CANCEL, NORMAL_BUTTON,
-			    cancel_button, 0, 0));
+			    cancel_button, 0));
 
     add_widget (conf_dlg,
 		button_new (BY, b2, B_EXIT, NORMAL_BUTTON,
-			    save_button, 0, 0));
+			    save_button, 0));
 
     add_widget (conf_dlg,
 		button_new (BY, b1, B_ENTER, DEFPUSH_BUTTON,
-			    ok_button, 0, 0));
+			    ok_button, 0));
 
 #define XTRACT(i) *check_options[i].variable, check_options[i].text
 
