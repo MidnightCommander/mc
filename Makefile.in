@@ -43,7 +43,7 @@ aclocal.m4: mc-aclocal.m4 $(GNOME_M4_FILES) gettext.m4
 config.h.in: configure.in acconfig.h
 	cd $(srcdir); autoheader
 
-install: installdirs @vcs@
+install: installdirs
 	@for I in $(unixdirs); do cd $$I; $(MAKE) DESTDIR=$(DESTDIR) $@ || exit 1; cd ..; done
 	$(INSTALL_DATA) $(srcdir)/FAQ $(DESTDIR)$(libdir)/FAQ
 	$(INSTALL_PROGRAM) mcfn_install $(DESTDIR)$(suppbindir)/mcfn_install
