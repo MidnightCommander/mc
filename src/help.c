@@ -784,10 +784,8 @@ interactive_display (char *filename, char *node)
 	help_lines = LINES - 4;
 
     whelp = create_dlg (0, 0, help_lines+4, HELP_WINDOW_WIDTH+4, dialog_colors,
-			help_callback, "[Help]", "help", DLG_TRYUP|DLG_CENTER);
-
-    /* allow us to process the tab key */
-    whelp->raw = 1;
+			help_callback, "[Help]", "help",
+			DLG_TRYUP | DLG_CENTER | DLG_WANT_TAB);
 
     selected_item = search_string_node (main_node, STRING_LINK_START) - 1;
     currentpoint = startpoint = main_node + 1;

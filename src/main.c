@@ -1914,8 +1914,9 @@ mc_maybe_editor_or_viewer (void)
 static void
 do_nc (void)
 {
-    midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors, midnight_callback, "[main]", "midnight", 0);
-    midnight_dlg->has_menubar = 1;
+    midnight_dlg = create_dlg (0, 0, LINES, COLS, midnight_colors,
+			       midnight_callback, "[main]", "midnight",
+			       DLG_HAS_MENUBAR);
 
     /* Check if we were invoked as an editor or file viewer */
     if (mc_maybe_editor_or_viewer ())

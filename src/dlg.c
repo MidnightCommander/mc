@@ -210,6 +210,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->y = y1;
     new_d->cols = cols;
     new_d->lines = lines;
+    new_d->flags = flags;
     return (new_d);
 }
 
@@ -663,20 +664,22 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     return handled;
 }
 
-int dlg_key_event (Dlg_head *h, int d_key)
+int
+dlg_key_event (Dlg_head * h, int d_key)
 {
     int handled;
 
     if (!h->current)
-        return 0;
+	return 0;
 
     /* TAB used to cycle */
-    if (!h->raw && (d_key == '\t' || d_key == KEY_BTAB))
+    if (!(h->flags & DLG_WANT_TAB)
+	&& (d_key == '\t' || d_key == KEY_BTAB)) {
 	if (d_key == '\t')
 	    dlg_one_down (h);
-        else
+	else
 	    dlg_one_up (h);
-    else {
+    } else {
 
 	/* first can dlg_callback handle the key */
 	handled = (*h->callback) (h, d_key, DLG_KEY);
@@ -687,7 +690,8 @@ int dlg_key_event (Dlg_head *h, int d_key)
 
 	/* not used - then try widget_callback */
 	if (!handled)
-	    handled |= callback (h)(h, h->current->widget, WIDGET_KEY, d_key);
+	    handled |=
+		callback (h) (h, h->current->widget, WIDGET_KEY, d_key);
 
 	/* not used- try to use the unhandled case */
 	if (!handled)
@@ -702,18 +706,19 @@ int dlg_key_event (Dlg_head *h, int d_key)
     return 1;
 }
 
-static inline int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
+static inline int
+dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 {
     Widget_Item *item;
     Widget_Item *starting_widget = h->current;
-    Gpm_Event   new_event;
+    Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
     int ret_value;
 
     /* kludge for the menubar: start at h->first, not current  */
-    /* Must be carefull in the insertion order to the dlg list */
-    if (y == 1 && h->has_menubar)
+    /* Must be careful in the insertion order to the dlg list */
+    if (y == 1 && (h->flags & DLG_HAS_MENUBAR))
 	starting_widget = h->first;
 
     item = starting_widget;
@@ -722,8 +727,8 @@ static inline int dlg_mouse_event (Dlg_head *h, Gpm_Event *event)
 
 	item = item->next;
 
-	if (!((x > widget->x) && (x <= widget->x+widget->cols)
-	    && (y > widget->y) && (y <= widget->y+widget->lines)))
+	if (!((x > widget->x) && (x <= widget->x + widget->cols)
+	      && (y > widget->y) && (y <= widget->y + widget->lines)))
 	    continue;
 
 	new_event = *event;

@@ -1,5 +1,13 @@
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h (struct Dlg_head): Fold fields "raw" and "has_menubar"
+	into one field "flags".  Adjust all dependencies.  Add new flag
+	DLG_COMPACT.
+	* wtools.c (dialog_repaint): Draw frame without spaces if
+	DLG_COMPACT flag is set.
+	* complete.c (complete_engine): Set DLG_COMPACT.
+	(query_callback): Use common_dialog_repaint().
+
 	* keys.h: Remove, include ...
 	* myslang.h: ... here.
 	* Makefile.am: Remove keys.h.

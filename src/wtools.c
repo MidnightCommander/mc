@@ -55,12 +55,16 @@
 void
 dialog_repaint (struct Dlg_head *h, int back, int title_fore)
 {
+    int space;
+
+    space = (h->flags & DLG_COMPACT) ? 0 : 1;
+
     attrset (back);
     dlg_erase (h);
-    draw_box (h, 1, 1, h->lines - 2, h->cols - 2);
+    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
     attrset (title_fore);
-    if (h->title){
-	dlg_move (h, 1, (h->cols-strlen (h->title))/2);
+    if (h->title) {
+	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
 	addstr (h->title);
     }
 }

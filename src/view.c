@@ -1825,10 +1825,10 @@ toggle_hex_mode (WView *view)
         view->start_display -= view->start_display % view->bytes_per_line;
         view->edit_cursor = view->start_display;
 	view->widget.options |= W_WANT_CURSOR;
-	view->widget.parent->raw = 1;
+	view->widget.parent->flags |= DLG_WANT_TAB;
     } else {
         view->start_display = view->start_save;
-	view->widget.parent->raw = 0;
+	view->widget.parent->flags &= ~DLG_WANT_TAB;
 	view->widget.options &= ~W_WANT_CURSOR;
     }
     altered_hex_mode = 1;

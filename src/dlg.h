@@ -99,8 +99,7 @@ typedef struct Dlg_head {
     int lines;
     void *data;
     
-    int  has_menubar;	/* GrossHack: Send events on row 1 to a menubar? */
-    int  raw;		/* Should the tab key be sent to the dialog? */
+    int flags;		/* Different flags, specified in create_dlg() */
 } Dlg_head;
 
 /* Every Widget must have this as it's first element */
@@ -143,6 +142,9 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      char *help_ctx, char *name, int flags);
 
 /* The flags: */
+#define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
+#define DLG_HAS_MENUBAR  8	/* GrossHack: Send events on row 1 to a menubar? */
+#define DLG_COMPACT      4	/* Suppress spaces around the frame */
 #define DLG_TRYUP        2	/* Try to move two lines up the dialog */
 #define DLG_CENTER       1	/* Center the dialog */
 #define DLG_NONE         0	/* No options */

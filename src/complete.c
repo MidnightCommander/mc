@@ -814,101 +814,107 @@ static int insert_text (WInput *in, char *text, int len)
     return len != 0;
 }
 
-static int query_callback (Dlg_head * h, int Par, int Msg)
+static int
+query_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
-    	case DLG_DRAW:
-    	    attrset (COLOR_NORMAL);
-	    dlg_erase (h);
-    	    draw_box (h, 0, 0, query_height, query_width);
-    	    break;
-    	    
-    	case DLG_KEY:
-	    switch (Par) {
-		case KEY_LEFT:
-		case KEY_RIGHT:
-	    	    h->ret_value = 0;
-		    dlg_stop (h);
-	    	    return 1;
-	    	    
-	    	case 0177:
-	    	case KEY_BACKSPACE:
-	    	case XCTRL('h'):
-	    	    if (end == min_end){
-	    	    	h->ret_value = 0;
-			dlg_stop (h);
-	    	    	return 1;
-	    	    } else {
-	    	    	WLEntry *e, *e1;
-	    	    	
-	    	    	e1 = e = ((WListbox *)(h->current->widget))->list;
-	    	    	do {
-	    	    	    if (!strncmp (input->buffer + start, e1->text, end - start - 1)){
-	    	    	    	listbox_select_entry((WListbox *)(h->current->widget), e1);
-	    	    	    	handle_char (input, Par);
-	    	    	    	end--;
-				send_message (h, h->current->widget,
-				    WIDGET_DRAW, 0);
-	    	    	    	break;
-	    	    	    }
-	    	    	    e1 = e1->next;
-	    	    	} while (e != e1);
-	    	    }
-	    	    return 1;
-	    	    
-                default:
-	    	    if (Par > 0xff || !is_printable (Par)){
-	    	    	if (is_in_input_map (input, Par) == 2){
-	    	    	    if (end == min_end)
-	    	    	        return 1;
-	    	    	    h->ret_value = B_USER; /* This means we want to refill the
-	    	    	         	              list box and start again */
-			    dlg_stop (h);
-	    	    	    return 1;
-	    	    	} else
-	    	    	    return 0;
-	    	    } else {
-	    	    	WLEntry *e, *e1;
-	    	    	int need_redraw = 0;
-	    	    	int low = 4096;
-	    	    	char *last_text = NULL;
-	    	    	
-	    	    	e1 = e = ((WListbox *)(h->current->widget))->list;
-	    	    	do {
-	    	    	    if (!strncmp (input->buffer + start, e1->text, end - start)){
-	    	    	        if (e1->text [end - start] == Par){
-	    	    	            if (need_redraw){
-	    	    	            	register int c1, c2, si;
-	    	    	            	
-					for (si = end - start + 1; 
-					     (c1 = last_text [si]) &&
-					     (c2 = e1->text [si]); si++)
-		    			    if (c1 != c2)
-		    			    	break;
-	        			if (low > si) 
-	        			    low = si;
-					last_text = e1->text;
-					need_redraw = 2;
-	    	    	            } else {
-	    	    	            	need_redraw = 1;
-	    	    	    	    	listbox_select_entry((WListbox *)(h->current->widget), e1);
-	    	    	    	    	last_text = e1->text;
-	    	    	    	    }
-	    	    	        }
-	    	    	    }
-	    	    	    e1 = e1->next;
-	    	    	} while (e != e1);
-	    	    	if (need_redraw == 2){
-	    	    	    insert_text (input, last_text, low);
-	    	    	    send_message (h, h->current->widget,WIDGET_DRAW,0);
-	    	    	} else if (need_redraw == 1){
-	    	    	    h->ret_value = B_ENTER;
-			    dlg_stop (h);
-	    	    	}
-	    	    }
-	    	    return 1;
+    case DLG_DRAW:
+	common_dialog_repaint (h);
+	break;
+
+    case DLG_KEY:
+	switch (Par) {
+	case KEY_LEFT:
+	case KEY_RIGHT:
+	    h->ret_value = 0;
+	    dlg_stop (h);
+	    return 1;
+
+	case 0177:
+	case KEY_BACKSPACE:
+	case XCTRL ('h'):
+	    if (end == min_end) {
+		h->ret_value = 0;
+		dlg_stop (h);
+		return 1;
+	    } else {
+		WLEntry *e, *e1;
+
+		e1 = e = ((WListbox *) (h->current->widget))->list;
+		do {
+		    if (!strncmp
+			(input->buffer + start, e1->text,
+			 end - start - 1)) {
+			listbox_select_entry ((WListbox *) (h->current->
+							    widget), e1);
+			handle_char (input, Par);
+			end--;
+			send_message (h, h->current->widget,
+				      WIDGET_DRAW, 0);
+			break;
+		    }
+		    e1 = e1->next;
+		} while (e != e1);
 	    }
-	    break;
+	    return 1;
+
+	default:
+	    if (Par > 0xff || !is_printable (Par)) {
+		if (is_in_input_map (input, Par) == 2) {
+		    if (end == min_end)
+			return 1;
+		    h->ret_value = B_USER;	/* This means we want to refill the
+						   list box and start again */
+		    dlg_stop (h);
+		    return 1;
+		} else
+		    return 0;
+	    } else {
+		WLEntry *e, *e1;
+		int need_redraw = 0;
+		int low = 4096;
+		char *last_text = NULL;
+
+		e1 = e = ((WListbox *) (h->current->widget))->list;
+		do {
+		    if (!strncmp
+			(input->buffer + start, e1->text, end - start)) {
+			if (e1->text[end - start] == Par) {
+			    if (need_redraw) {
+				register int c1, c2, si;
+
+				for (si = end - start + 1;
+				     (c1 = last_text[si]) &&
+				     (c2 = e1->text[si]); si++)
+				    if (c1 != c2)
+					break;
+				if (low > si)
+				    low = si;
+				last_text = e1->text;
+				need_redraw = 2;
+			    } else {
+				need_redraw = 1;
+				listbox_select_entry ((WListbox *) (h->
+								    current->
+								    widget),
+						      e1);
+				last_text = e1->text;
+			    }
+			}
+		    }
+		    e1 = e1->next;
+		} while (e != e1);
+		if (need_redraw == 2) {
+		    insert_text (input, last_text, low);
+		    send_message (h, h->current->widget, WIDGET_DRAW, 0);
+		} else if (need_redraw == 1) {
+		    h->ret_value = B_ENTER;
+		    dlg_stop (h);
+		}
+	    }
+	    return 1;
+	}
+	break;
     }
     return 0;
 }
@@ -988,7 +994,7 @@ complete_engine (WInput *in, int what_to_do)
 	    query_width  = w;
     	    query_dlg = create_dlg (y, x, query_height, query_width,
 				    dialog_colors, query_callback,
-				    "[Completion]", "complete", DLG_NONE);
+				    "[Completion]", "complete", DLG_COMPACT);
     	    query_list = listbox_new (1, 1, w - 2, h - 2, 0, querylist_callback, NULL);
     	    add_widget (query_dlg, query_list);
     	    for (p = in->completions + 1; *p; p++)
