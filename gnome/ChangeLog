@@ -1,3 +1,12 @@
+1998-11-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gpopup.c (gpopup_do_popup): Hide the edit/view separator if
+	those items were disabled, too.
+
+	* gdesktop-icon.c (desktop_icon_realize): Added
+	WIN_STATE_FIXED_POSITION and WIN_STATE_ARRANGE_IGNORE to the
+	window hints for the desktop icons.
+
 1998-11-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_event): Run the popup menu for the

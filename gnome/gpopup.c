@@ -11,6 +11,8 @@
 #include "util.h"
 #include <gnome.h>
 #include "gpopup.h"
+#define WANT_WIDGETS /* yuck */
+#include "main.h"
 #include "../vfs/vfs.h"
 
 
@@ -36,7 +38,8 @@ enum {
 	POPUP_OPEN_WITH_PROGRAM		= 2,
 	POPUP_OPEN_WITH_ARGUMENTS	= 3,
 	POPUP_VIEW			= 5,
-	POPUP_EDIT			= 6
+	POPUP_EDIT			= 6,
+	POPUP_VIEW_EDIT_SEPARATOR	= 7
 };
 
 /* The generic popup menu */
@@ -64,12 +67,18 @@ static GnomeUIInfo popup_info[] = {
 	GNOMEUIINFO_END
 };
 
+struct popup_file_info {
+	char *filename;
+	WPanel *panel;
+};
+
 int
-gpopup_do_popup (char *filename, int from_panel, GdkEventButton *event)
+gpopup_do_popup (char *filename, WPanel *from_panel, GdkEventButton *event)
 {
 	GtkWidget *popup;
 	struct stat s;
 	int result;
+	struct popup_file_info pfi;
 
 	if (mc_stat (filename, &s) != 0) {
 		g_warning ("Could not stat %s, no popup menu will be run", filename);
@@ -87,6 +96,7 @@ gpopup_do_popup (char *filename, int from_panel, GdkEventButton *event)
 		gtk_widget_hide (popup_info[POPUP_OPEN_WITH_ARGUMENTS].widget);
 		gtk_widget_hide (popup_info[POPUP_VIEW].widget);
 		gtk_widget_hide (popup_info[POPUP_EDIT].widget);
+		gtk_widget_hide (popup_info[POPUP_VIEW_EDIT_SEPARATOR].widget);
 	} else {
 		gtk_widget_hide (popup_info[POPUP_OPEN_IN_NEW_WINDOW].widget);
 
@@ -98,7 +108,10 @@ gpopup_do_popup (char *filename, int from_panel, GdkEventButton *event)
 
 	/* Go! */
 
-	result = gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, filename);
+	pfi.filename = filename;
+	pfi.panel = from_panel;
+
+	result = gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, &pfi);
 
 	gtk_widget_destroy (popup);
 	return result;
@@ -107,65 +120,93 @@ gpopup_do_popup (char *filename, int from_panel, GdkEventButton *event)
 static void
 popup_open (GtkWidget *widget, gpointer data)
 {
-	/* FIXME */
+	struct popup_file_info *pfi;
+	struct stat s;
+
+	pfi = data;
+
+	if (mc_stat (pfi->filename, &s) != 0) {
+		g_warning ("Could not stat %s", pfi->filename);
+		return;
+	}
+
+	if (S_ISDIR (s.st_mode)) {
+		/* Open the directory in the panel the menu was activated from */
+
+		g_assert (pfi->panel != NULL);
+
+		do_panel_cd (pfi->panel, pfi->filename, cd_exact);
+	}
+
+	/* FIXME: add other cases */
 }
 
 static void
 popup_open_new_window (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_open_with_program (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_open_with_arguments (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_view (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_edit (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_move (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_copy (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_link (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_delete (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }
 
 static void
 popup_properties (GtkWidget *widget, gpointer data)
 {
 	/* FIXME */
+	g_warning ("Implement this function!");
 }

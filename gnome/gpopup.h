@@ -11,9 +11,10 @@
 
 
 #include <gdk/gdktypes.h>
+#include "panel.h"
 
 
-int gpopup_do_popup (char *filename, int from_panel, GdkEventButton *event);
+int gpopup_do_popup (char *filename, WPanel *from_panel, GdkEventButton *event);
 
 
 #endif

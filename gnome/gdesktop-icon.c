@@ -166,6 +166,7 @@ desktop_icon_realize (GtkWidget *widget)
 
 	if (gnome_win_hints_wm_exists ()) {
 		gnome_win_hints_set_layer (widget, WIN_LAYER_DESKTOP);
+		gnome_win_hints_set_state (widget, WIN_STATE_FIXED_POSITION | WIN_STATE_ARRANGE_IGNORE);
 		gnome_win_hints_set_hints (widget,
 					   (WIN_HINTS_SKIP_FOCUS
 					    | WIN_HINTS_SKIP_WINLIST
