@@ -74,7 +74,10 @@ void open_error_pipe (void)
     close (error_pipe[1]);
 }
 
-void close_error_pipe (int error, char *text)
+/*
+ * Returns true if an error was displayed
+ */
+int close_error_pipe (int error, char *text)
 {
     char *title;
     char msg[MAX_PIPE_SIZE];
@@ -95,9 +98,9 @@ void close_error_pipe (int error, char *text)
 	close (error_pipe[0]);
     }
     if (error < 0)
-	return;		/* Just ignore error message */
+	return 0;		/* Just ignore error message */
     if (text == NULL){
-	if (len == 0) return;	/* Nothing to show */
+	if (len == 0) return 0;	/* Nothing to show */
 
 	/* Show message from pipe */
 	message (error, title, msg);
@@ -105,6 +108,7 @@ void close_error_pipe (int error, char *text)
 	/* Show given text and possible message from pipe */
 	message (error, title, " %s \n %s ", text, msg);
     }
+    return 1;
 }
 
 void check_error_pipe (void)
@@ -186,7 +190,7 @@ char* get_default_shell()
 	return "command.com";
 }
 
-char *tilde_expand (char *directory)
+char *tilde_expand (const char *directory)
 {
     return strdup (directory);
 }

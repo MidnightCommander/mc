@@ -307,7 +307,7 @@ int get_modifier()
 }
 
 /* void functions for UNIX compatibility */
-void define_sequence (int code, char* vkcode, int action) {}
+int define_sequence (int code, char* vkcode, int action) { return 1; }
 void channels_up() {}
 void channels_down() {}
 void init_key_input_fd (void) {}

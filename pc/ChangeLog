@@ -1,3 +1,9 @@
+2002-06-04  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* key_nt.c (define_sequence): Adjust for declaration.
+	* util_nt.c (close_error_pipe): Likewise.
+	(tilde_expand): Likewise.
+
 2002-03-18  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Remove regex.h and regex.c.
