@@ -712,7 +712,7 @@ setup_panels (void)
     } else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
 
-    load_hint ();
+    load_hint (1);
     update_xterm_title_path ();
 }
 

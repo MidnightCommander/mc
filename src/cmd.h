@@ -49,7 +49,7 @@ void swap_cmd (void);
 void view_other_cmd (void);
 void quick_cd_cmd (void);
 void save_setup_cmd (void);
-char *get_random_hint (void);
+char *get_random_hint (int force);
 void source_routing (void);
 void user_file_menu_cmd (void);
 char *guess_message_value (void);

@@ -1,3 +1,11 @@
+2003-02-04  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (get_random_hint): Add "force" argument to ignore
+	timeout.  Adjust all dependencies.
+	* main.c (load_hint): Likewise.
+	* layout.c (setup_panels): Force updating the hint bar.
+	Original patch by Adam Byrtek <alpha@debian.org>
+
 2003-02-03  Pavel Roskin  <proski@gnu.org>
 
 	* slint.c (getch): If there is EOF on the input, exit

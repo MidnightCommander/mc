@@ -1200,8 +1200,11 @@ char *guess_message_value (void)
     return g_strdup (locale);
 }
 
-/* Returns a random hint */
-char *get_random_hint (void)
+/*
+ * Return a random hint.  If force is not 0, ignore the timeout.
+ */
+char *
+get_random_hint (int force)
 {
     char *data, *result, *eol;
     int  len;
@@ -1214,7 +1217,7 @@ char *get_random_hint (void)
     time_t now;
 
     time (&now);
-    if ((now - last) < 60)
+    if (!force && (now - last) < 60)
 	return g_strdup ("");
     last = now;
 #else
@@ -1222,7 +1225,7 @@ char *get_random_hint (void)
     static struct timeval tv;
     
     gettimeofday (&tv, NULL);
-    if (!(tv.tv_sec> last_sec+60))
+    if (!force && !(tv.tv_sec > last_sec + 60))
 	return g_strdup (""); 
     last_sec = tv.tv_sec;
 #endif /* !SCO_FLAVOR */

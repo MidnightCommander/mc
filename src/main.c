@@ -789,7 +789,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 	do_load_dir (&panel->dir, panel->sort_type, panel->reverse,
 		     panel->case_sensitive, panel->filter);
     try_to_select (panel, get_parent_dir_name (panel->cwd, olddir));
-    load_hint ();
+    load_hint (0);
     panel_update_contents (panel);
     update_xterm_title_path ();
 
@@ -1853,9 +1853,12 @@ update_xterm_title_path (void)
     }
 }
 
-/* Load new hint and display it. */
+/*
+ * Load new hint and display it.
+ * IF force is not 0, ignore the timeout.
+ */
 void
-load_hint (void)
+load_hint (int force)
 {
     char *hint;
 
@@ -1867,7 +1870,7 @@ load_hint (void)
 	return;
     }
 
-    if ((hint = get_random_hint ())) {
+    if ((hint = get_random_hint (force))) {
 	if (*hint)
 	    set_hintbar (hint);
 	g_free (hint);
@@ -1887,7 +1890,7 @@ setup_panels_and_run_mc (void)
 
     xtoolkit_panel_setup ();
     add_widget (midnight_dlg, the_hint);
-    load_hint ();
+    load_hint (1);
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
     add_widget (midnight_dlg, the_bar);

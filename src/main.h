@@ -131,7 +131,7 @@ int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
 void untouch_bar    (void);
 void touch_bar      (void);
 void update_xterm_title_path (void);
-void load_hint      (void);
+void load_hint      (int force);
 
 void print_vfs_message(char *msg, ...)
     __attribute__ ((format (printf, 1, 2)));
