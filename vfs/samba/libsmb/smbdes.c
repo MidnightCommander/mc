@@ -46,8 +46,8 @@
    up with a different answer to the one above)
 */
 
-
-#define uchar unsigned char
+#undef	uchar
+#define uchar const unsigned char
 
 static uchar perm1[56] = {57, 49, 41, 33, 25, 17,  9,
 			 1, 58, 50, 42, 34, 26, 18,

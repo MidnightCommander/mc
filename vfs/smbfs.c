@@ -388,10 +388,9 @@ smbfs_init(vfs *me)
 	if(!get_myname(myhostname,NULL))
         DEBUG(0,("Failed to get my hostname.\n"));
 
-	if (!lp_load(servicesf,True,False,False)) {
-		if (errno != ENOENT)
+	if (!lp_load(servicesf,True,False,False))
 		DEBUG(0, ("Can't load %s - run testparm to debug it\n", servicesf));
-	}
+
     codepage_initialise(lp_client_code_page());
 
     load_interfaces();
@@ -467,7 +466,7 @@ smbfs_close (void *data)
     if (archive_level >= 2 && (inf->attr & aARCH)) {
         cli_setatr(info->cli, rname, info->attr & ~(uint16)aARCH, 0);
     }	*/
-	return cli_close(info->cli, info->fnum);
+	return (cli_close(info->cli, info->fnum) == True) ? 0 : -1;
 }
 
 static int
@@ -513,12 +512,11 @@ browsing_helper(const char *name, uint32 type, const char *comment)
 
 	if (first_direntry) {
 		current_info->entries = new_entry;
-		current_info->current = new_entry;
 		first_direntry = FALSE;
 	} else {
 		current_info->current->next = new_entry;
-		current_info->current = new_entry;
 	}
+	current_info->current = new_entry;
 
 	bzero(&new_entry->my_stat, sizeof(struct stat));
 	new_entry->merrno = 0;
@@ -753,14 +751,14 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 
 /* #if 0 */
 static int
-fs (char *text)
+fs (const char *text)
 {
-	char *p, count = 0;
-	p = strchr(text, '/');
-	while (p) {
+	const char *p = text;
+	int count = 0;
+	
+	while ((p = strchr(p, '/')) != NULL) {
 		count++;
 		p++;
-		p = strchr(p, '/');
 	}
 	if (count == 1)
 		return strlen(text);

@@ -1,3 +1,12 @@
+2001-03-15  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* samba/libsmb/smbdes.c: undefine uchar before redefine it
+
+	* smbfs.c (smbfs_close): honour changed semantics for return value
+	(on error -1 is expected).
+
+	* (fs): it is at least strange use char * for counter. Changed to int
+
 2001-03-14  Pavel Roskin  <proski@gnu.org>
 
 	* Make-mc.in: Use Automake conditional USE_SAMBA_FS.
