@@ -1,3 +1,7 @@
+2001-10-20  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h: Declare edit_printf() with the printf attribute.
+
 2001-10-18  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (check_file_access): Only allow to edit regular files.
