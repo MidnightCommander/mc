@@ -370,24 +370,28 @@ static int push_char (int c)
     return 1;
 }
 
-void define_sequence (int code, char *seq, int action)
+/*
+ * Return 1 on success, 0 on error.
+ * An error happens if SEQ is a beginning of an existing longer sequence.
+ */
+int define_sequence (int code, char *seq, int action)
 {
     key_def *base;
 
     if (strlen (seq) > sizeof (seq_buffer)-1)
-	return;
+	return 0;
     
     for (base = keys; (base != 0) && *seq; ){
 	if (*seq == base->ch){
 	    if (base->child == 0){
 		if (*(seq+1)){
 		    base->child = create_sequence (seq+1, code, action);
-		    return;
+		    return 1;
 		} else {
-		    /* The sequence clashes */
+		    /* The sequence matches an existing one.  */
                     base->code = code;
                     base->action = action;
-		    return;
+		    return 1;
 		}
 	    } else {
 		base = base->child;
@@ -398,11 +402,18 @@ void define_sequence (int code, char *seq, int action)
 		base = base->next;
 	    else {
 		base->next = create_sequence (seq, code, action);
-		return;
+		return 1;
 	    }
 	}
     }
+
+    if (!*seq) {
+	/* Attempt to redefine a sequence with a shorter sequence.  */
+	return 0;
+    }
+
     keys = create_sequence (seq, code, action);
+    return 1;
 }
 
 static int *pending_keys;

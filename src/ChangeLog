@@ -1,3 +1,10 @@
+2001-08-14  Pavel Roskin  <proski@gnu.org>
+
+	* key.h (define_sequence): Change declaration to return int.
+	* key.c (define_sequence): Return 1 on success, 0 on error.
+	* learn.c (learn_button): Don't accept sequence if
+	define_sequence() has failed.
+
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
 	* learn.c (learn_save): Fix memory leak.
