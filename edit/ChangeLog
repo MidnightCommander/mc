@@ -1,3 +1,8 @@
+2002-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* editdraw.c (edit_scroll_screen_over_cursor): Do nothing if the
+	edit widget has zero width or height.
+
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c: Rename DELETE to DELCHAR to avoid macro redefinition

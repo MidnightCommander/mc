@@ -136,6 +136,10 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
     int p;
     int outby;
     int b_extreme, t_extreme, l_extreme, r_extreme;
+
+    if (edit->num_widget_lines <= 0 || edit->num_widget_columns <= 0)
+	return;
+
     r_extreme = EDIT_RIGHT_EXTREME;
     l_extreme = EDIT_LEFT_EXTREME;
     b_extreme = EDIT_BOTTOM_EXTREME;
