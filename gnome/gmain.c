@@ -558,5 +558,5 @@ gnome_check_super_user (void)
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_OK, NULL);
 
-	gnome_dialog_run (GNOME_DIALOG (warning_dlg));
+	gnome_dialog_run_and_close (GNOME_DIALOG (warning_dlg));
 }

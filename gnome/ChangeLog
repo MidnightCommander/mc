@@ -1,5 +1,20 @@
 1999-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gpopup.c (panel_action_properties): Hanlde properly
+	gnome_dialog_run here.
+
+	* gpopup2.c (handle_properties): ditto
+
+	* gmain.c (gnome_check_super_user): Use dialog_run_and_close here.
+
+	* gpopup.c (dicon_properties): Handle propery gnome_dialog_run
+
+	* gdialogs.c (file_mask_dialog): Fix usage of gnome_dialog_run
+	here.  Handle case == -1.
+
+	* gcmd.c (gnome_select): Fix usage of gnome_dialog_run here
+	(handle case == -1)
+
 	* gscreen.c (panel_fill_panel_icons): Add a hack to work around
 	gnome-libs/gnome-icon-list bug that did not reset the proper
 	values.  A fix will be available in gnome-libs-1.0.10.

@@ -355,8 +355,9 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 		panel_set_sort_order (panel, sfn);
 		break;
 	case 1:
-	default:
 		break;
+	default:
+		return;
 	}
 	gtk_widget_destroy (sort_box);
 }
@@ -378,7 +379,8 @@ get_nickname (gchar *text)
 	GtkWidget *entry;
 	GtkWidget *label;
 	gchar *retval = NULL;
-
+	int destroy;
+	
 	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK, 
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
 	gtk_window_set_position (GTK_WINDOW (dlg), GTK_WIN_POS_MOUSE);
@@ -392,14 +394,20 @@ get_nickname (gchar *text)
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dlg)->vbox),
 			    entry, FALSE, FALSE, 0);
 	gtk_widget_show_all (GNOME_DIALOG (dlg)->vbox);
+	destroy = TRUE;
 	switch (gnome_dialog_run (GNOME_DIALOG (dlg))) {
+	case -1:
+		destroy = FALSE;
+		break;
 	case 0:
 		retval = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
 		break;
 	case 1:
 	default:
 	}
-	gtk_widget_destroy (dlg);
+	if (destroy)
+		gtk_widget_destroy (dlg);
+
 	return retval;	
 }
 
@@ -527,7 +535,8 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	GtkWidget *hbox;
 	gint i;
 	gchar *row_data;
-
+	int destroy;
+	
 	data = g_new0 (ep_dlg_data, 1);
 	data->setting_text = FALSE;
 	data->selected = -1;
@@ -576,6 +585,9 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_box_pack_start (GTK_BOX (hbox), data->entry, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (frame), hbox);
 	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
+
+	destroy = TRUE;
+	
 	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
 	case 0:
 		gtk_widget_hide (data->ep_dlg);
@@ -586,6 +598,10 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 		save_settings (GTK_CLIST (data->clist));
 		break;
 	case 1:
+		break;
+	case -1:
+		destroy = FALSE;
+		break;
 	default:
 	}
 	for (i = 0; i < GTK_CLIST (data->clist)->rows; i++) {
@@ -593,7 +609,9 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 		if (row_data)
 			g_free (row_data);
 	}
-	gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
+
+	if (destroy)
+		gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
 	g_free (data);
 }
 
@@ -704,6 +722,9 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 		x_filter_changed (panel);
 		reread_cmd ();
 		break;
+
+	case -1:
+		return;
 	}
 	gtk_widget_destroy (filter_dlg);
 }
@@ -815,6 +836,7 @@ gnome_select (GtkWidget *widget, WPanel *panel)
     GtkWidget *select_dialog;
     GtkWidget *entry;
     GtkWidget *label;
+    int run;
     
     select_dialog = gnome_dialog_new (_("Select File"), GNOME_STOCK_BUTTON_OK, 
 				      GNOME_STOCK_BUTTON_CANCEL, NULL);
@@ -836,11 +858,14 @@ gnome_select (GtkWidget *widget, WPanel *panel)
     gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (select_dialog)->vbox), entry, FALSE, FALSE, 0);
     gtk_widget_show_all (GNOME_DIALOG (select_dialog)->vbox);
     reg_exp = NULL;
-    if (gnome_dialog_run (GNOME_DIALOG (select_dialog)) == 0) {
+    run = gnome_dialog_run (GNOME_DIALOG (select_dialog));
+    if (run == 0) {
 	    gtk_widget_hide (select_dialog);
 	    reg_exp = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry)))));
     }
-    gtk_widget_destroy (select_dialog);
+    if (run != -1)
+	    gtk_widget_destroy (select_dialog);
+    
     if ((reg_exp == NULL) || (*reg_exp == '\000')) {
 	    g_free (reg_exp);
 	    return;

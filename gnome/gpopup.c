@@ -94,15 +94,18 @@ dicon_properties (GtkWidget *widget, DesktopIconInfo *dii)
 	int retval = 1;
 	char *path;
 	GtkWidget *dlg;
+	int run;
 	
 	path = concat_dir_and_file (desktop_directory, dii->filename);
 /*	retval = item_properties (dii->dicon, path, dii);*/
 	dlg = gnome_file_property_dialog_new (path, TRUE);
 	gtk_widget_show_all (dlg);
-	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
+	run = gnome_dialog_run (GNOME_DIALOG (dlg));
+	if (run == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
 
-	gtk_widget_destroy (dlg);
+	if (run != -1)
+		gtk_widget_destroy (dlg);
 	g_free(path);
 
 	if (retval)
@@ -151,13 +154,19 @@ panel_action_properties (GtkWidget *widget, WPanel *panel)
 	file_entry *fe = &panel->dir.list [panel->selected];
 	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
 	GtkWidget *dlg;
+	int run;
 
 /*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
 	reread_cmd ();*/
 	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
 	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (panel->xwindow));
-	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
+
+	run = gnome_dialog_run (GNOME_DIALOG (dlg));
+	
+	if (run == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
+
+	if (run != -1)
 		gtk_widget_destroy (dlg);
 	 g_free (full_name);
 	if (retval)

@@ -557,7 +557,8 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         char *source_mask, *orig_mask, *dest_dir;
         const char *error;
         struct stat buf;
-
+        int run;
+        
         g_return_val_if_fail (ctx != NULL, NULL);
 
         ctx->stable_symlinks = 0;
@@ -665,10 +666,15 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text, char 
         gnome_dialog_close_hides (GNOME_DIALOG (fmd_win), TRUE);
 
         /* Off to the races!!! */
-        if (gnome_dialog_run (GNOME_DIALOG (fmd_win)) == 1) {
+        run = gnome_dialog_run (GNOME_DIALOG (fmd_win));
+        
+        if (run == 1) {
                 gtk_widget_destroy (fmd_win);
                 return NULL;
         }
+
+        if (run == -1)
+                return NULL;
 
         dest_dir = gnome_file_entry_get_full_path(GNOME_FILE_ENTRY (fentry), FALSE);
         gtk_widget_destroy (fmd_win);
@@ -1062,5 +1068,6 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
                 *ret_new = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry2)));
         }
 
-        gtk_widget_destroy (dialog);
+        if (ret != -1)
+                gtk_widget_destroy (dialog);
 }

@@ -705,7 +705,8 @@ handle_properties (GtkWidget *widget, WPanel *panel)
 	gint retval = 0;
 	GtkWidget *dialog;
 	gchar *full_name = NULL;
-
+	int run;
+	
 	full_name = get_full_filename (panel);
 	dialog = gnome_file_property_dialog_new (full_name,
 						 (is_a_desktop_panel (panel)
@@ -715,11 +716,14 @@ handle_properties (GtkWidget *widget, WPanel *panel)
 	if (!is_a_desktop_panel (panel))
 		gnome_dialog_set_parent (GNOME_DIALOG (dialog), GTK_WINDOW (panel->xwindow));
 
-	if (gnome_dialog_run (GNOME_DIALOG (dialog)) == 0)
+	run = gnome_dialog_run (GNOME_DIALOG (dialog));
+	if (run == 0)
 		retval = gnome_file_property_dialog_make_changes (
 			GNOME_FILE_PROPERTY_DIALOG (dialog));
 
-	gtk_widget_destroy (dialog);
+	if (run != -1)
+		gtk_widget_destroy (dialog);
+
 	g_free (full_name);
 	if (retval && !is_a_desktop_panel (panel))
 		reread_cmd ();
