@@ -214,7 +214,7 @@ EXTRA_DIST =			\
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
 	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) \
-	$(CLIENTSRCS) gmc-window.c gmc-window.h
+	$(CLIENTSRCS)
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<

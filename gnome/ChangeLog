@@ -1,3 +1,9 @@
+2001-08-12  Pavel Roskin  <proski@gnu.org>
+
+	* gmc-window.c: Remove.
+	* gmc-window.h: Likewise.
+	* Makefile.in: Remove gmc-window.c and gmc-window.h.
+
 2001-08-10  Pavel Roskin  <proski@gnu.org>
 
 	* gnome.TODO: Remove already fixed problem in the find dialog.
