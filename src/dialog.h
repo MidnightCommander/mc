@@ -44,7 +44,8 @@ typedef enum {
     WIDGET_HOTKEY,		/* Sent to widget to catch preprocess key */
     WIDGET_DESTROY,		/* Sent to widget at destruction time */
     WIDGET_CURSOR,		/* Sent to widget to position the cursor */
-    WIDGET_IDLE,		/* Send to widgets with options & W_WANT_IDLE*/
+    WIDGET_IDLE,		/* Sent to widgets with options & W_WANT_IDLE*/
+    WIDGET_RESIZED,		/* Sent after a widget has been resized */
 } widget_msg_t;
 
 typedef enum {

@@ -819,6 +819,7 @@ void widget_set_size (Widget *widget, int y, int x, int lines, int cols)
     widget->y = y;
     widget->cols = cols;
     widget->lines = lines;
+    send_message (widget, WIDGET_RESIZED, 0 /* unused */);
 }
 
 /* Replace widget old_w for widget new_w in the dialog h */

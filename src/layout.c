@@ -633,10 +633,6 @@ panel_do_cols (int index)
 	set_panel_formats ((WPanel *) panels [index].widget);
     else {
 	panel_update_cols (panels [index].widget, frame_half);
-
-	/* In case of an Hex Quick View must review line length */
-	if (get_display_type (index) == view_quick)
-	    view_update_bytes_per_line ((WView *) panels [index].widget);
     }
 }
 

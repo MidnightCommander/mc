@@ -753,7 +753,7 @@ do_view_init (WView *view, const char *_command, const char *_file,
     return 0;
 }
 
-void
+static void
 view_update_bytes_per_line (WView *view)
 {
     int cols;
@@ -2734,6 +2734,8 @@ view_callback (WView *view, widget_msg_t msg, int parm)
     cb_ret_t i;
     Dlg_head *h = view->widget.parent;
 
+    view_update_bytes_per_line (view);
+
     switch (msg) {
     case WIDGET_INIT:
 	view_update_bytes_per_line (view);
@@ -2780,6 +2782,10 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 	if (view->have_frame)
 	    delete_hook (&select_file_hook, view_hook);
 	return MSG_HANDLED;
+
+    case WIDGET_RESIZED:
+    	view_update_bytes_per_line (view);
+	/* FALLTROUGH */
 
     default:
 	return default_proc (msg, parm);
