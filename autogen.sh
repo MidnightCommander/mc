@@ -14,9 +14,6 @@ test -z "$srcdir" && srcdir=.
 (
 cd $srcdir
 
-: ${CVS=cvs}
-test -d macros || $CVS co -d macros gnome-common/macros || exit 1
-
 # Ensure that gettext is reasonably new.
 gettext_ver=`$GETTEXTIZE --version | sed -n '1s/^.* //p'`
 
@@ -41,8 +38,8 @@ for i in $m4files; do
   cp -f $fromdir/$i gettext.m4
 done
 
-$ACLOCAL -I macros -I gettext.m4 $ACLOCAL_FLAGS || \
-  $ACLOCAL -I macros $ACLOCAL_FLAGS || \
+$ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || \
+  $ACLOCAL $ACLOCAL_FLAGS || \
   exit 1
 $AUTOHEADER || exit 1
 $AUTOCONF || exit 1

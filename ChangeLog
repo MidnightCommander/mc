@@ -1,5 +1,10 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4: Include all used macros from the macros
+	directory.
+	* autogen.sh: Remove all references to "macros".
+	* Makefile.am: Likewise.
+
 	* configure.in: Remove all GNOME stuff except GNOME_VFS_CHECKS.
 	* Makefile.am (SUBDIRS): Remove all GNOME-related directories.
 
