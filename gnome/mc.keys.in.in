@@ -36,7 +36,7 @@ application/x-troff-ms:
 application/x-troff-me:
 	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -me %f
 
-application/x-generic-spreadsheet:
+application/*spreadsheet*:
 	icon-filename=@icondir@/gnome-application-x-generic-spreadsheet.png
 
 application/x-gzip:
