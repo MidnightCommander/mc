@@ -444,7 +444,7 @@ panel_file_list_configure_contents (GtkWidget *sw, WPanel *panel, int main_width
 	usable_pixels = width - extra_pixels;
 	total_columns = usable_pixels / char_width;
 	extra_columns = total_columns - used_columns;
-	if (extra_columns > 0) {
+	if (extra_columns > 0 && expandables > 0) {
 		expand_space  = extra_columns / expandables;
 		extra_space   = extra_columns % expandables;
 	} else

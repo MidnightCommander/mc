@@ -1,3 +1,8 @@
+1999-06-04  Robert Brady  <rwb197@ecs.soton.ac.uk>
+
+	* gscreen.c (panel_list_configure_contents): Prevent
+	divide by zero error. (Fixes bug #1360)
+
 1999-06-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (xtoolkit_init): Ignore SIGTTIN and SIGTTOU.
