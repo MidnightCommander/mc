@@ -2114,7 +2114,7 @@ normal_search (WView *view, int direction)
 	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
 	 N_(" Enter search string:"), 0, 0,
 	 0, 0, 0},
-	{0}
+	NULL_QuickWidget
     };
     static QuickDialog Quick_input = {
 	SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),

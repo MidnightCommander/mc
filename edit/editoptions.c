@@ -117,7 +117,7 @@ edit_options_dialog (void)
 	/* 16 */
 	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 14, OPT_DLG_H,
 	 N_("Key emulation"), 0, 0, 0, 0, NULL},
-	{0}
+	NULL_QuickWidget
     };
 
     QuickDialog Quick_options =

@@ -764,7 +764,7 @@ static QuickWidget fmd_widgets[] = {
     {quick_checkbox, 31, 64, 7, FMDY, N_("&Dive into subdir if exists"), 0,
      0,
      0 /* &dive_into_subdirs */ , 0, "dive"},
-    {0}
+    NULL_QuickWidget
 };
 
 static int

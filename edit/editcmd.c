@@ -387,7 +387,7 @@ void menu_save_mode_cmd (void)
 	 0, 0, 0, "savemext"},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
 	 0, &save_mode_new, str, "t"},
-	{0}};
+	NULL_QuickWidget};
     static QuickDialog dialog =
     {DLG_X, DLG_Y, -1, -1, N_(" Edit Save Mode "), "[Edit Save Mode]",
      widgets};
@@ -1178,7 +1178,7 @@ edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	 0, B_ENTER, 0, 0, NULL},
 	{quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
 	 0, 0, 0, 0, 0},
-	{0}};
+	 NULL_QuickWidget};
 
 #ifdef HAVE_CHARSET
     char *msg = _(" Replace with: ");
@@ -1253,7 +1253,7 @@ edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char
 	 0, "edit-search"},
 	{quick_label, 2, REPLACE_DLG_WIDTH, 2, REPLACE_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
 	 0, 0},
-	{0}};
+	 NULL_QuickWidget};
 
     quick_widgets[2].result = &treplace_scanf;
     quick_widgets[3].result = &treplace_all;
@@ -1323,7 +1323,7 @@ edit_search_dialog (WEdit * edit, char **search_text)
 	 0, "edit-search"},
 	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT, N_(" Enter search string:"), 0, 0, 0,
 	 0, 0},
-	{0}};
+	 NULL_QuickWidget};
 
     quick_widgets[2].result = &treplace_scanf;
     quick_widgets[3].result = &treplace_backwards;
@@ -2582,7 +2582,7 @@ void edit_mail_dialog (WEdit * edit)
 	 0, 0},
 	{quick_label, 2, 50, 2, MAIL_DLG_HEIGHT, N_(" mail -s <subject> -c <cc> <to>"), 0, 0, 0,
 	 0, 0},
-	{0}};
+	NULL_QuickWidget};
 
     quick_widgets[2].str_result = &tmail_cc;
     quick_widgets[2].text = mail_cc_last ? mail_cc_last : "";
