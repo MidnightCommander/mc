@@ -50,7 +50,9 @@ ALLICONS =						\
 	gnome-manpage.png				\
 	gnome-objectfile.png				\
 	gnome-textfile.png				\
-	gnome-tex.png
+	gnome-tex.png					\
+	gnome-audio.png					\
+	gnome-image-xcf.png
 
 all:
 
