@@ -1999,32 +1999,6 @@ OPCIONES
 .\"OPTIONS"
 tiene más información sobre cómo controlar el cçodigo del subshell.
 .PP
-.\"NODE "  Controlling Midnight Commander"
-.SH "  Controlando Midnight Commander"
-Midnight Commander define la variable de entorno
-MC_CONTROL_FILE. Los comandos ejecutados por MC pueden dar instrucciones a
-MC escribiendo en el fichero especificado por ésta variable. Esto solamente
-está disponible si compilamos nuestra copia de the Midnight Commander con la opción
-WANT_PARSE.
-.PP
-Son soportadas las siguientes instrucciones.
-.PP
-.nf
-clear_tags		Elimina todas las marcas.
-tag <fichero>		Marca un fichero especificado.
-untag <fichero>		Desmarca un fichero especificado.
-select <fichero>	Desplaza el puntero el fichero.
-change_panel		Intercambia entre los paneles.
-cd <ruta>		Cambia de directorio.
-.fi
-.PP
-Si la primera letra de la instrucción está en minúscula opera en el
-panel actual. Si la letra está en mayúsculas, la instrucción
-opera sobre el otro panel. Las letras adicionales deben estar en minúsculas.
-Las instrucciones deben estarseparadas exáctamente por un espacio, tabulador o
-Abvance de línea. Las instrucciones no funcionan en la presentación de Información,
-Árbol o Rápida. El primer error provoca que el resto sea ignorado.
-.PP
 .\"NODE "Chmod"
 .SH "Cambiar Permisos"
 Cambiar Permisos se usa para cambiar los bits de permisos en un grupo de

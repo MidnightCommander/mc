@@ -1,5 +1,11 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* doc/mc.1.in (Controlling Midnight Commander): Remove, it's
+	obsolete.
+	* doc/es/mc.1.in: Likewise.
+	* doc/ru/mc.1.in: Likewise.
+	* doc/hu/mc.hlp.hu: Likewise.
+
 	* lib/mc.menu: Remove all references to $MC_CONTROL_FILE, which
 	was unsafe by design and is no longer supported.  Use %t instead
 	of %u to preserve tags in case of failure.

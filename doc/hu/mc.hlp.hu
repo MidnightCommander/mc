@@ -1901,33 +1901,6 @@ amit a jelenleg használt shell is használ.
 Az OPTIONS részben további információkat olvashatsz arról,
 hogy hogyan vezérelheted a subshell kódot.
 
-[Controlling Midnight Commander]
-A Midnight Commander vezérlése
-
-A Midnight Commander a környezeti változókat az
-MC_CONTROL_FILE-ban definiálja. Az MC által futtatott
-parancsokhoz további utasításokat adhatsz az MC számára a
-fájlban megadott változókkal. Ez csak akkor lesz elérhetõ,
-ha a Midnight Commandert a WANT_PARSE opcióval fordították.
-
-A következõ utasítások használhatók:
-
-clear_tags		Töröl minden kijelölést. 
-tag <fájlnév>		Kijelöli a megadott fájlt. 
-untag <fájlnév>		Megszünteti a megadott fájl
-			kijelölését. 
-select <fájlnév>	A mutatót a fájlra viszi.
-change_panel		Felcseréli a paneleket. 
-cd <path>		Könyvtárt vált.
-
-Ha az utasítás elsõ betûje kisbetû, az MC az aktív panelben 
-hajtja végre az utasítást. Ha nagybetû, akkor a mûveletet a
-másik panelen hajtja végre. A utasítások további betûi 
-kisbetûk. Az utasítások egyetlen szóközzel, tabulátorral, 
-vagy sor vége karakterrel választhatóak el megfelelõen. 
-A mûveletek nem mûködnek Infó, Fa és Gyors nézetben. Az elsõ 
-hiba esetében a további részeket nem veszi figyelembe.
-
 [Chmod]
 Chmod (hozzáférési jogosultság)
 
