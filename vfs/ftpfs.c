@@ -471,9 +471,8 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 	}
 
 	print_vfs_message (_("ftpfs: sending login name"));
-	code = command (me, super, WAIT_REPLY, "USER %s", name);
 
-	switch (code) {
+	switch (command (me, super, WAIT_REPLY, "USER %s", name)) {
 	case CONTINUE:
 	    print_vfs_message (_("ftpfs: sending user password"));
 	    code = command (me, super, WAIT_REPLY, "PASS %s", pass);
@@ -486,7 +485,7 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 		op = input_dialog (p, _("Account:"), "");
 		g_free (p);
 		if (op == NULL)
-		    ERRNOR (EPERM, 0);
+		    goto login_fail;
 		print_vfs_message (_("ftpfs: sending user account"));
 		code = command (me, super, WAIT_REPLY, "ACCT %s", op);
 		g_free (op);
@@ -503,7 +502,6 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 
 	default:
 	    SUP.failed_on_login = 1;
-	    /* my_errno = E; */
 	    if (SUP.password)
 		wipe_password (SUP.password);
 	    SUP.password = 0;
@@ -931,7 +929,8 @@ initconn (vfs *me, vfs_s_super *super)
     if (pe == NULL)
 	ERRNOR (EIO, -1);
 again:
-    getsockname (SUP.sock, (struct sockaddr *) &data_addr, &len);
+    if (getsockname (SUP.sock, (struct sockaddr *) &data_addr, &len) == -1)
+	ERRNOR (EIO, -1);
     data_addr.sin_port = 0;
     
     data = socket (AF_INET, SOCK_STREAM, pe->p_proto);
@@ -986,7 +985,7 @@ open_data_connection (vfs *me, vfs_s_super *super, const char *cmd,
 	    return -1;
     }
     if (remote) {
-	char * remote_path = translate_path (me, super, remote);
+	char *remote_path = translate_path (me, super, remote);
 	j = command (me, super, WAIT_REPLY, "%s /%s", cmd, 
 	    /* WarFtpD can't STORE //filename */
 	    (*remote_path == '/') ? remote_path + 1 : remote_path);
@@ -1049,6 +1048,7 @@ linear_abort (vfs *me, vfs_s_fh *fh)
 		gettimeofday (&tim, NULL);
 		if (tim.tv_sec > start_tim.tv_sec + ABORT_TIMEOUT) {
 		    /* server keeps sending, drop the connection and reconnect */
+		    close (dsock);
 		    reconnect (me, super);
 		    return;
 		}
@@ -1741,6 +1741,14 @@ static struct vfs_s_data ftp_data = {
 static void
 ftpfs_done (vfs *me)
 {
+    struct no_proxy_entry *np;
+
+    while (no_proxy) {
+	np = no_proxy->next;
+	g_free (no_proxy->domain);
+	g_free (no_proxy);
+	no_proxy = np;	
+    }
     g_free (ftpfs_anonymous_passwd);
     g_free (ftpfs_proxy_host);
 }

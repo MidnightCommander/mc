@@ -1,3 +1,9 @@
+2003-07-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (login_server): Fix memory leak.
+	(linear_abort): Close dsock before reconnect().
+	(ftpfs_done): Release no_proxy list.
+
 2003-07-21  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c (load_no_proxy_list): Fix infinitive loop if ferror().
