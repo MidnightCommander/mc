@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-03-11 14:23-0500\n"
+"POT-Creation-Date: 1999-03-11 17:13-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,99 +69,99 @@ msgstr ""
 msgid "&No"
 msgstr ""
 
-#: gnome/gcmd.c:225
+#: gnome/gcmd.c:268
 msgid "Sort By"
 msgstr ""
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:230
+#: gnome/gcmd.c:273
 msgid "Ignore case sensitivity."
 msgstr ""
 
-#: gnome/gcmd.c:238 src/chmod.c:150 src/screen.c:425
+#: gnome/gcmd.c:281 src/chmod.c:150 src/screen.c:425
 msgid "Name"
 msgstr ""
 
-#: gnome/gcmd.c:245
+#: gnome/gcmd.c:288
 msgid "File Type"
 msgstr ""
 
-#: gnome/gcmd.c:251 src/screen.c:426 src/screen.c:427
+#: gnome/gcmd.c:294 src/screen.c:426 src/screen.c:427
 msgid "Size"
 msgstr ""
 
-#: gnome/gcmd.c:257
+#: gnome/gcmd.c:300
 msgid "Time Last Accessed"
 msgstr ""
 
-#: gnome/gcmd.c:263
+#: gnome/gcmd.c:306
 msgid "Time Last Modified"
 msgstr ""
 
-#: gnome/gcmd.c:269
+#: gnome/gcmd.c:312
 msgid "Time Last Changed"
 msgstr ""
 
-#: gnome/gcmd.c:283
+#: gnome/gcmd.c:326
 msgid "Reverse the order."
 msgstr ""
 
-#: gnome/gcmd.c:345
+#: gnome/gcmd.c:389
 msgid "Enter name."
 msgstr ""
 
-#: gnome/gcmd.c:351
+#: gnome/gcmd.c:395
 msgid "Enter label for command:"
 msgstr ""
 
-#: gnome/gcmd.c:446
+#: gnome/gcmd.c:494
 msgid "Find all core files"
 msgstr ""
 
-#: gnome/gcmd.c:449 src/panelize.c:350
+#: gnome/gcmd.c:497 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr ""
 
-#: gnome/gcmd.c:491
+#: gnome/gcmd.c:541
 msgid "Run Command"
 msgstr ""
 
 #. Frame 1
-#: gnome/gcmd.c:496
+#: gnome/gcmd.c:546
 msgid "Preset Commands"
 msgstr ""
 
-#: gnome/gcmd.c:513
+#: gnome/gcmd.c:563
 msgid "Add"
 msgstr ""
 
-#: gnome/gcmd.c:517
+#: gnome/gcmd.c:567
 msgid "Remove"
 msgstr ""
 
 #. Frame 2
-#: gnome/gcmd.c:525
+#: gnome/gcmd.c:575
 msgid "Run this Command"
 msgstr ""
 
-#: gnome/gcmd.c:532
+#: gnome/gcmd.c:582
 msgid "Command: "
 msgstr ""
 
-#: gnome/gcmd.c:593
+#: gnome/gcmd.c:645
 msgid "Set Filter"
 msgstr ""
 
-#: gnome/gcmd.c:598 gnome/gcmd.c:639 gnome/gcmd.c:644 gnome/gcmd.c:648
-#: gnome/gscreen.c:2604
+#: gnome/gcmd.c:650 gnome/gcmd.c:691 gnome/gcmd.c:696 gnome/gcmd.c:700
+#: gnome/gscreen.c:2517
 msgid "Show all files"
 msgstr ""
 
-#: gnome/gcmd.c:605
+#: gnome/gcmd.c:657
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:621
+#: gnome/gcmd.c:673
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -169,19 +169,19 @@ msgid ""
 "*.gif will show just gif images"
 msgstr ""
 
-#: gnome/gcmd.c:623
+#: gnome/gcmd.c:675
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:680 gnome/gpopup.c:53
+#: gnome/gcmd.c:732 gnome/gpopup.c:53
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gcmd.c:681 gnome/gpopup.c:54
+#: gnome/gcmd.c:733 gnome/gpopup.c:54
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:420 gnome/gdesktop.c:2051
+#: gnome/gdesktop.c:420 gnome/gdesktop.c:2067
 msgid "Warning"
 msgstr ""
 
@@ -198,50 +198,50 @@ msgstr ""
 msgid "While running the eject command"
 msgstr ""
 
-#: gnome/gdesktop.c:1135 gnome/gicon.c:154 gnome/gtools.c:52
+#: gnome/gdesktop.c:1131 gnome/gicon.c:154 gnome/gtools.c:52
 msgid "Error"
 msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2047
+#: gnome/gdesktop.c:2063
 msgid "Home directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2052
+#: gnome/gdesktop.c:2068
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
 
-#: gnome/gdesktop.c:2381 gnome/glayout.c:318
+#: gnome/gdesktop.c:2397 gnome/glayout.c:355
 msgid "_Terminal"
 msgstr ""
 
-#: gnome/gdesktop.c:2381 gnome/glayout.c:318
+#: gnome/gdesktop.c:2397 gnome/glayout.c:355
 msgid "Launch a new terminal in the current directory"
 msgstr ""
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2383 gnome/glayout.c:320
+#: gnome/gdesktop.c:2399 gnome/glayout.c:357
 msgid "_Directory..."
 msgstr ""
 
-#: gnome/gdesktop.c:2383 gnome/glayout.c:320
+#: gnome/gdesktop.c:2399 gnome/glayout.c:357
 msgid "Creates a new directory"
 msgstr ""
 
-#: gnome/gdesktop.c:2391 gnome/glayout.c:411
+#: gnome/gdesktop.c:2407 gnome/glayout.c:440
 msgid "Arrange Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2392
+#: gnome/gdesktop.c:2408
 msgid "Create New Window"
 msgstr ""
 
-#: gnome/gdesktop.c:2394
+#: gnome/gdesktop.c:2410
 msgid "Rescan Mountable Devices"
 msgstr ""
 
-#: gnome/gdesktop.c:2395 gnome/glayout.c:414
+#: gnome/gdesktop.c:2411 gnome/glayout.c:443
 msgid "Rescan Desktop"
 msgstr ""
 
@@ -427,11 +427,59 @@ msgstr ""
 msgid "Default set of icons not found, please check your installation"
 msgstr ""
 
-#: gnome/glayout.c:265
+#: gnome/glayout.c:40
+msgid "_Icon View"
+msgstr ""
+
+#: gnome/glayout.c:41 gnome/glayout.c:57
+msgid "Switch view to an icon display"
+msgstr ""
+
+#: gnome/glayout.c:43
+msgid "_Brief View"
+msgstr ""
+
+#: gnome/glayout.c:44 gnome/glayout.c:60
+msgid "Switch view to show just file name and type"
+msgstr ""
+
+#: gnome/glayout.c:46
+msgid "_Detailed View"
+msgstr ""
+
+#: gnome/glayout.c:47 gnome/glayout.c:63
+msgid "Switch view to show detailed file statistics"
+msgstr ""
+
+#: gnome/glayout.c:49
+msgid "_Custom View"
+msgstr ""
+
+#: gnome/glayout.c:50 gnome/glayout.c:66
+msgid "Switch view to show user-defined statistics"
+msgstr ""
+
+#: gnome/glayout.c:56
+msgid "Icons"
+msgstr ""
+
+#: gnome/glayout.c:59
+msgid "Brief"
+msgstr ""
+
+#: gnome/glayout.c:62
+msgid "Detailed"
+msgstr ""
+
+#: gnome/glayout.c:65
+msgid "Custom"
+msgstr ""
+
+#: gnome/glayout.c:302
 msgid "Enter command to run"
 msgstr ""
 
-#: gnome/glayout.c:278
+#: gnome/glayout.c:315
 msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
 "also terminate the GNOME desktop handler.\n"
@@ -439,7 +487,7 @@ msgid ""
 "Are you sure you want to quit?"
 msgstr ""
 
-#: gnome/glayout.c:290
+#: gnome/glayout.c:327
 msgid ""
 "The file manager and the desktop handler are now terminating\n"
 "\n"
@@ -449,165 +497,149 @@ msgid ""
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
 
-#. GNOMEUIINFO_ITEM_NONE( N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:341
+#. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
+#: gnome/glayout.c:378
 msgid "_Copy..."
 msgstr ""
 
-#: gnome/glayout.c:341
+#: gnome/glayout.c:378
 msgid "Copy files"
 msgstr ""
 
-#: gnome/glayout.c:342
+#: gnome/glayout.c:379
 msgid "_Delete..."
 msgstr ""
 
-#: gnome/glayout.c:342
+#: gnome/glayout.c:379
 msgid "Delete files"
 msgstr ""
 
-#: gnome/glayout.c:343
+#: gnome/glayout.c:380
 msgid "_Move..."
 msgstr ""
 
-#: gnome/glayout.c:343
+#: gnome/glayout.c:380
 msgid "Rename or move files"
 msgstr ""
 
-#: gnome/glayout.c:345
+#: gnome/glayout.c:382
 msgid "Show directory sizes"
 msgstr ""
 
-#: gnome/glayout.c:345
+#: gnome/glayout.c:382
 msgid "Shows the disk space used by each directory"
 msgstr ""
 
-#: gnome/glayout.c:352
+#: gnome/glayout.c:389
 msgid "Select _All"
 msgstr ""
 
-#: gnome/glayout.c:352
+#: gnome/glayout.c:389
 msgid "Select all files in the current Panel"
 msgstr ""
 
-#: gnome/glayout.c:354
+#: gnome/glayout.c:391
 msgid "_Select Files..."
 msgstr ""
 
-#: gnome/glayout.c:354
+#: gnome/glayout.c:391
 msgid "Select a group of files"
 msgstr ""
 
-#: gnome/glayout.c:355
+#: gnome/glayout.c:392
 msgid "_Invert Selection"
 msgstr ""
 
-#: gnome/glayout.c:355
+#: gnome/glayout.c:392
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:357
+#: gnome/glayout.c:394
 msgid "_Rescan Directory"
 msgstr ""
 
-#: gnome/glayout.c:357
+#: gnome/glayout.c:394
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:364
-msgid "Icon View"
-msgstr ""
-
-#: gnome/glayout.c:365
-msgid "Partial View"
-msgstr ""
-
-#: gnome/glayout.c:366
-msgid "Full View"
-msgstr ""
-
-#: gnome/glayout.c:367
-msgid "Custom View"
-msgstr ""
-
-#: gnome/glayout.c:372
+#: gnome/glayout.c:401
 msgid "_Sort By..."
 msgstr ""
 
-#: gnome/glayout.c:372
+#: gnome/glayout.c:401
 msgid "Confirmation settings"
 msgstr ""
 
-#: gnome/glayout.c:373
+#: gnome/glayout.c:402
 msgid "_Filter View..."
 msgstr ""
 
-#: gnome/glayout.c:373
+#: gnome/glayout.c:402
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:380
+#: gnome/glayout.c:409
 msgid "_Find File..."
 msgstr ""
 
-#: gnome/glayout.c:380
+#: gnome/glayout.c:409
 msgid "Locate files on disk"
 msgstr ""
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:383
+#: gnome/glayout.c:412
 msgid "_Run Command..."
 msgstr ""
 
-#: gnome/glayout.c:383
+#: gnome/glayout.c:412
 msgid "Runs a command"
 msgstr ""
 
-#: gnome/glayout.c:385
+#: gnome/glayout.c:414
 msgid "_Run Command in panel..."
 msgstr ""
 
-#: gnome/glayout.c:385
+#: gnome/glayout.c:414
 msgid "Run a command and put the results in a panel"
 msgstr ""
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:424
 msgid "_Background jobs..."
 msgstr ""
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:424
 msgid "List of background operations"
 msgstr ""
 
-#: gnome/glayout.c:398
+#: gnome/glayout.c:427
 msgid "Exit"
 msgstr ""
 
-#: gnome/glayout.c:398
+#: gnome/glayout.c:427
 msgid "Terminates the file manager and the desktop"
 msgstr ""
 
-#: gnome/glayout.c:413
+#: gnome/glayout.c:442
 msgid "Rescan System Devices"
 msgstr ""
 
-#: gnome/glayout.c:421 gnome/glayout.c:431
+#: gnome/glayout.c:450 gnome/glayout.c:460
 msgid "_Layout"
 msgstr ""
 
-#: gnome/glayout.c:422 gnome/glayout.c:432
+#: gnome/glayout.c:451 gnome/glayout.c:461
 msgid "_Commands"
 msgstr ""
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:452
 msgid "_Desktop"
 msgstr ""
 
-#: gnome/glayout.c:424 gnome/glayout.c:433
+#: gnome/glayout.c:453 gnome/glayout.c:462
 msgid "_Help"
 msgstr ""
 
-#: gnome/glayout.c:571
+#: gnome/glayout.c:600
 msgid "File/New/Directory..."
 msgstr ""
 
@@ -845,7 +877,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2391
+#: gnome/gprop.c:521
 msgid "Icon"
 msgstr ""
 
@@ -853,182 +885,154 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:1473
+#: gnome/gscreen.c:1469
 msgid "Rescan Directory"
 msgstr ""
 
-#: gnome/gscreen.c:1473
+#: gnome/gscreen.c:1469
 msgid "Reloads the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:1475
+#: gnome/gscreen.c:1471
 msgid "New folder"
 msgstr ""
 
-#: gnome/gscreen.c:1475
+#: gnome/gscreen.c:1471
 msgid "Creates a new folder here"
 msgstr ""
 
-#: gnome/gscreen.c:1653
+#: gnome/gscreen.c:1649
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1655
+#: gnome/gscreen.c:1651
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1657
+#: gnome/gscreen.c:1653
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1659
+#: gnome/gscreen.c:1655
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1661
+#: gnome/gscreen.c:1657
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1663
+#: gnome/gscreen.c:1659
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1665
+#: gnome/gscreen.c:1661
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1667
+#: gnome/gscreen.c:1663
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1670
+#: gnome/gscreen.c:1666
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1672
+#: gnome/gscreen.c:1668
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1674
+#: gnome/gscreen.c:1670
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1676
+#: gnome/gscreen.c:1672
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1678
+#: gnome/gscreen.c:1674
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1680
+#: gnome/gscreen.c:1676
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1682
+#: gnome/gscreen.c:1678
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1684
+#: gnome/gscreen.c:1680
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1686
+#: gnome/gscreen.c:1682
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1813
+#: gnome/gscreen.c:1809
 #, c-format
 msgid "Search: %s"
 msgstr ""
 
-#: gnome/gscreen.c:1823
+#: gnome/gscreen.c:1819
 #, c-format
 msgid "%s bytes in %d file"
 msgstr ""
 
-#: gnome/gscreen.c:1823
+#: gnome/gscreen.c:1819
 #, c-format
 msgid "%s bytes in %d files"
 msgstr ""
 
-#: gnome/gscreen.c:1849 src/screen.c:677
+#: gnome/gscreen.c:1845 src/screen.c:677
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:1903
+#: gnome/gscreen.c:1899
 msgid "Filter"
 msgstr ""
 
-#: gnome/gscreen.c:2391
-msgid "Switch view to an Icon view"
-msgstr ""
-
-#: gnome/gscreen.c:2393
-msgid "Brief"
-msgstr ""
-
-#: gnome/gscreen.c:2393
-msgid "Switch view to show just file name and type"
-msgstr ""
-
-#: gnome/gscreen.c:2395
-msgid "Detailed"
-msgstr ""
-
-#: gnome/gscreen.c:2395
-msgid "Switch view to show detailed file statistics"
-msgstr ""
-
-#: gnome/gscreen.c:2397
-msgid "Custom"
-msgstr ""
-
-#: gnome/gscreen.c:2397
-msgid "Switch view to show custom determined statistics."
-msgstr ""
-
-#: gnome/gscreen.c:2405
+#: gnome/gscreen.c:2339
 msgid "Back"
 msgstr ""
 
-#: gnome/gscreen.c:2405
+#: gnome/gscreen.c:2339
 msgid "Go to the previously visited directory"
 msgstr ""
 
-#: gnome/gscreen.c:2407
+#: gnome/gscreen.c:2341
 msgid "Up"
 msgstr ""
 
-#: gnome/gscreen.c:2407
+#: gnome/gscreen.c:2341
 msgid "Go up a level in the directory heirarchy"
 msgstr ""
 
-#: gnome/gscreen.c:2409
+#: gnome/gscreen.c:2343
 msgid "Forward"
 msgstr ""
 
-#: gnome/gscreen.c:2409
+#: gnome/gscreen.c:2343
 msgid "Go to the next directory"
 msgstr ""
 
-#: gnome/gscreen.c:2412 src/tree.c:1020
+#: gnome/gscreen.c:2346 src/tree.c:1020
 msgid "Rescan"
 msgstr ""
 
-#: gnome/gscreen.c:2412
+#: gnome/gscreen.c:2346
 msgid "Rescan the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:2415
+#: gnome/gscreen.c:2349
 msgid "Home"
 msgstr ""
 
-#: gnome/gscreen.c:2415
+#: gnome/gscreen.c:2349
 msgid "Go to your home directory"
 msgstr ""
 
-#: gnome/gscreen.c:2549
+#: gnome/gscreen.c:2495
 msgid "Location:"
 msgstr ""
 

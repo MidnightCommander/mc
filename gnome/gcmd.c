@@ -160,49 +160,91 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 
 	layout_panel_gone (panel);
 
+	g_free (panel->view_menu_items);
+	g_free (panel->view_toolbar_items);
+
 	mc_chdir ("/");
+}
+
+static void
+set_view_type (GtkWidget *widget, WPanel *panel, enum list_types type)
+{
+	int i;
+
+	/* This is kind of a hack to see whether we need to do something or not.
+	 * This function (or at least the callback that calls it) can refer to a
+	 * radio menu item or a radio button, so we need to see if it is active.
+	 */
+
+	if (GTK_OBJECT_TYPE (widget) == gtk_radio_menu_item_get_type ()) {
+		if (!GTK_CHECK_MENU_ITEM (widget)->active)
+			return;
+	} else if (GTK_OBJECT_TYPE (widget) == gtk_radio_button_get_type ()) {
+		if (!GTK_TOGGLE_BUTTON (widget)->active)
+			return;
+	} else
+		g_assert_not_reached ();
+
+	/* Worth the effort? */
+
+	if (panel->list_type == type)
+		return;
+
+	/* Set the list type */
+
+	panel->list_type = type;
+	set_panel_formats (panel);
+	paint_panel (panel);
+	do_refresh ();
+
+	/* Synchronize the widgets */
+
+	for (i = 0; ; i++)
+		if (widget == panel->view_menu_items[i]) {
+			gtk_signal_handler_block_by_data (
+				GTK_OBJECT (panel->view_toolbar_items[i]), panel);
+			gtk_toggle_button_set_active (
+				GTK_TOGGLE_BUTTON (panel->view_toolbar_items[i]), TRUE);
+			gtk_signal_handler_unblock_by_data (
+				GTK_OBJECT (panel->view_toolbar_items[i]), panel);
+			return;
+		} else if (widget == panel->view_toolbar_items[i]) {
+			gtk_signal_handler_block_by_data (
+				GTK_OBJECT (panel->view_menu_items[i]), panel);
+			gtk_check_menu_item_set_active (
+				GTK_CHECK_MENU_ITEM (panel->view_menu_items[i]), TRUE);
+			gtk_signal_handler_unblock_by_data (
+				GTK_OBJECT (panel->view_menu_items[i]), panel);
+			return;
+		}
+
+	g_assert_not_reached ();
 }
 
 void
 gnome_icon_view_cmd (GtkWidget *widget, WPanel *panel)
 {
-	if (panel->list_type == list_icons)
-		return;
-	panel->list_type = list_icons;
-	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	set_view_type (widget, panel, list_icons);
 }
+
 void
-gnome_partial_view_cmd (GtkWidget *widget, WPanel *panel)
+gnome_brief_view_cmd (GtkWidget *widget, WPanel *panel)
 {
-	if (panel->list_type == list_brief)
-		return;
-	panel->list_type = list_brief;
-	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	set_view_type (widget, panel, list_brief);
 }
+
 void
-gnome_full_view_cmd (GtkWidget *widget, WPanel *panel)
+gnome_detailed_view_cmd (GtkWidget *widget, WPanel *panel)
 {
-	if (panel->list_type == list_full)
-		return;
-	panel->list_type = list_full;
-	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	set_view_type (widget, panel, list_full);
 }
+
 void
 gnome_custom_view_cmd (GtkWidget *widget, WPanel *panel)
 {
-	if (panel->list_type == list_user)
-		return;
-	panel->list_type = list_user;
-	set_panel_formats (panel);
-	paint_panel (panel);
-	do_refresh ();
+	set_view_type (widget, panel, list_user);
 }
+
 static void
 sort_callback (GtkWidget *menu_item, GtkWidget *cbox1)
 {
@@ -211,6 +253,7 @@ sort_callback (GtkWidget *menu_item, GtkWidget *cbox1)
 	else
 		gtk_widget_set_sensitive (cbox1, FALSE);
 }
+
 void
 gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 {
@@ -324,6 +367,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	gtk_widget_destroy (sort_box);
 }
+
 typedef struct ep_dlg_data {
 	GtkWidget *ep_dlg;
 	GtkWidget *clist;
@@ -365,6 +409,7 @@ get_nickname (gchar *text)
 	gtk_widget_destroy (dlg);
 	return retval;	
 }
+
 static void
 ep_add_callback (GtkWidget *widget, ep_dlg_data *data)
 {
@@ -382,6 +427,7 @@ ep_add_callback (GtkWidget *widget, ep_dlg_data *data)
 	gtk_widget_set_sensitive (data->add_button, FALSE);
 	gtk_entry_set_text (GTK_ENTRY (data->entry), "");
 }
+
 static void
 ep_remove_callback (GtkWidget *widget, ep_dlg_data *data)
 {
@@ -419,6 +465,7 @@ ep_select_callback (GtkWidget *widget,
 		gtk_widget_set_sensitive (data->add_button, FALSE);
 	}
 }
+
 static void
 ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
 {
@@ -432,6 +479,7 @@ ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
 	gtk_widget_set_sensitive (data->remove_button, FALSE);
 	gtk_widget_set_sensitive (data->add_button, TRUE);
 }
+
 static void
 load_settings (GtkCList *clist)
 {
@@ -458,6 +506,7 @@ load_settings (GtkCList *clist)
 		}
 	}
 }
+
 static void
 save_settings (GtkCList *clist)
 {
@@ -474,6 +523,7 @@ save_settings (GtkCList *clist)
 	}
 	sync_profiles ();
 }
+
 void
 gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 {
@@ -553,6 +603,7 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
 	g_free (data);
 }
+
 void
 gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
 {
@@ -566,6 +617,7 @@ gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
 	paint_panel (panel);
 	do_refresh ();
 }
+
 void
 gnome_reverse_selection_cmd_panel (WPanel *panel)
 {

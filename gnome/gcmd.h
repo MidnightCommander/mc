@@ -9,10 +9,12 @@ void gnome_about_cmd              (void);
 void gnome_quit_cmd               (void);
 void gnome_open_panel             (GtkWidget *widget, WPanel *panel);
 void gnome_close_panel            (GtkWidget *widget, WPanel *panel);
+
 void gnome_icon_view_cmd          (GtkWidget *widget, WPanel *panel);
-void gnome_partial_view_cmd       (GtkWidget *widget, WPanel *panel);
-void gnome_full_view_cmd          (GtkWidget *widget, WPanel *panel);
+void gnome_brief_view_cmd         (GtkWidget *widget, WPanel *panel);
+void gnome_detailed_view_cmd      (GtkWidget *widget, WPanel *panel);
 void gnome_custom_view_cmd        (GtkWidget *widget, WPanel *panel);
+
 void gnome_sort_cmd               (GtkWidget *widget, WPanel *panel);
 void gnome_select_all_cmd         (GtkWidget *widget, WPanel *panel);
 void gnome_filter_cmd             (GtkWidget *widget, WPanel *panel);

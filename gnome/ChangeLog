@@ -1,5 +1,22 @@
 1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	Fix bug #261: inconsistent labels in view menu and toolbar,
+	unsynchronized items.
+
+	* glayout.c (panel_view_menu_uiinfo panel_view_toolbar_uiinfo):
+	Made the view names consistent with the toolbar names.  Also,
+	added underscore accelerators to the menu items.
+	(copy_uiinfo_widgets): New function to copy the widgets from an
+	uiinfo array into a widget array.
+	(create_container): Copy the uiinfo widgets to the panel
+	structure.
+
+	* gcmd.c (set_view_type): New function to set the list view type
+	and synchronize the menu and toolbar items.
+	(gnome_close_panel): Free the view menu/toolbar item arrays.
+
+1999-03-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gpopup2.c (perform_mount_unmount): Set the icon's cursor while it is
 	being operated on.
 	(handle_mount): Use perform_mount_unmount().

@@ -44,10 +44,6 @@ int tree_panel_visible = -1;
 #include "dir-close.xpm"
 #include "link.xpm"
 #include "dev.xpm"
-#include "listing-list.xpm"
-#include "listing-iconic.xpm"
-#include "listing-custom.xpm"
-#include "listing-brief-list.xpm"
 
 
 /* This is used to initialize our pixmaps */
@@ -2326,54 +2322,6 @@ panel_up (GtkWidget *button, WPanel *panel)
 }
 
 static void
-do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
-{
-	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
-		return;
-	if (panel->list_type == list_icons)
-		return;
-	panel->list_type = list_icons;
-	set_panel_formats (panel);
-	panel_update_contents (panel);
-}
-
-static void
-do_switch_to_brief_listing (GtkWidget *widget, WPanel *panel)
-{
-	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
-		return;
-	if (panel->list_type == list_brief)
-		return;
-	panel->list_type = list_brief;
-	set_panel_formats (panel);
-	panel_update_contents (panel);
-}
-
-static void
-do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
-{
-	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
-		return;
-	if (panel->list_type == list_full)
-		return;
-	panel->list_type = list_full;
-	set_panel_formats (panel);
-	panel_update_contents (panel);
-}
-
-static void
-do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
-{
-	if (GTK_TOGGLE_BUTTON (widget)->active == FALSE)
-		return;
-	if (panel->list_type == list_user)
-		return;
-	panel->list_type = list_user;
-	set_panel_formats (panel);
-	panel_update_contents (panel);
-}
-
-static void
 rescan_panel (GtkWidget *widget, gpointer data)
 {
 	reread_cmd ();
@@ -2384,20 +2332,6 @@ go_home (GtkWidget *widget, WPanel *panel)
 {
 	do_panel_cd (panel, "~", cd_exact);
 }
-
-/* View mode radio buttons for toolbar */
-
-static GnomeUIInfo viewbar[] = {
-	{ GNOME_APP_UI_ITEM, N_("Icon"), N_("Switch view to an Icon view"), do_switch_to_iconic, NULL, NULL, \
-		GNOME_APP_PIXMAP_DATA, listing_iconic_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Brief"), N_("Switch view to show just file name and type"), do_switch_to_brief_listing, NULL, NULL, \
-		GNOME_APP_PIXMAP_DATA, listing_brief_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Detailed"), N_("Switch view to show detailed file statistics"), do_switch_to_full_listing, NULL, NULL, \
-		GNOME_APP_PIXMAP_DATA, listing_list_xpm, 0, (GdkModifierType) 0, NULL },
-	{ GNOME_APP_UI_ITEM, N_("Custom"), N_("Switch view to show custom determined statistics."), do_switch_to_custom_listing, NULL, NULL, \
-		GNOME_APP_PIXMAP_DATA, listing_custom_xpm, 0, (GdkModifierType) 0, NULL },
-	GNOMEUIINFO_END
-};
 
 /* The toolbar */
 
@@ -2415,9 +2349,10 @@ static GnomeUIInfo toolbar[] = {
 	GNOMEUIINFO_ITEM_STOCK (N_("Home"), N_("Go to your home directory"),
 				go_home, GNOME_STOCK_PIXMAP_HOME),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_RADIOLIST(viewbar),
+	GNOMEUIINFO_RADIOLIST(panel_view_toolbar_uiinfo),
 	GNOMEUIINFO_END
 };
+
 static void
 do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name, 
 		GnomeUIBuilderData *uibdata)
@@ -2427,8 +2362,6 @@ do_ui_signal_connect (GnomeUIInfo *uiinfo, gchar *signal_name,
 				    signal_name, uiinfo->moreinfo, uibdata->data ? 
 				    uibdata->data : uiinfo->user_data);
 }
-
-
 
 static void
 tree_size_allocate (GtkWidget *widget, GtkAllocation *allocation, WPanel *panel)
@@ -2470,7 +2403,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->notebook = gtk_notebook_new ();
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (panel->notebook), FALSE);
 	gtk_widget_show (panel->notebook);
-	
+
 	panel->icons = panel_create_icon_display (panel);
 	gtk_widget_show (panel->icons);
 
@@ -2490,7 +2423,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_widget_show (panel->icons);
 	gtk_widget_show (panel->list);
 	gtk_widget_show (panel->notebook);
-	
+
 	/*
 	 * Pane
 	 */
@@ -2498,7 +2431,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree_scrolled_window);
 	gtk_signal_connect (GTK_OBJECT (panel->tree_scrolled_window), "size_allocate",
 			    GTK_SIGNAL_FUNC (tree_size_allocate), panel);
-	
+
 	/*
 	 * Filter
 	 */
@@ -2511,7 +2444,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 
 	/* We do not want the focus by default  (and the previos add_widget just gave it to us) */
 	h->current = h->current->prev;
-	
+
 	/*
 	 * We go through a lot of pain, wrestling with gnome_app* and gmc's @#$&*#$ internal structure and
 	 * make the #@$*&@#$ toolbars here...
@@ -2531,17 +2464,30 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
 			       GNOME_DOCK_TOP,
 			       2, 0, 0);
-	
+	copy_uiinfo_widgets (panel_view_toolbar_uiinfo, &panel->view_toolbar_items);
+
 	panel->back_b   = toolbar[0].widget;
 	panel->up_b     = toolbar[1].widget;
 	panel->fwd_b    = toolbar[2].widget;
 	panel_update_marks (panel);
+
+	/* Set the list type by poking a toolbar item.  Yes, this is hackish.
+	 * We fall back to icon view if a certain listing type is not supported.
+	 * Be sure to keep this in sync with the uiinfo arrays in glayout.c.
+	 */
+	
 	if (panel->list_type == list_brief)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[1].widget), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[1].widget), TRUE);
 	else if (panel->list_type == list_full)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[2].widget), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[2].widget), TRUE);
 	else if (panel->list_type == list_user)
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (viewbar[3].widget), TRUE);
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[3].widget), TRUE);
+	else
+		gtk_toggle_button_set_active (
+			GTK_TOGGLE_BUTTON (panel_view_toolbar_uiinfo[0].widget), TRUE);
 
 	status_line = gtk_hbox_new (FALSE, 2);
 	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
@@ -2549,65 +2495,32 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
                             gtk_label_new (_("Location:")), FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (status_line),
                             cwd, TRUE, TRUE, 0);
-        
+
 	dock =  gnome_dock_item_new ("gmc-toolbar1",
                                      (GNOME_DOCK_ITEM_BEH_EXCLUSIVE
                                       | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL));
 	gtk_container_add (GTK_CONTAINER(dock), status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
 			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
-	
+
 	gtk_widget_show_all (dock);
 
-#if 0
-	status_line = gtk_toolbar_new (GTK_ORIENTATION_HORIZONTAL, GTK_TOOLBAR_BOTH);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   panel->back_b,
-				   "Go to the previous directory", NULL);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   panel->up_b,
-				   "Go up a level in the directory heirarchy", NULL);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   panel->fwd_b,
-				   "Go to the next directory", NULL);
-	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   button_switch_to_icon (panel),
-				   "Icon view", NULL);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   button_switch_to_brief_listing (panel),
-				   "Brief view", NULL);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   button_switch_to_full_listing (panel),
-				   "Detailed view", NULL);
-	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   button_switch_to_custom_listing (panel),
-				   "Custom view", NULL);
-	gnome_app_add_toolbar (GNOME_APP (panel->xwindow),
-			       GTK_TOOLBAR (status_line),
-			       "gmc-toolbar2",
-			       GNOME_DOCK_ITEM_BEH_EXCLUSIVE,
-			       GNOME_DOCK_TOP,
-			       2, 0, 0);
-	gtk_widget_show_all (status_line);
-#endif
 	panel->view_table = gtk_table_new (1, 1, 0);
 	gtk_widget_show (panel->view_table);
-
 
 	/*
 	 * The status bar.
 	 */
 	ministatus_box = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME(ministatus_box), GTK_SHADOW_IN);
-      
+
 	panel->status = gtk_label_new (_("Show all files"));
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->status), 2, 0);
-      
+
 	gtk_box_pack_start (GTK_BOX (panel->ministatus), ministatus_box, FALSE, FALSE, 0);
 	gtk_container_add (GTK_CONTAINER(ministatus_box), panel->status);
-      
+
 	gtk_widget_show (ministatus_box);
 	gtk_widget_show (panel->status);
 
@@ -2628,10 +2541,6 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 
 	gtk_paned_add2 (GTK_PANED (panel->pane), panel->view_table);
 
-#if 0
-	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
-			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
-#endif
 	/*
 	 * ministatus_box is a container created just to put the
 	 * panel->ministatus inside.

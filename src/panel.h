@@ -151,6 +151,10 @@ typedef struct {
     int maybe_start_drag;
     int click_x, click_y;
 
+    /* View menu and toolbar items */
+    void **view_menu_items;
+    void **view_toolbar_items;
+
     int dragging;
 
     /* Used for scrolling nicely during drags */

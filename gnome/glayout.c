@@ -26,10 +26,47 @@
 #include "setup.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
-
+#include "listing-iconic.xpm"
+#include "listing-brief-list.xpm"
+#include "listing-list.xpm"
+#include "listing-custom.xpm"
 
 
 #define UNDEFINED_INDEX -1
+
+/* Keep these two arrays in sync! */
+
+GnomeUIInfo panel_view_menu_uiinfo[] = {
+	GNOMEUIINFO_RADIOITEM (N_("_Icon View"),
+			       N_("Switch view to an icon display"),
+			       gnome_icon_view_cmd, NULL),
+	GNOMEUIINFO_RADIOITEM (N_("_Brief View"),
+			       N_("Switch view to show just file name and type"),
+			       gnome_brief_view_cmd, NULL),
+	GNOMEUIINFO_RADIOITEM (N_("_Detailed View"),
+			       N_("Switch view to show detailed file statistics"),
+			       gnome_detailed_view_cmd, NULL),
+	GNOMEUIINFO_RADIOITEM (N_("_Custom View"),
+			       N_("Switch view to show user-defined statistics"),
+			       gnome_custom_view_cmd, NULL),
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo panel_view_toolbar_uiinfo[] = {
+	GNOMEUIINFO_RADIOITEM (N_("Icons"),
+			       N_("Switch view to an icon display"),
+			       gnome_icon_view_cmd, listing_iconic_xpm),
+	GNOMEUIINFO_RADIOITEM (N_("Brief"),
+			       N_("Switch view to show just file name and type"),
+			       gnome_brief_view_cmd, listing_brief_list_xpm),
+	GNOMEUIINFO_RADIOITEM (N_("Detailed"),
+			       N_("Switch view to show detailed file statistics"),
+			       gnome_detailed_view_cmd, listing_list_xpm),
+	GNOMEUIINFO_RADIOITEM (N_("Custom"),
+			       N_("Switch view to show user-defined statistics"),
+			       gnome_custom_view_cmd, listing_custom_xpm),
+	GNOMEUIINFO_END
+};
 
 GList *containers = 0;
 
@@ -317,7 +354,7 @@ GtkCheckMenuItem *gnome_toggle_snap (void);
 static GnomeUIInfo gnome_panel_new_menu [] = {
 	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
-	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
+	GNOMEUIINFO_ITEM_NONE(N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd),
 	GNOMEUIINFO_END
 };
 
@@ -336,8 +373,8 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	/*  etc... */
 	GNOMEUIINFO_MENU_NEW_SUBTREE(gnome_panel_new_menu),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_OPEN_ITEM( gnome_open_files, NULL),
-/*	GNOMEUIINFO_ITEM_NONE( N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },*/
+	GNOMEUIINFO_MENU_OPEN_ITEM(gnome_open_files, NULL),
+/*	GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },*/
 	GNOMEUIINFO_ITEM_STOCK(N_("_Copy..."), N_("Copy files"), copy_cmd, GNOME_STOCK_PIXMAP_COPY),
 	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_REMOVE),
         GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move files"), ren_cmd),
@@ -351,28 +388,20 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 GnomeUIInfo gnome_panel_edit_menu [] = {
 	{ GNOME_APP_UI_ITEM,  N_("Select _All"),        N_("Select all files in the current Panel"), gnome_select_all_cmd,
 	  NULL, NULL, 0, NULL, 'a', GDK_CONTROL_MASK  },
-	GNOMEUIINFO_ITEM_NONE( N_("_Select Files..."),  N_("Select a group of files"), select_cmd ),
-	GNOMEUIINFO_ITEM_NONE( N_("_Invert Selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd ),
+	GNOMEUIINFO_ITEM_NONE(N_("_Select Files..."),  N_("Select a group of files"), select_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_Invert Selection"), N_("Reverses the list of tagged files"), reverse_selection_cmd),
 	GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_ITEM_NONE( N_("_Rescan Directory"), N_("Rescan the directory contents"), reread_cmd ),
+        GNOMEUIINFO_ITEM_NONE(N_("_Rescan Directory"), N_("Rescan the directory contents"), reread_cmd),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gnome_configure_box, NULL),
 	GNOMEUIINFO_END
 };
 
-GnomeUIInfo gnome_panel_view_menu [] = {
-	GNOMEUIINFO_RADIOITEM(N_("Icon View"), NULL, gnome_icon_view_cmd,NULL),
-	GNOMEUIINFO_RADIOITEM(N_("Partial View"), NULL, gnome_partial_view_cmd,NULL),
-	GNOMEUIINFO_RADIOITEM(N_("Full View"), NULL, gnome_full_view_cmd,NULL),
-	GNOMEUIINFO_RADIOITEM(N_("Custom View"), NULL, gnome_custom_view_cmd,NULL),
-	GNOMEUIINFO_END
-};
-
 GnomeUIInfo gnome_panel_layout_menu [] = {
-	GNOMEUIINFO_ITEM_NONE( N_("_Sort By..."),     N_("Confirmation settings"), gnome_sort_cmd ),
-	GNOMEUIINFO_ITEM_NONE( N_("_Filter View..."),    N_("Global option settings"), gnome_filter_cmd ),
+	GNOMEUIINFO_ITEM_NONE(N_("_Sort By..."),     N_("Confirmation settings"), gnome_sort_cmd),
+	GNOMEUIINFO_ITEM_NONE(N_("_Filter View..."),    N_("Global option settings"), gnome_filter_cmd),
 	GNOMEUIINFO_SEPARATOR,
-        GNOMEUIINFO_RADIOLIST( gnome_panel_view_menu),
+        GNOMEUIINFO_RADIOLIST(panel_view_menu_uiinfo),
 	GNOMEUIINFO_END
 };
 
@@ -389,10 +418,10 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 #endif
 #ifdef USE_EXT2FSLIB
 	/*does this do anything?*/
-/*	 GNOMEUIINFO_ITEM_NONE(N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd ),*/
+/*	 GNOMEUIINFO_ITEM_NONE(N_("_Undelete files (ext2fs only)..."), N_("Recover deleted files"), undelete_cmd),*/
 #endif
 #ifdef WITH_BACKGROUND
-	GNOMEUIINFO_ITEM_NONE( N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd ),
+	GNOMEUIINFO_ITEM_NONE(N_("_Background jobs..."),   N_("List of background operations"), jobs_cmd),
 #endif
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_STOCK (N_("Exit"), N_("Terminates the file manager and the desktop"),
@@ -403,7 +432,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 
 GnomeUIInfo gnome_panel_about_menu [] = {
 /*	GNOMEUIINFO_HELP ("midnight-commander"), */
-	GNOMEUIINFO_MENU_ABOUT_ITEM( gnome_about_cmd,NULL),
+	GNOMEUIINFO_MENU_ABOUT_ITEM(gnome_about_cmd, NULL),
 	GNOMEUIINFO_END
 };
 
@@ -632,6 +661,37 @@ my_app_create_menus (GnomeApp *app, GnomeUIInfo *uiinfo, void *data)
 	gnome_app_create_menus_custom (app, uiinfo, &uibdata);
 }
 
+/**
+ * copy_uiinfo_widgets:
+ * @uiinfo: A GnomeUIInfo array
+ * @dest: The destination array will be placed here
+ * 
+ * Allocates an array of widgets and copies the widgets from the uiinfo array to
+ * it.  The array will be NULL-terminated.
+ **/
+void
+copy_uiinfo_widgets (GnomeUIInfo *uiinfo, gpointer **dest)
+{
+	int n;
+	int i;
+
+	g_return_if_fail (uiinfo != NULL);
+	g_return_if_fail (dest != NULL);
+
+	/* Count number of items */
+
+	for (n = 0; uiinfo[n].type != GNOME_APP_UI_ENDOFINFO; n++);
+
+	/* Copy the widgets */
+
+	*dest = g_new (gpointer, n + 1);
+
+	for (i = 0; i < n; i++)
+		(*dest)[i] = uiinfo[i].widget;
+
+	(*dest)[i] = NULL;
+}
+
 WPanel *
 create_container (Dlg_head *h, char *name, char *geometry)
 {
@@ -667,8 +727,8 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	else
 		uiinfo = gnome_panel_menu_with_desktop;
 
-
 	my_app_create_menus (GNOME_APP (app), uiinfo, panel);
+	copy_uiinfo_widgets (panel_view_menu_uiinfo, &panel->view_menu_items);
 	
 	create_new_menu (GNOME_APP (app), panel);
 
