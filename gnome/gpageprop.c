@@ -49,7 +49,7 @@ int
 item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 {
 	GtkWidget     *parent_window;
-	GdkCursor     *clock_cursor;
+	GdkCursor     *cursor;
 	GtkWidget     *notebook, *ok, *cancel;
 	GtkWidget     *vbox;
 	GpropFilename *name;
@@ -72,8 +72,9 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	/* Set a clock cursor while we create stuff and read users/groups */
 
 	parent_window = gtk_widget_get_toplevel (parent);
-	clock_cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (parent_window->window, clock_cursor);
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (parent_window->window, cursor);
+	gdk_cursor_destroy (cursor);
 
 	toplevel = GTK_DIALOG (gtk_dialog_new ());
 	notebook = gtk_notebook_new ();
@@ -123,11 +124,15 @@ item_properties (GtkWidget *parent, char *fname, desktop_icon_t *di)
 	gtk_widget_grab_default (ok);
 	gtk_widget_show_all (GTK_WIDGET (toplevel));
 
-	gdk_window_set_cursor (parent_window->window, NULL);
+	/* Restore the arrow cursor and run the dialog */
+
+	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
+	gdk_window_set_cursor (parent_window->window, cursor);
+	gdk_cursor_destroy (cursor);
+
 	gtk_grab_add (GTK_WIDGET (toplevel));
 	gtk_main ();
 	gtk_grab_remove (GTK_WIDGET (toplevel));
-	gdk_cursor_destroy (clock_cursor);
 
 	if (prop_dialog_result != 0) {
 		gtk_widget_destroy (GTK_WIDGET (toplevel));

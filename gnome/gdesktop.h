@@ -28,7 +28,6 @@ typedef struct {
 	icon_t            type;
 	int               x, y;
 	int               grid_x, grid_y;
-	char              *title;
 	char              *pathname;
 } desktop_icon_t;
 
