@@ -73,8 +73,7 @@
 #include "setup.h"
 #include "profile.h"
 
-#define MIDNIGHT
-#include "../vfs/vfs.h"
+#include "vfs/vfs.h"
 #define WANT_WIDGETS
 #include "main.h"		/* global variables, global functions */
 #ifndef MAP_FILE

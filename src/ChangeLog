@@ -1,5 +1,7 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c: No need to define "MIDNIGHT" before including vfs.h.
+
 	* user.h: Remove all dirty tricks with "MIDNIGHT" - they are not
 	needed anymore.
 
