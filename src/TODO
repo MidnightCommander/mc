@@ -6,9 +6,6 @@ necessary - it's slow, especially in UTF-8 locales.
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
-Add minimal UTF-8 support on Red Hat 8.0 to fix the frames or disable
-support for S-Lang library compiled with UTF-8 support.
-
 Don't rely on temporary scripts being executable.  Run shell explicitly.
 
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
