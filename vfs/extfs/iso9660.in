@@ -32,13 +32,13 @@ case "$1" in
   *)     MYCAT="cat";;
 esac
 
-$ISOINFO -l -i "$1" | /usr/bin/awk '
+$ISOINFO -l -i "$1" | @AWK@ '
 BEGIN {
   dir="";
   # Pattern to match 8 first fields.
   rx = "[^ 	]+[ 	]+";
   rx = "^" rx rx rx rx rx rx rx rx;
-  irx = "^\[ *[0-9]* +[0-9]+\]  ";
+  irx = "^\\[ *[0-9]* *[0-9]+\\]  ";
 }
 /^$/ { next }
 /^d---------/ { next }
