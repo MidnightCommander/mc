@@ -1,5 +1,10 @@
 2002-09-13  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Add AM_GNU_GETTEXT_VERSION for autopoint.
+	Remove "potfiles" command.
+	* acinclude.m4: Add empty AM_GNU_GETTEXT_VERSION definition for
+	compatibility with gettext 0.10.x.
+
 	* autogen.sh: Use autopoint for gettext 0.11.5 and above.  Don't
 	allow gettext versions from 0.10.40 to 0.11.5 (not inclusive).
 

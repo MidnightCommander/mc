@@ -667,3 +667,6 @@ AC_DEFUN([AC_EXT2_UNDEL], [
   fi
 ])
 
+dnl The next line is for compatibility with gettext 0.10.x
+AC_DEFUN([AM_GNU_GETTEXT_VERSION], [])
+
