@@ -280,6 +280,7 @@ confbuild_configure() {
 	  cd "${test_workdir}"
 	  cmd="${test_srcdir}/configure"
 	  cmd="${cmd} --prefix=\"${test_prefix}\""
+	  cmd="${cmd} MAKE=\"${mc_make}\""
 	  cmd="${cmd} CPP=\"${mc_cpp}\""
 	  cmd="${cmd} CPPFLAGS=\"${mc_cppflags}\""
 	  cmd="${cmd} CC=\"${mc_cc}\""
