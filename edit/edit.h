@@ -179,7 +179,9 @@ struct context_rule {
     unsigned char first_right;
     char line_start_left;
     char line_start_right;
+#if 0
     int single_char;
+#endif
     int between_delimiters;
     char *whole_word_chars_left;
     char *whole_word_chars_right;

@@ -11,6 +11,10 @@
 	(edit_read_syntax_file): Use PATH_SEP_STR.
 	(edit_load_syntax): Use syntax_g_free to release error_file_name.
 	(edit_read_syntax_rules): Likewise.
+	Eliminate c->single_char. It's only written but never read.
+
+	* edit.h (struct context_rule): Comment out single_char field.
+	It is written once but never read.
 
 2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
 

@@ -691,7 +691,9 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		c->right = (char *) strdup (*a++);
 		c->first_left = *c->left;
 		c->first_right = *c->right;
+#if 0
 		c->single_char = (strlen (c->right) == 1);
+#endif
 	    }
 	    c->keyword = syntax_malloc (MAX_WORDS_PER_CONTEXT * sizeof (struct key_word *));
 #if 0
