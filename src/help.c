@@ -90,7 +90,7 @@ static int inside_link_area = 0;
 static int help_callback (struct Dlg_head *h, int id, int msg);
 
 #ifdef HAS_ACS_AS_PCCHARS
-static struct {
+static const struct {
     int acscode;
     int pccode;
 } acs2pc_table [] = {
@@ -369,7 +369,7 @@ static void show (Dlg_head *h, char *paint_start)
 	    selected_item = NULL;
 	
 	for (p = paint_start; *p != CHAR_NODE_END && line < help_lines; p++){
-	    c = *p;
+	    c = (unsigned char)*p;
 	    switch (c){
 	    case CHAR_LINK_START:
 		if (selected_item == NULL)
