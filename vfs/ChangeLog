@@ -1,9 +1,3 @@
-1999-08-18  Norbert Warmuth  <nwarmuth@privat.circular.de>
-
-	* sfs.c (vfmake): Quote characters with a special meaning to the
-	shell in filenames/-pathes (Fix Bug #1931, VFS will not work if 
-	your full path has the space character in it).
-	
 1999-08-17  Kjartan Maraas  <kmaraas@online.no>
 
 	* fish.c: Fix typo.
