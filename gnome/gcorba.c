@@ -267,7 +267,7 @@ window_servant_from_panel (WPanel *panel, CORBA_Environment *ev)
 /* WindowFactory::create_window method */
 static GNOME_FileManager_Window
 WindowFactory_create_window (PortableServer_Servant servant,
-			     CORBA_char *dir,
+			     const CORBA_char *dir,
 			     CORBA_Environment *ev)
 {
 	WPanel *panel;
@@ -282,7 +282,7 @@ WindowFactory_create_window (PortableServer_Servant servant,
 /* WindowFactory::rescan_directory method */
 static void
 WindowFactory_rescan_directory (PortableServer_Servant servant,
-				CORBA_char *dir,
+				const CORBA_char *dir,
 				CORBA_Environment *ev)
 {
 	PanelContainer *pc;
@@ -339,7 +339,7 @@ window_reference_from_panel (WPanel *panel, CORBA_Environment *ev)
 /* WindowFactory::get_window_by_directory method */
 static GNOME_FileManager_WindowFactory_WindowSeq *
 WindowFactory_get_windows_by_directory (PortableServer_Servant servant,
-					CORBA_char *dir,
+					const CORBA_char *dir,
 					CORBA_Environment *ev)
 {
 	GNOME_FileManager_WindowFactory_WindowSeq *seq;
@@ -379,7 +379,7 @@ WindowFactory_get_windows_by_directory (PortableServer_Servant servant,
 /* WindowFactory GenericFactory::supports method */
 static CORBA_boolean
 WindowFactory_supports (PortableServer_Servant servant,
-			CORBA_char *obj_goad_id,
+			const CORBA_char *obj_goad_id,
 			CORBA_Environment *ev)
 {
 	if (strcmp (obj_goad_id, "IDL:GNOME:FileManager:Window:1.0") == 0
@@ -392,8 +392,8 @@ WindowFactory_supports (PortableServer_Servant servant,
 /* WindowFactory GenericFactory::create_object method */
 static CORBA_Object
 WindowFactory_create_object (PortableServer_Servant servant,
-			     CORBA_char *goad_id,
-			     GNOME_stringlist *params,
+			     const CORBA_char *goad_id,
+			     const GNOME_stringlist *params,
 			     CORBA_Environment *ev)
 {
 	if (strcmp (goad_id, "IDL:GNOME:FileManager:Window:1.0") != 0)

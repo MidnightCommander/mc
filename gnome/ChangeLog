@@ -1,5 +1,7 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* gcorba.c: Add "const" when needed to match FileManager.idl.
+
 	* gtools.c (message): Use g_vsnprintf(). Make the "text"
 	argument constant.
 
