@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6\n"
-"POT-Creation-Date: 2003-01-30 17:22-0500\n"
+"POT-Creation-Date: 2003-02-05 12:58-0500\n"
 "PO-Revision-Date: 2003-01-31 00:11+0200\n"
 "Last-Translator: Miºu Moldovan <dumol@go.ro>\n"
 "Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
@@ -1378,52 +1378,52 @@ msgstr " editare legãturã simbolicã: %s "
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' nu este o legãturã simbolicã"
 
-#: src/cmd.c:1284
+#: src/cmd.c:1287
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " Nu pot schimba directorul la %s "
 
-#: src/cmd.c:1293
+#: src/cmd.c:1296
 msgid " Enter machine name (F1 for details): "
 msgstr " Introduceþi numele serverului (F1 pentru detalii): "
 
-#: src/cmd.c:1298 src/widget.c:1048
+#: src/cmd.c:1301 src/widget.c:1048
 msgid " Link to a remote machine "
 msgstr " Legãturã la un server la distanþã "
 
-#: src/cmd.c:1305 src/widget.c:1049
+#: src/cmd.c:1308 src/widget.c:1049
 msgid " FTP to machine "
 msgstr " FTP cãtre serverul "
 
-#: src/cmd.c:1311
+#: src/cmd.c:1314
 msgid " Shell link to machine "
 msgstr " Conexiune shell la serverul "
 
-#: src/cmd.c:1318 src/widget.c:1050
+#: src/cmd.c:1321 src/widget.c:1050
 msgid " SMB link to machine "
 msgstr " Legãturã SMB cãtre serverul "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1332
 msgid " Socket source routing setup "
 msgstr " Setare a rutãrii sursei socket-ului "
 
-#: src/cmd.c:1330
+#: src/cmd.c:1333
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Introduceþi numele gazdei de folosit ca nod de rutare al sursei: "
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Host name "
 msgstr " Numele gazdei "
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Error while looking up IP address "
 msgstr " Eroare în timpul cãutãrii adresei IP "
 
-#: src/cmd.c:1349
+#: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
 msgstr " Recupereazã fiºiere pe un sistem de fiºiere ext2 "
 
-#: src/cmd.c:1350
+#: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1431,11 +1431,11 @@ msgstr ""
 " Introduceþi perifericul (fãra /dev/) pentru\n"
 "   recuperare: (F1 pentru detalii)"
 
-#: src/cmd.c:1400
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr " Configuraþia salvatã în ~/"
 
-#: src/cmd.c:1402
+#: src/cmd.c:1405
 msgid " Setup "
 msgstr " Configurare "
 
@@ -2888,24 +2888,24 @@ msgstr "Meniu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Variabila de mediu TERM nu este setatã!\n"
 
-#: src/main.c:1877 src/textconf.c:116
+#: src/main.c:1880 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2129
+#: src/main.c:2132
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[opþiuni] [acest_dir] [celãlalt_dir]\n"
 
-#: src/main.c:2133
+#: src/main.c:2136
 msgid "+number"
 msgstr "+numãr"
 
-#: src/main.c:2134
+#: src/main.c:2137
 msgid "Set initial line number for the internal editor"
 msgstr "Numãrul primei linii pentru editorul intern"
 
-#: src/main.c:2136
+#: src/main.c:2139
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2916,7 +2916,7 @@ msgstr ""
 "V')\n"
 "la adresa mc-devel@gnome.org\n"
 
-#: src/main.c:2151
+#: src/main.c:2154
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2956,99 +2956,99 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2226
+#: src/main.c:2229
 msgid "Use to debug the background code"
 msgstr "Utilizat pentru depanarea codului de fundal"
 
-#: src/main.c:2229
+#: src/main.c:2232
 msgid "Request to run in color mode"
 msgstr "Cerere de rulare în culori"
 
-#: src/main.c:2231
+#: src/main.c:2234
 msgid "Specifies a color configuration"
 msgstr "Specificã o configuraþie de culori"
 
-#: src/main.c:2235
+#: src/main.c:2238
 msgid "Edits one file"
 msgstr "Editeazã un fiºier"
 
-#: src/main.c:2239
+#: src/main.c:2242
 msgid "Displays this help message"
 msgstr "Afiºeazã un mesaj de ajutor"
 
-#: src/main.c:2241
+#: src/main.c:2244
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Afiºeazã un ecran de ajutor despre cum se schimbã schema de culori"
 
-#: src/main.c:2244
+#: src/main.c:2247
 msgid "Log ftp dialog to specified file"
 msgstr "Înregistreazã dialogul ftp în fiºierul specificat"
 
-#: src/main.c:2247
+#: src/main.c:2250
 msgid "Set debug level"
 msgstr "Nivelul de depanare"
 
-#: src/main.c:2251
+#: src/main.c:2254
 msgid "Print data directory"
 msgstr "Aratã datele directorului"
 
-#: src/main.c:2253
+#: src/main.c:2256
 msgid "Requests to run in black and white"
 msgstr "Cerere de rulare în alb/negru"
 
-#: src/main.c:2255
+#: src/main.c:2258
 msgid "Disable mouse support in text version"
 msgstr "Dezactiveazã suportul de mouse în versiunea text"
 
-#: src/main.c:2258
+#: src/main.c:2261
 msgid "Disables subshell support"
 msgstr "Dezactiveazã suportul subshell"
 
-#: src/main.c:2260
+#: src/main.c:2263
 msgid "Force subshell execution"
 msgstr "Forþeazã pornirea unui subshell"
 
-#: src/main.c:2263
+#: src/main.c:2266
 msgid "Print last working directory to specified file"
 msgstr "Aratã ultimul directorul curent în fiºierul specificat"
 
-#: src/main.c:2265
+#: src/main.c:2268
 msgid "Resets soft keys on HP terminals"
 msgstr "Reseteazã tastele soft pe terminale HP"
 
-#: src/main.c:2267
+#: src/main.c:2270
 msgid "To run on slow terminals"
 msgstr "Pentru a rula pe terminale încete"
 
-#: src/main.c:2270
+#: src/main.c:2273
 msgid "Use stickchars to draw"
 msgstr "Utilizeazã +, -, | pentru desenare"
 
-#: src/main.c:2274
+#: src/main.c:2277
 msgid "Enables subshell support (default)"
 msgstr "Activeazã suportul pentru subshell (implicit)"
 
-#: src/main.c:2278
+#: src/main.c:2281
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Încearcã sã utilizeze termcap în locul terminfo"
 
-#: src/main.c:2281
+#: src/main.c:2284
 msgid "Displays the current version"
 msgstr "Afiºeazã versiunea curentã"
 
-#: src/main.c:2283
+#: src/main.c:2286
 msgid "Launches the file viewer on a file"
 msgstr "Lanseazã vizualizatorul de fiºiere pe un fiºier"
 
-#: src/main.c:2285
+#: src/main.c:2288
 msgid "Forces xterm features"
 msgstr "Forþeazã facilitãþile xterm"
 
-#: src/main.c:2502
+#: src/main.c:2505
 msgid " Notice "
 msgstr " Notã "
 
-#: src/main.c:2503
+#: src/main.c:2506
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99a\n"
-"POT-Creation-Date: 2003-01-22 02:37-0500\n"
+"POT-Creation-Date: 2003-02-05 12:58-0500\n"
 "PO-Revision-Date: 2001-09-26 16:43GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -55,12 +55,12 @@ msgstr ""
 msgid "Macro recursion is too deep"
 msgstr ""
 
-#: edit/edit.h:264
+#: edit/edit.h:268
 msgid "&Dismiss"
 msgstr "&Keç"
 
-#: edit/edit.h:266 edit/editcmd.c:367 edit/editcmd.c:1162 edit/editcmd.c:1244
-#: edit/editcmd.c:2480 edit/editmenu.c:36 edit/editoptions.c:71
+#: edit/edit.h:270 edit/editcmd.c:367 edit/editcmd.c:1162 edit/editcmd.c:1244
+#: edit/editcmd.c:2480 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:373 src/boxes.c:465
 #: src/boxes.c:588 src/boxes.c:712 src/boxes.c:939 src/boxes.c:1008
 #: src/filegui.c:781 src/find.c:177 src/layout.c:360 src/option.c:145
@@ -119,7 +119,7 @@ msgstr " Fərqli qeyd et "
 #: edit/editcmd.c:460 edit/editcmd.c:747 edit/editcmd.c:775 edit/editcmd.c:934
 #: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:466
 #: src/screen.c:1397 src/screen.c:1976 src/selcodepage.c:106
-#: src/subshell.c:701 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
+#: src/subshell.c:703 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
 #: src/utilunix.c:479 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "Xəbərdarlıq"
@@ -305,7 +305,7 @@ msgstr " Axtarılşan kəlimə tapıla bilmədi "
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d tapılış oldu, %d qeyd əlavə edildi "
 
-#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1421
+#: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
 #: src/view.c:491 src/view.c:2154 src/view.c:2179
 msgid "Quit"
 msgstr "Çıx"
@@ -319,14 +319,14 @@ msgid "Cancel quit"
 msgstr "Çıxışı dayandır"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:629 src/screen.c:1964
-#: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:630 src/screen.c:1964
+#: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Bəli"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:629 src/screen.c:1965
-#: src/subshell.c:702 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
+#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:630 src/screen.c:1965
+#: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Xeyr"
 
@@ -446,11 +446,11 @@ msgstr " Hərfi daxil et"
 msgid " Press any key: "
 msgstr " İstədiyin düyməyə bas :"
 
-#: edit/editmenu.c:52
+#: edit/editmenu.c:53
 msgid " About "
 msgstr " Haqqında "
 
-#: edit/editmenu.c:53
+#: edit/editmenu.c:54
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -468,191 +468,191 @@ msgstr ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 
-#: edit/editmenu.c:274 edit/editmenu.c:292
+#: edit/editmenu.c:275 edit/editmenu.c:293
 msgid "&Open file..."
 msgstr "Fayl &aç..."
 
-#: edit/editmenu.c:275
+#: edit/editmenu.c:276
 msgid "&New              C-n"
 msgstr "&Təzə             C-n"
 
-#: edit/editmenu.c:277 edit/editmenu.c:295
+#: edit/editmenu.c:278 edit/editmenu.c:296
 msgid "&Save              F2"
 msgstr "&Qeyd Et            F2"
 
-#: edit/editmenu.c:278 edit/editmenu.c:296
+#: edit/editmenu.c:279 edit/editmenu.c:297
 msgid "Save &as...       F12"
 msgstr "&Fərqli qeyd et  F12"
 
-#: edit/editmenu.c:280 edit/editmenu.c:298
+#: edit/editmenu.c:281 edit/editmenu.c:299
 msgid "&Insert file...   F15"
 msgstr "Faylı &daxil et .. F15"
 
-#: edit/editmenu.c:281
+#: edit/editmenu.c:282
 msgid "Copy to &file...  C-f"
 msgstr "&Fayla köçürt   C-f"
 
-#: edit/editmenu.c:283 edit/editmenu.c:301
+#: edit/editmenu.c:284 edit/editmenu.c:302
 msgid "&User menu...     F11"
 msgstr "İ&stifadəçi menyusu...   F1"
 
-#: edit/editmenu.c:285 edit/editmenu.c:303
+#: edit/editmenu.c:286 edit/editmenu.c:304
 msgid "A&bout...            "
 msgstr "&Haqqında ..."
 
-#: edit/editmenu.c:287 edit/editmenu.c:305
+#: edit/editmenu.c:288 edit/editmenu.c:306
 msgid "&Quit             F10"
 msgstr "Çı&x             F10"
 
-#: edit/editmenu.c:293
+#: edit/editmenu.c:294
 msgid "&New            C-x k"
 msgstr "&Təzə           C-x k"
 
-#: edit/editmenu.c:299
+#: edit/editmenu.c:300
 msgid "Copy to &file...     "
 msgstr "&Fayla köçürt ...  "
 
-#: edit/editmenu.c:310 edit/editmenu.c:327
+#: edit/editmenu.c:311 edit/editmenu.c:328
 msgid "&Toggle Mark       F3"
 msgstr "&Toggle Mark       F3"
 
-#: edit/editmenu.c:311 edit/editmenu.c:328
+#: edit/editmenu.c:312 edit/editmenu.c:329
 msgid "&Mark Columns    S-F3"
 msgstr "&Mark Columns    S-F3"
 
-#: edit/editmenu.c:313 edit/editmenu.c:330
+#: edit/editmenu.c:314 edit/editmenu.c:331
 msgid "Toggle &ins/overw Ins"
 msgstr "Toggle &ins/overw Ins"
 
-#: edit/editmenu.c:315 edit/editmenu.c:332
+#: edit/editmenu.c:316 edit/editmenu.c:333
 msgid "&Copy              F5"
 msgstr "&Köçürt           F5"
 
-#: edit/editmenu.c:316 edit/editmenu.c:333
+#: edit/editmenu.c:317 edit/editmenu.c:334
 msgid "&Move              F6"
 msgstr "&Daşı              F6"
 
-#: edit/editmenu.c:317 edit/editmenu.c:334
+#: edit/editmenu.c:318 edit/editmenu.c:335
 msgid "&Delete            F8"
 msgstr "&Sil               F8"
 
-#: edit/editmenu.c:319 edit/editmenu.c:336
+#: edit/editmenu.c:320 edit/editmenu.c:337
 msgid "&Undo             C-u"
 msgstr "&Geriyə al        C-u"
 
-#: edit/editmenu.c:321 edit/editmenu.c:338
+#: edit/editmenu.c:322 edit/editmenu.c:339
 msgid "&Beginning     C-PgUp"
 msgstr "&Başa           C-SaYu"
 
-#: edit/editmenu.c:322 edit/editmenu.c:339
+#: edit/editmenu.c:323 edit/editmenu.c:340
 msgid "&End           C-PgDn"
 msgstr "&Axıra           C-SaAş"
 
-#: edit/editmenu.c:344 edit/editmenu.c:351
+#: edit/editmenu.c:345 edit/editmenu.c:352
 msgid "&Search...         F7"
 msgstr "&Axtar ...           F7"
 
-#: edit/editmenu.c:345 edit/editmenu.c:352
+#: edit/editmenu.c:346 edit/editmenu.c:353
 msgid "Search &again     F17"
 msgstr "Təzədən t&ap      F17"
 
-#: edit/editmenu.c:346 edit/editmenu.c:353
+#: edit/editmenu.c:347 edit/editmenu.c:354
 msgid "&Replace...        F4"
 msgstr "&Dəyişdir ....    F4"
 
-#: edit/editmenu.c:358 edit/editmenu.c:381
+#: edit/editmenu.c:359 edit/editmenu.c:382
 msgid "&Go to line...            M-l"
 msgstr "&Sətirə get ...           M-l"
 
-#: edit/editmenu.c:359 edit/editmenu.c:382
+#: edit/editmenu.c:360 edit/editmenu.c:383
 msgid "Go to matching &bracket   M-b"
 msgstr "uyğun galan mötərizəyə get   M-b"
 
-#: edit/editmenu.c:361 edit/editmenu.c:384
+#: edit/editmenu.c:362 edit/editmenu.c:385
 msgid "Insert &literal...       C-q"
 msgstr "Insert &literal...       C-q"
 
-#: edit/editmenu.c:363 edit/editmenu.c:386
+#: edit/editmenu.c:364 edit/editmenu.c:387
 msgid "&Refresh screen          C-l"
 msgstr "&Ekranı təzələ\t\t\tC-1"
 
-#: edit/editmenu.c:365 edit/editmenu.c:388
+#: edit/editmenu.c:366 edit/editmenu.c:389
 msgid "&Start record macro      C-r"
 msgstr "&Makro qeydini başlat\t\tC-r"
 
-#: edit/editmenu.c:366 edit/editmenu.c:389
+#: edit/editmenu.c:367 edit/editmenu.c:390
 msgid "&Finish record macro...  C-r"
 msgstr "&Makro qeydini qurtar...\tC-r"
 
-#: edit/editmenu.c:367
+#: edit/editmenu.c:368
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Makroyu işa sal...\tC-a, Düymə"
 
-#: edit/editmenu.c:368 edit/editmenu.c:391
+#: edit/editmenu.c:369 edit/editmenu.c:392
 msgid "Delete macr&o...            "
 msgstr "makr&oyu sil ...            "
 
-#: edit/editmenu.c:370 edit/editmenu.c:393
+#: edit/editmenu.c:371 edit/editmenu.c:394
 msgid "Insert &date/time           "
 msgstr "t&arix/vaxtı daxil et          "
 
-#: edit/editmenu.c:372 edit/editmenu.c:395
+#: edit/editmenu.c:373 edit/editmenu.c:396
 msgid "Format p&aragraph        M-p"
 msgstr "P&raqrafı şəkilləndir\t\tM-p"
 
-#: edit/editmenu.c:373
+#: edit/editmenu.c:374
 msgid "'ispell' s&pell check    C-p"
 msgstr "'ispell' i&mla yoxlaması\tC-p"
 
-#: edit/editmenu.c:374 edit/editmenu.c:397
+#: edit/editmenu.c:375 edit/editmenu.c:398
 msgid "Sor&t...                 M-t"
 msgstr "sü&z...\t\t\t\tM-t"
 
-#: edit/editmenu.c:375 edit/editmenu.c:398
+#: edit/editmenu.c:376 edit/editmenu.c:399
 msgid "E&xternal Formatter      F19"
 msgstr "X&arici  Şakilləndirici\tF19"
 
-#: edit/editmenu.c:376 edit/editmenu.c:399
+#: edit/editmenu.c:377 edit/editmenu.c:400
 msgid "&Mail...                    "
 msgstr "&Məktubla göndər...               "
 
-#: edit/editmenu.c:390
+#: edit/editmenu.c:391
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Makroyu işə sal...\tC-x-e, Düymə"
 
-#: edit/editmenu.c:396
+#: edit/editmenu.c:397
 msgid "'ispell' s&pell check    M-$"
 msgstr "'ispell' i&mla yoxlaması\tM-$"
 
-#: edit/editmenu.c:404 edit/editmenu.c:413
+#: edit/editmenu.c:405 edit/editmenu.c:414
 msgid "&General...  "
 msgstr "&Ümumi ..."
 
-#: edit/editmenu.c:405 edit/editmenu.c:414
+#: edit/editmenu.c:406 edit/editmenu.c:415
 msgid "&Save mode..."
 msgstr "Qe&yd etmə modu ..."
 
-#: edit/editmenu.c:407 edit/editmenu.c:416 src/main.c:1078
-msgid "&Layout..."
-msgstr "&Düzülüş ..."
+#: edit/editmenu.c:408 edit/editmenu.c:417 src/main.c:1083
+msgid "learn &Keys..."
+msgstr "Düy&mələri öyrən ..."
 
-#: edit/editmenu.c:426 edit/editmenu.c:440 src/chmod.c:149 src/chown.c:121
+#: edit/editmenu.c:427 edit/editmenu.c:441 src/chmod.c:149 src/chown.c:121
 msgid " File "
 msgstr " Fayl "
 
-#: edit/editmenu.c:428 edit/editmenu.c:442
+#: edit/editmenu.c:429 edit/editmenu.c:443
 msgid " Edit "
 msgstr " Düzəlt "
 
-#: edit/editmenu.c:430 edit/editmenu.c:444
+#: edit/editmenu.c:431 edit/editmenu.c:445
 msgid " Sear/Repl "
 msgstr " Axt/Dəy "
 
-#: edit/editmenu.c:432 edit/editmenu.c:446
+#: edit/editmenu.c:433 edit/editmenu.c:447
 msgid " Command "
 msgstr " Əmr "
 
-#: edit/editmenu.c:434 edit/editmenu.c:448
+#: edit/editmenu.c:435 edit/editmenu.c:449
 msgid " Options "
 msgstr " Seçənəklər "
 
@@ -725,7 +725,7 @@ msgstr "Düymə emulyasiyası"
 msgid " Editor options "
 msgstr " Düzəldici seçənəkləri"
 
-#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1418
+#: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1419
 #: src/screen.c:2191 src/tree.c:1029 src/view.c:2152
 msgid "Help"
 msgstr "Kömək"
@@ -750,7 +750,7 @@ msgstr "Daşı"
 msgid "Delete"
 msgstr "Sil"
 
-#: edit/editwidget.c:291 src/main.c:1420
+#: edit/editwidget.c:291 src/main.c:1421
 msgid "PullDn"
 msgstr "Aç"
 
@@ -1206,7 +1206,7 @@ msgstr " %s in yerli üzünü çıxarda bilmədim"
 msgid "Files tagged, want to cd?"
 msgstr " Fayllar nişan alındı, cd istəyirsən mi?"
 
-#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:851 src/screen.c:1937
+#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:852 src/screen.c:1937
 msgid "Cannot change directory"
 msgstr "Qovluq dəyişdirilə bilmir"
 
@@ -1341,96 +1341,96 @@ msgstr ""
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Midnight Commanderə qayıtmaq üçün `exit' yazın"
 
-#: src/cmd.c:1059
+#: src/cmd.c:1060
 #, fuzzy, c-format
 msgid "Link %s to:"
 msgstr " bağ: %s "
 
-#: src/cmd.c:1060
+#: src/cmd.c:1061
 msgid " Link "
 msgstr " Bağla "
 
-#: src/cmd.c:1070
+#: src/cmd.c:1071
 #, c-format
 msgid " link: %s "
 msgstr " bağ: %s "
 
-#: src/cmd.c:1098
+#: src/cmd.c:1099
 #, c-format
 msgid " symlink: %s "
 msgstr " yumşaq bağ: %s "
 
-#: src/cmd.c:1132
+#: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " `%s'  Yumşaq bağı buranı göstərir: "
 
-#: src/cmd.c:1137
+#: src/cmd.c:1138
 msgid " Edit symlink "
 msgstr " Yumşaq bağı düzəlt "
 
-#: src/cmd.c:1142
+#: src/cmd.c:1143
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " yumşaq bağı düzalt, %s silinə bilmir: %s "
 
-#: src/cmd.c:1146
+#: src/cmd.c:1147
 #, c-format
 msgid " edit symlink: %s "
 msgstr " yumşaq bağı düzəlt: %s "
 
-#: src/cmd.c:1157
+#: src/cmd.c:1158
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "'%s' simvolik körpü deyildir"
 
-#: src/cmd.c:1283
+#: src/cmd.c:1287
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " %s ə keçə bilmədim "
 
-#: src/cmd.c:1292
+#: src/cmd.c:1296
 msgid " Enter machine name (F1 for details): "
 msgstr " Bilisayar adını ver (ətraflı mə'lumat üçün F1ə bas) : "
 
-#: src/cmd.c:1297 src/widget.c:1048
+#: src/cmd.c:1301 src/widget.c:1048
 msgid " Link to a remote machine "
 msgstr " Uzaq bilgisayara bağla "
 
-#: src/cmd.c:1304 src/widget.c:1049
+#: src/cmd.c:1308 src/widget.c:1049
 msgid " FTP to machine "
 msgstr " Bilgisayara FTPyə keç"
 
-#: src/cmd.c:1310
+#: src/cmd.c:1314
 #, fuzzy
 msgid " Shell link to machine "
 msgstr " Bilgisayara SMB bağı yarat "
 
-#: src/cmd.c:1317 src/widget.c:1050
+#: src/cmd.c:1321 src/widget.c:1050
 msgid " SMB link to machine "
 msgstr " Bilgisayara SMB bağı yarat "
 
-#: src/cmd.c:1328
+#: src/cmd.c:1332
 msgid " Socket source routing setup "
 msgstr "Socket source routing setup "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1333
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Enter host name to use as a source routing hop: "
 
-#: src/cmd.c:1337
+#: src/cmd.c:1341
 msgid " Host name "
 msgstr " Ev sahibi adı "
 
-#: src/cmd.c:1337
+#: src/cmd.c:1341
 msgid " Error while looking up IP address "
 msgstr "IP ünvanı axtarılarkən xəta oldu "
 
-#: src/cmd.c:1348
+#: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
 msgstr "ext2 fayl sistemi üstündəki fayllar silinsin "
 
-#: src/cmd.c:1349
+#: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1438,11 +1438,11 @@ msgstr ""
 " Qurtarılacaq mə'lumatların olduğu avandalığı (/dev/ siz) girin\n"
 "   üstündəki fayllar: (ətraflı mə'lumat üçün F1i basın)"
 
-#: src/cmd.c:1399
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr " Quruluş qeyd edildi ~/"
 
-#: src/cmd.c:1401
+#: src/cmd.c:1405
 msgid " Setup "
 msgstr " Quruluş "
 
@@ -2175,7 +2175,7 @@ msgstr "Fayl adı:"
 msgid "Content: "
 msgstr "Mövtəviyyat:"
 
-#: src/find.c:177 src/main.c:958 src/main.c:985
+#: src/find.c:177 src/main.c:959 src/main.c:986
 msgid "&Tree"
 msgstr "&Ağac"
 
@@ -2603,282 +2603,282 @@ msgstr ""
 msgid "Press any key to continue..."
 msgstr "Davam etmək üçün istədiyiniz bir düyməyə basın..."
 
-#: src/main.c:588
+#: src/main.c:589
 msgid " The shell is already running a command "
 msgstr " Shell artıq əmri işə salıb "
 
-#: src/main.c:627 src/screen.c:1963
+#: src/main.c:628 src/screen.c:1963
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
-#: src/main.c:628
+#: src/main.c:629
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Həqiqətən də Midnight Commander'dən çıxmaq istəyirsiniz ? "
 
-#: src/main.c:947
+#: src/main.c:948
 msgid " Listing format edit "
 msgstr "Şəkilləndirmə düzəldicisinin Sıralaması "
 
-#: src/main.c:947
+#: src/main.c:948
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Yeni mod \"%s\" "
 
-#: src/main.c:955 src/main.c:982
+#: src/main.c:956 src/main.c:983
 msgid "&Listing mode..."
 msgstr "Sıra&lama modu ..."
 
-#: src/main.c:956 src/main.c:983
+#: src/main.c:957 src/main.c:984
 msgid "&Quick view     C-x q"
 msgstr "Sür'&ətli nümayiş C-x q"
 
-#: src/main.c:957 src/main.c:984
+#: src/main.c:958 src/main.c:985
 msgid "&Info           C-x i"
 msgstr "Mə'&lumat\t\tC-x i"
 
-#: src/main.c:960 src/main.c:987
+#: src/main.c:961 src/main.c:988
 msgid "&Sort order..."
 msgstr "&Sıralama əmri..."
 
-#: src/main.c:962 src/main.c:989
+#: src/main.c:963 src/main.c:990
 msgid "&Filter..."
 msgstr "&Süzgəc ..."
 
-#: src/main.c:966 src/main.c:993
+#: src/main.c:967 src/main.c:994
 msgid "&Network link..."
 msgstr "Ş&əbəkə bağı ..."
 
-#: src/main.c:968 src/main.c:995
+#: src/main.c:969 src/main.c:996
 msgid "FT&P link..."
 msgstr "FT&P bağı ..."
 
-#: src/main.c:969 src/main.c:996
+#: src/main.c:970 src/main.c:997
 #, fuzzy
 msgid "S&hell link..."
 msgstr "SM&B bağı..."
 
-#: src/main.c:971 src/main.c:998
+#: src/main.c:972 src/main.c:999
 msgid "SM&B link..."
 msgstr "SM&B bağı..."
 
-#: src/main.c:976 src/main.c:1003
+#: src/main.c:977 src/main.c:1004
 msgid "&Drive...       M-d"
 msgstr "Sürü&cü ..      M-d"
 
-#: src/main.c:978 src/main.c:1005
+#: src/main.c:979 src/main.c:1006
 msgid "&Rescan         C-r"
 msgstr "Təzədən da&ra   C-r"
 
-#: src/main.c:1009
+#: src/main.c:1010
 msgid "&User menu          F2"
 msgstr "İ&stifadəçi menyusu\t\tF2"
 
-#: src/main.c:1010
+#: src/main.c:1011
 msgid "&View               F3"
 msgstr "&Göstər             F3"
 
-#: src/main.c:1011
+#: src/main.c:1012
 msgid "Vie&w file...         "
 msgstr "Fayla ba&x ..."
 
-#: src/main.c:1012
+#: src/main.c:1013
 msgid "&Filtered view     M-!"
 msgstr "&Süzgəcli görünüş     M-!"
 
-#: src/main.c:1013
+#: src/main.c:1014
 msgid "&Edit               F4"
 msgstr "D&əyişdir           F4"
 
-#: src/main.c:1014
+#: src/main.c:1015
 msgid "&Copy               F5"
 msgstr "&Köçürt            F5"
 
-#: src/main.c:1015
+#: src/main.c:1016
 msgid "c&Hmod           C-x c"
 msgstr "y&ömlr           C-x x"
 
-#: src/main.c:1017
+#: src/main.c:1018
 msgid "&Link            C-x l"
 msgstr "Bağ&la           C-x l"
 
-#: src/main.c:1018
+#: src/main.c:1019
 msgid "&SymLink         C-x s"
 msgstr "Yumşaq&Bağ     C-x s"
 
-#: src/main.c:1019
+#: src/main.c:1020
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "&YBağı düzəlt C-x C-s"
 
-#: src/main.c:1020
+#: src/main.c:1021
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
-#: src/main.c:1021
+#: src/main.c:1022
 msgid "&Advanced chown       "
 msgstr "Ə&traflı chown\t\t"
 
-#: src/main.c:1023
+#: src/main.c:1024
 msgid "&Rename/Move        F6"
 msgstr "Təzədən adlandır/&Daşı     F6"
 
-#: src/main.c:1024
+#: src/main.c:1025
 msgid "&Mkdir              F7"
 msgstr "&Mkdir\t\t\tF7"
 
-#: src/main.c:1025
+#: src/main.c:1026
 msgid "&Delete             F8"
 msgstr "&Sil                F8"
 
-#: src/main.c:1026
+#: src/main.c:1027
 msgid "&Quick cd          M-c"
 msgstr "&Sür'ətli qovluğa keç   M-c"
 
-#: src/main.c:1028
+#: src/main.c:1029
 msgid "select &Group      M-+"
 msgstr "&Qrup seç          M-+"
 
-#: src/main.c:1029
+#: src/main.c:1030
 msgid "u&Nselect group    M-\\"
 msgstr "Qrup&u seçmə      M-\\"
 
-#: src/main.c:1030
+#: src/main.c:1031
 msgid "reverse selec&Tion M-*"
 msgstr "Qrupu tə&rsçevir     M-*"
 
-#: src/main.c:1032
+#: src/main.c:1033
 msgid "e&Xit              F10"
 msgstr "Çı&x                F10"
 
-#: src/main.c:1040
+#: src/main.c:1041
 msgid "&Directory tree"
 msgstr "&Qovluqlar ağaçı"
 
-#: src/main.c:1041
+#: src/main.c:1042
 msgid "&Find file            M-?"
 msgstr "Fayl t&ap             M-?"
 
-#: src/main.c:1042
+#: src/main.c:1043
 msgid "s&Wap panels          C-u"
 msgstr "Panelləri &dəyişdir    C-u"
 
-#: src/main.c:1043
+#: src/main.c:1044
 msgid "switch &Panels on/off C-o"
 msgstr "&Panelləri bağla/aç    C-o"
 
-#: src/main.c:1044
+#: src/main.c:1045
 msgid "&Compare directories  C-x d"
 msgstr "Qovluqları &müqayisə et C-x d"
 
-#: src/main.c:1045
+#: src/main.c:1046
 msgid "e&Xternal panelize    C-x !"
 msgstr "X&ricdən panelle    C-x !"
 
-#: src/main.c:1046
+#: src/main.c:1047
 msgid "show directory s&Izes"
 msgstr "qov&luqların böyüklüyünü göstər"
 
-#: src/main.c:1048
+#: src/main.c:1049
 msgid "command &History"
 msgstr "əmr &Keçmişi"
 
-#: src/main.c:1049
+#: src/main.c:1050
 msgid "di&Rectory hotlist    C-\\"
 msgstr "qov&luqlar keçmişi      C-\\"
 
-#: src/main.c:1051
+#: src/main.c:1052
 msgid "&Active VFS list      C-x a"
 msgstr "&Fəal VFS siyahısi   C-x a"
 
-#: src/main.c:1052
+#: src/main.c:1053
 msgid "Fr&ee VFSs now"
 msgstr "VFS'i indi &boşalt"
 
-#: src/main.c:1055
+#: src/main.c:1056
 msgid "&Background jobs      C-x j"
 msgstr "&Arxaplan əməliyyatları     C-x j"
 
-#: src/main.c:1059
+#: src/main.c:1060
 msgid "&Undelete files (ext2fs only)"
 msgstr "Faylları q&urtar (sadəcə olaraq ext2fs'də)"
 
-#: src/main.c:1062
+#: src/main.c:1063
 msgid "&Listing format edit"
 msgstr "Şəkilləndirmə düzəldicisinin &Sıralaması "
 
-#: src/main.c:1067
+#: src/main.c:1068
 msgid "Edit &extension file"
 msgstr "Fayl suf&fikslərini dəyişdir"
 
-#: src/main.c:1068
+#: src/main.c:1069
 msgid "Edit &menu file"
 msgstr "&Menyunu dəyişdir"
 
-#: src/main.c:1070
+#: src/main.c:1071
 msgid "Edit edi&tor menu file"
 msgstr "Menyu edi&toru"
 
-#: src/main.c:1071
+#: src/main.c:1072
 #, fuzzy
 msgid "Edit &syntax file"
 msgstr "&Menyunu dəyişdir"
 
-#: src/main.c:1077
+#: src/main.c:1078
 msgid "&Configuration..."
 msgstr "&Qurğular..."
 
 #: src/main.c:1079
+msgid "&Layout..."
+msgstr "&Düzülüş ..."
+
+#: src/main.c:1080
 msgid "c&Onfirmation..."
 msgstr "&Qəbul etmə..."
 
-#: src/main.c:1080
+#: src/main.c:1081
 msgid "&Display bits..."
 msgstr "Bitləri &göstər ..."
 
-#: src/main.c:1082
-msgid "learn &Keys..."
-msgstr "Düy&mələri öyrən ..."
-
-#: src/main.c:1085
+#: src/main.c:1086
 msgid "&Virtual FS..."
 msgstr "&Virtual DYS (VFS) ..."
 
-#: src/main.c:1088
+#: src/main.c:1089
 msgid "&Save setup"
 msgstr "Qurğuları &Qeyd et"
 
-#: src/main.c:1099
+#: src/main.c:1100
 msgid " &Above "
 msgstr " &Üst "
 
-#: src/main.c:1099
+#: src/main.c:1100
 msgid " &Left "
 msgstr " &Sol "
 
-#: src/main.c:1103
+#: src/main.c:1104
 msgid " &File "
 msgstr " &Fayl "
 
-#: src/main.c:1106
+#: src/main.c:1107
 msgid " &Command "
 msgstr " &Əmr "
 
-#: src/main.c:1109
+#: src/main.c:1110
 msgid " &Options "
 msgstr " &Seçənəklər "
 
-#: src/main.c:1112
+#: src/main.c:1113
 msgid " &Below "
 msgstr " &Alt"
 
-#: src/main.c:1112
+#: src/main.c:1113
 msgid " &Right "
 msgstr " &Sağ "
 
-#: src/main.c:1155
+#: src/main.c:1156
 msgid " Information "
 msgstr " Mə'lumat       "
 
-#: src/main.c:1157
+#: src/main.c:1158
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2889,32 +2889,32 @@ msgstr ""
 " nəticə verməyə bilər. Bu halda siz öz əlinizlə qovluğu təzədən \n"
 " yükləməlisiniz. Ətraflı mə'lumat üçün MAN səhifəsinə baxın.\t"
 
-#: src/main.c:1419 src/screen.c:2192
+#: src/main.c:1420 src/screen.c:2192
 msgid "Menu"
 msgstr "Menyu"
 
-#: src/main.c:1559
+#: src/main.c:1560
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM dəyişəni bildirilməyib!\n"
 
-#: src/main.c:1876 src/textconf.c:116
+#: src/main.c:1880 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2128
+#: src/main.c:2132
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[flags] [this_dir] [other_panel_dir]\n"
 
-#: src/main.c:2132
+#: src/main.c:2136
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2133
+#: src/main.c:2137
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2135
+#: src/main.c:2139
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2924,7 +2924,7 @@ msgstr ""
 "Lütfən xəta raportlarını (`mc -V'nin çıxışları daxil olmaq üzərə)\n"
 "mc-devel@gnome.org ünvanına göndərin\n"
 
-#: src/main.c:2150
+#: src/main.c:2154
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2964,103 +2964,103 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2225
+#: src/main.c:2229
 msgid "Use to debug the background code"
 msgstr "Arxaplan kodunu həll etmək üçün istifadə et"
 
-#: src/main.c:2228
+#: src/main.c:2232
 msgid "Request to run in color mode"
 msgstr "Rəngli modda başlat"
 
-#: src/main.c:2230
+#: src/main.c:2234
 msgid "Specifies a color configuration"
 msgstr "Rəng qurğularını bildir"
 
-#: src/main.c:2234
+#: src/main.c:2238
 msgid "Edits one file"
 msgstr "Faylı düzəldər"
 
-#: src/main.c:2238
+#: src/main.c:2242
 msgid "Displays this help message"
 msgstr "Bu kömək ismarıcını göstərər"
 
-#: src/main.c:2240
+#: src/main.c:2244
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 "Rəng sxemini necə dəyişdirəcəyinizi bildiran kömak ekranı ortaya çıxardar"
 
-#: src/main.c:2243
+#: src/main.c:2247
 msgid "Log ftp dialog to specified file"
 msgstr "Ftp dialoqlarını bildirilən fayla qeyd edər"
 
-#: src/main.c:2246
+#: src/main.c:2250
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2250
+#: src/main.c:2254
 #, fuzzy
 msgid "Print data directory"
 msgstr "qovluq"
 
-#: src/main.c:2252
+#: src/main.c:2256
 msgid "Requests to run in black and white"
 msgstr "Ağ və qara başlat"
 
-#: src/main.c:2254
+#: src/main.c:2258
 msgid "Disable mouse support in text version"
 msgstr "Mətn modunda siçan dəstəyini passivləşdir"
 
-#: src/main.c:2257
+#: src/main.c:2261
 msgid "Disables subshell support"
 msgstr "Subchell dətəyini passivləşdir"
 
-#: src/main.c:2259
+#: src/main.c:2263
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "işə salarkən istifadəçi IDsini daxil et"
 
-#: src/main.c:2262
+#: src/main.c:2266
 #, fuzzy
 msgid "Print last working directory to specified file"
 msgstr "Proqram çıxışında iş gedən qovluğu bildirər"
 
-#: src/main.c:2264
+#: src/main.c:2268
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminallarda proqram düymələrini sıfırlayar"
 
-#: src/main.c:2266
+#: src/main.c:2270
 msgid "To run on slow terminals"
 msgstr "Yavaş terminallarda işləmək üçün"
 
-#: src/main.c:2269
+#: src/main.c:2273
 msgid "Use stickchars to draw"
 msgstr "Use stickchars to draw"
 
-#: src/main.c:2273
+#: src/main.c:2277
 msgid "Enables subshell support (default)"
 msgstr "Subshell dəstəyini fəallaşdırar (əsas)"
 
-#: src/main.c:2277
+#: src/main.c:2281
 msgid "Tries to use termcap instead of terminfo"
 msgstr "terminfo əvəzinə termcap istifadə etməyə cəhd edər"
 
-#: src/main.c:2280
+#: src/main.c:2284
 msgid "Displays the current version"
 msgstr "Hazırkı buraxılışı göstərər"
 
-#: src/main.c:2282
+#: src/main.c:2286
 msgid "Launches the file viewer on a file"
 msgstr "Faylda göstərici proqramı başladar"
 
-#: src/main.c:2284
+#: src/main.c:2288
 msgid "Forces xterm features"
 msgstr "Xterm qabiliyyətlərini zorlayar"
 
-#: src/main.c:2501
+#: src/main.c:2505
 msgid " Notice "
 msgstr " Bildir "
 
-#: src/main.c:2502
+#: src/main.c:2506
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3383,11 +3383,11 @@ msgstr ""
 msgid "Cannot open named pipe %s\n"
 msgstr "%s deyə adlandırılmış borunu aça bilmirəm\n"
 
-#: src/subshell.c:701
+#: src/subshell.c:703
 msgid " The shell is still active. Quit anyway? "
 msgstr " Shell hələ də fəaldır. Çıxım mı? "
 
-#: src/subshell.c:840
+#: src/subshell.c:842
 #, c-format
 msgid "Warning: Cannot change to %s.\n"
 msgstr "Xəbərdarlıq : %s'ye keçə bilmədim .\n"
@@ -3566,11 +3566,11 @@ msgstr " %s'də işlədiləbiləcək girişlər tapıla bilmədi "
 msgid " User menu "
 msgstr " İstifadəçi menyusu "
 
-#: src/util.c:665 src/util.c:691
+#: src/util.c:670 src/util.c:696
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:666 src/util.c:689
+#: src/util.c:671 src/util.c:694
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 

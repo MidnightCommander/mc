@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2003-02-04 09:31-0500\n"
+"POT-Creation-Date: 2003-02-05 12:58-0500\n"
 "PO-Revision-Date: 2003-02-04 02:57+0100\n"
 "Last-Translator: Adam Byrtek <alpha@debian.org>\n"
 "Language-Team: Polish\n"
@@ -1384,53 +1384,53 @@ msgstr " modyfikacja dowi±zania symbolicznego: %s"
 msgid "`%s' is not a symbolic link"
 msgstr "\"%s\" nie jest dowi±zaniem symbolicznym"
 
-#: src/cmd.c:1284
+#: src/cmd.c:1287
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " Nie mo¿na zmieniæ katalogu na %s "
 
-#: src/cmd.c:1293
+#: src/cmd.c:1296
 msgid " Enter machine name (F1 for details): "
 msgstr " Wprowad¼ nazwê maszyny (F1 - szczegó³y): "
 
-#: src/cmd.c:1298 src/widget.c:1048
+#: src/cmd.c:1301 src/widget.c:1048
 msgid " Link to a remote machine "
 msgstr " Po³±czenie ze zdaln± maszyn± "
 
-#: src/cmd.c:1305 src/widget.c:1049
+#: src/cmd.c:1308 src/widget.c:1049
 msgid " FTP to machine "
 msgstr " Po³±czenie FTP z maszyn± "
 
-#: src/cmd.c:1311
+#: src/cmd.c:1314
 msgid " Shell link to machine "
 msgstr " Po³±czenie po pow³oce z maszyn± "
 
-#: src/cmd.c:1318 src/widget.c:1050
+#: src/cmd.c:1321 src/widget.c:1050
 msgid " SMB link to machine "
 msgstr " Po³±czenie SMB z maszyn± "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1332
 msgid " Socket source routing setup "
 msgstr " Ustawienia trasowania przez ¼ród³o "
 
-#: src/cmd.c:1330
+#: src/cmd.c:1333
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 " Wprowad¼ nazwê komputera wykorzystywanego przy trasowaniu przez ¼ród³o: "
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Host name "
 msgstr " Nazwa hosta "
 
-#: src/cmd.c:1338
+#: src/cmd.c:1341
 msgid " Error while looking up IP address "
 msgstr " B³±d podczas wyszukiwania adresu IP "
 
-#: src/cmd.c:1349
+#: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
 msgstr " Odtwórz pliki na systemie plików ext2 "
 
-#: src/cmd.c:1350
+#: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1438,11 +1438,11 @@ msgstr ""
 " Wprowad¼ nazwê urz±dzenia (bez /dev/), na którym\n"
 " s± pliki do odzyskania (F1 - szczegó³y):"
 
-#: src/cmd.c:1400
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr " Zapisano ustawienia do ~/"
 
-#: src/cmd.c:1402
+#: src/cmd.c:1405
 msgid " Setup "
 msgstr " Ustawienia "
 
@@ -2893,24 +2893,24 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "Brak zmiennej ¶rodowiskowej TERM!\n"
 
-#: src/main.c:1877 src/textconf.c:116
+#: src/main.c:1880 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2129
+#: src/main.c:2132
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[znaczniki] [ten_katalog] [katalog_w_drugim_panelu]\n"
 
-#: src/main.c:2133
+#: src/main.c:2136
 msgid "+number"
 msgstr "+numer"
 
-#: src/main.c:2134
+#: src/main.c:2137
 msgid "Set initial line number for the internal editor"
 msgstr "Pocz±tkowy numer wiersza dla wbudowanego edytora"
 
-#: src/main.c:2136
+#: src/main.c:2139
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2920,7 +2920,7 @@ msgstr ""
 "Wszelkie komunikaty o b³êdach (wraz z wyj¶ciem \"mc -V\")\n"
 "wysy³aj na adres mc-devel@gnome.org\n"
 
-#: src/main.c:2151
+#: src/main.c:2154
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2961,99 +2961,99 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#: src/main.c:2226
+#: src/main.c:2229
 msgid "Use to debug the background code"
 msgstr "U¿ywane do ¶ledzenia kodu pracuj±cego w tle"
 
-#: src/main.c:2229
+#: src/main.c:2232
 msgid "Request to run in color mode"
 msgstr "Powoduje uruchomienie w trybie kolorowym"
 
-#: src/main.c:2231
+#: src/main.c:2234
 msgid "Specifies a color configuration"
 msgstr "Okre¶la konfiguracjê kolorów"
 
-#: src/main.c:2235
+#: src/main.c:2238
 msgid "Edits one file"
 msgstr "Modyfikuje plik"
 
-#: src/main.c:2239
+#: src/main.c:2242
 msgid "Displays this help message"
 msgstr "Wypisuje ten komunikat pomocy"
 
-#: src/main.c:2241
+#: src/main.c:2244
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Wypisuje pomoc na temat zmiany schematu kolorów"
 
-#: src/main.c:2244
+#: src/main.c:2247
 msgid "Log ftp dialog to specified file"
 msgstr "Zapisuje dziennik ftp do podanego pliku"
 
-#: src/main.c:2247
+#: src/main.c:2250
 msgid "Set debug level"
 msgstr "Ustaw poziom debug"
 
-#: src/main.c:2251
+#: src/main.c:2254
 msgid "Print data directory"
 msgstr "Wy¶wietla ¶cie¿kê do katalogu z danymi"
 
-#: src/main.c:2253
+#: src/main.c:2256
 msgid "Requests to run in black and white"
 msgstr "Powoduje uruchomienie w trybie czarno-bia³ym"
 
-#: src/main.c:2255
+#: src/main.c:2258
 msgid "Disable mouse support in text version"
 msgstr "Deaktywuje obs³ugê myszy w trybie tekstowym"
 
-#: src/main.c:2258
+#: src/main.c:2261
 msgid "Disables subshell support"
 msgstr "Deaktywuje obs³ugê podpow³oki"
 
-#: src/main.c:2260
+#: src/main.c:2263
 msgid "Force subshell execution"
 msgstr "Wymusza wykonywanie programów w podpow³oce"
 
-#: src/main.c:2263
+#: src/main.c:2266
 msgid "Print last working directory to specified file"
 msgstr "Koñcz±c zapisz bie¿±cy katalog do podanego pliku"
 
-#: src/main.c:2265
+#: src/main.c:2268
 msgid "Resets soft keys on HP terminals"
 msgstr "Przywraca klawisze programowe na terminalach HP"
 
-#: src/main.c:2267
+#: src/main.c:2270
 msgid "To run on slow terminals"
 msgstr "Aby uruchomiæ na powolnych terminalach"
 
-#: src/main.c:2270
+#: src/main.c:2273
 msgid "Use stickchars to draw"
 msgstr "Wykorzystuje proste znaki do rysowania ramek"
 
-#: src/main.c:2274
+#: src/main.c:2277
 msgid "Enables subshell support (default)"
 msgstr "Aktywuje obs³ugê podpow³oki (domy¶lne)"
 
-#: src/main.c:2278
+#: src/main.c:2281
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Próbuje u¿yæ termcap zamiast terminfo"
 
-#: src/main.c:2281
+#: src/main.c:2284
 msgid "Displays the current version"
 msgstr "Wy¶wietla aktualn± wersjê"
 
-#: src/main.c:2283
+#: src/main.c:2286
 msgid "Launches the file viewer on a file"
 msgstr "Wywo³uje podgl±d pliku"
 
-#: src/main.c:2285
+#: src/main.c:2288
 msgid "Forces xterm features"
 msgstr "Bezwzglêdnie aktywuje obs³ugê xterma"
 
-#: src/main.c:2502
+#: src/main.c:2505
 msgid " Notice "
 msgstr " Uwaga "
 
-#: src/main.c:2503
+#: src/main.c:2506
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
