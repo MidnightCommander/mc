@@ -233,6 +233,7 @@ read_directory (gchar *directory)
                         g_string_free (name, TRUE);
                 }
         }
+	closedir (parent_dir);
         if (retval->children == NULL) {
                 if (retval->data)
                         gnome_desktop_entry_free (retval->data);

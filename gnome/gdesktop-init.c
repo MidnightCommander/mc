@@ -128,6 +128,7 @@ desktop_init_at (const char *dir)
 
 		desktop_load_init_from (fname);
 	}
+	closedir (d);
 }
 
 void
