@@ -1,5 +1,9 @@
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* keys.h: Remove, include ...
+	* myslang.h: ... here.
+	* Makefile.am: Remove keys.h.
+
 	* dlg.h: Remove unused fields in struct Dlg_head.
 	* dlg.c: Adjust for the above.
 

@@ -11,7 +11,14 @@
 #    include "slang/slang-mc.h"
 #endif /* !HAVE_SYSTEM_SLANG */
 
-#include "keys.h"
+enum {
+    KEY_BACKSPACE = 400,
+    KEY_END, KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT,
+    KEY_HOME, KEY_A1, KEY_C1, KEY_NPAGE, KEY_PPAGE, KEY_IC,
+    KEY_ENTER, KEY_DC, KEY_SCANCEL, KEY_BTAB
+};
+
+#define KEY_F(x) 1000+x
 
 #define ACS_VLINE SLSMG_VLINE_CHAR
 #define ACS_HLINE SLSMG_HLINE_CHAR
