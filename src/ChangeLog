@@ -1,3 +1,7 @@
+2004-01-22  Pavel Roskin  <proski@gnu.org>
+
+	* glibcompat.h: Fix definition of g_try_realloc().
+
 2003-12-24  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* key.c (get_event): Treat all negative values of gpm_fd in the

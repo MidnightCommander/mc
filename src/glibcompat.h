@@ -21,8 +21,8 @@
 #if GLIB_MAJOR_VERSION < 2
 
 gsize g_strlcpy (gchar *dest, const gchar *src, gsize dest_size);
-#define g_try_malloc(x) malloc(x)
-#define g_try_realloc(x) realloc(x)
+#define g_try_malloc(size) malloc(size)
+#define g_try_realloc(ptr,size) realloc(ptr,size)
 
 static inline GSList *
 g_slist_delete_link (GSList *list, GSList *link)
