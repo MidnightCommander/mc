@@ -1,5 +1,9 @@
 1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gicon.c (gicon_get_filename_for_icon): Doh, use image_hash here.
+	
+1999-02-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gicon.c: Lots of changes to support the little symlink/stalled
 	icons that get overlaid on the normal file icons.  We now have the
 	concept of an icon set, which is a cache of normal icons plus

@@ -445,7 +445,7 @@ gicon_get_filename_for_icon (GdkImlibImage *image)
 
 	gicon_init ();
 
-	iset = g_hash_table_lookup (name_hash, image);
+	iset = g_hash_table_lookup (image_hash, image);
 	g_assert (iset != NULL);
 	return iset->filename;
 }
