@@ -180,6 +180,14 @@ gnome_custom_view_cmd (GtkWidget *widget, WPanel *panel)
 	paint_panel (panel);
 	do_refresh ();
 }
+static void
+sort_callback (GtkWidget *menu_item, GtkWidget *cbox1)
+{
+	if (gtk_object_get_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE") == SORT_NAME)
+		gtk_widget_set_sensitive (cbox1, TRUE);
+	else
+		gtk_widget_set_sensitive (cbox1, FALSE);
+}
 void
 gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 {
@@ -193,6 +201,8 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 
 	sort_box = gnome_dialog_new ("Sort By", GNOME_STOCK_BUTTON_OK, 
 				     GNOME_STOCK_BUTTON_CANCEL, NULL);
+	/* we define this up here so we can pass it in to our callback */
+	cbox1 = gtk_check_button_new_with_label (N_("Ignore case sensitivity."));
 	hbox = gtk_hbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox), hbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new ("Sort files by "), FALSE, FALSE, 0);
@@ -204,44 +214,55 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	/* FIXME: we want to set the option menu to be the correct ordering. */
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_NAME);
-
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
+	
         menu_item = gtk_menu_item_new_with_label ( _("File Type"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_EXTENSION);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
 
 	menu_item = gtk_menu_item_new_with_label ( _("Size"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_SIZE);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
 
         menu_item = gtk_menu_item_new_with_label ( _("Time Last Accessed"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_ACCESS);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
 
         menu_item = gtk_menu_item_new_with_label ( _("Time Last Modified"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_MODIFY);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
 
         menu_item = gtk_menu_item_new_with_label ( _("Time Last Changed"));
         gtk_menu_append (GTK_MENU (menu), menu_item);
 	gtk_object_set_data (GTK_OBJECT (menu_item), "SORT_ORDER_CODE", (gpointer) SORT_CHANGE);
+	gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				   GTK_SIGNAL_FUNC (sort_callback), cbox1);
 
 	gtk_widget_show_all (menu);
         gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
 
 	
-	cbox1 = gtk_check_button_new_with_label (N_("Reverse the order."));
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox1), panel->reverse);
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox1), panel->case_sensitive);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox),
 			    cbox1, FALSE, FALSE, 0);
-	cbox2 = gtk_check_button_new_with_label (N_("Ignore case sensitivity."));
-	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox2), panel->case_sensitive);
+
+	cbox2 = gtk_check_button_new_with_label (N_("Reverse the order."));
+	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (cbox2), panel->reverse);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (sort_box)->vbox),
 			    cbox2, FALSE, FALSE, 0);
 	/* off to the races */
 	gtk_widget_show_all (GNOME_DIALOG (sort_box)->vbox);
 	switch (gnome_dialog_run (GNOME_DIALOG (sort_box))) {
 	case 0:
-		g_print ("Ok selected\n");
 		switch( (gint) gtk_object_get_data (GTK_OBJECT
 						    (GTK_OPTION_MENU
 						     (omenu)->menu_item),
@@ -265,16 +286,33 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 			sfn = sort_size;
 			break;
 		}
-		/* Reverse order */
-		panel->reverse = GTK_TOGGLE_BUTTON (cbox1)->active;
 		/* case sensitive */
-		panel->case_sensitive = GTK_TOGGLE_BUTTON (cbox2)->active;
+		panel->case_sensitive = GTK_TOGGLE_BUTTON (cbox1)->active;
+		/* Reverse order */
+		panel->reverse = GTK_TOGGLE_BUTTON (cbox2)->active;
+
 		panel_set_sort_order (panel, sfn);
 		break;
 	case 1:
 	default:
-		g_print ("Cancel selected\n");
 		break;
 	}
 	gtk_widget_destroy (sort_box);
+}
+void
+gnome_external_panelize (GtkWidget *widget, WPanel *panel)
+{
+	
+}
+void
+gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
+{
+	gint i;
+	for (i = 0; i < panel->count; i++){
+		if (!strcmp (panel->dir.list [i].fname, ".."))
+			continue;
+		do_file_mark (panel, i, 1);
+	}
+	paint_panel (panel);
+	do_refresh ();
 }

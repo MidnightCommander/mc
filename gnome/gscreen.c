@@ -44,6 +44,9 @@
 #include "dev.xpm"
 #include "listing-list.xpm"
 #include "listing-iconic.xpm"
+#include "listing-custom.xpm"
+#include "listing-brief-list.xpm"
+
 
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
@@ -1414,9 +1417,9 @@ panel_create_cwd (Dlg_head *h, WPanel *panel, void **entry)
 
 	*entry = in;
 	/* FIXME: for now, we set the usize.  Ultimately, toolbar
-	 * will let you expand it.
+	 * will let you expand it, we hope.
 	 */
-	gtk_widget_set_usize (GTK_WIDGET (in->widget.wdata), 320, -1);
+	gtk_widget_set_usize (GTK_WIDGET (in->widget.wdata), 296, -1);
 	return GTK_WIDGET (in->widget.wdata);
 }
 
@@ -2072,11 +2075,31 @@ do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-do_switch_to_listing (GtkWidget *widget, WPanel *panel)
+do_switch_to_brief_listing (GtkWidget *widget, WPanel *panel)
 {
-	if (panel->list_type != list_icons)
+	if (panel->list_type == list_brief)
+		return;
+	panel->list_type = list_brief;
+	set_panel_formats (panel);
+	paint_panel (panel);
+	do_refresh ();
+}
+static void
+do_switch_to_full_listing (GtkWidget *widget, WPanel *panel)
+{
+	if (panel->list_type == list_full)
 		return;
 	panel->list_type = list_full;
+	set_panel_formats (panel);
+	paint_panel (panel);
+	do_refresh ();
+}
+static void
+do_switch_to_custom_listing (GtkWidget *widget, WPanel *panel)
+{
+	if (panel->list_type == list_user)
+		return;
+	panel->list_type = list_user;
 	set_panel_formats (panel);
 	paint_panel (panel);
 	do_refresh ();
@@ -2089,9 +2112,19 @@ button_switch_to_icon (WPanel *panel)
 }
 
 static GtkWidget *
-button_switch_to_listing (WPanel *panel)
+button_switch_to_full_listing (WPanel *panel)
 {
-	return button_switch_to (listing_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_listing), panel);
+	return button_switch_to (listing_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_full_listing), panel);
+}
+static GtkWidget *
+button_switch_to_brief_listing (WPanel *panel)
+{
+	return button_switch_to (listing_brief_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_brief_listing), panel);
+}
+static GtkWidget *
+button_switch_to_custom_listing (WPanel *panel)
+{
+	return button_switch_to (listing_custom_xpm, GTK_SIGNAL_FUNC (do_switch_to_custom_listing), panel);
 }
 
 void
@@ -2207,10 +2240,16 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_toolbar_append_space (GTK_TOOLBAR (status_line));
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
 				   button_switch_to_icon (panel),
-				   "Switch view to icon view.", NULL);
+				   "Icon view.", NULL);
 	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
-				   button_switch_to_listing (panel),
-				   "Switch view to detailed view.", NULL);
+				   button_switch_to_brief_listing (panel),
+				   "Brief view.", NULL);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   button_switch_to_full_listing (panel),
+				   "Detailed view.", NULL);
+	gtk_toolbar_append_widget (GTK_TOOLBAR (status_line),
+				   button_switch_to_custom_listing (panel),
+				   "Custom view.", NULL);
 	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
 	gtk_container_add (GTK_CONTAINER(dock),status_line);
 	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),

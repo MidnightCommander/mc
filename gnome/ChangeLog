@@ -1,3 +1,15 @@
+1999-01-02  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (gnome_sort_cmd): pretified
+	(gnome_select_all_cmd): New command -- selects all files (in
+	theory). 
+
+	* glayout.c: rearrange the edit menu some.
+
+
+	* gscreen.c (x_create_panel): new icon view icons -- brief and
+	custom.
+
 1999-01-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (select_range): Fixed selection of ranges where the
