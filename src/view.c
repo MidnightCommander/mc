@@ -7,6 +7,7 @@
 	       1997 Norbert Warmuth
 	       1998 Pavel Machek
 	       2004 Roland Illig <roland.illig@gmx.de>
+	       2005 Roland Illig <roland.illig@gmx.de>
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -22,20 +23,24 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-#include <config.h>
-#include <stdio.h>
-#include <sys/types.h>
-#ifdef HAVE_UNISTD_H
-#   include <unistd.h>
+#ifdef HAVE_CONFIG_H
+# include <config.h>
 #endif
-#include <string.h>
-#include <sys/stat.h>
-#ifdef HAVE_MMAP
-#   include <sys/mman.h>
-#endif
-#include <ctype.h>		/* For toupper() */
+
+#include <ctype.h>
 #include <errno.h>
 #include <limits.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#ifdef HAVE_MMAP
+# include <sys/mman.h>
+#endif
+#ifdef HAVE_UNISTD_H
+# include <unistd.h>
+#endif
 
 #include "global.h"
 #include "tty.h"

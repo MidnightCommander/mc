@@ -2,6 +2,7 @@
 
 	* view.c: Changed type of view->blocks from int to size_t.
 	* view.c: Removed unused parameters from local functions.
+	* view.c: Reordered #include files.
 
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
