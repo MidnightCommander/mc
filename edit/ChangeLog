@@ -1,3 +1,8 @@
+2002-08-20  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (freestrs): New function to clean temporary strings.
+	* edit.c (edit_clean): Call freestrs().
+
 2002-08-20  David Martin  <dmartina@excite.com>
 
 	* editmenu.c: Use new create_menu() interface.

@@ -102,6 +102,10 @@ char *itoa (int i)
     return ++s;
 }
 
+/* Temporary strings */
+static char *stacked[16] =
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 /*
    This joins strings end on end and allocates memory for the result.
    The result is later automatically free'd and must not be free'd
@@ -109,8 +113,6 @@ char *itoa (int i)
  */
 char *catstrs (const char *first,...)
 {
-    static char *stacked[16] =
-    {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     static int i = 0;
     va_list ap;
     int len;
@@ -140,6 +142,17 @@ char *catstrs (const char *first,...)
     va_end (ap);
 
     return stacked[i];
+}
+
+/* Free temporary strings */
+void freestrs(void)
+{
+    int i;
+
+    for (i = 0; i < sizeof(stacked) / sizeof(stacked[0]); i++) {
+	if (stacked[i])
+	    free (stacked[i]);
+    }
 }
 
 void edit_help_cmd (WEdit * edit)

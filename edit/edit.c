@@ -593,6 +593,10 @@ int edit_clean (WEdit * edit)
 	    free (edit->dir);
 /* we don't want to clear the widget */
 	memset (&(edit->from_here), 0, (unsigned long)&(edit->to_here) - (unsigned long)&(edit->from_here));
+
+	/* Free temporary strings used in catstrs() */
+	freestrs();
+
 	return 1;
     }
     return 0;
