@@ -1978,7 +1978,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	    }
 	    edit_scroll_screen_over_cursor (edit);
 	} else {
-	    char *msg = _(" Replace ");
+	    const char *msg = _(" Replace ");
 	    /* try and find from right here for next search */
 	    edit->search_start = edit->curs1;
 	    edit_update_curs_col (edit);

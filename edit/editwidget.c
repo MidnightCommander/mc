@@ -220,7 +220,7 @@ edit (const char *_file, int line)
     return 1;
 }
 
-static void edit_my_define (Dlg_head * h, int idx, char *text,
+static void edit_my_define (Dlg_head * h, int idx, const char *text,
 			    void (*fn) (WEdit *), WEdit * edit)
 {
     define_label_data (h, idx, text, (buttonbarfn) fn, edit);
