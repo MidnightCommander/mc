@@ -8696,4 +8696,3 @@ msgstr " Ligação simbólica "
 # src/main.c:2715
 msgid "Force activation even if a server is already running"
 msgstr "Força ativação mesmo que um servidor já esteja sendo executado"
-
