@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 1999-09-28 17:48+0200\n"
+"POT-Creation-Date: 1999-10-31 16:57+0100\n"
 "PO-Revision-Date: 1999-09-27 18:20+0100\n"
 "Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -362,19 +362,19 @@ msgstr "Varning"
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kan inte öppna %s, kommer inte att finnas några ikoner på skrivbordet"
 
-#: gnome/gdesktop.c:1176
+#: gnome/gdesktop.c:1181
 msgid "While running the mount/umount command"
 msgstr "Under körning av montera/avmontera kommandot"
 
-#: gnome/gdesktop.c:1245
+#: gnome/gdesktop.c:1250
 msgid "While running the eject command"
 msgstr "Vid körning av kommandot \"eject\""
 
-#: gnome/gdesktop.c:1429 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1434 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Fel"
 
-#: gnome/gdesktop.c:2588
+#: gnome/gdesktop.c:2593
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -388,84 +388,84 @@ msgstr ""
 "\n"
 "Kan inte sätta bakgrund."
 
-#: gnome/gdesktop.c:2611 gnome/glayout.c:362
+#: gnome/gdesktop.c:2616 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2611 gnome/glayout.c:363
+#: gnome/gdesktop.c:2616 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Starta en ny terminal i den aktuella katalogen"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2613 gnome/glayout.c:365
+#: gnome/gdesktop.c:2618 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "_Katalog..."
 
-#: gnome/gdesktop.c:2613 gnome/glayout.c:366
+#: gnome/gdesktop.c:2618 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Skapar en ny katalog"
 
-#: gnome/gdesktop.c:2614
+#: gnome/gdesktop.c:2619
 msgid "URL L_ink..."
 msgstr "URL-_länk..."
 
-#: gnome/gdesktop.c:2614
+#: gnome/gdesktop.c:2619
 msgid "Creates a new URL link"
 msgstr "Skapar en ny URL-länk"
 
-#: gnome/gdesktop.c:2615
+#: gnome/gdesktop.c:2620
 msgid "_Launcher..."
 msgstr "_Startare..."
 
-#: gnome/gdesktop.c:2615
+#: gnome/gdesktop.c:2620
 msgid "Creates a new launcher"
 msgstr "Skapar en ny startare"
 
-#: gnome/gdesktop.c:2621
+#: gnome/gdesktop.c:2626
 msgid "By _Name"
 msgstr "Efter _namn"
 
-#: gnome/gdesktop.c:2622
+#: gnome/gdesktop.c:2627
 msgid "By File _Type"
 msgstr "Efter _filtyp"
 
-#: gnome/gdesktop.c:2623
+#: gnome/gdesktop.c:2628
 msgid "By _Size"
 msgstr "I _storleksordning"
 
-#: gnome/gdesktop.c:2624
+#: gnome/gdesktop.c:2629
 msgid "By Time Last _Accessed"
 msgstr "Efter tid, senast _accessad"
 
-#: gnome/gdesktop.c:2625
+#: gnome/gdesktop.c:2630
 msgid "By Time Last _Modified"
 msgstr "Efter tid, senast _modified"
 
-#: gnome/gdesktop.c:2626
+#: gnome/gdesktop.c:2631
 msgid "By Time Last _Changed"
 msgstr "Efter tid, senast _ändrad"
 
-#: gnome/gdesktop.c:2634 gnome/glayout.c:462
+#: gnome/gdesktop.c:2639 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Arrangera ikoner"
 
-#: gnome/gdesktop.c:2635
+#: gnome/gdesktop.c:2640
 msgid "Create _New Window"
 msgstr "Öppna _nytt fönster"
 
-#: gnome/gdesktop.c:2637 gnome/glayout.c:464
+#: gnome/gdesktop.c:2642 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "_Ladda om skrivbordet"
 
-#: gnome/gdesktop.c:2638 gnome/glayout.c:465
+#: gnome/gdesktop.c:2643 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Ladda om _enheter"
 
-#: gnome/gdesktop.c:2639 gnome/glayout.c:466
+#: gnome/gdesktop.c:2644 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Återskapa skrivbords_ikoner"
 
-#: gnome/gdesktop.c:2641
+#: gnome/gdesktop.c:2646
 msgid "Configure _Background Image"
 msgstr "Konfigurera _bakgrundsbild"
 
@@ -497,6 +497,11 @@ msgstr "Använd formad text"
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
 msgstr "Skrivbord"
+
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:141
+msgid "Home directory"
+msgstr "Hemkatalog"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -800,8 +805,8 @@ msgstr ""
 "Om du vill starta upp dessa igen, kan du göra detta antingen från\n"
 "panelen, eller genom att köra UNIX-kommandot 'gmc'.\n"
 "\n"
-"Tryck OK för att avsluta applikationen, eller Avbryt för att fortsätta "
-"köra den."
+"Tryck OK för att avsluta applikationen, eller Avbryt för att fortsätta köra "
+"den."
 
 #: gnome/glayout.c:367
 msgid "_File..."
@@ -1132,7 +1137,7 @@ msgid "Use default Drop Action options"
 msgstr "Använd standardhandling när filen släpps"
 
 #: gnome/gnome-file-property-dialog.c:403
-#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
+#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:203
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
 msgstr "Visa"
@@ -1146,7 +1151,7 @@ msgid "Select an Icon"
 msgstr "Välj en ikon"
 
 #. we do open first
-#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
+#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:195
 msgid "Open"
 msgstr "Öppna"
 
@@ -1162,7 +1167,7 @@ msgstr "Använd standardhandling då filen släpps"
 msgid "Use default View action"
 msgstr "Använd standardmetod för att visa"
 
-#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
+#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
 msgstr "Redigera"
@@ -1297,53 +1302,53 @@ msgstr "Applikationer"
 msgid "Program to run"
 msgstr "Program att köra"
 
-#: gnome/gpopup2.c:188
+#: gnome/gpopup2.c:197
 msgid "Mount device"
 msgstr "Montera enhet"
 
-#: gnome/gpopup2.c:189
+#: gnome/gpopup2.c:198
 msgid "Unmount device"
 msgstr "Avmontera enhet"
 
-#: gnome/gpopup2.c:190
+#: gnome/gpopup2.c:199
 msgid "Eject device"
 msgstr "Mata ut enhet"
 
-#: gnome/gpopup2.c:193
+#: gnome/gpopup2.c:202
 msgid "Open with..."
 msgstr "Öppna med..."
 
-#: gnome/gpopup2.c:195
+#: gnome/gpopup2.c:204
 msgid "View Unfiltered"
 msgstr "Visa ofiltrerad"
 
-#: gnome/gpopup2.c:198
+#: gnome/gpopup2.c:207
 msgid "Copy..."
 msgstr "Kopiera..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2402
+#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
 msgstr "Radera"
 
-#: gnome/gpopup2.c:200
+#: gnome/gpopup2.c:209
 msgid "Move..."
 msgstr "Flytta..."
 
-#: gnome/gpopup2.c:201
+#: gnome/gpopup2.c:210
 msgid "Hard Link..."
 msgstr "Hård länk..."
 
-#: gnome/gpopup2.c:202
+#: gnome/gpopup2.c:211
 msgid "Symlink..."
 msgstr "Symlänk..."
 
-#: gnome/gpopup2.c:203
+#: gnome/gpopup2.c:212
 msgid "Edit Symlink..."
 msgstr "Ändra symlänk..."
 
 # redigera/edit/???
-#: gnome/gpopup2.c:205
+#: gnome/gpopup2.c:214
 msgid "Properties..."
 msgstr "Egenskaper..."
 
@@ -2994,7 +2999,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:639
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:634
 msgid " Oops... "
 msgstr " Hoppsan..."
 
@@ -3688,7 +3693,7 @@ msgstr "Filen existerar men status kan inte inhämtas: %s %s"
 msgid "Unknown"
 msgstr "Okänd"
 
-#: src/ext.c:143 src/user.c:506
+#: src/ext.c:143 src/user.c:501
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3697,7 +3702,7 @@ msgstr ""
 " Kan inte generera unika filnamn \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:518
+#: src/ext.c:150 src/user.c:513
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3706,7 +3711,7 @@ msgstr ""
 " Kan inte skapa temporär kommandofil \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:547
+#: src/ext.c:165 src/user.c:542
 msgid " Parameter "
 msgstr " Parameter "
 
@@ -4493,7 +4498,7 @@ msgstr " Kan inte hitta nod [Innehåll] i hjälpfilen "
 msgid " Help "
 msgstr " Hjälp "
 
-#: src/help.c:766 src/user.c:655
+#: src/help.c:766 src/user.c:650
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -5372,7 +5377,7 @@ msgstr "Inga fönster öppnade vid programstart"
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Visa katalogen som innehåller .links startfilerna och avsluta"
 
-#: src/main.c:3039
+#: src/main.c:3045
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5380,11 +5385,11 @@ msgstr ""
 "Kan inte öppna tty linje. Du måste starta mc utan -P flaggan.\n"
 "På vissa system kan det vara lämpligt att köra en # 'which mc'\n"
 
-#: src/main.c:3117
+#: src/main.c:3123
 msgid " Notice "
 msgstr " Notera "
 
-#: src/main.c:3118
+#: src/main.c:3124
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5721,32 +5726,32 @@ msgstr ""
 "Kan inte skriva till filen %s:\n"
 "%s\n"
 
-#: src/user.c:261
+#: src/user.c:256
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Ogiltig skalmönsterdefinition \"%c\". "
 
-#: src/user.c:394
+#: src/user.c:389
 msgid " Debug "
 msgstr " Debug "
 
-#: src/user.c:403
+#: src/user.c:398
 msgid " ERROR: "
 msgstr " FEL: "
 
-#: src/user.c:407
+#: src/user.c:402
 msgid " True:  "
 msgstr " Sant:   "
 
-#: src/user.c:409
+#: src/user.c:404
 msgid " False: "
 msgstr " Falskt: "
 
-#: src/user.c:621
+#: src/user.c:616
 msgid " Warning -- ignoring file "
 msgstr " Varning -- ignorerarar fil "
 
-#: src/user.c:622
+#: src/user.c:617
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5755,18 +5760,18 @@ msgstr ""
 "Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\n"
 "Att använda den kan äventyra din säkerhet"
 
-#: src/user.c:640
+#: src/user.c:635
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Det går inte att köra program om man är inloggad på en icke lokal katalog "
 
-#: src/user.c:724
+#: src/user.c:719
 #, c-format
 msgid " Empty file %s "
 msgstr " Tom fil %s "
 
 #. Create listbox
-#: src/user.c:733
+#: src/user.c:728
 msgid " User menu "
 msgstr " Användarmeny "
 
@@ -6416,7 +6421,7 @@ msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: lagrar fil %d (%d)"
 
-#: vfs/ftpfs.c:2036 vfs/ftpfs.c:2051
+#: vfs/ftpfs.c:2037 vfs/ftpfs.c:2052
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6549,4 +6554,3 @@ msgstr "%s: %s: %s %3d%% (%ld bytes överförda)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes överförda"
-
