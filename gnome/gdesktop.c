@@ -134,8 +134,13 @@ static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *
 static void
 get_slot_from_pos (int x, int y, int *u, int *v)
 {
-	*u = (x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
-	*v = (y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y;
+	int uu, vv;
+
+	uu = (x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
+	vv = (y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y;
+
+	*u = CLAMP (uu, 0, layout_cols - 1);
+	*v = CLAMP (vv, 0, layout_rows - 1);
 }
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates

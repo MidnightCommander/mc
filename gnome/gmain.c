@@ -630,8 +630,9 @@ gnome_check_super_user (void)
 		return;
 
 	warning_dlg = gnome_message_box_new (
-		_("You are running the GNOME Midnight Commander as root. \n\n"
-		  "You will not be protected from severly damaging your system."),
+		_("You are running the GNOME File Manager as root.\n\n"
+		  "As root, you can damage your system if you are not careful, and the "
+		  "GNOME File Manager will not stop you from doing it."),
 		GNOME_MESSAGE_BOX_WARNING,
 		GNOME_STOCK_BUTTON_OK, NULL);
 

@@ -2305,14 +2305,16 @@ create_and_setup_pane (WPanel *panel)
 		else
 			size = 0;
 	}
-	
+#if 0
+	gtk_paned_set_position (GTK_PANED (pane), size);
+#else
 	/*
 	 * Hack: set the default startup size for the pane without
 	 * using _set_usize which would set the minimal size
 	 */
 	GTK_PANED (pane)->child1_size = size;
 	GTK_PANED (pane)->position_set = TRUE;
-
+#endif
 	gtk_widget_show (pane);
 
 	return pane;

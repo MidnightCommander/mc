@@ -1,3 +1,13 @@
+1999-04-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* glayout.c (create_container): Use gtk_window_set_default_size(),
+	not gtk_widget_set_usize().
+
+	* gdesktop.c (get_slot_from_pos): Clamp the slot positions to be
+	inside the screen.
+
+	* gmain.c (gnome_check_super_user): Improved the message a bit.
+
 1999-04-06  David Martin <dmartina@usa.net>
 
 	* gcmd.c: marked message for translation.
