@@ -17,10 +17,6 @@ Recheck all mouse handlers, make sure that they check button number.
 ncurses 5.2 turns off keypad under heavy load on xterm.  Check if
 anything can be done about it.
 
-Implement --with-screen option.
-
-Remove side effects from --with-termcap option.
-
 ftp and fish with home != '/' - readjust directory to the home.
 
 
