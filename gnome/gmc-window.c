@@ -139,28 +139,32 @@ setup_contents (GmcWindow *gmc)
 
 	/* List view */
 
-	gmc->sw = gtk_scrolled_window_new (NULL, NULL);
-	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->sw);
-	gtk_widget_show (gmc->sw);
+	gmc->clist_sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (gmc->clist_sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->clist_sw);
+	gtk_widget_show (gmc->clist_sw);
 
 	gmc->clist = gtk_clist_new (1); /* FIXME: how many columns? */
-	gtk_container_add (GTK_CONTAINER (gmc->sw), gmc->clist);
+	gtk_container_add (GTK_CONTAINER (gmc->clist_sw), gmc->clist);
 	gtk_widget_show (gmc->clist);
 
 	/* Icon view */
 
-	gmc->ilist = gnome_icon_list_new (DESKTOP_SNAP_X, NULL, TRUE);
+	gmc->ilist_sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (gmc->ilist_sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->ilist_sw);
+	gtk_widget_show (gmc->ilist_sw);
 
+	gmc->ilist = gnome_icon_list_new (DESKTOP_SNAP_X, NULL, TRUE);
 	gnome_icon_list_set_separators (GNOME_ICON_LIST (gmc->ilist), ICON_LIST_SEPARATORS);
 	gnome_icon_list_set_row_spacing (GNOME_ICON_LIST (gmc->ilist), ICON_LIST_ROW_SPACING);
 	gnome_icon_list_set_col_spacing (GNOME_ICON_LIST (gmc->ilist), ICON_LIST_COL_SPACING);
 	gnome_icon_list_set_icon_border (GNOME_ICON_LIST (gmc->ilist), ICON_LIST_ICON_BORDER);
 	gnome_icon_list_set_text_spacing (GNOME_ICON_LIST (gmc->ilist), ICON_LIST_TEXT_SPACING);
-
 	gnome_icon_list_set_selection_mode (GNOME_ICON_LIST (gmc->ilist), GTK_SELECTION_MULTIPLE);
 	GTK_WIDGET_SET_FLAGS (gmc->ilist, GTK_CAN_FOCUS);
 
-	gtk_notebook_append_page (GTK_NOTEBOOK (gmc->notebook), gmc->ilist);
+	gtk_container_add (GTK_CONTAINER (gmc->ilist_sw), gmc->ilist);
 	gtk_widget_show (gmc->ilist);
 
 	gtk_notebook_set_page (GTK_NOTEBOOK (gmc->notebook), gmc->list_type);
