@@ -250,17 +250,31 @@ static void handle_command (char *buffer)
     else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0){
 	/* Bold text or italics text */
 	char type = buffer [1];
+	char *p;
+	char *w = buffer; 
+	int backslash_flag = 0;
 
 	buffer = strtok (NULL, "");
 	if (buffer == NULL){
 	    print_error ("Syntax error: .I / .B: no text");
 	    return;
 	}
-	else {
-	    printf_string ("%c%s%c", 
-			   (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON, 
-			   buffer, CHAR_BOLD_OFF);
+
+	*w = (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON;
+
+	/* Attempt to handle backslash quoting */
+	for (p = buffer, buffer = w++; *p; p++){
+	    if (*p == '\\' && !backslash_flag){
+		backslash_flag = 1;
+		continue;
+	    }
+	    backslash_flag = 0;
+	    *w++ = *p;
 	}
+
+	*w++ = CHAR_BOLD_OFF;
+	*w = 0;
+	print_string (buffer);
     }
     else if (strcmp (buffer, ".TP") == 0){
 	/* End of paragraph? */

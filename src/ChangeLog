@@ -1,3 +1,8 @@
+2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* man2hlp.c (handle_command): Handle backslash quoting
+	for .I and .B
+
 2002-03-20  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* man2hlp.c (handle_command): Handle '.\"TOPICS' comment.
