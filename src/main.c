@@ -445,149 +445,6 @@ update_panels (int force_update, char *current_file)
     mc_chdir (panel->cwd);
 }
 
-#ifdef WANT_PARSE
-static void select_by_index (WPanel *panel, int i);
-
-/* Called by parse_control_file */
-static int index_by_name (file_entry *list, int count)
-{
-    char *name;
-    int i;
-
-    name = strtok (NULL, " \t\n");
-    if (!name || !*name)
-	return -1;
-    for (i = 0; i < count; i++){
-	if (strcmp (name, list[i].fname) == 0)
-	    return i;
-    }
-    return -1;
-}
-
-/* Called by parse_control_file */
-static void select_by_index (WPanel *panel, int i)
-{
-    if (i >= panel->count)
-	return;
-    
-    unselect_item (panel);
-    panel->selected = i;
-
-    while (panel->selected - panel->top_file >= ITEMS (panel)){
-	/* Scroll window half screen */
-	panel->top_file += ITEMS (panel)/2;
-	paint_dir (panel);
-	select_item (panel);
-    } 
-    while (panel->selected < panel->top_file){
-	/* Scroll window half screen */
-	panel->top_file -= ITEMS (panel)/2;
-	if (panel->top_file < 0) panel->top_file = 0;
-	paint_dir (panel);
-    } 
-    select_item (panel);
-}
-
-/* Called by my_system
-   No error reporting, just exits on the first sign of trouble */
-static void parse_control_file (void)
-{
-    char *data, *current;
-    WPanel *panel;
-    file_entry *list;
-    int i;
-    FILE *file;
-    struct stat s;
-    
-    if ((file = fopen (control_file, "r")) == NULL){
-	return;
-    }
-    /* Use of fstat prevents race conditions */
-    if (fstat (fileno (file), &s) != 0){
-	fclose (file);
-	return;
-    }
-#ifndef OS2_NT
-    /* Security: Check that the user owns the control file and this file 
-       is not group/world writable to prevent other users from playing tricks 
-       on him/her. */
-    if (s.st_uid != getuid () || ((s.st_mode) & (S_IWGRP|S_IWOTH))) {
-	fclose (file);
-	return;
-    }
-#endif /* !OS2_NT */
-    data = (char *) g_malloc (s.st_size+1);
-    if (!data){
-	fclose (file);
-	return;
-    }
-    if (s.st_size != fread (data, 1, s.st_size, file)){
-	g_free (data);
-	fclose (file);
-	return;
-    }
-    data [s.st_size] = 0;
-    fclose (file);
-    
-    /* The Control file has now been loaded to memory -> start parsing. */
-    current = strtok (data, " \t\n");
-    while (current && *current){
-	if (isupper (*current)){
-	    if (get_other_type () != view_listing)
-		break;
-	    else
-		panel = other_panel;
-	} else
-	    panel = cpanel;
-
-	list = panel->dir.list;
-	*current = tolower (*current);
-
-	if (strcmp (current, "clear_tags") == 0){
-	    unmark_files (panel);
-	} else if (strcmp (current, "tag") == 0){
-	    i = index_by_name (list, panel->count);
-	    if (i >= 0) {
-		do_file_mark (panel, i, 1);
-	    }
-	} else if (strcmp (current, "untag") == 0){
-	    i = index_by_name (list, panel->count);
-	    if (i >= 0){
-		do_file_mark (panel, i, 0);
-	    }
-	} else if (strcmp (current, "select") == 0){
-	    i = index_by_name (list, panel->count);
-	    if (i >= 0){
-		select_by_index (panel, i);
-	    }
-	} else if (strcmp (current, "change_panel") == 0){
-	    change_panel ();
-	} else if (strcmp (current, "cd") == 0){
-	    int change = 0;
-	    current = strtok (NULL, " \t\n");
-	    if (!current) break;
-	    if (cpanel != panel){
-		change_panel ();
-		change = 1;
-	    }
-	    do_cd (current, cd_parse_command);
-	    if (change)
-		change_panel ();
-	} else {
-	    /* Unknown command -> let's give up */
-	    break;
-	}
-	current = strtok (NULL, " \t\n");
-    }
-
-    g_free (data);
-    paint_panel (cpanel);
-    paint_panel (opanel);
-}
-#else
-#define parse_control_file()
-#endif /* WANT_PARSE */
-
 /* Sets up the terminal before executing a program */
 static void
 pre_exec (void)
@@ -662,7 +519,6 @@ do_execute (const char *shell, const char *command, int flags)
     if (console_flag)
 	restore_console ();
 
-    unlink (control_file);
     if (!use_subshell && !(flags & EXECUTE_INTERNAL && command)) {
 	printf ("%s%s%s\n", last_paused ? "\r\n":"", prompt, command);
 	last_paused = 0;
@@ -723,8 +579,6 @@ do_execute (const char *shell, const char *command, int flags)
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     
-    parse_control_file ();
-    unlink (control_file);
     do_refresh ();
     use_dash (TRUE);
 }
@@ -2083,8 +1937,6 @@ do_nc (void)
 
 #if defined (_OS_NT)
 /* Windows NT code */
-#define CONTROL_FILE "\\mc.%d.control"
-char control_file [sizeof (CONTROL_FILE) + 8];
 
 void
 OS_Setup (void)
@@ -2123,9 +1975,6 @@ init_sigfatals (void)
 #else
 
 /* Unix version */
-#define CONTROL_FILE "/tmp/mc.%d.control"
-char control_file [sizeof (CONTROL_FILE) + 8];
-
 static void
 OS_Setup (void)
 {
@@ -2136,9 +1985,6 @@ OS_Setup (void)
     if (!shell || !*shell)
 	shell = "/bin/sh";
 
-    g_snprintf (control_file, sizeof (control_file), CONTROL_FILE, getpid ());
-    my_putenv ("MC_CONTROL_FILE", control_file);
-    
     /* This is the directory, where MC was installed, on Unix this is LIBDIR */
     /* and can be overriden by the MC_LIBDIR environment variable */
     if ((mc_libdir = getenv ("MC_LIBDIR")) != NULL) {

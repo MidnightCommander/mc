@@ -727,19 +727,6 @@ char *x_basename (char *s)
     return ((where = strrchr (s, PATH_SEP))) ? where + 1 : s;
 }
 
-void my_putenv (char *name, char *data)
-{
-    char *full;
-
-    full = malloc (strlen (name) + strlen (data) + 2);
-    strcpy (full, name);
-    strcat (full, "=");
-    strcat (full, data);
-    putenv (full);
-
-    /* WARNING: NEVER FREE THE full VARIABLE!!!!!!!!!!!!!!!!!!!!!!!! */
-    /* It is used by putenv. Freeing it will corrupt the environment */
-}
 #endif /* !VFS_STANDALONE */
 
 char *unix_error_string (int error_num)

@@ -74,7 +74,6 @@ void check_error_pipe (void);
 int close_error_pipe (int error, char *text);
 
 /* Process spawning */
-void my_putenv (char*, char*);
 #define EXECUTE_INTERNAL   1
 #define EXECUTE_TEMPFILE   2
 #define EXECUTE_AS_SHELL   4

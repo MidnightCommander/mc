@@ -1,5 +1,9 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Remove extremely unsafe and poorly designed support
+	for /tmp/mc.$PID.control file.
+	* util.c (my_putenv): Remove, it's unused now.
+
 	* panel.h (struct format_e): Make string_fn return const char *.
 	Adjust all dependencies.
 	* screen.c (string_file_mtime): Return empty string for "..".
