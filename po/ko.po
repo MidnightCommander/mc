@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.52a\n"
-"POT-Creation-Date: 2001-04-10 19:44+0900\n"
+"POT-Creation-Date: 2001-04-16 12:45-0400\n"
 "PO-Revision-Date: 2001-04-10 11:09+0900\n"
 "Last-Translator: Nam SungHyun <namsh@kldp.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
@@ -211,7 +211,7 @@ msgid "Set Filter"
 msgstr "필터 설정"
 
 #: gnome/gcmd.c:721 gnome/gcmd.c:762 gnome/gcmd.c:767 gnome/gcmd.c:771
-#: gnome/gscreen.c:2452
+#: gnome/gscreen.c:2447
 msgid "Show all files"
 msgstr "모든 파일 보여주기"
 
@@ -271,11 +271,11 @@ msgstr "패널 보기에서 파일 선택을 위한 정규 표현식 입력."
 msgid "  Malformed regular expression  "
 msgstr "  이해할 수 없는 정규표현식  "
 
-#: gnome/gcmd.c:1004
+#: gnome/gcmd.c:1002
 msgid "Creating a desktop link"
 msgstr "데스크탑 링크 생성"
 
-#: gnome/gcmd.c:1005
+#: gnome/gcmd.c:1003
 msgid "Enter the URL:"
 msgstr "URL 입력:"
 
@@ -348,28 +348,28 @@ msgstr "표시될 행"
 msgid "Custom View"
 msgstr "사용자 보기"
 
-#: gnome/gdesktop.c:631 gnome/gmount.c:385
+#: gnome/gdesktop.c:679 gnome/gmount.c:385
 msgid "Warning"
 msgstr "경고"
 
-#: gnome/gdesktop.c:632
+#: gnome/gdesktop.c:680
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "%s 열 수 없음; 초기 데스크탑 아이콘을 가질 수 없을 것임"
 
-#: gnome/gdesktop.c:1361
+#: gnome/gdesktop.c:1412
 msgid "While running the mount/umount command"
 msgstr "mount/unmount 명령을 실행하는 도중"
 
-#: gnome/gdesktop.c:1430
+#: gnome/gdesktop.c:1481
 msgid "While running the eject command"
 msgstr "eject 명령을 실행하는 도중"
 
-#: gnome/gdesktop.c:1614 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1665 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "에러"
 
-#: gnome/gdesktop.c:2846
+#: gnome/gdesktop.c:2917
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -382,92 +382,92 @@ msgstr ""
 "\n"
 "배경을 설정할 수 없습니다."
 
-#: gnome/gdesktop.c:2875 gnome/glayout.c:366
+#: gnome/gdesktop.c:2946 gnome/glayout.c:366
 msgid "_Terminal"
 msgstr "터미널(_T)"
 
-#: gnome/gdesktop.c:2875 gnome/glayout.c:367
+#: gnome/gdesktop.c:2946 gnome/glayout.c:367
 msgid "Launch a new terminal in the current directory"
 msgstr "현재 디렉토리에서 새 터미널 열기"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2877 gnome/glayout.c:369
+#: gnome/gdesktop.c:2948 gnome/glayout.c:369
 msgid "_Directory..."
 msgstr "디렉토리(_D)..."
 
-#: gnome/gdesktop.c:2877 gnome/glayout.c:370
+#: gnome/gdesktop.c:2948 gnome/glayout.c:370
 msgid "Creates a new directory"
 msgstr "새로운 디렉토리을 생성"
 
-#: gnome/gdesktop.c:2878
+#: gnome/gdesktop.c:2949
 msgid "URL L_ink..."
 msgstr "URL 링크(_i)..."
 
-#: gnome/gdesktop.c:2878
+#: gnome/gdesktop.c:2949
 msgid "Creates a new URL link"
 msgstr "새로운 URL 링크 생성"
 
-#: gnome/gdesktop.c:2879
+#: gnome/gdesktop.c:2950
 msgid "_Launcher..."
 msgstr "_Launcher..."
 
-#: gnome/gdesktop.c:2879
+#: gnome/gdesktop.c:2950
 msgid "Creates a new launcher"
 msgstr "새로운 launcher 생성"
 
-#: gnome/gdesktop.c:2885
+#: gnome/gdesktop.c:2956
 msgid "By _Name"
 msgstr "이름으로(_N)"
 
-#: gnome/gdesktop.c:2886
+#: gnome/gdesktop.c:2957
 msgid "By File _Type"
 msgstr "파일 종류로(_T)"
 
-#: gnome/gdesktop.c:2887
+#: gnome/gdesktop.c:2958
 msgid "By _Size"
 msgstr "크기로(_S)"
 
-#: gnome/gdesktop.c:2888
+#: gnome/gdesktop.c:2959
 msgid "By Time Last _Accessed"
 msgstr "마지막 액세스 시간으로(_A)"
 
-#: gnome/gdesktop.c:2889
+#: gnome/gdesktop.c:2960
 msgid "By Time Last _Modified"
 msgstr "마지막 수정 시간으로(_M)"
 
-#: gnome/gdesktop.c:2890
+#: gnome/gdesktop.c:2961
 msgid "By Time Last _Changed"
 msgstr "마지막 고쳐진 시간으로(_C)"
 
-#: gnome/gdesktop.c:2898 gnome/glayout.c:466
+#: gnome/gdesktop.c:2969 gnome/glayout.c:466
 msgid "_Arrange Icons"
 msgstr "아이콘 정렬(_A)"
 
-#: gnome/gdesktop.c:2899
+#: gnome/gdesktop.c:2970
 msgid "_Tidy Icons"
 msgstr "아이콘 정돈(_T)"
 
-#: gnome/gdesktop.c:2900
+#: gnome/gdesktop.c:2971
 msgid "Create _New Window"
 msgstr "새 창 생성(_N)"
 
-#: gnome/gdesktop.c:2902 gnome/glayout.c:468
+#: gnome/gdesktop.c:2973 gnome/glayout.c:468
 msgid "Rescan _Desktop Directory"
 msgstr "디렉토리 다시 읽기(_D)"
 
-#: gnome/gdesktop.c:2903 gnome/glayout.c:469
+#: gnome/gdesktop.c:2974 gnome/glayout.c:469
 msgid "Rescan De_vices"
 msgstr "장치 다시 읽기(_v)"
 
-#: gnome/gdesktop.c:2904 gnome/glayout.c:470
+#: gnome/gdesktop.c:2975 gnome/glayout.c:470
 msgid "Recreate Default _Icons"
 msgstr "기본 아이콘 재생성(_I)"
 
-#: gnome/gdesktop.c:2906
+#: gnome/gdesktop.c:2977
 msgid "Configure _Background Image"
 msgstr "배경 그림 설정(_B)"
 
-#: gnome/gdesktop.c:2907
+#: gnome/gdesktop.c:2978
 msgid "Des_ktop Properties"
 msgstr "데스크탑 속성(_k)"
 
@@ -669,7 +669,7 @@ msgstr "done."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1864
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1811
 msgid "Password:"
 msgstr "비밀번호:"
 
@@ -810,7 +810,7 @@ msgid "Creates a new file in this directory"
 msgstr "이 디렉토리에 새로운 파일을 생성"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:393 gnome/gscreen.c:2118
+#: gnome/glayout.c:393 gnome/gscreen.c:2113
 msgid "_Copy..."
 msgstr "복사(_C)..."
 
@@ -818,7 +818,7 @@ msgstr "복사(_C)..."
 msgid "Copy files"
 msgstr "파일 복사"
 
-#: gnome/glayout.c:394 gnome/gscreen.c:2119
+#: gnome/glayout.c:394 gnome/gscreen.c:2114
 msgid "_Delete..."
 msgstr "지우기(_D)..."
 
@@ -826,7 +826,7 @@ msgstr "지우기(_D)..."
 msgid "Delete files"
 msgstr "파일 지움"
 
-#: gnome/glayout.c:395 gnome/gscreen.c:2120
+#: gnome/glayout.c:395 gnome/gscreen.c:2115
 msgid "_Move..."
 msgstr "이동(_M)..."
 
@@ -1562,59 +1562,59 @@ msgstr "%s bytes in %d files"
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
 
-#: gnome/gscreen.c:2118
+#: gnome/gscreen.c:2113
 msgid "Copy directory"
 msgstr "디렉토리 복사"
 
-#: gnome/gscreen.c:2119
+#: gnome/gscreen.c:2114
 msgid "Delete directory"
 msgstr "디렉토리 삭제"
 
-#: gnome/gscreen.c:2120
+#: gnome/gscreen.c:2115
 msgid "Rename or move directory"
 msgstr "디렉토리 이름을 바꾸거나 이동"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2273
 msgid "Back"
 msgstr "뒤로"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2273
 msgid "Go to the previously visited directory"
 msgstr "바로 전 디렉토리으로 가기"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2275
 msgid "Up"
 msgstr "위로"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2275
 msgid "Go up a level in the directory hierarchy"
 msgstr "디렉토리 계층의 윗 레벨로 가기"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2277
 msgid "Forward"
 msgstr "앞으로"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2277
 msgid "Go to the next directory"
 msgstr "다음 디렉토리으로 가기"
 
-#: gnome/gscreen.c:2285 src/tree.c:1010
+#: gnome/gscreen.c:2280 src/tree.c:1010
 msgid "Rescan"
 msgstr "Rescan"
 
-#: gnome/gscreen.c:2285
+#: gnome/gscreen.c:2280
 msgid "Rescan the current directory"
 msgstr "현재 디렉토리 다시 읽기"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2283
 msgid "Home"
 msgstr "홈"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2283
 msgid "Go to your home directory"
 msgstr "홈 디렉토리으로 가기"
 
-#: gnome/gscreen.c:2431
+#: gnome/gscreen.c:2426
 msgid "Location:"
 msgstr "위치:"
 
@@ -6975,31 +6975,31 @@ msgstr ""
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
 
-#: vfs/vfs.c:1140
+#: vfs/vfs.c:1138
 msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
 
-#: vfs/vfs.c:1826
+#: vfs/vfs.c:1773
 msgid "Could not parse:"
 msgstr "분석할 수 없음:"
 
-#: vfs/vfs.c:1828
+#: vfs/vfs.c:1775
 msgid "More parsing errors will be ignored."
 msgstr "앞으로의 분석에러는 무시될 것입니다."
 
-#: vfs/vfs.c:1828
+#: vfs/vfs.c:1775
 msgid "(sorry)"
 msgstr "(미안)"
 
-#: vfs/vfs.c:1838
+#: vfs/vfs.c:1785
 msgid "Internal error:"
 msgstr "내부 오류:"
 
-#: vfs/vfs.c:1848
+#: vfs/vfs.c:1795
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld 바이트 송신)"
 
-#: vfs/vfs.c:1849
+#: vfs/vfs.c:1796
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld 바이트 송신됨"

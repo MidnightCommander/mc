@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
-"POT-Creation-Date: 2001-03-11 15:02+0100\n"
+"POT-Creation-Date: 2001-04-16 12:45-0400\n"
 "PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
@@ -177,7 +177,7 @@ msgstr "Vnesite oznako za ukaz:"
 msgid "Find all core files"
 msgstr "Poi¹èi vse core datoteke"
 
-#: gnome/gcmd.c:510 src/panelize.c:350
+#: gnome/gcmd.c:510 src/panelize.c:349
 msgid "Find rejects after patching"
 msgstr "Poi¹èi zavrnjene po patchingu"
 
@@ -213,7 +213,7 @@ msgid "Set Filter"
 msgstr "Doloèi filter"
 
 #: gnome/gcmd.c:721 gnome/gcmd.c:762 gnome/gcmd.c:767 gnome/gcmd.c:771
-#: gnome/gscreen.c:2449
+#: gnome/gscreen.c:2447
 msgid "Show all files"
 msgstr "Ka¾i vse datoteke"
 
@@ -273,11 +273,11 @@ msgstr "Vnesite regularni izraz za izibiro datotek v pultnem pogledu."
 msgid "  Malformed regular expression  "
 msgstr "  Napaèno formuliran regularni izraz  "
 
-#: gnome/gcmd.c:1004
+#: gnome/gcmd.c:1002
 msgid "Creating a desktop link"
 msgstr "Ustvarjam povezavo na namizju"
 
-#: gnome/gcmd.c:1005
+#: gnome/gcmd.c:1003
 msgid "Enter the URL:"
 msgstr "Vnesite URL:"
 
@@ -350,28 +350,28 @@ msgstr "Prikazani stolpci"
 msgid "Custom View"
 msgstr "Prikrojen pogled"
 
-#: gnome/gdesktop.c:629 gnome/gmount.c:385
+#: gnome/gdesktop.c:679 gnome/gmount.c:385
 msgid "Warning"
 msgstr "Opozorilo"
 
-#: gnome/gdesktop.c:630
+#: gnome/gdesktop.c:680
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Ne morem odpreti %s; ikon namizja ne bo"
 
-#: gnome/gdesktop.c:1347
+#: gnome/gdesktop.c:1412
 msgid "While running the mount/umount command"
 msgstr "Med tekom ukaza mount/unmount (priklopi/odklopi)"
 
-#: gnome/gdesktop.c:1416
+#: gnome/gdesktop.c:1481
 msgid "While running the eject command"
 msgstr "Med tekom ukaza eject (izvrzi)"
 
-#: gnome/gdesktop.c:1600 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1665 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "Napaka"
 
-#: gnome/gdesktop.c:2832
+#: gnome/gdesktop.c:2917
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -385,92 +385,92 @@ msgstr ""
 "\n"
 "Ne morem nastaviti ozadja."
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:366
+#: gnome/gdesktop.c:2946 gnome/glayout.c:366
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:367
+#: gnome/gdesktop.c:2946 gnome/glayout.c:367
 msgid "Launch a new terminal in the current directory"
 msgstr "Po¾eni nov terminal v trenutnem imeniku"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2863 gnome/glayout.c:369
+#: gnome/gdesktop.c:2948 gnome/glayout.c:369
 msgid "_Directory..."
 msgstr "_Imenik..."
 
-#: gnome/gdesktop.c:2863 gnome/glayout.c:370
+#: gnome/gdesktop.c:2948 gnome/glayout.c:370
 msgid "Creates a new directory"
 msgstr "Ustvari nov imenik"
 
-#: gnome/gdesktop.c:2864
+#: gnome/gdesktop.c:2949
 msgid "URL L_ink..."
 msgstr "URL _povezava ..."
 
-#: gnome/gdesktop.c:2864
+#: gnome/gdesktop.c:2949
 msgid "Creates a new URL link"
 msgstr "Ustvari novo URL povezavo"
 
-#: gnome/gdesktop.c:2865
+#: gnome/gdesktop.c:2950
 msgid "_Launcher..."
 msgstr "_Zaganjalnik..."
 
-#: gnome/gdesktop.c:2865
+#: gnome/gdesktop.c:2950
 msgid "Creates a new launcher"
 msgstr "Ustvari nov zaganjalnik"
 
-#: gnome/gdesktop.c:2871
+#: gnome/gdesktop.c:2956
 msgid "By _Name"
 msgstr "Po ime_nu"
 
-#: gnome/gdesktop.c:2872
+#: gnome/gdesktop.c:2957
 msgid "By File _Type"
 msgstr "Po _tipu datoteke"
 
-#: gnome/gdesktop.c:2873
+#: gnome/gdesktop.c:2958
 msgid "By _Size"
 msgstr "Po veliko_sti"
 
-#: gnome/gdesktop.c:2874
+#: gnome/gdesktop.c:2959
 msgid "By Time Last _Accessed"
 msgstr "Po èasu zadnjeg_a dostopa"
 
-#: gnome/gdesktop.c:2875
+#: gnome/gdesktop.c:2960
 msgid "By Time Last _Modified"
 msgstr "Po èasu zadnje _modifikacije"
 
-#: gnome/gdesktop.c:2876
+#: gnome/gdesktop.c:2961
 msgid "By Time Last _Changed"
 msgstr "Po èasu zadnje _spremembe"
 
-#: gnome/gdesktop.c:2884 gnome/glayout.c:466
+#: gnome/gdesktop.c:2969 gnome/glayout.c:466
 msgid "_Arrange Icons"
 msgstr "_Uredi ikone"
 
-#: gnome/gdesktop.c:2885
+#: gnome/gdesktop.c:2970
 msgid "_Tidy Icons"
 msgstr "_Poèisti ikone"
 
-#: gnome/gdesktop.c:2886
+#: gnome/gdesktop.c:2971
 msgid "Create _New Window"
 msgstr "Ustvari _novo okno"
 
-#: gnome/gdesktop.c:2888 gnome/glayout.c:468
+#: gnome/gdesktop.c:2973 gnome/glayout.c:468
 msgid "Rescan _Desktop Directory"
 msgstr "Osve¾i namizni i_menik"
 
-#: gnome/gdesktop.c:2889 gnome/glayout.c:469
+#: gnome/gdesktop.c:2974 gnome/glayout.c:469
 msgid "Rescan De_vices"
 msgstr "Osve¾i napra_ve"
 
-#: gnome/gdesktop.c:2890 gnome/glayout.c:470
+#: gnome/gdesktop.c:2975 gnome/glayout.c:470
 msgid "Recreate Default _Icons"
 msgstr "Znova ustvari privzete _ikone"
 
-#: gnome/gdesktop.c:2892
+#: gnome/gdesktop.c:2977
 msgid "Configure _Background Image"
 msgstr "Nastavi sliko v _ozadju"
 
-#: gnome/gdesktop.c:2893
+#: gnome/gdesktop.c:2978
 msgid "Des_ktop Properties"
 msgstr "_Lastnosti namizja"
 
@@ -685,11 +685,11 @@ msgstr "Geslo"
 msgid "Symbolic Link"
 msgstr "Simbolna povezava"
 
-#: gnome/gdialogs.c:1055 src/boxes.c:803
+#: gnome/gdialogs.c:1055 src/boxes.c:801
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Ime obstojeèe datoteke (tja bo simbolna povezava kazala):"
 
-#: gnome/gdialogs.c:1069 src/boxes.c:801
+#: gnome/gdialogs.c:1069 src/boxes.c:799
 msgid "Symbolic link filename:"
 msgstr "Ime simbolne povezave:"
 
@@ -812,7 +812,7 @@ msgid "Creates a new file in this directory"
 msgstr "Ustvari novo datoteko v tem imeniku"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:393 gnome/gscreen.c:2118
+#: gnome/glayout.c:393 gnome/gscreen.c:2113
 msgid "_Copy..."
 msgstr "_Kopiraj..."
 
@@ -820,7 +820,7 @@ msgstr "_Kopiraj..."
 msgid "Copy files"
 msgstr "Kopiraj datoteke"
 
-#: gnome/glayout.c:394 gnome/gscreen.c:2119
+#: gnome/glayout.c:394 gnome/gscreen.c:2114
 msgid "_Delete..."
 msgstr "_Zbri¹i..."
 
@@ -828,7 +828,7 @@ msgstr "_Zbri¹i..."
 msgid "Delete files"
 msgstr "Zbri¹i datoteke"
 
-#: gnome/glayout.c:395 gnome/gscreen.c:2120
+#: gnome/glayout.c:395 gnome/gscreen.c:2115
 msgid "_Move..."
 msgstr "_Prestavi..."
 
@@ -1492,7 +1492,7 @@ msgstr "Ime datoteke"
 msgid "Full name: "
 msgstr "Polno ime: "
 
-#: gnome/gprop.c:109 src/panelize.c:205
+#: gnome/gprop.c:109 src/panelize.c:204
 msgid "Command"
 msgstr "Ukaz"
 
@@ -1563,69 +1563,69 @@ msgstr "%s bajtov v %d datotekah"
 msgid "<readlink failed>"
 msgstr "<branje povezave neuspe¹no>"
 
-#: gnome/gscreen.c:2118
+#: gnome/gscreen.c:2113
 msgid "Copy directory"
 msgstr "Kopiraj imenik"
 
-#: gnome/gscreen.c:2119
+#: gnome/gscreen.c:2114
 msgid "Delete directory"
 msgstr "Zbri¹i imenik"
 
-#: gnome/gscreen.c:2120
+#: gnome/gscreen.c:2115
 msgid "Rename or move directory"
 msgstr "Preimenuj ali prestavi imenik"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2273
 msgid "Back"
 msgstr "Nazaj"
 
-#: gnome/gscreen.c:2278
+#: gnome/gscreen.c:2273
 msgid "Go to the previously visited directory"
 msgstr "Pojdi na prej obiskani imenik"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2275
 msgid "Up"
 msgstr "Gor"
 
-#: gnome/gscreen.c:2280
+#: gnome/gscreen.c:2275
 msgid "Go up a level in the directory hierarchy"
 msgstr "Pojdi nivo navzgor v hirarhiji imenikov"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2277
 msgid "Forward"
 msgstr "Naprej"
 
-#: gnome/gscreen.c:2282
+#: gnome/gscreen.c:2277
 msgid "Go to the next directory"
 msgstr "Pojdi na naslednji imenik"
 
-#: gnome/gscreen.c:2285 src/tree.c:1010
+#: gnome/gscreen.c:2280 src/tree.c:1010
 msgid "Rescan"
 msgstr "Osve¾i"
 
-#: gnome/gscreen.c:2285
+#: gnome/gscreen.c:2280
 msgid "Rescan the current directory"
 msgstr "Znova osve¾i trenutni imenik"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2283
 msgid "Home"
 msgstr "Dom"
 
-#: gnome/gscreen.c:2288
+#: gnome/gscreen.c:2283
 msgid "Go to your home directory"
 msgstr "Pojdi v va¹ domaèi imenik"
 
-#: gnome/gscreen.c:2428
+#: gnome/gscreen.c:2426
 msgid "Location:"
 msgstr "Lokacija:"
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/editcmd.c:393 gtkedit/editcmd.c:1243
 #: gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:69
-#: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
-#: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
-#: src/filegui.c:839 src/find.c:171 src/layout.c:375 src/option.c:143
-#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:117
+#: src/boxes.c:138 src/boxes.c:276 src/boxes.c:376 src/boxes.c:464
+#: src/boxes.c:644 src/boxes.c:726 src/boxes.c:781 src/boxes.c:896
+#: src/filegui.c:824 src/find.c:176 src/layout.c:375 src/option.c:143
+#: src/wtools.c:290 src/wtools.c:563 vfs/smbfs.c:118
 msgid "&Ok"
 msgstr "&V redu"
 
@@ -1846,13 +1846,13 @@ msgstr "Delaj varnostne kopije -->"
 #. 0
 #: gtkedit/editcmd.c:391 gtkedit/editcmd.c:1191 gtkedit/editcmd.c:1241
 #: gtkedit/editcmd.c:1326 gtkedit/editcmd.c:3021 gtkedit/editoptions.c:66
-#: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
-#: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:867 src/filegui.c:822
-#: src/find.c:171 src/hotlist.c:138 src/hotlist.c:801 src/hotlist.c:898
+#: src/achown.c:71 src/boxes.c:139 src/boxes.c:277 src/boxes.c:374
+#: src/boxes.c:462 src/boxes.c:642 src/boxes.c:725 src/boxes.c:779
+#: src/chmod.c:114 src/chown.c:79 src/cmd.c:867 src/filegui.c:807
+#: src/find.c:176 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
 #: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:407 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
-#: vfs/smbfs.c:117
+#: vfs/smbfs.c:118
 msgid "&Cancel"
 msgstr "&Preklièi"
 
@@ -1989,11 +1989,11 @@ msgstr " Preklièi "
 msgid "o&Ne"
 msgstr "e&Na"
 
-#: gtkedit/editcmd.c:1195 src/filegui.c:597
+#: gtkedit/editcmd.c:1195 src/filegui.c:584
 msgid "al&L"
 msgstr "&vse"
 
-#: gtkedit/editcmd.c:1197 src/file.c:2194 src/filegui.c:267
+#: gtkedit/editcmd.c:1197 src/file.c:2194 src/filegui.c:266
 msgid "&Skip"
 msgstr "Pre&skoèi"
 
@@ -2236,13 +2236,13 @@ msgid "Cancel quit"
 msgstr "Preklièi izhod"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
+#: src/filegui.c:590 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
 #: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "&Da"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
-#: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
+#: src/filegui.c:589 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
 #: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "&Ne"
@@ -3061,8 +3061,8 @@ msgstr "%6d od %d"
 msgid " Chown advanced command "
 msgstr " Chown napreden ukaz "
 
-#: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:285
-#: src/chmod.c:370
+#: src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:282
+#: src/chmod.c:367
 #, c-format
 msgid ""
 " Couldn't chmod \"%s\" \n"
@@ -3081,8 +3081,8 @@ msgstr ""
 " Nisem mogel doloèiti lastni¹tva \"%s\" \n"
 " %s "
 
-#: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
+#: src/achown.c:666 src/achown.c:670 src/chmod.c:317 src/chmod.c:321
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:299 src/user.c:671
 msgid " Oops... "
 msgstr " Ups... "
 
@@ -3154,116 +3154,116 @@ msgstr "uporabni¹ko &Mini stanje"
 msgid "Listing mode"
 msgstr "Seznamski naèin"
 
-#: src/boxes.c:280
+#: src/boxes.c:278
 msgid "&Reverse"
 msgstr "&Obrnjeno"
 
-#: src/boxes.c:281
+#: src/boxes.c:279 src/find.c:169
 msgid "case sensi&tive"
 msgstr "razlikuj velike in male èrke"
 
-#: src/boxes.c:282
+#: src/boxes.c:280
 msgid "Sort order"
 msgstr "Vrstni red sortiranja"
 
-#: src/boxes.c:381
+#: src/boxes.c:379
 msgid " confirm &Exit "
 msgstr " potrdi &Izhod "
 
-#: src/boxes.c:383
+#: src/boxes.c:381
 msgid " confirm e&Xecute "
 msgstr " potrdi &Zagon"
 
-#: src/boxes.c:385
+#: src/boxes.c:383
 msgid " confirm o&Verwrite "
 msgstr " potrdi &Prepis"
 
-#: src/boxes.c:387
+#: src/boxes.c:385
 msgid " confirm &Delete "
 msgstr " potrdi &Brisanje"
 
-#: src/boxes.c:393
+#: src/boxes.c:391
 msgid " Confirmation "
 msgstr " Potrditev"
 
-#: src/boxes.c:461
+#: src/boxes.c:459
 msgid "Full 8 bits output"
 msgstr "Polni 8 bitni izhod"
 
-#: src/boxes.c:461
+#: src/boxes.c:459
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:461
+#: src/boxes.c:459
 msgid "7 bits"
 msgstr "7 bitni"
 
-#: src/boxes.c:468
+#: src/boxes.c:466
 msgid "F&ull 8 bits input"
 msgstr "P&olni 8 bitni vhod"
 
-#: src/boxes.c:476
+#: src/boxes.c:474
 msgid " Display bits "
 msgstr " Ka¾i bite "
 
-#: src/boxes.c:651
+#: src/boxes.c:649
 msgid "&Always use ftp proxy"
 msgstr "&Vedno uporabi posrednika za FTP"
 
-#: src/boxes.c:653
+#: src/boxes.c:651
 msgid "sec"
 msgstr "sek"
 
-#: src/boxes.c:657
+#: src/boxes.c:655
 msgid "ftpfs directory cache timeout:"
 msgstr "Èasovna omejitev za predpomnilnik ftpfs imenikov:"
 
-#: src/boxes.c:661
+#: src/boxes.c:659
 msgid "ftp anonymous password:"
 msgstr "geslo za anonimni ftp:"
 
-#: src/boxes.c:668
+#: src/boxes.c:666
 msgid "Timeout for freeing VFSs:"
 msgstr "Èasovna omejitev za sprostitev VFS-jev:"
 
-#: src/boxes.c:674
+#: src/boxes.c:672
 msgid " Virtual File System Setting "
 msgstr " Nastavitve Navideznega Datoteènega Sistema (VFS)"
 
-#: src/boxes.c:740
+#: src/boxes.c:738
 msgid "Quick cd"
 msgstr "Hitri cd"
 
 #. want cd like completion
-#: src/boxes.c:745
+#: src/boxes.c:743
 msgid "cd"
 msgstr "cd"
 
-#: src/boxes.c:796
+#: src/boxes.c:794
 msgid "Symbolic link"
 msgstr "Simbolna povezava"
 
-#: src/boxes.c:833
+#: src/boxes.c:831
 msgid "Running "
 msgstr "Teèe "
 
-#: src/boxes.c:834 src/find.c:719 src/find.c:960
+#: src/boxes.c:832 src/find.c:732 src/find.c:973
 msgid "Stopped"
 msgstr "Ustavljen"
 
-#: src/boxes.c:895
+#: src/boxes.c:893
 msgid "&Stop"
 msgstr "&Ustavi"
 
-#: src/boxes.c:896
+#: src/boxes.c:894
 msgid "&Resume"
 msgstr "&Nadaljuj"
 
-#: src/boxes.c:897
+#: src/boxes.c:895
 msgid "&Kill"
 msgstr "&Ubij"
 
-#: src/boxes.c:936
+#: src/boxes.c:934
 msgid "Background Jobs"
 msgstr "Posli v ozadju"
 
@@ -3367,11 +3367,11 @@ msgstr "in T ali INS za oznaèitev"
 msgid "Chmod command"
 msgstr "Chmod ukaz"
 
-#: src/chmod.c:321
+#: src/chmod.c:318
 msgid " I can't run the Chmod command on an extfs "
 msgstr " Ne morem pognati Chmod ukaza na extfs"
 
-#: src/chmod.c:325
+#: src/chmod.c:322
 msgid " I can't run the Chmod command on a tarfs "
 msgstr " Ne morem pognati Chmod ukaza na tarfs"
 
@@ -3634,15 +3634,15 @@ msgstr " Vnesite ime raèunalnika (F1 za podrobnosti):"
 msgid " Could not chdir to %s "
 msgstr " Nisem mogel iti v imenik %s"
 
-#: src/cmd.c:1391 src/widget.c:1162
+#: src/cmd.c:1391 src/widget.c:1161
 msgid " Link to a remote machine "
 msgstr " Pove¾i se z oddaljenim raèunalnikom"
 
-#: src/cmd.c:1397 src/widget.c:1163
+#: src/cmd.c:1397 src/widget.c:1162
 msgid " FTP to machine "
 msgstr " FTP dostop do raèunalnika"
 
-#: src/cmd.c:1403 src/widget.c:1164
+#: src/cmd.c:1403 src/widget.c:1163
 msgid " SMB link to machine "
 msgstr " SMB povezava do raèunalnika"
 
@@ -4149,7 +4149,7 @@ msgstr "Datoteka je bila prene¹ena nepopolno. Naj ostane?"
 msgid "&Delete"
 msgstr "&Zbri¹i"
 
-#: src/file.c:803 src/hotlist.c:1430
+#: src/file.c:803 src/hotlist.c:1428
 msgid "&Keep"
 msgstr "&Obdr¾i"
 
@@ -4394,7 +4394,7 @@ msgstr ""
 msgid "&Retry"
 msgstr "Poskusi &znova"
 
-#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:592
+#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:579
 msgid "&Abort"
 msgstr "&Prekini"
 
@@ -4422,7 +4422,7 @@ msgstr ""
 msgid "a&ll"
 msgstr "&vse"
 
-#: src/file.c:2254 src/filegui.c:595
+#: src/file.c:2254 src/filegui.c:582
 msgid "non&E"
 msgstr "br&Ez"
 
@@ -4442,110 +4442,110 @@ msgstr " Rekurzivno brisanje "
 msgid " Background process: Recursive Delete "
 msgstr " Proces v ozadju: Rekurzivno brisanje "
 
-#: src/filegui.c:424
+#: src/filegui.c:412
 msgid "File"
 msgstr "Datoteka"
 
-#: src/filegui.c:447
+#: src/filegui.c:435
 msgid "Count"
 msgstr "©tevec"
 
-#: src/filegui.c:468
+#: src/filegui.c:456
 msgid "Bytes"
 msgstr "Bajtov"
 
-#: src/filegui.c:505
+#: src/filegui.c:493
 msgid "Source"
 msgstr "Izvor"
 
-#: src/filegui.c:528
+#: src/filegui.c:516
 msgid "Target"
 msgstr "Cilj"
 
-#: src/filegui.c:550
+#: src/filegui.c:538
 msgid "Deleting"
 msgstr "Bri¹em"
 
-#: src/filegui.c:590
+#: src/filegui.c:577
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Ciljna datoteka \"%s\" ¾e obstaja!"
 
-#: src/filegui.c:593
+#: src/filegui.c:580
 msgid "if &Size differs"
 msgstr "èe se &Velikost razlikuje"
 
-#: src/filegui.c:596
+#: src/filegui.c:583
 msgid "&Update"
 msgstr "&Osve¾i"
 
-#: src/filegui.c:598
+#: src/filegui.c:585
 msgid "Overwrite all targets?"
 msgstr "Prepi¹i vse cilje?"
 
-#: src/filegui.c:600
+#: src/filegui.c:587
 msgid "&Reget"
 msgstr "&Znova dobi"
 
-#: src/filegui.c:601
+#: src/filegui.c:588
 msgid "ap&Pend"
 msgstr "&Dodaj"
 
-#: src/filegui.c:604
+#: src/filegui.c:591
 msgid "Overwrite this target?"
 msgstr "Prepi¹i ta cilj"
 
-#: src/filegui.c:606
+#: src/filegui.c:593
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Datum cilja: %s, velikost %d"
 
-#: src/filegui.c:608
+#: src/filegui.c:595
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Datum izvora: %s, velikost %d"
 
-#: src/filegui.c:692
+#: src/filegui.c:677
 msgid " File exists "
 msgstr " Datoteka obstaja "
 
-#: src/filegui.c:693
+#: src/filegui.c:678
 msgid " Background process: File exists "
 msgstr " Proces v ozadju: datoteka obstaja "
 
 #. follow symlinks and preserve Attributes must be the first
-#: src/filegui.c:805
+#: src/filegui.c:790
 msgid "preserve &Attributes"
 msgstr "ohrani &Atribute"
 
 #. &op_preserve
-#: src/filegui.c:807
+#: src/filegui.c:792
 msgid "follow &Links"
 msgstr "sledi &Povezavam"
 
 #. &file_mask_op_follow_links
-#: src/filegui.c:809
+#: src/filegui.c:794
 msgid "to:"
 msgstr "v:"
 
-#: src/filegui.c:810
+#: src/filegui.c:795
 msgid "&Using shell patterns"
 msgstr "&Uporabi vzorce lupine"
 
-#: src/filegui.c:831
+#: src/filegui.c:816
 msgid "&Background"
 msgstr "&Ozadje"
 
-#: src/filegui.c:840
+#: src/filegui.c:825
 msgid "&Stable Symlinks"
 msgstr "&Stabilne simbolne povezave"
 
 #. &file_mask_stable_symlinks
-#: src/filegui.c:842
+#: src/filegui.c:827
 msgid "&Dive into subdir if exists"
 msgstr "&Potopi se v podimenik, èe obstaja"
 
-#: src/filegui.c:1001
+#: src/filegui.c:986
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -4586,82 +4586,82 @@ msgstr "&Pogled - F3"
 msgid "&Edit - F4"
 msgstr "&Uredi - F4"
 
-#: src/find.c:170
+#: src/find.c:175
 msgid "Start at:"
 msgstr "Zaèni pri:"
 
-#: src/find.c:170
+#: src/find.c:175
 msgid "Filename:"
 msgstr "Ime datoteke:"
 
-#: src/find.c:170
+#: src/find.c:175
 msgid "Content: "
 msgstr "Vsebina: "
 
-#: src/find.c:171 src/main.c:1251 src/main.c:1275
+#: src/find.c:176 src/main.c:1251 src/main.c:1275
 msgid "&Tree"
 msgstr "&Drevo"
 
-#: src/find.c:223
+#: src/find.c:230
 msgid "Find File"
 msgstr "Poi¹èi datoteko"
 
-#: src/find.c:452
+#: src/find.c:465
 #, c-format
 msgid "Grepping in %s"
 msgstr "I¹èem v %s"
 
-#: src/find.c:490
+#: src/find.c:503
 msgid " Find/read "
 msgstr " Poi¹èi/beri"
 
-#: src/find.c:490
+#: src/find.c:503
 msgid " Problem reading from child "
 msgstr " Napaka ob branju iz otroka "
 
-#: src/find.c:537
+#: src/find.c:550
 msgid "Finished"
 msgstr "Konèano"
 
-#: src/find.c:561 src/view.c:1518
+#: src/find.c:574 src/view.c:1518
 #, c-format
 msgid "Searching %s"
 msgstr "I¹èem %s"
 
-#: src/find.c:717 src/find.c:757
+#: src/find.c:730 src/find.c:770
 msgid "Suspend"
 msgstr "Izkljuèi"
 
-#: src/find.c:717
+#: src/find.c:730
 msgid "Restart"
 msgstr "Znova za¾eni"
 
-#: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
+#: src/find.c:732 src/find.c:834 src/find.c:973 src/find.c:1069
 msgid "Searching"
 msgstr "I¹èem"
 
-#: src/find.c:750 src/find.c:1031
+#: src/find.c:763 src/find.c:1044
 msgid "Find file"
 msgstr "Poi¹èi datoteko"
 
 #. The buttons
-#: src/find.c:755
+#: src/find.c:768
 msgid "Change to this directory"
 msgstr "Pojdi v ta imenik"
 
-#: src/find.c:756
+#: src/find.c:769
 msgid "Search again"
 msgstr "Iskanje znova"
 
-#: src/find.c:761
+#: src/find.c:774
 msgid "View this file"
 msgstr "Poglej to datoteko"
 
-#: src/find.c:762
+#: src/find.c:775
 msgid "Edit this file"
 msgstr "Uredi to datoteko"
 
-#: src/find.c:763
+#: src/find.c:776
 msgid "Send the results to a Panel"
 msgstr "Po¹lji rezultate v pult"
 
@@ -4711,15 +4711,15 @@ msgstr "Nazaj"
 msgid "&Move"
 msgstr "&Prestavi"
 
-#: src/hotlist.c:133 src/hotlist.c:1430 src/panelize.c:88 src/wtools.c:383
+#: src/hotlist.c:133 src/hotlist.c:1428 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
 msgstr "&Odstrani"
 
-#: src/hotlist.c:134 src/hotlist.c:805 src/hotlist.c:902
+#: src/hotlist.c:134 src/hotlist.c:803 src/hotlist.c:900
 msgid "&Append"
 msgstr "&Pripni"
 
-#: src/hotlist.c:135 src/hotlist.c:803 src/hotlist.c:900
+#: src/hotlist.c:135 src/hotlist.c:801 src/hotlist.c:898
 msgid "&Insert"
 msgstr "&Vstavi"
 
@@ -4755,53 +4755,53 @@ msgstr "Dejavni VFS imeniki"
 msgid "Directory hotlist"
 msgstr " Vroèa lista imenikov"
 
-#: src/hotlist.c:626
+#: src/hotlist.c:625
 msgid " Directory path "
 msgstr " Pot imenika "
 
 #. This one holds the displayed pathname
-#: src/hotlist.c:629 src/hotlist.c:676
+#: src/hotlist.c:628 src/hotlist.c:674
 msgid " Directory label "
 msgstr " Oznaka imenika "
 
-#: src/hotlist.c:650
+#: src/hotlist.c:649
 msgid "Moving "
 msgstr "Premikam "
 
-#: src/hotlist.c:879
+#: src/hotlist.c:877
 msgid "New hotlist entry"
 msgstr "Nov vpis v vroè seznam"
 
-#: src/hotlist.c:879
+#: src/hotlist.c:877
 msgid "Directory label"
 msgstr "Oznaka imenika"
 
-#: src/hotlist.c:879
+#: src/hotlist.c:877
 msgid "Directory path"
 msgstr "Pot imenika"
 
-#: src/hotlist.c:960
+#: src/hotlist.c:958
 msgid " New hotlist group "
 msgstr " Nova skupina v vroèem seznamu"
 
-#: src/hotlist.c:960
+#: src/hotlist.c:958
 msgid "Name of new group"
 msgstr "Ime nove skupine"
 
-#: src/hotlist.c:975
+#: src/hotlist.c:973
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Oznaka za \"%s\":"
 
-#: src/hotlist.c:979
+#: src/hotlist.c:977
 msgid " Add to hotlist "
 msgstr " Dodaj na vroèi seznam"
 
-#: src/hotlist.c:1016
+#: src/hotlist.c:1014
 msgid " Remove: "
 msgstr " Odstrani: "
 
-#: src/hotlist.c:1020
+#: src/hotlist.c:1018
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -4811,51 +4811,51 @@ msgstr ""
 " Skupina ni prazna.\n"
 " Naj jo odstranim?"
 
-#: src/hotlist.c:1365
+#: src/hotlist.c:1363
 msgid " Top level group "
 msgstr " Vrhnja skupina "
 
-#: src/hotlist.c:1381
+#: src/hotlist.c:1379
 msgid "Hotlist is now kept in file ~/"
 msgstr "Vroèi seznam je sedaj v datoteki ~/"
 
-#: src/hotlist.c:1383
+#: src/hotlist.c:1381
 msgid "MC will load hotlist from ~/"
 msgstr "Polnoèni Poveljnik bo nalo¾il vroèi seznam iz  ~/"
 
-#: src/hotlist.c:1385
+#: src/hotlist.c:1383
 msgid "and then delete [Hotlist] section there"
 msgstr "in nato zbrisal [Hotlist] sekcijo tam"
 
-#: src/hotlist.c:1387 src/hotlist.c:1406 src/hotlist.c:1429 src/hotlist.c:1454
+#: src/hotlist.c:1385 src/hotlist.c:1404 src/hotlist.c:1427 src/hotlist.c:1452
 msgid " Hotlist Load "
 msgstr " Nalo¾i vroèi seznam"
 
-#: src/hotlist.c:1403 src/hotlist.c:1451
+#: src/hotlist.c:1401 src/hotlist.c:1449
 msgid "MC was unable to write ~/"
 msgstr "Polnoèni Poveljnik ni mogel zapisati ~/"
 
-#: src/hotlist.c:1404
+#: src/hotlist.c:1402
 msgid " file, your old hotlist entries were not deleted"
 msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
-#: src/hotlist.c:1418
+#: src/hotlist.c:1416
 msgid "You have ~/"
 msgstr "Imate  ~/"
 
-#: src/hotlist.c:1418
+#: src/hotlist.c:1416
 msgid " file and [Hotlist] section in ~/"
 msgstr " datoteko in [Hotlist] sekcijo v  ~/"
 
-#: src/hotlist.c:1419
+#: src/hotlist.c:1417
 msgid "Your ~/"
 msgstr "Va¹ ~/"
 
-#: src/hotlist.c:1419
+#: src/hotlist.c:1417
 msgid " most probably was created\n"
 msgstr " je bil zelo verjetno ustvarjen\n"
 
-#: src/hotlist.c:1420
+#: src/hotlist.c:1418
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -4863,7 +4863,7 @@ msgstr ""
 "s strani starej¹e razvojne razlièice Polnoènega Poveljnika\n"
 "in je bolj aktualen kot ~/"
 
-#: src/hotlist.c:1421
+#: src/hotlist.c:1419
 msgid ""
 " entries\n"
 "\n"
@@ -4871,7 +4871,7 @@ msgstr ""
 " vpisov\n"
 "\n"
 
-#: src/hotlist.c:1422
+#: src/hotlist.c:1420
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4881,7 +4881,7 @@ msgstr ""
 "\n"
 "  Odstrani - odstranite stare vpise v vroèi seznam ~/"
 
-#: src/hotlist.c:1424
+#: src/hotlist.c:1422
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -4891,15 +4891,15 @@ msgstr ""
 "           bo zastavljeno prihodnjiè\n"
 "  Zdru¾i  - dodajte stare vnose v vroèi seznam kot skup¹ino \"Vnosi iz ~/"
 
-#: src/hotlist.c:1430
+#: src/hotlist.c:1428
 msgid "&Merge"
 msgstr "&Zdru¾i"
 
-#: src/hotlist.c:1442
+#: src/hotlist.c:1440
 msgid " Entries from ~/"
 msgstr " Vnosi iz ~/"
 
-#: src/hotlist.c:1452
+#: src/hotlist.c:1450
 msgid " file your old hotlist entries were not deleted"
 msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
@@ -5864,41 +5864,41 @@ msgstr "&Dodaj novo"
 msgid " External panelize "
 msgstr " V pult od zunaj"
 
-#: src/panelize.c:194 src/panelize.c:458
+#: src/panelize.c:194 src/panelize.c:457
 msgid "External panelize"
 msgstr "V pult od zunaj"
 
-#: src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
+#: src/panelize.c:218 src/panelize.c:275 src/panelize.c:346 src/panelize.c:367
 msgid "Other command"
 msgstr "Drug ukaz"
 
-#: src/panelize.c:260
+#: src/panelize.c:259
 msgid " Add to external panelize "
 msgstr " Dodaj v pult od zunaj "
 
-#: src/panelize.c:261
+#: src/panelize.c:260
 msgid " Enter command label: "
 msgstr " Vnesite oznèbo ukaza: "
 
-#: src/panelize.c:301
+#: src/panelize.c:300
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
 " Ne morem pognati dodajanja v pult od zunaj dokler sem prijavljen na "
 "ne-krajeven imenik "
 
-#: src/panelize.c:351
+#: src/panelize.c:350
 msgid "Find *.orig after patching"
 msgstr "Poi¹èi *.orig po patchanju"
 
-#: src/panelize.c:352
+#: src/panelize.c:351
 msgid "Find SUID and SGID programs"
 msgstr "Poi¹èi SUID in SGID programe"
 
-#: src/panelize.c:403
+#: src/panelize.c:402
 msgid "Cannot invoke command."
 msgstr "Ne morem izvesti ukaza."
 
-#: src/panelize.c:458
+#: src/panelize.c:457
 msgid "Pipe close failed"
 msgstr "Zaprtje cevi neuspe¹no"
 
@@ -6329,7 +6329,7 @@ msgstr "Neformatirano"
 msgid "Format"
 msgstr "Oblikuj izpis"
 
-#: src/widget.c:994
+#: src/widget.c:993
 msgid " History "
 msgstr " Zgodovina "
 
@@ -6914,24 +6914,24 @@ msgstr " Preveè odprtih povezav"
 msgid "Midnight Commander's private remote filesystem"
 msgstr "Privatni oddaljen datoteèni sistem Polnoènega Poveljnika"
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:117
 msgid "Domain:"
 msgstr "Domena:"
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:117
 msgid "Username:"
 msgstr "Uporabni¹ko ime:"
 
-#: vfs/smbfs.c:116
+#: vfs/smbfs.c:117
 msgid "Password: "
 msgstr "Geslo: "
 
-#: vfs/smbfs.c:171
+#: vfs/smbfs.c:172
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Geslo za \\\\%s\\%s"
 
-#: vfs/smbfs.c:668
+#: vfs/smbfs.c:678
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6940,32 +6940,32 @@ msgstr ""
 " ponovno povezovanje z %s ni uspelo\n"
 " "
 
-#: vfs/smbfs.c:1244
+#: vfs/smbfs.c:1256
 msgid " Authentication failed "
 msgstr " Avtentifikacija je bila neuspe¹na "
 
-#: vfs/smbfs.c:1739
+#: vfs/smbfs.c:1749
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s ustvarja imenik %s"
 
-#: vfs/smbfs.c:1760
+#: vfs/smbfs.c:1770
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s bri¹e imenik %s"
 
-#: vfs/smbfs.c:1865 vfs/smbfs.c:1885 vfs/smbfs.c:1946
+#: vfs/smbfs.c:1875 vfs/smbfs.c:1895 vfs/smbfs.c:1956
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s odpira oddaljeno datoteko %s"
 
-#: vfs/smbfs.c:1969
+#: vfs/smbfs.c:1979
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s preimenuje datoteke\n"
 
 #. This is place of next pointer
-#: vfs/smbfs.c:1995
+#: vfs/smbfs.c:2005
 msgid "netbios over tcp/ip"
 msgstr "netbios preko tcp/ip"
 
