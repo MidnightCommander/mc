@@ -682,20 +682,20 @@ due colonne aggiungendo il numero "2" alla stringa di formato.
 .PP
 Dopodichè si aggiunge il nome dei campi con una specifica di ampiezza
 opzionale. Questi sono i campi disponibile per la visualizzazione:
-.PP
-.BR name ,
+.TP
+.B name
 mostra il nome del file.
-.PP
-.BR size ,
+.TP
+.B size
 mostra l'ampiezza del file.
-.PP
-.BR bsize ,
+.TP
+.BR bsize
 è una forma alternativa del formato
-.BR size .
-Mostra l'ampiezza del file e per le directory mostra solo 
+.B size
+mostra l'ampiezza del file e per le directory mostra solo 
 SUB-DIR o UP--DIR.
-.PP
-.BR type ,
+.TP
+.BR type
 mostra un campo di un carattere. Questo carattere è simile a quello
 mostrato dal comando ls con la flag -F -
 .B *
@@ -716,50 +716,50 @@ per le pipe,
 per i collegamenti simbolici a directory e 
 .B !
 per i collegamenti simbolici stallati (che non puntano a niente).
-.PP
-.B mtime,
+.TP
+.B mtime
 la data dell'ultima modifica al file.
-.PP
-.B atime,
+.TP
+.B atime
 la data dell'ultimo accesso al file.
-.PP
-.B ctime,
+.TP
+.B ctime
 la data della creazione del file.
-.PP
-.B perm,
+.TP
+.B perm
 una stringa che rappresenta i bit dei permessi del file.
-.PP
-.B mode,
+.TP
+.B mode
 un valore ottale con i permessi correnti del file.
-.PP
-.B nlink,
+.TP
+.B nlink
 il numero dei collegamenti al file.
-.PP
-.B ngid,
+.TP
+.B ngid
 il GID (numerico).
-.PP
-.B nuid,
+.TP
+.B nuid
 l'UID (numerico).
-.PP
-.B owner,
+.TP
+.B owner
 il proprietario del file.
-.PP
-.B group,
+.TP
+.B group
 il gruppo del file.
-.PP
-.B inode,
+.TP
+.B inode
 l'inode del file.
 .PP
 Puoi usare ache questi campi per sistemare la visualizzazione:
-.PP
-.B space,
+.TP
+.B space
 uno spazio nel formato visualizzazione.
-.PP
-.B mark,
-Un asterico se il file è marcato, uno spazio se non lo è.
-.PP
-.B |,
-Questo carattere viene utilizzato per aggiungere una linea verticale
+.TP
+.B mark
+un asterico se il file è marcato, uno spazio se non lo è.
+.TP
+.B |
+questo carattere viene utilizzato per aggiungere una linea verticale
 al formato di visualizzazione.
 .PP
 Per forzare un campo ad un'ampiezza fissa (una specifica di ampiezza)
