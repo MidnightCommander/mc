@@ -1,3 +1,8 @@
+2000-09-25  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* extfs/mcunarj.diff: better version from Christian Gennerat
+	<christian.gennerat@vz.cit.alcatel.fr>
+
 2000-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/uzoo.in: Suppress output from grep. Don't use '~',

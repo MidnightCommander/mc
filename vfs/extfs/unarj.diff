@@ -1,18 +1,15 @@
-Only in unarj241a/: unarj
-diff -ur -x .dep* -x .hdep* -x *.[oas] -x *~ -x #* -x *CVS* -x *.orig -x *.rej -x *.old -x .menu* -x asm -x local.h -x System.map -x autoconf.h -x compile.h -x version.h -x .version -x defkeymap.c -x uni_hash.tbl -x zImage -x vmlinu?* -x TAGS -x bootsect -x *RCS* -x conmakehash -x map -x build -x build -x configure -x *target* /elf/tmp/unarj241a.tar.gz#utar/unarj241a/unarj.c unarj241a/unarj.c
---- /elf/tmp/unarj241a.tar.gz#utar/unarj241a/unarj.c	Sun Apr 10 11:00:56 1994
-+++ unarj241a/unarj.c	Mon Mar 16 21:00:47 1998
-@@ -40,7 +40,8 @@
-  * 11/24/91  R. Jung     Added more error_count processing.
-  * 12/03/91  R. Jung     Added backup file processing.
+diff -bur arj/unarj.c mc/unarj.c
+--- arj/unarj.c	Mon Sep 29 14:00:24 1997
++++ mc/unarj.c	Fri Sep 22 21:44:29 2000
+@@ -42,6 +42,7 @@
   * 02/17/93  R. Jung     Added archive modified date support.
-- * 940410    aeb@cwi.nl  Added automatic directory creation for x mode.
-+ * 04/10/94  aeb@cwi.nl  Added automatic directory creation for x mode.
+  * 01/22/94  R. Jung     Changed copyright message.
+  * 07/29/96  R. Jung     Added "/" to list of path separators.
 + * 02/16/98 pavel@ucw.cz Added v mode, added p mode. THIS IS MODIFIED VERSION.
   *
   */
  
-@@ -88,6 +89,7 @@
+@@ -89,6 +90,7 @@
  uchar  header[HEADERSIZE_MAX];
  char   arc_name[FNAME_MAX];
  int    command;
@@ -20,32 +17,29 @@ diff -ur -x .dep* -x .hdep* -x *.[oas] -x *~ -x #* -x *CVS* -x *.orig -x *.rej -
  int    bitcount;
  int    file_type;
  int    no_output;
-@@ -102,6 +104,10 @@
+@@ -103,6 +105,11 @@
  "        UNARJ l archive        (list archive)\n",
  "        UNARJ t archive        (test archive)\n",
  "        UNARJ x archive        (extract with pathnames)\n",
-+"        UNARJ v archive	(list archive with pathnames)\n",
++"        UNARJ v archive        (list archive with pathnames)\n",
 +"        UNARJ p archive file   (print single file from archive to stderr)\n",
 +"\n",
-+"Warning, this version has been modified by pavel@ucw.cz.\n"
++"Warning, this version has been modified by pavel@ucw.cz\n",
++"to be used as virtual fs within mc (Midnight Commander).\n",
  "\n",
  "This is an ARJ demonstration program and ** IS NOT OPTIMIZED ** for speed.\n",
  "You may freely use, copy and distribute this program, provided that no fee\n",
-@@ -744,15 +750,24 @@
+@@ -723,15 +730,24 @@
      if (command == 'E')
          strcpy(name, &filename[entry_pos]);
      else
--    {
--        strcpy(name, DEFAULT_DIR);
--        strcat(name, filename);
--    }
 +        if (command == 'X')
-+	{
-+	    strcpy(name, DEFAULT_DIR);
-+	    strcat(name, filename);
-+	}
-+	else
-+	    if (strcmp( &filename[entry_pos], file_to_extract ))
+     {
+         strcpy(name, DEFAULT_DIR);
+         strcat(name, filename);
+     }
++    else
++	    if (strcmp( &filename[0], file_to_extract ))
 +	    {
 +	        skip();
 +	        return 0;
@@ -61,47 +55,54 @@ diff -ur -x .dep* -x .hdep* -x *.[oas] -x *~ -x #* -x *CVS* -x *.orig -x *.rej -
      {
          printf(M_FEXISTS, name);
          printf(M_SKIPPED, name);
-@@ -764,7 +779,10 @@
-     if (command == 'X')
-         create_required_dirs(name);
- #endif
--    outfile = file_open(name, writemode[file_type & 1]);
+@@ -739,7 +755,10 @@
+         error_count++;
+         return 0;
+     }
 +    if (command != 'P')
-+        outfile = file_open(name, writemode[file_type & 1]);
+     outfile = file_open(name, writemode[file_type & 1]);
 +    else
 +        outfile = stderr;
      if (outfile == NULL)
      {
          printf(M_CANTOPEN, name);
-@@ -890,8 +908,11 @@
+@@ -865,9 +884,12 @@
      strcpy(fmode_str, "    ");
      if (host_os == OS)
          get_mode_str(fmode_str, (uint) file_mode);
 -    if (strlen(&filename[entry_pos]) > 12)
--        printf("%-12s\n             ", &filename[entry_pos]);
 +    if ((strlen(&filename[entry_pos]) > 12) || (command == 'V'))
 +        if (command != 'V')
-+	    printf("%-12s\n             ", &filename[entry_pos]);
-+        else
-+	    printf("%s\n             ", filename);
+         printf("%-12s\n             ", &filename[entry_pos]);
      else
++	    printf("%s\n             ", filename);
++    else
          printf("%-12s ", &filename[entry_pos]);
      printf("%10ld %10ld %u.%03u %s %08lX %4s%c%c%c%u%c%c%c\n",
-@@ -935,11 +956,13 @@
+         origsize, compsize, r / 1000, r % 1000, &date_str[2], file_crc,
+@@ -910,11 +932,13 @@
      {
          switch (command)
          {
-+	case 'P':
++        case 'P':
          case 'E':
          case 'X':
              if (extract())
                  file_count++;
              break;
-+	case 'V':
++        case 'V':
          case 'L':
              list_arc(file_count++);
              skip();
-@@ -1002,14 +1025,20 @@
+@@ -934,6 +958,7 @@
+             file_count, torigsize, tcompsize, r / 1000, r % 1000, &date_str[2]);
+     }
+     else
++    if (command != 'V')
+         printf(M_NBRFILES, file_count);
+ 
+     fclose(arcfile);
+@@ -977,14 +1002,20 @@
          if (strlen(argv[1]) > 1)
              error(M_BADCOMND, argv[1]);
          command = toupper(*argv[1]);
@@ -112,17 +113,14 @@ diff -ur -x .dep* -x .hdep* -x *.[oas] -x *~ -x #* -x *CVS* -x *.orig -x *.rej -
      }
      else
      {
--        help();
--        return EXIT_FAILURE;
 +        command = toupper(*argv[1]);
 +	if ((command!='P') || (argc != 4))
 +	{
-+	    help();
-+	    return EXIT_FAILURE;
+         help();
+         return EXIT_FAILURE;
 +	}
 +	file_to_extract = argv[3];
 +	arc_p = argv[2];
      }
  
      strncopy(arc_name, arc_p, FNAME_MAX);
-Only in unarj241a/: unarj.c.diff-right
