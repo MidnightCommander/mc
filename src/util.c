@@ -524,19 +524,6 @@ char *split_extension (char *x, int pad)
     return xbuf; */
 }
 
-#ifndef HAVE_MAD
-void *do_xmalloc (int size)
-{
-    void *m = malloc (size);
-
-    if (!m){
-	fprintf (stderr, "memory exhausted\n");
-	exit (1);
-    }
-    return m;
-}
-#endif /* HAVE_MAD */
-
 int get_int (char *file, char *key, int def)
 {
     return GetPrivateProfileInt (app_text, key, def, file);
@@ -733,33 +720,37 @@ char *unix_error_string (int error_num)
     return buffer;
 }
 
-char *copy_strings (const char *first,...)
+#ifdef HAVE_MAD
+char *copy_strings (const char *first, ...)
 {
     va_list ap;
-    int len;
+    long len;
     char *data, *result;
 
     if (!first)
 	return 0;
     
-    len = strlen (first);
+    len = strlen (first) + 1;
     va_start (ap, first);
 
-    while ((data = va_arg (ap, char *))!=0)
+    while ((data = va_arg (ap, char *)) != 0)
 	len += strlen (data);
 
-    len++;
-
-    result = xmalloc (len, "copy_strings");
+    result = g_malloc (len);
+    
     va_end (ap);
+
     va_start (ap, first);
     strcpy (result, first);
+
     while ((data = va_arg (ap, char *)) != 0)
 	strcat (result, data);
+
     va_end (ap);
 
     return result;
 }
+#endif /* HAVE_MAD */
 
 #ifndef VFS_STANDALONE	
 long blocks2kilos (int blocks, int bsize)

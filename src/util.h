@@ -24,7 +24,7 @@ char *strip_home_and_password(char *dir);
 char *extension (char *);
 char *split_extension (char *, int pad);
 char *get_full_name (char *dir, char *file);
-char *copy_strings (const char *first, ...);
+
 char *concat_dir_and_file (const char *dir, const char *file);
 char *unix_error_string (int error_num);
 char *skip_separators (char *s);
@@ -44,9 +44,14 @@ int strcasecmp (const char *s, const char *d);
 char *x_basename (char *s);
 
 extern int align_extensions;
-#ifndef HAVE_MAD
+#ifdef HAVE_MAD
+char *copy_strings (const char *first, ...);
+#else
 void *do_xmalloc (int);
-#define xmalloc(a,b) do_xmalloc (a)
+#define xmalloc(a,b) 	g_malloc(a)
+#define copy_strings	g_strconcat
+char *g_strconcat (const char *first, ...);
+void *g_malloc (unsigned long);
 #endif
 
 /* Profile managing functions */

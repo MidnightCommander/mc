@@ -28,13 +28,18 @@
 
 #define tempnam(x,y)	mad_tempnam (x, y)
 
-
 #define malloc(x)	mad_alloc (x, __FILE__, __LINE__)
 #define calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
 #define realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
 #define xmalloc(x, y)	mad_alloc (x, __FILE__, __LINE__)
 #define strdup(x)	mad_strdup (x, __FILE__, __LINE__)
 #define free(x)		mad_free (x, __FILE__, __LINE__)
+
+#define g_malloc(x)	mad_alloc (x, __FILE__, __LINE__)
+#define g_calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
+#define g_realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
+#define g_strdup(x)	mad_strdup (x, __FILE__, __LINE__)
+#define g_free(x)	mad_free (x, __FILE__, __LINE__)
 
 void mad_check (char *file, int line);
 void *mad_alloc (int size, char *file, int line);

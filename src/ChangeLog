@@ -1,3 +1,8 @@
+Thu Jan 21 01:11:24 1999  Timur Bakeyev <mc@bat.ru>
+
+	* mad.[ch], util.[ch]: commit changes, that allow coexist (temporary) 
+	GLib'ed VFS and not still converted MC itself.
+
 1999-01-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_start_check): Use mc_stat(), not stat().

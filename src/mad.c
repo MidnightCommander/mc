@@ -19,12 +19,21 @@
 
 #include <config.h>
 #include "mad.h"
+
 #undef malloc
 #undef calloc
 #undef realloc
 #undef xmalloc
 #undef strdup
 #undef free
+
+#undef g_malloc
+#undef g_calloc
+#undef g_realloc
+#undef g_strdup
+#undef g_strconcat
+#undef g_free
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -32,6 +41,7 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For getpid() */
 #endif
+#include <glib.h>
 
 /* Here to avoid non empty translation units */
 #ifdef HAVE_MAD
@@ -107,7 +117,7 @@ void *mad_alloc (int size, char *file, int line)
 
     mem_areas [i].in_use = 1;
     size = (size + 3) & (~3); /* Alignment */
-    area = (char*) malloc (size + 2 * sizeof (long));
+    area = (char*) g_malloc (size + 2 * sizeof (long));
     if (!area){
 	fprintf (stderr, "MAD: Out of memory.\r\n");
 	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
@@ -156,7 +166,7 @@ void *mad_realloc (void *ptr, int newsize, char *file, int line)
     }
 
     newsize = (newsize + 3) & (~3); /* Alignment */
-    area = (char*) realloc (mem_areas [i].start_sig, newsize + 2 * sizeof (long));
+    area = (char*) g_realloc (mem_areas [i].start_sig, newsize + 2 * sizeof (long));
     if (!area){
 	fprintf (stderr, "MAD: Out of memory.\r\n");
 	fprintf (stderr, "     Discovered in file \"%s\" at line %d.\r\n",
@@ -221,7 +231,7 @@ void mad_free (void *ptr, char *file, int line)
 	abort ();
     }
 
-    free (mem_areas [i].start_sig);
+    g_free (mem_areas [i].start_sig);
     mem_areas [i].in_use = 0;
 }
 
@@ -230,7 +240,7 @@ char *mad_tempnam (char *a, char *b)
     char *t, *u;
     t = tempnam(a,b);
     u = mad_strdup(t, "(mad_tempnam)", 0);
-    free(t);
+    g_free(t);
     return u;    
 }
 
