@@ -1852,13 +1852,12 @@ error:
       static int errorcount = 0;
 
       if (++errorcount < 5) {
-	message_1s (1, _("Could not parse:"), p_copy ? p_copy : line);
+	message_1s (1, _("Could not parse:"), (p_copy && *p_copy) ? p_copy : line);
       } else if (errorcount == 5)
-	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
+	message_1s (1, _(" Error "), _("More parsing errors will be ignored."));
     }
 
-    if (p_copy)
-	g_free (p_copy);
+    g_free (p_copy);
     return 0;
 }
 
