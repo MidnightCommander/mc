@@ -256,6 +256,8 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
  */
 static struct action file_actions[] = {
 	{ N_("Properties"),      F_SINGLE | F_PANEL,   	  	 (GtkSignalFunc) panel_action_properties },
+	{ N_("Delete"),          F_PANEL | F_ALL,                (GtkSignalFunc) delete_cmd },
+	{ N_("Delete"),          F_DICON | F_ALL,                (GtkSignalFunc) dicon_delete },
 	{ N_("Properties"),      F_SINGLE | F_DICON,  	  	 (GtkSignalFunc) dicon_properties },
 	{ N_("Mount device"),    F_SINGLE|F_MOUNTABLE|F_DICON,   (GtkSignalFunc) dicon_mount },
 	{ N_("Unmount device"),  F_SINGLE|F_UNMOUNTABLE|F_DICON, (GtkSignalFunc) dicon_unmount },
@@ -268,32 +270,13 @@ static struct action file_actions[] = {
 	{ N_("View unfiltered"), F_PANEL | F_NOTDIR,      	 (GtkSignalFunc) panel_action_view_unfiltered },  
 	{ N_("Edit"),            F_PANEL | F_NOTDIR,             (GtkSignalFunc) panel_action_edit },
 	{ "",                    0,          	                 NULL },
+	{ N_("Move/rename..."),  F_PANEL | F_ALL,                (GtkSignalFunc) ren_cmd },
+	{ N_("Copy..."),         F_PANEL | F_ALL,                (GtkSignalFunc) copy_cmd },
+	{ "",                    0,          	                 NULL },
 	{ N_("Link..."),         F_PANEL | F_REGULAR | F_SINGLE, (GtkSignalFunc) link_cmd },
 	{ N_("Symlink..."),      F_PANEL | F_SINGLE,             (GtkSignalFunc) symlink_cmd },
 	{ N_("Edit symlink..."), F_PANEL | F_SYMLINK,            (GtkSignalFunc) edit_symlink_cmd },
 	{ NULL, 0, NULL },
-};
-
-/* Menu entries for files from a panel window */
-static GnomeUIInfo panel_actions[] = {
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, ren_cmd),
-	GNOMEUIINFO_ITEM_NONE (N_("Copy..."), NULL, copy_cmd),
-	GNOMEUIINFO_ITEM_NONE (N_("Delete"), NULL, delete_cmd),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
-};
-
-/* Menu entries for files from desktop icons */
-static GnomeUIInfo dicon_actions[] = {
-	GNOMEUIINFO_SEPARATOR,
-#if 0
-	GNOMEUIINFO_ITEM_NONE (N_("Move/rename..."), NULL, dicon_move),
-	GNOMEUIINFO_ITEM_NONE (N_("Copy..."), NULL, dicon_copy),
-#endif
-	GNOMEUIINFO_ITEM_NONE (N_("Delete"), NULL, dicon_delete),
-	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_END
 };
 
 
@@ -528,7 +511,6 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 		       int panel_row, char *filename, int insert_pos)
 {
 	gpointer closure, regex_closure;
-	GnomeUIInfo *a_uiinfo;
 	int i;
 	GtkSignalFunc regex_callback;
 	const char *mime_type;
@@ -538,25 +520,14 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 		GNOMEUIINFO_END
 	};
 
+	regex_callback = mime_command_from_desktop_icon;
 	if (panel) {
-		a_uiinfo = panel_actions;
 		closure = panel;
-		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	} else {
-		a_uiinfo = dicon_actions;
 		closure = dii;
-		regex_callback = mime_command_from_desktop_icon;
 		regex_closure = filename;
 	}
-
-	/* Fill in the common part of the menus */
-
-	for (i = 0; a_uiinfo [i].type != GNOME_APP_UI_ENDOFINFO; i++)
-		a_uiinfo[i].user_data = closure;
-
-	fill_menu (GTK_MENU_SHELL (menu), a_uiinfo, insert_pos);
-	insert_pos += 5; /* the number of items from the common menus */
 
 	/* Fill in the regex command part */
 

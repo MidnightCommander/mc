@@ -1654,14 +1654,16 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
 		fe = file_entry_from_file (full_name);
-		g_free (full_name);
-		if (!fe)
-			return; /* eeeek */
+		if (!fe){
+			g_free (full_name);
+			return;
+		}
 
-		if (gdnd_perform_drop (context, data, desktop_directory, fe))
+		if (gdnd_perform_drop (context, data, full_name, fe))
 			desktop_reload_icons (FALSE, 0, 0);
 
 		file_entry_free (fe);
+		g_free (full_name);
 	}
 }
 

@@ -1,3 +1,15 @@
+1999-03-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (icon_drag_data_received): Pass the full directory
+	name to gdnd_perform_drop.
+
+	* gpopup.c (create_regexp_actions): This routine no longer creates
+	the default copy/move/delete context menu entries.
+
+	(file_actions): Include the copy/move/delete options here.  This
+	also enabled me to reorder things to put "Delete" closer to the
+	top, as it is a pretty common operation.
+
 1999-03-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (session_save_state): Add call to gnome_config_sync().

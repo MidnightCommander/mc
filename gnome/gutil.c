@@ -132,7 +132,6 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 	}
 	
 	if ((*pid = fork ()) < 0){
-		fprintf (stderr, "\n\nfork () = -1\n");
 		return -1;
 	}
 	if (*pid == 0){
