@@ -1,3 +1,8 @@
+2004-09-22  Roland Illig  <roland.illig@gmx.de>
+
+	* de.po: Fixed translation of "Count" to "Anzahl" instead of
+	"Zählen". (Closes: Debian#253869)
+
 2004-09-04  Jakub Jelinek  <jakub@redhat.com>
 
 	* az.po: don't truncate block counts to 32 bits 

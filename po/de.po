@@ -2026,7 +2026,7 @@ msgstr "Datei"
 
 #: src/filegui.c:416
 msgid "Count"
-msgstr "Zählen"
+msgstr "Anzahl"
 
 #: src/filegui.c:437
 msgid "Bytes"
