@@ -1356,17 +1356,7 @@ void load_hotlist (void)
 
     if ((hotlist_file = fopen (hotlist_file_name, "r")) == 0) {
 	int	result;
-	char    *msg;
 
-	msg = g_strconcat (_("Hotlist is now kept in file ~/"),
-			    HOTLIST_FILENAME, "\n",
-			    _("MC will load hotlist from ~/"),
-			    PROFILE_NAME, "\n",
-			    _("and then delete [Hotlist] section there"),
-			    NULL);
-	message (0, _(" Hotlist Load "), msg);
-	g_free (msg);
-	
 	load_group (hotlist);
 	hotlist_state.loaded   = 1;
 	/*

@@ -1,3 +1,8 @@
+2001-09-09  Pavel Roskin  <proski@gnu.org>
+
+	* hotlist.c (load_hotlist): If cannot open hotlist, don't assume
+	that it needs to be migrated and don't warn the user.
+
 2001-09-08  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Fix definitions of CONFDIR and LOCALEDIR.
