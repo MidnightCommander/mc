@@ -60,7 +60,7 @@ u¿ytkownicy basha i zsh:
 
 mc ()
 {
-        MC=~/tmp/mc$$-"$RANDOM"
+        MC=$HOME/tmp/mc$$-"$RANDOM"
         @prefix@/bin/mc -P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
@@ -321,11 +321,11 @@ Prze³±cza tryb wy¶wietlania do nastêpnego mo¿liwego. U¿ywaj±c tej opcji
 ³atwo jest przej¶æ szybko z d³ugiego do krótkiego trybu wy¶wietlania
 jak równie¿ do tego zdefiniowanego przez u¿ytkownika.
 .PP
-.B C-\\\\ 
+.B C-\\\\
 (control-backslash).
 Pokazuje hotlistê katalogów i zmienia katalog do wybranego przez u¿ytkownika.
 .PP
-.B + 
+.B +
 (plus).
 U¿ywane do zaznaczania grupy plików. Midnight Commander zapyta o
 wyra¿enie opisuj±c± grupê. Je¶li opcja
@@ -340,7 +340,7 @@ jest wy³±czona, sposób zaznaczania plików jest zgodny z ustawieniami
 Je¶li wyra¿enie zaczyna siê od uko¶nika (/), wtedy zaznaczone zostan± katalogi
 zamiast plików.
 .PP
-.B \\\\ 
+.B \\\\
 (backslash).
 U¿ywaj znaków "\\" do odznaczania grupy plików. Jest to przeciwieñstwo klawisza
 plus.
@@ -933,19 +933,19 @@ w prawo w celu dostania siê do katalogu podrzêdnego. Widoczne jest tylko
 najbardziej aktualne drzewo katalogów. Drzewo zmienia siê wiêc dynamicznie
 podczas twojego przemieszczania.
 .PP
-.B F5 
+.B F5
 (Copy).
 Kopiuje katalog.
 .PP
-.B F6 
+.B F6
 (RenMov).
 Przenosi katalog.
 .PP
-.B F7 
+.B F7
 (Mkdir).
 Tworzy nowy katalog poni¿ej aktualnego.
 .PP
-.B F8 
+.B F8
 (Delete).
 Kasuje katalog z systemu plików.
 .PP
@@ -965,7 +965,7 @@ w linii mini-statusu.
 Nastêpuj±ce klawisze s± dostêpne tylko w drzewie katalogów. Nie dzia³aj± one
 w pogl±dzie katalogów.
 .PP
-.B F1 
+.B F1
 (Help).
 Wywo³uje podgl±d pomocy i pokazuje tê sekcjê.
 .PP
@@ -1202,8 +1202,8 @@ Warunek jest jednym z nastêpuj±cych:
   d <wzorzec>           aktualny katalog spe³niaj±cy wzorzec?
   D <wzorzec>           katalog w drugim panelu spe³niaj±cy wzorzec?
   t <typ>               aktualny pliku typu typ?
-  T <typ>		plik w drugim panelu typu typ?
-  ! <warunek>		zaprzeczenie warunku
+  T <typ>               plik w drugim panelu typu typ?
+  ! <warunek>           zaprzeczenie warunku
 .fi
 .PP
 Wzorzec jest normalnym wzorcem pow³oki lub wyra¿eniem,
@@ -2126,20 +2126,20 @@ i przyporz±dkowany klawisz. Makro jest wykonywane równie¿ je¶li naci¶niesz
 klawisz Meta, Ctrl, lub Esc i wybrany klawisz, jednak tylko je¶li ten
 klawisz nie jest u¿ywane przez inne funkcje. Raz zdefiniowane, makro
 wêdruje sobie do pliku
-.B cedit/cooledit.macros
+.B .mc/cedit/cooledit.macros
 w twoim katalogu domowym. Mo¿esz skasowaæ makro kasuj±c odpowiedni± liniê z
 tego pliku.
 .PP
 .B F19
 sformatuje format C je¶li jest pod¶wietlony. ¯eby to dzia³a³o, stwórz
 wykonywalny plik
-.B cedit/edit.indent.rc
+.B .mc/cedit/edit.indent.rc
 w twoim katalogu domowym zawieraj±cy poni¿sze:
 .PP
 .nf
 #!/bin/sh
-/usr/bin/indent -kr -pcs ~/cedit/cooledit.block >& /dev/null
-cat /dev/null > ~/cedit/cooledit.error
+/usr/bin/indent -kr -pcs $HOME/.mc/cedit/cooledit.block >& /dev/null
+cat /dev/null > $HOME/.mc/cedit/cooledit.error
 .fi
 .PP
 Mo¿esz u¿ywaæ funkcji scanf do przeszukiwania i zastêpowania formatów
