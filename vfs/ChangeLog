@@ -1,3 +1,8 @@
+2001-08-19  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c (vfs_parse_ls_lga): Warning fix if st_nlink is unsigned.
+	Disallow st_nlink = 0.
+
 2001-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (cpio_read_head): Check return value of cpio_find_head,
