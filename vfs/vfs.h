@@ -60,8 +60,8 @@ struct utimbuf {
         vfs   *next;
         char  *name;		/* "FIles over SHell" */
         int   flags;
-#define F_EXEC 1
-#define F_NET 2
+#define F_EXEC 1	/* Filesystem needs to execute external programs */
+#define F_NET 2		/* Filesystem needs to access network */
         char  *prefix;		/* "fish:" */
         void  *data;		/* this is for filesystem's own use */
         int   verrno;           /* can't use errno because glibc2 might define errno as function */
@@ -108,7 +108,7 @@ struct utimbuf {
 	void (*free)           (vfsid id);
 	
 	char *(*getlocalcopy)  (vfs *me, char *filename);
-	void (*ungetlocalcopy) (vfs *me, char *filename, char *local,
+	int  (*ungetlocalcopy) (vfs *me, char *filename, char *local,
 				int has_changed);
 
 	int  (*mkdir)          (vfs *me, char *path, mode_t mode);
@@ -175,6 +175,7 @@ struct utimbuf {
     void vfs_add_current_stamps (void);
     void vfs_free_resources(char *path);
     void vfs_timeout_handler ();
+    void vfs_expire (int);
     int vfs_timeouts ();
 
     void vfs_fill_names (void (*)(char *));
@@ -222,9 +223,9 @@ struct utimbuf {
         int mc_mkdir    (char *path, mode_t mode);
 
         char *mc_getlocalcopy (char *filename);
-        void mc_ungetlocalcopy (char *filename, char *local, int has_changed);
+        int mc_ungetlocalcopy (char *filename, char *local, int has_changed);
         char *mc_def_getlocalcopy (vfs *vfs, char *filename);
-        void mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed);
+        int mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed);
         int mc_ctl (int fd, int ctlop, int arg);
         int mc_setctl (char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
@@ -303,7 +304,7 @@ struct utimbuf {
     typedef int vfs;
     
 #   define mc_getlocalcopy(x) NULL
-#   define mc_ungetlocalcopy(x,y,z)
+#   define mc_ungetlocalcopy(x,y,z) 0
 
 #   define ftpfs_hint_reread(x) 
 #   define ftpfs_flushdir()

@@ -41,7 +41,7 @@ struct inode {
     dev_t dev;		/* This is an internal identification of the extfs archive */
     struct archive *archive; /* And this is an archive structure */
     dev_t rdev;
-    umode_t mode;
+    mode_t mode;	/* What is umode_t? It will not compile for me, changed it t mode_t */
     uid_t uid;
     gid_t gid;
     int size;

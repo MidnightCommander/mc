@@ -281,8 +281,10 @@ static char *sfs_getlocalcopy (vfs *me, char *path)
     return g_strdup (path);
 }
 
-static void sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int sfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
+    g_free(local);
+    return 0;
 }
 
 static int sfs_init (vfs *me)

@@ -1,4 +1,3 @@
-#include <config.h>
 #include <errno.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -10,6 +9,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
+#include <config.h>
 #include "local.h"
 
 /* Note: Some of this functions are not static. This has rather good
@@ -265,9 +265,10 @@ local_getlocalcopy (vfs *me, char *path)
     return g_strdup (path);
 }
 
-static void
+static int
 local_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
+    return 0;
 }
 
 #ifdef HAVE_MMAP

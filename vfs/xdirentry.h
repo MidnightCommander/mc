@@ -61,6 +61,9 @@ typedef struct vfs_s_inode {
 	    struct timeval timestamp;
 	    struct stat local_stat;
 	} fish;
+	struct {
+	    struct timeval timestamp;
+	} ftp;
     } u;
     int magic;
 #define INODE_MAGIC 0x93451656
@@ -88,9 +91,28 @@ typedef struct vfs_s_super {
 	    int flags;
 	} fish;
 	struct {
-	    int sockr, sockw;
+	    int sock;
 	    char *home, *cwdir;
+	    char *host, *user;
+	    char *password;
+	    int port;
+
+	    char *proxy;
+	    int failed_on_login;	/* used to pass the failure reason to upper levels */
+	    int use_proxy;		/* use a proxy server */
+	    int result_pending;
+	    int use_source_route;
+	    int use_passive_connection;
+	    int remote_is_amiga;       /* No leading slash allowed for AmiTCP (Amiga) */
 	    int isbinary;
+	    int cwd_defered;  /* current_directory was changed but CWD command hasn't
+				 been sent yet */
+	    int strict; /* ftp server doesn't understand 
+					   "LIST -la <path>"; use "CWD <path>"/
+					   "LIST" instead */
+#define RFC_AUTODETECT 0
+#define RFC_DARING 1
+#define RFC_STRICT 2
 	} ftp;
     } u;
     int magic;
@@ -107,6 +129,9 @@ typedef struct vfs_s_fh {
 	struct {
 	    int got, total;
 	} fish;
+	struct {
+	    int sock;
+	} ftp;
     } u;
     int magic;
 #define FH_MAGIC 0x91324682

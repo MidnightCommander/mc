@@ -351,7 +351,7 @@ undelfs_readdir (void *vfs_info)
 		 delarray [readdir_ptr].num_blocks);
     readdir_ptr++;
     
-#ifndef DIRENT_LENGTH_COMPUTED
+#if 0
     undelfs_readdir_data.dent.d_namlen = strlen (undelfs_readdir_data.dent.d_name);
 #endif
     return &undelfs_readdir_data;

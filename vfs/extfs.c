@@ -1025,7 +1025,7 @@ static char *extfs_getlocalcopy (vfs *me, char *path)
     return p;
 }
 
-static void extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
     struct pseudofile *fp = 
         (struct pseudofile *) extfs_open (me, path, O_WRONLY, 0);
@@ -1036,11 +1036,11 @@ static void extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chan
         fp->entry->inode->has_changed = has_changed;
         fp->archive->fd_usage--;
         extfs_close ((void *) fp);
-        return;
+        return 0;
     } else {
         /* Should not happen */
         extfs_close ((void *) fp);
-        mc_def_ungetlocalcopy (me, path, local, has_changed);
+        return mc_def_ungetlocalcopy (me, path, local, has_changed);
     }
 }
 

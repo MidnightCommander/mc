@@ -261,7 +261,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
     return 0;
 }
 
-int
+static int
 open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
 {
     char *host, *user, *password;
@@ -302,12 +302,11 @@ fish_which (vfs *me, char *path)
     return 0;
 }
 
-int
+static int
 dir_uptodate(vfs *me, vfs_s_inode *ino)
 {
     struct timeval tim;
 
-    return 1; /* Timeouting of directories does not work too well :-(. */
     gettimeofday(&tim, NULL);
     if (force_expiration) {
 	force_expiration = 0;
@@ -350,7 +349,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 	    me->verrno = ECONNRESET;
 	    goto error;
 	}
-	if (logfile){
+	if (logfile) {
 	    fputs (buffer, logfile);
             fputs ("\n", logfile);
 	    fflush (logfile);
@@ -420,11 +419,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     
     vfs_s_free_entry (me, ent);
     me->verrno = E_REMOTE;
-    if (decode_reply(buffer+4, 0) != COMPLETE)
-        goto error;
-
-    print_vfs_message(_("fish: got listing"));
-    return 0;
+    if (decode_reply(buffer+4, 0) == COMPLETE)
+        return 0;
 
 error:
     print_vfs_message(_("fish: failed"));
@@ -676,74 +672,10 @@ static int fish_rmdir (vfs *me, char *path)
     POSTFIX(OPT_FLUSH);
 }
 
-static int retrieve_file(vfs *me, struct vfs_s_inode *ino)
-{
-    /* If you want reget, you'll have to open file with O_LINEAR */
-    int total = 0;
-    char buffer[8192];
-    int handle, n;
-    int stat_size = ino->st.st_size;
-    struct vfs_s_fh fh;
-
-    memset(&fh, 0, sizeof(fh));
-    
-    fh.ino = ino;
-    if (!(ino->localname = tempnam (NULL, me->name))) ERRNOR (ENOMEM, 0);
-
-    handle = open(ino->localname, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
-    if (handle == -1) {
-	me->verrno = errno;
-	goto error_4;
-    }
-
-    if (!MEDATA->linear_start (me, &fh, 0))
-        goto error_3;
-
-    /* Clear the interrupt status */
-    
-    while (1) {
-	n = linear_read(me, &fh, buffer, sizeof(buffer));
-	if (n < 0)
-	    goto error_1;
-	if (!n)
-	    break;
-
-	total += n;
-	vfs_print_stats (me->name, "Getting file", ino->ent->name, total, stat_size);
-
-        if (write(handle, buffer, n) < 0) {
-	    me->verrno = errno;
-	    goto error_1;
-	}
-    }
-    linear_close(me, &fh);
-    close(handle);
-
-    if (stat (ino->localname, &ino->u.fish.local_stat) < 0)
-        ino->u.fish.local_stat.st_mtime = 0;
-    
-    return 0;
-error_1:
-    linear_close(me, &fh);
-error_3:
-    disable_interrupt_key();
-    close(handle);
-    unlink(ino->localname);
-error_4:
-    g_free(ino->localname);
-    ino->localname = NULL;
-    return -1;
-}
-
 static int fish_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
-    if (IS_LINEAR(mode)) {
-	message_1s(1, "Linear mode requested", "?!" );
-	fh->linear = LS_LINEAR_CLOSED;
-	return 0;
-    }
     if (!fh->ino->localname)
-	if (retrieve_file (me, fh->ino)==-1)
+	if (vfs_s_retrieve_file (me, fh->ino)==-1)
 	    return -1;
     if (!fh->ino->localname)
 	vfs_die( "retrieve_file failed to fill in localname" );

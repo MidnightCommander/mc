@@ -1079,22 +1079,32 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
         return NULL;
     tmp = tempnam (NULL, "mclocalcopy");
     fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
-    if (fdout == -1){
-        mc_close (fdin);
-	g_free (tmp);
-        return NULL;
-    }
+    if (fdout == -1)
+	goto fail;
     while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
         write (fdout, buffer, i);
     }
-    if (i != -1)
-        write (fdout, buffer, i);
-    mc_close (fdin);
-    close (fdout);
+    if (i == -1)
+	goto fail;
+    if (write (fdout, buffer, i)==-1)
+	goto fail;
+    i = mc_close (fdin);
+    fdin = -1;
+    if (i==-1)
+	goto fail;
+    if (close (fdout)==-1)
+	goto fail;
+
     if (mc_stat (filename, &mystat) != -1){
         chmod (tmp, mystat.st_mode);
     }
     return tmp;
+
+ fail:
+    if (fdout) close(fdout);
+    if (fdin) mc_close (fdin);
+    g_free (tmp);
+    return NULL;
 }
 
 char *
@@ -1113,48 +1123,61 @@ mc_getlocalcopy (char *path)
     return result;
 }
 
-void
+int
 mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
-{
+{	/* Dijkstra probably hates me... But he should teach me how to do this nicely. */
+    int fdin = -1, fdout = -1, i;
     if (has_changed){
-        int fdin, fdout, i;
         char buffer [8192];
     
         fdin = open (local, O_RDONLY);
-        if (fdin == -1){
-            unlink (local);
-            g_free (local);
-            return;
-        }
+        if (fdin == -1)
+	    goto failed;
         fdout = mc_open (filename, O_WRONLY | O_TRUNC);
-        if (fdout == -1){
-            close (fdin);
-            unlink (local);
-            g_free (local);
-            return;
-        }
+        if (fdout == -1)
+	    goto failed;
         while ((i = read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
             mc_write (fdout, buffer, i);
         }
-        if (i != -1)
-            mc_write (fdout, buffer, i);
-        close (fdin);
-        mc_close (fdout);
+	if (i == -1)
+	    goto failed;
+
+	if (mc_write (fdout, buffer, i) == -1)
+	    goto failed;
+
+        if (close (fdin)==-1)
+	    goto failed;
+        if (mc_close (fdout)==-1) {
+	    fdout = -1;
+	    goto failed;
+	}
     }
     unlink (local);
     g_free (local);
+    return 0;
+
+ failed:
+    message_1s (1, "Changes to file lost", filename);
+    if (fdout) mc_close(fdout);
+    if (fdin) close(fdin);
+    unlink (local);
+    g_free (local);
+    return -1;
 }
 
-void
+int
 mc_ungetlocalcopy (char *path, char *local, int has_changed)
 {
     vfs *vfs;
+    int res;
 
     path = vfs_canon (path);
     vfs = vfs_type (path);
     vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
                           mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
+    /* FIXME: errors are ignored at this point */
     g_free (path);
+    return 0;
 }
 
 /*
@@ -1167,10 +1190,13 @@ timeoutcmp (struct timeval *t1, struct timeval *t2)
 	    || ((t1->tv_sec == t2->tv_sec) && (t1->tv_usec <= t2->tv_usec)));
 }
 
+/* This is called from timeout handler with now = 0, or can be called
+   with now = 1 to force freeing all filesystems that are not in use */
+
 void
-vfs_timeout_handler (void)
+vfs_expire (int now)
 {
-    static int locked;
+    static int locked = 0;
     struct timeval time;
     struct vfs_stamping *stamp, *st;
 
@@ -1184,7 +1210,7 @@ vfs_timeout_handler (void)
     time.tv_sec -= vfs_timeout;
 
     for (stamp = stamps; stamp != NULL;){
-        if (timeoutcmp (&stamp->time, &time)){
+        if (now || (timeoutcmp (&stamp->time, &time))){
             st = stamp->next;
             (*stamp->v->free) (stamp->id);
 	    vfs_rmstamp (stamp->v, stamp->id, 0);
@@ -1196,11 +1222,17 @@ vfs_timeout_handler (void)
 }
 
 void
+vfs_timeout_handler (void)
+{
+    vfs_expire (0);
+}
+
+void
 vfs_init (void)
 {
     time_t current_time;
     struct tm *t;
-    
+
     memset (vfs_file_table, 0, sizeof (vfs_file_table));
     current_time = time (NULL);
     t = localtime (&current_time);

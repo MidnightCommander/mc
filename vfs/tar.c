@@ -481,10 +481,12 @@ static int tar_read (void *fh, char *buffer, int count)
     return count;
 }
 
-static void tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
+static int tar_ungetlocalcopy (vfs *me, char *path, char *local, int has_changed)
 {
 /* We do just nothing. (We are read only and do not need to free local,
    since it will be freed when tar archive will be freed */
+/* We have to report error if file has changed */
+    ERRNOR (EROFS, -has_changed);
 }
 
 static int tar_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)

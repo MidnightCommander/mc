@@ -255,7 +255,7 @@ s_get_path (struct connection **bucket, char *path, char *name)
 }
 
 void
-X_flushdir (void)
+ftpfs_flushdir (void)
 {
     force_expiration = 1;
 }
