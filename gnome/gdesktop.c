@@ -1531,7 +1531,7 @@ icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 		break;
 
 	case GDK_BUTTON_RELEASE:
-		if (event->button.button != 1 || event->button.button != 2)
+		if (!(event->button.button == 1 || event->button.button != 2))
 			break;
 
 		if (on_text && icon_select_on_text) {

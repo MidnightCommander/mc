@@ -968,3 +968,51 @@ real_input_dialog_help (char *header, char *text, char *help, char *def_text)
         gtk_main ();
         return string;
 }
+
+/* Our implementation of the symlink-to dialog */
+void
+symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
+{
+        GtkWidget *dialog;
+        GtkWidget *vbox;
+        GtkWidget *entry1, *entry2;
+        int ret;
+
+        dialog = gnome_dialog_new (_("Symbolic Link"),
+                                   GNOME_STOCK_BUTTON_OK,
+                                   GNOME_STOCK_BUTTON_CANCEL);
+        gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+
+        /* File symlink will point to */
+
+        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+
+        gtk_box_pack_start (GTK_BOX (vbox),
+                            gtk_label_new (_("File symlink will point to:")),
+                            FALSE, FALSE, 0);
+
+        entry1 = gtk_entry_new ();
+        gtk_entry_set_text (GTK_ENTRY (entry1), existing);
+        gtk_box_pack_start (GTK_BOX (vbox), entry1, FALSE, FALSE, 0);
+
+        /* Name of symlink */
+
+        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
+
+        gtk_box_pack_start (GTK_BOX (vbox),
+                            gtk_label_new (_("Symlink name:")),
+                            FALSE, FALSE, 0);
+
+        entry2 = gtk_entry_new ();
+        gtk_entry_set_text (GTK_ENTRY (entry2), new);
+        gtk_box_pack_start (GTK_BOX (vbox), entry2, FALSE, FALSE, 0);
+
+        /* Run */
+
+        ret = gnome_dialog_run (GNOME_DIALOG (dialog));
+
+        
+        
+}

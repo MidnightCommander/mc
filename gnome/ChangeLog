@@ -1,3 +1,8 @@
+1999-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (icon_event): I'm an idiot.  Someone teach me boolean
+	logic again.  Fixed edit-on-release for icons.
+
 1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdialogs.c (real_input_dialog_help): Now we use a
