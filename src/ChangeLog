@@ -1,3 +1,23 @@
+Sun Nov  1 20:59:05 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* file.c (erase_file): translated goto into while loop (it is both
+ 	shorter AND cleaner)
+
+	* subshell.c (feed_subshell): do NOT print anything if we get
+ 	errors/eofs from read(subshell) - this fixes (or at least hides)
+ 	nasty bug where typing "exit" on mc prompt prints lots of garbage
+ 	and falls into infinite loop. Someone with better knowledge should
+ 	read feed_subshell(), and make it handle errors properly. (Why do
+ 	we ignore EIO for example?)
+
+Sun Oct 18 22:56:17 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* view.c: we now rely on sfs to do file decompressing for us. That
+ 	has advantage of displaying #ugz at first line, so user knows what
+ 	we are doing behind his back
+
+	* view.c: fix indentation, fallback to read whole file if mmap fails.
+	
 1998-11-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* setup.c: #ifdef'ed out stuff in the menus that will get changed

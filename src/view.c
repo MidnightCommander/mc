@@ -7,6 +7,7 @@
                1995 Jakub Jelinek
                1996 Joseph M. Hinkle
 	       1997 Norbert Warmuth
+	       1998 Pavel Machek
 
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -146,12 +147,11 @@ free_file (WView *view)
     int i;
     
 #ifdef HAVE_MMAP
-
     if (view->mmapping){
 	mc_munmap (view->data, view->s.st_size);
 	close_view_file (view);
     } else 
-#endif /* HAVE_MMAP */
+#endif
     {
 	if (view->reading_pipe){
 	    /* Check error messages */
@@ -183,15 +183,13 @@ enum { off, on };
 void
 view_done (WView *view)
 {
-	set_monitor (view, off);
-#ifndef HAVE_MMAP
-	/* alex: release core, used to replace mmap */
-	if (!view->growing_buffer && view->data != (unsigned char*)0)
-	{
-		free(view->data);
-		view->data = NULL;
-	}
-#endif /* HAVE_MMAP */
+    set_monitor (view, off);
+
+    /* alex: release core, used to replace mmap */
+    if (!view->mmapping && !view->growing_buffer && view->data != NULL){
+        free(view->data);
+	view->data = NULL;
+    }
 
     if (view->view_active){
 	if (view->localcopy)
@@ -245,6 +243,7 @@ get_byte (WView *view, int byte_index)
 		    n = fread (p, 1, VIEW_PAGE_SIZE, view->stdfile);
 		else
 		    n = mc_read (view->file, p, VIEW_PAGE_SIZE);
+#warning FIXME: Errors are ignored at this point, also should report preliminary EOF
 		if (n != -1)
 		    view->bytes_read += n;
 		if (view->s.st_size < view->bytes_read){
@@ -343,13 +342,11 @@ put_editkey (WView *view, unsigned char key)
 
         if (node) {
 #ifndef HAVE_MMAP
-			/* 
-			**	alex@bcs.zaporizhzhe.ua: here we are using file copy
-			**	completely loaded into memory, so we can replace bytes
-			**	in view->data array to allow changes to be reflected
-			**	when user switches back to ascii mode
-			*/
-			view->data[view->edit_cursor] = byte_val;
+	  /* alex@bcs.zaporizhzhe.ua: here we are using file copy
+	   * completely loaded into memory, so we can replace bytes in
+	   * view->data array to allow changes to be reflected when
+	   * user switches back to ascii mode */
+	    view->data[view->edit_cursor] = byte_val;
 #endif /* HAVE_MMAP */
             node->offset = view->edit_cursor;
             node->value = byte_val;
@@ -437,7 +434,7 @@ set_view_init_error (WView *view, char *msg)
     return 0;
 }
 
-/* return values: 0 for success, else points to error message */
+/* return values: NULL for success, else points to error message */
 static char *
 init_growing_view (WView *view, char *name, char *filename) 
 {
@@ -468,7 +465,7 @@ init_growing_view (WView *view, char *name, char *filename)
 	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
 	    return set_view_init_error (view, _(" Could not open file "));
     }
-    return 0;
+    return NULL;
 }
 
 /* Load filename into core */
@@ -479,15 +476,11 @@ init_growing_view (WView *view, char *name, char *filename)
 */
 static char *load_view_file (WView *view, char *filename)
 {
-    char *cmd;
-    int  type;
-
     if ((view->file = mc_open (filename, O_RDONLY)) < 0){
 	set_view_init_error (view, 0);
 	return (copy_strings (_(" Can't open file \""),
 			      filename, "\"\n ",
 			      unix_error_string (errno), " ", 0));
-
     }
     if (mc_fstat (view->file, &view->s) < 0){
 	set_view_init_error (view, 0);
@@ -506,62 +499,36 @@ static char *load_view_file (WView *view, char *filename)
 	close_view_file (view);
 	return init_growing_view (view, 0, filename);
     }
-    
-    /* First, try to open a compressed file */
-    if (view->viewer_magic_flag && (is_gunzipable (view->file, &type)) != 0){
-	close_view_file (view);
-	if (vfs_file_is_local (filename)) {
-	    char *tmp = name_quote (filename, 0);
-	    cmd = copy_strings (decompress_command (type), " ", tmp, 0);
-	    free (tmp);
-	}
-	else {
-	    char *tmp;
-	    if ((view->localcopy = mc_getlocalcopy (filename)) == 0)
-		return set_view_init_error (view, _(" Can not fetch local copy ") );
-	    tmp = name_quote (view->localcopy, 0);
-	    cmd = copy_strings (decompress_command (type), " ", tmp, 0);
-	    free (tmp);
-	}
-        return init_growing_view (view, cmd, filename);
-    }
 
-    /* Otherwise, the file wasn't compressed */
 #ifdef HAVE_MMAP
     view->data = mc_mmap (0, view->s.st_size, PROT_READ, MAP_FILE | MAP_SHARED,
 		          view->file, 0);
-    if ((caddr_t) view->data == (caddr_t) -1){
-	close_view_file (view);
-/*	set_view_init_error (view, 0);
-	return copy_strings (" Can't mmap file \n ",
-			     unix_error_string (errno), " ", 0);*/
-	return init_growing_view (view, 0, filename);
-			     
-    }
+    if ((caddr_t) view->data == (caddr_t) -1)
+        goto no_mmap;
 
     view->first = 0;
     view->bytes_read = view->s.st_size;
     view->mmapping = 1;
-    return 0;
-#else /* ! HAVE_MMAP */
-	/* 
-	**	For those OS that dont provide mmap call. Try to load all the file
-	**	into memory (alex@bcs.zaporizhzhe.ua)
-	*/
-	view->data = (unsigned char*) xmalloc (view->s.st_size, "load_view_file");
-    if (view->data == (unsigned char*) 0
-		|| mc_lseek(view->file,0,0) != 0
-		|| mc_read(view->file, view->data, view->s.st_size) != view->s.st_size
-	) {
-		if (view->data != (unsigned char*)0)
-			free(view->data);
-		close_view_file (view);
-		return init_growing_view (view, 0, filename);
+    return NULL;
+#endif
+
+no_mmap:
+    /* For those OS that dont provide mmap call. Try to load all the
+     * file into memory (alex@bcs.zaporizhzhe.ua). Also, mmap can fail
+     * for any reason, so we use this as fallback (pavel@ucw.cz) */
+
+    view->data = (unsigned char*) xmalloc (view->s.st_size, "load_view_file");
+    if (view->data == NULL
+	|| mc_lseek(view->file,0,0) != 0
+	|| mc_read(view->file, view->data, view->s.st_size) != view->s.st_size){
+        if (view->data != NULL)
+	    free(view->data);
+	close_view_file (view);
+	return init_growing_view (view, 0, filename);
     }
     view->first = 0;
     view->bytes_read = view->s.st_size;
-    return 0;
-#endif
+    return NULL;
 }
 
 /* Return zero on success, -1 on failure */
@@ -569,7 +536,7 @@ int
 do_view_init (WView *view, char *_command, char *_file, int start_line)
 {
     char *error = 0;
-    int i;
+    int i, type;
 
     if (view->view_active)
 	view_done (view);
@@ -598,10 +565,20 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     if (!view->have_frame){
 	view->start_col = 0;
     }
+
+    {
+        int fd;
+	fd = mc_open(_file, O_RDONLY);
+	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
+	    view->filename = copy_strings (_file, decompress_extension(type), NULL);
+	else view->filename = strdup (_file);
+	mc_close(fd);
+    }
+
     if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
-	error = init_growing_view (view, _command, _file);
+	error = init_growing_view (view, _command, view->filename);
     else
-	error = load_view_file (view, _file);
+	error = load_view_file (view, view->filename);
 
     if (error){
 	if (!view->have_frame){
@@ -612,7 +589,6 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
     }
 
     view->view_active = 1;
-    view->filename = strdup (_file);
     if (_command)
     	view->command = strdup (_command);
     else

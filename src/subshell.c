@@ -925,8 +925,9 @@ static int feed_subshell (int how, int fail_on_error)
 		    perror ("\n"__FILE__": read (subshell_pty...)");
 		    exit (1);
 		}
-		if (how == VISIBLY)
-		    write (STDOUT_FILENO, pty_buffer, bytes);
+		if (bytes > 0)
+		    if (how == VISIBLY)
+			write (STDOUT_FILENO, pty_buffer, bytes);
 	    }
 
 	    /* }}} */

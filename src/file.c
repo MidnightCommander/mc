@@ -1667,12 +1667,10 @@ erase_file (char *s)
 
     mc_refresh ();
 
- retry_unlink:
-    if (mc_unlink (s)){
+    while (mc_unlink (s)){
 	return_status = file_error (_(" Cannot delete file \"%s\" \n %s "), s);
-	if (return_status == FILE_RETRY)
-	    goto retry_unlink;
-	return return_status;
+	if (return_status != FILE_RETRY)
+	    return return_status;
     }
     return FILE_CONT;
 }
@@ -2339,8 +2337,12 @@ panel_operate (void *source_panel, int operation, char *thedefault)
     }
 #endif
     /* Initialize things */
-    /* We turn on ETA display if the source is an ftp file system */
+    /* We now have ETA in all cases */
     create_op_win (operation, 1);
+    /* We do not want to trash cache every time file is
+       created/touched. However, this will make our cache contain
+       invalid data. */
+    mc_setctl (dest, MCCTL_WANT_STALE_DATA, NULL);
     ftpfs_hint_reread (0);
     
     /* Now, let's do the job */
@@ -2489,6 +2491,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
  clean_up:
     /* Clean up */
     destroy_op_win ();
+    mc_setctl (dest, MCCTL_NO_STALE_DATA, NULL);
     ftpfs_hint_reread (1);
     free_linklist (&linklist);
     free_linklist (&dest_dirs);

@@ -378,8 +378,10 @@ int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
     }
     if (!show_backups && dp->d_name [NLENGTH (dp)-1] == '~')
 	return 0;
-    if (mc_lstat (dp->d_name, buf1) == -1)
+    if (mc_lstat (dp->d_name, buf1) == -1) {
+	message(1, _(" Error "), _("File exists but can not be stat-ed: %s %s"), dp->d_name, strerror(errno));
         return 0;
+    }
 
     if (S_ISDIR (buf1->st_mode))
 	tree_check (dp->d_name);
