@@ -298,7 +298,7 @@ static int sfs_init (vfs *me)
     cfg = fopen (mc_sfsini, "r");
 
     if (!cfg){
-	fprintf (stderr, _("Warning: %s not found\n"), mc_sfsini);
+	fprintf (stderr, _("Warning: file %s not found\n"), mc_sfsini);
 	free (mc_sfsini);
 	return 0;
     }
@@ -327,7 +327,7 @@ static int sfs_init (vfs *me)
 	    }
 
 	if (!semi){
-	    fprintf (stderr, _("Warning: Invalid line %s in sfs.ini.\n"), key);
+	    fprintf (stderr, _("Warning: Invalid line in sfs.ini:\n%s\n"), key);
 	    continue;
 	}
 
@@ -338,7 +338,7 @@ static int sfs_init (vfs *me)
 	    case '2': flags |= F_2; break;
 	    case 'R': flags |= F_NOLOCALCOPY; break;
 	    default:
-	      fprintf (stderr, _("Warning: Invalid flag %c in sfs.ini line %s.\n"), *c, key);
+	      fprintf (stderr, _("Warning: Invalid flag %c in sfs.ini:\n%s\n"), *c, key);
 	    }	    
 	    c++;
 	}
