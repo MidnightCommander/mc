@@ -38,6 +38,7 @@ src/cmd.c
 src/command.c
 src/dialog.c
 src/dir.c
+src/dlg.c
 src/ext.c
 src/textconf.c
 src/file.c
@@ -53,6 +54,7 @@ src/main.c
 src/menu.c
 src/option.c
 src/panelize.c
+src/popt.c
 src/popthelp.c
 src/poptint.h
 src/screen.c
@@ -72,6 +74,8 @@ vfs/extfs.c
 vfs/fish.c
 vfs/ftpfs.c
 vfs/mcfs.c
+vfs/sfs.c
+vfs/shared_ftp_fish.c
 vfs/smbfs.c
 vfs/tar.c
 vfs/vfs.c

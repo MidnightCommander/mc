@@ -1,3 +1,8 @@
+2001-05-22  Kjartan Maraas  <kmaraas@gnome.org>
+
+	* POTFILES.in: Added some missing files.
+	* no.po: Updated Norwegian translation.
+	
 2001-05-21  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* hu.po,zh_*: fixed syntax errors and multibyte errors
