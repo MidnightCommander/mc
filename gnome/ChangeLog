@@ -1,3 +1,7 @@
+1998-12-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gprop.c (perm_mode_new), gcliplabel.c: Uset gtk_label_set_text.
+
 Thu Dec 24 18:38:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* layout: Adapted for the new option Compute Totals in the

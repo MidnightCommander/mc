@@ -195,7 +195,7 @@ perm_set_mode_label (GtkWidget *widget, gpointer data)
 	s_mode[3] = '0' + ((umode & (S_IROTH | S_IWOTH | S_IXOTH)) >> 0);
 	s_mode[4] = 0;
 
-	gtk_label_set (GTK_LABEL (gp->mode_label), s_mode);
+	gtk_label_set_text (GTK_LABEL (gp->mode_label), s_mode);
 }
 
 static GtkWidget *

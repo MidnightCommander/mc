@@ -61,7 +61,7 @@ void
 gtk_clip_label_set (GtkLabel *label,
 		    const char *str)
 {
-	gtk_label_set (label, str);
+	gtk_label_set_text (label, str);
 }
 
 GtkWidget*
@@ -73,7 +73,7 @@ gtk_clip_label_new (const char *str)
 
 	label = gtk_type_new (gtk_clip_label_get_type ());
 	
-	gtk_label_set (GTK_LABEL (label), str);
+	gtk_label_set_text (GTK_LABEL (label), str);
 	
 	return GTK_WIDGET (label);
 }
