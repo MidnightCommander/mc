@@ -56,8 +56,7 @@ time.  In particular, the release procedure is described there.
 
 In order to compile GNU Midnight Commander from a clean CVS checkout you
 should use autogen.sh instead of configure.  Arguments passed to
-autogen.sh are passed to configure after it's generated.  See README.CVS
-for details and required software.
+autogen.sh are passed to configure after it's generated.
 
 GNU Midnight Commander uses Autoconf and Automake, with make it fairly
 portable.  However, GNU Make is strongly recommended for development
@@ -115,7 +114,7 @@ This library provides filesystem-like access to various data, such are
 archives and remote filesystems.  To use VFS, you should use wrappers
 around POSIX calls.  The wrappers have names composed from "mc_" and the
 standard name of the function.  For example, to open a file on VFS, use
-mc_open() in stead
+mc_open() instead.
 
 edit - the internal editor.
 
@@ -221,7 +220,7 @@ dlg.c:run_dlg routine.
 ncurses
 =======
 
-Although S-Lang is now used by default, we still support it ncurses.  We
+Although S-Lang is now used by default, we still support ncurses.  We
 basically are using a small subset of ncurses because we want to be
 compatible with Slang.
 
