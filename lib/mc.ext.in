@@ -560,7 +560,10 @@ shell/.cpio
 	Extract=cat '%f' | cpio -ic
 	Icon=cpio.xpm
 
-
+shell/.mp3
+	Open=mpg123 %f
+	View=mpg123 %f
+	Icon=sound.xpm
 
 # Default target for anything not described above
 default/*
