@@ -76,7 +76,7 @@ sort_orders_t sort_orders [SORT_TYPES_TOTAL] = {
     { N_("&Group"),       sort_group }
 };
 
-#define string_sortcomp(a,b) (case_sensitive ? strcmp (a,b) : g_strcasecmp (a,b))
+#define string_sortcomp(a,b) (case_sensitive ? strcoll (a,b) : g_strcasecmp (a,b))
 
 int
 unsorted (const file_entry *a, const file_entry *b)
