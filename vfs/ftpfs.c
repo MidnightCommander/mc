@@ -141,6 +141,8 @@ static struct linklist *connections_list;
 #define WANT_STRING 0x02
 static char reply_str [80];
 
+static struct vfs_class vfs_ftpfs_ops;
+
 /* char *translate_path (struct ftpfs_connection *bucket, char *remote_path)
    Translate a Unix path, i.e. MC's internal path representation (e.g. 
    /somedir/somefile) to a path valid for the remote server. Every path 
@@ -1768,63 +1770,6 @@ ftpfs_fill_names (vfs *me, void (*func)(char *))
     }
 }
 
-vfs vfs_ftpfs_ops = {
-    NULL,	/* This is place of next pointer */
-    "ftpfs",
-    VFSF_NOLINKS, /* flags */
-    "ftp:",	/* prefix */
-    &ftp_data,	/* data */
-    0,		/* errno */
-    NULL,	/* init */
-    ftpfs_done,	/* done */
-    ftpfs_fill_names,
-    NULL,
-
-    vfs_s_open,
-    vfs_s_close,
-    vfs_s_read,
-    vfs_s_write,
-    
-    vfs_s_opendir,
-    vfs_s_readdir,
-    vfs_s_closedir,
-    vfs_s_telldir,
-    vfs_s_seekdir,
-
-    vfs_s_stat,
-    vfs_s_lstat,
-    vfs_s_fstat,
-
-    ftpfs_chmod,
-    ftpfs_chown,	/* not really implemented but returns success */
-    NULL,
-
-    vfs_s_readlink,
-    NULL,
-    NULL,
-    ftpfs_unlink,
-
-    ftpfs_rename,
-    vfs_s_chdir,
-    vfs_s_ferrno,
-    vfs_s_lseek,
-    NULL,
-    
-    vfs_s_getid,
-    vfs_s_nothingisopen,
-    vfs_s_free,
-    
-    NULL,
-    NULL,
-
-    ftpfs_mkdir,
-    ftpfs_rmdir,
-    ftpfs_ctl,
-    vfs_s_setctl
-
-MMAPNULL
-};
-
 void ftpfs_set_debug (const char *file)
 {
     logfile = fopen (file, "w+");
@@ -2097,4 +2042,25 @@ static int lookup_netrc (const char *host, char **login, char **pass)
 	*pass = tmp_pass;
 
     return 0;
+}
+
+void
+init_ftpfs (void)
+{
+    vfs_s_init_class (&vfs_ftpfs_ops);
+    vfs_ftpfs_ops.name = "ftpfs";
+    vfs_ftpfs_ops.flags = VFSF_NOLINKS;
+    vfs_ftpfs_ops.prefix = "ftp:";
+    vfs_ftpfs_ops.data = &ftp_data;
+    vfs_ftpfs_ops.done = &ftpfs_done;
+    vfs_ftpfs_ops.fill_names = ftpfs_fill_names;
+    vfs_ftpfs_ops.chmod = ftpfs_chmod;
+    vfs_ftpfs_ops.chown = ftpfs_chown;
+    vfs_ftpfs_ops.unlink = ftpfs_unlink;
+    vfs_ftpfs_ops.rename = ftpfs_rename;
+    vfs_ftpfs_ops.getlocalcopy = NULL;
+    vfs_ftpfs_ops.mkdir = ftpfs_mkdir;
+    vfs_ftpfs_ops.rmdir = ftpfs_rmdir;
+    vfs_ftpfs_ops.ctl = ftpfs_ctl;
+    vfs_register_class (&vfs_ftpfs_ops);
 }
