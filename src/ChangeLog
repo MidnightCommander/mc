@@ -1,5 +1,11 @@
 2002-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* poptconfig.c (configLine): Cast the argument to functions for
+	character classification to unsigned or use unsigned char *.
+	(poptReadConfigFile): Likewise.
+	* popthelp.c (singleOptionHelp): Likewise.
+	* poptparse.c (poptParseArgvString): Likewise.
+
 	* main.c (show_change_notice): Make local variable in main().
 	(compatibility_move_mc_files): Merge with
 	do_compatibility_move() and return 1 if moving was done, 0

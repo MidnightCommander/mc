@@ -17,7 +17,7 @@
 #include "popt.h"
 #include "poptint.h"
 
-static void configLine(poptContext con, char * line) {
+static void configLine(poptContext con, unsigned char * line) {
     int nameLength = strlen(con->appName);
     char * opt;
     struct poptAlias alias;
@@ -101,7 +101,7 @@ int poptReadConfigFile(poptContext con, char * fn) {
 	  case '\n':
 	    *dst = '\0';
 	    dst = buf;
-	    while (*dst && isspace(*dst)) dst++;
+	    while (*dst && isspace((unsigned)*dst)) dst++;
 	    if (*dst && *dst != '#') {
 		configLine(con, dst);
 	    }

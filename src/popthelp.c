@@ -65,9 +65,9 @@ static void singleOptionHelp(FILE * f, int maxLeftCol,
 			     const char *translation_domain) {
     int indentLength = maxLeftCol + 5;
     int lineLength = 79 - indentLength;
-    const char * help = D_(translation_domain, opt->descrip);
+    const unsigned char * help = D_(translation_domain, opt->descrip);
     int helpLength;
-    const char * ch;
+    const unsigned char * ch;
     char * left;
     const char * argDescrip = getArgDescrip(opt, translation_domain);
 
