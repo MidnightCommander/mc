@@ -65,7 +65,7 @@
 
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
-	* configure.in: Check for strlcpy() is glib 1.2.x is used.
+	* configure.in: Check for strlcpy() if glib 1.2.x is used.
 
 2003-09-11  Strahinya Radich  <mr99164@alas.matf.bg.ac.yu>
 
