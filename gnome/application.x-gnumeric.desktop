@@ -1,10 +1,12 @@
 [Desktop Entry]
-Name=Image
-Name[de]=Grafik
-Comment=Create a new Image
-Comment[de]=Eine neue Grafik erzeugen
-TryExec=gimp
-Exec=gimp
-Icon=gnome-gimp.png
+Name=Spreadsheet
+Name[es]=Hoja de cálculo
+Name[fr]=Tableur
+Comment=Create a new spreadsheet
+Comment[es]=Crea una nueva hoja de cálculo
+Comment[fr]=Crée une nouvelle feuille de calcul
+TryExec=gnumeric
+Exec=gnumeric
+Icon=gnome-gnumeric.png
 Terminal=0
 Type=Application
