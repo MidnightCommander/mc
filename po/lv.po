@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
 "POT-Creation-Date: 2001-10-07 20:11-0400\n"
-"PO-Revision-Date: 2001-11-12 17:18+0200\n"
+"PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
 "MIME-Version: 1.0\n"
@@ -2758,7 +2758,7 @@ msgstr "direktoriji"
 # src/file.c:1704
 #: src/file.c:1699
 msgid "files/directories"
-msgstr "faili/direktoriji"
+msgstr "failus/direktorijas"
 
 # src/file.c:1704
 #: src/file.c:1699
