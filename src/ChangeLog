@@ -7,6 +7,11 @@
 	* view.c: Eliminated two global variables and put them into the
 	WView structure.
 
+2005-01-29  Miguel de Icaza  <miguel@novell.com>
+
+	* utilunix.c (init_groups) [HAVE_GETGROUPLIST]: Use getgrouplist().
+	Original patch by Stefan Gohmann <gohmann@univention.de>
+
 2005-01-17  Roland Illig  <roland.illig@gmx.de>
 
 	* info.c (info_show_info): Enabled display of the device number,
