@@ -58,9 +58,7 @@ DISTFILES = \
 	gindex.pl cons.saver.c ncurses.patch mc.hlp depend.awk \
 	fixhlp.c mfmt.c
 
-# Should be: mc $(srcdir)/mc.hlp but it's remaking it always
-
-all: mc mcmfmt @saver_target@ Makefile
+all: mc mcmfmt $(srcdir)/mc.hlp @saver_target@ Makefile
 
 Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
 	cd $(builddir) && CONFIG_FILES=src/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
@@ -95,10 +93,12 @@ libedit.a:
 @PCENTRULE@	$(RMF) libedit.a
 @PCENTRULE@	$(LN_S) ../edit/libedit.a .
 
-$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl
-	$(MAKE) man2hlp
-	./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
-	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
+$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl man2hlp
+	- ./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
+	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp.tmp && \
+	$(MV) -f $(srcdir)/mc.hlp.tmp $(srcdir)/mc.hlp; \
+	$(RMF) $(srcdir)/mc.hlp.tmp; \
+	touch $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
 	./man2hlp 0 $(docdir)/mc.1.in > body.html

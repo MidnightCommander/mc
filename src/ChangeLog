@@ -1,3 +1,9 @@
+2000-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* mc.hlp: removed. It's a derived file
+	* Makefile.in: Fixed dependencies for $(srcdir)/mc.hlp
+	Build $(srcdir)/mc.hlp but allow a failure (e.g. no perl)
+
 2000-08-11  Frederic L. W. Meunier" <fredlwm@pervalidus.net>
 
 	* Makefile.in: Don't compile mfmt, compile mcmfmt directly.
