@@ -28,6 +28,7 @@ Comment[pl]=Konfiguracja skojarzeñ typów plików
 Comment[pt]=Configura os tipos de ficheiros e os programas a eles associados
 Comment[sv]=Konfigurera hur filer är associerade och startade
 Comment[wa]=Apontyî les sôrtes di fitchî èt les programes po les drovî
+Icon=gnome-ccmime.png
 Exec=mime-type-capplet
 Terminal=0
 Type=Application
