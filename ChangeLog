@@ -1,3 +1,8 @@
+2000-05-05  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* lib/mc.ext.in: More changes by rebel@atrey: he forgot to begin
+	comment lines with # in last release
+
 2000-05-03  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* lib/mc.ext.in: Fixes to changes by rebel@atrey.karlin.mff.cuni.cz.
