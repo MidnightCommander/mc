@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-09-14 13:44+0200\n"
-"PO-Revision-Date: 1999-09-09 20:29+02:00\n"
+"POT-Creation-Date: 1999-09-18 09:33+0200\n"
+"PO-Revision-Date: 1999-09-18 10:59+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -964,7 +964,7 @@ msgstr "_Hjelp"
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
-#: gnome/gmain.c:558
+#: gnome/gmain.c:563
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -1550,7 +1550,7 @@ msgstr "Plassering:"
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:144
-#: src/wtools.c:289 src/wtools.c:563
+#: src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:116
 msgid "&Ok"
 msgstr "&Ok"
 
@@ -1736,6 +1736,7 @@ msgstr "Lag sikkerhetskopi -->"
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:371 src/learn.c:59 src/option.c:145 src/panelize.c:86
 #: src/view.c:404 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: vfs/smbfs.c:116
 msgid "&Cancel"
 msgstr "&Avbryt"
 
@@ -6368,22 +6369,48 @@ msgstr " Ugyldig passord "
 msgid " Too many open connections "
 msgstr " For mange åpne forbindelser "
 
-#: vfs/smbfs.c:1421
+#: vfs/smbfs.c:115
+msgid "Domain:"
+msgstr "Domene:"
+
+#: vfs/smbfs.c:115
+msgid "Username:"
+msgstr "Brukernavn:"
+
+#: vfs/smbfs.c:115
+msgid "Password: "
+msgstr "Passord: "
+
+#: vfs/smbfs.c:170
+#, c-format
+msgid "Password for \\\\%s\\%s"
+msgstr "Passord for \\\\%s\\%s"
+
+#: vfs/smbfs.c:666
+#, c-format
+msgid ""
+" reconnect to %s failed\n"
+" "
+msgstr ""
+"forsøk på å koble til %s på nytt feilet\n"
+" "
+
+#: vfs/smbfs.c:1737
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s lager katalog %s "
 
-#: vfs/smbfs.c:1442
+#: vfs/smbfs.c:1758
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s sletter katalog %s "
 
-#: vfs/smbfs.c:1550 vfs/smbfs.c:1570 vfs/smbfs.c:1631
+#: vfs/smbfs.c:1867 vfs/smbfs.c:1887 vfs/smbfs.c:1948
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s åpner ekstern fil %s"
 
-#: vfs/smbfs.c:1654
+#: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s endrer navn på filer\n"
