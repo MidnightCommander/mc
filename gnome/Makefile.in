@@ -197,7 +197,8 @@ CORBA_GENERATED =		\
 
 MAGICDEV_GENERATED =            \
 	magicdev-common.c 	\
-	magicdev-stubs.c
+	magicdev-stubs.c	\
+	magicdev.h
 
 CLIENTSRCS = gmc-client.c
 
@@ -211,7 +212,7 @@ $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
 $(MAGICDEV_GENERATED): magicdev.idl
-	orbit-idl `gnome-config --cflags idl` --noskels magicdev.idl
+	orbit-idl `gnome-config --cflags idl` --noskels $(srcdir)/magicdev.idl
 
 FileManager-impl.c: FileManager.h
 
