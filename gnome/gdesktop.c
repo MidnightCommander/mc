@@ -122,9 +122,7 @@ static int click_current_y;
 static int click_dragging;
 
 
-static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url,
-					       char *caption,
-					       int user_pos, int auto_pos,
+static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *caption,
 					       int xpos, int ypos);
 
 
@@ -211,27 +209,20 @@ remove_from_slot (DesktopIconInfo *dii)
 
 	layout_slots[dii->slot].num_icons--;
 	layout_slots[dii->slot].icons = g_list_remove (layout_slots[dii->slot].icons, dii);
+
+	dii->slot = -1;
+	dii->x = 0;
+	dii->y = 0;
 }
 
-/* Places a desktop icon.  If auto_pos is true, then the function will look for
- * a place to position the icon automatically, else it will use the specified
- * coordinates, snapped to the grid if the global desktop_snap_icons flag is
- * set.
- */
+/* Places a desktop icon on the specified position */
 static void
-desktop_icon_info_place (DesktopIconInfo *dii, int user_pos, int auto_pos, int xpos, int ypos)
+desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 {
 	int u, v;
 	char *filename;
 
 	remove_from_slot (dii);
-
-	if (!user_pos && auto_pos) {
-		if (desktop_snap_icons)
-			get_icon_snap_pos (&xpos, &ypos);
-		else
-			get_icon_auto_pos (&xpos, &ypos);
-	}
 
 	if (xpos < 0)
 		xpos = 0;
@@ -326,8 +317,7 @@ typedef struct {
 	char *caption;
 } file_and_url_t;
 
-/*
- * Reloads the desktop icons efficiently.  If there are "new" files for which no
+/* Reloads the desktop icons efficiently.  If there are "new" files for which no
  * icons have been created, then icons for them will be created started at the
  * specified position if user_pos is TRUE.  If it is FALSE, the icons will be
  * auto-placed.
@@ -404,7 +394,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 		gnome_metadata_get (full_name, "icon-caption", &size, &caption);
 		
 		if (have_pos) {
-			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, FALSE, FALSE, x, y);
+			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, x, y);
 			gtk_widget_show (dii->dicon);
 
 			g_free (full_name);
@@ -455,7 +445,10 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	for (sl = need_position_list; sl; sl = sl->next) {
 		file_and_url_t *fau = sl->data;
 
-		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, user_pos, TRUE, xpos, ypos);
+		if (!user_pos)
+			get_icon_auto_pos (&xpos, &ypos);
+
+		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 
 		if (fau->url)
@@ -467,11 +460,30 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	}
 
 	g_slist_free (need_position_list);
-
 	gnome_metadata_unlock ();
 
 	/* Flush events to make the icons paint themselves */
 	x_flush_events ();
+}
+
+/* Perform automatic arrangement of the desktop icons */
+static void
+arrange_desktop_icons (void)
+{
+	GList *icons, *l;
+	int xpos, ypos;
+
+	icons = g_list_reverse (get_all_icons ());
+
+	for (l = icons; l; l = l->next)
+		remove_from_slot (l->data);
+
+	for (l = icons; l; l = l->next) {
+		get_icon_auto_pos (&xpos, &ypos);
+		desktop_icon_info_place (l->data, xpos, ypos);
+	}
+
+	g_list_free (icons);
 }
 
 /* Unselects all the desktop icons except the one in exclude */
@@ -1278,21 +1290,22 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 				sel_icons = g_slist_prepend (sel_icons, l->data);
 		}
 
-	/* Move the icons */
+	/* Move the icons.  FIXME: handle auto-placement by reinserting the
+	 * icons in the proper place.
+	 */
 
-	for (sl = sel_icons; sl; sl = sl->next) {
-		dii = sl->data;
-		desktop_icon_info_place (dii,
-					 !desktop_auto_placement,
-					 desktop_auto_placement,
-					 dii->x + dx, dii->y + dy);
-	}
+	if (!desktop_auto_placement)
+		for (sl = sel_icons; sl; sl = sl->next) {
+			dii = sl->data;
+			desktop_icon_info_place (dii, dii->x + dx, dii->y + dy);
+		}
 
 	/* Clean up */
 
 	g_slist_free (sel_icons);
 }
 
+/* Handler for drag_data_received for desktop icons */
 static void
 icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 			 GtkSelectionData *data, guint info, guint time, gpointer user_data)
@@ -1313,7 +1326,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 			return; /* eeeek */
 
 		if (gdnd_perform_drop (context, data, fe, full_name))
-			reload_desktop_icons (TRUE, x, y);
+			reload_desktop_icons (FALSE, 0, 0);
 
 		file_entry_free (fe);
 	}
@@ -1341,7 +1354,7 @@ setup_icon_dnd_dest (DesktopIconInfo *dii)
  * desktop directory.  It does not show the icon.
  */
 static DesktopIconInfo *
-desktop_icon_info_new (char *filename, char *url, char *caption, int user_pos, int auto_pos, int xpos, int ypos)
+desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int ypos)
 {
 	DesktopIconInfo *dii;
 	file_entry *fe;
@@ -1427,7 +1440,7 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int user_pos, i
 
 	/* Place the icon and append it to the list */
 
-	desktop_icon_info_place (dii, user_pos, auto_pos, xpos, ypos);
+	desktop_icon_info_place (dii, xpos, ypos);
 	return dii;
 }
 
@@ -1822,11 +1835,36 @@ find_click_proxy_window (void)
 	return proxy_gdk_window;
 }
 
+/* Callback for arranging the icons on the desktop */
+static void
+handle_arrange_icons (GtkWidget *widget, gpointer data)
+{
+	arrange_desktop_icons ();
+}
+
+/* Callback for rescanning the desktop directory */
+static void
+handle_rescan_desktop (GtkWidget *widget, gpointer data)
+{
+	reload_desktop_icons (FALSE, 0, 0);
+}
+
+/* The popup menu for the desktop */
+static GnomeUIInfo desktop_popup_items[] = {
+	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, handle_rescan_desktop),
+	GNOMEUIINFO_END
+};
+
 /* Executes the popup menu for the desktop */
 static void
 desktop_popup (GdkEventButton *event)
 {
-	printf ("FIXME: display desktop popup menu\n");
+	GtkWidget *popup;
+
+	popup = gnome_popup_menu_new (desktop_popup_items);
+	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, NULL);
+	gtk_widget_destroy (popup);
 }
 
 /* Draws the rubberband rectangle for selecting icons on the desktop */

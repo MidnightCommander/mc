@@ -77,6 +77,8 @@ GtkWidget *drag_directory_ok = NULL;
 GtkWidget *drag_multiple     = NULL;
 GtkWidget *drag_multiple_ok  = NULL;
 
+static void file_list_popup (GdkEventButton *event, WPanel *panel);
+
 
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
@@ -462,12 +464,18 @@ panel_file_list_press_row (GtkWidget *file_list, GdkEvent *event, WPanel *panel)
 	if (event->type == GDK_BUTTON_PRESS && event->button.button == 3) {
 		gint row, column;
 
-		gtk_clist_get_selection_info (GTK_CLIST (file_list),
-					      event->button.x, event->button.y,
-					      &row, &column);
-		gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
-		gpopup_do_popup ((GdkEventButton *) event, panel, NULL,
-				 row, panel->dir.list[row].fname);
+		if (gtk_clist_get_selection_info (GTK_CLIST (file_list),
+						  event->button.x, event->button.y,
+						  &row, &column)) {
+			gtk_clist_select_row (GTK_CLIST (file_list), row, 0);
+#if 0
+			gpopup_do_popup2 ((GdkEventButton *) event, panel);
+#else
+			gpopup_do_popup ((GdkEventButton *) event, panel,
+					 NULL, row, panel->dir.list[row].fname);
+#endif
+		} else
+			file_list_popup ((GdkEventButton *) event, panel);
 	}
 	return TRUE;
 }
@@ -1361,9 +1369,14 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
-		if (event->button.button == 3)
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL,
-					 index, panel->dir.list[index].fname);
+		if (event->button.button == 3) {
+#if 0
+			gpopup_do_popup2 ((GdkEventButton *) event, panel);
+#else
+			gpopup_do_popup ((GdkEventButton *) event, panel,
+					 NULL, index, panel->dir.list[index].fname);
+#endif
+		}
 		break;
 
 	case GDK_BUTTON_RELEASE:
@@ -1412,6 +1425,34 @@ panel_icon_renamed (GtkWidget *widget, int index, char *dest, WPanel *panel)
 		return FALSE;
 }
 
+/* Callback for rescanning the cwd */
+static void
+handle_rescan_directory (GtkWidget *widget, gpointer data)
+{
+	reread_cmd ();
+}
+
+/* The popup menu for file panels */
+static GnomeUIInfo file_list_popup_items[] = {
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Directory"), N_("Reloads the current directory"),
+			       handle_rescan_directory),
+	GNOMEUIINFO_END
+};
+
+/* Creates the popup menu when the user clicks button 3 on the blank area of the
+ * file panels.
+ */
+static void
+file_list_popup (GdkEventButton *event, WPanel *panel)
+{
+	GtkWidget *popup;
+
+	popup = gnome_popup_menu_new (file_list_popup_items);
+	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, panel);
+	gtk_widget_destroy (popup);
+}
+
+
 /*
  * Strategy for activaing the drags from the icon-list:
  *
@@ -1430,11 +1471,8 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
 
 	if (icon == -1) {
-		if (event->button == 3) {
-#if 0
-			g_warning ("FIXME: icon_list_button_press menu");
-			gpopup_do_popup ((GdkEventButton *) event, panel, NULL, FALSE);
-#endif
+		if (event->type == GDK_BUTTON_PRESS && event->button == 3) {
+			file_list_popup (event, panel);
 			return TRUE;
 		}
 	} else if (event->button != 3)

@@ -25,6 +25,7 @@
 #include "gnome-file-property-dialog.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
+
 /* Flags for the popup menu entries.  They specify to which kinds of files an
  * entry is valid for.
  */
@@ -34,10 +35,9 @@ enum {
 	F_SYMLINK	= 1 << 2,	/* Applies only to symlinks */
 	F_SINGLE	= 1 << 3,	/* Applies only to a single file, not to multiple files */
 	F_NOTDIR	= 1 << 4,	/* Applies to non-directories */
-	F_DICON		= 1 << 5,	/* Applies only to desktop icons */
-	F_NOTDEV	= 1 << 6,	/* Applies to non-devices only (ie. reg, lnk, dir) */
-	F_ADVANCED	= 1 << 7,	/* Only appears in advanced mode */
-	F_MIME_ACTIONS	= 1 << 8	/* Special marker for the position of MIME actions */
+	F_NOTDEV	= 1 << 5,	/* Applies to non-devices only (ie. reg, lnk, dir) */
+	F_ADVANCED	= 1 << 6,	/* Only appears in advanced mode */
+	F_MIME_ACTIONS	= 1 << 7	/* Special marker for the position of MIME actions */
 };
 
 /* typedefs */
@@ -46,6 +46,7 @@ struct action {
 	int flags;		/* Flags from the above enum */
 	gpointer callback;	/* Callback for menu item */
 };
+
 
 /* Multiple File commands */
 static void handle_open (GtkWidget *widget, WPanel *panel);
@@ -63,11 +64,6 @@ static void handle_hard_link (GtkWidget *widget, WPanel *panel);
 static void handle_symlink (GtkWidget *widget, WPanel *panel);
 static void handle_edit_symlink (GtkWidget *widget, WPanel *panel);
 
-/* Generic Options */
-static void handle_display_properties (GtkWidget *widget, WPanel *panel);
-static void handle_rescan (GtkWidget *widget, WPanel *panel);
-static void handle_arrange_icons (GtkWidget *widget, WPanel *panel);
-static void handle_logout (GtkWidget *widget, WPanel *panel);
 
 /* global vars */
 extern int we_can_afford_the_speed;
@@ -178,6 +174,7 @@ free_on_destroy (GtkObject *object, gpointer data)
 	g_free (data);
 }
 
+/* Callback for MIME-based actions */
 static void
 mime_action_callback (GtkWidget *widget, gpointer data)
 {
@@ -187,7 +184,7 @@ mime_action_callback (GtkWidget *widget, gpointer data)
 	char *value;
 
 	filename = data;
-	key = gtk_object_get_user_data (widget);
+	key = gtk_object_get_user_data (GTK_OBJECT (widget));
 
 	g_assert (filename != NULL);
 	g_assert (key != NULL);
@@ -262,9 +259,6 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos)
 		gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
 				    (GtkSignalFunc) free_on_destroy,
 				    full_name);
-		gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
-				    (GtkSignalFunc) free_on_destroy,
-				    key);
 	}
 
 	g_list_free (keys);

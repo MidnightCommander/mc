@@ -1,3 +1,19 @@
+1999-02-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_popup): Handle popup menus for the desktop.
+	(arrange_desktop_icons): New function to auto-arrange the desktop
+	icons.
+	(reload_desktop_icons): Take care of positioning the new icons by
+	ourselves; do not rely on desktop_icon_info_new() to do it.
+	(remove_from_slot): Reset the icon's slot to -1.
+	(reload_desktop_icons): Show all the icons after they have been
+	loaded, instead doing it one by one.
+
+	* gscreen.c (file_list_popup): Handle popup menus for the blank
+	areas of the file panels.
+	(panel_icon_list_button_press): Call file_list_popup().
+	(panel_file_list_press_row): Likewise.
+
 1999-02-14  Sergey Panov <sipan@mit.edu>
 
         * glayout.c: Fixed my own stupid typo( stock ID instead of NULL)
