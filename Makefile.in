@@ -4,7 +4,7 @@ VPATH  = @srcdir@
 rootdir = $(srcdir)
 @MCFGR@@MCF@
 
-foreigndirs=nt os2
+foreigndirs=pc
 codedirs=vfs lib doc slang edit src tk xv gnome icons 
 unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
@@ -105,7 +105,7 @@ distdirs:
 	mkdir ../mc-$(VERSION)/xv/support/xview_private; \
 	mkdir ../mc-$(VERSION)/tk; \
 	mkdir ../mc-$(VERSION)/gnome; \
-	mkdir ../mc-$(VERSION)/nt; \
+	mkdir ../mc-$(VERSION)/pc; \
 	mkdir ../mc-$(VERSION)/po; \
 	mkdir ../mc-$(VERSION)/edit;
 
