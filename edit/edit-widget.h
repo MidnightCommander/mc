@@ -126,7 +126,6 @@ typedef struct editor_widget WEdit;
 #define CLIP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.clip"
 #define MACRO_FILE         EDIT_DIR PATH_SEP_STR "cooledit.macros"
 #define BLOCK_FILE         EDIT_DIR PATH_SEP_STR "cooledit.block"
-#define ERROR_FILE         EDIT_DIR PATH_SEP_STR "cooledit.error"
 #define TEMP_FILE          EDIT_DIR PATH_SEP_STR "cooledit.temp"
 
 #endif /* !__EDIT_WIDGET_H */

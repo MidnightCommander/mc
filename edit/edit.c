@@ -2682,51 +2682,40 @@ void edit_execute_macro (WEdit * edit, struct macro macro[], int n)
 }
 
 /* User edit menu, like user menu (F2) but only in editor. */
-void user_menu (WEdit *edit)
+void
+user_menu (WEdit * edit)
 {
     FILE *fd;
     int nomark;
     struct stat status;
     long start_mark, end_mark;
     char *block_file = catstrs (home_dir, BLOCK_FILE, 0);
-    char *error_file = catstrs (home_dir, ERROR_FILE, 0);
     int rc = 0;
 
-    nomark = eval_marks (edit, &start_mark, &end_mark); 
-    if (! nomark) /* remember marked or not */
+    nomark = eval_marks (edit, &start_mark, &end_mark);
+    if (!nomark)		/* remember marked or not */
 	edit_save_block (edit, block_file, start_mark, end_mark);
 
-    /* run shell scripts from menu */     
+    /* run shell scripts from menu */
     user_menu_cmd (edit);
-    
-    if (mc_stat (error_file, &status) != 0 || !status.st_size) {
-	/* no error messages */
-	if (mc_stat (block_file, &status) != 0 || !status.st_size) {
-	    /* no block messages */
-	    return;
-	}
 
-	if (! nomark) {
-	    /* i.e. we have marked block */
-	    rc = edit_block_delete_cmd(edit);
-	}
+    if (mc_stat (block_file, &status) != 0 || !status.st_size) {
+	/* no block messages */
+	return;
+    }
 
-	if (!rc) {
-	    edit_insert_file (edit, block_file);
-	}
-    } else {
-	/* error file exists and is not empty */
-	edit_cursor_to_bol (edit);
-	edit_insert_file (edit, error_file);
+    if (!nomark) {
+	/* i.e. we have marked block */
+	rc = edit_block_delete_cmd (edit);
+    }
 
-	/* truncate error file */
-	if ((fd = fopen (error_file, "w")))
-	    fclose(fd);
+    if (!rc) {
+	edit_insert_file (edit, block_file);
     }
 
     /* truncate block file */
     if ((fd = fopen (block_file, "w"))) {
-	fclose(fd);
+	fclose (fd);
     }
 
     edit_refresh_cmd (edit);

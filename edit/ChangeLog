@@ -1,3 +1,12 @@
+2002-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* edit-widget.h: Eliminate ERROR_FILE.
+	* edit.c: Remove all references to ERROR_FILE.
+	* editcmd.c (edit_block_process_cmd): Revert to using catstrs(),
+	those strings are freed now.  Use system(), not execute() to
+	execute commands.  Use open_error_pipe() and close_error_pipe()
+	to keep track of errors.
+
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c: Clean up global variables in the completion code.
