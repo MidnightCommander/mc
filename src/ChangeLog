@@ -1,3 +1,8 @@
+Sat Dec 26 09:53:39 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* layout.c: include sys/ioctl.h to get definition of TIOCGWINSZ 
+	(fixes problem with screen resize).
+
 Fri Dec 25 20:19:57 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* file.c (panel_operate_flags): Don't change file progress count and
