@@ -21,7 +21,7 @@ install:
 
 uninstall:
 	-cd $(mandir); $(RMF) $(manprefix)mc.$(manext)
-	-cd $(mandir); $(RMF) $manprefix)mcedit.$(manext)
+	-cd $(mandir); $(RMF) $(manprefix)mcedit.$(manext)
 	-cd $(man8dir); $(RMF) $(manprefix)mcserv.$(man8ext)
 
 check:
