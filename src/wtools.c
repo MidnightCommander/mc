@@ -38,6 +38,7 @@
 #include "wtools.h"
 #include "key.h"	/* For mi_getch() */
 #include "complete.h"   /* INPUT_COMPLETE_CD */
+#include "background.h"   /* parent_call */
 
 
 Listbox *
@@ -258,6 +259,43 @@ message (int flags, const char *title, const char *text, ...)
 }
 
 
+/* Show message box from background */
+#ifdef WITH_BACKGROUND
+static void
+bg_message (int dummy, int *flags, char *title, const char *text)
+{
+    title = g_strdup_printf ("%s %s", _("Background process:"), title);
+    message (*flags, title, "%s", text);
+    g_free (title);
+}
+#endif				/* WITH_BACKGROUND */
+
+
+/* Show message box, background safe */
+void
+mc_message (int flags, char *title, const char *text, ...)
+{
+    char *p;
+    va_list ap;
+
+    va_start (ap, text);
+    p = g_strdup_vprintf (text, ap);
+    va_end (ap);
+
+#ifdef WITH_BACKGROUND
+    if (we_are_background) {
+	if (title == MSG_ERROR)
+	    title = _("Error");
+	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
+		     strlen (title), title, strlen (text), text);
+    } else
+#endif				/* WITH_BACKGROUND */
+	message (flags, title, "%s", text);
+
+    g_free (p);
+}
+
+
 /* {{{ Quick dialog routines */
 
 #define I18N(x) (do_int && *x ? (x = _(x)): x)
@@ -395,8 +433,10 @@ int quick_dialog (QuickDialog *qd)
 /* {{{ Input routines */
 
 #define INPUT_INDEX 2
-char *
-real_input_dialog_help (char *header, char *text, char *help,
+
+/* Show dialog, not background safe */
+static char *
+fg_input_dialog_help (char *header, char *text, char *help,
 			char *def_text)
 {
     QuickDialog Quick_input;
@@ -473,6 +513,22 @@ real_input_dialog_help (char *header, char *text, char *help,
 	return 0;
 }
 
+/* Show input dialog, background safe */
+char *
+input_dialog_help (char *header, char *text, char *help, char *def_text)
+{
+#ifdef WITH_BACKGROUND
+    if (we_are_background)
+	return parent_call_string ((void *) fg_input_dialog_help, 4,
+				   strlen (header), header, strlen (text),
+				   text, strlen (help), help,
+				   strlen (def_text), def_text);
+    else
+#endif				/* WITH_BACKGROUND */
+	return fg_input_dialog_help (header, text, help, def_text);
+}
+
+/* Show input dialog with default help, background safe */
 char *input_dialog (char *header, char *text, char *def_text)
 {
     return input_dialog_help (header, text, "[Input Line Keys]", def_text);

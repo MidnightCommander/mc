@@ -22,6 +22,9 @@
 /* }}} */
 
 #include <config.h>
+
+#ifdef WITH_BACKGROUND
+
 #include <stdarg.h>
 #include <sys/types.h>
 #include <errno.h>
@@ -42,9 +45,7 @@
  * We currenlty only support one way of comunicating the background
  * and foreground process by using the socketpair system call
  */
-#ifdef WITH_BACKGROUND
-#    include <sys/socket.h>
-#endif
+#include <sys/socket.h>
 #include "fileopctx.h"
 #include "key.h"	/* For add_select_channel(), delete_select_channel() */
 #include "eregex.h"
@@ -53,8 +54,6 @@
 
 /* If true, this is a background process */
 int we_are_background = 0;
-
-#ifdef WITH_BACKGROUND
 
 #ifndef HAVE_SOCKETPAIR
 int socketpair(int, int, int, int fd[2]);
@@ -151,15 +150,6 @@ do_background (struct FileOpContext *ctx, char *info)
 	register_task_running (ctx, pid, comm[0], info);
 	return 1;
     }
-}
-
-static void
-bg_message (enum OperationMode mode, int *flags, char *title,
-	    const char *text)
-{
-    title = g_strdup_printf ("%s %s", _("Background process:"), title);
-    message (*flags, title, "%s", text);
-    g_free (title);
 }
 
 /* {{{ Parent handlers */
@@ -397,7 +387,7 @@ parent_call (void *routine, struct FileOpContext *ctx, int argc, ...)
     return i;
 }
 
-static char *
+char *
 parent_call_string (void *routine, int argc, ...)
 {
     va_list ap;
@@ -429,44 +419,5 @@ tell_parent (int msg)
 {
     write (parent_fd, &msg, sizeof (int));
 }
+
 #endif				/* WITH_BACKGROUND */
-
-/* Show message box, background safe */
-void
-mc_message (int flags, char *title, const char *text, ...)
-{
-    char *p;
-    va_list ap;
-
-    va_start (ap, text);
-    p = g_strdup_vprintf (text, ap);
-    va_end (ap);
-
-#ifdef WITH_BACKGROUND
-    if (we_are_background) {
-	if (title == MSG_ERROR)
-	    title = _("Error");
-	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
-		     strlen (title), title, strlen (text), text);
-    } else
-#endif				/* WITH_BACKGROUND */
-	message (flags, title, "%s", text);
-
-    g_free (p);
-}
-
-/* Show input dialog, background safe */
-char *
-input_dialog_help (char *header, char *text, char *help, char *def_text)
-{
-#ifdef WITH_BACKGROUND
-    if (we_are_background)
-	return parent_call_string ((void *) real_input_dialog_help, 4,
-				   strlen (header), header, strlen (text),
-				   text, strlen (help), help,
-				   strlen (def_text), def_text);
-    else
-#endif				/* WITH_BACKGROUND */
-	return real_input_dialog_help (header, text, help, def_text);
-}
-

@@ -33,6 +33,7 @@ void tell_parent (int msg);
 struct FileOpContext;
 int do_background (struct FileOpContext *ctx, char *info);
 int parent_call (void *routine, struct FileOpContext *ctx, int argc, ...);
+char *parent_call_string (void *routine, int argc, ...);
 
 void unregister_task_running (pid_t, int fd);
 

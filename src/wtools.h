@@ -63,8 +63,6 @@ int quick_dialog_skip (QuickDialog *qd, int nskip);
 char *input_dialog (char *header, char *text, char *def_text);
 char *input_dialog_help (char *header, char *text, char *help, char *def_text);
 char *input_expand_dialog (char *header, char *text, char *def_text);
-char *real_input_dialog (char *header, char *text, char *def_text);
-char *real_input_dialog_help (char *header, char *text, char *help, char *def_text);
 
 void query_set_sel (int new_sel);
 

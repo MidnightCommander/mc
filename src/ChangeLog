@@ -1,5 +1,9 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* background.c: Leave only code used when WITH_BACKGROUND is
+	defined. The rest goes ...
+	* wtools.c: ... here.
+
 	* background.c: Remove mymsg.
 
 	* util.c (msglen): Constify first argument.
