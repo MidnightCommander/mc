@@ -1,3 +1,8 @@
+2001-10-30  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* cpio.c (cpio_read_bin_head): Release name if mc_read fails.
+	(cpio_read_crc_head): Likewise.
+
 2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_read_crc_head): Fix buffer overflow.

@@ -263,9 +263,10 @@ static int cpio_read_bin_head(vfs *me, vfs_s_super *super)
     g_assert(buf.c_magic == 070707);
 
     name = g_malloc(buf.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, buf.c_namesize)) < buf.c_namesize)
+    if((len = mc_read(super->u.cpio.fd, name, buf.c_namesize)) < buf.c_namesize){
+	g_free(name);
 	return STATUS_EOF;
-
+    }
     CPIO_POS(super) += len;
     cpio_skip_padding(super);
 
@@ -365,9 +366,10 @@ static int cpio_read_crc_head(vfs *me, vfs_s_super *super)
 	return STATUS_FAIL;
 
     name = g_malloc(hd.c_namesize);
-    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize)
+    if((len = mc_read(super->u.cpio.fd, name, hd.c_namesize)) < hd.c_namesize){
+	g_free (name);
 	return STATUS_EOF;
-
+    }
     CPIO_POS(super) += len;
     cpio_skip_padding(super);
 
