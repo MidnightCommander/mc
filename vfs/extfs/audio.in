@@ -18,9 +18,8 @@ audiofs_list ()
     cdparanoia -Q -d $1 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while true
     do
     read A B C || break
-    A=`echo $A | sed 's/\.//'`
-    SIZE=$[44+$B*2352]
-    if (( $A < 10 )); then A="0$A"; fi
+    A=`echo $A | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
+    SIZE=$((44+$B*2352))
     echo "-r--r--r-- 1 0 0 $SIZE Jan 1 0:00 track-${A}.wav"
     done
 }

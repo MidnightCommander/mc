@@ -1,3 +1,8 @@
+2003-08-08  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/audio.in: Fix non-POSIX constructs.
+	From GoTaR <gotar@poczta.onet.pl>
+
 2003-07-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c (login_server): Undo last change.
