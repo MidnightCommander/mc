@@ -103,7 +103,7 @@ static int cpio_read(void *fh, char *buffer, int count);
 #define CPIO_SEEK_SET(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) = (where), SEEK_SET)
 #define CPIO_SEEK_CUR(super, where) mc_lseek((super)->u.cpio.fd, CPIO_POS(super) += (where), SEEK_SET)
 
-struct defer_inode * defer_find(struct defer_inode *l, struct defer_inode *i)
+static struct defer_inode * defer_find(struct defer_inode *l, struct defer_inode *i)
 {
     if(!l) return NULL;
     return l->inumber == i->inumber && l->device == i->device ? l : 
@@ -528,7 +528,7 @@ static int cpio_open_archive(vfs *me, vfs_s_super *super, char *name, char *op)
 }
 
 /* Remaining functions are exactly same as for tarfs (and were in fact just copied) */
-void *cpio_super_check(vfs *me, char *archive_name, char *op)
+static void *cpio_super_check(vfs *me, char *archive_name, char *op)
 {
     static struct stat sb;
     if(mc_stat(archive_name, &sb))
@@ -536,7 +536,7 @@ void *cpio_super_check(vfs *me, char *archive_name, char *op)
     return &sb;
 }
 
-int cpio_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
+static int cpio_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
 {	
     struct stat *archive_stat = cookie;	/* stat of main archive */
 

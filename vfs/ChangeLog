@@ -1,5 +1,16 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Declare functions without declarations static. Don't
+	omit `void' in declarations.
+	* cpio.c: Likewise.
+	* direntry.c: Likewise.
+	* extfs.c: Likewise.
+	* mcfs.c: Likewise.
+	* tar.c: Likewise.
+	* vfs.c: Likewise.
+	* vfs.h: Likewise.
+	* mcserv.c: Likewise. Remove unused functions.
+
 	* util-alone.c: Use indented #error.
 	* vfs.h: Use indented #warning instead of hiding it from non-gcc
 	compilers.

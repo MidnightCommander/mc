@@ -184,9 +184,9 @@ struct utimbuf {
     void vfs_add_noncurrent_stamps (vfs *, vfsid, struct vfs_stamping *);
     void vfs_add_current_stamps (void);
     void vfs_free_resources(char *path);
-    void vfs_timeout_handler ();
+    void vfs_timeout_handler (void);
     void vfs_expire (int);
-    int vfs_timeouts ();
+    int vfs_timeouts (void);
 
     void vfs_fill_names (void (*)(char *));
     char *vfs_translate_url (char *);

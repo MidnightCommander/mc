@@ -156,7 +156,7 @@ static int return_code;
 
 /* {{{ Misc routines */
 
-void send_status (int status, int errno_number)
+static void send_status (int status, int errno_number)
 {
     rpc_send (msock, RPC_INT, status, RPC_INT, errno_number, RPC_END);
     errno = 0;
@@ -166,7 +166,7 @@ void send_status (int status, int errno_number)
 
 /* {{{ File with handle operations */
 
-void do_open (void)
+static void do_open (void)
 {
     int handle, flags, mode;
     char *arg;
@@ -178,7 +178,7 @@ void do_open (void)
     g_free (arg);
 }
 
-void do_read (void)
+static void do_read (void)
 {
     int handle, count, n;
     void *data;
@@ -202,7 +202,7 @@ void do_read (void)
     g_free (data);
 }
 
-void do_write (void)
+static void do_write (void)
 {
     int handle, count, status, written = 0;
     char buf[8192];
@@ -229,7 +229,7 @@ void do_write (void)
     send_status (written, errno);
 }
 
-void do_lseek (void)
+static void do_lseek (void)
 {
     int handle, offset, whence, status;
 
@@ -241,7 +241,7 @@ void do_lseek (void)
     send_status (status, errno);
 }
 
-void do_close (void)
+static void do_close (void)
 {
     int handle, status;
     
@@ -254,7 +254,7 @@ void do_close (void)
 
 /* {{{ Stat family routines */
 
-void send_time (int sock, time_t time)
+static void send_time (int sock, time_t time)
 {
     if (clnt_version == 1) {
 	char   *ct;
@@ -302,7 +302,7 @@ void send_time (int sock, time_t time)
     }
 }
 
-void send_stat_info (struct stat *st)
+static void send_stat_info (struct stat *st)
 {
     long mylong;
     int blocks =
@@ -330,7 +330,7 @@ void send_stat_info (struct stat *st)
     send_time (msock, st->st_ctime);
 }
 
-void do_lstat ()
+static void do_lstat (void)
 {
     struct stat st;
     char   *file;
@@ -344,7 +344,7 @@ void do_lstat ()
     g_free (file);
 }
 
-void do_fstat (void)
+static void do_fstat (void)
 {
     int handle;
     int n;
@@ -359,7 +359,7 @@ void do_fstat (void)
     send_stat_info (&st);
 }
 
-void do_stat ()
+static void do_stat (void)
 {
     struct stat st;
     int    n;
@@ -384,7 +384,7 @@ static struct {
     char *names [OPENDIR_HANDLES];
 } mcfs_DIR;
 
-void close_handle (int handle)
+static void close_handle (int handle)
 {
     if (mcfs_DIR.used > 0) mcfs_DIR.used--;
     if (mcfs_DIR.dirs [handle])
@@ -395,7 +395,7 @@ void close_handle (int handle)
     mcfs_DIR.names [handle] = 0;
 }
 
-void do_opendir (void)
+static void do_opendir (void)
 {
     int handle, i;
     char *arg;
@@ -442,7 +442,7 @@ void do_opendir (void)
 }
 
 /* Sends the complete directory listing, as well as the stat information */
-void do_readdir (void)
+static void do_readdir (void)
 {
     struct dirent *dirent;
     struct stat st;
@@ -475,7 +475,7 @@ void do_readdir (void)
     rpc_send (msock, RPC_INT, 0, RPC_END);
 }
 
-void do_closedir (void)
+static void do_closedir (void)
 {
     int handle;
 
@@ -487,7 +487,7 @@ void do_closedir (void)
 
 /* {{{ Operations with one and two file name argument */
 
-void do_chdir (void)
+static void do_chdir (void)
 {
     char *file;
     int  status;
@@ -499,7 +499,7 @@ void do_chdir (void)
     g_free (file);
 }
 
-void do_rmdir (void)
+static void do_rmdir (void)
 {
     char *file;
     int  status;
@@ -511,7 +511,7 @@ void do_rmdir (void)
     g_free (file);
 }
 
-void do_mkdir (void)
+static void do_mkdir (void)
 {
     char *file;
     int  mode, status;
@@ -523,7 +523,7 @@ void do_mkdir (void)
     g_free (file);
 }
 
-void do_mknod (void)
+static void do_mknod (void)
 {
     char *file;
     int  mode, dev, status;
@@ -535,7 +535,7 @@ void do_mknod (void)
     g_free (file);
 }
 
-void do_readlink (void)
+static void do_readlink (void)
 {
     char buffer [2048];
     char *file;
@@ -551,7 +551,7 @@ void do_readlink (void)
     g_free (file);
 }
 
-void do_unlink (void)
+static void do_unlink (void)
 {
     char *file;
     int  status;
@@ -562,7 +562,7 @@ void do_unlink (void)
     g_free (file);
 }
 
-void do_rename (void)
+static void do_rename (void)
 {
     char *f1, *f2;
     int  status;
@@ -573,7 +573,7 @@ void do_rename (void)
     g_free (f1); g_free (f2);
 }
 
-void do_symlink (void)
+static void do_symlink (void)
 {
     char *f1, *f2;
     int  status;
@@ -584,7 +584,7 @@ void do_symlink (void)
     g_free (f1); g_free (f2);
 }
 
-void do_link (void)
+static void do_link (void)
 {
     char *f1, *f2;
     int  status;
@@ -600,17 +600,17 @@ void do_link (void)
 
 /* {{{ Misc commands */
 
-void do_gethome (void)
+static void do_gethome (void)
 {
     rpc_send (msock, RPC_STRING, (home_dir) ? home_dir : "/", RPC_END);
 }
 
-void do_getupdir (void)
+static void do_getupdir (void)
 {
     rpc_send (msock, RPC_STRING, (up_dir) ? up_dir : "/", RPC_END);
 }
 
-void do_chmod (void)
+static void do_chmod (void)
 {
     char *file;
     int  mode, status;
@@ -621,7 +621,7 @@ void do_chmod (void)
     g_free (file);
 }
 
-void do_chown (void)
+static void do_chown (void)
 {
     char *file;
     int  owner, group, status;
@@ -632,7 +632,7 @@ void do_chown (void)
     g_free (file);
 }
 
-void do_utime (void)
+static void do_utime (void)
 {
     char *file;
     int  status;
@@ -659,7 +659,7 @@ void do_utime (void)
     g_free (file);
 }
 
-void do_quit ()
+static void do_quit (void)
 {
     quit_server = 1;
 }
@@ -671,7 +671,7 @@ struct user_pass {
     char *password;
 };
 
-int
+static int
 mc_pam_conversation (int messages, const struct pam_message **msg,
 		     struct pam_response **resp, void *appdata_ptr)
 {
@@ -715,7 +715,7 @@ static struct pam_conv conv = { &mc_pam_conversation, NULL };
 			     
 
 /* Return 0 if authentication failed, 1 otherwise */
-int
+static int
 mc_pam_auth (char *username, char *password)
 {
     pam_handle_t *pamh;
@@ -769,7 +769,7 @@ static int ftp_answer (int sock, char *text)
     return 0;
 }
 
-int do_ftp_auth (char *username, char *password)
+static int do_ftp_auth (char *username, char *password)
 {
     struct   sockaddr_in local_address;
     unsigned long inaddr;
@@ -820,7 +820,7 @@ int do_ftp_auth (char *username, char *password)
     return 0;
 }
 
-int do_classic_auth (char *username, char *password)
+static int do_classic_auth (char *username, char *password)
 {
     struct passwd *this;
     int ret;
@@ -866,7 +866,7 @@ int do_classic_auth (char *username, char *password)
    - conventional auth (check salt on /etc/passwd, crypt, and compare
    - try to contact the local ftp server and login (if -f flag used)
 */
-int
+static int
 do_auth (char *username, char *password)
 {
     int auth = 0;
@@ -943,7 +943,7 @@ do_auth (char *username, char *password)
 }
 
 #if 0
-int do_rauth (int socket)
+static int do_rauth (int socket)
 {
     struct sockaddr_in from;
     struct hostent *hp;
@@ -962,12 +962,12 @@ int do_rauth (int socket)
 }
 #endif
 
-int do_rauth (int msock)
+static int do_rauth (int msock)
 {
     return 0;
 }
 
-void login_reply (int logged_in)
+static void login_reply (int logged_in)
 {
     rpc_send (msock, RPC_INT,
 	      logged_in ? MC_LOGINOK : MC_INVALID_PASS,
@@ -975,7 +975,7 @@ void login_reply (int logged_in)
 }
 
 /* FIXME: Implement the anonymous login */
-void do_login ()
+static void do_login (void)
 {
     char *username;
     char *password;
@@ -1011,7 +1011,7 @@ void do_login ()
 
 /* This structure must be kept in synch with mcfs.h enums */
 
-struct _command {
+static struct _command {
     char *command;
     void (*callback)(void);
 } commands [] = {
@@ -1046,7 +1046,7 @@ struct _command {
 
 static int ncommands = sizeof(commands)/sizeof(struct _command);
 
-void exec_command (int command)
+static void exec_command (int command)
 {
     if (command < 0 ||
 	command >= ncommands ||
@@ -1058,7 +1058,7 @@ void exec_command (int command)
     (*commands [command].callback)();
 }
 
-void check_version ()
+static void check_version (void)
 {
     int version;
     
@@ -1079,7 +1079,7 @@ void tcp_invalidate_socket (int sock)
     DO_QUIT_VOID();
 }
 
-void server (int sock)
+static void server (int sock)
 {
     int command;
     
@@ -1098,7 +1098,7 @@ void server (int sock)
 
 /* {{{ Net support code */
 
-char *get_client (int portnum)
+static char *get_client (int portnum)
 {
     int sock, clilen, newsocket;
     struct sockaddr_in client_address, server_address;
@@ -1161,7 +1161,7 @@ char *get_client (int portnum)
 }
 
 #ifdef HAVE_PMAP_SET
-void signal_int_handler (int sig)
+static void signal_int_handler (int sig)
 {
     pmap_unset (RPC_PROGNUM, RPC_PROGVER);
 }
@@ -1171,7 +1171,7 @@ void signal_int_handler (int sig)
 #define IPPORT_RESERVED 1024;
 #endif
 
-int get_port_number ()
+static int get_port_number (void)
 {
     int port = 0;
 
@@ -1195,7 +1195,7 @@ int get_port_number ()
     return port;
 }
 
-void register_port (int portnum, int abort_if_fail)
+static void register_port (int portnum, int abort_if_fail)
 {
 #ifdef HAVE_PMAP_SET
     /* Register our service with the portmapper */
@@ -1291,20 +1291,9 @@ int main (int argc, char *argv [])
     exit (return_code);
 }
 
-/* This functions are not used */
-void message (int is_error, char *text, char *msg)
-{
-    printf ("%s %s\n", text, msg);
-}
-
-char *unix_error_string (int a)
-{
-    return "none";
-}
-
+/* FIXME: This function should not be used in mcserv */
 void vfs_die( char *m )
 {
     fprintf (stderr, m);
-	exit (1);
+    exit (1);
 }
-

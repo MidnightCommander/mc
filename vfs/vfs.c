@@ -109,7 +109,7 @@ get_bucket (void)
 /* vfs_local_ops needs to be the first one */
 static vfs *vfs_list = &vfs_local_ops;
 
-int
+static int
 vfs_register (vfs *vfs)
 {
     if (!vfs)
@@ -125,7 +125,7 @@ vfs_register (vfs *vfs)
     return 1;
 }
 
-vfs *
+static vfs *
 vfs_type_from_op (char *path)
 {
     vfs *vfs;
@@ -238,7 +238,7 @@ vfs_split (char *path, char **inpath, char **op)
     return ret;
 }
 
-vfs *
+static vfs *
 vfs_rosplit (char *path)
 {
     char *semi;
@@ -591,7 +591,7 @@ MC_HANDLEOP (fstat, (int handle, struct stat *buf), (vfs_info (handle), buf))
  * You must g_strdup whatever this function returns, static buffers are in use
  */
 
-char *
+static char *
 mc_return_cwd (void)
 {
     char *p;
@@ -1166,7 +1166,7 @@ mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
 /*
  * Hmm, as timeout is minute or so, do we need to care about usecs?
  */
-inline int
+static inline int
 timeoutcmp (struct timeval *t1, struct timeval *t2)
 {
     return ((t1->tv_sec < t2->tv_sec)

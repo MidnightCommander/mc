@@ -433,7 +433,7 @@ static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
     return 0;
 }
 
-void *tar_super_check(vfs *me, char *archive_name, char *op)
+static void *tar_super_check(vfs *me, char *archive_name, char *op)
 {
     static struct stat stat_buf;
     if (mc_stat (archive_name, &stat_buf))
@@ -441,7 +441,7 @@ void *tar_super_check(vfs *me, char *archive_name, char *op)
     return &stat_buf;
 }
 
-int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
+static int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
 {	
     struct stat *archive_stat = cookie;	/* stat of main archive */
 

@@ -76,7 +76,7 @@ vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
     return entry;
 }
 
-void
+static void
 vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 {
     if (!ino)
@@ -406,7 +406,7 @@ vfs_s_new_super (vfs *me)
     return super;
 }
 
-void
+static void
 vfs_s_insert_super (vfs *me, vfs_s_super *super)
 {
     super->next = MEDATA->supers;

@@ -278,7 +278,7 @@ static int mcfs_open_tcp_link (char *host, char *user,
 }
 
 static int mcfs_get_free_bucket_init = 1;
-static mcfs_connection *mcfs_get_free_bucket ()
+static mcfs_connection *mcfs_get_free_bucket (void)
 {
     int i;
     

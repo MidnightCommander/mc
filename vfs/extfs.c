@@ -552,10 +552,7 @@ static char *get_archive_name (struct archive *archive)
 	return archive_name;
 }
 
-/* FIXME: we really should not have non-static procedures - it
- * pollutes namespace.  */
-
-void extfs_run (char *file)
+static void extfs_run (char *file)
 {
     struct archive *archive;
     char *p, *q, *archive_name, *mc_extfsdir;

@@ -520,7 +520,7 @@ static struct no_proxy_entry {
 } *no_proxy;
 
 static void
-load_no_proxy_list ()
+load_no_proxy_list (void)
 {
     /* FixMe: shouldn't be hardcoded!!! */
     char	s[BUF_LARGE]; /* provide for BUF_LARGE characters */
@@ -698,7 +698,7 @@ ftpfs_open_socket (vfs *me, vfs_s_super *super)
     return my_socket;
 }
 
-int
+static int
 open_archive_int (vfs *me, vfs_s_super *super)
 {
     int retry_seconds, count_down;
@@ -1442,7 +1442,7 @@ linear_close (vfs *me, vfs_s_fh *fh)
         linear_abort(me, fh);
 }
 
-int ftpfs_ctl (void *fh, int ctlop, int arg)
+static int ftpfs_ctl (void *fh, int ctlop, int arg)
 {
     switch (ctlop) {
         case MCCTL_IS_NOTREADY:
