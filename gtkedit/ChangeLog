@@ -1,3 +1,9 @@
+2001-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* edit.h [GTK]: Fix definition of edit_message_dialog().
+	* gtkedit.c (gtk_edit_dialog_message): Use "OK" button, not
+	"Cancel", for consistency with the text edition.
+
 2001-08-17  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (syntax_text): Add support for PO files.

@@ -997,7 +997,7 @@ void gtk_edit_dialog_message (guchar * heading, char *fmt,...)
 			    heading, GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
 			    " [ ( %Ld )xf ]xf / ( %Bxfgq )f ",
 			    s,
-			    GNOME_STOCK_BUTTON_CANCEL
+			    GNOME_STOCK_BUTTON_OK
 	);
     return;
 }

@@ -630,7 +630,7 @@ extern Window               gdk_root_window;
 #        define edit_get_load_file(d,f,h) gtk_edit_dialog_get_load_file(d,f,h)
 #        define edit_get_save_file(d,f,h) gtk_edit_dialog_get_save_file(d,f,h)
 #        define edit_error_dialog(h,t) gtk_edit_dialog_error(h,"%s",t)
-#        define edit_message_dialog(h,t) gtk_edit_dialog_message(0,h,"%s",t)
+#        define edit_message_dialog(h,t) gtk_edit_dialog_message(h,"%s",t)
 #        define edit_query_dialog2(h,t,a,b) gtk_edit_dialog_query(h,t,a,b,0)
 #        define edit_query_dialog3(h,t,a,b,c) gtk_edit_dialog_query(h,t,a,b,c,0)
 #        define edit_query_dialog4(h,t,a,b,c,d) gtk_edit_dialog_query(h,t,a,b,c,d,0)
