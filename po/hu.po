@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: hu\n"
-"POT-Creation-Date: 2003-04-15 00:01+0200\n"
+"POT-Creation-Date: 2003-05-29 00:45-0400\n"
 "PO-Revision-Date: 2003-04-14 23:29+0200\n"
 "Last-Translator: Arpad Biro <biro_arpad@yahoo.com>\n"
 "Language-Team: Hungarian\n"
@@ -19,7 +19,6 @@ msgstr ""
 "X-Generator: KBabel 1.0.1\n"
 
 #
-#. The file-name is printed after the ':'
 #: edit/edit.c:151 edit/edit.c:282 edit/edit.c:290 edit/edit.c:338
 #: edit/edit.c:353 edit/edit.c:364 edit/edit.c:380 edit/edit.c:2693
 #: edit/editcmd.c:265 edit/editcmd.c:273 edit/editcmd.c:1694 src/wtools.c:132
@@ -63,7 +62,6 @@ msgstr "A makrórekurzió túl mély"
 msgid "&Dismiss"
 msgstr "&Tovább"
 
-#. 1
 #: edit/edit.h:281 edit/editcmd.c:365 edit/editcmd.c:1203 edit/editcmd.c:1285
 #: edit/editcmd.c:2523 edit/editmenu.c:37 edit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:275 src/boxes.c:373 src/boxes.c:465
@@ -98,7 +96,6 @@ msgid "Do backups -->"
 msgstr "Másolatok készítése -->"
 
 #
-#. 0
 #: edit/editcmd.c:363 edit/editcmd.c:1144 edit/editcmd.c:1201
 #: edit/editcmd.c:1283 edit/editcmd.c:2521 edit/editoptions.c:68
 #: src/achown.c:69 src/boxes.c:139 src/boxes.c:276 src/boxes.c:371
@@ -125,7 +122,6 @@ msgid " Save As "
 msgstr " Mentés más névvel "
 
 #
-#. Execution on this filesysten is not implemented
 #: edit/editcmd.c:459 edit/editcmd.c:779 edit/editcmd.c:816 edit/editcmd.c:975
 #: edit/editcmd.c:1088 src/file.c:623 src/help.c:319 src/main.c:463
 #: src/screen.c:1391 src/screen.c:1970 src/selcodepage.c:106
@@ -151,17 +147,14 @@ msgstr "Mégsem"
 msgid " Cannot save file. "
 msgstr " Nem sikerült menteni a fájlt. "
 
-#. This heads the delete macro error dialog box
 #: edit/editcmd.c:602 edit/editcmd.c:610 edit/editcmd.c:635 edit/editcmd.c:682
 msgid " Delete macro "
 msgstr " Makró törlése "
 
-#. 'Open' = load temp file
 #: edit/editcmd.c:604
 msgid " Cannot open temp file "
 msgstr " Nem sikerült megnyitni az ideiglenes fájlt "
 
-#. 'Open' = load temp file
 #: edit/editcmd.c:612 edit/editcmd.c:673 edit/editcmd.c:730
 msgid " Cannot open macro file "
 msgstr " Nem sikerült megnyitni a makrófájlt "
@@ -170,12 +163,10 @@ msgstr " Nem sikerült megnyitni a makrófájlt "
 msgid " Cannot overwrite macro file "
 msgstr " Nem sikerült felülírni a makrófájlt "
 
-#. This heads the 'Macro' dialog box
 #: edit/editcmd.c:652 edit/editcmd.c:673
 msgid " Save macro "
 msgstr " Makró mentése "
 
-#. Input line for a single key press follows the ':'
 #: edit/editcmd.c:654
 msgid " Press the macro's new hotkey: "
 msgstr " A makró új gyorsbillentyûje: "
@@ -184,7 +175,6 @@ msgstr " A makró új gyorsbillentyûje: "
 msgid " Press macro hotkey: "
 msgstr " Makró-gyorsbillentyû: "
 
-#. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:729
 msgid " Load macro "
 msgstr " Makró betöltése "
@@ -193,7 +183,6 @@ msgstr " Makró betöltése "
 msgid " Confirm save file? : "
 msgstr " Tényleg mentsük a fájlt? - "
 
-#. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:744 src/view.c:474
 msgid " Save file "
 msgstr " Fájl mentése "
@@ -292,7 +281,6 @@ msgstr " Keresendõ minta:"
 msgid " Replace "
 msgstr " Csere "
 
-#. in response to number of bookmarks added because of string being found %d times
 #: edit/editcmd.c:1313 edit/editcmd.c:2011 edit/editcmd.c:2013
 #: edit/editcmd.c:2041 edit/editwidget.c:288 src/view.c:1631 src/view.c:1710
 #: src/view.c:1863 src/view.c:1875 src/view.c:2099 src/view.c:2152
@@ -1039,7 +1027,6 @@ msgstr " Virtuális fájlrendszer (VFS) beállításai "
 msgid "Quick cd"
 msgstr "Gyors 'cd'"
 
-#. want cd like completion
 #: src/boxes.c:801
 msgid "cd"
 msgstr "cd"
@@ -1060,7 +1047,7 @@ msgstr "Létezõ fájlnév (amire a link mutatni fog):"
 msgid "Running "
 msgstr "Futtatás: "
 
-#: src/boxes.c:875 src/find.c:733
+#: src/boxes.c:875 src/find.c:736
 msgid "Stopped"
 msgstr "Megállítva"
 
@@ -1246,7 +1233,6 @@ msgid " Chown command "
 msgstr " Chown parancs "
 
 # a kontextusbol szerencsere kiderul, hogy ez az owner
-#. add fields for unknown names (numbers)
 #: src/chown.c:184
 msgid "<Unknown user>"
 msgstr "<ismeretlen>"
@@ -1568,7 +1554,6 @@ msgstr "Mé&ret"
 msgid "&Inode"
 msgstr "&Inode"
 
-#. New sort orders
 #: src/dir.c:60
 msgid "&Type"
 msgstr "&Típus"
@@ -1611,15 +1596,15 @@ msgstr ""
 msgid " Parameter "
 msgstr " Paraméter "
 
-#: src/ext.c:525 src/ext.c:544
+#: src/ext.c:532 src/ext.c:551
 msgid " file error "
 msgstr " fájl hiba "
 
-#: src/ext.c:527 src/ext.c:546
+#: src/ext.c:534 src/ext.c:553
 msgid "Format of the "
 msgstr "A(z) "
 
-#: src/ext.c:528
+#: src/ext.c:535
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1632,7 +1617,7 @@ msgstr ""
 "Szerezz egy friss példányt a Midnight Commander\n"
 "csomagból."
 
-#: src/ext.c:547
+#: src/ext.c:554
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1642,7 +1627,7 @@ msgstr ""
 "a 3.0-s verzióval megváltozott. Esetleg\n"
 "lemásolhatsz egy "
 
-#: src/ext.c:550
+#: src/ext.c:557
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1650,7 +1635,7 @@ msgstr ""
 "'mc.ext'-et, vagy használhatod azt\n"
 "példaként egy saját fájl írásához.\n"
 
-#: src/ext.c:553
+#: src/ext.c:560
 msgid "mc.ext will be used for this moment."
 msgstr "Addig is, az 'mc.ext'-et használjuk helyette."
 
@@ -1973,15 +1958,6 @@ msgstr ""
 " Nem sikerült letörölni a(z) \"%s\" könyvtárt. \n"
 " %s "
 
-#.
-#. * This array introduced to avoid translation problems. The former (op_names)
-#. * is assumed to be nouns, suitable in dialog box titles; this one should
-#. * contain whatever is used in prompt itself (i.e. in russian, it's verb).
-#. * Notice first symbol - it is to fool gettext and force these strings to
-#. * be different for it. First symbol is skipped while building a prompt.
-#. * (I don't use spaces around the words, because someday they could be
-#. * dropped, when widgets get smarter)
-#.
 #: src/file.c:1688
 msgid "1Copy"
 msgstr "1másolása"
@@ -1996,15 +1972,6 @@ msgstr "1törlése"
 
 # pl.: "dfdsfds" nevû fájl törlése?
 # (Copy, Move, Delete)
-#.
-#. * These are formats for building a prompt. Parts encoded as follows:
-#. * %o - operation from op_names1
-#. * %f - file/files or files/directories, as appropriate
-#. * %m - "with source mask" or question mark for delete
-#. * %s - source name (truncated)
-#. * %d - number of marked files
-#. * %e - "to:" or question mark for delete
-#. *
 #: src/file.c:1703
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -2017,7 +1984,7 @@ msgstr "\"%s\" nevû %f %o%m"
 msgid "%o %d %f%m"
 msgstr "%d kijelölt %f %o%m"
 
-#: src/file.c:1707 vfs/fish.c:545
+#: src/file.c:1707 vfs/fish.c:539
 msgid "file"
 msgstr "fájl"
 
@@ -2189,17 +2156,14 @@ msgstr " A fájl már létezik "
 msgid " Background process: File exists "
 msgstr " Háttérfolyamat: a fájl már létezik "
 
-#. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:746
 msgid "preserve &Attributes"
 msgstr "&Attribútumok megõrzése"
 
-#. &op_preserve
 #: src/filegui.c:748
 msgid "follow &Links"
 msgstr "&Linkek követése"
 
-#. &file_mask_op_follow_links
 #: src/filegui.c:750
 msgid "to:"
 msgstr "Cél:"
@@ -2211,13 +2175,12 @@ msgstr "&Shell-minta"
 
 #: src/filegui.c:772
 msgid "&Background"
-msgstr "&Háttérben"
+msgstr "Háttér&ben"
 
 #: src/filegui.c:782
 msgid "&Stable Symlinks"
 msgstr "S&tabil szim. linkek"
 
-#. &file_mask_stable_symlinks
 #: src/filegui.c:784
 msgid "&Dive into subdir if exists"
 msgstr "Létezõ alkönyvtárba l&emenni"
@@ -2279,29 +2242,28 @@ msgstr "Tartalom: "
 msgid "&Tree"
 msgstr "Köny&vtárfa"
 
-#: src/find.c:225 src/find.c:803
+#: src/find.c:225 src/find.c:806
 msgid "Find File"
 msgstr "Fájl keresése"
 
-#: src/find.c:464
+#: src/find.c:467
 #, c-format
 msgid "Grepping in %s"
 msgstr "Keresés: \"%s\"..."
 
-#: src/find.c:535
+#: src/find.c:538
 msgid "Finished"
 msgstr "Kész"
 
-#: src/find.c:559 src/view.c:1631
+#: src/find.c:562 src/view.c:1631
 #, c-format
 msgid "Searching %s"
 msgstr "\"%s\" keresése"
 
-#: src/find.c:733 src/find.c:837
+#: src/find.c:736 src/find.c:840
 msgid "Searching"
 msgstr "Keresés"
 
-#. Create a replacement page with the error message
 #: src/help.c:280
 msgid " Help file format error\n"
 msgstr " Hibás a súgófájl formátuma.\n"
@@ -2375,7 +2337,6 @@ msgstr "Könyvtár-gyorslista"
 msgid " Directory path "
 msgstr " Könyvtár elérési útvonala "
 
-#. This one holds the displayed pathname
 #: src/hotlist.c:621 src/hotlist.c:671
 msgid " Directory label "
 msgstr " Címke "
@@ -2449,7 +2410,6 @@ msgstr " Gyorslista betöltése "
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
-#. This printf pattern string is used as a reference for size
 #: src/info.c:99
 #, c-format
 msgid "File:       %s"
@@ -2469,81 +2429,81 @@ msgstr "Nincs node-információ"
 msgid "Free space: %s (%d%%) of %s"
 msgstr "Szabad hely:  %s (%d%%) / %s"
 
-#: src/info.c:128
+#: src/info.c:129
 msgid "No space information"
 msgstr "Nincs adat a tárolóhelyrõl"
 
-#: src/info.c:132
+#: src/info.c:133
 #, c-format
 msgid "Type:      %s "
 msgstr "Típus:        %s "
 
-#: src/info.c:132
+#: src/info.c:133
 msgid "non-local vfs"
 msgstr "távoli VFS"
 
-#: src/info.c:138
+#: src/info.c:139
 #, c-format
 msgid "Device:    %s"
 msgstr "Eszköz:       %s"
 
-#: src/info.c:142
+#: src/info.c:143
 #, c-format
 msgid "Filesystem: %s"
 msgstr "Fájlrendszer: %s"
 
-#: src/info.c:147
+#: src/info.c:148
 #, c-format
 msgid "Accessed:  %s"
 msgstr "Használva:    %s"
 
-#: src/info.c:151
+#: src/info.c:152
 #, c-format
 msgid "Modified:  %s"
 msgstr "Módosítva:    %s"
 
 # !! Ez ext2fs-en nem 'creation', hanem az utolso metadata-valtozas...
-#: src/info.c:155
+#: src/info.c:156
 #, c-format
 msgid "Created:   %s"
 msgstr "Adatváltozt.: %s"
 
-#: src/info.c:170
+#: src/info.c:171
 #, c-format
 msgid "Size:      %s"
 msgstr "Méret:        %s"
 
-#: src/info.c:173
+#: src/info.c:174
 #, c-format
 msgid " (%d block)"
 msgstr " (%d blokk)"
 
-#: src/info.c:173
+#: src/info.c:174
 #, c-format
 msgid " (%d blocks)"
 msgstr " (%d blokk)"
 
-#: src/info.c:179
+#: src/info.c:180
 #, c-format
 msgid "Owner:     %s/%s"
 msgstr "Tulajdonos:   %s/%s"
 
-#: src/info.c:184
+#: src/info.c:185
 #, c-format
 msgid "Links:     %d"
 msgstr "Linkek száma: %d"
 
-#: src/info.c:188
+#: src/info.c:189
 #, c-format
 msgid "Mode:      %s (%04o)"
 msgstr "Jogok:        %s (%04o)"
 
-#: src/info.c:193
+#: src/info.c:194
 #, c-format
 msgid "Location:  %Xh:%Xh"
 msgstr "Hely:         %Xh:%Xh"
 
-#: src/info.c:203
+#: src/info.c:204
 msgid "File:       None"
 msgstr "Fájl:         Nincs"
 
@@ -2595,7 +2555,6 @@ msgstr "Fáj&ltípusok"
 msgid "&Save"
 msgstr "M&entés"
 
-#. length of line with '<' '>' buttons
 #: src/layout.c:370
 msgid " Panel split "
 msgstr " Panelek elhelyezkedése "
@@ -2847,10 +2806,6 @@ msgstr "Kijelölés megfor&dítása  M-*"
 msgid "e&Xit              F10"
 msgstr "&Kilépés                 F10"
 
-#. I know, I'm lazy, but the tree widget when it's not running
-#. * as a panel still has some problems, I have not yet finished
-#. * the WTree widget port, sorry.
-#.
 #: src/main.c:1038
 msgid "&Directory tree"
 msgstr "&Könyvtárfa"
@@ -3165,7 +3120,6 @@ msgstr ""
 " bemásolása megtörtént.\n"
 
 # gyakorlatilag egyaltalan nem "biztonsagosabb" az eredetinel...
-#. other options
 #: src/option.c:61
 msgid "safe de&Lete"
 msgstr "'Ó&vatos' törlés"
@@ -3216,7 +3170,6 @@ msgstr "'Összese&n'-ek számítása"
 msgid "&Verbose operation"
 msgstr "Részletes ü&zenetek"
 
-#. panel options
 #: src/option.c:74
 msgid "&Fast dir reload"
 msgstr "G&yors könyvtár-újraolvasás"
@@ -3253,7 +3206,6 @@ msgstr "Buta &terminálokon"
 msgid "Alwa&ys"
 msgstr "Min&dig"
 
-#. Similar code is in layout.c (init_layout())
 #: src/option.c:154
 msgid " Panel options "
 msgstr " Panel beállításai "
@@ -3448,7 +3400,6 @@ msgstr "Szerk"
 msgid "RenMov"
 msgstr "Áthely"
 
-#. FIXME: mkdir is currently defunct
 #: src/screen.c:2191 src/tree.c:1040
 msgid "Mkdir"
 msgstr "ÚjKvtr"
@@ -3677,17 +3628,14 @@ msgstr ""
 msgid " No suitable entries found in %s "
 msgstr " Nincsenek megfelelõ bejegyzések ebben: \"%s\" "
 
-#. Create listbox
 #: src/user.c:787
 msgid " User menu "
 msgstr " Felhasználói menü "
 
-#. strftime() format string for recent dates
 #: src/util.c:668 src/util.c:694
 msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgstr "%b %e %H.%M"
 
-#. strftime() format string for old dates
 #: src/util.c:669 src/util.c:692
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
@@ -3881,8 +3829,6 @@ msgstr "Formáz"
 msgid " History "
 msgstr " Elõzmények "
 
-#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
-#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:119
 msgid "Function key 1"
 msgstr "F1  funkcióbill."
@@ -4023,7 +3969,6 @@ msgstr "num. '-'"
 msgid "* on keypad"
 msgstr "num. '*'"
 
-#. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:155
 msgid "Left arrow keypad"
 msgstr "<Jobbra> a num. blokkban"
@@ -4117,11 +4062,6 @@ msgstr ""
 "ebben a 'cpio' archívumban:\n"
 "%s"
 
-#. In case entry is already there
-#. This shouldn't happen! (well, it can happen if there is a record for a
-#. file and than a record for a directory it is in; cpio would die with
-#. 'No such file or directory' is such case)
-#. This can be considered archive inconsistency
 #: vfs/cpio.c:453
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -4215,34 +4155,33 @@ msgstr "%s: kész"
 msgid "%s: failure"
 msgstr "%s: hiba!"
 
-#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:485
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: \"%s\" tárolása: parancs elküldése..."
 
-#: vfs/fish.c:532
+#: vfs/fish.c:526
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: helyi olvasás nem sikerült, nullák küldése..."
 
-#: vfs/fish.c:544
+#: vfs/fish.c:538
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: tárolás: %s %d (%lu)"
 
-#: vfs/fish.c:545
+#: vfs/fish.c:539
 msgid "zeros"
 msgstr "nullák"
 
-#: vfs/fish.c:598
+#: vfs/fish.c:592
 msgid "Aborting transfer..."
 msgstr "Átvitel megszakítása..."
 
-#: vfs/fish.c:607
+#: vfs/fish.c:601
 msgid "Error reported after abort."
 msgstr "Megszakítás után hibajelzés érkezett."
 
-#: vfs/fish.c:609
+#: vfs/fish.c:603
 msgid "Aborted transfer would be successful."
 msgstr "Megszakított átvitel sikeres lenne."
 
@@ -4618,6 +4557,3 @@ msgstr "%s: %s: %s %3d%% (%lu bájt átküldve)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bájt átküldve"
-
-#~ msgid "Force subshell execution"
-#~ msgstr "Háttér-shell parancsfuttatásának erõltetése."
