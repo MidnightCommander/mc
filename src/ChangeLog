@@ -1,5 +1,11 @@
 2001-05-30  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c: New file for charset conversion support.
+	From Walery Studennikov.
+	* charsets.h: Likewise.
+	* selcodepage.c: Likewise.
+	* selcodepage.h: Likewise.
+
 	* layout.c (init_curses) [!HAVE_SLANG]: Set ESCDELAY to 0 if
 	possible to prevent ncurses from waiting after escape.
 
