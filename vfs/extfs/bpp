@@ -4,6 +4,8 @@
 # (a simple cut & paste from rpm vfs)
 # (C) 1996 The Free Software Foundation.
 #
+# Package of a new italian distribution: Bad Penguin
+# http://www.badpenguin.org/
 
 # override any locale for dates
 unset LC_ALL
@@ -14,19 +16,20 @@ mcbppfs_list ()
 {
     FILEPREF="-r--r--r--   1 root     root    "
     FIEXPREF="-r-xr-xr-x   1 root     root    "
-    #Insert date here!
-    #DATE=`rpm -qp --qf "%{BUILDTIME:date}\n" "$1" | cut -c 5-11,21-24`
-    DATE="Oct 27 2000"
-    #Insert header here!
-    echo "$FILEPREF  0 $DATE CONTENTS.tar.gz"
-    echo "$FIEXPREF 39 $DATE INSTALL"
-    echo "$FIEXPREF 39 $DATE UPGRADE"
+    DATE=`date +"%b %d %H:%M"`
+    set x `ls -l $1`
+    size=$6
+    echo "$FILEPREF $size $DATE CONTENTS.tar.gz"
+    echo "$FIEXPREF 35 $DATE INSTALL"
+    echo "$FIEXPREF 35 $DATE UPGRADE"
 }
 
 mcbppfs_copyout ()
 {
     case "$2" in
 	CONTENTS.tar.gz)		cat "$1" > "$3"; exit 0;;
+	INSTALL) echo "# Run this to install this package" > "$3"; exit 0;;
+	UPGRADE) echo "# Run this to upgrade this package" > "$3"; exit 0;;
     esac
 }
 
