@@ -60,7 +60,8 @@ VFSHDRS = 			\
 	names.h 		\
 	tar.h 			\
 	tcputil.h 		\
-	vfs.h
+	vfs.h			\
+	xdirentry.h
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 

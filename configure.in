@@ -1033,7 +1033,7 @@ AC_DEFUN(AC_WITH_SLANG,
 	    screen_manager="SLang (using system-installed library)"
 	    AC_MSG_RESULT(Using system installed SLang library)
 	else
-	    CPPFLAGS="$CPPFLAGS -I\$(slangdir)"
+	    MCCPPFLAGS="$MCCPPFLAGS -I\$(slangdir)"
     	    LIBSLANG="libmcslang.a"
 	    screen_manager="SLang"
 	    LSLANG="-lmcslang"
@@ -1091,7 +1091,7 @@ AC_DEFUN(AC_WITH_VFS, [
 	LIBVFS="libvfs-mc.a"
 	LVFS="-lvfs-mc"
 	fastdepvfs=fastdepvfs
-	CPPFLAGS="$CPPFLAGS -I\$(vfsdir)"
+	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
 	AC_MSG_RESULT(Using the VFS switch code)
 	vfs_type="Midnight Commander Virtual File System"
 ])
@@ -1378,6 +1378,7 @@ LIBS="$LIBS $posix_libs"
 CPPFLAGS="-I.. $CPPFLAGS"
 AC_SUBST(CFLAGS)
 AC_SUBST(CPPFLAGS)
+AC_SUBST(MCCPPFLAGS)
 AC_SUBST(LDFLAGS)
 AC_SUBST(LIBS)
 

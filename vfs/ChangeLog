@@ -1,3 +1,7 @@
+Mon Oct 26 00:38:30 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Make-mc.in: added xdirentry.h to VFSHDRS
+
 Fri Oct 23 12:29:48 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* tar.c (tar_open_archive): do not double-free memory if you can

@@ -1,3 +1,11 @@
+Mon Oct 26 00:31:53 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in, Make.common.in: Split CPPFLAGS into CPPFLAGS and 
+	MCCPPFLAGS. The last one contains references to variables which are
+	not available in every Makefile.in (namely intl/Makefile.in). Without
+	the split `-I ' was passed to the compiler (the compiler on DU 4.0
+	interprets -I as "don't search include files in /usr/include").
+
 Thu Oct 22 20:41:50 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	*  configure.in (subshell): Don't define inline to be empty
