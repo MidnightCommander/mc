@@ -1,5 +1,7 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_find_entry_tree): Canonicalize path.
+
 	* direntry.c (vfs_s_resolve_symlink): Don't use buffers of fixed
 	size.  This fixes a security hole.  Always start from the root.
 	Remove broken code for making symlinks relative.

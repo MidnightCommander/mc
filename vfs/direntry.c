@@ -263,6 +263,8 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
     if (strlen(path) >= MC_MAXPATHLEN)
 	return NULL;
 
+    canonicalize_pathname (path);
+
     while (root) {
 	int t;
 
