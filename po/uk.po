@@ -155,7 +155,7 @@ msgstr "Часом останнього доступу"
 
 #: gnome/gcmd.c:329
 msgid "Time Last Modified"
-msgstr "Часом останньо╖ модификац╕╖"
+msgstr "Часом останньо╖ модиф╕кац╕╖"
 
 #: gnome/gcmd.c:335
 msgid "Time Last Changed"
@@ -1341,7 +1341,7 @@ msgstr "Очистити см╕тник"
 
 #: gnome/gpopup2.c:286
 msgid "Open with..."
-msgstr "Видкрити за допомогою..."
+msgstr "В╕дкрити за допомогою..."
 
 #: gnome/gpopup2.c:288
 msgid "View Unfiltered"
@@ -2888,7 +2888,7 @@ msgstr "Стерти"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Delete highlighted text"
-msgstr "Стерти вид╕линий текст"
+msgstr "Стерти вид╕лений текст"
 
 #: gtkedit/gtkedit.c:1257 src/main.c:1736 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
