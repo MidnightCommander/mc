@@ -76,7 +76,7 @@ sub mczipfs_rm {
 sub mczipfs_rmdir {
 	my ($qfile) = map { &zipquotemeta($_) } @_;
 	&checkargs(1, 'archive directory', @_);
-	&safesystem("$cmd_delete $qarchive $qfile/ >/dev/null 2>&1", 12);
+	&safesystem("$cmd_delete $qarchive $qfile/ >/dev/null", 12);
   exit;
 }
 
@@ -87,7 +87,7 @@ sub mczipfs_copyout {
 	my ($qafile, $qfsfile) = map { &zipquotemeta($_) } @_;
 	&checkargs(1, 'archive file', @_);
 	&checkargs(2, 'local file', @_);
-	&safesystem("$cmd_extract $qarchive $qafile > $qfsfile 2>/dev/null", 11);
+	&safesystem("$cmd_extract $qarchive $qafile > $qfsfile", 11);
   exit;
 }
 
