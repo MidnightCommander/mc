@@ -138,6 +138,9 @@ supports syntax highlighting.  This means that keywords and contexts
 (like C comments, string constants, etc) are highlighted in different
 colors.  The following section explains the format of the file
 .BR ~/.mc/cedit/Syntax .
+If this file is missing, system-wide
+.B @prefix@/share/mc/syntax/Syntax
+is used.
 The file
 .B ~/.mc/cedit/Syntax
 is rescanned on opening of a any new editor file.  The file contains
@@ -182,6 +185,7 @@ file .\\*\\\\.c C\\sProgram\\sFile (#include|/\\\\\\*)
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_
 
 # default colors
+define  comment   brown
 context default
   keyword  whole  if       yellow
   keyword  whole  else     yellow
@@ -197,7 +201,7 @@ context default
   keyword         '*'      green
 
 # C comments
-context /\\* \\*/ brown
+context /\\* \\*/ comment
 
 # C preprocessor directives
 context linestart # \\n red
@@ -225,8 +229,7 @@ Each context starts with a line of the form:
 .PP
 The first context is an exception.  It must start with the command
 .PP
-.B context
-.B default
+.B context default
 .RI [ foreground ]
 .RI [ background ]
 .PP
@@ -266,8 +269,7 @@ Each rule is a line of the form:
 .B keyword
 .RB [ whole | wholeright | wholeleft ]
 .RB [ linestart ]
-.I string
-.I foreground
+.I string foreground
 .RI [ background ]
 .PP
 Context or keyword strings are interpreted, so that you can include tabs
@@ -472,20 +474,20 @@ the user's own ~/.mc/ini file is missing.
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.mc/ini or not.
 .PP
-.I $HOME/.mc/ini
+.I @prefix@/share/mc/syntax/*
 .IP
-User's own setup.  If this file is present, the setup is loaded from
-here instead of the system-wide startup file.
+The default system-wide syntax files for mcedit, used only if
+the corresponding user's own ~/.mc/cedit/ file is missing.
 .PP
 .I $HOME/.mc/ini
 .IP
-User's own setup. If this file is present then the setup is loaded
-from here instead of the system-wide startup file.
+User's own setup.  If this file is present then the setup is loaded
+from here instead of the system-wide setup file.
 .PP
 .I $HOME/.mc/cedit/
 .IP
-User's own temporary directory where block commands are processed
-and saved.
+User's own directory where block commands are processed and saved and
+user's own syntax files are located.
 .SH LICENSE
 This program is distributed under the terms of the GNU General Public
 License as published by the Free Software Foundation.  See the built-in
