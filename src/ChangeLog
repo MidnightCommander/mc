@@ -1,3 +1,8 @@
+2001-08-26  Pavel Roskin  <proski@gnu.org>
+
+	* xcurses.c: Remove.
+	* Makefile.in: Remove all references to xcurses.c.
+
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* user.h: Include "../edit/edit-widget.h", not
