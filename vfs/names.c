@@ -57,16 +57,10 @@ static int my_gid = -993;
  * Look up a user or group name from a uid/gid, maintaining a cache.
  * FIXME, for now it's a one-entry cache.
  * FIXME2, the "-993" is to reduce the chance of a hit on the first lookup.
- *
- * This is ifdef'd because on Suns, it drags in about 38K of "yellow
- * pages" code, roughly doubling the program size.  Thanks guys.
  */
 void finduname (char *uname, int uid)
 {
     struct passwd *pw;
-#ifndef HAVE_GETPWUID
-    extern struct passwd *getpwuid ();
-#endif
 
     if (uid != saveuid) {
 	saveuid = uid;
@@ -100,9 +94,6 @@ int finduid (char *uname)
 void findgname (char *gname, int gid)
 {
     struct group *gr;
-#ifndef HAVE_GETGRGID
-    extern struct group *getgrgid ();
-#endif
 
     if (gid != savegid) {
 	savegid = gid;

@@ -1,5 +1,10 @@
 2001-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* names.c (finduname): Don't use HAVE_GETPWUID - it's never
+	defined.  Don't redeclare getpwuid().
+	(findgname): Don't use HAVE_GETGRGID - it's never defined.
+	Don't redeclare getgrgid().
+
 	* fish.c: Remove useless semicolons after functions.
 
 2001-08-19  Pavel Roskin  <proski@gnu.org>
