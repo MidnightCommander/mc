@@ -1,3 +1,9 @@
+1999-03-08  Sergey Panov  <sipan@mit.edu>
+
+        * gcustom-layout.c, gprefs.c: Make the preferences dialog
+        translatable. (include files in gcustom-layout.c and use of
+        the _() macro in gprefs.c)
+
 1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (create_settings_pane): Simplify

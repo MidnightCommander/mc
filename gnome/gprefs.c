@@ -284,7 +284,7 @@ create_prop_bool (PrefsDlg *dlg, Property *prop)
 {
         GtkWidget *checkbox;
         
-        checkbox = gtk_check_button_new_with_label (prop->label);
+        checkbox = gtk_check_button_new_with_label (_(prop->label));
         
         if (*((int*) prop->property_variable)) {
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
@@ -313,11 +313,11 @@ create_prop_string (PrefsDlg *dlg, Property *prop)
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
         
-        label = gtk_label_new (prop->label);
+        label = gtk_label_new (_(prop->label));
         gtk_box_pack_start (GTK_BOX (hbox), label, 
                             FALSE, FALSE, 0);
 
-        entry = gnome_entry_new (prop->label);
+        entry = gnome_entry_new (_(prop->label));
         gtk_entry = gnome_entry_gtk_entry (GNOME_ENTRY (entry));
 
         max_length = (int)prop->extra_data1;
@@ -352,11 +352,11 @@ create_prop_int (PrefsDlg *dlg, Property *prop)
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
         
-        label = gtk_label_new (prop->label);
+        label = gtk_label_new (_(prop->label));
         gtk_box_pack_start (GTK_BOX (hbox), label, 
                             FALSE, FALSE, 0);
 
-        entry = gnome_entry_new (prop->label);
+        entry = gnome_entry_new (_(prop->label));
 
         snprintf (buffer, 9, "%d", *( (int*) prop->property_variable));
 
@@ -437,7 +437,7 @@ create_page (PrefsDlg *dlg, PrefsPage *page)
 
         gnome_property_box_append_page (GNOME_PROPERTY_BOX (dlg->prop_box),
                                         vbox,
-                                        gtk_label_new (page->title));
+                                        gtk_label_new (_(page->title)));
 }
 
 static void

@@ -7,6 +7,8 @@
  * Author: Owen Taylor
  */
 
+#include <config.h>
+#include "x.h"
 #include <ctype.h>
 #include "panel.h"
 #include "gcustom-layout.h"
