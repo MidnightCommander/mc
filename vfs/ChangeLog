@@ -1,3 +1,11 @@
+2004-09-17  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* extfs.c (extfs_open_archive): Fixes bug in extfs, which showed
+	'Inconsistent extfs archive' on small archives and diffs. 
+	QNX 6.x (QNX Neutrino) specific 
+
+	Based on patch from Dmitry Alexeyev <dmi_a@qnx.org.ru>
+
 2004-09-06  Jakub Jelinek  <jakub@redhat.com>
 
         * fish.c (fish_file_store): Call got_interrupt() instead of testing
@@ -13,7 +21,7 @@
 	to system/open that spawn a shell.
 	* direntry.c (vfs_s_find_entry_tree): Make "size" size_t.
 
-Based on patches from Jakub Jelinek  <jakub@redhat.com>
+	Based on patches from Jakub Jelinek  <jakub@redhat.com>
 
 2004-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 

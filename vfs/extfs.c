@@ -254,7 +254,10 @@ extfs_open_archive (int fstype, const char *name, struct archive **pparc)
 	    g_free(local_name);
 	}
 	return NULL;
-    }
+    } 
+#ifdef ___QNXNTO__    
+    setvbuf (result, NULL, _IONBF, 0);
+#endif    
 
     current_archive = g_new (struct archive, 1);
     current_archive->fstype = fstype;
