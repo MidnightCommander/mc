@@ -1,3 +1,11 @@
+Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* extfs.c (extfs_open): tempnam returns a malloced string, no need
+	to strdup it
+
+	(various places): use free instead of g_free to free string returned
+	by tempnam.
+
 1999-04-21  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* urar.in, uzip.in: rolled in patches from "christian.gennerat"

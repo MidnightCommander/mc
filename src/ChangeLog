@@ -1,3 +1,10 @@
+Wed Apr 21 21:47:15 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ext.c (exec_extension): Use tempnam instead of tmpnam (AIX doesn't
+	like the latter when compiled with -mthreads).
+
+	* user.c (execute_menu_command): ditto.
+
 Wed Apr 21 20:40:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* Makefile.in: use MCCFLAGS and MCLIBS

@@ -497,15 +497,27 @@ execute_menu_command (char *s)
     int do_quote;
     char prompt [80] = "";
     int  col;
-    char *file_name = tmpnam (0);
+    char *file_name;
+#ifdef OS2_NT
+    char *p;
+#endif
+
+    if ((file_name = tempnam (NULL, "mcusr")) == 0) {
+	message (1, MSG_ERROR, _(" Can't generate unique filename \n %s "),
+		 unix_error_string (errno));
+	return;
+    }
 
 #ifdef OS2_NT
     /* OS/2 and NT requires the command to end in .cmd */
+    p = file_name;
     file_name = g_strconcat (file_name, ".cmd", NULL);
+    free (p);
 #endif
     if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
+        free (file_name);
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -513,6 +525,7 @@ execute_menu_command (char *s)
     if (!commands){
 	fclose (cmd_file);
 	unlink (file_name);
+        free (file_name);
 	return;
     }
     commands++;
@@ -536,6 +549,7 @@ execute_menu_command (char *s)
 		    /* User canceled */
 		    fclose (cmd_file);
 		    unlink (file_name);
+                    free (file_name);
 		    return;
 		}
 		if (do_quote) {
@@ -579,6 +593,7 @@ execute_menu_command (char *s)
     chmod (file_name, S_IRWXU);
     execute (file_name);
     unlink (file_name);
+    free (file_name);
 }
 
 /* 

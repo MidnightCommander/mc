@@ -603,7 +603,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
         char *cmd;
 	char *archive_name, *p;
         
-        entry->inode->local_filename = g_strdup (tempnam (NULL, "extfs"));
+        entry->inode->local_filename = tempnam (NULL, "extfs");
 	{
 	    int handle;
 
@@ -626,7 +626,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
 	g_free (mc_extfsdir);
 	g_free (archive_name);
         if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd) && !do_create){
-            g_free (entry->inode->local_filename);
+            free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             g_free (cmd);
             my_errno = EIO;
@@ -954,7 +954,7 @@ static void remove_entry (struct entry *e)
     if (i <= 0) {
         if (e->inode->local_filename != NULL) {
             unlink (e->inode->local_filename);
-            g_free (e->inode->local_filename);
+            free (e->inode->local_filename);
         }
         if (e->inode->linkname != NULL)
             g_free (e->inode->linkname);
@@ -977,7 +977,7 @@ static void free_entry (struct entry *e)
     if (i <= 0) {
         if (e->inode->local_filename != NULL) {
             unlink (e->inode->local_filename);
-            g_free (e->inode->local_filename);
+            free (e->inode->local_filename);
         }
         if (e->inode->linkname != NULL)
             g_free (e->inode->linkname);

@@ -127,15 +127,17 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
     else
 	do_local_copy = 0;
     
-    /* Note: this has to be done after the getlocalcopy call,
-     * since it uses tmpnam as well
-     */
-    file_name = g_strdup (tmpnam (NULL));
+    if ((file_name = tempnam (NULL, "mcext")) == 0) {
+	message (1, MSG_ERROR, _(" Can't generate unique filename \n %s "),
+		 unix_error_string (errno));
+	return;
+    }
 
     /* #warning FIXME: this is ugly */
     if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
+	free (file_name);
 	return;
     }
     cmd_file = fdopen (cmd_file_fd, "w");
@@ -156,7 +158,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 		    if (localcopy) {
 		        mc_ungetlocalcopy (filename, localcopy, 0);
 		    }
-		    g_free (file_name);
+		    free (file_name);
 		    return;
 		}
 		fputs (parameter, cmd_file);
@@ -200,7 +202,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 			    if (localcopy == NULL) {
 				fclose(cmd_file);
 				unlink(file_name);
-				g_free (file_name);
+				free (file_name);
 				return;
 			    }
 			    mc_stat (localcopy, &mystat);
@@ -308,7 +310,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);
     }
-    g_free (file_name);
+    free (file_name);
 }
 
 #ifdef FILE_L
