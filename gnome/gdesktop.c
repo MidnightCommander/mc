@@ -368,6 +368,7 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
 	char *desktop_url, *caption;
+	const char *mime;
 	int orig_xpos, orig_ypos;
 
 	dir = mc_opendir (desktop_directory);
@@ -502,6 +503,33 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 			get_icon_auto_pos (&xpos, &ypos);
 		}
 
+		/*
+		 * If the file dropped was a .desktop file, pull the suggested
+		 * title and icon from there
+		 */
+		mime = gnome_mime_type_or_default (fau->filename, NULL);
+		if (mime && strcmp (mime, "application/x-gnome-app-info") == 0){
+			GnomeDesktopEntry *entry;
+			char *fullname = g_concat_dir_and_file (desktop_directory, fau->filename);
+			
+			entry = gnome_desktop_entry_load (fullname);
+			if (entry){
+				if (entry->name){
+					if (fau->caption)
+						g_free (fau->caption);
+					fau->caption = g_strdup (entry->name);
+					gnome_metadata_set (fullname, "icon-caption",
+							    strlen (fau->caption)+1, fau->caption);
+				}
+				if (entry->icon){
+					gnome_metadata_set (fullname, "icon-filename",
+							    strlen (entry->icon)+1, entry->icon);
+				}
+				gnome_desktop_entry_free (entry);
+			}
+			g_free (fullname);
+		}
+		
 		dii = desktop_icon_info_new (fau->filename, fau->url, fau->caption, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 
@@ -1587,7 +1615,8 @@ desktop_icon_info_new (char *filename, char *url, char *caption, int xpos, int y
 			caption = url;
 	} else {
 		dii->url = NULL;
-		caption = filename;
+		if (caption == NULL)
+			caption = filename;
 	}
 	
 	icon_im = gicon_get_icon_for_file (desktop_directory, fe, FALSE);

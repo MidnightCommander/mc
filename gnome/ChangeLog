@@ -1,9 +1,13 @@
 1999-02-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (reload_desktop_icons): Load the information provided
+	on the .desktop file for the desktop icon information: icon
+	filename and text to be displayed.
+
 	* gpopup.c (create_actions): Add ejectable 
 
 	* gdesktop.c (do_eject): Add eject command.
-
+ 
 1999-02-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpopup.c (create_actions): Add support for mountable icons.
