@@ -1,3 +1,7 @@
+1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* vfs.c (mc_get_current_wd): Do not die.  Truncate the pathname.
+
 1999-01-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* sfs.c (redirect): tempnam returns a malloc()ed buffer.

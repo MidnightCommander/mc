@@ -635,10 +635,7 @@ mc_get_current_wd (char *buffer, int size)
 {
     char *cwd = mc_return_cwd();
     
-    if (strlen (cwd) > size)
-      vfs_die ("Current_dir size overflow.\n");
-
-    strcpy (buffer, cwd);
+    strncpy (buffer, cwd, size);
     return buffer;
 }
 

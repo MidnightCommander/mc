@@ -469,6 +469,8 @@ create_container (Dlg_head *h, char *name, char *geometry)
 		gtk_widget_set_uposition (GTK_WIDGET (app), xpos, ypos);
 
 	panel = panel_new (name);
+
+	
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);

@@ -743,13 +743,18 @@ desktop_icon_info_delete (DesktopIconInfo *dii)
 	x_flush_events ();
 	
 	full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
-	stat (full_name, &s);
-	if (S_ISDIR (s.st_mode))
-		erase_dir (full_name, &progress_count, &progress_bytes);
-	else
-		erase_file (full_name, &progress_count, &progress_bytes, TRUE);
-
-	gmeta_del_icon_pos (full_name);
+	if (lstat (full_name, &s) != -1){
+		if (S_ISLNK (s.st_mode))
+			erase_file (full_name, &progress_count, &progress_bytes, TRUE);
+		else {
+			if (S_ISDIR (s.st_mode))
+				erase_dir (full_name, &progress_count, &progress_bytes);
+			else
+				erase_file (full_name, &progress_count, &progress_bytes, TRUE);
+			
+		    }
+		gmeta_del_icon_pos (full_name);
+	}
 	g_free (full_name);
 	destroy_op_win ();
 
@@ -1574,6 +1579,15 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		break;
 
 	case TARGET_URI_LIST:
+		/*
+		 * Unless the user is dragging with button-2 (ask action)
+		 * drops on the desktop will be symlinks.
+		 *
+		 * I have got enough complaints as it is.
+		 */
+		if (context->suggested_action != GDK_ACTION_ASK)
+			context->suggested_action = GDK_ACTION_LINK;
+				
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
 		if (retval)
 			reload_desktop_icons (x, y);

@@ -1,3 +1,11 @@
+1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_drag_data_received): Drops on the desktop by
+	default will always be Link commands.  If the user wants to
+	copy/move he needs to use the button-2 to do this.
+	(desktop_icon_info_delete): Treat links as files, not directories.
+
+	I have got enough complaints about this.
 1999-01-12  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_open_files): now you can open multiple files.
