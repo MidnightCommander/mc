@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.6.0-pre2a\n"
-"POT-Creation-Date: 2002-12-28 10:24+0100\n"
-"PO-Revision-Date: 2002-12-28 11:16GMT\n"
+"POT-Creation-Date: 2003-01-05 12:19+0100\n"
+"PO-Revision-Date: 2003-01-05 12:27GMT\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: italiano <tp@lists.linux.it>\n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr " Impossibile ottenere dimensioni/permessi sul file: "
 
 #: edit/edit.c:364
 msgid " Not an ordinary file: "
-msgstr " File non riconosciuto: "
+msgstr " Non è un file normale: "
 
 #: edit/edit.c:380
 msgid " File is too large: "
@@ -90,7 +90,7 @@ msgstr "Salva sicuro"
 
 #: edit/editcmd.c:362
 msgid "Do backups -->"
-msgstr "Fai i backup -->"
+msgstr "Fai i salvataggi -->"
 
 #: edit/editcmd.c:365 edit/editcmd.c:1103 edit/editcmd.c:1160
 #: edit/editcmd.c:1242 edit/editcmd.c:2478 edit/editoptions.c:68
@@ -332,7 +332,7 @@ msgstr "&No"
 
 #: edit/editcmd.c:2132
 msgid " Copy to clipboard "
-msgstr " Copia nella clipboard "
+msgstr " Copia negli appunti "
 
 #: edit/editcmd.c:2132 edit/editcmd.c:2145
 msgid " Unable to save to file. "
@@ -340,7 +340,7 @@ msgstr " impossibile salvare il file. "
 
 #: edit/editcmd.c:2145
 msgid " Cut to clipboard "
-msgstr " Taglia nella clipboard "
+msgstr " Taglia negli appunti "
 
 #: edit/editcmd.c:2173 src/view.c:1982
 msgid " Goto line "
@@ -1230,7 +1230,7 @@ msgstr "Crea una nuova directory"
 
 #: src/cmd.c:403
 msgid " Enter directory name:"
-msgstr " Inserisci nome directory: "
+msgstr " Inserire nome directory: "
 
 #: src/cmd.c:464
 msgid " Filter "
@@ -2898,24 +2898,24 @@ msgstr "Menu"
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variabile TERM non è definita!\n"
 
-#: src/main.c:1877 src/textconf.c:116
+#: src/main.c:1874 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2129
+#: src/main.c:2126
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[flag] [questa_dir] [altra_dir_pannello]\n"
 
-#: src/main.c:2133
+#: src/main.c:2130
 msgid "+number"
 msgstr "+numero"
 
-#: src/main.c:2134
+#: src/main.c:2131
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
-#: src/main.c:2136
+#: src/main.c:2133
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2925,7 +2925,7 @@ msgstr ""
 "Prego spedire rapporti su bug (inclusa l'uscita di `mc -V')\n"
 "a mc-devel@gnome.org\n"
 
-#: src/main.c:2151
+#: src/main.c:2148
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2965,99 +2965,99 @@ msgstr ""
 "   brightcyan, lightgray e white\n"
 "\n"
 
-#: src/main.c:2226
+#: src/main.c:2223
 msgid "Use to debug the background code"
 msgstr "Usare per correggere il codice in background"
 
-#: src/main.c:2229
+#: src/main.c:2226
 msgid "Request to run in color mode"
 msgstr "Richiede l'esecuzione a colori"
 
-#: src/main.c:2231
+#: src/main.c:2228
 msgid "Specifies a color configuration"
 msgstr "Specifica la configurazione dei colori"
 
-#: src/main.c:2235
+#: src/main.c:2232
 msgid "Edits one file"
 msgstr "Modifica un file"
 
-#: src/main.c:2239
+#: src/main.c:2236
 msgid "Displays this help message"
 msgstr "Mostra questo messaggio di aiuto"
 
-#: src/main.c:2241
+#: src/main.c:2238
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra un messaggio di aiuto su come cambiare lo schema dei colori"
 
-#: src/main.c:2244
+#: src/main.c:2241
 msgid "Log ftp dialog to specified file"
 msgstr "Annota i messaggi dell'ftp in un file specificato"
 
-#: src/main.c:2247
+#: src/main.c:2244
 msgid "Set debug level"
 msgstr "Imposta livello di debug"
 
-#: src/main.c:2251
+#: src/main.c:2248
 msgid "Print data directory"
 msgstr "Stampa dati directory"
 
-#: src/main.c:2253
+#: src/main.c:2250
 msgid "Requests to run in black and white"
 msgstr "Richiede l'esecuzione in bianco e nero"
 
-#: src/main.c:2255
+#: src/main.c:2252
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto del mouse nella modalità testo"
 
-#: src/main.c:2258
+#: src/main.c:2255
 msgid "Disables subshell support"
 msgstr "Disabilita il supporto delle sottoshell"
 
-#: src/main.c:2260
+#: src/main.c:2257
 msgid "Force subshell execution"
 msgstr "Forza esecuzione subshell"
 
-#: src/main.c:2263
+#: src/main.c:2260
 msgid "Print last working directory to specified file"
 msgstr "Stampa l'ultima directory corrente nel file specificato"
 
-#: src/main.c:2265
+#: src/main.c:2262
 msgid "Resets soft keys on HP terminals"
 msgstr "Ripristina i tasti soft nei terminali HP"
 
-#: src/main.c:2267
+#: src/main.c:2264
 msgid "To run on slow terminals"
 msgstr "Per farlo andare su terminali lenti"
 
-#: src/main.c:2270
+#: src/main.c:2267
 msgid "Use stickchars to draw"
 msgstr "Usa caratteri semigrafici"
 
-#: src/main.c:2274
+#: src/main.c:2271
 msgid "Enables subshell support (default)"
 msgstr "Abilita il supporto sottoshell (predefinito)"
 
-#: src/main.c:2278
+#: src/main.c:2275
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova a usare termcap invece di terminfo"
 
-#: src/main.c:2281
+#: src/main.c:2278
 msgid "Displays the current version"
 msgstr "Visualizza la versione corrente"
 
-#: src/main.c:2283
+#: src/main.c:2280
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
 
-#: src/main.c:2285
+#: src/main.c:2282
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
 
-#: src/main.c:2502
+#: src/main.c:2499
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:2503
+#: src/main.c:2500
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
