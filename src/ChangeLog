@@ -1,3 +1,9 @@
+2002-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* mem.h: Clean up obsolete definitions, incorporate into ...
+	* global.h: ... this.
+	* Makefile.am: Remove mem.h.
+
 2002-07-13  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am (AM_CPPFLAGS): Remove REGEX_MALLOC, it's now in

@@ -8,6 +8,18 @@
 
 #include <stdlib.h>	/* for free() and other usefull routins */
 
+#if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
+#  include <string.h>
+   /* An ANSI string.h and pre-ANSI memory.h might conflict */
+#  if !defined(STDC_HEADERS) && defined(HAVE_MEMORY_H)
+#    include <memory.h>
+#  endif /* !STDC_HEADERS & HAVE_MEMORY_H */
+
+#else /* !STDC_HEADERS & !HAVE_STRING_H */
+#  include <strings.h>
+    /* memory and strings.h conflict on other systems */
+#endif /* !STDC_HEADERS & !HAVE_STRING_H */
+
 #ifdef _OS_NT
 #  include <windows.h>
 #  include <io.h>
@@ -89,7 +101,6 @@ struct timeval {
 #endif
 
 #include "fs.h"
-#include "mem.h"
 #include "util.h"
 #include "mad.h"
 
