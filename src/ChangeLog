@@ -1,5 +1,8 @@
 2001-05-31  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c: Include config.h before everything else.
+	* selcodepage.c: Likewise.
+
 	* textconf.c (features): Use longer strings to avoid enforcing
 	english word ordering on the translations. Capitalize sentences.
 	From Walery Studennikov: Indicate charset support.

@@ -1,3 +1,5 @@
+#include <config.h>
+
 #ifdef HAVE_CHARSET
 #include <stdlib.h>
 #include <stdio.h>
