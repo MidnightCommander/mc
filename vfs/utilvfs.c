@@ -20,9 +20,7 @@
 
 /* Namespace: exports vfs_split_url */
 
-#ifndef test_get_host_and_username
 #include <config.h>
-#endif
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -60,38 +58,39 @@
  * host.
  */
 
-char *vfs_split_url (const char *path, char **host, char **user, 
-		     int *port, char **pass, int default_port, int flags)
+char *
+vfs_split_url (const char *path, char **host, char **user, int *port,
+	       char **pass, int default_port, int flags)
 {
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
     char *pcopy = g_strdup (path);
-    char *pend  = pcopy + strlen (pcopy);
-    
+    char *pend = pcopy + strlen (pcopy);
+
     if (pass)
 	*pass = NULL;
     *port = default_port;
     *user = NULL;
     retval = NULL;
-    
+
     dir = pcopy;
     if (!(flags & URL_NOSLASH)) {
 	/* locate path component */
 	while (*dir != PATH_SEP && *dir)
 	    dir++;
-	if (*dir){
+	if (*dir) {
 	    retval = g_strdup (dir);
 	    *dir = 0;
 	} else
 	    retval = g_strdup (PATH_SEP_STR);
     }
-    
+
     /* search for any possible user */
-    at    = strchr (pcopy, '@');
+    at = strchr (pcopy, '@');
 
     /* We have a username */
-    if (at){
+    if (at) {
 	*at = 0;
 	inner_colon = strchr (pcopy, ':');
 	if (inner_colon) {
@@ -102,8 +101,8 @@ char *vfs_split_url (const char *path, char **host, char **user,
 	}
 	if (*pcopy != 0)
 	    *user = g_strdup (pcopy);
-	
-	if (pend == at+1)
+
+	if (pend == at + 1)
 	    rest = at;
 	else
 	    rest = at + 1;
@@ -123,18 +122,20 @@ char *vfs_split_url (const char *path, char **host, char **user,
 
     /* Check if the host comes with a port spec, if so, chop it */
     colon = strchr (rest, ':');
-    if (colon){
+    if (colon) {
 	*colon = 0;
-        if (sscanf(colon+1, "%d", port)==1) {
+	if (sscanf (colon + 1, "%d", port) == 1) {
 	    if (*port <= 0 || *port >= 65536)
-	        *port = default_port;
+		*port = default_port;
 	} else {
-	    while(*(++colon)){
-		switch(*colon) {
-		    case 'C': *port = 1;
-	                      break;
-		    case 'r': *port = 2;
-	                      break;
+	    while (*(++colon)) {
+		switch (*colon) {
+		case 'C':
+		    *port = 1;
+		    break;
+		case 'r':
+		    *port = 2;
+		    break;
 		}
 	    }
 	}
@@ -145,151 +146,3 @@ char *vfs_split_url (const char *path, char **host, char **user,
     g_free (pcopy);
     return retval;
 }
-
-#ifdef test_get_host_and_username
-struct tt {
-    char *url;
-    char *r_host;
-    char *r_user;
-    char *r_pass;
-    char *r_dir;
-    int  r_port;
-};
-
-struct tt tests [] = {
-    { "host",                                "host", "anonymous", NULL, "/", 21 },
-    { "host/dir",                            "host", "anonymous", NULL, "/dir", 21 },
-    { "host:40/",                            "host", "anonymous", NULL, "/", 40 },
-    { "host:40/dir",                         "host", "anonymous", NULL, "/dir", 40 },
-    { "user@host",                           "host", "user",      NULL, "/", 21 },
-    { "user@host/dir",                       "host", "user",      NULL, "/dir", 21 },
-    { "user@host:40/",                       "host", "user",      NULL, "/", 40 },
-    { "user@host:40/dir",                    "host", "user",      NULL, "/dir", 40 },
-    { "user:pass@host",                      "host", "user",    "pass", "/", 21 },
-    { "user:pass@host/dir",                  "host", "user",    "pass", "/dir", 21 },
-    { "user:pass@host:40",                   "host", "user",    "pass", "/", 40 },
-    { "user:pass@host:40/dir",               "host", "user",    "pass", "/dir", 40 },
-    { "host/a@b",                            "host", "anonymous", NULL, "/a@b", 21 },
-    { "host:40/a@b",                         "host", "anonymous", NULL, "/a@b", 40 },
-    { "user@host/a@b",                       "host", "user",      NULL, "/a@b", 21 },
-    { "user@host:40/a@b",                    "host", "user",      NULL, "/a@b", 40 },
-    { "user:pass@host/a@b",                  "host", "user",    "pass", "/a@b", 21 },
-    { "user:pass@host:40/a@b",               "host", "user",    "pass", "/a@b", 40 },
-    { "host/a:b",                            "host", "anonymous", NULL, "/a:b", 21 },
-    { "host:40/a:b",                         "host", "anonymous", NULL, "/a:b", 40 },
-    { "user@host/a:b",                       "host", "user",      NULL, "/a:b", 21 },
-    { "user@host:40/a:b",                    "host", "user",      NULL, "/a:b", 40 },
-    { "user:pass@host/a:b",                  "host", "user",    "pass", "/a:b", 21 },
-    { "user:pass@host:40/a:b",               "host", "user",    "pass", "/a:b", 40 },
-    { "host/a/b",                            "host", "anonymous", NULL, "/a/b", 21 },
-    { "host:40/a/b",                         "host", "anonymous", NULL, "/a/b", 40 },
-    { "user@host/a/b",                       "host", "user",      NULL, "/a/b", 21 },
-    { "user@host:40/a/b",                    "host", "user",      NULL, "/a/b", 40 },
-    { "user:pass@host/a/b",                  "host", "user",    "pass", "/a/b", 21 },
-    { "user:pass@host:40/a/b",               "host", "user",    "pass", "/a/b", 40 },
-    { NULL }
-};
-
-/* tests with implicit login name */
-struct tt tests2 [] = {
-    { "@host",                           "host", "user",      NULL, "/", 21 },
-    { "@host/dir",                       "host", "user",      NULL, "/dir", 21 },
-    { "@host:40/",                       "host", "user",      NULL, "/", 40 },
-    { "@host:40/dir",                    "host", "user",      NULL, "/dir", 40 },
-    { ":pass@host",                      "host", "user",    "pass", "/", 21 },
-    { ":pass@host/dir",                  "host", "user",    "pass", "/dir", 21 },
-    { ":pass@host:40",                   "host", "user",    "pass", "/", 40 },
-    { ":pass@host:40/dir",               "host", "user",    "pass", "/dir", 40 },
-    { "@host/a@b",                       "host", "user",      NULL, "/a@b", 21 },
-    { "@host:40/a@b",                    "host", "user",      NULL, "/a@b", 40 },
-    { ":pass@host/a@b",                  "host", "user",    "pass", "/a@b", 21 },
-    { ":pass@host:40/a@b",               "host", "user",    "pass", "/a@b", 40 },
-    { "@host/a:b",                       "host", "user",      NULL, "/a:b", 21 },
-    { "@host:40/a:b",                    "host", "user",      NULL, "/a:b", 40 },
-    { ":pass@host/a:b",                  "host", "user",    "pass", "/a:b", 21 },
-    { ":pass@host:40/a:b",               "host", "user",    "pass", "/a:b", 40 },
-    { "@host/a/b",                       "host", "user",      NULL, "/a/b", 21 },
-    { "@host:40/a/b",                    "host", "user",      NULL, "/a/b", 40 },
-    { ":pass@host/a/b",                  "host", "user",    "pass", "/a/b", 21 },
-    { ":pass@host:40/a/b",               "host", "user",    "pass", "/a/b", 40 },
-    { NULL }
-};
-
-main ()
-{
-    int i, port, err;
-    char *dir, *host, *user, *pass;
-    struct passwd *passwd_info;
-    char *current;
-    
-    if ((passwd_info = getpwuid (geteuid ())) == NULL)
-	current = g_strdup ("anonymous");
-    else {
-		current= g_strdup (passwd_info->pw_name);
-    }
-    endpwent ();
-    
-    for (i = 0; tests [i].url; i++){
-	err = 0;
-	dir = get_host_and_username (tests [i].url, &host, &user, &port, 21, 1, &pass);
-
-	if (strcmp (dir, tests [i].r_dir))
-	    err++, printf ("dir: test %d flunked\n", i);
-	
-	if (!err && strcmp (host, tests [i].r_host))
-	    err++, printf ("host: test %d flunked\n", i);
-	
-	if (!err && strcmp (user, tests [i].r_user))
-	    err++, printf ("user: test %d flunked\n", i);
-
-	if (!err && tests [i].r_pass)
-	    if (strcmp (dir, tests [i].r_dir))
-		err++, printf ("pass: test %d flunked\n", i);
-		
-	if (!err & tests [i].r_port != port)
-	    err++, printf ("port: test %d flunked\n", i);
-
-	if (err){
-	    printf ("host=[%s] user=[%s] pass=[%s] port=[%d]\n",
-		    host, user, pass, port);
-	}
-    }
-    
-    printf ("%d tests ok\nExtra tests:", i);
-    
-    for (i = 0; i < 4; i++){
-	dir = get_host_and_username (tests [i].url, &host, &user, &port, 21, 0, &pass);
-	if (strcmp (user, current))
-	    printf ("ntest: flunked %d\n", i);
-    }
-
-    printf ("%d tests ok\nTests with implicit login name\n", i);
-    
-    for (i = 0; tests2 [i].url; i++){
-	err = 0;
-	dir = get_host_and_username (tests2 [i].url, &host, &user, &port, 21, 1, &pass);
-
-	if (strcmp (dir, tests2 [i].r_dir))
-	    err++, printf ("dir: test %d flunked\n", i);
-	
-	if (!err && strcmp (host, tests2 [i].r_host))
-	    err++, printf ("host: test %d flunked\n", i);
-	
-	if (!err && strcmp (user, current))
-	    err++, printf ("user: test %d flunked\n", i);
-
-	if (!err && tests2 [i].r_pass)
-	    if (strcmp (dir, tests2 [i].r_dir))
-		err++, printf ("pass: test %d flunked\n", i);
-		
-	if (!err & tests2 [i].r_port != port)
-	    err++, printf ("port: test %d flunked\n", i);
-
-	if (err){
-	    printf ("host=[%s] user=[%s] pass=[%s] port=[%d]\n",
-		    host, user, pass, port);
-	}
-    }
-    printf ("%d tests ok\n", i);
-}
-#endif

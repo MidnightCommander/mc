@@ -160,7 +160,7 @@ static int mcfs_login_server (int my_socket, char *user, int port,
 
 /* This used to be in utilvfs.c, but as it deals with portmapper, it
    is probably usefull for mcfs */
-int
+static int
 open_tcp_link  (char *host, int *port, int *version, char *caller)
 {
     struct   sockaddr_in server_address;

@@ -20,9 +20,5 @@ int socket_write_block (int sock, char *buffer, int len);
 int send_string (int sock, char *string);
 void tcp_init (void);
 int get_remote_port (struct sockaddr_in *sin, int *version);
-int open_tcp_link  (char *host, int *port, int *version, char *caller);
-char *get_host_and_username (char *path, char **host, char **user, int *port,
-			     int default_port, int default_to_anon, char **pass);
 
-extern int tcp_inited;
 extern int got_sigpipe;
