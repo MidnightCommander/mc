@@ -1,5 +1,10 @@
 2002-08-17  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/c.syntax: Highlight "?" by the same color as ":".
+	* syntax/java.syntax: Likewise.
+	* syntax/swig.syntax: Likewise.
+	* syntax/python.syntax: Remove duplicate keyword ":".
+
 	* Makefile.am: Add m4 to SUBDIRS.  Set ACLOCAL_AMFLAGS so that
 	m4 directory is used by aclocal.
 	* m4/Makefile.am: New file.

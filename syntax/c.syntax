@@ -92,6 +92,7 @@ context default
     keyword ] brightcyan/14
     keyword , brightcyan/14
     keyword : brightcyan/14
+    keyword ? brightcyan/14
     keyword ; brightmagenta/19
 context exclusive /\* \*/ brown/22
     spellcheck
