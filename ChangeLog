@@ -1,3 +1,8 @@
+2002-03-26  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* src/Makefile.am: Move mc.hlp.ru processing ...
+	* doc/ru/Makefile.am: ... here.
+
 2002-03-21  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax/Syntax: Match ^Syntax$ for Syntax Highlighting.
