@@ -593,6 +593,7 @@ handle_link (char *buffer)
 {
     static char old[80];
     int len;
+    char *amp;
 
     switch (link_flag) {
     case 1:
@@ -618,8 +619,18 @@ handle_link (char *buffer)
 	if (len && buffer[len - 1] == '"') {
 	    buffer[--len] = 0;
 	}
-	printf_string ("%c%s%c%s%c\n", CHAR_LINK_START, old,
-		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END);
+
+	/* "Layout\&)," -- "Layout" should be highlighted, but not ")," */
+	amp = strstr (old, "\\&");
+	if (amp) {
+	    *amp = 0;
+	    amp += 2;
+	} else {
+	    amp = "";
+	}
+
+	printf_string ("%c%s%c%s%c%s\n", CHAR_LINK_START, old,
+		       CHAR_LINK_POINTER, buffer, CHAR_LINK_END, amp);
 	link_flag = 0;
 	/* Add to the linked list */
 	if (current_link) {
