@@ -1,3 +1,12 @@
+2000-10-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/libsmb/nterr.c (nt_errs): constified
+
+	* samba/libsmb/smberr.c (dos_msgs, server_msgs, hard_msgs, 
+	err_classes): ditto
+
+	(smb_errstr): err constified to avoid warnings
+
 2000-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* ftpfs.c (open_data_connection): don't generate //filename, some
