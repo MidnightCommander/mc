@@ -22,5 +22,5 @@ This command can take a while.
 Tools currently used for snapshots:
 
 Autoconf 2.57
-Automake 1.7.3
+Automake 1.7.4
 Gettext 0.11.5
