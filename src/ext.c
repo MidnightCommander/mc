@@ -219,13 +219,10 @@ exec_extension (const char *filename, const char *data, int *move_dir,
 	g_free (file_name);
 	file_name = NULL;
     } else {
-	int cmd_len = strlen (file_name) + 10;
-
 	/* Set executable flag on the command file ... */
 	chmod (file_name, S_IRWXU);
 	/* ... but don't rely on it - run /bin/sh explicitly */
-	cmd = g_malloc (cmd_len);
-	g_snprintf (cmd, cmd_len, "/bin/sh %s", file_name);
+	cmd = g_strconcat ("/bin/sh ", file_name, NULL);
     }
 
     if (run_view) {
