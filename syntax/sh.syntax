@@ -66,6 +66,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole umask yellow
     keyword whole unset yellow
     keyword whole until yellow
+    keyword whole wait yellow
     keyword whole while yellow
 
     keyword whole arch cyan
