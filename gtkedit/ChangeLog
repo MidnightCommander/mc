@@ -1,3 +1,7 @@
+2001-08-24  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (syntax_text): Fix recognizing pdksh and zsh scripts.
+
 2001-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_block_process_cmd): Use execute(), not

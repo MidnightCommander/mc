@@ -1211,7 +1211,7 @@ static const char * const syntax_text[] = {
 "file ..\\*\\\\.lsm$ LSM\\sFile",
 "include lsm.syntax",
 "",
-"file ..\\*\\\\.sh$ Shell\\sScript ^#!\\s\\*/.\\*/(ksh|bash|sh|pdkzsh)",
+"file ..\\*\\\\.sh$ Shell\\sScript ^#!\\s\\*/.\\*/(k|ba||pdk|z)sh",
 "include sh.syntax",
 "",
 "file ..\\*\\\\.(pl|PL|pm|PM])$ Perl\\sProgram ^#!\\s\\*/.\\*/perl",
