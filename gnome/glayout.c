@@ -15,6 +15,7 @@
 #include "main.h"
 #include "gmain.h"
 #include "cmd.h"
+#include "dialog.h"
 #include "boxes.h"
 #include "panelize.h"
 #include "gcmd.h"
@@ -260,13 +261,24 @@ save_panel_types (void)
 	}
 }
 
+static void
+run_cmd (void)
+{
+	char *cmd;
+
+	cmd = input_dialog (_("Enter command to run"), _("Enter command to run"), "");
+	if (cmd && *cmd){
+		my_system (EXECUTE_AS_SHELL, shell, cmd);
+	}
+}
+
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_New window"),        N_("Opens a new window"), gnome_open_panel },
-	{ GNOME_APP_UI_ITEM, N_("_New folder"),        N_("Creates a folder"), mkdir_panel_cmd },
+	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New window"), N_("Opens a new window"), gnome_open_panel, NULL),
+	GNOMEUIINFO_MENU_NEW_ITEM(N_("_New folder"),N_("Creates a folder"), mkdir_panel_cmd, NULL),
 	/* We want to make a new menu entry here... */
 	/* For example: */
 	/* New-> */
@@ -275,25 +287,27 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	/*  Gnumeric Spreadsheet */
 	/*  Text Document */
 	/*  etc... */
+
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Open selected files"), NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN },
+	{ GNOME_APP_UI_ITEM, N_("_Run"),               N_("Runs a command"), run_cmd, NULL,
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_OPEN, GDK_F2, 0 },
+	{ GNOME_APP_UI_ITEM, N_("_Open"),              N_("Opens the selected files"), NULL },
+	{ GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Copy..."),           N_("Copy files"), copy_cmd, NULL},
 	{ GNOME_APP_UI_ITEM, N_("_Delete..."),         N_("Delete files from disk"), delete_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Move..."),           N_("Rename or move files"), ren_cmd },
+	{ GNOME_APP_UI_ITEM, N_("_Make directory..."), N_("Creates a new directory"), mkdir_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("C_lose"),             N_("Close this panel"), gnome_close_panel, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE },
+	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CLOSE,
+	  GNOME_KEY_NAME_CLOSE, GNOME_KEY_MOD_CLOSE, NULL },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gnome_panel_edit_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("_Cut"),               N_("Cuts the selected files into the cut buffer."),  NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_CUT },
-	{ GNOME_APP_UI_ITEM, N_("C_opy"),              N_("Copies the selected files into the cut buffer."),  NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_COPY },
-	{ GNOME_APP_UI_ITEM, N_("_Paste"),             N_("Pastes files from the cut buffer into the current directory"),  NULL, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PASTE },
+	GNOMEUIINFO_MENU_CUT_ITEM(NULL, NULL),
+	GNOMEUIINFO_MENU_COPY_ITEM(NULL, NULL),
+	GNOMEUIINFO_MENU_PASTE_ITEM(NULL, NULL),
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("_Select All"),        N_("Select all files in the current Panel"), gnome_select_all_cmd },
 	{ GNOME_APP_UI_ITEM, N_("_Select Files..."),   N_("Select a group of files"), select_cmd },
@@ -301,8 +315,7 @@ GnomeUIInfo gnome_panel_edit_menu [] = {
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("_Rescan Directory"),  N_("Rescan the directory contents"), reread_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Preferences..."),     N_("Configure the GNOME Midnight Commander"), gnome_configure_box, NULL,
-	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP},
+	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gnome_configure_box, NULL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
@@ -456,7 +469,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 
 	panel = panel_new (name);
 	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_container_set_border_width (vbox, 0);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
 

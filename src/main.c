@@ -2834,6 +2834,10 @@ mc_tree_store_save ()
 
 int main (int argc, char *argv [])
 {
+#ifdef HAVE_GNOME
+    /* Just to time things */
+    printf ("GNU Midnight Commander " VERSION "\n");
+#endif
     /* We had LC_CTYPE before, LC_ALL includs LC_TYPE as well */
     setlocale (LC_ALL, "");
     bindtextdomain ("mc", LOCALEDIR);

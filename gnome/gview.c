@@ -286,49 +286,43 @@ gnome_monitor (GtkWidget *widget, WView *view)
 }
 
 GnomeUIInfo gview_file_menu [] = {
-	GNOMEUIINFO_ITEM_STOCK (N_("Goto line"),
+	GNOMEUIINFO_ITEM_STOCK (N_("_Goto line"),
 				N_("Jump to a specified line number"),
 				&gnome_goto_line, GNOME_STOCK_PIXMAP_JUMP_TO),
-	GNOMEUIINFO_ITEM (N_("Monitor file"), N_("Monitor file growing"),            &gnome_monitor, NULL),
-	GNOMEUIINFO_ITEM_STOCK (N_("Close"),
-				N_("Close the viewer"),
-				&gview_quit, GNOME_STOCK_PIXMAP_QUIT),
+	GNOMEUIINFO_ITEM (N_("_Monitor file"), N_("Monitor file growing"),            &gnome_monitor, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(gview_quit, NULL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_search_menu [] = {
-	GNOMEUIINFO_ITEM_STOCK (N_("Search"),
-				N_("String search"),
-				gnome_normal_search_cmd, GNOME_STOCK_MENU_SEARCH),
+	GNOMEUIINFO_MENU_FIND_ITEM(gnome_normal_search_cmd, NULL),
 	GNOMEUIINFO_ITEM_STOCK (N_("Regexp search"),
 				N_("Regular expression search"),
 				gnome_regexp_search_cmd, GNOME_STOCK_MENU_SEARCH),
-	GNOMEUIINFO_SEPARATOR,			 
-	GNOMEUIINFO_ITEM_STOCK (N_("Search again..."),
-				N_("Continue searching"),
-				gnome_continue_search, GNOME_STOCK_MENU_SRCHRPL),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_MENU_FIND_AGAIN_ITEM(gnome_continue_search, NULL),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_mode_menu [] = {
 #define WRAP_POS 0
-	GNOMEUIINFO_TOGGLEITEM (N_("Wrap"),      N_("Wrap the text"), gnome_toggle_wrap, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("_Wrap"),      N_("Wrap the text"), gnome_toggle_wrap, NULL),
 #if 0
 	/* Can not use this one yet, as it destroys the viewer, need to fix that */
-	GNOMEUIINFO_TOGGLEITEM ("Parsed view", NULL, gnome_toggle_parse, NULL),
+	GNOMEUIINFO_TOGGLEITEM ("_Parsed view", NULL, gnome_toggle_parse, NULL),
 #endif
 #define FORMAT_POS 1
-	GNOMEUIINFO_TOGGLEITEM (N_("Formatted"),   NULL, gnome_toggle_format, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("_Formatted"),   NULL, gnome_toggle_format, NULL),
 #define HEX_POS 2
-	GNOMEUIINFO_TOGGLEITEM (N_("Hex"),         NULL, gnome_toggle_hex, NULL),
+	GNOMEUIINFO_TOGGLEITEM (N_("_Hex"),         NULL, gnome_toggle_hex, NULL),
 	
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
 GnomeUIInfo gview_top_menu [] = {
-	{ GNOME_APP_UI_SUBTREE, N_("File"),     NULL, &gview_file_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Search"),   NULL, &gview_search_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Mode"),     NULL, &gview_mode_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_File"),     NULL, &gview_file_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Search"),   NULL, &gview_search_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Mode"),     NULL, &gview_mode_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 

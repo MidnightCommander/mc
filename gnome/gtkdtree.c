@@ -115,12 +115,8 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 
 	for (; (dirent = tree_store_readdir (dir)) != NULL; ){
 		GtkCTreeNode *sibling;
-		struct stat s;
 		char *text [1];
-		int   res;
 		
-		res = mc_stat (dirent->name, &s);
-
 		text [0] = x_basename (dirent->name);
 
 		/* Do not insert duplicates */
@@ -484,7 +480,11 @@ gtk_dtree_save_tree (void)
 	mc_tree_store_save ();
 	return FALSE;
 }
-	
+
+/*
+ * Callback routine invoked by the treestore code when the state
+ * of the treestore has been modified.
+ */
 static void
 gtk_dtree_dirty_notify (int state)
 {
@@ -498,7 +498,7 @@ gtk_dtree_dirty_notify (int state)
 	}
 
 	if (state)
-		dirty_tag = gtk_timeout_add (1000, (GtkFunction) gtk_dtree_save_tree, NULL);
+		dirty_tag = gtk_timeout_add (10 * 1000, (GtkFunction) gtk_dtree_save_tree, NULL);
 }
 
 static void

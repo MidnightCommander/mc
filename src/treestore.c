@@ -45,11 +45,14 @@
 #include <string.h>
 #include <glib.h>
 #include "fs.h"
+#include "../vfs/vfs.h"
 #include "util.h"
 #include "treestore.h"
 #ifdef OS2_NT
 #   include <io.h>
 #endif
+
+#define TREE_SIGNATURE "Midnight Commander TreeStore v 2.0"
 
 static TreeStore ts;
 
@@ -197,24 +200,50 @@ int
 tree_store_load (char *name)
 {
 	FILE *file;
-	char buffer [MC_MAXPATHLEN], oldname[MC_MAXPATHLEN];
+	char buffer [MC_MAXPATHLEN + 20], oldname[MC_MAXPATHLEN];
 	char *different;
 	int len, common;
-
+	int do_load;
+	
 	g_return_if_fail (name != NULL);
 
 	if (ts.loaded)
 		return TRUE;
 	
 	file = fopen (name, "r");
+
 	if (file){
+		fgets (buffer, sizeof (buffer), file);
+	
+		if (strncmp (buffer, TREE_SIGNATURE, strlen (TREE_SIGNATURE)) != 0){
+			fclose (file);
+			do_load = FALSE;
+		} else
+			do_load = TRUE;
+	} else
+		do_load = FALSE;
+
+	if (do_load){
 		ts.loaded = TRUE;
-		
+
 		/* File open -> read contents */
 		oldname [0] = 0;
 		while (fgets (buffer, MC_MAXPATHLEN, file)){
-			char *name = decode (buffer);
+			tree_entry *e;
+			int scanned;
+			char *name;
+
+			/* Skip invalid records */
+			if ((buffer [0] != '0' && buffer [0] != '1'))
+				continue;
 			
+			if (buffer [1] != ':')
+				continue;
+
+			scanned = buffer [0] == '1';
+
+			name = decode (buffer+2);
+
 			len = strlen (name);
 #ifdef OS2_NT
 			/* .ado: Drives for NT and OS/2 */
@@ -236,11 +265,13 @@ tree_store_load (char *name)
 						different = strtok (NULL, "");
 						if (different){
 							strcpy (oldname + common, different);
-							tree_store_add_entry (oldname);
+							e = tree_store_add_entry (oldname);
+							e->scanned = scanned;
 						}
 					}
 				} else {
-					tree_store_add_entry (name);
+					e = tree_store_add_entry (name);
+					e->scanned = scanned;
 					strcpy (oldname, name);
 				}
 		}
@@ -302,6 +333,8 @@ tree_store_save (char *name)
 	if (!file)
 		return errno;
 
+	fprintf (file, "%s\n", TREE_SIGNATURE);
+	
 	current = ts.tree_first;
 	while (current){
 		int i, common;
@@ -310,12 +343,12 @@ tree_store_save (char *name)
 		if (current->prev && (common = str_common (current->prev->name, current->name)) > 2){
 			char *encoded = encode (current->name + common);
 			
-			i = fprintf (file, "%d %s\n", common, encoded);
+			i = fprintf (file, "%d:%d %s\n", current->scanned, common, encoded);
 			free (encoded);
 		} else {
 			char *encoded = encode (current->name);
 			
-			i = fprintf (file, "%s\n", encoded);
+			i = fprintf (file, "%d:%s\n", current->scanned, encoded);
 			free (encoded);
 		}
 		
