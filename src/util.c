@@ -936,6 +936,19 @@ long int is_gunzipable (int fd, int *type)
 }
 
 char *
+decompress_extension (int type)
+{
+	switch (type){
+	case ISGUNZIPABLE_GUNZIP: return "#ugz";
+	case ISGUNZIPABLE_BZIP:   return "#ubz";
+	case ISGUNZIPABLE_BZIP2:  return "#ubz2";
+	}
+	/* Should never reach this place */
+	fprintf (stderr, "Fatal: decompress_extension called with an unknown argument\n");
+	return 0;
+}
+
+char *
 decompress_command (int type)
 {
 	switch (type){
