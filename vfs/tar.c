@@ -1067,26 +1067,6 @@ static int tar_chown (char *path, int owner, int group)
     return chown (path, owner, group);
 }
 
-static int tar_unlink (char *path)
-{
-    return -1;
-}
-
-static int tar_symlink (char *n1, char *n2)
-{
-    return -1;
-}
-
-static int tar_write (void *data, char *buf, int nbyte)
-{
-    return -1;
-}
-
-static int tar_rename (char *a, char *b)
-{
-    return -1;
-}
-
 static int tar_chdir (char *path)
 {
     struct tarfs_archive *archive;
@@ -1124,26 +1104,6 @@ static int tar_lseek (void *data, off_t offset, int whence)
     else
     	file->pos = file->end;
     return file->pos;
-}
-
-static int tar_mknod (char *path, int mode, int dev)
-{
-    return -1;
-}
-
-static int tar_link (char *p1, char *p2)
-{
-    return -1;
-}
-
-static int tar_mkdir (char *path, mode_t mode)
-{
-    return -1;
-}
-
-static int tar_rmdir (char *path)
-{
-    return -1;
 }
 
 static vfsid tar_getid (char *path, struct vfs_stamping **parent)
@@ -1251,24 +1211,12 @@ static void tar_ungetlocalcopy (char *path, char *local, int has_changed)
    since it will be freed when tar archive will be freed */
 }
 
-#ifdef HAVE_MMAP
-caddr_t tar_mmap (caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
-{
-    return (caddr_t)-1;
-}
-
-int tar_munmap (caddr_t addr, size_t len, void *data)
-{
-    return -1;
-}
-#endif
-
 vfs tarfs_vfs_ops =
 {
     tar_open,
     tar_close,
     tar_read,
-    tar_write,		/* unimplemented */
+    NULL,
 
     s_opendir,
     s_readdir,
@@ -1285,15 +1233,15 @@ vfs tarfs_vfs_ops =
     NULL,
 
     s_readlink,
-    tar_symlink,	/* unimplemented */
-    tar_link,		/* unimplemented */
-    tar_unlink,		/* unimplemented */
+    NULL,
+    NULL,
+    NULL,
 
-    tar_rename,		/* unimplemented */
+    NULL,
     tar_chdir,
     s_errno,
     tar_lseek,
-    tar_mknod,		/* unipmelemented */
+    NULL,
     
     tar_getid,
     tar_nothingisopen,
@@ -1302,13 +1250,13 @@ vfs tarfs_vfs_ops =
     tar_getlocalcopy,
     tar_ungetlocalcopy,
     
-    tar_mkdir,		/* unimplemented */
-    tar_rmdir,		/* unimplemented */
+    NULL,		/* mkdir */
+    NULL,
     NULL,
     NULL,
     NULL
 #ifdef HAVE_MMAP
-    , tar_mmap,		/* unimplemented */
-    tar_munmap		/* unimplemented */
+    , NULL,
+    NULL
 #endif    
 };

@@ -10,6 +10,8 @@
 void vfs_init( void );
 void ftpfs_init_passwd( void );
 
+char *mc_home = LIBDIR;
+
 void
 mc_vfs_init( void )
 {

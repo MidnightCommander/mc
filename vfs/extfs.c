@@ -746,32 +746,12 @@ static int extfs_chmod (char *path, int mode)
     return 0;
 }
 
-static int extfs_chown (char *path, int owner, int group)
-{
-    return -1;
-}
-
-static int extfs_unlink (char *path)
-{
-    return -1;
-}
-
-static int extfs_symlink (char *n1, char *n2)
-{
-    return -1;
-}
-
 static int extfs_write (void *data, char *buf, int nbyte)
 {
     struct extfs_pseudofile *file = (struct extfs_pseudofile *)data;
 
     file->has_changed = 1;
     return write (file->local_handle, buf, nbyte);
-}
-
-static int extfs_rename (char *a, char *b)
-{
-    return -1;
 }
 
 static int extfs_chdir (char *path)
@@ -805,26 +785,6 @@ static int extfs_lseek (void *data, off_t offset, int whence)
     struct extfs_pseudofile *file = (struct extfs_pseudofile *) data;
 
     return lseek (file->local_handle, offset, whence);
-}
-
-static int extfs_mknod (char *path, int mode, int dev)
-{
-    return -1;
-}
-
-static int extfs_link (char *p1, char *p2)
-{
-    return -1;
-}
-
-static int extfs_mkdir (char *path, mode_t mode)
-{
-    return -1;
-}
-
-static int extfs_rmdir (char *path)
-{
-    return -1;
 }
 
 static vfsid extfs_getid (char *path, struct vfs_stamping **parent)
@@ -940,18 +900,6 @@ static void extfs_ungetlocalcopy (char *path, char *local, int has_changed)
     }
 }
 
-#ifdef HAVE_MMAP
-caddr_t extfs_mmap (caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
-{
-    return (caddr_t)-1;
-}
-
-int extfs_munmap (caddr_t addr, size_t len, void *data)
-{
-    return -1;
-}
-#endif
-
 vfs extfs_vfs_ops =
 {
     extfs_open,
@@ -969,21 +917,21 @@ vfs extfs_vfs_ops =
     s_lstat,
     s_fstat,
 
-    extfs_chmod,		/* unimplemented */
-    extfs_chown,		/* unimplemented */
+    extfs_chmod,		/* chmod ... strange, returns success? */
+    NULL,
     NULL,
 
     s_readlink,
     
-    extfs_symlink,		/* unimplemented */
-    extfs_link,			/* unimplemented */
-    extfs_unlink,		/* unimplemented */
+    NULL,		/* symlink */
+    NULL,
+    NULL,
 
-    extfs_rename,		/* unimplemented */
+    NULL,
     extfs_chdir,
     s_errno,
     extfs_lseek,
-    extfs_mknod,		/* unimplemented */
+    NULL,
     
     extfs_getid,
     extfs_nothingisopen,
@@ -992,15 +940,15 @@ vfs extfs_vfs_ops =
     extfs_getlocalcopy,
     extfs_ungetlocalcopy,
     
-    extfs_mkdir,		/* unimplemented */
-    extfs_rmdir,		/* unimplemented */
+    NULL,		/* mkdir */
+    NULL,
     NULL,
     NULL,
     NULL
     
 #ifdef HAVE_MMAP
-    , extfs_mmap,
-    extfs_munmap
+    , NULL,
+    NULL
 #endif    
 };
 

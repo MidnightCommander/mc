@@ -2420,18 +2420,6 @@ static int ftpfs_unlink (char *path)
     return send_ftp_command(path, "DELE %s", 1);
 }
 
-static int ftpfs_symlink (char *n1, char *n2)
-{
-    ftpfserrno = EPERM;
-    return -1;
-}
-
-static int ftpfs_rename (char *path1, char *path2)
-{
-    ftpfserrno = EPERM;
-    return -1;
-}
-
 static int
 __ftpfs_chdir (struct ftpfs_connection *bucket ,char *remote_path)
 {
@@ -2475,12 +2463,6 @@ static int ftpfs_lseek (void *data, off_t offset, int whence)
     return lseek(fp->local_handle, offset, whence);
 }
 
-static int ftpfs_mknod (char *path, int mode, int dev)
-{
-    ftpfserrno = EPERM;
-    return -1;
-}
-
 static int ftpfs_mkdir (char *path, mode_t mode)
 {
     return send_ftp_command(path, "MKD %s", 1);
@@ -2489,12 +2471,6 @@ static int ftpfs_mkdir (char *path, mode_t mode)
 static int ftpfs_rmdir (char *path)
 {
     return send_ftp_command(path, "RMD %s", 1);
-}
-
-static int ftpfs_link (char *p1, char *p2)
-{
-    ftpfserrno = EPERM;
-    return -1;
 }
 
 static vfsid ftpfs_getid (char *p, struct vfs_stamping **parent)
@@ -2617,18 +2593,6 @@ void ftpfs_forget (char *file)
         wipe_password (pass);
 }
 
-#ifdef HAVE_MMAP
-caddr_t ftpfs_mmap (caddr_t addr, size_t len, int prot, int flags, void *data, off_t offset)
-{
-    return (caddr_t)-1; /* We do not mmap to far away */
-}
-
-int ftpfs_munmap (caddr_t addr, size_t len, void *data)
-{
-    return -1;
-}
-#endif
-
 vfs ftpfs_vfs_ops = {
     ftpfs_open,
     ftpfs_close,
@@ -2646,19 +2610,19 @@ vfs ftpfs_vfs_ops = {
     ftpfs_fstat,
 
     ftpfs_chmod,
-    ftpfs_chown,
+    ftpfs_chown,	/* not really implemented but returns success */
     NULL,
 
     ftpfs_readlink,
-    ftpfs_symlink,
-    ftpfs_link,
+    NULL,
+    NULL,
     ftpfs_unlink,
 
-    ftpfs_rename,
+    NULL,
     ftpfs_chdir,
     ftpfs_errno,
     ftpfs_lseek,
-    ftpfs_mknod,
+    NULL,
     
     ftpfs_getid,
     ftpfs_nothingisopen,
@@ -2673,8 +2637,8 @@ vfs ftpfs_vfs_ops = {
     ftpfs_setctl,
     ftpfs_forget
 #ifdef HAVE_MMAP
-    , ftpfs_mmap,
-    ftpfs_munmap
+    , NULL,
+    NULL
 #endif
 };
 
