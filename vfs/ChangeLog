@@ -1,3 +1,11 @@
+2001-08-07  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.h (struct entry): Remove unused `has_changed' field.
+	It's only written but never read.
+	(struct inode): Likewise.
+	* extfs.c: All dependencies changed.
+	(extfs_open): Mark file as changed if it's open for writing.
+
 2001-08-07  Oskar Liljeblad  <osk@hem.passagen.se>
 
 	* extfs/uzip: Update to version 1.4.0.

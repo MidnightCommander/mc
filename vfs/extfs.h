@@ -23,7 +23,6 @@ the Free Software Foundation, 59 Temple Place - Suite 330, Boston, MA 02111-1307
 struct inode;
 
 struct entry {
-    int has_changed;
     struct entry *next_in_dir;
     struct entry *dir;
     char *name;
@@ -33,7 +32,6 @@ struct entry {
 struct archive;
 
 struct inode {
-    int has_changed;
     nlink_t nlink;
     struct entry *first_in_subdir; /* only used if this is a directory */
     struct entry *last_in_subdir;

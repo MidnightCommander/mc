@@ -84,7 +84,6 @@ static void make_dot_doubledot (struct entry *ent)
     
     parent = (parentry != NULL) ? parentry->inode : NULL;
     entry->name = g_strdup (".");
-    entry->has_changed = 0;
     entry->inode = inode;
     entry->dir = ent;
     inode->local_filename = NULL;
@@ -94,7 +93,6 @@ static void make_dot_doubledot (struct entry *ent)
     entry->next_in_dir = g_new (struct entry, 1);
     entry=entry->next_in_dir;
     entry->name = g_strdup ("..");
-    entry->has_changed = 0;
     inode->last_in_subdir = entry;
     entry->next_in_dir = NULL;
     if (parent != NULL) {
@@ -119,7 +117,6 @@ static struct entry *generate_entry (struct archive *archive,
     entry = g_new (struct entry, 1);
     
     entry->name = g_strdup (name);
-    entry->has_changed = 0;
     entry->next_in_dir = NULL;
     entry->dir = parentry;
     if (parent != NULL) {
@@ -128,7 +125,6 @@ static struct entry *generate_entry (struct archive *archive,
     }
     inode = g_new (struct inode, 1);
     entry->inode = inode;
-    inode->has_changed = 0;
     inode->local_filename = NULL;
     inode->linkname = 0;
     inode->inode = (archive->__inode_counter)++;
@@ -305,7 +301,6 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
                 }
 		entry = g_new (struct entry, 1);
 		entry->name = g_strdup (p);
-		entry->has_changed = 0;
 		entry->next_in_dir = NULL;
 		entry->dir = pent;
 		if (pent != NULL) {
@@ -330,7 +325,6 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
 		    inode = g_new (struct inode, 1);
 		    entry->inode = inode;
 		    inode->local_filename = NULL;
-		    inode->has_changed = 0;
 		    inode->inode = (current_archive->__inode_counter)++;
 		    inode->nlink = 1;
 		    inode->dev = current_archive->rdev;
@@ -637,7 +631,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
     extfs_info = g_new (struct pseudofile, 1);
     extfs_info->archive = archive;
     extfs_info->entry = entry;
-    extfs_info->has_changed = 0;
+    extfs_info->has_changed = do_create;
     extfs_info->local_handle = local_handle;
 
     /* i.e. we had no open files and now we have one */
@@ -1292,7 +1286,6 @@ static int extfs_ungetlocalcopy (vfs *me, char *path, char *local, int has_chang
     if (fp == NULL)
         return 0;
     if (!strcmp (fp->entry->inode->local_filename, local)) {
-        fp->entry->inode->has_changed = has_changed;
         fp->archive->fd_usage--;
         extfs_close ((void *) fp);
         return 0;
