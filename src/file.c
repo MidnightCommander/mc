@@ -453,9 +453,9 @@ progress_update_one (FileOpContext *ctx,
 
 /* Status of the destination file */
 enum {
-    DST_NONE,			/* Not created */
-    DST_SHORT,			/* Created, not fully copied */
-    DST_FULL			/* Created, fully copied */
+    DEST_NONE,			/* Not created */
+    DEST_SHORT,			/* Created, not fully copied */
+    DEST_FULL			/* Created, fully copied */
 };
 
 int
@@ -478,7 +478,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
     off_t n_read_total = 0, file_size = -1;
     int return_status, temp_status;
     struct timeval tv_transfer_start;
-    int dst_status = DST_NONE;	/* 1 if the file is not fully copied */
+    int dst_status = DEST_NONE;	/* 1 if the file is not fully copied */
 
     /* FIXME: We should not be using global variables! */
     ctx->do_reget = 0;
@@ -651,7 +651,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	ctx->do_append = 0;
 	goto ret;
     }
-    dst_status = DST_SHORT;	/* file opened, but not fully copied */
+    dst_status = DEST_SHORT;	/* file opened, but not fully copied */
 
     appending = ctx->do_append;
     ctx->do_append = 0;
@@ -784,7 +784,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	}
     }
 
-    dst_status = DST_FULL;	/* copy successful, don't remove target file */
+    dst_status = DEST_FULL;	/* copy successful, don't remove target file */
 
   ret:
     if (buf)
@@ -811,7 +811,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	break;
     }
 
-    if (dst_status == DST_SHORT) {
+    if (dst_status == DEST_SHORT) {
 	/* Remove short file */
 	int result;
 	result =
@@ -820,7 +820,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 			  D_ERROR, 2, _("&Delete"), _("&Keep"));
 	if (!result)
 	    mc_unlink (dst_path);
-    } else if (dst_status == DST_FULL) {
+    } else if (dst_status == DEST_FULL) {
 	/* Copy has succeeded */
 #ifndef NATIVE_WIN32
 	if (!appending && ctx->preserve_uidgid) {
