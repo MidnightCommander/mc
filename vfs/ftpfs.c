@@ -239,9 +239,11 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
     if (logfile){
         if (strncmp (str, "PASS ", 5) == 0){
             char *tmp = "PASS <Password not logged>\r\n";
+	    
             fwrite (tmp, strlen (tmp), 1, logfile);
         } else
-	    fwrite (buf, strlen (buf), 1, logfile);
+	    fwrite (str, strlen (str), 1, logfile);
+
 	fflush (logfile);
     }
 

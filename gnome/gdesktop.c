@@ -207,10 +207,10 @@ desktop_destroy (void)
 #else
 
 #include <config.h>
+#include "fs.h"
 #include <gnome.h>
 #include "gdesktop-icon.h"
 #include "gdesktop.h"
-#include "fs.h"
 #include "../vfs/vfs.h"
 #include <string.h>
 #include "mad.h"

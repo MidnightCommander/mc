@@ -54,8 +54,11 @@ enum {
 
 #define COLOR_PAIR(x) x
 #define ERR -1
-#define TRUE 1
-#define FALSE 0
+
+#ifndef TRUE
+#    define TRUE 1
+#    define FALSE 0
+#endif
 
 void slang_set_raw_mode (void);
 

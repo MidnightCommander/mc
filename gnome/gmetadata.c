@@ -6,10 +6,10 @@
  */
 
 #include <config.h>
-#include <sys/stat.h>
+#include "fs.h"
 #include <libgnome/libgnome.h>
 #include "gmetadata.h"
-#include "fs.h"
+#include <sys/stat.h>
 #include "../vfs/vfs.h"
 
 

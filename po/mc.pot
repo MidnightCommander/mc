@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-10-28 19:40:46-0600\n"
+"Date: 1998-10-30 11:51:26-0600\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -64,7 +64,7 @@ msgid " Save As "
 msgstr ""
 
 #. the file exists
-#: edit/editcmd.c:482 edit/editcmd.c:801 edit/editcmd.c:831 edit/editcmd.c:978 edit/editcmd.c:1075 gnome/ext.c:295 gnome/file.c:1011 gnome/gdesktop.c:1376 gnome/help.c:320 gnome/main.c:651 gnome/screen.c:2064 gnome/subshell.c:700 gnome/subshell.c:726 gnome/utilunix.c:384 gnome/utilunix.c:388 gnome/utilunix.c:454 gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:295 src/file.c:1011 src/help.c:320 src/main.c:651 src/screen.c:2064 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:384 src/utilunix.c:388 src/utilunix.c:454 vfs/mcfs.c:171
+#: edit/editcmd.c:482 edit/editcmd.c:801 edit/editcmd.c:831 edit/editcmd.c:978 edit/editcmd.c:1075 gnome/ext.c:295 gnome/file.c:1011 gnome/gdesktop.c:1577 gnome/help.c:320 gnome/main.c:651 gnome/screen.c:2064 gnome/subshell.c:700 gnome/subshell.c:726 gnome/utilunix.c:384 gnome/utilunix.c:388 gnome/utilunix.c:454 gtkedit/editcmd.c:482 gtkedit/editcmd.c:801 gtkedit/editcmd.c:831 gtkedit/editcmd.c:978 gtkedit/editcmd.c:1075 src/ext.c:295 src/file.c:1011 src/help.c:320 src/main.c:651 src/screen.c:2064 src/subshell.c:700 src/subshell.c:726 src/utilunix.c:384 src/utilunix.c:388 src/utilunix.c:454 vfs/mcfs.c:171
 msgid " Warning "
 msgstr ""
 
@@ -309,11 +309,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:2235 gnome/cmd.c:248 gnome/file.c:2295 gnome/file.c:2620 gnome/file.c:2810 gnome/gcmd.c:94 gnome/gdesktop.c:653 gnome/gdesktop.c:1231 gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2050 gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197 gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2295 src/file.c:2620 src/file.c:2810 src/hotlist.c:1029 src/main.c:806 src/screen.c:2050 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197 src/view.c:411
+#: edit/editcmd.c:2235 gnome/cmd.c:248 gnome/file.c:2295 gnome/file.c:2620 gnome/file.c:2810 gnome/gcmd.c:94 gnome/gdesktop.c:854 gnome/gdesktop.c:1432 gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2050 gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197 gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2295 src/file.c:2620 src/file.c:2810 src/hotlist.c:1029 src/main.c:806 src/screen.c:2050 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197 src/view.c:411
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:2235 gnome/cmd.c:248 gnome/file.c:2295 gnome/file.c:2619 gnome/file.c:2810 gnome/gcmd.c:94 gnome/gdesktop.c:653 gnome/gdesktop.c:1231 gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2050 gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197 gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2295 src/file.c:2619 src/file.c:2810 src/hotlist.c:1029 src/main.c:806 src/screen.c:2050 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197 src/view.c:411
+#: edit/editcmd.c:2235 gnome/cmd.c:248 gnome/file.c:2295 gnome/file.c:2619 gnome/file.c:2810 gnome/gcmd.c:94 gnome/gdesktop.c:854 gnome/gdesktop.c:1432 gnome/hotlist.c:1029 gnome/main.c:806 gnome/screen.c:2050 gnome/subshell.c:701 gnome/subshell.c:727 gnome/tree.c:1197 gnome/view.c:411 gtkedit/editcmd.c:2235 src/cmd.c:248 src/file.c:2295 src/file.c:2619 src/file.c:2810 src/hotlist.c:1029 src/main.c:806 src/screen.c:2050 src/subshell.c:701 src/subshell.c:727 src/tree.c:1197 src/view.c:411
 msgid "&No"
 msgstr ""
 
@@ -779,11 +779,11 @@ msgstr ""
 msgid "Replac"
 msgstr ""
 
-#: edit/editwidget.c:1133 edit/gtkedit.c:1160 gnome/gdesktop.c:344 gnome/screen.c:2275 gnome/screen.c:2309 gnome/tree.c:1459 gtkedit/editwidget.c:1133 gtkedit/gtkedit.c:1160 src/screen.c:2275 src/screen.c:2309 src/tree.c:1459
+#: edit/editwidget.c:1133 edit/gtkedit.c:1160 gnome/gdesktop.c:545 gnome/screen.c:2275 gnome/screen.c:2309 gnome/tree.c:1459 gtkedit/editwidget.c:1133 gtkedit/gtkedit.c:1160 src/screen.c:2275 src/screen.c:2309 src/tree.c:1459
 msgid "Copy"
 msgstr ""
 
-#: edit/editwidget.c:1134 gnome/gdesktop.c:350 gtkedit/editwidget.c:1134
+#: edit/editwidget.c:1134 gnome/gdesktop.c:551 gtkedit/editwidget.c:1134
 msgid "Move"
 msgstr ""
 
@@ -791,7 +791,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: edit/editwidget.c:1136 gnome/gdesktop.c:652 gnome/gscreen.c:567 gnome/screen.c:2278 gnome/screen.c:2312 gtkedit/editwidget.c:1136 src/screen.c:2278 src/screen.c:2312
+#: edit/editwidget.c:1136 gnome/gdesktop.c:853 gnome/gscreen.c:567 gnome/screen.c:2278 gnome/screen.c:2312 gtkedit/editwidget.c:1136 src/screen.c:2278 src/screen.c:2312
 msgid "Delete"
 msgstr ""
 
@@ -943,7 +943,7 @@ msgstr ""
 msgid " Syntax error in file %s on line %d "
 msgstr ""
 
-#: gnome/achown.c:72 gnome/boxes.c:140 gnome/boxes.c:279 gnome/boxes.c:376 gnome/boxes.c:463 gnome/boxes.c:641 gnome/boxes.c:762 gnome/boxes.c:815 gnome/chmod.c:115 gnome/chown.c:81 gnome/cmd.c:856 gnome/file.c:1927 gnome/find.c:158 gnome/hotlist.c:140 gnome/hotlist.c:812 gnome/hotlist.c:905 gnome/layout.c:372 gnome/learn.c:59 gnome/option.c:143 gnome/panelize.c:89 gnome/view.c:411 gnome/wtools.c:114 gnome/wtools.c:408 gnome/wtools.c:581 gnome/wtools.c:661 src/achown.c:72 src/boxes.c:140 src/boxes.c:279 src/boxes.c:376 src/boxes.c:463 src/boxes.c:641 src/boxes.c:762 src/boxes.c:815 src/chmod.c:115 src/chown.c:81 src/cmd.c:856 src/file.c:1927 src/find.c:158 src/hotlist.c:140 src/hotlist.c:812 src/hotlist.c:905 src/layout.c:372 src/learn.c:59 src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: gnome/achown.c:72 gnome/boxes.c:140 gnome/boxes.c:279 gnome/boxes.c:376 gnome/boxes.c:463 gnome/boxes.c:641 gnome/boxes.c:762 gnome/boxes.c:815 gnome/chmod.c:115 gnome/chown.c:81 gnome/cmd.c:856 gnome/file.c:1927 gnome/find.c:158 gnome/hotlist.c:140 gnome/hotlist.c:812 gnome/hotlist.c:905 gnome/layout.c:373 gnome/learn.c:59 gnome/option.c:143 gnome/panelize.c:89 gnome/view.c:411 gnome/wtools.c:114 gnome/wtools.c:408 gnome/wtools.c:581 gnome/wtools.c:661 src/achown.c:72 src/boxes.c:140 src/boxes.c:279 src/boxes.c:376 src/boxes.c:463 src/boxes.c:641 src/boxes.c:762 src/boxes.c:815 src/chmod.c:115 src/chown.c:81 src/cmd.c:856 src/file.c:1927 src/find.c:158 src/hotlist.c:140 src/hotlist.c:812 src/hotlist.c:905 src/layout.c:373 src/learn.c:59 src/option.c:143 src/panelize.c:89 src/view.c:411 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr ""
 
@@ -1070,7 +1070,7 @@ msgid "user &Mini status"
 msgstr ""
 
 #. WITH_BACKGROUND
-#: gnome/boxes.c:139 gnome/boxes.c:278 gnome/boxes.c:378 gnome/boxes.c:465 gnome/boxes.c:643 gnome/boxes.c:763 gnome/boxes.c:817 gnome/boxes.c:928 gnome/file.c:1944 gnome/find.c:158 gnome/gtools.c:130 gnome/layout.c:371 gnome/option.c:142 gnome/wtools.c:302 gnome/wtools.c:583 src/boxes.c:139 src/boxes.c:278 src/boxes.c:378 src/boxes.c:465 src/boxes.c:643 src/boxes.c:763 src/boxes.c:817 src/boxes.c:928 src/file.c:1944 src/find.c:158 src/layout.c:371 src/option.c:142 src/wtools.c:302 src/wtools.c:583
+#: gnome/boxes.c:139 gnome/boxes.c:278 gnome/boxes.c:378 gnome/boxes.c:465 gnome/boxes.c:643 gnome/boxes.c:763 gnome/boxes.c:817 gnome/boxes.c:928 gnome/file.c:1944 gnome/find.c:158 gnome/gtools.c:130 gnome/layout.c:372 gnome/option.c:142 gnome/wtools.c:302 gnome/wtools.c:583 src/boxes.c:139 src/boxes.c:278 src/boxes.c:378 src/boxes.c:465 src/boxes.c:643 src/boxes.c:763 src/boxes.c:817 src/boxes.c:928 src/file.c:1944 src/find.c:158 src/layout.c:372 src/option.c:142 src/wtools.c:302 src/wtools.c:583
 msgid "&Ok"
 msgstr ""
 
@@ -2316,7 +2316,7 @@ msgstr ""
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1229 gnome/main.c:804 gnome/screen.c:2048 src/main.c:804 src/screen.c:2048
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1430 gnome/main.c:804 gnome/screen.c:2048 src/main.c:804 src/screen.c:2048
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -2324,28 +2324,44 @@ msgstr ""
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr ""
 
+#: gnome/gdesktop.c:109
+msgid "Home directory"
+msgstr ""
+
+#: gnome/gdesktop.c:113 gnome/gdesktop.c:136
+msgid "Warning"
+msgstr ""
+
+#: gnome/gdesktop.c:114
+msgid "Could not symlink %s to %s; will not have initial desktop icons."
+msgstr ""
+
+#: gnome/gdesktop.c:137
+msgid "Could not open %s; will not have initial desktop icons"
+msgstr ""
+
 #. Not yet implemented the Link bits, so better to not show what we dont have
-#: gnome/gdesktop.c:357
+#: gnome/gdesktop.c:558
 msgid "Link"
 msgstr ""
 
-#: gnome/gdesktop.c:651
+#: gnome/gdesktop.c:852
 msgid "Do you want to delete "
 msgstr ""
 
-#: gnome/gdesktop.c:1230 gnome/screen.c:2049 src/screen.c:2049
+#: gnome/gdesktop.c:1431 gnome/screen.c:2049 src/screen.c:2049
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/gdesktop.c:1240
+#: gnome/gdesktop.c:1441
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1241 gnome/gscreen.c:481
+#: gnome/gdesktop.c:1442 gnome/gscreen.c:481
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1376
+#: gnome/gdesktop.c:1577
 msgid " Could not open %s directory"
 msgstr ""
 
@@ -3252,88 +3268,88 @@ msgstr ""
 msgid "File:       None"
 msgstr ""
 
-#: gnome/layout.c:160 src/layout.c:160
+#: gnome/layout.c:161 src/layout.c:161
 msgid "&Vertical"
 msgstr ""
 
-#: gnome/layout.c:161 src/layout.c:161
+#: gnome/layout.c:162 src/layout.c:162
 msgid "&Horizontal"
 msgstr ""
 
-#: gnome/layout.c:171 src/layout.c:171
+#: gnome/layout.c:172 src/layout.c:172
 msgid "&Xterm hintbar"
 msgstr ""
 
-#: gnome/layout.c:172 src/layout.c:172
+#: gnome/layout.c:173 src/layout.c:173
 msgid "h&Intbar visible"
 msgstr ""
 
-#: gnome/layout.c:173 src/layout.c:173
+#: gnome/layout.c:174 src/layout.c:174
 msgid "&Keybar visible"
 msgstr ""
 
-#: gnome/layout.c:174 src/layout.c:174
+#: gnome/layout.c:175 src/layout.c:175
 msgid "command &Prompt"
 msgstr ""
 
-#: gnome/layout.c:175 src/layout.c:175
+#: gnome/layout.c:176 src/layout.c:176
 msgid "show &Mini status"
 msgstr ""
 
-#: gnome/layout.c:176 src/layout.c:176
+#: gnome/layout.c:177 src/layout.c:177
 msgid "menu&Bar visible"
 msgstr ""
 
-#: gnome/layout.c:177 src/layout.c:177
+#: gnome/layout.c:178 src/layout.c:178
 msgid "&Equal split"
 msgstr ""
 
-#: gnome/layout.c:178 src/layout.c:178
+#: gnome/layout.c:179 src/layout.c:179
 msgid "pe&Rmissions"
 msgstr ""
 
-#: gnome/layout.c:179 src/layout.c:179
+#: gnome/layout.c:180 src/layout.c:180
 msgid "&File types"
 msgstr ""
 
-#: gnome/layout.c:373 gnome/learn.c:60 gnome/learn.c:179 gnome/option.c:144 src/layout.c:373 src/learn.c:60 src/learn.c:179 src/option.c:144
+#: gnome/layout.c:374 gnome/learn.c:60 gnome/learn.c:179 gnome/option.c:144 src/layout.c:374 src/learn.c:60 src/learn.c:179 src/option.c:144
 msgid "&Save"
 msgstr ""
 
 #. length of line with '<' '>' buttons
-#: gnome/layout.c:381 src/layout.c:381
+#: gnome/layout.c:382 src/layout.c:382
 msgid " Layout "
 msgstr ""
 
-#: gnome/layout.c:382 src/layout.c:382
+#: gnome/layout.c:383 src/layout.c:383
 msgid " Panel split "
 msgstr ""
 
-#: gnome/layout.c:383 src/layout.c:383
+#: gnome/layout.c:384 src/layout.c:384
 msgid " Highlight... "
 msgstr ""
 
-#: gnome/layout.c:384 gnome/option.c:155 src/layout.c:384 src/option.c:155
+#: gnome/layout.c:385 gnome/option.c:155 src/layout.c:385 src/option.c:155
 msgid " Other options "
 msgstr ""
 
-#: gnome/layout.c:385 src/layout.c:385
+#: gnome/layout.c:386 src/layout.c:386
 msgid "output lines"
 msgstr ""
 
-#: gnome/layout.c:452 src/layout.c:452
+#: gnome/layout.c:453 src/layout.c:453
 msgid "Layout"
 msgstr ""
 
-#: gnome/layout.c:481 gnome/option.c:241 src/layout.c:481 src/option.c:241
+#: gnome/layout.c:482 gnome/option.c:241 src/layout.c:482 src/option.c:241
 msgid "Other options"
 msgstr ""
 
-#: gnome/layout.c:483 src/layout.c:483
+#: gnome/layout.c:484 src/layout.c:484
 msgid "Highlight..."
 msgstr ""
 
-#: gnome/layout.c:485 src/layout.c:485
+#: gnome/layout.c:486 src/layout.c:486
 msgid "Panel split"
 msgstr ""
 
@@ -4508,15 +4524,15 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr ""
 
-#: vfs/fish.c:287
+#: vfs/fish.c:288
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
 
-#: vfs/ftpfs.c:455
+#: vfs/ftpfs.c:461
 msgid " Could not set source routing (%s)"
 msgstr ""
 
-#: vfs/ftpfs.c:1777 vfs/ftpfs.c:1792
+#: vfs/ftpfs.c:1783 vfs/ftpfs.c:1798
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
