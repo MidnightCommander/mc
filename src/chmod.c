@@ -151,12 +151,10 @@ static cb_ret_t
 chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 {
     char buffer[BUF_TINY];
-    int id;
+    int id = h->current->dlg_id - BUTTONS + single_set * 2;
 
     switch (msg) {
     case DLG_ACTION:
-	id = h->current->dlg_id - BUTTONS + single_set * 2;
-
 	if (id >= 0) {
 	    c_stat ^= check_perm[id].mode;
 	    g_snprintf (buffer, sizeof (buffer), "%o", c_stat);
@@ -167,8 +165,7 @@ chmod_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case DLG_KEY:
-	if ((parm == 'T' || parm == 't' || parm == KEY_IC)
-	    && h->current->dlg_id >= BUTTONS - single_set * 2) {
+	if ((parm == 'T' || parm == 't' || parm == KEY_IC) && id > 0) {
 	    chmod_toggle_select (h, id);
 	    if (parm == KEY_IC)
 		dlg_one_down (h);
