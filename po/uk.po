@@ -5146,7 +5146,7 @@ msgstr "ГЕОМЕТР╤Я"
 
 #: src/main.c:2751
 msgid "No windows opened at startup"
-msgstr ""
+msgstr "Не в╕дкривати в╕кон на початку роботи"
 
 #: src/main.c:2753
 msgid "Display the directory that holds the .links startup files and exit"
@@ -5385,7 +5385,7 @@ msgstr ""
 
 #: src/screen.c:2400 src/screen.c:2430 src/tree.c:1016
 msgid "RenMov"
-msgstr "Перен"
+msgstr "Перем"
 
 #: src/screen.c:2401 src/screen.c:2431 src/tree.c:1020
 msgid "Mkdir"
@@ -6032,15 +6032,15 @@ msgstr " Прокс╕: Необх╕дний пароль для "
 
 #: vfs/ftpfs.c:437
 msgid "ftpfs: sending proxy login name"
-msgstr ""
+msgstr "ftpfs: в╕дсилання назви користува прокс╕"
 
 #: vfs/ftpfs.c:441
 msgid "ftpfs: sending proxy user password"
-msgstr ""
+msgstr "ftpfs: в╕дсилання паролю користува прокс╕"
 
 #: vfs/ftpfs.c:445
 msgid "ftpfs: proxy authentication succeeded"
-msgstr ""
+msgstr "ftpfs: аутенф╕кац╕я на прокс╕ пройшла усп╕шно"
 
 #: vfs/ftpfs.c:449
 #, c-format
@@ -6053,11 +6053,11 @@ msgstr "ftpfs: sending login name"
 
 #: vfs/ftpfs.c:471
 msgid "ftpfs: sending user password"
-msgstr ""
+msgstr "ftpfs: в╕дсилання паролю користувача"
 
 #: vfs/ftpfs.c:476
 msgid "ftpfs: logged in"
-msgstr ""
+msgstr "ftpfs: розпочато роботу"
 
 #: vfs/ftpfs.c:491
 #, c-format
@@ -6089,7 +6089,7 @@ msgstr "ftpfs: з'╓днання перервано користувачем"
 #: vfs/ftpfs.c:709
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr ""
+msgstr "ftpfs: невдала спроба з'╓днання до сервера: %s"
 
 #: vfs/ftpfs.c:793
 #, c-format
@@ -6123,7 +6123,7 @@ msgstr ""
 
 #: vfs/ftpfs.c:1175 vfs/ftpfs.c:1182
 msgid "ftpfs: couldn't resolve symlink"
-msgstr ""
+msgstr "ftpfs: неможливо роз╕менувати символьне посилання"
 
 #: vfs/ftpfs.c:1236
 msgid "Resolving symlink..."
