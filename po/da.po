@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.41\n"
 "POT-Creation-Date: 2001-04-16 12:45-0400\n"
-"PO-Revision-Date: 2001-01-13 23:37+01:00\n"
+"PO-Revision-Date: 2001-04-21 21:37+02:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -1881,7 +1881,7 @@ msgstr " Gem som "
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
 #: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:706 src/subshell.c:732 src/utilunix.c:382
+#: src/screen.c:2175 src/subshell.c:721 src/subshell.c:747 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Advarsel "
@@ -2246,13 +2246,13 @@ msgstr "Annullér afslut"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:590 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:407
 msgid "&Yes"
 msgstr "&Ja"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:589 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:407
 msgid "&No"
 msgstr "&Nej"
 
@@ -4337,7 +4337,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:509
+#: src/file.c:1707 vfs/fish.c:515
 msgid "file"
 msgstr "fil"
 
@@ -5982,24 +5982,24 @@ msgstr ""
 "Kan ikke skifte mappe til \"%s\" \n"
 " %s "
 
-#: src/subshell.c:287
+#: src/subshell.c:297
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Kunne ikke åbne navngivet pipe %s\n"
 
-#: src/subshell.c:706
+#: src/subshell.c:721
 msgid " The shell is still active. Quit anyway? "
 msgstr " Skallen er stadig aktiv. Afslut alligevel?"
 
-#: src/subshell.c:732
+#: src/subshell.c:747
 msgid " There are stopped jobs."
 msgstr " Der er stoppede jobs."
 
-#: src/subshell.c:733
+#: src/subshell.c:748
 msgid " Quit anyway? "
 msgstr " Afslut alligevel? "
 
-#: src/subshell.c:798
+#: src/subshell.c:813
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Advarsel: Kunne ikke skifte til %s.\n"
@@ -6649,56 +6649,56 @@ msgstr "fisk: Sender adgangskode..."
 msgid "fish: Sending initial line..."
 msgstr "fisk: Sender begyndelseslinie..."
 
-#: vfs/fish.c:252
+#: vfs/fish.c:258
 msgid "fish: Handshaking version..."
 msgstr "fisk: Håndrystende version..."
 
-#: vfs/fish.c:256
+#: vfs/fish.c:262
 msgid "fish: Setting up current directory..."
 msgstr "fisk: Indstiller den aktive mappe..."
 
-#: vfs/fish.c:258
+#: vfs/fish.c:264
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fisk: forbundet, hjem %s"
 
-#: vfs/fish.c:347
+#: vfs/fish.c:353
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fisk: Læser mappe %s..."
 
-#: vfs/fish.c:451
+#: vfs/fish.c:457
 msgid "fish: failed"
 msgstr "fisk: fejlede"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:471
+#: vfs/fish.c:477
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fisk: gem %s: sender kommando..."
 
-#: vfs/fish.c:496
+#: vfs/fish.c:502
 msgid "fish: Local read failed, sending zeros"
 msgstr "fisk: Lokal læsning fejlede, sender nuller"
 
-#: vfs/fish.c:508
+#: vfs/fish.c:514
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fisk: gemmer fil %s %d (%d)"
 
-#: vfs/fish.c:509
+#: vfs/fish.c:515
 msgid "zeros"
 msgstr "nuller"
 
-#: vfs/fish.c:556
+#: vfs/fish.c:562
 msgid "Aborting transfer..."
 msgstr "Afbryder overførsel..."
 
-#: vfs/fish.c:565
+#: vfs/fish.c:571
 msgid "Error reported after abort."
 msgstr "Fejl meldt tilbage efter afbrydelse."
 
-#: vfs/fish.c:567
+#: vfs/fish.c:573
 msgid "Aborted transfer would be successful."
 msgstr "Afbrudt overførsel ville være lykkedes."
 
@@ -6964,7 +6964,7 @@ msgstr "  %s omdøber filer\n"
 #. This is place of next pointer
 #: vfs/smbfs.c:2005
 msgid "netbios over tcp/ip"
-msgstr ""
+msgstr "netbios over tcp/ip"
 
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
