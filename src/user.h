@@ -1,8 +1,6 @@
 #ifndef __USER_H
 #define __USER_H
 
-#include "panel.h"
-
 struct WEdit;
 void user_menu_cmd (struct WEdit *edit_widget);
 char *expand_format (struct WEdit *edit_widget, char c, int quote);

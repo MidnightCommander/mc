@@ -1,13 +1,12 @@
 #ifndef __KEY_H
 #define __KEY_H
 
-#include "mouse.h" /* Gpm_Event */
-
 void init_key (void);
 void init_key_input_fd (void);
 void done_key (void);
 
-int get_event (Gpm_Event *event, int redo_event, int block);
+struct Gpm_Event;
+int get_event (struct Gpm_Event *event, int redo_event, int block);
 int is_idle (void);
 
 int mi_getch (void);

@@ -29,16 +29,13 @@
 
 #include "global.h"
 #include "tty.h"
-#include "win.h"
-#include "color.h"
-#include "mouse.h"
+#include "color.h"		/* dialog_colors */
 #include "dialog.h"
 #include "widget.h"
-#include "menu.h"
 #include "wtools.h"
-#include "key.h"	/* For mi_getch() */
-#include "complete.h"   /* INPUT_COMPLETE_CD */
-#include "background.h"   /* parent_call */
+#include "key.h"		/* mi_getch() */
+#include "complete.h"		/* INPUT_COMPLETE_CD */
+#include "background.h"		/* parent_call */
 
 
 Listbox *

@@ -23,16 +23,13 @@
 #include <stdarg.h>
 #include "global.h"
 #include "tty.h"
-#include "menu.h"
-#include "win.h"
-#include "color.h"
 #include "mouse.h"
-#include "help.h"
-#include "key.h"	/* For mi_getch() */
+#include "help.h"	/* interactive_display() */
+#include "key.h"	/* mi_getch() */
 #include "dialog.h"
-#include "layout.h"
-#include "execute.h"
-#include "main.h"
+#include "layout.h"	/* winch_flag */
+#include "execute.h"	/* suspend_cmd() */
+#include "main.h"	/* slow_terminal */
 
 #define waddc(w,y1,x1,c) move (w->y+y1, w->x+x1); addch (c)
 

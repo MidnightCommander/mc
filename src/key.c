@@ -893,12 +893,12 @@ static int getch_with_delay (void)
 /* Returns EV_MOUSE if it is a mouse event */
 /* Returns EV_NONE  if non-blocking or interrupt set and nothing was done */
 int
-get_event (Gpm_Event * event, int redo_event, int block)
+get_event (struct Gpm_Event * event, int redo_event, int block)
 {
     int c;
     static int flag;		/* Return value from select */
 #ifdef HAVE_LIBGPM
-    static Gpm_Event ev;	/* Mouse event */
+    static struct Gpm_Event ev;	/* Mouse event */
 #endif
     struct timeval timeout;
     struct timeval *time_addr = NULL;
