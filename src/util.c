@@ -789,16 +789,27 @@ char *strip_ctrl_codes (char *s)
     if (!s)
 	return 0;
 
-    for (w = s, r = s; *r; ++r)
-	if (*r != ESC_CHAR){
-	    if (is_printable(*r))
-		*w++ = *r;
-	} else {
+    for (w = s, r = s; *r; ) {
+	if (*r == ESC_CHAR) {
+	    /* Skip the control sequence's arguments */ ;
 	    if (*(++r) == '[') {
-		while (strchr ("0123456789;?", *(++r)))
-		    /* Skip the control sequence's arguments */ ;
+		/* strchr() matches trailing binary 0 */
+		while (*(++r) && strchr ("0123456789;?", *r));
 	    }
+
+	    /*
+	     * Now we are at the last character of the sequence.
+	     * Skip it unless it's binary 0.
+	     */
+	    if (*r)
+		r++;
+	    continue;
 	}
+
+	if (is_printable(*r))
+	    *w++ = *r;
+	++r;
+    }
     *w = 0;
     return s;
 }

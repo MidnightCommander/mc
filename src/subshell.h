@@ -29,7 +29,7 @@ enum {QUIETLY, VISIBLY};
 /* Exported functions */
 void init_subshell (void);
 int invoke_subshell (const char *command, int how, char **new_dir);
-int read_subshell_prompt (int how);
+int read_subshell_prompt (void);
 void resize_subshell (void);
 int exit_subshell (void);
 void do_subshell_chdir (const char *directory, int update_prompt, int reset_prompt);

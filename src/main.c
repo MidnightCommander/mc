@@ -1006,7 +1006,7 @@ directory_history_list (WPanel * panel)
 int
 load_prompt (int fd, void *unused)
 {
-    if (!read_subshell_prompt (QUIETLY))
+    if (!read_subshell_prompt ())
 	return 0;
 
     /* Don't actually change the prompt if it's invisible */

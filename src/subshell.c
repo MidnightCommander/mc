@@ -610,11 +610,10 @@ int invoke_subshell (const char *command, int how, char **new_dir)
 /* }}} */
 /* {{{ read_subshell_prompt */
 
-int read_subshell_prompt (int how)
+int read_subshell_prompt (void)
 {
     /* {{{ Local variables */
 
-    int clear_now = FALSE;
     static int prompt_size = INITIAL_PROMPT_SIZE;
     int bytes = 0, i, rc = 0;
     struct timeval timeleft = {0, 0};
@@ -650,17 +649,13 @@ int read_subshell_prompt (int how)
 	/* }}} */
 
 	bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
-	if (how == VISIBLY)
-	    write (STDOUT_FILENO, pty_buffer, bytes);
 
 	/* {{{ Extract the prompt from the shell output */
 
 	for (i=0; i<bytes; ++i)
 	    if (pty_buffer[i] == '\n' || pty_buffer[i] == '\r'){
 		prompt_pos = 0;
-		clear_now = FALSE;
 	    } else {
-		clear_now = TRUE;
 		if (!pty_buffer [i])
 		    continue;
 		
@@ -670,10 +665,7 @@ int read_subshell_prompt (int how)
 							prompt_size *= 2);
 	    }
 
-	/* Sometimes we get an empty new line and then nothing,
-	 * we better just keep the old prompt instead. */
-	if (clear_now)
-	    subshell_prompt[prompt_pos] = '\0';
+	subshell_prompt[prompt_pos] = '\0';
 
 	/* }}} */
     }
