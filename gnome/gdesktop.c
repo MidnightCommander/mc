@@ -42,6 +42,7 @@ struct layout_slot {
 /* Configuration options for the desktop */
 
 int desktop_use_shaped_icons = TRUE;
+int desktop_use_shaped_text = FALSE;
 int desktop_auto_placement = FALSE;
 int desktop_snap_icons = FALSE;
 int desktop_arr_r2l = FALSE;
@@ -2840,7 +2841,6 @@ update_drag_selection (int x, int y)
 				desktop_icon_select (DESKTOP_ICON (dii->dicon), dii->tmp_selected);
 				dii->selected = dii->tmp_selected;
 			}
-
 		}
 }
 
@@ -2850,6 +2850,29 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 {
 	GdkCursor *cursor;
 
+	/* maybe the user wants to click on the icon text */
+	if (event->button == 1 && desktop_use_shaped_text) {
+		int x = event->x;
+		int y = event->y;
+		GList *l, *icons = get_all_icons ();
+		DesktopIconInfo *clicked = NULL;
+		for (l = icons; l; l = l->next) {
+			DesktopIconInfo *dii = l->data;
+			DesktopIcon *di = DESKTOP_ICON (dii->dicon);
+			int x1 = dii->x + di->text_x;
+			int y1 = dii->y + di->text_y;
+			int x2 = x1 + di->text_w;
+			int y2 = y1 + di->text_h;
+			if (x>=x1 && y>=y1 && x<=x2 && y<=y2)
+				clicked = dii;
+		}
+		g_list_free (icons);
+		if (clicked) {
+			select_icon (clicked, event->state);
+			return FALSE;
+		}
+	}
+	
 	if (event->button == 1) {
 		click_start_x = event->x;
 		click_start_y = event->y;

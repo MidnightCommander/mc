@@ -13,6 +13,9 @@
 #include <gdk_imlib.h>
 #include "dir.h"
 
+/* Standard icon sizes */
+#define ICON_IMAGE_WIDTH 48
+#define ICON_IMAGE_HEIGHT 48
 
 void gicon_init (void);
 

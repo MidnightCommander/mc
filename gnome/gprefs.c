@@ -21,9 +21,9 @@
 #include "dialog.h"
 #include "layout.h"
 #include "gcustom-layout.h"
+#include "gdesktop-prefs.h"
 #include "../vfs/vfs.h"
 #include "gprefs.h"
-#include "gdesktop.h"
 
 /* Orphan confirmation options */
 /* Auto save setup */
@@ -56,21 +56,25 @@ typedef struct
         gpointer property_variable;
         gpointer extra_data1;
         gpointer extra_data2;
-        
-        GtkWidget *widget; 
-} Property; 
 
-typedef struct 
+        GtkWidget *widget;
+} Property;
+
+typedef struct
 {
         gchar *title;
-        Property *props; 
+        Property *props;
 } PrefsPage;
 
-typedef struct 
+typedef struct
 {
         WPanel *panel;
         GtkWidget *prop_box;
         PrefsPage *prefs_pages;
+
+	GDesktopPrefs *desktop_prefs;
+	gint desktop_prefs_page;
+
 	GCustomLayout *custom_layout;
 	gint custom_layout_page;
 } PrefsDlg;
@@ -82,14 +86,14 @@ typedef struct
 typedef GtkWidget* (*CustomCreateFunc) (PrefsDlg *dlg, Property *prop);
 typedef void (*CustomApplyFunc) (PrefsDlg *dlg, Property *prop);
 
-static Property file_display_props [] = 
+static Property file_display_props [] =
 {
         {
-                N_("Show backup files"), PROPERTY_BOOL, 
+                N_("Show backup files"), PROPERTY_BOOL,
                 &show_backups, NULL, NULL, NULL
         },
         {
-                N_("Show hidden files"), PROPERTY_BOOL, 
+                N_("Show hidden files"), PROPERTY_BOOL,
                 &show_dot_files, NULL, NULL, NULL
         },
         {
@@ -103,22 +107,22 @@ static Property file_display_props [] =
         PROPERTIES_DONE
 };
 
-static Property confirmation_props [] = 
+static Property confirmation_props [] =
 {
         {
-                N_("Confirm when deleting file"), PROPERTY_BOOL, 
+                N_("Confirm when deleting file"), PROPERTY_BOOL,
                 &confirm_delete, NULL, NULL, NULL
         },
         {
-                N_("Confirm when overwriting files"), PROPERTY_BOOL, 
+                N_("Confirm when overwriting files"), PROPERTY_BOOL,
                 &confirm_overwrite, NULL, NULL, NULL
         },
         {
-                N_("Confirm when executing files"), PROPERTY_BOOL, 
+                N_("Confirm when executing files"), PROPERTY_BOOL,
                 &confirm_execute, NULL, NULL, NULL
         },
         {
-                N_("Show progress while operations are being performed"), PROPERTY_BOOL, 
+                N_("Show progress while operations are being performed"), PROPERTY_BOOL,
                 &verbose, NULL, NULL, NULL
         },
         PROPERTIES_DONE
@@ -140,8 +144,8 @@ static Property vfs_props [] =
         },
         PROPERTIES_DONE
 };
-  
-static Property caching_and_optimization_props [] = 
+
+static Property caching_and_optimization_props [] =
 {
         {
                 N_("Fast directory reload"), PROPERTY_BOOL,
@@ -162,40 +166,12 @@ static Property caching_and_optimization_props [] =
         PROPERTIES_DONE
 };
 
-static Property desktop_props [] = {
-	{
-		N_("Use shaped icons"), PROPERTY_BOOL,
-		&desktop_use_shaped_icons, NULL, NULL, NULL
-	},
-	{
-		N_("Auto place icons"), PROPERTY_BOOL,
-		&desktop_auto_placement, NULL, NULL, NULL
-	},
-	{
-		N_("Snap icons to grid"), PROPERTY_BOOL,
-		&desktop_snap_icons, NULL, NULL, NULL
-	},
-	{
-		N_("Layout icons from right to left"), PROPERTY_BOOL,
-		&desktop_arr_r2l, NULL, NULL, NULL
-	},
-	{
-		N_("Layout icons from bottom to top"), PROPERTY_BOOL,
-		&desktop_arr_b2t, NULL, NULL, NULL
-	},
-	{
-		N_("Layout icons in rows instead of columns"), PROPERTY_BOOL,
-		&desktop_arr_rows, NULL, NULL, NULL
-	},
-        PROPERTIES_DONE
-};
-
 static PrefsPage prefs_pages [] =
 {
         {
                 N_("File display"),
                 file_display_props
-        }, 
+        },
         {
                 N_("Confirmation"),
                 confirmation_props
@@ -208,23 +184,19 @@ static PrefsPage prefs_pages [] =
                 N_("Caching"),
                 caching_and_optimization_props
         },
-	{
-		N_("Desktop"),
-		desktop_props
-	},
         PREFSPAGES_DONE
 };
 
-static void 
+static void
 apply_changes_bool (PrefsDlg *dlg, Property *cur_prop)
 {
         GtkWidget *checkbox;
-        
+
         checkbox = cur_prop->widget;
-       
-        if (GTK_TOGGLE_BUTTON (checkbox)->active) 
+
+        if (GTK_TOGGLE_BUTTON (checkbox)->active)
                 *( (int*) cur_prop->property_variable) = TRUE;
-        else 
+        else
                 *( (int*) cur_prop->property_variable) = FALSE;
 }
 
@@ -235,7 +207,7 @@ apply_changes_string (PrefsDlg *dlg, Property *cur_prop)
         gchar *text;
 
         entry = cur_prop->widget;
-        
+
         text = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))));
 
         *( (char**) cur_prop->property_variable) = g_strdup (text);
@@ -255,7 +227,7 @@ apply_changes_int (PrefsDlg *dlg, Property *cur_prop)
         *( (int*) cur_prop->property_variable) = (gint) val;
 }
 
-static void 
+static void
 apply_changes_custom (PrefsDlg *dlg, Property *cur_prop)
 {
         CustomApplyFunc apply = (CustomApplyFunc) cur_prop->extra_data2;
@@ -278,7 +250,7 @@ apply_page_changes (PrefsDlg *dlg, gint pagenum)
                 case PROPERTY_NONE :
                         g_warning ("Invalid case in gprefs.c:  apply_page_changes");
                         break;
-                case PROPERTY_BOOL : 
+                case PROPERTY_BOOL :
                         apply_changes_bool (dlg, &cur_prop);
                         break;
                 case PROPERTY_STRING :
@@ -296,22 +268,21 @@ apply_page_changes (PrefsDlg *dlg, gint pagenum)
 }
 
 static void
-apply_callback (GtkWidget *prop_box, gint pagenum, PrefsDlg *dlg) 
+apply_callback (GtkWidget *prop_box, gint pagenum, PrefsDlg *dlg)
 {
-	if (pagenum == dlg->custom_layout_page) {
+	if (pagenum == dlg->desktop_prefs_page)
+		desktop_prefs_apply (dlg->desktop_prefs);
+	else if (pagenum == dlg->custom_layout_page)
 		custom_layout_apply (dlg->custom_layout);
-	} else if (pagenum != -1) {
+	else if (pagenum != -1)
                 apply_page_changes (dlg, pagenum);
-        } else {
-		/* FIXME: can be optimized.  Only if some of the
-		 * boolean flags changed this makes sense
-		 */
+        else {
 		update_panels (UP_RELOAD, UP_KEEPSEL);
                 save_setup ();
         }
 }
 
-static void 
+static void
 changed_callback (GtkWidget *widget, PrefsDlg *dlg)
 {
         if (dlg->prop_box)
@@ -322,9 +293,9 @@ static GtkWidget*
 create_prop_bool (PrefsDlg *dlg, Property *prop)
 {
         GtkWidget *checkbox;
-        
+
         checkbox = gtk_check_button_new_with_label (_(prop->label));
-        
+
         if (*((int*) prop->property_variable)) {
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
                                               TRUE);
@@ -333,7 +304,7 @@ create_prop_bool (PrefsDlg *dlg, Property *prop)
                                               FALSE);
         }
 
-        gtk_signal_connect (GTK_OBJECT (checkbox), "clicked", 
+        gtk_signal_connect (GTK_OBJECT (checkbox), "clicked",
                             changed_callback, (gpointer) dlg);
 
         prop->widget = checkbox;
@@ -351,9 +322,9 @@ create_prop_string (PrefsDlg *dlg, Property *prop)
         gint max_length;
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-        
+
         label = gtk_label_new (_(prop->label));
-        gtk_box_pack_start (GTK_BOX (hbox), label, 
+        gtk_box_pack_start (GTK_BOX (hbox), label,
                             FALSE, FALSE, 0);
 
         entry = gnome_entry_new (_(prop->label));
@@ -367,20 +338,20 @@ create_prop_string (PrefsDlg *dlg, Property *prop)
 
         gtk_entry_set_text (GTK_ENTRY (gtk_entry),
                             (gchar*) *( (gchar**) prop->property_variable));
-        gtk_signal_connect_while_alive (GTK_OBJECT (gtk_entry), 
-                                        "changed", 
+        gtk_signal_connect_while_alive (GTK_OBJECT (gtk_entry),
+                                        "changed",
                                         GTK_SIGNAL_FUNC (changed_callback),
                                         (gpointer) dlg,
                                         GTK_OBJECT (dlg->prop_box));
-           
-        gtk_box_pack_start (GTK_BOX (hbox), entry, 
+
+        gtk_box_pack_start (GTK_BOX (hbox), entry,
                             FALSE, FALSE, 0);
-        
+
         prop->widget = entry;
 	gtk_widget_show_all (hbox);
         return hbox;
 }
-   
+
 static GtkWidget*
 create_prop_int (PrefsDlg *dlg, Property *prop)
 {
@@ -390,9 +361,9 @@ create_prop_int (PrefsDlg *dlg, Property *prop)
         gchar buffer [10];
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-        
+
         label = gtk_label_new (_(prop->label));
-        gtk_box_pack_start (GTK_BOX (hbox), label, 
+        gtk_box_pack_start (GTK_BOX (hbox), label,
                             FALSE, FALSE, 0);
 
         entry = gnome_entry_new (_(prop->label));
@@ -401,34 +372,34 @@ create_prop_int (PrefsDlg *dlg, Property *prop)
 
         gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))),
                             buffer);
-        
-        gtk_signal_connect_while_alive (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), 
-                                        "changed", 
+
+        gtk_signal_connect_while_alive (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (entry))),
+                                        "changed",
                                         GTK_SIGNAL_FUNC (changed_callback),
                                         (gpointer) dlg,
                                         GTK_OBJECT (dlg->prop_box));
-        
-        gtk_box_pack_start (GTK_BOX (hbox), entry, 
+
+        gtk_box_pack_start (GTK_BOX (hbox), entry,
                             FALSE, FALSE, 0);
 	if (prop->extra_data1) {
 		label = gtk_label_new (_((gchar *)prop->extra_data1));
-		gtk_box_pack_start (GTK_BOX (hbox), label, 
+		gtk_box_pack_start (GTK_BOX (hbox), label,
 				    FALSE, FALSE, 0);
 	}
-        
+
         prop->widget = entry;
 	gtk_widget_show_all (hbox);
         return hbox;
-}     
+}
 
-static GtkWidget* 
+static GtkWidget*
 create_prop_custom (PrefsDlg *dlg, Property *prop)
 {
         CustomCreateFunc create = (CustomCreateFunc) prop->extra_data1;
 
 	if (!create)
 		return create_prop_bool (dlg, prop);
-	
+
         return create (dlg, prop);
 }
 
@@ -454,7 +425,7 @@ create_prop_widget (PrefsDlg *dlg, Property *prop)
 
 static void
 create_page (PrefsDlg *dlg, PrefsPage *page)
-{ 
+{
         GtkWidget *vbox;
         GtkWidget *prop_widget;
         Property *cur_prop;
@@ -468,7 +439,7 @@ create_page (PrefsDlg *dlg, PrefsPage *page)
         while (cur_prop->label != NULL) {
                 cur_prop = &(page->props [i]);
                 prop_widget = create_prop_widget (dlg, cur_prop);
-                gtk_box_pack_start (GTK_BOX (vbox), prop_widget, 
+                gtk_box_pack_start (GTK_BOX (vbox), prop_widget,
                                     FALSE, FALSE, 0);
                 i++;
                 cur_prop = &(page->props [i]);
@@ -510,7 +481,10 @@ create_prop_box (PrefsDlg *dlg)
                 cur_page = &(dlg->prefs_pages [i]);
         }
 
-	dlg->custom_layout = custom_layout_create_page (GNOME_PROPERTY_BOX (dlg->prop_box), 
+	dlg->desktop_prefs = desktop_prefs_new (GNOME_PROPERTY_BOX (dlg->prop_box));
+	dlg->desktop_prefs_page = i++;
+
+	dlg->custom_layout = custom_layout_create_page (GNOME_PROPERTY_BOX (dlg->prop_box),
 							dlg->panel);
 	dlg->custom_layout_page = i;
 

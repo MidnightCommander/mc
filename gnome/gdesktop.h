@@ -25,6 +25,7 @@
 /* Configuration options for the desktop */
 
 extern int desktop_use_shaped_icons;	/* Whether to use shaped icons or not (for slow X servers) */
+extern int desktop_use_shaped_text;     /* Shaped text for the icons on the desktop */
 extern int desktop_auto_placement;	/* Whether to auto-place icons or not (user placement) */
 extern int desktop_snap_icons;		/* Whether to snap icons to the grid or not */
 extern int desktop_arr_r2l; /* Arrange from right to left */

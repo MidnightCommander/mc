@@ -1,3 +1,50 @@
+1999-08-23  Federico Mena Quintero  <federico@redhat.com>
+
+	* gdesktop-prefs.[ch]: New files that handle the desktop
+	preferences page.  Now we have a nice way to configure the
+	position of desktop icons.
+
+	* gprefs.c (create_prop_box): Use desktop_prefs_new() to create
+	the desktop preferences page.
+	(apply_page_changes): Do not update the desktop here.
+	(apply_callback): Take the desktop page into account.
+
+	* gdesktop.c (desktop_use_shaped_text): Renamed from
+	desktop_use_transparent_text.
+
+	* Makefile.in: Added gdesktop-prefs.[ch] to the list of sources.
+
+1999-08-19  Richard Hestilow  <hestgray@ionet.net>
+
+	* gicon.h: define ICON_IMAGE_WIDTH and ICON_IMAGE_HEIGHT
+	for default icon size. Currently set at 48 by 48.
+
+	* gicon.c (gicon_get_icon_for_file): Scale down images that are too
+	large. Scales down to a size <= DESKTOP_ICON_WIDTH by
+	DESKTOP_ICON_HEIGHT. Correctly composites arrows on user-selected
+	icons. Shows gnome-warning for unreachable symlinks with no user
+	selected icon.
+
+	* gdesktop-icon.c (desktop_icon_reshape): dicon->height is now a
+	MAX of total height (icon height + spacing + text height) and
+	DESKTOP_SNAP_X, so that all icons are of a uniform height and small
+	icons center nicely. Rest of function modified to take this into
+	account. create_window_shape is now called last of all,
+	so dicon's various x/y/width/height fields are up to date.
+	(create_window_shape): Determine drawing coordinates based on
+	dicon->icon & dicon->text coordinates, instead of calculating them
+	by hand (Needed for size changes).
+	(set_text): Modified to take the size changes into acount.
+
+	PATCH FROM volker.braun@physik.hu-berlin.de:
+
+	* gprefs.c, setup.c, gdesktop.[ch]: Added option
+	desktop_use_transparent_text (Default is FALSE)
+
+	* gdesktop-icon.c (create_window_shape:
+	* gdesktop.c (click_button_proxy_press): Modified to take into
+	account transparent text.
+
 1999-08-16  Federico Mena Quintero  <federico@redhat.com>
 
 	* gmain.c (default_edition_colors): "brightred" is not a standard

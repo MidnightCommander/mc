@@ -36,6 +36,7 @@ GNOMESRCS =					\
 	gcorba.c				\
 	gdesktop-icon.c				\
 	gdesktop-init.c				\
+	gdesktop-prefs.c			\
 	gdesktop.c				\
 	gdialogs.c				\
 	gdnd.c					\
@@ -75,6 +76,7 @@ GNOMEHDRS =					\
 	gcustom-layout.h			\
 	gdesktop-icon.h				\
 	gdesktop-init.h				\
+	gdesktop-prefs.h			\
 	gdesktop.h				\
 	gdnd.h					\
 	gicon.h					\
@@ -150,6 +152,7 @@ OBJS =						\
 	gcustom-layout.o			\
 	gdesktop-icon.o				\
 	gdesktop-init.o				\
+	gdesktop-prefs.o			\
 	gdesktop.o				\
 	gdnd.o					\
 	ghelp.o					\

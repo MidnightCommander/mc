@@ -117,6 +117,71 @@ ensure_icon_image (IconSet *iset, IconType type)
 	}
 }
 
+static void
+compute_scaled_size (int width, int height, int *nwidth, int *nheight)
+{
+	g_return_if_fail (nwidth != NULL);
+	g_return_if_fail (nheight != NULL);
+	
+	if (width <= ICON_IMAGE_WIDTH && height <= ICON_IMAGE_HEIGHT) {
+		*nheight = height;
+		*nwidth = width;
+	} else if (width < height) {
+		*nheight = ICON_IMAGE_HEIGHT;
+		*nwidth = *nheight * width / height;
+	} else {
+		*nwidth = ICON_IMAGE_WIDTH;
+		*nheight = *nwidth * height / width;
+	}
+}
+		
+/* Returns a newly allocated, correctly scaled image */
+static GdkImlibImage *
+get_scaled_image (GdkImlibImage *orig)
+{
+	GdkImlibImage *im;
+	int width, height;
+	
+	g_return_val_if_fail (orig != NULL, NULL);
+	
+	compute_scaled_size (orig->rgb_width, orig->rgb_height,
+			     &width, &height);
+	im = gdk_imlib_clone_scaled_image (orig, width, height);
+
+	return im;
+}
+
+/* Returns the icon set corresponding to the specified image.
+ * If we create a new IconSet, iset->plain is set to a new scaled
+ * image, so _WE FREE THE IM PARAMETER_. */
+static IconSet *
+get_icon_set_from_image (GdkImlibImage *im)
+{
+	IconSet *iset;
+
+	g_return_val_if_fail (im != NULL, NULL);
+	
+	iset = g_hash_table_lookup (image_hash, im);
+	if (iset)
+		return iset;
+
+	iset = g_new (IconSet, 1);
+	iset->plain = get_scaled_image (im);
+	iset->symlink = NULL;
+	iset->stalled = NULL;
+	iset->filename = NULL;
+	
+	
+	/* Insert the icon information into the hash tables */
+	
+	g_hash_table_remove (image_hash, im);
+	g_hash_table_insert (image_hash, iset->plain, iset);
+
+	gdk_imlib_destroy_image (im);
+
+	return iset;
+}
+
 /* Returns the icon set corresponding to the specified icon filename, or NULL if
  * the file could not be loaded.
  */
@@ -125,7 +190,7 @@ get_icon_set (const char *filename)
 {
 	GdkImlibImage *im;
 	IconSet *iset;
-
+	
 	iset = g_hash_table_lookup (name_hash, filename);
 	if (iset)
 		return iset;
@@ -133,17 +198,16 @@ get_icon_set (const char *filename)
 	im = gdk_imlib_load_image ((char *) filename);
 	if (!im)
 		return NULL;
+	
+	iset = get_icon_set_from_image (im);
+	im = NULL;
 
-	iset = g_new (IconSet, 1);
-	iset->plain = im;
-	iset->symlink = NULL;
 	iset->filename = g_strdup (filename);
 
 	/* Insert the icon information into the hash tables */
 
 	g_hash_table_insert (name_hash, iset->filename, iset);
-	g_hash_table_insert (image_hash, iset->plain, iset);
-
+	
 	return iset;
 }
 
@@ -234,29 +298,30 @@ get_icon_from_metadata (char *filename)
 {
 	int size;
 	char *buf;
-	GdkImlibImage *im;
-	IconSet *iset;
-
+	IconSet *iset = NULL;
+	
 	/* Try the inlined icon */
 
 	if (gnome_metadata_get (filename, "icon-inline-png", &size, &buf) == 0) {
+		GdkImlibImage *im;
 		im = gdk_imlib_inlined_png_to_image (buf, size);
 		g_free (buf);
-
-		if (im)
-			return im;
+		if (im) {
+			iset = get_icon_set_from_image (im);
+			im = NULL;
+		}
 	}
 
 	/* Try the non-inlined icon */
 
-	if (gnome_metadata_get (filename, "icon-filename", &size, &buf) == 0) {
+	if (!iset && gnome_metadata_get (filename, "icon-filename", &size, &buf) == 0) {
 		iset = get_icon_set (buf);
 		g_free (buf);
-
-		if (iset) {
-			ensure_icon_image (iset, ICON_TYPE_PLAIN);
-			return iset->plain;
-		}
+	}
+	
+	if (iset) {
+		ensure_icon_image (iset, ICON_TYPE_PLAIN);
+		return iset->plain;
 	}
 
 	return NULL; /* nothing is available */
@@ -355,6 +420,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 	IconSet *iset;
 	mode_t mode;
 	const char *mime_type;
+	gboolean is_user_set = FALSE;
 
 	g_return_val_if_fail (directory != NULL, NULL);
 	g_return_val_if_fail (fe != NULL, NULL);
@@ -372,13 +438,31 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 		full_name = g_concat_dir_and_file (directory, fe->fname);
 		im = get_icon_from_metadata (full_name);
 		g_free (full_name);
+		
+		if (im) {
+			iset = get_icon_set_from_image (im);
+			im = NULL;
+			is_user_set = TRUE;
+			goto add_link;
+		}
+	}
+	
+	/* 2. Before we do anything else, make sure the 
+	 * pointed-to file exists if a link */
+	
+	if (S_ISLNK (mode) && fe->f.stalled_link) {
+		const char *icon_name;
 
-		if (im)
-			return im;
+		icon_name = gnome_unconditional_pixmap_file ("gnome-warning.png");
+		if (icon_name) {
+			iset = get_icon_set (icon_name);
+			if (iset)
+				goto add_link;
+		}
 	}
 
-	/* 2. See if it is a directory */
-
+	/* 3. See if it is a directory */
+	
 	if (S_ISDIR (mode)) {
 		if (can_access_directory (fe))
 			iset = iset_directory;
@@ -388,7 +472,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 		goto add_link;
 	}
 
-	/* 3. Try MIME-types */
+	/* 4. Try MIME-types */
 
 	mime_type = gnome_mime_type_or_default (fe->fname, NULL);
 	if (mime_type) {
@@ -402,7 +486,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 		}
 	}
 
-	/* 4. Get an icon from the file mode */
+	/* 5. Get an icon from the file mode */
 
 	iset = get_default_icon (fe);
 
@@ -411,7 +495,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 	g_assert (iset != NULL);
 
 	if (S_ISLNK (mode)) {
-		if (fe->f.link_to_dir)
+		if (fe->f.link_to_dir && !is_user_set)
 			iset = iset_directory;
 
 		if (fe->f.stalled_link) {

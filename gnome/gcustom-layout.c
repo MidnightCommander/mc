@@ -1,10 +1,8 @@
-/* GNU Midnight Commander -- GNOME edition
- *
- * Preferences page for custom list view
+/* Custom layout preferences box for the Midnight Commander
  *
  * Copyright (C) 1999 The Free Software Foundation
  *
- * Author: Owen Taylor
+ * Author: Owen Taylor <otaylor@redhat.com>
  */
 
 #include <config.h>
