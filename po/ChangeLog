@@ -1,3 +1,7 @@
+2003-01-22  Vincent van Adrighem  <V.vanAdrighem@dirck.mine.nu>
+
+	* nl.po: Dutch translation updated.
+
 2002-12-30  Andras Timar  <timar@gnome.hu>
 
 	* hu.po: Updated Hungarian translation from
@@ -14,11 +18,11 @@
 
 2002-12-10  Pavel Roskin  <proski@gnu.org>
 
-	* es_ES.po: Remove.  Asked by David Martín <dmartina@excite.com>
+	* es_ES.po: Remove.  Asked by David MartÃ­n <dmartina@excite.com>
 
 2002-10-22  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2002-10-14  Pavel Roskin  <proski@gnu.org>
 
@@ -48,7 +52,7 @@
 
 2002-08-25  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2002-08-22  Zbigniew Chyla  <cyba@gnome.pl>
 
@@ -91,7 +95,7 @@
 
 2002-03-03  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2002-02-26  Stanislav Visnovsky  <visnovsky@nenya.ms.mff.cuni.cz>
 
@@ -132,7 +136,7 @@
 
 2002-01-30  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2002-01-29  Wang Jian  <lark@linux.net.cn>
 
@@ -196,7 +200,7 @@
 
 2001-11-06  Fatih Demir  <kabalak@gtranslator.org>
 
-	* tr.po: Committed updated Turkish translation by Nilgün.
+	* tr.po: Committed updated Turkish translation by NilgÃ¼n.
 
 2001-11-01  Peteris Krisjanis  <pecisk@inbox.lv>
 
@@ -243,12 +247,12 @@
 
 2001-10-08  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2001-10-08  Christian Rose  <menthos@menthos.com>
 
 	* sv.po: Fixed some bad language problems. Thanks to
-	Göran Weinholt <weinholt@linux.nu> for noticing.
+	GÃ¶ran Weinholt <weinholt@linux.nu> for noticing.
 
 2001-10-07  Artis Trops  <hornet@navigators.lv>
 
@@ -274,7 +278,7 @@
 
 2001-09-20  Fatih Demir  <kabalak@gtranslator.org>
 
-	* tr.po: Took over Nilgün's updated Turkish translation from RH
+	* tr.po: Took over NilgÃ¼n's updated Turkish translation from RH
 		CVS.
 
 2001-09-12  Christian Rose  <menthos@menthos.com>
@@ -296,7 +300,7 @@
 
 2001-08-25  Fatih Demir  <kabalak@gtranslator.org>
 
-	* tr.po: Committed updated Turkish translation by Nilgün.
+	* tr.po: Committed updated Turkish translation by NilgÃ¼n.
 
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
@@ -309,7 +313,7 @@
 
 2001-08-24  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2001-08-20  Christian Meyer  <chrisime@gnome.org>
 
@@ -473,9 +477,9 @@
 2001-03-24  Fatih Demir  <kabalak@gtranslator.org>
 
 	* tr.po: Committed fullfilled and finished
-		Turkish translation by Nilgün.
+		Turkish translation by NilgÃ¼n.
 
-2001-03-09  Carlos Perelló Marín  <carlos@gnome-db.org>
+2001-03-09  Carlos PerellÃ³ MarÃ­n  <carlos@gnome-db.org>
 
 	* es.po, es_ES.po: Update Spanish translation by
 	  David Martin <dmartina@excite.es>
@@ -492,7 +496,7 @@
 
 	* de.po: Updated German translation.
 
-2001-02-17  Carlos Perelló Marín  <carlos@gnome-db.org>
+2001-02-17  Carlos PerellÃ³ MarÃ­n  <carlos@gnome-db.org>
 
 	* es.po, es_ES.po: Update Spanish translation by
 	  David Martin <dmartina@excite.es>
@@ -527,7 +531,7 @@
 
 2001-01-11  Kjartan Maraas  <kmaraas@gnome.org>
 
-	* no.po: Updated Norwegian (bokmål) translation.
+	* no.po: Updated Norwegian (bokmÃ¥l) translation.
 
 2001-01-08  Szabolcs Ban  <shooby@gnome.hu>
 
