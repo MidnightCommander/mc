@@ -43,7 +43,7 @@ struct poptContext_s {
     char * otherHelp;
 };
 
-#include "i18n.h"
+#include "global.h"
 #define D_(dom, str) _(str)
 #define POPT_(foo) _(foo)
 
