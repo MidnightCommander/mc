@@ -1,3 +1,10 @@
+1999-06-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (new_terminal): New function to open a terminal from
+	the popup menu.  If the user opens a terminal from the desktop,
+	then its cwd should be the user's home directory, not the desktop
+	directory.  Fixes bug #2868 in the Red Hat bugzilla.
+
 1999-06-04  Robert Brady  <rwb197@ecs.soton.ac.uk>
 
 	* gscreen.c (panel_list_configure_contents): Prevent

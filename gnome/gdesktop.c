@@ -2403,8 +2403,22 @@ set_background_image (GtkWidget *widget, gpointer data)
 		gnome_dialog_run (GNOME_DIALOG (msg_box));
 	}
 }
+
+/* Callback from menus to create a terminal.  If the user creates a terminal
+ * from the desktop, he usually wants the cwd to be his home directory, not the
+ * desktop directory.
+ */
+static void
+new_terminal (GtkWidget *widget, gpointer data)
+{
+	if (is_a_desktop_panel (cpanel))
+		mc_chdir (home_dir);
+
+	gnome_open_terminal ();
+}
+
 static GnomeUIInfo gnome_panel_new_menu [] = {
-	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
+	GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), new_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
 	GNOMEUIINFO_ITEM_NONE( N_("URL L_ink..."),  N_("Creates a new URL link"), gnome_new_link ),
