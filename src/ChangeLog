@@ -1,3 +1,13 @@
+2001-06-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* wtools.c (message): Possible buffer overflow fixed.
+	(query_callback) [HAVE_X]: Disable more code.
+	(listbox_refresh) [!HAVE_X]: Became a macro.
+	* hotlist.c (init_i18n_stuff): Mark cancel_but for translation.
+
+	* tree.c (tree_copy, tree_move): Possible memory leaking fixed.
+	(tree_keymap): Constified.
+
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
 	* panelize.c: Define DIR_H_INCLUDE_HANDLE_DIRENT earlier, since
