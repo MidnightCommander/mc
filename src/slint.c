@@ -283,16 +283,17 @@ slang_reset_softkeys (void)
 {
     int key;
     char *send;
-    static const char display [] = "                ";
+    static const char display[] = "                ";
     char tmp[BUF_SMALL];
-    
-    for ( key = 1; key < 9; key++ ) {
+
+    for (key = 1; key < 9; key++) {
 	g_snprintf (tmp, sizeof (tmp), "k%d", key);
 	send = (char *) SLtt_tgetstr (tmp);
 	if (send) {
-            g_snprintf(tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
-                    sizeof (display) - 1, strlen(send), display, send);
-    	    SLtt_write_string (tmp);
+	    g_snprintf (tmp, sizeof (tmp), "\033&f%dk%dd%dL%s%s", key,
+			(int) (sizeof (display) - 1), (int) strlen (send),
+			display, send);
+	    SLtt_write_string (tmp);
 	}
     }
 }
