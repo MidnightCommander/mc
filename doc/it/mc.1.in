@@ -2549,7 +2549,8 @@ poi premere i tasti che si voglia essere eseguiti. Premere nuovamente
 .B Ctrl-R
 quando si ha finito. E' possibile assegnare una macro a qualsiasi tasto 
 si preme. La macro viene eseguita quando si preme
-.B Ctrl-A e poi il tasto assegnato. La macro viene eseguita anche se si
+.B Ctrl-A 
+e poi il tasto assegnato. La macro viene eseguita anche se si
 preme il tasto Meta, Ctrl, o Esc e il tasto assegnato, basta che il tasto
 non sia già assegnato a qualche altra funzione. Una volta definiti, i
 macro comandi finiscono nel file
