@@ -4,6 +4,8 @@ Before 4.6.1
 Broken pipe warning when viewing large *.tar.gz files.  Warnings should
 be shown before the viewer is started if possible.
 
+Need a separate color for hotkeys in red dialogs.
+
 
 Before 4.6.2
 ============
