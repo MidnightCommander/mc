@@ -1,5 +1,8 @@
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am (mcserv_SOURCES): Remove $(top_srcdir)/src/mad.c,
+	it breaks "make distcheck".
+
 	* Makefile.am: Set samba_libsamba_a_SOURCES to an empty value
 	to override the default.
 
