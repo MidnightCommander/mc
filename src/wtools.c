@@ -86,19 +86,21 @@ common_dialog_callback (struct Dlg_head *h, int id, int msg)
 /* }}} */
 /* {{{ Listbox utility functions */
 
+#ifdef HAVE_X
+#define listbox_refresh(h)
+#else
 static void
 listbox_refresh (Dlg_head *h)
 {
     dialog_repaint (h, COLOR_NORMAL, COLOR_HOT_NORMAL);
 }
+#endif
 
 static int listbox_callback (Dlg_head *h, int id, int msg)
 {
     switch (msg) {
     case DLG_DRAW:
-#ifndef HAVE_X
         listbox_refresh(h);
-#endif
         return 1;
     }
     return 0;
@@ -137,9 +139,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 		button_new (lines+3, (cols/2 + 2) - len/2, 
 		B_CANCEL, NORMAL_BUTTON, cancel_string, 0, 0, "c"));
     add_widget (listbox->dlg, listbox->list);
-#ifndef HAVE_X
     listbox_refresh(listbox->dlg);
-#endif /* !HAVE_X */
     return listbox;
 }
 

@@ -1,5 +1,12 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (adjust_top_file): Enable only if it's used, i.e.
+	when PORT_HAS_PAINT_FRAME in undefined.
+	* wtools.c (listbox_refresh): Disable for HAVE_X, define to
+	an empty macro instead.
+	(listbox_callback): Call listbox_refresh() regardless of HAVE_X.
+	(create_listbox_window): Likewise.
+
 	* fsusage.c: Include stdlib.h for abort().
 	* tree.c (tree_mkdir_cmd): Disable tree_mkdir_cmd() since it's
 	not used.

@@ -788,7 +788,7 @@ show_dir (WPanel *panel)
 }
 #endif
 
-#ifndef HAVE_TK
+#ifndef PORT_HAS_PAINT_FRAME
 /* To be used only by long_frame and full_frame to adjust top_file */
 static void
 adjust_top_file (WPanel *panel)
@@ -799,14 +799,7 @@ adjust_top_file (WPanel *panel)
 	panel->top_file = panel->selected;
     if (old_top - panel->count > llines (panel))
 	panel->top_file = panel->count - llines (panel);
-
-#ifdef HAVE_TK
-    if (old_top != panel->top_file)
-	x_adjust_top_file (panel);
-#endif
 }
-#else
-#define adjust_top_file(p)
 #endif
 
 /* Repaints the information that changes after a command */
