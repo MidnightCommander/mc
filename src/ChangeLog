@@ -1,3 +1,8 @@
+2000-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* fixhlp.c: Removed.
+	* Makefile.in: Removed all references to fixhlp.c
+
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* features.h: Joined with textconf.h to avoid name clash with

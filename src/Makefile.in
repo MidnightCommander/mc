@@ -57,8 +57,7 @@ OBJS =	dir.o util.o screen.o dialog.o key.o keyxdef.o menu.o		\
 
 DISTFILES = \
 	$(HDRS) $(SRCS) Makefile.in TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl cons.saver.c ncurses.patch mc.hlp depend.awk \
-	fixhlp.c mfmt.c
+	gindex.pl cons.saver.c ncurses.patch mc.hlp depend.awk mfmt.c
 
 all: mc mcmfmt $(srcdir)/mc.hlp @saver_target@ Makefile
 
@@ -97,7 +96,7 @@ TAGS: $(SRCS)
 	etags $(SRCS)
 
 clean:
-	$(RMF) mc cons.saver man2hlp fixhlp *.o core a.out mc.html mcmfmt
+	$(RMF) mc cons.saver man2hlp *.o core a.out mc.html mcmfmt
 
 realclean: clean
 	$(RMF) .depend
@@ -106,7 +105,7 @@ realclean: clean
 
 distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/mc $(srcdir)/cons.saver
-	$(RMF) $(srcdir)/man2hlp $(srcdir)/fixhlp $(srcdir)/*.o $(srcdir)/core
+	$(RMF) $(srcdir)/man2hlp $(srcdir)/*.o $(srcdir)/core
 	$(RMF) $(srcdir)/a.out $(srcdir)/mc.html
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	$(RMF) $(srcdir)/Makefile
