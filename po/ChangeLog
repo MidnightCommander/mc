@@ -1,3 +1,8 @@
+2001-08-12  Pavel Roskin  <proski@gnu.org>
+
+	* POTFILES.in: Remove gnome/gmc-window.c.
+	* ru.po: Update.
+
 2001-08-02  Stanislav Brabec  <utx@penguin.cz>
 
 	* cs.po: Updated translation.
