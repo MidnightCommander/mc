@@ -1105,6 +1105,7 @@ directory_history_prev (WPanel * panel)
     panel_update_marks (panel);
 }
 
+#ifndef HAVE_X
 void
 directory_history_list (WPanel * panel)
 {
@@ -1123,6 +1124,7 @@ directory_history_list (WPanel * panel)
 	}
     }
 }
+#endif /* !HAVE_X */
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 int

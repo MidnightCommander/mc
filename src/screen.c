@@ -2292,12 +2292,12 @@ static const key_map panel_keymap [] = {
 #ifndef HAVE_X
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
+    { ALT('H'),   directory_history_list },
 #endif /* HAVE_X */
     { KEY_F(13),  view_simple_cmd },
     { KEY_F(14),  edit_cmd_new },
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
-    { ALT('H'),   directory_history_list },
     { ALT('+'),	  select_cmd_panel },
     { KEY_KP_ADD, select_cmd_panel },
     { ALT('\\'),  unselect_cmd_panel },

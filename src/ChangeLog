@@ -1,5 +1,9 @@
 2001-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (panel_keymap) [HAVE_X]: Disable Alt-H - it's not
+	implemented properly for GNOME.
+	* main.c (directory_history_list) [HAVE_X]: Disable.
+
 	* panelize.c [HAVE_X]: Disable unused code.
 
 	* main.c [HAVE_X]: Disable Ctrl-X sequences.
