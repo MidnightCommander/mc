@@ -255,11 +255,11 @@ msgstr ""
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
-msgstr ""
+msgstr "Час доступу"
 
 #: gnome/gcustom-layout.c:35
 msgid "Creation Time"
-msgstr ""
+msgstr "Час створення"
 
 #. Group
 #: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:776
@@ -354,20 +354,20 @@ msgstr ""
 
 #: gnome/gdesktop.c:2616 gnome/glayout.c:362
 msgid "_Terminal"
-msgstr ""
+msgstr "Терм╕нал"
 
 #: gnome/gdesktop.c:2616 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
-msgstr ""
+msgstr "Запустити терм╕нал в поточному каталогу"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/gdesktop.c:2618 gnome/glayout.c:365
 msgid "_Directory..."
-msgstr ""
+msgstr "Каталог..."
 
 #: gnome/gdesktop.c:2618 gnome/glayout.c:366
 msgid "Creates a new directory"
-msgstr ""
+msgstr "Створити новий каталог"
 
 #: gnome/gdesktop.c:2619
 msgid "URL L_ink..."
@@ -379,35 +379,35 @@ msgstr ""
 
 #: gnome/gdesktop.c:2620
 msgid "_Launcher..."
-msgstr ""
+msgstr "Запускач..."
 
 #: gnome/gdesktop.c:2620
 msgid "Creates a new launcher"
-msgstr ""
+msgstr "Створити новий запускач"
 
 #: gnome/gdesktop.c:2626
 msgid "By _Name"
-msgstr ""
+msgstr "За назвою"
 
 #: gnome/gdesktop.c:2627
 msgid "By File _Type"
-msgstr ""
+msgstr "За типом файлу"
 
 #: gnome/gdesktop.c:2628
 msgid "By _Size"
-msgstr ""
+msgstr "За розм╕ром"
 
 #: gnome/gdesktop.c:2629
 msgid "By Time Last _Accessed"
-msgstr ""
+msgstr "За часом останнього доступу"
 
 #: gnome/gdesktop.c:2630
 msgid "By Time Last _Modified"
-msgstr ""
+msgstr "За часом останньо╖ модиф╕кац╕╖"
 
 #: gnome/gdesktop.c:2631
 msgid "By Time Last _Changed"
-msgstr ""
+msgstr "За часом останньо╖ зм╕ни"
 
 #: gnome/gdesktop.c:2639 gnome/glayout.c:462
 msgid "_Arrange Icons"
@@ -419,11 +419,11 @@ msgstr ""
 
 #: gnome/gdesktop.c:2642 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
-msgstr ""
+msgstr "Пересканувати каталог користувача"
 
 #: gnome/gdesktop.c:2643 gnome/glayout.c:465
 msgid "Rescan De_vices"
-msgstr ""
+msgstr "Пересканувати пристро╖"
 
 #: gnome/gdesktop.c:2644 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
@@ -774,11 +774,11 @@ msgstr ""
 
 #: gnome/glayout.c:393
 msgid "Show directory sizes"
-msgstr ""
+msgstr "Показати розм╕ри каталог╕в"
 
 #: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
-msgstr ""
+msgstr "Показати розм╕р дискового простору використаного кожним каталогом"
 
 #: gnome/glayout.c:395
 msgid "Close window"
@@ -822,11 +822,11 @@ msgstr ""
 
 #: gnome/glayout.c:411 gnome/gscreen.c:1415
 msgid "_Rescan Directory"
-msgstr ""
+msgstr "Пересканувати каталог"
 
 #: gnome/glayout.c:411
 msgid "Rescan the directory contents"
-msgstr ""
+msgstr "Пересканувати вм╕ст каталогу"
 
 #: gnome/glayout.c:421
 msgid "_Sort By..."
@@ -1064,7 +1064,7 @@ msgstr ""
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:203
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
-msgstr ""
+msgstr "Показ"
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
@@ -1094,7 +1094,7 @@ msgstr ""
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
-msgstr ""
+msgstr "Зм╕на"
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
@@ -1474,11 +1474,11 @@ msgstr ""
 
 #: gnome/gscreen.c:2252 src/tree.c:1010
 msgid "Rescan"
-msgstr ""
+msgstr "Пересканувати"
 
 #: gnome/gscreen.c:2252
 msgid "Rescan the current directory"
-msgstr ""
+msgstr "Пересканувати поточний каталог"
 
 #: gnome/gscreen.c:2255
 msgid "Home"
@@ -1505,7 +1505,7 @@ msgstr "&Гаразд"
 #: gnome/gview.c:136
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr ""
+msgstr "Зм╕щення 0x%08lx"
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
@@ -2886,7 +2886,7 @@ msgstr ""
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr ""
+msgstr " Параметри списку "
 
 #: src/boxes.c:68
 msgid "&Full file list"
@@ -2914,7 +2914,7 @@ msgstr ""
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr ""
+msgstr "Параметри списку"
 
 #: src/boxes.c:280
 msgid "&Reverse"
@@ -4114,7 +4114,7 @@ msgstr ""
 
 #: src/find.c:136
 msgid "&View - F3"
-msgstr ""
+msgstr "&Переглянути - F3"
 
 #: src/find.c:137
 msgid "&Edit - F4"
@@ -4134,7 +4134,7 @@ msgstr ""
 
 #: src/find.c:171 src/main.c:1243 src/main.c:1267
 msgid "&Tree"
-msgstr ""
+msgstr "&Дерево"
 
 #: src/find.c:223
 msgid "Find File"
@@ -4274,7 +4274,7 @@ msgstr ""
 
 #: src/hotlist.c:137
 msgid "New &Group"
-msgstr ""
+msgstr "Нова &група"
 
 #: src/hotlist.c:139
 msgid "&Up"
@@ -4282,7 +4282,7 @@ msgstr ""
 
 #: src/hotlist.c:140
 msgid "&Add current"
-msgstr ""
+msgstr "&Додати поточний"
 
 #: src/hotlist.c:141
 msgid "Change &To"
@@ -4302,7 +4302,7 @@ msgstr ""
 
 #: src/hotlist.c:639
 msgid " Directory path "
-msgstr ""
+msgstr " Каталог "
 
 #. This one holds the displayed pathname
 #: src/hotlist.c:642 src/hotlist.c:689
@@ -4352,10 +4352,13 @@ msgid ""
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
+"\n"
+" Група не порожня.\n"
+" Видалити ╖╖?"
 
 #: src/hotlist.c:1378
 msgid " Top level group "
-msgstr ""
+msgstr " Група верхнього р╕вня "
 
 #: src/hotlist.c:1394
 msgid "Hotlist is now kept in file ~/"
@@ -4438,7 +4441,7 @@ msgstr ""
 #: src/info.c:83
 #, c-format
 msgid "Midnight Commander %s"
-msgstr ""
+msgstr "Midnight Commander %s"
 
 #: src/info.c:109
 #, c-format
@@ -4578,7 +4581,7 @@ msgstr ""
 
 #: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
 msgid "&Save"
-msgstr ""
+msgstr "&Зберегти"
 
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
@@ -4595,7 +4598,7 @@ msgstr ""
 
 #: src/layout.c:383 src/option.c:156
 msgid " Other options "
-msgstr ""
+msgstr " ╤нш╕ параметри "
 
 #: src/layout.c:384
 msgid "output lines"
@@ -4607,7 +4610,7 @@ msgstr ""
 
 #: src/learn.c:74
 msgid " Learn keys "
-msgstr ""
+msgstr " Розп╕знавання клав╕ш "
 
 #: src/learn.c:93
 msgid " Teach me a key "
@@ -4633,31 +4636,35 @@ msgstr ""
 #: src/learn.c:123
 #, c-format
 msgid " You have entered \"%s\""
-msgstr ""
+msgstr " Ви ввели \"%s\""
 
 #: src/learn.c:170
 msgid "OK"
-msgstr ""
+msgstr "Гаразд"
 
 #: src/learn.c:177
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
+"Схоже, що ус╕ ваш╕ клав╕ш╕ тепер\n"
+"працюють нормально. Це чудово."
 
 #: src/learn.c:179
 msgid "&Discard"
-msgstr ""
+msgstr "&В╕дмова"
 
 #: src/learn.c:183
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
+"Чудово! У вас ╓ повна база опис╕в терм╕нал╕в!\n"
+"Вс╕ ваш╕ клав╕ш╕ працюють добре."
 
 #: src/learn.c:267
 msgid "Learn keys"
-msgstr ""
+msgstr "Розп╕знавання клав╕ш"
 
 #: src/learn.c:300
 msgid "Press all the keys mentioned here. After you have done it, check"
@@ -4697,55 +4704,55 @@ msgstr " Ви справд╕ хочете вийти з Midnight Commander? "
 
 #: src/main.c:1240 src/main.c:1264
 msgid "&Listing mode..."
-msgstr ""
+msgstr "Параметри &списку..."
 
 #: src/main.c:1241 src/main.c:1265
 msgid "&Quick view     C-x q"
-msgstr ""
+msgstr "&Швидкий перегляд  C-x q"
 
 #: src/main.c:1242 src/main.c:1266
 msgid "&Info           C-x i"
-msgstr ""
+msgstr "&╤нформац╕я        C-x i"
 
 #: src/main.c:1245 src/main.c:1269
 msgid "&Sort order..."
-msgstr ""
+msgstr "Параметри &сортування..."
 
 #: src/main.c:1247 src/main.c:1271
 msgid "&Filter..."
-msgstr ""
+msgstr "&Ф╕льтр..."
 
 #: src/main.c:1250 src/main.c:1274
 msgid "&Network link..."
-msgstr ""
+msgstr "&Мережевий зв'язок..."
 
 #: src/main.c:1251 src/main.c:1275
 msgid "FT&P link..."
-msgstr ""
+msgstr "&FTP-зв'язок..."
 
 #: src/main.c:1253 src/main.c:1277
 msgid "SM&B link..."
-msgstr ""
+msgstr "&SMB-зв'язок..."
 
 #: src/main.c:1258 src/main.c:1282
 msgid "&Drive...       M-d"
-msgstr ""
+msgstr "&Пристр╕й...         M-d"
 
 #: src/main.c:1260 src/main.c:1284
 msgid "&Rescan         C-r"
-msgstr ""
+msgstr "&Пересканувати       C-r"
 
 #: src/main.c:1288
 msgid "&User menu          F2"
-msgstr ""
+msgstr "Меню &користувача     F2"
 
 #: src/main.c:1289
 msgid "&View               F3"
-msgstr ""
+msgstr "&Переглянути          F3"
 
 #: src/main.c:1290
 msgid "Vie&w file...         "
-msgstr ""
+msgstr "Переглянути файл...     "
 
 #: src/main.c:1291
 msgid "&Filtered view     M-!"
@@ -4753,11 +4760,11 @@ msgstr ""
 
 #: src/main.c:1292
 msgid "&Edit               F4"
-msgstr ""
+msgstr "&Редагувати           F4"
 
 #: src/main.c:1293
 msgid "&Copy               F5"
-msgstr ""
+msgstr "&Скоп╕ювати           F5"
 
 #: src/main.c:1294
 msgid "c&Hmod           C-x c"
@@ -4777,7 +4784,7 @@ msgstr ""
 
 #: src/main.c:1299
 msgid "ch&Own           C-x o"
-msgstr ""
+msgstr "Зм╕на власника      C-x o"
 
 #: src/main.c:1300
 msgid "&Advanced chown       "
@@ -4789,35 +4796,35 @@ msgstr ""
 
 #: src/main.c:1303
 msgid "&Mkdir              F7"
-msgstr ""
+msgstr "&Створити калог        F7"
 
 #: src/main.c:1304
 msgid "&Delete             F8"
-msgstr ""
+msgstr "&Видалити              F8"
 
 #: src/main.c:1305
 msgid "&Quick cd          M-c"
-msgstr ""
+msgstr "&Швидка зм╕на калогу  M-c"
 
 #: src/main.c:1307
 msgid "select &Group      M-+"
-msgstr ""
+msgstr "Вибрати &групу        M-+"
 
 #: src/main.c:1308
 msgid "u&Nselect group    M-\\"
-msgstr ""
+msgstr "&Зняти виб╕р з групи  M-\\"
 
 #: src/main.c:1309
 msgid "reverse selec&Tion M-*"
-msgstr ""
+msgstr "&╤нвертувати виб╕р    M-*"
 
 #: src/main.c:1311
 msgid "e&Xit              F10"
-msgstr ""
+msgstr "Завершити          F10"
 
 #: src/main.c:1321
 msgid "&Directory tree"
-msgstr ""
+msgstr "&Дерево каталог╕в"
 
 #: src/main.c:1323
 msgid "&Find file            M-?"
@@ -4841,11 +4848,11 @@ msgstr ""
 
 #: src/main.c:1328
 msgid "show directory s&Izes"
-msgstr ""
+msgstr "Показати &розм╕ри каталог╕в"
 
 #: src/main.c:1330
 msgid "command &History"
-msgstr ""
+msgstr "&╤стор╕я команд"
 
 #: src/main.c:1331
 msgid "di&Rectory hotlist    C-\\"
@@ -4877,7 +4884,7 @@ msgstr ""
 
 #: src/main.c:1347
 msgid "&Menu file edit"
-msgstr ""
+msgstr "&Редагувати файл меню"
 
 #: src/main.c:1352
 msgid "&Configuration..."
@@ -4885,55 +4892,55 @@ msgstr "&Конф╕гурац╕я..."
 
 #: src/main.c:1354
 msgid "c&Onfirmation..."
-msgstr ""
+msgstr "&П╕дтвердження..."
 
 #: src/main.c:1355
 msgid "&Display bits..."
-msgstr ""
+msgstr "&В╕дображення б╕т╕в"
 
 #: src/main.c:1357
 msgid "learn &Keys..."
-msgstr ""
+msgstr "Розп╕знавання &клав╕ш..."
 
 #: src/main.c:1360
 msgid "&Virtual FS..."
-msgstr ""
+msgstr "&В╕ртуальна файлова система..."
 
 #: src/main.c:1363
 msgid "&Save setup"
-msgstr ""
+msgstr "&Зберегти установки"
 
 #: src/main.c:1379 src/main.c:1381
 msgid " &Left "
-msgstr ""
+msgstr " &Л╕ва "
 
 #: src/main.c:1381
 msgid " &Above "
-msgstr ""
+msgstr " &Верхня "
 
 #: src/main.c:1384
 msgid " &File "
-msgstr ""
+msgstr " &Файл "
 
 #: src/main.c:1385
 msgid " &Command "
-msgstr ""
+msgstr " &Команди "
 
 #: src/main.c:1386
 msgid " &Options "
-msgstr ""
+msgstr " &Параметри "
 
 #: src/main.c:1388 src/main.c:1390
 msgid " &Right "
-msgstr ""
+msgstr " &Права "
 
 #: src/main.c:1390
 msgid " &Below "
-msgstr ""
+msgstr " &Нижня "
 
 #: src/main.c:1445
 msgid " Information "
-msgstr ""
+msgstr " ╤нформац╕я "
 
 #: src/main.c:1446
 msgid ""
@@ -4945,7 +4952,7 @@ msgstr ""
 
 #: src/main.c:1925
 msgid "Thank you for using GNU Midnight Commander"
-msgstr ""
+msgstr "Дяку╓мо вам за використання GNU Midnight Commander"
 
 #: src/main.c:2284
 #, c-format
@@ -5052,11 +5059,11 @@ msgstr ""
 
 #: src/main.c:2750
 msgid "Geometry for the window"
-msgstr ""
+msgstr "Геометр╕я в╕кна"
 
 #: src/main.c:2750
 msgid "GEOMETRY"
-msgstr ""
+msgstr "ГЕОМЕТР╤Я"
 
 #: src/main.c:2751
 msgid "No windows opened at startup"
@@ -5101,7 +5108,7 @@ msgstr ""
 
 #: src/option.c:79
 msgid "Animation"
-msgstr ""
+msgstr "Ан╕мац╕я"
 
 #: src/option.c:81
 msgid "rotatin&G dash"
@@ -5182,7 +5189,7 @@ msgstr ""
 
 #: src/option.c:154
 msgid " Panel options "
-msgstr ""
+msgstr " Параметри панел╕ "
 
 #: src/option.c:155
 msgid " Pause after run... "
@@ -5270,11 +5277,11 @@ msgstr ""
 
 #: src/screen.c:424
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: src/screen.c:425
 msgid "GID"
-msgstr ""
+msgstr "GID"
 
 #: src/screen.c:661
 #, c-format
@@ -5299,7 +5306,7 @@ msgstr ""
 
 #: src/screen.c:2400 src/screen.c:2430 src/tree.c:1016
 msgid "RenMov"
-msgstr ""
+msgstr "Перен"
 
 #: src/screen.c:2401 src/screen.c:2431 src/tree.c:1020
 msgid "Mkdir"
@@ -5451,12 +5458,12 @@ msgstr ""
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
-msgstr ""
+msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
 #: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
-msgstr ""
+msgstr "%b %e  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5514,7 +5521,7 @@ msgstr ""
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
-msgstr ""
+msgstr " Неможливо показати: не звичайний файл "
 
 #: src/view.c:569
 #, c-format
@@ -5522,6 +5529,8 @@ msgid ""
 " Can't open \"%s\"\n"
 " %s "
 msgstr ""
+" Неможливо в╕дкрити \"%s\"\n"
+" %s "
 
 #: src/view.c:578
 #, c-format
@@ -5538,7 +5547,7 @@ msgstr "Файл: %s"
 #: src/view.c:728
 #, c-format
 msgid "Offset 0x%08x"
-msgstr ""
+msgstr "Зм╕щення 0x%08x"
 
 #: src/view.c:739
 msgid "  [grow]"
@@ -5551,11 +5560,11 @@ msgstr "Пошук \"%s\""
 
 #: src/view.c:1625 src/view.c:1748
 msgid " Search string not found "
-msgstr ""
+msgstr " Рядок незнайдено "
 
 #: src/view.c:1787
 msgid " Invalid regular expression "
-msgstr ""
+msgstr " Нев╕рний регулярний вираз "
 
 #: src/view.c:1911
 #, c-format
@@ -5563,6 +5572,8 @@ msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
+" Поточний номер рядка - %d.\n"
+" Введ╕ть новий номер рядка:"
 
 #: src/view.c:1933
 #, c-format
@@ -5570,10 +5581,12 @@ msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
+" Поточне зм╕щення - 0x%lx.\n"
+" Введ╕ть нове зм╕щення:"
 
 #: src/view.c:1935
 msgid " Goto Address "
-msgstr ""
+msgstr " Перех╕д за адресою "
 
 #: src/view.c:1966
 msgid " Enter regexp:"
@@ -5581,7 +5594,7 @@ msgstr ""
 
 #: src/view.c:2071
 msgid "Ascii"
-msgstr ""
+msgstr "Ascii"
 
 #: src/view.c:2071
 msgid "Hex"
@@ -5589,11 +5602,11 @@ msgstr ""
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr ""
+msgstr "Перейти"
 
 #: src/view.c:2072
 msgid "Line"
-msgstr ""
+msgstr "Рядок"
 
 #: src/view.c:2075
 msgid "RxSrch"
@@ -5723,47 +5736,47 @@ msgstr "Клав╕ша F20"
 
 #: src/win.c:244
 msgid "Backspace key"
-msgstr "Клав╕ша Backspace"
+msgstr "Backspace"
 
 #: src/win.c:245
 msgid "End key"
-msgstr "Клав╕ша End"
+msgstr "End"
 
 #: src/win.c:246
 msgid "Up arrow key"
-msgstr ""
+msgstr "Стр╕лка вверх"
 
 #: src/win.c:247
 msgid "Down arrow key"
-msgstr ""
+msgstr "Стр╕лка вниз"
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr ""
+msgstr "Стр╕лка вл╕во"
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr ""
+msgstr "Стр╕лка вправо"
 
 #: src/win.c:250
 msgid "Home key"
-msgstr ""
+msgstr "Home"
 
 #: src/win.c:251
 msgid "Page Down key"
-msgstr ""
+msgstr "Page Down"
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr ""
+msgstr "Page Up"
 
 #: src/win.c:253
 msgid "Insert key"
-msgstr ""
+msgstr "Insert"
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr ""
+msgstr "Delete"
 
 #: src/win.c:255
 msgid "Completion/M-tab"
@@ -5771,68 +5784,68 @@ msgstr ""
 
 #: src/win.c:256
 msgid "+ on keypad"
-msgstr ""
+msgstr "Додаткова +"
 
 #: src/win.c:257
 msgid "- on keypad"
-msgstr ""
+msgstr "Додаткова -"
 
 #: src/win.c:258
 msgid "* on keypad"
-msgstr ""
+msgstr "Додаткова *"
 
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:260
 msgid "Left arrow keypad"
-msgstr ""
+msgstr "Додаткова Стр╕лка вл╕во"
 
 #: src/win.c:261
 msgid "Right arrow keypad"
-msgstr ""
+msgstr "Додаткова Стр╕лка вправо"
 
 #: src/win.c:262
 msgid "Up arrow keypad"
-msgstr ""
+msgstr "Додаткова Стр╕лка вверх"
 
 #: src/win.c:263
 msgid "Down arrow keypad"
-msgstr ""
+msgstr "Додаткова Стр╕лка вниз"
 
 #: src/win.c:264
 msgid "Home on keypad"
-msgstr ""
+msgstr "Додаткова Home"
 
 #: src/win.c:265
 msgid "End on keypad"
-msgstr ""
+msgstr "Додаткова End"
 
 #: src/win.c:266
 msgid "Page Down keypad"
-msgstr ""
+msgstr "Додаткова Page Down"
 
 #: src/win.c:267
 msgid "Page Up keypad"
-msgstr ""
+msgstr "Додаткова Page Up"
 
 #: src/win.c:268
 msgid "Insert on keypad"
-msgstr ""
+msgstr "Додаткова Insert"
 
 #: src/win.c:269
 msgid "Delete on keypad"
-msgstr ""
+msgstr "Додаткова Delete"
 
 #: src/win.c:270
 msgid "Enter on keypad"
-msgstr ""
+msgstr "Додаткова Enter"
 
 #: src/win.c:271
 msgid "Slash on keypad"
-msgstr ""
+msgstr "Додаткова /"
 
 #: src/win.c:272
 msgid "NumLock on keypad"
-msgstr ""
+msgstr "NumLock"
 
 #: vfs/extfs.c:268
 #, c-format
@@ -5918,7 +5931,7 @@ msgstr ""
 #: vfs/ftpfs.c:328
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr ""
+msgstr "ftpfs: В╕д'╓днання в╕д %s"
 
 #: vfs/ftpfs.c:379
 msgid " FTP: Password required for "
@@ -5969,11 +5982,11 @@ msgstr ""
 
 #: vfs/ftpfs.c:652
 msgid "ftpfs: Invalid host name."
-msgstr ""
+msgstr "ftpfs: Нев╕рна назва хоста."
 
 #: vfs/ftpfs.c:672
 msgid "ftpfs: Invalid host address."
-msgstr ""
+msgstr "ftpfs: Нев╕рна адреса хоста."
 
 #: vfs/ftpfs.c:697
 #, c-format
@@ -6060,7 +6073,7 @@ msgstr ""
 #: vfs/ftpfs.c:1598
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr ""
+msgstr "ftpfs: збереження файлу %d (%d)"
 
 #: vfs/ftpfs.c:2037 vfs/ftpfs.c:2052
 msgid ""
@@ -6070,7 +6083,7 @@ msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " MCFS "
-msgstr ""
+msgstr " MCFS "
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
@@ -6097,7 +6110,7 @@ msgstr ""
 
 #: vfs/mcfs.c:188
 msgid " MCFS Password required "
-msgstr ""
+msgstr " Необх╕дний пароль MCFS "
 
 #: vfs/mcfs.c:202
 msgid " Invalid password "
@@ -6105,11 +6118,11 @@ msgstr " Нев╕рний пароль "
 
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
-msgstr ""
+msgstr " Надто багато в╕дкритих з'╓днань "
 
 #: vfs/smbfs.c:115
 msgid "Domain:"
-msgstr ""
+msgstr "Домен:"
 
 #: vfs/smbfs.c:115
 msgid "Username:"
@@ -6181,9 +6194,9 @@ msgstr ""
 
 #: vfs/vfs.c:1824
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr ""
+msgstr "%s: %s: %s %3d%% (%ld байт перенесено)"
 
 #: vfs/vfs.c:1825
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr ""
+msgstr "%s: %s: %s %ld байт перенесено"
