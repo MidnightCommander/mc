@@ -674,17 +674,9 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 	ERRNOR (EISDIR, NULL);
 
     if (entry->inode->local_filename == NULL) {
-	char *local_filename, *suffix;
+	char *local_filename;
 
-	/* retain original filename as a suffix for a temporary filename */
-	suffix = g_strconcat ("-", entry->name, NULL);
-
-	if ((local_handle =
-	     mc_mkstemps (&local_filename, "extfs", suffix)) == -1) {
-	    /* fallback for the case if the filename is too long */
-	    local_handle = mc_mkstemps (&local_filename, "extfs", NULL);
-	}
-	g_free (suffix);
+	local_handle = vfs_mkstemps (&local_filename, "extfs", entry->name);
 
 	if (local_handle == -1)
 	    return NULL;

@@ -729,7 +729,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
 	ent = vfs_s_generate_entry (me, name, dir, 0755);
 	ino = ent->ino;
 	vfs_s_insert_entry (me, dir, ent);
-	tmp_handle = mc_mkstemps (&ino->localname, me->name, NULL);
+	tmp_handle = vfs_mkstemps (&ino->localname, me->name, name);
 	if (tmp_handle == -1)
 	    return NULL;
 	close (tmp_handle);
@@ -903,7 +903,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
     fh.ino = ino;
     fh.handle = -1;
 
-    handle = mc_mkstemps (&ino->localname, me->name, NULL);
+    handle = vfs_mkstemps (&ino->localname, me->name, ino->ent->name);
     if (handle == -1) {
 	me->verrno = errno;
 	goto error_4;

@@ -18,26 +18,9 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <signal.h>
-#include <string.h>
-#include <pwd.h>
-#include <sys/types.h>
-#include <netdb.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#ifdef HAVE_ARPA_INET_H
-#include <arpa/inet.h>
-#endif
-#include <errno.h>
-#include <pwd.h>
-#include <grp.h>
+#include <ctype.h>
 
 #include "utilvfs.h"
-
 #include "vfs.h"
 
 /* Extract the hostname and username from the path */
@@ -206,4 +189,46 @@ vfs_findgid (char *gname)
 	}
     }
     return savegid;
+}
+
+/*
+ * Create a temporary file with a name resembling the original.
+ * This is needed e.g. for local copies requested by extfs.
+ * Some extfs scripts may look at the extension.
+ * We also protect stupid scripts agains dangerous names.
+ */
+int
+vfs_mkstemps (char **pname, const char *prefix, const char *basename)
+{
+    const unsigned char *p;
+    char *suffix, *q;
+    int shift;
+    int fd;
+
+    /* Strip directories */
+    p = strrchr (basename, PATH_SEP);
+    if (!p)
+	p = basename;
+    else
+	p++;
+
+    /* Protection against very long names */
+    shift = strlen (p) - (MC_MAXPATHLEN - 16);
+    if (shift > 0)
+	p += shift;
+
+    suffix = g_malloc (MC_MAXPATHLEN);
+
+    /* Protection against unusual characters */
+    q = suffix;
+    while (*p && (*p != '#')) {
+	if (strchr (".-_@", *p) || isalnum (*p))
+	    *q++ = *p;
+	p++;
+    }
+    *q = 0;
+
+    fd = mc_mkstemps (pname, prefix, suffix);
+    g_free (suffix);
+    return fd;
 }

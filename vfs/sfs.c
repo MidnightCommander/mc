@@ -131,7 +131,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
 	cur = cur->next;
     }
 
-    handle = mc_mkstemps (&cache, "sfs", NULL);
+    handle = vfs_mkstemps (&cache, "sfs", name);
 
     if (handle == -1) {
 	return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";

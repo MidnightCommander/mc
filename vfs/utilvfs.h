@@ -16,5 +16,6 @@ char *vfs_split_url (const char *path, char **host, char **user, int *port,
 
 int vfs_finduid (char *name);
 int vfs_findgid (char *name);
+int vfs_mkstemps (char **pname, const char *prefix, const char *basename);
 
 #endif				/* !__UTILVFS_H */

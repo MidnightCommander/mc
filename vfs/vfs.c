@@ -1010,8 +1010,7 @@ mc_munmap (caddr_t addr, size_t len)
 static char *
 mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
 {
-    char *tmp, *suffix;
-    const char *basename;
+    char *tmp;
     int fdin, fdout, i;
     char buffer[8192];
     struct stat mystat;
@@ -1020,20 +1019,7 @@ mc_def_getlocalcopy (struct vfs_class *vfs, const char *filename)
     if (fdin == -1)
 	return NULL;
 
-    /* retain original filename as a suffix for a temporary filename */
-    basename = strrchr (filename, PATH_SEP);
-    if (!basename)
-	basename = filename;
-    else
-	basename++;
-
-    suffix = g_strconcat ("-", basename, NULL);
-
-    if ((fdout = mc_mkstemps (&tmp, "vfs", suffix)) == -1) {
-	/* fallback for the case if the filename is too long */
-	fdout = mc_mkstemps (&tmp, "vfs", NULL);
-    }
-    g_free (suffix);
+    fdout = vfs_mkstemps (&tmp, "vfs", filename);
 
     if (fdout == -1)
 	goto fail;
