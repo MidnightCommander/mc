@@ -562,10 +562,10 @@ static char *convert (char *s)
 
 #define whiteness(x) ((x) == '\t' || (x) == '\n' || (x) == ' ')
 
-static void get_args (char *l, char **args, int *argc)
+static int get_args (char *l, char **args, int args_size)
 {
-    int i;
-    for (i = 1; i < *argc; i++) {
+    int argc = 0;
+    while (argc < args_size) {
 	char *p = l;
 	while (*p && whiteness (*p))
 	    p++;
@@ -574,10 +574,10 @@ static void get_args (char *l, char **args, int *argc)
 	for (l = p + 1; *l && !whiteness (*l); l++);
 	if (*l)
 	    *l++ = '\0';
-	*args++ = convert (p);
+	args[argc++] = convert (p);
     }
-    *args = (char *) NULL;
-    *argc = i;
+    args[argc] = (char *) NULL;
+    return argc; 
 }
 
 #define free_args(x)
@@ -638,7 +638,7 @@ static FILE *open_include_file (const char *filename)
 
 /* returns line number on error */
 static int
-edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int argc)
+edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int args_size)
 {
     FILE *g = 0;
     char *fg, *bg;
@@ -650,6 +650,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int argc)
     struct context_rule **r, *c = 0;
     int num_words = -1, num_contexts = -1;
     int result = 0;
+    int argc;
     int i, j;
     int alloc_contexts = MAX_CONTEXTS,
     	alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
@@ -683,7 +684,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args, int argc)
 		break;
 	    }
 	}
-	get_args (l, args, &argc);
+	argc = get_args (l, args, args_size);
 	a = args + 1;
 	if (!args[0]) {
 	    /* do nothing */
@@ -981,7 +982,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 	syntax_g_free (l);
 	if (!read_one_line (&l, f))
 	    break;
-	get_args (l, args, &argc);
+	argc = get_args (l, args, 1023);	/* Final NULL */
 	if (!args[0])
 	    continue;
 /* Looking for `include ...` lines before first `file ...` ones */
@@ -1036,7 +1037,7 @@ edit_read_syntax_file (WEdit * edit, char **names, const char *syntax_file,
 		char *syntax_type;
 	      found_type:
 		syntax_type = args[2];
-		line_error = edit_read_syntax_rules (edit, g ? g : f, args, 1024);
+		line_error = edit_read_syntax_rules (edit, g ? g : f, args, 1023);
 		if (line_error) {
 		    if (!error_file_name)	/* an included file */
 			result = line + line_error;

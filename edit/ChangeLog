@@ -1,3 +1,9 @@
+2004-11-18  Andrew V. Samoilov  <andrew@email.zp.ua>
+
+	* syntax.c (get_args): Use in "args_size" argument instead of
+	in out "argc".  Return number of found entries.
+	Adjust all callers.
+
 2004-11-16  Andrew V. Samoilov  <andrew@email.zp.ua>
 
 	* syntax.c (get_args): Use "argc" to check "args" size.
