@@ -24,7 +24,7 @@
 #endif
 #ifndef minor
 # warning minor() is undefined. Device numbers will not be shown correctly.
-# define minor(devnum) (((devnum) & 0xff)
+# define minor(devnum) (((devnum) & 0xff))
 #endif
 #ifndef makedev
 # warning makedev() is undefined. Device numbers will not be shown correctly.

@@ -1,3 +1,7 @@
+2005-02-22  Roland Illig  <roland.illig@gmx.de>
+
+	* unixcompat.h: Added missing parenthesis to the minor() macro.
+
 2005-02-12  Roland Illig  <roland.illig@gmx.de>
 
 	* info.c (info_show_info): Casted st_mode to unsigned to avoid
