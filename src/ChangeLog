@@ -1,3 +1,12 @@
+Tue Sep 15 01:02:34 1998   Paul Sheer <psheer@obsidian.co.za>
+
+	* gtkedit: Directory added. This directory contains all the editor
+	code modified to work with gnome. Mcedit now works properly under
+	gnome with a slightly reduced set of features.
+
+	* gscreen.c gscreen.h screen.c: Modified to respond to F4 on a file
+	and start the new gtkedit internal editor.
+
 1998-09-14  Norbert Warmuth  <k3190@fh-sw.de>
 
         * file.c (move_dir_dir): Fixed severe bug reported by Andrew Pechenov
