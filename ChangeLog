@@ -1,3 +1,8 @@
+2000-03-01  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* gtkedit/editcmd.c (edit_replace_prompt): fix index for
+	the label text
+
 2000-02-25  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* gtkedit/syntax.c: treat *.ads as Ada source

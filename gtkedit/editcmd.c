@@ -1199,7 +1199,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	 0, 0, 0, 0, XV_WLAY_DONTCARE, 0},
 	{0}};
 
-    quick_widgets[4].text = catstrs (_ (" Replace with: "), replace_text, 0);
+    quick_widgets[5].text = catstrs (_ (" Replace with: "), replace_text, 0);
 
     {
 	QuickDialog Quick_input =
