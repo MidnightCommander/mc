@@ -262,7 +262,7 @@ unlink_entry (struct hotlist *entry)
 }
     
 #ifdef USE_VFS
-static void add_name_to_list (char *path)
+static void add_name_to_list (const char *path)
 {
     listbox_add_item (l_hotlist, 0, 0, path, 0);
 }
