@@ -18,7 +18,7 @@ audiofs_list()
     echo "-r--r--r-- 1 0 0 0 $DATE CDDB"
     cdparanoia -Q -d "$1" 2>&1 | grep '^[ 0-9][ 0-9][ 0-9]\.' | while read A B C
     do
-	A=`echo $A | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
+	A=`echo "$A" | sed -e 's/\.//' -e 's/^\(.\)$/0\1/'`
 	SIZE=`expr 44 + $B \* 2352`
 	echo "-r--r--r-- 1 0 0 $SIZE $DATE track-${A}.wav"
     done
@@ -26,7 +26,7 @@ audiofs_list()
 
 audiofs_copyout()
 {
-    if [ "$2" == "CDDB" ]; then
+    if [ x"$2" = x"CDDB" ]; then
         DISCID=`cd-discid "$1" | tr " " "+"`
 	if [ -z "$DISCID" ]; then
 	    exit 1

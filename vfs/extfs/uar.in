@@ -22,7 +22,7 @@ mcarfs_copyout ()
 
 mcarfs_copyin ()
 {
-    TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-uar.XXXXXX` || exit 1
+    TMPDIR=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-uar.XXXXXX"` || exit 1
     name=`basename "$2"`
     (cd "$TMPDIR" && cp -fp "$3" "$name" && $XAR r "$1" "$name")
     rm -rf "$TMPDIR"

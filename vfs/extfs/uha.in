@@ -31,14 +31,14 @@ mchafs_list ()
 
 mchafs_copyout ()
 {
-    TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-uha.XXXXXX` || exit 1
-    cd $TMPDIR
+    TMPDIR=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-uha.XXXXXX"` || exit 1
+    cd "$TMPDIR"
 
     $HA xyq "$1" "$2" >/dev/null
     cat "$2" > "$3"
 
     cd /
-    rm -rf $TMPDIR
+    rm -rf "$TMPDIR"
 }
 
 cmd="$1"

@@ -98,30 +98,30 @@ mc_lha_fs_copyin ()
    NAME2=`basename "$2"`; DIR2=${2%$NAME2}
    NAME3=`basename "$3"`; DIR3=${3%$NAME3}
 
-   cd ${DIR3}
+   cd "${DIR3}"
 
    ONE2=${2%%/*}
-   [ -n ${ONE2} ] || exit 1
-   [ -e ${ONE2} ] && exit 1
+   [ -n "${ONE2}" ] || exit 1
+   [ -e "${ONE2}" ] && exit 1
 
-   [ -e ${DIR2} ] || mkdir -p ${DIR2}
+   [ -e "${DIR2}" ] || mkdir -p "${DIR2}"
    ln "$3" "$2"       || exit 1
 
    $LHA_PUT "$1" "$2"
-   rm -r ${ONE2}
+   rm -r "${ONE2}"
 }
 
 # The 'run' command executive to run a command from within an archive
 
 mc_lha_fs_run()
 {
-   TMPDIR=`mktemp -d ${MC_TMPDIR:-/tmp}/mctmpdir-ulha.XXXXXX` || exit 1
-   trap "rm -rf $TMPDIR; exit 0" 1 2 3 4 15
+   TMPDIR=`mktemp -d "${MC_TMPDIR:-/tmp}/mctmpdir-ulha.XXXXXX"` || exit 1
+   trap "rm -rf \"$TMPDIR\"; exit 0" 1 2 3 4 15
    TMPCMD=$TMPDIR/run
    $LHA_GET "$1" "$2" > $TMPCMD  
-   chmod a+x $TMPCMD
-   $TMPCMD
-   rm -rf $TMPDIR
+   chmod a+x "$TMPCMD"
+   "$TMPCMD"
+   rm -rf "$TMPDIR"
 }
 
 

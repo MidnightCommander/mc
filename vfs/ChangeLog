@@ -1,3 +1,11 @@
+2004-11-10  Roland Illig  <roland.illig@gmx.de>
+
+	* audio.in (audiofs_list): Fixed quoting issue.
+	(audiofs_copyout): Likewise.
+	* uar.in (mcarfs_copyin): Likewise.
+	* uha.in (mchafs_copyout): Likewise.
+	* ulha.in (mc_lha_fs_run): Likewise.
+
 2004-11-08  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* vfs.c (vfs_prefix_to_class): Avoid last class (localfs) that would
