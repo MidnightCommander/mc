@@ -1,5 +1,9 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (do_view_init): Use non-blocking open() followed by
+	fstat() to avoid race conditions.  Unset O_NONBLOCK flag after
+	the open().
+
 	* cmd.c (mkdir_cmd): Don't try to create a directory with empty
 	name.
 
