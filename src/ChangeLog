@@ -1,3 +1,8 @@
+2002-07-20  Pavel Roskin  <proski@gnu.org>
+
+	* screen.c (panel_callback): Revert last change, it has bad side
+	effects on the subshell.
+
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
 	* dlg.c: Eliminate all useless x_* functions.
