@@ -26,73 +26,432 @@
 /* advanced chown */
 /* cd follows links */
 /* safe delete */
-static GtkWidget *
-file_display_pane (WPanel *panel)
+
+extern int vfs_timeout;
+extern int ftpfs_always_use_proxy;
+extern char* ftpfs_anonymous_passwd;
+extern int file_op_compute_totals;
+typedef enum
 {
-	/* This should configure the file options. */
-	/* Show Backup files */
-	/* show Hidden files */
-	/* mix files and directories */
-	/* shell patterns */
-	GtkWidget *vbox;
-	
-	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
-	return vbox;
-}
-static GtkWidget *
-confirmation_pane (WPanel *panel)
+        PROPERTY_NONE,
+        PROPERTY_BOOL,
+        PROPERTY_STRING,
+        PROPERTY_INT,
+        PROPERTY_CUSTOM
+} PropertyType_e;
+
+typedef struct
 {
-	/* Confirm... */
-	/*  delete file*/
-	/*  overwrite */
-	/*  execute */
-	/* Verbose Operations */
-	return gtk_frame_new (NULL);
+        gchar *label;
+        PropertyType_e type;
+        gpointer property_variable;
+        gpointer extra_data1;
+        gpointer extra_data2;
+        
+        GtkWidget *widget; 
+} Property; 
+
+typedef struct 
+{
+        gchar *title;
+        Property *props; 
+} PrefsPage;
+
+typedef struct 
+{
+        WPanel *panel;
+        GtkWidget *prop_box;
+        PrefsPage *prefs_pages;
+} PrefsDlg;
+
+
+#define PROPERTIES_DONE { NULL, PROPERTY_NONE, NULL, NULL, NULL, NULL }
+#define PREFSPAGES_DONE { NULL, NULL }
+
+typedef GtkWidget* (*CustomCreateFunc) (PrefsDlg *dlg, Property *prop);
+typedef void (*CustomApplyFunc) (PrefsDlg *dlg, Property *prop);
+
+static Property file_display_props [] = 
+{
+        {
+                N_("Show backup files"), PROPERTY_BOOL, 
+                &show_backups, NULL, NULL, NULL
+        },
+        {
+                N_("Show hidden files"), PROPERTY_BOOL, 
+                &show_dot_files, NULL, NULL, NULL
+        },
+        {
+                N_("Mix files and directories"), PROPERTY_BOOL, 
+                &mix_all_files, NULL, NULL, NULL
+        },
+        {
+                N_("Use shell patterns instead of regular expressions"), PROPERTY_BOOL,
+                &easy_patterns, NULL, NULL, NULL
+        },
+        PROPERTIES_DONE
+};
+
+static Property confirmation_props [] = 
+{
+        {
+                N_("Confirm when deleting file"), PROPERTY_BOOL, 
+                &confirm_delete, NULL, NULL, NULL
+        },
+        {
+                N_("Confirm when overwriting files"), PROPERTY_BOOL, 
+                &confirm_overwrite, NULL, NULL, NULL
+        },
+        {
+                N_("Confirm when executing files"), PROPERTY_BOOL, 
+                &confirm_execute, NULL, NULL, NULL
+        },
+        {
+                N_("Show progress while operations are being performed"), PROPERTY_BOOL, 
+                &verbose, NULL, NULL, NULL
+        },
+        PROPERTIES_DONE
+};
+
+static Property vfs_props [] =
+{
+        {
+                N_("VFS Timeout :"), PROPERTY_INT,
+                &vfs_timeout, N_("Seconds"), NULL, NULL
+        },
+        {
+                N_("Anonymous FTP password :"), PROPERTY_STRING,
+                &ftpfs_anonymous_passwd, NULL, NULL, NULL
+        },
+        {
+                N_("Always use FTP proxy"), PROPERTY_BOOL,
+                &ftpfs_always_use_proxy, NULL, NULL, NULL
+        },
+        PROPERTIES_DONE
+};
+  
+static Property caching_and_optimization_props [] = 
+{
+        {
+                N_("Fast directory reload"), PROPERTY_BOOL,
+                &fast_reload, NULL, NULL, NULL
+        },
+        {
+                N_("Compute totals before copying files"), PROPERTY_BOOL,
+                &file_op_compute_totals, NULL, NULL, NULL
+        },
+        {
+                N_("FTP directory cache timeout :"), PROPERTY_INT,
+                &ftpfs_directory_timeout, N_("Seconds"), NULL, NULL
+        },
+        PROPERTIES_DONE
+};
+
+static PrefsPage prefs_pages [] =
+{
+        {
+                N_("File display"),
+                file_display_props
+        }, 
+        {
+                N_("Confirmation"),
+                confirmation_props
+        },
+        {
+                N_("VFS"),
+                vfs_props
+        },
+        {
+                N_("Caching"),
+                caching_and_optimization_props
+        },
+        PREFSPAGES_DONE
+};
+
+static void 
+apply_changes_bool (PrefsDlg *dlg, Property *cur_prop)
+{
+        GtkWidget *checkbox;
+        
+        checkbox = cur_prop->widget;
+       
+        if (GTK_TOGGLE_BUTTON (checkbox)->active) 
+                *( (int*) cur_prop->property_variable) = TRUE;
+        else 
+                *( (int*) cur_prop->property_variable) = FALSE;
 }
-static GtkWidget *
-custom_view_pane (WPanel *panel)
+
+static void
+apply_changes_string (PrefsDlg *dlg, Property *cur_prop)
+{
+        GtkWidget *entry;
+        gchar *text;
+
+        entry = cur_prop->widget;
+        
+        text = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))));
+
+        *( (char**) cur_prop->property_variable) = g_strdup (text);
+}
+
+static void
+apply_changes_int (PrefsDlg *dlg, Property *cur_prop)
+{
+        GtkWidget *entry;
+        gdouble val;
+	gchar *num;
+
+        entry = cur_prop->widget;
+        num = gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))));
+	sscanf(num,"%lg",&val);
+
+        *( (int*) cur_prop->property_variable) = (gint) val;
+}
+
+static void 
+apply_changes_custom (PrefsDlg *dlg, Property *cur_prop)
+{
+        CustomApplyFunc apply = (CustomApplyFunc) cur_prop->extra_data2;
+
+        apply (dlg, cur_prop);
+}
+
+static void
+apply_page_changes (PrefsDlg *dlg, gint pagenum)
+{
+        Property *props;
+        Property cur_prop;
+        gint i;
+
+        props = dlg->prefs_pages [pagenum].props;
+        i = 0;
+        cur_prop = props [i];
+        while (cur_prop.label != NULL) {
+                switch (cur_prop.type) {
+                case PROPERTY_NONE :
+                        g_warning ("Invalid case in gprefs.c:apply_page_changes");
+                        break;
+                case PROPERTY_BOOL : 
+                        apply_changes_bool (dlg, &cur_prop);
+                        break;
+                case PROPERTY_STRING :
+                        apply_changes_string (dlg, &cur_prop);
+                        break;
+                case PROPERTY_INT :
+                        apply_changes_int (dlg, &cur_prop);
+                        break;
+                case PROPERTY_CUSTOM :
+                        apply_changes_custom (dlg, &cur_prop);
+                        break;
+                }
+		cur_prop = props[++i];
+        }
+}
+
+static void
+apply_callback (GtkWidget *prop_box, gint pagenum, PrefsDlg *dlg) 
+{
+        if (pagenum != -1) {
+                apply_page_changes (dlg, pagenum);
+        } else {
+                save_setup ();
+        }
+}
+
+static void 
+changed_callback (GtkWidget *widget, PrefsDlg *dlg)
+{
+        if (dlg->prop_box)
+                gnome_property_box_changed (GNOME_PROPERTY_BOX (dlg->prop_box));
+}
+
+static GtkWidget*
+create_prop_bool (PrefsDlg *dlg, Property *prop)
+{
+        GtkWidget *checkbox;
+        
+        checkbox = gtk_check_button_new_with_label (prop->label);
+        
+        if (*((int*) prop->property_variable)) {
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
+                                              TRUE);
+        } else {
+                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (checkbox),
+                                              FALSE);
+        }
+
+        gtk_signal_connect (GTK_OBJECT (checkbox), "clicked", 
+                            changed_callback, (gpointer) dlg);
+
+        prop->widget = checkbox;
+	gtk_widget_show_all (checkbox);
+        return checkbox;
+}
+
+static GtkWidget*
+create_prop_string (PrefsDlg *dlg, Property *prop)
+{
+        GtkWidget *entry;
+        GtkWidget *gtk_entry;
+        GtkWidget *label;
+        GtkWidget *hbox;
+        gint max_length;
+
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        
+        label = gtk_label_new (prop->label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, 
+                            FALSE, FALSE, 0);
+
+        entry = gnome_entry_new (prop->label);
+        gtk_entry = gnome_entry_gtk_entry (GNOME_ENTRY (entry));
+
+        max_length = (int)prop->extra_data1;
+        if (max_length != 0) {
+                gtk_entry_set_max_length (GTK_ENTRY (gtk_entry),
+                                          max_length);
+        }
+
+        gtk_entry_set_text (GTK_ENTRY (gtk_entry),
+                            (gchar*) *( (gchar**) prop->property_variable));
+        gtk_signal_connect_while_alive (GTK_OBJECT (gtk_entry), 
+                                        "changed", 
+                                        GTK_SIGNAL_FUNC (changed_callback),
+                                        (gpointer) dlg,
+                                        GTK_OBJECT (dlg->prop_box));
+           
+        gtk_box_pack_start (GTK_BOX (hbox), entry, 
+                            FALSE, FALSE, 0);
+        
+        prop->widget = entry;
+	gtk_widget_show_all (hbox);
+        return hbox;
+}
+   
+static GtkWidget*
+create_prop_int (PrefsDlg *dlg, Property *prop)
+{
+        GtkWidget *entry;
+        GtkWidget *label;
+        GtkWidget *hbox;
+        gchar buffer [10];
+
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        
+        label = gtk_label_new (prop->label);
+        gtk_box_pack_start (GTK_BOX (hbox), label, 
+                            FALSE, FALSE, 0);
+
+        entry = gnome_entry_new (prop->label);
+
+        snprintf (buffer, 9, "%d", *( (int*) prop->property_variable));
+
+        gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))),
+                            buffer);
+        
+        gtk_signal_connect_while_alive (GTK_OBJECT (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), 
+                                        "changed", 
+                                        GTK_SIGNAL_FUNC (changed_callback),
+                                        (gpointer) dlg,
+                                        GTK_OBJECT (dlg->prop_box));
+        
+        gtk_box_pack_start (GTK_BOX (hbox), entry, 
+                            FALSE, FALSE, 0);
+	if (prop->extra_data1) {
+		label = gtk_label_new ((gchar *)prop->extra_data1);
+		gtk_box_pack_start (GTK_BOX (hbox), label, 
+				    FALSE, FALSE, 0);
+	}
+        
+        prop->widget = entry;
+	gtk_widget_show_all (hbox);
+        return hbox;
+}     
+
+static GtkWidget* 
+create_prop_custom (PrefsDlg *dlg, Property *prop)
+{
+        CustomCreateFunc create = (CustomCreateFunc) prop->extra_data1;
+        
+        return create (dlg, prop);
+}
+
+static GtkWidget*
+create_prop_widget (PrefsDlg *dlg, Property *prop)
+{
+        switch (prop->type) {
+        case PROPERTY_NONE :
+                g_warning ("Invalid case in gprefs.c - create_prop_widget");
+                break;
+        case PROPERTY_BOOL :
+                return create_prop_bool (dlg, prop);
+        case PROPERTY_STRING :
+                return create_prop_string (dlg, prop);
+        case PROPERTY_INT :
+                return create_prop_int (dlg, prop);
+        case PROPERTY_CUSTOM :
+                return create_prop_custom (dlg, prop);
+                break;
+        }
+        return NULL;
+}
+
+static void
+create_page (PrefsDlg *dlg, PrefsPage *page)
 { 
-	return gtk_frame_new (NULL);
+        GtkWidget *vbox;
+        GtkWidget *prop_widget;
+        Property *cur_prop;
+        gint i;
+
+        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+	gtk_widget_show (vbox);
+        i = 0;
+        cur_prop = &(page->props [i]);
+        while (cur_prop->label != NULL) {
+                cur_prop = &(page->props [i]);
+                prop_widget = create_prop_widget (dlg, cur_prop);
+                gtk_box_pack_start (GTK_BOX (vbox), prop_widget, 
+                                    FALSE, FALSE, 0);
+                i++;
+                cur_prop = &(page->props [i]);
+        }
+
+        gnome_property_box_append_page (GNOME_PROPERTY_BOX (dlg->prop_box),
+                                        vbox,
+                                        gtk_label_new (page->title));
 }
-static GtkWidget *
-vfs_pane (WPanel *panel)
+
+static void
+create_prop_box (PrefsDlg *dlg)
 {
-	/* VFS timeout */
-	/* Anon ftp password */
-	/* Always use ftp proxy: */
-	return gtk_frame_new (NULL);
+        gint i;
+        PrefsPage *cur_page;
+        
+        dlg->prop_box = gnome_property_box_new ();
+
+        i = 0;
+        cur_page = &(dlg->prefs_pages [i]);
+        while (cur_page->title != NULL) {
+                create_page (dlg, cur_page);
+                i++;
+                cur_page = &(dlg->prefs_pages [i]);
+        }
+        
+        gtk_signal_connect (GTK_OBJECT (dlg->prop_box), "apply",
+                            GTK_SIGNAL_FUNC (apply_callback), dlg);
 }
-static GtkWidget *
-caching_and_optimizations_pane (WPanel *panel)
-{
-	/* Fast dir reload */
-	/* Compute totals */
-	/* ftpfs directory cache timeout */
-	return gtk_frame_new (NULL);
-}
+                
 void
 gnome_configure_box (GtkWidget *widget, WPanel *panel)
 {
-	GtkWidget *prefs_dlg;
+        static PrefsDlg dlg;
 
-	prefs_dlg = gnome_property_box_new ();
-	/* do we want a generic page? */
-	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prefs_dlg),
-					file_display_pane (panel),
-					gtk_label_new (_("File Display")));
-	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prefs_dlg),
-					confirmation_pane (panel),
-					gtk_label_new (_("Confirmation")));
-	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prefs_dlg),
-					custom_view_pane (panel),
-					gtk_label_new (_("Custom View")));
-	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prefs_dlg),
-					vfs_pane (panel),
-					gtk_label_new (_("Caching and Optimizations")));
-	gnome_property_box_append_page (GNOME_PROPERTY_BOX (prefs_dlg),
-					caching_and_optimizations_pane (panel),
-					gtk_label_new (_("VFS")));
-	gtk_widget_show_all (GNOME_PROPERTY_BOX (prefs_dlg)->notebook);
-	gnome_dialog_run_and_close (GNOME_DIALOG (prefs_dlg));
+        dlg.panel = panel;
+        dlg.prefs_pages = prefs_pages;
+        
+        create_prop_box (&dlg);
+
+        gtk_widget_show (dlg.prop_box);
 }
-

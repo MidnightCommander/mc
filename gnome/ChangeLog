@@ -1,3 +1,9 @@
+1999-01-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gprefs.c: applied a heavily modified patch by Dave Camp
+	<campd@oit.edu>  The preference box now works.
+
+
 1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_construct): And the GTK+ people broke the

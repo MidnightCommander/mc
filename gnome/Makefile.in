@@ -173,8 +173,9 @@ EXTRA_DIST = gnome.TODO layout gmc.gnorba mc.keys.in.in
 
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
-	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS)
-
+	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) $(DISTGNOME_NEW)
+DISTGNOME_NEW = \
+	gimp.image.desktop application.x-gnumeric.desktop
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 
