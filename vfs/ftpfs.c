@@ -406,39 +406,38 @@ changetype (vfs *me, vfs_s_super *super, int binary)
 }
 
 /* This routine logs the user in */
-static int 
+static int
 login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 {
     char *pass;
     char *op;
     char *name;			/* login user name */
-    int  anon = 0;
+    int anon = 0;
     char reply_string[BUF_MEDIUM];
 
-    SUP.isbinary = TYPE_UNKNOWN;    
+    SUP.isbinary = TYPE_UNKNOWN;
     if (netrcpass)
-        op = g_strdup (netrcpass);
+	op = g_strdup (netrcpass);
     else {
-        if (!strcmp (SUP.user, "anonymous") || 
-            !strcmp (SUP.user, "ftp")) {
+	if (!strcmp (SUP.user, "anonymous") || !strcmp (SUP.user, "ftp")) {
 	    if (!ftpfs_anonymous_passwd)
-	        ftpfs_init_passwd();
+		ftpfs_init_passwd ();
 	    op = g_strdup (ftpfs_anonymous_passwd);
 	    anon = 1;
-         } else {
-            char *p;
+	} else {
+	    char *p;
 
-	    if (!SUP.password){
-		p = g_strconcat (_(" FTP: Password required for "), SUP.user, 
-				  " ", NULL);
+	    if (!SUP.password) {
+		p = g_strconcat (_(" FTP: Password required for "),
+				 SUP.user, " ", NULL);
 		op = vfs_get_password (p);
 		g_free (p);
 		if (op == NULL)
-			ERRNOR (EPERM, 0);
+		    ERRNOR (EPERM, 0);
 		SUP.password = g_strdup (op);
 	    } else
 		op = g_strdup (SUP.password);
-        }
+	}
     }
 
     if (!anon || logfile)
@@ -447,30 +446,50 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 	pass = g_strconcat ("-", op, NULL);
 	wipe_password (op);
     }
-    
-    /* Proxy server accepts: username@host-we-want-to-connect*/
-    if (SUP.proxy){
-	name = g_strconcat (SUP.user, "@", 
-		SUP.host[0] == '!' ? SUP.host+1 : SUP.host, NULL);
-    } else 
+
+    /* Proxy server accepts: username@host-we-want-to-connect */
+    if (SUP.proxy) {
+	name =
+	    g_strconcat (SUP.user, "@",
+			 SUP.host[0] == '!' ? SUP.host + 1 : SUP.host,
+			 NULL);
+    } else
 	name = g_strdup (SUP.user);
-    
-    if (get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1) == COMPLETE) {
+
+    if (get_reply (me, SUP.sock, reply_string, sizeof (reply_string) - 1)
+	== COMPLETE) {
 	g_strup (reply_string);
 	SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
 	if (logfile) {
-	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n", SUP.remote_is_amiga);
+	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n",
+		     SUP.remote_is_amiga);
 	    fflush (logfile);
 	}
 
 	print_vfs_message (_("ftpfs: sending login name"));
 	code = command (me, super, WAIT_REPLY, "USER %s", name);
 
-	switch (code){
+	switch (code) {
 	case CONTINUE:
 	    print_vfs_message (_("ftpfs: sending user password"));
-            if (command (me, super, WAIT_REPLY, "PASS %s", pass) != COMPLETE)
+	    code = command (me, super, WAIT_REPLY, "PASS %s", pass);
+	    if (code == CONTINUE) {
+		char *p;
+
+		p = g_strdup_printf (_
+				     ("FTP: Account required for user %s"),
+				     SUP.user);
+		op = input_dialog (p, _("Account:"), "");
+		g_free (p);
+		if (op == NULL)
+		    ERRNOR (EPERM, 0);
+		print_vfs_message (_("ftpfs: sending user account"));
+		code = command (me, super, WAIT_REPLY, "ACCT %s", op);
+		g_free (op);
+	    }
+	    if (code != COMPLETE)
 		break;
+	    /* fall through */
 
 	case COMPLETE:
 	    print_vfs_message (_("ftpfs: logged in"));
@@ -484,12 +503,13 @@ login_server (vfs *me, vfs_s_super *super, const char *netrcpass)
 	    if (SUP.password)
 		wipe_password (SUP.password);
 	    SUP.password = 0;
-	    
+
 	    goto login_fail;
 	}
     }
-    message_2s (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "), SUP.user);
-login_fail:
+    message_2s (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "),
+		SUP.user);
+  login_fail:
     wipe_password (pass);
     g_free (name);
     ERRNOR (EPERM, 0);

@@ -1,3 +1,8 @@
+2003-03-14  Lorinczy Zsigmond  <lzsiga@mail.ahiv.hu>
+
+	* ftpfs.c (login_server): Ask user for account if the server
+	asks for it.
+
 2003-03-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/libsmb/clientgen.c (cli_session_setup): Convert
