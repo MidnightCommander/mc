@@ -2209,7 +2209,7 @@ init_sigchld (void)
 #endif /* _OS_NT, UNIX */
 
 static void
-print_mc_usage (void)
+print_mc_usage (FILE *stream)
 {
     const char * const * ptr;
     const char * const usage [] = {
@@ -2265,7 +2265,7 @@ print_mc_usage (void)
     version (0);
     
     for (ptr = usage; *ptr; ptr++)
-	fputs (_(*ptr), stderr);
+	fputs (_(*ptr), stream);
 }
 
 static void
@@ -2285,7 +2285,7 @@ print_color_usage (void)
 	     "Colors:\n"
 	     "   black, gray, red, brightred, green, brightgreen, brown,\n"
 	     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-	     "   brightcyan, lightgray and white\n\n"), stderr);
+	     "   brightcyan, lightgray and white\n\n"), stdout);
 }
 
 static void
@@ -2334,7 +2334,7 @@ process_args (int c, const char *option_arg)
 #endif
 
     case 'm':
-	fprintf (stderr, _("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"));
+	fputs (_("Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"), stderr);
 	finish_program = 1;
 	break;
 
@@ -2367,7 +2367,7 @@ process_args (int c, const char *option_arg)
 	break;
 	    
     case 'h':
-	print_mc_usage ();
+	print_mc_usage (stdout);
 	finish_program = 1;
     }
 }
@@ -2462,7 +2462,7 @@ handle_args (int argc, char *argv [])
     }
 
     if (c < -1){
-	print_mc_usage ();
+	print_mc_usage (stderr);
 	fprintf(stderr, "%s: %s\n", 
 		poptBadOption (ctx, POPT_BADOPTION_NOALIAS), 
 		poptStrerror (c));

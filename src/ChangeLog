@@ -1,3 +1,12 @@
+2002-03-20  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* textconf.c (version): Write to stdout.
+	* main.c (print_mc_usage): Add "stream" parameter to specify
+	file stream.
+	(process_args): Use print_mc_usage() with stdout as stream.
+	(handle_args): Use print_mc_usage() with stderr as stream.
+	(print_color_usage): Write to stdout.
+
 2002-03-18  Pavel Roskin  <proski@gnu.org>
 
 	* eregex.h: Update from glibc-2.2.5.

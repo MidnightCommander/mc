@@ -96,10 +96,10 @@ version (int verbose)
 {
     int i;
 
-    fprintf (stderr, _("GNU Midnight Commander %s\n"), VERSION);
+    fprintf (stdout, _("GNU Midnight Commander %s\n"), VERSION);
     if (!verbose)
 	return;
     
     for (i = 0; features [i]; i++) 
-	fputs (_(features [i]), stderr);
+	fputs (_(features [i]), stdout);
 }
