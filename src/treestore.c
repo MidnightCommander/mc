@@ -58,7 +58,8 @@ tree_store_dirty(int state)
     ts.dirty = state;
 }
 
-/* Returns number of common characters */
+/* Returns number of common characters; s1[] and s2[] must differ in
+ * at least one character, or the behaviour will be undefined. */
 static int
 str_common(const char *s1, const char *s2)
 {
