@@ -1,3 +1,9 @@
+2001-05-31  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Add charsets.c, charsets.h, selcodepage.c and
+	selcodepage.h. Compile them if the charset support is enabled.
+	Distribute them always.
+
 2001-05-30  Pavel Roskin  <proski@gnu.org>
 
 	* charsets.c: New file for charset conversion support.
