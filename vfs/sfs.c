@@ -86,7 +86,7 @@ sfs_vfmake (struct vfs_class *me, const char *name, char *cache)
     g_free (pname);
 
 #define COPY_CHAR \
-    if (t-pad>sizeof(pad)) { \
+    if ((size_t) (t-pad) > sizeof(pad)) { \
 	g_free (pqname); \
 	return -1; \
     } \
