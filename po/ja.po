@@ -3,11 +3,14 @@
 # Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1999.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 1999.
 # Akira TAGOH <at@ff.iij4u.or.jp>, 2000.
+#. Not essential to translate
+#: gtkedit/edit.c:2768 gtkedit/editcmd.c:2880 gtkedit/editcmd.c:2886
+#: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc CVS-20000420\n"
-"POT-Creation-Date: 2000-04-20 23:31+0900\n"
-"PO-Revision-Date: 2000-04-20 23:37+0900\n"
+"Project-Id-Version: mc CVS-20000510\n"
+"POT-Creation-Date: 2000-05-10 18:12+0900\n"
+"PO-Revision-Date: 2000-05-10 21:35+0900\n"
 "Last-Translator: Akira TAGOH <at@ff.iij4u.or.jp>\n"
 "Language-Team: Japanese <translation@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -15,25 +18,25 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>\n"
 
-#: edit/edit_key_translator.c:124
+#: edit/edit_key_translator.c:126
 msgid " Emacs key: "
 msgstr " Emacsキー: "
 
-#: edit/edit_key_translator.c:136 edit/edit_key_translator.c:151
+#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
 msgid " Execute Macro "
 msgstr " マクロを実行 "
 
 #. Input line for a single key press follows the ':'
-#: edit/edit_key_translator.c:136 edit/edit_key_translator.c:151
+#: edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
 #: gtkedit/editcmd.c:760 gtkedit/editcmd.c:769
 msgid " Press macro hotkey: "
 msgstr " マクロホットキーを押して下さい: "
 
-#: edit/edit_key_translator.c:147
+#: edit/edit_key_translator.c:149
 msgid " Insert Literal "
 msgstr " 文字を入力してください "
 
-#: edit/edit_key_translator.c:147
+#: edit/edit_key_translator.c:149
 msgid " Press any key: "
 msgstr " キーを押してください: "
 
@@ -268,7 +271,7 @@ msgstr ""
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "パネルで選択するファイルのフィルタの正規表現を入力してください"
 
-#: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:917 src/cmd.c:540 src/cmd.c:591
 msgid "  Malformed regular expression  "
 msgstr "  おかしな正規表現です  "
 
@@ -349,28 +352,28 @@ msgstr "表示横幅"
 msgid "Custom View"
 msgstr "カスタム表示"
 
-#: gnome/gdesktop.c:532 gnome/gmount.c:382
+#: gnome/gdesktop.c:622 gnome/gmount.c:382
 msgid "Warning"
 msgstr "警告"
 
-#: gnome/gdesktop.c:533
+#: gnome/gdesktop.c:623
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "%sを開けません; デスクトップアイコンがありません"
 
-#: gnome/gdesktop.c:1205
+#: gnome/gdesktop.c:1298
 msgid "While running the mount/umount command"
 msgstr "mount/umountコマンド実行中"
 
-#: gnome/gdesktop.c:1274
+#: gnome/gdesktop.c:1367
 msgid "While running the eject command"
 msgstr "ejectコマンド実行中"
 
-#: gnome/gdesktop.c:1458 gnome/gicon.c:282 gnome/gtools.c:46
+#: gnome/gdesktop.c:1551 gnome/gicon.c:282 gnome/gtools.c:46
 msgid "Error"
 msgstr "エラー"
 
-#: gnome/gdesktop.c:2617
+#: gnome/gdesktop.c:2775
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -384,84 +387,84 @@ msgstr ""
 "\n"
 "背景を設定できません."
 
-#: gnome/gdesktop.c:2640 gnome/glayout.c:362
+#: gnome/gdesktop.c:2798 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "端末 (_T)"
 
-#: gnome/gdesktop.c:2640 gnome/glayout.c:363
+#: gnome/gdesktop.c:2798 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "現在のディレクトリで新規端末を起動"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2642 gnome/glayout.c:365
+#: gnome/gdesktop.c:2800 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "ディレクトリ (_D)..."
 
-#: gnome/gdesktop.c:2642 gnome/glayout.c:366
+#: gnome/gdesktop.c:2800 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "新規ディレクトリの作成"
 
-#: gnome/gdesktop.c:2643
+#: gnome/gdesktop.c:2801
 msgid "URL L_ink..."
 msgstr "URLリンク (_L)..."
 
-#: gnome/gdesktop.c:2643
+#: gnome/gdesktop.c:2801
 msgid "Creates a new URL link"
 msgstr "新規URLリンクを作成する"
 
-#: gnome/gdesktop.c:2644
+#: gnome/gdesktop.c:2802
 msgid "_Launcher..."
 msgstr "ランチャ (_L)..."
 
-#: gnome/gdesktop.c:2644
+#: gnome/gdesktop.c:2802
 msgid "Creates a new launcher"
 msgstr "新規ランチャをこの場所で作成する"
 
-#: gnome/gdesktop.c:2650
+#: gnome/gdesktop.c:2808
 msgid "By _Name"
 msgstr "名前 (_N)"
 
-#: gnome/gdesktop.c:2651
+#: gnome/gdesktop.c:2809
 msgid "By File _Type"
 msgstr "ファイルタイプ (_T)"
 
-#: gnome/gdesktop.c:2652
+#: gnome/gdesktop.c:2810
 msgid "By _Size"
 msgstr "サイズ (_S)"
 
-#: gnome/gdesktop.c:2653
+#: gnome/gdesktop.c:2811
 msgid "By Time Last _Accessed"
 msgstr "最終アクセス時刻 (_A)"
 
-#: gnome/gdesktop.c:2654
+#: gnome/gdesktop.c:2812
 msgid "By Time Last _Modified"
 msgstr "最終更新時刻 (_M)"
 
-#: gnome/gdesktop.c:2655
+#: gnome/gdesktop.c:2813
 msgid "By Time Last _Changed"
 msgstr "最終変更時刻 (_C)"
 
-#: gnome/gdesktop.c:2663 gnome/glayout.c:462
+#: gnome/gdesktop.c:2821 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "アイコンの整列 (_A)"
 
-#: gnome/gdesktop.c:2664
+#: gnome/gdesktop.c:2822
 msgid "Create _New Window"
 msgstr "新規ウィンドウの作成 (_N)"
 
-#: gnome/gdesktop.c:2666 gnome/glayout.c:464
+#: gnome/gdesktop.c:2824 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "デスクトップディレクトリを再スキャン (_D)"
 
-#: gnome/gdesktop.c:2667 gnome/glayout.c:465
+#: gnome/gdesktop.c:2825 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "デバイスを再スキャン (_V)"
 
-#: gnome/gdesktop.c:2668 gnome/glayout.c:466
+#: gnome/gdesktop.c:2826 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "デフォルトのアイコンを再作成 (_I)"
 
-#: gnome/gdesktop.c:2670
+#: gnome/gdesktop.c:2828
 msgid "Configure _Background Image"
 msgstr "背景画像を設定 (_B)"
 
@@ -558,7 +561,7 @@ msgid "Replace it?"
 msgstr "上書きしますか?"
 
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1250
-#: src/file.c:802 src/screen.c:2398 src/screen.c:2428 src/tree.c:1014
+#: src/file.c:802 src/screen.c:2400 src/screen.c:2430 src/tree.c:1014
 msgid "Copy"
 msgstr "コピー"
 
@@ -658,7 +661,7 @@ msgstr "終了しました"
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1834
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1833
 msgid "Password:"
 msgstr "パスワード:"
 
@@ -1092,6 +1095,12 @@ msgstr "ファイルサイズ: N/A"
 msgid "File Created on: "
 msgstr "ファイル作成日付: "
 
+#: gnome/gnome-file-property-dialog.c:281
+#: gnome/gnome-file-property-dialog.c:290
+#: gnome/gnome-file-property-dialog.c:299
+msgid "%a, %b %d %Y,  %I:%M:%S %p"
+msgstr "%a, %b %d %Y,  %I:%M:%S %p"
+
 #: gnome/gnome-file-property-dialog.c:286
 msgid "Last Modified on: "
 msgstr "最終更新日付: "
@@ -1119,7 +1128,7 @@ msgstr "標準で用意されたドロップ処理を行う"
 
 #: gnome/gnome-file-property-dialog.c:413
 #: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:203
-#: src/screen.c:2396 src/screen.c:2426
+#: src/screen.c:2398 src/screen.c:2428
 msgid "View"
 msgstr "表示"
 
@@ -1149,7 +1158,7 @@ msgid "Use default View action"
 msgstr "標準で用意された表示処理を行う"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:205
-#: src/screen.c:2397 src/screen.c:2427 src/view.c:2081
+#: src/screen.c:2399 src/screen.c:2429 src/view.c:2081
 msgid "Edit"
 msgstr "編集"
 
@@ -1305,8 +1314,8 @@ msgstr "フィルタせずに表示"
 msgid "Copy..."
 msgstr "コピー..."
 
-#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1143 src/screen.c:2401
-#: src/screen.c:2431
+#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1143 src/screen.c:2403
+#: src/screen.c:2433
 msgid "Delete"
 msgstr "削除"
 
@@ -1554,8 +1563,8 @@ msgid "Location:"
 msgstr "場所:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:386 gtkedit/editcmd.c:1234
-#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:2983 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:386 gtkedit/editcmd.c:1235
+#: gtkedit/editcmd.c:1320 gtkedit/editcmd.c:3027 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
@@ -1701,47 +1710,56 @@ msgid "Close windows whose directories cannot be reached"
 msgstr "アクセスできないディレクトリのウインドウを閉じる"
 
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:145 gtkedit/edit.c:314 gtkedit/edit.c:319 gtkedit/edit.c:333
-#: gtkedit/edit.c:337 gtkedit/edit.c:369 gtkedit/edit.c:375 gtkedit/edit.c:382
-#: gtkedit/edit.c:389 gtkedit/edit.c:395 gtkedit/editcmd.c:298
-#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2030 gtkedit/editwidget.c:1023
+#: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
+#: gtkedit/edit.c:341 gtkedit/edit.c:373 gtkedit/edit.c:379 gtkedit/edit.c:386
+#: gtkedit/edit.c:393 gtkedit/edit.c:399 gtkedit/editcmd.c:298
+#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2031 gtkedit/editwidget.c:1023
 #: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " エラー "
 
-#: gtkedit/edit.c:145 gtkedit/edit.c:337 gtkedit/edit.c:375
+#: gtkedit/edit.c:149 gtkedit/edit.c:341 gtkedit/edit.c:379
 msgid " Failed trying to open file for reading: "
 msgstr "読み出しのためファイルを開くことに失敗しました: "
 
-#: gtkedit/edit.c:314
+#: gtkedit/edit.c:318
 msgid " Error reading from pipe: "
 msgstr " パイプからの読み込みエラー: "
 
-#: gtkedit/edit.c:319
+#: gtkedit/edit.c:323
 msgid " Failed trying to open pipe for reading: "
 msgstr "読み込むためのパイプを開く試みが失敗しました: "
 
-#: gtkedit/edit.c:333
+#: gtkedit/edit.c:337
 msgid " Error reading file: "
 msgstr " ファイル読み込みエラー: "
 
-#: gtkedit/edit.c:382
+#: gtkedit/edit.c:386
 msgid " Cannot get size/permissions info on file: "
 msgstr "ファイルの大きさ・パーミッションの情報を取得できませんでした: "
 
-#: gtkedit/edit.c:389
+#: gtkedit/edit.c:393
 msgid " Not an ordinary file: "
 msgstr "普通のファイルではありません: "
 
-#: gtkedit/edit.c:395
+#: gtkedit/edit.c:399
 msgid " File is too large: "
 msgstr "ファイルが大きすぎます: "
 
-#: gtkedit/edit.c:396
+#: gtkedit/edit.c:400
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr "edit.h の MAXBUF を増やしてエディタを再コンパイルしてください"
+
+#: gtkedit/edit.c:2571
+msgid "User menu avalaible only in mcedit invoked from mc"
+msgstr "mc から呼び出される mcedit でだけ利用可能なユーザメニューです"
+
+#. Not essential to translate
+#: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
+msgid "Error trying to stat file:"
+msgstr " ファイルの stat 試行中のエラー:"
 
 #: gtkedit/editcmd.c:298
 msgid " Error writing to pipe: "
@@ -1764,11 +1782,11 @@ msgid "Do backups -->"
 msgstr "バックアップする →"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1188 gtkedit/editcmd.c:1232
-#: gtkedit/editcmd.c:1317 gtkedit/editcmd.c:2981 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1189 gtkedit/editcmd.c:1233
+#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:3025 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
-#: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
+#: src/chmod.c:114 src/chown.c:79 src/cmd.c:858 src/filegui.c:822
 #: src/find.c:171 src/hotlist.c:138 src/hotlist.c:814 src/hotlist.c:911
 #: src/layout.c:371 src/learn.c:59 src/option.c:144 src/panelize.c:86
 #: src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
@@ -1791,7 +1809,7 @@ msgstr " 別名で保存 "
 
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:539 gtkedit/editcmd.c:862 gtkedit/editcmd.c:887
-#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1135 src/ext.c:315 src/file.c:619
+#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1136 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:708 src/screen.c:1451 src/screen.c:2128
 #: src/screen.c:2178 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
@@ -1809,7 +1827,7 @@ msgstr "上書き"
 
 #: gtkedit/editcmd.c:542 gtkedit/editcmd.c:609 gtkedit/editcmd.c:836
 #: gtkedit/editcmd.c:862 gtkedit/editcmd.c:887 gtkedit/editcmd.c:1038
-#: gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1671
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -1817,7 +1835,7 @@ msgstr "キャンセル"
 msgid " Save as "
 msgstr " 別名で保存 "
 
-#: gtkedit/editcmd.c:561 gtkedit/editcmd.c:2770
+#: gtkedit/editcmd.c:561 gtkedit/editcmd.c:2771
 msgid " Error trying to save file. "
 msgstr "ファイルの保存時にエラーが発生しました"
 
@@ -1900,105 +1918,105 @@ msgstr "継続"
 msgid " Load "
 msgstr " 読み込み "
 
-#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1135
+#: gtkedit/editcmd.c:1038 gtkedit/editcmd.c:1136
 msgid " Block is large, you may not be able to undo this action. "
 msgstr "大きなブロックです。この操作はやり直せないかもしれません"
 
-#: gtkedit/editcmd.c:1135
+#: gtkedit/editcmd.c:1136
 msgid " Continue "
 msgstr " 継続 "
 
-#: gtkedit/editcmd.c:1135
+#: gtkedit/editcmd.c:1136
 msgid " Cancel "
 msgstr " キャンセル "
 
-#: gtkedit/editcmd.c:1190
+#: gtkedit/editcmd.c:1191
 msgid "o&Ne"
 msgstr "一つ (&N)"
 
-#: gtkedit/editcmd.c:1192 src/filegui.c:597
+#: gtkedit/editcmd.c:1193 src/filegui.c:597
 msgid "al&L"
 msgstr "全部 (&L)"
 
-#: gtkedit/editcmd.c:1194 src/file.c:2190 src/filegui.c:267
+#: gtkedit/editcmd.c:1195 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
 msgstr "スキップ (&S)"
 
-#: gtkedit/editcmd.c:1196
+#: gtkedit/editcmd.c:1197
 msgid "&Replace"
 msgstr "置換 (&R)"
 
-#: gtkedit/editcmd.c:1202 gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1203 gtkedit/editcmd.c:1671
 msgid " Replace with: "
 msgstr " 置き換える文字列: "
 
-#: gtkedit/editcmd.c:1206
+#: gtkedit/editcmd.c:1207
 msgid " Confirm replace "
 msgstr " 確認置換 "
 
-#: gtkedit/editcmd.c:1236 gtkedit/editcmd.c:1321
+#: gtkedit/editcmd.c:1237 gtkedit/editcmd.c:1322
 msgid "scanf &Expression"
 msgstr "scanf 形式 (&E)"
 
-#: gtkedit/editcmd.c:1238
+#: gtkedit/editcmd.c:1239
 msgid "replace &All"
 msgstr "全て置き換える (&A)"
 
-#: gtkedit/editcmd.c:1240
+#: gtkedit/editcmd.c:1241
 msgid "pr&Ompt on replace"
 msgstr "置換時にプロンプト (&O)"
 
-#: gtkedit/editcmd.c:1242 gtkedit/editcmd.c:1323
+#: gtkedit/editcmd.c:1243 gtkedit/editcmd.c:1324
 msgid "&Backwards"
 msgstr "後方 (&B)"
 
-#: gtkedit/editcmd.c:1244 gtkedit/editcmd.c:1325
+#: gtkedit/editcmd.c:1245 gtkedit/editcmd.c:1326
 msgid "&Regular expression"
 msgstr "正規表現 (&R)"
 
-#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1327
+#: gtkedit/editcmd.c:1247 gtkedit/editcmd.c:1328
 msgid "&Whole words only"
 msgstr "単語のみ (&W)"
 
-#: gtkedit/editcmd.c:1248 gtkedit/editcmd.c:1329
+#: gtkedit/editcmd.c:1249 gtkedit/editcmd.c:1330
 msgid "case &Sensitive"
 msgstr "大文字・小文字を区別 (&S)"
 
-#: gtkedit/editcmd.c:1252
+#: gtkedit/editcmd.c:1253
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr "置換の引数の順番を入力してください (例) 3,2,1,4 "
 
-#: gtkedit/editcmd.c:1256
+#: gtkedit/editcmd.c:1257
 msgid " Enter replacement string:"
 msgstr "置換文字列を入力してください:"
 
-#: gtkedit/editcmd.c:1260 gtkedit/editcmd.c:1333 src/view.c:2000
+#: gtkedit/editcmd.c:1261 gtkedit/editcmd.c:1334 src/view.c:2000
 msgid " Enter search string:"
 msgstr "検索文字列を入力してください:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1279 gtkedit/editcmd.c:1583 gtkedit/editcmd.c:1670
-#: gtkedit/editcmd.c:2209 gtkedit/editcmd.c:2240 gtkedit/editcmd.c:2242
+#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:1584 gtkedit/editcmd.c:1671
+#: gtkedit/editcmd.c:2210 gtkedit/editcmd.c:2241 gtkedit/editcmd.c:2243
 msgid " Replace "
 msgstr " 置換 "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1347 gtkedit/editcmd.c:1577 gtkedit/editcmd.c:2308
-#: gtkedit/editcmd.c:2310 gtkedit/editcmd.c:2338 src/view.c:1528
+#: gtkedit/editcmd.c:1348 gtkedit/editcmd.c:1578 gtkedit/editcmd.c:2309
+#: gtkedit/editcmd.c:2311 gtkedit/editcmd.c:2339 src/view.c:1528
 #: src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
 msgid " Search "
 msgstr " 検索 "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1401
+#: gtkedit/editcmd.c:1402
 msgid " Enter search text : "
 msgstr "検索テキストを入力してください : "
 
-#: gtkedit/editcmd.c:1408
+#: gtkedit/editcmd.c:1409
 msgid " Enter replace text : "
 msgstr "置換テキストを入力してください : "
 
-#: gtkedit/editcmd.c:1411 gtkedit/editcmd.c:1412
+#: gtkedit/editcmd.c:1412 gtkedit/editcmd.c:1413
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2007,12 +2025,12 @@ msgstr ""
 "正規表現の部分文字列を %s で入力できます\n"
 "(sed のように \\1 や \\2 ではありません) それから \"引数の〜入力\" を使います"
 
-#: gtkedit/editcmd.c:1414
+#: gtkedit/editcmd.c:1415
 msgid " Enter argument (or substring) order : "
 msgstr "引数 (あるいは部分文字列) の順番を入力 : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1418 gtkedit/editcmd.c:1419
+#: gtkedit/editcmd.c:1419 gtkedit/editcmd.c:1420
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2021,19 +2039,19 @@ msgstr ""
 "入力してください (例) 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1424
+#: gtkedit/editcmd.c:1425
 msgid " Whole words only "
 msgstr "単語のみ "
 
-#: gtkedit/editcmd.c:1426
+#: gtkedit/editcmd.c:1427
 msgid " Case sensitive "
 msgstr "大文字・小文字を区別 "
 
-#: gtkedit/editcmd.c:1429
+#: gtkedit/editcmd.c:1430
 msgid " Regular expression "
 msgstr "正規表現 "
 
-#: gtkedit/editcmd.c:1430 gtkedit/editcmd.c:1431
+#: gtkedit/editcmd.c:1431 gtkedit/editcmd.c:1432
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2041,48 +2059,48 @@ msgstr ""
 "正規表現の書き方については\n"
 "正規表現のマニュアルを読んでください"
 
-#: gtkedit/editcmd.c:1439
+#: gtkedit/editcmd.c:1440
 msgid " Backwards "
 msgstr "後方 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1441 gtkedit/editcmd.c:1442
+#: gtkedit/editcmd.c:1442 gtkedit/editcmd.c:1443
 msgid "Warning: Searching backward can be slow"
 msgstr "警告: 後方検索には時間がかかります"
 
-#: gtkedit/editcmd.c:1463
+#: gtkedit/editcmd.c:1464
 msgid " Prompt on replace "
 msgstr "置換時に確認 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1465
+#: gtkedit/editcmd.c:1466
 msgid "Ask before making each replacement"
 msgstr "置換するごとに尋ねる"
 
-#: gtkedit/editcmd.c:1467
+#: gtkedit/editcmd.c:1468
 msgid " Replace all "
 msgstr "全部置換する "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1469
+#: gtkedit/editcmd.c:1470
 msgid "Replace repeatedly"
 msgstr "繰り返し置換"
 
-#: gtkedit/editcmd.c:1473
+#: gtkedit/editcmd.c:1474
 msgid " Bookmarks "
 msgstr " ブックマーク "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1475 gtkedit/editcmd.c:1476
+#: gtkedit/editcmd.c:1476 gtkedit/editcmd.c:1477
 msgid "Create bookmarks at all lines found"
 msgstr "全ての行で見つけたブックマークを作成"
 
-#: gtkedit/editcmd.c:1479
+#: gtkedit/editcmd.c:1480
 msgid " Scanf expression "
 msgstr "Scanf 形式 "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1481
+#: gtkedit/editcmd.c:1482
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
@@ -2091,61 +2109,61 @@ msgstr ""
 "scanf のマニュアルを参照"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1506
+#: gtkedit/editcmd.c:1507
 msgid "Begin search, Enter"
 msgstr "検索の開始, ENTER"
 
-#: gtkedit/editcmd.c:1507
+#: gtkedit/editcmd.c:1508
 msgid "Abort this dialog, Esc"
 msgstr "このダイアログを中断, ESC"
 
-#: gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1671
 msgid "Replace"
 msgstr "置換"
 
-#: gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1671
 msgid "Skip"
 msgstr "スキップ"
 
-#: gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1671
 msgid "Replace all"
 msgstr "すべて置換"
 
-#: gtkedit/editcmd.c:1670
+#: gtkedit/editcmd.c:1671
 msgid "Replace one"
 msgstr "一つ置換"
 
-#: gtkedit/editcmd.c:2030
+#: gtkedit/editcmd.c:2031
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr "おかしな正規表現、あるいは scanf 形式です。変換が多すぎます "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2211
+#: gtkedit/editcmd.c:2212
 msgid " Error in replacement format string. "
 msgstr "置換形式文字列にエラー"
 
-#: gtkedit/editcmd.c:2239
+#: gtkedit/editcmd.c:2240
 #, c-format
 msgid " %ld replacements made. "
 msgstr "%ld 個置換しました"
 
-#: gtkedit/editcmd.c:2242 gtkedit/editcmd.c:2310 gtkedit/editcmd.c:2338
+#: gtkedit/editcmd.c:2243 gtkedit/editcmd.c:2311 gtkedit/editcmd.c:2339
 msgid " Search string not found. "
 msgstr "検索文字列が見付かりませんでした"
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2307
+#: gtkedit/editcmd.c:2308
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d 個発見し， %d 個のブックマークを追加しました "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2363 gtkedit/editcmd.c:2378 gtkedit/editcmd.c:2381
+#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2379 gtkedit/editcmd.c:2382
 msgid " Quit "
 msgstr " 終了 "
 
-#: gtkedit/editcmd.c:2364 gtkedit/editcmd.c:2382
+#: gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2383
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -2153,155 +2171,165 @@ msgstr ""
 "現在のテキストに変更が加えられていますが、保存していません。\n"
 "保存して終了しますか?"
 
-#: gtkedit/editcmd.c:2378
+#: gtkedit/editcmd.c:2379
 msgid " File was modified, Save with exit? "
 msgstr "ファイルに変更が加えられています。保存して終了しますか?"
 
-#: gtkedit/editcmd.c:2378
+#: gtkedit/editcmd.c:2379
 msgid "Cancel quit"
 msgstr "終了を中止"
 
-#: gtkedit/editcmd.c:2378 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:603 src/hotlist.c:1035 src/main.c:863 src/screen.c:2165
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&Yes"
 msgstr "はい (&Y)"
 
-#: gtkedit/editcmd.c:2378 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2379 src/cmd.c:246 src/file.c:1878 src/file.c:2249
 #: src/filegui.c:602 src/hotlist.c:1035 src/main.c:863 src/screen.c:2165
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
 msgid "&No"
 msgstr "いいえ (&N)"
 
-#: gtkedit/editcmd.c:2382
+#: gtkedit/editcmd.c:2383
 msgid " &Cancel quit "
 msgstr " 終了を中止 (&C) "
 
-#: gtkedit/editcmd.c:2382
+#: gtkedit/editcmd.c:2383
 msgid " &Yes "
 msgstr " はい (&Y) "
 
-#: gtkedit/editcmd.c:2382
+#: gtkedit/editcmd.c:2383
 msgid " &No "
 msgstr " いいえ (&N) "
 
-#: gtkedit/editcmd.c:2614 gtkedit/editcmd.c:2689
+#: gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2690
 msgid " Copy to clipboard "
 msgstr " クリップボードへコピー "
 
-#: gtkedit/editcmd.c:2614 gtkedit/editcmd.c:2636 gtkedit/editcmd.c:2689
-#: gtkedit/editcmd.c:2702
+#: gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2637 gtkedit/editcmd.c:2690
+#: gtkedit/editcmd.c:2703
 msgid " Unable to save to file. "
 msgstr " ファイル保存ができませんでした "
 
-#: gtkedit/editcmd.c:2636 gtkedit/editcmd.c:2702
+#: gtkedit/editcmd.c:2637 gtkedit/editcmd.c:2703
 msgid " Cut to clipboard "
 msgstr " クリップボードへ切り出し "
 
-#: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
-#: gtkedit/editcmd.c:2736 src/view.c:1915
+#: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
+#: gtkedit/editcmd.c:2737 src/view.c:1915
 msgid " Goto line "
 msgstr " 指定行へ移動 "
 
-#: gtkedit/editcmd.c:2724 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2733
-#: gtkedit/editcmd.c:2736
+#: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
+#: gtkedit/editcmd.c:2737
 msgid " Enter line: "
 msgstr " 行番号を入力してください: "
 
-#: gtkedit/editcmd.c:2757 gtkedit/editcmd.c:2770
+#: gtkedit/editcmd.c:2758 gtkedit/editcmd.c:2771
 msgid " Save Block "
 msgstr " ブロックを保存 "
 
-#: gtkedit/editcmd.c:2784
+#: gtkedit/editcmd.c:2785
 msgid " Insert File "
 msgstr " ファイルを挿入 "
 
-#: gtkedit/editcmd.c:2797
+#: gtkedit/editcmd.c:2798
 msgid " Insert file "
 msgstr " ファイルを挿入 "
 
-#: gtkedit/editcmd.c:2797
+#: gtkedit/editcmd.c:2798
 msgid " Error trying to insert file. "
 msgstr " ファイルを挿入しようとしてエラーが発生しました "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2819
+#: gtkedit/editcmd.c:2820
 msgid " Sort block "
 msgstr " ブロックで並べ替え "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2819 gtkedit/editcmd.c:2873
+#: gtkedit/editcmd.c:2820 gtkedit/editcmd.c:2908
 msgid " You must first highlight a block of text. "
 msgstr " まずテキストブロックをハイライトする必要があります "
 
-#: gtkedit/editcmd.c:2826
+#: gtkedit/editcmd.c:2827
 msgid " Run Sort "
 msgstr "ソートを実行 "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2828
+#: gtkedit/editcmd.c:2829
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " ソートのオプション (マニュアル参照) を空白で区切って入力してください: "
 
-#: gtkedit/editcmd.c:2839 gtkedit/editcmd.c:2845
+#: gtkedit/editcmd.c:2840 gtkedit/editcmd.c:2846
 msgid " Sort "
 msgstr " ソート "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2841
+#: gtkedit/editcmd.c:2842
 msgid " Error trying to execute sort command "
 msgstr " ソートコマンドを実行しようとしてエラーが発生しました "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2847
+#: gtkedit/editcmd.c:2848
 msgid " Sort returned non-zero: "
 msgstr " ソートコマンドがゼロ以外の返り値: "
 
-#. Not essential to translate
-#: gtkedit/editcmd.c:2871 gtkedit/editcmd.c:2901
-msgid " Process block "
-msgstr " ブロックを処理 "
+#: gtkedit/editcmd.c:2881
+msgid "Error create script:"
+msgstr "スクリプト作成でエラー:"
 
-#. Not essential to translate
-#: gtkedit/editcmd.c:2903
-msgid " Error trying to stat file "
-msgstr " ファイルの stat をしようとしてエラーが発生しました "
+#: gtkedit/editcmd.c:2887
+msgid "Error read script:"
+msgstr "スクリプト読み込みでエラー:"
 
-#: gtkedit/editcmd.c:2974
+#: gtkedit/editcmd.c:2894
+msgid "Error close script:"
+msgstr "スクリプトクローズエラー:"
+
+#: gtkedit/editcmd.c:2899
+msgid "Script created:"
+msgstr "スクリプトは作成されました:"
+
+#: gtkedit/editcmd.c:2906
+msgid "Process block"
+msgstr "プロセスブロック"
+
+#: gtkedit/editcmd.c:3018
 msgid " Mail "
 msgstr " メイル "
 
-#: gtkedit/editcmd.c:2987
+#: gtkedit/editcmd.c:3031
 msgid " Copies to"
 msgstr " コピー"
 
-#: gtkedit/editcmd.c:2991
+#: gtkedit/editcmd.c:3035
 msgid " Subject"
 msgstr " 件名"
 
-#: gtkedit/editcmd.c:2995
+#: gtkedit/editcmd.c:3039
 msgid " To"
 msgstr " To"
 
-#: gtkedit/editcmd.c:2997
+#: gtkedit/editcmd.c:3041
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subject> -c <cc> <to>"
 
-#: gtkedit/editmenu.c:61
+#: gtkedit/editmenu.c:62
 msgid " Word wrap "
 msgstr " 単語折り返し "
 
 #. Not essential to translate
-#: gtkedit/editmenu.c:63
+#: gtkedit/editmenu.c:64
 msgid " Enter line length, 0 for off: "
 msgstr " 行の長さを入力してください (0 でオフ): "
 
-#: gtkedit/editmenu.c:74
+#: gtkedit/editmenu.c:75
 msgid " About "
 msgstr " Cooledit について "
 
-#: gtkedit/editmenu.c:75
+#: gtkedit/editmenu.c:76
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2319,349 +2347,353 @@ msgstr ""
 "             Midnight Commander 用の\n"
 "            ユーザに親切なエディタです\n"
 
-#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
+#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
 msgid "&Open/load...     C-o"
 msgstr "開く (&O)...             C-o"
 
-#: gtkedit/editmenu.c:125
+#: gtkedit/editmenu.c:129
 msgid "&New              C-n"
 msgstr "新規作成 (&N)            C-n"
 
-#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
+#: gtkedit/editmenu.c:131 gtkedit/editmenu.c:150
 msgid "&Save              F2"
 msgstr "保存 (&S)                 F2"
 
-#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
+#: gtkedit/editmenu.c:132 gtkedit/editmenu.c:151
 msgid "save &As...       F12"
 msgstr "別名で保存 (&A)...       F12"
 
-#: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
+#: gtkedit/editmenu.c:134 gtkedit/editmenu.c:153
 msgid "&Insert file...   F15"
 msgstr "ファイル挿入 (&I)...     F15"
 
-#: gtkedit/editmenu.c:131
+#: gtkedit/editmenu.c:135
 msgid "copy to &File...  C-f"
 msgstr "ファイルへコピー (&F)... C-f"
 
-#: gtkedit/editmenu.c:133 gtkedit/editmenu.c:149
+#: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
+msgid "&User menu...     F11"
+msgstr "ユーザメニュー (&U)...   F11"
+
+#: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
 msgid "a&Bout...            "
 msgstr "情報 (&B)...                "
 
-#: gtkedit/editmenu.c:135 gtkedit/editmenu.c:151
+#: gtkedit/editmenu.c:142 gtkedit/editmenu.c:161
 msgid "&Quit             F10"
 msgstr "終了 (&Q)                F10"
 
-#: gtkedit/editmenu.c:141
+#: gtkedit/editmenu.c:148
 msgid "&New            C-x k"
 msgstr "新規 (&N)              C-x k"
 
-#: gtkedit/editmenu.c:147
+#: gtkedit/editmenu.c:154
 msgid "copy to &File...     "
 msgstr "ファイルへコピー (&F)...    "
 
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
+#: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
 msgid "&Toggle Mark       F3"
 msgstr "マークを切替え (&T)       F3"
 
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
+#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
 msgid "&Mark Columns    S-F3"
 msgstr "列にマーク (&M)         S-F3"
 
-#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
+#: gtkedit/editmenu.c:169 gtkedit/editmenu.c:186
 msgid "toggle &Ins/overw Ins"
 msgstr "挿入・上書きを切替え(&I) Ins"
 
-#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
+#: gtkedit/editmenu.c:171 gtkedit/editmenu.c:188
 msgid "&Copy              F5"
 msgstr "コピー (&C)               F5"
 
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
+#: gtkedit/editmenu.c:172 gtkedit/editmenu.c:189
 msgid "&Move              F6"
 msgstr "移動 (&M)                 F6"
 
-#: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
+#: gtkedit/editmenu.c:173 gtkedit/editmenu.c:190
 msgid "&Delete            F8"
 msgstr "削除 (&D)                 F8"
 
-#: gtkedit/editmenu.c:165 gtkedit/editmenu.c:182
+#: gtkedit/editmenu.c:175 gtkedit/editmenu.c:192
 msgid "&Undo             C-u"
 msgstr "やりなおし (&U)          C-u"
 
-#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
+#: gtkedit/editmenu.c:177 gtkedit/editmenu.c:194
 msgid "&Beginning     C-PgUp"
 msgstr "先頭 (&B)             C-PgUp"
 
-#: gtkedit/editmenu.c:168 gtkedit/editmenu.c:185
+#: gtkedit/editmenu.c:178 gtkedit/editmenu.c:195
 msgid "&End           C-PgDn"
 msgstr "末尾 (&E)             C-PgDn"
 
-#: gtkedit/editmenu.c:190 gtkedit/editmenu.c:197
+#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:207
 msgid "&Search...         F7"
 msgstr "検索 (&S)...              F7"
 
-#: gtkedit/editmenu.c:191 gtkedit/editmenu.c:198
+#: gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
 msgid "search &Again     F17"
 msgstr "再検索 (&A)              F17"
 
-#: gtkedit/editmenu.c:192 gtkedit/editmenu.c:199
+#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
 msgid "&Replace...        F4"
 msgstr "置換 (&R)...              F4"
 
-#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:227
+#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
 msgid "&Goto line...            M-l"
 msgstr "行移動 (&G)...              M-l"
 
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:228
+#: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
 msgstr "対の括弧へ移動              M-b"
 
-#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:230
+#: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
 msgid "insert &Literal...       C-q"
 msgstr "文字を挿入 (&L)...          C-q"
 
-#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:232
+#: gtkedit/editmenu.c:219 gtkedit/editmenu.c:242
 msgid "&Refresh screen          C-l"
 msgstr "画面を再描画 (&R)           C-l"
 
-#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:234
+#: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
 msgid "&Start record macro      C-r"
 msgstr "マクロの記録を開始 (&S)     C-r"
 
-#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:235
+#: gtkedit/editmenu.c:222 gtkedit/editmenu.c:245
 msgid "&Finish record macro...  C-r"
 msgstr "マクロの記録を終了 (&F)...  C-r"
 
-#: gtkedit/editmenu.c:213
+#: gtkedit/editmenu.c:223
 msgid "&Execute macro...   C-a, KEY"
 msgstr "マクロを実行 (&E)...   C-a, KEY"
 
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
+#: gtkedit/editmenu.c:224 gtkedit/editmenu.c:247
 msgid "delete macr&O...            "
 msgstr "マクロを削除 (&O)              "
 
-#: gtkedit/editmenu.c:216 gtkedit/editmenu.c:239
+#: gtkedit/editmenu.c:226 gtkedit/editmenu.c:249
 msgid "insert &Date/time           "
 msgstr "日付・時間を挿入 (&D)          "
 
-#: gtkedit/editmenu.c:218 gtkedit/editmenu.c:241
+#: gtkedit/editmenu.c:228 gtkedit/editmenu.c:251
 msgid "format p&Aragraph        M-p"
 msgstr "段落を整形 (&A)             M-p"
 
-#: gtkedit/editmenu.c:219
+#: gtkedit/editmenu.c:229
 msgid "'ispell' s&Pell check    C-p"
 msgstr "'ispell' スペルチェック(&P) C-p"
 
-#: gtkedit/editmenu.c:220 gtkedit/editmenu.c:243
+#: gtkedit/editmenu.c:230 gtkedit/editmenu.c:253
 msgid "sor&T...                 M-t"
 msgstr "並べ替え (&T)               M-t"
 
-#: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
-msgid "'indent' &C Formatter    F19"
-msgstr "'indent' プログラム整形 (&C)   F19"
+#: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
+msgid "E&xternal Formatter      F19"
+msgstr "外部フォーマッタ(&x)        F19"
 
-#: gtkedit/editmenu.c:222
+#: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
 msgstr "メイル (&M)...                 "
 
-#: gtkedit/editmenu.c:236
+#: gtkedit/editmenu.c:246
 msgid "&Execute macro... C-x e, KEY"
 msgstr "マクロを実行 (&E)... C-x e, KEY"
 
-#: gtkedit/editmenu.c:242
+#: gtkedit/editmenu.c:252
 msgid "'ispell' s&Pell check    M-$"
 msgstr "'ispell' スペルチェック(&P) M-$"
 
-#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260
+#: gtkedit/editmenu.c:261 gtkedit/editmenu.c:270
 msgid "&General...  "
 msgstr "一般 (&G)...   "
 
-#: gtkedit/editmenu.c:252 gtkedit/editmenu.c:261
+#: gtkedit/editmenu.c:262 gtkedit/editmenu.c:271
 msgid "&Save mode..."
 msgstr "保存方法(&S)..."
 
-#: gtkedit/editmenu.c:254 gtkedit/editmenu.c:263 src/main.c:1355
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1357
 msgid "&Layout..."
 msgstr "レイアウト(&L)..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:273 gtkedit/editmenu.c:282 gtkedit/editmenu.c:399
+#: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
 #: src/chmod.c:164 src/chown.c:130
 msgid " File "
 msgstr " ファイル "
 
-#: gtkedit/editmenu.c:274 gtkedit/editmenu.c:283 gtkedit/editmenu.c:415
+#: gtkedit/editmenu.c:284 gtkedit/editmenu.c:293 gtkedit/editmenu.c:425
 msgid " Edit "
 msgstr " 編集 "
 
-#: gtkedit/editmenu.c:275 gtkedit/editmenu.c:284
+#: gtkedit/editmenu.c:285 gtkedit/editmenu.c:294
 msgid " Sear/Repl "
 msgstr " 検索・置換 "
 
-#: gtkedit/editmenu.c:276 gtkedit/editmenu.c:285 gtkedit/editmenu.c:455
+#: gtkedit/editmenu.c:286 gtkedit/editmenu.c:295 gtkedit/editmenu.c:465
 msgid " Command "
 msgstr " コマンド "
 
-#: gtkedit/editmenu.c:277 gtkedit/editmenu.c:286
+#: gtkedit/editmenu.c:287 gtkedit/editmenu.c:296
 msgid " Options "
 msgstr " オプション "
 
-#: gtkedit/editmenu.c:400
+#: gtkedit/editmenu.c:410
 msgid "Open...\tC-o"
 msgstr "開く...\tC-o"
 
-#: gtkedit/editmenu.c:401
+#: gtkedit/editmenu.c:411
 msgid "New\tC-n"
 msgstr "新規\tC-n"
 
-#: gtkedit/editmenu.c:403
+#: gtkedit/editmenu.c:413
 msgid "Save\tF2"
 msgstr "保存\tF2"
 
-#: gtkedit/editmenu.c:404
+#: gtkedit/editmenu.c:414
 msgid "Save as...\tF12"
 msgstr "別名保存...\tF12"
 
-#: gtkedit/editmenu.c:406
+#: gtkedit/editmenu.c:416
 msgid "Insert file...\tF15"
 msgstr "ファイル挿入...\tF15"
 
-#: gtkedit/editmenu.c:407
+#: gtkedit/editmenu.c:417
 msgid "Copy to file...\tC-f"
 msgstr "ファイルへコピー...\tC-f"
 
 #. Tool hint
-#: gtkedit/editmenu.c:410
+#: gtkedit/editmenu.c:420
 msgid "Disk operations and file indexing/searching"
 msgstr "ディスク操作およびファイルのインデックス作成・検索"
 
-#: gtkedit/editmenu.c:416
+#: gtkedit/editmenu.c:426
 msgid "Toggle mark\tF3"
 msgstr "マークのトグル\tF3"
 
-#: gtkedit/editmenu.c:417
+#: gtkedit/editmenu.c:427
 msgid "Toggle mark columns\tC-b"
 msgstr "列のマークをトグル\tC-b"
 
-#: gtkedit/editmenu.c:419
+#: gtkedit/editmenu.c:429
 msgid "Toggle book mark\tC-M-Ins"
 msgstr "ブックマークをトグル\tC-M-Ins"
 
-#: gtkedit/editmenu.c:420
+#: gtkedit/editmenu.c:430
 msgid "Previous book mark\tC-M-Up"
 msgstr "前のブックマーク\tC-M-Up"
 
-#: gtkedit/editmenu.c:421
+#: gtkedit/editmenu.c:431
 msgid "Next book mark\tC-M-Down"
 msgstr "次のブックマーク\tC-M-Down"
 
-#: gtkedit/editmenu.c:422
+#: gtkedit/editmenu.c:432
 msgid "Flush book marks"
 msgstr "ブックマークをクリア"
 
-#: gtkedit/editmenu.c:424
+#: gtkedit/editmenu.c:434
 msgid "Toggle insert/overwrite\tIns"
 msgstr "挿入・上書きの切替え\tIns"
 
-#: gtkedit/editmenu.c:426
+#: gtkedit/editmenu.c:436
 msgid "Copy block to cursor\tF5"
 msgstr "ブロックをカーソル位置へコピー\tF5"
 
-#: gtkedit/editmenu.c:427
+#: gtkedit/editmenu.c:437
 msgid "Move block to cursor\tF6"
 msgstr "ブロックをカーソル位置へ移動\tF6"
 
-#: gtkedit/editmenu.c:428
+#: gtkedit/editmenu.c:438
 msgid "Delete block\tF8/C-Del"
 msgstr "ブロックを削除\tF8/C-Del"
 
-#: gtkedit/editmenu.c:430
+#: gtkedit/editmenu.c:440
 msgid "Copy block to clipbrd\tC-Ins"
 msgstr "ブロックをクリップボードへコピー\tC-Ins"
 
-#: gtkedit/editmenu.c:431
+#: gtkedit/editmenu.c:441
 msgid "Cut block to clipbrd\tS-Del"
 msgstr "ブロックをクリップボードへ切りだし\tS-Del"
 
-#: gtkedit/editmenu.c:432
+#: gtkedit/editmenu.c:442
 msgid "Paste block from clipbrd\tS-Ins"
 msgstr "ブロックをクリップボードから張り付け\tS-Ins"
 
-#: gtkedit/editmenu.c:433
+#: gtkedit/editmenu.c:443
 msgid "Selection history\tM-Ins"
 msgstr "選択の履歴\tM-Ins"
 
-#: gtkedit/editmenu.c:435
+#: gtkedit/editmenu.c:445
 msgid "Undo\tC-BackSpace"
 msgstr "やりなおし\tC-BackSpace"
 
 #. Tool hint
-#: gtkedit/editmenu.c:438
+#: gtkedit/editmenu.c:448
 msgid "Manipulating blocks of text"
 msgstr "テキストのブロックを操作"
 
-#: gtkedit/editmenu.c:443
+#: gtkedit/editmenu.c:453
 msgid " Srch/Replce "
 msgstr " 検索・置換 "
 
-#: gtkedit/editmenu.c:444
+#: gtkedit/editmenu.c:454
 msgid "Search...\tF7"
 msgstr "検索...\tF7"
 
-#: gtkedit/editmenu.c:445
+#: gtkedit/editmenu.c:455
 msgid "Search again\tF17"
 msgstr "再検索\tF17"
 
-#: gtkedit/editmenu.c:446
+#: gtkedit/editmenu.c:456
 msgid "Replace...\tF4"
 msgstr "置換...\tF4"
 
-#: gtkedit/editmenu.c:447
+#: gtkedit/editmenu.c:457
 msgid "Replace again\tF14"
 msgstr "再置換\tF14"
 
 #. Tool hint
-#: gtkedit/editmenu.c:450
+#: gtkedit/editmenu.c:460
 msgid "Search for and replace text"
 msgstr "テキストを検索し置換する"
 
-#: gtkedit/editmenu.c:456
+#: gtkedit/editmenu.c:466
 msgid "Goto line...\tM-l"
 msgstr "行移動...\tM-l"
 
-#: gtkedit/editmenu.c:457
+#: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
 msgstr "対の括弧へ移動\tM-b"
 
-#: gtkedit/editmenu.c:459
+#: gtkedit/editmenu.c:469
 msgid "Start record macro\tC-r"
 msgstr "マクロの記録開始\tC-r"
 
-#: gtkedit/editmenu.c:460
+#: gtkedit/editmenu.c:470
 msgid "Finish record macro...\tC-r"
 msgstr "マクロの記録終了...\tC-r"
 
-#: gtkedit/editmenu.c:461
+#: gtkedit/editmenu.c:471
 msgid "Execute macro...\tC-a, KEY"
 msgstr "マクロ実行...\tC-a, KEY"
 
-#: gtkedit/editmenu.c:462
+#: gtkedit/editmenu.c:472
 msgid "Delete macro...\t"
 msgstr "マクロ削除...\t"
 
-#: gtkedit/editmenu.c:464
+#: gtkedit/editmenu.c:474
 msgid "Insert date/time\tC-d"
 msgstr "日付・時間を挿入\tC-d"
 
-#: gtkedit/editmenu.c:465
+#: gtkedit/editmenu.c:475
 msgid "Format paragraph\tM-p"
 msgstr "段落を整形\tM-p"
 
-#: gtkedit/editmenu.c:467
+#: gtkedit/editmenu.c:477
 msgid "Refresh display\tC-l"
 msgstr "表示をリフレッシュ\tC-l"
 
 #. Tool hint
-#: gtkedit/editmenu.c:470
+#: gtkedit/editmenu.c:480
 msgid "Macros and internal commands"
 msgstr "マクロおよび内部コマンド"
 
@@ -2744,7 +2776,7 @@ msgid "Error initialising editor.\n"
 msgstr "エディタの初期化にエラーが起こりました.\n"
 
 #: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1721 src/screen.c:2394 src/screen.c:2424 src/tree.c:1008
+#: src/main.c:1723 src/screen.c:2396 src/screen.c:2426 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "ヘルプ"
@@ -2757,13 +2789,13 @@ msgstr "マーク"
 msgid "Replac"
 msgstr "置換"
 
-#: gtkedit/editwidget.c:1145 src/main.c:1723
+#: gtkedit/editwidget.c:1145 src/main.c:1725
 msgid "PullDn"
 msgstr "PullDn"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1724 src/view.c:2072 src/view.c:2094
+#: src/main.c:1726 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "終了"
 
@@ -2830,7 +2862,7 @@ msgstr "削除"
 msgid "Delete highlighted text"
 msgstr "ハイライトしたテキストを削除"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1722 src/screen.c:2395 src/screen.c:2425
+#: gtkedit/gtkedit.c:1255 src/main.c:1724 src/screen.c:2397 src/screen.c:2427
 msgid "Menu"
 msgstr "メニュ"
 
@@ -2866,12 +2898,12 @@ msgstr "ブロックをファイルヘコピー"
 msgid "Search/Replace"
 msgstr "検索/置換"
 
-#: gtkedit/syntax.c:1069 gtkedit/syntax.c:1078 gtkedit/syntax.c:1087
-#: gtkedit/syntax.c:1096
+#: gtkedit/syntax.c:1072 gtkedit/syntax.c:1081 gtkedit/syntax.c:1090
+#: gtkedit/syntax.c:1099
 msgid " Spelling Message "
 msgstr "スペル関連メッセージ"
 
-#: gtkedit/syntax.c:1069
+#: gtkedit/syntax.c:1072
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2881,7 +2913,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1078
+#: gtkedit/syntax.c:1081
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2891,7 +2923,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1087
+#: gtkedit/syntax.c:1090
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2901,7 +2933,7 @@ msgstr ""
 "PATH が通っているかどうか、-a オプションが使えるかを確認してください。\n"
 "そうでなければオプションメニューでスペルチェックを無効にしてください。"
 
-#: gtkedit/syntax.c:1096
+#: gtkedit/syntax.c:1099
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
@@ -2909,11 +2941,11 @@ msgstr ""
 "ispell からの読みだし中にエラーが発生しました。\n"
 "ispell を再起動します"
 
-#: gtkedit/syntax.c:1369 gtkedit/syntax.c:1371
+#: gtkedit/syntax.c:1372 gtkedit/syntax.c:1374
 msgid " Load Syntax Rules "
 msgstr " 構文ルールをロード "
 
-#: gtkedit/syntax.c:1369 gtkedit/syntax.c:1371
+#: gtkedit/syntax.c:1372 gtkedit/syntax.c:1374
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -2923,15 +2955,15 @@ msgstr ""
 " 新しいルールファイルはインストールされています \n"
 " 古いルールファイルは .OLD 拡張子をつけて保存されています "
 
-#: gtkedit/syntax.c:1519 gtkedit/syntax.c:1526
+#: gtkedit/syntax.c:1517 gtkedit/syntax.c:1524
 msgid " Load syntax file "
 msgstr " 文法ファイルをロード "
 
-#: gtkedit/syntax.c:1519
+#: gtkedit/syntax.c:1517
 msgid " File access error "
 msgstr " ファイルアクセスエラー "
 
-#: gtkedit/syntax.c:1525
+#: gtkedit/syntax.c:1523
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " ファイル %s の %d 行目でエラー "
@@ -2998,7 +3030,7 @@ msgstr ""
 " %s "
 
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:621
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:669
 msgid " Oops... "
 msgstr " あうう... "
 
@@ -3340,129 +3372,129 @@ msgstr " extfs では chown コマンドを実行できません "
 msgid " I can't run the Chown command on a tarfs "
 msgstr " tarfs では chown を実行できません "
 
-#: src/cmd.c:198
+#: src/cmd.c:195
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " %s のローカルコピーにアクセスできません "
 
-#: src/cmd.c:248
+#: src/cmd.c:245
 msgid " CD "
 msgstr " CD "
 
-#: src/cmd.c:248
+#: src/cmd.c:245
 msgid "Files tagged, want to cd?"
 msgstr "ファイルはタグ付られています。cd しますか?"
 
-#: src/cmd.c:254 src/cmd.c:713 src/cmd.c:732
+#: src/cmd.c:251 src/cmd.c:712 src/cmd.c:731
 msgid "Could not change directory"
 msgstr "ディレクトリを変更できません"
 
-#: src/cmd.c:283
+#: src/cmd.c:280
 msgid " View file "
 msgstr " ファイルを見る "
 
-#: src/cmd.c:283
+#: src/cmd.c:280
 msgid " Filename:"
 msgstr " ファイル名:"
 
-#: src/cmd.c:300
+#: src/cmd.c:297
 msgid " Filtered view "
 msgstr " フィルタされた一覧 "
 
-#: src/cmd.c:300
+#: src/cmd.c:297
 msgid " Filter command and arguments:"
 msgstr " フィルタコマンドと引数:"
 
-#: src/cmd.c:388
+#: src/cmd.c:385
 msgid "Create a new Directory"
 msgstr "新規ディレクトリの作成"
 
-#: src/cmd.c:388
+#: src/cmd.c:385
 msgid " Enter directory name:"
 msgstr " ディレクトリ名を入力:"
 
-#: src/cmd.c:449
+#: src/cmd.c:446
 msgid " Filter "
 msgstr " フィルタ "
 
-#: src/cmd.c:449
+#: src/cmd.c:446
 msgid " Set expression for filtering filenames"
 msgstr " ファイル名のフィルタの形式を設定"
 
-#: src/cmd.c:515
+#: src/cmd.c:512
 msgid " Select "
 msgstr " 選択 "
 
-#: src/cmd.c:567
+#: src/cmd.c:564
 msgid " Unselect "
 msgstr " 選択解除 "
 
-#: src/cmd.c:640
+#: src/cmd.c:637
 msgid "Extension file edit"
 msgstr "拡張ファイルの編集"
 
-#: src/cmd.c:641
+#: src/cmd.c:638
 msgid " Which extension file you want to edit? "
 msgstr " どの拡張ファイルを編集しますか? "
 
-#: src/cmd.c:642
+#: src/cmd.c:639
 msgid "&User"
 msgstr "ユーザ (&U)"
 
-#: src/cmd.c:642 src/cmd.c:668
+#: src/cmd.c:639 src/cmd.c:667
 msgid "&System Wide"
 msgstr "システム全体 (&S)"
 
-#: src/cmd.c:665
-msgid "Menu file edit"
-msgstr "メニューファイルを編集"
+#: src/cmd.c:664
+msgid " Menu edit "
+msgstr " メニューの編集 "
 
-#: src/cmd.c:666
-msgid " Which menu file will you edit? "
+#: src/cmd.c:665
+msgid " Which menu file will you edit ? "
 msgstr " どのメニューファイルを編集しますか? "
 
-#: src/cmd.c:668
+#: src/cmd.c:667
 msgid "&Local"
 msgstr "ローカル (&L)"
 
-#: src/cmd.c:668
+#: src/cmd.c:667
 msgid "&Home"
 msgstr "ホーム (&H)"
 
-#: src/cmd.c:858
+#: src/cmd.c:857
 msgid " Compare directories "
 msgstr " ディレクトリを比較 "
 
-#: src/cmd.c:858
+#: src/cmd.c:857
 msgid " Select compare method: "
 msgstr " 比較方法を選んでください: "
 
-#: src/cmd.c:859
+#: src/cmd.c:858
 msgid "&Quick"
 msgstr "クイック (&Q)"
 
-#: src/cmd.c:859
+#: src/cmd.c:858
 msgid "&Size only"
 msgstr "大きさのみ (&S)"
 
-#: src/cmd.c:859
+#: src/cmd.c:858
 msgid "&Thorough"
 msgstr "通しで (&T)"
 
-#: src/cmd.c:869
+#: src/cmd.c:868
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 " このコマンドを使うには,両パネルとも一覧表示モードでなければなりません "
 
-#: src/cmd.c:883
+#: src/cmd.c:882
 msgid " The command history is empty "
 msgstr " コマンドの履歴は空です "
 
-#: src/cmd.c:889
+#: src/cmd.c:888
 msgid " Command history "
 msgstr " コマンドの履歴 "
 
-#: src/cmd.c:931
+#: src/cmd.c:930
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -3470,11 +3502,11 @@ msgstr ""
 " xterm または Linux コンソールではありません; \n"
 " パネルをトグルできません"
 
-#: src/cmd.c:970
+#: src/cmd.c:969
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "`exit' と入力すれば Midnight Commander へ戻ります"
 
-#: src/cmd.c:1025
+#: src/cmd.c:1024
 #, c-format
 msgid ""
 " Couldn't stat %s \n"
@@ -3483,98 +3515,107 @@ msgstr ""
 " %s を stat できません \n"
 " %s "
 
-#: src/cmd.c:1034 src/cmd.c:1036
+#: src/cmd.c:1033 src/cmd.c:1035
 msgid " Link "
 msgstr " リンク "
 
-#: src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
+#: src/cmd.c:1034 src/cmd.c:1173 src/file.c:1704
 msgid " to:"
 msgstr " to:"
 
-#: src/cmd.c:1046
+#: src/cmd.c:1045
 #, c-format
 msgid " link: %s "
 msgstr " リンク: %s "
 
-#: src/cmd.c:1079
+#: src/cmd.c:1078
 #, c-format
 msgid " symlink: %s "
 msgstr " シンボリックリンク: %s "
 
-#: src/cmd.c:1133
+#: src/cmd.c:1132
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " シンボリックリンク `%s' のリンク先: "
 
-#: src/cmd.c:1138
+#: src/cmd.c:1137
 msgid " Edit symlink "
 msgstr " シンボリックリンクの編集 "
 
-#: src/cmd.c:1143
+#: src/cmd.c:1142
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " シンボリックリンクの編集, %sを削除できません: %s "
 
-#: src/cmd.c:1147
+#: src/cmd.c:1146
 #, c-format
 msgid " edit symlink: %s "
 msgstr " シンボリックリンクの編集: %s "
 
-#: src/cmd.c:1174
+#: src/cmd.c:1173
 msgid " Link symbolically "
 msgstr " シンボリックリンクを張る "
 
-#: src/cmd.c:1175
+#: src/cmd.c:1174
 msgid " Relative symlink "
 msgstr " 相対的シンボリックリンク "
 
-#: src/cmd.c:1186
+#: src/cmd.c:1185
 #, c-format
 msgid " relative symlink: %s "
 msgstr " 相対的シンボリックリンク: %s "
 
-#: src/cmd.c:1336
+#: src/cmd.c:1260
+msgid "Using default locale"
+msgstr "デフォルトロカールを利用"
+
+#: src/cmd.c:1262
+#, c-format
+msgid "Using locale \"%s\" (from environment variable %s)"
+msgstr "ロカール \"%s\" を利用します (環境変数 %s より)"
+
+#: src/cmd.c:1348
 msgid " Enter machine name (F1 for details): "
 msgstr " マシン名を入力してください(詳細はF1キー): "
 
-#: src/cmd.c:1363
+#: src/cmd.c:1375
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " ディレクトリを%sへ変更できません "
 
-#: src/cmd.c:1370 src/widget.c:1163
+#: src/cmd.c:1382 src/widget.c:1163
 msgid " Link to a remote machine "
 msgstr " リモート・マシンへのリンク "
 
-#: src/cmd.c:1376 src/widget.c:1164
+#: src/cmd.c:1388 src/widget.c:1164
 msgid " FTP to machine "
 msgstr " マシンへのFTP "
 
-#: src/cmd.c:1382 src/widget.c:1165
+#: src/cmd.c:1394 src/widget.c:1165
 msgid " SMB link to machine "
 msgstr " マシンへのSMBリンク "
 
-#: src/cmd.c:1392
+#: src/cmd.c:1404
 msgid " Socket source routing setup "
 msgstr " ソケットのソースルーティング設定 "
 
-#: src/cmd.c:1393
+#: src/cmd.c:1405
 msgid " Enter host name to use as a source routing hop: "
 msgstr " ソースルーティングの hop に使うホストの名前を入力してください: "
 
-#: src/cmd.c:1401
+#: src/cmd.c:1413
 msgid " Host name "
 msgstr " ホスト名 "
 
-#: src/cmd.c:1401
+#: src/cmd.c:1413
 msgid " Error while looking up IP address "
 msgstr " IPアドレスを見付ける際のエラー "
 
-#: src/cmd.c:1412
+#: src/cmd.c:1424
 msgid " Undelete files on an ext2 file system "
 msgstr " ext2ファイルシステムでのファイル削除のやり直し "
 
-#: src/cmd.c:1413
+#: src/cmd.c:1425
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3582,11 +3623,11 @@ msgstr ""
 " ファイルを復活させるデバイスのデバイス名 (/dev/ は省く) を\n"
 " 入力してください: (F1 で詳細)"
 
-#: src/cmd.c:1463
+#: src/cmd.c:1475
 msgid " Setup saved to ~/"
 msgstr " 設定は ~/ へ保存されました"
 
-#: src/cmd.c:1468
+#: src/cmd.c:1480
 msgid " Setup "
 msgstr " 設定 "
 
@@ -3685,7 +3726,7 @@ msgstr "ファイル '%s' は存在しますが stat-ed できません: %s"
 msgid "Unknown"
 msgstr "不明"
 
-#: src/ext.c:143 src/user.c:499
+#: src/ext.c:143 src/user.c:542
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3694,7 +3735,7 @@ msgstr ""
 " 一意なファイル名を生成できません \n"
 " %s "
 
-#: src/ext.c:150 src/user.c:511
+#: src/ext.c:150 src/user.c:554
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3703,7 +3744,7 @@ msgstr ""
 " 一時的なコマンド・ファイルを作成できません \n"
 " %s "
 
-#: src/ext.c:165 src/user.c:533
+#: src/ext.c:165 src/user.c:576
 msgid " Parameter "
 msgstr " パラメータ "
 
@@ -4584,7 +4625,7 @@ msgstr " ヘルプファイルでノード [Contents] を見付けられません "
 msgid " Help "
 msgstr " ヘルプ "
 
-#: src/help.c:766 src/user.c:637
+#: src/help.c:766 src/user.c:687
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -5252,71 +5293,75 @@ msgstr "ファイルの復活(&U) (ext2fsのみ)"
 msgid "&Listing format edit"
 msgstr "一覧形式編集(&L)"
 
-#: src/main.c:1348
+#: src/main.c:1349
 msgid "&Extension file edit"
 msgstr "拡張ファイルを編集(&E)"
 
-#: src/main.c:1349
+#: src/main.c:1350
 msgid "&Menu file edit"
 msgstr "メニューファイル編集(&M)"
 
-#: src/main.c:1354
+#: src/main.c:1351
+msgid "Menu edi&Tor edit"
+msgstr "メニューエディタで編集(&T)"
+
+#: src/main.c:1356
 msgid "&Configuration..."
 msgstr "設定(&C)..."
 
-#: src/main.c:1356
+#: src/main.c:1358
 msgid "c&Onfirmation..."
 msgstr "確認(&O)..."
 
-#: src/main.c:1357
+#: src/main.c:1359
 msgid "&Display bits..."
 msgstr "表示ビット数(&D)..."
 
-#: src/main.c:1359
+#: src/main.c:1361
 msgid "learn &Keys..."
 msgstr "キーの学習(&K)..."
 
-#: src/main.c:1362
+#: src/main.c:1364
 msgid "&Virtual FS..."
 msgstr "仮想FS(&V)..."
 
-#: src/main.c:1365
+#: src/main.c:1367
 msgid "&Save setup"
 msgstr "設定保存(&S)"
 
-#: src/main.c:1381 src/main.c:1383
+#: src/main.c:1383 src/main.c:1385
 msgid " &Left "
 msgstr "左(&L)"
 
-#: src/main.c:1383
+#: src/main.c:1385
 msgid " &Above "
 msgstr "上(&A)"
 
-#: src/main.c:1386
+#: src/main.c:1388
 msgid " &File "
 msgstr " ファイル(&F) "
 
-#: src/main.c:1387
+#: src/main.c:1389
 msgid " &Command "
 msgstr " コマンド(&C) "
 
-#: src/main.c:1388
+#: src/main.c:1390
 msgid " &Options "
 msgstr " オプション(&O) "
 
-#: src/main.c:1390 src/main.c:1392
+#: src/main.c:1392 src/main.c:1394
 msgid " &Right "
 msgstr " 右(&R) "
 
-#: src/main.c:1392
+#: src/main.c:1394
 msgid " &Below "
 msgstr " 下(&B) "
 
-#: src/main.c:1447
+#: src/main.c:1449
 msgid " Information "
 msgstr " 情報 "
 
-#: src/main.c:1448
+#: src/main.c:1450
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5328,24 +5373,23 @@ msgstr ""
 " レクトリの再読込をする必要があります。詳しくはマニュ\n"
 " アルを見てください"
 
-#: src/main.c:1927
+#: src/main.c:1929
 msgid "Thank you for using GNU Midnight Commander"
 msgstr " GNU Midnight Command のご利用、ありがとございました"
 
-#: src/main.c:2284
-#, c-format
-msgid "with mouse support on xterm%s.\n"
-msgstr "xterm%s によるマウスサポート有り\n"
+#: src/main.c:2287
+msgid "with mouse support on xterm and the Linux console.\n"
+msgstr "xterm と Linux コンソールによるマウスサポート有り\n"
 
-#: src/main.c:2285
-msgid " and the Linux console"
-msgstr "Linux console でのサポートも有り"
+#: src/main.c:2288
+msgid "with mouse support on xterm.\n"
+msgstr "xterm によるマウスサポート有り\n"
 
-#: src/main.c:2381
+#: src/main.c:2389
 msgid "The TERM environment variable is unset!\n"
 msgstr "環境変数 TERM がセットされていません\n"
 
-#: src/main.c:2487
+#: src/main.c:2495
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5357,20 +5401,20 @@ msgstr ""
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
 
-#: src/main.c:2490
+#: src/main.c:2498
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   強制的に +, -, | を使ってライン描画をする\n"
 
-#: src/main.c:2492
+#: src/main.c:2500
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      強制的にモノクロ表示する\n"
 
-#: src/main.c:2494
+#: src/main.c:2502
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr ""
 "-B, --background   [開発バージョンのみ: バックグラウンドコードのデバッグ]\n"
 
-#: src/main.c:2496
+#: src/main.c:2504
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5380,11 +5424,11 @@ msgstr ""
 "-C, --colors       色を指定する (--help-colors を使ってリストを得なさい)\n"
 "-d, --nomouse      マウスサポートを無効にする\n"
 
-#: src/main.c:2500
+#: src/main.c:2508
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         内部エディタの起動\n"
 
-#: src/main.c:2502
+#: src/main.c:2510
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5398,17 +5442,17 @@ msgstr ""
 "terminfo/termcap を\n"
 "                   デフォルトにする\n"
 
-#: src/main.c:2507
+#: src/main.c:2515
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  ftpfs コマンドのログをファイルに出力する\n"
 
-#: src/main.c:2510
+#: src/main.c:2518
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory file  [開発バージョンのみ: MAD "
 "メッセージのログをファイルに出力する]\n"
 
-#: src/main.c:2512
+#: src/main.c:2520
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5416,18 +5460,18 @@ msgstr ""
 "-P, --printwd      終了時，最後の作業ディレクトリを表示する\n"
 "-s, --slow         くどい操作を無視する (ターミナルの速度を落とすため)\n"
 
-#: src/main.c:2515
+#: src/main.c:2523
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      環境変数 TERMCAP に対するサポートを活性化する\n"
 
-#: src/main.c:2518
+#: src/main.c:2526
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile "
 "デフォルトディレクトリを終了時に設定するためにコマンドファイルを作成する\n"
 
-#: src/main.c:2521
+#: src/main.c:2529
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5437,21 +5481,23 @@ msgstr ""
 "-U, --subshell     同時にサブシェルモードを強制使用する\n"
 "-r, --forceexec    強制的にサブシェルを実行する\n"
 
-#: src/main.c:2525
+#: src/main.c:2533
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
+"+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
 "-v, --view fname   ビューアモードの中へ立ち上げる\n"
 "-V, --version      バージョンとコンフィグオプションを表示\n"
 "-x, --xterm        強制的に xterm でマウスをサポートし画面の保存/復元をする\n"
+"+number            number が 'mcedit' のためのファイルの開始行番号になる\n"
 
-#: src/main.c:2529
+#: src/main.c:2538
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [開発バージョンのみ: サブシェルのデバッグ\n"
 
-#: src/main.c:2531
+#: src/main.c:2540
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5461,7 +5507,7 @@ msgstr ""
 "不具合報告を ('mc -V' の出力を含めて) mc-bugs@nuclecu.unam.mx\n"
 "まで送ってください\n"
 
-#: src/main.c:2547
+#: src/main.c:2556
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5500,123 +5546,123 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2596
+#: src/main.c:2605
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Midnight Commander のライブラリディレクトリ: %s\n"
 
-#: src/main.c:2610
+#: src/main.c:2619
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "オプション -m "
 "は廃止されました。オプションメニューの「表示ビット数...」をご覧ください\n"
 
-#: src/main.c:2687
+#: src/main.c:2696
 msgid "Use to debug the background code"
 msgstr "バックグラウンドのコードのデバッグに使用"
 
-#: src/main.c:2693
+#: src/main.c:2702
 msgid "Request to run in color mode"
 msgstr "カラーモードでの実行を要求"
 
-#: src/main.c:2695
+#: src/main.c:2704
 msgid "Specifies a color configuration"
 msgstr "カラー設定を指定"
 
-#: src/main.c:2700
+#: src/main.c:2709
 msgid "Edits one file"
 msgstr "ファイルを編集"
 
-#: src/main.c:2704
+#: src/main.c:2713
 msgid "Displays this help message"
 msgstr "このヘルプメッセージを表示"
 
-#: src/main.c:2707
+#: src/main.c:2716
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "カラースキームの変更方法を画面に表示"
 
-#: src/main.c:2710
+#: src/main.c:2719
 msgid "Log ftp dialog to specified file"
 msgstr "ftp の対話記録を指定したファイルに保存"
 
-#: src/main.c:2717
+#: src/main.c:2726
 msgid "Obsolete"
 msgstr "廃止"
 
-#: src/main.c:2719
+#: src/main.c:2728
 msgid "Requests to run in black and white"
 msgstr "白黒モードでの実行を要求"
 
-#: src/main.c:2721
+#: src/main.c:2730
 msgid "Disable mouse support in text version"
 msgstr "テキスト版でのマウスのサポートを無効化"
 
-#: src/main.c:2724
+#: src/main.c:2733
 msgid "Disables subshell support"
 msgstr "サブシェルのサポートを無効化"
 
-#: src/main.c:2728
+#: src/main.c:2737
 msgid "Prints working directory at program exit"
 msgstr "プログラム終了時に作業ディレクトリを表示"
 
-#: src/main.c:2730
+#: src/main.c:2739
 msgid "Resets soft keys on HP terminals"
 msgstr "HPターミナルでソフトウェアキーボードを要求"
 
-#: src/main.c:2732
+#: src/main.c:2741
 msgid "To run on slow terminals"
 msgstr "遅い端末で実行"
 
-#: src/main.c:2735
+#: src/main.c:2744
 msgid "Use stickchars to draw"
 msgstr "stickchars で描画"
 
-#: src/main.c:2739
+#: src/main.c:2748
 msgid "Enables subshell support (default)"
 msgstr "サブシェルのサポート (デフォルト)"
 
-#: src/main.c:2744
+#: src/main.c:2753
 msgid "Tries to use termcap instead of terminfo"
 msgstr "terminfoの代わりにtermcapを試す"
 
-#: src/main.c:2748
+#: src/main.c:2757
 msgid "Displays the current version"
 msgstr "バージョンを表示"
 
-#: src/main.c:2750
+#: src/main.c:2759
 msgid "Launches the file viewer on a file"
 msgstr "ファイルビューアを起動"
 
-#: src/main.c:2752
+#: src/main.c:2761
 msgid "Forces xterm features"
 msgstr "強制的に xterm 機能を使う"
 
-#: src/main.c:2754
+#: src/main.c:2763
 msgid "Geometry for the window"
 msgstr "ウインドウのジオメトリ"
 
-#: src/main.c:2754
+#: src/main.c:2763
 msgid "GEOMETRY"
 msgstr "GEOMETRY"
 
-#: src/main.c:2755
+#: src/main.c:2764
 msgid "No windows opened at startup"
 msgstr "起動時にウインドウを表示しない"
 
-#: src/main.c:2756
+#: src/main.c:2765
 msgid "No desktop icons"
 msgstr "デスクトップアイコンがない"
 
-#: src/main.c:2757
+#: src/main.c:2766
 msgid "Look more like traditional gmc"
 msgstr "伝統的な gmc に近い外観"
 
-#: src/main.c:2759
+#: src/main.c:2768
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ".links 起動ファイルがあるディレクトリを表示し, 終了"
 
-#: src/main.c:3071
+#: src/main.c:3081
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5624,11 +5670,11 @@ msgstr ""
 "tty をオープンできません. -P フラグを付けずに起動しなくてはなりません.\n"
 "いくつかのシステムでは # `which mc` を実行したほうが良いかもしれません\n"
 
-#: src/main.c:3149
+#: src/main.c:3159
 msgid " Notice "
 msgstr " 注意 "
 
-#: src/main.c:3150
+#: src/main.c:3160
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5860,15 +5906,15 @@ msgstr " 本当に実行しますか? "
 msgid " No action taken "
 msgstr " 何も実行しませんでした "
 
-#: src/screen.c:2399 src/screen.c:2429 src/tree.c:1016
+#: src/screen.c:2401 src/screen.c:2431 src/tree.c:1016
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2400 src/screen.c:2430 src/tree.c:1020
+#: src/screen.c:2402 src/screen.c:2432 src/tree.c:1020
 msgid "Mkdir"
 msgstr "MkDir"
 
-#: src/screen.c:2416 src/tree.c:866
+#: src/screen.c:2418 src/tree.c:866
 #, c-format
 msgid ""
 " Can't chdir to \"%s\" \n"
@@ -5961,32 +6007,32 @@ msgstr ""
 "ファイル %s に書き込めません:\n"
 "%s\n"
 
-#: src/user.c:250
+#: src/user.c:271
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " 不正なシェルパターン定義です \"%c\". "
 
-#: src/user.c:383
+#: src/user.c:424
 msgid " Debug "
 msgstr " デバッグ "
 
-#: src/user.c:392
+#: src/user.c:433
 msgid " ERROR: "
 msgstr " エラー: "
 
-#: src/user.c:396
+#: src/user.c:437
 msgid " True:  "
 msgstr " 真: "
 
-#: src/user.c:398
+#: src/user.c:439
 msgid " False: "
 msgstr " 偽: "
 
-#: src/user.c:602
+#: src/user.c:645
 msgid " Warning -- ignoring file "
 msgstr " 警告 -- ファイルを無視 "
 
-#: src/user.c:603
+#: src/user.c:646
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5995,18 +6041,18 @@ msgstr ""
 "ファイル %s は root やあなたの所有物ではないのに誰でも書き込み\n"
 "可能です.利用するとあなたのセキュリティを侵害する恐れがあります"
 
-#: src/user.c:622
+#: src/user.c:670
 msgid " I can't run programs while logged on a non local directory "
 msgstr "  ローカルでないディレクトリにいる時にプログラムの実行はできません "
 
 #. FIXME: this message is not quite right
-#: src/user.c:720
+#: src/user.c:770
 #, c-format
 msgid " Empty file %s "
 msgstr " 空のファイル %s "
 
 #. Create listbox
-#: src/user.c:730
+#: src/user.c:779
 msgid " User menu "
 msgstr " ユーザー・メニュー "
 
@@ -6464,29 +6510,29 @@ msgstr ""
 "予期しない EOF です\n"
 "%s"
 
-#: vfs/direntry.c:310
+#: vfs/direntry.c:300
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "'%s' の Dir キャッシュが終了しました"
 
-#: vfs/direntry.c:440 vfs/direntry.c:443
+#: vfs/direntry.c:430 vfs/direntry.c:433
 msgid " Direntry warning "
 msgstr "Direntry の警告"
 
-#: vfs/direntry.c:440
+#: vfs/direntry.c:430
 #, c-format
 msgid "Super ino_usage is %d, memory leak"
 msgstr "Super ino_usage は %d で，これはメモリリークです"
 
-#: vfs/direntry.c:443
+#: vfs/direntry.c:433
 msgid "Super has want_stale set"
 msgstr "Super has want_stable set"
 
-#: vfs/direntry.c:823
+#: vfs/direntry.c:811
 msgid "Starting linear transfer..."
 msgstr "リニア転送を開始します..."
 
-#: vfs/direntry.c:968
+#: vfs/direntry.c:956
 msgid "Getting file"
 msgstr "ファイル取得中"
 
@@ -6702,20 +6748,20 @@ msgstr "(厳密な rfc959)"
 msgid "(chdir first)"
 msgstr "(初めに chdir)"
 
-#: vfs/ftpfs.c:1286
+#: vfs/ftpfs.c:1287
 msgid "ftpfs: failed"
 msgstr "ftpfs: 失敗しました"
 
-#: vfs/ftpfs.c:1296
+#: vfs/ftpfs.c:1297
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 失敗しました。フォールバックできません"
 
-#: vfs/ftpfs.c:1359
+#: vfs/ftpfs.c:1360
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: ファイルの保存中 %d (%d)"
 
-#: vfs/ftpfs.c:1774
+#: vfs/ftpfs.c:1775
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6863,31 +6909,31 @@ msgstr ""
 "%s\n"
 "これはtarアーカイブではないようです"
 
-#: vfs/vfs.c:1152
+#: vfs/vfs.c:1151
 msgid "Changes to file lost"
 msgstr "紛失したファイルに変更します"
 
-#: vfs/vfs.c:1795
+#: vfs/vfs.c:1794
 msgid "Could not parse:"
 msgstr "構文解析が出来ません:"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "More parsing errors will be ignored."
 msgstr "多くの構文解析エラーがでましたが無視します"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1796
 msgid "(sorry)"
 msgstr "(sorry)"
 
-#: vfs/vfs.c:1808
+#: vfs/vfs.c:1807
 msgid "Internal error:"
 msgstr "内部エラー:"
 
-#: vfs/vfs.c:1818
+#: vfs/vfs.c:1817
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld バイト転送)"
 
-#: vfs/vfs.c:1819
+#: vfs/vfs.c:1818
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld バイト転送しました"
