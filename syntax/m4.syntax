@@ -12,29 +12,29 @@ context default
 
 	#=========================
 	# Macros with parameters
-	keyword wholeleft builtin	yellow/24
-	keyword wholeleft decr		yellow/24
-	keyword wholeleft define	yellow/24
-	keyword wholeleft defn		yellow/24
-	keyword wholeleft esyscmd	yellow/24
-	keyword wholeleft eval		yellow/24
-	keyword wholeleft format	yellow/24
-	keyword wholeleft ifdef		yellow/24
-	keyword wholeleft ifelse	yellow/24
-	keyword wholeleft include	yellow/24
-	keyword wholeleft incr		yellow/24
-	keyword wholeleft index		yellow/24
-	keyword wholeleft len		yellow/24
-	keyword wholeleft maketemp	yellow/24
-	keyword wholeleft patsubst	yellow/24
-	keyword wholeleft popdef	yellow/24
-	keyword wholeleft pushdef	yellow/24
-	keyword wholeleft regexp	yellow/24
-	keyword wholeleft sinclude	yellow/24
-	keyword wholeleft substr	yellow/24
-	keyword wholeleft syscmd	yellow/24
-	keyword wholeleft translit	yellow/24
-	keyword wholeleft undefine	yellow/24
+	keyword whole builtin	yellow/24
+	keyword whole decr		yellow/24
+	keyword whole define	yellow/24
+	keyword whole defn		yellow/24
+	keyword whole esyscmd	yellow/24
+	keyword whole eval		yellow/24
+	keyword whole format	yellow/24
+	keyword whole ifdef		yellow/24
+	keyword whole ifelse	yellow/24
+	keyword whole include	yellow/24
+	keyword whole incr		yellow/24
+	keyword whole index		yellow/24
+	keyword whole len		yellow/24
+	keyword whole maketemp	yellow/24
+	keyword whole patsubst	yellow/24
+	keyword whole popdef	yellow/24
+	keyword whole pushdef	yellow/24
+	keyword whole regexp	yellow/24
+	keyword whole sinclude	yellow/24
+	keyword whole substr	yellow/24
+	keyword whole syscmd	yellow/24
+	keyword whole translit	yellow/24
+	keyword whole undefine	yellow/24
 
 	#=========================
 	# Macros with optional parameters
