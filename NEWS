@@ -38,6 +38,7 @@ Version 4.6.0-pre1.
 	- Samba configuration and codepage files locations can be
 	  configured.
 	- .netrc support in ftpfs is enabled by default.
+	- Viewing zip files could corrupt them.
 
 - Documentation.
 	- Added manuals in Spanish, Italian and Russian.
