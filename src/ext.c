@@ -311,12 +311,18 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 	}
 #endif /* !HAVE_X */
     }
-#ifndef PORT_DOES_BACKGROUND_EXEC
     if (file_name) {
+	/*
+	 * GNOME edition executes file_name in a separate process.
+	 * Cannot remove it here because it may happen before the
+	 * child has executed it.  my_system() in gutil.c has
+	 * (currently defunct) code to remove temporary files.
+	 */
+#ifndef HAVE_X
 	unlink (file_name);
+#endif /* !HAVE_X */
 	g_free (file_name);
     }
-#endif
     if (localcopy) {
         mc_stat (localcopy, &mystat);
         mc_ungetlocalcopy (filename, localcopy, localmtime != mystat.st_mtime);

@@ -1,3 +1,8 @@
+2001-07-08  Pavel Roskin  <proski@gnu.org>
+
+	* ext.c (exec_extension) [HAVE_X]: Free file_name. Add comment
+	explaining why it cannot be unlinked there.
+
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
 	* ext.c (exec_extension): Unlink temporary file earlier if it's
