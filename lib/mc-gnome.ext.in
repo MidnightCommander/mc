@@ -380,7 +380,7 @@ regex/\.mpe?g$
 # HTML
 regex/\.html?$
 #	Open=if echo "%d/%p" | grep ^ftp; then $viewer %d/%p; else $viewer file:%p; fi
-	Open=if [ x$DISPLAY = x ]; then lynx -force_html %f; else (@X11_WWW@ %f &); fi
+	Open=gnome-moz-remote %f
 	View=%view{ascii} lynx -dump -force_html %f; 
 	Run with AppletViewer=appletviewer %f
 	View with @X11_WWW@=@X11_WWW@ file://%f
