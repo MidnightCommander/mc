@@ -147,12 +147,12 @@ x-url/news:
 	open=gnome-moz-remote %f
 
 application/x-troff-man:
-	icon-filename=@icondir@/man.xpm
+	icon-filename=@icondir@/gnome-manpage.png
 	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ @MANDOC@ %f
 
 application/x-troff-man-compressed:
 	fm-view=%view{ascii,nroff} gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@
-	icon-filename=@icondir@/gnome-compressed.png
+	icon-filename=@icondir@/gnome-manpage.png
 
 application/x-troff-ms:
 	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f

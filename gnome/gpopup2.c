@@ -37,7 +37,7 @@ enum {
 	F_DICON		= 1 << 5,	/* Applies only to desktop icons */
 	F_NOTDEV	= 1 << 6,	/* Applies to non-devices only (ie. reg, lnk, dir) */
 	F_ADVANCED	= 1 << 7,	/* Only appears in advanced mode */
-	F_ACTIONS	= 1 << 8	/* Special marker for the position of MIME actions */
+	F_MIME_ACTIONS	= 1 << 8	/* Special marker for the position of MIME actions */
 };
 
 /* typedefs */
@@ -75,7 +75,7 @@ extern int we_can_afford_the_speed;
 static struct action file_actions[] = {
 	{ N_("Open"),			F_NOTDEV,				handle_open },
 	{ "",				F_NOTDEV,				NULL },
-	{ "",				F_ACTIONS,				NULL },
+	{ "",				F_MIME_ACTIONS,				NULL },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with },
 	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view },
 	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },
@@ -171,11 +171,105 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
 	gnome_app_fill_menu_custom (menu_shell, uiinfo, &uibdata, NULL, FALSE, pos);
 }
 
+/* Convenience function to free something when an object is destroyed */
+static void
+free_on_destroy (GtkObject *object, gpointer data)
+{
+	g_free (data);
+}
 
-/* The context menu: text displayed, condition that must be met and the routine
- * that gets invoked upon activation.
+static void
+mime_action_callback (GtkWidget *widget, gpointer data)
+{
+	char *filename;
+	char *key;
+	char *mime_type;
+	char *value;
+
+	filename = data;
+	key = gtk_object_get_user_data (widget);
+
+	g_assert (filename != NULL);
+	g_assert (key != NULL);
+
+	mime_type = gnome_mime_type_or_default (filename, NULL);
+	g_assert (mime_type != NULL);
+
+	value = gnome_mime_get_value (mime_type, key);
+	exec_extension (filename, value, NULL, NULL, 0);
+}
+
+/* Creates the menu items for actions based on the MIME type of the selected
+ * file in the panel.
  */
+static int
+create_mime_actions (GtkWidget *menu, WPanel *panel, int pos)
+{
+	char *full_name;
+	const char *mime_type;
+	GList *keys, *l;
+	GnomeUIInfo uiinfo[] = {
+		{ 0 },
+		GNOMEUIINFO_END
+	};
 
+	full_name = g_concat_dir_and_file (panel->cwd, panel->dir.list[panel->selected].fname);
+	mime_type = gnome_mime_type_or_default (full_name, NULL);
+	g_free (full_name);
+
+	if (!mime_type)
+		return pos;
+
+	keys = gnome_mime_get_keys (mime_type);
+	for (l = keys; l; l = l->next) {
+		char *key;
+		char *str;
+
+		str = key = l->data;
+
+		if (strncmp (key, "open.", 5) != 0)
+			continue;
+
+		str += 5;
+		while (*str && *str != '.')
+			str++;
+
+		if (*str)
+			str++;
+
+		if (!*str)
+			continue;
+
+		/* Create the item for that entry */
+
+		uiinfo[0].type = GNOME_APP_UI_ITEM;
+		uiinfo[0].label = str;
+		uiinfo[0].hint = NULL;
+		uiinfo[0].moreinfo = mime_action_callback;
+		uiinfo[0].user_data = full_name;
+		uiinfo[0].unused_data = NULL;
+		uiinfo[0].pixmap_type = GNOME_APP_PIXMAP_NONE;
+		uiinfo[0].pixmap_info = NULL;
+		uiinfo[0].accelerator_key = 0;
+		uiinfo[0].ac_mods = 0;
+		uiinfo[0].widget = NULL;
+
+		fill_menu (GTK_MENU_SHELL (menu), uiinfo, pos++);
+		gtk_object_set_user_data (GTK_OBJECT (uiinfo[0].widget), key);
+
+		/* Remember to free this memory */
+
+		gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
+				    (GtkSignalFunc) free_on_destroy,
+				    full_name);
+		gtk_signal_connect (GTK_OBJECT (uiinfo[0].widget), "destroy",
+				    (GtkSignalFunc) free_on_destroy,
+				    key);
+	}
+
+	g_list_free (keys);
+	return pos;
+}
 
 /* Creates the menu items for the standard actions.  Returns the position at
  * which additional menu items should be inserted.
@@ -193,9 +287,17 @@ create_actions (GtkWidget *menu, gint flags, WPanel *panel)
 	pos = 0;
 
 	for (action = file_actions; action->text; action++) {
+		/* Insert the MIME actions if appropriate */
+		if ((action->flags & F_MIME_ACTIONS) && (flags & F_SINGLE)) {
+			pos = create_mime_actions (menu, panel, pos);
+			continue;
+		}
+
+		/* Filter the actions that are not appropriate */
 		if ((action->flags & flags) != action->flags)
 			continue;
 
+		/* Create the menu item for this action */
 		if (action->text[0]) {
 			uiinfo[0].type = GNOME_APP_UI_ITEM;
 			uiinfo[0].label = _(action->text);
