@@ -1,4 +1,4 @@
-# Ukrainian translations for (g)mc messages.
+# Ukrainian translations for mc messages.
 # Copyright (C) 1999-2002 Free Software Foundation, Inc.
 # Yuriy Syrota <yuri@renome.rovno.ua>, 1999-2001
 #
@@ -3766,7 +3766,7 @@ msgstr "З╕ вбудованим редактором\n"
 
 #: src/textconf.c:37
 msgid "Using system-installed S-Lang library"
-msgstr "З використанням встановлено у систем╕ б╕бл╕отек╕ S-Lang"
+msgstr "З використанням встановлено╖ у систем╕ б╕бл╕отеки S-Lang"
 
 #: src/textconf.c:39
 msgid "Using included S-Lang library"
@@ -3782,7 +3782,7 @@ msgstr "з базою даних termcap"
 
 #: src/textconf.c:49
 msgid "with an unknown terminal database"
-msgstr "з нев╕дом╕й терм╕нальн╕й базою даних"
+msgstr "з нев╕домою терм╕нальною базою даних"
 
 #: src/textconf.c:53
 msgid "Using the ncurses library"
