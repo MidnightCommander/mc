@@ -76,27 +76,8 @@ panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, f
 static void
 panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 {
-	GtkCListRow *row;
-
-	row = 0;
-	
-	if (gmc_color_pairs [color_pair].fore)
-		gtk_clist_set_foreground (cl, row, gmc_color_pairs [color_pair].fore);
-	else {
-		/* ARREGLAME GUEY */
-		row = g_list_nth (cl->rows, row);
-		row->fg_set = 0;
-	}
-
-	if (gmc_color_pairs [color_pair].back)
-		gtk_clist_set_background (cl, row, gmc_color_pairs [color_pair].back);
-	else {
-		if (!row)
-			row = g_list_nth (cl->rows, row);
-		
-		row->bg_set = 0;
-	}
-		
+	gtk_clist_set_foreground (cl, row, gmc_color_pairs [color_pair].fore);
+	gtk_clist_set_background (cl, row, gmc_color_pairs [color_pair].back);
 }
 
 void
@@ -174,8 +155,11 @@ x_panel_set_size (int index)
 void
 x_panel_select_item (WPanel *panel, int index, int value)
 {
-	printf ("x_panel_select_item: value = %d\n", value);
-	panel_file_list_set_row_colors (GTK_CLIST (panel->list), index, MARKED_COLOR);
+	int color;
+
+	color = file_compute_color (value ? MARKED : NORMAL, &panel->dir.list[index]);
+
+	panel_file_list_set_row_colors (GTK_CLIST (panel->list), index, color);
 }
 
 void

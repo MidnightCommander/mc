@@ -1,5 +1,7 @@
 1998-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (x_panel_select_item): Set the colors of the row.
+
 	* gmain.c (xtoolkit_init): Changed gnome_init() to new version.
 	(xtoolkit_init): Call gnome_init() properly.  Also, return 0.
 

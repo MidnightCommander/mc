@@ -28,9 +28,9 @@ GdkColorContext *mc_cc;
 struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 
 char *default_edition_colors =
-"normal=black,white:"
+"normal=black:"
 "directory=blue:"
-"marked=white,blue:"
+"marked=white,seagreen:"
 "execute=green:"
 "link=yellow:"
 "device=magenta:"
