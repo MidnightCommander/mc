@@ -1,5 +1,7 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (mc_def_getlocalcopy): Preserve existing extension.
+
 	* direntry.c (vfs_s_getlocalcopy): Fix potentially dangerous
 	strcpy().
 

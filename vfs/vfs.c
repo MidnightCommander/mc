@@ -1090,12 +1090,25 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     int fdin, fdout, i;
     char buffer[8192];
     struct stat mystat;
+    char *ext = NULL;
+    char *ptr;
 
     fdin = mc_open (filename, O_RDONLY);
     if (fdin == -1)
         return NULL;
 
-    fdout = mc_mkstemps (&tmp, "mclocalcopy", NULL);
+    /* Try to preserve existing extension */
+    for (ptr = filename + strlen(filename) - 1; ptr >= filename; ptr--) {
+	if (*ptr == '.') {
+	    ext = ptr;
+	    break;
+	}
+
+	if (!isalnum((unsigned char) *ptr))
+	    break;
+    }
+
+    fdout = mc_mkstemps (&tmp, "mclocalcopy", ext);
     if (fdout == -1)
 	goto fail;
     while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0){
