@@ -1,3 +1,7 @@
+2004-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* tar.c: Eliminate struct hstat, use stack arguments instead.
+
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* utilvfs.c (vfs_parse_ls_lga): Handle device without whitespace(s)

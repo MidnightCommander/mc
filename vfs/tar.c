@@ -187,8 +187,6 @@ static long tar_from_oct (int digs, char *where)
     return value;
 }
 
-static struct stat hstat;		/* Stat struct corresponding */
-
 static void tar_free_archive (struct vfs_class *me, struct vfs_s_super *archive)
 {
     if (archive->u.arch.fd != -1)
@@ -274,7 +272,8 @@ static void tar_skip_n_records (struct vfs_s_super *archive, int tard, int n)
 }
 
 static void
-tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header)
+tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header,
+	       size_t h_size)
 {
     st->st_mode = tar_from_oct (8, header->header.mode);
 
@@ -321,7 +320,7 @@ tar_fill_stat (struct vfs_class *me, struct stat *st, union record *header)
 	st->st_uid = tar_from_oct (8, header->header.uid);
 	st->st_gid = tar_from_oct (8, header->header.gid);
     }
-    st->st_size = hstat.st_size;
+    st->st_size = h_size;
     st->st_mtime = tar_from_oct (1 + 12, header->header.mtime);
     st->st_atime = tar_from_oct (1 + 12, header->header.atime);
     st->st_ctime = tar_from_oct (1 + 12, header->header.ctime);
@@ -340,7 +339,8 @@ typedef enum {
  *
  */
 static ReadStatus
-tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
+tar_read_header (struct vfs_class *me, struct vfs_s_super *archive,
+		 int tard, size_t *h_size)
 {
     register int i;
     register long sum, signed_sum, recsum;
@@ -356,13 +356,14 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 
     recsum = tar_from_oct (8, header->header.chksum);
 
-    sum = 0; signed_sum = 0;
+    sum = 0;
+    signed_sum = 0;
     p = header->charptr;
     for (i = sizeof (*header); --i >= 0;) {
-	        /*
-		 * We can't use unsigned char here because of old compilers,
-		 * e.g. V7.
-		 */
+	/*
+	 * We can't use unsigned char here because of old compilers,
+	 * e.g. V7.
+	 */
 	signed_sum += *p;
 	sum += 0xFF & *p++;
     }
@@ -384,22 +385,23 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 
     if (sum != recsum && signed_sum != recsum)
 	return STATUS_BADCHECKSUM;
-    
+
     /*
      * linkflag on BSDI tar (pax) always '\000'
      */
-    if (header->header.linkflag == '\000' &&
-	(i = strlen(header->header.arch_name)) &&
-	header->header.arch_name[i - 1] == '/')
+    if (header->header.linkflag == '\000'
+	&& (i = strlen (header->header.arch_name))
+	&& header->header.arch_name[i - 1] == '/')
 	header->header.linkflag = LF_DIR;
-    
+
     /*
      * Good record.  Decode file size and return.
      */
-    if (header->header.linkflag == LF_LINK || header->header.linkflag == LF_DIR)
-	hstat.st_size = 0;	/* Links 0 size on tape */
+    if (header->header.linkflag == LF_LINK
+	|| header->header.linkflag == LF_DIR)
+	*h_size = 0;		/* Links 0 size on tape */
     else
-	hstat.st_size = tar_from_oct (1 + 12, header->header.size);
+	*h_size = tar_from_oct (1 + 12, header->header.size);
 
     header->header.arch_name[NAMSIZ - 1] = '\0';
     if (header->header.linkflag == LF_LONGNAME
@@ -409,19 +411,17 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	int size, written;
 
 	longp = ((header->header.linkflag == LF_LONGNAME)
-		 ? &next_long_name
-		 : &next_long_link);
+		 ? &next_long_name : &next_long_link);
 
 	if (*longp)
 	    g_free (*longp);
-	bp = *longp = g_malloc (hstat.st_size);
+	bp = *longp = g_malloc (*h_size);
 
-	for (size = hstat.st_size;
-	     size > 0;
-	     size -= written) {
+	for (size = *h_size; size > 0; size -= written) {
 	    data = tar_get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
-		message (1, MSG_ERROR, _("Unexpected EOF on archive file"));
+		message (1, MSG_ERROR,
+			 _("Unexpected EOF on archive file"));
 		return STATUS_BADCHECKSUM;
 	    }
 	    written = RECORDSIZE;
@@ -432,8 +432,8 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	    bp += written;
 	}
 #if 0
-	if (hstat.st_size > 1)
-	    bp [hstat.st_size - 1] = 0;	/* just to make sure */
+	if (*h_size > 1)
+	    bp[*h_size - 1] = 0;	/* just to make sure */
 #endif
 	goto recurse;
     } else {
@@ -445,51 +445,54 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	int len;
 	char *current_file_name, *current_link_name;
 
-	current_link_name = (next_long_link
-			     ? next_long_link
-			     : g_strdup (header->header.arch_linkname));
+	current_link_name =
+	    (next_long_link ? next_long_link :
+	     g_strdup (header->header.arch_linkname));
 	len = strlen (current_link_name);
-	if (len > 1 && current_link_name [len - 1] == '/')
+	if (len > 1 && current_link_name[len - 1] == '/')
 	    current_link_name[len - 1] = 0;
 
-	current_file_name = (next_long_name
-			     ? next_long_name
-			     : g_strdup (header->header.arch_name));
+	current_file_name =
+	    (next_long_name ? next_long_name :
+	     g_strdup (header->header.arch_name));
 	len = strlen (current_file_name);
 	if (current_file_name[len - 1] == '/') {
 	    current_file_name[len - 1] = 0;
 	}
 
 	data_position = current_tar_position;
-	
+
 	p = strrchr (current_file_name, '/');
 	if (p == NULL) {
 	    p = current_file_name;
-	    q = current_file_name + len; /* "" */
+	    q = current_file_name + len;	/* "" */
 	} else {
 	    *(p++) = 0;
 	    q = current_file_name;
 	}
 
-	parent = vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
+	parent =
+	    vfs_s_find_inode (me, archive, q, LINK_NO_FOLLOW, FL_MKDIR);
 	if (parent == NULL) {
 	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}
 
 	if (header->header.linkflag == LF_LINK) {
-	    inode = vfs_s_find_inode (me, archive, current_link_name, LINK_NO_FOLLOW, 0);
+	    inode =
+		vfs_s_find_inode (me, archive, current_link_name,
+				  LINK_NO_FOLLOW, 0);
 	    if (inode == NULL) {
-	        message (1, MSG_ERROR, _("Inconsistent tar archive"));
+		message (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
-		entry = vfs_s_new_entry(me, p, inode);
-		vfs_s_insert_entry(me, parent, entry);
+		entry = vfs_s_new_entry (me, p, inode);
+		vfs_s_insert_entry (me, parent, entry);
 		g_free (current_link_name);
 		goto done;
 	    }
 	}
 
-	tar_fill_stat (me, &st, header);
+	tar_fill_stat (me, &st, header, *h_size);
 	inode = vfs_s_new_inode (me, archive, &st);
 
 	inode->data_offset = data_position;
@@ -503,11 +506,12 @@ tar_read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	vfs_s_insert_entry (me, parent, entry);
 	g_free (current_file_name);
 
-    done:
+      done:
 	next_long_link = next_long_name = NULL;
 
 	if (header->header.isextended) {
-	    while (tar_get_next_record (archive, tard)->ext_hdr.isextended);
+	    while (tar_get_next_record (archive, tard)->ext_hdr.
+		   isextended);
 	    inode->data_offset = current_tar_position;
 	}
 	return STATUS_SUCCESS;
@@ -533,15 +537,16 @@ tar_open_archive (struct vfs_class *me, struct vfs_s_super *archive,
 	return -1;
 
     for (;;) {
-	prev_status = status;
-	status = tar_read_header (me, archive, tard);
+	size_t h_size;
 
+	prev_status = status;
+	status = tar_read_header (me, archive, tard, &h_size);
 
 	switch (status) {
 
 	case STATUS_SUCCESS:
 	    tar_skip_n_records (archive, tard,
-				(hstat.st_size + RECORDSIZE -
+				(h_size + RECORDSIZE -
 				 1) / RECORDSIZE);
 	    continue;
 
