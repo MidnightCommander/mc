@@ -1,3 +1,9 @@
+2000-04-04  Jacob and Miguee, The Debugging Machines <debugging_machines@helixcode.com>
+
+	* gdesktop.c (click_proxy_button_press): Federico should make sure
+	he releases the server grab before he starts pooping up menus on
+	the desktop.
+
 2000-03-13  Miguel de Icaza  <miguel@helixcode.com>
 
 	* gaction.c (gmc_open_filename): Usae open.flags to determine

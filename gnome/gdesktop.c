@@ -2886,6 +2886,22 @@ update_drag_selection (int x, int y)
 		}
 }
 
+/* Terminates rubberbanding when the button is released.  This is shared by the
+ * button_release handler and the motion_notify handler.
+ */
+static void
+perform_release (guint32 time)
+{
+	draw_rubberband (click_current_x, click_current_y);
+	gdk_pointer_ungrab (time);
+	click_dragging = FALSE;
+
+	update_drag_selection (click_current_x, click_current_y);
+
+	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
+}
+
 /* Handles button presses on the root window via the click_proxy_gdk_window */
 static gint
 click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
@@ -2945,27 +2961,14 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 
 		return TRUE;
 	} else if (event->button == 3) {
+		if (click_dragging)
+			perform_release (event->time);
+
 		desktop_popup (event);
 		return TRUE;
 	}
 
 	return FALSE;
-}
-
-/* Terminates rubberbanding when the button is released.  This is shared by the
- * button_release handler and the motion_notify handler.
- */
-static void
-perform_release (guint32 time)
-{
-	draw_rubberband (click_current_x, click_current_y);
-	gdk_pointer_ungrab (time);
-	click_dragging = FALSE;
-
-	update_drag_selection (click_current_x, click_current_y);
-
-	XUngrabServer (GDK_DISPLAY ());
-	gdk_flush ();
 }
 
 /* Handles button releases on the root window via the click_proxy_gdk_window */
