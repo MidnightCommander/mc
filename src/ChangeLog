@@ -1,3 +1,10 @@
+2002-09-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* screen.c (string_file_name): Fix possible off-by-one
+	buffer overflow.
+	(string_file_size): Avoid unsafe strcpy().
+	(string_file_size_brief): Likewise.  Eliminate buffer array.
+
 2002-09-08  Pavel Roskin  <proski@gnu.org>
 
 	* color.c: Move hascolors variable into init_colors().  Adjust

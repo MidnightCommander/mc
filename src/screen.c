@@ -148,7 +148,7 @@ string_file_name (file_entry *fe, int len)
     static char buffer [BUF_SMALL];
     int i;
 
-    for (i = 0; i < sizeof(buffer); i++) {
+    for (i = 0; i < sizeof(buffer) - 1; i++) {
 	char c;
 
 	c = fe->fname[i];
@@ -174,8 +174,7 @@ string_file_size (file_entry *fe, int len)
 
     /* Don't ever show size of ".." since we don't calculate it */
     if (!strcmp (fe->fname, "..")) {
-       strcpy (buffer, _("UP--DIR"));
-       return buffer;
+	return _("UP--DIR");
     }
 
 #ifdef HAVE_ST_RDEV
@@ -195,16 +194,12 @@ string_file_size (file_entry *fe, int len)
 static const char *
 string_file_size_brief (file_entry *fe, int len)
 {
-    static char buffer [BUF_TINY];
-
     if (S_ISLNK (fe->buf.st_mode) && !fe->f.link_to_dir) {
-       strcpy (buffer, _("SYMLINK"));
-       return buffer;
+	return _("SYMLINK");
     }
 
     if ((S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
-       strcpy (buffer, _("SUB-DIR"));
-       return buffer;
+	return _("SUB-DIR");
     }
 
     return string_file_size (fe, len);
