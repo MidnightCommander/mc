@@ -1,5 +1,7 @@
 2001-05-18  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Use src/main.c in AC_INIT.
+
 	* create_vcs: Remove.
 
 	* INSTALL: Update download locations for MC, rxvt, gpm, ncurses.

@@ -1,7 +1,7 @@
 dnl
 dnl Configure.in file for the Midnight Commander
 dnl
-AC_INIT(create_vcs)
+AC_INIT(src/main.c)
 AC_PREREQ(2.13)
 AC_CANONICAL_HOST
 
