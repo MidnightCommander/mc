@@ -150,11 +150,11 @@ free_archive (vfs *me, vfs_s_super *super)
 	close(SUP.sockr);
 	SUP.sockw = SUP.sockr = -1;
     }
-    ifree (SUP.host);
-    ifree (SUP.home);
-    ifree (SUP.user);
-    ifree (SUP.cwdir);
-    ifree (SUP.password);
+    g_free (SUP.host);
+    g_free (SUP.home);
+    g_free (SUP.user);
+    g_free (SUP.cwdir);
+    g_free (SUP.password);
 }
 
 static void

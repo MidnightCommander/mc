@@ -1,5 +1,10 @@
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Get rid of ifree(), it's equivalent to g_free().
+	* direntry.c: Likewise.
+	* fish.c: Likewise.
+	* ftpfs.c: Likewise.
+
 	* fish.c (fish_fill_names): New function, replacement for
 	generic vfs_s_fill_names() which didn't work right with fish.
 

@@ -91,7 +91,7 @@ vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 	}
 
 	CALL (free_inode) (me, ino);
-	ifree (ino->linkname);
+	g_free (ino->linkname);
 	if (ino->localname){
 	    unlink (ino->localname);
 	    g_free(ino->localname);
@@ -443,7 +443,7 @@ vfs_s_free_super (vfs *me, vfs_s_super *super)
     }
 
     CALL (free_archive) (me, super);
-    ifree (super->name);
+    g_free (super->name);
     super->name = NULL;
     g_free(super);
 }
