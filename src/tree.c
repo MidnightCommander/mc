@@ -4,12 +4,12 @@
    Written: 1994, 1996 Janne Kukonlehto
             1997 Norbert Warmuth
             1996, 1999 Miguel de Icaza
-	    
+
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
    the Free Software Foundation; either version 2 of the License, or
    (at your option) any later version.
-   
+
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -90,7 +90,7 @@ tree_entry *tree_add_entry (WTree *tree, char *name)
 {
     if (!tree)
 	return 0;
-    
+
     return tree_store_add_entry (name);
 }
 
@@ -164,8 +164,7 @@ void tree_destroy (WTree *tree)
 {
     tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
-    tree_store_destroy ();
-    
+
     if (tree->tree_shown){
 	g_free (tree->tree_shown);
 	tree->tree_shown = 0;
@@ -186,7 +185,7 @@ void load_tree (WTree *tree)
 void save_tree (WTree *tree)
 {
     int error;
-    
+
     error = tree_store_save ();
 
     if (error){
@@ -208,17 +207,17 @@ static void tree_show_mini_info (WTree *tree, int tree_lines, int tree_cols)
 	line = tree_lines+2;
     } else
 	line = tree_lines+1;
-    
+
     widget_move (&tree->widget, line, 1);
     hline (' ', tree_cols);
     widget_move (&tree->widget, line, 1);
-    
+
     if (tree->searching){
 	/* Show search string */
 	attrset (TREE_NORMALC);
 	attrset (FOCUSC);
 	addch (PATH_SEP);
-	
+
 	addstr (name_trunc (tree->search_buffer, tree_cols-2));
 	addch (' ');
 	attrset (FOCUSC);
@@ -263,7 +262,7 @@ void show_tree (WTree *tree)
 	tree->topdiff = 0;
     }
     current = tree->selected_ptr;
-    
+
     /* Calculate the directory which is to be shown on the topmost line */
     if (tree_navigation_flag){
 	i = 0;
@@ -298,7 +297,7 @@ void show_tree (WTree *tree)
 
 	if (!current)
 	    continue;
-	
+
 	tree->tree_shown [i] = current;
 	if (current->sublevel == topsublevel){
 
@@ -334,7 +333,7 @@ void show_tree (WTree *tree)
 		addch (ACS_LTEE);
 	    addch (ACS_HLINE);
 	    noacs ();
-	    
+
 	    if (tree->active && current == tree->selected_ptr) {
 		/* Selected directory -> change color */
 		if (!use_colors && !tree->is_panel)
@@ -349,7 +348,7 @@ void show_tree (WTree *tree)
 				tree_cols - 2 - 4 - 3 * j));
 	}
 	addch (' ');
-	
+
 	/* Return to normal color */
 	attrset (TREE_NORMALC);
 
@@ -391,7 +390,7 @@ void tree_move_backward (WTree *tree, int i)
 {
     tree_entry *current;
     int j = 0;
-    
+
     if (tree_navigation_flag){
 	current = tree->selected_ptr;
 	while (j < i && current->prev
@@ -462,7 +461,7 @@ int tree_move_to_parent (WTree *tree)
 {
     tree_entry *current;
     tree_entry *old;
-    
+
     if (!tree->selected_ptr)
 	return 0;
     old = tree->selected_ptr;
@@ -535,7 +534,7 @@ static int event_callback (Gpm_Event *event, WTree *tree)
 
     if (tree->is_panel)
 	event->y--;
-    
+
     event->y--;
 
     if (!tree->active)
@@ -602,7 +601,7 @@ static void tree_do_search (WTree *tree, int key)
 
     if (!search_tree (tree, tree->search_buffer))
 	tree->search_buffer [--l] = 0;
-    
+
     show_tree (tree);
     maybe_chdir (tree);
 }
@@ -632,7 +631,7 @@ void tree_copy (WTree *tree, char *default_dest)
     long   count = 0;
     double bytes = 0;
     FileOpContext *ctx;
-    
+
     if (!tree->selected_ptr)
 	return;
     g_snprintf (cmd_buf, sizeof(cmd_buf), _("Copy \"%s\" directory to:"),
@@ -732,7 +731,7 @@ tree_rmdir_cmd (WTree *tree)
     long count = 0;
     double bytes = 0;
     FileOpContext *ctx;
-    
+
     if (tree->selected_ptr){
 	if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
 	    return;
@@ -814,7 +813,7 @@ static int
 move_left (WTree *tree)
 {
     int v;
-    
+
     if (tree_navigation_flag){
 	v = tree_move_to_parent (tree);
 	show_tree (tree);
@@ -878,15 +877,15 @@ tree_start_search (WTree *tree)
     int i;
 
     if (tree->searching){
-    
+
 	if (tree->selected_ptr == tree->store->tree_last)
 	    tree_move_to_top(tree);
 	else {
-	/* set navigation mode temporarily to 'Static' because in 
+	/* set navigation mode temporarily to 'Static' because in
 	 * dynamic navigation mode tree_move_forward will not move
 	 * to a lower sublevel if necessary (sequent searches must
 	 * start with the directory followed the last found directory)
-         */	 
+         */
 	    i = tree_navigation_flag;
 	    tree_navigation_flag = 0;
 	    tree_move_forward (tree, 1);
@@ -984,7 +983,7 @@ tree_frame (Dlg_head *h, WTree *tree)
     if (tree->is_panel)
 	draw_double_box (h, tree->widget.y, tree->widget.x, tree->widget.lines,
 		         tree->widget.cols);
-    
+
     if (show_mini_info && tree->is_panel){
 	widget_move (tree, tlines (tree) + 1, 1);
 	hline (ACS_HLINE, tree->widget.cols - 2);
@@ -1007,29 +1006,29 @@ tree_callback (Dlg_head *h, WTree *tree, int msg, int par)
     case WIDGET_FOCUS:
 	tree->active = 1;
 	define_label (h, (Widget *)tree, 1, _("Help"), (voidfn) tree_help_cmd);
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    2, _("Rescan"), (buttonbarfn)tree_rescan_cmd, tree);
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    3, _("Forget"), (buttonbarfn)tree_forget_cmd, tree);
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    5, _("Copy"),   (buttonbarfn) tree_copy_cmd, tree);
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    6, _("RenMov"), (buttonbarfn) tree_move_cmd, tree);
 #if 0
 	/* FIXME: mkdir is currently defunct */
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    7, _("Mkdir"),  (buttonbarfn) tree_mkdir_cmd, tree);
 #else
         define_label (h, (Widget *)tree, 7, "", 0);
 #endif
-	define_label_data (h, (Widget *)tree, 
+	define_label_data (h, (Widget *)tree,
 	    8, _("Rmdir"),  (buttonbarfn) tree_rmdir_cmd, tree);
 	set_navig_label (h);
 	redraw_labels (h, (Widget *)tree);
 
-	
+
 	/* FIXME: Should find a better way of only displaying the
-	   currently selected item */ 
+	   currently selected item */
 	show_tree (tree);
 	return 1;
 
@@ -1053,7 +1052,7 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     tree->is_panel = is_panel;
     tree->selected_ptr = 0;
 
-    tree->store = tree_store_init ();
+    tree->store = tree_store_get ();
     tree_store_add_entry_remove_hook (remove_callback, tree);
     tree->tree_shown = 0;
     tree->search_buffer [0] = 0;
@@ -1061,12 +1060,9 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     tree->searching = 0;
     tree->done = 0;
     tree->active = 0;
-    
+
     /* We do not want to keep the cursor */
     widget_want_cursor (tree->widget, 0);
     load_tree (tree);
     return tree;
 }
-
-
-

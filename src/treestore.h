@@ -30,7 +30,6 @@ typedef struct {
 } tree_scan;
 
 typedef struct {
-	int refcount;
 	tree_entry *tree_first;     	/* First entry in the list */
 	tree_entry *tree_last;          /* Last entry in the list */
 	tree_entry *check_start;	/* Start of checked subdirectories */
@@ -44,12 +43,11 @@ typedef struct {
 
 extern void (*tree_store_dirty_notify)(int state);
 
-TreeStore  *tree_store_init            (void);
+TreeStore  *tree_store_get             (void);
 int         tree_store_load            (void);
 int         tree_store_save            (void);
 tree_entry *tree_store_add_entry       (char *name);
 void        tree_store_remove_entry    (char *name);
-void        tree_store_destroy         (void);
 tree_entry *tree_store_start_check     (char *path);
 tree_entry *tree_store_start_check_cwd (void);
 void        tree_store_mark_checked    (const char *subname);

@@ -132,34 +132,9 @@ tree_store_whereis (char *name)
 }
 
 TreeStore *
-tree_store_init (void)
+tree_store_get (void)
 {
-	ts.tree_first = 0;
-	ts.tree_last = 0;
-	ts.refcount++;
-	ts.check_name = NULL;
-	
 	return &ts;
-}
-
-void
-tree_store_destroy (void)
-{
-	tree_entry *current, *old;
-
-	ts.refcount--;
-	
-	current = ts.tree_first;
-	while (current){
-		old = current;
-		current = current->next;
-		g_free (old->name);
-		g_free (old);
-	}
-
-	ts.tree_first = NULL;
-	ts.tree_last = NULL;
-	ts.loaded = FALSE;
 }
 
 static char *

@@ -1,5 +1,14 @@
 1999-09-13  Federico Mena Quintero  <federico@redhat.com>
 
+	* treestore.c: Removed tree_store_destroy(), renamed
+	tree_store_init() to tree_store_get().
+
+	* tree.c (tree_destroy): Do not destroy the tree store.
+	(tree_new): Get the tree store, do not initialize it.
+
+	* treestore.c (tree_store_init): Do not set the linked list
+	pointers to NULL.
+
 	* panel.h (WPanel): Added a new field that indicates whether the
 	user is dragging something over the tree.
 
