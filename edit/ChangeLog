@@ -1,3 +1,14 @@
+2003-07-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* edit-widget.h: Resurrect "dir" field in WEdit to store
+	directory for relative filenames.
+
+	* edit.c (edit_clean): Release edit->dir.
+
+	* editcmd.c (edit_save_file): Use absolute filename.
+	Temporarily disable safe save and backups on remote VFS because
+	it doesn't work - again.
+
 2003-07-25  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (edit_execute_cmd): Enable user menu in mcedit.

@@ -31,6 +31,7 @@ struct WEdit {
     int num_widget_columns;
 
     char *filename;		/* Name of the file */
+    char *dir;			/* NULL if filename is absolute */
 
     /* dynamic buffers and cursor position for editor: */
     long curs1;			/* position of the cursor from the beginning of the file. */

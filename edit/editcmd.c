@@ -207,7 +207,14 @@ edit_save_file (WEdit *edit, const char *filename)
     if (!*filename)
 	return 0;
 
-    if ((fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
+    if (*filename != PATH_SEP && edit->dir) {
+	savename = concat_dir_and_file (edit->dir, filename);
+	filename = catstrs (savename, NULL);
+	g_free (savename);
+    }
+
+    if (!vfs_file_is_local (filename) ||
+	(fd = mc_open (filename, O_WRONLY | O_BINARY)) == -1) {
 	/*
 	 * The file does not exists yet, so no safe save or
 	 * backup are necessary.
@@ -426,6 +433,12 @@ edit_set_filename (WEdit *edit, const char *f)
     if (!f)
 	f = "";
     edit->filename = g_strdup (f);
+    if (edit->dir == NULL && *f != PATH_SEP)
+#ifdef USE_VFS
+	edit->dir = g_strdup (vfs_get_current_dir ());
+#else
+	edit->dir = g_get_current_dir ();
+#endif
 }
 
 /* Here we want to warn the users of overwriting an existing file,

@@ -606,6 +606,7 @@ edit_clean (WEdit *edit)
 
     g_free (edit->undo_stack);
     g_free (edit->filename);
+    g_free (edit->dir);
 
     edit_purge_widget (edit);
 
