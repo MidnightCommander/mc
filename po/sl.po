@@ -2179,7 +2179,7 @@ msgstr "da"
 #: src/filegui.c:348
 #, c-format
 msgid "ETA %d:%02d.%02d"
-msgstr "Èas do konca &d:&02d.%02d"
+msgstr "Èas do konca %d:%02d.%02d"
 
 #: src/filegui.c:370
 #, c-format
@@ -4436,7 +4436,7 @@ msgstr ""
 #: vfs/cpio.c:311 vfs/cpio.c:361
 #, c-format
 msgid ""
-"Corrupted cpio header encountered in\n"
+"Corrupt cpio header encountered in\n"
 "%s"
 msgstr ""
 "Pokvarjena cpio glava v\n"
