@@ -39,7 +39,6 @@
 
 #include "vfs.h"
 #include "smbfs.h"
-#include "tcputil.h"
 #include "../src/dialog.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
@@ -1192,7 +1191,7 @@ smbfs_opendir (vfs *me, char *dirname)
 }
 
 static int
-fake_server_stat(char *server_url, const char *path, struct stat *buf)
+fake_server_stat(const char *server_url, const char *path, struct stat *buf)
 {
 	dir_entry *dentry;
 	char *p;
@@ -1204,23 +1203,26 @@ fake_server_stat(char *server_url, const char *path, struct stat *buf)
 		if (!smbfs_loaddir(current_info));	/* browse host */
 			return -1;
 	}
+
+    if (current_info->server_list == True) {
 	dentry = current_info->entries;
 	DEBUG(4, ("fake stat for SERVER \"%s\"\n", path));
 	while (dentry) {
 		if (strcmp(dentry->text, path) == 0) {
-			DEBUG(4, ("fake_server_stat: %s:%d\n",
+			DEBUG(4, ("fake_server_stat: %s:%4o\n",
 				dentry->text, dentry->my_stat.st_mode));
 			memcpy(buf, &dentry->my_stat, sizeof(struct stat));
 			return 0;
 		}
 		dentry = dentry->next;
 	}
+    }
 	my_errno = ENOENT;
 	return -1;
 }
 
 static int
-fake_share_stat(char *server_url, char *path, struct stat *buf)
+fake_share_stat(const char *server_url, char *path, struct stat *buf)
 {
 	dir_entry *dentry;
 	if (strlen(path) < strlen(server_url))
@@ -1239,7 +1241,7 @@ fake_share_stat(char *server_url, char *path, struct stat *buf)
 	DEBUG(3, ("fake_share_stat: %s on %s\n", path, server_url));
 	while (dentry) {
 		if (strcmp(dentry->text, path) == 0) {
-			DEBUG(6, ("fake_share_stat: %s:%d\n",
+			DEBUG(6, ("fake_share_stat: %s:%4o\n",
 				dentry->text, dentry->my_stat.st_mode));
 			memcpy(buf, &dentry->my_stat, sizeof(struct stat));
 			return 0;
@@ -1436,14 +1438,12 @@ loaddir(vfs *me, const char *path)
 {
 	void *info;
 	char *mypath, *p;
+
 	mypath = g_strdup(path);
-	p = mypath;
-	if (*p == '/')
-		p++;
-	while (strchr(p, '/'))
-		p++;
-	if (p-mypath > 1)
-		*--p = 0;
+	p = strchr(mypath, '/');
+
+	if (p > mypath)
+		*p = 0;
 	DEBUG(6, ("loaddir(%s)\n", mypath));
 	smbfs_chdir(me, mypath);
 	info = smbfs_opendir (me, mypath);
