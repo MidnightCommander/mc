@@ -2143,7 +2143,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 	break;
 		
     case 'f':
-	printf (_("Library directory for the Midnight Commander: %s\n"), mc_home);
+	printf ("%s\n", mc_home);
 	finish_program = 1;
 	break;
 		
@@ -2210,8 +2210,8 @@ static const struct poptOption argument_table[] = {
      N_("Set debug level")},
 #endif
 #endif
-    {"libdir", 'f', POPT_ARG_NONE, NULL, 'f',
-     N_("Print configured paths")},
+    {"datadir", 'f', POPT_ARG_NONE, NULL, 'f',
+     N_("Print data directory")},
     {"nocolor", 'b', POPT_ARG_NONE, &disable_colors, 0,
      N_("Requests to run in black and white")},
     {"nomouse", 'd', POPT_ARG_NONE, NULL, 'd',

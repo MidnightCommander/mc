@@ -1,5 +1,10 @@
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (process_args): Print only data directory and nothing
+	else for the "-f" argument.
+	(argument_table): Rename --libdir to --datadir, adjust its
+	description.
+
 	* Makefile.am: Rename LIBDIR to DATADIR, since it refers to
 	pkgdatadir now.  Install cons.saver to pkglibdir, pass it to the
 	compiler as LIBDIR.
