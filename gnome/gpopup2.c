@@ -41,67 +41,66 @@ enum {
 typedef struct action {
 	char *text;		/* Menu item text */
 	int flags;		/* Flags from the above enum */
-	GtkSignalFunc callback;	/* Callback for menu item */
+	gpointer callback;	/* Callback for menu item */
 } action;
 
 /* Prototypes */
 /* Multiple File commands */
-static void panel_action_open_with (GtkWidget *widget, WPanel *panel);
-static void popup_handle_open (GtkWidget *widget, WPanel *panel);
-static void popup_handle_view (GtkWidget *widget, WPanel *panel);
-static void popup_handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
-static void popup_handle_edit (GtkWidget *widget, WPanel *panel);
-static void popup_handle_copy (GtkWidget *widget, WPanel *panel);
-static void popup_handle_delete (GtkWidget *widget, WPanel *panel);
-static void popup_handle_move (GtkWidget *widget, WPanel *panel);
+static void panel_action_with (GtkWidget *widget, WPanel *panel);
+static void handle_open (GtkWidget *widget, WPanel *panel);
+static void handle_view (GtkWidget *widget, WPanel *panel);
+static void handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
+static void handle_edit (GtkWidget *widget, WPanel *panel);
+static void handle_copy (GtkWidget *widget, WPanel *panel);
+static void handle_delete (GtkWidget *widget, WPanel *panel);
+static void handle_move (GtkWidget *widget, WPanel *panel);
 
 /* F_SINGLE file commands */
-static void popup_handle_properties (GtkWidget *widget, WPanel *panel);
-static void popup_handle_open_with (GtkWidget *widget, WPanel *panel);
-static void popup_handle_hard_link (GtkWidget *widget, WPanel *panel);
-static void popup_handle_symlink (GtkWidget *widget, WPanel *panel);
-static void popup_handle_edit_symlink (GtkWidget *widget, WPanel *panel);
+static void handle_properties (GtkWidget *widget, WPanel *panel);
+static void handle_open_with (GtkWidget *widget, WPanel *panel);
+static void handle_hard_link (GtkWidget *widget, WPanel *panel);
+static void handle_symlink (GtkWidget *widget, WPanel *panel);
+static void handle_edit_symlink (GtkWidget *widget, WPanel *panel);
 
 /* Generic Options */
-static void popup_handle_display_properties (GtkWidget *widget, WPanel *panel);
-static void popup_handle_refresh (GtkWidget *widget, WPanel *panel);
-static void popup_handle_arrange_icons (GtkWidget *widget, WPanel *panel);
-static void popup_handle_logout (GtkWidget *widget, WPanel *panel);
+static void handle_display_properties (GtkWidget *widget, WPanel *panel);
+static void handle_rescan (GtkWidget *widget, WPanel *panel);
+static void handle_arrange_icons (GtkWidget *widget, WPanel *panel);
+static void handle_logout (GtkWidget *widget, WPanel *panel);
 
 /* global vars */
 extern int we_can_afford_the_speed;
 
 static action file_actions[] = {
-	{ N_("Properties"),      F_SINGLE | F_ALL,   	  	 (GtkSignalFunc) popup_handle_properties },
-	{ "",                    F_SINGLE | F_ALL,  	  	 NULL },
-	{ N_("Open"),            F_NOTDEV,		  	 (GtkSignalFunc) popup_handle_open },
-	{ "",                    F_NOTDEV,   	    	  	 NULL },
-	{ N_("Open with..."),    F_REGULAR | F_SINGLE, 	  	 (GtkSignalFunc) popup_handle_open_with },
-	{ N_("View"),            F_REGULAR | F_SINGLE,		 (GtkSignalFunc) popup_handle_view },
-	{ N_("View unfiltered"), F_REGULAR | F_ADVANCED | F_SINGLE,      	 (GtkSignalFunc) popup_handle_view_unfiltered },  
-	{ N_("Edit"),            F_REGULAR | F_SINGLE,     	 (GtkSignalFunc) popup_handle_edit },
-	{ "",                    F_REGULAR | F_SINGLE,         	 NULL },
-	{ N_("Copy..."),         F_ALL,             		 (GtkSignalFunc) popup_handle_copy },
-	{ N_("Delete"),          F_ALL,             		 (GtkSignalFunc) popup_handle_delete },
-	{ N_("Move..."),         F_ALL,             		 (GtkSignalFunc) popup_handle_move },
-	{ "", 			 F_SINGLE, 			 NULL }, 
-	{ N_("Hard Link..."),    F_ADVANCED | F_SINGLE,		 (GtkSignalFunc) popup_handle_hard_link }, /* UGH.  I can't believe this exists. */
-	{ N_("Link..."),    F_SINGLE, 	                 (GtkSignalFunc) popup_handle_symlink },
-	{ N_("Edit symlink..."), F_SYMLINK | F_SINGLE,           (GtkSignalFunc) popup_handle_edit_symlink },
+	{ N_("Properties"),		F_SINGLE | F_ALL, 			handle_properties },
+	{ "",				F_SINGLE | F_ALL, 			NULL },
+	{ N_("Open"),			F_NOTDEV, 				handle_open },
+	{ "",				F_NOTDEV, 				NULL },
+	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with },
+	{ N_("View"),			F_REGULAR | F_SINGLE, 			handle_view },
+	{ N_("View Unfiltered"),	F_REGULAR | F_ADVANCED | F_SINGLE,	handle_view_unfiltered },  
+	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit },
+	{ "",				F_REGULAR | F_SINGLE, 			NULL },
+	{ N_("Copy..."),		F_ALL, 					handle_copy },
+	{ N_("Delete"),			F_ALL, 					handle_delete },
+	{ N_("Move..."),		F_ALL, 					handle_move },
+	{ "",				F_SINGLE, 				NULL }, 
+	{ N_("Hard Link..."),		F_ADVANCED | F_SINGLE, 			handle_hard_link },
+	{ N_("Link..."),		F_SINGLE, 				handle_symlink },
+	{ N_("Edit Symlink..."),	F_SYMLINK | F_SINGLE, 			handle_edit_symlink },
 	{ NULL, 0, NULL }
 };
 
 static action generic_actions[] = {
-	{ N_("NEW(FIXME)"),      F_ALL,	 	  	  	 NULL },
-	{ "",                    F_ALL,   	    	  	 NULL },
-	{ N_("Change Background"),F_DICON,		      	 (GtkSignalFunc) popup_handle_display_properties },
-	{ N_("Refresh"),         F_ALL,		      	  	 (GtkSignalFunc) popup_handle_refresh },
-	{ N_("Arrange Icons"),   F_DICON,			 (GtkSignalFunc) popup_handle_arrange_icons },
-	{ N_(""),                F_DICON,             		 NULL },
-	{ N_("Logout"),          F_DICON,             		 (GtkSignalFunc) popup_handle_logout },
+	{ N_("NEW(FIXME)"),		F_ALL, 		NULL },
+	{ "",				F_ALL, 		NULL },
+	{ N_("Change Background"),	F_DICON, 	handle_display_properties },
+	{ N_("Rescan Directory"),	F_ALL,		handle_rescan },
+	{ N_("Arrange Icons"),		F_DICON, 	handle_arrange_icons },
+	{ N_(""),			F_DICON, 	NULL },
+	{ N_("Logout"),			F_DICON, 	handle_logout },
 	{ NULL, 0, NULL }
 };
-
 
 
 /* This is our custom signal connection function for popup menu items -- see below for the
@@ -114,7 +113,8 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 	g_assert (uibdata->is_interp);
 
 	if (uiinfo->moreinfo) {
-		gtk_object_set_data (GTK_OBJECT (uiinfo->widget), "popup_user_data", uiinfo->user_data);
+		gtk_object_set_data (GTK_OBJECT (uiinfo->widget), "popup_user_data",
+				     uiinfo->user_data);
 		gtk_signal_connect_full (GTK_OBJECT (uiinfo->widget), signal_name,
 					 NULL,
 					 uibdata->relay_func,
@@ -125,9 +125,10 @@ popup_connect_func (GnomeUIInfo *uiinfo, gchar *signal_name, GnomeUIBuilderData 
 	}
 }
 
-/* Our custom marshaller for menu items.  We need it so that it can extract the per-attachment
- * user_data pointer from the parent menu shell and pass it to the callback.  This overrides the
- * user-specified data from the GnomeUIInfo structures.
+/* Our custom marshaller for menu items.  We need it so that it can extract the
+ * per-attachment user_data pointer from the parent menu shell and pass it to
+ * the callback.  This overrides the user-specified data from the GnomeUIInfo
+ * structures.
  */
 
 typedef void (* ActivateFunc) (GtkObject *object, WPanel *panel);
@@ -145,16 +146,18 @@ popup_marshal_func (GtkObject *object, gpointer data, guint n_args, GtkArg *args
 	(* func) (object, user_data);
 }
 
-/* Fills the menu with the specified uiinfo at the specified position, using our magic marshallers
- * to be able to fetch the active item.  The code is shamelessly ripped from gnome-popup-menu.
+/* Fills the menu with the specified uiinfo at the specified position, using our
+ * magic marshallers to be able to fetch the active item.  The code is
+ * shamelessly ripped from gnome-popup-menu.
  */
 static void
 fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
 {
 	GnomeUIBuilderData uibdata;
 
-	/* We use our own callback marshaller so that it can fetch the popup user data
-	 * from the popup menu and pass it on to the user-defined callbacks.
+	/* We use our own callback marshaller so that it can fetch the popup
+	 * user data from the popup menu and pass it on to the user-defined
+	 * callbacks.
 	 */
 
 	uibdata.connect_func = popup_connect_func;
@@ -167,13 +170,13 @@ fill_menu (GtkMenuShell *menu_shell, GnomeUIInfo *uiinfo, int pos)
 }
 
 
-/* The context menu: text displayed, condition that must be met and the routine that gets invoked
- * upon activation.
+/* The context menu: text displayed, condition that must be met and the routine
+ * that gets invoked upon activation.
  */
 
 
-/* Creates the menu items for the standard actions.  Returns the position at which additional menu
- * items should be inserted.
+/* Creates the menu items for the standard actions.  Returns the position at
+ * which additional menu items should be inserted.
  */
 static int
 create_actions (GtkWidget *menu, gint flags, gboolean on_selected, WPanel *panel)
@@ -235,7 +238,6 @@ create_actions (GtkWidget *menu, gint flags, gboolean on_selected, WPanel *panel
 	return pos;
 }
 
-
 /* Convenience callback to exit the main loop of a modal popup menu when it is deactivated*/
 static void
 menu_shell_deactivated (GtkMenuShell *menu_shell, WPanel *panel)
@@ -260,10 +262,8 @@ get_active_index (GtkMenu *menu)
 	return -1;
 }
 
-/*
- * Create a context menu
- * It can take either a WPanel or a GnomeDesktopEntry.  One of them should
- * be set to NULL.
+/* Create a context menu.  It can take either a WPanel or a GnomeDesktopEntry.
+ * One of them should be set to NULL.
  */
 #define REMOVE(x,f) x &= ~f
 
@@ -365,7 +365,7 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-popup_handle_open (GtkWidget *widget, WPanel *panel)
+handle_open (GtkWidget *widget, WPanel *panel)
 {
 	if (do_enter (panel))
 		return;
@@ -374,52 +374,54 @@ popup_handle_open (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-popup_handle_view (GtkWidget *widget, WPanel *panel)
+handle_view (GtkWidget *widget, WPanel *panel)
 {
 	view_cmd (panel);
 }
 
 static void
-popup_handle_view_unfiltered (GtkWidget *widget, WPanel *panel)
+handle_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
 	view_simple_cmd (panel);
 }
 
 static void
-popup_handle_edit (GtkWidget *widget, WPanel *panel)
+handle_edit (GtkWidget *widget, WPanel *panel)
 {
 	edit_cmd (panel);
 }
 
 static void
-popup_handle_copy (GtkWidget *widget, WPanel *panel)
+handle_copy (GtkWidget *widget, WPanel *panel)
 {
 	copy_cmd ();
 }
 
 static void
-popup_handle_delete (GtkWidget *widget, WPanel *panel)
+handle_delete (GtkWidget *widget, WPanel *panel)
 {
 	delete_cmd ();
 }
 
 static void
-popup_handle_move (GtkWidget *widget, WPanel *panel)
+handle_move (GtkWidget *widget, WPanel *panel)
 {
 	ren_cmd ();
 }
 
 /* F_SINGLE file commands */
 static void
-popup_handle_properties (GtkWidget *widget, WPanel *panel)
+handle_properties (GtkWidget *widget, WPanel *panel)
 {
 	gint retval;
 	file_entry *fe = &panel->dir.list [panel->selected];
 	char *full_name = concat_dir_and_file (panel->cwd, fe->fname);
 	GtkWidget *dlg;
 
-/*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
-	reread_cmd ();*/
+#if 0
+	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
+		reread_cmd ();
+#endif
 	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
 	gnome_dialog_set_parent (GNOME_DIALOG (dlg),
 				 GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
@@ -434,7 +436,7 @@ popup_handle_properties (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-popup_handle_open_with (GtkWidget *widget, WPanel *panel)
+handle_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
 	
@@ -449,47 +451,46 @@ popup_handle_open_with (GtkWidget *widget, WPanel *panel)
 }
 
 static void
-popup_handle_hard_link (GtkWidget *widget, WPanel *panel)
+handle_hard_link (GtkWidget *widget, WPanel *panel)
 {
 	/* yeah right d:  -jrb */
 	link_cmd ();
 }
 
 static void
-popup_handle_symlink (GtkWidget *widget, WPanel *panel)
+handle_symlink (GtkWidget *widget, WPanel *panel)
 {
 	symlink_cmd ();
 }
 
 static void
-popup_handle_edit_symlink (GtkWidget *widget, WPanel *panel)
+handle_edit_symlink (GtkWidget *widget, WPanel *panel)
 {
 	edit_symlink_cmd ();
 }
 
 static void
-popup_handle_display_properties (GtkWidget *widget, WPanel *panel)
+handle_display_properties (GtkWidget *widget, WPanel *panel)
 {
 	/* FIXME */
 	g_warning ("FIXME: implement popup_handle_display_properties()");
 }
 
 static void
-popup_handle_refresh (GtkWidget *widget, WPanel *panel)
+handle_rescan (GtkWidget *widget, WPanel *panel)
 {
-	/* FIXME */
-	g_warning ("FIXME: implement popup_handle_refresh()");
+	reread_cmd ();
 }
 
 static void
-popup_handle_arrange_icons (GtkWidget *widget, WPanel *panel)
+handle_arrange_icons (GtkWidget *widget, WPanel *panel)
 {
 	/* FIXME */
 	g_warning ("FIXME: implement popup_handle_arrange_icons()");
 }
 
 static void
-popup_handle_logout (GtkWidget *widget, WPanel *panel)
+handle_logout (GtkWidget *widget, WPanel *panel)
 {
 	/* FIXME */
 	g_warning ("FIXME: implement popup_handle_logout()");

@@ -19,6 +19,7 @@
 #include "gscreen.h"
 #include "main.h"
 #include "gmain.h"
+#include "gcmd.h"
 #include "gcorba.h"
 
 PortableServer_POA poa;
@@ -134,7 +135,7 @@ do_window_close(GtkWidget *widget, gpointer _servant)
 static void
 impl_GNOME_FileManagerWindow_close (impl_POA_GNOME_FileManagerWindow * servant, CORBA_Environment * ev)
 {
-	gtk_widget_destroy(servant->mywin->xwindow);
+	gnome_close_panel (GTK_WIDGET (servant->mywin->widget.wdata), servant->mywin);
 }
 
 GNOME_FileManagerWindow
@@ -235,7 +236,7 @@ corba_init (void)
 
 	orb = gnome_CORBA_ORB ();
 
-	poa = CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+	poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
 	if (ev._major != CORBA_NO_EXCEPTION){
 		printf ("Can not resolve initial reference to RootPOA");
 		return;

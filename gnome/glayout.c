@@ -307,7 +307,7 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 	GNOMEUIINFO_ITEM_STOCK(N_("_Delete..."), N_("Delete files"), delete_cmd, GNOME_STOCK_PIXMAP_REMOVE),
         GNOMEUIINFO_ITEM_NONE(N_("_Move..."), N_("Rename or move files"), ren_cmd),
 	GNOMEUIINFO_SEPARATOR,
-	GNOMEUIINFO_MENU_CLOSE_ITEM( gnome_close_panel, NULL),
+	GNOMEUIINFO_MENU_CLOSE_ITEM(gnome_close_panel, NULL),
         GNOMEUIINFO_END
 };
 
@@ -390,10 +390,11 @@ gnome_init_panels (void)
 	other_panel_ptr = NULL;
 }
 
-static void
+static int
 gnome_close_panel_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
 	gnome_close_panel (widget, panel);
+	return TRUE;
 }
 
 static void

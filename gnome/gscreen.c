@@ -1430,12 +1430,12 @@ panel_icon_list_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *
 	icon = gnome_icon_list_get_icon_at (gil, event->x, event->y);
 
 	if (icon == -1) {
-		if (event->button == 3)
+		if (event->button == 3) {
 			gpopup_do_popup2 ((GdkEventButton *) event, panel, NULL, FALSE);
-	} else {
-		if (event->button != 3)
-			panel->maybe_start_drag = event->button;
-	}
+			return TRUE;
+		}
+	} else if (event->button == 1)
+		panel->maybe_start_drag = event->button;
 
 	panel->click_x = event->x;
 	panel->click_y = event->y;

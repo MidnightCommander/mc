@@ -1,3 +1,19 @@
+1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* glayout.c (gnome_close_panel_event): This function should return
+	FALSE.
+
+	* gcorba.c (corba_init): Cast poa to PortableServer_POA.
+	(impl_GNOME_FileManagerWindow_close): Call gnome_close_panel(); do
+	not destroy the widget by hand.
+
+	* gcmd.c (gnome_close_panel): This function should be void.
+
+	* gpopup2.c (popup_handle_rescan): Call reread_cmd().
+
+	* gscreen.c (panel_icon_list_button_press): Return TRUE if we
+	handled a popup menu.
+
 1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcorba.c (impl_GNOME_FileManagerFactory_create_window): Fix bug

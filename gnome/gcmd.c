@@ -118,7 +118,7 @@ gnome_open_panel (GtkWidget *widget, WPanel *panel)
 	new_panel_at (panel->cwd);
 }
 
-int
+void
 gnome_close_panel (GtkWidget *widget, WPanel *panel)
 {
 	Dlg_head *h = panel->widget.parent;
@@ -127,7 +127,7 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 		gtk_timeout_remove (panel->timer_id);
 		panel->timer_id = -1;
 	}
-	
+
 	/* Remove the widgets from the dialog head */
 	remove_widget (h, panel->current_dir);
 	remove_widget (h, panel->filter_w);
@@ -136,12 +136,11 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 	/* Kill them */
 	destroy_widget (panel->current_dir);
 	destroy_widget (panel->filter_w);
-	destroy_widget ((void *)panel);
+	destroy_widget ((Widget *)panel);
 
 	layout_panel_gone (panel);
 
 	mc_chdir ("/");
-	return TRUE;
 }
 
 void
