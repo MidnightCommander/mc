@@ -1,5 +1,9 @@
 2002-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Fix help text for gpm and ncurses.  Properly
+	handle --without-ncurses.
+	Reported by Moritz Barsnick <moritz@barsnick.net>
+
 	* configure.in: Work around a bug in Autoconf-2.53 that prevents
 	splitting of user-specified path in AC_PATH_PROGS.
 

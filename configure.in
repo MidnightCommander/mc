@@ -302,7 +302,7 @@ mouse_lib="xterm only"
 case $host_os in
 linux*)
     AC_ARG_WITH(gpm-mouse, 
-	[--with-gpm-mouse[=base-dir]  Compile with gpm mouse support (Linux only)],
+	[--with-gpm-mouse[[=base-dir]]  Compile with gpm mouse support (Linux only)],
 	[if test x$withval != xno
 	then
 		if test x$withval != xyes
@@ -326,8 +326,9 @@ linux*)
 esac
 
 AC_ARG_WITH(ncurses,
-	[--with-ncurses[=base-dir]    Compile with ncurses/locate base dir],
-	[if test x$withval != xyes; then
+	[--with-ncurses[[=base-dir]]  Compile with ncurses/locate base dir],
+[if test x$withval != xno; then
+	if test x$withval != xyes; then
 		MCLIBS="$MCLIBS -L$withval/lib"
 		CPPFLAGS="$CPPFLAGS -I$withval/include"
 	fi
@@ -346,6 +347,7 @@ AC_ARG_WITH(ncurses,
 	screen_manager="ncurses"
 	AC_DEFINE(USE_NCURSES, 1,
 		  [Define to use ncurses for screen management])
+fi
 ])
 
 AC_ARG_WITH(hsc,
