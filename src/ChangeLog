@@ -1,5 +1,7 @@
 2001-09-08  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Fix definitions of CONFDIR and LOCALEDIR.
+
 	* subshell.c: Move definitions of WEXITSTATUS and WIFEXITED
 	below all includes so that they can be defined elsewhere.
 

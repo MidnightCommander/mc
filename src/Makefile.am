@@ -1,9 +1,10 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
 AM_CPPFLAGS = -DREGEX_MALLOC -DLIBDIR=\""$(mclibdir)/"\" \
-	-DCONFDIR=\""$(confdir)/"\" -DLOCALEDIR=\""$(localedir)/"\"
+	-DCONFDIR=\""$(sysconfdir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
 mclibdir = $(libdir)/mc
 suppbindir = $(mclibdir)/bin
+localedir = $(datadir)/locale
 
 bin_PROGRAMS = mc mcmfmt
 
