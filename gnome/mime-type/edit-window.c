@@ -130,7 +130,7 @@ initialize_main_win ()
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	main_win->regexp1_label = gtk_label_new ("");
-	main_win->regexp1_tag_label = gtk_label_new (_("First Regular Expresion: "));
+	main_win->regexp1_tag_label = gtk_label_new (_("First Regular Expression: "));
 	gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp1_tag_label,
 			    FALSE, FALSE, 0);
@@ -138,7 +138,7 @@ initialize_main_win ()
 
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	main_win->regexp2_label = gtk_label_new ("");
-	main_win->regexp2_tag_label = gtk_label_new (_("Second Regular Expresion: "));
+	main_win->regexp2_tag_label = gtk_label_new (_("Second Regular Expression: "));
 	gtk_box_pack_start (GTK_BOX (vbox2), hbox, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), main_win->regexp2_tag_label,
 			    FALSE, FALSE, 0);

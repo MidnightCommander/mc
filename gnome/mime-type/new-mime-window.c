@@ -48,7 +48,7 @@ launch_new_mime_window (void)
 	gtk_box_pack_start (GTK_BOX (hbox), ext_entry, TRUE, TRUE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
-	frame = gtk_frame_new (_("Regular Expresions"));
+	frame = gtk_frame_new (_("Regular Expressions"));
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (add_dialog)->vbox), frame, FALSE, FALSE, 0);
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
