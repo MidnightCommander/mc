@@ -1,5 +1,9 @@
 2002-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Introduce enum keyword_t to improve readability.
+	(netrc_next): Fix return value for unknown keywords.
+	(lookup_netrc): Remove special processing of "*netrc*".
+
 	* ftpfs.c (ftp_split_url): Move protection against pass being
 	NULL ...
 	(lookup_netrc): ... here.

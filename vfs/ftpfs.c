@@ -162,7 +162,7 @@ static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
     __attribute__ ((format (printf, 4, 5)));
 static int ftpfs_open_socket (vfs *me, vfs_s_super *super);
 static int login_server (vfs *me, vfs_s_super *super, const char *netrcpass);
-static int lookup_netrc (char *host, char **login, char **pass);
+static int lookup_netrc (const char *host, char **login, char **pass);
 
 static char *
 translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
@@ -1819,12 +1819,26 @@ void ftpfs_set_debug (const char *file)
 static char buffer[BUF_MEDIUM];
 static char *netrc, *netrcp;
 
-static int netrc_next (void)
+/* This should match the keywords[] array below */
+typedef enum {
+    NETRC_NONE = 0,
+    NETRC_DEFAULT,
+    NETRC_MACHINE,
+    NETRC_LOGIN,
+    NETRC_PASSWORD,
+    NETRC_PASSWD,
+    NETRC_ACCOUNT,
+    NETRC_MACDEF,
+    NETRC_UNKNOWN,
+    NETRC_BREAK = 20
+} keyword_t;
+
+static keyword_t netrc_next (void)
 {
     char *p;
-    int i;
+    keyword_t i;
     static const char * const keywords [] = { "default", "machine", 
-        "login", "password", "passwd", "account", "macdef" };
+        "login", "password", "passwd", "account", "macdef", NULL };
 
     
     while (1) {
@@ -1834,7 +1848,7 @@ static int netrc_next (void)
         netrcp++;
     }
     if (!*netrcp)
-	return 0;
+	return NETRC_NONE;
     p = buffer;
     if (*netrcp == '"') {
 	for (netrcp++; *netrcp != '"' && *netrcp; netrcp++) {
@@ -1853,10 +1867,16 @@ static int netrc_next (void)
     *p = 0;
     if (!*buffer)
 	return 0;
-    for (i = 0; i < sizeof (keywords) / sizeof (keywords [0]); i++)
-	if (!strcmp (keywords [i], buffer))
-	    break;
-    return i + 1;
+
+    i = NETRC_DEFAULT;
+    while (keywords [i - 1]) {
+	if (!strcmp (keywords [i - 1], buffer))
+	    return i;
+
+        i++;
+    }
+
+    return NETRC_UNKNOWN;
 }
 
 static int netrc_has_incorrect_mode (char * netrcname, char * netrc)
@@ -1877,12 +1897,13 @@ static int netrc_has_incorrect_mode (char * netrcname, char * netrc)
     return 0;
 }
 
-static int lookup_netrc (char *host, char **login, char **pass)
+/* Extract login and password from .netrc for the host */
+static int lookup_netrc (const char *host, char **login, char **pass)
 {
     char *netrcname;
     char *tmp_pass = NULL;
     char hostname[MAXHOSTNAMELEN], *domain;
-    int keyword;
+    keyword_t keyword;
     static struct rupcache {
         struct rupcache *next;
         char *host;
@@ -1890,7 +1911,8 @@ static int lookup_netrc (char *host, char **login, char **pass)
         char *pass;
     } *rup_cache = NULL, *rupp;
 
-    for (rupp = rup_cache; rupp != NULL; rupp = rupp->next)
+    /* Look up in the cache first */
+    for (rupp = rup_cache; rupp != NULL; rupp = rupp->next) {
 	/* return from cache only if host AND user match! */
         if ((!strcmp (host, rupp->host)) &&
 	    (rupp->login != NULL) &&
@@ -1901,22 +1923,25 @@ static int lookup_netrc (char *host, char **login, char **pass)
             	    *pass = g_strdup (rupp->pass);
         	return 0;
 	}
+    }
+
     netrcname = concat_dir_and_file (home_dir, ".netrc");
     netrcp = netrc = load_file (netrcname);
     if (netrc == NULL) {
         g_free (netrcname);
 	return 0;
     }
+
     if (gethostname (hostname, sizeof (hostname)) < 0)
 	*hostname = 0;
     if (!(domain = strchr (hostname, '.')))
 	domain = "";
 
     while ((keyword = netrc_next ())) {
-        if (keyword == 2) {
+        if (keyword == NETRC_MACHINE) {
 	    char *tmp;
 
-	    if (netrc_next () != 8)
+	    if (netrc_next () != NETRC_UNKNOWN)
 		continue;
 	    if (g_strcasecmp (host, buffer) &&
 	        ((tmp = strchr (host, '.')) == NULL ||
@@ -1924,21 +1949,22 @@ static int lookup_netrc (char *host, char **login, char **pass)
 		g_strncasecmp (host, buffer, tmp - host) ||
 		buffer [tmp - host]))
 		continue;
-	} else if (keyword != 1)
+	} else if (keyword != NETRC_DEFAULT)
 	    continue;
-	while ((keyword = netrc_next ()) > 2) {
+
+	while ((keyword = netrc_next ()) > NETRC_MACHINE) {
 	    switch (keyword) {
-		case 3:
+		case NETRC_LOGIN:
 		    if (netrc_next ()) {
-			/* replace the dummy user with the one from ~/.netrc */
-			if ((*login == NULL) || !strcmp(*login, "*netrc*"))
+			if (*login == NULL)
 			    *login = g_strdup (buffer);
 			else if (strcmp (*login, buffer))
-			    keyword = 20;
+			    keyword = NETRC_BREAK;
 		    }
 		    break;
-		case 4:
-		case 5:
+
+		case NETRC_PASSWORD:
+		case NETRC_PASSWD:
 		    if (strcmp (*login, "anonymous") && strcmp (*login, "ftp") &&
 			netrc_has_incorrect_mode (netrcname, netrc)) {
 			return -1;
@@ -1946,13 +1972,15 @@ static int lookup_netrc (char *host, char **login, char **pass)
 		    if (netrc_next () && tmp_pass == NULL)
 			tmp_pass = g_strdup (buffer);
 		    break;
-		case 6:
+
+		case NETRC_ACCOUNT:
 		    if (netrc_has_incorrect_mode (netrcname, netrc)) {
 			return -1;
 		    }
 		    netrc_next ();
 		    break;
-		case 7:	/* macdef: skip it */
+
+		case NETRC_MACDEF:	/* macdef: skip it */
 		    do {
 		        while (*netrcp && *netrcp != '\n')
 			    netrcp++;
@@ -1961,11 +1989,18 @@ static int lookup_netrc (char *host, char **login, char **pass)
 		        netrcp++;
 		    } while (*netrcp && *netrcp != '\n');
 		    break;
+
+		case NETRC_NONE:
+		case NETRC_DEFAULT:
+		case NETRC_MACHINE:
+		case NETRC_UNKNOWN:
+		case NETRC_BREAK:
+		    break;
 	    }
-	    if (keyword == 20)
+	    if (keyword == NETRC_BREAK)
 	        break;
 	}
-	if (keyword != 20)
+	if (keyword != NETRC_BREAK)
 	    break;
     }
 
@@ -1977,9 +2012,6 @@ static int lookup_netrc (char *host, char **login, char **pass)
     rupp->login = rupp->pass = 0;
     
     if (*login != NULL) {
-    	if (!strcmp(*login, "*netrc*"))
-	    /* no match in ~/.netrc, try anonymous */
-	    *login = g_strdup("anonymous");
         rupp->login = g_strdup (*login);
     }
     if (tmp_pass != NULL)
