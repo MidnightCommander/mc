@@ -1,15 +1,15 @@
+# translation of mn.po to Mongolian
 # Mongolian translation of Midnight Commander
-# Copyright (C) 1998-2002 Free Software Foundation, Inc.
-#
+# Copyright (C) 1998-2002,2003 Free Software Foundation, Inc.
 # Current translator Mungungadas Erhembaatar <admin@tv5.ru>, 2003
 # Sanlig Badral <badral@chinggis.com>, 2003
 #
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.6.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-03-04 11:45-0500\n"
-"PO-Revision-Date: 2003-03-03 11:07+0100\n"
+"Project-Id-Version: mn\n"
+"POT-Creation-Date: 2003-02-05 12:58-0500\n"
+"PO-Revision-Date: 2003-03-04 21:16+0100\n"
 "Last-Translator: Sanlig Badral <badral@chinggis.com>\n"
 "Language-Team: Mongolian <mn@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: edit/edit.c:150 edit/edit.c:281 edit/edit.c:289 edit/edit.c:337
 #: edit/edit.c:352 edit/edit.c:363 edit/edit.c:379 edit/edit.c:2686
 #: edit/editcmd.c:267 edit/editcmd.c:275 edit/editcmd.c:1653 src/wtools.c:132
-#: vfs/vfs.c:1832
+#: vfs/vfs.c:1803
 msgid "Error"
 msgstr "Алдаа"
 
@@ -118,7 +118,7 @@ msgstr " Гэж хадгалах "
 
 #: edit/editcmd.c:460 edit/editcmd.c:747 edit/editcmd.c:775 edit/editcmd.c:934
 #: edit/editcmd.c:1047 src/file.c:623 src/help.c:319 src/main.c:466
-#: src/screen.c:1391 src/screen.c:1970 src/selcodepage.c:106
+#: src/screen.c:1397 src/screen.c:1976 src/selcodepage.c:106
 #: src/subshell.c:703 src/utilunix.c:401 src/utilunix.c:405 src/utilunix.c:427
 #: src/utilunix.c:479 vfs/mcfs.c:139
 msgid "Warning"
@@ -181,7 +181,7 @@ msgstr " Файл хадгалахаа баталгаажуулах уу?: "
 msgid " Save file "
 msgstr " Файлыг хадгалах "
 
-#: edit/editcmd.c:723 edit/editwidget.c:283 src/view.c:2162
+#: edit/editcmd.c:723 edit/editwidget.c:283 src/view.c:2159
 msgid "Save"
 msgstr "Хадгалах"
 
@@ -252,7 +252,7 @@ msgstr "&Тогтмол илэрхийлэл"
 
 #: edit/editcmd.c:1174 edit/editcmd.c:1252
 msgid "&Whole words only"
-msgstr "Зөвхөн бvтэн &vгнvvд"
+msgstr "Зөвхөн &бүтэн үгнүүд"
 
 #: edit/editcmd.c:1176 edit/editcmd.c:1254 src/find.c:169
 msgid "case &Sensitive"
@@ -266,7 +266,7 @@ msgstr " Солигдох утгуудын дарааллыг оруул, жиш
 msgid " Enter replacement string:"
 msgstr " Солигдох текстийг оруул: "
 
-#: edit/editcmd.c:1188 edit/editcmd.c:1258 src/view.c:2077
+#: edit/editcmd.c:1188 edit/editcmd.c:1258 src/view.c:2074
 msgid " Enter search string:"
 msgstr " Хайх үгээ оруул:"
 
@@ -275,15 +275,16 @@ msgid " Replace "
 msgstr " Солих "
 
 #: edit/editcmd.c:1272 edit/editcmd.c:1970 edit/editcmd.c:1972
-#: edit/editcmd.c:2000 edit/editwidget.c:288 src/view.c:1604 src/view.c:1684
-#: src/view.c:1804 src/view.c:1816 src/view.c:2040 src/view.c:2077
-#: src/view.c:2172
+#: edit/editcmd.c:2000 edit/editwidget.c:288 src/view.c:1601 src/view.c:1681
+#: src/view.c:1801 src/view.c:1813 src/view.c:2037 src/view.c:2074
+#: src/view.c:2169
 msgid "Search"
 msgstr "Хайх"
 
 #: edit/editcmd.c:1653
 msgid ""
-" Invalid regular expression, or scanf expression with to many conversions "
+" Invalid regular expression, or scanf expression with to many "
+"conversions "
 msgstr " Буруу тогтмол илэрхийлэл эсвэл scanf-илэрхийлэлд олон хөрвүүэл байна"
 
 #: edit/editcmd.c:1861
@@ -295,8 +296,8 @@ msgstr " Солигдох текстийн хэлбэр алдаатай бай�
 msgid " %ld replacements made. "
 msgstr " %ld нь солигдсон байна"
 
-#: edit/editcmd.c:1894 edit/editcmd.c:1972 edit/editcmd.c:2000 src/view.c:1684
-#: src/view.c:1816
+#: edit/editcmd.c:1894 edit/editcmd.c:1972 edit/editcmd.c:2000 src/view.c:1681
+#: src/view.c:1813
 msgid " Search string not found "
 msgstr " Хайсан г алга байна "
 
@@ -306,7 +307,7 @@ msgid " %d finds made, %d bookmarks added "
 msgstr " %d н хайлт дуусч, %d н хавчуулага нэмэгдэв "
 
 #: edit/editcmd.c:2018 edit/editwidget.c:292 src/help.c:825 src/main.c:1422
-#: src/view.c:491 src/view.c:2157 src/view.c:2182
+#: src/view.c:491 src/view.c:2154 src/view.c:2179
 msgid "Quit"
 msgstr "Гарах"
 
@@ -319,13 +320,13 @@ msgid "Cancel quit"
 msgstr "Болих гарах"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:630 src/screen.c:1958
+#: src/filegui.c:544 src/hotlist.c:1029 src/main.c:630 src/screen.c:1964
 #: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Тийм"
 
 #: edit/editcmd.c:2018 src/cmd.c:242 src/file.c:1859 src/file.c:2240
-#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:630 src/screen.c:1959
+#: src/filegui.c:543 src/hotlist.c:1029 src/main.c:630 src/screen.c:1965
 #: src/subshell.c:704 src/tree.c:765 src/view.c:493 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Yгvй"
@@ -342,7 +343,7 @@ msgstr " Файлыг хадгалж чадсангvй. "
 msgid " Cut to clipboard "
 msgstr " Буфер руу зөөх"
 
-#: edit/editcmd.c:2173 src/view.c:1985
+#: edit/editcmd.c:2173 src/view.c:1982
 msgid " Goto line "
 msgstr " мөр рүү очих "
 
@@ -377,8 +378,8 @@ msgstr " Эрэмблэлтийг эхлүүл "
 #: edit/editcmd.c:2277
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
-" Эрэмблэлтийн параметрүүдийг (man sort(1) хар) зайгаар тусгаарлаж оруулна "
-"уу: "
+" Эрэмблэлтийн параметрүүдийг (man sort(1) хар) зайгаар тусгаарлаж "
+"оруулна уу: "
 
 #: edit/editcmd.c:2288 edit/editcmd.c:2293
 msgid " Sort "
@@ -434,7 +435,7 @@ msgstr " mail -s <Гарчиг> -c <нд Хувилах> <Хэнд>"
 
 #: edit/editkeys.c:219
 msgid " Emacs key: "
-msgstr " Emacsийн товчлуурууд: "
+msgstr " Emacs-ийн товчлуурууд: "
 
 #: edit/editkeys.c:233 edit/editkeys.c:264
 msgid " Execute Macro "
@@ -514,147 +515,147 @@ msgstr "&Шинэ файл         C-x k"
 msgid "Copy to &file...     "
 msgstr "Файл руу &хуулах..."
 
-#: edit/editmenu.c:311
+#: edit/editmenu.c:311 edit/editmenu.c:328
 msgid "&Toggle Mark       F3"
 msgstr "Блокыг &тэмдэглэх          F3"
 
-#: edit/editmenu.c:312
+#: edit/editmenu.c:312 edit/editmenu.c:329
 msgid "&Mark Columns    S-F3"
 msgstr "Багануудыг &ялгах     S-F3"
 
-#: edit/editmenu.c:314
+#: edit/editmenu.c:314 edit/editmenu.c:331
 msgid "Toggle &ins/overw Ins"
 msgstr "&Оруул/соли горим Ins"
 
-#: edit/editmenu.c:316
+#: edit/editmenu.c:316 edit/editmenu.c:333
 msgid "&Copy              F5"
 msgstr "Блокыг &хуулах        F5"
 
-#: edit/editmenu.c:317
+#: edit/editmenu.c:317 edit/editmenu.c:334
 msgid "&Move              F6"
 msgstr "Блокыг &зөөх       F6"
 
-#: edit/editmenu.c:318
+#: edit/editmenu.c:318 edit/editmenu.c:335
 msgid "&Delete            F8"
 msgstr "Блокыг &устгах           F8"
 
-#: edit/editmenu.c:320
+#: edit/editmenu.c:320 edit/editmenu.c:337
 msgid "&Undo             C-u"
 msgstr "&Буцаах                C-u"
 
-#: edit/editmenu.c:322
+#: edit/editmenu.c:322 edit/editmenu.c:339
 msgid "&Beginning     C-PgUp"
 msgstr "Файлын &эхлэлд очих       C-PgUp"
 
-#: edit/editmenu.c:323
+#: edit/editmenu.c:323 edit/editmenu.c:340
 msgid "&End           C-PgDn"
 msgstr "Файлын &төгсгөл        C-PgDn"
 
-#: edit/editmenu.c:330
+#: edit/editmenu.c:345 edit/editmenu.c:352
 msgid "&Search...         F7"
 msgstr "&Хайх...          F7"
 
-#: edit/editmenu.c:331
+#: edit/editmenu.c:346 edit/editmenu.c:353
 msgid "Search &again     F17"
 msgstr "&Цааш хайх F17"
 
-#: edit/editmenu.c:332
+#: edit/editmenu.c:347 edit/editmenu.c:354
 msgid "&Replace...        F4"
 msgstr "&Солих...         F4"
 
-#: edit/editmenu.c:339 edit/editmenu.c:362
+#: edit/editmenu.c:359 edit/editmenu.c:382
 msgid "&Go to line...            M-l"
 msgstr "&Мөр луу очих...        M-l"
 
-#: edit/editmenu.c:340 edit/editmenu.c:363
+#: edit/editmenu.c:360 edit/editmenu.c:383
 msgid "Go to matching &bracket   M-b"
 msgstr "Хос &хаалтууд руу очих    M-b"
 
-#: edit/editmenu.c:342 edit/editmenu.c:365
+#: edit/editmenu.c:362 edit/editmenu.c:385
 msgid "Insert &literal...       C-q"
 msgstr "&Литерал оруулах...        C-q"
 
-#: edit/editmenu.c:344 edit/editmenu.c:367
+#: edit/editmenu.c:364 edit/editmenu.c:387
 msgid "&Refresh screen          C-l"
 msgstr "Дэл&гэцийг дахин дуудах         C-l"
 
-#: edit/editmenu.c:346 edit/editmenu.c:369
+#: edit/editmenu.c:366 edit/editmenu.c:389
 msgid "&Start record macro      C-r"
 msgstr "&Бичигдсэн макрог эхлүүлэх      C-r"
 
-#: edit/editmenu.c:347 edit/editmenu.c:370
+#: edit/editmenu.c:367 edit/editmenu.c:390
 msgid "&Finish record macro...  C-r"
 msgstr "Бичигдсэн макрог &дуусгах... C-r"
 
-#: edit/editmenu.c:348
+#: edit/editmenu.c:368
 msgid "&Execute macro...   C-a, KEY"
 msgstr "Макрог &гүйцэтгэх...   C-a, KEY"
 
-#: edit/editmenu.c:349 edit/editmenu.c:372
+#: edit/editmenu.c:369 edit/editmenu.c:392
 msgid "Delete macr&o...            "
 msgstr "Макрог &устгах..."
 
-#: edit/editmenu.c:351 edit/editmenu.c:374
+#: edit/editmenu.c:371 edit/editmenu.c:394
 msgid "Insert &date/time           "
 msgstr "&Огноо оруулах"
 
-#: edit/editmenu.c:353 edit/editmenu.c:376
+#: edit/editmenu.c:373 edit/editmenu.c:396
 msgid "Format p&aragraph        M-p"
 msgstr "Параграфын &бүтэц        M-p"
 
-#: edit/editmenu.c:354
+#: edit/editmenu.c:374
 msgid "'ispell' s&pell check    C-p"
 msgstr "Зөв бичлэгийн дүр&эм шалгах        C-p"
 
-#: edit/editmenu.c:355 edit/editmenu.c:378
+#: edit/editmenu.c:375 edit/editmenu.c:398
 msgid "Sor&t...                 M-t"
 msgstr "&Эрэмбэлэлт...              M-t"
 
-#: edit/editmenu.c:356 edit/editmenu.c:379
+#: edit/editmenu.c:376 edit/editmenu.c:399
 msgid "E&xternal Formatter      F19"
 msgstr "&Хэлбэржүүлэгч             F19"
 
-#: edit/editmenu.c:357 edit/editmenu.c:380
+#: edit/editmenu.c:377 edit/editmenu.c:400
 msgid "&Mail...                    "
 msgstr "&Шуудан..."
 
-#: edit/editmenu.c:371
+#: edit/editmenu.c:391
 msgid "&Execute macro... C-x e, KEY"
 msgstr "Макрог &гүйцэтгэх... C-x e, KEY"
 
-#: edit/editmenu.c:377
+#: edit/editmenu.c:397
 msgid "'ispell' s&pell check    M-$"
 msgstr "Зөв бичлэгийн дүр&эм шалгах    M-$"
 
-#: edit/editmenu.c:385
+#: edit/editmenu.c:405 edit/editmenu.c:414
 msgid "&General...  "
 msgstr "&Ерөнхий..."
 
-#: edit/editmenu.c:386
+#: edit/editmenu.c:406 edit/editmenu.c:415
 msgid "&Save mode..."
 msgstr "Хадгалах &горим..."
 
-#: edit/editmenu.c:388 src/main.c:1083
+#: edit/editmenu.c:408 edit/editmenu.c:417 src/main.c:1083
 msgid "learn &Keys..."
 msgstr "&Товчлууруудыг судлах..."
 
-#: edit/editmenu.c:400 edit/editmenu.c:414 src/chmod.c:149 src/chown.c:121
+#: edit/editmenu.c:427 edit/editmenu.c:441 src/chmod.c:149 src/chown.c:121
 msgid " File "
 msgstr " Файл "
 
-#: edit/editmenu.c:402 edit/editmenu.c:416
+#: edit/editmenu.c:429 edit/editmenu.c:443
 msgid " Edit "
 msgstr " Засварлах "
 
-#: edit/editmenu.c:404 edit/editmenu.c:418
+#: edit/editmenu.c:431 edit/editmenu.c:445
 msgid " Sear/Repl "
 msgstr " Хайх/Солих "
 
-#: edit/editmenu.c:406 edit/editmenu.c:420
+#: edit/editmenu.c:433 edit/editmenu.c:447
 msgid " Command "
 msgstr " Команд "
 
-#: edit/editmenu.c:408 edit/editmenu.c:422
+#: edit/editmenu.c:435 edit/editmenu.c:449
 msgid " Options "
 msgstr " Тохируулга "
 
@@ -727,7 +728,7 @@ msgid " Editor options "
 msgstr " Засварлагчын тохиргоо "
 
 #: edit/editwidget.c:282 src/help.c:792 src/help.c:813 src/main.c:1419
-#: src/screen.c:2185 src/tree.c:1029 src/view.c:2155
+#: src/screen.c:2191 src/tree.c:1029 src/view.c:2152
 msgid "Help"
 msgstr "Тусламж"
 
@@ -739,7 +740,7 @@ msgstr "Блок"
 msgid "Replac"
 msgstr "Солих"
 
-#: edit/editwidget.c:286 src/file.c:828 src/screen.c:2189 src/tree.c:1034
+#: edit/editwidget.c:286 src/file.c:828 src/screen.c:2195 src/tree.c:1034
 msgid "Copy"
 msgstr "Хуулах"
 
@@ -747,7 +748,7 @@ msgstr "Хуулах"
 msgid "Move"
 msgstr "Зөөх"
 
-#: edit/editwidget.c:289 src/screen.c:2192
+#: edit/editwidget.c:289 src/screen.c:2198
 msgid "Delete"
 msgstr "Устгах"
 
@@ -755,11 +756,11 @@ msgstr "Устгах"
 msgid "PullDn"
 msgstr "ЦэсMC"
 
-#: edit/syntax.c:1087 edit/syntax.c:1094
+#: edit/syntax.c:982 edit/syntax.c:989
 msgid " Load syntax file "
 msgstr " өгүүлбэрзүйн файлыг ачаалах "
 
-#: edit/syntax.c:1088 src/help.c:763 src/user.c:700
+#: edit/syntax.c:983 src/help.c:763 src/user.c:700
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -768,7 +769,7 @@ msgstr ""
 " Файлыг нээж чадсангүй %s \n"
 " %s "
 
-#: edit/syntax.c:1095
+#: edit/syntax.c:990
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " %s файлын %d р мөр алдаатай "
@@ -1038,7 +1039,7 @@ msgstr "Домен:"
 msgid "Username:"
 msgstr "Хэрэглэгчийн нэр:"
 
-#: src/boxes.c:1007 vfs/vfs.c:1867
+#: src/boxes.c:1007 vfs/vfs.c:1838
 msgid "Password:"
 msgstr "Нууц үг:"
 
@@ -1047,7 +1048,7 @@ msgstr "Нууц үг:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s ийн Нууц үг"
 
-#: src/charsets.c:51 vfs/extfs.c:1299 vfs/sfs.c:307
+#: src/charsets.c:51 vfs/extfs.c:1291 vfs/sfs.c:307
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Анхааруулга: файл %s алга байна\n"
@@ -1206,7 +1207,7 @@ msgstr " %s ийн локаль хуулбарыг авч чадсангүй "
 msgid "Files tagged, want to cd?"
 msgstr "Файлууд тэмдэглэгдсэн байна, шилжих үү?"
 
-#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:855 src/screen.c:1931
+#: src/cmd.c:247 src/cmd.c:709 src/cmd.c:771 src/main.c:852 src/screen.c:1937
 msgid "Cannot change directory"
 msgstr "Хавтас руу шилжиж чадсангүй"
 
@@ -1322,11 +1323,11 @@ msgstr "Энэ коммандыг 2 панелийг жагсаалтын гор
 msgid " The command history is empty "
 msgstr " Командын бүртгэл хоосон байна "
 
-#: src/cmd.c:935
+#: src/cmd.c:937
 msgid " Command history "
 msgstr " Командын бүртгэл "
 
-#: src/cmd.c:974
+#: src/cmd.c:976
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1334,99 +1335,99 @@ msgstr ""
 " Энэ бол xterm эсвэл консол ч биш байна; \n"
 "    панелууд салгагдахгүй. "
 
-#: src/cmd.c:1008
+#: src/cmd.c:1010
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr " \"exit\" гэж бичиж Midnight Commander руу буцна"
 
-#: src/cmd.c:1058
+#: src/cmd.c:1060
 #, c-format
 msgid "Link %s to:"
 msgstr "%s руу холбох:"
 
-#: src/cmd.c:1059
+#: src/cmd.c:1061
 msgid " Link "
 msgstr " Холбоос "
 
-#: src/cmd.c:1069
+#: src/cmd.c:1071
 #, c-format
 msgid " link: %s "
 msgstr " холбоос: %s "
 
-#: src/cmd.c:1097
+#: src/cmd.c:1099
 #, c-format
 msgid " symlink: %s "
 msgstr " тэмдэгт холбоос: %s "
 
-#: src/cmd.c:1131
+#: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Тэмдэгт холбоос %s ийг руу заах: "
 
-#: src/cmd.c:1136
+#: src/cmd.c:1138
 msgid " Edit symlink "
 msgstr " Тэмдэгт холбоосийг засах "
 
-#: src/cmd.c:1141
+#: src/cmd.c:1143
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " %s: %s Тэмдэгт холбоосыг устгаж чадсангүй "
 
-#: src/cmd.c:1145
+#: src/cmd.c:1147
 #, c-format
 msgid " edit symlink: %s "
 msgstr " Тэмдэгт холбоос: %s ийг засварлах "
 
-#: src/cmd.c:1156
+#: src/cmd.c:1158
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "%s нь тэмдэгт холбоос биш байна"
 
-#: src/cmd.c:1285
+#: src/cmd.c:1287
 #, c-format
 msgid " Cannot chdir to %s "
 msgstr " %s руу шилжиж чадсангүй"
 
-#: src/cmd.c:1294
+#: src/cmd.c:1296
 msgid " Enter machine name (F1 for details): "
 msgstr " Машины нэрээ оруул (дэлгэрэнгүйгээр үзвэл F1): "
 
-#: src/cmd.c:1299 src/widget.c:1046
+#: src/cmd.c:1301 src/widget.c:1048
 msgid " Link to a remote machine "
 msgstr " Алсын машин руу холбогдох "
 
-#: src/cmd.c:1306 src/widget.c:1047
+#: src/cmd.c:1308 src/widget.c:1049
 msgid " FTP to machine "
 msgstr " FTP-ээр машин руу холбогдох "
 
-#: src/cmd.c:1312
+#: src/cmd.c:1314
 msgid " Shell link to machine "
 msgstr " Shell-ээр машин руу холбогдох "
 
-#: src/cmd.c:1319 src/widget.c:1048
+#: src/cmd.c:1321 src/widget.c:1050
 msgid " SMB link to machine "
 msgstr " SMB-аар машин руу холбогдох"
 
-#: src/cmd.c:1330
+#: src/cmd.c:1332
 msgid " Socket source routing setup "
 msgstr " Сокет эх чиглүүлэгчийн тохиргуулга "
 
-#: src/cmd.c:1331
+#: src/cmd.c:1333
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Эх чиглүүлэгч хоп болгон хэрэглэх хост нэрийг оруул: "
 
-#: src/cmd.c:1339
+#: src/cmd.c:1341
 msgid " Host name "
 msgstr " Хост нэр "
 
-#: src/cmd.c:1339
+#: src/cmd.c:1341
 msgid " Error while looking up IP address "
 msgstr " IP-хаягийг харахад алдаа гарлаа "
 
-#: src/cmd.c:1350
+#: src/cmd.c:1352
 msgid " Undelete files on an ext2 file system "
 msgstr " ext2 файл систем дэхь сэргээгдсэн файлууд "
 
-#: src/cmd.c:1351
+#: src/cmd.c:1353
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1434,15 +1435,15 @@ msgstr ""
 " Сэргээх төхөөрөмжийг (/dev/ биш), өгнө үү\n"
 " (дэлгэрэнгүйгээр F1)"
 
-#: src/cmd.c:1401
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr " Хадгалах утгууд ~/"
 
-#: src/cmd.c:1403
+#: src/cmd.c:1405
 msgid " Setup "
 msgstr " Тохируулга "
 
-#: src/command.c:167 src/screen.c:2176 src/tree.c:885
+#: src/command.c:167 src/screen.c:2182 src/tree.c:885
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -2188,7 +2189,7 @@ msgstr " %s д дотор хайж байна"
 msgid "Finished"
 msgstr "Дууссан"
 
-#: src/find.c:559 src/view.c:1604
+#: src/find.c:559 src/view.c:1601
 #, c-format
 msgid "Searching %s"
 msgstr "Хайж байна %s"
@@ -2360,7 +2361,7 @@ msgstr "Мөчирт мэдээлэл алга"
 #: src/info.c:125
 #, c-format
 msgid "Free space: %s (%d%%) of %s"
-msgstr "%3$s дэхь чөлөөт зай: %1$s (%2$d%%)"
+msgstr "Чөлөөт зай: %s (%d%%) %s дэхь"
 
 #: src/info.c:128
 msgid "No space information"
@@ -2577,8 +2578,8 @@ msgstr "Бүх товчлууруудаа дарж үзнэ үү. Дараа н�
 #: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr ""
-" \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг хүлээж "
-"байна"
+" \"OK\" гэж тэмдэглээдээгүй байгааг шалгаарай. Хоосон зай дарахыг "
+"хүлээж байна"
 
 #: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
@@ -2603,7 +2604,7 @@ msgstr "Дурын товчлуур дарж үргэлжлүүл..."
 msgid " The shell is already running a command "
 msgstr " shell коммандыг аль хэдийнэ биелүүлж байна "
 
-#: src/main.c:628 src/screen.c:1957
+#: src/main.c:628 src/screen.c:1963
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -2880,10 +2881,10 @@ msgid ""
 " the details.                                           "
 msgstr ""
 " Хавтасын агуулгыг харахад хурдан дуудах     \n"
-" тохиргоо хэрэглэж болсонгүй. Энэ тохиолдолд та лавлахыг гар аргаар ачаалах "
-"хэрэгтэй.  Дэлгэрэнгүй мэдээллийг лавлахаас (man) харна уу."
+" тохиргоо хэрэглэж болсонгүй. Энэ тохиолдолд та лавлахыг гар аргаар "
+"ачаалах хэрэгтэй.  Дэлгэрэнгүй мэдээллийг лавлахаас (man) харна уу."
 
-#: src/main.c:1420 src/screen.c:2186
+#: src/main.c:1420 src/screen.c:2192
 msgid "Menu"
 msgstr "Цэс"
 
@@ -2930,8 +2931,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, "
-"core\n"
+"   File types:   directory, executable, link, stalelink, device, "
+"special, core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -2939,7 +2940,7 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
-"--colors {ТүЛХүүР үГ}={ТЕКСТ},{ФОН}\n"
+"--colors {ТҮЛХҮҮР ҮГ}={ТЕКСТ},{ФОН}\n"
 "\n"
 "{ТЕКСТ} ба {ФОН} оруулж болно, анхны утгаар нь хэрэглэхэд\n"
 "\n"
@@ -3186,7 +3187,7 @@ msgstr " Локал биш лавлах дахь гадаад панелизыг
 
 #: src/panelize.c:315
 msgid "Find rejects after patching"
-msgstr "Рatch ээр гүйцэтгэгдээгүй шалтгааныг олох"
+msgstr "Рatch-ээр гүйцэтгэгдээгүй шалтгааныг олох"
 
 #: src/panelize.c:316
 msgid "Find *.orig after patching"
@@ -3306,35 +3307,35 @@ msgstr "%2$d файлууд %1$s байт"
 msgid "<readlink failed>"
 msgstr "<унших холбоох алдаатай>"
 
-#: src/screen.c:1267
+#: src/screen.c:1273
 msgid "Unknown tag on display format: "
 msgstr "Дүрслэх хэлбэрт тодорхойгүй tag байна: "
 
-#: src/screen.c:1391
+#: src/screen.c:1397
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Хэрэглэж байгаа формат буруу байна, тиймээс стандарт руугаа буцлаа."
 
-#: src/screen.c:1958
+#: src/screen.c:1964
 msgid " Do you really want to execute? "
 msgstr " Та үүнийг ажиллуулахдаа итгэлтэй байна уу? "
 
-#: src/screen.c:1970
+#: src/screen.c:1976
 msgid " No action taken "
 msgstr " үйлдэл хийгдсэнгүй "
 
-#: src/screen.c:2187
+#: src/screen.c:2193
 msgid "View"
 msgstr "Харах"
 
-#: src/screen.c:2188 src/view.c:2168
+#: src/screen.c:2194 src/view.c:2165
 msgid "Edit"
 msgstr "Засах"
 
-#: src/screen.c:2190 src/tree.c:1036
+#: src/screen.c:2196 src/tree.c:1036
 msgid "RenMov"
 msgstr "Зөөх"
 
-#: src/screen.c:2191 src/tree.c:1040
+#: src/screen.c:2197 src/tree.c:1040
 msgid "Mkdir"
 msgstr "ШинэХавт"
 
@@ -3553,11 +3554,11 @@ msgstr " Тохирох бичлэг олдсонгүй %s"
 msgid " User menu "
 msgstr " Хэрэглэгчийн цэс "
 
-#: src/util.c:668 src/util.c:694
+#: src/util.c:670 src/util.c:696
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:669 src/util.c:692
+#: src/util.c:671 src/util.c:694
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
@@ -3610,7 +3611,7 @@ msgstr "Хүү шүүлтүүрийн гаралт хоосон байна"
 msgid " Cannot open file "
 msgstr " Файлыг нээж чадсангүй "
 
-#: src/view.c:654
+#: src/view.c:651
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3619,7 +3620,7 @@ msgstr ""
 " \"%s\" ийг нээж чадсангүй\n"
 " %s "
 
-#: src/view.c:663
+#: src/view.c:660
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3628,43 +3629,43 @@ msgstr ""
 " \"%s\" ийн төлөвийг тогтоож чадсангүй\n"
 " %s "
 
-#: src/view.c:672
+#: src/view.c:669
 msgid " Cannot view: not a regular file "
 msgstr " Харж чадсангүй: хэвийн бус файл "
 
-#: src/view.c:812
+#: src/view.c:809
 #, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#: src/view.c:827
+#: src/view.c:824
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Хаяг 0x%08x"
 
-#: src/view.c:829
+#: src/view.c:826
 #, c-format
 msgid "Col %d"
 msgstr "Багана. %d"
 
-#: src/view.c:833
+#: src/view.c:830
 #, c-format
 msgid "%s bytes"
 msgstr "%s байт"
 
-#: src/view.c:838
+#: src/view.c:835
 msgid "  [grow]"
 msgstr "  [рост]"
 
-#: src/view.c:1804
+#: src/view.c:1801
 msgid "Invalid hex search expression"
 msgstr "Хайхад боломжгүй илэрхийлэл байна"
 
-#: src/view.c:1858
+#: src/view.c:1855
 msgid " Invalid regular expression "
 msgstr " Буруу тогтмол илэрхийлэл "
 
-#: src/view.c:1983
+#: src/view.c:1980
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3673,7 +3674,7 @@ msgstr ""
 " Одоогийн мөрийн дугаар %d.\n"
 " Шинэ мөрийн дугаараа оруул:"
 
-#: src/view.c:2006
+#: src/view.c:2003
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3682,71 +3683,71 @@ msgstr ""
 " Одоогийн хаяг - 0x%lx.\n"
 " Шинэ хаягаа оруул:"
 
-#: src/view.c:2008
+#: src/view.c:2005
 msgid " Goto Address "
 msgstr " Хаяг руу очих "
 
-#: src/view.c:2040
+#: src/view.c:2037
 msgid " Enter regexp:"
 msgstr " Тогмол илэрхийлэлээ оруул:"
 
-#: src/view.c:2158
+#: src/view.c:2155
 msgid "Ascii"
 msgstr "Текст"
 
-#: src/view.c:2158
+#: src/view.c:2155
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2160
+#: src/view.c:2157
 msgid "Goto"
 msgstr "Очих"
 
-#: src/view.c:2160
+#: src/view.c:2157
 msgid "Line"
 msgstr "Мөр"
 
-#: src/view.c:2162
+#: src/view.c:2159
 msgid "RxSrch"
 msgstr "РегХайх"
 
-#: src/view.c:2167
+#: src/view.c:2164
 msgid "EdText"
 msgstr "ТкстЗас"
 
-#: src/view.c:2167
+#: src/view.c:2164
 msgid "EdHex"
 msgstr "HxЗас"
 
-#: src/view.c:2169
+#: src/view.c:2166
 msgid "UnWrap"
 msgstr "ТаслБолих"
 
-#: src/view.c:2169
+#: src/view.c:2166
 msgid "Wrap"
 msgstr "Таслах"
 
-#: src/view.c:2172
+#: src/view.c:2169
 msgid "HxSrch"
 msgstr "HxХайх"
 
-#: src/view.c:2175
+#: src/view.c:2172
 msgid "Raw"
 msgstr "Дутуу"
 
-#: src/view.c:2175
+#: src/view.c:2172
 msgid "Parse"
 msgstr "Бэлэн"
 
-#: src/view.c:2180
+#: src/view.c:2177
 msgid "Unform"
 msgstr "ФормБус"
 
-#: src/view.c:2180
+#: src/view.c:2177
 msgid "Format"
 msgstr "Формат"
 
-#: src/widget.c:906
+#: src/widget.c:901
 msgid " History "
 msgstr "Бүртгэл"
 
@@ -4282,8 +4283,8 @@ msgid ""
 "Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Анхаар: %2$s д алдаатай флаг %1$c :\n"
-"%3$s\n"
+"Анхаар: Алдаатай флаг %c %s -д байна:\n"
+"%s\n"
 
 #: vfs/smbfs.c:574
 #, c-format
@@ -4298,27 +4299,27 @@ msgstr ""
 msgid " Authentication failed "
 msgstr " Шалгалтад алдаа гарлаа "
 
-#: vfs/smbfs.c:1622
+#: vfs/smbfs.c:1597
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s лавлахын нээхэд алдаа гарлаа %s "
 
-#: vfs/smbfs.c:1645
+#: vfs/smbfs.c:1620
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s лавлахыг устгахад алдаа гарлаа %s "
 
-#: vfs/smbfs.c:1749 vfs/smbfs.c:1769
+#: vfs/smbfs.c:1724 vfs/smbfs.c:1744
 #, c-format
 msgid " %s opening remote file %s "
 msgstr "алсын машинаас %s файлыг нээж байна %s "
 
-#: vfs/smbfs.c:1837
+#: vfs/smbfs.c:1812
 #, c-format
 msgid " %s removing remote file %s "
 msgstr "алсын машинаас %s файлуудыг устгаж байна %s "
 
-#: vfs/smbfs.c:1875
+#: vfs/smbfs.c:1850
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s файлуудад шинэ нэр өгч байна\n"
@@ -4377,7 +4378,8 @@ msgstr " зангилааг шалгаж эхлээд байна %d "
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr ""
-"undelfs: %d зангилаануудын устгагдсан файлуудын мэдээллийг ачаалж байна "
+"undelfs: %d зангилаануудын устгагдсан файлуудын мэдээллийг ачаалж "
+"байна "
 
 #: vfs/undelfs.c:214
 #, c-format
@@ -4440,28 +4442,29 @@ msgstr " Та файлуудаа задлахын тулд, эхлээд лав�
 msgid " while iterating over blocks "
 msgstr " блокуудаа дахин сонгох хэрэгтэй "
 
-#: vfs/vfs.c:1158
+#: vfs/vfs.c:1155
 msgid "Changes to file lost"
 msgstr "Файлын өөрчлөлт алга байна"
 
-#: vfs/vfs.c:1830
+#: vfs/vfs.c:1801
 msgid "Cannot parse:"
 msgstr "Анализ хийж чадсангүй:"
 
-#: vfs/vfs.c:1832
+#: vfs/vfs.c:1803
 msgid "More parsing errors will be ignored."
 msgstr "Зөндөө анализын алдаанууд алгасагдах болно."
 
-#: vfs/vfs.c:1842
+#: vfs/vfs.c:1813
 msgid "Internal error:"
 msgstr "Дотоод алдаа:"
 
-#: vfs/vfs.c:1852
+#: vfs/vfs.c:1823
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт дамжуулагдлаа)"
 
-#: vfs/vfs.c:1853
+#: vfs/vfs.c:1824
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu байт дамжуулагдлаа"
+
