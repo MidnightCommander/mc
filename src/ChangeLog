@@ -1,3 +1,8 @@
+2004-08-17  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* utilunix.c (mc_tmpdir): Check return value of getpwuid()
+	for NULL. 
+
 2004-04-18  Pavel Roskin  <proski@gnu.org>
 
 	* vfsdummy.h [!USE_VFS]: Make sure that vfs_canon() doesn't
