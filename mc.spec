@@ -34,7 +34,7 @@ The tk version of Midnight Commander is not yet finished though. :-(
  
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
-Requires: mc
+Requires: mc >= 4.1.30
 Group:    X11/Shells
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
