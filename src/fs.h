@@ -36,6 +36,10 @@
 #   define S_ISDOOR(x) 0
 #endif
 
+/* Special named files are widely used in QNX6 */
+#ifndef S_ISNAM
+#   define S_ISNAM(x) 0
+#endif
 
 
 #ifndef MAXPATHLEN

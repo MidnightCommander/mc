@@ -547,6 +547,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
 
 	if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode)
 	    || S_ISFIFO (sb.st_mode)
+	    || S_ISNAM (sb.st_mode)
 	    || S_ISSOCK (sb.st_mode)) {
 	    while (mc_mknod
 		   (dst_path, sb.st_mode & ctx->umask_kill,

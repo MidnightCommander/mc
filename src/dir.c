@@ -284,6 +284,8 @@ file_type_to_num (const file_entry *fe)
 	return 6;
     if (S_ISFIFO (s->st_mode))
 	return 7;
+    if (S_ISNAM (s->st_mode)) /* Special named files will be shown as block devices */
+	return 6;
     if (is_exe (s->st_mode))
 	return 8;
     return 9;

@@ -27,6 +27,9 @@
 #include <string.h>		/* On Solaris, FD_SET invokes memset(3) */
 #include <sys/wait.h>
 #include <unistd.h>
+#ifdef HAVE_SYS_SELECT_H
+#  include <sys/select.h>
+#endif
 
 #include <pipethrough.h>
 

@@ -377,6 +377,8 @@ string_perm (mode_t mode_bits)
 	mode[0] = 'l';
     if (S_ISFIFO (mode_bits))
 	mode[0] = 'p';
+    if (S_ISNAM (mode_bits))
+	mode[0] = 'n';
     if (S_ISSOCK (mode_bits))
 	mode[0] = 's';
     if (S_ISDOOR (mode_bits))

@@ -255,6 +255,8 @@ string_file_type (file_entry *fe, int len)
 	buffer[0] = '+';
     else if (S_ISFIFO (fe->st.st_mode))
 	buffer[0] = '|';
+    else if (S_ISNAM (fe->st.st_mode))
+	buffer[0] = '#';
     else if (!S_ISREG (fe->st.st_mode))
 	buffer[0] = '?';	/* non-regular of unknown kind */
     else if (is_exe (fe->st.st_mode))
@@ -492,6 +494,8 @@ file_compute_color (int attr, file_entry *fe)
     else if (S_ISCHR (fe->st.st_mode))
 	return (DEVICE_COLOR);
     else if (S_ISBLK (fe->st.st_mode))
+	return (DEVICE_COLOR);
+    else if (S_ISNAM (fe->st.st_mode))
 	return (DEVICE_COLOR);
     else if (S_ISFIFO (fe->st.st_mode))
 	return (SPECIAL_COLOR);
