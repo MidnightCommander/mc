@@ -2545,7 +2545,7 @@ real_query_recursive (enum OperationMode mode, char *s)
 
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
-        recursive_result = query_dialog (text, msg, 3, 5,
+        recursive_result = query_dialog (text, msg, D_ERROR, 5,
 				     _("&Yes"), _("&No"), _("a&ll"), _("non&E"), _("&Abort"));
 	
 	
