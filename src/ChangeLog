@@ -1,3 +1,8 @@
+2002-01-09  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* util.c (string_perm) [S_IFDOOR]: Support Solaris doors.
+	screen.c (string_file_type) [S_IFDOOR]: Likewise.
+
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 
 	* hotlist.c (hotlist_callback): Recognize "delete" key.

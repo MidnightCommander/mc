@@ -215,10 +215,16 @@ string_file_type (file_entry *fe, int len)
             buffer [0] = '!';
         else
 	    buffer [0] = '@';
-    } else if (S_ISSOCK (fe->buf.st_mode))
-	buffer [0] = '=';
-    else if (S_ISCHR (fe->buf.st_mode))
+    } else if (S_ISCHR (fe->buf.st_mode))
 	buffer [0] = '-';
+#ifdef S_ISSOCK
+    else if (S_ISSOCK (fe->buf.st_mode))
+	buffer [0] = '=';
+#endif
+#ifdef S_ISDOOR
+    else if (S_ISDOOR (fe->buf.st_mode))
+	buffer [0] = '>';
+#endif
     else if (S_ISBLK (fe->buf.st_mode))
 	buffer [0] = '+';
     else if (S_ISFIFO (fe->buf.st_mode))

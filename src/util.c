@@ -356,6 +356,9 @@ char *string_perm (mode_t mode_bits)
     if (ismode (mode_bits, S_ISVTX)) mode [9] = (mode [9] == 'x') ? 't' : 'T';
     if (ismode (mode_bits, S_IFLNK)) mode [0] = 'l';
     if (ismode (mode_bits, S_IFIFO)) mode [0] = 'p';
+#ifdef	S_IFDOOR
+    if (ismode (mode_bits, S_IFDOOR)) mode [0] = 'D';
+#endif /* S_IFDOOR */
 #endif /* !OS2_NT */
     return mode;
 }
