@@ -1,3 +1,9 @@
+1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (setup_motif_dnd_proxy): Use Window instead of
+	gint32, fix from George Lebl.
+	(setup_xdnd_proxy): ditto.
+
 1999-02-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmain.h: Removed set_current_panel() since it was never used.
@@ -67,7 +73,8 @@
 
 	* gdesktop.c (reload_desktop_icons): Load the information provided
 	on the .desktop file for the desktop icon information: icon
-	filename and text to be displayed.
+	filename and text to be displayed.pwd
+	
 
 	* gpopup.c (create_actions): Add ejectable 
 

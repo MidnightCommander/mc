@@ -1799,7 +1799,7 @@ static gboolean
 setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 {
 	GdkAtom xdnd_proxy_atom;
-	guint32 proxy_xid;
+	Window proxy_xid;
 	Atom type;
 	int format;
 	unsigned long nitems, after;
@@ -1887,7 +1887,7 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 static void
 setup_motif_dnd_proxy (guint32 xid, GdkWindow *proxy_window)
 {
-	guint32 proxy_xid;
+	Window proxy_xid;
 	MotifDragReceiverInfo info;
 	Atom receiver_info_atom;
 	guint32 myint;
