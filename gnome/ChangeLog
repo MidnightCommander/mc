@@ -1,3 +1,13 @@
+Sat May 16 02:29:51 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* gdesktop.c (url_dropped): `exec' field of desktop entry now a
+	vector.
+	(dentry_execute): Likewise.
+	(desktop_icon_remove): Likewise.
+	(get_transparent_window_for_dentry): Likewise.
+	(desktop_create_directory_entry): Likewise; also initialize
+	exec_length.
+
 1998-05-16  Jaka Mocnik <jaka.mocnik@kiss.uni-lj.si>
 
 	* gscreen.c (create_popup_submenu): fixed bug which caused it to require

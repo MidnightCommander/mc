@@ -560,7 +560,7 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 	}
 	
 	if (is_directory){
-		drop_on_directory (event, di->dentry->exec, 0);
+		drop_on_directory (event, di->dentry->exec[0], 0);
 		return;
 	}
 
@@ -611,7 +611,7 @@ dentry_execute (desktop_icon_t *di)
 	 */
 
 	if (strcmp (di->dentry->type, "Directory") == 0){
-		new_panel_at (di->dentry->exec);
+		new_panel_at (di->dentry->exec[0]);
 	} else 
 		gnome_desktop_entry_launch (dentry);
 }
@@ -834,11 +834,11 @@ desktop_icon_remove (desktop_icon_t *di)
 		if (strcmp (di->dentry->type, "Directory") == 0){
 			struct stat s;
 
-			if (mc_lstat (di->dentry->exec, &s) == 0){
+			if (mc_lstat (di->dentry->exec[0], &s) == 0){
 				if (S_ISLNK (s.st_mode))
-					mc_unlink (di->dentry->exec);
+					mc_unlink (di->dentry->exec[0]);
 				else 
-					if (!remove_directory (di->dentry->exec))
+					if (!remove_directory (di->dentry->exec[0]))
 						return;
 			}
 		}
@@ -879,7 +879,7 @@ get_transparent_window_for_dentry (GnomeDesktopEntry *dentry)
 	GtkWidget *window;
 	char *icon_label;
 
-	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec);
+	icon_label = dentry->name ? dentry->name : x_basename (dentry->exec[0]);
 
 	if (dentry->icon)
 		window = my_create_transparent_text_window (dentry->icon, icon_label);
@@ -1078,7 +1078,10 @@ desktop_create_directory_entry (char *dentry_path, char *pathname, char *short_n
 	dentry->name     = g_strdup (short_name);
 	dentry->comment  = NULL;
 	dentry->tryexec  = NULL;
-	dentry->exec     = g_strdup (pathname);
+	dentry->exec_length = 0;
+	dentry->exec     = (char **) malloc (2 * sizeof (char *));
+	dentry->exec[0]  = g_strdup (pathname);
+	dentry->exec[1]  = NULL;
 	dentry->icon     = gnome_unconditional_pixmap_file ("gnome-folder.png");
 	dentry->docpath  = NULL;
 	dentry->type     = g_strdup ("Directory");
