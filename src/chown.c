@@ -81,11 +81,11 @@ static struct {
     int y, x;
     WLabel *l;
 } chown_label [LABELS] = {
-{ TY+2, TX+2 },
-{ TY+4, TX+2 },
-{ TY+6, TX+2 },
-{ TY+8, TX+2 },
-{ TY+10,TX+2 }
+{ TY+2, TX+2, NULL },
+{ TY+4, TX+2, NULL },
+{ TY+6, TX+2, NULL },
+{ TY+8, TX+2, NULL },
+{ TY+10,TX+2, NULL }
 };
 
 static void
