@@ -28,6 +28,7 @@
 #include "src/tty.h"		/* KEY_F */
 #include "src/key.h"		/* XCTRL */
 #include "src/main.h"		/* drop_menus */
+#include "src/learn.h"		/* learn_keys */
 
 #include "edit-widget.h"
 #include "editcmddef.h"
@@ -402,19 +403,19 @@ static menu_entry CmdMenuEmacs[] =
 static menu_entry OptMenu[] =
 {
     {' ', N_("&General...  "), 'G', menu_options},
-    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd}
-#if 0
-    {' ', N_("&Layout..."),    'L', menu_layout_cmd}
-#endif
+    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
+#ifndef NATIVE_WIN32
+    {' ', N_("learn &Keys..."), 'K', learn_keys}
+#endif				/* !NATIVE_WIN32 */
 };
 
 static menu_entry OptMenuEmacs[] =
 {
     {' ', N_("&General...  "), 'G', menu_options},
-    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd}
-#if 0
-    {' ', N_("&Layout..."),    'L', menu_layout_cmd}
-#endif
+    {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
+#ifndef NATIVE_WIN32
+    {' ', N_("learn &Keys..."), 'K', learn_keys}
+#endif				/* !NATIVE_WIN32 */
 };
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)

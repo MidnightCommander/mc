@@ -1,3 +1,8 @@
+2002-12-28  Pavel Roskin  <proski@gnu.org>
+
+	* (OptMenu): Add "Learn Keys".
+	(OptMenuEmacs): Likewise.
+
 2003-01-27  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* edit-widget.h (struct macro): Move definition ...
