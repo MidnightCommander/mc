@@ -48,7 +48,6 @@
 #include "../src/wtools.h"	/* input_dialog() */
 
 #include "vfs.h"
-#include "extfs.h"		/* FIXME: we should not know anything about our modules */
 #ifdef USE_NETCODE
 #   include "tcputil.h"
 #endif

@@ -23,7 +23,6 @@ BASICFILES = 			\
 	vfs.c
 
 VFSHDRS = 			\
-	extfs.h 		\
 	ftpfs.h 		\
 	local.h			\
 	mcfs.h 			\

@@ -19,7 +19,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports only vfs_extfs_ops */
+/* Namespace: init_extfs */
 
 #include <config.h>
 #include <stdio.h>
@@ -37,7 +37,6 @@
 #include "utilvfs.h"
 #include "../src/execute.h"	/* For shell_execute */
 #include "vfs.h"
-#include "extfs.h"
 
 #undef ERRNOR
 #define ERRNOR(x,y) do { my_errno = x; return y; } while(0)
@@ -74,6 +73,19 @@ struct pseudofile {
     unsigned int has_changed:1;
     int local_handle;
     struct entry *entry;
+};
+
+struct archive {
+    int fstype;
+    char *name;
+    char *local_name;
+    struct stat local_stat;
+    dev_t rdev;
+    int fd_usage;
+    ino_t __inode_counter;
+    struct entry *root_entry;
+    struct entry *current_dir;
+    struct archive *next;
 };
 
 static struct entry *extfs_find_entry (struct entry *dir, char *name,

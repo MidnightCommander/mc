@@ -1,5 +1,9 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.h: Merge ...
+	* extfs.c: ... here.
+	* Makefile.am: Remove extfs.h.
+
 	* ftpfs.c: Use HAVE_STRUCT_LINGER_L_LINGER instead of
 	HAVE_STRUCT_LINGER.
 
