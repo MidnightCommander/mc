@@ -1680,9 +1680,10 @@ block_search (WView *view, char *buffer, int len)
 static void
 hex_search (WView *view, char *text)
 {
-    char *buffer;		/* Where we hold the information */
-    long pos;			/* Where did we found the string */
-    int  block_len = 0;
+    char *buffer;		/* Parsed search string */
+    char *cur;			/* Current position in it */
+    int  block_len;		/* Length of the search string */
+    long pos;			/* Position of the string in the file */
     int  parse_error = 0;
 
     if (!*text) {
@@ -1692,11 +1693,18 @@ hex_search (WView *view, char *text)
 
     /* buffer will never be longer that text */
     buffer = g_new (char, strlen (text));
+    cur = buffer;
 
     /* First convert the string to a stream of bytes */
     while (*text) {
 	int val;
 	int ptr;
+
+	/* Skip leading spaces */
+	if (*text == ' ' || *text == '\t') {
+	    text++;
+	    continue;
+	}
 
 	/* %i matches octal, decimal, and hexadecimal numbers */
 	if (sscanf (text, "%i%n", &val, &ptr) > 0) {
@@ -1706,21 +1714,31 @@ hex_search (WView *view, char *text)
 		break;
 	    }
 
-	    buffer [block_len++] = (char) val;
+	    *cur++ = (char) val;
 	    text += ptr;
 	    continue;
 	}
 
 	/* Try quoted string, strip quotes */
-	if (sscanf (text, "\"%[^\"]\"%n", buffer + block_len, &ptr) > 0) {
-	    text += ptr;
-	    block_len += ptr - 2;
-	    continue;
+	if (*text == '"') {
+	    char *next_quote;
+
+	    text++;
+	    next_quote = strchr (text, '"');
+	    if (next_quote) {
+		memcpy (cur, text, next_quote - text);
+		cur += next_quote - text;
+		text = next_quote + 1;
+		continue;
+	    }
+	    /* fall through */
 	}
 
 	parse_error = 1;
 	break;
     }
+
+    block_len = cur - buffer;
 
     /* No valid bytes in the user input */
     if (block_len <= 0 || parse_error) {
