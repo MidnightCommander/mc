@@ -29,9 +29,7 @@
 #include "edit.h"
 #include "editcmddef.h"
 
-#ifdef HAVE_CHARSET
 #include "src/charsets.h"
-#endif
 
 /* globals: */
 
@@ -1573,7 +1571,8 @@ static void regexp_error (WEdit *edit)
 }
 
 /* call with edit = 0 before shutdown to close memory leaks */
-void edit_replace_cmd (WEdit * edit, int again)
+void
+edit_replace_cmd (WEdit *edit, int again)
 {
     static regmatch_t pmatch[NUM_REPL_ARGS];
     static char *old1 = NULL;
@@ -1621,41 +1620,27 @@ void edit_replace_cmd (WEdit * edit, int again)
     } else {
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
-#ifdef HAVE_CHARSET
-	if (exp1 && *exp1)
-	    convert_to_display (exp1);
-	if (exp2 && *exp2)
-	    convert_to_display (exp2);
-#endif /* HAVE_CHARSET */
+	convert_to_display (exp1);
+	convert_to_display (exp2);
 
 	edit_replace_dialog (edit, &exp1, &exp2, &exp3);
 
-#ifdef HAVE_CHARSET
-	if (exp1 && *exp1)
-	    convert_from_input (exp1);
-	if (exp2 && *exp2)
-	    convert_from_input (exp2);
-#endif /* HAVE_CHARSET */
+	convert_from_input (exp1);
+	convert_from_input (exp2);
 
 	treplace_prompt = replace_prompt;
     }
 
     if (!exp1 || !*exp1) {
 	edit->force = REDRAW_COMPLETELY;
-	if (exp1)
-	    g_free (exp1);
-	if (exp2)
-	    g_free (exp2);
-	if (exp3)
-	    g_free (exp3);
+	g_free (exp1);
+	g_free (exp2);
+	g_free (exp3);
 	return;
     }
-    if (old1)
-	g_free (old1);
-    if (old2)
-	g_free (old2);
-    if (old3)
-	g_free (old3);
+    g_free (old1);
+    g_free (old2);
+    g_free (old3);
     old1 = g_strdup (exp1);
     old2 = g_strdup (exp2);
     old3 = g_strdup (exp3);
@@ -1667,7 +1652,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    memmove (s, s + 1, strlen (s));
 	s = exp3;
 	for (i = 0; i < NUM_REPL_ARGS; i++) {
-	    if (s != (char *)1 && *s) {
+	    if (s != (char *) 1 && *s) {
 		ord = atoi (s);
 		if ((ord > 0) && (ord < NUM_REPL_ARGS))
 		    argord[i] = ord - 1;
@@ -1681,17 +1666,21 @@ void edit_replace_cmd (WEdit * edit, int again)
 
     replace_continue = replace_all;
 
-    if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
+    if (edit->found_len && edit->search_start == edit->found_start + 1
+	&& replace_backwards)
 	edit->search_start--;
 
-    if (edit->found_len && edit->search_start == edit->found_start - 1 && !replace_backwards)
+    if (edit->found_len && edit->search_start == edit->found_start - 1
+	&& !replace_backwards)
 	edit->search_start++;
 
     do {
 	int len = 0;
 	long new_start;
-	new_start = edit_find (edit->search_start, (unsigned char *) exp1, &len, last_search,
-	   (int (*)(void *, long)) edit_get_byte, (void *) edit, pmatch);
+	new_start =
+	    edit_find (edit->search_start, (unsigned char *) exp1, &len,
+		       last_search, (int (*)(void *, long)) edit_get_byte,
+		       (void *) edit, pmatch);
 	if (new_start == -3) {
 	    regexp_error (edit);
 	    break;
@@ -1724,8 +1713,10 @@ void edit_replace_cmd (WEdit * edit, int again)
 		edit_push_key_press (edit);
 
 		switch (edit_replace_prompt (edit, exp2,	/* and prompt 2/3 down */
-					     (edit->num_widget_columns - CONFIRM_DLG_WIDTH)/2,
-					     edit->num_widget_lines * 2 / 3)) {
+					     (edit->num_widget_columns -
+					      CONFIRM_DLG_WIDTH) / 2,
+					     edit->num_widget_lines * 2 /
+					     3)) {
 		case B_ENTER:
 		    break;
 		case B_SKIP_REPLACE:
@@ -1747,13 +1738,29 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    if (replace_yes) {	/* delete then insert new */
 		if (replace_scanf || replace_regexp) {
 		    char repl_str[MAX_REPL_LEN + 2];
-		    if (replace_regexp) {	/* we need to fill in sargs just like with scanf */
+
+		    /* we need to fill in sargs just like with scanf */
+		    if (replace_regexp) {
 			int k, j;
-			for (k = 1; k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0; k++) {
+			for (k = 1;
+			     k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0;
+			     k++) {
 			    unsigned char *t;
 			    t = (unsigned char *) &sargs[k - 1][0];
-			    for (j = 0; j < pmatch[k].rm_eo - pmatch[k].rm_so && j < 255; j++, t++)
-				*t = (unsigned char) edit_get_byte (edit, edit->search_start - pmatch[0].rm_so + pmatch[k].rm_so + j);
+			    for (j = 0;
+				 j < pmatch[k].rm_eo - pmatch[k].rm_so
+				 && j < 255; j++, t++)
+				*t = (unsigned char) edit_get_byte (edit,
+								    edit->
+								    search_start
+								    -
+								    pmatch
+								    [0].
+								    rm_so +
+								    pmatch
+								    [k].
+								    rm_so +
+								    j);
 			    *t = '\0';
 			}
 			for (; k <= NUM_REPL_ARGS; k++)
@@ -1766,9 +1773,9 @@ void edit_replace_cmd (WEdit * edit, int again)
 			while (repl_str[++i])
 			    edit_insert (edit, repl_str[i]);
 		    } else {
-			edit_error_dialog (_ (" Replace "),
-/* "Invalid regexp string or scanf string" */
-			    _ (" Error in replacement format string. "));
+			edit_error_dialog (_(" Replace "),
+					   _
+					   (" Error in replacement format string. "));
 			replace_continue = 0;
 		    }
 		} else {
@@ -1780,7 +1787,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 		}
 		edit->found_len = i;
 	    }
-/* so that we don't find the same string again */
+	    /* so that we don't find the same string again */
 	    if (replace_backwards) {
 		last_search = edit->search_start;
 		edit->search_start--;
@@ -1791,15 +1798,17 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    edit_scroll_screen_over_cursor (edit);
 	} else {
 	    char *msg = _(" Replace ");
-	    edit->search_start = edit->curs1;	/* try and find from right here for next search */
+	    /* try and find from right here for next search */
+	    edit->search_start = edit->curs1;
 	    edit_update_curs_col (edit);
 
 	    edit->force |= REDRAW_PAGE;
 	    edit_render_keypress (edit);
 	    if (times_replaced) {
-		message (0, msg, _(" %ld replacements made. "), times_replaced);
+		message (0, msg, _(" %ld replacements made. "),
+			 times_replaced);
 	    } else
-		edit_message_dialog (msg, _ (" Search string not found "));
+		edit_message_dialog (msg, _(" Search string not found "));
 	    replace_continue = 0;
 	}
     } while (replace_continue);

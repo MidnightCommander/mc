@@ -25,9 +25,7 @@
 
 #define MAX_LINE_LEN 1024
 
-#ifdef HAVE_CHARSET
 #include "src/charsets.h"
-#endif
 
 /* Text styles */
 #define MOD_ABNORMAL		(1 << 8)
@@ -304,10 +302,8 @@ edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
 			*(p++) = c;
 		    break;
 		default:
-#ifdef HAVE_CHARSET
-		    if (c >= 0 && c <= 255)
-			c = conv_displ[c];
-#endif
+		    c = convert_to_display_c (c);
+
 		    /* Caret notation for control characters */
 		    if (c < 32) {
 			*(p++) = '^' | MOD_ABNORMAL;

@@ -23,10 +23,8 @@
 #include <config.h>
 #include "edit.h"
 
-#ifdef HAVE_CHARSET
 #include "src/charsets.h"
 #include "src/selcodepage.h"
-#endif
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL

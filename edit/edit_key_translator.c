@@ -292,16 +292,15 @@
 	    goto fin;
 	}
     }
-/* an ordinary insertable character */
 
-#ifndef HAVE_CHARSET
-    if (x_key < 256 && is_printable (x_key)) {
-	char_for_insertion = x_key;
-#else
-    if (x_key < 256 && is_printable (conv_input [x_key])) {
-	char_for_insertion = conv_input [x_key];
-#endif
-	goto fin;
+/* an ordinary insertable character */
+    if (x_key < 256) {
+	int c = convert_from_input_c (x_key);
+
+	if (is_printable (c)) {
+	    char_for_insertion = c;
+	    goto fin;
+	}
     }
 
 /* other commands */
