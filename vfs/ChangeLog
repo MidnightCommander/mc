@@ -1,3 +1,8 @@
+Tue Oct 13 18:43:18 1998  Pavel Machek  <pavel@lomikel.karlin.mff.cuni.cz>
+
+	* vfs.c (vfs_add_noncurrent_stamps): Fixed typo reported by Andrej
+ 	Borsenkow <borsenkow.msk@sni.de>
+
 Tue Oct 13 12:42:10 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* vfs.h (vfs_struct): renamed to avoid namespace conflict

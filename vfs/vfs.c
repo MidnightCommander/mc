@@ -687,7 +687,7 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 
     f = is_parent (oldvfs, oldvfsid, par);
     vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfs == oldvfsid) || oldvfsid == (vfsid *)-1 || f){
+    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid *)-1 || f){
 	return;
     }
 
