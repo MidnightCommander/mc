@@ -2551,7 +2551,7 @@ MC beeps and the following action depends on the setting of the
 option in the
 .\"LINK2"
 Configuration
-.\"Configuration">
+.\"Configuration"
 dialog. If it is enabled, a list of all
 possibilities pops up next to the current position and you can select with
 the arrow keys and
