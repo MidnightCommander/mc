@@ -1035,7 +1035,7 @@ static void write_attributes (unsigned short *src, int count)
 # if defined (HAS_LINEAR_SCREEN)
 	*(pos++) = ((unsigned short) Attribute_Byte << 8) | pair & 0xff;
 # else
-#  ifndef WIN32
+#  if defined(EMX_VIDEO) || !defined(WIN32)
 	*(p++) = pair & 0xff;		/* character byte */
 	*(p++) = Attribute_Byte;	/* attribute byte */
 #  else
