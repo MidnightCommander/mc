@@ -1919,16 +1919,6 @@ y
 Ficheros seleccionados: Los ficheros marcados si los hay y si no el
 fichero actual.
 .PP
-.I "%q"
-.IP
-Ficheros arrastrados con el ratón (o dispositivo similar). En todos los lugares
-excepto en la acción de Soltar del fichero
-.\"LINK2"
-mc.ext,
-.\"Extension File Edit"
-producirá una cadena vacía, en la acción Soltar será substituida
-por una lista de ficheros separados por espacio que fueron soltados sobre el fichero.
-.PP
 .I "%cd"
 .IP
 Ésta es una macro especial usada para cambiar del directorio actual

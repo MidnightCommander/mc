@@ -1836,12 +1836,6 @@ alkalommal ezek nem lesznek kijelölt fájlok.
 "%s" és "%S" A kiválasztott, kijelölt fájlok, ha vannak
 ilyenek. Egyébként a jelenlegi fájlok.
 
-"%q" Kidobott fájlok. Mindenhol, kivéve a
-társításokExtension File Edit kidobás mûveleténél, mivel a null
-karakter, a Kidobás mûveletnél ez kicserélõdik egy
-szóközzel elválasztott listával, amely a kidobott fájlokat
-tartalmazza.
-
 "%cd" Ez a speciális makro, ami arra használható, hogy a
 jelenlegi könyvtárat lecserélhessük az elõtte levõ könyvtárra. 
 Ezt elsõsorban a Csatolt fájlrendszernélVirtual File System használhatjuk.

@@ -2026,15 +2026,6 @@ and
 The selected files: The tagged files if there are any. Otherwise the
 current file.
 .PP
-.I "%q"
-.IP
-Dropped files. In all places except in the Drop action of the
-.\"LINK2"
-mc.ext file,
-.\"Extension File Edit"
-this will become a null string, in the Drop action it will be replaced
-with a space separated list of files that were dropped on the file.
-.PP
 .I "%cd"
 .IP
 This is a special macro that is used to change the current directory
