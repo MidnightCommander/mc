@@ -17,7 +17,6 @@ int vfs_findgid (char *name);
 char *vfs_split_url (const char *path, char **host, char **user, int *port,
 		     char **pass, int default_port, int flags);
 int vfs_split_text (char *p);
-char *vfs_translate_url (const char *);
 
 int vfs_mkstemps (char **pname, const char *prefix, const char *basename);
 void vfs_die (const char *msg);
