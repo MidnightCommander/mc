@@ -436,7 +436,7 @@ close_error_pipe (int error, const char *text)
 	close (2);
 	dup (old_error);
 	close (old_error);
-	len = read (error_pipe[0], msg, MAX_PIPE_SIZE);
+	len = read (error_pipe[0], msg, MAX_PIPE_SIZE - 1);
 
 	if (len >= 0)
 	    msg[len] = 0;
