@@ -823,14 +823,18 @@ static int fish_rmdir (struct vfs_class *me, char *path)
     POSTFIX(OPT_FLUSH);
 }
 
-static int fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, int mode)
+static int
+fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
+	      int mode)
 {
     fh->u.fish.append = 0;
     /* File will be written only, so no need to retrieve it */
-    if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
+    if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY | O_RDWR))) {
 	fh->u.fish.append = flags & O_APPEND;
-	if (!fh->ino->localname){
-	    int tmp_handle = mc_mkstemps (&fh->ino->localname, me->name, NULL);
+	if (!fh->ino->localname) {
+	    int tmp_handle =
+		vfs_mkstemps (&fh->ino->localname, me->name,
+			      fh->ino->ent->name);
 	    if (tmp_handle == -1)
 		return -1;
 	    close (tmp_handle);
@@ -838,10 +842,10 @@ static int fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags, i
 	return 0;
     }
     if (!fh->ino->localname)
-	if (vfs_s_retrieve_file (me, fh->ino)==-1)
+	if (vfs_s_retrieve_file (me, fh->ino) == -1)
 	    return -1;
     if (!fh->ino->localname)
-	vfs_die( "retrieve_file failed to fill in localname" );
+	vfs_die ("retrieve_file failed to fill in localname");
     return 0;
 }
 

@@ -1577,8 +1577,8 @@ ftpfs_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
 	 */
 	if (FH_SUPER->u.ftp.ctl_connection_busy) {
 	    if (!fh->ino->localname) {
-		int handle =
-		    mc_mkstemps (&fh->ino->localname, me->name, NULL);
+		int handle = vfs_mkstemps (&fh->ino->localname, me->name,
+					   fh->ino->ent->name);
 		if (handle == -1)
 		    return -1;
 		close (handle);
