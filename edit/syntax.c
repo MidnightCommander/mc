@@ -89,14 +89,18 @@ static GTree *defines;
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
 {
+    char **values = value;
+
     g_free (key);
+    while (*values)
+	g_free (*values++);
     g_free (value);
 
     return FALSE;
 }
 
 /* Completely destroys the defines tree */
-static void
+static inline void
 destroy_defines (void)
 {
     g_tree_traverse (defines, mc_defines_destroy, G_POST_ORDER, NULL);
@@ -104,7 +108,39 @@ destroy_defines (void)
     defines = 0;
 }
 
-static long compare_word_to_right (WEdit * edit, long i, char *text, char *whole_left, char *whole_right, int line_start)
+static void
+subst_defines (GTree *defines, char **argv, char **argv_end)
+{
+    char **t, **p;
+    int argc;
+    while (*argv && argv < argv_end) {
+	if ((t = g_tree_lookup (defines, *argv))) {
+	    int count = 0;
+	    /* Count argv array members */
+	    argc = 0;
+	    for (p = &argv[1]; *p; p++)
+		argc++;
+	    /* Count members of definition array */
+	    for (p = t; *p; p++)
+		count++;
+	    p = &argv[count + argc];
+	    /* Buffer overflow or infinitive loop in define */
+	    if (p >= argv_end)
+		break;
+	    /* Move rest of argv after definition members */
+	    while (argc >= 0)
+		*p-- = argv[argc-- + 1];
+	    /* Copy definition members to argv */
+	    for (p = argv; *t; *p++ = *t++);
+	}
+	argv++;
+    }
+}
+
+static long
+compare_word_to_right (WEdit *edit, long i, const char *text,
+		       const char *whole_left, const char *whole_right,
+		       int line_start)
 {
     unsigned char *p, *q;
     int c, d, j;
@@ -555,9 +591,6 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	if (!*fg)
 	    fg = 0;
     if (fg) {
-	p = g_tree_lookup (defines, fg);
-	if (p)
-	    fg = p;
 	strncpy (f, fg, sizeof (f) - 1);
 	f[sizeof (f) - 1] = 0;
 	p = strchr (f, '/');
@@ -566,9 +599,6 @@ this_try_alloc_color_pair (char *fg, char *bg)
 	fg = f;
     }
     if (bg) {
-	p = g_tree_lookup (defines, bg);
-	if (p)
-	    bg = p;
 	strncpy (b, bg, sizeof (b) - 1);
 	b[sizeof (b) - 1] = 0;
 	p = strchr (b, '/');
@@ -735,6 +765,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 #endif
 	    num_words = 1;
 	    c->keyword[0] = g_malloc0 (sizeof (struct key_word));
+	    subst_defines (defines, a, &args[1024]);
 	    fg = *a;
 	    if (*a)
 		a++;
@@ -783,6 +814,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    }
 	    k->keyword = g_strdup (*a++);
 	    k->first = *k->keyword;
+	    subst_defines (defines, a, &args[1024]);
 	    fg = *a;
 	    if (*a)
 		a++;
@@ -801,17 +833,22 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	} else if (!strcmp (args[0], "file")) {
 	    break;
 	} else if (!strcmp (args[0], "define")) {
-	    gpointer t;
 	    char *key = *a++;
-	    char *value = *a;
-	    if (!key || !value)
+	    char **argv;
+
+	    if (argc < 3)
 		break_a;
-	    if ((t = g_tree_lookup (defines, key))){
-		g_free (t);
+	    if ((argv = g_tree_lookup (defines, key))) {
+		mc_defines_destroy (NULL, argv, NULL);
 	    } else {
 		key = g_strdup (key);
 	    }
-	    g_tree_insert (defines, key, g_strdup (value));
+	    argv = g_new (char *, argc - 1);
+	    g_tree_insert (defines, key, argv);
+	    while (*a) {
+		*argv++ = g_strdup (*a++);
+	    };
+	    *argv = NULL;
 	} else {		/* anything else is an error */
 	    break_a;
 	}
