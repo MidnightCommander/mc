@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.39\n"
 "POT-Creation-Date: 1999-09-18 23:28+0200\n"
-"PO-Revision-Date: 1999-09-19 19:07+02:00\n"
+"PO-Revision-Date: 1999-10-03 00:38+02:00\n"
 "Last-Translator: Kenneth Christiansen <kenneth@ripen.dk>\n"
 "Language-Team: Danish <sslug-locale@sslug.dk>\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr " Kør makro "
 #: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
 #: gtkedit/editcmd.c:712 gtkedit/editcmd.c:721
 msgid " Press macro hotkey: "
-msgstr " Tryk hurtigtast for makro: "
+msgstr " Tryk makro genvejstast: "
 
 #: edit/edit_key_translator.c:144
 msgid " Insert Literal "
@@ -47,7 +47,7 @@ msgstr ""
 "Kan ikke køre\n"
 "\"%s\".\n"
 "\n"
-"Tjeck venligst om den peger på en gyldig kommando."
+"Tjek venligst om den peger på en gyldig kommando."
 
 #: gnome/gaction.c:40
 #, c-format
@@ -168,7 +168,7 @@ msgstr "Indtast navn."
 
 #: gnome/gcmd.c:401
 msgid "Enter label for command:"
-msgstr "Indtast kommandolabel:"
+msgstr "Indtast kommandoetiket:"
 
 #: gnome/gcmd.c:506
 msgid "Find all core files"
@@ -207,7 +207,7 @@ msgstr "Kommando: "
 
 #: gnome/gcmd.c:674
 msgid "Set Filter"
-msgstr "Sæt filter"
+msgstr "Anvend filter"
 
 #: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
 #: gnome/gscreen.c:2489
@@ -389,7 +389,7 @@ msgid ""
 msgstr ""
 "Kan ikke finde filen:\n"
 "background-properties-capplet\n"
-"i din kommandosti.\n"
+"i din kommandosøgesti.\n"
 "\n"
 "Vi kan ikke lave baggrunden."
 
@@ -412,7 +412,7 @@ msgstr "Opretter en ny mappe"
 
 #: gnome/gdesktop.c:2613
 msgid "URL L_ink..."
-msgstr "URL-g_envej..."
+msgstr "URL-gen_vej..."
 
 #: gnome/gdesktop.c:2613
 msgid "Creates a new URL link"
@@ -584,7 +584,7 @@ msgstr "Udvidede Indstillinger"
 
 #: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
-msgstr "Bevar symbolskelænker"
+msgstr "Bevar symbolske lænker"
 
 #: gnome/gdialogs.c:643
 msgid "Follow links."
@@ -708,7 +708,7 @@ msgstr ""
 
 #: gnome/gicon.c:218
 msgid "Default set of icons not found, please check your installation"
-msgstr "Standardikoner blev ikke fundet, tjeck venligst din installation"
+msgstr "Standardikoner blev ikke fundet, tjek venligst din installation"
 
 #: gnome/glayout.c:41
 msgid "_Icon View"
@@ -910,7 +910,7 @@ msgstr "R_edigér mime-typer..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
-msgstr "Redigere MIME-typebindinger"
+msgstr "Redigerer MIME-typebindinger"
 
 #: gnome/glayout.c:434
 msgid "_Run Command..."
@@ -946,7 +946,7 @@ msgstr "Afslutter filhåndteringen og skrivebordet"
 
 #: gnome/glayout.c:472 gnome/glayout.c:483
 msgid "_Settings"
-msgstr "O_psætning"
+msgstr "Op_sætning"
 
 #: gnome/glayout.c:473 gnome/glayout.c:484
 msgid "_Layout"
@@ -977,8 +977,7 @@ msgid ""
 msgstr ""
 "Du kører GNOME filhåndteringen som administrator (root).\n"
 "\n"
-"Som root kan du gøre skade på dit system, hvis ud ikke passer på. "
-"GNOME filhåndteringen kan ikke forhindre dig i det."
+"Som root kan du gøre skade på dit system, hvis ud ikke passer på. GNOME filhåndteringen vil ikke forhindre dig i det."
 
 #: gnome/gmount.c:205
 msgid "Could not open the /etc/fstab file"
@@ -987,13 +986,12 @@ msgstr "Kunne ikke åbne /etc/fstab filen"
 #: gnome/gmount.c:370
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
-"Kunne ikke lave symbolsk lænke fra %s til %s; kan ikke lave skrivebordsikon."
+msgstr "Kunne ikke lave symbolsk lænke fra %s til %s; kan ikke lave skrivebordsenhedsikon."
 
 #: gnome/gmount.c:426
 #, c-format
 msgid "CD-ROM %d"
-msgstr "CD-ROM %d"
+msgstr "Cd-rom %d"
 
 #: gnome/gmount.c:438
 #, c-format
@@ -1110,7 +1108,7 @@ msgstr "Overskrift:"
 #: gnome/gnome-file-property-dialog.c:387
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Drop Action"
-msgstr "Drop handling"
+msgstr "Slip handling"
 
 #: gnome/gnome-file-property-dialog.c:388
 msgid "Use default Drop Action options"
@@ -1128,7 +1126,7 @@ msgstr "Brug standard visning"
 
 #: gnome/gnome-file-property-dialog.c:439
 msgid "Select an Icon"
-msgstr "Vælg ikon"
+msgstr "Vælg en ikon"
 
 #. we do open first
 #: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
@@ -1260,7 +1258,7 @@ msgstr "Du skal omdøbe filen til noget"
 
 #: gnome/gnome-file-property-dialog.c:1208
 msgid "You cannot rename a file to something containing a '/' character"
-msgstr "Du kan ikke omdøbe filen til et navn, der indeholder '/'"
+msgstr "Du kan ikke omdøbe filen til et navn, der indeholder et '/' tegn"
 
 #: gnome/gnome-open-dialog.c:384
 #, c-format
@@ -1717,7 +1715,7 @@ msgstr ""
 
 #: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
-msgstr " Fejl under hukommelsesallokering "
+msgstr " Fejl under hukommelsestildeling "
 
 #: gtkedit/editcmd.c:335
 msgid "Quick save "
