@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Mime Types
+Name[de]=Mime-Typen
 Name[es]=Tipos MIME
 Name[fi]=MIME-tyypit
 Name[fr]=Types MIME
@@ -7,6 +8,7 @@ Name[it]=Tipi MIME
 Name[no]=Mime typer
 Name[wa]=Sôrtes MIME
 Comment=Configure how files are associated and started.
+Comment[de]=Einrichten, wie Dateien verknüpft und geöffnet werden.
 Comment[es]=Configura los tipos de archivos y los programas asociados para manejarlos.
 Comment[fi]=Aseta tiedostoassosiaatiot ja avaajat.
 Comment[fr]=Configure les types de fichier et les programmes y associés
