@@ -92,14 +92,6 @@ gmc_color_init (void)
 int
 xtoolkit_init (int *argc, char *argv [])
 {
-	printf (
-		"The GNOME file manager is going trough a massive code\n"
-		"rewrite, so many problems are known to exist due to a major\n"
-		"code design shift.\n\n"
-		"Yes, we know there are lots of problems in the current code\n"
-		"so dont even report them, when the major design has finished\n"
-		"I will remove this notice\n");
-
 	gmc_color_init ();
 
 	return 0;
