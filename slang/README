@@ -3,7 +3,8 @@ This is the Slang Screen Manager, it has been modified a little to
 make it work with the Midnight Commander.  If you want to get the
 complete Slang distribution, you may grab it from:
 
-space.mit.edu:/pub/davis
+http://space.mit.edu/~davis/slang.html
+ftp://space.mit.edu/pub/davis/slang
 
 All of the patches relevant to Slang have been sumbited to John Davis
 for inclusion in his Slang version, changes that are only useful for
