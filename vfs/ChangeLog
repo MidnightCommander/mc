@@ -1,5 +1,8 @@
 2002-10-04  Pavel Roskin  <proski@gnu.org>
 
+	* mcfs.c (mcfs_lseek): Explicity cast offset to int.  This fixes
+	viewing and editing files on mcfs.
+
 	* tcputil.c: Split mcfs-specific part to
 	* mcfsutil.c: ... this.
 	* tcputil.h: Split mcfs-specific part to
