@@ -125,7 +125,7 @@ void edit_user_menu_cmd (void)          { menu_edit_cmd (1); }
 
 static menu_entry FileMenu[] =
 {
-    {' ', N_("&Open/load...     C-o"), 'O', menu_load_cmd},
+    {' ', N_("&Open file..."),         'O', menu_load_cmd},
     {' ', N_("&New              C-n"), 'N', menu_new_cmd},
     {' ', "", ' ', 0},
     {' ', N_("&Save              F2"), 'S', menu_save_cmd},
@@ -144,7 +144,7 @@ static menu_entry FileMenu[] =
 
 static menu_entry FileMenuEmacs[] =
 {
-    {' ', N_("&Open/load...     C-o"), 'O', menu_load_cmd},
+    {' ', N_("&Open file..."),         'O', menu_load_cmd},
     {' ', N_("&New            C-x k"), 'N', menu_new_cmd},
     {' ', "", ' ', 0},
     {' ', N_("&Save              F2"), 'S', menu_save_cmd},

@@ -2612,7 +2612,10 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Mail:
 	edit_mail_dialog (edit);
 	break;
-#endif
+    case CK_Shell:
+	view_other_cmd ();
+	break;
+#endif /* MIDNIGHT */
 
 /* These commands are not handled and must be handled by the user application */
 #ifndef MIDNIGHT

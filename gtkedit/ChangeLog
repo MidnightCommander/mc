@@ -1,3 +1,11 @@
+2001-08-12  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Handle CK_Shell.
+	* editcmddef.h: Define CK_Shell.
+	* editmenu.c (FileMenu): Remove C-o from the "Open file..."
+	item.
+	(FileMenuEmacs): Likewise.
+
 2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* editcmd.c (edit_replace_prompt): Fix menu location calculation.

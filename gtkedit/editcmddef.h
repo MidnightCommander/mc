@@ -142,6 +142,8 @@
 #define CK_Selection_History	704
 
 #ifdef MIDNIGHT			/* cooledit now has its own full-featured script editor and executor */
+#define CK_Shell		801
+
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
    shell_cmd[i] must process the file ~/cooledit.block and output ~/cooledit.block
