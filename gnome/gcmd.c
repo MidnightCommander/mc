@@ -120,5 +120,7 @@ gnome_close_panel (GtkWidget *widget, WPanel *panel)
 	destroy_widget ((void *)panel);
 
 	layout_panel_gone (panel);
+
+	mc_chdir ("/");
 	return TRUE;
 }

@@ -1,3 +1,13 @@
+1998-12-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcmd.c (gnome_close_panel): When a panel is destroyed, chdir to
+	root directory, as the process will be holding the inode for the
+	directory that was selected until an operation is performed in
+	another panel.
+
+	* gicon.c (gicon_get_icon_for_file): Invert the way the testing
+	for icons is done to handle directories properly.
+
 1998-12-10  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c (x_create_panel): made some small stylistic changes.
@@ -45,6 +55,7 @@ Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 	* gscreen.c (panel_icon_list_select_icon): Middle button opens a
 	new panel on a directory.
 	
+>>>>>>> 1.184
 1998-12-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c: Moved the old DnD cruft to olddnd.c to keep it there

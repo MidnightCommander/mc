@@ -140,45 +140,6 @@ gnome_file_entry_color (file_entry *fe)
 {
 	mode_t mode = fe->buf.st_mode;
 
-	/*
-	 * If a directory, choose the best icon that reprensents it
-	 */
-	if (S_ISDIR (mode)){
-		if (fe->buf.st_uid != our_uid){
-			if (fe->buf.st_gid != our_gid){
-
-				/*
-				 * We do not share the UID or the GID,
-				 * test for read/execute permissions
-				 */
-				if ((mode & (S_IROTH | S_IXOTH)) != (S_IROTH | S_IXOTH))
-					return icon_view_dirclosed;
-			} else {
-
-				/*
-				 * Same group, check if we have permissions
-				 */
-				if ((mode & (S_IRGRP | S_IXGRP)) != (S_IRGRP | S_IXGRP))
-					return icon_view_dirclosed;
-			}
-		} else {
-			if ((mode & (S_IRUSR | S_IXUSR)) != (S_IRUSR | S_IXUSR))
-				return icon_view_dirclosed;
-		}
-
-		return icon_view_directory;
-	}
-
-	if (S_ISLNK (mode)){
-		if (fe->f.link_to_dir)
-			return icon_view_directory;
-
-		if (fe->f.stalled_link)
-			return icon_view_stalled;
-
-		return icon_view_symlink;
-	}
-
 	if (S_ISSOCK (mode))
 		return icon_view_sock;
 
@@ -212,14 +173,57 @@ gicon_get_icon_for_file (file_entry *fe)
 	GdkImlibImage *image;
 	int            size;
 	char          *buf;
+	mode_t        mode;
 	
 	g_return_val_if_fail (fe != NULL, NULL);
 
 	if (!gicon_inited)
 		gicon_init ();
+
+	mode = fe->buf.st_mode;
 	
 	/*
-	 * 1. Try to fetch the icon from the metadata.
+	 * 1. First test for it being a directory or a link to a directory.
+	 */
+	if (S_ISDIR (mode)){
+		if (fe->buf.st_uid != our_uid){
+			if (fe->buf.st_gid != our_gid){
+
+				/*
+				 * We do not share the UID or the GID,
+				 * test for read/execute permissions
+				 */
+				if ((mode & (S_IROTH | S_IXOTH)) != (S_IROTH | S_IXOTH))
+					return icon_view_dirclosed;
+			} else {
+
+				/*
+				 * Same group, check if we have permissions
+				 */
+				if ((mode & (S_IRGRP | S_IXGRP)) != (S_IRGRP | S_IXGRP))
+					return icon_view_dirclosed;
+			}
+		} else {
+			if ((mode & (S_IRUSR | S_IXUSR)) != (S_IRUSR | S_IXUSR))
+				return icon_view_dirclosed;
+		}
+
+		return icon_view_directory;
+	}
+	
+	if (S_ISLNK (mode)){
+		if (fe->f.link_to_dir)
+			return icon_view_directory;
+
+		if (fe->f.stalled_link)
+			return icon_view_stalled;
+
+		return icon_view_symlink;
+	}
+
+
+	/*
+	 * 2. Try to fetch the icon from the metadata.
 	 */
 	if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
 		image = gicon_get_by_filename (buf);
@@ -229,7 +233,7 @@ gicon_get_icon_for_file (file_entry *fe)
 	}
 
 	/*
-	 * 2. Try to fetch the icon as an inline png from the metadata.
+	 * 3. Try to fetch the icon as an inline png from the metadata.
 	 */
 	if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
 		image = gdk_imlib_inlined_png_to_image (buf, size);
@@ -241,7 +245,7 @@ gicon_get_icon_for_file (file_entry *fe)
 	}
 
 	/*
-	 * 3. Try to find an appropiate icon from the stat information or
+	 * 4. Try to find an appropiate icon from the stat information or
 	 * the hard coded filename.
 	 */
 	image = gnome_file_entry_color (fe);
