@@ -2,11 +2,10 @@
 # Copyright (C) 1999 Free Software Foundation, Inc.
 # Spiros Papadimitriou <spapadim+@cs.cmu.edu>, 1999.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-07-22 00:46-0400\n"
+"Project-Id-Version: mc 4.5.38\n"
+"POT-Creation-Date: 1999-08-30 13:07+0200\n"
 "PO-Revision-Date: 1997-07-23 00:04-0400\n"
 "Last-Translator: Spiros Papadimitriou <spapadim+@cs.cmu.edu>\n"
 "Language-Team: Greek <el@li.org>\n"
@@ -36,125 +35,176 @@ msgstr ""
 msgid " Press any key: "
 msgstr " Πιέστε κάποιο πλήκτρο: "
 
-#: gnome/gcmd.c:58
+#: gnome/gaction.c:33
+#, c-format
+msgid ""
+"Unable to execute\n"
+"\"%s\".\n"
+"\n"
+"Please check it to see if it points to a valid command."
+msgstr ""
+
+#: gnome/gaction.c:40
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this, bring up the mime-properties editor in the GNOME Control "
+"Center, and edit the default %s-action for \"%s\"."
+msgstr ""
+
+#: gnome/gaction.c:46
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this error, bring up this file's properties and change the default "
+"%s-action."
+msgstr ""
+
+#: gnome/gaction.c:51
+#, c-format
+msgid ""
+"Unable to %s\n"
+"\"%s\"\n"
+"with the command:\n"
+"\"%s\"%s"
+msgstr ""
+
+#: gnome/gaction.c:134 gnome/gaction.c:150
+#, fuzzy
+msgid "open"
+msgstr "Άνοιγμα"
+
+#: gnome/gaction.c:185 gnome/gaction.c:198
+#, fuzzy
+msgid "edit"
+msgstr "Επεξεργασία"
+
+#: gnome/gaction.c:331
+#, fuzzy
+msgid "view"
+msgstr "Προβολή"
+
+#: gnome/gcmd.c:48
 msgid " There is no other panel to compare contents to "
 msgstr ""
 
-#: gnome/gcmd.c:109
+#: gnome/gcmd.c:99
 msgid "The Midnight Commander Team"
 msgstr "Η ομάδα του Midnight Commander"
 
-#: gnome/gcmd.c:111
+#: gnome/gcmd.c:101
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "αναφορές σφαλμάτων: http://bugs.gnome.org, ή μέσω gnome-bug"
 
-#: gnome/gcmd.c:123
+#: gnome/gcmd.c:113
 msgid "GNU Midnight Commander"
 msgstr ""
 
-#: gnome/gcmd.c:126
+#: gnome/gcmd.c:116
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "Η έκδοση του διαχειριστή αρχείων Midnight Commander για το GNOME."
 
-#: gnome/gcmd.c:261
+#: gnome/gcmd.c:289
 msgid "Sort By"
 msgstr "Ταξινόμιση κατά"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:266
+#: gnome/gcmd.c:294
 msgid "Ignore case sensitivity."
 msgstr "Παράβλεψη κεφαλαίων/πεζών."
 
-#: gnome/gcmd.c:269
+#: gnome/gcmd.c:297
 msgid "Sort files by "
 msgstr "Ταξινόμιση αρχείων κατά "
 
-#: gnome/gcmd.c:274 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
+#: gnome/gcmd.c:302 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
 msgstr "Όνομα"
 
-#: gnome/gcmd.c:281
+#: gnome/gcmd.c:309
 msgid "File Type"
 msgstr "Τύπος αρχείου"
 
-#: gnome/gcmd.c:287 gnome/gcustom-layout.c:47 src/screen.c:396
-#: src/screen.c:397
+#: gnome/gcmd.c:315 gnome/gcustom-layout.c:45 src/screen.c:414
+#: src/screen.c:415
 msgid "Size"
 msgstr "Μέγεθος"
 
-#: gnome/gcmd.c:293
+#: gnome/gcmd.c:321
 msgid "Time Last Accessed"
 msgstr "Ώρα τελευταίας πρόσβασης"
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:327
 msgid "Time Last Modified"
 msgstr "Ώρα τελευταίας τροποποίησης"
 
-#: gnome/gcmd.c:305
+#: gnome/gcmd.c:333
 msgid "Time Last Changed"
 msgstr "Ώρα τελευταίας αλλαγής"
 
-#: gnome/gcmd.c:319
+#: gnome/gcmd.c:347
 msgid "Reverse the order."
 msgstr "Αντίστροφη σειράς."
 
-#: gnome/gcmd.c:384
+#: gnome/gcmd.c:394
 msgid "Enter name."
 msgstr "Εισαγωγή όνοματος."
 
-#: gnome/gcmd.c:390
+#: gnome/gcmd.c:400
 msgid "Enter label for command:"
 msgstr ""
 
-#: gnome/gcmd.c:495
+#: gnome/gcmd.c:505
 msgid "Find all core files"
 msgstr "Εύρεση όλων των αρχείων core"
 
-#: gnome/gcmd.c:498 src/panelize.c:350
+#: gnome/gcmd.c:508 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr ""
 
-#: gnome/gcmd.c:543
+#: gnome/gcmd.c:553
 msgid "Run Command"
 msgstr "Εκτέλεση εντολής"
 
 #. Frame 1
-#: gnome/gcmd.c:548
+#: gnome/gcmd.c:558
 msgid "Preset Commands"
 msgstr "Προκαθορισμένες εντολές"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:565 gnome/gcustom-layout.c:185
+#: gnome/gcmd.c:575 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "Προσθήκη"
 
-#: gnome/gcmd.c:569 gnome/gcustom-layout.c:186
+#: gnome/gcmd.c:579 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "Αφαίρεση"
 
 #. Frame 2
-#: gnome/gcmd.c:577
+#: gnome/gcmd.c:587
 msgid "Run this Command"
 msgstr "Εντολή προς εκτέλεση"
 
-#: gnome/gcmd.c:584
+#: gnome/gcmd.c:594
 msgid "Command: "
 msgstr "Εντολή: "
 
-#: gnome/gcmd.c:662
+#: gnome/gcmd.c:673
 msgid "Set Filter"
 msgstr "Καθορισμός φίλτρου"
 
-#: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
-#: gnome/gscreen.c:2403
+#: gnome/gcmd.c:678 gnome/gcmd.c:719 gnome/gcmd.c:724 gnome/gcmd.c:728
+#: gnome/gscreen.c:2478
 msgid "Show all files"
 msgstr "Προβολή όλων των αρχείων"
 
-#: gnome/gcmd.c:674
+#: gnome/gcmd.c:685
 msgid "."
 msgstr ""
 
-#: gnome/gcmd.c:690
+#: gnome/gcmd.c:701
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -162,27 +212,27 @@ msgid ""
 "*.png will show just png images"
 msgstr ""
 
-#: gnome/gcmd.c:692
+#: gnome/gcmd.c:703
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr ""
 
-#: gnome/gcmd.c:752
+#: gnome/gcmd.c:763
 msgid " Open with..."
 msgstr " Άνοιγμα με..."
 
-#: gnome/gcmd.c:753
+#: gnome/gcmd.c:764
 msgid "Enter extra arguments:"
 msgstr "Εισαγωγή επιπλέον ορισμάτων:"
 
-#: gnome/gcmd.c:816
+#: gnome/gcmd.c:827
 msgid "Desktop entry properties"
 msgstr "Ιδιότητες στοιχείου επιφάνειας εργασίας"
 
-#: gnome/gcmd.c:842
+#: gnome/gcmd.c:853
 msgid "Select File"
 msgstr "Επιλογή αρχείου"
 
-#: gnome/gcmd.c:850
+#: gnome/gcmd.c:861
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -190,123 +240,149 @@ msgid ""
 "*.png will select all png images"
 msgstr ""
 
-#: gnome/gcmd.c:852
+#: gnome/gcmd.c:863
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr ""
 
-#: gnome/gcmd.c:898 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:909 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
 msgstr ""
 
-#: gnome/gcmd.c:943
+#: gnome/gcmd.c:954
 msgid "Creating a desktop link"
 msgstr ""
 
-#: gnome/gcmd.c:944
+#: gnome/gcmd.c:955
 msgid "Enter the URL:"
 msgstr "Εισαγωγή URL:"
 
-#: gnome/gcustom-layout.c:36
+#: gnome/gcustom-layout.c:34
 msgid "Access Time"
 msgstr "Ώρα πρόσβασης"
 
-#: gnome/gcustom-layout.c:37
+#: gnome/gcustom-layout.c:35
 msgid "Creation Time"
 msgstr "Ώρα δημιουργίας"
 
 #. Group
-#: gnome/gcustom-layout.c:38 gnome/gnome-file-property-dialog.c:776
-#: gnome/gnome-file-property-dialog.c:935 gnome/gprop.c:280 gnome/gprop.c:405
-#: src/screen.c:409
+#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:776
+#: gnome/gnome-file-property-dialog.c:945 gnome/gprop.c:280 gnome/gprop.c:405
+#: src/screen.c:427
 msgid "Group"
 msgstr "Ομάδα"
 
-#: gnome/gcustom-layout.c:39
+#: gnome/gcustom-layout.c:37
 msgid "Group ID"
 msgstr "Κωδικός ομάδας"
 
-#: gnome/gcustom-layout.c:40
+#: gnome/gcustom-layout.c:38
 msgid "Inode Number"
 msgstr "Αριθμός Inode"
 
-#: gnome/gcustom-layout.c:41 src/achown.c:378
+#: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
 msgstr ""
 
-#: gnome/gcustom-layout.c:42
+#: gnome/gcustom-layout.c:40
 msgid "Modification Time"
 msgstr "Ώρα τροποποίησης"
 
-#: gnome/gcustom-layout.c:44
+#: gnome/gcustom-layout.c:42
 msgid "Number of Hard Links"
 msgstr ""
 
 #. Owner
-#: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:920
-#: gnome/gprop.c:390 src/screen.c:408
+#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:930
+#: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
 msgstr "Ιδιοκτήτης"
 
-#: gnome/gcustom-layout.c:46 src/screen.c:402
+#: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
 msgstr "Δικαιώματα"
 
-#: gnome/gcustom-layout.c:48
+#: gnome/gcustom-layout.c:46
 msgid "Size (short)"
 msgstr "Μέγεθος (σύντομο)"
 
-#: gnome/gcustom-layout.c:49
+#: gnome/gcustom-layout.c:47
 msgid "Type"
 msgstr "Τύπος"
 
-#: gnome/gcustom-layout.c:50
+#: gnome/gcustom-layout.c:48
 msgid "User ID"
 msgstr "Κωδικός χρήστη"
 
-#: gnome/gcustom-layout.c:144
+#: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
 msgstr "Πιθανές στήλες"
 
-#: gnome/gcustom-layout.c:164
+#: gnome/gcustom-layout.c:162
 msgid "Displayed Columns"
 msgstr "Εμφανείς στήλες"
 
-#: gnome/gcustom-layout.c:306
+#: gnome/gcustom-layout.c:304
 msgid "Custom View"
 msgstr "Τυποποιημένη προβολή"
 
-#: gnome/gdesktop.c:425 gnome/gdesktop.c:2081 gnome/gmount.c:321
+#. Icon position
+#: gnome/gdesktop-prefs.c:242
+msgid "Icon position"
+msgstr ""
+
+#. Snap and placement
+#: gnome/gdesktop-prefs.c:258
+msgid "Automatic icon placement"
+msgstr ""
+
+#: gnome/gdesktop-prefs.c:262
+msgid "Snap icons to grid"
+msgstr ""
+
+#: gnome/gdesktop-prefs.c:277
+msgid "Use shaped icons"
+msgstr ""
+
+#: gnome/gdesktop-prefs.c:281
+msgid "Use shaped text"
+msgstr ""
+
+#: gnome/gdesktop-prefs.c:335
+msgid "Desktop"
+msgstr "Επιφάνεια εργασίας"
+
+#: gnome/gdesktop.c:520 gnome/gdesktop.c:2207 gnome/gmount.c:324
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
-#: gnome/gdesktop.c:426
+#: gnome/gdesktop.c:521
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Άνοιγμα %s ανεπιτυχές; "
 
-#: gnome/gdesktop.c:1043
+#: gnome/gdesktop.c:1178
 msgid "While running the mount/umount command"
 msgstr "Κατά την εκτέλεση εντολής mount/umount"
 
-#: gnome/gdesktop.c:1112
+#: gnome/gdesktop.c:1247
 msgid "While running the eject command"
 msgstr "Κατά την εξαγωγή (eject) δίσκέττας"
 
-#: gnome/gdesktop.c:1296 gnome/gicon.c:154 gnome/gtools.c:46
+#: gnome/gdesktop.c:1431 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Σφάλμα"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2077
+#: gnome/gdesktop.c:2203
 msgid "Home directory"
 msgstr "Αρχικός κατάλογος"
 
-#: gnome/gdesktop.c:2082
+#: gnome/gdesktop.c:2208
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
 
-#: gnome/gdesktop.c:2427
+#: gnome/gdesktop.c:2587
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -320,57 +396,91 @@ msgstr ""
 "\n"
 "Αλλαγή φόντου αδύνατη."
 
-#: gnome/gdesktop.c:2450 gnome/glayout.c:361
-msgid "_Terminal"
-msgstr "_Τερματικό"
-
-#: gnome/gdesktop.c:2450 gnome/glayout.c:361
+#: gnome/gdesktop.c:2610 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
 msgstr "Εκκίνιση νέου τερματικού στον τρέχοντα κατάλογο"
 
-#. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2452 gnome/glayout.c:363
-msgid "_Directory..."
-msgstr "_Κατάλογος..."
+#: gnome/gdesktop.c:2610 gnome/glayout.c:361
+msgid "_Terminal"
+msgstr "_Τερματικό"
 
-#: gnome/gdesktop.c:2452 gnome/glayout.c:363
+#: gnome/gdesktop.c:2612 gnome/glayout.c:363
 msgid "Creates a new directory"
 msgstr "Δημηουργία νέου καταλόγου"
 
-#: gnome/gdesktop.c:2453
-msgid "URL L_ink..."
-msgstr ""
+#. If this ever changes, make sure you update create_new_menu accordingly.
+#: gnome/gdesktop.c:2612 gnome/glayout.c:363
+msgid "_Directory..."
+msgstr "_Κατάλογος..."
 
-#: gnome/gdesktop.c:2453
+#: gnome/gdesktop.c:2613
 msgid "Creates a new URL link"
 msgstr ""
 
-#: gnome/gdesktop.c:2454
-msgid "_Launcher..."
+#: gnome/gdesktop.c:2613
+msgid "URL L_ink..."
 msgstr ""
 
-#: gnome/gdesktop.c:2454
+#: gnome/gdesktop.c:2614
 msgid "Creates a new launcher"
 msgstr ""
 
-#: gnome/gdesktop.c:2462 gnome/glayout.c:451
-msgid "Arrange Icons"
+#: gnome/gdesktop.c:2614
+msgid "_Launcher..."
+msgstr ""
+
+#: gnome/gdesktop.c:2620
+#, fuzzy
+msgid "By _Name"
+msgstr "Όνομα"
+
+#: gnome/gdesktop.c:2621
+#, fuzzy
+msgid "By File _Type"
+msgstr "Τύπος αρχείου"
+
+#: gnome/gdesktop.c:2622
+#, fuzzy
+msgid "By _Size"
+msgstr "Μέγεθος"
+
+#: gnome/gdesktop.c:2623
+#, fuzzy
+msgid "By Time Last _Accessed"
+msgstr "Ώρα τελευταίας πρόσβασης"
+
+#: gnome/gdesktop.c:2624
+#, fuzzy
+msgid "By Time Last _Modified"
+msgstr "Ώρα τελευταίας τροποποίησης"
+
+#: gnome/gdesktop.c:2625
+#, fuzzy
+msgid "By Time Last _Changed"
+msgstr "Ώρα τελευταίας αλλαγής"
+
+#: gnome/gdesktop.c:2633 gnome/glayout.c:455
+#, fuzzy
+msgid "_Arrange Icons"
 msgstr "Τακτοποίηση εικονιδίων"
 
-#: gnome/gdesktop.c:2463
-msgid "Create New Window"
+#: gnome/gdesktop.c:2634
+#, fuzzy
+msgid "Create _New Window"
 msgstr "Νέο παράθυρο"
 
-#: gnome/gdesktop.c:2465
-msgid "Recreate Desktop Shortcuts"
+#: gnome/gdesktop.c:2636 gnome/glayout.c:457
+msgid "Recreate Desktop _Shortcuts"
 msgstr ""
 
-#: gnome/gdesktop.c:2466 gnome/glayout.c:454
-msgid "Rescan Desktop"
-msgstr ""
+#: gnome/gdesktop.c:2637 gnome/glayout.c:458
+#, fuzzy
+msgid "Rescan _Desktop"
+msgstr "Επιφάνεια εργασίας"
 
-#: gnome/gdesktop.c:2467
-msgid "Configure Background Image"
+#: gnome/gdesktop.c:2638
+#, fuzzy
+msgid "Configure _Background Image"
 msgstr "Παραμετροποίηση εικόνας φόντου"
 
 #: gnome/gdialogs.c:60
@@ -385,11 +495,11 @@ msgstr "Αντιγραφή από: "
 msgid "Deleting file: "
 msgstr "Διαγραφή αρχείου: "
 
-#: gnome/gdialogs.c:370
+#: gnome/gdialogs.c:371
 msgid "Files Exist"
 msgstr ""
 
-#: gnome/gdialogs.c:385
+#: gnome/gdialogs.c:386
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
@@ -397,45 +507,45 @@ msgstr ""
 "Ορισμένα από τα αρχεία που θέλετε να αντιγράψετε υπάρχουν ήδη στον κατάλογο "
 "προορισμού.  Παρακαλώ επιλέξτε την προτιμώμενη πράξη."
 
-#: gnome/gdialogs.c:398
+#: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
 msgstr "Επιβεβαίωση επικάλυψης αρχείων."
 
-#: gnome/gdialogs.c:405
+#: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
 msgstr "Μη επικάλυψη αρχείων."
 
-#: gnome/gdialogs.c:421
+#: gnome/gdialogs.c:422
 msgid "Overwrite:"
 msgstr "Επικάλυψη:"
 
-#: gnome/gdialogs.c:428
+#: gnome/gdialogs.c:429
 msgid "Older files."
 msgstr "Παλαιοτέρων αρχείων."
 
-#: gnome/gdialogs.c:434
+#: gnome/gdialogs.c:435
 msgid "Files only if size differs."
 msgstr "Μόνο εάν διαφέρει το μέγεθος."
 
-#: gnome/gdialogs.c:440
+#: gnome/gdialogs.c:441
 msgid "All files."
 msgstr "Όλων."
 
-#: gnome/gdialogs.c:480
+#: gnome/gdialogs.c:481
 msgid "File Exists"
 msgstr "Υπάρχον αρχείο"
 
-#: gnome/gdialogs.c:486
+#: gnome/gdialogs.c:487
 #, c-format
 msgid "The target file already exists: %s"
 msgstr "Το αρχείο προορισμού `%s' υπάρχει ήδη"
 
-#: gnome/gdialogs.c:493
+#: gnome/gdialogs.c:494
 msgid "Replace it?"
 msgstr "Αντικατάσταση;"
 
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1097 gtkedit/gtkedit.c:1250
-#: src/file.c:802 src/screen.c:2368 src/screen.c:2398 src/tree.c:1015
+#: src/file.c:802 src/screen.c:2398 src/screen.c:2428 src/tree.c:1015
 msgid "Copy"
 msgstr "Αντιγραφή"
 
@@ -443,53 +553,53 @@ msgstr "Αντιγραφή"
 msgid "Move"
 msgstr "Μετακίνηση"
 
-#: gnome/gdialogs.c:588
+#: gnome/gdialogs.c:583
 msgid "Destination"
 msgstr "Προορισμός"
 
-#: gnome/gdialogs.c:592
+#: gnome/gdialogs.c:597
 msgid "Find Destination Folder"
 msgstr "Εύρεση καταλόγου προορισμού"
 
-#: gnome/gdialogs.c:597
+#: gnome/gdialogs.c:611
 msgid "Copy as a background process"
 msgstr ""
 
-#: gnome/gdialogs.c:617
+#: gnome/gdialogs.c:629
 msgid "Advanced Options"
 msgstr "Επιλογές για προχωρημένους"
 
-#: gnome/gdialogs.c:621
+#: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
 msgstr ""
 
-#: gnome/gdialogs.c:631
+#: gnome/gdialogs.c:643
 msgid "Follow links."
 msgstr ""
 
-#: gnome/gdialogs.c:637
+#: gnome/gdialogs.c:649
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
 msgstr ""
 
-#: gnome/gdialogs.c:642
+#: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
 msgstr "Διατήρηση ιδιοτήτων αρχείου."
 
-#: gnome/gdialogs.c:647
+#: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "Διατήρηση δικαιωμάτων και κωδικών χρήστη/ομάδας, εφόσον δυνατό"
 
-#: gnome/gdialogs.c:653
+#: gnome/gdialogs.c:666
 msgid "Recursively copy subdirectories."
 msgstr "Αναδρομική αντιγραφή υποκαταλόγων."
 
-#: gnome/gdialogs.c:658
+#: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
 msgstr "Ενεργοποίηση/απενεργοποίηση αναδρομικής αντιγραφής καταλόγων"
 
-#: gnome/gdialogs.c:767
+#: gnome/gdialogs.c:780
 #, c-format
 msgid ""
 "%s\n"
@@ -500,58 +610,58 @@ msgstr ""
 "\n"
 "Ο κατάλογος δεν είναι άδειος. Αναδρομική διαγραφή;"
 
-#: gnome/gdialogs.c:776 src/file.c:2247
+#: gnome/gdialogs.c:790 src/file.c:2247
 msgid " Delete: "
 msgstr " Διαγραφή: "
 
-#: gnome/gdialogs.c:780
+#: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
 msgstr "Ομοίως για τα υπόλοιπα"
 
-#: gnome/gdialogs.c:863
+#: gnome/gdialogs.c:877
 msgid "Move Progress"
 msgstr "Πρόοδος μετακίνησης"
 
-#: gnome/gdialogs.c:866
+#: gnome/gdialogs.c:880
 msgid "Copy Progress"
 msgstr "Πρόοδος ανιγραφής"
 
-#: gnome/gdialogs.c:869
+#: gnome/gdialogs.c:883
 msgid "Delete Progress"
 msgstr "Πρόοδος διαγραφής"
 
-#: gnome/gdialogs.c:919
+#: gnome/gdialogs.c:939
 msgid "File "
 msgstr "Αρχείο "
 
-#: gnome/gdialogs.c:923
+#: gnome/gdialogs.c:943
 msgid "is "
 msgstr "είναι "
 
-#: gnome/gdialogs.c:926
+#: gnome/gdialogs.c:946
 msgid "done."
 msgstr "ολοκληρωμένο."
 
-#. Translators should take care as "Password" or its translations
-#. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:986 src/wtools.c:587 vfs/vfs.c:1801
-msgid "Password:"
-msgstr "Κωδικός:"
-
-#: gnome/gdialogs.c:986
+#: gnome/gdialogs.c:1007
 msgid "Password"
 msgstr "Κωδικός"
 
+#. Translators should take care as "Password" or its translations
+#. are used to identify password boxes and hide characters with "*"
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1808
+msgid "Password:"
+msgstr "Κωδικός:"
+
 #. Create the dialog
-#: gnome/gdialogs.c:1018
+#: gnome/gdialogs.c:1039
 msgid "Symbolic Link"
 msgstr ""
 
-#: gnome/gdialogs.c:1034 src/boxes.c:803
+#: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: gnome/gdialogs.c:1048 src/boxes.c:801
+#: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
 msgstr ""
 
@@ -579,7 +689,7 @@ msgid ""
 "%s"
 msgstr ""
 
-#: gnome/gicon.c:154
+#: gnome/gicon.c:218
 msgid "Default set of icons not found, please check your installation"
 msgstr ""
 
@@ -657,30 +767,30 @@ msgid ""
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
 
-#. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384 gnome/gscreen.c:2072
-msgid "_Copy..."
-msgstr "_Αντιγραφή..."
-
 #: gnome/glayout.c:384
 msgid "Copy files"
 msgstr "Αντιγραφή αρχείων"
 
-#: gnome/glayout.c:385 gnome/gscreen.c:2073
-msgid "_Delete..."
-msgstr "_Διαγραφή..."
+#. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
+#: gnome/glayout.c:384 gnome/gscreen.c:2147
+msgid "_Copy..."
+msgstr "_Αντιγραφή..."
 
 #: gnome/glayout.c:385
 msgid "Delete files"
 msgstr "Διαγραφή αρχείων"
 
-#: gnome/glayout.c:386 gnome/gscreen.c:2074
-msgid "_Move..."
-msgstr "_Μετακίνηση..."
+#: gnome/glayout.c:385 gnome/gscreen.c:2148
+msgid "_Delete..."
+msgstr "_Διαγραφή..."
 
 #: gnome/glayout.c:386
 msgid "Rename or move files"
 msgstr "Μετονομασία ή μετακίνηση αρχείων"
+
+#: gnome/glayout.c:386 gnome/gscreen.c:2149
+msgid "_Move..."
+msgstr "_Μετακίνηση..."
 
 #: gnome/glayout.c:388
 msgid "Show directory sizes"
@@ -699,127 +809,127 @@ msgid "Select all files in the current Panel"
 msgstr ""
 
 #: gnome/glayout.c:397
-msgid "_Select Files..."
-msgstr "_Επιλογή αρχείων..."
-
-#: gnome/glayout.c:397
 msgid "Select a group of files"
 msgstr "Επιλογή ομάδας αρχείων"
 
-#: gnome/glayout.c:398
-msgid "_Invert Selection"
-msgstr "Αντ_ιστρφή επιλογής"
+#: gnome/glayout.c:397
+msgid "_Select Files..."
+msgstr "_Επιλογή αρχείων..."
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
 msgstr "Αντιστροφή του συνόλου επιλεγμένων αρχείων"
 
-#: gnome/glayout.c:400 gtkedit/editwidget.c:1099 src/view.c:2083
+#: gnome/glayout.c:398
+msgid "_Invert Selection"
+msgstr "Αντ_ιστρφή επιλογής"
+
+#: gnome/glayout.c:401 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: gnome/glayout.c:400
+#: gnome/glayout.c:401
 msgid "Search for a file in the current Panel"
 msgstr ""
 
-#: gnome/glayout.c:403 gnome/gscreen.c:1445
-msgid "_Rescan Directory"
-msgstr ""
-
-#: gnome/glayout.c:403
+#: gnome/glayout.c:404
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:410
-msgid "_Sort By..."
-msgstr "_Ταξινόμηση κατά..."
+#: gnome/glayout.c:404 gnome/gscreen.c:1508
+msgid "_Rescan Directory"
+msgstr ""
 
-#: gnome/glayout.c:410
+#: gnome/glayout.c:414
 msgid "Confirmation settings"
 msgstr "Ρυθμίσεις επιβεβαίωσης"
 
-#: gnome/glayout.c:411
-msgid "_Filter View..."
-msgstr "Προβολή _φίλτρου"
+#: gnome/glayout.c:414
+msgid "_Sort By..."
+msgstr "_Ταξινόμηση κατά..."
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:415
 msgid "Global option settings"
 msgstr "Καθολικές ρυθμίσεις"
 
-#: gnome/glayout.c:418
-msgid "_Find File..."
-msgstr "_Εύρεση αρχείου..."
+#: gnome/glayout.c:415
+msgid "_Filter View..."
+msgstr "Προβολή _φίλτρου"
 
-#: gnome/glayout.c:418
+#: gnome/glayout.c:422
 msgid "Locate files on disk"
 msgstr "Εντοπισμός αρχείων στο δίσκο"
 
-#. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:421
-msgid "_Edit mime types..."
-msgstr "_Επεξεργασία τύπων MIME"
+#: gnome/glayout.c:422
+msgid "_Find File..."
+msgstr "_Εύρεση αρχείου..."
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "Edits the MIME type bindings"
 msgstr ""
 
-#: gnome/glayout.c:423
-msgid "_Run Command..."
-msgstr "Εκτέ_λεση εντολής..."
+#. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
+#: gnome/glayout.c:425
+msgid "_Edit mime types..."
+msgstr "_Επεξεργασία τύπων MIME"
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:427
 msgid "Runs a command"
 msgstr "Εκτέλεση εντολής"
 
-#: gnome/glayout.c:425
-msgid "_Run Command in panel..."
-msgstr "Εκτέ_λεση εντολής στο {panel}..."
+#: gnome/glayout.c:427
+msgid "_Run Command..."
+msgstr "Εκτέ_λεση εντολής..."
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:429
 msgid "Run a command and put the results in a panel"
 msgstr ""
 
-#: gnome/glayout.c:435
-msgid "_Background jobs..."
-msgstr "Εργασίες παρασ_κηνίου..."
+#: gnome/glayout.c:429
+msgid "_Run Command in panel..."
+msgstr "Εκτέ_λεση εντολής στο {panel}..."
 
-#: gnome/glayout.c:435
+#: gnome/glayout.c:439
 msgid "List of background operations"
 msgstr "Κατάλογος εργασιών παρασκηνίου"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:439
+msgid "_Background jobs..."
+msgstr "Εργασίες παρασ_κηνίου..."
+
+#: gnome/glayout.c:442
 msgid "Exit"
 msgstr "Έξοδος"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:442
 msgid "Terminates the file manager and the desktop"
 msgstr "Τερματισμός του διαχειριστή αρχείων και επιφάνειας εργασίας"
 
-#: gnome/glayout.c:453
-msgid "Rescan System Devices"
+#: gnome/glayout.c:465 gnome/glayout.c:476
+msgid "_Settings"
 msgstr ""
 
-#: gnome/glayout.c:461 gnome/glayout.c:471
+#: gnome/glayout.c:466 gnome/glayout.c:477
 msgid "_Layout"
 msgstr ""
 
-#: gnome/glayout.c:462 gnome/glayout.c:472
+#: gnome/glayout.c:467 gnome/glayout.c:478
 msgid "_Commands"
 msgstr "Ε_ντολές"
 
-#: gnome/glayout.c:463
+#: gnome/glayout.c:468
 msgid "_Desktop"
 msgstr ""
 
-#: gnome/glayout.c:464 gnome/glayout.c:473
+#: gnome/glayout.c:469 gnome/glayout.c:479
 msgid "_Help"
 msgstr "_Βοήθεια"
 
-#: gnome/glayout.c:613
+#: gnome/glayout.c:619
 msgid "File/New/Directory..."
 msgstr "Αρχείο/Νέο/Κατάλογος..."
 
-#: gnome/gmain.c:551
+#: gnome/gmain.c:558
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -828,8 +938,43 @@ msgid ""
 msgstr ""
 "Εκτελέσατε το διαχειριστή αρχείων ως χρήστης root.\n"
 "\n"
-"Ως χρήστης root ενδέχεται να καταστρέψετε το σύστημά σας εάν δεν είσαστε προσεκτικοί, "
-"και ο διαχειριστής αρχείων του GNOME δεν μπορεί να σας αποτρέψει."
+"Ως χρήστης root ενδέχεται να καταστρέψετε το σύστημά σας εάν δεν είσαστε "
+"προσεκτικοί, και ο διαχειριστής αρχείων του GNOME δεν μπορεί να σας "
+"αποτρέψει."
+
+#: gnome/gmount.c:195
+msgid "Could not open the /etc/fstab file"
+msgstr "Άνοιγμα αρχείου /etc/fstab ανεπιτυχές"
+
+#: gnome/gmount.c:325
+#, c-format
+msgid "Could not symlink %s to %s; will not have such a desktop device icon."
+msgstr ""
+
+#: gnome/gmount.c:377 gnome/gmount.c:392
+#, c-format
+msgid "CD-ROM %d"
+msgstr ""
+
+#: gnome/gmount.c:382
+#, c-format
+msgid "Floppy %d"
+msgstr "Δισκέττα %d"
+
+#: gnome/gmount.c:388
+#, c-format
+msgid "Disk %d"
+msgstr "Δίσκος %d"
+
+#: gnome/gmount.c:398
+#, c-format
+msgid "NFS dir %s"
+msgstr "Κατάλογος NFS %s"
+
+#: gnome/gmount.c:402
+#, c-format
+msgid "Device %d"
+msgstr "Συσκευή %d"
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
@@ -877,14 +1022,14 @@ msgid "File Type: FIFO"
 msgstr "Τύπος αρχείου: FIFO"
 
 #: gnome/gnome-file-property-dialog.c:238
+msgid " bytes"
+msgstr " byte"
+
+#: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
 msgid "File Size: "
 msgstr "Μέγεθος αρχείου: "
-
-#: gnome/gnome-file-property-dialog.c:238
-msgid " bytes"
-msgstr " byte"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
@@ -934,7 +1079,7 @@ msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2366 src/screen.c:2396
+#: src/screen.c:2396 src/screen.c:2426
 msgid "View"
 msgstr "Προβολή"
 
@@ -964,7 +1109,7 @@ msgid "Use default View action"
 msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2367 src/screen.c:2397 src/view.c:2079
+#: src/screen.c:2397 src/screen.c:2427 src/view.c:2079
 msgid "Edit"
 msgstr "Επεξεργασία"
 
@@ -1036,39 +1181,45 @@ msgstr ""
 msgid "Sticky"
 msgstr ""
 
-#: gnome/gnome-file-property-dialog.c:909
+#: gnome/gnome-file-property-dialog.c:815
+#: gnome/gnome-file-property-dialog.c:905
+#, fuzzy, c-format
+msgid "<Unknown> (%d)"
+msgstr "<Άγνωστο>"
+
+#: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
 msgstr "Ιδιοκτησία αρχείου"
 
-#: gnome/gnome-file-property-dialog.c:1069
+#: gnome/gnome-file-property-dialog.c:1079
 msgid "URL"
 msgstr ""
 
-#: gnome/gnome-file-property-dialog.c:1072
+#: gnome/gnome-file-property-dialog.c:1082
 msgid "Statistics"
 msgstr "Στατιστικά"
 
-#: gnome/gnome-file-property-dialog.c:1078
+#: gnome/gnome-file-property-dialog.c:1088
 msgid "Options"
 msgstr "Επιλογές"
 
-#: gnome/gnome-file-property-dialog.c:1081
+#: gnome/gnome-file-property-dialog.c:1091
 msgid "Permissions"
 msgstr "Δικαιώματα"
 
-#: gnome/gnome-file-property-dialog.c:1084
+#: gnome/gnome-file-property-dialog.c:1094
 msgid " Properties"
 msgstr " Ιδιότητες"
 
-#: gnome/gnome-file-property-dialog.c:1135
+#: gnome/gnome-file-property-dialog.c:1145
 msgid "You entered an invalid username"
 msgstr "Δώσατε άκυρο όνομα χρήστη"
 
-#: gnome/gnome-file-property-dialog.c:1180
+#: gnome/gnome-file-property-dialog.c:1190
 msgid "You must rename your file to something"
 msgstr ""
 
-#: gnome/gnome-file-property-dialog.c:1186
+#: gnome/gnome-file-property-dialog.c:1196
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr ""
 
@@ -1114,8 +1265,8 @@ msgstr "Μη φιλτραρισμένη προβολή"
 msgid "Copy..."
 msgstr "Αντιγραφή..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2371
-#: src/screen.c:2401
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2401
+#: src/screen.c:2431
 msgid "Delete"
 msgstr "Διαγραφή"
 
@@ -1139,103 +1290,87 @@ msgstr ""
 msgid "Properties..."
 msgstr "Ιδιότητες..."
 
-#: gnome/gprefs.c:88
+#: gnome/gprefs.c:92
 msgid "Show backup files"
 msgstr ""
 
-#: gnome/gprefs.c:92
+#: gnome/gprefs.c:96
 msgid "Show hidden files"
 msgstr "Εμφάνιση κρυφών αρχείων"
 
-#: gnome/gprefs.c:96
+#: gnome/gprefs.c:100
 msgid "Mix files and directories"
 msgstr "Ανάμεικτα αρχεία και κατάλογοι"
 
-#: gnome/gprefs.c:100
+#: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
 msgstr ""
 
-#: gnome/gprefs.c:109
+#: gnome/gprefs.c:113
 msgid "Confirm when deleting file"
 msgstr "Επιβεβαίωση διαγραφής αρχείων"
 
-#: gnome/gprefs.c:113
+#: gnome/gprefs.c:117
 msgid "Confirm when overwriting files"
 msgstr "Επιβεβαίωση επικάλυψης αρχείων"
 
-#: gnome/gprefs.c:117
+#: gnome/gprefs.c:121
 msgid "Confirm when executing files"
 msgstr "Επιβεβαίωση εκτέλεσης αρχείων"
 
-#: gnome/gprefs.c:121
+#: gnome/gprefs.c:125
 msgid "Show progress while operations are being performed"
 msgstr "Εμφάνιση προόδου κατά την εκτέλεση λειτουργιών"
 
-#: gnome/gprefs.c:130
+#: gnome/gprefs.c:134
 msgid "VFS Timeout:"
 msgstr "Προθεσμία χρόνου VFS:"
 
-#: gnome/gprefs.c:131 gnome/gprefs.c:156
+#: gnome/gprefs.c:135 gnome/gprefs.c:160
 msgid "Seconds"
 msgstr "Δευτ/τα"
 
-#: gnome/gprefs.c:134
+#: gnome/gprefs.c:138
 msgid "Anonymous FTP password:"
 msgstr "Κωδικός ανώνυμου FTP:"
 
-#: gnome/gprefs.c:138
+#: gnome/gprefs.c:142
 msgid "Always use FTP proxy"
 msgstr "Χρήση FTP proxy πάντοτε"
 
-#: gnome/gprefs.c:147
+#: gnome/gprefs.c:151
 msgid "Fast directory reload"
 msgstr ""
 
-#: gnome/gprefs.c:151
+#: gnome/gprefs.c:155
 msgid "Compute totals before copying files"
 msgstr "Υπολογισμός αθροίσματος πρίν την αντιγραφή"
 
-#: gnome/gprefs.c:155
+#: gnome/gprefs.c:159
 msgid "FTP directory cache timeout :"
 msgstr ""
 
-#: gnome/gprefs.c:159
+#: gnome/gprefs.c:163
 msgid "Allow customization of icons in icon view"
 msgstr ""
 
-#: gnome/gprefs.c:167
-msgid "Use shaped icons"
-msgstr ""
-
-#: gnome/gprefs.c:171
-msgid "Auto place icons"
-msgstr "Αυτόματη τοποθέτηση εικονιδίων"
-
-#: gnome/gprefs.c:175
-msgid "Snap icons to grid"
-msgstr ""
-
-#: gnome/gprefs.c:184
+#: gnome/gprefs.c:172
 msgid "File display"
 msgstr "Προβολή αρχείων"
 
-#: gnome/gprefs.c:188
+#: gnome/gprefs.c:176
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
 
-#: gnome/gprefs.c:192
+#: gnome/gprefs.c:180
 msgid "VFS"
 msgstr ""
 
-#: gnome/gprefs.c:196
+#: gnome/gprefs.c:184
 msgid "Caching"
 msgstr "Ενταμίευση"
 
-#: gnome/gprefs.c:200
-msgid "Desktop"
-msgstr "Επιφάνεια εργασίας"
-
-#: gnome/gprefs.c:479
+#: gnome/gprefs.c:474
 msgid "Preferences"
 msgstr "Προτιμήσεις"
 
@@ -1279,90 +1414,90 @@ msgstr "Τίτλος"
 msgid "Select icon"
 msgstr "Επιλογή εικονιδίου"
 
-#: gnome/gscreen.c:1445
+#: gnome/gscreen.c:1508
 msgid "Reloads the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:1447
-msgid "New _Directory..."
-msgstr "Νέος _κατάλογος..."
-
-#: gnome/gscreen.c:1447
+#: gnome/gscreen.c:1510
 msgid "Creates a new directory here"
 msgstr "Δημιουργία νέου καταλόγου εντός του τρέχοντος"
 
-#: gnome/gscreen.c:1630
+#: gnome/gscreen.c:1510
+msgid "New _Directory..."
+msgstr "Νέος _κατάλογος..."
+
+#: gnome/gscreen.c:1711
 #, c-format
 msgid "Search: %s"
 msgstr "Αναζήτηση: %s"
 
-#: gnome/gscreen.c:1640
+#: gnome/gscreen.c:1721
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s byte se %d αρχείο"
 
-#: gnome/gscreen.c:1640
+#: gnome/gscreen.c:1721
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s byte σε %d αρχεία"
 
-#: gnome/gscreen.c:1666 src/screen.c:670
+#: gnome/gscreen.c:1747 src/screen.c:688
 msgid "<readlink failed>"
 msgstr ""
 
-#: gnome/gscreen.c:2072
+#: gnome/gscreen.c:2147
 msgid "Copy directory"
 msgstr "Αντιγραφή καταλόγου"
 
-#: gnome/gscreen.c:2073
+#: gnome/gscreen.c:2148
 msgid "Delete directory"
 msgstr "Διαγραφή καταλόγου"
 
-#: gnome/gscreen.c:2074
+#: gnome/gscreen.c:2149
 msgid "Rename or move directory"
 msgstr "Μετονομασία/μετακίνηση καταλόγου"
 
-#: gnome/gscreen.c:2230
+#: gnome/gscreen.c:2305
 msgid "Back"
 msgstr "Πίσω"
 
-#: gnome/gscreen.c:2230
+#: gnome/gscreen.c:2305
 msgid "Go to the previously visited directory"
 msgstr "Μετακίνηση στον προηγούμενο κατάλογο"
 
-#: gnome/gscreen.c:2232
-msgid "Up"
-msgstr "Επάνω"
-
-#: gnome/gscreen.c:2232
+#: gnome/gscreen.c:2307
 msgid "Go up a level in the directory heirarchy"
 msgstr "Μετακίνηση προς τα επάνς στην ιεραρχία καταλόγων"
 
-#: gnome/gscreen.c:2234
+#: gnome/gscreen.c:2307
+msgid "Up"
+msgstr "Επάνω"
+
+#: gnome/gscreen.c:2309
 msgid "Forward"
 msgstr "Εμπρός"
 
-#: gnome/gscreen.c:2234
+#: gnome/gscreen.c:2309
 msgid "Go to the next directory"
 msgstr "Μετακίνηση στον επόμενο κατάλογο"
 
-#: gnome/gscreen.c:2237 src/tree.c:1011
+#: gnome/gscreen.c:2312 src/tree.c:1011
 msgid "Rescan"
 msgstr ""
 
-#: gnome/gscreen.c:2237
+#: gnome/gscreen.c:2312
 msgid "Rescan the current directory"
 msgstr ""
 
-#: gnome/gscreen.c:2240
-msgid "Home"
-msgstr "Αρχή"
-
-#: gnome/gscreen.c:2240
+#: gnome/gscreen.c:2315
 msgid "Go to your home directory"
 msgstr "Μετακίνιση στον αρχικό σας κατάλογο"
 
-#: gnome/gscreen.c:2381
+#: gnome/gscreen.c:2315
+msgid "Home"
+msgstr "Αρχή"
+
+#: gnome/gscreen.c:2456
 msgid "Location:"
 msgstr "Θέση:"
 
@@ -1376,9 +1511,9 @@ msgstr "Θέση:"
 msgid "&Ok"
 msgstr "&Εντάξει"
 
-#: gnome/gview.c:136 src/view.c:728
+#: gnome/gview.c:136
 #, c-format
-msgid "Offset 0x%08x"
+msgid "Offset 0x%08lx"
 msgstr ""
 
 #: gnome/gview.c:138 src/view.c:730
@@ -1400,11 +1535,11 @@ msgid "Jump to a specified line number"
 msgstr ""
 
 #: gnome/gview.c:309
-msgid "_Monitor file"
+msgid "Monitor file growing"
 msgstr ""
 
 #: gnome/gview.c:309
-msgid "Monitor file growing"
+msgid "_Monitor file"
 msgstr ""
 
 #: gnome/gview.c:316
@@ -1468,45 +1603,11 @@ msgstr "έξοδος"
 msgid "abort"
 msgstr ""
 
-#: gnome/gmount.c:195
-msgid "Could not open the /etc/fstab file"
-msgstr "Άνοιγμα αρχείου /etc/fstab ανεπιτυχές"
-
-#: gnome/gmount.c:322
-#, c-format
-msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
-
-#: gnome/gmount.c:374 gnome/gmount.c:389
-#, c-format
-msgid "CD-ROM %d"
-msgstr ""
-
-#: gnome/gmount.c:379
-#, c-format
-msgid "Floppy %d"
-msgstr "Δισκέττα %d"
-
-#: gnome/gmount.c:385
-#, c-format
-msgid "Disk %d"
-msgstr "Δίσκος %d"
-
-#: gnome/gmount.c:395
-#, c-format
-msgid "NFS dir %s"
-msgstr "Κατάλογος NFS %s"
-
-#: gnome/gmount.c:399
-#, c-format
-msgid "Device %d"
-msgstr "Συσκευή %d"
-
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:132 gtkedit/edit.c:227 gtkedit/edit.c:234 gtkedit/edit.c:241
 #: gtkedit/edit.c:248 gtkedit/edit.c:254 gtkedit/edit.c:311 gtkedit/edit.c:347
 #: gtkedit/editcmd.c:1947 gtkedit/editwidget.c:980 src/dir.c:386
-#: src/screen.c:2386 src/tree.c:683 src/tree.c:689 src/wtools.c:222
+#: src/screen.c:2416 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr " Σφάλμα "
@@ -1578,9 +1679,9 @@ msgstr " Αποθήκευση ως "
 
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:491 gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
-#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095 src/ext.c:303 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:1432 src/screen.c:2106
-#: src/screen.c:2149 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
+#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095 src/ext.c:315 src/file.c:619
+#: src/help.c:318 src/main.c:699 src/screen.c:1450 src/screen.c:2128
+#: src/screen.c:2178 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
 #: src/utilunix.c:394 src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
 msgstr " Προειδοποίηση "
@@ -1589,24 +1690,24 @@ msgstr " Προειδοποίηση "
 msgid " A file already exists with this name. "
 msgstr ""
 
-#. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:494
-msgid "Overwrite"
-msgstr "Επικάλυψη"
-
 #: gtkedit/editcmd.c:494 gtkedit/editcmd.c:561 gtkedit/editcmd.c:788
 #: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
 #: gtkedit/editcmd.c:1585
 msgid "Cancel"
 msgstr "Άκυρο"
 
-#: gtkedit/editcmd.c:513
-msgid " Save as "
-msgstr " Αποθήκευση ως"
+#. Push buttons to over-write the current file, or cancel the operation
+#: gtkedit/editcmd.c:494
+msgid "Overwrite"
+msgstr "Επικάλυψη"
 
 #: gtkedit/editcmd.c:513 gtkedit/editcmd.c:2657
 msgid " Error trying to save file. "
 msgstr " Σφάλμα αποθήκευσης αρχείου. "
+
+#: gtkedit/editcmd.c:513
+msgid " Save as "
+msgstr " Αποθήκευση ως"
 
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:631 gtkedit/editcmd.c:639 gtkedit/editcmd.c:664
@@ -1681,26 +1782,26 @@ msgstr ""
 msgid "Continue"
 msgstr "Συνέχεια"
 
+#: gtkedit/editcmd.c:837
+msgid " Error trying to open file for reading "
+msgstr " Άνοιγμα αρχείου για ανάγνωση ανεπιτυχές "
+
 #. Heads the 'Load' file dialog box
 #: gtkedit/editcmd.c:837 gtkedit/editcmd.c:853
 msgid " Load "
 msgstr " Ανάγνωση "
-
-#: gtkedit/editcmd.c:837
-msgid " Error trying to open file for reading "
-msgstr " Άνοιγμα αρχείου για ανάγνωση ανεπιτυχές "
 
 #: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095
 msgid " Block is large, you may not be able to undo this action. "
 msgstr ""
 
 #: gtkedit/editcmd.c:1095
-msgid " Continue "
-msgstr " Συνέχεια "
-
-#: gtkedit/editcmd.c:1095
 msgid " Cancel "
 msgstr " Άκυρο "
+
+#: gtkedit/editcmd.c:1095
+msgid " Continue "
+msgstr " Συνέχεια "
 
 #: gtkedit/editcmd.c:1151
 msgid "o&Ne"
@@ -1795,7 +1896,8 @@ msgid ""
 "(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
 "Μπορείτε να εισάγετε υπακολουθίες κανονικών εκφράσεων με %s\n"
-"(όχι \\1, \\2 όπως στο sed) και κατόπιν χρησιμοποιήστε το \"Εισαγωγή...υπακολουθιών)\""
+"(όχι \\1, \\2 όπως στο sed) και κατόπιν χρησιμοποιήστε το "
+"\"Εισαγωγή...υπακολουθιών)\""
 
 #: gtkedit/editcmd.c:1373
 msgid " Enter argument (or substring) order : "
@@ -1875,16 +1977,16 @@ msgid "Replace"
 msgstr "Αντικατάσταση"
 
 #: gtkedit/editcmd.c:1585
-msgid "Skip"
-msgstr "Προσπέραση"
-
-#: gtkedit/editcmd.c:1585
 msgid "Replace all"
 msgstr "Αντικατάσταση όλων"
 
 #: gtkedit/editcmd.c:1585
 msgid "Replace one"
 msgstr "Αντικατάσταση ενός"
+
+#: gtkedit/editcmd.c:1585
+msgid "Skip"
+msgstr "Προσπέραση"
 
 #: gtkedit/editcmd.c:1947
 msgid ""
@@ -1920,33 +2022,33 @@ msgstr ""
 msgid " File was modified, Save with exit? "
 msgstr " Το αρχείο τροποποιήθηκε, Αποθήκευση κατά την έξοδο; "
 
-#: gtkedit/editcmd.c:2265
-msgid "Cancel quit"
-msgstr "Ακύρωση τέλους"
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
+msgid "&No"
+msgstr "&Όχι"
 
 #: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2135
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "&Ναι"
 
-#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2135
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
-msgid "&No"
-msgstr "&Όχι"
+#: gtkedit/editcmd.c:2265
+msgid "Cancel quit"
+msgstr "Ακύρωση τέλους"
 
 #: gtkedit/editcmd.c:2269
 msgid " &Cancel quit "
 msgstr " &Ακύρωση τέλους "
 
 #: gtkedit/editcmd.c:2269
-msgid " &Yes "
-msgstr " &Ναί "
-
-#: gtkedit/editcmd.c:2269
 msgid " &No "
 msgstr " &Όχι"
+
+#: gtkedit/editcmd.c:2269
+msgid " &Yes "
+msgstr " &Ναί "
 
 #: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2576
 msgid " Copy to clipboard "
@@ -1962,14 +2064,14 @@ msgid " Cut to clipboard "
 msgstr " Αποκοπή στο τεμάχιο "
 
 #: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
-#: gtkedit/editcmd.c:2623 src/view.c:1913
-msgid " Goto line "
-msgstr " Επίσκεψη γραμμής "
-
-#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
 #: gtkedit/editcmd.c:2623
 msgid " Enter line: "
 msgstr " Γραμμή: "
+
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623 src/view.c:1913
+msgid " Goto line "
+msgstr " Επίσκεψη γραμμής "
 
 #: gtkedit/editcmd.c:2644 gtkedit/editcmd.c:2657
 msgid " Save Block "
@@ -1980,12 +2082,12 @@ msgid " Insert File "
 msgstr " Παρεμβολή αρχείου "
 
 #: gtkedit/editcmd.c:2707
-msgid " Insert file "
-msgstr " Παρεμβολή αρχείου"
-
-#: gtkedit/editcmd.c:2707
 msgid " Error trying to insert file. "
 msgstr " Σφάλμα κατά την παρεμβολή αρχείου. "
+
+#: gtkedit/editcmd.c:2707
+msgid " Insert file "
+msgstr " Παρεμβολή αρχείου"
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2729
@@ -2050,108 +2152,6 @@ msgstr " Προς"
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <θέμα> -c <αντίγραφα> <προς>"
 
-#: gtkedit/editoptions.c:36
-msgid "Intuitive"
-msgstr ""
-
-#: gtkedit/editoptions.c:36
-msgid "Emacs"
-msgstr ""
-
-#: gtkedit/editoptions.c:39
-msgid "None"
-msgstr "Κανένα"
-
-#: gtkedit/editoptions.c:39
-msgid "Dynamic paragraphing"
-msgstr ""
-
-#: gtkedit/editoptions.c:39
-msgid "Type writer wrap"
-msgstr ""
-
-#. 2
-#: gtkedit/editoptions.c:74
-msgid "Word wrap line length : "
-msgstr ""
-
-#. 4
-#: gtkedit/editoptions.c:80
-msgid "Tab spacing : "
-msgstr ""
-
-#: gtkedit/editoptions.c:88
-msgid "synta&X highlighting"
-msgstr "τονισμός σύντα&ξης"
-
-#. 7
-#: gtkedit/editoptions.c:94
-msgid "confir&M before saving"
-msgstr ""
-
-#. 8
-#: gtkedit/editoptions.c:97
-msgid "fill tabs with &Spaces"
-msgstr ""
-
-#. 9
-#: gtkedit/editoptions.c:100
-msgid "&Return does autoindent"
-msgstr ""
-
-#. 10
-#: gtkedit/editoptions.c:103
-msgid "&Backspace through tabs"
-msgstr ""
-
-#. 11
-#: gtkedit/editoptions.c:106
-msgid "&Fake half tabs"
-msgstr ""
-
-#. 13
-#: gtkedit/editoptions.c:112
-msgid "Wrap mode"
-msgstr ""
-
-#. 15
-#: gtkedit/editoptions.c:118
-msgid "Key emulation"
-msgstr "Εξομοίοση πληκτρολογίου"
-
-#: gtkedit/editoptions.c:159
-msgid " Editor options "
-msgstr " Επιλογές επεξεργαστή "
-
-#. Not essential to translate
-#: gtkedit/editwidget.c:317
-msgid "Error initialising editor.\n"
-msgstr " Σφάλμα αρχικοποίησης επεξεργαστή.\n"
-
-#: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1711 src/screen.c:2364 src/screen.c:2394 src/tree.c:1009
-#: src/view.c:2068
-msgid "Help"
-msgstr "Βοήθεια"
-
-#: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
-msgid "Mark"
-msgstr ""
-
-#: gtkedit/editwidget.c:1096
-msgid "Replac"
-msgstr ""
-
-#: gtkedit/editwidget.c:1102 src/main.c:1713
-msgid "PullDn"
-msgstr ""
-
-#. gtk_edit_menu
-#: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1714 src/view.c:2070 src/view.c:2092
-msgid "Quit"
-msgstr "Τέλος"
-
 #: gtkedit/editmenu.c:61
 msgid " Word wrap "
 msgstr ""
@@ -2159,6 +2159,22 @@ msgstr ""
 #. Not essential to translate
 #: gtkedit/editmenu.c:63
 msgid " Enter line length, 0 for off: "
+msgstr ""
+
+#: gtkedit/editmenu.c:74
+#, fuzzy
+msgid " About "
+msgstr " Τέλος "
+
+#: gtkedit/editmenu.c:75
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
 msgstr ""
 
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
@@ -2499,6 +2515,108 @@ msgstr ""
 msgid "Macros and internal commands"
 msgstr ""
 
+#: gtkedit/editoptions.c:36
+msgid "Emacs"
+msgstr ""
+
+#: gtkedit/editoptions.c:36
+msgid "Intuitive"
+msgstr ""
+
+#: gtkedit/editoptions.c:39
+msgid "Dynamic paragraphing"
+msgstr ""
+
+#: gtkedit/editoptions.c:39
+msgid "None"
+msgstr "Κανένα"
+
+#: gtkedit/editoptions.c:39
+msgid "Type writer wrap"
+msgstr ""
+
+#. 2
+#: gtkedit/editoptions.c:74
+msgid "Word wrap line length : "
+msgstr ""
+
+#. 4
+#: gtkedit/editoptions.c:80
+msgid "Tab spacing : "
+msgstr ""
+
+#: gtkedit/editoptions.c:88
+msgid "synta&X highlighting"
+msgstr "τονισμός σύντα&ξης"
+
+#. 7
+#: gtkedit/editoptions.c:94
+msgid "confir&M before saving"
+msgstr ""
+
+#. 8
+#: gtkedit/editoptions.c:97
+msgid "fill tabs with &Spaces"
+msgstr ""
+
+#. 9
+#: gtkedit/editoptions.c:100
+msgid "&Return does autoindent"
+msgstr ""
+
+#. 10
+#: gtkedit/editoptions.c:103
+msgid "&Backspace through tabs"
+msgstr ""
+
+#. 11
+#: gtkedit/editoptions.c:106
+msgid "&Fake half tabs"
+msgstr ""
+
+#. 13
+#: gtkedit/editoptions.c:112
+msgid "Wrap mode"
+msgstr ""
+
+#. 15
+#: gtkedit/editoptions.c:118
+msgid "Key emulation"
+msgstr "Εξομοίοση πληκτρολογίου"
+
+#: gtkedit/editoptions.c:159
+msgid " Editor options "
+msgstr " Επιλογές επεξεργαστή "
+
+#. Not essential to translate
+#: gtkedit/editwidget.c:317
+msgid "Error initialising editor.\n"
+msgstr " Σφάλμα αρχικοποίησης επεξεργαστή.\n"
+
+#: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
+#: src/main.c:1711 src/screen.c:2394 src/screen.c:2424 src/tree.c:1009
+#: src/view.c:2068
+msgid "Help"
+msgstr "Βοήθεια"
+
+#: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
+msgid "Mark"
+msgstr ""
+
+#: gtkedit/editwidget.c:1096
+msgid "Replac"
+msgstr ""
+
+#: gtkedit/editwidget.c:1102 src/main.c:1713
+msgid "PullDn"
+msgstr ""
+
+#. gtk_edit_menu
+#: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
+#: src/main.c:1714 src/view.c:2070 src/view.c:2092
+msgid "Quit"
+msgstr "Τέλος"
+
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
 msgstr ""
@@ -2529,11 +2647,11 @@ msgid "Toggle In/Off invisible marker to highlight text"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1249
-msgid "Replc"
+msgid "Find and replace strings/regular expressions"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1249
-msgid "Find and replace strings/regular expressions"
+msgid "Replc"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1250
@@ -2553,14 +2671,14 @@ msgid "Find strings/regular expressions"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1254
-msgid "Dlete"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1254
 msgid "Delete highlighted text"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2365 src/screen.c:2395
+#: gtkedit/gtkedit.c:1254
+msgid "Dlete"
+msgstr ""
+
+#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2395 src/screen.c:2425
 msgid "Menu"
 msgstr ""
 
@@ -2596,16 +2714,16 @@ msgstr ""
 msgid "Search/Replace"
 msgstr ""
 
-#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
-#: gtkedit/syntax.c:1078
-msgid " Spelling Message "
-msgstr ""
-
 #: gtkedit/syntax.c:1051
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+
+#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
+#: gtkedit/syntax.c:1078
+msgid " Spelling Message "
 msgstr ""
 
 #: gtkedit/syntax.c:1060
@@ -2628,12 +2746,23 @@ msgid ""
 " Ispell is being restarted. "
 msgstr ""
 
-#: gtkedit/syntax.c:1487 gtkedit/syntax.c:1494
-msgid " Load syntax file "
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+msgid " Load Syntax Rules "
+msgstr ""
+
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+msgid ""
+" Your syntax rule file is outdated \n"
+" A new rule file is being installed. \n"
+" Your old rule file has been saved with a .OLD extension. "
 msgstr ""
 
 #: gtkedit/syntax.c:1487
 msgid " File access error "
+msgstr ""
+
+#: gtkedit/syntax.c:1487 gtkedit/syntax.c:1494
+msgid " Load syntax file "
 msgstr ""
 
 #: gtkedit/syntax.c:1493
@@ -2802,15 +2931,15 @@ msgid " Confirmation "
 msgstr ""
 
 #: src/boxes.c:461
+msgid "7 bits"
+msgstr ""
+
+#: src/boxes.c:461
 msgid "Full 8 bits output"
 msgstr ""
 
 #: src/boxes.c:461
 msgid "ISO 8859-1"
-msgstr ""
-
-#: src/boxes.c:461
-msgid "7 bits"
 msgstr ""
 
 #: src/boxes.c:468
@@ -3057,27 +3186,27 @@ msgid "Could not change directory"
 msgstr ""
 
 #: src/cmd.c:283
-msgid " View file "
-msgstr ""
-
-#: src/cmd.c:283
 msgid " Filename:"
 msgstr ""
 
-#: src/cmd.c:300
-msgid " Filtered view "
+#: src/cmd.c:283
+msgid " View file "
 msgstr ""
 
 #: src/cmd.c:300
 msgid " Filter command and arguments:"
 msgstr ""
 
-#: src/cmd.c:388
-msgid "Create a new Directory"
+#: src/cmd.c:300
+msgid " Filtered view "
 msgstr ""
 
 #: src/cmd.c:388
 msgid " Enter directory name:"
+msgstr ""
+
+#: src/cmd.c:388
+msgid "Create a new Directory"
 msgstr ""
 
 #: src/cmd.c:449
@@ -3104,12 +3233,12 @@ msgstr ""
 msgid " Which extension file you want to edit? "
 msgstr ""
 
-#: src/cmd.c:642
-msgid "&User"
-msgstr ""
-
 #: src/cmd.c:642 src/cmd.c:668
 msgid "&System Wide"
+msgstr ""
+
+#: src/cmd.c:642
+msgid "&User"
 msgstr ""
 
 #: src/cmd.c:665
@@ -3121,11 +3250,11 @@ msgid " Which menu file will you edit? "
 msgstr ""
 
 #: src/cmd.c:668
-msgid "&Local"
+msgid "&Home"
 msgstr ""
 
 #: src/cmd.c:668
-msgid "&Home"
+msgid "&Local"
 msgstr ""
 
 #: src/cmd.c:853
@@ -3227,58 +3356,58 @@ msgstr ""
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1284
+#: src/cmd.c:1331
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1308
+#: src/cmd.c:1355
 #, c-format
 msgid " Could not chdir to %s "
 msgstr ""
 
-#: src/cmd.c:1315
+#: src/cmd.c:1362
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1321
+#: src/cmd.c:1368
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1327
+#: src/cmd.c:1374
 msgid " SMB link to machine "
 msgstr ""
 
-#: src/cmd.c:1337
+#: src/cmd.c:1384
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1338
+#: src/cmd.c:1385
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1345
-msgid " Host name "
-msgstr ""
-
-#: src/cmd.c:1345
+#: src/cmd.c:1392
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1356
+#: src/cmd.c:1392
+msgid " Host name "
+msgstr ""
+
+#: src/cmd.c:1403
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1357
+#: src/cmd.c:1404
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1407
+#: src/cmd.c:1454
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1412
+#: src/cmd.c:1459
 msgid " Setup "
 msgstr ""
 
@@ -3365,62 +3494,62 @@ msgstr ""
 msgid "File exists but can not be stat-ed: %s %s"
 msgstr ""
 
-#: src/dir.c:662
+#: src/dir.c:657
 msgid "Unknown"
 msgstr ""
 
-#: src/ext.c:131 src/user.c:506
+#: src/ext.c:143 src/user.c:506
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:138 src/user.c:518
+#: src/ext.c:150 src/user.c:518
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
 " %s "
 msgstr ""
 
-#: src/ext.c:153 src/user.c:547
+#: src/ext.c:165 src/user.c:547
 msgid " Parameter "
 msgstr ""
 
-#: src/ext.c:303
+#: src/ext.c:315
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr ""
 
-#: src/ext.c:400
+#: src/ext.c:412
 msgid " file error"
 msgstr ""
 
-#: src/ext.c:401
+#: src/ext.c:413
 msgid "Format of the "
 msgstr ""
 
-#: src/ext.c:419
+#: src/ext.c:431
 msgid " file error "
 msgstr ""
 
-#: src/ext.c:420
-msgid "Format of the ~/"
-msgstr ""
-
-#: src/ext.c:420
+#: src/ext.c:432
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
 msgstr ""
 
-#: src/ext.c:422
+#: src/ext.c:432
+msgid "Format of the ~/"
+msgstr ""
+
+#: src/ext.c:434
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
 msgstr ""
 
-#: src/ext.c:424
+#: src/ext.c:436
 msgid "mc.ext will be used for this moment."
 msgstr ""
 
@@ -3703,11 +3832,11 @@ msgid "1Copy"
 msgstr ""
 
 #: src/file.c:1680
-msgid "1Move"
+msgid "1Delete"
 msgstr ""
 
 #: src/file.c:1680
-msgid "1Delete"
+msgid "1Move"
 msgstr ""
 
 #: src/file.c:1695
@@ -3731,11 +3860,7 @@ msgid "%o %d %f%e"
 msgstr ""
 
 #: src/file.c:1703
-msgid "file"
-msgstr ""
-
-#: src/file.c:1703
-msgid "files"
+msgid "directories"
 msgstr ""
 
 #: src/file.c:1703
@@ -3743,27 +3868,31 @@ msgid "directory"
 msgstr ""
 
 #: src/file.c:1703
-msgid "directories"
+msgid "file"
 msgstr ""
 
-#: src/file.c:1704
-msgid "files/directories"
+#: src/file.c:1703
+msgid "files"
 msgstr ""
 
 #: src/file.c:1704
 msgid " with source mask:"
 msgstr ""
 
+#: src/file.c:1704
+msgid "files/directories"
+msgstr ""
+
 #: src/file.c:1856
 msgid " Can't operate on \"..\"! "
 msgstr ""
 
-#: src/file.c:1875 src/screen.c:2095
-msgid "Yes"
+#: src/file.c:1875 src/screen.c:2116
+msgid "No"
 msgstr ""
 
-#: src/file.c:1875 src/screen.c:2095
-msgid "No"
+#: src/file.c:1875 src/screen.c:2116
+msgid "Yes"
 msgstr ""
 
 #: src/file.c:1928
@@ -3785,12 +3914,12 @@ msgid ""
 " %s "
 msgstr ""
 
-#: src/file.c:2193
-msgid "&Retry"
-msgstr ""
-
 #: src/file.c:2193 src/file.c:2254 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
+msgstr ""
+
+#: src/file.c:2193
+msgid "&Retry"
 msgstr ""
 
 #: src/file.c:2245
@@ -3974,7 +4103,7 @@ msgid "&Edit - F4"
 msgstr ""
 
 #: src/find.c:170
-msgid "Start at:"
+msgid "Content: "
 msgstr ""
 
 #: src/find.c:170
@@ -3982,7 +4111,7 @@ msgid "Filename:"
 msgstr ""
 
 #: src/find.c:170
-msgid "Content: "
+msgid "Start at:"
 msgstr ""
 
 #: src/find.c:171 src/main.c:1236 src/main.c:1260
@@ -4015,12 +4144,12 @@ msgstr ""
 msgid "Searching %s"
 msgstr ""
 
-#: src/find.c:717 src/find.c:757
-msgid "Suspend"
-msgstr ""
-
 #: src/find.c:717
 msgid "Restart"
+msgstr ""
+
+#: src/find.c:717 src/find.c:757
+msgid "Suspend"
 msgstr ""
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
@@ -4167,15 +4296,15 @@ msgid "Moving "
 msgstr ""
 
 #: src/hotlist.c:892
-msgid "New hotlist entry"
-msgstr ""
-
-#: src/hotlist.c:892
 msgid "Directory label"
 msgstr ""
 
 #: src/hotlist.c:892
 msgid "Directory path"
+msgstr ""
+
+#: src/hotlist.c:892
+msgid "New hotlist entry"
 msgstr ""
 
 #: src/hotlist.c:973
@@ -4235,19 +4364,19 @@ msgid " file, your old hotlist entries were not deleted"
 msgstr ""
 
 #: src/hotlist.c:1431
-msgid "You have ~/"
-msgstr ""
-
-#: src/hotlist.c:1431
 msgid " file and [Hotlist] section in ~/"
 msgstr ""
 
-#: src/hotlist.c:1432
-msgid "Your ~/"
+#: src/hotlist.c:1431
+msgid "You have ~/"
 msgstr ""
 
 #: src/hotlist.c:1432
 msgid " most probably was created\n"
+msgstr ""
+
+#: src/hotlist.c:1432
+msgid "Your ~/"
 msgstr ""
 
 #: src/hotlist.c:1433
@@ -4540,7 +4669,7 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
-#: src/main.c:852 src/screen.c:2093 src/screen.c:2133
+#: src/main.c:852 src/screen.c:2114 src/screen.c:2162
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -4809,123 +4938,123 @@ msgstr ""
 msgid "The TERM environment variable is unset!\n"
 msgstr ""
 
-#: src/main.c:2579
+#: src/main.c:2582
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr ""
 
-#: src/main.c:2593
+#: src/main.c:2596
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 
-#: src/main.c:2670
+#: src/main.c:2673
 msgid "Use to debug the background code"
 msgstr ""
 
-#: src/main.c:2676
+#: src/main.c:2679
 msgid "Request to run in color mode"
 msgstr ""
 
-#: src/main.c:2678
+#: src/main.c:2681
 msgid "Specifies a color configuration"
 msgstr ""
 
-#: src/main.c:2683
+#: src/main.c:2686
 msgid "Edits one file"
 msgstr ""
 
-#: src/main.c:2687
+#: src/main.c:2690
 msgid "Displays this help message"
 msgstr ""
 
-#: src/main.c:2690
+#: src/main.c:2693
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 
-#: src/main.c:2693
+#: src/main.c:2696
 msgid "Log ftp dialog to specified file"
 msgstr ""
 
-#: src/main.c:2700
+#: src/main.c:2703
 msgid "Obsolete"
 msgstr ""
 
-#: src/main.c:2702
+#: src/main.c:2705
 msgid "Requests to run in black and white"
 msgstr ""
 
-#: src/main.c:2704
+#: src/main.c:2707
 msgid "Disable mouse support in text version"
 msgstr ""
 
-#: src/main.c:2707
+#: src/main.c:2710
 msgid "Disables subshell support"
 msgstr ""
 
-#: src/main.c:2711
+#: src/main.c:2714
 msgid "Prints working directory at program exit"
 msgstr ""
 
-#: src/main.c:2713
+#: src/main.c:2716
 msgid "Resets soft keys on HP terminals"
 msgstr ""
 
-#: src/main.c:2715
+#: src/main.c:2718
 msgid "To run on slow terminals"
 msgstr ""
 
-#: src/main.c:2718
+#: src/main.c:2721
 msgid "Use stickchars to draw"
 msgstr ""
 
-#: src/main.c:2722
+#: src/main.c:2725
 msgid "Enables subshell support (default)"
 msgstr ""
 
-#: src/main.c:2727
+#: src/main.c:2730
 msgid "Tries to use termcap instead of terminfo"
 msgstr ""
 
-#: src/main.c:2731
+#: src/main.c:2734
 msgid "Displays the current version"
 msgstr ""
 
-#: src/main.c:2733
+#: src/main.c:2736
 msgid "Launches the file viewer on a file"
 msgstr ""
 
-#: src/main.c:2735
+#: src/main.c:2738
 msgid "Forces xterm features"
 msgstr ""
 
-#: src/main.c:2737
-msgid "Geometry for the window"
-msgstr ""
-
-#: src/main.c:2737
+#: src/main.c:2740
 msgid "GEOMETRY"
 msgstr ""
 
-#: src/main.c:2738
+#: src/main.c:2740
+msgid "Geometry for the window"
+msgstr ""
+
+#: src/main.c:2741
 msgid "No windows opened at startup"
 msgstr ""
 
-#: src/main.c:2740
+#: src/main.c:2743
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ""
 
-#: src/main.c:3031
+#: src/main.c:3034
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
-#: src/main.c:3109
+#: src/main.c:3112
 msgid " Notice "
 msgstr ""
 
-#: src/main.c:3110
+#: src/main.c:3113
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5085,76 +5214,76 @@ msgstr ""
 msgid "Pipe close failed"
 msgstr ""
 
-#: src/popthelp.c:35
+#: src/popthelp.c:31
 msgid "Show this help message"
 msgstr ""
 
-#: src/popthelp.c:36
+#: src/popthelp.c:32
 msgid "Display brief usage message"
 msgstr ""
 
-#: src/screen.c:399
+#: src/screen.c:417
 msgid "MTime"
 msgstr ""
 
-#: src/screen.c:400
+#: src/screen.c:418
 msgid "ATime"
 msgstr ""
 
-#: src/screen.c:401
+#: src/screen.c:419
 msgid "CTime"
 msgstr ""
 
-#: src/screen.c:403
+#: src/screen.c:421
 msgid "Perm"
 msgstr ""
 
-#: src/screen.c:404
+#: src/screen.c:422
 msgid "Nl"
 msgstr ""
 
-#: src/screen.c:405
+#: src/screen.c:423
 msgid "Inode"
 msgstr ""
 
-#: src/screen.c:406
+#: src/screen.c:424
 msgid "UID"
 msgstr ""
 
-#: src/screen.c:407
+#: src/screen.c:425
 msgid "GID"
 msgstr ""
 
-#: src/screen.c:643
+#: src/screen.c:661
 #, c-format
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: src/screen.c:1306
+#: src/screen.c:1324
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: src/screen.c:1432
+#: src/screen.c:1450
 msgid "User suplied format looks invalid, reverting to default."
 msgstr ""
 
-#: src/screen.c:2094 src/screen.c:2134
+#: src/screen.c:2115 src/screen.c:2163
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: src/screen.c:2106 src/screen.c:2149
+#: src/screen.c:2128 src/screen.c:2178
 msgid " No action taken "
 msgstr ""
 
-#: src/screen.c:2369 src/screen.c:2399 src/tree.c:1017
+#: src/screen.c:2399 src/screen.c:2429 src/tree.c:1017
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2370 src/screen.c:2400 src/tree.c:1021
+#: src/screen.c:2400 src/screen.c:2430 src/tree.c:1021
 msgid "Mkdir"
 msgstr ""
 
-#: src/screen.c:2386
+#: src/screen.c:2416
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
@@ -5217,11 +5346,11 @@ msgid "  Delete %s?  "
 msgstr ""
 
 #: src/tree.c:777
-msgid "Static"
+msgid "Dynamc"
 msgstr ""
 
 #: src/tree.c:777
-msgid "Dynamc"
+msgid "Static"
 msgstr ""
 
 #: src/tree.c:867
@@ -5297,12 +5426,12 @@ msgid "name_trunc: too big"
 msgstr ""
 
 #. strftime() format string for recent dates
-#: src/util.c:602 src/util.c:627
+#: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
 msgstr ""
 
 #. strftime() format string for old dates
-#: src/util.c:603 src/util.c:625
+#: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
 msgstr ""
 
@@ -5377,6 +5506,11 @@ msgstr ""
 msgid "File: %s"
 msgstr ""
 
+#: src/view.c:728
+#, c-format
+msgid "Offset 0x%08x"
+msgstr ""
+
 #: src/view.c:739
 msgid "  [grow]"
 msgstr ""
@@ -5437,11 +5571,11 @@ msgid "RxSrch"
 msgstr ""
 
 #: src/view.c:2078
-msgid "EdText"
+msgid "EdHex"
 msgstr ""
 
 #: src/view.c:2078
-msgid "EdHex"
+msgid "EdText"
 msgstr ""
 
 #: src/view.c:2080
@@ -5457,19 +5591,23 @@ msgid "HxSrch"
 msgstr ""
 
 #: src/view.c:2086
-msgid "Raw"
+msgid "Parse"
 msgstr ""
 
 #: src/view.c:2086
-msgid "Parse"
+msgid "Raw"
+msgstr ""
+
+#: src/view.c:2090
+msgid "Format"
 msgstr ""
 
 #: src/view.c:2090
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2090
-msgid "Format"
+#: src/widget.c:999
+msgid " History "
 msgstr ""
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
@@ -5680,9 +5818,86 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Χαλασμένο αρχείο extfs"
 
+#: vfs/fish.c:136
+#, fuzzy, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "ftpfs: Αποσύνδεση από το %s"
+
+#: vfs/fish.c:214
+msgid "fish: Waiting for initial line..."
+msgstr ""
+
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
-msgstr "Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν υποστηρίζονται."
+msgstr ""
+"Με συγχωρείτε, αλλά προς το παρόν συνδέσεις με χρήση κωδικού δεν "
+"υποστηρίζονται."
+
+#: vfs/fish.c:238
+#, fuzzy
+msgid "fish: Sending password..."
+msgstr "ftpfs: αποστολή κωδικού χρήστη"
+
+#: vfs/fish.c:244
+msgid "fish: Sending initial line..."
+msgstr ""
+
+#: vfs/fish.c:248
+msgid "fish: Handshaking version..."
+msgstr ""
+
+#: vfs/fish.c:252
+#, fuzzy
+msgid "fish: Setting up current directory..."
+msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+
+#: vfs/fish.c:254
+#, fuzzy, c-format
+msgid "fish: Connected, home %s."
+msgstr "ftpfs: σύνδεση με το %s ολοκληρώθηκε"
+
+#: vfs/fish.c:331
+#, fuzzy, c-format
+msgid "fish: Reading directory %s..."
+msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
+
+#: vfs/fish.c:426
+#, fuzzy
+msgid "fish: got listing"
+msgstr "ftpfs: λήψη καταλόγου ολοκληρώθηκε"
+
+#: vfs/fish.c:430
+#, fuzzy
+msgid "fish: failed"
+msgstr "ftpfs: αποτυχία"
+
+#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
+#: vfs/fish.c:450
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr ""
+
+#: vfs/fish.c:464
+msgid "fish: Local read failed, sending zeros"
+msgstr ""
+
+#: vfs/fish.c:476
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%d)"
+msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
+
+#: vfs/fish.c:516
+#, fuzzy
+msgid "Aborting transfer..."
+msgstr "ftpfs: ακύρωση μεταφοράς."
+
+#: vfs/fish.c:525
+msgid "Error reported after abort."
+msgstr ""
+
+#: vfs/fish.c:527
+msgid "Aborted transfer would be successful."
+msgstr ""
 
 #: vfs/ftpfs.c:326
 #, c-format
@@ -5784,54 +5999,55 @@ msgstr "ftpfs: σφάλμα ακύρωσης: %s"
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: ακύρωση ανεπιτυχής"
 
-#: vfs/ftpfs.c:1160 vfs/ftpfs.c:1339
+#: vfs/ftpfs.c:1161 vfs/ftpfs.c:1340
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: ανεπιτυχές CWD (αλλαγή καταλόγου)"
 
-#: vfs/ftpfs.c:1170 vfs/ftpfs.c:1177
+#: vfs/ftpfs.c:1171 vfs/ftpfs.c:1178
 msgid "ftpfs: couldn't resolve symlink"
 msgstr ""
 
-#: vfs/ftpfs.c:1231
+#: vfs/ftpfs.c:1232
 msgid "Resolving symlink..."
 msgstr ""
 
-#: vfs/ftpfs.c:1333
+#: vfs/ftpfs.c:1334
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s... (χωρίς χρήση ορισμάτων ls του UNIX)"
+msgstr ""
+"ftpfs: Ανάγνωση καταλόγου FTP %s... (χωρίς χρήση ορισμάτων ls του UNIX)"
 
-#: vfs/ftpfs.c:1335
+#: vfs/ftpfs.c:1336
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
 msgstr "ftpfs: Ανάγνωση καταλόγου FTP %s..."
 
-#: vfs/ftpfs.c:1351
+#: vfs/ftpfs.c:1352
 msgid "ftpfs: FAIL"
 msgstr "ftpfs: ΑΠΟΤΥΧΙΑ"
 
-#: vfs/ftpfs.c:1442
+#: vfs/ftpfs.c:1443
 msgid "ftpfs: reading FTP directory interrupt by user"
 msgstr "ftpfs: διακοπή ανάγνωσης καταλόγου FTP από το χρήστη"
 
-#: vfs/ftpfs.c:1472
+#: vfs/ftpfs.c:1473
 msgid "ftpfs: got listing"
 msgstr "ftpfs: λήψη καταλόγου ολοκληρώθηκε"
 
-#: vfs/ftpfs.c:1485
+#: vfs/ftpfs.c:1486
 msgid "ftpfs: failed"
 msgstr "ftpfs: αποτυχία"
 
-#: vfs/ftpfs.c:1529
+#: vfs/ftpfs.c:1530
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr ""
 
-#: vfs/ftpfs.c:1593
+#: vfs/ftpfs.c:1594
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: αποθήκευση αρχείου %d (%d)"
 
-#: vfs/ftpfs.c:2029 vfs/ftpfs.c:2044
+#: vfs/ftpfs.c:2030 vfs/ftpfs.c:2045
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -5855,12 +6071,12 @@ msgid ""
 msgstr ""
 
 #: vfs/mcfs.c:174
-msgid " Yes "
-msgstr " Ναι "
-
-#: vfs/mcfs.c:174
 msgid " No "
 msgstr " Όχι "
+
+#: vfs/mcfs.c:174
+msgid " Yes "
+msgstr " Ναι "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
@@ -5877,6 +6093,26 @@ msgstr " Άκυρος κωδικός "
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
 msgstr " Υπέρβαση ορίου συνδέσεων "
+
+#: vfs/smbfs.c:1421
+#, c-format
+msgid " %s mkdir'ing %s "
+msgstr ""
+
+#: vfs/smbfs.c:1442
+#, c-format
+msgid " %s rmdir'ing %s "
+msgstr ""
+
+#: vfs/smbfs.c:1550 vfs/smbfs.c:1570 vfs/smbfs.c:1631
+#, c-format
+msgid " %s opening remote file %s "
+msgstr ""
+
+#: vfs/smbfs.c:1654
+#, fuzzy, c-format
+msgid " %s renaming files\n"
+msgstr "%s byte σε %d αρχεία"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -5905,3 +6141,15 @@ msgstr ""
 "Χμμ,...\n"
 "το %s\n"
 "δε μοιάζει με αρχείο tar."
+
+#: vfs/vfs.c:1792
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr ""
+
+#: vfs/vfs.c:1793
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr ""
+
+#~ msgid "Auto place icons"
+#~ msgstr "Αυτόματη τοποθέτηση εικονιδίων"

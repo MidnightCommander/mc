@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.33\n"
-"POT-Creation-Date: 1999-05-27 16:45-0500\n"
+"POT-Creation-Date: 1999-08-30 13:07+0200\n"
 "PO-Revision-Date: 1999-04-22 00:04+02:00\n"
 "Last-Translator: David Sauer <davids@penguin.cz>\n"
 "Language-Team: czech <cs@li.org>\n"
@@ -24,7 +24,7 @@ msgstr " Spustit makro "
 
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
-#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:715
+#: gtkedit/editcmd.c:712 gtkedit/editcmd.c:721
 msgid " Press macro hotkey: "
 msgstr " Stisknìte hotkey makra: "
 
@@ -36,125 +36,177 @@ msgstr " Vlo¾it znak "
 msgid " Press any key: "
 msgstr " Stisknìte libovolnou klávesu: "
 
-#: gnome/gcmd.c:58
+#: gnome/gaction.c:33
+#, c-format
+msgid ""
+"Unable to execute\n"
+"\"%s\".\n"
+"\n"
+"Please check it to see if it points to a valid command."
+msgstr ""
+
+#: gnome/gaction.c:40
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this, bring up the mime-properties editor in the GNOME Control "
+"Center, and edit the default %s-action for \"%s\"."
+msgstr ""
+
+#: gnome/gaction.c:46
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this error, bring up this file's properties and change the default "
+"%s-action."
+msgstr ""
+
+#: gnome/gaction.c:51
+#, c-format
+msgid ""
+"Unable to %s\n"
+"\"%s\"\n"
+"with the command:\n"
+"\"%s\"%s"
+msgstr ""
+
+#: gnome/gaction.c:134 gnome/gaction.c:150
+#, fuzzy
+msgid "open"
+msgstr "Otevøít"
+
+#: gnome/gaction.c:185 gnome/gaction.c:198
+#, fuzzy
+msgid "edit"
+msgstr "Editace"
+
+#: gnome/gaction.c:331
+#, fuzzy
+msgid "view"
+msgstr "Prohlí¾et"
+
+#: gnome/gcmd.c:48
 msgid " There is no other panel to compare contents to "
 msgstr " Neexistuje ¾ádný panel, se kterým by bylo mo¾no porovnávat "
 
-#: gnome/gcmd.c:109
+#: gnome/gcmd.c:99
 msgid "The Midnight Commander Team"
 msgstr "Vývojový tým programu Midnight Commander"
 
-#: gnome/gcmd.c:111
+#: gnome/gcmd.c:101
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
-msgstr "oznamování chyb: http://bugs.gnome.org, nebo pou¾ijte gnome-bug (anglicky)."
+msgstr ""
+"oznamování chyb: http://bugs.gnome.org, nebo pou¾ijte gnome-bug (anglicky)."
 
-#: gnome/gcmd.c:123
+#: gnome/gcmd.c:113
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:126
+#: gnome/gcmd.c:116
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "Midnight Commander: verze pro desktop Gnome."
 
-#: gnome/gcmd.c:261
+#: gnome/gcmd.c:289
 msgid "Sort By"
 msgstr "Seøadit podle"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:266
+#: gnome/gcmd.c:294
 msgid "Ignore case sensitivity."
 msgstr "Ignorovat velikost písmen."
 
-#: gnome/gcmd.c:269
+#: gnome/gcmd.c:297
 msgid "Sort files by "
 msgstr "Seøadit soubory podle "
 
-#: gnome/gcmd.c:274 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
+#: gnome/gcmd.c:302 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
 msgstr "Jméno"
 
-#: gnome/gcmd.c:281
+#: gnome/gcmd.c:309
 msgid "File Type"
 msgstr "Typ souboru"
 
-#: gnome/gcmd.c:287 gnome/gcustom-layout.c:47 src/screen.c:396
-#: src/screen.c:397
+#: gnome/gcmd.c:315 gnome/gcustom-layout.c:45 src/screen.c:414
+#: src/screen.c:415
 msgid "Size"
 msgstr "Délka"
 
-#: gnome/gcmd.c:293
+#: gnome/gcmd.c:321
 msgid "Time Last Accessed"
 msgstr "Èas posledního pøístupu"
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:327
 msgid "Time Last Modified"
 msgstr "Èas poslední modifikace"
 
-#: gnome/gcmd.c:305
+#: gnome/gcmd.c:333
 msgid "Time Last Changed"
 msgstr "Èas poslední zmìny"
 
-#: gnome/gcmd.c:319
+#: gnome/gcmd.c:347
 msgid "Reverse the order."
 msgstr "Obrátit poøadí."
 
-#: gnome/gcmd.c:384
+#: gnome/gcmd.c:394
 msgid "Enter name."
 msgstr "Zadejte jméno."
 
-#: gnome/gcmd.c:390
+#: gnome/gcmd.c:400
 msgid "Enter label for command:"
 msgstr "Zadejte oznaèení pro pøíkaz:"
 
-#: gnome/gcmd.c:495
+#: gnome/gcmd.c:505
 msgid "Find all core files"
 msgstr "Najít 'core' soubory"
 
-#: gnome/gcmd.c:498 src/panelize.c:350
+#: gnome/gcmd.c:508 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr "Najít odmítnuté èásti záplat (*.rej)"
 
-#: gnome/gcmd.c:543
+#: gnome/gcmd.c:553
 msgid "Run Command"
 msgstr "Spustit pøíkaz"
 
 #. Frame 1
-#: gnome/gcmd.c:548
+#: gnome/gcmd.c:558
 msgid "Preset Commands"
 msgstr "Nastavit pøíkazy"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:565 gnome/gcustom-layout.c:185
+#: gnome/gcmd.c:575 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "Pøidat"
 
-#: gnome/gcmd.c:569 gnome/gcustom-layout.c:186
+#: gnome/gcmd.c:579 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "Odstranit"
 
 #. Frame 2
-#: gnome/gcmd.c:577
+#: gnome/gcmd.c:587
 msgid "Run this Command"
 msgstr "Spustit tento Pøíkaz"
 
-#: gnome/gcmd.c:584
+#: gnome/gcmd.c:594
 msgid "Command: "
 msgstr "Pøíkaz:"
 
-#: gnome/gcmd.c:662
+#: gnome/gcmd.c:673
 msgid "Set Filter"
 msgstr "Nastavit filtr"
 
-#: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
-#: gnome/gscreen.c:2508
+#: gnome/gcmd.c:678 gnome/gcmd.c:719 gnome/gcmd.c:724 gnome/gcmd.c:728
+#: gnome/gscreen.c:2478
 msgid "Show all files"
 msgstr "V¹echny soubory"
 
-#: gnome/gcmd.c:674
+#: gnome/gcmd.c:685
 msgid "."
 msgstr "."
 
-#: gnome/gcmd.c:690
+#: gnome/gcmd.c:701
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -166,27 +218,27 @@ msgstr ""
 "Napøíklad:\n"
 "*.png pro soubory konèící .png"
 
-#: gnome/gcmd.c:692
+#: gnome/gcmd.c:703
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "Zadejte regulární výraz pro filtrování jmen soubporù."
 
-#: gnome/gcmd.c:752
+#: gnome/gcmd.c:763
 msgid " Open with..."
 msgstr " Otevøít èím..."
 
-#: gnome/gcmd.c:753
+#: gnome/gcmd.c:764
 msgid "Enter extra arguments:"
 msgstr "Zadejte dal¹í argumenty:"
 
-#: gnome/gcmd.c:815
+#: gnome/gcmd.c:827
 msgid "Desktop entry properties"
 msgstr "Vlastnosti pro polo¾ku na plo¹e."
 
-#: gnome/gcmd.c:841
+#: gnome/gcmd.c:853
 msgid "Select File"
 msgstr "Vyberte soubor"
 
-#: gnome/gcmd.c:849
+#: gnome/gcmd.c:861
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -198,124 +250,151 @@ msgstr ""
 "Napøíklad:\n"
 "*.png vybere soubory konèící na .png (obrázky formátu PNG)"
 
-#: gnome/gcmd.c:851
+#: gnome/gcmd.c:863
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Zadejte regulární výraz popisující názvy souborù, které chcete vidìt."
 
-#: gnome/gcmd.c:897 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:909 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
 msgstr "  ©patnì zadaný regulární výraz  "
 
-#: gnome/gcmd.c:942
+#: gnome/gcmd.c:954
 msgid "Creating a desktop link"
 msgstr "Vytvoøení odkazu na plo¹e"
 
-#: gnome/gcmd.c:943
+#: gnome/gcmd.c:955
 msgid "Enter the URL:"
 msgstr "Zadejte URL:"
 
-#: gnome/gcustom-layout.c:36
+#: gnome/gcustom-layout.c:34
 msgid "Access Time"
 msgstr "Èas pøístupu"
 
-#: gnome/gcustom-layout.c:37
+#: gnome/gcustom-layout.c:35
 msgid "Creation Time"
 msgstr "Èas vytvoøení"
 
 #. Group
-#: gnome/gcustom-layout.c:38 gnome/gnome-file-property-dialog.c:776
-#: gnome/gnome-file-property-dialog.c:940 gnome/gprop.c:280 gnome/gprop.c:405
-#: src/screen.c:409
+#: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:776
+#: gnome/gnome-file-property-dialog.c:945 gnome/gprop.c:280 gnome/gprop.c:405
+#: src/screen.c:427
 msgid "Group"
 msgstr "Skupina"
 
-#: gnome/gcustom-layout.c:39
+#: gnome/gcustom-layout.c:37
 msgid "Group ID"
 msgstr "Èíslo skupiny"
 
-#: gnome/gcustom-layout.c:40
+#: gnome/gcustom-layout.c:38
 msgid "Inode Number"
 msgstr "Èíslo i-uzlu"
 
-#: gnome/gcustom-layout.c:41 src/achown.c:378
+#: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
 msgstr "Mode"
 
-#: gnome/gcustom-layout.c:42
+#: gnome/gcustom-layout.c:40
 msgid "Modification Time"
 msgstr "Èas zmìny"
 
-#: gnome/gcustom-layout.c:44
+#: gnome/gcustom-layout.c:42
 msgid "Number of Hard Links"
 msgstr "Poèet pøímých odkazù"
 
 #. Owner
-#: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:925
-#: gnome/gprop.c:390 src/screen.c:408
+#: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:930
+#: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
 msgstr "Vlastník"
 
-#: gnome/gcustom-layout.c:46 src/screen.c:402
+#: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
 msgstr "Práva"
 
-#: gnome/gcustom-layout.c:48
+#: gnome/gcustom-layout.c:46
 msgid "Size (short)"
 msgstr "Velikost (krátce)"
 
-#: gnome/gcustom-layout.c:49
+#: gnome/gcustom-layout.c:47
 msgid "Type"
 msgstr "Typ"
 
-#: gnome/gcustom-layout.c:50
+#: gnome/gcustom-layout.c:48
 msgid "User ID"
 msgstr "Èíslo u¾ivatele"
 
-#: gnome/gcustom-layout.c:144
+#: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
 msgstr "Mo¾né sloupce"
 
-#: gnome/gcustom-layout.c:164
+#: gnome/gcustom-layout.c:162
 msgid "Displayed Columns"
 msgstr "Zobrazené sloupce"
 
-#: gnome/gcustom-layout.c:306
+#: gnome/gcustom-layout.c:304
 msgid "Custom View"
 msgstr "Vlastní formát pohledu"
 
-#: gnome/gdesktop.c:425 gnome/gdesktop.c:2052 gnome/gmount.c:321
+#. Icon position
+#: gnome/gdesktop-prefs.c:242
+msgid "Icon position"
+msgstr ""
+
+#. Snap and placement
+#: gnome/gdesktop-prefs.c:258
+msgid "Automatic icon placement"
+msgstr ""
+
+#: gnome/gdesktop-prefs.c:262
+msgid "Snap icons to grid"
+msgstr "Zarovnávat ikony"
+
+#: gnome/gdesktop-prefs.c:277
+msgid "Use shaped icons"
+msgstr "Ikony budou bez podkladu"
+
+#: gnome/gdesktop-prefs.c:281
+#, fuzzy
+msgid "Use shaped text"
+msgstr "Ikony budou bez podkladu"
+
+#: gnome/gdesktop-prefs.c:335
+msgid "Desktop"
+msgstr "Plocha"
+
+#: gnome/gdesktop.c:520 gnome/gdesktop.c:2207 gnome/gmount.c:324
 msgid "Warning"
 msgstr "Varování"
 
-#: gnome/gdesktop.c:426
+#: gnome/gdesktop.c:521
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Nelze otevøít %s; na plo¹e nebudete mít ikony"
 
-#: gnome/gdesktop.c:1019
+#: gnome/gdesktop.c:1178
 msgid "While running the mount/umount command"
 msgstr "Pøi spou¹tìní pøíkazu pro pøipojení/odpojení"
 
-#: gnome/gdesktop.c:1088
+#: gnome/gdesktop.c:1247
 msgid "While running the eject command"
 msgstr "Pøi spu¹tìní pøíkazu pro vysunutí média"
 
-#: gnome/gdesktop.c:1272 gnome/gicon.c:154 gnome/gtools.c:46
+#: gnome/gdesktop.c:1431 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Chyba"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2048
+#: gnome/gdesktop.c:2203
 msgid "Home directory"
 msgstr "Domácí adresáø"
 
-#: gnome/gdesktop.c:2053
+#: gnome/gdesktop.c:2208
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
 "Nelze vutvoøit symbolický odkaz %s na %s; na Plo¹e nebudou poèáteèní ikony."
 
-#: gnome/gdesktop.c:2398
+#: gnome/gdesktop.c:2587
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -328,57 +407,92 @@ msgstr ""
 "\n"
 "Nelze nastavit pozadí Plochy."
 
-#: gnome/gdesktop.c:2407 gnome/glayout.c:361
-msgid "_Terminal"
-msgstr "_Terminál"
-
-#: gnome/gdesktop.c:2407 gnome/glayout.c:361
+#: gnome/gdesktop.c:2610 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
 msgstr "V aktuálním adresáøi odstartovat nový terminál."
 
-#. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2409 gnome/glayout.c:363
-msgid "_Directory..."
-msgstr "_Adresáø..."
+#: gnome/gdesktop.c:2610 gnome/glayout.c:361
+msgid "_Terminal"
+msgstr "_Terminál"
 
-#: gnome/gdesktop.c:2409 gnome/glayout.c:363
+#: gnome/gdesktop.c:2612 gnome/glayout.c:363
 msgid "Creates a new directory"
 msgstr "Vytvoøí nový adresáø"
 
-#: gnome/gdesktop.c:2410
-msgid "URL L_ink..."
-msgstr "Odkaz na _URL..."
+#. If this ever changes, make sure you update create_new_menu accordingly.
+#: gnome/gdesktop.c:2612 gnome/glayout.c:363
+msgid "_Directory..."
+msgstr "_Adresáø..."
 
-#: gnome/gdesktop.c:2410
+#: gnome/gdesktop.c:2613
 msgid "Creates a new URL link"
 msgstr "Vytvoøí nový odkaz na URL"
 
-#: gnome/gdesktop.c:2411
-msgid "_Launcher..."
-msgstr "_Spou¹tìè..."
+#: gnome/gdesktop.c:2613
+msgid "URL L_ink..."
+msgstr "Odkaz na _URL..."
 
-#: gnome/gdesktop.c:2411
+#: gnome/gdesktop.c:2614
 msgid "Creates a new launcher"
 msgstr "Vytvoøí nový spou¹tìè"
 
-#: gnome/gdesktop.c:2419 gnome/glayout.c:451
-msgid "Arrange Icons"
+#: gnome/gdesktop.c:2614
+msgid "_Launcher..."
+msgstr "_Spou¹tìè..."
+
+#: gnome/gdesktop.c:2620
+#, fuzzy
+msgid "By _Name"
+msgstr " Jméno "
+
+#: gnome/gdesktop.c:2621
+#, fuzzy
+msgid "By File _Type"
+msgstr "Typ souboru"
+
+#: gnome/gdesktop.c:2622
+#, fuzzy
+msgid "By _Size"
+msgstr " Délka "
+
+#: gnome/gdesktop.c:2623
+#, fuzzy
+msgid "By Time Last _Accessed"
+msgstr "Èas posledního pøístupu"
+
+#: gnome/gdesktop.c:2624
+#, fuzzy
+msgid "By Time Last _Modified"
+msgstr "Èas poslední modifikace"
+
+#: gnome/gdesktop.c:2625
+#, fuzzy
+msgid "By Time Last _Changed"
+msgstr "Èas poslední zmìny"
+
+#: gnome/gdesktop.c:2633 gnome/glayout.c:455
+#, fuzzy
+msgid "_Arrange Icons"
 msgstr "Srovnat ikony"
 
-#: gnome/gdesktop.c:2420
-msgid "Create New Window"
+#: gnome/gdesktop.c:2634
+#, fuzzy
+msgid "Create _New Window"
 msgstr "Vytvoøit nové okno správce souborù"
 
-#: gnome/gdesktop.c:2422
-msgid "Recreate Desktop Shortcuts"
+#: gnome/gdesktop.c:2636 gnome/glayout.c:457
+#, fuzzy
+msgid "Recreate Desktop _Shortcuts"
 msgstr "Znovu vytvoøit odkazy na plo¹e"
 
-#: gnome/gdesktop.c:2423 gnome/glayout.c:454
-msgid "Rescan Desktop"
+#: gnome/gdesktop.c:2637 gnome/glayout.c:458
+#, fuzzy
+msgid "Rescan _Desktop"
 msgstr "Aktualizovat obsah plochy"
 
-#: gnome/gdesktop.c:2424
-msgid "Configure Background Image"
+#: gnome/gdesktop.c:2638
+#, fuzzy
+msgid "Configure _Background Image"
 msgstr "Konfigurace obrázku pozadí"
 
 #: gnome/gdialogs.c:60
@@ -393,11 +507,11 @@ msgstr "Kopírování z: "
 msgid "Deleting file: "
 msgstr "Ma¾e se soubor: "
 
-#: gnome/gdialogs.c:370
+#: gnome/gdialogs.c:371
 msgid "Files Exist"
 msgstr "Soubory existují"
 
-#: gnome/gdialogs.c:385
+#: gnome/gdialogs.c:386
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
@@ -405,77 +519,77 @@ msgstr ""
 "Nìkteré ze souborù, které zkou¹íte kopírovat ji¾ existují v cílovém \n"
 "adresáøi. Vyberte nìkterém z následujících akcí."
 
-#: gnome/gdialogs.c:398
+#: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
 msgstr "Pøed pøepisem souborù se zeptat."
 
-#: gnome/gdialogs.c:405
+#: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
 msgstr "Nepøepisovat soubory."
 
-#: gnome/gdialogs.c:421
+#: gnome/gdialogs.c:422
 msgid "Overwrite:"
 msgstr "Pøepsat:"
 
-#: gnome/gdialogs.c:428
+#: gnome/gdialogs.c:429
 msgid "Older files."
 msgstr "Star¹í soubory."
 
-#: gnome/gdialogs.c:434
+#: gnome/gdialogs.c:435
 msgid "Files only if size differs."
 msgstr "Jestli¾e se délky li¹í"
 
-#: gnome/gdialogs.c:440
+#: gnome/gdialogs.c:441
 msgid "All files."
 msgstr "V¹echny soubory."
 
-#: gnome/gdialogs.c:480
+#: gnome/gdialogs.c:481
 msgid "File Exists"
 msgstr "Soubor existuje"
 
-#: gnome/gdialogs.c:486
+#: gnome/gdialogs.c:487
 #, c-format
 msgid "The target file already exists: %s"
 msgstr "Cílový soubor u¾ existuje: %s"
 
-#: gnome/gdialogs.c:493
+#: gnome/gdialogs.c:494
 msgid "Replace it?"
 msgstr "Nahradit ?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1069 src/file.c:802
-#: src/screen.c:2365 src/screen.c:2395 src/tree.c:1015
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1097 gtkedit/gtkedit.c:1250
+#: src/file.c:802 src/screen.c:2398 src/screen.c:2428 src/tree.c:1015
 msgid "Copy"
 msgstr "Kopírovat"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1070
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1098 gtkedit/gtkedit.c:1252
 msgid "Move"
 msgstr "Pøesunout"
 
-#: gnome/gdialogs.c:588
+#: gnome/gdialogs.c:583
 msgid "Destination"
 msgstr "Cíl"
 
-#: gnome/gdialogs.c:592
+#: gnome/gdialogs.c:597
 msgid "Find Destination Folder"
 msgstr "Najít cílový adresáø"
 
-#: gnome/gdialogs.c:597
+#: gnome/gdialogs.c:611
 msgid "Copy as a background process"
 msgstr "Kopírovat na pozadí"
 
-#: gnome/gdialogs.c:617
+#: gnome/gdialogs.c:629
 msgid "Advanced Options"
 msgstr "Pokroèilej¹í nastavení"
 
-#: gnome/gdialogs.c:621
+#: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
 msgstr "Chránit symbolické odkazy "
 
-#: gnome/gdialogs.c:631
+#: gnome/gdialogs.c:643
 msgid "Follow links."
 msgstr "Následovat linky."
 
-#: gnome/gdialogs.c:637
+#: gnome/gdialogs.c:649
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
@@ -484,23 +598,23 @@ msgstr ""
 "\n"
 "odkazuje symbolický odkaz, nikoli tento odkaz samotný."
 
-#: gnome/gdialogs.c:642
+#: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
 msgstr "Zachovat atributy"
 
-#: gnome/gdialogs.c:647
+#: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "Zachovávat pøístupová práva, vlastníka a skupinu (je-li to mo¾né)"
 
-#: gnome/gdialogs.c:653
+#: gnome/gdialogs.c:666
 msgid "Recursively copy subdirectories."
 msgstr "Rekurzivní kopie adresáøù"
 
-#: gnome/gdialogs.c:658
+#: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
 msgstr "Pokud je nastaveno, budou adresøe kopírovány rekurzivnì"
 
-#: gnome/gdialogs.c:767
+#: gnome/gdialogs.c:780
 #, c-format
 msgid ""
 "%s\n"
@@ -511,58 +625,58 @@ msgstr ""
 "\n"
 "Adresáø není prázdný. Smazat vèetnì podadresáøù? "
 
-#: gnome/gdialogs.c:776 src/file.c:2228
+#: gnome/gdialogs.c:790 src/file.c:2247
 msgid " Delete: "
 msgstr " Smazat: "
 
-#: gnome/gdialogs.c:780
+#: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
 msgstr "Toté¾ pro zbývající soubory"
 
-#: gnome/gdialogs.c:863
+#: gnome/gdialogs.c:877
 msgid "Move Progress"
 msgstr "Prùbìh pøesunù"
 
-#: gnome/gdialogs.c:866
+#: gnome/gdialogs.c:880
 msgid "Copy Progress"
 msgstr "Prùbìh kopírování"
 
-#: gnome/gdialogs.c:869
+#: gnome/gdialogs.c:883
 msgid "Delete Progress"
 msgstr "Prùbìh mazání"
 
-#: gnome/gdialogs.c:919
+#: gnome/gdialogs.c:939
 msgid "File "
 msgstr "Soubor "
 
-#: gnome/gdialogs.c:923
+#: gnome/gdialogs.c:943
 msgid "is "
 msgstr "je "
 
-#: gnome/gdialogs.c:926
+#: gnome/gdialogs.c:946
 msgid "done."
 msgstr "zpracován."
 
-#. Translators should take care as "Password" or its translations
-#. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:986 src/wtools.c:587 vfs/vfs.c:1775
-msgid "Password:"
-msgstr "Heslo:"
-
-#: gnome/gdialogs.c:986
+#: gnome/gdialogs.c:1007
 msgid "Password"
 msgstr "Heslo"
 
+#. Translators should take care as "Password" or its translations
+#. are used to identify password boxes and hide characters with "*"
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1808
+msgid "Password:"
+msgstr "Heslo:"
+
 #. Create the dialog
-#: gnome/gdialogs.c:1018
+#: gnome/gdialogs.c:1039
 msgid "Symbolic Link"
 msgstr "Symbolický odkaz:"
 
-#: gnome/gdialogs.c:1034 src/boxes.c:803
+#: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Existující jméno (na nìj¾ bude symlink ukazovat):"
 
-#: gnome/gdialogs.c:1048 src/boxes.c:801
+#: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
 msgstr "Jméno symbolického linku:"
 
@@ -592,7 +706,7 @@ msgstr ""
 " Nelze provést stat na %s\n"
 "%s"
 
-#: gnome/gicon.c:154
+#: gnome/gicon.c:218
 msgid "Default set of icons not found, please check your installation"
 msgstr "Standardní sada ikon nebyla nalezena. Zkontrolujte instalaci."
 
@@ -677,30 +791,30 @@ msgstr ""
 "'gmc'\n"
 "Stiskem OK ukonèíte správce souborù, jinak bude tato akce zru¹ena."
 
-#. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384
-msgid "_Copy..."
-msgstr "_Kopírovat..."
-
 #: gnome/glayout.c:384
 msgid "Copy files"
 msgstr "Kopírovat soubory"
 
-#: gnome/glayout.c:385
-msgid "_Delete..."
-msgstr "_Smazat..."
+#. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
+#: gnome/glayout.c:384 gnome/gscreen.c:2147
+msgid "_Copy..."
+msgstr "_Kopírovat..."
 
 #: gnome/glayout.c:385
 msgid "Delete files"
 msgstr "Smazat soubory"
 
-#: gnome/glayout.c:386
-msgid "_Move..."
-msgstr "_Pøesunout..."
+#: gnome/glayout.c:385 gnome/gscreen.c:2148
+msgid "_Delete..."
+msgstr "_Smazat..."
 
 #: gnome/glayout.c:386
 msgid "Rename or move files"
 msgstr "Pøesunout nebo pøejmenovat soubory"
+
+#: gnome/glayout.c:386 gnome/gscreen.c:2149
+msgid "_Move..."
+msgstr "_Pøesunout..."
 
 #: gnome/glayout.c:388
 msgid "Show directory sizes"
@@ -719,127 +833,127 @@ msgid "Select all files in the current Panel"
 msgstr "Vybrat v¹echny soubory v aktuálním panelu"
 
 #: gnome/glayout.c:397
-msgid "_Select Files..."
-msgstr "vybrat _Soubory..."
-
-#: gnome/glayout.c:397
 msgid "Select a group of files"
 msgstr "Vybrat skupinu souborù"
 
-#: gnome/glayout.c:398
-msgid "_Invert Selection"
-msgstr "_Invertovat výbìr"
+#: gnome/glayout.c:397
+msgid "_Select Files..."
+msgstr "vybrat _Soubory..."
 
 #: gnome/glayout.c:398
 msgid "Reverses the list of tagged files"
 msgstr "Zru¹í oznaèení oznaèených souborù a oznaèí ty dosud neoznaèené."
 
-#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2038
+#: gnome/glayout.c:398
+msgid "_Invert Selection"
+msgstr "_Invertovat výbìr"
+
+#: gnome/glayout.c:401 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
 msgstr "Hledat"
 
-#: gnome/glayout.c:400
+#: gnome/glayout.c:401
 msgid "Search for a file in the current Panel"
 msgstr "Hledat soubor v aktuálním panelu"
 
-#: gnome/glayout.c:403 gnome/gscreen.c:1447
-msgid "_Rescan Directory"
-msgstr "_Aktualizovat zobrazení adresáøe"
-
-#: gnome/glayout.c:403
+#: gnome/glayout.c:404
 msgid "Rescan the directory contents"
 msgstr "Obnovit zobrazení obsahu adresáøe"
 
-#: gnome/glayout.c:410
-msgid "_Sort By..."
-msgstr "_Seøadit podle..."
+#: gnome/glayout.c:404 gnome/gscreen.c:1508
+msgid "_Rescan Directory"
+msgstr "_Aktualizovat zobrazení adresáøe"
 
-#: gnome/glayout.c:410
+#: gnome/glayout.c:414
 msgid "Confirmation settings"
 msgstr "Nastavení potvrzování"
 
-#: gnome/glayout.c:411
-msgid "_Filter View..."
-msgstr "_Filtrovat.."
+#: gnome/glayout.c:414
+msgid "_Sort By..."
+msgstr "_Seøadit podle..."
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:415
 msgid "Global option settings"
 msgstr "Globální nastavení"
 
-#: gnome/glayout.c:418
-msgid "_Find File..."
-msgstr "_Hledat soubor"
+#: gnome/glayout.c:415
+msgid "_Filter View..."
+msgstr "_Filtrovat.."
 
-#: gnome/glayout.c:418
+#: gnome/glayout.c:422
 msgid "Locate files on disk"
 msgstr "Najít soubor na disku"
 
-#. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:421
-msgid "_Edit mime types..."
-msgstr "_Upravit MIME typy"
+#: gnome/glayout.c:422
+msgid "_Find File..."
+msgstr "_Hledat soubor"
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "Edits the MIME type bindings"
 msgstr "Úprava informací o MIME typech"
 
-#: gnome/glayout.c:423
-msgid "_Run Command..."
-msgstr "_Provést pøíkaz..."
+#. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
+#: gnome/glayout.c:425
+msgid "_Edit mime types..."
+msgstr "_Upravit MIME typy"
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:427
 msgid "Runs a command"
 msgstr "Spustit pøíkaz"
 
-#: gnome/glayout.c:425
-msgid "_Run Command in panel..."
-msgstr "P_rovést pøíkaz v panelu..."
+#: gnome/glayout.c:427
+msgid "_Run Command..."
+msgstr "_Provést pøíkaz..."
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:429
 msgid "Run a command and put the results in a panel"
 msgstr "Spustit pøíkaz a zobrazit výsledek v panelu"
 
-#: gnome/glayout.c:435
-msgid "_Background jobs..."
-msgstr "Úlohy na _Pozadí"
+#: gnome/glayout.c:429
+msgid "_Run Command in panel..."
+msgstr "P_rovést pøíkaz v panelu..."
 
-#: gnome/glayout.c:435
+#: gnome/glayout.c:439
 msgid "List of background operations"
 msgstr "Seznam operací na pozadí"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:439
+msgid "_Background jobs..."
+msgstr "Úlohy na _Pozadí"
+
+#: gnome/glayout.c:442
 msgid "Exit"
 msgstr "Konec"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:442
 msgid "Terminates the file manager and the desktop"
 msgstr "Ukonèit správce souborù a správu ploch"
 
-#: gnome/glayout.c:453
-msgid "Rescan System Devices"
-msgstr "Obnovit informace o zaøízeních"
+#: gnome/glayout.c:465 gnome/glayout.c:476
+msgid "_Settings"
+msgstr ""
 
-#: gnome/glayout.c:461 gnome/glayout.c:471
+#: gnome/glayout.c:466 gnome/glayout.c:477
 msgid "_Layout"
 msgstr "_Zobrazení"
 
-#: gnome/glayout.c:462 gnome/glayout.c:472
+#: gnome/glayout.c:467 gnome/glayout.c:478
 msgid "_Commands"
 msgstr "_Pøíkazy"
 
-#: gnome/glayout.c:463
+#: gnome/glayout.c:468
 msgid "_Desktop"
 msgstr "_Plocha"
 
-#: gnome/glayout.c:464 gnome/glayout.c:473
+#: gnome/glayout.c:469 gnome/glayout.c:479
 msgid "_Help"
 msgstr "_Pomoc"
 
-#: gnome/glayout.c:613
+#: gnome/glayout.c:619
 msgid "File/New/Directory..."
 msgstr "Soubor/Nový/Adresáø"
 
-#: gnome/gmain.c:555
+#: gnome/gmain.c:558
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -850,6 +964,42 @@ msgstr ""
 "\n"
 "Jako root mù¾ete, pokud nebudete dostateènì opatrný(á) ponièit Vá¹ systém,\n"
 "ale Správce souborù nebude schopen Vám v tom zabránit."
+
+#: gnome/gmount.c:195
+msgid "Could not open the /etc/fstab file"
+msgstr " Nelze otevøít soubor /etc/fstab"
+
+#: gnome/gmount.c:325
+#, c-format
+msgid "Could not symlink %s to %s; will not have such a desktop device icon."
+msgstr ""
+"Nelze vytvoøit symbolický odkaz z %s na %s; nebude vytvoøena ikona pro dané "
+"zaøízení."
+
+#: gnome/gmount.c:377 gnome/gmount.c:392
+#, c-format
+msgid "CD-ROM %d"
+msgstr "CD-ROM %d"
+
+#: gnome/gmount.c:382
+#, c-format
+msgid "Floppy %d"
+msgstr "Disketa %d"
+
+#: gnome/gmount.c:388
+#, c-format
+msgid "Disk %d"
+msgstr "Disk %d"
+
+#: gnome/gmount.c:398
+#, c-format
+msgid "NFS dir %s"
+msgstr "Adresáø NFS %s"
+
+#: gnome/gmount.c:402
+#, c-format
+msgid "Device %d"
+msgstr "Zaøízení: %d"
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
@@ -897,14 +1047,14 @@ msgid "File Type: FIFO"
 msgstr "Typ souboru: FIFO"
 
 #: gnome/gnome-file-property-dialog.c:238
+msgid " bytes"
+msgstr " bytù"
+
+#: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
 msgid "File Size: "
 msgstr "Délka souboru:"
-
-#: gnome/gnome-file-property-dialog.c:238
-msgid " bytes"
-msgstr " bytù"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
@@ -943,9 +1093,19 @@ msgstr "URL:"
 msgid "Caption:"
 msgstr "Popiska:"
 
+#: gnome/gnome-file-property-dialog.c:387
+#: gnome/gnome-file-property-dialog.c:489
+msgid "Drop Action"
+msgstr "Akce pøi polo¾ení souboru"
+
+#: gnome/gnome-file-property-dialog.c:388
+#, fuzzy
+msgid "Use default Drop Action options"
+msgstr "Pouøí standardní akci pro pokládání souborù"
+
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2363 src/screen.c:2393
+#: src/screen.c:2396 src/screen.c:2426
 msgid "View"
 msgstr "Prohlí¾et"
 
@@ -966,10 +1126,6 @@ msgstr "Otevøít"
 msgid "Use default Open action"
 msgstr "Pou¾ít standardní akci pro otevøení"
 
-#: gnome/gnome-file-property-dialog.c:489
-msgid "Drop Action"
-msgstr "Akce pøi polo¾ení souboru"
-
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
 msgstr "Pouøí standardní akci pro pokládání souborù"
@@ -979,7 +1135,7 @@ msgid "Use default View action"
 msgstr "Pou¾í standardní akci pro prohlí¾ení"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2364 src/screen.c:2394 src/view.c:2034
+#: src/screen.c:2397 src/screen.c:2427 src/view.c:2079
 msgid "Edit"
 msgstr "Editace"
 
@@ -1051,45 +1207,51 @@ msgstr "Nastavení GID"
 msgid "Sticky"
 msgstr "Sticky"
 
-#: gnome/gnome-file-property-dialog.c:914
+#: gnome/gnome-file-property-dialog.c:815
+#: gnome/gnome-file-property-dialog.c:905
+#, fuzzy, c-format
+msgid "<Unknown> (%d)"
+msgstr "<Není známo>"
+
+#: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
 msgstr "Vlastnictví souboru"
 
-#: gnome/gnome-file-property-dialog.c:1074
+#: gnome/gnome-file-property-dialog.c:1079
 msgid "URL"
 msgstr "URL"
 
-#: gnome/gnome-file-property-dialog.c:1077
+#: gnome/gnome-file-property-dialog.c:1082
 msgid "Statistics"
 msgstr "Statistiky"
 
-#: gnome/gnome-file-property-dialog.c:1083
+#: gnome/gnome-file-property-dialog.c:1088
 msgid "Options"
 msgstr "Volby"
 
-#: gnome/gnome-file-property-dialog.c:1086
+#: gnome/gnome-file-property-dialog.c:1091
 msgid "Permissions"
 msgstr "Pøístupová práva"
 
-#: gnome/gnome-file-property-dialog.c:1089
+#: gnome/gnome-file-property-dialog.c:1094
 msgid " Properties"
 msgstr " Vlastnosti"
 
-#: gnome/gnome-file-property-dialog.c:1140
+#: gnome/gnome-file-property-dialog.c:1145
 msgid "You entered an invalid username"
 msgstr "Nebylo zadáno jméno existujícího u¾ivatele"
 
-#: gnome/gnome-file-property-dialog.c:1185
+#: gnome/gnome-file-property-dialog.c:1190
 msgid "You must rename your file to something"
 msgstr "Musíte soubor nìjak pøejmenovat"
 
-#: gnome/gnome-file-property-dialog.c:1191
+#: gnome/gnome-file-property-dialog.c:1196
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Soubor nelze pøejmenovat, pokud nové jméno obsahuje znak '/'"
 
-#. the first label
-#: gnome/gnome-open-dialog.c:383
-msgid "Select an application to open \""
+#: gnome/gnome-open-dialog.c:384
+#, fuzzy, c-format
+msgid "Select an application to open \"%s\" with."
 msgstr "Vyberte aplikaci, kterou bude otevøeno \""
 
 #: gnome/gnome-open-dialog.c:394
@@ -1129,8 +1291,8 @@ msgstr "Nefiltrovat"
 msgid "Copy..."
 msgstr "Kopírovat..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2368
-#: src/screen.c:2398
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2401
+#: src/screen.c:2431
 msgid "Delete"
 msgstr "Smazat"
 
@@ -1154,103 +1316,87 @@ msgstr "Upravit symlink..."
 msgid "Properties..."
 msgstr "Vlastnosti"
 
-#: gnome/gprefs.c:88
+#: gnome/gprefs.c:92
 msgid "Show backup files"
 msgstr "Ukazovat zálohy souborù"
 
-#: gnome/gprefs.c:92
+#: gnome/gprefs.c:96
 msgid "Show hidden files"
 msgstr "Ukazovat skryté soubory"
 
-#: gnome/gprefs.c:96
+#: gnome/gprefs.c:100
 msgid "Mix files and directories"
 msgstr "Míchat soubory a adresáøe"
 
-#: gnome/gprefs.c:100
+#: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
 msgstr "Pou¾ívat vzory jako v shellu, nikoli regulární výrazy"
 
-#: gnome/gprefs.c:109
+#: gnome/gprefs.c:113
 msgid "Confirm when deleting file"
 msgstr "Potvrzovat mazání souborù"
 
-#: gnome/gprefs.c:113
+#: gnome/gprefs.c:117
 msgid "Confirm when overwriting files"
 msgstr "Potvrzovat pøepis souborù"
 
-#: gnome/gprefs.c:117
+#: gnome/gprefs.c:121
 msgid "Confirm when executing files"
 msgstr "Potvrzovat spou¹tìní programù"
 
-#: gnome/gprefs.c:121
+#: gnome/gprefs.c:125
 msgid "Show progress while operations are being performed"
 msgstr "Ukazovat prùbìh operací"
 
-#: gnome/gprefs.c:130
+#: gnome/gprefs.c:134
 msgid "VFS Timeout:"
 msgstr "Doba platnosti obsahu VFS:"
 
-#: gnome/gprefs.c:131 gnome/gprefs.c:156
+#: gnome/gprefs.c:135 gnome/gprefs.c:160
 msgid "Seconds"
 msgstr "Sekund"
 
-#: gnome/gprefs.c:134
+#: gnome/gprefs.c:138
 msgid "Anonymous FTP password:"
 msgstr "Heslo pro anonymní ftp:"
 
-#: gnome/gprefs.c:138
+#: gnome/gprefs.c:142
 msgid "Always use FTP proxy"
 msgstr "V¾dy pou¾ít ftp proxy"
 
-#: gnome/gprefs.c:147
+#: gnome/gprefs.c:151
 msgid "Fast directory reload"
 msgstr "Rychlé naèítání adresáøù"
 
-#: gnome/gprefs.c:151
+#: gnome/gprefs.c:155
 msgid "Compute totals before copying files"
 msgstr "Pøed kopírováním zjistit celkovou velikost"
 
-#: gnome/gprefs.c:155
+#: gnome/gprefs.c:159
 msgid "FTP directory cache timeout :"
 msgstr "Zru¹it platnost FTP ke¹e po:"
 
-#: gnome/gprefs.c:159
+#: gnome/gprefs.c:163
 msgid "Allow customization of icons in icon view"
 msgstr "Pøi zobrazení ikon povolit jejich zmìny"
 
-#: gnome/gprefs.c:167
-msgid "Use shaped icons"
-msgstr "Ikony budou bez podkladu"
-
-#: gnome/gprefs.c:171
-msgid "Auto place icons"
-msgstr "Automatické nastavení pozice ikon"
-
-#: gnome/gprefs.c:175
-msgid "Snap icons to grid"
-msgstr "Zarovnávat ikony"
-
-#: gnome/gprefs.c:184
+#: gnome/gprefs.c:172
 msgid "File display"
 msgstr "Zobrazit soubor"
 
-#: gnome/gprefs.c:188
+#: gnome/gprefs.c:176
 msgid "Confirmation"
 msgstr "Potvrzování"
 
-#: gnome/gprefs.c:192
+#: gnome/gprefs.c:180
 msgid "VFS"
 msgstr "VFS"
 
-#: gnome/gprefs.c:196
+#: gnome/gprefs.c:184
 msgid "Caching"
 msgstr "Ke¹"
 
-#: gnome/gprefs.c:200
-msgid "Desktop"
-msgstr "Plocha"
-
-#: gnome/gprefs.c:479
+#: gnome/gprefs.c:474
 msgid "Preferences"
 msgstr "Priority"
 
@@ -1294,152 +1440,99 @@ msgstr "Titulek"
 msgid "Select icon"
 msgstr "Vybrat ikonu"
 
-#: gnome/gscreen.c:1447
+#: gnome/gscreen.c:1508
 msgid "Reloads the current directory"
 msgstr "Znovu naète aktuální adresáø"
 
-#: gnome/gscreen.c:1449
-msgid "New _Directory..."
-msgstr "Nový _Adresáø..."
-
-#: gnome/gscreen.c:1449
+#: gnome/gscreen.c:1510
 msgid "Creates a new directory here"
 msgstr "Nový adresáø zde"
 
-#: gnome/gscreen.c:1630
-msgid "All files"
-msgstr "V¹echny soubory"
+#: gnome/gscreen.c:1510
+msgid "New _Directory..."
+msgstr "Nový _Adresáø..."
 
-#: gnome/gscreen.c:1632
-msgid "Archives and compressed files"
-msgstr "Archivy a komprimované soubory"
-
-#: gnome/gscreen.c:1634
-msgid "RPM/DEB files"
-msgstr "Soubory RPM/DEB"
-
-#: gnome/gscreen.c:1636
-msgid "Text/Document files"
-msgstr "Textové soubory a dokumenty"
-
-#: gnome/gscreen.c:1638
-msgid "HTML and SGML files"
-msgstr "Soubory HTML a SGML"
-
-#: gnome/gscreen.c:1640
-msgid "Postscript and PDF files"
-msgstr "Postscript a PDF"
-
-#: gnome/gscreen.c:1642
-msgid "Spreadsheet files"
-msgstr "Soubory tabulkových kalkulátorù"
-
-#: gnome/gscreen.c:1644
-msgid "Image files"
-msgstr "Obrázky"
-
-#: gnome/gscreen.c:1647
-msgid "Video/animation files"
-msgstr "Video/animace"
-
-#: gnome/gscreen.c:1649
-msgid "Audio files"
-msgstr "Zvuky"
-
-#: gnome/gscreen.c:1651
-msgid "C program files"
-msgstr "C programy"
-
-#: gnome/gscreen.c:1653
-msgid "C++ program files"
-msgstr "C++ programy"
-
-#: gnome/gscreen.c:1655
-msgid "Objective-C program files"
-msgstr "Programy v Objective-C"
-
-#: gnome/gscreen.c:1657
-msgid "Scheme program files"
-msgstr "Programy v Scheme"
-
-#: gnome/gscreen.c:1659
-msgid "Assembler program files"
-msgstr "Programy v asembleru"
-
-#: gnome/gscreen.c:1661
-msgid "Misc. program files"
-msgstr "Dal¹í programy"
-
-#: gnome/gscreen.c:1663
-msgid "Font files"
-msgstr "Soubory s fonty"
-
-#: gnome/gscreen.c:1790
+#: gnome/gscreen.c:1711
 #, c-format
 msgid "Search: %s"
 msgstr "Hledat: %s"
 
-#: gnome/gscreen.c:1800
+#: gnome/gscreen.c:1721
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytù v %d souborech"
 
-#: gnome/gscreen.c:1800
+#: gnome/gscreen.c:1721
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytù v %d souborech"
 
-#: gnome/gscreen.c:1826 src/screen.c:670
+#: gnome/gscreen.c:1747 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<ètení odkazu selhalo>"
 
-#: gnome/gscreen.c:2335
+#: gnome/gscreen.c:2147
+#, fuzzy
+msgid "Copy directory"
+msgstr "Domácí adresáø"
+
+#: gnome/gscreen.c:2148
+#, fuzzy
+msgid "Delete directory"
+msgstr "Domácí adresáø"
+
+#: gnome/gscreen.c:2149
+#, fuzzy
+msgid "Rename or move directory"
+msgstr "Pøesunout nebo pøejmenovat soubory"
+
+#: gnome/gscreen.c:2305
 msgid "Back"
 msgstr "Zpìt"
 
-#: gnome/gscreen.c:2335
+#: gnome/gscreen.c:2305
 msgid "Go to the previously visited directory"
 msgstr "Pøejde do pøedchozího adresáøe"
 
-#: gnome/gscreen.c:2337
-msgid "Up"
-msgstr "Nahoru"
-
-#: gnome/gscreen.c:2337
+#: gnome/gscreen.c:2307
 msgid "Go up a level in the directory heirarchy"
 msgstr "O jeden adresáø v hiearchii vý¹"
 
-#: gnome/gscreen.c:2339
+#: gnome/gscreen.c:2307
+msgid "Up"
+msgstr "Nahoru"
+
+#: gnome/gscreen.c:2309
 msgid "Forward"
 msgstr "Vpøed"
 
-#: gnome/gscreen.c:2339
+#: gnome/gscreen.c:2309
 msgid "Go to the next directory"
 msgstr "Pøechod na dal¹í adresáø"
 
-#: gnome/gscreen.c:2342 src/tree.c:1011
+#: gnome/gscreen.c:2312 src/tree.c:1011
 msgid "Rescan"
 msgstr "Obnovit"
 
-#: gnome/gscreen.c:2342
+#: gnome/gscreen.c:2312
 msgid "Rescan the current directory"
 msgstr "Obnovit obsah pohledu do aktuálního adresáøe"
 
-#: gnome/gscreen.c:2345
-msgid "Home"
-msgstr "Domù"
-
-#: gnome/gscreen.c:2345
+#: gnome/gscreen.c:2315
 msgid "Go to your home directory"
 msgstr "Naète domácí adresáø"
 
-#: gnome/gscreen.c:2486
+#: gnome/gscreen.c:2315
+msgid "Home"
+msgstr "Domù"
+
+#: gnome/gscreen.c:2456
 msgid "Location:"
 msgstr "Poloha:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:341 gtkedit/editcmd.c:1184
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:2865 gtkedit/editoptions.c:71
+#: gnome/gtools.c:105 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1197
+#: gtkedit/editcmd.c:1282 gtkedit/editcmd.c:2893 gtkedit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:144
@@ -1447,67 +1540,67 @@ msgstr "Poloha:"
 msgid "&Ok"
 msgstr "&Ok"
 
-#: gnome/gview.c:135 src/view.c:718
-#, c-format
-msgid "Offset 0x%08x"
+#: gnome/gview.c:136
+#, fuzzy, c-format
+msgid "Offset 0x%08lx"
 msgstr "Posun 0x%08x"
 
-#: gnome/gview.c:137 src/view.c:720
+#: gnome/gview.c:138 src/view.c:730
 #, c-format
 msgid "Col %d"
 msgstr "Sloupec %d"
 
-#: gnome/gview.c:141 src/view.c:724
+#: gnome/gview.c:142 src/view.c:734
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytù"
 
-#: gnome/gview.c:305
+#: gnome/gview.c:306
 msgid "_Goto line"
 msgstr "_Jdi na øádek"
 
-#: gnome/gview.c:306
+#: gnome/gview.c:307
 msgid "Jump to a specified line number"
 msgstr "Na dané èíslo øádky"
 
-#: gnome/gview.c:308
-msgid "_Monitor file"
-msgstr "_Monitorovat soubor"
-
-#: gnome/gview.c:308
+#: gnome/gview.c:309
 msgid "Monitor file growing"
 msgstr "Monitorovat délku souboru"
 
-#: gnome/gview.c:315
+#: gnome/gview.c:309
+msgid "_Monitor file"
+msgstr "_Monitorovat soubor"
+
+#: gnome/gview.c:316
 msgid "Regexp search"
 msgstr "Hledání regulárního výrazu"
 
-#: gnome/gview.c:316
+#: gnome/gview.c:317
 msgid "Regular expression search"
 msgstr "Vyhledávání regulárního výrazu"
 
-#: gnome/gview.c:325
+#: gnome/gview.c:326
 msgid "_Wrap"
 msgstr "_Zarovnávat"
 
-#: gnome/gview.c:326
+#: gnome/gview.c:327
 msgid "Wrap the text"
 msgstr "Zarovnávat text"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:329
+#: gnome/gview.c:330
 msgid "_Parsed view"
 msgstr "_Upravený pohled"
 
-#: gnome/gview.c:332
+#: gnome/gview.c:333
 msgid "_Formatted"
 msgstr "_Formátováno"
 
-#: gnome/gview.c:334
+#: gnome/gview.c:335
 msgid "_Hex"
 msgstr "_Hex"
 
-#: gnome/gview.c:340
+#: gnome/gview.c:341
 msgid "_Search"
 msgstr "_Hledat"
 
@@ -1523,11 +1616,11 @@ msgstr "zru¹it"
 msgid "help"
 msgstr "pomoc"
 
-#: gnome/gwidget.c:96 src/file.c:2252
+#: gnome/gwidget.c:96 src/file.c:2271
 msgid "yes"
 msgstr "ano"
 
-#: gnome/gwidget.c:98 src/file.c:2250
+#: gnome/gwidget.c:98 src/file.c:2269
 msgid "no"
 msgstr "ne"
 
@@ -1539,68 +1632,32 @@ msgstr "konec"
 msgid "abort"
 msgstr "pøeru¹it"
 
-#: gnome/gmount.c:195
-msgid "Could not open the /etc/fstab file"
-msgstr " Nelze otevøít soubor /etc/fstab"
-
-#: gnome/gmount.c:322
-#, c-format
-msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
-"Nelze vytvoøit symbolický odkaz z %s na %s; nebude vytvoøena ikona pro dané "
-"zaøízení."
-
-#: gnome/gmount.c:374 gnome/gmount.c:389
-#, c-format
-msgid "CD-ROM %d"
-msgstr "CD-ROM %d"
-
-#: gnome/gmount.c:379
-#, c-format
-msgid "Floppy %d"
-msgstr "Disketa %d"
-
-#: gnome/gmount.c:385
-#, c-format
-msgid "Disk %d"
-msgstr "Disk %d"
-
-#: gnome/gmount.c:395
-#, c-format
-msgid "NFS dir %s"
-msgstr "Adresáø NFS %s"
-
-#: gnome/gmount.c:399
-#, c-format
-msgid "Device %d"
-msgstr "Zaøízení: %d"
-
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
-#: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
-#: gtkedit/editcmd.c:1951 gtkedit/editwidget.c:952 src/dir.c:386
-#: src/screen.c:2383 src/tree.c:683 src/tree.c:689 src/wtools.c:222
+#: gtkedit/edit.c:132 gtkedit/edit.c:227 gtkedit/edit.c:234 gtkedit/edit.c:241
+#: gtkedit/edit.c:248 gtkedit/edit.c:254 gtkedit/edit.c:311 gtkedit/edit.c:347
+#: gtkedit/editcmd.c:1947 gtkedit/editwidget.c:980 src/dir.c:386
+#: src/screen.c:2416 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr " Chyba "
 
-#: gtkedit/edit.c:131 gtkedit/edit.c:233
+#: gtkedit/edit.c:132 gtkedit/edit.c:234
 msgid " Failed trying to open file for reading: "
 msgstr " Nelze otevøít soubor pro ètení: "
 
-#: gtkedit/edit.c:240
+#: gtkedit/edit.c:241
 msgid " Cannot get size/permissions info on file: "
 msgstr " Nelze zjistit délku/práva k souboru: "
 
-#: gtkedit/edit.c:247
+#: gtkedit/edit.c:248
 msgid " Not an ordinary file: "
 msgstr " To není obyèejný soubor: "
 
-#: gtkedit/edit.c:253
+#: gtkedit/edit.c:254
 msgid " File is too large: "
 msgstr " Soubor je pøíli¹ velký: "
 
-#: gtkedit/edit.c:254
+#: gtkedit/edit.c:255
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -1608,25 +1665,25 @@ msgstr ""
 " \n"
 " Zvy¹ edit.hf:MAXBUF a pøekompiluj editor. "
 
-#: gtkedit/edit.c:310 gtkedit/edit.c:346
+#: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
 msgstr " Chyba pøi alokaci pamìti "
 
-#: gtkedit/editcmd.c:334
+#: gtkedit/editcmd.c:335
 msgid "Quick save "
 msgstr "Rychle ulo¾it "
 
-#: gtkedit/editcmd.c:335
+#: gtkedit/editcmd.c:336
 msgid "Safe save "
 msgstr " Bezpeèné ukládání "
 
-#: gtkedit/editcmd.c:336
+#: gtkedit/editcmd.c:337
 msgid "Do backups -->"
 msgstr "Ukládání záloh -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1182
-#: gtkedit/editcmd.c:1267 gtkedit/editcmd.c:2863 gtkedit/editoptions.c:68
+#: gtkedit/editcmd.c:340 gtkedit/editcmd.c:1149 gtkedit/editcmd.c:1195
+#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:2891 gtkedit/editoptions.c:68
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:854 src/filegui.c:822
@@ -1636,114 +1693,115 @@ msgstr "Ukládání záloh -->"
 msgid "&Cancel"
 msgstr "&Zru¹it"
 
-#: gtkedit/editcmd.c:345
+#: gtkedit/editcmd.c:346
 msgid "Extension:"
 msgstr "Pøípona:"
 
 #. NLS ?
-#: gtkedit/editcmd.c:352
+#: gtkedit/editcmd.c:353
 msgid " Edit Save Mode "
 msgstr " Upravit ukládací re¾im "
 
-#: gtkedit/editcmd.c:476
+#: gtkedit/editcmd.c:477
 msgid " Save As "
 msgstr " Ulo¾it jako "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:490 gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
-#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083 src/ext.c:303 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:2103 src/screen.c:2146
-#: src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390 src/utilunix.c:394
-#: src/utilunix.c:465 vfs/mcfs.c:170
+#: gtkedit/editcmd.c:491 gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
+#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095 src/ext.c:315 src/file.c:619
+#: src/help.c:318 src/main.c:699 src/screen.c:1450 src/screen.c:2128
+#: src/screen.c:2178 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
+#: src/utilunix.c:394 src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
 msgstr " Varování "
 
-#: gtkedit/editcmd.c:491
+#: gtkedit/editcmd.c:492
 msgid " A file already exists with this name. "
 msgstr " Soubor tohoto jména ji¾ existuje. "
 
-#. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:493
-msgid "Overwrite"
-msgstr "Pøepi¹"
-
-#: gtkedit/editcmd.c:493 gtkedit/editcmd.c:555 gtkedit/editcmd.c:782
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:494 gtkedit/editcmd.c:561 gtkedit/editcmd.c:788
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
+#: gtkedit/editcmd.c:1585
 msgid "Cancel"
 msgstr "Zru¹it"
 
-#: gtkedit/editcmd.c:509
-msgid " Save as "
-msgstr " Ulo¾ jako "
+#. Push buttons to over-write the current file, or cancel the operation
+#: gtkedit/editcmd.c:494
+msgid "Overwrite"
+msgstr "Pøepi¹"
 
-#: gtkedit/editcmd.c:509 gtkedit/editcmd.c:2633
+#: gtkedit/editcmd.c:513 gtkedit/editcmd.c:2657
 msgid " Error trying to save file. "
 msgstr " Chyba pøi zápisu do souboru. "
 
+#: gtkedit/editcmd.c:513
+msgid " Save as "
+msgstr " Ulo¾ jako "
+
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:625 gtkedit/editcmd.c:633 gtkedit/editcmd.c:658
+#: gtkedit/editcmd.c:631 gtkedit/editcmd.c:639 gtkedit/editcmd.c:664
 msgid " Delete macro "
 msgstr " Sma¾ macro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:627
+#: gtkedit/editcmd.c:633
 msgid " Error trying to open temp file "
 msgstr " Chyba pøi otvírání doèasného souboru "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:635 gtkedit/editcmd.c:696 gtkedit/editcmd.c:764
+#: gtkedit/editcmd.c:641 gtkedit/editcmd.c:702 gtkedit/editcmd.c:770
 msgid " Error trying to open macro file "
 msgstr " Chyba pøi otvírání souboru maker "
 
-#: gtkedit/editcmd.c:640 gtkedit/editcmd.c:648 gtkedit/editcmd.c:684
-#: gtkedit/editcmd.c:739
+#: gtkedit/editcmd.c:646 gtkedit/editcmd.c:654 gtkedit/editcmd.c:690
+#: gtkedit/editcmd.c:745
 #, c-format
 msgid "key '%d 0': "
 msgstr "klávesa '%d 0': "
 
-#: gtkedit/editcmd.c:659
+#: gtkedit/editcmd.c:665
 msgid " Error trying to overwrite macro file "
 msgstr " Chyba pøi pokusu o pøepis souboru maker "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:676
+#: gtkedit/editcmd.c:681
 msgid " Macro "
 msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:678
+#: gtkedit/editcmd.c:683
 msgid " Press the macro's new hotkey: "
 msgstr " Stiskni novou hotkey pro makro: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:696
+#: gtkedit/editcmd.c:702
 msgid " Save macro "
 msgstr " Ulo¾ makro "
 
-#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:713
+#: gtkedit/editcmd.c:712 gtkedit/editcmd.c:719
 msgid " Delete Macro "
 msgstr " Sma¾ makro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:763
+#: gtkedit/editcmd.c:769
 msgid " Load macro "
 msgstr " Naèti makro "
 
-#: gtkedit/editcmd.c:777 gtkedit/editcmd.c:779
+#: gtkedit/editcmd.c:783 gtkedit/editcmd.c:785
 msgid " Confirm save file? : "
 msgstr " Potvrï ulo¾ení souboru? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:782
+#: gtkedit/editcmd.c:788
 msgid " Save file "
 msgstr " Ulo¾ soubor "
 
-#: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 src/view.c:2030
+#: gtkedit/editcmd.c:788 gtkedit/editwidget.c:1094 gtkedit/gtkedit.c:1247
+#: src/view.c:2075
 msgid "Save"
 msgstr "Ulo¾"
 
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1751,231 +1809,246 @@ msgstr ""
 " Tento text byl zmìnìn, ale zmìny nebyly ulo¾eny. \n"
 " Pokraèováním se zmìny ztratí. "
 
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
 msgid "Continue"
 msgstr "Pokraèovat"
 
-#. Heads the 'Load' file dialog box
-#: gtkedit/editcmd.c:828 gtkedit/editcmd.c:842
-msgid " Load "
-msgstr " Naèíst "
-
-#: gtkedit/editcmd.c:828
+#: gtkedit/editcmd.c:837
 msgid " Error trying to open file for reading "
 msgstr " Chyba pøi otevøení souboru pro ètení "
 
-#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083
+#. Heads the 'Load' file dialog box
+#: gtkedit/editcmd.c:837 gtkedit/editcmd.c:853
+msgid " Load "
+msgstr " Naèíst "
+
+#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok je pøíli¹ velký, undo nebude fungovat. "
 
-#: gtkedit/editcmd.c:1083
-msgid " Continue "
-msgstr " Pokraèovat "
-
-#: gtkedit/editcmd.c:1083
+#: gtkedit/editcmd.c:1095
 msgid " Cancel "
 msgstr " Zru¹it "
 
-#: gtkedit/editcmd.c:1138 src/filegui.c:597
+#: gtkedit/editcmd.c:1095
+msgid " Continue "
+msgstr " Pokraèovat "
+
+#: gtkedit/editcmd.c:1151
+#, fuzzy
+msgid "o&Ne"
+msgstr "&Jméno"
+
+#: gtkedit/editcmd.c:1153 src/filegui.c:597
 msgid "al&L"
 msgstr "&V¹echny"
 
-#: gtkedit/editcmd.c:1140 src/file.c:2174 src/filegui.c:267
+#: gtkedit/editcmd.c:1155 src/file.c:2193 src/filegui.c:267
 msgid "&Skip"
 msgstr "&Pøeskoèit"
 
-#: gtkedit/editcmd.c:1142
+#: gtkedit/editcmd.c:1157
 msgid "&Replace"
 msgstr "&Nahradit"
 
-#. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: gtkedit/editcmd.c:1148 gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:1163 gtkedit/editcmd.c:1585
 msgid " Replace with: "
 msgstr " Nahradit textem: "
 
-#: gtkedit/editcmd.c:1152
+#: gtkedit/editcmd.c:1167
 msgid " Confirm replace "
 msgstr " Potvrdit náhradu "
 
-#: gtkedit/editcmd.c:1186 gtkedit/editcmd.c:1271
+#: gtkedit/editcmd.c:1199 gtkedit/editcmd.c:1284
 msgid "scanf &Expression"
 msgstr "&Výraz pro scanf"
 
-#: gtkedit/editcmd.c:1188
+#: gtkedit/editcmd.c:1201
 msgid "replace &All"
 msgstr "Nahraïit &V¹e"
 
-#: gtkedit/editcmd.c:1190
+#: gtkedit/editcmd.c:1203
 msgid "pr&Ompt on replace"
 msgstr "vý&zva pøed nahrazením "
 
-#: gtkedit/editcmd.c:1192 gtkedit/editcmd.c:1273
+#: gtkedit/editcmd.c:1205 gtkedit/editcmd.c:1286
 msgid "&Backwards"
 msgstr "&Zpátky"
 
-#: gtkedit/editcmd.c:1194 gtkedit/editcmd.c:1275
+#: gtkedit/editcmd.c:1207 gtkedit/editcmd.c:1288
 msgid "&Regular expression"
 msgstr "&Regulární výraz"
 
-#: gtkedit/editcmd.c:1196 gtkedit/editcmd.c:1277
+#: gtkedit/editcmd.c:1209 gtkedit/editcmd.c:1290
 msgid "&Whole words only"
 msgstr "Pouze &Celá slova"
 
-#: gtkedit/editcmd.c:1198 gtkedit/editcmd.c:1279
+#: gtkedit/editcmd.c:1211 gtkedit/editcmd.c:1292
 msgid "case &Sensitive"
 msgstr "v¹ímat si velikos&ti písmen"
 
-#: gtkedit/editcmd.c:1202
+#: gtkedit/editcmd.c:1215
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Zadejte poøadí argumentù (tøeba 3,2,1,4) "
 
-#: gtkedit/editcmd.c:1206
+#: gtkedit/editcmd.c:1219
 msgid " Enter replacement string:"
 msgstr " Zadejte náhradní text:"
 
-#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1955
+#: gtkedit/editcmd.c:1223 gtkedit/editcmd.c:1296 src/view.c:1998
 msgid " Enter search string:"
 msgstr " Zadej hledaný text:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1229 gtkedit/editcmd.c:1480 gtkedit/editcmd.c:1574
-#: gtkedit/editcmd.c:2125 gtkedit/editcmd.c:2156 gtkedit/editcmd.c:2158
+#: gtkedit/editcmd.c:1242 gtkedit/editcmd.c:1494 gtkedit/editcmd.c:1585
+#: gtkedit/editcmd.c:2124 gtkedit/editcmd.c:2155 gtkedit/editcmd.c:2157
 msgid " Replace "
 msgstr " Nahradit "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1297 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2227
-#: src/view.c:1509 src/view.c:1608 src/view.c:1730 src/view.c:1923
-#: src/view.c:1955
+#: gtkedit/editcmd.c:1310 gtkedit/editcmd.c:1488 gtkedit/editcmd.c:2226
+#: src/view.c:1526 src/view.c:1625 src/view.c:1748 src/view.c:1966
+#: src/view.c:1998
 msgid " Search "
 msgstr " Hledat "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1346
+#: gtkedit/editcmd.c:1360
 msgid " Enter search text : "
 msgstr " Zadej hledaný text : "
 
-#: gtkedit/editcmd.c:1353
+#: gtkedit/editcmd.c:1367
 msgid " Enter replace text : "
 msgstr " Nahradit textem : "
 
-#: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1357
-#, c-format
+#: gtkedit/editcmd.c:1370 gtkedit/editcmd.c:1371
+#, fuzzy, c-format
 msgid ""
-"You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
-"\"Enter...order\""
+"You can enter regexp substrings with %s\n"
+"(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
 "Regulární výraz lze vlo¾it s %s (nikoli \\1, \\2 jako v sed), pak pou¾ijte\n"
 "\"Zadat...poøadí\""
 
-#: gtkedit/editcmd.c:1359
+#: gtkedit/editcmd.c:1373
 msgid " Enter argument (or substring) order : "
 msgstr " Zadejte poøadí argumentù(nebo podøetìzce) : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
+#: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:1378
+#, fuzzy
 msgid ""
-"Enter the order of replacement of your scanf format specifiers or regexp "
-"substrings"
+"Enter the order of replacement of your scanf\n"
+"format specifiers or regexp substrings, eg 3,1,2"
 msgstr ""
 "Zadejte poøadí náhrad (viz. man scanf) nebo podøetìzce regulárních výrazù"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1369
+#: gtkedit/editcmd.c:1383
 msgid " Whole words only "
 msgstr " Pouze celá slova "
 
-#: gtkedit/editcmd.c:1371
+#: gtkedit/editcmd.c:1385
 msgid " Case sensitive "
 msgstr " V¹ímat si velikosti písmen "
 
-#: gtkedit/editcmd.c:1374
+#: gtkedit/editcmd.c:1388
 msgid " Regular expression "
 msgstr " Regulární výraz "
 
-#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
-msgid "See the regex man page for how to compose a regular expression"
+#: gtkedit/editcmd.c:1389 gtkedit/editcmd.c:1390
+#, fuzzy
+msgid ""
+"See the regex man page for how\n"
+"to compose a regular expression"
 msgstr "Podívej se na 'man regex', chce¹-li vìdìt jak tvoøit regulární výrazy"
 
-#: gtkedit/editcmd.c:1382
+#: gtkedit/editcmd.c:1396
 msgid " Backwards "
 msgstr " Zpátky "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1384 gtkedit/editcmd.c:1385
+#: gtkedit/editcmd.c:1398 gtkedit/editcmd.c:1399
 msgid "Warning: Searching backward can be slow"
 msgstr "Pozor: Hledání zpátky mù¾e být pomalé"
 
-#: gtkedit/editcmd.c:1398
+#: gtkedit/editcmd.c:1412
 msgid " Prompt on replace "
 msgstr " Ptej se pøed nahrazením "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1400
+#: gtkedit/editcmd.c:1414
 msgid "Ask before making each replacement"
 msgstr " Ptej se pøed ka¾dým nahrazením"
 
-#: gtkedit/editcmd.c:1402
+#: gtkedit/editcmd.c:1416
 msgid " Replace all "
 msgstr " Nahraï v¹e "
 
-#: gtkedit/editcmd.c:1405
+#: gtkedit/editcmd.c:1419
 msgid " Scanf expression "
 msgstr " Výraz pro scanf "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1407
-msgid "Allows entering of a C format string, see the scanf man page"
+#: gtkedit/editcmd.c:1421
+#, fuzzy
+msgid ""
+"Allows entering of a C format string,\n"
+"see the scanf man page"
 msgstr "Zde je mo¾né napsat string jako pro scanf, viz man scanf"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1412
+#: gtkedit/editcmd.c:1426
 msgid "Begin search, Enter"
 msgstr "Zaèít hledání, Enter"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1415
+#: gtkedit/editcmd.c:1429
 msgid "Abort this dialog, Esc"
 msgstr "Zru¹it tento dialog, Esc"
 
-#. Buttons for the confirm replace dialog box.
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:1585
 msgid "Replace"
 msgstr "Nahradit"
 
-#: gtkedit/editcmd.c:1578
-msgid "Skip"
-msgstr "Pøeskoèit"
-
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:1585
 msgid "Replace all"
 msgstr "Nahraï v¹e"
 
-#: gtkedit/editcmd.c:1951
+#: gtkedit/editcmd.c:1585
+#, fuzzy
+msgid "Replace one"
+msgstr " Nahradit "
+
+#: gtkedit/editcmd.c:1585
+msgid "Skip"
+msgstr "Pøeskoèit"
+
+#: gtkedit/editcmd.c:1947
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr " ©patný regulární výraz, nebo scanf výraz s pøíli¹ mnoha pøevody "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2127
+#: gtkedit/editcmd.c:2126
 msgid " Error in replacement format string. "
 msgstr " Chyba ve formátu nahrazovaného textu. "
 
-#: gtkedit/editcmd.c:2155
+#: gtkedit/editcmd.c:2154
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Provedeno %ld nahrazení. "
 
-#: gtkedit/editcmd.c:2158 gtkedit/editcmd.c:2227
+#: gtkedit/editcmd.c:2157 gtkedit/editcmd.c:2226
 msgid " Search string not found. "
 msgstr " Text nenalezen. "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2266 gtkedit/editcmd.c:2269
+#: gtkedit/editcmd.c:2250 gtkedit/editcmd.c:2265 gtkedit/editcmd.c:2268
 msgid " Quit "
 msgstr " Pryè "
 
-#: gtkedit/editcmd.c:2252 gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2269
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -1983,155 +2056,526 @@ msgstr ""
 " Text byl zmìnìn bez ulo¾ení. \n"
 " Ulo¾it pøed odchodem? "
 
-#: gtkedit/editcmd.c:2266
+#: gtkedit/editcmd.c:2265
 msgid " File was modified, Save with exit? "
 msgstr " Soubor byl zmìnìn, ulo¾it pøi odchodu? "
 
-#: gtkedit/editcmd.c:2266
-msgid "Cancel quit"
-msgstr "Zru¹ odchod"
-
-#: gtkedit/editcmd.c:2266 src/cmd.c:249 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
-msgid "&Yes"
-msgstr "&Ano"
-
-#: gtkedit/editcmd.c:2266 src/cmd.c:249 src/file.c:1859 src/file.c:2233
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2132
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
 msgstr "&Ne"
 
-#: gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
+msgid "&Yes"
+msgstr "&Ano"
+
+#: gtkedit/editcmd.c:2265
+msgid "Cancel quit"
+msgstr "Zru¹ odchod"
+
+#: gtkedit/editcmd.c:2269
 msgid " &Cancel quit "
 msgstr " &Zru¹ odchod "
 
-#: gtkedit/editcmd.c:2270
-msgid " &Yes "
-msgstr " &Ano "
-
-#: gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2269
 msgid " &No "
 msgstr " &Ne "
 
-#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2548
+#: gtkedit/editcmd.c:2269
+msgid " &Yes "
+msgstr " &Ano "
+
+#: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2576
 msgid " Copy to clipboard "
 msgstr " Zkopírovat na clipboard "
 
-#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2548
-#: gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2523 gtkedit/editcmd.c:2576
+#: gtkedit/editcmd.c:2589
 msgid " Unable to save to file. "
 msgstr " Nelze ulo¾it soubor. "
 
-#: gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2523 gtkedit/editcmd.c:2589
 msgid " Cut to clipboard "
 msgstr " Pøesuò na clipboard "
 
-#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595 src/view.c:1895
-msgid " Goto line "
-msgstr " Jdi na øádek "
-
-#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623
 msgid " Enter line: "
 msgstr " Zadej èíslo øádku: "
 
-#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2633
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623 src/view.c:1913
+msgid " Goto line "
+msgstr " Jdi na øádek "
+
+#: gtkedit/editcmd.c:2644 gtkedit/editcmd.c:2657
 msgid " Save Block "
 msgstr " Ulo¾ blok "
 
-#: gtkedit/editcmd.c:2667
+#: gtkedit/editcmd.c:2694
 msgid " Insert File "
 msgstr " Vlo¾ soubor "
 
-#: gtkedit/editcmd.c:2682
-msgid " Insert file "
-msgstr " Vlo¾ soubor "
-
-#: gtkedit/editcmd.c:2682
+#: gtkedit/editcmd.c:2707
 msgid " Error trying to insert file. "
 msgstr " Chyba pøi vkládání souboru. "
 
+#: gtkedit/editcmd.c:2707
+msgid " Insert file "
+msgstr " Vlo¾ soubor "
+
 #. Not essential to translate
-#: gtkedit/editcmd.c:2702
+#: gtkedit/editcmd.c:2729
 msgid " Sort block "
 msgstr " Setøiï blok "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2756
+#: gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2783
 msgid " You must first highlight a block of text. "
 msgstr " Nejdøíve je tøeba oznaèit blok textu. "
 
-#: gtkedit/editcmd.c:2709
+#: gtkedit/editcmd.c:2736
 msgid " Run Sort "
 msgstr " Spustit tøídìní "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2711
+#: gtkedit/editcmd.c:2738
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Vlo¾te parametry pro tøídìní (man sort) oddìlené mezerami: "
 
-#: gtkedit/editcmd.c:2722 gtkedit/editcmd.c:2728
+#: gtkedit/editcmd.c:2749 gtkedit/editcmd.c:2755
 msgid " Sort "
 msgstr " Setøídit "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2724
+#: gtkedit/editcmd.c:2751
 msgid " Error trying to execute sort command "
 msgstr " Chyba pøi spou¹tìní príkazu sort "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2730
+#: gtkedit/editcmd.c:2757
 msgid " Sort returned non-zero: "
 msgstr " sort vrátil neskoèil dobøe: "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2754 gtkedit/editcmd.c:2784
+#: gtkedit/editcmd.c:2781 gtkedit/editcmd.c:2811
 msgid " Process block "
 msgstr " Zpracovat blok "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2786
+#: gtkedit/editcmd.c:2813
 msgid " Error trying to stat file "
 msgstr " Na souboru nelze provést stat() "
 
-#: gtkedit/editcmd.c:2856
+#: gtkedit/editcmd.c:2884
 msgid " Mail "
 msgstr " e-po¹ta "
 
-#: gtkedit/editcmd.c:2869
+#: gtkedit/editcmd.c:2897
 msgid " Copies to"
 msgstr " Kopie do"
 
-#: gtkedit/editcmd.c:2873
+#: gtkedit/editcmd.c:2901
 msgid " Subject"
 msgstr " Pøedmìt"
 
-#: gtkedit/editcmd.c:2877
+#: gtkedit/editcmd.c:2905
 msgid " To"
 msgstr " Komu"
 
-#: gtkedit/editcmd.c:2879
+#: gtkedit/editcmd.c:2907
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <pøedmìt> -c <kopie> <komu>"
 
-#: gtkedit/editoptions.c:36
-msgid "Intuitive"
-msgstr "Intuitivní"
+#: gtkedit/editmenu.c:61
+msgid " Word wrap "
+msgstr " Zalamování "
+
+#. Not essential to translate
+#: gtkedit/editmenu.c:63
+msgid " Enter line length, 0 for off: "
+msgstr " Zadejte délku øádky, 0 znamené bez limitu: "
+
+#: gtkedit/editmenu.c:74
+msgid " About "
+msgstr " O programu "
+
+#: gtkedit/editmenu.c:75
+#, fuzzy
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                 Cooledit  v2.1\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       U¾ivatelsky pøíjemný textový editor\n"
+"         pro program Midnight Commander\n"
+"\n"
+
+#: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
+msgid "&Open/load...     C-o"
+msgstr "Otevøít/naèíst...          C-o"
+
+#: gtkedit/editmenu.c:124
+msgid "&New              C-n"
+msgstr "&Nový                       C-n"
+
+#: gtkedit/editmenu.c:126 gtkedit/editmenu.c:142
+msgid "&Save              F2"
+msgstr "&Ulo¾it                     F2"
+
+#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
+msgid "save &As...       F12"
+msgstr "Ulo¾it Jako...             F12"
+
+#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
+msgid "&Insert file...   F15"
+msgstr "&Vlo¾it soubor...           F15"
+
+#: gtkedit/editmenu.c:130
+msgid "copy to &File...  C-f"
+msgstr "zkopírovat do &Souboru...   C-f"
+
+#: gtkedit/editmenu.c:132 gtkedit/editmenu.c:148
+msgid "a&Bout...            "
+msgstr "&O programu...     "
+
+#: gtkedit/editmenu.c:134 gtkedit/editmenu.c:150
+msgid "&Quit             F10"
+msgstr "&Konec\tF10"
+
+#: gtkedit/editmenu.c:140
+msgid "&New            C-x k"
+msgstr "&Nový           C-x k"
+
+#: gtkedit/editmenu.c:146
+msgid "copy to &File...     "
+msgstr "Zkopírovat do &Souboru... C-f"
+
+#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
+msgid "&Toggle Mark       F3"
+msgstr "&Pøehodit znaèky     F3"
+
+#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
+msgid "&Mark Columns    S-F3"
+msgstr "&Znaèit sloupcovì    S-F3"
+
+#: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
+msgid "toggle &Ins/overw Ins"
+msgstr "Vkládání/Pøepis     Ins"
+
+#: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
+msgid "&Copy              F5"
+msgstr "&Kopírovat           F5"
+
+#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
+msgid "&Move              F6"
+msgstr "&Pøesunout           F6"
+
+#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
+msgid "&Delete            F8"
+msgstr "&Smazat              F8"
+
+#: gtkedit/editmenu.c:164 gtkedit/editmenu.c:181
+msgid "&Undo             C-u"
+msgstr "&Akce zpìt           C-u"
+
+#: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
+msgid "&Beginning     C-PgUp"
+msgstr "&Zaèátek             C-PgUp"
+
+#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
+msgid "&End           C-PgDn"
+msgstr "&Konec               C-PgDn"
+
+#: gtkedit/editmenu.c:189 gtkedit/editmenu.c:196
+msgid "&Search...         F7"
+msgstr "&Hledat...         F7"
+
+#: gtkedit/editmenu.c:190 gtkedit/editmenu.c:197
+msgid "search &Again     F17"
+msgstr "Hledej &Znovu      F17"
+
+#: gtkedit/editmenu.c:191 gtkedit/editmenu.c:198
+msgid "&Replace...        F4"
+msgstr "&Nahradit...       F4"
+
+#: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
+msgid "&Goto line...            M-l"
+msgstr "&Jdi na øádku...                M-l"
+
+#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
+msgid "insert &Literal...       C-q"
+msgstr "vlo¾it &Znak...                 C-q"
+
+#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
+msgid "&Refresh screen          C-l"
+msgstr "&Obnovit obrazovku              C-l"
+
+#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
+msgid "&Start record macro      C-r"
+msgstr "&Zaèít zaznamenávat makro       C-r"
+
+#: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
+msgid "&Finish record macro...  C-r"
+msgstr "&Ukonèi záznam makra...         C-r"
+
+#: gtkedit/editmenu.c:211
+msgid "&Execute macro...   C-a, KEY"
+msgstr "&Provést makro...               C-a, KEY"
+
+#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
+msgid "delete macr&O...            "
+msgstr "&Smazat makro"
+
+#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
+msgid "insert &Date/time           "
+msgstr "vlo¾it &datum/èas"
+
+#: gtkedit/editmenu.c:216 gtkedit/editmenu.c:238
+msgid "format p&Aragraph        M-p"
+msgstr "Pøeformátovat &Odstavec         M-p"
+
+#: gtkedit/editmenu.c:217
+msgid "'ispell' s&Pell check    C-p"
+msgstr "'ispell' &Kontrola pravopisu    C-p"
+
+#: gtkedit/editmenu.c:218 gtkedit/editmenu.c:240
+msgid "sor&T...                 M-t"
+msgstr "&seøadit                        M-t"
+
+#: gtkedit/editmenu.c:219 gtkedit/editmenu.c:241
+msgid "'indent' &C Formatter    F19"
+msgstr "'indent' - formátování &C kódu  F19"
+
+#: gtkedit/editmenu.c:220
+msgid "&Mail...                    "
+msgstr "&Poslat elektronicky..."
+
+#: gtkedit/editmenu.c:233
+msgid "&Execute macro... C-x e, KEY"
+msgstr "&Proveï makro...                C-x e, KEY"
+
+#: gtkedit/editmenu.c:239
+msgid "'ispell' s&Pell check    M-$"
+msgstr "'ispell' &Kontrola pravopisu    M-$"
+
+#: gtkedit/editmenu.c:248 gtkedit/editmenu.c:257
+msgid "&General...  "
+msgstr "&Obecné...  "
+
+#: gtkedit/editmenu.c:249 gtkedit/editmenu.c:258
+msgid "&Save mode..."
+msgstr "&Re¾im ukládání..."
+
+#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260 src/main.c:1345
+msgid "&Layout..."
+msgstr "&Rozlo¾ení..."
+
+#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
+#: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279 gtkedit/editmenu.c:396
+#: src/chmod.c:164 src/chown.c:130
+msgid " File "
+msgstr " Soubor "
+
+#: gtkedit/editmenu.c:271 gtkedit/editmenu.c:280 gtkedit/editmenu.c:412
+msgid " Edit "
+msgstr " Edit "
+
+#: gtkedit/editmenu.c:272 gtkedit/editmenu.c:281
+msgid " Sear/Repl "
+msgstr " Hledat/Nahradit "
+
+#: gtkedit/editmenu.c:273 gtkedit/editmenu.c:282 gtkedit/editmenu.c:452
+msgid " Command "
+msgstr " Pøíkaz "
+
+#: gtkedit/editmenu.c:274 gtkedit/editmenu.c:283
+msgid " Options "
+msgstr " Nastavení "
+
+#: gtkedit/editmenu.c:397
+msgid "Open...\tC-o"
+msgstr "Otevøít...\tC-o"
+
+#: gtkedit/editmenu.c:398
+msgid "New\tC-n"
+msgstr "Nový\tC-n"
+
+#: gtkedit/editmenu.c:400
+msgid "Save\tF2"
+msgstr "Ulo¾it\tF2"
+
+#: gtkedit/editmenu.c:401
+msgid "Save as...\tF12"
+msgstr "Ulo¾it jako...\tF12"
+
+#: gtkedit/editmenu.c:403
+msgid "Insert file...\tF15"
+msgstr "Vlo¾it soubor...\tF15"
+
+#: gtkedit/editmenu.c:404
+msgid "Copy to file...\tC-f"
+msgstr "Zkopírovat do souboru...\tC-f"
+
+#. Tool hint
+#: gtkedit/editmenu.c:407
+msgid "Disk operations and file indexing/searching"
+msgstr ""
+
+#: gtkedit/editmenu.c:413
+msgid "Toggle mark\tF3"
+msgstr "Otoèit znaèky\tF3"
+
+#: gtkedit/editmenu.c:414
+msgid "Toggle mark columns\tC-b"
+msgstr "Prohodit znaèku sloupcù\tC-b"
+
+#: gtkedit/editmenu.c:416
+msgid "Toggle book mark\tC-M-Ins"
+msgstr "Pøepnout zálo¾ku\tC-M-Ins"
+
+#: gtkedit/editmenu.c:417
+msgid "Previous book mark\tC-M-Up"
+msgstr "Pøedchozí zálo¾ka\tC-M-Up"
+
+#: gtkedit/editmenu.c:418
+msgid "Next book mark\tC-M-Down"
+msgstr "Dal¹í zálo¾ka\tC-M-Down"
+
+#: gtkedit/editmenu.c:419
+msgid "Flush book marks"
+msgstr "Zamenout zálo¾ky"
+
+#: gtkedit/editmenu.c:421
+msgid "Toggle insert/overwrite\tIns"
+msgstr "Pøepni vkládání/pøepisování\tIns"
+
+#: gtkedit/editmenu.c:423
+msgid "Copy block to cursor\tF5"
+msgstr "Zkopíruj blok ke kurzoru\tF5"
+
+#: gtkedit/editmenu.c:424
+msgid "Move block to cursor\tF6"
+msgstr "Pøesunout blok ke kurzoru\tF6"
+
+#: gtkedit/editmenu.c:425
+msgid "Delete block\tF8/C-Del"
+msgstr "Vymazat blok\tF8/C-Del"
+
+#: gtkedit/editmenu.c:427
+msgid "Copy block to clipbrd\tC-Ins"
+msgstr "Zkopírovat blok na clipboard\tC-Ins"
+
+#: gtkedit/editmenu.c:428
+msgid "Cut block to clipbrd\tS-Del"
+msgstr "Pøesunout blok do schránky\tS-Del"
+
+#: gtkedit/editmenu.c:429
+msgid "Paste block from clipbrd\tS-Ins"
+msgstr "Vlo¾it blok ze schránky\tS-Ins"
+
+#: gtkedit/editmenu.c:430
+msgid "Selection history\tM-Ins"
+msgstr "Historie výbìru\tM-Ins"
+
+#: gtkedit/editmenu.c:432
+msgid "Undo\tC-BackSpace"
+msgstr "Akce zpìt\tC-BackSpace"
+
+#. Tool hint
+#: gtkedit/editmenu.c:435
+msgid "Manipulating blocks of text"
+msgstr "Manipulace s bloky textu"
+
+#: gtkedit/editmenu.c:440
+msgid " Srch/Replce "
+msgstr " Hledat/Nahr "
+
+#: gtkedit/editmenu.c:441
+msgid "Search...\tF7"
+msgstr "Hledat...\tF7"
+
+#: gtkedit/editmenu.c:442
+msgid "Search again\tF17"
+msgstr "Hledat znovu\tF17"
+
+#: gtkedit/editmenu.c:443
+msgid "Replace...\tF4"
+msgstr "Nahraï...\tF4"
+
+#: gtkedit/editmenu.c:444
+msgid "Replace again\tF14"
+msgstr "Nahraï znovu\tF14"
+
+#. Tool hint
+#: gtkedit/editmenu.c:447
+msgid "Search for and replace text"
+msgstr "Hledat text a nahraïit jiným"
+
+#: gtkedit/editmenu.c:453
+msgid "Goto line...\tM-l"
+msgstr "Na øádku...\tM-l"
+
+#: gtkedit/editmenu.c:455
+msgid "Start record macro\tC-r"
+msgstr "Zaèátek makra\tC-r"
+
+#: gtkedit/editmenu.c:456
+msgid "Finish record macro...\tC-r"
+msgstr "Konec makra...\tC-r"
+
+#: gtkedit/editmenu.c:457
+msgid "Execute macro...\tC-a, KEY"
+msgstr "Provést makro...\tC-a, TOUCHE"
+
+#: gtkedit/editmenu.c:458
+msgid "Delete macro...\t"
+msgstr "Smazat makro...\t"
+
+#: gtkedit/editmenu.c:460
+msgid "Insert date/time\tC-d"
+msgstr "Vlo¾it datum a èas\tC-d"
+
+#: gtkedit/editmenu.c:461
+msgid "Format paragraph\tM-p"
+msgstr "Pøeformátovat odstavec\tM-p"
+
+#: gtkedit/editmenu.c:463
+msgid "Refresh display\tC-l"
+msgstr "Obnovit zobrazení\tC-l"
+
+#. Tool hint
+#: gtkedit/editmenu.c:466
+msgid "Macros and internal commands"
+msgstr "Makra a interní pøíkazy"
 
 #: gtkedit/editoptions.c:36
 msgid "Emacs"
 msgstr "Emacs"
 
-#: gtkedit/editoptions.c:39
-msgid "None"
-msgstr "®ádný"
+#: gtkedit/editoptions.c:36
+msgid "Intuitive"
+msgstr "Intuitivní"
 
 #: gtkedit/editoptions.c:39
 msgid "Dynamic paragraphing"
 msgstr "Dynamické odstavce"
+
+#: gtkedit/editoptions.c:39
+msgid "None"
+msgstr "®ádný"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
@@ -2191,401 +2635,33 @@ msgid " Editor options "
 msgstr " Nastavení editoru "
 
 #. Not essential to translate
-#: gtkedit/editwidget.c:312
+#: gtkedit/editwidget.c:317
 msgid "Error initialising editor.\n"
 msgstr "Chyba pøi startování editoru.\n"
 
-#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1705 src/screen.c:2361
-#: src/screen.c:2391 src/tree.c:1009 src/view.c:2025
+#: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
+#: src/main.c:1711 src/screen.c:2394 src/screen.c:2424 src/tree.c:1009
+#: src/view.c:2068
 msgid "Help"
 msgstr "Nápovìda"
 
-#: gtkedit/editwidget.c:1067
+#: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
 msgstr "Znaèka"
 
-#: gtkedit/editwidget.c:1068
+#: gtkedit/editwidget.c:1096
 msgid "Replac"
 msgstr "Náhrada"
 
-#: gtkedit/editwidget.c:1074 src/main.c:1707
+#: gtkedit/editwidget.c:1102 src/main.c:1713
 msgid "PullDn"
 msgstr "HlMenu"
 
-#: gtkedit/editwidget.c:1075 src/help.c:818 src/main.c:1708 src/view.c:2027
-#: src/view.c:2047
+#. gtk_edit_menu
+#: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
+#: src/main.c:1714 src/view.c:2070 src/view.c:2092
 msgid "Quit"
 msgstr "Konec"
-
-#: gtkedit/editmenu.c:57
-msgid " Word wrap "
-msgstr " Zalamování "
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:59
-msgid " Enter line length, 0 for off: "
-msgstr " Zadejte délku øádky, 0 znamené bez limitu: "
-
-#: gtkedit/editmenu.c:70
-msgid " About "
-msgstr " O programu "
-
-#: gtkedit/editmenu.c:71
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       U¾ivatelsky pøíjemný textový editor\n"
-"         pro program Midnight Commander\n"
-"\n"
-
-#: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
-msgid "&Open/load...     C-o"
-msgstr "Otevøít/naèíst...          C-o"
-
-#: gtkedit/editmenu.c:120
-msgid "&New              C-n"
-msgstr "&Nový                       C-n"
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-msgid "&Save              F2"
-msgstr "&Ulo¾it                     F2"
-
-#: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
-msgid "save &As...       F12"
-msgstr "Ulo¾it Jako...             F12"
-
-#: gtkedit/editmenu.c:125 gtkedit/editmenu.c:141
-msgid "&Insert file...   F15"
-msgstr "&Vlo¾it soubor...           F15"
-
-#: gtkedit/editmenu.c:126
-msgid "copy to &File...  C-f"
-msgstr "zkopírovat do &Souboru...   C-f"
-
-#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
-msgid "a&Bout...            "
-msgstr "&O programu...     "
-
-#: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
-msgid "&Quit             F10"
-msgstr "&Konec\tF10"
-
-#: gtkedit/editmenu.c:136
-msgid "&New            C-x k"
-msgstr "&Nový           C-x k"
-
-#: gtkedit/editmenu.c:142
-msgid "copy to &File...     "
-msgstr "Zkopírovat do &Souboru... C-f"
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Toggle Mark       F3"
-msgstr "&Pøehodit znaèky     F3"
-
-#: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
-msgid "&Mark Columns    S-F3"
-msgstr "&Znaèit sloupcovì    S-F3"
-
-#: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
-msgid "toggle &Ins/overw Ins"
-msgstr "Vkládání/Pøepis     Ins"
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-msgid "&Copy              F5"
-msgstr "&Kopírovat           F5"
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-msgid "&Move              F6"
-msgstr "&Pøesunout           F6"
-
-#: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
-msgid "&Delete            F8"
-msgstr "&Smazat              F8"
-
-#: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
-msgid "&Undo             C-u"
-msgstr "&Akce zpìt           C-u"
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-msgid "&Beginning     C-PgUp"
-msgstr "&Zaèátek             C-PgUp"
-
-#: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
-msgid "&End           C-PgDn"
-msgstr "&Konec               C-PgDn"
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "&Search...         F7"
-msgstr "&Hledat...         F7"
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-msgid "search &Again     F17"
-msgstr "Hledej &Znovu      F17"
-
-#: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
-msgid "&Replace...        F4"
-msgstr "&Nahradit...       F4"
-
-#: gtkedit/editmenu.c:199 gtkedit/editmenu.c:221
-msgid "&Goto line...            M-l"
-msgstr "&Jdi na øádku...                M-l"
-
-#: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
-msgid "insert &Literal...       C-q"
-msgstr "vlo¾it &Znak...                 C-q"
-
-#: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
-msgid "&Refresh screen          C-l"
-msgstr "&Obnovit obrazovku              C-l"
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Start record macro      C-r"
-msgstr "&Zaèít zaznamenávat makro       C-r"
-
-#: gtkedit/editmenu.c:206 gtkedit/editmenu.c:228
-msgid "&Finish record macro...  C-r"
-msgstr "&Ukonèi záznam makra...         C-r"
-
-#: gtkedit/editmenu.c:207
-msgid "&Execute macro...   C-a, KEY"
-msgstr "&Provést makro...               C-a, KEY"
-
-#: gtkedit/editmenu.c:208 gtkedit/editmenu.c:230
-msgid "delete macr&O...            "
-msgstr "&Smazat makro"
-
-#: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
-msgid "insert &Date/time           "
-msgstr "vlo¾it &datum/èas"
-
-#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
-msgid "format p&Aragraph        M-p"
-msgstr "Pøeformátovat &Odstavec         M-p"
-
-#: gtkedit/editmenu.c:213
-msgid "'ispell' s&Pell check    C-p"
-msgstr "'ispell' &Kontrola pravopisu    C-p"
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "sor&T...                 M-t"
-msgstr "&seøadit                        M-t"
-
-#: gtkedit/editmenu.c:215 gtkedit/editmenu.c:237
-msgid "'indent' &C Formatter    F19"
-msgstr "'indent' - formátování &C kódu  F19"
-
-#: gtkedit/editmenu.c:216
-msgid "&Mail...                    "
-msgstr "&Poslat elektronicky..."
-
-#: gtkedit/editmenu.c:229
-msgid "&Execute macro... C-x e, KEY"
-msgstr "&Proveï makro...                C-x e, KEY"
-
-#: gtkedit/editmenu.c:235
-msgid "'ispell' s&Pell check    M-$"
-msgstr "'ispell' &Kontrola pravopisu    M-$"
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-msgid "&General...  "
-msgstr "&Obecné...  "
-
-#: gtkedit/editmenu.c:245 gtkedit/editmenu.c:254
-msgid "&Save mode..."
-msgstr "&Re¾im ukládání..."
-
-#: gtkedit/editmenu.c:247 gtkedit/editmenu.c:256 src/main.c:1339
-msgid "&Layout..."
-msgstr "&Rozlo¾ení..."
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:392
-#: src/chmod.c:164 src/chown.c:130
-msgid " File "
-msgstr " Soubor "
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276 gtkedit/editmenu.c:408
-msgid " Edit "
-msgstr " Edit "
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277
-msgid " Sear/Repl "
-msgstr " Hledat/Nahradit "
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278 gtkedit/editmenu.c:448
-msgid " Command "
-msgstr " Pøíkaz "
-
-#: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279
-msgid " Options "
-msgstr " Nastavení "
-
-#: gtkedit/editmenu.c:393
-msgid "Open...\tC-o"
-msgstr "Otevøít...\tC-o"
-
-#: gtkedit/editmenu.c:394
-msgid "New\tC-n"
-msgstr "Nový\tC-n"
-
-#: gtkedit/editmenu.c:396
-msgid "Save\tF2"
-msgstr "Ulo¾it\tF2"
-
-#: gtkedit/editmenu.c:397
-msgid "Save as...\tF12"
-msgstr "Ulo¾it jako...\tF12"
-
-#: gtkedit/editmenu.c:399
-msgid "Insert file...\tF15"
-msgstr "Vlo¾it soubor...\tF15"
-
-#: gtkedit/editmenu.c:400
-msgid "Copy to file...\tC-f"
-msgstr "Zkopírovat do souboru...\tC-f"
-
-#. Tool hint
-#: gtkedit/editmenu.c:403
-msgid "Disk operations"
-msgstr "Diskové operace"
-
-#: gtkedit/editmenu.c:409
-msgid "Toggle mark\tF3"
-msgstr "Otoèit znaèky\tF3"
-
-#: gtkedit/editmenu.c:410
-msgid "Toggle mark columns\tC-b"
-msgstr "Prohodit znaèku sloupcù\tC-b"
-
-#: gtkedit/editmenu.c:412
-msgid "Toggle book mark\tC-M-Ins"
-msgstr "Pøepnout zálo¾ku\tC-M-Ins"
-
-#: gtkedit/editmenu.c:413
-msgid "Previous book mark\tC-M-Up"
-msgstr "Pøedchozí zálo¾ka\tC-M-Up"
-
-#: gtkedit/editmenu.c:414
-msgid "Next book mark\tC-M-Down"
-msgstr "Dal¹í zálo¾ka\tC-M-Down"
-
-#: gtkedit/editmenu.c:415
-msgid "Flush book marks"
-msgstr "Zamenout zálo¾ky"
-
-#: gtkedit/editmenu.c:417
-msgid "Toggle insert/overwrite\tIns"
-msgstr "Pøepni vkládání/pøepisování\tIns"
-
-#: gtkedit/editmenu.c:419
-msgid "Copy block to cursor\tF5"
-msgstr "Zkopíruj blok ke kurzoru\tF5"
-
-#: gtkedit/editmenu.c:420
-msgid "Move block to cursor\tF6"
-msgstr "Pøesunout blok ke kurzoru\tF6"
-
-#: gtkedit/editmenu.c:421
-msgid "Delete block\tF8/C-Del"
-msgstr "Vymazat blok\tF8/C-Del"
-
-#: gtkedit/editmenu.c:423
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr "Zkopírovat blok na clipboard\tC-Ins"
-
-#: gtkedit/editmenu.c:424
-msgid "Cut block to clipbrd\tS-Del"
-msgstr "Pøesunout blok do schránky\tS-Del"
-
-#: gtkedit/editmenu.c:425
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr "Vlo¾it blok ze schránky\tS-Ins"
-
-#: gtkedit/editmenu.c:426
-msgid "Selection history\tM-Ins"
-msgstr "Historie výbìru\tM-Ins"
-
-#: gtkedit/editmenu.c:428
-msgid "Undo\tC-BackSpace"
-msgstr "Akce zpìt\tC-BackSpace"
-
-#. Tool hint
-#: gtkedit/editmenu.c:431
-msgid "Manipulating blocks of text"
-msgstr "Manipulace s bloky textu"
-
-#: gtkedit/editmenu.c:436
-msgid " Srch/Replce "
-msgstr " Hledat/Nahr "
-
-#: gtkedit/editmenu.c:437
-msgid "Search...\tF7"
-msgstr "Hledat...\tF7"
-
-#: gtkedit/editmenu.c:438
-msgid "Search again\tF17"
-msgstr "Hledat znovu\tF17"
-
-#: gtkedit/editmenu.c:439
-msgid "Replace...\tF4"
-msgstr "Nahraï...\tF4"
-
-#: gtkedit/editmenu.c:440
-msgid "Replace again\tF14"
-msgstr "Nahraï znovu\tF14"
-
-#. Tool hint
-#: gtkedit/editmenu.c:443
-msgid "Search for and replace text"
-msgstr "Hledat text a nahraïit jiným"
-
-#: gtkedit/editmenu.c:449
-msgid "Goto line...\tM-l"
-msgstr "Na øádku...\tM-l"
-
-#: gtkedit/editmenu.c:451
-msgid "Start record macro\tC-r"
-msgstr "Zaèátek makra\tC-r"
-
-#: gtkedit/editmenu.c:452
-msgid "Finish record macro...\tC-r"
-msgstr "Konec makra...\tC-r"
-
-#: gtkedit/editmenu.c:453
-msgid "Execute macro...\tC-a, KEY"
-msgstr "Provést makro...\tC-a, TOUCHE"
-
-#: gtkedit/editmenu.c:454
-msgid "Delete macro...\t"
-msgstr "Smazat makro...\t"
-
-#: gtkedit/editmenu.c:456
-msgid "Insert date/time\tC-d"
-msgstr "Vlo¾it datum a èas\tC-d"
-
-#: gtkedit/editmenu.c:457
-msgid "Format paragraph\tM-p"
-msgstr "Pøeformátovat odstavec\tM-p"
-
-#: gtkedit/editmenu.c:459
-msgid "Refresh display\tC-l"
-msgstr "Obnovit zobrazení\tC-l"
-
-#. Tool hint
-#: gtkedit/editmenu.c:462
-msgid "Macros and internal commands"
-msgstr "Makra a interní pøíkazy"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
@@ -2605,6 +2681,71 @@ msgid ""
 msgstr ""
 "gtkedit.c: Promìnná HOME není nastavena a neexistuje polo¾ka v /etc/passwd - "
 "konec.\n"
+
+#: gtkedit/gtkedit.c:1246
+msgid "Interactive help browser"
+msgstr ""
+
+#: gtkedit/gtkedit.c:1247
+#, fuzzy
+msgid "Save to current file name"
+msgstr " Zadejte jméno souboru: "
+
+#: gtkedit/gtkedit.c:1248
+msgid "Toggle In/Off invisible marker to highlight text"
+msgstr ""
+
+#: gtkedit/gtkedit.c:1249
+#, fuzzy
+msgid "Find and replace strings/regular expressions"
+msgstr " ©patnì zadaný regulární výraz "
+
+#: gtkedit/gtkedit.c:1249
+#, fuzzy
+msgid "Replc"
+msgstr "Náhrada"
+
+#: gtkedit/gtkedit.c:1250
+#, fuzzy
+msgid "Copy highlighted block to cursor position"
+msgstr "Zkopíruj blok ke kurzoru\tF5"
+
+#: gtkedit/gtkedit.c:1252
+#, fuzzy
+msgid "Move highlighted block to cursor position"
+msgstr "Pøesunout blok ke kurzoru\tF6"
+
+#: gtkedit/gtkedit.c:1253
+#, fuzzy
+msgid "Find"
+msgstr "Hotovo"
+
+#: gtkedit/gtkedit.c:1253
+#, fuzzy
+msgid "Find strings/regular expressions"
+msgstr " ©patnì zadaný regulární výraz "
+
+#: gtkedit/gtkedit.c:1254
+msgid "Delete highlighted text"
+msgstr ""
+
+#: gtkedit/gtkedit.c:1254
+#, fuzzy
+msgid "Dlete"
+msgstr "Smazat"
+
+#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2395 src/screen.c:2425
+msgid "Menu"
+msgstr "MenuU¾"
+
+#: gtkedit/gtkedit.c:1255
+#, fuzzy
+msgid "Pull down menu"
+msgstr "menu pøi &F9"
+
+#: gtkedit/gtkedit.c:1256
+msgid "Exit editor"
+msgstr ""
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
@@ -2630,15 +2771,59 @@ msgstr "zkopírovat blok do souboru"
 msgid "Search/Replace"
 msgstr "Hledat/Nahradit"
 
-#: gtkedit/syntax.c:1339 gtkedit/syntax.c:1346
-msgid " Load syntax file "
+#: gtkedit/syntax.c:1051
+msgid ""
+" Fail trying to open ispell program. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+
+#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
+#: gtkedit/syntax.c:1078
+msgid " Spelling Message "
+msgstr ""
+
+#: gtkedit/syntax.c:1060
+msgid ""
+" Fail trying to open ispell pipes. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+
+#: gtkedit/syntax.c:1069
+msgid ""
+" Fail trying to read ispell pipes. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+
+#: gtkedit/syntax.c:1078
+msgid ""
+" Error reading from ispell. \n"
+" Ispell is being restarted. "
+msgstr ""
+
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+#, fuzzy
+msgid " Load Syntax Rules "
 msgstr " Naèíst syntaktický soubor "
 
-#: gtkedit/syntax.c:1339
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+msgid ""
+" Your syntax rule file is outdated \n"
+" A new rule file is being installed. \n"
+" Your old rule file has been saved with a .OLD extension. "
+msgstr ""
+
+#: gtkedit/syntax.c:1487
 msgid " File access error "
 msgstr " Chyba v pøístupu k souboru "
 
-#: gtkedit/syntax.c:1345
+#: gtkedit/syntax.c:1487 gtkedit/syntax.c:1494
+msgid " Load syntax file "
+msgstr " Naèíst syntaktický soubor "
+
+#: gtkedit/syntax.c:1493
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Chyba v souboru %s na øádce %d "
@@ -2721,7 +2906,7 @@ msgstr " Nemù¾ete pou¾ít chown na tarfs "
 msgid "Background process:"
 msgstr "Procesy na pozadí:"
 
-#: src/background.c:287 src/file.c:2173
+#: src/background.c:287 src/file.c:2192
 msgid " Background process error "
 msgstr " Chyba procesu na pozadí "
 
@@ -2808,16 +2993,16 @@ msgid " Confirmation "
 msgstr " Potvrzovaní "
 
 #: src/boxes.c:461
+msgid "7 bits"
+msgstr "7 bits"
+
+#: src/boxes.c:461
 msgid "Full 8 bits output"
 msgstr "Plných 8 bitù na výstupu"
 
 #: src/boxes.c:461
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
-
-#: src/boxes.c:461
-msgid "7 bits"
-msgstr "7 bits"
 
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
@@ -3063,28 +3248,28 @@ msgid "Could not change directory"
 msgstr "Není mo¾no zmìnit adresáø"
 
 #: src/cmd.c:283
-msgid " View file "
-msgstr " Prohlí¾et soubor "
-
-#: src/cmd.c:283
 msgid " Filename:"
 msgstr " Jméno souboru:"
 
-#: src/cmd.c:300
-msgid " Filtered view "
-msgstr " Filtrovaný pohled "
+#: src/cmd.c:283
+msgid " View file "
+msgstr " Prohlí¾et soubor "
 
 #: src/cmd.c:300
 msgid " Filter command and arguments:"
 msgstr " Pøíkaz filtru a jeho argumenty:"
 
-#: src/cmd.c:388
-msgid "Create a new Directory"
-msgstr "Vytvoøit nový adresáø"
+#: src/cmd.c:300
+msgid " Filtered view "
+msgstr " Filtrovaný pohled "
 
 #: src/cmd.c:388
 msgid " Enter directory name:"
 msgstr " Zadej jméno adresáøe:"
+
+#: src/cmd.c:388
+msgid "Create a new Directory"
+msgstr "Vytvoøit nový adresáø"
 
 #: src/cmd.c:449
 msgid " Filter "
@@ -3110,13 +3295,13 @@ msgstr "Upravit akce k pøíponám"
 msgid " Which extension file you want to edit? "
 msgstr " Který soubor s pøíponami chcete editovat? "
 
-#: src/cmd.c:642
-msgid "&User"
-msgstr "&U¾ivatel"
-
 #: src/cmd.c:642 src/cmd.c:668
 msgid "&System Wide"
 msgstr "&Systémový"
+
+#: src/cmd.c:642
+msgid "&User"
+msgstr "&U¾ivatel"
 
 #: src/cmd.c:665
 msgid "Menu file edit"
@@ -3127,12 +3312,12 @@ msgid " Which menu file will you edit? "
 msgstr " Který soubor menu chcete upravit? "
 
 #: src/cmd.c:668
-msgid "&Local"
-msgstr "&Local"
-
-#: src/cmd.c:668
 msgid "&Home"
 msgstr "&Doma"
+
+#: src/cmd.c:668
+msgid "&Local"
+msgstr "&Local"
 
 #: src/cmd.c:853
 msgid " Compare directories "
@@ -3192,7 +3377,7 @@ msgstr ""
 msgid " Link "
 msgstr " Link "
 
-#: src/cmd.c:1030 src/cmd.c:1169 src/file.c:1685
+#: src/cmd.c:1030 src/cmd.c:1169 src/file.c:1704
 msgid " to:"
 msgstr " na:"
 
@@ -3238,44 +3423,49 @@ msgstr " Relativní symlink "
 msgid " relative symlink: %s "
 msgstr " relativní symlink: %s "
 
-#: src/cmd.c:1284
+#: src/cmd.c:1331
 msgid " Enter machine name (F1 for details): "
 msgstr " Jméno poèítaèe (F1 - nápovìda): "
 
-#: src/cmd.c:1308
+#: src/cmd.c:1355
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Pracovní adresáø nelze zmìnit na %s "
 
-#: src/cmd.c:1315
+#: src/cmd.c:1362
 msgid " Link to a remote machine "
 msgstr " Odkaz na vzdálený poèítaè "
 
-#: src/cmd.c:1321
+#: src/cmd.c:1368
 msgid " FTP to machine "
 msgstr " spojení pøes FTP "
 
-#: src/cmd.c:1331
+#: src/cmd.c:1374
+#, fuzzy
+msgid " SMB link to machine "
+msgstr " spojení pøes FTP "
+
+#: src/cmd.c:1384
 msgid " Socket source routing setup "
 msgstr " Nastavení zdrojového smìrování pro soket "
 
-#: src/cmd.c:1332
+#: src/cmd.c:1385
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Zadejte poèítaè pro 'source routing': "
 
-#: src/cmd.c:1339
-msgid " Host name "
-msgstr " Jméno poèítaèe "
-
-#: src/cmd.c:1339
+#: src/cmd.c:1392
 msgid " Error while looking up IP address "
 msgstr " Chyba pøi zji¹»ování IP adresy "
 
-#: src/cmd.c:1350
+#: src/cmd.c:1392
+msgid " Host name "
+msgstr " Jméno poèítaèe "
+
+#: src/cmd.c:1403
 msgid " Undelete files on an ext2 file system "
 msgstr " Obnovit soubory na diskových oblastech typu ext2"
 
-#: src/cmd.c:1351
+#: src/cmd.c:1404
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3283,11 +3473,11 @@ msgstr ""
 " Zadejte zaøízení (bez /dev/), na kterém chcete\n"
 "   obnovit soubory: (F1 nápovìda)"
 
-#: src/cmd.c:1401
+#: src/cmd.c:1454
 msgid " Setup saved to ~/"
 msgstr " Nastavení ulo¾eno do ~/"
 
-#: src/cmd.c:1406
+#: src/cmd.c:1459
 msgid " Setup "
 msgstr " Nastavení "
 
@@ -3382,11 +3572,11 @@ msgstr "&Skupina"
 msgid "File exists but can not be stat-ed: %s %s"
 msgstr "Soubor existuje, ale nelze na mìm provést stat(): %s %s"
 
-#: src/dir.c:662
+#: src/dir.c:657
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: src/ext.c:131 src/user.c:506
+#: src/ext.c:143 src/user.c:506
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3395,7 +3585,7 @@ msgstr ""
 " Nelze vygenerovat unikátní jméno souboru \n"
 " %s "
 
-#: src/ext.c:138 src/user.c:518
+#: src/ext.c:150 src/user.c:518
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3404,31 +3594,27 @@ msgstr ""
 " Nelze vytvoøit doèasný soubor \n"
 " %s "
 
-#: src/ext.c:153 src/user.c:547
+#: src/ext.c:165 src/user.c:547
 msgid " Parameter "
 msgstr " Parametr "
 
-#: src/ext.c:303
+#: src/ext.c:315
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " Nelze pou¹tìt pøíkazy na VFS adresáøi "
 
-#: src/ext.c:400
+#: src/ext.c:412
 msgid " file error"
 msgstr " chyba souboru"
 
-#: src/ext.c:401
+#: src/ext.c:413
 msgid "Format of the "
 msgstr "Formát "
 
-#: src/ext.c:419
+#: src/ext.c:431
 msgid " file error "
 msgstr " chyba souboru "
 
-#: src/ext.c:420
-msgid "Format of the ~/"
-msgstr "Formát ~/"
-
-#: src/ext.c:420
+#: src/ext.c:432
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3438,7 +3624,11 @@ msgstr ""
 " verzí 3.0. Mù¾ete ji buï\n"
 " zkopírovat z "
 
-#: src/ext.c:422
+#: src/ext.c:432
+msgid "Format of the ~/"
+msgstr "Formát ~/"
+
+#: src/ext.c:434
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3446,7 +3636,7 @@ msgstr ""
 "mc.ext nebo pou¾ít tento\n"
 " soubor jako pøíklad, jak ho napsat.\n"
 
-#: src/ext.c:424
+#: src/ext.c:436
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext bude pou¾it pro teï."
 
@@ -3725,16 +3915,21 @@ msgstr ""
 " %s "
 
 #: src/file.c:1246
+#, fuzzy, c-format
+msgid " `%s' and `%s' are the same directory "
+msgstr " `%s' a `%s' jsou stejný soubor "
+
+#: src/file.c:1265
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Nelze pøepsat adresáø \"%s\" %s "
 
-#: src/file.c:1248
+#: src/file.c:1267
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Nelze pøepsat soubor \"%s\" %s"
 
-#: src/file.c:1275
+#: src/file.c:1294
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -3743,7 +3938,7 @@ msgstr ""
 " Nelze pøesunout adresáø \"%s\" na \"%s\" \n"
 " %s "
 
-#: src/file.c:1338
+#: src/file.c:1357
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -3752,7 +3947,7 @@ msgstr ""
 " Nelze smazat soubor \"%s\" \n"
 " %s "
 
-#: src/file.c:1399 src/file.c:1469 src/file.c:1501
+#: src/file.c:1418 src/file.c:1488 src/file.c:1520
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -3761,7 +3956,7 @@ msgstr ""
 " Nelze smazat adresáø \"%s\" \n"
 " %s "
 
-#: src/file.c:1540
+#: src/file.c:1559
 msgid " Internal error: get_file \n"
 msgstr " Interní chyba: get_file \n"
 
@@ -3774,87 +3969,87 @@ msgstr " Interní chyba: get_file \n"
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1661
+#: src/file.c:1680
 msgid "1Copy"
 msgstr "1Kopírovat"
 
-#: src/file.c:1661
-msgid "1Move"
-msgstr "1Pøesunout"
-
-#: src/file.c:1661
+#: src/file.c:1680
 msgid "1Delete"
 msgstr "1Smazat"
 
-#: src/file.c:1676
+#: src/file.c:1680
+msgid "1Move"
+msgstr "1Pøesunout"
+
+#: src/file.c:1695
 #, c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1677
+#: src/file.c:1696
 #, c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1679
+#: src/file.c:1698
 #, c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-#: src/file.c:1680
+#: src/file.c:1699
 #, c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1684
-msgid "file"
-msgstr "soubor"
-
-#: src/file.c:1684
-msgid "files"
-msgstr "souborù"
-
-#: src/file.c:1684
-msgid "directory"
-msgstr "adresáø"
-
-#: src/file.c:1684
+#: src/file.c:1703
 msgid "directories"
 msgstr "adresáøù"
 
-#: src/file.c:1685
-msgid "files/directories"
-msgstr "souborù/adresáøù"
+#: src/file.c:1703
+msgid "directory"
+msgstr "adresáø"
 
-#: src/file.c:1685
+#: src/file.c:1703
+msgid "file"
+msgstr "soubor"
+
+#: src/file.c:1703
+msgid "files"
+msgstr "souborù"
+
+#: src/file.c:1704
 msgid " with source mask:"
 msgstr " vyhovujících masce: (F1=nápovìda)"
 
-#: src/file.c:1837
+#: src/file.c:1704
+msgid "files/directories"
+msgstr "souborù/adresáøù"
+
+#: src/file.c:1856
 msgid " Can't operate on \"..\"! "
 msgstr " Nelze pracovat s \"..\"! "
 
-#: src/file.c:1856 src/screen.c:2092
-msgid "Yes"
-msgstr "Ano"
-
-#: src/file.c:1856 src/screen.c:2092
+#: src/file.c:1875 src/screen.c:2116
 msgid "No"
 msgstr "Ne"
 
-#: src/file.c:1909
+#: src/file.c:1875 src/screen.c:2116
+msgid "Yes"
+msgstr "Ano"
+
+#: src/file.c:1928
 msgid " Sorry, I could not put the job in background "
 msgstr " Bohu¾el, úlohu nelze pøesunout na pozadí "
 
-#: src/file.c:1997 src/file.c:2081
+#: src/file.c:2016 src/file.c:2100
 msgid " Internal failure "
 msgstr " Interní chyba "
 
-#: src/file.c:1997 src/file.c:2081
+#: src/file.c:2016 src/file.c:2100
 msgid " Unknown file operation "
 msgstr " Neznámá souborová operace "
 
-#: src/file.c:2012
+#: src/file.c:2031
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -3863,15 +4058,15 @@ msgstr ""
 " Cíl \"%s\" musí být adresáøem \n"
 " %s "
 
-#: src/file.c:2174
-msgid "&Retry"
-msgstr "&Zkus znovu"
-
-#: src/file.c:2174 src/file.c:2235 src/filegui.c:264 src/filegui.c:592
+#: src/file.c:2193 src/file.c:2254 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
 msgstr "&Zru¹it"
 
-#: src/file.c:2226
+#: src/file.c:2193
+msgid "&Retry"
+msgstr "&Zkus znovu"
+
+#: src/file.c:2245
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -3881,7 +4076,7 @@ msgstr ""
 "   Adresáø není prázdný.   \n"
 "   Smazat vèetnì podadresáøù? "
 
-#: src/file.c:2227
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -3891,27 +4086,27 @@ msgstr ""
 "   Proces na pozadí: Adresáø není prázdný \n"
 "   Smazat rekurzivnì? "
 
-#: src/file.c:2234
+#: src/file.c:2253
 msgid "a&ll"
 msgstr "&v¹e"
 
-#: src/file.c:2234 src/filegui.c:595
+#: src/file.c:2253 src/filegui.c:595
 msgid "non&E"
 msgstr "¾ád&Né"
 
-#: src/file.c:2244
+#: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Napi¹te 'yes' jestli¾e OPRAVDU chcete smazat "
 
-#: src/file.c:2246
+#: src/file.c:2265
 msgid "all the directories "
 msgstr "v¹echny adresáøe "
 
-#: src/file.c:2248
+#: src/file.c:2267
 msgid " Recursive Delete "
 msgstr " Rekurzivní mazání "
 
-#: src/file.c:2249
+#: src/file.c:2268
 msgid " Background process: Recursive Delete "
 msgstr " Pozadí: Rekurzivní mazání "
 
@@ -4062,18 +4257,18 @@ msgid "&Edit - F4"
 msgstr "&Uprav - F4"
 
 #: src/find.c:170
-msgid "Start at:"
-msgstr "Zaèni v:"
+msgid "Content: "
+msgstr "Obsah: "
 
 #: src/find.c:170
 msgid "Filename:"
 msgstr "Jméno souboru:"
 
 #: src/find.c:170
-msgid "Content: "
-msgstr "Obsah: "
+msgid "Start at:"
+msgstr "Zaèni v:"
 
-#: src/find.c:171 src/main.c:1236 src/main.c:1257
+#: src/find.c:171 src/main.c:1236 src/main.c:1260
 msgid "&Tree"
 msgstr "&Strom"
 
@@ -4098,18 +4293,18 @@ msgstr " Chyba pøi ètení dat od potomka "
 msgid "Finished"
 msgstr "Hotovo"
 
-#: src/find.c:561 src/view.c:1509
+#: src/find.c:561 src/view.c:1526
 #, c-format
 msgid "Searching %s"
 msgstr "Hledám %s"
 
-#: src/find.c:717 src/find.c:757
-msgid "Suspend"
-msgstr "Potlaèit"
-
 #: src/find.c:717
 msgid "Restart"
 msgstr "Restartovat"
+
+#: src/find.c:717 src/find.c:757
+msgid "Suspend"
+msgstr "Potlaèit"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
@@ -4262,16 +4457,16 @@ msgid "Moving "
 msgstr "Pøesunuji "
 
 #: src/hotlist.c:892
-msgid "New hotlist entry"
-msgstr "Nová polo¾ka hotlistu"
-
-#: src/hotlist.c:892
 msgid "Directory label"
 msgstr "Popis adresáøe"
 
 #: src/hotlist.c:892
 msgid "Directory path"
 msgstr "Cesta k adresáøi"
+
+#: src/hotlist.c:892
+msgid "New hotlist entry"
+msgstr "Nová polo¾ka hotlistu"
 
 #: src/hotlist.c:973
 msgid " New hotlist group "
@@ -4333,20 +4528,20 @@ msgid " file, your old hotlist entries were not deleted"
 msgstr " soubor a polo¾ky va¹eho hotlistu nebyly smazány"
 
 #: src/hotlist.c:1431
-msgid "You have ~/"
-msgstr "Máte soubor ~/"
-
-#: src/hotlist.c:1431
 msgid " file and [Hotlist] section in ~/"
 msgstr "a sekci [Hotlist] v ~/"
 
-#: src/hotlist.c:1432
-msgid "Your ~/"
-msgstr "Vá¹ ~/"
+#: src/hotlist.c:1431
+msgid "You have ~/"
+msgstr "Máte soubor ~/"
 
 #: src/hotlist.c:1432
 msgid " most probably was created\n"
 msgstr " byl velmi pravdìpodobnì vytvoøen\n"
+
+#: src/hotlist.c:1432
+msgid "Your ~/"
+msgstr "Vá¹ ~/"
 
 #: src/hotlist.c:1433
 msgid ""
@@ -4665,7 +4860,7 @@ msgstr "Stisknìte libovolnou klávesu pro pokraèování..."
 msgid " The shell is already running a command "
 msgstr " Shell u¾ provádí pøíkaz "
 
-#: src/main.c:852 src/screen.c:2090 src/screen.c:2130
+#: src/main.c:852 src/screen.c:2114 src/screen.c:2162
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -4673,239 +4868,244 @@ msgstr " Midnight Commander "
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Opravdu ukonèit Midnight Commander? "
 
-#: src/main.c:1233 src/main.c:1254
+#: src/main.c:1233 src/main.c:1257
 msgid "&Listing mode..."
 msgstr "re¾im &Výpisu..."
 
-#: src/main.c:1234 src/main.c:1255
+#: src/main.c:1234 src/main.c:1258
 msgid "&Quick view     C-x q"
 msgstr "&Rychloprohlí¾eè   C-x q"
 
-#: src/main.c:1235 src/main.c:1256
+#: src/main.c:1235 src/main.c:1259
 msgid "&Info           C-x i"
 msgstr "&Informace         C-x i"
 
-#: src/main.c:1238 src/main.c:1259
+#: src/main.c:1238 src/main.c:1262
 msgid "&Sort order..."
 msgstr "&Poøadí..."
 
-#: src/main.c:1240 src/main.c:1261
+#: src/main.c:1240 src/main.c:1264
 msgid "&Filter..."
 msgstr "&Filtr.."
 
-#: src/main.c:1243 src/main.c:1264
+#: src/main.c:1243 src/main.c:1267
 msgid "&Network link..."
 msgstr "sí»ové spo&Jení..."
 
-#: src/main.c:1244 src/main.c:1265
+#: src/main.c:1244 src/main.c:1268
 msgid "FT&P link..."
 msgstr "F&TP spojení..."
 
-#: src/main.c:1248 src/main.c:1269
+#: src/main.c:1246 src/main.c:1270
+#, fuzzy
+msgid "SM&B link..."
+msgstr "F&TP spojení..."
+
+#: src/main.c:1251 src/main.c:1275
 msgid "&Drive...       M-d"
 msgstr "&Disk...\tM-d"
 
-#: src/main.c:1250 src/main.c:1271
+#: src/main.c:1253 src/main.c:1277
 msgid "&Rescan         C-r"
 msgstr "&Znovu naèíst      C-r"
 
-#: src/main.c:1275
+#: src/main.c:1281
 msgid "&User menu          F2"
 msgstr "u¾ivate&Lské menu         F2"
 
-#: src/main.c:1276
+#: src/main.c:1282
 msgid "&View               F3"
 msgstr "pro&Hlí¾et                F3"
 
-#: src/main.c:1277
+#: src/main.c:1283
 msgid "Vie&w file...         "
 msgstr "vi&Dìt soubor... "
 
-#: src/main.c:1278
+#: src/main.c:1284
 msgid "&Filtered view     M-!"
 msgstr "&Filtrovaný pohled        M-!"
 
-#: src/main.c:1279
+#: src/main.c:1285
 msgid "&Edit               F4"
 msgstr "&Editovat                 F4"
 
-#: src/main.c:1280
+#: src/main.c:1286
 msgid "&Copy               F5"
 msgstr "&Kopie                    F5"
 
-#: src/main.c:1281
+#: src/main.c:1287
 msgid "c&Hmod           C-x c"
 msgstr "zmìna &práv               C-x c"
 
-#: src/main.c:1283
+#: src/main.c:1289
 msgid "&Link            C-x l"
 msgstr "Vyrobit &odkaz            C-x l"
 
-#: src/main.c:1284
+#: src/main.c:1290
 msgid "&SymLink         C-x s"
 msgstr "Vyrobit &symb. odkaz      C-x s"
 
-#: src/main.c:1285
+#: src/main.c:1291
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "uprav s&Ymb. odkaz        C-x C-s"
 
-#: src/main.c:1286
+#: src/main.c:1292
 msgid "ch&Own           C-x o"
 msgstr "zmìna &vlastníka          C-x o"
 
-#: src/main.c:1287
+#: src/main.c:1293
 msgid "&Advanced chown       "
 msgstr "&Zmìna práv/vlastníka  "
 
-#: src/main.c:1289
+#: src/main.c:1295
 msgid "&Rename/Move        F6"
 msgstr "pøesun/pøejmenova&T       F6"
 
-#: src/main.c:1290
+#: src/main.c:1296
 msgid "&Mkdir              F7"
 msgstr "&Nový adresáø             F7"
 
-#: src/main.c:1291
+#: src/main.c:1297
 msgid "&Delete             F8"
 msgstr "s&mazat                   F8"
 
-#: src/main.c:1292
+#: src/main.c:1298
 msgid "&Quick cd          M-c"
 msgstr "rychlé &Cd                M-c"
 
-#: src/main.c:1294
+#: src/main.c:1300
 msgid "select &Group      M-+"
 msgstr "oznaè&It skupinu          M-+"
 
-#: src/main.c:1295
+#: src/main.c:1301
 msgid "u&Nselect group    M-\\"
 msgstr "odznaèit sk&Upinu         M-\\"
 
-#: src/main.c:1296
+#: src/main.c:1302
 msgid "reverse selec&Tion M-*"
 msgstr "p&Rohodit oznaèení        M-*"
 
-#: src/main.c:1298
+#: src/main.c:1304
 msgid "e&Xit              F10"
 msgstr "Konec                    F10"
 
-#: src/main.c:1308
+#: src/main.c:1314
 msgid "&Directory tree"
 msgstr "&Strom adresáøù"
 
-#: src/main.c:1310
+#: src/main.c:1316
 msgid "&Find file            M-?"
 msgstr "&Najít soubor                       M-?"
 
-#: src/main.c:1311
+#: src/main.c:1317
 msgid "s&Wap panels          C-u"
 msgstr "&Prohodit panely                    C-u"
 
-#: src/main.c:1312
+#: src/main.c:1318
 msgid "switch &Panels on/off C-o"
 msgstr "Panely &ano/ne                      C-o"
 
-#: src/main.c:1313
+#: src/main.c:1319
 msgid "&Compare directories  C-x d"
 msgstr "po&Rovnat adresáøe                  C-x d"
 
-#: src/main.c:1314
+#: src/main.c:1320
 msgid "e&Xternal panelize    C-x !"
 msgstr "e&Xterní panelizace                 C-x !"
 
-#: src/main.c:1315
+#: src/main.c:1321
 msgid "show directory s&Izes"
 msgstr "ukázat velikost&I adresáøù"
 
-#: src/main.c:1317
+#: src/main.c:1323
 msgid "command &History"
 msgstr "&Historie pøíkazù"
 
-#: src/main.c:1318
+#: src/main.c:1324
 msgid "di&Rectory hotlist    C-\\"
 msgstr "ho&Tlist adresáøù                   C-\\"
 
-#: src/main.c:1320
+#: src/main.c:1326
 msgid "&Active VFS list      C-x a"
 msgstr "Seznam aktivních &VFS               C-x a"
 
-#: src/main.c:1323
+#: src/main.c:1329
 msgid "&Background jobs      C-x j"
 msgstr "úloh&Y na pozadí                    C-x j"
 
-#: src/main.c:1327
+#: src/main.c:1333
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Obnovit smazané soubory (pouze ext2fs)"
 
-#: src/main.c:1330
+#: src/main.c:1336
 msgid "&Listing format edit"
 msgstr "&Upravit formát výpisu"
 
-#: src/main.c:1332
+#: src/main.c:1338
 msgid "&Extension file edit"
 msgstr "&Upravit akce k pøíponám"
 
-#: src/main.c:1333
+#: src/main.c:1339
 msgid "&Menu file edit"
 msgstr "upravit u¾ivatelské &Menu"
 
-#: src/main.c:1338
+#: src/main.c:1344
 msgid "&Configuration..."
 msgstr "kon&Figurace..."
 
-#: src/main.c:1340
+#: src/main.c:1346
 msgid "c&Onfirmation..."
 msgstr "&Potvrzování..."
 
-#: src/main.c:1341
+#: src/main.c:1347
 msgid "&Display bits..."
 msgstr "&7/8bitù display..."
 
-#: src/main.c:1343
+#: src/main.c:1349
 msgid "learn &Keys..."
 msgstr "uèení &Kláves..."
 
-#: src/main.c:1346
+#: src/main.c:1352
 msgid "&Virtual FS..."
 msgstr "&Virtuální FS..."
 
-#: src/main.c:1349
+#: src/main.c:1355
 msgid "&Save setup"
 msgstr "&Ulo¾it nastavení"
 
-#: src/main.c:1365 src/main.c:1367
+#: src/main.c:1371 src/main.c:1373
 msgid " &Left "
 msgstr " &Levý "
 
-#: src/main.c:1367
+#: src/main.c:1373
 msgid " &Above "
 msgstr " &Nahoøe "
 
-#: src/main.c:1370
+#: src/main.c:1376
 msgid " &File "
 msgstr " &Soubor "
 
-#: src/main.c:1371
+#: src/main.c:1377
 msgid " &Command "
 msgstr " &Pøíkaz "
 
-#: src/main.c:1372
+#: src/main.c:1378
 msgid " &Options "
 msgstr " &Nastavení "
 
-#: src/main.c:1374 src/main.c:1376
+#: src/main.c:1380 src/main.c:1382
 msgid " &Right "
 msgstr " &Pravý "
 
-#: src/main.c:1376
+#: src/main.c:1382
 msgid " &Below "
 msgstr " &Ní¾e "
 
-#: src/main.c:1431
+#: src/main.c:1437
 msgid " Information "
 msgstr " Informace "
 
-#: src/main.c:1432
+#: src/main.c:1438
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -4917,136 +5117,132 @@ msgstr ""
 " dì pou¾ijte ruèní naètení obsahu adresáøe(manual reload).\n"
 " V manuálové stránce se dozvíte detaily."
 
-#: src/main.c:1706 src/screen.c:2362 src/screen.c:2392
-msgid "Menu"
-msgstr "MenuU¾"
-
-#: src/main.c:1911
+#: src/main.c:1917
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Dìkujeme za pou¾ití programu GNU Midnight Commander"
 
-#: src/main.c:2270
+#: src/main.c:2276
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr "s podporou my¹i v xterm%s.\n"
 
-#: src/main.c:2271
+#: src/main.c:2277
 msgid " and the Linux console"
 msgstr " a linuxové konzoli"
 
-#: src/main.c:2366
+#: src/main.c:2372
 msgid "The TERM environment variable is unset!\n"
 msgstr "Promìnná prostøedí TERM není nastavena!\n"
 
-#: src/main.c:2573
+#: src/main.c:2582
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Adresáø knihovních souborù programu Midnight Commander: %s\n"
 
-#: src/main.c:2584
+#: src/main.c:2596
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Pøepínaè -m není ji¾ pou¾íván. Pou¾ijte volby Zobrazení znakù... v menu "
 "Nastavení\n"
 
-#: src/main.c:2661
+#: src/main.c:2673
 msgid "Use to debug the background code"
 msgstr "Pou¾ít pøi ladìní kódu v pozadí"
 
-#: src/main.c:2667
+#: src/main.c:2679
 msgid "Request to run in color mode"
 msgstr "Vy¾aduje barevné zobrazování"
 
-#: src/main.c:2669
+#: src/main.c:2681
 msgid "Specifies a color configuration"
 msgstr "Urèuje konfiguraci barev"
 
-#: src/main.c:2674
+#: src/main.c:2686
 msgid "Edits one file"
 msgstr "Editovat jeden soubor"
 
-#: src/main.c:2678
+#: src/main.c:2690
 msgid "Displays this help message"
 msgstr "Zobrazit tuto nápovìdu"
 
-#: src/main.c:2681
+#: src/main.c:2693
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Zobrazí se nápovìda, jak zmìnit barvy"
 
-#: src/main.c:2684
+#: src/main.c:2696
 msgid "Log ftp dialog to specified file"
 msgstr "Zapisovat dialog ftp do daného souboru"
 
-#: src/main.c:2691
+#: src/main.c:2703
 msgid "Obsolete"
 msgstr "Ji¾ nepou¾íváno"
 
-#: src/main.c:2693
+#: src/main.c:2705
 msgid "Requests to run in black and white"
 msgstr "Spustit èernobíle"
 
-#: src/main.c:2695
+#: src/main.c:2707
 msgid "Disable mouse support in text version"
 msgstr "Zakázat podporu my¹i (v textové verzi)"
 
-#: src/main.c:2698
+#: src/main.c:2710
 msgid "Disables subshell support"
 msgstr "Zákaz pou¾ítí podshellu"
 
-#: src/main.c:2702
+#: src/main.c:2714
 msgid "Prints working directory at program exit"
 msgstr "Pøi ukonèení programu vytisknout pracovní adresáø"
 
-#: src/main.c:2704
+#: src/main.c:2716
 msgid "Resets soft keys on HP terminals"
 msgstr "Reset softkeys (kláves) na HP terminálech"
 
-#: src/main.c:2706
+#: src/main.c:2718
 msgid "To run on slow terminals"
 msgstr "Pro spu¹tìní na pomalém terminálu"
 
-#: src/main.c:2709
+#: src/main.c:2721
 msgid "Use stickchars to draw"
 msgstr "Pro vykreslení pou¾ít ascii znaky"
 
-#: src/main.c:2713
+#: src/main.c:2725
 msgid "Enables subshell support (default)"
 msgstr "Povolí spu¹tìní shellu (standardní volba)"
 
-#: src/main.c:2718
+#: src/main.c:2730
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Zkusí pou¾ít databázi termcap, nikoli terminfo"
 
-#: src/main.c:2722
+#: src/main.c:2734
 msgid "Displays the current version"
 msgstr "Zobrazí èíslo verze"
 
-#: src/main.c:2724
+#: src/main.c:2736
 msgid "Launches the file viewer on a file"
 msgstr "Odstartuje jako prohlí¾eè souboru"
 
-#: src/main.c:2726
+#: src/main.c:2738
 msgid "Forces xterm features"
 msgstr "Vnutí pou¾ití mo¾ností programu xterm"
 
-#: src/main.c:2728
-msgid "Geometry for the window"
-msgstr "Geometrie okna"
-
-#: src/main.c:2728
+#: src/main.c:2740
 msgid "GEOMETRY"
 msgstr "GEOMETRIE"
 
-#: src/main.c:2729
+#: src/main.c:2740
+msgid "Geometry for the window"
+msgstr "Geometrie okna"
+
+#: src/main.c:2741
 msgid "No windows opened at startup"
 msgstr "Neotevøe pøi startu ¾ádné okno"
 
-#: src/main.c:2731
+#: src/main.c:2743
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Zobrazit adresáø, ve kterém jsou soubory .link a konec"
 
-#: src/main.c:3015
+#: src/main.c:3034
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5054,11 +5250,11 @@ msgstr ""
 "Nelze pou¾ít(otevøít) ¾ádnou terminálovou linku. Zkuste pustit MC\n"
 "bez pøepínaèe -P. Na nìkterých systémech je tøeba pustit `which mc`\n"
 
-#: src/main.c:3093
+#: src/main.c:3112
 msgid " Notice "
 msgstr " Poznámka "
 
-#: src/main.c:3094
+#: src/main.c:3113
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5231,64 +5427,68 @@ msgstr "Zobrazit tuto nápovìdu"
 msgid "Display brief usage message"
 msgstr "Zobrazit struènou nápovìdu"
 
-#: src/screen.c:399
+#: src/screen.c:417
 msgid "MTime"
 msgstr "Modif"
 
-#: src/screen.c:400
+#: src/screen.c:418
 msgid "ATime"
 msgstr "Pøístup"
 
-#: src/screen.c:401
+#: src/screen.c:419
 msgid "CTime"
 msgstr "Zmìna"
 
-#: src/screen.c:403
+#: src/screen.c:421
 msgid "Perm"
 msgstr "Práva"
 
-#: src/screen.c:404
+#: src/screen.c:422
 msgid "Nl"
 msgstr "#ln"
 
-#: src/screen.c:405
+#: src/screen.c:423
 msgid "Inode"
 msgstr "I-uzel"
 
-#: src/screen.c:406
+#: src/screen.c:424
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:407
+#: src/screen.c:425
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:643
+#: src/screen.c:661
 #, c-format
 msgid "  %s bytes in %d file%s"
 msgstr "  %s bytù v %d souborech (%s)"
 
-#: src/screen.c:1314
+#: src/screen.c:1324
 msgid "Unknow tag on display format: "
 msgstr "Neznámá popiska ve formátu panelu: "
 
-#: src/screen.c:2091 src/screen.c:2131
+#: src/screen.c:1450
+msgid "User suplied format looks invalid, reverting to default."
+msgstr ""
+
+#: src/screen.c:2115 src/screen.c:2163
 msgid " Do you really want to execute? "
 msgstr " Opravdu spustit? "
 
-#: src/screen.c:2103 src/screen.c:2146
+#: src/screen.c:2128 src/screen.c:2178
 msgid " No action taken "
 msgstr " ®ádná akce nebyla provedena "
 
-#: src/screen.c:2366 src/screen.c:2396 src/tree.c:1017
+#: src/screen.c:2399 src/screen.c:2429 src/tree.c:1017
 msgid "RenMov"
 msgstr "Pøesun"
 
-#: src/screen.c:2367 src/screen.c:2397 src/tree.c:1021
+#: src/screen.c:2400 src/screen.c:2430 src/tree.c:1021
 msgid "Mkdir"
 msgstr "NovýAdr"
 
-#: src/screen.c:2383
+#: src/screen.c:2416
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
@@ -5357,12 +5557,12 @@ msgid "  Delete %s?  "
 msgstr "  Smazat %s?  "
 
 #: src/tree.c:777
-msgid "Static"
-msgstr "Statický"
-
-#: src/tree.c:777
 msgid "Dynamc"
 msgstr "Dynamický"
+
+#: src/tree.c:777
+msgid "Static"
+msgstr "Statický"
 
 #: src/tree.c:867
 #, c-format
@@ -5429,22 +5629,27 @@ msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Bohu¾el, pokud nepracujete s lokálním adresáøem, nelze spou¹tìt programy"
 
+#: src/user.c:724
+#, fuzzy, c-format
+msgid " Empty file %s "
+msgstr "Kopírovat soubory"
+
 #. Create listbox
-#: src/user.c:727
+#: src/user.c:733
 msgid " User menu "
 msgstr " Menu u¾ivatele "
 
-#: src/util.c:228
+#: src/util.c:232
 msgid "name_trunc: too big"
 msgstr "name_trunc: pøíli¹ velké"
 
 #. strftime() format string for recent dates
-#: src/util.c:598 src/util.c:623
+#: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
 msgstr "%e.%b %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:599 src/util.c:621
+#: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
 msgstr "%e.%b  %Y"
 
@@ -5508,7 +5713,7 @@ msgstr ""
 msgid " Can't view: not a regular file "
 msgstr " Nelze prohlí¾et: není to normální soubor "
 
-#: src/view.c:567 src/view.c:572
+#: src/view.c:569
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
@@ -5517,29 +5722,43 @@ msgstr ""
 " Nelze otevøít \"%s\"\n"
 " %s "
 
-#: src/view.c:704
+#: src/view.c:578
+#, fuzzy, c-format
+msgid ""
+" Can't stat \"%s\"\n"
+" %s "
+msgstr ""
+" Nelze provést stat %s \n"
+" %s "
+
+#: src/view.c:714
 #, c-format
 msgid "File: %s"
 msgstr "Soubor: %s "
 
-#: src/view.c:729
+#: src/view.c:728
+#, c-format
+msgid "Offset 0x%08x"
+msgstr "Posun 0x%08x"
+
+#: src/view.c:739
 msgid "  [grow]"
 msgstr " [roste]"
 
-#: src/view.c:1501
+#: src/view.c:1518
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Hledat `%s'"
 
-#: src/view.c:1608 src/view.c:1730
+#: src/view.c:1625 src/view.c:1748
 msgid " Search string not found "
 msgstr " Hledaný text nenalezen "
 
-#: src/view.c:1769
+#: src/view.c:1787
 msgid " Invalid regular expression "
 msgstr " ©patnì zadaný regulární výraz "
 
-#: src/view.c:1893
+#: src/view.c:1911
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -5548,61 +5767,84 @@ msgstr ""
 " Aktuální èíslo øádku je %d.\n"
 " Zadej nové èíslo øádku:"
 
-#: src/view.c:1923
+#: src/view.c:1933
+#, fuzzy, c-format
+msgid ""
+" The current address is 0x%lx.\n"
+" Enter the new address:"
+msgstr ""
+" Aktuální èíslo øádku je %d.\n"
+" Zadej nové èíslo øádku:"
+
+#: src/view.c:1935
+#, fuzzy
+msgid " Goto Address "
+msgstr " Jdi na øádek "
+
+#: src/view.c:1966
 msgid " Enter regexp:"
 msgstr " Zadej regulární výraz:"
 
-#: src/view.c:2028
+#: src/view.c:2071
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2028
+#: src/view.c:2071
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2029
+#: src/view.c:2072
+msgid "Goto"
+msgstr ""
+
+#: src/view.c:2072
 msgid "Line"
 msgstr "Øádek"
 
-#: src/view.c:2030
+#: src/view.c:2075
 msgid "RxSrch"
 msgstr "RxHled"
 
-#: src/view.c:2033
-msgid "EdText"
-msgstr "EdText"
-
-#: src/view.c:2033
+#: src/view.c:2078
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2035
+#: src/view.c:2078
+msgid "EdText"
+msgstr "EdText"
+
+#: src/view.c:2080
 msgid "UnWrap"
 msgstr "Nezalamovat"
 
-#: src/view.c:2035
+#: src/view.c:2080
 msgid "Wrap"
 msgstr "Zalamovat"
 
-#: src/view.c:2038
+#: src/view.c:2083
 msgid "HxSrch"
 msgstr "HxHled"
 
-#: src/view.c:2041
-msgid "Raw"
-msgstr "Pøímo"
-
-#: src/view.c:2041
+#: src/view.c:2086
 msgid "Parse"
 msgstr "Zpracovat"
 
-#: src/view.c:2045
+#: src/view.c:2086
+msgid "Raw"
+msgstr "Pøímo"
+
+#: src/view.c:2090
+msgid "Format"
+msgstr "Formátovat"
+
+#: src/view.c:2090
 msgid "Unform"
 msgstr "Neformátovat"
 
-#: src/view.c:2045
-msgid "Format"
-msgstr "Formátovat"
+#: src/widget.c:999
+#, fuzzy
+msgid " History "
+msgstr "&Historie pøíkazù"
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
@@ -5812,9 +6054,84 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Po¹kozený extfs archiv"
 
+#: vfs/fish.c:136
+#, fuzzy, c-format
+msgid "fish: Disconnecting from %s"
+msgstr "ftpfs: odpojení od %s"
+
+#: vfs/fish.c:214
+msgid "fish: Waiting for initial line..."
+msgstr ""
+
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Promiòte, ale souèasnì není mo¾né pro Vás autentizovat spojení."
+
+#: vfs/fish.c:238
+#, fuzzy
+msgid "fish: Sending password..."
+msgstr "ftpfs: heslo pro anonymní ftp odesláno"
+
+#: vfs/fish.c:244
+msgid "fish: Sending initial line..."
+msgstr ""
+
+#: vfs/fish.c:248
+msgid "fish: Handshaking version..."
+msgstr ""
+
+#: vfs/fish.c:252
+#, fuzzy
+msgid "fish: Setting up current directory..."
+msgstr "Obnovit obsah pohledu do aktuálního adresáøe"
+
+#: vfs/fish.c:254
+#, fuzzy, c-format
+msgid "fish: Connected, home %s."
+msgstr "ftpfs: pøipojeno k %s"
+
+#: vfs/fish.c:331
+#, fuzzy, c-format
+msgid "fish: Reading directory %s..."
+msgstr "ftpfs: Ète se FTP adresáø %s..."
+
+#: vfs/fish.c:426
+#, fuzzy
+msgid "fish: got listing"
+msgstr "ftpfs: získán seznam souborù"
+
+#: vfs/fish.c:430
+#, fuzzy
+msgid "fish: failed"
+msgstr "ftpfs: selhání"
+
+#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
+#: vfs/fish.c:450
+#, c-format
+msgid "fish: store %s: sending command..."
+msgstr ""
+
+#: vfs/fish.c:464
+msgid "fish: Local read failed, sending zeros"
+msgstr ""
+
+#: vfs/fish.c:476
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%d)"
+msgstr "ftpfs: ukládá se soubor %d (%d)"
+
+#: vfs/fish.c:516
+#, fuzzy
+msgid "Aborting transfer..."
+msgstr "ftpfs: pøeru¹ení pøenosu."
+
+#: vfs/fish.c:525
+msgid "Error reported after abort."
+msgstr ""
+
+#: vfs/fish.c:527
+msgid "Aborted transfer would be successful."
+msgstr ""
 
 #: vfs/ftpfs.c:326
 #, c-format
@@ -5916,55 +6233,55 @@ msgstr "ftpfs: chyba pøi pøeru¹ení: %s"
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: pøeru¹ení selhalo"
 
-#: vfs/ftpfs.c:1159 vfs/ftpfs.c:1329
+#: vfs/ftpfs.c:1161 vfs/ftpfs.c:1340
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: pøíkaz CWD selhal."
 
-#: vfs/ftpfs.c:1169 vfs/ftpfs.c:1176
+#: vfs/ftpfs.c:1171 vfs/ftpfs.c:1178
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nelze najít cíle odkazù"
 
-#: vfs/ftpfs.c:1221
+#: vfs/ftpfs.c:1232
 msgid "Resolving symlink..."
 msgstr "Vyhledávání cílù odkazù..."
 
-#: vfs/ftpfs.c:1323
+#: vfs/ftpfs.c:1334
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
 msgstr ""
 "ftpfs: Ète se FTP adresáø %s... (bez pou¾ití voleb UNIXového pøíkazu ls)"
 
-#: vfs/ftpfs.c:1325
+#: vfs/ftpfs.c:1336
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
 msgstr "ftpfs: Ète se FTP adresáø %s..."
 
-#: vfs/ftpfs.c:1341
+#: vfs/ftpfs.c:1352
 msgid "ftpfs: FAIL"
 msgstr "ftpfs: SELHÁNÍ"
 
-#: vfs/ftpfs.c:1432
+#: vfs/ftpfs.c:1443
 msgid "ftpfs: reading FTP directory interrupt by user"
 msgstr "ftpfs: u¾ivatel pøeru¹il ètení vzdáleného adresáøe"
 
-#: vfs/ftpfs.c:1462
+#: vfs/ftpfs.c:1473
 msgid "ftpfs: got listing"
 msgstr "ftpfs: získán seznam souborù"
 
-#: vfs/ftpfs.c:1475
+#: vfs/ftpfs.c:1486
 msgid "ftpfs: failed"
 msgstr "ftpfs: selhání"
 
-#: vfs/ftpfs.c:1519
+#: vfs/ftpfs.c:1530
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: selhání; jinak to ji¾ nejde"
 
-#: vfs/ftpfs.c:1583
+#: vfs/ftpfs.c:1594
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: ukládá se soubor %d (%d)"
 
-#: vfs/ftpfs.c:2019 vfs/ftpfs.c:2034
+#: vfs/ftpfs.c:2030 vfs/ftpfs.c:2045
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -5991,12 +6308,12 @@ msgstr ""
 " na vzdálené stranì kompromitována. Pokraèovat? \n"
 
 #: vfs/mcfs.c:174
-msgid " Yes "
-msgstr " Ano "
-
-#: vfs/mcfs.c:174
 msgid " No "
 msgstr " Ne "
+
+#: vfs/mcfs.c:174
+msgid " Yes "
+msgstr " Ano "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
@@ -6013,6 +6330,28 @@ msgstr " Chybné heslo "
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
 msgstr " Pøíli¹ mnoho otevøených spojení "
+
+#: vfs/smbfs.c:1421
+#, fuzzy, c-format
+msgid " %s mkdir'ing %s "
+msgstr " symbolický link: %s "
+
+#: vfs/smbfs.c:1442
+#, fuzzy, c-format
+msgid " %s rmdir'ing %s "
+msgstr " symbolický link: %s "
+
+#: vfs/smbfs.c:1550 vfs/smbfs.c:1570 vfs/smbfs.c:1631
+#, fuzzy, c-format
+msgid " %s opening remote file %s "
+msgstr ""
+" Nelze smazat soubor \"%s\" \n"
+" %s "
+
+#: vfs/smbfs.c:1654
+#, fuzzy, c-format
+msgid " %s renaming files\n"
+msgstr "  %s bytù v %d souborech (%s)"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6041,3 +6380,72 @@ msgstr ""
 "Mòoooo,...\n"
 "%s\n"
 "nevypadá, ¾e by to byl .tar archiv."
+
+#: vfs/vfs.c:1792
+msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
+msgstr ""
+
+#: vfs/vfs.c:1793
+#, c-format
+msgid "%s: %s: %s %ld bytes transfered"
+msgstr ""
+
+#~ msgid "Rescan System Devices"
+#~ msgstr "Obnovit informace o zaøízeních"
+
+#~ msgid "Auto place icons"
+#~ msgstr "Automatické nastavení pozice ikon"
+
+#~ msgid "All files"
+#~ msgstr "V¹echny soubory"
+
+#~ msgid "Archives and compressed files"
+#~ msgstr "Archivy a komprimované soubory"
+
+#~ msgid "RPM/DEB files"
+#~ msgstr "Soubory RPM/DEB"
+
+#~ msgid "Text/Document files"
+#~ msgstr "Textové soubory a dokumenty"
+
+#~ msgid "HTML and SGML files"
+#~ msgstr "Soubory HTML a SGML"
+
+#~ msgid "Postscript and PDF files"
+#~ msgstr "Postscript a PDF"
+
+#~ msgid "Spreadsheet files"
+#~ msgstr "Soubory tabulkových kalkulátorù"
+
+#~ msgid "Image files"
+#~ msgstr "Obrázky"
+
+#~ msgid "Video/animation files"
+#~ msgstr "Video/animace"
+
+#~ msgid "Audio files"
+#~ msgstr "Zvuky"
+
+#~ msgid "C program files"
+#~ msgstr "C programy"
+
+#~ msgid "C++ program files"
+#~ msgstr "C++ programy"
+
+#~ msgid "Objective-C program files"
+#~ msgstr "Programy v Objective-C"
+
+#~ msgid "Scheme program files"
+#~ msgstr "Programy v Scheme"
+
+#~ msgid "Assembler program files"
+#~ msgstr "Programy v asembleru"
+
+#~ msgid "Misc. program files"
+#~ msgstr "Dal¹í programy"
+
+#~ msgid "Font files"
+#~ msgstr "Soubory s fonty"
+
+#~ msgid "Disk operations"
+#~ msgstr "Diskové operace"
