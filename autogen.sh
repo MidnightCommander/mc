@@ -6,19 +6,16 @@ test -z "$srcdir" && srcdir=.
 
 (
 cd $srcdir
-if test -d macros; then
-	aclocal -I macros $ACLOCAL_FLAGS || exit 1
-else
-	if test -f aclocal.m4; then
-		echo Warning: aclocal.m4 cannot be rebuilt
-	else
-		echo Error: aclocal.m4 cannot be created
-		exit 1
-	fi
-fi
+
+: ${CVS=cvs}
+test -d macros || $CVS co -d macros gnome-common/macros || exit 1
+test -d intl || $CVS co -d intl gnome-common/intl || exit 1
+
+aclocal -I macros $ACLOCAL_FLAGS || exit 1
 autoheader || exit 1
 autoconf || exit 1
 automake -a || exit 1
+
 cd vfs/samba || exit 1
 date -u >include/stamp-h.in
 autoheader || exit 1

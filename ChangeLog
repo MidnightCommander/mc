@@ -1,5 +1,8 @@
 2001-04-06  Pavel Roskin  <proski@gnu.org>
 
+	* autogen.sh: Check out "intl" and "macros" directories if they
+	are missing. Simply "cvs up -d" won't restore them.
+
 	* configure.in: Bump version to 4.5.52a.
 
 2001-03-14  Pavel Roskin  <proski@gnu.org>
