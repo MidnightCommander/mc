@@ -1,5 +1,9 @@
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
+	* fish.c (open_archive_int): Don't combine "export" and
+	assignment into one command - it's not portable.  Set LC_TIME
+	to "C" as well.
+
 	* fish.c (open_archive_int): Set remote locale to C, otherwise
 	timestamps cannot be parsed in some locales.
 

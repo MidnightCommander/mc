@@ -268,7 +268,8 @@ open_archive_int (vfs *me, vfs_s_super *super)
         ERRNOR (E_PROTO, -1);
 
     /* Set up remote locale to C, otherwise dates cannot be recognized */
-    if (command (me, super, WAIT_REPLY, "export LANG=C; export LC_ALL=C\n"
+    if (command (me, super, WAIT_REPLY, "LANG=C; LC_ALL=C; LC_TIME=C\n"
+					"export LANG; export LC_ALL; export LC_TIME\n"
 					"echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
