@@ -477,9 +477,11 @@ context default
     keyword , brightcyan/14
     keyword ; brightcyan/14
 
-context # \n brown/22
+# MySQL comment
+context linestart # \n brown/22
     spellcheck
 
+# ANSI SQL comment
 context exclusive -- \n brown/22
     spellcheck
 
