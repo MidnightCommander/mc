@@ -2,6 +2,11 @@
 
 # Peter Daum <gator@cs.tu-berlin.de> (Jan 1998, mc-4.1.22)
 
+# override any locale for dates
+unset LC_ALL
+LC_TIME=C
+export LC_TIME
+
 # paths to used programs:
 ncat=cat                  # regular cat
 zcat=zcat                 # gunzip to stdout

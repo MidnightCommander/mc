@@ -1,3 +1,8 @@
+2000-09-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* extfs/patchfs (LC_TIME): patch by Martin Bialasinski:
+	override locale for dates
+
 2000-09-14  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c, extfs/{a,extfs.ini} Improved /#a filesystem
