@@ -320,7 +320,7 @@ learn_save (void)
 	    profile_changed = 1;
 	    WritePrivateProfileString (section, key_name_conv_tab [i].name,
 	        learnkeys [i].sequence, profile_name);
-        }
+	}
     }
 
     /* On the one hand no good idea to save the complete setup but 
@@ -330,7 +330,9 @@ learn_save (void)
      * disk is much worse.
      */
     if (profile_changed)
-        sync_profiles ();
+	sync_profiles ();
+
+    g_free (section);
 }
 
 void learn_keys (void)
