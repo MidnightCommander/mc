@@ -47,7 +47,11 @@ ALLICONS = 				\
 
 all:
 
-install: @insticons@
+install: @insticons@ Makefile
+
+Makefile: Makefile.in ../config.status
+	(cd ..; CONFIG_FILES=new_icons/Makefile CONFIG_HEADERS= ./config.status)
+
 
 install_icons:
 	for I in $(ALLICONS); \

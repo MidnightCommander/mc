@@ -560,6 +560,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
     dirp = mc_opendir (".");
     if (!dirp) {
  	clean_dir (list, count);
+	tree_store_end_check ();
 	return set_zero_dir (list);
     }
 
@@ -590,6 +591,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
              IMHO it's not worthwhile). 
 	    clean_dir (&dir_copy, count);
              */
+	    tree_store_end_check ();
 	    return next_free;
 	}
 	

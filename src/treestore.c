@@ -594,7 +594,7 @@ tree_store_start_check (char *path)
 	if (!ts.loaded)
 		return NULL;
 
-	g_assert (ts.check_name == NULL);
+	g_return_val_if_fail (ts.check_name == NULL, NULL);
 	ts.check_start = NULL;
 
 	tree_store_set_freeze (TRUE);
@@ -655,7 +655,7 @@ tree_store_end_check (void)
 	if (!ts.loaded)
 		return;
 
-	g_assert (ts.check_name != NULL);
+	g_return_if_fail (ts.check_name != NULL);
 	
 	/* Check delete marks and delete if found */
 	len = strlen (ts.check_name);

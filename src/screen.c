@@ -2221,6 +2221,7 @@ static key_map panel_keymap [] = {
     { KEY_F(6),   ren_cmd },
     { KEY_F(7),   mkdir_panel_cmd },
     { KEY_F(8),   delete_cmd },
+    { KEY_DC,     delete_cmd },
 #endif
     
     { 0, 0 }

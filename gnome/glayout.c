@@ -183,7 +183,7 @@ void
 set_hintbar (char *str)
 {
   /*gtk_label_set (GTK_LABEL (current_panel_ptr->panel->status), str);*/
-	x_flush_events ();
+/*	x_flush_events (); */
 }
 
 void
