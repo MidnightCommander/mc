@@ -1,5 +1,10 @@
 1999-09-20  Federico Mena Quintero  <federico@redhat.com>
 
+	* gsession.c (load_panel_info): Doh.  Fix test for presence of the
+	cwd info.
+	(load_session_info): If we could not load the panel info, do not
+	insert bogus data in the list.
+
 	The following is a patch from Volker Braun
 	<volker.braun@physik.hu-berlin.de> to fix column resizing in the
 	file panels.

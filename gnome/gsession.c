@@ -73,7 +73,7 @@ load_panel_info (char *file, char *section)
 	gnome_config_push_prefix (prefix);
 
 	cwd = gnome_config_get_string ("cwd");
-	if (cwd) {
+	if (!cwd) {
 		g_warning ("Could not read panel data for \"%s\"", prefix);
 		gnome_config_pop_prefix ();
 		g_free (prefix);
@@ -151,6 +151,9 @@ load_session_info (char *filename)
 	while ((iterator = gnome_config_iterator_next (iterator, &key, &value)) != NULL)
 		if (key && strncmp (key, "panel ", 6) == 0) {
 			pi = load_panel_info (filename, key);
+			if (!pi)
+				continue;
+
 			panels = g_slist_prepend (panels, pi);
 			g_free (key);
 		}
