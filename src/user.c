@@ -215,7 +215,7 @@ char *expand_format (char c, int quote)
 	        return g_strnfill (s_editwidget->curs_col, ' ');
         break;
     case 'y': /* syntax type */
-        if (s_editwidget)
+        if (s_editwidget && s_editwidget->syntax_type)
 	        return g_strdup (s_editwidget->syntax_type);
         break;
     case 'e': 
@@ -369,7 +369,7 @@ static char *test_condition (char *p, int *condition)
 	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
 	    break;
 	case 'y': /* syntax pattern */
-            if (s_editwidget) {
+            if (s_editwidget && s_editwidget->syntax_type) {
 	        p = extract_arg (p, arg);
 	        *condition = panel &&
                     regexp_match (arg, s_editwidget->syntax_type, match_normal);

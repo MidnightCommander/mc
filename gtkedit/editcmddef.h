@@ -152,7 +152,7 @@
    it into the text, which is annoying.
  */
 #define CK_Pipe_Block(i)	(1000+(i))
-#define SHELL_COMMANDS_i {"/.cedit/edit.indent.rc", "/.cedit/edit.spell.rc", /* and so on */ 0};
+#define SHELL_COMMANDS_i {"/edit.indent.rc", "/edit.spell.rc", /* and so on */ 0};
 #define CK_Macro(i)		(2000+(i))
 #define CK_Last_Macro		CK_Macro(0x7FFF)
 #else

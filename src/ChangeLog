@@ -1,3 +1,8 @@
+2000-05-11  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	src/user.c: fix segfault when Shift-F4, Shift-F1, so when menu
+       content condition y , macro %y
+	
 2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
        * src/user.c: Add macro %k it is block file name
