@@ -1,3 +1,7 @@
+Mon Jun 29 15:12:55 1998  Pavel Roskin <pavel.roskin@ecsoft.co.uk>
+
+	* Makefile.in: Rewritten stuff concerning extfs files.
+
 Mon Jun 22 22:30:00 1998  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 
 	* Makefile.in: Remove arfs, since it doesn't seem to exist
