@@ -156,7 +156,7 @@ va_dcl
     return( 0 );
     }
   
-    if( !dbf )
+    if( !dbf && *debugf)
       {
       mode_t oldumask = umask( 022 );
 
@@ -176,6 +176,7 @@ va_dcl
         }
       }
 
+    if (dbf)
     {
 #ifdef HAVE_STDARG_H
     va_start( ap, format_str );

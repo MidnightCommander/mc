@@ -10,6 +10,9 @@
 	* vfs.c (mc_def_ungetlocalcopy): Fix missed "%s".
 	* utilvfs.c (vfs_parse_ls_lga): Likewise.
 
+	* samba/lib/debug.c (Debug1): Don't try to open/create logfile
+	if debugf is empty string.
+
 2004-01-27  Pavel Roskin  <proski@gnu.org>
 
 	* smbfs.c (smbfs_reconnect): Revert changes in a translated
