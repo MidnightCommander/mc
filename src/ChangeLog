@@ -1,5 +1,8 @@
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
+	* util.c [!USE_VFS] (get_current_wd): Resurrect, this time using
+	g_get_current_dir().
+
 	* background.h: Remove WITH_BACKGROUND, it's now in extraconf.h.
 	* background.c: Use WITH_BACKGROUND instead of USE_NETCODE.
 

@@ -872,6 +872,27 @@ char *strip_ctrl_codes (char *s)
 
 #endif /* !VFS_STANDALONE */
 
+#ifndef USE_VFS
+char *get_current_wd (char *buffer, int size)
+{
+    char *p;
+    int len;
+
+    p = g_get_current_dir ();
+    len = strlen(p) + 1;
+
+    if (len > size) {
+	g_free (p);
+	return NULL;
+    }
+
+    strncpy (buffer, p, len);
+    g_free (p);
+
+    return buffer;
+}
+#endif /* !USE_VFS */
+
 #define CHECK(x) if (x == -1) return 0;
 
 static long
