@@ -70,9 +70,6 @@ no)
 esac])
 AC_FUNC_MMAP
 
-ALL_LINGUAS="az be bg ca cs da de el es eu fi fr hu it ja ko lv \
-nl no pl pt pt_BR ro ru sk sl sv uk ta tr wa zh_CN zh_TW"
-
 dnl
 dnl Internationalization
 dnl
@@ -88,7 +85,12 @@ ALL_DOC_LINGUAS="es hu it pl ru"
 
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
-    langs="${LINGUAS-$ALL_LINGUAS}"
+    if test -z "$LINGUAS"; then
+	langs="`grep -v '^#' $srcdir/po/LINGUAS`"
+    else
+	langs="$LINGUAS"
+    fi
+    echo srcdir=$srcdir
 else
     langs=
 fi
