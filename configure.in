@@ -113,10 +113,9 @@ sco*)
 esac
 
 AC_PROG_INSTALL
-AC_CHECK_HEADERS([unistd.h string.h memory.h crypt.h grp.h limits.h \
-	malloc.h stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h \
-	sys/time.h sys/timeb.h sys/select.h sys/ioctl.h stropts.h \
-	arpa/inet.h])
+AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
+	stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h sys/time.h \
+	sys/timeb.h sys/select.h sys/ioctl.h stropts.h arpa/inet.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
@@ -142,18 +141,6 @@ dnl
 dnl getpt is a GNU Extension (glibc 2.1.x)
 dnl
 AC_CHECK_FUNCS(getpt)
-
-
-dnl
-dnl On SCO and some SVR4, crypt is on libcrypt.a
-dnl         grantpt in  libpt.a
-dnl
-LCRYPT=""
-AC_CHECK_FUNCS(crypt, , [
-    AC_CHECK_LIB(crypt, crypt, [LCRYPT="-lcrypt"], [
-	AC_CHECK_LIB(crypt_i, crypt, [LCRYPT="-lcrypt_i"])])])
-AC_SUBST(LCRYPT)
-
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
 
 dnl replacing lstat with statlstat on sco makes it more portable between
@@ -494,29 +481,13 @@ if test $use_vfs = yes; then
 fi
 
 
-dnl
-dnl The variables used for expanding the auto saver.
-dnl
+dnl Check if the OS is supported by the console saver.
 cons_saver=""
-install_saver="no"
-PAMLIBS=""
 case $host_os in
 linux*)
-    cons_saver="cons.saver"
-    install_saver="yes"
-
-    dnl
-    dnl On Linux, check for PAM authentication available
-    dnl
-    AC_CHECK_LIB(pam, pam_start, [
-	AC_DEFINE(HAVE_PAM, 1,
-		  [Define if PAM (Pluggable Authentication Modules) is available])
-	PAMLIBS="-lpam -ldl"
-    ],[],[-ldl])
-    ;;
+    cons_saver=yes
 esac
-AC_SUBST(cons_saver)
-AC_SUBST(PAMLIBS)
+
 
 dnl
 dnl User visible support for charset conversion.
@@ -616,7 +587,6 @@ Configuration:
   File system:                ${vfs_type}
                               ${vfs_flags}
   Screen library:             ${screen_msg}
-  Install console saver:      ${install_saver}
   Mouse support:              ${mouse_lib}
   X11 events support:         ${textmode_x11_support}
   With subshell support:      ${subshell}

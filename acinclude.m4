@@ -35,6 +35,35 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 
 
 
+dnl MC_MCSERVER_CHECKS
+dnl    Check how mcserver should check passwords.
+dnl    Possible methods are PAM and libcrypt.
+
+AC_DEFUN([MC_MCSERVER_CHECKS], [
+    dnl Check if PAM can be used for mcserv
+    PAMLIBS=""
+    case $host_os in
+    linux*)
+	AC_CHECK_LIB(pam, pam_start, [
+	    AC_DEFINE(HAVE_PAM, 1,
+		      [Define if PAM (Pluggable Authentication Modules) is available])
+	    PAMLIBS="-lpam -ldl"
+	],[],[-ldl])
+	;;
+    esac
+    AC_SUBST(PAMLIBS)
+
+    AC_CHECK_HEADERS([crypt.h])
+
+    LCRYPT=""
+    AC_CHECK_FUNCS(crypt, , [
+	AC_CHECK_LIB(crypt, crypt, [LCRYPT="-lcrypt"], [
+	    AC_CHECK_LIB(crypt_i, crypt, [LCRYPT="-lcrypt_i"])])])
+    AC_SUBST(LCRYPT)
+])
+
+
+
 dnl MC_VFS_CHECKS
 dnl   Check for various functions needed by libvfs.
 dnl   This has various effects:
@@ -100,6 +129,7 @@ AC_DEFUN([MC_WITH_VFS],[
 	    AC_DEFINE(WITH_MCFS, 1, [Define to enable mc-specific networking file system])
 	    vfs_flags="$vfs_flags, mcfs"
 	    use_mcfs=yes
+	    MC_MCSERVER_CHECKS
 	fi]
       )
       vfs_flags="$vfs_flags, ftpfs, fish"

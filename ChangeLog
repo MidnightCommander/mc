@@ -1,3 +1,8 @@
+2002-11-16  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Move all mcserv related checks ...
+	* acinclude.m4 (MC_MCSERVER_CHECKS): ... here.
+
 2002-11-15  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Fully enable glib2.  Update the documentation.
