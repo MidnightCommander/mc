@@ -556,7 +556,7 @@ static int sel_charset_button( int action, void *param )
     cpname = (new_display_codepage < 0)
 	     ? _("Other 8 bit")
 	     : codepages[ new_display_codepage ].name;
-    sprintf( buf, "%-27s", cpname ); /* avoid strange bug with label repainting */
+    g_snprintf( buf, sizeof (buf), "%-27s", cpname ); /* avoid strange bug with label repainting */
     label_set_text( cplabel, buf );
     return 0;
 }
@@ -576,7 +576,7 @@ init_disp_bits_box (void)
 		label_new( 3, 4, _("Input / display codepage:"), NULL));
 
     cpname = (new_display_codepage < 0)
-	     ? "Other 8 bit"
+	     ? _("Other 8 bit")
 	     : codepages[ new_display_codepage ].name;
     cplabel = label_new( 4, 4, cpname, NULL);
     add_widget( dbits_dlg, cplabel );
