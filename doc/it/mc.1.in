@@ -782,39 +782,43 @@ I pannelli possono anche essere impostati alle modalità seguenti:
 La modalità informazioni mostra alcuni dati relativi al file correntemente selezionato
 e se possibile informazioni circa il file system corrente.
 .TP
-.B "Tree" 
-The tree view is quite similar to the
+.B "Albero" 
+La vista ad albero è abbastanza simile al comando
 .\"LINK2"
-directory tree
+albero directory
 .\"Directory Tree"
-feature. See the section about it for more information.
+. Vedere la sezione corrispondente per maggiori informazioni.
 .TP 
-.B "Quick View"
+.B "Vista rapida"
+In questa modalità il pannello si imposta come un
 In this mode, the panel will switch to a reduced 
 .\"LINK2"
-viewer
+visualizzatore
 .\"Internal File Viewer"
-that displays the contents of the currently selected file, if you
-select the panel (with the tab key or the mouse), you will have access
-to the usual viewer commands.
+ridotto che mostra i contenuti del file correntemente selezionato;
+se si seleziona il pannello (con il tasto tab o con il mouse), si ha
+accesso ai normali comandi del visualizzatore.
 .PP
-.SH "    Sort Order..."
-The eight sort orders are by name, by extension, by modification time,
-by access time, and by inode information modification time, by size,
-by inode and unsorted.  In the Sort order dialog box you can choose
-the sort order and you may also specify if you want to sort in reverse
-order by checking the reverse box.
+.\"NODE "    Sort Order..."
+.SH "    Ordina per..."
+Gli otto possibili ordinamenti sono per nome, per estensione, per data 
+di modifica, per data di accesso, per data di modifica informazioni di
+inode, per ampiezza, per inode e non ordinato. Nella finestra di dialogo 
+di ordinamento è possibile scegliere il tipo di ordinamento ed è anche 
+possibile specificare se si desidera l'ordinamento inverso selezionando 
+la voce inverso.
 .PP
-By default directories are sorted before files but this can be changed
-from the
+Normalmente le directory sono ordinare prima dei file ma quest'impostazione
+può essere modificata dal
 .\"LINK2"
-Options menu
+Menu Opzioni
 .\"Options Menu"
-(option 
-.B "Mix all files"
+(oztione  
+.B "mescola tutti i file"
 ).
 .PP
-.SH "    Filter..."
+.\"NODE "    Filter..."
+.SH "    Filtro..."
 The filter command allows you to specify a shell pattern (for example
 .B "*.tar.gz"
 ) which the files must match to be shown. Regardless
