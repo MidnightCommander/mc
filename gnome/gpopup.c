@@ -338,6 +338,7 @@ regex_command_from_panel (GtkMenuItem *item, WPanel *panel)
 	char *action;
 	int movedir;
 
+	/* This is broken */
 	filename = panel->dir.list[panel->selected].fname;
 	action = get_label_text (item);
 
@@ -375,8 +376,8 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *file
 	if (panel) {
 		a_uiinfo = panel_actions;
 		closure = panel;
-		regex_callback = regex_command_from_panel;
-		regex_closure = panel;
+		regex_callback = regex_command_from_desktop_icon;
+		regex_closure = filename;
 	} else {
 		a_uiinfo = desktop_icon_actions;
 		closure = filename;
@@ -502,3 +503,7 @@ gpopup_do_popup (GdkEventButton *event, WPanel *from_panel, int panel_row, char 
 
 	return get_active_index (GTK_MENU (menu));
 }
+
+
+
+
