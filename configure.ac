@@ -152,7 +152,8 @@ AC_PROG_INSTALL
 AC_CHECK_HEADERS([unistd.h string.h memory.h grp.h limits.h malloc.h \
 	stdlib.h termios.h utime.h fcntl.h pwd.h sys/statfs.h sys/time.h \
 	sys/timeb.h sys/select.h sys/ioctl.h stropts.h arpa/inet.h \
-	security/pam_misc.h sys/socket.h])
+	security/pam_misc.h sys/socket.h sys/sysmacros.h sys/types.h \
+	sys/mkdev.h])
 
 AC_HEADER_TIME
 AC_HEADER_SYS_WAIT
