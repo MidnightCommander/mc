@@ -187,7 +187,8 @@ char* init_translation_table( int cpsource, int cpdisplay )
 
     cd = iconv_open( cpdisp, cpsour );
     if (cd == (iconv_t) -1) {
-	sprintf( errbuf, _("Cannot translate from %s to %s"), cpsour, cpdisp );
+	g_snprintf( errbuf, sizeof (errbuf), 
+		    _("Cannot translate from %s to %s"), cpsour, cpdisp );
 	return errbuf;
     }
 
@@ -200,7 +201,8 @@ char* init_translation_table( int cpsource, int cpdisplay )
 
     cd = iconv_open( cpsour, cpdisp );
     if (cd == (iconv_t) -1) {
-	sprintf( errbuf, _("Cannot translate from %s to %s"), cpdisp, cpsour );
+	g_snprintf( errbuf, sizeof (errbuf),
+		    _("Cannot translate from %s to %s"), cpdisp, cpsour );
 	return errbuf;
     }
 
