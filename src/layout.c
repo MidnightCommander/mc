@@ -860,7 +860,11 @@ void print_vfs_message(char *msg, ...)
     char str[128];
 
     va_start(ap, msg);
-    vsprintf(str, msg, ap);
+    vsnprintf(str, 126, msg, ap);
+    /* Before you kill me for using non-portable vsnprintf... It is
+       neccessary: vfs layer may print arbitrary long messages (they
+       contain pathname). If you know how to solve it, please do so,
+       but this is probably exploitable buffer overrun.) */
     va_end(ap);
     if (midnight_shutdown || !the_hint || !the_hint->widget.parent)
 	return;
