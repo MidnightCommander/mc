@@ -14,8 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2001-07-18 00:10+0200\n"
-"PO-Revision-Date: 2001-07-18 00:12+0200\n"
+"POT-Creation-Date: 2001-08-17 00:37+0200\n"
+"PO-Revision-Date: 2001-08-17 01:34+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgstr " Kör makro "
 
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:139 edit/edit_key_translator.c:164
-#: gtkedit/editcmd.c:766 gtkedit/editcmd.c:775
+#: gtkedit/editcmd.c:803 gtkedit/editcmd.c:812
 msgid " Press macro hotkey: "
 msgstr " Tryck snabbtangent för makro: "
 
@@ -120,11 +120,11 @@ msgstr "Människorna bakom Midnight Commander"
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "buggrapporter: http://bugs.gnome.org, eller använd gnome-bug"
 
-#: gnome/gcmd.c:91 gnome/gmc-window.c:68
+#: gnome/gcmd.c:91
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:94 gnome/gmc-window.c:71
+#: gnome/gcmd.c:94
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "GNOME-versionen av filhanterare Midnight Commander."
 
@@ -141,7 +141,7 @@ msgstr "Skilj inte på stora och små bokstäver."
 msgid "Sort files by "
 msgstr "Sortera filer efter "
 
-#: gnome/gcmd.c:280 gnome/gcustom-layout.c:41 src/chmod.c:140 src/screen.c:407
+#: gnome/gcmd.c:280 gnome/gcustom-layout.c:41 src/chmod.c:139 src/screen.c:407
 msgid "Name"
 msgstr "Namn"
 
@@ -218,7 +218,7 @@ msgid "Set Filter"
 msgstr "Sätt filter"
 
 #: gnome/gcmd.c:699 gnome/gcmd.c:740 gnome/gcmd.c:745 gnome/gcmd.c:749
-#: gnome/gscreen.c:2485
+#: gnome/gscreen.c:2484
 msgid "Show all files"
 msgstr "Visa alla filer"
 
@@ -272,15 +272,15 @@ msgstr ""
 "Ange ett reguljärt uttryck för att välja vilka filer som skall visas i "
 "panelvyn."
 
-#: gnome/gcmd.c:937 src/cmd.c:549 src/cmd.c:602
+#: gnome/gcmd.c:937 src/cmd.c:551 src/cmd.c:604
 msgid "  Malformed regular expression  "
 msgstr "  Felaktigt formulerat reguljärt uttryck  "
 
-#: gnome/gcmd.c:978
+#: gnome/gcmd.c:979
 msgid "Creating a desktop link"
 msgstr "Skapar en skrivbordslänk"
 
-#: gnome/gcmd.c:979
+#: gnome/gcmd.c:980
 msgid "Enter the URL:"
 msgstr "Ange URL:"
 
@@ -306,7 +306,7 @@ msgstr "Grupp ID"
 msgid "Inode Number"
 msgstr "Inodnummer"
 
-#: gnome/gcustom-layout.c:39 src/achown.c:365
+#: gnome/gcustom-layout.c:39 src/achown.c:361
 msgid "Mode"
 msgstr "Läge"
 
@@ -576,12 +576,12 @@ msgstr "Målfilen finns redan: %s"
 msgid "Replace it?"
 msgstr "Ersätt den?"
 
-#: gnome/gdialogs.c:569 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1250
+#: gnome/gdialogs.c:569 gtkedit/editwidget.c:1143 gtkedit/gtkedit.c:1254
 #: src/file.c:802 src/screen.c:2418 src/tree.c:1023
 msgid "Copy"
 msgstr "Kopiera"
 
-#: gnome/gdialogs.c:573 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1252
+#: gnome/gdialogs.c:573 gtkedit/editwidget.c:1144 gtkedit/gtkedit.c:1256
 msgid "Move"
 msgstr "Flytta"
 
@@ -644,7 +644,7 @@ msgstr ""
 "\n"
 "Katalogen är inte tom. Radera den rekursivt?"
 
-#: gnome/gdialogs.c:797 src/file.c:2248
+#: gnome/gdialogs.c:797 src/file.c:2247
 msgid " Delete: "
 msgstr " Radera: "
 
@@ -680,7 +680,7 @@ msgstr "klar."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1015 src/wtools.c:570 vfs/vfs.c:1823
+#: gnome/gdialogs.c:1015 src/wtools.c:570 vfs/vfs.c:1821
 msgid "Password:"
 msgstr "Lösenord:"
 
@@ -750,87 +750,88 @@ msgstr ""
 "Kan inte inhämta status för filen \"%s\"\n"
 "%s"
 
-#: gnome/gfind.c:108
+#: gnome/gfind.c:115
 msgid "Case sensitive"
 msgstr "Skilj på versaler/gemener"
 
-#: gnome/gfind.c:114 src/find.c:148
+#: gnome/gfind.c:121 src/find.c:148
 msgid "Start at:"
 msgstr "Starta vid:"
 
-#: gnome/gfind.c:114 src/find.c:148
+#: gnome/gfind.c:121 src/find.c:148
 msgid "Filename:"
 msgstr "Filnamn:"
 
-#: gnome/gfind.c:114 src/find.c:148
+#: gnome/gfind.c:121 src/find.c:148
 msgid "Content: "
 msgstr "Innehåll: "
 
-#: gnome/gfind.c:125 src/find.c:203
+#. Create dialog
+#: gnome/gfind.c:131 src/find.c:203
 msgid "Find File"
 msgstr "Sök Fil"
 
-#: gnome/gfind.c:325 src/find.c:398
+#: gnome/gfind.c:335 src/find.c:398
 #, c-format
 msgid "Grepping in %s"
 msgstr "Greppar i %s"
 
 # svängelska ok?
-#: gnome/gfind.c:362 src/find.c:435
+#: gnome/gfind.c:372 src/find.c:435
 msgid " Find/read "
 msgstr " Sök/läs "
 
-#: gnome/gfind.c:362 src/find.c:435
+#: gnome/gfind.c:372 src/find.c:435
 msgid " Problem reading from child "
 msgstr " Problem att läsa från barn "
 
-#: gnome/gfind.c:399 src/find.c:476
+#: gnome/gfind.c:409 src/find.c:476
 msgid "Finished"
 msgstr "Klar"
 
-#: gnome/gfind.c:420 src/find.c:500 src/view.c:1527
+#: gnome/gfind.c:430 src/find.c:500 src/view.c:1529
 #, c-format
 msgid "Searching %s"
 msgstr "Söker efter %s"
 
-#: gnome/gfind.c:553 gnome/gfind.c:588
+#: gnome/gfind.c:552 gnome/gfind.c:589
 msgid "Suspend"
 msgstr "Suspendera"
 
-#: gnome/gfind.c:553
+#: gnome/gfind.c:552
 msgid "Restart"
 msgstr "Starta om"
 
-#: gnome/gfind.c:555 src/boxes.c:922 src/find.c:674
+#: gnome/gfind.c:554 src/boxes.c:922 src/find.c:674
 msgid "Stopped"
 msgstr "Stannad"
 
-#: gnome/gfind.c:555 gnome/gfind.c:652 src/find.c:674 src/find.c:770
+#: gnome/gfind.c:554 gnome/gfind.c:654 src/find.c:674 src/find.c:770
 msgid "Searching"
 msgstr "Söker"
 
-#: gnome/gfind.c:582 src/find.c:745
+#: gnome/gfind.c:583 src/find.c:745
 msgid "Find file"
 msgstr "Sök fil"
 
 #. The buttons
-#: gnome/gfind.c:586
+#: gnome/gfind.c:587
 msgid "Change to this directory"
 msgstr "Ändra till den här katalogen"
 
-#: gnome/gfind.c:587
+#: gnome/gfind.c:588
 msgid "Search again"
 msgstr "Sök igen"
 
-#: gnome/gfind.c:593
+#: gnome/gfind.c:594
 msgid "View this file"
 msgstr "Visa den här filen"
 
-#: gnome/gfind.c:594
+#: gnome/gfind.c:595
 msgid "Edit this file"
 msgstr "Redigera den här filen"
 
-#: gnome/gfind.c:595
+#: gnome/gfind.c:596
 msgid "Send the results to a Panel"
 msgstr "Skicka resultatet till en panel"
 
@@ -929,7 +930,7 @@ msgid "Creates a new file in this directory"
 msgstr "Skapa en ny fil i den här katalogen"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:388 gnome/gscreen.c:2116
+#: gnome/glayout.c:388 gnome/gscreen.c:2115
 msgid "_Copy..."
 msgstr "_Kopiera..."
 
@@ -937,7 +938,7 @@ msgstr "_Kopiera..."
 msgid "Copy files"
 msgstr "Kopiera filer"
 
-#: gnome/glayout.c:389 gnome/gscreen.c:2117
+#: gnome/glayout.c:389 gnome/gscreen.c:2116
 msgid "_Delete..."
 msgstr "_Radera..."
 
@@ -945,7 +946,7 @@ msgstr "_Radera..."
 msgid "Delete files"
 msgstr "Radera filer"
 
-#: gnome/glayout.c:390 gnome/gscreen.c:2118
+#: gnome/glayout.c:390 gnome/gscreen.c:2117
 msgid "_Move..."
 msgstr "_Flytta..."
 
@@ -993,7 +994,7 @@ msgstr "_Invertera markeringen"
 msgid "Reverses the list of tagged files"
 msgstr "Vänd listan av markerade filer"
 
-#: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2089
+#: gnome/glayout.c:407 gtkedit/editwidget.c:1145 src/view.c:2091
 msgid "Search"
 msgstr "Sök"
 
@@ -1001,7 +1002,7 @@ msgstr "Sök"
 msgid "Search for a file in the current Panel"
 msgstr "Sök efter en fil i den aktuella panelen"
 
-#: gnome/glayout.c:410 gnome/gscreen.c:1413 gnome/gscreen.c:1424
+#: gnome/glayout.c:410 gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "_Rescan Directory"
 msgstr "_Ladda om katalog"
 
@@ -1090,19 +1091,15 @@ msgstr "_Kommando"
 msgid "_Desktop"
 msgstr "_Skrivbord"
 
-#: gnome/glayout.c:476 gnome/glayout.c:486 gnome/gmc-window.c:121
+#: gnome/glayout.c:476 gnome/glayout.c:486
 msgid "_Help"
 msgstr "_Hjälp"
 
-#: gnome/glayout.c:625
-msgid "File/New/Directory..."
-msgstr "Arkiv/Ny/Katalog..."
-
-#: gnome/gmain.c:549
+#: gnome/gmain.c:551
 msgid "Don't show this window again"
 msgstr "Visa inte detta fönster igen"
 
-#: gnome/gmain.c:551
+#: gnome/gmain.c:553
 msgid ""
 "You are running the GNOME File Manager as root.\n"
 "\n"
@@ -1162,47 +1159,6 @@ msgstr "namn | typ | storlek | atid | mtid | ätid"
 #: gnome/gmc-client.c:217
 msgid "Close windows whose directories cannot be reached"
 msgstr "Stäng fönster vars kataloger inte kan nås"
-
-#: gnome/gmc-window.c:69
-msgid "Copyright (C) 1998 The Free Software Foundation"
-msgstr "Copyright © 1998 The Free Software Foundation"
-
-#: gnome/gmc-window.c:81
-msgid "Open _new window"
-msgstr "Öppna _nytt fönster"
-
-#: gnome/gmc-window.c:86
-msgid "_Close this window"
-msgstr "_Stäng detta fönster"
-
-#: gnome/gmc-window.c:88
-msgid "E_xit"
-msgstr "_Avsluta"
-
-# skippa användar
-#: gnome/gmc-window.c:95
-msgid "_Listing view"
-msgstr "_Listningsläge"
-
-#: gnome/gmc-window.c:96
-msgid "_Icon view"
-msgstr "_Ikonvy"
-
-#: gnome/gmc-window.c:102
-msgid "Display _tree view"
-msgstr "Visa _trädvy"
-
-#: gnome/gmc-window.c:112
-msgid "_About the Midnight Commander..."
-msgstr "_Om Midnight Commander..."
-
-#: gnome/gmc-window.c:119
-msgid "_File"
-msgstr "_Arkiv"
-
-#: gnome/gmc-window.c:120
-msgid "_View"
-msgstr "_Visa"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1321,7 +1277,7 @@ msgstr "Filen skapades: "
 #: gnome/gnome-file-property-dialog.c:282
 #: gnome/gnome-file-property-dialog.c:291
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr "%a %d %b %Y  %H:%M:%S"
+msgstr "%a %d %b %Y  %H.%M.%S"
 
 #: gnome/gnome-file-property-dialog.c:278
 msgid "Last Modified on: "
@@ -1380,7 +1336,7 @@ msgid "Use default View action"
 msgstr "Använd standardmetod för att visa"
 
 #: gnome/gnome-file-property-dialog.c:515 gnome/gpopup2.c:288
-#: src/screen.c:2417 src/view.c:2085
+#: src/screen.c:2417 src/view.c:2087
 msgid "Edit"
 msgstr "Redigera"
 
@@ -1500,21 +1456,21 @@ msgstr "Du måste ge din fil ett namn"
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Du måste ge din fil ett namn som inte innehåller ett \"/\"-tecken"
 
-#: gnome/gnome-open-dialog.c:383
+#: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
 msgstr "Välj en applikation att öppna \"%s\" med."
 
-#: gnome/gnome-open-dialog.c:393
+#: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
 msgstr "Välj fil att köra med"
 
 #. the file tree
-#: gnome/gnome-open-dialog.c:404
+#: gnome/gnome-open-dialog.c:406
 msgid "Applications"
 msgstr "Applikationer"
 
-#: gnome/gnome-open-dialog.c:420
+#: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
 msgstr "Program att köra"
 
@@ -1550,7 +1506,7 @@ msgstr "Kopiera..."
 msgid "Move to Trash"
 msgstr "Flytta till papperskorgen"
 
-#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1254
+#: gnome/gpopup2.c:292 gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1258
 #: src/screen.c:2421
 msgid "Delete"
 msgstr "Radera"
@@ -1664,104 +1620,104 @@ msgstr "Cachning"
 msgid "Preferences"
 msgstr "Alternativ"
 
-#: gnome/gscreen.c:1413 gnome/gscreen.c:1424
+#: gnome/gscreen.c:1412 gnome/gscreen.c:1423
 msgid "Reloads the current directory"
 msgstr "Laddar om den aktuella katalogen"
 
-#: gnome/gscreen.c:1415 gnome/gscreen.c:1426
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "New _Directory..."
 msgstr "Ny _katalog..."
 
-#: gnome/gscreen.c:1415 gnome/gscreen.c:1426
+#: gnome/gscreen.c:1414 gnome/gscreen.c:1425
 msgid "Creates a new directory here"
 msgstr "Skapar en ny katalog här"
 
-#: gnome/gscreen.c:1422
+#: gnome/gscreen.c:1421
 msgid "Empty _Trash"
 msgstr "Töm _papperskorgen"
 
-#: gnome/gscreen.c:1422
+#: gnome/gscreen.c:1421
 msgid "Empties the Trash"
 msgstr "Tömmer papperskorgen"
 
-#: gnome/gscreen.c:1655
+#: gnome/gscreen.c:1654
 #, c-format
 msgid "Search: %s"
 msgstr "Sök: %s"
 
-#: gnome/gscreen.c:1665 src/screen.c:658
+#: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s byte i %d fil"
 
-#: gnome/gscreen.c:1665 src/screen.c:658
+#: gnome/gscreen.c:1664 src/screen.c:658
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s byte i %d filer"
 
-#: gnome/gscreen.c:1691 src/screen.c:684
+#: gnome/gscreen.c:1690 src/screen.c:684
 msgid "<readlink failed>"
 msgstr "<kunde inte läsa länken>"
 
-#: gnome/gscreen.c:2116
+#: gnome/gscreen.c:2115
 msgid "Copy directory"
 msgstr "Kopiera katalog"
 
-#: gnome/gscreen.c:2117
+#: gnome/gscreen.c:2116
 msgid "Delete directory"
 msgstr "Radera katalog"
 
-#: gnome/gscreen.c:2118
+#: gnome/gscreen.c:2117
 msgid "Rename or move directory"
 msgstr "Byt namn eller flytta katalog"
 
-#: gnome/gscreen.c:2311
+#: gnome/gscreen.c:2310
 msgid "Back"
 msgstr "Bakåt"
 
-#: gnome/gscreen.c:2311
+#: gnome/gscreen.c:2310
 msgid "Go to the previously visited directory"
 msgstr "Gå till den tidigare besökta katalogen"
 
-#: gnome/gscreen.c:2313
+#: gnome/gscreen.c:2312
 msgid "Up"
 msgstr "Upp"
 
-#: gnome/gscreen.c:2313
+#: gnome/gscreen.c:2312
 msgid "Go up a level in the directory hierarchy"
 msgstr "Gå upp en nivå i kataloghierarkin"
 
-#: gnome/gscreen.c:2315
+#: gnome/gscreen.c:2314
 msgid "Forward"
 msgstr "Framåt"
 
-#: gnome/gscreen.c:2315
+#: gnome/gscreen.c:2314
 msgid "Go to the next directory"
 msgstr "Gå till nästa katalog"
 
-#: gnome/gscreen.c:2318 src/tree.c:1019
+#: gnome/gscreen.c:2317 src/tree.c:1019
 msgid "Rescan"
 msgstr "Ladda om"
 
-#: gnome/gscreen.c:2318
+#: gnome/gscreen.c:2317
 msgid "Rescan the current directory"
 msgstr "Ladda om den aktuella katalogen"
 
-#: gnome/gscreen.c:2321
+#: gnome/gscreen.c:2320
 msgid "Home"
 msgstr "Hem"
 
-#: gnome/gscreen.c:2321
+#: gnome/gscreen.c:2320
 msgid "Go to your home directory"
 msgstr "Gå till din hemkatalog"
 
-#: gnome/gscreen.c:2464
+#: gnome/gscreen.c:2463
 msgid "Location:"
 msgstr "Placering:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:396 gtkedit/editcmd.c:1255
-#: gtkedit/editcmd.c:1340 gtkedit/editcmd.c:3065 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:415 gtkedit/editcmd.c:1292
+#: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:3102 gtkedit/editoptions.c:69
 #: src/boxes.c:145 src/boxes.c:279 src/boxes.c:379 src/boxes.c:470
 #: src/boxes.c:617 src/boxes.c:753 src/boxes.c:986 src/boxes.c:1056
 #: src/filegui.c:805 src/find.c:149 src/layout.c:369 src/option.c:135
@@ -1775,65 +1731,65 @@ msgid "Offset 0x%08lx"
 msgstr "Offset 0x%08lx"
 
 # svängelska?
-#: gnome/gview.c:138 src/view.c:733
+#: gnome/gview.c:138 src/view.c:735
 #, c-format
 msgid "Col %d"
 msgstr "Kol %d"
 
-#: gnome/gview.c:142 src/view.c:737
+#: gnome/gview.c:142 src/view.c:739
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
 
-#: gnome/gview.c:306
+#: gnome/gview.c:308
 msgid "_Goto line"
 msgstr "_Gå till rad"
 
-#: gnome/gview.c:307
+#: gnome/gview.c:309
 msgid "Jump to a specified line number"
 msgstr "Hoppa till ett specificerat radnummer"
 
-#: gnome/gview.c:309
+#: gnome/gview.c:311
 msgid "_Monitor file"
 msgstr "_Övervaka fil"
 
 # filtillväxt är för långt
-#: gnome/gview.c:309
+#: gnome/gview.c:311
 msgid "Monitor file growing"
 msgstr "Övervaka hur en fil växer"
 
-#: gnome/gview.c:316
+#: gnome/gview.c:318
 msgid "Regexp search"
 msgstr "Regexp sökning"
 
 # bättre än "Regutr sökning?"
-#: gnome/gview.c:317
+#: gnome/gview.c:319
 msgid "Regular expression search"
 msgstr "Sökning med reguljära uttryck"
 
-#: gnome/gview.c:326
+#: gnome/gview.c:328
 msgid "_Wrap"
 msgstr "_Bryt rad"
 
-#: gnome/gview.c:327
+#: gnome/gview.c:329
 msgid "Wrap the text"
 msgstr "Radbryt texten"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
-#: gnome/gview.c:330
+#: gnome/gview.c:332
 msgid "_Parsed view"
 msgstr "_Parsad vy"
 
 # svängelska ok?
-#: gnome/gview.c:333
+#: gnome/gview.c:335
 msgid "_Formatted"
 msgstr "_Formaterad"
 
-#: gnome/gview.c:335
+#: gnome/gview.c:337
 msgid "_Hex"
 msgstr "_Hex"
 
-#: gnome/gview.c:341
+#: gnome/gview.c:343
 msgid "_Search"
 msgstr "_Sök"
 
@@ -1849,11 +1805,11 @@ msgstr "avbryt"
 msgid "help"
 msgstr "hjälp"
 
-#: gnome/gwidget.c:101 src/file.c:2272
+#: gnome/gwidget.c:101 src/file.c:2271
 msgid "yes"
 msgstr "ja"
 
-#: gnome/gwidget.c:103 src/file.c:2270
+#: gnome/gwidget.c:103 src/file.c:2269
 msgid "no"
 msgstr "nej"
 
@@ -1868,9 +1824,9 @@ msgstr "avbryt"
 #. The file-name is printed after the ':'
 #: gtkedit/edit.c:156 gtkedit/edit.c:325 gtkedit/edit.c:330 gtkedit/edit.c:344
 #: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
-#: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:308
-#: gtkedit/editcmd.c:314 gtkedit/editcmd.c:2053 gtkedit/editwidget.c:1024
-#: src/dir.c:396 src/wtools.c:216
+#: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:327
+#: gtkedit/editcmd.c:333 gtkedit/editcmd.c:2090 gtkedit/editwidget.c:1024
+#: src/dir.c:427 src/wtools.c:216
 msgid " Error "
 msgstr " Fel "
 
@@ -1914,148 +1870,148 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Användarmenyn är tillgänglig endast i mcedit som startats från mc"
 
-#: gtkedit/edit.c:2801 gtkedit/editcmd.c:2983
+#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3020
 msgid "Error trying to stat file:"
 msgstr " Kan inte inhämta status om fil:"
 
-#: gtkedit/editcmd.c:308
+#: gtkedit/editcmd.c:327
 msgid " Error writing to pipe: "
 msgstr " Fel vid skrivning till rör: "
 
-#: gtkedit/editcmd.c:314
+#: gtkedit/editcmd.c:333
 msgid " Failed trying to open pipe for writing: "
 msgstr " Misslyckades med att öppna rör för läsning: "
 
-#: gtkedit/editcmd.c:389
+#: gtkedit/editcmd.c:408
 msgid "Quick save "
 msgstr "Snabbspara"
 
-#: gtkedit/editcmd.c:390
+#: gtkedit/editcmd.c:409
 msgid "Safe save "
 msgstr "Spara "
 
 # snabb spara är osäker men spara då är allt sparat så att säga
 # säker är standard IMHO
-#: gtkedit/editcmd.c:391
+#: gtkedit/editcmd.c:410
 msgid "Do backups -->"
 msgstr "Gör backup -->"
 
 #. 0
-#: gtkedit/editcmd.c:394 gtkedit/editcmd.c:1194 gtkedit/editcmd.c:1253
-#: gtkedit/editcmd.c:1338 gtkedit/editcmd.c:3063 gtkedit/editoptions.c:66
-#: src/achown.c:71 src/boxes.c:146 src/boxes.c:280 src/boxes.c:377
+#: gtkedit/editcmd.c:413 gtkedit/editcmd.c:1231 gtkedit/editcmd.c:1290
+#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:3100 gtkedit/editoptions.c:66
+#: src/achown.c:73 src/boxes.c:146 src/boxes.c:280 src/boxes.c:377
 #: src/boxes.c:468 src/boxes.c:614 src/boxes.c:751 src/boxes.c:1056
-#: src/chmod.c:110 src/chown.c:79 src/cmd.c:868 src/filegui.c:788
+#: src/chmod.c:109 src/chown.c:80 src/cmd.c:870 src/filegui.c:788
 #: src/find.c:149 src/hotlist.c:134 src/hotlist.c:504 src/hotlist.c:792
 #: src/hotlist.c:889 src/layout.c:370 src/learn.c:59 src/option.c:136
-#: src/panelize.c:83 src/view.c:408 src/wtools.c:107 src/wtools.c:374
+#: src/panelize.c:83 src/view.c:410 src/wtools.c:107 src/wtools.c:374
 #: src/wtools.c:544
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-#: gtkedit/editcmd.c:400
+#: gtkedit/editcmd.c:419
 msgid "Extension:"
 msgstr "Ändelse:"
 
-#: gtkedit/editcmd.c:406
+#: gtkedit/editcmd.c:425
 msgid " Edit Save Mode "
 msgstr " Redigera sparläge "
 
-#: gtkedit/editcmd.c:530
+#: gtkedit/editcmd.c:567
 msgid " Save As "
 msgstr " Spara som "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:544 gtkedit/editcmd.c:868 gtkedit/editcmd.c:893
-#: gtkedit/editcmd.c:1044 gtkedit/editcmd.c:1142 src/file.c:619 src/help.c:314
+#: gtkedit/editcmd.c:581 gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179 src/file.c:619 src/help.c:314
 #: src/main.c:718 src/screen.c:1436 src/screen.c:2113 src/screen.c:2163
-#: src/selcodepage.c:73 src/selcodepage.c:90 src/subshell.c:744
+#: src/selcodepage.c:74 src/selcodepage.c:91 src/subshell.c:744
 #: src/subshell.c:770 src/utilunix.c:370 src/utilunix.c:374 src/utilunix.c:394
 #: src/utilunix.c:445 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Varning "
 
-#: gtkedit/editcmd.c:545
+#: gtkedit/editcmd.c:582
 msgid " A file already exists with this name. "
 msgstr " Det existerar redan en fil med det namnet. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:547
+#: gtkedit/editcmd.c:584
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: gtkedit/editcmd.c:547 gtkedit/editcmd.c:614 gtkedit/editcmd.c:842
-#: gtkedit/editcmd.c:868 gtkedit/editcmd.c:893 gtkedit/editcmd.c:1044
-#: gtkedit/editcmd.c:1693
+#: gtkedit/editcmd.c:584 gtkedit/editcmd.c:651 gtkedit/editcmd.c:879
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
+#: gtkedit/editcmd.c:1730
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: gtkedit/editcmd.c:566
+#: gtkedit/editcmd.c:603
 msgid " Save as "
 msgstr " Spara som "
 
-#: gtkedit/editcmd.c:566 gtkedit/editcmd.c:2825
+#: gtkedit/editcmd.c:603 gtkedit/editcmd.c:2862
 msgid " Error trying to save file. "
 msgstr " Fel vid försök att spara fil. "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:684 gtkedit/editcmd.c:692 gtkedit/editcmd.c:717
+#: gtkedit/editcmd.c:721 gtkedit/editcmd.c:729 gtkedit/editcmd.c:754
 msgid " Delete macro "
 msgstr " Radera makro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:686
+#: gtkedit/editcmd.c:723
 msgid " Error trying to open temp file "
 msgstr " Fel vid försök att öppna tillfällig fil "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:694 gtkedit/editcmd.c:755 gtkedit/editcmd.c:824
+#: gtkedit/editcmd.c:731 gtkedit/editcmd.c:792 gtkedit/editcmd.c:861
 msgid " Error trying to open macro file "
 msgstr " Fel vid försök att öppna makrofil "
 
-#: gtkedit/editcmd.c:718
+#: gtkedit/editcmd.c:755
 msgid " Error trying to overwrite macro file "
 msgstr " Fel vid försök att skriva över makrofil "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:734
+#: gtkedit/editcmd.c:771
 msgid " Macro "
 msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:736
+#: gtkedit/editcmd.c:773
 msgid " Press the macro's new hotkey: "
 msgstr " Tryck ned makrots nya snabbtangent: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:755
+#: gtkedit/editcmd.c:792
 msgid " Save macro "
 msgstr " Spara makro "
 
-#: gtkedit/editcmd.c:765 gtkedit/editcmd.c:773
+#: gtkedit/editcmd.c:802 gtkedit/editcmd.c:810
 msgid " Delete Macro "
 msgstr " Radera makro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:823
+#: gtkedit/editcmd.c:860
 msgid " Load macro "
 msgstr " Ladda makro "
 
-#: gtkedit/editcmd.c:837 gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:874 gtkedit/editcmd.c:876
 msgid " Confirm save file? : "
 msgstr " Bekräfta spara? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:842
+#: gtkedit/editcmd.c:879
 msgid " Save file "
 msgstr " Spara fil "
 
-#: gtkedit/editcmd.c:842 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1247
-#: src/view.c:2081
+#: gtkedit/editcmd.c:879 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1251
+#: src/view.c:2083
 msgid "Save"
 msgstr "Spara"
 
-#: gtkedit/editcmd.c:868 gtkedit/editcmd.c:893
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -2063,114 +2019,114 @@ msgstr ""
 " Den aktuella texten har modifierats men inte sparats. \n"
 " Fortsätt och förlora de ändringar som gjorts."
 
-#: gtkedit/editcmd.c:868 gtkedit/editcmd.c:893 gtkedit/editcmd.c:1044
+#: gtkedit/editcmd.c:905 gtkedit/editcmd.c:930 gtkedit/editcmd.c:1081
 msgid "Continue"
 msgstr "Fortsätt"
 
-#: gtkedit/editcmd.c:899
+#: gtkedit/editcmd.c:936
 msgid " Load "
 msgstr " Öppna "
 
-#: gtkedit/editcmd.c:1044 gtkedit/editcmd.c:1142
+#: gtkedit/editcmd.c:1081 gtkedit/editcmd.c:1179
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blocket är stort, det kanske inte går att ångra operationen. "
 
-#: gtkedit/editcmd.c:1142
+#: gtkedit/editcmd.c:1179
 msgid " Continue "
 msgstr " Fortsätt "
 
-#: gtkedit/editcmd.c:1142
+#: gtkedit/editcmd.c:1179
 msgid " Cancel "
 msgstr " Avbryt "
 
-#: gtkedit/editcmd.c:1196
+#: gtkedit/editcmd.c:1233
 msgid "o&Ne"
 msgstr "e&N"
 
-#: gtkedit/editcmd.c:1198 src/filegui.c:565
+#: gtkedit/editcmd.c:1235 src/filegui.c:565
 msgid "al&L"
 msgstr "a&Lla"
 
-#: gtkedit/editcmd.c:1200 src/file.c:2194 src/filegui.c:260
+#: gtkedit/editcmd.c:1237 src/file.c:2193 src/filegui.c:260
 msgid "&Skip"
 msgstr "&Skippa"
 
-#: gtkedit/editcmd.c:1202
+#: gtkedit/editcmd.c:1239
 msgid "&Replace"
 msgstr "&Ersätt"
 
-#: gtkedit/editcmd.c:1209 gtkedit/editcmd.c:1213 gtkedit/editcmd.c:1693
+#: gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1250 gtkedit/editcmd.c:1730
 msgid " Replace with: "
 msgstr " Ersätt med: "
 
-#: gtkedit/editcmd.c:1221
+#: gtkedit/editcmd.c:1258
 msgid " Confirm replace "
 msgstr " Bekräfta ersättningar "
 
-#: gtkedit/editcmd.c:1257 gtkedit/editcmd.c:1342
+#: gtkedit/editcmd.c:1294 gtkedit/editcmd.c:1379
 msgid "scanf &Expression"
 msgstr "scanf &Uttryck"
 
-#: gtkedit/editcmd.c:1259
+#: gtkedit/editcmd.c:1296
 msgid "replace &All"
 msgstr "ersätt &Alla"
 
-#: gtkedit/editcmd.c:1261
+#: gtkedit/editcmd.c:1298
 msgid "pr&Ompt on replace"
 msgstr "fr&Åga vid ersätt"
 
-#: gtkedit/editcmd.c:1263 gtkedit/editcmd.c:1344
+#: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1381
 msgid "&Backwards"
 msgstr "&Bakåt"
 
-#: gtkedit/editcmd.c:1265 gtkedit/editcmd.c:1346
+#: gtkedit/editcmd.c:1302 gtkedit/editcmd.c:1383
 msgid "&Regular expression"
 msgstr "&Reguljära uttryck"
 
-#: gtkedit/editcmd.c:1267 gtkedit/editcmd.c:1348
+#: gtkedit/editcmd.c:1304 gtkedit/editcmd.c:1385
 msgid "&Whole words only"
 msgstr "Endast &Hela ord"
 
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1350
+#: gtkedit/editcmd.c:1306 gtkedit/editcmd.c:1387 src/find.c:142
 msgid "case &Sensitive"
 msgstr "&Skilj gemener/versaler"
 
-#: gtkedit/editcmd.c:1273
+#: gtkedit/editcmd.c:1310
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Ange ordning för ersättningsargument, tex 3,2,1,4 "
 
-#: gtkedit/editcmd.c:1277
+#: gtkedit/editcmd.c:1314
 msgid " Enter replacement string:"
 msgstr " Ange ersättningssträng:"
 
-#: gtkedit/editcmd.c:1281 gtkedit/editcmd.c:1354 src/view.c:1996
+#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:1391 src/view.c:1998
 msgid " Enter search string:"
 msgstr " Ange söksträng:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1300 gtkedit/editcmd.c:1604 gtkedit/editcmd.c:1693
-#: gtkedit/editcmd.c:2252 gtkedit/editcmd.c:2283 gtkedit/editcmd.c:2285
+#: gtkedit/editcmd.c:1337 gtkedit/editcmd.c:1641 gtkedit/editcmd.c:1730
+#: gtkedit/editcmd.c:2289 gtkedit/editcmd.c:2320 gtkedit/editcmd.c:2322
 msgid " Replace "
 msgstr " Ersätt "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1368 gtkedit/editcmd.c:1598 gtkedit/editcmd.c:2363
-#: gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2393 src/view.c:1527
-#: src/view.c:1624 src/view.c:1726 src/view.c:1738 src/view.c:1954
-#: src/view.c:1996
+#: gtkedit/editcmd.c:1405 gtkedit/editcmd.c:1635 gtkedit/editcmd.c:2400
+#: gtkedit/editcmd.c:2402 gtkedit/editcmd.c:2430 src/view.c:1529
+#: src/view.c:1626 src/view.c:1728 src/view.c:1740 src/view.c:1956
+#: src/view.c:1998
 msgid " Search "
 msgstr " Sök "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1422
+#: gtkedit/editcmd.c:1459
 msgid " Enter search text : "
 msgstr " Ange söktext : "
 
-#: gtkedit/editcmd.c:1429
+#: gtkedit/editcmd.c:1466
 msgid " Enter replace text : "
 msgstr " Ange ersättningstext : "
 
-#: gtkedit/editcmd.c:1432 gtkedit/editcmd.c:1433
+#: gtkedit/editcmd.c:1469 gtkedit/editcmd.c:1470
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2180,12 +2136,12 @@ msgstr ""
 "(inte \\1, \\2 som i 'sed'). Använd sedan \"Ange...ordningen\""
 
 # får plats?
-#: gtkedit/editcmd.c:1435
+#: gtkedit/editcmd.c:1472
 msgid " Enter argument (or substring) order : "
 msgstr " Ange argument (eller delsträngs) ordning : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1439 gtkedit/editcmd.c:1440
+#: gtkedit/editcmd.c:1476 gtkedit/editcmd.c:1477
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2194,19 +2150,19 @@ msgstr ""
 "uttryck eller 'scanf' formatssträng, tex 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1445
+#: gtkedit/editcmd.c:1482
 msgid " Whole words only "
 msgstr " Endast hela ord "
 
-#: gtkedit/editcmd.c:1447
+#: gtkedit/editcmd.c:1484
 msgid " Case sensitive "
 msgstr " Skilj på versaler/gemener "
 
-#: gtkedit/editcmd.c:1450
+#: gtkedit/editcmd.c:1487
 msgid " Regular expression "
 msgstr " Reguljärt uttryck "
 
-#: gtkedit/editcmd.c:1451 gtkedit/editcmd.c:1452
+#: gtkedit/editcmd.c:1488 gtkedit/editcmd.c:1489
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
@@ -2214,48 +2170,48 @@ msgstr ""
 "För tips om hur man bygger reguljära\n"
 "uttryck, se mansidan för 'regex'"
 
-#: gtkedit/editcmd.c:1460
+#: gtkedit/editcmd.c:1497
 msgid " Backwards "
 msgstr " Baklänges "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1462 gtkedit/editcmd.c:1463
+#: gtkedit/editcmd.c:1499 gtkedit/editcmd.c:1500
 msgid "Warning: Searching backward can be slow"
 msgstr "Warning: Att söka baklänges kan gå långsamt"
 
-#: gtkedit/editcmd.c:1484
+#: gtkedit/editcmd.c:1521
 msgid " Prompt on replace "
 msgstr " Fråga innan ersätt "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1486
+#: gtkedit/editcmd.c:1523
 msgid "Ask before making each replacement"
 msgstr "Fråga innan ersätt"
 
-#: gtkedit/editcmd.c:1488
+#: gtkedit/editcmd.c:1525
 msgid " Replace all "
 msgstr " Ersätt alla "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1490
+#: gtkedit/editcmd.c:1527
 msgid "Replace repeatedly"
 msgstr "Ersätt flera gånger"
 
-#: gtkedit/editcmd.c:1494
+#: gtkedit/editcmd.c:1531
 msgid " Bookmarks "
 msgstr "Bokmärken"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1496 gtkedit/editcmd.c:1497
+#: gtkedit/editcmd.c:1533 gtkedit/editcmd.c:1534
 msgid "Create bookmarks at all lines found"
 msgstr "Skapa bokmärken för alla funna rader"
 
-#: gtkedit/editcmd.c:1500
+#: gtkedit/editcmd.c:1537
 msgid " Scanf expression "
 msgstr " Scanf-uttryck "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1502
+#: gtkedit/editcmd.c:1539
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
@@ -2264,63 +2220,63 @@ msgstr ""
 "Se mansidan för 'scanf'"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1527
+#: gtkedit/editcmd.c:1564
 msgid "Begin search, Enter"
 msgstr "Börja sökning, Enter"
 
 # tänker inte ersätta 'enter' med retur
-#: gtkedit/editcmd.c:1528
+#: gtkedit/editcmd.c:1565
 msgid "Abort this dialog, Esc"
 msgstr "Avbryt den här dialogen, Esc"
 
-#: gtkedit/editcmd.c:1693 gtkedit/gtkedit.c:1249
+#: gtkedit/editcmd.c:1730 gtkedit/gtkedit.c:1253
 msgid "Replace"
 msgstr "Ersätt"
 
-#: gtkedit/editcmd.c:1693
+#: gtkedit/editcmd.c:1730
 msgid "Skip"
 msgstr "Skippa"
 
-#: gtkedit/editcmd.c:1693
+#: gtkedit/editcmd.c:1730
 msgid "Replace all"
 msgstr "Ersätt alla"
 
-#: gtkedit/editcmd.c:1693
+#: gtkedit/editcmd.c:1730
 msgid "Replace one"
 msgstr "Ersätt en"
 
-#: gtkedit/editcmd.c:2053
+#: gtkedit/editcmd.c:2090
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Ogiltigt reguljärt uttryck, eller scanfuttryck med för många konverteringar "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2254
+#: gtkedit/editcmd.c:2291
 msgid " Error in replacement format string. "
 msgstr " Fel i formatsträngen för ersättningar."
 
-#: gtkedit/editcmd.c:2282
+#: gtkedit/editcmd.c:2319
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld strängar ersattes. "
 
-#: gtkedit/editcmd.c:2285 gtkedit/editcmd.c:2365 gtkedit/editcmd.c:2393
+#: gtkedit/editcmd.c:2322 gtkedit/editcmd.c:2402 gtkedit/editcmd.c:2430
 msgid " Search string not found. "
 msgstr " Söksträngen kunde inte hittas. "
 
 #. in response to number of bookmarks added because of string being found %d times
-#: gtkedit/editcmd.c:2362
+#: gtkedit/editcmd.c:2399
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d sökningar gjorda, %d bokmärken tillagda"
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2418 gtkedit/editcmd.c:2433 gtkedit/editcmd.c:2436
+#: gtkedit/editcmd.c:2455 gtkedit/editcmd.c:2470 gtkedit/editcmd.c:2473
 msgid " Quit "
 msgstr " Avsluta "
 
-#: gtkedit/editcmd.c:2419 gtkedit/editcmd.c:2437
+#: gtkedit/editcmd.c:2456 gtkedit/editcmd.c:2474
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -2329,144 +2285,144 @@ msgstr ""
 " Spara och avsluta? "
 
 # stämmer detta semantiskt i sammanhanget alltså?
-#: gtkedit/editcmd.c:2433
+#: gtkedit/editcmd.c:2470
 msgid " File was modified, Save with exit? "
 msgstr " Filen har modifierats, spara och avsluta? "
 
 # stämmer detta semantiskt i sammanhanget?
-#: gtkedit/editcmd.c:2433
+#: gtkedit/editcmd.c:2470
 msgid "Cancel quit"
 msgstr "Avbryt avsluta"
 
-#: gtkedit/editcmd.c:2433 src/cmd.c:245 src/file.c:1882 src/file.c:2253
+#: gtkedit/editcmd.c:2470 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:571 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:408
+#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
 msgid "&Yes"
 msgstr "&Ja"
 
-#: gtkedit/editcmd.c:2433 src/cmd.c:245 src/file.c:1882 src/file.c:2253
+#: gtkedit/editcmd.c:2470 src/cmd.c:245 src/file.c:1881 src/file.c:2252
 #: src/filegui.c:570 src/hotlist.c:1013 src/main.c:875 src/screen.c:2150
-#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:408
+#: src/subshell.c:745 src/subshell.c:771 src/tree.c:754 src/view.c:410
 msgid "&No"
 msgstr "&Nej"
 
-#: gtkedit/editcmd.c:2437
+#: gtkedit/editcmd.c:2474
 msgid " &Cancel quit "
 msgstr " &Avbryt avsluta "
 
-#: gtkedit/editcmd.c:2437
+#: gtkedit/editcmd.c:2474
 msgid " &Yes "
 msgstr " &Ja "
 
-#: gtkedit/editcmd.c:2437
+#: gtkedit/editcmd.c:2474
 msgid " &No "
 msgstr " &Nej "
 
-#: gtkedit/editcmd.c:2669 gtkedit/editcmd.c:2744
+#: gtkedit/editcmd.c:2706 gtkedit/editcmd.c:2781
 msgid " Copy to clipboard "
 msgstr " Kopiera till klippbordet "
 
-#: gtkedit/editcmd.c:2669 gtkedit/editcmd.c:2691 gtkedit/editcmd.c:2744
-#: gtkedit/editcmd.c:2757
+#: gtkedit/editcmd.c:2706 gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2781
+#: gtkedit/editcmd.c:2794
 msgid " Unable to save to file. "
 msgstr " Kunde inte spara till filen. "
 
-#: gtkedit/editcmd.c:2691 gtkedit/editcmd.c:2757
+#: gtkedit/editcmd.c:2728 gtkedit/editcmd.c:2794
 msgid " Cut to clipboard "
 msgstr " Klipp ut till klippbordet "
 
-#: gtkedit/editcmd.c:2779 gtkedit/editcmd.c:2783 gtkedit/editcmd.c:2788
-#: gtkedit/editcmd.c:2791 src/view.c:1901
+#: gtkedit/editcmd.c:2816 gtkedit/editcmd.c:2820 gtkedit/editcmd.c:2825
+#: gtkedit/editcmd.c:2828 src/view.c:1903
 msgid " Goto line "
 msgstr " Gå till rad "
 
-#: gtkedit/editcmd.c:2779 gtkedit/editcmd.c:2783 gtkedit/editcmd.c:2788
-#: gtkedit/editcmd.c:2791
+#: gtkedit/editcmd.c:2816 gtkedit/editcmd.c:2820 gtkedit/editcmd.c:2825
+#: gtkedit/editcmd.c:2828
 msgid " Enter line: "
 msgstr " Ange radnummer: "
 
-#: gtkedit/editcmd.c:2812 gtkedit/editcmd.c:2825
+#: gtkedit/editcmd.c:2849 gtkedit/editcmd.c:2862
 msgid " Save Block "
 msgstr " Spara block "
 
-#: gtkedit/editcmd.c:2837
+#: gtkedit/editcmd.c:2874
 msgid " Insert File "
 msgstr " Infoga fil "
 
-#: gtkedit/editcmd.c:2850
+#: gtkedit/editcmd.c:2887
 msgid " Insert file "
 msgstr " Infoga fil "
 
-#: gtkedit/editcmd.c:2850
+#: gtkedit/editcmd.c:2887
 msgid " Error trying to insert file. "
 msgstr " Fel vid infogning av fil. "
 
-#: gtkedit/editcmd.c:2869
+#: gtkedit/editcmd.c:2906
 msgid " Sort block "
 msgstr " Sortera block "
 
 # varför är texten lokaliserad om den inte skall översättas?
-#: gtkedit/editcmd.c:2869 gtkedit/editcmd.c:2953
+#: gtkedit/editcmd.c:2906 gtkedit/editcmd.c:2990
 msgid " You must first highlight a block of text. "
 msgstr " Du måste först markera ett textblock. "
 
-#: gtkedit/editcmd.c:2876
+#: gtkedit/editcmd.c:2913
 msgid " Run Sort "
 msgstr " Kör \"sort\" "
 
-#: gtkedit/editcmd.c:2877
+#: gtkedit/editcmd.c:2914
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Ange in flaggor för 'sort' (see mansidan) skilda av blanktecken: "
 
-#: gtkedit/editcmd.c:2888 gtkedit/editcmd.c:2893
+#: gtkedit/editcmd.c:2925 gtkedit/editcmd.c:2930
 msgid " Sort "
 msgstr " Sortera "
 
-#: gtkedit/editcmd.c:2889
+#: gtkedit/editcmd.c:2926
 msgid " Error trying to execute sort command "
 msgstr " Fel vid exekvering av 'sort' kommandot "
 
-#: gtkedit/editcmd.c:2894
+#: gtkedit/editcmd.c:2931
 msgid " Sort returned non-zero: "
 msgstr " Sortera returnerade icke-nollor: "
 
-#: gtkedit/editcmd.c:2927
+#: gtkedit/editcmd.c:2964
 msgid "Error create script:"
 msgstr "Fel vid skapande av skript:"
 
-#: gtkedit/editcmd.c:2933
+#: gtkedit/editcmd.c:2970
 msgid "Error read script:"
 msgstr "Fel vid läsning av skript:"
 
-#: gtkedit/editcmd.c:2940
+#: gtkedit/editcmd.c:2977
 msgid "Error close script:"
 msgstr "Fel vid stängning av skript:"
 
-#: gtkedit/editcmd.c:2945
+#: gtkedit/editcmd.c:2982
 msgid "Script created:"
 msgstr "Skript skapat:"
 
-#: gtkedit/editcmd.c:2952
+#: gtkedit/editcmd.c:2989
 msgid "Process block"
 msgstr "Processblock"
 
-#: gtkedit/editcmd.c:3058
+#: gtkedit/editcmd.c:3095
 msgid " Mail "
 msgstr " Brev "
 
-#: gtkedit/editcmd.c:3069
+#: gtkedit/editcmd.c:3106
 msgid " Copies to"
 msgstr " Kopior till"
 
-#: gtkedit/editcmd.c:3073
+#: gtkedit/editcmd.c:3110
 msgid " Subject"
 msgstr " Ämne"
 
-#: gtkedit/editcmd.c:3077
+#: gtkedit/editcmd.c:3114
 msgid " To"
 msgstr " Till"
 
-#: gtkedit/editcmd.c:3079
+#: gtkedit/editcmd.c:3116
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <ämne> -c <cc> <mottagare>"
 
@@ -2501,8 +2457,8 @@ msgstr ""
 "               Midnight Commander. \n"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
-msgid "&Open/load...     C-o"
-msgstr "&Öppna            C-o"
+msgid "&Open file..."
+msgstr "&Öppna med..."
 
 # ladda låter inte så bra i sammanhanget
 #: gtkedit/editmenu.c:129
@@ -2672,7 +2628,7 @@ msgstr "&Layout..."
 
 #. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
 #: gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
-#: src/chmod.c:154 src/chown.c:130
+#: src/chmod.c:153 src/chown.c:131
 msgid " File "
 msgstr " Fil "
 
@@ -2939,12 +2895,12 @@ msgstr "Inställningar"
 msgid "Error initialising editor.\n"
 msgstr "Fel vid initiering.\n"
 
-#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1246 src/help.c:811
-#: src/main.c:1723 src/screen.c:2414 src/tree.c:1017 src/view.c:2074
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250 src/help.c:811
+#: src/main.c:1723 src/screen.c:2414 src/tree.c:1017 src/view.c:2076
 msgid "Help"
 msgstr "Hjälp"
 
-#: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1248
+#: gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
 msgid "Mark"
 msgstr "Markera"
 
@@ -2958,111 +2914,111 @@ msgstr "Rullgardin"
 
 # ?
 # får plats
-#: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1258 src/help.c:823
-#: src/main.c:1726 src/view.c:2076 src/view.c:2098
+#: gtkedit/editwidget.c:1149 gtkedit/gtkedit.c:1262 src/help.c:823
+#: src/main.c:1726 src/view.c:2078 src/view.c:2100
 msgid "Quit"
 msgstr "Avsluta"
 
-#: gtkedit/gtkedit.c:67
+#: gtkedit/gtkedit.c:66
 msgid "&Dismiss"
 msgstr "&Försvinn"
 
 # varsågod att komma på något bättre
-#: gtkedit/gtkedit.c:68
+#: gtkedit/gtkedit.c:67
 msgid " Enter file name: "
 msgstr " Mata in filnamn: "
 
-#: gtkedit/gtkedit.c:113
+#: gtkedit/gtkedit.c:112
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
 msgstr "Den spanska räven rev en annan räv"
 
-#: gtkedit/gtkedit.c:802
+#: gtkedit/gtkedit.c:801
 msgid ""
 "gtkedit.c: HOME environment variable not set and no passwd entry - aborting\n"
 msgstr ""
 "gtkedit.c: Miljövariabeln \"HOME\" är inte satt och lösenordspost saknas - "
 "avbryter\n"
 
-#: gtkedit/gtkedit.c:1246
+#: gtkedit/gtkedit.c:1250
 msgid "Interactive help browser"
 msgstr "Interaktiv hjälpläsare"
 
-#: gtkedit/gtkedit.c:1247
+#: gtkedit/gtkedit.c:1251
 msgid "Save to current file name"
 msgstr "Spara till nuvarande fil"
 
-#: gtkedit/gtkedit.c:1248
+#: gtkedit/gtkedit.c:1252
 msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "Aktivera/deaktivera osynlig markör för markerad text"
 
 # får plats?
-#: gtkedit/gtkedit.c:1249
+#: gtkedit/gtkedit.c:1253
 msgid "Find and replace strings/regular expressions"
 msgstr "Sök och ersätt strängar/reguljära uttryck"
 
-#: gtkedit/gtkedit.c:1250
+#: gtkedit/gtkedit.c:1254
 msgid "Copy highlighted block to cursor position"
 msgstr "Kopiera markerad text till markörens position"
 
-#: gtkedit/gtkedit.c:1252
+#: gtkedit/gtkedit.c:1256
 msgid "Move highlighted block to cursor position"
 msgstr "Flytta markerad text till markörens posistion"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1257
 msgid "Find"
 msgstr "Sök"
 
-#: gtkedit/gtkedit.c:1253
+#: gtkedit/gtkedit.c:1257
 msgid "Find strings/regular expressions"
 msgstr "Sök strängar/reguljära uttryck"
 
 # får plats ?
-#: gtkedit/gtkedit.c:1254
+#: gtkedit/gtkedit.c:1258
 msgid "Delete highlighted text"
 msgstr "Radera markerad text"
 
-#: gtkedit/gtkedit.c:1256 src/main.c:1724 src/screen.c:2415
+#: gtkedit/gtkedit.c:1260 src/main.c:1724 src/screen.c:2415
 msgid "Menu"
 msgstr "Meny"
 
-#: gtkedit/gtkedit.c:1256
+#: gtkedit/gtkedit.c:1260
 msgid "Pull down menu"
 msgstr "Rullgardinsmeny"
 
-#: gtkedit/gtkedit.c:1258
+#: gtkedit/gtkedit.c:1262
 msgid "Exit editor"
 msgstr "Avsluta"
 
-#: gtkedit/gtkedit.c:1292
+#: gtkedit/gtkedit.c:1296
 msgid "Clear the edit buffer"
 msgstr "Rensa redigeringsbufferten"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1301
 msgid "Insert File"
 msgstr "Infoga fil"
 
-#: gtkedit/gtkedit.c:1297
+#: gtkedit/gtkedit.c:1301
 msgid "Insert text from a file"
 msgstr "Infoga text från en fil"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1303
 msgid "Copy to file"
 msgstr "Kopiera till fil"
 
-#: gtkedit/gtkedit.c:1299
+#: gtkedit/gtkedit.c:1303
 msgid "copy a block to a file"
 msgstr "kopiera ett block till en fil"
 
-#: gtkedit/gtkedit.c:1339
+#: gtkedit/gtkedit.c:1343
 msgid "Search/Replace"
 msgstr "Sök/Ersätt"
 
-#: gtkedit/syntax.c:1079 gtkedit/syntax.c:1088 gtkedit/syntax.c:1097
-#: gtkedit/syntax.c:1106
+#: gtkedit/syntax.c:1081 gtkedit/syntax.c:1090 gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1108
 msgid " Spelling Message "
 msgstr " Stavningskontrollerar meddelande "
 
-#: gtkedit/syntax.c:1079
+#: gtkedit/syntax.c:1081
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -3073,7 +3029,7 @@ msgstr ""
 " Ett annat alternativ är att deaktivera stavningskontroll i "
 "inställningsmenyn."
 
-#: gtkedit/syntax.c:1088
+#: gtkedit/syntax.c:1090
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -3084,7 +3040,7 @@ msgstr ""
 " Ett annat alternativ är att deaktivera stavningskontroll i "
 "inställningsmenyn."
 
-#: gtkedit/syntax.c:1097
+#: gtkedit/syntax.c:1099
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -3095,7 +3051,7 @@ msgstr ""
 " Ett annat alternativ är att deaktivera stavningskontroll i "
 "inställningsmenyn."
 
-#: gtkedit/syntax.c:1106
+#: gtkedit/syntax.c:1108
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
@@ -3103,11 +3059,11 @@ msgstr ""
 " Fel vid läsning från \"ispell\". \n"
 " \"ispell\" håller på att startas om. "
 
-#: gtkedit/syntax.c:1381 gtkedit/syntax.c:1383
+#: gtkedit/syntax.c:1386 gtkedit/syntax.c:1388
 msgid " Load Syntax Rules "
 msgstr " Ladda syntaxregler "
 
-#: gtkedit/syntax.c:1381 gtkedit/syntax.c:1383
+#: gtkedit/syntax.c:1386 gtkedit/syntax.c:1388
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -3117,62 +3073,62 @@ msgstr ""
 " En ny fil kommer att installeras. \n"
 " Din gamla regelfil har sparats med ett .OLD suffix. "
 
-#: gtkedit/syntax.c:1529 gtkedit/syntax.c:1536
+#: gtkedit/syntax.c:1534 gtkedit/syntax.c:1541
 msgid " Load syntax file "
 msgstr " Ladda syntaxfil "
 
-#: gtkedit/syntax.c:1529
+#: gtkedit/syntax.c:1534
 msgid " File access error "
 msgstr " Filåtkomst nekas "
 
-#: gtkedit/syntax.c:1535
+#: gtkedit/syntax.c:1540
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Fel i fil \"%s\" på rad %d "
 
-#: src/achown.c:72 src/chmod.c:111 src/chown.c:80
+#: src/achown.c:74 src/chmod.c:110 src/chown.c:81
 msgid "&Set"
 msgstr "&Sätt"
 
-#: src/achown.c:73
+#: src/achown.c:75
 msgid "S&kip"
 msgstr "s&Kippa"
 
-#: src/achown.c:74 src/chmod.c:115 src/chown.c:83
+#: src/achown.c:76 src/chmod.c:114 src/chown.c:84
 msgid "Set &all"
 msgstr "Sätt &Alla"
 
-#: src/achown.c:349 src/achown.c:356
+#: src/achown.c:345 src/achown.c:352
 msgid "owner"
 msgstr "ägare"
 
-#: src/achown.c:351 src/achown.c:358
+#: src/achown.c:347 src/achown.c:354
 msgid "group"
 msgstr "grupp"
 
-#: src/achown.c:353
+#: src/achown.c:349
 msgid "other"
 msgstr "andra"
 
-#: src/achown.c:361
+#: src/achown.c:357
 msgid "On"
 msgstr "På"
 
-#: src/achown.c:363
+#: src/achown.c:359
 msgid "Flag"
 msgstr "Flagga"
 
-#: src/achown.c:370
+#: src/achown.c:366
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d av %d"
 
-#: src/achown.c:378
+#: src/achown.c:374
 msgid " Chown advanced command "
 msgstr " Avancerat \"chown\" kommando "
 
-#: src/achown.c:613 src/achown.c:629 src/achown.c:690 src/chmod.c:270
-#: src/chmod.c:355
+#: src/achown.c:609 src/achown.c:625 src/achown.c:671 src/chmod.c:269
+#: src/chmod.c:338
 #, c-format
 msgid ""
 " Couldn't chmod \"%s\" \n"
@@ -3181,8 +3137,8 @@ msgstr ""
 " Kan inte ändra rättigheter på \"%s\" \n"
 " %s "
 
-#: src/achown.c:618 src/achown.c:633 src/achown.c:694 src/chown.c:223
-#: src/chown.c:345
+#: src/achown.c:614 src/achown.c:629 src/achown.c:675 src/chown.c:224
+#: src/chown.c:331
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -3191,40 +3147,27 @@ msgstr ""
 " Kan inte byta ägare på \"%s\" \n"
 " %s "
 
-#: src/achown.c:650 src/achown.c:654 src/chmod.c:305 src/chmod.c:309
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:298 src/user.c:664
-msgid " Oops... "
-msgstr " Hoppsan..."
-
-#: src/achown.c:651
-msgid " I can't run the Advanced Chown command on an extfs "
-msgstr " Kan inte köra avancerad \"chown\" kommando på extfs "
-
-#: src/achown.c:655
-msgid " I can't run the Advanced Chown command on a tarfs "
-msgstr " Kan inte köra avancerad \"chown\" kommando på tarfs "
-
-#: src/background.c:182
+#: src/background.c:184
 msgid "Background process:"
 msgstr "Bakgrundsprocess:"
 
-#: src/background.c:280 src/file.c:2193
+#: src/background.c:282 src/file.c:2192
 msgid " Background process error "
 msgstr " Bakgrundsprocessfel "
 
-#: src/background.c:283
+#: src/background.c:285
 msgid " Child died unexpectedly "
 msgstr " Barnet dog oväntat "
 
-#: src/background.c:285
+#: src/background.c:287
 msgid " Unknown error in child "
 msgstr " Okänt fel i barn "
 
-#: src/background.c:300
+#: src/background.c:302
 msgid " Background protocol error "
 msgstr " Bakgrundsprotokollfel"
 
-#: src/background.c:301
+#: src/background.c:303
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -3269,7 +3212,7 @@ msgstr "Listningsläge"
 msgid "&Reverse"
 msgstr "&Omvänd"
 
-#: src/boxes.c:282 src/find.c:142
+#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr "ski&Lj på versaler/gemener"
 
@@ -3317,7 +3260,7 @@ msgstr "8 bitars inmatning"
 msgid " Display bits "
 msgstr " Visa bitar "
 
-#: src/boxes.c:585 src/selcodepage.c:47
+#: src/boxes.c:585 src/selcodepage.c:48
 msgid "Other 8 bit"
 msgstr "Annan 8-bitars"
 
@@ -3387,168 +3330,157 @@ msgstr "&Döda"
 msgid "Background Jobs"
 msgstr "Bakgrundsjobb"
 
-#: src/charsets.c:171 src/charsets.c:184
+#: src/charsets.c:33 vfs/extfs.c:1337 vfs/sfs.c:301
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Varning: filen %s kunde inte hittas\n"
+
+#: src/charsets.c:174 src/charsets.c:187
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Kan inte översätta från %s till %s"
 
-#: src/chmod.c:91
+#: src/chmod.c:90
 msgid "execute/search by others"
 msgstr "exekverbar/sökbar för andra"
 
-#: src/chmod.c:92
+#: src/chmod.c:91
 msgid "write by others"
 msgstr "skrivbar för andra"
 
-#: src/chmod.c:93
+#: src/chmod.c:92
 msgid "read by others"
 msgstr "läsbar för andra"
 
-#: src/chmod.c:94
+#: src/chmod.c:93
 msgid "execute/search by group"
 msgstr "exekverbar/sökbar för grupp"
 
-#: src/chmod.c:95
+#: src/chmod.c:94
 msgid "write by group"
 msgstr "skrivbar för grupp"
 
-#: src/chmod.c:96
+#: src/chmod.c:95
 msgid "read by group"
 msgstr "läsbar för grupp"
 
-#: src/chmod.c:97
+#: src/chmod.c:96
 msgid "execute/search by owner"
 msgstr "exekverbar/sökbar för ägaren"
 
-#: src/chmod.c:98
+#: src/chmod.c:97
 msgid "write by owner"
 msgstr "skrivbar för ägaren"
 
-#: src/chmod.c:99
+#: src/chmod.c:98
 msgid "read by owner"
 msgstr "läsbar för ägaren"
 
-#: src/chmod.c:100
+#: src/chmod.c:99
 msgid "sticky bit"
 msgstr "orörliga biten"
 
-#: src/chmod.c:101
+#: src/chmod.c:100
 msgid "set group ID on execution"
 msgstr "sätt grupp-ID vid exekvering"
 
-#: src/chmod.c:102
+#: src/chmod.c:101
 msgid "set user ID on execution"
 msgstr "sätt användar-ID vid exekvering"
 
-#: src/chmod.c:112
+#: src/chmod.c:111
 msgid "C&lear marked"
 msgstr "&Nollställ markerad"
 
-#: src/chmod.c:113
+#: src/chmod.c:112
 msgid "S&et marked"
 msgstr "S&Ätt markerad"
 
-#: src/chmod.c:114
+#: src/chmod.c:113
 msgid "&Marked all"
 msgstr "&Markera"
 
-#: src/chmod.c:142
+#: src/chmod.c:141
 msgid "Permissions (Octal)"
 msgstr "Rättigheter (Oktalt)"
 
-#: src/chmod.c:144
+#: src/chmod.c:143
 msgid "Owner name"
 msgstr "Ägarnamn"
 
-#: src/chmod.c:146
+#: src/chmod.c:145
 msgid "Group name"
 msgstr "Gruppnamn"
 
-#: src/chmod.c:150
+#: src/chmod.c:149
 msgid " Chmod command "
 msgstr " chmod kommandot "
 
-#: src/chmod.c:152 src/chown.c:120
+#: src/chmod.c:151 src/chown.c:121
 msgid " Permission "
 msgstr " Rättigheter "
 
-#: src/chmod.c:159
+#: src/chmod.c:158
 msgid "Use SPACE to change"
 msgstr "Använd mellanslag för att ändra"
 
-#: src/chmod.c:161
+#: src/chmod.c:160
 msgid "an option, ARROW KEYS"
 msgstr "en inställning, piltangenterna"
 
 # ?
-#: src/chmod.c:163
+#: src/chmod.c:162
 msgid "to move between options"
 msgstr "för att flytta mellan olika alternativ"
 
-#: src/chmod.c:165
+#: src/chmod.c:164
 msgid "and T or INS to mark"
 msgstr "och T eller INS för att välja"
 
-#: src/chmod.c:221
+#: src/chmod.c:220
 msgid "Chmod command"
 msgstr "chmod kommandot"
 
-#: src/chmod.c:306
-msgid " I can't run the Chmod command on an extfs "
-msgstr " Kan inte använda chmod kommandot på ett extfs "
-
-#: src/chmod.c:310
-msgid " I can't run the Chmod command on a tarfs "
-msgstr " Kan inte använda chmod kommandot på tarfs"
-
-#: src/chown.c:81
+#: src/chown.c:82
 msgid "Set &users"
 msgstr "Sätt &Användare"
 
-#: src/chown.c:82
+#: src/chown.c:83
 msgid "Set &groups"
 msgstr "Sätt &Grupper"
 
-#: src/chown.c:112
+#: src/chown.c:113
 msgid " Name "
 msgstr " Namn "
 
-#: src/chown.c:114
+#: src/chown.c:115
 msgid " Owner name "
 msgstr " Ägarnamn "
 
-#: src/chown.c:116 src/chown.c:128
+#: src/chown.c:117 src/chown.c:129
 msgid " Group name "
 msgstr " Gruppnamn "
 
-#: src/chown.c:118
+#: src/chown.c:119
 msgid " Size "
 msgstr " Storlek "
 
-#: src/chown.c:124
+#: src/chown.c:125
 msgid " Chown command "
 msgstr " chown kommandot "
 
-#: src/chown.c:126
+#: src/chown.c:127
 msgid " User name "
 msgstr " Användarnamn "
 
-#: src/chown.c:192
+#: src/chown.c:193
 msgid "<Unknown user>"
 msgstr "<Okänd användare>"
 
 #. add fields for unknown names (numbers)
-#: src/chown.c:193
+#: src/chown.c:194
 msgid "<Unknown group>"
 msgstr "<Okänd grupp>"
-
-#: src/chown.c:261
-msgid " I can't run the Chown command on an extfs "
-msgstr " Kan inte använda chown kommandot på extfs "
-
-#: src/chown.c:265
-msgid " I can't run the Chown command on a tarfs "
-msgstr " Kan inte använda chown kommandot på tarfs "
 
 #: src/cmd.c:194
 #, c-format
@@ -3563,7 +3495,7 @@ msgstr " CD "
 msgid "Files tagged, want to cd?"
 msgstr "Filerna är markerade, vill du byta katalog?"
 
-#: src/cmd.c:250 src/cmd.c:722 src/cmd.c:741
+#: src/cmd.c:250 src/cmd.c:724 src/cmd.c:743
 msgid "Could not change directory"
 msgstr "Kan inte ändra katalog"
 
@@ -3595,85 +3527,85 @@ msgstr " Mata in katalognamnet:"
 msgid " Filter "
 msgstr " Filter "
 
-#: src/cmd.c:452
+#: src/cmd.c:453
 msgid " Set expression for filtering filenames"
 msgstr " Sätt uttryck för filtrering av filnamn"
 
-#: src/cmd.c:521
+#: src/cmd.c:523
 msgid " Select "
 msgstr " Välj "
 
-#: src/cmd.c:575
+#: src/cmd.c:577
 msgid " Unselect "
 msgstr " Välj bort "
 
-#: src/cmd.c:649
+#: src/cmd.c:651
 msgid "Extension file edit"
 msgstr "Redigera utökningsfilen"
 
-#: src/cmd.c:650
+#: src/cmd.c:652
 msgid " Which extension file you want to edit? "
 msgstr " Vilken utökningsfil vill du redigera? "
 
-#: src/cmd.c:651
+#: src/cmd.c:653
 msgid "&User"
 msgstr "&Användare"
 
-#: src/cmd.c:651 src/cmd.c:679
+#: src/cmd.c:653 src/cmd.c:681
 msgid "&System Wide"
 msgstr "Global &System"
 
-#: src/cmd.c:676
+#: src/cmd.c:678
 msgid " Menu edit "
 msgstr " Menyredigering "
 
-#: src/cmd.c:677
+#: src/cmd.c:679
 msgid " Which menu file will you edit ? "
 msgstr " Vilken menyfil vill du redigera? "
 
-#: src/cmd.c:679
+#: src/cmd.c:681
 msgid "&Local"
 msgstr "&Lokal"
 
-#: src/cmd.c:679
+#: src/cmd.c:681
 msgid "&Home"
 msgstr "&Hem"
 
-#: src/cmd.c:867
+#: src/cmd.c:869
 msgid " Compare directories "
 msgstr " Jämför kataloger "
 
-#: src/cmd.c:867
+#: src/cmd.c:869
 msgid " Select compare method: "
 msgstr " Välj jämförelsemetod: "
 
-#: src/cmd.c:868
+#: src/cmd.c:870
 msgid "&Quick"
 msgstr "&Snabb"
 
-#: src/cmd.c:868
+#: src/cmd.c:870
 msgid "&Size only"
 msgstr "&Endast storlek"
 
-#: src/cmd.c:868
+#: src/cmd.c:870
 msgid "&Thorough"
 msgstr "&Noggrann"
 
-#: src/cmd.c:878
+#: src/cmd.c:880
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 " Båda panelerna måste vara i listningsläge vid användning av detta kommando "
 
 # undersök om raden är för lång
-#: src/cmd.c:892
+#: src/cmd.c:894
 msgid " The command history is empty "
 msgstr " Kommandohistorien är tom "
 
-#: src/cmd.c:898
+#: src/cmd.c:900
 msgid " Command history "
 msgstr " Kommandohistoria "
 
-#: src/cmd.c:938
+#: src/cmd.c:940
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -3681,125 +3613,116 @@ msgstr ""
 " Inte en xterm eller Linuxkonsol. \n"
 " Panelerna kan inte aktiveras/deaktiveras."
 
-#: src/cmd.c:973
+#: src/cmd.c:975
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Skriv `exit' för att återvända till Midnight Commander"
 
-#: src/cmd.c:1025
-#, c-format
-msgid ""
-" Couldn't stat %s \n"
-" %s "
-msgstr ""
-" Kan inte inhämta information om filen \"%s\" \n"
-" %s "
-
-#: src/cmd.c:1034 src/cmd.c:1036
+#: src/cmd.c:1023 src/cmd.c:1025
 msgid " Link "
 msgstr " Länk "
 
-#: src/cmd.c:1035 src/cmd.c:1180 src/file.c:1708
+#: src/cmd.c:1024 src/cmd.c:1161 src/file.c:1707
 msgid " to:"
 msgstr " till:"
 
-#: src/cmd.c:1046
+#: src/cmd.c:1035
 #, c-format
 msgid " link: %s "
 msgstr " länk: %s "
 
-#: src/cmd.c:1079
+#: src/cmd.c:1062
 #, c-format
 msgid " symlink: %s "
 msgstr " symlänk: %s "
 
-#: src/cmd.c:1136
+#: src/cmd.c:1117
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Symlänk `%s' pekar på: "
 
-#: src/cmd.c:1141
+#: src/cmd.c:1122
 msgid " Edit symlink "
 msgstr " Redigera symlänk "
 
-#: src/cmd.c:1146
+#: src/cmd.c:1127
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " redigera symlänk, kunde inte radera %s: %s "
 
-#: src/cmd.c:1150
+#: src/cmd.c:1131
 #, c-format
 msgid " edit symlink: %s "
 msgstr " redigera symlänk: %s "
 
-#: src/cmd.c:1162
+#: src/cmd.c:1143
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "\"%s\" är inte en symbolisk länk"
 
-#: src/cmd.c:1180
+#: src/cmd.c:1161
 msgid " Link symbolically "
 msgstr " Länka symboliskt "
 
-#: src/cmd.c:1181
+#: src/cmd.c:1162
 msgid " Relative symlink "
 msgstr "Relativ symlänk "
 
-#: src/cmd.c:1192
+#: src/cmd.c:1173
 #, c-format
 msgid " relative symlink: %s "
 msgstr " relativ symlänk: %s "
 
-#: src/cmd.c:1265
+#: src/cmd.c:1246
 msgid "Using default locale"
 msgstr "Använd standardlokal"
 
-#: src/cmd.c:1267
+#: src/cmd.c:1248
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
 msgstr "Använd lokalisering \"%s\" (från omgivningsvariabel %s)"
 
-#: src/cmd.c:1329
+#: src/cmd.c:1310
 msgid " Enter machine name (F1 for details): "
 msgstr " Mata in maskinnamnet (F1 för detaljer): "
 
-#: src/cmd.c:1356
+#: src/cmd.c:1337
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Kunde inte byta katalog till %s "
 
-#: src/cmd.c:1363 src/widget.c:1151
+#: src/cmd.c:1344 src/widget.c:1151
 msgid " Link to a remote machine "
-msgstr " Länk till en avlägsen maskin "
+msgstr " Länk till en fjärrmaskin "
 
-#: src/cmd.c:1369 src/widget.c:1152
+#: src/cmd.c:1350 src/widget.c:1152
 msgid " FTP to machine "
 msgstr " FTP till maskin"
 
-#: src/cmd.c:1375 src/widget.c:1153
+#: src/cmd.c:1356 src/widget.c:1153
 msgid " SMB link to machine "
 msgstr " SMB-länk till maskin "
 
-#: src/cmd.c:1385
+#: src/cmd.c:1366
 msgid " Socket source routing setup "
 msgstr "Inställning för \"socket source routing\""
 
-#: src/cmd.c:1386
+#: src/cmd.c:1367
 msgid " Enter host name to use as a source routing hop: "
 msgstr "Ange namn på värddator att användas som \"source routing hop\": "
 
-#: src/cmd.c:1394
+#: src/cmd.c:1375
 msgid " Host name "
 msgstr " Namnet på värddatorn "
 
-#: src/cmd.c:1394
+#: src/cmd.c:1375
 msgid " Error while looking up IP address "
 msgstr " Fel vid uppslagning av IP adress "
 
-#: src/cmd.c:1405
+#: src/cmd.c:1386
 msgid " Undelete files on an ext2 file system "
 msgstr " Återskapa filer på ett ext2 filsystem "
 
-#: src/cmd.c:1406
+#: src/cmd.c:1387
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -3807,11 +3730,11 @@ msgstr ""
 " Mata in namnet på enheten (utan /dev/) som du \n"
 " vill återskapa filer på: (F1 för detaljer)"
 
-#: src/cmd.c:1458
+#: src/cmd.c:1439
 msgid " Setup saved to ~/"
 msgstr " Inställningarna sparade till ~/"
 
-#: src/cmd.c:1460
+#: src/cmd.c:1441
 msgid " Setup "
 msgstr " Inställningar "
 
@@ -3902,16 +3825,16 @@ msgstr "äga&Re"
 msgid "&Group"
 msgstr "gru&Pp"
 
-#: src/dir.c:396
+#: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Filen \"%s\" existerar men status kan inte inhämtas: %s"
 
-#: src/dir.c:667
+#: src/dir.c:698
 msgid "Unknown"
 msgstr "Okänd"
 
-#: src/ext.c:146 src/user.c:550
+#: src/ext.c:151 src/user.c:558
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -3920,19 +3843,19 @@ msgstr ""
 " Kan inte skapa temporär kommandofil \n"
 " %s "
 
-#: src/ext.c:160 src/user.c:571
+#: src/ext.c:164 src/user.c:579
 msgid " Parameter "
 msgstr " Parameter "
 
-#: src/ext.c:419
+#: src/ext.c:416
 msgid " file error"
 msgstr " filfel"
 
-#: src/ext.c:420
+#: src/ext.c:417
 msgid "Format of the "
 msgstr "Formatet i "
 
-#: src/ext.c:422
+#: src/ext.c:419
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -3944,15 +3867,15 @@ msgstr ""
 "har misslyckats. Hämta ett nytt exemplar från\n"
 "Midnight Commander-paketet."
 
-#: src/ext.c:436
+#: src/ext.c:433
 msgid " file error "
 msgstr " filfel "
 
-#: src/ext.c:437
+#: src/ext.c:434
 msgid "Format of the ~/"
 msgstr "Formatet i ~/"
 
-#: src/ext.c:437
+#: src/ext.c:434
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3962,7 +3885,7 @@ msgstr ""
 "från och med version 3.0. Du kan endera\n"
 "kopiera den från "
 
-#: src/ext.c:439
+#: src/ext.c:436
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3970,7 +3893,7 @@ msgstr ""
 "mc.ext eller använda\n"
 "den som exempelfil.\n"
 
-#: src/ext.c:441
+#: src/ext.c:438
 msgid "mc.ext will be used for this moment."
 msgstr "För tillfället kommer mc.ext att användas."
 
@@ -4292,10 +4215,6 @@ msgstr ""
 " Kan inte radera katalog \"%s\" \n"
 " %s "
 
-#: src/file.c:1559
-msgid " Internal error: get_file \n"
-msgstr " Internt fel: get_file \n"
-
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
 #. * is assumed to be nouns, suitable in dialog box titles; this one should
@@ -4305,15 +4224,15 @@ msgstr " Internt fel: get_file \n"
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Copy"
 msgstr "1Kopiera"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Move"
 msgstr "1Flytta"
 
-#: src/file.c:1680
+#: src/file.c:1679
 msgid "1Delete"
 msgstr "1Radera"
 
@@ -4326,75 +4245,75 @@ msgstr "1Radera"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1696
+#: src/file.c:1695
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
-#: src/file.c:1698
+#: src/file.c:1697
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1701
+#: src/file.c:1700
 #, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
-#: src/file.c:1703
+#: src/file.c:1702
 #, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:518
+#: src/file.c:1706 vfs/fish.c:518
 msgid "file"
 msgstr "fil"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "files"
 msgstr "filer"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directory"
 msgstr "katalog"
 
-#: src/file.c:1707
+#: src/file.c:1706
 msgid "directories"
 msgstr "kataloger"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid "files/directories"
 msgstr "filer/kataloger"
 
-#: src/file.c:1708
+#: src/file.c:1707
 msgid " with source mask:"
 msgstr " med källmask:"
 
-#: src/file.c:1860
+#: src/file.c:1859
 msgid " Cannot operate on \"..\"! "
 msgstr " Kan inte operera på \"..\"! "
 
-#: src/file.c:1879 src/screen.c:2103
+#: src/file.c:1878 src/screen.c:2103
 msgid "Yes"
 msgstr "Ja"
 
-#: src/file.c:1879 src/screen.c:2103
+#: src/file.c:1878 src/screen.c:2103
 msgid "No"
 msgstr "Nej"
 
-#: src/file.c:1932
+#: src/file.c:1931
 msgid " Sorry, I could not put the job in background "
 msgstr " Tyvärr, kunde inte lägga jobbet i bakgrunden "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Internal failure "
 msgstr " Internt fel "
 
-#: src/file.c:2018 src/file.c:2102
+#: src/file.c:2017 src/file.c:2101
 msgid " Unknown file operation "
 msgstr " Okänd filoperation"
 
-#: src/file.c:2033
+#: src/file.c:2032
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -4403,15 +4322,15 @@ msgstr ""
 " Målet \"%s\" måste vara en katalog \n"
 " %s"
 
-#: src/file.c:2194
+#: src/file.c:2193
 msgid "&Retry"
 msgstr "försök &Igen"
 
-#: src/file.c:2194 src/file.c:2255 src/filegui.c:258 src/filegui.c:560
+#: src/file.c:2193 src/file.c:2254 src/filegui.c:258 src/filegui.c:560
 msgid "&Abort"
 msgstr "&Avbryt"
 
-#: src/file.c:2246
+#: src/file.c:2245
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -4421,7 +4340,7 @@ msgstr ""
 "  Katalogen är inte tom.  \n"
 "  Radera den rekursivt? "
 
-#: src/file.c:2247
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -4431,28 +4350,28 @@ msgstr ""
 "   Bakgrundsprocessen: Katalogen är inte tom \n"
 "   Vill du radera den rekursivt?"
 
-#: src/file.c:2254
+#: src/file.c:2253
 msgid "a&ll"
 msgstr "&Alla"
 
-#: src/file.c:2254 src/filegui.c:563
+#: src/file.c:2253 src/filegui.c:563
 msgid "non&E"
 msgstr "&Ingen"
 
-#: src/file.c:2264
+#: src/file.c:2263
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Skriv \"ja\" om du VERKLIGEN vill radera "
 
 # hoppas att ja fungerar som svar KONTROLLERA!
-#: src/file.c:2266
+#: src/file.c:2265
 msgid "all the directories "
 msgstr "alla kataloger"
 
-#: src/file.c:2268
+#: src/file.c:2267
 msgid " Recursive Delete "
 msgstr " Rekursiv radering"
 
-#: src/file.c:2269
+#: src/file.c:2268
 msgid " Background process: Recursive Delete "
 msgstr " Bakgrundsprocess: Rekursiv radering"
 
@@ -4630,7 +4549,7 @@ msgstr " Kan inte hitta nod [Innehåll] i hjälpfilen "
 msgid " Help "
 msgstr " Hjälp "
 
-#: src/help.c:768 src/user.c:682
+#: src/help.c:768 src/user.c:689
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -4994,7 +4913,7 @@ msgstr "&Rättigheter"
 msgid "&File types"
 msgstr "&Filtyper"
 
-#: src/layout.c:371 src/learn.c:60 src/learn.c:177 src/option.c:137
+#: src/layout.c:371 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "&Spara"
 
@@ -5052,20 +4971,20 @@ msgstr ""
 "Om du vill avbryta, tryck en gång på Escape \n"
 "tangenten och vänta."
 
-#: src/learn.c:120
+#: src/learn.c:126
 msgid " Cannot accept this key "
 msgstr " Kan inte acceptera den här tangenten "
 
-#: src/learn.c:121
+#: src/learn.c:127
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " Du har matat in \"%s\""
 
-#: src/learn.c:168
+#: src/learn.c:174
 msgid "OK"
 msgstr "OK"
 
-#: src/learn.c:175
+#: src/learn.c:181
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -5073,11 +4992,11 @@ msgstr ""
 "Det verkar som om alla dina tangenter\n"
 "fungerar. Det är toppen!"
 
-#: src/learn.c:177
+#: src/learn.c:183
 msgid "&Discard"
 msgstr "&Förkasta"
 
-#: src/learn.c:181
+#: src/learn.c:187
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -5085,19 +5004,19 @@ msgstr ""
 "Toppen! Nu har du en komplett terminaldatabas!\n"
 "Alla dina tangenter fungerar."
 
-#: src/learn.c:265
+#: src/learn.c:271
 msgid "Learn keys"
 msgstr "Lär MC dina tangenter"
 
-#: src/learn.c:298
+#: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Tryck ned de tangenter som nämns här. När du har gjort det, se efter"
 
-#: src/learn.c:300
+#: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "vilka tangenter som inte markerats med OK. Tryck på mellanslag eller"
 
-#: src/learn.c:302
+#: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "den saknade tangenten för att definiera den. Flytta runt med tab."
 
@@ -5405,15 +5324,15 @@ msgstr ""
 " I så fall behöver du göra en manuell omladdning av katalogen.   \n"
 " Se man-sidan för detaljer."
 
-#: src/main.c:1929
+#: src/main.c:1934
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Tack för att du använder GNU Midnight Commander"
 
-#: src/main.c:2372
+#: src/main.c:2377
 msgid "The TERM environment variable is unset!\n"
 msgstr "Omgivningsvariablen TERM är inte satt!\n"
 
-#: src/main.c:2477
+#: src/main.c:2482
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5424,19 +5343,19 @@ msgstr ""
 "\n"
 "mc [flaggor] [denna katalog] [annan panels katalog]\n"
 
-#: src/main.c:2480
+#: src/main.c:2485
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Använd +,-,| för linjeritning.\n"
 
-#: src/main.c:2482
+#: src/main.c:2487
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Använd svartvitt.\n"
 
-#: src/main.c:2484
+#: src/main.c:2489
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [Bara för utvecklare: Avlusa bakgrundskoden]\n"
 
-#: src/main.c:2486
+#: src/main.c:2491
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5446,11 +5365,11 @@ msgstr ""
 "-C, --colors       Specifiera färger (använd --help-colors för lista).\n"
 "-d, --nomouse      Inget musstöd.\n"
 
-#: src/main.c:2490
+#: src/main.c:2495
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Starta den interna editorn.\n"
 
-#: src/main.c:2492
+#: src/main.c:2497
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5463,16 +5382,16 @@ msgstr ""
 "-k, --resetsoft    Återställ softkeys (bara HP-terminaler) till deras\n"
 "                   terminfo/termcap standardinställningar\n"
 
-#: src/main.c:2497
+#: src/main.c:2502
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog fil   Logga ftpfs-kommandon till fil.\n"
 
-#: src/main.c:2500
+#: src/main.c:2505
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory fil   [Bara för utvecklare: Logga MAD-meddelanden till fil.]\n"
 
-#: src/main.c:2502
+#: src/main.c:2507
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5480,17 +5399,17 @@ msgstr ""
 "-P, --printwd      Skriv ut senaste arbetskatalog vid avslutning.\n"
 "-s, --slow         Stänger av högljutt läge (för långsamma terminaler).\n"
 
-#: src/main.c:2505
+#: src/main.c:2510
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Aktivera stöd för TERMCAP-variablen.\n"
 
-#: src/main.c:2508
+#: src/main.c:2513
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Skapa kommandofil för att sätta katalog vid avslutning.\n"
 
-#: src/main.c:2511
+#: src/main.c:2516
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5500,7 +5419,7 @@ msgstr ""
 "-U, --subshell     Slå på parallelläge för underskal.\n"
 "-r, --forceexec    Tvinga fram exekvering i underskal.\n"
 
-#: src/main.c:2515
+#: src/main.c:2520
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5512,11 +5431,11 @@ msgstr ""
 "-x, --xterm        Använd musstöd och skärmåterställning i xterm.\n"
 "+nummer            radnummer som \"mcedit\" skall starta på.\n"
 
-#: src/main.c:2520
+#: src/main.c:2525
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [Endast för utvecklare: Avlusa underskalet.]\n"
 
-#: src/main.c:2522
+#: src/main.c:2527
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5526,7 +5445,7 @@ msgstr ""
 "Skicka felrapporter (ta med utdata från \"mc -V\") till\n"
 "mc-devel@gnome.org och kommentarer på översättningen till sv@li.org\n"
 
-#: src/main.c:2537
+#: src/main.c:2542
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5564,124 +5483,124 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2589
+#: src/main.c:2594
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Bibliotekskatalog för Midnight Commander: %s\n"
 
-#: src/main.c:2603
+#: src/main.c:2608
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "-m inställningen är förlegad. Titta på Vy-Bitarna... i Inställningsmenyn\n"
 
-#: src/main.c:2662
+#: src/main.c:2667
 msgid "Use to debug the background code"
 msgstr "Använd för att avlusa bakgrundskod"
 
-#: src/main.c:2668
+#: src/main.c:2673
 msgid "Request to run in color mode"
 msgstr "Begär att få köra i färgläge"
 
-#: src/main.c:2670
+#: src/main.c:2675
 msgid "Specifies a color configuration"
 msgstr "Specificera en färgkonfiguration"
 
-#: src/main.c:2675
+#: src/main.c:2680
 msgid "Edits one file"
 msgstr "Redigera en fil"
 
-#: src/main.c:2679
+#: src/main.c:2684
 msgid "Displays this help message"
 msgstr "Visa det här hjälpmeddelandet"
 
-#: src/main.c:2682
+#: src/main.c:2687
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Visa ett hjälpfönster över hur man ändrar färgschema"
 
-#: src/main.c:2685
+#: src/main.c:2690
 msgid "Log ftp dialog to specified file"
 msgstr "Logga ftpdialog till specificerad fil"
 
-#: src/main.c:2692
+#: src/main.c:2697
 msgid "Obsolete"
 msgstr "Förlegad"
 
-#: src/main.c:2694
+#: src/main.c:2699
 msgid "Requests to run in black and white"
 msgstr "Begäran att köra i svartvitt"
 
-#: src/main.c:2696
+#: src/main.c:2701
 msgid "Disable mouse support in text version"
 msgstr "Stäng av musstödet i text versionen"
 
-#: src/main.c:2699
+#: src/main.c:2704
 msgid "Disables subshell support"
 msgstr "Stäng av stöd för subshell"
 
-#: src/main.c:2703
+#: src/main.c:2708
 msgid "Prints working directory at program exit"
 msgstr "Skriver ut arbetskatalogen vid programmavslutning"
 
-#: src/main.c:2705
+#: src/main.c:2710
 msgid "Resets soft keys on HP terminals"
 msgstr "Nollställ mjuka tangenter på HP-terminaler"
 
-#: src/main.c:2707
+#: src/main.c:2712
 msgid "To run on slow terminals"
 msgstr "Att köra på långsamma terminaler"
 
-#: src/main.c:2710
+#: src/main.c:2715
 msgid "Use stickchars to draw"
 msgstr "Använd 'stickchars' för att rita"
 
 # incomplete
-#: src/main.c:2714
+#: src/main.c:2719
 msgid "Enables subshell support (default)"
 msgstr "Aktiverar stöd för subshell (default)"
 
 # svängelska
-#: src/main.c:2719
+#: src/main.c:2724
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Försöker använda termcap istället för terminfo"
 
-#: src/main.c:2723
+#: src/main.c:2728
 msgid "Displays the current version"
 msgstr "Visa den aktuella versionen"
 
-#: src/main.c:2725
+#: src/main.c:2730
 msgid "Launches the file viewer on a file"
 msgstr "Startar filläsaren"
 
-#: src/main.c:2727
+#: src/main.c:2732
 msgid "Forces xterm features"
 msgstr "Tvinga fram xtermfinesser"
 
-#: src/main.c:2729
+#: src/main.c:2734
 msgid "Geometry for the window"
 msgstr "Geometri för fönstret"
 
-#: src/main.c:2729
+#: src/main.c:2734
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: src/main.c:2730
+#: src/main.c:2735
 msgid "No windows opened at startup"
 msgstr "Inga fönster öppnade vid programstart"
 
-#: src/main.c:2731
+#: src/main.c:2736
 msgid "No desktop icons"
 msgstr "Inga skrivbordsikoner"
 
-#: src/main.c:2732
+#: src/main.c:2737
 msgid "Look more like traditional gmc"
 msgstr "Se ut som traditionell gmc"
 
-#: src/main.c:2734
+#: src/main.c:2739
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Visa katalogen som innehåller .links startfilerna och avsluta"
 
-#: src/main.c:3057
+#: src/main.c:3062
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5689,11 +5608,11 @@ msgstr ""
 "Kan inte öppna tty linje. Du måste starta mc utan -P flaggan.\n"
 "På vissa system kan det vara lämpligt att köra en # 'which mc'\n"
 
-#: src/main.c:3144
+#: src/main.c:3149
 msgid " Notice "
 msgstr " Notera "
 
-#: src/main.c:3145
+#: src/main.c:3150
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5837,6 +5756,10 @@ msgstr " Lägg till extern panelisering "
 msgid " Enter command label: "
 msgstr " Mata in kommandoetikett: "
 
+#: src/panelize.c:298 src/user.c:671
+msgid " Oops... "
+msgstr " Hoppsan..."
+
 #: src/panelize.c:299
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
@@ -5940,15 +5863,15 @@ msgstr "RenMov"
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/selcodepage.c:32
+#: src/selcodepage.c:33
 msgid " Choose input codepage "
 msgstr " Välj teckentabell för inmatning "
 
-#: src/selcodepage.c:36
+#: src/selcodepage.c:37
 msgid "-  < No translation >"
 msgstr "- < Ingen översättning >"
 
-#: src/selcodepage.c:74
+#: src/selcodepage.c:75
 msgid ""
 "Midnight Commander was compiled without iconv support,\n"
 "so charsets recoding feature is not available!"
@@ -5956,7 +5879,7 @@ msgstr ""
 "Midnight Commander kompilerades utan stöd för iconv, så\n"
 "möjligheten att konvertera mellan teckentabeller är inte tillgänglig!"
 
-#: src/selcodepage.c:91
+#: src/selcodepage.c:92
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -5965,11 +5888,6 @@ msgstr ""
 "För att använda denna finess väljer du din teckentabell\n"
 "i dialogen Inställningar/Visa bitar!\n"
 "Glöm inte att spara inställningarna."
-
-#: src/setup.c:654
-#, c-format
-msgid "Cannot load %s/%s"
-msgstr "Kan inte läsa in %s/%s"
 
 #: src/slint.c:199
 #, c-format
@@ -6047,12 +5965,12 @@ msgid "With builtin Editor\n"
 msgstr "Med inbyggd editor\n"
 
 #: src/textconf.c:47
-msgid "Using S-Lang library"
-msgstr "Använder S-Lang-biblioteket"
-
-#: src/textconf.c:49
 msgid "Using system-installed S-Lang library"
 msgstr "Använder systeminstallerade S-Lang-biblioteket"
+
+#: src/textconf.c:49
+msgid "Using S-Lang library"
+msgstr "Använder S-Lang-biblioteket"
 
 #: src/textconf.c:55
 msgid "with terminfo database"
@@ -6165,44 +6083,44 @@ msgstr ""
 "Kan inte skriva till filen %s:\n"
 "%s\n"
 
-#: src/user.c:140
+#: src/user.c:139
 msgid " Format error on file Extensions File "
 msgstr " Felaktigt format på filen \"Extensions File\""
 
-#: src/user.c:141
+#: src/user.c:140
 msgid " The %%var macro has no default "
 msgstr " Makrot %%var har inget standardvärde "
 
-#: src/user.c:142
+#: src/user.c:141
 msgid " The %%var macro has no variable "
 msgstr " Makrot %%var har ingen variabel "
 
-#: src/user.c:277
+#: src/user.c:285
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Ogiltig skalmönsterdefinition \"%c\". "
 
-#: src/user.c:430
+#: src/user.c:438
 msgid " Debug "
 msgstr " Debug "
 
-#: src/user.c:439
+#: src/user.c:447
 msgid " ERROR: "
 msgstr " FEL: "
 
-#: src/user.c:443
+#: src/user.c:451
 msgid " True:  "
 msgstr " Sant:   "
 
-#: src/user.c:445
+#: src/user.c:453
 msgid " False: "
 msgstr " Falskt: "
 
-#: src/user.c:640
+#: src/user.c:648
 msgid " Warning -- ignoring file "
 msgstr " Varning -- ignorerarar fil "
 
-#: src/user.c:641
+#: src/user.c:649
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6211,34 +6129,34 @@ msgstr ""
 "Fil %s ägs varken av dig eller root, eller är skrivbar för alla.\n"
 "Att använda den kan äventyra din säkerhet"
 
-#: src/user.c:665
+#: src/user.c:672
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Det går inte att köra program om man är inloggad på en icke lokal katalog "
 
-#: src/user.c:763
+#: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr "Inga lämpliga poster funna i %s "
 
 #. Create listbox
-#: src/user.c:769
+#: src/user.c:776
 msgid " User menu "
 msgstr " Användarmeny "
 
-#: src/util.c:251
+#: src/util.c:244
 msgid "name_trunc: too big"
 msgstr "name_trunc: för stor"
 
 #. strftime() format string for recent dates
-#: src/util.c:688 src/util.c:713
+#: src/util.c:682 src/util.c:708
 msgid "%b %e %H:%M"
-msgstr "%e %b %H:%M"
+msgstr "%e %b %H.%M"
 
 #. strftime() format string for old dates
-#: src/util.c:689 src/util.c:711
+#: src/util.c:683 src/util.c:706
 msgid "%b %e  %Y"
-msgstr "%e %d  %Y"
+msgstr "%e %b  %Y"
 
 #: src/utilunix.c:370
 msgid " Pipe failed "
@@ -6248,7 +6166,7 @@ msgstr " Pipe misslyckades"
 msgid " Dup failed "
 msgstr " Dup misslyckades"
 
-#: src/view.c:405
+#: src/view.c:407
 msgid ""
 "File: \n"
 "\n"
@@ -6258,7 +6176,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:406
+#: src/view.c:408
 msgid ""
 "\n"
 "\n"
@@ -6268,27 +6186,27 @@ msgstr ""
 "\n"
 "har modifierats, vill du spara ändringarna?\n"
 
-#: src/view.c:408
+#: src/view.c:410
 msgid " Save changes "
 msgstr " Spara ändringar "
 
-#: src/view.c:450
+#: src/view.c:452
 msgid " Cannot spawn child program "
 msgstr " Kan inte skapa barnprogram "
 
-#: src/view.c:459
+#: src/view.c:461
 msgid " Empty output from child filter "
 msgstr " Tom utmatning från barnfilter "
 
-#: src/view.c:464
+#: src/view.c:466
 msgid " Could not open file "
 msgstr " Kan inte öppna fil "
 
-#: src/view.c:479
+#: src/view.c:481
 msgid " Cannot open file \""
 msgstr " Kan inte öppna fil \""
 
-#: src/view.c:486
+#: src/view.c:488
 msgid ""
 " Cannot stat file \n"
 " "
@@ -6296,11 +6214,11 @@ msgstr ""
 " Kan inte inhämta status om fil \n"
 " "
 
-#: src/view.c:492
+#: src/view.c:494
 msgid " Cannot view: not a regular file "
 msgstr " Kan inte visa: inte en vanlig fil "
 
-#: src/view.c:573
+#: src/view.c:575
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -6309,7 +6227,7 @@ msgstr ""
 " Kan inte öppna \"%s\"\n"
 " %s "
 
-#: src/view.c:582
+#: src/view.c:584
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -6318,38 +6236,38 @@ msgstr ""
 " Kan inte inhämta status om \"%s\"\n"
 " %s "
 
-#: src/view.c:717
+#: src/view.c:719
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
 
-#: src/view.c:731
+#: src/view.c:733
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Offset 0x%08x"
 
-#: src/view.c:742
+#: src/view.c:744
 msgid "  [grow]"
 msgstr "  [väx]"
 
-#: src/view.c:1517
+#: src/view.c:1519
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Söker efter \"%s\""
 
-#: src/view.c:1624 src/view.c:1738
+#: src/view.c:1626 src/view.c:1740
 msgid " Search string not found "
 msgstr " Söksträngen kunde inte hittas "
 
-#: src/view.c:1726
+#: src/view.c:1728
 msgid "Invalid hex search expression"
 msgstr "Ogiltigt hexadecimalt sökuttryck"
 
-#: src/view.c:1777
+#: src/view.c:1779
 msgid " Invalid regular expression "
 msgstr " Ogiltigt reguljärt uttryck"
 
-#: src/view.c:1899
+#: src/view.c:1901
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6358,7 +6276,7 @@ msgstr ""
 " Det nuvarande radnumret är %d.\n"
 " Ange det nya radnumret:"
 
-#: src/view.c:1921
+#: src/view.c:1923
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6367,73 +6285,73 @@ msgstr ""
 " Den aktuella adressen är 0x%lx.\n"
 " Ange den nya adressen:"
 
-#: src/view.c:1923
+#: src/view.c:1925
 msgid " Goto Address "
 msgstr " Gå till adress "
 
-#: src/view.c:1954
+#: src/view.c:1956
 msgid " Enter regexp:"
 msgstr " Ange regexp:"
 
-#: src/view.c:2077
+#: src/view.c:2079
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2077
+#: src/view.c:2079
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2078
+#: src/view.c:2080
 msgid "Goto"
 msgstr "Gå till"
 
-#: src/view.c:2078
+#: src/view.c:2080
 msgid "Line"
 msgstr "Linje"
 
-#: src/view.c:2081
+#: src/view.c:2083
 msgid "RxSrch"
 msgstr "RxSrch"
 
 # ?
-#: src/view.c:2084
+#: src/view.c:2086
 msgid "EdText"
 msgstr "EdText"
 
 # ?
-#: src/view.c:2084
+#: src/view.c:2086
 msgid "EdHex"
 msgstr "EdHex"
 
 # ?
-#: src/view.c:2086
+#: src/view.c:2088
 msgid "UnWrap"
 msgstr "UnWrap"
 
 # ?
-#: src/view.c:2086
+#: src/view.c:2088
 msgid "Wrap"
 msgstr "Wrap"
 
 # ?
-#: src/view.c:2089
+#: src/view.c:2091
 msgid "HxSrch"
 msgstr "HxSrch"
 
-#: src/view.c:2092
+#: src/view.c:2094
 msgid "Raw"
 msgstr "Rå"
 
-#: src/view.c:2092
+#: src/view.c:2094
 msgid "Parse"
 msgstr "Parsa"
 
 # ?
-#: src/view.c:2096
+#: src/view.c:2098
 msgid "Unform"
 msgstr "Oformera"
 
-#: src/view.c:2096
+#: src/view.c:2098
 msgid "Format"
 msgstr "Formera"
 
@@ -6701,28 +6619,15 @@ msgstr ""
 msgid "Dir cache expired for %s"
 msgstr "Katalogcache för gammal för %s"
 
-#: vfs/direntry.c:433 vfs/direntry.c:436
-msgid " Direntry warning "
-msgstr " Katalogpostsvarning "
-
-#: vfs/direntry.c:433
-#, c-format
-msgid "Super ino_usage is %d, memory leak"
-msgstr "Super ino_usage är %d, minnesläcka"
-
-#: vfs/direntry.c:436
-msgid "Super has want_stale set"
-msgstr "Super har satt want_stale"
-
-#: vfs/direntry.c:818
+#: vfs/direntry.c:820
 msgid "Starting linear transfer..."
 msgstr "Startar linjär överföring..."
 
-#: vfs/direntry.c:962
+#: vfs/direntry.c:964
 msgid "Getting file"
 msgstr "Hämtar fil: "
 
-#: vfs/extfs.c:268
+#: vfs/extfs.c:298
 #, c-format
 msgid ""
 "Couldn't open %s archive\n"
@@ -6731,7 +6636,7 @@ msgstr ""
 "Kan inte öppna %s arkivet\n"
 "%s"
 
-#: vfs/extfs.c:300 vfs/extfs.c:320
+#: vfs/extfs.c:330 vfs/extfs.c:349
 msgid "Inconsistent extfs archive"
 msgstr "Inkonsistent extfsfil"
 
@@ -6953,7 +6858,7 @@ msgstr "ftpfs: misslyckades: det finns ingenstans att falla tillbaka på"
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: lagrar fil %d (%d)"
 
-#: vfs/ftpfs.c:1798
+#: vfs/ftpfs.c:1812
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6975,7 +6880,7 @@ msgid ""
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
 msgstr ""
-" Den avlägsna servern är inte aktiv på en systemport. \n"
+" Fjärrservern är inte aktiv på en systemport. \n"
 " För att kunna logga in måste du ange ett lösenord, men det går inte \n"
 " att garantera att detta är säkert. Vill du fortsätta? \n"
 
@@ -6989,7 +6894,7 @@ msgstr " Nej "
 
 #: vfs/mcfs.c:173
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr " Den avlägsna servern är aktiv på en underlig port. Ger upp.\n"
+msgstr " Fjärrservern är aktiv på en underlig port. Ger upp.\n"
 
 #: vfs/mcfs.c:185
 msgid " MCFS Password required "
@@ -7018,11 +6923,6 @@ msgstr "Kan inte ansluta till värd: %s"
 msgid " Too many open connections "
 msgstr " För många aktiva anslutningar "
 
-#: vfs/sfs.c:301
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Varning: filen %s kunde inte hittas\n"
-
 #: vfs/sfs.c:329
 #, c-format
 msgid ""
@@ -7041,7 +6941,7 @@ msgstr ""
 "Varning: Flaggan %c i sfs.ini är ogiltig:\n"
 "%s\n"
 
-#: vfs/smbfs.c:539
+#: vfs/smbfs.c:527
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -7050,26 +6950,31 @@ msgstr ""
 " misslyckades att koppla upp till %s\n"
 " "
 
-#: vfs/smbfs.c:1123
+#: vfs/smbfs.c:1098
 msgid " Authentication failed "
 msgstr " Autentisering misslyckades "
 
-#: vfs/smbfs.c:1622
+#: vfs/smbfs.c:1590
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s skapar katalog %s"
 
-#: vfs/smbfs.c:1643
+#: vfs/smbfs.c:1613
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s raderar %s"
 
-#: vfs/smbfs.c:1748 vfs/smbfs.c:1768 vfs/smbfs.c:1829
+#: vfs/smbfs.c:1717 vfs/smbfs.c:1737
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s öppnar avlägsen fil %s "
+msgstr " %s öppnar fjärrfil %s "
 
-#: vfs/smbfs.c:1852
+#: vfs/smbfs.c:1805
+#, c-format
+msgid " %s removing remote file %s "
+msgstr " %s tar bort fjärrfil %s "
+
+#: vfs/smbfs.c:1843
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s byter namn på filerna\n"
@@ -7204,34 +7109,111 @@ msgstr " vid genomsökning av block "
 msgid " Could not open file: %s "
 msgstr " Kan inte öppna fil: %s "
 
-#: vfs/vfs.c:1148
+#: vfs/vfs.c:1146
 msgid "Changes to file lost"
 msgstr "Ändringar i filen förlorade"
 
-#: vfs/vfs.c:1784
+#: vfs/vfs.c:1782
 msgid "Could not parse:"
 msgstr "Kunde inte tolka:"
 
-#: vfs/vfs.c:1786
+#: vfs/vfs.c:1784
 msgid "More parsing errors will be ignored."
 msgstr "Resten av tolkningsfelen ignoreras."
 
-#: vfs/vfs.c:1786
+#: vfs/vfs.c:1784
 msgid "(sorry)"
 msgstr "(tyvärr)"
 
-#: vfs/vfs.c:1797
+#: vfs/vfs.c:1795
 msgid "Internal error:"
 msgstr " Internt fel:"
 
-#: vfs/vfs.c:1807
+#: vfs/vfs.c:1805
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld bytes överförda)"
 
-#: vfs/vfs.c:1808
+#: vfs/vfs.c:1806
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld bytes överförda"
+
+#~ msgid "File/New/Directory..."
+#~ msgstr "Arkiv/Ny/Katalog..."
+
+#~ msgid "Copyright (C) 1998 The Free Software Foundation"
+#~ msgstr "Copyright © 1998 The Free Software Foundation"
+
+#~ msgid "Open _new window"
+#~ msgstr "Öppna _nytt fönster"
+
+#~ msgid "_Close this window"
+#~ msgstr "_Stäng detta fönster"
+
+#~ msgid "E_xit"
+#~ msgstr "_Avsluta"
+
+# skippa användar
+#~ msgid "_Listing view"
+#~ msgstr "_Listningsläge"
+
+#~ msgid "_Icon view"
+#~ msgstr "_Ikonvy"
+
+#~ msgid "Display _tree view"
+#~ msgstr "Visa _trädvy"
+
+#~ msgid "_About the Midnight Commander..."
+#~ msgstr "_Om Midnight Commander..."
+
+#~ msgid "_File"
+#~ msgstr "_Arkiv"
+
+#~ msgid "_View"
+#~ msgstr "_Visa"
+
+#~ msgid "&Open/load...     C-o"
+#~ msgstr "&Öppna            C-o"
+
+#~ msgid " I can't run the Advanced Chown command on an extfs "
+#~ msgstr " Kan inte köra avancerad \"chown\" kommando på extfs "
+
+#~ msgid " I can't run the Advanced Chown command on a tarfs "
+#~ msgstr " Kan inte köra avancerad \"chown\" kommando på tarfs "
+
+#~ msgid " I can't run the Chmod command on an extfs "
+#~ msgstr " Kan inte använda chmod kommandot på ett extfs "
+
+#~ msgid " I can't run the Chmod command on a tarfs "
+#~ msgstr " Kan inte använda chmod kommandot på tarfs"
+
+#~ msgid " I can't run the Chown command on an extfs "
+#~ msgstr " Kan inte använda chown kommandot på extfs "
+
+#~ msgid " I can't run the Chown command on a tarfs "
+#~ msgstr " Kan inte använda chown kommandot på tarfs "
+
+#~ msgid ""
+#~ " Couldn't stat %s \n"
+#~ " %s "
+#~ msgstr ""
+#~ " Kan inte inhämta information om filen \"%s\" \n"
+#~ " %s "
+
+#~ msgid " Internal error: get_file \n"
+#~ msgstr " Internt fel: get_file \n"
+
+#~ msgid "Cannot load %s/%s"
+#~ msgstr "Kan inte läsa in %s/%s"
+
+#~ msgid " Direntry warning "
+#~ msgstr " Katalogpostsvarning "
+
+#~ msgid "Super ino_usage is %d, memory leak"
+#~ msgstr "Super ino_usage är %d, minnesläcka"
+
+#~ msgid "Super has want_stale set"
+#~ msgstr "Super har satt want_stale"
 
 #~ msgid " There is no other panel to compare contents to "
 #~ msgstr " Det finns ingen annan panel att jämföra innehållet med "

@@ -1,3 +1,8 @@
+2001-08-17  Christian Rose  <menthos@menthos.com>
+
+	* sv.po: Updated Swedish translation.
+	* .cvsignore: Added the messages file.
+
 2001-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* ru.po: Update. Translate every message.
