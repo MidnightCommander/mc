@@ -2182,13 +2182,13 @@ owner/group of files at once.
 .\"NODE "File Operations"
 .SH "File Operations"
 When you copy, move or delete files the Midnight Commander shows the
-file operations dialog. It shows the files currently being operated on
-and there are at most three progress bars. The file bar tells how big
-part of the current file has been copied so far. The count bar tells
-how many of tagged files have been handled so far. The bytes bar tells
-how big part of total size of the tagged files has been handled so
-far. If the verbose option is off the file and bytes bars are not
-shown.
+file operations dialog.  It shows the files currently being processed
+and uses up to three progress bars.  The file bar indicates the
+percentage of the current file that has been processed so far.  The
+count bar shows how many of the tagged files have been handled.  The
+bytes bar indicates the percentage of the total size of the tagged files
+that has been handled.  If the verbose option is off, the file and bytes
+bars are not shown.
 .PP
 There are two buttons at the bottom of the dialog. Pressing the Skip
 button will skip the rest of the current file. Pressing the Abort
@@ -2234,27 +2234,46 @@ matching the source mask are renamed.
 .PP
 There are other options which you can set:
 .PP
-Follow links tells whether make the symlinks and hardlinks in the source
+.B Follow links
+.PP
+determines whether make the symlinks and hardlinks in the source
 directory (recursively in subdirectories) new links in the target
 directory or whether would you like to copy their content.
 .PP
-Dive into subdirs tells what to do if in the target directory exists a
-directory with the same name as the file/directory being copied.  The
-default action is to copy its content into that directory, by enabling
-this you can copy the source directory into that directory.  Perhaps an
-example will help:
+.B Dive into subdirs
 .PP
-You want to copy content of a directory foo to /bla/foo, which is an
-already existing directory.  Normally (when Dive is not set), mc would
-copy it exactly into /bla/foo.  By enabling this option you will copy
-the content into /bla/foo/foo, because the directory already exists.
+determines the behavior when the source directory is about to be copied,
+but the target directory already exists.  The default action is to copy
+the contents of the source directory into the target directory. 
+Enabling this option causes copying the source directory itself into the
+target directory.
 .PP
-Preserve attributes tells whether to preserve the original files'
-permissions, timestamps and if you are root whether to preserve the
-original files' UID and GID.  If this option is not set the current
-value of the umask will be respected.
+For example, you want to copy directory
+.I /foo
+containing file
+.I bar
+to
+.IR /bla/foo ,
+which is an already existing directory.  Normally (when
+.B Dive into subdirs
+is not set), mc would copy file
+.I /foo/bar
+into the file
+.IR /bla/foo/bar .
+By enabling this option the
+.I /bla/foo/foo
+directory will be created, and
+.I /foo/bar
+will be copied into
+.IR /bla/foo/foo/bar .
 .PP
-.B "Use shell patterns on"
+.B Preserve attributes
+.PP
+determines whether to preserve the permissions, timestamps and (if you
+are root) the ownership of the original files.  If this option is not
+set, the current value of the umask will be respected.
+.PP
+.B Use shell patterns on
 .PP
 When the shell patterns option is on you can use the '*' and '?'
 wildcards in the source mask.  They work like they do in the shell.  In
@@ -2271,11 +2290,11 @@ Two examples:
 If the source mask is "*.tar.gz", the destination is "/bla/*.tgz" and the
 file to be copied is "foo.tar.gz", the copy will be "foo.tgz" in "/bla".
 .PP
-Let's suppose you want to swap basename and extension so that "file.c"
-will become "c.file" and so on. The source mask for this is "*.*" and
-the destination is "\\2.\\1".
+Suppose you want to swap basename and extension so that "file.c" would
+become "c.file" and so on.  The source mask for this is "*.*" and the
+destination is "\\2.\\1".
 .PP
-.B "Use shell patterns off"
+.B Use shell patterns off
 .PP
 When the shell patterns option is off the MC doesn't do automatic
 grouping anymore. You must use '\\(...\\)' expressions in the source
@@ -2293,7 +2312,7 @@ Let's suppose you want to swap basename and extension so that "file.c"
 will become "c.file" and so on. The source mask for this is
 "^\\(.*\\)\\.\\(.*\\)$" and the destination is "\\2.\\1".
 .PP
-.B "Case Conversions"
+.B Case Conversions
 .PP
 You can also change the case of the filenames.  If you use '\\u'
 or '\\l' in the target mask, the next character will be converted to
@@ -3191,8 +3210,8 @@ everywhere).
 .\"NODE "FILES"
 .SH "FILES"
 The program will retrieve all of its information relative to the
-MC_DATADIR environment variable.  If this variable is not set, then it
-will fall back to the @prefix@/share/mc directory.
+MC_DATADIR environment variable.  If this variable is not set, it will
+fall back to the @prefix@/share/mc directory.
 .PP
 .I @prefix@/share/mc/mc.hlp
 .IP
