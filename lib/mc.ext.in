@@ -336,6 +336,11 @@ regex/\.so\.[0-9\.]*$
 	View=%view{hex}
 	Icon=so.xpm
 
+# GNU Info page
+type/Info\ text
+	Open=info --directory %d -f %p
+	Icon=info.xpm
+
 # Manual page
 regex/(([^0-9]|^[^\.]*)\.([1-9][A-Za-z]*|n)|\.man)$
 	Open=nroff @TROFFASCII@ @MANDOC@ %f | %var{PAGER:more}
