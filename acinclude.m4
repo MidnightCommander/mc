@@ -773,7 +773,7 @@ AC_DEFUN([AC_EXT2_UNDEL], [
      AC_MSG_NOTICE([using ext2fs file recovery code])
      vfs_flags="${vfs_flags}, undelfs"
      undelfs_o="undelfs.o"
-     LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
+     MCLIBS="$MCLIBS $EXT2FS_UNDEL_LIBS"
   else
      AC_MSG_NOTICE([not using ext2fs file recovery code])
   fi

@@ -1,5 +1,11 @@
 2002-07-13  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (AC_EXT2_UNDEL): Add ext2fs libraries to MC_LIBS,
+	not to LIBS.
+	* configure.in: Fix breakage in ncurses headers check from the
+	previous commit.  Simplify other instances of AC_CHECK_HEADERS.
+	Define REGEX_MALLOC here.
+
 	* acinclude.m4 (AC_NCURSES): Remove.
 	* configure.in: Use AC_CHECK_HEADERS to find ncurses headers and
 	AC_CHECK_LIB to check existance of ncurses library.  Eliminate

@@ -131,11 +131,10 @@ SHADOWLIB=
 case $host_os in
 linux*)
     AC_CHECK_LIB(shadow,pw_encrypt,
-	[shadow_header=yes
-	AC_CHECK_HEADERS(shadow.h,,
-		[AC_CHECK_HEADERS(shadow/shadow.h,,
-			[shadow_header=no])])
-	if test $shadow_header = yes; then
+	[shadow_header=
+	AC_CHECK_HEADERS([shadow.h shadow/shadow.h],
+			 [shadow_header=yes; break])
+	if test -n "$shadow_header"; then
 	    AC_DEFINE(LINUX_SHADOW, 1,
 		      [Define to use shadow passwords on Linux])
 	    SHADOWLIB=-lshadow
@@ -336,15 +335,16 @@ AC_ARG_WITH(ncurses,
 		CPPFLAGS="$CPPFLAGS -I$withval/include"
 	fi
 
-	AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h], [break],
-			 [AC_MSG_ERROR([Could not find ncurses header])])
+	AC_CHECK_HEADERS([ncurses/curses.h ncurses.h curses.h],
+			 [ncurses_h_found=yes; break])
+	if test -z "$ncurses_h_found"; then
+	    AC_MSG_ERROR([Could not find ncurses header])
+	fi
 
-	dnl -lncurses should not go to LIBS, hence [:]
 	dnl curses_version is specific to ncurses, it's not in old curses
-	AC_CHECK_LIB(ncurses, curses_version, [:],
+	AC_CHECK_LIB(ncurses, curses_version, [MCLIBS="$MCLIBS -lncurses"],
 		     [AC_MSG_ERROR([Could not find ncurses library])])
 
-	MCLIBS="$MCLIBS -lncurses"
 	screen_type="ncurses"
 	screen_manager="ncurses"
 	AC_DEFINE(USE_NCURSES, 1,
@@ -498,6 +498,8 @@ AC_ARG_WITH(subshell,
 AC_MSG_RESULT([$result])
 subshell="$result"
 
+AC_DEFINE(REGEX_MALLOC, 1, [Define to make regex use malloc(), not alloca()])
+
 dnl
 dnl Memory Allocation Debugger
 dnl
@@ -527,18 +529,11 @@ if test "x$screen_type" != xncurses; then
 	slang_term=""
 	slang_use_system_installed_lib=false
 	AC_CHECK_LIB(slang,SLang_init_tty,
-		[AC_CHECK_HEADERS(slang.h)
-		if test x$ac_cv_header_slang_h = xyes
-		then
+		[AC_CHECK_HEADERS([slang.h slang/slang.h],
+				  [slang_h_found=yes; break])
+		if test "x$slang_h_found" = xyes; then
 	             slang_use_system_installed_lib=true
 		     slang_check_lib=false
-	        else
-		     AC_CHECK_HEADERS(slang/slang.h)
-		     if test x$ac_cv_header_slang_slang_h = xyes
-		     then
-			 slang_use_system_installed_lib=true
-			 slang_check_lib=false
-		     fi
 		fi
 	])
 fi
