@@ -145,22 +145,22 @@ install:
 
 uninstall:
 
-clean: 
-	-rm -f core */*~ *~ */*.o */*.so bin/*
-
 etags:
 	etags `find . -name "*.[ch]"`
 
 ctags:
 	ctags `find . -name "*.[ch]"`
 
-realclean: clean
-	-rm -f config.log
-	-rmdir bin
+mostlyclean:
+	rm -f core */*~ *~ */*.o config.log
 
-distclean: realclean
-	-rm -f include/config.h include/stamp-h Makefile
-	-rm -f config.status config.cache so_locations
+clean: mostlyclean
+	rm -f *.a
+
+distclean: clean
+	rm -f config.log
+	rm -f include/config.h include/stamp-h Makefile
+	rm -f config.status config.cache so_locations
 
 #
 # This target is for documenation updators. It regenerates

@@ -1,5 +1,8 @@
 2001-03-14  Pavel Roskin  <proski@gnu.org>
 
+	* samba/Makefile.in: Make *clean targets Automake-compatible.
+	Don't ignore errors from `rm'.
+
 	* samba/configure.in: Use AC_CHECK_TOOL to find AR.
 	* samba/Makefile.in: Remove useless rules, including defunct
 	dependency tracking. Create libsamba.a from the object files.
