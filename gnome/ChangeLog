@@ -1,3 +1,13 @@
+1999-01-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_fill_panel_list): Assertion that will pin point
+	if a CList gets out of sync with the panel->format.
+
+1999-01-01  Momchil 'Velco' Velikov <velco@fadata.bg>
+
+	* gscreen.c (panel_fill_panel_list): NULL terminate the column
+	array.  This is strange, as it should not need the ending NULL.
+
 1999-01-01  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c ((GtkWidget *widget, WPanel *panel): Now hooked up

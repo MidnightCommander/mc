@@ -163,7 +163,7 @@ panel_fill_panel_list (WPanel *panel)
 	int i, col, type_col, color;
 	char  **texts;
 
-	texts = malloc (sizeof (char *) * items);
+	texts = malloc (sizeof (char *) * (items+1));
 
 	gtk_clist_freeze (GTK_CLIST (cl));
 	gtk_clist_clear (GTK_CLIST (cl));
@@ -171,6 +171,9 @@ panel_fill_panel_list (WPanel *panel)
 	/* which column holds the type information */
 	type_col = -1;
 
+	g_assert (items == GTK_CLIST (cl->columns));
+		  
+	texts [items] = NULL;
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
 		format_e *format = panel->format;
