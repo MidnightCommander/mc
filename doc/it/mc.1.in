@@ -1811,8 +1811,8 @@ massimizzare la velocità di accesso ai file system usati spesso.
 .PP
 A causa del formato degli archivi tar, il
 .I filesystem tar
-abbisogna di leggere l'intero file solo per caricare le voci dei 
-file. dato che molti file tar sono compressi (i file
+necessita di leggere l'intero file solo per caricare le voci dei 
+file. Dato che molti file tar sono compressi (i file
 tar non compressi sono una specie in via di estinzione), 
 il file system tar deve decomprimere il file su disco, 
 in una locazione temporanea per poi accedervi come un file tar 
@@ -1833,7 +1833,7 @@ File System FTP
 (ftpfs) permette di navigare le directory su server FTP remoti. Esso
 possiede diverse opzioni.
 .PP
-.I password ftp anonimo
+.I Password ftp anonimo
 è la password utilizzata per accedere come "anonimo". Alcuni siti
 richiedono un indirizzo email valido. Daltra parte, probabilmente
 non si vuole dare il vostro indirizzo email reale a siti non di fiducia,
@@ -1842,7 +1842,7 @@ specialmente se non si sta usando filtri anti spam.
 L'ftpfs mantiene l'elenco della directory che scarica dal server ftp
 in una cache. Il tempo di scadenza della cache è configurabile
 con l'opzione 
-.IR "Scadenza cache directory ftpfs" .  
+.IR "scadenza cache directory ftpfs" .  
 Un valore basso per quest'opzione può rallentare ogni operazione sul
 file system ftp perché ogni operazione è accompagnata da una
 richiesta al server ftp.
@@ -1873,8 +1873,8 @@ E' possibile abilitare l'uso del file
 che mantiene i nomi di accesso e le password per i server ftp. Vedere
 netrc (5) per una descrizione del formato .netrc.
 .PP
-.I usa modalità passiva
-abilita l'uso della modalità FTP passiva, quando la connessione per 
+.I Usa modalità passiva
+abilita l'uso della modalità FTP passiva quando la connessione per 
 il trasferimento file è iniziata dal client, non dal server. 
 Quest'opzione è raccomandata e preimpostata. Se quest'opzione è spenta,
 la connessione dati viene iniziata dal server. Questo potrebbe non 
@@ -2694,7 +2694,7 @@ Esempi:
     /ftp/GCC/gcc-2.7.0.tar#utar
 .fi
 .PP
-L'ultima specifica il percorso completo dell'archivio tar.
+L'ultima riga, specifica il percorso completo dell'archivio tar.
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Trasferimento di File su Filesystem di Shell (FISH)"
 Il file system fish è un file system basato sulla rete che permette di
