@@ -1,13 +1,14 @@
+*.html
 Makefile
 Makefile.in
 genindex.sgml
 gmc
 gmc.junk
 docbook.css
-*.html
 gmc.dvi
 gmc.tex
 gmc.aux
 gmc.log
 gmc.ps
+gmc.pdf
 gmc.rtf
