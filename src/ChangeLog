@@ -1,3 +1,27 @@
+Sun May 24 02:45:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* utilunix.c, util.h (errno_dir_not_empty): deleted
+
+Sat May 23 22:29:57 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* file.c (check_dir_is_empty): New function which takes a path and 
+	returns -1 on error, 1 if there are no entries besides "." and
+	".."  in the directory path points to, 0 else. This function
+	actually opens and reads the directory and doesn't do tricks we
+	used to do with rmdir.
+	
+	* file.c (erase_dir, erase_dir_iff_empty): Use check_dir_is_empty
+	to detect non empty directories. The old code tried to remove the 
+	directory and decided on errno whether the failure of rmdir was
+	caused by a non empty directory or whether there was a different
+	error. 
+	Unfortunatly not every filesystem sets errno to EDIRNOTEMPTY if
+	you try to delete a non empty directory. Namely the linux user
+	space nfs server sets errno to EIO, Suns nfs server sets it to
+	EEXIST and the AIX nfs server sets it to ??? (Steve reported
+	problems on AIX so I guess AIX sets errno to a value we currently
+	don't check).
+
 1998-maj-18  Tamasi Gyorgy (gt_cosy@usa.net)
 
 	* lib/mc.menu: 'Z' on 'tar.Z' and 'tar.z' files: '%f' -> '$1'.

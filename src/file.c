@@ -1801,6 +1801,31 @@ recursive_erase (char *s)
     return FILE_CONT;
 }
 
+/* Return -1 on error, 1 if there are no entries besides "." and ".." 
+   in the directory path points to, 0 else. */
+static int 
+check_dir_is_empty(char *path)
+{
+    DIR *dir;
+    struct dirent *d;
+    int i;
+
+    dir = mc_opendir (path);
+    if (!dir)
+	return -1;
+
+    for (i = 1, d = mc_readdir (dir); d; d = mc_readdir (dir)) {
+	if (d->d_name[0] == '.' && (d->d_name[1] == '\0' ||
+            (d->d_name[1] == '.' && d->d_name[2] == '\0')))
+	    continue; /* "." or ".." */
+	i = 0;
+	break;
+    }
+
+    mc_closedir (dir);
+    return i;
+}
+
 int
 erase_dir (char *s)
 {
@@ -1816,16 +1841,25 @@ erase_dir (char *s)
 	return FILE_ABORT;
     mc_refresh ();
 
- retry_rmdir:
-    error = my_rmdir (s);
-    if (error && errno_dir_not_empty (errno)){
+    /* The old way to detect a non empty directory was:
+            error = my_rmdir (s);
+            if (error && (errno == ENOTEMPTY || errno == EEXIST))) {
+       For the linux user space nfs server (nfs-server-2.2beta29-2)
+       we would have to check also for EIO. I hope the new way is
+       fool proof. (Norbert)
+     */
+    error = check_dir_is_empty (s);
+    if (error == 0) { /* not empty */
 	error = query_recursive (s);
 	if (error == FILE_CONT)
 	    return recursive_erase (s);
 	else
 	    return error;
     }
-    if (error){
+
+ retry_rmdir:
+    error = my_rmdir (s);
+    if (error == -1){
 	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
 	if (error == FILE_RETRY)
 	    goto retry_rmdir;
@@ -1849,9 +1883,12 @@ erase_dir_iff_empty (char *s)
 	return FILE_ABORT;
     mc_refresh ();
 
+    if (1 != check_dir_is_empty (s)) /* not empty or error */
+	return FILE_CONT;
+
  retry_rmdir:
     error = my_rmdir (s);
-    if (error && !errno_dir_not_empty (errno)) {
+    if (error) {
 	error = file_error (_(" Cannot remove directory \"%s\" \n %s "), s);
 	if (error == FILE_RETRY)
 	    goto retry_rmdir;

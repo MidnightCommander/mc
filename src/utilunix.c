@@ -832,14 +832,6 @@ int gettimeofday (struct timeval *tp, void *tzp)
 }
 #endif
 
-int
-errno_dir_not_empty (int err)
-{
-    if (err == ENOTEMPTY || err == EEXIST)
-	return 1;
-    return 0;
-}
-
 #ifdef SCO_FLAVOR
 /* Define this only for SCO */
 #ifdef USE_NETCODE

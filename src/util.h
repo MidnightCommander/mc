@@ -124,9 +124,6 @@ char *get_current_wd (char *buffer, int size);
 int my_mkdir (char *s, mode_t mode);
 int my_rmdir (char *s);
 
-/* Returns true if the err means the directory is not empty */
-int errno_dir_not_empty (int err);
-
 /* Filesystem status */
 struct my_statfs {
     int type;
