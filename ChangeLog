@@ -1,3 +1,8 @@
+2001-09-02  Pavel Roskin  <proski@gnu.org>
+
+	* lib/ncurses.h: Remove.
+	* lib/Makefile.am: Remove ncurses.h.
+
 2001-09-02  Abel Cheung  <maddog@linux.org.hk>
 
 	* configure.in (ALL_LINGUAS): zh_TW.Big5 -> zh_TW

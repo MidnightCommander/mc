@@ -17,7 +17,6 @@ LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.hu mc.hint.it \
 
 noinst_DATA = \
 	xnc.hlp			\
-	ncurses.h 		\
 	mcserv.init 		\
 	mcserv.pamd 		\
 	mc.global
