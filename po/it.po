@@ -4450,7 +4450,7 @@ msgstr "Sorgente"
 
 #: src/filegui.c:528
 msgid "Target"
-msgstr "Destinazione"
+msgstr "Destinaz"
 
 #: src/filegui.c:550
 msgid "Deleting"
