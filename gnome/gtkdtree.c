@@ -170,6 +170,7 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	if (row == dtree->last_node)
 		return;
 
+	dtree->loading_dir++;
 	dtree->last_node = row;
 
 	gtk_clist_freeze (GTK_CLIST (ctree));
@@ -198,7 +199,8 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 		g_free (np);
 	}
 #endif
-	
+
+	dtree->loading_dir--;
 	gtk_clist_thaw (GTK_CLIST (ctree));
 }
 
