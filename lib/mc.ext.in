@@ -231,7 +231,7 @@ regex/\.deb$
 	View=%view{ascii} dpkg-deb -c %f
 
 # zip
-regex/\.(zip|ZIP)$
+regex/\.(zip|ZIP|jar|JAR)$
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
 	Icon=zip.xpm

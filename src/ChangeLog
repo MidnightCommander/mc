@@ -1,3 +1,7 @@
+Thu Oct 22 20:31:17 1998  Pavel Roskin  <pavel_roskin@geocities.com>
+
+	* lib/mc.ext.in: *.jar and *.JAR treated like *.zip and *.ZIP
+
 Fri Oct 16 12:10:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* cmd.c (quick_chdir_cmd): you must check for return code of
