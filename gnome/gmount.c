@@ -84,6 +84,11 @@ void free (void *ptr);
 #define MOUNTED_GETMNTTBL
 #endif
 
+#ifdef HAVE_MAGICDEV
+#include <libgnorba/gnorba.h>
+#include "magicdev.h"
+#endif /* HAVE_MAGICDEV */
+
 #include <dirent.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -284,8 +289,31 @@ mount_point_to_device (char *mount_point)
 static gboolean
 automounter_is_running (void)
 {
-	/* FIXME: finish this when magicdev is finished */
-	return TRUE;
+#if defined(HAVE_MAGICDEV) && defined(HAVE_CORBA)
+	CORBA_Object server;
+	CORBA_Environment ev;
+	gboolean result = FALSE;
+
+	CORBA_exception_init (&ev);
+	
+        server = goad_server_activate_with_id (NULL,
+					       "GOAD:magicdev:19990913",
+                                               GOAD_ACTIVATE_EXISTING_ONLY,
+					       NULL);
+
+	if (!CORBA_Object_is_nil (server, &ev)) {
+		result = GNOME_MagicDev_is_running (server, &ev);
+		if (ev._major != CORBA_NO_EXCEPTION)
+			result = FALSE;
+		
+		CORBA_Object_release (server, &ev);
+	}
+
+	return result;
+		
+#else  /* !HAVE_MAGICDEV */
+	return FALSE;
+#endif /* HAVE_MAGICDEV */
 }
 
 
@@ -404,7 +432,7 @@ setup_devices (void)
 			 * be nice and create only the links for CD-ROMS that
 			 * are actually mounted.
 			 */
-			if (automounter && !is_block_device_mounted (dev_name))
+			if (automounter && !is_block_device_mounted (dit->mount_point))
 				do_create = FALSE;
 		} else if (strncmp (short_dev_name, "fd", 2) == 0) {
 			format = _("Floppy %d");

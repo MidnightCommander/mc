@@ -1,3 +1,18 @@
+1999-09-13  Owen Taylor  <otaylor@redhat.com>
+
+	* Makefile.in (MAGICDEV_OBJS): Built common/stubs
+	for magicdev if we found it.
+
+	* gmount.c (automounter_is_running): If we detected
+	magicdev support at compile time, use a CORBA query
+	to detect if it is running.
+
+	* gcorba.c (WindowFactory_get_windows_by_directory): Set the
+	length of the sequence we are returning.
+
+	* gmount.c (setup_devices): is_block_device_mounted expects
+	mount point, not device.
+
 1999-09-13  Miguel de Icaza  <miguel@gnu.org>
 
 	* glayout.c: Add C-w for sopwith.

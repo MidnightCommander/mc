@@ -15,6 +15,7 @@ EXTRALIBS = -L../vfs @LVFS@ -L../gtkedit -lgtkedit @LINTL@
 INSTALL = @INSTALL@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
+GNOME_IDLDIR = @GNOME_IDLDIR@
 
 PIXMAPS =			\
 	dev.xpm			\
@@ -138,6 +139,8 @@ OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o		\
 CORBAOBJS = 			\
 	main-corba.o		\
 	gcorba.o		\
+	gmount-corba.o          \
+	$(MAGICDEV_OBJS)        \
 	FileManager-skels.o	\
 	FileManager-stubs.o	\
 	FileManager-common.o
@@ -161,7 +164,6 @@ OBJS =						\
 	gkey.o					\
 	glayout.o				\
 	gmain.o					\
-	gmount.o				\
 	gmc-chargrid.o				\
 	gmenu.o					\
 	gmetadata.o				\
@@ -182,7 +184,8 @@ OBJS =						\
 	gtkflist.o				\
 	gwidget.o
 
-NORMALOBJS =	\
+NORMALOBJS =	 \
+	gmount.o \
 	main.o
 
 CORBA_GENERATED =		\
@@ -190,6 +193,14 @@ CORBA_GENERATED =		\
 	FileManager-stubs.c	\
 	FileManager-skels.c	\
 	FileManager-common.c
+
+MAGICDEV_GENERATED =            \
+	magicdev-common.c 	\
+	magicdev-stubs.c
+
+@MAGICDEV@MAGICDEV_OBJS = 	  \
+@MAGICDEV@	magicdev-common.o \
+@MAGICDEV@      magicdev-stubs.o
 
 CLIENTSRCS = gmc-client.c
 
@@ -201,6 +212,9 @@ CLIENTOBJS = 			\
 
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
+
+@MAGICDEV@$(MAGICDEV_GENERATED): $(GNOME_IDLDIR)/magicdev.idl
+@MAGICDEV@	orbit-idl `gnome-config --cflags idl` --noskels $(GNOME_IDLDIR)/magicdev.idl
 
 FileManager-impl.c: FileManager.h
 
@@ -220,7 +234,11 @@ DISTGNOME = \
 main-corba.o: main.c
 	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
 
+gmount-corba.o: gmount.c
+	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o gmount-corba.o
+
 gcorba.o: gcorba.c $(CORBA_GENERATED)
+gmount.o: gmount.c $(MAGICDEV_GENERATED)
 
 all: @mx@ Makefile mc.keys 
 

@@ -321,6 +321,7 @@ WindowFactory_get_windows_by_directory (PortableServer_Servant servant,
 	}
 
 	seq = GNOME_FileManager_WindowFactory_WindowSeq__alloc ();
+	seq->_length = n;
 	seq->_buffer = CORBA_sequence_GNOME_FileManager_Window_allocbuf (n);
 
 	for (l = containers, i = 0; l; l = l->next, i++) {
