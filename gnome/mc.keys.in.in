@@ -19,7 +19,7 @@ application/x-bzip-compressed-tar
 	icon-filename=@icondir@/gnome-package.png
 
 application/x-bzip:
-	icon-filename=@icondir@/compressed.xpm
+	icon-filename=@icondir@/gnome-compressed.png
 	fm-view=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 	open.extract.Extract=bzip2 -dc %f 2>/dev/null | tar xf -
 
@@ -90,7 +90,7 @@ application/x-gnu-rmail:
 
 archive/
 application/x-gzip:
-	icon-filename=@icondir@/compressed.xpm
+	icon-filename=@icondir@/gnome-compressed.png
 
 application/x-tex:
 	icon-filename=@icondir@/tex.xpm
@@ -108,6 +108,7 @@ application/x-shared-library:
 application/x-cpio-compressed:
 	fm-open=%cd %d/%p#ucpio/
 	fm-view=%view{ascii} gzip -dc '%f' | cpio -ictv
+	icon-filename=@icondir@/gnome-compressed.png
 
 application/x-cpio:
 	fm-open=%cd %d/%p#ucpio/
@@ -151,6 +152,7 @@ application/x-troff-man:
 
 application/x-troff-man-compressed:
 	fm-view=%view{ascii,nroff} gunzip -dc %f | nroff @TROFFASCII@ @MANDOC@
+	icon-filename=@icondir@/gnome-compressed.png
 
 application/x-troff-ms:
 	fm-view=%view{ascii,nroff} nroff @TROFFASCII@ -ms %f

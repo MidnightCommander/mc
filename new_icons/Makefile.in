@@ -43,6 +43,7 @@ ALLICONS = 				\
 	gnome-application-x-c-source.png	\
 	gnome-application-x-cc-source.png \
 	gnome-package.png		\
+	gnome-compressed.png		\
 	gnome-core.png
 
 all:
