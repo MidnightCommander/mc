@@ -256,6 +256,9 @@ static struct {
     { "desktop_use_shaped_icons", &desktop_use_shaped_icons },
     { "desktop_auto_placement", &desktop_auto_placement },
     { "desktop_snap_icons", &desktop_snap_icons },
+    { "desktop_arr_r2l", &desktop_arr_r2l },
+    { "desktop_arr_b2t", &desktop_arr_b2t },
+    { "desktop_arr_rows", &desktop_arr_rows },
     { "tree_panel_visible", &tree_panel_visible },
     { "we_can_afford_the_speed", &we_can_afford_the_speed },
 #else
