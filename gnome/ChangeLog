@@ -1,3 +1,9 @@
+1999-01-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (gnome_filter_cmd): now it works!  It's even sorta
+	useful.  I'm so psyched... (:
+	
+
 1999-01-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_drag_data_received): Do not update

@@ -547,14 +547,35 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 	GtkWidget *filter_dlg;
 	GtkWidget *entry;
 	GtkWidget *label;
+	gchar *text1, *text2, *text3;
+	GList *list;
 
 	filter_dlg = gnome_dialog_new (_("Set Filter"), GNOME_STOCK_BUTTON_OK, 
 				       GNOME_STOCK_BUTTON_CANCEL, NULL);
-	entry = gtk_entry_new ();
-	if (panel->filter && easy_patterns && !(strcmp (panel->filter, "*")))
-		gtk_entry_set_text (GTK_ENTRY (entry), _("Show all files"));
-	else
-		gtk_entry_set_text (GTK_ENTRY (entry), panel->filter);
+	if (easy_patterns) {
+		text1 = "mc_filter_globs";
+		text3 = _("Show all files");
+		if (panel->filter && (strcmp (panel->filter, "*")))
+			text2 = panel->filter;
+		else
+			text2 = NULL;
+	} else {
+		text1 = ("mc_filter_regexps");
+		text3 = _(".");
+		if (!panel->filter)
+			text2 = NULL;
+		else
+			text2 = panel->filter;
+	}
+	entry = gnome_entry_new (text1);
+	gnome_entry_load_history (GNOME_ENTRY (entry));
+	
+	if (text2) {
+		gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), text2);
+		gnome_entry_prepend_history (GNOME_ENTRY (entry), FALSE, text3);
+	} else
+		gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))), text3);
+
 	if (easy_patterns)
 		label = gtk_label_new (_("Enter a filter here for files in the panel view.\n\nFor example:\n*.gif will show just gif images"));
 	else
@@ -573,13 +594,21 @@ gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 			g_free (panel->filter);
 			panel->filter = NULL;
 		}
-		panel->filter = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
-		if (!strcmp ("*", panel->filter)) {
+		panel->filter = g_strdup (gtk_entry_get_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry)))));
+		if (!strcmp (_("Show all files"), panel->filter)) {
+			g_free (panel->filter);
+			panel->filter = NULL;
+			gtk_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (entry))),
+					    "");
+			gtk_label_set_text (GTK_LABEL (panel->status), _("Show all files"));
+		} else if (!strcmp ("*", panel->filter)) {
 			g_free (panel->filter);
 			panel->filter = NULL;
 			gtk_label_set_text (GTK_LABEL (panel->status), _("Show all files"));
 		} else
 			gtk_label_set_text (GTK_LABEL (panel->status), panel->filter);
+		
+		gnome_entry_save_history (GNOME_ENTRY (entry));
 		reread_cmd ();
 		x_filter_changed (panel);
 		break;
