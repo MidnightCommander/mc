@@ -269,9 +269,12 @@ struct user_drop {
 static void user_drop (struct user_drop *usdr)
 {
     WPanel *panel = current_panel;
+    char *droplist[2];
+    droplist [0] = usdr->drops;
+    droplist [1] = NULL;
     
     xv_set_current_panel (usdr->panel);
-    regex_command (usdr->filename, "Drop", usdr->drops, NULL);
+    regex_command (usdr->filename, "Drop", droplist, NULL);
     free (usdr->drops);
     free (usdr);
     xv_set_current_panel (panel);

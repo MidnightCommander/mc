@@ -118,7 +118,11 @@ struct xviconruncommand {
 
 void xvIconRunCommand (struct xviconruncommand *xirc)
 {
-    regex_command (x_basename (xirc->filename), xirc->action, xirc->drops, NULL);
+    char *droplist [2];
+    droplist [0] = xirc->drops;
+    droplist [1] = NULL;
+
+    regex_command (x_basename (xirc->filename), xirc->action, droplist, NULL);
     free (xirc->filename);
     free (xirc->action);
     if (xirc->drops != NULL)
