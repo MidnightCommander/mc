@@ -1,4 +1,3 @@
-Midnight Commander (c) 1995-2001, Free Software Foundation
 Tip: C-x t vlo¾í na pøíkazovou øádku oznaèené soubory.
 Tip: C-x p vlo¾í na pøíkazovou øádku jméno aktuálního adresáøe.
 Tip: K doplòování pou¾ijte M-Tab (nebo Esc+Tab). Dvojitım zadání získáte seznam.

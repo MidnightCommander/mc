@@ -1,4 +1,3 @@
-GNU Midnight Commander (c) 1995-2001, The Free Software Foundation
 Ayudita: C-x t pone los archivos marcados en la línea de órdenes.
 Ayudita: C-x p copia la trayectoria completa en la línea de órdenes.
 Ayudita: C-x C-p copia la trayectoria del panel opuesto en la línea de órdenes.

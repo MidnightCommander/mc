@@ -1,4 +1,3 @@
-Midnight Commander (c) 1995-2001, Free Software Foundation
 Porada: Za pomoc± C-x t kopiuje siê nazwy zaznaczoych plików do wiersza poleceñ.
 Porada: Za pomoc± C-x p kopiuje siê nazwê bie¿±cej ¶cie¿ki do wiersza poleceñ.
 Porada: Uzupe³nianie: M-Tab (lub Esc+Tab). Podwójne wci¶niêcie wywo³uje listê.

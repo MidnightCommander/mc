@@ -1,4 +1,3 @@
-Midnight Commander (c) 1995-2001 The Free Software Foundation
 Hint: C-x t zet de geselecteerde filenamen in de commando lijn.
 Hint: Gebruik C-x p om de huidige padnaam naar de commando lijn te kopieren.
 Hint: Completeren: gebruik M-Tab (of Esc+Tab). Herhaal voor een lijst.
