@@ -1,3 +1,9 @@
+2002-01-21  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Rename DELETE to DELCHAR to avoid macro redefinition
+	on Win32.
+	* edit.h: Likewise.
+
 2002-01-21  Matthias Urban  <murban@cs.uni-magdeburg.de>
 
 	* edit.c: Add support for CK_Complete_Word event.

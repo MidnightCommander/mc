@@ -875,7 +875,7 @@ void edit_insert_ahead (WEdit * edit, int c)
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
     edit_modification (edit);
-    edit_push_action (edit, DELETE);
+    edit_push_action (edit, DELCHAR);
 
     edit->mark1 += (edit->mark1 >= edit->curs1);
     edit->mark2 += (edit->mark2 >= edit->curs1);
@@ -1790,7 +1790,7 @@ void edit_do_undo (WEdit * edit)
 	case BACKSPACE:
 	    edit_backspace (edit);
 	    break;
-	case DELETE:
+	case DELCHAR:
 	    edit_delete (edit);
 	    break;
 	case COLUMN_ON:

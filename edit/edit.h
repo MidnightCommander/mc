@@ -136,7 +136,7 @@
 /*some codes that may be pushed onto or returned from the undo stack: */
 #define CURS_LEFT 601
 #define CURS_RIGHT 602
-#define DELETE 603
+#define DELCHAR 603
 #define BACKSPACE 604
 #define STACK_BOTTOM 605
 #define CURS_LEFT_LOTS 606
