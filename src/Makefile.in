@@ -118,7 +118,7 @@ distclean: clean
 # Make sure to install mcview and mcedit after mc - important
 # on systems without symlinks.
 #
-install: mc mcmfmt
+install: all
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	$(mkinstalldirs) $(DESTDIR)$(mclibdir)
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc

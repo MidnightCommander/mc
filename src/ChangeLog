@@ -1,3 +1,8 @@
+2001-07-31  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: "install" now depends on "all".
+	Reported by Walery Studennikov <despair@sama.ru>
+
 2001-07-31  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* util.c [!HAVE_X] (is_printable): Don't duplicate declarations from
@@ -10,7 +15,7 @@
 	* widget.[ch] (label_new): Make text parameter const.
 	* menu.c (create_menu): Don't localize name, it is always done.
 	* find.c (find_parameters): Fix hotkeys duplication.
-	* complete.c (command_completion_function): Don't stop $PATH 
+	* complete.c (command_completion_function): Don't stop $PATH
 	processing on empty entry. Interpret it as current directory.
 
 2001-07-31  Pavel Roskin  <proski@gnu.org>
