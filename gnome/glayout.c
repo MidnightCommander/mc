@@ -267,6 +267,12 @@ run_cmd (void)
 	}
 }
 
+static void
+do_desktop_rescan_devices (void)
+{
+	desktop_reload_icons (FALSE, 0, 0);
+}
+
 void configure_box (void);
 
 GtkCheckMenuItem *gnome_toggle_snap (void);
@@ -360,12 +366,21 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 	GNOMEUIINFO_END
 };
 
+GnomeUIInfo gnome_panel_desktop_menu [] = {
+	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, desktop_arrange_icons),
+	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Mountable Devices"), NULL, desktop_rescan_devices),
+	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, do_desktop_rescan_devices),
+	GNOMEUIINFO_END
+};
+
+#define GNOME_PANEL_MENU_DESKTOP_INDEX 5
 GnomeUIInfo gnome_panel_menu [] = {
         GNOMEUIINFO_MENU_FILE_TREE(gnome_panel_file_menu),
         GNOMEUIINFO_MENU_EDIT_TREE(gnome_panel_edit_menu),
         GNOMEUIINFO_SUBTREE(N_("_Layout"),gnome_panel_layout_menu),
         GNOMEUIINFO_SUBTREE(N_("_Commands"),gnome_panel_commands_menu),
-        GNOMEUIINFO_MENU_HELP_TREE(gnome_panel_about_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Desktop"), gnome_panel_desktop_menu),
         GNOMEUIINFO_END
 };
 
@@ -516,6 +531,10 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 0);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
+
+	if (desktop_wm_is_gnome_compliant == 1)
+		gnome_panel_menu [GNOME_PANEL_MENU_DESKTOP_INDEX].type = GNOME_APP_UI_ENDOFINFO;
+	
 	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
 	create_new_menu (GNOME_APP (app), panel);
 

@@ -57,6 +57,9 @@ static int layout_cols;
 static int layout_rows;
 static struct layout_slot *layout_slots;
 
+
+int desktop_wm_is_gnome_compliant = -1;
+
 #define l_slots(u, v) (layout_slots[(u) * layout_rows + (v)])
 
 /* The last icon to be selected */
@@ -369,8 +372,8 @@ typedef struct {
  * specified position if user_pos is TRUE.  If it is FALSE, the icons will be
  * auto-placed.
  */
-static void
-reload_desktop_icons (int user_pos, int xpos, int ypos)
+void
+desktop_reload_icons (int user_pos, int xpos, int ypos)
 {
 	struct dirent *dirent;
 	DIR *dir;
@@ -569,8 +572,8 @@ reload_desktop_icons (int user_pos, int xpos, int ypos)
 }
 
 /* Perform automatic arrangement of the desktop icons */
-static void
-arrange_desktop_icons (void)
+void
+desktop_arrange_icons (void)
 {
 	GList *icons, *l;
 	int xpos, ypos;
@@ -902,12 +905,15 @@ find_command (char **known_locations)
 }
 
 gboolean
-is_mountable (char *filename, file_entry *fe, int *is_mounted)
+is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 {
-	char buffer [128];
+	char buffer [128], *p;
 	umode_t mode;
 	struct stat s;
 
+	if (point)
+		*point = NULL;
+	
 	if (!S_ISLNK (fe->buf.st_mode))
 		return FALSE;
 
@@ -921,9 +927,13 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted)
 	if (readlink (filename, buffer, sizeof (buffer)) == -1)
 		return FALSE;
 
-	if (!is_block_device_mountable (buffer))
+	p = is_block_device_mountable (buffer);
+	if (!p)
 		return FALSE;
 
+	if (point)
+		*point = p;
+			
 	*is_mounted = is_block_device_mounted (buffer);
 		
 	return TRUE;
@@ -1021,12 +1031,11 @@ try_to_mount (char *filename, file_entry *fe)
 {
 	int x;
 	
-	if (!is_mountable (filename, fe, &x))
+	if (!is_mountable (filename, fe, &x, NULL))
 		return FALSE;
 
 	return do_mount_umount (filename, TRUE);
 }
-
 
 /**
  * desktop_icon_info_open:
@@ -1051,7 +1060,20 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
 		new_panel_at (filename);
 	else {
-		if (!try_to_mount (filename, fe)) {
+		int is_mounted;
+		char *point;
+		int launch = FALSE;
+		
+		if (is_mountable (filename, fe, &is_mounted, &point)){
+			if (!is_mounted){
+				if (try_to_mount (filename, fe))
+					launch = TRUE;
+			} else
+				launch = TRUE;
+
+			if (launch)
+				new_panel_at (point);
+		} else {
 			if (is_exe (fe->buf.st_mode) && if_link_is_exe (desktop_directory, fe))
 				my_system (EXECUTE_AS_SHELL, shell, filename);
 			else
@@ -1108,7 +1130,7 @@ do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
-		reload_desktop_icons (FALSE, 0, 0);
+		desktop_reload_icons (FALSE, 0, 0);
 
 	g_free (filename);
 }
@@ -1423,7 +1445,7 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 static void
 drag_end (GtkWidget *widget, GdkDragContext *context, gpointer data)
 {
-	reload_desktop_icons (FALSE, 0, 0);
+	desktop_reload_icons (FALSE, 0, 0);
 }
 
 /* Set up a desktop icon as a DnD source */
@@ -1587,7 +1609,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 			return; /* eeeek */
 
 		if (gdnd_perform_drop (context, data, desktop_directory, fe))
-			reload_desktop_icons (FALSE, 0, 0);
+			desktop_reload_icons (FALSE, 0, 0);
 
 		file_entry_free (fe);
 	}
@@ -1966,7 +1988,7 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		directory = g_strndup (desktop_directory, p - desktop_directory);
 
 		if (gdnd_perform_drop (context, data, directory, desktop_fe))
-			reload_desktop_icons (TRUE, x, y);
+			desktop_reload_icons (TRUE, x, y);
 
 		g_free (directory);
 		file_entry_free (desktop_fe);
@@ -2074,7 +2096,7 @@ find_click_proxy_window (void)
 static void
 handle_arrange_icons (GtkWidget *widget, gpointer data)
 {
-	arrange_desktop_icons ();
+	desktop_arrange_icons ();
 }
 
 /* Callback for creating a new panel window */
@@ -2084,23 +2106,29 @@ handle_new_window (GtkWidget *widget, gpointer data)
 	new_panel_at (gnome_user_home_dir);
 }
 
+void
+desktop_rescan_devices (void)
+{
+	gmount_setup_devices (TRUE);
+	desktop_reload_icons (FALSE, 0, 0);
+}
+
 /* Callback for rescanning the mountable devices */
 static void
 handle_rescan_devices (GtkWidget *widget, gpointer data)
 {
-	gmount_setup_devices (TRUE);
-	reload_desktop_icons (FALSE, 0, 0);
+	desktop_rescan_devices ();
 }
 
 /* Callback for rescanning the desktop directory */
 static void
 handle_rescan_desktop (GtkWidget *widget, gpointer data)
 {
-	reload_desktop_icons (FALSE, 0, 0);
+	desktop_reload_icons (FALSE, 0, 0);
 }
 
 /* The popup menu for the desktop */
-static GnomeUIInfo desktop_popup_items[] = {
+GnomeUIInfo desktop_popup_items[] = {
 	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, handle_arrange_icons),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Create New Window"), NULL, handle_new_window),
@@ -2402,9 +2430,11 @@ setup_desktop_click_proxy_window (void)
 {
 	click_proxy_gdk_window = find_click_proxy_window ();
 	if (!click_proxy_gdk_window) {
+		desktop_wm_is_gnome_compliant = 0;
 		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
 		return;
 	}
+	desktop_wm_is_gnome_compliant = 1;	
 
 	/* Make the proxy window send events to the invisible proxy widget */
 	gdk_window_set_user_data (click_proxy_gdk_window, proxy_invisible);
@@ -2524,7 +2554,7 @@ desktop_init (void)
 	gicon_init ();
 	create_layout_info ();
 	create_desktop_dir ();
-	reload_desktop_icons (FALSE, 0, 0);
+	desktop_reload_icons (FALSE, 0, 0);
 
 	/* Create the proxy window and initialize all proxying stuff */
 

@@ -52,7 +52,12 @@ void desktop_icon_info_delete    (DesktopIconInfo *dii);
 file_entry *file_entry_from_file (char *filename);
 void        file_entry_free      (file_entry *fe);
 
-gboolean    is_mountable (char *filename, file_entry *fe, int *is_mounted);
+gboolean    is_mountable (char *filename, file_entry *fe, int *is_mounted, char **mount_point);
 gboolean    do_mount_umount (char *filename, gboolean is_mount);
 
+void desktop_arrange_icons (void);
+void desktop_rescan_devices (void);
+void desktop_reload_icons (int user_pos, int xpos, int ypos);
+
+extern int desktop_wm_is_gnome_compliant;
 #endif

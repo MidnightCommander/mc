@@ -13,9 +13,7 @@
 
 void gmount_setup_devices (int cleanup);
 
-#if 0
-gboolean  is_block_device_mountable (char *devname);
+char     *is_block_device_mountable (char *devname);
 gboolean  is_block_device_mounted   (char *devname);
-#endif
 
 #endif

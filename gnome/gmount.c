@@ -96,12 +96,17 @@ void free (void *ptr);
 
 #ifdef MOUNTED_GETMNTENT1
 
-gboolean
+/*
+ * Returns wheter devname is mountable:
+ * NULL if it is not or
+ * g_strdup()ed string with the mount point
+ */
+char *
 is_block_device_mountable (char *devname)
 {
 	FILE *f;
 	struct mntent *mnt;
-	gboolean retval = FALSE;
+	char *retval = NULL;
 	
 	if (getuid () == 0)
 		return TRUE;
@@ -112,7 +117,7 @@ is_block_device_mountable (char *devname)
 
 	while ((mnt = getmntent (f))){
 		if (strstr (mnt->mnt_opts, "user")){
-			retval = TRUE;
+			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}
 	}
@@ -162,10 +167,10 @@ get_mountable_devices (void)
 
 #else
 
-gboolean
+char *
 is_block_device_mountable (char *devname)
 {
-	return FALSE;
+	return NULL;
 }
 
 static GList *
@@ -285,7 +290,7 @@ setup_devices (void)
 		g_free (l->data);
 	}
 
-	g_free (list);
+	g_list_free (list);
 }
 
 void

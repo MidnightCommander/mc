@@ -1,5 +1,14 @@
 1999-02-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gdesktop.c (desktop_icon_info_open): Launch a panel at the
+	location of the mount point.
+
+	* gmount.c (setup_devices): Use g_list_free, not g_free.  Fed,
+	test your fixes to my code ;-)
+
+	* glayout.c (create_container): Add a Desktop menu if the WM is
+	not GNOME compliant.
+
 	* gdesktop.c (setup_motif_dnd_proxy): Use Window instead of
 	gint32, fix from George Lebl.
 	(setup_xdnd_proxy): ditto.
