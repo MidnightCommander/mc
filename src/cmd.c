@@ -908,14 +908,11 @@ view_other_cmd (void)
 #ifndef HAVE_X
 	if (use_mouse_p)
 	    shut_mouse ();
-#endif	    
-
-#ifndef HAVE_X
 	if (clear_before_exec)
 	    clr_scr ();
-#endif
         if (alternate_plus_minus)
             numeric_keypad_mode ();
+#endif
 #ifndef HAVE_SLANG
 	/* With slang we don't want any of this, since there
 	 * is no mc_raw_mode supported
@@ -952,13 +949,13 @@ view_other_cmd (void)
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
 
-        if (alternate_plus_minus)
-            application_keypad_mode ();
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
 #ifndef HAVE_X	
 	if (use_mouse_p)
 	    init_mouse ();
+        if (alternate_plus_minus)
+            application_keypad_mode ();
 #endif	    
 
 #ifdef HAVE_SUBSHELL_SUPPORT
