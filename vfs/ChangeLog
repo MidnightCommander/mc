@@ -1,5 +1,7 @@
 2005-01-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* samba/lib/util_file.c: Comment out all but fgets_slash().
+
 	* samba/lib/util.c: Comment out some more unused functions.
 	(global_myworkgroup): Remove unused variable.
 	(def_finfo): Make const.
@@ -367,8 +369,7 @@
 	* ftpfs.c (ftpfs_get_reply): Use g_strlcpy() instead of strncpy().
 	* extfs.c (extfs_readlink): Fix return value. Use g_strlcpy()
 	instead of strncpy().
-	* mcfs.c (mcfs_readlink): Fix return value. Use g_strlcpy()
-	instead strncpy().
+	* mcfs.c (mcfs_readlink): Ditto.
 	* tar.c (tar_read_header): Add additional check for consistency.
 	Fix memory leak.
 	* cpio.c (cpio_defer_find): Remove recursion.
