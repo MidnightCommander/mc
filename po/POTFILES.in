@@ -14,8 +14,6 @@ gnome/gwidget.c
 gtkedit/edit.c
 gtkedit/edit.h
 gtkedit/editcmd.c
-gtkedit/editmenu.c
-gtkedit/editoptions.c
 gtkedit/editwidget.c
 gtkedit/gtkedit.c
 gtkedit/syntax.c
