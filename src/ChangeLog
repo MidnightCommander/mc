@@ -1,3 +1,9 @@
+2002-04-03  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile: mc.hlp should be in MAINTAINERCLEANFILES, not in
+	CLEANFILES, because "make clean" should not make the source
+	directory useless on systems without Perl.
+
 2002-03-26  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* eregex.h [!USE_INCLUDED_REGEX]: Include <regex.h>.
@@ -8,7 +14,7 @@
 	* complete.c (insert_text): Fix buffer overflow.
 
 	* cmd.[ch] [USE_INTERNAL_EDIT] (edit_syntax_cmd:) New dialog
-	to edit Syntax Highlighting definitions file. 
+	to edit Syntax Highlighting definitions file.
 	* main.c (CmdMenu) [USE_INTERNAL_EDIT]: Add 'Syntax file edit'
 	entry.
 	(process_args): Print mc's library directory to stdout.

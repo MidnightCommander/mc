@@ -15,7 +15,7 @@ endif
 noinst_PROGRAMS = man2hlp
 
 mclib_DATA = mc.hlp
-CLEANFILES = mc.hlp
+MAINTAINERCLEANFILES = mc.hlp
 
 mcmfmt_SOURCES = mfmt.c
 
