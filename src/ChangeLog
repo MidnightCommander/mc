@@ -1,5 +1,7 @@
 2003-09-12  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c (l_call): Fix incorrect calls to hotlist_callback().
+
 	* dlg.h: Merge Widget_Item into Widget.  Massive adjustment.
 
 	* main.c (setup_panels_and_run_mc): Use straight widget order in

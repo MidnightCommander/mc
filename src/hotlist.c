@@ -492,7 +492,7 @@ static int l_call (WListbox *list)
 		return LISTBOX_DONE;
 	    } else {
 		hotlist_button_callback (B_ENTER);
-		hotlist_callback (dlg, '\n', DLG_POST_KEY);
+		hotlist_callback (dlg, DLG_POST_KEY, '\n');
 		return LISTBOX_CONT;
 	    }
 	} else {
@@ -503,7 +503,7 @@ static int l_call (WListbox *list)
     }
 
     hotlist_button_callback (B_UP_GROUP);
-    hotlist_callback (dlg, 'u', DLG_POST_KEY);
+    hotlist_callback (dlg, DLG_POST_KEY, 'u');
     return LISTBOX_CONT;
 }
 
