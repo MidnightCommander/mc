@@ -13,6 +13,8 @@ LDFLAGS  = $(XLDFLAGS)
 DEFS     = $(XDEFS)
 LIBS     = $(XLIBS) @TERMNET@ $(XLIB) @TERMNET@ @MCLIBS@
 OURLIBS  = @LVFS@ @LSLANG@ @LEDIT@ @LGPM@ @LINTL@
+DEPLIBS  = $(top_builddir)/vfs/@LIBVFS@ $(top_builddir)/slang/@LIBSLANG@ \
+	$(top_builddir)/edit/@LIBEDIT_A@ @INTLDEPS@
 INSTALL  = @INSTALL@
 
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -73,7 +75,7 @@ cons.saver: cons.saver.o
 check:
 	@echo no tests are supplied.
 
-mc: $(OBJS)
+mc: $(OBJS) $(DEPLIBS)
 	$(CC) $(LDFLAGS) -o $@ $(OBJS) -L../vfs -L../slang -L../edit $(OURLIBS) $(LIBS) 
 
 man2hlp: man2hlp.o

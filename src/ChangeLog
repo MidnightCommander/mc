@@ -1,3 +1,8 @@
+2001-04-06  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: Add dependencies between mc and static libraries
+	in the source tree.
+
 2001-04-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* find.c (find_parameters): Add a checkbox for case insensitive
