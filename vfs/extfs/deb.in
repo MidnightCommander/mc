@@ -148,7 +148,7 @@ sub mcdebfs_run
 	{
 	        $suffix = "aaa";
 		while (1) {
-		    $tmpdir = /tmp/mcdebfs.run.$$.$suffix;
+		    $tmpdir = "/tmp/mcdebfs.run".$$.$suffix;
 		    last if mkdir $tmpdir, 0700;
 		    $suffix++;
 		    # Somebody is being really nasty, give up
