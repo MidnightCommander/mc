@@ -188,8 +188,10 @@ int rpc_get (int sock, ...)
 	    return 1;
 
 	case RPC_INT:
-	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0)
+	    if (socket_read_block (sock, (char *) &tmp, sizeof (tmp)) == 0){
+		va_end (ap);
 		return 0;
+	    }
 	    dest = va_arg (ap, int *);
 	    *dest = ntohl (tmp);
 	    break;
@@ -197,8 +199,10 @@ int rpc_get (int sock, ...)
 	    /* returns an allocated string */
 	case RPC_LIMITED_STRING:
 	case RPC_STRING:
-	    if (socket_read_block (sock, (char *)&tmp, sizeof (tmp)) == 0)
+	    if (socket_read_block (sock, (char *)&tmp, sizeof (tmp)) == 0){
+		va_end (ap);
 		return 0;
+	    }
 	    len = ntohl (tmp);
 	    if (cmd == RPC_LIMITED_STRING)
 		if (len > 16*1024){
@@ -208,8 +212,11 @@ int rpc_get (int sock, ...)
 	    if (len > 128*1024)
 		    abort ();
 	    text = g_new0 (char, len+1);
-	    if (socket_read_block (sock, text, len) == 0)
+	    if (socket_read_block (sock, text, len) == 0){
+		g_free (text);
+		va_end (ap);
 		return 0;
+	    }
 	    str_dest = va_arg (ap, char **);
 	    *str_dest = text;
 	    text [len] = '\0';
@@ -218,8 +225,10 @@ int rpc_get (int sock, ...)
 	case RPC_BLOCK:
 	    len = va_arg (ap, int);
 	    text = va_arg (ap, char *);
-	    if (socket_read_block (sock, text, len) == 0)
+	    if (socket_read_block (sock, text, len) == 0){
+		va_end (ap);
 		return 0;
+	    }
 	    break;
 
 	default:

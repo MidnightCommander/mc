@@ -1,5 +1,7 @@
 2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* tcputil.c (rpc_get): Add missing va_end()s.
+	Fix memory leaking.
 	* smbfs.h: Declare smbfs_set_debug.
 
 2001-10-20  Pavel Roskin  <proski@gnu.org>
@@ -19,7 +21,7 @@
 	long.  This should fix uploading when large file support is on.
 	File size is limited to 4096 * ULONG_MAX for now.
 
-2001-10-18  Andrew V. Samoilov  <kai@cmail.ru
+2001-10-18  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* samba/configure.in: Don't check readline.h, history.h and
 	libreadline.
