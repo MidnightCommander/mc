@@ -119,7 +119,7 @@ static struct {
     int		type;		/* LIST_HOTLIST || LIST_VFSLIST */
 }   hotlist_state;
 
-struct _hotlist_but {
+static struct _hotlist_but {
     int ret_cmd, flags, y, x;
     char *text;
     char *tkname;
@@ -147,10 +147,12 @@ static struct hotlist{
     struct hotlist *next;
 } *hotlist = NULL;
 
-struct hotlist *current_group;
+static struct hotlist *current_group;
 
+static void init_movelist (int, struct hotlist *);
+static void add_new_group_cmd (void);
+static void add_new_entry_cmd (void);
 static void remove_from_hotlist (struct hotlist *entry);
-void add_new_group_cmd (void);
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
@@ -262,9 +264,6 @@ unlink_entry (struct hotlist *entry)
 	entry->up = 0;
 }
     
-static void add_new_entry_cmd (void);
-static void init_movelist (int, struct hotlist *);
-
 static int hotlist_button_callback (int action, void *data)
 {
     switch (action) {
@@ -932,7 +931,7 @@ static int add_new_group_input (char *header, char *label, char **result)
 	return 0;
 }
 
-void add_new_group_cmd (void)
+static void add_new_group_cmd (void)
 {
     char   *label;
     int		ret;
