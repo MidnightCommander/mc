@@ -754,7 +754,7 @@ msgstr "Détaillée"
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Personnalisée"
+msgstr "Perso."
 
 #: gnome/glayout.c:302
 msgid "Enter command to run"
