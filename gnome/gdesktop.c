@@ -387,20 +387,22 @@ static void
 check_window_in_one_panel (gpointer data, gpointer user_data)
 {
 	PanelContainer *pc    = (PanelContainer *) data;
-	GdkWindow *window     = user_data;
+	GdkWindowPrivate *w   = (GdkWindowPrivate *) user_data;
 	WPanel *panel         = pc->panel;
 
 	if (panel->list_type == list_icons){
 		GnomeIconList *icon_list = GNOME_ICON_LIST (panel->icons);
-
-		if (window == GTK_WIDGET (icon_list)->window){
+		GdkWindowPrivate *wp = (GdkWindowPrivate *) GTK_WIDGET (icon_list)->window;
+		
+		if (w->xwindow == wp->xwindow){
 			temp_panel = panel;
 			return;
 		}
 	} else {
 		GtkCList *clist       = GTK_CLIST (panel->list);
-
-		if (window == GTK_CLIST (panel->list)->clist_window){
+		GdkWindowPrivate *wp = (GdkWindowPrivate *) clist->clist_window;
+		
+		if (w->xwindow == wp->xwindow){
 			temp_panel = panel;
 			return;
 		}
@@ -411,6 +413,9 @@ static WPanel *
 find_panel_owning_window (GdkWindow *window)
 {
 	temp_panel = NULL;
+
+	printf ("Looking for window %x\n", window);
+	
 	g_list_foreach (containers, check_window_in_one_panel, window);
 
 	return temp_panel;
@@ -564,6 +569,7 @@ drop_on_directory (GtkSelectionData *sel_data, GdkDragContext *context,
 	WPanel *source_panel;
 	GList *names;
 
+	gdk_flush ();
 	g_warning ("Figure out the data type\n");
 	if (sel_data->data == NULL)
 		return;

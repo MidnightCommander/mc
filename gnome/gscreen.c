@@ -783,23 +783,23 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 	unselect_item (panel);
 	panel->selected = row;
 
-	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
 	select_item (panel);
-	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
 }
 
 static void
 panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent *event, WPanel *panel)
 {
 	int current_selection = panel->selected;
-	
+
+	printf ("Selecting %d %p, %d\n", row, event, event ? event->type : -1);
 	if (!event) {
 		internal_select_item (file_list, panel, row);
 		return;
 	}
 	
 	switch (event->type) {
-	case GDK_BUTTON_PRESS:
+	case GDK_BUTTON_RELEASE:
+		printf ("1\n");
 		gtk_clist_unselect_row (GTK_CLIST (panel->list), row, 0);
 		internal_select_item (file_list, panel, row);
 
@@ -823,6 +823,7 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		break;
 
 	case GDK_2BUTTON_PRESS:
+		printf ("2\n");
 		gtk_clist_unselect_row (GTK_CLIST (panel->list), row, 0);
 		if (event->button.button == 1)
 			do_enter (panel);
