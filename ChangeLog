@@ -1,5 +1,9 @@
 2001-05-27  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Remove unused HAVE_PORTABLE_TOKEN_PASTING.
+	* acconfig.h: Likewise.
+	* src/layout.c: Likewise.
+
 	* Make.common.in: Remove all percent rules.
 	* acinclude.m4 (AC_PROG_GNU_MAKE): Remove.
 	* configure.in: Remove AC_PROG_GNU_MAKE. Don't substitute

@@ -1068,16 +1068,6 @@ void swap_panels ()
     WPanel *panel1, *panel2;
     int tmp_type;
     
-#if 0
-#ifdef HAVE_PORTABLE_TOKEN_PASTING
-#define panelswap(e) panel.##e = panel1->##e; panel1->##e = panel2->##e; panel2->##e = panel.##e;
-#define panelswapstr(e) strcpy (panel.##e, panel1->##e); strcpy (panel1->##e, panel2->##e); strcpy (panel2->##e, panel.##e);
-#else
-#define panelswap(e) panel./**/e = panel1->/**/e; panel1->/**/e = panel2->/**/e; panel2->/**/e = panel./**/e;
-#define panelswapstr(e) strcpy (panel./**/e, panel1->/**/e); strcpy (panel1->/**/e, panel2->/**/e); strcpy (panel2->/**/e, panel./**/e);
-#endif
-#endif
-
 #define panelswap(x) panel. x = panel1-> x; panel1-> x = panel2-> x; panel2-> x = panel. x;
 
 #define panelswapstr(e) strcpy (panel. e, panel1-> e); \

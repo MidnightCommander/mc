@@ -192,19 +192,6 @@ AC_CHECK_TYPE(nlink_t, unsigned int)
 AC_FUNC_MMAP
 AC_FUNC_ALLOCA
 
-dnl
-dnl Cool hack, but we don't use it currently 
-dnl
-dnl AC_MSG_CHECKING([for token pasting method])
-dnl AC_EGREP_CPP(portable,[
-dnl #define tken(a, b) a##b
-dnl tken(port, able)
-dnl ], [AC_DEFINE(HAVE_PORTABLE_TOKEN_PASTING)
-dnl AC_MSG_RESULT(portable)
-dnl ], [
-dnl AC_MSG_RESULT(non-portable)
-dnl ])
-
 AC_PATH_XTRA
 
 dnl

@@ -142,9 +142,6 @@
 /* Defined if you have the crypt prototype in neither unistd.h nor crypt.h */
 #undef NEED_CRYPT_PROTOTYPE
 
-/* Defined if your CPP understands ## macro token pasting method */
-#undef HAVE_PORTABLE_TOKEN_PASTING
-
 /* Define if your system has struct linger */
 #undef HAVE_STRUCT_LINGER
 
