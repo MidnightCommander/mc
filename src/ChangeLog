@@ -1,5 +1,10 @@
 2002-10-13  Pavel Roskin  <proski@gnu.org>
 
+	* color.h: Remove Q_SELECTED_COLOR and Q_UNSELECTED_COLOR.
+	Rename BEST_COLOR to IF_COLOR.  Make error messages bold on b/w
+	terminals.  Don't highlight stale links on b/w terminals, since
+	they cannot be distinguished from marked files.
+
 	* main.c (print_color_usage): Update list of keywords for file
 	types.  Add a notice for translators.
 
