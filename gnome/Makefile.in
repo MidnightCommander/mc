@@ -26,6 +26,7 @@ PIXMAPS =			\
 	dir-open.xpm
 
 GNOMESRCS = 		\
+	gaction.c	\
 	gblist.c	\
 	gcache.c	\
 	gcliplabel.c	\
@@ -79,6 +80,7 @@ GNOMEHDRS = 		\
 
 ICONS = 			\
 	directory.xpm		\
+	i-dirclosed.png		\
 	i-directory.png		\
 	i-executable.png	\
 	i-symlink.png		\

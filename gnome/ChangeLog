@@ -1,3 +1,11 @@
+1998-12-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gicon.c (gnome_file_entry_color): If we do not have permissions
+	for this directory, indicate this with a special icon.
+
+	* gscreen.c (panel_icon_list_select_icon): Middle button opens a
+	new panel on a directory.
+	
 1998-12-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c: Moved the old DnD cruft to olddnd.c to keep it there

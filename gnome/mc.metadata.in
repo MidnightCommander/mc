@@ -1,3 +1,35 @@
+#
+# Default metadata file provided by the GNOME File Manaeger.
+#
+# The following metadata keys are used by the File Manager:
+#
+# icon-filename:
+#    Points to a full pathname that contains the icon that 
+#    is bound to this file.
+#
+# icon-inline-png:
+#    If present, the value of this entry is an inlined PNG image 
+#    that should be used to display this file.
+#
+# drop-open:
+#    Command to run when a file or files are dropped on this
+#    file.  If value is not available, the file manager will try 
+#    to use the contents of the 'open' key.
+#
+# open:
+#    Command to execute when the file is "opened".  The same interpolation
+#    done for "drop-open" is done with "open".
+#
+# Interpolation for open and drop-open:
+#    Any ocurrence of the strings '%c'/%C '%f' are interpolated. 
+#    with the drop site name (ie, the name of the file or executable where
+#    data was dropped) and the file or files that were dropped there 
+#    respectively.  The character "\" can be used to escape text.  
+#  
+# Execution is done without shell intervention, so no shell metacharacters
+# are used.
+#
+
 regex: \.c$
 	type=x-application-gnome/c-source
 	icon-filename=@icondir@/c.xpm

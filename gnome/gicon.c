@@ -22,6 +22,7 @@ static int gicon_inited = FALSE;
 
 /* These are some default images used in the Icon View */
 static GdkImlibImage *icon_view_directory;
+static GdkImlibImage *icon_view_dirclosed;
 static GdkImlibImage *icon_view_executable;
 static GdkImlibImage *icon_view_symlink;
 static GdkImlibImage *icon_view_regular;
@@ -30,6 +31,10 @@ static GdkImlibImage *icon_view_sock;
 static GdkImlibImage *icon_view_char_dev;
 static GdkImlibImage *icon_view_block_dev;
 static GdkImlibImage *icon_view_stalled;
+
+/* Our UID and GID */
+static uid_t our_uid;
+static gid_t our_gid;
 
 /**
  * gicon_init:
@@ -45,8 +50,12 @@ gicon_init (void)
 	icon_hash = g_hash_table_new (g_str_hash, g_str_equal);
 	gicon_inited = TRUE;
 
+	our_uid = getuid ();
+	our_gid = getgid ();
+	
 	/* Recursive call to load the stock images */
 	icon_view_directory  = gicon_stock_load	("i-directory.png");
+	icon_view_dirclosed  = gicon_stock_load	("i-dirclosed.png");
 	icon_view_executable = gicon_stock_load	("i-executable.png");
 	icon_view_symlink    = gicon_stock_load	("i-symlink.png");
 	icon_view_regular    = gicon_stock_load	("i-regular.png");
@@ -57,6 +66,7 @@ gicon_init (void)
 	icon_view_stalled    = gicon_stock_load ("i-stalled.png");
 	
 	if (icon_view_directory  == NULL ||
+	    icon_view_dirclosed  == NULL ||
 	    icon_view_executable == NULL ||
 	    icon_view_symlink    == NULL ||
 	    icon_view_regular    == NULL ||
@@ -129,9 +139,35 @@ static GdkImlibImage *
 gnome_file_entry_color (file_entry *fe)
 {
 	mode_t mode = fe->buf.st_mode;
-		
-	if (S_ISDIR (mode))
+
+	/*
+	 * If a directory, choose the best icon that reprensents it
+	 */
+	if (S_ISDIR (mode)){
+		if (fe->buf.st_uid != our_uid){
+			if (fe->buf.st_gid != our_gid){
+
+				/*
+				 * We do not share the UID or the GID,
+				 * test for read/execute permissions
+				 */
+				if ((mode & (S_IROTH | S_IXOTH)) != (S_IROTH | S_IXOTH))
+					return icon_view_dirclosed;
+			} else {
+
+				/*
+				 * Same group, check if we have permissions
+				 */
+				if ((mode & (S_IRGRP | S_IXGRP)) != (S_IRGRP | S_IXGRP))
+					return icon_view_dirclosed;
+			}
+		} else {
+			if ((mode & (S_IRUSR | S_IXUSR)) != (S_IRUSR | S_IXUSR))
+				return icon_view_dirclosed;
+		}
+
 		return icon_view_directory;
+	}
 
 	if (S_ISLNK (mode)){
 		if (fe->f.link_to_dir)

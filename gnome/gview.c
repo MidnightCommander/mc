@@ -290,8 +290,8 @@ GnomeUIInfo gview_file_menu [] = {
 				N_("Jump to a specified line number"),
 				&gnome_goto_line, GNOME_STOCK_PIXMAP_JUMP_TO),
 	GNOMEUIINFO_ITEM (N_("Monitor file"), N_("Monitor file growing"),            &gnome_monitor, NULL),
-	GNOMEUIINFO_ITEM_STOCK (N_("Quit"),
-				N_("Terminate the viewer"),
+	GNOMEUIINFO_ITEM_STOCK (N_("Close"),
+				N_("Close the viewer"),
 				&gview_quit, GNOME_STOCK_PIXMAP_QUIT),
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
