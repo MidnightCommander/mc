@@ -1,3 +1,10 @@
+2005-02-09  Roland Illig  <roland.illig@gmx.de>
+
+	* extfs/uzip.in: Widened the regular expression for infozip to
+	also detect non-Unix file listings.
+
+	Patch provided by Jindrich Makovicka <makovick * kmlinux.fjfi.cvut.cz>
+
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
 	* cpio.c: Added some FIXMEs about data representation.

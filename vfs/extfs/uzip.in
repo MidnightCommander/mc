@@ -36,7 +36,7 @@ my $cmd_extract = "$app_unzip -p";
 
 # -rw-r--r--  2.2 unx     2891 tx     1435 defN 20000330.211927 ./edit.html
 # (perm) (?) (?) (size) (?) (zippedsize) (method) (yyyy)(mm)(dd)(HH)(MM) (fname)
-my $regex_zipinfo_line = qr"^(\S{10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
+my $regex_zipinfo_line = qr"^(\S{7,10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
 
 #     2891  Defl:N     1435  50%  03-30-00 21:19  50cbaaf8  ./edit.html
 # (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy)(HH)(MM) (cksum) (fname)
