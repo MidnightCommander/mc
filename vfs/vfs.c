@@ -299,13 +299,16 @@ void
 vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
 {
     if (v != &vfs_local_ops && id != (vfsid)-1){
-        struct vfs_stamping *stamp, *st1;
+        struct vfs_stamping *stamp;
+	struct vfs_stamping *last_stamp = NULL;
         
-        for (stamp = stamps; stamp != NULL; st1 = stamp, stamp = stamp->next)
+        for (stamp = stamps; stamp != NULL; stamp = stamp->next) {
             if (stamp->v == v && stamp->id == id){
 		gettimeofday(&(stamp->time), NULL);
                 return;
 	    }
+	    last_stamp = stamp;
+	}
         stamp = g_new (struct vfs_stamping, 1);
         stamp->v = v;
         stamp->id = id;
@@ -325,10 +328,13 @@ vfs_addstamp (vfs *v, vfsid id, struct vfs_stamping *parent)
         gettimeofday (&(stamp->time), NULL);
         stamp->next = 0;
 
-	if (stamps)
-	    st1->next = stamp;
-	else
+	if (stamps) {
+	    /* Add to the end */
+	    last_stamp->next = stamp;
+	} else {
+	    /* Add first element */
     	    stamps = stamp;
+	}
     }
 }
 
