@@ -568,11 +568,11 @@ mc_closedir (DIR *dirp)
     return result; 
 }
 
-int mc_stat (char *path, struct stat *buf) {
+int mc_stat (const char *filename, struct stat *buf) {
     vfs *vfs;
     int result;
-
-    path = vfs_canon (path); vfs = vfs_type (path);
+    char *path;
+    path = vfs_canon (filename); vfs = vfs_type (path);
     result = vfs->stat ? (*vfs->stat) (vfs, vfs_name (path), buf) : -1;
     g_free (path);
     if (result == -1)
@@ -580,11 +580,11 @@ int mc_stat (char *path, struct stat *buf) {
     return result;
 }
 
-int mc_lstat (char *path, struct stat *buf) {
+int mc_lstat (const char *filename, struct stat *buf) {
     vfs *vfs;
     int result;
-
-    path = vfs_canon (path); vfs = vfs_type (path);
+    char *path;
+    path = vfs_canon (filename); vfs = vfs_type (path);
     result = vfs->lstat ? (*vfs->lstat) (vfs, vfs_name (path), buf) : -1;
     g_free (path);
     if (result == -1)

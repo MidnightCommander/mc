@@ -142,11 +142,6 @@
     char *vfs_canon (const char *path);
     char *mc_get_current_wd (char *buffer, int bufsize);
     int vfs_current_is_local (void);
-#if 0
-    int vfs_current_is_extfs (void);
-    int vfs_current_is_tarfs (void);
-    int vfs_current_is_cpiofs (void);
-#endif
     int vfs_file_is_local (const char *name);
     int vfs_file_is_ftp (char *filename);
     int vfs_file_is_smb (char *filename);
@@ -190,8 +185,8 @@
  	int mc_telldir (DIR *dir);
  	void mc_seekdir (DIR *dir, int offset);
 
-	int mc_stat  (char *path, struct stat *buf);
-	int mc_lstat (char *path, struct stat *buf);
+	int mc_stat  (const char *path, struct stat *buf);
+	int mc_lstat (const char *path, struct stat *buf);
 	int mc_fstat (int fd, struct stat *buf);
 
 	int mc_chmod    (char *path, int mode);
@@ -213,9 +208,9 @@
         int mc_ctl (int fd, int ctlop, int arg);
         int mc_setctl (char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
-	    caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
-	    int mc_unmap (caddr_t, size_t);
-            int mc_munmap (caddr_t addr, size_t len);
+	caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
+	int mc_unmap (caddr_t, size_t);
+        int mc_munmap (caddr_t addr, size_t len);
 #endif /* HAVE_MMAP */
 
 #else
