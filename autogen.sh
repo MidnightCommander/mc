@@ -51,7 +51,7 @@ if test $gettext_ver -ge 01100; then
     echo "Upgrade gettext to at least 0.11.5 or downgrade to 0.10.40" 2>&1
     exit 1
   fi
-  $AUTOPOINT || exit 1
+  $AUTOPOINT --force || exit 1
 else
   $GETTEXTIZE --copy --force || exit 1
   if test -e po/ChangeLog~; then
