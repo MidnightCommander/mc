@@ -445,9 +445,8 @@ shell/.cpio
 # ls-lR
 regex/(^|\.)ls-?lR$
 	Open=%cd %p#lslR
-regex/(^|\.)ls-?lR\.(g?z|Z)$
+regex/(^|\.)ls-?lR\.(g?z|Z|bz2)$
 	Open=%cd %p#lslR
-	View=%view{ascii} gzip -dc %f
 
 # patch
 regex/\.(diff|patch)(\.(bz2|gz|Z))?$
