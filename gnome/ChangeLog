@@ -1,3 +1,11 @@
+2000-08-29  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* Makefile.in (CFLAGS): -I$(rootdir)/src removed from CFLAGS -- it
+	breaks compilation on glibc2.1 systems because glibc includes
+	src/features.h instead of it's own features.h. Run `make
+	cleansourcelinks; make sourcelinks' in case mc doesn't find it's
+	include files. 
+
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: don't do anything with *.inc - they are gone
