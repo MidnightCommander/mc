@@ -1,5 +1,9 @@
 2001-05-16  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (init_subshell_child): New function to initialize
+	child process and run subshell. Code moved from ...
+	(init_subshell): ... here.
+
 	* subshell.c (init_subshell): Don't close pty_slave if is wasn't
 	open. Initialize it with -1.
 

@@ -181,18 +181,6 @@ static int prompt_pos;
 
 /* }}} */
 
-/* {{{ init_subshell */
-
-/*
- *  Fork the subshell, and set up many, many things.
- *
- *  Possibly modifies the global variables:
- *	shell_mode
- *	subshell_type, subshell_alive, subshell_stopped, subshell_pid
- *	use_subshell - Is set to FALSE if we can't run the subshell
- *	quit - Can be set to SUBSHELL_EXIT by the SIGCHLD handler
- */
-
 #ifdef HAVE_GRANTPT
 #    define SYNC_PTY_SIDES
 #else
@@ -207,6 +195,168 @@ static void sigusr1_handler (int sig)
 {
 }
 #endif
+
+/*
+ *  Prepare child process to running the shell and run it.
+ *
+ *  Modifies the global variables (in the child process only):
+ *	shell_mode
+ *
+ *  Returns: never.
+ */
+static void init_subshell_child (const char *pty_name)
+{
+    int pty_slave;
+    char *init_file = NULL;
+	
+    setsid ();  /* Get a fresh terminal session */
+
+    /* {{{ Open the slave side of the pty: again */
+    pty_slave = pty_open_slave (pty_name);
+
+    /* This must be done before closing the master side of the pty, */
+    /* or it will fail on certain idiotic systems, such as Solaris.	*/
+
+    /* Close master side of pty.  This is important; apart from	*/
+    /* freeing up the descriptor for use in the subshell, it also	*/
+    /* means that when MC exits, the subshell will get a SIGHUP and	*/
+    /* exit too, because there will be no more descriptors pointing	*/
+    /* at the master side of the pty and so it will disappear.	*/
+
+    close (subshell_pty);
+
+#ifdef SYNC_PTY_SIDES
+    /* Give our parent process (MC) the go-ahead */
+    kill (getppid (), SIGUSR1);
+#endif
+
+    /* }}} */
+    /* {{{ Make sure that it has become our controlling terminal */
+
+    /* Redundant on Linux and probably most systems, but just in case: */
+
+#ifdef TIOCSCTTY
+    ioctl (pty_slave, TIOCSCTTY, 0);
+#endif
+
+    /* }}} */
+    /* {{{ Configure its terminal modes and window size */
+
+    /* Set up the pty with the same termios flags as our own tty, plus  */
+    /* TOSTOP, which keeps background processes from writing to the pty */
+
+    shell_mode.c_lflag |= TOSTOP;  /* So background writers get SIGTTOU */
+    if (tcsetattr (pty_slave, TCSANOW, &shell_mode))
+    {
+        perror (__FILE__": couldn't set pty terminal modes");
+        _exit (FORK_FAILURE);
+    }
+
+    /* Set the pty's size (80x25 by default on Linux) according to the */
+    /* size of the real terminal as calculated by ncurses, if possible */
+#if defined TIOCSWINSZ && !defined SCO_FLAVOR
+    {
+	struct winsize tty_size;
+	tty_size.ws_row = LINES;
+	tty_size.ws_col = COLS;
+	tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
+
+	if (ioctl (pty_slave, TIOCSWINSZ, &tty_size))
+	    perror (__FILE__": couldn't set pty size");
+    }
+#endif
+
+    /* }}} */
+    /* {{{ Set up the subshell's environment and init file name */
+
+    /* It simplifies things to change to our home directory here, */
+    /* and the user's startup file may do a `cd' command anyway   */
+    chdir (home_dir);  /* FIXME? What about when we re-run the subshell? */
+
+    switch (subshell_type)
+    {
+        case BASH:
+	    init_file = ".mc/bashrc";
+	    if (access (init_file, R_OK) == -1)
+		init_file = ".bashrc";
+
+	    /* Make MC's special commands not show up in bash's history */
+	    putenv ("HISTCONTROL=ignorespace");
+
+	    /* Allow alternative readline settings for MC */
+	    if (access (".mc/inputrc", R_OK) == 0)
+		putenv ("INPUTRC=.mc/inputrc");
+
+	    break;
+
+	case TCSH:
+	    init_file = ".mc/tcshrc";
+	    if (access (init_file, R_OK) == -1)
+		init_file += 3;
+	break;
+
+	case ZSH:
+	    break;
+
+	default:
+	    fprintf (stderr, __FILE__": unimplemented subshell type %d\n",
+		     subshell_type);
+	    _exit (FORK_FAILURE);
+    }
+
+    /* }}} */
+    /* {{{ Attach all our standard file descriptors to the pty */
+
+    /* This is done just before the fork, because stderr must still	 */
+    /* be connected to the real tty during the above error messages; */
+    /* otherwise the user will never see them.			 */
+
+    dup2 (pty_slave, STDIN_FILENO);
+    dup2 (pty_slave, STDOUT_FILENO);
+    dup2 (pty_slave, STDERR_FILENO);
+
+    /* }}} */
+    /* {{{ Execute the subshell at last */
+
+    close (subshell_pipe[READ]);
+    close (pty_slave);  /* These may be FD_CLOEXEC, but just in case... */
+
+    switch (subshell_type)
+    {
+        case BASH:
+	    execl (shell, "bash", "-rcfile", init_file, NULL);
+	    break;
+
+        case TCSH:
+	    execl (shell, "tcsh", NULL);  /* What's the -rcfile equivalent? */
+	    break;
+
+        case ZSH:
+	    /* change from "+Z" to "-Z" by Michael Bramer
+	     * (Debian-mc-maintainer) <grisu@debian.org> from a patch from
+	     * Radovan Garabik <garabik@center.fmph.uniba.sk>
+	     */
+	    execl (shell, "zsh", "-Z", NULL);
+
+	    break;
+    }
+
+    /* If we get this far, everything failed miserably */
+    _exit (FORK_FAILURE);
+
+    /* }}} */
+}
+
+/* {{{ init_subshell */
+
+/*
+ *  Fork the subshell, and set up many, many things.
+ *
+ *  Possibly modifies the global variables:
+ *	subshell_type, subshell_alive, subshell_stopped, subshell_pid
+ *	use_subshell - Is set to FALSE if we can't run the subshell
+ *	quit - Can be set to SUBSHELL_EXIT by the SIGCHLD handler
+ */
 
 void init_subshell (void)
 {
@@ -339,144 +489,7 @@ void init_subshell (void)
 
     if (subshell_pid == 0)  /* We are in the child process */
     {
-	char *init_file = NULL;
-	
-	setsid ();  /* Get a fresh terminal session */
-
-	/* {{{ Open the slave side of the pty: again */
-	pty_slave = pty_open_slave (pty_name);
-
-	/* This must be done before closing the master side of the pty, */
-	/* or it will fail on certain idiotic systems, such as Solaris.	*/
-
-	/* Close master side of pty.  This is important; apart from	*/
-	/* freeing up the descriptor for use in the subshell, it also	*/
-	/* means that when MC exits, the subshell will get a SIGHUP and	*/
-	/* exit too, because there will be no more descriptors pointing	*/
-	/* at the master side of the pty and so it will disappear.	*/
-
-	close (subshell_pty);
-
-#ifdef SYNC_PTY_SIDES
-	    /* Give our parent process (MC) the go-ahead */
-	    kill (getppid (), SIGUSR1);
-#endif
-
-	/* }}} */
-	/* {{{ Make sure that it has become our controlling terminal */
-
-	/* Redundant on Linux and probably most systems, but just in case: */
-
-#	ifdef TIOCSCTTY
-	ioctl (pty_slave, TIOCSCTTY, 0);
-#	endif
-
-	/* }}} */
-	/* {{{ Configure its terminal modes and window size */
-
-	/* Set up the pty with the same termios flags as our own tty, plus  */
-	/* TOSTOP, which keeps background processes from writing to the pty */
-
-	shell_mode.c_lflag |= TOSTOP;  /* So background writers get SIGTTOU */
-	if (tcsetattr (pty_slave, TCSANOW, &shell_mode))
-	{
-	    perror (__FILE__": couldn't set pty terminal modes");
-	    _exit (FORK_FAILURE);
-	}
-
-	/* Set the pty's size (80x25 by default on Linux) according to the */
-	/* size of the real terminal as calculated by ncurses, if possible */
-#	if defined TIOCSWINSZ && !defined SCO_FLAVOR
-	{
-	    struct winsize tty_size;
-	    tty_size.ws_row = LINES;
-	    tty_size.ws_col = COLS;
-	    tty_size.ws_xpixel = tty_size.ws_ypixel = 0;
-
-	    if (ioctl (pty_slave, TIOCSWINSZ, &tty_size))
-		perror (__FILE__": couldn't set pty size");
-	}
-#	endif
-
-	/* }}} */
-	/* {{{ Set up the subshell's environment and init file name */
-
-	/* It simplifies things to change to our home directory here, */
-	/* and the user's startup file may do a `cd' command anyway   */
-	chdir (home_dir);  /* FIXME? What about when we re-run the subshell? */
-
-	switch (subshell_type)
-	{
-	    case BASH:
-		init_file = ".mc/bashrc";
-		if (access (init_file, R_OK) == -1)
-		    init_file = ".bashrc";
-
-		/* Make MC's special commands not show up in bash's history */
-		putenv ("HISTCONTROL=ignorespace");
-
-		/* Allow alternative readline settings for MC */
-		if (access (".mc/inputrc", R_OK) == 0)
-		    putenv ("INPUTRC=.mc/inputrc");
-
-		break;
-
-	    case TCSH:
-		init_file = ".mc/tcshrc";
-		if (access (init_file, R_OK) == -1)
-		    init_file += 3;
-		break;
-
-	    case ZSH:
-		break;
-
-	    default:
-		fprintf (stderr, __FILE__": unimplemented subshell type %d\n",
-			 subshell_type);
-		_exit (FORK_FAILURE);
-	}
-
-	/* }}} */
-	/* {{{ Attach all our standard file descriptors to the pty */
-
-	/* This is done just before the fork, because stderr must still	 */
-	/* be connected to the real tty during the above error messages; */
-	/* otherwise the user will never see them.			 */
-
-	dup2 (pty_slave, STDIN_FILENO);
-	dup2 (pty_slave, STDOUT_FILENO);
-	dup2 (pty_slave, STDERR_FILENO);
-
-	/* }}} */
-	/* {{{ Execute the subshell at last */
-
-	close (subshell_pipe[READ]);
-	close (pty_slave);  /* These may be FD_CLOEXEC, but just in case... */
-
-	switch (subshell_type)
-	{
-	    case BASH:
-	    execl (shell, "bash", "-rcfile", init_file, NULL);
-	    break;
-
-	    case TCSH:
-	    execl (shell, "tcsh", NULL);  /* What's the -rcfile equivalent? */
-	    break;
-
-	    case ZSH:
-	    /* change from "+Z" to "-Z" by Michael Bramer
-	     * (Debian-mc-maintainer) <grisu@debian.org> from a patch from
-	     * Radovan Garabik <garabik@center.fmph.uniba.sk>
-	     */
-	    execl (shell, "zsh", "-Z", NULL);
-
-	    break;
-	}
-
-	/* If we get this far, everything failed miserably */
-	_exit (FORK_FAILURE);
-
-	/* }}} */
+	init_subshell_child (pty_name);
     }
 
     /* pty_slave is only opened when called the first time */
