@@ -165,12 +165,12 @@ char errbuf[255];
  */
 #define CP_ASCII 0
 
-char *
+const char *
 init_translation_table (int cpsource, int cpdisplay)
 {
     int i;
     iconv_t cd;
-    char *cpsour, *cpdisp;
+    const char *cpsour, *cpdisp;
 
     /* Fill inpit <-> display tables */
 

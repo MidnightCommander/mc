@@ -13,8 +13,8 @@ extern unsigned char conv_displ[256];
 extern unsigned char conv_input[256];
 
 struct codepage_desc {
-    const char *id;
-    const char *name;
+    char *id;
+    char *name;
 };
 
 extern struct codepage_desc *codepages;
