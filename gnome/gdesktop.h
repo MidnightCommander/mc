@@ -18,6 +18,9 @@
 #define DESKTOP_SNAP_X 80
 #define DESKTOP_SNAP_Y 80
 
+/* Name of the user's desktop directory (i.e. ~/desktop) */
+#define DESKTOP_DIR_NAME ".gnome-desktop"
+
 
 /* Configuration options for the desktop */
 

@@ -32,8 +32,6 @@
 #include "../vfs/vfs.h"
 #include "main.h"
 
-/* Name of the user's desktop directory (i.e. ~/desktop) */
-#define DESKTOP_DIR_NAME ".gnome-desktop"
 
 
 struct layout_slot {
@@ -2400,6 +2398,7 @@ static GnomeUIInfo gnome_panel_new_menu [] = {
 	 GNOMEUIINFO_ITEM_NONE(N_("_Terminal"), N_("Launch a new terminal in the current directory"), gnome_open_terminal),
 	/* If this ever changes, make sure you update create_new_menu accordingly. */
 	GNOMEUIINFO_ITEM_NONE( N_("_Directory..."), N_("Creates a new directory"), gnome_mkdir_cmd ),
+	GNOMEUIINFO_ITEM_NONE( N_("_Launcher..."), N_("Creates a new launcher"), gnome_new_launcher ),
 	GNOMEUIINFO_END
 };
 

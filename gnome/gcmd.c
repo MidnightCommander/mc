@@ -22,6 +22,7 @@
 #include "gcmd.h"
 #include "dialog.h"
 #include "layout.h"
+#include "gdesktop.h"
 #include "../vfs/vfs.h"
 
 enum {
@@ -753,4 +754,56 @@ gnome_mkdir_cmd (GtkWidget *widget, WPanel *panel)
 {
 	mkdir_cmd (panel);
 }
+static void
+dentry_apply_callback(GtkWidget *widget, int page, gpointer data)
+{
+	GnomeDesktopEntry *dentry;
+	gchar *desktop_directory;
 
+	if (page != -1)
+		return;
+	
+	g_return_if_fail(data!=NULL);
+	g_return_if_fail(GNOME_IS_DENTRY_EDIT(data));
+	dentry = gnome_dentry_get_dentry(GNOME_DENTRY_EDIT(data));
+
+	if (getenv ("GNOME_DESKTOP_DIR") != NULL)
+		desktop_directory = g_strconcat (getenv ("GNOME_DESKTOP_DIR"),
+						 "/",
+						 dentry->name, ".desktop",
+						 NULL);
+	else
+		desktop_directory = g_strconcat (gnome_user_home_dir, "/",
+						 DESKTOP_DIR_NAME, "/",
+						 dentry->name, ".desktop",
+						 NULL);
+
+	dentry->location = desktop_directory;
+	gnome_desktop_entry_save(dentry);
+	gnome_desktop_entry_free(dentry);
+	gnome_config_sync ();
+	desktop_reload_icons (FALSE, 0, 0);
+
+}
+
+void
+gnome_new_launcher (GtkWidget *widget, WPanel *panel)
+{
+	GtkWidget *dialog;
+	GtkObject *dentry;
+
+	dialog = gnome_property_box_new ();
+	gtk_window_set_title(GTK_WINDOW(dialog), _("Desktop entry properties"));
+	gtk_window_set_policy(GTK_WINDOW(dialog), FALSE, FALSE, TRUE);
+	dentry = gnome_dentry_edit_new_notebook(GTK_NOTEBOOK(GNOME_PROPERTY_BOX(dialog)->notebook));
+	gtk_signal_connect_object(GTK_OBJECT(dentry), "changed",
+				  GTK_SIGNAL_FUNC(gnome_property_box_changed),
+				  GTK_OBJECT(dialog));
+
+	gtk_signal_connect(GTK_OBJECT(dialog), "apply",
+			   GTK_SIGNAL_FUNC(dentry_apply_callback),
+			   dentry);
+	gtk_widget_show(dialog);
+
+
+}

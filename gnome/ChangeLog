@@ -1,3 +1,8 @@
+1999-03-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (dentry_apply_callback): new function.
+	(gnome_new_launcher): We can now create new 
+
 1999-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpopup2.c (create_mime_actions): Free full_name, just once, not

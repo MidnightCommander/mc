@@ -765,7 +765,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    }
 
 	    file_progress_set_stalled_label (ctx, stalled_msg);
-
+	    file_progress_show_bytes (ctx, *progress_bytes + n_read_total, ctx->progress_bytes);
 	    return_status = file_progress_show (ctx, n_read_total, file_size);
 	    mc_refresh ();
 	    if (return_status != FILE_CONT)
@@ -1942,6 +1942,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
         file_op_context_create_ui (ctx, operation, 1);
     
     /* This code is only called by the tree and panel code */
+#ifndef HAVE_GNOME
     if (only_one){
 	/* We now have ETA in all cases */
 
@@ -2002,7 +2003,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    unmark_files (panel);
     } else {
         /* Many files */
-
+#endif
 	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
 	retry_many_dst_stat:
@@ -2107,8 +2108,9 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
 	    mc_refresh ();
 	} /* Loop for every file */
+#ifndef HAVE_GNOME
     } /* Many files */
-
+#endif
  clean_up:
     /* Clean up */
 

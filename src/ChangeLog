@@ -1,3 +1,7 @@
+1999-03-19  Jonathan Blandford  <jrb@redhat.com>
+
+	* file.c (panel_operate): Ugly hack for GNOME.  We only treat the
+	copy as if it were many files, and skip the only_one branch.
 1999-03-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* utilunix.c (close_error_pipe): Inform parent of the return value

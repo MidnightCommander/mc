@@ -242,12 +242,9 @@ file_progress_show (FileOpContext *ctx, long done, long total)
         
         if (total > 0) {
                 perc = (double) done / (double) total;
-                snprintf (count, 9, "%d%%", (gint) (100.0 * perc));
+                snprintf (count, 9, "%3d%% ", (gint) (100.0 * perc));
                 gtk_label_set_text (GTK_LABEL (ui->file_label), count);
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), perc);
-        } else
-                gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), 0.0);
-
+        }
         while (gtk_events_pending ())
                 gtk_main_iteration ();
 	return FILE_CONT;
@@ -270,7 +267,7 @@ file_progress_show_count (FileOpContext *ctx, long done, long total)
         if (ui->aborting)
                 return FILE_ABORT;
 
-        snprintf (count, 13, "%d/%d", done, total);
+        snprintf (count, 13, "%d/%d ", done, total);
         gtk_label_set_text (GTK_LABEL (ui->count_label), count);
         while (gtk_events_pending ())
                 gtk_main_iteration ();
@@ -893,10 +890,10 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
         ui->count_label = GTK_OBJECT (gtk_label_new (""));
         gtk_box_pack_start (GTK_BOX (hbox), GTK_WIDGET (ui->count_label), FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(" is ")), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("is ")), FALSE, FALSE, 0);
         ui->file_label = gtk_label_new ("");
         gtk_box_pack_start (GTK_BOX (hbox), ui->file_label, FALSE, FALSE, 0);
-        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_(" Done.")), FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("done.")), FALSE, FALSE, 0);
         gtk_container_add (GTK_CONTAINER (alignment), hbox);
 
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ui->op_win)->vbox),
