@@ -1696,8 +1696,6 @@ static void nothing ()
 
 static key_map default_map [] = {
     { KEY_F(19),  menu_last_selected_cmd },
-    
-    { KEY_F(13),  (key_callback) view_simple_cmd },
     { KEY_F(20),  (key_callback) quiet_quit_cmd },
 
     /* Copy useful information to the command line */

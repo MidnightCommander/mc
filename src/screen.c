@@ -1959,10 +1959,10 @@ chdir_other_panel (WPanel *panel)
     if (get_other_type () != view_listing)
 	return;
 
-    if (!S_ISDIR (cpanel->dir.list [cpanel->selected].buf.st_mode))
-	new_dir = concat_dir_and_file (cpanel->cwd, "..");
+    if (!S_ISDIR (panel->dir.list [panel->selected].buf.st_mode))
+	new_dir = concat_dir_and_file (panel->cwd, "..");
     else
-	new_dir = concat_dir_and_file (cpanel->cwd, cpanel->dir.list [cpanel->selected].fname);
+	new_dir = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
 
     change_panel ();
     do_cd (new_dir, cd_exact);
@@ -1981,15 +1981,15 @@ chdir_to_readlink (WPanel *panel)
     if (get_other_type () != view_listing)
 	return;
 
-    if (S_ISLNK (cpanel->dir.list [cpanel->selected].buf.st_mode)) {
+    if (S_ISLNK (panel->dir.list [panel->selected].buf.st_mode)) {
 	char buffer [MC_MAXPATHLEN], *p;
 	int i;
 	struct stat mybuf;
 	
-	i = readlink (selection (cpanel)->fname, buffer, MC_MAXPATHLEN);
+	i = readlink (selection (panel)->fname, buffer, MC_MAXPATHLEN);
 	if (i < 0)
 	    return;
-	if (mc_stat (selection (cpanel)->fname, &mybuf) < 0)
+	if (mc_stat (selection (panel)->fname, &mybuf) < 0)
 	    return;
 	buffer [i] = 0;
 	if (!S_ISDIR (mybuf.st_mode)) {
@@ -2005,7 +2005,7 @@ chdir_to_readlink (WPanel *panel)
 	if (*buffer == PATH_SEP)
 	    new_dir = strdup (buffer);
 	else
-	    new_dir = concat_dir_and_file (cpanel->cwd, buffer);
+	    new_dir = concat_dir_and_file (panel->cwd, buffer);
 
 	change_panel ();
 	do_cd (new_dir, cd_exact);
@@ -2054,7 +2054,9 @@ static key_map panel_keymap [] = {
     { XCTRL('t'), mark_file },
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
-    
+    { KEY_F(13),  view_simple_cmd },
+    { KEY_F(14),  edit_cmd_new },
+
 #ifdef HAVE_GNOME
     { '+',        select_cmd },
     { '\\',       unselect_cmd },

@@ -9,7 +9,7 @@ int view_file_at_line (char *filename, int plain_view, int internal,
                        int start_line);
 int view_file (char *filename, int normal, int internal);
 void view_cmd (WPanel *panel);
-void view_simple_cmd ();
+void view_simple_cmd (WPanel *panel);
 void filtered_view_cmd (WPanel *panel);
 void filtered_view_cmd_cpanel (void);
 void do_edit (const char *what);

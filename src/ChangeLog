@@ -1,3 +1,24 @@
+Wed Mar 12 17:46:09 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* screen.c (chdir_other_panel, chdir_to_readlink): Use passed
+	panel instead of cpanel (removed mixed use of panel and cpanel).
+
+	* main.c, screen.c: Deleted F13 from the default keymap, added F13 
+	and F14 to the panel's keymap (the keymap for panels in listing
+	mode). These two keys are only useful for panels in listing mode. 
+	It seems there are even more candidates for such a move. Especially
+	select_cmd and unselect_cmd which appeared recently for the GNOME
+	edition in screen.c act unexpected for panels in tree-mode.
+
+	* cmd.c (view_simple_cmd): Added WPanel* to the parameter list.
+
+	(edit_cmd_new): No need to get a panel because it is not used.
+
+	* panelize.c: Changed hotkey of the Panelize button (Alt-p is
+	already used by the input line history). I wonder if I should
+	change it in the find dialog, too (just to have a unique hotkey
+	for the panelize button).
+
 Wed Mar 11 19:02:48 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* view.c: Lots of changes:  Split the X11 code from the main view

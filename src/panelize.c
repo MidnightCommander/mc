@@ -92,7 +92,7 @@ struct {
     { B_CANCEL, NORMAL_BUTTON, 0, 53, "&Cancel",  "c"},
     { B_ADD, NORMAL_BUTTON,    0, 28, "&Add new", "a"},
     { B_REMOVE, NORMAL_BUTTON, 0, 16, "&Remove",  "r"},
-    { B_ENTER, DEFPUSH_BUTTON, 0,  0, "&Panelize","p"},
+    { B_ENTER, DEFPUSH_BUTTON, 0,  0, "Pane&lize","l"},
 };
 
 /* Directory panelize */

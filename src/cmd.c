@@ -260,9 +260,9 @@ void view_cmd (WPanel *panel)
     do_view_cmd (panel, 0);
 }
 
-void view_simple_cmd (void)
+void view_simple_cmd (WPanel *panel)
 {
-    do_view_cmd (cpanel, 1);
+    do_view_cmd (panel, 1);
 }
 
 void filtered_view_cmd (WPanel *panel)
@@ -320,7 +320,6 @@ void edit_cmd (WPanel *panel)
 
 void edit_cmd_new (WPanel *panel)
 {
-    panel = get_a_panel(panel);
     do_edit ("");
 }
 
