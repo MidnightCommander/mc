@@ -338,9 +338,9 @@ quick cd
 dialog.
 .TP
 .B C-o
-when the program is being run in the Linux or SCO console or under an xterm,
-it will show you the output of the previous command.  When ran on the
-Linux console, the Midnight Commander uses an external program
+when the program is being run in the Linux or FreeBSD console or under
+an xterm, it will show you the output of the previous command.  When ran
+on the Linux console, the Midnight Commander uses an external program
 (cons.saver) to handle saving and restoring of information on the
 screen.
 .PP
@@ -1044,8 +1044,8 @@ Find file
 command allows you to search for a specific file. The "Swap panels"
 command swaps the contents of the two directory panels.
 .PP
-The "Panels on/off" command shows the output of the last shell
-command. This works only on xterm and on Linux and SCO console.
+The "Panels on/off" command shows the output of the last shell command.
+This works only on xterm and on Linux and FreeBSD console.
 .PP
 The Compare directories (C-x d) command compares the directory
 panels with each other. You can then use the Copy (F5) command to make
@@ -1606,8 +1606,8 @@ possible settings for this variable:
 .PP
 .I Never.
 Means that you do not want to see the output of your command.  If you
-are using the Linux or SCO console or an xterm, you will be able to see the
-output of the command by typing C-o.
+are using the Linux or FreeBSD console or an xterm, you will be able to
+see the output of the command by typing C-o.
 .PP
 .I On dumb terminals.
 You will get the pause message on terminals that are not capable of
@@ -1717,9 +1717,9 @@ default.
 .\"NODE "    Layout"
 .SH "    Layout"
 The layout dialog gives you a possibility to change the general layout
-of screen. You can specify whether the menubar, the command prompt,
-the hintbar and the function keybar are visible. On the Linux or SCO console
-you can specify how many lines are shown in the output window.
+of screen. You can specify whether the menubar, the command prompt, the
+hintbar and the function keybar are visible. On the Linux or FreeBSD
+console you can specify how many lines are shown in the output window.
 .PP
 The rest of the screen area is used for the two directory panels. You
 can specify whether the area is split to the panels in vertical or

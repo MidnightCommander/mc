@@ -340,9 +340,9 @@ Gyors cd
 dialógboxba.
 .PP
 .B C-o
-A parancs futtatásakor xterm-en Linux, vagy SCO konzolon, megmutatja az
-elõzö parancs kimeneteit. Linux konzolon történõ futtatáskor a Midnight
-Commander egy beépített programot használ (cons.saver) a
+A parancs futtatásakor xterm-en Linux, vagy FreeBSD konzolon, megmutatja
+az elõzö parancs kimeneteit. Linux konzolon történõ futtatáskor a
+Midnight Commander egy beépített programot használ (cons.saver) a
 képernyõ-információk elmentésére és visszaállítására. Tehát az MC
 képernyõjét bármikor kikapcsolhatjuk, és visszakapcsolhatjuk.
 .PP
@@ -1041,7 +1041,7 @@ parancs lehetõvé teszi számodra a speciális fájlok megkeresését. A
 tartalmát.
 .PP
 A "Panelok ki-be" parancs megmutatja az utolsó shell parancs kimenetét.
-Ez csak xterm-en, Linux-on és SCO konzolon mûködik.
+Ez csak xterm-en, Linux-on és FreeBSD konzolon mûködik.
 .PP
 A Könyvtár összehasonlítás (C-x d) parancs összehasonlítja a könyvtár
 paneleket egymással. Ilyenkor használható a Másol (F5) parancs a panelek
@@ -1602,8 +1602,8 @@ amiatt, hogy meg tudd vizsgálni a parancs kimenetét. Három beállítás
 adható meg ennek a változónak:
 .I Soha
 Abban az esetben, ha te nem kívánod látni azt, hogy mit írt ki a
-parancs. Ha Linux, vagy SCO konzolt, vagy xterm-et használsz, a parancs
-kimenete a
+parancs. Ha Linux, vagy FreeBSD konzolt, vagy xterm-et használsz, a
+parancs kimenete a
 .I C-o
 begépelésével megjeleníthetõ.
 .I Buta terminálokon
@@ -1716,8 +1716,9 @@ az opció nem engedélyezett.
 .SH "    Megjelenés"
 A Megjelenés dialógus ablakban megváltoztathatod a képernyõ-megjelenés
 beállításait. Beállíthatod azt, hogy a menüsor, a parancssor, a tippek
-és a funkcióbillentyûk láthatóak legyenek-e. Linux, vagy SCO konzolon
-megadhatod azt, hogy hány sorban legyen látható a megjelenõ ablak.
+és a funkcióbillentyûk láthatóak legyenek-e. Linux, vagy FreeBSD
+konzolon megadhatod azt, hogy hány sorban legyen látható a megjelenõ
+ablak.
 .PP
 A képernyõ nyugalomban lévõ részén két panelt használhatunk.  Megadhatod
 azt, hogy vízszintesen, vagy függõlegesen ossza-e fel a képernyõt a

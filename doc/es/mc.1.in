@@ -335,8 +335,8 @@ Cambiar de Directorio\&.
 .\"Quick cd"
 .TP
 .B C-o
-en la consola de Linux o SCO o bajo un xterm, se muestra la salida de
-la orden anterior. En la consola de Linux, Midnight Commander usa un
+en la consola de Linux o FreeBSD o bajo un xterm, se muestra la salida
+de la orden anterior. En la consola de Linux, Midnight Commander usa un
 programa externo (cons.saver) para controlar la copia y restauración de
 la pantalla.
 .PP
@@ -1046,8 +1046,9 @@ Buscar archivo
 permite buscar un archivo específico. El comando "Intercambiar paneles"
 intercambia los contenidos de los dos paneles de directorios.
 .PP
-El comando "Activa/desactiva paneles" muestra la salida del último comando
-del shell. Esto funciona sólo en xterm y en una consola Linux y SCO.
+El comando "Activa/desactiva paneles" muestra la salida del último
+comando del shell. Esto funciona sólo en xterm y en una consola Linux y
+FreeBSD.
 .PP
 El comando Compara directorios (C-x d) compara los paneles de directorio
 uno con el otro. Podemos usar el comando Copiar (F5) para hacer ambos
@@ -1576,7 +1577,7 @@ valores para esta variable:
 .PP
 .I Nunca.
 Significa que no queremos ver la salida de nuestros comandos. Si estamos
-utilizando la consola Linux o SCO o un xterm, podremos ver la salida
+utilizando la consola Linux o FreeBSD o un xterm, podremos ver la salida
 del comando pulsando C-o.
 .PP
 .I Sólo en Terminales Tontas.
@@ -1681,8 +1682,8 @@ opción está desactivada.
 La ventana de presentación nos da la posibilidad de cambiar la
 presentación general de la pantalla. Podemos configurar si son visibles
 la barra de menú, la línea de órdenes, la línea de sugerencias o la
-barra de teclas de Función. En la consola Linux o SCO podemos especificar
-cuántas líneas se muestran en la ventana de salida.
+barra de teclas de Función. En la consola Linux o FreeBSD podemos
+especificar cuántas líneas se muestran en la ventana de salida.
 .PP
 El resto del área de pantalla se utiliza para los dos paneles de
 directorio. Podemos elegir si disponemos los paneles vertical u

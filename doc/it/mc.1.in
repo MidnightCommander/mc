@@ -354,10 +354,11 @@ cambia dir veloce\&.
 .\"Quick cd"
 .TP
 .B C-o
-quando il programma viene eseguito in una console Linux o SCO o in un xterm,
-mostrerà il risultato del comando precedente. Eseguito in console Linux, il
-Midnight Commander usa un programma esterno (cons.saver) per gestire il
-salvataggio e recupero delle informazioni sullo schermo.
+quando il programma viene eseguito in una console Linux o FreeBSD o in
+un xterm, mostrerà il risultato del comando precedente. Eseguito in
+console Linux, il Midnight Commander usa un programma esterno
+(cons.saver) per gestire il salvataggio e recupero delle informazioni
+sullo schermo.
 .PP
 Se è stato compilato il supporto alla subsell, è possibile premere C-o
 in ogni momento per tornare alla schermata principale del Midnight Commander;
@@ -1064,8 +1065,8 @@ permette di cercare un file specifico. Il comando "Scambia pannelli"
 scambia il contenuto dei due pannelli directory.
 .PP
 Il comando "attiva/disattiva pannelli" mostra il risultato dell'ultimo
-comando shell. Quest'ultimo funziona solo su xterm e sulle console Linux e
-SCO.
+comando shell. Quest'ultimo funziona solo su xterm e sulle console Linux
+e FreeBSD.
 .PP
 Il comando Confronta directory (C-x d) confronta il contenuto dei
 pannelli directory uno con l'altro. E' poi possibile usare il comando
@@ -1607,13 +1608,13 @@ tre possibili impostazioni per questa variabile:
 .IP
 .I Mai.
 Significa che non si vuole vedere il risultato del comando. Se si sta
-usando la console Linux o SCO o un xterm, ci sarà la possibilità di vedere
-il risultato del comando premendo C-o.
+usando la console Linux o FreeBSD o un xterm, ci sarà la possibilità di
+vedere il risultato del comando premendo C-o.
 .IP
 .I Su terminali stupidi.
 Si avrà il messaggio di pausa su quei terminali che non sono in grado di
-mostrare il risultato dell'ultimo comando eseguito (qualsiasi terminale che
-non sia un xterm o una console Linux o SCO).
+mostrare il risultato dell'ultimo comando eseguito (qualsiasi terminale
+che non sia un xterm o una console Linux o FreeBSD).
 .IP
 .I Sempre.
 Il programma si fermerà dopo l'esecuzione di tutti i comandi.
@@ -1722,8 +1723,8 @@ disabilitata.
 La finestra di aspetto da la possibilità di cambiare l'aspetto generale
 dello schermo. Si può specificare la visibilità della barra dei menu, 
 della riga dei comandi, della riga dei suggerimenti o della riga dei
-tasti funzione. Sulle console Linux o SCO si può impostare quante righe
-siano visibili sulla finestra di uscita.
+tasti funzione. Sulle console Linux o FreeBSD si può impostare quante
+righe siano visibili sulla finestra di uscita.
 .PP
 Il resto dell'area dello schermo viene usata per i due pannelli directory.
 Si può specificare se l'area venga divisa dai due pannelli in direzione 

@@ -271,10 +271,11 @@ Uruchamia komendê szukania pliku.
 W³±cza okno dialogowe quick cd (szybkiej zmiany katalogów)
 .PP
 .BR C-o .
-Je¶li program jest uruchamiany na konsoli typu Linux lub SCO lub te¿ na konsoli
-xterm, poka¿e wyj¶cie ostatnio wykonywanego programu. Je¶li uruchomiono Midnight
-Commandera na konsoli type Linux, MC u¿ywa zewnêtrznego programu (cons.saver)
-w celu zachowywyania i odzyskiwania informacji na ekranie komputera.
+Je¶li program jest uruchamiany na konsoli typu Linux lub FreeBSD lub te¿
+na konsoli xterm, poka¿e wyj¶cie ostatnio wykonywanego programu. Je¶li
+uruchomiono Midnight Commandera na konsoli type Linux, MC u¿ywa
+zewnêtrznego programu (cons.saver) w celu zachowywyania i odzyskiwania
+informacji na ekranie komputera.
 .PP
 Je¶li u¿ycie trybu pow³oki w tle jest wkompilowane, mo¿esz nacisn±æ
 C-o w dowolnej chwili i zostataniesz przeniesiony z powrotem bezpo¶rednio
@@ -870,7 +871,7 @@ Komenda "Find file" szuka pliku spe³niaj±cego podane warunki, natomiast komenda
 "Swap panels" zamienia zawarto¶ci obu paneli.
 .PP
 Komenda "Panels on/off" pokazuje wyj¶cie ostatniej komendy interpetatora
-poleceñ. Dzia³a ona tylko na terminalach typu Linux lub SCO.
+poleceñ. Dzia³a ona tylko na terminalach typu Linux lub FreeBSD.
 .PP
 Komenda porównywania katalogów (Compare directories) (C-x d) porównuje
 zawarto¶ci panelu katalogowego z drugim. Mo¿esz potem u¿yc Kopiuj (F5)
@@ -1363,8 +1364,8 @@ dla tej zmiennej:
 .IP
 .I Nigdy (Never)
 Oznacza, ¿e nie chcesz widzieæ wyj¶cia twojej komendy. Je¶li u¿ywasz
-termianala typu Linux lub SCO czy te¿ xterm, bêdziesz móg³ jednak zobaczyæ
-jej wyj¶cie naciskaj±c C-o.
+termianala typu Linux lub FreeBSD czy te¿ xterm, bêdziesz móg³ jednak
+zobaczyæ jej wyj¶cie naciskaj±c C-o.
 .IP
 .I "On dumb terminals"
 Bêdziesz mia³ pauzê po uruchomieniu na terminalach, które nie s± w stanie
@@ -1460,8 +1461,9 @@ du¿o trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z
 .SH "    Wygl±d (Layout)"
 Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
 zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
-hintów (pomocy) i linia klawiszy funkcyjnych maj± byæ widoczne. Na konsolach
-typu Linux lub SCO mo¿esz wybraæ ile linii ma byæ pokazywanych na wyj¶ciu okna.
+hintów (pomocy) i linia klawiszy funkcyjnych maj± byæ widoczne. Na
+konsolach typu Linux lub FreeBSD mo¿esz wybraæ ile linii ma byæ
+pokazywanych na wyj¶ciu okna.
 .PP
 Reszta powierzchni ekranu jest u¿ywana przez dwa panele katalogowe. Mo¿esz
 wybraæ nawet czy panele maj± byæ u³o¿one poziomo czy pionowo.
