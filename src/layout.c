@@ -843,7 +843,8 @@ void set_hintbar(char *str)
 {
 #ifndef HAVE_X
     if (xterm_flag && xterm_hintbar) {
-        fprintf (stderr, "\33]0;mc - %s\7", str);
+	fprintf (stdout, "\33]0;mc - %s\7", str);
+	fflush (stdout);
     } else
 #endif
     {
