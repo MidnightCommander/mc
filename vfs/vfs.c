@@ -602,9 +602,7 @@ mc_return_cwd (void)
     struct stat my_stat, my_stat2;
 
     if (!vfs_rosplit (current_dir)){
-	static char buffer[MC_MAXPATHLEN];
-
-	p = get_current_wd (buffer, MC_MAXPATHLEN);
+	p = g_get_current_dir ();
 	if (!p)  /* One of the directories in the path is not readable */
 	    return current_dir;
 
@@ -615,7 +613,7 @@ mc_return_cwd (void)
 	    my_stat.st_dev != my_stat2.st_dev ||
 	    !cd_symlinks){
 	    g_free (current_dir);
-	    current_dir = g_strdup (p);
+	    current_dir = p;
 	    return p;
 	} /* Otherwise we return current_dir below */
     } 
