@@ -1,4 +1,4 @@
-/* CORBA support for the Midhignt Commander
+/* CORBA support for the Midnight Commander
  *
  * Copyright (C) 1999 The Free Sofware Foundation
  *
@@ -34,6 +34,7 @@ typedef struct {
 	POA_GNOME_FileManager_Desktop servant;
 } DesktopServant;
 
+static PortableServer_ServantBase__epv desktop_base_epv;
 static POA_GNOME_FileManager_Desktop__epv desktop_epv;
 static POA_GNOME_FileManager_Desktop__vepv desktop_vepv;
 
@@ -44,6 +45,7 @@ typedef struct {
 	WPanel *panel;
 } WindowServant;
 
+static PortableServer_ServantBase__epv window_base_epv;
 static POA_GNOME_FileManager_Window__epv window_epv;
 static POA_GNOME_FileManager_Window__vepv window_vepv;
 
@@ -53,6 +55,8 @@ typedef struct {
 	POA_GNOME_FileManager_WindowFactory servant;
 } WindowFactoryServant;
 
+static PortableServer_ServantBase__epv window_factory_base_epv;
+static POA_GNOME_GenericFactory__epv window_factory_generic_factory_epv;
 static POA_GNOME_FileManager_WindowFactory__epv window_factory_epv;
 static POA_GNOME_FileManager_WindowFactory__vepv window_factory_vepv;
 
@@ -67,16 +71,55 @@ static CORBA_Object desktop_server = CORBA_OBJECT_NIL;
 
 /* Desktop implementation */
 
+/* Desktop::rescan method */
 static void
 Desktop_rescan (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	desktop_reload_icons (FALSE, 0, 0);
 }
 
+/* Desktop::rescan_devices method */
 static void
 Desktop_rescan_devices (PortableServer_Servant servant, CORBA_Environment *ev)
 {
 	desktop_rescan_devices ();
+}
+
+/* Fills the vepv structure for the desktop object */
+static void
+Desktop_class_init (void)
+{
+	static int inited = FALSE;
+
+	if (inited)
+		return;
+
+	inited = TRUE;
+
+	desktop_epv.rescan = Desktop_rescan;
+	desktop_epv.rescan_devices = Desktop_rescan_devices;
+
+	desktop_vepv._base_epv = &desktop_base_epv;
+	desktop_vepv.GNOME_FileManager_Desktop_epv = &desktop_epv;
+}
+
+/* Creates a reference for the desktop object */
+static GNOME_FileManager_Desktop
+Desktop_create (PortableServer_POA poa, CORBA_Environment *ev)
+{
+	DesktopServant *ds;
+	PortableServer_ObjectId *objid;
+
+	Desktop_class_init ();
+
+	ds = g_new0 (DesktopServant, 1);
+	ds->servant.vepv = &desktop_vepv;
+
+	POA_GNOME_FileManager_Desktop__init ((PortableServer_Servant) ds, ev);
+	objid = PortableServer_POA_activate_object (poa, ds, ev);
+	CORBA_free (objid);
+
+	return PortableServer_POA_servant_to_reference (poa, ds, ev);
 }
 
 
@@ -105,6 +148,23 @@ window_destroy (WindowServant *ws, CORBA_Environment *ev)
 
 	POA_GNOME_FileManager_Window__fini (ws, ev);
 	g_free (ws);
+}
+
+/* Fills the vepv structure for the window object */
+static void
+Window_class_init (void)
+{
+	static int inited = FALSE;
+
+	if (inited)
+		return;
+
+	inited = TRUE;
+
+	window_epv.close = Window_close;
+
+	window_vepv._base_epv = &window_base_epv;
+	window_vepv.GNOME_FileManager_Window_epv = &window_epv;
 }
 
 
@@ -144,6 +204,8 @@ window_servant_from_panel (WPanel *panel, CORBA_Environment *ev)
 
 	if (panel->servant)
 		return panel->servant;
+
+	Window_class_init ();
 
 	ws = g_new0 (WindowServant, 1);
 	ws->servant.vepv = &window_vepv;
@@ -304,12 +366,39 @@ WindowFactory_create_object (PortableServer_Servant servant,
 	}
 }
 
+/* Fills the vepv structure for the window factory object */
+static void
+WindowFactory_class_init (void)
+{
+	static int inited = FALSE;
+
+	if (inited)
+		return;
+
+	inited = TRUE;
+
+	window_factory_generic_factory_epv.supports = WindowFactory_supports;
+	window_factory_generic_factory_epv.create_object = WindowFactory_create_object;
+
+	window_factory_epv._get_the_desktop = WindowFactory_get_the_desktop;
+	window_factory_epv.create_window = WindowFactory_create_window;
+	window_factory_epv.rescan_directory = WindowFactory_rescan_directory;
+	window_factory_epv.close_invalid_windows = WindowFactory_close_invalid_windows;
+	window_factory_epv.get_windows_by_directory = WindowFactory_get_windows_by_directory;
+
+	window_factory_vepv._base_epv = &window_factory_base_epv;
+	window_factory_vepv.GNOME_GenericFactory_epv = &window_factory_generic_factory_epv;
+	window_factory_vepv.GNOME_FileManager_WindowFactory_epv = &window_factory_epv;
+}
+
 /* Creates a reference for the window factory object */
 static GNOME_FileManager_WindowFactory
 WindowFactory_create (PortableServer_POA poa, CORBA_Environment *ev)
 {
 	WindowFactoryServant *wfs;
 	PortableServer_ObjectId *objid;
+
+	WindowFactory_class_init ();
 
 	wfs = g_new0 (WindowFactoryServant, 1);
 	wfs->servant.vepv = &window_factory_vepv;
@@ -323,245 +412,11 @@ WindowFactory_create (PortableServer_POA poa, CORBA_Environment *ev)
 
 
 
-
-#if 0
-
-/*** Implementation stub prototypes ***/
-
-static void impl_GNOME_FileManagerWindow__destroy (impl_POA_GNOME_FileManagerWindow *servant,
-						   CORBA_Environment *ev);
-static void impl_GNOME_FileManagerWindow_close (impl_POA_GNOME_FileManagerWindow *servant,
-						CORBA_Environment *ev);
-
-static void impl_GNOME_FileManagerFactory__destroy (impl_POA_GNOME_FileManagerFactory *servant,
-						    CORBA_Environment *ev);
-
-static CORBA_boolean impl_GNOME_FileManagerFactory_supports (
-	impl_POA_GNOME_FileManagerFactory *servant,
-	const CORBA_char *obj_goad_id,
-	CORBA_Environment *ev);
-
-static CORBA_Object impl_GNOME_FileManagerFactory_create_object (
-	impl_POA_GNOME_FileManagerFactory *servant,
-	const CORBA_char *goad_id,
-	const GNOME_stringlist *params,
-	CORBA_Environment *ev);
-
-static GNOME_FileManagerWindow impl_GNOME_FileManagerFactory_create_window (
-	impl_POA_GNOME_FileManagerFactory * servant,
-	const CORBA_char * dir,
-	CORBA_Environment * ev);
-
-/*** epv structures ***/
-
-static PortableServer_ServantBase__epv impl_GNOME_FileManagerWindow_base_epv =
-{
-	NULL,							/* _private data */
-	NULL,							/* finalize routine */
-	NULL,							/* default_POA routine */
-};
-
-static POA_GNOME_FileManagerWindow__epv impl_GNOME_FileManagerWindow_epv =
-{
-	NULL,							/* _private */
-	(gpointer) &impl_GNOME_FileManagerWindow_close,
-
-};
-
-static PortableServer_ServantBase__epv impl_GNOME_FileManagerFactory_base_epv =
-{
-	NULL,							/* _private data */
-	NULL,							/* finalize routine */
-	NULL,							/* default_POA routine */
-};
-
-static POA_GNOME_FileManagerFactory__epv impl_GNOME_FileManagerFactory_epv =
-{
-	NULL,							/* _private */
-	(gpointer) &impl_GNOME_FileManagerFactory_create_window,
-};
-
-static POA_GNOME_GenericFactory__epv impl_GNOME_FileManagerFactory_GNOME_GenericFactory_epv =
-{
-	NULL,							/* _private */
-	(gpointer) &impl_GNOME_FileManagerFactory_supports,
-	(gpointer) &impl_GNOME_FileManagerFactory_create_object
-};
-
-/*** vepv structures ***/
-
-static POA_GNOME_FileManagerWindow__vepv impl_GNOME_FileManagerWindow_vepv =
-{
-	&impl_GNOME_FileManagerWindow_base_epv,
-	&impl_GNOME_FileManagerWindow_epv
-};
-
-static POA_GNOME_FileManagerFactory__vepv impl_GNOME_FileManagerFactory_vepv =
-{
-	&impl_GNOME_FileManagerFactory_base_epv,
-	&impl_GNOME_FileManagerFactory_GNOME_GenericFactory_epv,
-	&impl_GNOME_FileManagerFactory_epv
-};
-
-/*** Stub implementations ***/
-
-static GNOME_FileManagerWindow
-impl_GNOME_FileManagerWindow__create(PortableServer_POA poa,
-				     impl_POA_GNOME_FileManagerWindow **servant,
-				     CORBA_Environment *ev)
-{
-	GNOME_FileManagerWindow retval;
-	impl_POA_GNOME_FileManagerWindow *newservant;
-	PortableServer_ObjectId *objid;
-
-	newservant = g_new0 (impl_POA_GNOME_FileManagerWindow, 1);
-	newservant->servant.vepv = &impl_GNOME_FileManagerWindow_vepv;
-	newservant->poa = poa;
-	POA_GNOME_FileManagerWindow__init ((PortableServer_Servant) newservant, ev);
-	objid = PortableServer_POA_activate_object (poa, newservant, ev);
-	CORBA_free (objid);
-	retval = PortableServer_POA_servant_to_reference (poa, newservant, ev);
-
-	if (servant)
-		*servant = newservant;
-
-	return retval;
-}
-
-/* You shouldn't call this routine directly without first deactivating the servant... */
-static void
-impl_GNOME_FileManagerWindow__destroy(impl_POA_GNOME_FileManagerWindow *servant,
-				      CORBA_Environment *ev)
-{
-	PortableServer_ObjectId *objid;
-
-	objid = PortableServer_POA_servant_to_id (servant->poa, servant, ev);
-	PortableServer_POA_deactivate_object (servant->poa, objid, ev);
-	CORBA_free (objid);
-
-	POA_GNOME_FileManagerWindow__fini ((PortableServer_Servant) servant, ev);
-	g_free(servant);
-}
-
-static void
-impl_GNOME_FileManagerWindow_close(impl_POA_GNOME_FileManagerWindow *servant,
-				   CORBA_Environment *ev)
-{
-	gnome_close_panel (GTK_WIDGET (servant->panel->xwindow), servant->panel);
-}
-
-static GNOME_FileManagerFactory
-impl_GNOME_FileManagerFactory__create(PortableServer_POA poa,
-				      impl_POA_GNOME_FileManagerFactory **servant,
-				      CORBA_Environment *ev)
-{
-	GNOME_FileManagerFactory retval;
-	impl_POA_GNOME_FileManagerFactory *newservant;
-	PortableServer_ObjectId *objid;
-
-	newservant = g_new0 (impl_POA_GNOME_FileManagerFactory, 1);
-	newservant->servant.vepv = &impl_GNOME_FileManagerFactory_vepv;
-	newservant->poa = poa;
-	POA_GNOME_FileManagerFactory__init ((PortableServer_Servant) newservant, ev);
-	objid = PortableServer_POA_activate_object (poa, newservant, ev);
-	CORBA_free (objid);
-	retval = PortableServer_POA_servant_to_reference (poa, newservant, ev);
-
-	if (servant)
-		*servant = newservant;
-
-	return retval;
-}
-
-/* You shouldn't call this routine directly without first deactivating the servant... */
-static void
-impl_GNOME_FileManagerFactory__destroy(impl_POA_GNOME_FileManagerFactory *servant,
-				       CORBA_Environment *ev)
-{
-	PortableServer_ObjectId *objid;
-
-	objid = PortableServer_POA_servant_to_id (servant->poa, servant, ev);
-	PortableServer_POA_deactivate_object (servant->poa, objid, ev);
-	CORBA_free (objid);
-
-	POA_GNOME_FileManagerFactory__fini ((PortableServer_Servant) servant, ev);
-	g_free (servant);
-}
-
-static CORBA_boolean
-impl_GNOME_FileManagerFactory_supports (impl_POA_GNOME_FileManagerFactory *servant,
-					const CORBA_char *obj_goad_id,
-					CORBA_Environment *ev)
-{
-	if (strcmp (obj_goad_id, "IDL:GNOME:FileManagerWindow:1.0") == 0)
-		return CORBA_TRUE;
-	else
-		return CORBA_FALSE;
-}
-
-static CORBA_Object
-impl_GNOME_FileManagerFactory_create_object (impl_POA_GNOME_FileManagerFactory *servant,
-					     const CORBA_char *goad_id,
-					     const GNOME_stringlist *params,
-					     CORBA_Environment *ev)
-{
-	if (strcmp (goad_id, "IDL:GNOME:FileManagerWindow:1.0") != 0) {
-		CORBA_exception_set (ev, CORBA_USER_EXCEPTION,
-				     ex_GNOME_GenericFactory_CannotActivate,
-				     NULL);
-		return CORBA_OBJECT_NIL;
-	}
-
-	return impl_GNOME_FileManagerFactory_create_window (
-		servant,
-		params->_length ? params->_buffer[0] : home_dir,
-		ev);
-}
-
-/* Callback used when a panel is destroyed */
-static void
-panel_destroyed (GtkObject *object, gpointer data)
-{
-	impl_POA_GNOME_FileManagerWindow *servant;
-	CORBA_Environment ev;
-
-	servant = data;
-
-	CORBA_exception_init (&ev);
-	impl_GNOME_FileManagerWindow__destroy (servant, &ev);
-	CORBA_exception_free (&ev);
-}
-
-static GNOME_FileManagerWindow
-impl_GNOME_FileManagerFactory_create_window(impl_POA_GNOME_FileManagerFactory *servant,
-					    const CORBA_char *dir,
-					    CORBA_Environment *ev)
-{
-	GNOME_FileManagerWindow retval;
-	impl_POA_GNOME_FileManagerWindow *newservant;
-	WPanel *panel;
-
-	retval = impl_GNOME_FileManagerWindow__create (servant->poa,
-						       &newservant,
-						       ev);
-
-	panel = new_panel_at ((dir && *dir) ? dir : home_dir);
-	newservant->panel = panel;
-
-	gtk_signal_connect (GTK_OBJECT (panel->xwindow), "destroy",
-			    (GtkSignalFunc) panel_destroyed,
-			    newservant);
-
-	return retval;
-}
-
-#endif
-
-/*** Public non-implementation functions ***/
-
-/* Creates the CORBA server */
+/* Creates and registers the CORBA servers.  Returns TRUE on success, FALSE
+ * otherwise.
+ */
 static int
-create_server (void)
+register_servers (void)
 {
 	CORBA_Environment ev;
 	PortableServer_POAManager poa_manager;
@@ -585,14 +440,14 @@ create_server (void)
 	if (ev._major != CORBA_NO_EXCEPTION)
 		goto out;
 
+	/* Register the window factory and see if it was already there */
+
 	window_factory_server = WindowFactory_create (poa, &ev);
 	if (ev._major != CORBA_NO_EXCEPTION)
 		goto out;
 
-	/* Register the server and see if it was already there */
-
 	v = goad_server_register (CORBA_OBJECT_NIL, window_factory_server,
-				  "IDL:GNOME:FileManager:WindowFactory:1.0", "server", &ev);
+				  "IDL:GNOME:FileManager:WindowFactory:1.0", "object", &ev);
 	switch (v) {
 	case 0:
 		corba_have_server = FALSE;
@@ -606,11 +461,21 @@ create_server (void)
 		goto out;
 	}
 
+	/* Register the desktop server */
+
+	desktop_server = Desktop_create (poa, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+	goad_server_register (CORBA_OBJECT_NIL, desktop_server,
+			      "IDL:GNOME:FileManager:Desktop:1.0", "object", &ev);
+
 	retval = TRUE;
 
 	/* Done */
-
  out:
+	CORBA_exception_free (&ev);
+
 	return retval;
 }
 
@@ -632,11 +497,17 @@ corba_init_server (void)
 		GOAD_ACTIVATE_EXISTING_ONLY,
 		NULL);
 
+	desktop_server = goad_server_activate_with_id (
+		NULL,
+		"IDL:GNOME:FileManager:Desktop:1.0",
+		GOAD_ACTIVATE_EXISTING_ONLY,
+		NULL);
+
 	if (window_factory_server != CORBA_OBJECT_NIL) {
 		corba_have_server = TRUE;
 		return TRUE;
 	} else
-		return create_server ();
+		return register_servers ();
 }
 
 /**
@@ -646,7 +517,7 @@ corba_init_server (void)
  * Creates a GMC window using a CORBA call to the server.
  **/
 void
-corba_create_window (const char *dir)
+corba_create_window (char *dir)
 {
 	CORBA_Environment ev;
 	char cwd[MC_MAXPATHLEN];

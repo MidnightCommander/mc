@@ -191,6 +191,14 @@ CORBA_GENERATED =		\
 	FileManager-skels.c	\
 	FileManager-common.c
 
+CLIENTSRCS = gmc-client.c
+
+CLIENTOBJS = 			\
+	gmc-client.o		\
+	FileManager-stubs.o	\
+	FileManager-common.o
+
+
 $(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
 	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
 
@@ -222,6 +230,7 @@ Makefile: Makefile.in ../config.status
 mx: checklinks 
 	$(MAKE) plain-gmc
 	$(MAKE) corba-gmc
+	$(MAKE) gmc-client
 	@echo ----------------------------------------------------------
 	@echo -
 	@echo - GMC no longer exists here.  Use plain-gmc or corba-gmc
@@ -235,6 +244,9 @@ plain-gmc: @LIBVFS@ $(OBJS) $(NORMALOBJS) libgtkedit.a
 
 corba-gmc: @LIBVFS@ $(OBJS) $(CORBAOBJS) libgtkedit.a
 	$(CC) -o corba-gmc $(CORBAOBJS) $(OBJS) $(EXTRALIBS) $(CORBA_LDFLAGS) $(LIBS) 
+
+gmc-client: $(CLIENTOBJS)
+	$(CC) -o gmc-client $(CLIENTOBJS) $(CORBA_LDFLAGS) $(LIBS)
 
 mc.keys: mc.keys.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' \
@@ -307,6 +319,7 @@ install_mx: all
 	$(MKINSTALLDIRS) $(DESTDIR)$(gnewdir)
 	$(INSTALL_PROGRAM) plain-gmc $(DESTDIR)$(bindir)/$(binprefix)plain-gmc
 	$(INSTALL_PROGRAM) corba-gmc $(DESTDIR)$(bindir)/$(binprefix)gmc
+	$(INSTALL_PROGRAM) gmc-client $(DESTDIR)$(bindir)/$(binprefix)gmc-client
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
 	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(mclibdir)/layout

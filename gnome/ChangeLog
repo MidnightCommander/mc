@@ -1,3 +1,13 @@
+1999-09-09  Federico Mena Quintero  <federico@redhat.com>
+
+	* gmc-client.c: New file.  This is a small program to which you
+	can pass arguments to call the GMC CORBA interface for you.  You
+	can do stuff like create a directory window, rescan the desktop,
+	etc.
+
+	* gcorba.c (register_servers): Create the window factory and
+	desktop servers.
+
 1999-09-08  Federico Mena Quintero  <federico@redhat.com>
 
 	* gcorba.c: Major re-arrangement and beautifying.  Use nicer and
