@@ -1,5 +1,10 @@
 2003-07-08  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Add new field loading_done.
+	* edit.c (edit_init): Set loading_done.
+	(edit_insert): Don't call edit_modification() before the file is
+	completely loaded.
+
 	* edit-widget.h: Eliminate unused explicit_syntax field.
 
 	* edit-widget.h: Stop misusing "unsigned char" for boolean.

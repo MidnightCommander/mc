@@ -553,6 +553,7 @@ edit_init (WEdit *edit, int lines, int columns, const char *filename,
 	    g_free (edit);
 	return 0;
     }
+    edit->loading_done = 1;
     edit->modified = 0;
     edit->locked = 0;
     edit_load_syntax (edit, 0, 0);
@@ -839,8 +840,10 @@ edit_insert (WEdit *edit, int c)
 	    edit->start_line++;
     }
 
-    /* tell that we've modified the file */
-    edit_modification (edit);
+    /* Mark file as modified, unless the file hasn't been fully loaded */
+    if (edit->loading_done) {
+	edit_modification (edit);
+    }
     
     /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n') {

@@ -53,6 +53,7 @@ struct WEdit {
     int force;			/* how much of the screen do we redraw? */
     int overwrite:1;		/* Overwrite on type mode (as opposed to insert) */
     int modified:1;		/* File has been modified and needs saving */
+    int loading_done:1;		/* File has been loaded into the editor */
     int locked:1;		/* We hold lock on current file */
     int screen_modified:1;	/* File has been changed since the last screen draw */
     int delete_file:1;		/* New file, needs to be deleted unless modified */
