@@ -1,3 +1,12 @@
+2003-02-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* vfs.c (is_localized_month): New function for locale's
+	abbreviated month name as any 3 bytes long string without digits
+	and control characters.
+	(vfs_parse_filedate): Fallback to is_localized_month() if
+	is_month() and is_dos_date() fail and set date to Jan 1 1970.
+	(vfs_parse_ls_lga): Use is_localized_month().
+
 2003-01-24  Pavel Roskin  <proski@gnu.org>
 
 	* smbfs.c (smbfs_nothingisopen): Warning fix for 64-bit systems.

@@ -1359,7 +1359,7 @@ is_dos_date (const char *str)
 }
 
 static int
-is_week (char *str, struct tm *tim)
+is_week (const char *str, struct tm *tim)
 {
     static const char *week = "SunMonTueWedThuFriSat";
     char *pos;
@@ -1376,7 +1376,7 @@ is_week (char *str, struct tm *tim)
 }
 
 static int
-is_month (char *str, struct tm *tim)
+is_month (const char *str, struct tm *tim)
 {
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
     char *pos;
@@ -1392,8 +1392,27 @@ is_month (char *str, struct tm *tim)
     return 0;
 }
 
+/*
+ * Check for possible locale's abbreviated month name (Jan..Dec).
+ * Any 3 bytes long string without digit and control characters.
+ * isalpha() is locale specific, so it cannot be used if current
+ * locale is "C" and ftp server use Cyrillic.
+ * TODO: Punctuation characters also cannot be part of month name.
+ * NB: It is assumed there are no whitespaces in month.
+ */
 static int
-is_time (char *str, struct tm *tim)
+is_localized_month (const unsigned char *month)
+{
+    int i = 0;
+    while ((i < 3) && *month && !isdigit (*month) && !iscntrl (*month)) {
+	i++;
+	month++;
+    }
+    return ((i == 3) && (*month == 0));
+}
+
+static int
+is_time (const char *str, struct tm *tim)
 {
     char *p, *p2;
 
@@ -1450,7 +1469,7 @@ int
 vfs_parse_filetype (char c)
 {
     switch (c) {
-	case 'd': return S_IFDIR; 
+	case 'd': return S_IFDIR;
 	case 'b': return S_IFBLK;
 	case 'c': return S_IFCHR;
 	case 'l': return S_IFLNK;
@@ -1540,6 +1559,7 @@ vfs_parse_filedate (int idx, time_t *t)
     struct tm tim;
     int d[3];
     int got_year = 0;
+    int l10n = 0;		/* Locale's abbreviated month name */
 
     /* Let's setup default time values */
     tim.tm_year = current_year;
@@ -1599,8 +1619,13 @@ vfs_parse_filedate (int idx, time_t *t)
 		got_year = 1;
 	    } else
 		return 0;	/* sscanf failed */
-	} else
-	    return 0;		/* unsupported format */
+	} else {
+	    /* Locale's abbreviated month name followed by day number */
+	    if (is_localized_month (p) && (is_num (idx++)))
+		l10n = 1;
+	    else
+		return 0;	/* unsupported format */
+	}
     }
 
     /* Here we expect to find time and/or year */
@@ -1635,7 +1660,7 @@ vfs_parse_filedate (int idx, time_t *t)
 
 	tim.tm_year--;
 
-    if ((*t = mktime (&tim)) < 0)
+    if (l10n || (*t = mktime (&tim)) < 0)
 	*t = 0;
     return idx;
 }
@@ -1691,17 +1716,18 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
         s->st_uid = (uid_t) atol (columns [1]);
 
     /* Mhm, the ls -lg did not produce a group field */
-    for (idx = 3; idx <= 5; idx++) 
-        if (is_month(columns [idx], NULL) || is_week(columns [idx], NULL) || is_dos_date(columns[idx]))
-            break;
+    for (idx = 3; idx <= 5; idx++)
+	if (is_month (columns[idx], NULL) || is_week (columns[idx], NULL)
+	    || is_dos_date (columns[idx]) || is_localized_month (columns[idx]))
+	    break;
 
     if (idx == 6 || (idx == 5 && !S_ISCHR (s->st_mode) && !S_ISBLK (s->st_mode)))
 	goto error;
 
-    /* We don't have gid */	
+    /* We don't have gid */
     if (idx == 3 || (idx == 4 && (S_ISCHR(s->st_mode) || S_ISBLK (s->st_mode))))
         idx2 = 2;
-    else { 
+    else {
 	/* We have gid field */
 	if (is_num (2))
 	    s->st_gid = (gid_t) atol (columns [2]);
@@ -1713,30 +1739,30 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     /* This is device */
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)){
 	int maj, min;
-	
+
 	if (!is_num (idx2) || sscanf(columns [idx2], " %d,", &maj) != 1)
 	    goto error;
-	
+
 	if (!is_num (++idx2) || sscanf(columns [idx2], " %d", &min) != 1)
 	    goto error;
-	
+
 #ifdef HAVE_ST_RDEV
 	s->st_rdev = ((maj & 0xff) << 8) | (min & 0xffff00ff);
 #endif
 	s->st_size = 0;
-	
+
     } else {
 	/* Common file size */
 	if (!is_num (idx2))
 	    goto error;
-	
+
 	s->st_size = (size_t) atol (columns [idx2]);
 #ifdef HAVE_ST_RDEV
 	s->st_rdev = 0;
 #endif
     }
 
-    idx = vfs_parse_filedate(idx, &s->st_mtime);
+    idx = vfs_parse_filedate (idx, &s->st_mtime);
     if (!idx)
         goto error;
     /* Use resulting time value */
@@ -1749,16 +1775,16 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     s->st_blocks = (s->st_size + 511) / 512;
 #endif
 
-    for (i = idx + 1, idx2 = 0; i < num_cols; i++ ) 
+    for (i = idx + 1, idx2 = 0; i < num_cols; i++ )
 	if (strcmp (columns [i], "->") == 0){
 	    idx2 = i;
 	    break;
 	}
-    
-    if (((S_ISLNK (s->st_mode) || 
+
+    if (((S_ISLNK (s->st_mode) ||
         (num_cols == idx + 3 && s->st_nlink > 1))) /* Maybe a hardlink? (in extfs) */
         && idx2){
-	    
+
 	if (filename){
 	    *filename = g_strndup (p + column_ptr [idx], column_ptr [idx2] - column_ptr [idx] - 1);
 	}
@@ -1771,9 +1797,9 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 	 * this way we have a chance of entering hidden directories like ". ."
 	 */
 	if (filename){
-	    /* 
-	    *filename = g_strdup (columns [idx++]);
-	    */
+	    /*
+	     * filename = g_strdup (columns [idx++]);
+	     */
 
 	    t = g_strdup (p + column_ptr [idx]);
 	    *filename = t;
