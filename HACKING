@@ -277,7 +277,36 @@ provide a callback function.  Please note that it's not the same as the
 user callback in some widgets.
 
 
-PROGRAMMING TIPS
+Where to Find Bug Reports and Patches
+=====================================
+
+There are various sources where bug reports and patches can be found.
+
+http://savannah.gnu.org/bugs/?group=mc
+	The primary bug tracking system for MC.
+
+http://bugs.debian.org/mc
+	The bug tracking system for Debian, a package collection mainly
+	for GNU/Linux and the Hurd.
+
+
+http://savannah.gnu.org/patch/?group=mc
+	Patches reported in the GNU Savannah project.
+
+http://www.openbsd.org/cgi-bin/cvsweb/ports/misc/mc/patches/
+	The patches that are applied for the OpenBSD version of MC.
+
+http://www.freebsd.org/cgi/cvsweb.cgi/ports/misc/mc/files/
+	The patches that are applied for the FreeBSD version of MC.
+
+http://cvsweb.netbsd.org/bsdweb.cgi/pkgsrc/sysutils/mc/patches/
+	The patches that are applied for the NetBSD version of MC.
+
+http://www.gentoo.org/cgi-bin/viewcvs.cgi/app-misc/mc/files/?hideattic=1
+	The patches that are applied for the Gentoo Linux version of MC.
+
+
+Programming Tips
 ================
 
 (This list should be sorted alphabetically.)

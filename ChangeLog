@@ -2,6 +2,8 @@
 
 	* HACKING: added advice for using g_strdup for a modifiable
 	copy of a string.
+	* HACKING: added a section about where to look for bug reports
+	and patches.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 
