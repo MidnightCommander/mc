@@ -48,6 +48,7 @@ GNOMESRCS = 		\
 	gmetadata.c	\
 	gpageprop.c	\
 	gpopup.c	\
+	gprefs.c	\
 	gprop.c		\
 	gdialogs.c	\
 	gscreen.c 	\
@@ -75,6 +76,7 @@ GNOMEHDRS = 		\
 	gmetadata.h	\
 	gpageprop.h	\
 	gpopup.h	\
+	gprefs.h	\
 	gprop.h		\
 	gdialogs.h	\
 	gscreen.h	\
@@ -139,6 +141,7 @@ OBJS = 			\
 	gmetadata.o	\
 	gpageprop.o	\
 	gpopup.o	\
+	gprefs.o	\
 	gprop.o		\
 	gscreen.o 	\
 	gtools.o 	\

@@ -22,7 +22,7 @@
 #include "gdesktop.h"
 #include "setup.h"
 #include "../vfs/vfs.h"
-
+#include "gprefs.h"
 #define UNDEFINED_INDEX -1
 
 GList *containers = 0;
@@ -301,7 +301,7 @@ GnomeUIInfo gnome_panel_edit_menu [] = {
 	{ GNOME_APP_UI_SEPARATOR },
 	{ GNOME_APP_UI_ITEM, N_("_Rescan Directory"),  N_("Rescan the directory contents"), reread_cmd },
 	{ GNOME_APP_UI_SEPARATOR },
-	{ GNOME_APP_UI_ITEM, N_("Preferences..."),     N_("Configure the GNOME Midnight Commander"), configure_box, NULL,
+	{ GNOME_APP_UI_ITEM, N_("Preferences..."),     N_("Configure the GNOME Midnight Commander"), gnome_configure_box, NULL,
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_PROP},
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };

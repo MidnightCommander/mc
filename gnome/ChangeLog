@@ -1,3 +1,12 @@
+1999-01-08  Jonathan Blandford  <jrb@redhat.com>
+
+	* glayout.c: now open the new (non-functional) dialog box.  If you
+	want functionality, I suppose you could put the old one back in.
+	I'll work on it more this weekend, though, so hopefully it can get
+	back to the old state relatively quickly.
+	* gprefs.c (gnome_configure_box): New function, new file, first
+	start at unified properties box.
+
 1999-01-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_list_select_icon): Remove debugging message.
