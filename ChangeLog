@@ -1,3 +1,7 @@
+2000-01-31  Yuan-Chung Cheng <platin@linux.org.tw>
+
+        * configure.in: Added "zh_CN.GB2312" to ALL_LINGUAS.
+
 2000-01-29  Matthias Warkus  <mawa@iname.com>
 
 	* new_icons/gnome-pack-deb.png: Replaced with Eduardo Silva's
