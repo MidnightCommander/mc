@@ -576,6 +576,12 @@ gtk_dtree_destroy (GtkObject *object)
 	gdk_bitmap_unref (dtree->bitmap_open);
 	gdk_bitmap_unref (dtree->bitmap_close);
 
+	if (dtree->current_path)
+		g_free (dtree->current_path);
+
+	if (dtree->requested_path)
+		g_free (dtree->requested_path);
+	
 	(GTK_OBJECT_CLASS (parent_class))->destroy (object);
 }
 

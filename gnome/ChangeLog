@@ -1,3 +1,8 @@
+1999-04-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_destroy): Memory leak fix: destroy
+	current_path and requested_path
+
 1999-04-13  Jonathan Blandford  <jrb@redhat.com>
 
 	* mc.keys.in.in: updated the key files to add more types.
