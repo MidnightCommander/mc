@@ -1,5 +1,10 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* view.c: Cleanup of preprocessor directives.
+	* view.h: Likewise.
+	* widget.c: Likewise.
+	* widget.h: Likewise.
+
 	* textconf.h: Get rid of all PORT_HAS_*.  Adjust all users.
 	Continued eliminating GNOME code.
 

@@ -37,9 +37,6 @@
 #   include <sys/mman.h>
 #endif
 #include <fcntl.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
-#endif
 #include <ctype.h>	/* For toupper() */
 #include <errno.h>
 #include <limits.h>
@@ -73,7 +70,7 @@
 #ifdef HAVE_CHARSET
 #include "charsets.h"
 #include "selcodepage.h"
-#endif
+#endif /* HAVE_CHARSET */
 
 #ifndef MAP_FILE
 #define MAP_FILE 0
@@ -95,10 +92,6 @@ int max_dirt_limit =
 0;
 #else
 10;
-#endif
-
-#ifdef HAVE_X
-#define is_idle() 1
 #endif
 
 extern Hook *idle_hook;
@@ -154,7 +147,7 @@ free_file (WView *view)
 	mc_munmap (view->data, view->s.st_size);
 	close_view_file (view);
     } else 
-#endif
+#endif /* HAVE_MMAP */
     {
 	if (view->reading_pipe){
 	    /* Check error messages */
@@ -344,7 +337,7 @@ put_editkey (WView *view, unsigned char key)
 	   * view->data array to allow changes to be reflected when
 	   * user switches back to ascii mode */
 	    view->data[view->edit_cursor] = byte_val;
-#endif /* HAVE_MMAP */
+#endif /* !HAVE_MMAP */
             node->offset = view->edit_cursor;
             node->value = byte_val;
             enqueue_change (&view->change_list, node);
@@ -675,7 +668,6 @@ view_init (WView *view, char *_command, const char *_file, int start_line)
 
 /* {{{ Screen update functions */
 
-#ifndef HAVE_X
 void
 view_percent (WView *view, int p, int w, gboolean update_gui)
 {
@@ -770,7 +762,6 @@ view_display_clean (WView *view, int height, int width)
 #define view_add_one_vline()       one_vline()
 #define view_add_string(view,s)    addstr (s)
 #define view_gotoyx(v,r,c)    widget_move (v,r,c)
-#endif
 
 /* Both the text mode and gnome editions use this */
 #define BOLD_COLOR        MARKED_COLOR
@@ -1463,14 +1454,6 @@ search_update_steps (WView *view)
 	update_steps = 20000;
 }
 
-#ifdef HAVE_GNOME
-static void
-cancel_pressed (GtkWidget *widget, int *abort)
-{
-	*abort = 1;
-}
-#endif
-
 static void
 search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 {
@@ -1480,13 +1463,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     long p, beginning;
     int found_len, search_start;
     int search_status;
-#ifdef HAVE_GNOME
-    char *msg;
-    int abort;
-    GtkWidget *gd;
-#else
     Dlg_head *d = 0;
-#endif
     
     /* Used to keep track of where the line starts, when looking forward */
     /* is the index before transfering the line; the reverse case uses   */
@@ -1497,22 +1474,10 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     /* Clear interrupt status */
     got_interrupt ();
 
-#ifdef HAVE_GNOME
-    abort = 0;
-    msg = g_strdup_printf (_("Searching for `%s'"), text);
-    gd = gnome_message_box_new (msg,
-				GNOME_MESSAGE_BOX_INFO,
-				GNOME_STOCK_BUTTON_CANCEL,
-				NULL);
-    g_free (msg);
-    gnome_dialog_button_connect (GNOME_DIALOG (gd), 0, GTK_SIGNAL_FUNC (cancel_pressed), &abort);
-    gtk_widget_show (gd);
-#else
     if (verbose){
 	d = message (D_INSERT, _(" Search "), _("Searching %s"), text);
 	mc_refresh ();
     }
-#endif
 
     found_len = view->found_len;
     search_start = view->search_start;
@@ -1584,15 +1549,11 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 	break;
     }
     disable_interrupt_key ();
-#ifdef HAVE_GNOME
-    gtk_object_destroy (GTK_OBJECT (gd));
-#else
-    if (verbose){
+    if (verbose) {
 	dlg_run_done (d);
 	destroy_dlg (d);
     }
-#endif
-    if (!s){
+    if (!s) {
 	message (0, _(" Search "), _(" Search string not found "));
 	view->found_len = 0;
     }
@@ -2271,7 +2232,6 @@ view_handle_key (WView *view, int c)
         view_move_forward (view, vheight - 1);
         return 1;
 
-#ifndef HAVE_X
     case XCTRL('o'):
 	view_other_cmd ();
 	return 1;
@@ -2280,7 +2240,6 @@ view_handle_key (WView *view, int c)
     case '!':
 	exec_shell ();
 	return 1;
-#endif /* !HAVE_X */
 	
     case 'F':
 	set_monitor (view, on);
@@ -2328,7 +2287,7 @@ view_handle_key (WView *view, int c)
 	view->dirty++;
 	view_update( view, TRUE );
 	return 1;
-#endif
+#endif /* HAVE_CHARSET */
 
     }
     if (c >= '0' && c <= '9')
@@ -2393,7 +2352,6 @@ real_view_event (Gpm_Event *event, void *x)
 /* }}} */
 /* {{{ Window creation, destruction and a driver stub for real view */
 
-#ifndef PORT_WANTS_VIEW
 static int
 view_mode_callback (struct Dlg_head *h, int id, int msg)
 {
@@ -2434,9 +2392,7 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
 			   "view",
 			   DLG_NONE);
 
-#ifndef HAVE_X
     view_dlg = our_dlg;
-#endif
     wview = view_new (0, 0, COLS, LINES-1, 0);
 
     bar  = buttonbar_new (1);
@@ -2461,7 +2417,6 @@ view (char *_command, const char *_file, int *move_dir_p, int start_line)
     
     return !error;
 }
-#endif
 
 static void
 view_hook (void *v)

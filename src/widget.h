@@ -32,9 +32,6 @@ typedef struct WRadio {
     int count;			/* number of members */
     char **texts;		/* texts of labels */
     int upper_letter_is_hotkey; /* If true, then the capital letter is a hk */
-#ifdef HAVE_GNOME
-    void *first_gtk_radio;
-#endif
 } WRadio;
 
 typedef struct WCheck {
@@ -216,30 +213,5 @@ void set_label_text (WButtonBar *, int, char *);
 void redraw_labels (Dlg_head *h, Widget *paneletc);
 WButtonBar *find_buttonbar (Dlg_head *h, Widget *paneletc);
 void buttonbar_hint (WButtonBar *bb, char *s);
-
-#ifdef HAVE_X
-int  x_create_radio       	     (Dlg_head *h, widget_data parent, WRadio *r);
-int  x_create_button                 (Dlg_head *h, widget_data parent, WButton *b);
-int  x_create_check       	     (Dlg_head *h, widget_data parent, WCheck *c);
-int  x_create_label       	     (Dlg_head *h, widget_data parent, WLabel *l);
-int  x_create_input       	     (Dlg_head *h, widget_data parent, WInput *in);
-int  x_create_listbox     	     (Dlg_head *h, widget_data parent, WListbox *l);
-int  x_create_buttonbar   	     (Dlg_head *h, widget_data parent, WButtonBar *bb);
-
-void x_button_set         (WButton *b, char *text);
-void x_label_set_text     (WLabel *label, char *text);
-void x_listbox_select_nth (WListbox *l, int nth);
-void x_listbox_delete_nth (WListbox *l, int nth);
-void x_label_set_text     (WLabel *label, char *text);
-int  x_create_gauge       (Dlg_head *h, widget_data parent, WGauge *g);
-void x_gauge_show         (WGauge *g);
-void x_gauge_set_value    (WGauge *g, int max, int current);
-void x_radio_toggle       (WRadio *);
-void x_radio_focus_item   (WRadio *radio);
-void x_listbox_select_nth (WListbox *, int);
-void x_list_insert        (WListbox *, WLEntry *, WLEntry *);
-void x_redefine_label     (WButtonBar *, int);
-void x_update_input       (WInput *in);
-#endif
 
 #endif	/* __WIDGET_H */

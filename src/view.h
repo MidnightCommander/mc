@@ -79,17 +79,6 @@ typedef struct {
     int marks [10];		/* 10 marks: 0..9 */
     
 	
-#ifdef HAVE_X
-    int  current_x, current_y;	/* Current x,y position */
-    int  color;			/* Current color */
-    void *gtk_fname;		/* filename widget */
-    void *gtk_offset;		/* offset widget */
-    void *gtk_bytes;		/* bytes */
-    void *gtk_flags;		/* flags (growing) */
-    void *gtk_percent;		/* percent */
-    void *sadj;			/* scrollbar adjustment */
-#endif /* HAVE_X */
-	
     int  move_dir;		/* return value from widget:  
 				 * 0 do nothing
 				 * -1 view previous file
@@ -157,23 +146,9 @@ struct hexedit_change_node {
    unsigned char              value;
 };
 
-#ifdef HAVE_X
-#ifdef WANT_WIDGETS
-void view_display_clean (WView *view, int h, int w);
-
-void x_destroy_view     (WView *);
-void x_create_viewer    (WView *);
-void x_focus_view       (WView *);
-void x_init_view        (WView *);
-
-void view_freeze (WView *view);
-void view_thaw (WView *view);
-#endif /* WANT_WIDGETS */
-#else
-#    define x_init_view(x)
-#    define x_destroy_view(x)
-#    define x_create_viewer(x)
-#    define x_focus_view(x)
-#endif /* !HAVE_X */
+#define x_init_view(x)
+#define x_destroy_view(x)
+#define x_create_viewer(x)
+#define x_focus_view(x)
 
 #endif	/* __VIEW_H */
