@@ -1139,7 +1139,7 @@ get_remote_stat(smbfs_connection *sc, char *path, struct stat *buf)
 	char *mypath = g_new(char, sizeof(path)+1);
 	mypath = g_strdup(path);
 
-	DEBUG(1, ("get_remote_stat(): mypath:%s\n", mypath));
+	DEBUG(3, ("get_remote_stat(): mypath:%s\n", mypath));
 
 	convert_path(&mypath, FALSE);
 

@@ -1,6 +1,8 @@
 1999-06-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* smbfs.c (get_stat_info): 2 line fixes from Wayne to check the
+	* smbfs.c 	(get_remote_stat): Change debug level.
+
+	(get_stat_info): 2 line fixes from Wayne to check the
 	cache properly.  WOOOOHOOOO!  Works like a charm.
 
 1999-06-14  Wayne Roberts <wroberts1@cx983858-b.orng1.occa.home.com>
