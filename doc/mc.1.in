@@ -1694,16 +1694,55 @@ confirmed by entering the word
 \&.
 By default this option is disabled.
 .PP
+.SH "    Layout"
+The layout dialog gives you a possibility to change the general layout
+of screen. You can specify whether the menubar, the command prompt,
+the hintbar and the function keybar are visible. On the Linux or SCO console
+you can specify how many lines are shown in the output window.
+.PP
+The rest of the screen area is used for the two directory panels. You
+can specify whether the area is split to the panels in vertical or
+horizontal direction. The split can be equal or you can specify an
+unequal split.
+.PP
+By default all contents of the directory panels are displayed with
+the same color, but you can specify whether
+.I permissions
+and
+.I file types
+are highlighted with special
+.\"LINK2"
+Colors.
+.\"Colors"
+If permission highlighting is enabled, the parts of the
+.I perm
+and
+.I mode
+.\"LINK2"
+display fields
+.\"Listing Mode..."
+which are valid for the user running Midnight Commander
+are highlighted with the color defined with the
+.I selected
+keyword. If file type highlighting is enabled, files are colored according
+to their file type (e.g. directory, core file, executable, ...).
+.PP
+If the
+.I Show Mini-Status
+option is enabled, one line of status
+information about the currently selected item is showed at the bottom
+of the panels.
+.PP
+.SH "    Confirmation"
+In this menu you configure the confirmation options for file deletion,
+overwriting, execution by pressing enter and quitting the program.
+.PP
 .SH "    Display bits"
 This is used to configure the range of visible characters on the
 screen.  This setting may be 7-bits if your terminal/curses supports
 only seven output bits, ISO-8859-1 displays all the characters in the
 ISO-8859-1 map and full 8 bits is for those terminals that can display
 full 8 bit characters.
-.PP
-.SH "    Confirmation"
-In this menu you configure the confirmation options for file deletion,
-overwriting, execution by pressing enter and quitting the program.
 .PP
 .SH "    Learn keys"
 This dialog allows you to test and redefine functional keys, cursor
@@ -1800,45 +1839,6 @@ the section on
 FTP File System
 .\"FTP File System"
 for more information.
-.PP
-.SH "    Layout"
-The layout dialog gives you a possibility to change the general layout
-of screen. You can specify whether the menubar, the command prompt,
-the hintbar and the function keybar are visible. On the Linux or SCO console
-you can specify how many lines are shown in the output window.
-.PP
-The rest of the screen area is used for the two directory panels. You
-can specify whether the area is split to the panels in vertical or
-horizontal direction. The split can be equal or you can specify an
-unequal split.
-.PP
-By default all contents of the directory panels are displayed with
-the same color, but you can specify whether
-.I permissions
-and
-.I file types
-are highlighted with special
-.\"LINK2"
-Colors.
-.\"Colors"
-If permission highlighting is enabled, the parts of the
-.I perm
-and
-.I mode
-.\"LINK2"
-display fields
-.\"Listing Mode..."
-which are valid for the user running Midnight Commander
-are highlighted with the color defined with the
-.I selected
-keyword. If file type highlighting is enabled, files are colored according
-to their file type (e.g. directory, core file, executable, ...).
-.PP
-If the
-.I Show Mini-Status
-option is enabled, one line of status
-information about the currently selected item is showed at the bottom
-of the panels.
 .PP
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
