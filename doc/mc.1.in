@@ -199,15 +199,19 @@ Some commands in the Midnight Commander involve the use of the
 .I Meta
 (sometimes labeled ALT or even Compose) keys. In this manual we will
 use the following abbreviations:
-.PP
-C-<chr> means hold the Control key while typing the character
-<chr>. Thus C-f would be: hold the Control key and type f.
-.PP
-M-<chr> means hold the Meta or Alt key down while typing <chr>. If
-there is no Meta or Alt key, type ESC, release it, then type the
-character <chr>.
-.PP
-S-<chr> means hold the Shift key down while typing <chr>.
+.TP
+.B C-<chr>
+means hold the Control key while typing the character <chr>.
+Thus C-f would be: hold the Control key and type f.
+.TP
+.B M-<chr>
+means hold the Meta or Alt key down while typing <chr>.
+If there is no Meta or Alt key, type
+.IR ESC , 
+release it, then type the character <chr>.
+.TP
+.B S-<chr>
+means hold the Shift key down while typing <chr>.
 .PP
 All input lines in the Midnight Commander use an approximation to
 the GNU Emacs editor's key bindings.
@@ -249,9 +253,9 @@ the input lines in the query dialogs.
 .\"NODE "  Miscellaneous Keys"
 .SH "  Miscellaneous Keys"
 Here are some keys which don't fall into any of the other categories:
-.PP
-.B Enter.
-If there is some text in the command line (the one at the bottom of
+.TP 
+.B Enter
+if there is some text in the command line (the one at the bottom of
 the panels), then that command is executed. If there is no text in the
 command line then if the selection bar is over a directory the
 Midnight Commander does a
@@ -264,72 +268,72 @@ extensions in the
 extensions file
 .\"Extension File Edit"
 then the corresponding command is executed.
-.PP
-.B C-l.
-Repaint all the information in the Midnight Commander.
-.PP
-.B C-x c.
-Run the
+.TP
+.B C-l
+repaint all the information in the Midnight Commander.
+.TP
+.B C-x c
+run the
 .\"LINK2"
 Chmod
 .\"Chmod"
 command on a file or on the tagged files.
-.PP
-.B C-x o.
-Run the
+.TP 
+.B C-x o
+run the
 .\"LINK2"
 Chown
 .\"Chown"
 command on the current file or on the tagged files.
-.PP
-.B C-x l.
-Run the link command.
-.PP
-.B C-x s.
-Run the symbolic link command.
-.PP
-.B C-x i.
-Set the other panel display mode to information.
-.PP
-.B C-x q.
-Set the other panel display mode to quick view.
-.PP
-.B C-x !.
-Execute the
+.TP
+.B C-x l
+run the link command.
+.TP
+.B C-x s
+run the symbolic link command.
+.TP
+.B C-x i
+set the other panel display mode to information.
+.TP
+.B C-x q
+set the other panel display mode to quick view.
+.TP
+.B C-x !
+execute the
 .\"LINK2"
 External panelize
 .\"External panelize"
 command.
-.PP
+.TP
 .B C-x h
-Run the
+run the
 .\"LINK2"
 add directory to hotlist
 .\"Hotlist"
 command.
-.PP
-.B M-!,
-Executes the Filtered view command, described in the
+.TP
+.B M-!
+executes the Filtered view command, described in the
 .\"LINK2"
 view command\&.
 .\"Internal File Viewer"
-.PP
-.B M-?,
-Executes the
+.TP
+.B M-?
+executes the
 .\"LINK2"
 Find file
 .\"Find File"
 command.
-.PP
-.B M-c,
-Pops up the
+.TP
+.B M-c
+pops up the
 .\"LINK2"
 quick cd
 .\"Quick cd"
 dialog.
-.PP
-.B C-o,
-When the program is being run in the Linux or SCO console or under an xterm,
+.TP
+.B C-o
+when the program is being run in the Linux or SCO console or under an xterm,
 it will show you the output of the previous command.  When ran on the
 Linux console, the Midnight Commander uses an external program
 (cons.saver) to handle saving and restoring of information on the
@@ -349,24 +353,24 @@ look at the section on
 .\"LINK2"
 Left and Right Menus\&.
 .\"Left and Right Menus"
-.PP
-.B Tab, C-i.
-Change the current panel. The old other panel becomes the new current
+.TP
+.B Tab, C-i
+change the current panel. The old other panel becomes the new current
 panel and the old current panel becomes the new other panel. The
 selection bar moves from the old current panel to the new current
 panel.
-.PP
-.B Insert, C-t.
-To tag files you may use the Insert key (the kich1 terminfo sequence)
+.TP
+.B Insert, C-t
+to tag files you may use the Insert key (the kich1 terminfo sequence)
 or the C-t (Control-t) sequence. To untag files, just retag a tagged
 file.
-.PP
-.B M-g, M-r, M-j.
-Used to select the top file in a panel, the middle file and the bottom one,
+.TP
+.B M-g, M-r, M-j
+used to select the top file in a panel, the middle file and the bottom one,
 respectively.
-.PP
-.B C-s, M-s.
-Start a filename search in the directory listing. When the search is
+.TP
+.B C-s, M-s
+start a filename search in the directory listing. When the search is
 active, the user input will be added to the search string instead of
 the command line. If the
 .I Show mini-status
@@ -378,21 +382,21 @@ or
 .I DEL
 keys can be used to correct typing mistakes. If C-s is pressed
 again, the next match is searched for.
-.PP
+.TP
 .B M-t
-Toggle the current display listing to show the next display listing
+toggle the current display listing to show the next display listing
 mode.  With this it is possible to quickly switch from long listing
 to regular listing and the user defined listing mode.
-.PP
-.B C-\\\\ (control-backslash).
-Show the
+.TP
+.B C-\\\\ (control-backslash)
+show the
 .\"LINK2"
 directory hotlist
 .\"Hotlist"
 and change to the selected directory.
-.PP
-.B + \ (plus).
-This is used to select (tag) a group of files. The Midnight Commander
+.TP
+.B + \ (plus)
+this is used to select (tag) a group of files. The Midnight Commander
 will prompt for a regular expression describing the group. When
 .I Shell Patterns
 are enabled, the regular expression is much like the regular
@@ -404,89 +408,89 @@ expressions (see ed (1)).
 .PP
 If the expression starts or ends with a slash (/), then it will select
 directories instead of files.
-.PP
-.B \\\\ (backslash).
-Use the "\\" key to unselect a group of files. This is the opposite of
+.TP
+.B \\\\ (backslash)
+use the "\\" key to unselect a group of files. This is the opposite of
 the Plus key.
-.PP
-.B up-key, C-p.
-Move the selection bar to the previous entry in the panel.
-.PP
-.B down-key, C-n.
-Move the selection bar to the next entry in the panel.
-.PP
-.B home, a1, M-<.
-Move the selection bar to the first entry in the panel.
-.PP
-.B end, c1, M->.
-Move the selection bar to the last entry in the panel.
-.PP
-.B next-page, C-v.
-Move the selection bar one page down.
-.PP
-.B prev-page, M-v.
-Move the selection bar one page up.
-.PP
-.B M-o,
-If the other panel is a listing panel and you are standing on a
+.TP
+.B up-key, C-p
+move the selection bar to the previous entry in the panel.
+.TP
+.B down-key, C-n
+move the selection bar to the next entry in the panel.
+.TP
+.B home, a1, M-<
+move the selection bar to the first entry in the panel.
+.TP
+.B end, c1, M->
+move the selection bar to the last entry in the panel.
+.TP
+.B next-page, C-v
+move the selection bar one page down.
+.TP
+.B prev-page, M-v
+move the selection bar one page up.
+.TP
+.B M-o
+if the other panel is a listing panel and you are standing on a
 directory in the current panel, then the other panel contents are set
 to the contents of the currently selected directory (like Emacs' dired
 C-o key) otherwise the other panel contents are set to the parent dir
 of the current dir.
-.PP
+.TP
 .B C-PageUp, C-PageDown
-Only when ran on the Linux console: does a chdir to ".." and to the
+only when ran on the Linux console: does a chdir to ".." and to the
 currently selected directory respectively.
-.PP
+.TP
 .B M-y
-Moves to the previous directory in the history, equivalent
+moves to the previous directory in the history, equivalent
 to depressing the '<' with the mouse.
-.PP
+.TP
 .B M-u
-Moves to the next directory in the history, equivalent
+moves to the next directory in the history, equivalent
 to depressing the '>' with the mouse.
-.PP
+.TP
 .B M-S-h, M-H
-Displays the directory history, equivalent to depressing the 'v' with
+displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .\"NODE "  Shell Command Line"
 .SH "  Shell Command Line"
 This section lists keys which are useful to avoid excessive typing when
 entering shell commands.
-.PP
-.B M-Enter.
-Copy the currently selected file name to the command line.
-.PP
-.B C-Enter.
-Same a M-Enter, this one only works on the Linux console.
-.PP
-.B M-Tab.
-Does the filename, command, variable, username and hostname
+.TP
+.B M-Enter
+copy the currently selected file name to the command line.
+.TP
+.B C-Enter
+same a M-Enter, this one only works on the Linux console.
+.TP
+.B M-Tab
+does the filename, command, variable, username and hostname
 .\"LINK2"
 completion
 .\"Completion"
 for you.
-.PP
-.B C-x t, C-x C-t.
-Copy the tagged files (or if there are no tagged files, the selected
+.TP
+.B C-x t, C-x C-t
+copy the tagged files (or if there are no tagged files, the selected
 file) of the current panel (C-x t) or of the other panel (C-x C-t) to
 the command line.
-.PP
-.B C-x p, C-x C-p.
-The first key sequence copies the current path name to the command
+.TP
+.B C-x p, C-x C-p
+the first key sequence copies the current path name to the command
 line, and the second one copies the unselected panel's path name to
 the command line.
-.PP
-.B C-q.
-The quote command can be used to insert characters that are otherwise
+.TP
+.B C-q
+the quote command can be used to insert characters that are otherwise
 interpreted by the Midnight Commander (like the '+' symbol)
-.PP
-.B M-p, M-n.
-Use these keys to browse through the command history. M-p takes you
+.TP
+.B M-p, M-n
+use these keys to browse through the command history. M-p takes you
 to the last entry, M-n takes you to the next one.
-.PP
-.B M-h.
-Displays the history for the current input line.
+.TP
+.B M-h
+displays the history for the current input line.
 .\"NODE "  General Movement Keys"
 .SH "  General Movement Keys"
 The help viewer, the file viewer and the directory tree use common
@@ -495,39 +499,39 @@ keys. Each of them also accepts some keys of its own.
 .PP
 Other parts of the Midnight Commander use some of the same movement
 keys, so this section may be of use for those parts too.
-.PP
-.B Up, C-p.
-Moves one line backward.
-.PP
-.B Down, C-n.
-Moves one line forward.
-.PP
-.B Prev Page, Page Up, M-v.
-Moves one page up.
-.PP
-.B Next Page, Page Down, C-v.
-Moves one page down.
-.PP
-.B Home, A1.
-Moves to the beginning.
-.PP
-.B End, C1.
-Move to the end.
+.TP
+.B Up, C-p
+moves one line backward.
+.TP
+.B Down, C-n
+moves one line forward.
+.TP
+.B Prev Page, Page Up, M-v
+moves one page up.
+.TP
+.B Next Page, Page Down, C-v
+moves one page down.
+.TP
+.B Home, A1
+moves to the beginning.
+.TP
+.B End, C1
+move to the end.
 .PP
 The help viewer and the file viewer accept the following keys in
 addition the to ones mentioned above:
-.PP
-.B b, C-b, C-h, Backspace, Delete.
-Moves one page up.
-.PP
-.B Space bar.
-Moves one page down.
-.PP
-.B u, d.
-Moves one half of a page up or down.
-.PP
-.B g, G.
-Moves to the beginning or to the end.
+.TP
+.B b, C-b, C-h, Backspace, Delete
+moves one page up.
+.TP
+.B Space bar
+moves one page down.
+.TP
+.B u, d
+moves one half of a page up or down.
+.TP
+.B g, G
+moves to the beginning or to the end.
 .\"NODE "  Input Line Keys"
 .SH "  Input Line Keys"
 The input lines (they are used for the
@@ -535,54 +539,54 @@ The input lines (they are used for the
 command line
 .\"Shell Command Line"
 and for the query dialogs in the program) accept these keys:
-.PP
+.TP
 .B C-a
 puts the cursor at the beginning of line.
-.PP
+.TP
 .B C-e
 puts the cursor at the end of the line.
-.PP
+.TP
 .B C-b, move-left
 move the cursor one position left.
-.PP
+.TP
 .B C-f, move-right
 move the cursor one position right.
-.PP
+.TP
 .B M-f
 moves one word forward.
-.PP
+.TP
 .B M-b
 moves one word backward.
-.PP
+.TP
 .B C-h, backspace
 delete the previous character.
-.PP
+.TP
 .B C-d, Delete
 delete the character in the point (over the cursor).
-.PP
+.TP
 .B C-@
 sets the mark for cutting.
-.PP
+.TP
 .B C-w
 copies the text between the cursor and the mark to a kill buffer and
 removes the text from the input line.
-.PP
+.TP
 .B M-w
 copies the text between the cursor and the mark to a kill buffer.
-.PP
+.TP
 .B C-y
 yanks back the contents of the kill buffer.
-.PP
+.TP
 .B C-k
 kills the text from the cursor to the end of the line.
-.PP
+.TP
 .B M-p, M-n
 Use these keys to browse through the command history. M-p takes you
 to the last entry, M-n takes you to the next one.
-.PP
+.TP
 .B M-C-h, M-Backspace
 delete one word backward.
-.PP
+.TP
 .B M-Tab
 does the filename, command, variable, username and hostname
 .\"LINK2"
