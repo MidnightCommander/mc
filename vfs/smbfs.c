@@ -481,7 +481,7 @@ chkpath(struct cli_state *cli, char *path, BOOL send_only)
 	return True;
 }
 
-//#if 0
+/* #if 0 */
 static int
 fs (char *text)
 {
@@ -496,7 +496,7 @@ fs (char *text)
 		return strlen(text);
 	return count;
 }
-//#endif
+/* #endif */
 
 static int
 smbfs_loaddir (opendir_info *smbfs_info)
@@ -511,7 +511,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 
 	DEBUG(3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
 	first_direntry = TRUE;
-//#if 0
+
 	if (current_info) {
 		DEBUG(3, ("smbfs_loaddir: new:'%s', cached:'%s'\n", my_dirname, current_info->dirname));
 		/* if new desired dir is longer than cached in current_info */
@@ -520,7 +520,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 			previous_info = current_info;
 		}
 	}
-//#endif
+
 	current_info = smbfs_info;
 
 	if (strcmp(my_dirname, "/") == 0) {
