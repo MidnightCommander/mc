@@ -128,6 +128,7 @@
 #    include "src/help.h"
 #    include "src/key.h"
 #    include "src/wtools.h"		/* for QuickWidgets */
+#    include "src/cmd.h"		/* for menu_edit_cmd */
 #    include "src/win.h"
 #    include "vfs/vfs.h"
 #    include "src/menu.h"
@@ -165,6 +166,8 @@
 #      define N_(x) x
 #   endif
 #include "vfs/vfs.h"
+#include "src/dialog.h"		/* for input_dialog() */
+#include "src/util.h"		/* for is_printable() */
 #    define CDisplay gdk_display
 #    define CRoot gdk_root_parent
 #    define Window GtkEdit *
@@ -461,6 +464,8 @@ void user_menu (WEdit *edit);
 
 #ifdef MIDNIGHT
 
+#include "src/user.h" /* for user_menu_cmd, must be after edit-widget.h */
+
 #define CPushFont(x,y)
 #define CPopFont()
 #define FIXED_FONT 1
@@ -621,10 +626,6 @@ extern int gtk_edit_fixed_font;
 extern Display             *gdk_display;
 extern Window               gdk_root_window;
 */
-
-enum {
- match_file, match_normal
-};
 
 #        define edit_get_load_file(d,f,h) gtk_edit_dialog_get_load_file(d,f,h)
 #        define edit_get_save_file(d,f,h) gtk_edit_dialog_get_save_file(d,f,h)

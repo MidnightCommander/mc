@@ -441,7 +441,7 @@ void edit_split_filename (WEdit * edit, const char *f)
 
 static char cwd[1040];
 
-static char *canonicalize_pathname (const char *p)
+static char *edit_canonicalize_pathname (const char *p)
 {
     char *q, *r;
     char *t = NULL;
@@ -500,7 +500,7 @@ void edit_split_filename (WEdit * edit, const char *longname)
 {
     char *exp, *p;
 #ifdef	GTK
-    exp = canonicalize_pathname (longname);
+    exp = edit_canonicalize_pathname (longname);
 #else
     exp = pathdup (longname);	/* this ensures a full path */
 #endif

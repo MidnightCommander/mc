@@ -1,5 +1,11 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* editcmd.c (canonicalize_pathname) [GTK]: Rename to ...
+	(edit_canonicalize_pathname): ... this to avoid namespace clash.
+	* edit.h [MIDNIGHT]: Include "src/cmd.h" and "src/user.h".
+	Remove declarations duplicating "src/user.h".
+	[GTK]: Include "src/dialog.h" and "src/util.h".
+
 	* editmenu.c (edit_wrap_cmd): Fix declaration.
 	(edit_about_cmd): Likewise.
 	* editwidget.c (get_key_state): Likewise.
