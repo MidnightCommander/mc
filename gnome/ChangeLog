@@ -1,3 +1,33 @@
+1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	Wheeeee!  Desktop icons can be selected by rubberbanding.  You
+	need Englightenment to do this, as so far it seems to be the only
+	WM with support for the _WIN_DESKTOP_BUTTON_PROXY property.
+
+	* gdesktop.c (click_proxy_filter): New event filter for button
+	presses and releases on the root window.
+	(click_proxy_button_press): New function to handle button presses
+	on the desktop.
+	(click_proxy_button_release): New function to handle button
+	releases on the desktop.
+	(click_proxy_motion): New function to handle rubberbanding motion
+	on the desktop.
+	(setup_xdnd_proxy): Flush the server after ungrabbing it.
+	(find_click_proxy_window): Flush the server after ungrabbing it.
+	(store_temp_selection): Stores the temporary selection to the
+	master selection, or viceversa.  This is needed for dynamic
+	updating while the user rubberbands.
+	(update_drag_selection): New function to update the selection
+	while the user is rubberbanding on the desktop.
+	(icon_is_in_area): New function to see if an icon is inside the
+	rubberbanding area.
+
+	* gdesktop-icon.h: Added fields for querying the icon and text
+	position and size.
+
+	* gdesktop-icon.c (desktop_icon_reshape): Set the position and
+	size fields as computed for layout.
+
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gdesktop.c (editing_started): Grab on the window for the

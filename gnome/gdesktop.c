@@ -50,14 +50,15 @@
 
 /* This structure defines the information carried by a desktop icon */
 struct desktop_icon_info {
-	GtkWidget *dicon;	      /* The desktop icon widget */
-	int x, y;		      /* Position in the desktop */
-	int slot;		      /* Index of the slot the icon is in, or -1 for none */
-	char *filename;		      /* The file this icon refers to (relative to the desktop_directory) */
-	int selected : 1;	      /* Is the icon selected? */
-	int finishing_selection : 1;  /* Flag set while we are releasing button
-				       * after selecting in the text
-				       */
+	GtkWidget *dicon;		/* The desktop icon widget */
+	int x, y;			/* Position in the desktop */
+	int slot;			/* Index of the slot the icon is in, or -1 for none */
+	char *filename;			/* The file this icon refers to (relative to the desktop_directory) */
+	int selected : 1;		/* Is the icon selected? */
+	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
+	int finishing_selection : 1;	/* Flag set while we are releasing
+					 * button after selecting in the text
+					 */
 };
 
 struct layout_slot {
@@ -123,6 +124,20 @@ static int dnd_select_icon_pending;
 /* Proxy window for clicks on the root window */
 static GdkWindow *click_proxy_gdk_window;
 static GtkWidget *click_proxy_invisible;
+
+/* GC for drawing the rubberband rectangle */
+static GdkGC *click_gc;
+
+/* Starting click position and event state for rubberbanding on the desktop */
+static int click_start_x;
+static int click_start_y;
+static int click_start_state;
+
+/* Current mouse position for rubberbanding on the desktop */
+static int click_current_x;
+static int click_current_y;
+
+static int click_dragging;
 
 
 static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
@@ -971,8 +986,6 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 	char *filename;
 	file_entry *fe;
 
-	printf ("Here!\n");
-
 	dii = user_data;
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
@@ -1234,6 +1247,7 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 	gdk_error_warnings = old_warnings;
   
 	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
 
 	if (!proxy) {
 		/* Mark our window as a valid proxy window with a XdndProxy
@@ -1446,6 +1460,7 @@ find_click_proxy_window (void)
 	gdk_error_warnings = old_warnings;
 
 	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
 
 	if (proxy)
 		proxy_gdk_window = gdk_window_foreign_new (proxy);
@@ -1455,18 +1470,277 @@ find_click_proxy_window (void)
 	return proxy_gdk_window;
 }
 
-/* Handles events on the root window via the click_proxy_gdk_window */
-static gint
-click_proxy_event (GtkWidget *widget, GdkEvent *event, gpointer data)
+/* Executes the popup menu for the desktop */
+static void
+desktop_popup (GdkEventButton *event)
 {
-	printf ("Click proxy event %d\n", event->type);
+	printf ("FIXME: display desktop popup menu\n");
+}
+
+/* Draws the rubberband rectangle for selecting icons on the desktop */
+static void
+draw_rubberband (int x, int y)
+{
+	int x1, y1, x2, y2;
+
+	if (click_start_x < x) {
+		x1 = click_start_x;
+		x2 = x;
+	} else {
+		x1 = x;
+		x2 = click_start_x;
+	}
+
+	if (click_start_y < y) {
+		y1 = click_start_y;
+		y2 = y;
+	} else {
+		y1 = y;
+		y2 = click_start_y;
+	}
+	
+	gdk_draw_rectangle (GDK_ROOT_PARENT (), click_gc, FALSE, x1, y1, x2 - x1, y2 - y1);
+}
+
+/* Stores dii->selected into dii->tmp_selected to keep the original selection
+ * around while the user is rubberbanding.
+ */
+static void
+store_temp_selection (void)
+{
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			dii->tmp_selected = dii->selected;
+		}
+}
+
+/* Returns TRUE if the specified icon is at least partially inside the specified
+ * area, or FALSE otherwise.
+ */
+static int
+icon_is_in_area (struct desktop_icon_info *dii, int x1, int y1, int x2, int y2)
+{
+	DesktopIcon *dicon;
+
+	dicon = DESKTOP_ICON (dii->dicon);
+
+	/* FIXME: this only intersects the rectangle with the icon image's
+	 * bounds.  Doing the "hard" intersection with the actual shape of the
+	 * image is left as an exercise to the reader.
+	 */
+
+	x1 -= dii->x;
+	y1 -= dii->y;
+	x2 -= dii->x;
+	y2 -= dii->y;
+
+	if (x1 < dicon->icon_x + dicon->icon_w - 1
+	    && x2 > dicon->icon_x
+	    && y1 < dicon->icon_y + dicon->icon_h - 1
+	    && y2 > dicon->icon_y)
+		return TRUE;
+
+	if (x1 < dicon->text_x + dicon->text_w - 1
+	    && x2 > dicon->text_x
+	    && y1 < dicon->text_y + dicon->text_h - 1
+	    && y2 > dicon->text_y)
+		return TRUE;
+
 	return FALSE;
 }
+
+/* Update the selection being rubberbanded.  It selects or unselects the icons
+ * as appropriate.
+ */
+static void
+update_drag_selection (int x, int y)
+{
+	int x1, y1, x2, y2;
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+	int additive, invert, in_area;
+
+	if (click_start_x < x) {
+		x1 = click_start_x;
+		x2 = x;
+	} else {
+		x1 = x;
+		x2 = click_start_x;
+	}
+
+	if (click_start_y < y) {
+		y1 = click_start_y;
+		y2 = y;
+	} else {
+		y1 = y;
+		y2 = click_start_y;
+	}
+
+	/* Select or unselect icons as appropriate */
+
+	additive = click_start_state & GDK_SHIFT_MASK;
+	invert = click_start_state & GDK_CONTROL_MASK;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			in_area = icon_is_in_area (dii, x1, y1, x2, y2);
+
+			if (in_area) {
+				if (invert) {
+					if (dii->selected == dii->tmp_selected) {
+						desktop_icon_select (DESKTOP_ICON (dii->dicon), !dii->selected);
+						dii->selected = !dii->selected;
+					}
+				} else if (additive) {
+					if (!dii->selected) {
+						desktop_icon_select (DESKTOP_ICON (dii->dicon), TRUE);
+						dii->selected = TRUE;
+					}
+				} else {
+					if (!dii->selected) {
+						desktop_icon_select (DESKTOP_ICON (dii->dicon), TRUE);
+						dii->selected = TRUE;
+					}
+				}
+			} else if (dii->selected != dii->tmp_selected) {
+				desktop_icon_select (DESKTOP_ICON (dii->dicon), dii->tmp_selected);
+				dii->selected = dii->tmp_selected;
+			}
+
+		}
+}
+
+/* Handles button presses on the root window via the click_proxy_gdk_window */
+static gint
+click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	if (event->button == 1) {
+		click_start_x = event->x;
+		click_start_y = event->y;
+		click_start_state = event->state;
+
+		XGrabServer (GDK_DISPLAY ());
+
+		gdk_pointer_grab (GDK_ROOT_PARENT (),
+				  FALSE,
+				  GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK,
+				  NULL,
+				  NULL,
+				  event->time);
+
+		/* If no modifiers are pressed, we unselect all the icons */
+
+		if ((click_start_state & (GDK_SHIFT_MASK | GDK_CONTROL_MASK)) == 0)
+			unselect_all (NULL);
+
+		store_temp_selection (); /* Save the original selection */
+
+		draw_rubberband (event->x, event->y);
+		click_current_x = event->x;
+		click_current_y = event->y;
+		click_dragging = TRUE;
+
+		return TRUE;
+	} else if (event->button == 3) {
+		desktop_popup (event);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+/* Handles button releases on the root window via the click_proxy_gdk_window */
+static gint
+click_proxy_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	if (!click_dragging || event->button != 1)
+		return FALSE;
+
+	draw_rubberband (click_current_x, click_current_y);
+	gdk_pointer_ungrab (event->time);
+	click_dragging = FALSE;
+
+	update_drag_selection (event->x, event->y);
+
+	XUngrabServer (GDK_DISPLAY ());
+
+	return TRUE;
+}
+
+/* Handles motion events when dragging the icon-selection rubberband on the desktop */
+static gint
+click_proxy_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
+{
+	if (!click_dragging)
+		return FALSE;
+
+	draw_rubberband (click_current_x, click_current_y);
+	draw_rubberband (event->x, event->y);
+	update_drag_selection (event->x, event->y);
+	click_current_x = event->x;
+	click_current_y = event->y;
+
+	return TRUE;
+}
+
+/* Filter that translates proxied events from virtual root windows into normal
+ * Gdk events for the click_proxy_invisible widget.
+ */
+static GdkFilterReturn
+click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
+{
+	XEvent *xev;
+
+	xev = xevent;
+
+	switch (xev->type) {
+	case ButtonPress:
+	case ButtonRelease:
+		if (xev->type == ButtonPress)
+			event->button.type = GDK_BUTTON_PRESS;
+		else
+			event->button.type = GDK_BUTTON_RELEASE;
+
+		gdk_window_ref (click_proxy_gdk_window);
+
+		event->button.window = click_proxy_gdk_window;
+		event->button.send_event = xev->xbutton.send_event;
+		event->button.time = xev->xbutton.time;
+		event->button.x = xev->xbutton.x;
+		event->button.y = xev->xbutton.y;
+		event->button.state = xev->xbutton.state;
+		event->button.button = xev->xbutton.button;
+		break;
+
+	default:
+		return GDK_FILTER_CONTINUE;
+	}
+
+	return GDK_FILTER_TRANSLATE;
+}
+
+#define gray50_width 2
+#define gray50_height 2
+static char gray50_bits[] = {
+  0x02, 0x01, };
 
 /* Sets up the window manager proxy window to receive clicks on the desktop root window */
 static void
 setup_desktop_clicks (void)
 {
+	GdkColormap *cmap;
+	GdkColor color;
+	GdkBitmap *stipple;
+
 	click_proxy_gdk_window = find_click_proxy_window ();
 	if (!click_proxy_gdk_window) {
 		g_warning ("Root window clicks will not work as no GNOME-compliant window manager could be found!");
@@ -1475,15 +1749,48 @@ setup_desktop_clicks (void)
 
 	click_proxy_invisible = gtk_invisible_new ();
 	gtk_widget_show (click_proxy_invisible);
-	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible); /* make it send events to us */
+
+	/* Make the proxy and the root windows send events to the invisible proxy widget */
+
+	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible);
+	gdk_window_set_user_data (GDK_ROOT_PARENT (), click_proxy_invisible);
+
+	/* Add our filter to translate virtual root window events into Gdk events */
+
+	gdk_window_add_filter (GDK_ROOT_PARENT (), click_proxy_filter, NULL);
 
 	/* The proxy window for clicks sends us events as SubstructureNotify things */
 
 	XSelectInput (GDK_DISPLAY (), GDK_WINDOW_XWINDOW (click_proxy_gdk_window), SubstructureNotifyMask);
 
-	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "event",
-			    (GtkSignalFunc) click_proxy_event,
+	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "button_press_event",
+			    (GtkSignalFunc) click_proxy_button_press,
 			    NULL);
+	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "button_release_event",
+			    (GtkSignalFunc) click_proxy_button_release,
+			    NULL);
+	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "motion_notify_event",
+			    (GtkSignalFunc) click_proxy_motion,
+			    NULL);
+
+	/* Create the GC to paint the rubberband rectangle */
+
+	click_gc = gdk_gc_new (GDK_ROOT_PARENT ());
+
+	cmap = gdk_window_get_colormap (GDK_ROOT_PARENT ());
+
+	gdk_color_white (cmap, &color);
+	if (color.pixel == 0)
+		gdk_color_black (cmap, &color);
+
+	gdk_gc_set_foreground (click_gc, &color);
+	gdk_gc_set_function (click_gc, GDK_XOR);
+
+	gdk_gc_set_fill (click_gc, GDK_STIPPLED);
+
+	stipple = gdk_bitmap_create_from_data (NULL, gray50_bits, gray50_width, gray50_height);
+	gdk_gc_set_stipple (click_gc, stipple);
+	gdk_bitmap_unref (stipple);
 }
 
 /**

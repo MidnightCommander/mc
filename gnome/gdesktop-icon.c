@@ -407,6 +407,16 @@ desktop_icon_reshape (DesktopIcon *dicon)
 
 	gtk_widget_set_usize (GTK_WIDGET (dicon), dicon->width, dicon->height);
 	create_window_shape (dicon, icon_width, icon_height, text_width, text_height);
+
+	dicon->icon_x = (int) ((dicon->width - icon_width) / 2.0 + 0.5);
+	dicon->icon_y = 0;
+	dicon->icon_w = icon_width;
+	dicon->icon_h = icon_height;
+
+	dicon->text_x = x1;
+	dicon->text_y = y1;
+	dicon->text_w = text_width;
+	dicon->text_h = text_height;
 }
 
 /**

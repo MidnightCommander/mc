@@ -40,6 +40,11 @@ struct _DesktopIcon {
 
 	int width, height;		/* Total size of the window */
 
+	int icon_x, icon_y;		/* Icon offsets */
+	int icon_w, icon_h;		/* Icon size */
+	int text_x, text_y;		/* Text offsets */
+	int text_w, text_h;		/* Text size */
+
 	int w_changed_id;		/* Signal connection ID for "width_changed" from the icon text item */
 	int h_changed_id;		/* Signal connection ID for "height_changed" from the icon text item */
 };
