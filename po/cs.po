@@ -1319,7 +1319,7 @@ msgstr "Symbolický odkaz..."
 
 #: gnome/gpopup2.c:203
 msgid "Edit Symlink..."
-msgstr "Upravit sybmolický odkaz..."
+msgstr "Upravit symbolický odkaz..."
 
 #: gnome/gpopup2.c:205
 msgid "Properties..."
