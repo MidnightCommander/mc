@@ -633,12 +633,12 @@ AC_DEFUN([AC_WITH_SLANG], [
 	if $slang_use_system_installed_lib
 	then
 	    AC_DEFINE(HAVE_SYSTEM_SLANG)
-	    LSLANG="-lslang"
+	    MCLIBS="-lslang $MCLIBS"
 	    screen_manager="SLang (system-installed library)"
 	    AC_MSG_RESULT([Using system installed SLang library])
 	    rm -f slang/slang.h
 	    ac_save_LIBS="$LIBS"
-	    LIBS="$LIBS $LSLANG"
+	    LIBS="$LIBS -lslang"
 	    AC_TRY_RUN(
 	    [ 
 	    #ifdef SLANG_H_INSIDE_SLANG_DIR
@@ -654,9 +654,7 @@ AC_DEFUN([AC_WITH_SLANG], [
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
-    	    LIBSLANG="libmcslang.a"
 	    screen_manager="SLang"
-	    LSLANG="-lmcslang"
 	    CPPFLAGS="$CPPFLAGS -I../slang"
 	    fastdepslang=fastdepslang
 	    mkdir -p slang

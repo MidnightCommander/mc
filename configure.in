@@ -567,17 +567,12 @@ AC_ARG_WITH(included-slang,
 	fi]
 )
 
-LIBSLANG=""
-LSLANG=""
 AC_ARG_WITH(slang,
 	[--with-slang		   Compile with the slang screen manager],[
 	if test x$withval = xyes; then
 		AC_WITH_SLANG
 	fi
 ])
-
-AC_SUBST(LIBSLANG)
-AC_SUBST(LSLANG)
 
 LIBEDIT_A=""
 MCEDIT=""
@@ -797,7 +792,8 @@ AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$SAMBAFILES"])
 AM_CONDITIONAL(MCSERV_INSTALL,
 	       [test "x$enable_mcserv_install$mcserv" = xyesmcserv])
-AM_CONDITIONAL(INCLUDED_SLANG, [test -n "$LIBSLANG"])
+AM_CONDITIONAL(INCLUDED_SLANG,
+	       [test "x$slang_use_system_installed_lib" = xfalse])
 AM_CONDITIONAL(CHARSET, [test -n "$have_charset"])
 AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
