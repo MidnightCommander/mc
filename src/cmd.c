@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#ifdef HAVE_PARAM_H
+#ifdef HAVE_SYS_PARAM_H
 #   include <sys/param.h>
 #endif
 
