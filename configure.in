@@ -96,7 +96,6 @@ if test "x$USE_NLS" = xyes; then
     else
 	langs="$LINGUAS"
     fi
-    echo srcdir=$srcdir
 else
     langs=
 fi
