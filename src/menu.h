@@ -1,11 +1,6 @@
 #ifndef __MENU_H
 #define __MENU_H
 
-/* IMPORTANT NOTE: This header is dependent on HAVE_X / HAVE_XVIEW. If you
- * include this header, you have to move it to the group of HAVE_X dependant
- * modules in {xv|tk}/Makefile.in !!!
- */
- 
 #include "dlg.h"
 #include "widget.h"
 
@@ -21,11 +16,6 @@ typedef struct {
     callfn call_back;
 } menu_entry;
 
-#ifdef HAVE_XVIEW
-#   ifndef xview_walkmenu_DEFINED
-        typedef unsigned long Menu;
-#   endif
-#else
 typedef struct {
     char   *name;
     int    count;
@@ -36,7 +26,6 @@ typedef struct {
     int    start_x;		/* position relative to menubar start */
 } sMenu;
 typedef sMenu *Menu;
-#endif
 
 extern int menubar_visible;
 

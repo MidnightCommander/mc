@@ -66,20 +66,6 @@
 
   - the interal editor adds it's entries to the wrong menu
 
-* XView/mc
-
-  - Dropping files on root window should create action icon.
-
-  - Fix the viewer.
-
-  - Fix help.
-
-  - Icons for buttonbar.
-
-  - Info panel.
-
-  - Tree panel.
-
 * Configuration 
 
 * Documentation
