@@ -141,7 +141,6 @@ void vfs_release_path (const char *dir);
 void vfs_fill_names (void (*)(char *));
 char *vfs_translate_url (const char *);
 
-void ftpfs_set_debug (const char *file);
 #ifdef USE_NETCODE
 void ftpfs_flushdir (void);
 extern int use_netrc;

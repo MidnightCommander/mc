@@ -1,5 +1,8 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_setctl): Add support to VFS_SETCTL_LOGFILE.
+	* ftpfs.c (ftpfs_set_debug): Remove.
+
 	* names.c: Merge ...
 	* utilvfs.c: ... here.
 	* names.h: Merge ...

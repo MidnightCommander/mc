@@ -995,17 +995,23 @@ vfs_s_getlocalcopy (struct vfs_class *me, char *path)
 static int
 vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 {
-    struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
-    if (!ino)
-	return 0;
     switch (ctlop) {
     case VFS_SETCTL_STALE_DATA:
-	if (arg)
-	    ino->super->want_stale = 1;
-	else {
-	    ino->super->want_stale = 0;
-	    vfs_s_invalidate (me, ino->super);
+	{
+	    struct vfs_s_inode *ino = vfs_s_inode_from_path (me, path, 0);
+
+	    if (!ino)
+		return 0;
+	    if (arg)
+		ino->super->want_stale = 1;
+	    else {
+		ino->super->want_stale = 0;
+		vfs_s_invalidate (me, ino->super);
+	    }
+	    return 1;
 	}
+    case VFS_SETCTL_LOGFILE:
+	MEDATA->logfile = fopen ((char *) arg, "w");
 	return 1;
     }
     return 0;

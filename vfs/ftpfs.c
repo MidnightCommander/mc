@@ -131,9 +131,6 @@ int ftpfs_always_use_proxy;
 /* source routing host */
 extern int source_route;
 
-/* Where we store the transactions */
-static FILE *logfile = NULL;
-
 /* If true, the directory cache is forced to reload */
 static int force_expiration = 0;
 
@@ -178,9 +175,9 @@ translate_path (struct vfs_class *me, struct vfs_s_super *super, const char *rem
     else {
 	char *ret, *p;
 
-	if (logfile) {
-	    fprintf (logfile, "MC -- translate_path: %s\n", remote_path);
-	    fflush (logfile);
+	if (MEDATA->logfile) {
+	    fprintf (MEDATA->logfile, "MC -- translate_path: %s\n", remote_path);
+	    fflush (MEDATA->logfile);
 	}
 
 	/* strip leading slash(es) */
@@ -339,13 +336,13 @@ command (struct vfs_class *me, struct vfs_s_super *super, int wait_reply, const 
     strcpy (cmdstr + cmdlen, "\r\n");
     cmdlen += 2;
 
-    if (logfile) {
+    if (MEDATA->logfile) {
 	if (strncmp (cmdstr, "PASS ", 5) == 0) {
-	    fputs ("PASS <Password not logged>\r\n", logfile);
+	    fputs ("PASS <Password not logged>\r\n", MEDATA->logfile);
 	} else
-	    fwrite (cmdstr, cmdlen, 1, logfile);
+	    fwrite (cmdstr, cmdlen, 1, MEDATA->logfile);
 
-	fflush (logfile);
+	fflush (MEDATA->logfile);
     }
 
     got_sigpipe = 0;
@@ -452,7 +449,7 @@ login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrc
 	}
     }
 
-    if (!anon || logfile)
+    if (!anon || MEDATA->logfile)
 	pass = op;
     else {
 	pass = g_strconcat ("-", op, NULL);
@@ -472,10 +469,10 @@ login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrc
 	== COMPLETE) {
 	g_strup (reply_string);
 	SUP.remote_is_amiga = strstr (reply_string, "AMIGA") != 0;
-	if (logfile) {
-	    fprintf (logfile, "MC -- remote_is_amiga =  %d\n",
+	if (MEDATA->logfile) {
+	    fprintf (MEDATA->logfile, "MC -- remote_is_amiga =  %d\n",
 		     SUP.remote_is_amiga);
-	    fflush (logfile);
+	    fflush (MEDATA->logfile);
 	}
 
 	print_vfs_message (_("ftpfs: sending login name"));
@@ -1177,9 +1174,9 @@ resolve_symlink_with_ls_options(struct vfs_class *me, struct vfs_s_super *super,
 	while (1) {
 	    if (fgets (buffer, sizeof (buffer), fp) == NULL)
 		goto done;
-	    if (logfile){
-		fputs (buffer, logfile);
-	        fflush (logfile);
+	    if (MEDATA->logfile){
+		fputs (buffer, MEDATA->logfile);
+	        fflush (MEDATA->logfile);
 	    }
 vfs_die("This code should be commented out\n");
 	    if (vfs_parse_ls_lga (buffer, &s, &filename, NULL)) {
@@ -1317,10 +1314,10 @@ again:
 	    return -1;
 	}
 
-	if (logfile){
-	    fputs (buffer, logfile);
-            fputs ("\n", logfile);
-	    fflush (logfile);
+	if (MEDATA->logfile){
+	    fputs (buffer, MEDATA->logfile);
+            fputs ("\n", MEDATA->logfile);
+	    fflush (MEDATA->logfile);
 	}
 
 	ent = vfs_s_generate_entry(me, NULL, dir, 0);
@@ -1748,15 +1745,6 @@ ftpfs_fill_names (struct vfs_class *me, void (*func)(char *))
     }
 }
 
-static struct vfs_s_subclass ftpfs_subclass;
-
-void ftpfs_set_debug (const char *file)
-{
-    logfile = fopen (file, "w+");
-    if (logfile)
-	ftpfs_subclass.logfile = logfile;
-}
-
 static char buffer[BUF_MEDIUM];
 static char *netrc, *netrcp;
 
@@ -2027,6 +2015,8 @@ static int lookup_netrc (const char *host, char **login, char **pass)
 void
 init_ftpfs (void)
 {
+    static struct vfs_s_subclass ftpfs_subclass;
+
     ftpfs_subclass.archive_same = archive_same;
     ftpfs_subclass.open_archive = open_archive;
     ftpfs_subclass.free_archive = free_archive;
