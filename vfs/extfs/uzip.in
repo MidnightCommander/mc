@@ -34,6 +34,14 @@ my $cmd_delete = "$app_zip -d";
 # Command used to extract a file to standard out
 my $cmd_extract = "$app_unzip -p";
 
+# -rw-r--r--  2.2 unx     2891 tx     1435 defN 20000330.211927 ./edit.html
+# (perm) (?) (?) (size) (?) (zippedsize) (method) (yyyy)(mm)(dd)(HH)(MM) (fname)
+my $regex_zipinfo_line = qr"^(\S{10})\s+(\d+\.\d+)\s+(\S+)\s+(\d+)\s+(\S\S)\s+(\d+)\s+(\S{4})\s+(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d)\s(.*)$";
+
+#     2891  Defl:N     1435  50%  03-30-00 21:19  50cbaaf8  ./edit.html
+# (size) (method) (zippedsize) (zipratio) (mm)(dd)(yy)(HH)(MM) (cksum) (fname)
+my $regex_nonzipinfo_line = qr"^\s*(\d+)\s+(\S+)\s+(\d+)\s+(-?\d+\%)\s+(\d?\d)-(\d?\d)-(\d\d)\s+(\d?\d):(\d\d)\s+([0-9a-f]+)\s\s(.*)$";
+
 #
 # Main code
 #
@@ -50,6 +58,50 @@ my $aarchive = absolutize($archive, $oldpwd);
 my $cmd_list = ($op_has_zipinfo ? $cmd_list_zi : $cmd_list_nzi);
 my ($qarchive, $aqarchive) = map (quotemeta, $archive, $aarchive);
 
+# Strip all "." and ".." path components from a pathname.
+sub zipfs_canonicalize_pathname($) {
+  my ($fname) = @_;
+  $fname =~ s,/+,/,g;
+  $fname =~ s,(^|/)(?:\.?\./)+,$1,;
+  return $fname;
+}
+
+# The Midnight Commander never calls this script with archive pathnames
+# starting with either "./" or "../". Some ZIP files contain such names,
+# so we need to build a translation table for them.
+my $zipfs_realpathname_table = undef;
+sub zipfs_realpathname($) {
+    my ($fname) = @_;
+
+    if (!defined($zipfs_realpathname_table)) {
+        $zipfs_realpathname_table = {};
+	if (!open(ZIP, "$cmd_list $qarchive |")) {
+	    return $fname;
+	}
+	foreach my $line (<ZIP>) {
+	    $line =~ s/\r*\n*$//;
+	    if ($op_has_zipinfo) {
+		if ($line =~ $regex_zipinfo_line) {
+		    my ($fname) = ($14);
+		    $zipfs_realpathname_table->{zipfs_canonicalize_pathname($fname)} = $fname;
+		}
+	    } else {
+		if ($line =~ $regex_nonzipinfo_line) {
+		    my ($fname) = ($11);
+		    $zipfs_realpathname_table->{zipfs_canonicalize_pathname($fname)} = $fname;
+		}
+	    }
+	}
+	if (!close(ZIP)) {
+	    return $fname;
+	}
+    }
+    if (exists($zipfs_realpathname_table->{$fname})) {
+	return $zipfs_realpathname_table->{$fname};
+    }
+    return $fname;
+}
+
 if ($cmd eq 'list')    { &mczipfs_list(@ARGV); }
 if ($cmd eq 'rm')      { &mczipfs_rm(@ARGV); }
 if ($cmd eq 'rmdir')   { &mczipfs_rmdir(@ARGV); }
@@ -63,7 +115,12 @@ exit 1;
 
 # Remove a file from the archive.
 sub mczipfs_rm {
-	my ($qfile) = map { &zipquotemeta($_) } @_;
+	my ($qfile) = map { &zipquotemeta(zipfs_realpathname($_)) } @_;
+
+	# "./" at the beginning of pathnames is stripped by Info-ZIP,
+	# so convert it to "[.]/" to prevent stripping.
+	$qfile =~ s/^\\\./[.]/;
+
 	&checkargs(1, 'archive file', @_);
 	&safesystem("$cmd_delete $qarchive $qfile >/dev/null");
 	exit;
@@ -74,7 +131,7 @@ sub mczipfs_rm {
 # additional slash to the directory name to remove. I am not
 # sure this is absolutely necessary, but it doesn't hurt.
 sub mczipfs_rmdir {
-	my ($qfile) = map { &zipquotemeta($_) } @_;
+	my ($qfile) = map { &zipquotemeta(zipfs_realpathname($_)) } @_;
 	&checkargs(1, 'archive directory', @_);
 	&safesystem("$cmd_delete $qarchive $qfile/ >/dev/null", 12);
   exit;
@@ -84,7 +141,7 @@ sub mczipfs_rmdir {
 # Note that we don't need to check if the file is a link,
 # because mc apparently doesn't call copyout for symbolic links.
 sub mczipfs_copyout {
-	my ($qafile, $qfsfile) = map { &zipquotemeta($_) } @_;
+	my ($qafile, $qfsfile) = map { &zipquotemeta(zipfs_realpathname($_)) } @_;
 	&checkargs(1, 'archive file', @_);
 	&checkargs(2, 'local file', @_);
 	&safesystem("$cmd_extract $qarchive $qafile > $qfsfile", 11);
@@ -195,14 +252,14 @@ sub mczipfs_list {
 			next if /^Archive:/;
 			next if /^\d+ file/;
 			next if /^Empty zipfile\.$/;
-			my @match = /^(.{10}) +([\d.]+) +([a-z\d]+) +(\d+) +([^ ]{2}) +(\d+) +([^ ]{4}) +(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d) +(.*)$/;
+			my @match = /$regex_zipinfo_line/;
 			next if ($#match != 13);
 			&checked_print_file(@match);
 		}
 	} else {
 		while (<PIPE>) {
 			chomp;
-			my @match = /^ *(\d+) +([^ ]+) +(\d+) +(-?\d+\%) +(\d?\d)-(\d?\d)-(\d\d) (\d?\d):(\d\d) +([0-9a-f]+) +(.*)$/;
+			my @match = /$regex_nonzipinfo_line/;
 			next if ($#match != 10);
 			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
 					$match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
@@ -230,7 +287,7 @@ sub mczipfs_list {
 sub mczipfs_run {
 	my ($afile) = @_;
 	&checkargs(1, 'archive file', @_);
-	my $qafile = &zipquotemeta($afile);
+	my $qafile = &zipquotemeta(zipfs_realpathname($afile));
 	my $tmpdir = &mktmpdir();
 	my $tmpfile = File::Basename::basename($afile);
 

@@ -1,3 +1,8 @@
+2004-12-10  Roland Illig  <roland.illig@gmx.de>
+
+	* extfs/uzip.in: Fix handling of archive member pathnames starting
+	with "./".
+
 2004-12-07  Roland Illig  <roland.illig@gmx.de>
 
 	* ext.c: Fixed FIXME by passing around a reference to a VFS.
