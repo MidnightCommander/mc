@@ -1,3 +1,8 @@
+1998-10-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* desktop-icon.c (desktop_icon_realize): Doh.  We need to
+	initialize the gnome_win_hints before we set any of the hints.
+
 1998-10-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (create_desktop_icon): Renamed from

@@ -208,7 +208,20 @@ desktop_icon_realize (GtkWidget *widget)
 	if (GTK_WIDGET_CLASS (parent_class)->realize)
 		(* GTK_WIDGET_CLASS (parent_class)->realize) (widget);
 
-	/* FIXME: set the appropriate WM hints for desktop icons */
+	/* Set the window decorations to none and hints to the appropriate combination */
+
+	gnome_win_hints_init ();
+
+	if (gnome_win_hints_wm_exists ()) {
+		gdk_window_set_decorations (widget->window, 0);
+		gdk_window_set_functions (widget->window, 0);
+
+		gnome_win_hints_set_layer (widget, WIN_LAYER_DESKTOP);
+		gnome_win_hints_set_hints (widget,
+					   (WIN_HINTS_SKIP_FOCUS
+					    | WIN_HINTS_SKIP_WINLIST
+					    | WIN_HINTS_SKIP_TASKBAR));
+	}
 }
 
 GtkWidget *
