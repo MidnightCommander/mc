@@ -1,3 +1,8 @@
+2003-07-02  Pavel Roskin  <proski@gnu.org>
+
+	* ext.c (regex_check_type): Set content_shift to skip the
+	filename.
+
 2003-06-27  David Sterba  <dave@jikos.cz>
 
 	* hotlist.c: Add buttons "Refresh" and "Free VFSs now" to Active
