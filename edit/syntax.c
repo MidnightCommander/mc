@@ -45,19 +45,10 @@
 int option_syntax_highlighting = 1;
 int option_auto_spellcheck = 1;
 
-#ifdef HAVE_MAD
-static void *mad_syntax_malloc (size_t x, char *file, int line)
-#define syntax_malloc(x) mad_syntax_malloc (x, __FILE__, __LINE__)
-#else
-static void *syntax_malloc (size_t x)
-#endif
+static inline void *syntax_malloc (size_t x)
 {
     void *p;
-#ifdef HAVE_MAD
-    p = mad_alloc (x, file, line);
-#else
     p = malloc (x);
-#endif
     memset (p, 0, x);
     return p;
 }
@@ -391,11 +382,7 @@ static int read_one_line (char **line, FILE * f)
 {
     char *p;
     int len = 256, c, r = 0, i = 0;
-#ifdef HAVE_MAD
-    p = mad_syntax_malloc (len, file, line_);
-#else
     p = syntax_malloc (len);
-#endif
 
     for (;;) {
 	c = fgetc (f);

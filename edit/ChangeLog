@@ -1,5 +1,7 @@
 2002-08-01  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c: Remove all references to MAD.
+
 	* edit.h: Don't include mad.h.
 
 2002-07-29  Andrew V. Samoilov  <kai@cmail.ru>
