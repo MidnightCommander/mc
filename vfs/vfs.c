@@ -1035,12 +1035,12 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     if (fdin == -1)
         return NULL;
     tmp = tempnam (NULL, "mclocalcopy");
-    fdout = creat (tmp, 0600); 		/* FIXME: What about symlink attack ? */
+    fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
     if (fdout == -1){
         mc_close (fdin);
+	free (tmp);
         return NULL;
     }
-    tmp = strdup (tmp);
     while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
         write (fdout, buffer, i);
     }
