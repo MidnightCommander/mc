@@ -40,7 +40,6 @@
 #undef HAVE_HACKED_SSH
 
 #include "utilvfs.h"
-#include "../src/dialog.h"	/* For MSG_ERROR */
 
 #include "xdirentry.h"
 #include "vfs.h"

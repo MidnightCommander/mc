@@ -46,7 +46,6 @@
 
 #include "vfs.h"
 #include "smbfs.h"
-#include "../src/dialog.h"
 
 #define SMBFS_MAX_CONNECTIONS 16
 static const char * const IPC = "IPC$";

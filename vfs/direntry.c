@@ -29,7 +29,6 @@
 
 #include "utilvfs.h"
 #include "xdirentry.h"
-#include "../src/tty.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
 

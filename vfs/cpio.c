@@ -22,10 +22,6 @@
 #include "utilvfs.h"
 #include "xdirentry.h"
 
-/* #include "utilvfs.h" */
-
-#include "../src/dialog.h"
-
 enum {
     STATUS_START,
     STATUS_OK,

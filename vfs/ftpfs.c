@@ -73,7 +73,6 @@ What to do with this?
 #include "xdirentry.h"
 #include "vfs.h"
 #include "tcputil.h"
-#include "../src/dialog.h"
 #include "../src/setup.h"	/* for load_anon_passwd */
 #include "ftpfs.h"
 #ifndef MAXHOSTNAMELEN

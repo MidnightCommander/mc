@@ -26,8 +26,6 @@
 
 #include "utilvfs.h"
 #include "xdirentry.h"
-
-#include "../src/dialog.h"	/* For MSG_ERROR */
 #include "tar.h"
 
 static struct vfs_class vfs_tarfs_ops;

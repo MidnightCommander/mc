@@ -23,7 +23,7 @@
 
 #include "vfs.h"
 #include "local.h"
-#include "../src/execute.h"
+#include "../src/execute.h"	/* EXECUTE_AS_SHELL */
 
 struct cachedfile {
     char *name, *cache;

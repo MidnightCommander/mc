@@ -54,7 +54,6 @@
 #include "mcfs.h"
 #include "mcfsutil.h"
 #include "tcputil.h"
-#include "../src/dialog.h"
 
 #define MCFS_MAX_CONNECTIONS 32
 
