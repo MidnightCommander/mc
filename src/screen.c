@@ -653,20 +653,21 @@ display_mini_info (WPanel *panel)
     /* Status displays total marked size */
     if (panel->marked){
 	char buffer [BUF_SMALL];
-	char *p;
+	char *p = "  %-*s";
+	int  cols = panel->widget.cols-2;
 
 	attrset (MARKED_COLOR);
-	printw  ("%*s", panel->widget.cols-2, " ");
+	printw  ("%*s", cols, " ");
 	widget_move (&panel->widget, llines (panel)+3, 1);
 	g_snprintf (buffer, sizeof (buffer), _((panel->marked == 1) ?
-		 N_("  %s bytes in %d file") : N_("  %s bytes in %d files")),
+		 N_("%s bytes in %d file") : N_("%s bytes in %d files")),
 		 size_trunc_sep (panel->total), panel->marked);
-	p = buffer;
-	if (strlen (buffer) > panel->widget.cols-4){
-	    buffer [panel->widget.cols-4] = 0;
+	if (strlen (buffer) > cols-2){
+	    buffer [cols] = 0;
 	    p += 2;
-	}
-	printw ("%-*s", panel->widget.cols-2, p);
+	} else
+	    cols -= 2;
+	printw (p, cols, buffer);
 	return;
     }
 
