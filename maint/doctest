@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Test the documentation for possible errors.
+find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tps {} \; >/dev/null 2>doctest-ps.out
+find doc -name '*.[1-9].in' -exec groff -wall -mandoc -Tdvi {} \; >/dev/null 2>doctest-dvi.out
+find doc -name '*.[1-9].in' -exec nroff -mandoc -Tlatin1 {} \; >/dev/null 2>doctest-nroff.out
+
+# Check English manuals to be in ASCII.
+find doc -maxdepth 1 -name '*.[1-9].in' -exec groff -wall -Tascii {} \; >/dev/null 2>doctest-ascii.out
