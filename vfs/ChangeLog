@@ -1,3 +1,8 @@
+Mon Feb  1 01:45:08 1999  Timur I. Bakeyev <mc@bat.ru>
+
+	* mcserv.c: If setuid() is avaliable, use it, even, streuid() also
+	present. (BTW, bsdi uses it's own auth system..)
+
 Sun Jan 31 20:51:17 1999  Alexander Savelyev <fano@vcom.kiev.ua>
 
 	* mcserv.c (do_auth): mcserv never auth properly on bsdi.

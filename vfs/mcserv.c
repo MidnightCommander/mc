@@ -912,12 +912,13 @@ do_auth (char *username, char *password)
 #endif
 #endif    
 
-#if !defined(BSD) || defined(__bsdi__)
+#if defined (HAVE_SETUID)
     if (setuid (this->pw_uid))
-#else
-    if (setreuid (this->pw_uid, this->pw_uid))
-#endif
         return 0;
+#elif defined (HAVE_SETREUID)
+    if (setreuid (this->pw_uid, this->pw_uid))
+        return 0;
+#endif
 
     /* If the setuid call failed, then deny access */
     /* This should fix the problem on those machines with strange setups */
