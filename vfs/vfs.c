@@ -1015,7 +1015,7 @@ mc_def_getlocalcopy (struct vfs_class *vfs, char *filename)
     char buffer[8192];
     struct stat mystat;
 
-    fdin = mc_open (filename, O_RDONLY);
+    fdin = mc_open (filename, O_RDONLY | O_LINEAR);
     if (fdin == -1)
 	return NULL;
 

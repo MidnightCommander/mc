@@ -1,5 +1,8 @@
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (mc_def_getlocalcopy): Use O_LINEAR when retrieving the
+	remote file.  This avoids an extra temporary file.
+
 	* cpio.c (cpio_ungetlocalcopy): Remove.
 	* tar.c (tar_ungetlocalcopy): Likewise.
 	* vfs.c (mc_def_ungetlocalcopy): Add support for read-only
