@@ -103,6 +103,8 @@ stock_from_text (char *text)
 		stock = GNOME_STOCK_BUTTON_CANCEL;
 	else
 		stock = 0;
+
+	return stock;
 }
 
 int
