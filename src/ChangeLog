@@ -1,3 +1,20 @@
+Mon Mar 16 13:03:45 1998  Pavel Roskin <pavel@absolute.spb.su>
+
+	* cmd.c: Internal edit is used by default. vi may be
+        confusing for some users.
+
+	* tree.c: tree_rmdir_cmd() should not return any value,
+        because it is not analyzed for errors.
+
+	* main.c: NT code: use O_BINARY instead of _O_BINARY
+
+	* util.c: DO not test for arguments that do not make sense under
+	Windows NT.
+
+	* file.c: utime.h always included for Windows NT port. 
+
+	* view.c: Events are flushed only if the ports supports it. 
+	
 Mon Mar 16 12:30:39 1998  Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* hotlist.c: Defaults on the hotlist add-current and new-entry is

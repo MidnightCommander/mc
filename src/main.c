@@ -2222,7 +2222,7 @@ OS_Setup ()
 	shell = get_default_shell ();
     
     /* Default opening mode for files is binary, not text (CR/LF translation) */
-    _fmode = _O_BINARY;
+    _fmode = O_BINARY;
 
     mc_home = get_mc_lib_dir ();
 }

@@ -1176,15 +1176,15 @@ static int tree_mkdir_cmd (WTree *tree)
     return 1;
 }
 
-static int tree_rmdir_cmd (WTree *tree)
+static void tree_rmdir_cmd (WTree *tree)
 {
     char old_dir [MC_MAXPATHLEN];
 
     if (tree->selected_ptr){
 	if (!mc_get_current_wd (old_dir, MC_MAXPATHLEN))
-	    return 0;
+	    return;
 	if (mc_chdir (PATH_SEP_STR))
-	    return 0;
+	    return;
 	if (confirm_delete){
 	    char *cmd_buf;
 	    int result;
@@ -1195,7 +1195,7 @@ static int tree_rmdir_cmd (WTree *tree)
 	    result = query_dialog (" Delete ", cmd_buf, 3, 2, "&Yes", "&No");
 	    free (cmd_buf);
 	    if (result != 0){
-		return 0;
+		return;
 	    }
 	}
 	create_op_win (OP_DELETE, 0);
@@ -1203,9 +1203,9 @@ static int tree_rmdir_cmd (WTree *tree)
 	    tree_forget_cmd (tree);
 	destroy_op_win ();
 	mc_chdir (old_dir);
-	return 1;
+	return;
     } else
-	return 0;
+	return;
 }
 
 #if 0

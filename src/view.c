@@ -1483,7 +1483,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     update_activate = 0;
 
     for (; ; isatbeg = 1, free (s)){
-#ifdef HAVE_X
+#ifdef PORT_HAS_FLUSH_EVENTS
 	static int count;
 
 	if ((count++ % 32) == 0)

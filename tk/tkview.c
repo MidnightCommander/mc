@@ -23,6 +23,9 @@
    code so that the code knows about the window resize.
 */
 
+#include <stdio.h>
+
+#define WANT_WIDGETS
 #include "dlg.h"
 #include "view.h"
 #include "tkmain.h"
@@ -128,7 +131,7 @@ view_percent (WView *view, int p, int w)
 static int current_color;
 
 void
-view_set_color (int font)
+view_set_color (WView *view, int font)
 {
     current_color = font;
 }
@@ -152,7 +155,7 @@ void
 view_add_string (WView *view, char *s)
 {
     while (*s)
-	add_character (view, *s++);
+	view_add_character (view, *s++);
 }
 
 static char *
@@ -262,4 +265,4 @@ view_gotoyx (WView *view, int row, int col)
     }
     view->last_col = col;
 }
-#endif
+

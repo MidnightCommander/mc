@@ -60,11 +60,9 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
-#ifdef __os2__
+#ifdef OS2_NT
 #    include <io.h>
-#    include <direct.h>
 #endif 
-
 
 #include <errno.h>
 #include "tty.h"
@@ -81,12 +79,7 @@
 #	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
 #endif /* SCO_FLAVOR */
 #include <time.h>
-#ifdef OS2_NT
-#    include <sys/time.h>
-#    include <sys/utime.h>
-#else
-#    include <utime.h>
-#endif
+#include <utime.h>
 #include "mad.h"
 #include "regex.h"
 #include "util.h"

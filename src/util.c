@@ -321,7 +321,7 @@ char *string_perm (mode_t mode_bits)
     if (ismode (mode_bits, S_IXUSR)) mode [3] = 'x';
     if (ismode (mode_bits, S_IWUSR)) mode [2] = 'w';
     if (ismode (mode_bits, S_IRUSR)) mode [1] = 'r';
-#ifndef __os2__
+#ifndef OS2_NT
     if (ismode (mode_bits, S_ISUID)) mode [3] = (mode [3] == 'x') ? 's' : 'S';
     if (ismode (mode_bits, S_ISGID)) mode [6] = (mode [6] == 'x') ? 's' : 'S';
     if (ismode (mode_bits, S_IFCHR)) mode [0] = 'c';

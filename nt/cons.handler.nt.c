@@ -41,11 +41,17 @@ static HANDLE hSaved, hNew;
 void show_console_contents (int starty, unsigned char begin_line, unsigned char end_line)
 {
     DWORD dw;
-    COORD c0 = {0,0};
-    COORD csize = {COLS, end_line-begin_line}; 
-    SMALL_RECT rect = { 0, begin_line, COLS, end_line };
+    COORD c0 = { 0, 0 };
+    COORD csize; 
+    SMALL_RECT rect;
     CHAR_INFO *pchar;
 
+    csize.X = COLS;
+    csize.Y = end_line-begin_line;
+    rect.Left = 0;
+    rect.Top = begin_line;
+    rect.Right = COLS;
+    rect.Bottom = end_line;
 
 //    -- This code reads characters and attributes
     pchar = malloc (sizeof(CHAR_INFO) *  (end_line-begin_line) * COLS);

@@ -38,6 +38,10 @@
 #include <util.h>
 #include "util.Win32.h"
 
+#ifdef __BORLANDC__
+#define ENOTEMPTY ERROR_DIR_NOT_EMPTY
+#endif
+
 char *get_owner (int uid)
 {
     return "none";
@@ -135,11 +139,11 @@ int my_system (int as_shell_command, const char *shell, const char *command)
     if (as_shell_command) {
 		/* It is only the shell, /c will not work */
 		if (command) 
-			spawnlp (_P_WAIT, shell, shell, "/c", command, (char *) 0);
+			spawnlp (P_WAIT, shell, shell, "/c", command, (char *) 0);
 		else
-			spawnlp (_P_WAIT, shell, (char *) 0);
+			spawnlp (P_WAIT, shell, (char *) 0);
 	} else
-       spawnl (_P_WAIT, shell, shell, command, (char *) 0);
+       spawnl (P_WAIT, shell, shell, command, (char *) 0);
 
     if (win32_GetPlatform() == OS_Win95) {
 	    SetConsoleTitle ("GNU Midnight Commander");		/* title is gone after spawn... */
@@ -150,21 +154,21 @@ int my_system (int as_shell_command, const char *shell, const char *command)
 	    switch(win32_GetEXEType (shell)) {	
 		case EXE_win16:			/* Windows 3.x archive or OS/2 */
 		case EXE_win32GUI:		/* NT or Chicago GUI API */
-		    spawnlp (_P_NOWAIT, shell, shell, "/c", command, (char *) 0);   /* don't wait for GUI programs to end */
+		    spawnlp (P_NOWAIT, shell, shell, "/c", command, (char *) 0);   /* don't wait for GUI programs to end */
 		    break;			
 		case EXE_otherCUI:		/* DOS COM, MZ, ZM, Phar Lap */
 		case EXE_win32CUI:		/* NT or Chicago Console API, also OS/2 */
 		case EXE_Unknown:
 		default:
-		    spawnlp (_P_WAIT, shell, shell, "/c", command, (char *) 0);
+		    spawnlp (P_WAIT, shell, shell, "/c", command, (char *) 0);
 		    break;
 	    }
 	}
 	else
-	    spawnlp (_P_WAIT, shell, shell, "/c", command, (char *) 0);
+	    spawnlp (P_WAIT, shell, shell, "/c", command, (char *) 0);
     }
     else
-       spawnl (_P_WAIT, shell, shell, command, (char *) 0);
+       spawnl (P_WAIT, shell, shell, command, (char *) 0);
 
     if (win32_GetPlatform() == OS_Win95) {
 	    SetConsoleTitle ("GNU Midnight Commander");		/* title is gone after spawn... */
@@ -405,7 +409,7 @@ int mc_unlink (char *pathName)
 		   }
 		}
 
-		_chmod(pathName, _S_IWRITE); /* make it writable */
+		chmod(pathName, S_IWRITE); /* make it writable */
 		rc = DeleteFile(pathName);
 		returnError = GetLastError();
 		if (rc == FALSE) {

@@ -16,6 +16,7 @@
 #include "global.h"
 #include "panel.h"
 #include "gscreen.h"
+#include "ext.h"
 #include <gdk/gdkx.h>
 
 /* Types of desktop icons:

@@ -1,3 +1,7 @@
+Mon Mar 16 13:05:47 1998  Pavel Roskin <pavel@absolute.spb.su>
+
+	* tkview.c: Include stdio.h;  Minor spelling corrections added. 
+
 1998-03-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* tkconf.h (PORT_HAS_FILTER_CHANGED): New flag for conditional compilation.

@@ -24,6 +24,7 @@
 #ifdef _OS_NT
 #include <windows.h>
 #endif
+#include <errno.h>
 #include "util.debug.h"
 
 /* Global variables */

@@ -99,7 +99,7 @@ int output_starts_shell = 0;
 int source_route = 0;
 
 /* If set, use the builtin editor */
-int use_internal_edit = 0;
+int use_internal_edit = 1;
 
 /* Ugly hack in order to distinguish between left and right panel in menubar */
 int is_right;
