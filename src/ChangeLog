@@ -1,5 +1,9 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c (setup_panels): Make the button bar 0 lines high if
+	it's invisible, so that mouse click on the history button works
+	with invisible button bar.
+
 	* widget.c: Make more functions static.
 
 	* ext.c: (regex_check_type): Further split.  Restore caching
