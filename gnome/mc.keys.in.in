@@ -164,6 +164,9 @@ image/x-bmp:
 image/x-xcf:
 	icon-filename=@icondir@/gnome-image-xcf.png
 
+image/x-compressed-xcf:
+	icon-filename=@icondir@/gnome-image-xcf.png
+
 image/gif:
 	icon-filename=@icondir@/gnome-image-gif.png
 
