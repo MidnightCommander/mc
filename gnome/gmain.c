@@ -556,6 +556,10 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 
 	g_free (argv);
 
+	if (shutdown){
+		quit = 1;
+		dlg_stop (midnight_dlg);
+	}
 	return 1;
 }
 
