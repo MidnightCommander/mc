@@ -1943,69 +1943,69 @@ process_args (poptContext ctx, int c, const char *option_arg)
 static const struct poptOption argument_table[] = {
     /* generic options */
     {"help", 'h', POPT_ARG_NONE, NULL, 'h',
-     N_("Displays this help message")},
+     N_("Displays this help message"), NULL},
     {"version", 'V', POPT_ARG_NONE, NULL, 'V',
-     N_("Displays the current version")},
+     N_("Displays the current version"), NULL},
 
     /* terminal options */
     {"xterm", 'x', POPT_ARG_NONE, &force_xterm, 0,
-     N_("Forces xterm features")},
+     N_("Forces xterm features"), NULL},
     {"nomouse", 'd', POPT_ARG_NONE, NULL, 'd',
-     N_("Disable mouse support in text version")},
+     N_("Disable mouse support in text version"), NULL},
 #if defined(HAVE_SLANG)
     {"termcap", 't', 0, &SLtt_Try_Termcap, 0,
-     N_("Tries to use termcap instead of terminfo")},
+     N_("Tries to use termcap instead of terminfo"), NULL},
 #endif
     {"resetsoft", 'k', POPT_ARG_NONE, &reset_hp_softkeys, 0,
-     N_("Resets soft keys on HP terminals")},
+     N_("Resets soft keys on HP terminals"), NULL},
     {"slow", 's', POPT_ARG_NONE, &slow_terminal, 0,
-     N_("To run on slow terminals")},
+     N_("To run on slow terminals"), NULL},
     {"stickchars", 'a', 0, &force_ugly_line_drawing, 0,
-     N_("Use stickchars to draw")},
+     N_("Use stickchars to draw"), NULL},
 
     /* color options */
     {"nocolor", 'b', POPT_ARG_NONE, &disable_colors, 0,
-     N_("Requests to run in black and white")},
+     N_("Requests to run in black and white"), NULL},
     {"color", 'c', POPT_ARG_NONE, NULL, 'c',
-     N_("Request to run in color mode")},
+     N_("Request to run in color mode"), NULL},
     {"colors", 'C', POPT_ARG_STRING, &command_line_colors, 0,
-     N_("Specifies a color configuration")},
+     N_("Specifies a color configuration"), NULL},
     {"help-colors", 'H', POPT_ARG_NONE, NULL, 'H',
-     N_("Displays a help screen on how to change the color scheme")},
+     N_("Displays a help screen on how to change the color scheme"), NULL},
 
     /* debug options */
 #ifdef USE_NETCODE
     {"ftplog", 'l', POPT_ARG_STRING, NULL, 'l',
-     N_("Log ftp dialog to specified file")},
+     N_("Log ftp dialog to specified file"), NULL},
 #ifdef WITH_SMBFS
     {"debuglevel", 'D', POPT_ARG_STRING, NULL, 'D',
-     N_("Set debug level")},
+     N_("Set debug level"), NULL},
 #endif
 #endif
 
     /* options for wrappers */
     {"datadir", 'f', POPT_ARG_NONE, NULL, 'f',
-     N_("Print data directory")},
+     N_("Print data directory"), NULL},
     {"printwd", 'P', POPT_ARG_STRING, &last_wd_file, 0,
-     N_("Print last working directory to specified file")},
+     N_("Print last working directory to specified file"), NULL},
 
     /* subshell options */
 #ifdef HAVE_SUBSHELL_SUPPORT
     {"subshell", 'U', POPT_ARG_NONE, &use_subshell, 0,
-     N_("Enables subshell support (default)")},
+     N_("Enables subshell support (default)"), NULL},
     {"nosubshell", 'u', POPT_ARG_NONE, NULL, 'u',
-     N_("Disables subshell support")},
+     N_("Disables subshell support"), NULL},
 #endif
 
     /* single file operations */
     {"view", 'v', POPT_ARG_STRING, &view_one_file, 0,
-     N_("Launches the file viewer on a file")},
+     N_("Launches the file viewer on a file"), NULL},
 #ifdef USE_INTERNAL_EDIT
     {"edit", 'e', POPT_ARG_STRING, &edit_one_file, 0,
-     N_("Edits one file")},
+     N_("Edits one file"), NULL},
 #endif
 
-    {NULL, 0, 0, NULL, 0}
+    {NULL, '\0', 0, NULL, 0, NULL, NULL}
 };
 
 static void
