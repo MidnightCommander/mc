@@ -1238,7 +1238,7 @@ static const key_map ctl_x_map[] = {
 static int ctl_x_map_enabled = 0;
 
 static void
-ctl_x_cmd (int ignore)
+ctl_x_cmd (void)
 {
     ctl_x_map_enabled = 1;
 }
@@ -1468,7 +1468,7 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; ctl_x_map[i].key_code; i++)
 		if (parm == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) (parm);
+		    (*ctl_x_map[i].fn) ();
 		    return MSG_HANDLED;
 		}
 	}
@@ -1564,13 +1564,13 @@ midnight_callback (struct Dlg_head *h, dlg_msg_t msg, int parm)
 	    ctl_x_map_enabled = 0;
 	    for (i = 0; ctl_x_map[i].key_code; i++)
 		if (parm == ctl_x_map[i].key_code) {
-		    (*ctl_x_map[i].fn) (parm);
+		    (*ctl_x_map[i].fn) ();
 		    return MSG_HANDLED;
 		}
 	} else {
 	    for (i = 0; default_map[i].key_code; i++) {
 		if (parm == default_map[i].key_code) {
-		    (*default_map[i].fn) (parm);
+		    (*default_map[i].fn) ();
 		    return MSG_HANDLED;
 		}
 	    }

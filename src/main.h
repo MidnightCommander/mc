@@ -73,10 +73,7 @@ extern int is_right;		/* If the selected menu was the right */
 #define MENU_PANEL_IDX  (is_right ? 1 : 0)
 #define SELECTED_IS_PANEL (get_display_type (is_right ? 1 : 0) == view_listing)
 
-typedef void (*key_callback) ();
-/* FIXME: We have to leave this type ambiguous, because `key_callback'
-   is used both for functions that take an argument and ones that don't.
-   That ought to be cleared up. */
+typedef void (*key_callback) (void);
 
 /* The keymaps are of this type */
 typedef struct {
