@@ -85,7 +85,7 @@ int query_dialog (const char *header, const char *text, int flags, int count, ..
 /* flags for message() and query_dialog() */
 enum {
    D_NORMAL = 0,
-   D_ERROR  = 1,
+   D_ERROR  = 1
 } /* dialog options */;
 
 #endif	/* __WTOOLS_H */

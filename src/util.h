@@ -66,7 +66,7 @@ char *_icase_search (char *text, char *data, int *lng);
 enum {
     match_file,			/* match a filename, use easy_patterns */
     match_normal,		/* match pattern, use easy_patterns */
-    match_regex,		/* match pattern, force using regex */
+    match_regex			/* match pattern, force using regex */
 };
 
 extern int easy_patterns;
