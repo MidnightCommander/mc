@@ -1,1 +1,1 @@
-alias mc='. @suppbindir@/mc-wrapper.sh "$@"'
+alias mc='. @suppbindir@/mc-wrapper.sh'
