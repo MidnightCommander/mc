@@ -34,6 +34,7 @@ manext     = 1
 man8dir    = $(mandir)/man8
 man8ext   = 8
 xv_bindir = @xv_bindir@
+top_srcdir = $(rootdir)
 
 # Tools & program stuff
 MKINSTALLDIRS = @MKINSTALLDIRS@
