@@ -1,5 +1,7 @@
 Fri Jul 24 00:22:30 1998  Tom Tromey  <tromey@cygnus.com>
 
+	* Make-mc.in (DISTVFS): Changed Makefile.in to Make-mc.in.
+
 	* Makefile.am: New file.
 	* Make-mc.in: Renamed from Makefile.in.
 	* Makefile.in: Removed.

@@ -59,7 +59,7 @@ libvfs.so: $(VFSSOOBJS) libvfs.o
 # Distribution variables
 #
 
-DISTVFS = 	Makefile.in ChangeLog $(VFSSRCS) $(VFSHDRS)
+DISTVFS = 	Make-mc.in ChangeLog $(VFSSRCS) $(VFSHDRS)
 
 all: @LIBVFS@ @mcserv@
 
