@@ -936,7 +936,7 @@ AC_DEFUN(AC_WITH_EDIT, [
 	LIBEDIT_A="libedit.a"
 	MCEDIT="mcedit"
 	LEDIT="-ledit"
-	CPPFLAGS="$CPPFLAGS -I\$(rootdir)"
+	CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
 	EDIT_msg="yes"
 	AC_MSG_RESULT(will call internal editor)
 ])

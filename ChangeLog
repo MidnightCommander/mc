@@ -1,4 +1,9 @@
-2000-09-13  Pavel Roskin  <proski@gnu.org>
+2000-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in, Make.common.in, doc/Makefile.in,
+	edit/Makefile.in, gnome/Makefile.in, gtkedit/Makefile.in,
+	slang/Makefile.in, src/Makefile.in, vfs/Make-mc.in: rootdir
+	changed to top_srcdir for Automake compatability
 
 	* configure.in: REGEX_O variable removed - always use our regex
 

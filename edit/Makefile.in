@@ -1,7 +1,7 @@
 srcdir = @srcdir@
+top_srcdir = @top_srcdir@
 VPATH = @srcdir@
 
-rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
 CFLAGS = $(XCFLAGS)
@@ -37,17 +37,17 @@ check:
 	@echo no tests are supplied.
 
 checklinks:
-	@if test -f $(rootdir)/edit/edit.c; then echo ok; \
+	@if test -f $(top_srcdir)/edit/edit.c; then echo ok; \
 	else $(MAKE) sourcelinks; fi
-	@if test -f $(rootdir)/edit/bookmark.c; then echo ok; \
+	@if test -f $(top_srcdir)/edit/bookmark.c; then echo ok; \
 	else $(MAKE) sourcelinks; fi
 
 sourcelinks:
-	-cd $(rootdir)/edit ; $(LN_S) ../gtkedit/*.[ch] . >/dev/null 2>&1 ; true
+	-cd $(top_srcdir)/edit ; $(LN_S) ../gtkedit/*.[ch] . >/dev/null 2>&1 ; true
 
 cleansourcelinks:
-	-if test -f $(rootdir)/edit/edit.c; then \
-	    cd $(rootdir)/edit; find . -lname '*.[ch]' | xargs $(RM); \
+	-if test -f $(top_srcdir)/edit/edit.c; then \
+	    cd $(top_srcdir)/edit; find . -lname '*.[ch]' | xargs $(RM); \
 	fi
 
 libedit.a: checklinks

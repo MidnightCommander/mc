@@ -1,13 +1,14 @@
 srcdir = @srcdir@
+top_srcdir = @top_srcdir@
 VPATH = @srcdir@
 
-rootdir = $(srcdir)/..
+top_srcdir = $(srcdir)/..
 @MCFG@@MCF@
 
 GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@
 
 #
-# Warning: Don't add `-I$(rootdir)/src' to CFLAGS -- it breaks compilation
+# Warning: Don't add `-I$(top_srcdir)/src' to CFLAGS -- it breaks compilation
 # on glibc2.1 systems because glibc includes src/features.h instead of it's
 # own features.h. Run `make cleansourcelinks; make sourcelinks'/modify targets
 # cleansourcelinks/sourclinks in case mc doesn't find it's include files.
@@ -215,8 +216,8 @@ CLIENTOBJS = 			\
 	FileManager-common.o
 
 
-$(CORBA_GENERATED): $(rootdir)/idl/FileManager.idl
-	orbit-idl `gnome-config --cflags idl` $(rootdir)/idl/FileManager.idl
+$(CORBA_GENERATED): $(top_srcdir)/idl/FileManager.idl
+	orbit-idl `gnome-config --cflags idl` $(top_srcdir)/idl/FileManager.idl
 
 $(MAGICDEV_GENERATED): $(srcdir)/magicdev.idl
 	orbit-idl `gnome-config --cflags idl` --noskels $(srcdir)/magicdev.idl

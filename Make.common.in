@@ -40,8 +40,6 @@ manext     = 1
 man8dir    = $(mandir)/man8
 man8ext    = 8
 
-top_srcdir = $(rootdir)
-
 # Tools & program stuff
 MKINSTALLDIRS = @MKINSTALLDIRS@
 SEDCMD = @SEDCMD@
@@ -71,12 +69,12 @@ XLIBS = @LIBS@
 
 # Where do we have the sources?
 # You shouldn't have to edit this :)
-mcsrcdir    = $(rootdir)/src
-docdir      = $(rootdir)/doc
-mcsrclibdir = $(rootdir)/lib
-slangdir    = $(rootdir)/slang
-vfsdir      = $(rootdir)/vfs
-gnomedir    = $(rootdir)/gnome
+mcsrcdir    = $(top_srcdir)/src
+docdir      = $(top_srcdir)/doc
+mcsrclibdir = $(top_srcdir)/lib
+slangdir    = $(top_srcdir)/slang
+vfsdir      = $(top_srcdir)/vfs
+gnomedir    = $(top_srcdir)/gnome
 
 hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir)
 
