@@ -59,4 +59,5 @@ vfs/sfs.c
 vfs/smbfs.c
 vfs/tar.c
 vfs/undelfs.c
+vfs/utilvfs.c
 vfs/vfs.c
