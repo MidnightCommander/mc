@@ -623,11 +623,12 @@ try_channels (int set_timeout)
     static fd_set select_set;
     struct timeval *timeptr;
     int v;
+    int maxfdp;
 
     while (1){
 	FD_ZERO (&select_set);
 	FD_SET  (input_fd, &select_set);	/* Add stdin */
-	add_selects (&select_set);
+	maxfdp = max (add_selects (&select_set), input_fd);
 	
 	if (set_timeout){
 	    timeout.tv_sec = 0;
@@ -636,7 +637,7 @@ try_channels (int set_timeout)
 	} else
 	    timeptr = 0;
 
-	v = select (FD_SETSIZE, &select_set, NULL, NULL, timeptr);
+	v = select (maxfdp + 1, &select_set, NULL, NULL, timeptr);
 	if (v > 0){
 	    check_selects (&select_set);
 	    if (FD_ISSET (input_fd, &select_set))
@@ -706,13 +707,15 @@ int get_event (Gpm_Event *event, int redo_event, int block)
     /* Repeat if using mouse */
     while (mouse_enabled && !pending_keys) {
 	if (mouse_enabled) {
+	    int maxfdp;
 	    FD_ZERO (&select_set);
 	    FD_SET  (input_fd, &select_set);
-	    add_selects (&select_set);
+	    maxfdp = max (add_selects (&select_set), input_fd);
 
 #ifdef HAVE_LIBGPM
 	    if (mouse_enabled && use_mouse_p == MOUSE_GPM) {
 		FD_SET (gpm_fd, &select_set);
+		maxfdp = max (maxfdp, gpm_fd);
 	    }
 #endif
 
@@ -743,7 +746,7 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 		timeout.tv_usec = 0;
 	    }
 	    enable_interrupt_key ();
-	    flag = select (FD_SETSIZE, &select_set, NULL, NULL, time_addr);
+	    flag = select (maxfdp + 1, &select_set, NULL, NULL, time_addr);
 	    disable_interrupt_key ();
 	    
 	    /* select timed out: it could be for any of the following reasons:
@@ -826,7 +829,7 @@ static int xgetch_second (void)
     nodelay (stdscr, TRUE);
     FD_ZERO (&Read_FD_Set);
     FD_SET (input_fd, &Read_FD_Set);
-    select (FD_SETSIZE, &Read_FD_Set, NULL, NULL, &timeout);
+    select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
     c = xgetch ();
     nodelay (stdscr, FALSE);
     return c;
@@ -884,7 +887,7 @@ char *learn_key (void)
             if (timeout.tv_sec >= 0 && timeout.tv_usec > 0) {
     		FD_ZERO (&Read_FD_Set);
     		FD_SET (input_fd, &Read_FD_Set);
-                select (FD_SETSIZE, &Read_FD_Set, NULL, NULL, &timeout);
+                select (input_fd + 1, &Read_FD_Set, NULL, NULL, &timeout);
             } else
             	break;
         }
@@ -934,7 +937,7 @@ int is_idle (void)
     FD_SET (0, &select_set);
     timeout.tv_sec = 0;
     timeout.tv_usec = 0;
-    select (FD_SETSIZE, &select_set, 0, 0, &timeout);
+    select (1, &select_set, 0, 0, &timeout);
     return ! FD_ISSET (0, &select_set);
 }
 

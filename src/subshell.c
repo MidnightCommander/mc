@@ -632,7 +632,7 @@ int read_subshell_prompt (void)
     }
 
     while (subshell_alive &&
-	   (rc = select (FD_SETSIZE, &tmp, NULL, NULL, &timeleft)))
+	   (rc = select (subshell_pty + 1, &tmp, NULL, NULL, &timeleft)))
     {
 	/* {{{ Check for `select' errors */
 
@@ -906,6 +906,7 @@ static int feed_subshell (int how, int fail_on_error)
 {
     /* {{{ Local variables */
     fd_set read_set;	/* For `select' */
+    int maxfdp;
     int bytes;		/* For the return value from `read' */
     int i;		/* Loop counter */
     
@@ -927,10 +928,13 @@ static int feed_subshell (int how, int fail_on_error)
 	FD_ZERO (&read_set);
 	FD_SET (subshell_pty, &read_set);
 	FD_SET (subshell_pipe[READ], &read_set);
-	if (how == VISIBLY)
+	maxfdp = max (subshell_pty, subshell_pipe[READ]);
+	if (how == VISIBLY) {
 	    FD_SET (STDIN_FILENO, &read_set);
+	    maxfdp = max (maxfdp, STDIN_FILENO);
+	}
 
-	if (select (FD_SETSIZE, &read_set, NULL, NULL, wptr) == -1){
+	if (select (maxfdp + 1, &read_set, NULL, NULL, wptr) == -1){
 
 	    /* Despite using SA_RESTART, we still have to check for this */
 	    if (errno == EINTR)
