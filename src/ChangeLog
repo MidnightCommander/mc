@@ -2,6 +2,8 @@
 
 	* file.c (do_file_error): Add const qualifier. (query_recursive):
 	Likewise. (query_replace): Likewise.
+	* view.c: Rename EOF_offset to INVALID_OFFSET, as it is mostly
+	used to mark an invalid cache.
 
 2004-10-13  Jindrich Novy  <jnovy@redhat.com>
 

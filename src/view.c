@@ -78,7 +78,7 @@
 
 /* Offset in bytes into a file */
 typedef unsigned long offset_type;
-#define EOF_offset ((offset_type) -1)
+#define INVALID_OFFSET ((offset_type) -1)
 
 /* A width or height on the screen */
 typedef unsigned int screen_dimen;
@@ -307,7 +307,7 @@ get_byte (WView *view, unsigned int byte_index)
 		if (n != -1)
 		    view->bytes_read += n;
 		if (view->s.st_size < view->bytes_read) {
-		    view->bottom_first = -1;	/* Invalidate cache */
+		    view->bottom_first = INVALID_OFFSET; /* Invalidate cache */
 		    view->s.st_size = view->bytes_read;
 		    view->last_byte = view->bytes_read;
 		    if (view->reading_pipe)
@@ -730,7 +730,7 @@ view_update_bytes_per_line (WView *view)
     else
 	cols = view->widget.cols;
 
-    view->bottom_first = -1;
+    view->bottom_first = INVALID_OFFSET;
     if (cols < 80)
 	view->bytes_per_line = ((cols - 8) / 17) * 4;
     else
@@ -1379,7 +1379,7 @@ get_bottom_first (WView *view, int do_not_cache, int really)
     if (!have_fast_cpu && !really)
 	return INT_MAX;
 
-    if (!do_not_cache && view->bottom_first != EOF_offset)
+    if (!do_not_cache && view->bottom_first != INVALID_OFFSET)
 	return view->bottom_first;
 
     /* Force loading */
@@ -1724,8 +1724,9 @@ search (WView *view, char *text,
     }
 }
 
-/* Search buffer (it's size is len) in the complete buffer */
-/* returns the position where the block was found or -1 if not found */
+/* Search buffer (its size is len) in the complete buffer
+ * returns the position where the block was found or INVALID_OFFSET
+ * if not found */
 static offset_type
 block_search (WView *view, const char *buffer, int len)
 {
@@ -1800,7 +1801,7 @@ block_search (WView *view, const char *buffer, int len)
 	}
     }
     disable_interrupt_key ();
-    return EOF_offset;
+    return INVALID_OFFSET;
 }
 
 /*
@@ -1884,7 +1885,7 @@ hex_search (WView *view, const char *text)
 
     g_free (buffer);
 
-    if (pos == EOF_offset) {
+    if (pos == INVALID_OFFSET) {
 	message (0, _("Search"), _(" Search string not found "));
 	view->found_len = 0;
 	return;
@@ -2340,7 +2341,7 @@ set_monitor (WView *view, int set_on)
 
     if (view->monitor) {
 	move_to_bottom (view);
-	view->bottom_first = -1;
+	view->bottom_first = INVALID_OFFSET;
 	set_idle_proc (view->widget.parent, 1);
     } else {
 	if (old)
@@ -2746,7 +2747,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 
     case WIDGET_IDLE:
 	/* This event is generated when the user is using the 'F' flag */
-	view->bottom_first = -1;
+	view->bottom_first = INVALID_OFFSET;
 	move_to_bottom (view);
 	display (view);
 	view_status (view, TRUE);
