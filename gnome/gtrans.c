@@ -322,6 +322,12 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	text_info_free (ti);
 }
 
+static void
+lower_icon_window(GtkWidget *widget, GdkEventExpose *event)
+{
+	gdk_window_lower(widget->window);
+}
+
 GtkWidget *
 create_transparent_text_window (char *file, char *text, int extra_events)
 {
@@ -354,6 +360,10 @@ create_transparent_text_window (char *file, char *text, int extra_events)
 	cursor = gdk_cursor_new (GDK_TOP_LEFT_ARROW);
 	gdk_window_set_cursor (window->window, cursor);
 	gdk_cursor_destroy (cursor);
+
+	/* We do this so the desktop icons appear to really be part of the
+	   desktop */
+	gtk_signal_connect(window, "expose_event", GTK_SIGNAL_FUNC(lower_icon_window), NULL);
 
 	return window;
 }
