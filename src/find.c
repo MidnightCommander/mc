@@ -468,7 +468,10 @@ search_content (Dlg_head *h, char *directory, char *filename)
     enable_interrupt_key ();
     got_interrupt ();
 
-    while ((i = read (pipe, &c, 1)) == 0){
+    while (1){
+	i = read (pipe, &c, 1);
+	if (i == 0)
+	    break;
 	
 	if (c == '\n'){
 	    p = buffer;

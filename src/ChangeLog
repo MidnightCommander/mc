@@ -1,3 +1,8 @@
+2001-04-26  Pavel Roskin  <proski@gnu.org>
+
+	* find.c (search_content): Undo a recent change that caused an
+	infinite loop.
+
 2001-04-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* view.c (get_line_at): previous newline is right condition 
