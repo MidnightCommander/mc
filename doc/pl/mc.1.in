@@ -1,13 +1,18 @@
 .\"Przet³umaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
 .TH mc 1 "30 October 1998"
+.\"SKIP_SECTION"
 .SH NAZWA
 mc - wizualny interpetator poleceñ dla systemów Unixopodobnych
+.\"SKIP_SECTION"
 .SH U¯YTKOWANIE
 .B \mc
 [-abcCdfPstuUVx?] [-l log] [kat1 [kat2]] [-v plik]
+.\"NODE "DESCRIPTION"
 .SH OPIS
 Midnight Commander jest przeszukiwark± katalogów/mened¿erem plików dla systemów
 Unixopodobnych
+.\"NODE "OPTIONS"
+.\".\"DONT_SPLIT"
 .SH OPCJE
 .TP
 .I \-a
@@ -56,14 +61,14 @@ u¿ytkownicy basha i zsh:
 mc ()
 {
         MC=~/tmp/mc$$-"$RANDOM"
-        /usr/bin/mc -P "$@" > "$MC"
+        @prefix@/bin/mc -P "$@" > "$MC"
         cd "`cat $MC`"
         rm "$MC"
         unset MC;
 }
 
 u¿ytkownicy tcsh:
-alias mc 'setenv MC `/usr/bin/mc -P \!*`; cd $MC; unsetenv MC'
+alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
 .fi
 Wiem, ¿e ta funkcja mog³aby byæ krótsza dla basha i zsh, ale ma³e cudzys³owy
 nie zaakceptowa³y by zawieszenia programu kombinacj±
@@ -101,6 +106,7 @@ w opcje xterm (dwa tryby ekranu i mo¿liwo¶æ wysy³ania mysz± sygna³ów wyj¶cia).
 .PP
 Je¶li wybrano, pierwszy katalog u¿ywany jest do wy¶wietlenia w pierwszym panelu.
 Drugi wy¶wietlany jest w drugim panelu.
+.\"NODE "Overview"
 .SH Opis
 Ekran Midnight Commandera podzielony jest na cztery czê¶ci. Prawie ca³y obszar
 ekranu zajmuj± dwa panele. Standardowo przedostatnia od do³u linijka ekranu,
@@ -125,6 +131,7 @@ wykonane przez Midnight Commandera. Przeczytaj sekcjê
 .BR "Linia pow³oki i Linia wej¶ciowa klawiszy" ,
 ¿eby nauczyæ siê wiêcej na ten temat.
 .PP
+.\"NODE "Mouse Support"
 .SH "Obs³uga myszy"
 Midnight Commander obs³uguje mysz. Modu³ ten jest uruchamiany wtedy kiedy
 korzystasz z terminala
@@ -163,6 +170,7 @@ Je¶li u¿ywasz Midnight Commandera z obs³ug± myszy, mo¿esz "przeszczepiaæ"
 kawa³ki tekstów i u¿ywaæ standardowych zastosowañ myszki (kopiowanie i
 wklejanie) za pomoc± klawisza Shift.
 .SH ""
+.\"NODE "Keys"
 .SH "Klawisze"
 Niektóre komendy Midnight Commandera wywo³uje siê kombinacj± klawiszy
 .I Control
@@ -206,6 +214,7 @@ s± u¿ywane do edytowania linii na wej¶ciu (przy wpisywaniu). Oznacza,
 to ¿e stosuje siê je zarówno
 do linii poleceñ jak do okien dialogowych.
 .PP
+.\"NODE "  Miscellaneous Keys"
 .SH "Klawisze ró¿ne"
 Jest tu kilka klawiszy, które nie kwalifikuj± siê do ¿adnej z wymienionych
 powy¿ej grup:
@@ -274,6 +283,7 @@ Aby dowiedzieæ siê czego¶ na temat polskiech liter w Midnight Commanderze
 przeczytaj sekcjê
 .IR "Polskie litery" .
 .PP
+.\"NODE "  Directory Panels"
 .SH "  Panel Katalogów"
 Sekcja opisuje klawisze, które operuj± na panelu katalogów. Je¶li chcesz
 wiedzieæ jak zmieniæ panele zobacz sekcjê
@@ -373,6 +383,7 @@ w '>'.
 .BR M-S-h ", " M-H .
 Wy¶wietla historiê katalogów, podobne dzia³anie do klikniêcia myszk± 'v'.
 .PP
+.\"NODE "  Shell Command Line"
 .SH "  Linia Pow³oki"
 Ta sekcja opisuje klawisze, które s± u¿yteczne do efektywniejszego
 wpisywania podczas podawania komend pow³oki.
@@ -406,6 +417,7 @@ a M-n nastêpn± komendê.
 .BR M-h .
 Wy¶wietla historiê aktualnej linii poleceñ.
 .PP
+.\"NODE "  General Movement Keys"
 .SH "  Generalne klawisze ruchu"
 Przegl±darka pomocy, podgl±d plików i drzewo katalogów u¿ywaj± podobnych
 klawiszy do przemieszczania. Przez to akceptuj± dok³adnie te same klawisze.
@@ -447,6 +459,7 @@ Przechodzi pó³ strony naprzód lub wstecz.
 .BR g ", " G .
 Przechodzi do pocz±tku lub do koñca.
 .PP
+.\"NODE "  Input Line Keys"
 .SH "  Linia wej¶ciowa klawiszy"
 Linie wej¶ciowe (te u¿ywane w linii komend i w oknach dialogowych), akceptuj±
 nastêpuj±ce klawisze:
@@ -503,6 +516,7 @@ Wykonuje dokoñczenie nazw plików, komend, zmiennych, u¿ytkowników, nazw hostów
 za Ciebie.
 .PP
 .SH ""
+.\"NODE "Menu Bar"
 .SH "Linia menu"
 Linia menu uaktywnia siê kiedy wciskasz klawisz F9 lub kiedy klikasz myszk±
 na najwy¿szy wiersz ekranu. Linia menu ma piêæ podmenu: "left", "file", command",
@@ -517,12 +531,14 @@ Menu plik pozwala na wykonanie akcji na aktualnym lub zaznaczonych plikach.
 Menu komend mie¶ci w sobie mo¿liwe do wykonania akcje, które s± du¿o bardziej
 globalne i nie maj± zwi±zku z aktualnym i zaznaczonymi plikami.
 .PP
+.\"NODE "  Left and Right Menus"
 .SH "  Lewe i prawe menu"
 Wygl±d panelu katalogowego mo¿e zostaæ zmieniony poprzez menu
 .B left
 i
 .BR right .
 .PP
+.\"NODE "    Listing Mode..."
 .SH "    Tryby wy¶wietlania (Listing modes)"
 Tryby wy¶wietlania s± u¿ywane do zmienia ustawieñ przy wy¶wietlaniu. Dostêpne
 s± cztery ró¿ne tryby:
@@ -652,6 +668,7 @@ W tym trybie, panele zostan± prze³±czone w tryb zredukowanego podgl±du
 wy¶wietlaj±cego zawarto¶æ aktualnego pliku. Je¶li zaznaczysz panel (klawiszem
 tab lub myszk±), bêdziesz mia³ dostêp do wiêkszo¶ci komend podgl±du.
 .PP
+.\"NODE "    Sort Order..."
 .SH "    Porz±dek sortowania (Sort order...)"
 Istnieje osiem porz±dków sortowania. Przez: nazwê, rozszerzenie,
 datê modyfikacje, datê odczytu, datê zmiany, rozmiar,
@@ -663,16 +680,19 @@ Standardowo, katalogi s± sortowane przed plikami, ale mo¿e to byæ zmienione
 przez opcjê
 .BR "Mix all files (mieszaj wszystkie pliki)" .
 .PP
+.\"NODE "    Filter..."
 .SH "    Filtry (Filter...)"
 Komenda filtra pozwala ci na podanie rozszerzenia, które musi byæ spe³nione,
 ¿eby pliki by³y widoczne (na przyk³ad
 \fB"*.tar.gz."\fR).
 Niezale¿nie od filtru katalalogi i dowi±zania do katalogów s± zawsze pokazywane.
 .PP
+.\"NODE "    Reread"
 .SH "    Od¶wie¿ (Reread)"
 Komenda od¶wie¿ od¶wie¿a widok wszystkich plików w katalogów. Jest to u¿yteczne
 je¶li inny proces stworzy³ lub usun±³ jaki¶ pliki. Je¶li u¿y³e¶ panelu
 zewnêtrznego, wszystkie informacje zostan± przywrócone do prawdziwego stanu.
+.\"NODE "  File Menu"
 .SH "Menu plików (File menu)"
 .PP
 Midnight Commander u¿ywa klawiszy F1 - F10 jako skrótów klawiszowych do komend
@@ -822,6 +842,7 @@ Zamyka Midnight Commandera. Shift-F10 jest u¿ywany je¶li u¿ywasz
 by³e¶ ostatnio w Midnight Commanderze, zamiast tego przejdzie do katalogu,
 z którego uruchomi³e¶ program.
 .PP
+.\"NODE "    Quick cd"
 .SH "    Szybka zmiana katalogów (Quick cd) M-c"
 Ta komenda jest bardzo u¿yteczna, je¶li masz ju¿ pe³n± liniê poleceñ, a
 chcesz przej¶æ do innego katalogu. Uruchamia ona ma³e okno dialogowe,
@@ -830,6 +851,7 @@ w którym podajesz to co po normalnej komendzie
 po czym naciskasz Enter. Wszystkie opcje s± dok³adnie takie same jak we
 wbudowanej komendzie cd.
 .PP
+.\"NODE "  Command Menu"
 .SH "  Menu komend (Command Menu)"
 Komenda drzewo katalogów (Directory tree) pokazuje drzewo katalogów.
 .PP
@@ -865,6 +887,7 @@ rozszerzeniami. Komenda edycji pliku menu (Menu file edit) mo¿e byæ u¿ywana do
 edytowania menu u¿ytkownika (tego, które pojawia siê po naci¶niêciu kombinacji
 F2).
 .PP
+.\"NODE "    Directory Tree"
 .SH "    Drzewo katalogów (Directory Tree)"
 Mo¿esz wybieraæ katalogi z drzewa katalogów i Midnight Commander przejdzie do
 wybranego przez Ciebie katalogu.
@@ -945,6 +968,7 @@ Mysz jest obs³ugiwana. Podwójne klikniêcie ma znaczenie identyczne do
 klawisza Enter. Zobacz równie¿ sekcjê
 .IR "Obs³uga myszy" .
 .PP
+.\"NODE "    Find File"
 .SH "    Znajd¼ plik (Find File)"
 Komenda znajd¼ plik najpierw pyta siê o startowy katalog do przeszukiwania
 i o nazwê pliku, który ma byæ znaleziony. Wciskaj±c przycisk "Tree" (drzewo)
@@ -990,6 +1014,7 @@ Szukanie pliku jest dobre tylko dla prostych zapytañ. U¿ywaj±c panelu
 zewnêtrznego mo¿esz dokonywaæ tak skomplikowanych wyszukiwañ jak tylko
 pragniesz.
 .PP
+.\"NODE "    External panelize"
 .SH "    Panel zewnêtrzny"
 Panel zewnêtrzny pozwala ci na wykonywanie zewnêtrznych programów i
 ogl±danie ich wyj¶cia jako zawarto¶ci aktywnego panelu.
@@ -1019,6 +1044,7 @@ w linii wej¶ciowej, a potem naciskaj±æ przycisk Add. Potem wpisujesz nazwê,
 pod jak± ta komenda ma byæ widoczna. Nastêpnym razem po prostu wybierasz
 tê komendê z listy i nie musisz ju¿ wpisywaæ jej ponownie.
 .PP
+.\"NODE "    Hotlist"
 .SH "    Hotlist"
 Hotlista katalogów pokazuje nazwy katalogów wprowadzonych do hotlisty.
 Midnight Commander zmieni miejsce do tego, które wskazuje nazwa katalogu.
@@ -1032,6 +1058,7 @@ Powoduje to przechodzenie do czê¶ciej przegl±danych katalogów znacznie szybciej.
 Mo¿esz u¿ywaæ ci±gle warto¶ci CDPATH opisanej w sekcji Wewnêtrzne
 przemieszczanie.
 .PP
+.\"NODE "    Extension File Edit"
 .SH "    Edycja rozszerzeñ pliów (Extension File Edit)"
 Ta komenda wywo³a twój edytor na plik ~/.mc/ext. Format tego pliku jest
 nastêpuj±cy (zmieni³ siê on pocz±wszy od wersji 3.0):
@@ -1094,6 +1121,7 @@ i trzecim i brakuje w pierwszym akcji View, to naciskaj±c F3 u¿yta bêdzie
 akcja z trzeciego wzorca). Opcja default powinna wychwyciæ wszystkie mo¿liwe
 akcje.
 .PP
+.\"NODE "    Background Jobs"
 .SH "    Prace w tle (Background jobs)"
 Pozwalaj± ci one kontrolowaæ status jakichkolwiek procesów wykonywanych
 w tle
@@ -1101,6 +1129,7 @@ przez Midnight Commandera (tylko operacje kopiowania i przenoszenia, mog±
 byæ wykonywane w tle). Z tego menu mo¿esz zastopowaæ, zresetowaæ i "zabiæ"
 proces w tle.
 .PP
+.\"NODE "    Menu File Edit"
 .SH "    Edycja menu u¿ytkownika (Menu File Edit)"
 Menu u¿ytkownika jest bardzo u¿ytecznym menu, które mo¿e byæ tworzone
 w sposób dowolny, przez u¿ytkownika. Kiedy tylko próbujesz co¶ zrobiæ
@@ -1108,7 +1137,7 @@ przy u¿yciu tego menu, ³adowany jest plik .mc.menu z aktualnego katalogu, ale
 tylko wtedy kiedy jest on w posiadaniu u¿ytkownika lub roota i mamy do niego
 prawa zapisu. Je¶li takiego nie ma próbuje siê z plikiem ~/.mc/menu z tymi
 samymi za³o¿eniami, je¶li jego te¿ nie ma - u¿ywa siê standardowego pliku
-systemowego, który znajduje siê w /usr/lib/mc/mc.menu.
+systemowego, który znajduje siê w @prefix@/lib/mc/mc.menu.
 .PP
 Format pliku z menu u¿ytkownika jest bardzo prosty. Linie zaczynaj±ce siê
 od czegokolwiek innego ni¿ spacja lub tabulacja, s± traktowane jako
@@ -1231,6 +1260,7 @@ siê od znaku '+', a drugim od '='.
 .PP
 Wszelkie komentarze rozpoczynaj± siê od znaku '#'.
 .PP
+.\"NODE "  Options Menu"
 .SH "  Menu opcji (Options Menu)"
 Midnight Commander ma niektóre opcje, które mog± byæ w³±czane lyb wy³±czane
 w ró¿nych oknach dialogowych z tego menu. Opcja jest w³±czona je¶li widnieje
@@ -1270,6 +1300,7 @@ Komenda
 .I Save Setup
 zachowuje wszystkie ustawienia z menu Lewego, Prawego i Opcji.
 .PP
+.\"NODE "    Configuration"
 .SH "    Konfiguracja"
 Opcje w tym oknie s± podzielone na trzy grupy:
 opcje panelu (Panel Options), zatrzymaj po uruchomieniu (Pause after run) i
@@ -1417,6 +1448,7 @@ trudniejsze. Standardowy wybór w linii potwierdzenia zmienia siê z "Yes" na
 .IR yes .
 Standardowo ta opcja jest wy³±czona.
 .PP
+.\"NODE "    Display bits"
 .SH "    Wy¶wietlanie znaków (Display bits)"
 U¿ywane do konfigurowania zakresu znaków widocznych potem na ekranie.
 To ustawienie mo¿e byæ 7-bitowe je¶li twój terminal obs³uguje tylko
@@ -1428,11 +1460,13 @@ Zobacz sekcjê
 .IR "Polskie znaki" ,
 po wiêcej szczegó³ów na temat ich u¿ywania w Midnight Commanderze.
 .PP
+.\"NODE "    Confirmation"
 .SH "    Potwierdzanie (Confirmation)"
 W tym menu mo¿esz skonfigurowaæ opcje potwierdzania dla kasowania,
 zastêpowania, wykonywania przez naci¶niêcie klawisza Enter, jak równie¿
 wychodzenia z programu.
 .PP
+.\"NODE "    Learn keys"
 .SH "    Nauka klawiszy (Learn keys)"
 W tym oknie mo¿esz przetestowaæ czy twoje klawisz F1-F20, Home, End itp.
 pracuj± poprawnie na twoim terminalu. Czêsto nie dzia³aj± tak, poniewa¿
@@ -1461,6 +1495,7 @@ Kiedy skoñczysz ju¿ ze wszystkimi klawiszami, mo¿esz nacisn±æ Save
 ¿eby zachowaæ zmiany do pliku ~/.mc/ini do sekcji [terminal:TERM] (gdzie
 TERM jest nazw± twojego aktualnego terminala) lub po prostu odrzuciæ je.
 .PP
+.\"NODE "    Virtual FS"
 .SH "    Wirtualny system plików (Virtual FS)"
 Ta opcja daje ci kontrolê nad ustawieniami informacji wirtualnego systemu
 plików.
@@ -1509,6 +1544,7 @@ Midnight Commandera tak, aby zawsze go u¿ywa³. Zobacz sekcjê
 System plików FTP (FTP File
 System) po wiêcej szczegó³ów.
 .PP
+.\"NODE "    Virtual FS"
 .SH "    Wygl±d (Layout)"
 Meny wygl±d pozwala ci na ró¿ne warianty zmieniania ogólnego wygl±du
 zewnêtrznego ekranu. Mo¿esz wybraæ, czy linia menu, linia poleceñ, linia
@@ -1540,10 +1576,11 @@ Je¶li opcja
 jest w³±czona, jeden wiersz informacji statusowych na temat aktualnie
 wybranej rzeczy w panelu, bêdzie pokazany na dole panelu.
 .PP
+.\"NODE "    Save Setup"
 .SH "    Zapisz ustawienia (Save Setup)"
 Na starcie Midnight Commander bêdzie próbowa³ odczytaæ opcje startowe
 z pliku ~/.mc/ini. Je¶li on nie istnieje, odczyta on konfiguracje z
-ogólnodostêpnego pliku /usr/lib/mc/mc.ini. Je¶li on te¿ nie istnieje MC
+ogólnodostêpnego pliku @prefix@/lib/mc/mc.ini. Je¶li on te¿ nie istnieje MC
 u¿yje swoich domy¶lnych ustawieñ.
 .PP
 Komenda
@@ -1561,6 +1598,7 @@ twojego ulubionego edytora. Zobacz sekcjê Specjalne ustawienia po wiêcej
 informacji.
 .PP
 .SH ""
+.\"NODE "Executing operating system commands"
 .SH "Wykonywanie poleceñ systemu operacyjnego (Executing operating system commands)"
 Mo¿esz wykonywaæ komendy wpisuj±c je bezpo¶rednio do linii poleceñ Midnight
 Commandera, lub wybieraj±c program, który chcesz wykonaæ za pomoc± klawiszy
@@ -1571,6 +1609,7 @@ sprawdzi rozszerzenie pliku i porówna je z rozszerzeniami wybranymi w pliku
 rozszerzeñ (Extensions File). Je¶li jaka¶ pozycja siê zgadza, wykonywana
 jest komenda (raczej bardziej rozszerzone makro) powi±zana z tym rozszerzeniem.
 .PP
+.\"NODE "  The cd internal command"
 .SH "  Wbudowana komenda cd (The cd internal command)"
 Komenda cd jest interpretowana przez Midnight Commandera, nie
 dok³adnie tak samo jak wykonuje to pow³oka. Przez to rozkaz cd nie mo¿e zawieraæ
@@ -1602,6 +1641,7 @@ na katalogi ~/src:/usr/src, pozwalaj±c na zmianê katalogów na jakikolwiek
 inny wewn±trz ~/src i /usr/src, z miejsca w którym jeste¶ (np. cd linux
 przeniesie ciê do katalogu /usr/src/linux).
 .PP
+.\"NODE "  Macro Substitution"
 .SH "  Obs³uga makr (Macro Substitution)"
 .PP
 Kiedy u¿ywamy menu u¿ytkownika, wykonujemy plik o znajomym rozszerzeniu, lub
@@ -1683,6 +1723,7 @@ u¿ywany jest jako zachêta (prompt). Makro jest zastêpowane tekstem wpisanym
 przez u¿ytkownika. U¿ytkownik mo¿e nacisn±æ ESC lub F10 aby anulowaæ. To
 makro nie dzia³a jeszcze w linii poleceñ.
 .PP
+.\"NODE "  The subshell support"
 .SH "  Obs³uga podpow³oki (The subshell support)"
 Podpow³oka (pow³oka w tle) jest opcj±, która musi byæ wybrana przy kompilacji,
 dzia³a ona z pow³okami: bash, tcsh i zsh.
@@ -1716,30 +1757,7 @@ w Midnight Commanderze jest t± sam±, któr± aktualnie u¿ywasz w pow³oce.
 Zobacz sekcjê Opcje po wiêcej informacji na temat tego, jak mo¿esz
 kontrolowaæ pow³okê w tle.
 .PP
-.SH "  Kontrolowanie Midnight Commandera"
-Midnight Commander definiuje zmienn± ¶rodowiskow± MC_CONTROL_FILE.
-Komendy wykonywane przez MC mog± dawaæ instrukcje do MC poprzez wpisywanie
-ich do wybranego przez tê zmienn± pliku. To jest mo¿liwe tylko je¶li
-skompilowa³e¶ Midnight Commandera z opcj± WANT_PARSE.
-.PP
-Obs³ugiwane s± nastêpuj±ce instrukcje.
-.PP
-.nf
-clear_tags		Czy¶ci wszystkie zaznaczenia.
-tag <filename>		Zaznacza wybrany plik.
-untag <filename>	Odznacza wybrany plik.
-select <filename>	Przenosi liniê wyboru do wybranego pliku.
-change_panel		Prze³±cza pomiêdzy panelami.
-cd <path>		Zmienia katalog.
-.fi
-.PP
-Je¶li pierwsza litera instrukcji jest ma³a operujemy na aktywnym panelu. Je¶li
-jest wielka instrukcja jest wykonywana na nieaktywnym panelu. Nastêpne
-literki musz± byæ ma³e. Instrukcje musz± byæ odseparowane dok³adnie
-jedn± spacj±, tabulacj± lub now± lini±. Instrukcje nie dzia³aj± w trybie
-info, tree i quick. Pierwszy b³±d powoduje automatycznie niewykonanie
-pozosta³ych instrukcji.
-.PP
+.\"NODE "Chmod"
 .SH "Chmod"
 Okno Chmod jest u¿ywane do zmieniania atrybutów grupy plików lub katalogów.
 Mo¿e byæ ono wywo³ane kombinacj± C-x c.
@@ -1794,14 +1812,17 @@ ustawia atrybuty jednego pliku.
 .B [Cancel]
 uniewa¿nia komendê chmod.
 .PP
+.\"NODE "Chown"
 .SH "Chown"
 Komenda chown jest u¿ywana do zmiany w³a¶ciela/grupy pliku. Skrótem
 klawiszowym jest kombinacja C-x o.
 .PP
+.\"NODE "Advanced Chown"
 .SH "Zaawansowane chown (Advanced Chown)"
 Zaawansowane chown jest komend± ³±cz±c± w sobie komendy chmod i chown.
 Mo¿esz za jednym zamachem zmieniæ atrybuty i w³a¶ciela/grupê pliku.
 .PP
+.\"NODE "File Operations"
 .SH "Operacje na plikach (File Operations)"
 Kiedy kopiujesz, przenosisz lub kasujesz pliki, Midnight Commander pokazuje
 okno opisowe operacji na pliku. Pokazuje nazwê pliku, na którym
@@ -1845,6 +1866,7 @@ Je¶li zaznaczy³e¶ pliki, i wykonujesz operacje tylko na nich, to je¶li
 operacja siê uda³a zostan± one odznaczone, te, na których operacja
 nie przebieg³a ca³kowicie pomy¶lnie, pozostan± zaznaczone.
 .PP
+.\"NODE "Mask Copy/Rename"
 .SH "Maski kopiowania/przenoszenia (Mask Copy/Rename)"
 Operacje przenoszenia i kopiowania pozwalaj± ci na t³umaczenie nazw
 plików w ³atwy sposób. Aby to zrobiæ, musisz wybraæ odpowiedni± maskê
@@ -1937,6 +1959,7 @@ nazwy.
 Mo¿esz równie¿ u¿ywaæ '\\' aby "podkre¶liæ" znak. Na przyk³ad, '\\\\' jest
 backsleshem, a '\\*' jest gwiazdk±.
 .PP
+.\"NODE "Internal File Viewer"
 .SH "Wbudowany podgl±d plików"
 Wbudowany podgl±d plików pozwala na dwa tryby wy¶mietlania: ASCII i hex.
 Aby prze³±czaæ siê pomiêdzy tymi trybami u¿ywaj klawisza F4. Je¶li masz
@@ -2044,6 +2067,7 @@ Prze³±cza linijkê.
 .PP
 Mo¿liwe jest poinstruowanie podgl±du pliku jak ma wy¶wietlaæ plik, zobacz
 sekcjê Edycja pliku rozszerzeñ.
+.\"NODE "Internal File Editor"
 .SH "Wbudowany edytor plików"
 Wbudowany edytor plików ma wiêkszo¶æ funkcji posiadanych przez inne
 edytory pe³no-ekranowe. Jest wywo³ywany po naci¶niêciu klawisza
@@ -2151,6 +2175,7 @@ do 7 bitów w menu opcji, aby utrzymaæ przejrzysto¶æ odstêpów miêdzy znakami.
 Zobacz sekcjê Polskie znaki, aby poznaæ szczegó³y na temat u¿ywania
 polskich znaków w Midnight Commanderze.
 .PP
+.\"NODE "Completion"
 .SH Dokañczanie
 .PP
 Pozwól Midnight Commanderowi pisaæ za ciebie.
@@ -2188,6 +2213,7 @@ jest wy³±czone, okno z list± w³±cza siê dopiero wtedy, kiedy naciskasz
 .B M-Tab
 po raz drugi. Za pierwszym razem MC wydaje tylko krótki d¼wiêk.
 .PP
+.\"NODE "Virtual File System"
 .SH "Wirtualny system plików (Virtual File System)"
 Midnight Commander jest dostarczany z kodem pozwalaj±cy na dostêp do
 systemów plików. Ten kod nazywany jest wirtualnym systemem plików. Pozwala on
@@ -2208,6 +2234,7 @@ Kod VFS potrafi interpretowaæ poprawnie wszystkie nazwy ¶cie¿ek i przekazuje
 je do w³a¶ciwego systemu plików. Format u¿ywany dla ka¿dego z systemów plików
 jest opisany w swojej oddzielnej sekcji.
 .PP
+.\"NODE "  FTP File System"
 .SH "  System plików FTP (FTP File System)"
 Ftpfs pozwala na manipulowanie plikami na zdalnych komputerach, do
 normalnego u¿ytku, mo¿esz próbowaæ u¿ywaæ panelowych komend FTP i dowi±zañ
@@ -2252,7 +2279,7 @@ Inn± mo¿liwo¶ci± jest ustawienie opcji
 w oknie konfiguracyjnym wirtualnego systemu plików. Skonfiguruje
 to program tak, aby zawsze
 u¿ywa³ serwera proxy. Je¶li ta zmienna jest ustawiona, program bêdzie robi³
-dwie rzeczy: konsultowa³ plik /usr/lib/mc.no_proxy w celu znalezienia linii
+dwie rzeczy: konsultowa³ plik @prefix@/lib/mc.no_proxy w celu znalezienia linii
 zawieraj±cych nazwy serwerów, które s± lokalne (je¶li nazwa hosta zaczyna
 siê od kropki, uznaje siê, ¿e jest to domena) i sprawdza czy jakie¶ hosty
 bez kropek w nazwie s± widoczne bezpo¶rednio.
@@ -2270,6 +2297,7 @@ u¿yciu kombinacji C-r. To jest dobre rozwi±zanie (je¶li my¶lisz, ¿e to jest
 bug, to pomy¶l o pracy na zdalnych systemach po³o¿onych po drugiej stronie
 Atlantyku przy u¿yciu ftpfs :) ).
 .PP
+.\"NODE "  Tar File System"
 .SH "  System plików tar (Tar File System)"
 System plików tar pozwala na dostêp w trybie tylko-do-odczytu do plików typu
 tar i do skompresowanych plików typu tar, za pomoc± komendy chdir. Aby
@@ -2291,6 +2319,7 @@ Przyk³ady
 .fi
 .PP
 Pó¼niejszy podaje pe³n± ¶cie¿kê archiwum tar.
+.\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Transfer plików pomiêdzy systemami plików (FIle transfer over SHell filesystem)".
 .PP
 System plików fish jest systemem opartym na sieci, który pozwala na
@@ -2328,6 +2357,7 @@ Przyk³ady:
     /#sh:joe@want.compression.edu:C/private
     /#sh:joe@noncompressed.ssh.edu/private
 .fi
+.\"NODE "  Network File System"
 .SH "  Sieciowe systemy plików"
 Midnight Commander pozwala na obs³ugê zdalnych systemów i manipulowanie
 na ich dyskach, tak jakby by³y one lokalne. ¯eby to by³o mo¿liwe
@@ -2365,6 +2395,7 @@ Przyk³ady:
     mc:joe@foo.edu:11321/private
 .fi
 .PP
+.\"NODE "  Undelete File System"
 .SH "  Odzyskiwanie plików"
 Na systemach Linuksowych, je¶li doda³e¶ w konfiguracji opcjê przywracania
 skasowanych plików z systemów ext2, bêdziesz w stanie to robiæ. Odzyskiwanie
@@ -2429,6 +2460,7 @@ zapisujemy konfiguracjê w opcje | Save setup.
 I gotowe - polskie literki dzia³aj± równie¿ w podgl±dzie i wbudowanym
 edytorze plików.
 .PP
+.\"NODE "Colors"
 .SH Kolory
 Midnight Commander próbuje sprawdziæ czy twój terminal obs³uguje
 kolory u¿ywaj±c bazy danych terminali. Czasami jest to zmieniane
@@ -2539,6 +2571,7 @@ brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
 cyan, brightcyan, lightgray and white. [sorry, ¿e ich nazw nie t³umaczy³em,
 ale u¿ywaæ ich trzeba w oryginalnym brzmieniu :))].
 .PP
+.\"NODE "Special Settings"
 .SH "Specjalne ustawienia"
 Wiêkszo¶æ ustawieñ Midnight Commandera mo¿e byæ zmieniana z poziomu menu.
 Pomimo tego jest pewna ilo¶æ ustawieñ, których zmiana mo¿liwa jest jedynie
@@ -2696,6 +2729,7 @@ Je¶li ta opcja jest w³±czona (standardowo tak nie jest) kiedy przegl±dasz plik
 w panelu drzewa, bêdzie on automatycznie prze³adowywa³ drugi panel na
 zawarto¶æ wybranego katalogu.
 .PP
+.\"NODE "Terminal databases"
 .SH Baza danych terminali (Terminal databases)
 Midnight Commander pozwala ci na naprawienie bazy danych terminali bez
 posiadania uprawnieñ roota. Midnight Commander szuka w pliku startowym
@@ -2739,16 +2773,17 @@ do wykonywania tych samych funkcji (na tych klawiaturach z ton± fajnych i
 zupe³nie bezu¿ytecznych klawiszy).
 .PP
 .SH ""
+.\"NODE "FILES"
 .SH PLIKI
 .PP
 Program bêdzie pobiera³ wszystkie swoje informacje ze zmiennej MCHOME,
 je¶li jest ona nie ustawiona to znowu przetwarzany jest katalog /usr.
 .PP
-/usr/lib/mc.hlp
+@prefix@/lib/mc.hlp
 .IP
 Plik pomocy dla programu.
 .PP
-/usr/lib/mc/mc.ext
+@prefix@/lib/mc/mc.ext
 .IP
 Standardowy plik rozszerzeñ plików.
 .PP
@@ -2757,12 +2792,12 @@ Standardowy plik rozszerzeñ plików.
 W³asny plik u¿ytkownika, konfiguruje podgl±d i edycje plików. Ma wy¿szy
 priorytet ni¿ plik systemowy.
 .PP
-/usr/lib/mc/mc.ini
+@prefix@/lib/mc/mc.ini
 .IP
 Standardowy plik setupu do Midnight Commandera, u¿ywany tylko wówczas,
 kiedy u¿ytkownik nie ma swojego w³asnego pliku ~/.mc/ini.
 .PP
-/usr/lib/mc/mc.lib
+@prefix@/lib/mc/mc.lib
 .IP
 Globalne ustawienia Midnight Commandera. Ustawienia w tym pliku s±
 uwzglêdniane przez wszystkie sesje Midnight Commandera, u¿yteczne do
@@ -2773,11 +2808,11 @@ definiowania ogólnosystemowych ustawieñ terminali.
 W³asny setup u¿ytkownika. Je¶li ten plik jest dostêpny, jest ³adowany
 zamiast pliku globalnego.
 .PP
-/usr/lib/mc/mc.hint
+@prefix@/lib/mc/mc.hint
 .IP
 Plik zawieraj±cy podpowiedzi (hints) wy¶wietlane przez program.
 .PP
-/usr/lib/mc/mc.menu
+@prefix@/lib/mc/mc.menu
 .IP
 Ten plik zawiera informacje o ogólnosystemowych aplikacjach w menu.
 .PP
@@ -2800,14 +2835,17 @@ Midnight Commander robi to sam za ciebie.
 Lokalny plik zdefiniowany przez u¿ytkownika. Je¶li ten plik jest dostêpny,
 jest u¿ywany zamiast pliku w katalogu domowym i ogólnosystemowego.
 .PP
+.\"SKIP_SECTION"
 .SH LICENCJA
 Program jest dystrybuowany na zasadach licencji GNU General Public License
 dopóki jako publikowany przez Free Software Foundation. Zobacz wbudowan±
 pomoc po wiêcej szczegó³ów na temat licencji i braku gwarancji.
+.\"NODE "AVAILABILITY"
 .SH DOSTÊPNO¦Æ
 Najnowsza wersja programu jest do zdobycia na serwerze ftp.nuclecu.unam.mc w
 katalogu /linux/local i w Europie na serwerze sunsite.mff.cuni.cz w katalogu
 /GNU/mc i na serwerze ftp.teuto.de w katalogu /lmb/mc.
+.\"NODE "SEE ALSO"
 .SH ZOBACZ TAK¯E
 ed(1), gpm(1), mcserv(8), terminfo(1), view(1), sh(1), bash(1),
 tcsh(1), zsh(1).
@@ -2817,6 +2855,7 @@ Strona Midnight Commander w sieci World Wide Web:
 	http://www.gnome.org/mc/
 .fi
 .PP
+.\"NODE "AUTHORS"
 .SH AUTORZY
 Miguel de Icaza (miguel@roxanne.nuclecu.unam.mx), Janne Kukonlehto
 (jtklehto@paju.oulu.fi), Radek Doulik (rodo@ucw.cz), Fred
@@ -2851,6 +2890,7 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 and Wim Osterholt (wim@djo.wtm.tudelft.nl).
 .PP
+.\"NODE "BUGS"
 .SH B£ÊDY
 W pliku TODO dystrybucji znajdziesz informacje na temat tego, co
 pozosta³o jeszcze do zrobienia.
