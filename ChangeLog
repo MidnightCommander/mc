@@ -1,3 +1,7 @@
+1999-07-02  Tuomas J. Lukka <lukka@iki.fi>
+
+	* Add fi into ALL_LINGUAS
+
 1999-07-01  Tuomas Kuosmanen  <tigert@gimp.org>
 
 	* gnome/i-zipdisk2.png: Added another zip-disk icon
