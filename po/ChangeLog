@@ -2,10 +2,10 @@
 
 	* es.po: Updated Spanish translation.
 
-2004-12-07  Marco Ciampa <ciampix@libero.it>
+2004-12-07  Marco Ciampa  <ciampix@libero.it>
 
 	* it.po: Updated italian translation.
-	
+
 2004-12-02  Pavel Shirshov  <me@pavelsh.pp.ru>
 
 	* az.po: Use proper format string parameter for size in file dialogs.
@@ -85,7 +85,7 @@
 	* zh_CN.po: Likewise.
 	* zh_TW.po: Likewise.
 
-2004-09-29  Andriy Gritsenko <andrej@rep.kiev.ua>
+2004-09-29  Andriy Gritsenko  <andrej@rep.kiev.ua>
 
 	* uk.po: Updated Ukrainian translation.
 
@@ -96,7 +96,7 @@
 
 2004-09-04  Jakub Jelinek  <jakub@redhat.com>
 
-	* az.po: don't truncate block counts to 32 bits 
+	* az.po: don't truncate block counts to 32 bits
 	on 64-bit platforms
 	* be.po: Likewise.
 	* bg.po: Likewise.

@@ -69,7 +69,7 @@
 	(remote_proto, remote_arch): Make static const char * instead of
 	fstring.
 	(local_machine, remote_machine): Ditto.
-	* samba/libsmb/clientgen.c (interpret_long_filename): Fix 
+	* samba/libsmb/clientgen.c (interpret_long_filename): Fix
 	def_finfo declaration.
 
 2005-01-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
@@ -77,7 +77,7 @@
 	* ftpfs.c (ftpfs_file_store): Make sure we write() all read() data.
 	Check fstat() return value.
 
-2005-01-07  Roland Illig <roland.illig@gmx.de>
+2005-01-07  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/urar.in: Fixed some quoting issues.
 
@@ -114,10 +114,10 @@
 
 	* ext.c: Fixed FIXME by passing around a reference to a VFS.
 
-2004-12-01  Pavel Tsekov <ptsekov@gmx.net>
+2004-12-01  Pavel Tsekov  <ptsekov@gmx.net>
 
 	* tar.c (tar_read_header): Skip over records containing
-        incremental tar specific info.
+	incremental tar specific info.
 
 2004-11-29  Jindrich Novy  <jnovy@redhat.com>
 
@@ -165,9 +165,9 @@
 	* vfs.c (vfs_prefix_to_class): Avoid last class (localfs) that would
 	accept any prefix.
 
-2004-11-04 Mike Gorchak <mike@malva.ua>
+2004-11-04  Mike Gorchak  <mike@malva.ua>
 
-        * cpio.c (cpio_create_entry): Added initial support for the Special
+	* cpio.c (cpio_create_entry): Added initial support for the Special
 	Named Files. Needed on QNX Neutrino.
 	* utilvfs.c (vfs_parse_filetype): Likewise.
 
@@ -175,7 +175,7 @@
 
 	* ftpfs.c: Add fallback to type int if socklen_t is not provided.
 
-2004-11-01  Andriy Gritsenko <andrej * rep kiev ua>
+2004-11-01  Andriy Gritsenko  <andrej * rep kiev ua>
 
 	* tar.c (tar_read_header): Fix pathname canonicalization.
 
@@ -208,8 +208,8 @@
 
 2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * smbfs.c (smbfs_open_readwrite): Comment out flags games,
-        it is cli_open() headache.
+	* smbfs.c (smbfs_open_readwrite): Comment out flags games,
+	it is cli_open() headache.
 
 	* vfs.c (mc_def_getlocalcopy): Don't close fd -1.
 	(_vfs_get_class): Make path "char *" instead of
@@ -307,7 +307,7 @@
 
 2004-09-25  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* direntry.c (vfs_s_free_entry): g_free handles NULL argument too, 
+	* direntry.c (vfs_s_free_entry): g_free handles NULL argument too,
 	no need for the comparison.
 	* extfs.c (extfs_free_archive): Likewise.
 	    (extfs_open_archive): Likewise.
@@ -378,15 +378,15 @@
 2004-09-17  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs.c (extfs_open_archive): Fixes bug in extfs, which showed
-	'Inconsistent extfs archive' on small archives and diffs. 
-	QNX 6.x (QNX Neutrino) specific 
+	'Inconsistent extfs archive' on small archives and diffs.
+	QNX 6.x (QNX Neutrino) specific
 
 	Based on patch from Dmitry Alexeyev <dmi_a@qnx.org.ru>
 
 2004-09-06  Jakub Jelinek  <jakub@redhat.com>
 
-        * fish.c (fish_file_store): Call got_interrupt() instead of testing
-        whether got_interrupt is non-NULL (it always is).
+	* fish.c (fish_file_store): Call got_interrupt() instead of testing
+	whether got_interrupt is non-NULL (it always is).
 
 2004-09-04  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
@@ -402,14 +402,14 @@
 
 2004-09-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * tar.c (tar_read_header): Fix missed *.
-        * extfs.c (extfs_readlink): Revert last change: readlink() does not
-        append a NUL character to buf.
+	* tar.c (tar_read_header): Fix missed *.
+	* extfs.c (extfs_readlink): Revert last change: readlink() does not
+	append a NUL character to buf.
 	* mcfs.c (mcfs_readlink): Likewise.
 	* direntry.c (vfs_s_readlink): Likewise.
-        * ftpfs.c: Warning fix.
-        * vfs-impl.h (struct vfs_class.readlink): Make "size" size_t.
-        Adjust all callers.
+	* ftpfs.c: Warning fix.
+	* vfs-impl.h (struct vfs_class.readlink): Make "size" size_t.
+	Adjust all callers.
 	* local.c (local_readlink): Make "size" size_t.
 	* sfs.c (sfs_readlink): Reformat function.
 	* smbfs.c (smbfs_readlink): Reformat function.
@@ -421,7 +421,7 @@
 
 2004-09-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* extfs/uzip.in (mczipfs_list): Add support for negative 
+	* extfs/uzip.in (mczipfs_list): Add support for negative
 	compression ratio in archive listing.
 
 2004-09-02  Pavel S. Shirshov  <me@pavelsh.pp.ru>
@@ -444,17 +444,17 @@
 2004-09-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* fish.c (fish_get_reply): Use g_strlcpy() instead of
-        sequence strncpy(), name[len] = '\0'
+	sequence strncpy(), name[len] = '\0'
 	* vfs.c (mc_get_current_wd): Likewise.
 
 2004-08-31  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * utilvfs.c (vfs_parse_ls_lga): Use atoll()/atof() instead of atol()
-        for st_size to show file sizes > 2G.
-        * fish.c (fish_dir_load): Likewise.
-        * extfs.c (struct inode): Use off_t for size.
+	* utilvfs.c (vfs_parse_ls_lga): Use atoll()/atof() instead of atol()
+	for st_size to show file sizes > 2G.
+	* fish.c (fish_dir_load): Likewise.
+	* extfs.c (struct inode): Use off_t for size.
 
-        Reported by Daradics Daniel <yotzo@freemail.hu>.
+	Reported by Daradics Daniel <yotzo@freemail.hu>.
 
 2004-08-29  Roland Illig  <roland.illig@gmx.de>
 
@@ -510,7 +510,7 @@
 
 2004-08-21  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* extfs/rpm: Modified workaround for spaces and single quotes 
+	* extfs/rpm: Modified workaround for spaces and single quotes
 	in the path name.
 
 	Based on patch from Jakub Jelinek  <jakub@redhat.com>
@@ -518,8 +518,8 @@
 2004-08-21  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs/rpm: Don't show cpio contents in main rpm view.
-	Also avoids copying files from main view instead of from 
-	inside CONTENTS.cpio. The former is painfully slow as the whole 
+	Also avoids copying files from main view instead of from
+	inside CONTENTS.cpio. The former is painfully slow as the whole
 	file is rpm2cpio'd on each copy.
 
 	From Jakub Jelinek  <jakub@redhat.com>
@@ -534,14 +534,14 @@
 	* extfs/deb.in (mcdebfs_list): Separated the use of quoted and
 	unquoted variables. (mcdebfs_copyout): likewise.
 	(mcdebfs_run): likewise.
-	
+
 	From Leonard den Ottolander <leonard * den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* extfs/deba.in (list): Separated the use of quoted and unquoted
 	variables. (copyout): likewise. (run): likewise.
-	
+
 	From Leonard den Ottolander <leonard * den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
@@ -549,7 +549,7 @@
 	* extfs/deba.in (bt): deleted. (ft): deleted. (fm): deleted.
 	(ls): deleted. (list): correctly quoted shell command arguments.
 	(copyout): likewise. (run): likewise.
-	
+
 	From Leonard den Ottolander <leonard * den.ottolander.nl>
 
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
@@ -562,7 +562,7 @@
 2004-08-18  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
 	* extfs/rpm: Command line parameters fix for UPGRADE.
-	Fix mcrpmfs_copyout for INFO/OBSOLETES and INFO/LICENSE 
+	Fix mcrpmfs_copyout for INFO/OBSOLETES and INFO/LICENSE
 
 	From Leonard den Ottolander <leonard * den.ottolander.nl>
 
@@ -606,15 +606,15 @@
 
 2004-08-16  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-	* extfs/deb.in: Security fix patch. Fix insecure temporary file and 
+	* extfs/deb.in: Security fix patch. Fix insecure temporary file and
 	directory creations. (CAN-2004-0231).
 
-        * extfs/uar.in: Likewise.
+	* extfs/uar.in: Likewise.
 	* extfs/uha.in: Likewise.
 	* extfs/ulha.in: Likewise.
-        * extfs/urar.in: Likewise.
-        * extfs/uzip.in: Likewise.
-        * extfs/uzoo.in: Likewise.
+	* extfs/urar.in: Likewise.
+	* extfs/uzip.in: Likewise.
+	* extfs/uzoo.in: Likewise.
 
 2004-08-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 

@@ -13,9 +13,9 @@
 
 2004-11-09  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-        * include/slang.h (SLang_Version): Delete const qualifier for
+	* include/slang.h (SLang_Version): Delete const qualifier for
 	compatibility with system slang library.
-        * slmisc.c: Likewise.
+	* slmisc.c: Likewise.
 
 	* sldisply.c (tt_sprintf): Import last changes from libslang-current.
 	Add code to check for a buffer overflow.
@@ -26,8 +26,8 @@
 
 2004-11-08  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-        * include/slang.h (SLang_Version): Declare const.
-        * slmisc.c: Add SLang_Version.
+	* include/slang.h (SLang_Version): Declare const.
+	* slmisc.c: Add SLang_Version.
 
 2004-11-01  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
@@ -60,7 +60,7 @@
 	* sldisply.c (SLtt_erase_line): Use tt_write() instead
 	tt_write_string().
 
-2004-09-26  Mike Gorchak  <mike@malva.ua> 
+2004-09-26  Mike Gorchak  <mike@malva.ua>
 
 	* sldisplay.c (SLtt_goto_rc): Disable cursor movement optimizations
 	for qansi-m consoles. Needed on QNX Neutrino.
