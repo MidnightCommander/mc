@@ -6,7 +6,7 @@
 : ${backup_suffix="\.v0"}
 backup_files=`find . -path "*$backup_suffix" -type f | sort -u`
 for oldfile in $backup_files; do
-  newfile=`echo $oldfile | sed 's,^\./,,;s,'$backup_suffix'$,,'`
+  newfile=`echo $oldfile | sed 's,^\./,,;s/'$backup_suffix'$//'`
   oldlabel="$oldprefix$newfile"
   newlabel="$newprefix$newfile"
   find "$oldfile" ! -size 0 | grep . >/dev/null || \
@@ -15,7 +15,7 @@ for oldfile in $backup_files; do
     { newfile="/dev/null"; newlabel="/dev/null"; }
   case $newfile in
     *.c) dflags="-u -p" ;;
-    *.po) dflags="-u1 -I'^#[:,.~]'"
+    *.po) dflags="-u1 -I'^#[:,.~]'";;
     *ChangeLog*) dflags="-u1" ;;
     *) dflags="-u" ;;
   esac
