@@ -335,3 +335,8 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 	  fi
 	  shift
         done
+
++ x /usr/bin/open | x /usr/local/bin/open & x /bin/sh
+o       Open next a free console
+        open -s -- sh
+

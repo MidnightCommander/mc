@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # It is the uhafs Valery Kornienkov vlk@st.simbirsk.su 2:5051/30@fidonet
-# ver ? :)
+# ver 0.1 Thu Apr  6 12:05:08 2000
 
 HA=ha # for HA 0.999 Copyright (c) 1995 Harri Hirvola
       # Source: ftp://sunsite.unc.edu/pub/Linux/compress/ha0999p-linux.tar.gz
@@ -12,7 +12,7 @@ mchafs_list ()
 { date="JanFebMarAprMayJunJulAugSepOctNovDec" }
 /^===========/ {next}
 {
- if ($5="%" && $8~/DIR|ASC|CPY/) { 
+ if ($5="%" && $8~/DIR|ASC|HSC|CPY/) {
    split($6, a, "-")
    split($7, t, ":")
    filename=$1

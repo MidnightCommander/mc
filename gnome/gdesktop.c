@@ -42,6 +42,7 @@ struct layout_slot {
 
 /* Configuration options for the desktop */
 
+
 int desktop_use_shaped_icons = TRUE;
 int desktop_auto_placement = FALSE;
 int desktop_snap_icons = FALSE;
@@ -68,6 +69,8 @@ char *desktop_directory;
  * array of slots.  Each slot is an integer that specifies the number of icons
  * that belong to that slot.
  */
+static int layout_spacer_width;
+static int layout_spacer_height;
 static int layout_screen_width;
 static int layout_screen_height;
 static int layout_cols;
@@ -148,6 +151,22 @@ static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url, char *
 
 static GHashTable *icon_hash;
 
+/* Convenience function to figure out the (x, y) position from a slot */
+static void
+get_pos_from_slot (int u, int v, int *x, int *y)
+{
+        int xx, yy;
+
+        xx = (layout_spacer_width / 2) +
+             (u * (DESKTOP_SNAP_X + layout_spacer_width));
+
+	yy = (layout_spacer_height / 2) +
+             (v * (DESKTOP_SNAP_Y + layout_spacer_height));
+
+	*x = CLAMP (xx, 0, layout_screen_width);
+	*y = CLAMP (yy, 0, layout_screen_height);
+
+}
 
 /* Convenience function to figure out the slot corresponding to an (x, y) position */
 static void
@@ -155,8 +174,8 @@ get_slot_from_pos (int x, int y, int *u, int *v)
 {
 	int uu, vv;
 
-	uu = (x + DESKTOP_SNAP_X / 2) / DESKTOP_SNAP_X;
-	vv = (y + DESKTOP_SNAP_Y / 2) / DESKTOP_SNAP_Y;
+	uu = x / (DESKTOP_SNAP_X + layout_spacer_width);
+	vv = y / (DESKTOP_SNAP_Y + layout_spacer_height);
 
 	*u = CLAMP (uu, 0, layout_cols - 1);
 	*v = CLAMP (vv, 0, layout_rows - 1);
@@ -252,6 +271,8 @@ get_icon_auto_pos (int *x, int *y)
 	int slot1;
 	int slot;
 	int sx, sy, ex, ey;
+	int u, v;
+	int xx, yy;
 
 #if 0
 	get_slot_from_pos (*x, *y, &sx, &sy);
@@ -305,9 +326,14 @@ get_icon_auto_pos (int *x, int *y)
 			slot = slot2;
 	}
 #endif
+	u = slot / layout_rows;
+	v = slot % layout_rows;
 
-	*x = (slot / layout_rows) * DESKTOP_SNAP_X;
-	*y = (slot % layout_rows) * DESKTOP_SNAP_Y;
+	get_pos_from_slot(u, v, &xx, &yy);
+
+	*x = xx;
+	*y = yy;
+
 }
 
 /* Snaps the specified position to the icon grid.  It looks for the closest free spot on the grid,
@@ -321,6 +347,7 @@ get_icon_snap_pos (int *x, int *y)
 	int u, v;
 	int val, dist;
 	int dx, dy;
+	int ux, vy;
 
 	min = l_slots (0, 0).num_icons;
 	min_x = min_y = 0;
@@ -329,21 +356,22 @@ get_icon_snap_pos (int *x, int *y)
 	for (u = 0; u < layout_cols; u++)
 		for (v = 0; v < layout_rows; v++) {
 			val = l_slots (u, v).num_icons;
-
-			dx = *x - u * DESKTOP_SNAP_X;
-			dy = *y - v * DESKTOP_SNAP_Y;
+			get_pos_from_slot(u, v, &ux, &vy);
+			dx = *x - ux;
+			dy = *y - vy;
 			dist = dx * dx + dy * dy;
 
 			if ((val == min && dist < min_dist) || (val < min)) {
 				min = val;
 				min_dist = dist;
-				min_x = u;
-				min_y = v;
+				min_x = ux;
+				min_y = vy;
 			}
 		}
 
-	*x = min_x * DESKTOP_SNAP_X;
-	*y = min_y * DESKTOP_SNAP_Y;
+	*x = min_x;
+	*y = min_y;
+
 }
 
 /* Removes an icon from the slot it is in, if any */
@@ -373,15 +401,16 @@ desktop_icon_info_place (DesktopIconInfo *dii, int xpos, int ypos)
 
 	remove_from_slot (dii);
 
-	if (xpos < 0)
-		xpos = 0;
-	else if (xpos > layout_screen_width)
-		xpos = layout_screen_width - DESKTOP_SNAP_X;
+	if (xpos < (layout_spacer_width / 2))
+		xpos = layout_spacer_width / 2;
+	else if (xpos > layout_screen_width - (DESKTOP_SNAP_X + (layout_spacer_width / 2)))
+		xpos = layout_screen_width - (DESKTOP_SNAP_X + (layout_spacer_width / 2));
 
-	if (ypos < 0)
-		ypos = 0;
-	else if (ypos > layout_screen_height)
-		ypos = layout_screen_height - DESKTOP_SNAP_Y;
+	if (ypos < (layout_spacer_height / 2))
+	        ypos = layout_spacer_height / 2;
+	else if (ypos > layout_screen_height - (DESKTOP_SNAP_Y + (layout_spacer_height / 2)))
+		ypos = layout_screen_height - (DESKTOP_SNAP_Y + (layout_spacer_height / 2));
+
 
 	/* Increase the number of icons in the corresponding slot */
 
@@ -507,6 +536,64 @@ typedef struct {
 	char *caption;
 } file_and_url_t;
 
+/* get_drop_grid generates a compact organization for icons that are dragged out
+ * of applications on to the desktop.
+ */
+GSList *
+get_drop_grid (gint xpos, gint ypos, gint need_position_list_length, GSList *grid_list)
+{
+        gint i = 1;
+	gint my_bool = 0;
+	gint j;
+	gint k;
+	gint new_xpos;
+	gint new_ypos;
+
+	/* Determine size of a square grid in which to put the dropped icons */
+	while (!my_bool) {
+	        if (need_position_list_length <= i * i)
+		        my_bool = 1;
+		else
+		        i++;
+	}
+
+	/* Make sure no icons are off the side of the screen */
+	if ((xpos + (i * DESKTOP_SNAP_X) + ((i - 1) * layout_spacer_width) +
+	    (layout_spacer_width / 2)) > layout_screen_width) {
+	        xpos = layout_screen_width - (layout_spacer_width / 2) -
+		       (i * DESKTOP_SNAP_X) - ((i - 1) * layout_spacer_width);
+	}
+	if ((ypos + (i * DESKTOP_SNAP_Y) + ((i - 1) * layout_spacer_height) +
+	     (layout_spacer_height / 2)) > layout_screen_height) {
+		ypos = layout_screen_height - (layout_spacer_height / 2) -
+		       (i * DESKTOP_SNAP_Y) - ((i - 1) * layout_spacer_height);
+	}
+	if (xpos < layout_spacer_width / 2) {
+	        xpos = layout_spacer_width / 2;
+	}
+	if (ypos < layout_spacer_height / 2) {
+        	ypos = layout_spacer_height / 2;
+	}
+
+	/* Now write the (x, y) coordinates of the dropped icons */
+	for (j = 0; j < i; j++) {
+	        for (k = 0; k < i; k++) {
+		        new_xpos = xpos + k * (DESKTOP_SNAP_X + layout_spacer_width);
+			new_ypos = ypos + j * (DESKTOP_SNAP_Y + layout_spacer_height);
+
+			if (desktop_snap_icons) {
+			        get_icon_snap_pos (&new_xpos, &new_ypos);
+			}
+	                
+			grid_list = g_slist_append (grid_list, (void *) new_xpos);	      	                                    grid_list = g_slist_append (grid_list, (void *) new_ypos);
+	        }
+	}
+
+	return grid_list;
+
+}
+	
+
 /* Reloads the desktop icons efficiently.  If there are "new" files for which no
  * icons have been created, then icons for them will be created started at the
  * specified position if user_pos is TRUE.  If it is FALSE, the icons will be
@@ -518,13 +605,16 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 	struct dirent *dirent;
 	DIR *dir;
 	char *full_name;
-	int have_pos, x, y, size;
+	/* int have_pos, x, y, size; */
+	int x, y, size;
 	DesktopIconInfo *dii;
-	GSList *need_position_list, *sl;
+	GSList *need_position_list, *sl, *drop_grid_list, *drop_gl_copy;
 	GList *all_icons, *l;
 	char *desktop_url, *caption;
 	const char *mime;
 	int orig_xpos, orig_ypos;
+	guint need_position_list_length;
+	file_and_url_t *fau;
 
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -538,9 +628,9 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 	gnome_metadata_lock ();
 
 	/* Read the directory.  For each file for which we do have an existing
-	 * icon, do nothing.  Otherwise, if the file has its metadata for icon
-	 * position set, create an icon for it.  Otherwise, store it in a list
-	 * of new icons for which positioning is pending.
+	 * icon, do nothing.  Otherwise, store it in a list
+	 * of new icons for which positioning is pending. If we have metadata for
+	 * the file but no icon, delete the metadata and treat the file as new.
 	 */
 
 	need_position_list = NULL;
@@ -583,7 +673,6 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		}
 
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
-		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
 
 		if (gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url) != 0)
 			desktop_url = NULL;
@@ -591,23 +680,16 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		caption = NULL;
 		gnome_metadata_get (full_name, "icon-caption", &size, &caption);
 
-		if (have_pos) {
-			dii = desktop_icon_info_new (dirent->d_name, desktop_url, caption, x, y);
-			gtk_widget_show (dii->dicon);
-		} else {
-			file_and_url_t *fau;
+		fau = g_new0 (file_and_url_t, 1);
+		fau->filename = g_strdup (dirent->d_name);
 
-			fau = g_new0 (file_and_url_t, 1);
-			fau->filename = g_strdup (dirent->d_name);
+		if (desktop_url)
+		        fau->url = g_strdup (desktop_url);
 
-			if (desktop_url)
-				fau->url = g_strdup (desktop_url);
+		if (caption)
+		        fau->caption  = g_strdup (caption);
 
-			if (caption)
-				fau->caption  = g_strdup (caption);
-
-			need_position_list = g_slist_prepend (need_position_list, fau);
-		}
+		need_position_list = g_slist_prepend (need_position_list, fau);
 
 		g_free (full_name);
 
@@ -643,6 +725,15 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 	need_position_list = g_slist_reverse (need_position_list);
 
+	need_position_list_length = g_slist_length (need_position_list);
+
+	/* Get a position list for the dragged icons, to nicely place multiple icon drops */
+	if (user_pos && (need_position_list_length != 0)) {
+		drop_grid_list = NULL;
+	        drop_grid_list = get_drop_grid (xpos, ypos, need_position_list_length, drop_grid_list);
+		drop_gl_copy = drop_grid_list;
+	}
+
 	orig_xpos = orig_ypos = 0;
 
 	for (sl = need_position_list; sl; sl = sl->next) {
@@ -650,19 +741,16 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 		fau = sl->data;
 
-		if (user_pos && sl == need_position_list) {
-			/* If we are on the first icon, place it "by hand".
-			 * Else, use automatic placement based on the position
-			 * of the first icon of the series.
-			 */
+		if (user_pos) {
 			if (desktop_auto_placement) {
 				xpos = ypos = 0;
 				get_icon_auto_pos (&xpos, &ypos);
-			} else if (desktop_snap_icons)
-				get_icon_snap_pos (&xpos, &ypos);
-
-			orig_xpos = xpos;
-			orig_ypos = ypos;
+			} else { /* Place the icons according to the position list obtained above */
+			        xpos = (int) drop_gl_copy->data;
+				drop_gl_copy = drop_gl_copy->next;
+				ypos = (int) drop_gl_copy->data;
+				drop_gl_copy = drop_gl_copy->next;
+			}
 		} else {
 			xpos = orig_xpos;
 			ypos = orig_ypos;
@@ -721,7 +809,12 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		g_free (fau);
 	}
 
+	if ((need_position_list_length != 0) && user_pos) {
+	        g_slist_free (drop_grid_list);
+	}
+
 	g_slist_free (need_position_list);
+
 	gnome_metadata_unlock ();
 }
 
@@ -2002,26 +2095,31 @@ static void
 drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
 {
 	DesktopIconInfo *source_dii, *dii;
-	int dx, dy;
+	int dx, dy, sl_x, sl_y, sl_max_x, sl_max_y, sl_min_x, sl_min_y;
 	int i;
 	GList *l;
-	GSList *sel_icons, *sl;
+	GSList *sel_icons, *sl, *sl2, *sl2_p;
 
 	/* Find the icon that the user is dragging */
 
 	source_dii = find_icon_by_drag_context (context);
+
 	if (!source_dii) {
 		g_warning ("Eeeeek, could not find the icon that started the drag!");
 		return;
 	}
+
+	x -= dnd_press_x;
+	y -= dnd_press_y;
 
 	/* Compute the distance to move icons */
 
 	if (desktop_snap_icons)
 		get_icon_snap_pos (&x, &y);
 
-	dx = x - source_dii->x - dnd_press_x;
-	dy = y - source_dii->y - dnd_press_y;
+	dx = x - source_dii->x;
+	dy = y - source_dii->y;
+
 
 	/* Build a list of selected icons */
 
@@ -2038,12 +2136,66 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 	 * icons in the proper place.
 	 */
 
-	if (!desktop_auto_placement)
+	if (!desktop_auto_placement) {
+	        sl2 = NULL;
+		sl2_p = NULL;
+	        for (sl = sel_icons; sl; sl = sl->next) {
+	                dii = sl->data;
+	                sl2 = g_slist_prepend (sl2, (void *) (dii->x + dx));
+	                sl2 = g_slist_prepend (sl2, (void *) (dii->y + dy));
+	        }
+
+	        sl_max_x = 0;
+	        sl_max_y = 0;
+		sl_min_x = INT_MAX;
+		sl_min_y = INT_MAX;
+		sl2_p = sl2;
+
+		/* For multiple icon drags, get the min/max x and y coordinates */
+	        for (sl = sel_icons; sl; sl = sl->next) {
+	                sl_y = (int) sl2_p->data;
+	                sl2_p = sl2_p->next;
+	                sl_x = (int) sl2_p->data;
+			sl2_p = sl2_p->next;
+
+	                if (sl_x > sl_max_x) {
+	                       sl_max_x = sl_x;
+	                }
+			if (sl_x < sl_min_x) {
+			       sl_min_x = sl_x;
+			}
+	                if (sl_y > sl_max_y) {
+	                       sl_max_y = sl_y;
+	                }
+			if (sl_x < sl_min_y) {
+			       sl_min_y = sl_y;
+			}
+	        }
+
+		g_slist_free (sl2);
+
+		/* Make sure that no icons are placed off the screen, and keep their relative positions */
+	        if (sl_max_x > layout_screen_width - (DESKTOP_SNAP_X + layout_spacer_width / 2)) {
+	                dx -= (sl_max_x - (layout_screen_width -
+			       (DESKTOP_SNAP_X + layout_spacer_width / 2)));
+	        }
+	        if (sl_max_y > layout_screen_height - (DESKTOP_SNAP_Y + layout_spacer_height / 2)) {
+	                dy -= (sl_max_y - (layout_screen_height -
+			       (DESKTOP_SNAP_Y + layout_spacer_width / 2)));
+	        }
+		if (sl_min_x < layout_spacer_width / 2) {
+		        dx += (layout_spacer_width / 2 - sl_min_x);
+		}
+		if (sl_min_y < layout_spacer_height / 2) {
+		        dy += (layout_spacer_height / 2 - sl_min_y);
+		}
+
+		/* Place the icons */
 		for (sl = sel_icons; sl; sl = sl->next) {
 			dii = sl->data;
 			desktop_icon_info_place (dii, dii->x + dx, dii->y + dy);
 		}
-
+	}
 	/* Clean up */
 
 	g_slist_free (sel_icons);
@@ -2202,8 +2354,14 @@ create_layout_info (void)
 {
 	layout_screen_width = gdk_screen_width ();
 	layout_screen_height = gdk_screen_height ();
-	layout_cols = (layout_screen_width + DESKTOP_SNAP_X - 1) / DESKTOP_SNAP_X;
-	layout_rows = (layout_screen_height + DESKTOP_SNAP_Y - 1) / DESKTOP_SNAP_Y;
+	layout_cols = layout_screen_width / DESKTOP_SNAP_X;
+	layout_rows = layout_screen_height / DESKTOP_SNAP_Y;
+
+	/* Adjust icon size to spread the icons evenly across the screen */
+	layout_spacer_width = (layout_screen_width / layout_cols) - DESKTOP_SNAP_X;
+	layout_spacer_height = (layout_screen_height / layout_rows) - DESKTOP_SNAP_Y;
+	
+
 	layout_slots = g_new0 (struct layout_slot, layout_cols * layout_rows);
 }
 
@@ -2745,7 +2903,7 @@ desktop_popup (GdkEventButton *event)
 static void
 draw_rubberband (int x, int y)
 {
-	int x1, y1, x2, y2;
+       	int x1, y1, x2, y2;
 
 	if (click_start_x < x) {
 		x1 = click_start_x;

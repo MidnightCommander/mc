@@ -1287,7 +1287,7 @@ static menu_entry RightMenu [] = {
 };
 
 static menu_entry FileMenu [] = {
-    { ' ', N_("&User menu          F2"), 'U', user_menu_cmd },
+    { ' ', N_("&User menu          F2"), 'U', user_file_menu_cmd },
     { ' ', N_("&View               F3"), 'V', view_cmd },
     { ' ', N_("Vie&w file...         "), 'W', view_file_cmd },
     { ' ', N_("&Filtered view     M-!"), 'F', filtered_view_cmd },
@@ -1345,8 +1345,10 @@ static menu_entry CmdMenu [] = {
 #ifdef VERSION_4
     { ' ', N_("&Listing format edit"),          'L', listmode_cmd},
 #endif
+    { ' ', "", ' ', 0 },
     { ' ', N_("&Extension file edit"),          'E', ext_cmd },
-    { ' ', N_("&Menu file edit"),               'M', menu_edit_cmd }
+    { ' ', N_("&Menu file edit"),               'M', menu_edit_cmd },
+    {' ',  N_("Menu edi&Tor edit"),             'T', edit_user_menu_cmd}
 };
 
 /* Must keep in sync with the constants in menu_cmd */
@@ -1719,7 +1721,7 @@ static void
 init_labels (Widget *paneletc)
 {
     define_label (midnight_dlg, paneletc, 1, _("Help"), help_cmd);
-    define_label (midnight_dlg, paneletc, 2, _("Menu"), user_menu_cmd);
+    define_label (midnight_dlg, paneletc, 2, _("Menu"), user_file_menu_cmd);
     define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
@@ -2196,7 +2198,6 @@ prepend_cwd_on_local (char *filename)
 }
 
 #ifdef USE_INTERNAL_EDIT
-void edit (const char *file_name, int startline);
 
 static int
 mc_maybe_editor_or_viewer (void)
@@ -2275,17 +2276,24 @@ do_nc (void)
 static void
 version (int verbose)
 {
+    char *str;    
+
     fprintf (stderr, "The Midnight Commander %s\n", VERSION);
     if (!verbose)
 	return;
     
 #ifndef HAVE_X
-    fprintf (stderr,
-	    _("with mouse support on xterm%s.\n"),
-	     status_mouse_support ? _(" and the Linux console") : "");
+    fprintf (stderr, status_mouse_support ?
+	    _("with mouse support on xterm and the Linux console.\n") :
+	    _("with mouse support on xterm.\n"));
 #endif /* HAVE_X */
     for (verbose = 0; features [verbose]; verbose++) 
     	fprintf (stderr, _(features [verbose]));
+
+    str = guess_message_value (1);
+    fprintf (stderr, "%s\n", str);
+    g_free (str);
+
     if (print_last_wd)
 	write (stdout_fd, ".", 1);
 }
@@ -2524,7 +2532,8 @@ print_mc_usage (void)
 #endif
     N_("-v, --view fname   Start up into the viewer mode.\n"
        "-V, --version      Report version and configuration options.\n"
-       "-x, --xterm        Force xterm mouse support and screen save/restore.\n"),
+       "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
+       "+number            number it is the start line number of file for `mcedit'.\n"),
 #ifdef HAVE_SUBSHELL_SUPPORT
     N_("-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"),
 #endif
@@ -3004,9 +3013,10 @@ main (int argc, char *argv [])
 	    /* mc_home was computed by OS_Setup */
 	    home_dir = mc_home; 
     }
-
+    
     vfs_init ();
-
+    edit_init_file();
+    
 #ifdef HAVE_X
     /* NOTE: This call has to be before any our argument handling :) */
 

@@ -92,6 +92,7 @@
 #define CK_Terminal		422
 #define CK_Terminal_App		423
 
+#define CK_User_Menu		425
 /* application control */
 #define CK_Save_Desktop		451
 #define CK_New_Window		452

@@ -51,6 +51,7 @@
      KEY_F (6), CK_Move, KEY_F (8), CK_Remove, KEY_F (12), CK_Save_As,
      KEY_F (2), CK_Save, XCTRL ('n'), CK_New,
      XCTRL ('l'), CK_Refresh, ESC_CHAR, CK_Exit, KEY_F (10), CK_Exit,
+     KEY_F (11), /* edit user menu */ CK_User_Menu,
      KEY_F (19), /*C formatter */ CK_Pipe_Block (0),
      XCTRL ('p'), /*spell check */ CK_Pipe_Block (1),
      KEY_F (15), CK_Insert_File,
@@ -89,6 +90,7 @@
      ALT ('w'), CK_XStore,
 
      XCTRL ('l'), CK_Refresh, ESC_CHAR, CK_Exit, KEY_F (10), CK_Exit,
+     KEY_F (11), /* edit user menu */ CK_User_Menu,
      KEY_F (19), /*C formatter */ CK_Pipe_Block (0),
      ALT ('$'), /*spell check */ CK_Pipe_Block (1),
      KEY_F (15), CK_Insert_File,

@@ -31,6 +31,7 @@
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
+#include "subshell.h" 		/* for subshell_pty */
 #include "user.h"
 #include "layout.h"
 #include "setup.h"
@@ -50,6 +51,8 @@
 
 static int debug_flag = 0;
 static int debug_error = 0;
+static WEdit *s_editwidget;
+static char *menu;
 
 /* Formats defined:
    %%  The % character
@@ -203,9 +206,27 @@ char *expand_format (char c, int quote)
     case 'f': 
     case 'p': return (*quote_func) (fname, 0);
     case 'b': return strip_ext((*quote_func) (fname, 0));
+    case 'x': return (*quote_func) (extension(fname), 0);
     case 'd': return (*quote_func) (panel->cwd, 0);
     case 's': if (!panel->marked)
 		return (*quote_func) (fname, 0);
+    case 'i': /* indent equal number cursor position in line */
+        if (s_editwidget)
+	        return g_strnfill (s_editwidget->curs_col, ' ');
+        break;
+    case 'y': /* syntax type */
+        if (s_editwidget)
+	        return g_strdup (s_editwidget->syntax_type);
+        break;
+    case 'e': 
+        /* error file name */
+	return (*quote_func) (g_strconcat (home_dir, ERROR_FILE, NULL), 0);
+    case 'k': 
+        /* block file name */
+	return (*quote_func) (g_strconcat (home_dir, BLOCK_FILE, NULL), 0);
+    case 'm': 
+        /* menu file name */
+	return (*quote_func) (menu, 0);
 
 	/* Fall through */
 
@@ -259,7 +280,8 @@ static char *extract_arg (char *p, char *arg)
 {
     while (*p && (*p == ' ' || *p == '\t' || *p == '\n'))
 	p++;
-    while (*p && *p != ' ' && *p != '\t' && *p != '\n')
+                /* support quote space .mnu */
+    while (*p && (*p != ' ' || *(p-1) == '\\') && *p != '\t' && *p != '\n')
 	*arg++ = *p++;
     *arg = 0;
     if (!*p || *p == '\n')
@@ -323,7 +345,8 @@ static char *test_condition (char *p, int *condition)
 
     /* Handle one condition */
     for (;*p != '\n' && *p != '&' && *p != '|'; p++){
-	if (*p == ' ' || *p == '\t')
+                /* support quote space .mnu */
+	if ((*p == ' ' && *(p-1) != '\\') || *p == '\t')
 	    continue;
 	if (*p >= 'a')
 	    panel = cpanel;
@@ -341,10 +364,17 @@ static char *test_condition (char *p, int *condition)
 	    *condition = ! *condition;
 	    p--;
 	    break;
-	case 'f':
+	case 'f': /* file name pattern */
 	    p = extract_arg (p, arg);
 	    *condition = panel && regexp_match (arg, panel->dir.list [panel->selected].fname, match_file);
 	    break;
+	case 'y': /* syntax pattern */
+            if (s_editwidget) {
+	        p = extract_arg (p, arg);
+	        *condition = panel &&
+                    regexp_match (arg, s_editwidget->syntax_type, match_normal);
+	    }
+                break;
 	case 'd':
 	    p = extract_arg (p, arg);
 	    *condition = panel && regexp_match (arg, panel->cwd, match_file);
@@ -353,6 +383,17 @@ static char *test_condition (char *p, int *condition)
 	    p = extract_arg (p, arg);
 	    *condition = panel && test_type (panel, arg);
 	    break;
+	case 'x': /* executable */
+	{
+	    struct stat status;
+	    
+	    p = extract_arg (p, arg);
+	    if (stat (arg, &status) == 0)
+		*condition = is_exe (status.st_mode);
+	    else
+		*condition = 0; 
+	    break;
+	}
 	default:
 	    debug_error = 1;
 	    break;
@@ -424,8 +465,9 @@ static char *test_line (char *p, int *result)
     /* Init debugger */
     debug_out (NULL, NULL, 0);
     /* Repeat till end of line */
-    while (*p && *p != '\n'){
-	while (*p == ' ' || *p == '\t')
+    while (*p && *p != '\n') {
+        /* support quote space .mnu */
+	while ((*p == ' ' && *(p-1) != '\\' ) || *p == '\t')
 	    p++;
 	if (!*p || *p == '\n')
 	    break;
@@ -434,7 +476,8 @@ static char *test_line (char *p, int *result)
 	    debug_flag = 1;
 	    p++;
 	}
-	while (*p == ' ' || *p == '\t')
+        /* support quote space .mnu */
+	while ((*p == ' ' && *(p-1) != '\\' ) || *p == '\t')
 	    p++;
 	if (!*p || *p == '\n')
 	    break;
@@ -482,7 +525,7 @@ execute_menu_command (char *commands)
     int  cmd_file_fd;
     int  expand_prefix_found = 0;
     char *parameter = 0;
-    int  do_quote;
+    int  do_quote = 0;
     char prompt [80];
     int  col;
     char *file_name;
@@ -608,14 +651,19 @@ menu_file_own(char* path)
     return 0;
 }
 
-void user_menu_cmd (void)
+/*
+    if edit_widget = pointer then it is file menu from cool edit
+    if edit_widget = NULL then routine is invoke from file menu of mc.
+*/
+void user_menu_cmd (WEdit *edit_widget)
 {
-    char *menu, *p;
+    char *p;
     char *data, **entries;
     int  max_cols, menu_lines, menu_limit;
     int  col, i, accept_entry = 1;
     int  selected, old_patterns;
     Listbox *listbox;
+    s_editwidget = edit_widget;
     
     if (!vfs_current_is_local ()){
 	message (1, _(" Oops... "),
@@ -623,13 +671,15 @@ void user_menu_cmd (void)
 	return;
     }
     
-    menu = g_strdup (MC_LOCAL_MENU);
+    menu = g_strdup (edit_widget ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
     if (!exist_file (menu) || !menu_file_own (menu)){
 	g_free (menu);
-        menu = concat_dir_and_file (home_dir, MC_HOME_MENU);
+        menu = concat_dir_and_file \
+                            (home_dir, edit_widget ? CEDIT_HOME_MENU : MC_HOME_MENU);
 	if (!exist_file (menu)){
 	    g_free (menu);
-	    menu = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+	    menu = concat_dir_and_file \
+                        (mc_home, edit_widget ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	}
     }
 
@@ -722,7 +772,6 @@ void user_menu_cmd (void)
 	easy_patterns = old_patterns;
 	return;
     }
-    g_free (menu);
 
     max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
  
@@ -745,6 +794,7 @@ void user_menu_cmd (void)
 
     easy_patterns = old_patterns;
     do_refresh ();
+    g_free (menu);
     g_free (entries);
     g_free (data);
 }

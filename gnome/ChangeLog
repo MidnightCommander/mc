@@ -1,3 +1,9 @@
+2000-05-08  Miguel de Icaza  <miguel@helixcode.com>
+
+	* gnome-file-property-dialog.c (create_general_properties): Tag
+	the strftime format for translation to let the localization
+	efforts to localize the time display.
+
 2000-05-06  Jacob Berkman  <jacob@helixcode.com>
 
 	* gsession.c (session_set_restart): restart with priority 40 so we show

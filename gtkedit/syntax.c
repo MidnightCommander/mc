@@ -374,9 +374,12 @@ static void translate_rule_to_color (WEdit * edit, struct syntax_rule rule, int 
     *fg = k->fg;
 }
 
+extern int use_colors;
+
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
 {
-    if (edit->rules && byte_index < edit->last_byte && option_syntax_highlighting) {
+    if (edit->rules && byte_index < edit->last_byte && 
+                         option_syntax_highlighting && use_colors) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), fg, bg);
     } else {
 #ifdef MIDNIGHT
@@ -1500,11 +1503,6 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
     char *f;
 
     edit_free_syntax_rules (edit);
-
-#ifdef MIDNIGHT
-    if (!SLtt_Use_Ansi_Colors || !use_colors)
-	return;
-#endif
 
     if (edit) {
 	if (!edit->filename)

@@ -42,14 +42,25 @@ void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 #endif
     char t[160];		/* 160 just to be sure */
 /* The field lengths just prevents the status line from shortening to much */
-    sprintf (t, "[%c%c%c%c] %2ld:%3ld+%2ld=%3ld/%3ld - *%-4ld/%4ldb=%3d",
-	     edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
-	     edit->modified ? 'M' : '-', edit->macro_i < 0 ? '-' : 'R',
-	     edit->overwrite == 0 ? '-' : 'O',
-	     edit->curs_col / font_width, edit->start_line + 1, edit->curs_row,
-	     edit->curs_line + 1, edit->total_lines + 1, edit->curs1,
-	     edit->last_byte, edit->curs1 < edit->last_byte
-	     ? edit_get_byte (edit, edit->curs1) : -1);
+sprintf (t,"[%c%c%c%c] %2ld L:[%3ld+%2ld %3ld/%3ld] *(%-4ld/%4ldb)= %c %d %xH",
+	edit->mark1 != edit->mark2 ? ( column_highlighting ? 'C' : 'B') : '-',
+	edit->modified ? 'M' : '-',
+        edit->macro_i < 0 ? '-' : 'R',
+	edit->overwrite == 0 ? '-' : 'O',
+	edit->curs_col / font_width,
+        
+        edit->start_line + 1,
+        edit->curs_row,
+        edit->curs_line + 1,
+        edit->total_lines + 1,
+        
+        edit->curs1,
+	edit->last_byte, 
+        
+        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : '?',
+        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : -1,
+        edit->curs1 < edit->last_byte ? edit_get_byte (edit, edit->curs1) : -1
+        );
 #ifdef MIDNIGHT
     sprintf (s, "%.*s", w + 1, t);
     i = strlen (s);

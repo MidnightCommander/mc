@@ -2385,6 +2385,8 @@ panel_key (WPanel *panel, int key)
     return 0;
 }
 
+void user_file_menu_cmd (void) { user_menu_cmd (NULL); }
+
 static int
 panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 {
@@ -2392,7 +2394,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
     case WIDGET_INIT:
 #ifdef HAVE_X
 	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
-	define_label (h, (Widget *)panel, 2, _("Menu"), user_menu_cmd);
+	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);
 	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
 	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
 	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);
@@ -2422,7 +2424,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 	focus_select_item (panel);
 #ifndef HAVE_X
 	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
-	define_label (h, (Widget *)panel, 2, _("Menu"), user_menu_cmd);
+	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);
 	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
 	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
 	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);

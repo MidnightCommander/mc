@@ -1110,12 +1110,15 @@ Condition syntax:
 Sub-condition is one of following:
 
 <tscreen><verb>
+y <pattern>	syntax of current file matching pattern?
+                for edit menu only.
 f <pattern>	current file matching pattern
 F <pattern>	other file matching pattern
 d <pattern>	current directory matching pattern
 D <pattern>	other directory matching pattern
 t <type>	current file of type
 T <type>	other file of type
+x <filename>	is it executable filename
 ! <sub-cond>	negate the result of sub-condition
 </verb></tscreen>
 
@@ -1572,7 +1575,22 @@ line input, a simple macro substitution takes place.
 
 The macros are:
 
+<em/"&percnt;i"/ The indent of blank space, equal the cursor column 
+position. For edit menu only.
+
+<em/"&percnt;y"/ The syntax type of current file. For edit menu only.
+
+<em/"&percnt;k"/ The block file name.
+
+<em/"&percnt;e"/ The error file name.
+
+<em/"&percnt;m"/ The current menu name.
+
 <em/"&percnt;f"/ The current file name.
+
+<em/"&percnt;n"/ Only the current file name without extension.
+
+<em/"&percnt;x"/ The extension of current file name.
 
 <em/"&percnt;d"/ The current directory name.
 
@@ -1604,6 +1622,7 @@ file.
 current directory to the directory specified in front of
 it. This is used primarily as an interface to the <lnk name="Virtual
 File System" id="Virtual File System">.
+Possible to use only in mc.ext .
 
 <tag/"&percnt;view"/ This macro is used to invoke the internal viewer.
 This macro can be used alone, or with arguments. If you
@@ -1614,6 +1633,7 @@ into ascii mode; <em/hex/ to force the viewer into hex mode;
 and underline sequences of nroff; <em/unformatted/ to tell the
 viewer to not interpret nroff commands for making the text
 bold or underlined.
+Possible to use only in mc.ext .
 
 <tag/"&percnt;&percnt;"/ The &percnt; character
 

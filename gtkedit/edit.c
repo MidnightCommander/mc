@@ -38,6 +38,10 @@
 #include "mad.h"
 #endif
 
+#include <../src/dialog.h> /* MSG_ERROR */
+
+extern char *edit_one_file;
+
 /*
  *
  * here's a quick sketch of the layout: (don't run this through indent.)
@@ -2562,6 +2566,14 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Match_Bracket:
 	edit_goto_matching_bracket (edit);
 	break;
+    case CK_User_Menu:
+	if (edit_one_file) {
+	    message (1, MSG_ERROR, _("User menu avalaible only in mcedit invoked from mc"));
+	    break;
+	}    
+	else
+	    user_menu (edit);
+	break;
 #ifdef MIDNIGHT
     case CK_Sort:
 	edit_sort_cmd (edit);
@@ -2714,3 +2726,61 @@ void edit_execute_macro (WEdit * edit, struct macro macro[], int n)
     edit_update_screen (edit);
 }
 
+/* User edit menu, like user menu (F2) but only in editor. */
+void user_menu (WEdit *edit)
+{
+    FILE *fd;
+    int nomark;
+    struct stat status;
+    long start_mark, end_mark;
+    char *block_file = catstrs (home_dir, BLOCK_FILE, 0);
+    char *error_file = catstrs (home_dir, ERROR_FILE, 0);
+    int rc = 0;
+
+    nomark = eval_marks (edit, &start_mark, &end_mark); 
+    if (! nomark) /* remember marked or not */
+	edit_save_block (edit, block_file = catstrs (home_dir, BLOCK_FILE, 0),
+							start_mark, end_mark);
+
+    /* run shell scripts from menu */     
+    user_menu_cmd (edit);
+    
+    if (stat (error_file, &status) == 0) {
+        if (!status.st_size) {	/* no error messages */
+	    if (stat (block_file, &status) == 0)
+    		if (!status.st_size)
+		    return;  /* no block messages */
+            if (! nomark) /* i.e. we have marked block */
+                rc = edit_block_delete_cmd(edit);
+            if (!rc) {
+                edit_cursor_to_bol (edit);
+                edit_insert_file (edit, block_file);
+                edit_cursor_to_eol (edit);
+                if (fd = fopen (block_file, "w")) fclose(fd);
+            }
+        } else { /* it is error */
+                edit_cursor_to_bol (edit);
+		edit_insert_file (edit, error_file);
+		if (fd = fopen (error_file, "w")) fclose(fd);
+		if (fd = fopen (block_file, "w")) fclose(fd);
+        }
+    } else {
+        edit_error_dialog (_(""),
+        get_sys_error (catstrs (_ ("Error trying to stat file:"),
+	    						    error_file, 0)));
+        return;
+    }
+    edit_refresh_cmd (edit);
+    edit->force |= REDRAW_COMPLETELY;
+    return;
+}
+
+void edit_init_file()
+{
+    FILE *f;
+
+    if (f = fopen (catstrs (home_dir, ERROR_FILE, 0), "w")) fclose(f);
+    if (f = fopen (catstrs (home_dir, BLOCK_FILE, 0), "w")) fclose(f);
+    if (f = fopen (catstrs (home_dir, TEMP_FILE, 0) , "w")) fclose(f);
+    return;
+}

@@ -22,6 +22,7 @@
 
 #include <config.h>
 #include "edit.h"
+#include "../src/user.h"
 
 #include "editcmddef.h"
 
@@ -118,6 +119,9 @@ void menu_lit_cmd (void)		{ menu_key (XCTRL ('q')); }
 void menu_format_paragraph (void)	{ menu_cmd (CK_Paragraph_Format); }
 void edit_options_dialog (void);
 void menu_options (void)		{ edit_options_dialog (); }
+void menu_user_menu_cmd (void)          { menu_key (KEY_F (11)); }
+
+void edit_user_menu_cmd (void)          { menu_edit_cmd (1); }
 
 static menu_entry FileMenu[] =
 {
@@ -129,6 +133,9 @@ static menu_entry FileMenu[] =
     {' ', "", ' ', 0},
     {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
     {' ', N_("copy to &File...  C-f"), 'F', menu_cut_cmd},
+    {' ', "", ' ', 0},
+    {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
+/*    {' ', N_("Menu edi&Tor edit    "), 'T', edit_user_menu_cmd}, */
     {' ', "", ' ', 0},
     {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
@@ -145,6 +152,9 @@ static menu_entry FileMenuEmacs[] =
     {' ', "", ' ', 0},
     {' ', N_("&Insert file...   F15"), 'I', menu_insert_file_cmd},
     {' ', N_("copy to &File...     "), 'F', menu_cut_cmd},
+    {' ', "", ' ', 0},
+    {' ', N_("&User menu...     F11"), 'U', menu_user_menu_cmd},
+/*    {' ', N_("Menu edi&Tor edit    "), 'T', edit_user_menu_cmd}, */
     {' ', "", ' ', 0},
     {' ', N_("a&Bout...            "), 'B', edit_about_cmd},
     {' ', "", ' ', 0},
@@ -218,7 +228,7 @@ static menu_entry CmdMenu[] =
     {' ', N_("format p&Aragraph        M-p"), 'A', menu_format_paragraph},
     {' ', N_("'ispell' s&Pell check    C-p"), 'P', menu_ispell_cmd},
     {' ', N_("sor&T...                 M-t"), 'T', menu_sort_cmd},
-    {' ', N_("'indent' &C Formatter    F19"), 'C', menu_c_form_cmd},
+    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
     {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };
 
@@ -241,7 +251,7 @@ static menu_entry CmdMenuEmacs[] =
     {' ', N_("format p&Aragraph        M-p"), 'a', menu_format_paragraph},
     {' ', N_("'ispell' s&Pell check    M-$"), 'P', menu_ispell_cmd},
     {' ', N_("sor&T...                 M-t"), 'T', menu_sort_cmd},
-    {' ', N_("'indent' &C Formatter    F19"), 'C', menu_c_form_cmd}
+    {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd}
 };
 
 extern void menu_save_mode_cmd (void);

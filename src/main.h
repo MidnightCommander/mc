@@ -46,6 +46,7 @@ extern int auto_save_setup;
 extern int use_internal_view;
 extern int use_internal_edit;
 #ifdef USE_INTERNAL_EDIT
+extern int edit (const char *file, int line);
 extern int option_word_wrap_line_length;
 extern int edit_key_emulation;
 extern int option_tab_spacing;
@@ -161,6 +162,8 @@ void touch_bar      (void);
 void load_hint      (void);
 
 void print_vfs_message(char *msg, ...);
+
+void edit_user_menu_cmd (void);
 
 extern char *prompt;
 extern char *mc_home;

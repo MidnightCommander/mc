@@ -1,3 +1,7 @@
+2000-05-08  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	vfs/extfs/uha.in: add HSC type archives
+
 2000-05-01  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* direntry.c (vfs_s_inode_from_path): fix for stating / directory

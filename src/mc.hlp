@@ -1238,12 +1238,15 @@ Condition syntax: 	= <sub-cond>
 
 Sub-condition is one of following:
 
+  y <pattern>		syntax of current file matching pattern?
+                        for edit menu only.
   f <pattern>		current file matching pattern?
   F <pattern>		other file matching pattern?
   d <pattern>		current directory matching pattern?
   D <pattern>		other directory matching pattern?
   t <type>		current file of type?
   T <type>		other file of type?
+  x <filename>		is it executable filename?
   ! <sub-cond>		negate the result of sub-condition
 
 Pattern is a normal shell pattern or a regular expression,
@@ -1701,7 +1704,22 @@ line input, a simple macro substitution takes place.
 
 The macros are:
 
+"%i" The indent of blank space, equal the cursor column 
+       position. For edit menu only.
+
+"%y" The syntax type of current file. For edit menu only.
+
+"%k" The block file name.
+
+"%e" The error file name.
+
+"%m" The current menu name.
+
 "%f" The current file name.
+
+"%n" Only the current file name without extension.
+
+"%x" The extension of current file name.
 
 "%d" The current directory name.
 
@@ -2158,17 +2176,14 @@ press Ctrl-A and then the assigned key. The macro is also
 executed if you press Meta, Ctrl, or Esc and the assigned
 key, provided that the key is not used for any other
 function. Once defined, the macro commands go into the
-file cedit/cooledit.macros in your home directory. You can
+file ~/.cedit/cooledit.macros in your home directory. You can
 delete a macro by deleting the appropriate line in this
 file.
 
-F19 will format C code when it is highlighted. For this to
-work, make an executable file called cedit/edit.indent.rc
-in your home directory containing the following:
-
-#!/bin/sh
-/usr/bin/indent -kr -pcs ~/cedit/cooledit.block >& /dev/null
-cat /dev/null > ~/cedit/cooledit.error
+F19 will format text (C, C++ code or another) when it is
+block highlighted. For this to work, first time, will create 
+executable file called ~/.cedit/edit.indent.rc in your
+home directory.  To edit this script if needed.  
 
 You can use scanf search and replace to search and replace
 a C format string. First take a look at the sscanf and
@@ -2429,7 +2444,7 @@ For example, to recover deleted files on the second
 partition of the first scsi disk on Linux, you would use
 the following path name:
 
-    /#undel:/dev/sda2
+    /#undel:sda2
 
 It may take a while for the undelfs to load the required
 information before you start browsing files there.

@@ -79,9 +79,6 @@
 #include "profile.h"
 
 #define MIDNIGHT
-#ifdef  USE_INTERNAL_EDIT
-    extern int edit (const char *file, int line);
-#endif
 #include "../vfs/vfs.h"
 #define WANT_WIDGETS
 #include "main.h"		/* global variables, global functions */
@@ -655,34 +652,36 @@ void ext_cmd (void)
    flush_extension_file ();
 }
 
-void menu_edit_cmd (void)
+/* where  = 0 - do edit a file menu for mc */
+/* where  = 1 - do edit a file menu for cool edit */
+void menu_edit_cmd (int where)
 {
     char *buffer;
     char *menufile;
     int dir = 0;
     
     dir = query_dialog (
-	_("Menu file edit"),
-	_(" Which menu file will you edit? "), 
+	_(" Menu edit "),
+	_(" Which menu file will you edit ? "), 
 	0, geteuid() ? 2 : 3,
 	_("&Local"), _("&Home"), _("&System Wide")
     );
 
-    menufile = concat_dir_and_file(mc_home, MC_GLOBAL_MENU);
+    menufile = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 
-    switch (dir){
+    switch (dir) {
 	case 0:
-	    buffer = g_strdup (MC_LOCAL_MENU);
+	    buffer = g_strdup (where ? CEDIT_LOCAL_MENU : MC_LOCAL_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 
 	case 1:
-	    buffer = concat_dir_and_file (home_dir, MC_HOME_MENU);
+	    buffer = concat_dir_and_file (home_dir, where ? CEDIT_HOME_MENU : MC_HOME_MENU);
 	    check_for_default (menufile, buffer);
 	    break;
 	
 	case 2:
-	    buffer = concat_dir_and_file (mc_home, MC_GLOBAL_MENU);
+	    buffer = concat_dir_and_file (mc_home, where ? CEDIT_GLOBAL_MENU : MC_GLOBAL_MENU);
 	    break;
 
 	default:
@@ -1222,43 +1221,55 @@ void mkdir_panel_cmd (void)
 }
 
 /* partly taken from dcgettect.c, returns "" for C locale */
-static const char *
-guess_message_value (void)
+/* value should be gfreed by calling function */
+char *guess_message_value (unsigned want_info)
 {
-    const char *retval;
-
-    /* The highest priority value is the `LANGUAGE' environment
-       variable.  This is a GNU extension.  */
-    retval = getenv ("LANGUAGE");
-    if (retval != NULL && retval[0] != '\0')
-        return retval;
-
-    /* Setting of LC_ALL overwrites all other.  */
-    retval = getenv ("LC_ALL");
-    if (retval != NULL && retval[0] != '\0')
-        return retval;
-
-    /* Next comes the name of the desired category.  */
-    retval = getenv ("LC_MESSAGE");
-    if (retval != NULL && retval[0] != '\0')
-        return retval;
+    const char *var[] = {
+	/* The highest priority value is the `LANGUAGE' environment
+        variable.  This is a GNU extension.  */
+	"LANGUAGE",
+	/* Setting of LC_ALL overwrites all other.  */
+	"LC_ALL",
+	/* Next comes the name of the desired category.  */
+	"LC_MESSAGE",
+        /* Last possibility is the LANG environment variable.  */
+	"LANG",
+	/* NULL exit loops */
+	NULL
+    };
     
-    /* Last possibility is the LANG environment variable.  */
-    retval = getenv ("LANG");
-    if (retval != NULL && retval[0] != '\0')
-        return retval;
+    gchar *retval;
+    
+    unsigned i = 0;
+    char *locale = NULL;
 
-    /* We use C as the default domain.  POSIX says this is implementation
-       defined.  */
-    return "";
+    while (var[i] != NULL) {
+	locale = getenv (var[i]);
+	if (locale != NULL && locale[0] != '\0')
+	    break;
+	i++;
+	}
 
+    if (var[i] == NULL)
+	locale = "";
+		
+    if (want_info == 0)
+	retval = g_strdup (locale);
+    else
+	if (var[i] == NULL)
+	    retval = g_strdup (_("Using default locale"));
+	else
+	    retval = g_strdup_printf (_("Using locale \"%s\" (from environment variable %s)"), locale, var[i]);
+	     	
+    return retval;
 }
+
 /* Returns a random hint */
 char *get_random_hint (void)
 {
     char *data, *result, *eol;
     char *hintfile_base, *hintfile;
-    const char *lang;
+    char *lang;
     int  len;
     int start;
     
@@ -1283,7 +1294,7 @@ char *get_random_hint (void)
 #endif
 
     hintfile_base = concat_dir_and_file (mc_home, MC_HINT);
-    lang = guess_message_value ();
+    lang = guess_message_value (0);
 
     hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
     data = load_file (hintfile);
@@ -1298,6 +1309,7 @@ char *get_random_hint (void)
 	    data = load_file (hintfile_base);
     }
 
+    g_free (lang);
     g_free (hintfile_base);
     if (!data)
 	return 0;
@@ -1557,7 +1569,7 @@ info_cmd (void)
 void
 quick_view_cmd (void)
 {
-    if (get_panel_widget (MENU_PANEL_IDX) == cpanel)
+    if ((WPanel *) get_panel_widget (MENU_PANEL_IDX) == cpanel)
 	change_panel ();
     set_display_type (MENU_PANEL_IDX, view_quick);
 }

@@ -18,7 +18,7 @@ static const char * const features [] =  {
     N_(" with X11 support to read modifiers"),
 #endif
 #endif
-    ".\n",
+    "\n",
 
 #ifdef USE_VFS
     N_("Virtual File System: tarfs, extfs"),
@@ -38,7 +38,7 @@ static const char * const features [] =  {
 #ifdef USE_EXT2FSLIB
     N_(", undelfs"),
 #endif
-    ".\n",
+    "\n",
 #endif
     
 #ifdef USE_INTERNAL_EDIT

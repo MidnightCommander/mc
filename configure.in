@@ -170,7 +170,7 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS(strerror statfs getwd strcasecmp strncasecmp strcoll)
+AC_CHECK_FUNCS(strerror statfs getwd strcasecmp strncasecmp strcoll strftime)
 AC_CHECK_FUNCS(strdup memmove pwdauth truncate initgroups putenv)
 AC_CHECK_FUNCS(memset memcpy tcsetattr tcgetattr cfgetospeed)
 AC_CHECK_FUNCS(sigaction sigemptyset sigprocmask sigaddset)

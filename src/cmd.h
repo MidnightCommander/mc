@@ -8,7 +8,7 @@ void help_cmd (void);
 void dirsizes_cmd (void);
 int view_file_at_line (char *filename, int plain_view, int internal, 
                        int start_line);
-int view_file (char *filename, int normal, int internal);
+int  view_file (char *filename, int normal, int internal);
 void view_cmd (WPanel *panel);
 void view_file_cmd (WPanel *panel);
 void view_simple_cmd (WPanel *panel);
@@ -35,7 +35,7 @@ void do_re_sort (WPanel *panel);
 void quick_view_cmd (void);
 void tree_view_cmd (void);
 void ext_cmd (void);
-void menu_edit_cmd (void);
+void menu_edit_cmd (int select);
 void quick_chdir_cmd (void);
 void compare_dirs_cmd (void);
 void history_cmd (void);
@@ -59,6 +59,8 @@ void quick_cd_cmd (void);
 void save_setup_cmd (void);
 char *get_random_hint (void);
 void source_routing (void);
+void user_file_menu_cmd (void);
+char *guess_message_value (unsigned want_info);
 
 /* Display mode code */
 void info_cmd (void);
@@ -71,4 +73,10 @@ void info_cmd_no_menu (void);
 void quick_view_cmd (void);
 void toggle_listing_cmd (void);
 void configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status);
+
+#ifdef  USE_INTERNAL_EDIT
+extern int edit (const char *file, int line);
+extern int edit_run;
+#endif
+
 #endif /* __CMD_H */

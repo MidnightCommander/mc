@@ -1389,12 +1389,15 @@ Condition syntax: 	= <sub-cond>
 
 Sub-condition is one of following:
 
+  y <pattern>		syntax of current file matching pattern?
+                        for edit menu only.
   f <pattern>		current file matching pattern?
   F <pattern>		other file matching pattern?
   d <pattern>		current directory matching pattern?
   D <pattern>		other directory matching pattern?
   t <type>		current file of type?
   T <type>		other file of type?
+  x <filename>		is it executable filename?
   ! <sub-cond>		negate the result of sub-condition
 .fi
 .PP
@@ -1939,9 +1942,38 @@ a simple macro substitution takes place.
 .PP
 The macros are:
 .PP
+.I "%i"
+.IP
+The indent of blank space, equal the cursor column
+position. For edit menu only.
+.PP
+.I "%y"
+.IP
+The syntax type of current file. For edit menu only.
+.PP
+.I "%k"
+.IP
+The block file name.
+.PP
+.I "%e"
+.IP
+The error file name.
+.PP
+.I "%m"
+.IP
+The current menu name.
+.PP
 .I "%f"
 .IP
 The current file name.
+.PP
+.I "%x"
+.IP
+The extension of current file name.
+.PP
+.I "%b"
+.IP
+The current file name without extension.
 .PP
 .I "%d"
 .IP

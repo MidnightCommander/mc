@@ -1,3 +1,46 @@
+2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+       * src/user.c: Add macro %k it is block file name
+       Add macro %e it is error file name
+       Add macro %i it is cursor column indent of spaces, only for edit
+       Add macro %y, it is syntax of current file in editor, only for edit
+       Add condition y , it is syntax pattern of current file in edit
+       Add macro %x it is extension of current file
+       Add macro %m it is current menu filename
+	
+2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	* gtkedit/editcmd.c: Modify External Formatter (was C indent formatter) .
+	Autocreate a scripts in home, from templates /usr/lib/mc/edit.indent.rc,
+	edit.ispell.rc, etc. Remove leading and trailing spaces into _(""),
+	(the message of David H. Martin <dmartina@usa.net>)
+
+2000-05-05  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	* src/user.c:	Add condition (x filename) into mc.menu .
+			for "Open next a free console" and like.
+
+2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	src/user.c: fix segfault in chunk_alloc of glibc, when into condition
+	of .mnu we have quoted space. (~.mc/menu: + f \.\ test$).
+
+2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+	* gtkedit/edit.c:
+       Add ability user edit menus: system: /usr/lib/mc/cedit.menu,
+	* gtkedit/editmenu.c:        home: ~/.cedit.menu, local: .cedit.menu 
+	Marked block is access now from an user edit menu
+	Access ~/.cedit/cooledit.block for insert to cursor place from 
+	user edit menu.
+	Created system cedit.menu
+
+2000-05-04  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
+
+    	* gtkedit/editdraw.c: 
+	Improved a status string of cool editor for best understand,
+	and to add char,hex view.
+
 2000-04-17  Andrew V. Samoilov <sav@bcs.zp.ua>
 	
 	* widget.c: (history_put): profile is free()d if chmod failed, 

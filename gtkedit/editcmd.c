@@ -1122,6 +1122,7 @@ void edit_delete_column_of_text (WEdit * edit)
     }
 }
 
+/* if success return 0 */
 int edit_block_delete (WEdit * edit)
 {
     long count;
@@ -2864,47 +2865,90 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 {
     long start_mark, end_mark;
     struct stat s;
-    char *f = NULL, *b = NULL;
+    char buf[BUFSIZ];
+    FILE *script_home = NULL;
+    FILE *script_src = NULL;
+    FILE *block_file = NULL;
 
-    if (block) {
+    char *o = catstrs (mc_home, shell_cmd, 0);   /* original source script */
+    char *h = catstrs (home_dir, EDIT_DIR, shell_cmd, 0); /* home script */
+    char *b = catstrs (home_dir, BLOCK_FILE, 0); /* block file */
+    char *e = catstrs (home_dir, ERROR_FILE, 0); /* error file */
+    
+    if (! (script_home = fopen (h, "r"))) {
+	if (! (script_home = fopen (h, "w"))) {
+	    edit_error_dialog (_(""),
+            get_sys_error (catstrs (_ ("Error create script:"), h, 0)));
+            return;
+	} else {
+	    if (! (script_src = fopen (o, "r"))) {
+                fclose (script_home); unlink (h);
+	        edit_error_dialog (_(""),
+                get_sys_error (catstrs (_ ("Error read script:"), o, 0)));
+                return;
+            } else {    
+                while (fgets(buf, sizeof(buf), script_src))
+	                fprintf(script_home, "%s",buf);
+                if (fclose(script_home)) {
+	            edit_error_dialog (_(""),
+                    get_sys_error (catstrs (_ ("Error close script:"), h, 0)));
+                    return;
+                } else {
+                    chmod (h, 0700);
+	            edit_error_dialog (_(""),
+                    get_sys_error (catstrs (_ ("Script created:"), h, 0)));
+                }
+	    }
+        }
+    }
+    if (block) { /* for marked block run indent formatter */
 	if (eval_marks (edit, &start_mark, &end_mark)) {
-	    edit_error_dialog (_(" Process block "), 
+	    edit_error_dialog (_("Process block"),
 /* Not essential to translate */
 		_(" You must first highlight a block of text. "));
 	    return;
 	}
-	edit_save_block (edit, b = catstrs (home_dir, BLOCK_FILE, 0), start_mark, end_mark);
-	my_system (0, shell, catstrs (home_dir, shell_cmd, 0));
-	edit_refresh_cmd (edit);
-    } else {
-	my_system (0, shell, shell_cmd);
-	edit_refresh_cmd (edit);
+        edit_save_block (edit, b, start_mark, end_mark);
+        
+	/* run your script */
+        my_system (EXECUTE_AS_SHELL, shell,
+	    catstrs (home_dir, EDIT_DIR, shell_cmd, " ", 
+	    edit->filename, " ", home_dir, BLOCK_FILE, " ", 
+	    home_dir, ERROR_FILE, 0));
+
+        edit_refresh_cmd (edit);
+
+    } else { /* for missing marked block run ... */
+	my_system (0, shell, catstrs (EDIT_DIR, shell_cmd));
+        edit_refresh_cmd (edit);
     }
-
     edit->force |= REDRAW_COMPLETELY;
-
-    f = catstrs (home_dir, ERROR_FILE, 0);
-
+    
+    /* insert result block */ 
     if (block) {
-	if (stat (f, &s) == 0) {
+	if (stat (e, &s) == 0) {
 	    if (!s.st_size) {	/* no error messages */
 		if (edit_block_delete_cmd (edit))
 		    return;
 		edit_insert_file (edit, b);
+		if (block_file = fopen (b, "w")) fclose(block_file);
 		return;
 	    } else {
-		edit_insert_file (edit, f);
+		edit_insert_file (edit, e);
+		if (block_file = fopen (b, "w")) fclose(block_file);
 		return;
 	    }
 	} else {
 /* Not essential to translate */
-	    edit_error_dialog (_(" Process block "), 
+	    edit_error_dialog (_(""),
 /* Not essential to translate */
-	    get_sys_error (_(" Error trying to stat file ")));
+            get_sys_error (catstrs (_ ("Error trying to stat file:"), e, 0)));
 	    edit->force |= REDRAW_COMPLETELY;
+	    if (block_file = fopen (b, "w")) fclose(block_file);
 	    return;
 	}
     }
+    return;
 }
 
 #endif
