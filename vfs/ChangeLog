@@ -1,3 +1,9 @@
+1999-04-08  Owen Taylor  <otaylor@redhat.com>
+
+	* extfs/deb.in extfs/ulha.in extfs/ucpio.in: Fix
+	up "TMP RACE" comments so they are at least secure,
+	if not terribly robust.
+
 1999-03-31 Serge Winitzki <swinitzk@hotmail.com>
 
         * added copy_in capability to mtools filesystem

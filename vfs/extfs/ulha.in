@@ -46,8 +46,11 @@ LHA_LIST="lha l"
 LHA_GET="lha pq"
 LHA_PUT="lha aq"
 
-# Define the temporary name of a command to be run from the archive
-TMPCMD=/tmp/mc-cmd.$$
+# Define a directory to create a temporary file for when
+# running a command to be run from the archive
+TMPDIR=/tmp/mc-cmd.$$
+# Temporary file within the directory
+TMPCMD=$TMPDIR/run
 
 # The 'list' command executive
 
@@ -137,12 +140,14 @@ mc_lha_fs_copyin ()
 
 mc_lha_fs_run()
 {
-# FIXME: TMP RACE
-   trap "rm $TMPCMD; exit 0" 1 2 3 4 15
+   trap "rm $TMPCMD; rmdir $TMPDIR; exit 0" 1 2 3 4 15
+# FIXME: Try harder to generate a unique directory if this fails
+   mkdir -m 0700 $TMPDIR || exit 1
    $LHA_GET $1 $2 > $TMPCMD  2> /dev/null
    chmod a+x $TMPCMD  2> /dev/null
    $TMPCMD 2> /dev/null
    rm $TMPCMD
+   rmdir $TMPDIR
 }
 
 
