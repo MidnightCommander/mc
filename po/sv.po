@@ -5645,11 +5645,11 @@ msgstr "-X, --dbgsubshell  [Endast för utvecklare: Avlusa underskalet.]\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Skicka felrapporter (ta med utdata från \"mc -V\") till\n"
-"mc2-devel@nuclecu.unam.mx och kommentarer på översättningen till sv@li.org\n"
+"mc-devel@gnome.org och kommentarer på översättningen till sv@li.org\n"
 
 #: src/main.c:2544
 msgid ""

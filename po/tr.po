@@ -5561,11 +5561,11 @@ msgstr "-X, --dbgsubshell  [GELÝÞTÝRME için: Altkabukta hata ayýklama].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Lütfen, `mc -V' çýktýsýný da içeren bir hata raporunu\n"
-"mc2-devel@nuclecu.unam.mx adresine gönderiniz\n"
+"mc-devel@gnome.org adresine gönderiniz\n"
 
 #: src/main.c:2544
 msgid ""

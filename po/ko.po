@@ -5551,11 +5551,11 @@ msgstr "-X, --dbgsubshell  [개발자만: subshell 디버그].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "버그 레포트 (`mc -V'의 출력결과를 포함)를\n"
-"to mc2-devel@nuclecu.unam.mx로 보내주세요\n"
+"to mc-devel@gnome.org로 보내주세요\n"
 
 #: src/main.c:2544
 msgid ""

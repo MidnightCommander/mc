@@ -5592,11 +5592,11 @@ msgstr "-X, --dbgsubshell  [DEVEL-ONLY: Déboguer le sous-shell].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Envoyer vos rapports d'anomalies (incluant la sortie de `mc -V')\n"
-"à mc2-devel@nuclecu.unam.mx\n"
+"à mc-devel@gnome.org\n"
 
 #: src/main.c:2544
 msgid ""

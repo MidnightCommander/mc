@@ -5569,11 +5569,11 @@ msgstr "-X, --dbgsubshell  [SOLO-SVILUPPO: Debug subshell].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Prego spedire rapporti su bug (inclusa l'uscita di `mc -V')\n"
-"a mc2-devel@nuclecu.unam.mx\n"
+"a mc-devel@gnome.org\n"
 
 #: src/main.c:2544
 msgid ""

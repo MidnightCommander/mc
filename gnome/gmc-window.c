@@ -61,7 +61,7 @@ about_dialog (GtkWidget *widget, gpointer data)
 	const gchar *authors[] = {
 		"The Midnight Commander Team",
 		"http://www.gnome.org/mc",
-		"Bug reports:  mc2-devel@nuclecu.unam.mx",
+		"Bug reports:  mc-devel@gnome.org",
 		NULL
 	};
 

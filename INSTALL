@@ -134,34 +134,6 @@ installed the gpm package.
 `--with-termnet'
      Enables the network support with the Term package.
 
-`--with-tk'                    [WARNING: X code is not released]
-     This option enables including the Tcl/Tk version.
-
-`--with-tk-includes=DIR'       [WARNING: X code is not released]
-     Lets you specify the place where you have your Tcl/Tk headers installed.
-     It should be a directory containing tcl.h and tk.h.
-
-`--with-tk-libraries=DIR'      [WARNING: X code is not released]
-     Lets you specify the place where you have your Tcl/Tk libraries - 
-     libtcl and libtk.
-
-`--with-xview'                 [WARNING: X code is not released]
-     This option enables including the XView version.
-
-`--with-xview-includes=DIR'    [WARNING: X code is not released]
-     Lets you specify the place where you have your xview headers installed.
-     It should be the directory, which has subdirectories xview and
-     hopefuly xview_private.
-
-`--with-xview-libraries=DIR'   [WARNING: X code is not released]
-     Lets you specify the place where you have your xview libraries - 
-     libolgx and libxview.
-
-`--with-xv-bindir=DIR'         [WARNING: X code is not released]
-     Lets you specify the place where program mxc will be installed.
-     Default is somewhere in your XView binaries directory,
-     $OPENWINHOME/bin.
-
 `--with-tm-x-support'
      This option enables minimal X Window support in the text edition. It 
      enables MC to query the status of the modifiers CONTROL and SHIFT 
@@ -322,22 +294,13 @@ http://mc.blackdown.org/mc/
 
 We also a set of mailing lists for the program:
 
-mc-announce: Announcements of new version of the Midnight Commander.
-mc-digest:   Digest version of the mc list.
-mc-patches:  Patches by mail (also on the ftp site).
-mc2:         Discussion on the Midnight Commander file manager.
-mc2-devel:   For discussion between the developers of the program.
+mc:         Discussion on the Midnight Commander file manager.
+mc-devel:   For discussion between the developers of the program.
 
-to subscribe to the mailing lists, send a message to:
+to subscribe to the mailing lists, visit their respective pages:
 
-majordomo@roxanne.nuclecu.unam.mx
-
-with the following text in the body of the message:
-
-subscribe <list-name> [address]
-
-The address is optional and list-name is one of the above list names
-(mc, mc-announce, mc-patches or mc-digest).
+http://mail.gnome.org/mailman/listinfo/mc/
+http://mail.gnome.org/mailman/listinfo/mc-devel/
 
 
 Notes about the Midnight Commander installation
@@ -461,41 +424,6 @@ o The X Windows System libraries are only used if you are going to
   is not finished, so it's only useful if you want to look at what we
   are doing or want to help in one of the two X11 versions.
   
-o The XView library can be obtained from (currently the newest is
-  XView3.2p1-X11R6.tar.gz):
-
-  ftp.nuclecu.unam.mx:/Midnight/devel/XView.libs
-  ftp.x.org:/contrib/libraries
-  ftp.cvut.cz:/pub/x11/contrib/libraries
-
-  - Linux/ELF shared binaries:
-
-      sunsite.unc.edu:/pub/Linux/libs/X/xview
-      ftp.cvut.cz:/pub/linux/sunsite/libs/X/xview
-
-o The Tcl/Tk libraries can be obtained from:
-
-  ftp.smli.com:/pub/tcl
-  ftp.aud.alcatel.com:/tcl/ftp.smli.com
-  ftp.cvut.cz:/pub/tcl/ftp.smli.com
-
-  - Linux/ELF shared binaries:
-
-      ftp.ods.com:/pub/linux
-      ftp.cvut.cz:/pub/linux/ods
-
-o The Xpm library (used by the XView version) can be obtained from
-  (currently xpm-3.4f.tar.gz):
-
-  koala.inria.fr:/pub/xpm
-  ftp.x.org:/contrib/libraries
-  ftp.cvut.cz:/pub/x11/contrib/libraries
-
-  - Linux/ELF shared binaries:
-
-      ftp.ctd.comsat.com:/pub/linux/ELF
-      ftp.cvut.cz:/pub/linux/comsat
-
 To get the mouse support working on the Linux console:
 
 If you're using Linux version >= 1.1.34, then you will have to choose yes

@@ -5560,10 +5560,10 @@ msgstr "-X, --dbgsubshell  [SOLO-PROGRAMADORES: Depurar subshell.]\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
-"Si detecta algún fallo puede comunicarlo a mc2-devel@nuclecu.unam.mx\n"
+"Si detecta algún fallo puede comunicarlo a mc-devel@gnome.org\n"
 "incluyendo la descripción obtenida con `mc -V'.\n"
 
 #: src/main.c:2544

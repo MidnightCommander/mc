@@ -857,8 +857,8 @@ into drive D:"?
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
    
-   Send your report/request to mc2-devel@nuclecu.unam.mx or
-   mc2@nuclecu.unam.mx. These mailing lists are the most certain
+   Send your report/request to mc-devel@gnome.org or
+   mc@gnome.org. These mailing lists are the most certain
    way to contact the developers. Remember to mention if you are not on
    the mailing list to make sure that you will receive a copy of replies.
    
@@ -886,7 +886,7 @@ into drive D:"?
 9.4 How can I join the development?
 
    To join the development just code the feature you want to add and send
-   your patch for inclusion. Email address is mc2-devel@nuclecu.unam.mx.
+   your patch for inclusion. Email address is mc-devel@gnome.org.
    Before you start coding check the latest development version. It might
    be that your feature has already been implemented.
    
@@ -907,54 +907,32 @@ answer?
    fixed in the new versions.
    
    If you still can't find an answer, post your question to the Midnight
-   Commander mailing list. Its address is mc2@nuclecu.unam.mx.
+   Commander mailing list. Its address is mc@gnome.org.
    
 10.2 What mailing lists are there for Midnight Commander?
 
    Following mailing lists discuss about Midnight Commander:
    
-   mc2
+   mc@gnome.org
           General discussion of the Midnight Commander
+          To subscribe visit
+          http://mail.gnome.org/mailman/listinfo/mc/
           
-   mc-digest
-          The mc list, in digest format
-          
-   mc-announce
-          Major announcements about the Commander
-          
-   mc-patches
-          The latest Commander patches
-          
-   mc2-devel
+   mc-devel@gnome.org
           Technical development discussion
+          To subscribe visit
+          http://mail.gnome.org/mailman/listinfo/mc-devel/
           
-   mc-chat
-          Non-MC related chatting by the developers (contact Miguel to
-          subscribe)
-          
-   To subscribe, send e-mail to majordomo@nuclecu.unam.mx with
-   the following line in the body of the message:
-
-    subscribe <list-name> [optional-address]
-
-   Replace <list-name> with the name of the list you want to subscribe
-   and [optional-address] with your email address.
-   
 10.3 Where should I look on the World Wide Web for MC stuff?
 
    There is a WWW page for Midnight Commander. The URL is:
    
      http://www.gnome.org/mc/
      
-   The WWW page features MC screen shots, photographs of the authors,
-   mailing list archive and a few other things.
-   
 10.4 Are the mailing lists archived anywhere?
 
-   The mc and mc-devel lists are archived on the World Wide Web page (see
-   the previous question). Other lists are not currently archived though
-   Miguel keeps a private archive. Contact him if you want copies of past
-   messages.
+   The mc and mc-devel lists are archived on the World Wide Web. There are
+   links to the archives on the mailing list pages (see 10.2).
    
 11 Administrivia
 
@@ -976,7 +954,7 @@ answer?
 
    Send your comments about this document to janne@gnome.org
    
-   Send your comments about the Midnight Commander to mc2@nuclecu.unam.mx
+   Send your comments about the Midnight Commander to mc@gnome.org
    
 11.4 Disclaimer and copyright
 

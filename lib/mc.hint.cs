@@ -9,7 +9,7 @@ Tip: Adresáøe vyberete pøidáním lomítka na konec vzorku.
 Tip: Pokud Vá¹ terminál nezní nebo nemá funkèní klávesy, pou¾ijte Esc+èíslo.
 Tip: Domácí stránka programu Midnight Commander je na http://www.gnome.org/mc/
 Tip: Poslední verze programu Midnight Commander je na ftp://ftp.gnome.org/pub/GNOME/sources/mc
-Tip: Zprávy o chybách posílejte na mc2-devel@nuclecu.unam.mx (anglicky).
+Tip: Zprávy o chybách posílejte na mc-devel@gnome.org (anglicky).
 Tip: Pomocí klávesy Tab zmìníte aktuální panel.
 Tip: Stiskem Enter na souboru .tar nebo .tar.gz si prohlédnete obsah.
 Tip: Existuje také manuálová stránka [mc(1)].

@@ -5568,11 +5568,11 @@ msgstr "-X, --dbgsubshell  [KUN-UDVIKLERE: Debug underskallen].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Venligst send fejlrapporter (inkluderet udskrift af `mc -V')\n"
-"til mc2-devel@nuclecu.unam.mx\n"
+"til mc-devel@gnome.org\n"
 
 #: src/main.c:2544
 msgid ""

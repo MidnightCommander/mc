@@ -122,11 +122,13 @@ Where to get more information:
 ------------------------------
 
 There is a mailing list for discussion on enhancing the program, future
-directions and announcements; if you want to subscribe, send mail to:
+directions and announcements; if you want to subscribe, visit
 
-majordomo@nuclecu.unam.mx
+http://mail.gnome.org/mailman/listinfo/mc/
 
-There is a WWW page for the Midnight Commander at http://www.gnome.org/mc.
+There is a WWW page for the Midnight Commander at
+
+http://www.gnome.org/mc/
 
 
 The Midnight Commander:
@@ -136,14 +138,13 @@ The Midnight Commander is released under the GNU General Public
 License version 2.0 or any later version.  A copy of the file is
 included with this distribution package.
 
-If you have comments, you can send them to us:
+If you have comments, you can send them to the mailing list:
 
-miguel@nuclecu.unam.mx
-federico@nuclecu.unam.mx
+mc@gnome.org
 
-or if it would benefit more people, to the mailing list:
+If you have made a patch send it to the developers' mailing list:
 
-mc2@nuclecu.unam.mx
+mc-devel@gnome.org
 
 Help develop and enhance free software.
 
@@ -184,7 +185,7 @@ Where you may obtain the Midnight Commander
 -------------------------------------------
 
 You can download the latest version of the Midnight Commander by
-anonymous fTP at ftp.gnome.org in the directory /pub/GNOME/sources/mc.  
+anonymous FTP at ftp.gnome.org in the directory /pub/GNOME/sources/mc.  
 Please note that this is a very busy site; use a mirror if possible.
 
 European mirrors of both version 3.1 and alpha versions are available
@@ -196,7 +197,7 @@ Reporting problems
 ------------------
 
 Please, send a detailed description of your problem to the
-mc2-devel@nuclecu.unam.mx address.
+mc-devel@gnome.org address.
 
 Include the version of the program, the operating system that you are
 using, the compiler and compiler flags used to compile the program (if

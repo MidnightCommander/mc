@@ -5568,11 +5568,11 @@ msgstr ""
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
-"по адресу mc2-devel@nuclecu.unam.mx\n"
+"по адресу mc-devel@gnome.org\n"
 
 #: src/main.c:2544
 msgid ""

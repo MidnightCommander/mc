@@ -7198,11 +7198,11 @@ msgstr "-X, --dbgsubshell  [僅供發展使用: 對次殼層除錯].\n"
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
-"to mc2-devel@nuclecu.unam.mx\n"
+"to mc-devel@gnome.org\n"
 msgstr ""
 "\n"
 "請將臭蟲回報 (包含 `mc -V' 的輸出)\n"
-"給 mc2-devel@nuclecu.unam.mx\n"
+"給 mc-devel@gnome.org\n"
 
 # src/main.c:2544
 #: src/main.c:2544
