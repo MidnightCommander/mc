@@ -101,9 +101,9 @@ This port is based on the port for Windows NT by
 and the port for OS/2 by
     Alexander Dong <ado@software-ag.de>
 Both ports were merged to one PC port by me,
-    Pavel Roskin <pavel_roskin@geocities.com>
+    Pavel Roskin <proski@gnu.org>
 Please note, that I'm using Linux now. I have access to Windows 95 machines,
 but I have no access to OS/2 machines. If you are really keen to continue my
 work, please drop me a letter.
 
-Pavel Roskin <pavel_roskin@geocities.com>
+Pavel Roskin <proski@gnu.org>
