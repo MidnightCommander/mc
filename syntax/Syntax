@@ -17,6 +17,9 @@
 # brightcyan
 # white
 
+file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
+include syntax.syntax
+
 file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^(diff|Index:)\s
 include diff.syntax
 
@@ -112,9 +115,6 @@ include po.syntax
 
 file Don_t_match_me Mail\sfolder ^From\s
 include mail.syntax
-
-file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
-include syntax.syntax
 
 file .\* unknown
 include unknown.syntax

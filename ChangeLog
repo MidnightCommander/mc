@@ -1,3 +1,8 @@
+2003-02-04  Arpi  <arpi@mplayerhq.hu>
+
+	* syntax/Syntax: Match *.syntax before other files to fix
+	highlighting of makefile.syntax.
+
 2003-02-04  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/c.syntax: Revert highlighting trailing whitespaces.
