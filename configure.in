@@ -273,7 +273,7 @@ AC_SUBST(NETFILES)
 vfs_type="normal"
 if test $use_vfs = yes
 then
-	AC_MSG_RESULT([Using the VFS switch code])
+	AC_MSG_NOTICE([enabling VFS code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
 
@@ -345,7 +345,7 @@ if $HAVE_nroff; then
     fi
     ])
     MANDOC=$ac_cv_mandoc
-    AC_MSG_RESULT($MANDOC)
+    AC_MSG_RESULT([$MANDOC])
 else
     MANDOC=-man
 fi
@@ -372,7 +372,7 @@ if $HAVE_nroff; then
     fi
     ])
     if test "x$ac_cv_nroff_tascii" = x; then
-	AC_MSG_RESULT(no)
+	AC_MSG_RESULT([no])
     else
 	AC_MSG_RESULT([yes,$ac_cv_nroff_tascii])
     fi
@@ -498,7 +498,7 @@ AC_ARG_WITH(mad,
 	mem_debug="Janne's MAD library"
 	AC_DEFINE(HAVE_MAD, 1,
 		  [Define to use Memory Allocation Debugger (MAD)])
-	AC_MSG_RESULT([compiling with memory leak detector])
+	AC_MSG_NOTICE([compiling with memory leak detector])
 fi])
 
 dnl
@@ -508,7 +508,7 @@ AC_ARG_WITH(efence,
 [--with-efence              Developers only: activates Electric Fence],
 	[if test x$withval = xyes; then
 	LIBS="$LIBS -lefence"
-	AC_MSG_RESULT([compiling with Electric fence])
+	AC_MSG_NOTICE([compiling with Electric fence])
 	mem_debug="Electric Fence"
 fi])
 
@@ -521,7 +521,7 @@ AC_ARG_WITH(mmap,
 	[--with-mmap                To force using the mmap call (AIX)],
 	[if test x$withval = xyes; then
 	AC_DEFINE(HAVE_MMAP)
-        AC_MSG_RESULT([forcing MMAP support])
+        AC_MSG_NOTICE([forcing MMAP support])
 fi])
 
 slang_check_lib=true
@@ -581,7 +581,7 @@ MCEDIT=""
 LEDIT=""
 EDIT_msg=""
 AC_ARG_WITH(edit,
-        [--with-edit                Define INTERNAL_EDIT],
+        [--with-edit                Enable internal editpr],
 	[if test x$withval = xyes
 	then
 		AC_WITH_EDIT
@@ -600,7 +600,7 @@ AC_ARG_WITH(netrc,
 	if test x$withval = xyes; then
 		AC_DEFINE(USE_NETRC, 1,
 			  [Define to use .netrc for FTP connections])
-		AC_MSG_RESULT([ftpfs will have .netrc parsing code])
+		AC_MSG_NOTICE([ftpfs will use .netrc])
 	fi
 ])
 
@@ -627,7 +627,7 @@ AC_SUBST(undelfs_o)
 	
 if $search_ncurses
 then
-    AC_CHECKING([location of ncurses.h file])
+    AC_MSG_NOTICE([checking location of ncurses.h file])
 
     AC_NCURSES(/usr/include, ncurses.h, -lncurses,, "ncurses on /usr/include")
     AC_NCURSES(/usr/include/ncurses, ncurses.h, -lncurses, -I/usr/include/ncurses, "ncurses on /usr/include/ncurses")
@@ -656,7 +656,7 @@ cat > conftest.$ac_ext <<EOF
 #undef VERSION
 VERSION:NCURSES_VERSION
 EOF
-        if (eval "$ac_cpp conftest.$ac_ext") 2>&AC_FD_CC |
+        if (eval "$ac_cpp conftest.$ac_ext") 2>&AS_MESSAGE_LOG_FD |
   egrep "VERSION:" >conftest.out 2>&1; then
             ncurses_version=`cat conftest.out|sed -e 's/^[[^"]]*"//' -e 's/".*//'`
 	fi
@@ -809,7 +809,7 @@ AM_CONDITIONAL(CONS_SAVER, [test -n "$cons_saver"])
 
 AH_BOTTOM([#include <extraconf.h>])
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile 
 mc.spec
 doc/Makefile 
@@ -841,7 +841,12 @@ vfs/extfs/uzoo
 doc/mc.1 doc/mcedit.1 doc/mcserv.8
 
 intl/Makefile po/Makefile.in
-],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+])
+
+AC_CONFIG_COMMANDS(potfiles,
+    [sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
+
+AC_OUTPUT
 
 case $screen_manager in
 SLang*)

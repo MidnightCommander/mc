@@ -181,7 +181,7 @@ av_struct_linger=no
 ],[
 av_struct_linger=no
 ])
-AC_MSG_RESULT($av_struct_linger)
+AC_MSG_RESULT([$av_struct_linger])
 ])
 
 
@@ -445,7 +445,7 @@ can be used together])
 dnl This configure.in code has been stolen from GNU fileutils-3.12.  Its
 dnl job is to detect a method to get file system information.
 
-    AC_CHECKING([how to get filesystem space usage])
+    AC_MSG_NOTICE([checking how to get filesystem space usage])
     space=no
 
     # Here we'll compromise a little (and perform only the link test)
@@ -626,7 +626,8 @@ int t() {
 ; return 0; }
 EOF
 ac_compile_warn='${CC-cc} -c $CFLAGS $CPPFLAGS conftest.$ac_ext 2>&1'
-if { if eval $ac_compile_warn; then :; else echo arning; fi; } | grep arning 1>&AC_FD_CC 2>&AC_FD_CC; then
+if { if eval $ac_compile_warn; then :; else echo arning; fi; } |
+	grep arning 1>&AS_MESSAGE_LOG_FD 2>&AS_MESSAGE_LOG_FD; then
   ifelse([$4], , :, [rm -rf conftest*
   $4])
 ifelse([$3], , , [else
@@ -639,12 +640,12 @@ rm -f conftest*]
 
 AC_DEFUN([AC_USE_TERMINFO], [
 	AC_DEFINE(SLANG_TERMINFO, 1, [Define to use S-Lang with terminfo])
-	AC_MSG_RESULT([Using SLang screen manager/terminfo])
+	AC_MSG_NOTICE([using SLang screen manager/terminfo])
 	slang_term=" with terminfo"
 ])
 
 AC_DEFUN([AC_USE_TERMCAP], [
-	AC_MSG_RESULT([Using SLang screen manager/termcap])
+	AC_MSG_NOTICE([using S-Lang screen manager/termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [[Define to use termcap library]])
 	dnl Check with $LIBS at the end so that it works with ELF libs.
 	AC_CHECK_LIB(termcap, tgoto, LIBS="$LIBS -ltermcap", , $LIBS)
@@ -661,22 +662,19 @@ AC_DEFUN([AC_WITH_SLANG], [
 		      [Define to use S-Lang library installed on the system])
 	    MCLIBS="-lslang $MCLIBS"
 	    screen_manager="SLang (system-installed library)"
-	    AC_MSG_RESULT([Using system installed SLang library])
+	    AC_MSG_NOTICE([using system installed S-Lang library])
 	    rm -f slang/slang.h
 	    ac_save_LIBS="$LIBS"
 	    LIBS="$LIBS -lslang"
-	    AC_TRY_RUN(
+	    AC_TRY_LINK(
 	    [ 
-	    #ifdef SLANG_H_INSIDE_SLANG_DIR
+	    #ifdef HAVE_SLANG_SLANG_H
 	    #include <slang/slang.h>
 	    #else
 	    #include <slang.h>
-	    #endif
-	    int main(void){
-		SLtt_get_terminfo();
-		SLtt_tgetflag("");
-		return 0;
-	    } ], 
+	    #endif], [
+	    SLtt_get_terminfo();
+	    SLtt_tgetflag("");], 
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
 	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
 	else
@@ -716,18 +714,18 @@ AC_DEFUN([AC_WITH_EDIT], [
 	MCEDIT="mcedit"
 	LEDIT="-ledit"
 	EDIT_msg="yes"
-	AC_MSG_RESULT([will call internal editor])
+	AC_MSG_NOTICE([using internal editor])
 ])
 
 AC_DEFUN([AC_EXT2_UNDEL], [
   MC_UNDELFS_CHECKS
   if test "$ext2fs_undel" = yes; then
-     AC_MSG_RESULT([With ext2fs file recovery code])
+     AC_MSG_NOTICE([using ext2fs file recovery code])
      vfs_flags="${vfs_flags}, undelfs"
      undelfs_o="undelfs.o"
      LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
   else
-     AC_MSG_WARN([No ext2fs file recovery code])
+     AC_MSG_NOTICE([not using ext2fs file recovery code])
   fi
 ])
 
@@ -739,7 +737,7 @@ AC_DEFUN([AC_NCURSES], [
     then
         if test -f $1/$2
 	then
-	    AC_MSG_RESULT([Found ncurses on $1/$2])
+	    AC_MSG_NOTICE([found ncurses header $1/$2])
  	    MCLIBS="$MCLIBS $3"
 	    CPPFLAGS="$CPPFLAGS $4"
 	    search_ncurses=false

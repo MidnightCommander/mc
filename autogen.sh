@@ -50,6 +50,9 @@ $ACLOCAL -I gettext.m4 $ACLOCAL_FLAGS || \
   exit 1
 $AUTOHEADER || exit 1
 $AUTOCONF || exit 1
+
+# Workaround for Automake 1.5 to ensure that depcomp is distributed.
+$AUTOMAKE -a src/Makefile || exit 1
 $AUTOMAKE -a || exit 1
 
 cd vfs/samba || exit 1
