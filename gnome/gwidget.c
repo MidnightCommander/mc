@@ -350,6 +350,12 @@ x_update_input (WInput *in)
 }
 
 /* Listboxes */
+static GtkWidget *
+listbox_pull (widget_data data)
+{
+	return GTK_SCROLLED_WINDOW (data)->child;
+}
+
 void
 x_listbox_select_nth (WListbox *l, int nth)
 {
@@ -363,7 +369,7 @@ x_listbox_select_nth (WListbox *l, int nth)
 		return;
 	
 	inside = 1;
-	clist = GTK_CLIST (l->widget.wdata);
+	clist = GTK_CLIST (listbox_pull (l->widget.wdata));
 	
 	gtk_clist_select_row (clist, nth, 0);
 	if (gtk_clist_row_is_visible (clist, nth) != GTK_VISIBILITY_FULL)
@@ -375,7 +381,7 @@ x_listbox_select_nth (WListbox *l, int nth)
 void
 x_listbox_delete_nth (WListbox *l, int nth)
 {
-	gtk_clist_remove (GTK_CLIST (l->widget.wdata), nth);
+	gtk_clist_remove (GTK_CLIST (listbox_pull (l->widget.wdata)), nth);
 }
 
 static void
@@ -425,22 +431,25 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 int
 x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l)
 {
-	GtkWidget *listbox;
+	GtkWidget *listbox, *sw;
 	GtkRequisition req;
 	WLEntry *p;
 	int i;
 	
 	listbox = gtk_clist_new (1);
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_container_add (GTK_CONTAINER (sw), listbox);
+	
 	gtk_clist_set_selection_mode (GTK_CLIST (listbox), GTK_SELECTION_BROWSE);
 	gtk_widget_size_request (listbox, &req);
 	gtk_widget_set_usize (listbox, req.width, req.height + 20*8);
 	gtk_signal_connect (GTK_OBJECT (listbox), "select_row",
 			    GTK_SIGNAL_FUNC (listbox_select), l);
+	l->widget.wdata = (widget_data) sw;
 	gtk_widget_show (listbox);
-	l->widget.wdata = (widget_data) listbox;
-
+	
 	for (p = l->list, i = 0; i < l->count; i++, p = p->next){
-		char *text [1];
+		const char *text [1];
 
 		text [0] = p->text;
 		gtk_clist_append (GTK_CLIST (listbox), text);
@@ -470,7 +479,7 @@ x_list_insert (WListbox *l, WLEntry *p, WLEntry *e)
 		return;
 	}
 	text [0] = e->text;
-	gtk_clist_append (GTK_CLIST (l->widget.wdata), text);
+	gtk_clist_append (GTK_CLIST (listbox_pull (l->widget.wdata)), text);
 }
 
 /* Labels */

@@ -1,3 +1,8 @@
+1998-11-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_list_insert): Make it work with the new CList
+	policies. 
+
 1998-11-23  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c: Put in a bunch of stubs for the functions in
