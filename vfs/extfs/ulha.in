@@ -41,7 +41,7 @@ LHA_PUT="lha aq"
 
 # Define a directory to create a temporary file for when
 # running a command to be run from the archive
-TMPDIR=/tmp/mc-cmd.$$
+TMPDIR="/tmp/mctmpdir-uha.$$"
 # Temporary file within the directory
 TMPCMD=$TMPDIR/run
 
@@ -50,7 +50,7 @@ TMPCMD=$TMPDIR/run
 mc_lha_fs_list()
 {
    # List the contents of the archive and sort it out    
-   $LHA_LIST $1 | $AWK -v uid=`id -nu` -v gid=`id -ng` '
+   $LHA_LIST "$1" | $AWK -v uid=`id -nu` -v gid=`id -ng` '
       # Strip a leading '/' if present in a filepath
       $(NF) ~ /^\// { $(NF) = substr($NF,2) }
       # Print the line this way if there is no permission string
@@ -91,33 +91,33 @@ mc_lha_fs_list()
          next;
       }
 
-   ' 2> /dev/null
+   ' 
 }
 
 # The 'copyout' command executive to copy displayed files to a destination
 
 mc_lha_fs_copyout()
 {
-   $LHA_GET $1 $2 > $3  2> /dev/null
+   $LHA_GET "$1" "$2" > "$3"
 }
 
 # The 'copyin' command executive to add something to the archive
 
 mc_lha_fs_copyin ()
 {
-   NAME2=`basename $2`; DIR2=${2%$NAME2}
-   NAME3=`basename $3`; DIR3=${3%$NAME3}
+   NAME2=`basename "$2"`; DIR2=${2%$NAME2}
+   NAME3=`basename "$3"`; DIR3=${3%$NAME3}
 
    cd ${DIR3}
 
    ONE2=${2%%/*}
-   [ -n ${ONE2} ] || exit
-   [ -e ${ONE2} ] && exit
+   [ -n ${ONE2} ] || exit 1
+   [ -e ${ONE2} ] && exit 1
 
    [ -e ${DIR2} ] || mkdir -p ${DIR2}
-   ln $3 $2       || exit
+   ln "$3" "$2"       || exit 1
 
-   $LHA_PUT $1 $2  2> /dev/null
+   $LHA_PUT "$1" "$2"
    rm -r ${ONE2}
 }
 
@@ -125,25 +125,28 @@ mc_lha_fs_copyin ()
 
 mc_lha_fs_run()
 {
-   trap "rm $TMPCMD; rmdir $TMPDIR; exit 0" 1 2 3 4 15
-# FIXME: Try harder to generate a unique directory if this fails
+   trap "rm -rf $TMPDIR; exit 0" 1 2 3 4 15
+   # FIXME: Try harder to generate a unique directory if this fails
    mkdir -m 0700 $TMPDIR || exit 1
-   $LHA_GET $1 $2 > $TMPCMD  2> /dev/null
+   $LHA_GET "$1" "$2" > $TMPCMD  
    chmod a+x $TMPCMD  2> /dev/null
    $TMPCMD 2> /dev/null
-   rm $TMPCMD
-   rmdir $TMPDIR
+   rm -rf $TMPDIR
 }
 
 
 # The main routine
 umask 077
 
-case "$1" in
-   list) mc_lha_fs_list $2; exit $?;;
-   copyout) mc_lha_fs_copyout $2 $3 $4; exit $?;;
-   copyin)  mc_lha_fs_copyin  $2 $3 $4; exit $?;;
-   run)     mc_lha_fs_run     $2 $3 $4; exit $?;;
-esac
-exit 1
+cmd="$1"
+shift
 
+case "$cmd" in
+   list)    mc_lha_fs_list    "$@" ;;
+   copyout) mc_lha_fs_copyout "$@" ;;
+   copyin)  mc_lha_fs_copyin  "$@" ;;
+   run)     mc_lha_fs_run     "$@" ;;
+   *)       exit 1 ;;
+esac
+
+exit 0
