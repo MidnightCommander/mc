@@ -57,7 +57,7 @@ static TreeStore ts;
 
 void (*tree_store_dirty_notify)(int state) = NULL;
 
-void
+static void
 tree_store_dirty (int state)
 {
 	ts.dirty = state;
@@ -502,7 +502,7 @@ tree_store_add_entry (char *name)
 	return new;
 }
 
-tree_entry *
+static tree_entry *
 remove_entry (tree_entry *entry)
 {
 	tree_entry *current = entry->prev;
@@ -746,7 +746,7 @@ process_special_dirs (GList **special_dirs, char *file)
 	g_free (buffer);
 }
 
-gboolean
+static gboolean
 should_skip_directory (char *dir)
 {
 	static GList *special_dirs;

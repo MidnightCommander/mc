@@ -1,5 +1,16 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* achown.c: Eliminate untyped declarations.
+	* boxes.c: Likewise.
+	* cons.saver.c: Likewise.
+	* hotlist.c: Likewise.
+	* panelize.c: Likewise.
+	* rxvt.c: Likewise.
+	* main.c: Likewise. Make undeclared functions static.
+	* treestore.c: Make undeclared functions static.
+	* view.c: Likewise.
+	* widget.c: Likewise.
+
 	* main.h: Fix prototype of exec_shell.
 	* tree.c: Make all functions static when possible.
 	* tree.h: Changes for the above.

@@ -376,7 +376,7 @@ int   nowindows = 0, nodesktop = 0, twopanel;
 int display_linksdir = 0;
 
 /* Forward declarations */
-char *get_mc_lib_dir ();
+char *get_mc_lib_dir (void);
 int panel_event    (Gpm_Event *event, WPanel *panel);
 int menu_bar_event (Gpm_Event *event, void *);
 
@@ -384,13 +384,13 @@ int menu_bar_event (Gpm_Event *event, void *);
 static void menu_cmd (void);
 
 WPanel *
-get_current_panel ()
+get_current_panel (void)
 {
 	return current_panel;
 }
 
 WPanel *
-get_other_panel ()
+get_other_panel (void)
 {
 	return (WPanel *) get_panel_widget (get_other_index ());
 }
@@ -501,7 +501,7 @@ panel_clean_dir (WPanel *panel)
 }
 
 #ifndef PORT_HAS_UPDATE_PANELS
-void
+static void
 update_one_panel (int which, int force_update, char *current_file)
 {
     WPanel *panel;
@@ -718,7 +718,7 @@ do_possible_cd (char *new_dir)
 }
 
 void
-do_update_prompt ()
+do_update_prompt (void)
 {
     if (update_prompt){
 	printf ("%s", subshell_prompt);
@@ -735,7 +735,7 @@ restore_console (void)
 }
 
 void
-exec_shell ()
+exec_shell (void)
 {
     do_execute (shell, 0, 0);
 }
@@ -1771,7 +1771,7 @@ static void ctl_x_cmd (int ignore)
 	ctl_x_map_enabled = 1;
 }
 
-static void nothing ()
+static void nothing (void)
 {
 }
 
@@ -1824,7 +1824,7 @@ static const key_map default_map [] = {
 };
 
 #ifndef HAVE_X
-static void setup_sigwinch ()
+static void setup_sigwinch (void)
 {
 #if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && \
    !defined(OS2_NT) && defined(SIGWINCH)
@@ -1840,7 +1840,7 @@ static void setup_sigwinch ()
 }
 
 static void
-setup_pre ()
+setup_pre (void)
 {
     /* Call all the inits */
 #ifdef HAVE_CHARSET
@@ -1859,7 +1859,7 @@ setup_pre ()
 #endif
 
 static void
-setup_post ()
+setup_post (void)
 {
     setup_sigwinch ();
     
@@ -1915,7 +1915,7 @@ static void setup_dummy_mc (const char *file)
     cpanel->dir.list[0].fname = (char *) file;
 }
 
-static void done_mc ()
+static void done_mc (void)
 {
     done_menu ();
     
@@ -1941,7 +1941,7 @@ static void done_mc ()
 /* This should be called after destroy_dlg since panel widgets
  *  save their state on the profiles
  */
-static void done_mc_profile ()
+static void done_mc_profile (void)
 {
     if (!auto_save_setup)
 	profile_forget_profile (profile_name);
@@ -1955,7 +1955,7 @@ static void done_mc_profile ()
  * and use get_panel_widget (i) and make the test done below
  */
 static void
-make_panels_dirty ()
+make_panels_dirty (void)
 {
     if (cpanel->dirty)
 	panel_update_contents (cpanel);
@@ -2108,7 +2108,7 @@ widget_data containers [2];
 int containers_no = 2;
 
 void
-xtoolkit_panel_setup ()
+xtoolkit_panel_setup (void)
 {
     containers [0] = x_create_panel_container (0);
     containers [1] = x_create_panel_container (1);
@@ -2133,7 +2133,7 @@ xtoolkit_panel_setup ()
 #endif
 
 #ifndef PORT_HAS_LOAD_HINT
-void load_hint ()
+void load_hint (void)
 {
     char *hint;
 
@@ -2158,7 +2158,7 @@ void load_hint ()
 
 #ifndef HAVE_GNOME
 static void
-setup_panels_and_run_mc ()
+setup_panels_and_run_mc (void)
 {
     int first, second;
 
@@ -2288,7 +2288,7 @@ do_nc (void)
 char control_file [sizeof (CONTROL_FILE) + 8];
 
 void
-OS_Setup ()
+OS_Setup (void)
 {
     SetConsoleTitle ("GNU Midnight Commander");
     
@@ -2362,7 +2362,7 @@ init_sigfatals (void)
 char control_file [sizeof (CONTROL_FILE) + 8];
 
 static void
-OS_Setup ()
+OS_Setup (void)
 {
     char   *mc_libdir;
 #ifndef HAVE_X

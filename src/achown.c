@@ -95,7 +95,7 @@ static int current_file;
 static int single_set;
 static char *fname;
 
-static void get_ownership ()
+static void get_ownership (void)
 {				/* set buttons  - ownership */
     char *name_t;
 
@@ -169,7 +169,7 @@ static umode_t get_perm (char *s, int base)
     return m;
 }
 
-static umode_t get_mode ()
+static umode_t get_mode (void)
 {
     umode_t m;
 
@@ -378,7 +378,7 @@ static void chown_refresh (void)
     addstr (_(" Chown advanced command "));
 }
 
-static void chown_info_update ()
+static void chown_info_update (void)
 {
     /* display file info */
     attrset (COLOR_NORMAL);

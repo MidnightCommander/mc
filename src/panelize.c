@@ -115,7 +115,7 @@ panelize_refresh (void)
 #endif
 
 static void
-update_command ()
+update_command (void)
 {
     if (l_panelize->pos != last_listitem) {
     	last_listitem = l_panelize->pos;

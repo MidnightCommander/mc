@@ -71,7 +71,7 @@ static int rxvt_getc (void)
 
 extern int keybar_visible;
 
-static int anything_ready ()
+static int anything_ready (void)
 {
     fd_set fds;
     struct timeval tv;

@@ -1919,7 +1919,7 @@ goto_line (WView *view)
 }
 
 /* Hex view */
-void
+static void
 goto_addr (WView *view)
 {
     char *line, *error, prompt [BUF_SMALL];

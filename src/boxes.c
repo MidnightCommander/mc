@@ -971,7 +971,7 @@ static struct
 	char* name;
 	int xpos;
 	int value;
-	int (*callback)();
+	int (*callback)(int, void *);
 	char* tkname;
 } 
 job_buttons [] =

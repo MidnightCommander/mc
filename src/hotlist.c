@@ -166,7 +166,7 @@ static void hotlist_refresh (Dlg_head *dlg)
 }
 
 /* If current->data is 0, then we are dealing with a VFS pathname */
-static INLINE void update_path_name ()
+static INLINE void update_path_name (void)
 {
     char *text, *p;
     WListbox  *list = hotlist_state.moving ? l_movelist : l_hotlist;
@@ -1102,7 +1102,7 @@ static char *hotlist_file_name;
 static FILE *hotlist_file;
 static time_t hotlist_file_mtime;
 
-static int hot_skip_blanks ()
+static int hot_skip_blanks (void)
 {
     int c;
 
@@ -1112,7 +1112,7 @@ static int hot_skip_blanks ()
     
 }
 
-static int hot_next_token ()
+static int hot_next_token (void)
 {
     int	c;
 

@@ -76,7 +76,7 @@ static void dwrite (int fd, char *buffer)
     write (fd, buffer, strlen (buffer));
 }
 
-static void tty_getsize ()
+static void tty_getsize (void)
 {
     struct winsize winsz;
 
@@ -274,7 +274,7 @@ static void restore_console (void)
     }
 }
 
-static void send_contents ()
+static void send_contents (void)
 {
     unsigned char begin_line=0, end_line=0;
     int index, x, y;
