@@ -497,7 +497,7 @@ msgstr "Рабочий стол"
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop-init.c:141
 msgid "Home directory"
-msgstr "Домашний каталог"
+msgstr "Персональный каталог"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -1367,7 +1367,7 @@ msgstr "Показывать индикатор прогресса во время выполнения операций"
 
 #: gnome/gprefs.c:134
 msgid "VFS Timeout:"
-msgstr "ВФС таймаут:"
+msgstr "ВФС тайм-аут:"
 
 #: gnome/gprefs.c:135 gnome/gprefs.c:160
 msgid "Seconds"
@@ -1391,7 +1391,7 @@ msgstr "Вычислять общий размер файлов перед копированием"
 
 #: gnome/gprefs.c:159
 msgid "FTP directory cache timeout :"
-msgstr "Таймаут кеша каталога FTP:"
+msgstr "Тайм-аут кэша каталога FTP:"
 
 #: gnome/gprefs.c:163
 msgid "Allow customization of icons in icon view"
@@ -1494,7 +1494,7 @@ msgstr "%s байт в %d файлах"
 
 #: gnome/gscreen.c:1656 src/screen.c:688
 msgid "<readlink failed>"
-msgstr "<ошибка чтения ссылки>"
+msgstr "<сбой чтения ссылки>"
 
 #: gnome/gscreen.c:2085
 msgid "Copy directory"
@@ -1546,7 +1546,7 @@ msgstr "Дом"
 
 #: gnome/gscreen.c:2255
 msgid "Go to your home directory"
-msgstr "Перейти в домашний каталог"
+msgstr "Перейти в персональный каталог"
 
 #: gnome/gscreen.c:2395
 msgid "Location:"
@@ -1697,7 +1697,7 @@ msgstr " Ошибка "
 
 #: gtkedit/edit.c:132 gtkedit/edit.c:234
 msgid " Failed trying to open file for reading: "
-msgstr " Ошибка открытия файла для чтения: "
+msgstr " Сбой открытия файла для чтения: "
 
 #: gtkedit/edit.c:241
 msgid " Cannot get size/permissions info on file: "
@@ -2419,7 +2419,7 @@ msgstr "&Электронная почта..."
 
 #: gtkedit/editmenu.c:233
 msgid "&Execute macro... C-x e, KEY"
-msgstr "&Выполнить макро...  C-x e, KEY"
+msgstr "&Выполнить макрос... C-x e, KEY"
 
 #: gtkedit/editmenu.c:239
 msgid "'ispell' s&Pell check    M-$"
@@ -3082,7 +3082,7 @@ msgstr "сек"
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
-msgstr "Таймаут кеша каталога FTP:"
+msgstr "Тайм-аут кэша каталога FTP:"
 
 #: src/boxes.c:661
 msgid "ftp anonymous password:"
@@ -3090,7 +3090,7 @@ msgstr "Пароль анонимного FTP:"
 
 #: src/boxes.c:668
 msgid "Timeout for freeing VFSs:"
-msgstr "Таймаут высвобождения ВФС:"
+msgstr "Тайм-аут высвобождения ВФС:"
 
 #: src/boxes.c:674
 msgid " Virtual File System Setting "
@@ -3377,7 +3377,7 @@ msgstr "&Местный"
 
 #: src/cmd.c:668
 msgid "&Home"
-msgstr "&Домашний"
+msgstr "&Персональный"
 
 #: src/cmd.c:853
 msgid " Compare directories "
@@ -3808,7 +3808,7 @@ msgstr ""
 
 #: src/file.c:619
 msgid " Reget failed, about to overwrite file "
-msgstr " Ошибка докачки файла, собираюсь переписать файл "
+msgstr " Сбой докачки файла, файл будет переписан "
 
 #: src/file.c:625
 #, c-format
@@ -4416,7 +4416,7 @@ msgid ""
 ""
 msgstr ""
 "Ошибка формата файла помощи\n"
-"."
+""
 
 #: src/help.c:318
 msgid " Internal bug: Double start of link area "
@@ -5168,7 +5168,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 " Использование опции быстрой перезагрузки может не отразить     \n"
-" текущего содержимого каталога. В этом случае вы должны вручную \n"
+" текущего содержимого каталога. В этом случае требуется вручную \n"
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
@@ -5469,7 +5469,7 @@ msgstr "Невозможно исполнить команду."
 
 #: src/panelize.c:458
 msgid "Pipe close failed"
-msgstr "Ошибка при закрытии канала"
+msgstr "Сбой закрытия канала"
 
 #: src/popthelp.c:31
 msgid "Show this help message"
@@ -5707,11 +5707,11 @@ msgstr "%b %e  %Y"
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
-msgstr " Ошибка создания канала "
+msgstr " Сбой канала "
 
 #: src/utilunix.c:394
 msgid " Dup failed "
-msgstr " Ошибка дублирования дескриптора "
+msgstr " Сбой дублирования дескриптора "
 
 #: src/view.c:401
 msgid ""
@@ -6137,7 +6137,7 @@ msgstr "fish: Устанавливается текущий каталог..."
 #: vfs/fish.c:254
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr "fish: Соединение успешно, домашний каталог %s."
+msgstr "fish: Соединение успешно, персональный каталог %s."
 
 #: vfs/fish.c:331
 #, c-format
@@ -6160,7 +6160,7 @@ msgstr "fish: запись %s: посылается команда..."
 
 #: vfs/fish.c:464
 msgid "fish: Local read failed, sending zeros"
-msgstr "fish: Ошибка локального чтения, посылаются нули"
+msgstr "fish: Сбой локального чтения, посылаются нули"
 
 #: vfs/fish.c:476
 #, c-format
@@ -6242,16 +6242,16 @@ msgstr "ftpfs: Неверный адрес системы."
 #: vfs/ftpfs.c:697
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: Соединение с %s"
+msgstr "ftpfs: осуществляется соединение с %s"
 
 #: vfs/ftpfs.c:707
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: Соединение прервано пользователем"
+msgstr "ftpfs: соединение прервано пользователем"
 
 #: vfs/ftpfs.c:709
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
-msgstr "ftpfs: Соединение с сервером неуспешно: %s"
+msgstr "ftpfs: сбой соединения с сервером: %s"
 
 #: vfs/ftpfs.c:793
 #, c-format
@@ -6261,15 +6261,15 @@ msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
 #: vfs/ftpfs.c:987
 msgid "ftpfs: could not setup passive mode for source routing"
 msgstr ""
-"ftpfs: Невозможно установить пассивный режим для распределения источника"
+"ftpfs: невозможно установить пассивный режим для распределения источника"
 
 #: vfs/ftpfs.c:997
 msgid "ftpfs: could not setup passive mode"
-msgstr "ftpfs: Невозможно установить пассивный режим"
+msgstr "ftpfs: невозможно установить пассивный режим"
 
 #: vfs/ftpfs.c:1070
 msgid "ftpfs: aborting transfer."
-msgstr "ftpfs: Прерываю передачу."
+msgstr "ftpfs: прерывание передачи."
 
 #: vfs/ftpfs.c:1072
 #, c-format
@@ -6278,15 +6278,15 @@ msgstr "ftpfs: Ошибка прерывания: %s"
 
 #: vfs/ftpfs.c:1077
 msgid "ftpfs: abort failed"
-msgstr "ftpfs: Не удается прервать"
+msgstr "ftpfs: сбой прерывания"
 
 #: vfs/ftpfs.c:1165 vfs/ftpfs.c:1344
 msgid "ftpfs: CWD failed."
-msgstr "ftpfs: Поиск текущего рабочего каталога неуспешен."
+msgstr "ftpfs: сбой поиска текущего рабочего каталога."
 
 #: vfs/ftpfs.c:1175 vfs/ftpfs.c:1182
 msgid "ftpfs: couldn't resolve symlink"
-msgstr "ftpfs: Невозможно распознать символическую ссылку"
+msgstr "ftpfs: невозможно распознать символическую ссылку"
 
 #: vfs/ftpfs.c:1236
 msgid "Resolving symlink..."
@@ -6304,11 +6304,11 @@ msgstr "ftpfs: Чтение каталога FTP %s..."
 
 #: vfs/ftpfs.c:1356
 msgid "ftpfs: FAIL"
-msgstr "ftpfs: ОШИБКА"
+msgstr "ftpfs: СБОЙ"
 
 #: vfs/ftpfs.c:1447
 msgid "ftpfs: reading FTP directory interrupt by user"
-msgstr "ftpfs: Чтение каталога FTP прервано пользователем"
+msgstr "ftpfs: чтение каталога FTP прервано пользователем"
 
 #: vfs/ftpfs.c:1477
 msgid "ftpfs: got listing"
@@ -6320,7 +6320,7 @@ msgstr "ftpfs: ошибка"
 
 #: vfs/ftpfs.c:1534
 msgid "ftpfs: failed; nowhere to fallback to"
-msgstr "ftpfs: Ошибка; некуда перейти на аварийный режим"
+msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
 #: vfs/ftpfs.c:1598
 #, c-format
@@ -6363,7 +6363,7 @@ msgstr " Нет "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr " Удаленный сервер запущен на странном порту. Сдаюсь.\n"
+msgstr " Удаленный сервер запущен на странном порту. Отказ.\n"
 
 #: vfs/mcfs.c:188
 msgid " MCFS Password required "
@@ -6400,7 +6400,7 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" Ошибка повторного соединения к %s\n"
+" Сбой повторного соединения к %s\n"
 " "
 
 #: vfs/smbfs.c:1737
