@@ -660,7 +660,7 @@ AC_DEFUN([AC_EXT2_UNDEL], [
   if test "$ext2fs_undel" = yes; then
      AC_MSG_NOTICE([using ext2fs file recovery code])
      vfs_flags="${vfs_flags}, undelfs"
-     undelfs_o="undelfs.o"
+     use_undelfs=yes
      MCLIBS="$MCLIBS $EXT2FS_UNDEL_LIBS"
   else
      AC_MSG_NOTICE([not using ext2fs file recovery code])

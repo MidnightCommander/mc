@@ -508,8 +508,6 @@ else
 fi
 
 
-undelfs_o=""
-
 if test $use_vfs = yes; then
     AC_ARG_WITH(ext2undel,
         [  --with-ext2undel         Compile with ext2 undelete code [[yes if found]]],
@@ -525,8 +523,6 @@ if test $use_vfs = yes; then
     ])
 fi
 
-AC_SUBST(undelfs_o)
-	
 
 dnl Ncurses specific checks
 dnl
@@ -655,7 +651,7 @@ fi
 AM_CONDITIONAL(USE_EDIT, [test -n "$use_edit"])
 AM_CONDITIONAL(USE_VFS, [test "x$use_vfs" = xyes])
 AM_CONDITIONAL(USE_VFS_NET, [test x"$use_net_code" = xtrue])
-AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$undelfs_o"])
+AM_CONDITIONAL(USE_UNDEL_FS, [test -n "$use_undelfs"])
 AM_CONDITIONAL(USE_SAMBA_FS, [test -n "$use_smbfs"])
 AM_CONDITIONAL(USE_MCFS, [test -n "$use_mcfs"])
 AM_CONDITIONAL(INCLUDED_SLANG,
