@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1998-04-06 11:48+0300\n"
+"POT-Creation-Date: 1998-04-06 11:57+0300\n"
 "PO-Revision-Date: 1998-03-27 11:07+0200\n"
 "Last-Translator: Alex Tkachenko <alex@bcs.zp.ua>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1034,93 +1034,93 @@ msgstr "перед &Удалением"
 
 #: src/boxes.c:387
 msgid " Confirmation "
-msgstr " Подтверждение "
+msgstr " Запрос подтверждения "
 
-#: src/boxes.c:412
+#: src/boxes.c:454
 msgid "Full 8 bits output"
 msgstr "Полный &8-битный вывод"
 
-#: src/boxes.c:412
+#: src/boxes.c:454
 msgid "ISO 8859-1"
 msgstr ""
 
-#: src/boxes.c:412
+#: src/boxes.c:454
 msgid "7 bits"
 msgstr "&7 бит"
 
-#: src/boxes.c:419
+#: src/boxes.c:461
 msgid "F&ull 8 bits input"
 msgstr "Полный 8-битный &ввод"
 
-#: src/boxes.c:427
+#: src/boxes.c:469
 msgid " Display bits "
 msgstr " Отображение символов "
 
-#: src/boxes.c:554
+#: src/boxes.c:596
 msgid "Always to memory"
 msgstr ""
 
-#: src/boxes.c:554
+#: src/boxes.c:596
 msgid "If size less than:"
 msgstr ""
 
-#: src/boxes.c:564
+#: src/boxes.c:606
 msgid "&Always use ftp proxy"
 msgstr ""
 
-#: src/boxes.c:566
+#: src/boxes.c:608
 msgid "sec"
 msgstr ""
 
-#: src/boxes.c:570
+#: src/boxes.c:612
 msgid "ftpfs directory cache timeout:"
 msgstr ""
 
-#: src/boxes.c:574
+#: src/boxes.c:616
 msgid "ftp anonymous password:"
 msgstr ""
 
-#: src/boxes.c:581
+#: src/boxes.c:623
 msgid "Gzipped tar archive extract:"
 msgstr ""
 
-#: src/boxes.c:587
+#: src/boxes.c:629
 msgid "Timeout for freeing VFSs:"
 msgstr ""
 
-#: src/boxes.c:593
+#: src/boxes.c:635
 msgid " Virtual File System Setting "
 msgstr ""
 
-#: src/boxes.c:740
+#: src/boxes.c:782
 msgid "Symbolic link filename:"
 msgstr ""
 
-#: src/boxes.c:742
+#: src/boxes.c:784
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: src/boxes.c:771
+#: src/boxes.c:813
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:772 src/find.c:609
+#: src/boxes.c:814 src/find.c:609
 msgid "Stopped"
 msgstr ""
 
-#: src/boxes.c:826
+#: src/boxes.c:868
 msgid "Background Jobs"
 msgstr ""
 
-#: src/boxes.c:833
+#: src/boxes.c:875
 msgid "&Kill"
 msgstr ""
 
-#: src/boxes.c:835
+#: src/boxes.c:877
 msgid "&Resume"
 msgstr ""
 
-#: src/boxes.c:837 src/find.c:669
+#: src/boxes.c:879 src/find.c:669
 msgid "&Stop"
 msgstr ""
 
@@ -1312,11 +1312,11 @@ msgstr ""
 
 #: src/cmd.c:417
 msgid " Filter "
-msgstr " ц╔╠╪╘р "
+msgstr " Фильтр "
 
 #: src/cmd.c:417
 msgid " Set expression for filtering filenames"
-msgstr " ·┴─┴╩╘┼ в┘р┴ж┼╬╔┼ ─╠я ╧╘┬╧р┴ ╔═┼╬ ╞┴╩╠╧в"
+msgstr " Задайте выражение для отбора имен файлов"
 
 #: src/cmd.c:501
 msgid " Select "
@@ -1464,15 +1464,15 @@ msgstr ""
 
 #: src/cmd.c:1228
 msgid " Enter machine name (F1 for details): "
-msgstr " ╕в┼─╔╘┼ ╔═я ═┴█╔╬┘ (─┼╘┴╠╔ ╨╧ F1): "
+msgstr " Введите имя машины (детали по F1): "
 
 #: src/cmd.c:1257
 msgid " Link to a remote machine "
-msgstr " ╜╧┼─╔╬┼╬╔┼ ╙ ╒─┴╠┼╬╬╧╩ ═┴█╔╬╧╩ "
+msgstr " Соединение с удаленной машиной "
 
 #: src/cmd.c:1263
 msgid " FTP to machine "
-msgstr " FTP-╙╧┼─╔╬┼╬╔┼ ╙ ╒─┴╠┼╬╬╧╩ ═┴█╔╬╧╩ "
+msgstr " FTP-соединение с удаленной машиной "
 
 #: src/cmd.c:1273
 msgid " Socket source routing setup "
@@ -2482,87 +2482,88 @@ msgstr ""
 msgid "File:       None"
 msgstr ""
 
-#: src/layout.c:154
+#: src/layout.c:153
 msgid "&Vertical"
 msgstr "&Вертикальное"
 
-#: src/layout.c:155
+#: src/layout.c:154
 msgid "&Horizontal"
 msgstr "&Горизонтальное"
 
-#: src/layout.c:165
+#: src/layout.c:164
 msgid "&Xterm hintbar"
 msgstr "Подсказка в &xterm"
 
-#: src/layout.c:166
+#: src/layout.c:165
 msgid "h&Intbar visible"
 msgstr "С&трока подсказки"
 
-#: src/layout.c:167
+#: src/layout.c:166
 msgid "&Keybar visible"
 msgstr "М&етки клавиш"
 
-#: src/layout.c:168
+#: src/layout.c:167
 msgid "command &Prompt"
 msgstr "&Командная строка"
 
-#: src/layout.c:169
+#: src/layout.c:168
 msgid "show &Mini status"
 msgstr "&Мини-статус"
 
-#: src/layout.c:170
+#: src/layout.c:169
 msgid "menu&Bar visible"
 msgstr "&Линейка меню"
 
-#: src/layout.c:171
+#: src/layout.c:170
 msgid "&Equal split"
 msgstr "&Равные размеры"
 
-#: src/layout.c:172
+#: src/layout.c:171
 msgid "pe&Rmissions"
-msgstr "Права &доступа"
+msgstr "Права д&оступа"
 
-#: src/layout.c:173
+#: src/layout.c:172
 msgid "&File types"
 msgstr "Типы &файлов"
 
-#: src/layout.c:282
-msgid " Layout "
-msgstr " Внешний вид "
-
-#: src/layout.c:284
-msgid " Panel split "
-msgstr " Разбиение панелей "
-
-#: src/layout.c:286
-msgid " Highlight... "
-msgstr " Цветовыделение "
-
-#: src/layout.c:288 src/option.c:129
-msgid " Other options "
-msgstr " Прочие настройки "
-
-#: src/layout.c:297
-msgid "output lines"
-msgstr "строки вывода"
-
-#: src/layout.c:374
-msgid "Layout"
-msgstr "Внешний вид"
-
-#: src/layout.c:380 src/learn.c:59 src/learn.c:177 src/option.c:169
+#: src/layout.c:366 src/learn.c:59 src/learn.c:177 src/option.c:144
 msgid "&Save"
 msgstr "&Сохранить"
 
-#: src/layout.c:401 src/option.c:196
+#. length of line with '<' '>' buttons
+#: src/layout.c:374
+msgid " Layout "
+msgstr " Внешний вид "
+
+#: src/layout.c:375
+msgid " Panel split "
+msgstr " Разбиение панелей "
+
+#: src/layout.c:376
+msgid " Highlight... "
+msgstr " Цветовыделение "
+
+#: src/layout.c:377 src/option.c:155
+msgid " Other options "
+msgstr " Прочие настройки "
+
+#: src/layout.c:378
+msgid "output lines"
+msgstr "строки вывода"
+
+#: src/layout.c:445
+msgid "Layout"
+msgstr "Внешний вид"
+
+#: src/layout.c:474 src/option.c:240
 msgid "Other options"
 msgstr "Прочие настройки"
 
-#: src/layout.c:403
+#: src/layout.c:476
 msgid "Highlight..."
 msgstr "Цветовыделение"
 
-#: src/layout.c:405
+#: src/layout.c:478
 msgid "Panel split"
 msgstr "Разбиение панелей"
 
@@ -2931,118 +2932,122 @@ msgid ""
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
 msgstr ""
+" Файлы конфигурации Midnight Commander \n"
+" теперь хранятся в каталоге ~/.mc, старые \n"
+" файлы сейчас туда перемещены\n"
+
+#: src/option.c:74
+msgid "safe de&Lete"
+msgstr "Безопасное &удаление"
+
+#: src/option.c:75
+msgid "cd follows lin&Ks"
+msgstr "Смена &каталога по ссылкам"
+
+#: src/option.c:76
+msgid "advanced cho&Wn"
+msgstr "Расширенная команда cho&Wn"
+
+#: src/option.c:77
+msgid "l&Ynx-like motion"
+msgstr "Навигация в стиле l&Ynx"
+
+#: src/option.c:79
+msgid "Animation"
+msgstr "Анимация"
 
 #: src/option.c:81
-msgid "safe de&Lete"
-msgstr ""
-
-#: src/option.c:82
-msgid "cd follows lin&Ks"
-msgstr ""
+msgid "ro&Tating dash"
+msgstr "Вращающийся &индикатор"
 
 #: src/option.c:83
-msgid "advanced cho&Wn"
-msgstr ""
+msgid "co&Mplete: show all"
+msgstr "Допо&лнение: показывать все"
 
 #: src/option.c:84
-msgid "l&Ynx-like motion"
-msgstr ""
+msgid "&Use internal view"
+msgstr "Встро&енный просмотр"
+
+#: src/option.c:85
+msgid "use internal ed&It"
+msgstr "Встроенный &редактор"
 
 #: src/option.c:86
-msgid "Animation"
-msgstr ""
+msgid "auto m&Enus"
+msgstr "Автоматические &меню"
+
+#: src/option.c:87
+msgid "&Auto save setup"
+msgstr "&Автосохранение настроек"
 
 #: src/option.c:88
-msgid "ro&Tating dash"
-msgstr ""
+msgid "shell &Patterns"
+msgstr "Образцы в стиле &shell"
+
+#: src/option.c:89
+msgid "&Verbose operation"
+msgstr "Детали операци&й"
 
 #: src/option.c:90
-msgid "co&Mplete: show all"
-msgstr ""
+msgid "&Fast dir reload"
+msgstr "&Быстрая загрузка каталога"
 
 #: src/option.c:91
-msgid "&Use internal view"
-msgstr ""
+msgid "mi&X all files"
+msgstr "Смешивать &файлы/каталоги"
 
 #: src/option.c:92
-msgid "use internal ed&It"
-msgstr ""
+msgid "&Drop down menus"
+msgstr "Выпадение мен&ю при вызове"
 
 #: src/option.c:93
-msgid "auto m&Enus"
-msgstr ""
+msgid "ma&Rk moves down"
+msgstr "&Отметка перемещает курсор"
 
 #: src/option.c:94
-msgid "&Auto save setup"
-msgstr ""
+msgid "show &Hidden files"
+msgstr "Показывать скр&ытые файлы"
 
 #: src/option.c:95
-msgid "shell &Patterns"
-msgstr ""
-
-#: src/option.c:96
-msgid "&Verbose operation"
-msgstr ""
-
-#: src/option.c:97
-msgid "&Fast dir reload"
-msgstr ""
-
-#: src/option.c:98
-msgid "mi&X all files"
-msgstr ""
-
-#: src/option.c:99
-msgid "&Drop down menus"
-msgstr ""
-
-#: src/option.c:100
-msgid "ma&Rk moves down"
-msgstr ""
-
-#: src/option.c:101
-msgid "show &Hidden files"
-msgstr ""
+msgid "show &Backup files"
+msgstr "Показывать ре&зервные файлы"
 
 #: src/option.c:102
-msgid "show &Backup files"
-msgstr ""
-
-#: src/option.c:109
 msgid "&Never"
 msgstr "&Никогда"
 
-#: src/option.c:110
+#: src/option.c:103
 msgid "on dumb &Terminals"
 msgstr "На &тупых терминалах"
 
-#: src/option.c:111
+#: src/option.c:104
 msgid "alwa&Ys"
 msgstr "&Всегда"
 
-#: src/option.c:127
+#. Similar code is in layout.c (init_layout())
+#: src/option.c:152
 msgid " Configure options "
-msgstr ""
+msgstr " Параметры конфигурации "
 
-#: src/option.c:131
-msgid " Pause after run... "
-msgstr ""
-
-#: src/option.c:133
+#: src/option.c:153
 msgid " Panel options "
-msgstr ""
+msgstr " Настройки панелей "
 
-#: src/option.c:162
+#: src/option.c:154
+msgid " Pause after run... "
+msgstr " Пауза после исполнения... "
+
+#: src/option.c:206
 msgid "Configure options"
-msgstr ""
+msgstr "Параметры конфигурации"
 
-#: src/option.c:198
+#: src/option.c:242
 msgid "Pause after run..."
-msgstr ""
+msgstr "Пауза после запуска..."
 
-#: src/option.c:200
+#: src/option.c:244
 msgid "Panel options"
-msgstr ""
+msgstr "Настройки панелей"
 
 #: src/panelize.c:90
 msgid "&Add new"
