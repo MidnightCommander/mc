@@ -1,3 +1,8 @@
+2001-07-28  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (view_ok_to_quit): Make global - it's needed for GMC.
+	* view.h: Declare view_ok_to_quit().
+
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
 	* util.c [!USE_VFS] (get_current_wd): Resurrect, this time using

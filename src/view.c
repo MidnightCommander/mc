@@ -392,7 +392,7 @@ save_edit_changes (WView *view)
     free_change_list (view);
 }
 
-static int
+int
 view_ok_to_quit (WView *view)
 {
     int r;
