@@ -1,3 +1,20 @@
+1999-02-01  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_drag_motion): If the user is dragging a
+	Netscape url, allow ACTION_LINK.
+	(setup_desktop_dnd): Now we use a single GtkInvisible widget to
+	proxy both DnD and clicks on the desktop.
+	(setup_motif_dnd_proxy): New function to set up a widow as a Motif
+	DnD proxy (to allow drops from Netscape, for example).
+	(setup_desktop_click_proxy_window): Use the proxy_invisible widget.
+	(drop_url): Reload desktop icons after creating the url entry.
+	(desktop_icon_info_place): Allow a drop from something other than
+	a desktop icon to be placed where the user wants.
+	(desktop_drag_motion): Unconditionally specify ACTION_MOVE if we
+	are dragging a desktop icon.
+	(desktop_icon_info_place): Remove the icon from its slot before
+	calling the smart-positioning routines.
+
 1999-01-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (reload_desktop_icons): Reload the icon image for a

@@ -6,13 +6,6 @@
  *          Miguel de Icaza <miguel@nuclecu.unam.mx>
  */
 
-/*
- * TO-DO list for the desktop;
- *
- * - Put an InputOnly window over icons to be able to select them even if the user clicks on
- *   the transparent area.
- */
-
 #include <config.h>
 #include "global.h"
 #include <gdk/gdkx.h>
@@ -83,17 +76,17 @@ static GtkTargetEntry dnd_icon_targets[] = {
 };
 
 static GtkTargetEntry dnd_desktop_targets[] = {
-	{ "_NETSCAPE_URL", 0, TARGET_URL },
 	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
-	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
+	{ TARGET_URL_TYPE, 0, TARGET_URL }
 };
 
 static int dnd_icon_nsources = sizeof (dnd_icon_sources) / sizeof (dnd_icon_sources[0]);
 static int dnd_icon_ntargets = sizeof (dnd_icon_targets) / sizeof (dnd_icon_targets[0]);
 static int dnd_desktop_ntargets = sizeof (dnd_desktop_targets) / sizeof (dnd_desktop_targets[0]);
 
-/* Proxy window for DnD on the root window */
-static GtkWidget *dnd_proxy_window;
+/* Proxy window for DnD and clicks on the desktop */
+static GtkWidget *proxy_invisible;
 
 /* Offsets for the DnD cursor hotspot */
 static int dnd_press_x, dnd_press_y;
@@ -112,7 +105,6 @@ static int icon_select_on_text;
 
 /* Proxy window for clicks on the root window */
 static GdkWindow *click_proxy_gdk_window;
-static GtkWidget *click_proxy_invisible;
 
 /* GC for drawing the rubberband rectangle */
 static GdkGC *click_gc;
@@ -130,7 +122,7 @@ static int click_dragging;
 
 
 static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url,
-					       int auto_pos, int xpos, int ypos);
+					       int user_pos, int auto_pos, int xpos, int ypos);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -218,23 +210,24 @@ remove_from_slot (DesktopIconInfo *dii)
 	layout_slots[dii->slot].icons = g_list_remove (layout_slots[dii->slot].icons, dii);
 }
 
-/*
- * Places a desktop icon.  If auto_pos is true, then the function will
- * look for a place to position the icon automatically, else it will
- * use the specified coordinates, snapped to the grid if the global
- * desktop_snap_icons flag is set.
+/* Places a desktop icon.  If auto_pos is true, then the function will look for
+ * a place to position the icon automatically, else it will use the specified
+ * coordinates, snapped to the grid if the global desktop_snap_icons flag is
+ * set.
  */
 static void
-desktop_icon_info_place (DesktopIconInfo *dii, int auto_pos, int xpos, int ypos)
+desktop_icon_info_place (DesktopIconInfo *dii, int user_pos, int auto_pos, int xpos, int ypos)
 {
 	int u, v;
 	char *filename;
 
-	if (auto_pos) {
-		if (desktop_auto_placement || !desktop_snap_icons)
-			get_icon_auto_pos (&xpos, &ypos);
-		else if (desktop_snap_icons)
+	remove_from_slot (dii);
+
+	if (!user_pos && auto_pos) {
+		if (desktop_snap_icons)
 			get_icon_snap_pos (&xpos, &ypos);
+		else
+			get_icon_auto_pos (&xpos, &ypos);
 	}
 
 	if (xpos < 0)
@@ -248,8 +241,6 @@ desktop_icon_info_place (DesktopIconInfo *dii, int auto_pos, int xpos, int ypos)
 		ypos = layout_screen_height - DESKTOP_SNAP_Y;
 
 	/* Increase the number of icons in the corresponding slot */
-
-	remove_from_slot (dii);
 
 	u = xpos / DESKTOP_SNAP_X;
 	v = ypos / DESKTOP_SNAP_Y;
@@ -332,13 +323,13 @@ typedef struct {
 } file_and_url_t;
 
 /*
- * Reloads the desktop icons efficiently.  If there are "new" files
- * for which no icons have been created, then icons for them will be
- * created started at the specified position -- this is used when
- * dragging new icons to the desktop.
+ * Reloads the desktop icons efficiently.  If there are "new" files for which no
+ * icons have been created, then icons for them will be created started at the
+ * specified position if user_pos is TRUE.  If it is FALSE, the icons will be
+ * auto-placed.
  */
 static void
-reload_desktop_icons (int xpos, int ypos)
+reload_desktop_icons (int user_pos, int xpos, int ypos)
 {
 	struct dirent *dirent;
 	DIR *dir;
@@ -391,7 +382,7 @@ reload_desktop_icons (int xpos, int ypos)
 			g_free (full_name);
 
 			dii = l->data;
-			desktop_icon_set_icon (dii->dicon, im);
+			desktop_icon_set_icon (DESKTOP_ICON (dii->dicon), im);
 
 			/* Leave the icon in the desktop by removing it from the list */
 
@@ -406,7 +397,7 @@ reload_desktop_icons (int xpos, int ypos)
 			desktop_url = NULL;
 
 		if (have_pos) {
-			dii = desktop_icon_info_new (dirent->d_name, desktop_url, FALSE, x, y);
+			dii = desktop_icon_info_new (dirent->d_name, desktop_url, FALSE, FALSE, x, y);
 			gtk_widget_show (dii->dicon);
 
 			g_free (full_name);
@@ -452,7 +443,7 @@ reload_desktop_icons (int xpos, int ypos)
 	for (sl = need_position_list; sl; sl = sl->next) {
 		file_and_url_t *fau = sl->data;
 
-		dii = desktop_icon_info_new (fau->filename, fau->url, TRUE, xpos, ypos);
+		dii = desktop_icon_info_new (fau->filename, fau->url, user_pos, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
 
 		g_free (fau->url);
@@ -691,7 +682,7 @@ text_changed_url (GnomeIconTextItem *iti, gpointer data)
 	
 	fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
 	new_text = gnome_icon_text_item_get_text (iti);
-	gnome_metadata_set (fullname, "desktop-url", strlen (new_text)+1, new_text);
+	gnome_metadata_set (fullname, "desktop-url", strlen (new_text) + 1, new_text);
 
 	return TRUE;
 }
@@ -858,7 +849,7 @@ do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	if (gpopup_do_popup (event, NULL, dii, 0, filename) != -1)
-		reload_desktop_icons (0, 0);
+		reload_desktop_icons (FALSE, 0, 0);
 
 	g_free (filename);
 }
@@ -1290,7 +1281,10 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 
 	for (sl = sel_icons; sl; sl = sl->next) {
 		dii = sl->data;
-		desktop_icon_info_place (dii, FALSE, dii->x + dx, dii->y + dy);
+		desktop_icon_info_place (dii,
+					 !desktop_auto_placement,
+					 desktop_auto_placement,
+					 dii->x + dx, dii->y + dy);
 	}
 
 	/* Clean up */
@@ -1309,72 +1303,70 @@ desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSe
 	int size;
 	char *buf;
 	const char *mime_type;
-	
+
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	fe = file_entry_from_file (filename);
 	if (!fe)
 		return; /* eek */
 
-	/*
-	 * 1. If it is directory, drop the files there
-	 */
-	if (fe->f.link_to_dir){
+	/* 1. If it is a directory, drop the files there */
+
+	if (fe->f.link_to_dir) {
 		gdnd_drop_on_directory (context, data, filename);
 		goto out;
 	}
 
-	/*
-	 * 2. Try to use a metadata-based drop action 
-	 */
-	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0){
+	/* 2. Try to use a metadata-based drop action */
+
+	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0) {
 		/*action_drop (filename, buf, context, data);*/ /* Fixme: i'm undefined */
 		g_free (buf);
 		goto out;
 	}
 
-	/* 
-	 * 3. Try a drop action from the mime-type
-	 */
+	/* 3. Try a drop action from the mime-type */
+
 	mime_type = gnome_mime_type_or_default (filename, NULL);
-	if (mime_type){
+	if (mime_type) {
 		char *action;
-		
+
 		action = gnome_mime_get_value (mime_type, "drop-action");
-		
-		if (action){
+
+		if (action) {
 			/*action_drop (filename, action, context, data);*/ /* Fixme: i'm undefined */
 			goto out;
 		}
 	}
 
-	/*
-	 * 4. Executable.  Try metadata keys for "open".
-	 */
-	if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe)){
+	/* 4. Executable.  Try metadata keys for "open" */
+
+	if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe)) {
 		GList *names, *l;
 		int len, i;
 		char **drops;
 
 		/* Convert the list of filenames into an array of char */
+
 		names = gnome_uri_list_extract_uris (data->data);
 		len = g_list_length (names);
 		drops = (char **) g_malloc (sizeof (char *) * (len+1));
 
-		for (l = names, i = 0; i < len; i++, l = l->next){
+		for (l = names, i = 0; i < len; i++, l = l->next) {
 			char *text = l->data;
-			
+
 			if (strncmp (text, "file:", 5) == 0)
 				text += 5;
 
 			drops [i] = text;
 		}
 		drops [i] = NULL;
-		
-		if (gnome_metadata_get (filename, "open", &size, &buf) == 0){
+
+		if (gnome_metadata_get (filename, "open", &size, &buf) == 0) {
 			exec_extension (filename, buf, drops, NULL, 0);
 			goto out2;
 		}
+
 		exec_extension (filename, "%f %q", drops, NULL, 0);
 
 		g_free (drops);
@@ -1433,22 +1425,18 @@ setup_icon_dnd_dest (DesktopIconInfo *dii)
 			    dii);
 }
 
-/*
- * Creates a new desktop icon.  The filename is the pruned filename
- * inside the desktop directory.  If auto_pos is false, it will use
- * the specified coordinates for the icon.  Else, it will use auto-
- * positioning trying to start at the specified coordinates.  It does
- * not show the icon.
+/* Creates a new desktop icon.  The filename is the pruned filename inside the
+ * desktop directory.  It does not show the icon.
  */
 static DesktopIconInfo *
-desktop_icon_info_new (char *filename, char *url, int auto_pos, int xpos, int ypos)
+desktop_icon_info_new (char *filename, char *url, int user_pos, int auto_pos, int xpos, int ypos)
 {
 	DesktopIconInfo *dii;
 	file_entry *fe;
 	char *full_name;
 	GdkImlibImage *icon_im;
 	GtkSignalFunc text_changed_func;
-	
+
 	/* Create the icon structure */
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
@@ -1518,7 +1506,7 @@ desktop_icon_info_new (char *filename, char *url, int auto_pos, int xpos, int yp
 
 	/* Place the icon and append it to the list */
 
-	desktop_icon_info_place (dii, auto_pos, xpos, ypos);
+	desktop_icon_info_place (dii, user_pos, auto_pos, xpos, ypos);
 	return dii;
 }
 
@@ -1562,7 +1550,7 @@ setup_trashcan (char *desktop_dir)
 	if (!g_file_exists (trashcan_dir)){
 		mkdir (trashcan_dir, 0777);
 		gnome_metadata_set (
-			trashcan_dir, "icon-filename", strlen (trash_pix)+1, trash_pix);
+			trashcan_dir, "icon-filename", strlen (trash_pix) + 1, trash_pix);
 	}
 	
 	g_free (trashcan_dir);
@@ -1599,6 +1587,18 @@ create_desktop_dir (void)
 
 /*	setup_trashcan (desktop_directory); */
 }
+
+/* Property placed on target windows */
+typedef struct {
+  guint8 byte_order;
+  guint8 protocol_version;
+  guint8 protocol_style;
+  guint8 pad;
+  guint32 proxy_window;
+  guint16 num_drop_sites;
+  guint16 padding;
+  guint32 total_size;
+} MotifDragReceiverInfo;
 
 /* Sets up a proxy window for DnD on the specified X window.  Courtesy of Owen Taylor */
 static gboolean 
@@ -1683,10 +1683,38 @@ setup_xdnd_proxy (guint32 xid, GdkWindow *proxy_window)
 				 xdnd_proxy_atom, gdk_atom_intern ("WINDOW", FALSE),
 				 32, PropModeReplace,
 				 (guchar *) &proxy_xid, 1);
-      
+
 		return TRUE;
 	} else
 		return FALSE;
+}
+
+/* Sets up a window as a Motif DnD proxy */
+static void
+setup_motif_dnd_proxy (guint32 xid, GdkWindow *proxy_window)
+{
+	guint32 proxy_xid;
+	MotifDragReceiverInfo info;
+	Atom receiver_info_atom;
+	guint32 myint;
+
+	myint = 0x01020304;
+	proxy_xid = GDK_WINDOW_XWINDOW (proxy_window);
+	receiver_info_atom = gdk_atom_intern ("_MOTIF_DRAG_RECEIVER_INFO", FALSE);
+
+	info.byte_order = (*((gchar *) &myint) == 1) ? 'B' : 'l';
+	info.protocol_version = 0;
+	info.protocol_style = 5; /* XmDRAG_DYNAMIC */
+	info.proxy_window = proxy_xid;
+	info.num_drop_sites = 0;
+	info.total_size = sizeof(info);
+
+	XChangeProperty (gdk_display, xid,
+			 receiver_info_atom,
+			 receiver_info_atom,
+			 8, PropModeReplace,
+			 (guchar *)&info,
+			 sizeof (info));
 }
 
 /* Callback used when we get a drag_motion event from the desktop.  We must
@@ -1702,25 +1730,27 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 
 	action = context->suggested_action; /* this is the default */
 
-	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON)) {
-		if (context->actions & GDK_ACTION_MOVE)
-			action = GDK_ACTION_MOVE;
-	} else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
+	if (gdnd_drag_context_has_target (context, TARGET_MC_DESKTOP_ICON))
+		action = GDK_ACTION_MOVE;
+	else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
 		source_widget = gtk_drag_get_source_widget (context);
 
 		/* If it comes from ourselves, make move the default unless the
 		 * user is explicitly asking for ASK.
 		 */
-		printf ("%s\t%s\t%s\t%s\n",
-			(context->actions & GDK_ACTION_COPY) ? "copy" : "",
-			(context->actions & GDK_ACTION_MOVE) ? "move" : "",
-			(context->actions & GDK_ACTION_LINK) ? "link" : "",
-			(context->actions & GDK_ACTION_ASK) ? "ask" : "");
-			
 		if (source_widget
 		    && context->suggested_action != GDK_ACTION_ASK
 		    && (context->actions & GDK_ACTION_MOVE))
 			action = GDK_ACTION_MOVE;
+	} else if (gdnd_drag_context_has_target (context, TARGET_URL)) {
+		/* FIXME: right now we only allow links.  We should see if we
+		 * can move or copy stuff instead (for ftp instead of http
+		 * sites, for example).
+		 */
+		if (context->actions & GDK_ACTION_LINK)
+			action = GDK_ACTION_LINK;
+		else
+			action = 0;
 	} else
 		action = 0; /* we cannot handle that type of data */
 
@@ -1739,7 +1769,7 @@ drop_url (GdkDragContext *context, GtkSelectionData *data, gint x, gint y)
 
 	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
 
-	if (mktemp (template)){
+	if (mktemp (template)) {
 		FILE *f;
 
 		f = fopen (template, "w");
@@ -1748,7 +1778,10 @@ drop_url (GdkDragContext *context, GtkSelectionData *data, gint x, gint y)
 			fclose (f);
 
 			gnome_metadata_set (template, "desktop-url",
-					    strlen (data->data)+1, data->data);
+					    strlen (data->data) + 1,
+					    data->data);
+
+			reload_desktop_icons (TRUE, x, y);
 		}
 	}
 
@@ -1769,7 +1802,6 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 	x += dx;
 	y += dy;
 
-	printf ("Drag!!\n");
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
 		drop_desktop_icons (context, data, x, y);
@@ -1778,14 +1810,13 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 	case TARGET_URI_LIST:
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
 		if (retval)
-			reload_desktop_icons (x, y);
+			reload_desktop_icons (TRUE, x, y);
 		break;
 
 	case TARGET_URL:
-		printf ("Aqui!\n");
 		drop_url (context, data, x, y);
 		break;
-		
+
 	default:
 		break;
 	}
@@ -1795,22 +1826,21 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 static void
 setup_desktop_dnd (void)
 {
-	dnd_proxy_window = gtk_invisible_new ();
-	gtk_widget_show (dnd_proxy_window);
+	if (!setup_xdnd_proxy (GDK_ROOT_WINDOW (), proxy_invisible->window))
+		g_warning ("There is already a process taking drops on the desktop!\n");
 
-	if (!setup_xdnd_proxy (GDK_ROOT_WINDOW (), dnd_proxy_window->window))
-		g_warning ("There is already a process taking drop windows on the desktop\n");
+	setup_motif_dnd_proxy (GDK_ROOT_WINDOW (), proxy_invisible->window);
 
-	gtk_drag_dest_set (dnd_proxy_window,
+	gtk_drag_dest_set (proxy_invisible,
 			   GTK_DEST_DEFAULT_DROP,
 			   dnd_desktop_targets,
 			   dnd_desktop_ntargets,
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
-	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_motion",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "drag_motion",
 			    (GtkSignalFunc) desktop_drag_motion,
 			    NULL);
-	gtk_signal_connect (GTK_OBJECT (dnd_proxy_window), "drag_data_received",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "drag_data_received",
 			    (GtkSignalFunc) desktop_drag_data_received,
 			    NULL);
 }
@@ -2122,7 +2152,7 @@ click_proxy_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 
 /*
  * Filter that translates proxied events from virtual root windows into normal
- * Gdk events for the click_proxy_invisible widget.
+ * Gdk events for the proxy_invisible widget.
  */
 static GdkFilterReturn
 click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
@@ -2187,7 +2217,7 @@ setup_desktop_click_proxy_window (void)
 	}
 
 	/* Make the proxy window send events to the invisible proxy widget */
-	gdk_window_set_user_data (click_proxy_gdk_window, click_proxy_invisible);
+	gdk_window_set_user_data (click_proxy_gdk_window, proxy_invisible);
 
 	/* Add our filter to get events */
 	gdk_window_add_filter (click_proxy_gdk_window, click_proxy_filter, NULL);
@@ -2239,11 +2269,8 @@ setup_desktop_clicks (void)
 	GdkColor color;
 	GdkBitmap *stipple;
 
-	click_proxy_invisible = gtk_invisible_new ();
-	gtk_widget_show (click_proxy_invisible);
-
 	/* Make the root window send events to the invisible proxy widget */
-	gdk_window_set_user_data (GDK_ROOT_PARENT (), click_proxy_invisible);
+	gdk_window_set_user_data (GDK_ROOT_PARENT (), proxy_invisible);
 
 	/* Add our filter to get button press/release events (they are sent by
 	 * the WM * with the window set to the root).  Our filter will translate
@@ -2260,17 +2287,17 @@ setup_desktop_clicks (void)
 
 	/* Connect the signals */
 
-	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "button_press_event",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "button_press_event",
 			    (GtkSignalFunc) click_proxy_button_press,
 			    NULL);
-	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "button_release_event",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "button_release_event",
 			    (GtkSignalFunc) click_proxy_button_release,
 			    NULL);
-	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "motion_notify_event",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "motion_notify_event",
 			    (GtkSignalFunc) click_proxy_motion,
 			    NULL);
 
-	gtk_signal_connect (GTK_OBJECT (click_proxy_invisible), "property_notify_event",
+	gtk_signal_connect (GTK_OBJECT (proxy_invisible), "property_notify_event",
 			    (GtkSignalFunc) click_proxy_property_notify,
 			    NULL);
 
@@ -2306,7 +2333,13 @@ desktop_init (void)
 	gdnd_init ();
 	create_layout_info ();
 	create_desktop_dir ();
-	reload_desktop_icons (0, 0);
+	reload_desktop_icons (FALSE, 0, 0);
+
+	/* Create the proxy window and initialize all proxying stuff */
+
+	proxy_invisible = gtk_invisible_new ();
+	gtk_widget_show (proxy_invisible);
+
 	setup_desktop_dnd ();
 	setup_desktop_clicks ();
 }
@@ -2333,13 +2366,12 @@ desktop_destroy (void)
 	g_free (desktop_directory);
 	desktop_directory = NULL;
 
-	/* Remove DnD crap */
-
-	gtk_widget_destroy (dnd_proxy_window);
-	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
-
 	/* Remove click-on-desktop crap */
 
 	gdk_window_unref (click_proxy_gdk_window);
-	gtk_widget_destroy (click_proxy_invisible);
+
+	/* Remove DnD crap */
+
+	gtk_widget_destroy (proxy_invisible);
+	XDeleteProperty (GDK_DISPLAY (), GDK_ROOT_WINDOW (), gdk_atom_intern ("XdndProxy", FALSE));
 }
