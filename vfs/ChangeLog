@@ -1,3 +1,9 @@
+2000-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* sfs.c (redirect): temporary file unlinked on error;
+
+	(sfs_init): warnings are localized
+
 2000-10-05  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/rpm: If rpm indicates an error create a virtual file
@@ -24,7 +30,7 @@
 
 2000-09-14  Pavel Machek  <pavel@bug.ucw.cz>
 
-	* vfs.c, extfs/{a,extfs.ini} Improved /#a filesystem
+	* vfs.c, extfs/{a,extfs.ini}: Improved /#a filesystem
 
 2000-09-14  Pavel Roskin  <proski@gnu.org>
 
