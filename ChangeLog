@@ -1,3 +1,8 @@
+2002-04-21  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for *.rmi files - latest TiMidity++
+	can play them.
+
 2002-04-09  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* autogen.sh: Fix for gettext 0.11 family (and newer).

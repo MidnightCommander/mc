@@ -270,7 +270,7 @@ regex/\.(ogg|OGG|Ogg)$
 	Open=if [ "$DISPLAY" = "" ]; then ogg123 %f; else (xmms %f &); fi
 	View=%view{ascii} ogginfo %s
 
-regex/\.(midi?|MIDI?|Midi?)$
+regex/\.(midi?|MIDI?|Midi?|rmid?|RMID?|Rmid?)$
 	Open=timidity %f
 
 ### Multimedia ###
