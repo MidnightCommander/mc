@@ -1,5 +1,9 @@
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Don't check for strcasecmp(), strncasecmp() and
+	strdup() - test results are not used except in gettext, which
+	provides its own tests.
+
 	* configure.in: When checking for ncurses, check for
 	has_colors(), not curses_version() - the later is missing in
 	older version of ncurses.
