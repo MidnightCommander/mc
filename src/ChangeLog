@@ -1,3 +1,8 @@
+2003-11-20  Pavel Roskin  <proski@gnu.org>
+
+	* glibcompat.h: Provide replacement for g_slist_delete_link().
+	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
+
 2003-11-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* util.c (load_mc_home_file): Eliminate g_strdup_printf().

@@ -19,9 +19,19 @@
 #define __MC_GLIBCOMPAT_H
 
 #if GLIB_MAJOR_VERSION < 2
+
 gsize g_strlcpy (gchar *dest, const gchar *src, gsize dest_size);
 #define g_try_malloc(x) malloc(x)
 #define g_try_realloc(x) realloc(x)
+
+static inline GSList *
+g_slist_delete_link (GSList *list, GSList *link)
+{
+    list = g_slist_remove_link (list, link);
+    g_slist_free_1 (link);
+    return list;
+}
+
 #endif				/* GLIB_MAJOR_VERSION < 2 */
 
 #endif				/* !__MC_GLIBCOMPAT_H */
