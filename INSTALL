@@ -97,11 +97,6 @@ incomplete, use `configure --help' to get the full list):
      Use this flag to disable gpm mouse support (e.g. if you want to
      use mouse only on X terminals).
 
-`--with-hsc'
-     Compiles support for HSC firewall into the ftp virtual file system.
-     Use this option with caution - it disables support for standard FTP
-     proxies.
-
 `--with-mmap', `--without-mmap'
      Force using or not using the mmap function.  It is currently used
      in the internal viewer.  `--with-mmap' may be useful on some

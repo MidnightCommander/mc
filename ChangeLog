@@ -1,3 +1,8 @@
+2002-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Remove support for HSC proxy - it's obsolete.
+	Remove all references to HSC proxy everywhere.
+
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Bump version to 4.6.0-pre1b.

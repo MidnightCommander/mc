@@ -317,15 +317,6 @@ AC_ARG_WITH(ncurses,
 fi
 ])
 
-AC_ARG_WITH(hsc,
-        [  --with-hsc               Compile with support for HSC firewall instead
-                           of FTP proxy [[no]]],
-        [if test x$withval = xyes; then
-                AC_DEFINE(HSC_PROXY, 1,
-			  [Define if you want to use the HSC firewall])
-        fi
-])
-
 dnl
 dnl Check for the -mandoc package
 dnl

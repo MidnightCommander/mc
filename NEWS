@@ -3,7 +3,7 @@ Changes made after 4.6.0-pre1.
 - Polish manual has been added.
 - glib is now properly detected on FreeBSD.
 - New syntax rules - RPM specfile.
-- Termnet support has heen removed.
+- Support for termnet and HSC firewall has heen removed.
 - mc now creates its own temporary directory, separate for each user.
 - Experimental support for glib 2.0.x has been added (use --with-glib2).
 - Mouse wheel is supported in the internal editor in xterm and
