@@ -810,7 +810,7 @@ __find_entry (struct entry *dir, char *name,
 		    pent = generate_entry (dir->inode->archive, p, pdir, S_IFDIR | 0777);
 		}
 		if (pent == NULL && make_file) { 
-		    pent = generate_entry (dir->inode->archive, p, pdir, 0777);
+		    pent = generate_entry (dir->inode->archive, p, pdir, S_IFREG | 0666);
 		}
 	    }
 	}

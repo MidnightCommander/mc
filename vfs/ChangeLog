@@ -1,5 +1,9 @@
 2002-12-09  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.c (__find_entry): When creating entried for regular
+	files, set initial permissions to S_IFREG | 0666.  This fixes
+	problems with viewing and editing newly added files.
+
 	* extfs/bpp: Fix file sizes, contents of INSTALL and UPGRADE.
 
 2002-12-08  Pavel Roskin  <proski@gnu.org>
