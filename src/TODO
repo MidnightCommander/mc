@@ -2,7 +2,7 @@ Before 4.6.0-pre2
 =================
 
 Use paranoid quoting in subshell_name_quote() only when absolutely
-necessary.
+necessary - it's slow, especially in UTF-8 locales.
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
@@ -14,8 +14,6 @@ support for S-Lang library compiled with UTF-8 support.
 REGRESSION: Allow minimal functionality on read-only filesystems.
 
 Don't rely on temporary scripts being executable.  Run shell explicitly.
-
-Recheck and clean up manuals.  Add node names to the English manual.
 
 reimplement "-P" in a safer way (temp file instead of stdout) - possibly
 security issues.
@@ -36,6 +34,12 @@ have been reported.
 
 
 Before 4.6.0
+============
+
+Contact all translators to update translations.
+
+
+Before 4.6.1
 ============
 
 Totals are not calculated when operating on a single directory.
@@ -71,14 +75,16 @@ avoid using a superlong line to redefine all colors.
 Allow modifiers for keys in mc.lib, like "shift-up".
 
 
-After 4.6.0
-===========
+After 4.6.1 on 4.6.x branch
+===========================
 
 Consistent support for mc.lib.
 
 Consistent support for per-terminal settings.
 
 New syntax for mc.ext - path check, desktop environment check.
+
+fxp support in VFS.
 
 
 In the 4.7 branch
@@ -93,6 +99,8 @@ Dynamic loading for libX11, libgpm.
 Process all input internally, use screen libraries only for output.
 
 Support for multi-byte charsets (e.g. UTF-8).
+
+sftp support in VFS.
 
 
 ========================================================================
