@@ -1,5 +1,7 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* direntry.c (vfs_s_get_line): Fix off-by-one buffer overflow.
+
 	* fish.c (pipeopen): Use _exit(), not vfs_die() to terminate the
 	child if execvp() fails.
 

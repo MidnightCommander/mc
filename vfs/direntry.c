@@ -1134,7 +1134,7 @@ vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term)
     int i, status;
     char c;
 
-    for (i = 0; i < buf_len; i++, buf++){
+    for (i = 0; i < buf_len - 1; i++, buf++){
 	if (read (sock, buf, sizeof(char)) <= 0)
 	    return 0;
 	if (logfile){
@@ -1146,6 +1146,8 @@ vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term)
 	    return 1;
 	}
     }
+
+    /* Line is too long - terminate buffer and discard the rest of line */
     *buf = 0;
     while ((status = read (sock, &c, sizeof (c))) > 0){
 	if (logfile){
