@@ -1,13 +1,21 @@
+2005-03-19  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_WITH_SLANG): Reorder checks.  Move termcap
+	checks ...
+	(MC_SLANG_TERMCAP): ... here.
+	(MC_SLANG_PRIVATE): Check if private functions are available.
+	It's not the case on Debian unstable.
+
 2005-03-19  Pavel S. Shirshov  <me@pavelsh.pp.ru>
 
-        * syntax/idl.syntax: Add syntax file for the CORBA idl.
+	* syntax/idl.syntax: Add syntax file for the CORBA idl.
 	From Ian Zagorskih <ianzag@megasignal.com>
-        * syntax/lua.syntax: Add syntax file for the LUA programming language.
-	From Mike Gorchak  <mike@malva.ua> 
-        * syntax/Syntax: Add syntax file for CORBA idl and lua.
-        * syntax/Makefile.am: Likewise.
-        * mc.qpg.in: Likewise.
-        * NEWS: Likewise.
+	* syntax/lua.syntax: Add syntax file for the LUA programming language.
+	From Mike Gorchak  <mike@malva.ua>
+	* syntax/Syntax: Add syntax file for CORBA idl and lua.
+	* syntax/Makefile.am: Likewise.
+	* mc.qpg.in: Likewise.
+	* NEWS: Likewise.
 
 2005-03-19  Pavel Roskin  <proski@gnu.org>
 

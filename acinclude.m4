@@ -669,6 +669,69 @@ AC_DEFUN([MC_USE_TERMCAP], [
 
 
 dnl
+dnl Check if private functions are available for linking
+dnl
+AC_DEFUN([MC_SLANG_PRIVATE], [
+    AC_CACHE_CHECK([if S-Lang exports private functions],
+		   [mc_cv_slang_private], [
+	ac_save_LIBS="$LIBS"
+	LIBS="$LIBS -lslang"
+	AC_TRY_LINK([
+		     #ifdef HAVE_SLANG_SLANG_H
+		     #include <slang/slang.h>
+		     #else
+		     #include <slang.h>
+		     #endif
+		     #if SLANG_VERSION >= 10000
+		     extern unsigned int SLsys_getkey (void);
+		     #else
+		     extern unsigned int _SLsys_getkey (void);
+		     #endif
+		    ], [
+		     #if SLANG_VERSION >= 10000
+		     _SLsys_getkey ();
+		     #else
+		     SLsys_getkey ();
+		     #endif
+		    ],
+		    [mc_cv_slang_private=yes],
+		    [mc_cv_slang_private=no])
+	LIBS="$ac_save_LIBS"
+    ])
+
+    if test x$mc_cv_slang_private = xyes; then
+	AC_DEFINE(HAVE_SLANG_PRIVATE, 1,
+		  [Define if private S-Lang functions are available])
+    fi
+])
+
+
+dnl
+dnl Check if the installed S-Lang library uses termcap
+dnl
+AC_DEFUN([MC_SLANG_TERMCAP], [
+    AC_CACHE_CHECK([if S-Lang uses termcap], [mc_cv_slang_termcap], [
+	ac_save_LIBS="$LIBS"
+	LIBS="$LIBS -lslang"
+	AC_TRY_LINK([
+		     #ifdef HAVE_SLANG_SLANG_H
+		     #include <slang/slang.h>
+		     #else
+		     #include <slang.h>
+		     #endif
+		    ],
+		    [SLtt_get_terminfo(); SLtt_tgetflag("");],
+		    [mc_cv_slang_termcap=no],
+		    [mc_cv_slang_termcap=yes])
+	LIBS="$ac_save_LIBS"
+    ])
+
+    if test x$mc_cv_slang_termcap = xyes; then
+	MC_USE_TERMCAP
+    fi
+])
+
+dnl
 dnl Common code for MC_WITH_SLANG and MC_WITH_MCSLANG
 dnl
 AC_DEFUN([_MC_WITH_XSLANG], [
@@ -689,40 +752,33 @@ AC_DEFUN([MC_WITH_SLANG], [
     slang_h_found=
     AC_CHECK_HEADERS([slang.h slang/slang.h],
 		     [slang_h_found=yes; break])
-
     if test -z "$slang_h_found"; then
 	with_screen=mcslang
     fi
 
-    dnl Check if the installed S-Lang library uses termcap
+    dnl Check the library
     if test x$with_screen = xslang; then
-	screen_type=slang
-	screen_msg="S-Lang library (installed on the system)"
-	ac_save_LIBS="$LIBS"
-	LIBS="$LIBS -lslang"
-	AC_TRY_LINK([
-		     #ifdef HAVE_SLANG_SLANG_H
-		     #include <slang/slang.h>
-		     #else
-		     #include <slang.h>
-		     #endif
-		    ],
-		    [SLtt_get_terminfo(); SLtt_tgetflag("");],
-		    [LIBS="$ac_save_LIBS"],
-		    [LIBS="$ac_save_LIBS"; MC_USE_TERMCAP])
+	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
+		     [with_screen=mcslang], ["$MCLIBS"])
+    fi
 
-	dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
+    dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
+    if test x$with_screen = xslang; then
+	:
 	m4_if([$1], strict, ,
 	      [AC_CHECK_LIB([slang], [SLsmg_write_nwchars],
 	    		    [AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
-it doesn't work well])
+it's not fully supported yet])
 	      with_screen=mcslang])])
+    fi
 
-	dnl Check the library
-	if test x$with_screen = xslang; then
-	    AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
-			 [with_screen=mcslang], ["$MCLIBS"])
-	fi
+    if test x$with_screen = xslang; then
+	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
+		  [Define to use S-Lang library installed on the system])
+        MC_SLANG_PRIVATE
+	MC_SLANG_TERMCAP
+	screen_type=slang
+	screen_msg="S-Lang library (installed on the system)"
     else
 	m4_if([$1], strict,
 	    [if test $with_screen != slang; then
@@ -730,11 +786,6 @@ it doesn't work well])
 	    fi],
 	    [MC_WITH_MCSLANG]
 	)
-    fi
-
-    if test x$with_screen = xslang; then
-	AC_DEFINE(HAVE_SYSTEM_SLANG, 1,
-		  [Define to use S-Lang library installed on the system])
     fi
 
     _MC_WITH_XSLANG
