@@ -1,0 +1,20 @@
+/* XPM */
+static char * multi_xpm[] = {
+"16 13 4 1",
+" 	c #000000000000",
+".	c #FFFFFFFFFFFF",
+"X	c #FFFFFFFF7979",
+"o	c #C7C7C3C30000",
+"                ",
+" ....X          ",
+" .XXXoX         ",
+" .XXXXo.......X ",
+" .XXXXXXXXXXXXo ",
+" .XXX XXX XXXXo ",
+" .XXX  X  XXXXo ",
+" .XXX     XXXXo ",
+" .XXX X X XXXXo ",
+" .XXX XXX XXXXo ",
+" .XXX XXX XXXXo ",
+" Xooooooooooooo ",
+"                "};
