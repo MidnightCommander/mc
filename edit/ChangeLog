@@ -1,3 +1,23 @@
+2001-11-05  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* edit.h (edit_execute_cmd): Declare it here.
+
+	* edit.c: Remove edit_execute_cmd declaration.
+	(edit_execute_cmd): Use edit_print_string instead of edit_printf.
+
+	* editcmd.c:  Remove edit_execute_cmd declaration.
+	(edit_search_dialog): Eliminate tsearch_text.
+	(edit_search_cmd): edit_search_dialog gives g_malloc()ed exp.
+	Use g_strdup/g_free instead of strdup/free.
+	(edit_mail_dialog): quick_dialog use g_strdup, so g_free
+	must be used.
+
+	* bookmark.c (book_mark_clear): Eliminate rend.
+	It's only written but never read.
+	(book_mark_flush): Likewise.
+	(book_mark_inc): Likewise.
+	(book_mark_dec): Likewise.
+
 2001-10-23  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (user_menu): If the error file is missing, treat it as
@@ -275,7 +295,8 @@
 	* edit.c [HAVE_CHARSET]: Include charsets.h and selcodepage.h.
 	* editcmd.c [HAVE_CHARSET]: Add charset conversion support.
 	* editdraw.c [HAVE_CHARSET]: Likewise.
-	From Walery Studennikov <hqsoftware@mail.ru>.
+	From Andrew V. Samoilov <sav@bcs.zp.ua>
+	and Walery Studennikov <hqsoftware@mail.ru>.
 
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 

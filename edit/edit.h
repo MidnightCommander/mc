@@ -322,6 +322,9 @@ void book_mark_dec (WEdit * edit, int line);
 
 void user_menu (WEdit *edit);
 
+/* either command or char_for_insertion must be passed as -1 */
+int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
+
 #define CPushFont(x,y)
 #define CPopFont()
 #define FIXED_FONT 1

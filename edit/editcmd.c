@@ -1179,7 +1179,6 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     int treplace_case = replace_case;
     int treplace_backwards = replace_backwards;
 
-    char *tsearch_text;
     QuickWidget quick_widgets[] =
     {
 	{quick_button, 6, 10, 7, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
@@ -1207,7 +1206,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
     quick_widgets[4].result = &treplace_regexp;
     quick_widgets[5].result = &treplace_whole;
     quick_widgets[6].result = &treplace_case;
-    quick_widgets[7].str_result = &tsearch_text;
+    quick_widgets[7].str_result = search_text;
     quick_widgets[7].text = *search_text;
 
     {
@@ -1218,16 +1217,13 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 	Quick_input.widgets = quick_widgets;
 
 	if (quick_dialog (&Quick_input) != B_CANCEL) {
-	    *search_text = *(quick_widgets[7].str_result);
 	    replace_scanf = treplace_scanf;
 	    replace_backwards = treplace_backwards;
 	    replace_regexp = treplace_regexp;
 	    replace_whole = treplace_whole;
 	    replace_case = treplace_case;
-	    return;
 	} else {
 	    *search_text = NULL;
-	    return;
 	}
     }
 }
@@ -1838,7 +1834,7 @@ void edit_search_cmd (WEdit * edit, int again)
 
     if (!edit) {
 	if (old) {
-	    free (old);
+	    g_free (old);
 	    old = 0;
 	}
 	return;
@@ -1847,7 +1843,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
 	    return;
-	exp = (char *) strdup (old);
+	exp = (char *) g_strdup (old);
     } else {
 
 #ifdef HAVE_CHARSET
@@ -1869,8 +1865,8 @@ void edit_search_cmd (WEdit * edit, int again)
 	if (*exp) {
 	    int len = 0;
 	    if (old)
-		free (old);
-	    old = (char *) strdup (exp);
+		g_free (old);
+	    old = (char *) g_strdup (exp);
 
 	    if (search_create_bookmark) {
 		int found = 0, books = 0;
@@ -1928,7 +1924,7 @@ void edit_search_cmd (WEdit * edit, int again)
 		}
 	    }
 	}
-	free (exp);
+	g_free (exp);
     }
     edit->force |= REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
@@ -2169,7 +2165,7 @@ int edit_sort_cmd (WEdit * edit)
     if (!exp)
 	return 1;
     if (old)
-	free (old);
+	g_free (old);
     old = exp;
 
     e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, 0));
@@ -2292,8 +2288,6 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     return;
 }
 
-int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
-
 /* prints at the cursor */
 /* returns the number of chars printed */
 int edit_print_string (WEdit * e, const char *s)
@@ -2389,11 +2383,11 @@ void edit_mail_dialog (WEdit * edit)
 
     if (quick_dialog (&Quick_input) != B_CANCEL) {
 	if (mail_cc_last)
-	    free (mail_cc_last);
+	    g_free (mail_cc_last);
 	if (mail_subject_last)
-	    free (mail_subject_last);
+	    g_free (mail_subject_last);
 	if (mail_to_last)
-	    free (mail_to_last);
+	    g_free (mail_to_last);
 	mail_cc_last = *(quick_widgets[2].str_result);
 	mail_subject_last = *(quick_widgets[4].str_result);
 	mail_to_last = *(quick_widgets[6].str_result);

@@ -2008,9 +2008,6 @@ static void check_and_wrap_line (WEdit * edit)
 
 void edit_execute_macro (WEdit * edit, struct macro macro[], int n);
 
-/* either command or char_for_insertion must be passed as -1 */
-int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
-
 int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch)
 {
     int command = -1;
@@ -2520,9 +2517,9 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	    time (&t);
 #ifdef HAVE_STRFTIME
 	    strftime (s, sizeof (s), time_format, localtime (&t));
-	    edit_printf (edit, s);
+	    edit_print_string (edit, s);
 #else
-	    edit_printf (edit, ctime (&t));
+	    edit_print_string (edit, ctime (&t));
 #endif
 	    edit->force |= REDRAW_PAGE;
 	    break;

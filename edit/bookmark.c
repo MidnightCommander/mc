@@ -146,7 +146,6 @@ int book_mark_clear (WEdit * edit, int line, int c)
 {
     struct _book_mark *p, *q;
     int r = 1;
-    int rend = 0;
     if (!edit->book_mark)
 	return r;
     for (p = book_mark_find (edit, line); p; p = q) {
@@ -158,7 +157,6 @@ int book_mark_clear (WEdit * edit, int line, int c)
 	    p->prev->next = p->next;
 	    if (p->next)
 		p->next->prev = p->prev;
-	    rend = 1;
 	    free (p);
 	    break;
 	}
@@ -175,7 +173,6 @@ int book_mark_clear (WEdit * edit, int line, int c)
 void book_mark_flush (WEdit * edit, int c)
 {
     struct _book_mark *p, *q;
-    int rend = 0;
     if (!edit->book_mark)
 	return;
     edit->force |= REDRAW_PAGE;
@@ -187,7 +184,6 @@ void book_mark_flush (WEdit * edit, int c)
 	    q->prev->next = q->next;
 	    if (p)
 		p->prev = q->prev;
-	    rend = 1;
 	    free (q);
 	}
     }
@@ -200,13 +196,11 @@ void book_mark_flush (WEdit * edit, int c)
 /* shift down bookmarks after this line */
 void book_mark_inc (WEdit * edit, int line)
 {
-    int rend = 0;
     if (edit->book_mark) {
 	struct _book_mark *p;
 	p = book_mark_find (edit, line);
 	for (p = p->next; p; p = p->next) {
 	    p->line++;
-	    rend = 1;
 	}
     }
 }
@@ -214,13 +208,11 @@ void book_mark_inc (WEdit * edit, int line)
 /* shift up bookmarks after this line */
 void book_mark_dec (WEdit * edit, int line)
 {
-    int rend = 0;
     if (edit->book_mark) {
 	struct _book_mark *p;
 	p = book_mark_find (edit, line);
 	for (p = p->next; p; p = p->next) {
 	    p->line--;
-	    rend = 1;
 	}
     }
 }
