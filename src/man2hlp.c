@@ -74,6 +74,9 @@ persistent_fread (void *data, size_t len, FILE *stream)
     size_t bytes_done = 0;
     char *ptr = (char *) data;
 
+    if (len <= 0)
+	return 0;
+
     while (bytes_done < len) {
 	count = len - bytes_done;
 	if (count > MAX_STREAM_BLOCK)
@@ -101,6 +104,9 @@ persistent_fwrite (const void *data, size_t len, FILE *stream)
     size_t count;
     size_t bytes_done = 0;
     const char *ptr = (const char *) data;
+
+    if (len <= 0)
+	return 0;
 
     while (bytes_done < len) {
 	count = len - bytes_done;
@@ -780,6 +786,11 @@ main (int argc, char **argv)
     }
 
     cont_start = ftell (f_out);
+    if (cont_start <= 0) {
+	perror (c_out);
+	return 1;
+    }
+
     if (topics)
 	fprintf (f_out, "\004[Contents]\n%s\n\n", topics);
     else
@@ -830,7 +841,9 @@ main (int argc, char **argv)
     }
 
     file_end = ftell (f_out);
-    if (file_end <= 0) {
+
+    /* Sanity check */
+    if ((file_end <= 0) || (file_end - cont_start <= 0)) {
 	perror (c_out);
 	return 1;
     }

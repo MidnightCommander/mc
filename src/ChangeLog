@@ -1,5 +1,9 @@
 2002-11-13  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (persistent_fread): Return error for len <= 0.
+	(persistent_fwrite): Likewise.
+	(main): Check the result of the second ftell().
+
 	* cmd.h: Fully exclude WPanel from public interfaces of cmd.c.
 	* cmd.c: All commands operate on current panels.
 	(get_a_panel): Remove.
