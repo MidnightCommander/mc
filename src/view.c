@@ -1481,10 +1481,23 @@ icase_search_p (WView *view, char *text, char *data, int nothing)
 {
     char *q;
     int lng;
+    int direction = view->direction;
 
-    if ((q = _icase_search (text, data, &lng)) != 0) {
+    /* If we are searching backwards, reverse the string */
+    if (direction == -1)
+	g_strreverse (text);
+
+    q = _icase_search (text, data, &lng);
+
+    if (direction == -1)
+	g_strreverse (text);
+
+    if (q != 0) {
+	if (direction > 0)
+	    view->search_start = q - data - lng;
+	else
+	    view->search_start = strlen (data) - (q - data);
 	view->found_len = lng;
-	view->search_start = q - data - lng;
 	return 1;
     }
     return 0;
@@ -1516,8 +1529,13 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
     long i = 0;
     int prev = 0;
 
+    if (!pos && direction == -1)
+	return 0;
+
     /* skip over all the possible zeros in the file */
     while ((ch = get_byte (view, pos)) == 0) {
+	if (!pos && direction == -1)
+	    return 0;
 	pos += direction;
 	i++;
     }
@@ -1536,22 +1554,21 @@ get_line_at (WView *view, unsigned long *p, unsigned long *skipped)
 	    usable_size = buffer_size - 2;
 	}
 
-	pos += direction;
 	i++;
-
-	if (ch == '\n' || !ch) {
-	    break;
-	}
 	buffer[i] = ch;
+
+	if (!pos && direction == -1)
+	    break;
+
+	pos += direction;
+
+	if (ch == '\n' || !ch)
+	    break;
     }
+
     if (buffer) {
 	buffer[0] = prev;
 	buffer[i] = 0;
-
-	/* If we are searching backwards, reverse the string */
-	if (direction < 0) {
-	    g_strreverse (buffer + 1);
-	}
     }
 
     *p = pos;
@@ -1611,7 +1628,7 @@ search (WView *view, char *text,
     if (view->direction == 1) {
 	p = found_len ? search_start + 1 : search_start;
     } else {
-	p = (found_len ? search_start : view->last) - 1;
+	p = (found_len && search_start) ? search_start - 1 : search_start;
     }
     beginning = p;
 
@@ -1662,7 +1679,7 @@ search (WView *view, char *text,
 	if (view->direction == 1)
 	    t += forward_line_start;
 	else
-	    t += reverse_line_start ? reverse_line_start + 3 : 0;
+	    t = reverse_line_start ? reverse_line_start + 2 : 0;
 	view->search_start += t;
 
 	if (t != beginning) {
@@ -1692,41 +1709,74 @@ static long
 block_search (WView *view, char *buffer, int len)
 {
     int w = view->widget.cols - view->have_frame + 1;
-
+    int direction = view->direction;
     char *d = buffer, b;
     unsigned long e;
 
     /* clear interrupt status */
     got_interrupt ();
     enable_interrupt_key ();
-    e = view->found_len ? view->search_start + 1 : view->search_start;
+    if (direction == 1)
+	e = view->found_len ? view->search_start + 1 : view->search_start;
+    else
+	e = (view->found_len
+	     && view->search_start) ? view->search_start - 1
+				    : view->search_start;
 
     search_update_steps (view);
     update_activate = 0;
 
-    while (e < view->last_byte) {
-	if (e >= update_activate) {
-	    update_activate += update_steps;
-	    if (verbose) {
-		view_percent (view, e, w, TRUE);
-		mc_refresh ();
+    if (direction == -1) {
+
+	for (d += len - 1;; e--) {
+	    if (e <= update_activate) {
+		update_activate -= update_steps;
+		if (verbose) {
+		    view_percent (view, e, w, TRUE);
+		    mc_refresh ();
+		}
+		if (got_interrupt ())
+		    break;
 	    }
-	    if (got_interrupt ())
+	    b = get_byte (view, e);
+
+	    if (*d == b) {
+		if (d == buffer) {
+		    disable_interrupt_key ();
+		    return e;
+		}
+		d--;
+	    } else {
+		e += buffer + len - 1 - d;
+		d = buffer + len - 1;
+	    }
+	    if (e == 0)
 		break;
 	}
-	b = get_byte (view, e++);
-
-	if (*d == b) {
-	    d++;
-	    if (d - buffer == len) {
-		disable_interrupt_key ();
-		return e - len;
+    } else
+	while (e < view->last_byte) {
+	    if (e >= update_activate) {
+		update_activate += update_steps;
+		if (verbose) {
+		    view_percent (view, e, w, TRUE);
+		    mc_refresh ();
+		}
+		if (got_interrupt ())
+		    break;
 	    }
-	} else {
-	    e -= d - buffer;
-	    d = buffer;
+	    b = get_byte (view, e++);
+
+	    if (*d == b) {
+		d++;
+		if (d - buffer == len) {
+		    disable_interrupt_key ();
+		    return e - len;
+		}
+	    } else {
+		e -= d - buffer;
+		d = buffer;
+	    }
 	}
-    }
     disable_interrupt_key ();
     return -1;
 }
@@ -2070,17 +2120,55 @@ static void
 normal_search (WView *view, int direction)
 {
     static char *old;
-    char *exp;
+    char *exp = old ? old : "";
 
+    enum {
+	SEARCH_DLG_HEIGHT = 8,
+	SEARCH_DLG_WIDTH = 58
+    };
+
+    static int replace_backwards;
+    int treplace_backwards = replace_backwards;
+
+    static QuickWidget quick_widgets[] = {
+	{quick_button, 6, 10, 5, SEARCH_DLG_HEIGHT, N_("&Cancel"), 0,
+	 B_CANCEL,
+	 0, 0, NULL},
+	{quick_button, 2, 10, 5, SEARCH_DLG_HEIGHT, N_("&OK"), 0, B_ENTER,
+	 0, 0, NULL},
+	{quick_checkbox, 3, SEARCH_DLG_WIDTH, 4, SEARCH_DLG_HEIGHT,
+	 N_("&Backwards"), 0, 0,
+	 0, 0, NULL},
+	{quick_input, 3, SEARCH_DLG_WIDTH, 3, SEARCH_DLG_HEIGHT, "", 52, 0,
+	 0, 0, N_("Search")},
+	{quick_label, 2, SEARCH_DLG_WIDTH, 2, SEARCH_DLG_HEIGHT,
+	 N_(" Enter search string:"), 0, 0,
+	 0, 0, 0},
+	{0}
+    };
+    static QuickDialog Quick_input = {
+	SEARCH_DLG_WIDTH, SEARCH_DLG_HEIGHT, -1, 0, N_("Search"),
+	"[Input Line Keys]", quick_widgets, 0
+    };
     convert_to_display (old);
 
-    exp = input_dialog (_("Search"), _(" Enter search string:"), old ? old : "");
+    quick_widgets[2].result = &treplace_backwards;
+    quick_widgets[3].str_result = &exp;
+    quick_widgets[3].text = exp;
 
-    if ((!exp) || (!*exp)) {
-	if (exp)
-	    g_free (exp);
-
+    if (quick_dialog (&Quick_input) == B_CANCEL) {
 	convert_from_input (old);
+	return;
+    }
+    replace_backwards = treplace_backwards;
+
+    convert_from_input (old);
+
+    if ((!exp)) {
+	return;
+    }
+    if ((!*exp)) {
+	g_free (exp);
 	return;
     }
 
@@ -2090,7 +2178,7 @@ normal_search (WView *view, int direction)
 
     convert_from_input (exp);
 
-    view->direction = direction;
+    view->direction = replace_backwards ? -1 : 1;
     do_normal_search (view, exp);
     view->last_search = do_normal_search;
 }

@@ -1,3 +1,12 @@
+2003-03-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* view.c (icase_search_p): Add backward search support.
+	(search): Likewise.
+	(block_search): Likewise.
+	(normal_search): Add "Backwards" button.
+	(get_line_at): Handle view->direction properly and return
+	reversed string if backward search required.
+
 2003-03-14  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (xterm_key_defines): Add more sequences for xterm, rxvt
