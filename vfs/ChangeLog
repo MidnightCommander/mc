@@ -1,3 +1,8 @@
+2002-12-19  Adam Byrtek  <alpha@debian.org>
+
+	* extfs/patchfs.in: Allow diffs with function names after "@@".
+	Don't consider an empty newline as the end of the diff.
+
 2002-12-18  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs/patchfs.in (openread): Use quoted $archive when opening
