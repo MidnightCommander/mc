@@ -2500,30 +2500,29 @@ Salta al file precedente.
 .B M-r 
 Abilita/disabilita il righello.
 .PP
-It's possible to instruct the file viewer how to display a file, look
-at the 
+E' anche possibile istruire il visualizzatore su come mostrare un file,
+vedere la sezione
 .\"LINK2"
-Extension File Edit section
+Editor File Estensioni
 .\"Extension File Edit"
-.SH "Internal File Editor"
-The internal file editor provides most of the features of
-common full screen editors. It is invoked using 
+.\"NODE "Internal File Editor"
+.SH "Editor di File Interno"
+L'editor di file interno fornisce molte delle funzioni dei più
+diffusi editor a pieno schermo. Viene incocato tramite 
 .B F4
-provided
-the 
+sempre che l'opzione
 .I use_internal_edit
-option is set in the initialization file. It has an extendable file size
-limit of sixteen megabytes and edits binary files flawlessly.
+sia impostata nel file di inizializzazione. Esso ha un limite estensibile
+di sedici megabyte e gestisce i file binari senza problemi.
 .PP
-The features it presently supports are: Block
-copy, move, delete, cut, paste; 
-.I "key for key undo"; 
-pull-down
-menus; file insertion; macro definition; regular expression
-search and replace (and our own scanf-printf search and
-replace); shift-arrow MSW-MAC text highlighting (for the
-linux console only); insert-overwrite toggle; and an option
-to pipe text blocks through shell commands like indent.
+Le funzioni che allo stato attuale supporta sono: copia,
+spostamento, cancellazione, taglia e incolla di blocchi;
+.I "tasto per l'annullamento"; 
+menu a discesa, inserimento file, definizione di macro, ricerca e
+sostituzione di espressioni regolari (e una propria ricerca e
+sostituzione a scanf e printf); evidenziazione di testo maiuscolo-freccia 
+MSW-MAC (solo per la console Linux); scambio tra inserimento-rimpiazzo e
+un'opzionale flusso di blocchi di testo attraverso comandi shell come indent.
 .PP
 The editor is very easy to use and requires no tutoring.
 To see what keys do what, just consult the appropriate
