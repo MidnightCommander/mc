@@ -1,3 +1,12 @@
+2001-10-26  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* key.c (push_char): Fix buffer length calculation.
+	By drk@sgi.com.
+	http://bugzilla.gnome.org/show_bug.cgi?id=60932
+	
+	(define_sequence): Likewise.
+	(key_define_t): Add const declaration.
+
 2001-10-22  Pavel Roskin  <proski@gnu.org>
 
 	* main.h: Declare view_one_file and edit_one_file.

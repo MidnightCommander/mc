@@ -165,7 +165,7 @@ void channels_up (void)
     disabled_channels--;
 }
 
-typedef struct {
+typedef const struct {
     int code;
     char *seq;
     int action;
@@ -354,7 +354,8 @@ static key_def *create_sequence (char *seq, int code, int action)
 }
 
 /* The maximum sequence length (32 + null terminator) */
-static int seq_buffer [33];
+#define SEQ_BUFFER_LEN 33
+static int seq_buffer [SEQ_BUFFER_LEN];
 static int *seq_append = 0;
 
 static int push_char (int c)
@@ -362,7 +363,7 @@ static int push_char (int c)
     if (!seq_append)
 	seq_append = seq_buffer;
     
-    if (seq_append == &(seq_buffer [sizeof (seq_buffer)-2]))
+    if (seq_append == &(seq_buffer [SEQ_BUFFER_LEN-2]))
 	return 0;
     *(seq_append++) = c;
     *seq_append = 0;
@@ -377,7 +378,7 @@ int define_sequence (int code, char *seq, int action)
 {
     key_def *base;
 
-    if (strlen (seq) > sizeof (seq_buffer)-1)
+    if (strlen (seq) > SEQ_BUFFER_LEN-1)
 	return 0;
     
     for (base = keys; (base != 0) && *seq; ){
