@@ -1,3 +1,11 @@
+2002-09-29  Pavel Roskin  <proski@gnu.org>
+
+	* dlg.c (frontend_run_dlg): Allow terminating the dialog from
+	the idle handler.
+	From Jindrich Makovicka <makovick@KMLinux.fjfi.cvut.cz>
+	Call change_screen_size() regardless of ncurses version, and let
+	that function decide what to do.
+
 2002-09-28  Pavel Roskin  <proski@gnu.org>
 
 	* background.c (background_attention): Fix calling functions

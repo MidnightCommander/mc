@@ -812,22 +812,24 @@ frontend_run_dlg (Dlg_head *h)
 
     event.x = -1;
     while (h->running) {
-#if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-	/* It does not work with ncurses before 1.9.9g, it will break */
 	if (winch_flag)
 	    change_screen_size ();
-#endif
-	if (is_idle ()){
+
+	if (is_idle ()) {
 	    if (idle_hook)
 		execute_hooks (idle_hook);
 
-	    while (h->send_idle_msg && is_idle ()){
+	    while (h->send_idle_msg && is_idle ()) {
 		(*h->callback) (h, 0, DLG_IDLE);
 	    }
+
+	    /* Allow terminating the dialog from the idle handler */
+	    if (!h->running)
+		break;
 	}
 
 	update_cursor (h);
-	(*h->callback)(h, 0, DLG_PRE_EVENT);
+	(*h->callback) (h, 0, DLG_PRE_EVENT);
 
 	/* Clear interrupt flag */
 	got_interrupt ();
