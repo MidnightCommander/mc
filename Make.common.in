@@ -110,8 +110,6 @@ slowdep: dummy
 
 mcdep: @dep@
 
-distdir: distcopy
-
 dummy:
 
 # End of Make.common

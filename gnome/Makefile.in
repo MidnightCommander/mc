@@ -325,8 +325,10 @@ distclean: cleansourcelinks
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	$(RMF) $(srcdir)/Makefile
 
-distcopy:
-	for I in $(DISTGNOME); do $(CP) $(top_srcdir)/gnome/$$I $(top_srcdir)/mc-$(VERSION)/gnome; done
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir:
+	for I in $(DISTGNOME); do $(CP) $(srcdir)/$$I $(distdir); done
 
 install: install_@mx@
 

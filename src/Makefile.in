@@ -140,8 +140,10 @@ uninstall:
 	$(RMF) $(DESTDIR)$(suppbindir)/cons.saver
 	$(RMF) $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
 
-distcopy: $(srcdir)/mc.hlp
-	for I in $(DISTFILES); do $(CP) $(top_srcdir)/src/$$I $(top_srcdir)/mc-$(VERSION)/src; done
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir: $(srcdir)/mc.hlp
+	for I in $(DISTFILES); do $(CP) $(srcdir)/$$I $(distdir); done
 
 depend dep: mcdep
 

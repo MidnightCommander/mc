@@ -27,6 +27,9 @@ DIST = 	Makefile.in $(EDITSRC)
 
 all: @LIBEDIT_A@
 
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=edit/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DMIDNIGHT $<
 
@@ -89,8 +92,10 @@ install: @MCEDIT@
 uninstall:
 	$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
-distcopy:
-	for I in $(DIST); do $(CP) $(top_srcdir)/edit/$$I $(top_srcdir)/mc-$(VERSION)/edit; done
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir:
+	for I in $(DIST); do $(CP) $(srcdir)/$$I $(distdir); done
 
 depend dep: mcdep
 

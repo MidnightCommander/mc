@@ -1,3 +1,12 @@
+2000-08-28  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in: removed hack for "make distcopy"
+	* doc/Makefile.in, edit/Makefile.in, gnome/Makefile.in,
+	gtkedit/Makefile.in, slang/Makefile.in, src/Makefile.in,
+	vfs/Make-mc.in: added "distdir" target. Now "make dist" works
+	for external builds.
+	* edit/Makefile.in, slang/Makefile.in: added "Makefile" target
+
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
 	* new_icons/Makefile.in: converted to ...

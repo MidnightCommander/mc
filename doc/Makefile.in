@@ -80,7 +80,9 @@ realclean:
 distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile $(srcdir)/*.1 $(srcdir)/*.8
 
-distcopy:
-	for I in $(DISTDOC); do $(CP) $(top_srcdir)/doc/$$I $(top_srcdir)/mc-$(VERSION)/doc; done
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir:
+	for I in $(DISTDOC); do $(CP) $(srcdir)/$$I $(distdir); done
 
 depend dep:

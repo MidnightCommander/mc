@@ -29,6 +29,9 @@ DISTSLANG = 	Makefile.in ChangeLog README $(SLANGSRCS) $(SLANGHDRS)
 
 all: @LIBSLANG@
 
+Makefile: $(srcdir)/Makefile.in $(builddir)/config.status
+	cd $(builddir) && CONFIG_FILES=slang/Makefile CONFIG_HEADERS= $(SHELL) ./config.status
+
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
 
@@ -64,8 +67,10 @@ distclean:
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
 	$(RMF) $(srcdir)/Makefile
 
-distcopy: 
-	for I in $(DISTSLANG); do $(CP) $(top_srcdir)/slang/$$I $(top_srcdir)/mc-$(VERSION)/slang; done
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+distdir: 
+	for I in $(DISTSLANG); do $(CP) $(srcdir)/$$I $(distdir); done
 
 install uninstall:
 
