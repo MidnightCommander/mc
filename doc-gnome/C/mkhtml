@@ -13,7 +13,7 @@ WARNING='
 Could not generate GMC documentation.
 Due to installations of DocBook being very different across platforms
 and distributions, this "mkhtml" script has been designed to run on
-RedHat Linux 7.1 only. You may want to adopt it to your system if you
+RedHat Linux 7.1 only. You may want to adapt it to your system if you
 have DocBook 4.1 installed.
 
 Please DO NOT make official releases of GNU Midnight Commander on the
