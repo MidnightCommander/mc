@@ -12,10 +12,13 @@ INSTALL_DATA = @INSTALL_DATA@
 # Distribution variables
 #
 
-DISTLIB = Makefile.in mc.menu mc.ext.in tdiff xnc.hlp xterm.ti \
-	vt100.ti ansi.ti linux.ti tdiff ncurses.h mc.hint mc.lib xterm.tcap \
-	xterm.ad README.xterm mc.sh mc.csh mcserv.init mcserv.pamd tkmc.wmconfig \
-	mc.ext.in.qnx.diff mc.menu.qnx.diff
+LIBFILES_IN = mc.ext.in
+LIBFILES_OUT = mc.ext
+LIBFILES_CONST = mc.hint mc.lib mc.menu
+TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
+DISTLIB = $(LIBFILES_IN) $(LIBFILES_CONST) $(TIFILES) \
+	Makefile.in tdiff xnc.hlp ncurses.h mc.sh mc.csh mcserv.init \
+	mcserv.pamd tkmc.wmconfig mc.ext.in.qnx.diff mc.menu.qnx.diff
 
 all:
 
@@ -32,22 +35,21 @@ realclean:
 
 distclean:
 	$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+	for I in $(LIBFILES_OUT); do $(RMF) $(srcdir)/$$I; done
 
 install:
-	$(INSTALL_DATA) mc.ext $(DESTDIR)$(libdir)/mc.ext
-	$(INSTALL_DATA) $(srcdir)/mc.menu $(DESTDIR)$(libdir)/mc.menu
-	$(INSTALL_DATA) $(srcdir)/mc.hint $(DESTDIR)$(libdir)/mc.hint
-	$(INSTALL_DATA) $(srcdir)/mc.lib $(DESTDIR)$(libdir)/mc.lib
-	$(INSTALL_DATA) $(srcdir)/ansi.ti $(DESTDIR)$(tidir)/ansi.ti
-	$(INSTALL_DATA) $(srcdir)/linux.ti $(DESTDIR)$(tidir)/linux.ti
-	$(INSTALL_DATA) $(srcdir)/vt100.ti $(DESTDIR)$(tidir)/vt100.ti
-	$(INSTALL_DATA) $(srcdir)/xterm.ti $(DESTDIR)$(tidir)/xterm.ti
-	$(INSTALL_DATA) $(srcdir)/xterm.tcap $(DESTDIR)$(tidir)/xterm.tcap
-	$(INSTALL_DATA) $(srcdir)/xterm.ad $(DESTDIR)$(tidir)/xterm.ad
-	$(INSTALL_DATA) $(srcdir)/README.xterm $(DESTDIR)$(tidir)/README.xterm
+	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(libdir)/$$I; done
+	for I in $(TIFILES); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(tidir)/$$I; done
 
 uninstall:
-	cd $(libdir); $(RMF) mc.ext mc.hint mc.view mc.menu mc.edit
+	for I in $(LIBFILES_OUT) $(LIBFILES_CONST); \
+	do $(RMF) $(DESTDIR)$(libdir)/$$I; done
+	for I in $(TIFILES); \
+	do $(RMF) $(DESTDIR)$(tidir)/$$I; done
+	-rmdir $(DESTDIR)$(tidir)
+	-rmdir $(DESTDIR)$(libdir)
 
 distcopy:
 	$(CP) $(DISTLIB) ../../mc-$(VERSION)/lib
