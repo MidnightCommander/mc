@@ -5,8 +5,7 @@
 and the port for OS/2 by
     Alexander Dong <ado@software-ag.de>
 and is currently maintained by
-    Pavel Roskin <pavel@absolute.spb.su>
-(e-mail address will change in the next future).
+    Pavel Roskin <pavel.roskin@ecsoft.co.uk>
 
  This port of the Midnight Commander is released under the GNU General
 Public License version 2.0 or any later version. See file COPYING for
@@ -39,4 +38,4 @@ the distribution.
  This port is not very stable now. See files BUGS and TODO in this
 directory.
 
-Pavel Roskin <pavel@absolute.spb.su>
+Pavel Roskin <pavel.roskin@ecsoft.co.uk>
