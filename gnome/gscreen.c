@@ -866,13 +866,13 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
-		drag_directory = load_transparent_image ("directory-ok.xpm");
+		drag_directory = load_transparent_image ("not.png");
 	
 	if (!drag_directory_ok)
 		drag_directory_ok = load_transparent_image ("directory.xpm");
 	
 	if (!drag_multiple)
-		drag_multiple = load_transparent_image ("multi.xpm");
+		drag_multiple = load_transparent_image ("not.png");
 	
 	if (!drag_multiple_ok)
 		drag_multiple_ok = load_transparent_image ("multi-ok.png");
