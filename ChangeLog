@@ -1,3 +1,8 @@
+2005-03-14  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* syntax/diff.syntax: Changed default color from gray, which was
+	quite unreadable, to a bright yellow.
+
 2005-03-10  Roland Illig  <roland.illig@gmx.de>
 
 	* autogen.sh: Made the gettext version check more portable. The
