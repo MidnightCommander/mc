@@ -115,7 +115,7 @@ application/x-cpio:
 	fm-view=%view{ascii} cat %f | cpio -ictv
 
 audio/*:
-	icon-filename=@icondir@/sound.xpm
+	icon-filename=@icondir@/gnome-audio.png
 	open.x11amp.Use x11amp to play this=x11amp %f
 	open.mpeg.Play with mpeg_play=mpeg_play %f
 	open.mpg123.Open with mpg123=mpg123 %f
@@ -160,6 +160,9 @@ application/x-troff-me:
 
 image/x-bmp:
 	icon-filename=@icondir@/gnome-image-bmp.png
+
+image/x-xcf:
+	icon-filename=@icondir@/gnome-image-xcf.png
 
 image/gif:
 	icon-filename=@icondir@/gnome-image-gif.png
