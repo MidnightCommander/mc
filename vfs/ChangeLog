@@ -1,3 +1,27 @@
+2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* smbfs.c: Eliminate smbfs_get_free_bucket_init.  convert_path 
+	gives malloced filename, so this memory must be released after use.
+	
+	(reconnect): Fix segmentation fault.
+	(smbfs_loadddir): Don't g_strdup path.
+	(smbfs_get_free_bucket): Eliminate smbfs_get_free_bucket_init and
+	smbfs_connections initialisation.
+	(smbfs_open_link): Likewise. Release host after get_master_browser.
+	(get_stat_info): Fix unneeded g_strdup/g_free calls.
+	(smbfs_mkdir): Release path after use.
+	(smbfs_mkdir): Likewise.
+	(smbfs_open): Fix memory leak.
+	(smbfs_unlink): Likewise. Fix error message.
+	(smbfs_rename): Fix memory leaks.
+	(smbfs_stat): Fix url parsing.
+
+	* samba/lib/charcnv.c (unix2dos_format): Fix possible buffer overflow.
+	(dos2unix_format): Likewise.
+
+	* ftpfs.c (ftpfs_fill_names): New function.
+	(vfs_ftpfs_ops): Use ftpfs_fill_names insted of vfs_s_fill_names.
+
 2001-08-03  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* utilvfs.c, vfs.h (vfs_split_url): Make path parameter const.
