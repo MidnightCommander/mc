@@ -14,6 +14,7 @@ Source0:   ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/mc-%{PACKAGE_V
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
 Prereq:    /sbin/chkconfig
+BuildPrereq: glib-devel, slang-devel
 
 %description
 Midnight Commander is a visual shell much like a file manager, only with way
@@ -28,8 +29,6 @@ files, and poke into RPMs for specific files.  :-)
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
 	--prefix=%{_prefix} \
 	--mandir=%{_mandir} \
-	--with-included-slang \
-	--with-gnome \
         --sysconfdir=/etc
 
 if [ "$SMP" != "" ]; then
@@ -83,6 +82,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/lib/mc/syntax
 
 %changelog
+* Mon Jan 21 2002 Pavel Roskin <proski@gnu.org>
+- Remove --with-gnome and --with-included-slang from configure options.
+- Add BuildPrereq.
+
 * Fri Aug 24 2001 Pavel Roskin <proski@gnu.org>
 - Remove gmc.  Reunite mc and mc-common.
 
