@@ -4,19 +4,25 @@
 #	$1 - edit file name  
 #       $2 - highlight block file name
 #	$3 - error file name
-	
-case "$(echo $1 |sed s/^.*\\.//)" in #got extesion
-    c|C) 
-    #ftp://ftp.gnu.org/pub/gnu/indent-2.2.5.tar.gz
-        indent -kr -pcs $2 1>/dev/null 2>$3
+
+exec >/dev/null
+exec 2>"$3"
+
+case `echo $1 |sed 's/^.*\.//'` in
+    c|h)
+    # ftp://ftp.gnu.org/pub/gnu/indent/
+        indent -kr -pcs "$2"
     ;;
-    cc|CC)
-    #http://gene.md.huji.ac.il/~tald/astyle/stable/src/astyle_1.11.5_src.tar.gz
-        astyle $2 1>/dev/null 2>$3
+    C|cc|CC|cxx|CXX|cpp|CPP)
+    # http://astyle.sourceforge.net/
+        astyle "$2"
+    ;;
+    java|JAVA)
+    # http://astyle.sourceforge.net/
+        astyle --style=java --mode=java "$2"
     ;;
     *)
-	mv -f $2 $2.tmp
     #ftp://alpha.gnu.org/gnu/fetish/textutils-2.0.tar.gz
-        fmt $2.tmp 1>$2 2>$3
-	rm -f $2.tmp
+        fmt "$2" >"$2.tmp" && rm -f "$2" && mv -f "$2.tmp" "$2"
+    ;;
 esac

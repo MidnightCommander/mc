@@ -5,10 +5,4 @@
 #       $2 - highlight block file name
 #	$3 - error file name
 
-# The editor doesn't save stty.  Save it manually.
-stty_save=`stty -g`
-reset
-clear
-ispell $2 2>$3
-clear
-stty $stty_save
+ispell "$2" 2>"$3"
