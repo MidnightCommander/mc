@@ -13,6 +13,22 @@ Current
 	- zipfs can handle zip files that contain pathnames starting
 	  with "./".
 
+
+Version 4.6.1-pre4.
+
+- Editor.
+	- Add syntax file for the x86 assembler.
+	- Add syntax file for the Vision(tm) Ray Tracer.
+
+
+Version 4.6.1-pre3.
+
+- Core functionality.
+	- Improve support for tcsh.
+- Translations.
+	- Updated translations: Spain.
+
+
 Version 4.6.1-pre2.
 
 Release candidate for 4.6.1.

@@ -87,6 +87,7 @@
          <QPG:Add file="./syntax/Syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/ada95.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/aspx.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/assembler.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/c.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/changelog.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/cs.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
@@ -110,6 +111,7 @@
          <QPG:Add file="./syntax/perl.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/php.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/po.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
+         <QPG:Add file="./syntax/povray.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/python.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/ruby.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>
          <QPG:Add file="./syntax/sh.syntax" permissions="0644" install="/opt/share/mc/syntax/"/>

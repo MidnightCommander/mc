@@ -2,6 +2,7 @@ SYNTAXFILES =			\
 	Syntax			\
 	ada95.syntax		\
 	aspx.syntax		\
+	assembler.syntax	\
 	c.syntax		\
 	cs.syntax		\
 	changelog.syntax	\
@@ -25,6 +26,7 @@ SYNTAXFILES =			\
 	perl.syntax		\
 	php.syntax		\
 	po.syntax		\
+	povray.syntax		\
 	python.syntax		\
 	ruby.syntax		\
 	sh.syntax		\
