@@ -1,3 +1,8 @@
+1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* screen.c: Remove KEY_DC forever.  This should have never been
+	here. 
+
 Wed Mar 18 22:08:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* achown.c (do_enter_key): call endgrent, endpwent.

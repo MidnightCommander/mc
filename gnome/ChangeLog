@@ -1,3 +1,8 @@
+Wed Mar 18 23:09:35 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_file_list_select_row): Use control/shift click
+	to add files to the selection.
+
 Wed Mar 18 22:32:53 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_action_properties): Make Federico's

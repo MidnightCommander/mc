@@ -502,9 +502,7 @@ internal_select_item (GtkWidget *file_list, WPanel *panel, int row)
 	panel->selected = row;
 
 	gtk_signal_handler_block_by_data (GTK_OBJECT (file_list), panel);
-	printf ("Selecttionando\n");
 	select_item (panel);
-	printf ("Post-selección\n");
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (file_list), panel);
 }
 
@@ -521,16 +519,17 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 		internal_select_item (file_list, panel, row);
 
 		switch (event->button.button) {
+		case 1:
+			if (!(event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK)))
+				break;
+			/* fallback if shift-click is pressed */
+			
 		case 2:
-			printf("Llamando a do_file_mark()\n");
 			do_file_mark (panel, row, !panel->dir.list[row].f.marked);
 			break;
 
 		case 3:
 			file_popup (event, panel, row, panel->dir.list[row].fname);
-			break;
-
-		default:
 			break;
 		}
 
@@ -1151,6 +1150,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	filter = panel_create_filter (h, panel, (GtkWidget **) &panel->filter_w);
 	gtk_widget_show (filter);
 
+	panel->ministatus = gtk_label_new ("");
 	status_line = gtk_hbox_new (0, 0);
 	gtk_widget_show (status_line);
 	
@@ -1168,7 +1168,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_table_attach (GTK_TABLE (panel->table), status_line, 0, 1, 0, 1,
 			  GTK_EXPAND | GTK_FILL, GTK_SHRINK, 0, 0);
 
-	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 2, 3,
+	gtk_table_attach (GTK_TABLE (panel->table), panel->ministatus, 0, 1, 2, 3,
+			  GTK_EXPAND | GTK_FILL,
+			  0, 0, 0);
+	gtk_table_attach (GTK_TABLE (panel->table), statusbar, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
 	

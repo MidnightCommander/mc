@@ -657,9 +657,7 @@ display_mini_info (WPanel *panel)
     }
 #endif
     /* Default behaviour */
-#ifndef HAVE_XVIEW
     repaint_file (panel, panel->selected, 0, STATUS, 1);
-#endif	
     return;
 #endif
 }
@@ -2064,9 +2062,6 @@ static key_map panel_keymap [] = {
     { XCTRL('r'), reread_cmd },
 #endif
     
-#ifndef HAVE_X
-    { KEY_DC,     delete_cmd},
-#endif
     { 0, 0 }
 };
     

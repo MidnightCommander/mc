@@ -3,6 +3,8 @@ All:
 - It crashes
 - It leaks objects.
 - It does not object to leaks.
+- argp handling.
+- Session management
 
 Desktop:
 - Add special destkop entries ("Network neighborhood")

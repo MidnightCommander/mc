@@ -115,6 +115,7 @@ typedef struct {
     void *current_dir;
     void *filter_w;
     void *status;
+    void *ministatus;
 #endif
 } WPanel;
 

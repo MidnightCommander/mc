@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#!/usr/bin/perl
 # Since we use a linear search trought the block and the license and
 # the warranty are quite big, we leave them at the end of the help file,
 # the index will be consulted quite frequently, so we put it at the beginning. 
