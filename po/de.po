@@ -1106,7 +1106,7 @@ msgstr " Bestätigung "
 
 #: gnome/boxes.c:460 src/boxes.c:460
 msgid "Full 8 bits output"
-msgstr "Komplette 8-Bit Ausgabe"
+msgstr "Komplette 8-Bit &Eingabe"
 
 #: gnome/boxes.c:460 src/boxes.c:460
 msgid "ISO 8859-1"
