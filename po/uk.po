@@ -15,7 +15,7 @@ msgstr ""
 
 #: edit/edit_key_translator.c:121
 msgid " Emacs key: "
-msgstr " Клав╕ша Emacs: "
+msgstr ""
 
 #: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
 msgid " Execute Macro "
@@ -29,11 +29,11 @@ msgstr " Натисн╕ть клав╕шу макросу: "
 
 #: edit/edit_key_translator.c:144
 msgid " Insert Literal "
-msgstr " Вставити л╕терал "
+msgstr " Вставити л╕тералу "
 
 #: edit/edit_key_translator.c:144
 msgid " Press any key: "
-msgstr " Натисн╕ть клав╕шу: "
+msgstr ""
 
 #: gnome/gaction.c:33
 #, c-format
@@ -73,15 +73,15 @@ msgstr ""
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
 msgid "open"
-msgstr "в╕дкрити"
+msgstr ""
 
 #: gnome/gaction.c:185 gnome/gaction.c:198
 msgid "edit"
-msgstr "редагувати"
+msgstr ""
 
 #: gnome/gaction.c:331
 msgid "view"
-msgstr "перегляд"
+msgstr ""
 
 #: gnome/gcmd.c:49
 msgid " There is no other panel to compare contents to "
@@ -105,45 +105,45 @@ msgstr "Редакц╕я Midnight Commander для GNOME."
 
 #: gnome/gcmd.c:290
 msgid "Sort By"
-msgstr "Сортувати за"
+msgstr ""
 
 #. we define this up here so we can pass it in to our callback
 #: gnome/gcmd.c:295
 msgid "Ignore case sensitivity."
-msgstr "╤гнорувати рег╕стр."
+msgstr ""
 
 #: gnome/gcmd.c:298
 msgid "Sort files by "
-msgstr "Сортувати файли за"
+msgstr ""
 
 #: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
-msgstr "Назва"
+msgstr ""
 
 #: gnome/gcmd.c:310
 msgid "File Type"
-msgstr "Тип"
+msgstr ""
 
 #: gnome/gcmd.c:316 gnome/gcustom-layout.c:45 src/screen.c:414
 #: src/screen.c:415
 msgid "Size"
-msgstr "Розм╕р"
+msgstr ""
 
 #: gnome/gcmd.c:322
 msgid "Time Last Accessed"
-msgstr "Часом останнього доступу"
+msgstr ""
 
 #: gnome/gcmd.c:328
 msgid "Time Last Modified"
-msgstr "Часом останньо╖ модификац╕╖"
+msgstr ""
 
 #: gnome/gcmd.c:334
 msgid "Time Last Changed"
-msgstr "Часом останньо╖ зм╕ни"
+msgstr ""
 
 #: gnome/gcmd.c:348
 msgid "Reverse the order."
-msgstr "Зм╕нити порядок"
+msgstr ""
 
 #: gnome/gcmd.c:395
 msgid "Enter name."
@@ -155,7 +155,7 @@ msgstr ""
 
 #: gnome/gcmd.c:506
 msgid "Find all core files"
-msgstr "Знайти вс╕ core-файли"
+msgstr ""
 
 #: gnome/gcmd.c:509 src/panelize.c:350
 msgid "Find rejects after patching"
@@ -163,7 +163,7 @@ msgstr ""
 
 #: gnome/gcmd.c:554
 msgid "Run Command"
-msgstr "Запустити команду"
+msgstr ""
 
 #. Frame 1
 #: gnome/gcmd.c:559
@@ -173,29 +173,29 @@ msgstr ""
 #. add add/remove buttons in center
 #: gnome/gcmd.c:576 gnome/gcustom-layout.c:183
 msgid "Add"
-msgstr "Додати"
+msgstr ""
 
 #: gnome/gcmd.c:580 gnome/gcustom-layout.c:184
 msgid "Remove"
-msgstr "Вилучити"
+msgstr ""
 
 #. Frame 2
 #: gnome/gcmd.c:588
 msgid "Run this Command"
-msgstr "Запустити цю команду"
+msgstr ""
 
 #: gnome/gcmd.c:595
 msgid "Command: "
-msgstr "Команда: "
+msgstr ""
 
 #: gnome/gcmd.c:674
 msgid "Set Filter"
-msgstr "Встановити ф╕льтр"
+msgstr ""
 
 #: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
 #: gnome/gscreen.c:2416
 msgid "Show all files"
-msgstr "Показати вс╕ файли"
+msgstr ""
 
 #: gnome/gcmd.c:686
 msgid "."
@@ -208,22 +208,18 @@ msgid ""
 "For example:\n"
 "*.png will show just png images"
 msgstr ""
-"Введ╕ть ф╕льтр для вибирання файл╕в у панель.\n"
-"\n"
-"Наприклад:\n"
-"*.png вибере вс╕ png зображення"
 
 #: gnome/gcmd.c:704
 msgid "Enter a Regular Expression to filter files in the panel view."
-msgstr "Введ╕ть регулярний вираз для ф╕льтрування файл╕в у панел╕."
+msgstr ""
 
 #: gnome/gcmd.c:764
 msgid " Open with..."
-msgstr " В╕дкрити за допомогою... "
+msgstr ""
 
 #: gnome/gcmd.c:765
 msgid "Enter extra arguments:"
-msgstr "Введ╕ть додатков╕ аргументи:"
+msgstr ""
 
 #: gnome/gcmd.c:835
 msgid "Desktop entry properties"
@@ -240,10 +236,6 @@ msgid ""
 "For example:\n"
 "*.png will select all png images"
 msgstr ""
-"Введ╕ть ф╕льтр для вибирання файл╕в у панель.\n"
-"\n"
-"Наприклад:\n"
-"*.png вибере вс╕ png зображення"
 
 #: gnome/gcmd.c:871
 msgid "Enter a regular expression here to select files in the panel view with."
@@ -251,7 +243,7 @@ msgstr ""
 
 #: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
-msgstr " Погано сформований регулярний вираз "
+msgstr ""
 
 #: gnome/gcmd.c:962
 msgid "Creating a desktop link"
@@ -263,26 +255,26 @@ msgstr ""
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
-msgstr "Час доступу"
+msgstr ""
 
 #: gnome/gcustom-layout.c:35
 msgid "Creation Time"
-msgstr "Час створення"
+msgstr ""
 
 #. Group
 #: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:776
 #: gnome/gnome-file-property-dialog.c:945 gnome/gprop.c:280 gnome/gprop.c:405
 #: src/screen.c:427
 msgid "Group"
-msgstr "Група"
+msgstr ""
 
 #: gnome/gcustom-layout.c:37
 msgid "Group ID"
-msgstr "╤дентиф╕катор групи"
+msgstr ""
 
 #: gnome/gcustom-layout.c:38
 msgid "Inode Number"
-msgstr "Номер I-вузла"
+msgstr ""
 
 #: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
@@ -290,17 +282,17 @@ msgstr ""
 
 #: gnome/gcustom-layout.c:40
 msgid "Modification Time"
-msgstr "Час модиф╕кац╕╖"
+msgstr ""
 
 #: gnome/gcustom-layout.c:42
 msgid "Number of Hard Links"
-msgstr "К╕льк╕сть жорстких посилань"
+msgstr ""
 
 #. Owner
 #: gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:930
 #: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
-msgstr "Власник"
+msgstr ""
 
 #: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
@@ -308,27 +300,27 @@ msgstr ""
 
 #: gnome/gcustom-layout.c:46
 msgid "Size (short)"
-msgstr "Розм╕р (коротко)"
+msgstr ""
 
 #: gnome/gcustom-layout.c:47
 msgid "Type"
-msgstr "Тип"
+msgstr ""
 
 #: gnome/gcustom-layout.c:48
 msgid "User ID"
-msgstr "╤дентиф╕катор користувача"
+msgstr ""
 
 #: gnome/gcustom-layout.c:142
 msgid "Possible Columns"
-msgstr "Можлив╕ стовпчики"
+msgstr ""
 
 #: gnome/gcustom-layout.c:162
 msgid "Displayed Columns"
-msgstr "Показуван╕ стовпчики"
+msgstr ""
 
 #: gnome/gcustom-layout.c:304
 msgid "Custom View"
-msgstr "Нетипове в╕дображення"
+msgstr ""
 
 #: gnome/gdesktop.c:521 gnome/gmount.c:389
 msgid "Warning"
@@ -362,20 +354,20 @@ msgstr ""
 
 #: gnome/gdesktop.c:2616 gnome/glayout.c:362
 msgid "_Terminal"
-msgstr "Терм╕нал"
+msgstr ""
 
 #: gnome/gdesktop.c:2616 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
-msgstr "Запустити терм╕нал в поточному каталогу"
+msgstr ""
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
 #: gnome/gdesktop.c:2618 gnome/glayout.c:365
 msgid "_Directory..."
-msgstr "Каталог..."
+msgstr ""
 
 #: gnome/gdesktop.c:2618 gnome/glayout.c:366
 msgid "Creates a new directory"
-msgstr "Створити новий каталог"
+msgstr ""
 
 #: gnome/gdesktop.c:2619
 msgid "URL L_ink..."
@@ -387,51 +379,51 @@ msgstr ""
 
 #: gnome/gdesktop.c:2620
 msgid "_Launcher..."
-msgstr "Запускач..."
+msgstr ""
 
 #: gnome/gdesktop.c:2620
 msgid "Creates a new launcher"
-msgstr "Створити новий запускач"
+msgstr ""
 
 #: gnome/gdesktop.c:2626
 msgid "By _Name"
-msgstr "За назвою"
+msgstr ""
 
 #: gnome/gdesktop.c:2627
 msgid "By File _Type"
-msgstr "За типом файлу"
+msgstr ""
 
 #: gnome/gdesktop.c:2628
 msgid "By _Size"
-msgstr "За розм╕ром"
+msgstr ""
 
 #: gnome/gdesktop.c:2629
 msgid "By Time Last _Accessed"
-msgstr "За часом останнього доступу"
+msgstr ""
 
 #: gnome/gdesktop.c:2630
 msgid "By Time Last _Modified"
-msgstr "За часом останньо╖ модиф╕кац╕╖"
+msgstr ""
 
 #: gnome/gdesktop.c:2631
 msgid "By Time Last _Changed"
-msgstr "За часом останньо╖ зм╕ни"
+msgstr ""
 
 #: gnome/gdesktop.c:2639 gnome/glayout.c:462
 msgid "_Arrange Icons"
-msgstr "Впорядкувати п╕ктограми"
+msgstr ""
 
 #: gnome/gdesktop.c:2640
 msgid "Create _New Window"
-msgstr "Створити нове в╕кно"
+msgstr ""
 
 #: gnome/gdesktop.c:2642 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
-msgstr "Пересканувати каталог користувача"
+msgstr ""
 
 #: gnome/gdesktop.c:2643 gnome/glayout.c:465
 msgid "Rescan De_vices"
-msgstr "Пересканувати пристро╖"
+msgstr ""
 
 #: gnome/gdesktop.c:2644 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
@@ -444,12 +436,12 @@ msgstr ""
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
-msgstr "Позиц╕я п╕ктограми"
+msgstr ""
 
 #. Snap and placement
 #: gnome/gdesktop-prefs.c:258
 msgid "Automatic icon placement"
-msgstr "Автоматичне розм╕щення п╕ктограм"
+msgstr ""
 
 #: gnome/gdesktop-prefs.c:262
 msgid "Snap icons to grid"
@@ -465,7 +457,7 @@ msgstr ""
 
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
-msgstr "Робочий ст╕л"
+msgstr ""
 
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop-init.c:141
@@ -496,11 +488,11 @@ msgstr ""
 
 #: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
-msgstr "Перепитування перед зам╕щенням будь-яких файл╕в."
+msgstr ""
 
 #: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
-msgstr "Не зам╕щати н╕яких файл╕в."
+msgstr ""
 
 #: gnome/gdialogs.c:422
 msgid "Overwrite:"
@@ -516,75 +508,75 @@ msgstr ""
 
 #: gnome/gdialogs.c:441
 msgid "All files."
-msgstr "Вс╕ файли:"
+msgstr ""
 
 #: gnome/gdialogs.c:481
 msgid "File Exists"
-msgstr "Файл ╕сну╓"
+msgstr ""
 
 #: gnome/gdialogs.c:487
 #, c-format
 msgid "The target file already exists: %s"
-msgstr "Ц╕льовий файл вже ╕сну╓: %s"
+msgstr ""
 
 #: gnome/gdialogs.c:494
 msgid "Replace it?"
-msgstr "Зам╕нити його?"
+msgstr ""
 
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1097 gtkedit/gtkedit.c:1250
 #: src/file.c:802 src/screen.c:2399 src/screen.c:2429 src/tree.c:1014
 msgid "Copy"
-msgstr "Коп╕ювати"
+msgstr "Коп╕я"
 
 #: gnome/gdialogs.c:571 gtkedit/editwidget.c:1098 gtkedit/gtkedit.c:1252
 msgid "Move"
-msgstr "Перенести"
+msgstr ""
 
 #: gnome/gdialogs.c:583
 msgid "Destination"
-msgstr "М╕сце призначення"
+msgstr ""
 
 #: gnome/gdialogs.c:597
 msgid "Find Destination Folder"
-msgstr "Пошук м╕сця призначення"
+msgstr ""
 
 #: gnome/gdialogs.c:611
 msgid "Copy as a background process"
-msgstr "Коп╕ювати в процес╕ на тл╕"
+msgstr ""
 
 #: gnome/gdialogs.c:629
 msgid "Advanced Options"
-msgstr "Додатков╕ параметри"
+msgstr ""
 
 #: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
-msgstr "Збер╕гати символьн╕ посиланя"
+msgstr ""
 
 #: gnome/gdialogs.c:643
 msgid "Follow links."
-msgstr "Роз╕меновувати посилань"
+msgstr ""
 
 #: gnome/gdialogs.c:649
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
-msgstr "Коп╕ювати файли на як╕ вказують посилання зам╕сть посилань"
+msgstr ""
 
 #: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
-msgstr "Збер╕гати атрибути"
+msgstr ""
 
 #: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr "Збер╕гати права та UID/GID якщо можливо"
+msgstr ""
 
 #: gnome/gdialogs.c:666
 msgid "Recursively copy subdirectories."
-msgstr "Рекурсивно коп╕ювати каталоги"
+msgstr ""
 
 #: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
-msgstr "Рекурсивно коп╕ювати каталоги"
+msgstr ""
 
 #: gnome/gdialogs.c:780
 #, c-format
@@ -593,13 +585,10 @@ msgid ""
 "\n"
 "Directory not empty. Delete it recursively?"
 msgstr ""
-"%s\n"
-"\n"
-"Каталог не порожн╕й. Видалити його рекурсивно?"
 
 #: gnome/gdialogs.c:790 src/file.c:2244
 msgid " Delete: "
-msgstr " Видалити: "
+msgstr ""
 
 #: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
@@ -607,15 +596,15 @@ msgstr ""
 
 #: gnome/gdialogs.c:877
 msgid "Move Progress"
-msgstr "Поступ переносу"
+msgstr ""
 
 #: gnome/gdialogs.c:880
 msgid "Copy Progress"
-msgstr "Поступ коп╕ювання"
+msgstr ""
 
 #: gnome/gdialogs.c:883
 msgid "Delete Progress"
-msgstr "Поступ видалення"
+msgstr ""
 
 #: gnome/gdialogs.c:939
 msgid "File "
@@ -642,15 +631,15 @@ msgstr "Пароль"
 #. Create the dialog
 #: gnome/gdialogs.c:1039
 msgid "Symbolic Link"
-msgstr "Символьне посилання"
+msgstr ""
 
 #: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Назва ╕снуючого файу (на який буде вазувати посилання):"
+msgstr ""
 
 #: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
-msgstr "Назва символьного посилання:"
+msgstr ""
 
 #: gnome/gdnd.c:52
 msgid "_Move here"
@@ -769,35 +758,35 @@ msgstr ""
 
 #: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
-msgstr "_Видалити..."
+msgstr ""
 
 #: gnome/glayout.c:390
 msgid "Delete files"
-msgstr "Видалити файли"
+msgstr ""
 
 #: gnome/glayout.c:391 gnome/gscreen.c:2087
 msgid "_Move..."
-msgstr "_Перенести..."
+msgstr ""
 
 #: gnome/glayout.c:391
 msgid "Rename or move files"
-msgstr "Перейменувати чи перенести файли"
+msgstr ""
 
 #: gnome/glayout.c:393
 msgid "Show directory sizes"
-msgstr "Показати розм╕ри каталог╕в"
+msgstr ""
 
 #: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
-msgstr "Показати розм╕р дискового простору використаного кожним каталогом"
+msgstr ""
 
 #: gnome/glayout.c:395
 msgid "Close window"
-msgstr "Закрити в╕кно"
+msgstr ""
 
 #: gnome/glayout.c:395
 msgid "Closes this window"
-msgstr "Закрива╓ це в╕кно"
+msgstr ""
 
 #: gnome/glayout.c:402
 msgid "Select _All"
@@ -833,15 +822,15 @@ msgstr ""
 
 #: gnome/glayout.c:411 gnome/gscreen.c:1415
 msgid "_Rescan Directory"
-msgstr "Пересканувати каталог"
+msgstr ""
 
 #: gnome/glayout.c:411
 msgid "Rescan the directory contents"
-msgstr "Пересканувати вм╕ст каталогу"
+msgstr ""
 
 #: gnome/glayout.c:421
 msgid "_Sort By..."
-msgstr "Сортувати за..."
+msgstr ""
 
 #: gnome/glayout.c:421
 msgid "Confirmation settings"
@@ -985,35 +974,35 @@ msgstr "Тип файлу: "
 
 #: gnome/gnome-file-property-dialog.c:207
 msgid "File Type: Symbolic Link"
-msgstr "Тип файлу: Символьне посилання"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:212
 msgid "Target Name: INVALID LINK"
-msgstr "Назва ориг╕налу: НЕВ╤РНЕ ПОСИЛАННЯ"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:215
 msgid "Target Name: "
-msgstr "Назва ориг╕налу: "
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:220
 msgid "File Type: Directory"
-msgstr "Тип файлу: Каталог"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Character Device"
-msgstr "Тип файлу: Символьний пристр╕й"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Block Device"
-msgstr "Тип файлу: Блоковий пристр╕й"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:226
 msgid "File Type: Socket"
-msgstr "Тип файлу: Сокет"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:228
 msgid "File Type: FIFO"
-msgstr "Тип файлу: FIFO"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
@@ -1023,24 +1012,24 @@ msgstr "Розм╕р файлу: "
 
 #: gnome/gnome-file-property-dialog.c:238
 msgid " bytes"
-msgstr " байт╕в"
+msgstr " байт"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
-msgstr " КБайт╕в ("
+msgstr " КБайт  ("
 
 #: gnome/gnome-file-property-dialog.c:243
 #: gnome/gnome-file-property-dialog.c:249
 msgid " bytes)"
-msgstr " байт╕в)"
+msgstr " бийт)"
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " MBytes  ("
-msgstr " МБайт╕в ("
+msgstr " МБайт  ("
 
 #: gnome/gnome-file-property-dialog.c:256
 msgid "File Size: N/A"
-msgstr "Розм╕р файлу: Н/Д"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:267
 msgid "File Created on: "
@@ -1056,11 +1045,11 @@ msgstr "Останн╕й доступ: "
 
 #: gnome/gnome-file-property-dialog.c:303
 msgid "URL:"
-msgstr "URL:"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:310
 msgid "Caption:"
-msgstr "П╕дпис:"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:387
 #: gnome/gnome-file-property-dialog.c:489
@@ -1075,15 +1064,15 @@ msgstr ""
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:203
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
-msgstr "Переглянути"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
-msgstr "Використовувати типовий перегляд"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:439
 msgid "Select an Icon"
-msgstr "Вибер╕ть п╕ктограму"
+msgstr ""
 
 #. we do open first
 #: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:195
@@ -1092,7 +1081,7 @@ msgstr "В╕дкрити"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr "Використовувати типове в╕дкриття"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
@@ -1100,16 +1089,16 @@ msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr "Використовувати типовий перегляд"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
-msgstr "Редагувати"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:523
 msgid "Use default Edit action"
-msgstr "Використовувати типове редагування"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:577 gnome/gprop.c:521
 msgid "Icon"
@@ -1118,62 +1107,62 @@ msgstr "П╕ктограма"
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
 msgid "File Actions"
-msgstr "Д╕╖ над файлом"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:616
 msgid "Open action"
-msgstr "В╕дкриття"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:617
 msgid "Needs terminal to run"
-msgstr "Виконання в терм╕нал╕"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:742
 msgid "File Permissions"
-msgstr "Права доступу до файлу"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:753 gnome/gprop.c:259
 msgid "Current mode: "
-msgstr "Поточн╕ права: "
+msgstr ""
 
 #. Headings
 #: gnome/gnome-file-property-dialog.c:768 gnome/gprop.c:272
 msgid "Read"
-msgstr "Зчитування"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:769 gnome/gprop.c:273
 msgid "Write"
-msgstr "Запис"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:770 gnome/gprop.c:274
 msgid "Exec"
-msgstr "Виконання"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:771 gnome/gprop.c:275
 msgid "Special"
-msgstr "Спец╕альн╕"
+msgstr ""
 
 #. Permissions
 #: gnome/gnome-file-property-dialog.c:775 gnome/gprop.c:279
 msgid "User"
-msgstr "Користувач"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:777 gnome/gprop.c:281
 msgid "Other"
-msgstr "╤нш╕"
+msgstr ""
 
 #. Special
 #: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:285
 msgid "Set UID"
-msgstr "Встановлення UID"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:782 gnome/gprop.c:286
 msgid "Set GID"
-msgstr "Встановлення GID"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:287
 msgid "Sticky"
-msgstr "Закр╕плення"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:905
 #, c-format
@@ -1182,11 +1171,11 @@ msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
-msgstr "Волод╕ння файлом"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:1079
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:1082
 msgid "Statistics"
@@ -1198,7 +1187,7 @@ msgstr "Параметри"
 
 #: gnome/gnome-file-property-dialog.c:1091
 msgid "Permissions"
-msgstr "Права"
+msgstr ""
 
 #: gnome/gnome-file-property-dialog.c:1094
 msgid " Properties"
@@ -1220,7 +1209,7 @@ msgstr ""
 #: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
-msgstr "Вибер╕ть програму для в╕дкриття нею \"%s\"."
+msgstr ""
 
 #: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
@@ -1229,11 +1218,11 @@ msgstr ""
 #. the file tree
 #: gnome/gnome-open-dialog.c:406
 msgid "Applications"
-msgstr "Програми"
+msgstr ""
 
 #: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
-msgstr "Запустити програму"
+msgstr ""
 
 #: gnome/gpopup2.c:197
 msgid "Mount device"
@@ -1249,7 +1238,7 @@ msgstr ""
 
 #: gnome/gpopup2.c:202
 msgid "Open with..."
-msgstr "Видкрити за допомогою..."
+msgstr ""
 
 #: gnome/gpopup2.c:204
 msgid "View Unfiltered"
@@ -1257,32 +1246,32 @@ msgstr ""
 
 #: gnome/gpopup2.c:207
 msgid "Copy..."
-msgstr "Коп╕ювання..."
+msgstr ""
 
 #: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
-msgstr "Видалити"
+msgstr ""
 
 #: gnome/gpopup2.c:209
 msgid "Move..."
-msgstr "Перенесення..."
+msgstr ""
 
 #: gnome/gpopup2.c:210
 msgid "Hard Link..."
-msgstr "Жорстке посилання..."
+msgstr ""
 
 #: gnome/gpopup2.c:211
 msgid "Symlink..."
-msgstr "Символьне посилання..."
+msgstr ""
 
 #: gnome/gpopup2.c:212
 msgid "Edit Symlink..."
-msgstr "Зм╕нити символьне посилання..."
+msgstr ""
 
 #: gnome/gpopup2.c:214
 msgid "Properties..."
-msgstr "Властивост╕..."
+msgstr ""
 
 #: gnome/gprefs.c:92
 msgid "Show backup files"
@@ -1294,7 +1283,7 @@ msgstr ""
 
 #: gnome/gprefs.c:100
 msgid "Mix files and directories"
-msgstr "Сум╕ш файл╕в та каталог╕в"
+msgstr ""
 
 #: gnome/gprefs.c:104
 msgid "Use shell patterns instead of regular expressions"
@@ -1302,19 +1291,19 @@ msgstr ""
 
 #: gnome/gprefs.c:113
 msgid "Confirm when deleting file"
-msgstr "П╕дтвердження на видалення файлу"
+msgstr ""
 
 #: gnome/gprefs.c:117
 msgid "Confirm when overwriting files"
-msgstr "П╕дтвердження на зам╕щення файлу"
+msgstr ""
 
 #: gnome/gprefs.c:121
 msgid "Confirm when executing files"
-msgstr "П╕дтвердження на виконання файлу"
+msgstr ""
 
 #: gnome/gprefs.c:125
 msgid "Show progress while operations are being performed"
-msgstr "Показати поступ виконання операц╕й"
+msgstr ""
 
 #: gnome/gprefs.c:134
 msgid "VFS Timeout:"
@@ -1358,7 +1347,7 @@ msgstr "П╕дтвердження"
 
 #: gnome/gprefs.c:180
 msgid "VFS"
-msgstr "ВФС"
+msgstr ""
 
 #: gnome/gprefs.c:184
 msgid "Caching"
@@ -1402,7 +1391,7 @@ msgstr ""
 
 #: gnome/gprop.c:505
 msgid "Title"
-msgstr "Заголовок"
+msgstr ""
 
 #: gnome/gprop.c:535
 msgid "Select icon"
@@ -1414,34 +1403,34 @@ msgstr ""
 
 #: gnome/gscreen.c:1417
 msgid "New _Directory..."
-msgstr "Новий _каталог..."
+msgstr ""
 
 #: gnome/gscreen.c:1417
 msgid "Creates a new directory here"
-msgstr "Створю╓ тут новий каталог"
+msgstr ""
 
 #: gnome/gscreen.c:1419
 msgid "New _File..."
-msgstr "Новий _файл..."
+msgstr ""
 
 #: gnome/gscreen.c:1419
 msgid "Creates a new file here"
-msgstr "Створю╓ тут новий файл"
+msgstr ""
 
 #: gnome/gscreen.c:1620
 #, c-format
 msgid "Search: %s"
-msgstr "Пошук: %s"
+msgstr ""
 
 #: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d file"
-msgstr "%s байт╕в в %d файл╕"
+msgstr "%s байт╕ в %d файл╕"
 
 #: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d files"
-msgstr "%s байт╕в в %d файлах"
+msgstr "%s байт в %d файлах"
 
 #: gnome/gscreen.c:1656 src/screen.c:688
 msgid "<readlink failed>"
@@ -1453,55 +1442,55 @@ msgstr ""
 
 #: gnome/gscreen.c:2086
 msgid "Delete directory"
-msgstr "Видалити каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2087
 msgid "Rename or move directory"
-msgstr "Перейменувати чи перенести каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2245
 msgid "Back"
-msgstr "Назад"
+msgstr ""
 
 #: gnome/gscreen.c:2245
 msgid "Go to the previously visited directory"
-msgstr "Перейти в попередн╕й каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2247
 msgid "Up"
-msgstr "Вверх"
+msgstr ""
 
 #: gnome/gscreen.c:2247
 msgid "Go up a level in the directory heirarchy"
-msgstr "П╕днятись на р╕вень в ╕╓рарх╕╖ каталог╕в"
+msgstr ""
 
 #: gnome/gscreen.c:2249
 msgid "Forward"
-msgstr "Вперед"
+msgstr ""
 
 #: gnome/gscreen.c:2249
 msgid "Go to the next directory"
-msgstr "Перейти в наступний каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2252 src/tree.c:1010
 msgid "Rescan"
-msgstr "Оновити"
+msgstr ""
 
 #: gnome/gscreen.c:2252
 msgid "Rescan the current directory"
-msgstr "Пересканувати поточний каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2255
 msgid "Home"
-msgstr "Дом╕вка"
+msgstr ""
 
 #: gnome/gscreen.c:2255
 msgid "Go to your home directory"
-msgstr "Перейти у ваш домашн╕й каталог"
+msgstr ""
 
 #: gnome/gscreen.c:2395
 msgid "Location:"
-msgstr "Розм╕щення:"
+msgstr ""
 
 #. 1
 #: gnome/gtools.c:105 gtkedit/editcmd.c:341 gtkedit/editcmd.c:1219
@@ -1516,12 +1505,12 @@ msgstr "&Гаразд"
 #: gnome/gview.c:136
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "Зм╕щення 0x%08lx"
+msgstr ""
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
 msgid "Col %d"
-msgstr "Стовпчик %d"
+msgstr ""
 
 #: gnome/gview.c:142 src/view.c:734
 #, c-format
@@ -1530,11 +1519,11 @@ msgstr "%s байт"
 
 #: gnome/gview.c:306
 msgid "_Goto line"
-msgstr "_Перейти на рядок"
+msgstr ""
 
 #: gnome/gview.c:307
 msgid "Jump to a specified line number"
-msgstr "Перескочити на вказаний рядок"
+msgstr ""
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
@@ -1660,7 +1649,7 @@ msgstr ""
 
 #: gtkedit/edit.c:254
 msgid " File is too large: "
-msgstr " Файл надто великий: "
+msgstr ""
 
 #: gtkedit/edit.c:255
 msgid ""
@@ -1674,15 +1663,15 @@ msgstr ""
 
 #: gtkedit/editcmd.c:334
 msgid "Quick save "
-msgstr "Швидке збереження "
+msgstr ""
 
 #: gtkedit/editcmd.c:335
 msgid "Safe save "
-msgstr "Безпечне збереження "
+msgstr ""
 
 #: gtkedit/editcmd.c:336
 msgid "Do backups -->"
-msgstr "Робити резервн╕ коп╕╖ -->"
+msgstr ""
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1171 gtkedit/editcmd.c:1217
@@ -1699,16 +1688,16 @@ msgstr "&В╕дм╕на"
 
 #: gtkedit/editcmd.c:345
 msgid "Extension:"
-msgstr "Розширення:"
+msgstr ""
 
 #. NLS ?
 #: gtkedit/editcmd.c:352
 msgid " Edit Save Mode "
-msgstr " Редагування режиму збереження "
+msgstr ""
 
 #: gtkedit/editcmd.c:499
 msgid " Save As "
-msgstr " Зберегти як "
+msgstr ""
 
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:513 gtkedit/editcmd.c:836 gtkedit/editcmd.c:869
@@ -1721,12 +1710,12 @@ msgstr " Попередження "
 
 #: gtkedit/editcmd.c:514
 msgid " A file already exists with this name. "
-msgstr " Файл з ц╕╓ю назвою вже ╕сну╓. "
+msgstr ""
 
 #. Push buttons to over-write the current file, or cancel the operation
 #: gtkedit/editcmd.c:516
 msgid "Overwrite"
-msgstr "Зам╕стити"
+msgstr ""
 
 #: gtkedit/editcmd.c:516 gtkedit/editcmd.c:583 gtkedit/editcmd.c:810
 #: gtkedit/editcmd.c:836 gtkedit/editcmd.c:869 gtkedit/editcmd.c:1020
@@ -1740,12 +1729,12 @@ msgstr " Зберегти як "
 
 #: gtkedit/editcmd.c:535 gtkedit/editcmd.c:2680
 msgid " Error trying to save file. "
-msgstr " Помилка на спроб╕ зберегти файл. "
+msgstr ""
 
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:653 gtkedit/editcmd.c:661 gtkedit/editcmd.c:686
 msgid " Delete macro "
-msgstr " Видалити макрос "
+msgstr " Видилити макрос "
 
 #. 'Open' = load temp file
 #: gtkedit/editcmd.c:655
@@ -1761,7 +1750,7 @@ msgstr " Помилка при спроб╕ в╕дкрити файл макрос╕в "
 #: gtkedit/editcmd.c:767
 #, c-format
 msgid "key '%d 0': "
-msgstr "клав╕ша '%d 0': "
+msgstr ""
 
 #: gtkedit/editcmd.c:687
 msgid " Error trying to overwrite macro file "
@@ -1793,12 +1782,12 @@ msgstr " Завантажити макрос "
 
 #: gtkedit/editcmd.c:805 gtkedit/editcmd.c:807
 msgid " Confirm save file? : "
-msgstr " П╕дтверд╕ть збереження файлу : "
+msgstr ""
 
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:810
 msgid " Save file "
-msgstr " Збереження файлу "
+msgstr ""
 
 #: gtkedit/editcmd.c:810 gtkedit/editwidget.c:1094 gtkedit/gtkedit.c:1247
 #: src/view.c:2075
@@ -1810,29 +1799,27 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
 msgstr ""
-" Поточний текст було модиф╕ковано ╕ не збережено. \n"
-" Продовження призведе до втрати цих зм╕н. "
 
 #: gtkedit/editcmd.c:836 gtkedit/editcmd.c:869 gtkedit/editcmd.c:1020
 msgid "Continue"
-msgstr "Продовжити"
+msgstr ""
 
 #. Heads the 'Load' file dialog box
 #: gtkedit/editcmd.c:859 gtkedit/editcmd.c:875
 msgid " Load "
-msgstr " Завантаження "
+msgstr ""
 
 #: gtkedit/editcmd.c:859
 msgid " Error trying to open file for reading "
-msgstr " Помилка на спроб╕ в╕дкрити файл на зчитування "
+msgstr ""
 
 #: gtkedit/editcmd.c:1020 gtkedit/editcmd.c:1117
 msgid " Block is large, you may not be able to undo this action. "
-msgstr " Блок надто великий, ви не зможете зробити в╕дкат ц╕╓╖ д╕╖. "
+msgstr ""
 
 #: gtkedit/editcmd.c:1117
 msgid " Continue "
-msgstr " Продовжити "
+msgstr ""
 
 #: gtkedit/editcmd.c:1117
 msgid " Cancel "
@@ -1840,27 +1827,27 @@ msgstr " В╕дм╕на "
 
 #: gtkedit/editcmd.c:1173
 msgid "o&Ne"
-msgstr "один"
+msgstr ""
 
 #: gtkedit/editcmd.c:1175 src/filegui.c:597
 msgid "al&L"
-msgstr "вс╕"
+msgstr ""
 
 #: gtkedit/editcmd.c:1177 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
-msgstr "&Пропустити"
+msgstr ""
 
 #: gtkedit/editcmd.c:1179
 msgid "&Replace"
-msgstr "&Зам╕нити"
+msgstr ""
 
 #: gtkedit/editcmd.c:1185 gtkedit/editcmd.c:1607
 msgid " Replace with: "
-msgstr " Зам╕нити на: "
+msgstr ""
 
 #: gtkedit/editcmd.c:1189
 msgid " Confirm replace "
-msgstr " П╕дтвердження зам╕ни "
+msgstr ""
 
 #: gtkedit/editcmd.c:1221 gtkedit/editcmd.c:1306
 msgid "scanf &Expression"
@@ -1872,7 +1859,7 @@ msgstr "&Зам╕нити все"
 
 #: gtkedit/editcmd.c:1225
 msgid "pr&Ompt on replace"
-msgstr "&П╕дтвердження"
+msgstr "&П╕дтвердження на зам╕ну"
 
 #: gtkedit/editcmd.c:1227 gtkedit/editcmd.c:1308
 msgid "&Backwards"
@@ -1918,11 +1905,11 @@ msgstr " Пошук "
 #. An input line comes after the ':'
 #: gtkedit/editcmd.c:1382
 msgid " Enter search text : "
-msgstr " Введ╕ть текст для пошуку : "
+msgstr ""
 
 #: gtkedit/editcmd.c:1389
 msgid " Enter replace text : "
-msgstr " Введ╕ть текст для зам╕ни : "
+msgstr ""
 
 #: gtkedit/editcmd.c:1392 gtkedit/editcmd.c:1393
 #, c-format
@@ -1968,16 +1955,16 @@ msgstr " Назад "
 #. Tool hint
 #: gtkedit/editcmd.c:1420 gtkedit/editcmd.c:1421
 msgid "Warning: Searching backward can be slow"
-msgstr "Увага: Пошук назад може бути пов╕льним"
+msgstr ""
 
 #: gtkedit/editcmd.c:1434
 msgid " Prompt on replace "
-msgstr " П╕дтвердження на зам╕ну "
+msgstr ""
 
 #. Tool hint
 #: gtkedit/editcmd.c:1436
 msgid "Ask before making each replacement"
-msgstr "Перепитувати перед зам╕ною"
+msgstr ""
 
 #: gtkedit/editcmd.c:1438
 msgid " Replace all "
@@ -1997,28 +1984,28 @@ msgstr ""
 #. Tool hint
 #: gtkedit/editcmd.c:1448
 msgid "Begin search, Enter"
-msgstr "Розпочати пошук, Enter"
+msgstr ""
 
 #. Tool hint
 #: gtkedit/editcmd.c:1451
 msgid "Abort this dialog, Esc"
-msgstr "В╕дм╕нити д╕ю, Esc"
+msgstr ""
 
 #: gtkedit/editcmd.c:1607
 msgid "Replace"
-msgstr "Зам╕нити"
+msgstr ""
 
 #: gtkedit/editcmd.c:1607
 msgid "Skip"
-msgstr "Пропустити"
+msgstr ""
 
 #: gtkedit/editcmd.c:1607
 msgid "Replace all"
-msgstr "Зам╕нити все"
+msgstr ""
 
 #: gtkedit/editcmd.c:1607
 msgid "Replace one"
-msgstr "Зам╕нити раз"
+msgstr ""
 
 #: gtkedit/editcmd.c:1969
 msgid ""
@@ -2033,11 +2020,11 @@ msgstr ""
 #: gtkedit/editcmd.c:2177
 #, c-format
 msgid " %ld replacements made. "
-msgstr " %ld зам╕н зроблено. "
+msgstr ""
 
 #: gtkedit/editcmd.c:2180 gtkedit/editcmd.c:2249
 msgid " Search string not found. "
-msgstr " Рядок не знайдено. "
+msgstr ""
 
 #. Confirm 'Quit' dialog box
 #: gtkedit/editcmd.c:2273 gtkedit/editcmd.c:2288 gtkedit/editcmd.c:2291
@@ -2049,8 +2036,6 @@ msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
 msgstr ""
-" Поточний текст було зм╕нено ╕ не збережено. \n"
-" Зберегти берез виходом? "
 
 #: gtkedit/editcmd.c:2288
 msgid " File was modified, Save with exit? "
@@ -2100,12 +2085,12 @@ msgstr ""
 #: gtkedit/editcmd.c:2634 gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2643
 #: gtkedit/editcmd.c:2646 src/view.c:1913
 msgid " Goto line "
-msgstr " Перех╕д на рядок "
+msgstr ""
 
 #: gtkedit/editcmd.c:2634 gtkedit/editcmd.c:2638 gtkedit/editcmd.c:2643
 #: gtkedit/editcmd.c:2646
 msgid " Enter line: "
-msgstr " Введ╕ть номер рядка: "
+msgstr ""
 
 #: gtkedit/editcmd.c:2667 gtkedit/editcmd.c:2680
 msgid " Save Block "
@@ -2121,35 +2106,35 @@ msgstr ""
 
 #: gtkedit/editcmd.c:2730
 msgid " Error trying to insert file. "
-msgstr " Помилка на спроб╕ вставити файл. "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2752
 msgid " Sort block "
-msgstr " Сортування блоку "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2752 gtkedit/editcmd.c:2806
 msgid " You must first highlight a block of text. "
-msgstr " Необх╕дно спочатку вид╕лити блок тексту. "
+msgstr ""
 
 #: gtkedit/editcmd.c:2759
 msgid " Run Sort "
-msgstr " Почати сортування "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2761
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Введ╕ть параметри sort розд╕лен╕ пропусками: "
+msgstr ""
 
 #: gtkedit/editcmd.c:2772 gtkedit/editcmd.c:2778
 msgid " Sort "
-msgstr " Сортування "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2774
 msgid " Error trying to execute sort command "
-msgstr " Помилка на спроб╕ виконати команду sort"
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2780
@@ -2159,7 +2144,7 @@ msgstr ""
 #. Not essential to translate
 #: gtkedit/editcmd.c:2804 gtkedit/editcmd.c:2834
 msgid " Process block "
-msgstr " Обробка блоку "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2836
@@ -2188,12 +2173,12 @@ msgstr " mail -s <заголовок> -c <коп╕╖> <до>"
 
 #: gtkedit/editmenu.c:61
 msgid " Word wrap "
-msgstr " Форматування рядка "
+msgstr ""
 
 #. Not essential to translate
 #: gtkedit/editmenu.c:63
 msgid " Enter line length, 0 for off: "
-msgstr " Введ╕ть довжину рядка, 0 - вимкнути: "
+msgstr ""
 
 #: gtkedit/editmenu.c:74
 msgid " About "
@@ -2209,13 +2194,6 @@ msgid ""
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
 msgstr ""
-"\n"
-"                  Cooledit  v3.11.5\n"
-"\n"
-"   Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"Текстовий редактор з дружн╕м ╕нтерфейсом користувача.\n"
-"           Створено для Midnight Commander.\n"
 
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
 msgid "&Open/load...     C-o"
@@ -2283,7 +2261,7 @@ msgstr "&Видалити          F8"
 
 #: gtkedit/editmenu.c:164 gtkedit/editmenu.c:181
 msgid "&Undo             C-u"
-msgstr "В╕д&кат           C-u"
+msgstr ""
 
 #: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
 msgid "&Beginning     C-PgUp"
@@ -2466,7 +2444,7 @@ msgstr ""
 
 #: gtkedit/editmenu.c:425
 msgid "Delete block\tF8/C-Del"
-msgstr "Видалити блок\tF8/C-Del"
+msgstr ""
 
 #: gtkedit/editmenu.c:427
 msgid "Copy block to clipbrd\tC-Ins"
@@ -2536,7 +2514,7 @@ msgstr "Виконати макрос...\tC-a, Клав╕ша"
 
 #: gtkedit/editmenu.c:458
 msgid "Delete macro...\t"
-msgstr "Видалити макрос..\t"
+msgstr "Видилити макрос..\t"
 
 #: gtkedit/editmenu.c:460
 msgid "Insert date/time\tC-d"
@@ -2578,16 +2556,16 @@ msgstr ""
 #. 2
 #: gtkedit/editoptions.c:74
 msgid "Word wrap line length : "
-msgstr "Позиция обриву рядк╕в : "
+msgstr ""
 
 #. 4
 #: gtkedit/editoptions.c:80
 msgid "Tab spacing : "
-msgstr "Крок табуляц╕╖ : "
+msgstr ""
 
 #: gtkedit/editoptions.c:88
 msgid "synta&X highlighting"
-msgstr "&Вид╕лення синтаксису кольором"
+msgstr ""
 
 #. 7
 #: gtkedit/editoptions.c:94
@@ -2597,12 +2575,12 @@ msgstr "П╕дтвердження на запис"
 #. 8
 #: gtkedit/editoptions.c:97
 msgid "fill tabs with &Spaces"
-msgstr "&Заповнення табуляц╕╖ пропусками"
+msgstr ""
 
 #. 9
 #: gtkedit/editoptions.c:100
 msgid "&Return does autoindent"
-msgstr "&Автовир╕внювання рядк╕в"
+msgstr ""
 
 #. 10
 #: gtkedit/editoptions.c:103
@@ -2612,7 +2590,7 @@ msgstr ""
 #. 11
 #: gtkedit/editoptions.c:106
 msgid "&Fake half tabs"
-msgstr "&Симуляц╕я п╕втабуляц╕╖"
+msgstr ""
 
 #. 13
 #: gtkedit/editoptions.c:112
@@ -2637,7 +2615,7 @@ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
 #: src/main.c:1719 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
 #: src/view.c:2068
 msgid "Help"
-msgstr "Допомога"
+msgstr "Пом╕ч"
 
 #: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
@@ -2663,7 +2641,7 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:66
 msgid " Enter file name: "
-msgstr " Введ╕ть назву файлу: "
+msgstr ""
 
 #: gtkedit/gtkedit.c:111
 msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
@@ -2808,7 +2786,7 @@ msgstr ""
 #: gtkedit/syntax.c:1493
 #, c-format
 msgid " Error in file %s on line %d "
-msgstr " Помилка у файл╕ %s в рядку %d "
+msgstr ""
 
 #: src/achown.c:72 src/chmod.c:115 src/chown.c:80
 msgid "&Set"
@@ -2908,23 +2886,23 @@ msgstr ""
 
 #: src/boxes.c:63
 msgid " Listing mode "
-msgstr " Параметри списку "
+msgstr ""
 
 #: src/boxes.c:68
 msgid "&Full file list"
-msgstr "&Повний список файл╕в"
+msgstr ""
 
 #: src/boxes.c:69
 msgid "&Brief file list"
-msgstr "&Короткий список файл╕в"
+msgstr ""
 
 #: src/boxes.c:70
 msgid "&Long file list"
-msgstr "&Довгий список файл╕в"
+msgstr ""
 
 #: src/boxes.c:71
 msgid "&User defined:"
-msgstr "&Визначений користувачем"
+msgstr ""
 
 #: src/boxes.c:72
 msgid "&Icon view"
@@ -2932,23 +2910,23 @@ msgstr ""
 
 #: src/boxes.c:137
 msgid "user &Mini status"
-msgstr "Користувацький рядок &статусу"
+msgstr ""
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr "Параметри списку"
+msgstr ""
 
 #: src/boxes.c:280
 msgid "&Reverse"
-msgstr "&Перевернутий"
+msgstr ""
 
 #: src/boxes.c:281
 msgid "case sensi&tive"
-msgstr "&Врахувати рег╕стр"
+msgstr ""
 
 #: src/boxes.c:282
 msgid "Sort order"
-msgstr "Порядок сортування"
+msgstr ""
 
 #: src/boxes.c:381
 msgid " confirm &Exit "
@@ -2988,15 +2966,15 @@ msgstr "Повний 8-б╕тний вв╕д"
 
 #: src/boxes.c:476
 msgid " Display bits "
-msgstr " В╕дображення б╕т╕в "
+msgstr " Показ б╕т╕в "
 
 #: src/boxes.c:651
 msgid "&Always use ftp proxy"
-msgstr "&Завжди використовувати прокс╕ FTP"
+msgstr ""
 
 #: src/boxes.c:653
 msgid "sec"
-msgstr "с"
+msgstr ""
 
 #: src/boxes.c:657
 msgid "ftpfs directory cache timeout:"
@@ -3025,31 +3003,31 @@ msgstr ""
 
 #: src/boxes.c:796
 msgid "Symbolic link"
-msgstr "Символьне посилання"
+msgstr ""
 
 #: src/boxes.c:833
 msgid "Running "
-msgstr "Виконання "
+msgstr ""
 
 #: src/boxes.c:834 src/find.c:719 src/find.c:960
 msgid "Stopped"
-msgstr "Зупинено"
+msgstr ""
 
 #: src/boxes.c:895
 msgid "&Stop"
-msgstr "Зу&пинити"
+msgstr ""
 
 #: src/boxes.c:896
 msgid "&Resume"
-msgstr "&Продовжити"
+msgstr ""
 
 #: src/boxes.c:897
 msgid "&Kill"
-msgstr "&Знищити"
+msgstr ""
 
 #: src/boxes.c:936
 msgid "Background Jobs"
-msgstr "Завдання на тл╕"
+msgstr ""
 
 #: src/chmod.c:95
 msgid "execute/search by others"
@@ -3125,27 +3103,27 @@ msgstr "Назва групи"
 
 #: src/chmod.c:160
 msgid " Chmod command "
-msgstr " Зм╕на прав "
+msgstr ""
 
 #: src/chmod.c:162 src/chown.c:120
 msgid " Permission "
-msgstr " Права "
+msgstr ""
 
 #: src/chmod.c:169
 msgid "Use SPACE to change"
-msgstr "Використовуйте ПРОПУСК для"
+msgstr "Використовуйте ПРОПУСК для зам╕ни"
 
 #: src/chmod.c:171
 msgid "an option, ARROW KEYS"
-msgstr "зм╕ни параметру, СТР╤ЛКИ"
+msgstr ""
 
 #: src/chmod.c:173
 msgid "to move between options"
-msgstr "для пересування та T"
+msgstr ""
 
 #: src/chmod.c:175
 msgid "and T or INS to mark"
-msgstr "чи INS для вибору"
+msgstr ""
 
 #: src/chmod.c:233
 msgid "Chmod command"
@@ -3173,11 +3151,11 @@ msgstr ""
 
 #: src/chown.c:114
 msgid " Owner name "
-msgstr " Назва власника "
+msgstr ""
 
 #: src/chown.c:116 src/chown.c:128
 msgid " Group name "
-msgstr " Назва групи "
+msgstr ""
 
 #: src/chown.c:118
 msgid " Size "
@@ -3219,27 +3197,27 @@ msgstr " CD "
 
 #: src/cmd.c:248
 msgid "Files tagged, want to cd?"
-msgstr "Вибрано файли, хочете зм╕нити каталог?"
+msgstr ""
 
 #: src/cmd.c:254 src/cmd.c:713 src/cmd.c:732
 msgid "Could not change directory"
-msgstr "Неможливо зм╕нити каталог"
+msgstr ""
 
 #: src/cmd.c:283
 msgid " View file "
-msgstr " Перегляд файлу "
+msgstr ""
 
 #: src/cmd.c:283
 msgid " Filename:"
-msgstr " Назва файлу:"
+msgstr ""
 
 #: src/cmd.c:300
 msgid " Filtered view "
-msgstr " Ф╕льтрований перегляд "
+msgstr ""
 
 #: src/cmd.c:300
 msgid " Filter command and arguments:"
-msgstr " Команда-ф╕льтр та аргументи:"
+msgstr ""
 
 #: src/cmd.c:388
 msgid "Create a new Directory"
@@ -3251,11 +3229,11 @@ msgstr " Введ╕ть назву каталогу:"
 
 #: src/cmd.c:449
 msgid " Filter "
-msgstr " Ф╕льтр "
+msgstr ""
 
 #: src/cmd.c:449
 msgid " Set expression for filtering filenames"
-msgstr " Вкаж╕ть вираз для в╕льтрац╕╖ назв файл╕в"
+msgstr ""
 
 #: src/cmd.c:515
 msgid " Select "
@@ -3357,21 +3335,21 @@ msgstr " в:"
 #: src/cmd.c:1046
 #, c-format
 msgid " link: %s "
-msgstr " посилання: %s "
+msgstr ""
 
 #: src/cmd.c:1079
 #, c-format
 msgid " symlink: %s "
-msgstr " символьне посилання: %s "
+msgstr ""
 
 #: src/cmd.c:1133
 #, c-format
 msgid " Symlink `%s' points to: "
-msgstr " Символьне посилання \"%s\" вказу╓ на: "
+msgstr ""
 
 #: src/cmd.c:1138
 msgid " Edit symlink "
-msgstr " Редагування символьного посилання "
+msgstr ""
 
 #: src/cmd.c:1143
 #, c-format
@@ -3407,15 +3385,15 @@ msgstr " Неможливо перейти в каталог %s "
 
 #: src/cmd.c:1367
 msgid " Link to a remote machine "
-msgstr " Зв'язок ╕з в╕ддаленою машиною "
+msgstr ""
 
 #: src/cmd.c:1373
 msgid " FTP to machine "
-msgstr " FTP-зв'язок ╕з машиною "
+msgstr ""
 
 #: src/cmd.c:1379
 msgid " SMB link to machine "
-msgstr " SMB-зв'язок ╕з машиною "
+msgstr ""
 
 #: src/cmd.c:1389
 msgid " Socket source routing setup "
@@ -3435,7 +3413,7 @@ msgstr ""
 
 #: src/cmd.c:1408
 msgid " Undelete files on an ext2 file system "
-msgstr " В╕дновлення файл╕в на файлов╕й систем╕ ext2"
+msgstr ""
 
 #: src/cmd.c:1409
 msgid ""
@@ -3445,11 +3423,11 @@ msgstr ""
 
 #: src/cmd.c:1459
 msgid " Setup saved to ~/"
-msgstr " Установки збережено в ~/"
+msgstr ""
 
 #: src/cmd.c:1464
 msgid " Setup "
-msgstr " Установки "
+msgstr ""
 
 #: src/command.c:170
 #, c-format
@@ -3457,8 +3435,6 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
-" Неможливо перейти в каталог \"%s\" \n"
-" %s "
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
@@ -3476,40 +3452,40 @@ msgstr ""
 
 #: src/dir.c:61
 msgid "&Unsorted"
-msgstr "&Не сортувати"
+msgstr ""
 
 #: src/dir.c:62
 msgid "&Name"
-msgstr "За &назвою"
+msgstr ""
 
 #: src/dir.c:63
 msgid "&Extension"
-msgstr "За роз&ширенням"
+msgstr ""
 
 #: src/dir.c:64
 msgid "&Modify time"
-msgstr "За часом &модиф╕кац╕╖"
+msgstr ""
 
 #: src/dir.c:65
 msgid "&Access time"
-msgstr "За часом &доступу"
+msgstr ""
 
 #: src/dir.c:66
 msgid "&Change time"
-msgstr "За часом &зм╕ни"
+msgstr ""
 
 #: src/dir.c:67
 msgid "&Size"
-msgstr "За &розм╕ром"
+msgstr ""
 
 #: src/dir.c:68
 msgid "&Inode"
-msgstr "За i-&вузлом"
+msgstr ""
 
 #. New sort orders
 #: src/dir.c:71
 msgid "&Type"
-msgstr "За &типом"
+msgstr ""
 
 #: src/dir.c:72
 msgid "&Links"
@@ -3525,11 +3501,11 @@ msgstr ""
 
 #: src/dir.c:75
 msgid "&Owner"
-msgstr "За &власником"
+msgstr ""
 
 #: src/dir.c:76
 msgid "&Group"
-msgstr "За &групою"
+msgstr ""
 
 #: src/dir.c:386
 #, c-format
@@ -3546,8 +3522,6 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
-" Неможливо створити ун╕кальну назву файлу \n"
-" %s "
 
 #: src/ext.c:150 src/user.c:511
 #, c-format
@@ -3748,7 +3722,7 @@ msgstr ""
 
 #: src/file.c:803
 msgid "&Delete"
-msgstr "&Видалити"
+msgstr ""
 
 #: src/file.c:803 src/hotlist.c:1443
 msgid "&Keep"
@@ -3775,8 +3749,6 @@ msgid ""
 " Cannot copy cyclic symbolic link \n"
 " `%s' "
 msgstr ""
-" Неможливо скоп╕ювати цикл╕чне символьне посилання \n"
-" `%s' "
 
 #: src/file.c:964
 #, c-format
@@ -3784,8 +3756,6 @@ msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо створити ц╕льовий каталог \"%s\" \n"
-" %s "
 
 #: src/file.c:987
 #, c-format
@@ -3854,8 +3824,6 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо видалити файл \"%s\" \n"
-" %s "
 
 #: src/file.c:1418 src/file.c:1488 src/file.c:1520
 #, c-format
@@ -3863,12 +3831,10 @@ msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо видалити каталог \"%s\" \n"
-" %s "
 
 #: src/file.c:1559
 msgid " Internal error: get_file \n"
-msgstr " Внутр╕шня помилка: get_file \n"
+msgstr ""
 
 #.
 #. * This array introduced to avoid translation problems. The former (op_names)
@@ -3980,9 +3946,6 @@ msgid ""
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
-"\n"
-"   Каталог не порожн╕й.   \n"
-"   Видалити його рекурсивно? "
 
 #: src/file.c:2243
 msgid ""
@@ -3990,9 +3953,6 @@ msgid ""
 "   Background process: Directory not empty \n"
 "   Delete it recursively? "
 msgstr ""
-"\n"
-"   Процес на тл╕: Каталог не порожн╕й \n"
-"   Видалити його рекурсивно? "
 
 #: src/file.c:2250
 msgid "a&ll"
@@ -4012,40 +3972,40 @@ msgstr ""
 
 #: src/file.c:2264
 msgid " Recursive Delete "
-msgstr " Рекурсивне видалення "
+msgstr ""
 
 #: src/file.c:2265
 msgid " Background process: Recursive Delete "
-msgstr " Процес на тл╕: рекурсивне видалення "
+msgstr ""
 
 #: src/filegui.c:424
 msgid "File"
-msgstr "Файл"
+msgstr ""
 
 #: src/filegui.c:447
 msgid "Count"
-msgstr "К╕льк╕сть"
+msgstr ""
 
 #: src/filegui.c:468
 msgid "Bytes"
-msgstr "Байти"
+msgstr ""
 
 #: src/filegui.c:505
 msgid "Source"
-msgstr "Джерело"
+msgstr ""
 
 #: src/filegui.c:528
 msgid "Target"
-msgstr "Ц╕ль"
+msgstr ""
 
 #: src/filegui.c:550
 msgid "Deleting"
-msgstr "Видалення"
+msgstr ""
 
 #: src/filegui.c:590
 #, c-format
 msgid "Target file \"%s\" already exists!"
-msgstr "Ц╕льовий файл \"%s\" вже ╕сну╓!"
+msgstr ""
 
 #: src/filegui.c:593
 msgid "if &Size differs"
@@ -4154,7 +4114,7 @@ msgstr ""
 
 #: src/find.c:136
 msgid "&View - F3"
-msgstr "&Переглянути - F3"
+msgstr ""
 
 #: src/find.c:137
 msgid "&Edit - F4"
@@ -4174,7 +4134,7 @@ msgstr ""
 
 #: src/find.c:171 src/main.c:1243 src/main.c:1267
 msgid "&Tree"
-msgstr "&Дерево"
+msgstr ""
 
 #: src/find.c:223
 msgid "Find File"
@@ -4229,11 +4189,11 @@ msgstr "Шукати знову"
 
 #: src/find.c:761
 msgid "View this file"
-msgstr "Переглянути цей файл"
+msgstr ""
 
 #: src/find.c:762
 msgid "Edit this file"
-msgstr "Редагувати цей файл"
+msgstr ""
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
@@ -4270,7 +4230,7 @@ msgstr ""
 
 #: src/help.c:741
 msgid " Help "
-msgstr " Дов╕дка "
+msgstr ""
 
 #: src/help.c:766 src/user.c:637
 #, c-format
@@ -4278,8 +4238,6 @@ msgid ""
 " Can't open file %s \n"
 " %s "
 msgstr ""
-" Неможливо в╕дкрити файл %s \n"
-" %s "
 
 #: src/help.c:771
 #, c-format
@@ -4288,7 +4246,7 @@ msgstr ""
 
 #: src/help.c:808
 msgid "Index"
-msgstr "Покажчик"
+msgstr ""
 
 #: src/help.c:810
 msgid "Prev"
@@ -4296,27 +4254,27 @@ msgstr ""
 
 #: src/hotlist.c:132
 msgid "&Move"
-msgstr "&Пересунути"
+msgstr ""
 
 #: src/hotlist.c:133 src/hotlist.c:1443 src/panelize.c:88 src/wtools.c:383
 msgid "&Remove"
-msgstr "&Видалити"
+msgstr ""
 
 #: src/hotlist.c:134 src/hotlist.c:818 src/hotlist.c:915
 msgid "&Append"
-msgstr "&Додати"
+msgstr ""
 
 #: src/hotlist.c:135 src/hotlist.c:816 src/hotlist.c:913
 msgid "&Insert"
-msgstr "&Вставити"
+msgstr ""
 
 #: src/hotlist.c:136
 msgid "New &Entry"
-msgstr "Новий &елемент"
+msgstr ""
 
 #: src/hotlist.c:137
 msgid "New &Group"
-msgstr "Нова &група"
+msgstr ""
 
 #: src/hotlist.c:139
 msgid "&Up"
@@ -4324,69 +4282,69 @@ msgstr ""
 
 #: src/hotlist.c:140
 msgid "&Add current"
-msgstr "&Додати поточний"
+msgstr ""
 
 #: src/hotlist.c:141
 msgid "Change &To"
-msgstr "&Перейти в"
+msgstr ""
 
 #: src/hotlist.c:201
 msgid "Subgroup - press ENTER to see list"
-msgstr "П╕дгрупа - натисн╕ть ENTER щоб побачити список"
+msgstr ""
 
 #: src/hotlist.c:620
 msgid "Active VFS directories"
-msgstr "Активн╕ каталоги ВФС"
+msgstr ""
 
 #: src/hotlist.c:620
 msgid "Directory hotlist"
-msgstr "П╕дручн╕ каталоги"
+msgstr ""
 
 #: src/hotlist.c:639
 msgid " Directory path "
-msgstr " Каталог "
+msgstr ""
 
 #. This one holds the displayed pathname
 #: src/hotlist.c:642 src/hotlist.c:689
 msgid " Directory label "
-msgstr " Позначка каталогу "
+msgstr ""
 
 #: src/hotlist.c:663
 msgid "Moving "
-msgstr "Пересування "
+msgstr ""
 
 #: src/hotlist.c:892
 msgid "New hotlist entry"
-msgstr "Новий елемент"
+msgstr ""
 
 #: src/hotlist.c:892
 msgid "Directory label"
-msgstr "Позначка каталогу"
+msgstr ""
 
 #: src/hotlist.c:892
 msgid "Directory path"
-msgstr "Каталог"
+msgstr ""
 
 #: src/hotlist.c:973
 msgid " New hotlist group "
-msgstr " Створення ново╖ групи "
+msgstr ""
 
 #: src/hotlist.c:973
 msgid "Name of new group"
-msgstr "Назва ново╖ групи"
+msgstr ""
 
 #: src/hotlist.c:988
 #, c-format
 msgid "Label for \"%s\":"
-msgstr "Позначка до \"%s\":"
+msgstr ""
 
 #: src/hotlist.c:992
 msgid " Add to hotlist "
-msgstr " Додати до списку "
+msgstr ""
 
 #: src/hotlist.c:1029
 msgid " Remove: "
-msgstr " Видалити: "
+msgstr ""
 
 #: src/hotlist.c:1033
 msgid ""
@@ -4394,21 +4352,18 @@ msgid ""
 " Group not empty.\n"
 " Remove it?"
 msgstr ""
-"\n"
-" Група не порожня.\n"
-" Видалити ╖╖?"
 
 #: src/hotlist.c:1378
 msgid " Top level group "
-msgstr " Група верхнього р╕вня "
+msgstr ""
 
 #: src/hotlist.c:1394
 msgid "Hotlist is now kept in file ~/"
-msgstr "Список збережено у файл╕ ~/"
+msgstr ""
 
 #: src/hotlist.c:1396
 msgid "MC will load hotlist from ~/"
-msgstr "Завантажено список з ~/"
+msgstr ""
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
@@ -4416,11 +4371,11 @@ msgstr ""
 
 #: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
 msgid " Hotlist Load "
-msgstr " Завантаження списку "
+msgstr ""
 
 #: src/hotlist.c:1416 src/hotlist.c:1464
 msgid "MC was unable to write ~/"
-msgstr "Неможливо записати ~/"
+msgstr ""
 
 #: src/hotlist.c:1417
 msgid " file, your old hotlist entries were not deleted"
@@ -4483,16 +4438,16 @@ msgstr ""
 #: src/info.c:83
 #, c-format
 msgid "Midnight Commander %s"
-msgstr "Midnight Commander %s"
+msgstr ""
 
 #: src/info.c:109
 #, c-format
 msgid "File:       %s"
-msgstr "Файл:          %s"
+msgstr ""
 
 #: src/info.c:122
 msgid "Free nodes %d (%d%%) of %d"
-msgstr "В╕льно %d (%d%%) вузл╕в з %d"
+msgstr ""
 
 #: src/info.c:128
 msgid "No node information"
@@ -4500,11 +4455,11 @@ msgstr ""
 
 #: src/info.c:133
 msgid "Free space "
-msgstr "В╕льно"
+msgstr ""
 
 #: src/info.c:135
 msgid " (%d%%) of "
-msgstr " (%d%%) з "
+msgstr ""
 
 #: src/info.c:139
 msgid "No space information"
@@ -4513,117 +4468,117 @@ msgstr ""
 #: src/info.c:143
 #, c-format
 msgid "Type:      %s "
-msgstr "Тип:          %s "
+msgstr ""
 
 #: src/info.c:143
 msgid "non-local vfs"
-msgstr "не локальна ВФС"
+msgstr ""
 
 #: src/info.c:149
 #, c-format
 msgid "Device:    %s"
-msgstr "Пристр╕й:     %s"
+msgstr ""
 
 #: src/info.c:153
 #, c-format
 msgid "Filesystem: %s"
-msgstr "Файлсистема:  %s"
+msgstr ""
 
 #: src/info.c:158
 #, c-format
 msgid "Accessed:  %s"
-msgstr "Доступ:       %s"
+msgstr ""
 
 #: src/info.c:162
 #, c-format
 msgid "Modified:  %s"
-msgstr "Модиф╕ковано: %s"
+msgstr ""
 
 #: src/info.c:166
 #, c-format
 msgid "Created:   %s"
-msgstr "Створено:     %s"
+msgstr ""
 
 #: src/info.c:179
 msgid "Size:      "
-msgstr "Розм╕р:       "
+msgstr ""
 
 #: src/info.c:182
 #, c-format
 msgid " (%d blocks)"
-msgstr " (%d блок╕в)"
+msgstr ""
 
 #: src/info.c:188
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Власник:      %s/%s"
+msgstr ""
 
 #: src/info.c:193
 #, c-format
 msgid "Links:     %d"
-msgstr "Посилань:     %d"
+msgstr ""
 
 #: src/info.c:197
 #, c-format
 msgid "Mode:      %s (%04o)"
-msgstr "Права:        %s (%04o)"
+msgstr ""
 
 #: src/info.c:202
 #, c-format
 msgid "Location:  %Xh:%Xh"
-msgstr "Розм╕щення:   %Xh:%Xh"
+msgstr ""
 
 #: src/info.c:212
 msgid "File:       None"
-msgstr "Файл:          Нема╓"
+msgstr ""
 
 #: src/layout.c:159
 msgid "&Vertical"
-msgstr "&Вертикальне"
+msgstr ""
 
 #: src/layout.c:160
 msgid "&Horizontal"
-msgstr "&Горизонтальне"
+msgstr ""
 
 #: src/layout.c:170
 msgid "&Xterm hintbar"
-msgstr "Панель порад &Xterm"
+msgstr ""
 
 #: src/layout.c:171
 msgid "h&Intbar visible"
-msgstr "Панель &порад"
+msgstr ""
 
 #: src/layout.c:172
 msgid "&Keybar visible"
-msgstr "Панель &клав╕ш"
+msgstr ""
 
 #: src/layout.c:173
 msgid "command &Prompt"
-msgstr "Рядок &вводу команд"
+msgstr ""
 
 #: src/layout.c:174
 msgid "show &Mini status"
-msgstr "Рядок &стану"
+msgstr ""
 
 #: src/layout.c:175
 msgid "menu&Bar visible"
-msgstr "Панель &меню"
+msgstr ""
 
 #: src/layout.c:176
 msgid "&Equal split"
-msgstr "&Р╕вне розд╕лення"
+msgstr ""
 
 #: src/layout.c:177
 msgid "pe&Rmissions"
-msgstr "&Права доступу"
+msgstr ""
 
 #: src/layout.c:178
 msgid "&File types"
-msgstr "&Типи файл╕в"
+msgstr ""
 
 #: src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
 msgid "&Save"
-msgstr "&Зберегти"
+msgstr ""
 
 #. length of line with '<' '>' buttons
 #: src/layout.c:380
@@ -4632,31 +4587,31 @@ msgstr " Схема розташування "
 
 #: src/layout.c:381
 msgid " Panel split "
-msgstr " Розд╕лення панелей "
+msgstr ""
 
 #: src/layout.c:382
 msgid " Highlight... "
-msgstr " П╕дсв╕тка "
+msgstr ""
 
 #: src/layout.c:383 src/option.c:156
 msgid " Other options "
-msgstr " ╤нш╕ параметри "
+msgstr ""
 
 #: src/layout.c:384
 msgid "output lines"
-msgstr "рядк╕в виводу"
+msgstr ""
 
 #: src/layout.c:451
 msgid "Layout"
-msgstr "Схема розташування"
+msgstr ""
 
 #: src/learn.c:74
 msgid " Learn keys "
-msgstr " Розп╕знавання клав╕ш "
+msgstr ""
 
 #: src/learn.c:93
 msgid " Teach me a key "
-msgstr " Розп╕знавання клав╕ш╕ "
+msgstr ""
 
 #: src/learn.c:94
 #, c-format
@@ -4670,63 +4625,51 @@ msgid ""
 "If you want to escape, press a single Escape key\n"
 "and wait as well."
 msgstr ""
-"Будь ласка натисн╕ть клавишу %s\n"
-"╕ почекайте, доки це пов╕домлення не зникне.\n"
-"\n"
-"Пот╕м натисн╕ть ╖╖ ще раз, щоб пересв╕дчитись,\n"
-"що справа в╕д ╖╖ назви з'явилась позначка √.\n"
-"\n"
-"Якщо ви хочете припинити розп╕знавання, натисн╕ть\n"
-"клавишу Esc ╕ теж тр╕шки почекайте."
 
 #: src/learn.c:122
 msgid " Cannot accept this key "
-msgstr " Неможливо прийняти цю клав╕шу "
+msgstr ""
 
 #: src/learn.c:123
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Ви ввели \"%s\""
+msgstr ""
 
 #: src/learn.c:170
 msgid "OK"
-msgstr "√"
+msgstr ""
 
 #: src/learn.c:177
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
 msgstr ""
-"Схоже, що ус╕ ваш╕ клав╕ш╕ тепер\n"
-"працюють нормально. Це чудово."
 
 #: src/learn.c:179
 msgid "&Discard"
-msgstr "&В╕дмова"
+msgstr ""
 
 #: src/learn.c:183
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
 msgstr ""
-"Чудово! У вас ╓ повна база опис╕в терм╕нал╕в!\n"
-"Вс╕ ваш╕ клав╕ш╕ працюють добре."
 
 #: src/learn.c:267
 msgid "Learn keys"
-msgstr "Розп╕знавання клав╕ш"
+msgstr ""
 
 #: src/learn.c:300
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Натисн╕ть вс╕ перерахован╕ вище клав╕ш╕. Посля натиснень знайд╕ть,"
+msgstr ""
 
 #: src/learn.c:302
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "т╕, що не мають позначки √. Для розп╕знавання клав╕ш╕"
+msgstr ""
 
 #: src/learn.c:304
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "вибер╕ть ╖╖ за допомогою Tab чи мишою ╕ натисн╕ть пропуск."
+msgstr ""
 
 #: src/main.c:707
 msgid ""
@@ -4735,18 +4678,14 @@ msgid ""
 " deleted your working directory, or given yourself \n"
 " extra access permissions with the \"su\" command? "
 msgstr ""
-" Неможливо перейти в каталог, про який пов╕домив \n"
-" ╕нтерпретатор команд. Може, ви видалили робочий \n"
-" каталог чи дали соб╕ додатков╕ права доступу за \n"
-" допомогою команди \"su\"? "
 
 #: src/main.c:782
 msgid "Press any key to continue..."
-msgstr "Для продовження натисн╕ть будь-яку клав╕шу..."
+msgstr ""
 
 #: src/main.c:832
 msgid " The shell is already running a command "
-msgstr " ╤нтерпретатор вже викону╓ команду "
+msgstr ""
 
 #: src/main.c:859 src/screen.c:2115 src/screen.c:2163
 msgid " The Midnight Commander "
@@ -4758,143 +4697,143 @@ msgstr " Ви справд╕ хочете вийти з Midnight Commander? "
 
 #: src/main.c:1240 src/main.c:1264
 msgid "&Listing mode..."
-msgstr "Параметри &списку..."
+msgstr ""
 
 #: src/main.c:1241 src/main.c:1265
 msgid "&Quick view     C-x q"
-msgstr "&Швидкий перегляд  C-x q"
+msgstr ""
 
 #: src/main.c:1242 src/main.c:1266
 msgid "&Info           C-x i"
-msgstr "&╤нформац╕я        C-x i"
+msgstr ""
 
 #: src/main.c:1245 src/main.c:1269
 msgid "&Sort order..."
-msgstr "Параметри &сортування..."
+msgstr ""
 
 #: src/main.c:1247 src/main.c:1271
 msgid "&Filter..."
-msgstr "&Ф╕льтр..."
+msgstr ""
 
 #: src/main.c:1250 src/main.c:1274
 msgid "&Network link..."
-msgstr "&Мережевий зв'язок..."
+msgstr ""
 
 #: src/main.c:1251 src/main.c:1275
 msgid "FT&P link..."
-msgstr "&FTP-зв'язок..."
+msgstr ""
 
 #: src/main.c:1253 src/main.c:1277
 msgid "SM&B link..."
-msgstr "&SMB-зв'язок..."
+msgstr ""
 
 #: src/main.c:1258 src/main.c:1282
 msgid "&Drive...       M-d"
-msgstr "&Пристр╕й...         M-d"
+msgstr ""
 
 #: src/main.c:1260 src/main.c:1284
 msgid "&Rescan         C-r"
-msgstr "&Пересканувати       C-r"
+msgstr ""
 
 #: src/main.c:1288
 msgid "&User menu          F2"
-msgstr "Меню &користувача                  F2"
+msgstr ""
 
 #: src/main.c:1289
 msgid "&View               F3"
-msgstr "&Переглянути                       F3"
+msgstr ""
 
 #: src/main.c:1290
 msgid "Vie&w file...         "
-msgstr "Пере&глянути файл..."
+msgstr ""
 
 #: src/main.c:1291
 msgid "&Filtered view     M-!"
-msgstr "&Ф╕льтрований перегляд            M-!"
+msgstr ""
 
 #: src/main.c:1292
 msgid "&Edit               F4"
-msgstr "&Редагувати                        F4"
+msgstr ""
 
 #: src/main.c:1293
 msgid "&Copy               F5"
-msgstr "&Скоп╕ювати                        F5"
+msgstr ""
 
 #: src/main.c:1294
 msgid "c&Hmod           C-x c"
-msgstr "Зм╕на &прав                     C-x c"
+msgstr ""
 
 #: src/main.c:1296
 msgid "&Link            C-x l"
-msgstr "&Посилання                      C-x l"
+msgstr ""
 
 #: src/main.c:1297
 msgid "&SymLink         C-x s"
-msgstr "&Символьне посилання            C-x s"
+msgstr ""
 
 #: src/main.c:1298
 msgid "edit s&Ymlink  C-x C-s"
-msgstr "&Зм╕нити символьне посилання  C-x C-s"
+msgstr ""
 
 #: src/main.c:1299
 msgid "ch&Own           C-x o"
-msgstr "Зм╕нити власника               C-x o"
+msgstr ""
 
 #: src/main.c:1300
 msgid "&Advanced chown       "
-msgstr "&Розширена зм╕на власника"
+msgstr ""
 
 #: src/main.c:1302
 msgid "&Rename/Move        F6"
-msgstr "&Перейменувати/Перенести           F6"
+msgstr ""
 
 #: src/main.c:1303
 msgid "&Mkdir              F7"
-msgstr "&Створити калог                    F7"
+msgstr ""
 
 #: src/main.c:1304
 msgid "&Delete             F8"
-msgstr "&Видалити                          F8"
+msgstr ""
 
 #: src/main.c:1305
 msgid "&Quick cd          M-c"
-msgstr "&Швидка зм╕на калогу              M-c"
+msgstr ""
 
 #: src/main.c:1307
 msgid "select &Group      M-+"
-msgstr "Вибрати &групу                    M-+"
+msgstr ""
 
 #: src/main.c:1308
 msgid "u&Nselect group    M-\\"
-msgstr "&Зняти виб╕р з групи              M-\\"
+msgstr ""
 
 #: src/main.c:1309
 msgid "reverse selec&Tion M-*"
-msgstr "&╤нвертувати виб╕р                M-*"
+msgstr ""
 
 #: src/main.c:1311
 msgid "e&Xit              F10"
-msgstr "Завершити                        F10"
+msgstr ""
 
 #: src/main.c:1321
 msgid "&Directory tree"
-msgstr "&Дерево каталог╕в"
+msgstr ""
 
 #: src/main.c:1323
 msgid "&Find file            M-?"
-msgstr "&Шукати файл          M-?"
+msgstr ""
 
 #: src/main.c:1324
 msgid "s&Wap panels          C-u"
-msgstr "&Обм╕няти панел╕      C-u"
+msgstr ""
 
 #: src/main.c:1325
 msgid "switch &Panels on/off C-o"
-msgstr "Ввмк/вимк &панел╕     C-o"
+msgstr ""
 
 #: src/main.c:1326
 msgid "&Compare directories  C-x d"
-msgstr "&Пор╕вняти каталоги   C-x d"
+msgstr ""
 
 #: src/main.c:1327
 msgid "e&Xternal panelize    C-x !"
@@ -4902,31 +4841,31 @@ msgstr ""
 
 #: src/main.c:1328
 msgid "show directory s&Izes"
-msgstr "Показати &розм╕ри каталог╕в"
+msgstr ""
 
 #: src/main.c:1330
 msgid "command &History"
-msgstr "&╤стор╕я команд"
+msgstr ""
 
 #: src/main.c:1331
 msgid "di&Rectory hotlist    C-\\"
-msgstr "&П╕дручн╕ каталоги    C-\\"
+msgstr ""
 
 #: src/main.c:1333
 msgid "&Active VFS list      C-x a"
-msgstr "Список активних &ВФС  C-x a"
+msgstr ""
 
 #: src/main.c:1334
 msgid "Fr&ee VFSs now"
-msgstr "З&в╕льнити ВФС"
+msgstr ""
 
 #: src/main.c:1337
 msgid "&Background jobs      C-x j"
-msgstr "Завдання на &тл╕      C-x j"
+msgstr ""
 
 #: src/main.c:1341
 msgid "&Undelete files (ext2fs only)"
-msgstr "&В╕дновлення файл╕в (лише ext2fs)"
+msgstr ""
 
 #: src/main.c:1344
 msgid "&Listing format edit"
@@ -4934,11 +4873,11 @@ msgstr ""
 
 #: src/main.c:1346
 msgid "&Extension file edit"
-msgstr "Редагувати файл &розширень"
+msgstr ""
 
 #: src/main.c:1347
 msgid "&Menu file edit"
-msgstr "Редагувати файл &меню"
+msgstr ""
 
 #: src/main.c:1352
 msgid "&Configuration..."
@@ -4946,55 +4885,55 @@ msgstr "&Конф╕гурац╕я..."
 
 #: src/main.c:1354
 msgid "c&Onfirmation..."
-msgstr "&П╕дтвердження..."
+msgstr ""
 
 #: src/main.c:1355
 msgid "&Display bits..."
-msgstr "&В╕дображення б╕т╕в..."
+msgstr ""
 
 #: src/main.c:1357
 msgid "learn &Keys..."
-msgstr "Розп╕знавання &клав╕ш..."
+msgstr ""
 
 #: src/main.c:1360
 msgid "&Virtual FS..."
-msgstr "&В╕ртуальна файлова система..."
+msgstr ""
 
 #: src/main.c:1363
 msgid "&Save setup"
-msgstr "&Зберегти установки"
+msgstr ""
 
 #: src/main.c:1379 src/main.c:1381
 msgid " &Left "
-msgstr " &Л╕ва "
+msgstr ""
 
 #: src/main.c:1381
 msgid " &Above "
-msgstr " &Верхня "
+msgstr ""
 
 #: src/main.c:1384
 msgid " &File "
-msgstr " &Файл "
+msgstr ""
 
 #: src/main.c:1385
 msgid " &Command "
-msgstr " &Команди "
+msgstr ""
 
 #: src/main.c:1386
 msgid " &Options "
-msgstr " &Параметри "
+msgstr ""
 
 #: src/main.c:1388 src/main.c:1390
 msgid " &Right "
-msgstr " &Права "
+msgstr ""
 
 #: src/main.c:1390
 msgid " &Below "
-msgstr " &Нижня "
+msgstr ""
 
 #: src/main.c:1445
 msgid " Information "
-msgstr " ╤нформац╕я "
+msgstr ""
 
 #: src/main.c:1446
 msgid ""
@@ -5006,7 +4945,7 @@ msgstr ""
 
 #: src/main.c:1925
 msgid "Thank you for using GNU Midnight Commander"
-msgstr "Дяку╓мо вам за використання GNU Midnight Commander"
+msgstr ""
 
 #: src/main.c:2284
 #, c-format
@@ -5019,7 +4958,7 @@ msgstr ""
 
 #: src/main.c:2381
 msgid "The TERM environment variable is unset!\n"
-msgstr "Зм╕нну середовища TERM не встановлено!\n"
+msgstr ""
 
 #: src/main.c:2592
 #, c-format
@@ -5030,7 +4969,6 @@ msgstr ""
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"Параметр -m застар╕в. Подив╕ться у В╕дображення б╕т╕в... в меню Параметри\n"
 
 #: src/main.c:2683
 msgid "Use to debug the background code"
@@ -5038,19 +4976,19 @@ msgstr ""
 
 #: src/main.c:2689
 msgid "Request to run in color mode"
-msgstr "Вимога на виконання в кольоровому режим╕"
+msgstr ""
 
 #: src/main.c:2691
 msgid "Specifies a color configuration"
-msgstr "Визнача╓ кольорову конф╕гурац╕ю"
+msgstr ""
 
 #: src/main.c:2696
 msgid "Edits one file"
-msgstr "Редагу╓ один файл"
+msgstr ""
 
 #: src/main.c:2700
 msgid "Displays this help message"
-msgstr "Показу╓ це дов╕дкове пов╕домлення"
+msgstr ""
 
 #: src/main.c:2703
 msgid "Displays a help screen on how to change the color scheme"
@@ -5066,19 +5004,19 @@ msgstr ""
 
 #: src/main.c:2715
 msgid "Requests to run in black and white"
-msgstr "Вимога на виконання у чорноб╕лому режим╕"
+msgstr ""
 
 #: src/main.c:2717
 msgid "Disable mouse support in text version"
-msgstr "Вимкнення п╕дтримки м╕ш╕ в текстов╕й верс╕╖"
+msgstr ""
 
 #: src/main.c:2720
 msgid "Disables subshell support"
-msgstr "Вимкнення п╕дтримки п╕д╕нтерпретатора команд"
+msgstr ""
 
 #: src/main.c:2724
 msgid "Prints working directory at program exit"
-msgstr "Друку╓ робочий каталог на виход╕ з програми"
+msgstr ""
 
 #: src/main.c:2726
 msgid "Resets soft keys on HP terminals"
@@ -5086,7 +5024,7 @@ msgstr ""
 
 #: src/main.c:2728
 msgid "To run on slow terminals"
-msgstr "Для виконання на пов╕льних терм╕налах"
+msgstr ""
 
 #: src/main.c:2731
 msgid "Use stickchars to draw"
@@ -5094,19 +5032,19 @@ msgstr ""
 
 #: src/main.c:2735
 msgid "Enables subshell support (default)"
-msgstr "Ув╕мкнення п╕дтримки п╕д╕нтерпретатора команд (типово)"
+msgstr ""
 
 #: src/main.c:2740
 msgid "Tries to use termcap instead of terminfo"
-msgstr "Спробувати використовувати termcap зам╕сть terminfo"
+msgstr ""
 
 #: src/main.c:2744
 msgid "Displays the current version"
-msgstr "Показу╓ поточну верс╕ю"
+msgstr ""
 
 #: src/main.c:2746
 msgid "Launches the file viewer on a file"
-msgstr "Запуска╓ переглядач на файл"
+msgstr ""
 
 #: src/main.c:2748
 msgid "Forces xterm features"
@@ -5114,11 +5052,11 @@ msgstr ""
 
 #: src/main.c:2750
 msgid "Geometry for the window"
-msgstr "Геометр╕я в╕кна"
+msgstr ""
 
 #: src/main.c:2750
 msgid "GEOMETRY"
-msgstr "ГЕОМЕТР╤Я"
+msgstr ""
 
 #: src/main.c:2751
 msgid "No windows opened at startup"
@@ -5147,7 +5085,7 @@ msgstr ""
 
 #: src/option.c:74
 msgid "safe de&Lete"
-msgstr "Безпечне &видалення"
+msgstr ""
 
 #: src/option.c:75
 msgid "cd follows lin&Ks"
@@ -5163,11 +5101,11 @@ msgstr ""
 
 #: src/option.c:79
 msgid "Animation"
-msgstr "Ан╕мац╕я"
+msgstr ""
 
 #: src/option.c:81
 msgid "rotatin&G dash"
-msgstr "&Обертовий ╕ндикатор"
+msgstr ""
 
 #: src/option.c:83
 msgid "co&Mplete: show all"
@@ -5187,7 +5125,7 @@ msgstr ""
 
 #: src/option.c:87
 msgid "&Auto save setup"
-msgstr "&Автоматичне збер╕гання установок"
+msgstr ""
 
 #: src/option.c:88
 msgid "shell &Patterns"
@@ -5203,56 +5141,56 @@ msgstr ""
 
 #: src/option.c:91
 msgid "&Fast dir reload"
-msgstr "&Швидке перевантаження каталог╕в"
+msgstr ""
 
 #: src/option.c:92
 msgid "mi&X all files"
-msgstr "&Сум╕ш ус╕х файл╕в"
+msgstr ""
 
 #: src/option.c:93
 msgid "&Drop down menus"
-msgstr "Випадаючи &меню"
+msgstr ""
 
 #: src/option.c:94
 msgid "ma&Rk moves down"
-msgstr "Виб╕р пересува╓ться &вниз"
+msgstr ""
 
 #: src/option.c:95
 msgid "show &Hidden files"
-msgstr "Показати &прихован╕ файли"
+msgstr ""
 
 #: src/option.c:96
 msgid "show &Backup files"
-msgstr "Показати &резервн╕ коп╕╖"
+msgstr ""
 
 #: src/option.c:103
 msgid "&Never"
-msgstr "&Н╕коли"
+msgstr ""
 
 #: src/option.c:104
 msgid "on dumb &Terminals"
-msgstr "на &простих терм╕налах"
+msgstr ""
 
 #: src/option.c:105
 msgid "alwa&Ys"
-msgstr "&Завжди"
+msgstr ""
 
 #. Similar code is in layout.c (init_layout())
 #: src/option.c:153
 msgid " Configure options "
-msgstr " Параметри конф╕гурац╕╖ "
+msgstr ""
 
 #: src/option.c:154
 msgid " Panel options "
-msgstr " Параметри панел╕ "
+msgstr ""
 
 #: src/option.c:155
 msgid " Pause after run... "
-msgstr " Пауза п╕сля виконання "
+msgstr ""
 
 #: src/option.c:207
 msgid "Configure options"
-msgstr "Параметри конф╕гурац╕╖"
+msgstr ""
 
 #: src/panelize.c:87
 msgid "&Add new"
@@ -5268,7 +5206,7 @@ msgstr ""
 
 #: src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
 msgid "Other command"
-msgstr "╤нша команда"
+msgstr ""
 
 #: src/panelize.c:260
 msgid " Add to external panelize "
@@ -5292,7 +5230,7 @@ msgstr ""
 
 #: src/panelize.c:403
 msgid "Cannot invoke command."
-msgstr "Неможливо викликати команду."
+msgstr ""
 
 #: src/panelize.c:458
 msgid "Pipe close failed"
@@ -5300,27 +5238,27 @@ msgstr ""
 
 #: src/popthelp.c:31
 msgid "Show this help message"
-msgstr "Показати це дов╕дкове пов╕домлення"
+msgstr ""
 
 #: src/popthelp.c:32
 msgid "Display brief usage message"
-msgstr "Показати коротку дов╕дку про використання"
+msgstr ""
 
 #: src/screen.c:417
 msgid "MTime"
-msgstr "ЧасМ"
+msgstr ""
 
 #: src/screen.c:418
 msgid "ATime"
-msgstr "ЧасД"
+msgstr ""
 
 #: src/screen.c:419
 msgid "CTime"
-msgstr "ЧасС"
+msgstr ""
 
 #: src/screen.c:421
 msgid "Perm"
-msgstr "Права"
+msgstr ""
 
 #: src/screen.c:422
 msgid "Nl"
@@ -5328,20 +5266,20 @@ msgstr ""
 
 #: src/screen.c:423
 msgid "Inode"
-msgstr "I-вузол"
+msgstr ""
 
 #: src/screen.c:424
 msgid "UID"
-msgstr "UID"
+msgstr ""
 
 #: src/screen.c:425
 msgid "GID"
-msgstr "GID"
+msgstr ""
 
 #: src/screen.c:661
 #, c-format
 msgid "  %s bytes in %d file%s"
-msgstr "  %s байт╕в в %d файл╕%s"
+msgstr ""
 
 #: src/screen.c:1325
 msgid "Unknow tag on display format: "
@@ -5353,7 +5291,7 @@ msgstr ""
 
 #: src/screen.c:2116 src/screen.c:2164
 msgid " Do you really want to execute? "
-msgstr " Ви справд╕ хочете виконати? "
+msgstr ""
 
 #: src/screen.c:2129 src/screen.c:2179
 msgid " No action taken "
@@ -5361,11 +5299,11 @@ msgstr ""
 
 #: src/screen.c:2400 src/screen.c:2430 src/tree.c:1016
 msgid "RenMov"
-msgstr "Перен"
+msgstr ""
 
 #: src/screen.c:2401 src/screen.c:2431 src/tree.c:1020
 msgid "Mkdir"
-msgstr "СтвКат"
+msgstr ""
 
 #: src/screen.c:2417
 #, c-format
@@ -5373,25 +5311,23 @@ msgid ""
 " Can't chdir to %s \n"
 " %s "
 msgstr ""
-" Неможливо перейти в каталог %s \n"
-" %s "
 
 #: src/subshell.c:287
 #, c-format
 msgid "Couldn't open named pipe %s\n"
-msgstr "Неможливо в╕дкрити ╕менований канал %s\n"
+msgstr ""
 
 #: src/subshell.c:705
 msgid " The shell is still active. Quit anyway? "
-msgstr " ╤нтерпретатор залиша╓ться активним. Все-таки вийти? "
+msgstr ""
 
 #: src/subshell.c:731
 msgid " There are stopped jobs."
-msgstr " ╢ зупинен╕ завдання. "
+msgstr ""
 
 #: src/subshell.c:732
 msgid " Quit anyway? "
-msgstr " Все-таки вийти? "
+msgstr ""
 
 #: src/subshell.c:785
 #, c-format
@@ -5404,8 +5340,6 @@ msgid ""
 "Can't open the %s file for writing:\n"
 "%s\n"
 msgstr ""
-"Неможливо в╕дкрити файл %s для записування:\n"
-"%s\n"
 
 #: src/tree.c:637
 #, c-format
@@ -5447,8 +5381,6 @@ msgid ""
 " Can't chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" Неможливо зм╕нити каталог на \"%s\" \n"
-" %s "
 
 #: src/tree.c:1012
 msgid "Forget"
@@ -5464,8 +5396,6 @@ msgid ""
 "Can't write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Неможливо записати у файл %s:\n"
-"%s\n"
 
 #: src/user.c:250
 #, c-format
@@ -5474,11 +5404,11 @@ msgstr ""
 
 #: src/user.c:383
 msgid " Debug "
-msgstr " Налагодження "
+msgstr ""
 
 #: src/user.c:392
 msgid " ERROR: "
-msgstr " ПОМИЛКА: "
+msgstr ""
 
 #: src/user.c:396
 msgid " True:  "
@@ -5490,7 +5420,7 @@ msgstr ""
 
 #: src/user.c:602
 msgid " Warning -- ignoring file "
-msgstr " Попередження -- ╕гнорування файлу "
+msgstr ""
 
 #: src/user.c:603
 #, c-format
@@ -5521,12 +5451,12 @@ msgstr ""
 #. strftime() format string for recent dates
 #: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
-msgstr "%b %e %H:%M"
+msgstr ""
 
 #. strftime() format string for old dates
 #: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
-msgstr "%b %e  %Y"
+msgstr ""
 
 #: src/utilunix.c:390
 msgid " Pipe failed "
@@ -5566,15 +5496,15 @@ msgstr ""
 
 #: src/view.c:455
 msgid " Empty output from child filter "
-msgstr " Пустий вив╕д з ф╕льтру "
+msgstr ""
 
 #: src/view.c:460
 msgid " Could not open file "
-msgstr " Неможливо в╕дкрити файл "
+msgstr ""
 
 #: src/view.c:475
 msgid " Can't open file \""
-msgstr " Неможливо в╕дкрити файл \""
+msgstr ""
 
 #: src/view.c:482
 msgid ""
@@ -5584,7 +5514,7 @@ msgstr ""
 
 #: src/view.c:488
 msgid " Can't view: not a regular file "
-msgstr " Неможливо показати: не звичайний файл "
+msgstr ""
 
 #: src/view.c:569
 #, c-format
@@ -5592,8 +5522,6 @@ msgid ""
 " Can't open \"%s\"\n"
 " %s "
 msgstr ""
-" Неможливо в╕дкрити \"%s\"\n"
-" %s "
 
 #: src/view.c:578
 #, c-format
@@ -5610,7 +5538,7 @@ msgstr "Файл: %s"
 #: src/view.c:728
 #, c-format
 msgid "Offset 0x%08x"
-msgstr "Зм╕щення 0x%08x"
+msgstr ""
 
 #: src/view.c:739
 msgid "  [grow]"
@@ -5623,11 +5551,11 @@ msgstr "Пошук \"%s\""
 
 #: src/view.c:1625 src/view.c:1748
 msgid " Search string not found "
-msgstr " Рядок незнайдено "
+msgstr ""
 
 #: src/view.c:1787
 msgid " Invalid regular expression "
-msgstr " Нев╕рний регулярний вираз "
+msgstr ""
 
 #: src/view.c:1911
 #, c-format
@@ -5635,8 +5563,6 @@ msgid ""
 " The current line number is %d.\n"
 " Enter the new line number:"
 msgstr ""
-" Поточний номер рядка - %d.\n"
-" Введ╕ть новий номер рядка:"
 
 #: src/view.c:1933
 #, c-format
@@ -5644,20 +5570,18 @@ msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
-" Поточне зм╕щення - 0x%lx.\n"
-" Введ╕ть нове зм╕щення:"
 
 #: src/view.c:1935
 msgid " Goto Address "
-msgstr " Перех╕д за адресою "
+msgstr ""
 
 #: src/view.c:1966
 msgid " Enter regexp:"
-msgstr " Введ╕ть регулярний вираз:"
+msgstr ""
 
 #: src/view.c:2071
 msgid "Ascii"
-msgstr "Ascii"
+msgstr ""
 
 #: src/view.c:2071
 msgid "Hex"
@@ -5665,11 +5589,11 @@ msgstr ""
 
 #: src/view.c:2072
 msgid "Goto"
-msgstr "Перейти"
+msgstr ""
 
 #: src/view.c:2072
 msgid "Line"
-msgstr "Рядок"
+msgstr ""
 
 #: src/view.c:2075
 msgid "RxSrch"
@@ -5713,202 +5637,202 @@ msgstr ""
 
 #: src/widget.c:999
 msgid " History "
-msgstr " ╤стор╕я "
+msgstr ""
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:224
 msgid "Function key 1"
-msgstr "F1"
+msgstr "Клав╕ша F1"
 
 #: src/win.c:225
 msgid "Function key 2"
-msgstr "F2"
+msgstr "Клав╕ша F2"
 
 #: src/win.c:226
 msgid "Function key 3"
-msgstr "F3"
+msgstr "Клав╕ша F3"
 
 #: src/win.c:227
 msgid "Function key 4"
-msgstr "F4"
+msgstr "Клав╕ша F4"
 
 #: src/win.c:228
 msgid "Function key 5"
-msgstr "F5"
+msgstr "Клав╕ша F5"
 
 #: src/win.c:229
 msgid "Function key 6"
-msgstr "F6"
+msgstr "Клав╕ша F6"
 
 #: src/win.c:230
 msgid "Function key 7"
-msgstr "F7"
+msgstr "Клав╕ша F7"
 
 #: src/win.c:231
 msgid "Function key 8"
-msgstr "F8"
+msgstr "Клав╕ша F8"
 
 #: src/win.c:232
 msgid "Function key 9"
-msgstr "F9"
+msgstr "Клав╕ша F9"
 
 #: src/win.c:233
 msgid "Function key 10"
-msgstr "F10"
+msgstr "Клав╕ша F10"
 
 #: src/win.c:234
 msgid "Function key 11"
-msgstr "F11"
+msgstr "Клав╕ша F11"
 
 #: src/win.c:235
 msgid "Function key 12"
-msgstr "F12"
+msgstr "Клав╕ша F12"
 
 #: src/win.c:236
 msgid "Function key 13"
-msgstr "F13"
+msgstr "Клав╕ша F13"
 
 #: src/win.c:237
 msgid "Function key 14"
-msgstr "F14"
+msgstr "Клав╕ша F14"
 
 #: src/win.c:238
 msgid "Function key 15"
-msgstr "F15"
+msgstr "Клав╕ша F15"
 
 #: src/win.c:239
 msgid "Function key 16"
-msgstr "F16"
+msgstr "Клав╕ша F16"
 
 #: src/win.c:240
 msgid "Function key 17"
-msgstr "F17"
+msgstr "Клав╕ша F17"
 
 #: src/win.c:241
 msgid "Function key 18"
-msgstr "F18"
+msgstr "Клав╕ша F18"
 
 #: src/win.c:242
 msgid "Function key 19"
-msgstr "F19"
+msgstr "Клав╕ша F19"
 
 #: src/win.c:243
 msgid "Function key 20"
-msgstr "F20"
+msgstr "Клав╕ша F20"
 
 #: src/win.c:244
 msgid "Backspace key"
-msgstr "Backspace"
+msgstr "Клав╕ша Backspace"
 
 #: src/win.c:245
 msgid "End key"
-msgstr "End"
+msgstr "Клав╕ша End"
 
 #: src/win.c:246
 msgid "Up arrow key"
-msgstr "Стр╕лка вверх"
+msgstr ""
 
 #: src/win.c:247
 msgid "Down arrow key"
-msgstr "Стр╕лка вниз"
+msgstr ""
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr "Стр╕лка вл╕во"
+msgstr ""
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr "Стр╕лка вправо"
+msgstr ""
 
 #: src/win.c:250
 msgid "Home key"
-msgstr "Home"
+msgstr ""
 
 #: src/win.c:251
 msgid "Page Down key"
-msgstr "Page Down"
+msgstr ""
 
 #: src/win.c:252
 msgid "Page Up key"
-msgstr "Page Up"
+msgstr ""
 
 #: src/win.c:253
 msgid "Insert key"
-msgstr "Insert"
+msgstr ""
 
 #: src/win.c:254
 msgid "Delete key"
-msgstr "Delete"
+msgstr ""
 
 #: src/win.c:255
 msgid "Completion/M-tab"
-msgstr "Completion/M-tab"
+msgstr ""
 
 #: src/win.c:256
 msgid "+ on keypad"
-msgstr "Додаткова +"
+msgstr ""
 
 #: src/win.c:257
 msgid "- on keypad"
-msgstr "Додаткова -"
+msgstr ""
 
 #: src/win.c:258
 msgid "* on keypad"
-msgstr "Додаткова *"
+msgstr ""
 
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:260
 msgid "Left arrow keypad"
-msgstr "Додаткова Стр╕лка вл╕во"
+msgstr ""
 
 #: src/win.c:261
 msgid "Right arrow keypad"
-msgstr "Додаткова Стр╕лка вправо"
+msgstr ""
 
 #: src/win.c:262
 msgid "Up arrow keypad"
-msgstr "Додаткова Стр╕лка вверх"
+msgstr ""
 
 #: src/win.c:263
 msgid "Down arrow keypad"
-msgstr "Додаткова Стр╕лка вниз"
+msgstr ""
 
 #: src/win.c:264
 msgid "Home on keypad"
-msgstr "Додаткова Home"
+msgstr ""
 
 #: src/win.c:265
 msgid "End on keypad"
-msgstr "Додаткова End"
+msgstr ""
 
 #: src/win.c:266
 msgid "Page Down keypad"
-msgstr "Додаткова Page Down"
+msgstr ""
 
 #: src/win.c:267
 msgid "Page Up keypad"
-msgstr "Додаткова Page Up"
+msgstr ""
 
 #: src/win.c:268
 msgid "Insert on keypad"
-msgstr "Додаткова Insert"
+msgstr ""
 
 #: src/win.c:269
 msgid "Delete on keypad"
-msgstr "Додаткова Delete"
+msgstr ""
 
 #: src/win.c:270
 msgid "Enter on keypad"
-msgstr "Додаткова Enter"
+msgstr ""
 
 #: src/win.c:271
 msgid "Slash on keypad"
-msgstr "Додаткова /"
+msgstr ""
 
 #: src/win.c:272
 msgid "NumLock on keypad"
-msgstr "NumLock"
+msgstr ""
 
 #: vfs/extfs.c:268
 #, c-format
@@ -5916,8 +5840,6 @@ msgid ""
 "Couldn't open %s archive\n"
 "%s"
 msgstr ""
-"Неможливо в╕дкрити арх╕в %s\n"
-"%s"
 
 #: vfs/extfs.c:300 vfs/extfs.c:320
 msgid "Inconsistent extfs archive"
@@ -5926,7 +5848,7 @@ msgstr ""
 #: vfs/fish.c:136
 #, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "fish: Розрив з'╓днання з %s"
+msgstr ""
 
 #: vfs/fish.c:214
 msgid "fish: Waiting for initial line..."
@@ -5960,7 +5882,7 @@ msgstr ""
 #: vfs/fish.c:330
 #, c-format
 msgid "fish: Reading directory %s..."
-msgstr "fish: Зчитування каталогу %s..."
+msgstr ""
 
 #: vfs/fish.c:426
 msgid "fish: failed"
@@ -5979,7 +5901,7 @@ msgstr ""
 #: vfs/fish.c:472
 #, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr "fish: збереження %s %d (%d)"
+msgstr ""
 
 #: vfs/fish.c:512
 msgid "Aborting transfer..."
@@ -5996,7 +5918,7 @@ msgstr ""
 #: vfs/ftpfs.c:328
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
-msgstr "ftpfs: В╕д'╓днання в╕д %s"
+msgstr ""
 
 #: vfs/ftpfs.c:379
 msgid " FTP: Password required for "
@@ -6021,11 +5943,11 @@ msgstr ""
 #: vfs/ftpfs.c:449
 #, c-format
 msgid "ftpfs: connected to %s"
-msgstr "ftpfs: з'╓днано з %s"
+msgstr ""
 
 #: vfs/ftpfs.c:466
 msgid "ftpfs: sending login name"
-msgstr "ftpfs: sending login name"
+msgstr ""
 
 #: vfs/ftpfs.c:471
 msgid "ftpfs: sending user password"
@@ -6047,20 +5969,20 @@ msgstr ""
 
 #: vfs/ftpfs.c:652
 msgid "ftpfs: Invalid host name."
-msgstr "ftpfs: Нев╕рна назва хоста."
+msgstr ""
 
 #: vfs/ftpfs.c:672
 msgid "ftpfs: Invalid host address."
-msgstr "ftpfs: Нев╕рна адреса хоста."
+msgstr ""
 
 #: vfs/ftpfs.c:697
 #, c-format
 msgid "ftpfs: making connection to %s"
-msgstr "ftpfs: створення з'╓днання з %s"
+msgstr ""
 
 #: vfs/ftpfs.c:707
 msgid "ftpfs: connection interrupted by user"
-msgstr "ftpfs: з'╓днання перервано користувачем"
+msgstr ""
 
 #: vfs/ftpfs.c:709
 #, c-format
@@ -6070,7 +5992,7 @@ msgstr ""
 #: vfs/ftpfs.c:793
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Оч╕кування в╕дпов╕д╕... %d (Control-C - в╕дмова)"
+msgstr ""
 
 #: vfs/ftpfs.c:987
 msgid "ftpfs: could not setup passive mode for source routing"
@@ -6113,7 +6035,7 @@ msgstr ""
 #: vfs/ftpfs.c:1340
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
-msgstr "ftpfs: Зчитування FTP-каталогу %s..."
+msgstr ""
 
 #: vfs/ftpfs.c:1356
 msgid "ftpfs: FAIL"
@@ -6121,7 +6043,7 @@ msgstr ""
 
 #: vfs/ftpfs.c:1447
 msgid "ftpfs: reading FTP directory interrupt by user"
-msgstr "ftpfs: зчитування каталогу FTP перервано користувачем"
+msgstr ""
 
 #: vfs/ftpfs.c:1477
 msgid "ftpfs: got listing"
@@ -6138,7 +6060,7 @@ msgstr ""
 #: vfs/ftpfs.c:1598
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
-msgstr "ftpfs: збереження файлу %d (%d)"
+msgstr ""
 
 #: vfs/ftpfs.c:2037 vfs/ftpfs.c:2052
 msgid ""
@@ -6148,11 +6070,11 @@ msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " MCFS "
-msgstr " MCFS "
+msgstr ""
 
 #: vfs/mcfs.c:154
 msgid " The server does not support this version "
-msgstr " Сервер не п╕дтриму╓ цю верс╕ю "
+msgstr ""
 
 #: vfs/mcfs.c:171
 msgid ""
@@ -6175,7 +6097,7 @@ msgstr ""
 
 #: vfs/mcfs.c:188
 msgid " MCFS Password required "
-msgstr " Необх╕дний пароль MCFS "
+msgstr ""
 
 #: vfs/mcfs.c:202
 msgid " Invalid password "
@@ -6183,11 +6105,11 @@ msgstr " Нев╕рний пароль "
 
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
-msgstr " Надто багато в╕дкритих з'╓днань "
+msgstr ""
 
 #: vfs/smbfs.c:115
 msgid "Domain:"
-msgstr "Домен:"
+msgstr ""
 
 #: vfs/smbfs.c:115
 msgid "Username:"
@@ -6212,22 +6134,22 @@ msgstr ""
 #: vfs/smbfs.c:1737
 #, c-format
 msgid " %s mkdir'ing %s "
-msgstr " %s створення каталогу %s "
+msgstr ""
 
 #: vfs/smbfs.c:1758
 #, c-format
 msgid " %s rmdir'ing %s "
-msgstr " %s видалення каталогу %s "
+msgstr ""
 
 #: vfs/smbfs.c:1867 vfs/smbfs.c:1887 vfs/smbfs.c:1948
 #, c-format
 msgid " %s opening remote file %s "
-msgstr " %s в╕дкриття в╕ддаленого файлу %s "
+msgstr ""
 
 #: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s перейменування файл╕в\n"
+msgstr ""
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
@@ -6259,9 +6181,9 @@ msgstr ""
 
 #: vfs/vfs.c:1824
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
-msgstr "%s: %s: %s %3d%% (%ld байт перенесено)"
+msgstr ""
 
 #: vfs/vfs.c:1825
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
-msgstr "%s: %s: %s %ld байт перенесено"
+msgstr ""

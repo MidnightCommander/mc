@@ -1,3 +1,7 @@
+1999-11-25  Yuri Syrota <rasta@renome.rovno.ua>
+
+	* configure.in: added 'uk' to ALL_LINGUAS.
+
 1999-11-09  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* lib/Makefile.in (LIBFILES_CONST): Adding mc.hint.cs file on
