@@ -28,11 +28,9 @@ included with this distribution package.
 Dependencies
 ------------
 
-To compile the GNU Midnight Commander you need at least to have a copy
-of the glib library, available at ftp://ftp.gtk.org/pub/gtk/v1.2/ 
-Versions 1.2.x are recommended.  Older versions are not supported.
-Support for glib 2.0.x is experimental and has to be explicitly enabled
-(see file INSTALL).
+To compile the GNU Midnight Commander you need to have a copy of the
+glib library version 1.2.x or 2.0.x, available at
+ftp://ftp.gtk.org/pub/gtk/
 
 
 Features

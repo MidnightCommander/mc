@@ -70,10 +70,6 @@ incomplete, use `configure --help' to get the full list):
      Print the version of Autoconf used to generate the `configure'
      script, and exit.
 
-`--with-glib2'
-     Look for glib 2.0 and newer.  Otherwise, only glib 1.2.x will be
-     used.  Note that you need pkgconfig installed to use this option.
-
 `--without-edit'
      Configure GNU Midnight Commander to be compiled without the
      built-in file editor.  The built-in editor is compiled in by
@@ -302,9 +298,7 @@ get glib from
 
 ftp://ftp.gtk.org/pub/gtk/
 
-Note that only versions 1.2.x are fully supported.  Older versions won't
-even be detected.  Newer versions will be detected if `--with-glib2' is
-specified.  Support for glib 2.0 is considered experimental.
+Note that only versions 1.2.x and 2.0.x are supported.
 
 Terminal database
 -----------------

@@ -1,3 +1,7 @@
+2002-11-15  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Fully enable glib2.  Update the documentation.
+
 2002-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* lib/mc.menu: Don't use --repetitive-best option with bzip2 -

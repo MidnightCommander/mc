@@ -6,8 +6,7 @@ To compile MC from CVS, the following software is required:
 Autoconf 2.52 and above
 Automake 1.5 and above
 Gettext 0.10.38 - 0.10.40 or (preferrably) 0.11.5 and above.
-Glib 1.2.6 and above on the 1.2.x branch or 2.0.x (experimental, has to
-be explicitly enabled by `--with-glib2').
+Glib 1.2.6 and above on the 1.2.x branch or 2.0.x.
 
 It is recommended that all those tools are installed with the same
 prefix.  Make sure that the tools with the right version are first in
