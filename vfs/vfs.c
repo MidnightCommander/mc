@@ -234,6 +234,7 @@ vfs_split (char *path, char **inpath, char **op)
 	return ret;
     }
 
+
     if (slash)
 	*slash = PATH_SEP;
     ret = vfs_split (path, inpath, op);
@@ -248,11 +249,9 @@ vfs_rosplit (char *path)
     char *slash;
     vfs *ret;
 
-    if (!path)
-	vfs_die ("Can not rosplit NULL");
-    
+    g_return_val_if_fail(path, NULL);
+
     semi = strrchr (path, '#');
-    
     if (!semi || !path_magic (path))
 	return NULL;
     
@@ -262,6 +261,8 @@ vfs_rosplit (char *path)
 	*slash = 0;
     
     ret = vfs_type_from_op (semi+1);
+    if (!ret && (vfs_flags & FL_NO_LOCALHASH))
+	return &vfs_nil_ops;
 
     if (slash)
 	*slash = PATH_SEP;
@@ -280,7 +281,7 @@ vfs_type (char *path)
     vfs = vfs_rosplit(path);
 
     if (!vfs)
-        vfs = &vfs_local_ops;
+	vfs = &vfs_local_ops;
 
     return vfs;
 }
@@ -409,8 +410,10 @@ mc_open (const char *filename, int flags, ...)
     mode = va_arg (ap, int);
     va_end (ap);
     
-    if (!vfs->open)
-	vfs_die ("VFS must support open.\n");
+    if (!vfs->open) {
+	errno = -EOPNOTSUPP;
+	return -1;
+    }
 
     info = (*vfs->open) (vfs, file, flags, mode);	/* open must be supported */
     g_free (file);

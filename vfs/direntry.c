@@ -581,7 +581,6 @@ vfs_s_inode_from_path (vfs *me, char *name, int flags)
 	return NULL;
 
     return vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
-
 }
 
 struct dirhandle {
@@ -694,11 +693,18 @@ vfs_s_chdir (vfs *me, char *path)
 static int
 vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
 {
+    char *path2;
     struct vfs_s_inode *ino;
 
-    if (!(ino = vfs_s_inode_from_path (me, path, flag)))
-	return -1;
+    path2 = g_strdup(path);
+    if (!(ino = vfs_s_inode_from_path (me, path2, flag))) {
+	if (!(ino = vfs_s_inode_from_path (me, path, flag|FL_DIR))) {
+	    g_free(path2);
+	    return -1;
+	}
+    }
     *buf = ino->st;
+    g_free(path2);
     return 0;
 }
 

@@ -126,6 +126,7 @@ struct utimbuf {
 
     /* Other file systems */
     extern vfs vfs_local_ops;
+    extern vfs vfs_nil_ops;
     extern vfs vfs_tarfs_ops;
     extern vfs vfs_cpiofs_ops;
 
@@ -369,7 +370,9 @@ extern gid_t vfs_gid;
 #define FL_NO_SFS 64
 #define FL_NO_FISH 128
 
+#define FL_NO_LOCALHASH 0x20000000	/* When you never ever want vfs to work with regular files with # in name */
 #define FL_NO_CWDSETUP	0x40000000
+
 
 #ifdef VFS_STANDALONE
 extern void mc_vfs_init( void );

@@ -1,3 +1,11 @@
+2000-04-16  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c (vfs_type): FL_NO_LOCALHASH for prevention of obscure
+	deadlocks with podfuk
+
+	* direntry.c: fix behaviour when stating / directory of ftp
+	archive
+
 2000-04-15  Timur Bakeyev  <mc@bat.ru>
 
 	* ftpfs.c (netrc_next): "const char * keywords" is pretty nice.
