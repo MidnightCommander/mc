@@ -12,7 +12,7 @@
  * If you want to gunzip something, you should open it with #ugz
  * suffix, DON'T try to gunzip it yourself.
  *
- * Namespace: exports vfs_sfs_ops, shell (FIXME) */
+ * Namespace: exports vfs_sfs_ops */
 
 #include <config.h>
 #include <errno.h>
@@ -308,7 +308,6 @@ static int sfs_init (vfs *me)
     while (sfs_no < MAXFS){
 	char key[256];
 	char *c, *semi = NULL, flags = 0;
-	int i;
 
         if (!fgets (key, sizeof (key), cfg))
 	    break;
@@ -316,11 +315,11 @@ static int sfs_init (vfs *me)
 	if (*key == '#')
 	    continue;
 
-	for (i = 0; i < strlen (key); i++)
-	    if ((key[i]==':') || (key[i]=='/')){
-		semi = key+i;
-		if (key [i] == '/'){
-		    key [i] = 0;
+	for (c = key; *c; c++)
+	    if ((*c == ':') || (*c == '/')){
+		semi = c;
+		if (*c == '/'){
+		    *c = 0;
 		    flags |= F_FULLMATCH;
 		}
 		break;
