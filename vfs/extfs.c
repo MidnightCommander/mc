@@ -365,7 +365,7 @@ extfs_read_archive (int fstype, const char *name, struct archive **pparc)
 		    inode->dev = current_archive->rdev;
 		    inode->archive = current_archive;
 		    inode->mode = hstat.st_mode;
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
 		    inode->rdev = hstat.st_rdev;
 #else
 		    inode->rdev = 0;
@@ -921,14 +921,14 @@ static void extfs_stat_move( struct stat *buf, struct inode *inode )
     buf->st_nlink = inode->nlink;
     buf->st_uid = inode->uid;
     buf->st_gid = inode->gid;
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     buf->st_rdev = inode->rdev;
 #endif
     buf->st_size = inode->size;
-#ifdef HAVE_ST_BLKSIZE
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     buf->st_blksize = RECORDSIZE;
 #endif
-#ifdef HAVE_ST_BLOCKS
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     buf->st_blocks = (inode->size + RECORDSIZE - 1) / RECORDSIZE;
 #endif
     buf->st_atime = inode->atime;

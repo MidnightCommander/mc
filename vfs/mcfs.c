@@ -823,7 +823,7 @@ mcfs_get_stat_info (mcfs_connection *mc, struct stat *buf)
     buf->st_dev = 0;
 
     rpc_get (sock, RPC_INT, &mylong, RPC_END);
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     buf->st_rdev = mylong;
 #endif
     rpc_get (sock, RPC_INT, &mylong, RPC_END);
@@ -841,7 +841,7 @@ mcfs_get_stat_info (mcfs_connection *mc, struct stat *buf)
 
     if (!rpc_get (sock, RPC_INT, &mylong, RPC_END))
 	return 0;
-#ifdef HAVE_ST_BLOCKS
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     buf->st_blocks = mylong;
 #endif
     buf->st_atime = mcfs_get_time (mc);

@@ -464,7 +464,7 @@ fish_dir_load(struct vfs_class *me, struct vfs_s_inode *dir, char *remote_path)
 	              int maj, min;
 	              if (sscanf(buffer+1, "%d,%d", &maj, &min) != 2)
 			  break;
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
 		      ST.st_rdev = (maj << 8) | min;
 #endif
 	          }

@@ -167,9 +167,8 @@ AC_HEADER_DIRENT
 AC_HEADER_STDC
 
 dnl Missing structure components
-AC_STRUCT_ST_BLKSIZE
+AC_CHECK_MEMBERS([struct stat.st_blksize, struct stat.st_rdev])
 AC_STRUCT_ST_BLOCKS
-AC_STRUCT_ST_RDEV
 
 dnl
 dnl Check availability of some functions 

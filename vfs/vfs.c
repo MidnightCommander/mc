@@ -1702,7 +1702,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 	if (!is_num (++idx2) || sscanf(columns [idx2], " %d", &min) != 1)
 	    goto error;
 
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
 	s->st_rdev = ((maj & 0xff) << 8) | (min & 0xffff00ff);
 #endif
 	s->st_size = 0;
@@ -1713,7 +1713,7 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
 	    goto error;
 
 	s->st_size = (size_t) atol (columns [idx2]);
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
 	s->st_rdev = 0;
 #endif
     }
@@ -1724,10 +1724,10 @@ vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linknam
     /* Use resulting time value */
     s->st_atime = s->st_ctime = s->st_mtime;
     /* s->st_dev and s->st_ino must be initialized by vfs_s_new_inode () */
-#ifdef HAVE_ST_BLKSIZE
+#ifdef HAVE_STRUCT_STAT_ST_BLKSIZE
     s->st_blksize = 512;
 #endif
-#ifdef HAVE_ST_BLOCKS
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
     s->st_blocks = (s->st_size + 511) / 512;
 #endif
 

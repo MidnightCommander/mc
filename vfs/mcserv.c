@@ -329,13 +329,13 @@ send_stat_info (struct stat *st)
 {
     long mylong;
     int blocks =
-#ifdef HAVE_ST_BLOCKS
+#ifdef HAVE_STRUCT_STAT_ST_BLOCKS
 	st->st_blocks;
 #else
 	st->st_size / 1024;
 #endif
 
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     mylong = st->st_rdev;
 #else
     mylong = 0;

@@ -201,7 +201,7 @@ string_file_size (file_entry *fe, int len)
 	return _("UP--DIR");
     }
 
-#ifdef HAVE_ST_RDEV
+#ifdef HAVE_STRUCT_STAT_ST_RDEV
     if (S_ISBLK (fe->st.st_mode) || S_ISCHR (fe->st.st_mode))
         g_snprintf (buffer, sizeof (buffer), "%3d,%3d",
 		    (int) ((fe->st.st_rdev >> 8) & 0xff),
