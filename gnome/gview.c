@@ -329,8 +329,6 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	if (move_dir_p)
 		*move_dir_p = 0;
 
-	scrollbar = gtk_vscrollbar_new (sadj);
-	
 	/* Please note that if you add another widget,
 	 * you have to modify view_adjust_size to
 	 * be aware of it
