@@ -993,7 +993,6 @@ panel_new (char *panel_name)
     panel->searching        = 0;
     panel->dirs_marked      = 0;
     panel->is_panelized     = 0;
-    panel->has_dir_sizes    = 0;
     panel->format	    = 0;
     panel->status_format    = 0;    
     panel->format_modified  = 1;
@@ -1037,7 +1036,6 @@ panel_new (char *panel_name)
 void
 panel_reload (WPanel *panel)
 {
-    int i;
     struct stat current_stat;
 
     if (fast_reload
@@ -1069,19 +1067,7 @@ panel_reload (WPanel *panel)
     if (panel->selected >= panel->count)
         do_select (panel, panel->count-1);
 
-    panel->marked = 0;
-    panel->dirs_marked = 0;
-    panel->total  = 0;
-    panel->has_dir_sizes = 0;
-
-    for (i = 0; i < panel->count; i++)
-	if (panel->dir.list [i].f.marked){
-	    /* do_file_mark will return immediately if newmark == oldmark.
-	       So we have to first unmark it to get panel's summary information
-	       updated. (Norbert) */
-	    panel->dir.list [i].f.marked = 0;
-	    do_file_mark (panel, i, 1);
-	}
+    recalculate_panel_summary (panel);
 }
 
 #ifndef PORT_HAS_PAINT_FRAME
@@ -1893,6 +1879,27 @@ move_end (WPanel *panel)
     select_item (panel);
 }
 
+/* Recalculate the panels summary information, used e.g. when marked
+   files might have been removed by an external command */
+void
+recalculate_panel_summary (WPanel *panel)
+{
+    int i;
+
+    panel->marked = 0;
+    panel->dirs_marked = 0;
+    panel->total  = 0;
+
+    for (i = 0; i < panel->count; i++)
+	if (panel->dir.list [i].f.marked){
+	    /* do_file_mark will return immediately if newmark == oldmark.
+	       So we have to first unmark it to get panel's summary information
+	       updated. (Norbert) */
+	    panel->dir.list [i].f.marked = 0;
+	    do_file_mark (panel, i, 1);
+	}
+}
+
 /* This routine marks a file or a directory */
 void
 do_file_mark (WPanel *panel, int idx, int mark)
@@ -1907,7 +1914,7 @@ do_file_mark (WPanel *panel, int idx, int mark)
         if (panel->dir.list [idx].f.marked){
             panel->marked++;
             if (S_ISDIR (panel->dir.list [idx].buf.st_mode)) {
-		if (panel->has_dir_sizes)
+		if (panel->dir.list [idx].f.dir_size_computed)
 		    panel->total += panel->dir.list [idx].buf.st_size;
                 panel->dirs_marked++;
 	    } else 
@@ -1915,7 +1922,7 @@ do_file_mark (WPanel *panel, int idx, int mark)
             set_colors (panel);
         } else {
             if (S_ISDIR(panel->dir.list [idx].buf.st_mode)) {
-		if (panel->has_dir_sizes)
+		if (panel->dir.list [idx].f.dir_size_computed)
 		    panel->total -= panel->dir.list [idx].buf.st_size;
                 panel->dirs_marked--;
 	    } else

@@ -1,3 +1,39 @@
+Thu Dec 24 19:00:05 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* screen.c (recalculate_panel_summary): new function which recalculates
+	the summary information for the mini-status.
+
+	* screen.c (panel_reload): use recalculate_panel_summary
+
+	* screen.c (do_file_mark): Honour that dirsizes computed is now a
+	per entry flag.
+
+Thu Dec 24 18:53:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* option.c: Added Compute Totals to the configuration dialog.
+
+	* file.c (compute_dir_size): made non static
+
+	(panel_operate_flags): Don't compute directory sizes if verbose
+	operation are off.
+
+Thu Dec 24 18:42:52 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* cmd.c (dirsizes_cmd): Rewritten to use compute_dir_size as suggested
+	by Miguel, i.e. get rid of du. Now the dirsizes_cmd honours a
+	selection and computes sizes only for marked directories. Possible
+	improvement: add a dialog (or C-C?) to abort computation.
+
+	* dir.h (file_entry), panel.h (WPanel): Made the dirsizes computed 
+	flag a per file flag.
+
+	* dir.c, find.c, panelize.c, screen.c: Adapted to new file_entry and 
+	WPanel structure.
+
+	* features.inc: Deleted DUSUM information
+
+	* mc.hlp: remade because of changes in doc/mc.1.in	
+
 1998-12-22  Jonathan Blandford  <jrb@redhat.com>
 
 	* file.c: add a HAVE_GNOME only function

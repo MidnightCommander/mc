@@ -1451,6 +1451,10 @@ Comments are started with '#'. The additional comment lines must start
 with '#', space or tab.
 .PP
 .SH "  Options Menu"
+The Midnight Commander has some options that may be toggled on and
+off in several dialogs which are accessible from this menue. Options 
+are enabled if they have an asterisk or "x" in front of them. 
+.PP
 The
 .\"LINK2"
 Configuration
@@ -1500,19 +1504,8 @@ command saves the current settings of the Left, Right and Options
 menus. A small number of other settings is saved, too.
 .PP
 .SH "    Configuration"
-The program has some options that may be toggled on and off from the
-Configuration dialog. Options are enabled if they have an asterisk or
-"x" in front of them. These options are divided into three groups:
-Screen Colors, Panel Options and Other Options.
-.PP
-.B Screen Colors
-.PP
-You can select whether your display supports color or not. Normally
-this information is in the terminfo database. If you want to know
-how to change individual colors see the section on
-.\"LINK2"
-Colors.
-.\"Colors"
+The options in this dialog are divided into three groups:
+Panel Options, Pause after run and Other Options.
 .PP
 .B Panel Options
 .PP
@@ -1528,9 +1521,13 @@ a dot (like ls -a).
 By default when you mark a file (with either C-t or the Insert key)
 the selection bar will move down.
 .PP
-.I Show Mini-Status.
-If enabled, show one line of status information at the bottom of
-the panels about the currently selected item.
+.I Drop down menues.
+When this option is enabled, when you press the 
+.B F9
+key, the pull down menus will be activated, else, you will
+only be presented with the menu title, and you will have
+to select the entry with the arrow keys or the first
+letter and from there select your option in the menu.
 .PP
 .I Mix all files.
 When this option is enabled, all files and directories are shown mixed
@@ -1547,16 +1544,8 @@ i-node for a file in the directory (file size changes, mode or owner
 changes, etc) the display is not updated. In these cases, if you have
 the option on, you have to rescan the directory manually (with C-r).
 .PP
-.B Other Options
+.B Pause after run
 .PP
-.I Verbose operation.
-This toggles whether the file Copy, Rename and Delete operations are
-verbose (i.e., display a dialog box for each operation). If you have a
-slow terminal, you may wish to disable the verbose operation. It is
-automatically turned off if the speed of your terminal is less than
-9600 bps.
-.PP
-.I Pause after run.
 After executing your commands, the Midnight Commander can pause, so
 that you can examine the output of the command.  There are three
 possible settings for this variable:
@@ -1573,6 +1562,24 @@ not an xterm or the Linux console).
 .IP
 .I Always
 The program will pause after executing all of your commands.
+.PP
+.B Other Options
+.PP
+.I Verbose operation.
+This toggles whether the file Copy, Rename and Delete operations are
+verbose (i.e., display a dialog box for each operation). If you have a
+slow terminal, you may wish to disable the verbose operation. It is
+automatically turned off if the speed of your terminal is less than
+9600 bps.
+.PP
+.I Compute totals.
+If this option is enabled, the Midnight
+Commander computes total byte sizes and total number of files
+prior to any Copy, Rename and Delete operations. This will
+provide you with a more accurate progress bar at the expense
+of some speed. This option has no effect, if 
+.I Verbose operation
+is disabled.
 .PP
 .I Shell Patterns.
 By default the Select, Unselect and Filter commands will use shell-like
@@ -1615,9 +1622,47 @@ command is used.  See the section on the
 internal file viewer.
 .\"Internal File Viewer"
 .PP
-.I Confirm Delete.
-This option is toggled on by default, and will cause the Midnight
-Commander to ask for confirmation when deleting a single file. 
+.I Complete: show all.
+By default the Midnight Commander
+pops up all possible 
+.\"LINK2"
+completions
+.\"Completion"
+if the completion is
+ambiguous if you press 
+.B M-Tab
+for the second time, for the
+first time it just completes as much as possible and in
+the case of ambiguity beeps. If you want to see all the
+possible completions already after the first
+.B M-Tab
+pressing, enable this option.
+.PP
+.I Rotating dash.
+If this option is enabled, the 
+Midnight Commander shows a rotating dash in the upper right corner
+as a work in progress indicator.
+.PP
+.I Lynx-like motion.
+If this option is enabled, 
+you may use the arrows keys to automatically chdir if the
+current selection is a subdirectory and the shell command
+line is empty. By default, this setting is off.
+.PP
+.I Advanced chown.
+If this option is enabled, the 
+.\"LINK2"
+Advanced Chown
+.\"Advanced Chown"
+command will be invoked if you run the 
+.\"LINK2"
+Chmod
+.\"Chmod"
+ or 
+.\"LINK2"
+Chown
+.\"Chown"
+command.
 .PP
 .I Cd follows links.
 This option, if set, causes the Midnight Commander to follow the
@@ -1627,6 +1672,16 @@ behavior of bash. When unset, the Midnight Commander follows the
 real directory structure, so cd .. if you've entered that directory
 through a link will move you to the current directory's real parent
 and not to the directory where the link was present.
+.PP
+.I Safe delete.
+If this option is enabled, deleting files 
+unintentionally will get more difficult. The default
+selection in the confirmation dialog changes from the "Yes"
+to the "No" button and deletion of non empty direcories has to be 
+confirmed by entering the word 
+.I yes
+\&. 
+By default this option is disabled.
 .PP
 .SH "    Display bits"
 This is used to configure the range of visible characters on the
@@ -1744,6 +1799,12 @@ The rest of the screen area is used for the two directory panels. You
 can specify whether the area is split to the panels in vertical or
 horizontal direction. The split can be equal or you can specify an
 unequal split.
+.PP
+If the 
+.I Show Mini-Status
+option is enabled, one line of status
+information about the currently selected item is showed at the bottom 
+of the panels.
 .PP
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
@@ -2052,6 +2113,18 @@ cancel the Chmod command
 .SH "Chown"
 The Chown command is used to change the owner/group of a file. The hot
 key for this command is C-x o.
+.PP
+.SH "Advanced Chown"
+The Advanced Chown command is the 
+.\"LINK2"
+Chmod
+.\"Chmod"
+and 
+.\"LINK2"
+Chown
+.\"Chown"
+command combined into one window. You can change the permissions and 
+owner/group of files at once.
 .PP
 .SH "File Operations"
 When you copy, move or delete files the Midnight Commander shows the
@@ -2431,10 +2504,12 @@ Filename, username, variable and hostname completion works on all input
 lines, command completion is command line specific.
 If the completion is ambiguous (there are more different possibilities),
 MC beeps and the following action depends on the setting of the
+.I Complete: show all
+option in the
 .\"LINK2"
-show_all_if_ambiguous
-.\"Special Settings"
-variable in the Initialization file. If it is nonzero, a list of all
+Configuration
+.\"Configuration">
+dialog. If it is enabled, a list of all
 possibilities pops up next to the current position and you can select with
 the arrow keys and
 .B Enter
@@ -2450,9 +2525,9 @@ canceling keys
 .B F10
 and left and right arrow keys. If
 .\"LINK2"
-show_all_if_ambiguous
-.\"Special Settings"
-is set to zero, the dialog pops up only if you press
+Complete: show all
+.\"Configuration"
+is disabled, the dialog pops up only if you press
 .B M-Tab
 for the second time, for the first time MC just beeps.
 .PP
@@ -2811,13 +2886,6 @@ If you press F3 on a directory, normally MC enters that directory. If
 this flag is set to 1, then MC will ask for confirmation before
 changing the directory if you have files tagged.
 .PP
-.I drop_menus.
-.IP
-If this variable is set, when you press the F9 key, the pull down
-menus will be activated, else, you will only be presented with the
-menu title, and you will have to select the entry with the arrow keys
-or the first letter and from there select your option in the menu.
-.PP
 .I ftpfs_retry_seconds.
 .IP
 This value is the number of seconds the Midnight Commander will wait
@@ -2854,17 +2922,6 @@ line on the panels.
 Controls if scrolling with the mouse is done by pages or line by line
 on the internal file viewer.
 .PP
-.I navigate_with_arrows.
-.IP
-If this setting is turned on, then you may use the arrows keys to
-automatically chdir if the current selection is a subdirectory and
-the shell command line is empty.  By default, this setting is off.
-.PP
-.I nice_rotating_dash
-.IP
-When on, this flag causes the commander to show a rotating dash as a
-work in progress indicator.
-.PP
 .I old_esc_mode
 .IP
 By default the Midnight Commander treats the ESC key as a key prefix
@@ -2898,20 +2955,6 @@ This variable only works if you are not using the subshell support.
 When you use the C-o keystroke to go back to the user screen, if this
 one is set, you will get a fresh shell.  Otherwise, pressing any key
 will bring you back to the Midnight Commander.
-.PP
-.I show_all_if_ambiguous.
-.IP
-By default the Midnight Commander pops up all possible
-.\"LINK2"
-completions
-.\"Completion"
-if the completion is ambiguous if you press
-.B M-Tab
-for the second time, for the first time it just completes as much as
-possible and in the case of ambiguity beeps. If you want to see all the
-possible completions already after the first
-.B M-Tab
-pressing, set this option to 1.
 .PP
 .I torben_fj_mode
 .IP

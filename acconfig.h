@@ -129,17 +129,6 @@
  */
 #undef NEED_EXTRA_DIRENT_BUFFER
 
-/* Define if you want the du -s summary */
-#undef HAVE_DUSUM
-
-/* Define if your du does handle -b correctly */
-#undef DUSUM_USEB
-
-/* Define to size of chunks du is displaying its information.
- * If DUSUM_USEB is defined, this should be 1
- */
-#define DUSUM_FACTOR 512
-
 /* Define this one if you want termnet support */
 #undef USE_TERMNET
 

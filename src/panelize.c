@@ -411,7 +411,6 @@ void do_external_panelize (char *command)
 
     /* Clear the counters */
     cpanel->total = cpanel->dirs_marked = cpanel->marked = 0;
-    cpanel->has_dir_sizes = 0;
     cpanel->top_file = 0;
     cpanel->selected = 0;
 
@@ -442,6 +441,7 @@ void do_external_panelize (char *command)
 	file_mark (cpanel, next_free, 0);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
+	list->list [next_free].f.dir_size_computed = 0;
 	list->list [next_free].buf = buf;
 	next_free++;
 	if (!(next_free & 32))

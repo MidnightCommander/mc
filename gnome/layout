@@ -136,19 +136,19 @@ flags=snew
 text=Directory path
 
 [option-Widget-button-ok]
-geometry=2,15,1,1
+geometry=2,16,1,1
 flags=
 
 [option-Widget-safe-del]
-geometry=5,13,1,1
+geometry=5,14,1,1
 flags=w
 
 [option-Widget-shell-patt]
-geometry=5,3,1,1
+geometry=5,4,1,1
 flags=w
 
 [option-Widget-auto-save]
-geometry=5,4,1,1
+geometry=5,5,1,1
 flags=w
 
 [option-Widget-drop-menus]
@@ -156,15 +156,15 @@ geometry=2,5,2,1
 flags=w
 
 [option-Widget-edit-int]
-geometry=5,6,1,1
+geometry=5,7,1,1
 flags=w
 
 [option-Widget-button-save]
-geometry=3,15,2,1
+geometry=3,16,2,1
 flags=ew
 
 [option-Widget-lynx]
-geometry=5,10,1,1
+geometry=5,11,1,1
 flags=w
 
 [option-Widget-fast-reload]
@@ -172,15 +172,15 @@ geometry=2,7,1,1
 flags=w
 
 [option-Widget-view-int]
-geometry=5,7,1,1
-flags=w
-
-[option-Widget-completion]
 geometry=5,8,1,1
 flags=w
 
+[option-Widget-completion]
+geometry=5,9,1,1
+flags=w
+
 [option-Widget-achown]
-geometry=5,11,1,1
+geometry=5,12,1,1
 flags=w
 
 [option-Widget-show-hidden]
@@ -195,24 +195,28 @@ flags=w
 geometry=5,2,1,1
 flags=w
 
+[option-Widget-compute-totals]
+geometry=5,3,1,1
+flags=w
+
 [option-Widget-mix-files]
 geometry=2,6,2,1
 flags=w
 
 [option-Widget-auto-menus]
-geometry=5,5,1,1
+geometry=5,6,1,1
 flags=w
 
 [option-Widget-button-cancel]
-geometry=5,15,1,1
+geometry=5,16,1,1
 flags=
 
 [option-Widget-dummy]
-geometry=5,9,1,1
-flags=
+geometry=5,10,1,1
+flags=w
 
 [option-Widget-cd-follow]
-geometry=5,12,1,1
+geometry=5,13,1,1
 flags=w
 
 [option-Widget-show-backup]
@@ -220,11 +224,11 @@ geometry=2,2,2,1
 flags=w
 
 [option-Widget-pause-radio]
-geometry=2,10,2,5
+geometry=2,11,2,5
 flags=nw
 
 [option-Frame-Frame-1]
-geometry=4,0,4,15
+geometry=4,0,4,16
 flags=snew
 text=Other options
 

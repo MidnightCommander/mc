@@ -1576,7 +1576,7 @@ file_mask_defaults (void)
  *
  * Computes the number of bytes used by the files in a directory
  */
-static void
+void
 compute_dir_size (char *dirname, long *ret_marked, double *ret_total)
 {
 	DIR *dir;
@@ -1879,7 +1879,7 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 	}
 
 	/* Initialize variables for progress bars */
-	if (file_op_compute_totals)
+	if (verbose && file_op_compute_totals)
 		panel_compute_totals (
 			panel, &file_progress_count, &file_progress_bytes);
 	else {

@@ -861,6 +861,7 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    file_mark (cpanel, next_free, 0);
 	    list->list [next_free].f.link_to_dir = link_to_dir;
 	    list->list [next_free].f.stalled_link = stalled_link;
+	    list->list [next_free].f.dir_size_computed = 0;
 	    list->list [next_free].buf = buf;
 	    next_free++;
            if (!(next_free & 15))
@@ -870,7 +871,6 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	    cpanel->count = next_free;
 	    cpanel->is_panelized = 1;
 	    cpanel->dirs_marked = 0;
-	    cpanel->has_dir_sizes = 0;
 	    cpanel->marked = 0;
 	    cpanel->total = 0;
 	    cpanel->top_file = 0;

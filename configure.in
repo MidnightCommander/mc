@@ -634,39 +634,6 @@ if test x$ac_cv_grep_stdin = xyes; then
 fi
 AC_MSG_RESULT($ac_cv_grep_stdin)
 
-
-dnl
-dnl HAVE_DUSUM is on by default, only if you have a strange du, you can
-dnl turn it off by --without-dusum
-dnl
-have_dusum=yes
-AC_MSG_CHECKING(for du arguments)
-AC_ARG_WITH(dusum, 
-	[--with-dusum               Support the du -s summaries],[
-	if test x$withval = xno; then
-		have_dusum=no
-	fi
-])
-if test x$have_dusum = xyes; then
-    AC_DEFINE(HAVE_DUSUM)
-    AC_CACHE_VAL(ac_cv_dusum, [
-    du -s -b $srcdir/configure >/dev/null 2>&1
-    if test $? = 0; then
-        ac_cv_dusum='dusum_useb=yes; dusum_factor=1'
-    else
-	ac_cv_dusum='dusum_useb=; dusum_factor=512'
-    fi
-])
-    eval "$ac_cv_dusum"
-    if test x$dusum_useb = xyes; then
-	AC_DEFINE(DUSUM_USEB)
-	AC_MSG_RESULT(-b)
-    else
-	AC_MSG_RESULT(block size $dusum_factor)
-    fi
-    AC_DEFINE_UNQUOTED(DUSUM_FACTOR, $dusum_factor)
-fi
-
 dnl
 dnl The termnet support
 dnl

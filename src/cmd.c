@@ -1346,102 +1346,28 @@ void quick_cd_cmd (void)
         free (p);
 }
 
-#ifdef SCO_FLAVOR
-#undef DUSUM_USEB
-#undef DUSUM_FACTOR
-#endif /* SCO_FLAVOR */
-
-#ifdef HAVE_DUSUM
-void dirsizes_cmd (void)
+void 
+dirsizes_cmd (void)
 {
     WPanel *panel = cpanel;
-    int i, j = 0;
-    char *cmd, *p, *q, *r;
-    FILE *f;
-#ifdef DUSUM_USEB
-#   define dirsizes_command "du -s -b "
-#else
-#   define dirsizes_command "du -s "
-#endif
-#ifndef DUSUM_FACTOR
-#    define DUSUM_FACTOR 512
-#endif
+    int i;
+    long marked;
+    double total;
 
-    if (!vfs_current_is_local ()) {
-	message (1, MSG_ERROR, _("You can not scan disk usage on non-local filesystem. Sorry.") );
-        return;
-    }
-    for (i = 0; i < panel->count; i++)
-        if (S_ISDIR (panel->dir.list [i].buf.st_mode))
-            j += strlen (panel->dir.list [i].fname) + 1;
-    if (!j)
-        return;
-    /* worst case: name_quote doubles every filename, i.e. use
-       2 * j to be save */
-    cmd = xmalloc (strlen (dirsizes_command) + 2 * j + 1, "dirsizes_cmd");
-    strcpy (cmd, dirsizes_command);
-    p = strchr (cmd, 0);
-    for (i = 0; i < panel->count; i++)
-        if (S_ISDIR (panel->dir.list [i].buf.st_mode) && 
-            strcmp (panel->dir.list [i].fname, "..")) {
-            /* The quotes will be removed from the shell when invoking
-               du, i.e. no need to remove quotes when reading the
-               directory sizes from du. */
-            strcpy (p, r = name_quote (panel->dir.list [i].fname, 0));
-            free (r);
-            p = strchr (p, 0);
-            *(p++) = ' ';
-        }
-    *(--p) = 0;
-    open_error_pipe ();
-    f = popen (cmd, "r");
-    free (cmd);
-    if (f != NULL) {
-        /* Assume that du will display the directories in the order 
-         * I've passed to it :( 
-         */
-        i = 0;
-        p = xmalloc (1024, "dirsizes_cmd");
-        while (fgets (p, 1024, f)) {
-            j = atoi (p) * DUSUM_FACTOR;
-            for (q = p; *q && *q != ' ' && *q != '\t'; q++);
-            while (*q == ' ' || *q == '\t')
-                q++;
-            r = strchr (q, '\n');
-            if (r == NULL)
-                r = strchr (q, 0);
-    	    for (; i < panel->count; i++)
-                if (S_ISDIR (panel->dir.list [i].buf.st_mode))
-                    if (!strncmp (q, panel->dir.list [i].fname,
-                        r - q)) {
-                        if (panel->dir.list [i].f.marked)
-                            panel->total += j - 
-			    ((panel->has_dir_sizes) ? panel->dir.list [i].buf.st_size : 0); 
-                        panel->dir.list [i].buf.st_size = j;
-                        break;
-                    }
-            if (i == panel->count)
-                break;
-        }
-	free (p);
-        if (pclose (f) < 0)
-#ifndef SCO_FLAVOR
-	    message (0, _("Show directory sizes"), _("Pipe close failed"));
-	else
-#else /* SCO_FLAVOR */
- 	/* 
- 	**	SCO reports about error while all seems to be ok. Just ignore it...
- 	**	(alex@bcs.zaporizhzhe.ua)
- 	*/
- 	;
-#endif /* SCO_FLAVOR */
-	    panel->has_dir_sizes = 1;
-	close_error_pipe (0, 0);
-	paint_panel (panel);
-    } else
-        close_error_pipe (1, _("Cannot invoke du command."));
+    for (i = 0; i < panel->count; i++) 
+	if (S_ISDIR (panel->dir.list [i].buf.st_mode) &&
+	         ((panel->dirs_marked && panel->dir.list [i].f.marked) || 
+                   !panel->dirs_marked) &&
+	         strcmp (panel->dir.list [i].fname, "..") != 0) {
+	    total = 0.0l;
+	    compute_dir_size (panel->dir.list [i].fname, &marked, &total);
+            panel->dir.list [i].buf.st_size = (long)total;
+	    panel->dir.list [i].f.dir_size_computed = 1;
+	}
+	
+    recalculate_panel_summary (panel);
+    paint_panel (panel);
 }
-#endif
 
 void
 save_setup_cmd (void)

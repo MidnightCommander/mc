@@ -111,8 +111,6 @@ typedef struct {
     int      searching;
     char     search_buffer [256];
    
-    int      has_dir_sizes;	/* Set if directories have sizes = to du -s */
-
     void     *port_ui;		/* UI stuff specific to each GUI port */
 
 #ifdef HAVE_GNOME
@@ -262,6 +260,7 @@ char *string_inode (file_entry *fe, int len);
 char *string_file_ngid (file_entry *fe, int len);
 char *string_file_nuid (file_entry *fe, int len);
 
+void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int index, int val);
 void do_file_mark (WPanel *panel, int index, int val);
 int  file_compute_color (int attr, file_entry *fe);

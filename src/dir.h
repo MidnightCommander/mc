@@ -17,6 +17,7 @@ typedef struct {
 	unsigned int marked:1;		/* File marked in pane window */
 	unsigned int link_to_dir:1;	/* If this is a link, does it point to directory? */
 	unsigned int stalled_link:1;    /* If this is a symlink and points to Charon's land */
+	unsigned int dir_size_computed:1; /* Size of directory was computed with dirsizes_cmd */
     } f;
 } file_entry;
 

@@ -92,6 +92,7 @@ int background_attention (int fd, void *info);
 extern int background_wait;
 
 int is_wildcarded (char *p);
+void compute_dir_size (char *dirname, long *ret_marked, double *ret_total);
 #endif
 
 

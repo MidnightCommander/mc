@@ -1283,9 +1283,7 @@ static menu_entry CmdMenu [] = {
     { ' ', N_("switch &Panels on/off C-o"),     'P', view_other_cmd },
     { ' ', N_("&Compare directories  C-x d"),   'C', compare_dirs_cmd },
     { ' ', N_("e&Xternal panelize    C-x !"),   'X', external_panelize },
-#ifdef HAVE_DUSUM
     { ' ', N_("show directory s&Izes"),         'I', dirsizes_cmd },
-#endif
     { ' ', "", ' ', 0 },
     { ' ', N_("command &History"),              'H', history_cmd },
     { ' ', N_("di&Rectory hotlist    C-\\"),    'R', quick_chdir_cmd },

@@ -162,11 +162,6 @@ installed the gpm package.
      Default is somewhere in your XView binaries directory,
      $OPENWINHOME/bin.
 
-`--without-dusum'
-     This option disables a feature of the Midnight Commander, which is
-     forking the du command with the -s option when you want to calculate
-     directory sizes.
-
 `--without-vfs'
      This option disables the Virtual File System switch code in the
      Midnight Commander and uses the standard file system calls for

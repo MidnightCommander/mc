@@ -1,3 +1,8 @@
+Thu Dec 24 18:38:45 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* layout: Adapted for the new option Compute Totals in the
+	Configuration dialog.
+
 1998-12-22  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdialogs.c (file_progress_query_replace_policy): new function.

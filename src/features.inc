@@ -74,10 +74,6 @@ char *features =
     "\n"
 #endif
 
-#ifdef HAVE_DUSUM
-    "With DUSUM command\n"
-#endif
-
 #ifdef WITH_BACKGROUND
     "With support for background operations\n"
 #endif

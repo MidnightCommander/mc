@@ -47,9 +47,9 @@
 #define PY	2
 
 #define RX	4
-#define RY	11
+#define RY	12
 
-#define BY	16
+#define BY	17
 #define OY	2
 
 static Dlg_head *conf_dlg;
@@ -79,7 +79,7 @@ static struct {
 #ifdef HAVE_GNOME
    {N_("Animation"),          &dummy,             TOGGLE_VARIABLE,       0, "dummy" },
 #else
-   {N_("ro&Tating dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
+   {N_("rotatin&G dash"),     &nice_rotating_dash,TOGGLE_VARIABLE,       0, "rotating" },
 #endif
    {N_("co&Mplete: show all"),&show_all_if_ambiguous,TOGGLE_VARIABLE,    0, "completion" },
    {N_("&Use internal view"), &use_internal_view, TOGGLE_VARIABLE,       0, "view-int" },
@@ -87,6 +87,7 @@ static struct {
    {N_("auto m&Enus"),        &auto_menu,         TOGGLE_VARIABLE,       0, "auto-menus" },
    {N_("&Auto save setup"),   &auto_save_setup,   TOGGLE_VARIABLE,       0, "auto-save" },
    {N_("shell &Patterns"),    &easy_patterns,     TOGGLE_VARIABLE,       0, "shell-patt" },
+   {N_("Compute &Totals"),    &file_op_compute_totals,           TOGGLE_VARIABLE,       0, "compute-totals" },
    {N_("&Verbose operation"), &verbose,           TOGGLE_VARIABLE,       0, "verbose" },
    {N_("&Fast dir reload"),   &fast_reload,       toggle_fast_reload,    0, "fast-reload" },
    {N_("mi&X all files"),     &mix_all_files,     toggle_mix_all_files,  0, "mix-files" },
@@ -114,7 +115,7 @@ static int configure_callback (struct Dlg_head *h, int Id, int Msg)
 	draw_box (h, 1, 2, h->lines - 2, h->cols - 4);
 	draw_box (h, PY, PX, 8, first_width);
 	draw_box (h, RY, RX, 5, first_width);
-	draw_box (h, OY, OX, 14, second_width);
+	draw_box (h, OY, OX, 15, second_width);
 
 	attrset (COLOR_HOT_NORMAL);
 	dlg_move (h, 1, (h->cols - strlen(configure_title))/2);
@@ -156,7 +157,7 @@ static void init_configure (void)
 		title3 = _(" Other options ");
 
 		first_width = strlen (title1) + 1;
-		for (i = 12; i < 18; i++)
+		for (i = 13; i < 18; i++)
 		{
 			check_options[i].text = _(check_options[i].text);
 			l1 = strlen (check_options[i].text) + 7;
@@ -180,7 +181,7 @@ static void init_configure (void)
 		OX = first_width + 5;
 
 		second_width = strlen (title3) + 1;
-		for (i = 0; i < 12; i++)
+		for (i = 0; i < 13; i++)
 		{
 			check_options[i].text = _(check_options[i].text);
 			l1 = strlen (check_options[i].text) + 7;
@@ -200,7 +201,7 @@ static void init_configure (void)
 		i18n_config_flag = 1;
 	}
 
-    conf_dlg = create_dlg (0, 0, 19, first_width + second_width + 9,
+    conf_dlg = create_dlg (0, 0, 20, first_width + second_width + 9,
 		dialog_colors, configure_callback, "[Options Menu]",
 		"option", DLG_CENTER | DLG_GRID);
 
@@ -221,8 +222,8 @@ static void init_configure (void)
 #define XTRACT(i) *check_options[i].variable, check_options[i].text, check_options [i].tk
 
     /* Add all the checkboxes */
-    for (i = 0; i < 12; i++){
-	check_options [i].widget = check_new (OY + (12-i), OX+2, XTRACT(i));
+    for (i = 0; i < 13; i++){
+	check_options [i].widget = check_new (OY + (13-i), OX+2, XTRACT(i));
 	add_widgetl (conf_dlg, check_options [i].widget,
 	    XV_WLAY_BELOWCLOSE);
     }
@@ -233,9 +234,9 @@ static void init_configure (void)
     add_widgetl (conf_dlg, pause_radio, XV_WLAY_BELOWCLOSE);
 #endif
     for (i = 0; i < 6; i++){
-	check_options [i+12].widget = check_new (PY + (6-i), PX+2,
-						  XTRACT(i+12));
-	add_widgetl (conf_dlg, check_options [i+12].widget,
+	check_options [i+13].widget = check_new (PY + (6-i), PX+2,
+						  XTRACT(i+13));
+	add_widgetl (conf_dlg, check_options [i+13].widget,
 	    XV_WLAY_BELOWCLOSE);
     }
 }

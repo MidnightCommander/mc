@@ -318,6 +318,7 @@ add_dotdot_to_list (dir_list *list, int index)
     (list->list) [index].fname = strdup ("..");
     (list->list) [index].f.link_to_dir = 0;
     (list->list) [index].f.stalled_link = 0;
+    (list->list) [index].f.dir_size_computed = 0;
     
     /* FIXME: We need to get the panel definition! to use file_mark */
     (list->list) [index].f.marked = 0;
@@ -472,6 +473,7 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 	list->list [next_free].f.marked = 0;
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
+        list->list [next_free].f.dir_size_computed = 0;
 	list->list [next_free].buf = buf;
 	if (strcmp (dp->d_name, ".." ) == 0)
 	    dotdot_found = 1;
@@ -561,6 +563,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	dir_copy.list [i].fnamelen = list->list [i].fnamelen;
 	dir_copy.list [i].fname =    list->list [i].fname;
 	dir_copy.list [i].f.marked = list->list [i].f.marked;
+        dir_copy.list [i].f.dir_size_computed = list->list [i].f.dir_size_computed;
 	dir_copy.list [i].f.link_to_dir = list->list [i].f.link_to_dir;
 	dir_copy.list [i].f.stalled_link = list->list [i].f.stalled_link;
     }
@@ -590,7 +593,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	    if (tmp_len == dir_copy.list [i].fnamelen
 		&& !strcmp (dp->d_name, dir_copy.list [i].fname)){
 		list->list [next_free].f.marked = dir_copy.list [i].f.marked;
-		found = 1;
+                found = 1;
 		break;
 	    }
 	
@@ -601,6 +604,7 @@ int do_reload_dir (dir_list *list, sortfn *sort, int count, int rev,
 	list->list [next_free].fname = strdup (dp->d_name);
 	list->list [next_free].f.link_to_dir = link_to_dir;
 	list->list [next_free].f.stalled_link = stalled_link;
+        list->list [next_free].f.dir_size_computed = 0;
 	list->list [next_free].buf = buf;
 	if (strcmp (dp->d_name, ".." ) == 0)
 	    dotdot_found = 1;
