@@ -112,7 +112,6 @@ samba/libsamba.a:
 
 SAMBA_DIST =			\
 	Makefile.in		\
-	acconfig.h		\
 	aclocal.m4		\
 	architecture.doc	\
 	configure.in		\

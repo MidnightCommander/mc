@@ -203,6 +203,6 @@ include/stamp-h: $(srcdir)/include/config.h.in config.status
 $(srcdir)/include/config.h.in: $(srcdir)/include/stamp-h.in
 	@:
 
-$(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/acconfig.h $(srcdir)/configure.in
+$(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/configure.in
 	cd $(srcdir) && $(AUTOHEADER)
 	@date -u > $@

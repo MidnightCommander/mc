@@ -1,3 +1,19 @@
+2002-04-31  Pavel Roskin  <proski@gnu.org>
+
+	* samba/acconfig.h: Remove.
+	* Makefile.am: Remove references to samba/acconfig.h.
+	* samba/Makefile.in: Likewise.
+	* samba/aclocal.m4: Remove unused test AC_DIRENT_D_OFF.
+	* samba/configure.in: Add descriptions to AC_DEFINE calls.
+	Remove unused tests.
+	* samba/include/includes.h: Cleanup for the symbols that
+	samba/configure.in doesn't define.
+	* samba/lib/netmask.c: Likewise.
+
+	* samba/include/includes.h: Eliminate all references to
+	HAVE_EXPLICIT_LARGEFILE_SUPPORT.
+	* samba/lib/system.c: Likewise.
+
 2002-04-24  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* vfs.c (vfs_print_stats): s/transfered/transferred/

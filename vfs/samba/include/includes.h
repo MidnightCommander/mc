@@ -45,16 +45,6 @@
 #undef HAVE_TERMIOS_H
 #endif
 
-#ifdef RELIANTUNIX
-/*
- * <unistd.h> has to be included before any other to get
- * large file support on Reliant UNIX
- */
-#ifdef HAVE_UNISTD_H
-#include <unistd.h>
-#endif
-#endif /* RELIANTUNIX */
-
 #include <sys/types.h>
 
 #ifdef TIME_WITH_SYS_TIME
@@ -342,35 +332,11 @@
 #endif
 #endif /* HAVE_NETGROUP */
 
-/*
- * Define VOLATILE if needed.
- */
-
-#if defined(HAVE_VOLATILE)
-#define VOLATILE volatile
-#else
-#define VOLATILE
-#endif
-
-/*
- * Define SIG_ATOMIC_T if needed.
- */
-
-#if defined(HAVE_SIG_ATOMIC_T_TYPE)
-#define SIG_ATOMIC_T sig_atomic_t
-#else
-#define SIG_ATOMIC_T int
-#endif
-
 #ifndef uchar
 #define uchar unsigned char
 #endif
 
-#ifdef HAVE_UNSIGNED_CHAR
 #define schar signed char
-#else
-#define schar char
-#endif
 
 /*
    Samba needs type definitions for int16, int32, uint16 and uint32.
@@ -665,10 +631,6 @@ union semun {
  Knowing this speeds up password searches a lot */
 #ifndef PASSWORD_LENGTH
 #define PASSWORD_LENGTH 8
-#endif
-
-#ifdef REPLACE_INET_NTOA
-#define inet_ntoa rep_inet_ntoa
 #endif
 
 #ifndef HAVE_PIPE
