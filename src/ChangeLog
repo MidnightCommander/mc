@@ -1,4 +1,9 @@
-2000-05-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+2001-05-14  Pavel Roskin  <proski@gnu.org>
+
+	* util.h: Remove declarations of some functions defined in
+	background.c.
+
+2001-05-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* background.c (real_message_1s, message_1s): third parameter is
 	  used by message () as printf pattern, so "%s" has to be added

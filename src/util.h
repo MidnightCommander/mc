@@ -173,12 +173,6 @@ void execute_hooks (Hook *hook_list);
 void delete_hook (Hook **hook_list, void (*hook_fn)(void *));
 int hook_present (Hook *hook_list, void (*hook_fn)(void *));
 
-/* message stubs: used by those routines that may output something during the panel_operate process */
-void message_1s (int flags, char *title, char *str1);
-void message_2s (int flags, char *title, char *str1, char *str2);
-void message_3s (int flags, char *title, char *str1, char *str2, const char *str3);
-void message_1s1d (int flags, char *title, char *str, int d);
-void tell_parent (int msg);
 int max_open_files (void);
 
 #ifdef OS2_NT
