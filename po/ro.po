@@ -6064,7 +6064,7 @@ msgid ""
 "Can't write to the %s file:\n"
 "%s\n"
 msgstr ""
-"Nu pot scrie în fiºierul:\n"
+"Nu pot scrie în fiºierul %s:\n"
 "%s\n"
 
 #: src/user.c:137

@@ -3410,7 +3410,7 @@ msgstr " Symbolische link bewerken "
 #: src/cmd.c:1138
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
-msgstr " bewerken symbolische link, kan % niet verwijderen: %s"
+msgstr " bewerken symbolische link, kan niet verwijderen %s: %s"
 
 #: src/cmd.c:1142
 #, c-format

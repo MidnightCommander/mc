@@ -1606,7 +1606,7 @@ msgstr "確定 (&O)"
 #: gnome/gview.c:136
 #, c-format
 msgid "Offset 0x%08lx"
-msgstr "偏移值 0x%08x"
+msgstr "偏移值 0x%08lx"
 
 #: gnome/gview.c:138
 #: src/view.c:732
@@ -3808,7 +3808,7 @@ msgstr "群組"
 #: src/dir.c:386
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
-msgstr "檔案'%s'存在，但是無法被 stat: %s %s"
+msgstr "檔案'%s'存在，但是無法被 stat: %s"
 
 #: src/dir.c:657
 msgid "Unknown"
@@ -5950,7 +5950,7 @@ msgstr " 目前行號是 %d，\n 請輸入新行號："
 #: src/view.c:1935
 #, c-format
 msgid " The current address is 0x%lx.\n Enter the new address:"
-msgstr " 目前行號是 %d，\n 請輸入新行號："
+msgstr " 目前行號是 0x%lx，\n 請輸入新行號："
 
 #: src/view.c:1937
 msgid " Goto Address "

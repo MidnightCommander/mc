@@ -1,6 +1,8 @@
 2001-01-26  Pablo Saratxaga <pablo@mandrakesoft.com>
 
 	* az.po: Added Azeri file
+	* {fr,sl,po,uk,sk,nl,it,ro,pl,ru,ta,zh_TW.Big5}.po: fixed headers and
+	  syntax errors
 
 2001-01-24  Szabolcs Ban  <shooby@gnome.hu>
 

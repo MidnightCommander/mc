@@ -5,7 +5,6 @@
 # Martin Quinson <mquinson@zeppelin-cb.de>, 2000.
 # Christophe Merlet (RedFox) <redfox@eikonex.org>, 2000.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"

@@ -1681,6 +1681,8 @@ static char *op_names1 [] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
 #define	FMD_XLEN 64
 
 int fmd_xlen = FMD_XLEN;
+
+#ifndef HAVE_GNOME
 /*
  * These are formats for building a prompt. Parts encoded as follows:
  * %o - operation from op_names1
@@ -1689,13 +1691,15 @@ int fmd_xlen = FMD_XLEN;
  * %s - source name (truncated)
  * %d - number of marked files
  * %e - "to:" or question mark for delete
- */
-
-#ifndef HAVE_GNOME
+ * 
+ * xgettext:no-c-format */
 static char* one_format  = N_("%o %f \"%s\"%m");
+/* xgettext:no-c-format */
 static char* many_format = N_("%o %d %f%m");
 #else
+/* xgettext:no-c-format */
 static char* one_format  = N_("%o %f \"%s\"%e");
+/* xgettext:no-c-format */
 static char* many_format = N_("%o %d %f%e");
 #endif
 static char* prompt_parts [] =
