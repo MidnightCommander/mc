@@ -1,5 +1,8 @@
 2002-12-07  Pavel Roskin  <proski@gnu.org>
 
+	* syntax.c (edit_load_syntax): Reuse more informative error
+	message.
+
 	* edit.c (check_file_access): Use O_EXCL when opening new files.
 	Don't allow editing stale symlinks.
 	Reported by Max Derzhak <max@linux.zp.ua>

@@ -958,10 +958,13 @@ static char *get_first_editor_line (WEdit * edit)
     return s;
 }
 
-/* loads rules into edit struct. one of edit or names must be zero. if
-   edit is zero, a list of types will be stored into name. type may be zero
-   in which case the type will be selected according to the filename. */
-void edit_load_syntax (WEdit * edit, char **names, char *type)
+/*
+ * Load rules into edit struct.  Either edit or names must be NULL.  If
+ * edit is NULL, a list of types will be stored into names.  If type is
+ * NULL, then the type will be selected according to the filename.
+ */
+void
+edit_load_syntax (WEdit *edit, char **names, char *type)
 {
     int r;
     char *f;
@@ -981,17 +984,20 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
 	    return;
     }
     f = catstrs (home_dir, SYNTAX_FILE, 0);
-    r = edit_read_syntax_file (edit, names, f, edit ? edit->filename : 0, get_first_editor_line (edit), type);
+    r = edit_read_syntax_file (edit, names, f, edit ? edit->filename : 0,
+			       get_first_editor_line (edit), type);
     if (r == -1) {
 	edit_free_syntax_rules (edit);
-	edit_error_dialog (_ (" Load syntax file "), _ (" File access error "));
+	message (D_ERROR, _(" Load syntax file "),
+		 _(" Cannot open file %s \n %s "), f,
+		 unix_error_string (errno));
 	return;
     }
     if (r) {
 	edit_free_syntax_rules (edit);
-	message (0, _(" Load syntax file "), 
-		    _(" Error in file %s on line %d "),
-		    error_file_name ? error_file_name : f, r);
+	message (D_ERROR, _(" Load syntax file "),
+		 _(" Error in file %s on line %d "),
+		 error_file_name ? error_file_name : f, r);
 	syntax_g_free (error_file_name);
 	return;
     }
