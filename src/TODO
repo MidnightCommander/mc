@@ -3,6 +3,16 @@ Before 4.6.1
 
 Regression - restore tilde expansion, but do it properly this time.
 
+Regression - vfs_split() modifies first argument, although it's declared
+const.
+
+Crash in VFS code after entering extfs inside extfs and letting both
+expire.
+
+
+Before 4.6.2
+============
+
 Cannot spell check unsaved files in the editor.
 
 Dynamic loading for libgpm, libext2fs.
@@ -97,7 +107,7 @@ Alt-O should optionally show the current directory and move cursor down
 needed.
 
 
-After 4.6.1 on 4.6.x branch
+After 4.6.2 on 4.6.x branch
 ===========================
 
 Make the internal editor reentrant.  Add "edit menu file" to the editor
