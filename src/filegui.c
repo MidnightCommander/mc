@@ -898,8 +898,11 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, const char *text,
     *do_background = 0;
   ask_file_mask:
 
-    if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL)
+    if ((val = quick_dialog_skip (&Quick_input, SKIP)) == B_CANCEL) {
+	g_free (def_text_secure);
 	return 0;
+    }
+    g_free (def_text_secure);
 
     if (ctx->follow_links)
 	ctx->stat_func = (mc_stat_fn) mc_stat;
