@@ -193,9 +193,13 @@ void edit_scroll_screen_over_cursor (WEdit * edit)
 #define lowlevel_set_color(x) attrset(MY_COLOR_PAIR(color))
 #endif
 
-static void print_to_widget (WEdit * edit, long row, int start_col, float start_col_real, long end_col, unsigned int line[])
+static void
+print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
+		 long end_col, unsigned int line[])
 {
-    int x = (float) start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
+    unsigned int *p;
+
+    int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
 
@@ -204,38 +208,35 @@ static void print_to_widget (WEdit * edit, long row, int start_col, float start_
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
     edit_move (x + FONT_OFFSET_X, y + FONT_OFFSET_Y);
-    {
-	unsigned int *p = line;
-	int textchar = ' ';
-	int style;
-	int color;
+    p = line;
 
-	while (*p) {
-	    style = *p & 0xFF00;
-	    textchar = *p & 0xFF;
-	    color = *p >> 16;
+    while (*p) {
+	int style = *p & 0xFF00;
+	int textchar = *p & 0xFF;
+	int color = *p >> 16;
 
-	    if (style & MOD_ABNORMAL) {
-		/* Non-printable - use black background */
-		color = 0;
-	    }
-
-	    if (style & MOD_BOLD) {
-		set_color (EDITOR_BOLD_COLOR);
-	    } else if (style & MOD_MARKED) {
-		set_color (EDITOR_MARKED_COLOR);
-	    } else {
-		lowlevel_set_color (color);
-	    }
-
-	    addch (textchar);
-	    p++;
+	if (style & MOD_ABNORMAL) {
+	    /* Non-printable - use black background */
+	    color = 0;
 	}
+
+	if (style & MOD_BOLD) {
+	    set_color (EDITOR_BOLD_COLOR);
+	} else if (style & MOD_MARKED) {
+	    set_color (EDITOR_MARKED_COLOR);
+	} else {
+	    lowlevel_set_color (color);
+	}
+
+	addch (textchar);
+	p++;
     }
 }
 
 /* b is a pointer to the beginning of the line */
-static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col, long end_col)
+static void
+edit_draw_this_line (WEdit *edit, long b, long row, long start_col,
+		     long end_col)
 {
     static unsigned int line[MAX_LINE_LEN];
     unsigned int *p = line;
@@ -252,7 +253,9 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 
     edit_get_syntax_color (edit, b - 1, &color);
     q = edit_move_forward3 (edit, b, start_col - edit->start_col, 0);
-    start_col_real = (col = (int) edit_move_forward3 (edit, b, 0, q)) + edit->start_col;
+    start_col_real = (col =
+		      (int) edit_move_forward3 (edit, b, 0,
+						q)) + edit->start_col;
     c1 = min (edit->column1, edit->column2);
     c2 = max (edit->column1, edit->column2);
 
@@ -275,7 +278,8 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		}
 		if (q == edit->bracket)
 		    *p |= MOD_BOLD;
-		if (q >= edit->found_start && q < edit->found_start + edit->found_len)
+		if (q >= edit->found_start
+		    && q < edit->found_start + edit->found_len)
 		    *p |= MOD_BOLD;
 		c = edit_get_byte (edit, q);
 /* we don't use bg for mc - fg contains both */
@@ -302,7 +306,7 @@ static void edit_draw_this_line (WEdit * edit, long b, long row, long start_col,
 		default:
 #ifdef HAVE_CHARSET
 		    if (c >= 0 && c <= 255)
-			c = conv_displ[ c ];
+			c = conv_displ[c];
 #endif
 		    /* Caret notation for control characters */
 		    if (c < 32) {
