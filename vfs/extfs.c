@@ -1334,7 +1334,7 @@ static int extfs_init (vfs *me)
     cfg = fopen (mc_extfsini, "r");
 
     if (!cfg) {
-	fprintf(stderr, "Warning: file %s not found\n", mc_extfsini);
+	fprintf(stderr, _("Warning: file %s not found\n"), mc_extfsini);
 	g_free (mc_extfsini);
 	return 0;
     }

@@ -1,3 +1,8 @@
+2001-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* extfs.c (extfs_init): Internationalize error message, it's
+	already in sfs.c.
+
 2001-08-11  Pavel Roskin  <proski@gnu.org>
 
 	* sfs.c (sfs_init): Use g_free(), not free() on mc_sfsini.
@@ -20,9 +25,9 @@
 
 2001-08-06  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* smbfs.c: Eliminate smbfs_get_free_bucket_init.  convert_path 
+	* smbfs.c: Eliminate smbfs_get_free_bucket_init.  convert_path
 	gives malloced filename, so this memory must be released after use.
-	
+
 	(reconnect): Fix segmentation fault.
 	(smbfs_loadddir): Don't g_strdup path.
 	(smbfs_get_free_bucket): Eliminate smbfs_get_free_bucket_init and
@@ -57,7 +62,7 @@
 	(server_browsing_helper): Likewise.
 
 	(cached_lstat_info): Eliminated.
-	(smbfs_readdir): Make dirent_dest static const. 
+	(smbfs_readdir): Make dirent_dest static const.
 	Eliminate cached_lstat_info.
 	(smbfs_open_link): Make user parameter const. Fix memory leak.
 	(fake_server_stat): Make path parameter const. Symplify.
@@ -218,7 +223,7 @@
 	* ftpfs.h: Declare use_netrc, ftpfs_retry_seconds, ftpfs_first_cd_then_ls,
 	ftpfs_use_passive_connections and ftpfs_use_unix_list_options.
 
-	* vfs.c [VFS_STANDALONE]: Undefine WITH_SMBFS, they are mutually 
+	* vfs.c [VFS_STANDALONE]: Undefine WITH_SMBFS, they are mutually
 	exclusive now.
 	(is_week): Unmade week static.
 	(is_month): Unmade month static.
@@ -231,7 +236,7 @@
 
 2001-05-30  Ludovic Drolez  <ludovic.drolez@freealter.com>
 
-	* sfs.c (sfs_init): Don't hardcode location of sfs.ini, 
+	* sfs.c (sfs_init): Don't hardcode location of sfs.ini,
 	use mc_home to make mc relocatable.
 	* util-alone.c (shell): ... here
 
@@ -387,7 +392,7 @@
 
 2001-03-04  Andrew V. Samoilov <sav@bcs.zp.ua>
 
-	* extfs/patchfs: LANG overrides LC_TIME at least in glibc, 
+	* extfs/patchfs: LANG overrides LC_TIME at least in glibc,
 	so use LC_ALL=C to override any locale
 	* smbfs.c (smbfs_open_link): service initialized
 	* (my_forget): new features of vfs_split_url used
@@ -570,7 +575,7 @@
 
 	* samba/libsmb/nterr.c (nt_errs): constified
 
-	* samba/libsmb/smberr.c (dos_msgs, server_msgs, hard_msgs, 
+	* samba/libsmb/smberr.c (dos_msgs, server_msgs, hard_msgs,
 	err_classes): ditto
 
 	(smb_errstr): err constified to avoid warnings
@@ -730,11 +735,11 @@
 	* direntry.c (vfs_s_find_entry_tree): segfault fixed when root is NULL
 
 	(vfs_s_new_inode, vfs_s_new_entry): g_new replaced by g_new0
-	
+
 	* ftpfs.c (dir_load): ent->name is free()d for "." and ".."
-	
+
 	(ftpfs_directory_timeout): default value changed to 900
-	
+
 	(netrc_next): "const char * const keywords" go to rodata and is shared
 
 2000-04-16  Pavel Machek  <pavel@bug.ucw.cz>
@@ -748,7 +753,7 @@
 2000-04-15  Timur Bakeyev  <mc@bat.ru>
 
 	* ftpfs.c (netrc_next): "const char * keywords" is pretty nice.
-	
+
 	* ftpfs.c (dir_load): At last, found place, that broke handling
 	directories with spaces in name. Problem was in prepending "/"
 	to "." for current directory. Which was, obviously, wrong. Hacked
@@ -769,7 +774,7 @@
 	* utilfs.c (vfs_split_url): don't assign *pass if pass is NULL
 	* fish.c (archive_open, archive_same): memory allocated by
 	  vfs_split_url () must be released after use, don't strdup()
-	  values allocated by vfs_split_url () and NULL passed to 
+	  values allocated by vfs_split_url () and NULL passed to
 	  vfs_split_url () when password value is unused
 	* ftpfs.c (archive_open, archive_same): ditto plus same for
 	  ftpfs_get_proxy_host_and_port ()
@@ -779,21 +784,21 @@
 	* ftpfs.c (netrc_next): Turned strange "const char * const keywords"
 	into more alike "const char const * keywords". Still, think, it's
 	too strict.
-	
+
 	* smbfs.c: Add #define BOOL_DEFINED before inclusion of samba headers.
 	Libncurses(or slang?) defines BOOL and that can cause problems. (In fact,
 	I can't find references to that const, but sure, I hade reason to do that:)
-	
+
 	* util-alone.h: Declare load_anon_passwd() to avoid warnings.
-	
+
 2000-03-31  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* vfs.c (mc_def_getlocalcopy): free() replaced by g_free() to prevent
-	  crushes with mad, thanks to Timur I. Bakeyev <timur@bat.ru> 
+	  crushes with mad, thanks to Timur I. Bakeyev <timur@bat.ru>
 	* fish.c (linear_start): name wasn't freed after usage
-	* cpio.c (cpio_ungetlocalcopy): return type changed to int, 
+	* cpio.c (cpio_ungetlocalcopy): return type changed to int,
 	  function return 0 now
-	* direntry.c (vfs_s_close, vfs_s_resolve_symlink): memory, allocated 
+	* direntry.c (vfs_s_close, vfs_s_resolve_symlink): memory, allocated
 	  by vfs_s_fullpath () is freed after use
 	* ftpfs.c (linear_start): ditto;
 
@@ -804,18 +809,18 @@
 
 2000-03-29  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
-	* fish.c: Patch by <rebel@atrey.karlin.mff.cuni.cz>: make 
-	fish work better with files files like "this is sentence"	
+	* fish.c: Patch by <rebel@atrey.karlin.mff.cuni.cz>: make
+	fish work better with files files like "this is sentence"
 
 2000-03-28  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/*rpm: Patch by <rebel@atrey.karlin.mff.cuni.cz>: set
 	locale to C so that rpm does not confuse us
-	
+
 2000-03-06  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	Patch by  Andrew V. Samoilov <sav@bcs.zp.ua>
-	
+
 	* vfs.c (vfs_parse_ls_lga): don't hard code st_ino and st_dev to 0's,
 	  these variables must be assigned in vfs_s_new_inode () or extfs
 	  layer, so ftpfs subdirectories now can be copied.
@@ -824,9 +829,9 @@
 
 	Patch by  Andrew V. Samoilov <sav@bcs.zp.ua>
 
-	* vfs.[ch] (vfs_canon, mc_open, vfs_file_is_local, 
+	* vfs.[ch] (vfs_canon, mc_open, vfs_file_is_local,
 	  mc_(un)?getlocalcopy): added const qualifier
-	(mc_def_getlocalcopy): tempnam() returns malloc()ed buffer, 
+	(mc_def_getlocalcopy): tempnam() returns malloc()ed buffer,
 	  so, free() it, not g_free();
 	(vfs_canon): prepend filename by cwd when tilde '~' cannot be expanded;
 
@@ -845,7 +850,7 @@
 	where appropriate.
 
 	(dir_load): Do not hard code the directory cache timeout to 10
-	seconds. Instead use the setting from Options/Virtual VFS ... 
+	seconds. Instead use the setting from Options/Virtual VFS ...
 
 	* fish.c (file_store): honour changed semantics for return value
 	(on error -1 is expected).
@@ -886,7 +891,7 @@
 	message
 
 	* ftpfs.c: cosmetic fixes by Andrew V. Samoilov
-	
+
 2000-01-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* ftpfs.c: cosmetic fixes + killed ugly infinite loop, patch
@@ -903,7 +908,7 @@
 	depending on the version, it saves files as "./filename" or
 	"filename".
 
-	* From debian: added deba, debd, dpkg, apt script file systems. 
+	* From debian: added deba, debd, dpkg, apt script file systems.
 
 1999-12-28  Andrew V. Samoilov <sav@bcs.zp.ua>
 
@@ -938,7 +943,7 @@
 
 	* fish.c: don't use directory expiration, it does not work,
 		use retrieve_file from direntry.c
-	
+
 
 1999-02-17  Pavel Machek  <pavel@bug.ucw.cz>
 
@@ -958,7 +963,7 @@
 
 1999-09-22  Bjorn Eriksson <mdeans@algonet.se>
 
-	* extfs/uzip.in: Better handling of zip-archives that contain files 
+	* extfs/uzip.in: Better handling of zip-archives that contain files
 	which contain spaces.
 
 1999-09-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
@@ -978,15 +983,15 @@
 1999-09-14  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* smbfs.c (various places): Store filenames in memory with the unix
-	character set and convert it back to the dos character set when 
-	filenames are passed back to the samba server. If samba is configured 
-	correctly this will fix the problems with filenames which contain 
+	character set and convert it back to the dos character set when
+	filenames are passed back to the samba server. If samba is configured
+	correctly this will fix the problems with filenames which contain
 	national characters.
 
 	(bucket_set_authinfo): Set domain, username and password which will
 	be used to log on and authenticate against the samba server and remember
 	this information on a host/share basis. If set use PASSWD to get the
-	password. If already authenticated against the host and share use this 
+	password. If already authenticated against the host and share use this
 	information. If already authenticated against host and IPC$ use this
 	information. If neither of the former is true ask the user how to
 	log on.
@@ -995,26 +1000,26 @@
 	domain, username and password to use for authentication.
 
 	(authinfo_free): New function. Free memory in authentication structure.
-	
+
 	(authinfo_free_all): New function. Free the list used to remember
 	authentication information.
-	
+
 	(authinfo_compare_host_and_share, authinfo_compare_host): New functions.
 	Helper functions used to search the authentication list.
-	
-	(authinfo_add): New function. Add one authentication entry to the 
+
+	(authinfo_add): New function. Add one authentication entry to the
 	authlist.
-	
+
 	(authinfo_remove): New function. Remove one entry from the authlist.
 
 	(free_bucket): Free memory associated with one bucket.
-	
-	(smbfs_get_free_bucket): Initialize the complete connection array 
+
+	(smbfs_get_free_bucket): Initialize the complete connection array
 	with 0. Free the memory allocated for a bucket and initialize the
 	bucket before reusing it.
-	
+
 	(smbfs_open_link): use new functions to get authentication information
-	
+
 	(get_stat_info, smbfs_stat): remove unused variables.
 
 1999-08-31  Federico Mena Quintero  <federico@redhat.com>
@@ -1041,7 +1046,7 @@
 	and ls -lLa doesn't resolve the symlink either)
 
 	Added protection against recursive symbolic links.
-	
+
 1999-08-19  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* smbfs.c: added missing include file
@@ -1056,19 +1061,19 @@
 
 	(get_remote_stat): fixed memory leaks
 	(smbfs_loaddir): ditto
-	(get_stat_info): ditto 
+	(get_stat_info): ditto
 	(smbfs_stat): ditto
 
-	(convert_path): rewritten, now it's much cleaner what it does. 
+	(convert_path): rewritten, now it's much cleaner what it does.
 	This rewrite was necessary because gcc -O2 choked on glibc 2.1
 	systems. In that combination strncat is a macro which expands to
 	strlen and strcat and in vfs/samba/include/includes.h the latter is
-	defined to __ERROR__XX__NEVER_USE_STRCAT___;. 
+	defined to __ERROR__XX__NEVER_USE_STRCAT___;.
 
 1999-08-18  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* direntry.c (vfs_s_getlocalcopy): There's an aditional strdup
-	needed. In rare cases a pointer was freed twice. Pavel Machek 
+	needed. In rare cases a pointer was freed twice. Pavel Machek
 	pointed this out a while ago but obviously it hasn't been fixed yet.
 
 	* sfs.c (vfmake): Quote characters with a special meaning to the
@@ -1078,7 +1083,7 @@
 1999-08-17  Kjartan Maraas  <kmaraas@online.no>
 
 	* fish.c: Fix typo.
-	
+
 1999-08-15  David Martin <dmartina@usa.net>
 
 	* vfs.c (vfs_print_stats): Translate vfs stats
@@ -1095,7 +1100,7 @@
 1999-08-01  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* vfs.c: Don't close a function definition with "};". SunCC from
-	2.5.1 chokes on the extra semicolon 
+	2.5.1 chokes on the extra semicolon
 
 	(mc_munmap): Don't dereference function pointer when checking for
 	NULL (this check is supposed to prevent a segfault instead of
@@ -1110,7 +1115,7 @@ Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 	* Make-mc.in(XCPPFLAGS): Add necessary paths to allow compile sambafs
 	when builddir != srcdir. Removed some junk after not coherent patching.
-	
+
 1999-07-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Make-mc.in (distcopy): Added a bunch of new lists of files for
@@ -1145,7 +1150,7 @@ Tue Jul  6 11:18:45 1999  Timur I. Bakeyev  <mc@bat.ru>
 
 Fri Jun 18 11:49:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* ftpfs.c (resolve_symlink_with_ls_options): Some ftp servers don't 
+	* ftpfs.c (resolve_symlink_with_ls_options): Some ftp servers don't
 	make a difference between "LIST -la" and "LIST -lLa". If we find such
 	a server don't use -lLa when resolving symbolic links.
 
@@ -1153,7 +1158,7 @@ Fri Jun 18 11:49:05 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* urar.in, uzip.in: patches to use in #urar and #uzip the new features
 	added in mc-4.5.31 (unlink, mkdir, rmdir)
-	
+
 1999-04-30  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* extfs/deb.in (mcdebfs_run): Quote string properly, fix suggested
@@ -1187,7 +1192,7 @@ Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* urar.in, uzip.in: rolled in patches from "christian.gennerat"
 	<christian.gennerat@vz.cit.alcatel.fr> for better handling of
-	spaces and copyin-feature-addon.	
+	spaces and copyin-feature-addon.
 
 1999-04-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1236,13 +1241,13 @@ Wed Apr 21 21:59:50 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Sun Mar 28 23:50:47 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* vfs.h (vfs_translate_url): Fixed the macro which is used when 
+	* vfs.h (vfs_translate_url): Fixed the macro which is used when
 	compiling without vfs.
 
 1999-03-22  David Martin <dmartina@mailexcite.com>
-	
+
 	* ftpfs.c: Internationalize the messages that are displayed as
-	hints. 
+	hints.
 
 1999-03-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1282,7 +1287,7 @@ Tue Feb 16 12:11:04 1999 Paul Sheer <psheer@obsidian.co.za>
 	of st_rdev. This makes stats on device files useless. Fixing
 	this does not break anything, but adds the ability to copy
 	device files properly. Ideally, both st_dev and st_rdev should
-	be returned for those programs that use the vfs to properly 
+	be returned for those programs that use the vfs to properly
 	recreate hardlinks. Whose idea was it to only return one of
 	these???
 
@@ -1297,8 +1302,8 @@ Sat Feb  6 23:44:28 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 Mon Feb  1 19:32:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* ftpfs.c (insert_dots): renamed from insert_dot. We have to 
-	insert ".." as well or directories from ftp servers which don't 
+	* ftpfs.c (insert_dots): renamed from insert_dot. We have to
+	insert ".." as well or directories from ftp servers which don't
 	list "." and ".." are displayed with an additional "/".
 
 Mon Feb  1 02:55:07 1999  Timur I. Bakeyev <mc@bat.ru>
@@ -1320,12 +1325,12 @@ Sun Jan 31 20:51:17 1999  Alexander Savelyev <fano@vcom.kiev.ua>
 
 Sun Jan 31 20:41:00 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* mcserv.c (do_link): Removed duplicate invokation of link. Thanks 
+	* mcserv.c (do_link): Removed duplicate invokation of link. Thanks
 	to Grzegorz Makarewicz <mak@mikroplan.com.pl> for spotting this.
-	
+
 Sun Jan 31 20:04:13 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* vfs.c (vfs_strip_suffix_from_filename): Whoever replaces every 
+	* vfs.c (vfs_strip_suffix_from_filename): Whoever replaces every
 	occurance of 0 with NULL should stop this stupidy. And replacing
 	'\0' with NULL is plan wrong!!. Reverted this replacement.
 
@@ -1341,14 +1346,14 @@ Sun Jan 31 19:57:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	haven't send it.
 
 Sun Jan 31 19:50:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
-	
-	* The following changes make ftpfs work with a remote AmiTCP
-	server are the result of somehow longish EMail debugging session. I 
-	don't know any public server of this kind but I was told the
-	combination Unix/Amiga boxes are often used in intranets. 
 
-	* ftpfs.c (translate_path): New function. Translate a Unix path, 
-	i.e. MC's internal path representation (e.g. /somedir/somefile) to 
+	* The following changes make ftpfs work with a remote AmiTCP
+	server are the result of somehow longish EMail debugging session. I
+	don't know any public server of this kind but I was told the
+	combination Unix/Amiga boxes are often used in intranets.
+
+	* ftpfs.c (translate_path): New function. Translate a Unix path,
+	i.e. MC's internal path representation (e.g. /somedir/somefile) to
 	a path valid for the remote server. Every path transfered to the
 	remote server has to be mangled by this function right prior to
 	sending it. Currently only Amiga ftp servers are handled in a
@@ -1360,7 +1365,7 @@ Sun Jan 31 19:50:24 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	the greatings string from the server contains the word Amiga. If
 	this assumption is wrong I have to find another way to turn on
 	path translation.
-	
+
 	* ftpfs.c (ftpfs_get_current_directory): Prepend a leading slash
 	if it is missing. MC needs it as seperator between hostname and
 	path in its internal url representation.
@@ -1375,7 +1380,7 @@ Wed Jan 27 03:09:48 1999  Timur I. Bakeyev <mc@bat.ru>
 	* All around the source: Changed copy_strings() to g_strconcat(). Modi-
 	fy last parameter in concat_dir_and_file() to "" - to prevent stack from
 	disbalancing.
-	
+
 1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.am (libvfs_la_SOURCES): Added utilvfs.h.
@@ -1402,26 +1407,26 @@ Fri Jan 22 01:41:25 1999  Timur I. Bakeyev <mc@bat.ru>
 Thu Jan 21 00:58:12 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* Actually commit all changes :>
-	
+
 Tue Jan 19 05:15:49 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* Converted all occurences of DIR_SEP_CHAR and "/" to PATH_SEP and
 	PATH_SEP_STR. Additionall cleanups of the memory code.
-	
+
 	* utilvfs.h: Added several defenitions for common sizes for buffers.
 	It seems, most of us experience problems, when inventing size for new
 	buffer. This is much better and portable way to eliminate the problem.
 
 1999-01-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* vfs.h: The correct thing to use is PATH_SEP and PATH_SEP_STR 
+	* vfs.h: The correct thing to use is PATH_SEP and PATH_SEP_STR
 
 Sun Jan 17 16:19:48 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
-	g_strdup()/g_free() routings. Also, copy_strings() replaced by 
+	g_strdup()/g_free() routings. Also, copy_strings() replaced by
 	g_strconcat(), and sprintf() by g_snprintf().
-	
+
 	* utilvfs.h: New header file. Introduced as a stock header, which keeps
 	all includes in a right order, to avoid order-dependence mistakes.
 
@@ -1470,12 +1475,12 @@ Sat Jan  9 22:49:02 1999  Timur I. Bakeyev <mc@bat.ru>
 
 Fri Jan  8 20:03:36 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
 
-	* vfs.c (vfs_parse_filedate): I forgot to set got_year in one place 
+	* vfs.c (vfs_parse_filedate): I forgot to set got_year in one place
 	(where YY-MM-DD is parsed).
 
 Thu Jan  7 06:24:25 1999  Andrej Borsenkow <borsenkow.msk@sni.de>
 
-	* vfs.c (vfs_parse_filedate): If the date is less than 6 months 
+	* vfs.c (vfs_parse_filedate): If the date is less than 6 months
 	in the past, it is shown without year. In this case MC assumed
 	the current year which is wrong from Jan to Jun.
 
@@ -1486,7 +1491,7 @@ Thu Jan  7 03:47:35 1999  Timur I. Bakeyev <mc@bat.ru>
 Thu Dec 31 08:47:15 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* sfs.c (sfs_nothingisopen): Assume for now it's always save to free
-	this filesystem and delete temporary files. This needs further 
+	this filesystem and delete temporary files. This needs further
 	investigation.
 
 	* tar.c: deleted unused empty struct tar_super.
@@ -1561,15 +1566,15 @@ Mon Dec  7 11:04:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* direntry.c (vfs_s_insert_super): This routine does not return
-	anything. 
+	anything.
 
 1998-12-02  Sebastian Wilhelmi  <wilhelmi@ira.uka.de>
 
 	* fish.c (FISH_OP): changed snprintf to g_snprintf, as glib is
 	used anyway.
 
-	* xdirentry.h (LINK_NO_FOLLOW): 
-	* tar.c (read_header): 
+	* xdirentry.h (LINK_NO_FOLLOW):
+	* tar.c (read_header):
 	* direntry.c (vfs_s_resolve_symlink):
 	(vfs_s_inode_from_path):
 	(vfs_s_open): renamed NO_FOLLOW and FOLLOW to LINK_NO_FOLLOW and
@@ -1588,7 +1593,7 @@ Sun Nov 29 02:54:54 1998  Timur I. Bakeyev <mc@bat.ru>
 	* vfs.h: (Temporary?) fix to the compiling error: Some of the error
 	codes, defined here are Linux specific and unknown to other systems.
 	Changed to #ifdef's with assigning new codes by means ELAST+offset.
-	
+
 Tue 24 Nov 12:43:20 1998  Peter Kleiweg  <kleiweg@let.rug.nl>
 
 	* vfs.c (vfs_parse_ls_lga): ignore trailing + in permission string
@@ -1601,11 +1606,11 @@ Mon Nov 23 21:19:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	(resolve_symlink_without_ls_options): that's resolve_symlinks
 	we used in release 4.1.36 and 4.5.[01]. It gets symlink stats from the
-	directory cache fetching directories if necessary. We got some 
+	directory cache fetching directories if necessary. We got some
 	complaints about slower ftpfs in the above releases. Now this methode
 	is no longer the default methode to resolve symbolic links. It is still
 	needed for ftp servers which don't understand the LIST -lLa command.
-	
+
 	(resolve_symlink): Dispatch between the two methods to
 	resolve symlinks.
 
@@ -1644,12 +1649,12 @@ Thu Nov 12 11:28:48 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* fish.c (command): Replace vnsprintf with g_strdup_vprintf.  This
 	is both safe and more correct, as there is no limit on the
-	pathname. 
-	
+	pathname.
+
 	* ftpfs.c (command): Same as above.
 
 	* util-alone.c (print_vfs_message): Same as above.
-	
+
 Wed Oct 28 17:06:57 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* ftpfs.c: report which directory you are listing, fix behaviour
@@ -1680,12 +1685,12 @@ Thu Oct 22 22:24:44 1998  Pavel Machek  <pavel@bug.ucw.cz>
 	read this one.
 
 	* direntry.{c,h}: new library created, so that same entry/inode
-	code does not have to be copied in every handler. 
+	code does not have to be copied in every handler.
 
-	* tar.c: converted to use direntry.c library, which means BIG changes. 
+	* tar.c: converted to use direntry.c library, which means BIG changes.
 
 	* ftpfs.c: small updates to make code look nicer
-	
+
 Mon Oct 19 19:40:58 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.h (&more): killed ERRNOR() from vfs.h and put it into files
@@ -1712,7 +1717,7 @@ Thu Oct 22 20:30:28 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink, retrieve_dir): Don't timeout and
 	free dcache while resolving symlinks (i.e. don't free some
-	pointers which are in use by resolve_symlink). 
+	pointers which are in use by resolve_symlink).
 
 Mon Oct 19 11:44:47 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
@@ -1767,7 +1772,7 @@ Sun Oct 11 01:44:37 1998  Pavel Machek  <pavel@bug.ucw.cz>
 	that goal is far away).
 
 	* all over the code: replace X_vfs_ops to vfs_X_ops
-	
+
 Mon Oct  5 20:11:01 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* vfs.c: added stat to avoid hiding files by naming them
@@ -1783,7 +1788,7 @@ Sat Oct  3 14:28:57 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink): fixed cut'n paste error in my last
 	change, i.e. make it compile)
-	
+
 Sat Oct  3 01:03:37 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* ftpfs.c (resolve_symlink): minor speed enhancement
@@ -1799,12 +1804,12 @@ Tue Sep 29 17:23:03 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 Mon Sep 28 21:43:16 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* vfs.h (struct vfs): renamed errno to verrno because glibc2 
+	* vfs.h (struct vfs): renamed errno to verrno because glibc2
 	defines errno as macro (#define errno (*__errno_location ()))
 
 Mon Sep 28 21:34:03 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
-	* Makefile.in: search config.status in builddir and not in srcdir/.., 
+	* Makefile.in: search config.status in builddir and not in srcdir/..,
 	i. e. make it compile for builddir != srcdir
 
 Sun Sep 27 16:16:52 1998  Pavel Machek  <pavel@bug.ucw.cz>
@@ -1823,7 +1828,7 @@ Wed Sep 23 22:37:40 1998  Pavel Machek  <pavel@bug.ucw.cz>
 1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* shared_ftp_fish.c: Addaed prototypes for linear_start, linear_read,
-	linear_close 
+	linear_close
 
 Wed Sep 23 15:09:55 1998  Tom Tromey  <tromey@cygnus.com>
 
@@ -1832,7 +1837,7 @@ Wed Sep 23 15:09:55 1998  Tom Tromey  <tromey@cygnus.com>
 
 Wed Sep 23 13:33:14 1998  Pavel Machek <pavel@ucw.cz>
 
-	* ftpfs.c: Fixed segfault caused by unitialized varialble 
+	* ftpfs.c: Fixed segfault caused by unitialized varialble
 
 Wed Sep 23 11:51:12 1998  Pavel Roskin <pavel_roskin@geocities.com)
 
@@ -1840,7 +1845,7 @@ Wed Sep 23 11:51:12 1998  Pavel Roskin <pavel_roskin@geocities.com)
 	This caused funny effects if "XTerm hintbar" was on.
 
 Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
-	
+
 	* ftpfs.c, fish.c: added O_LINEAR mode to handle linear read of
 	files in sane way. copy_file_file will make temporary files for a
 	while (fix pending).
@@ -1848,7 +1853,7 @@ Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
 	* tar.c: fixed bzip/bzip2 compressed archives
 
 Wed Sep 18 12:51:51 1998  Pavel Machek <pavel@ucw.cz>
-	
+
 	* fish.c, vfs.c: created aliases /#ssh: and /#rsh:
 
 	* vfs.h: created ERRNOR() macro which sets my_errno and returns,
@@ -1861,14 +1866,14 @@ Fri Sep 18 10:37:28 1998  Pavel Roskin <pavel_roskin@geocities.com)
 
 Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
-	* ftpfs.c (ftp_use_unix_list_options): New global variable/option. 
-	If true we try to use 'LIST -la <path>'. When it fails we use the 
-	two commands 'CWD <path>' and 'LIST' instead. 
-	
-	(resolve_symlink): rewritten. Don't get a second directory listing 
+	* ftpfs.c (ftp_use_unix_list_options): New global variable/option.
+	If true we try to use 'LIST -la <path>'. When it fails we use the
+	two commands 'CWD <path>' and 'LIST' instead.
+
+	(resolve_symlink): rewritten. Don't get a second directory listing
 	with `LIST -lLa'. Instead use the cache to get the file stat of
 	symbolic links. If the directory the symlink points to isn't
-	already in the cache the directory listing will be fetched and 
+	already in the cache the directory listing will be fetched and
 	stored in the directory cache (without resolving symlinks
 	recursively).
 	The new method to resolve symlinks is faster if symlinks
@@ -1876,12 +1881,12 @@ Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	is already in the cache.
 	This function was small and nice until I discovered that it was
 	broken for symlinks to symlinks. Now it looks ugly and perhaps I
-	will revert it to use "LIST -lLa" again. With a fast connection it 
+	will revert it to use "LIST -lLa" again. With a fast connection it
 	doesn't matter which methode we use but with a slow connection I
 	wouldn't hesitate to burn more cpu cycles on the client side.
 
 	(retrieve_dir): Added parameter to tell whether to resolve
-	symlinks (don't resolve symlinks in directory listings retrieved 
+	symlinks (don't resolve symlinks in directory listings retrieved
 	while resolving symlinks).
 	When we don't get a directory listing with 'LIST -la <path>' then
 	try to get it with `CWD <path>; LIST'.
@@ -1889,10 +1894,10 @@ Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
 Tue Sep 15 20:27:29 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (login_server): s/ftpfs_get_host/my_get_host/
-	
-	(retrieve_file_start2): Don't create target file O_EXCL, in 
+
+	(retrieve_file_start2): Don't create target file O_EXCL, in
 	copy_file_file we check existance of the target file and know
-	that we want to truncate it (this change was already done a 
+	that we want to truncate it (this change was already done a
 	while back but it was reverted with the vfs-split).
 
 Tue Sep 15 20:15:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
@@ -1938,7 +1943,7 @@ Wed Sep  2 13:59:47 1998  Pavel Machek <pavel@ucw.cz>
 
 	* util-alone.c: now includes code from libvfs.c, so we can kill
 	libvfs.c (which is good thing as it was non-standard in Makefiles)
-	
+
 Sun Aug 30 13:19:49 1998  Pavel Machek <pavel@ucw.cz>
 
 	* undelfs.c: fixed, it has been broken for too long
@@ -1964,7 +1969,7 @@ Thu Aug 27 19:45:31 1998  Pavel Roskin <pavel_roskin@geocities.com>
 	* Makefile.am: sfs.c was not linked to standalone VFS
 
 Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
-	
+
 	* Added vfs_uid for use by libvfs.so users (rpc.nfsd)
 
 	* Added single file filesystem (sfs)
@@ -1974,11 +1979,11 @@ Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
 
 	* Minor shuffling of functions so garbage collection works for
 	library
-	
+
 1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (mad.c, mad.h): Create symlinks to counterparts in
-	`mc-src'. 
+	`mc-src'.
 
 Wed Aug 12 19:04:48 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
@@ -2032,18 +2037,18 @@ Mon Jun 22 22:30:00 1998  Manish Vachharajani <mvachhar@vger.rutgers.edu>
 Wed Jun 17 Pavel Machek <pavel@ucw.cz>
 	* Rename helper scripts (extfs/{rar|lha|...}.in), so their names
 	are more logical (and so that things actually work, because new
-	names are currently in extfs.ini). 
-	
+	names are currently in extfs.ini).
+
 Wed Jun 17 Pavel Machek <pavel@ucw.cz>
 	* Modified code to use tempnam() instead of tmpnam(), fixed
-	tempnam() to use NULL instead of 0. 
+	tempnam() to use NULL instead of 0.
 
 Wed Jun  3 Pavel Machek <pavel@ucw.cz>
 
 	* libvfs.c: adding libvfs.c which should contain things specific
 	to stand-alone libvfs.so. (This file was missing from previous
 	merge.)
-	
+
 Mon Jun  1 16:00:19 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (ftpfs_fill_names): use right character to seperate
@@ -2063,18 +2068,18 @@ Thu May 28 16:42:31 1998  Pavel Machek <pavel@ucw.cz>
 	* extfs.c, shared.c, tar.c: I changed semantics in my previous
 	patch - _get_path() now modifies strings passed to it. I thought
 	that I were carefull enough not to introduce bugs. You guessed it -
-	I was not. [Many tar_ and extfs_ functions modify strings passed 
-	to them, but as they are only called from vfs layer, it does not 
+	I was not. [Many tar_ and extfs_ functions modify strings passed
+	to them, but as they are only called from vfs layer, it does not
 	matter much.]
-	So I renamed function to alert everyone that semantics changed. 
+	So I renamed function to alert everyone that semantics changed.
 
-	Fixed bugs in timestamping (and segfaults) when you entered tar 
+	Fixed bugs in timestamping (and segfaults) when you entered tar
 	inside zip file or similar.
 
 	* vfs.c (mc_open): Die if the filesystem doesn't support open
 
 ???         Pavel Machek <pavel@ucw.cz>
-	
+
 	* shared.c: Shared parts of extfs.c and tar.c are now in shared.c
 
 	* util-alone.*: VFS should be able to compile stand-alone into
@@ -2088,7 +2093,7 @@ Thu May 28 16:42:31 1998  Pavel Machek <pavel@ucw.cz>
 
 1998-05-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* vfs.c (MC_DIROP): Macro now returns the proper value. 
+	* vfs.c (MC_DIROP): Macro now returns the proper value.
 
 1998-maj-18  Tamasi Gyorgy (gt_cosy@usa.net)
 
@@ -2103,11 +2108,11 @@ Sun May 10 14:51:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (__ftpfs_chdir): CWD command wasn't sent at all. This
 	optimation is wrong because for directories containing spaces we
-	have to "CWD <pathname>" and "LIST -la" instead of 
+	have to "CWD <pathname>" and "LIST -la" instead of
 	"LIST -la <pathname>".
 	I implemented a different optimation. Now ftpfs_chdir only stores
-	the new working directory and sets a flag. __ftpfs_chdir is called 
-	when we really want to change the directory on the ftp server. 
+	the new working directory and sets a flag. __ftpfs_chdir is called
+	when we really want to change the directory on the ftp server.
 
 	(resolve_symlink): Log the directory listing to the logfile.
 
@@ -2117,10 +2122,10 @@ Sun May 10 14:51:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 Mon May  4 10:27:49 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in: Links to mad.c and mad.h were created wrong when
-	srcdir != builddir and directory depth to srcdir and builddir were 
+	srcdir != builddir and directory depth to srcdir and builddir were
 	different (e.g. srcdir=/src/mc and builddir=/src/compile/mc)
 
-	* ftpfs.c (retrieve_file_start2): Don't create target file O_EXCL, 
+	* ftpfs.c (retrieve_file_start2): Don't create target file O_EXCL,
 	in copy_file_file we check existance of the target file and know
 	that we want to truncate it.
 
@@ -2133,7 +2138,7 @@ Tue Apr 28 06:06:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* extfs.c (extfs_open, extfs_close): Changed my_system(1,...) to
 	my_system(EXECUTE_AS_SHELL,...), this fixes the broken copyin and
 	copyout of 4.1.32.
-	
+
 1998-04-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* ftpfs.c (retrieve_file_start2): Open file exclusively.
@@ -2155,15 +2160,15 @@ Mon Mar 23 00:42:21 1998  Christofer Edvardsen <ce@earthling.net>
 Wed Feb 11 14:09:02 1998  Oleg <oleg@pobox.com>
 
 	* extfs.c: Add support for writtable external file systems.
-	Required for the httpfs. 
+	Required for the httpfs.
 
 Fri Jan 23 07:27:37 1998  Peter Daum <gator@cs.tu-berlin.de>
 
 	* extfs.c (open_extfs_archive): Pass the quoted argument to the
-	list command. 
+	list command.
 
 	* mailfs: new file system.
-	
+
 1997-12-21  Yuri Kuzmenko <Yuri.Kuzmenko@f169.n463.z2.fidonet.org>
 
 	* tar.c: fix the bug which core dumps when trying to view tar file
@@ -2180,7 +2185,7 @@ Thu Jul  3 19:08:43 1997  Michele Marziani <marziani@axpfe1.fe.infn.it>
 	* extfs/rpm: Small fix for older RPM files.
 
 Mon Jun  9 19:00:30 1997  Norbert Warmuth <k3190@fh-sw.de>
-	
+
 	* vfs/vfs.c (vfs_canon): Fix for the 'cd a:/somedir/..' problem
 
 	* vfs/vfs.c (vfs_add_non_current_stamps): when leaving a mtools fs
@@ -2206,26 +2211,26 @@ Fri May 16 16:42:18 1997  Tomasz K³oczko, <kloczek@rudy.mif.pg.gda.pl>
 	* mc.spec: New spec file, this packages mc, mcserv and tkmc.
 
 	* lib/mcserv.init, lib/mc.sh, lib/mcserv.pamd: added
-	
+
 	* vfs/ext/rpm: instead using sed and rpm -qpi use rpm queries,
-	more info currently displayed (changeslogs, Os, URL, packager 
+	more info currently displayed (changeslogs, Os, URL, packager
 
 Tue May 13 18:14:49 1997  Wojtek Pilorz <wpilorz@bdk.lublin.pl>
 
 	* vfs/Makefile.in (INSTALL_PROGRAM): Use -m flag for install to
 	force vfs scripts to be executable on those systems that use
-	install.sh 
+	install.sh
 
 	* src/utilunix.c: Implement socketpair for SCO flavored systems.
-	
+
 Mon Mar 17 12:03:50 1997  Norbert Warmuth <k3190@fh-sw.de>
 
 	* configure.in (--with-hsc): fix.
-	
+
 	* vfs/ftpfs.c (ftpfs_get_proxy_host_and_port): Fixed wrong parameter
 	passing (HSC_DEFAULT_PORT was passed as pointer to char instead of
 	passing it as integer)
-	
+
 Tue Feb 25 20:21:00 1997  Joseph M. Hinkle <jhinkle@rockisland.com>
 
 	* extfs/lha: Updated the lha filesystem and included a command
@@ -2233,5 +2238,5 @@ Tue Feb 25 20:21:00 1997  Joseph M. Hinkle <jhinkle@rockisland.com>
 	by Zdenek Kabelac <kabi@informatics.muni.cz>
 
 	* extfs/: Renamed cpio, deb, rar, rpm as *.in files and altered
-	config.in to create these VFS's for cleaner compilation 
-	
+	config.in to create these VFS's for cleaner compilation
+
