@@ -856,7 +856,7 @@ perm_group_new (GnomeFilePropertyDialog *fp_dlg)
 				grpname = grpnum;
 			}
 		} else {
-			sprintf (grpnum, "%d", (int) grp->gr_gid);
+			sprintf (grpnum, "%d", (int) fp_dlg->st.st_gid);
 			grpname = grpnum;
 		}
 			
