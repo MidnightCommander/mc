@@ -1,3 +1,7 @@
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
+	* NEWS: Added the changes between mc-4.6.1-pre3 and now.
+
 2005-01-27  Roland Illig  <roland.illig@gmx.de>
 
 	* configure.ac: Add checks for C headers <sys/mkdev.h> and
