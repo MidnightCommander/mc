@@ -996,7 +996,6 @@ new_icons/Makefile
 pc/Makefile
 
 lib/mc.ext
-lib/mc-gnome.ext
 lib/mc.sh
 lib/mc.csh
 

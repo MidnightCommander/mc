@@ -5,7 +5,7 @@ tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
 
 LOCALIZED_HELP = mc.hlp.hu
-LIBFILES_OUT = mc.ext mc-gnome.ext
+LIBFILES_OUT = mc.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.it mc.hint.pl \
 	mc.hint.ru mc.lib mc.menu cedit.menu edit.indent.rc
 
