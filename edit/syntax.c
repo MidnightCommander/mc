@@ -147,7 +147,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		       const char *whole_left, const char *whole_right,
 		       int line_start)
 {
-    unsigned char *p, *q;
+    const unsigned char *p, *q;
     int c, d, j;
     if (!*text)
 	return -1;
@@ -220,12 +220,12 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    for (;; i++) {
 		d = c;
 		c = edit_get_byte (edit, i);
-		for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET; j++)
+		for (j = 0; p[j] != SYNTAX_TOKEN_BRACKET && p[j]; j++)
 		    if (c == p[j])
 			goto found_char2;
 		break;
 	      found_char2:
-		j = c;		/* dummy command */
+		; /* dummy command */
 	    }
 	    i--;
 	    while (*p != SYNTAX_TOKEN_BRACKET && p <= q)
@@ -239,12 +239,13 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    if (++p > q)
 		return -1;
 	    c = edit_get_byte (edit, i);
-	    for (; *p != SYNTAX_TOKEN_BRACE; p++)
+	    for (; *p != SYNTAX_TOKEN_BRACE && *p; p++)
 		if (c == *p)
 		    goto found_char3;
 	    return -1;
 	  found_char3:
-	    for (; *p != SYNTAX_TOKEN_BRACE && p <= q; p++);
+	    while (*p != SYNTAX_TOKEN_BRACE && p < q)
+		 p++;
 	    break;
 	default:
 	    if (*p != edit_get_byte (edit, i))

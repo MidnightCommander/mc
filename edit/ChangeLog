@@ -1,3 +1,8 @@
+2003-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* syntax.c (compare_word_to_right): More checks for braces and
+	brackets.
+
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
 	* syntax.c (compare_word_to_right): Fix recent breakage - rules
