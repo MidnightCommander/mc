@@ -1,3 +1,7 @@
+2004-12-02  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* file.c (make_symlink): Constify r.
+
 2004-12-02  Leonard den Ottolander  <leonard * den ottolander nl>
 
         * file.c (copy_dir_dir): Code cleanup (removal of unnecessary goto,

@@ -377,9 +377,9 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 	}
 
     if (ctx->stable_symlinks && *link_target != PATH_SEP) {
-	char *p, *q, *r, *s;
+	char *p, *q, *s;
 
-	r = strrchr (src_path, PATH_SEP);
+	const char *r = strrchr (src_path, PATH_SEP);
 
 	if (r) {
 	    p = g_strndup (src_path, r - src_path);
@@ -387,9 +387,9 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 		q = g_strdup (dst_path);
 	    else
 		q = g_strconcat (p, dst_path, (char *) NULL);
-	    r = strrchr (q, PATH_SEP);
-	    if (r) {
-		r[1] = 0;
+	    s = strrchr (q, PATH_SEP);
+	    if (s) {
+		s[1] = 0;
 		s = g_strconcat (p, link_target, (char *) NULL);
 		g_free (p);
 		g_strlcpy (link_target, s, sizeof (link_target));
@@ -401,7 +401,6 @@ make_symlink (FileOpContext *ctx, const char *src_path, const char *dst_path)
 		}
 	    } else
 		g_free (p);
-
 	    g_free (q);
 	}
     }
