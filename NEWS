@@ -1,3 +1,9 @@
+Changes made after 4.6.0-pre1.
+
+- Polish manual has been added.
+- glib is now properly detected on FreeBSD.
+
+
 Version 4.6.0-pre1.
 
 - Security release.  Massive code cleanup.  Most improvements didn't
