@@ -8,9 +8,9 @@ Ayudita: Para introducir un carácter especial: C-q y el caracter.
 Ayudita: ¿Harto de mensajitos? Se quitan en el menú Opciones/Presentación.
 Ayudita: Para seleccionar directorios añadir "/" tras el patrón a buscar.
 Ayudita: Si no funcionan las teclas de función, ESC+número sirve.
-Ayudita: El web del Midnight Commander está en http://www.gnome.org/mc/
+Ayudita: El web del Midnight Commander está en http://www.ibiblio.org/mc/
+Ayudita: El sitio oficial del Midnight Commander es http://www.ibiblio.org/mc/
 Ayudita: Comunique cualquier defecto a mc-devel@gnome.org
-Ayudita: El sitio oficial del Midnight Commander es http://www.gnome.org/mc/
 Ayudita: El tabulador cambia de panel.
 Ayudita: ¡El mejor VFS! Al <entrar> en un archivo comprimido se ve su contenido.
 Ayudita: El Midnight Commander tiene manual: "man mc"
@@ -33,7 +33,7 @@ Ayudita: Con C-y puede recuperar texto eliminado.
 Ayudita: ¿Alguna tecla rebelde? Puede educarla con "Redefinir teclas".
 Ayudita: Para ver la salida de un comando por el visor M-!
 Ayudita: F13 (o Mayúsculas-F3) invoca el visor en modo primitivo, sin formatos.
-Ayudita: ¿Problemas de teclas en terminales X? Use xterm.ad, .ti y .tcap 
+Ayudita: ¿Problemas de teclas en terminales X? Use xterm.ad, .ti y .tcap
 Ayudita: F4 puede usar cualquier editor que indiquemos en la variable EDITOR.
 Ayudita: Se puede usar un visor externo indicado en la variable PAGER.
 Ayudita: Para deshabilitar los mensajes de Confirmación vaya al menú Opciones.

@@ -7,9 +7,9 @@ Tipp: Speciális karaktert kell beírni? Használd ezt: Control-q <karakter>
 Tipp: Az itt megjelenõ üzenetek kikapcsolhatók a "Beállítások/Megjelenés"-nél.
 Tipp: Könyvtárak kijelölése a minta végére / jelet írva lehetséges.
 Tipp: Ha a terminálon nincsenek funkcióbillentyûk, használd ezt: Esc <szám>
-Tipp: A Midnight Commander internet-címe: http://www.gnome.org/mc/
+Tipp: A Midnight Commander internet-címe: http://www.ibiblio.org/mc/
+Tipp: A Midnight Commander honlapja: http://www.ibiblio.org/mc/
 Tipp: Hibabejelentéseket a következõ címre lehet küldeni: mc-devel@gnome.org
-Tipp: A Midnight Commander honlapja: http://www.gnome.org/mc
 Tipp: A Tab billentyûvel lehet panelt váltani.
 Tipp: VFS-funkció: egy tar fájlon Entert nyomva megjelenik annak tartalma.
 Tipp: A Midnight Commandernek van "man" (kézikönyv) lapja is.
