@@ -93,8 +93,6 @@ extern int dialog_colors   [4];
 
 void mc_init_pair (int index, CTYPE foreground, CTYPE background);
 int try_alloc_color_pair (char *fg, char *bg);
-#ifdef HAVE_MAD
 void dealloc_color_pairs (void);
-#endif
 
 #endif /* __COLOR_H */

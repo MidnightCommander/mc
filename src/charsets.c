@@ -84,7 +84,6 @@ fail:
     return result;
 }
 
-#ifdef HAVE_MAD
 void free_codepages_list (void)
 {
     if (n_codepages > 0) {
@@ -98,7 +97,6 @@ void free_codepages_list (void)
 	codepages = 0;
     }
 }
-#endif /* HAVE_MAD */
 
 #define OTHER_8BIT "Other_8_bit"
 

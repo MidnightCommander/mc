@@ -2759,7 +2759,6 @@ main (int argc, char *argv [])
 	g_free (last_wd_string);
     }
 
-#ifdef HAVE_MAD
 #ifndef _OS_NT
     g_free (mc_home);
 #endif /* (_OS_NT) */
@@ -2771,7 +2770,6 @@ main (int argc, char *argv [])
 	g_free (this_dir);
     if (other_dir)
 	g_free (other_dir);
-#endif
 
     return 0;
 }

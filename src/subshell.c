@@ -749,7 +749,10 @@ int exit_subshell (void)
 	if (unlink (pty_buffer) == -1)
 	    perror (__FILE__": couldn't remove named pipe /tmp/mc.pipe.NNN");
     }
-    
+
+    g_free (subshell_prompt);
+    subshell_prompt = NULL;
+
     return quit;
 }
 

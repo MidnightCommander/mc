@@ -981,7 +981,6 @@ ctrl_pressed (void)
 	return 0;
 }
 
-#ifdef HAVE_MAD
 static void k_dispose (key_def *k)
 {
     if (!k)
@@ -999,14 +998,11 @@ static void s_dispose (SelectList *sel)
     s_dispose (sel->next);
     g_free (sel);
 }
-#endif /* HAVE_MAD */
 
 void done_key ()
 {
-#ifdef HAVE_MAD
     k_dispose (keys);
     s_dispose (select_list);
-#endif /* HAVE_MAD */
 
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_display)

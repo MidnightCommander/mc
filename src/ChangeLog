@@ -1,5 +1,14 @@
 2002-08-01  Pavel Roskin  <proski@gnu.org>
 
+	* charsets.c: Unconditionally enable finalization code that was
+	only used with HAVE_MAD.
+	* color.c: Likewise.
+	* color.h: Likewise.
+	* key.c: Likewise.
+	* main.c: Likewise.
+	* slint.c: Likewise.
+	* subshell.c (exit_subshell): Free subshell_prompt.
+
 	* mad.c: Remove.
 	* mad.h: Likewise.
 	* Makefile.am (SRCS): Remove mad.c and mad.h.

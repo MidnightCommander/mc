@@ -404,7 +404,6 @@ try_alloc_color_pair (char *fg, char *bg)
 }
 #endif /* !HAVE_SLANG */
 
-#ifdef	HAVE_MAD
 void
 dealloc_color_pairs (void)
 {
@@ -420,5 +419,4 @@ dealloc_color_pairs (void)
     }
     c.next = NULL;
 }
-#endif /* HAVE_MAD */
 
