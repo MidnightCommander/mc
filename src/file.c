@@ -899,7 +899,7 @@ copy_dir_dir (FileOpContext *ctx, const char *s, const char *d, int toplevel,
     if (!S_ISDIR (cbuf.st_mode)) {
 	return_status =
 	    file_error (_
-			(" Source directory \"%s\" is not a directory \n %s "),
+			(" Source \"%s\" is not a directory \n %s "),
 			s);
 	if (return_status == FILE_RETRY)
 	    goto retry_src_stat;

@@ -1,3 +1,7 @@
+2004-10-11  Leonard den Ottolander  <leonard * den ottolander nl>
+
+	* file.c (copy_dir_dir): Small text fix.
+
 2004-10-06  Alexander Savelyev  <i@fano.com.ua>
 
         * fileopctx.h (struct FileOpContext): Use off_t for offset.
