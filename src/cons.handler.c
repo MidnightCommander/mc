@@ -51,30 +51,23 @@
 
 signed char console_flag = 0;
 
-#if defined(linux) || defined(__linux__)
+#ifdef __linux__
 #include "main.h"
 
 /* The cons saver can't have a pid of 1, used to prevent bunches of
  * #ifdef linux */
 
 int cons_saver_pid = 1;
-static int pipefd1[2] = { -1, -1 }, pipefd2[2] = {
--1, -1};
+static int pipefd1[2] = { -1, -1 };
+static int pipefd2[2] = { -1, -1 };
 
-void
-show_console_contents (int starty, unsigned char begin_line,
-		       unsigned char end_line)
+static void
+show_console_contents_linux (int starty, unsigned char begin_line,
+			     unsigned char end_line)
 {
     unsigned char message = 0;
     unsigned short bytes = 0;
     int i;
-
-    standend ();
-
-    if (look_for_rxvt_extensions ()) {
-	show_rxvt_contents (starty, begin_line, end_line);
-	return;
-    }
 
     /* Is tty console? */
     if (!console_flag)
@@ -112,8 +105,8 @@ show_console_contents (int starty, unsigned char begin_line,
     read (pipefd2[0], &message, 1);
 }
 
-void
-handle_console (unsigned char action)
+static void
+handle_console_linux (unsigned char action)
 {
     char *tty_name;
     char *mc_conssaver;
@@ -121,8 +114,6 @@ handle_console (unsigned char action)
 
     switch (action) {
     case CONSOLE_INIT:
-	if (look_for_rxvt_extensions ())
-	    return;
 	/* Close old pipe ends in case it is the 2nd time we run cons.saver */
 	close (pipefd1[1]);
 	close (pipefd2[0]);
@@ -185,8 +176,6 @@ handle_console (unsigned char action)
     case CONSOLE_DONE:
     case CONSOLE_SAVE:
     case CONSOLE_RESTORE:
-	if (look_for_rxvt_extensions ())
-	    return;
 	/* Is tty console? */
 	if (!console_flag)
 	    return;
@@ -220,7 +209,6 @@ handle_console (unsigned char action)
 **	Copyright (C) 1997 Alex Tkachenko <alex@bcs.zaporizhzhe.ua>
 */
 
-#include "util.h"
 #include "color.h"
 
 static int FD_OUT = 2;
@@ -359,11 +347,9 @@ console_init ()
     }
 }
 
-void
-handle_console (unsigned char action)
+static void
+handle_console_sco (unsigned char action)
 {
-    if (look_for_rxvt_extensions ())
-	return;
     switch (action) {
     case CONSOLE_INIT:
 	console_init ();
@@ -385,16 +371,12 @@ handle_console (unsigned char action)
     }
 }
 
-void
-show_console_contents (int starty, unsigned char begin_line,
-		       unsigned char end_line)
+static void
+show_console_contents_sco (int starty, unsigned char begin_line,
+			   unsigned char end_line)
 {
     register int i, len = (end_line - begin_line) * width;
 
-    if (look_for_rxvt_extensions ()) {
-	show_rxvt_contents (starty, begin_line, end_line);
-	return;
-    }
     attrset (DEFAULT_COLOR);
     for (i = 0; i < len; i++) {
 	if ((i % width) == 0)
@@ -430,14 +412,11 @@ console_init (void)
     if (ioctl (FD_OUT, CONS_GETINFO, &screen_info) == -1)
 	return;
 
-#if __FreeBSD_version >= 500000
-    screen_shot.x = 0;
-    screen_shot.y = 0;
-#endif
+    memset (&screen_shot, 0, sizeof (screen_shot));
     screen_shot.xsize = screen_info.mv_csz;
     screen_shot.ysize = screen_info.mv_rsz;
     if ((screen_shot.buf =
-	 malloc (screen_info.mv_csz * screen_info.mv_rsz)) == NULL)
+	 g_malloc (screen_info.mv_csz * screen_info.mv_rsz)) == NULL)
 	return;
 
     console_flag = 1;
@@ -493,7 +472,7 @@ console_shutdown (void)
     if (!console_flag)
 	return;
 
-    free (screen_shot.buf);
+    g_free (screen_shot.buf);
 
     console_flag = 0;
 }
@@ -543,16 +522,11 @@ console_save (void)
     }
 }
 
-void
-show_console_contents (int starty, unsigned char begin_line,
-		       unsigned char end_line)
+static void
+show_console_contents_freebsd (int starty, unsigned char begin_line,
+			       unsigned char end_line)
 {
     int i, first, last;
-
-    if (look_for_rxvt_extensions ()) {
-	show_rxvt_contents (starty, begin_line, end_line);
-	return;
-    }
 
     if (!console_flag)
 	return;
@@ -569,12 +543,9 @@ show_console_contents (int starty, unsigned char begin_line,
     fflush (stdout);
 }
 
-void
-handle_console (unsigned char action)
+static void
+handle_console_freebsd (unsigned char action)
 {
-    if (look_for_rxvt_extensions ())
-	return;
-
     switch (action) {
     case CONSOLE_INIT:
 	console_init ();
@@ -593,8 +564,7 @@ handle_console (unsigned char action)
 	break;
     }
 }
-
-#else
+#endif				/* SCO_FLAVOR */
 
 void
 show_console_contents (int starty, unsigned char begin_line,
@@ -606,13 +576,28 @@ show_console_contents (int starty, unsigned char begin_line,
 	show_rxvt_contents (starty, begin_line, end_line);
 	return;
     }
+#ifdef __linux__
+    show_console_contents_linux (starty, begin_line, end_line);
+#elif defined (__FreeBSD__)
+    show_console_contents_freebsd (starty, begin_line, end_line);
+#elif defined (SCO_FLAVOR)
+    show_console_contents_sco (starty, begin_line, end_line);
+#else
     console_flag = 0;
+#endif
 }
 
 void
 handle_console (unsigned char action)
 {
-    look_for_rxvt_extensions ();
-}
+    if (look_for_rxvt_extensions ())
+	return;
 
-#endif				/* !defined(linux) && !defined(__linux__) && !defined(SCO_FLAVOR) && !defined(__FreeBSD__) */
+#ifdef __linux__
+    handle_console_linux (action);
+#elif defined (__FreeBSD__)
+    handle_console_freebsd (action);
+#elif defined (SCO_FLAVOR)
+    handle_console_sco (action);
+#endif
+}

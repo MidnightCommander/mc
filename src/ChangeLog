@@ -1,3 +1,8 @@
+2003-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* cons.handler.c: Put checks for rxvt extensions in one place.
+	Simplify FreeBSD code.
+
 2003-02-26  Max Khon  <fjoe@iclub.nsu.ru>
 
 	* cons.handler.c: Add implementation for FreeBSD 4.x and 5.x.
