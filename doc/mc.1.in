@@ -2081,15 +2081,18 @@ Follow links tells whether make the symlinks and hardlinks in the source
 directory (recursively in subdirectories) new links in the target 
 directory or whether would you like to copy their content.
 .PP
-Dive into subdirs tells what to do if in the target directory exists a
-directory with the same name as the file/directory being copied. The default
-action is to copy it into that directory, by disabling this you can copy a
-directory's content into that directory. Perhaps an example will help:
+Dive into subdirs tells what to do if in the target
+directory exists a directory with the same name as the
+file/directory being copied. The default action is to copy
+it's content into that directory, by enabling this 
+you can copy the source directory into that directory. 
+Perhaps an example will help:
 .PP
-You want to copy content of a directory foo to /bla/foo, which is an already
-existing directory. Normally (when Dive is set), mc would copy the content
-into /bla/foo/foo, 'cause the directory already exists. By disabling this
-option you will copy it exactly into /bla/foo.
+You want to copy content of a directory foo to /bla/foo,
+which is an already existing directory. Normally (when
+Dive is not set), mc would copy it exactly into /bla/foo. 
+By enabling this option you will copy the content into /bla/foo/foo,
+because the directory already exists.
 .PP
 Preserve attributes tells whether to preserve the original files' 
 permissions, timestamps and if you are root whether to preserve 

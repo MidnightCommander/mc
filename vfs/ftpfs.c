@@ -1282,6 +1282,10 @@ resolve_symlink(struct ftpfs_connection *bucket, struct ftpfs_dir *dir)
 	while (1) {
 	    if (fgets (buffer, sizeof (buffer), fp) == NULL)
 		goto done;
+	    if (ftpfs_debug_server_dialog){
+		fputs (buffer, ftpfs_logfile);
+	        fflush (ftpfs_logfile);
+	    }
 	    if (parse_ls_lga (buffer, &s, &filename, NULL)) {
 		int r = strcmp(fe->name, filename);
 		free(filename);
@@ -1444,6 +1448,7 @@ retrieve_dir(struct ftpfs_connection *bucket, char *remote_path)
 
 	if (ftpfs_debug_server_dialog){
 	    fputs (buffer, ftpfs_logfile);
+            fputs ("\n", ftpfs_logfile);
 	    fflush (ftpfs_logfile);
 	}
 	if (buffer [0] == 0 && eof)
@@ -2377,14 +2382,11 @@ static int ftpfs_rename (char *path1, char *path2)
 static int
 __ftpfs_chdir (struct ftpfs_connection *bucket ,char *remote_path)
 {
-#ifdef ARE_WE_SURE_WE_DONT_NEED_THIS_P
     int r;
-#endif
     
-    if (ftpfs_same_dir (remote_path, bucket))
+    if (!bucket->cwd_defered && ftpfs_same_dir (remote_path, bucket))
 	return COMPLETE;
 
-#ifdef ARE_WE_SURE_WE_DONT_NEED_THIS_P
     r = command (bucket, WAIT_REPLY, "CWD %s", remote_path);
     if (r != COMPLETE) {
 	ftpfserrno = EIO;
@@ -2392,35 +2394,25 @@ __ftpfs_chdir (struct ftpfs_connection *bucket ,char *remote_path)
 	if (qcdir(bucket))
 	    free(qcdir(bucket));
 	qcdir(bucket) = strdup (remote_path);
+	bucket->cwd_defered = 0;
     }
     return r;
-#else
-    
-    if (qcdir(bucket))
-	free(qcdir(bucket));
-    qcdir(bucket) = strdup (remote_path);
-    
-    return COMPLETE;
-#endif
 }
 
 static int ftpfs_chdir (char *path)
 {
     char *remote_path;
     struct ftpfs_connection *bucket;
-    int r;
 
- retry:
     if (!(remote_path = ftpfs_get_path(&bucket, path)))
 	return -1;
-    got_sigpipe = 0;
-    r = __ftpfs_chdir (bucket, remote_path);
-    free (remote_path);
-    if (got_sigpipe)
-	goto retry;
+    if (qcdir(bucket))
+        free(qcdir(bucket));
+    qcdir(bucket) = remote_path;
+    bucket->cwd_defered = 1;
     
     vfs_add_noncurrent_stamps (&ftpfs_vfs_ops, (vfsid) bucket, NULL);
-    return r == COMPLETE ? 0 : -1;
+    return 0;
 }
 
 static int ftpfs_lseek (void *data, off_t offset, int whence)

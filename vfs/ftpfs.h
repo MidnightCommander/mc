@@ -45,6 +45,8 @@ struct ftpfs_connection {
     int use_source_route;
     int use_passive_connection;
     int isbinary;
+    int cwd_defered;  /* current_directory was changed but CWD command hasn't
+                         been sent yet */
 };
 
 #define qhost(b) (b)->host

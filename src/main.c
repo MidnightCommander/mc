@@ -1558,7 +1558,7 @@ static void copy_readlink (WPanel *panel)
 	char *p = concat_dir_and_file (panel->cwd, selection (panel)->fname);
 	int i;
 	
-	i = readlink (p, buffer, MC_MAXPATHLEN);
+	i = mc_readlink (p, buffer, MC_MAXPATHLEN);
 	free (p);
 	if (i > 0) {
 	    buffer [i] = 0;

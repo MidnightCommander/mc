@@ -142,7 +142,12 @@ static struct {
     { 0, 0 }
 };
 
+
+#undef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
+
+#ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
 extern int preserve_uidgid;
+#endif
 
 static struct {
     char *opt_name;
@@ -174,7 +179,6 @@ static struct {
     { "full_eight_bits", &full_eight_bits },
     { "use_8th_bit_as_meta", &use_8th_bit_as_meta },
     { "confirm_view_dir", &confirm_view_dir },
-    { "tree_navigation_flag", &tree_navigation_flag },
     { "mouse_move_pages", &mouse_move_pages },
     { "mouse_move_pages_viewer", &mouse_move_pages_viewer },
     { "fast_refresh", &fast_refresh },
@@ -193,10 +197,15 @@ static struct {
     { "only_leading_plus_minus", &only_leading_plus_minus },
     { "show_output_starts_shell", &output_starts_shell },
     { "panel_scroll_pages", &panel_scroll_pages },
-    { "dive_into_subdirs", &dive_into_subdirs },
-    { "preserve_uidgid", &preserve_uidgid },
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
+#ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
+    { "dive_into_subdirs", &dive_into_subdirs },
+    { "preserve_uidgid", &preserve_uidgid },
+    /* What about the other two options in the copy dialog
+       (follow links, stable symlinks) -Norbert */
+    { "tree_navigation_flag", &tree_navigation_flag },
+#endif
 #ifdef USE_VFS    
     { "tar_gzipped_memlimit", &tar_gzipped_memlimit },
     { "vfs_timeout", &vfs_timeout },

@@ -1,3 +1,61 @@
+Sun May 10 13:27:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* widget.c (handle_char): Don't try to to delete default text in
+	input widget more than once. Right after MC's start copy_filename
+	(ESC Enter) failed because a flag wasn't cleared while characters
+	were stuffed into the commandline (Andrej reported this bug). 
+
+	* main.c (copy_readlink): usr mc_readlink instead of readlink
+
+	* file.c: Changed default for the copy/move option "dive into
+	subdir if exists" to off (note: this was only possible after the
+	change in setup.c).
+
+	(copy_dir_dir): Activated the previously uncommented code which
+	implements "Dive into subdirs". Even when there's no case where we 
+	actually would like that behaviour it is a documented feature. 
+	Though I don't wanted to change the default behavour. Hence the 
+	option change.
+	
+	(file_mask_defaults): set dive_into_subdirs
+
+	(file_mask_dialog): Fix for debian Bug #20727: Move operation with 
+	"[ ] Dive into subdir if exists" and destination filename not 
+	wildcarded. If destination is an existing directory then files
+	will be moved into this directory. If destination is not an
+	existing directory then src file will be renamed (one file
+	selected) or an error will be displayed (more than one file
+	selected).
+
+	(file_mask_dialog): made the option "Using shell patterns" local
+	to the current copy/move operation, i.e. this option is always 
+	initialized with the global options's value. Previously it affected 
+	the global Options/Configuration/shell Patterns.
+	Another possiblilty would be to make the global option a default
+	option on startup and keep changes in the copy/move dialog
+	(without saving these changes with save setup).
+
+	* setup.c: Don't save and load options which can be changed
+	outside the options menu. For example I don't like that
+	preserve_uid_gid and dive_into_subdirs from the copy/move dialog
+	are saved and restored (strange, what about the other options from 
+	this dialog?). 
+	It would be much cleaner to make these option read-only. This way
+	one could edit ~/.mc/ini to provide default option setting on
+	startup and "Save setup" wouldn't have side effects outside the
+	option's menu.
+
+Sun May 10 13:24:20 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* doc/mc.1.in, doc/mc.sgml, mc.hlp: Updated to reflect new default 
+	for dive into subdirs.
+
+Sun May 10 13:21:45 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* edit/syntax.c: Disable debug messages on stderr.
+	
+	* edit/edit.h: Added missing _()
+
 1998-05-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* layout.c (flag_winch): Propagate the window change to the slave

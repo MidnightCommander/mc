@@ -1,3 +1,18 @@
+Sun May 10 14:51:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.c (__ftpfs_chdir): CWD command wasn't sent at all. This
+	optimation is wrong because for directories containing spaces we
+	have to "CWD <pathname>" and "LIST -la" instead of 
+	"LIST -la <pathname>".
+	I implemented a different optimation. Now ftpfs_chdir only stores
+	the new working directory and sets a flag. __ftpfs_chdir is called 
+	when we really want to change the directory on the ftp server. 
+
+	(resolve_symlink): Log the directory listing to the logfile.
+
+	* ftpfs.h (struct ftpfs_connection): Added a (per connection)
+	cwd_defered flag.
+
 Mon May  4 10:27:49 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* Makefile.in: Links to mad.c and mad.h were created wrong when

@@ -473,8 +473,8 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
 #    define mkdir(s,m) mc_mkdir(s,m)
 #    define itoa MY_itoa
 
-#    define edit_get_load_file(d,f,h) input_dialog (h, " Enter file name: ", f)
-#    define edit_get_save_file(d,f,h) input_dialog (h, " Enter file name: ", f)
+#    define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
+#    define edit_get_save_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
 #    define CMalloc(x) malloc(x)
      
 #    define set_error_msg(s) edit_init_error_msg = strdup(s)

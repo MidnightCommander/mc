@@ -1560,6 +1560,7 @@ handle_char (WInput *in, int c_code)
 	if (in->first){
 	    *in->buffer = 0;
 	    in->point = 0;
+	    in->first = 0;
 	}
     	free_completions (in);
 	v = insert_char (in, c_code);

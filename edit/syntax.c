@@ -231,7 +231,7 @@ static int compare_word_to_left (WEdit * edit, long i, char *text, char *whole_l
 }
 
 
-#if 1
+#if 0
 #define debug_printf(x,y) fprintf(stderr,x,y)
 #else
 #define debug_printf(x,y)

@@ -122,7 +122,7 @@ int do_reget;
 int verbose = 1;
 
 /* Recursive operation on subdirectories */
-int dive_into_subdirs = 1;
+int dive_into_subdirs = 0;
 
 /* When moving directories cross filesystem boundaries delete the successfull
    copied files when all files below the directory and its subdirectories 
@@ -1381,13 +1381,16 @@ copy_dir_dir (char *s, char *d, int toplevel, int move_over, int delete,
          * so, say /bla exists, if we copy /tmp/\* to /bla, we get /bla/tmp/\*
          * or ( /bla doesn't exist )       /tmp/\* to /bla     ->  /bla/\*
          */
-#if 0
+#if 1
 /* Again, I'm getting curious. Is not d already what we wanted, incl.
  *  masked source basename? Is not this just a relict of the past versions? 
  *  I'm afraid this will lead into a two level deep dive :(
  *
  * I think this is indeed the problem.  I can not remember any case where
  * we actually would like that behaviour -miguel
+ *
+ * It's a documented feature (option `Dive into subdir if exists' in the
+ * copy/move dialog). -Norbert
  */
         if (toplevel && dive_into_subdirs){
 	    dest_dir = concat_dir_and_file (d, x_basename (s));
@@ -1911,6 +1914,7 @@ file_mask_defaults (void)
 {
     stable_symlinks = 0;
     op_follow_links = 0;
+    dive_into_subdirs = 0;
     xstat = mc_lstat;
     
     preserve = 1;
@@ -2113,7 +2117,7 @@ ask_file_mask:
 	source_easy_patterns = easy_patterns;
 	easy_patterns = 1;
 	source_mask = convert_pattern (source_mask, match_file, 1);
-	source_easy_patterns = easy_patterns;
+	easy_patterns = source_easy_patterns;
         error = re_compile_pattern (source_mask, strlen (source_mask), &rx);
         free (source_mask);
     } else
@@ -2134,7 +2138,8 @@ ask_file_mask:
     else
 	dest_mask++;
     orig_mask = dest_mask;
-    if (!*dest_mask || (!dive_into_subdirs && !is_wildcarded (dest_mask)) ||
+    if (!*dest_mask || (!dive_into_subdirs && !is_wildcarded (dest_mask) &&
+                        (!only_one || (!mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))) ||
 	(dive_into_subdirs && ((!only_one && !is_wildcarded (dest_mask)) ||
 			       (only_one && !mc_stat (dest_dir, &buf) && S_ISDIR (buf.st_mode)))))
 	dest_mask = strdup ("*");
