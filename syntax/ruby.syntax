@@ -1,5 +1,5 @@
 #Ruby syntax file derived from perl syntax by Marco Ciampa <ciampix@libero.it>
-#alpha version 0.1 14/05/2003
+#alpha version 0.2 16/05/2003
 
 context default
 
@@ -40,35 +40,36 @@ context default
 #highlighted as a system variable. This is not right but I actually do
 #not know any way to avoid it. Any idea is welcome.
 
-    keyword $\{!@&\+`'=~/\\,\.;<>_\*"$:F?\} red
+    keyword $\{!@&\+`'=~/\\,.;<>_\*"$:F?\} red
     keyword $\{\0123456789\} red
-    keyword $defout red
     keyword $-+ red
-    keyword $DEBUG red
-    keyword $F red
-    keyword $FILENAME red
-    keyword $LOAD_PATH red
-    keyword $SAFE red
-    keyword $VERBOSE red
-    keyword __FILE__ red
-    keyword __LINE__ red
-    keyword BEGIN red
-    keyword END red
-		keyword DATA red
-		keyword RUBY_PLATFORM red
-	  keyword RUBY_RELEASE_DATE red
-	  keyword RUBY_VERSION red
-    keyword $stdin red
-    keyword STDIN red
-    keyword $stdout red
-    keyword STDOUT red
-    keyword $stderr red
-    keyword STDERR red
-    keyword argv red
-    keyword ARGV red
-    keyword ARGF red
-    keyword env red
-    keyword ENV red
+
+    keyword whole $defout red
+    keyword whole $DEBUG red
+    keyword whole $F red
+    keyword whole $FILENAME red
+    keyword whole $LOAD_PATH red
+    keyword whole $SAFE red
+    keyword whole $VERBOSE red
+    keyword whole __FILE__ red
+    keyword whole __LINE__ red
+    keyword whole BEGIN red
+    keyword whole END red
+    keyword whole DATA red
+    keyword whole RUBY_PLATFORM red
+    keyword whole RUBY_RELEASE_DATE red
+    keyword whole RUBY_VERSION red
+    keyword whole $stdin red
+    keyword whole STDIN red
+    keyword whole $stdout red
+    keyword whole STDOUT red
+    keyword whole $stderr red
+    keyword whole STDERR red
+    keyword whole argv red
+    keyword whole ARGV red
+    keyword whole ARGF red
+    keyword whole env red
+    keyword whole ENV red
 
 #Braces & 
 
@@ -81,12 +82,12 @@ context default
     keyword , brightcyan
     keyword : brightcyan
 
-		keyword whole false brightred
-		keyword whole FALSE brightred
-		keyword whole nil brightred
-		keyword whole NIL brightred
-	  keyword whole true brightred
-	  keyword whole TRUE brightred
+    keyword whole false brightred
+    keyword whole FALSE brightred
+    keyword whole nil brightred
+    keyword whole NIL brightred
+    keyword whole true brightred
+    keyword whole TRUE brightred
 
 #Variables
 
@@ -97,13 +98,14 @@ context default
 
 #Reserved words (see ruby manual)
 
+    keyword whole def magenta
+
     keyword whole alias magenta
     keyword whole and magenta
     keyword whole begin magenta
     keyword whole break magenta
     keyword whole case magenta
     keyword whole class magenta
-    keyword whole def magenta
     keyword whole defined\? magenta
     keyword whole do magenta
     keyword whole else magenta
@@ -151,13 +153,15 @@ context default
 
 #Class IO
 
-    keyword whole sync yellow
+    keyword whole close yellow
     keyword whole crypt yellow
-    keyword whole inspect yellow
     keyword whole delete yellow
     keyword whole each yellow
+    keyword whole gets yellow
     keyword whole grep yellow
+    keyword whole inspect yellow
     keyword whole join yellow
+    keyword whole sync yellow
 
 #Class Array
 
@@ -196,6 +200,7 @@ context default
     keyword whole fork yellow
     keyword whole rand yellow
     keyword whole srand yellow
+    keyword whole open yellow
     keyword whole print yellow
     keyword whole printf yellow
     keyword whole sprintf yellow
@@ -203,7 +208,6 @@ context default
     keyword whole eval yellow
     keyword whole exit yellow
     keyword whole sleep yellow
-
 
 #this works only with label EOF :-(
 #context exclusive whole <<\[\s\]EOF EOF green 

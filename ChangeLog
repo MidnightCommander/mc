@@ -1,3 +1,8 @@
+2003-05-16  Marco Ciampa  <ciampix@libero.it>
+
+	* syntax/ruby.syntax: upgrade
+	* syntax/perl.syntax: small fix
+
 2003-05-14  Marco Ciampa  <ciampix@libero.it>
 
 	* syntax/ruby.syntax: New file - syntax for Ruby.

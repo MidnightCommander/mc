@@ -341,7 +341,9 @@ context default
 context exclusive whole <\[\s\\\]EOF EOF green
 context # \n brown
     spellcheck
-context linestart = =cut brown
+context exclusive linestart = linestart =cut brown
+    spellcheck
+
 context " " green
     keyword \\" brightgreen
     keyword \\\\ brightgreen
