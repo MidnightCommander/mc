@@ -1,3 +1,18 @@
+1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdnd.c (get_action): Sensitize the menu items based on the
+	allowed actions in the drag context.
+	(actions): Add some underlined accelerators for the action menu.
+
+	* gdesktop.c (icon_drag_motion): Use S_ISDIR() in addition to
+	fe->f.link_to_dir.
+
+	* gscreen.c (panel_file_list_scrolled): Removed this function, as
+	it was not used for anything useful.
+
+	* gdnd.c (gdnd_drop_on_directory): Duh.  Use context->action, not
+	context->suggested_action.
+
 1999-01-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_load_path): Keep track of when we are

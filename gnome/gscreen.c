@@ -620,15 +620,6 @@ panel_setup_drag_motion (WPanel *panel, int x, int y, desirable_fn desirable, sc
 }
 
 static void
-panel_file_list_scrolled (GtkAdjustment *adj, WPanel *panel)
-{
-	if (!GTK_IS_ADJUSTMENT (adj)) {
-		fprintf (stderr, "file_list_is_scrolled is called and there are not enough boats!\n");
-		exit (1);
-	}
-}
-
-static void
 panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 {
 	format_e *format = panel->format;
@@ -661,8 +652,6 @@ panel_configure_file_list (WPanel *panel, GtkWidget *sw, GtkWidget *file_list)
 
 	/* Configure the scrolbars */
 	adjustment = GTK_OBJECT (gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw)));
-	gtk_signal_connect_after (adjustment, "value_changed",
-				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
 }
 
 /*
@@ -1118,6 +1107,7 @@ panel_icon_list_scroll (gpointer data)
 
 	return TRUE;
 }
+
 /**
  * panel_icon_list_drag_motion:
  *

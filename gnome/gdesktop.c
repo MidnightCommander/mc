@@ -1147,7 +1147,7 @@ icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, gu
 	    && (context->actions & GDK_ACTION_MOVE))
 		action = GDK_ACTION_MOVE;
 	else if (gdnd_drag_context_has_target (context, TARGET_URI_LIST)) {
-		if (fe->f.link_to_dir)
+		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir)
 			action = context->suggested_action;
 		else if (is_exe (fe->buf.st_mode)
 			 && if_link_is_exe (fe)
@@ -1344,7 +1344,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 			drop_desktop_icons (context, data, x + dii->x, y + dii->y);
 		else
 			printf ("FIXME: what do drop?\n"); /* FIXME */
-			
+
 		break;
 
 	case TARGET_URI_LIST:

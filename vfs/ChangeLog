@@ -1,3 +1,8 @@
+1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.am (libvfs_la_SOURCES): Added utilvfs.h.
+	* Make-mc.in (VFSHDRS): Likewise.
+
 1999-01-21  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* utilvfs.c (append_path_sep): Fixed, it was broken for paths

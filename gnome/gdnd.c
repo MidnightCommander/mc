@@ -46,9 +46,9 @@ gdnd_init (void)
 
 /* The menu of DnD actions */
 static GnomeUIInfo actions[] = {
-	GNOMEUIINFO_ITEM_NONE (N_("Move here"), NULL, NULL),
-	GNOMEUIINFO_ITEM_NONE (N_("Copy here"), NULL, NULL),
-	GNOMEUIINFO_ITEM_NONE (N_("Link here"), NULL, NULL),
+	GNOMEUIINFO_ITEM_NONE (N_("_Move here"), NULL, NULL),
+	GNOMEUIINFO_ITEM_NONE (N_("_Copy here"), NULL, NULL),
+	GNOMEUIINFO_ITEM_NONE (N_("_Link here"), NULL, NULL),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Cancel drag"), NULL, NULL),
 	GNOMEUIINFO_END
@@ -56,13 +56,22 @@ static GnomeUIInfo actions[] = {
 
 /* Pops up a menu of actions to perform on dropped files */
 static GdkDragAction
-get_action (void)
+get_action (GdkDragContext *context)
 {
 	GtkWidget *menu;
 	int a;
 	GdkDragAction action;
 
+	/* Create the menu and set the sensitivity of the items based on the
+	 * allowed actions.
+	 */
+
 	menu = gnome_popup_menu_new (actions);
+
+	gtk_widget_set_sensitive (actions[0].widget, (context->actions & GDK_ACTION_MOVE) != 0);
+	gtk_widget_set_sensitive (actions[1].widget, (context->actions & GDK_ACTION_COPY) != 0);
+	gtk_widget_set_sensitive (actions[2].widget, (context->actions & GDK_ACTION_LINK) != 0);
+
 	a = gnome_popup_menu_do_popup_modal (menu, NULL, NULL, NULL, NULL);
 
 	switch (a) {
@@ -285,29 +294,29 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	WPanel *source_panel;
 	GList *names;
 
-	if (context->suggested_action == GDK_ACTION_ASK) {
-		action = get_action ();
+	if (context->action == GDK_ACTION_ASK) {
+		action = get_action (context);
 
 		if (action == GDK_ACTION_ASK)
 			return FALSE;
 		
 	} else
-		action = context->suggested_action;
+		action = context->action;
 
 	/* If we are dragging from a file panel, we can display a nicer status display */
 	source_panel = find_panel_owning_window (context);
 
 	/* Check if the user did not drag the information to the same directory */
-	if (source_panel){
+	if (source_panel) {
 		if (strcmp (source_panel->cwd, destdir) == 0)
 			return FALSE;
 	}
-	
+
 	/* Symlinks do not use file.c */
 
 	if (source_panel && action != GDK_ACTION_LINK)
 		perform_action_on_panel (source_panel, action, destdir,
-					 context->suggested_action == GDK_ACTION_ASK);
+					 context->action == GDK_ACTION_ASK);
 	else {
 		names = gnome_uri_list_extract_uris (selection_data->data);
 

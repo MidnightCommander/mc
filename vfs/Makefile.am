@@ -40,6 +40,7 @@ libvfs_la_SOURCES = \
 	tcputil.c		\
 	undelfs.c 		\
 	utilvfs.c		\
+	utilvfs.h		\
 	vfs.c			\
 	container.h 		\
 	extfs.h 		\

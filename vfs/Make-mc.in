@@ -62,6 +62,7 @@ VFSHDRS = 			\
 	names.h 		\
 	tar.h 			\
 	tcputil.h 		\
+	utilvfs.h		\
 	vfs.h			\
 	xdirentry.h
 
