@@ -15,7 +15,7 @@
 	* configure.in: Substitute doc/hu/mc.hlp.hu.
 	* doc/hu/Makefile.am: Don't distribute mc.hlp.hu.
 
-	* doc/mc.1.in: Update path to data the files.  Rename MC_LIBDIR
+	* doc/mc.1.in: Update path to the data files.  Rename MC_LIBDIR
 	to MC_DATADIR.  Make the same changes in the translations.
 
 	* */Makefile.am: Replace mclibdir with pkgdatadir to use "share"
