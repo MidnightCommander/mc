@@ -3,7 +3,9 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <dirent.h>
+#ifdef HAVE_DIRENT_H
+#  include <dirent.h>
+#endif
 
 #ifdef HAVE_SYS_TIMEB_H
 #  include <sys/timeb.h>
