@@ -1,5 +1,7 @@
 2000-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* lib/Makefile.am: simplified, fixed "make dist"
+
 	* lib/Makefile.in: converted to ...
 	* lib/Makefile.am: ... this
 

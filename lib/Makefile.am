@@ -4,16 +4,11 @@ suppbindir = $(mclibdir)/bin
 tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
 
-LIBFILES_IN = mc.ext.in mc-gnome.ext.in
 LIBFILES_OUT = mc.ext mc-gnome.ext
 LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.ru \
 	mc.lib mc.menu cedit.menu edit.indent.rc
-SUPPBIN_IN = mc.csh.in mc.sh.in
-SUPPBIN_OUT =  mc.csh mc.sh
-DESKTOP_FILES = startup.links README.desktop
-TIFILES = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
-NOINST_FILES = tdiff		\
-	tdiff		 	\
+
+noinst_DATA = \
 	xnc.hlp			\
 	ncurses.h 		\
 	mcserv.init 		\
@@ -21,12 +16,20 @@ NOINST_FILES = tdiff		\
 	mc.ext.in.qnx.diff 	\
 	mc.global
 
-conf_DATA = mc.global
+noinst_SCRIPTS = tdiff
 
-# Files processed by configure don't need to be here
-EXTRA_DIST = $(LIBFILES_CONST) $(TIFILES) $(DESKTOP_FILES) $(conf_DATA)
+conf_DATA = mc.global
+suppbin_SCRIPTS = mc.csh mc.sh
+desktop_DATA = startup.links README.desktop
+ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
 mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_OUT)
-suppbin_SCRIPTS = $(SUPPBIN_OUT)
-ti_DATA = $(TIFILES)
-desktop_DATA = $(DESKTOP_FILES)
+
+# Files processed by configure don't need to be here
+EXTRA_DIST = \
+	$(LIBFILES_CONST) \
+	$(conf_DATA) \
+	$(desktop_DATA) \
+	$(ti_DATA) \
+	$(noinst_DATA) \
+	$(noinst_SCRIPTS)
