@@ -590,7 +590,7 @@ msgstr "&Esegui macro...         C-a, TASTO"
 
 #: edit/editmenu.c:369 edit/editmenu.c:392
 msgid "Delete macr&o...            "
-msgstr "Cancella &macro"
+msgstr "Elimina &macro..."
 
 #: edit/editmenu.c:371 edit/editmenu.c:394
 msgid "Insert &date/time           "
@@ -914,7 +914,7 @@ msgstr "&Sovrascrittura "
 
 #: src/boxes.c:382
 msgid " confirm &Delete "
-msgstr "C&ancellazione "
+msgstr "Elimin&azione "
 
 #: src/boxes.c:388 src/cmd.c:241
 msgid " Confirmation "
@@ -1600,7 +1600,7 @@ msgstr " Sposta "
 
 #: src/file.c:142 src/tree.c:765
 msgid " Delete "
-msgstr " Cancella "
+msgstr " Elimina "
 
 #: src/file.c:229
 msgid " Invalid target mask "
@@ -1898,7 +1898,7 @@ msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
-" Non posso cancellare il file `%s' \n"
+" Non posso eliminare il file `%s' \n"
 " %s "
 
 #: src/file.c:1447 src/file.c:1516 src/file.c:1544
@@ -1920,7 +1920,7 @@ msgstr "1Sposta"
 
 #: src/file.c:1689
 msgid "1Delete"
-msgstr "1Cancella"
+msgstr "1Elimina"
 
 #: src/file.c:1704
 #, no-c-format
@@ -1984,7 +1984,7 @@ msgid ""
 msgstr ""
 "\n"
 " La directory non è vuota.\n"
-" Cancellarla ricorsivamente?"
+" Eliminarla ricorsivamente?"
 
 #: src/file.c:2233
 msgid ""
@@ -1994,11 +1994,11 @@ msgid ""
 msgstr ""
 "\n"
 " Processo in background: la directory non è vuota. \n"
-" Cancellarla ricorsivamente? "
+" Eliminarla ricorsivamente? "
 
 #: src/file.c:2235
 msgid " Delete: "
-msgstr " Cancella: "
+msgstr " Elimina: "
 
 #: src/file.c:2241 src/filegui.c:537
 msgid "Non&e"
@@ -2337,7 +2337,7 @@ msgstr " MC non può scrivere su ~/"
 
 #: src/hotlist.c:1394
 msgid " file, your old hotlist entries were not deleted"
-msgstr " file, la vostra vecchia lista favorite non è stata cancellata"
+msgstr " file, la vostra vecchia lista favorite non è stata eliminata"
 
 #: src/hotlist.c:1396
 msgid " Hotlist Load "
@@ -2596,7 +2596,7 @@ msgid ""
 msgstr ""
 " Midnight Commander non può entrare nella directory dalla\n"
 " quale la subshell dichiara di operare. Forse avete \n"
-" rimosso la directory in questione o vi siete entrati \n"
+" eliminato la directory in questione o vi siete entrati \n"
 " usando il comando \"su\"?"
 
 #: src/main.c:541 src/utilunix.c:380
@@ -2726,7 +2726,7 @@ msgstr "Crea director&y          F7"
 
 #: src/main.c:1026
 msgid "&Delete             F8"
-msgstr "Ca&ncella                F8"
+msgstr "Elimi&na                 F8"
 
 #: src/main.c:1027
 msgid "&Quick cd          M-c"
@@ -4384,7 +4384,7 @@ msgstr " durante inizio scansione inode %d "
 #: vfs/undelfs.c:199
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr "undelfs: caricamento informazioni file cancellati %d inode"
+msgstr "undelfs: caricamento informazioni file eliminati %d inode"
 
 #: vfs/undelfs.c:214
 #, c-format
