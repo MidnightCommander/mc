@@ -33,7 +33,7 @@
 
 /* Define this if your ssh can take -I option */
 
-#define HAVE_HACKED_SSH
+#undef HAVE_HACKED_SSH
 
 #include "xdirentry.h"
 #include "../src/tty.h"		/* enable/disable interrupt key */
@@ -203,10 +203,11 @@ open_archive_int (vfs *me, vfs_s_super *super)
     argv[i++] = "echo FISH:; /bin/sh";
     argv[i++] = NULL;
 
+#if 0
     /* Debugging hack */
-#warning Debugging hack, delete me
     if (!MEDATA->logfile)
 	MEDATA->logfile = fopen( "/home/pavel/talk.fish", "w+" ); /* FIXME */
+#endif
 
     pipeopen(super, xsh, argv );
 

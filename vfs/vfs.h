@@ -403,14 +403,10 @@ extern void mc_vfs_done( void );
 
 /* And now some defines for our errors. */
 
-#ifndef ELAST
-#define ELAST 300 /* bad hack, but what can we do */
-#endif
-
 #ifdef ENOSYS
 #define E_NOTSUPP ENOSYS	/* for use in vfs when module does not provide function */
 #else
-#define E_NOTSUPP (ELAST+1)	/* for use in vfs when module does not provide function */
+#warning Does this really happen?
 #endif
 
 #ifdef ENOMSG
@@ -422,7 +418,7 @@ extern void mc_vfs_done( void );
 #ifdef EREMOTEIO
 #define E_REMOTE EREMOTEIO	/* if other side of ftp/fish reports error */
 #else
-#define E_REMOTE (ELAST+3)	/* if other side of ftp/fish reports error */
+#define E_REMOTE ENETUNREACH
 #endif
 
 #ifdef EPROTO
