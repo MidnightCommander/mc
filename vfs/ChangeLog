@@ -1,3 +1,10 @@
+2003-11-05  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.c: Move all parsing code, vfs_die() and vfs_get_password()
+	to utilvfs.c, vfs_print_stats() to direntry.c.
+	* utilvfs.c (vfs_parse_ls_lga): Disable caching current date,
+	it's done incorrectly.
+
 2003-11-04  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c: Allocate handles dynamically.

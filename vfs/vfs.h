@@ -187,17 +187,6 @@ caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
 int mc_munmap (caddr_t addr, size_t len);
 #endif				/* HAVE_MMAP */
 
-/* These functions are meant for use by vfs modules */
-int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename,
-		      char **linkname);
-int vfs_split_text (char *p);
-int vfs_parse_filetype (char c);
-int vfs_parse_filemode (const char *p);
-int vfs_parse_filedate (int idx, time_t * t);
-
-void vfs_die (const char *msg);
-char *vfs_get_password (char *msg);
-
 #ifdef WITH_SMBFS
 /* Interface for requesting SMB credentials.  */
 struct smb_authinfo {
@@ -213,9 +202,6 @@ struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
 					   const char *domain,
 					   const char *user);
 #endif				/* WITH_SMBFS */
-
-void vfs_print_stats (const char *fs_name, const char *action,
-		      const char *file_name, off_t have, off_t need);
 
 /* Operations for mc_ctl - on open file */
 enum {

@@ -888,6 +888,28 @@ vfs_s_close (void *fh)
     return res;
 }
 
+static void
+vfs_s_print_stats (const char *fs_name, const char *action,
+		   const char *file_name, off_t have, off_t need)
+{
+    static char *i18n_percent_transf_format = NULL, *i18n_transf_format =
+	NULL;
+
+    if (i18n_percent_transf_format == NULL) {
+	i18n_percent_transf_format =
+	    _("%s: %s: %s %3d%% (%lu bytes transferred)");
+	i18n_transf_format = _("%s: %s: %s %lu bytes transferred");
+    }
+
+    if (need)
+	print_vfs_message (i18n_percent_transf_format, fs_name, action,
+			   file_name, (int) ((double) have * 100 / need),
+			   (unsigned long) have);
+    else
+	print_vfs_message (i18n_transf_format, fs_name, action, file_name,
+			   (unsigned long) have);
+}
+
 int
 vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 {
@@ -922,8 +944,8 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 	    goto error_1;
 
 	total += n;
-	vfs_print_stats (me->name, _("Getting file"), ino->ent->name,
-			 total, stat_size);
+	vfs_s_print_stats (me->name, _("Getting file"), ino->ent->name,
+			   total, stat_size);
 
 	if (got_interrupt ())
 	    goto error_1;
