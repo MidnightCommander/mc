@@ -1,3 +1,18 @@
+2001-06-11  Pavel Roskin  <proski@gnu.org>
+
+	* cpio.c (vfs_cpiofs_ops): Use short name for the filesystem.
+	This avoids creating long filenames in dirent.c when the "name"
+	field is used.
+	* extfs.c (vfs_extfs_ops): Likewise.
+	* fish.c (vfs_fish_ops): Likewise.
+	* ftpfs.c (vfs_ftpfs_ops): Likewise.
+	* local.c (vfs_local_ops): Likewise.
+	(vfs_nil_ops): Likewise.
+	* mcfs.c (vfs_mcfs_ops): Likewise.
+	* sfs.c (vfs_sfs_ops): Likewise.
+	* tar.c (vfs_tarfs_ops): Likewise.
+	* undelfs.c (vfs_undelfs_ops): Likewise.
+
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
 	* sfs.c (sfs_init): Change some warning messages to simplify

@@ -792,7 +792,7 @@ static struct vfs_s_data fish_data = {
 
 vfs vfs_fish_ops = {
     NULL,	/* This is place of next pointer */
-    "FIles tranferred over SHell",
+    "fish",
     F_EXEC,	/* flags */
     "sh:",	/* prefix */
     &fish_data,	/* data */

@@ -681,7 +681,7 @@ undelfs_init(vfs *me) {
 
 vfs vfs_undelfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_("Undelete filesystem for ext2"),
+    "undelfs",
     0,	/* flags */
     "undel:",	/* prefix */
     NULL,	/* data */

@@ -295,7 +295,7 @@ local_which (vfs *me, char *path)
 
 vfs vfs_local_ops = {
     NULL,	/* This is place of next pointer */
-    "Local filesystem",
+    "localfs",
     0,		/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
@@ -355,7 +355,7 @@ vfs vfs_local_ops = {
 
 vfs vfs_nil_ops = {
     NULL,	/* This is place of next pointer */
-    "Filesystem which just returns failure",
+    "nullfs",
     0,		/* flags */
     NULL,	/* prefix */
     NULL,	/* data */

@@ -1120,7 +1120,7 @@ mcfs_setctl (vfs *me, char *path, int ctlop, char *arg)
 
 vfs vfs_mcfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_("Midnight Commander's private remote filesystem"),
+    "mcfs",
     F_NET,	/* flags */
     "mc:",	/* prefix */
     NULL,	/* data */

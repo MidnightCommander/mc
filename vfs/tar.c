@@ -519,7 +519,7 @@ static struct vfs_s_data tarfs_data = {
 vfs vfs_tarfs_ops =
 {
     NULL,	/* This is place of next pointer */
-    "TApe aRchiver decompressor",
+    "tarfs",
     0,		/* flags */
     "utar",	/* prefix */
     &tarfs_data,

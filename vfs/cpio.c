@@ -613,7 +613,7 @@ static struct vfs_s_data cpiofs_data = {
 
 vfs vfs_cpiofs_ops = {
     NULL, /* next pointer */
-    "CPIO dearchiver",
+    "cpiofs",
     0, /* flags */
     "ucpio", /* prefix */
     &cpiofs_data, /* vfs_s_data */

@@ -1681,7 +1681,7 @@ static struct vfs_s_data ftp_data = {
 
 vfs vfs_ftpfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_("File Transfer Protocol (ftp)"),
+    "ftpfs",
     F_NET,	/* flags */
     "ftp:",	/* prefix */
     &ftp_data,	/* data */
