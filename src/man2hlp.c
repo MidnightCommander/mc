@@ -41,7 +41,7 @@ static int node = 0;		/* Flag: This line is an original ".SH" */
 static const char *c_out;	/* Output filename */
 static FILE *f_out;		/* Output file */
 
-static char *Topics = NULL;
+static char *topics = NULL;
 
 static struct node {
     char *node;
@@ -113,6 +113,36 @@ print_error (char *message)
 {
     fprintf (stderr, "man2hlp: %s in file \"%s\" at row %d\n", message,
 	     c_out, in_row);
+}
+
+/* Do fopen(), exit if it fails */
+static FILE *
+fopen_check (const char *filename, const char *flags)
+{
+    char *tmp;
+    FILE *f;
+
+    f = fopen (filename, flags);
+    if (f == NULL) {
+	sprintf (tmp, "man2hlp: Cannot open file \"%s\"", filename);
+	perror (tmp);
+	exit (3);
+    }
+
+    return f;
+}
+
+/* Do fclose(), exit if it fails */
+static void
+fclose_check (FILE * f)
+{
+    int ret;
+
+    ret = fclose (f);
+    if (ret != 0) {
+	perror ("man2hlp: Cannot close file");
+	exit (3);
+    }
 }
 
 /* Change output line */
@@ -382,7 +412,7 @@ handle_command (char *buffer)
 		buffer[len] = 0;
 	    }
 	}
-	Topics = strdup (buffer);
+	topics = strdup (buffer);
     } else {
 	/* Other commands are ignored */
     }
@@ -433,11 +463,11 @@ main (int argc, char **argv)
     const char *c_tmpl;		/* Template filename */
     FILE *f_man;		/* Manual file */
     FILE *f_tmpl;		/* Template file */
-    char buffer2[BUFFER_SIZE];	/* Temp input line */
-    char *buffer = buffer2;	/* Input line */
+    char buffer[BUFFER_SIZE];	/* Full input line */
     char *node = NULL;
-
-    long cont_start, file_end;
+    char *outfile_buffer;	/* Large buffer to keep the output file */
+    long cont_start;		/* Start of [Contents] */
+    long file_end;		/* Length of the output file */
 
     /* Validity check for arguments */
     if ((argc != 5) || ((width = atoi (argv[1])) <= 10)) {
@@ -450,79 +480,68 @@ main (int argc, char **argv)
     c_tmpl = argv[3];
     c_out = argv[4];
 
-    /* Open the input file (manual) */
-    f_man = fopen (c_man, "r");
-    if (f_man == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_man);
-	perror (buffer);
-	return 3;
-    }
-
-    f_out = fopen (c_out, "w");
-    if (f_out == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_out);
-	perror (buffer);
-	return 3;
-    }
+    /* First stage - process the manual, write to the output file */
+    f_man = fopen_check (c_man, "r");
+    f_out = fopen_check (c_out, "w");
 
     /* Repeat for each input line */
     while (!feof (f_man)) {
+	char *input_line;	/* Input line without initial "\&" */
+
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, f_man)) {
+	if (!fgets (buffer, BUFFER_SIZE, f_man)) {
 	    break;
 	}
-	if (buffer2[0] == '\\' && buffer2[1] == '&')
-	    buffer = buffer2 + 2;
+
+	if (buffer[0] == '\\' && buffer[1] == '&')
+	    input_line = buffer + 2;
 	else
-	    buffer = buffer2;
+	    input_line = buffer;
+
 	in_row++;
-	len = strlen (buffer);
+	len = strlen (input_line);
 	/* Remove terminating newline */
-	if (buffer[len - 1] == '\n') {
+	if (input_line[len - 1] == '\n') {
 	    len--;
-	    buffer[len] = 0;
+	    input_line[len] = 0;
 	}
+
 	if (verbatim_flag) {
 	    /* Copy the line verbatim */
-	    if (strcmp (buffer, ".fi") == 0) {
+	    if (strcmp (input_line, ".fi") == 0) {
 		verbatim_flag = 0;
 	    } else {
-		print_string (buffer);
+		print_string (input_line);
 		newline ();
 	    }
 	} else if (link_flag)
 	    /* The line is a link */
-	    handle_link (buffer);
+	    handle_link (input_line);
 	else if (buffer[0] == '.')
 	    /* The line is a roff command */
-	    handle_command (buffer);
+	    handle_command (input_line);
 	else {
 	    /* A normal line, just output it */
-	    print_string (buffer);
+	    print_string (input_line);
 	}
     }
 
-    /* All done */
     newline ();
-    fclose (f_man);
+    fclose_check (f_man);
+    /* First stage ends here, closing the manual */
 
-    /* Open the template file */
-    f_tmpl = fopen (c_tmpl, "r");
-    if (f_tmpl == NULL) {
-	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", c_tmpl);
-	perror (buffer);
-	return 3;
-    }
+    /* Second stage - process the template file */
+    f_tmpl = fopen_check (c_tmpl, "r");
 
     /* Repeat for each input line */
     while (!feof (f_tmpl)) {
 	/* Read a line */
-	if (!fgets (buffer2, BUFFER_SIZE, f_tmpl)) {
+	if (!fgets (buffer, BUFFER_SIZE, f_tmpl)) {
 	    break;
 	}
 	if (node) {
-	    if (*buffer2 && *buffer2 != '\n') {
-		cnode->lname = strdup (buffer2);
+	    if (*buffer && *buffer != '\n') {
+		cnode->lname = strdup (buffer);
 		node = strchr (cnode->lname, '\n');
 		if (node)
 		    *node = 0;
@@ -554,8 +573,8 @@ main (int argc, char **argv)
     }
 
     cont_start = ftell (f_out);
-    if (Topics)
-	fprintf (f_out, "\004[Contents]\n%s\n\n", Topics);
+    if (topics)
+	fprintf (f_out, "\004[Contents]\n%s\n\n", topics);
     else
 	fprintf (f_out, "\004[Contents]\n");
 
@@ -582,57 +601,52 @@ main (int argc, char **argv)
     }
 
     file_end = ftell (f_out);
-    fclose (f_out);
-
     if (file_end <= 0) {
 	perror (c_out);
 	return 1;
     }
 
-    Topics = malloc (file_end);
-    if (!Topics)
+    fclose_check (f_out);
+    fclose_check (f_tmpl);
+    /* Second stage ends here, closing all files, note the end of output */
+
+    /*
+     * Third stage - swap two parts of the output file.
+     * First, open the output file for reading and load it into the memory.
+     */
+    f_out = fopen_check (c_out, "r");
+
+    outfile_buffer = malloc (file_end);
+    if (!outfile_buffer)
 	return 1;
 
-    f_out = fopen (c_out, "r");
-    if (!f_out) {
+    if (persistent_fread (outfile_buffer, file_end, f_out) < 0) {
 	perror (c_out);
 	return 1;
     }
 
-    if (persistent_fread (Topics, file_end, f_out) < 0) {
-	perror (c_out);
-	return 1;
-    }
+    fclose_check (f_out);
+    /* Now the output file is in the memory */
 
-    if (fclose (f_out) != 0) {
-	perror (c_out);
-	return 1;
-    }
+    /* Again open output file for writing */
+    f_out = fopen_check (c_out, "w");
 
-    f_out = fopen (c_out, "w");
-    if (!f_out) {
-	perror (c_out);
-	return 1;
-    }
-
+    /* Write part after the "Contents" node */
     if (persistent_fwrite
-	(Topics + cont_start, file_end - cont_start, f_out)
-	< 0) {
+	(outfile_buffer + cont_start, file_end - cont_start, f_out) < 0) {
 	perror (c_out);
 	return 1;
     }
 
-    if (persistent_fwrite (Topics, cont_start, f_out) < 0) {
+    /* Write part before the "Contents" node */
+    if (persistent_fwrite (outfile_buffer, cont_start, f_out) < 0) {
 	perror (c_out);
 	return 1;
     }
 
-    free (Topics);
-
-    if (fclose (f_out) != 0) {
-	perror (c_out);
-	return 1;
-    }
+    free (outfile_buffer);
+    fclose_check (f_out);
+    /* Closing everything */
 
     return 0;
 }
