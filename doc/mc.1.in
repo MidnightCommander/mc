@@ -6,7 +6,7 @@ mc \- Visual shell for Unix-like systems.
 .\"SKIP_SECTION"
 .SH "USAGE"
 .B mc
-[\-abcCdfhPstuUVx?] [\-l log] [dir1 [dir2]] [-v file]
+[\-abcCdfhPstuUVx] [\-l log] [dir1 [dir2]] [-v file]
 .SH "DESCRIPTION"
 .LP
 The Midnight Commander is a directory browser/file manager for
@@ -2791,21 +2791,20 @@ before you start browsing files there.
 .SH "  SMB File System"
 The smbfs allows you to manipulate files on remote machines with SMB
 (or CIFS) protocol.  These include Windows for Workgroups,
-Windows 9x, Windows NT, Windows 2000 and Samba.
-To actually use it, you may try
-to use the panel command "SMB link..."
+Windows 9x/ME/XP, Windows NT, Windows 2000 and Samba.
+To actually use it, you may try to use the panel command "SMB link..."
 (accessible from the menubar) or you may directly change your current
 directory to it using the cd command to a path name that looks like this:
 .PP
-.I /#smb:machine[/service][/remote-dir]
+.I /#smb:[user@]machine[/service][/remote-dir]
 .PP
 The
-.I service
+.I user, service
 and
 .I remote-dir
 elements are optional.
 The
-.I username, domain
+.I user, domain
 and
 .I password
 can be specified in input dialog.
@@ -2815,6 +2814,7 @@ Examples:
 .nf
     /#smb:machine/Share
     /#smb:other_machine
+    /#smb:guest@machine/Public/Irlex
 .fi
 .PP
 .SH "Colors"
@@ -3077,7 +3077,7 @@ The possible key symbols are:
 .PP
 .nf
 f0 to f20     Function keys f0-f20
-bs	      backspace
+bs            backspace
 home          home key
 end           end key
 up            up arrow key

@@ -3553,7 +3553,7 @@ ext2fs, позволяющий восстановить имена всех удаленных файлов,
 на котором находится реальная файловая система.
 .PP
 Например, чтобы восстановить удаленные файлы на втором разделе
-первого SCSI-диска, вы должны использовать следующее путевое имя:
+первого SCSI-диска, вы должны использовать следующее имя:
 .PP
 .nf
     /#undel:sda2
@@ -3569,16 +3569,16 @@ ext2fs, позволяющий восстановить имена всех удаленных файлов,
 .SH "  Файловая система smbfs"
 Файловая система smbfs позволяет вам работать с файлами на
 удаленных компьютерах по протоколу SMB (CIFS) (Windows for Workgroups, 
-Windows 9x, Windows NT, Windows 2000 и Samba).
+Windows 9x/ME/XP, Windows NT, Windows 2000 и Samba).
 Для этого вы можете использовать 
-пункт "SMB связь" (доступный из меню левой и правой
+пункт "SMB связь..." (доступный из меню левой и правой
 панелей) или же непосредственно сменить текущий каталог
 командой cd, задав путь к каталогу следующим образом:
 .PP
-.I /#smb:machine[/service][/remote-dir]
+.I /#smb:[username@]machine[/service][/remote-dir]
 .PP
 Элементы
-.I service
+.I username, service
 и
 .I remote-dir
 необязательны.
@@ -3592,6 +3592,7 @@ Windows 9x, Windows NT, Windows 2000 и Samba).
 .nf
     /#smb:machine/Share
     /#smb:other_machine
+    /#smb:guest@machine/Public/Irlex
 .fi
 .PP
 .\"NODE "Colors"
