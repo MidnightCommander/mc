@@ -56,40 +56,71 @@
       <para>This document is intended to explain the Gnome specific features
       of the Gnome Midnight Commander.</para>
     </sect1>
+    <sect1 id="features">
+      <title>Features of the Gnome Midnight Commander</title>
+      <para>List the features of gmc...</para>
+    </sect1>
   </chapter>
-
-  <chapter id="wmclass">
-    <title>Window Manager Classes</title>
-    <sect1 id="wmclass-intro">
-      <title>Introduction</title>
-      <para>This chapter describes the various window manager classes that have
+  <chapter id="installing">
+    <title>Installation</title>
+    <para>In this chapter we will describe the various ways to get the
+    Gnome Midnight Commander installed and working on your system. Also
+    we will discuss how to get the latest versions.</para>
+    <sect1 id="latest-version">
+      <title>Getting the latest version</title>
+      <para>Where to get the latest stable version</para>
+    </sect1>
+    <sect1 id="source-install">
+      <title>Installing with the source files</title>
+      <para>Describe the source installation steps.</para>
+    </sect1>
+    <sect1 id="binary-install">
+      <title>Installing pre-packaged binaries</title>
+      <para>Describe the binary install steps.</para>
+    </sect1>
+  </chapter>
+  <chapter id="using-gmc">
+    <title>Using gmc</title>
+    <para>Someone write this!</para>
+  </chapter>
+  <chapter id="customizing">
+    <title>Customizing gmc</title>
+    <para>Not happy with the way gmc does things or the looks of gmc, in this
+     chapter we will show you all the customization options available to you.
+    </para>
+    <sect1 id="wmclass">
+      <title>Window Manager Classes</title>
+      <sect2 id="wmclass-intro">
+	<title>Introduction</title>
+	<para>This section describes the various window manager classes that have
        been set on the windows and dialogs that gmc uses. It is intended to aid
        you in customizing your enviornment.</para>
-      <para>Where possible we have provided some example window manager 
+	<para>Where possible we have provided some example window manager 
        configuration file snippets.</para>
-    </sect1>
-    <sect1 id="classes">
-      <title>The classes</title>
-      <para>On all the desktop icons that gmc uses and displays the following
+      </sect2>
+      <sect2 id="classes">
+	<title>The classes</title>
+	<para>On all the desktop icons that gmc uses and displays the following
       window manager classes have been set on them.</para>
-      <itemizedlist>
-	<listitem>
-	  <para>gmc</para>
-	</listitem>
-	<listitem>
-	  <para>desktop_icon</para>
-	</listitem>
-      </itemizedlist>
-      <para>Some window managers do not understand either the Gnome window
+	<itemizedlist>
+	  <listitem>
+	    <para>gmc</para>
+	  </listitem>
+	  <listitem>
+	    <para>desktop_icon</para>
+	  </listitem>
+	</itemizedlist>
+	<para>Some window managers do not understand either the Gnome window
       manager hints or the Motif window manager hints. They end up making
       a terrible mess of the desktop icons. To work around this problem
       you can do the following.</para>
-      <itemizedlist>
-	<listitem>
-	  <para>FVWM and variants</para>
-	  <para>Style "desktop_icon"    MinimalDecoration, CirculateSkip</para>
-	</listitem>
-      </itemizedlist>
+	<itemizedlist>
+	  <listitem>
+	    <para>FVWM and variants</para>
+	    <para>Style "desktop_icon"    MinimalDecoration, CirculateSkip</para>
+	  </listitem>
+	</itemizedlist>
+      </sect2>
     </sect1>
   </chapter>
 </book>
