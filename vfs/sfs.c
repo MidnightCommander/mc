@@ -104,6 +104,7 @@ static char *redirect( vfs *me, char *name )
     struct cachedfile *cur = head;
     uid_t uid = vfs_uid;
     char *cache, *xname;
+    int handle;
 
     while (cur) {
         if ((!strcmp( name, cur->name )) &&
@@ -117,6 +118,11 @@ static char *redirect( vfs *me, char *name )
 	cur = cur->next;
     }
     cache = tempnam( NULL, "sfs" );
+    handle = open(cache, O_RDWR | O_CREAT | O_EXCL, 0600);
+    if (handle == -1)
+        return "/SOMEONE_PLAYING_DIRTY_TMP_TRICKS_ON_US";
+    close(handle);
+
     xname = strdup( name );
     if (!vfmake( me, name, cache )) {
         cur = xmalloc( sizeof(struct cachedfile), "SFS cache" );

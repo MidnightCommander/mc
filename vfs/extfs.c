@@ -607,6 +607,14 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
         char *cmd, *archive_name, *p;
         
         entry->inode->local_filename = strdup (tempnam (NULL, "extfs"));
+	{
+	    int handle;
+
+	    handle = open(entry->inode->local_filename, O_RDWR | O_CREAT | O_EXCL, 0600);
+	    if (handle == -1)
+	      return NULL;
+	    close(handle);
+	}
 	p = get_path_from_entry (entry);
 	q = name_quote (p, 0);
 	free (p);
