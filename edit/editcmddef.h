@@ -141,7 +141,6 @@
 #define CK_XPaste		703
 #define CK_Selection_History	704
 
-#ifdef MIDNIGHT			/* cooledit now has its own full-featured script editor and executor */
 #define CK_Shell		801
 
 /*
@@ -163,7 +162,5 @@
 #define IS_USER_COMMAND(i)	((i) & (1 << 16))
 #define CK_Macro(i)		((i) | (1 << 17))
 #define IS_MACRO_COMMAND(i)	((i) & (1 << 17))
-#endif
 
-#endif
-
+#endif /* !__EDIT_CMD_DEF_H */

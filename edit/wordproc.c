@@ -20,13 +20,8 @@
 
 #include <config.h>
 #include "edit.h"
-#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
-#include "mad.h"
-#endif
 
-#ifdef MIDNIGHT
 #define tab_width option_tab_spacing
-#endif
 
 int line_is_blank (WEdit * edit, long line);
 
@@ -138,9 +133,6 @@ static void strip_newlines (unsigned char *t, int size)
     }
 }
 
-#ifndef MIDNIGHT
-int edit_width_of_long_printable (int c);
-#endif
 /* 
    This is a copy of the function 
    int calc_text_pos (WEdit * edit, long b, long *q, int l)
@@ -164,11 +156,7 @@ static int line_pixel_length (unsigned char *t, long b, int l)
 	    xn = next_tab_pos (x);
 	    break;
 	default:
-#ifdef MIDNIGHT
 	    xn = x + 1;
-#else
-	    xn = x + edit_width_of_long_printable (c);
-#endif
 	    break;
 	}
 	if (xn > l)
@@ -346,13 +334,3 @@ void format_paragraph (WEdit * edit, int force)
     put_paragraph (edit, t, p, q, indent, size);
     free (t);
 }
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,12 @@
 2001-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c: Eliminate all code disabled for the text edition.
+	* editcmddef.h: Likewise.
+	* editmenu.c: Likewise.
+	* editwidget.c: Likewise.
+	* syntax.c: Likewise.
+	* wordproc.c: Likewise.
+
 	* edit-widget.h: Change ~/.cedit to ~/.mc/cedit to keep mcedit
 	files separate from cooledit.
 

@@ -2084,12 +2084,6 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
 	edit_push_key_press (edit);
 
     r = edit_execute_cmd (edit, command, char_for_insertion);
-#ifdef GTK
-    if (edit->stopped && edit->widget->destroy_me) {
-	(*edit->widget->destroy_me) (edit->widget->destroy_me_user_data);
-	return 0;
-    }
-#endif
     if (column_highlighting)
 	edit->force |= REDRAW_PAGE;
 

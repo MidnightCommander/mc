@@ -23,14 +23,7 @@
 */
 
 #include <config.h>
-#if defined(MIDNIGHT) || defined(GTK)
 #include "edit.h"
-#else
-#include "coolwidget.h"
-#endif
-#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
-#include "mad.h"
-#endif
 
 /* bytes */
 #define SYNTAX_MARKER_DENSITY 512
@@ -47,7 +40,7 @@
 
 #define UNKNOWN_FORMAT "unknown"
 
-#if !defined(MIDNIGHT) || defined(HAVE_SYNTAXH)
+#ifdef HAVE_SYNTAXH
 
 int option_syntax_highlighting = 1;
 int option_auto_spellcheck = 1;
@@ -384,12 +377,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
                          option_syntax_highlighting && use_colors) {
 	translate_rule_to_color (edit, edit_get_rule (edit, byte_index), fg, bg);
     } else {
-#ifdef MIDNIGHT
 	*fg = EDITOR_NORMAL_COLOR;
-#else
-	*fg = NO_COLOR;
-	*bg = NO_COLOR;
-#endif
     }
 }
 
@@ -532,8 +520,6 @@ static void free_args (char **args)
 #define check_a {if(!*a){result=line;break;}}
 #define check_not_a {if(*a){result=line;break;}}
 
-#ifdef MIDNIGHT
-
 int try_alloc_color_pair (char *fg, char *bg);
 
 int this_try_alloc_color_pair (char *fg, char *bg)
@@ -561,39 +547,6 @@ int this_try_alloc_color_pair (char *fg, char *bg)
     }
     return try_alloc_color_pair (fg, bg);
 }
-#else
-#ifdef GTK
-int allocate_color (WEdit *edit, gchar *color);
-
-int this_allocate_color (WEdit *edit, char *fg)
-{
-    char *p;
-    if (fg)
-	if (!*fg)
-	    fg = 0;
-    if (!fg)
-	return allocate_color (edit, 0);
-    p = strchr (fg, '/');
-    if (!p)
-	return allocate_color (edit, fg);
-    return allocate_color (edit, p + 1);
-}
-#else
-int this_allocate_color (WEdit *edit, char *fg)
-{
-    char *p;
-    if (fg)
-	if (!*fg)
-	    fg = 0;
-    if (!fg)
-	return allocate_color (0);
-    p = strchr (fg, '/');
-    if (!p)
-	return allocate_color (fg);
-    return allocate_color (p + 1);
-}
-#endif	/* GTK */
-#endif	/* MIDNIGHT */
 
 static char *error_file_name = 0;
 
@@ -615,12 +568,8 @@ static FILE *open_include_file (char *filename)
     f = fopen (p, "r");
     if (f)
 	return f;
-#if !defined (MIDNIGHT) && !defined(GTK)
-    strcpy (p, LIBDIR "/syntax/");
-#else
     strcpy (p, mc_home);
     strcat (p, "/syntax/");
-#endif /* MIDNIGHT || GTK */
     strcat (p, filename);
     syntax_free (error_file_name);
     error_file_name = (char *) strdup (p);
@@ -762,12 +711,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		a++;
 	    strcpy (last_fg, fg ? fg : "");
 	    strcpy (last_bg, bg ? bg : "");
-#ifdef MIDNIGHT
 	    c->keyword[0]->fg = this_try_alloc_color_pair (fg, bg);
-#else
-	    c->keyword[0]->fg = this_allocate_color (edit, fg);
-	    c->keyword[0]->bg = this_allocate_color (edit, bg);
-#endif
 	    c->keyword[0]->keyword = (char *) strdup (" ");
 	    check_not_a;
 	    num_contexts++;
@@ -816,12 +760,7 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
 		fg = last_fg;
 	    if (!bg)
 		bg = last_bg;
-#ifdef MIDNIGHT
 	    k->fg = this_try_alloc_color_pair (fg, bg);
-#else
-	    k->fg = this_allocate_color (edit, fg);
-	    k->bg = this_allocate_color (edit, bg);
-#endif
 	    check_not_a;
 	    num_words++;
 	} else if (!strncmp (args[0], "#", 1)) {
@@ -866,264 +805,10 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
     return result;
 }
 
-#if !defined (GTK) && !defined (MIDNIGHT)
-
-/* strdup and append c */
-static char *strdupc (char *s, int c)
-{
-    char *t;
-    int l;
-    strcpy (t = syntax_malloc ((l = strlen (s)) + 3), s);
-    t[l] = c;
-    t[l + 1] = '\0';
-    return t;
-}
-
-static void edit_syntax_clear_keyword (WEdit * edit, int context, int j)
-{
-    struct context_rule *c;
-    struct _syntax_marker *s;
-    c = edit->rules[context];
-/* first we clear any instances of this keyword in our cache chain (we used to just clear the cache chain, but this slows things down) */
-    for (s = edit->syntax_marker; s; s = s->next)
-	if (s->rule.keyword == j)
-	    s->rule.keyword = 0;
-	else if (s->rule.keyword > j)
-	    s->rule.keyword--;
-    syntax_free (c->keyword[j]->keyword);
-    syntax_free (c->keyword[j]->whole_word_chars_left);
-    syntax_free (c->keyword[j]->whole_word_chars_right);
-    syntax_free (c->keyword[j]);
-    memcpy (&c->keyword[j], &c->keyword[j + 1], (MAX_WORDS_PER_CONTEXT - j - 1) * sizeof (struct keyword *));
-    strcpy (&c->keyword_first_chars[j], &c->keyword_first_chars[j + 1]);
-}
-
-
-FILE *spelling_pipe_in = 0;
-FILE *spelling_pipe_out = 0;
-pid_t ispell_pid = 0;
-
-
-/* adds a keyword for underlining into the keyword list for this context, returns 1 if too many words */
-static int edit_syntax_add_keyword (WEdit * edit, char *keyword, int context, time_t t)
-{
-    int j;
-    char *s;
-    struct context_rule *c;
-    c = edit->rules[context];
-    for (j = 1; c->keyword[j]; j++) {
-/* if a keyword has been around for more than TRANSIENT_WORD_TIME_OUT 
-   seconds, then remove it - we don't want to run out of space or makes syntax highlighting to slow */
-	if (c->keyword[j]->time) {
-	    if (c->keyword[j]->time + TRANSIENT_WORD_TIME_OUT < t) {
-		edit->force |= REDRAW_PAGE;
-		edit_syntax_clear_keyword (edit, context, j);
-		j--;
-	    }
-	}
-    }
-/* are we out of space? */
-    if (j >= MAX_WORDS_PER_CONTEXT - 2)
-	return 1;
-/* add the new keyword and date it */
-    c->keyword[j + 1] = 0;
-    c->keyword[j] = syntax_malloc (sizeof (struct key_word));
-#ifdef MIDNIGHT
-    c->keyword[j]->fg = SPELLING_ERROR;
-#else
-    c->keyword[j]->fg = c->keyword[0]->fg;
-    c->keyword[j]->bg = SPELLING_ERROR;
-#endif
-    c->keyword[j]->keyword = (char *) strdup (keyword);
-    c->keyword[j]->first = *c->keyword[j]->keyword;
-    c->keyword[j]->whole_word_chars_left = (char *) strdup ("-'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ¡¢£¤¥¦§§¨©©ª«¬­®®¯°±²³´µ¶¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ");
-    c->keyword[j]->whole_word_chars_right = (char *) strdup ("-'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ¡¢£¤¥¦§§¨©©ª«¬­®®¯°±²³´µ¶¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ");
-    c->keyword[j]->time = t;
-    s = strdupc (c->keyword_first_chars, c->keyword[j]->first);
-    syntax_free (c->keyword_first_chars);
-    c->keyword_first_chars = s;
-    return 0;
-}
-
-/* checks spelling of the word at offset */
-static int edit_check_spelling_at (WEdit * edit, long byte_index)
-{
-    int context;
-    long p1, p2;
-    unsigned char *p, *q;
-    int r, c1, c2, j;
-    int ch;
-    time_t t;
-    struct context_rule *c;
-/* sanity check */
-    if (!edit->rules || byte_index > edit->last_byte)
-	return 0;
-/* in what context are we */
-    context = edit_get_rule (edit, byte_index).context;
-    c = edit->rules[context];
-/* does this context have `spellcheck' */
-    if (!edit->rules[context]->spelling)
-	return 0;
-/* find word start */
-    for (p1 = byte_index - 1;; p1--) {
-	ch = edit_get_byte (edit, p1);
-	if (isalpha (ch) || ch == '-' || ch == '\'')
-	    continue;
-	break;
-    }
-    p1++;
-/* find word end */
-    for (p2 = byte_index;; p2++) {
-	ch = edit_get_byte (edit, p2);
-	if (isalpha (ch) || ch == '-' || ch == '\'')
-	    continue;
-	break;
-    }
-    if (p2 <= p1)
-	return 0;
-/* create string */
-    q = p = syntax_malloc (p2 - p1 + 2);
-    for (; p1 < p2; p1++)
-	*p++ = edit_get_byte (edit, p1);
-    *p = '\0';
-    if (q[0] == '-' || strlen ((char *) q) > 40) {	/* if you are using words over 40 characters, you are on your own */
-	syntax_free (q);
-	return 0;
-    }
-    time (&t);
-    for (j = 1; c->keyword[j]; j++) {
-/* if the keyword is present, then update its time only. if it is a fixed keyword from the rules file, then just return */
-	if (!strcmp (c->keyword[j]->keyword, (char *) q)) {
-	    if (c->keyword[j]->time)
-		c->keyword[j]->time = t;
-	    syntax_free (q);
-	    return 0;
-	}
-    }
-/* feed it to ispell */
-    fprintf (spelling_pipe_out, "%s\n", (char *) q);
-    fflush (spelling_pipe_out);
-/* what does ispell say? */
-    do {
-	r = fgetc (spelling_pipe_in);
-    } while (r == -1 && errno == EINTR);
-    if (r == -1) {
-	syntax_free (q);
-	return 1;
-    }
-    if (r == '\n') {		/* ispell sometimes returns just blank line if it is given bad characters */
-	syntax_free (q);
-	return 0;
-    }
-/* now read ispell output untill we get two blanks lines - we are not intersted in this part */
-    do {
-	c1 = fgetc (spelling_pipe_in);
-    } while (c1 == -1 && errno == EINTR);
-    for (;;) {
-	if (c1 == -1) {
-	    syntax_free (q);
-	    return 1;
-	}
-	do {
-	    c2 = fgetc (spelling_pipe_in);
-	} while (c2 == -1 && errno == EINTR);
-	if (c1 == '\n' && c2 == '\n')
-	    break;
-	c1 = c2;
-    }
-/* spelled ok */
-    if (r == '*' || r == '+' || r == '-') {
-	syntax_free (q);
-	return 0;
-    }
-/* not spelled ok - so add a syntax keyword for this word */
-    edit_syntax_add_keyword (edit, (char *) q, context, t);
-    syntax_free (q);
-    return 0;
-}
-
-char *option_alternate_dictionary = "";
-
-int edit_check_spelling (WEdit * edit)
-{
-    if (!option_auto_spellcheck)
-	return 0;
-/* magic arg to close up shop */
-    if (!edit) {
-	option_auto_spellcheck = 0;
-	goto close_spelling;
-    }
-/* do we at least have a syntax rule struct to put new wrongly spelled keyword in for highlighting? */
-    if (!edit->rules && !edit->explicit_syntax)
-	edit_load_syntax (edit, 0, UNKNOWN_FORMAT);
-    if (!edit->rules) {
-	option_auto_spellcheck = 0;
-	return 0;
-    }
-/* is ispell running? */
-    if (!spelling_pipe_in) {
-	int in, out, a = 0;
-	char *arg[10];
-	arg[a++] = "ispell";
-	arg[a++] = "-a";
-	if (option_alternate_dictionary)
-	    if (*option_alternate_dictionary) {
-		arg[a++] = "-d";
-		arg[a++] = option_alternate_dictionary;
-	    }
-	arg[a++] = "-a";
-	arg[a++] = 0;
-/* start ispell process */
-	ispell_pid = triple_pipe_open (&in, &out, 0, 1, arg[0], arg);
-	if (ispell_pid < 1) {
-	    option_auto_spellcheck = 0;
-#if 0
-	    CErrorDialog (0, 0, 0, _ (" Spelling Message "), "%s", _ (" Fail trying to open ispell program. \n Check that it is in your path and works with the -a option. \n Alternatively, disable spell checking from the Options menu. "));
-#endif
-	    return 1;
-	}
-/* prepare pipes */
-	spelling_pipe_in = (FILE *) fdopen (out, "r");
-	spelling_pipe_out = (FILE *) fdopen (in, "w");
-	if (!spelling_pipe_in || !spelling_pipe_out) {
-	    option_auto_spellcheck = 0;
-	    CErrorDialog (0, 0, 0, _ (" Spelling Message "), "%s", _ (" Fail trying to open ispell pipes. \n Check that it is in your path and works with the -a option. \n Alternatively, disable spell checking from the Options menu. "));
-	    return 1;
-	}
-/* read the banner message */
-	for (;;) {
-	    int c1;
-	    c1 = fgetc (spelling_pipe_in);
-	    if (c1 == -1 && errno != EINTR) {
-		option_auto_spellcheck = 0;
-		CErrorDialog (0, 0, 0, _ (" Spelling Message "), "%s", _ (" Fail trying to read ispell pipes. \n Check that it is in your path and works with the -a option. \n Alternatively, disable spell checking from the Options menu. "));
-		return 1;
-	    }
-	    if (c1 == '\n')
-		break;
-	}
-    }
-/* spellcheck the word under the cursor */
-    if (edit_check_spelling_at (edit, edit->curs1)) {
-	CMessageDialog (0, 0, 0, 0, _ (" Spelling Message "), "%s", _ (" Error reading from ispell. \n Ispell is being restarted. "));
-      close_spelling:
-	fclose (spelling_pipe_in);
-	spelling_pipe_in = 0;
-	fclose (spelling_pipe_out);
-	spelling_pipe_out = 0;
-	kill (ispell_pid, SIGKILL);
-    }
-    return 0;
-}
-
-#else				/* ! GTK && ! MIDNIGHT*/
-
 int edit_check_spelling (WEdit * edit)
 {
     return 0;
 }
-
-#endif
 
 void (*syntax_change_callback) (CWidget *) = 0;
 
@@ -1143,11 +828,7 @@ void edit_free_syntax_rules (WEdit * edit)
     syntax_free (edit->syntax_type);
     edit->syntax_type = 0;
     if (syntax_change_callback)
-#ifdef MIDNIGHT
 	(*syntax_change_callback) (&edit->widget);
-#else
-	(*syntax_change_callback) (edit->widget);
-#endif
     for (i = 0; edit->rules[i]; i++) {
 	if (edit->rules[i]->keyword) {
 	    for (j = 0; edit->rules[i]->keyword[j]; j++) {
@@ -1388,11 +1069,7 @@ FILE *upgrade_syntax_file (char *syntax_file)
 	unlink (s);
 	rename (syntax_file, s);
 	unlink (syntax_file);	/* might rename() fail ? */
-#if defined(MIDNIGHT) || defined(GTK)
 	edit_message_dialog (_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. "));
-#else
-	CMessageDialog (0, 20, 20, 0,_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ")); 
-#endif
 	goto rewrite_rule_file;
     }
     rewind (f);
@@ -1479,11 +1156,7 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
 			}
 /* notify the callback of a change in rule set */
 		    if (syntax_change_callback)
-#ifdef MIDNIGHT
 			(*syntax_change_callback) (&edit->widget);
-#else
-			(*syntax_change_callback) (edit->widget);
-#endif
 		}
 		break;
 	    }
@@ -1574,5 +1247,4 @@ int edit_check_spelling (WEdit * edit)
     return 0;
 }
 
-#endif		/* !defined(MIDNIGHT) || defined(HAVE_SYNTAXH) */
-
+#endif /* HAVE_SYNTAXH */
