@@ -2,6 +2,7 @@
 
 	* Make-mc.in (DISTVFS): try to distribute files needed for
 	building libvfs.so alone
+	(EXTFS_MISC): include uarj and unarj.diff in distribution
 
 1999-04-08  Owen Taylor  <otaylor@redhat.com>
 

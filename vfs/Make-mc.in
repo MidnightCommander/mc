@@ -70,8 +70,8 @@ VFSHDRS = 			\
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-EXTFS_MISC  = README extfs.ini
-EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini trpm rpms
+EXTFS_MISC  = README extfs.ini unarj.diff
+EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini trpm rpms uarj
 
 EXTFS_IN    = 			\
 	deb.in 			\
