@@ -1,3 +1,8 @@
+2002-07-14  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c (open_archive_int): Set remote locale to C, otherwise
+	timestamps cannot be parsed in some locales.
+
 2002-07-12  Pavel Roskin  <proski@gnu.org>
 
 	* fish.c (file_store): Reduce input block size to 256 bytes,

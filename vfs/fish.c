@@ -267,6 +267,11 @@ open_archive_int (vfs *me, vfs_s_super *super)
     if (command (me, super, WAIT_REPLY, "#VER 0.0.0\necho '### 000'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
+    /* Set up remote locale to C, otherwise dates cannot be recognized */
+    if (command (me, super, WAIT_REPLY, "export LANG=C; export LC_ALL=C\n"
+					"echo '### 200'\n") != COMPLETE)
+        ERRNOR (E_PROTO, -1);
+
     print_vfs_message( _("fish: Setting up current directory...") );
     SUP.home = fish_getcwd (me, super);
     print_vfs_message( _("fish: Connected, home %s."), SUP.home );
