@@ -1,5 +1,8 @@
 2002-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Make GLIB_LIBS a separate AC_SUBST'ed variable,
+	use only for the programs that need it (mc and mcserv).
+
 	* configure.in: Fix help text for gpm and ncurses.  Properly
 	handle --without-ncurses.
 	Reported by Moritz Barsnick <moritz@barsnick.net>

@@ -102,7 +102,7 @@ endif
 
 mcserv_SOURCES = mcserv.c tcputil.c
 
-mcserv_LDFLAGS = $(TERMNET) $(PAMLIBS) $(LCRYPT)
+mcserv_LDFLAGS = $(TERMNET) $(PAMLIBS) $(LCRYPT) $(GLIB_LIBS)
 
 SAMBA_DIST =			\
 	Makefile.in		\

@@ -33,7 +33,7 @@ AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,[$glib_path])
 
 AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config])
 AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
-LIBS="$LIBS $GLIB_LIBS"
+AC_SUBST(GLIB_LIBS)
 
 
 AC_HEADER_MAJOR

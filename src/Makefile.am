@@ -36,7 +36,7 @@ endif
 endif
 
 mc_LDADD = $(EDITLIB) $(SLANGLIB) $(VFSLIB) \
-	$(INTLLIBS) $(TERMNET) $(MCLIBS) $(LIBICONV)
+	$(INTLLIBS) $(TERMNET) $(GLIB_LIBS) $(MCLIBS) $(LIBICONV)
 
 CHARSET_SRC = charsets.c charsets.h selcodepage.c selcodepage.h
 
