@@ -1,200 +1,200 @@
 context default
-    keyword whole Auto\{Pp\}rov: green/6
-    keyword whole Auto\{Rr\}eq\{Pp\}rov: green/6
-    keyword whole Auto\{Rr\}eq: green/6
-    keyword whole BuildPre\{Rr\}eq: green/6
-    keyword whole Build\{Rr\}oot: green/6
-    keyword whole BuildRequires: green/6
-    keyword whole Conflicts: green/6
-    keyword whole Copyright: green/6
-    keyword whole Description: green/6    
-    keyword whole Distribution: green/6    
-    keyword whole Doc\{Dd\}ir: green/6    
-    keyword whole Epoch: green/6
-    keyword whole ExcludeArch: green/6
-    keyword whole ExclusiveArch: green/6
-    keyword whole ExclusiveOS: green/6
-    keyword whole Group: green/6
-    keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]): green/6
-    keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green/6
-    keyword whole Icon: green/6
-    keyword whole License: green/6
-    keyword whole Name: green/6    
-    keyword whole Obsoletes: green/6
-    keyword whole Packager: green/6
-    keyword whole Patch\[0123456789\]: green/6    
-    keyword whole Prefix: green/6
-    keyword whole Pre\{Rr\}eq: green/6    
-    keyword whole Provides: green/6    
-    keyword whole Release: green/6    
-    keyword whole Requires: green/6    
-    keyword whole Root: green/6    
-    keyword whole Source\[0123456789\]: green/6
-    keyword whole Summary: green/6
-    keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]): green/6
-    keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green/6
-    keyword whole Vendor: green/6
-    keyword whole Version: green/6
-    keyword whole URL: green/6
+    keyword whole Auto\{Pp\}rov: green
+    keyword whole Auto\{Rr\}eq\{Pp\}rov: green
+    keyword whole Auto\{Rr\}eq: green
+    keyword whole BuildPre\{Rr\}eq: green
+    keyword whole Build\{Rr\}oot: green
+    keyword whole BuildRequires: green
+    keyword whole Conflicts: green
+    keyword whole Copyright: green
+    keyword whole Description: green    
+    keyword whole Distribution: green    
+    keyword whole Doc\{Dd\}ir: green    
+    keyword whole Epoch: green
+    keyword whole ExcludeArch: green
+    keyword whole ExclusiveArch: green
+    keyword whole ExclusiveOS: green
+    keyword whole Group: green
+    keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]): green
+    keyword whole Group(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green
+    keyword whole Icon: green
+    keyword whole License: green
+    keyword whole Name: green    
+    keyword whole Obsoletes: green
+    keyword whole Packager: green
+    keyword whole Patch\[0123456789\]: green    
+    keyword whole Prefix: green
+    keyword whole Pre\{Rr\}eq: green    
+    keyword whole Provides: green    
+    keyword whole Release: green    
+    keyword whole Requires: green    
+    keyword whole Root: green    
+    keyword whole Source\[0123456789\]: green
+    keyword whole Summary: green
+    keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]): green
+    keyword whole Summary(\[abcdefghijklmnopqrstuvwxyz\]_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]): green
+    keyword whole Vendor: green
+    keyword whole Version: green
+    keyword whole URL: green
 
-    keyword whole linestart %build red/9
-    keyword whole linestart %clean red/9
-    keyword whole linestart %changelog red/9
-    keyword whole linestart %description red/9
-    keyword whole linestart %files red/9
-    keyword whole linestart %install red/9
-    keyword whole linestart %package red/9
-    keyword whole linestart %pre red/9
-    keyword whole linestart %prep red/9
-    keyword whole linestart %preun red/9
-    keyword whole linestart %post red/9
-    keyword whole linestart %postun red/9
+    keyword whole linestart %build red
+    keyword whole linestart %clean red
+    keyword whole linestart %changelog red
+    keyword whole linestart %description red
+    keyword whole linestart %files red
+    keyword whole linestart %install red
+    keyword whole linestart %package red
+    keyword whole linestart %pre red
+    keyword whole linestart %prep red
+    keyword whole linestart %preun red
+    keyword whole linestart %post red
+    keyword whole linestart %postun red
 
-    keyword whole %define brightmagenta/23
-    keyword whole %dump brightmagenta/23
-    keyword whole %global brightmagenta/23
-    keyword whole %trace brightmagenta/23
-    keyword whole %undefine brightmagenta/23
-    keyword %\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\] brightred/23
+    keyword whole %define brightmagenta
+    keyword whole %dump brightmagenta
+    keyword whole %global brightmagenta
+    keyword whole %trace brightmagenta
+    keyword whole %undefine brightmagenta
+    keyword %\{ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\}\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\] brightred
 
-    keyword whole echo: brightmagenta/23
-    keyword whole warn: brightmagenta/23
-    keyword whole error: brightmagenta/23
-    keyword whole uncompress: brightmagenta/23
-    keyword whole expand: brightmagenta/23
-    keyword whole S: brightmagenta/23
-    keyword whole P: brightmagenta/23
-    keyword whole F: brightmagenta/23
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+    keyword whole echo: brightmagenta
+    keyword whole warn: brightmagenta
+    keyword whole error: brightmagenta
+    keyword whole uncompress: brightmagenta
+    keyword whole expand: brightmagenta
+    keyword whole S: brightmagenta
+    keyword whole P: brightmagenta
+    keyword whole F: brightmagenta
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
         
-    keyword whole %triggerin magenta/23
-    keyword whole %triggerun magenta/23
-    keyword whole %triggerun magenta/23
+    keyword whole %triggerin magenta
+    keyword whole %triggerun magenta
+    keyword whole %triggerun magenta
     
-    keyword \\\n yellow/26
-    keyword wholeright $+ brightgreen/16
-    keyword ftp://+ brightgreen/16
-    keyword http://+ brightgreen/16
+    keyword \\\n yellow
+    keyword wholeright $+ brightgreen
+    keyword ftp://+ brightgreen
+    keyword http://+ brightgreen
 
-    keyword whole missingok brightblue/11
-    keyword whole noreplace brightblue/11
+    keyword whole missingok brightblue
+    keyword whole noreplace brightblue
 
-    keyword whole PATCH\[0123456789\] cyan/14
-    keyword whole SOURCE\[0123456789\] cyan/14
+    keyword whole PATCH\[0123456789\] cyan
+    keyword whole SOURCE\[0123456789\] cyan
 
-context linestart # \n brown/22
-context %( ) brightblue/23
+context linestart # \n brown
+context %( ) brightblue
 
 # Changelog
-context exclusive whole linestart %changelog EOF lightgray/13
-    keyword Revision*\n brightgreen/16
-    keyword \*\s\{MWTFS\}*\n brightgreen/16
-    keyword \s\s[*] brightgreen/16
-    keyword $Log*\n brightred/18
+context exclusive whole linestart %changelog EOF lightgray
+    keyword Revision*\n brightgreen
+    keyword \*\s\{MWTFS\}*\n brightgreen
+    keyword \s\s[*] brightgreen
+    keyword $Log*\n brightred
 
 #sections
-context exclusive linestart %build \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %build \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %clean \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %clean \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %description \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %description \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %files \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %files \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %install \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %install \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %package \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %package \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %pre \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %pre \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %prep \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %prep \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %preun \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %preun \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %post \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %post \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
-context exclusive linestart %postun \n yellow/24
-    keyword -l brightred/18
-    keyword -n brightred/18
-    keyword -p brightred/18
-    keyword %{ brightcyan/14
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive linestart %postun \n yellow
+    keyword -l brightred
+    keyword -n brightred
+    keyword -p brightred
+    keyword %{ brightcyan
+    keyword { brightcyan
+    keyword } brightcyan
 
 #triggers
-context exclusive %triggerin \n lightgray/13
-    keyword -n brightmagenta/23
-    keyword -p brightmagenta/23
-    keyword -- brightmagenta/23
+context exclusive %triggerin \n lightgray
+    keyword -n brightmagenta
+    keyword -p brightmagenta
+    keyword -- brightmagenta
 
-context exclusive %triggerun \n lightgray/13
-    keyword -n brightmagenta/23
-    keyword -p brightmagenta/23
-    keyword -- brightmagenta/23
+context exclusive %triggerun \n lightgray
+    keyword -n brightmagenta
+    keyword -p brightmagenta
+    keyword -- brightmagenta
 
-context exclusive %triggerpostun \n lightgray/13
-    keyword -n brightmagenta/23
-    keyword -p brightmagenta/23
-    keyword -- brightmagenta/23
+context exclusive %triggerpostun \n lightgray
+    keyword -n brightmagenta
+    keyword -p brightmagenta
+    keyword -- brightmagenta

@@ -1,5 +1,9 @@
 2002-09-29  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/*.syntax: Remove numeric Cooledit colors.  It's
+	unreasonable to require them to be correct.  On the other hand,
+	Cooledit can easily be changed to accept named color names.
+
 	* syntax/syntax.syntax: Don't require Cooledit colors for
 	highlighting color names.  Remove Cooledit colors.
 

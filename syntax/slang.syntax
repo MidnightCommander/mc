@@ -1,109 +1,109 @@
 context default
-    keyword whole forever white/24
-    keyword whole foreach white/24
-    keyword whole using white/24
-    keyword whole orelse white/24
-    keyword whole andelse white/24
-    keyword whole loop white/24
-    keyword whole variable white/24
-    keyword whole define white/24
-    keyword whole break white/24
-    keyword whole case white/24
-    keyword whole continue white/24
-    keyword whole do white/24
-    keyword whole else white/24
-    keyword whole for white/24
-    keyword whole goto white/24
-    keyword whole if white/24
-    keyword whole !if white/24
-    keyword whole return white/24
-    keyword whole sizeof white/24
-    keyword whole static white/24
-    keyword whole struct white/24
-    keyword whole switch white/24
-    keyword whole typedef white/24
-    keyword whole while white/24
-    keyword whole typecast white/24
-    keyword whole delete white/24
-    keyword whole private white/24
-    keyword whole protected white/24
-    keyword whole public white/24
-    keyword whole namespace white/24
-    keyword whole implements white/24
+    keyword whole forever white
+    keyword whole foreach white
+    keyword whole using white
+    keyword whole orelse white
+    keyword whole andelse white
+    keyword whole loop white
+    keyword whole variable white
+    keyword whole define white
+    keyword whole break white
+    keyword whole case white
+    keyword whole continue white
+    keyword whole do white
+    keyword whole else white
+    keyword whole for white
+    keyword whole goto white
+    keyword whole if white
+    keyword whole !if white
+    keyword whole return white
+    keyword whole sizeof white
+    keyword whole static white
+    keyword whole struct white
+    keyword whole switch white
+    keyword whole typedef white
+    keyword whole while white
+    keyword whole typecast white
+    keyword whole delete white
+    keyword whole private white
+    keyword whole protected white
+    keyword whole public white
+    keyword whole namespace white
+    keyword whole implements white
 
-    keyword whole EXIT_BLOCK white/24
-    keyword whole ERROR_BLOCK white/24
-    keyword whole EXECUTE_ERROR_BLOCK white/24
+    keyword whole EXIT_BLOCK white
+    keyword whole ERROR_BLOCK white
+    keyword whole EXECUTE_ERROR_BLOCK white
 
-    keyword whole and white/24
-    keyword whole or white/24
-    keyword whole xor white/24
+    keyword whole and white
+    keyword whole or white
+    keyword whole xor white
 
 
-    keyword whole Char_Type yellow/24
-    keyword whole UChar_Type yellow/24
-    keyword whole Short_Type yellow/24
-    keyword whole UShort_Type yellow/24
-    keyword whole Integer_Type yellow/24
-    keyword whole UInteger_Type yellow/24
-    keyword whole Long_Type yellow/24
-    keyword whole ULong_Type yellow/24
-    keyword whole Float_Type yellow/24
-    keyword whole Double_Type yellow/24
-    keyword whole Complex_Type yellow/24
-    keyword whole String_Type yellow/24
-    keyword whole BString_Type yellow/24
-    keyword whole Struct_Type yellow/24
-    keyword whole Ref_Type yellow/24
-    keyword whole Null_Type yellow/24
-    keyword whole Array_Type yellow/24
-    keyword whole DataType_Type yellow/24
-    keyword whole Assoc_Type yellow/24
+    keyword whole Char_Type yellow
+    keyword whole UChar_Type yellow
+    keyword whole Short_Type yellow
+    keyword whole UShort_Type yellow
+    keyword whole Integer_Type yellow
+    keyword whole UInteger_Type yellow
+    keyword whole Long_Type yellow
+    keyword whole ULong_Type yellow
+    keyword whole Float_Type yellow
+    keyword whole Double_Type yellow
+    keyword whole Complex_Type yellow
+    keyword whole String_Type yellow
+    keyword whole BString_Type yellow
+    keyword whole Struct_Type yellow
+    keyword whole Ref_Type yellow
+    keyword whole Null_Type yellow
+    keyword whole Array_Type yellow
+    keyword whole DataType_Type yellow
+    keyword whole Assoc_Type yellow
 
-    keyword '\\\{"abtnvfr\}' brightgreen/16
-    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen/16
-    keyword '\\'' brightgreen/16
-    keyword '\\\\' brightgreen/16
-    keyword '\\0' brightgreen/16
-    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen/16
+    keyword '\\\{"abtnvfr\}' brightgreen
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen
+    keyword '\\'' brightgreen
+    keyword '\\\\' brightgreen
+    keyword '\\0' brightgreen
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen
 
-    keyword > white/24
-    keyword < white/24
-    keyword \+ white/24
-    keyword - white/24
-    keyword \* white/24
-    keyword / white/24
-    keyword = white/24
-    keyword != white/24
-    keyword == white/24
-    keyword ; white/19
-    keyword { brightcyan/14
-    keyword } brightcyan/14
-    keyword ( brightcyan/15
-    keyword ) brightcyan/15
-    keyword [ brightcyan/14
-    keyword ] brightcyan/14
-    keyword , brightcyan/14
-    keyword : brightcyan/14
-context % \n brown/22
+    keyword > white
+    keyword < white
+    keyword \+ white
+    keyword - white
+    keyword \* white
+    keyword / white
+    keyword = white
+    keyword != white
+    keyword == white
+    keyword ; white
+    keyword { brightcyan
+    keyword } brightcyan
+    keyword ( brightcyan
+    keyword ) brightcyan
+    keyword [ brightcyan
+    keyword ] brightcyan
+    keyword , brightcyan
+    keyword : brightcyan
+context % \n brown
     spellcheck
-context linestart # \n brightred/18
-    keyword \\\n yellow/24
-    keyword /\**\*/ brown/22
-    keyword "+" red/19
-    keyword <+> red/19
-context " " green/6
+context linestart # \n brightred
+    keyword \\\n yellow
+    keyword /\**\*/ brown
+    keyword "+" red
+    keyword <+> red
+context " " green
     spellcheck
-    keyword \\" brightgreen/16
-    keyword \\\n brightgreen/16
-    keyword %% brightgreen/16
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen/16
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen/16
-    keyword %\[hl\]n brightgreen/16
-    keyword %\[.\]\[0123456789\]s brightgreen/16
-    keyword %[*] brightgreen/16
-    keyword %c brightgreen/16
-    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
-    keyword \\\\ brightgreen/16
-    keyword \\' brightgreen/16
-    keyword \\\{abtnvfr\} brightgreen/16
+    keyword \\" brightgreen
+    keyword \\\n brightgreen
+    keyword %% brightgreen
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen
+    keyword %\[hl\]n brightgreen
+    keyword %\[.\]\[0123456789\]s brightgreen
+    keyword %[*] brightgreen
+    keyword %c brightgreen
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
+    keyword \\\\ brightgreen
+    keyword \\' brightgreen
+    keyword \\\{abtnvfr\} brightgreen

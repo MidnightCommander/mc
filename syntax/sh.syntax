@@ -1,337 +1,337 @@
 
 context default
-    keyword ;; brightred/18
-    keyword \\@ brightred/18
-    keyword \\$ brightred/18
-    keyword \\\\ brightred/18
-    keyword \\" brightred/18
-    keyword \\' brightred/18
-    keyword \\` brightred/18
-    keyword ` brightred/18
-    keyword ; brightcyan/17
-    keyword $(*) brightgreen/16
-    keyword ${*} brightgreen/16
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+    keyword ;; brightred
+    keyword \\@ brightred
+    keyword \\$ brightred
+    keyword \\\\ brightred
+    keyword \\" brightred
+    keyword \\' brightred
+    keyword \\` brightred
+    keyword ` brightred
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
 
-    keyword whole linestart #!\[\s\]/bin/\[abkpct\]sh brightcyan/17 black/0
+    keyword whole linestart #!\[\s\]/bin/\[abkpct\]sh brightcyan black
 
-    keyword $\* brightred/18
-    keyword $@ brightred/18
-    keyword $# brightred/18
-    keyword $? brightred/18
-    keyword $- brightred/18
-    keyword $$ brightred/18
-    keyword $! brightred/18
-    keyword $_ brightred/18
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
 
-    keyword wholeright $\[0123456789\] brightred/18
+    keyword wholeright $\[0123456789\] brightred
 
-    keyword wholeright $+ brightgreen/16
+    keyword wholeright $+ brightgreen
 
-    keyword $ brightgreen/16
+    keyword $ brightgreen
 
-    keyword wholeleft linestart function*() brightmagenta/23
-    keyword wholeleft linestart function\[\s\]+ brightmagenta/23
-    keyword wholeright +() brightmagenta/23
+    keyword wholeleft linestart function*() brightmagenta
+    keyword wholeleft linestart function\[\s\]+ brightmagenta
+    keyword wholeright +() brightmagenta
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole alias yellow/24
-    keyword whole bg yellow/24
-    keyword whole break yellow/24
-    keyword whole case yellow/24
-    keyword whole continue yellow/24
-    keyword whole done yellow/24
-    keyword whole do yellow/24
-    keyword whole elif yellow/24
-    keyword whole else yellow/24
-    keyword whole esac yellow/24
-    keyword whole eval yellow/24
-    keyword whole exec yellow/24
-    keyword whole exit yellow/24
-    keyword whole export yellow/24
-    keyword whole fg yellow/24
-    keyword whole fi yellow/24
-    keyword whole for yellow/24
-    keyword whole if yellow/24
-    keyword whole in yellow/24
-    keyword whole read yellow/24
-    keyword whole return yellow/24
-    keyword whole select yellow/24
-    keyword whole set yellow/24
-    keyword whole shift yellow/24
-    keyword whole then yellow/24
-    keyword whole trap yellow/24
-    keyword whole umask yellow/24
-    keyword whole unset yellow/24
-    keyword whole until yellow/24
-    keyword whole while yellow/24
+    keyword whole alias yellow
+    keyword whole bg yellow
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole continue yellow
+    keyword whole done yellow
+    keyword whole do yellow
+    keyword whole elif yellow
+    keyword whole else yellow
+    keyword whole esac yellow
+    keyword whole eval yellow
+    keyword whole exec yellow
+    keyword whole exit yellow
+    keyword whole export yellow
+    keyword whole fg yellow
+    keyword whole fi yellow
+    keyword whole for yellow
+    keyword whole if yellow
+    keyword whole in yellow
+    keyword whole read yellow
+    keyword whole return yellow
+    keyword whole select yellow
+    keyword whole set yellow
+    keyword whole shift yellow
+    keyword whole then yellow
+    keyword whole trap yellow
+    keyword whole umask yellow
+    keyword whole unset yellow
+    keyword whole until yellow
+    keyword whole while yellow
 
-    keyword whole arch cyan/14
-    keyword whole ash cyan/14
-    keyword whole awk cyan/14
-    keyword whole basename cyan/14
-    keyword whole bash cyan/14
-    keyword whole bg_backup cyan/14
-    keyword whole bg_restore cyan/14
-    keyword whole bsh cyan/14
-    keyword whole cat cyan/14
-    keyword whole cd cyan/14
-    keyword whole chgrp cyan/14
-    keyword whole chmod cyan/14
-    keyword whole chown cyan/14
-    keyword whole cp cyan/14
-    keyword whole cpio cyan/14
-    keyword whole csh cyan/14
-    keyword whole date cyan/14
-    keyword whole dd cyan/14
-    keyword whole df cyan/14
-    keyword whole dmesg cyan/14
-    keyword whole dnsdomainname cyan/14
-    keyword whole doexec cyan/14
-    keyword whole domainname cyan/14
-    keyword whole echo cyan/14
-    keyword whole ed cyan/14
-    keyword whole egrep cyan/14
-    keyword whole ex cyan/14
-    keyword whole false cyan/14
-    keyword whole fgrep cyan/14
-    keyword whole fsconf cyan/14
-    keyword whole gawk cyan/14
-    keyword whole grep cyan/14
-    keyword whole gunzip cyan/14
-    keyword whole gzip cyan/14
-    keyword whole hostname cyan/14
-    keyword whole igawk cyan/14
-    keyword whole ipcalc cyan/14
-    keyword whole kill cyan/14
-    keyword whole ksh cyan/14
-    keyword whole linuxconf cyan/14
-    keyword whole ln cyan/14
-    keyword whole login cyan/14
-    keyword whole lpdconf cyan/14
-    keyword whole ls cyan/14
-    keyword whole mail cyan/14
-    keyword whole mkdir cyan/14
-    keyword whole mknod cyan/14
-    keyword whole mktemp cyan/14
-    keyword whole more cyan/14
-    keyword whole mount cyan/14
-    keyword whole mt cyan/14
-    keyword whole mv cyan/14
-    keyword whole netconf cyan/14
-    keyword whole netstat cyan/14
-    keyword whole nice cyan/14
-    keyword whole nisdomainname cyan/14
-    keyword whole ping cyan/14
-    keyword whole ps cyan/14
-    keyword whole pwd cyan/14
-    keyword whole red cyan/14
-    keyword whole remadmin cyan/14
-    keyword whole rm cyan/14
-    keyword whole rmdir cyan/14
-    keyword whole rpm cyan/14
-    keyword whole sed cyan/14
-    keyword whole set cyan/14
-    keyword whole setserial cyan/14
-    keyword whole sh cyan/14
-    keyword whole sleep cyan/14
-    keyword whole sort cyan/14
-    keyword whole stty cyan/14
-    keyword whole su cyan/14
-    keyword whole sync cyan/14
-    keyword whole taper cyan/14
-    keyword whole tar cyan/14
-    keyword whole tcsh cyan/14
-    keyword whole test cyan/14
-    keyword whole touch cyan/14
-    keyword whole true cyan/14
-    keyword whole umount cyan/14
-    keyword whole uname cyan/14
-    keyword whole userconf cyan/14
-    keyword whole usleep cyan/14
-    keyword whole vi cyan/14
-    keyword whole view cyan/14
-    keyword whole vim cyan/14
-    keyword whole xconf cyan/14
-    keyword whole ypdomainname cyan/14
-    keyword whole zcat cyan/14
-    keyword whole zsh cyan/14
+    keyword whole arch cyan
+    keyword whole ash cyan
+    keyword whole awk cyan
+    keyword whole basename cyan
+    keyword whole bash cyan
+    keyword whole bg_backup cyan
+    keyword whole bg_restore cyan
+    keyword whole bsh cyan
+    keyword whole cat cyan
+    keyword whole cd cyan
+    keyword whole chgrp cyan
+    keyword whole chmod cyan
+    keyword whole chown cyan
+    keyword whole cp cyan
+    keyword whole cpio cyan
+    keyword whole csh cyan
+    keyword whole date cyan
+    keyword whole dd cyan
+    keyword whole df cyan
+    keyword whole dmesg cyan
+    keyword whole dnsdomainname cyan
+    keyword whole doexec cyan
+    keyword whole domainname cyan
+    keyword whole echo cyan
+    keyword whole ed cyan
+    keyword whole egrep cyan
+    keyword whole ex cyan
+    keyword whole false cyan
+    keyword whole fgrep cyan
+    keyword whole fsconf cyan
+    keyword whole gawk cyan
+    keyword whole grep cyan
+    keyword whole gunzip cyan
+    keyword whole gzip cyan
+    keyword whole hostname cyan
+    keyword whole igawk cyan
+    keyword whole ipcalc cyan
+    keyword whole kill cyan
+    keyword whole ksh cyan
+    keyword whole linuxconf cyan
+    keyword whole ln cyan
+    keyword whole login cyan
+    keyword whole lpdconf cyan
+    keyword whole ls cyan
+    keyword whole mail cyan
+    keyword whole mkdir cyan
+    keyword whole mknod cyan
+    keyword whole mktemp cyan
+    keyword whole more cyan
+    keyword whole mount cyan
+    keyword whole mt cyan
+    keyword whole mv cyan
+    keyword whole netconf cyan
+    keyword whole netstat cyan
+    keyword whole nice cyan
+    keyword whole nisdomainname cyan
+    keyword whole ping cyan
+    keyword whole ps cyan
+    keyword whole pwd cyan
+    keyword whole red cyan
+    keyword whole remadmin cyan
+    keyword whole rm cyan
+    keyword whole rmdir cyan
+    keyword whole rpm cyan
+    keyword whole sed cyan
+    keyword whole set cyan
+    keyword whole setserial cyan
+    keyword whole sh cyan
+    keyword whole sleep cyan
+    keyword whole sort cyan
+    keyword whole stty cyan
+    keyword whole su cyan
+    keyword whole sync cyan
+    keyword whole taper cyan
+    keyword whole tar cyan
+    keyword whole tcsh cyan
+    keyword whole test cyan
+    keyword whole touch cyan
+    keyword whole true cyan
+    keyword whole umount cyan
+    keyword whole uname cyan
+    keyword whole userconf cyan
+    keyword whole usleep cyan
+    keyword whole vi cyan
+    keyword whole view cyan
+    keyword whole vim cyan
+    keyword whole xconf cyan
+    keyword whole ypdomainname cyan
+    keyword whole zcat cyan
+    keyword whole zsh cyan
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
-context # \n brown/22
+context # \n brown
     spellcheck
 
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green/6
-context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green/6
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]EOF EOF green
+context exclusive whole <<\[\s\]\[-\]\[\s\]\[\\\]END END green
 
-context ' ' green/6
+context ' ' green
 
-context " " green/6
-    keyword \\* brightgreen/16
-    keyword \\@ brightgreen/16
-    keyword \\$ brightgreen/16
-    keyword \\\\ brightgreen/16
-    keyword \\` brightgreen/16
-    keyword \\" brightgreen/16
-    keyword $(*) brightgreen/16
-    keyword ${*} brightgreen/16
-    keyword $\* brightred/18
-    keyword $@ brightred/18
-    keyword $# brightred/18
-    keyword $? brightred/18
-    keyword $- brightred/18
-    keyword $$ brightred/18
-    keyword $! brightred/18
-    keyword $_ brightred/18
-    keyword wholeright $\[0123456789\] brightred/18
+context " " green
+    keyword \\* brightgreen
+    keyword \\@ brightgreen
+    keyword \\$ brightgreen
+    keyword \\\\ brightgreen
+    keyword \\` brightgreen
+    keyword \\" brightgreen
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
+    keyword wholeright $\[0123456789\] brightred
 
-    keyword wholeright $+ brightgreen/16
+    keyword wholeright $+ brightgreen
 
-    keyword $ brightgreen/16
+    keyword $ brightgreen
 
-context exclusive ` ` white/26 black/0
-    keyword '*' green/6
-    keyword " green/6
-    keyword \\` green/6
-    keyword ; brightcyan/17
-    keyword $(*) brightgreen/16
-    keyword ${*} brightgreen/16
-    keyword { brightcyan/14
-    keyword } brightcyan/14
+context exclusive ` ` white black
+    keyword '*' green
+    keyword " green
+    keyword \\` green
+    keyword ; brightcyan
+    keyword $(*) brightgreen
+    keyword ${*} brightgreen
+    keyword { brightcyan
+    keyword } brightcyan
 
-    keyword $\* brightred/18
-    keyword $@ brightred/18
-    keyword $# brightred/18
-    keyword $? brightred/18
-    keyword $- brightred/18
-    keyword $$ brightred/18
-    keyword $! brightred/18
-    keyword $_ brightred/18
+    keyword $\* brightred
+    keyword $@ brightred
+    keyword $# brightred
+    keyword $? brightred
+    keyword $- brightred
+    keyword $$ brightred
+    keyword $! brightred
+    keyword $_ brightred
 
-    keyword wholeright $\[0123456789\] brightred/18
+    keyword wholeright $\[0123456789\] brightred
 
-    keyword wholeright $+ brightgreen/16
+    keyword wholeright $+ brightgreen
 
-    keyword $ brightgreen/16
+    keyword $ brightgreen
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 
-    keyword whole break yellow/24
-    keyword whole case yellow/24
-    keyword whole continue yellow/24
-    keyword whole done yellow/24
-    keyword whole do yellow/24
-    keyword whole elif yellow/24
-    keyword whole else yellow/24
-    keyword whole esac yellow/24
-    keyword whole exit yellow/24
-    keyword whole fi yellow/24
-    keyword whole for yellow/24
-    keyword whole if yellow/24
-    keyword whole in yellow/24
-    keyword whole return yellow/24
-    keyword whole select yellow/24
-    keyword whole shift yellow/24
-    keyword whole then yellow/24
-    keyword whole trap yellow/24
-    keyword whole until yellow/24
-    keyword whole while yellow/24
+    keyword whole break yellow
+    keyword whole case yellow
+    keyword whole continue yellow
+    keyword whole done yellow
+    keyword whole do yellow
+    keyword whole elif yellow
+    keyword whole else yellow
+    keyword whole esac yellow
+    keyword whole exit yellow
+    keyword whole fi yellow
+    keyword whole for yellow
+    keyword whole if yellow
+    keyword whole in yellow
+    keyword whole return yellow
+    keyword whole select yellow
+    keyword whole shift yellow
+    keyword whole then yellow
+    keyword whole trap yellow
+    keyword whole until yellow
+    keyword whole while yellow
 
-    keyword whole arch cyan/14
-    keyword whole ash cyan/14
-    keyword whole awk cyan/14
-    keyword whole basename cyan/14
-    keyword whole bash cyan/14
-    keyword whole bg_backup cyan/14
-    keyword whole bg_restore cyan/14
-    keyword whole bsh cyan/14
-    keyword whole cat cyan/14
-    keyword whole cd cyan/14
-    keyword whole chgrp cyan/14
-    keyword whole chmod cyan/14
-    keyword whole chown cyan/14
-    keyword whole cp cyan/14
-    keyword whole cpio cyan/14
-    keyword whole csh cyan/14
-    keyword whole date cyan/14
-    keyword whole dd cyan/14
-    keyword whole df cyan/14
-    keyword whole dmesg cyan/14
-    keyword whole dnsdomainname cyan/14
-    keyword whole doexec cyan/14
-    keyword whole domainname cyan/14
-    keyword whole echo cyan/14
-    keyword whole ed cyan/14
-    keyword whole egrep cyan/14
-    keyword whole ex cyan/14
-    keyword whole false cyan/14
-    keyword whole fgrep cyan/14
-    keyword whole fsconf cyan/14
-    keyword whole gawk cyan/14
-    keyword whole grep cyan/14
-    keyword whole gunzip cyan/14
-    keyword whole gzip cyan/14
-    keyword whole hostname cyan/14
-    keyword whole igawk cyan/14
-    keyword whole ipcalc cyan/14
-    keyword whole kill cyan/14
-    keyword whole ksh cyan/14
-    keyword whole linuxconf cyan/14
-    keyword whole ln cyan/14
-    keyword whole login cyan/14
-    keyword whole lpdconf cyan/14
-    keyword whole ls cyan/14
-    keyword whole mail cyan/14
-    keyword whole mkdir cyan/14
-    keyword whole mknod cyan/14
-    keyword whole mktemp cyan/14
-    keyword whole more cyan/14
-    keyword whole mount cyan/14
-    keyword whole mt cyan/14
-    keyword whole mv cyan/14
-    keyword whole netconf cyan/14
-    keyword whole netstat cyan/14
-    keyword whole nice cyan/14
-    keyword whole nisdomainname cyan/14
-    keyword whole ping cyan/14
-    keyword whole ps cyan/14
-    keyword whole pwd cyan/14
-    keyword whole red cyan/14
-    keyword whole remadmin cyan/14
-    keyword whole rm cyan/14
-    keyword whole rmdir cyan/14
-    keyword whole rpm cyan/14
-    keyword whole sed cyan/14
-    keyword whole set cyan/14
-    keyword whole setserial cyan/14
-    keyword whole sh cyan/14
-    keyword whole sleep cyan/14
-    keyword whole sort cyan/14
-    keyword whole stty cyan/14
-    keyword whole su cyan/14
-    keyword whole sync cyan/14
-    keyword whole taper cyan/14
-    keyword whole tar cyan/14
-    keyword whole tcsh cyan/14
-    keyword whole test cyan/14
-    keyword whole touch cyan/14
-    keyword whole true cyan/14
-    keyword whole umount cyan/14
-    keyword whole uname cyan/14
-    keyword whole userconf cyan/14
-    keyword whole usleep cyan/14
-    keyword whole vi cyan/14
-    keyword whole view cyan/14
-    keyword whole vim cyan/14
-    keyword whole xconf cyan/14
-    keyword whole ypdomainname cyan/14
-    keyword whole zcat cyan/14
-    keyword whole zsh cyan/14
+    keyword whole arch cyan
+    keyword whole ash cyan
+    keyword whole awk cyan
+    keyword whole basename cyan
+    keyword whole bash cyan
+    keyword whole bg_backup cyan
+    keyword whole bg_restore cyan
+    keyword whole bsh cyan
+    keyword whole cat cyan
+    keyword whole cd cyan
+    keyword whole chgrp cyan
+    keyword whole chmod cyan
+    keyword whole chown cyan
+    keyword whole cp cyan
+    keyword whole cpio cyan
+    keyword whole csh cyan
+    keyword whole date cyan
+    keyword whole dd cyan
+    keyword whole df cyan
+    keyword whole dmesg cyan
+    keyword whole dnsdomainname cyan
+    keyword whole doexec cyan
+    keyword whole domainname cyan
+    keyword whole echo cyan
+    keyword whole ed cyan
+    keyword whole egrep cyan
+    keyword whole ex cyan
+    keyword whole false cyan
+    keyword whole fgrep cyan
+    keyword whole fsconf cyan
+    keyword whole gawk cyan
+    keyword whole grep cyan
+    keyword whole gunzip cyan
+    keyword whole gzip cyan
+    keyword whole hostname cyan
+    keyword whole igawk cyan
+    keyword whole ipcalc cyan
+    keyword whole kill cyan
+    keyword whole ksh cyan
+    keyword whole linuxconf cyan
+    keyword whole ln cyan
+    keyword whole login cyan
+    keyword whole lpdconf cyan
+    keyword whole ls cyan
+    keyword whole mail cyan
+    keyword whole mkdir cyan
+    keyword whole mknod cyan
+    keyword whole mktemp cyan
+    keyword whole more cyan
+    keyword whole mount cyan
+    keyword whole mt cyan
+    keyword whole mv cyan
+    keyword whole netconf cyan
+    keyword whole netstat cyan
+    keyword whole nice cyan
+    keyword whole nisdomainname cyan
+    keyword whole ping cyan
+    keyword whole ps cyan
+    keyword whole pwd cyan
+    keyword whole red cyan
+    keyword whole remadmin cyan
+    keyword whole rm cyan
+    keyword whole rmdir cyan
+    keyword whole rpm cyan
+    keyword whole sed cyan
+    keyword whole set cyan
+    keyword whole setserial cyan
+    keyword whole sh cyan
+    keyword whole sleep cyan
+    keyword whole sort cyan
+    keyword whole stty cyan
+    keyword whole su cyan
+    keyword whole sync cyan
+    keyword whole taper cyan
+    keyword whole tar cyan
+    keyword whole tcsh cyan
+    keyword whole test cyan
+    keyword whole touch cyan
+    keyword whole true cyan
+    keyword whole umount cyan
+    keyword whole uname cyan
+    keyword whole userconf cyan
+    keyword whole usleep cyan
+    keyword whole vi cyan
+    keyword whole view cyan
+    keyword whole vim cyan
+    keyword whole xconf cyan
+    keyword whole ypdomainname cyan
+    keyword whole zcat cyan
+    keyword whole zsh cyan
 
 

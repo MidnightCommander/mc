@@ -1,33 +1,33 @@
 
 context default
     spellcheck
-    keyword linestart Begin3		brightmagenta/20
-    keyword linestart Title:\s\s\s\s\s\s\s\s\s\s	red/9  yellow/24
-    keyword linestart Version:\s\s\s\s\s\s\s\s	red/9  yellow/24
-    keyword linestart Entered-date:\s\s\s	red/9  yellow/24
-    keyword linestart Description:\s\s\s\s	red/9  yellow/24
-    keyword linestart Keywords:\s\s\s\s\s\s\s	red/9  yellow/24
-    keyword linestart Alternate-site:\s	red/9  yellow/24
-    keyword linestart Primary-site:\s\s\s	red/9  yellow/24
-    keyword linestart Original-site:\s\s	red/9  yellow/24
-    keyword linestart Platforms:\s\s\s\s\s\s	red/9  yellow/24
-    keyword linestart Copying-policy:\s	red/9  yellow/24
-    keyword linestart End			brightmagenta/20
+    keyword linestart Begin3		brightmagenta
+    keyword linestart Title:\s\s\s\s\s\s\s\s\s\s	red  yellow
+    keyword linestart Version:\s\s\s\s\s\s\s\s	red  yellow
+    keyword linestart Entered-date:\s\s\s	red  yellow
+    keyword linestart Description:\s\s\s\s	red  yellow
+    keyword linestart Keywords:\s\s\s\s\s\s\s	red  yellow
+    keyword linestart Alternate-site:\s	red  yellow
+    keyword linestart Primary-site:\s\s\s	red  yellow
+    keyword linestart Original-site:\s\s	red  yellow
+    keyword linestart Platforms:\s\s\s\s\s\s	red  yellow
+    keyword linestart Copying-policy:\s	red  yellow
+    keyword linestart End			brightmagenta
 
-    keyword linestart \t\t				white/26 yellow/24
-    keyword linestart \s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s	white/26 yellow/24
-    keyword whole GPL	green/6
-    keyword whole BSD	green/6
-    keyword whole Shareware	green/6
-    keyword whole sunsite.unc.edu	green/6
-    keyword wholeright \s*.tar.gz	green/6
-    keyword wholeright \s*.lsm	green/6
+    keyword linestart \t\t				white yellow
+    keyword linestart \s\s\s\s\s\s\s\s\s\s\s\s\s\s\s\s	white yellow
+    keyword whole GPL	green
+    keyword whole BSD	green
+    keyword whole Shareware	green
+    keyword whole sunsite.unc.edu	green
+    keyword wholeright \s*.tar.gz	green
+    keyword wholeright \s*.lsm	green
 
-context linestart Author:\s\s\s\s\s\s\s\s\s \n brightred/19
-    keyword whole \s*@*\s(*)		cyan/16
+context linestart Author:\s\s\s\s\s\s\s\s\s \n brightred
+    keyword whole \s*@*\s(*)		cyan
 
-context linestart Maintained-by:\s\s \n brightred/19
-    keyword whole \s*@*\s(*)		cyan/16
+context linestart Maintained-by:\s\s \n brightred
+    keyword whole \s*@*\s(*)		cyan
 
 ###############################################################################
 

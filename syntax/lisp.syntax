@@ -8,75 +8,75 @@
 wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-*0123456789
 
 context default
-    keyword whole apply yellow/24
-    keyword whole and yellow/24
-    keyword whole car yellow/24
-    keyword whole caar yellow/24
-    keyword whole cadr yellow/24
-    keyword whole cdar yellow/24
-    keyword whole cddr yellow/24
-    keyword whole cdr yellow/24
-    keyword whole close yellow/24
-    keyword whole cond yellow/24
-    keyword whole cons yellow/24
-    keyword whole count yellow/24
-    keyword whole defvar yellow/24
-    keyword whole defstruct yellow/24
-    keyword whole defun yellow/24
-    keyword whole do yellow/24
-    keyword whole eq yellow/24
-    keyword whole eql yellow/24
-    keyword whole equal yellow/24
-    keyword whole eval yellow/24
-    keyword whole format yellow/24
-    keyword whole if yellow/24
-    keyword whole let* yellow/24
-    keyword whole let yellow/24
-    keyword whole list yellow/24
-    keyword whole load yellow/24
-    keyword whole make-package yellow/24
-    keyword whole mapcar yellow/24
-    keyword whole not yellow/24
-    keyword whole null yellow/24
-    keyword whole numberp yellow/24
-    keyword whole open yellow/24
-    keyword whole or yellow/24
-    keyword whole pprint yellow/24
-    keyword whole prin1 yellow/24
-    keyword whole princ yellow/24
-    keyword whole print yellow/24
-    keyword whole provide yellow/24
-    keyword whole read yellow/24
-    keyword whole require yellow/24
-    keyword whole set yellow/24
-    keyword whole setf yellow/24
-    keyword whole setq yellow/24
-    keyword whole slot-value yellow/24
-    keyword whole sort yellow/24
-    keyword whole stringp yellow/24
-    keyword whole terpri yellow/24
-    keyword whole write yellow/24
+    keyword whole apply yellow
+    keyword whole and yellow
+    keyword whole car yellow
+    keyword whole caar yellow
+    keyword whole cadr yellow
+    keyword whole cdar yellow
+    keyword whole cddr yellow
+    keyword whole cdr yellow
+    keyword whole close yellow
+    keyword whole cond yellow
+    keyword whole cons yellow
+    keyword whole count yellow
+    keyword whole defvar yellow
+    keyword whole defstruct yellow
+    keyword whole defun yellow
+    keyword whole do yellow
+    keyword whole eq yellow
+    keyword whole eql yellow
+    keyword whole equal yellow
+    keyword whole eval yellow
+    keyword whole format yellow
+    keyword whole if yellow
+    keyword whole let* yellow
+    keyword whole let yellow
+    keyword whole list yellow
+    keyword whole load yellow
+    keyword whole make-package yellow
+    keyword whole mapcar yellow
+    keyword whole not yellow
+    keyword whole null yellow
+    keyword whole numberp yellow
+    keyword whole open yellow
+    keyword whole or yellow
+    keyword whole pprint yellow
+    keyword whole prin1 yellow
+    keyword whole princ yellow
+    keyword whole print yellow
+    keyword whole provide yellow
+    keyword whole read yellow
+    keyword whole require yellow
+    keyword whole set yellow
+    keyword whole setf yellow
+    keyword whole setq yellow
+    keyword whole slot-value yellow
+    keyword whole sort yellow
+    keyword whole stringp yellow
+    keyword whole terpri yellow
+    keyword whole write yellow
 
-    keyword whole lambda brightred/18
-    keyword whole nil brightred/18
-    keyword whole t brightred/18
+    keyword whole lambda brightred
+    keyword whole nil brightred
+    keyword whole t brightred
 
-    keyword #' brightmagenta/23
-    keyword ' brightmagenta/23
-    keyword , brightmagenta/23
+    keyword #' brightmagenta
+    keyword ' brightmagenta
+    keyword , brightmagenta
 
-    keyword ( brightcyan/15
-    keyword ) brightcyan/15
+    keyword ( brightcyan
+    keyword ) brightcyan
 
 # Keyword declarations and keywords
 
-    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white/19
-    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white/19
+    keyword :\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
+    keyword &\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_-*0123456789\] white
 
 # Comments
 
-context ; \n brown/22
+context ; \n brown
 
 # Strings
 
-context " " green/6
+context " " green

@@ -2,66 +2,66 @@
 
 context default
 
-	keyword whole with	yellow/24
-	keyword whole use	yellow/24
-	keyword whole loop	yellow/24
-	keyword whole is	yellow/24
-	keyword whole of	yellow/24
-	keyword whole range	yellow/24
-	keyword whole abs	yellow/24
-	keyword whole delta	yellow/24
-	keyword whole return	yellow/24
+	keyword whole with	yellow
+	keyword whole use	yellow
+	keyword whole loop	yellow
+	keyword whole is	yellow
+	keyword whole of	yellow
+	keyword whole range	yellow
+	keyword whole abs	yellow
+	keyword whole delta	yellow
+	keyword whole return	yellow
 
 # prevents - keyword from interfering with comment
-	keyword --	brown/22
+	keyword --	brown
 
-	keyword :=	brightgreen/6
-	keyword .	brightgreen/6
-	keyword ;	brightgreen/6
-	keyword ..	brightgreen/6
-	keyword :	brightgreen/6
-	keyword (	brightgreen/6
-	keyword )	brightgreen/6
-	keyword \+	brightgreen/6
-	keyword -	brightgreen/6
-	keyword /	brightgreen/6
-	keyword \*	brightgreen/6
-	keyword \*\*	brightgreen/6
-	keyword #	brightgreen/6
-	keyword =>	brightgreen/6
-	keyword ,	brightgreen/6
-	keyword '	brightgreen/6
-	keyword =	brightgreen/6
-	keyword /=	brightgreen/6
+	keyword :=	brightgreen
+	keyword .	brightgreen
+	keyword ;	brightgreen
+	keyword ..	brightgreen
+	keyword :	brightgreen
+	keyword (	brightgreen
+	keyword )	brightgreen
+	keyword \+	brightgreen
+	keyword -	brightgreen
+	keyword /	brightgreen
+	keyword \*	brightgreen
+	keyword \*\*	brightgreen
+	keyword #	brightgreen
+	keyword =>	brightgreen
+	keyword ,	brightgreen
+	keyword '	brightgreen
+	keyword =	brightgreen
+	keyword /=	brightgreen
 
-	keyword whole begin	brightred/18
-	keyword whole end	brightred/18
-	keyword whole for	brightred/18
-	keyword whole while	brightred/18
-	keyword whole if	brightred/18
-	keyword whole case	brightred/18
-	keyword whole when	brightred/18
-	keyword whole elsif	brightred/18
+	keyword whole begin	brightred
+	keyword whole end	brightred
+	keyword whole for	brightred
+	keyword whole while	brightred
+	keyword whole if	brightred
+	keyword whole case	brightred
+	keyword whole when	brightred
+	keyword whole elsif	brightred
 
-	keyword whole integer	cyan/14
-	keyword whole float	cyan/14
-	keyword whole character	cyan/14
-	keyword whole string	cyan/14
-	keyword whole boolean	cyan/14
-	keyword whole fixed	cyan/14
-	keyword whole array	cyan/14
+	keyword whole integer	cyan
+	keyword whole float	cyan
+	keyword whole character	cyan
+	keyword whole string	cyan
+	keyword whole boolean	cyan
+	keyword whole fixed	cyan
+	keyword whole array	cyan
 
-	keyword whole type	brightcyan/16
-	keyword whole subtype	brightcyan/16
-	keyword whole new_line	brightcyan/16
-	keyword whole goto	brightcyan/16
+	keyword whole type	brightcyan
+	keyword whole subtype	brightcyan
+	keyword whole new_line	brightcyan
+	keyword whole goto	brightcyan
 
-	keyword whole new	magenta/23
-	keyword whole package	magenta/23
-	keyword whole procedure	magenta/23
-	keyword whole function	magenta/23
+	keyword whole new	magenta
+	keyword whole package	magenta
+	keyword whole procedure	magenta
+	keyword whole function	magenta
 
-context exclusive -- \n	brown/22
+context exclusive -- \n	brown
 context " "	green/green
 
 

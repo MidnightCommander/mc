@@ -1,17 +1,17 @@
 context default
-	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen/16
-	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen/16
-	keyword &#\[0123456789\]; brightgreen/16
+	keyword &\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]; brightgreen
+	keyword &#\{xX\}\[0123456789abcdefABCDEF\]; brightgreen
+	keyword &#\[0123456789\]; brightgreen
 	spellcheck
 
-context <!-- --> brown/22
+context <!-- --> brown
 	spellcheck
 
 context <! > brightred/orange
 	spellcheck
 
-context </ > brightcyan/17
+context </ > brightcyan
 
-context < > brightcyan/17
-	keyword "*" green/6
-	keyword = yellow/24
+context < > brightcyan
+	keyword "*" green
+	keyword = yellow

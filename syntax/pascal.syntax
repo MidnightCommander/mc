@@ -1,135 +1,135 @@
 # Pascal (BP7 IDE alike)
 
-context default yellow/24
-    keyword whole absolute white/25
-    keyword whole abstract white/25
-    keyword whole and white/25
-    keyword whole array white/25
-    keyword whole as white/25
-    keyword whole asm white/25
-    keyword whole assembler white/25
-    keyword whole begin white/25
-    keyword whole break white/25
-    keyword whole case white/25
-    keyword whole cdecl white/25
-    keyword whole class white/25
-    keyword whole const white/25
-    keyword whole continue white/25
-    keyword whole constructor white/25
-    keyword whole destructor white/25
-    keyword whole dispid white/25
-    keyword whole dispinterface white/25
-    keyword whole dispose white/25
-    keyword whole div white/25
-    keyword whole do white/25
-    keyword whole downto white/25
-    keyword whole dynamic white/25
-    keyword whole else white/25
-    keyword whole end white/25
-    keyword whole except white/25
-    keyword whole exit white/25
-    keyword whole export white/25
-    keyword whole exports white/25
-    keyword whole external white/25
-    keyword whole fail white/25
-    keyword whole far white/25
-    keyword whole false white/25
-    keyword whole file white/25
-    keyword whole finally white/25
-    keyword whole for white/25
-    keyword whole forward white/25
-    keyword whole function white/25
-    keyword whole goto white/25
-    keyword whole if white/25
-    keyword whole implementation white/25
-    keyword whole in white/25
-    keyword whole inherited white/25
-    keyword whole initialization white/25
-    keyword whole inline white/25
-    keyword whole interface white/25
-    keyword whole interrupt white/25
-    keyword whole is white/25
-    keyword whole label white/25
-    keyword whole library white/25
-    keyword whole mod white/25
-    keyword whole near white/25
-    keyword whole new white/25
-    keyword whole nil white/25
-    keyword whole not white/25
-    keyword whole object white/25
-    keyword whole of white/25
-    keyword whole on white/25
-    keyword whole operator white/25
-    keyword whole or white/25
-    keyword whole otherwise white/25
-    keyword whole override white/25
-    keyword whole packed white/25
-    keyword whole pascal white/25
-    keyword whole private white/25
-    keyword whole procedure white/25
-    keyword whole program white/25
-    keyword whole property white/25
-    keyword whole protected white/25
-    keyword whole public white/25
-    keyword whole published white/25
-    keyword whole raise white/25
-    keyword whole readonly white/25
-    keyword whole record white/25
-    keyword whole register white/25
-    keyword whole repeat white/25
-    keyword whole safecall white/25
-    keyword whole self white/25
-    keyword whole set white/25
-    keyword whole shl white/25
-    keyword whole shr white/25
-    keyword whole stdcall white/25
-    keyword whole string white/25
-    keyword whole then white/25
-    keyword whole to white/25
-    keyword whole true white/25
-    keyword whole try white/25
-    keyword whole type white/25
-    keyword whole unit white/25
-    keyword whole until white/25
-    keyword whole uses white/25
-    keyword whole var white/25
-    keyword whole virtual white/25
-    keyword whole while white/25
-    keyword whole with white/25
-    keyword whole xor white/25
-    keyword whole .. white/25
+context default yellow
+    keyword whole absolute white
+    keyword whole abstract white
+    keyword whole and white
+    keyword whole array white
+    keyword whole as white
+    keyword whole asm white
+    keyword whole assembler white
+    keyword whole begin white
+    keyword whole break white
+    keyword whole case white
+    keyword whole cdecl white
+    keyword whole class white
+    keyword whole const white
+    keyword whole continue white
+    keyword whole constructor white
+    keyword whole destructor white
+    keyword whole dispid white
+    keyword whole dispinterface white
+    keyword whole dispose white
+    keyword whole div white
+    keyword whole do white
+    keyword whole downto white
+    keyword whole dynamic white
+    keyword whole else white
+    keyword whole end white
+    keyword whole except white
+    keyword whole exit white
+    keyword whole export white
+    keyword whole exports white
+    keyword whole external white
+    keyword whole fail white
+    keyword whole far white
+    keyword whole false white
+    keyword whole file white
+    keyword whole finally white
+    keyword whole for white
+    keyword whole forward white
+    keyword whole function white
+    keyword whole goto white
+    keyword whole if white
+    keyword whole implementation white
+    keyword whole in white
+    keyword whole inherited white
+    keyword whole initialization white
+    keyword whole inline white
+    keyword whole interface white
+    keyword whole interrupt white
+    keyword whole is white
+    keyword whole label white
+    keyword whole library white
+    keyword whole mod white
+    keyword whole near white
+    keyword whole new white
+    keyword whole nil white
+    keyword whole not white
+    keyword whole object white
+    keyword whole of white
+    keyword whole on white
+    keyword whole operator white
+    keyword whole or white
+    keyword whole otherwise white
+    keyword whole override white
+    keyword whole packed white
+    keyword whole pascal white
+    keyword whole private white
+    keyword whole procedure white
+    keyword whole program white
+    keyword whole property white
+    keyword whole protected white
+    keyword whole public white
+    keyword whole published white
+    keyword whole raise white
+    keyword whole readonly white
+    keyword whole record white
+    keyword whole register white
+    keyword whole repeat white
+    keyword whole safecall white
+    keyword whole self white
+    keyword whole set white
+    keyword whole shl white
+    keyword whole shr white
+    keyword whole stdcall white
+    keyword whole string white
+    keyword whole then white
+    keyword whole to white
+    keyword whole true white
+    keyword whole try white
+    keyword whole type white
+    keyword whole unit white
+    keyword whole until white
+    keyword whole uses white
+    keyword whole var white
+    keyword whole virtual white
+    keyword whole while white
+    keyword whole with white
+    keyword whole xor white
+    keyword whole .. white
     
-    keyword // brightgreen/22
+    keyword // brightgreen
 
-    keyword > cyan/5
-    keyword < cyan/5
-    keyword \+ cyan/5
-    keyword - cyan/5
-    keyword / cyan/5
-    keyword % lightgray/5
-    keyword = lightgray/5
-    keyword [ lightgray/5
-    keyword ] lightgray/5
-    keyword ( lightgray/5
-    keyword ) lightgray/5
-    keyword , lightgray/5
-    keyword . lightgray/5
-    keyword : lightgray/5
-    keyword ; lightgray/5
-#    keyword {$*} brightred/19
+    keyword > cyan
+    keyword < cyan
+    keyword \+ cyan
+    keyword - cyan
+    keyword / cyan
+    keyword % lightgray
+    keyword = lightgray
+    keyword [ lightgray
+    keyword ] lightgray
+    keyword ( lightgray
+    keyword ) lightgray
+    keyword , lightgray
+    keyword . lightgray
+    keyword : lightgray
+    keyword ; lightgray
+#    keyword {$*} brightred
 
-context ' ' brightcyan/22
-context exclusive // \n brightgreen/22
-	keyword $+:*$ black/13 green/13
-context exclusive (\*\* \*) brightgreen/22 black/22
-	keyword $+:*$ black/13 green/13
-context exclusive (\* \*) brightgreen/22
-	keyword $+:*$ black/13 green/13
-context {$ } green/22
-context { } brightgreen/19
-#    keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]\[-\+\] brightgreen/16
-#    keyword $* green/16
-	keyword $+:*$ black/13 green/13
+context ' ' brightcyan
+context exclusive // \n brightgreen
+	keyword $+:*$ black green
+context exclusive (\*\* \*) brightgreen black
+	keyword $+:*$ black green
+context exclusive (\* \*) brightgreen
+	keyword $+:*$ black green
+context {$ } green
+context { } brightgreen
+#    keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]\[-\+\] brightgreen
+#    keyword $* green
+	keyword $+:*$ black green
     spellcheck
 
 

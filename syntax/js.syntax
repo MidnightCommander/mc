@@ -21,162 +21,162 @@ context default
 
 	#=========================
 	# Keywords
-	keyword whole arguments		yellow/24
-	keyword whole break		yellow/24
-	keyword whole caller		yellow/24
-	keyword whole case		yellow/24
-	keyword whole catch		yellow/24
-	keyword whole constructor	yellow/24
-	keyword whole continue		yellow/24
-	keyword whole else		yellow/24
-	keyword whole default		yellow/24
-	keyword whole delete		yellow/24
-	keyword whole for		yellow/24
-	keyword whole function		yellow/24
-	keyword whole if		yellow/24
-	keyword whole in		yellow/24
-	keyword whole instanceof	yellow/24
-	keyword whole new		yellow/24
-	keyword whole prototype		yellow/24
-	keyword whole return		yellow/24
-	keyword whole switch		yellow/24
-	keyword whole this		yellow/24
-	keyword whole throw		yellow/24
-	keyword whole try		yellow/24
-	keyword whole typeof		yellow/24
-	keyword whole var		yellow/24
-	keyword whole while		yellow/24
-	keyword whole with		yellow/24
+	keyword whole arguments		yellow
+	keyword whole break		yellow
+	keyword whole caller		yellow
+	keyword whole case		yellow
+	keyword whole catch		yellow
+	keyword whole constructor	yellow
+	keyword whole continue		yellow
+	keyword whole else		yellow
+	keyword whole default		yellow
+	keyword whole delete		yellow
+	keyword whole for		yellow
+	keyword whole function		yellow
+	keyword whole if		yellow
+	keyword whole in		yellow
+	keyword whole instanceof	yellow
+	keyword whole new		yellow
+	keyword whole prototype		yellow
+	keyword whole return		yellow
+	keyword whole switch		yellow
+	keyword whole this		yellow
+	keyword whole throw		yellow
+	keyword whole try		yellow
+	keyword whole typeof		yellow
+	keyword whole var		yellow
+	keyword whole while		yellow
+	keyword whole with		yellow
 
 	#=========================
 	# Objects
-	keyword whole ActiveXObject	yellow/24
-	keyword whole Array		yellow/24
-	keyword whole Boolean		yellow/24
-	keyword whole Date		yellow/24
-	keyword whole Dictionary	yellow/24
-	keyword whole Enumerator	yellow/24
-	keyword whole FileSystemObject	yellow/24
-	keyword whole Function		yellow/24
-	keyword whole Global		yellow/24
-	keyword whole Image		yellow/24
-	keyword whole Math		yellow/24
-	keyword whole Number		yellow/24
-	keyword whole Object		yellow/24
-	keyword whole TextStream	yellow/24
-	keyword whole RegExp		yellow/24
-	keyword whole VBArray		yellow/24
+	keyword whole ActiveXObject	yellow
+	keyword whole Array		yellow
+	keyword whole Boolean		yellow
+	keyword whole Date		yellow
+	keyword whole Dictionary	yellow
+	keyword whole Enumerator	yellow
+	keyword whole FileSystemObject	yellow
+	keyword whole Function		yellow
+	keyword whole Global		yellow
+	keyword whole Image		yellow
+	keyword whole Math		yellow
+	keyword whole Number		yellow
+	keyword whole Object		yellow
+	keyword whole TextStream	yellow
+	keyword whole RegExp		yellow
+	keyword whole VBArray		yellow
 
 	#=========================
 	# Most common functions
-	keyword whole alert		yellow/24
-	keyword whole escape		yellow/24
-	keyword whole eval		yellow/24
-	keyword whole indexOf		yellow/24
-	keyword whole isNaN		yellow/24
-	keyword whole toString		yellow/24
-	keyword whole unescape		yellow/24
-	keyword whole valueOf		yellow/24
+	keyword whole alert		yellow
+	keyword whole escape		yellow
+	keyword whole eval		yellow
+	keyword whole indexOf		yellow
+	keyword whole isNaN		yellow
+	keyword whole toString		yellow
+	keyword whole unescape		yellow
+	keyword whole valueOf		yellow
 
 	#=========================
 	# Constants
-	keyword whole false		brightgreen/16
-	keyword whole null		brightgreen/16
-	keyword whole true		brightgreen/16
-	keyword whole undefined		yellow/24
+	keyword whole false		brightgreen
+	keyword whole null		brightgreen
+	keyword whole true		brightgreen
+	keyword whole undefined		yellow
 
 	#=========================
 	# Comments
-	keyword /\*			brown/22
-	keyword \*/			brown/22
-	keyword //			brown/22
+	keyword /\*			brown
+	keyword \*/			brown
+	keyword //			brown
 
 	#=========================
 	# Numbers
 	wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_.
 
-	keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]	brightgreen/16
-	keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]	brightgreen/16
-	keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]	brightgreen/16
+	keyword whole 0\{xX\}\{0123456789abcdefABCDEF\}\[0123456789abcdefABCDEF\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]	brightgreen
+	keyword whole \[0123456789\]\.\{0123456789\}\[0123456789\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]\.\[0123456789\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{0123456789\}\[0123456789\]	brightgreen
+	keyword whole \{0123456789\}\[0123456789\]\.\{0123456789\}\[0123456789\]\{eE\}\{\-\+\}\{0123456789\}\[0123456789\]	brightgreen
 
 	#=========================
 	# Special symbols
-	keyword \.	yellow/24
-	keyword \*	yellow/24
-	keyword \+	yellow/24
-	keyword -	yellow/24
-	keyword /	yellow/24
-	keyword %	yellow/24
-	keyword =	yellow/24
-	keyword !	yellow/24
-	keyword &	yellow/24
-	keyword |	yellow/24
-	keyword ^	yellow/24
-	keyword ~	yellow/24
-	keyword >	yellow/24
-	keyword <	yellow/24
+	keyword \.	yellow
+	keyword \*	yellow
+	keyword \+	yellow
+	keyword -	yellow
+	keyword /	yellow
+	keyword %	yellow
+	keyword =	yellow
+	keyword !	yellow
+	keyword &	yellow
+	keyword |	yellow
+	keyword ^	yellow
+	keyword ~	yellow
+	keyword >	yellow
+	keyword <	yellow
 
 	#=========================
 	# Separators
-	keyword {	brightcyan/14
-	keyword }	brightcyan/14
-	keyword (	brightcyan/14
-	keyword )	brightcyan/14
-	keyword [	brightcyan/14
-	keyword ]	brightcyan/14
-	keyword ,	brightcyan/14
-	keyword ?	brightcyan/14
-	keyword :	brightcyan/14
-	keyword ;	brightmagenta/19
+	keyword {	brightcyan
+	keyword }	brightcyan
+	keyword (	brightcyan
+	keyword )	brightcyan
+	keyword [	brightcyan
+	keyword ]	brightcyan
+	keyword ,	brightcyan
+	keyword ?	brightcyan
+	keyword :	brightcyan
+	keyword ;	brightmagenta
 
 
 #=============================
 # Comments
 
-context exclusive /\* \*/ brown/22
+context exclusive /\* \*/ brown
 	spellcheck
-	keyword whole BUG	brightred/18
-	keyword whole FixMe	brightred/18
-	keyword whole FIXME	brightred/18
-	keyword whole Note	brightred/18
-	keyword whole NOTE	brightred/18
-	keyword whole ToDo	brightred/18
-	keyword whole TODO	brightred/18
-	keyword !!\[!\]		brightred/18
-	keyword ??\[?\]		brightred/18
+	keyword whole BUG	brightred
+	keyword whole FixMe	brightred
+	keyword whole FIXME	brightred
+	keyword whole Note	brightred
+	keyword whole NOTE	brightred
+	keyword whole ToDo	brightred
+	keyword whole TODO	brightred
+	keyword !!\[!\]		brightred
+	keyword ??\[?\]		brightred
 
 
-context exclusive // \n brown/22
+context exclusive // \n brown
 	spellcheck
-	keyword whole BUG	brightred/18
-	keyword whole FixMe	brightred/18
-	keyword whole FIXME	brightred/18
-	keyword whole Note	brightred/18
-	keyword whole NOTE	brightred/18
-	keyword whole ToDo	brightred/18
-	keyword whole TODO	brightred/18
-	keyword !!\[!\]		brightred/18
-	keyword ??\[?\]		brightred/18
+	keyword whole BUG	brightred
+	keyword whole FixMe	brightred
+	keyword whole FIXME	brightred
+	keyword whole Note	brightred
+	keyword whole NOTE	brightred
+	keyword whole ToDo	brightred
+	keyword whole TODO	brightred
+	keyword !!\[!\]		brightred
+	keyword ??\[?\]		brightred
 
 
 #=============================
 # Strings
 
-context " " green/6
+context " " green
 	spellcheck
-	keyword \\\{\\'"abtnvfr\}	brightgreen/16
-	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
+	keyword \\\{\\'"abtnvfr\}	brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
 
-	keyword '	brightgreen/16
+	keyword '	brightgreen
 
-context ' ' green/6
+context ' ' green
 	spellcheck
-	keyword \\\{\\'"abtnvfr\}	brightgreen/16
-	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
+	keyword \\\{\\'"abtnvfr\}	brightgreen
+	keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen
 
-	keyword "	brightgreen/16
+	keyword "	brightgreen

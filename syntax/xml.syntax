@@ -4,45 +4,45 @@
 # http://kozelka.hyperlink.cz
 
 context default
-	keyword &*; white/16 cyan/12
+	keyword &*; white cyan
 	spellcheck
 
-context <!-- --> brightgreen/22
+context <!-- --> brightgreen
 	spellcheck
 
-context <! > yellow/20
-	keyword '+' brightcyan/23
-	keyword "+" brightcyan/23
-	keyword whole DOCTYPE white/13 red/0
-	keyword whole PUBLIC brightred/13
-	keyword whole SYSTEM brightred/13
-	keyword whole NDATA brightred/13
-	keyword whole CDATA white/13
-	keyword whole #PCDATA white/13
-	keyword whole EMPTY white/13
-	keyword whole #REQUIRED white/13
-	keyword whole #IMPLIED white/13
-	keyword whole ELEMENT white/13
-	keyword whole ENTITY brightred/13
-	keyword whole ATTLIST white/13
-	keyword whole %*; white/16 cyan/12
-	keyword \( lightgray/23
-	keyword \) lightgray/23
-	keyword \* lightgray/23
-	keyword \? lightgray/23
-	keyword \+ lightgray/23
-	keyword \| lightgray/23
-	keyword \, lightgray/23
+context <! > yellow
+	keyword '+' brightcyan
+	keyword "+" brightcyan
+	keyword whole DOCTYPE white red
+	keyword whole PUBLIC brightred
+	keyword whole SYSTEM brightred
+	keyword whole NDATA brightred
+	keyword whole CDATA white
+	keyword whole #PCDATA white
+	keyword whole EMPTY white
+	keyword whole #REQUIRED white
+	keyword whole #IMPLIED white
+	keyword whole ELEMENT white
+	keyword whole ENTITY brightred
+	keyword whole ATTLIST white
+	keyword whole %*; white cyan
+	keyword \( lightgray
+	keyword \) lightgray
+	keyword \* lightgray
+	keyword \? lightgray
+	keyword \+ lightgray
+	keyword \| lightgray
+	keyword \, lightgray
 	spellcheck
 
-context <\?xml \?> white/15 red/0
-context <\? \?> lightgray/15 black/0
-context < > white/15
-	keyword \sxmlns\:*\="+" brightred/24
-	keyword \sxmlns\="+" brightred/24
-	keyword \s+\= yellow/24
-	keyword '*' brightcyan/23
-	keyword "*" brightcyan/23
+context <\?xml \?> white red
+context <\? \?> lightgray black
+context < > white
+	keyword \sxmlns\:*\="+" brightred
+	keyword \sxmlns\="+" brightred
+	keyword \s+\= yellow
+	keyword '*' brightcyan
+	keyword "*" brightcyan
 	spellcheck
 
 

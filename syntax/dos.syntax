@@ -2,111 +2,111 @@
 # 2002 (C) Petr Kozelka, <pkozelka@email.cz>
 
 context default
-	keyword whole break yellow/24
-	keyword whole BREAK yellow/24
-	keyword whole call yellow/24
-	keyword whole CALL yellow/24
-	keyword whole cd yellow/24
-	keyword whole CD yellow/24
-	keyword whole chdir yellow/24
-	keyword whole CHDIR yellow/24
-	keyword whole cls yellow/24
-	keyword whole CLS yellow/24
-	keyword whole copy yellow/24
-	keyword whole COPY yellow/24
-	keyword whole del yellow/24
-	keyword whole DEL yellow/24
-	keyword whole dir yellow/24
-	keyword whole DIR yellow/24
-	keyword whole do yellow/24
-	keyword whole DO yellow/24
-	keyword whole echo yellow/24
-	keyword whole ECHO yellow/24
-	keyword whole else yellow/24
-	keyword whole ELSE yellow/24
-	keyword whole erase yellow/24
-	keyword whole ERASE yellow/24
-	keyword whole endlocal yellow/24
-	keyword whole ENDLOCAL yellow/24
-	keyword whole errorlevel yellow/24
-	keyword whole ERRORLEVEL yellow/24
-	keyword whole exist yellow/24
-	keyword whole EXIST yellow/24
-	keyword whole exit yellow/24
-	keyword whole EXIT yellow/24
-	keyword whole for yellow/24
-	keyword whole FOR yellow/24
-	keyword whole goto yellow/24
-	keyword whole GOTO yellow/24
-	keyword whole if yellow/24
-	keyword whole IF yellow/24
-	keyword whole in yellow/24
-	keyword whole IN yellow/24
-	keyword whole md yellow/24
-	keyword whole MD yellow/24
-	keyword whole mkdir yellow/24
-	keyword whole MKDIR yellow/24
-	keyword whole move yellow/24
-	keyword whole MOVE yellow/24
-	keyword whole not yellow/24
-	keyword whole NOT yellow/24
-	keyword whole off yellow/24
-	keyword whole OFF yellow/24
-	keyword whole on yellow/24
-	keyword whole ON yellow/24
-	keyword whole pause yellow/24
-	keyword whole PAUSE yellow/24
-	keyword whole popd yellow/24
-	keyword whole POPD yellow/24
-	keyword whole pushd yellow/24
-	keyword whole PUSHD yellow/24
- 	keyword whole rd yellow/24
- 	keyword whole RD yellow/24
-	keyword wholeleft rem\s*\n brown/22
-	keyword wholeleft REM\s*\n brown/22
- 	keyword whole ren yellow/24
- 	keyword whole REN yellow/24
- 	keyword whole rename yellow/24
- 	keyword whole RENAME yellow/24
- 	keyword whole rmdir yellow/24
- 	keyword whole RMDIR yellow/24
-	keyword whole set yellow/24
-	keyword whole SET yellow/24
-	keyword whole setlocal yellow/24
-	keyword whole SETLOCAL yellow/24
-	keyword whole shift yellow/24
-	keyword whole SHIFT yellow/24
-	keyword whole then yellow/24
-	keyword whole THEN yellow/24
-	keyword whole type yellow/24
-	keyword whole TYPE yellow/24
-	keyword whole ver yellow/24
-	keyword whole VER yellow/24
+	keyword whole break yellow
+	keyword whole BREAK yellow
+	keyword whole call yellow
+	keyword whole CALL yellow
+	keyword whole cd yellow
+	keyword whole CD yellow
+	keyword whole chdir yellow
+	keyword whole CHDIR yellow
+	keyword whole cls yellow
+	keyword whole CLS yellow
+	keyword whole copy yellow
+	keyword whole COPY yellow
+	keyword whole del yellow
+	keyword whole DEL yellow
+	keyword whole dir yellow
+	keyword whole DIR yellow
+	keyword whole do yellow
+	keyword whole DO yellow
+	keyword whole echo yellow
+	keyword whole ECHO yellow
+	keyword whole else yellow
+	keyword whole ELSE yellow
+	keyword whole erase yellow
+	keyword whole ERASE yellow
+	keyword whole endlocal yellow
+	keyword whole ENDLOCAL yellow
+	keyword whole errorlevel yellow
+	keyword whole ERRORLEVEL yellow
+	keyword whole exist yellow
+	keyword whole EXIST yellow
+	keyword whole exit yellow
+	keyword whole EXIT yellow
+	keyword whole for yellow
+	keyword whole FOR yellow
+	keyword whole goto yellow
+	keyword whole GOTO yellow
+	keyword whole if yellow
+	keyword whole IF yellow
+	keyword whole in yellow
+	keyword whole IN yellow
+	keyword whole md yellow
+	keyword whole MD yellow
+	keyword whole mkdir yellow
+	keyword whole MKDIR yellow
+	keyword whole move yellow
+	keyword whole MOVE yellow
+	keyword whole not yellow
+	keyword whole NOT yellow
+	keyword whole off yellow
+	keyword whole OFF yellow
+	keyword whole on yellow
+	keyword whole ON yellow
+	keyword whole pause yellow
+	keyword whole PAUSE yellow
+	keyword whole popd yellow
+	keyword whole POPD yellow
+	keyword whole pushd yellow
+	keyword whole PUSHD yellow
+ 	keyword whole rd yellow
+ 	keyword whole RD yellow
+	keyword wholeleft rem\s*\n brown
+	keyword wholeleft REM\s*\n brown
+ 	keyword whole ren yellow
+ 	keyword whole REN yellow
+ 	keyword whole rename yellow
+ 	keyword whole RENAME yellow
+ 	keyword whole rmdir yellow
+ 	keyword whole RMDIR yellow
+	keyword whole set yellow
+	keyword whole SET yellow
+	keyword whole setlocal yellow
+	keyword whole SETLOCAL yellow
+	keyword whole shift yellow
+	keyword whole SHIFT yellow
+	keyword whole then yellow
+	keyword whole THEN yellow
+	keyword whole type yellow
+	keyword whole TYPE yellow
+	keyword whole ver yellow
+	keyword whole VER yellow
 
-	keyword \\ lightgray/12
-	keyword whole \%\* brightmagenta/13
-	keyword whole \%\$ brightmagenta/13
-	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta/13
-	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta/13
-	keyword >> white/12
-	keyword > white/12
-	keyword < white/12
-	keyword | white/12
+	keyword \\ lightgray
+	keyword whole \%\* brightmagenta
+	keyword whole \%\$ brightmagenta
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta
+	keyword >> white
+	keyword > white
+	keyword < white
+	keyword | white
 
-context ' ' brightcyan/22
+context ' ' brightcyan
 	spellcheck
 
-context " " brightcyan/22
-	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta/13
-	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta/13
+context " " brightcyan
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]+\% brightmagenta
+	keyword whole \%\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789@~\]+ brightmagenta
 	spellcheck
 
-context linestart :: \n brightgreen/3
-	keyword $+:*$ black/13 green/13
+context linestart :: \n brightgreen
+	keyword $+:*$ black green
 	spellcheck
 
-context linestart : \n white/5 black/2
+context linestart : \n white black
 	spellcheck
 
-context :: \n brightgreen/22
+context :: \n brightgreen
 	spellcheck

@@ -1,7 +1,7 @@
 
 context default
-    keyword $(*) yellow/24
-    keyword ${*} brightgreen/16
+    keyword $(*) yellow
+    keyword ${*} brightgreen
     keyword whole linestart include magenta
     keyword whole linestart ifdef magenta
     keyword whole linestart ifndef magenta
@@ -10,36 +10,36 @@ context default
     keyword whole linestart ifeq magenta
     keyword whole linestart ifneq magenta
     keyword whole linestart else magenta
-    keyword linestart \t lightgray/13 red
-    keyword whole .PHONY white/25
-    keyword whole .NOEXPORT white/25
-    keyword = white/25
-    keyword : yellow/24
-    keyword \\\n yellow/24
+    keyword linestart \t lightgray red
+    keyword whole .PHONY white
+    keyword whole .NOEXPORT white
+    keyword = white
+    keyword : yellow
+    keyword \\\n yellow
 # this handles strange cases like @something@@somethingelse@ properly
-    keyword whole @+@ brightmagenta/23 black/0
-    keyword @+@ brightmagenta/23 black/0
+    keyword whole @+@ brightmagenta black
+    keyword @+@ brightmagenta black
 
-context linestart # \n brown/22
+context linestart # \n brown
     spellcheck
-    keyword whole @+@ brightmagenta/23 black/0
-    keyword @+@ brightmagenta/23 black/0
+    keyword whole @+@ brightmagenta black
+    keyword @+@ brightmagenta black
 
-context exclusive = \n brightcyan/17
-    keyword \\\n yellow/24
-    keyword $(*) yellow/24
-    keyword ${*} brightgreen/16
-    keyword linestart \t lightgray/13 red
-    keyword whole @+@ brightmagenta/23 black/0
-    keyword @+@ brightmagenta/23 black/0
+context exclusive = \n brightcyan
+    keyword \\\n yellow
+    keyword $(*) yellow
+    keyword ${*} brightgreen
+    keyword linestart \t lightgray red
+    keyword whole @+@ brightmagenta black
+    keyword @+@ brightmagenta black
 
 context exclusive linestart \t \n
-    keyword \\\n yellow/24
-    keyword $(*) yellow/24
-    keyword ${*} brightgreen/16
-    keyword linestart \t lightgray/13 red
-    keyword whole @+@ brightmagenta/23 black/0
-    keyword @+@ brightmagenta/23 black/0
+    keyword \\\n yellow
+    keyword $(*) yellow
+    keyword ${*} brightgreen
+    keyword linestart \t lightgray red
+    keyword whole @+@ brightmagenta black
+    keyword @+@ brightmagenta black
 
 
 

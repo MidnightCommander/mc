@@ -12,99 +12,99 @@ context default
 
 	#=========================
 	# Built-in macros with mandatory parameters
-	keyword whole builtin		yellow/24
-	keyword whole decr		yellow/24
-	keyword whole define		yellow/24
-	keyword whole defn		yellow/24
-	keyword whole esyscmd		yellow/24
-	keyword whole eval		yellow/24
-	keyword whole format		yellow/24
-	keyword whole ifdef		yellow/24
-	keyword whole ifelse		yellow/24
-	keyword whole include		yellow/24
-	keyword whole incr		yellow/24
-	keyword whole index		yellow/24
-	keyword whole len		yellow/24
-	keyword whole maketemp		yellow/24
-	keyword whole patsubst		yellow/24
-	keyword whole popdef		yellow/24
-	keyword whole pushdef		yellow/24
-	keyword whole regexp		yellow/24
-	keyword whole sinclude		yellow/24
-	keyword whole substr		yellow/24
-	keyword whole syscmd		yellow/24
-	keyword whole translit		yellow/24
-	keyword whole undefine		yellow/24
+	keyword whole builtin		yellow
+	keyword whole decr		yellow
+	keyword whole define		yellow
+	keyword whole defn		yellow
+	keyword whole esyscmd		yellow
+	keyword whole eval		yellow
+	keyword whole format		yellow
+	keyword whole ifdef		yellow
+	keyword whole ifelse		yellow
+	keyword whole include		yellow
+	keyword whole incr		yellow
+	keyword whole index		yellow
+	keyword whole len		yellow
+	keyword whole maketemp		yellow
+	keyword whole patsubst		yellow
+	keyword whole popdef		yellow
+	keyword whole pushdef		yellow
+	keyword whole regexp		yellow
+	keyword whole sinclude		yellow
+	keyword whole substr		yellow
+	keyword whole syscmd		yellow
+	keyword whole translit		yellow
+	keyword whole undefine		yellow
 
 	#=========================
 	# Built-in macros with optional parameters
-	keyword whole changecom		yellow/24
-	keyword whole changequote	yellow/24
-	keyword whole debugfile		yellow/24
-	keyword whole debugmode		yellow/24
-	keyword whole divert		yellow/24
-	keyword whole divnum		yellow/24
-	keyword whole dumpdef		yellow/24
-	keyword whole errprint		yellow/24
-	keyword whole indir		yellow/24
-	keyword whole m4exit		yellow/24
-	keyword whole m4wrap		yellow/24
-	keyword whole shift		yellow/24
-	keyword whole sysval		yellow/24
-	keyword whole traceoff		yellow/24
-	keyword whole traceon		yellow/24
-	keyword whole undivert		yellow/24
+	keyword whole changecom		yellow
+	keyword whole changequote	yellow
+	keyword whole debugfile		yellow
+	keyword whole debugmode		yellow
+	keyword whole divert		yellow
+	keyword whole divnum		yellow
+	keyword whole dumpdef		yellow
+	keyword whole errprint		yellow
+	keyword whole indir		yellow
+	keyword whole m4exit		yellow
+	keyword whole m4wrap		yellow
+	keyword whole shift		yellow
+	keyword whole sysval		yellow
+	keyword whole traceoff		yellow
+	keyword whole traceon		yellow
+	keyword whole undivert		yellow
 
 	#=========================
 	# Autoconf and Automake macros
-	keyword whole AC_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan/16
-	keyword whole AM_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan/16
+	keyword whole AC_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan
+	keyword whole AM_\[ABCDEFGHIJKLMNOPQRSTUVWXYZ_\] cyan
 
 	#=========================
 	# Variables
-	keyword whole __file__		brightred/18
-	keyword whole __gnu__		brightred/18
-	keyword whole __line__		brightred/18
-	keyword whole __unix__		brightred/18
-	keyword wholeright $\{0123456789\}\[0123456789\] brightred/18
-	keyword wholeright $\{@\*#\}	brightred/18
+	keyword whole __file__		brightred
+	keyword whole __gnu__		brightred
+	keyword whole __line__		brightred
+	keyword whole __unix__		brightred
+	keyword wholeright $\{0123456789\}\[0123456789\] brightred
+	keyword wholeright $\{@\*#\}	brightred
 
 	#=========================
 	# Special symbols
-	keyword `			brightcyan/17
-	keyword '			brightcyan/17
-	keyword [			brightcyan/17
-	keyword ]			brightcyan/17
-	keyword ,			brightcyan/17
-	keyword (			brightcyan/17
-	keyword )			brightcyan/17
+	keyword `			brightcyan
+	keyword '			brightcyan
+	keyword [			brightcyan
+	keyword ]			brightcyan
+	keyword ,			brightcyan
+	keyword (			brightcyan
+	keyword )			brightcyan
 
 
 #=============================
 # Comments
 
-context # \n brown/22
+context # \n brown
 	spellcheck
-	keyword whole BUG		brightred/18
-	keyword whole FixMe		brightred/18
-	keyword whole FIXME		brightred/18
-	keyword whole Note		brightred/18
-	keyword whole NOTE		brightred/18
-	keyword whole ToDo		brightred/18
-	keyword whole TODO		brightred/18
-	keyword !!\[!\]			brightred/18
-	keyword ??\[?\]			brightred/18
+	keyword whole BUG		brightred
+	keyword whole FixMe		brightred
+	keyword whole FIXME		brightred
+	keyword whole Note		brightred
+	keyword whole NOTE		brightred
+	keyword whole ToDo		brightred
+	keyword whole TODO		brightred
+	keyword !!\[!\]			brightred
+	keyword ??\[?\]			brightred
 
 
-context dnl \n brown/22
+context dnl \n brown
 	spellcheck
-	keyword whole BUG		brightred/18
-	keyword whole FixMe		brightred/18
-	keyword whole FIXME		brightred/18
-	keyword whole Note		brightred/18
-	keyword whole NOTE		brightred/18
-	keyword whole ToDo		brightred/18
-	keyword whole TODO		brightred/18
-	keyword !!\[!\]			brightred/18
-	keyword ??\[?\]			brightred/18
+	keyword whole BUG		brightred
+	keyword whole FixMe		brightred
+	keyword whole FIXME		brightred
+	keyword whole Note		brightred
+	keyword whole NOTE		brightred
+	keyword whole ToDo		brightred
+	keyword whole TODO		brightred
+	keyword !!\[!\]			brightred
+	keyword ??\[?\]			brightred
 
