@@ -438,10 +438,8 @@ extern int option_long_whitespace;
 
 void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
-    int f = 0;
     if (page)			/* if it was an expose event, 'page' would be set */
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
-    f = edit->force & (REDRAW_PAGE | REDRAW_COMPLETELY);
 
     if (edit->force & REDRAW_COMPLETELY)
 	redraw_labels (edit->widget.parent, (Widget *) edit);
