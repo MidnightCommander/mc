@@ -1,0 +1,35 @@
+text/c:
+	icon-filename=@icondir@/c.xpm
+
+text/h:
+	icon-filename=@icondir@/h.xpm
+
+text/C++:
+	icon-filename=@icondir@/cc.xpm
+
+application/x-bzip:
+	icon-filename=@icondir@/compressed.xpm
+
+application/x-gzip:
+	icon-filename=@icondir@/compressed.xpm
+
+application/zip:
+	icon-filename=@icondir@/zip.xpm
+	
+application/x-tex:
+	icon-filename=@icondir@/tex.xpm
+
+application/postscript:
+	icon-filename=@icondir@/postscript.xpm
+
+audio/*:
+	icon-filename=@icondir@/sound.xpm
+
+text/html:
+	icon-filename=@icondir@/html.xpm
+
+application/vcard:
+	icon-filename=@icondir@/calendar.xpm
+
+application/x-troff-man:
+	icon-filename=@icondir@/man.xpm

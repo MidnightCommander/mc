@@ -172,7 +172,7 @@ DISTGNOME = \
 main-corba.o: main.c
 	$(CC) -c -DHAVE_CORBA $(CPPFLAGS) $(DEFS) $(CFLAGS) $< -o main-corba.o
 
-all: @gmc@ Makefile mc.metadata image.metadata
+all: @gmc@ Makefile mc.metadata mc.keys image.metadata
 
 Makefile: Makefile.in ../config.status
 	(cd ..; CONFIG_FILES=gnome/Makefile CONFIG_HEADERS= ./config.status)
@@ -194,6 +194,10 @@ mc.metadata: mc.metadata.in Makefile
 image.metadata: image.metadata.in Makefile
 	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/image.metadata.in > image.metadata.tmp \
 	&& mv image.metadata.tmp image.metadata 
+
+mc.keys: mc.keys.in Makefile
+	sed -e 's^\@icondir\@^$(icondir)^g' < $(srcdir)/mc.keys.in > mc.keys.tmp \
+	&& mv mc.keys.tmp mc.keys 
 
 @LIBVFS@:
 	cd ../vfs; $(MAKE) @LIBVFS@

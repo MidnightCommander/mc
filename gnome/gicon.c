@@ -36,6 +36,11 @@ static GdkImlibImage *icon_view_stalled;
 static uid_t our_uid;
 static gid_t our_gid;
 
+/*
+ * If true, we choose the icon in a way that might be a bit slow
+ */
+static int we_can_affort_the_speed = 1;
+
 /**
  * gicon_init:
  *
@@ -172,7 +177,7 @@ gicon_get_icon_for_file (file_entry *fe)
 {
 	GdkImlibImage *image;
 	int            size;
-	char          *buf;
+	char          *buf, *mime_type;
 	mode_t        mode;
 	
 	g_return_val_if_fail (fe != NULL, NULL);
@@ -221,35 +226,56 @@ gicon_get_icon_for_file (file_entry *fe)
 		return icon_view_symlink;
 	}
 
-
 	/*
-	 * 2. Try to fetch the icon as an inline png from the metadata.
+	 * 2. Expensive tests
 	 */
-	if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
-		image = gdk_imlib_inlined_png_to_image (buf, size);
-
-		free (buf);
+	if (we_can_affort_the_speed){
+		/*
+		 * 2.1 Try to fetch the icon as an inline png from the metadata.
+		 */
+		if (gnome_metadata_get (fe->fname, "icon-inline-png", &size, &buf) == 0){
+			image = gdk_imlib_inlined_png_to_image (buf, size);
+			
+			free (buf);
+			
+			if (image)
+				return image;
+		}
 		
-		if (image)
-			return image;
+		/*
+		 * 2.2. Try to fetch the icon from the metadata.
+		 */
+		if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
+			image = gicon_get_by_filename (buf);
+			
+			if (image)
+				return image;
+		}
 	}
-
+	
 	/*
-	 * 3. Try to fetch the icon from the metadata.
+	 * 3. Mime-type based
 	 */
-	if (gnome_metadata_get (fe->fname, "icon-filename", &size, &buf) == 0){
-		image = gicon_get_by_filename (buf);
+	mime_type = gnome_mime_type_or_default (fe->fname, NULL);
+	if (mime_type){
+		char *icon;
 
-		if (image)
-			return image;
+		icon = gnome_mime_type_get_value (mime_type, "icon-filename");
+
+		if (icon){
+			image = gicon_get_by_filename (icon);
+
+			if (image)
+				return image;
+		}
 	}
-
+	
 	/*
 	 * 4. Try to find an appropiate icon from the stat information or
 	 * the hard coded filename.
 	 */
 	image = gnome_file_entry_color (fe);
-
+	
 	g_assert (image != NULL);
 
 	return image;
