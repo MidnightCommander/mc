@@ -2549,8 +2549,8 @@ msgid "MC will load hotlist from ~/"
 msgstr "MC wird Hotlist laden von ~/"
 
 #: src/hotlist.c:1387
-msgid " and then delete [Hotlist] section there"
-msgstr " und dann den Abschnitt [Hotlist] dort löschen"
+msgid "and then delete [Hotlist] section there"
+msgstr "und dann den Abschnitt [Hotlist] dort löschen"
 
 #: src/hotlist.c:1388 src/hotlist.c:1407 src/hotlist.c:1430 src/hotlist.c:1455
 msgid " Hotlist Load "

@@ -2305,8 +2305,8 @@ msgid "MC will load hotlist from ~/"
 msgstr "MC cargar\341 la lista de favoritos del archivo ~/"
 
 #: src/hotlist.c:1247
-msgid " and then delete [Hotlist] section there"
-msgstr " y luego borrar\341 la secci\363n [Hotlist]"
+msgid "and then delete [Hotlist] section there"
+msgstr "y luego borrar\341 la secci\363n [Hotlist]"
 
 #: src/hotlist.c:1248 src/hotlist.c:1267 src/hotlist.c:1290 src/hotlist.c:1315
 msgid " Hotlist Load "

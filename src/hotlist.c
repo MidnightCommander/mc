@@ -1382,9 +1382,12 @@ void load_hotlist (void)
 	int	result;
 	char    *msg;
 
-	msg = copy_strings (_("Hotlist is now kept in file ~/"), HOTLIST_FILENAME,
-			    _("MC will load hotlist from ~/"),  PROFILE_NAME,
-			    _(" and then delete [Hotlist] section there"), NULL);
+	msg = copy_strings (_("Hotlist is now kept in file ~/"),
+			    HOTLIST_FILENAME, "\n",
+			    _("MC will load hotlist from ~/"),
+			    PROFILE_NAME, "\n",
+			    _("and then delete [Hotlist] section there"),
+			    NULL);
 	message (0, _(" Hotlist Load "), msg);
 	free (msg);
 	
