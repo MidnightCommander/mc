@@ -141,10 +141,14 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 {
 	GtkWidget *win, *ted;
 
-	if (flags & DLG_GNOME_APP)
-		win = gnome_app_new ("mc", h->name);
-	else 
-		win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	if (!(flags & DLG_NO_TOPLEVEL)){
+		if (flags & DLG_GNOME_APP)
+			win = gnome_app_new ("mc", h->name);
+		else 
+			win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+	} else
+		win = 0;
+	
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
@@ -154,8 +158,21 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		
 		bind_gtk_keys (GTK_WIDGET (ted), h);
 	}
-	bind_gtk_keys (GTK_WIDGET (win), h);
+	if (win)
+		bind_gtk_keys (GTK_WIDGET (win), h);
 	return (widget_data) win;
+}
+
+/* Used to bind a window for an already created Dlg_head.  This is
+ * used together with the DLG_NO_TOPLEVEL: the dialog is created
+ * with the DLG_NO_TOPLEVEL and later, when the window is created
+ * it is assigned with this routine
+ */
+void
+x_dlg_set_window (Dlg_head *h, GtkWidget *win)
+{
+	h->wdata = (widget_data) win;
+	bind_gtk_keys (GTK_WIDGET (win), h);	
 }
 
 void
@@ -201,6 +218,15 @@ x_add_widget (Dlg_head *h, Widget_Item *w)
 	}
 }
 
+static int
+gnome_dlg_send_destroy (GtkWidget *widget, Dlg_head *h)
+{
+	printf ("destruyendo\n");
+	h->ret_value = B_CANCEL;
+	dlg_stop (h);
+	return TRUE;
+}
+
 void
 x_init_dlg (Dlg_head *h)
 {
@@ -219,6 +245,8 @@ x_init_dlg (Dlg_head *h)
 
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
+	gtk_signal_connect (GTK_OBJECT (h->wdata), "delete_event",
+			    GTK_SIGNAL_FUNC (gnome_dlg_send_destroy), h);
 	x_focus_widget (h->current);
 }
 

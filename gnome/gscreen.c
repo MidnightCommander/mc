@@ -918,7 +918,10 @@ panel_switch_new_display_mode (WPanel *panel)
 static GtkWidget *
 panel_create_cwd (WPanel *panel)
 {
-	return gtk_label_new ("");
+	GtkWidget *label = gtk_label_new ("");
+
+	gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_RIGHT);
+	return label;
 }
 
 static void

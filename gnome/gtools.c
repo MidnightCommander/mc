@@ -43,9 +43,10 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	int i, result = -1;
 	
 	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
-			DLG_NO_TED);
+			DLG_NO_TED | DLG_NO_TOPLEVEL);
 	dialog = GTK_DIALOG (gtk_dialog_new ());
-	h->wdata = dialog;
+	x_dlg_set_window (h, dialog);
+	gtk_window_set_policy (GTK_WINDOW (dialog), 0, 0, 0);
 
 	x_set_dialog_title (h, header);
 	
@@ -94,7 +95,6 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	dlg_run_done (h);
 	last_query_dlg = h;
 	gtk_grab_remove (GTK_WIDGET (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
 
 	switch (h->ret_value){
 	case B_CANCEL:

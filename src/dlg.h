@@ -199,12 +199,13 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      char *help_ctx, char *name, int flags);
 
 /* The flags: */
-#define DLG_GNOME_APP  16       /* GNOME only: use a gnome-app for the toplevel window */
-#define DLG_NO_TED      8       /* GNOME only: do not manage layout with a GNOME GtkTed widget */
-#define DLG_GRID        4       /* Widgets should be created under .widgets */
-#define DLG_TRYUP       2	/* Try to move two lines up the dialog */
-#define DLG_CENTER      1	/* Center the dialog */
-#define DLG_NONE        0	/* No options */
+#define DLG_NO_TOPLEVEL 32	/* GNOME only: Do not create a toplevel window, user provides it */
+#define DLG_GNOME_APP   16      /* GNOME only: use a gnome-app for the toplevel window */
+#define DLG_NO_TED       8      /* GNOME only: do not manage layout with a GNOME GtkTed widget */
+#define DLG_GRID         4      /* Widgets should be created under .widgets */
+#define DLG_TRYUP        2	/* Try to move two lines up the dialog */
+#define DLG_CENTER       1	/* Center the dialog */
+#define DLG_NONE         0	/* No options */
 int  add_widget (Dlg_head *dest, void *Widget);
 int  add_widgetl (Dlg_head *dest, void *Widget, WLay layout);
 

@@ -1,3 +1,14 @@
+Sat Mar 14 17:13:26 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gmain.c (gnome_dlg_send_destroy): New signal handler for
+	"delete_event".  I return TRUE (ie, do not kill this window), and
+	manually queue que destruction of this window. 
+
+	* gtools.c (query_dialog): Do not allow resizing; do not destroy
+	the dialog ourselves, this is properly handled by dlg.c now
+	(pack_button): Do not use the defaults: we do not want growing
+	buttons;
+
 Fri Mar 13 16:01:28 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (buttonbar_clicked, x_create_buttonbar): Button bar

@@ -570,9 +570,8 @@ static INLINE void dialog_handle_key (Dlg_head *h, int d_key)
     case KEY_F (10):
     case XCTRL ('c'):
     case XCTRL ('g'):
-	h->running = 0;
-	x_dialog_stop (h);
 	h->ret_value = B_CANCEL;
+	dlg_stop (h);
 	break;
     }
 }

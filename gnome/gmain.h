@@ -10,6 +10,7 @@ int xtoolkit_end (void);
 /* Required by the standard code */
 widget_data xtoolkit_create_dialog (Dlg_head *h, int with_grid);
 widget_data xtoolkit_get_main_dialog (Dlg_head *h);
+void x_dlg_set_window (Dlg_head *h, GtkWidget *win);
 widget_data x_create_panel_container (int which);
 void x_panel_container_show (widget_data wdata);
 

@@ -1,3 +1,8 @@
+Sat Mar 14 17:30:21 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* file.c (panel_operate): Why was the flags in query_dialog set to
+	D_INSERT is a big mistery.  Should be fixed now.
+
 Fri Mar 13 18:10:58 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* dlg.c (dlg_stop): New routine used to finish dialog boxes.

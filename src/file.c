@@ -2119,7 +2119,7 @@ panel_operate (void *source_panel, int operation, char *thedefault)
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
 	i = query_dialog (op_names [operation], cmd_buf,
-			  3, 2, "&Yes", "&No");
+			  D_ERROR, 2, "&Yes", "&No");
 	if (i != 0)
 	    return 0;
     } else if (operation != OP_DELETE) {
