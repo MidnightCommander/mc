@@ -52,6 +52,7 @@
 #include "widget.h"
 #include "../vfs/vfs.h"
 #include "../vfs/extfs.h"
+#include <glib.h>
 
 #if defined(OS2_NT)
 # include "drive.h"
@@ -2533,4 +2534,50 @@ panel_update_marks (WPanel *panel)
 #ifdef PORT_HAS_UPDATE_MARKS
 	x_panel_update_marks (panel);
 #endif
+}
+
+void
+panel_re_sort (WPanel *panel)
+{
+    char *filename;
+    int  i;
+
+    g_return_if_fail (panel != NULL);
+    
+    filename = strdup (selection (panel)->fname);
+    unselect_item (panel);
+    do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse, panel->case_sensitive);
+    panel->selected = -1;
+    for (i = panel->count; i; i--){
+	if (!strcmp (panel->dir.list [i-1].fname, filename)){
+	    panel->selected = i-1;
+	    break;
+	}
+    }
+    free (filename);
+    panel->top_file = panel->selected - ITEMS (panel)/2;
+    if (panel->top_file < 0)
+	panel->top_file = 0;
+    select_item (panel);
+    panel_update_contents (panel);
+}
+
+void
+panel_set_sort_order (WPanel *panel, sortfn *sort_order)
+{
+    if (sort_order == 0)
+	return;
+
+    panel->sort_type = sort_order;
+
+    /* The directory is already sorted, we have to load the unsorted stuff */
+    if (sort_order == (sortfn *) unsorted){
+	char *current_file;
+	
+	current_file = strdup (panel->dir.list [panel->selected].fname);
+	panel_reload (panel);
+	try_to_select (panel, current_file);
+	free (current_file);
+    }
+    panel_re_sort (panel);
 }

@@ -479,26 +479,8 @@ void reread_cmd (void)
 /* Panel sorting related routines */
 void do_re_sort (WPanel *panel)
 {
-    char *filename;
-    int  i;
-
     panel = get_a_panel (panel);
-    filename = strdup (selection (cpanel)->fname);
-    unselect_item (panel);
-    do_sort (&panel->dir, panel->sort_type, panel->count-1, panel->reverse, panel->case_sensitive);
-    panel->selected = -1;
-    for (i = panel->count; i; i--){
-	if (!strcmp (panel->dir.list [i-1].fname, filename)){
-	    panel->selected = i-1;
-	    break;
-	}
-    }
-    free (filename);
-    cpanel->top_file = cpanel->selected - ITEMS (cpanel)/2;
-    if (cpanel->top_file < 0)
-	cpanel->top_file = 0;
-    select_item (panel);
-    panel_update_contents (panel);
+    panel_re_sort (panel);
 }
 
 void reverse_selection_cmd_panel (WPanel *panel)

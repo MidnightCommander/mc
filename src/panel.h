@@ -187,14 +187,17 @@ extern int extra_info;
 #define RP_ONLY_PAINT 0
 #define RP_SETPOS 1
 
-void set_colors (WPanel *panel);
-void paint_panel (WPanel *panel);
-void format_file (char *dest, WPanel *panel, int file_index, int panel_width, int attr, int isstatus);
-void repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus);
-void display_mini_info (WPanel *panel);
-void panel_reload (WPanel *panel);
-void paint_dir (WPanel *panel);
-void show_dir (WPanel *panel);
+void set_colors           (WPanel *panel);
+void paint_panel          (WPanel *panel);
+void format_file          (char *dest, WPanel *panel, int file_index, int panel_width, int attr, int isstatus);
+void repaint_file         (WPanel *panel, int file_index, int move, int attr, int isstatus);
+void display_mini_info    (WPanel *panel);
+void panel_reload         (WPanel *panel);
+void paint_dir            (WPanel *panel);
+void show_dir             (WPanel *panel);
+
+void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
+void panel_re_sort        (WPanel *panel);
 
 /* NOTE: Have to be ifdefed for HAVE_X */
 void x_panel_set_size        (int index);
@@ -271,12 +274,12 @@ int do_enter_on_file_entry (file_entry *fe);
 int do_enter (WPanel *panel);
 
 /* NOTE: Have to be ifdefed for HAVE_X */
-void x_panel_select_item (WPanel *panel, int index, int val);
-void x_select_item (WPanel *panel);
-void x_unselect_item (WPanel *panel);
+void    x_panel_select_item (WPanel *panel, int index, int val);
+void    x_select_item (WPanel *panel);
+void    x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
-void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
-void panel_update_marks (WPanel *panel);
+void    update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
+void    panel_update_marks (WPanel *panel);
 
 void directory_history_next (WPanel * panel);
 void directory_history_prev (WPanel * panel);

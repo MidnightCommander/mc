@@ -1153,21 +1153,8 @@ sort_cmd (void)
     p = MENU_PANEL;
     sort_order = sort_box (p->sort_type, &p->reverse, &p->case_sensitive);
 
-    if (sort_order == 0)
-	return;
+    panel_set_sort_order (p, sort_order);
 
-    p->sort_type = sort_order;
-
-    /* The directory is already sorted, we have to load the unsorted stuff */
-    if (sort_order == (sortfn *) unsorted){
-	char *current_file;
-	
-	current_file = strdup (cpanel->dir.list [cpanel->selected].fname);
-	panel_reload (cpanel);
-	try_to_select (cpanel, current_file);
-	free (current_file);
-    }
-    do_re_sort (p);
 }
 
 #ifndef HAVE_GNOME
