@@ -12,7 +12,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2001-04-16 12:45-0400\n"
+"POT-Creation-Date: 2001-04-30 23:07+0200\n"
 "PO-Revision-Date: 1999-03-18 23:11+0100\n"
 "Last-Translator: Lorint Hendschel <LorintHendschel@skynet.be>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -874,7 +874,7 @@ msgstr "Tchwezi çu ki n' esteut _nén tchwezi"
 msgid "Reverses the list of tagged files"
 msgstr "Tchwezi les fitchîs ki n' sont nén tchwezi pol moumint"
 
-#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2081
+#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2075
 msgid "Search"
 msgstr "Cweri"
 
@@ -1008,18 +1008,16 @@ msgid "E_xit"
 msgstr "Moussî _foû"
 
 #: gnome/gmc-window.c:95
-#, fuzzy
 msgid "_Listing view"
-msgstr "Môde listing"
+msgstr "Vey è _djîvéye"
 
 #: gnome/gmc-window.c:96
 msgid "_Icon view"
 msgstr "Vey a _imådjetes"
 
 #: gnome/gmc-window.c:102
-#, fuzzy
 msgid "Display _tree view"
-msgstr " Håyner bits "
+msgstr "Vey come on åbe"
 
 #: gnome/gmc-window.c:112
 msgid "_About the Midnight Commander..."
@@ -1210,7 +1208,7 @@ msgid "Use default View action"
 msgstr "Eployî li prémetuwe tchûze po loukî"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2077
+#: src/screen.c:2396 src/screen.c:2426 src/view.c:2071
 msgid "Edit"
 msgstr "Aspougnî"
 
@@ -1629,7 +1627,7 @@ msgstr "Eplaeçmint:"
 #: gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:276 src/boxes.c:376 src/boxes.c:464
 #: src/boxes.c:644 src/boxes.c:726 src/boxes.c:781 src/boxes.c:896
-#: src/filegui.c:824 src/find.c:176 src/layout.c:375 src/option.c:143
+#: src/filegui.c:824 src/find.c:173 src/layout.c:375 src/option.c:143
 #: src/wtools.c:290 src/wtools.c:563 vfs/smbfs.c:118
 msgid "&Ok"
 msgstr "I &Va"
@@ -1639,12 +1637,12 @@ msgstr "I &Va"
 msgid "Offset 0x%08lx"
 msgstr ""
 
-#: gnome/gview.c:138 src/view.c:732
+#: gnome/gview.c:138 src/view.c:724
 #, c-format
 msgid "Col %d"
 msgstr "Col %d"
 
-#: gnome/gview.c:142 src/view.c:736
+#: gnome/gview.c:142 src/view.c:728
 #, c-format
 msgid "%s bytes"
 msgstr "%s bytes"
@@ -1785,19 +1783,16 @@ msgid " Failed trying to open file for reading: "
 msgstr " Dj' a fwait berwete come dji sayîve di drovi li fitchî po lére: "
 
 #: gtkedit/edit.c:320
-#, fuzzy
 msgid " Error reading from pipe: "
-msgstr " Yåk ni va nén cwand dji saye di lére dins l' efant "
+msgstr " Yåk ni va nén cwand dji saye di lére del bûze: "
 
 #: gtkedit/edit.c:325
-#, fuzzy
 msgid " Failed trying to open pipe for reading: "
-msgstr " Dj' a fwait berwete come dji sayîve di drovi li fitchî po lére: "
+msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po lére: "
 
 #: gtkedit/edit.c:339
-#, fuzzy
 msgid " Error reading file: "
-msgstr " Yåk n' a nén stî come dji sayîve di fé on stat sol fitchî "
+msgstr " Yåk n' a nén stî come dji sayîve di lére li fitchî: "
 
 #: gtkedit/edit.c:388
 msgid " Cannot get size/permissions info on file: "
@@ -1827,19 +1822,17 @@ msgstr ""
 msgid "Error trying to stat file:"
 msgstr "Yåk n' a nén stî come dji sayîve di fé on stat sol fitchî:"
 
-#: gtkedit/editcmd.c:168 src/cmd.c:1212 src/tree.c:654 src/view.c:1821
+#: gtkedit/editcmd.c:168 src/cmd.c:1212 src/tree.c:654 src/view.c:1815
 msgid "mc.hlp"
 msgstr "mc.hlp"
 
 #: gtkedit/editcmd.c:305
-#, fuzzy
 msgid " Error writing to pipe: "
-msgstr " Yåk n' a nén stî come dji sayîve di fé on stat sol fitchî "
+msgstr " Yåk n' a nén stî come dji sayîve di scrire èl bûze: "
 
 #: gtkedit/editcmd.c:311
-#, fuzzy
 msgid " Failed trying to open pipe for writing: "
-msgstr " Dj' a fwait berwete come dji sayîve di drovi li fitchî po lére: "
+msgstr " Dj' a fwait berwete come dji sayîve di drovî l' bûze po scrire: "
 
 #: gtkedit/editcmd.c:386
 msgid "Quick save "
@@ -1859,9 +1852,9 @@ msgstr "Fé des copeyes di såvrité -->"
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:277 src/boxes.c:374
 #: src/boxes.c:462 src/boxes.c:642 src/boxes.c:725 src/boxes.c:779
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:867 src/filegui.c:807
-#: src/find.c:176 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
+#: src/find.c:173 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
 #: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:407 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: src/view.c:399 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:118
 msgid "&Cancel"
 msgstr "&Rinoncî"
@@ -1883,7 +1876,7 @@ msgstr " Schaper èt rlomer "
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
 #: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:706 src/subshell.c:732 src/utilunix.c:382
+#: src/screen.c:2175 src/subshell.c:721 src/subshell.c:747 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Advertixhmint "
@@ -1964,7 +1957,7 @@ msgid " Save file "
 msgstr " Schaper Fitchî "
 
 #: gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2073
+#: src/view.c:2067
 msgid "Save"
 msgstr "Schaper"
 
@@ -2056,7 +2049,7 @@ msgstr " Dinez l' ôrde des årgumints di discandje, metans: 3, 2, 1, 4 "
 msgid " Enter replacement string:"
 msgstr " Dinez li tchinne pol discandje:"
 
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1992
+#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1986
 msgid " Enter search string:"
 msgstr " Dinez li tchinne a cweri après:"
 
@@ -2068,8 +2061,8 @@ msgstr " Mete el plaece "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1586 gtkedit/editcmd.c:2321
-#: gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351 src/view.c:1518
-#: src/view.c:1615 src/view.c:1738 src/view.c:1956 src/view.c:1992
+#: gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351 src/view.c:1512
+#: src/view.c:1609 src/view.c:1732 src/view.c:1950 src/view.c:1986
 msgid " Search "
 msgstr " Cweri "
 
@@ -2250,13 +2243,13 @@ msgstr "Rinoncî a moussî foû"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:590 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
 msgid "&Yes"
 msgstr "&Oyi"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:589 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
 msgid "&No"
 msgstr "&Neni"
 
@@ -2286,7 +2279,7 @@ msgid " Cut to clipboard "
 msgstr " Côper evoye è tchapea emacralé "
 
 #: gtkedit/editcmd.c:2737 gtkedit/editcmd.c:2741 gtkedit/editcmd.c:2746
-#: gtkedit/editcmd.c:2749 src/view.c:1903
+#: gtkedit/editcmd.c:2749 src/view.c:1897
 msgid " Goto line "
 msgstr " Potchî al roye "
 
@@ -2554,9 +2547,8 @@ msgid "sor&T...                 M-t"
 msgstr "re&Lire...                          M-t"
 
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#, fuzzy
 msgid "E&xternal Formatter      F19"
-msgstr "'ritiraedje' Modele &C              F19"
+msgstr "difoûtrin metaedje è &cogne         F19"
 
 #: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
@@ -2846,7 +2838,7 @@ msgstr "Yåk n' a nén stî come dj' enondéve l' aspougneu.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2066
+#: src/view.c:2060
 msgid "Help"
 msgstr "Aide"
 
@@ -2864,7 +2856,7 @@ msgstr "Djus"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1738 src/view.c:2068 src/view.c:2090
+#: src/main.c:1738 src/view.c:2062 src/view.c:2084
 msgid "Quit"
 msgstr "Cwiter"
 
@@ -3157,13 +3149,13 @@ msgstr "&Mini statut ûzeu"
 
 #: src/boxes.c:186
 msgid "Listing mode"
-msgstr "Môde listing"
+msgstr "Môde djîvéye"
 
 #: src/boxes.c:278
 msgid "&Reverse"
 msgstr "Å&rvier"
 
-#: src/boxes.c:279 src/find.c:169
+#: src/boxes.c:279 src/find.c:166
 msgid "case sensi&tive"
 msgstr "grandès <> ptitès letes"
 
@@ -3254,7 +3246,7 @@ msgstr "Loyén simbolike"
 msgid "Running "
 msgstr "Èn alaedje "
 
-#: src/boxes.c:832 src/find.c:732 src/find.c:973
+#: src/boxes.c:832 src/find.c:721 src/find.c:962
 msgid "Stopped"
 msgstr "Djoké"
 
@@ -3871,9 +3863,8 @@ msgid " with X11 support to read modifiers"
 msgstr ""
 
 #: src/textconf.c:20
-#, fuzzy
 msgid "Virtual File System: tarfs, extfs"
-msgstr " Apontiaedje do forveyu sistinme di fitchîs "
+msgstr "Forveyu sistinme di fitchîs: tarfs, extfs"
 
 #: src/textconf.c:22
 msgid ", ftpfs"
@@ -3889,7 +3880,7 @@ msgstr ", mcfs"
 
 #: src/textconf.c:28
 msgid " (with termnet support)"
-msgstr ""
+msgstr " (avou sopoirt termnet)"
 
 #: src/textconf.c:31
 msgid ", smbfs"
@@ -3913,7 +3904,7 @@ msgstr ""
 
 #: src/textconf.c:49
 msgid "S-lang library with "
-msgstr ""
+msgstr "lîvreye S-lang avou "
 
 #: src/textconf.c:52
 msgid "terminfo"
@@ -3929,7 +3920,7 @@ msgstr "on terminå nén cnoxhu"
 
 #: src/textconf.c:60
 msgid " database"
-msgstr " båze di doneyes"
+msgstr " båze di dneyes"
 
 #: src/textconf.c:63
 msgid "the ncurses library"
@@ -4338,7 +4329,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:509
+#: src/file.c:1707 vfs/fish.c:515
 msgid "file"
 msgstr "fitchî"
 
@@ -4559,114 +4550,114 @@ msgstr ""
 "Li modele soûrdant n' est nén valåbe `%s' \n"
 " %s "
 
-#: src/find.c:130
+#: src/find.c:127
 msgid "&Suspend"
 msgstr "Mete a &Djok"
 
-#: src/find.c:131
+#: src/find.c:128
 msgid "Con&tinue"
 msgstr "&Tcheryî"
 
-#: src/find.c:132
+#: src/find.c:129
 msgid "&Chdir"
 msgstr "&Chdir"
 
-#: src/find.c:133
+#: src/find.c:130
 msgid "&Again"
 msgstr "&Eco on côp"
 
-#: src/find.c:134
+#: src/find.c:131
 msgid "&Quit"
 msgstr "&Cwiter"
 
-#: src/find.c:135 src/panelize.c:89
+#: src/find.c:132 src/panelize.c:89
 msgid "Pane&lize"
 msgstr "Mete è &Panea"
 
-#: src/find.c:136
+#: src/find.c:133
 msgid "&View - F3"
 msgstr "&Loukî - F3"
 
-#: src/find.c:137
+#: src/find.c:134
 msgid "&Edit - F4"
 msgstr "&Aspougnî - F4"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Start at:"
 msgstr "Ataker a:"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Filename:"
 msgstr "No do fitchî:"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Content: "
 msgstr "Ådvins:"
 
-#: src/find.c:176 src/main.c:1251 src/main.c:1275
+#: src/find.c:173 src/main.c:1251 src/main.c:1275
 msgid "&Tree"
 msgstr "Å&be"
 
-#: src/find.c:230
+#: src/find.c:227
 msgid "Find File"
 msgstr "Trover Fitchî"
 
-#: src/find.c:465
+#: src/find.c:455
 #, c-format
 msgid "Grepping in %s"
 msgstr "Dji cwîr dins %s"
 
-#: src/find.c:503
+#: src/find.c:492
 msgid " Find/read "
 msgstr " Trover/Lére "
 
-#: src/find.c:503
+#: src/find.c:492
 msgid " Problem reading from child "
 msgstr " Yåk ni va nén cwand dji saye di lére dins l' efant "
 
-#: src/find.c:550
+#: src/find.c:539
 msgid "Finished"
 msgstr "Fwait"
 
-#: src/find.c:574 src/view.c:1518
+#: src/find.c:563 src/view.c:1512
 #, c-format
 msgid "Searching %s"
 msgstr "Dji cwîr %s"
 
-#: src/find.c:730 src/find.c:770
+#: src/find.c:719 src/find.c:759
 msgid "Suspend"
 msgstr "Djoker"
 
-#: src/find.c:730
+#: src/find.c:719
 msgid "Restart"
 msgstr "Renonder"
 
-#: src/find.c:732 src/find.c:834 src/find.c:973 src/find.c:1069
+#: src/find.c:721 src/find.c:823 src/find.c:962 src/find.c:1058
 msgid "Searching"
 msgstr "Dji cwîr"
 
-#: src/find.c:763 src/find.c:1044
+#: src/find.c:752 src/find.c:1033
 msgid "Find file"
 msgstr "Trover fitchî"
 
 #. The buttons
-#: src/find.c:768
+#: src/find.c:757
 msgid "Change to this directory"
 msgstr "Potchî dins ci ridant chal"
 
-#: src/find.c:769
+#: src/find.c:758
 msgid "Search again"
 msgstr "Cweri eco ene feye"
 
-#: src/find.c:774
+#: src/find.c:763
 msgid "View this file"
 msgstr "Loukî ci fitchî chal"
 
-#: src/find.c:775
+#: src/find.c:764
 msgid "Edit this file"
 msgstr "Aspougnî ci fitchî chal"
 
-#: src/find.c:776
+#: src/find.c:765
 msgid "Send the results to a Panel"
 msgstr "Evoyî li rezultat dins on panea"
 
@@ -5192,9 +5183,8 @@ msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Voloz moussî foû po do bon do Midnight Commander? "
 
 #: src/main.c:1236
-#, fuzzy
 msgid " Listing format edit "
-msgstr " Cogne del djîveye "
+msgstr " Candjî l' cogne del djîveye "
 
 #: src/main.c:1236
 #, c-format
@@ -5940,24 +5930,24 @@ msgstr ""
 " Dji n' sai fé on chdir dins \"%s\" \n"
 " %s "
 
-#: src/subshell.c:287
+#: src/subshell.c:297
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Dji n' sai drovi li lomeye bûze %s\n"
 
-#: src/subshell.c:706
+#: src/subshell.c:721
 msgid " The shell is still active. Quit anyway? "
 msgstr " Li shell est co èn alaedje. Voloz-ve tot l' minme moussî foû? "
 
-#: src/subshell.c:732
+#: src/subshell.c:747
 msgid " There are stopped jobs."
 msgstr " I gn a des bouyes d' aresteyes."
 
-#: src/subshell.c:733
+#: src/subshell.c:748
 msgid " Quit anyway? "
 msgstr " Fåt-i moussî foû tot l' minme? "
 
-#: src/subshell.c:798
+#: src/subshell.c:813
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Advertixhmint: dji n' sai candjî dins %s.\n"
@@ -6105,7 +6095,7 @@ msgstr " Li bûze a fwait berwete "
 msgid " Dup failed "
 msgstr " Dup a fwait berwete "
 
-#: src/view.c:404
+#: src/view.c:396
 msgid ""
 "File: \n"
 "\n"
@@ -6115,7 +6105,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:405
+#: src/view.c:397
 msgid ""
 "\n"
 "\n"
@@ -6125,27 +6115,27 @@ msgstr ""
 "\n"
 "a stî candjî. Voloz-ve schaper les candjmints?\n"
 
-#: src/view.c:407
+#: src/view.c:399
 msgid " Save changes "
 msgstr " Schaper les candjmints "
 
-#: src/view.c:449
+#: src/view.c:441
 msgid " Can't spawn child program "
 msgstr ""
 
-#: src/view.c:458
+#: src/view.c:450
 msgid " Empty output from child filter "
 msgstr ""
 
-#: src/view.c:463
+#: src/view.c:455
 msgid " Could not open file "
 msgstr " Dji n' sai drovi li fitchî "
 
-#: src/view.c:478
+#: src/view.c:470
 msgid " Can't open file \""
 msgstr " Dji n' sai drovi li fitchî \""
 
-#: src/view.c:485
+#: src/view.c:477
 msgid ""
 " Can't stat file \n"
 " "
@@ -6153,11 +6143,11 @@ msgstr ""
 " Dji n' sai fé on stat sol fitchî \n"
 " "
 
-#: src/view.c:491
+#: src/view.c:483
 msgid " Can't view: not a regular file "
 msgstr " Dji n' sai håyner ci fitchî ci: ci n' est nén on fitchî normå "
 
-#: src/view.c:572
+#: src/view.c:564
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
@@ -6166,7 +6156,7 @@ msgstr ""
 " Dji n' sai drovi \"%s\"\n"
 " %s "
 
-#: src/view.c:581
+#: src/view.c:573
 #, c-format
 msgid ""
 " Can't stat \"%s\"\n"
@@ -6175,34 +6165,34 @@ msgstr ""
 " Dji n' sai fé on stat so \"%s\"\n"
 " %s "
 
-#: src/view.c:716
+#: src/view.c:708
 #, c-format
 msgid "File: %s"
 msgstr "Fitchî: %s"
 
-#: src/view.c:730
+#: src/view.c:722
 #, c-format
 msgid "Offset 0x%08x"
 msgstr ""
 
-#: src/view.c:741
+#: src/view.c:733
 msgid "  [grow]"
 msgstr "  [grandit]"
 
-#: src/view.c:1510
+#: src/view.c:1502
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Dji cwir après `%s'"
 
-#: src/view.c:1615 src/view.c:1738
+#: src/view.c:1609 src/view.c:1732
 msgid " Search string not found "
 msgstr " Dji n' a nén trové li tchinne ki dji cachîve après "
 
-#: src/view.c:1777
+#: src/view.c:1771
 msgid " Invalid regular expression "
 msgstr " Voste erûleye ratoûrneure n' est nén valåbe "
 
-#: src/view.c:1901
+#: src/view.c:1895
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6211,7 +6201,7 @@ msgstr ""
 " Li roye do moumint a li limerô %d.\n"
 " Intrez li novea limerô del roye:"
 
-#: src/view.c:1923
+#: src/view.c:1917
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6220,67 +6210,67 @@ msgstr ""
 " L' adresse do moumint est 0x%lx.\n"
 " Intrez li novele adresse:"
 
-#: src/view.c:1925
+#: src/view.c:1919
 msgid " Goto Address "
 msgstr " Potchî al Adresse "
 
-#: src/view.c:1956
+#: src/view.c:1950
 msgid " Enter regexp:"
 msgstr " Intrez l' erûleye ratoûrneure:"
 
-#: src/view.c:2069
+#: src/view.c:2063
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2069
+#: src/view.c:2063
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2070
+#: src/view.c:2064
 msgid "Goto"
 msgstr ""
 
-#: src/view.c:2070
+#: src/view.c:2064
 msgid "Line"
 msgstr "Roye"
 
-#: src/view.c:2073
+#: src/view.c:2067
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2076
+#: src/view.c:2070
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2076
+#: src/view.c:2070
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2078
+#: src/view.c:2072
 msgid "UnWrap"
 msgstr ""
 
-#: src/view.c:2078
+#: src/view.c:2072
 msgid "Wrap"
 msgstr ""
 
-#: src/view.c:2081
+#: src/view.c:2075
 msgid "HxSrch"
 msgstr ""
 
-#: src/view.c:2084
+#: src/view.c:2078
 msgid "Raw"
 msgstr ""
 
-#: src/view.c:2084
+#: src/view.c:2078
 msgid "Parse"
 msgstr ""
 
-#: src/view.c:2088
+#: src/view.c:2082
 msgid "Unform"
 msgstr ""
 
-#: src/view.c:2088
+#: src/view.c:2082
 msgid "Format"
 msgstr ""
 
@@ -6594,56 +6584,56 @@ msgstr "fish: dj' evoye li scret di l' ûzeu..."
 msgid "fish: Sending initial line..."
 msgstr ""
 
-#: vfs/fish.c:252
+#: vfs/fish.c:258
 msgid "fish: Handshaking version..."
 msgstr ""
 
-#: vfs/fish.c:256
+#: vfs/fish.c:262
 msgid "fish: Setting up current directory..."
 msgstr ""
 
-#: vfs/fish.c:258
+#: vfs/fish.c:264
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Raloyi, måjhon %s."
 
-#: vfs/fish.c:347
+#: vfs/fish.c:353
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Dji lé li ridant FTP %s..."
 
-#: vfs/fish.c:451
+#: vfs/fish.c:457
 msgid "fish: failed"
 msgstr "fish: berwete"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:471
+#: vfs/fish.c:477
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr ""
 
-#: vfs/fish.c:496
+#: vfs/fish.c:502
 msgid "fish: Local read failed, sending zeros"
 msgstr ""
 
-#: vfs/fish.c:508
+#: vfs/fish.c:514
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr ""
 
-#: vfs/fish.c:509
+#: vfs/fish.c:515
 msgid "zeros"
 msgstr ""
 
-#: vfs/fish.c:556
+#: vfs/fish.c:562
 msgid "Aborting transfer..."
 msgstr ""
 
-#: vfs/fish.c:565
+#: vfs/fish.c:571
 msgid "Error reported after abort."
 msgstr ""
 
-#: vfs/fish.c:567
+#: vfs/fish.c:573
 msgid "Aborted transfer would be successful."
 msgstr ""
 
@@ -6895,14 +6885,14 @@ msgid " %s opening remote file %s "
 msgstr ""
 
 #: vfs/smbfs.c:1979
-#, fuzzy, c-format
+#, c-format
 msgid " %s renaming files\n"
-msgstr "  %s bytes divins %d fitchîs%s"
+msgstr "  %s fitchîs ki restèt\n"
 
 #. This is place of next pointer
 #: vfs/smbfs.c:2005
 msgid "netbios over tcp/ip"
-msgstr ""
+msgstr "netbios so tcp/ip"
 
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
