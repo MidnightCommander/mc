@@ -1,3 +1,8 @@
+2003-03-13  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/libsmb/clientgen.c (cli_session_setup): Convert
+	username from Unix to DOS codepage before sending.
+
 2003-03-10  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: Minor cleanups.

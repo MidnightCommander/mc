@@ -754,6 +754,7 @@ BOOL cli_session_setup(struct cli_state *cli,
 		p += passlen;
 		pstrcpy(p,user);
 		strupper(p);
+		unix_to_dos (p, True);
 	}
 	else
 	{
@@ -776,6 +777,7 @@ BOOL cli_session_setup(struct cli_state *cli,
 		p += SVAL(cli->outbuf,smb_vwv8);
 		pstrcpy(p,user);
 		strupper(p);
+		unix_to_dos (p, True);
 		p = skip_string(p,1);
 		pstrcpy(p,workgroup);
 		strupper(p);
