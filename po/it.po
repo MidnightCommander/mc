@@ -4030,7 +4030,7 @@ msgstr " Dup fallita "
 
 #: src/view.c:390
 msgid " Try again ? "
-msgstr " Provare ancora ? "
+msgstr " Provare ancora? "
 
 #: src/view.c:410
 msgid ""
