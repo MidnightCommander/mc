@@ -271,7 +271,7 @@ printf_string (const char *format, ...)
     print_string (buffer);
 }
 
-/* Handle all the roff dot commands */
+/* Handle all the roff dot commands.  See man groff_man for details */
 static void
 handle_command (char *buffer)
 {
@@ -364,23 +364,30 @@ handle_command (char *buffer)
 	verbatim_flag = 1;
 	if (col > 0)
 	    newline ();
-    } else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0) {
+    } else if (strcmp (buffer, ".I") == 0 || strcmp (buffer, ".B") == 0
+	       || strcmp (buffer, ".SB") == 0) {
 	/* Bold text or italics text */
-	char type = buffer[1];
 	char *p;
-	char *w = buffer;
+	char *w;
 	int backslash_flag = 0;
 
-	buffer = strtok (NULL, "");
-	if (buffer == NULL) {
-	    print_error ("Syntax error: .I / .B: no text");
+	/* .SB [text]
+	 * Causes the text on the same line or the text on the
+	 * next  line  to  appear  in boldface font, one point
+	 * size smaller than the default font.
+	 */
+
+	/* FIXME: text is optional, so there is no error */
+	p = strtok (NULL, "");
+	if (p == NULL) {
+	    print_error ("Syntax error: .I | .B | .SB : no text");
 	    return;
 	}
 
-	*w = (type == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON;
+	*buffer = (buffer[1] == 'I') ? CHAR_ITALIC_ON : CHAR_BOLD_ON;
 
 	/* Attempt to handle backslash quoting */
-	for (p = buffer, buffer = w++; *p; p++) {
+	for (w = &buffer[1]; *p; p++) {
 	    if (*p == '\\' && !backslash_flag) {
 		backslash_flag = 1;
 		continue;
@@ -392,14 +399,16 @@ handle_command (char *buffer)
 	*w++ = CHAR_BOLD_OFF;
 	*w = 0;
 	print_string (buffer);
-    } else if ((strcmp (buffer, ".TP") == 0) || (strcmp (buffer, ".IP") == 0)) {
-	/* End of paragraph? */
+    } else if ((strcmp (buffer, ".TP") == 0)
+	       || (strcmp (buffer, ".IP") == 0)) {
+	/* TODO: Implement these indented paragraphs */
 	if (col > 0)
 	    newline ();
 	newline ();
     } else if (strcmp (buffer, ".\\\"TOPICS") == 0) {
 	if (out_row > 1) {
-	    print_error ("Syntax error: .\\\"TOPICS must be first command");
+	    print_error
+		("Syntax error: .\\\"TOPICS must be first command");
 	    return;
 	}
 	buffer = strtok (NULL, "");
@@ -424,6 +433,13 @@ handle_command (char *buffer)
 	/* Comment */
     } else if (strcmp (buffer, ".TH") == 0) {
 	/* Title header */
+    } else if (strcmp (buffer, ".SM") == 0) {
+	/* Causes the text on the same line or the text on the
+	 * next  line  to  appear  in a font that is one point
+	 * size smaller than the default font. */
+	buffer = strtok (NULL, "");
+	if (buffer)
+	    print_string (buffer);
     } else {
 	/* Other commands are ignored */
 	/* There is no memmove on some systems */

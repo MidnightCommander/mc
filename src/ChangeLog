@@ -4,6 +4,7 @@
 	(handle_command): Handle .P, .LP, .IP and .br.
 	Ignore comments and .TH (Title header).
 	Report about unsupported commands.
+	Handle .SM and .SB.
 
 	* ext.c (regex_command): Use "%s" as text argument.
 	* user.c (debug_out): Likewise.
