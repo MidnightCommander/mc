@@ -1,3 +1,7 @@
+1999-03-29  Jonathan Blandford  <jrb@redhat.com>
+
+	* main.c (main): updated message.
+
 Sun Mar 28 23:52:08 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* util.c (is_printable): Character 155 is non printable even when 

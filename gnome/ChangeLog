@@ -1,3 +1,8 @@
+1999-03-29  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdesktop.c (create_desktop_dir): improved wording.
+	(create_desktop_dir): improved wording.
+
 1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* mc.keys.in: Now that the menu code uses the full filename, we do

@@ -2066,7 +2066,7 @@ create_desktop_dir (void)
 			message (FALSE,
 				 _("Warning"),
 				 _("Could not symlink %s to %s; "
-				   "will not have initial desktop icons."),
+				   "will not have initial home desktop icon."),
 				 gnome_user_home_dir, home_link_name);
 		}
 		g_free (home_link_name);

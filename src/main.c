@@ -3070,17 +3070,10 @@ int main (int argc, char *argv [])
     if (geteuid () == 0) {
 	    GtkWidget *warning_dlg;
 	    warning_dlg = gnome_message_box_new (_("You are running the GNOME Midnight Commander as root. \n\n"
-					   "You will not be protected from severly damaging your system\n"
-					   "if you continue."),
-					   GNOME_MESSAGE_BOX_WARNING,
-					   _("Continue"), GNOME_STOCK_BUTTON_CANCEL, NULL);
-	    if (gnome_dialog_run (GNOME_DIALOG (warning_dlg)) != 0) {
-		    GnomeClient *client = NULL;
-		    
-		    client = gnome_master_client ();
-		    gnome_client_set_restart_style (client, GNOME_RESTART_NEVER);
-		    exit (0);
-	    }
+						   "You will not be protected from severly damaging your system.")
+						 GNOME_MESSAGE_BOX_WARNING,
+						 GNOME_STOCK_BUTTON_OK, NULL);
+	    gnome_dialog_run (GNOME_DIALOG (warning_dlg));
     }
 #endif
     if (show_change_notice){
