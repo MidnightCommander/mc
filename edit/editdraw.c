@@ -31,8 +31,6 @@
 #include "src/charsets.h"
 #endif
 
-extern int column_highlighting;
-
 static void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 {
     char byte_str[16];
@@ -446,9 +444,6 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
     CPopFont ();
     return;
 }
-
-void edit_set_space_width (int s);
-extern int option_long_whitespace;
 
 void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {

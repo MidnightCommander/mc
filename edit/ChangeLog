@@ -1,5 +1,8 @@
 2002-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* editoptions.c: Make some variables static.
+	* edit.h: Take extern declaratrions from all C files.
+
 	* editcmd.c (edit_block_process_cmd): Plug memory leak.
 	Simplify logic, reformat.
 

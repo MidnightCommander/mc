@@ -773,9 +773,6 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
     }
 }
 
-/*Block copy, move and delete commands */
-extern int column_highlighting;
-
 #define space_width 1
 
 void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)

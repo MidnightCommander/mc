@@ -139,7 +139,6 @@ static void strip_newlines (unsigned char *t, int size)
    in propfont.c  :(
    It calculates the number of chars in a line specified to length l in pixels
  */
-extern int tab_width;
 static inline int next_tab_pos (int x)
 {
     return x += tab_width - x % tab_width;

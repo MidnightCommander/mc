@@ -91,8 +91,6 @@ int edit_mouse_event (Gpm_Event * event, void *x)
 	return menubar_event (event, edit_menubar);
 }
 
-extern Menu EditMenuBar[5];
-
 int edit (const char *_file, int line)
 {
     static int made_directory = 0;

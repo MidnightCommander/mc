@@ -192,6 +192,7 @@ void edit_menu_cmd (WEdit * e);
 void edit_init_menu_emacs (void);
 void edit_init_menu_normal (void);
 void edit_done_menu (void);
+void menu_save_mode_cmd (void);
 int edit_raw_key_query (char *heading, char *query, int cancel);
 char *strcasechr (const unsigned char *s, int c);
 int edit (const char *_file, int line);
@@ -373,6 +374,9 @@ extern char *home_dir;
  */
 extern int edit_key_emulation;
 extern WEdit *wedit;
+extern Menu EditMenuBar[];
+extern Dlg_head *edit_dlg;
+extern WMenu *edit_menubar;
 
 extern int option_word_wrap_line_length;
 extern int option_typewriter_wrap;
@@ -385,6 +389,7 @@ extern int option_fake_half_tabs;
 extern int option_save_mode;
 extern int option_backup_ext_int;
 extern int option_max_undo;
+extern int option_syntax_highlighting;
 
 extern int option_edit_right_extreme;
 extern int option_edit_left_extreme;
@@ -395,5 +400,6 @@ extern char *option_whole_chars_search;
 extern char *option_backup_ext;
 
 extern int edit_confirm_save;
+extern int column_highlighting;
 
 #endif 				/* __EDIT_H */

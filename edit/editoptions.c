@@ -30,15 +30,11 @@
 #define USE_INTERNAL_EDIT 1
 #endif
 
-#include "src/main.h"	/* extern int option_this_and_that ... */
-
-char *key_emu_str[] =
+static char *key_emu_str[] =
 {N_("Intuitive"), N_("Emacs"), NULL};
 
-char *wrap_str[] =
+static char *wrap_str[] =
 {N_("None"), N_("Dynamic paragraphing"), N_("Type writer wrap"), NULL};
-
-extern int option_syntax_highlighting;
 
 void i18n_translate_array (char *array[])
 {

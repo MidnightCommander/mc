@@ -1768,8 +1768,6 @@ static void edit_left_delete_word (WEdit * edit)
     }
 }
 
-extern int column_highlighting;
-
 /*
    the start column position is not recorded, and hence does not
    undo as it happed. But who would notice.

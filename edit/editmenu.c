@@ -28,11 +28,6 @@
 
 #include "editcmddef.h"
 
-extern int edit_key_emulation;
-extern WButtonBar *edit_bar;
-extern Dlg_head *edit_dlg;
-extern WMenu *edit_menubar;
-
 #undef edit_message_dialog
 #define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&Ok"))
 #define CFocus(x) 
@@ -246,8 +241,6 @@ static menu_entry CmdMenuEmacs[] =
     {' ', N_("E&xternal Formatter      F19"), 'C', menu_c_form_cmd},
     {' ', N_("&Mail...                    "), 'M', menu_mail_cmd}
 };
-
-extern void menu_save_mode_cmd (void);
 
 static menu_entry OptMenu[] =
 {

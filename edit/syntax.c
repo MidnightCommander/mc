@@ -533,8 +533,6 @@ int this_try_alloc_color_pair (char *fg, char *bg)
 
 static char *error_file_name = 0;
 
-extern char *mc_home;
-
 static FILE *open_include_file (char *filename)
 {
     FILE *f;
