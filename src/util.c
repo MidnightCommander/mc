@@ -879,7 +879,7 @@ int get_compression_type (int fd)
     return 0;
 }
 
-const char *
+char *
 decompress_extension (int type)
 {
 	switch (type){
