@@ -1,5 +1,8 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in (EDITSRC): Add headers.
+	(CPPFLAGS): Remove reference to gtkedit.
+
 	Copy all necessary files from gtkedit.
 	* Makefile.in (EDITLINKS): Merge with EDITSRC, remove all
 	references.

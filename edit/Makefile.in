@@ -7,8 +7,7 @@ top_builddir = ..
 @MCF@
 
 CFLAGS = $(XCFLAGS)
-CPPFLAGS = $(XCPPFLAGS) -I$(top_srcdir) -I$(top_srcdir)/edit \
-	-I$(top_srcdir)/gtkedit
+CPPFLAGS = $(XCPPFLAGS) -I$(top_srcdir) -I$(top_srcdir)/edit
 LDFLAGS = $(XLDFLAGS) 
 DEFS = $(XDEFS)
 LIBS = @SHADOWLIB@ $(XLIBS) @TERMNET@ @PAMLIBS@ $(XLIB)
@@ -23,7 +22,7 @@ AR = @AR@
 
 EDITSRC = edit_key_translator.c edit.c editcmd.c editwidget.c \
 	editdraw.c editmenu.c wordproc.c syntax.c editoptions.c \
-	bookmark.c
+	bookmark.c editcmddef.h edit.h edit-widget.h
 
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 	  syntax.o editoptions.o bookmark.o
