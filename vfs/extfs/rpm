@@ -1,7 +1,7 @@
 #! /bin/sh
 #
 # Written by Erik Troan (ewt@redhat.com) 1996
-#            Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996
+#            Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996,2004
 #            Tomasz K³oczko (kloczek@rudy.mif.pg.gda.pl) 1997
 # minor changes by Wojtek Pilorz (wpilorz@bdk.lublin.pl) 1997
 # minor changes by Michele Marziani (marziani@fe.infn.it) 1997
@@ -25,6 +25,10 @@ else
   RPM="rpm"
 fi
 RPM2CPIO="rpm2cpio"
+SED="sed"
+# Surround the whole filename with single quotes and handle specially
+# \', ' and \ at the end of the string.
+SEDCMD="s/\\(\\\\\\?\\)'/'\\1\\1\\\\''/g;s/\\\\\$/'\\\\\\\\'/;s/^/'/;s/\$/'/"
 
 mcrpmfs_list ()
 {
@@ -34,7 +38,7 @@ mcrpmfs_list ()
     if test -z "$MCFASTRPM"; then
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
-    f="\"$1\""
+    f="`echo "$1" | $SED "$SEDCMD"`"
     FILEPREF="-r--r--r--   1 root     root    "
     DESC=`$RPM -qip "$f" 2>/dev/null` || {
 	echo "$FILEPREF 0 "`date +"%b %d %H:%M"`" ERROR"
@@ -171,9 +175,10 @@ mcrpmfs_copyout ()
 
 mcrpmfs_run ()
 {
+    f="`echo "$1" | $SED "$SEDCMD"`"
     case "$2" in
-	INSTALL) echo "Installing \"\"$1\"\""; $RPM -ivh "$1"; exit 0;;
-	UPGRADE) echo "Upgrading \"\"$1\"\""; $RPM -Uvh "$1"; exit 0;;
+	INSTALL) echo "Installing \"\"$f\"\""; $RPM -ivh "$1"; exit 0;;
+	UPGRADE) echo "Upgrading \"\"$f\"\""; $RPM -Uvh "$1"; exit 0;;
     esac
 }
 

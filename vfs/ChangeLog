@@ -1,5 +1,12 @@
 2004-08-21  Pavel S. Shirshov  <pavelsh@mail.ru>
 
+	* extfs/rpm: Modified workaround for spaces and single quotes 
+	in the path name.
+
+	Based on patch from Jakub Jelinek  <jakub@redhat.com>
+
+2004-08-21  Pavel S. Shirshov  <pavelsh@mail.ru>
+
 	* extfs/rpm: Don't show cpio contents in main rpm view.
 	Also avoids copying files from main view instead of from 
 	inside CONTENTS.cpio. The former is painfully slow as the whole 
