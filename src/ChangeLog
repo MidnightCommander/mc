@@ -1,3 +1,10 @@
+2000-04-15  Timur Bakeyev  <mc@bat.ru>
+
+	* dlg.c: Commited at last patch, that fixes screwed up right panel in
+	a long format. Occasionaly, all my colors problems also gone. All thanks
+	to Norbert Warmuth <nwarmuth@privat.circular.de>, who tracked down the 
+	problem, blames to me and Federico :)
+	
 2000-04-12  Timur Bakeyev  <mc@bat.ru>
 
 	* widget.c ([forward|backward]_word): Changed one more time - now it

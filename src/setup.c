@@ -527,10 +527,10 @@ load_mode (char *section)
 static char *
 do_load_string (char *s, char *ss, char *def)
 {
-    char *buffer = g_malloc (128);
+    char *buffer = g_malloc (BUF_SMALL);
     char *p;
 
-    load_string (s, ss, def, buffer, 128);
+    load_string (s, ss, def, buffer, BUF_SMALL);
 
     p = g_strdup (buffer);
     g_free (buffer);
