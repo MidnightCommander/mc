@@ -1,5 +1,10 @@
 2003-01-19  Pavel Roskin  <proski@gnu.org>
 
+	* dir.c (do_load_dir): Remove dotdot_found - handle_dirent()
+	doesn't process ".." now.  Don't add ".." to the "/" directory.
+	(do_reload_dir): Likewise.
+	Suggested by Bulia Byak <bulia@dr.com>
+
 	* dir.c (handle_dirent): If mc_lstat() fails, assume that the
 	entry is a directory.  This is useful for QNX Neutrino.
 

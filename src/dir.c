@@ -471,7 +471,6 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive,
     int status, link_to_dir, stale_link;
     int next_free = 0;
     struct stat buf;
-    int dotdot_found = 0;
 
     tree_store_start_check_cwd ();
 
@@ -499,15 +498,14 @@ do_load_dir (dir_list *list, sortfn *sort, int reverse, int case_sensitive,
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].buf = buf;
-	if (strcmp (dp->d_name, "..") == 0)
-	    dotdot_found = 1;
 	next_free++;
 	if (!(next_free % 32))
 	    rotate_dash ();
     }
 
     if (next_free) {
-	if (!dotdot_found)
+	/* Add ".." except the root directory */
+	if (strcmp (vfs_canon ("."), "/") != 0)
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, reverse, case_sensitive);
     } else {
@@ -578,7 +576,6 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     int next_free = 0;
     int i, status, link_to_dir, stale_link;
     struct stat buf;
-    int dotdot_found = 0;
     int marked_cnt;
     GHashTable *marked_files = g_hash_table_new (g_str_hash, g_str_equal);
 
@@ -651,8 +648,6 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
 	list->list[next_free].f.stale_link = stale_link;
 	list->list[next_free].f.dir_size_computed = 0;
 	list->list[next_free].buf = buf;
-	if (strcmp (dp->d_name, "..") == 0)
-	    dotdot_found = 1;
 	next_free++;
 	if (!(next_free % 16))
 	    rotate_dash ();
@@ -661,7 +656,8 @@ do_reload_dir (dir_list * list, sortfn * sort, int count, int rev,
     tree_store_end_check ();
     g_hash_table_destroy (marked_files);
     if (next_free) {
-	if (!dotdot_found)
+	/* Add ".." except the root directory */
+	if (strcmp (vfs_canon ("."), "/") != 0)
 	    add_dotdot_to_list (list, next_free++);
 	do_sort (list, sort, next_free - 1, rev, case_sensitive);
     } else
