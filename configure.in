@@ -19,21 +19,26 @@ AC_ISC_POSIX
 
 AC_PROG_CC_STDC
 
-
 dnl
-dnl Find glib 1.2.x.  This check should be kept close to the beginning,
-dnl as it tends to fail often.
+dnl Check if the user requested to compile with glib 2.x.  If not, use
+dnl glib 1.2.x.  This check should be kept close to the beginning, as it
+dnl fails for the users without any glib.
 dnl
+AC_ARG_WITH(glib2, [  --with-glib2             Use glib 2.x [[no]]])
 
-dnl This temporary variable is a workaround for a bug in Autoconf-2.53
-glib_path=$PATH:/usr/local/bin
+if test "x$with_glib2" = "xyes" ; then
+	PKG_CHECK_MODULES(GLIB, "glib-2.0")
+else
+	dnl This temporary variable is a workaround for a bug in Autoconf-2.53
+	glib_path=$PATH:/usr/local/bin
 
-dnl Klugde for FreeBSD, where glib-config is renamed to glib12-config.
-AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,[$glib_path])
+	dnl Klugde for FreeBSD, where glib-config is renamed to glib12-config.
+	AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,[$glib_path])
 
-AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config])
-AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
-AC_SUBST(GLIB_LIBS)
+	AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config (version 1.2.x only)])
+	AM_PATH_GLIB(1.2.6,,[AC_MSG_ERROR([Test for glib failed.
+GNU Midnight Commander requires glib 1.2.6 or above.])])
+fi
 
 
 AC_HEADER_MAJOR
