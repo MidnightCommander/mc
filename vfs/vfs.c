@@ -341,24 +341,24 @@ int mc_##name inarg \
 { \
     struct vfs_class *vfs; \
     int result; \
-    path = vfs_canon (path); \
-    vfs = vfs_get_class (path); \
+    char *mpath = vfs_canon (path); \
+    vfs = vfs_get_class (mpath); \
     result = vfs->name ? (*vfs->name)callarg : -1; \
-    g_free (path); \
+    g_free (mpath); \
     if (result == -1) \
 	errno = vfs->name ? ferrno (vfs) : E_NOTSUPP; \
     return result; \
 }
 
-MC_NAMEOP (chmod, (char *path, int mode), (vfs, path, mode))
-MC_NAMEOP (chown, (char *path, int owner, int group), (vfs, path, owner, group))
-MC_NAMEOP (utime, (char *path, struct utimbuf *times), (vfs, path, times))
-MC_NAMEOP (readlink, (char *path, char *buf, int bufsiz), (vfs, path, buf, bufsiz))
-MC_NAMEOP (unlink, (char *path), (vfs, path))
-MC_NAMEOP (symlink, (char *name1, char *path), (vfs, name1, path))
-MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, path, mode))
-MC_NAMEOP (rmdir, (char *path), (vfs, path))
-MC_NAMEOP (mknod, (char *path, int mode, int dev), (vfs, path, mode, dev))
+MC_NAMEOP (chmod, (const char *path, int mode), (vfs, path, mode))
+MC_NAMEOP (chown, (const char *path, int owner, int group), (vfs, path, owner, group))
+MC_NAMEOP (utime, (const char *path, struct utimbuf *times), (vfs, path, times))
+MC_NAMEOP (readlink, (const char *path, char *buf, int bufsiz), (vfs, path, buf, bufsiz))
+MC_NAMEOP (unlink, (const char *path), (vfs, path))
+MC_NAMEOP (symlink, (const char *name1, const char *path), (vfs, name1, path))
+MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, path, mode))
+MC_NAMEOP (rmdir, (const char *path), (vfs, path))
+MC_NAMEOP (mknod, (const char *path, int mode, int dev), (vfs, path, mode, dev))
 
 
 #define MC_HANDLEOP(name, inarg, callarg) \
@@ -376,7 +376,7 @@ int mc_##name inarg \
 }
 
 MC_HANDLEOP(read, (int handle, char *buffer, int count), (vfs_info (handle), buffer, count) )
-MC_HANDLEOP (write, (int handle, char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
+MC_HANDLEOP (write, (int handle, const char *buf, int nbyte), (vfs_info (handle), buf, nbyte))
 
 
 #define MC_RENAMEOP(name) \
@@ -414,18 +414,19 @@ mc_ctl (int handle, int ctlop, void *arg)
 }
 
 int
-mc_setctl (char *path, int ctlop, void *arg)
+mc_setctl (const char *path, int ctlop, void *arg)
 {
     struct vfs_class *vfs;
     int result;
+    char *mpath;
 
     if (!path)
 	vfs_die("You don't want to pass NULL to mc_setctl.");
     
-    path = vfs_canon (path);
-    vfs = vfs_get_class (path);    
-    result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;
-    g_free (path);
+    mpath = vfs_canon (path);
+    vfs = vfs_get_class (mpath);
+    result = vfs->setctl ? (*vfs->setctl)(vfs, mpath, ctlop, arg) : 0;
+    g_free (mpath);
     return result;
 }
 

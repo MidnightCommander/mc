@@ -137,7 +137,7 @@ extern int use_netrc;
 int mc_open (const char *filename, int flags, ...);
 int mc_close (int handle);
 int mc_read (int handle, char *buffer, int count);
-int mc_write (int handle, char *buffer, int count);
+int mc_write (int handle, const char *buffer, int count);
 off_t mc_lseek (int fd, off_t offset, int whence);
 int mc_chdir (const char *path);
 
@@ -149,22 +149,22 @@ int mc_stat (const char *path, struct stat *buf);
 int mc_lstat (const char *path, struct stat *buf);
 int mc_fstat (int fd, struct stat *buf);
 
-int mc_chmod (char *path, int mode);
-int mc_chown (char *path, int owner, int group);
-int mc_utime (char *path, struct utimbuf *times);
-int mc_readlink (char *path, char *buf, int bufsiz);
-int mc_unlink (char *path);
-int mc_symlink (char *name1, char *name2);
+int mc_chmod (const char *path, int mode);
+int mc_chown (const char *path, int owner, int group);
+int mc_utime (const char *path, struct utimbuf *times);
+int mc_readlink (const char *path, char *buf, int bufsiz);
+int mc_unlink (const char *path);
+int mc_symlink (const char *name1, const char *name2);
 int mc_link (const char *name1, const char *name2);
-int mc_mknod (char *, int, int);
+int mc_mknod (const char *, int, int);
 int mc_rename (const char *original, const char *target);
-int mc_rmdir (char *path);
-int mc_mkdir (char *path, mode_t mode);
+int mc_rmdir (const char *path);
+int mc_mkdir (const char *path, mode_t mode);
 
 char *mc_getlocalcopy (const char *pathname);
 int mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed);
 int mc_ctl (int fd, int ctlop, void *arg);
-int mc_setctl (char *path, int ctlop, void *arg);
+int mc_setctl (const char *path, int ctlop, void *arg);
 #ifdef HAVE_MMAP
 caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
 int mc_munmap (caddr_t addr, size_t len);
