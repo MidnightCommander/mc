@@ -139,13 +139,23 @@ desktop_init_at (const char *dir)
 void
 gdesktop_links_init (void)
 {
-	char *home_link_name;
+	char *link_name;
+	char *icon;
 	char *dir;
 
 	/* Create the link to the user's home directory so that he will have an icon */
-	home_link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
-	mc_symlink (gnome_user_home_dir, home_link_name);
-	g_free (home_link_name);
+	link_name = g_concat_dir_and_file (desktop_directory, _("Home directory"));
+	mc_symlink (gnome_user_home_dir, link_name);
+	g_free (link_name);
+
+	/* Create the link to the user's trash directory */
+	link_name = g_concat_dir_and_file (desktop_directory, "Trash");
+	icon = gnome_pixmap_file ("mc/gnome-trashcan.png");
+	mc_mkdir (link_name, S_IRUSR | S_IWUSR | S_IXUSR );
+	if (icon)
+		gnome_metadata_set (link_name, "icon-filename", strlen (icon) + 1, icon);
+	g_free (icon);
+	g_free (link_name);
 
 	/* Create custom links */
 
