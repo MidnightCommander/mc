@@ -476,11 +476,8 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	 */
 	panel->widget.wdata = (widget_data) vbox;
 	container->panel = panel;
-	if (!containers){
-		containers = g_list_alloc ();
-		containers->data = container;
-	} else  
-		containers = g_list_append (containers, container);
+	
+	containers = g_list_append (containers, container);
 
 	if (!current_panel_ptr){
 		current_panel_ptr = container;

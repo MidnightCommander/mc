@@ -1094,8 +1094,14 @@ static GtkWidget *
 panel_create_icon_display (WPanel *panel)
 {
 	GnomeIconList *ilist;
-
+	GtkStyle *style;
+			       
 	ilist = GNOME_ICON_LIST (gnome_icon_list_new (90, NULL, TRUE));
+	/* Set the background of the icon list to white */
+	style = gtk_style_copy (gtk_widget_get_style (GTK_WIDGET (ilist)));
+	style->bg [GTK_STATE_NORMAL] = style->bg [GTK_STATE_PRELIGHT];
+	gtk_widget_set_style (GTK_WIDGET (ilist), style);
+		
 	gnome_icon_list_set_separators (ilist, " /-_.");
 	gnome_icon_list_set_row_spacing (ilist, 2);
 	gnome_icon_list_set_col_spacing (ilist, 2);
