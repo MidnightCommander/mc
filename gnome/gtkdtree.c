@@ -503,7 +503,9 @@ gtk_dtree_construct (GtkDTree *dtree)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_set_sort_type (clist, GTK_SORT_ASCENDING);
 	gtk_clist_set_selection_mode (clist, GTK_SELECTION_BROWSE);
-				      
+	gtk_clist_set_column_auto_resize (clist, 0, TRUE);
+	gtk_clist_columns_autosize (clist);
+	
 	gtk_ctree_set_line_style (ctree, GTK_CTREE_LINES_DOTTED);
 	gtk_ctree_set_reorderable (ctree, TRUE);
 
@@ -547,3 +549,4 @@ gtk_dtree_get_type (void)
 	
 	return dtree_type;
 }
+

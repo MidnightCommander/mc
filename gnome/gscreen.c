@@ -1096,6 +1096,28 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 	return FALSE;
 }
 
+/**
+ * panel_drag_begin:
+ *
+ * Invoked when a drag is starting in the List view or the Icon view
+ */
+static void
+panel_drag_begin (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
+{
+	panel->dragging = 1;
+}
+
+/**
+ * panel_drag_end:
+ *
+ * Invoked when a drag has finished in the List view or the Icon view
+ */
+static void
+panel_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
+{
+	panel->dragging = 0;
+}
+
 /*
  * Create, setup the file listing display.
  */
@@ -1160,7 +1182,11 @@ panel_create_file_list (WPanel *panel)
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_widget_motion), panel);
-
+	gtk_signal_connect (GTK_OBJECT (file_list), "drag_begin",
+			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	gtk_signal_connect (GTK_OBJECT (file_list), "drag_end",
+			    GTK_SIGNAL_FUNC (panel_drag_end), panel);
+	
 	return sw;
 }
 
@@ -1390,6 +1416,10 @@ panel_create_icon_display (WPanel *panel)
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_icon_list_drag_data_received),
 			    panel);
+	gtk_signal_connect (GTK_OBJECT (ilist), "drag_begin",
+			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
+	gtk_signal_connect (GTK_OBJECT (ilist), "drag_end",
+			    GTK_SIGNAL_FUNC (panel_drag_end), panel);
 
 	/* These implement our drag-start activation code, as we have a pretty oveloaded widget */
 
@@ -1711,7 +1741,8 @@ panel_create_filter (Dlg_head *h, WPanel *panel, void **filter_w)
 static void
 panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
 {
-	do_panel_cd (panel, path, cd_exact);
+	if (!panel->dragging)
+		do_panel_cd (panel, path, cd_exact);
 }
 
 /**
@@ -1745,6 +1776,62 @@ tree_drag_open_directory (gpointer data)
 	return FALSE;
 }
 
+static GtkAdjustment *
+scrolled_window_get_vadjustment (GtkScrolledWindow *sw)
+{
+	GtkRange *vsb = GTK_RANGE (sw->vscrollbar);
+	GtkAdjustment *va = vsb->adjustment;
+
+	return va;
+}
+
+/**
+ * panel_tree_scrolling_is_desirable:
+ *
+ * If the cursor is in a position close to either edge (top or bottom)
+ * and there is possible to scroll the window, this routine returns
+ * true.
+ */
+static gboolean
+panel_tree_scrolling_is_desirable (WPanel *panel, int x, int y)
+{
+	GtkDTree *dtree = GTK_DTREE (panel->tree);
+	GtkAdjustment *va;
+
+	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
+
+	if (y < 10){
+		if (va->value > va->lower)
+			return TRUE;
+	} else {
+		if (y > (GTK_WIDGET (dtree)->allocation.height-10)){
+			if (va->value < va->upper)
+				return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+/**
+ * panel_tree_scroll:
+ *
+ * Timer callback invoked to scroll the tree window
+ */
+static gboolean
+panel_tree_scroll (gpointer data)
+{
+	WPanel *panel = data;
+	GtkAdjustment *va;
+
+	va = scrolled_window_get_vadjustment (panel->tree_scrolled_window);
+	
+	if (GTK_DTREE (panel->tree)->drag_motion_y < 10)
+		gtk_adjustment_set_value (va, va->value - va->step_increment);
+	else
+		gtk_adjustment_set_value (va, va->value + va->step_increment);
+}
+
 /** 
  * panel_tree_drag_motion:
  *
@@ -1762,11 +1849,17 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
         if (dtree->timer_id != -1)
 		gtk_timeout_remove (dtree->timer_id);
 
+	dtree->drag_motion_x = x;
+	dtree->drag_motion_y = y;
+
+	if (panel_tree_scrolling_is_desirable (panel, x, y)){
+		dtree->timer_id = gtk_timeout_add (200, panel_tree_scroll, data);
+		return TRUE;
+	}
+	
 	r = gtk_clist_get_selection_info (
 		GTK_CLIST (widget), x, y, &row, &col);
 
-	dtree->drag_motion_x = x;
-	dtree->drag_motion_y = y;
 	dtree->timer_id = gtk_timeout_add (200, tree_drag_open_directory, data);
 
 	return TRUE;
@@ -1821,7 +1914,35 @@ panel_create_tree_view (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_tree_drag_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_leave",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_leave), panel);
+	
 	return tree;
+}
+
+/*
+ * create_and_setup_pane:
+ *
+ * Creates the horizontal GtkPaned widget that holds the tree
+ * and the listing/iconing displays
+ */
+static GtkWidget *
+create_and_setup_pane (WPanel *panel)
+{
+	GtkWidget *pane;
+	GtkWidget *tree = panel->tree;
+	GdkFont *tree_font = tree->style->font;
+	
+	pane = gtk_hpaned_new ();
+
+	/*
+	 * Hack: set the default startup size for the pane without
+	 * using _set_usize which would set the minimal size
+	 */
+	GTK_PANED (pane)->child1_size = 20 * gdk_string_width (tree_font, "W");
+	GTK_PANED (pane)->position_set = TRUE;
+	
+	gtk_widget_show (pane);
+
+	return pane;
 }
 
 static void
@@ -1894,7 +2015,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p;
-	GtkWidget *display, *tree_scrolled_window;
+	GtkWidget *display;
 		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
@@ -1903,13 +2024,13 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Tree View
 	 */
-	tree_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+	panel->tree_scrolled_window = gtk_scrolled_window_new (NULL, NULL);
 	gtk_scrolled_window_set_policy (
-		GTK_SCROLLED_WINDOW (tree_scrolled_window),
+		GTK_SCROLLED_WINDOW (panel->tree_scrolled_window),
 		GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	panel->tree = panel_create_tree_view (panel);
-	gtk_container_add (GTK_CONTAINER (tree_scrolled_window), panel->tree);
-	gtk_widget_show_all (tree_scrolled_window);
+	gtk_container_add (GTK_CONTAINER (panel->tree_scrolled_window), panel->tree);
+	gtk_widget_show_all (panel->tree_scrolled_window);
 	
 	/*
 	 * Icon and Listing display
@@ -1930,10 +2051,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * Pane
 	 */
-	panel->pane = gtk_hpaned_new ();
-	gtk_widget_show (panel->pane);
-
-	gtk_paned_add1 (GTK_PANED (panel->pane), tree_scrolled_window);
+	panel->pane = create_and_setup_pane (panel);
+	gtk_paned_add1 (GTK_PANED (panel->pane), panel->tree_scrolled_window);
 	
 	/*
 	 * Filter

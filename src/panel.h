@@ -129,7 +129,8 @@ typedef struct {
     void *scrollbar;
     void *status;
     void *ministatus;
-
+    void *tree_scrolled_window;
+	
     void *filter_w;		/* A WInput* */
     void *current_dir;		/* A WInput* */
     int estimated_total;
@@ -141,6 +142,8 @@ typedef struct {
     /* Used during drag and drop */
     int maybe_start_drag;
     int click_x, click_y;
+
+    int dragging;
 #endif
 } WPanel;
 
