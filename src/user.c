@@ -265,7 +265,7 @@ expand_format (struct WEdit *edit_widget, char c, int quote)
 	    return block;
 	}			/* sub case block */
     }				/* switch */
-    return g_strdup ("");
+    return g_strdup ("%");
 }
 
 /*

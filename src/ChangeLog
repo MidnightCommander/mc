@@ -1,3 +1,8 @@
+2003-11-19  Pavel Roskin  <proski@gnu.org>
+
+	* user.c (expand_format): Preserve "%" if followed by a
+	characted without special meaning.
+
 2003-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* glibcompat.h: Define g_try_realloc as realloc for glib 1.2.x.
