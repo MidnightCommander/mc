@@ -1,2 +1,1 @@
-alias mc 'setenv MC_PWD_FILE /tmp/mc-$USER/mc.pwd.$$; @prefix@/bin/mc -P $MC_PWD_FILE \!*; cd `cat $MC_PWD_FILE`; unsetenv MC_PWD_FILE'
-
+alias mc 'setenv MC_PWD_FILE /tmp/mc-$USER/mc.pwd.$$; @prefix@/bin/mc -P "$MC_PWD_FILE" \!*; cd "`cat $MC_PWD_FILE`"; rm -f "$MC_PWD_FILE"; unsetenv MC_PWD_FILE'
