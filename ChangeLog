@@ -1,3 +1,8 @@
+2001-03-07  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/changelog.syntax: Require space after asterisk to have
+	it highlighted.
+
 2001-03-02  Pavel Roskin  <proski@gnu.org>
 
 	* aclocal.m4 (MC_HPUX_PROG_CC_STDC): Remove, it's obsolete.

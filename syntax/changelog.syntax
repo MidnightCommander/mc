@@ -4,8 +4,8 @@ context default
     keyword \t+() brightmagenta/23
     spellcheck
 
-context linestart \t\* : brightcyan/17
-context linestart \s\s\s\s\s\s\s\s\* : brightcyan/17
+context linestart \t\*\s : brightcyan/17
+context linestart \s\s\s\s\s\s\s\s\*\s : brightcyan/17
 
 context linestart 19+-+\s \n            yellow/24
     keyword <+@+> 			brightred/19
