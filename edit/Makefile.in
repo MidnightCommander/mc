@@ -24,7 +24,7 @@ EDITSRC = edit.c editcmd.c editwidget.c edit_key_translator.c editdraw.c \
 EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 	  syntax.o editoptions.o
 
-DIST = 	Makefile.in README.edit $(EDITSRC)
+DIST = 	Makefile.in $(EDITSRC)
 
 all: @LIBEDIT_A@
 

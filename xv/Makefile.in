@@ -134,7 +134,10 @@ distclean: cleansourcelinks
 
 distcopy:
 	$(CP) $(DISTXV) ../../mc-$(VERSION)/xv
-	cd support/xview_private; $(CP) $(XVSUPPXVHDRS) ../../../../mc-$(VERSION)/xv/support/xview_private
+	mkdir ../../mc-$(VERSION)/xv/support
+	mkdir ../../mc-$(VERSION)/xv/support/xview_private
+	cd support/xview_private; $(CP) $(XVSUPPXVHDRS) \
+		../../../../mc-$(VERSION)/xv/support/xview_private
 
 install: install_@mxc@
 

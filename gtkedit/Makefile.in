@@ -21,14 +21,14 @@ AR = @AR@
 EDITSRC = edit.c editcmd.c editdraw.c \
 	editwidget.c gtkedit.c gtkeditkey.c \
 	mousemark.c propfont.c syntax.c wordproc.c \
-	config.h edit.h editcmddef.h global.h gtkedit.h \
-	libgettext.h lkeysym.h mousemark.h my_string.h
+	edit.h editcmddef.h global.h gtkedit.h \
+	libgettext.h lkeysym.h mousemark.h
 
 EDITOBJS = edit.o editcmd.o editdraw.o \
 	editwidget.o gtkedit.o gtkeditkey.o \
 	mousemark.o propfont.o syntax.o wordproc.o \
 
-DIST = 	Makefile.in README.edit $(EDITSRC)
+DIST = 	Makefile.in $(EDITSRC)
 
 all: libgtkedit.a
 

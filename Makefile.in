@@ -99,17 +99,12 @@ distclean:
 	rm -f vfs/extfs/{ftplist,uzip,uzoo,lslR,ulha,ucpio,deb,urar,uar}
 	rm -f $(srcdir)/config.log $(srcdir)/config.status 
 
-distdirs:
-	mkdir ../mc-$(VERSION); \
-	for I in $(alldirs) extfs support support/xview_private; do \
-		mkdir ../mc-$(VERSION)/$$I; \
-	done
-
 distcopy:
 	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile
+	mkdir ../mc-$(VERSION)
 	cp $(DISTMAIN) ../mc-$(VERSION);
-	-mkdir ../mc-$(VERSION)/intl
 	for I in $(alldirs); do \
+	    mkdir ../mc-$(VERSION)/$$I; \
 	    cd $$I ; \
 	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
 	    cd ..; done
@@ -120,6 +115,5 @@ distcopy:
 	(cd ..; tar cvf - mc-$(VERSION) | \
 	gzip -f9 > mc-$(VERSION).tar.gz)
 
-dist: configure config.h.in distdirs distcopy
-
+dist: configure config.h.in distcopy
 
