@@ -4,6 +4,7 @@
 	does what the comment above it says.
 	* main.c (maybe_cd): Removed unused parameter.
 	* main.h: Likewise.
+	* screen.c: Marked unused parameters. Updated use of maybe_cd.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 

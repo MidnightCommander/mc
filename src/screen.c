@@ -81,13 +81,13 @@ typedef void (*info_fn) (file_entry *, char * buf, size_t bufsize);
  */
 typedef struct format_e {
     struct format_e *next;
-    int    requested_field_len;
-    int    field_len;
-    int    just_mode;
-    int    expand;
-    info_fn string_fn;
-    const char   *title;
-    const char   *id;
+    unsigned int     requested_field_len;
+    unsigned int     field_len;
+    int              just_mode;
+    int              expand;
+    info_fn          string_fn;
+    const char      *title;
+    const char      *id;
 } format_e;
 
 /* If true, show the mini-info on the panel */
@@ -123,6 +123,7 @@ static const char *mini_status_format (WPanel *panel);
 static void
 set_colors (WPanel *panel)
 {
+    (void) panel;
     standend ();
     attrset (NORMAL_COLOR);
 }
@@ -525,7 +526,6 @@ format_file (char *dest, size_t destsize, WPanel *panel, int file_index, int wid
 {
     char buffer[BUF_1K];
     int      color, length, empty_line;
-    const char *txt;
     char     *old_pos;
     char     *cdest = dest;
     format_e *format, *home;
@@ -559,7 +559,7 @@ format_file (char *dest, size_t destsize, WPanel *panel, int file_index, int wid
 	    len = format->field_len;
 	    if (len + length > width)
 		len = width - length;
-	    if (len + (cdest - dest) > destsize)
+	    if (len + (cdest - dest) > (int) destsize)
 		len = destsize - (cdest - dest);
 	    if (len <= 0)
 		break;
@@ -1102,7 +1102,7 @@ paint_frame (WPanel *panel)
                 txt = format->title;
 
 		header_len = strlen (txt);
-		if (header_len > format->field_len)
+		if ((unsigned int) header_len > format->field_len)
 		    header_len = format->field_len;
 
                 attrset (MARKED_COLOR);
@@ -1630,23 +1630,23 @@ move_selection (WPanel *panel, int lines)
 }
 
 static cb_ret_t
-move_left (WPanel *panel, int c_code)
+move_left (WPanel *panel)
 {
     if (panel->split) {
 	move_selection (panel, -llines (panel));
 	return MSG_HANDLED;
     } else
-	return maybe_cd (c_code, 0);
+	return maybe_cd (1); /* cd .. */
 }
 
 static int
-move_right (WPanel *panel, int c_code)
+move_right (WPanel *panel)
 {
     if (panel->split) {
 	move_selection (panel, llines (panel));
 	return MSG_HANDLED;
     } else
-	return maybe_cd (c_code, 1);
+	return maybe_cd (0); /* cd (selection) */
 }
 
 static void
@@ -1678,6 +1678,7 @@ prev_page (WPanel *panel)
 static void
 ctrl_prev_page (WPanel *panel)
 {
+    (void) panel;
     do_cd ("..", cd_exact);
 }
 
@@ -2068,14 +2069,14 @@ typedef struct {
 } panel_key_map;
 
 static void cmd_do_enter(WPanel *wp) { (void) do_enter(wp); }
-static void cmd_view_simple(WPanel *wp) { view_simple_cmd(); }
-static void cmd_edit_new(WPanel *wp) { edit_cmd_new(); }
-static void cmd_copy_local(WPanel *wp) { copy_cmd_local(); }
-static void cmd_rename_local(WPanel *wp) { ren_cmd_local(); }
-static void cmd_delete_local(WPanel *wp) { delete_cmd_local(); }
-static void cmd_select(WPanel *wp) { select_cmd(); }
-static void cmd_unselect(WPanel *wp) { unselect_cmd(); }
-static void cmd_reverse_selection(WPanel *wp) { reverse_selection_cmd(); }
+static void cmd_view_simple(WPanel *wp) { (void) wp; view_simple_cmd(); }
+static void cmd_edit_new(WPanel *wp) { (void) wp; edit_cmd_new(); }
+static void cmd_copy_local(WPanel *wp) { (void) wp; copy_cmd_local(); }
+static void cmd_rename_local(WPanel *wp) { (void) wp; ren_cmd_local(); }
+static void cmd_delete_local(WPanel *wp) { (void) wp; delete_cmd_local(); }
+static void cmd_select(WPanel *wp) { (void) wp; select_cmd(); }
+static void cmd_unselect(WPanel *wp) { (void) wp; unselect_cmd(); }
+static void cmd_reverse_selection(WPanel *wp) { (void) wp; reverse_selection_cmd(); }
 
 static const panel_key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
@@ -2157,10 +2158,10 @@ panel_key (WPanel *panel, int key)
     /* We do not want to take a key press if nothing can be done with it */
     /* The command line widget may do something more useful */
     if (key == KEY_LEFT)
-	return move_left (panel, key);
+	return move_left (panel);
 
     if (key == KEY_RIGHT)
-	return move_right (panel, key);
+	return move_right (panel);
 
     if (is_abort_char (key)) {
 	panel->searching = 0;
