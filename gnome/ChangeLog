@@ -1,3 +1,9 @@
+1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gpopup.c (create_actions): The tests for F_PANEL and F_DICON
+	were wrong.  Fixed them.  This does not mean that the popup menus
+	are right, though.
+
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gscreen.c gdesktop.c gdnd.h: enable dragging locale files 
@@ -61,7 +67,6 @@
 	* gdesktop-icon.c (desktop_icon_reshape): Set the position and
 	size fields as computed for layout.
 
->>>>>>> 1.192
 1998-12-11  Owen Taylor  <otaylor@redhat.com>
 
 	* gdesktop.c (editing_started): Grab on the window for the

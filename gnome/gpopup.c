@@ -238,10 +238,10 @@ create_actions (GtkWidget *menu, WPanel *panel, int panel_row, char *filename)
 	for (action = file_actions; action->text; action++) {
 		/* First, try F_PANEL and F_DICON flags */
 
-		if (panel && !(action->flags & F_PANEL))
+		if (!panel && (action->flags & F_PANEL))
 			continue;
 
-		if (!panel && (action->flags & F_DICON))
+		if (panel && (action->flags & F_DICON))
 			continue;
 
 		/* Items with F_ALL bypass any other condition */
