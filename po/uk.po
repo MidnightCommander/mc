@@ -3423,11 +3423,11 @@ msgstr ""
 
 #: src/cmd.c:1459
 msgid " Setup saved to ~/"
-msgstr ""
+msgstr " Установки збережено в ~/"
 
 #: src/cmd.c:1464
 msgid " Setup "
-msgstr ""
+msgstr " Установки "
 
 #: src/command.c:170
 #, c-format
@@ -3435,6 +3435,8 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
+" Неможливо зм╕нити директор╕ю на '%s' \n"
+" %s "
 
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
@@ -3522,6 +3524,8 @@ msgid ""
 " Can't generate unique filename \n"
 " %s "
 msgstr ""
+" Неможливо створити ун╕кальну назву файлу \n"
+" %s "
 
 #: src/ext.c:150 src/user.c:511
 #, c-format
