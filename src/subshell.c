@@ -1100,7 +1100,7 @@ static int pty_open_master (char *pty_name)
     pty_master = getpt ();
 #else
     strcpy (pty_name, "/dev/ptmx");
-    pty_master = open (pty_name, O_RDWR)
+    pty_master = open (pty_name, O_RDWR);
 #endif 
     if (pty_master == -1
 	|| grantpt (pty_master) == -1		  /* Grant access to slave */

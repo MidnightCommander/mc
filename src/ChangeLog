@@ -1,3 +1,7 @@
+1999-05-24  Brandon S. Allbery <allbery@ece.cmu.edu>
+
+	* subshell.c (pty_open_master): Added missing comma.p
+
 Mon May 17 07:37:12 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* subshell.c (pty_open_master): use getpt () if available to open
