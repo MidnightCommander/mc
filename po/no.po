@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.29\n"
-"POT-Creation-Date: 1999-04-07 16:22+0100\n"
+"POT-Creation-Date: 1999-04-09 02:33+0200\n"
 "PO-Revision-Date: 1999-04-07 16:26+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -145,7 +145,7 @@ msgid "Set Filter"
 msgstr "Sett filter"
 
 #: gnome/gcmd.c:652 gnome/gcmd.c:693 gnome/gcmd.c:698 gnome/gcmd.c:702
-#: gnome/gscreen.c:2534
+#: gnome/gscreen.c:2535
 msgid "Show all files"
 msgstr "Vis alle filer"
 
@@ -158,12 +158,12 @@ msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
 "For example:\n"
-"*.gif will show just gif images"
+"*.png will show just png images"
 msgstr ""
 "Skriv inn et filter for filer i panelvisningen.\n"
 "\n"
 "For eksempel:\n"
-"*.gif vil kun vise gif bilder"
+"*.png vil kun vise png bilder"
 
 #: gnome/gcmd.c:677
 msgid "Enter a Regular Expression to filter files in the panel view."
@@ -180,6 +180,30 @@ msgstr "Skriv inn ekstra argumenter:"
 #: gnome/gcmd.c:797
 msgid "Desktop entry properties"
 msgstr "Egenskaper for skrivebordsoppføring"
+
+#: gnome/gcmd.c:822
+msgid "Select File"
+msgstr "Velg fil"
+
+#: gnome/gcmd.c:830
+msgid ""
+"Enter a filter here to select files in the panel view with.\n"
+"\n"
+"For example:\n"
+"*.png will select all png images"
+msgstr ""
+"Skriv inn et filter for å velge filer i panelvisningen.\n"
+"\n"
+"For eksempel:\n"
+"*.png vil vise alle png bilder"
+
+#: gnome/gcmd.c:832
+msgid "Enter a regular expression here to select files in the panel view with."
+msgstr "Skriv inn et vanlig uttrykk for bruk som filter i panelvisningen."
+
+#: gnome/gcmd.c:875 src/cmd.c:545 src/cmd.c:596
+msgid "  Malformed regular expression  "
+msgstr "  Malformert vanlig uttrykk  "
 
 #: gnome/gcustom-layout.c:36
 msgid "Access Time"
@@ -250,7 +274,7 @@ msgstr "Synlige kolonner"
 msgid "Custom View"
 msgstr "Egendefinert visning"
 
-#: gnome/gdesktop.c:422 gnome/gdesktop.c:2074 gnome/gmount.c:318
+#: gnome/gdesktop.c:422 gnome/gdesktop.c:2081 gnome/gmount.c:318
 msgid "Warning"
 msgstr "Advarsel"
 
@@ -272,17 +296,17 @@ msgid "Error"
 msgstr "Feil"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2070
+#: gnome/gdesktop.c:2077
 msgid "Home directory"
 msgstr "Hjemmekatalog"
 
-#: gnome/gdesktop.c:2075
+#: gnome/gdesktop.c:2082
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
 "Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
 
-#: gnome/gdesktop.c:2419
+#: gnome/gdesktop.c:2426
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -296,48 +320,48 @@ msgstr ""
 "\n"
 "Kan ikke sette bakgrunnen."
 
-#: gnome/gdesktop.c:2428 gnome/glayout.c:362
+#: gnome/gdesktop.c:2435 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2428 gnome/glayout.c:362
+#: gnome/gdesktop.c:2435 gnome/glayout.c:362
 msgid "Launch a new terminal in the current directory"
 msgstr "Starter en ny terminal i aktiv katalog"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2430 gnome/glayout.c:364
+#: gnome/gdesktop.c:2437 gnome/glayout.c:364
 msgid "_Directory..."
 msgstr "Katalog..."
 
-#: gnome/gdesktop.c:2430 gnome/glayout.c:364
+#: gnome/gdesktop.c:2437 gnome/glayout.c:364
 msgid "Creates a new directory"
 msgstr "Oppretter en ny katalog"
 
-#: gnome/gdesktop.c:2431
+#: gnome/gdesktop.c:2438
 msgid "_Launcher..."
 msgstr "_Oppstarter..."
 
-#: gnome/gdesktop.c:2431
+#: gnome/gdesktop.c:2438
 msgid "Creates a new launcher"
 msgstr "Oppretter en ny oppstarter"
 
-#: gnome/gdesktop.c:2439 gnome/glayout.c:452
+#: gnome/gdesktop.c:2446 gnome/glayout.c:452
 msgid "Arrange Icons"
 msgstr "Plasser ikonene"
 
-#: gnome/gdesktop.c:2440
+#: gnome/gdesktop.c:2447
 msgid "Create New Window"
 msgstr "Opprett nytt vindu"
 
-#: gnome/gdesktop.c:2442
+#: gnome/gdesktop.c:2449
 msgid "Recreate Desktop Shortcuts"
 msgstr "Lag skrivebordsnarveiene på nytt"
 
-#: gnome/gdesktop.c:2443 gnome/glayout.c:455
+#: gnome/gdesktop.c:2450 gnome/glayout.c:455
 msgid "Rescan Desktop"
 msgstr "Oppdater skrivebordet"
 
-#: gnome/gdesktop.c:2444
+#: gnome/gdesktop.c:2451
 msgid "Configure Background Image"
 msgstr "Konfigurer bakgrunnsbilde"
 
@@ -403,7 +427,7 @@ msgid "Replace it?"
 msgstr "Erstatt den?"
 
 #: gnome/gdialogs.c:567 gtkedit/editwidget.c:1069 src/file.c:802
-#: src/screen.c:2305 src/screen.c:2335 src/tree.c:1024
+#: src/screen.c:2306 src/screen.c:2336 src/tree.c:1024
 msgid "Copy"
 msgstr "Kopier"
 
@@ -700,7 +724,7 @@ msgstr "Søk"
 msgid "Search for a file in the current Panel"
 msgstr "Søk etter en fil i det aktive panelet"
 
-#: gnome/glayout.c:404 gnome/gscreen.c:1478
+#: gnome/glayout.c:404 gnome/gscreen.c:1479
 msgid "_Rescan Directory"
 msgstr "Oppdate_r kataloginnholdet"
 
@@ -916,7 +940,7 @@ msgid "Drop Action"
 msgstr "Handlig ved slipp"
 
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2303 src/screen.c:2333
+#: src/screen.c:2304 src/screen.c:2334
 msgid "View"
 msgstr "Se på"
 
@@ -929,7 +953,7 @@ msgid "Use default View action"
 msgstr "Bruk standard handling for visning"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2304 src/screen.c:2334 src/view.c:2013
+#: src/screen.c:2305 src/screen.c:2335 src/view.c:2013
 msgid "Edit"
 msgstr "Rediger"
 
@@ -1079,8 +1103,8 @@ msgstr "Se på ufiltrert"
 msgid "Copy..."
 msgstr "Kopier..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2308
-#: src/screen.c:2338
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2309
+#: src/screen.c:2339
 msgid "Delete"
 msgstr "Slett"
 
@@ -1244,150 +1268,150 @@ msgstr "Tittel"
 msgid "Select icon"
 msgstr "Velg ikon"
 
-#: gnome/gscreen.c:1478
+#: gnome/gscreen.c:1479
 msgid "Reloads the current directory"
 msgstr "Leser aktiv katalog på nytt"
 
-#: gnome/gscreen.c:1480
+#: gnome/gscreen.c:1481
 msgid "New _Directory..."
 msgstr "Ny _Katalog..."
 
-#: gnome/gscreen.c:1480
+#: gnome/gscreen.c:1481
 msgid "Creates a new directory here"
 msgstr "Oppretter en ny katalog her"
 
-#: gnome/gscreen.c:1658
+#: gnome/gscreen.c:1659
 msgid "All files"
 msgstr "Alle filer"
 
-#: gnome/gscreen.c:1660
+#: gnome/gscreen.c:1661
 msgid "Archives and compressed files"
 msgstr "Arkiver og komprimerte filer"
 
-#: gnome/gscreen.c:1662
+#: gnome/gscreen.c:1663
 msgid "RPM/DEB files"
 msgstr "RPM/DEB filer"
 
-#: gnome/gscreen.c:1664
+#: gnome/gscreen.c:1665
 msgid "Text/Document files"
 msgstr "Tekst-/dokumentfiler"
 
-#: gnome/gscreen.c:1666
+#: gnome/gscreen.c:1667
 msgid "HTML and SGML files"
 msgstr "HTML- og SGML-filer"
 
-#: gnome/gscreen.c:1668
+#: gnome/gscreen.c:1669
 msgid "Postscript and PDF files"
 msgstr "Postscript- of PDF-filer"
 
-#: gnome/gscreen.c:1670
+#: gnome/gscreen.c:1671
 msgid "Spreadsheet files"
 msgstr "Regnearkfiler"
 
-#: gnome/gscreen.c:1672
+#: gnome/gscreen.c:1673
 msgid "Image files"
 msgstr "Bildefiler"
 
-#: gnome/gscreen.c:1675
+#: gnome/gscreen.c:1676
 msgid "Video/animation files"
 msgstr "Video-/animasjonsfiler"
 
-#: gnome/gscreen.c:1677
+#: gnome/gscreen.c:1678
 msgid "Audio files"
 msgstr "Lydfiler"
 
-#: gnome/gscreen.c:1679
+#: gnome/gscreen.c:1680
 msgid "C program files"
 msgstr "C programfiler"
 
-#: gnome/gscreen.c:1681
+#: gnome/gscreen.c:1682
 msgid "C++ program files"
 msgstr "C++ programfiler"
 
-#: gnome/gscreen.c:1683
+#: gnome/gscreen.c:1684
 msgid "Objective-C program files"
 msgstr "Objektiv-C programfiler"
 
-#: gnome/gscreen.c:1685
+#: gnome/gscreen.c:1686
 msgid "Scheme program files"
 msgstr "Scheme programfiler"
 
-#: gnome/gscreen.c:1687
+#: gnome/gscreen.c:1688
 msgid "Assembler program files"
 msgstr "Assembler programfiler"
 
-#: gnome/gscreen.c:1689
+#: gnome/gscreen.c:1690
 msgid "Misc. program files"
 msgstr "Forskj. programfiler"
 
-#: gnome/gscreen.c:1691
+#: gnome/gscreen.c:1692
 msgid "Font files"
 msgstr "Skrifttypefiler"
 
-#: gnome/gscreen.c:1818
+#: gnome/gscreen.c:1819
 #, c-format
 msgid "Search: %s"
 msgstr "Søk: %s"
 
-#: gnome/gscreen.c:1828
+#: gnome/gscreen.c:1829
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes i %d fil"
 
-#: gnome/gscreen.c:1828
+#: gnome/gscreen.c:1829
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes i %d filer"
 
-#: gnome/gscreen.c:1854 src/screen.c:670
+#: gnome/gscreen.c:1855 src/screen.c:670
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
-#: gnome/gscreen.c:1908
+#: gnome/gscreen.c:1909
 msgid "Filter"
 msgstr "Filter"
 
-#: gnome/gscreen.c:2356
+#: gnome/gscreen.c:2357
 msgid "Back"
 msgstr "Tilbake"
 
-#: gnome/gscreen.c:2356
+#: gnome/gscreen.c:2357
 msgid "Go to the previously visited directory"
 msgstr "Gå til tidligere vist katalog"
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2359
 msgid "Up"
 msgstr "Opp"
 
-#: gnome/gscreen.c:2358
+#: gnome/gscreen.c:2359
 msgid "Go up a level in the directory heirarchy"
 msgstr "Gå opp ett nivå i kataloghierarkiet"
 
-#: gnome/gscreen.c:2360
+#: gnome/gscreen.c:2361
 msgid "Forward"
 msgstr "Fremover"
 
-#: gnome/gscreen.c:2360
+#: gnome/gscreen.c:2361
 msgid "Go to the next directory"
 msgstr "Gå til neste katalog"
 
-#: gnome/gscreen.c:2363 src/tree.c:1020
+#: gnome/gscreen.c:2364 src/tree.c:1020
 msgid "Rescan"
 msgstr "Oppdater"
 
-#: gnome/gscreen.c:2363
+#: gnome/gscreen.c:2364
 msgid "Rescan the current directory"
 msgstr "Oppdater aktiv katalog"
 
-#: gnome/gscreen.c:2366
+#: gnome/gscreen.c:2367
 msgid "Home"
 msgstr "Hjemme"
 
-#: gnome/gscreen.c:2366
+#: gnome/gscreen.c:2367
 msgid "Go to your home directory"
 msgstr "Gå til din hjemmekatalog"
 
-#: gnome/gscreen.c:2512
+#: gnome/gscreen.c:2513
 msgid "Location:"
 msgstr "Sted:"
 
@@ -1500,8 +1524,10 @@ msgstr " Kunne ikke åpne /etc/fstab filen"
 #: gnome/gmount.c:319
 #, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr "Kunne ikke lage symlenke fra %s til %s; får ikke et slikt skrivebordsikon."
-"Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
+msgstr ""
+"Kunne ikke lage symlenke fra %s til %s; får ikke et slikt "
+"skrivebordsikon.Kunne ikke lage symbolsk lenke fra %s til %s; får ikke "
+"skrivebordsikoner."
 
 #: gnome/gmount.c:371 gnome/gmount.c:386
 #, c-format
@@ -1532,7 +1558,7 @@ msgstr "Enhet %d"
 #: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
 #: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
 #: gtkedit/editcmd.c:1954 gtkedit/editwidget.c:952 src/dir.c:386
-#: src/screen.c:2323 src/tree.c:692 src/tree.c:698 src/wtools.c:222
+#: src/screen.c:2324 src/tree.c:692 src/tree.c:698 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr " Feil "
@@ -2150,8 +2176,8 @@ msgstr " Alternativer for redigerer "
 msgid "Error initialising editor.\n"
 msgstr "Feil under initialisering av editor.\n"
 
-#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1696 src/screen.c:2301
-#: src/screen.c:2331 src/tree.c:1018 src/view.c:2004
+#: gtkedit/editwidget.c:1065 src/help.c:806 src/main.c:1696 src/screen.c:2302
+#: src/screen.c:2332 src/tree.c:1018 src/view.c:2004
 msgid "Help"
 msgstr "Hjelp"
 
@@ -3049,10 +3075,6 @@ msgstr " Sett uttrykk for filtrering av filnavn"
 #: src/cmd.c:517
 msgid " Select "
 msgstr " Velg "
-
-#: src/cmd.c:545 src/cmd.c:596
-msgid "  Malformed regular expression  "
-msgstr "  Malformert vanlig uttrykk  "
 
 #: src/cmd.c:569
 msgid " Unselect "
@@ -4862,7 +4884,7 @@ msgstr ""
 " du utføre en manuell gjenlesing av katalogen. Se manualsiden for \n"
 " detaljene."
 
-#: src/main.c:1697 src/screen.c:2302 src/screen.c:2332
+#: src/main.c:1697 src/screen.c:2303 src/screen.c:2333
 msgid "Menu"
 msgstr "Meny"
 
@@ -5223,15 +5245,15 @@ msgstr " Vil du virkelig kjøre? "
 msgid " No action taken "
 msgstr " Ingen handling utført "
 
-#: src/screen.c:2306 src/screen.c:2336 src/tree.c:1026
+#: src/screen.c:2307 src/screen.c:2337 src/tree.c:1026
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2307 src/screen.c:2337 src/tree.c:1030
+#: src/screen.c:2308 src/screen.c:2338 src/tree.c:1030
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/screen.c:2323
+#: src/screen.c:2324
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
