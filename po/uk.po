@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.40\n"
-"POT-Creation-Date: 2000-08-30 16:00+0300\n"
+"POT-Creation-Date: 2000-09-14 12:07+0300\n"
 "PO-Revision-Date: 1999-11-25 12:24+0200\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -115,11 +115,11 @@ msgstr "Команда розробник╕в Midnight Commander"
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "про помилки пов╕домляйте: http://bugs.gnome.org, or use gnome-bug"
 
-#: gnome/gcmd.c:115
+#: gnome/gcmd.c:115 gnome/gmc-window.c:68
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:118
+#: gnome/gcmd.c:118 gnome/gmc-window.c:71
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "Редакц╕я Midnight Commander для GNOME."
 
@@ -380,20 +380,20 @@ msgid ""
 "We are unable to set the background."
 msgstr ""
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:362
+#: gnome/gdesktop.c:2861 gnome/glayout.c:366
 msgid "_Terminal"
 msgstr "Терм╕нал"
 
-#: gnome/gdesktop.c:2861 gnome/glayout.c:363
+#: gnome/gdesktop.c:2861 gnome/glayout.c:367
 msgid "Launch a new terminal in the current directory"
 msgstr "Запустити терм╕нал в поточному каталогу"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2863 gnome/glayout.c:365
+#: gnome/gdesktop.c:2863 gnome/glayout.c:369
 msgid "_Directory..."
 msgstr "Каталог..."
 
-#: gnome/gdesktop.c:2863 gnome/glayout.c:366
+#: gnome/gdesktop.c:2863 gnome/glayout.c:370
 msgid "Creates a new directory"
 msgstr "Створити новий каталог"
 
@@ -437,7 +437,7 @@ msgstr "За часом останньо╖ модиф╕кац╕╖"
 msgid "By Time Last _Changed"
 msgstr "За часом останньо╖ зм╕ни"
 
-#: gnome/gdesktop.c:2884 gnome/glayout.c:462
+#: gnome/gdesktop.c:2884 gnome/glayout.c:466
 msgid "_Arrange Icons"
 msgstr "Впорядкувати п╕ктограми"
 
@@ -449,15 +449,15 @@ msgstr ""
 msgid "Create _New Window"
 msgstr "Створити нове в╕кно"
 
-#: gnome/gdesktop.c:2888 gnome/glayout.c:464
+#: gnome/gdesktop.c:2888 gnome/glayout.c:468
 msgid "Rescan _Desktop Directory"
 msgstr "Пересканувати каталог користувача"
 
-#: gnome/gdesktop.c:2889 gnome/glayout.c:465
+#: gnome/gdesktop.c:2889 gnome/glayout.c:469
 msgid "Rescan De_vices"
 msgstr "Пересканувати пристро╖"
 
-#: gnome/gdesktop.c:2890 gnome/glayout.c:466
+#: gnome/gdesktop.c:2890 gnome/glayout.c:470
 msgid "Recreate Default _Icons"
 msgstr "В╕дновити типов╕ п╕ктограми"
 
@@ -561,12 +561,12 @@ msgstr "Ц╕льовий файл вже ╕сну╓: %s"
 msgid "Replace it?"
 msgstr "Зам╕нити його?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1252
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
 #: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
 msgid "Copy"
 msgstr "Коп╕ювати"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1254
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
 msgid "Move"
 msgstr "Перенести"
 
@@ -758,11 +758,11 @@ msgstr "Детально"
 msgid "Custom"
 msgstr "Нетипово"
 
-#: gnome/glayout.c:302
+#: gnome/glayout.c:301
 msgid "Enter command to run"
 msgstr "Введ╕ть команду для виконання"
 
-#: gnome/glayout.c:315
+#: gnome/glayout.c:319
 msgid ""
 "Notice that if you choose to terminate the file manager, you will\n"
 "also terminate the GNOME desktop handler.\n"
@@ -770,7 +770,7 @@ msgid ""
 "Are you sure you want to exit?"
 msgstr ""
 
-#: gnome/glayout.c:327
+#: gnome/glayout.c:331
 msgid ""
 "The file manager and the desktop handler are now terminating\n"
 "\n"
@@ -780,181 +780,181 @@ msgid ""
 "Press OK to terminate the application, or cancel to continue using it."
 msgstr ""
 
-#: gnome/glayout.c:367
+#: gnome/glayout.c:371
 msgid "_File..."
 msgstr "Файл..."
 
-#: gnome/glayout.c:368
+#: gnome/glayout.c:372
 msgid "Creates a new file in this directory"
 msgstr "Створини новий файл в цьому каталоз╕"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:389 gnome/gscreen.c:2118
+#: gnome/glayout.c:393 gnome/gscreen.c:2118
 msgid "_Copy..."
 msgstr "Коп╕ювати..."
 
-#: gnome/glayout.c:389
+#: gnome/glayout.c:393
 msgid "Copy files"
 msgstr "Коп╕ювати файли"
 
-#: gnome/glayout.c:390 gnome/gscreen.c:2119
+#: gnome/glayout.c:394 gnome/gscreen.c:2119
 msgid "_Delete..."
 msgstr "_Стерти..."
 
-#: gnome/glayout.c:390
+#: gnome/glayout.c:394
 msgid "Delete files"
 msgstr "Стерти файли"
 
-#: gnome/glayout.c:391 gnome/gscreen.c:2120
+#: gnome/glayout.c:395 gnome/gscreen.c:2120
 msgid "_Move..."
 msgstr "_Перем╕стити..."
 
-#: gnome/glayout.c:391
+#: gnome/glayout.c:395
 msgid "Rename or move files"
 msgstr "Перейменувати чи перем╕стити файли"
 
-#: gnome/glayout.c:393
+#: gnome/glayout.c:397
 msgid "Show directory sizes"
 msgstr "Показати розм╕ри каталог╕в"
 
-#: gnome/glayout.c:393
+#: gnome/glayout.c:397
 msgid "Shows the disk space used by each directory"
 msgstr "Показати розм╕р дискового простору використаного кожним каталогом"
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:399
 msgid "Close window"
 msgstr "Закрити в╕кно"
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:399
 msgid "Closes this window"
 msgstr "Закрива╓ це в╕кно"
 
-#: gnome/glayout.c:402
+#: gnome/glayout.c:406
 msgid "Select _All"
 msgstr "Вибрати все"
 
-#: gnome/glayout.c:402
+#: gnome/glayout.c:406
 msgid "Select all files in the current Panel"
 msgstr "Вибрати вс╕ файли в поточн╕й панел╕"
 
-#: gnome/glayout.c:404
+#: gnome/glayout.c:408
 msgid "_Select Files..."
 msgstr "Вибрати файли..."
 
-#: gnome/glayout.c:404
+#: gnome/glayout.c:408
 msgid "Select a group of files"
 msgstr "Вибрати групу файл╕в"
 
-#: gnome/glayout.c:405
+#: gnome/glayout.c:409
 msgid "_Invert Selection"
 msgstr "╤нвертувати виб╕р"
 
-#: gnome/glayout.c:405
+#: gnome/glayout.c:409
 msgid "Reverses the list of tagged files"
 msgstr "╤нвертувати виб╕р файл╕в"
 
-#: gnome/glayout.c:408 gtkedit/editwidget.c:1142 src/view.c:2085
+#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2085
 msgid "Search"
 msgstr "Пошук"
 
-#: gnome/glayout.c:408
+#: gnome/glayout.c:412
 msgid "Search for a file in the current Panel"
 msgstr "Шувати файл в поточн╕й панел╕"
 
-#: gnome/glayout.c:411 gnome/gscreen.c:1428 gnome/gscreen.c:1439
+#: gnome/glayout.c:415 gnome/gscreen.c:1428 gnome/gscreen.c:1439
 msgid "_Rescan Directory"
 msgstr "Пересканувати каталог"
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:415
 msgid "Rescan the directory contents"
 msgstr "Пересканувати вм╕ст каталогу"
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "_Sort By..."
 msgstr "Сортувати за..."
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "Confirmation settings"
 msgstr "Установки п╕дтверджень "
 
-#: gnome/glayout.c:422
+#: gnome/glayout.c:426
 msgid "_Filter View..."
 msgstr "Ф╕льтрований перегляд..."
 
-#: gnome/glayout.c:422
+#: gnome/glayout.c:426
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:429
+#: gnome/glayout.c:433
 msgid "_Find File..."
 msgstr "Шукати файл..."
 
-#: gnome/glayout.c:429
+#: gnome/glayout.c:433
 msgid "Locate files on disk"
 msgstr "Знайти файли на диску"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:432
+#: gnome/glayout.c:436
 msgid "_Edit mime types..."
 msgstr "Редагувати MIME-типи..."
 
-#: gnome/glayout.c:432
+#: gnome/glayout.c:436
 msgid "Edits the MIME type bindings"
 msgstr "Редагувати прив'язки до MIME-тип╕в"
 
-#: gnome/glayout.c:434
+#: gnome/glayout.c:438
 msgid "_Run Command..."
 msgstr "Виконати команду"
 
-#: gnome/glayout.c:434
+#: gnome/glayout.c:438
 msgid "Runs a command"
 msgstr "Виконати команду"
 
-#: gnome/glayout.c:436
+#: gnome/glayout.c:440
 msgid "_Run Command in panel..."
 msgstr "Виконати команду в панел╕..."
 
-#: gnome/glayout.c:436
+#: gnome/glayout.c:440
 msgid "Run a command and put the results in a panel"
 msgstr "Виконати команду ╕ розм╕стити результат в панел╕"
 
-#: gnome/glayout.c:446
+#: gnome/glayout.c:450
 msgid "_Background jobs..."
 msgstr "Завдання на тл╕..."
 
-#: gnome/glayout.c:446
+#: gnome/glayout.c:450
 msgid "List of background operations"
 msgstr "Список операц╕й на тл╕"
 
-#: gnome/glayout.c:449
+#: gnome/glayout.c:453
 msgid "Exit"
 msgstr "Вийти"
 
-#: gnome/glayout.c:449
+#: gnome/glayout.c:453
 msgid "Terminates the file manager and the desktop"
 msgstr "Завершити роботу файлового менеджера ╕ робочого столу"
 
-#: gnome/glayout.c:473 gnome/glayout.c:484
+#: gnome/glayout.c:477 gnome/glayout.c:488
 msgid "_Settings"
 msgstr "Установки"
 
-#: gnome/glayout.c:474 gnome/glayout.c:485
+#: gnome/glayout.c:478 gnome/glayout.c:489
 msgid "_Layout"
 msgstr "Схема розташування"
 
-#: gnome/glayout.c:475 gnome/glayout.c:486
+#: gnome/glayout.c:479 gnome/glayout.c:490
 msgid "_Commands"
 msgstr "Команди"
 
-#: gnome/glayout.c:476
+#: gnome/glayout.c:480
 msgid "_Desktop"
 msgstr "Робочий ст╕л"
 
-#: gnome/glayout.c:477 gnome/glayout.c:487
+#: gnome/glayout.c:481 gnome/glayout.c:491 gnome/gmc-window.c:121
 msgid "_Help"
 msgstr "Дов╕дка"
 
-#: gnome/glayout.c:627
+#: gnome/glayout.c:630
 msgid "File/New/Directory..."
 msgstr "Файл/Новий/Каталог..."
 
@@ -965,6 +965,50 @@ msgid ""
 "As root, you can damage your system if you are not careful, and the GNOME "
 "File Manager will not stop you from doing it."
 msgstr ""
+"Ви використову╓те менеджера файл╕в GNOME як root. \n"
+"\n"
+"Як root, ви можете випадково пошкодити вашу систему. \n"
+"Менеджер файл╕в GNOME не зможе завадити вам у цьому."
+
+#: gnome/gmc-window.c:69
+msgid "Copyright (C) 1998 The Free Software Foundation"
+msgstr "Copyright © 1998 The Free Software Foundation"
+
+#: gnome/gmc-window.c:81
+msgid "Open _new window"
+msgstr "В╕дкрити нове в╕кно"
+
+#: gnome/gmc-window.c:86
+msgid "_Close this window"
+msgstr "Закрити це в╕кно"
+
+#: gnome/gmc-window.c:88
+msgid "E_xit"
+msgstr "Вийти"
+
+#: gnome/gmc-window.c:95
+msgid "_Listing view"
+msgstr "Показ списком"
+
+#: gnome/gmc-window.c:96
+msgid "_Icon view"
+msgstr "Показ п╕ктограми"
+
+#: gnome/gmc-window.c:102
+msgid "Display _tree view"
+msgstr "Показ деревом"
+
+#: gnome/gmc-window.c:112
+msgid "_About the Midnight Commander..."
+msgstr "Про Midnight Commander "
+
+#: gnome/gmc-window.c:119
+msgid "_File"
+msgstr "Файл"
+
+#: gnome/gmc-window.c:120
+msgid "_View"
+msgstr "Перегляд"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1304,7 +1348,7 @@ msgstr "Коп╕ювання..."
 msgid "Move to Trash"
 msgstr "Перенсти в см╕тник"
 
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
+#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 #: src/screen.c:2430
 msgid "Delete"
 msgstr "Стерти"
@@ -1553,8 +1597,8 @@ msgid "Location:"
 msgstr "Розм╕щення:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:387 gtkedit/editcmd.c:1236
-#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3022 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:391 gtkedit/editcmd.c:1236
+#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
@@ -1700,43 +1744,43 @@ msgid "Close windows whose directories cannot be reached"
 msgstr "Закрити в╕кна недосяжних каталог╕в"
 
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
-#: gtkedit/edit.c:341 gtkedit/edit.c:373 gtkedit/edit.c:379 gtkedit/edit.c:386
-#: gtkedit/edit.c:393 gtkedit/edit.c:399 gtkedit/editcmd.c:298
-#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1023
+#: gtkedit/edit.c:151 gtkedit/edit.c:320 gtkedit/edit.c:325 gtkedit/edit.c:339
+#: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
+#: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:301
+#: gtkedit/editcmd.c:307 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1024
 #: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Помилка "
 
-#: gtkedit/edit.c:149 gtkedit/edit.c:341 gtkedit/edit.c:379
+#: gtkedit/edit.c:151 gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381
 msgid " Failed trying to open file for reading: "
 msgstr " Помилка при спроб╕ в╕дкрити файл для зчитування: "
 
-#: gtkedit/edit.c:318
+#: gtkedit/edit.c:320
 msgid " Error reading from pipe: "
 msgstr " Помилка зчитування з каналу: "
 
-#: gtkedit/edit.c:323
+#: gtkedit/edit.c:325
 msgid " Failed trying to open pipe for reading: "
 msgstr " Помилка на спроб╕ в╕дкрити канал для зчитування: "
 
-#: gtkedit/edit.c:337
+#: gtkedit/edit.c:339
 msgid " Error reading file: "
 msgstr " Помилка зчитування файлу: "
 
-#: gtkedit/edit.c:386
+#: gtkedit/edit.c:388
 msgid " Cannot get size/permissions info on file: "
 msgstr ""
 
-#: gtkedit/edit.c:393
+#: gtkedit/edit.c:395
 msgid " Not an ordinary file: "
 msgstr " Незвичайний файл: "
 
-#: gtkedit/edit.c:399
+#: gtkedit/edit.c:401
 msgid " File is too large: "
 msgstr " Файл надто великий: "
 
-#: gtkedit/edit.c:400
+#: gtkedit/edit.c:402
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -1744,38 +1788,38 @@ msgstr ""
 " \n"
 " Зб╕льш╕ть значення edit.h:MAXBUF та перекомп╕люйте редактор. "
 
-#: gtkedit/edit.c:2567
+#: gtkedit/edit.c:2569
 msgid "User menu avalaible only in mcedit invoked from mc"
 msgstr ""
 
 #. Not essential to translate
-#: gtkedit/edit.c:2765 gtkedit/editcmd.c:2939
+#: gtkedit/edit.c:2767 gtkedit/editcmd.c:2939
 msgid "Error trying to stat file:"
 msgstr "Помилка на спроб╕ отримання атрибут╕в файлу:"
 
-#: gtkedit/editcmd.c:298
+#: gtkedit/editcmd.c:301
 msgid " Error writing to pipe: "
 msgstr " Помилка запису в канал: "
 
-#: gtkedit/editcmd.c:304
+#: gtkedit/editcmd.c:307
 msgid " Failed trying to open pipe for writing: "
 msgstr " Помилка на спроб╕ в╕дкрити файл для запису: "
 
-#: gtkedit/editcmd.c:380
+#: gtkedit/editcmd.c:384
 msgid "Quick save "
 msgstr "Швидке збереження "
 
-#: gtkedit/editcmd.c:381
+#: gtkedit/editcmd.c:385
 msgid "Safe save "
 msgstr "Безпечне збереження "
 
-#: gtkedit/editcmd.c:382
+#: gtkedit/editcmd.c:386
 msgid "Do backups -->"
 msgstr "Робити резервн╕ коп╕╖ -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:385 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
-#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3020 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:389 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
+#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3021 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
@@ -1786,12 +1830,12 @@ msgstr "Робити резервн╕ коп╕╖ -->"
 msgid "&Cancel"
 msgstr "В╕дм╕на"
 
-#: gtkedit/editcmd.c:391
+#: gtkedit/editcmd.c:395
 msgid "Extension:"
 msgstr "Розширення:"
 
 #. NLS ?
-#: gtkedit/editcmd.c:398
+#: gtkedit/editcmd.c:402
 msgid " Edit Save Mode "
 msgstr " Редагування режиму збереження "
 
@@ -1889,7 +1933,7 @@ msgstr " П╕дтверд╕ть збереження файлу : "
 msgid " Save file "
 msgstr " Збереження файлу "
 
-#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1249
+#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
 #: src/view.c:2077
 msgid "Save"
 msgstr "Запис"
@@ -2283,23 +2327,23 @@ msgstr "Скрипт створено:"
 msgid "Process block"
 msgstr "Обробити блок"
 
-#: gtkedit/editcmd.c:3013
+#: gtkedit/editcmd.c:3014
 msgid " Mail "
 msgstr " В╕дсилання "
 
-#: gtkedit/editcmd.c:3026
+#: gtkedit/editcmd.c:3027
 msgid " Copies to"
 msgstr " Коп╕╖ до"
 
-#: gtkedit/editcmd.c:3030
+#: gtkedit/editcmd.c:3031
 msgid " Subject"
 msgstr " Заголовок"
 
-#: gtkedit/editcmd.c:3034
+#: gtkedit/editcmd.c:3035
 msgid " To"
 msgstr " До"
 
-#: gtkedit/editcmd.c:3036
+#: gtkedit/editcmd.c:3037
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <заголовок> -c <коп╕╖> <до>"
 
@@ -2758,30 +2802,30 @@ msgid " Editor options "
 msgstr " Параметри редактора "
 
 #. Not essential to translate
-#: gtkedit/editwidget.c:323
+#: gtkedit/editwidget.c:324
 msgid "Error initialising editor.\n"
 msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
 
-#: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1248 src/help.c:806
+#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1729 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Дов╕дка"
 
-#: gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1250
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
 msgid "Mark"
 msgstr "Виб╕р"
 
-#: gtkedit/editwidget.c:1139
+#: gtkedit/editwidget.c:1140
 msgid "Replac"
 msgstr "Зам╕на"
 
-#: gtkedit/editwidget.c:1145 src/main.c:1731
+#: gtkedit/editwidget.c:1146 src/main.c:1731
 msgid "PullDn"
 msgstr "МенюMC"
 
 #. gtk_edit_menu
-#: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1258 src/help.c:818
+#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
 #: src/main.c:1732 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Вих╕д"
@@ -2883,58 +2927,58 @@ msgstr "Скоп╕ювати блок у файл"
 msgid "Search/Replace"
 msgstr "Пошук/Зам╕на"
 
-#: gtkedit/syntax.c:1072 gtkedit/syntax.c:1081 gtkedit/syntax.c:1090
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1074 gtkedit/syntax.c:1083 gtkedit/syntax.c:1092
+#: gtkedit/syntax.c:1101
 msgid " Spelling Message "
 msgstr ""
 
-#: gtkedit/syntax.c:1072
+#: gtkedit/syntax.c:1074
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1081
+#: gtkedit/syntax.c:1083
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1090
+#: gtkedit/syntax.c:1092
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
 
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1101
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
 msgid " Load Syntax Rules "
 msgstr ""
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
 " Your old rule file has been saved with a .OLD extension. "
 msgstr ""
 
-#: gtkedit/syntax.c:1515 gtkedit/syntax.c:1522
+#: gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
 msgid " Load syntax file "
 msgstr " Завантажити файл синтаксису "
 
-#: gtkedit/syntax.c:1515
+#: gtkedit/syntax.c:1518
 msgid " File access error "
 msgstr " Помилка доступу до файлу "
 
-#: gtkedit/syntax.c:1521
+#: gtkedit/syntax.c:1524
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Помилка у файл╕ %s в рядку %d "
@@ -4512,15 +4556,15 @@ msgstr "Редагувати цей файл"
 msgid "Send the results to a Panel"
 msgstr ""
 
-#: src/fixhlp.c:171
+#: src/fixhlp.c:169
 msgid "Usage: fixhlp <width> <tocname>\n"
 msgstr ""
 
-#: src/fixhlp.c:176
+#: src/fixhlp.c:174
 msgid "fixhlp: Cannot open toc for writing"
 msgstr "fixhlp: Не вдалось в╕дкрити зм╕ст для запису"
 
-#: src/fixhlp.c:179
+#: src/fixhlp.c:177
 msgid ""
 "[Contents]\n"
 " Topics:\n"
@@ -5540,15 +5584,15 @@ msgstr "Безпечне &видалення"
 
 #: src/option.c:75
 msgid "cd follows lin&Ks"
-msgstr ""
+msgstr "Зм╕на &каталогу за посиланням"
 
 #: src/option.c:76
 msgid "advanced cho&Wn"
-msgstr ""
+msgstr "Розширена команда cho&wn"
 
 #: src/option.c:77
 msgid "l&Ynx-like motion"
-msgstr ""
+msgstr "Нав╕╜ац╕я в ст╕л╕ l&ynx"
 
 #: src/option.c:79
 msgid "Animation"
@@ -5560,19 +5604,19 @@ msgstr "&Обертовий ╕ндикатор"
 
 #: src/option.c:83
 msgid "co&Mplete: show all"
-msgstr ""
+msgstr "&Доповнення: показувати все"
 
 #: src/option.c:84
 msgid "&Use internal view"
-msgstr ""
+msgstr "Вмонтований &перегляд"
 
 #: src/option.c:85
 msgid "use internal ed&It"
-msgstr ""
+msgstr "Вмонтований &редактор"
 
 #: src/option.c:86
 msgid "auto m&Enus"
-msgstr ""
+msgstr "Автоматичн╕ &меню"
 
 #: src/option.c:87
 msgid "&Auto save setup"
