@@ -258,6 +258,7 @@ char *expand_format (char c, int quote)
     return g_strdup ("");
 }
 
+#ifndef HAVE_X
 /* Checks for shell patterns definition */
 char *check_patterns (char *p)
 {
@@ -788,3 +789,4 @@ void user_menu_cmd (WEdit *edit_widget)
 	g_free (entries);
     g_free (data);
 }
+#endif /* !HAVE_X */

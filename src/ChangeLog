@@ -1,5 +1,9 @@
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (user_file_menu_cmd) [HAVE_X]: Disable.
+	(panel_callback) [HAVE_X]: Don't define labels, they are unused.
+	* user.c [HAVE_X]: Disable all user meny code.
+
 	* color.c (color_table): Make static. Only use in text edition.
 	* xtty.h: Remove unused definitions.
 

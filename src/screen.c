@@ -2371,7 +2371,11 @@ panel_key (WPanel *panel, int key)
     return 0;
 }
 
-void user_file_menu_cmd (void) { user_menu_cmd (NULL); }
+#ifndef HAVE_X
+void user_file_menu_cmd (void) {
+    user_menu_cmd (NULL);
+}
+#endif /* !HAVE_X */
 
 static int
 panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
@@ -2379,16 +2383,8 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
     switch (msg){
     case WIDGET_INIT:
 #ifdef HAVE_X
-	define_label (h, (Widget *)panel, 1, _("Help"), help_cmd);
-	define_label (h, (Widget *)panel, 2, _("Menu"), user_file_menu_cmd);
-	define_label (h, (Widget *)panel, 3, _("View"), view_panel_cmd);
-	define_label (h, (Widget *)panel, 4, _("Edit"), edit_panel_cmd);
-	define_label (h, (Widget *)panel, 5, _("Copy"), copy_cmd);
-	define_label (h, (Widget *)panel, 6, _("RenMov"), ren_cmd);
-	define_label (h, (Widget *)panel, 7, _("Mkdir"), mkdir_panel_cmd);
-	define_label (h, (Widget *)panel, 8, _("Delete"), delete_cmd);
 	x_create_panel (h, h->wdata, panel);
-#endif
+#endif /* !HAVE_X */
 	return 1;
 
     case WIDGET_DRAW:
