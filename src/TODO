@@ -66,7 +66,7 @@ ideas still waiting for their implementation.
 
   - Make the extfs handle re-reads.
 
-  - Document C-x C-r, C-x C-l, C-x C-s
+  - Document (or remove) C-x C-r, C-x C-s.
 
   - Check that all the help contexts exist on the help file.
 
