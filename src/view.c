@@ -1962,13 +1962,11 @@ static void
 normal_search (WView *view, int direction)
 {
     static char *old;
-    char *exp = "";
+    char *exp;
 
-    exp = old ? old : exp;
+    convert_to_display (old);
 
-    convert_to_display (exp);
-
-    exp = input_dialog (_("Search"), _(" Enter search string:"), exp);
+    exp = input_dialog (_("Search"), _(" Enter search string:"), old ? old : "");
 
     if ((!exp) || (!*exp)) {
 	if (exp)
