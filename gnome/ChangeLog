@@ -1,5 +1,8 @@
 1998-05-20  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gtrans.c (set_window_text): Pass new justification parameter to
+	gnome_icon_paint_text().
+
 	* gpageprop.c (item_properties): Restore the arrow cursor for the
 	desktop icon windows.
 

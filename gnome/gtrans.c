@@ -144,14 +144,16 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 		gdk_gc_set_foreground (m_gc, &color);
 		gnome_icon_paint_text (ti, mask, m_gc,
 				       (width - ti->width) / 2,
-				       im->rgb_height + SPACING);
+				       im->rgb_height + SPACING,
+				       GTK_JUSTIFY_CENTER);
 	}
 	
 	gdk_color_white (gdk_imlib_get_colormap (), &color);
 	gdk_gc_set_foreground (p_gc, &color);
 	gnome_icon_paint_text (ti, pixmap, p_gc,
 			       (width - ti->width) / 2,
-			       im->rgb_height + SPACING);
+			       im->rgb_height + SPACING,
+			       GTK_JUSTIFY_CENTER);
 
 	/* Set contents of window */
 
