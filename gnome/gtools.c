@@ -40,77 +40,32 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	va_list ap;
 	Dlg_head  *h;
 	WLabel    *label;
-	GtkDialog *dialog;
-	GList     *list;
+	GtkWidget *dialog;
 	int i, result = -1;
-	
+	gchar **buttons;
+
 	if (header == MSG_ERROR)
 		header = _("Error");
-	
 	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
 			DLG_NO_TED | DLG_NO_TOPLEVEL);
-	dialog = GTK_DIALOG (gtk_dialog_new ());
-	x_dlg_set_window (h, GTK_WIDGET (dialog));
-	gtk_window_set_policy (GTK_WINDOW (dialog), 0, 0, 0);
 
-	x_set_dialog_title (h, header);
-	
-	label = label_new (0, 0, text, NULL);
-	add_widget (h, label);
-	
-	if (flags & D_ERROR)
-		fprintf (stderr, "Messagebox: this should be displayed like an error\n");
-	
+	/* extract the buttons from the args */
+	buttons = g_malloc (sizeof (gchar[flags + 1]));
 	va_start (ap, count);
-	list = g_list_alloc ();
-	for (i = 0; i < count; i++){
-		WButton *button;
-		char *cur_name = va_arg (ap, char *);
-		
-		button = button_new (0, 0, B_USER+i, NORMAL_BUTTON, cur_name, 0, 0, NULL);
-
-		add_widget (h, button);
-		list = g_list_append (list, button);
-
-		if (i == sel_pos)
-			h->initfocus = h->current;
-	}
+	for (i = 0; i < count; i++)
+	  buttons[i] = va_arg (ap, char *);
 	va_end (ap);
-	
-	/* Init the widgets */
-	init_dlg (h);
-	if (!(flags & D_INSERT))
-		gtk_grab_add (GTK_WIDGET (dialog));
 
-	/* Now do the GTK stuff */
-	gtk_container_add (GTK_CONTAINER (dialog->vbox), GTK_WIDGET (label->widget.wdata));
-	gtk_container_set_border_width (GTK_CONTAINER (dialog->vbox), 5);
+	buttons[i] = NULL;
+	dialog = gnome_message_box_newv (text, header, buttons);
 
-	g_list_foreach (list, (GFunc) pack_button, dialog->action_area);
-	g_list_free (list);
-
-	gtk_box_set_homogeneous (GTK_BOX (dialog->action_area), TRUE);
-	gtk_widget_show (GTK_WIDGET (dialog));
-
-	if (flags & D_INSERT){
-		last_query_dlg = h;
-		return 0;
-	}
-	
-	frontend_run_dlg (h);
-	dlg_run_done (h);
-	last_query_dlg = h;
-	gtk_grab_remove (GTK_WIDGET (dialog));
-
-	switch (h->ret_value){
+	switch (gnome_dialog_run_and_close (GNOME_DIALOG (dialog))){
 	case B_CANCEL:
 		break;
 	default:
 		result = h->ret_value - B_USER;
 	}
-	destroy_dlg (h);
-	
-	sel_pos = 0;
+
 	return result;
 }
 

@@ -1,3 +1,11 @@
+1998-12-22  Jonathan Blandford  <jrb@redhat.com>
+
+	* gdialogs.c (file_progress_query_replace_policy): new function.
+	Currently called every time multiple files are called -- should
+	only be called if needed.
+	(file_progress_real_query_replace): Cleaned up some.  Still has a
+	bit of work to do, but in general, much better.
+
 Mon Dec 21 22:33:07 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* layout: Deleted obsolete widgets from the Virtual FS configuration

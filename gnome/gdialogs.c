@@ -9,6 +9,16 @@
 #include "regex.h"
 #include "../vfs/vfs.h"
 
+enum {
+    REPLACE_PROMPT,
+    REPLACE_ALWAYS,
+    REPLACE_UPDATE,
+    REPLACE_NEVER,
+    REPLACE_ABORT,
+    REPLACE_SIZE,
+    REPLACE_OPTION_MENU
+} FileReplaceCode;
+
 static GtkWidget *op_win = NULL;
 static GtkWidget *fmd_win = NULL;
 static GtkObject *count_label = NULL;
@@ -16,10 +26,18 @@ static GtkObject *byte_prog = NULL;
 static GtkWidget *file_label = NULL;
 static GtkWidget *op_source_label = NULL;
 static GtkWidget *op_target_label = NULL;
+static GtkWidget *op_radio = NULL;
 int op_preserve = 1;
+static gint copy_status;
+static gint minor_copy_status;
+
 #define GDIALOG_TO_STRING "To: "
 #define GDIALOG_FROM_STRING "Copying from: "
 #define GDIALOG_PROGRESS_WIDTH 350
+
+
+
+
 /* Callbacks go here... */
 static void
 fmd_check_box_callback (GtkWidget *widget, gpointer data)
@@ -156,23 +174,178 @@ file_progress_show_bytes (double done, double total)
                 gtk_main_iteration ();
 	return FILE_CONT;
 }
+static void
+option_menu_policy_callback (GtkWidget *menu, gpointer data)
+{
+        g_print ("ork ork:%d\n", (gint) data);
+        minor_copy_status = (gint) data;
+        copy_status = (gint) data;
+        gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (op_radio), TRUE);
+}
+static void
+policy_callback (GtkWidget *button, gpointer data)
+{
+        if (GTK_TOGGLE_BUTTON (button)->active) {
+                g_print ("toggle\n");
+                if ((gint) data == REPLACE_OPTION_MENU) {
+                        copy_status = minor_copy_status;
+                } else
+                        copy_status = (gint) data;
+        }
+}
+FileProgressStatus
+file_progress_query_replace_policy ()
+{
+        GtkWidget *qrp_dlg;
+        GtkWidget *radio;
+        GtkWidget *vbox;
+        GtkWidget *hbox;
+        GtkWidget *icon;
+        GtkWidget *label;
+        GtkWidget *hrbox;
+        GSList *group = NULL;
+        GtkWidget *omenu;
+        GtkWidget *menu;
+        GtkWidget *menu_item;
 
-/*
- * I have placed the old code because it is importatn.
- * It is in temp-hack for now.
- *
- * When the new code for replace_dlg is done, we can
- * kill it.
- *                 -miguel.
- */ 
-#include "temp-hack.c"
+        copy_status = REPLACE_PROMPT;
+        minor_copy_status = REPLACE_ALWAYS;
+        g_print ("in file_progress_query_replace_policy\n");
+        qrp_dlg = gnome_dialog_new (_("Files Exist"),
+                                    GNOME_STOCK_BUTTON_OK,
+                                    GNOME_STOCK_BUTTON_CANCEL,
+                                    NULL);
+        vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+        hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        icon = gnome_stock_pixmap_widget (hbox, GNOME_STOCK_PIXMAP_HELP);
+
+        gtk_box_pack_start (GTK_BOX (hbox), icon, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, GNOME_PAD_SMALL);
+
+        label = gtk_label_new (_("Some of the files you are trying to copy already "
+                                 "exist in the destination folder."));
+        gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+        gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+        gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+
+        gtk_box_pack_start (GTK_BOX (vbox), label, FALSE, FALSE, 0);
+        gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, 0);
+
+        radio = gtk_radio_button_new_with_label (group, _("Prompt me before overwriting any file."));
+        gtk_signal_connect (GTK_OBJECT (radio), "toggled", GTK_SIGNAL_FUNC (policy_callback), (gpointer) REPLACE_PROMPT);
+        gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+        group = gtk_radio_button_group (GTK_RADIO_BUTTON (radio));
+
+
+        radio = gtk_radio_button_new_with_label (group, _("Don't overwrite any files."));
+        gtk_signal_connect (GTK_OBJECT (radio), "toggled", GTK_SIGNAL_FUNC (policy_callback), (gpointer) REPLACE_NEVER);
+        gtk_box_pack_start (GTK_BOX (vbox), radio, FALSE, FALSE, 0);
+        group = gtk_radio_button_group (GTK_RADIO_BUTTON (radio));
+
+        
+        op_radio = gtk_radio_button_new (group);
+        gtk_signal_connect (GTK_OBJECT (op_radio), "toggled", GTK_SIGNAL_FUNC (policy_callback), (gpointer) REPLACE_OPTION_MENU);
+        hrbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+        gtk_box_pack_start (GTK_BOX (hrbox), gtk_label_new (_("Overwrite:")), FALSE, FALSE, 0);
+        
+        /* we set up the option menu. */
+        omenu = gtk_option_menu_new ();
+        gtk_box_pack_start (GTK_BOX (hrbox), omenu, FALSE, FALSE, 0);
+        menu = gtk_menu_new ();
+        menu_item = gtk_menu_item_new_with_label ( _("Older files."));
+        gtk_menu_append (GTK_MENU (menu), menu_item);
+        gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+                            GTK_SIGNAL_FUNC (option_menu_policy_callback), (gpointer) REPLACE_UPDATE);
+        menu_item = gtk_menu_item_new_with_label ( _("Files only if size differs."));
+        gtk_menu_append (GTK_MENU (menu), menu_item);
+        gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+                            GTK_SIGNAL_FUNC (option_menu_policy_callback), (gpointer) REPLACE_SIZE);
+        menu_item = gtk_menu_item_new_with_label ( _("All files."));
+        gtk_menu_append (GTK_MENU (menu), menu_item);
+        gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+                            GTK_SIGNAL_FUNC (option_menu_policy_callback), (gpointer) REPLACE_ALWAYS);
+        gtk_widget_show_all (menu);
+        gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
+
+        gtk_signal_connect (GTK_OBJECT (op_radio), "toggled", GTK_SIGNAL_FUNC (policy_callback), (gpointer) REPLACE_ALWAYS);
+        gtk_box_pack_start (GTK_BOX (vbox), op_radio, FALSE, FALSE, 0);
+        group = gtk_radio_button_group (GTK_RADIO_BUTTON (op_radio));
+        gtk_container_add (GTK_CONTAINER (op_radio), hrbox);
+
+        gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qrp_dlg)->vbox),
+                            hbox, FALSE, FALSE, 0);
+
+        gtk_widget_show_all (GTK_WIDGET (GNOME_DIALOG (qrp_dlg)->vbox));
+        switch (gnome_dialog_run_and_close (GNOME_DIALOG (qrp_dlg))) {
+        case 0:
+                break;
+        case -1:
+        default:
+                copy_status = REPLACE_ABORT;
+                return FILE_ABORT;
+        }
+        return FILE_CONT;
+}
+
+
+FileProgressStatus
+file_progress_real_query_replace (enum OperationMode mode, char *destname, struct stat *_s_stat, struct stat *_d_stat)
+{
+        GtkWidget *qr_dlg;
+        gchar msg[128];
+        GtkWidget *label;
+
+        /* so what's the situation?  Do we prompt or don't we prompt. */
+        if (copy_status == REPLACE_PROMPT){
+                qr_dlg = gnome_dialog_new ("File Exists", "Yes", "No", "Cancel", NULL);
+                
+                snprintf (msg, 127, "The target file already exists:", destname);
+                label = gtk_label_new ("The target file already exists.");
+                gtk_label_set_justify (GTK_LABEL (label), GTK_JUSTIFY_LEFT);
+                gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+                gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+                gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (qr_dlg)->vbox),
+                                    label, FALSE, FALSE, 0);
+
+                gtk_widget_show_all (GNOME_DIALOG (qr_dlg)->vbox);
+                g_print ("here?\n");
+                switch (gnome_dialog_run_and_close (GNOME_DIALOG (qr_dlg))) {
+                case 0:
+                        return FILE_CONT;
+                case 1:
+                        return FILE_SKIP;
+                default:
+                        return FILE_ABORT;
+                }
+        }
+
+        switch (copy_status){
+        case REPLACE_UPDATE:
+                if (_s_stat->st_mtime > _d_stat->st_mtime)
+                        return FILE_CONT;
+                else
+                        return FILE_SKIP;
+        case REPLACE_SIZE:
+                if (_s_stat->st_size == _d_stat->st_size)
+                        return FILE_SKIP;
+                else
+                        return FILE_CONT;
+        case REPLACE_ALWAYS:
+                return FILE_CONT;
+        case REPLACE_NEVER:
+                return FILE_SKIP;
+        case REPLACE_ABORT:
+        default:
+                return FILE_ABORT;
+        }
+}
 
 void
 file_progress_set_stalled_label (char *stalled_msg)
 {
         if (!stalled_msg || !*stalled_msg)
                 return;
-	g_warning ("memo: file_progress_set_stalled_label!\nmsg\t%s\n",stalled_msg);
+	g_warning ("FIXME: file_progress_set_stalled_label!\nmsg\t%s\n",stalled_msg);
 }
 char *
 file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_one, int *do_background)
@@ -366,8 +539,7 @@ create_op_win (FileOperation op, int with_eta)
 {
         GtkWidget *alignment;
         GtkWidget *hbox;
-        GtkWidget *prog;
-        g_print ("in create_op_win\n");
+
         
         switch (op) {
         case OP_MOVE:

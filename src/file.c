@@ -216,9 +216,12 @@ char *file_mask_dest_mask = NULL;
 int (*file_mask_xstat)(char *, struct stat *) = mc_lstat;
 
 int   file_mask_op_follow_links = 0;
+
+#ifndef HAVE_GNOME
+/* we don't need these in the GNOME version */
 char *file_progress_replace_filename;
 int   file_progress_replace_result;
-
+#endif
 unsigned long file_progress_bps = 0, file_progress_bps_time = 0;
 
 char *op_names [3] = {
@@ -1711,8 +1714,13 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
     if (operation == OP_DELETE && confirm_delete){
         if (know_not_what_am_i_doing)
 	    query_set_sel (1);
+#ifdef HAVE_GNOME
+	i = query_dialog (_(op_names [operation]), cmd_buf,
+			  D_ERROR, 2, _("Yes"), _("No"));
+#else
 	i = query_dialog (_(op_names [operation]), cmd_buf,
 			  D_ERROR, 2, _("&Yes"), _("&No"));
+#endif
 	if (i != 0)
 	    return 0;
     } else if (operation != OP_DELETE){
@@ -1771,8 +1779,6 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 #endif
 
     /* Initialize things */
-    /* We now have ETA in all cases */
-    create_op_win (operation, 1);
     /* We do not want to trash cache every time file is
        created/touched. However, this will make our cache contain
        invalid data. */
@@ -1791,6 +1797,9 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 
     /* This code is only called by the tree and panel code */
     if (only_one){
+      /* We now have ETA in all cases */
+      create_op_win (operation, 1);
+
 	/* One file: FIXME mc_chdir will take user out of any vfs */
 	if (operation != OP_COPY && get_current_type () == view_tree)
 	    mc_chdir (PATH_SEP_STR);
@@ -1878,6 +1887,15 @@ panel_operate_flags (void *source_panel, FileOperation operation, char *thedefau
 		file_progress_bytes = panel->total;
 	}
 
+#ifdef HAVE_GNOME
+	
+	/* FIXME: we need to determine if this dialog is actually needed. */
+	if (file_progress_query_replace_policy () == FILE_ABORT)
+	  goto clean_up;
+#endif
+	/* We now have ETA in all cases */
+	create_op_win (operation, 1);
+      
 	/* Loop for every file, perform the actual copy operation */
 	for (i = 0; i < panel->count; i++){
 
