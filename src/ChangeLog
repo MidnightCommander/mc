@@ -1,3 +1,8 @@
+2002-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* file.c (copy_file_file): Reuse message.
+	(copy_dir_dir): Eliminate one more goto.
+
 2002-10-22  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (main): Remove unnecessary spaces in the table of

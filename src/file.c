@@ -519,7 +519,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
 	    message_3s (1, MSG_ERROR,
-			_(" `%s' and `%s' are the same file. "), src_path,
+			_(" `%s' and `%s' are the same file "), src_path,
 			dst_path);
 	    do_refresh ();
 	    return FILE_SKIP;
@@ -995,12 +995,10 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
 #ifndef NATIVE_WIN32 
     if (ctx->preserve_uidgid){
-    retry_dst_chown:
-        if (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid)){
+        while (mc_chown (dest_dir, cbuf.st_uid, cbuf.st_gid)){
 	    return_status = file_error (_(" Cannot chown target directory \"%s\" \n %s "), dest_dir);
-	    if (return_status == FILE_RETRY)
-	        goto retry_dst_chown;
-	    goto ret;
+	    if (return_status != FILE_RETRY)
+		goto ret;
         }
     }
 #endif /* !NATIVE_WIN32 */
