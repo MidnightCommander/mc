@@ -65,7 +65,6 @@ static struct stat hstat;		/* Stat struct corresponding */
 
 static void tar_free_archive (vfs *me, vfs_s_super *archive)
 {
-    message_1s( 1, archive->name, "Freeing tar archive");
     if (archive->u.tar.fd != -1)
 	mc_close(archive->u.tar.fd);
 

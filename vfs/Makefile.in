@@ -18,7 +18,7 @@ AR = @AR@
 # VFS code
 #
 NETFILES   = tcputil.o ftpfs.o mcfs.o utilvfs.o
-NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o sfs.o fish.o @undelfs_o@
+NONETFILES = local.o vfs.o tar.o names.o container.o extfs.o sfs.o fish.o direntry.o @undelfs_o@
 
 VFSSRCS = local.c vfs.c mcfs.c tcputil.c tar.c names.c \
 	ftpfs.c container.c mcserv.c extfs.c undelfs.c utilvfs.c sfs.c fish.c

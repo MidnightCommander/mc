@@ -1,12 +1,19 @@
+Fri Oct 23 12:29:48 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* Makefile.in: add direntry.o to list of NONETFILES so we actually compile
+
+	* sfs.c, tar.c: remove debugging messages (which really should not
+ 	escape from my tree)
+
 Thu Oct 22 22:24:44 1998  Pavel Machek  <pavel@bug.ucw.cz>
 
 	* README: added. If you are using emacs or hacking libvfs, please
  	read this one.
 
 	* direntry.{c,h}: new library created, so that same entry/inode
- 	code does not have to be copied in every handler
+ 	code does not have to be copied in every handler. 
 
-	* tar.c: converted to use direntry.c library
+	* tar.c: converted to use direntry.c library, which means BIG changes. 
 
 	* ftpfs.c: small updates to make code look nicer
 	

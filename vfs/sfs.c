@@ -235,7 +235,6 @@ static void sfs_free (vfsid id)
     struct cachedfile *which = (struct cachedfile *) id;
     struct cachedfile **cur = &head;
 
-    message_1s(1, "%s", "Freeing sfs file" );
     unlink( CUR->cache );
     while (CUR) {
         if (CUR == which)
