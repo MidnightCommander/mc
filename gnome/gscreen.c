@@ -1077,16 +1077,16 @@ load_dnd_icons (void)
 	GdkPoint hotspot = { 5, 5 };
 
 	if (!drag_directory)
-		drag_directory = load_transparent_image ("not.png");
+		drag_directory = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_NOT, NULL);
 	
 	if (!drag_directory_ok)
-		drag_directory_ok = load_transparent_image ("directory.xpm");
+		drag_directory_ok = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_NEW, NULL);
 	
 	if (!drag_multiple)
-		drag_multiple = load_transparent_image ("not.png");
+		drag_multiple = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_NOT, NULL);
 	
 	if (!drag_multiple_ok)
-		drag_multiple_ok = load_transparent_image ("multi-ok.png");
+		drag_multiple_ok = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_MULTIPLE, NULL);
 
 	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,

@@ -1,3 +1,9 @@
+1998-05-21  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (load_dnd_icons): Remove the code and the icons that
+	we had here privately.  Use new gnome-stock functionality
+	instead. 
+
 1998-05-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_drag_request): All of the drag_request code is

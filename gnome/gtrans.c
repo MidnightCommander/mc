@@ -235,7 +235,7 @@ make_transparent_window (char *file)
 	im = image_cache_load_image (file);
 	if (!im)
 		return NULL;
-
+	
 	gtk_widget_push_visual (gdk_imlib_get_visual ());
 	gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 
@@ -262,3 +262,4 @@ make_transparent_window (char *file)
 	
 	return window;
 }
+

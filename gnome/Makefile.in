@@ -51,12 +51,7 @@ GNOMEHDRS = 		\
 	gblist.h
 
 ICONS = 				\
-	$(srcdir)/directory-ok.xpm	\
 	$(srcdir)/directory.xpm		\
-	$(srcdir)/multi.xpm		\
-	$(srcdir)/multi-ok.png		\
-	$(srcdir)/not.png		\
-	$(srcdir)/multi-ok.xpm		\
 	$(srcdir)/i-directory.png	\
 	$(srcdir)/i-executable.png	\
 	$(srcdir)/i-symlink.png		\
