@@ -77,28 +77,29 @@ static inline int my_lower_case (int c)
     return tolower(c & 0xFF);
 }
 
-static char *strcasechr (const unsigned char *s, int c)
+static const char *strcasechr (const unsigned char *s, int c)
 {
     for (c = my_lower_case (c); my_lower_case ((int) *s) != c; ++s)
 	if (*s == '\0')
 	    return 0;
-    return (char *) s;
+    return (const char *) s;
 }
 
 #ifndef HAVE_MEMMOVE
 /* for Christophe */
 static void *memmove (void *dest, const void *src, size_t n)
 {
-    char *t, *s;
+    char *t;
+    const char *s;
 
     if (dest <= src) {
 	t = (char *) dest;
-	s = (char *) src;
+	s = (const char *) src;
 	while (n--)
 	    *t++ = *s++;
     } else {
 	t = (char *) dest + n;
-	s = (char *) src + n;
+	s = (const char *) src + n;
 	while (n--)
 	    *--t = *--s;
     }
@@ -432,7 +433,7 @@ void menu_save_mode_cmd (void)
     option_backup_ext = str_result;	/* this is a memory leak */
     option_backup_ext_int = 0;
     str_result[min (strlen (str_result), sizeof (int))] = '\0';
-    memcpy ((char *) &option_backup_ext_int, str_result, strlen (option_backup_ext));
+    memcpy (&option_backup_ext_int, str_result, strlen (option_backup_ext));
 }
 
 void
@@ -1525,7 +1526,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int 
 
 		if (buf[q - 1] != '\n') { /* incomplete line: try to recover */
 		    buf = mbuf + MAX_REPL_LEN / 2;
-		    q = strlen ((char *) buf);
+		    q = strlen ((const char *) buf);
 		    memmove (mbuf, buf, q);
 		    p = start + q;
 		    move_win = 1;
@@ -1535,7 +1536,7 @@ edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int 
 	    }
 	}
     } else {
- 	*len = strlen ((char *) exp);
+ 	*len = strlen ((const char *) exp);
 	if (replace_case) {
 	    for (p = start; p <= last_byte - l; p++) {
  		if ((*get_byte) (data, p) == (unsigned char)exp[0]) {	/* check if first char matches */
