@@ -32,10 +32,10 @@
 #include <stdlib.h>	/* For errno, putenv, etc.	      */
 #include <errno.h>	/* For errno on SunOS systems	      */
 #include <termios.h>	/* tcgetattr(), struct termios, etc.  */
-#if (!defined(__IBMC__) && !defined(__IBMCPP__))
 #include <sys/types.h>	/* Required by unistd.h below	      */
+#ifdef HAVE_SYS_IOCTL_H
+#   include <sys/ioctl.h> /* For ioctl() (surprise, surprise) */
 #endif
-#include <sys/ioctl.h>	/* For ioctl() (surprise, surprise)   */
 #include <fcntl.h>	/* For open(), etc.		      */
 #include <string.h>	/* strstr(), strcpy(), etc.	      */
 #include <signal.h>	/* sigaction(), sigprocmask(), etc.   */

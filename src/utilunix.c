@@ -35,12 +35,7 @@
 #include <errno.h>		/* my_system */
 #include <string.h>
 #include <ctype.h>
-#ifdef __linux__
-#   if defined(__GLIBC__) && (__GLIBC__ < 2)
-#	include <linux/termios.h>	/* This is needed for TIOCLINUX */
-#   else
-#	include <termios.h>
-#   endif
+#ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
 #ifdef __QNX__

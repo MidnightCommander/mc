@@ -1,5 +1,12 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* layout.c: Use HAVE_TERMIOS_H and HAVE_SYS_IOCTL_H more
+	consistently.
+	* mouse.c: Likewise.
+	* subshell.c: Likewise.
+	* win.c: Likewise.
+	* util.c: Remove unused includes.
+
 	* Makefile.am (mc_LDADD): Don't use LSLANG and LGPM, since they
 	are now included into MCLIBS.
 

@@ -27,7 +27,7 @@
 #endif
 #include <signal.h>	/* For kill() and SIGQUIT */
 #include <fcntl.h>
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
+#if HAVE_TERMIOS_H
 #    include <termios.h>
 #endif
 #include <stdio.h>

@@ -18,7 +18,7 @@
 #include <config.h>
 #include <stdio.h>
 #include <string.h>
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
+#ifdef HAVE_TERMIOS_H
 #    include <termios.h>
 #endif
 

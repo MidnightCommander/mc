@@ -25,15 +25,15 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
+#if HAVE_TERMIOS_H
 #    include <termios.h>
 #endif
      /*
       * If TIOCGWINSZ supported, make it available here, because window-
       * resizing code depends on it...
       */
-#if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_SYS_IOCTL_H)
-#	include <sys/ioctl.h>
+#ifdef HAVE_SYS_IOCTL_H
+#   include <sys/ioctl.h>
 #endif
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
