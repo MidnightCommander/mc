@@ -650,13 +650,16 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
     int num_words = -1, num_contexts = -1;
     int argc, result = 0;
     int i, j;
+    int alloc_contexts = MAX_CONTEXTS,
+    	alloc_words_per_context = MAX_WORDS_PER_CONTEXT,
+	max_alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
 
     args[0] = 0;
 
     strcpy (whole_left, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
     strcpy (whole_right, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_01234567890");
 
-    r = edit->rules = g_malloc0 (MAX_CONTEXTS * sizeof (struct context_rule *));
+    r = edit->rules = g_malloc (alloc_contexts * sizeof (struct context_rule *));
 
     if (!edit->defines)
 	edit->defines = g_tree_new ((GCompareFunc) strcmp);
@@ -728,6 +731,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 		c->right = g_strdup (" ");
 		num_contexts = 0;
 	    } else {
+		/* Terminate previous context.  */
+		r[num_contexts - 1]->keyword[num_words] = NULL;
 		c = r[num_contexts] = g_malloc0 (sizeof (struct context_rule));
 		if (!strcmp (*a, "exclusive")) {
 		    a++;
@@ -762,10 +767,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 		c->first_left = *c->left;
 		c->first_right = *c->right;
 	    }
-	    c->keyword = g_malloc0 (MAX_WORDS_PER_CONTEXT * sizeof (struct key_word *));
-#if 0
-	    c->max_words = MAX_WORDS_PER_CONTEXT;
-#endif
+	    c->keyword = g_malloc (alloc_words_per_context * sizeof (struct key_word *));
 	    num_words = 1;
 	    c->keyword[0] = g_malloc0 (sizeof (struct key_word));
 	    subst_defines (edit->defines, a, &args[1024]);
@@ -782,7 +784,15 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    c->keyword[0]->color = this_try_alloc_color_pair (fg, bg);
 	    c->keyword[0]->keyword = g_strdup (" ");
 	    check_not_a;
-	    num_contexts++;
+
+	    alloc_words_per_context = MAX_WORDS_PER_CONTEXT;
+	    if (++num_contexts >= alloc_contexts) {
+	    	struct context_rule **tmp;
+
+		alloc_contexts += 128;
+		tmp = g_realloc (r, alloc_contexts * sizeof (struct context_rule *));
+		r = tmp;
+	    }
 	} else if (!strcmp (args[0], "spellcheck")) {
 	    if (!c) {
 		result = line;
@@ -793,8 +803,6 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    struct key_word *k;
 	    if (num_words == -1)
 		break_a;
-	    if (num_words >= MAX_WORDS_PER_CONTEXT) 
-		break;
 	    check_a;
 	    k = r[num_contexts - 1]->keyword[num_words] = g_malloc0 (sizeof (struct key_word));
 	    if (!strcmp (*a, "whole")) {
@@ -832,7 +840,18 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 		bg = last_bg;
 	    k->color = this_try_alloc_color_pair (fg, bg);
 	    check_not_a;
-	    num_words++;
+
+	    if (++num_words >= alloc_words_per_context) {
+	    	struct key_word **tmp;
+
+		alloc_words_per_context += 1024;
+
+		if (alloc_words_per_context > max_alloc_words_per_context)
+		    max_alloc_words_per_context = alloc_words_per_context;
+
+		tmp = g_realloc (c->keyword, alloc_words_per_context * sizeof (struct key_word *));
+		c->keyword = tmp;
+	    }
 	} else if (*(args[0]) == '#') {
 	    /* do nothing for comment */
 	} else if (!strcmp (args[0], "file")) {
@@ -863,6 +882,12 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
     free_args (args);
     syntax_g_free (l);
 
+    /* Terminate context array.  */
+    if (num_contexts > 0) {
+	r[num_contexts - 1]->keyword[num_words] = NULL;
+	r[num_contexts] = NULL;
+    }
+
     if (!edit->rules[0])
 	syntax_g_free (edit->rules);
 
@@ -874,7 +899,10 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
     }
 
     {
-	char first_chars[MAX_WORDS_PER_CONTEXT + 2], *p;
+	char *first_chars, *p;
+
+	first_chars = g_malloc (max_alloc_words_per_context + 2);
+
 	for (i = 0; edit->rules[i]; i++) {
 	    c = edit->rules[i];
 	    p = first_chars;
@@ -884,6 +912,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    *p = '\0';
 	    c->keyword_first_chars = g_strdup (first_chars);
 	}
+
+	g_free (first_chars);
     }
 
     return result;
