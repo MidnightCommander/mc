@@ -714,7 +714,6 @@ AC_DEFUN([AC_USE_TERMCAP], [
 AC_DEFUN([AC_WITH_SLANG], [
 	AC_DEFINE(HAVE_SLANG, 1,
 		  [Define to use S-Lang library for screen management])
-	search_ncurses=false
 	screen_type="slang"
 	if $slang_use_system_installed_lib
 	then
@@ -780,22 +779,3 @@ AC_DEFUN([AC_EXT2_UNDEL], [
   fi
 ])
 
-dnl
-dnl Parameters: directory filename LIBS_append CPPFLAGS_append nicename
-dnl
-AC_DEFUN([AC_NCURSES], [
-    if $search_ncurses
-    then
-        if test -f $1/$2
-	then
-	    AC_MSG_NOTICE([found ncurses header $1/$2])
- 	    MCLIBS="$MCLIBS $3"
-	    CPPFLAGS="$CPPFLAGS $4"
-	    search_ncurses=false
-	    screen_type="ncurses"
-	    screen_manager="$5"
-	    AC_DEFINE(USE_NCURSES, 1,
-		      [Define to use ncurses for screen management])
-	fi
-    fi
-])
