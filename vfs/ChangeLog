@@ -1,3 +1,8 @@
+2002-12-16  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/rpm: Don't check package signatures - it creates a lot
+	of noise on stderr if the signature is missing.
+
 2002-12-14  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/mailfs.in: Fixed bug when opening empty mailbox.  Added

@@ -16,6 +16,9 @@ unset LC_ALL
 LC_TIME=C
 export LC_TIME
 
+RPM="rpm --nosignature"
+RPM2CPIO="rpm2cpio"
+
 mcrpmfs_list ()
 {
     # set MCFASTRPM_DFLT to 1 for faster rpm files handling by default, to 0 for
@@ -25,11 +28,11 @@ mcrpmfs_list ()
       MCFASTRPM=$MCFASTRPM_DFLT
     fi
     FILEPREF="-r--r--r--   1 root     root    "
-    DESC=`rpm -qip "$1" 2>/dev/null` || {
+    DESC=`$RPM -qip "$1" 2>/dev/null` || {
 	echo "$FILEPREF 0 "`date +"%b %d %H:%M"`" ERROR"
 	exit 1
     }
-    DATE=`rpm -qp --qf "%{BUILDTIME:date}\n" "$1" | cut -c 5-11,21-24`
+    DATE=`$RPM -qp --qf "%{BUILDTIME:date}\n" "$1" | cut -c 5-11,21-24`
     HEADERSIZE=`echo "$DESC" | wc -c`
     echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
     echo "-r-xr-xr-x   1 root     root    39 $DATE INSTALL"
@@ -40,25 +43,25 @@ mcrpmfs_list ()
     echo "$FILEPREF 0 $DATE INFO/BUILDHOST"
     echo "$FILEPREF 0 $DATE INFO/SOURCERPM"
     if test "$MCFASTRPM" = 0 ; then
-     test "`rpm -qp --qf \"%{DISTRIBUTION}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{DISTRIBUTION}\" \"$1\"`" = "(none)" ||
  	 echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
-     test "`rpm -qp --qf \"%{VENDOR}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{VENDOR}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/VENDOR"
-     test "`rpm -qp --qf \"%{DESCRIPTION}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{DESCRIPTION}\" \"$1\"`" = "(none)" ||
          echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
-     test "`rpm -qp --qf \"%{SUMMARY}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{SUMMARY}\" \"$1\"`" = "(none)" ||
          echo "$FILEPREF 0 $DATE INFO/SUMMARY"
-     if test "`rpm -qp --qf \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\" \"$1\"`" != "(none)(none)(none)(none)(none)"; then
+     if test "`$RPM -qp --qf \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\" \"$1\"`" != "(none)(none)(none)(none)(none)"; then
 	echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
-	test "`rpm -qp --qf \"%{RPMTAG_PREIN}\" \"$1\"`" = '(none)' ||
+	test "`$RPM -qp --qf \"%{RPMTAG_PREIN}\" \"$1\"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
-	test "`rpm -qp --qf \"%{RPMTAG_POSTIN}\" \"$1\"`" = '(none)' ||
+	test "`$RPM -qp --qf \"%{RPMTAG_POSTIN}\" \"$1\"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
-	test "`rpm -qp --qf \"%{RPMTAG_PREUN}\" \"$1\"`" = '(none)' ||
+	test "`$RPM -qp --qf \"%{RPMTAG_PREUN}\" \"$1\"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
-	test "`rpm -qp --qf \"%{RPMTAG_POSTUN}\" \"$1\"`" = '(none)' ||
+	test "`$RPM -qp --qf \"%{RPMTAG_POSTUN}\" \"$1\"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
-	test "`rpm -qp --qf \"%{VERIFYSCRIPT}\" \"$1\"`" = '(none)' ||
+	test "`$RPM -qp --qf \"%{VERIFYSCRIPT}\" \"$1\"`" = '(none)' ||
 	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
         echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
      fi
@@ -76,15 +79,15 @@ mcrpmfs_list ()
      echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
     fi
     if test "$MCFASTRPM" = 0 ; then
-     test "`rpm -qp --qf \"%{PACKAGER}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{PACKAGER}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
-     test "`rpm -qp --qf \"%{URL}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{URL}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/URL"
-     test "`rpm -qp --qf \"%{SERIAL}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{SERIAL}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
-     test "`rpm -qp --qf \"%{COPYRIGHT}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{COPYRIGHT}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
-     test "`rpm -qp --qf \"%{LICENSE}\" \"$1\"`" = "(none)" ||
+     test "`$RPM -qp --qf \"%{LICENSE}\" \"$1\"`" = "(none)" ||
 	 echo "$FILEPREF 0 $DATE INFO/LICENSE"
     else
 	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
@@ -98,13 +101,13 @@ mcrpmfs_list ()
     echo "$FILEPREF 0 $DATE INFO/OS"
     echo "$FILEPREF 0 $DATE INFO/SIZE"
     if test "$MCFASTRPM" != 0 ; then
-    rpm -qp --qf "[%{REQUIRENAME}\n]" "$1" | grep "(none)" > /dev/null ||
+    $RPM -qp --qf "[%{REQUIRENAME}\n]" "$1" | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
-    rpm -qp --qf "[%{OBSOLETES}\n]" "$1" | grep "(none)" > /dev/null ||
+    $RPM -qp --qf "[%{OBSOLETES}\n]" "$1" | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/OBSOLETES"
-    rpm -qp --qf "[%{PROVIDES}\n]" "$1" | grep "(none)" > /dev/null ||
+    $RPM -qp --qf "[%{PROVIDES}\n]" "$1" | grep "(none)" > /dev/null ||
 	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
-    test "`rpm -qp --qf \"%{CHANGELOGTEXT}\" \"$1\"`" = "(none)" ||
+    test "`$RPM -qp --qf \"%{CHANGELOGTEXT}\" \"$1\"`" = "(none)" ||
        echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     else 
 	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
@@ -113,50 +116,50 @@ mcrpmfs_list ()
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
 
-    rpm2cpio "$1" | cpio -tv --quiet
+    $RPM2CPIO "$1" | cpio -tv --quiet
     echo "$FILEPREF 0 $DATE CONTENTS.cpio"
 }
 
 mcrpmfs_copyout ()
 {
     case "$2" in
-	HEADER) rpm -qip "$1" > "$3"; exit 0;;
+	HEADER) $RPM -qip "$1" > "$3"; exit 0;;
 	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
 	UPGRADE) echo "# Run this to upgrade this RPM package" > "$3"; exit 0;;
-	ERROR) rpm -qip "$1" > /dev/null 2> "$3"; exit 0;;
-	INFO/NAME-VERSION-RELEASE)	rpm -qp --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" "$1" > "$3"; exit 0;;
-	INFO/RELEASE)		rpm -qp --qf "%{RELEASE}\n" "$1" > "$3"; exit 0;;
-	INFO/GROUP)		rpm -qp --qf "%{GROUP}\n" "$1" > "$3"; exit 0;;
-	INFO/DISTRIBUTION) 	rpm -qp --qf "%{DISTRIBUTION}\n" "$1" > "$3"; exit 0;;
-	INFO/VENDOR)		rpm -qp --qf "%{VENDOR}\n" "$1" > "$3"; exit 0;;
-	INFO/BUILDHOST)		rpm -qp --qf "%{BUILDHOST}\n" "$1" > "$3"; exit 0;;
-	INFO/SOURCERPM)		rpm -qp --qf "%{SOURCERPM}\n" "$1" > "$3"; exit 0;;
-	INFO/DESCRIPTION)	rpm -qp --qf "%{DESCRIPTION}\n" "$1" > "$3"; exit 0;;
-	INFO/PACKAGER)		rpm -qp --qf "%{PACKAGER}\n" "$1" > "$3"; exit 0;;
-	INFO/URL)		rpm -qp --qf "%{URL}\n" "$1" >"$3"; exit 0;;
-	INFO/BUILDTIME)		rpm -qp --qf "%{BUILDTIME:date}\n" "$1" >"$3"; exit 0;;
-	INFO/SERIAL)		rpm -qp --qf "%{SERIAL}\n" "$1" >"$3"; exit 0;;
-	INFO/COPYRIGHT)		rpm -qp --qf "%{COPYRIGHT}\n" "$1" >"$3"; exit 0;;
-	INFO/RPMVERSION)	rpm -qp --qf "%{RPMVERSION}\n" "$1" >"$3"; exit 0;;
-	INFO/REQUIRENAME)	rpm -qp --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" "$1" >"$3"; exit 0;;
-	INFO/PROVIDES)		rpm -qp --qf "[%{PROVIDES}\n]" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/PREIN)	rpm -qp --qf "%{RPMTAG_PREIN}\n" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/POSTIN)	rpm -qp --qf "%{RPMTAG_POSTIN}\n" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/PREUN)	rpm -qp --qf "%{RPMTAG_PREUN}\n" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/POSTUN)	rpm -qp --qf "%{RPMTAG_POSTUN}\n" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/VERIFYSCRIPT)	rpm -qp --qf "%{VERIFYSCRIPT}\n" "$1" >"$3"; exit 0;;
-	INFO/SCRIPTS/ALL)		rpm -qp --scripts "$1" > "$3"; exit 0;;
-	INFO/SUMMARY)		rpm -qp --qf "%{SUMMARY}\n" "$1" > "$3"; exit 0;;
-	INFO/OS)		rpm -qp --qf "%{OS}\n" "$1" > "$3"; exit 0;;
-	INFO/CHANGELOG)		rpm -qp --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" "$1" > "$3"; exit 0;;
-	INFO/SIZE)		rpm -qp --qf "%{SIZE} bytes\n" "$1" > "$3"; exit 0;;
-	CONTENTS.cpio)		rpm2cpio "$1" > "$3"; exit 0;;
+	ERROR) $RPM -qip "$1" > /dev/null 2> "$3"; exit 0;;
+	INFO/NAME-VERSION-RELEASE)	$RPM -qp --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" "$1" > "$3"; exit 0;;
+	INFO/RELEASE)		$RPM -qp --qf "%{RELEASE}\n" "$1" > "$3"; exit 0;;
+	INFO/GROUP)		$RPM -qp --qf "%{GROUP}\n" "$1" > "$3"; exit 0;;
+	INFO/DISTRIBUTION) 	$RPM -qp --qf "%{DISTRIBUTION}\n" "$1" > "$3"; exit 0;;
+	INFO/VENDOR)		$RPM -qp --qf "%{VENDOR}\n" "$1" > "$3"; exit 0;;
+	INFO/BUILDHOST)		$RPM -qp --qf "%{BUILDHOST}\n" "$1" > "$3"; exit 0;;
+	INFO/SOURCERPM)		$RPM -qp --qf "%{SOURCERPM}\n" "$1" > "$3"; exit 0;;
+	INFO/DESCRIPTION)	$RPM -qp --qf "%{DESCRIPTION}\n" "$1" > "$3"; exit 0;;
+	INFO/PACKAGER)		$RPM -qp --qf "%{PACKAGER}\n" "$1" > "$3"; exit 0;;
+	INFO/URL)		$RPM -qp --qf "%{URL}\n" "$1" >"$3"; exit 0;;
+	INFO/BUILDTIME)		$RPM -qp --qf "%{BUILDTIME:date}\n" "$1" >"$3"; exit 0;;
+	INFO/SERIAL)		$RPM -qp --qf "%{SERIAL}\n" "$1" >"$3"; exit 0;;
+	INFO/COPYRIGHT)		$RPM -qp --qf "%{COPYRIGHT}\n" "$1" >"$3"; exit 0;;
+	INFO/RPMVERSION)	$RPM -qp --qf "%{RPMVERSION}\n" "$1" >"$3"; exit 0;;
+	INFO/REQUIRENAME)	$RPM -qp --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" "$1" >"$3"; exit 0;;
+	INFO/PROVIDES)		$RPM -qp --qf "[%{PROVIDES}\n]" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/PREIN)	$RPM -qp --qf "%{RPMTAG_PREIN}\n" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/POSTIN)	$RPM -qp --qf "%{RPMTAG_POSTIN}\n" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/PREUN)	$RPM -qp --qf "%{RPMTAG_PREUN}\n" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/POSTUN)	$RPM -qp --qf "%{RPMTAG_POSTUN}\n" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/VERIFYSCRIPT)	$RPM -qp --qf "%{VERIFYSCRIPT}\n" "$1" >"$3"; exit 0;;
+	INFO/SCRIPTS/ALL)		$RPM -qp --scripts "$1" > "$3"; exit 0;;
+	INFO/SUMMARY)		$RPM -qp --qf "%{SUMMARY}\n" "$1" > "$3"; exit 0;;
+	INFO/OS)		$RPM -qp --qf "%{OS}\n" "$1" > "$3"; exit 0;;
+	INFO/CHANGELOG)		$RPM -qp --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" "$1" > "$3"; exit 0;;
+	INFO/SIZE)		$RPM -qp --qf "%{SIZE} bytes\n" "$1" > "$3"; exit 0;;
+	CONTENTS.cpio)		$RPM2CPIO "$1" > "$3"; exit 0;;
 	*)
 	    TMPDIR=/tmp/mctmpdir.$$
 	    mkdir $TMPDIR || exit 1
 	    cd $TMPDIR
 	    # Files in RPM version 4 and above start with "./" - try both
-	    rpm2cpio "$1" | cpio -iumd --quiet "$2" "./$2" >/dev/null
+	    $RPM2CPIO "$1" | cpio -iumd --quiet "$2" "./$2" >/dev/null
 	    mv "$2" "$3" 2>/dev/null
 	    cd /
 	    rm -rf $TMPDIR;;
@@ -166,8 +169,8 @@ mcrpmfs_copyout ()
 mcrpmfs_run ()
 {
     case "$2" in
-	INSTALL) echo "Installing \"$1\""; rpm -ivh "$1"; exit 0;;
-	UPGRADE) echo "Upgrading \"$1\""; rpm -iUvh "$1"; exit 0;;
+	INSTALL) echo "Installing \"$1\""; $RPM -ivh "$1"; exit 0;;
+	UPGRADE) echo "Upgrading \"$1\""; $RPM -iUvh "$1"; exit 0;;
     esac
 }
 
