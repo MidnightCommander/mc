@@ -1,10 +1,12 @@
 edit/edit_key_translator.c
 gnome/gcmd.c
 gnome/gdesktop.c
+gnome/gdialogs.c
 gnome/gdnd.c
+gnome/gicon.c
 gnome/glayout.c
-gnome/gmc-window.c
 gnome/gprop.c
+gnome/gpopup.c
 gnome/gscreen.c
 gnome/gtools.c
 gnome/gview.c
@@ -28,6 +30,7 @@ src/dialog.c
 src/dir.c
 src/ext.c
 src/file.c
+src/filegui.c
 src/find.c
 src/fixhlp.c
 src/help.c
