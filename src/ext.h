@@ -8,11 +8,7 @@ int regex_command (char *filename, char *action, int *move_dir);
  */
 void flush_extension_file (void);
 
-#ifdef NATIVE_WIN32
-#    define MC_USER_EXT "mc.ext"
-#    define MC_LIB_EXT  "mc.ext"
-#else
-#    define MC_USER_EXT ".mc/bindings" 
-#    define MC_LIB_EXT  "mc.ext"
-#endif
-#endif
+#define MC_USER_EXT ".mc/bindings"
+#define MC_LIB_EXT  "mc.ext"
+
+#endif				/* !__EXT_H */

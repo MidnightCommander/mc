@@ -933,7 +933,6 @@ view_other_cmd (void)
     }
 }
 
-#ifndef NATIVE_WIN32
 static void
 do_link (int symbolic_link, char *fname)
 {
@@ -1042,7 +1041,6 @@ void edit_symlink_cmd (void)
 		 selection (cpanel)->fname);
     }
 }
-#endif /* !NATIVE_WIN32 */
 
 void help_cmd (void)
 {

@@ -171,12 +171,7 @@ struct WView {
 
 
 /* Maxlimit for skipping updates */
-int max_dirt_limit =
-#ifdef NATIVE_WIN32
-    0;
-#else
-    10;
-#endif
+int max_dirt_limit = 10;
 
 extern Hook *idle_hook;
 

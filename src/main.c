@@ -22,10 +22,6 @@
 #include <config.h>
 #include <locale.h>
 
-#ifdef NATIVE_WIN32
-#    include <windows.h>
-#endif
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -78,10 +74,6 @@
 
 #include "chmod.h"
 #include "chown.h"
-
-#ifdef NATIVE_WIN32
-#    include "drive.h"
-#endif
 
 #ifdef WITH_SMBFS
 #include "../vfs/smbfs.h"	/* smbfs_set_debug() */
@@ -840,9 +832,6 @@ static menu_entry PanelMenu[] = {
 #endif
 #endif
     {' ', "", ' ', 0},
-#ifdef NATIVE_WIN32
-    {' ', N_("&Drive...       M-d"), 'D', drive_cmd_a},
-#endif
     {' ', N_("&Rescan         C-r"), 'R', reread_cmd}
 };
 
@@ -867,9 +856,6 @@ static menu_entry RightMenu[] = {
 #endif
 #endif
     {' ', "", ' ', 0},
-#ifdef NATIVE_WIN32
-    {' ', N_("&Drive...       M-d"), 'D', drive_cmd_b},
-#endif
     {' ', N_("&Rescan         C-r"), 'R', reread_cmd}
 };
 
@@ -881,13 +867,11 @@ static menu_entry FileMenu[] = {
     {' ', N_("&Edit               F4"), 'E', edit_cmd},
     {' ', N_("&Copy               F5"), 'C', copy_cmd},
     {' ', N_("c&Hmod           C-x c"), 'H', chmod_cmd},
-#ifndef NATIVE_WIN32
     {' ', N_("&Link            C-x l"), 'L', link_cmd},
     {' ', N_("&SymLink         C-x s"), 'S', symlink_cmd},
     {' ', N_("edit s&Ymlink  C-x C-s"), 'Y', edit_symlink_cmd},
     {' ', N_("ch&Own           C-x o"), 'O', chown_cmd},
     {' ', N_("&Advanced chown       "), 'A', chown_advanced_cmd},
-#endif
     {' ', N_("&Rename/Move        F6"), 'R', ren_cmd},
     {' ', N_("&Mkdir              F7"), 'M', mkdir_cmd},
     {' ', N_("&Delete             F8"), 'D', delete_cmd},
@@ -945,9 +929,7 @@ static menu_entry OptMenu[] = {
     {' ', N_("&Layout..."), 'L', layout_cmd},
     {' ', N_("c&Onfirmation..."), 'O', confirm_box},
     {' ', N_("&Display bits..."), 'D', display_bits_box},
-#ifndef NATIVE_WIN32
     {' ', N_("learn &Keys..."), 'K', learn_keys},
-#endif				/* !NATIVE_WIN32 */
 #ifdef USE_VFS
     {' ', N_("&Virtual FS..."), 'V', configure_vfs},
 #endif				/* !USE_VFS */
@@ -1260,14 +1242,12 @@ static const key_map ctl_x_map[] = {
     {'t', copy_current_tagged},
     {XCTRL ('t'), copy_other_tagged},
     {'c', chmod_cmd},
-#ifndef NATIVE_WIN32
     {'o', chown_cmd},
     {'r', copy_current_readlink},
     {XCTRL ('r'), copy_other_readlink},
     {'l', link_cmd},
     {'s', symlink_cmd},
     {XCTRL ('s'), edit_symlink_cmd},
-#endif				/* !NATIVE_WIN32 */
     {'i', info_cmd_no_menu},
     {'q', quick_cmd_no_menu},
     {'h', add2hotlist_cmd},
@@ -1341,15 +1321,14 @@ static const key_map default_map[] = {
 static void
 setup_sigwinch (void)
 {
-#if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && \
-   !defined(NATIVE_WIN32) && defined(SIGWINCH)
+#if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && defined(SIGWINCH)
     struct sigaction act, oact;
     act.sa_handler = flag_winch;
     sigemptyset (&act.sa_mask);
     act.sa_flags = 0;
-#   ifdef SA_RESTART
+#ifdef SA_RESTART
     act.sa_flags |= SA_RESTART;
-#   endif
+#endif
     sigaction (SIGWINCH, &act, &oact);
 #endif
 }
@@ -1519,13 +1498,6 @@ make_panels_dirty (void)
     move (row, col);
 }
 
-/* In Windows people want to actually type the '\' key frequently */
-#ifdef NATIVE_WIN32
-#   define check_key_backslash(x) 0
-#else
-#   define check_key_backslash(x) ((x) == '\\')
-#endif
-
 static int
 midnight_callback (struct Dlg_head *h, int id, int msg)
 {
@@ -1585,7 +1557,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 		    return MSG_HANDLED;
 		}
 
-		if (check_key_backslash (id) || id == '-') {
+		if (id == '\\' || id == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
@@ -1604,7 +1576,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 		    return MSG_HANDLED;
 		}
 
-		if (check_key_backslash (id) || id == '-') {
+		if (id == '\\' || id == '-') {
 		    unselect_cmd ();
 		    return MSG_HANDLED;
 		}
@@ -1825,46 +1797,7 @@ do_nc (void)
     done_mc_profile ();
 }
 
-#if defined (NATIVE_WIN32)
-/* Windows NT code */
-
-void
-OS_Setup (void)
-{
-    SetConsoleTitle ("GNU Midnight Commander");
-
-    shell = getenv ("COMSPEC");
-    if (!shell || !*shell)
-	shell = get_default_shell ();
-
-    /* Default opening mode for files is binary, not text (CR/LF translation) */
-#ifndef __EMX__
-    _fmode = O_BINARY;
-#endif
-
-    mc_home = get_mc_lib_dir ();
-}
-
-/* Nothing to be done on Windows */
-static void
-sigchld_handler_no_subshell (int sig)
-{
-}
-
-void
-init_sigchld (void)
-{
-}
-
-void
-init_sigfatals (void)
-{
-}
-
-
-#else
-
-/* Unix version */
+/* POSIX version.  The only version we support.  */
 static void
 OS_Setup (void)
 {
@@ -1947,8 +1880,6 @@ init_sigchld (void)
 #endif				/* HAVE_SUBSHELL_SUPPORT */
     }
 }
-
-#endif				/* NATIVE_WIN32, UNIX */
 
 static void
 print_mc_usage (poptContext ctx, FILE *stream)
@@ -2093,15 +2024,13 @@ static const struct poptOption argument_table[] = {
      N_("Resets soft keys on HP terminals")},
     {"slow", 's', POPT_ARG_NONE, &slow_terminal, 0,
      N_("To run on slow terminals")},
-#ifndef NATIVE_WIN32
     {"stickchars", 'a', 0, &force_ugly_line_drawing, 0,
      N_("Use stickchars to draw")},
-#endif				/* !NATIVE_WIN32 */
 #ifdef HAVE_SUBSHELL_SUPPORT
     {"subshell", 'U', POPT_ARG_NONE, &use_subshell, 0,
      N_("Enables subshell support (default)")},
 #endif
-#if defined(HAVE_SLANG) && !defined(NATIVE_WIN32)
+#if defined(HAVE_SLANG)
     {"termcap", 't', 0, &SLtt_Try_Termcap, 0,
      N_("Tries to use termcap instead of terminfo")},
 #endif
@@ -2193,9 +2122,6 @@ handle_args (int argc, char *argv[])
  * Previous versions of the program had all of their files in
  * the $HOME, we are now putting them in $HOME/.mc
  */
-#ifdef NATIVE_WIN32
-#    define compatibility_move_mc_files() 0
-#else
 
 static int
 do_mc_filename_rename (char *mc_dir, char *o_name, char *n_name)
@@ -2232,7 +2158,6 @@ compatibility_move_mc_files (void)
     g_free (mc_dir);
     return move;
 }
-#endif				/* NATIVE_WIN32 */
 
 int
 main (int argc, char *argv[])
@@ -2366,18 +2291,12 @@ main (int argc, char *argv[])
     if (alternate_plus_minus)
 	numeric_keypad_mode ();
 
-#ifndef NATIVE_WIN32
     signal (SIGCHLD, SIG_DFL);	/* Disable the SIGCHLD handler */
-#endif
 
     if (console_flag)
 	handle_console (CONSOLE_DONE);
     putchar ('\n');		/* Hack to make shell's prompt start at left of screen */
 
-#ifdef NATIVE_WIN32
-    /* On NT, home_dir is malloced */
-    g_free (home_dir);
-#endif
     if (last_wd_file && last_wd_string && !print_last_revert
 	&& !edit_one_file && !view_one_file) {
 	int last_wd_fd =
@@ -2391,9 +2310,7 @@ main (int argc, char *argv[])
     }
     g_free (last_wd_string);
 
-#ifndef NATIVE_WIN32
     g_free (mc_home);
-#endif				/* NATIVE_WIN32 */
     done_key ();
 #ifdef HAVE_CHARSET
     free_codepages_list ();

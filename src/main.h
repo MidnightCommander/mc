@@ -146,11 +146,7 @@ extern struct WMenu *the_menubar;
 void done_menu (void);
 void init_menu (void);
 
-#ifdef NATIVE_WIN32
-#    define MC_BASE ""
-#else
-#    define MC_BASE "/.mc/"
-#endif /* !NATIVE_WIN32 */
+#define MC_BASE "/.mc/"
 
 struct WPanel;
 void directory_history_add   (struct WPanel *panel, const char *dir);

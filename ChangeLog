@@ -1,5 +1,7 @@
 2003-07-22  Pavel Roskin  <proski@gnu.org>
 
+	Get rid of all references to NATIVE_WIN32.
+
 	* pc: Remove.  No work has been done on the PC post for years.
 	* README.PC: Likewise.
 	* Makefile.am: Adjust for the above.

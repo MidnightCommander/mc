@@ -392,9 +392,7 @@ static menu_entry OptMenu[] =
 {
     {' ', N_("&General...  "), 'G', menu_options},
     {' ', N_("&Save mode..."), 'S', menu_save_mode_cmd},
-#ifndef NATIVE_WIN32
     {' ', N_("learn &Keys..."), 'K', learn_keys}
-#endif				/* !NATIVE_WIN32 */
 };
 
 #define OptMenuEmacs OptMenu

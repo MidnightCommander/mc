@@ -593,11 +593,6 @@ static int dlg_try_hotkey (Dlg_head *h, int d_key)
     if (d_key & ALT(0) && c < 255 && isalpha(c))
 	d_key = tolower(c);
 
-#ifdef NATIVE_WIN32
-	/* .ado: fix problem with file_permission under Win95 */
-    if (d_key == 0) return 0;
-#endif
-
     handled = 0;
     if (h->current->widget->options & W_WANT_HOTKEY)
 	handled = callback (h) (h->current->widget, WIDGET_HOTKEY, d_key);

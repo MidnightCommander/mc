@@ -199,12 +199,6 @@ filename_completion_function (char *text, int state)
 
 /* We assume here that text[0] == '~' , if you want to call it in another way,
    you have to change the code */
-#ifdef NATIVE_WIN32
-char *username_completion_function (char *text, int state)
-{
-    return NULL;
-}
-#else
 static char *
 username_completion_function (char *text, int state)
 {
@@ -238,7 +232,6 @@ username_completion_function (char *text, int state)
 }
 
 extern char **environ;
-#endif /* NATIVE_WIN32 */
 
 /* We assume text [0] == '$' and want to have a look at text [1], if it is
    equal to '{', so that we should append '}' at the end */

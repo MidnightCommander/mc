@@ -211,16 +211,6 @@ tree_store_load_from(char *name)
 	    name = decode(buffer + 2);
 
 	    len = strlen(name);
-#ifdef NATIVE_WIN32
-	    /* .ado: Drives for Win32 */
-	    if ((len > 2) &&
-		isalpha(name[0]) &&
-		(name[1] == ':') && (name[2] == '\\')) {
-		tree_store_add_entry(name);
-		strcpy(oldname, name);
-	    } else
-#endif
-		/* UNIX Version */
 	    if (name[0] != PATH_SEP) {
 		/* Clear-text decompression */
 		char *s = strtok(name, " ");

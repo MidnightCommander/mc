@@ -18,19 +18,15 @@ void panel_load_setup (struct WPanel *panel, char *section);
 extern char *profile_name;
 extern char *global_profile_name;
 
-extern char setup_color_string [];
-extern char term_color_string [];
-extern char color_terminal_string [];
+extern char setup_color_string[];
+extern char term_color_string[];
+extern char color_terminal_string[];
 
 extern int startup_left_mode;
 extern int startup_right_mode;
 extern int verbose;
 
-#ifdef NATIVE_WIN32
-#    define PROFILE_NAME     "mc.ini"
-#    define HOTLIST_FILENAME "mc.hot"
-#else
-#    define PROFILE_NAME     ".mc/ini"
-#    define HOTLIST_FILENAME ".mc/hotlist"
-#endif
-#endif
+#define PROFILE_NAME     ".mc/ini"
+#define HOTLIST_FILENAME ".mc/hotlist"
+
+#endif				/* !__SETUP_H */

@@ -3,13 +3,8 @@
 
 /* Default filenames for the tree */
 
-#ifdef NATIVE_WIN32
-#   define MC_TREE "mcn.tre"
-#   define MC_TREE_TMP "mcn.tr~"
-#else
-#   define MC_TREE ".mc/Tree"
-#   define MC_TREE_TMP ".mc/Tree.tmp"
-#endif
+#define MC_TREE ".mc/Tree"
+#define MC_TREE_TMP ".mc/Tree.tmp"
 
 typedef struct tree_entry {
 	char *name;			/* The full path of directory */

@@ -76,11 +76,6 @@ my_mkdir (char *s, mode_t mode)
     int result;
 
     result = mc_mkdir (s, mode);
-#ifdef NATIVE_WIN32
-    /* .ado: it will be disabled in Win32 */
-    /* otherwise crash if directory already exists. */
-    return result;
-#endif
     if (result) {
 	char *p = vfs_canon (s);
 

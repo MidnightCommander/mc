@@ -289,12 +289,6 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	return 1;
     }
 
-    /* .ado: NT Alpha cannot allow CTRL in Menubar */
-#if defined(NATIVE_WIN32)
-       if (!key)
-               return 0;
-#endif
-
     if (!menubar->dropped){
 	const int items = menubar->items;
 	for (i = 0; i < items; i++){

@@ -437,15 +437,11 @@ static void help_show (Dlg_head *h, char *paint_start)
 		    if (c == ' ' || c == '.')
 			addch (c);
 		    else
-#ifndef NATIVE_WIN32
 #ifndef HAVE_SLANG
 			addch (acs_map [c]);
 #else
 			SLsmg_draw_object (h->y + line + 2, h->x + col + 2, c);
 #endif
-#else
-			addch (acs2pc (c));
-#endif /* NATIVE_WIN32 */
 		} else
 		    addch (c);
 		col++;

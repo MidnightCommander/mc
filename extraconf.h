@@ -25,13 +25,6 @@ the need to embed this logic into configure.in.
 # endif
 #endif
 
-#ifndef NATIVE_WIN32
-/* some Unices do not define this, and slang requires it: */
-#ifndef unix
-#    define unix
-#endif
-#endif
-
 #ifndef USE_VFS
 #    undef USE_NETCODE
 #    undef USE_EXT2FSLIB

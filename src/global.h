@@ -20,14 +20,6 @@
     /* memory and strings.h conflict on other systems */
 #endif /* !STDC_HEADERS & !HAVE_STRING_H */
 
-#ifdef NATIVE_WIN32
-#  include <windows.h>
-#  include <io.h>
-#ifdef _MSC_VER
-#    include <direct.h> /* from mkdir() */
-#endif
-#endif
-
 #ifdef HAVE_SYS_PARAM_H
 #  include <sys/param.h>
 #endif
@@ -76,7 +68,7 @@
 #  endif
 #endif
 
-#if !defined(HAVE_SYS_TIME_H) && !defined(NATIVE_WIN32)
+#if !defined(HAVE_SYS_TIME_H)
 struct timeval {
     long int tv_sec;  /* seconds */
     long int tv_usec; /* microseconds */

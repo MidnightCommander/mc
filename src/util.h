@@ -145,32 +145,16 @@ void save_file_position (char *filename, long line, long column);
 
 
 /* OS specific defines */
-
-#ifdef NATIVE_WIN32
-#    define PATH_SEP '\\'
-#    define PATH_SEP_STR "\\"
-#    define PATH_ENV_SEP ';'
-#    define TMPDIR_DEFAULT "c:\\temp"
-#    define SCRIPT_SUFFIX ".cmd"
-#    define OS_SORT_CASE_SENSITIVE_DEFAULT 0
-#    define STRCOMP stricmp
-#    define STRNCOMP strnicmp
-#    define MC_ARCH_FLAGS REG_ICASE
-     char *get_default_shell (void);
-     char *get_default_editor (void);
-     int lstat (const char* pathname, struct stat *buffer);
-#else
-#    define PATH_SEP '/'
-#    define PATH_SEP_STR "/"
-#    define PATH_ENV_SEP ':'
-#    define TMPDIR_DEFAULT "/tmp"
-#    define SCRIPT_SUFFIX ""
-#    define get_default_editor() "vi"
-#    define OS_SORT_CASE_SENSITIVE_DEFAULT 1
-#    define STRCOMP strcmp
-#    define STRNCOMP strncmp
-#    define MC_ARCH_FLAGS 0
-#endif
+#define PATH_SEP '/'
+#define PATH_SEP_STR "/"
+#define PATH_ENV_SEP ':'
+#define TMPDIR_DEFAULT "/tmp"
+#define SCRIPT_SUFFIX ""
+#define get_default_editor() "vi"
+#define OS_SORT_CASE_SENSITIVE_DEFAULT 1
+#define STRCOMP strcmp
+#define STRNCOMP strncmp
+#define MC_ARCH_FLAGS 0
 
 #include "i18n.h"
 
@@ -192,4 +176,4 @@ void save_file_position (char *filename, long line, long column);
 #define ISASCII(c) isascii(c)
 #endif
 
-#endif
+#endif				/* !__UTIL_H */
