@@ -914,8 +914,8 @@ view_other_cmd (void)
 	if (clear_before_exec)
 	    clr_scr ();
 #endif
-
-	numeric_keypad_mode ();
+        if (alternate_plus_minus)
+            numeric_keypad_mode ();
 #ifndef HAVE_SLANG
 	/* With slang we don't want any of this, since there
 	 * is no mc_raw_mode supported
@@ -952,7 +952,8 @@ view_other_cmd (void)
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
 
-	application_keypad_mode ();
+        if (alternate_plus_minus)
+            application_keypad_mode ();
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
 #ifndef HAVE_X	

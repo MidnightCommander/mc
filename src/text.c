@@ -63,7 +63,8 @@ edition_post_exec (void)
     channels_up ();
     if (use_mouse_p)
 	init_mouse ();
-    application_keypad_mode ();
+    if (alternate_plus_minus)
+        application_keypad_mode ();
 }
 
 void
