@@ -262,6 +262,14 @@ regex/\.a(rj|[0-9][0-9])$
 	Extract=unarj x %f '*'
 	Extract (with flags)=I=%{Enter any Unarj flags:}; if test -n "$I"; then unarj x $I %f; fi
 
+# ha
+regex/\.(ha|HA|Ha)$
+	Open=%cd %p#uha
+	View=%view{ascii} ha lf %f
+	Icon=ha.xpm
+	Extract=ha xy %f '*'
+	Extract (with flags)=I=%{Enter any HA flags:}; if test -n "$I"; then ha xy $I %f; fi
+
 # ar library
 regex/\.s?a$
 	Open=%cd %p#uar
