@@ -199,18 +199,10 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	/* File statistics */
 	/* File type first */
   	if (S_ISREG (fp_dlg->st.st_mode)) {
-		if (use_magic)
-		{
-			gen_string = g_strconcat (_("File Type: "),
-						  gnome_mime_type_or_default_of_file (fp_dlg->file_name, "text/plain"),
-						  NULL);
-		}
-		else
-		{
-			gen_string = g_strconcat (_("File Type: "),
-                                                  gnome_mime_type (fp_dlg->file_name),
-						  NULL);
-		}
+		gen_string = g_strconcat (_("File Type: "), use_magic ?
+					    gnome_mime_type_or_default_of_file (fp_dlg->file_name, "text/plain") :
+                                	    gnome_mime_type (fp_dlg->file_name),
+					    NULL);
 		label = gtk_label_new (gen_string);
 		g_free (gen_string);
 	} else if (S_ISLNK (fp_dlg->st.st_mode)) {
@@ -1161,7 +1153,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 			if (!p) {
 				uid = atoi (new_user_name);
 				if (uid == 0) {
-					message (1, "Error", _("You entered an invalid username"));
+					message (1, MSG_ERROR, _("You entered an invalid username"));
 					uid = fpd->st.st_uid;
 				}
 			} else
@@ -1172,7 +1164,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 				if (!p) {
 					uid = atoi (new_user_name);
 					if (uid == 0) {
-						message (1, "Error", _("You entered an invalid username"));
+						message (1, MSG_ERROR, _("You entered an invalid username"));
 						uid = fpd->st.st_uid;
 					}
 				} else
@@ -1192,7 +1184,7 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 		if (!g) {
 			gid = atoi (new_group_name);
 			if (gid == 0) {
-				message (1, "Error", "You entered an invalid group name");
+				message (1, MSG_ERROR, _("You entered an invalid group name"));
 				gid = fpd->st.st_gid;
 			}
 		} else
@@ -1209,25 +1201,25 @@ static gint
 apply_name_change (GnomeFilePropertyDialog *fpd)
 {
 	char *new_name;
-	char *base_name;
-	char *full_target;
 	FileOpContext *ctx;
 	long   count = 0;
 	double bytes = 0;
 
 	new_name = gtk_entry_get_text (GTK_ENTRY (fpd->file_entry));
 	if (!*new_name) {
-		message (1, "Error", _("You must rename your file to something"));
+		message (1, MSG_ERROR, _("You must rename your file to something"));
 		return 0;
 	}
 	/* has it changed? */
 	if (strcmp (strrchr(fpd->file_name, '/') + 1, new_name)) {
 		if (strchr (new_name, '/')) {
-			message (1, "Error", _("You cannot rename a file to something containing a '/' character"));
+			message (1, MSG_ERROR, _("You cannot rename a file to something containing a '/' character"));
 			return 0;
 		} else {
 			char *p;
 			int s;
+			char *base_name;
+			char *full_target;
 
 			/* create the files. */
 			base_name = g_strdup (fpd->file_name);
@@ -1238,6 +1230,7 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 				*p = '\0';
 
 			full_target = concat_dir_and_file (base_name, new_name);
+			g_free (base_name);
 
 			ctx = file_op_context_new ();
 			file_op_context_create_ui (ctx, OP_MOVE, FALSE);
