@@ -31,11 +31,11 @@ Tartalomjegyzék
        Menü szerkesztés Menu File Edit
      Beállítások Options Menu
        Beállítások... Configuration
-       Képernyõbitek Display bits
+       Megjelenés Layout
        Megerõsítés Confirmation
+       Képernyõbitek Display bits
        Billentyûzet tanítás Learn keys
        Csatolt fájlrendszer Virtual FS
-       Megjelenés Layout
        Beállítások mentése Save Setup
 
    Az operációs rendszer parancsainak futtatása Executing operating system commands
@@ -1406,13 +1406,17 @@ A BeállításokConfiguration parancs dialógus ablakot
 nyit meg, amelyben a Midnight Commander fõbb beállításait 
 elvégezheted.
 
-A KépernyõbitekDisplay bits parancs dialógus ablakot 
-nyit meg, amellyel beállíthatod azt, hogy milyen karakterek
-jelenhessenek meg a terminálodon.
+A MegjelenésLayout parancs dialógus ablakot jelenít 
+meg, amelyben az mc képernyõn történõ megjelenésének
+opcióit találod egy csokorban.
 
 A MegerõsítésConfirmation parancs dialógus ablakot 
 jelenít meg, amelyben meg tudod adni azt, hogy mely 
 mûveletekhez kell megerõsítést kérni.
+
+A KépernyõbitekDisplay bits parancs dialógus ablakot 
+nyit meg, amellyel beállíthatod azt, hogy milyen karakterek
+jelenhessenek meg a terminálodon.
 
 A Billentyûzet tanításLearn keys dialódus ablakot 
 jelenít meg, amelyben megvizsgálhatod azokat a gombokat,
@@ -1421,10 +1425,6 @@ amelyek nem mûködnek néhány terminálon, és kijavíthatod õket.
 A Csatolt fájlrendszer...Virtual FS
 parancs olyan dialógus ablakot jelenít meg, amelyben 
 VFS-hez kapcsolódó opciókat adhatod meg.
-
-A MegjelenésLayout parancs dialógus ablakot jelenít 
-meg, amelyben az mc képernyõn történõ megjelenésének
-opcióit találod egy csokorban.
 
 A Beállítások mentéseSave Setup parancs elmenti
 a Bal, Jobb és a Beállítások jelenlegi értékeit. Néhány egyéb
