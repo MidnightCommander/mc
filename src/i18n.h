@@ -2,6 +2,10 @@
 #ifndef _MC_I18N_H_
 #define _MC_I18N_H_
 
+#ifdef VFS_STANDALONE	/* We do not want vfs code to depend on internationalization, do we? */
+#undef ENABLE_NLS
+#endif
+
 #ifdef HAVE_GNOME
 #    include <gnome.h>
 #else

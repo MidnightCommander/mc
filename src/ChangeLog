@@ -1,3 +1,8 @@
+Wed Jun 18   Pavel Machek  <pavel@ucw.cz>
+	
+	* i18n.h: we do not want i18n in case of compiling standalone
+	libvfs.so.
+
 Fri Jun  5 23:34:20 1998  Timur I. Bakeyev <timur@comtat.kazan.ru>
 	
 	* screen.c (file_entry_color): take care about BSD core dumps
