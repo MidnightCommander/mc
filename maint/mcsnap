@@ -1,0 +1,86 @@
+#! /bin/sh
+
+# This script takes the compiled tarball, makes an RPM package and
+# a patch against the latest released version, then uploads
+# everything over ssh and removes old snapshots.
+# Run this script in the directory where mc was built.
+
+# TODO:
+#  upload to .in* files, then rename.
+#  build tarball, select level of testing
+#  (dist, distcheck, warning checks)
+
+
+set -e
+
+# Version to make patches against.
+# Make sure to have it unpacked in /usr/src
+BASE_VERSION="4.6.0-pre1"
+
+# Location of the snapshot directory
+SITE="login.ibiblio.org"
+DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
+
+MCVERSION=`ls mc*.tar.gz | sort | sed -n '$s/\.tar\.gz//p'`
+MCNAME=mc-`date "+%Y-%m-%d-%H" --utc`.tar.gz
+MCTARBALL="$MCVERSION.tar.gz"
+
+if test -z "$MCVERSION" || test ! -f "$MCTARBALL"; then
+  echo "No tarball found!!!"
+  exit 1
+fi
+
+rpm -tb "$MCTARBALL"
+MC_RPM=`echo /usr/src/redhat/RPMS/i386/mc-*.i386.rpm`
+if test ! -f $MC_RPM; then
+  echo "Failed to compile package!!!"
+  exit 1
+fi
+
+# Make a patch against the latest released version
+MC_PATCH="mc-$BASE_VERSION-current.diff.bz2"
+if test ! -d /usr/src/mc-$BASE_VERSION; then
+  echo "Cannot find unpacked base version!!!"
+  exit 1
+fi
+rm -f mc-$BASE_VERSION-current.diff mc-$BASE_VERSION-current.diff.bz2
+
+# Don't bother to merge PO-files, we are skipping them in the patch
+make distdir MSGMERGE=
+
+# Sometimes GNU diff returns 1 for unclear reasons
+diff -urN -x po /usr/src/mc-$BASE_VERSION mc-*/ >mc-$BASE_VERSION-current.diff || :
+bzip2 mc-$BASE_VERSION-current.diff
+
+echo "Copying $MCTARBALL to $SITE"
+scp "$MCTARBALL" "$SITE:$DIR/$MCNAME"
+
+# Remove old tarballs
+MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.tar\.gz' | sort | sed '$d'`
+for i in $MCFILES; do
+  echo "Removing $i"
+  ssh $SITE rm -f "$DIR/$i"
+done
+
+echo "Copying $MC_RPM to $SITE"
+scp "$MC_RPM" "$SITE:$DIR/"
+
+# Remove old RPM packages
+MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.rpm' | sort | sed '$d'`
+for i in $MCFILES; do
+  echo "Removing $i"
+  ssh $SITE rm -f "$DIR/$i"
+done
+
+echo "Copying $MC_PATCH to $SITE"
+scp "$MC_PATCH" "$SITE:$DIR/"
+
+# Remove old patches
+MCFILES=`ssh $SITE ls $DIR | egrep '^mc.*\.diff\.bz2' | sort | sed '$d'`
+for i in $MCFILES; do
+  echo "Removing $i"
+  ssh $SITE rm -f "$DIR/$i"
+done
+
+
+echo "Done"
