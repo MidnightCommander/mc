@@ -1587,7 +1587,6 @@ void edit_replace_cmd (WEdit * edit, int again)
     int treplace_prompt = 0;
     int i = 0;
     long times_replaced = 0, last_search;
-    char fin_string[64];
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
@@ -1797,8 +1796,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    edit->force |= REDRAW_PAGE;
 	    edit_render_keypress (edit);
 	    if (times_replaced) {
-		sprintf (fin_string, _ (" %ld replacements made. "), times_replaced);
-		edit_message_dialog (_ (" Replace "), fin_string);
+		message (0, _(" Replace "), _(" %ld replacements made. "), times_replaced);
 	    } else
 		edit_message_dialog (_ (" Replace "), _ (" Search string not found. "));
 	    replace_continue = 0;
@@ -1875,10 +1873,8 @@ void edit_search_cmd (WEdit * edit, int again)
 		    q = p + 1;
 		}
 		if (found) {
-		    char fin_string[64];
 /* in response to number of bookmarks added because of string being found %d times */
-		    sprintf (fin_string, _ (" %d finds made, %d bookmarks added "), found, books);
-		    edit_message_dialog (_ (" Search "), fin_string);
+		    message (0, _(" Search "), _(" %d finds made, %d bookmarks added "), found, books);
 		} else {
 		    edit_error_dialog (_ (" Search "), _ (" Search string not found. "));
 		}

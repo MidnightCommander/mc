@@ -1,3 +1,9 @@
+2002-02-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* editcmd.c (edit_replace_cmd): Eliminate fin_string
+	and use message() to fix possible buffer overflow.
+	(edit_search_cmd): Likewise.
+
 2002-02-18  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* syntax.c (convert): Fix buffer overflow for ".*\" cases.
