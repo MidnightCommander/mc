@@ -441,13 +441,12 @@ esac
 
 
 dnl
-dnl Force using termcap
+dnl Force using termcap.  This option is processed in MC_WITH_MCSLANG.
+dnl Report an error if this option is not applicable.
 dnl
 AC_ARG_WITH(termcap,
-	[  --with-termcap           Try using termcap database [[no]]],
-	[if test x$with_screen = xmcslang; then
-		MC_USE_TERMCAP
-	else
+	[  --with-termcap           Try using termcap database [[only if no terminfo]]],
+	[if test x$with_screen != xmcslang; then
 		AC_MSG_ERROR([Option `--with-termcap' only works with `--with-screen=mcslang'])
 	fi
 ])

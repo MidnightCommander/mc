@@ -610,7 +610,7 @@ dnl Try using termcap database and link with libtermcap if possible.
 dnl
 AC_DEFUN([MC_USE_TERMCAP], [
 	screen_msg="$screen_msg with termcap database"
-	AC_MSG_NOTICE([using S-Lang screen manager with termcap])
+	AC_MSG_NOTICE([using S-Lang screen library with termcap])
 	AC_DEFINE(USE_TERMCAP, 1, [Define to use termcap database])
 	AC_CHECK_LIB(termcap, tgoto, [MCLIBS="$MCLIBS -ltermcap"], , [$LIBS])
 ])
@@ -704,6 +704,30 @@ dnl
 AC_DEFUN([MC_WITH_MCSLANG], [
     screen_type=slang
     screen_msg="Included S-Lang library (mcslang)"
+
+    # Search for terminfo database.
+    use_terminfo=
+    if test x"$with_termcap" != xyes; then
+	if test x"$with_termcap" = xno; then
+	    use_terminfo=yes
+	fi
+	if test -n "$TERMINFO" && test -r "$TERMINFO/v/vt100"; then
+	    use_terminfo=yes
+	fi
+	for dir in "/usr/share/terminfo" "/usr/lib/terminfo" \
+		   "/usr/share/lib/terminfo" "/etc/terminfo" \
+		   "/usr/local/lib/terminfo" "$HOME/.terminfo"; do
+	    if test -r "$dir/v/vt100"; then
+		use_terminfo=yes
+	    fi
+	done
+    fi
+
+    # If there is no terminfo, use termcap
+    if test -z "$use_terminfo"; then
+	MC_USE_TERMCAP
+    fi
+
     _MC_WITH_XSLANG
 ])
 
