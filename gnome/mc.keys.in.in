@@ -3,10 +3,10 @@ text/*:
 	fm-view=%view{ascii}
 
 text/c:
-	icon-filename=@icondir@/c.xpm
+	icon-filename=@icondir@/gnome-application-x-c-source.png
 
 text/C++:
-	icon-filename=@icondir@/cc.xpm
+	icon-filename=@icondir@/gnome-application-x-cc-source.png
 
 application/x-compressed-tar
 	fm-open=%cd %p#utar
