@@ -1,3 +1,11 @@
+1999-01-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_icon_list_drag_data_received): Do not update
+	contents if nothing was done (ie, the drop was cancelled).
+
+	* gdnd.c (gdnd_drop_on_directory): Do nothing if the files dragged
+	are on the same directory we are.
+
 1999-01-07  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_filter_cmd): Function filled in now.  Actually

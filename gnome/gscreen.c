@@ -769,7 +769,8 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 	GnomeIconList *gil = GNOME_ICON_LIST (widget);
 	char *dir;
 	int idx;
-
+	gboolean reload;
+	
 	idx = gnome_icon_list_get_icon_at (gil, x, y);
 	if (idx == -1)
 		dir = g_strdup (panel->cwd);
@@ -781,11 +782,13 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 			dir = g_strdup (panel->cwd);
 	}
 
-	gdnd_drop_on_directory (context, selection_data, dir);
+	reload = gdnd_drop_on_directory (context, selection_data, dir);
 	free (dir);
 
-	update_one_panel_widget (panel, 0, UP_KEEPSEL);
-	panel_update_contents (panel);
+	if (reload){
+		update_one_panel_widget (panel, 0, UP_KEEPSEL);
+		panel_update_contents (panel);
+	}
 }
 
 /**

@@ -276,7 +276,12 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	/* If we are dragging from a file panel, we can display a nicer status display */
 	source_panel = find_panel_owning_window (context);
 
-	printf ("Panel found for this source: %p\n", source_panel);
+	/* Check if the user did not drag the information to the same directory */
+	if (source_panel){
+		if (strcmp (source_panel->cwd, destdir) == 0)
+			return FALSE;
+	}
+	
 	/* Symlinks do not use file.c */
 
 	if (source_panel && action != GDK_ACTION_LINK)
