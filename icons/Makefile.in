@@ -31,7 +31,9 @@ ALLICONS = a.xpm application.xpm binary.xpm bitmap.xpm blackhole.xpm \
 
 all:
 
-install: @insticons@
+install:
+
+installx: @insticons@
 
 install_icons:
 	for I in $(ALLICONS); \

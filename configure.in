@@ -1263,7 +1263,7 @@ src/Makefile
 slang/Makefile 
 edit/Makefile 
 gtkedit/Makefile 
-icons/Makefile 
+new_icons/Makefile 
 
 lib/mc.ext
 lib/mc-gnome.ext

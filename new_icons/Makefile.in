@@ -1,0 +1,48 @@
+srcdir = @srcdir@
+VPATH = @srcdir@
+
+rootdir = $(srcdir)/..
+@MCFG@@MCF@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+
+#
+# Distribution variables
+#
+
+DISTICONS = Makefile.in $(ALLICONS)
+ALLICONS = 
+
+all:
+
+install: @insticons@
+
+install_icons:
+	for I in $(ALLICONS); \
+	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
+
+uninstall:
+	for I in $(ALLICONS); \
+	do $(RMF) $(DESTDIR)$(icondir)/$$I; done
+	-rmdir $(DESTDIR)$(icondir)
+
+check:
+	@echo no tests are supplied.
+
+TAGS:
+
+cross:
+
+clean:
+
+realclean:
+
+distclean:
+	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
+
+distcopy:
+	$(CP) $(DISTICONS) ../../mc-$(VERSION)/icons
+
+depend dep:
