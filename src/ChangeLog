@@ -1,5 +1,7 @@
 2000-08-16  Pavel Roskin  <proski@gnu.org>
 
+	* gindex.pl: Enable warnings. Existing warnings fixed.
+
 	* Makefile.in: mc.hlp now depends on man2hlp.c instead of
 	man2hlp - this avoids some rebuilds of mc.hlp
 
