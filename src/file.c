@@ -63,14 +63,14 @@
 #include <stdio.h>
 #ifdef NEEDS_IO_H
 #    include <io.h>
-#endif 
+#endif /* NEEDS_IO_H */
 #include <errno.h>
 #include "tty.h"
 #include <ctype.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
-#endif
+#endif /* HAVE_UNISTD_H */
 #include <sys/stat.h>
 #include <sys/param.h>
 #include <fcntl.h>
@@ -295,12 +295,12 @@ is_in_linklist (struct link *lp, char *path, struct stat *sb)
    dev_t dev = sb->st_dev;
 #ifdef USE_VFS
    vfs *vfs = vfs_type (path);
-#endif
+#endif /* USE_VFS */
    
    while (lp){
 #ifdef USE_VFS
       if (lp->vfs == vfs)
-#endif
+#endif /* USE_VFS */
 	  if (lp->ino == ino && lp->dev == dev )
 	      return 1;
       lp = lp->next;
@@ -476,7 +476,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 #ifndef OS2_NT
     uid_t src_uid = (uid_t) -1;
     gid_t src_gid = (gid_t) -1;
-#endif
+#endif /* !OS2_NT */
     char *buf = NULL;
     int  buf_size = BUF_8K;
     int  src_desc, dest_desc = 0;
@@ -532,7 +532,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif
+#endif /* !OS2_NT */
 
 	/* Should we replace destination? */
 	if (ask_overwrite){
@@ -562,11 +562,11 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		gnome_metadata_delete (dst_path);
 		gnome_metadata_copy (src_path, dst_path);
 	    }
-#endif
+#endif /* !HAVE_GNOME */
 	    return retval;
 	}
 
-#endif /* !OS_NT */
+#endif /* !OS2_NT */
 
         if (S_ISCHR (sb.st_mode) || S_ISBLK (sb.st_mode) || S_ISFIFO (sb.st_mode)
             || S_ISSOCK (sb.st_mode)){
@@ -585,7 +585,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		    continue;
 		return temp_status;
 	    }
-#endif
+#endif /* !OS2_NT */
 #ifndef __os2__
 	    while (ctx->preserve &&
 		(mc_chmod (dst_path, sb.st_mode & ctx->umask_kill) < 0)){
@@ -594,11 +594,11 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		    continue;
 		return temp_status;
 	    }
-#endif
+#endif /* !__os2__ */ 
 #ifdef HAVE_GNOME
 	    gnome_metadata_delete (dst_path);
 	    gnome_metadata_copy (src_path, dst_path);
-#endif
+#endif /* HAVE_GNOME */
 	    return FILE_CONT;
         }
     }
@@ -632,7 +632,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 #ifndef OS2_NT
     src_uid = sb.st_uid;
     src_gid = sb.st_gid;
-#endif
+#endif /* !OS2_NT */
     utb.actime = sb.st_atime;
     utb.modtime = sb.st_mtime;
     file_size = sb.st_size;
@@ -644,7 +644,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 #ifdef HAVE_GNOME
     if (!ctx->do_append)
         gnome_metadata_delete (dst_path);
-#endif
+#endif /* HAVE_GNOME */
 	    
     while ((dest_desc = mc_open (dst_path, O_WRONLY | 
       (ctx->do_append ? O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0){
@@ -816,12 +816,12 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 		break;
     	    }
 	}
-#endif
+#endif /* !OS2_NT */
 
 #ifdef HAVE_GNOME
 	gnome_metadata_delete (dst_path);
 	gnome_metadata_copy (src_path, dst_path);
-#endif
+#endif /* HAVE_GNOME */
      /*
       * .ado: according to the XPG4 standard, the file must be closed before
       * chmod can be invoked
@@ -862,7 +862,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
     DIR    *next;
 #else
     struct dirent *next;
-#endif
+#endif /* !__os2__ */
     struct stat   buf, cbuf;
     DIR    *reading;
     char   *path, *mdpath, *dest_file, *dest_dir;
@@ -924,7 +924,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 #ifdef HAVE_GNOME
 		gnome_metadata_delete (d);
 		gnome_metadata_copy (s, d);
-#endif
+#endif /* HAVE_GNOME */
 		g_free (parent_dirs);
 		return FILE_CONT;
 	    }
@@ -970,7 +970,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 #ifdef HAVE_GNOME
     gnome_metadata_delete (dest_dir);
     gnome_metadata_copy (s, dest_dir);
-#endif
+#endif /* HAVE_GNOME */
 
     lp = g_new (struct link, 1);
     mc_stat (dest_dir, &buf);
@@ -990,7 +990,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	    goto ret;
         }
     }
-#endif
+#endif /* !OS2_NT */
 
  dont_mkdir:
     /* open the source dir for reading */
@@ -1054,7 +1054,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	 */
 	if (!next)
 		g_free (next);
-#endif
+#endif /* __os2__ */
        g_free (path);
     }
     mc_closedir (reading);
@@ -1068,7 +1068,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 	mc_utime(dest_dir, &utb);
     }
 
-#endif
+#endif /* !__os2__ */
 ret:
    g_free (dest_dir);
    g_free (parent_dirs);
@@ -1086,7 +1086,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
     int return_status = FILE_CONT;
 #ifdef HAVE_GNOME
     int delete_metadata = TRUE;
-#endif
+#endif /* HAVE_GNOME */
 
     if (file_progress_show_source (ctx, s) == FILE_ABORT
 	|| file_progress_show_target (ctx, d) == FILE_ABORT)
@@ -1124,7 +1124,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif /* OS2_NT */
+#endif /* !OS2_NT */
 	if (S_ISDIR (dst_stats.st_mode)){
 	    message_2s (1, MSG_ERROR, _(" Cannot overwrite directory `%s' "), d);
 	    do_refresh ();
@@ -1146,7 +1146,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 		gnome_metadata_delete (d);
 		gnome_metadata_rename (s, d);
 		delete_metadata = FALSE;
-#endif
+#endif /* HAVE_GNOME */
 		goto retry_src_remove;
 	    } else
 		return return_status;
@@ -1156,7 +1156,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 #ifdef HAVE_GNOME
 	    gnome_metadata_delete (d);
 	    gnome_metadata_rename (s, d);
-#endif
+#endif /* HAVE_GNOME */
 	    return FILE_CONT;
 	}
     }
@@ -1197,7 +1197,7 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 #ifdef HAVE_GNOME
     if (delete_metadata)
 	gnome_metadata_delete (s);
-#endif
+#endif /* HAVE_GNOME */
     
     if (return_status == FILE_CONT)
         return_status = progress_update_one (ctx,
@@ -1248,7 +1248,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
-#endif
+#endif /* !OS2_NT */
 
     /* Check if the user inputted an existing dir */
  retry_dst_stat:
@@ -1277,7 +1277,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 #ifdef HAVE_GNOME
 	gnome_metadata_delete (destdir);
 	gnome_metadata_rename (s, destdir);
-#endif
+#endif /* HAVE_GNOME */
 	return_status = FILE_CONT;
 	goto ret;
     }
@@ -1288,7 +1288,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
 	if (toupper(s[0]) != toupper(destdir[0]))
 	    goto w32try;
     }
-#endif
+#endif /* WIN32 */
 
     if (errno != EXDEV){
 	return_status = files_error (_(" Cannot move directory \"%s\" to \"%s\" \n %s "), s, d);
@@ -1298,7 +1298,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d, long *progress_count, double
     }
 #ifdef WIN32
  w32try:
-#endif
+#endif /* WIN32 */
     /* Failed because of filesystem boundary -> copy dir instead */
     return_status = copy_dir_dir (ctx, s, destdir, 0, 0, 1, 0, progress_count, progress_bytes);
 
@@ -1360,7 +1360,7 @@ erase_file (FileOpContext *ctx, char *s, long *progress_count, double *progress_
     }
 #ifdef HAVE_GNOME
     gnome_metadata_delete (s);
-#endif
+#endif /* HAVE_GNOME */
     if (progress_count)
         return progress_update_one (ctx, progress_count, progress_bytes, buf.st_size,
 				    is_toplevel_file);
@@ -1405,7 +1405,7 @@ recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *prog
 #ifdef __os2__
 	if (!next)
 	   g_free (next);
-#endif
+#endif /* __os2__ */
     }
     mc_closedir (reading);
     if (return_status != FILE_CONT)
@@ -1422,7 +1422,7 @@ recursive_erase (FileOpContext *ctx, char *s, long *progress_count, double *prog
     }
 #ifdef HAVE_GNOME
     gnome_metadata_delete (s);
-#endif
+#endif /* HAVE_GNOME */
     return FILE_CONT;
 }
 
@@ -1492,7 +1492,7 @@ erase_dir (FileOpContext *ctx, char *s, long *progress_count, double *progress_b
     }
 #ifdef HAVE_GNOME
     gnome_metadata_delete (s);
-#endif
+#endif /* HAVE_GNOME */
     return FILE_CONT;
 }
 
@@ -1524,7 +1524,7 @@ erase_dir_iff_empty (FileOpContext *ctx, char *s)
     }
 #ifdef HAVE_GNOME
     gnome_metadata_delete (s);
-#endif
+#endif /* HAVE_GNOME */
     return FILE_CONT;
 }
 
@@ -1701,7 +1701,7 @@ static char* many_format = N_("%o %d %f%m");
 static char* one_format  = N_("%o %f \"%s\"%e");
 /* xgettext:no-c-format */
 static char* many_format = N_("%o %d %f%e");
-#endif
+#endif /* HAVE_GNOME */
 static char* prompt_parts [] =
 {
 	N_("file"), N_("files"), N_("directory"), N_("directories"),
@@ -1814,7 +1814,7 @@ extern int                file_delete_query_recursive        (FileOpContext *ctx
 							      enum OperationMode mode,
 							      gchar         *s);
 
-#endif
+#endif /* HAVE_GNOME */
 
 /**
  * panel_operate:
@@ -1833,7 +1833,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     char *source_with_path = NULL;
 #else
 #   define source_with_path source
-#endif
+#endif /* !WITH_FULL_PATHS */
     char *source = NULL;
     char *dest = NULL;
     char *temp = NULL;
@@ -1880,7 +1880,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 #else
 	i = query_dialog (_(op_names [operation]), cmd_buf,
 			  D_ERROR, 2, _("&Yes"), _("&No"));
-#endif
+#endif /* !HAVE_GNOME */
 	if (i != 0) {
 	    file_op_context_destroy (ctx);
 	    return 0;
@@ -1940,7 +1940,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    return 0;
 	}
     }
-#endif
+#endif /* WITH_BACKGROUND */
 
     /* Initialize things */
     /* We do not want to trash cache every time file is
@@ -1974,7 +1974,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	/* The source and src_stat variables have been initialized before */
 #ifdef WITH_FULL_PATHS
 	source_with_path = concat_dir_and_file (panel->cwd, source);
-#endif
+#endif /* WITH_FULL_PATHS */
 
 	if (operation == OP_DELETE) {
 	    if (S_ISDIR (src_stat.st_mode))
@@ -2024,7 +2024,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    unmark_files (panel);
     } else {
         /* Many files */
-#endif
+#endif /* !HAVE_GNOME */
 	/* Check destination for copy or move operation */
 	if (operation != OP_DELETE){
 	retry_many_dst_stat:
@@ -2059,7 +2059,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	    if (source_with_path)
 	    	g_free (source_with_path);
 	    source_with_path = concat_dir_and_file (panel->cwd, source);
-#endif
+#endif /* WITH_FULL_PATHS */
 
 	    if (operation == OP_DELETE){
 		if (S_ISDIR (src_stat.st_mode))
@@ -2115,7 +2115,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 #else
 	    if (value == FILE_CONT)
 		    do_file_mark (panel, i, 0);
-#endif
+#endif /* !HAVE_GNOME */
 
 	    
 	    if (file_progress_show_count (ctx, count, ctx->progress_count) == FILE_ABORT)
@@ -2131,7 +2131,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	} /* Loop for every file */
 #ifndef HAVE_GNOME
     } /* Many files */
-#endif
+#endif /* !HAVE_GNOME */
  clean_up:
     /* Clean up */
 
@@ -2146,10 +2146,10 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
-#if WITH_FULL_PATHS
+#ifdef WITH_FULL_PATHS
     if (source_with_path)
     	g_free (source_with_path);
-#endif
+#endif /* WITH_FULL_PATHS */
 
     if (dest)
 	g_free (dest);
@@ -2174,7 +2174,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
 	tell_parent (MSG_CHILD_EXITING);
 	_exit (1);
     } 
-#endif
+#endif /* WITH_BACKGROUND */
 
     file_op_context_destroy (ctx);
     return 1;
@@ -2292,7 +2292,7 @@ real_query_recursive (FileOpContext *ctx, enum OperationMode mode, char *s)
 	return FILE_ABORT;
     }
 }
-#endif
+#endif /* !HAVE_GNOME */
 
 #ifdef WITH_BACKGROUND
 static int
@@ -2317,7 +2317,7 @@ query_recursive (FileOpContext *ctx, char *s)
 	return parent_call (real_query_recursive, ctx, 1, strlen (s), s);
     else
 	return real_query_recursive (ctx, Foreground, s);
-#endif    
+#endif /* !HAVE_GNOME */
 }
 
 static int
@@ -2344,7 +2344,11 @@ do_file_error (char *str)
 static int
 query_recursive (FileOpContext *ctx, char *s)
 {
+#ifdef HAVE_GNOME
+    return file_delete_query_recursive (ctx, Foreground, s);
+#else
     return real_query_recursive (ctx, Foreground, s);
+#endif /* !HAVE_GNOME */
 }
 
 static int
@@ -2353,7 +2357,7 @@ query_replace (FileOpContext *ctx, char *destname, struct stat *_s_stat, struct 
     return file_progress_real_query_replace (ctx, Foreground, destname, _s_stat, _d_stat);
 }
 
-#endif
+#endif /* !WITH_BACKGROUND */
 
 /*
   Cause emacs to enter folding mode for this file:

@@ -1,3 +1,8 @@
+2001-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* file.c: Add comments after every endif.
+	[HAVE_GNOME] [!WITH_BACKGROUND]: Fix compilation.
+
 2001-06-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* main.c [HAVE_CHARSET]: Remove source_codepage and display_codepage.
