@@ -291,3 +291,36 @@ gicon_get_icon_for_file (file_entry *fe)
 {
 	return gicon_get_icon_for_file_speed (fe, TRUE);
 }
+
+typedef lookup_name_closure_t {
+	char *name;
+	void *image;
+};
+
+void
+search_image (gpointer key, gpointer value, gpointer user_data)
+{
+	lookup_name_closure_t *closure = user_data;
+
+	if (value == closure->image)
+		closure->name = key;
+}
+
+/**
+ * Returns the file name that maps to this given GdkImlibImage
+ *
+ */
+char *
+gicon_image_to_name (GdkImlibImage *image)
+{
+	lookup_name_closure_t closure;
+
+	closure.image = image;
+	closure.name  = NULL;
+	
+	g_hash_table_foreach (icon_hash, check_key, &search_image, &closure);
+	if (closure.name == NULL)
+		return g_strdup (ICONDIR "i-regular.png");
+
+	return g_strdup (closure.name);
+}
