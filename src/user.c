@@ -737,7 +737,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 	    } else if (*p == '+'){
 		if (*(p+1) == '='){
 		    /* Combined adding and default */
-		    p = test_line (edit_widget, p, &accept_entry);
+		    p = test_line (edit_widget, p + 1, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {
@@ -747,7 +747,7 @@ user_menu_cmd (struct WEdit *edit_widget)
 	    } else if (*p == '='){
 		if (*(p+1) == '+'){
 		    /* Combined adding and default */
-		    p = test_line (edit_widget, p, &accept_entry);
+		    p = test_line (edit_widget, p + 1, &accept_entry);
 		    if (selected == 0 && accept_entry)
 			selected = menu_lines;
 		} else {

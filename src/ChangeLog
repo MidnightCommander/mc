@@ -1,3 +1,9 @@
+2004-10-20  Jakub Jelinek  <jakub@redhat.com>
+
+	* user.c (user_menu_cmd): Fix error. test_line() doesn't handle
+	consecutive '+'s and '='s correctly. Pass a line starting with 
+	a single '+' or '=' instead.
+
 2004-10-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (add_new_entry_cmd): Fix memory leaks.
