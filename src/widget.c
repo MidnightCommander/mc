@@ -2042,11 +2042,11 @@ listbox_event (Gpm_Event *event, WListbox *l)
 	case listbox_finish:
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
-	    return MOU_ENDLOOP;
+	    return MOU_NORMAL;
 
 	case listbox_cback:
 	    if ((*l->cback)(l) == listbox_finish)
-		return MOU_ENDLOOP;
+		return MOU_NORMAL;
 	}
     }
     return MOU_NORMAL;

@@ -710,7 +710,6 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
     Gpm_Event new_event;
     int x = event->x;
     int y = event->y;
-    int ret_value;
 
     /* kludge for the menubar: start at h->first, not current  */
     /* Must be careful in the insertion order to the dlg list */
@@ -731,12 +730,13 @@ dlg_mouse_event (Dlg_head * h, Gpm_Event * event)
 	new_event.x -= widget->x;
 	new_event.y -= widget->y;
 
-	ret_value = widget->mouse ? (*widget->mouse) (&new_event, widget) :
-	    MOU_NORMAL;
+	if (!widget->mouse)
+	    return MOU_NORMAL;
 
-	return ret_value;
+	return (*widget->mouse) (&new_event, widget);
     } while (item != starting_widget);
-    return 0;
+
+    return MOU_NORMAL;
 }
 
 /* Run dialog routines */
@@ -769,7 +769,7 @@ void init_dlg (Dlg_head *h)
     current_dlg = h;
 
     /* Initialize the mouse status */
-    h->mouse_status = 0;
+    h->mouse_status = MOU_NORMAL;
 
     /* Redraw the screen */
     dlg_redraw (h);

@@ -1,3 +1,10 @@
+2002-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* mouse.h: Put return codes from the mouse callback to an enum.
+	Remove MOU_ENDLOOP and MOU_LOCK - they are interpreted like
+	MOU_NORMAL.  Adjust all dependencies.
+	* dlg.c: Use MOU_NORMAL instead of 0 for mouse_status.
+
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (process_args): Print only data directory and nothing

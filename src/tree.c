@@ -533,7 +533,7 @@ static void maybe_chdir (WTree *tree)
 static int event_callback (Gpm_Event *event, WTree *tree)
 {
     if (!(event->type & GPM_UP))
-	return MOU_ENDLOOP;
+	return MOU_NORMAL;
 
     if (tree->is_panel)
 	event->y--;
@@ -556,7 +556,7 @@ static int event_callback (Gpm_Event *event, WTree *tree)
 	    chdir_sel (tree);
 	}
     }
-    return MOU_ENDLOOP;
+    return MOU_NORMAL;
 }
 
 /* Search tree for text */

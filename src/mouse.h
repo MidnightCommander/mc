@@ -42,10 +42,15 @@ typedef struct Gpm_Event {
 
 #endif /* !HAVE_LIBGPM */
 
-/* General mouse support definitions */
+/* General (i.e. both for xterm and gpm) mouse support definitions */
 
-typedef int (*mouse_h)(Gpm_Event *, void *);
+/* Constants returned from the mouse callback */
+enum { MOU_NORMAL, MOU_REPEAT };
 
+/* Mouse callback */
+typedef int (*mouse_h) (Gpm_Event *, void *);
+
+/* Type of mouse support */
 typedef enum {
     MOUSE_NONE,		/* Not detected yet */
     MOUSE_DISABLED,	/* Explicitly disabled by -d */
@@ -66,14 +71,7 @@ void init_mouse (void);
 void enable_mouse (void);
 void disable_mouse (void);
 
-/* Constants returned from mouse handlers */
-
-#define MOU_NORMAL    0x00
-#define MOU_REPEAT    0x01
-#define MOU_ENDLOOP   0x02
-#define MOU_LOCK      0x04
-
-/* Mouse wheel events.  GPM doesn't seem to support them yet.  */
+/* Mouse wheel events */
 #define GPM_B_UP        8
 #define GPM_B_DOWN     16
 
