@@ -7,11 +7,9 @@ All:
 
 Desktop:
 - Add special destkop entries ("Network neighborhood")
-- Property pages do not work for desktop icons
 
 Panels:
 - Global bindings (some shortcuts are not implemented)
-- Finish regular property pages
 - Add a nifty toolbar
 - Split view.
 - External panelize hangs
