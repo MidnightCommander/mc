@@ -1550,52 +1550,8 @@ BOOL mask_match(char *str, char *regexp, int case_sig,BOOL trans2)
   return matched;
 }
 
+
 #if 0
-/****************************************************************************
-become a daemon, discarding the controlling terminal
-****************************************************************************/
-void become_daemon(void)
-{
-	if (fork()) {
-		_exit(0);
-	}
-
-  /* detach from the terminal */
-#ifdef HAVE_SETSID
-	setsid();
-#elif defined(TIOCNOTTY)
-	{
-		int i = sys_open("/dev/tty", O_RDWR, 0);
-		if (i != -1) {
-			ioctl(i, (int) TIOCNOTTY, (char *)0);      
-			close(i);
-		}
-	}
-#endif /* HAVE_SETSID */
-
-	/* Close fd's 0,1,2. Needed if started by rsh */
-	close_low_fds();
-}
-
-
-/****************************************************************************
-put up a yes/no prompt
-****************************************************************************/
-BOOL yesno(char *p)
-{
-  pstring ans;
-  printf("%s",p);
-
-  if (!fgets(ans,sizeof(ans)-1,stdin))
-    return(False);
-
-  if (*ans == 'y' || *ans == 'Y')
-    return(True);
-
-  return(False);
-}
-
-
 /****************************************************************************
 set the length of a file from a filedescriptor.
 Returns 0 on success, -1 on failure.
@@ -2324,16 +2280,6 @@ struct hostent *Get_Hostbyname(const char *name)
   /* nothing works :-( */
   free(name2);
   return(NULL);
-}
-
-
-/****************************************************************************
-check if a process exists. Does this work on all unixes?
-****************************************************************************/
-
-BOOL process_exists(int pid)
-{
-	return(kill(pid,0) == 0 || errno != ESRCH);
 }
 
 
