@@ -103,7 +103,7 @@ int close_error_pipe (int error, char *text)
 	if (len == 0) return 0;	/* Nothing to show */
 
 	/* Show message from pipe */
-	message (error, title, msg);
+	message (error, title, "%s", msg);
     } else {
 	/* Show given text and possible message from pipe */
 	message (error, title, " %s \n %s ", text, msg);
@@ -120,7 +120,7 @@ void check_error_pipe (void)
 	{
 	    int rvalue;
 
-	    rvalue = -1; // read (error_pipe[0], error + len, 1);
+	    rvalue = -1; /* read (error_pipe[0], error + len, 1); */
 	    if (rvalue <= 0)
 		break;
 	    len ++;
@@ -129,7 +129,7 @@ void check_error_pipe (void)
 	close (error_pipe[0]);
     }
     if (len > 0)
-        message (0, " Warning ", error);
+        message (0, " Warning ", "%s", error);
 }
 
 int my_system (int as_shell_command, const char *shell, const char *command)
