@@ -1,5 +1,10 @@
 2001-05-31  Pavel Roskin  <proski@gnu.org>
 
+	* textconf.c (features): Use longer strings to avoid enforcing
+	english word ordering on the translations. Capitalize sentences.
+	From Walery Studennikov: Indicate charset support.
+	(version): Use fputs, not fprintf.
+
 	* Makefile.in: Add charsets.c, charsets.h, selcodepage.c and
 	selcodepage.h. Compile them if the charset support is enabled.
 	Distribute them always.

@@ -41,51 +41,55 @@ static const char * const features [] =  {
     N_("With builtin Editor\n"),
 #endif
 
-    N_("Using "),
 #ifdef HAVE_SLANG
-#   ifdef HAVE_SYSTEM_SLANG
-	N_("system-installed "),
-#   endif
-    N_("S-lang library with "),
 
-#   ifdef SLANG_TERMINFO
-        N_("terminfo"),
+#   ifdef HAVE_SYSTEM_SLANG
+    N_("Using S-Lang library"),
 #   else
-#       ifdef USE_TERMCAP
-            N_("termcap"),
-#       else
-            N_("an unknown terminal"),
-#       endif
+    N_("Using system-installed S-Lang library"),
 #   endif
-    N_(" database"),
+
+    " ",
+
+#ifdef SLANG_TERMINFO
+    N_("with terminfo database"),
+#elif defined(USE_TERMCAP)
+    N_("with termcap database"),
 #else
-#   ifdef USE_NCURSES
-        N_("the ncurses library"),
-#   else
-        N_("some unknown curses library"),
-#   endif
+    N_("with an unknown terminal database"),
 #endif
+
+#elif defined(USE_NCURSES)
+    N_("Using the ncurses library"),
+#else
+    N_("Using old curses library"),
+#endif /* !HAVE_SLANG && !USE_NCURSES */
+
     "\n",
+
 #ifdef HAVE_SUBSHELL_SUPPORT
-    N_("With subshell support: "),
 #   ifdef SUBSHELL_OPTIONAL
-        N_("optional"),
+    N_("With optional subshell support"),
 #   else
-        N_("as default"),
+    N_("With subshell support as default"),
 #   endif
     "\n",
-#endif
+#endif /* !HAVE_SUBSHELL_SUPPORT */
 
 #ifdef WITH_BACKGROUND
     N_("With support for background operations\n"),
 #endif
 
 #ifdef HAVE_LIBGPM
-    N_("with mouse support on xterm and the Linux console.\n"),
+    N_("With mouse support on xterm and Linux console\n"),
 #else
-    N_("with mouse support on xterm.\n"),
+    N_("With mouse support on xterm\n"),
 #endif
-	NULL }
+#ifdef HAVE_CHARSET
+    N_("With multiple codepages support\n"),
+#endif
+
+    NULL }
 ;
 
 void
@@ -94,12 +98,12 @@ version (int verbose)
     char *str;
     int i;
 
-    fprintf (stderr, "The Midnight Commander %s\n", VERSION);
+    fprintf (stderr, _("GNU Midnight Commander %s\n"), VERSION);
     if (!verbose)
 	return;
     
     for (i = 0; features [i]; i++) 
-    	fprintf (stderr, _(features [i]));
+	fputs (_(features [i]), stderr);
 
     str = guess_message_value (1);
     fprintf (stderr, "%s\n", str);
