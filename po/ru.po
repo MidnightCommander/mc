@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2002-10-21 18:51-0400\n"
+"POT-Creation-Date: 2002-10-21 19:16-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -2926,27 +2926,23 @@ msgstr "Благодарим Вас за использование GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
-#: src/main.c:2077
+#: src/main.c:2076
 msgid ""
-"Usage is:\n"
-"\n"
-"mc [flags] [this_dir] [other_panel_dir]\n"
+"[flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
-"Используйте:\n"
-"\n"
-"mc [флаги] [этот_каталог] [каталог_другой_панели]\n"
+"[флаги] [этот_каталог] [каталог_другой_панели]\n"
 "\n"
 
-#: src/main.c:2083
+#: src/main.c:2080
 msgid "+number"
 msgstr "+число"
 
-#: src/main.c:2084
+#: src/main.c:2081
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
 
-#: src/main.c:2086
+#: src/main.c:2083
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2957,7 +2953,7 @@ msgstr ""
 "по адресу mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2100
+#: src/main.c:2097
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2997,95 +2993,95 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#: src/main.c:2187
+#: src/main.c:2184
 msgid "Use to debug the background code"
 msgstr "Использовать для отладки фонового кода"
 
-#: src/main.c:2190
+#: src/main.c:2187
 msgid "Request to run in color mode"
 msgstr "Принудительно установить цветной режим"
 
-#: src/main.c:2192
+#: src/main.c:2189
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
-#: src/main.c:2196
+#: src/main.c:2193
 msgid "Edits one file"
 msgstr "Редактировать файл"
 
-#: src/main.c:2200
+#: src/main.c:2197
 msgid "Displays this help message"
 msgstr "Показать это справочное сообщение"
 
-#: src/main.c:2202
+#: src/main.c:2199
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Показать справку, как изменить цветовую схему"
 
-#: src/main.c:2205
+#: src/main.c:2202
 msgid "Log ftp dialog to specified file"
 msgstr "Записывать диалог с FTP в заданный файл"
 
-#: src/main.c:2208
+#: src/main.c:2205
 msgid "Set debug level"
 msgstr "Установить уровень отладки"
 
-#: src/main.c:2212
+#: src/main.c:2209
 msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
-#: src/main.c:2214
+#: src/main.c:2211
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
 
-#: src/main.c:2216
+#: src/main.c:2213
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
-#: src/main.c:2219
+#: src/main.c:2216
 msgid "Disables subshell support"
 msgstr "Отключить поддержку встроенной командной оболочки"
 
-#: src/main.c:2221
+#: src/main.c:2218
 msgid "Force subshell execution"
 msgstr "Принудительное исполнение во встроенной командной оболочке"
 
-#: src/main.c:2224
+#: src/main.c:2221
 msgid "Prints working directory at program exit"
 msgstr "Печатать рабочий каталог при выходе из программы"
 
-#: src/main.c:2226
+#: src/main.c:2223
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#: src/main.c:2228
+#: src/main.c:2225
 msgid "To run on slow terminals"
 msgstr "Подразумевать медленный терминал"
 
-#: src/main.c:2231
+#: src/main.c:2228
 msgid "Use stickchars to draw"
 msgstr "Использовать псевдографику для рисования"
 
-#: src/main.c:2235
+#: src/main.c:2232
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
-#: src/main.c:2239
+#: src/main.c:2236
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Пытаться использовать termcap вместо terminfo"
 
-#: src/main.c:2242
+#: src/main.c:2239
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
 
-#: src/main.c:2244
+#: src/main.c:2241
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
-#: src/main.c:2246
+#: src/main.c:2243
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
-#: src/main.c:2436
+#: src/main.c:2433
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3093,11 +3089,11 @@ msgstr ""
 "Невозможно открыть tty линию. Вы должны запустить mc без флага -P.\n"
 "На некоторых системах вы можете захотеть запустить # `which mc`\n"
 
-#: src/main.c:2499
+#: src/main.c:2496
 msgid " Notice "
 msgstr " Предупреждение "
 
-#: src/main.c:2500
+#: src/main.c:2497
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"

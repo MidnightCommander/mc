@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.54\n"
-"POT-Creation-Date: 2002-09-26 21:21-0400\n"
+"POT-Creation-Date: 2002-10-21 19:16-0400\n"
 "PO-Revision-Date: 2001-11-06 05:50+0200\n"
 "Last-Translator: Nilgün Belma Bugüner <nilgun@fide.org>\n"
 "Language-Team: Turkish <gnu-tr-u12a@lists.sourceforge.net>\n"
@@ -16,8 +16,9 @@ msgstr ""
 "X-Generator: KBabel 0.9.5\n"
 
 #: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
-#: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:255
-#: edit/editcmd.c:261 edit/editcmd.c:1564 src/wtools.c:132 vfs/vfs.c:1848
+#: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/edit.c:2595
+#: edit/editcmd.c:254 edit/editcmd.c:260 edit/editcmd.c:1572 src/wtools.c:132
+#: vfs/vfs.c:1848
 msgid "Error"
 msgstr "Hata"
 
@@ -57,6 +58,10 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Kullanýcý menüsü sadece mc ile çaðrýlan mcedit içinde kullanýþlýdýr"
 
+#: edit/edit.c:2595
+msgid "Macro recursion is too deep"
+msgstr ""
+
 #: edit/edit.h:319 edit/edit.h:320
 #, fuzzy
 msgid " Enter file name: "
@@ -66,8 +71,8 @@ msgstr " Satýrý girin: "
 msgid "&Dismiss"
 msgstr "&Býrak"
 
-#: edit/edit.h:325 edit/editcmd.c:335 edit/editcmd.c:1083 edit/editcmd.c:1164
-#: edit/editcmd.c:2341 edit/editmenu.c:30 edit/editoptions.c:65
+#: edit/edit.h:325 edit/editcmd.c:334 edit/editcmd.c:1091 edit/editcmd.c:1172
+#: edit/editcmd.c:2355 edit/editmenu.c:30 edit/editoptions.c:65
 #: src/boxes.c:139 src/boxes.c:276 src/boxes.c:374 src/boxes.c:466
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
@@ -84,7 +89,7 @@ msgid " Execute Macro "
 msgstr " Macro'yu çalýþtýr "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
-#: edit/editcmd.c:623
+#: edit/editcmd.c:622
 msgid " Press macro hotkey: "
 msgstr " Macro tuþuna bas: "
 
@@ -96,124 +101,115 @@ msgstr " Harfi içer "
 msgid " Press any key: "
 msgstr " Bir tuþa basýnýz: "
 
-#: edit/editcmd.c:255
+#: edit/editcmd.c:254
 msgid " Error writing to pipe: "
 msgstr " Veri yoluna yazarken hata: "
 
-#: edit/editcmd.c:261
+#: edit/editcmd.c:260
 msgid " Failed trying to open pipe for writing: "
 msgstr " Veri yolu yazmak için açýlýrken hata oluþtu: "
 
-#: edit/editcmd.c:328
+#: edit/editcmd.c:327
 msgid "Quick save "
 msgstr "Çabuk "
 
-#: edit/editcmd.c:329
+#: edit/editcmd.c:328
 msgid "Safe save "
 msgstr "Güvenli "
 
-#: edit/editcmd.c:330
+#: edit/editcmd.c:329
 msgid "Do backups -->"
 msgstr "Yedekle -->"
 
-#: edit/editcmd.c:333 edit/editcmd.c:1025 edit/editcmd.c:1081
-#: edit/editcmd.c:1162 edit/editcmd.c:2339 edit/editoptions.c:62
+#: edit/editcmd.c:332 edit/editcmd.c:1033 edit/editcmd.c:1089
+#: edit/editcmd.c:1170 edit/editcmd.c:2353 edit/editoptions.c:62
 #: src/achown.c:71 src/boxes.c:140 src/boxes.c:277 src/boxes.c:372
 #: src/boxes.c:464 src/boxes.c:586 src/boxes.c:710 src/boxes.c:1009
-#: src/chmod.c:103 src/chown.c:75 src/cmd.c:871 src/filegui.c:754
+#: src/chmod.c:103 src/chown.c:75 src/cmd.c:881 src/filegui.c:754
 #: src/find.c:148 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:811
 #: src/hotlist.c:907 src/layout.c:364 src/learn.c:60 src/option.c:149
-#: src/panelize.c:74 src/view.c:387 src/view.c:409 src/wtools.c:57
-#: src/wtools.c:374
+#: src/panelize.c:74 src/view.c:387 src/wtools.c:57 src/wtools.c:374
 msgid "&Cancel"
 msgstr "&Vazgeç"
 
-#: edit/editcmd.c:339
+#: edit/editcmd.c:338
 msgid "Extension:"
 msgstr "Uzantý:"
 
-#: edit/editcmd.c:345
+#: edit/editcmd.c:344
 msgid " Edit Save Mode "
 msgstr " Kaydetme kipini düzenle "
 
-#: edit/editcmd.c:410 edit/editcmd.c:445
+#: edit/editcmd.c:409 edit/editcmd.c:444
 msgid " Save As "
 msgstr " Farklý kaydet "
 
-#: edit/editcmd.c:424 edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
-#: edit/editcmd.c:975 src/file.c:613 src/help.c:317 src/main.c:463
-#: src/screen.c:1374 src/screen.c:1944 src/selcodepage.c:101
-#: src/subshell.c:702 src/utilunix.c:351 src/utilunix.c:355 src/utilunix.c:377
-#: src/utilunix.c:429 vfs/mcfs.c:124
+#: edit/editcmd.c:423 edit/editcmd.c:707 edit/editcmd.c:732 edit/editcmd.c:880
+#: edit/editcmd.c:978 src/file.c:613 src/help.c:317 src/main.c:463
+#: src/screen.c:1374 src/screen.c:1947 src/selcodepage.c:106
+#: src/subshell.c:702 src/utilunix.c:354 src/utilunix.c:358 src/utilunix.c:380
+#: src/utilunix.c:432 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "Uyarý"
 
-#: edit/editcmd.c:425
+#: edit/editcmd.c:424
 msgid " A file already exists with this name. "
 msgstr " Bu isimde bir dosya zaten var. "
 
-#: edit/editcmd.c:427
+#: edit/editcmd.c:426
 msgid "Overwrite"
 msgstr "Üstüne yaz"
 
-#: edit/editcmd.c:427 edit/editcmd.c:484 edit/editcmd.c:684 edit/editcmd.c:708
-#: edit/editcmd.c:733 edit/editcmd.c:877
+#: edit/editcmd.c:426 edit/editcmd.c:483 edit/editcmd.c:683 edit/editcmd.c:707
+#: edit/editcmd.c:732 edit/editcmd.c:880 edit/editcmd.c:981
 msgid "Cancel"
 msgstr "Vazgeç"
 
-#: edit/editcmd.c:445 edit/editcmd.c:2093 src/view.c:386
+#: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
 msgid " Error trying to save file. "
 msgstr " Dosyayý kaydederken hata oluþtu. "
 
-#: edit/editcmd.c:542 edit/editcmd.c:550 edit/editcmd.c:575
+#: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
 msgid " Delete macro "
 msgstr " Makroyu sil "
 
-#: edit/editcmd.c:544
+#: edit/editcmd.c:543
 msgid " Error trying to open temp file "
 msgstr " Geçici dosyayý açarken hata oluþtu "
 
-#: edit/editcmd.c:552 edit/editcmd.c:613 edit/editcmd.c:670
+#: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
 msgid " Error trying to open macro file "
 msgstr " Makro dosyasýný açarken hata oluþtu "
 
-#: edit/editcmd.c:576
+#: edit/editcmd.c:575
 msgid " Error trying to overwrite macro file "
 msgstr " Makro dosyasýnýn üstüne yazarken hata oluþtu "
 
-#: edit/editcmd.c:592
-msgid " Macro "
-msgstr " Makro "
-
-#: edit/editcmd.c:594
-msgid " Press the macro's new hotkey: "
-msgstr " Yeni Makro tuþuna basýnýz: "
-
-#: edit/editcmd.c:613
+#: edit/editcmd.c:591 edit/editcmd.c:612
 msgid " Save macro "
 msgstr " Makroyu kaydet "
 
-#: edit/editcmd.c:622
-msgid " Delete Macro "
-msgstr " Makroyu sil "
+#: edit/editcmd.c:593
+msgid " Press the macro's new hotkey: "
+msgstr " Yeni Makro tuþuna basýnýz: "
 
-#: edit/editcmd.c:669
+#: edit/editcmd.c:668
 msgid " Load macro "
 msgstr " Makroyu yükle "
 
-#: edit/editcmd.c:682
+#: edit/editcmd.c:681
 msgid " Confirm save file? : "
 msgstr " Dosya kaydelirken sorulsun mu?: "
 
-#: edit/editcmd.c:684 src/view.c:385
+#: edit/editcmd.c:683 src/view.c:385
 msgid " Save file "
 msgstr " Dosyayý kaydet"
 
-#: edit/editcmd.c:684 edit/editwidget.c:287 src/view.c:2045
+#: edit/editcmd.c:683 edit/editwidget.c:287 src/view.c:2050
 msgid "Save"
 msgstr "Kaydet"
 
-#: edit/editcmd.c:708 edit/editcmd.c:733
+#: edit/editcmd.c:707 edit/editcmd.c:732
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -221,251 +217,240 @@ msgstr ""
 "Mevcut metin kaydedilmemiþ deðiþiklikler içeriyor.\n"
 " Bu deðiþiklikler yoksayýlarak devam edilsin mi?"
 
-#: edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
+#: edit/editcmd.c:707 edit/editcmd.c:732 edit/editcmd.c:880 edit/editcmd.c:981
 msgid "Continue"
 msgstr "Devam et"
 
-#: edit/editcmd.c:739
+#: edit/editcmd.c:738
 msgid " Load "
 msgstr " Yükle "
 
-#: edit/editcmd.c:877 edit/editcmd.c:975
+#: edit/editcmd.c:880 edit/editcmd.c:980
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blok çok büyük, bu eylem geri alýnamayabilir. "
 
-#: edit/editcmd.c:975
-msgid " Continue "
-msgstr " Devam et "
-
-#: edit/editcmd.c:975
-msgid " Cancel "
-msgstr " Vazgeç "
-
-#: edit/editcmd.c:1027
+#: edit/editcmd.c:1035
 msgid "O&ne"
 msgstr "&Biri"
 
-#: edit/editcmd.c:1029 src/filegui.c:527
+#: edit/editcmd.c:1037 src/file.c:2223 src/filegui.c:527
 msgid "A&ll"
 msgstr "&Tümü"
 
-#: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
+#: edit/editcmd.c:1039 src/file.c:2161 src/filegui.c:229
 msgid "&Skip"
 msgstr "&Atla"
 
-#: edit/editcmd.c:1033
+#: edit/editcmd.c:1041
 msgid "&Replace"
 msgstr "&Yerleþtir"
 
-#: edit/editcmd.c:1040 edit/editcmd.c:1047
+#: edit/editcmd.c:1048 edit/editcmd.c:1055
 msgid " Replace with: "
 msgstr " Bununla deðiþtir: "
 
-#: edit/editcmd.c:1052
+#: edit/editcmd.c:1060
 msgid " Confirm replace "
 msgstr " Yer deðiþikliðini onaylat "
 
-#: edit/editcmd.c:1085 edit/editcmd.c:1166
+#: edit/editcmd.c:1093 edit/editcmd.c:1174
 msgid "scanf &Expression"
 msgstr "scanf &Deyimi"
 
-#: edit/editcmd.c:1087
+#: edit/editcmd.c:1095
 msgid "replace &All"
 msgstr "&Tümünün yerini deðiþtir"
 
-#: edit/editcmd.c:1089
+#: edit/editcmd.c:1097
 msgid "pr&Ompt on replace"
 msgstr "Yerleþtirirken &Sor"
 
-#: edit/editcmd.c:1091 edit/editcmd.c:1168
+#: edit/editcmd.c:1099 edit/editcmd.c:1176
 msgid "&Backwards"
 msgstr "&Geriye doðru"
 
-#: edit/editcmd.c:1093 edit/editcmd.c:1170
+#: edit/editcmd.c:1101 edit/editcmd.c:1178
 msgid "&Regular expression"
 msgstr "&Düzenli ifade"
 
-#: edit/editcmd.c:1095 edit/editcmd.c:1172
+#: edit/editcmd.c:1103 edit/editcmd.c:1180
 msgid "&Whole words only"
 msgstr "&Sadece tam kelimeler"
 
-#: edit/editcmd.c:1097 edit/editcmd.c:1174 src/find.c:140
+#: edit/editcmd.c:1105 edit/editcmd.c:1182 src/find.c:140
 msgid "case &Sensitive"
 msgstr "Harf büyüklüðüne &Duyarlý"
 
-#: edit/editcmd.c:1101
+#: edit/editcmd.c:1109
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr "Yerdeðiþtirme sýrasýný girin (örn: 3,2,1,4) "
 
-#: edit/editcmd.c:1105
+#: edit/editcmd.c:1113
 msgid " Enter replacement string:"
 msgstr " Yerleþtirilecek metni verin:"
 
-#: edit/editcmd.c:1109 edit/editcmd.c:1178 src/view.c:1960
+#: edit/editcmd.c:1117 edit/editcmd.c:1186 src/view.c:1965
 msgid " Enter search string:"
 msgstr " Aranacak metni girin:"
 
-#: edit/editcmd.c:1128 edit/editcmd.c:1761 edit/editcmd.c:1791
-#: edit/editcmd.c:1793
+#: edit/editcmd.c:1136 edit/editcmd.c:1769 edit/editcmd.c:1793
 msgid " Replace "
 msgstr " Deðiþtir"
 
-#: edit/editcmd.c:1192 edit/editcmd.c:1869 edit/editcmd.c:1871
-#: edit/editcmd.c:1899 src/view.c:1490 src/view.c:1569 src/view.c:1689
-#: src/view.c:1701 src/view.c:1918 src/view.c:1960
-msgid " Search "
-msgstr " Ara "
+#: edit/editcmd.c:1200 edit/editcmd.c:1878 edit/editcmd.c:1880
+#: edit/editcmd.c:1908 edit/editwidget.c:292 src/view.c:1495 src/view.c:1574
+#: src/view.c:1694 src/view.c:1706 src/view.c:1923 src/view.c:1965
+#: src/view.c:2058
+msgid "Search"
+msgstr "Ara"
 
-#: edit/editcmd.c:1564
+#: edit/editcmd.c:1572
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr " Deðiþtirmelerin çoðunda scanf deyimi ya da düzenli ifade geçersiz "
 
-#: edit/editcmd.c:1763
+#: edit/editcmd.c:1771
 msgid " Error in replacement format string. "
 msgstr " Yerleþtirme biçimi dizgesinde hata. "
 
-#: edit/editcmd.c:1791
+#: edit/editcmd.c:1800
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld yerleþtirme yapýldý. "
 
-#: edit/editcmd.c:1793 edit/editcmd.c:1871 edit/editcmd.c:1899 src/view.c:1569
-#: src/view.c:1701
+#: edit/editcmd.c:1802 edit/editcmd.c:1880 edit/editcmd.c:1908 src/view.c:1574
+#: src/view.c:1706
 msgid " Search string not found "
 msgstr " Aranan metin bulunamadý "
 
-#: edit/editcmd.c:1869
+#: edit/editcmd.c:1878
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d bulma gerçekleþti, %d yer imi eklendi "
 
-#: edit/editcmd.c:1917
-msgid " Quit "
-msgstr " Çýk "
+#: edit/editcmd.c:1926 edit/editwidget.c:296 src/help.c:833 src/main.c:1395
+#: src/view.c:404 src/view.c:2045 src/view.c:2067
+msgid "Quit"
+msgstr "Çýk"
 
-#: edit/editcmd.c:1917
+#: edit/editcmd.c:1926 src/view.c:405
 msgid " File was modified, Save with exit? "
 msgstr " Deðiþiklikler çýkarken dosyaya kaydedilsin mi? "
 
-#: edit/editcmd.c:1917
+#: edit/editcmd.c:1926 src/view.c:406
 msgid "Cancel quit"
 msgstr "Çýkýþý durdur"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
-#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
-#: src/subshell.c:703 src/tree.c:754 src/view.c:409
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
+#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1935
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Evet"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
-#: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
-#: src/subshell.c:703 src/tree.c:754 src/view.c:409
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
+#: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1936
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Hayýr"
 
-#: edit/editcmd.c:2028
+#: edit/editcmd.c:2037
 msgid " Copy to clipboard "
 msgstr " Panoya kopyala "
 
-#: edit/editcmd.c:2028 edit/editcmd.c:2041
+#: edit/editcmd.c:2037 edit/editcmd.c:2050
 msgid " Unable to save to file. "
 msgstr " Dosya kaydedilemedi. "
 
-#: edit/editcmd.c:2041
+#: edit/editcmd.c:2050
 msgid " Cut to clipboard "
 msgstr " Panoya kes "
 
-#: edit/editcmd.c:2061 src/view.c:1864
+#: edit/editcmd.c:2070 src/view.c:1869
 msgid " Goto line "
 msgstr " Satýra git "
 
-#: edit/editcmd.c:2061
+#: edit/editcmd.c:2070
 msgid " Enter line: "
 msgstr " Satýrý girin: "
 
-#: edit/editcmd.c:2080 edit/editcmd.c:2093
+#: edit/editcmd.c:2089 edit/editcmd.c:2102
 msgid " Save Block "
 msgstr " Bloku kaydet "
 
-#: edit/editcmd.c:2105
+#: edit/editcmd.c:2117 edit/editcmd.c:2130
 msgid " Insert File "
 msgstr " Dosya Ýçer "
 
-#: edit/editcmd.c:2118
-msgid " Insert file "
-msgstr " Dosya içeriðine bir dosyayý ekler "
-
-#: edit/editcmd.c:2118
+#: edit/editcmd.c:2132
 msgid " Error trying to insert file. "
 msgstr " Dosyayý içerirken hata oluþtu. "
 
-#: edit/editcmd.c:2135
+#: edit/editcmd.c:2149
 msgid " Sort block "
 msgstr " Bloku sýrala "
 
-#: edit/editcmd.c:2135 edit/editcmd.c:2229
+#: edit/editcmd.c:2149 edit/editcmd.c:2243
 msgid " You must first highlight a block of text. "
 msgstr " Önce bir metin blokunu aydýnlatmalýsýnýz. "
 
-#: edit/editcmd.c:2142
+#: edit/editcmd.c:2156
 msgid " Run Sort "
 msgstr " Sýralamayý çalýþtýr "
 
-#: edit/editcmd.c:2143
+#: edit/editcmd.c:2157
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " Sýralama seçeneklerini (man sayfasýna bakýnýz) boþluklarla ayýrarak veriniz:"
 
-#: edit/editcmd.c:2154 edit/editcmd.c:2159
+#: edit/editcmd.c:2168 edit/editcmd.c:2173
 msgid " Sort "
 msgstr " Sýrala "
 
-#: edit/editcmd.c:2155
+#: edit/editcmd.c:2169
 msgid " Error trying to execute sort command "
 msgstr " Sýralama yapýlýrken bir hata oluþtu "
 
-#: edit/editcmd.c:2160
+#: edit/editcmd.c:2174
 msgid " Sort returned non-zero: "
 msgstr " Sýralama sýfýrdan farklý deðer döndürdü: "
 
-#: edit/editcmd.c:2196
+#: edit/editcmd.c:2210
 msgid "Error creating script:"
 msgstr "Betiði oluþtururken hata:"
 
-#: edit/editcmd.c:2204
+#: edit/editcmd.c:2218
 msgid "Error reading script:"
 msgstr "Betik okunurken hata:"
 
-#: edit/editcmd.c:2213
+#: edit/editcmd.c:2227
 msgid "Error closing script:"
 msgstr "Betik kapatýlýrken hata:"
 
-#: edit/editcmd.c:2219
+#: edit/editcmd.c:2233
 msgid "Script created:"
 msgstr "Betik oluþturuldu:"
 
-#: edit/editcmd.c:2227
+#: edit/editcmd.c:2241
 msgid "Process block"
 msgstr "Bloku iþle"
 
-#: edit/editcmd.c:2334
+#: edit/editcmd.c:2348
 msgid " Mail "
 msgstr " Posta"
 
-#: edit/editcmd.c:2345
+#: edit/editcmd.c:2359
 msgid " Copies to"
 msgstr " Kopyalar "
 
-#: edit/editcmd.c:2349
+#: edit/editcmd.c:2363
 msgid " Subject"
 msgstr " Konu "
 
-#: edit/editcmd.c:2353
+#: edit/editcmd.c:2367
 msgid " To"
 msgstr " Kime"
 
-#: edit/editcmd.c:2355
+#: edit/editcmd.c:2369
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <konu> -c <karbonkopya> <kime>"
 
@@ -752,7 +737,7 @@ msgid " Editor options "
 msgstr " Düzenleyici seçenekleri "
 
 #: edit/editwidget.c:286 src/help.c:800 src/help.c:821 src/main.c:1392
-#: src/screen.c:2155 src/tree.c:1017 src/view.c:2038
+#: src/screen.c:2158 src/tree.c:1017 src/view.c:2043
 msgid "Help"
 msgstr "Yardým"
 
@@ -764,7 +749,7 @@ msgstr "Seç"
 msgid "Replac"
 msgstr "Deðþtir"
 
-#: edit/editwidget.c:290 src/file.c:818 src/screen.c:2159 src/tree.c:1023
+#: edit/editwidget.c:290 src/file.c:818 src/screen.c:2162 src/tree.c:1023
 msgid "Copy"
 msgstr "Kopyala"
 
@@ -772,22 +757,13 @@ msgstr "Kopyala"
 msgid "Move"
 msgstr "Taþý"
 
-#: edit/editwidget.c:292 src/view.c:2053
-msgid "Search"
-msgstr "Ara"
-
-#: edit/editwidget.c:293 src/screen.c:2162
+#: edit/editwidget.c:293 src/screen.c:2165
 msgid "Delete"
 msgstr "Sil"
 
 #: edit/editwidget.c:295 src/main.c:1394
 msgid "PullDn"
 msgstr "AnaMenü"
-
-#: edit/editwidget.c:296 src/help.c:833 src/main.c:1395 src/view.c:2040
-#: src/view.c:2062
-msgid "Quit"
-msgstr "Çýk"
 
 #: edit/syntax.c:967 edit/syntax.c:972
 msgid " Load syntax file "
@@ -871,7 +847,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Artalan iþlemi:"
 
-#: src/background.c:275 src/file.c:2128
+#: src/background.c:275 src/file.c:2160
 msgid " Background process error "
 msgstr " Artalan iþlem hatasý "
 
@@ -947,7 +923,7 @@ msgstr " ü&stüne yazma onayý iste "
 msgid " confirm &Delete "
 msgstr " sil&me onayý iste "
 
-#: src/boxes.c:389
+#: src/boxes.c:389 src/cmd.c:228
 msgid " Confirmation "
 msgstr " Onaylama "
 
@@ -971,7 +947,7 @@ msgstr "Ta&m 8-bitlik girdi"
 msgid " Display bits "
 msgstr " Bitleri göster "
 
-#: src/boxes.c:557 src/selcodepage.c:67
+#: src/boxes.c:557 src/boxes.c:579 src/selcodepage.c:71
 msgid "Other 8 bit"
 msgstr "Diðer 8 bit"
 
@@ -1072,12 +1048,12 @@ msgstr "Parola:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s için parola"
 
-#: src/charsets.c:50 vfs/extfs.c:1330 vfs/sfs.c:303
+#: src/charsets.c:50 vfs/extfs.c:1330 vfs/sfs.c:306
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Uyarý: %s dosyasý yok\n"
 
-#: src/charsets.c:190 src/charsets.c:203
+#: src/charsets.c:191 src/charsets.c:205
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "%s, %s olarak çevrilemiyor"
@@ -1222,142 +1198,138 @@ msgstr "<Bilinmeyen>"
 msgid "<Unknown group>"
 msgstr "<Bilinmeyen>"
 
-#: src/cmd.c:171
+#: src/cmd.c:175
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " `%s'in yerel kopyasý alýnamadý "
 
-#: src/cmd.c:221
-msgid " CD "
-msgstr " CD "
-
-#: src/cmd.c:221
+#: src/cmd.c:228
 msgid "Files tagged, want to cd?"
 msgstr "Dosyalar iþaretli, dizin deðiþsin mi?"
 
-#: src/cmd.c:227 src/cmd.c:725 src/cmd.c:744 src/main.c:842
+#: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
 msgid "Could not change directory"
 msgstr "Dizin deðiþtirilemedi"
 
-#: src/cmd.c:256
+#: src/cmd.c:263
 msgid " View file "
 msgstr " Dosyayý göster "
 
-#: src/cmd.c:256
+#: src/cmd.c:263
 msgid " Filename:"
 msgstr " Dosyaismi:"
 
-#: src/cmd.c:273
+#: src/cmd.c:280
 msgid " Filtered view "
 msgstr " Görünüm Süzgeci "
 
-#: src/cmd.c:273
+#: src/cmd.c:280
 msgid " Filter command and arguments:"
 msgstr " Süzgeç komutlarý ve argümanlarý:"
 
-#: src/cmd.c:374
+#: src/cmd.c:384
 msgid "Create a new Directory"
 msgstr "Yeni bir dizin Oluþtur"
 
-#: src/cmd.c:374
+#: src/cmd.c:384
 msgid " Enter directory name:"
 msgstr " Dizin ismi:"
 
-#: src/cmd.c:434
+#: src/cmd.c:444
 msgid " Filter "
 msgstr " Süzgeç "
 
-#: src/cmd.c:435
+#: src/cmd.c:445
 msgid " Set expression for filtering filenames"
 msgstr " Dosya isimlerini süzmede kullanýlacak ifadeyi belirtin"
 
-#: src/cmd.c:501
+#: src/cmd.c:511
 msgid " Select "
 msgstr " Seç "
 
-#: src/cmd.c:529 src/cmd.c:580 src/find.c:261
+#: src/cmd.c:539 src/cmd.c:590 src/find.c:261
 msgid "  Malformed regular expression  "
 msgstr " Düzenli ifade yanlýþ  "
 
-#: src/cmd.c:553
+#: src/cmd.c:563
 msgid " Unselect "
 msgstr " Seçimi býrak "
 
-#: src/cmd.c:626
+#: src/cmd.c:636
 msgid "Extension file edit"
 msgstr "Uzantý dosyasý düzenleme"
 
-#: src/cmd.c:627
+#: src/cmd.c:637
 msgid " Which extension file you want to edit? "
 msgstr " Hangi uzantý dosyasý düzenlenecek? "
 
-#: src/cmd.c:628 src/cmd.c:654
+#: src/cmd.c:638 src/cmd.c:664
 msgid "&User"
 msgstr "&Kullanýcý"
 
-#: src/cmd.c:628 src/cmd.c:654 src/cmd.c:682
+#: src/cmd.c:638 src/cmd.c:664 src/cmd.c:692
 msgid "&System Wide"
 msgstr "&Sistem çapýnda"
 
-#: src/cmd.c:652
+#: src/cmd.c:662
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "Men&ü dosyasýný düzenle"
 
-#: src/cmd.c:653
+#: src/cmd.c:663
 #, fuzzy
 msgid " Which syntax file you want to edit? "
 msgstr " Hangi uzantý dosyasý düzenlenecek? "
 
-#: src/cmd.c:679
+#: src/cmd.c:689
 msgid " Menu edit "
 msgstr " Menu Düzenleme "
 
-#: src/cmd.c:680
+#: src/cmd.c:690
 msgid " Which menu file will you edit ? "
 msgstr " Düzenlenecek menü hangisi? "
 
-#: src/cmd.c:682
+#: src/cmd.c:692
 msgid "&Local"
 msgstr "Yere&l"
 
-#: src/cmd.c:682
+#: src/cmd.c:692
 msgid "&Home"
 msgstr "&Ev"
 
-#: src/cmd.c:870
+#: src/cmd.c:880
 msgid " Compare directories "
 msgstr " Dizinleri karþýlaþtýr"
 
-#: src/cmd.c:870
+#: src/cmd.c:880
 msgid " Select compare method: "
 msgstr " Karþýlaþtýrma yöntemini seçin: "
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Quick"
 msgstr "&Çabuk"
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Size only"
 msgstr "&Sadece uzunluk"
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Thorough"
 msgstr "&Titiz"
 
-#: src/cmd.c:881
+#: src/cmd.c:891
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr "Bu komutu kullanmak için her iki panelde liste görünümünde olmalý"
 
-#: src/cmd.c:896
+#: src/cmd.c:906
 msgid " The command history is empty "
 msgstr " Komut geçmiþi boþ "
 
-#: src/cmd.c:902
+#: src/cmd.c:912
 msgid " Command history "
 msgstr " Komut Geçmiþi "
 
-#: src/cmd.c:941
+#: src/cmd.c:951
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1365,100 +1337,100 @@ msgstr ""
 " Bir xterm ya da Linux konsolu deðil;\n"
 " Paneller deðiþtirilemez. "
 
-#: src/cmd.c:975
+#: src/cmd.c:985
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Midnight Commander'a dönmek için `exit' yazýnýz"
 
-#: src/cmd.c:1024
+#: src/cmd.c:1034
 #, fuzzy, c-format
 msgid "Link %s to:"
 msgstr " bað: %s "
 
-#: src/cmd.c:1025
+#: src/cmd.c:1035
 msgid " Link "
 msgstr " Sabit Bað: "
 
-#: src/cmd.c:1035
+#: src/cmd.c:1045
 #, c-format
 msgid " link: %s "
 msgstr " bað: %s "
 
-#: src/cmd.c:1063
+#: src/cmd.c:1073
 #, c-format
 msgid " symlink: %s "
 msgstr " sembað: %s"
 
-#: src/cmd.c:1097
+#: src/cmd.c:1107
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr "%s sembolik baðýnýn hedefi:"
 
-#: src/cmd.c:1102
+#: src/cmd.c:1112
 msgid " Edit symlink "
 msgstr " Sembolik baðý düzenle "
 
-#: src/cmd.c:1107
+#: src/cmd.c:1117
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " sembolik bað düzenleme, %s silinemedi: %s "
 
-#: src/cmd.c:1111
+#: src/cmd.c:1121
 #, c-format
 msgid " edit symlink: %s "
 msgstr " sembolik bað düzenleme: %s"
 
-#: src/cmd.c:1122
+#: src/cmd.c:1132
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' bir sembolik bað deðil"
 
-#: src/cmd.c:1263
+#: src/cmd.c:1273
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " %s dizinine geçilemedi"
 
-#: src/cmd.c:1272
+#: src/cmd.c:1282
 msgid " Enter machine name (F1 for details): "
 msgstr " makina ismi (ayrýntýlar için F1): "
 
-#: src/cmd.c:1277 src/widget.c:1044
+#: src/cmd.c:1287 src/widget.c:1044
 msgid " Link to a remote machine "
 msgstr " Bir uzak makinaya bað "
 
-#: src/cmd.c:1284 src/widget.c:1045
+#: src/cmd.c:1294 src/widget.c:1045
 msgid " FTP to machine "
 msgstr " makinaya FTP "
 
-#: src/cmd.c:1290
+#: src/cmd.c:1300
 #, fuzzy
 msgid " Shell link to machine "
 msgstr " makinaya SMB bað "
 
-#: src/cmd.c:1297 src/widget.c:1046
+#: src/cmd.c:1307 src/widget.c:1046
 msgid " SMB link to machine "
 msgstr " makinaya SMB bað "
 
-#: src/cmd.c:1308
+#: src/cmd.c:1318
 msgid " Socket source routing setup "
 msgstr "Soket kaynak güzergahý ayarý"
 
-#: src/cmd.c:1309
+#: src/cmd.c:1319
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Bir kaynak güzergahý sekmesi olarak kullanýlacak makina ismi: "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1327
 msgid " Host name "
 msgstr " Makina ismi "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1327
 msgid " Error while looking up IP address "
 msgstr " IP adresi denetlenirken hata "
 
-#: src/cmd.c:1328
+#: src/cmd.c:1338
 msgid " Undelete files on an ext2 file system "
 msgstr " Bir ext2 dosya sistemi üzerinde silinen dosyalarý kurtarýr "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1339
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1466,15 +1438,15 @@ msgstr ""
 " Kurtarýlacak dosyalarýn bulunduðu aygýtýn ismini\n"
 " (/dev/ olmadan - Ayrýntýlar için F1) verin"
 
-#: src/cmd.c:1379
+#: src/cmd.c:1389
 msgid " Setup saved to ~/"
 msgstr " Ayarlar kaydedildi: ~/"
 
-#: src/cmd.c:1381
+#: src/cmd.c:1391
 msgid " Setup "
 msgstr " Ayarlar "
 
-#: src/command.c:170 src/screen.c:2147 src/tree.c:875
+#: src/command.c:170 src/screen.c:2150 src/tree.c:875
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1564,7 +1536,7 @@ msgstr "&Grup"
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "'%s' dosyasý var ama durumlanamaz: %s"
 
-#: src/ext.c:105 src/user.c:565
+#: src/ext.c:107 src/user.c:565
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1573,19 +1545,19 @@ msgstr ""
 " Geçici komut dosyasý oluþturulamýyor:\n"
 " %s "
 
-#: src/ext.c:118 src/user.c:586
+#: src/ext.c:120 src/user.c:586
 msgid " Parameter "
 msgstr " Parametre "
 
-#: src/ext.c:490 src/ext.c:509
+#: src/ext.c:510 src/ext.c:529
 msgid " file error "
 msgstr " dosya hatasý"
 
-#: src/ext.c:492 src/ext.c:511
+#: src/ext.c:512 src/ext.c:531
 msgid "Format of the "
 msgstr "Biçim "
 
-#: src/ext.c:493
+#: src/ext.c:513
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1596,7 +1568,7 @@ msgstr ""
 "Kurulum baþarýsýz görünüyor. Lütfen, Midnight\n"
 "Commander paketinden temiz bir kopyasýyla deðiþtirin."
 
-#: src/ext.c:512
+#: src/ext.c:532
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1606,7 +1578,7 @@ msgstr ""
 "Dosyayý mc.ext dosyasýndan kopyalayabilir\n"
 "ya da "
 
-#: src/ext.c:515
+#: src/ext.c:535
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1614,7 +1586,7 @@ msgstr ""
 "nasýl yazýlacaðýna\n"
 "bir örnek olarak kullanabilirsiniz.\n"
 
-#: src/ext.c:518
+#: src/ext.c:538
 msgid "mc.ext will be used for this moment."
 msgstr "þimdilik mc.ext kullanýlacak."
 
@@ -1835,7 +1807,7 @@ msgstr ""
 " Devirli sembolik bað kopyalanamaz \n"
 " `%s' "
 
-#: src/file.c:954 src/file.c:1977
+#: src/file.c:954 src/file.c:1994
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1963,7 +1935,7 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1665 vfs/fish.c:550
+#: src/file.c:1665 vfs/fish.c:549
 msgid "file"
 msgstr "dosya:"
 
@@ -1991,31 +1963,23 @@ msgstr " bu maskla:"
 msgid " to:"
 msgstr " için bað dosyasý:"
 
-#: src/file.c:1809
+#: src/file.c:1811
 msgid " Cannot operate on \"..\"! "
 msgstr " \"..\" üzerinde iþlem yapýlamýyor! "
 
-#: src/file.c:1878
+#: src/file.c:1886
 msgid " Sorry, I could not put the job in background "
 msgstr " Ýþ artalana konulamadý "
 
-#: src/file.c:1963 src/file.c:2046
-msgid " Internal failure "
-msgstr " Ýç baþarýsýzlýk"
-
-#: src/file.c:1963 src/file.c:2046
-msgid " Unknown file operation "
-msgstr " Bilinmeyen dosya iþlemi "
-
-#: src/file.c:2129 src/view.c:387
+#: src/file.c:2161 src/view.c:387
 msgid "&Retry"
 msgstr "&Tekrar"
 
-#: src/file.c:2129 src/file.c:2189 src/filegui.c:227 src/filegui.c:522
+#: src/file.c:2161 src/file.c:2224 src/filegui.c:227 src/filegui.c:522
 msgid "&Abort"
 msgstr "Ý&ptal"
 
-#: src/file.c:2180
+#: src/file.c:2213
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2025,7 +1989,7 @@ msgstr ""
 "   Dizin boþ deðil.     \n"
 "   Ardýþýk silinsin mi? "
 
-#: src/file.c:2181
+#: src/file.c:2215
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2035,41 +1999,13 @@ msgstr ""
 "    Artalan süreç: Dizin boþ deðil \n"
 "    Ardýþýk silinsin mi? "
 
-#: src/file.c:2182
+#: src/file.c:2217
 msgid " Delete: "
 msgstr " Silinecek: "
 
-#: src/file.c:2188
-msgid "a&ll"
-msgstr "tü&mü"
-
-#: src/file.c:2188 src/filegui.c:525
+#: src/file.c:2223 src/filegui.c:525
 msgid "Non&e"
 msgstr "&hiçbiri"
-
-#: src/file.c:2198
-msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Gerçekten silmek istiyorsanýz 'evet' yazýn "
-
-#: src/file.c:2200
-msgid "all the directories "
-msgstr "tüm dizinler "
-
-#: src/file.c:2202
-msgid " Recursive Delete "
-msgstr " Ardýþýk Sil "
-
-#: src/file.c:2203
-msgid " Background process: Recursive Delete "
-msgstr " Artalan süreç: Ardýþýk Sil "
-
-#: src/file.c:2204
-msgid "no"
-msgstr "hayýr"
-
-#: src/file.c:2206
-msgid "yes"
-msgstr "evet"
 
 #: src/filegui.c:329
 #, c-format
@@ -2260,7 +2196,7 @@ msgstr "%s'de Grepliyor"
 msgid "Finished"
 msgstr "Bitirildi"
 
-#: src/find.c:538 src/view.c:1490
+#: src/find.c:538 src/view.c:1495
 #, c-format
 msgid "Searching %s"
 msgstr "%s aranýyor"
@@ -2568,7 +2504,7 @@ msgstr "i&zinler"
 msgid "&File types"
 msgstr "Dosya tü&rleri"
 
-#: src/layout.c:365 src/learn.c:61 src/learn.c:173 src/option.c:150
+#: src/layout.c:365 src/learn.c:61 src/learn.c:176 src/option.c:150
 msgid "&Save"
 msgstr "&Kaydet"
 
@@ -2593,8 +2529,8 @@ msgid "Layout"
 msgstr "Yerleþim"
 
 #: src/learn.c:75
-msgid " Learn keys "
-msgstr " Tuþlarý öðren "
+msgid "Learn keys"
+msgstr "Tuþlarý öðret"
 
 #: src/learn.c:81
 msgid " Teach me a key "
@@ -2630,11 +2566,12 @@ msgstr " Bu tuþ kabul edilemez "
 msgid " You have entered \"%s\""
 msgstr " \"%s\" tuþuna bastýnýz"
 
-#: src/learn.c:164
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+#: src/learn.c:166
 msgid "OK"
 msgstr "OK"
 
-#: src/learn.c:171
+#: src/learn.c:174
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2642,11 +2579,11 @@ msgstr ""
 "Tüm tuþlarýnýz doðru çalýþýyor.\n"
 "Bu çok iyi."
 
-#: src/learn.c:173
+#: src/learn.c:176
 msgid "&Discard"
 msgstr "Ýp&tal"
 
-#: src/learn.c:177
+#: src/learn.c:181
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2654,19 +2591,15 @@ msgstr ""
 "Tebrikler! Tam bir terminal veritabanýnýz var!\n"
 "Tüm tuþlarýnýz doðru çalýþýyor."
 
-#: src/learn.c:260
-msgid "Learn keys"
-msgstr "Tuþlarý öðret"
-
-#: src/learn.c:293
+#: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Burada gösterilen tüm tuþlara basýn. Bunu yaptýktan sonra OK ile"
 
-#: src/learn.c:295
+#: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "iþaretlenmemiþ tuþlarý kontrol edin. Tuþu atamak için boþluk"
 
-#: src/learn.c:297
+#: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "tuþuna basýn ya da fareyle týklayýn. Tab ile dolaþabilirsiniz."
 
@@ -2690,7 +2623,7 @@ msgstr "Bir tuþa basýnýz..."
 msgid " The shell is already running a command "
 msgstr " Kabukta halen bir komut etkin "
 
-#: src/main.c:622 src/screen.c:1931
+#: src/main.c:622 src/screen.c:1934
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
@@ -2974,7 +2907,7 @@ msgstr ""
 " kalacaksýnýz. Daha detaylý bilgi için man sayfalarýna\n"
 " bakýnýz."
 
-#: src/main.c:1393 src/screen.c:2156
+#: src/main.c:1393 src/screen.c:2159
 msgid "Menu"
 msgstr "KMenü"
 
@@ -2993,25 +2926,21 @@ msgstr "GNU Midnight Commander %s\n"
 
 #: src/main.c:2076
 msgid ""
-"Usage is:\n"
-"\n"
-"mc [flags] [this_dir] [other_panel_dir]\n"
+"[flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
-"Kullanýmý:\n"
-"\n"
-"mc [seçenekler] [bu_dizin] [diðer_panel_dizini]\n"
+"[seçenekler] [bu_dizin] [diðer_panel_dizini]\n"
 "\n"
 
-#: src/main.c:2082
+#: src/main.c:2080
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2081
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2085
+#: src/main.c:2083
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3021,7 +2950,8 @@ msgstr ""
 "Lütfen, `mc -V' çýktýsýný da içeren bir hata raporunu\n"
 "mc-devel@gnome.org adresine gönderiniz\n"
 
-#: src/main.c:2094
+#. TRANSLATORS: don't translate keywords and names of colors
+#: src/main.c:2097
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3033,7 +2963,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, core\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3051,7 +2982,8 @@ msgstr ""
 "   Diloglar:        dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menüler:         menu, menuhot, menusel, menuhotsel\n"
 "   Yardým:          helpnormal, helpitalic, helplink, helpslink\n"
-"   Dosya türleri:   directory, executable, link, stalelink, device, special, core\n"
+"   Dosya türleri:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Renkler:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3059,97 +2991,97 @@ msgstr ""
 "   brightcyan, lightgray and white\n"
 "\n"
 
-#: src/main.c:2186
+#: src/main.c:2184
 msgid "Use to debug the background code"
 msgstr "Artalan kodunda hata ayýklamakta kullanýlýr"
 
-#: src/main.c:2189
+#: src/main.c:2187
 msgid "Request to run in color mode"
 msgstr "Renkli kipte çalýþtýrma isteði"
 
-#: src/main.c:2191
+#: src/main.c:2189
 msgid "Specifies a color configuration"
 msgstr "Bir renk yapýlandýrmasý belirtir"
 
-#: src/main.c:2195
+#: src/main.c:2193
 msgid "Edits one file"
 msgstr "Dosya düzenler"
 
-#: src/main.c:2199
+#: src/main.c:2197
 msgid "Displays this help message"
 msgstr "Bu yardým iletisini gösterir"
 
-#: src/main.c:2201
+#: src/main.c:2199
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Renk þemasýnýn deðiþtirilmesi ile ilgili yardým ekranýný gösterir"
 
-#: src/main.c:2204
+#: src/main.c:2202
 msgid "Log ftp dialog to specified file"
 msgstr "ftp dialog günlüðünü belirtilen dosyaya yazar"
 
-#: src/main.c:2207
+#: src/main.c:2205
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2211
+#: src/main.c:2209
 #, fuzzy
 msgid "Print data directory"
 msgstr "dizin:"
 
-#: src/main.c:2213
+#: src/main.c:2211
 msgid "Requests to run in black and white"
 msgstr "Siyah/Beyaz olarak çalýþtýrma isteði"
 
-#: src/main.c:2215
+#: src/main.c:2213
 msgid "Disable mouse support in text version"
 msgstr "Metin sürümünde fare desteðini kapatýr"
 
-#: src/main.c:2218
+#: src/main.c:2216
 msgid "Disables subshell support"
 msgstr "Altkabuk desteðini kapatýr"
 
-#: src/main.c:2220
+#: src/main.c:2218
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "kullanýcý çalýþtýrabilir"
 
-#: src/main.c:2223
+#: src/main.c:2221
 msgid "Prints working directory at program exit"
 msgstr "Program çýkýþýnda çalýþýlan dizini basar"
 
-#: src/main.c:2225
+#: src/main.c:2223
 msgid "Resets soft keys on HP terminals"
 msgstr "HP terminallerde soft tuþlarý sýfýrlar"
 
-#: src/main.c:2227
+#: src/main.c:2225
 msgid "To run on slow terminals"
 msgstr "Yavaþ terminallerde çalýþtýrmak"
 
-#: src/main.c:2230
+#: src/main.c:2228
 msgid "Use stickchars to draw"
 msgstr "Pencere çizgilerinde çubuk karakterleri kullanýlýr"
 
-#: src/main.c:2234
+#: src/main.c:2232
 msgid "Enables subshell support (default)"
 msgstr "Altkabuk desteðini etkinleþtirir (öntanýmlý)"
 
-#: src/main.c:2238
+#: src/main.c:2236
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Terminfo yerine termcap kullanmayý dener"
 
-#: src/main.c:2241
+#: src/main.c:2239
 msgid "Displays the current version"
 msgstr "Sürümü gösterir"
 
-#: src/main.c:2243
+#: src/main.c:2241
 msgid "Launches the file viewer on a file"
 msgstr "Bir dosyayý dosya göstericide açar"
 
-#: src/main.c:2245
+#: src/main.c:2243
 msgid "Forces xterm features"
 msgstr "xterm özelliklerini etkinleþtirir"
 
-#: src/main.c:2436
+#: src/main.c:2433
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3157,11 +3089,11 @@ msgstr ""
 "tty satýrý açýlamadý. mc'yi -P seçeneði olmaksýzýn çalýþtýrýnýz.\n"
 "Bazý sistemlerde # `which mc` çalýþtýrýlabilir.\n"
 
-#: src/main.c:2499
+#: src/main.c:2496
 msgid " Notice "
 msgstr " Uyarý "
 
-#: src/main.c:2500
+#: src/main.c:2497
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3327,6 +3259,19 @@ msgstr "Bu yardým iletisini göster"
 msgid "Display brief usage message"
 msgstr "Kýsa bir kullaným iletisi gösterir"
 
+#: src/popthelp.c:60
+msgid "ARG"
+msgstr ""
+
+#: src/popthelp.c:179
+#, fuzzy
+msgid "Usage:"
+msgstr "Kullanýcý: "
+
+#: src/popthelp.c:197
+msgid "[OPTION...]"
+msgstr ""
+
 #: src/screen.c:173
 msgid "UP--DIR"
 msgstr "ÜST-DÝZ"
@@ -3409,39 +3354,39 @@ msgstr "Gösterme biçeminde bilinmeyen etiket:"
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Kullanýcý tanýmlý biçim geçersiz: öntanýmlýsý kullanýlacak."
 
-#: src/screen.c:1932
+#: src/screen.c:1935
 msgid " Do you really want to execute? "
 msgstr "Gerçekten çalýþtýrmak istiyor musunuz?"
 
-#: src/screen.c:1944
+#: src/screen.c:1947
 msgid " No action taken "
 msgstr " Hareket yok "
 
-#: src/screen.c:2157
+#: src/screen.c:2160
 msgid "View"
 msgstr "Görünüm"
 
-#: src/screen.c:2158 src/view.c:2049
+#: src/screen.c:2161 src/view.c:2054
 msgid "Edit"
 msgstr "Düzenle"
 
-#: src/screen.c:2160 src/tree.c:1025
+#: src/screen.c:2163 src/tree.c:1025
 msgid "RenMov"
 msgstr "Taþý"
 
-#: src/screen.c:2161 src/tree.c:1029
+#: src/screen.c:2164 src/tree.c:1029
 msgid "Mkdir"
 msgstr "DizinAç"
 
-#: src/selcodepage.c:54
+#: src/selcodepage.c:55
 msgid " Choose input codepage "
 msgstr " Girdi karakter kümesini seçin "
 
-#: src/selcodepage.c:58
+#: src/selcodepage.c:59
 msgid "-  < No translation >"
 msgstr "-  < Çeviri yok >"
 
-#: src/selcodepage.c:102
+#: src/selcodepage.c:107
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -3657,66 +3602,38 @@ msgstr " %s içinde tahsis edilebilir bir girdi yok"
 msgid " User menu "
 msgstr " Kullanýcý menüsü "
 
-#: src/util.c:220
-msgid "name_trunc: too big"
-msgstr "name_trunc: çok büyük"
-
-#: src/util.c:670 src/util.c:696
+#: src/util.c:665 src/util.c:691
 msgid "%b %e %H:%M"
 msgstr "%e %b %H:%M"
 
-#: src/util.c:671 src/util.c:694
+#: src/util.c:666 src/util.c:689
 msgid "%b %e  %Y"
 msgstr "%e %b  %Y"
 
-#: src/utilunix.c:329
+#: src/utilunix.c:331
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
 " Hedef dizin \"%s\" oluþturulamýyor \n"
 " %s"
 
-#: src/utilunix.c:351
+#: src/utilunix.c:354
 msgid " Pipe failed "
 msgstr " Veri yolu açýlamadý "
 
-#: src/utilunix.c:355
+#: src/utilunix.c:358
 msgid " Dup failed "
 msgstr " Tekrar baþarýsýz "
 
-#: src/view.c:406
-msgid ""
-"File: \n"
-"\n"
-"    "
-msgstr ""
-"Dosya: \n"
-"\n"
-"    "
-
-#: src/view.c:407
-msgid ""
-"\n"
-"\n"
-"has been modified, do you want to save the changes?\n"
-msgstr ""
-"\n"
-"\n"
-"deðiþtirilmiþti, deðiþiklikleri kaydetmek ister misiniz?\n"
-
-#: src/view.c:409
-msgid " Save changes "
-msgstr " Kaydet "
-
-#: src/view.c:454
+#: src/view.c:450
 msgid " Cannot spawn child program "
 msgstr " Alt uygulama çalýþtýrýlamadý "
 
-#: src/view.c:471
+#: src/view.c:467
 msgid " Could not open file "
 msgstr " Dosya açýlamadý "
 
-#: src/view.c:563
+#: src/view.c:559
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3725,11 +3642,11 @@ msgstr ""
 " \"%s\" durumlanamýyor\n"
 " %s "
 
-#: src/view.c:571
+#: src/view.c:567
 msgid " Cannot view: not a regular file "
 msgstr " Gösterilemiyor: normal bir dosya deðil "
 
-#: src/view.c:578
+#: src/view.c:574
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3738,39 +3655,39 @@ msgstr ""
 " \"%s\" açýlamýyor\n"
 " %s "
 
-#: src/view.c:708
+#: src/view.c:705
 #, c-format
 msgid "File: %s"
 msgstr "Dosya: %s"
 
-#: src/view.c:722
+#: src/view.c:719
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Offset 0x%08x"
 
-#: src/view.c:724
+#: src/view.c:721
 #, c-format
 msgid "Col %d"
 msgstr "Sütun %d"
 
-#: src/view.c:728
+#: src/view.c:725
 #, c-format
 msgid "%s bytes"
 msgstr "%s bayt"
 
-#: src/view.c:733
+#: src/view.c:730
 msgid "  [grow]"
 msgstr "  [büyüterek]"
 
-#: src/view.c:1689
+#: src/view.c:1694
 msgid "Invalid hex search expression"
 msgstr "Onaltýlýk arama ifadesi geçersiz "
 
-#: src/view.c:1740
+#: src/view.c:1745
 msgid " Invalid regular expression "
 msgstr " Düzenli ifade geçersiz "
 
-#: src/view.c:1862
+#: src/view.c:1867
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3779,7 +3696,7 @@ msgstr ""
 " Þimdiki satýr numarasý %d.\n"
 " Yeni satýr numarasýný verin:"
 
-#: src/view.c:1884
+#: src/view.c:1889
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3788,67 +3705,67 @@ msgstr ""
 " Þimdiki adres 0x%lx.\n"
 " Yeni adresi verin:"
 
-#: src/view.c:1886
+#: src/view.c:1891
 msgid " Goto Address "
 msgstr " Adrese Git "
 
-#: src/view.c:1918
+#: src/view.c:1923
 msgid " Enter regexp:"
 msgstr " Düzenli ifadeyi girin:"
 
-#: src/view.c:2041
+#: src/view.c:2046
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2041
+#: src/view.c:2046
 msgid "Hex"
 msgstr "Onaltýlýk"
 
-#: src/view.c:2042
+#: src/view.c:2047
 msgid "Goto"
 msgstr "Git"
 
-#: src/view.c:2042
+#: src/view.c:2047
 msgid "Line"
 msgstr "Satýr"
 
-#: src/view.c:2045
+#: src/view.c:2050
 msgid "RxSrch"
 msgstr "DüzÝfAra"
 
-#: src/view.c:2048
+#: src/view.c:2053
 msgid "EdText"
 msgstr "MetnDüzn"
 
-#: src/view.c:2048
+#: src/view.c:2053
 msgid "EdHex"
 msgstr "OnaltDüzn"
 
-#: src/view.c:2050
+#: src/view.c:2055
 msgid "UnWrap"
 msgstr "Sarma"
 
-#: src/view.c:2050
+#: src/view.c:2055
 msgid "Wrap"
 msgstr "Sarmala"
 
-#: src/view.c:2053
+#: src/view.c:2058
 msgid "HxSrch"
 msgstr "OnaltAra"
 
-#: src/view.c:2056
+#: src/view.c:2061
 msgid "Raw"
 msgstr "Temel"
 
-#: src/view.c:2056
+#: src/view.c:2061
 msgid "Parse"
 msgstr "Tara"
 
-#: src/view.c:2060
+#: src/view.c:2065
 msgid "Unform"
 msgstr "BiçKald"
 
-#: src/view.c:2060
+#: src/view.c:2065
 msgid "Format"
 msgstr "Biçim"
 
@@ -4107,11 +4024,11 @@ msgstr ""
 msgid "Dir cache expired for %s"
 msgstr "Dizin arabelleðinde %s için zamanaþýmý"
 
-#: vfs/direntry.c:785
+#: vfs/direntry.c:787
 msgid "Starting linear transfer..."
 msgstr "Doðrusal aktarým baþlangýcý..."
 
-#: vfs/direntry.c:957
+#: vfs/direntry.c:961
 msgid "Getting file"
 msgstr "Dosya alýnmasý"
 
@@ -4128,149 +4045,149 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "Kararsýz extfs arþivi"
 
-#: vfs/fish.c:145
+#: vfs/fish.c:144
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: %s baðlantýsý kapanýyor"
 
-#: vfs/fish.c:223
+#: vfs/fish.c:222
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Kendi satýrý için bekliyor..."
 
-#: vfs/fish.c:233
+#: vfs/fish.c:232
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr ""
 "Üzgünüm, þimdilik parola ile kimlik bildirimi yapýlan baðlantýlar yapýlamýyor"
 
-#: vfs/fish.c:238
+#: vfs/fish.c:237
 msgid " fish: Password required for "
 msgstr " fish: Parola gerekli "
 
-#: vfs/fish.c:247
+#: vfs/fish.c:246
 msgid "fish: Sending password..."
 msgstr "fish: Parola gönderimi..."
 
-#: vfs/fish.c:253
+#: vfs/fish.c:252
 msgid "fish: Sending initial line..."
 msgstr "fish: Satýr gönderimi..."
 
-#: vfs/fish.c:263
+#: vfs/fish.c:262
 msgid "fish: Handshaking version..."
 msgstr "fish: Sürüm anlaþmasý..."
 
-#: vfs/fish.c:273
+#: vfs/fish.c:272
 msgid "fish: Setting up current directory..."
 msgstr "fish: Çalýþma dizini belirlenmesi..."
 
-#: vfs/fish.c:275
+#: vfs/fish.c:274
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Baðlantý kuruldu, Ev %s."
 
-#: vfs/fish.c:364
+#: vfs/fish.c:363
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: %s dizini okunuyor..."
 
-#: vfs/fish.c:467 vfs/ftpfs.c:1306 vfs/undelfs.c:310
+#: vfs/fish.c:466 vfs/ftpfs.c:1318 vfs/undelfs.c:310
 #, c-format
 msgid "%s: done."
 msgstr "%s: bitti."
 
-#: vfs/fish.c:472 vfs/ftpfs.c:1258 vfs/undelfs.c:313
+#: vfs/fish.c:471 vfs/ftpfs.c:1270 vfs/undelfs.c:313
 #, c-format
 msgid "%s: failure"
 msgstr "%s: baþarýsýz"
 
-#: vfs/fish.c:493
+#: vfs/fish.c:492
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: %s kaydet: komut gönderiliyor..."
 
-#: vfs/fish.c:537
+#: vfs/fish.c:536
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Yerel okuma baþarýsýz, sýfýrlar gönderiliyor"
 
-#: vfs/fish.c:549
+#: vfs/fish.c:548
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: %s %d (%lu) kaydediliyor"
 
-#: vfs/fish.c:550
+#: vfs/fish.c:549
 msgid "zeros"
 msgstr "sýfýrlar"
 
-#: vfs/fish.c:599
+#: vfs/fish.c:598
 msgid "Aborting transfer..."
 msgstr "Aktarým durduruluyor..."
 
-#: vfs/fish.c:608
+#: vfs/fish.c:607
 msgid "Error reported after abort."
 msgstr "Durdurma sonra hata raporlandý."
 
-#: vfs/fish.c:610
+#: vfs/fish.c:609
 msgid "Aborted transfer would be successful."
 msgstr "Aktarýmýn durdurulmasý baþarýldý."
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:375
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s baðlantýsý kesiliyor"
 
-#: vfs/ftpfs.c:430
+#: vfs/ftpfs.c:429
 msgid " FTP: Password required for "
 msgstr "FTP: Parola gerekli: "
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:463
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: kullanýcý ismi gönderiliyor"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:468
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: kullanýcý parolasý gönderiliyor"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:473
 msgid "ftpfs: logged in"
 msgstr "ftpfs: giriþ tamamlandý: "
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:488
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: kullanýcý %s için baðlantý reddedildi"
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:520
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Kaynak güzergahý (%s) belirlenemedi"
 
-#: vfs/ftpfs.c:642
+#: vfs/ftpfs.c:641
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Makina ismi geçersiz."
 
-#: vfs/ftpfs.c:662
+#: vfs/ftpfs.c:661
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Makina adresi geçersiz."
 
-#: vfs/ftpfs.c:685
+#: vfs/ftpfs.c:684
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: %s ile baðlantý kuruluyor"
 
-#: vfs/ftpfs.c:695
+#: vfs/ftpfs.c:694
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: baðlantý kullanýcý tarafýndan kesildi"
 
-#: vfs/ftpfs.c:697
+#: vfs/ftpfs.c:696
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: Sunucuya baðlantý baþarýsýz: %s"
 
-#: vfs/ftpfs.c:738
+#: vfs/ftpfs.c:737
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Yinelemek için bekleniyor... %d (iptal etmek için Ctrl-C)"
 
-#: vfs/ftpfs.c:921
+#: vfs/ftpfs.c:920
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: pasif kip ayarlanamadý"
 
@@ -4283,45 +4200,45 @@ msgstr "ftpfs: aktarým durduruluyor"
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: çýkýþ hatasý: %s"
 
-#: vfs/ftpfs.c:1001
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: durdurma baþarýsýz"
 
-#: vfs/ftpfs.c:1090 vfs/ftpfs.c:1195
+#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1207
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD baþarýsýz"
 
-#: vfs/ftpfs.c:1100 vfs/ftpfs.c:1107
+#: vfs/ftpfs.c:1112 vfs/ftpfs.c:1119
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: sembolik bað çözümlenemedi"
 
-#: vfs/ftpfs.c:1158
+#: vfs/ftpfs.c:1170
 msgid "Resolving symlink..."
 msgstr "Sembolik bað çözümleniyor..."
 
-#: vfs/ftpfs.c:1183
+#: vfs/ftpfs.c:1195
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: %s FTP dizini okunuyor... %s%s"
 
-#: vfs/ftpfs.c:1184
+#: vfs/ftpfs.c:1196
 msgid "(strict rfc959)"
 msgstr "(kesin rfc959)"
 
-#: vfs/ftpfs.c:1185
+#: vfs/ftpfs.c:1197
 msgid "(chdir first)"
 msgstr "(önce chdir)"
 
-#: vfs/ftpfs.c:1319
+#: vfs/ftpfs.c:1331
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: baþarýsýz; son çare yok"
 
-#: vfs/ftpfs.c:1384
+#: vfs/ftpfs.c:1396
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: %d dosyasý kaydediliyor (%lu)"
 
-#: vfs/ftpfs.c:1843
+#: vfs/ftpfs.c:1855
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4329,15 +4246,15 @@ msgstr ""
 "~/.netrc dosyasý doðru kipte deðil .\n"
 "Ya parolayý silin ya da kipi düzeltin."
 
-#: vfs/mcfs.c:109 vfs/mcfs.c:152
+#: vfs/mcfs.c:123 vfs/mcfs.c:168
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:109
+#: vfs/mcfs.c:124
 msgid " The server does not support this version "
 msgstr " Sunucu bu sürümü desteklemiyor "
 
-#: vfs/mcfs.c:125
+#: vfs/mcfs.c:141
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4347,42 +4264,34 @@ msgstr ""
 " giriþ yapmak için bir parola lazým, fakat bu bilgi \n"
 " karþý tarafta güvenilir olmayabilir. Devam edilsin mi ?\n"
 
-#: vfs/mcfs.c:128
-msgid " Yes "
-msgstr " Evet "
-
-#: vfs/mcfs.c:128
-msgid " No "
-msgstr " Hayýr"
-
-#: vfs/mcfs.c:138
+#: vfs/mcfs.c:154
 msgid " MCFS Password required "
 msgstr " MCFS parolasý gerekli "
 
-#: vfs/mcfs.c:152
+#: vfs/mcfs.c:168
 msgid " Invalid password "
 msgstr " Yanlýþ parola "
 
-#: vfs/mcfs.c:183
+#: vfs/mcfs.c:228
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Makina ismi bulunamadý: %s "
 
-#: vfs/mcfs.c:201
+#: vfs/mcfs.c:247
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Soket oluþturulamadý: %s "
 
-#: vfs/mcfs.c:207
+#: vfs/mcfs.c:253
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " Sunucuya baðlanýlamadý: %s "
 
-#: vfs/mcfs.c:273
+#: vfs/mcfs.c:323
 msgid " Too many open connections "
 msgstr " Çok fazla açýk baðlantý var "
 
-#: vfs/sfs.c:331
+#: vfs/sfs.c:334
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4391,7 +4300,7 @@ msgstr ""
 "Uyarý: %s içindeki satýr geçersiz:\n"
 "%s\n"
 
-#: vfs/sfs.c:343
+#: vfs/sfs.c:346
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4400,7 +4309,7 @@ msgstr ""
 "Uyarý: %2$s içindeki %1$c seçeneði geçersiz:\n"
 "%3$s\n"
 
-#: vfs/smbfs.c:564
+#: vfs/smbfs.c:565
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4409,31 +4318,31 @@ msgstr ""
 " %s ile tekrar baðlantý kurulamadý\n"
 " "
 
-#: vfs/smbfs.c:1122
+#: vfs/smbfs.c:1101
 msgid " Authentication failed "
 msgstr " Kimlik Kanýtlama baþarýsýz "
 
-#: vfs/smbfs.c:1583
+#: vfs/smbfs.c:1588
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s %s dizinini yaratýyor "
 
-#: vfs/smbfs.c:1606
+#: vfs/smbfs.c:1611
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s %s dizinini siliyor "
 
-#: vfs/smbfs.c:1710 vfs/smbfs.c:1730
+#: vfs/smbfs.c:1715 vfs/smbfs.c:1735
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s karþýdaki %s dosyasýný açýyor "
 
-#: vfs/smbfs.c:1798
+#: vfs/smbfs.c:1803
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s karþýdaki %s dosyasýný siliyor "
 
-#: vfs/smbfs.c:1836
+#: vfs/smbfs.c:1841
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s dosyalarý yeniden adlandýrýlýyor\n"
@@ -4579,3 +4488,87 @@ msgstr "%s : %s : %s %3d%% (%lu bayt aktarýldý)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s : %s : %s %lu bayt aktarýldý"
+
+#~ msgid " Macro "
+#~ msgstr " Makro "
+
+#~ msgid " Delete Macro "
+#~ msgstr " Makroyu sil "
+
+#~ msgid " Continue "
+#~ msgstr " Devam et "
+
+#~ msgid " Cancel "
+#~ msgstr " Vazgeç "
+
+#~ msgid " Search "
+#~ msgstr " Ara "
+
+#~ msgid " Quit "
+#~ msgstr " Çýk "
+
+#~ msgid " Insert file "
+#~ msgstr " Dosya içeriðine bir dosyayý ekler "
+
+#~ msgid " CD "
+#~ msgstr " CD "
+
+#~ msgid " Internal failure "
+#~ msgstr " Ýç baþarýsýzlýk"
+
+#~ msgid " Unknown file operation "
+#~ msgstr " Bilinmeyen dosya iþlemi "
+
+#~ msgid "a&ll"
+#~ msgstr "tü&mü"
+
+#~ msgid " Type 'yes' if you REALLY want to delete "
+#~ msgstr " Gerçekten silmek istiyorsanýz 'evet' yazýn "
+
+#~ msgid "all the directories "
+#~ msgstr "tüm dizinler "
+
+#~ msgid " Recursive Delete "
+#~ msgstr " Ardýþýk Sil "
+
+#~ msgid " Background process: Recursive Delete "
+#~ msgstr " Artalan süreç: Ardýþýk Sil "
+
+#~ msgid "no"
+#~ msgstr "hayýr"
+
+#~ msgid "yes"
+#~ msgstr "evet"
+
+#~ msgid " Learn keys "
+#~ msgstr " Tuþlarý öðren "
+
+#~ msgid "name_trunc: too big"
+#~ msgstr "name_trunc: çok büyük"
+
+#~ msgid ""
+#~ "File: \n"
+#~ "\n"
+#~ "    "
+#~ msgstr ""
+#~ "Dosya: \n"
+#~ "\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "has been modified, do you want to save the changes?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "deðiþtirilmiþti, deðiþiklikleri kaydetmek ister misiniz?\n"
+
+#~ msgid " Save changes "
+#~ msgstr " Kaydet "
+
+#~ msgid " Yes "
+#~ msgstr " Evet "
+
+#~ msgid " No "
+#~ msgstr " Hayýr"

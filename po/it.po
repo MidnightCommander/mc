@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-10-21 15:11+0200\n"
+"POT-Creation-Date: 2002-10-21 19:16-0400\n"
 "PO-Revision-Date: 2002-09-27 11:11+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -233,7 +233,7 @@ msgstr " Il blocco è grande, potresti non riuscire ad annullare l'azione. "
 msgid "O&ne"
 msgstr "&Nome"
 
-#: edit/editcmd.c:1037 src/filegui.c:527
+#: edit/editcmd.c:1037 src/file.c:2223 src/filegui.c:527
 msgid "A&ll"
 msgstr "&Tutti"
 
@@ -343,15 +343,15 @@ msgstr " Il file è stato modificato. Lo salvo uscendo? "
 msgid "Cancel quit"
 msgstr "Annulla l'uscita"
 
-#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2219
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
 #: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1935
-#: src/subshell.c:703 src/tree.c:754 src/view.c:406
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr " &Sì"
 
-#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2219
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
 #: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1936
-#: src/subshell.c:703 src/tree.c:754 src/view.c:406
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&No"
 
@@ -1978,11 +1978,11 @@ msgstr " Spiacente, non posso mettere il programma in background "
 msgid "&Retry"
 msgstr "&Riprova"
 
-#: src/file.c:2161 src/file.c:2221 src/filegui.c:227 src/filegui.c:522
+#: src/file.c:2161 src/file.c:2224 src/filegui.c:227 src/filegui.c:522
 msgid "&Abort"
 msgstr "&Esci"
 
-#: src/file.c:2212
+#: src/file.c:2213
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -1992,7 +1992,7 @@ msgstr ""
 " La directory non è vuota.\n"
 " Cancellarla ricorsivamente?"
 
-#: src/file.c:2213
+#: src/file.c:2215
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2002,38 +2002,13 @@ msgstr ""
 " Processo in background: la directory non è vuota. \n"
 " Cancellarla ricorsivamente? "
 
-#: src/file.c:2214
+#: src/file.c:2217
 msgid " Delete: "
 msgstr " Cancella: "
 
-#: src/file.c:2220
-msgid "a&ll"
-msgstr "&Tutto"
-
-#: src/file.c:2220 src/filegui.c:525
+#: src/file.c:2223 src/filegui.c:525
 msgid "Non&e"
 msgstr "nessun&O"
-
-#: src/file.c:2230
-msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Scrivi 'si' se VERAMENTE vuoi cancellare "
-
-#: src/file.c:2232
-msgid "all the directories "
-msgstr "tutte le directory "
-
-#: src/file.c:2234
-msgid " Recursive Delete "
-msgstr " Cancella Ricorsivamente "
-
-#: src/file.c:2235
-msgid " Background process: Recursive Delete "
-msgstr " Processo in background: cancellazione ricorsiva "
-
-#. TRANSLATORS: user types this text to confirm deletion
-#: src/file.c:2239
-msgid "yes"
-msgstr "si"
 
 #: src/filegui.c:329
 #, c-format
@@ -2532,7 +2507,7 @@ msgstr "&Permessi"
 msgid "&File types"
 msgstr "&Tipo di file"
 
-#: src/layout.c:365 src/learn.c:61 src/learn.c:173 src/option.c:150
+#: src/layout.c:365 src/learn.c:61 src/learn.c:176 src/option.c:150
 msgid "&Save"
 msgstr "&Salva"
 
@@ -2594,11 +2569,12 @@ msgstr " Non posso accettare il tasto "
 msgid " You have entered \"%s\""
 msgstr " Hai inserito \"%s\""
 
-#: src/learn.c:164
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+#: src/learn.c:166
 msgid "OK"
 msgstr "OK"
 
-#: src/learn.c:171
+#: src/learn.c:174
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2606,11 +2582,11 @@ msgstr ""
 "Pare che tutti i tasti siano già\n"
 "configurati correttamente. Ottimo!"
 
-#: src/learn.c:173
+#: src/learn.c:176
 msgid "&Discard"
 msgstr "&Annulla"
 
-#: src/learn.c:177
+#: src/learn.c:181
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2618,15 +2594,15 @@ msgstr ""
 "Meraviglioso! Hai un database dei te,rmnali completo\n"
 "Tutti i tasti sono configurati e funzionano correttamente."
 
-#: src/learn.c:293
+#: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Premere tutti i tasti riportati. Una volta fatto, controllare"
 
-#: src/learn.c:295
+#: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "quali tasti non sono OK. Premere la Barra spazio sui tasti"
 
-#: src/learn.c:297
+#: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "mancanti, o usare il mouse per ridefinirli. Spostarsi con il Tab."
 
@@ -2949,27 +2925,23 @@ msgstr "Grazie per aver usato GNU Midnight Commander"
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander %s\n"
 
-#: src/main.c:2077
+#: src/main.c:2076
 msgid ""
-"Usage is:\n"
-"\n"
-"mc [flags] [this_dir] [other_panel_dir]\n"
+"[flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
-"Uso:\n"
-"\n"
-"mc [flag] [questa_dir] [altra_dir_pannello]\n"
+"[flag] [questa_dir] [altra_dir_pannello]\n"
 "\n"
 
-#: src/main.c:2083
+#: src/main.c:2080
 msgid "+number"
 msgstr "+numero"
 
-#: src/main.c:2084
+#: src/main.c:2081
 msgid "Set initial line number for the internal editor"
 msgstr "Imposta numero di riga iniziale per l'editor interno"
 
-#: src/main.c:2086
+#: src/main.c:2083
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2980,7 +2952,7 @@ msgstr ""
 "a mc-devel@gnome.org\n"
 
 #. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2100
+#: src/main.c:2097
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3020,95 +2992,95 @@ msgstr ""
 "   brightcyan, lightgray e white\n"
 "\n"
 
-#: src/main.c:2187
+#: src/main.c:2184
 msgid "Use to debug the background code"
 msgstr "Usare per correggere il codice in background"
 
-#: src/main.c:2190
+#: src/main.c:2187
 msgid "Request to run in color mode"
 msgstr "Richiede l'esecuzione a colori"
 
-#: src/main.c:2192
+#: src/main.c:2189
 msgid "Specifies a color configuration"
 msgstr "Specifica la configurazione dei colori"
 
-#: src/main.c:2196
+#: src/main.c:2193
 msgid "Edits one file"
 msgstr "Modifica un file"
 
-#: src/main.c:2200
+#: src/main.c:2197
 msgid "Displays this help message"
 msgstr "Mostra questo messaggio di aiuto"
 
-#: src/main.c:2202
+#: src/main.c:2199
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra un messaggio di aiuto su come cambiare lo schema dei colori"
 
-#: src/main.c:2205
+#: src/main.c:2202
 msgid "Log ftp dialog to specified file"
 msgstr "Annota i messaggi dell'ftp in un file specificato"
 
-#: src/main.c:2208
+#: src/main.c:2205
 msgid "Set debug level"
 msgstr "Imposta livello di debug"
 
-#: src/main.c:2212
+#: src/main.c:2209
 msgid "Print data directory"
 msgstr "Stampa dati directory"
 
-#: src/main.c:2214
+#: src/main.c:2211
 msgid "Requests to run in black and white"
 msgstr "Richiede l'esecuzione in bianco e nero"
 
-#: src/main.c:2216
+#: src/main.c:2213
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto del mouse nella modalità testo"
 
-#: src/main.c:2219
+#: src/main.c:2216
 msgid "Disables subshell support"
 msgstr "Disabilita il supporto delle sottoshell"
 
-#: src/main.c:2221
+#: src/main.c:2218
 msgid "Force subshell execution"
 msgstr "Forza esecuzione subshell"
 
-#: src/main.c:2224
+#: src/main.c:2221
 msgid "Prints working directory at program exit"
 msgstr "Visualizza la directory corrente in uscita"
 
-#: src/main.c:2226
+#: src/main.c:2223
 msgid "Resets soft keys on HP terminals"
 msgstr "Ripristina i tasti soft nei terminali HP"
 
-#: src/main.c:2228
+#: src/main.c:2225
 msgid "To run on slow terminals"
 msgstr "Per farlo andare su terminali lenti"
 
-#: src/main.c:2231
+#: src/main.c:2228
 msgid "Use stickchars to draw"
 msgstr "Usa caratteri semigrafici"
 
-#: src/main.c:2235
+#: src/main.c:2232
 msgid "Enables subshell support (default)"
 msgstr "Abilita il supporto sottoshell (predefinito)"
 
-#: src/main.c:2239
+#: src/main.c:2236
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova a usare termcap invece di terminfo"
 
-#: src/main.c:2242
+#: src/main.c:2239
 msgid "Displays the current version"
 msgstr "Visualizza la versione corrente"
 
-#: src/main.c:2244
+#: src/main.c:2241
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
 
-#: src/main.c:2246
+#: src/main.c:2243
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
 
-#: src/main.c:2436
+#: src/main.c:2433
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3117,11 +3089,11 @@ msgstr ""
 "P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
-#: src/main.c:2499
+#: src/main.c:2496
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:2500
+#: src/main.c:2497
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -4289,14 +4261,6 @@ msgstr ""
 " necessiti di una password per entrare, ma la trasmissione \n"
 " potrebbe non essere sicura dal lato remoto. Continuare? \n"
 
-#: vfs/mcfs.c:144
-msgid " Yes "
-msgstr " Si "
-
-#: vfs/mcfs.c:144
-msgid " No "
-msgstr " No "
-
 #: vfs/mcfs.c:154
 msgid " MCFS Password required "
 msgstr " MCFS Password richiesta "
@@ -4521,6 +4485,30 @@ msgstr "%s: %s: %s %3d%% (%lu byte trasferiti)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte trasferiti"
+
+#~ msgid "a&ll"
+#~ msgstr "&Tutto"
+
+#~ msgid " Type 'yes' if you REALLY want to delete "
+#~ msgstr " Scrivi 'si' se VERAMENTE vuoi cancellare "
+
+#~ msgid "all the directories "
+#~ msgstr "tutte le directory "
+
+#~ msgid " Recursive Delete "
+#~ msgstr " Cancella Ricorsivamente "
+
+#~ msgid " Background process: Recursive Delete "
+#~ msgstr " Processo in background: cancellazione ricorsiva "
+
+#~ msgid "yes"
+#~ msgstr "si"
+
+#~ msgid " Yes "
+#~ msgstr " Si "
+
+#~ msgid " No "
+#~ msgstr " No "
 
 #~ msgid " Macro "
 #~ msgstr " Macro "

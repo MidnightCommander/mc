@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.99\n"
-"POT-Creation-Date: 2002-09-26 21:21-0400\n"
+"POT-Creation-Date: 2002-10-21 19:16-0400\n"
 "PO-Revision-Date: 2001-05-25 13:35+0200\n"
 "Last-Translator: mari susperregi <mari@elhuyar.com>\n"
 "Language-Team: Euskara\n"
@@ -15,8 +15,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
-#: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:255
-#: edit/editcmd.c:261 edit/editcmd.c:1564 src/wtools.c:132 vfs/vfs.c:1848
+#: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/edit.c:2595
+#: edit/editcmd.c:254 edit/editcmd.c:260 edit/editcmd.c:1572 src/wtools.c:132
+#: vfs/vfs.c:1848
 msgid "Error"
 msgstr "Errorea"
 
@@ -56,6 +57,10 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Erabiltzaile-menua mcedit-en bakarrik erabilgarri, mc-k deitua "
 
+#: edit/edit.c:2595
+msgid "Macro recursion is too deep"
+msgstr ""
+
 #: edit/edit.h:319 edit/edit.h:320
 #, fuzzy
 msgid " Enter file name: "
@@ -65,8 +70,8 @@ msgstr "Sartu lerroa: "
 msgid "&Dismiss"
 msgstr "&Itxi"
 
-#: edit/edit.h:325 edit/editcmd.c:335 edit/editcmd.c:1083 edit/editcmd.c:1164
-#: edit/editcmd.c:2341 edit/editmenu.c:30 edit/editoptions.c:65
+#: edit/edit.h:325 edit/editcmd.c:334 edit/editcmd.c:1091 edit/editcmd.c:1172
+#: edit/editcmd.c:2355 edit/editmenu.c:30 edit/editoptions.c:65
 #: src/boxes.c:139 src/boxes.c:276 src/boxes.c:374 src/boxes.c:466
 #: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
 #: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
@@ -83,7 +88,7 @@ msgid " Execute Macro "
 msgstr " Exekutatu makroa "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
-#: edit/editcmd.c:623
+#: edit/editcmd.c:622
 msgid " Press macro hotkey: "
 msgstr " Sakatu makroaren laster-tekla: "
 
@@ -95,124 +100,115 @@ msgstr " Txertatu literala "
 msgid " Press any key: "
 msgstr " Sakatu tekla bat: "
 
-#: edit/editcmd.c:255
+#: edit/editcmd.c:254
 msgid " Error writing to pipe: "
 msgstr " Errorea kanalizazioan idaztean: "
 
-#: edit/editcmd.c:261
+#: edit/editcmd.c:260
 msgid " Failed trying to open pipe for writing: "
 msgstr " Huts egin da kanalizazioa idazteko irekitzen saiatzean: "
 
-#: edit/editcmd.c:328
+#: edit/editcmd.c:327
 msgid "Quick save "
 msgstr "Gordetze bizkorra "
 
-#: edit/editcmd.c:329
+#: edit/editcmd.c:328
 msgid "Safe save "
 msgstr "Gordetze segurua "
 
-#: edit/editcmd.c:330
+#: edit/editcmd.c:329
 msgid "Do backups -->"
 msgstr "Egin babeskopiak -->"
 
-#: edit/editcmd.c:333 edit/editcmd.c:1025 edit/editcmd.c:1081
-#: edit/editcmd.c:1162 edit/editcmd.c:2339 edit/editoptions.c:62
+#: edit/editcmd.c:332 edit/editcmd.c:1033 edit/editcmd.c:1089
+#: edit/editcmd.c:1170 edit/editcmd.c:2353 edit/editoptions.c:62
 #: src/achown.c:71 src/boxes.c:140 src/boxes.c:277 src/boxes.c:372
 #: src/boxes.c:464 src/boxes.c:586 src/boxes.c:710 src/boxes.c:1009
-#: src/chmod.c:103 src/chown.c:75 src/cmd.c:871 src/filegui.c:754
+#: src/chmod.c:103 src/chown.c:75 src/cmd.c:881 src/filegui.c:754
 #: src/find.c:148 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:811
 #: src/hotlist.c:907 src/layout.c:364 src/learn.c:60 src/option.c:149
-#: src/panelize.c:74 src/view.c:387 src/view.c:409 src/wtools.c:57
-#: src/wtools.c:374
+#: src/panelize.c:74 src/view.c:387 src/wtools.c:57 src/wtools.c:374
 msgid "&Cancel"
 msgstr "&Utzi"
 
-#: edit/editcmd.c:339
+#: edit/editcmd.c:338
 msgid "Extension:"
 msgstr "Luzapena:"
 
-#: edit/editcmd.c:345
+#: edit/editcmd.c:344
 msgid " Edit Save Mode "
 msgstr " Editatu Gorde modua "
 
-#: edit/editcmd.c:410 edit/editcmd.c:445
+#: edit/editcmd.c:409 edit/editcmd.c:444
 msgid " Save As "
 msgstr " Gorde honela "
 
-#: edit/editcmd.c:424 edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
-#: edit/editcmd.c:975 src/file.c:613 src/help.c:317 src/main.c:463
-#: src/screen.c:1374 src/screen.c:1944 src/selcodepage.c:101
-#: src/subshell.c:702 src/utilunix.c:351 src/utilunix.c:355 src/utilunix.c:377
-#: src/utilunix.c:429 vfs/mcfs.c:124
+#: edit/editcmd.c:423 edit/editcmd.c:707 edit/editcmd.c:732 edit/editcmd.c:880
+#: edit/editcmd.c:978 src/file.c:613 src/help.c:317 src/main.c:463
+#: src/screen.c:1374 src/screen.c:1947 src/selcodepage.c:106
+#: src/subshell.c:702 src/utilunix.c:354 src/utilunix.c:358 src/utilunix.c:380
+#: src/utilunix.c:432 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "Abisua"
 
-#: edit/editcmd.c:425
+#: edit/editcmd.c:424
 msgid " A file already exists with this name. "
 msgstr " Izen hau duen fitxategia badago lehendik. "
 
-#: edit/editcmd.c:427
+#: edit/editcmd.c:426
 msgid "Overwrite"
 msgstr "Gainidatzi"
 
-#: edit/editcmd.c:427 edit/editcmd.c:484 edit/editcmd.c:684 edit/editcmd.c:708
-#: edit/editcmd.c:733 edit/editcmd.c:877
+#: edit/editcmd.c:426 edit/editcmd.c:483 edit/editcmd.c:683 edit/editcmd.c:707
+#: edit/editcmd.c:732 edit/editcmd.c:880 edit/editcmd.c:981
 msgid "Cancel"
 msgstr "Utzi"
 
-#: edit/editcmd.c:445 edit/editcmd.c:2093 src/view.c:386
+#: edit/editcmd.c:444 edit/editcmd.c:2102 src/view.c:386
 msgid " Error trying to save file. "
 msgstr " Errorea fitxategia gordetzen saiatzean. "
 
-#: edit/editcmd.c:542 edit/editcmd.c:550 edit/editcmd.c:575
+#: edit/editcmd.c:541 edit/editcmd.c:549 edit/editcmd.c:574 edit/editcmd.c:621
 msgid " Delete macro "
 msgstr " Ezabatu makroa "
 
-#: edit/editcmd.c:544
+#: edit/editcmd.c:543
 msgid " Error trying to open temp file "
 msgstr " Errorea temp fitxategia irekitzen saiatzean "
 
-#: edit/editcmd.c:552 edit/editcmd.c:613 edit/editcmd.c:670
+#: edit/editcmd.c:551 edit/editcmd.c:612 edit/editcmd.c:669
 msgid " Error trying to open macro file "
 msgstr " Errorea makro-fitxategia irekitzen saiatzean "
 
-#: edit/editcmd.c:576
+#: edit/editcmd.c:575
 msgid " Error trying to overwrite macro file "
 msgstr " Errorea makro-fitxategia gaindidazten saiatzean "
 
-#: edit/editcmd.c:592
-msgid " Macro "
-msgstr " Makroa "
-
-#: edit/editcmd.c:594
-msgid " Press the macro's new hotkey: "
-msgstr " Sakatu makroaren laster-tekla berria: "
-
-#: edit/editcmd.c:613
+#: edit/editcmd.c:591 edit/editcmd.c:612
 msgid " Save macro "
 msgstr " Gorde makroa "
 
-#: edit/editcmd.c:622
-msgid " Delete Macro "
-msgstr " Ezabatu makroa "
+#: edit/editcmd.c:593
+msgid " Press the macro's new hotkey: "
+msgstr " Sakatu makroaren laster-tekla berria: "
 
-#: edit/editcmd.c:669
+#: edit/editcmd.c:668
 msgid " Load macro "
 msgstr " Kargatu makroa "
 
-#: edit/editcmd.c:682
+#: edit/editcmd.c:681
 msgid " Confirm save file? : "
 msgstr " Berretsi fitxategia gordetzea? : "
 
-#: edit/editcmd.c:684 src/view.c:385
+#: edit/editcmd.c:683 src/view.c:385
 msgid " Save file "
 msgstr " Gorde fitxategia "
 
-#: edit/editcmd.c:684 edit/editwidget.c:287 src/view.c:2045
+#: edit/editcmd.c:683 edit/editwidget.c:287 src/view.c:2050
 msgid "Save"
 msgstr "Gorde"
 
-#: edit/editcmd.c:708 edit/editcmd.c:733
+#: edit/editcmd.c:707 edit/editcmd.c:732
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -220,253 +216,242 @@ msgstr ""
 " Uneko testuan aldaketak egin dira eta ez dira gorde.\n"
 " Jarraitzen baduzu aldaketa horiek baztertu egingo dira."
 
-#: edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
+#: edit/editcmd.c:707 edit/editcmd.c:732 edit/editcmd.c:880 edit/editcmd.c:981
 msgid "Continue"
 msgstr "Jarraitu"
 
-#: edit/editcmd.c:739
+#: edit/editcmd.c:738
 msgid " Load "
 msgstr " Kargatu "
 
-#: edit/editcmd.c:877 edit/editcmd.c:975
+#: edit/editcmd.c:880 edit/editcmd.c:980
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokea handia da, ezingo duzu ekintza hau desegin. "
 
-#: edit/editcmd.c:975
-msgid " Continue "
-msgstr " Jarraitu "
-
-#: edit/editcmd.c:975
-msgid " Cancel "
-msgstr " Utzi "
-
-#: edit/editcmd.c:1027
+#: edit/editcmd.c:1035
 msgid "O&ne"
 msgstr "Ba&t"
 
-#: edit/editcmd.c:1029 src/filegui.c:527
+#: edit/editcmd.c:1037 src/file.c:2223 src/filegui.c:527
 msgid "A&ll"
 msgstr "&Guztia"
 
-#: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
+#: edit/editcmd.c:1039 src/file.c:2161 src/filegui.c:229
 msgid "&Skip"
 msgstr "&Saltatu"
 
-#: edit/editcmd.c:1033
+#: edit/editcmd.c:1041
 msgid "&Replace"
 msgstr "&Ordeztu"
 
-#: edit/editcmd.c:1040 edit/editcmd.c:1047
+#: edit/editcmd.c:1048 edit/editcmd.c:1055
 msgid " Replace with: "
 msgstr " Ordeztu honekin: "
 
-#: edit/editcmd.c:1052
+#: edit/editcmd.c:1060
 msgid " Confirm replace "
 msgstr " Berretsi ordeztea "
 
-#: edit/editcmd.c:1085 edit/editcmd.c:1166
+#: edit/editcmd.c:1093 edit/editcmd.c:1174
 msgid "scanf &Expression"
 msgstr "scanf &Adierazpena"
 
-#: edit/editcmd.c:1087
+#: edit/editcmd.c:1095
 msgid "replace &All"
 msgstr "&Ordeztu guztiak"
 
-#: edit/editcmd.c:1089
+#: edit/editcmd.c:1097
 msgid "pr&Ompt on replace"
 msgstr "&galdetu ordeztean"
 
-#: edit/editcmd.c:1091 edit/editcmd.c:1168
+#: edit/editcmd.c:1099 edit/editcmd.c:1176
 msgid "&Backwards"
 msgstr "&Atzera"
 
-#: edit/editcmd.c:1093 edit/editcmd.c:1170
+#: edit/editcmd.c:1101 edit/editcmd.c:1178
 msgid "&Regular expression"
 msgstr "&Adierazpen erregularra"
 
-#: edit/editcmd.c:1095 edit/editcmd.c:1172
+#: edit/editcmd.c:1103 edit/editcmd.c:1180
 msgid "&Whole words only"
 msgstr "&Hitz osoak bakarrik"
 
-#: edit/editcmd.c:1097 edit/editcmd.c:1174 src/find.c:140
+#: edit/editcmd.c:1105 edit/editcmd.c:1182 src/find.c:140
 msgid "case &Sensitive"
 msgstr "&maiuskulak eta minuskulak bereizten ditu"
 
-#: edit/editcmd.c:1101
+#: edit/editcmd.c:1109
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Sartu ordezko argumentuaren ordena, adib.3,2,1,4 "
 
-#: edit/editcmd.c:1105
+#: edit/editcmd.c:1113
 msgid " Enter replacement string:"
 msgstr "Sartu ordezko katea:"
 
-#: edit/editcmd.c:1109 edit/editcmd.c:1178 src/view.c:1960
+#: edit/editcmd.c:1117 edit/editcmd.c:1186 src/view.c:1965
 msgid " Enter search string:"
 msgstr "Sartu bilaketa-katea:"
 
-#: edit/editcmd.c:1128 edit/editcmd.c:1761 edit/editcmd.c:1791
-#: edit/editcmd.c:1793
+#: edit/editcmd.c:1136 edit/editcmd.c:1769 edit/editcmd.c:1793
 msgid " Replace "
 msgstr "Ordeztu "
 
-#: edit/editcmd.c:1192 edit/editcmd.c:1869 edit/editcmd.c:1871
-#: edit/editcmd.c:1899 src/view.c:1490 src/view.c:1569 src/view.c:1689
-#: src/view.c:1701 src/view.c:1918 src/view.c:1960
-msgid " Search "
-msgstr "Bilatu "
+#: edit/editcmd.c:1200 edit/editcmd.c:1878 edit/editcmd.c:1880
+#: edit/editcmd.c:1908 edit/editwidget.c:292 src/view.c:1495 src/view.c:1574
+#: src/view.c:1694 src/view.c:1706 src/view.c:1923 src/view.c:1965
+#: src/view.c:2058
+msgid "Search"
+msgstr "Bilatu"
 
-#: edit/editcmd.c:1564
+#: edit/editcmd.c:1572
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 "Baliogabeko adierazpen erregularra, edo scanf adierazpena bihurketa "
 "gehiegirekin "
 
-#: edit/editcmd.c:1763
+#: edit/editcmd.c:1771
 msgid " Error in replacement format string. "
 msgstr "Errorea formatu-katea ordeztean."
 
-#: edit/editcmd.c:1791
+#: edit/editcmd.c:1800
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld ordezpen eginda."
 
-#: edit/editcmd.c:1793 edit/editcmd.c:1871 edit/editcmd.c:1899 src/view.c:1569
-#: src/view.c:1701
+#: edit/editcmd.c:1802 edit/editcmd.c:1880 edit/editcmd.c:1908 src/view.c:1574
+#: src/view.c:1706
 msgid " Search string not found "
 msgstr " Bilatutako katea ez da aurkitu "
 
-#: edit/editcmd.c:1869
+#: edit/editcmd.c:1878
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr "%d aurkikuntza egin dira, %d laster-marka gehituta "
 
-#: edit/editcmd.c:1917
-msgid " Quit "
-msgstr "Irten "
+#: edit/editcmd.c:1926 edit/editwidget.c:296 src/help.c:833 src/main.c:1395
+#: src/view.c:404 src/view.c:2045 src/view.c:2067
+msgid "Quit"
+msgstr "Irten"
 
-#: edit/editcmd.c:1917
+#: edit/editcmd.c:1926 src/view.c:405
 msgid " File was modified, Save with exit? "
 msgstr "Fitxategia aldatu egin da, irtetean gorde? "
 
-#: edit/editcmd.c:1917
+#: edit/editcmd.c:1926 src/view.c:406
 msgid "Cancel quit"
 msgstr "Bertan behera utzi Irten"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
-#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
-#: src/subshell.c:703 src/tree.c:754 src/view.c:409
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
+#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1935
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Bai"
 
-#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
-#: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
-#: src/subshell.c:703 src/tree.c:754 src/view.c:409
+#: edit/editcmd.c:1926 src/cmd.c:229 src/file.c:1832 src/file.c:2222
+#: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1936
+#: src/subshell.c:703 src/tree.c:754 src/view.c:406 vfs/mcfs.c:144
 msgid "&No"
 msgstr "E&z"
 
-#: edit/editcmd.c:2028
+#: edit/editcmd.c:2037
 msgid " Copy to clipboard "
 msgstr "Kopiatu arbelean "
 
-#: edit/editcmd.c:2028 edit/editcmd.c:2041
+#: edit/editcmd.c:2037 edit/editcmd.c:2050
 msgid " Unable to save to file. "
 msgstr " Ezin da fitxategia gorde."
 
-#: edit/editcmd.c:2041
+#: edit/editcmd.c:2050
 msgid " Cut to clipboard "
 msgstr "Ebaki arbelera "
 
-#: edit/editcmd.c:2061 src/view.c:1864
+#: edit/editcmd.c:2070 src/view.c:1869
 msgid " Goto line "
 msgstr "Joan lerro honetara "
 
-#: edit/editcmd.c:2061
+#: edit/editcmd.c:2070
 msgid " Enter line: "
 msgstr "Sartu lerroa: "
 
-#: edit/editcmd.c:2080 edit/editcmd.c:2093
+#: edit/editcmd.c:2089 edit/editcmd.c:2102
 msgid " Save Block "
 msgstr "Gorde blokea "
 
-#: edit/editcmd.c:2105
+#: edit/editcmd.c:2117 edit/editcmd.c:2130
 msgid " Insert File "
 msgstr "Txertatu fitxategia "
 
-#: edit/editcmd.c:2118
-msgid " Insert file "
-msgstr "Txertatu fitxategia "
-
-#: edit/editcmd.c:2118
+#: edit/editcmd.c:2132
 msgid " Error trying to insert file. "
 msgstr " Errorea fitxategia txertatzen saiatzean."
 
-#: edit/editcmd.c:2135
+#: edit/editcmd.c:2149
 msgid " Sort block "
 msgstr "Ordenatu blokea "
 
-#: edit/editcmd.c:2135 edit/editcmd.c:2229
+#: edit/editcmd.c:2149 edit/editcmd.c:2243
 msgid " You must first highlight a block of text. "
 msgstr " Lehendabizi testu-bloke bat nabarmendu behar duzu."
 
-#: edit/editcmd.c:2142
+#: edit/editcmd.c:2156
 msgid " Run Sort "
 msgstr "Exekutatu Ordenatu "
 
-#: edit/editcmd.c:2143
+#: edit/editcmd.c:2157
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr ""
 " Sartu ordenatze-aukerak (ikus eskuliburuko orrialdea) zuriunez bereizita:"
 
-#: edit/editcmd.c:2154 edit/editcmd.c:2159
+#: edit/editcmd.c:2168 edit/editcmd.c:2173
 msgid " Sort "
 msgstr "Ordenatu "
 
-#: edit/editcmd.c:2155
+#: edit/editcmd.c:2169
 msgid " Error trying to execute sort command "
 msgstr "Errorea Ordenatu komandoa exekutatzen saiatzean "
 
-#: edit/editcmd.c:2160
+#: edit/editcmd.c:2174
 msgid " Sort returned non-zero: "
 msgstr "Ordenatu-k itzulitako balioa ez da zero: "
 
-#: edit/editcmd.c:2196
+#: edit/editcmd.c:2210
 msgid "Error creating script:"
 msgstr "Errorea script-a sortzean:"
 
-#: edit/editcmd.c:2204
+#: edit/editcmd.c:2218
 msgid "Error reading script:"
 msgstr "Errorea script-a irakurtzean:"
 
-#: edit/editcmd.c:2213
+#: edit/editcmd.c:2227
 msgid "Error closing script:"
 msgstr "Errorea script-a ixtean:"
 
-#: edit/editcmd.c:2219
+#: edit/editcmd.c:2233
 msgid "Script created:"
 msgstr "Sortutako script-a:"
 
-#: edit/editcmd.c:2227
+#: edit/editcmd.c:2241
 msgid "Process block"
 msgstr "Prozesatu blokea"
 
-#: edit/editcmd.c:2334
+#: edit/editcmd.c:2348
 msgid " Mail "
 msgstr "Posta "
 
-#: edit/editcmd.c:2345
+#: edit/editcmd.c:2359
 msgid " Copies to"
 msgstr "Hona kopiatzen du"
 
-#: edit/editcmd.c:2349
+#: edit/editcmd.c:2363
 msgid " Subject"
 msgstr "Gaia"
 
-#: edit/editcmd.c:2353
+#: edit/editcmd.c:2367
 msgid " To"
 msgstr "Nori"
 
-#: edit/editcmd.c:2355
+#: edit/editcmd.c:2369
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr "posta -s <gaia> -c <cc> <nori>"
 
@@ -753,7 +738,7 @@ msgid " Editor options "
 msgstr "Editore-aukerak "
 
 #: edit/editwidget.c:286 src/help.c:800 src/help.c:821 src/main.c:1392
-#: src/screen.c:2155 src/tree.c:1017 src/view.c:2038
+#: src/screen.c:2158 src/tree.c:1017 src/view.c:2043
 msgid "Help"
 msgstr "Laguntza"
 
@@ -765,7 +750,7 @@ msgstr "Markatu"
 msgid "Replac"
 msgstr "Ordeztu"
 
-#: edit/editwidget.c:290 src/file.c:818 src/screen.c:2159 src/tree.c:1023
+#: edit/editwidget.c:290 src/file.c:818 src/screen.c:2162 src/tree.c:1023
 msgid "Copy"
 msgstr "Kopiatu"
 
@@ -773,22 +758,13 @@ msgstr "Kopiatu"
 msgid "Move"
 msgstr "Lekuz aldatu"
 
-#: edit/editwidget.c:292 src/view.c:2053
-msgid "Search"
-msgstr "Bilatu"
-
-#: edit/editwidget.c:293 src/screen.c:2162
+#: edit/editwidget.c:293 src/screen.c:2165
 msgid "Delete"
 msgstr "Ezabatu"
 
 #: edit/editwidget.c:295 src/main.c:1394
 msgid "PullDn"
 msgstr "GoitBeh"
-
-#: edit/editwidget.c:296 src/help.c:833 src/main.c:1395 src/view.c:2040
-#: src/view.c:2062
-msgid "Quit"
-msgstr "Irten"
 
 #: edit/syntax.c:967 edit/syntax.c:972
 msgid " Load syntax file "
@@ -872,7 +848,7 @@ msgstr ""
 msgid "Background process:"
 msgstr "Atzeko planoko prozesua:"
 
-#: src/background.c:275 src/file.c:2128
+#: src/background.c:275 src/file.c:2160
 msgid " Background process error "
 msgstr "Atzeko planoko prozesuaren errorea "
 
@@ -948,7 +924,7 @@ msgstr "berretsi &gainidatzi "
 msgid " confirm &Delete "
 msgstr "berretsi e&zabatu "
 
-#: src/boxes.c:389
+#: src/boxes.c:389 src/cmd.c:228
 msgid " Confirmation "
 msgstr "Berrespena "
 
@@ -972,7 +948,7 @@ msgstr "Sartu 8 bit"
 msgid " Display bits "
 msgstr "Bistaratu bitak "
 
-#: src/boxes.c:557 src/selcodepage.c:67
+#: src/boxes.c:557 src/boxes.c:579 src/selcodepage.c:71
 msgid "Other 8 bit"
 msgstr "Beste 8 bit"
 
@@ -1075,12 +1051,12 @@ msgstr "Pasahitza:"
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s(r)en pasahitza"
 
-#: src/charsets.c:50 vfs/extfs.c:1330 vfs/sfs.c:303
+#: src/charsets.c:50 vfs/extfs.c:1330 vfs/sfs.c:306
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Abisua: %s fitxategia ez da aurkitu\n"
 
-#: src/charsets.c:190 src/charsets.c:203
+#: src/charsets.c:191 src/charsets.c:205
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Ezin da %s(e)tik %s(e)ra itzuli"
@@ -1225,144 +1201,140 @@ msgstr "<Erabiltzaile ezezaguna>"
 msgid "<Unknown group>"
 msgstr "<Talde ezezaguna>"
 
-#: src/cmd.c:171
+#: src/cmd.c:175
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr "Ezin da %s(r)en kopia lokala eskuratu "
 
-#: src/cmd.c:221
-msgid " CD "
-msgstr "CD "
-
-#: src/cmd.c:221
+#: src/cmd.c:228
 msgid "Files tagged, want to cd?"
 msgstr "Fitxategi etiketatuak, direktorioz aldatu nahi?"
 
-#: src/cmd.c:227 src/cmd.c:725 src/cmd.c:744 src/main.c:842
+#: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
 msgid "Could not change directory"
 msgstr "Ezin izan da direktorioz aldatu"
 
-#: src/cmd.c:256
+#: src/cmd.c:263
 msgid " View file "
 msgstr "Ikusi fitxategia "
 
-#: src/cmd.c:256
+#: src/cmd.c:263
 msgid " Filename:"
 msgstr "Fitxategi-izena:"
 
-#: src/cmd.c:273
+#: src/cmd.c:280
 msgid " Filtered view "
 msgstr " Ikuspegi iragazia "
 
-#: src/cmd.c:273
+#: src/cmd.c:280
 msgid " Filter command and arguments:"
 msgstr "Iragazi komandoa eta argumentuak:"
 
-#: src/cmd.c:374
+#: src/cmd.c:384
 msgid "Create a new Directory"
 msgstr "Sortu direktorio berria"
 
-#: src/cmd.c:374
+#: src/cmd.c:384
 msgid " Enter directory name:"
 msgstr "Sartu direktorio-izena:"
 
-#: src/cmd.c:434
+#: src/cmd.c:444
 msgid " Filter "
 msgstr "Iragazkia "
 
-#: src/cmd.c:435
+#: src/cmd.c:445
 msgid " Set expression for filtering filenames"
 msgstr "Konfiguratu fitxategi-izenak iragazteko adierazpenak"
 
-#: src/cmd.c:501
+#: src/cmd.c:511
 msgid " Select "
 msgstr "Hautatu "
 
-#: src/cmd.c:529 src/cmd.c:580 src/find.c:261
+#: src/cmd.c:539 src/cmd.c:590 src/find.c:261
 msgid "  Malformed regular expression  "
 msgstr " Adierazpen erregular gaizki osatuta  "
 
-#: src/cmd.c:553
+#: src/cmd.c:563
 msgid " Unselect "
 msgstr "Desautatu "
 
-#: src/cmd.c:626
+#: src/cmd.c:636
 msgid "Extension file edit"
 msgstr "Editatu luzapen-fitxategia"
 
-#: src/cmd.c:627
+#: src/cmd.c:637
 msgid " Which extension file you want to edit? "
 msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
 
-#: src/cmd.c:628 src/cmd.c:654
+#: src/cmd.c:638 src/cmd.c:664
 msgid "&User"
 msgstr "&Erabiltzailea"
 
-#: src/cmd.c:628 src/cmd.c:654 src/cmd.c:682
+#: src/cmd.c:638 src/cmd.c:664 src/cmd.c:692
 msgid "&System Wide"
 msgstr "&Sistema guztientzat"
 
-#: src/cmd.c:652
+#: src/cmd.c:662
 #, fuzzy
 msgid "Syntax file edit"
 msgstr "Editatu &menu-fitxategia"
 
-#: src/cmd.c:653
+#: src/cmd.c:663
 #, fuzzy
 msgid " Which syntax file you want to edit? "
 msgstr "Zer luzapen-fitxategi nahi duzu editatu? "
 
-#: src/cmd.c:679
+#: src/cmd.c:689
 msgid " Menu edit "
 msgstr "Edizioa menua "
 
-#: src/cmd.c:680
+#: src/cmd.c:690
 msgid " Which menu file will you edit ? "
 msgstr "Menuko zer fitxategi editatuko duzu ? "
 
-#: src/cmd.c:682
+#: src/cmd.c:692
 msgid "&Local"
 msgstr "&Lokala"
 
-#: src/cmd.c:682
+#: src/cmd.c:692
 msgid "&Home"
 msgstr "&Etxea"
 
-#: src/cmd.c:870
+#: src/cmd.c:880
 msgid " Compare directories "
 msgstr "Konparatu direktorioak "
 
-#: src/cmd.c:870
+#: src/cmd.c:880
 msgid " Select compare method: "
 msgstr "Hautatu konparazio-metodoa: "
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Quick"
 msgstr "&Bizkorra"
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Size only"
 msgstr "&Tamaina bakarrik"
 
-#: src/cmd.c:871
+#: src/cmd.c:881
 msgid "&Thorough"
 msgstr "&Osoa"
 
-#: src/cmd.c:881
+#: src/cmd.c:891
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr ""
 " Bi panelek zerrendatzea ikuspegi-moduan egon behar dute komando hau "
 "erabiltzeko"
 
-#: src/cmd.c:896
+#: src/cmd.c:906
 msgid " The command history is empty "
 msgstr "Komando-historia hutsik dago "
 
-#: src/cmd.c:902
+#: src/cmd.c:912
 msgid " Command history "
 msgstr "Komando-historia "
 
-#: src/cmd.c:941
+#: src/cmd.c:951
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1370,100 +1342,100 @@ msgstr ""
 "Ez da xterm edo Linux kontsola; \n"
 " panelak ezin dira txandakatu."
 
-#: src/cmd.c:975
+#: src/cmd.c:985
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Idatzi `irten' Midnight Commander-era itzultzeko"
 
-#: src/cmd.c:1024
+#: src/cmd.c:1034
 #, fuzzy, c-format
 msgid "Link %s to:"
 msgstr "esteka: %s "
 
-#: src/cmd.c:1025
+#: src/cmd.c:1035
 msgid " Link "
 msgstr "Esteka "
 
-#: src/cmd.c:1035
+#: src/cmd.c:1045
 #, c-format
 msgid " link: %s "
 msgstr "esteka: %s "
 
-#: src/cmd.c:1063
+#: src/cmd.c:1073
 #, c-format
 msgid " symlink: %s "
 msgstr "esteka sinbolikoa: %s "
 
-#: src/cmd.c:1097
+#: src/cmd.c:1107
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr "`%s' esteka sinbolikoak hona seinalatzen du: "
 
-#: src/cmd.c:1102
+#: src/cmd.c:1112
 msgid " Edit symlink "
 msgstr "Editatu esteka sinbolikoa "
 
-#: src/cmd.c:1107
+#: src/cmd.c:1117
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr "editatu esteka sinbolikoa, ezin da %s kendu: %s "
 
-#: src/cmd.c:1111
+#: src/cmd.c:1121
 #, c-format
 msgid " edit symlink: %s "
 msgstr "editatu esteka sinbolikoa: %s "
 
-#: src/cmd.c:1122
+#: src/cmd.c:1132
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' ez da esteka sinbolikoa"
 
-#: src/cmd.c:1263
+#: src/cmd.c:1273
 #, c-format
 msgid " Could not chdir to %s "
 msgstr "Ezin da %s direktoriora aldatu "
 
-#: src/cmd.c:1272
+#: src/cmd.c:1282
 msgid " Enter machine name (F1 for details): "
 msgstr "Sartu ordenagailuaren izena (F1 xehetasunetarako): "
 
-#: src/cmd.c:1277 src/widget.c:1044
+#: src/cmd.c:1287 src/widget.c:1044
 msgid " Link to a remote machine "
 msgstr "Estekatu urruneko ordenagailuari "
 
-#: src/cmd.c:1284 src/widget.c:1045
+#: src/cmd.c:1294 src/widget.c:1045
 msgid " FTP to machine "
 msgstr "FTP ordenagailura "
 
-#: src/cmd.c:1290
+#: src/cmd.c:1300
 #, fuzzy
 msgid " Shell link to machine "
 msgstr "SMB esteka ordenagailura "
 
-#: src/cmd.c:1297 src/widget.c:1046
+#: src/cmd.c:1307 src/widget.c:1046
 msgid " SMB link to machine "
 msgstr "SMB esteka ordenagailura "
 
-#: src/cmd.c:1308
+#: src/cmd.c:1318
 msgid " Socket source routing setup "
 msgstr "Socket-aren iturburu-banabidearen konfigurazioa "
 
-#: src/cmd.c:1309
+#: src/cmd.c:1319
 msgid " Enter host name to use as a source routing hop: "
 msgstr "Sartu ostalari-izena iturburu-banabidearen jauzi moduan erabiltzeko: "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1327
 msgid " Host name "
 msgstr "Ostalari-izena "
 
-#: src/cmd.c:1317
+#: src/cmd.c:1327
 msgid " Error while looking up IP address "
 msgstr "Errorea IP helbidea bilatzerakoan "
 
-#: src/cmd.c:1328
+#: src/cmd.c:1338
 msgid " Undelete files on an ext2 file system "
 msgstr "Desezabatu ext2 fitxategi-sistemako fitxategiak "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1339
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1471,15 +1443,15 @@ msgstr ""
 "Sartu gailua (/dev/ gabe) fitxategiak\n"
 " desezabatzeko: (F1 xehetasunetarako)"
 
-#: src/cmd.c:1379
+#: src/cmd.c:1389
 msgid " Setup saved to ~/"
 msgstr "Konfigurazioa hemen gorde da: ~/"
 
-#: src/cmd.c:1381
+#: src/cmd.c:1391
 msgid " Setup "
 msgstr "Konfigurazioa "
 
-#: src/command.c:170 src/screen.c:2147 src/tree.c:875
+#: src/command.c:170 src/screen.c:2150 src/tree.c:875
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -1569,7 +1541,7 @@ msgstr "&Taldea"
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "'%s' fitxategia lehendik badago, baina ezin da identifikatu: %s"
 
-#: src/ext.c:105 src/user.c:565
+#: src/ext.c:107 src/user.c:565
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1578,19 +1550,19 @@ msgstr ""
 "Ezin da aldi baterako %s komando-fitxategia \n"
 " sortu"
 
-#: src/ext.c:118 src/user.c:586
+#: src/ext.c:120 src/user.c:586
 msgid " Parameter "
 msgstr "Parametroa "
 
-#: src/ext.c:490 src/ext.c:509
+#: src/ext.c:510 src/ext.c:529
 msgid " file error "
 msgstr "fitxategi-errorea "
 
-#: src/ext.c:492 src/ext.c:511
+#: src/ext.c:512 src/ext.c:531
 msgid "Format of the "
 msgstr "\t "
 
-#: src/ext.c:493
+#: src/ext.c:513
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1602,7 +1574,7 @@ msgstr ""
 "huts egin duela. Eskuratu kopia berri bat\n"
 "Midnight Commander paketetik."
 
-#: src/ext.c:512
+#: src/ext.c:532
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1612,7 +1584,7 @@ msgstr ""
 "3.0 bertsiora aldatu da. Beharbada\n"
 "kopiatu nahiko duzu"
 
-#: src/ext.c:515
+#: src/ext.c:535
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1620,7 +1592,7 @@ msgstr ""
 "mc.ext-etik edo\n"
 "nola idatzi jakiteko, adibide gisa erabili nahiko duzu.\n"
 
-#: src/ext.c:518
+#: src/ext.c:538
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext une honetan erabiliko da."
 
@@ -1841,7 +1813,7 @@ msgstr ""
 "Ezin da esteka sinboliko ziklikoa kopiatu\n"
 " `%s' "
 
-#: src/file.c:954 src/file.c:1977
+#: src/file.c:954 src/file.c:1994
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1969,7 +1941,7 @@ msgstr "%o %f \"%s\"%m"
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-#: src/file.c:1665 vfs/fish.c:550
+#: src/file.c:1665 vfs/fish.c:549
 msgid "file"
 msgstr "fitxategia"
 
@@ -1997,31 +1969,23 @@ msgstr "iturburu-maskararekin:"
 msgid " to:"
 msgstr "hona:"
 
-#: src/file.c:1809
+#: src/file.c:1811
 msgid " Cannot operate on \"..\"! "
 msgstr " Ezin da hemen erabili: \"..\"! "
 
-#: src/file.c:1878
+#: src/file.c:1886
 msgid " Sorry, I could not put the job in background "
 msgstr "Ezin izan dut lana atzeko planoan ipini "
 
-#: src/file.c:1963 src/file.c:2046
-msgid " Internal failure "
-msgstr "Barne-hutsegitea "
-
-#: src/file.c:1963 src/file.c:2046
-msgid " Unknown file operation "
-msgstr "Fitxategi-eragiketa ezezaguna "
-
-#: src/file.c:2129 src/view.c:387
+#: src/file.c:2161 src/view.c:387
 msgid "&Retry"
 msgstr "&Saiatu berriz"
 
-#: src/file.c:2129 src/file.c:2189 src/filegui.c:227 src/filegui.c:522
+#: src/file.c:2161 src/file.c:2224 src/filegui.c:227 src/filegui.c:522
 msgid "&Abort"
 msgstr "&Abortatu"
 
-#: src/file.c:2180
+#: src/file.c:2213
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2031,7 +1995,7 @@ msgstr ""
 "   Direktorioa ez dago hutsik.   \n"
 "   Errekurtsiboki ezabatu? "
 
-#: src/file.c:2181
+#: src/file.c:2215
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2041,41 +2005,13 @@ msgstr ""
 "   Atzeko planoko prozesua: Direktorioa ez dago hutsik \n"
 "   Errekurtsiboki ezabatu? "
 
-#: src/file.c:2182
+#: src/file.c:2217
 msgid " Delete: "
 msgstr "Ezabatu: "
 
-#: src/file.c:2188
-msgid "a&ll"
-msgstr "&dena"
-
-#: src/file.c:2188 src/filegui.c:525
+#: src/file.c:2223 src/filegui.c:525
 msgid "Non&e"
 msgstr "&Bat ere ez"
-
-#: src/file.c:2198
-msgid " Type 'yes' if you REALLY want to delete "
-msgstr "Idatzi 'bai' BENETAN ezabatu nahi baduzu "
-
-#: src/file.c:2200
-msgid "all the directories "
-msgstr "direktorio guztiak "
-
-#: src/file.c:2202
-msgid " Recursive Delete "
-msgstr "Ezabatze errekurtsiboa "
-
-#: src/file.c:2203
-msgid " Background process: Recursive Delete "
-msgstr "Atzeko planoko prozesua: Ezabatze errekurtsiboa "
-
-#: src/file.c:2204
-msgid "no"
-msgstr "ez"
-
-#: src/file.c:2206
-msgid "yes"
-msgstr "bai"
 
 #: src/filegui.c:329
 #, c-format
@@ -2266,7 +2202,7 @@ msgstr "%s(e)n bilatzen ari da"
 msgid "Finished"
 msgstr "Amaituta"
 
-#: src/find.c:538 src/view.c:1490
+#: src/find.c:538 src/view.c:1495
 #, c-format
 msgid "Searching %s"
 msgstr "%s bilatzen"
@@ -2574,7 +2510,7 @@ msgstr "bai&menak"
 msgid "&File types"
 msgstr "&Fitxategi-motak"
 
-#: src/layout.c:365 src/learn.c:61 src/learn.c:173 src/option.c:150
+#: src/layout.c:365 src/learn.c:61 src/learn.c:176 src/option.c:150
 msgid "&Save"
 msgstr "&Gorde"
 
@@ -2599,8 +2535,8 @@ msgid "Layout"
 msgstr "Diseinua"
 
 #: src/learn.c:75
-msgid " Learn keys "
-msgstr "Ikasteko teklak "
+msgid "Learn keys"
+msgstr "Ikasteko teklak"
 
 #: src/learn.c:81
 msgid " Teach me a key "
@@ -2636,11 +2572,12 @@ msgstr "Ezin da tekla hori onartu "
 msgid " You have entered \"%s\""
 msgstr "\"%s\" sartu duzu"
 
-#: src/learn.c:164
+#. TRANSLATORS: This label appears near learned keys.  Keep it short.
+#: src/learn.c:166
 msgid "OK"
 msgstr "Ados"
 
-#: src/learn.c:171
+#: src/learn.c:174
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -2648,11 +2585,11 @@ msgstr ""
 "Tekla guztiak ongi dabiltzala \n"
 "ematen du. Oso ondo."
 
-#: src/learn.c:173
+#: src/learn.c:176
 msgid "&Discard"
 msgstr "&Baztertu"
 
-#: src/learn.c:177
+#: src/learn.c:181
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -2660,19 +2597,15 @@ msgstr ""
 "Oso ondo! Terminaleko datu-base osoa duzu!\n"
 "Tekla guztiak ongi dabiltza."
 
-#: src/learn.c:260
-msgid "Learn keys"
-msgstr "Ikasteko teklak"
-
-#: src/learn.c:293
+#: src/learn.c:294
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Sakatu hemen aipatutako tekla guztiak. Ondoren, egiaztatu"
 
-#: src/learn.c:295
+#: src/learn.c:296
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "zer tekla ez dauden Adosez markatuta. Sakatu zuriune-barra "
 
-#: src/learn.c:297
+#: src/learn.c:298
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr ""
 "tekla horietan edo egin klik saguaz definitzeko. Tabuladorearekin mugitu "
@@ -2698,7 +2631,7 @@ msgstr "Sakatu edozein tekla jarraitzeko..."
 msgid " The shell is already running a command "
 msgstr "Shell dagoeneko komando bat exekutatzen ari da "
 
-#: src/main.c:622 src/screen.c:1931
+#: src/main.c:622 src/screen.c:1934
 msgid " The Midnight Commander "
 msgstr "Midnight Commander-a "
 
@@ -2981,7 +2914,7 @@ msgstr ""
 " direktorioa eskuz berritu beharko duzu. Ikus eskuliburuko \n"
 " orrialdeak xehetasunetarako.                                "
 
-#: src/main.c:1393 src/screen.c:2156
+#: src/main.c:1393 src/screen.c:2159
 msgid "Menu"
 msgstr "Menua"
 
@@ -3000,25 +2933,21 @@ msgstr "GNUren %s Midnight Commander-a\n"
 
 #: src/main.c:2076
 msgid ""
-"Usage is:\n"
-"\n"
-"mc [flags] [this_dir] [other_panel_dir]\n"
+"[flags] [this_dir] [other_panel_dir]\n"
 "\n"
 msgstr ""
-"Erabilera:\n"
-"\n"
-"mc [flags] [this_dir] [other_panel_dir]\n"
+"[flags] [this_dir] [other_panel_dir]\n"
 "\n"
 
-#: src/main.c:2082
+#: src/main.c:2080
 msgid "+number"
 msgstr ""
 
-#: src/main.c:2083
+#: src/main.c:2081
 msgid "Set initial line number for the internal editor"
 msgstr ""
 
-#: src/main.c:2085
+#: src/main.c:2083
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3028,7 +2957,8 @@ msgstr ""
 "Bidali akatsen berri-emateak (`mc -V'-ren irteera barne)\n"
 "mc-devel@gnome.org helbidera\n"
 
-#: src/main.c:2094
+#. TRANSLATORS: don't translate keywords and names of colors
+#: src/main.c:2097
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3040,7 +2970,8 @@ msgid ""
 "   Dialog boxes: dnormal, dfocus, dhotnormal, dhotfocus\n"
 "   Menus:        menu, menuhot, menusel, menuhotsel\n"
 "   Help:         helpnormal, helpitalic, helplink, helpslink\n"
-"   File types:   directory, executable, link, stalelink, device, special, core\n"
+"   File types:   directory, executable, link, stalelink, device, special, "
+"core\n"
 "\n"
 "Colors:\n"
 "   black, gray, red, brightred, green, brightgreen, brown,\n"
@@ -3067,98 +2998,98 @@ msgstr ""
 "   cyan argia, gris argia eta zuria\n"
 "\n"
 
-#: src/main.c:2186
+#: src/main.c:2184
 msgid "Use to debug the background code"
 msgstr "Atzeko planoaren kodea arazteko erabiltzen da"
 
-#: src/main.c:2189
+#: src/main.c:2187
 msgid "Request to run in color mode"
 msgstr "Kolore moduan exekutatzeko eskatzen du"
 
-#: src/main.c:2191
+#: src/main.c:2189
 msgid "Specifies a color configuration"
 msgstr "Kolore-konfigurazioa zehazten du"
 
-#: src/main.c:2195
+#: src/main.c:2193
 msgid "Edits one file"
 msgstr "Fitxategi bat editatzen du"
 
-#: src/main.c:2199
+#: src/main.c:2197
 msgid "Displays this help message"
 msgstr "Laguntza-mezu hau bistaratzen du"
 
-#: src/main.c:2201
+#: src/main.c:2199
 msgid "Displays a help screen on how to change the color scheme"
 msgstr ""
 "Kolore-eskema nola aldatu azaltzen duen laguntza-pantaila bistaratzen du"
 
-#: src/main.c:2204
+#: src/main.c:2202
 msgid "Log ftp dialog to specified file"
 msgstr "Erregistratu ftp elkarrizketa-koadroa zehaztutako fitxategian "
 
-#: src/main.c:2207
+#: src/main.c:2205
 msgid "Set debug level"
 msgstr ""
 
-#: src/main.c:2211
+#: src/main.c:2209
 #, fuzzy
 msgid "Print data directory"
 msgstr "direktorioa"
 
-#: src/main.c:2213
+#: src/main.c:2211
 msgid "Requests to run in black and white"
 msgstr "Zuri-beltzean exekutatzea eskatzen du "
 
-#: src/main.c:2215
+#: src/main.c:2213
 msgid "Disable mouse support in text version"
 msgstr "Testu-bertsioan sagu-euskarria desgaitzen du"
 
-#: src/main.c:2218
+#: src/main.c:2216
 msgid "Disables subshell support"
 msgstr "Subshell euskarria desgaitzen du"
 
-#: src/main.c:2220
+#: src/main.c:2218
 #, fuzzy
 msgid "Force subshell execution"
 msgstr "konfiguratu erabiltzailearen IDa exekutatzerakoan"
 
-#: src/main.c:2223
+#: src/main.c:2221
 msgid "Prints working directory at program exit"
 msgstr "Programatik irtetean oraingo direktorioa inprimatzen du"
 
-#: src/main.c:2225
+#: src/main.c:2223
 msgid "Resets soft keys on HP terminals"
 msgstr "Tekla transferigarriak HP terminalean berrezartzen ditu"
 
-#: src/main.c:2227
+#: src/main.c:2225
 msgid "To run on slow terminals"
 msgstr "Terminal moteletan exekutatzeko"
 
-#: src/main.c:2230
+#: src/main.c:2228
 msgid "Use stickchars to draw"
 msgstr "Erabili karaktere grafikoak marrazteko"
 
-#: src/main.c:2234
+#: src/main.c:2232
 msgid "Enables subshell support (default)"
 msgstr "Subshell euskarria (lehenetsia) gaitzen du"
 
-#: src/main.c:2238
+#: src/main.c:2236
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Terminfo-ren ordez termcap erabiltzen saiatzen da "
 
-#: src/main.c:2241
+#: src/main.c:2239
 msgid "Displays the current version"
 msgstr "Uneko bertsioa bistaratzen du"
 
-#: src/main.c:2243
+#: src/main.c:2241
 msgid "Launches the file viewer on a file"
 msgstr "Fitxategi-ikustailea fitxategian abiarazten du"
 
-#: src/main.c:2245
+#: src/main.c:2243
 msgid "Forces xterm features"
 msgstr "xterm eginbideak behartzen ditu"
 
-#: src/main.c:2436
+#: src/main.c:2433
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3166,11 +3097,11 @@ msgstr ""
 "Ezin izan da tty lerroa ireki. Mc -P bandera gabe exekutatu behar duzu.\n"
 "Sistema batzuetan # `which mc` exekutatu nahiko duzu\n"
 
-#: src/main.c:2499
+#: src/main.c:2496
 msgid " Notice "
 msgstr "Oharra "
 
-#: src/main.c:2500
+#: src/main.c:2497
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3338,6 +3269,19 @@ msgstr "Erakutsi laguntza-mezu hau"
 msgid "Display brief usage message"
 msgstr "Bistaratu erabilera-mezu laburra"
 
+#: src/popthelp.c:60
+msgid "ARG"
+msgstr ""
+
+#: src/popthelp.c:179
+#, fuzzy
+msgid "Usage:"
+msgstr "Erabiltzaile-izena:"
+
+#: src/popthelp.c:197
+msgid "[OPTION...]"
+msgstr ""
+
 #: src/screen.c:173
 msgid "UP--DIR"
 msgstr "GOI--DIR"
@@ -3420,39 +3364,39 @@ msgstr "Etiketa ezezaguna bistaratze-formatuan: "
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Erabiltzaileak emandako formatua baliogabea da, lehenetsira itzultzen."
 
-#: src/screen.c:1932
+#: src/screen.c:1935
 msgid " Do you really want to execute? "
 msgstr "Ziur zaude exekutatu nahi duzula? "
 
-#: src/screen.c:1944
+#: src/screen.c:1947
 msgid " No action taken "
 msgstr "Ez da neurririk hartu "
 
-#: src/screen.c:2157
+#: src/screen.c:2160
 msgid "View"
 msgstr "Ikuspegia"
 
-#: src/screen.c:2158 src/view.c:2049
+#: src/screen.c:2161 src/view.c:2054
 msgid "Edit"
 msgstr "Edizioa"
 
-#: src/screen.c:2160 src/tree.c:1025
+#: src/screen.c:2163 src/tree.c:1025
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2161 src/tree.c:1029
+#: src/screen.c:2164 src/tree.c:1029
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/selcodepage.c:54
+#: src/selcodepage.c:55
 msgid " Choose input codepage "
 msgstr " Aukeratu sarrerako kode-orria "
 
-#: src/selcodepage.c:58
+#: src/selcodepage.c:59
 msgid "-  < No translation >"
 msgstr "-  < Ez dago itzulpenik >"
 
-#: src/selcodepage.c:102
+#: src/selcodepage.c:107
 msgid ""
 "To use this feature select your codepage in\n"
 "Setup / Display Bits dialog!\n"
@@ -3670,66 +3614,38 @@ msgstr " Ez da sarrera egokirik aurkitu %s(e)n "
 msgid " User menu "
 msgstr " Erabiltzaile-menua "
 
-#: src/util.c:220
-msgid "name_trunc: too big"
-msgstr "name_trunc: handiegia"
-
-#: src/util.c:670 src/util.c:696
+#: src/util.c:665 src/util.c:691
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:671 src/util.c:694
+#: src/util.c:666 src/util.c:689
 msgid "%b %e  %Y"
 msgstr "%Y %b %e"
 
-#: src/utilunix.c:329
+#: src/utilunix.c:331
 #, fuzzy, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr ""
 "Ezin da \"%s\" helburu-direktorioa sortu\n"
 " %s "
 
-#: src/utilunix.c:351
+#: src/utilunix.c:354
 msgid " Pipe failed "
 msgstr " Kanalizazioak huts egin du "
 
-#: src/utilunix.c:355
+#: src/utilunix.c:358
 msgid " Dup failed "
 msgstr " Bikoizketak huts egin du "
 
-#: src/view.c:406
-msgid ""
-"File: \n"
-"\n"
-"    "
-msgstr ""
-"Fitxategia: \n"
-"\n"
-"    "
-
-#: src/view.c:407
-msgid ""
-"\n"
-"\n"
-"has been modified, do you want to save the changes?\n"
-msgstr ""
-"\n"
-"\n"
-"aldatu egin da, aldaketak gorde nahi dituzu?\n"
-
-#: src/view.c:409
-msgid " Save changes "
-msgstr " Gorde aldaketak "
-
-#: src/view.c:454
+#: src/view.c:450
 msgid " Cannot spawn child program "
 msgstr " Ezin da programa umea abiarazi "
 
-#: src/view.c:471
+#: src/view.c:467
 msgid " Could not open file "
 msgstr " Ezin izan da fitxategia ireki "
 
-#: src/view.c:563
+#: src/view.c:559
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3738,11 +3654,11 @@ msgstr ""
 " Ezin da \"%s\" identifikatu\n"
 " %s "
 
-#: src/view.c:571
+#: src/view.c:567
 msgid " Cannot view: not a regular file "
 msgstr " Ezin da ikusi: ez da fitxategi erregularra "
 
-#: src/view.c:578
+#: src/view.c:574
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3751,39 +3667,39 @@ msgstr ""
 " Ezin da \"%s\" ireki\n"
 " %s "
 
-#: src/view.c:708
+#: src/view.c:705
 #, c-format
 msgid "File: %s"
 msgstr "Fitxategia: %s"
 
-#: src/view.c:722
+#: src/view.c:719
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Desplazamendua 0x%08x"
 
-#: src/view.c:724
+#: src/view.c:721
 #, c-format
 msgid "Col %d"
 msgstr "%d zutabe"
 
-#: src/view.c:728
+#: src/view.c:725
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
 
-#: src/view.c:733
+#: src/view.c:730
 msgid "  [grow]"
 msgstr "  [handitu]"
 
-#: src/view.c:1689
+#: src/view.c:1694
 msgid "Invalid hex search expression"
 msgstr "Baliogabeko bilaketa-adierazpen hamaseitarra"
 
-#: src/view.c:1740
+#: src/view.c:1745
 msgid " Invalid regular expression "
 msgstr " Baliogabeko adierazpen erregularra "
 
-#: src/view.c:1862
+#: src/view.c:1867
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3792,7 +3708,7 @@ msgstr ""
 " Uneko lerro-zenbakia %d da.\n"
 " Sartu lerro-zenbaki berria:"
 
-#: src/view.c:1884
+#: src/view.c:1889
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3801,67 +3717,67 @@ msgstr ""
 " Uneko helbidea 0x%lx da.\n"
 " Sartu helbide berria:"
 
-#: src/view.c:1886
+#: src/view.c:1891
 msgid " Goto Address "
 msgstr " Joan helbidera "
 
-#: src/view.c:1918
+#: src/view.c:1923
 msgid " Enter regexp:"
 msgstr " Sartu regexp:"
 
-#: src/view.c:2041
+#: src/view.c:2046
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2041
+#: src/view.c:2046
 msgid "Hex"
 msgstr "Hamaseitarra"
 
-#: src/view.c:2042
+#: src/view.c:2047
 msgid "Goto"
 msgstr "Joan"
 
-#: src/view.c:2042
+#: src/view.c:2047
 msgid "Line"
 msgstr "Lerrora"
 
-#: src/view.c:2045
+#: src/view.c:2050
 msgid "RxSrch"
 msgstr "RxSrch"
 
-#: src/view.c:2048
+#: src/view.c:2053
 msgid "EdText"
 msgstr "EdTest"
 
-#: src/view.c:2048
+#: src/view.c:2053
 msgid "EdHex"
 msgstr "EdHamas"
 
-#: src/view.c:2050
+#: src/view.c:2055
 msgid "UnWrap"
 msgstr "Desdoitu"
 
-#: src/view.c:2050
+#: src/view.c:2055
 msgid "Wrap"
 msgstr "Doitu"
 
-#: src/view.c:2053
+#: src/view.c:2058
 msgid "HxSrch"
 msgstr "HxBila"
 
-#: src/view.c:2056
+#: src/view.c:2061
 msgid "Raw"
 msgstr "Formaturik gabe"
 
-#: src/view.c:2056
+#: src/view.c:2061
 msgid "Parse"
 msgstr "Analizatu"
 
-#: src/view.c:2060
+#: src/view.c:2065
 msgid "Unform"
 msgstr "Formarik gabe"
 
-#: src/view.c:2060
+#: src/view.c:2065
 msgid "Format"
 msgstr "Formateatu"
 
@@ -4120,11 +4036,11 @@ msgstr ""
 msgid "Dir cache expired for %s"
 msgstr "%s(r)en dir cache-a iraungi egin da"
 
-#: vfs/direntry.c:785
+#: vfs/direntry.c:787
 msgid "Starting linear transfer..."
 msgstr "Transferentzia lineala hasten..."
 
-#: vfs/direntry.c:957
+#: vfs/direntry.c:961
 msgid "Getting file"
 msgstr "Fitxategia eskuratzen"
 
@@ -4141,148 +4057,148 @@ msgstr ""
 msgid "Inconsistent extfs archive"
 msgstr "extfs artxibo inkontsistentea"
 
-#: vfs/fish.c:145
+#: vfs/fish.c:144
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "arraina: %s(e)tik deskonektatzen"
 
-#: vfs/fish.c:223
+#: vfs/fish.c:222
 msgid "fish: Waiting for initial line..."
 msgstr "arraina: Hasierako lerroaren zain..."
 
-#: vfs/fish.c:233
+#: vfs/fish.c:232
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Oraingoz ezin dugu pasahitzaren bidezko konexiorik egin."
 
-#: vfs/fish.c:238
+#: vfs/fish.c:237
 msgid " fish: Password required for "
 msgstr " arraina: honentzat pasahitza behar da: "
 
-#: vfs/fish.c:247
+#: vfs/fish.c:246
 msgid "fish: Sending password..."
 msgstr "arraina: Pasahitza bidaltzen..."
 
-#: vfs/fish.c:253
+#: vfs/fish.c:252
 msgid "fish: Sending initial line..."
 msgstr "arraina: Hasierako lerroa bidaltzen..."
 
-#: vfs/fish.c:263
+#: vfs/fish.c:262
 msgid "fish: Handshaking version..."
 msgstr "arraina: Handshaking bertsioa..."
 
-#: vfs/fish.c:273
+#: vfs/fish.c:272
 msgid "fish: Setting up current directory..."
 msgstr "arraina: Uneko direktorioa konfiguratzen..."
 
-#: vfs/fish.c:275
+#: vfs/fish.c:274
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "arraina: Konektatuta, hasiera %s."
 
-#: vfs/fish.c:364
+#: vfs/fish.c:363
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "arraina: %s direktorioa irakurtzen..."
 
-#: vfs/fish.c:467 vfs/ftpfs.c:1306 vfs/undelfs.c:310
+#: vfs/fish.c:466 vfs/ftpfs.c:1318 vfs/undelfs.c:310
 #, c-format
 msgid "%s: done."
 msgstr "%s: eginda."
 
-#: vfs/fish.c:472 vfs/ftpfs.c:1258 vfs/undelfs.c:313
+#: vfs/fish.c:471 vfs/ftpfs.c:1270 vfs/undelfs.c:313
 #, c-format
 msgid "%s: failure"
 msgstr "%s: hutsegitea"
 
-#: vfs/fish.c:493
+#: vfs/fish.c:492
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "arraina: gorde %s: komandoa bidaltzen..."
 
-#: vfs/fish.c:537
+#: vfs/fish.c:536
 msgid "fish: Local read failed, sending zeros"
 msgstr "arraina: Irakurketa lokalak huts egin du, zeroak bidaltzen"
 
-#: vfs/fish.c:549
+#: vfs/fish.c:548
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "arraina: %s %d gordetzen (%lu)"
 
-#: vfs/fish.c:550
+#: vfs/fish.c:549
 msgid "zeros"
 msgstr "zeroak"
 
-#: vfs/fish.c:599
+#: vfs/fish.c:598
 msgid "Aborting transfer..."
 msgstr "Transferentzia bertan behera uzten..."
 
-#: vfs/fish.c:608
+#: vfs/fish.c:607
 msgid "Error reported after abort."
 msgstr "Errorearen berri eman da abortatu ondoren."
 
-#: vfs/fish.c:610
+#: vfs/fish.c:609
 msgid "Aborted transfer would be successful."
 msgstr "Transferentzia bertan behera utziko da."
 
-#: vfs/ftpfs.c:376
+#: vfs/ftpfs.c:375
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s(e)tik deskonektatzen"
 
-#: vfs/ftpfs.c:430
+#: vfs/ftpfs.c:429
 msgid " FTP: Password required for "
 msgstr " FTP: honentzat pasahitza behar da: "
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:463
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: erabiltzaile-izena bidaltzen"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:468
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: erabiltzailearen pasahitza bidaltzen"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:473
 msgid "ftpfs: logged in"
 msgstr "ftpfs: saioa hasita"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:488
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: %s erabiltzailearen erabiltzaile-izena ez da zuzena "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:520
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Ezin izan da iturburu-banabidea (%s) konfiguratu"
 
-#: vfs/ftpfs.c:642
+#: vfs/ftpfs.c:641
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Ostalari-izen baliogabea."
 
-#: vfs/ftpfs.c:662
+#: vfs/ftpfs.c:661
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Ostalari-helbide baliogabea."
 
-#: vfs/ftpfs.c:685
+#: vfs/ftpfs.c:684
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: %s(r)ekin konektatzen"
 
-#: vfs/ftpfs.c:695
+#: vfs/ftpfs.c:694
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: konexioa erabiltzaileak moztu du"
 
-#: vfs/ftpfs.c:697
+#: vfs/ftpfs.c:696
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: zerbitzariarekiko konexioak huts egin du: %s"
 
-#: vfs/ftpfs.c:738
+#: vfs/ftpfs.c:737
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Berriro saiatzeko zain... %d (Control-C uzteko)"
 
-#: vfs/ftpfs.c:921
+#: vfs/ftpfs.c:920
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: ezin izan da modu pasiboa konfiguratu"
 
@@ -4295,45 +4211,45 @@ msgstr "ftpfs: transferentzia abortatzen."
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: abortatze-errorea: %s"
 
-#: vfs/ftpfs.c:1001
+#: vfs/ftpfs.c:1002
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: abortatzeak huts egin du"
 
-#: vfs/ftpfs.c:1090 vfs/ftpfs.c:1195
+#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1207
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWDk huts egin du."
 
-#: vfs/ftpfs.c:1100 vfs/ftpfs.c:1107
+#: vfs/ftpfs.c:1112 vfs/ftpfs.c:1119
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: ezin izan da esteka sinbolikoa konpondu"
 
-#: vfs/ftpfs.c:1158
+#: vfs/ftpfs.c:1170
 msgid "Resolving symlink..."
 msgstr "Esteka sinbolikoa konpontzen..."
 
-#: vfs/ftpfs.c:1183
+#: vfs/ftpfs.c:1195
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: FTP direktorioa irakurtzen %s... %s%s "
 
-#: vfs/ftpfs.c:1184
+#: vfs/ftpfs.c:1196
 msgid "(strict rfc959)"
 msgstr "(rfc959 ertsia)"
 
-#: vfs/ftpfs.c:1185
+#: vfs/ftpfs.c:1197
 msgid "(chdir first)"
 msgstr "(chdir aurrena)"
 
-#: vfs/ftpfs.c:1319
+#: vfs/ftpfs.c:1331
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: huts egin du; ez dauka nora itzuli"
 
-#: vfs/ftpfs.c:1384
+#: vfs/ftpfs.c:1396
 #, fuzzy, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: %d fitxategia gordetzen (%lu)"
 
-#: vfs/ftpfs.c:1843
+#: vfs/ftpfs.c:1855
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4341,15 +4257,15 @@ msgstr ""
 "~/.netrc fitxategiak ez du modu zuzena.\n"
 "Kendu pasahitza edo zuzendu modua."
 
-#: vfs/mcfs.c:109 vfs/mcfs.c:152
+#: vfs/mcfs.c:123 vfs/mcfs.c:168
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:109
+#: vfs/mcfs.c:124
 msgid " The server does not support this version "
 msgstr " Zerbitzariak ez du bertsio hau onartzen "
 
-#: vfs/mcfs.c:125
+#: vfs/mcfs.c:141
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4359,42 +4275,34 @@ msgstr ""
 " saioa hasteko pasahitza behar duzu, baina informazioa \n"
 " ez da babesturik egongo bestaldean.  Jarraitu nahi duzu? \n"
 
-#: vfs/mcfs.c:128
-msgid " Yes "
-msgstr " Bai "
-
-#: vfs/mcfs.c:128
-msgid " No "
-msgstr " Ez "
-
-#: vfs/mcfs.c:138
+#: vfs/mcfs.c:154
 msgid " MCFS Password required "
 msgstr " MCFS Pasahitza behar da "
 
-#: vfs/mcfs.c:152
+#: vfs/mcfs.c:168
 msgid " Invalid password "
 msgstr " Baliogabeko pasahitza "
 
-#: vfs/mcfs.c:183
+#: vfs/mcfs.c:228
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Ezin da ostalari-izena lokalizatu: %s "
 
-#: vfs/mcfs.c:201
+#: vfs/mcfs.c:247
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Ezin da socket-a sortu: %s "
 
-#: vfs/mcfs.c:207
+#: vfs/mcfs.c:253
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " Ezin da zerbitzariarekin konektatu: %s "
 
-#: vfs/mcfs.c:273
+#: vfs/mcfs.c:323
 msgid " Too many open connections "
 msgstr " Konexio gehiegi daude irekita "
 
-#: vfs/sfs.c:331
+#: vfs/sfs.c:334
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4403,7 +4311,7 @@ msgstr ""
 "Abisua: Baliogabeko lerroa %s-n:\n"
 "%s\n"
 
-#: vfs/sfs.c:343
+#: vfs/sfs.c:346
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4412,7 +4320,7 @@ msgstr ""
 "Abisua: Baliogabeko %c bandera %s-n:\n"
 "%s\n"
 
-#: vfs/smbfs.c:564
+#: vfs/smbfs.c:565
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4421,31 +4329,31 @@ msgstr ""
 " huts egin da %s(r)ekin berriro konektatzean\n"
 " "
 
-#: vfs/smbfs.c:1122
+#: vfs/smbfs.c:1101
 msgid " Authentication failed "
 msgstr " Autentifikatzean huts egin du. "
 
-#: vfs/smbfs.c:1583
+#: vfs/smbfs.c:1588
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s %s direktorioa sortzen "
 
-#: vfs/smbfs.c:1606
+#: vfs/smbfs.c:1611
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s %s direktorioa kentzen "
 
-#: vfs/smbfs.c:1710 vfs/smbfs.c:1730
+#: vfs/smbfs.c:1715 vfs/smbfs.c:1735
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s urruneko %s fitxategia irekitzen "
 
-#: vfs/smbfs.c:1798
+#: vfs/smbfs.c:1803
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s urruneko %s fitxategia kentzen "
 
-#: vfs/smbfs.c:1836
+#: vfs/smbfs.c:1841
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s fitxategiei izena aldatzen\n"
@@ -4591,3 +4499,87 @@ msgstr "%s: %s: %s %3d%% (%lu byte transferitu dira)"
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu byte transferitu dira"
+
+#~ msgid " Macro "
+#~ msgstr " Makroa "
+
+#~ msgid " Delete Macro "
+#~ msgstr " Ezabatu makroa "
+
+#~ msgid " Continue "
+#~ msgstr " Jarraitu "
+
+#~ msgid " Cancel "
+#~ msgstr " Utzi "
+
+#~ msgid " Search "
+#~ msgstr "Bilatu "
+
+#~ msgid " Quit "
+#~ msgstr "Irten "
+
+#~ msgid " Insert file "
+#~ msgstr "Txertatu fitxategia "
+
+#~ msgid " CD "
+#~ msgstr "CD "
+
+#~ msgid " Internal failure "
+#~ msgstr "Barne-hutsegitea "
+
+#~ msgid " Unknown file operation "
+#~ msgstr "Fitxategi-eragiketa ezezaguna "
+
+#~ msgid "a&ll"
+#~ msgstr "&dena"
+
+#~ msgid " Type 'yes' if you REALLY want to delete "
+#~ msgstr "Idatzi 'bai' BENETAN ezabatu nahi baduzu "
+
+#~ msgid "all the directories "
+#~ msgstr "direktorio guztiak "
+
+#~ msgid " Recursive Delete "
+#~ msgstr "Ezabatze errekurtsiboa "
+
+#~ msgid " Background process: Recursive Delete "
+#~ msgstr "Atzeko planoko prozesua: Ezabatze errekurtsiboa "
+
+#~ msgid "no"
+#~ msgstr "ez"
+
+#~ msgid "yes"
+#~ msgstr "bai"
+
+#~ msgid " Learn keys "
+#~ msgstr "Ikasteko teklak "
+
+#~ msgid "name_trunc: too big"
+#~ msgstr "name_trunc: handiegia"
+
+#~ msgid ""
+#~ "File: \n"
+#~ "\n"
+#~ "    "
+#~ msgstr ""
+#~ "Fitxategia: \n"
+#~ "\n"
+#~ "    "
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "has been modified, do you want to save the changes?\n"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "aldatu egin da, aldaketak gorde nahi dituzu?\n"
+
+#~ msgid " Save changes "
+#~ msgstr " Gorde aldaketak "
+
+#~ msgid " Yes "
+#~ msgstr " Bai "
+
+#~ msgid " No "
+#~ msgstr " Ez "
