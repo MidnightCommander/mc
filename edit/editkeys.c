@@ -180,6 +180,7 @@ static long const common_key_map[] = {
     KEY_M_CTRL | (KEY_F (4)), CK_Replace_Again,
     KEY_M_CTRL | (KEY_F (7)), CK_Find_Again,
     KEY_M_CTRL | KEY_BACKSPACE, CK_Undo,
+    KEY_M_CTRL | 0177, CK_Undo,
     KEY_M_CTRL | KEY_PPAGE, CK_Beginning_Of_Text,
     KEY_M_CTRL | KEY_NPAGE, CK_End_Of_Text,
     KEY_M_CTRL | KEY_HOME, CK_Beginning_Of_Text,
@@ -190,6 +191,10 @@ static long const common_key_map[] = {
     KEY_M_CTRL | KEY_RIGHT, CK_Word_Right,
     KEY_M_CTRL | KEY_IC, CK_XStore,
     KEY_M_CTRL | KEY_DC, CK_Remove,
+
+    /* Alt */
+    KEY_M_ALT | KEY_BACKSPACE, CK_Delete_Word_Left,
+    KEY_M_ALT | 0177, CK_Delete_Word_Left,
 
     0, 0
 };

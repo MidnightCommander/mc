@@ -1,3 +1,9 @@
+2003-03-07  Pavel Roskin  <proski@gnu.org>
+
+	* editkeys.c (common_key_map): Delete previous word by
+	Alt-Backspace.  Fix Ctrl-Backspace on some terminals.
+	Reported by Andrew V. Samoilov <sav@bcs.zp.ua>
+
 2003-03-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* syntax.c (edit_read_syntax_file): Fix segmentation violation.
