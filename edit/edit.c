@@ -429,15 +429,14 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Cannot get size/permissions info on file: "), filename, " ", 0)));
 	return 1;
     }
+    close (file);
 
     if (st->st_size >= SIZE_LIMIT) {
-	close (file);
 /* The file-name is printed after the ':' */
 	edit_error_dialog (_ (" Error "), catstrs (_ (" File is too large: "), \
 						   filename, _ (" \n Increase edit.h:MAXBUF and recompile the editor. "), 0));
 	return 1;
     }
-    close (file);
     return 0;
 }
 
@@ -604,16 +603,19 @@ int edit_renew (WEdit * edit)
     int lines = edit->num_widget_lines;
     int columns = edit->num_widget_columns;
     char *dir;
+    int retval = 1;
 
     if (edit->dir)
 	dir = (char *) strdup (edit->dir);
     else
 	dir = 0;
-    
+
     edit_clean (edit);
     if (!edit_init (edit, lines, columns, 0, "", dir, 0))
-	return 0;
-    return 1;
+	retval = 0;
+    if (dir)
+	free (dir);
+    return retval;
 }
 
 /* returns 1 on success, if returns 0, the edit struct would have been free'd */

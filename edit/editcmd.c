@@ -188,25 +188,15 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (!*filename)
 	return 0;
 
-    savename = (char *) strdup ((char *) filename);
-
-    if (vfs_file_is_local (filename)) {
-	if ((fd = open (savename, O_WRONLY)) == -1) {
-	    /*
-	     * The file does not exists yet, so no safe save or
-	     * backup are necessary.
-	     */
-	    this_save_mode = 0;
-	} else {
-	    close (fd);
-	    this_save_mode = option_save_mode;
-	}
-    } else {
+    if ((fd = open (filename, O_WRONLY)) == -1) {
 	/*
-	 * FIXME - rename is not impemented in VFS, so only
-	 * quick save is possible.
+	 * The file does not exists yet, so no safe save or
+	 * backup are necessary.
 	 */
 	this_save_mode = 0;
+    } else {
+	close (fd);
+	this_save_mode = option_save_mode;
     }
 
     if (this_save_mode > 0) {
@@ -218,20 +208,15 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    savedir = (char *) strdup (filename);
 	    savedir[slashpos - filename + 1] = '\0';
 	}
-	if (savename)
-	    free (savename);
 	saveprefix = concat_dir_and_file (savedir, "cooledit");
+	free (savedir);
 	fd = mc_mkstemps(&savename, saveprefix, NULL);
 	g_free (saveprefix);
-	free (savedir);
 	if (!savename)
 	    return 0;
-	/*
-	 * Close for now because it needs to be reopened by
-	 * VFS-aware mc_open() and MY_O_TEXT should be used.
-	 */
 	close (fd);
-    }
+    } else
+	savename = (char *) strdup (filename);
 
     if ((fd = open (savename, O_CREAT | O_WRONLY | O_TRUNC | MY_O_TEXT,
 		    edit->stat1.st_mode)) == -1)
@@ -523,8 +508,7 @@ static FILE *edit_open_macro_file (const char *r)
 }
 
 #define MAX_MACROS 1024
-static int saved_macro[MAX_MACROS + 1] =
-{0, 0};
+static int saved_macro[MAX_MACROS + 1];
 static int saved_macros_loaded = 0;
 
 /*
@@ -1054,9 +1038,9 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	{0}};
 
 #ifdef HAVE_CHARSET
-    char *msg;
+    char *msg = _(" Replace with: ");
 
-    quick_widgets[5].text = catstrs (msg = _(" Replace with: "), replace_text, 0);
+    quick_widgets[5].text = catstrs (msg, replace_text, 0);
 
     if (*replace_text)
 	convert_to_display (quick_widgets[5].text + strlen (msg));
@@ -1093,9 +1077,6 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     int treplace_whole = replace_whole;
     int treplace_case = replace_case;
 
-    char *tsearch_text;
-    char *treplace_text;
-    char *targ_order;
     QuickWidget quick_widgets[] =
     {
 	{quick_button, 6, 10, 12, REPLACE_DLG_HEIGHT, N_("&Cancel"), 0, B_CANCEL, 0,
@@ -1137,11 +1118,11 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     quick_widgets[6].result = &treplace_regexp;
     quick_widgets[7].result = &treplace_whole;
     quick_widgets[8].result = &treplace_case;
-    quick_widgets[9].str_result = &targ_order;
+    quick_widgets[9].str_result = arg_order;
     quick_widgets[9].text = *arg_order;
-    quick_widgets[11].str_result = &treplace_text;
+    quick_widgets[11].str_result = replace_text;
     quick_widgets[11].text = *replace_text;
-    quick_widgets[13].str_result = &tsearch_text;
+    quick_widgets[13].str_result = search_text;
     quick_widgets[13].text = *search_text;
     {
 	QuickDialog Quick_input =
@@ -1151,9 +1132,6 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
 	Quick_input.widgets = quick_widgets;
 
 	if (quick_dialog (&Quick_input) != B_CANCEL) {
-	    *arg_order = *(quick_widgets[INPUT_INDEX].str_result);
-	    *replace_text = *(quick_widgets[INPUT_INDEX + 2].str_result);
-	    *search_text = *(quick_widgets[INPUT_INDEX + 4].str_result);
 	    replace_scanf = treplace_scanf;
 	    replace_backwards = treplace_backwards;
 	    replace_regexp = treplace_regexp;
@@ -1607,15 +1585,15 @@ void edit_replace_cmd (WEdit * edit, int again)
 
     if (!edit) {
 	if (old1) {
-	    free (old1);
+	    g_free (old1);
 	    old1 = 0;
 	}
 	if (old2) {
-	    free (old2);
+	    g_free (old2);
 	    old2 = 0;
 	}
 	if (old3) {
-	    free (old3);
+	    g_free (old3);
 	    old3 = 0;
 	}
 	return;
@@ -1631,9 +1609,9 @@ void edit_replace_cmd (WEdit * edit, int again)
     if (again) {
 	if (!old1 || !old2)
 	    return;
-	exp1 = (char *) strdup (old1);
-	exp2 = (char *) strdup (old2);
-	exp3 = (char *) strdup (old3);
+	exp1 = g_strdup (old1);
+	exp2 = g_strdup (old2);
+	exp3 = g_strdup (old3);
     } else {
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 
@@ -1659,21 +1637,21 @@ void edit_replace_cmd (WEdit * edit, int again)
     if (!exp1 || !*exp1) {
 	edit->force = REDRAW_COMPLETELY;
 	if (exp1) {
-	    free (exp1);
-	    free (exp2);
-	    free (exp3);
+	    g_free (exp1);
+	    g_free (exp2);
+	    g_free (exp3);
 	}
 	return;
     }
     if (old1)
-	free (old1);
+	g_free (old1);
     if (old2)
-	free (old2);
+	g_free (old2);
     if (old3)
-	free (old3);
-    old1 = (char *) strdup (exp1);
-    old2 = (char *) strdup (exp2);
-    old3 = (char *) strdup (exp3);
+	g_free (old3);
+    old1 = g_strdup (exp1);
+    old2 = g_strdup (exp2);
+    old3 = g_strdup (exp3);
 
     {
 	char *s;
@@ -1682,8 +1660,8 @@ void edit_replace_cmd (WEdit * edit, int again)
 	    memmove (s, s + 1, strlen (s));
 	s = exp3;
 	for (i = 0; i < NUM_REPL_ARGS; i++) {
-	    if ((unsigned long) s != 1 && s < exp3 + strlen (exp3)) {
-		if ((ord = atoi (s)))
+	    if (s != (char *)1 && *s) {
+		if ((ord = atoi (s))>0)
 		    argord[i] = ord - 1;
 		else
 		    argord[i] = i;
@@ -1818,9 +1796,9 @@ void edit_replace_cmd (WEdit * edit, int again)
 	}
     } while (replace_continue);
 
-    free (exp1);
-    free (exp2);
-    free (exp3);
+    g_free (exp1);
+    g_free (exp2);
+    g_free (exp3);
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
 }

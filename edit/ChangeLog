@@ -1,4 +1,15 @@
-2001-11-14  Andrew V. Samoilov  <kai@cmail.ru>
+2001-11-19  Andrew V. Samoilov  <kai@cmail.ru>
+
+	edit.c (edit_renew): Release dir after use.
+
+	* editcmd.c (edit_replace_dialog): Eliminate tsearch_text,
+	treplace_text and targ_order.
+	(edit_replace_cmd): edit_replace_dialog gives g_malloced
+	strings, so g_strdup/g_free have to be used.  Accept only
+	positive pattern number in Scanf search and replace.
+	(edit_save_file): Enable safe save and backups on remote VFS.
+
+2001-11-16  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* edit_key_translator.c (cooledit_key_map):
 	Add C-k, CK_Delete_To_Line_End.
