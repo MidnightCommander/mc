@@ -1439,7 +1439,7 @@ smbfs_stat (vfs * me, char *path, struct stat *buf)
 {
     smbfs_connection *sc;
     pstring server_url;
-    char *service, *pp;
+    char *service, *pp, *at;
     const char *p;
 
     DEBUG (3, ("smbfs_stat(path:%s)\n", path));
@@ -1463,16 +1463,19 @@ smbfs_stat (vfs * me, char *path, struct stat *buf)
 	p++;
 
     pp = strchr (p, '/');	/* advance past next '/' */
-
+    at = strchr (p, '@');
     pstrcpy (server_url, URL_HEADER);
-    if (pp) {
-    	char *t = strchr (p, '@');
-	if (t && t < pp) {	/* user@server */
-	    *t = 0;
-	    pstrcat (server_url, p);
-	    pstrcat (server_url, "@");
-	    *t = '@';
-	}
+    if (at && at < pp) {	/* user@server */
+    	char *z = &(server_url[sizeof (server_url) - 1]);
+	const char *s = p;
+
+	at = &(server_url [HEADER_LEN]) + (at - p + 1);
+	if (z > at)
+	    z = at;
+	at = &(server_url [HEADER_LEN]);
+	while (at < z)
+	    *at++ = *s++;
+	*z = 0;
     }
     pstrcat (server_url, current_bucket->host);
 
