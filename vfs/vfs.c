@@ -346,23 +346,26 @@ void
 vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
 {
     struct vfs_stamping *stamp, *st1;
-    
-    for (stamp = stamps, st1 = NULL; stamp != NULL; st1 = stamp, stamp = stamp->next)
-        if (stamp->v == v && stamp->id == id){
-            if (stamp->parent != NULL){
-                if (removeparents)
-                    vfs_rmstamp (stamp->parent->v, stamp->parent->id, 1);
-		vfs_rm_parents (stamp->parent);
-            }
-            if (st1 == NULL){
-                stamps = stamp->next;
-            } else {
-            	st1->next = stamp->next;
-            }
-            g_free (stamp);
 
-            return;
-        }
+    for (stamp = stamps, st1 = NULL; stamp != NULL;
+	 st1 = stamp, stamp = stamp->next)
+	if (stamp->v == v && stamp->id == id) {
+	    if (stamp->parent != NULL) {
+		if (removeparents)
+		    vfs_rmstamp (stamp->parent->v, stamp->parent->id, 1);
+		vfs_rm_parents (stamp->parent);
+		stamp->parent = NULL;
+		continue;	/* rescan the tree */
+	    }
+	    if (st1 == NULL) {
+		stamps = stamp->next;
+	    } else {
+		st1->next = stamp->next;
+	    }
+	    g_free (stamp);
+
+	    return;
+	}
 }
 
 static int
