@@ -11,6 +11,10 @@ lib_LTLIBRARIES = libvfs.la
 
 BUILT_SOURCES = mad.c mad.h
 
+libvfsincludedir=$(includedir)/vfs
+
+libvfsinclude_HEADERS=vfs.h
+
 mad.c: mc-src/mad.c
 	$(LN_S) $< $@
 
