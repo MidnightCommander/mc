@@ -1577,6 +1577,8 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
         goto error;
 
     s->st_mode = i;
+    if (*p == ' ')	/* Notwell 4 */
+        p++;
     if (*p == '['){
 	if (strlen (p) <= 8 || p [8] != ']')
 	    goto error;

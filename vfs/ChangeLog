@@ -1,3 +1,8 @@
+1999-01-26  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* vfs.c (vfs_parse_ls_lga): attempt to correctly work against
+	Notwell 4
+
 Wed Jan 27 03:09:48 1999  Timur I. Bakeyev <mc@bat.ru>
 
 	* All around the source: Changed copy_strings() to g_strconcat(). Modi-
