@@ -72,6 +72,8 @@ build_overlay (GdkImlibImage *plain, GdkImlibImage *overlay)
 
 	im = gdk_imlib_clone_image (plain);
 
+	g_return_val_if_fail(plain, NULL);
+	g_return_val_if_fail(overlay, NULL);
 	rowstride = plain->rgb_width * 3;
 	overlay_rowstride = overlay->rgb_width * 3;
 
@@ -211,14 +213,6 @@ get_icon_set (const char *filename)
 	return iset;
 }
 
-/* Die because the icon installation is wrong */
-static void
-die_with_no_icons (void)
-{
-	message (1, _("Error"), _("Default set of icons not found, please check your installation"));
-	exit (1);
-}
-
 /* Convenience function to load one of the default icons and die if this fails */
 static IconSet *
 get_stock_icon (char *name)
@@ -229,9 +223,6 @@ get_stock_icon (char *name)
 	filename = g_concat_dir_and_file (ICONDIR, name);
 	iset = get_icon_set (filename);
 	g_free (filename);
-
-	if (!iset)
-		die_with_no_icons ();
 
 	return iset;
 }
@@ -246,9 +237,6 @@ get_stock_overlay (char *name)
 	filename = g_concat_dir_and_file (ICONDIR, name);
 	im = gdk_imlib_load_image (filename);
 	g_free (filename);
-
-	if (!im)
-		die_with_no_icons ();
 
 	return im;
 		
@@ -287,6 +275,11 @@ gicon_init (void)
 
 	symlink_overlay = get_stock_overlay ("i-symlink.png");
 	stalled_overlay = get_stock_overlay ("i-stalled.png");
+
+	if (!iset_directory || !iset_dirclosed || !iset_executable ||
+	    !iset_regular || !iset_core || !iset_fifo || !iset_chardev ||
+	    !iset_blockdev || !symlink_overlay || !stalled_overlay)
+		message (1, _("Warning"), _("Default set of icons not found, check your installation"));
 
 	our_uid = getuid ();
 	our_gid = getgid ();
@@ -500,7 +493,7 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 
  add_link:
 
-	g_assert (iset != NULL);
+	g_return_val_if_fail (iset, NULL);
 
 	if (S_ISLNK (mode)) {
 		if (fe->f.link_to_dir && !is_user_set)

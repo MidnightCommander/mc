@@ -366,7 +366,7 @@ char cmd_buf [512];
 int finish_program = 0;
 
 /* If set, then no windows are displayed in the GNOME edition */
-int   nowindows = 0;
+int   nowindows = 0, nodesktop = 0, twopanel;
 
 /* If set it displays the directory that holds the gnome .links files */
 int display_linksdir = 0;
@@ -2753,6 +2753,8 @@ static const struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
     { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
     {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
+    {"nodesktop", '\0', POPT_ARG_NONE, &nodesktop, 0, N_("No desktop icons"), NULL},
+    {"twopanel", '\0', POPT_ARG_NONE, &twopanel, 0, N_("Look more like traditional gmc"), NULL},
     {"desktop-linksdir", '\0', POPT_ARG_NONE, &display_linksdir, 0,
      N_("Display the directory that holds the .links startup files and exit")},
 #endif

@@ -1,3 +1,9 @@
+2000-02-01  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* gicon.c (gicon_init): make missing icons non-fatal error
+
+	* gmain.c, gdesktop.c: added option not to display desktop icons
+
 2000-01-26  Federico Mena Quintero  <federico@helixcode.com>
 
 	* gmc-client.c (options): Added the --arrange-desktop-icons

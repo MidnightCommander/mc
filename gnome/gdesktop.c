@@ -3188,11 +3188,13 @@ desktop_init (void)
 {
 	icon_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
-	gdnd_init ();
-	gicon_init ();
-	create_layout_info ();
-	create_desktop_dir ();
-	desktop_reload_icons (FALSE, 0, 0);
+	if (!nodesktop) {
+		gdnd_init ();
+		gicon_init ();
+		create_layout_info ();
+		create_desktop_dir ();
+		desktop_reload_icons (FALSE, 0, 0);
+	}
 
 	/* Create the proxy window and initialize all proxying stuff */
 
