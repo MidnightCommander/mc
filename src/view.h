@@ -146,9 +146,4 @@ struct hexedit_change_node {
    unsigned char              value;
 };
 
-#define x_init_view(x)
-#define x_destroy_view(x)
-#define x_create_viewer(x)
-#define x_focus_view(x)
-
 #endif	/* __VIEW_H */

@@ -43,22 +43,6 @@
 #include "key.h"		/* XCTRL and ALT macros  */
 #include "profile.h"	/* for history loading and saving */
 
-#define x_create_button(a,b,c)  1
-#define x_create_radio(a,b,c)   1
-#define x_create_check(a,b,c)   1
-#define x_create_label(a,b,c)   1
-#define x_create_input(a,b,c)   1
-#define x_create_listbox(a,b,c) 1
-#define x_create_buttonbar(a,b,c) 1
-#define x_create_gauge(a,b,c) 1
-#define x_listbox_select_nth(a,b)
-#define x_list_insert(a,b,c)
-#define x_redefine_label(a,b)
-
-#define x_destroy_cmd(w)
-#define x_radio_focus_item(r)
-#define x_radio_toggle(r)
-
 static int button_event (Gpm_Event *event, WButton *b);
 
 int quote = 0;
@@ -72,7 +56,7 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
     
     switch (Msg){
     case WIDGET_INIT:
-	return x_create_button (h, h->wdata, b);
+	return 1;
 
     case WIDGET_HOTKEY:
         if (b->hotkey == Par ||  toupper(b->hotkey) == Par){
@@ -177,7 +161,6 @@ button_event (Gpm_Event *event, WButton *b)
 static void
 button_destroy (WButton *b)
 {
-    x_destroy_cmd (b);
     g_free (b->text);
 }
 
@@ -265,7 +248,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
     
     switch (Msg) {
     case WIDGET_INIT:
-	return x_create_radio (h, h->wdata, r);
+	return 1;
 	
     case WIDGET_HOTKEY:
 	{
@@ -293,14 +276,12 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	    r->sel = r->pos;
     	    (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
 	    radio_callback (h, r, WIDGET_FOCUS, ' ');
-	    x_radio_toggle (r);
 	    return 1;
 
 	case KEY_UP:
 	case KEY_LEFT:
 	    if (r->pos > 0){
 		r->pos--;
-		x_radio_focus_item (r);
 		return 1;
 	    }
 	    return 0;
@@ -309,7 +290,6 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	case KEY_RIGHT:
 	    if (r->count - 1 > r->pos) {
 		r->pos++;
-		x_radio_focus_item (r);
 		return 1;
 	    }
 	}
@@ -404,7 +384,7 @@ check_callback (Dlg_head *h, WCheck *c, int Msg, int Par)
 {
     switch (Msg) {
     case WIDGET_INIT:
-	return x_create_check (h, h->wdata, c);
+	return 1;
 
     case WIDGET_HOTKEY:
         if (c->hotkey==Par ||
@@ -464,7 +444,6 @@ check_event (Gpm_Event *event, WCheck *c)
 static void
 check_destroy (WCheck *c)
 {
-	x_destroy_cmd (c);
 	g_free (c->text);
 }
 
@@ -507,7 +486,7 @@ static int
 label_callback (Dlg_head *h, WLabel *l, int Msg, int Par)
 {
     if (Msg == WIDGET_INIT)
-	return x_create_label (h, h->wdata, l);
+	return 1;
     
     /* We don't want to get the focus */
     if (Msg == WIDGET_FOCUS)
@@ -574,7 +553,6 @@ label_set_text (WLabel *label, char *text)
 static void
 label_destroy (WLabel *l)
 {
-    x_destroy_cmd (l);
     if (l->text)
 	g_free (l->text);
 }
@@ -612,7 +590,7 @@ gauge_callback (Dlg_head *h, WGauge *g, int Msg, int Par)
 {
 
     if (Msg == WIDGET_INIT)
-	return x_create_gauge (h, h->wdata, g);
+	return 1;
     
     /* We don't want to get the focus */
     if (Msg == WIDGET_FOCUS)
@@ -1049,7 +1027,6 @@ input_destroy (WInput *in)
 	   g_free (old);
 	}
     }
-    x_destroy_cmd (in);
     g_free (in->buffer);
     free_completions (in);
     if (in->history_name)
@@ -1563,7 +1540,7 @@ input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 {
     switch (Msg){
     case WIDGET_INIT:
-	return x_create_input (h, h->wdata, in);
+	return 1;
 
     case WIDGET_KEY:
 	if (Par == XCTRL('q')){
@@ -1806,7 +1783,6 @@ listbox_select_last (WListbox *l, int set_top)
 	l->pos = l->count - 1;
 	if (set_top)
 	    l->top = l->list->prev;
-	x_listbox_select_nth (l, l->pos);
     }
 }
 
@@ -1893,14 +1869,12 @@ listbox_select_entry (WListbox *l, WLEntry *dest)
 		l->top = l->current;
 	    }
 	    l->pos = pos;
-	    x_listbox_select_nth (l, l->pos);
 	    return;
 	}
     }
     /* If we are unable to find it, set decent values */
     l->current = l->top = l->list;
     l->pos = 0;
-    x_listbox_select_nth (l, l->pos);
 }
 
 /* Selects from base the pos element */
@@ -1999,7 +1973,7 @@ listbox_callback (Dlg_head *h, WListbox *l, int msg, int par)
     
     switch (msg){
     case WIDGET_INIT:
-	return x_create_listbox (h, h->wdata, l);
+	return 1;
 	
     case WIDGET_HOTKEY:
 	if ((e = listbox_check_hotkey (l, par)) != NULL){
@@ -2102,7 +2076,6 @@ listbox_destroy (WListbox *l)
     WLEntry *n, *p = l->list;
     int i;
 
-    x_destroy_cmd (l);
     for (i = 0; i < l->count; i++){
 	n = p->next;
 	g_free (p->text);
@@ -2173,7 +2146,6 @@ listbox_append_item (WListbox *l, WLEntry *e, enum append_pos pos)
 	l->current->next->prev = e;
 	l->current->next = e;
     }
-    x_list_insert (l, l->list, e);
     l->count++;
 }
 
@@ -2246,7 +2218,7 @@ buttonbar_callback (Dlg_head *h, WButtonBar *bb, int msg, int par)
     
     switch (msg){
     case WIDGET_INIT:
-	return x_create_buttonbar (h, h->wdata, bb);
+	return 1;
 
     case WIDGET_FOCUS:
 	return 0;
@@ -2366,7 +2338,6 @@ define_label_data (Dlg_head *h, Widget *paneletc, int idx, char *text,
     set_label_text (bb, idx, text);
     bb->labels [idx-1].function = cback;
     bb->labels [idx-1].data = data;
-    x_redefine_label (bb, idx);
 }
 
 void

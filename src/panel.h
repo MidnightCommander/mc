@@ -30,8 +30,6 @@ enum panel_display_enum {
     frame_half			/* half screen frame */
 };
 
-#define is_view_special(x) (((x) == view_info) || ((x) == view_quick))
-
 #define J_LEFT 		1
 #define J_RIGHT		2
 #define J_CENTER	3
@@ -164,18 +162,6 @@ void panel_reload         (WPanel *panel);
 void panel_set_sort_order (WPanel *panel, sortfn *sort_order);
 void panel_re_sort        (WPanel *panel);
 
-void x_panel_set_size        (int index);
-void x_create_panel          (Dlg_head *h, widget_data parent, WPanel *panel);
-void x_fill_panel            (WPanel *panel);
-void x_adjust_top_file       (WPanel *panel);
-void x_filter_changed        (WPanel *panel);
-void x_add_sort_label        (WPanel *panel, int index, char *text, char *tag, void *sr);
-void x_sort_label_start      (WPanel *panel);
-void x_reset_sort_labels     (WPanel *panel);
-void x_panel_destroy         (WPanel *panel);
-void change_view             (WPanel *panel, int view_type);
-void x_panel_update_marks    (WPanel *panel);
-
 extern void paint_info_panel (WPanel *);
 extern void paint_quick_view_panel (WPanel *);
 void info_frame (WPanel *panel);
@@ -207,12 +193,7 @@ void recalculate_panel_summary (WPanel *panel);
 void file_mark (WPanel *panel, int index, int val);
 void do_file_mark (WPanel *panel, int index, int val);
 
-void    x_panel_select_item (WPanel *panel, int index, int val);
-void    x_select_item (WPanel *panel);
-void    x_unselect_item (WPanel *panel);
 sortfn *get_sort_fn (char *name);
-void    update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
-void    panel_update_marks (WPanel *panel);
 
 void directory_history_next (WPanel * panel);
 void directory_history_prev (WPanel * panel);

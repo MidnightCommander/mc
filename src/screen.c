@@ -82,9 +82,6 @@ static void paint_frame (WPanel *panel);
 static char *panel_format (WPanel *panel);
 static char *mini_status_format (WPanel *panel);
 
-#define x_adjust_top_file(p)
-#define x_reset_sort_labels(x)
-
 /* This macro extracts the number of available lines in a panel */
 #define llines(p) (p->widget.lines-3 - (show_mini_info ? 2 : 0))
 
@@ -99,11 +96,6 @@ static char *mini_status_format (WPanel *panel);
 #else
 #    define unfocus_unselect_item(x) unselect_item(x)
 #endif
-
-#define x_create_panel(x,y,z) 1;
-#define x_panel_load_index(p,x)
-#define x_panel_select_item(a,b,c)
-#define x_panel_destroy(p)
 
 static void
 set_colors (WPanel *panel)
@@ -797,7 +789,6 @@ do_select (WPanel *panel, int i)
 	panel->top_file = panel->selected - (panel->widget.lines-2)/2;
 	if (panel->top_file < 0)
 	    panel->top_file = 0;
-	x_adjust_top_file (panel);
     }
 }
 
@@ -830,6 +821,14 @@ Xtry_to_select (WPanel *panel, char *name)
     if (panel->selected >= panel->count)
         do_select (panel, panel->count-1);
     g_free (subdir);
+}
+
+void
+try_to_select (WPanel *panel, char *name)
+{
+    Xtry_to_select (panel, name);
+    select_item (panel);
+    display_mini_info (panel);
 }
 
 void
@@ -879,7 +878,6 @@ panel_destroy (WPanel *p)
     char *name = panel_save_name (p);
 
     panel_save_setup (p, name);
-    x_panel_destroy (p);
     panel_clean_dir (p);
 
 /* save and clean history */
@@ -913,7 +911,6 @@ static void
 panel_format_modified (WPanel *panel)
 {
     panel->format_modified = 1;
-    x_reset_sort_labels (panel);
 }
 
 /* Panel creation */
@@ -1699,7 +1696,6 @@ prev_page (WPanel *panel)
 	panel->selected = 0;
     if (panel->top_file < 0)
 	panel->top_file = 0;
-    x_adjust_top_file (panel);
     select_item (panel);
     paint_dir (panel);
 }
@@ -1738,7 +1734,6 @@ next_page (WPanel *panel)
 	panel->selected = panel->count - 1;
     if (panel->top_file >= panel->count)
 	panel->top_file = panel->count - 1;
-    x_adjust_top_file (panel);
     select_item (panel);
     paint_dir (panel);
 }
@@ -2256,7 +2251,6 @@ void
 file_mark (WPanel *panel, int index, int val)
 {
     panel->dir.list [index].f.marked = val;
-    x_panel_select_item (panel, index, val);
 }
 
 /*                                     */
@@ -2362,11 +2356,6 @@ panel_event (Gpm_Event *event, WPanel *panel)
 		do_enter (panel);
     }
     return MOU_NORMAL;
-}
-
-void
-panel_update_marks (WPanel *panel)
-{
 }
 
 void

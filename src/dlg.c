@@ -159,13 +159,9 @@ int default_proc (Dlg_head *h, int Msg, int Par)
 	return 0;		/* Didn't use the key */
 
     case WIDGET_FOCUS:		/* We accept FOCUSes */
-	if (h->current)
-	    x_focus_widget (h->current);
 	return 1;
 
     case WIDGET_UNFOCUS:	/* We accept loose FOCUSes */
-	if (h->current)
-	    x_unfocus_widget (h->current);
 	return 1;
 
     case WIDGET_DRAW:
@@ -531,7 +527,6 @@ void update_cursor (Dlg_head *h)
 	do {
 	    if (p->widget->options & W_WANT_CURSOR)
 		if ((*p->widget->callback)(h, p->widget, WIDGET_CURSOR, 0)){
-		    x_focus_widget (p);
 		    break;
 		}
 	    p = p->next;
@@ -791,7 +786,6 @@ void init_dlg (Dlg_head *h)
 
     h->ret_value = 0;
     h->running = 1;
-    x_init_dlg (h);
 }
 
 /* Shutdown the run_dlg */
@@ -801,15 +795,6 @@ void dlg_run_done (Dlg_head *h)
 	(*h->callback) (h, h->current->dlg_id, DLG_END);
 
     current_dlg = (Dlg_head *) h->previous_dialog;
-    if (current_dlg){
-
-	    /*
-	     * Special case for the GNOME desktop:
-	     * The desktop will not have any widgets
-	     */
-	    if (current_dlg->current)
-		    x_focus_widget (current_dlg->current);
-    }
 }
 
 void dlg_process_event (Dlg_head *h, int key, Gpm_Event *event)
@@ -881,7 +866,6 @@ destroy_dlg (Dlg_head *h)
     if (h->refresh_pushed)
 	pop_refresh ();
 
-    x_destroy_dlg_start (h);
     dlg_broadcast_msg (h, WIDGET_DESTROY, 0);
     c = h->current;
     for (i = 0; i < h->count; i++){
@@ -896,7 +880,6 @@ destroy_dlg (Dlg_head *h)
     }
     if (h->title)
 	g_free (h->title);
-    x_destroy_dlg (h);
     g_free (h);
 
     if (refresh_list)

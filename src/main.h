@@ -203,7 +203,6 @@ void exec_shell (void);
 #define PANEL_DEFS_DONE
 void directory_history_add   (WPanel *panel, char *s);
 int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
-void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
 int  midnight_callback       (struct Dlg_head *h, int id, int msg);
 #endif /* !PANEL_DEFS_DONE */
 #endif /* __PANEL_H */

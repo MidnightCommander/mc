@@ -250,11 +250,4 @@ void x_set_dialog_title (Dlg_head *h, const char *title);
 int  dlg_key_event (Dlg_head *h, int d_key);
 void update_cursor (Dlg_head *h);
 
-/* FIXME: Remove those functions */
-#define x_focus_widget(x) {}
-#define x_unfocus_widget(x) {}
-#define x_init_dlg(x)     {}
-#define x_destroy_dlg(x)  {}
-#define x_destroy_dlg_start(x) {}
-
 #endif /* MC_DLG_H */

@@ -210,7 +210,6 @@ view_destroy (WView *view)
     view_done (view);
     if (view->have_frame)
 	delete_hook (&select_file_hook, view_hook);
-    x_destroy_view (view);
 }
 
 static int
@@ -2454,7 +2453,6 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
     
     switch (msg){
     case WIDGET_INIT:
-	x_create_viewer (view);
 	if (view->have_frame)
 	    add_hook (&select_file_hook, view_hook, view);
 	else
@@ -2490,7 +2488,6 @@ view_callback (Dlg_head *h, WView *view, int msg, int par)
 	return 1;
 	
     case WIDGET_FOCUS:
-	x_focus_view (view);
 	view_labels (view);
 	return 1;
 	
@@ -2516,8 +2513,6 @@ view_new (int y, int x, int cols, int lines, int is_panel)
     view->last_byte = -1;
     view->wrap_mode = global_wrap_mode;
     
-    x_init_view (view);
-
     widget_want_cursor (view->widget, 0);
 
     return view;

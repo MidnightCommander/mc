@@ -3,8 +3,6 @@
 
 /* Features of the text mode edition */
 
-#define x_flush_events()
-
 extern void version (int verbose);
 
 #endif /* __TEXTCONF_H */

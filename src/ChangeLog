@@ -1,5 +1,16 @@
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.c: Eliminate all useless x_* functions.
+	* dlg.h: Likewise.
+	* panel.h: Likewise.
+	* textconf.h: Likewise.
+	* view.c: Likewise.
+	* view.h: Likewise.
+	* widget.c: Likewise.
+	* main.c: Remove panel_update_marks(). Move try_to_select() ...
+	* screen.c: ... here.  Eliminate x_* functions.
+	* main.h: Remove panel_update_marks().
+
 	* screen.c (panel_callback): Only change directory on
 	WIDGET_FOCUS if current_panel changes.
 

@@ -318,14 +318,6 @@ get_other_panel (void)
 	return (WPanel *) get_panel_widget (get_other_index ());
 }
 
-void
-try_to_select (WPanel *panel, char *name)
-{
-    Xtry_to_select (panel, name);
-    select_item (panel);
-    display_mini_info (panel);
-}
-
 static void
 reload_panelized (WPanel *panel)
 {
@@ -364,7 +356,7 @@ reload_panelized (WPanel *panel)
 	mc_chdir (cpanel->cwd);
 }
 
-void
+static void
 update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 {
     int free_pointer;
@@ -867,8 +859,6 @@ directory_history_add (WPanel * panel, char *s)
     panel->dir_history = panel->dir_history->next;
     panel->dir_history->text = g_strdup (s);
     strip_password (panel->dir_history->text, 1);
-
-    panel_update_marks (panel);
 }
 
 /*
@@ -977,7 +967,6 @@ directory_history_next (WPanel * panel)
 	return;
     if (_do_panel_cd (panel, panel->dir_history->next->text, cd_exact))
 	panel->dir_history = panel->dir_history->next;
-    panel_update_marks (panel);
 }
 
 void
@@ -987,7 +976,6 @@ directory_history_prev (WPanel * panel)
 	return;
     if (_do_panel_cd (panel, panel->dir_history->prev->text, cd_exact))
 	panel->dir_history = panel->dir_history->prev;
-    panel_update_marks (panel);
 }
 
 void
