@@ -1,3 +1,11 @@
+2000-09-30  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.sh.in: Use "rm -f" to delete temporary files. Use
+	"export -f" to have mc() exported.
+	* doc/mc.1.in: Changed description of the "-P" option to
+	avoid inclusion of mc.sh and mc.csh into the manual.
+	Corrected paths of mc.hlp, mc.no_proxy and ~/mc/Tree.
+
 2000-09-24  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in: Minor formatting fixes.

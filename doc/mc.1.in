@@ -49,39 +49,16 @@ Save the ftpfs dialog with the server in file.
 .TP
 .I "\-P"
 At program end, the Midnight Commander will print the last working
-directory; this, along with the shell function below, will allow you
-to browse through your directories and automatically move to the last
-directory you were in (thanks to Torben Fjerdingstad and Sergey for
-contributing this function and the code which implements this option).
-
-Please don't add verbatim copies of the function definitions below. Source the 
-files @prefix@/lib/mc/bin/mc.sh (bash and zsh users) respectively 
-@prefix@/lib/mc/bin/mc.csh (tcsh users) instead. This way you will not
-need to change your profiles if the function definitions are improved, 
-provided that you don't compile MC with a different prefix.
-.nf
-
-bash and zsh users:
-
-mc ()
-{
-        mkdir -p $HOME/.mc/tmp 2> /dev/null
-	chmod 700 $HOME/.mc/tmp
-	MC=$HOME/.mc/tmp/mc-$$
-        @prefix@/bin/mc -P "$@" > "$MC"
-        cd "`cat $MC`"
-        rm -r "$MC"
-        unset MC;
-}
-
-tcsh users:
-alias mc 'setenv MC `@prefix@/bin/mc -P \!*`; cd $MC; unsetenv MC'
-.fi
-
-I know the bash function could be shorter for zsh and bash but the
-backquotes on bash won't accept your suspension the program with
-C-z. The temporary file is created in the private directory ~/.mc/tmp 
-in order to avoid symlink attacks in a world writable /tmp.
+directory. This function should not be used directly, instead, it should
+be used from a special shell function that will automatically change the
+current directory of the shell to the last directory the Midnight
+Commander was in (thanks to Torben Fjerdingstad and Sergey for
+contributing this function and the code implementing this option).
+Source the files
+.B @prefix@/lib/mc/bin/mc.sh
+(bash and zsh users) respectively
+.B @prefix@/lib/mc/bin/mc.csh
+(tcsh users) in order to have this function defined.
 .TP
 .I "\-s"
 Turns on the slow terminal mode, in this mode the program will not
@@ -2667,7 +2644,7 @@ Virtual File System
 .\"Virtual FS"
 dialog box.  This will configure the program
 to always use the proxy host.  If this variable is set, the program
-will do two things: consult the @prefix@/lib/mc.no_proxy file for
+will do two things: consult the @prefix@/lib/mc/mc.no_proxy file for
 lines containing host names that are local (if the host name starts
 with a dot, it is assumed to be a domain) and to assume that any
 hostnames without dots in their names are directly accessible.
@@ -3109,7 +3086,7 @@ The program will retrieve all of its information relative to the
 MCHOME environment variable, if this variable is not set, then it will
 fall back to the @prefix@ directory.
 .PP
-@prefix@/lib/mc.hlp
+@prefix@/lib/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
@@ -3153,15 +3130,9 @@ This file contains the default system-wide applications menu.
 User's own application menu. If this file is present it is used
 instead of the system-wide applications menu.
 .PP
-~/.mc/tree
+~/.mc/Tree
 .IP
 The directory list for the directory tree and tree view features.
-Each line is one entry. The lines starting with a slash are full
-directory names. The lines starting with a number have that many
-characters equal to the previous directory. If you want you may create
-this file by giving the command "find / -type d -print | sort >
-~/.mc.tree". Normally there is no sense in doing it because the
-Midnight Commander automatically updates this file for you.
 .PP
 \&./.mc.menu
 .IP
