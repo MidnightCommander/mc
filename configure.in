@@ -539,7 +539,7 @@ dnl Libraries used only when building the mc binary
 AC_SUBST(MCLIBS)
 
 dnl Version for the RedHat package, without dashes
-RH_VERSION=`echo $VERSION | sed 's/-//'`
+RPM_VERSION=`echo $VERSION | sed 's/-//g'`
 AC_SUBST(RH_VERSION)
 
 if test -n "$use_smbfs"; then

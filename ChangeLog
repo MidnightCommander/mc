@@ -1,5 +1,8 @@
 2002-10-08  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Rename RH_VERSION to RPM_VERSION - not every
+	rpm-based system is Red Hat.  Replace all dashes, not just one.
+
 	* acinclude.m4 (MC_WITH_MCSLANG): Check for terminfo and use
 	termcap if terminfo is missing in the known locations.
 	* configure.in: Remove --with-termcap processing, it is now in

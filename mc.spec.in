@@ -7,13 +7,13 @@
 
 # Note that this is NOT a relocatable package
 %define ver     @VERSION@
-%define rhver   @RH_VERSION@
+%define rpmver   @RPM_VERSION@
 %define  RELEASE 1
 %define  rel     %{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
 
 Summary:   Midnight Commander visual shell
 Name:      mc
-Version:   %rhver
+Version:   %rpmver
 Release:   %rel
 Epoch:     1
 Copyright: GPL
