@@ -2426,13 +2426,13 @@ msgstr "Tamaño:     %s"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d block)"
-msgstr " (%d bloque)"
+msgid " (%ld block)"
+msgstr " (%ld bloque)"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d bloques)"
+msgid " (%ld blocks)"
+msgstr " (%ld bloques)"
 
 #: src/info.c:172
 #, c-format

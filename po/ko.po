@@ -2399,13 +2399,13 @@ msgstr "农扁:      %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d 备开)"
+msgid " (%ld block)"
+msgstr " (%ld 备开)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d 备开)"
+msgid " (%ld blocks)"
+msgstr " (%ld 备开)"
 
 #: src/info.c:179
 #, c-format

@@ -2407,13 +2407,13 @@ msgstr "大小：      "
 
 #: src/info.c:173
 #, fuzzy, c-format
-msgid " (%d block)"
-msgstr " (%d 個區塊)"
+msgid " (%ld block)"
+msgstr " (%ld 個區塊)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d 個區塊)"
+msgid " (%ld blocks)"
+msgstr " (%ld 個區塊)"
 
 #: src/info.c:179
 #, c-format

@@ -2304,12 +2304,12 @@ msgstr ""
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
+msgid " (%ld block)"
 msgstr ""
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
+msgid " (%ld blocks)"
 msgstr ""
 
 #: src/info.c:179

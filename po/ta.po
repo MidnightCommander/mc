@@ -2307,12 +2307,12 @@ msgstr ""
 
 #: src/info.c:173
 #, fuzzy, c-format
-msgid " (%d block)"
+msgid " (%ld block)"
 msgstr " ¦¾¡Ì¾¢¨Â Å¡¢¨ºÂ¡ìÌ "
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
+msgid " (%ld blocks)"
 msgstr ""
 
 #: src/info.c:179

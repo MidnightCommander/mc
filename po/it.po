@@ -2436,13 +2436,13 @@ msgstr "Dimensione: %s"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blocchi)"
+msgid " (%ld block)"
+msgstr " (%ld blocchi)"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blocchi)"
+msgid " (%ld blocks)"
+msgstr " (%ld blocchi)"
 
 #: src/info.c:172
 #, c-format

@@ -2410,13 +2410,13 @@ msgstr "サイズ:    %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%dブロック)"
+msgid " (%ld block)"
+msgstr " (%ldブロック)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%dブロック)"
+msgid " (%ld blocks)"
+msgstr " (%ldブロック)"
 
 #: src/info.c:179
 #, c-format

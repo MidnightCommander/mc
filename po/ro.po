@@ -2403,13 +2403,13 @@ msgstr "Mãrime:    %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blocuri)"
+msgid " (%ld block)"
+msgstr " (%ld blocuri)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blocuri)"
+msgid " (%ld blocks)"
+msgstr " (%ld blocuri)"
 
 #: src/info.c:179
 #, c-format

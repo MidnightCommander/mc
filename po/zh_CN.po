@@ -2396,13 +2396,13 @@ msgstr "大小：     %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d 个块)"
+msgid " (%ld block)"
+msgstr " (%ld 个块)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d 个块)"
+msgid " (%ld blocks)"
+msgstr " (%ld 个块)"
 
 #: src/info.c:179
 #, c-format

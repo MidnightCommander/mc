@@ -1,3 +1,43 @@
+2004-09-04  Jakub Jelinek  <jakub@redhat.com>
+
+	* az.po: don't truncate block counts to 32 bits 
+	on 64-bit platforms
+	* be.po: Likewise.
+	* bg.po: Likewise.
+	* ca.po: Likewise.
+	* cs.po: Likewise.
+	* da.po: Likewise.
+	* de.po: Likewise.
+	* el.po: Likewise.
+	* es.po: Likewise.
+	* eu.po: Likewise.
+	* fi.po: Likewise.
+	* fr.po: Likewise.
+	* hu.po: Likewise.
+	* it.po: Likewise.
+	* ja.po: Likewise.
+	* ko.po: Likewise.
+	* lt.po: Likewise.
+	* lv.po: Likewise.
+	* mn.po: Likewise.
+	* nl.po: Likewise.
+	* no.po: Likewise.
+	* pl.po: Likewise.
+	* pt.po: Likewise.
+	* pt_BR.po:  Likewise.
+	* ro.po: Likewise.
+	* ru.po: Likewise.
+	* sk.po: Likewise.
+	* sl.po: Likewise.
+	* sr.po: Likewise.
+	* sv.po: Likewise.
+	* ta.po: Likewise.
+	* tr.po: Likewise.
+	* uk.po: Likewise.
+	* wa.po: Likewise.
+	* zh_CN.po: Likewise.
+	* zh_TW.po: Likewise.
+
 2004-03-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* uk.po: Updated Ukrainian translation.

@@ -2408,13 +2408,13 @@ msgstr "Größe:     %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d Block)"
+msgid " (%ld block)"
+msgstr " (%ld Block)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr "(%d Blöcke)"
+msgid " (%ld blocks)"
+msgstr "(%ld Blöcke)"
 
 #: src/info.c:179
 #, c-format

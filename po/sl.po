@@ -2405,13 +2405,13 @@ msgstr "Velikost:  %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blokov)"
+msgid " (%ld block)"
+msgstr " (%ld blokov)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blokov)"
+msgid " (%ld blocks)"
+msgstr " (%ld blokov)"
 
 #: src/info.c:179
 #, c-format

@@ -2434,13 +2434,13 @@ msgstr "Размер:    %s"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d block)"
-msgstr " (%d блок)"
+msgid " (%ld block)"
+msgstr " (%ld блок)"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d блоков)"
+msgid " (%ld blocks)"
+msgstr " (%ld блоков)"
 
 #: src/info.c:172
 #, c-format

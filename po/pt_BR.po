@@ -2429,13 +2429,13 @@ msgstr "Tamanho:   "
 
 #: src/info.c:173
 #, fuzzy, c-format
-msgid " (%d block)"
-msgstr " (%d blocos)"
+msgid " (%ld block)"
+msgstr " (%ld blocos)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blocos)"
+msgid " (%ld blocks)"
+msgstr " (%ld blocos)"
 
 #: src/info.c:179
 #, c-format

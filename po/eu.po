@@ -2415,13 +2415,13 @@ msgstr "Tamaina:  %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d bloke)"
+msgid " (%ld block)"
+msgstr " (%ld bloke)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr "(%d bloke)"
+msgid " (%ld blocks)"
+msgstr "(%ld bloke)"
 
 #: src/info.c:179
 #, c-format

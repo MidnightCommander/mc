@@ -2406,13 +2406,13 @@ msgstr "Grootte:     %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blokken)"
+msgid " (%ld block)"
+msgstr " (%ld blokken)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr "(%d blokken)"
+msgid " (%ld blocks)"
+msgstr "(%ld blokken)"
 
 #: src/info.c:179
 #, c-format

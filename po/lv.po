@@ -2411,13 +2411,13 @@ msgstr "Lielums:      %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d bloks)"
+msgid " (%ld block)"
+msgstr " (%ld bloks)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d bloki)"
+msgid " (%ld blocks)"
+msgstr " (%ld bloki)"
 
 #: src/info.c:179
 #, c-format

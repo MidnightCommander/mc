@@ -2409,13 +2409,13 @@ msgstr "Boyut:      %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blok)"
+msgid " (%ld block)"
+msgstr " (%ld blok)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blok)"
+msgid " (%ld blocks)"
+msgstr " (%ld blok)"
 
 #: src/info.c:179
 #, c-format

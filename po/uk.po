@@ -2461,13 +2461,13 @@ msgstr "Розм╕р:    %s"
 
 #: src/info.c:174
 #, c-format
-msgid " (%d block)"
-msgstr " (%d блок)"
+msgid " (%ld block)"
+msgstr " (%ld блок)"
 
 #: src/info.c:174
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d блок╕в)"
+msgid " (%ld blocks)"
+msgstr " (%ld блок╕в)"
 
 #: src/info.c:180
 #, c-format

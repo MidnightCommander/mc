@@ -2517,13 +2517,13 @@ msgstr "Méret:        %s"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blokk)"
+msgid " (%ld block)"
+msgstr " (%ld blokk)"
 
 #: src/info.c:166
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blokk)"
+msgid " (%ld blocks)"
+msgstr " (%ld blokk)"
 
 #: src/info.c:172
 #, c-format

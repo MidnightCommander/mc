@@ -2434,13 +2434,13 @@ msgstr "Storlek:   %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d block)"
+msgid " (%ld block)"
+msgstr " (%ld block)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d block)"
+msgid " (%ld blocks)"
+msgstr " (%ld block)"
 
 #: src/info.c:179
 #, c-format

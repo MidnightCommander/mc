@@ -2416,13 +2416,13 @@ msgstr "Mida:      %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d bloc)"
+msgid " (%ld block)"
+msgstr " (%ld bloc)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blocs)"
+msgid " (%ld blocks)"
+msgstr " (%ld blocs)"
 
 #: src/info.c:179
 #, c-format

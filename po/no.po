@@ -2405,13 +2405,13 @@ msgstr "Størrelse: %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d blokk)"
+msgid " (%ld block)"
+msgstr " (%ld blokk)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d blokker)"
+msgid " (%ld blocks)"
+msgstr " (%ld blokker)"
 
 #: src/info.c:179
 #, c-format

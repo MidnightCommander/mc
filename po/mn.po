@@ -2408,13 +2408,13 @@ msgstr "Хэмжээ:    %s"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d block)"
-msgstr " (%d блок)"
+msgid " (%ld block)"
+msgstr " (%ld блок)"
 
 #: src/info.c:173
 #, c-format
-msgid " (%d blocks)"
-msgstr " (%d блокууд)"
+msgid " (%ld blocks)"
+msgstr " (%ld блокууд)"
 
 #: src/info.c:179
 #, c-format
