@@ -22,6 +22,11 @@
 #include <sys/types.h>
 #include <stdio.h>
 
+/* This header needs to be included before sys/mount.h on *BSD */
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+
 #if defined (MOUNTED_GETFSSTAT)	/* __alpha running OSF_1 */
 #include <sys/mount.h>
 #include <sys/fs_types.h>
