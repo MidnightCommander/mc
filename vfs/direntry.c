@@ -229,7 +229,6 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
 {
     unsigned int pseg;
     vfs_s_entry *ent = NULL;
-    int found;
     char p[MC_MAXPATHLEN] = "";
 
     while (1){
@@ -248,7 +247,6 @@ vfs_s_find_entry_tree (vfs *me, vfs_s_inode *root, char *path, int follow, int f
 	strncpy (p + (t = strlen (p)), path, pseg);
 	p[t + pseg] = '\0';
 
-	found = 0;
 	for (ent = root->subdir; ent != NULL; ent = ent->next)
 	    if (strlen (ent->name) == pseg && (!strncmp (ent->name, path, pseg)))
 		/* FOUND! */
@@ -376,7 +374,9 @@ vfs_s_resolve_symlink (vfs *me, vfs_s_entry *entry, char *path, int follow)
         if (*linkname == PATH_SEP)
 	    return (MEDATA->find_entry) (me, entry->dir->super->root, linkname, follow - 1, 0);
 	else { /* FIXME: this does not work */ 
-	    sprintf(buf, "%s/%s", vfs_s_fullpath(me, entry->dir), linkname);
+	    char *fullpath = vfs_s_fullpath(me, entry->dir);
+	    sprintf(buf, "%s/%s", fullpath, linkname);
+	    g_free (fullpath);
 	    return (MEDATA->find_entry) (me, entry->dir->super->root, buf, follow - 1, 0);
 	}
     }
@@ -411,10 +411,6 @@ vfs_s_new_super (vfs *me)
     vfs_s_super *super;
 
     super = g_new0 (struct vfs_s_super, 1);
-    super->root = NULL;
-    super->name = NULL;
-    super->fd_usage = 0;
-    super->ino_usage = 0;
     super->me = me;
     return super;
 }
@@ -557,7 +553,7 @@ vfs_s_fullpath (vfs *me, vfs_s_inode *ino)
 	ERRNOR (EAGAIN, NULL);
 
     if ((!ino->ent->dir) || (!ino->ent->dir->ent)) /* It must be directory */
-        return g_strconcat( ino->ent->name, NULL );
+        return g_strdup (ino->ent->name);
 
     return  g_strconcat (ino->ent->dir->ent->name, PATH_SEP_STR, 
 			    ino->ent->name, NULL);
@@ -917,8 +913,10 @@ vfs_s_close (void *fh)
 	char *s = vfs_s_fullpath (me, FH->ino);
 	if (!s)
 	    res = -1;
-	else
+ 	else {
 	    res = MEDATA->file_store (me, FH_SUPER, s, FH->ino->localname);
+	    g_free (s);
+	}
 	vfs_s_invalidate (me, FH_SUPER);
     }
     if (FH->handle)

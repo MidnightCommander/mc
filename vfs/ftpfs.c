@@ -81,6 +81,7 @@ What to do with this?
 #include "vfs.h"
 #include "tcputil.h"
 #include "../src/dialog.h"
+#include "../src/setup.h"	/* for load_anon_passwd */
 #include "container.h"
 #include "ftpfs.h"
 #ifndef MAXHOSTNAMELEN
@@ -1368,6 +1369,7 @@ linear_start(vfs *me, vfs_s_fh *fh, int offset)
     if (!name)
 	return 0;
     FH_SOCK = open_data_connection(me, FH_SUPER, "RETR", name, TYPE_BINARY, offset);
+    g_free (name);
     if (FH_SOCK == -1)
 	ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;

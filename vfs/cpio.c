@@ -31,7 +31,7 @@
 /* #include "utilvfs.h" */
 
 #include "../src/dialog.h"
-//#include "cpio.h"
+/* #include "cpio.h" */
 #include "names.h"
 
 enum {
@@ -574,10 +574,11 @@ static int cpio_read(void *fh, char *buffer, int count)
     return count;
 }
 
-static void cpio_ungetlocalcopy(vfs *me, char *path, char *local, int has_changed)
+static int cpio_ungetlocalcopy(vfs *me, char *path, char *local, int has_changed)
 {
 /* We do just nothing. (We are read only and do not need to free local,
    since it will be freed when tar archive will be freed */
+    return 0;
 }
 
 static int cpio_fh_open(vfs *me, vfs_s_fh *fh, int flags, int mode)

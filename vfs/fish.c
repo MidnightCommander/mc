@@ -514,7 +514,7 @@ static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
     name = vfs_s_fullpath (me, fh->ino);
     if (!name)
 	return 0;
-    if (command(me, FH_SUPER, WANT_STRING, 
+    offset = command(me, FH_SUPER, WANT_STRING,
 		"#RETR /%s\n"
 		"ls -l \"/%s\" | (\n"
 		  "read var1 var2 var3 var4 var5 var6\n"
@@ -523,8 +523,9 @@ static int linear_start(vfs *me, vfs_s_fh *fh, int offset)
 		"echo '### 100'\n"
 		"cat \"/%s\"\n"
 		"echo '### 200'\n", 
-		name, name, name )
-	!= PRELIM) ERRNOR (E_REMOTE, 0);
+		name, name, name );
+    g_free (name);
+    if (offset != PRELIM) ERRNOR (E_REMOTE, 0);
     fh->linear = LS_LINEAR_OPEN;
     fh->u.fish.got = 0;
     if (sscanf( reply_str, "%d", &fh->u.fish.total )!=1)

@@ -1093,7 +1093,7 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
  fail:
     if (fdout) close(fdout);
     if (fdin) mc_close (fdin);
-    free (tmp);
+    g_free (tmp);
     return NULL;
 }
 
