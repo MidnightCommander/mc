@@ -14,3 +14,4 @@ acinclude.m4
 COPYING
 mkinstalldirs
 install-sh
+mc.spec
