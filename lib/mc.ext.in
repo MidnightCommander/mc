@@ -499,6 +499,11 @@ regex/\.deb$
 	Open=%cd %p#deb
 	View=%view{ascii} dpkg-deb -c %f
 
+# ISO9660
+regex/\.iso$
+	Open=%cd %p#iso9660
+	View=%view{ascii} isoinfo -l -i %f
+
 
 ### Default ###
 

@@ -1,3 +1,8 @@
+2003-04-29  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Add vfs/extfs/iso9660 to AC_CONFIG_FILES.
+	* lib/mc.ext.in: Add support for ISO images.
+
 2003-03-31  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* syntax/Syntax: Highlight *.mc as a makefile.
