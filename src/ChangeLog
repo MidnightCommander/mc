@@ -1,3 +1,7 @@
+2004-09-10  Jakub Jelinek  <jakub@redhat.com>
+
+	* cons.saver.c: Partly rewritten cons.saver.c.
+
 2004-09-28  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* util.c (convert_controls): Fix possible buffer overflow
@@ -224,7 +228,7 @@
 
 	From Petr Hadraba <hadrabap@volny.cz>
 
-2004-09-10  Jakub Jelinek  <jakub@redhat.com>
+
 
 	* view.c (get_byte): Fix avoid dying if file is too large 
 	to fit into memory.

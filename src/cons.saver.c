@@ -1,9 +1,13 @@
-#ifdef __linux__
+/* This program should be setuid vcsa and /dev/vcsa* should be
+   owned by the same user too.
+   Partly rewritten by Jakub Jelinek <jakub@redhat.com>.  */
 
 /* General purpose Linux console screen save/restore server
    Copyright (C) 1994 Janne Kukonlehto <jtklehto@stekt.oulu.fi>
    Original idea from Unix Interactive Tools version 3.2b (tty.c)
    This code requires root privileges.
+   You may want to make the cons.saver setuid root.
+   The code should be safe even if it is setuid but who knows?
    
    This program is free software; you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -19,300 +23,201 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* cons.saver is run by MC to save and restore screen contents on Linux
-   virtual console.  This is done by using file /dev/vcsaN or /dev/vcc/aN,
-   where N is the number of the virtual console.
-   In a properly set up system, /dev/vcsaN should become accessible
-   by the user when the user logs in on the corresponding console
-   /dev/ttyN or /dev/vc/N.  In this case, cons.saver doesn't need to be
-   suid root.  However, if /dev/vcsaN is not accessible by the user,
-   cons.saver can be made setuid root - this program is designed to be
-   safe even in this case.  */
+/* This code does _not_ need to be setuid root. However, it needs
+   read/write access to /dev/vcsa* (which is priviledged
+   operation). You should create user vcsa, make cons.saver setuid
+   user vcsa, and make all vcsa's owned by user vcsa.
 
-#include <config.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/ioctl.h>
-#include <fcntl.h>
-#include <errno.h>
-#ifdef HAVE_UNISTD_H
-#    include <unistd.h>
+   Seeing other peoples consoles is bad thing, but believe me, full
+   root is even worse. */
+
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
 #endif
+#include <fcntl.h>
+#include <unistd.h>
 #include <termios.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>	/* For isdigit() */
 #include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/ioctl.h>
 
 #define LINUX_CONS_SAVER_C
 #include "cons.saver.h"
 
-#define cmd_input 0
-#define cmd_output 1
-
-static int console_minor = 0;
-static char *buffer = NULL;
-static int buffer_size = 0;
-static int columns, rows;
-static int vcs_fd;
-
-
-/*
- * Get window size for the given terminal.
- * Return 0 for success, -1 otherwise.
- */
-static int tty_getsize (int console_fd)
+void
+send_contents (char *buffer, unsigned int columns, unsigned int rows)
 {
-    struct winsize winsz;
+  unsigned char begin_line = 0, end_line = 0;
+  unsigned int lastline, index, x;
+  unsigned char message, outbuf[1024], *p;
+  unsigned short bytes;
 
-    winsz.ws_col = winsz.ws_row = 0;
-    ioctl (console_fd, TIOCGWINSZ, &winsz);
-    if (winsz.ws_col && winsz.ws_row) {
-	columns = winsz.ws_col;
-	rows    = winsz.ws_row;
-	return 0;
-    }
+  index = 2 * rows * columns;
+  for (lastline = rows; lastline > 0; lastline--)
+    for (x = 0; x < columns; x++)
+      {
+	index -= 2;
+	if (buffer [index] != ' ')
+	  goto out;
+      }
+out:
 
-    return -1;
-}
+  message = CONSOLE_CONTENTS;
+  write (1, &message, 1);
 
-/*
- * Do various checks to make sure that the supplied filename is
- * a suitable tty device.  If check_console is set, check that we
- * are dealing with a Linux virtual console.
- * Return 0 for success, -1 otherwise.
- */
-static int check_file (char *filename, int check_console)
-{
-    int fd;
-    struct stat stat_buf;
+  read (0, &begin_line, 1);
+  read (0, &end_line, 1);
+  if (begin_line > lastline)
+    begin_line = lastline;
+  if (end_line > lastline)
+    end_line = lastline;
 
-    /* Avoiding race conditions: use of fstat makes sure that
-       both 'open' and 'stat' operate on the same file */
+  index = (end_line - begin_line) * columns;
+  bytes = index;
+  if (index != bytes)
+    bytes = 0;
+  write (1, &bytes, 2);
+  if (! bytes)
+    return;
 
-    fd = open (filename, O_RDWR);
-    if (fd == -1)
-	return -1;
-    
-    do {
-	if (fstat (fd, &stat_buf) == -1)
-	    break;
-
-	/* Must be character device */
-	if (!S_ISCHR (stat_buf.st_mode)){
-	    break;
-	}
-
-	if (check_console){
-	    /* Major number must be 4 */
-	    if ((stat_buf.st_rdev & 0xff00) != 0x0400){
-		break;
-	    }
-
-	    /* Minor number must be between 1 and 63 */
-	    console_minor = (int) (stat_buf.st_rdev & 0x00ff);
-	    if (console_minor < 1 || console_minor > 63){
-		break;
-	    }
-
-	    /* Must be owned by the user */
-	    if (stat_buf.st_uid != getuid ()){
-		break;
-	    }
-	}
-	/* Everything seems to be okay */
-	return fd;
-    } while (0);
-
-    close (fd);
-    return -1;
-}
-
-/*
- * Check if the supplied filename is a Linux virtual console.
- * Return 0 if successful, -1 otherwise.
- * Since the tty name is supplied by the user and cons.saver can be
- * a setuid program, many checks have to be done to prevent possible
- * security compromise.
- */
-static int detect_console (char *tty_name)
-{
-    char console_name [16];
-    static char vcs_name [16];
-    int console_fd;
-
-    /* Must be console */
-    console_fd = check_file (tty_name, 1);
-    if (console_fd == -1)
-	return -1;
-
-    if (tty_getsize (console_fd) == -1) {
-	close (console_fd);
-	return -1;
-    }
-
-    close (console_fd);
-
-    /*
-     * Only allow /dev/ttyMINOR and /dev/vc/MINOR where MINOR is the minor
-     * device number of the console, set in check_file()
-     */
-    switch (tty_name[5])
+  p = outbuf;
+  for (index = 2 * begin_line * columns;
+       index < 2 * end_line * columns;
+       index += 2)
     {
-	case 'v':
-	    snprintf (console_name, sizeof (console_name), "/dev/vc/%d",
-		      console_minor);
-	    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
-		return -1;
-	    break;
-	case 't':
-	    snprintf (console_name, sizeof (console_name), "/dev/tty%d",
-		      console_minor);
-	    if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
-		return -1;
-	    break;
-	default:
-	    return -1;
+      *p++ = buffer [index];
+      if (p == outbuf + sizeof (outbuf))
+	{
+	  write (1, outbuf, sizeof (outbuf));
+	  p = outbuf;
+	}
     }
 
-    snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%d", console_minor);
-    vcs_fd = check_file (vcs_name, 0);
+  if (p != outbuf)
+    write (1, outbuf, p - outbuf);
+}
 
-    /* Try devfs name */
-    if (vcs_fd == -1) {
-	snprintf (vcs_name, sizeof (vcs_name), "/dev/vcc/a%d", console_minor);
-	vcs_fd = check_file (vcs_name, 0);
+void __attribute__ ((noreturn))
+die (void)
+{
+  unsigned char zero = 0;
+  write (1, &zero, 1);
+  exit (3);
+}
+
+int
+main (int argc, char **argv)
+{
+  unsigned char action = 0, console_flag = 3;
+  int console_fd, vcsa_fd, console_minor, buffer_size;
+  struct stat st;
+  uid_t uid, euid;
+  char *buffer, *tty_name, console_name [16], vcsa_name [16], *p, *q;
+  struct winsize winsz;
+
+  close (2);
+
+  if (argc != 2)
+    die ();
+
+  tty_name = argv [1];
+  if (strnlen (tty_name, 15) == 15
+      || strncmp (tty_name, "/dev/", 5))
+    die ();
+
+  setsid ();
+  uid = getuid ();
+  euid = geteuid ();
+
+  if (seteuid (uid) < 0)
+    die ();
+  console_fd = open (tty_name, O_RDONLY);
+  if (console_fd < 0)
+    die ();
+  if (fstat (console_fd, &st) < 0 || ! S_ISCHR (st.st_mode))
+    die ();
+  if ((st.st_rdev & 0xff00) != 0x0400)
+    die ();
+  console_minor = (int) (st.st_rdev & 0x00ff);
+  if (console_minor < 1 || console_minor > 63)
+    die ();
+  if (st.st_uid != uid)
+    die ();
+
+  switch (tty_name [5])
+    {
+    /* devfs */
+    case 'v': p = "/dev/vc/%d"; q = "/dev/vcc/a%d"; break;
+    /* /dev/ttyN */
+    case 't': p = "/dev/tty%d"; q = "/dev/vcsa%d"; break;
+    default: die (); break;
     }
 
-    if (vcs_fd == -1)
-	return -1;
+  snprintf (console_name, sizeof (console_name), p, console_minor);
+  if (strncmp (console_name, tty_name, sizeof (console_name)) != 0)
+    die ();
 
-    return 0;
-}
+  if (seteuid (euid) < 0)
+    die ();
 
-static void save_console (void)
-{
-    lseek (vcs_fd, 0, SEEK_SET);
-    read (vcs_fd, buffer, buffer_size);
-}
+  snprintf (vcsa_name, sizeof (vcsa_name), q, console_minor);
+  vcsa_fd = open (vcsa_name, O_RDWR);
+  if (vcsa_fd < 0)
+    die ();
+  if (fstat (vcsa_fd, &st) < 0 || ! S_ISCHR (st.st_mode))
+    die ();
 
-static void restore_console (void)
-{
-    lseek (vcs_fd, 0, SEEK_SET);
-    write (vcs_fd, buffer, buffer_size);
-}
+  if (seteuid (uid) < 0)
+    die ();
 
-static void send_contents (void)
-{
-    unsigned char begin_line=0, end_line=0;
-    int index;
-    unsigned char message;
-    unsigned short bytes;
-    const int bytes_per_char = 2;
+  winsz.ws_col = winsz.ws_row = 0;
+  if (ioctl (console_fd, TIOCGWINSZ, &winsz) < 0
+      || winsz.ws_col <= 0 || winsz.ws_row <= 0
+      || winsz.ws_col >= 256 || winsz.ws_row >= 256)
+    die ();
 
-    /* Inform the invoker that we can handle this command */
-    message = CONSOLE_CONTENTS;
-    write (cmd_output, &message, 1);
+  buffer_size = 4 + 2 * winsz.ws_col * winsz.ws_row;
+  buffer = calloc (buffer_size, 1);
+  if (buffer == NULL)
+    die ();
 
-    /* Read the range of lines wanted */
-    read (cmd_input, &begin_line, 1);
-    read (cmd_input, &end_line, 1);
-    if (begin_line > rows)
-	begin_line = rows;
-    if (end_line > rows)
-	end_line = rows;
+  write (1, &console_flag, 1);
 
-    /* Tell the invoker how many bytes it will be */
-    bytes = (end_line - begin_line) * columns;
-    write (cmd_output, &bytes, 2);
-
-    /* Send the contents */
-    for (index = (2 + begin_line * columns) * bytes_per_char;
-	 index < (2 + end_line * columns) * bytes_per_char;
-	 index += bytes_per_char)
-	write (cmd_output, buffer + index, 1);
-
-    /* All done */
-}
-
-int main (int argc, char **argv)
-{
-    unsigned char action = 0;
-    int stderr_fd;
-
-    /* 0 - not a console, 3 - supported Linux console */
-    signed char console_flag = 0;
-
-    /*
-     * Make sure stderr points to a valid place
-     */
-    close (2);
-    stderr_fd = open ("/dev/tty", O_RDWR);
-
-    /* This may well happen if program is running non-root */
-    if (stderr_fd == -1)
-	stderr_fd = open ("/dev/null", O_RDWR);
-
-    if (stderr_fd == -1)
-	exit (1);
-    
-    if (stderr_fd != 2)
-	while (dup2 (stderr_fd, 2) == -1 && errno == EINTR)
-	    ;
-    
-    if (argc != 2){
-	/* Wrong number of arguments */
-
-	write (cmd_output, &console_flag, 1);
-	return 3;
-    }
-
-    /* Lose the control terminal */
-    setsid ();
-    
-    /* Check that the argument is a Linux console */
-    if (detect_console (argv [1]) == -1) {
-	/* Not a console -> no need for privileges */
-	setuid (getuid ());
-    } else {
-	console_flag = 3;
-	/* Allocate buffer for screen image */
-	buffer_size = 4 + 2 * columns * rows;
-	buffer = (char*) malloc (buffer_size);
-    }
-
-    /* Inform the invoker about the result of the tests */
-    write (cmd_output, &console_flag, 1);
-
-    /* Read commands from the invoker */
-    while (console_flag && read (cmd_input, &action, 1)){
-	/* Handle command */
-	switch (action){
+  while (console_flag && read (0, &action, 1) == 1)
+    {
+      switch (action)
+	{
 	case CONSOLE_DONE:
-	    console_flag = 0;
-	    continue; /* Break while loop instead of switch clause */
+	  console_flag = 0;
+	  continue;
 	case CONSOLE_SAVE:
-	    save_console ();
-	    break;
+	  if (seteuid (euid) < 0
+	      || lseek (vcsa_fd, 0, 0) != 0
+	      || fstat (console_fd, &st) < 0 || st.st_uid != uid
+	      || read (vcsa_fd, buffer, buffer_size) != buffer_size
+	      || fstat (console_fd, &st) < 0 || st.st_uid != uid)
+	    memset (buffer, 0, buffer_size);
+	  if (seteuid (uid) < 0)
+	    die ();
+	  break;
 	case CONSOLE_RESTORE:
-	    restore_console ();
-	    break;
+	  if (seteuid (euid) >= 0
+	      && lseek (vcsa_fd, 0, 0) == 0
+	      && fstat (console_fd, &st) >= 0 && st.st_uid == uid)
+	    write (vcsa_fd, buffer, buffer_size);
+	  if (seteuid (uid) < 0)
+	    die ();
+	  break;
 	case CONSOLE_CONTENTS:
-	    send_contents ();
-	    break;
-	} /* switch (action) */
-		
-	/* Inform the invoker that command has been handled */
-	write (cmd_output, &console_flag, 1);
-    } /* while (read ...) */
+	  send_contents (buffer + 4, winsz.ws_col, winsz.ws_row);
+	  break;
+	}
 
-    if (buffer)
-	free (buffer);
-    return 0;   
+      write (1, &console_flag, 1);
+    }
+
+  exit (0);
 }
-
-#else
-
- #error "The Linux console screen saver works only on Linux"
-
-#endif /* __linux__ */
