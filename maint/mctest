@@ -36,7 +36,7 @@ make distcheck with_screen=mcslang enable_charset=yes with_samba=yes \
 echo "Checking the configuration with minimal code coverage"
 make distcheck enable_largefile=no enable_nls=no with_vfs=no \
      with_gpm_mouse=no with_subshell=no with_edit=no with_ext2undel=no \
-     with_screen=ncurses >test3.out 2>test3.err
+     with_screen=ncurses with_x=no >test3.out 2>test3.err
 
 echo "Checking the configuration with minimal code coverage + editor"
 make distcheck enable_largefile=no enable_nls=no with_vfs=no \
