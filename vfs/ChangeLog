@@ -1,3 +1,7 @@
+2002-12-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/rpm: Use --nosignature only if rpm supports this.
+
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c (read_archive): Free archive if the "list" command

@@ -16,7 +16,11 @@ unset LC_ALL
 LC_TIME=C
 export LC_TIME
 
-RPM="rpm --nosignature"
+if rpm --nosignature --version >/dev/null 2>&1; then
+  RPM="rpm --nosignature"
+else
+  RPM="rpm"
+fi
 RPM2CPIO="rpm2cpio"
 
 mcrpmfs_list ()
