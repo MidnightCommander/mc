@@ -1,13 +1,13 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
+# Brazilian Portuguese translations of mc
+# Copyright (C) 1999 Free Software Foundation, Inc.
 # Sandro Henrique <sandro@conectiva.com.br>, 1999.
 #
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc-4.5.36\n"
-"POT-Creation-Date: 1999-09-23 13:09-0300\n"
-"PO-Revision-Date: 1999-05-09 11:04-0400\n"
+"POT-Creation-Date: 1999-11-01 10:28-0200\n"
+"PO-Revision-Date: 1999-11-01 10:34-02:00\n"
 "Last-Translator: Sandro Henrique <sandro@conectiva.com.br>\n"
 "Language-Team: pt_BR <ldp-br@bazar.conectiva.com.br>\n"
 "MIME-Version: 1.0\n"
@@ -79,21 +79,18 @@ msgstr ""
 
 # gnome/gpopup.c:260 gnome/gpopup.c:261
 #: gnome/gaction.c:134 gnome/gaction.c:150
-#, fuzzy
 msgid "open"
-msgstr "Abrir"
+msgstr "abrir"
 
 # gnome/gpopup.c:265 src/screen.c:2293 src/screen.c:2323 src/view.c:1991
 #: gnome/gaction.c:185 gnome/gaction.c:198
-#, fuzzy
 msgid "edit"
-msgstr "Editar"
+msgstr "editar"
 
 # gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
 #: gnome/gaction.c:331
-#, fuzzy
 msgid "view"
-msgstr "Visualizar"
+msgstr "visualizar"
 
 # gnome/gcmd.c:56
 #: gnome/gcmd.c:49
@@ -102,9 +99,8 @@ msgstr " Não há nenhum outro painel para comparar o conteúdo "
 
 # gnome/gcmd.c:127 src/main.c:844 src/screen.c:2053
 #: gnome/gcmd.c:100
-#, fuzzy
 msgid "The Midnight Commander Team"
-msgstr " O Midnight Commander"
+msgstr "O Time do Comandante da Meia Noite"
 
 #: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
@@ -133,9 +129,8 @@ msgstr "Não diferenciar MAIÚSCULAS de minúsculas."
 
 # gnome/gscreen.c:1682
 #: gnome/gcmd.c:298
-#, fuzzy
 msgid "Sort files by "
-msgstr "Arquivos de Fontes"
+msgstr "Seleciona arquivos por "
 
 # gnome/gcmd.c:281 src/chmod.c:150 src/screen.c:425
 #: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
@@ -245,16 +240,16 @@ msgstr ""
 
 # gnome/gcmd.c:673
 #: gnome/gcmd.c:702
-#, fuzzy
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
 "For example:\n"
 "*.png will show just png images"
 msgstr ""
-"Informe um filtro aqui\n"
+"Informe um filtro para arquivos no painel\n"
+"\n"
 "Por exemplo:\n"
-"*.gif irá mostrar apenas imagens GIF"
+"*.png irá mostrar apenas imagens PNG"
 
 # gnome/gcmd.c:675
 #: gnome/gcmd.c:704
@@ -277,28 +272,26 @@ msgstr ""
 
 # gnome/glayout.c:391
 #: gnome/gcmd.c:861
-#, fuzzy
 msgid "Select File"
-msgstr "Selecionar _Arquivos"
+msgstr "Seleciona Arquivo"
 
 # gnome/gcmd.c:673
 #: gnome/gcmd.c:869
-#, fuzzy
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
 "For example:\n"
 "*.png will select all png images"
 msgstr ""
-"Informe um filtro aqui\n"
+"Informe um filtro aqui para selecionar arquivos no painel\n"
+"\n"
 "Por exemplo:\n"
-"*.gif irá mostrar apenas imagens GIF"
+"*.png irá mostrar apenas imagens PNG"
 
 # gnome/gcmd.c:675
 #: gnome/gcmd.c:871
-#, fuzzy
 msgid "Enter a regular expression here to select files in the panel view with."
-msgstr "Informe uma expressão regular para filtro de arquivos no painel"
+msgstr "Informe aqui uma expressão regular para selecionar arquivos no painel"
 
 # src/cmd.c:545 src/cmd.c:596
 #: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
@@ -315,9 +308,8 @@ msgstr ""
 
 # src/dir.c:65
 #: gnome/gcustom-layout.c:34
-#, fuzzy
 msgid "Access Time"
-msgstr "&Hora de acesso"
+msgstr "Hora de acesso"
 
 #: gnome/gcustom-layout.c:35
 msgid "Creation Time"
@@ -333,9 +325,8 @@ msgstr "Grupo"
 
 # gnome/gprop.c:280 gnome/gprop.c:405 src/screen.c:439
 #: gnome/gcustom-layout.c:37
-#, fuzzy
 msgid "Group ID"
-msgstr "Grupo"
+msgstr "Identificação do Grupo"
 
 #: gnome/gcustom-layout.c:38
 msgid "Inode Number"
@@ -348,9 +339,8 @@ msgstr "Modo"
 
 # src/dir.c:64
 #: gnome/gcustom-layout.c:40
-#, fuzzy
 msgid "Modification Time"
-msgstr "&Hora de modificação"
+msgstr "Hora de modificação"
 
 #: gnome/gcustom-layout.c:42
 msgid "Number of Hard Links"
@@ -374,13 +364,11 @@ msgstr ""
 
 # src/dir.c:71
 #: gnome/gcustom-layout.c:47
-#, fuzzy
 msgid "Type"
-msgstr "&Tipo"
+msgstr "Tipo"
 
 # gnome/gprop.c:279
 #: gnome/gcustom-layout.c:48
-#, fuzzy
 msgid "User ID"
 msgstr "Usuário"
 
@@ -394,9 +382,8 @@ msgstr ""
 
 # gnome/glayout.c:49
 #: gnome/gcustom-layout.c:304
-#, fuzzy
 msgid "Custom View"
-msgstr "Visão _Personalizada"
+msgstr "Visão Personalizada"
 
 # gnome/gdesktop.c:420 gnome/gdesktop.c:2072
 #: gnome/gdesktop.c:521 gnome/gmount.c:389
@@ -410,21 +397,21 @@ msgid "Could not open %s; will not have desktop icons"
 msgstr "Impossível abrir %s; não serão criados ícones na área de trabalho"
 
 # gnome/gdesktop.c:1013
-#: gnome/gdesktop.c:1176
+#: gnome/gdesktop.c:1181
 msgid "While running the mount/umount command"
 msgstr "Ao executar o comando montar/desmontar"
 
 # gnome/gdesktop.c:1082
-#: gnome/gdesktop.c:1245
+#: gnome/gdesktop.c:1250
 msgid "While running the eject command"
 msgstr "Ao executar o comando ejetar"
 
 # gnome/gdesktop.c:1135 gnome/gicon.c:154 gnome/gtools.c:52
-#: gnome/gdesktop.c:1429 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1434 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Erro"
 
-#: gnome/gdesktop.c:2588
+#: gnome/gdesktop.c:2593
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -434,113 +421,100 @@ msgid ""
 msgstr ""
 
 # gnome/gdesktop.c:2402 gnome/glayout.c:355
-#: gnome/gdesktop.c:2611 gnome/glayout.c:362
+#: gnome/gdesktop.c:2616 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr ""
 
 # gnome/gdesktop.c:2402 gnome/glayout.c:355
-#: gnome/gdesktop.c:2611 gnome/glayout.c:363
+#: gnome/gdesktop.c:2616 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Executar uma nova janela para o diretório corrente"
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2613 gnome/glayout.c:365
+#: gnome/gdesktop.c:2618 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "_Diretório"
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
-#: gnome/gdesktop.c:2613 gnome/glayout.c:366
+#: gnome/gdesktop.c:2618 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Cria um novo diretório"
 
 # gnome/gpopup.c:270
-#: gnome/gdesktop.c:2614
-#, fuzzy
+#: gnome/gdesktop.c:2619
 msgid "URL L_ink..."
-msgstr "Ligar..."
+msgstr "L_igação (URL)..."
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
-#: gnome/gdesktop.c:2614
-#, fuzzy
+#: gnome/gdesktop.c:2619
 msgid "Creates a new URL link"
-msgstr "Cria um novo diretório"
+msgstr "Cria um novo link (URL)"
 
-#: gnome/gdesktop.c:2615
+#: gnome/gdesktop.c:2620
 msgid "_Launcher..."
-msgstr ""
+msgstr "_Lançador..."
 
 # gnome/gscreen.c:1471
-#: gnome/gdesktop.c:2615
-#, fuzzy
+#: gnome/gdesktop.c:2620
 msgid "Creates a new launcher"
-msgstr "Cria uma nova pasta"
+msgstr "Cria um novo lançador"
 
 # src/chown.c:112
-#: gnome/gdesktop.c:2621
-#, fuzzy
+#: gnome/gdesktop.c:2626
 msgid "By _Name"
-msgstr " Nome "
+msgstr "Por _Nome "
 
 # gnome/gcmd.c:288
-#: gnome/gdesktop.c:2622
-#, fuzzy
+#: gnome/gdesktop.c:2627
 msgid "By File _Type"
-msgstr "Tipo de Arquivo"
+msgstr "Por _Tipo de Arquivo"
 
 # src/chown.c:118
-#: gnome/gdesktop.c:2623
-#, fuzzy
+#: gnome/gdesktop.c:2628
 msgid "By _Size"
-msgstr " Tamanho "
+msgstr "Por Tamanho "
 
 # gnome/gcmd.c:300
-#: gnome/gdesktop.c:2624
-#, fuzzy
+#: gnome/gdesktop.c:2629
 msgid "By Time Last _Accessed"
-msgstr "Último Acesso"
+msgstr "Último _Acesso"
 
 # gnome/gcmd.c:306
-#: gnome/gdesktop.c:2625
-#, fuzzy
+#: gnome/gdesktop.c:2630
 msgid "By Time Last _Modified"
-msgstr "Última Modificação"
+msgstr "Última _Modificação"
 
 # gnome/gcmd.c:312
-#: gnome/gdesktop.c:2626
-#, fuzzy
+#: gnome/gdesktop.c:2631
 msgid "By Time Last _Changed"
 msgstr "Última Alteração"
 
 # gnome/gdesktop.c:2412 gnome/glayout.c:440
-#: gnome/gdesktop.c:2634 gnome/glayout.c:462
-#, fuzzy
+#: gnome/gdesktop.c:2639 gnome/glayout.c:462
 msgid "_Arrange Icons"
-msgstr "Organizar ícones"
+msgstr "Org_anizar ícones"
 
 # gnome/gdesktop.c:2413
-#: gnome/gdesktop.c:2635
-#, fuzzy
+#: gnome/gdesktop.c:2640
 msgid "Create _New Window"
-msgstr "Criar Nova Janela"
+msgstr "Criar _Nova Janela"
 
 # gnome/gscreen.c:1469
-#: gnome/gdesktop.c:2637 gnome/glayout.c:464
-#, fuzzy
+#: gnome/gdesktop.c:2642 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
-msgstr "Reexaminar diretório"
+msgstr "Reexaminar _Diretório"
 
 # gnome/glayout.c:442
-#: gnome/gdesktop.c:2638 gnome/glayout.c:465
-#, fuzzy
+#: gnome/gdesktop.c:2643 gnome/glayout.c:465
 msgid "Rescan De_vices"
-msgstr "Atualiza dispositivos do sistema"
+msgstr "Atualiza _Dispositivos"
 
-#: gnome/gdesktop.c:2639 gnome/glayout.c:466
+#: gnome/gdesktop.c:2644 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr ""
 
-#: gnome/gdesktop.c:2641
+#: gnome/gdesktop.c:2646
 msgid "Configure _Background Image"
 msgstr ""
 
@@ -568,9 +542,14 @@ msgstr ""
 
 # gnome/glayout.c:452
 #: gnome/gdesktop-prefs.c:335
-#, fuzzy
 msgid "Desktop"
-msgstr "_Área de Trabalho"
+msgstr "Área de Trabalho"
+
+# gnome/gdesktop.c:2068
+#. Create the link to the user's home directory so that he will have an icon
+#: gnome/gdesktop-init.c:141
+msgid "Home directory"
+msgstr "Diretório pessoal"
 
 # gnome/gdialogs.c:58
 #: gnome/gdialogs.c:60
@@ -763,15 +742,13 @@ msgstr "Arquivo "
 
 # gnome/gdialogs.c:889
 #: gnome/gdialogs.c:943
-#, fuzzy
 msgid "is "
-msgstr " é "
+msgstr "é "
 
 # gnome/gdialogs.c:892
 #: gnome/gdialogs.c:946
-#, fuzzy
 msgid "done."
-msgstr " Feito."
+msgstr "feito."
 
 # src/wtools.c:587 vfs/vfs.c:1762
 #. Translators should take care as "Password" or its translations
@@ -788,7 +765,6 @@ msgstr "Senha"
 # src/boxes.c:796
 #. Create the dialog
 #: gnome/gdialogs.c:1039
-#, fuzzy
 msgid "Symbolic Link"
 msgstr "Ligação Simbólica"
 
@@ -938,15 +914,13 @@ msgstr ""
 
 # src/main.c:1223 src/main.c:1244
 #: gnome/glayout.c:367
-#, fuzzy
 msgid "_File..."
-msgstr "&Filtro..."
+msgstr "Arquivo..."
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
 #: gnome/glayout.c:368
-#, fuzzy
 msgid "Creates a new file in this directory"
-msgstr "Cria um novo diretório"
+msgstr "Cria um novo arquivo neste diretório"
 
 # gnome/glayout.c:378
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
@@ -991,9 +965,8 @@ msgstr "Mostra o espaço em disco utilizado por cada diretório"
 
 # gnome/gdesktop.c:2413
 #: gnome/glayout.c:395
-#, fuzzy
 msgid "Close window"
-msgstr "Criar Nova Janela"
+msgstr "Fechar janela"
 
 #: gnome/glayout.c:395
 msgid "Closes this window"
@@ -1036,9 +1009,8 @@ msgstr "Procurar"
 
 # gnome/glayout.c:389
 #: gnome/glayout.c:408
-#, fuzzy
 msgid "Search for a file in the current Panel"
-msgstr "Seleciona todos os arquivos"
+msgstr "Procura por um arquivo no painel atual"
 
 # gnome/glayout.c:394
 #: gnome/glayout.c:411 gnome/gscreen.c:1415
@@ -1168,13 +1140,12 @@ msgstr ""
 
 # src/view.c:460
 #: gnome/gmount.c:225
-#, fuzzy
 msgid "Could not open the /etc/fstab file"
-msgstr " Impossível abrir arquivo"
+msgstr "Não foi possível abrir o arquivo /etc/fstab"
 
 # gnome/gdesktop.c:2073
 #: gnome/gmount.c:390
-#, fuzzy, c-format
+#, c-format
 msgid "Could not symlink %s to %s; will not have such a desktop device icon."
 msgstr ""
 "Não posso criar ligação simbólica de %s para %s; Não haverá ícones iniciais "
@@ -1202,34 +1173,30 @@ msgstr ""
 
 # src/info.c:139
 #: gnome/gmount.c:473
-#, fuzzy, c-format
+#, c-format
 msgid "Device %d"
-msgstr "Dispositivo:  %s"
+msgstr "Dispositivo: %d"
 
 # gnome/gprop.c:67
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
-#, fuzzy
 msgid "Full Name: "
 msgstr "Nome completo: "
 
 # gnome/gprop.c:58 gnome/gprop.c:75
 #: gnome/gnome-file-property-dialog.c:178
-#, fuzzy
 msgid "File Name"
 msgstr "Nome do arquivo"
 
 # gnome/gcmd.c:288
 #: gnome/gnome-file-property-dialog.c:201
-#, fuzzy
 msgid "File Type: "
-msgstr "Tipo de Arquivo"
+msgstr "Tipo de Arquivo: "
 
 # src/boxes.c:796
 #: gnome/gnome-file-property-dialog.c:207
-#, fuzzy
 msgid "File Type: Symbolic Link"
-msgstr "Ligação Simbólica"
+msgstr "Tipo de Arquivo: Ligação Simbólica"
 
 #: gnome/gnome-file-property-dialog.c:212
 msgid "Target Name: INVALID LINK"
@@ -1237,60 +1204,53 @@ msgstr ""
 
 # src/chown.c:112
 #: gnome/gnome-file-property-dialog.c:215
-#, fuzzy
 msgid "Target Name: "
-msgstr " Nome "
+msgstr "Nome Alvo: "
 
 # gnome/glayout.c:600
 #: gnome/gnome-file-property-dialog.c:220
-#, fuzzy
 msgid "File Type: Directory"
-msgstr "Arquivo/Novo/Diretório..."
+msgstr "Tipo de Arquivo: Diretório"
 
 #: gnome/gnome-file-property-dialog.c:222
 msgid "File Type: Character Device"
-msgstr ""
+msgstr "Tipo de Arquivo: Dispositivo de Caractere"
 
 #: gnome/gnome-file-property-dialog.c:224
 msgid "File Type: Block Device"
-msgstr ""
+msgstr "Tipo de Arquivo: Dispositivo de Bloco"
 
 # gnome/gcmd.c:288
 #: gnome/gnome-file-property-dialog.c:226
-#, fuzzy
 msgid "File Type: Socket"
-msgstr "Tipo de Arquivo"
+msgstr "Tipo de Arquivo: Soquete"
 
 # gnome/gcmd.c:288
 #: gnome/gnome-file-property-dialog.c:228
-#, fuzzy
 msgid "File Type: FIFO"
-msgstr "Tipo de Arquivo"
+msgstr "Tipo de Arquivo: FIFO"
 
 # src/chown.c:118
 #: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
-#, fuzzy
 msgid "File Size: "
-msgstr " Tamanho "
+msgstr "Tamanho de Arquivo: "
 
 # gnome/gwidget.c:96 src/file.c:2251
 #: gnome/gnome-file-property-dialog.c:238
-#, fuzzy
 msgid " bytes"
-msgstr "sim"
+msgstr " bytes"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
-msgstr ""
+msgstr " KBytes  ("
 
 # gnome/gwidget.c:96 src/file.c:2251
 #: gnome/gnome-file-property-dialog.c:243
 #: gnome/gnome-file-property-dialog.c:249
-#, fuzzy
 msgid " bytes)"
-msgstr "sim"
+msgstr " bytes)"
 
 #: gnome/gnome-file-property-dialog.c:248
 msgid " MBytes  ("
@@ -1298,27 +1258,23 @@ msgstr ""
 
 # src/chown.c:118
 #: gnome/gnome-file-property-dialog.c:256
-#, fuzzy
 msgid "File Size: N/A"
-msgstr " Tamanho "
+msgstr "Tamanho de Arquivo: Indisponível"
 
 # src/info.c:156
 #: gnome/gnome-file-property-dialog.c:267
-#, fuzzy
 msgid "File Created on: "
-msgstr "Criado: %s"
+msgstr "Arquivo Criado em: "
 
 # gnome/gcmd.c:306
 #: gnome/gnome-file-property-dialog.c:276
-#, fuzzy
 msgid "Last Modified on: "
-msgstr "Última Modificação"
+msgstr "Última Modificação em:"
 
 # gnome/gcmd.c:300
 #: gnome/gnome-file-property-dialog.c:285
-#, fuzzy
 msgid "Last Accessed on: "
-msgstr "Último Acesso"
+msgstr "Último Acesso em:"
 
 #: gnome/gnome-file-property-dialog.c:303
 msgid "URL:"
@@ -1333,9 +1289,8 @@ msgstr "Localização:"
 # gnome/gscreen.c:2495
 #: gnome/gnome-file-property-dialog.c:387
 #: gnome/gnome-file-property-dialog.c:489
-#, fuzzy
 msgid "Drop Action"
-msgstr "Localização:"
+msgstr "Desfazer"
 
 #: gnome/gnome-file-property-dialog.c:388
 msgid "Use default Drop Action options"
@@ -1343,7 +1298,7 @@ msgstr ""
 
 # gnome/gpopup.c:263 src/screen.c:2292 src/screen.c:2322
 #: gnome/gnome-file-property-dialog.c:403
-#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
+#: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:203
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
 msgstr "Visualizar"
@@ -1354,13 +1309,12 @@ msgstr ""
 
 # gnome/gprop.c:535
 #: gnome/gnome-file-property-dialog.c:439
-#, fuzzy
 msgid "Select an Icon"
 msgstr "Selecionar ícone"
 
 # gnome/gpopup.c:260 gnome/gpopup.c:261
 #. we do open first
-#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:187
+#: gnome/gnome-file-property-dialog.c:469 gnome/gpopup2.c:195
 msgid "Open"
 msgstr "Abrir"
 
@@ -1377,7 +1331,7 @@ msgid "Use default View action"
 msgstr ""
 
 # gnome/gpopup.c:265 src/screen.c:2293 src/screen.c:2323 src/view.c:1991
-#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
+#: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:205
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
 msgid "Edit"
 msgstr "Editar"
@@ -1394,27 +1348,23 @@ msgstr "Ícone"
 # gnome/gdialogs.c:361
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
-#, fuzzy
 msgid "File Actions"
 msgstr "O Arquivo existe"
 
 # gnome/gdialogs.c:578
 #: gnome/gnome-file-property-dialog.c:616
-#, fuzzy
 msgid "Open action"
-msgstr "Destino"
+msgstr "Ação para Abrir"
 
 # gnome/gprop.c:129
 #: gnome/gnome-file-property-dialog.c:617
-#, fuzzy
 msgid "Needs terminal to run"
-msgstr "Utilizar Terminal"
+msgstr "Executar no Terminal"
 
 # src/chmod.c:162 src/chown.c:120
 #: gnome/gnome-file-property-dialog.c:742
-#, fuzzy
 msgid "File Permissions"
-msgstr " Permissão "
+msgstr "Permissões "
 
 # gnome/gprop.c:259
 #: gnome/gnome-file-property-dialog.c:753 gnome/gprop.c:259
@@ -1471,9 +1421,9 @@ msgstr "Pegajoso"
 
 # gnome/gprop.c:321 gnome/gprop.c:347
 #: gnome/gnome-file-property-dialog.c:905
-#, fuzzy, c-format
+#, c-format
 msgid "<Unknown> (%d)"
-msgstr "<desconhecido>"
+msgstr "<desconhecido> (%d)"
 
 #: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
@@ -1485,27 +1435,23 @@ msgstr ""
 
 # src/tree.c:786
 #: gnome/gnome-file-property-dialog.c:1082
-#, fuzzy
 msgid "Statistics"
-msgstr "Estático"
+msgstr "Estatísticas"
 
 # gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
 #: gnome/gnome-file-property-dialog.c:1088
-#, fuzzy
 msgid "Options"
-msgstr " Opções "
+msgstr "Opções"
 
 # src/screen.c:432
 #: gnome/gnome-file-property-dialog.c:1091
-#, fuzzy
 msgid "Permissions"
-msgstr "Permissão"
+msgstr "Permissões"
 
 # gnome/gpopup.c:252 gnome/gpopup.c:255
 #: gnome/gnome-file-property-dialog.c:1094
-#, fuzzy
 msgid " Properties"
-msgstr "Propriedades"
+msgstr " Propriedades"
 
 #: gnome/gnome-file-property-dialog.c:1146
 #: gnome/gnome-file-property-dialog.c:1157
@@ -1527,88 +1473,80 @@ msgstr ""
 
 # gnome/glayout.c:389
 #: gnome/gnome-open-dialog.c:395
-#, fuzzy
 msgid "Select a file to run with"
-msgstr "Seleciona todos os arquivos"
+msgstr "Seleciona um arquivo para executar com"
 
 # src/option.c:80
 #. the file tree
 #: gnome/gnome-open-dialog.c:406
-#, fuzzy
 msgid "Applications"
-msgstr "Animação"
+msgstr "Aplicações"
 
 #: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
 msgstr ""
 
 # gnome/gpopup.c:256
-#: gnome/gpopup2.c:188
+#: gnome/gpopup2.c:197
 msgid "Mount device"
 msgstr "Montar dispositivo"
 
 # gnome/gpopup.c:257
-#: gnome/gpopup2.c:189
+#: gnome/gpopup2.c:198
 msgid "Unmount device"
 msgstr "Desmontar dispositivo"
 
 # gnome/gpopup.c:258
-#: gnome/gpopup2.c:190
+#: gnome/gpopup2.c:199
 msgid "Eject device"
 msgstr "Ejetar Dispositivo"
 
 # gnome/gcmd.c:732 gnome/gpopup.c:53
-#: gnome/gpopup2.c:193
-#, fuzzy
+#: gnome/gpopup2.c:202
 msgid "Open with..."
-msgstr " Abir com..."
+msgstr "Abrir com..."
 
 # gnome/gpopup.c:264
-#: gnome/gpopup2.c:195
-#, fuzzy
+#: gnome/gpopup2.c:204
 msgid "View Unfiltered"
 msgstr "Ver sem filtro"
 
 # gnome/gpopup.c:268
-#: gnome/gpopup2.c:198
+#: gnome/gpopup2.c:207
 msgid "Copy..."
 msgstr "Copiar..."
 
 # gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
 # src/screen.c:2297 src/screen.c:2327
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2402
+#: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
 msgstr "Excluir"
 
 # gnome/glayout.c:380
-#: gnome/gpopup2.c:200
-#, fuzzy
+#: gnome/gpopup2.c:209
 msgid "Move..."
-msgstr "_Mover..."
+msgstr "Mover..."
 
 # gnome/gpopup.c:270
-#: gnome/gpopup2.c:201
-#, fuzzy
+#: gnome/gpopup2.c:210
 msgid "Hard Link..."
 msgstr "Ligar..."
 
 # gnome/gpopup.c:271
-#: gnome/gpopup2.c:202
+#: gnome/gpopup2.c:211
 msgid "Symlink..."
 msgstr "Ligação simbólica..."
 
 # gnome/gpopup.c:272
-#: gnome/gpopup2.c:203
-#, fuzzy
+#: gnome/gpopup2.c:212
 msgid "Edit Symlink..."
-msgstr "Editar ligação.."
+msgstr "Editar ligação simbólica..."
 
 # gnome/gpopup.c:252 gnome/gpopup.c:255
-#: gnome/gpopup2.c:205
-#, fuzzy
+#: gnome/gpopup2.c:214
 msgid "Properties..."
-msgstr "Propriedades"
+msgstr "Propriedades..."
 
 # gnome/gprefs.c:81
 #: gnome/gprefs.c:92
@@ -1772,27 +1710,23 @@ msgstr "Recarregar o diretório corrente"
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
 #: gnome/gscreen.c:1417
-#, fuzzy
 msgid "New _Directory..."
-msgstr "_Diretório"
+msgstr "Novo _Diretório..."
 
 # gnome/gdesktop.c:2404 gnome/glayout.c:357
 #: gnome/gscreen.c:1417
-#, fuzzy
 msgid "Creates a new directory here"
-msgstr "Cria um novo diretório"
+msgstr "Cria um novo diretório aqui"
 
 # gnome/glayout.c:391
 #: gnome/gscreen.c:1419
-#, fuzzy
 msgid "New _File..."
-msgstr "Selecionar _Arquivos"
+msgstr "Novo Arquivo"
 
 # gnome/gscreen.c:1471
 #: gnome/gscreen.c:1419
-#, fuzzy
 msgid "Creates a new file here"
-msgstr "Cria uma nova pasta"
+msgstr "Cria um novo arquivo aqui"
 
 # gnome/gscreen.c:1809
 #: gnome/gscreen.c:1620
@@ -1819,19 +1753,16 @@ msgstr "<erro ao ler ligação>"
 
 # gnome/gdesktop.c:2068
 #: gnome/gscreen.c:2085
-#, fuzzy
 msgid "Copy directory"
-msgstr "Diretório pessoal"
+msgstr "Copia diretório"
 
 # gnome/gdesktop.c:2068
 #: gnome/gscreen.c:2086
-#, fuzzy
 msgid "Delete directory"
-msgstr "Diretório pessoal"
+msgstr "Apagar diretório"
 
 # gnome/glayout.c:380
 #: gnome/gscreen.c:2087
-#, fuzzy
 msgid "Rename or move directory"
 msgstr "Renomeia ou move arquivos"
 
@@ -1908,9 +1839,9 @@ msgstr ""
 
 # gnome/gview.c:135 src/view.c:683
 #: gnome/gview.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "Offset 0x%08lx"
-msgstr "Deslocamento 0x%08x"
+msgstr "Deslocamento 0x%08lx"
 
 # gnome/gview.c:137 src/view.c:685
 #: gnome/gview.c:138 src/view.c:730
@@ -2022,15 +1953,13 @@ msgstr "abortar"
 
 # src/view.c:460
 #: gnome/gmc-client.c:26
-#, fuzzy
 msgid "Could not contact the file manager\n"
-msgstr " Impossível abrir arquivo"
+msgstr "Não é possível contatar o gerenciador de arquivos\n"
 
 # src/file.c:342
 #: gnome/gmc-client.c:45
-#, fuzzy
 msgid "Could not get the desktop\n"
-msgstr " Impossível fazer a ligação (direta) "
+msgstr "Não é possível acessar a área de trabalho\n"
 
 #: gnome/gmc-client.c:171
 msgid "Create window showing the specified directory"
@@ -2042,21 +1971,18 @@ msgstr ""
 
 # gnome/gscreen.c:2346
 #: gnome/gmc-client.c:173
-#, fuzzy
 msgid "Rescan the specified directory"
-msgstr "Reexamina o diretório corrente"
+msgstr "Reexamina o diretório especificado"
 
 # gnome/glayout.c:394
 #: gnome/gmc-client.c:175
-#, fuzzy
 msgid "Rescan the desktop icons"
-msgstr "Atualiza o conteúdo do diretório"
+msgstr "Reexamina os ícones da área de trabalho"
 
 # gnome/glayout.c:394
 #: gnome/gmc-client.c:177
-#, fuzzy
 msgid "Rescan the desktop device icons"
-msgstr "Atualiza o conteúdo do diretório"
+msgstr "Reexamina os ícones da área de trabalho"
 
 #: gnome/gmc-client.c:179
 msgid "Close windows whose directories cannot be reached"
@@ -2326,9 +2252,8 @@ msgstr " Cancelar "
 
 # src/dir.c:62
 #: gtkedit/editcmd.c:1173
-#, fuzzy
 msgid "o&Ne"
-msgstr "&Nome"
+msgstr "U&M"
 
 # gtkedit/editcmd.c:1139 src/filegui.c:596
 #: gtkedit/editcmd.c:1175 src/filegui.c:597
@@ -2443,14 +2368,12 @@ msgstr ""
 
 # gtkedit/editcmd.c:1359
 #: gtkedit/editcmd.c:1395
-#, fuzzy
 msgid " Enter argument (or substring) order : "
 msgstr " Digite a ordem dos parâmetros : "
 
 # gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
 #. Tool hint
 #: gtkedit/editcmd.c:1399 gtkedit/editcmd.c:1400
-#, fuzzy
 msgid ""
 "Enter the order of replacement of your scanf\n"
 "format specifiers or regexp substrings, eg 3,1,2"
@@ -2474,13 +2397,12 @@ msgstr " Expressão regular "
 
 # gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
 #: gtkedit/editcmd.c:1411 gtkedit/editcmd.c:1412
-#, fuzzy
 msgid ""
 "See the regex man page for how\n"
 "to compose a regular expression"
 msgstr ""
-" Veja a página de manual de regexp sobre como construir  uma expressão "
-"regular"
+"Veja a página de manual de regexp sobre\n"
+" como construir uma expressão regular"
 
 # gtkedit/editcmd.c:1382
 #: gtkedit/editcmd.c:1418
@@ -2517,12 +2439,12 @@ msgstr " Expressão Scanf "
 # gtkedit/editcmd.c:1407
 #. Tool hint
 #: gtkedit/editcmd.c:1443
-#, fuzzy
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
 msgstr ""
-"Permite a digitação de uma expressão da linguagem C,  veja o manual do scanf"
+"Permite a digitação de uma expressão da \n"
+"linguagem C,  veja o manual do scanf"
 
 # gtkedit/editcmd.c:1412
 #. Tool hint
@@ -2554,9 +2476,8 @@ msgstr "Substituir Tudo"
 # gtkedit/editcmd.c:1230 gtkedit/editcmd.c:1480 gtkedit/editcmd.c:1574
 # gtkedit/editcmd.c:2107 gtkedit/editcmd.c:2138 gtkedit/editcmd.c:2140
 #: gtkedit/editcmd.c:1607
-#, fuzzy
 msgid "Replace one"
-msgstr " Substituir "
+msgstr "Substituir"
 
 # gtkedit/editcmd.c:1945
 #: gtkedit/editcmd.c:1969
@@ -2789,7 +2710,6 @@ msgstr " Sobre "
 
 # gtkedit/editmenu.c:70
 #: gtkedit/editmenu.c:75
-#, fuzzy
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2800,12 +2720,12 @@ msgid ""
 "           for the Midnight Commander.\n"
 msgstr ""
 "\n"
-"                 Cooledit  v2.1\n"
+"                 Cooledit  v3.11.5\n"
 "\n"
 " Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
-"       Um editor de texto fácil para o \n"
-"            Midnight Commander.\n"
+"       Um editor de texto fácil escrito para o \n"
+"            Comandante da Meia Noite.\n"
 
 # gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
 #: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
@@ -3082,9 +3002,8 @@ msgstr "Alternar marcação de coluna\tC-b"
 
 # gtkedit/editmenu.c:408
 #: gtkedit/editmenu.c:416
-#, fuzzy
 msgid "Toggle book mark\tC-M-Ins"
-msgstr "Alternar marca\tF3"
+msgstr "Alternar marca\tC-M-Ins"
 
 #: gtkedit/editmenu.c:417
 msgid "Previous book mark\tC-M-Up"
@@ -3380,9 +3299,8 @@ msgstr ""
 
 # gtkedit/gtkedit.c:66
 #: gtkedit/gtkedit.c:1247
-#, fuzzy
 msgid "Save to current file name"
-msgstr " Informe nome do arquivo: "
+msgstr "Salvar no nome de arquivo atual"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
@@ -3390,44 +3308,37 @@ msgstr ""
 
 # gtkedit/editwidget.c:1066
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Replc"
-msgstr "Substituir"
+msgstr "Subst"
 
 # src/view.c:1727
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Find and replace strings/regular expressions"
-msgstr " Expressão regular inválida"
+msgstr "Encontrar e trocar cadeias/expressões regulares"
 
 # gtkedit/editmenu.c:413
 #: gtkedit/gtkedit.c:1250
-#, fuzzy
 msgid "Copy highlighted block to cursor position"
-msgstr "Copiar bloco sobre cursor\tF5"
+msgstr "Copiar bloco enfatizado para a posição do cursor"
 
 # gtkedit/editmenu.c:414
 #: gtkedit/gtkedit.c:1252
-#, fuzzy
 msgid "Move highlighted block to cursor position"
-msgstr "Mover bloco sobre cursor\tF6"
+msgstr "Mover bloco enfatizado para a posição do cursor"
 
 # src/find.c:537
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find"
-msgstr "Terminado"
+msgstr "Localizar"
 
 # src/view.c:1727
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find strings/regular expressions"
-msgstr " Expressão regular inválida"
+msgstr "Localizar cadeia/expressão regular"
 
 # gnome/gpopup.c:253 gnome/gpopup.c:254 gtkedit/editwidget.c:1070
 # src/screen.c:2297 src/screen.c:2327
 #: gtkedit/gtkedit.c:1254
-#, fuzzy
 msgid "Dlete"
 msgstr "Excluir"
 
@@ -3619,7 +3530,7 @@ msgstr ""
 # src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
 # src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:624
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
-#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:639
+#: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:634
 msgid " Oops... "
 msgstr " Epa... "
 
@@ -4470,7 +4381,7 @@ msgid "Unknown"
 msgstr "Desconhecido"
 
 # src/help.c:766 src/user.c:640
-#: src/ext.c:143 src/user.c:506
+#: src/ext.c:143 src/user.c:501
 #, fuzzy, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -4480,7 +4391,7 @@ msgstr ""
 " %s "
 
 # src/ext.c:137 src/user.c:507
-#: src/ext.c:150 src/user.c:518
+#: src/ext.c:150 src/user.c:513
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -4490,7 +4401,7 @@ msgstr ""
 " %s "
 
 # src/ext.c:151 src/user.c:534
-#: src/ext.c:165 src/user.c:547
+#: src/ext.c:165 src/user.c:542
 msgid " Parameter "
 msgstr " Parâmetro "
 
@@ -5411,7 +5322,7 @@ msgid " Help "
 msgstr " Ajuda "
 
 # src/help.c:766 src/user.c:640
-#: src/help.c:766 src/user.c:655
+#: src/help.c:766 src/user.c:650
 #, c-format
 msgid ""
 " Can't open file %s \n"
@@ -6474,7 +6385,7 @@ msgid "Display the directory that holds the .links startup files and exit"
 msgstr ""
 
 # src/main.c:2987
-#: src/main.c:3039
+#: src/main.c:3045
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -6483,12 +6394,12 @@ msgstr ""
 "Em alguns sistemas talvez seja necessário executar # `which mc`\n"
 
 # src/main.c:3061
-#: src/main.c:3117
+#: src/main.c:3123
 msgid " Notice "
 msgstr " Nota "
 
 # src/main.c:3062
-#: src/main.c:3118
+#: src/main.c:3124
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -6895,38 +6806,38 @@ msgstr ""
 "%s\n"
 
 # src/user.c:261
-#: src/user.c:261
+#: src/user.c:256
 #, fuzzy, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Máscara de interpretador de comandos inválida \"%c\". "
 
 # src/user.c:394
-#: src/user.c:394
+#: src/user.c:389
 msgid " Debug "
 msgstr " Depurar "
 
 # src/user.c:403
-#: src/user.c:403
+#: src/user.c:398
 msgid " ERROR: "
 msgstr " ERRO: "
 
 # src/user.c:407
-#: src/user.c:407
+#: src/user.c:402
 msgid " True:  "
 msgstr " Verdadeiro: "
 
 # src/user.c:409
-#: src/user.c:409
+#: src/user.c:404
 msgid " False: "
 msgstr " Falso: "
 
 # src/user.c:606
-#: src/user.c:621
+#: src/user.c:616
 msgid " Warning -- ignoring file "
 msgstr " Alerta -- ignorando arquivo "
 
 # src/user.c:607
-#: src/user.c:622
+#: src/user.c:617
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -6937,21 +6848,21 @@ msgstr ""
 "O seu uso pode comprometer a segurança"
 
 # src/user.c:625
-#: src/user.c:640
+#: src/user.c:635
 msgid " I can't run programs while logged on a non local directory "
 msgstr ""
 " Não é possível executar programas em um\n"
 " diretório remoto. "
 
 # gnome/glayout.c:378
-#: src/user.c:724
+#: src/user.c:719
 #, fuzzy, c-format
 msgid " Empty file %s "
 msgstr "Copiar arquivos"
 
 # src/user.c:712
 #. Create listbox
-#: src/user.c:733
+#: src/user.c:728
 msgid " User menu "
 msgstr " Menu de usuário "
 
@@ -7703,7 +7614,7 @@ msgid "ftpfs: storing file %d (%d)"
 msgstr ""
 
 # vfs/ftpfs.c:1995 vfs/ftpfs.c:2010
-#: vfs/ftpfs.c:2036 vfs/ftpfs.c:2051
+#: vfs/ftpfs.c:2037 vfs/ftpfs.c:2052
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
