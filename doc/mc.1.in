@@ -169,7 +169,7 @@ the bottom frame line will cause a scroll of one pageful forward. This
 frame line method works also in the
 .\"LINK2"
 Help Viewer
-.\"Help"
+.\"Contents"
 and the
 .\"LINK2"
 Directory Tree.
@@ -810,7 +810,7 @@ The File menu has the following commands (keyboard shortcuts in parentheses):
 Invokes the built-in hypertext help viewer. Inside the
 .\"LINK2"
 help viewer,
-.\"Help"
+.\"Contents"
 you can use the Tab key to select the next link and the Enter key to
 follow that link. The keys Space and Backspace are used to move
 forward and backward in a help page. Press F1 again to get the full
@@ -1297,7 +1297,7 @@ match (i.e. if a file matches the first and second entry and View action
 is missing in the first one, then on pressing F3 the View action from
 the second entry will be used. default should catch all the actions.
 .PP
-.SH "    Background jobs"
+.SH "    Background Jobs"
 This lets you control the state of any background Midnight Commander
 process (only copy and move files operations can be done in the
 background).  You can stop, restart and kill a background job from
