@@ -184,6 +184,11 @@ static char *layout_title, *title1, *title2, *title3, *output_lines_label;
 
 static WButton *bleft_widget, *bright_widget;
 
+/* Declarations for static functions */
+#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
+static void low_level_change_screen_size (void);
+#endif /* PORT_NEEDS_CHANGE_SCREEN_SIZE */
+
 static void _check_split (void)
 {
     if (_horizontal_split){
@@ -746,6 +751,9 @@ void setup_panels (void)
 
 void flag_winch (int dummy)
 {
+#ifdef PORT_NEEDS_CHANGE_SCREEN_SIZE
+    low_level_change_screen_size ();
+#endif /* PORT_NEEDS_CHANGE_SCREEN_SIZE */
     winch_flag = 1;
 }
 

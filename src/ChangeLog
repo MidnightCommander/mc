@@ -1,3 +1,10 @@
+2000-11-02  Pavel Roskin  <proski@gnu.org>
+
+	* layout.c [PORT_NEEDS_CHANGE_SCREEN_SIZE]: Declare
+	low_level_change_screen_size().
+	(flag_winch) [PORT_NEEDS_CHANGE_SCREEN_SIZE]: Call
+	low_level_change_screen_size(). From Andrew V. Samoilov.
+
 2000-10-04  Pavel Roskin  <proski@gnu.org>
 
 	* user.c (expand_format): Fixed processing of "%s".
