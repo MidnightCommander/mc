@@ -14,7 +14,7 @@ endif
 
 noinst_PROGRAMS = man2hlp
 
-mclib_DATA = mc.hlp
+mclib_DATA = mc.hlp mc.hlp.ru
 
 mcmfmt_SOURCES = mfmt.c
 
@@ -65,13 +65,17 @@ mc_SOURCES = $(SRCS)
 endif
 
 EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl ncurses.patch mc.hlp $(CHARSET_SRC)
+	gindex.pl ncurses.patch mc.hlp mc.hlp.ru $(CHARSET_SRC)
 
 $(srcdir)/mc.hlp: $(top_srcdir)/doc/mc.1.in $(top_srcdir)/lib/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
 	- $(MAKE) man2hlp
 	- perl $(srcdir)/gindex.pl $(top_srcdir)/doc/mc.1.in \
 	       $(top_srcdir)/lib/xnc.hlp $(srcdir)/mc.hlp
 	- touch $(srcdir)/mc.hlp
+
+$(srcdir)/mc.hlp.ru: $(top_srcdir)/doc/ru/mc.1.in $(top_srcdir)/doc/ru/xnc.hlp $(srcdir)/gindex.pl man2hlp
+	perl $(srcdir)/gindex.pl $(top_srcdir)/doc/ru/mc.1.in \
+	     $(top_srcdir)/doc/ru/xnc.hlp $(srcdir)/mc.hlp.ru 'Разделы помощи:'
 
 install-exec-hook:
 	$(MAKE) install_mcview

@@ -1,5 +1,9 @@
 2002-03-01  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* Makefile.am (mc.hlp.ru): New rule to compile translated
+	help file.
+	(mclib_DATA): Add mc.hlp.ru.
+
 	* gindex.pl: Add optional 4th argument for translated
 	Content section name.
 	
