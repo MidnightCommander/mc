@@ -1,3 +1,8 @@
+2004-11-10  Roland Illig  <roland.illig@gmx.de>
+
+	* Makefile.am: Excluded pipethough.{c,h} from the distribution
+	as they are currently unused.
+
 2004-11-10  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (unlink_entry): Add missed brackets.
