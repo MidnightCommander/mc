@@ -41,7 +41,8 @@ ALLICONS = 				\
 	gnome-image-generic.png		\
 	gnome-application-x-c-header.png	\
 	gnome-application-x-c-source.png	\
-	gnome-application-x-cc-source.png
+	gnome-application-x-cc-source.png \
+	gnome-core.png
 
 all:
 
