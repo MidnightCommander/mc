@@ -588,7 +588,7 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 /* This heads the 'Macro' dialog box */
-    s = edit_raw_key_query (_(" Macro "),
+    s = edit_raw_key_query (_(" Save macro "),
 /* Input line for a single key press follows the ':' */
     _(" Press the macro's new hotkey: "), 1);
     edit->force |= REDRAW_COMPLETELY;
