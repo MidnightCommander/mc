@@ -41,7 +41,7 @@ system. It provides access to the host file system to clients running the
 Midnight file system (currently, only the Midnight Commander file manager).
 
 %prep
-%setup
+%setup -q
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure \
