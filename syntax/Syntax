@@ -27,7 +27,7 @@ file gobledy_gook #\sand\sconsult\sthe\sman\spage.
 context default
 
 
-file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^diff
+file ..\*\\.(diff|rej|patch)$ Diff\sOutput ^(diff|Index:)\s
 include diff.syntax
 
 file ..\*\\.lsm$ LSM\sFile
