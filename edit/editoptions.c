@@ -123,8 +123,9 @@ void edit_options_dialog (void)
 	i18n_flag = 1;
     }
 
-    sprintf (wrap_length, "%d", option_word_wrap_line_length);
-    sprintf (tab_spacing, "%d", option_tab_spacing);
+    g_snprintf (wrap_length, sizeof (wrap_length), "%d",
+		option_word_wrap_line_length);
+    g_snprintf (tab_spacing, sizeof (tab_spacing), "%d", option_tab_spacing);
 
     quick_widgets[3].text = wrap_length;
     quick_widgets[3].str_result = &p;
@@ -169,17 +170,18 @@ void edit_options_dialog (void)
 		    option_tab_spacing = 8;
 		free (q);
 	    }
-	    option_syntax_highlighting = *quick_widgets[5 + OA].result;
-	    edit_confirm_save = *quick_widgets[6 + OA].result;
-	    option_fill_tabs_with_spaces = *quick_widgets[7 + OA].result;
-	    option_return_does_auto_indent = *quick_widgets[8 + OA].result;
-	    option_backspace_through_tabs = *quick_widgets[9 + OA].result;
-	    option_fake_half_tabs = *quick_widgets[10 + OA].result;
 
-	    if (*quick_widgets[11 + OA].result == 1) {
+	    option_syntax_highlighting = tedit_syntax_highlighting;
+	    edit_confirm_save = tedit_confirm_save;
+	    option_fill_tabs_with_spaces = toption_fill_tabs_with_spaces;
+	    option_return_does_auto_indent = toption_return_does_auto_indent;
+	    option_backspace_through_tabs = toption_backspace_through_tabs;
+	    option_fake_half_tabs = toption_fake_half_tabs;
+
+	    if (wrap_mode == 1) {
 		option_auto_para_formatting = 1;
 		option_typewriter_wrap = 0;
-	    } else if (*quick_widgets[11 + OA].result == 2) {
+	    } else if (wrap_mode == 2) {
 		option_auto_para_formatting = 0;
 		option_typewriter_wrap = 1;
 	    } else {
@@ -187,15 +189,11 @@ void edit_options_dialog (void)
 		option_typewriter_wrap = 0;
 	    }
 
-	    edit_key_emulation = *quick_widgets[13 + OA].result;
+	    edit_key_emulation = tedit_key_emulation;
 
 	    /* Load or unload syntax rules if the option has changed */
 	    if (option_syntax_highlighting != old_syntax_hl)
 		edit_load_syntax (wedit, 0, 0);
-
-	    return;
-	} else {
-	    return;
 	}
     }
 }

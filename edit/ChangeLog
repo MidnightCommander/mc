@@ -1,3 +1,8 @@
+2002-11-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editoptions.c (edit_options_dialog): Clean up and use g_snprintf()
+	instead of sprintf().
+
 2002-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Decentralize includes.
