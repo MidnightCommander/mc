@@ -97,7 +97,7 @@ mcrpmfs_list ()
         echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
     fi
 
-    rpm -qlvp $1 | sed -e 's/^\(..........\). /\1 1 /'
+    rpm -qlvp $1 | sed -e 's/^\(..........\) /\1 1 /'
 }
 
 mcrpmfs_copyout ()
