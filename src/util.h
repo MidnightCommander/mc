@@ -95,8 +95,6 @@ void use_dash (int flag); /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);
 void remove_dash (void);
 
-extern const char app_text [];
-
 /* Creating temporary files safely */
 const char *mc_tmpdir (void);
 int mc_mkstemps(char **pname, const char *prefix, const char *suffix);
