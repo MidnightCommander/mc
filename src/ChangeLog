@@ -1,3 +1,8 @@
+1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* mad.h: Include stdlib.h/malloc.h first, to prevent prototypes
+	from being clobbered by the subsequent macro defines.
+
 Wed Aug 12 15:56:46 1998  Pavel Roskin <pavel.roskin@escoft.co.uk>
 
 	* edit.h: added "../" before some includes to avoid unnecessary

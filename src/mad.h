@@ -1,6 +1,10 @@
 #ifndef __MAD_H
 #define __MAD_H
 
+/* To prevent molesting these files with the malloc/calloc/free macros.  */
+#include <stdlib.h>
+#include <malloc.h>
+
 #ifdef HAVE_MAD
 #   define INLINE 
 #else
