@@ -1,3 +1,8 @@
+2004-08-29  Roland Illig  <roland.illig@gmx.de>
+
+	* Code cleanup: Added const qualifier for variables and
+	function declarations where possible. No functional changes.
+
 2004-08-26  Leonard den Ottolander  <leonard * den ottolander nl>
 
         * edit/editcmd.c: Fix buffer overflows in edit replace code.
