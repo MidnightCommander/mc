@@ -471,95 +471,66 @@ void reverse_selection_cmd (void)
     }
 }
 
-void select_cmd (void)
+static void
+select_unselect_cmd (const char *title, int cmd)
 {
     char *reg_exp, *reg_exp_t;
     int i;
     int c;
     int dirflag = 0;
 
-    reg_exp = input_dialog (_(" Select "), "", easy_patterns ? "*" : ".");
+    reg_exp = input_dialog (title, "", easy_patterns ? "*" : ".");
     if (!reg_exp)
 	return;
-    
+    if (!*reg_exp) {
+	g_free (reg_exp);
+	return;
+    }
+
     reg_exp_t = reg_exp;
 
     /* Check if they specified a directory */
-    if (*reg_exp_t == PATH_SEP){
-        dirflag = 1;
-        reg_exp_t++;
+    if (*reg_exp_t == PATH_SEP) {
+	dirflag = 1;
+	reg_exp_t++;
     }
-    if (reg_exp_t [strlen(reg_exp_t) - 1] == PATH_SEP){
-        dirflag = 1;
-        reg_exp_t [strlen(reg_exp_t) - 1] = 0;
+    if (reg_exp_t[strlen (reg_exp_t) - 1] == PATH_SEP) {
+	dirflag = 1;
+	reg_exp_t[strlen (reg_exp_t) - 1] = 0;
     }
 
-    for (i = 0; i < current_panel->count; i++){
-        if (!strcmp (current_panel->dir.list [i].fname, ".."))
-            continue;
-	if (S_ISDIR (current_panel->dir.list [i].st.st_mode)){
+    for (i = 0; i < current_panel->count; i++) {
+	if (!strcmp (current_panel->dir.list[i].fname, ".."))
+	    continue;
+	if (S_ISDIR (current_panel->dir.list[i].st.st_mode)) {
 	    if (!dirflag)
-                continue;
-        } else {
-            if (dirflag)
-                continue;
+		continue;
+	} else {
+	    if (dirflag)
+		continue;
 	}
-	c = regexp_match (reg_exp_t, current_panel->dir.list [i].fname, match_file);
-	if (c == -1){
+	c = regexp_match (reg_exp_t, current_panel->dir.list[i].fname,
+			  match_file);
+	if (c == -1) {
 	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
 	    g_free (reg_exp);
 	    return;
 	}
-	if (c){
-	    do_file_mark (current_panel, i, 1);
+	if (c) {
+	    do_file_mark (current_panel, i, cmd);
 	}
     }
     g_free (reg_exp);
 }
 
+void select_cmd (void)
+{
+    select_unselect_cmd (_(" Select "), 1);
+}
+
 void unselect_cmd (void)
 {
-    char *reg_exp, *reg_exp_t;
-    int i;
-    int c;
-    int dirflag = 0;
-
-    reg_exp = input_dialog (_(" Unselect "),"", easy_patterns ? "*" : ".");
-    if (!reg_exp)
-	return;
-    
-    reg_exp_t = reg_exp;
-    
-    /* Check if they specified directory matching */
-    if (*reg_exp_t == PATH_SEP){
-        dirflag = 1;
-	reg_exp_t ++;
-    }
-    if (reg_exp_t [strlen(reg_exp_t) - 1] == PATH_SEP){
-        dirflag = 1;
-        reg_exp_t [strlen(reg_exp_t) - 1] = 0;
-    }
-    for (i = 0; i < current_panel->count; i++){
-        if (!strcmp (current_panel->dir.list [i].fname, "..")) 
-            continue;
-	if (S_ISDIR (current_panel->dir.list [i].st.st_mode)){
-	    if (!dirflag)
-	        continue;
-        } else {
-            if (dirflag)
-                continue;
-        }
-	c = regexp_match (reg_exp_t, current_panel->dir.list [i].fname, match_file);
-	if (c == -1){
-	    message (1, MSG_ERROR, _("  Malformed regular expression  "));
-	    g_free (reg_exp);
-	    return;
-	}
-	if (c){
-	    do_file_mark (current_panel, i, 0);
-	}
-    }
-    g_free (reg_exp);
+    select_unselect_cmd (_(" Unselect "), 0);
 }
 
 /* Check if the file exists */

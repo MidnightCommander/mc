@@ -1,3 +1,12 @@
+2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cmd.c (select_unselect_cmd): Collect repeated code from
+	(un)?select_cmd here.  Fix rare off-by-one and memory leak if
+	empty pattern passed.
+
+	(select_cmd): Use select_unselect_cmd().
+	(unselect_cmd): Likewise.
+
 2004-10-23  Roland Illig  <roland.illig@gmx.de>
 
 	* complete.c (environ): Don't declare environ on Cygwin.
