@@ -1,5 +1,8 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* color.h: Replace PORT_COLOR macro with BEST_COLOR, which uses
+	MY_COLOR_PAIR.
+
 	* util.c: Remove unused functions.
 	* utilunix.c: Likewise.
 	* util.h: Update to match.
