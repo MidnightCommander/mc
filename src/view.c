@@ -508,7 +508,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 {
     char *error = 0;
     int i, type;
-    int fd;
+    int fd = -1;
     char tmp[BUF_MEDIUM];
 
     if (view->view_active)
@@ -539,34 +539,34 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	view->start_col = 0;
     }
 
-    /* Make sure we are working with a regular file */
-    if (mc_stat (view->filename, &view->s) == -1) {
-	g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
-		    _file, unix_error_string (errno));
-	error = set_view_init_error (view, tmp);
-	goto finish;
-    }
+    if (_file[0]) {
+	/* Make sure we are working with a regular file */
+	if (mc_stat (view->filename, &view->s) == -1) {
+	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
+			_file, unix_error_string (errno));
+	    error = set_view_init_error (view, tmp);
+	    goto finish;
+	}
 
-    if (!S_ISREG (view->s.st_mode)) {
-	g_snprintf (tmp, sizeof (tmp),
-		    _(" Cannot view: not a regular file "));
-	error = set_view_init_error (view, tmp);
-	goto finish;
-    }
+	if (!S_ISREG (view->s.st_mode)) {
+	    g_snprintf (tmp, sizeof (tmp),
+			_(" Cannot view: not a regular file "));
+	    error = set_view_init_error (view, tmp);
+	    goto finish;
+	}
 
-    /* Actually open the file */
-    if ((fd = mc_open(_file, O_RDONLY)) == -1) {
-	g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
-		    _file, unix_error_string (errno));
-	error = set_view_init_error (view, tmp);
-	goto finish;
-    }
+	/* Actually open the file */
+	if ((fd = mc_open(_file, O_RDONLY)) == -1) {
+	    g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
+			_file, unix_error_string (errno));
+	    error = set_view_init_error (view, tmp);
+	    goto finish;
+	}
 
-    if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0) {
-	g_free (view->filename);
-	view->filename = g_strconcat (_file, decompress_extension(type), NULL);
-    } else {
-	view->filename = g_strdup (_file);
+	if (view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0) {
+	    g_free (view->filename);
+	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
+	}
     }
 
     if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
