@@ -93,9 +93,9 @@ edit_status (WEdit *edit)
     const int w = edit->widget.cols;
     const size_t status_size = w + 1;
     char * const status = g_malloc (status_size);
-    size_t status_len;
+    int status_len;
     const char *fname = "";
-    size_t fname_len;
+    int fname_len;
     const int gap = 3; /* between the filename and the status */
     const int right_gap = 2; /* at the right end of the screen */
     const int preferred_fname_len = 16;
