@@ -2121,7 +2121,7 @@ static key_map panel_keymap [] = {
     { KEY_F(14),  edit_cmd_new },
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
-
+    { ALT('H'),   directory_history_list },
     { ALT('+'),	  select_cmd_panel },
     { KEY_KP_ADD, select_cmd_panel },
     { ALT('\\'),  unselect_cmd_panel },

@@ -259,7 +259,7 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
     if (keyword) {
 	struct key_word *k;
 	k = edit->rules[context]->keyword[keyword];
-	if (k->last == c1 && compare_word_to_left (edit, i - 1, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+	if ((k->last == c1 && compare_word_to_left (edit, i - 1, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) || (c2 == '\n')) {
 	    keyword = 0;
 	    debug_printf ("keyword=%d ", keyword);
 	}
@@ -270,14 +270,12 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
     if (context && !keyword) {
 	r = edit->rules[context];
 	if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
-		&& !(rule & RULE_ON_RIGHT_BORDER)) {
+	    &&!(rule & RULE_ON_RIGHT_BORDER)) {
 	    debug_printf ("A:3 ", 0);
 	    found_right = 1;
 	    border = RULE_ON_RIGHT_BORDER;
-	    if (r->between_delimiters) {
+	    if (r->between_delimiters)
 		context = 0;
-		keyword = 0;
-	    }
 	} else if (!found_left) {
 	    if (r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
 		&&(rule & RULE_ON_RIGHT_BORDER)) {
@@ -286,66 +284,17 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 		found_left = 1;
 		border = 0;
 		context = 0;
-		keyword = 0;
 	    } else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
 		       &&(rule & RULE_ON_LEFT_BORDER)) {
 /* never turn off a context at 2 */
 		debug_printf ("A:2 ", 0);
 		found_left = 1;
 		border = 0;
-		keyword = 0;
 	    }
 	}
     }
     debug_printf ("\n", 0);
 
-/* check to turn on a context */
-    if (!context && !keyword) {
-	int count;
-	for (count = 1; edit->rules[count] && !done; count++) {
-	    r = edit->rules[count];
-	    if (!found_left) {
-		if (r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
-		    &&(rule & RULE_ON_RIGHT_BORDER)) {
-		    debug_printf ("B:4 count=%d", count);
-		    found_left = 1;
-		    border = 0;
-		    context = 0;
-		} else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
-			   &&(rule & RULE_ON_LEFT_BORDER)) {
-		    debug_printf ("B:2 ", 0);
-		    found_left = 1;
-		    border = 0;
-		    if (r->between_delimiters) {
-			context = count;
-			debug_printf ("context=%d ", context);
-			keyword = 0;
-			if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
-			    debug_printf ("B:3 ", 0);
-			    found_right = 1;
-			    border = RULE_ON_RIGHT_BORDER;
-			    context = 0;
-			    keyword = 0;
-			}
-		    }
-		    break;
-		}
-	    }
-	    if (!found_right) {
-		if (r->first_left == c2 && compare_word_to_right (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
-		    debug_printf ("B:1 ", 0);
-		    found_right = 1;
-		    border = RULE_ON_LEFT_BORDER;
-		    if (!r->between_delimiters) {
-			context = count;
-			debug_printf ("context=%d ", context);
-			keyword = 0;
-		    }
-		    break;
-		}
-	    }
-	}
-    }
 /* check to turn on a keyword */
     if (!keyword) {
 	char *p;
@@ -359,6 +308,68 @@ static inline unsigned long apply_rules_going_right (WEdit * edit, long i, unsig
 		keyword = count;
 		debug_printf ("keyword=%d ", keyword);
 		break;
+	    }
+	}
+    }
+/* check to turn on a context */
+    if (!context) {
+	int count;
+	for (count = 1; edit->rules[count] && !done; count++) {
+	    r = edit->rules[count];
+	    if (!found_left) {
+		if (r->last_right == c1 && compare_word_to_left (edit, i - 1, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right) \
+		    &&(rule & RULE_ON_RIGHT_BORDER)) {
+		    debug_printf ("B:4 count=%d", count);
+		    found_left = 1;
+		    border = 0;
+		    if (!keyword)
+			context = 0;
+		} else if (r->last_left == c1 && compare_word_to_left (edit, i - 1, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left) \
+			   &&(rule & RULE_ON_LEFT_BORDER)) {
+		    debug_printf ("B:2 ", 0);
+		    found_left = 1;
+		    border = 0;
+		    if (r->between_delimiters) {
+			if (!keyword)
+			    context = count;
+			debug_printf ("context=%d ", context);
+			if (r->first_right == c2 && compare_word_to_right (edit, i, r->right, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_right)) {
+			    debug_printf ("B:3 ", 0);
+			    found_right = 1;
+			    border = RULE_ON_RIGHT_BORDER;
+			    if (!keyword)
+				context = 0;
+			} else {
+			    char *p;
+			    p = (r = edit->rules[context])->keyword_first_chars;
+			    while ((p = strchr (p + 1, c2))) {
+				struct key_word *k;
+				int count;
+				count = (unsigned long) p - (unsigned long) r->keyword_first_chars;
+				k = r->keyword[count];
+				if (compare_word_to_right (edit, i, k->keyword, k->whole_word_chars_left, k->whole_word_chars_right, k->line_start)) {
+				    keyword = count;
+				    debug_printf ("keyword=%d ", keyword);
+				    break;
+				}
+			    }
+			}
+		    }
+		    break;
+		}
+	    }
+	    if (!found_right) {
+		if (r->first_left == c2 && compare_word_to_right (edit, i, r->left, r->whole_word_chars_left, r->whole_word_chars_right, r->line_start_left)) {
+		    debug_printf ("B:1 ", 0);
+		    found_right = 1;
+		    border = RULE_ON_LEFT_BORDER;
+		    if (!r->between_delimiters) {
+			debug_printf ("context=%d ", context);
+			if (!keyword)
+			    context = count;
+		    }
+		    break;
+		}
 	    }
 	}
     }
@@ -414,7 +425,7 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
     if (keyword) {
 	struct key_word *k;
 	k = edit->rules[context]->keyword[keyword];
-	if (k->first == c2 && compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
+	if ((k->first == c2 && compare_word_to_right (edit, i + 1, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) || (c1 == '\n')) {
 	    keyword = 0;
 	    debug_printf ("keyword=%d ", keyword);
 	}
@@ -429,10 +440,8 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 	    debug_printf ("A:2 ", 0);
 	    found_left = 1;
 	    border = RULE_ON_LEFT_BORDER;
-	    if (r->between_delimiters) {
+	    if (r->between_delimiters)
 		context = 0;
-		keyword = 0;
-	    }
 	} else if (!found_right) {
 	    if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
 		&&(rule & RULE_ON_LEFT_BORDER)) {
@@ -441,68 +450,17 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 		found_right = 1;
 		border = 0;
 		context = 0;
-		keyword = 0;
 	    } else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
 		       &&(rule & RULE_ON_RIGHT_BORDER)) {
 /* never turn off a context at 2 */
 		debug_printf ("A:3 ", 0);
 		found_right = 1;
 		border = 0;
-		keyword = 0;
 	    }
 	}
     }
     debug_printf ("\n", 0);
 
-/* check to turn on a context */
-    if (!context && !keyword) {
-	int count;
-	for (count = 1; edit->rules[count] && !done; count++) {
-	    r = edit->rules[count];
-	    if (!found_right) {
-		if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
-		    &&(rule & RULE_ON_LEFT_BORDER)) {
-		    debug_printf ("B:1 count=%d", count);
-		    found_right = 1;
-		    border = 0;
-		    context = 0;
-		} else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
-			   &&(rule & RULE_ON_RIGHT_BORDER)) {
-		    if (!(c2 == '\n' && r->single_char)) {
-		    debug_printf ("B:3 ", 0);
-		    found_right = 1;
-		    border = 0;
-		    if (r->between_delimiters) {
-			    context = resolve_left_delim (edit, i, r, count);
-			debug_printf ("context=%d ", context);
-			keyword = 0;
-			if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left)) {
-			    debug_printf ("B:2 ", 0);
-			    found_left = 1;
-			    border = RULE_ON_LEFT_BORDER;
-			    context = 0;
-			    keyword = 0;
-			}
-		    }
-		    break;
-		    }
-		}
-	    }
-	    if (!found_left) {
-		if (r->last_right == c1 && compare_word_to_left (edit, i, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right)) {
-		    if (!(c1 == '\n' && r->single_char)) {
-		    debug_printf ("B:4 ", 0);
-		    found_left = 1;
-		    border = RULE_ON_RIGHT_BORDER;
-		    if (!r->between_delimiters)
-			context = resolve_left_delim (edit, i - 1, r, count);
-		    keyword = 0;
-		    break;
-		    }
-		}
-	    }
-	}
-    }
 /* check to turn on a keyword */
     if (!keyword) {
 	char *p;
@@ -516,6 +474,70 @@ static inline unsigned long apply_rules_going_left (WEdit * edit, long i, unsign
 		keyword = count;
 		debug_printf ("keyword=%d ", keyword);
 		break;
+	    }
+	}
+    }
+/* check to turn on a context */
+    if (!context) {
+	int count;
+	for (count = 1; edit->rules[count] && !done; count++) {
+	    r = edit->rules[count];
+	    if (!found_right) {
+		if (r->first_left == c2 && compare_word_to_right (edit, i + 1, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left) \
+		    &&(rule & RULE_ON_LEFT_BORDER)) {
+		    debug_printf ("B:1 count=%d", count);
+		    found_right = 1;
+		    border = 0;
+		    if (!keyword)
+			context = 0;
+		} else if (r->first_right == c2 && compare_word_to_right (edit, i + 1, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right) \
+			   &&(rule & RULE_ON_RIGHT_BORDER)) {
+		    if (!(c2 == '\n' && r->single_char)) {
+			debug_printf ("B:3 ", 0);
+			found_right = 1;
+			border = 0;
+			if (r->between_delimiters) {
+			    debug_printf ("context=%d ", context);
+			    if (!keyword)
+				context = resolve_left_delim (edit, i, r, count);
+			    if (r->last_left == c1 && compare_word_to_left (edit, i, r->left, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_left)) {
+				debug_printf ("B:2 ", 0);
+				found_left = 1;
+				border = RULE_ON_LEFT_BORDER;
+				if (!keyword)
+				    context = 0;
+			    } else {
+				char *p;
+				p = (r = edit->rules[context])->keyword_last_chars;
+				while ((p = strchr (p + 1, c1))) {
+				    struct key_word *k;
+				    int count;
+				    count = (unsigned long) p - (unsigned long) r->keyword_last_chars;
+				    k = r->keyword[count];
+				    if (compare_word_to_left (edit, i, k->keyword, k->whole_word_chars_right, k->whole_word_chars_left, k->line_start)) {
+					keyword = count;
+					debug_printf ("keyword=%d ", keyword);
+					break;
+				    }
+				}
+			    }
+			}
+			break;
+		    }
+		}
+	    }
+	    if (!found_left) {
+		if (r->last_right == c1 && compare_word_to_left (edit, i, r->right, r->whole_word_chars_right, r->whole_word_chars_left, r->line_start_right)) {
+		    if (!(c1 == '\n' && r->single_char)) {
+			debug_printf ("B:4 ", 0);
+			found_left = 1;
+			border = RULE_ON_RIGHT_BORDER;
+			if (!keyword)
+			    if (!r->between_delimiters)
+				context = resolve_left_delim (edit, i - 1, r, count);
+			break;
+		    }
+		}
 	    }
 	}
     }
@@ -1018,7 +1040,7 @@ void edit_free_syntax_rules (WEdit * edit)
     syntax_free (edit->rules);
 }
 
-#define CURRENT_SYNTAX_RULES_VERSION "19"
+#define CURRENT_SYNTAX_RULES_VERSION "22"
 
 char *syntax_text = 
 "# syntax rules version " CURRENT_SYNTAX_RULES_VERSION "\n"
@@ -1040,6 +1062,191 @@ char *syntax_text =
 "# brightmagenta\n"
 "# brightcyan\n"
 "# white\n"
+"\n"
+"###############################################################################\n"
+"file ..\\*\\\\.tex$ LaTeX\\s2.09\\sDocument\n"
+"context default\n"
+"wholechars left \\\\\n"
+"wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
+"\n"
+"# type style\n"
+"    keyword whole \\\\tiny yellow/24\n"
+"    keyword whole \\\\scriptsize yellow/24\n"
+"    keyword whole \\\\footnotesize yellow/24\n"
+"    keyword whole \\\\small yellow/24\n"
+"    keyword whole \\\\normalsize yellow/24\n"
+"    keyword whole \\\\large yellow/24\n"
+"    keyword whole \\\\Large yellow/24\n"
+"    keyword whole \\\\LARGE yellow/24\n"
+"    keyword whole \\\\huge yellow/24\n"
+"    keyword whole \\\\Huge yellow/24\n"
+"\n"
+"# accents and symbols\n"
+"    keyword whole \\\\`{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\'{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\^{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\\"{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\~{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\={\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\.{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\u{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\v{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\H{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\t{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\c{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\d{\\[aeiouAEIOU\\]} yellow/24\n"
+"    keyword whole \\\\b{\\[aeiouAEIOU\\]} yellow/24\n"
+"\n"
+"    keyword whole \\\\dag yellow/24\n"
+"    keyword whole \\\\ddag yellow/24\n"
+"    keyword whole \\\\S yellow/24\n"
+"    keyword whole \\\\P yellow/24\n"
+"    keyword whole \\\\copyright yellow/24\n"
+"    keyword whole \\\\pounds yellow/24\n"
+"\n"
+"# sectioning and table of contents\n"
+"    keyword whole \\\\part[*]{*} brightred/19\n"
+"    keyword whole \\\\part{*} brightred/19\n"
+"    keyword whole \\\\part\\*{*} brightred/19\n"
+"    keyword whole \\\\chapter[*]{*} brightred/19\n"
+"    keyword whole \\\\chapter{*} brightred/19\n"
+"    keyword whole \\\\chapter\\*{*} brightred/19\n"
+"    keyword whole \\\\section[*]{*} brightred/19\n"
+"    keyword whole \\\\section{*} brightred/19\n"
+"    keyword whole \\\\section\\*{*} brightred/19\n"
+"    keyword whole \\\\subsection[*]{*} brightred/19\n"
+"    keyword whole \\\\subsection{*} brightred/19\n"
+"    keyword whole \\\\subsection\\*{*} brightred/19\n"
+"    keyword whole \\\\subsubsection[*]{*} brightred/19\n"
+"    keyword whole \\\\subsubsection{*} brightred/19\n"
+"    keyword whole \\\\subsubsection\\*{*} brightred/19\n"
+"    keyword whole \\\\paragraph[*]{*} brightred/19\n"
+"    keyword whole \\\\paragraph{*} brightred/19\n"
+"    keyword whole \\\\paragraph\\*{*} brightred/19\n"
+"    keyword whole \\\\subparagraph[*]{*} brightred/19\n"
+"    keyword whole \\\\subparagraph{*} brightred/19\n"
+"    keyword whole \\\\subparagraph\\*{*} brightred/19\n"
+"\n"
+"    keyword whole \\\\appendix brightred/19\n"
+"    keyword whole \\\\tableofcontents brightred/19\n"
+"\n"
+"# misc\n"
+"    keyword whole \\\\item[*] yellow/24\n"
+"    keyword whole \\\\item yellow/24\n"
+"    keyword whole \\\\\\\\ yellow/24\n"
+"    keyword \\\\\\s yellow/24 black/0\n"
+"    keyword %% yellow/24\n"
+"\n"
+"# docuement and page styles    \n"
+"    keyword whole \\\\documentstyle[*]{*} yellow/20\n"
+"    keyword whole \\\\documentstyle{*} yellow/20\n"
+"    keyword whole \\\\pagestyle{*} yellow/20\n"
+"\n"
+"# cross references\n"
+"    keyword whole \\\\label{*} yellow/24\n"
+"    keyword whole \\\\ref{*} yellow/24\n"
+"\n"
+"# bibliography and citations\n"
+"    keyword whole \\\\bibliography{*} yellow/24\n"
+"    keyword whole \\\\bibitem[*]{*} yellow/24\n"
+"    keyword whole \\\\bibitem{*} yellow/24\n"
+"    keyword whole \\\\cite[*]{*} yellow/24\n"
+"    keyword whole \\\\cite{*} yellow/24\n"
+"\n"
+"# splitting the input\n"
+"    keyword whole \\\\input{*} yellow/20\n"
+"    keyword whole \\\\include{*} yellow/20\n"
+"    keyword whole \\\\includeonly{*} yellow/20\n"
+"\n"
+"# line breaking\n"
+"    keyword whole \\\\linebreak[\\[01234\\]] yellow/24\n"
+"    keyword whole \\\\nolinebreak[\\[01234\\]] yellow/24\n"
+"    keyword whole \\\\linebreak yellow/24\n"
+"    keyword whole \\\\nolinebreak yellow/24\n"
+"    keyword whole \\\\[+] yellow/24\n"
+"    keyword whole \\\\- yellow/24\n"
+"    keyword whole \\\\sloppy yellow/24\n"
+"\n"
+"# page breaking\n"
+"    keyword whole \\\\pagebreak[\\[01234\\]] yellow/24\n"
+"    keyword whole \\\\nopagebreak[\\[01234\\]] yellow/24\n"
+"    keyword whole \\\\pagebreak yellow/24\n"
+"    keyword whole \\\\nopagebreak yellow/24\n"
+"    keyword whole \\\\samepage yellow/24\n"
+"    keyword whole \\\\newpage yellow/24\n"
+"    keyword whole \\\\clearpage yellow/24\n"
+"\n"
+"# defintiions\n"
+"    keyword \\\\newcommand{*}[*] cyan/5\n"
+"    keyword \\\\newcommand{*} cyan/5\n"
+"    keyword \\\\newenvironment{*}[*]{*} cyan/5\n"
+"    keyword \\\\newenvironment{*}{*} cyan/5\n"
+"\n"
+"# boxes\n"
+"\n"
+"# begins and ends\n"
+"    keyword \\\\begin{document} brightred/14\n"
+"    keyword \\\\begin{equation} brightred/14\n"
+"    keyword \\\\begin{eqnarray} brightred/14\n"
+"    keyword \\\\begin{quote} brightred/14\n"
+"    keyword \\\\begin{quotation} brightred/14\n"
+"    keyword \\\\begin{center} brightred/14\n"
+"    keyword \\\\begin{verse} brightred/14\n"
+"    keyword \\\\begin{verbatim} brightred/14\n"
+"    keyword \\\\begin{itemize} brightred/14\n"
+"    keyword \\\\begin{enumerate} brightred/14\n"
+"    keyword \\\\begin{description} brightred/14\n"
+"    keyword \\\\begin{array} brightred/14\n"
+"    keyword \\\\begin{tabular} brightred/14\n"
+"    keyword \\\\begin{thebibliography}{*} brightred/14\n"
+"    keyword \\\\begin{sloppypar} brightred/14\n"
+"\n"
+"    keyword \\\\end{document} brightred/14\n"
+"    keyword \\\\end{equation} brightred/14\n"
+"    keyword \\\\end{eqnarray} brightred/14\n"
+"    keyword \\\\end{quote} brightred/14\n"
+"    keyword \\\\end{quotation} brightred/14\n"
+"    keyword \\\\end{center} brightred/14\n"
+"    keyword \\\\end{verse} brightred/14\n"
+"    keyword \\\\end{verbatim} brightred/14\n"
+"    keyword \\\\end{itemize} brightred/14\n"
+"    keyword \\\\end{enumerate} brightred/14\n"
+"    keyword \\\\end{description} brightred/14\n"
+"    keyword \\\\end{array} brightred/14\n"
+"    keyword \\\\end{tabular} brightred/14\n"
+"    keyword \\\\end{thebibliography}{*} brightred/14\n"
+"    keyword \\\\end{sloppypar} brightred/14\n"
+"\n"
+"    keyword \\\\begin{*} brightcyan/16\n"
+"    keyword \\\\end{*} brightcyan/16\n"
+"\n"
+"    keyword \\\\theorem{*}{*} yellow/24\n"
+"\n"
+"# if all else fails\n"
+"    keyword whole \\\\+[*]{*}{*}{*} brightcyan/17\n"
+"    keyword whole \\\\+[*]{*}{*} brightcyan/17\n"
+"    keyword whole \\\\+{*}{*}{*}{*} brightcyan/17\n"
+"    keyword whole \\\\+{*}{*}{*} brightcyan/17\n"
+"    keyword whole \\\\+{*}{*} brightcyan/17\n"
+"    keyword whole \\\\+{*} brightcyan/17\n"
+"    keyword \\\\\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\\]\\n brightcyan/17\n"
+"    keyword \\\\\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\\]\\s brightcyan/17\n"
+"    keyword \\\\\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\\]\\t brightcyan/17\n"
+"\n"
+"context \\\\pagenumbering{ } yellow/20\n"
+"    keyword arabic brightcyan/17\n"
+"    keyword roman brightcyan/17\n"
+"    keyword alph brightcyan/17\n"
+"    keyword Roman brightcyan/17\n"
+"    keyword Alph brightcyan/17\n"
+"\n"
+"context % \\n brown/22\n"
+"\n"
+"# mathematical formulas\n"
+"context $ $ brightgreen/6\n"
+"context exclusive \\\\begin{equation} \\\\end{equation} brightgreen/6\n"
+"context exclusive \\\\begin{eqnarray} \\\\end{eqnarray} brightgreen/6\n"
+"\n"
 "\n"
 "###############################################################################\n"
 "file ..\\*\\\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C\\+\\+\\sProgram\n"
@@ -1107,6 +1314,10 @@ char *syntax_text =
 "    keyword whole using yellow/24\n"
 "    keyword whole wchar_t yellow/24\n"
 "    keyword whole ... yellow/24\n"
+"\n"
+"    keyword /\\* brown/22\n"
+"    keyword \\*/ brown/22\n"
+"\n"
 "    keyword '\\s' brightgreen/16\n"
 "    keyword '+' brightgreen/16\n"
 "    keyword > yellow/24\n"
@@ -1128,7 +1339,7 @@ char *syntax_text =
 "    keyword , brightcyan/14\n"
 "    keyword : brightcyan/14\n"
 "    keyword ; brightmagenta/19\n"
-"context /\\* \\*/ brown/22\n"
+"context exclusive /\\* \\*/ brown/22\n"
 "context linestart # \\n brightred/18\n"
 "    keyword \\\\\\n yellow/24\n"
 "    keyword /\\**\\*/ brown/22\n"
@@ -1225,6 +1436,80 @@ char *syntax_text =
 "    keyword whole @+@ brightmagenta/23 black/0\n"
 "    keyword @+@ brightmagenta/23 black/0\n"
 "\n"
+"###############################################################################\n"
+"\n"
+"file .\\*syntax$ Syntax\\sHighlighting\\sdefinitions\n"
+"\n"
+"context default\n"
+"    keyword whole keyw\\ord yellow/24\n"
+"    keyword whole whole\\[\\t\\s\\]l\\inestart brightcyan/17\n"
+"    keyword whole whole\\[\\t\\s\\]l\\inestart brightcyan/17\n"
+"    keyword whole wh\\oleleft\\[\\t\\s\\]l\\inestart brightcyan/17\n"
+"    keyword whole wh\\oleright\\[\\t\\s\\]l\\inestart brightcyan/17\n"
+"    keyword whole l\\inestart\\[\\t\\s\\]wh\\ole\n"
+"    keyword whole l\\inestart\\[\\t\\s\\]wh\\ole\n"
+"    keyword whole l\\inestart\\[\\t\\s\\]wh\\oleleft\n"
+"    keyword whole l\\inestart\\[\\t\\s\\]wh\\oleright\n"
+"    keyword wholeleft whole\\s brightcyan/17\n"
+"    keyword wholeleft whole\\t brightcyan/17\n"
+"    keyword whole wh\\oleleft brightcyan/17\n"
+"    keyword whole wh\\oleright brightcyan/17\n"
+"    keyword whole lin\\[e\\]start brightcyan/17\n"
+"    keyword whole c\\ontext\\[\\t\\s\\]exclusive brightred/18\n"
+"    keyword whole c\\ontext\\[\\t\\s\\]default brightred/18\n"
+"    keyword whole c\\ontext brightred/18\n"
+"    keyword whole wh\\olechars\\[\\t\\s\\]left brightcyan/17\n"
+"    keyword whole wh\\olechars\\[\\t\\s\\]right brightcyan/17\n"
+"    keyword whole wh\\olechars brightcyan/17\n"
+"    keyword whole f\\ile brightgreen/6\n"
+"\n"
+"    keyword whole 0 lightgray/0	blue/26\n"
+"    keyword whole 1 lightgray/1	blue/26\n"
+"    keyword whole 2 lightgray/2	blue/26\n"
+"    keyword whole 3 lightgray/3	blue/26\n"
+"    keyword whole 4 lightgray/4	blue/26\n"
+"    keyword whole 5 lightgray/5	blue/26\n"
+"    keyword whole 6 lightgray/6\n"
+"    keyword whole 7 lightgray/7\n"
+"    keyword whole 8 lightgray/8\n"
+"    keyword whole 9 lightgray/9\n"
+"    keyword whole 10 lightgray/10\n"
+"    keyword whole 11 lightgray/11\n"
+"    keyword whole 12 lightgray/12\n"
+"    keyword whole 13 lightgray/13\n"
+"    keyword whole 14 lightgray/14\n"
+"    keyword whole 15 lightgray/15\n"
+"    keyword whole 16 lightgray/16\n"
+"    keyword whole 17 lightgray/17\n"
+"    keyword whole 18 lightgray/18\n"
+"    keyword whole 19 lightgray/19\n"
+"    keyword whole 20 lightgray/20\n"
+"    keyword whole 21 lightgray/21\n"
+"    keyword whole 22 lightgray/22\n"
+"    keyword whole 23 lightgray/23\n"
+"    keyword whole 24 lightgray/24\n"
+"    keyword whole 25 lightgray/25\n"
+"    keyword whole 26 lightgray/26\n"
+"\n"
+"    keyword wholeleft black\\/ black/0\n"
+"    keyword wholeleft red\\/ red/DarkRed\n"
+"    keyword wholeleft green\\/ green/green3\n"
+"    keyword wholeleft brown\\/ brown/saddlebrown\n"
+"    keyword wholeleft blue\\/ blue/blue3\n"
+"    keyword wholeleft magenta\\/ magenta/magenta3\n"
+"    keyword wholeleft cyan\\/ cyan/cyan3\n"
+"    keyword wholeleft lightgray\\/ lightgray/lightgray\n"
+"    keyword wholeleft gray\\/ gray/gray\n"
+"    keyword wholeleft brightred\\/ brightred/red\n"
+"    keyword wholeleft brightgreen\\/ brightgreen/green1\n"
+"    keyword wholeleft yellow\\/ yellow/yellow\n"
+"    keyword wholeleft brightblue\\/ brightblue/blue1\n"
+"    keyword wholeleft brightmagenta\\/ brightmagenta/magenta\n"
+"    keyword wholeleft brightcyan\\/ brightcyan/cyan1\n"
+"    keyword wholeleft white\\/ white/26\n"
+"\n"
+"context linestart # \\n brown/22\n"
+"\n"
 "file \\.\\* Help\\ssupport\\sother\\sfile\\stypes\n"
 "context default\n"
 "file \\.\\* by\\scoding\\srules\\sin\\s~/.cedit/syntax.\n"
@@ -1233,6 +1518,7 @@ char *syntax_text =
 "context default\n"
 "file \\.\\* and\\sconsult\\sthe\\sman\\spage.\n"
 "context default\n";
+
 
 
 FILE *upgrade_syntax_file (char *syntax_file)
@@ -1408,5 +1694,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
 }
 
 #endif		/* !defined(MIDNIGHT) || defined(HAVE_SYNTAXH) */
+
+
 
 

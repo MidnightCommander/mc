@@ -1,3 +1,15 @@
+Sat May  2 14:07:05 1998 Paul Sheer  <psheer@obsidian.co.za>
+
+	* setup.c: ALT('H') now shows a directory history - that
+	ESC SHIFT-h   or   ALT-SHIFT-h
+
+Fri May  1 17:45:58 1998 Paul Sheer  <psheer@obsidian.co.za>
+
+	* syntax.c: initial support for LaTeX 2.09 files added,
+
+	* syntax.c: some minor bug fixes. and reorganisation
+	of context and keyword priorities.
+
 Fri May  1 11:24:21 1998  Paul Sheer  <psheer@obsidian.co.za>
 
 	* syntax.c: syntax highlighting segfaults when editing a binary
