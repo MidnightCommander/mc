@@ -23,6 +23,10 @@
 #ifndef __EDIT_H
 #define __EDIT_H
 
+#ifdef HAVE_SYS_PARAM_H
+#    include <sys/param.h>
+#endif
+
 #ifdef MIDNIGHT
 
 #ifdef HAVE_SLANG
@@ -104,9 +108,9 @@
 #    include "coollocal.h"
 #    include "stringtools.h"
 #else
-#    include "gtk/gtk.h"
-#    include "gdk/gdkprivate.h"
-#    include "gdk/gdk.h"
+#    include <gtk/gtk.h>
+#    include <gdk/gdkprivate.h>
+#    include <gdk/gdk.h>
 #    include "gtkedit.h"
 #    include "editcmddef.h"
 #    ifndef _

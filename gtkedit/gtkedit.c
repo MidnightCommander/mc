@@ -26,10 +26,10 @@
 #include <ctype.h>
 #include <string.h>
 #include <pwd.h>
-#include "gdk/gdkkeysyms.h"
-#include "gtk/gtkmain.h"
-#include "gtk/gtkselection.h"
-#include "gtk/gtksignal.h"
+#include <gdk/gdkkeysyms.h>
+#include <gtk/gtkmain.h>
+#include <gtk/gtkselection.h>
+#include <gtk/gtksignal.h>
 #include "edit.h"
 #if ! defined (MIDNIGHT) && ! defined (GTK)
 #include "mousemark.h"
