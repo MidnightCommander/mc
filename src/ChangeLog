@@ -1,5 +1,8 @@
 2001-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (setup_pre) [HAVE_CHARSET]: Fix compilation with
+	ncurses.
+
 	* textconf.c (features): Fix interpretation of
 	HAVE_SYSTEM_SLANG.
 	From David Martin <dmartina@excite.es>

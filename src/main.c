@@ -1841,8 +1841,13 @@ setup_pre (void)
 {
     /* Call all the inits */
 #ifdef HAVE_CHARSET
-    int full_eight_bits = (display_codepage != 0 && display_codepage != 1);
-#endif
+/*
+ * Don't restrict the output on the screen manager level,
+ * the translation tables take care of it.
+ */
+#define full_eight_bits (1)
+#define eight_bit_clean (1)
+#endif /* !HAVE_CHARSET */
 
 #ifndef HAVE_SLANG
     meta (stdscr, eight_bit_clean);
