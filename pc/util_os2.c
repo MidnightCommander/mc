@@ -427,10 +427,6 @@ canonicalize_pathname (char *path)
 	    i = start + 1;
 	}
 
-        /* Handle backquoted BACKSLASH. */
-/*         if (start > 0 && path[start - 1] == '\\')
-	    continue; */
-
         /* Check for trailing BACKSLASH. */
         if (start && !path[i]) {
 	zero_last:

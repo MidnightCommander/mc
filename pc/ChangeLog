@@ -1,3 +1,10 @@
+2001-07-13  Pavel Roskin  <proski@gnu.org>
+
+	* util_nt.c (canonicalize_pathname): Don't handle PATH_SEP
+	after backslash	in a special way.
+	* util_os2.c (canonicalize_pathname): Likewise (was already
+	commented out).
+
 2001-06-26  Pavel Roskin  <proski@gnu.org>
 
 	* dirent_nt.c: Include <config.h>.
