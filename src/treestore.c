@@ -733,6 +733,9 @@ tree_store_opendir (char *path)
 		if (!entry)
 			return NULL;
 	}
+
+	if (entry->next == NULL)
+		return NULL;
 	
 	scan = xmalloc (sizeof (tree_scan), "");
 	scan->base = entry;
