@@ -15,9 +15,6 @@ Ctrl-q Ctrl-m in input dialog should enter \r, not a newline.
 Interpret C literals in regular expressions entered by the user, e.g. \r
 and \0x0D.
 
-Changing directory while in the editor shouldn't affect the path where
-the editor saves its files.
-
 Allow entering archives in VFS by Ctrl-PgDown with non-empty command
 line.  Right now, there is no convenient way to enter an archive when
 the command line is not empty.
