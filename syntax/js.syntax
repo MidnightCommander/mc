@@ -89,7 +89,6 @@ context default
 
 	#=========================
 	# Numbers
-	keyword whole \{012345679\}\[012345679\]%	brightgreen/16
 	keyword whole -\{012345679\}\[012345679\]	brightgreen/16
 	keyword whole \{012345679\}\[012345679\]	brightgreen/16
 
