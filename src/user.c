@@ -213,6 +213,7 @@ char *expand_format (WEdit *edit_widget, char c, int quote)
 	        return g_strdup (edit_widget->syntax_type);
         break;
     case 'e': /* error file name */
+    case 'k': /* block file name */
     case 'b': /* block file name / strip extension */ {
 	if (edit_widget) {
 	    char *file = g_strconcat (home_dir,
@@ -221,9 +222,10 @@ char *expand_format (WEdit *edit_widget, char c, int quote)
 	    fname = (*quote_func) (file, 0);
 	    g_free (file);
 	    return fname;
-	} else if (c == 'e') {
+	} else if (c == 'b') {
 	    return strip_ext((*quote_func) (fname, 0));
 	}
+	break;
     }
     case 'n': /* strip extension in editor */
 	if (edit_widget)

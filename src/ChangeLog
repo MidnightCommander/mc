@@ -1,3 +1,8 @@
+2002-06-13  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* user.c (expand_format): Fix '%b' proccessing.
+	Handle '%k' as documented.
+
 2002-05-30  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (regexp_search): Don't call save_edit_changes
