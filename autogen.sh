@@ -13,4 +13,9 @@ autoheader
 autoconf
 )
 
-$srcdir/configure --enable-maintainer-mode $*
+if [ ! -z "$OBJ_DIR" ]; then
+	mkdir -p "$OBJ_DIR"
+	cd "$OBJ_DIR"
+fi
+
+$srcdir/$OBJDIR/configure --enable-maintainer-mode $*
