@@ -2872,7 +2872,7 @@ click_proxy_button_press (GtkWidget *widget, GdkEventButton *event, gpointer dat
 			return FALSE;
 		}
 	}
-	
+
 	if (event->button == 1) {
 		click_start_x = event->x;
 		click_start_y = event->y;

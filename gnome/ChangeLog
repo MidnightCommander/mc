@@ -1,3 +1,14 @@
+1999-09-10  Federico Mena Quintero  <federico@redhat.com>
+
+	* gmount.c (setup_devices): See if our supported automounter,
+	magicdev, is running and only create links for mounted CD-ROMs if
+	so.
+	(automounter_is_running): For now just return TRUE; we have to
+	wait for magicdev to export a CORBA server.
+
+	* gcorba.c (corba_init_server): Initialize the POA here instead of
+	in register_servers().
+
 1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_uid_group_change): Fix more

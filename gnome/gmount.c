@@ -95,10 +95,13 @@ void free (void *ptr);
 #include "util.h"
 #include "i18n.h"
 
+
+
+/* Information for a mountable device */
 typedef struct {
 	char *devname;
 	char *mount_point;
-	
+
 	/* This is just a good guess */
 	enum {
 		TYPE_UNKNOWN,
@@ -107,12 +110,14 @@ typedef struct {
 	} type;
 } devname_info_t;
 
+
+
 static gboolean
 option_has_user (char *str)
 {
 	char *p;
-	if ((p = strstr (str, "user")) != NULL){
-		if ((p - 2) >= str){
+	if ((p = strstr (str, "user")) != NULL) {
+		if ((p - 2) >= str) {
 			if (strncmp (p - 2, "nouser", 6) == 0)
 				return FALSE;
 		}
@@ -121,12 +126,12 @@ option_has_user (char *str)
 	return FALSE;
 }
 
+
+
 #ifdef MOUNTED_GETMNTENT1
 
-/*
- * Returns wheter devname is mountable:
- * NULL if it is not or
- * g_strdup()ed string with the mount point
+/* Returns whether devname is mountable: NULL if it is not or g_strdup()ed
+ * string with the mount point.
  */
 char *
 is_block_device_mountable (char *mount_point)
@@ -134,32 +139,31 @@ is_block_device_mountable (char *mount_point)
 	FILE *f;
 	struct mntent *mnt;
 	char *retval = NULL;
-	
+
 	f = setmntent ("/etc/fstab", "r");
 	if (f == NULL)
 		return NULL;
 
-	while ((mnt = getmntent (f))){
-		if (strcmp (mnt->mnt_dir, mount_point) != 0){
-
-			/*
-			 * This second test is for compatibility with older
-			 * desktops that might be using this
+	while ((mnt = getmntent (f)) != NULL) {
+		if (strcmp (mnt->mnt_dir, mount_point) != 0) {
+			/* This second test is for compatibility with older
+			 * desktops that might be using this.
 			 */
 			if (strcmp (mnt->mnt_dir, mount_point) != 0)
 				continue;
 		}
-		
-		if (getuid () == 0){
+
+		if (getuid () == 0) {
 			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}
-	
-		if (option_has_user (mnt->mnt_opts)){
+
+		if (option_has_user (mnt->mnt_opts)) {
 			retval = g_strdup (mnt->mnt_dir);
 			break;
 		}
 	}
+
 	endmntent (f);
 	return retval;
 }
@@ -170,15 +174,16 @@ is_block_device_mounted (char *filename)
 	FILE *f;
 	struct mntent *mnt;
 	gboolean retval = FALSE;
-	
+
 	f = setmntent ("/etc/mtab", "r");
 	if (f == NULL)
 		return FALSE;
 
-	while ((mnt = getmntent (f))){
+	while ((mnt = getmntent (f)) != NULL) {
 		if (strcmp (mnt->mnt_dir, filename) == 0)
 			retval = TRUE;
 	}
+
 	endmntent (f);
 	return retval;
 }
@@ -189,17 +194,17 @@ get_mountable_devices (void)
 	FILE *f;
 	struct mntent *mnt;
 	GList *list = NULL;
-	
+
 	f = setmntent ("/etc/fstab", "r");
-	if (f == NULL){
+	if (f == NULL) {
 		message (1, MSG_ERROR, _("Could not open the /etc/fstab file"));
 		return NULL;
 	}
 
-	while ((mnt = getmntent (f))){
-		if (option_has_user (mnt->mnt_opts)){
+	while ((mnt = getmntent (f)) != NULL) {
+		if (option_has_user (mnt->mnt_opts)) {
 			devname_info_t *dit;
-			
+
 			dit = g_new0 (devname_info_t, 1);
 			dit->devname = g_strdup (mnt->mnt_fsname);
 			dit->mount_point = g_strdup (mnt->mnt_dir);
@@ -210,7 +215,7 @@ get_mountable_devices (void)
 
 			if (strcmp (mnt->mnt_type, "nfs") == 0)
 				dit->type = TYPE_NFS;
-			
+
 			list = g_list_prepend (list, dit);
 		}
 	}
@@ -226,15 +231,15 @@ mount_point_to_device (char *mount_point)
 {
 	FILE *f;
 	struct mntent *mnt;
-	
+
 	f = setmntent ("/etc/fstab", "r");
 	if (f == NULL)
 		return NULL;
 
-	while ((mnt = getmntent (f))){
-		if (strcmp (mnt->mnt_dir, mount_point) == 0){
+	while ((mnt = getmntent (f))) {
+		if (strcmp (mnt->mnt_dir, mount_point) == 0) {
 			char *v;
-			
+
 			v = g_strdup (mnt->mnt_fsname);
 			endmntent (f);
 			return v;
@@ -243,6 +248,8 @@ mount_point_to_device (char *mount_point)
 	endmntent (f);
 	return NULL;
 }
+
+
 
 #else
 
@@ -271,11 +278,20 @@ mount_point_to_device (char *mount_point)
 }
 #endif
 
+
 
-/*
- * Cleans up the desktop directory from device files
- *
- * Includes block devices and printers.
+/* Returns whether our supported automounter is running */
+static gboolean
+automounter_is_running (void)
+{
+	/* FIXME: finish this when magicdev is finished */
+	return TRUE;
+}
+
+
+
+/* Cleans up the desktop directory from device files.  Includes block devices
+ * and printers.
  */
 void
 desktop_cleanup_devices (void)
@@ -304,19 +320,20 @@ desktop_cleanup_devices (void)
 		g_free (full_name);
 	}
 	gnome_metadata_unlock ();
-	
+
 	mc_closedir (dir);
 }
 
 /* Creates the desktop link for the specified device */
 static void
-create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon, gboolean ejectable)
+create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon,
+		    gboolean ejectable)
 {
 	char *full_name;
 	char *icon_full;
 	char type = 'D';
 	char ejectable_c = ejectable;
-	
+
 	icon_full = g_concat_dir_and_file (ICONDIR, icon);
 	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
 	if (mc_symlink (dev_name, full_name) != 0) {
@@ -347,8 +364,10 @@ setup_devices (void)
 	int cdrom_count;
 	int generic_count;
 	int nfs_count;
-	
+	int automounter;
+
 	list = get_mountable_devices ();
+	automounter = automounter_is_running ();
 
 	hd_count = 0;
 	cdrom_count = 0;
@@ -365,19 +384,28 @@ setup_devices (void)
 		char buffer[128];
 		gboolean release_format;
 		gboolean ejectable;
+		gboolean do_create;
 
 		dev_name = dit->devname;
 		short_dev_name = x_basename (dev_name);
 
 		release_format = FALSE;
 		ejectable = FALSE;
-		
+		do_create = TRUE;
+
 		/* Create the format/icon/count.  This could use better heuristics. */
-		if (dit->type == TYPE_CDROM){
+		if (dit->type == TYPE_CDROM || strncmp (short_dev_name, "cdrom", 5) == 0) {
 			format = _("CD-ROM %d");
 			icon = "i-cdrom.png";
 			count = cdrom_count++;
 			ejectable = TRUE;
+
+			/* If our supported automounter is running, then we can
+			 * be nice and create only the links for CD-ROMS that
+			 * are actually mounted.
+			 */
+			if (automounter && !is_block_device_mounted (dev_name))
+				do_create = FALSE;
 		} else if (strncmp (short_dev_name, "fd", 2) == 0) {
 			format = _("Floppy %d");
 			icon = "i-floppy.png";
@@ -388,12 +416,7 @@ setup_devices (void)
 			format = _("Disk %d");
 			icon = "i-blockdev.png";
 			count = hd_count++;
-		} else if (strncmp (short_dev_name, "cdrom", 5) == 0){
-			format = _("CD-ROM %d");
-			icon = "i-cdrom.png";
-			count = cdrom_count++;
-			ejectable = TRUE;
-		} else if (dit->type == TYPE_NFS){
+		} else if (dit->type == TYPE_NFS) {
 			release_format = TRUE;
 			format = g_strdup_printf (_("NFS dir %s"), dit->mount_point);
 			icon = "i-nfs.png";
@@ -405,19 +428,20 @@ setup_devices (void)
 		}
 
 		g_snprintf (buffer, sizeof (buffer), format, count);
-		if (release_format){
+		if (release_format) {
 			g_free (format);
 			format = NULL;
 		}
 
 		/* Create the actual link */
 
-		create_device_link (dit->mount_point, short_dev_name, buffer, icon, ejectable);
+		if (do_create)
+			create_device_link (dit->mount_point, short_dev_name,
+					    buffer, icon, ejectable);
 
 		g_free (dit->devname);
 		g_free (dit->mount_point);
 		g_free (dit);
-
 	}
 
 	g_list_free (list);
@@ -428,4 +452,3 @@ gmount_setup_devices (void)
 {
 	setup_devices ();
 }
-

@@ -25,7 +25,7 @@
 CORBA_ORB orb = CORBA_OBJECT_NIL;
 
 /* The POA */
-PortableServer_POA poa;
+PortableServer_POA poa = CORBA_OBJECT_NIL;
 
 
 
@@ -421,26 +421,11 @@ static int
 register_servers (void)
 {
 	CORBA_Environment ev;
-	PortableServer_POAManager poa_manager;
 	int retval;
 	int v;
 
 	retval = FALSE;
 	CORBA_exception_init (&ev);
-
-	/* Get the POA and create the server */
-
-	poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		goto out;
-
-	poa_manager = PortableServer_POA__get_the_POAManager (poa, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		goto out;
-
-	PortableServer_POAManager_activate (poa_manager, &ev);
-	if (ev._major != CORBA_NO_EXCEPTION)
-		goto out;
 
 	/* Register the window factory and see if it was already there */
 
@@ -493,6 +478,31 @@ register_servers (void)
 int
 corba_init_server (void)
 {
+	int retval;
+	CORBA_Environment ev;
+	PortableServer_POAManager poa_manager;
+
+	retval = FALSE;
+	CORBA_exception_init (&ev);
+
+	/* Get the POA and create the server */
+
+	poa = (PortableServer_POA) CORBA_ORB_resolve_initial_references (orb, "RootPOA", &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+	poa_manager = PortableServer_POA__get_the_POAManager (poa, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+	PortableServer_POAManager_activate (poa_manager, &ev);
+	if (ev._major != CORBA_NO_EXCEPTION)
+		goto out;
+
+	CORBA_exception_free (&ev);
+
+	/* See if the servers are there */
+
 	window_factory_server = goad_server_activate_with_id (
 		NULL,
 		"IDL:GNOME:FileManager:WindowFactory:1.0",
@@ -507,9 +517,12 @@ corba_init_server (void)
 
 	if (window_factory_server != CORBA_OBJECT_NIL) {
 		corba_have_server = TRUE;
-		return TRUE;
+		retval = TRUE;
 	} else
-		return register_servers ();
+		retval = register_servers ();
+
+ out:
+	return retval;
 }
 
 /**
