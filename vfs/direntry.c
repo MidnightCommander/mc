@@ -61,7 +61,7 @@ vfs_s_new_inode (struct vfs_class *me, struct vfs_s_super *super, struct stat *i
 }
 
 struct vfs_s_entry *
-vfs_s_new_entry (struct vfs_class *me, char *name, struct vfs_s_inode *inode)
+vfs_s_new_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *inode)
 {
     struct vfs_s_entry *entry;
 
@@ -164,7 +164,7 @@ vfs_s_default_stat (struct vfs_class *me, mode_t mode)
 }
 
 struct vfs_s_entry *
-vfs_s_generate_entry (struct vfs_class *me, char *name, struct vfs_s_inode *parent, mode_t mode)
+vfs_s_generate_entry (struct vfs_class *me, const char *name, struct vfs_s_inode *parent, mode_t mode)
 {
     struct vfs_s_inode *inode;
     struct stat *st;
@@ -238,10 +238,12 @@ vfs_s_resolve_symlink (struct vfs_class *me, struct vfs_s_entry *entry,
  */
 static struct vfs_s_entry *
 vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
-		       char *path, int follow, int flags)
+		       const char *a_path, int follow, int flags)
 {
     size_t pseg;
     struct vfs_s_entry *ent = NULL;
+    char * const pathref = g_strdup (a_path);
+    char *path = pathref;
 
     canonicalize_pathname (path);
 
@@ -249,8 +251,10 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 	while (*path == PATH_SEP)	/* Strip leading '/' */
 	    path++;
 
-	if (!path[0])
+	if (!path[0]) {
+	    g_free (pathref);
 	    return ent;
+	}
 
 	for (pseg = 0; path[pseg] && path[pseg] != PATH_SEP; pseg++);
 
@@ -262,8 +266,10 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 
 	if (!ent && (flags & (FL_MKFILE | FL_MKDIR)))
 	    ent = vfs_s_automake (me, root, path, flags);
-	if (!ent)
-	    ERRNOR (ENOENT, NULL);
+	if (!ent) {
+	    me->verrno = ENOENT;
+	    goto cleanup;
+	}
 	path += pseg;
 	/* here we must follow leading directories always;
 	   only the actual file is optional */
@@ -273,10 +279,11 @@ vfs_s_find_entry_tree (struct vfs_class *me, struct vfs_s_inode *root,
 					   PATH_SEP) ? LINK_FOLLOW :
 				   follow);
 	if (!ent)
-	    return NULL;
+	    goto cleanup;
 	root = ent->ino;
     }
-
+cleanup:
+    g_free (pathref);
     return NULL;
 }
 
@@ -299,9 +306,11 @@ split_dir_name (struct vfs_class *me, char *path, char **dir, char **name, char 
 
 static struct vfs_s_entry *
 vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
-			 char *path, int follow, int flags)
+			 const char *a_path, int follow, int flags)
 {
     struct vfs_s_entry *ent = NULL;
+    char * const path = g_strdup (a_path);
+    struct vfs_s_entry *retval = NULL;
 
     if (root->super->root != root)
 	vfs_die ("We have to use _real_ root. Always. Sorry.");
@@ -317,7 +326,9 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 			      flags | FL_DIR);
 	if (save)
 	    *save = PATH_SEP;
-	return vfs_s_find_entry_tree (me, ino, name, follow, flags);
+	retval = vfs_s_find_entry_tree (me, ino, name, follow, flags);
+	g_free (path);
+	return retval;
     }
 
     for (ent = root->subdir; ent != NULL; ent = ent->next)
@@ -341,6 +352,7 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 	ent = vfs_s_new_entry (me, path, ino);
 	if ((MEDATA->dir_load) (me, ino, path) == -1) {
 	    vfs_s_free_entry (me, ent);
+	    g_free (path);
 	    return NULL;
 	}
 	vfs_s_insert_entry (me, root, ent);
@@ -353,15 +365,18 @@ vfs_s_find_entry_linear (struct vfs_class *me, struct vfs_s_inode *root,
 	vfs_die ("find_linear: success but directory is not there\n");
 
 #if 0
-    if (!vfs_s_resolve_symlink (me, ent, follow))
+    if (!vfs_s_resolve_symlink (me, ent, follow)) {
+    	g_free (path);
 	return NULL;
+    }
 #endif
+    g_free (path);
     return ent;
 }
 
 struct vfs_s_inode *
 vfs_s_find_inode (struct vfs_class *me, const struct vfs_s_super *super,
-		  char *path, int follow, int flags)
+		  const char *path, int follow, int flags)
 {
     struct vfs_s_entry *ent;
     if (!(MEDATA->flags & VFS_S_REMOTE) && (!*path))
@@ -494,7 +509,7 @@ static char *
 vfs_s_get_path (struct vfs_class *me, const char *inname,
 		struct vfs_s_super **archive, int flags)
 {
-    char *buf = g_strdup (inname);
+    char * const buf = g_strdup (inname);
     char *res = vfs_s_get_path_mangle (me, buf, archive, flags);
     if (res)
 	res = g_strdup (res);
