@@ -42,11 +42,8 @@
 
 #include "utilvfs.h"
 
-#include "../src/dir.h"
-#include "../src/main.h"
-#include "../src/panel.h"
-#include "../src/key.h"		/* Required for the async alarm handler */
-#include "../src/layout.h"	/* For get_panel_widget and get_other_index */
+#include "../src/panel.h"	/* get_current_panel() */
+#include "../src/layout.h"	/* get_current_type() */
 #include "../src/wtools.h"	/* input_dialog() */
 
 #include "xdirentry.h"
