@@ -1,3 +1,9 @@
+2001-08-26  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/changelog.syntax: Don't require '@' to be in the
+	address.  This also works around a bug in the syntax engine
+	that prevented highlighting of addresses.
+
 2001-08-25  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: New conditionals USE_VFS and INCLUDED_SLANG.
