@@ -1,5 +1,11 @@
 2002-08-17  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Add m4 to SUBDIRS.  Set ACLOCAL_AMFLAGS so that
+	m4 directory is used by aclocal.
+	* m4/Makefile.am: New file.
+	* configure.in: Substitute m4/Makefile.
+	* autogen.sh: Don't copy any macro files, use m4 directory.
+
 	* syntax/Makefile.am: Add js.syntax.
 
 	* configure.in: Add support for glib 2.x.  Right now, it has to

@@ -680,6 +680,7 @@ slang/Makefile
 edit/Makefile 
 syntax/Makefile
 pc/Makefile
+m4/Makefile
 
 lib/mc.ext
 lib/mc.sh
@@ -702,7 +703,8 @@ doc/it/mc.1 doc/it/Makefile
 doc/pl/mc.1 doc/pl/Makefile
 doc/ru/mc.1 doc/ru/Makefile
 
-intl/Makefile po/Makefile.in
+intl/Makefile
+po/Makefile.in
 ])
 
 AC_OUTPUT

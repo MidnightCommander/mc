@@ -37,31 +37,14 @@ if test $gettext_ver -ge 01100; then
   fi
   $AUTOPOINT || exit 1
 else
-  $GETTEXTIZE --copy --force >tmpout || exit 1
+  $GETTEXTIZE --copy --force || exit 1
   if test -e po/ChangeLog~; then
     rm -f po/ChangeLog
     mv po/ChangeLog~ po/ChangeLog
   fi
 fi
 
-rm -f aclocal.m4
-if test -f `aclocal --print-ac-dir`/gettext.m4; then
-  : # gettext macro files are available to aclocal.
-else
-  # gettext macro files are not available.
-  # Find them and copy to a local directory.
-  # Ugly way to parse the instructions gettexize gives us.
-  m4files="`cat tmpout | sed -n -e '/^Please/,/^from/s/^  *//p'`"
-  fromdir=`cat tmpout | sed -n -e '/^Please/,/^from/s/^from the \([^ ]*\) .*$/\1/p'`
-  rm -rf gettext.m4
-  mkdir gettext.m4
-  for i in $m4files; do
-    cp -f $fromdir/$i gettext.m4
-  done
-  ACLOCAL_INCLUDES="-I gettext.m4"
-fi
-
-rm -f tmpout
+ACLOCAL_INCLUDES="-I m4"
 
 # Some old version of GNU build tools fail to set error codes.
 # Check that they generate some of the files they should.
