@@ -272,7 +272,8 @@ Z       Extract compressed tar files to subdirectories
 
 + f \.gz$ | f \.tgz$ | f \.tpz$ | f \.Z$ | f \.z$ | f \.bz2$ & t r & ! t t
 c       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
-        unset D
+	unset D
+	unset EXT
 	case %f in
 	    *.tgz)	EXT=tgz;;
 	    *.tpz)	EXT=tpz;;
@@ -297,7 +298,8 @@ C       Convert gz<->bz2, tar.gz<->tar.bz2 & tgz->tar.bz2
 	set %t
 	while [ -n "$1" ]
         do
-          unset D
+	  unset D
+	  unset EXT
 	  case $1 in
 	    *.tgz)	EXT=tgz;;
 	    *.tpz)	EXT=tpz;;
