@@ -206,7 +206,7 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
     
     result = mc_open (name, O_RDONLY);
     if (result == -1) {
-        mc_message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
+        message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
 	ERRNOR (ENOENT, -1);
     }
     
@@ -223,7 +223,7 @@ static int tar_open_archive (struct vfs_class *me, char *name, struct vfs_s_supe
 	s = g_strconcat ( archive->name, decompress_extension (type), NULL );
 	result = mc_open (s, O_RDONLY);
 	if (result == -1) 
-	    mc_message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
+	    message (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
 	g_free(s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);
@@ -406,7 +406,7 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 	     size -= written) {
 	    data = get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
-		mc_message (1, MSG_ERROR, _("Unexpected EOF on archive file"));
+		message (1, MSG_ERROR, _("Unexpected EOF on archive file"));
 		return STATUS_BADCHECKSUM;
 	    }
 	    written = RECORDSIZE;
@@ -458,14 +458,14 @@ read_header (struct vfs_class *me, struct vfs_s_super *archive, int tard)
 
 	parent = vfs_s_find_inode (me, archive->root, q, LINK_NO_FOLLOW, FL_MKDIR);
 	if (parent == NULL) {
-	    mc_message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	    message (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    return STATUS_BADCHECKSUM;
 	}
 
 	if (header->header.linkflag == LF_LINK) {
 	    inode = vfs_s_find_inode (me, archive->root, current_link_name, LINK_NO_FOLLOW, 0);
 	    if (inode == NULL) {
-	        mc_message (1, MSG_ERROR, _("Inconsistent tar archive"));
+	        message (1, MSG_ERROR, _("Inconsistent tar archive"));
 	    } else {
 		entry = vfs_s_new_entry(me, p, inode);
 		vfs_s_insert_entry(me, parent, entry);
@@ -535,7 +535,7 @@ static int open_archive (struct vfs_class *me, struct vfs_s_super *archive, char
 
 		/* Error on first record */
 	    case STATUS_EOFMARK:
-		mc_message (1, MSG_ERROR, _("Hmm,...\n%s\ndoesn't look like a tar archive."), name);
+		message (1, MSG_ERROR, _("Hmm,...\n%s\ndoesn't look like a tar archive."), name);
 		/* FALL THRU */
 
 		/* Error after header rec */

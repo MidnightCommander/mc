@@ -236,20 +236,12 @@ create_message (int flags, const char *title, const char *text, ...)
  * Show message dialog.  Dismiss it when any key is pressed.
  * Not safe to call from background.
  */
-void
-message (int flags, const char *title, const char *text, ...)
+static void
+fg_message (int flags, const char *title, const char *text)
 {
-    va_list args;
     Dlg_head *d;
-    char *p;
 
-    va_start (args, text);
-    p = g_strdup_vprintf (text, args);
-    va_end (args);
-
-    d = do_create_message (flags, title, p);
-    g_free (p);
-
+    d = do_create_message (flags, title, text);
     mi_getch ();
     dlg_run_done (d);
     destroy_dlg (d);
@@ -262,7 +254,7 @@ static void
 bg_message (int dummy, int *flags, char *title, const char *text)
 {
     title = g_strdup_printf ("%s %s", _("Background process:"), title);
-    message (*flags, title, "%s", text);
+    fg_message (*flags, title, text);
     g_free (title);
 }
 #endif				/* WITH_BACKGROUND */
@@ -270,7 +262,7 @@ bg_message (int dummy, int *flags, char *title, const char *text)
 
 /* Show message box, background safe */
 void
-mc_message (int flags, char *title, const char *text, ...)
+message (int flags, const char *title, const char *text, ...)
 {
     char *p;
     va_list ap;
@@ -279,15 +271,16 @@ mc_message (int flags, char *title, const char *text, ...)
     p = g_strdup_vprintf (text, ap);
     va_end (ap);
 
+    if (title == MSG_ERROR)
+	title = _("Error");
+
 #ifdef WITH_BACKGROUND
     if (we_are_background) {
-	if (title == MSG_ERROR)
-	    title = _("Error");
 	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
 		     strlen (title), title, strlen (p), p);
     } else
 #endif				/* WITH_BACKGROUND */
-	message (flags, title, "%s", p);
+	fg_message (flags, title, p);
 
     g_free (p);
 }

@@ -1,5 +1,8 @@
 2003-10-26  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c: Merge mc_message() and message() into one background
+	safe function message().  Fix all callers.
+
 	* i18n.h: Include into global.h.
 	* Makefile.am: Remove i18n.h.
 

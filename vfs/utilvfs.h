@@ -4,8 +4,7 @@
 #include "../src/global.h"
 
 #include "../src/tty.h"		/* enable/disable interrupt key */
-#include "../src/wtools.h"	/* MSG_ERROR */
-#include "../src/background.h"	/* mc_message */
+#include "../src/wtools.h"	/* message() */
 #include "../src/main.h"	/* print_vfs_message */
 
 /* Flags for vfs_split_url() */

@@ -1,23 +1,4 @@
-/* {{{ Copyright */
-
-/* File managing.  Important notes on this file:
-   
-   About the use of dialogs in this file:
-     If you want to add a new dialog box (or call a routine that pops
-     up a dialog box), you have to provide a wrapper for background
-     operations (ie, background operations have to up-call to the parent
-     process).
-
-     For example, instead of using the message() routine, in this
-     file, you should use mc_message(), which can talk to the foreground
-     process.
-
-     Actually, that is a rule that should be followed by any routines
-     that may be called from this module.
-
-*/
-
-/* File managing
+/* File management.
    Copyright (C) 1994, 1995, 1996 The Free Software Foundation
    
    Written by: 1994, 1995       Janne Kukonlehto
@@ -50,7 +31,10 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* }}} */
+/*
+ * Please note that all dialogs used here must be safe for background
+ * operations.
+ */
 
 /* {{{ Include files */
 
@@ -230,7 +214,7 @@ do_transform_source (FileOpContext *ctx, unsigned char *source)
 	case '*':
 	    if (next_reg < 0 || next_reg >= RE_NREGS
 		|| ctx->regs.start[next_reg] < 0) {
-		mc_message (1, MSG_ERROR, _(" Invalid target mask "));
+		message (1, MSG_ERROR, _(" Invalid target mask "));
 		transform_error = FILE_ABORT;
 		return NULL;
 	    }
@@ -329,7 +313,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 		    }
 		}
 	    }
-	    mc_message (1, MSG_ERROR, _(" Cannot make the hardlink "));
+	    message (1, MSG_ERROR, _(" Cannot make the hardlink "));
 	    return 0;
 	}
     lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)
@@ -382,7 +366,7 @@ make_symlink (FileOpContext *ctx, char *src_path, char *dst_path)
 
     if (ctx->stable_symlinks)
 	if (!vfs_file_is_local (src_path) || !vfs_file_is_local (dst_path)) {
-	    mc_message (1, MSG_ERROR,
+	    message (1, MSG_ERROR,
 			_(" Cannot make stable symlinks across "
 			  "non-local filesystems: \n\n"
 			  " Option Stable Symlinks will be disabled "));
@@ -526,7 +510,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
     if (dst_exists) {
 	/* Destination already exists */
 	if (sb.st_dev == sb2.st_dev && sb.st_ino == sb2.st_ino) {
-	    mc_message (1, MSG_ERROR,
+	    message (1, MSG_ERROR,
 			_(" `%s' and `%s' are the same file "), src_path,
 			dst_path);
 	    do_refresh ();
@@ -612,7 +596,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path,
 
     if (ctx->do_reget) {
 	if (mc_lseek (src_desc, ctx->do_reget, SEEK_SET) != ctx->do_reget) {
-	    mc_message (1, _("Warning"),
+	    message (1, _("Warning"),
 			_(" Reget failed, about to overwrite file "));
 	    ctx->do_reget = ctx->do_append = 0;
 	}
@@ -922,7 +906,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
     if (is_in_linklist (parent_dirs, s, &cbuf)) {
 	/* we found a cyclic symbolic link */
-	mc_message (1, MSG_ERROR,
+	message (1, MSG_ERROR,
 		    _(" Cannot copy cyclic symbolic link \n `%s' "), s);
 	return FILE_SKIP;
     }
@@ -1127,14 +1111,14 @@ move_file_file (FileOpContext *ctx, char *s, char *d,
 
 	    strcpy (st, name_trunc (s, msize));
 	    strcpy (dt, name_trunc (d, msize));
-	    mc_message (1, MSG_ERROR,
+	    message (1, MSG_ERROR,
 			_(" `%s' and `%s' are the same file "), st, dt);
 	    do_refresh ();
 	    return FILE_SKIP;
 	}
 
 	if (S_ISDIR (dst_stats.st_mode)) {
-	    mc_message (1, MSG_ERROR,
+	    message (1, MSG_ERROR,
 			_(" Cannot overwrite directory `%s' "), d);
 	    do_refresh ();
 	    return FILE_SKIP;
@@ -1245,7 +1229,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 
 	strcpy (st, name_trunc (s, msize));
 	strcpy (dt, name_trunc (d, msize));
-	mc_message (1, MSG_ERROR,
+	message (1, MSG_ERROR,
 		    _(" `%s' and `%s' are the same directory "), st, dt);
 	do_refresh ();
 	return FILE_SKIP;

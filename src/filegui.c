@@ -1,23 +1,4 @@
-/* {{{ Copyright */
-
-/* File managing.  Important notes on this file:
- *  
- * About the use of dialogs in this file:
- *   If you want to add a new dialog box (or call a routine that pops
- *   up a dialog box), you have to provide a wrapper for background
- *   operations (ie, background operations have to up-call to the parent
- *   process).
- *
- *   For example, instead of using the message() routine, in this
- *   file, you should use mc_message(), which can talk to the foreground
- *   process.
- *
- *   Actually, that is a rule that should be followed by any routines
- *   that may be called from this module.
- *
- */
-
-/* File managing GUI for the text mode edition
+/* File management GUI for the text mode edition
  *
  * Copyright (C) 1994, 1995, 1996 The Free Software Foundation
  *  
@@ -52,7 +33,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-/* }}} */
+/*
+ * Please note that all dialogs used here must be safe for background
+ * operations.
+ */
+
 
 /* {{{ Include files */
 
@@ -75,7 +60,7 @@
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
 #include "color.h"		/* dialog_colors */
-#include "background.h"		/* mc_message */
+#include "background.h"		/* message */
 #include "widget.h"		/* WLabel */
 #define WANT_WIDGETS
 #include "main.h"		/* the_hint */
@@ -878,7 +863,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
 
     g_return_val_if_fail (ctx != NULL, NULL);
 #if 0
-    mc_message (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
+    message (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
 		def_text);
 #endif
     fmd_init_i18n (FALSE);
@@ -951,7 +936,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
 				&ctx->rx);
 
     if (error) {
-	mc_message (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
+	message (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		    orig_mask, error);
 	if (orig_mask)
 	    g_free (orig_mask);

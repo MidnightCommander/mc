@@ -71,12 +71,8 @@ struct Dlg_head *create_message (int flags, const char *title,
 				 const char *text, ...)
     __attribute__ ((format (printf, 3, 4)));
 
-/* Show message box, not background safe */
-void message (int flags, const char *title, const char *text, ...)
-    __attribute__ ((format (printf, 3, 4)));
-
 /* Show message box, background safe */
-void mc_message (int flags, char *title, const char *text, ...)
+void message (int flags, const char *title, const char *text, ...)
     __attribute__ ((format (printf, 3, 4)));
 
 

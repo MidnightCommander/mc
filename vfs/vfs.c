@@ -1113,7 +1113,7 @@ mc_def_ungetlocalcopy (struct vfs_class *vfs, char *filename, char *local, int h
     return 0;
 
  failed:
-    mc_message (1, _("Changes to file lost"), filename);
+    message (1, _("Changes to file lost"), filename);
     if (fdout!=-1) mc_close(fdout);
     if (fdin!=-1) close(fdin);
     unlink (local);
@@ -1156,7 +1156,7 @@ vfs_expire (int now)
     struct vfs_stamping *stamp, *st;
 
     /* Avoid recursive invocation, e.g. when one of the free functions
-       calls mc_message */
+       calls message */
     if (locked)
 	return;
     locked = 1;
@@ -1788,9 +1788,9 @@ error:
       static int errorcount = 0;
 
       if (++errorcount < 5) {
-	mc_message (1, _("Cannot parse:"), (p_copy && *p_copy) ? p_copy : line);
+	message (1, _("Cannot parse:"), (p_copy && *p_copy) ? p_copy : line);
       } else if (errorcount == 5)
-	mc_message (1, _("Error"), _("More parsing errors will be ignored."));
+	message (1, _("Error"), _("More parsing errors will be ignored."));
     }
 
     g_free (p_copy);
@@ -1800,7 +1800,7 @@ error:
 void
 vfs_die (const char *m)
 {
-    mc_message (1, _("Internal error:"), m);
+    message (1, _("Internal error:"), m);
     exit (1);
 }
 

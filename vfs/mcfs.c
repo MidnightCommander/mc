@@ -119,7 +119,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 	return 0;
 
     if (result != MC_VERSION_OK) {
-	mc_message (1, _(" MCFS "),
+	message (1, _(" MCFS "),
 		    _(" The server does not support this version "));
 	close (my_socket);
 	return 0;
@@ -164,7 +164,7 @@ mcfs_login_server (int my_socket, char *user, int port,
 	    return 0;
 
 	if (result != MC_LOGINOK) {
-	    mc_message (1, _(" MCFS "), _(" Invalid password "));
+	    message (1, _(" MCFS "), _(" Invalid password "));
 	    rpc_send (my_socket, RPC_INT, MC_QUIT, RPC_END);
 	    close (my_socket);
 	    return 0;
@@ -224,7 +224,7 @@ open_tcp_link (char *host, int *port, int *version, char *caller)
 		sizeof (inaddr));
     else {
 	if ((hp = gethostbyname (host)) == NULL) {
-	    mc_message (1, caller, _(" Cannot locate hostname: %s "),
+	    message (1, caller, _(" Cannot locate hostname: %s "),
 			host);
 	    return 0;
 	}
@@ -243,13 +243,13 @@ open_tcp_link (char *host, int *port, int *version, char *caller)
     server_address.sin_port = htons (*port);
 
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0) {
-	mc_message (1, caller, _(" Cannot create socket: %s "),
+	message (1, caller, _(" Cannot create socket: %s "),
 		    unix_error_string (errno));
 	return 0;
     }
     if (connect (my_socket, (struct sockaddr *) &server_address,
 		 sizeof (server_address)) < 0) {
-	mc_message (1, caller, _(" Cannot connect to server: %s "),
+	message (1, caller, _(" Cannot connect to server: %s "),
 		    unix_error_string (errno));
 	close (my_socket);
 	return 0;
@@ -319,7 +319,7 @@ mcfs_open_link (char *host, char *user, int *port, char *netrcpass)
 		return &mcfs_connections[i];
 	}
     if (mcfs_open_connections == MCFS_MAX_CONNECTIONS) {
-	mc_message (1, MSG_ERROR, _(" Too many open connections "));
+	message (1, MSG_ERROR, _(" Too many open connections "));
 	return 0;
     }
 

@@ -134,7 +134,7 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
     struct vfs_s_inode *root;
 
     if((fd = mc_open(name, O_RDONLY)) == -1) {
-	mc_message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
+	message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
 	return -1;
     }
 
@@ -150,7 +150,7 @@ static int cpio_open_cpio_file(struct vfs_class *me, struct vfs_s_super *super, 
 	mc_close(fd);
 	s = g_strconcat(name, decompress_extension(type), NULL);
 	if((fd = mc_open(s, O_RDONLY)) == -1) {
-	    mc_message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
+	    message (1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
 	    g_free(s);
 	    return -1;
 	}
@@ -216,7 +216,7 @@ static int cpio_find_head(struct vfs_class *me, struct vfs_s_super *super)
 		ptr -= top - 128;
 	    }
 	    if((tmp = mc_read(super->u.arch.fd, buf, top)) == 0 || tmp == -1) {
-		mc_message (1, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
+		message (1, MSG_ERROR, _("Premature end of cpio archive\n%s"), super->name);
 		cpio_free_archive(me, super);
 		return CPIO_UNKNOWN;
 	    }
@@ -302,7 +302,7 @@ static int cpio_read_oldc_head(struct vfs_class *me, struct vfs_s_super *super)
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
-	mc_message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), super->name);
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), super->name);
 	return STATUS_FAIL;
     }
 
@@ -352,7 +352,7 @@ static int cpio_read_crc_head(struct vfs_class *me, struct vfs_s_super *super)
 	      &hd.c_nlink,  &hd.c_mtime, &hd.c_filesize,
 	      &hd.c_dev, &hd.c_devmin, &hd.c_rdev, &hd.c_rdevmin,
 	      &hd.c_namesize, &hd.c_chksum) < 14) {
-	mc_message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
+	message (1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"),
 		   super->name);
 	return STATUS_FAIL;
     }
@@ -423,7 +423,7 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 	if((l = defer_find(super->u.arch.deferred, &i)) != NULL) {
 	    inode = l->inode;
 	    if(inode->st.st_size && stat->st_size && (inode->st.st_size != stat->st_size)) {
-		mc_message (1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
+		message (1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
 			   name, super->name);
 		inode = NULL;
 	    }
@@ -446,7 +446,7 @@ static int cpio_create_entry(struct vfs_class *me, struct vfs_s_super *super, st
 		   'No such file or directory' is such case) */
 
 	if(!S_ISDIR(entry->ino->st.st_mode)) { /* This can be considered archive inconsistency */
-	    mc_message (1, MSG_ERROR, _("%s contains duplicate entries! Skipping!"), super->name);
+	    message (1, MSG_ERROR, _("%s contains duplicate entries! Skipping!"), super->name);
 	} else {
 	    entry->ino->st.st_mode = stat->st_mode;
 	    entry->ino->st.st_uid = stat->st_uid;
@@ -515,7 +515,7 @@ static int cpio_open_archive(struct vfs_class *me, struct vfs_s_super *super, ch
 
 	switch(status) {
 	case STATUS_EOF:
-	    mc_message (1, MSG_ERROR, _("Unexpected end of file\n%s"), name);
+	    message (1, MSG_ERROR, _("Unexpected end of file\n%s"), name);
 	    return 0;
 	case STATUS_OK:
 	    continue;
