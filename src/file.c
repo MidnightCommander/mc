@@ -500,7 +500,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     if (file_progress_show_source (ctx, src_path) == FILE_ABORT ||
 	file_progress_show_target (ctx, dst_path) == FILE_ABORT)
 	return FILE_ABORT;
-    file_progress_show_count (ctx, *progress_count, ctx->progress_count);
+/*    file_progress_show_count (ctx, *progress_count, ctx->progress_count); */
     mc_refresh ();
 
  retry_dst_stat:
@@ -673,7 +673,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
     ctx->bps = 0;
 
     return_status = file_progress_show (ctx, 0, file_size);
-    file_progress_show_bytes (ctx, 0, file_size);
+/*    file_progress_show_bytes (ctx, 0, file_size); */
     mc_refresh ();
 
     if (return_status != FILE_CONT)
@@ -767,7 +767,7 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	    file_progress_set_stalled_label (ctx, stalled_msg);
 
 	    return_status = file_progress_show (ctx, n_read_total, file_size);
-            file_progress_show_bytes (ctx, n_read_total, file_size);
+/*            file_progress_show_bytes (ctx, n_read_total, file_size); */
 	    mc_refresh ();
 	    if (return_status != FILE_CONT)
 	        goto ret;
