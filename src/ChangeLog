@@ -1,5 +1,9 @@
 2001-07-24  Pavel Roskin  <proski@gnu.org>
 
+	* achown.c (ch_perm): Make constant array.
+	(chown_info_update): Use set_perm_by_flags(), not set_perm().
+	(set_perm): Remove.
+
 	* achown.c: Make all global variables static.  Fix help.
 	* complete.c: Likewise.
 	* chmod.c: Make all global variables static.

@@ -88,7 +88,7 @@ static int files_on_begin;	/* Number of files at startup */
 static int flag_pos;
 static int x_toggle;
 static char ch_flags[11];
-static char *ch_perm = "rwx";
+static const char ch_perm[] = "rwx";
 static umode_t ch_cmode;
 static struct stat *sf_stat;
 static int need_update;
@@ -138,20 +138,14 @@ static void set_perm_by_flags (char *s, int f_p)
 {
     int i;
 
-    for (i = 0; i < 3; i++)
+    for (i = 0; i < 3; i++) {
 	if (ch_flags[f_p + i] == '+')
 	    s[i] = ch_perm[i];
 	else if (ch_flags[f_p + i] == '-')
 	    s[i] = '-';
 	else
 	    s[i] = (ch_cmode & (1 << (8 - f_p - i))) ? ch_perm[i] : '-';
-}
-
-static void set_perm (char *s, int p)
-{
-    s[0] = (p & 4) ? 'r' : '-';
-    s[1] = (p & 2) ? 'w' : '-';
-    s[2] = (p & 1) ? 'x' : '-';
+    }
 }
 
 static umode_t get_perm (char *s, int base)
@@ -392,9 +386,9 @@ static void chown_info_update (void)
     printw ("%12o", get_mode ());
     
     /* permissions */
-    set_perm (b_att[0]->text, sf_stat->st_mode >> 6);
-    set_perm (b_att[1]->text, sf_stat->st_mode >> 3);
-    set_perm (b_att[2]->text, sf_stat->st_mode);
+    set_perm_by_flags (b_att[0]->text, 0);
+    set_perm_by_flags (b_att[1]->text, 3);
+    set_perm_by_flags (b_att[2]->text, 6);
 }
 
 static void b_setpos (int f_pos) {
