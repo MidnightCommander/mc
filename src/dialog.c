@@ -361,7 +361,7 @@ int dlg_overlap (Widget *a, Widget *b)
 
 /* Find the widget with the given callback in the dialog h */
 Widget *
-find_widget_type (Dlg_head *h, void *callback)
+find_widget_type (Dlg_head *h, callback_fn callback)
 {
     Widget *w;
     Widget *item;
