@@ -1,3 +1,10 @@
+1999-06-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop-icon.c (desktop_icon_select): Show the
+	dicon->background. 
+	(desktop_icon_init): Initialize backgorund as a rectangle that
+	fills all of the space used by the icon.
+
 1999-05-31  Kjartan Maraas  <kmaraas@online.no>
 
 	* glayout.c (gnome_panel_about_menu): Hooked up the new help
