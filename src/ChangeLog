@@ -1,3 +1,8 @@
+2004-09-26  Mike Gorchak  <mike@malva.ua>
+
+	* key.c (qansi_key_defines[]): Add support for qansi-m terminals.
+	Needed on QNX Neutrino. (correct_key_code): Likewise.
+
 2004-09-25  Roland Illig  <roland.illig@gmx.de>
 
 	* pipethrough.c: Added pipethrough, a function to execute child
