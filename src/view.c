@@ -99,7 +99,6 @@ struct WView {
 
     char *filename;		/* Name of the file */
     char *command;		/* Command used to pipe data in */
-    char *localcopy;
     int view_active;
     int have_frame;
     
@@ -121,23 +120,22 @@ struct WView {
     unsigned long start_display;/* First char displayed */
     int  start_col;		/* First displayed column, negative */
     unsigned long edit_cursor;  /* HexEdit cursor position in file */
-    char hexedit_mode;          /* Hexidecimal editing mode flag */ 
-    char nib_shift;             /* A flag for inserting nibbles into bytes */
+    int hexedit_mode:1;		/* Hexidecimal editing mode flag */ 
+    int nib_shift:1;		/* Set if editing the least significant nibble */
     enum ViewSide view_side;	/* A flag for the active editing panel */
-    int  file_dirty;            /* Number of changes */
     int  start_save;            /* Line start shift between Ascii and Hex */ 
     int  cursor_col;		/* Cursor column */
     int  cursor_row;		/* Cursor row */
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
-    int wrap_mode;		/* wrap_mode */
+    int wrap_mode:1;		/* wrap_mode */
 	
     /* Mode variables */
-    int hex_mode;		/* Hexadecimal mode flag */
+    int hex_mode:1;		/* Hexadecimal mode flag */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
-    int viewer_magic_flag;	/* Selected viewer */
-    int viewer_nroff_flag;	/* Do we do nroff style highlighting? */
+    int viewer_magic_flag:1;	/* Selected viewer */
+    int viewer_nroff_flag:1;	/* Do we do nroff style highlighting? */
     
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
@@ -152,7 +150,7 @@ struct WView {
     int  direction;		/* 1= forward; -1 backward */
     void (*last_search)(void *, char *);
                                 /* Pointer to the last search command */
-    int view_quit;		/* Quit flag */
+    int view_quit:1;		/* Quit flag */
 
     int monitor;		/* Monitor file growth (like tail -f) */
     /* Markers */
@@ -267,8 +265,6 @@ view_done (WView *view)
     }
 
     if (view->view_active) {
-	if (view->localcopy)
-	    mc_ungetlocalcopy (view->filename, view->localcopy, 0);
 	free_file (view);
 	g_free (view->filename);
 	if (view->command)
@@ -388,7 +384,7 @@ put_editkey (WView *view, unsigned char key)
 	else
 	    byte_val = get_byte (view, view->edit_cursor);
 
-	if (view->nib_shift == 0) {
+	if (!view->nib_shift) {
 	    byte_val = (byte_val & 0x0f) | (key << 4);
 	} else {
 	    byte_val = (byte_val & 0xf0) | (key);
@@ -431,7 +427,6 @@ free_change_list (WView *view)
 	g_free (n);
 	n = view->change_list;
     }
-    view->file_dirty = 0;
     view->dirty++;
 }
 
@@ -618,7 +613,6 @@ do_view_init (WView *view, const char *_command, const char *_file,
     view->first = view->bytes_read = 0;
     view->last_byte = 0;
     view->filename = g_strdup (_file);
-    view->localcopy = 0;
     view->command = 0;
     view->last = view->first + ((LINES - 2) * view->bytes_per_line);
 
@@ -716,7 +710,6 @@ do_view_init (WView *view, const char *_command, const char *_file,
 	view->wrap_mode = saved_wrap_mode;
     }
     view->edit_cursor = view->first;
-    view->file_dirty = 0;
     view->nib_shift = 0;
     view->view_side = view_side_left;
     view->change_list = NULL;
@@ -1144,8 +1137,8 @@ view_place_cursor (WView *view)
 {
     int shift;
 
-    if (view->view_side == view_side_left)
-	shift = view->nib_shift;
+    if ((view->view_side == view_side_left) && view->nib_shift)
+	shift = 1;
     else
 	shift = 0;
 
@@ -1425,8 +1418,8 @@ move_right (WView *view)
 	view->last = view->first + ((LINES - 2) * view->bytes_per_line);
 
 	if (view->hex_mode && view->view_side == view_side_left) {
-	    view->nib_shift = 1 - view->nib_shift;
-	    if (view->nib_shift == 1)
+	    view->nib_shift = !view->nib_shift;
+	    if (view->nib_shift)
 		return;
 	}
 	view->edit_cursor = (++view->edit_cursor < view->last_byte) ?
@@ -1447,8 +1440,8 @@ move_left (WView *view)
 	return;
     if (view->hex_mode) {
 	if (view->hex_mode && view->view_side == view_side_left) {
-	    view->nib_shift = 1 - view->nib_shift;
-	    if (view->nib_shift == 0)
+	    view->nib_shift = !view->nib_shift;
+	    if (!view->nib_shift)
 		return;
 	}
 	if (view->edit_cursor > view->first)
