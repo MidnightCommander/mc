@@ -526,6 +526,26 @@ type/Microsoft Word Document
        View=%view{ascii} word2x -f text %f -
        Icon=word.xpm
  
+# cpio rules
+
+shell/.cpio.Z
+	Open=%cd cpio:%d/%p/
+	View=%view{ascii} compress -dc '%f' | cpio -ictv
+	Extract=compress -dc '%f' | cpio -ic
+	Icon=compressed.xpm
+
+shell/.cpio.gz
+	Open=%cd cpio:%d/%p/
+	View=%view{ascii} gzip -dc '%f' | cpio -ictv
+	Extract=gzip -dc '%f' | cpio -ic
+	Icon=compressed.xpm
+
+shell/.cpio
+	Open=%cd cpio:%d/%p/
+	View=%view{ascii} cat '%f' | cpio -ictv
+	Extract=cat '%f' | cpio -ic
+	Icon=cpio.xpm
+
 
 
 # Default target for anything not described above

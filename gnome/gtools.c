@@ -30,7 +30,7 @@ pack_button (WButton *button, GtkBox *box)
 {
 	if (!button)
 		return;
-	gtk_box_pack_start_defaults (GTK_BOX (box), GTK_WIDGET (button->widget.wdata));
+	gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (button->widget.wdata), 0, 0, 0);
 }
 
 int query_dialog (char *header, char *text, int flags, int count, ...)

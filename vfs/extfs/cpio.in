@@ -1,32 +1,73 @@
 #!/bin/sh
 #
-# Written by Erik Troan (ewt@redhat.com) 1996
-# Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996
+# Written by Stas Maximov 1998 SVR4 (UnixWare)
+# stmax@u213.srcc.msu.su 
 # (C) 1996 The Free Software Foundation.
 #
 #
 
-mccpiofs_list ()
+uni_cat ()
+# $1 is the archive name
 {
-    cpio -tv --quiet < $1
-}
-
-mccpiofs_copyout ()
-{
-    case "$2" in
-	*)
-	    TMPDIR=/tmp/mctmpdir.$$
-	    mkdir $TMPDIR
-	    cd $TMPDIR
-	    cpio -iumd --quiet $2 < $1 2>/dev/null
-	    mv $2 $3
-	    cd /
-	    rm -rf $TMPDIR;;
+    case "$1" in
+    *.cpio.Z)	compress -dc "$1"
+	;;
+    *.cpio.gz)	gzip -dc "$1"
+	;;
+    *.cpio)	cat "$1"
+	;;
+    *)		echo "unknown extension"
     esac
 }
 
-case "$1" in
-  list) mccpiofs_list $2; exit 0;;
-  copyout) mccpiofs_copyout $2 $3 $4; exit 0;;
-esac
-exit 1
+mccpiofs_list ()
+# $1 is the archive name
+{
+    uni_cat "$1" | cpio -itv | /bin/awk '
+	{
+	    if (substr($9,length($9),1) == ",")
+	    {
+		tmp = substr($9, 1, length($9)-1);
+		$9 = $8;
+		$8 = tmp
+	    }
+	    else if (substr($10,length($10),1) == ",")
+	    {
+		tmp = substr($10, 1, length($10)-1);
+		$10 = $9
+		$9 = tmp 
+	    }
+		
+	    print $0
+	}'
+}
+
+mccpiofs_copyout ()
+# $1 is the archive name
+# $2 is a name of a file within the archive
+# $3 is a name of a file within the system (to add from or extract to)
+{
+    TMPDIR=/tmp/mctmpdir.$$
+    mkdir $TMPDIR
+    cd $TMPDIR
+    uni_cat "$1" | cpio -icumd "$2" 2>/dev/null
+    mv "$2" "$3"
+    cd /
+    rm -rf $TMPDIR
+}
+
+#
+# main
+#
+
+    case "$1" in
+    list)   mccpiofs_list $2
+	    exit 0
+	    ;;
+    copyout) mccpiofs_copyout $2 $3 $4
+	    exit 0
+	    ;;
+    esac
+
+    exit 1
+
