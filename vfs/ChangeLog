@@ -1,5 +1,13 @@
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
+	* extfs/deb.in (mcdebfs_list): Separated the use of quoted and
+	unquoted variables. (mcdebfs_copyout): likewise.
+	(mcdebfs_run): likewise.
+	
+	From Leonard den Ottolander <leonard@den.ottolander.nl>
+
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
+
 	* extfs/deba.in (list): Separated the use of quoted and unquoted
 	variables. (copyout): likewise. (run): likewise.
 	
