@@ -5,7 +5,7 @@ rootdir = $(srcdir)/..
 @MCFG@@MCF@
 
 GNOMEDEFS     = -DHAVE_X -DHAVE_GNOME @GNOME_INCLUDEDIR@ 
-CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@
+CFLAGS        = -g $(XCFLAGS) @X_CFLAGS@ -I.
 CPPFLAGS      = $(XCPPFLAGS) -I$(vfsdir) -I$(slangdir) $(GNOMEDEFS)
 LDFLAGS       = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEUI_LIBS@
 CORBA_LDFLAGS = $(XLDFLAGS) @GNOME_LIBDIR@ @GNOMEGNORBA_LIBS@
@@ -22,6 +22,8 @@ PIXMAPS =			\
 	directory.xpm		\
 	listing-list.xpm	\
 	listing-iconic.xpm	\
+	listing-custom.xpm	\
+	listing-brief-list.xpm	\
 	dir-close.xpm		\
 	dir-open.xpm
 
@@ -63,6 +65,7 @@ GNOMEHDRS = 		\
 	gcliplabel.h	\
 	gcmd.h		\
 	gconf.h		\
+	gcorba.h	\
 	gdesktop-icon.h	\
 	gdesktop.h	\
 	gdnd.h		\
