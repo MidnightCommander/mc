@@ -20,6 +20,9 @@
 
 #include <config.h>
 #include "edit.h"
+#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
+#include "mad.h"
+#endif
 
 #ifdef MIDNIGHT
 #define tab_width option_tab_spacing
@@ -107,7 +110,11 @@ static long end_paragraph (WEdit * edit, long p, int force)
 static char *get_paragraph (WEdit * edit, long p, long q, int indent, int *size)
 {
     char *s, *t;
+#if 0
     t = malloc ((q - p) + 2 * (q - p) / option_word_wrap_line_length + 10);
+#else
+    t = malloc (2 * (q - p) + 100);
+#endif
     if (!t)
 	return 0;
     for (s = t; p < q; p++, s++) {

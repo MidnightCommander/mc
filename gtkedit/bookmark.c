@@ -23,6 +23,9 @@
 
 #include <config.h>
 #include "edit.h"
+#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
+#include "mad.h"
+#endif
 
 /* note, if there is more than one bookmark on a line, then they are
    appended after each other and the last one is always the one found
@@ -138,23 +141,30 @@ void book_mark_insert (WEdit * edit, int line, int c)
     if (p->next)
 	p->next->prev = q;
     p->next = q;
+#if !defined (GTK) && !defined (MIDNIGHT)
+    render_scrollbar (edit->widget->vert_scrollbar);
+#endif
 }
 
 /* remove a bookmark if there is one at this line matching this colour - c of -1 clear all */
-void book_mark_clear (WEdit * edit, int line, int c)
+/* returns non-zero on not-found */
+int book_mark_clear (WEdit * edit, int line, int c)
 {
     struct _book_mark *p, *q;
+    int r = 1;
+    int rend = 0;
     if (!edit->book_mark)
-	return;
+	return r;
     for (p = book_mark_find (edit, line); p; p = q) {
 	q = p->prev;
 	if (p->line == line && (p->c == c || c == -1)) {
+	    r = 0;
 	    edit->force |= REDRAW_LINE;
 	    edit->book_mark = p->prev;
 	    p->prev->next = p->next;
 	    if (p->next)
 		p->next->prev = p->prev;
-	    memset (p, 0, sizeof (struct _book_mark));
+	    rend = 1;
 	    free (p);
 	    break;
 	}
@@ -164,12 +174,18 @@ void book_mark_clear (WEdit * edit, int line, int c)
 	free (edit->book_mark);
 	edit->book_mark = 0;
     }
+#if !defined (GTK) && !defined (MIDNIGHT)
+    if (rend)
+	render_scrollbar (edit->widget->vert_scrollbar);
+#endif
+    return r;
 }
 
 /* clear all bookmarks matching this colour, if c is -1 clears all */
 void book_mark_flush (WEdit * edit, int c)
 {
     struct _book_mark *p, *q;
+    int rend = 0;
     if (!edit->book_mark)
 	return;
     edit->force |= REDRAW_PAGE;
@@ -181,7 +197,7 @@ void book_mark_flush (WEdit * edit, int c)
 	    q->prev->next = q->next;
 	    if (p)
 		p->prev = q->prev;
-	    memset (q, 0, sizeof (struct _book_mark));
+	    rend = 1;
 	    free (q);
 	}
     }
@@ -189,28 +205,46 @@ void book_mark_flush (WEdit * edit, int c)
 	free (edit->book_mark);
 	edit->book_mark = 0;
     }
+#if !defined (GTK) && !defined (MIDNIGHT)
+    if (rend)
+	render_scrollbar (edit->widget->vert_scrollbar);
+#endif
 }
 
 /* shift down bookmarks after this line */
 void book_mark_inc (WEdit * edit, int line)
 {
+    int rend = 0;
     if (edit->book_mark) {
 	struct _book_mark *p;
 	p = book_mark_find (edit, line);
-	for (p = p->next; p; p = p->next)
+	for (p = p->next; p; p = p->next) {
 	    p->line++;
+	    rend = 1;
+	}
     }
+#if !defined (GTK) && !defined (MIDNIGHT)
+    if (rend)
+	render_scrollbar (edit->widget->vert_scrollbar);
+#endif
 }
 
 /* shift up bookmarks after this line */
 void book_mark_dec (WEdit * edit, int line)
 {
+    int rend = 0;
     if (edit->book_mark) {
 	struct _book_mark *p;
 	p = book_mark_find (edit, line);
-	for (p = p->next; p; p = p->next)
+	for (p = p->next; p; p = p->next) {
 	    p->line--;
+	    rend = 1;
+	}
     }
+#if !defined (GTK) && !defined (MIDNIGHT)
+    if (rend)
+	render_scrollbar (edit->widget->vert_scrollbar);
+#endif
 }
 
 

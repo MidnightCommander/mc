@@ -25,20 +25,21 @@
 
 #define MAX_LINE_LEN 1024
 
-#ifndef MIDNIGHT
-#ifndef GTK
+#if ! defined (MIDNIGHT) && ! defined (GTK)
 #include "app_glob.c"
 #include "coollocal.h"
-#endif
-#else
-#include "../src/mad.h"
+#include "mad.h"
 #endif
 
 extern int column_highlighting;
 
+#if defined (MIDNIGHT) || defined (GTK)
+
 void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 {
+#ifdef MIDNIGHT
     int i;
+#endif
     char t[160];		/* 160 just to be sure */
 /* The field lengths just prevents the status line from shortening to much */
     sprintf (t, "[%c%c%c%c] %2ld:%3ld+%2ld=%3ld/%3ld - *%-4ld/%4ldb=%3d",
@@ -49,19 +50,24 @@ void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
 	     edit->curs_line + 1, edit->total_lines + 1, edit->curs1,
 	     edit->last_byte, edit->curs1 < edit->last_byte
 	     ? edit_get_byte (edit, edit->curs1) : -1);
+#ifdef MIDNIGHT
     sprintf (s, "%.*s", w + 1, t);
     i = strlen (s);
     s[i] = ' ';
     i = w;
     do {
-	if (strchr (" +-*=/:b", s[i]))	/* chop off the last word/number */
+	if (strchr ("+-*=/:b", s[i]))	/* chop off the last word/number */
 	    break;
 	s[i] = fill;
     } while (i--);
     s[i] = fill;
     s[w] = 0;
+#else
+    strcpy (s, t);
+#endif
 }
 
+#endif
 
 #ifdef MIDNIGHT
 
@@ -101,7 +107,7 @@ void edit_status (WEdit * edit)
 extern int fixed_font;
 #endif
 
-void rerender_text (CWidget * wdt);
+void render_status (CWidget * wdt, int expose);
 
 #ifdef GTK
 
@@ -138,40 +144,45 @@ void edit_status (WEdit *edit)
 
 void edit_status (WEdit * edit)
 {
-    if ((COptionsOf (edit->widget) & EDITOR_NO_TEXT)) {
+    long start_mark, end_mark;
+    CWidget *wdt;
+    mode_t m;
+    char *p;
+    char id[33];
+    char s[256];
+    if (eval_marks (edit, &start_mark, &end_mark))
+	end_mark = start_mark = 0;
+    if ((COptionsOf (edit->widget) & EDITOR_NO_TEXT))
 	return;
-    } else {
-	int w, i, t;
-	CWidget *wdt;
-	char id[33];
-	char s[160];
-	w = edit->num_widget_columns - 1;
-	if (w > 150)
-	    w = 150;
-	if (w < 0)
-	    w = 0;
-	memset (s, 0, w);
-	if (w > 1) {
-	    i = w > 24 ? 18 : w - 6;
-	    i = i < 13 ? 13 : i;
-	    sprintf (s, "%s", name_trunc (edit->filename ? edit->filename : "", i));
-	    i = strlen (s);
-	    s[i] = ' ';
-	    s[i+1] = ' ';
-	    t = w - i - 2;
-	    if (t < 0)
-		t = 0;
-	    status_string (edit, s + i + 2, t, 0, FONT_MEAN_WIDTH);
-	}
-	s[w] = 0;
-	strcpy (id, CIdentOf (edit->widget));
-	strcat (id, ".text");
-	wdt = CIdent (id);
-	free (wdt->text);
-	wdt->text = strdup (s);
-	CSetWidgetSize (id, CWidthOf (edit->widget), CHeightOf (wdt));
-	rerender_text (wdt);
-    }
+    m = edit->stat.st_mode;
+    p = edit->filename ? edit->filename : "";
+    sprintf (s, "\034%c%s\033\035  \034-%c%c%c%c%c%c%c%c%c\035  \034%s%s%s%c\035  \034\030%02ld\033\035  \034%-4ld+%2ld=\030%4ld\033/%3ld\035  \034*%-5ld/%5ldb=%c%3d\035%c \034\001%ld\033\035",
+	     *p ? '\033' : '\003', *p ? (char *) name_trunc (p, max (edit->num_widget_lines / 3, 16)) : _ ("<unnamed>"),
+	     m & S_IRUSR ? 'r' : '-',
+	     m & S_IWUSR ? 'w' : '-',
+	     m & S_IXUSR ? 'x' : '-',
+	     m & S_IRGRP ? 'r' : '-',
+	     m & S_IWGRP ? 'w' : '-',
+	     m & S_IXGRP ? 'x' : '-',
+	     m & S_IROTH ? 'r' : '-',
+	     m & S_IWOTH ? 'w' : '-',
+	     m & S_IXOTH ? 'x' : '-',
+	     end_mark - start_mark || (edit->mark2 == -1 && !edit->highlight) ? (column_highlighting ? "\032C\033" : "\001B\033") : "-",
+	     edit->modified ? "\012M\033" : "-", edit->macro_i < 0 ? "-" : "\023R\033",
+	     edit->overwrite == 0 ? '-' : 'O',
+	     edit->curs_col / FONT_MEAN_WIDTH, edit->start_line + 1, edit->curs_row,
+	     edit->curs_line + 1, edit->total_lines + 1, edit->curs1,
+	     edit->last_byte, edit->curs1 == edit->last_byte ? '\014' : '\033', edit->curs1 < edit->last_byte
+	     ? edit_get_byte (edit, edit->curs1) : -1,
+	     end_mark - start_mark && !column_highlighting ? ' ' : '\0',
+	     end_mark - start_mark);
+    strcpy (id, CIdentOf (edit->widget));
+    strcat (id, ".text");
+    wdt = CIdent (id);
+    free (wdt->text);
+    wdt->text = (char *) strdup (s);
+    CSetWidgetSize (id, CWidthOf (edit->widget), CHeightOf (wdt));
+    render_status (wdt, 0);
 }
 
 #endif
@@ -216,32 +227,50 @@ int edit_width_of_long_printable (int c);
 /* this scrolls the text so that cursor is on the screen */
 void edit_scroll_screen_over_cursor (WEdit * edit)
 {
-    int p, l;
+    int p;
     int outby;
+    int b_extreme, t_extreme, l_extreme, r_extreme;
+    r_extreme = EDIT_RIGHT_EXTREME;
+    l_extreme = EDIT_LEFT_EXTREME;
+    b_extreme = EDIT_BOTTOM_EXTREME;
+    t_extreme = EDIT_TOP_EXTREME;
+    if (edit->found_len) {
+	b_extreme = max (edit->num_widget_lines / 4, b_extreme);
+	t_extreme = max (edit->num_widget_lines / 4, t_extreme);
+    }
+    if (b_extreme + t_extreme + 1 > edit->num_widget_lines) {
+	int n;
+	n = b_extreme + t_extreme;
+	b_extreme = (b_extreme * (edit->num_widget_lines - 1)) / n;
+	t_extreme = (t_extreme * (edit->num_widget_lines - 1)) / n;
+    }
+    if (l_extreme + r_extreme + 1 > edit->num_widget_columns) {
+	int n;
+	n = l_extreme + t_extreme;
+	l_extreme = (l_extreme * (edit->num_widget_columns - 1)) / n;
+	r_extreme = (r_extreme * (edit->num_widget_columns - 1)) / n;
+    }
     p = edit_get_col (edit);
     edit_update_curs_row (edit);
 #ifdef MIDNIGHT
-    outby = p + edit->start_col - edit->num_widget_columns + 1 + (EDIT_RIGHT_EXTREME + edit->found_len);
+    outby = p + edit->start_col - edit->num_widget_columns + 1 + (r_extreme + edit->found_len);
 #else
-    outby = p + edit->start_col - CWidthOf (edit->widget) + 7 + (EDIT_RIGHT_EXTREME + edit->found_len) * FONT_MEAN_WIDTH + edit_width_of_long_printable (edit_get_byte (edit, edit->curs1));
+    outby = p + edit->start_col - CWidthOf (edit->widget) + 7 + (r_extreme + edit->found_len) * FONT_MEAN_WIDTH + edit_width_of_long_printable (edit_get_byte (edit, edit->curs1));
 #endif
     if (outby > 0)
 	edit_scroll_right (edit, outby);
 #ifdef MIDNIGHT
-    outby = EDIT_LEFT_EXTREME - p - edit->start_col;
+    outby = l_extreme - p - edit->start_col;
 #else
-    outby = EDIT_LEFT_EXTREME * FONT_MEAN_WIDTH - p - edit->start_col;
+    outby = l_extreme * FONT_MEAN_WIDTH - p - edit->start_col;
 #endif
     if (outby > 0)
 	edit_scroll_left (edit, outby);
     p = edit->curs_row;
-    l = 0;
-    if (edit->found_len != 0)
-	l = edit->num_widget_lines / 5;
-    outby = p - edit->num_widget_lines + 1 + EDIT_BOTTOM_EXTREME + l;
+    outby = p - edit->num_widget_lines + 1 + b_extreme;
     if (outby > 0)
 	edit_scroll_downward (edit, outby);
-    outby = EDIT_TOP_EXTREME - p + l;
+    outby = t_extreme - p;
     if (outby > 0)
 	edit_scroll_upward (edit, outby);
     edit_update_curs_row (edit);
@@ -440,11 +469,20 @@ int edit_mouse_pending (Window win);
 
 static int key_pending (WEdit * edit)
 {
+    static int flush = 0, line = 0;
 #ifdef GTK
     /* ******* */
 #else
-    if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw)
-	return CKeyPending ();
+    if (!edit) {
+	flush = line = 0;
+    } else if (!(edit->force & REDRAW_COMPLETELY) && !EditExposeRedraw) {
+/* this flushes the display in logarithmic intervals - so both fast and
+   slow machines will get good performance vs nice-refreshing */
+	if ((1 << flush) == ++line) {
+	    flush++;
+	    return CKeyPending ();
+	}
+    }
 #endif
     return 0;
 }
@@ -477,6 +515,10 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
 
     int force = edit->force;
     long b;
+
+#ifndef MIDNIGHT
+    key_pending (0);
+#endif
 
 /*
    if the position of the page has not moved then we can draw the cursor character only.
@@ -708,8 +750,8 @@ void edit_render_expose (WEdit * edit, XExposeEvent * xexpose)
 {
     int row_start, col_start, row_end, col_end;
     EditExposeRedraw = 1;
-    edit->num_widget_lines = (CHeightOf (edit->widget) - 6) / FONT_PIX_PER_LINE;
-    edit->num_widget_columns = (CWidthOf (edit->widget) - 7) / FONT_MEAN_WIDTH;
+    edit->num_widget_lines = (CHeightOf (edit->widget) - EDIT_FRAME_H) / FONT_PIX_PER_LINE;
+    edit->num_widget_columns = (CWidthOf (edit->widget) - EDIT_FRAME_W) / FONT_MEAN_WIDTH;
     if (edit->force & (REDRAW_PAGE | REDRAW_COMPLETELY)) {
 	edit->force |= REDRAW_PAGE | REDRAW_COMPLETELY;
 	edit_render_keypress (edit);

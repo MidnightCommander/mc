@@ -36,6 +36,8 @@
 #    	 include <unistd.h>
 #    endif
 #    include <string.h>
+#    include <ctype.h>
+#    include <errno.h>
 #    include "src/tty.h"
 #    include <sys/stat.h>
 #    include <errno.h>
@@ -61,6 +63,8 @@
 #else
 #    include <my_string.h>
 #endif
+#    include <ctype.h>
+#    include <errno.h>
 #    include <sys/stat.h>
      
 #    ifdef HAVE_FCNTL_H
@@ -81,11 +85,7 @@
 #    	 endif
 #    endif
  
-#ifdef GTK
-#    include <regex.h>
-#else
 #    include "regex.h"
-#endif
 
 #endif
 
@@ -274,55 +274,58 @@ struct selection {
    int len;
 };
 
+struct syntax_rule {
+    unsigned short keyword;
+    unsigned char end;
+    unsigned char context;
+    unsigned char _context;
+#define RULE_ON_LEFT_BORDER 1
+#define RULE_ON_RIGHT_BORDER 2
+    unsigned char border;
+};
 
-#define RULE_CONTEXT		0x00FFF000UL
-#define RULE_CONTEXT_SHIFT	12
-#define RULE_WORD		0x00000FFFUL
-#define RULE_WORD_SHIFT		0
-#define RULE_ON_LEFT_BORDER	0x02000000UL
-#define RULE_ON_RIGHT_BORDER	0x01000000UL
+#define MAX_WORDS_PER_CONTEXT	1024
+#define MAX_CONTEXTS		128
 
 struct key_word {
     char *keyword;
-    char first;
-    char last;
+    unsigned char first;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
-#define NO_COLOR 0xFFFFFFFF
+    time_t time;
+#define NO_COLOR 0x7FFFFFFF
+#define SPELLING_ERROR 0x7EFEFEFE
     int line_start;
     int bg;
     int fg;
 };
 
 struct context_rule {
-    int rule_number;
     char *left;
-    char first_left;
-    char last_left;
-    char line_start_left;
+    unsigned char first_left;
     char *right;
-    char first_right;
-    char last_right;
+    unsigned char first_right;
+    char line_start_left;
     char line_start_right;
     int single_char;
     int between_delimiters;
     char *whole_word_chars_left;
     char *whole_word_chars_right;
     char *keyword_first_chars;
-    char *keyword_last_chars;
+    int spelling;
 /* first word is word[1] */
     struct key_word **keyword;
 };
 
 struct _syntax_marker {
     long offset;
-    unsigned long rule;
+    struct syntax_rule rule;
     struct _syntax_marker *next;
 };
 
 struct _book_mark {
     int line;		/* line number */
-#define BOOK_MARK_COLOR ((5 << 8) + 26)		/* cyan on white */
+#define BOOK_MARK_COLOR ((0 << 8) | 26)		/* black on white */
     int c;		/* colour */
     struct _book_mark *next;
     struct _book_mark *prev;
@@ -349,7 +352,7 @@ struct editor_widget {
     char *filename;		/* Name of the file */
     char *dir;			/* current directory */
 
-/* dynamic buffers and curser position for editor: */
+/* dynamic buffers and cursor position for editor: */
     long curs1;			/*position of the cursor from the beginning of the file. */
     long curs2;			/*position from the end of the file */
     unsigned char *buffers1[MAXBUFF + 1];	/*all data up to curs1 */
@@ -365,7 +368,7 @@ struct editor_widget {
     long start_display;		/* First char displayed */
     long start_col;		/* First displayed column, negative */
     long max_column;		/* The maximum cursor position ever reached used to calc hori scroll bar */
-    long curs_row;		/*row position of curser on the screen */
+    long curs_row;		/*row position of cursor on the screen */
     long curs_col;		/*column position on screen */
     int force;			/* how much of the screen do we redraw? */
     unsigned char overwrite;
@@ -377,7 +380,7 @@ struct editor_widget {
 				   or saved */
 #endif				   
     unsigned char highlight;
-    long prev_col;		/*recent column position of the curser - used when moving
+    long prev_col;		/*recent column position of the cursor - used when moving
 				   up or down past lines that are shorter than the current line */
     long curs_line;		/*line number of the cursor. */
     long start_line;		/*line nummber of the top of the page */
@@ -410,7 +413,7 @@ struct editor_widget {
     struct _syntax_marker *syntax_marker;
     struct context_rule **rules;
     long last_get_rule;
-    unsigned long rule;
+    struct syntax_rule rule;
     char *syntax_type;		/* description of syntax highlighting type being used */
     int explicit_syntax;	/* have we forced the syntax hi. type in spite of the filename? */
 
@@ -547,8 +550,8 @@ void edit_word_wrap (WEdit * edit);
 unsigned char *edit_get_block (WEdit * edit, long start, long finish, int *l);
 int edit_sort_cmd (WEdit * edit);
 void edit_help_cmd (WEdit * edit);
-void edit_left_word_move (WEdit * edit);
-void edit_right_word_move (WEdit * edit);
+void edit_left_word_move (WEdit * edit, int s);
+void edit_right_word_move (WEdit * edit, int s);
 void edit_get_selection (WEdit * edit);
 
 int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n);
@@ -572,13 +575,14 @@ void edit_set_syntax_change_callback (void (*callback) (CWidget *));
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg);
+int edit_check_spelling (WEdit * edit);
 
 
 void book_mark_insert (WEdit * edit, int line, int c);
 int book_mark_query_color (WEdit * edit, int line, int c);
 int book_mark_query_all (WEdit * edit, int line, int *c);
 struct _book_mark *book_mark_find (WEdit * edit, int line);
-void book_mark_clear (WEdit * edit, int line, int c);
+int book_mark_clear (WEdit * edit, int line, int c);
 void book_mark_flush (WEdit * edit, int c);
 void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
@@ -665,6 +669,9 @@ extern char *edit_init_error_msg;
 #        define FONT_HEIGHT		(gtk_edit_option_font_ascent + gtk_edit_option_font_descent)
 #        define FONT_PIX_PER_LINE	(FONT_OVERHEAD + FONT_HEIGHT)
 #        define FONT_MEAN_WIDTH	gtk_edit_option_font_mean_width
+
+#        define EDIT_FRAME_H 3
+#        define EDIT_FRAME_W 3
 
 #        define FONT_OFFSET_X 0
 #        define FONT_OFFSET_Y		FONT_BASE_LINE
@@ -772,7 +779,7 @@ enum {
 
 extern char *home_dir;
 
-#define NUM_SELECTION_HISTORY 32
+#define NUM_SELECTION_HISTORY 64
 
 #ifndef MAX_PATH_LEN
 #ifdef PATH_MAX
@@ -841,7 +848,7 @@ int option_editor_bg_highlighted = 12;
 int option_editor_fg_cursor = 18;
 
 char *option_whole_chars_search = "0123456789abcdefghijklmnopqrstuvwxyz_";
-char *option_whole_chars_move = "0123456789abcdefghijklmnopqrstuvwxyz_; ,[](){}";
+char *option_chars_move_whole_word = "!=&|<>^~ !:;, !'!`!.?!\"!( !) !Aa0 !+-*/= |<> ![ !] !\\#! ";
 char *option_backup_ext = "~";
 
 #else				/* ! _EDIT_C */
@@ -889,7 +896,7 @@ extern int option_editor_bg_highlighted;
 extern int option_editor_fg_cursor;
 
 extern char *option_whole_chars_search;
-extern char *option_whole_chars_move;
+extern char *option_chars_move_whole_word;
 extern char *option_backup_ext;
 
 extern int edit_confirm_save;

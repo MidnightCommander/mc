@@ -63,7 +63,7 @@ int edit_confirm_save = 0;
 
 static inline int my_lower_case (int c)
 {
-    return tolower(c);
+    return tolower(c & 0xFF);
 }
 
 char *strcasechr (const unsigned char *s, int c)
@@ -76,6 +76,8 @@ char *strcasechr (const unsigned char *s, int c)
 
 #ifdef MIDNIGHT
 #include "../src/mad.h"
+#elif !defined (GTK)
+#include "mad.h"
 #endif
 
 #ifndef HAVE_MEMMOVE
@@ -257,13 +259,12 @@ int edit_save_file (WEdit * edit, const char *filename)
     if (this_save_mode > 0) {
 	char *savedir = ".", *slashpos = strrchr (filename, '/');
 	if (slashpos != 0) {
-	    savedir = strdup (filename);
+	    savedir = (char *) strdup (filename);
 	    if (savedir == 0)
 		return 0;
 	    savedir[slashpos - filename + 1] = '\0';
 	}
-	savename = tempnam (savedir, "cooledit");
-
+	savename = (char *) tempnam (savedir, "cooledit");
 	if (slashpos)
 	    free (savedir);
 	if (!savename)
@@ -336,13 +337,13 @@ void menu_save_mode_cmd (void)
 	N_("Do backups -->")};
     static QuickWidget widgets[] =
     {
-	{quick_button, 20, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
+	{quick_button, 18, DLG_X, 7, DLG_Y, N_("&Cancel"), 0,
 	 B_CANCEL, 0, 0, XV_WLAY_DONTCARE, "c"},
 	{quick_button, 6, DLG_X, 7, DLG_Y, N_("&Ok"), 0,
 	 B_ENTER, 0, 0, XV_WLAY_DONTCARE, "o"},
-	{quick_input, 24, DLG_X, 5, DLG_Y, 0, 10,
+	{quick_input, 23, DLG_X, 5, DLG_Y, 0, 9,
 	 0, 0, &str_result, XV_WLAY_DONTCARE, "i"},
-	{quick_label, 24, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
+	{quick_label, 22, DLG_X, 4, DLG_Y, N_("Extension:"), 0,
 	 0, 0, 0, XV_WLAY_DONTCARE, "savemext"},
 	{quick_radio, 4, DLG_X, 3, DLG_Y, "", 3,
 	 0, &save_mode_new, str, XV_WLAY_DONTCARE, "t"},
@@ -380,10 +381,10 @@ void edit_split_filename (WEdit * edit, char *f)
 {
     if (edit->filename)
 	free (edit->filename);
-    edit->filename = strdup (f);
+    edit->filename = (char *) strdup (f);
     if (edit->dir)
 	free (edit->dir);
-    edit->dir = strdup ("");
+    edit->dir = (char *) strdup ("");
 }
 
 #else
@@ -456,9 +457,9 @@ void edit_split_filename (WEdit * edit, char *longname)
     if (edit->dir)
 	free (edit->dir);
     p = strrchr (exp, '/');
-    edit->filename = strdup (++p);
+    edit->filename = (char *) strdup (++p);
     *p = 0;
-    edit->dir = strdup (exp);
+    edit->dir = (char *) strdup (exp);
     free (exp);
 }
 
@@ -475,11 +476,11 @@ int edit_save_as_cmd (WEdit * edit)
 
     exp = edit_get_save_file (edit->dir, edit->filename, _(" Save As "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-    edit->force |= REDRAW_COMPLETELY;
 
     if (exp) {
 	if (!*exp) {
 	    free (exp);
+	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
 	} else {
 	    if (strcmp(catstrs (edit->dir, edit->filename, 0), exp)) {
@@ -490,8 +491,10 @@ int edit_save_as_cmd (WEdit * edit)
 		    if (edit_query_dialog2 (_(" Warning "), 
 		    _(" A file already exists with this name. "), 
 /* Push buttons to over-write the current file, or cancel the operation */
-		    _("Overwrite"), _("Cancel")))
+		    _("Overwrite"), _("Cancel"))) {
+			edit->force |= REDRAW_COMPLETELY;
 			return 0;
+		    }
 		}
 	    }
 	    if (edit_save_file (edit, exp)) {
@@ -503,15 +506,18 @@ int edit_save_as_cmd (WEdit * edit)
 #endif		
 		if (different_filename && !edit->explicit_syntax)
 		    edit_load_syntax (edit, 0, 0);
+		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
 		free (exp);
 		edit_error_dialog (_(" Save as "), get_sys_error (_(" Error trying to save file. ")));
+		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
 	}
-    } else
-	return 0;
+    }
+    edit->force |= REDRAW_COMPLETELY;
+    return 0;
 }
 
 /* {{{ Macro stuff starts here */
@@ -670,12 +676,12 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     FILE *f;
     int s, i;
 
-    edit->force |= REDRAW_COMPLETELY;
     edit_push_action (edit, KEY_PRESS + edit->start_display);
 /* This heads the 'Macro' dialog box */
     s = edit_raw_key_query (_(" Macro "),
 /* Input line for a single key press follows the ':' */
     _(" Press the macro's new hotkey: "), 1);
+    edit->force |= REDRAW_COMPLETELY;
     if (s) {
 	if (edit_delete_macro (edit, s))
 	    return 0;
@@ -703,23 +709,23 @@ void edit_delete_macro_cmd (WEdit * edit)
     int command;
 
 #ifdef MIDNIGHT
-    command = CK_Macro (edit_raw_key_query (_(" Delete Macro "), _(" Press macro hotkey: "), 1));
+    command = CK_Macro (edit_raw_key_query (_ (" Delete Macro "), _ (" Press macro hotkey: "), 1));
 #else
 /* This heads the 'Delete Macro' dialog box */
 #ifdef GTK
 /* *** */
     command = 0;
 #else
-    command = CK_Macro (CKeySymMod (CRawkeyQuery (0, 0, 0, _(" Delete Macro "), 
+    command = CKeySymMod (CRawkeyQuery (0, 0, 0, _ (" Delete Macro "),
 /* Input line for a single key press follows the ':' */
-    _(" Press macro hotkey: "))));
+					_ (" Press macro hotkey: ")));
 #endif
 #endif
 
-    if (command == CK_Macro (0))
+    if (!command)
 	return;
 
-    edit_delete_macro (edit, command - 2000);
+    edit_delete_macro (edit, command);
 }
 
 /* return 0 on error */
@@ -789,9 +795,9 @@ int edit_save_confirm_cmd (WEdit * edit)
 /* returns 1 on success */
 int edit_save_cmd (WEdit * edit)
 {
-    edit->force |= REDRAW_COMPLETELY;
     if (!edit_save_file (edit, catstrs (edit->dir, edit->filename, 0)))
 	return edit_save_as_cmd (edit);
+    edit->force |= REDRAW_COMPLETELY;
     edit->modified = 0;
 #if defined(MIDNIGHT) || defined(GTK)
     edit->delete_file = 0;
@@ -804,10 +810,13 @@ int edit_save_cmd (WEdit * edit)
 /* returns 1 on success */
 int edit_new_cmd (WEdit * edit)
 {
-    edit->force |= REDRAW_COMPLETELY;
-    if (edit->modified)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
+    if (edit->modified) {
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
+	}
+    }
+    edit->force |= REDRAW_COMPLETELY;
     edit->modified = 0;
     return edit_renew (edit);	/* if this gives an error, something has really screwed up */
 }
@@ -833,11 +842,13 @@ int edit_load_file_from_filename (WEdit *edit, char *exp)
 int edit_load_cmd (WEdit * edit)
 {
     char *exp;
-    edit->force |= REDRAW_COMPLETELY;
 
-    if (edit->modified)
-	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel")))
+    if (edit->modified) {
+	if (edit_query_dialog2 (_ (" Warning "), _ (" Current text was modified without a file save. \n Continue discards these changes. "), _ ("Continue"), _ ("Cancel"))) {
+	    edit->force |= REDRAW_COMPLETELY;
 	    return 0;
+	}
+    }
 
     exp = edit_get_load_file (edit->dir, edit->filename, _ (" Load "));
 
@@ -846,6 +857,7 @@ int edit_load_cmd (WEdit * edit)
 	    edit_load_file_from_filename (edit, exp);
 	free (exp);
     }
+    edit->force |= REDRAW_COMPLETELY;
     return 0;
 }
 
@@ -1122,10 +1134,11 @@ int edit_block_delete_cmd (WEdit * edit)
 #define SEARCH_DLG_HEIGHT 10
 #define REPLACE_DLG_WIDTH 58
 #define REPLACE_DLG_HEIGHT 15
-#define CONFIRM_DLG_WIDTH 66
+#define CONFIRM_DLG_WIDTH 79
 #define CONFIRM_DLG_HEIGTH 6
 #define B_REPLACE_ALL B_USER+1
-#define B_SKIP_REPLACE B_USER+2
+#define B_REPLACE_ONE B_USER+2
+#define B_SKIP_REPLACE B_USER+3
 
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
@@ -1133,23 +1146,25 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	QuickWidget quick_widgets[] =
 	{
 /* NLS  for hotkeys? */
-	    {quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Cancel"),
-	     0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("al&L"),
-	     0, B_REPLACE_ALL, 0, 0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Skip"),
-	     0, B_SKIP_REPLACE, 0, 0, XV_WLAY_DONTCARE, NULL},
-	    {quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Replace"),
-	     0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
-	    {quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
+           {quick_button, 63, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Cancel"),
+            0, B_CANCEL, 0, 0, XV_WLAY_DONTCARE, NULL},
+           {quick_button, 50, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("o&Ne"),
+            0, B_REPLACE_ONE, 0, 0, XV_WLAY_DONTCARE, NULL},
+           {quick_button, 37, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("al&L"),
+            0, B_REPLACE_ALL, 0, 0, XV_WLAY_DONTCARE, NULL},
+           {quick_button, 21, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Skip"),
+            0, B_SKIP_REPLACE, 0, 0, XV_WLAY_DONTCARE, NULL},
+           {quick_button, 4, CONFIRM_DLG_WIDTH, 3, CONFIRM_DLG_HEIGTH, N_("&Replace"),
+            0, B_ENTER, 0, 0, XV_WLAY_DONTCARE, NULL},
+           {quick_label, 2, CONFIRM_DLG_WIDTH, 2, CONFIRM_DLG_HEIGTH, 0,
 	     0, 0, 0, XV_WLAY_DONTCARE, 0},
 	    {0}};
 
-	quick_widgets[4].text = catstrs (_(" Replace with: "), replace_text, 0);
+	quick_widgets[5].text = catstrs (_(" Replace with: "), replace_text, 0);
 
 	{
 	    QuickDialog Quick_input =
-	    {CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_(" Confirm replace "),
+           {CONFIRM_DLG_WIDTH, CONFIRM_DLG_HEIGTH, 0, 0, N_(" Confirm replace "),
 	     "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	    Quick_input.widgets = quick_widgets;
@@ -1161,8 +1176,6 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     } else
 	return 0;
 }
-
-
 
 void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
 {
@@ -1319,7 +1332,8 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 #define B_ENTER 0
 #define B_SKIP_REPLACE 1
 #define B_REPLACE_ALL 2
-#define B_CANCEL 3
+#define B_REPLACE_ONE 3
+#define B_CANCEL 4
 
 extern CWidget *wedit;
 
@@ -1346,22 +1360,22 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     (CDrawText ("replace.t1", win, xh, h, _(" Enter search text : ")))->hotkey = 'E';
 
     CGetHintPos (0, &yh);
-    (m = CDrawTextInput ("replace.sinp", win, xh, yh, 10, AUTO_HEIGHT, 256, *search_text))->hotkey = 'E';
+    (m = CDrawTextInput ("replace.sinp", win, xh, yh, 10, AUTO_HEIGHT, 8192, *search_text))->hotkey = 'E';
 
     if (replace_text) {
 	CGetHintPos (0, &yh);
 	(CDrawText ("replace.t2", win, xh, yh, _(" Enter replace text : ")))->hotkey = 'n';
 	CGetHintPos (0, &yh);
-	(CDrawTextInput ("replace.rinp", win, xh, yh, 10, AUTO_HEIGHT, 256, *replace_text))->hotkey = 'n';
-	CSetToolHint ("replace.t2", _("You can enter regexp substrings with %s (not \\1, \\2 like sed) then use \"Enter...order\""));
-	CSetToolHint ("replace.rinp", _("You can enter regexp substrings with %s (not \\1, \\2 like sed) then use \"Enter...order\""));
+	(CDrawTextInput ("replace.rinp", win, xh, yh, 10, AUTO_HEIGHT, 8192, *replace_text))->hotkey = 'n';
+	CSetToolHint ("replace.t2", _("You can enter regexp substrings with %s\n(not \\1, \\2 like sed) then use \"Enter...order\""));
+	CSetToolHint ("replace.rinp", _("You can enter regexp substrings with %s\n(not \\1, \\2 like sed) then use \"Enter...order\""));
 	CGetHintPos (0, &yh);
 	(CDrawText ("replace.t3", win, xh, yh, _(" Enter argument (or substring) order : ")))->hotkey = 'o';
 	CGetHintPos (0, &yh);
 	(CDrawTextInput ("replace.ainp", win, xh, yh, 10, AUTO_HEIGHT, 256, *arg_order))->hotkey = 'o';
 /* Tool hint */
-	CSetToolHint ("replace.ainp", _("Enter the order of replacement of your scanf format specifiers or regexp substrings"));
-	CSetToolHint ("replace.t3", _("Enter the order of replacement of your scanf format specifiers or regexp substrings"));
+	CSetToolHint ("replace.ainp", _("Enter the order of replacement of your scanf\nformat specifiers or regexp substrings, eg 3,1,2"));
+	CSetToolHint ("replace.t3", _("Enter the order of replacement of your scanf\nformat specifiers or regexp substrings, eg 3,1,2"));
     }
     CGetHintPos (0, &yh);
     ys = yh;
@@ -1372,8 +1386,8 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     yc = yh;
     CGetHintPos (0, &yh);
     CDrawSwitch ("replace.reg", win, xh, yh, replace_regexp, _(" Regular expression "), 1);
-    CSetToolHint ("replace.reg", _("See the regex man page for how to compose a regular expression"));
-    CSetToolHint ("replace.reg.label", _("See the regex man page for how to compose a regular expression"));
+    CSetToolHint ("replace.reg", _("See the regex man page for how\nto compose a regular expression"));
+    CSetToolHint ("replace.reg.label", _("See the regex man page for how\nto compose a regular expression"));
     yb = yh;
     CGetHintPos (0, &yh);
     CGetHintPos (&xb, 0);
@@ -1404,7 +1418,7 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
     }
     CDrawSwitch ("replace.scanf", win, xb, yr, replace_scanf, _(" Scanf expression "), 1);
 /* Tool hint */
-    CSetToolHint ("replace.scanf", _("Allows entering of a C format string, see the scanf man page"));
+    CSetToolHint ("replace.scanf", _("Allows entering of a C format string,\nsee the scanf man page"));
 
     get_hint_limits (&x, &y);
     CDrawPixmapButton ("replace.ok", win, x - WIDGET_SPACING - TICK_BUTTON_WIDTH, h, PIXMAP_BUTTON_TICK);
@@ -1446,10 +1460,10 @@ void edit_search_replace_dialog (Window parent, int x, int y, char **search_text
 	    if (replace_text) {
 		replace_all = CIdent ("replace.all")->keypressed;
 		replace_prompt = CIdent ("replace.pr")->keypressed;
-		*replace_text = strdup (CIdent ("replace.rinp")->text);
-		*arg_order = strdup (CIdent ("replace.ainp")->text);
+		*replace_text = (char *) strdup (CIdent ("replace.rinp")->text);
+		*arg_order = (char *) strdup (CIdent ("replace.ainp")->text);
 	    }
-	    *search_text = strdup (CIdent ("replace.sinp")->text);
+	    *search_text = (char *) strdup (CIdent ("replace.sinp")->text);
 	    replace_whole = CIdent ("replace.ww")->keypressed;
 	    replace_case = CIdent ("replace.case")->keypressed;
 	    replace_scanf = CIdent ("replace.scanf")->keypressed;
@@ -1539,15 +1553,17 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 	char *s;
 	s = gtk_dialog_cauldron (
 				    "Replace", GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB,
-		  " ( (Replace with:)d %Ld )xf / ( %Bxfrq || %Bxfq || %Bxfq || %Bxfgq )f",
+		  " ( (Replace with:)d %Ld )xf / ( %Bxfrq || %Bxfq || %Bxfq || %Bxfq || %Bxfgq )f",
 				    replace_text,
-				    "Replace", "Skip", "Replace All",
+				    "Replace", "Skip", "Replace all", "Replace one",
 				    GNOME_STOCK_BUTTON_CANCEL
 	    );
 	if (s == GTK_CAULDRON_ESCAPE || !s || s == GNOME_STOCK_BUTTON_CANCEL)
 	    return B_CANCEL;
-	if (!strcmp (s, "Replace All"))
+	if (!strcmp (s, "Replace all"))
 	    return B_REPLACE_ALL;
+	if (!strcmp (s, "Replace one"))
+	    return B_REPLACE_ONE;
 	if (!strcmp (s, "Skip"))
 	    return B_SKIP_REPLACE;
 	if (!strcmp (s, "Replace"))
@@ -1561,34 +1577,14 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
     if (replace_prompt) {
-	int q;
-	char *p, *r = 0;
-	r = p = malloc (strlen (replace_text) + NUM_REPL_ARGS * 2);
-	strcpy (p, replace_text);
-	while ((p = strchr (p, '%'))) {		/* convert "%" to "%%" so no convertion is attempted */
-	    memmove (p + 2, p + 1, strlen (p) + 1);
-	    *(++p) = '%';
-	    p++;
-	}
+	int q, x[] =
+	{
+	    B_CANCEL, B_ENTER, B_SKIP_REPLACE, B_REPLACE_ALL, B_REPLACE_ONE, B_CANCEL
+	};
+	q = CQueryDialog (WIN_MESSAGES + (edit->curs_line < 8 ? edit->num_widget_lines / 2 * FONT_PIX_PER_LINE + CYof (edit->widget) : 0),
+			  _ (" Replace "), catstrs (_ (" Replace with: "), replace_text, 0), _ ("Replace"), _ ("Skip"), _ ("Replace all"), _ ("Replace one"), _ ("Cancel"), 0);
 	edit->force |= REDRAW_COMPLETELY;
-	q = edit_query_dialog4 (_(" Replace "), 
-/* This is for the confirm replace dialog box. The replaced string comes after the ':' */
-	catstrs (_(" Replace with: "), r, 0), 
-/* Buttons for the confirm replace dialog box. */
-	_("Replace"), _("Skip"), _("Replace all"), _("Cancel"));
-	if (r)
-	    free (r);
-	switch (q) {
-	case 0:
-	    return B_ENTER;
-	case 1:
-	    return B_SKIP_REPLACE;
-	case 2:
-	    return B_REPLACE_ALL;
-	case -1:
-	case 3:
-	    return B_CANCEL;
-	}
+	return x[q + 1];
     }
     return 0;
 }
@@ -1634,7 +1630,7 @@ int string_regexp_search (char *pattern, char *string, int len, int match_type, 
 	    *found_len = 0;
 	    return -3;
 	}
-	old_pattern = strdup (pattern);
+	old_pattern = (char *) strdup (pattern);
 	old_type = match_type;
 	old_icase = icase;
     }
@@ -1994,9 +1990,9 @@ void edit_replace_cmd (WEdit * edit, int again)
     if (again) {
 	if (!old1 || !old2)
 	    return;
-	exp1 = strdup (old1);
-	exp2 = strdup (old2);
-	exp3 = strdup (old3);
+	exp1 = (char *) strdup (old1);
+	exp2 = (char *) strdup (old2);
+	exp3 = (char *) strdup (old3);
     } else {
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
 	edit_replace_dialog (edit, &exp1, &exp2, &exp3);
@@ -2017,9 +2013,9 @@ void edit_replace_cmd (WEdit * edit, int again)
 	free (old2);
     if (old3)
 	free (old3);
-    old1 = strdup (exp1);
-    old2 = strdup (exp2);
-    old3 = strdup (exp3);
+    old1 = (char *) strdup (exp1);
+    old2 = (char *) strdup (exp2);
+    old3 = (char *) strdup (exp3);
 
     {
 	char *s;
@@ -2084,7 +2080,7 @@ void edit_replace_cmd (WEdit * edit, int again)
 		edit_push_key_press (edit);
 
 		switch (edit_replace_prompt (edit, exp2,	/*and prompt 2/3 down */
-					     edit->num_widget_columns / 2 - 33, edit->num_widget_lines * 2 / 3)) {
+					     edit->num_widget_columns / 2 - 39, edit->num_widget_lines * 2 / 3)) {
 		case B_ENTER:
 		    break;
 		case B_SKIP_REPLACE:
@@ -2093,6 +2089,9 @@ void edit_replace_cmd (WEdit * edit, int again)
 		case B_REPLACE_ALL:
 		    replace_prompt = 0;
 		    replace_continue = 1;
+		    break;
+		case B_REPLACE_ONE:
+		    replace_continue = 0;
 		    break;
 		case B_CANCEL:
 		    replace_yes = 0;
@@ -2187,7 +2186,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (again) {		/*ctrl-hotkey for search again. */
 	if (!old)
 	    return;
-	exp = strdup (old);
+	exp = (char *) strdup (old);
     } else {
 	edit_search_dialog (edit, &exp);
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
@@ -2198,7 +2197,7 @@ void edit_search_cmd (WEdit * edit, int again)
 	    int len = 0;
 	    if (old)
 		free (old);
-	    old = strdup (exp);
+	    old = (char *) strdup (exp);
 
 	    if (edit->found_len && edit->search_start == edit->found_start + 1 && replace_backwards)
 		edit->search_start--;
@@ -2248,8 +2247,8 @@ void edit_quit_cmd (WEdit * edit)
     if (edit->modified) {
 #ifdef GTK
 	char *r;
-	r = gtk_dialog_cauldron (_(" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
-				     _(" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
+	r = gtk_dialog_cauldron (_ (" Quit "), GTK_CAULDRON_TOPLEVEL | GTK_CAULDRON_GRAB, " [ ( %Lxf )xf ]xf / ( %Bgxfq || %Bgxfq || %Bgxfq ) ",
+				     _ (" Current text was modified without a file save. \n Save with exit? "), GNOME_STOCK_BUTTON_CANCEL, GNOME_STOCK_BUTTON_YES, GNOME_STOCK_BUTTON_NO);
 	if (!strcmp (r, GNOME_STOCK_BUTTON_YES)) {
 	    edit_push_markers (edit);
 	    edit_set_markers (edit, 0, 0, 0, 0);
@@ -2263,11 +2262,11 @@ void edit_quit_cmd (WEdit * edit)
 	}
 #else
 #ifdef MIDNIGHT
-	switch (edit_query_dialog3 (_(" Quit "), _(" File was modified, Save with exit? "), _("Cancel quit"), _("&Yes"), _("&No"))) {
+	switch (edit_query_dialog3 (_ (" Quit "), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
 #else
 /* Confirm 'Quit' dialog box */
-	switch (edit_query_dialog3 (_(" Quit "),
-				    _(" Current text was modified without a file save. \n Save with exit? "), _(" &Cancel quit "), _(" &Yes "), _(" &No "))) {
+	switch (edit_query_dialog3 (_ (" Quit "),
+				    _ (" Current text was modified without a file save. \n Save with exit? "), _ (" &Cancel quit "), _ (" &Yes "), _ (" &No "))) {
 #endif
 	case 1:
 	    edit_push_markers (edit);
@@ -2296,10 +2295,10 @@ void edit_quit_cmd (WEdit * edit)
 #else
 #ifdef GTK
     {
-	    extern char *edit_one_file;
+           extern char *edit_one_file;
 
-	    if (edit_one_file)
-		    gtk_main_quit ();
+           if (edit_one_file)
+                   gtk_main_quit ();
     }
 #endif
     edit->stopped = 1;
@@ -2405,13 +2404,42 @@ char *selection_get_line (void *data, int line)
 	int c, j;
 	for (j = 0; j < s[line].len; j++) {
 	    c = *p++;
-	    if ((c < ' ' || (c > '~' && c < 160)) && c != '\t') {
-		t[i++] = '.';
+	    if (!isprint (c)) {
+		t[i++] = '_';
 		t[i++] = '\b';
-		t[i++] = '.';
+		t[i++] = '\\';
+		t[i++] = '_';
+		t[i++] = '\b';
+		switch (c) {
+		case '\a':
+		    t[i++] = 'a';
+		    break;
+		case '\b':
+		    t[i++] = 'b';
+		    break;
+		case '\t':
+		    t[i++] = 't';
+		    break;
+		case '\n':
+		    t[i++] = 'n';
+		    break;
+		case '\v':
+		    t[i++] = 'v';
+		    break;
+		case '\f':
+		    t[i++] = 'f';
+		    break;
+		case '\r':
+		    t[i++] = 'r';
+		    break;
+		default:
+		    i -= 3;
+		    t[i++] = '.';
+		    break;
+		}
 	    } else
 		t[i++] = c;
-	    if (i > 1020)
+	    if (i > 1000)
 		break;
 	}
     }
@@ -2523,8 +2551,8 @@ void edit_paste_from_X_buf_cmd (WEdit * edit)
 #endif
     else
 #ifdef GTK
-	gtk_selection_convert (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY,
-	     gdk_atom_intern ("COMPOUND_TEXT", FALSE), GDK_CURRENT_TIME);
+       gtk_selection_convert (GTK_WIDGET (edit->widget), GDK_SELECTION_PRIMARY,
+            gdk_atom_intern ("COMPOUND_TEXT", FALSE), GDK_CURRENT_TIME);
 #else
 	XConvertSelection (CDisplay, XA_PRIMARY, XA_STRING,
 			   XInternAtom (CDisplay, "VT_SELECTION", False),
@@ -2589,7 +2617,7 @@ void edit_goto_cmd (WEdit *edit)
     char s [12];
 
     sprintf (s, "%d", l);
-    f = input_dialog (_(" Goto line "), _(" Enter line: "), l ? s : "");
+    f = (char *) input_dialog (_(" Goto line "), _(" Enter line: "), l ? s : "");
 #endif
 #else
     f = CInputDialog ("goto", WIN_MESSAGES, 150, l ? itoa (l) : "", _(" Goto line "), _(" Enter line: "));
@@ -2607,17 +2635,14 @@ void edit_goto_cmd (WEdit *edit)
 }
 
 /*returns 1 on success */
-int edit_save_block_cmd (WEdit * edit) {
+int edit_save_block_cmd (WEdit * edit)
+{
     long start_mark, end_mark;
     char *exp;
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
-
-    exp = edit_get_save_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _(" Save Block "));
-
-    edit->force |= REDRAW_COMPLETELY;
+    exp = edit_get_save_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _ (" Save Block "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-
     if (exp) {
 	if (!*exp) {
 	    free (exp);
@@ -2629,13 +2654,14 @@ int edit_save_block_cmd (WEdit * edit) {
 		return 1;
 	    } else {
 		free (exp);
+		edit_error_dialog (_ (" Save Block "), get_sys_error (_ (" Error trying to save file. ")));
 		edit->force |= REDRAW_COMPLETELY;
-		edit_error_dialog (_(" Save Block "), get_sys_error (_(" Error trying to save file. ")));
 		return 0;
 	    }
 	}
-    } else
-	return 0;
+    }
+    edit->force |= REDRAW_COMPLETELY;
+    return 0;
 }
 
 
@@ -2663,12 +2689,10 @@ int edit_insert_file (WEdit * edit, const char *filename)
 
 
 /* returns 1 on success */
-int edit_insert_file_cmd (WEdit * edit) {
-    char *exp = edit_get_load_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _(" Insert File "));
-    edit->force |= REDRAW_COMPLETELY;
-
+int edit_insert_file_cmd (WEdit * edit)
+{
+    char *exp = edit_get_load_file (edit->dir, catstrs (home_dir, CLIP_FILE, 0), _ (" Insert File "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-
     if (exp) {
 	if (!*exp) {
 	    free (exp);
@@ -2676,15 +2700,18 @@ int edit_insert_file_cmd (WEdit * edit) {
 	} else {
 	    if (edit_insert_file (edit, exp)) {
 		free (exp);
+		edit->force |= REDRAW_COMPLETELY;
 		return 1;
 	    } else {
 		free (exp);
-		edit_error_dialog (_(" Insert file "), get_sys_error (_(" Error trying to insert file. ")));
+		edit_error_dialog (_ (" Insert file "), get_sys_error (_ (" Error trying to insert file. ")));
+		edit->force |= REDRAW_COMPLETELY;
 		return 0;
 	    }
 	}
-    } else
-	return 0;
+    }
+    edit->force |= REDRAW_COMPLETELY;
+    return 0;
 }
 
 #ifdef MIDNIGHT
@@ -2784,6 +2811,7 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	    edit_error_dialog (_(" Process block "), 
 /* Not essential to translate */
 	    get_sys_error (_(" Error trying to stat file ")));
+	    edit->force |= REDRAW_COMPLETELY;
 	    return;
 	}
     }

@@ -20,7 +20,6 @@
    02111-1307, USA.
 */
 
-
 #include <config.h>
 #include "edit.h"
 
@@ -32,7 +31,9 @@
 #include "editcmddef.h"
 #include "mousemark.h"
 #endif
-
+#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
+#include "mad.h"
+#endif
 
 #ifndef MIDNIGHT
 
@@ -142,9 +143,12 @@ static void release_mark (WEdit * edit, XEvent * event)
     if (edit->mark1 != edit->mark2 && event) {
 	edit_get_selection (edit);
 	XSetSelectionOwner (CDisplay, XA_PRIMARY, CWindowOf (edit->widget), event->xbutton.time);
-    } else {
+    }
+#ifdef GTK
+    else {
 	edit->widget->editable.has_selection = TRUE;
     }
+#endif
 }
 
 static char *get_block (WEdit * edit, long start_mark, long end_mark, int *type, int *l)
@@ -166,9 +170,9 @@ static void move (WEdit *edit, long click, int y)
 static void dclick (WEdit *edit, XEvent *event)
 {
     edit_mark_cmd (edit, 1);
-    edit_right_word_move (edit);
+    edit_right_word_move (edit, 1);
     edit_mark_cmd (edit, 0);
-    edit_left_word_move (edit);
+    edit_left_word_move (edit, 1);
     release_mark (edit, event);
 }
 
@@ -265,6 +269,7 @@ struct mouse_funcs edit_mouse_funcs =
     mime_majors
 };
 
+static void render_book_marks (CWidget *w);
 extern int option_editor_bg_normal;
 void edit_tri_cursor (Window win);
 
@@ -273,7 +278,7 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	   int width, int height, const char *text, const char *filename,
 		const char *starting_directory, unsigned int options, unsigned long text_size)
 {
-    static made_directory = 0;
+    static int made_directory = 0;
     int extra_space_for_hscroll = 0;
     CWidget *w;
     WEdit *e;
@@ -282,7 +287,7 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 	extra_space_for_hscroll = 8;
 
     wedit = w = CSetupWidget (identifier, parent, x, y,
-			      width + 7, height + 6, C_EDITOR_WIDGET,
+			      width + EDIT_FRAME_W, height + EDIT_FRAME_H, C_EDITOR_WIDGET,
 		   ExposureMask | ButtonPressMask | ButtonReleaseMask | \
 		     KeyPressMask | KeyReleaseMask | ButtonMotionMask | \
 			      PropertyChangeMask | StructureNotifyMask | \
@@ -296,9 +301,9 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
 
     w->destroy = edit_destroy_callback;
     if (filename)
-	w->label = strdup (filename);
+	w->label = (char *) strdup (filename);
     else
-	w->label = strdup ("");
+	w->label = (char *) strdup ("");
 
     if (!made_directory) {
 	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
@@ -323,20 +328,43 @@ CWidget *CDrawEditor (const char *identifier, Window parent, int x, int y,
     e->macro_i = -1;
     e->widget = w;
 
-    set_hint_pos (x + width + 7 + WIDGET_SPACING, y + height + 6 + WIDGET_SPACING + extra_space_for_hscroll);
+    set_hint_pos (x + width + EDIT_FRAME_W + WIDGET_SPACING, y + height + EDIT_FRAME_H + WIDGET_SPACING + extra_space_for_hscroll);
     if (extra_space_for_hscroll) {
 	w->hori_scrollbar = CDrawHorizontalScrollbar (catstrs (identifier, ".hsc", 0), parent,
-		x, y + height + 6, width + 6, 12, 0, 0);
+		x, y + height + EDIT_FRAME_H, width + EDIT_FRAME_W, 12, 0, 0);
 	CSetScrollbarCallback (w->hori_scrollbar->ident, w->ident, link_hscrollbar_to_editor);
     }
     if (!(options & EDITOR_NO_TEXT))
-	CDrawText (catstrs (identifier, ".text", 0), parent, x, y + height + 6 + WIDGET_SPACING + extra_space_for_hscroll, "%s", e->filename);
+	CDrawStatus (catstrs (identifier, ".text", 0), parent, x, y + height + 3 + EDIT_FRAME_H + WIDGET_SPACING + extra_space_for_hscroll, width + EDIT_FRAME_W, e->filename);
     if (!(options & EDITOR_NO_SCROLL)) {
 	w->vert_scrollbar = CDrawVerticalScrollbar (catstrs (identifier, ".vsc", 0), parent,
-		x + width + 7 + WIDGET_SPACING, y, height + 6, 20, 0, 0);
+		x + width + EDIT_FRAME_W + WIDGET_SPACING, y, height + EDIT_FRAME_H, 20, 0, 0);
 	CSetScrollbarCallback (w->vert_scrollbar->ident, w->ident, link_scrollbar_to_editor);
+	w->vert_scrollbar->scroll_bar_extra_render = render_book_marks;
     }
     return w;
+}
+
+static void render_book_marks (CWidget * w)
+{
+    struct _book_mark *p;
+    WEdit *edit;
+    int l;
+    char i[32];
+    if (!w)
+	return;
+    strcpy (i, CIdentOf (w));
+    *(strstr (i, ".vsc")) = '\0';
+    edit = (CIdent (i))->editor;
+    if (!edit->book_mark)
+	return;
+    l = CHeightOf (w) - 10 * CWidthOf (w) / 3 - 10;
+    for (p = edit->book_mark; p->next; p = p->next);
+    for (; p->prev; p = p->prev) {
+	int y = (CWidthOf (w) + 2 * CWidthOf (w) / 3 + 4) + (int) ((double) l * p->line / edit->total_lines);
+	CSetColor (color_palette (p->c & 0xFF));
+	CLine (CWindowOf (w), 5, y, CWidthOf (w) - 6, y);
+    }
 }
 
 void update_scroll_bars (WEdit * e)
@@ -571,6 +599,7 @@ void paste_prop (void *data, void (*insert) (void *, int), Window win, unsigned 
 	Atom actual_type;
 	int actual_fmt, i;
 	unsigned long nitems;
+
 	if (XGetWindowProperty (CDisplay, win, prop,
 				nread / 4, 65536, delete,
 			      AnyPropertyType, &actual_type, &actual_fmt,
@@ -632,7 +661,6 @@ void edit_update_screen (WEdit * e)
 	edit_render_keypress (e);
     }
 }
-
 
 extern int space_width;
 

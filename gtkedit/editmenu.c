@@ -25,6 +25,10 @@
 
 #include "editcmddef.h"
 
+#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
+#include "mad.h"
+#endif
+
 #ifdef MIDNIGHT
 
 #include "../src/mad.h"
@@ -67,14 +71,14 @@ void edit_wrap_cmd ()
 
 void edit_about_cmd ()
 {
-    edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
-		      _("\n"
-		      "                 Cooledit  v2.1\n"
+    edit_message_dialog (wedit->mainid, 20, 20, " About ",
+		      "\n"
+		      "                Cooledit  v3.11.5\n"
 		      "\n"
 		      " Copyright (C) 1996 the Free Software Foundation\n"
 		      "\n"
 		      "       A user friendly text editor written\n"
-		      "           for the Midnight Commander.\n")
+		      "           for the Midnight Commander.\n"
 	);
 }
 
@@ -400,7 +404,7 @@ void CDrawEditMenuButtons (const char *ident, Window parent, Window focus_return
 		     _("Copy to file...\tC-f"), '~', menu_cmd, (unsigned long) CK_Save_Block
 	);
 /* Tool hint */
-    CSetToolHint (catstrs (ident, ".filemenu", 0), _("Disk operations"));
+    CSetToolHint (catstrs (ident, ".filemenu", 0), _("Disk operations and file indexing/searching"));
 
     CGetHintPos (&x, &d);
 

@@ -87,6 +87,7 @@
 #define CK_Util			417
 #define CK_Type_Load_Python	418
 #define CK_Find_File		419
+#define CK_Ctags		420
 
 /* application control */
 #define CK_Save_Desktop		451
@@ -136,7 +137,7 @@
 #define CK_XPaste		703
 #define CK_Selection_History	704
 
-#ifdef MIDNIGHT		/* cooledit now has its own full-featured script editor and executor */
+#ifdef MIDNIGHT			/* cooledit now has its own full-featured script editor and executor */
 /*
    Process a block through a shell command: CK_Pipe_Block(i) executes shell_cmd[i].
    shell_cmd[i] must process the file ~/cooledit.block and output ~/cooledit.block
@@ -148,14 +149,15 @@
  */
 #define CK_Pipe_Block(i)	(1000+(i))
 #define SHELL_COMMANDS_i {"/.cedit/edit.indent.rc", "/.cedit/edit.spell.rc", /* and so on */ 0};
-#else
-#define CK_User_Command(i)	(1000+(i))
-#endif
-
-/* execute a macro */
 #define CK_Macro(i)		(2000+(i))
 #define CK_Last_Macro		CK_Macro(0x7FFF)
+#else
 
+#define CK_User_Command(i)	((i) | (1 << 16))
+#define IS_USER_COMMAND(i)	((i) & (1 << 16))
+#define CK_Macro(i)		((i) | (1 << 17))
+#define IS_MACRO_COMMAND(i)	((i) & (1 << 17))
+#endif
 
 #endif
 

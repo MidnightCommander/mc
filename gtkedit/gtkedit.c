@@ -665,9 +665,9 @@ static gint gtk_edit_button_press_release (GtkWidget * widget,
     case GDK_2BUTTON_PRESS:
 	dragging = 0;
 	edit_cursor_move (e, mouse_pos - e->curs1);
-	edit_right_word_move (e);
+	edit_right_word_move (e, 1);
 	mouse_pos = e->curs1;
-	edit_left_word_move (e);
+	edit_left_word_move (e, 1);
 	button_down_pos = e->curs1;
 	gtk_edit_set_selection (GTK_EDITABLE (widget), mouse_pos, button_down_pos);
 	gtk_edit_mouse_redraw (e, mouse_pos);
@@ -911,7 +911,7 @@ static void gtk_edit_class_init (GtkEditClass * class)
 
 static void gtk_edit_init (GtkEdit * edit)
 {
-    static made_directory = 0;
+    static int made_directory = 0;
 
     GTK_WIDGET_SET_FLAGS (edit, GTK_CAN_FOCUS);
 

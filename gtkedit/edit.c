@@ -26,8 +26,6 @@
 #if defined(NEEDS_IO_H)
 #    include <io.h>
 #    include <fcntl.h>
-#endif
-#ifdef NEEDS_CR_LF_TRANSLATION
 #    define CR_LF_TRANSLATION
 #endif
 #include "edit.h"
@@ -36,6 +34,9 @@
 #	include <sys/timeb.h>
 #endif /* SCO_FLAVOR */
 #include <time.h>	/* for ctime() */
+#if defined (HAVE_MAD) && ! defined (MIDNIGHT) && ! defined (GTK)
+#include "mad.h"
+#endif
 
 /*
  *
@@ -257,10 +258,10 @@ int edit_load_file (WEdit * edit, const char *filename, const char *text, unsign
 
 /* Lastbyte calculation in TEXT mode FRANCO */
 #if defined CR_LF_TRANSLATION
-	if(file && (!text)) {
+	if(file && (!text)){
 		real_size=0;
 		tmp_buf[sizeof (tmp_buf) - 1] = 0;
-		while ((bytes_read = read (file, tmp_buf, 1024)) > 0) {
+		while((bytes_read = read(file,tmp_buf,1024)) > 0){
 			real_size += bytes_read;
 		}
 		s.st_size = real_size;
@@ -336,8 +337,8 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 	filename = catstrs (dir, filename, 0);
 	edit_split_filename (edit, (char *) filename);
     } else {
-	edit->filename = strdup ("");
-	edit->dir = strdup(dir);
+	edit->filename = (char *) strdup ("");
+	edit->dir = (char *) strdup(dir);
     }
     edit->stack_size = START_STACK_SIZE;
     edit->stack_size_mask = START_STACK_SIZE - 1;
@@ -394,7 +395,7 @@ int edit_renew (WEdit * edit)
     char *dir;
 
     if (edit->dir)
-	dir = strdup (edit->dir);
+	dir = (char *) strdup (edit->dir);
     else
 	dir = 0;
     
@@ -444,7 +445,7 @@ int edit_reload (WEdit * edit, const char *filename, const char *text, const cha
    set edit->mark1 position. 700'000'000 through 1400'000'000 is to set edit->mark2
    position.
 
-   The only way the curser moves or the buffer is changed is through the routines:
+   The only way the cursor moves or the buffer is changed is through the routines:
    insert, backspace, insert_ahead, delete, and cursor_move.
    These record the reverse undo movements onto the stack each time they are
    called.
@@ -745,26 +746,22 @@ int edit_backspace (WEdit * edit)
 
 #ifdef FAST_MOVE_CURSOR
 
-#define memqcpy(edit,d,s,i)						\
-	{								\
-	    unsigned long next;						\
-	    char *dest = d;						\
-	    char *src = s;						\
-	    int n = i;							\
-	    while ((next =						\
-		    (unsigned long) memccpy (dest, src, '\n', n))) {	\
-		edit->curs_line--;					\
-		next -= (unsigned long) dest;				\
-		n -= next;						\
-		src += next;						\
-		dest += next;						\
-	    }								\
-	}
+static void memqcpy (WEdit * edit, unsigned char *dest, unsigned char *src, int n)
+{
+    unsigned long next;
+    while ((next = (unsigned long) memccpy (dest, src, '\n', n))) {
+	edit->curs_line--;
+	next -= (unsigned long) dest;
+	n -= next;
+	src += next;
+	dest += next;
+    }
+}
 
 int edit_move_backward_lots (WEdit * edit, long increment)
 {
     int r, s, t;
-    char *p;
+    unsigned char *p;
 
     if (increment > edit->curs1)
 	increment = edit->curs1;
@@ -845,7 +842,7 @@ int edit_move_backward_lots (WEdit * edit, long increment)
 
 #endif		/* ! FAST_MOVE_CURSOR */
 
-/* moves the curser right or left: increment positive or negative respectively */
+/* moves the cursor right or left: increment positive or negative respectively */
 int edit_cursor_move (WEdit * edit, long increment)
 {
 /* this is the same as a combination of two of the above routines, with only one push onto the undo stack */
@@ -1158,7 +1155,7 @@ int is_blank (WEdit * edit, long offset)
     f = edit_eol (edit, offset) - 1;
     while (s <= f) {
 	c = edit_get_byte (edit, s++);
-	if ((c > ' ' && c <= '~') || c >= 160)	/* non-printables on a line are considered "blank" */
+	if (!isspace (c))
 	    return 0;
     }
     return 1;
@@ -1169,7 +1166,7 @@ int is_blank (WEdit * edit, long offset)
 long edit_find_line (WEdit * edit, int line)
 {
     int i, j = 0;
-    int m = 1000000000;
+    int m = 2000000000;
     if (!edit->caches_valid) {
 	for (i = 0; i < N_LINE_CACHES; i++)
 	    edit->line_numbers[i] = edit->line_offsets[i] = 0;
@@ -1435,75 +1432,118 @@ void edit_mark_cmd (WEdit * edit, int unmark)
     }
 }
 
-int my_type_of (int c)
+static unsigned long my_type_of (int c)
 {
-    if (c < ' ' && c > 0)
-	return 1;
-    if (strchr ("+_-.", c))
-	if (strchr (option_whole_chars_move, c))
-	    return 3;
-    if (!strcasechr (option_whole_chars_move, c))
-	return 2;
-    if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c >= 160)
-	return 3;
-    return c;
+    int x, r = 0;
+    char *p, *q;
+    if (!c)
+	return 0;
+    if (c == '!') {
+	if (*option_chars_move_whole_word == '!')
+	    return 2;
+	return 0x80000000UL;
+    }
+    if (isupper (c))
+	c = 'A';
+    else if (islower (c))
+	c = 'a';
+    else if (isalpha (c))
+	c = 'a';
+    else if (isdigit (c))
+	c = '0';
+    else if (isspace (c))
+	c = ' ';
+    q = strchr (option_chars_move_whole_word, c);
+    if (!q)
+	return 0xFFFFFFFFUL;
+    do {
+	for (x = 1, p = option_chars_move_whole_word; (unsigned long) p < (unsigned long) q; p++)
+	    if (*p == '!')
+		x <<= 1;
+	r |= x;
+    } while ((q = strchr (q + 1, c)));
+    return r;
 }
 
-void edit_left_word_move (WEdit * edit)
+void edit_left_word_move (WEdit * edit, int s)
 {
-    do {
+    for (;;) {
+	int c1, c2;
 	edit_cursor_move (edit, -1);
 	if (!edit->curs1)
 	    break;
-    } while (my_type_of (edit_get_byte (edit, edit->curs1))
-	     ==
-	     my_type_of (edit_get_byte (edit, edit->curs1 - 1)));
+	c1 = edit_get_byte (edit, edit->curs1 - 1);
+	c2 = edit_get_byte (edit, edit->curs1);
+	if (!(my_type_of (c1) & my_type_of (c2)))
+	    break;
+	if (isspace (c1) && !isspace (c2))
+	    break;
+	if (s)
+	    if (!isspace (c1) && isspace (c2))
+		break;
+    }
 }
 
 static void edit_left_word_move_cmd (WEdit * edit)
 {
-    edit_left_word_move (edit);
-    if (strchr (option_whole_chars_move, ' '))
-	if (strchr ("\t ", edit_get_byte (edit, edit->curs1)))
-	    edit_left_word_move (edit);
+    edit_left_word_move (edit, 0);
     edit->force |= REDRAW_PAGE;
 }
 
-void edit_right_word_move (WEdit * edit)
+void edit_right_word_move (WEdit * edit, int s)
 {
-    do {
+    for (;;) {
+	int c1, c2;
 	edit_cursor_move (edit, 1);
 	if (edit->curs1 >= edit->last_byte)
 	    break;
-    } while (my_type_of (edit_get_byte (edit, edit->curs1 - 1))
-	     ==
-	     my_type_of (edit_get_byte (edit, edit->curs1)));
+	c1 = edit_get_byte (edit, edit->curs1 - 1);
+	c2 = edit_get_byte (edit, edit->curs1);
+	if (!(my_type_of (c1) & my_type_of (c2)))
+	    break;
+	if (isspace (c1) && !isspace (c2))
+	    break;
+	if (s)
+	    if (!isspace (c1) && isspace (c2))
+		break;
+    }
 }
 
 static void edit_right_word_move_cmd (WEdit * edit)
 {
-    edit_right_word_move (edit);
-    if (strchr (option_whole_chars_move, ' '))
-	if (strchr ("\t ", edit_get_byte (edit, edit->curs1)))
-	    edit_right_word_move (edit);
+    edit_right_word_move (edit, 0);
     edit->force |= REDRAW_PAGE;
 }
 
 
 static void edit_right_delete_word (WEdit * edit)
 {
-    int c;
-    do {
-	c = edit_delete (edit);
-    } while (my_type_of (c) == my_type_of (edit_get_byte (edit, edit->curs1)));
+    int c1, c2;
+    for (;;) {
+	if (edit->curs1 >= edit->last_byte)
+	    break;
+	c1 = edit_delete (edit);
+	c2 = edit_get_byte (edit, edit->curs1);
+	if ((isspace (c1) == 0) != (isspace (c2) == 0))
+	    break;
+	if (!(my_type_of (c1) & my_type_of (c2)))
+	    break;
+    }
 }
 
 static void edit_left_delete_word (WEdit * edit)
 {
-    int c;
-    do {
-	c = edit_backspace (edit);
-    } while (my_type_of (c) == my_type_of (edit_get_byte (edit, edit->curs1 - 1)));
+    int c1, c2;
+    for (;;) {
+	if (edit->curs1 <= 0)
+	    break;
+	c1 = edit_backspace (edit);
+	c2 = edit_get_byte (edit, edit->curs1 - 1);
+	if ((isspace (c1) == 0) != (isspace (c2) == 0))
+	    break;
+	if (!(my_type_of (c1) & my_type_of (c2)))
+	    break;
+    }
 }
 
 extern int column_highlighting;
@@ -1661,21 +1701,21 @@ void edit_insert_indent (WEdit * edit, int indent)
 	    indent -= TAB_SIZE;
 	}
     }
-    while (indent--)
+    while (indent-- > 0)
 	edit_insert (edit, ' ');
 }
 
-static void edit_auto_indent (WEdit * edit, int always)
+void edit_auto_indent (WEdit * edit, int extra, int no_advance)
 {
     long p;
     int indent;
     p = edit->curs1;
-    while (strchr ("\t\n\r ", edit_get_byte (edit, p - 1)) && p > 0)	/* move back/up to a line with text */
+    while (isspace (edit_get_byte (edit, p - 1)) && p > 0)	/* move back/up to a line with text */
 	p--;
     indent = edit_indent_width (edit, edit_bol (edit, p));
-    if (edit->curs_col < indent)
+    if (edit->curs_col < indent && no_advance)
 	indent = edit->curs_col;
-    edit_insert_indent (edit, indent);
+    edit_insert_indent (edit, indent + (option_fake_half_tabs ? HALF_TAB_SIZE : TAB_SIZE) * space_width * extra);
 }
 
 static void edit_double_newline (WEdit * edit)
@@ -1930,6 +1970,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->prev_col = edit_get_col (edit);
 	edit->search_start = edit->curs1;
 	edit_find_bracket (edit);
+	edit_check_spelling (edit);
 	return 1;
     }
     switch (command) {
@@ -2004,11 +2045,11 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	if (option_auto_para_formatting) {
 	    edit_double_newline (edit);
 	    if (option_return_does_auto_indent)
-		edit_auto_indent (edit, 0);
+		edit_auto_indent (edit, 0, 1);
 	    format_paragraph (edit, 0);
 	} else if (option_return_does_auto_indent) {
 	    edit_insert (edit, '\n');
-	    edit_auto_indent (edit, 0);
+	    edit_auto_indent (edit, 0, 1);
 	} else {
 	    edit_insert (edit, '\n');
 	}
@@ -2294,6 +2335,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
     case CK_Sort:
     case CK_Mail:
     case CK_Find_File:
+    case CK_Ctags:
 #endif
     case CK_Complete:
     case CK_Cancel:
@@ -2332,18 +2374,24 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 /* CK_Pipe_Block */
     if ((command / 1000) == 1)	/* a shell command */
 	edit_block_process_cmd (edit, shell_cmd[command - 1000], 1);
-#else
-    if ((command / 1000) == 1)	/* a user defined command */
-	if (user_commamd)
-	    (*user_commamd) (edit, command - 1000);
-#endif
-
     if (command > CK_Macro (0) && command <= CK_Last_Macro) {	/* a macro command */
 	struct macro m[MAX_MACRO_LENGTH];
 	int nm;
 	if ((result = edit_load_macro_cmd (edit, m, &nm, command - 2000)))
 	    edit_execute_macro (edit, m, nm);
     }
+#else
+    if (IS_USER_COMMAND (command))	/* a user defined command */
+	if (user_commamd)
+	    (*user_commamd) (edit, command & 0xFFFF);
+    if (IS_MACRO_COMMAND (command)) {	/* a macro command */
+	struct macro m[MAX_MACRO_LENGTH];
+	int nm;
+	if ((result = edit_load_macro_cmd (edit, m, &nm, command & 0xFFFF)))
+	    edit_execute_macro (edit, m, nm);
+    }
+#endif
+
 /* keys which must set the col position, and the search vars */
     switch (command) {
     case CK_Find:
@@ -2376,6 +2424,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
 	edit_find_bracket (edit);
+	edit_check_spelling (edit);
 	return 1;
 	break;
     default:
@@ -2384,6 +2433,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->search_start = edit->curs1;
     }
     edit_find_bracket (edit);
+    edit_check_spelling (edit);
 
     if (option_auto_para_formatting) {
 	switch (command) {
