@@ -18,7 +18,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
 		config.h.in mc-aclocal.m4 aclocal.m4 acconfig.h \
 		VERSION mcfn_install.in Make.common.in README.PC \
-		mc.spec Specfile README.QNX VERSION.in \
+		mc.spec mc.spec.in Specfile README.QNX VERSION.in \
 		mkinstalldirs autogen.sh ABOUT-NLS gettext.m4
 
 all: 
