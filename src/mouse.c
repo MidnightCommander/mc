@@ -38,84 +38,6 @@
 
 int xmouse_flag = 0;
 
-/*
- * This chunk of NCURSES internals is used to support the keyok() function for
- * NCURSES versions between 1.9.6 (when the mouse code was introduced in 1995),
- * and 4.2 (when the keyok function will be release).
- */
-#ifndef HAVE_KEYOK
-#ifdef NCURSES_MOUSE_VERSION	/* first defined for ncurses 1.9.6 */
-#ifdef NCURSES_970530		/* defined by configure script */
-/*
- * ncurses 1.9.8a ported to QNX doesn't provide the SP pointer as a global
- * symbol in the library...
- */
-#ifndef __QNX__
-struct tries {
-	struct tries    *child;
-	struct tries    *sibling;
-	unsigned char    ch;
-	unsigned short   value;
-};
-
-struct screen {
-	int             _ifd;
-	FILE            *_ofp;
-#if NCURSES_970530 >= 2
-	char            *_setbuf;	/*4.0*/
-#endif
-	int             _checkfd;
-	struct term     *_term;
-	short           _lines;
-	short           _columns;
-#if NCURSES_970530 >= 1
-	short           _lines_avail;	/*1.9.9g*/
-	short           _topstolen;	/*1.9.9g*/
-#endif
-	struct _win_st  *_curscr;
-	struct _win_st  *_newscr;
-	struct _win_st  *_stdscr;
-	struct tries    *_keytry;       /* "Try" for use with keypad mode   */
-	/* there's more, but this is just for alignment */
-};
-extern struct screen *SP;
-
-/*
- * Remove a code from the specified tree, freeing the unused nodes.  Returns
- * true if the code was found/removed.
- */
-static
-int _nc_remove_key(struct tries **tree, unsigned short code)
-{
-	struct tries *ptr = (*tree);
-
-	if (code > 0) {
-		while (ptr != 0) {
-			if (_nc_remove_key(&(ptr->child), code)) {
-				return TRUE;
-			}
-			if (ptr->value == code) {
-				*tree = 0;
-				g_free (ptr);
-				return TRUE;
-			}
-			ptr = ptr->sibling;
-		}
-	}
-	return FALSE;
-}
-
-int
-keyok(int code, bool flag)
-{
-	_nc_remove_key(&(SP->_keytry), code);
-	return OK;
-}
-#endif /* __QNX__ */
-#endif /* NCURSES_970530 */
-#endif /* NCURSES_MOUSE_VERSION */
-#endif /* HAVE_KEYOK */
-
 #ifdef HAVE_LIBGPM
 static int mouse_d;		/* Handle to the mouse server */
 #endif
@@ -182,19 +104,6 @@ int redo_mouse (Gpm_Event *event)
 
 void init_mouse (void)
 {
-    /*
-     * MC's use of xterm mouse is incompatible with NCURSES's support.  The
-     * simplest solution is to disable NCURSE's mouse.
-     */
-#ifdef NCURSES_MOUSE_VERSION
-/* See the comment above about QNX/ncurses 1.9.8a ... */
-#ifndef __QNX__
-    keyok(KEY_MOUSE, FALSE);
-#endif /* __QNX__ */
-#endif /* NCURSES_MOUSE_VERSION */
-
-#if defined(NCURSES_970530)
-#endif
     switch (use_mouse_p)
     {
 #ifdef HAVE_LIBGPM

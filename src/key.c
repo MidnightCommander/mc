@@ -769,20 +769,25 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 	    *event = ev;
 	    return EV_MOUSE;
 	}
-#endif
+#endif /* !HAVE_LIBGPM */
     }
-#   ifndef HAVE_SLANG
+#ifndef HAVE_SLANG
     flag = is_wintouched(stdscr);
     untouchwin (stdscr);
-#   endif
+#endif /* !HAVE_SLANG */
     c = block ? getch_with_delay () : get_key_code(1);
 
-#   ifndef HAVE_SLANG
+#ifndef HAVE_SLANG
     if (flag)
         touchwin (stdscr);
-#   endif
+#endif /* !HAVE_SLANG */
     
-    if (c == MCKEY_MOUSE) { /* Mouse event */
+    if (c == MCKEY_MOUSE
+#ifdef KEY_MOUSE
+			 || c == KEY_MOUSE
+#endif /* KEY_MOUSE */
+					  ) {
+	/* Mouse event */
         xmouse_get_event (event);
 	if (event->type)
 	    return EV_MOUSE;

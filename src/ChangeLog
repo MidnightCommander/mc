@@ -1,3 +1,9 @@
+2001-09-14  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (get_event): Recognize KEY_MOUSE, not just MCKEY_MOUSE.
+	* mouse.c: Don't use or emulate keyok(), since MC understands
+	KEY_MOUSE now.
+
 2001-09-11  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (check_for_default): Make accessible from other files.
