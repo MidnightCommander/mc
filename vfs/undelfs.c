@@ -99,7 +99,7 @@ undelfs_shutdown (void)
 }
 
 static void
-undelfs_get_path (const char *dirname, char **ext2_fname, char **file)
+undelfs_get_path (const char *dirname, char **fsname, char **file)
 {
     const char *p;
 
@@ -108,7 +108,7 @@ undelfs_get_path (const char *dirname, char **ext2_fname, char **file)
        hda5, sdb8 etc, which is assumed to live under /dev. 
                                                     -- pavel@ucw.cz */
 
-    *ext2_fname = NULL;
+    *fsname = NULL;
     
     if (strncmp (dirname, "/#undel:", 8))
 	return;
@@ -134,14 +134,14 @@ undelfs_get_path (const char *dirname, char **ext2_fname, char **file)
 
 	    *file = g_strdup (p+1);
 	    tmp = g_strndup (dirname, p - dirname);
-	    *ext2_fname = g_strconcat ("/dev/", tmp, NULL);
+	    *fsname = g_strconcat ("/dev/", tmp, NULL);
 	    g_free (tmp);
 	    return;
 	}
 	p--;
     }
     *file = g_strdup ("");
-    *ext2_fname = g_strconcat ("/dev/", dirname, NULL);
+    *fsname = g_strconcat ("/dev/", dirname, NULL);
     return;
 }
 
@@ -640,19 +640,20 @@ undelfs_lseek(void *vfs_info, off_t offset, int whence)
 }
 
 static vfsid
-undelfs_getid(struct vfs_class *me, const char *path, struct vfs_stamping **parent)
+undelfs_getid (struct vfs_class *me, const char *path,
+	       struct vfs_stamping **parent)
 {
-    char *ext2_fname, *file;
+    char *fname, *fsname;
 
     /* We run only on the local fs */
     *parent = NULL;
-    undelfs_get_path (path, &ext2_fname, &file);
+    undelfs_get_path (path, &fsname, &fname);
 
-    if (!ext2_fname)
-        return (vfsid) -1;
-    g_free (ext2_fname);
-    g_free (file);
-    return (vfsid)0;
+    if (!fsname)
+	return NULL;
+    g_free (fname);
+    g_free (fsname);
+    return (vfsid) fs;
 }
 
 static int

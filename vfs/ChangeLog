@@ -1,3 +1,10 @@
+2003-11-12  Pavel Roskin  <proski@gnu.org>
+
+	* gc.c: Use NULL instead of -1 for empty vfsid.  Adjust all
+	dependencies.
+	* undelfs.c (undelfs_get_path): Don't shadow static ext2_fname.
+	(undelfs_getid): Likewise.  Use fs for non-empty vfsid.
+
 2003-11-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cpio.c (cpio_create_entry): Fix possible buffer underflow

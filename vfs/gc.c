@@ -1,4 +1,4 @@
-/* Virtual File System grabage collection code
+/* Virtual File System garbage collection code
    Copyright (C) 1995-2003 The Free Software Foundation
 
    Written by: 1995 Miguel de Icaza
@@ -47,7 +47,7 @@ static struct vfs_stamping *stamps;
 static void
 vfs_addstamp (struct vfs_class *v, vfsid id, struct vfs_stamping *parent)
 {
-    if (!(v->flags & VFSF_LOCAL) && id != (vfsid) - 1) {
+    if (!(v->flags & VFSF_LOCAL) && id != NULL) {
 	struct vfs_stamping *stamp;
 	struct vfs_stamping *last_stamp = NULL;
 
@@ -149,7 +149,7 @@ vfsid
 vfs_getid (struct vfs_class *vclass, const char *path,
 	   struct vfs_stamping **parent)
 {
-    vfsid id = (vfsid) - 1;
+    vfsid id = NULL;
 
     *parent = NULL;
     if (vclass->getid)
@@ -235,7 +235,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 
     f = is_parent (oldvfs, oldvfsid, par);
     vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == (vfsid) - 1
+    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == NULL
 	|| f) {
 	return;
     }
@@ -249,7 +249,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	    return;
     } else {
 	n2vfs = NULL;
-	n2vfsid = (vfsid) - 1;
+	n2vfsid = NULL;
     }
 
     if (get_other_type () == view_listing) {
@@ -261,7 +261,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	    return;
     } else {
 	n3vfs = NULL;
-	n3vfsid = (vfsid) - 1;
+	n3vfsid = NULL;
     }
 
     if (!oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
@@ -272,7 +272,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	if ((stamp->v == nvfs && stamp->id == nvfsid)
 	    || (stamp->v == n2vfs && stamp->id == n2vfsid)
 	    || (stamp->v == n3vfs && stamp->id == n3vfsid)
-	    || stamp->id == (vfsid) - 1 || !stamp->v->nothingisopen
+	    || !stamp->id || !stamp->v->nothingisopen
 	    || !(*stamp->v->nothingisopen) (stamp->id))
 	    break;
 	vfs_addstamp (stamp->v, stamp->id, stamp->parent);

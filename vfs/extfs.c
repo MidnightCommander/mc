@@ -1132,12 +1132,12 @@ static vfsid extfs_getid (struct vfs_class *me, const char *path, struct vfs_sta
 
     *parent = NULL;
     if (!(p = extfs_get_path (path, &archive, 1, 1)))
-	return (vfsid) -1;
+	return NULL;
     g_free(p);
     if (archive->name){
 	v = vfs_get_class (archive->name);
 	id = vfs_getid (v, archive->name, &par);
-	if (id != (vfsid)-1) {
+	if (id) {
 	    *parent = g_new (struct vfs_stamping, 1);
 	    (*parent)->v = v;
 	    (*parent)->id = id;

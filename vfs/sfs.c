@@ -215,12 +215,14 @@ static int sfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 }
 
 static vfsid
-sfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
-{				/* FIXME: what should I do? */
+sfs_getid (struct vfs_class *me, const char *path,
+	   struct vfs_stamping **parent)
+{
     struct vfs_class *v;
     vfsid id;
     struct vfs_stamping *par;
     struct cachedfile *cur = head;
+    char *path2;
 
     while (cur) {
 	if (!strcmp (path, cur->name))
@@ -231,22 +233,20 @@ sfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
     *parent = NULL;
 
     if (!cur)
-	return (vfsid) (-1);
+	return NULL;
 
-    {
-	char *path2 = g_strdup (path);
+    path2 = g_strdup (path);
 
-	/* Strip suffix which led to this being sfs */
-	v = vfs_split (path2, NULL, NULL);
+    /* Strip suffix which led to this being sfs */
+    v = vfs_split (path2, NULL, NULL);
 
-	/* ... and learn whoever was the parent system */
-	v = vfs_split (path2, NULL, NULL);
+    /* ... and learn whoever was the parent system */
+    v = vfs_split (path2, NULL, NULL);
 
-	id = vfs_getid (v, path2, &par);
-	g_free (path2);
-    }
+    id = vfs_getid (v, path2, &par);
+    g_free (path2);
 
-    if (id != (vfsid) - 1) {
+    if (id) {
 	*parent = g_new (struct vfs_stamping, 1);
 	(*parent)->v = v;
 	(*parent)->id = id;

@@ -1068,11 +1068,11 @@ vfs_s_getid (struct vfs_class *me, const char *path, struct vfs_stamping **paren
 
     *parent = NULL;
     if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
-	return (vfsid) -1;
+	return NULL;
     g_free(p);
     v = vfs_get_class (archive->name);
     id = vfs_getid (v, archive->name, &par);
-    if (id != (vfsid)-1){
+    if (id) {
         *parent = g_new (struct vfs_stamping, 1);
         (*parent)->v = v;
         (*parent)->id = id;
