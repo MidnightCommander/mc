@@ -1,5 +1,8 @@
 2001-05-21  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/Makefile.am: Allow "make install" without *.html
+	files.
+
 	* doc-gnome/C/mkhtml: Print a big warning if the script fails.
 	* doc-gnome/C/Makefile.am: Ignore exit status of mkhtml.
 
@@ -653,7 +656,7 @@
 
 2000-01-31  Yuan-Chung Cheng <platin@linux.org.tw>
 
-        * configure.in: Added "zh_CN.GB2312" to ALL_LINGUAS.
+	* configure.in: Added "zh_CN.GB2312" to ALL_LINGUAS.
 
 2000-01-29  Matthias Warkus  <mawa@iname.com>
 
@@ -1186,7 +1189,7 @@ Sun Jan 17 03:19:47 1999  Timur Bakeyev  <mc@bat.ru>
 
 1999-01-10  Ilya Zakharevich <ilya@math.ohio-state.edu>
 
-        * gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.
+	* gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.
 
 1999-01-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -1232,7 +1235,7 @@ Sun Dec 13 15:26:19 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 1998-12-08  Tuomas Kuosmanen  <tigert@gimp.org>
 
-        * new_icons/gnome-image-[lots].png: I added some icons for file
+	* new_icons/gnome-image-[lots].png: I added some icons for file
 	types (image) there - someone please tell me what the correct
 	location and naming convention is and I will try to follow that. :)
 

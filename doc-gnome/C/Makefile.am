@@ -21,7 +21,7 @@ dist-hook: $(srcdir)/index.html
 	cp $(srcdir)/*.html $(distdir)
 
 install-data-local: $(srcdir)/index.html
-	for file in $(srcdir)/*.html; do \
+	-for file in $(srcdir)/*.html; do \
 	  $(INSTALL_DATA) $$file $(DESTDIR)$(gmc_helpdir) || exit 1; \
 	done
 
