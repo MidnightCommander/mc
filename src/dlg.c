@@ -391,6 +391,9 @@ int send_message (Dlg_head *h, Widget *w, int msg, int par)
 void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 {
     Widget_Item *p, *first, *wi;
+#ifdef HAVE_GNOME
+    int was_panel;
+#endif
 
     if (!h->current)
 	    return;
@@ -406,6 +409,10 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 #else
 	first = p = h->current->next;
 #endif
+
+#ifdef HAVE_GNOME
+    was_panel = FALSE;
+#endif
     do {
 	if (reverse)
 	    p = p->prev;
@@ -414,8 +421,14 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 
 	wi = p;
 /*	if (p->widget->options & flags) */
-	    send_message (h, wi->widget, message, 0);
+	if (is_a_panel (wi->widget))
+	    was_panel |= TRUE;
+	send_message (h, wi->widget, message, 0);
     } while (first != p);
+#ifdef HAVE_GNOME
+    if (was_panel && message == WIDGET_INIT)
+	h->current = h->current->prev;
+#endif
 }
 
 /* broadcast a message to all the widgets in a dialog */
