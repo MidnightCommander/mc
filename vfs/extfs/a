@@ -8,7 +8,7 @@
 
 ### Change this when the commands are outside PATH
 $mdir = "mdir";
-$mcopy = "mcopy";
+$mcopy = "mcopy -noQ";
 ###
 
 $disk = $0;
@@ -70,13 +70,20 @@ sub a_list
 sub a_copyout
 {
     my($archname,$filename,$dest) = @_;
-    system "$mcopy $disk:/$filename $dest";
+    system "$mcopy $disk:/$filename $dest >& /dev/null";
 }
 
 #    system "touch /tmp/deb";
 
+sub a_copyin
+{
+    my($archname,$filename,$dest) = @_;
+    system "$mcopy $dest $disk:/$filename >& /dev/null";
+}
+
 if($ARGV[0] eq "list") { shift; &a_list(@ARGV); exit 0; }
 elsif($ARGV[0] eq "copyout") { shift; &a_copyout(@ARGV); exit 0; }
+elsif($ARGV[0] eq "copyin") { shift; &a_copyin(@ARGV); exit 0; }
 
 exit 1;
 
