@@ -107,13 +107,13 @@ local_closedir (void *data)
 }
 
 static int
-local_stat (struct vfs_class *me, char *path, struct stat *buf)
+local_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return stat (path, buf);
 }
 
 static int
-local_lstat (struct vfs_class *me, char *path, struct stat *buf)
+local_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
 #ifndef HAVE_STATLSTAT
     return lstat (path,buf);

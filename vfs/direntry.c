@@ -642,7 +642,7 @@ vfs_s_chdir (struct vfs_class *me, const char *path)
 /* --------------------------- stat and friends ---------------------------- */
 
 static int
-vfs_s_internal_stat (struct vfs_class *me, char *path, struct stat *buf, int flag)
+vfs_s_internal_stat (struct vfs_class *me, const char *path, struct stat *buf, int flag)
 {
     struct vfs_s_inode *ino;
 
@@ -653,13 +653,13 @@ vfs_s_internal_stat (struct vfs_class *me, char *path, struct stat *buf, int fla
 }
 
 static int
-vfs_s_stat (struct vfs_class *me, char *path, struct stat *buf)
+vfs_s_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_FOLLOW);
 }
 
 static int
-vfs_s_lstat (struct vfs_class *me, char *path, struct stat *buf)
+vfs_s_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return vfs_s_internal_stat (me, path, buf, FL_NONE);
 }

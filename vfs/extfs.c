@@ -929,14 +929,15 @@ static void extfs_stat_move( struct stat *buf, struct inode *inode )
     buf->st_ctime = inode->ctime;
 }
 
-static int extfs_internal_stat (char *path, struct stat *buf, int resolve)
+static int extfs_internal_stat (const char *path, struct stat *buf, int resolve)
 {
     struct archive *archive;
     char *q;
     struct entry *entry;
     struct inode *inode;
+    char *path2 = g_strdup(path);
 
-    if ((q = extfs_get_path_mangle (path, &archive, 0, 0)) == NULL)
+    if ((q = extfs_get_path_mangle (path2, &archive, 0, 0)) == NULL)
 	return -1;
     entry = extfs_find_entry (archive->root_entry, q, 0, 0);
     if (entry == NULL)
@@ -948,12 +949,12 @@ static int extfs_internal_stat (char *path, struct stat *buf, int resolve)
     return 0;
 }
 
-static int extfs_stat (struct vfs_class *me, char *path, struct stat *buf)
+static int extfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return extfs_internal_stat (path, buf, 1);
 }
 
-static int extfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
+static int extfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return extfs_internal_stat (path, buf, 0);
 }

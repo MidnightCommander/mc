@@ -39,8 +39,8 @@ struct vfs_class {
     void *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
 
-    int (*stat) (struct vfs_class *me, /*FIXME:const*/ char *path, struct stat * buf);
-    int (*lstat) (struct vfs_class *me, /*FIXME:const*/ char *path, struct stat * buf);
+    int (*stat) (struct vfs_class *me, const char *path, struct stat * buf);
+    int (*lstat) (struct vfs_class *me, const char *path, struct stat * buf);
     int (*fstat) (void *vfs_info, struct stat * buf);
 
     int (*chmod) (struct vfs_class *me, /*FIXME:const*/ char *path, int mode);

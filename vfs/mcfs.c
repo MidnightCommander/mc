@@ -851,7 +851,7 @@ mcfs_get_stat_info (mcfs_connection *mc, struct stat *buf)
 }
 
 static int
-mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
+mcfs_stat_cmd (int cmd, const char *path, struct stat *buf)
 {
     char *remote_file;
     mcfs_connection *mc;
@@ -875,13 +875,13 @@ mcfs_stat_cmd (int cmd, char *path, struct stat *buf)
 }
 
 static int
-mcfs_stat (struct vfs_class *me, char *path, struct stat *buf)
+mcfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     return mcfs_stat_cmd (MC_STAT, path, buf);
 }
 
 static int
-mcfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
+mcfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     int path_len = strlen (path);
     int entry_len = strlen (mcfs_readdir_data.dent.d_name);

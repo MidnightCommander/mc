@@ -1295,10 +1295,10 @@ static dir_entry *single_entry;
 
 /* stat a single file */
 static int
-smbfs_get_remote_stat (smbfs_connection * sc, char *path, struct stat *buf)
+smbfs_get_remote_stat (smbfs_connection * sc, const char *path, struct stat *buf)
 {
     uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
-    char *mypath = path;
+    char *mypath = g_strdup(path);
 
     DEBUG (3, ("smbfs_get_remote_stat(): mypath:%s\n", mypath));
 
@@ -1346,7 +1346,7 @@ smbfs_search_dir_entry (dir_entry *dentry, const char *text, struct stat *buf)
 }
 
 static int
-smbfs_get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
+smbfs_get_stat_info (smbfs_connection * sc, const char *path, struct stat *buf)
 {
     char *p;
 #if 0
@@ -1472,7 +1472,7 @@ smbfs_loaddir_by_name (struct vfs_class *me, const char *path)
 }
 
 static int
-smbfs_stat (struct vfs_class * me, char *path, struct stat *buf)
+smbfs_stat (struct vfs_class * me, const char *path, struct stat *buf)
 {
     smbfs_connection *sc;
     pstring server_url;

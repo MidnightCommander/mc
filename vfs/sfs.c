@@ -200,13 +200,13 @@ sfs_open (struct vfs_class *me, const char *path, int flags, int mode)
     return sfs_info;
 }
 
-static int sfs_stat (struct vfs_class *me, char *path, struct stat *buf)
+static int sfs_stat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     path = sfs_redirect (me, path);
     return stat (path, buf);
 }
 
-static int sfs_lstat (struct vfs_class *me, char *path, struct stat *buf)
+static int sfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     path = sfs_redirect (me, path);
 #ifndef HAVE_STATLSTAT
