@@ -4,7 +4,7 @@
 	(vfs_s_free_inode): Remove support for "." and ".." entries.
 	* ftpfs.c (dir_load): Likewise.
 	Support for "." and ".." entries was a hack that could make the
-	cache non-traversible from inodes to the root and cause infinite
+	cache non-traversable from inodes to the root and cause infinite
 	loop in vfs_s_fullpath().
 	Reported by Frédéric L. W. Meunier <lists1@pervalidus.net>
 
@@ -184,7 +184,7 @@
 	* vfs.c (vfs_init): Register cpiofs in cpio.c.
 	(vfs_register): Rename to vfs_register_class(), remove "static".
 	* direntry.c (vfs_s_init_class): New function - generic VFS
-	class registraction for vfs_s descendants.
+	class registration for vfs_s descendants.
 	* cpio.c: Register VFS class locally.
 
 2003-10-07  Pavel Roskin  <proski@gnu.org>
