@@ -2,7 +2,6 @@
 #define __EXT_H
 
 char *regex_command (char *filename, char *action, char **drops, int *move_dir);
-void exec_extension (char *filename, char *data, char **drops, int *move_dir, int start_line);
 
 /* Call it after the user has edited the mc.ext file, 
  * to flush the cached mc.ext file

@@ -1108,8 +1108,6 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
 
-	if (event)
-		printf ("Icon list select icon, event->type= %d %d %d\n", event->type, GDK_BUTTON_PRESS, GDK_2BUTTON_PRESS);
 	if (!event)
 		return;
 
@@ -2097,9 +2095,8 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 				   button_switch_to_listing (panel),
 				   "Switch view to detailed view.", NULL);
 	dock =  gnome_dock_item_new ("gmc-toolbar", GNOME_DOCK_ITEM_BEH_EXCLUSIVE | GNOME_DOCK_ITEM_BEH_NEVER_VERTICAL);
-	gtk_container_add (GTK_CONTAINER(dock),status_line);
-	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock),
-			     GNOME_DOCK_ITEM (dock), GNOME_DOCK_TOP, 1, 0, 0, FALSE);
+	gtk_container_add(GTK_CONTAINER(dock),status_line);
+	gnome_dock_add_item (GNOME_DOCK(GNOME_APP (panel->xwindow)->dock), dock, GNOME_DOCK_TOP, 1, 0, 0, FALSE);
 	gtk_widget_show_all (dock);
 
 
