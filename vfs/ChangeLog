@@ -1,5 +1,9 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* samba/aclocal.m4: Fix underquoting.
+	* samba/configure.in: Fix underquoting. Don't use loff_t as the
+	second argument to AC_CHECK_TYPE - it's not a builtin type.
+
 	* samba/configure.in: Remove checks for statvfs and friends -
 	they are irrelevant to the client code.
 	* samba/tests/summary.c: Likewise.

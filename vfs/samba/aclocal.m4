@@ -2,7 +2,7 @@ dnl AC_VALIDATE_CACHE_SYSTEM_TYPE[(cmd)]
 dnl if the cache file is inconsistent with the current host,
 dnl target and build system types, execute CMD or print a default
 dnl error message.
-AC_DEFUN(AC_VALIDATE_CACHE_SYSTEM_TYPE, [
+AC_DEFUN([AC_VALIDATE_CACHE_SYSTEM_TYPE], [
     AC_REQUIRE([AC_CANONICAL_SYSTEM])
     AC_MSG_CHECKING([config.cache system type])
     if { test x"${ac_cv_host_system_type+set}" = x"set" &&
@@ -13,7 +13,7 @@ AC_DEFUN(AC_VALIDATE_CACHE_SYSTEM_TYPE, [
          test x"$ac_cv_target_system_type" != x"$target"; }; then
 	AC_MSG_RESULT([different])
 	ifelse($#, 1, [$1],
-		[AC_MSG_ERROR(["you must remove config.cache and restart configure"])])
+		[AC_MSG_ERROR([you must remove config.cache and restart configure])])
     else
 	AC_MSG_RESULT([same])
     fi
@@ -23,7 +23,7 @@ AC_DEFUN(AC_VALIDATE_CACHE_SYSTEM_TYPE, [
 ])
 
 dnl based on Automake's maintainer mode
-AC_DEFUN(SAMBA_MAINTAINER_MODE,[
+AC_DEFUN([SAMBA_MAINTAINER_MODE],[
   AC_ARG_ENABLE(maintainer-mode,
 	[  --enable-maintainer-mode enable some make rules for maintainers],
       maint_mode=$enableval, maint_mode=no)
@@ -37,7 +37,7 @@ AC_DEFUN(SAMBA_MAINTAINER_MODE,[
 
 
 dnl test whether dirent has a d_off member
-AC_DEFUN(AC_DIRENT_D_OFF,
+AC_DEFUN([AC_DIRENT_D_OFF],
 [AC_CACHE_CHECK([for d_off in dirent], ac_cv_dirent_d_off,
 [AC_TRY_COMPILE([
 #include <unistd.h>
@@ -51,8 +51,8 @@ fi
 
 
 dnl AC_PROG_CC_FLAG(flag)
-AC_DEFUN(AC_PROG_CC_FLAG,
-[AC_CACHE_CHECK(whether ${CC-cc} accepts -$1, ac_cv_prog_cc_$1,
+AC_DEFUN([AC_PROG_CC_FLAG],
+[AC_CACHE_CHECK([whether ${CC-cc} accepts -$1], ac_cv_prog_cc_$1,
 [echo 'void f(){}' > conftest.c
 if test -z "`${CC-cc} -$1 -c conftest.c 2>&1`"; then
   ac_cv_prog_cc_$1=yes
@@ -65,7 +65,7 @@ rm -f conftest*
 dnl check for a function in a library, but don't
 dnl keep adding the same library to the LIBS variable.
 dnl AC_LIBTESTFUNC(lib,func)
-AC_DEFUN(AC_LIBTESTFUNC,
+AC_DEFUN([AC_LIBTESTFUNC],
 [case "$LIBS" in
   *-l$1*) AC_CHECK_FUNCS($2) ;;
   *) AC_CHECK_LIB($1, $2) 

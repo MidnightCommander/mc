@@ -213,7 +213,7 @@ AC_STRUCT_ST_RDEV
 AC_DIRENT_D_OFF
 AC_CHECK_TYPE(ino_t,unsigned)
 AC_CHECK_TYPE(loff_t,off_t)
-AC_CHECK_TYPE(offset_t,loff_t)
+AC_CHECK_TYPE(offset_t,off_t)
 AC_CHECK_TYPE(ssize_t, int)
 
 # we need libdl for PAM and the new VFS code
@@ -828,7 +828,7 @@ AC_TRY_RUN([main() { exit(getuid() != 0); }],
 if test x"$samba_cv_HAVE_ROOT" = x"yes"; then
     AC_DEFINE(HAVE_ROOT)
 else
-    AC_MSG_WARN(running as non-root will disable some tests)
+    AC_MSG_WARN([running as non-root will disable some tests])
 fi
 
 netmask=no;
@@ -953,7 +953,7 @@ fi
 
 #################################################
 # check for smbwrapper support
-AC_MSG_CHECKING(whether to use smbwrapper)
+AC_MSG_CHECKING([whether to use smbwrapper])
 AC_ARG_WITH(smbwrapper,
 [  --with-smbwrapper     Include SMB wrapper support
   --without-smbwrapper  Don't include SMB wrapper support (default)],
@@ -990,7 +990,7 @@ AC_ARG_WITH(smbwrapper,
 
 #################################################
 # check for the AFS filesystem
-AC_MSG_CHECKING(whether to use AFS)
+AC_MSG_CHECKING([whether to use AFS])
 AC_ARG_WITH(afs,
 [  --with-afs     Include AFS support
   --without-afs  Don't include AFS support (default)],
@@ -1009,7 +1009,7 @@ AC_ARG_WITH(afs,
 
 #################################################
 # check for the DFS auth system
-AC_MSG_CHECKING(whether to use DFS auth)
+AC_MSG_CHECKING([whether to use DFS auth])
 AC_ARG_WITH(dfs,
 [  --with-dfs     Include DFS support
   --without-dfs  Don't include DFS support (default)],
@@ -1027,7 +1027,7 @@ AC_ARG_WITH(dfs,
 
 #################################################
 # check for Kerberos IV auth system
-AC_MSG_CHECKING(whether to use Kerberos IV)
+AC_MSG_CHECKING([whether to use Kerberos IV])
 AC_ARG_WITH(krb4,
 [  --with-krb4=base-dir     Include Kerberos IV support
   --whithout-krb4          Don't include Kerbers IV support (default)],
@@ -1042,7 +1042,7 @@ AC_ARG_WITH(krb4,
 
 #################################################
 # check for Kerberos 5 auth system
-AC_MSG_CHECKING(whether to use Kerberos 5)
+AC_MSG_CHECKING([whether to use Kerberos 5])
 AC_ARG_WITH(krb5,
 [  --with-krb5=base-dir     Include Kerberos 5 support
   --whithout-krb5          Don't include Kerbers 5 support (default)],
@@ -1056,7 +1056,7 @@ AC_ARG_WITH(krb5,
 
 #################################################
 # check for automount support
-AC_MSG_CHECKING(whether to use AUTOMOUNT)
+AC_MSG_CHECKING([whether to use AUTOMOUNT])
 AC_ARG_WITH(automount,
 [  --with-automount     Include AUTOMOUNT support
   --without-automount  Don't include AUTOMOUNT support (default)],
@@ -1074,7 +1074,7 @@ AC_ARG_WITH(automount,
 
 #################################################
 # check for smbmount support
-AC_MSG_CHECKING(whether to use SMBMOUNT)
+AC_MSG_CHECKING([whether to use SMBMOUNT])
 AC_ARG_WITH(smbmount,
 [  --with-smbmount     Include SMBMOUNT (Linux only) support
   --without-smbmount  Don't include SMBMOUNT support (default)],
@@ -1096,7 +1096,7 @@ AC_ARG_WITH(smbmount,
 
 #################################################
 # check for a PAM password database
-AC_MSG_CHECKING(whether to use PAM password database)
+AC_MSG_CHECKING([whether to use PAM password database])
 AC_ARG_WITH(pam,
 [  --with-pam     Include PAM password database support
   --without-pam  Don't include PAM password database support (default)],
@@ -1116,7 +1116,7 @@ AC_ARG_WITH(pam,
 
 #################################################
 # check for a LDAP password database
-AC_MSG_CHECKING(whether to use LDAP password database)
+AC_MSG_CHECKING([whether to use LDAP password database])
 AC_ARG_WITH(ldap,
 [  --with-ldap     Include LDAP support
   --without-ldap  Don't include LDAP support (default)],
@@ -1134,7 +1134,7 @@ AC_ARG_WITH(ldap,
 
 #################################################
 # check for a NISPLUS password database
-AC_MSG_CHECKING(whether to use NISPLUS password database)
+AC_MSG_CHECKING([whether to use NISPLUS password database])
 AC_ARG_WITH(nisplus,
 [  --with-nisplus     Include NISPLUS password database support
   --without-nisplus  Don't include NISPLUS password database support (default)],
@@ -1152,7 +1152,7 @@ AC_ARG_WITH(nisplus,
 
 #################################################
 # check for a NISPLUS_HOME support 
-AC_MSG_CHECKING(whether to use NISPLUS_HOME)
+AC_MSG_CHECKING([whether to use NISPLUS_HOME])
 AC_ARG_WITH(nisplus-home,
 [  --with-nisplus-home     Include NISPLUS_HOME support
   --without-nisplus-home  Don't include NISPLUS_HOME support (default)],
@@ -1170,7 +1170,7 @@ AC_ARG_WITH(nisplus-home,
 
 #################################################
 # check for the secure socket layer
-AC_MSG_CHECKING(whether to use SSL)
+AC_MSG_CHECKING([whether to use SSL])
 AC_ARG_WITH(ssl,
 [  --with-ssl     Include SSL support
   --without-ssl  Don't include SSL support (default)
@@ -1223,7 +1223,7 @@ AC_ARG_WITH(ssl,
 
 #################################################
 # check for experimental mmap support
-AC_MSG_CHECKING(whether to use MMAP)
+AC_MSG_CHECKING([whether to use MMAP])
 AC_ARG_WITH(mmap,
 [  --with-mmap     Include experimental MMAP support
   --without-mmap  Don't include MMAP support (default)],
@@ -1241,7 +1241,7 @@ AC_ARG_WITH(mmap,
 
 #################################################
 # check for syslog logging
-AC_MSG_CHECKING(whether to use syslog logging)
+AC_MSG_CHECKING([whether to use syslog logging])
 AC_ARG_WITH(syslog,
 [  --with-syslog     Include experimental SYSLOG support
   --without-syslog  Don't include SYSLOG support (default)],
@@ -1259,7 +1259,7 @@ AC_ARG_WITH(syslog,
 
 #################################################
 # check for experimental netatalk resource fork support
-AC_MSG_CHECKING(whether to support netatalk)
+AC_MSG_CHECKING([whether to support netatalk])
 AC_ARG_WITH(netatalk,
 [  --with-netatalk     Include experimental Netatalk support
   --without-netatalk  Don't include experimental Netatalk support (default)],
@@ -1279,7 +1279,7 @@ AC_ARG_WITH(netatalk,
 # check for experimental disk-quotas support
 QUOTAOBJS=noquotas.o
 
-AC_MSG_CHECKING(whether to support disk-quotas)
+AC_MSG_CHECKING([whether to support disk-quotas])
 AC_ARG_WITH(quotas,
 [  --with-quotas     Include experimental disk-quota support
   --without-quotas  Don't include experimental disk-quota support (default)],
@@ -1393,4 +1393,4 @@ AC_TRY_RUN([#include "${srcdir-.}/tests/summary.c"],
 builddir=`pwd`
 AC_SUBST(builddir)
 
-AC_OUTPUT(include/stamp-h Makefile)
+AC_OUTPUT([include/stamp-h Makefile])
