@@ -62,7 +62,7 @@ context default
     keyword whole using yellow/24
     keyword whole wchar_t yellow/24
     keyword whole ... yellow/24
-    keyword whole linestart \[\s\t\]#*\n brightred/18
+    keyword whole linestart \{\s\t\}\[\s\t\]#*\n brightmagenta/19
 
     keyword /\* brown/22
     keyword \*/ brown/22
