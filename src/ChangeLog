@@ -1,5 +1,10 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
+	view.c (toggle_hexedit_mode): New function, split from ...
+	(toggle_wrap_mode): ... this.
+	(view_labels): Fix overuse of the :? operator.  Don't allow
+	editing files in quick view - it's easy to lose changes.
+
 	* main.c (process_args): Use cast to avoid warning.
 
 	* view.c (view_callback): Don't close the current dialog when

@@ -1951,25 +1951,25 @@ view_help_cmd (void)
      */
 }
 
-/* Both views */
+/* Toggle between text edit and hex edit */
+static void
+toggle_hexedit_mode (WView *view)
+{
+    get_bottom_first (view, 1, 1);
+    if (view->hexedit_mode) {
+	view->view_side = 1 - view->view_side;
+    } else {
+	view->hexedit_mode = 1 - view->hexedit_mode;
+    }
+    view_labels (view);
+    view->dirty++;
+    view_update (view, TRUE);
+}
+
+/* Toggle between wrapped and unwrapped view */
 static void
 toggle_wrap_mode (WView *view)
 {
-    if (view->hex_mode) {
-	if (view->growing_buffer != 0) {
-	    return;
-	}
-	get_bottom_first (view, 1, 1);
-	if (view->hexedit_mode) {
-	    view->view_side = 1 - view->view_side;
-	} else {
-	    view->hexedit_mode = 1 - view->hexedit_mode;
-	}
-	view_labels (view);
-	view->dirty++;
-	view_update (view, TRUE);
-	return;
-    }
     view->wrap_mode = 1 - view->wrap_mode;
     get_bottom_first (view, 1, 1);
     if (view->wrap_mode)
@@ -1987,7 +1987,7 @@ toggle_wrap_mode (WView *view)
     view_update (view, TRUE);
 }
 
-/* Both views */
+/* Toggle between hex view and text view */
 static void
 toggle_hex_mode (WView *view)
 {
@@ -2230,7 +2230,7 @@ view_quit_cmd (WView *view)
 	dlg_stop (view->widget.parent);
 }
 
-/* Both views */
+/* Define labels and handlers for functional keys */
 static void
 view_labels (WView *view)
 {
@@ -2246,12 +2246,20 @@ view_labels (WView *view)
     my_define (h, 6, view->hex_mode ? _("Save") : _("RxSrch"),
 	       regexp_search_cmd, view);
 
-    my_define (h, 2, view->hex_mode ? view->hexedit_mode ?
-	       view->view_side ==
-	       view_side_left ? _("EdText") : _("EdHex") : view->
-	       growing_buffer ? "" : _("Edit") : view->
-	       wrap_mode ? _("UnWrap") : _("Wrap"), toggle_wrap_mode,
-	       view);
+    if (view->hex_mode)
+	if (view->hexedit_mode)
+	    my_define (h, 2,
+		       (view->view_side ==
+			view_side_left) ? _("EdText") : _("EdHex"),
+		       toggle_hexedit_mode, view);
+	else {
+	    if (view->growing_buffer || view->have_frame)
+		my_define (h, 2, "", NULL, view);
+	    else
+		my_define (h, 2, _("Edit"), toggle_hexedit_mode, view);
+    } else
+	my_define (h, 2, view->wrap_mode ? _("UnWrap") : _("Wrap"),
+		   toggle_wrap_mode, view);
 
     my_define (h, 7, view->hex_mode ? _("HxSrch") : _("Search"),
 	       normal_search_cmd, view);
