@@ -133,7 +133,7 @@ mcrpmfs_list ()
 
 mcrpmfs_copyout ()
 {
-    f="\"$1\""
+    f="`echo "$1" | $SED "$SEDCMD"`"
     case "$2" in
 	HEADER) $RPM -qip "$f" > "$3"; exit 0;;
 	INSTALL) echo "# Run this to install this RPM package" > "$3"; exit 0;;
