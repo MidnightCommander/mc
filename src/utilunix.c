@@ -238,21 +238,6 @@ int my_system (int flags, const char *shell, const char *command)
 	signal (SIGTSTP, SIG_DFL);
 	signal (SIGCHLD, SIG_DFL);
 
-#if 0
-	prepare_environment ();
-#endif
-
-#ifdef USE_VFS
-	if (flags & EXECUTE_SETUID)
-#    if defined (HAVE_SETUID)
-	    setuid (vfs_uid);
-#    elif defined (HAVE_SETREUID)
-	    setreuid (vfs_uid, vfs_uid);
-#    else
-	    ; /* Cannot drop privileges */
-#    endif
-#endif
-	
 	if (flags & EXECUTE_AS_SHELL)
 	    execl (shell, shell, "-c", command, NULL);
 	else

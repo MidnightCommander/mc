@@ -1,5 +1,10 @@
 2002-08-19  Pavel Roskin  <proski@gnu.org>
 
+	* util.h: Remove unused and dangerous flags for my_system():
+	EXECUTE_TEMPFILE, EXECUTE_SETUID and EXECUTE_WAIT.
+	* utilunix.c: Corresponding adjustments.
+	* ext.c: Don't use EXECUTE_TEMPFILE, it has no effect.
+
 	* subshell.c (synchronize): Workaround for Cygwin (should not be
 	needed for the next version) - remove SIGCHLD blocking from
 	old_mask.

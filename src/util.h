@@ -75,10 +75,7 @@ int close_error_pipe (int error, char *text);
 
 /* Process spawning */
 #define EXECUTE_INTERNAL   1
-#define EXECUTE_TEMPFILE   2
 #define EXECUTE_AS_SHELL   4
-#define EXECUTE_SETUID     8
-#define EXECUTE_WAIT      16
 int my_system (int flags, const char *shell, const char *command);
 void save_stop_handler (void);
 extern struct sigaction startup_handler;

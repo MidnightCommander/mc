@@ -250,7 +250,7 @@ exec_extension (const char *filename, const char *data, int *move_dir, int start
     	q[1] = 0;
     	do_cd (p, cd_parse_command);
     } else {
-	shell_execute (file_name, EXECUTE_INTERNAL | EXECUTE_TEMPFILE);
+	shell_execute (file_name, EXECUTE_INTERNAL);
 	if (console_flag) {
 	    handle_console (CONSOLE_SAVE);
 	    if (output_lines && keybar_visible) {
