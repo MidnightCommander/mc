@@ -1,14 +1,15 @@
 # mc nl.po
 # Copyright (C) 1994-1999 Free Software Foundation, Inc.
 # Dirk-Jan C. Binnema <djcb@dds.nl>
+# Gert Dewit <Gert.Dewit@sos.be>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.30\n"
 "POT-Creation-Date: 1999-08-30 13:07+0200\n"
-"PO-Revision-Date: 1999-06-06 21:46+02:00\n"
-"Last-Translator: Dirk-Jan C. Binnema <djcb@dds.nl>\n"
-"Language-Team: Linux Gebruikersgroep Den Haag <djcb@dds.nl>\n"
+"PO-Revision-Date: 1999-09-19 11:46+02:00\n"
+"Last-Translator: Gert Dewit <Gert.Dewit@sos.be>\n"
+"Language-Team: nl <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1974,12 +1975,12 @@ msgstr " 'scanf'-expressie "
 
 #. Tool hint
 #: gtkedit/editcmd.c:1421
-#, fuzzy
 msgid ""
 "Allows entering of a C format string,\n"
 "see the scanf man page"
 msgstr ""
-"Sta invoer van een 'C' formaatstring toe, zie de 'man'-pagina voor 'scanf'"
+"Sta invoer van een 'C' formaatstring toe,\n"
+"zie de 'man'-pagina voor 'scanf'"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1426
@@ -2000,9 +2001,8 @@ msgid "Replace all"
 msgstr "Alles vervangen"
 
 #: gtkedit/editcmd.c:1585
-#, fuzzy
 msgid "Replace one"
-msgstr " Vervangen "
+msgstr "Eenmaal Vervangen "
 
 #: gtkedit/editcmd.c:1585
 msgid "Skip"
@@ -2189,7 +2189,6 @@ msgid " About "
 msgstr " Info "
 
 #: gtkedit/editmenu.c:75
-#, fuzzy
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -2200,7 +2199,7 @@ msgid ""
 "           for the Midnight Commander.\n"
 msgstr ""
 "\n"
-"                  Cooledit  v2.1\n"
+"                  Cooledit  v3.11.5\n"
 "\n"
 " Copyright (C) 1996 the Free Software Foundation\n"
 "\n"
@@ -2671,65 +2670,56 @@ msgid "Interactive help browser"
 msgstr ""
 
 #: gtkedit/gtkedit.c:1247
-#, fuzzy
 msgid "Save to current file name"
-msgstr " Geef bestandsnaam: "
+msgstr "Bewaar onder de huidige bestandsnaam"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
-msgstr ""
+msgstr "Zet onzichtbare marker voor tekstaanduiding Aan/Uit"
 
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Find and replace strings/regular expressions"
-msgstr " Ongeldige reguliere expressie "
+msgstr "Zoek en vervang reguliere expressies"
 
 #: gtkedit/gtkedit.c:1249
-#, fuzzy
 msgid "Replc"
 msgstr "Vervng"
 
 #: gtkedit/gtkedit.c:1250
-#, fuzzy
 msgid "Copy highlighted block to cursor position"
-msgstr "Kopieer blok naar cursor\tF5"
+msgstr "Kopieer blok naar huidige cursorpositie"
 
 #: gtkedit/gtkedit.c:1252
-#, fuzzy
 msgid "Move highlighted block to cursor position"
-msgstr "Verplaats blok naar cursor\tF6"
+msgstr "Verplaats blok naar huidige cursorpositie"
 
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find"
-msgstr "Klaar"
+msgstr "Zoek"
 
 #: gtkedit/gtkedit.c:1253
-#, fuzzy
 msgid "Find strings/regular expressions"
-msgstr " Ongeldige reguliere expressie "
+msgstr "Zoek reguliere expressies"
 
 #: gtkedit/gtkedit.c:1254
 msgid "Delete highlighted text"
-msgstr ""
+msgstr "Verwijder tekstblok"
 
 #: gtkedit/gtkedit.c:1254
-#, fuzzy
 msgid "Dlete"
-msgstr "Verwijderen"
+msgstr "Verwijder"
 
 #: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2395 src/screen.c:2425
 msgid "Menu"
 msgstr "Menu"
 
 #: gtkedit/gtkedit.c:1255
-#, fuzzy
 msgid "Pull down menu"
 msgstr "Neerklapmenu's"
 
 #: gtkedit/gtkedit.c:1256
 msgid "Exit editor"
-msgstr ""
+msgstr "Editor verlaten"
 
 #: gtkedit/gtkedit.c:1290
 msgid "Clear the edit buffer"
@@ -2788,9 +2778,8 @@ msgid ""
 msgstr ""
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
-#, fuzzy
 msgid " Load Syntax Rules "
-msgstr " Laad syntaxbestand "
+msgstr "Laad syntax regels"
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
 msgid ""
@@ -2798,6 +2787,9 @@ msgid ""
 " A new rule file is being installed. \n"
 " Your old rule file has been saved with a .OLD extension. "
 msgstr ""
+" Uw syntax regels bestand is te oud \n"
+" Er wordt een nieuw bestand geïnstalleerd. \n"
+" Uw oud bestand is bewaard met een .OLD extentie. "
 
 #: gtkedit/syntax.c:1487
 msgid " File access error "
@@ -3164,9 +3156,8 @@ msgid " I can't run the Chmod command on an extfs "
 msgstr " 'chmod'-opdracht kan niet op extfs worden uitgevoerd "
 
 #: src/chmod.c:325
-#, fuzzy
 msgid " I can't run the Chmod command on a tarfs "
-msgstr " 'chown'-opdracht kan niet op tarfs worden uitgevoerd "
+msgstr "'chmod'-opdracht kan niet op tarfs worden uitgevoerd "
 
 #: src/chown.c:81
 msgid "Set &users"
@@ -3429,9 +3420,8 @@ msgid " FTP to machine "
 msgstr " FTP naar machine "
 
 #: src/cmd.c:1374
-#, fuzzy
 msgid " SMB link to machine "
-msgstr " FTP naar machine "
+msgstr " SMB link naar machine "
 
 #: src/cmd.c:1384
 msgid " Socket source routing setup "
@@ -3906,9 +3896,9 @@ msgstr ""
 " %s "
 
 #: src/file.c:1246
-#, fuzzy, c-format
+#, c-format
 msgid " `%s' and `%s' are the same directory "
-msgstr " `%s' en `%s' zijn het zelfde bestand "
+msgstr " `%s' en `%s' zijn dezelfde directory "
 
 #: src/file.c:1265
 #, c-format
@@ -4553,7 +4543,6 @@ msgstr ""
 "\n"
 
 #: src/hotlist.c:1435
-#, fuzzy
 msgid ""
 "You can choose between\n"
 "\n"
@@ -4889,9 +4878,8 @@ msgid "FT&P link..."
 msgstr "FT&P-Verbinding..."
 
 #: src/main.c:1246 src/main.c:1270
-#, fuzzy
 msgid "SM&B link..."
-msgstr "FT&P-Verbinding..."
+msgstr "SM&B-Verbinding..."
 
 #: src/main.c:1251 src/main.c:1275
 msgid "&Drive...       M-d"
@@ -5620,9 +5608,9 @@ msgstr ""
 "directory"
 
 #: src/user.c:724
-#, fuzzy, c-format
+#, c-format
 msgid " Empty file %s "
-msgstr "Bestanden kopiëren"
+msgstr " Leeg bestand %s "
 
 #. Create listbox
 #: src/user.c:733
@@ -5713,12 +5701,12 @@ msgstr ""
 " %s"
 
 #: src/view.c:578
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " Can't stat \"%s\"\n"
 " %s "
 msgstr ""
-" Inspectie van %s mislukt \n"
+" Inspectie van \"%s\" mislukt \n"
 " %s "
 
 #: src/view.c:714
@@ -5758,18 +5746,17 @@ msgstr ""
 " Geef het nieuwe regelnummer:"
 
 #: src/view.c:1933
-#, fuzzy, c-format
+#, c-format
 msgid ""
 " The current address is 0x%lx.\n"
 " Enter the new address:"
 msgstr ""
-" Het huidige regelnummer is  %d.\n"
-" Geef het nieuwe regelnummer:"
+" Het huidige adres is  0x%lx.\n"
+" Geef het nieuwe adres:"
 
 #: src/view.c:1935
-#, fuzzy
 msgid " Goto Address "
-msgstr " Ga naar regel "
+msgstr " Ga naar adres "
 
 #: src/view.c:1966
 msgid " Enter regexp:"
@@ -5832,9 +5819,8 @@ msgid "Unform"
 msgstr "OnFrmt"
 
 #: src/widget.c:999
-#, fuzzy
 msgid " History "
-msgstr "Opdrachthistorie"
+msgstr " Opdrachthistorie "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
@@ -6045,83 +6031,78 @@ msgid "Inconsistent extfs archive"
 msgstr "Inconsistent extfs archief"
 
 #: vfs/fish.c:136
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Disconnecting from %s"
-msgstr "ftpfs: Verbinding verbreken met %s"
+msgstr "fish: Verbinding verbreken met %s"
 
 #: vfs/fish.c:214
 msgid "fish: Waiting for initial line..."
-msgstr ""
+msgstr "fish: Wachten op initiële lijn..."
 
 #: vfs/fish.c:224
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Helaas, wachtwoordbeveiligde verbindingen niet mogelijk."
 
 #: vfs/fish.c:238
-#, fuzzy
 msgid "fish: Sending password..."
-msgstr "ftpfs: wachtwoord wordt verstuurd"
+msgstr "fish: wachtwoord wordt verstuurd..."
 
 #: vfs/fish.c:244
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish: initiële lijn wordt verstuurd..."
 
 #: vfs/fish.c:248
 msgid "fish: Handshaking version..."
 msgstr ""
 
 #: vfs/fish.c:252
-#, fuzzy
 msgid "fish: Setting up current directory..."
-msgstr "De huidige directory opnieuw inlezen"
+msgstr "fish: huidige directory opzetten..."
 
 #: vfs/fish.c:254
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Connected, home %s."
-msgstr "ftpfs: verbonden met %s"
+msgstr "fish: verbonden, home %s"
 
 #: vfs/fish.c:331
-#, fuzzy, c-format
+#, c-format
 msgid "fish: Reading directory %s..."
-msgstr "ftpfs: FTP directory %s wordt gelezen..."
+msgstr "fish: directory %s wordt gelezen..."
 
 #: vfs/fish.c:426
-#, fuzzy
 msgid "fish: got listing"
-msgstr "ftpfs: lijst verkregen"
+msgstr "fish: lijst verkregen"
 
 #: vfs/fish.c:430
-#, fuzzy
 msgid "fish: failed"
-msgstr "ftpfs: mislukt"
+msgstr "fish: mislukt"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:450
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish: bewaar %s: opdracht verzenden..."
 
 #: vfs/fish.c:464
 msgid "fish: Local read failed, sending zeros"
-msgstr ""
+msgstr "fisch: Lokale leesopdracht mislukt, zend nullen"
 
 #: vfs/fish.c:476
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%d)"
-msgstr "ftpfs: opslaan bestand %d (%d)"
+msgstr "fish: opslaan %s %d (%d)"
 
 #: vfs/fish.c:516
-#, fuzzy
 msgid "Aborting transfer..."
-msgstr "ftpfs: transfer wordt afgebroken."
+msgstr "Transfert wordt verbroken..."
 
 #: vfs/fish.c:525
 msgid "Error reported after abort."
-msgstr ""
+msgstr "Fout gemeld na verbreking."
 
 #: vfs/fish.c:527
 msgid "Aborted transfer would be successful."
-msgstr ""
+msgstr "Verbroken transfert zou een success zijn."
 
 #: vfs/ftpfs.c:326
 #, c-format
@@ -6321,26 +6302,24 @@ msgid " Too many open connections "
 msgstr " Teveel open verbindingen "
 
 #: vfs/smbfs.c:1421
-#, fuzzy, c-format
+#, c-format
 msgid " %s mkdir'ing %s "
-msgstr " symbolische link: %s "
+msgstr " %s mkdir uitvoeren %s "
 
 #: vfs/smbfs.c:1442
-#, fuzzy, c-format
+#, c-format
 msgid " %s rmdir'ing %s "
-msgstr " symbolische link: %s "
+msgstr " %s rmdir uitvoeren %s "
 
 #: vfs/smbfs.c:1550 vfs/smbfs.c:1570 vfs/smbfs.c:1631
-#, fuzzy, c-format
+#, c-format
 msgid " %s opening remote file %s "
-msgstr ""
-" Verwijderen van bestand \"%s\" mislukt \n"
-" %s "
+msgstr " %s bezig bestand %s te openen"
 
 #: vfs/smbfs.c:1654
-#, fuzzy, c-format
+#, c-format
 msgid " %s renaming files\n"
-msgstr "  %s bytes in %d bestand(en)%s"
+msgstr " %s bestanden herbenoemen\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
