@@ -14,6 +14,7 @@
 .\"
 .\" Prego mantenere la linea di traduzione generale (per quanto possibile).
 .\"
+.\"TOPICS "Indice degli argomenti:"
 .TH mc 1 "30 Ottobre 1998"
 .\"SKIP_SECTION"
 .SH "NOME"
@@ -2815,9 +2816,9 @@ a questo valore.
 Esempi:
 .PP
 .nf
-    /#sh:onlyrsh.mx:r/linux/local
-    /#sh:joe@want.compression.edu:C/private
-    /#sh:joe@noncompressed.ssh.edu/private
+    /#sh:solorsh.mx:r/linux/locale
+    /#sh:joe@vuole.lacompressione.edu:C/privato
+    /#sh:joe@noncompresso.ssh.edu/privato
 .fi
 .PP
 .\"NODE "  Network File System"
@@ -2853,63 +2854,66 @@ a questo valore.
 Esempi:
 .PP
 .nf
-    /#mc:ftp.nuclecu.unam.mx/linux/local
-    /#mc:joe@foo.edu:11321/private
+    /#mc:ftp.nuclecu.unam.mx/linux/locale
+    /#mc:joe@foo.edu:11321/privato
 .fi
 .PP
 .\"NODE "  Undelete File System"
-.SH "  Undelete File System"
-On Linux systems, if you asked configure to use the ext2fs undelete
-facilities, you will have the undelete file system available.
-Recovery of deleted files is only available on ext2 file systems.  The
-undelete file system is just an interface to the ext2fs library to:
-retrieve all of the deleted files names on an ext2fs and provides and
-to extract the selected files into a regular partition.
+.SH "  Recupero File Cancellati"
+Su sistemi Linux, se si ha richiesto a configure di usare la 
+caratteristica di undelete ext2fs, si avrà accesso al file sistem
+di recupero cancellati. Il recupero di file cancellati è disponibile
+solo su file system di tipo ext2. Il file system è solo un'interfaccia
+alla libreria ext2fs che: recupera tutti i nomi dei file cancellati
+su un fs ext2 e fornisce ed estrae i file selezionati in una
+partizione normale.
 .PP
-To use this file system, you have to chdir into the special file name
-formed by the "/#undel" prefix and the file name where the actual
-file system resides.
+Per usare questo file system, è necessario entrare nella directory
+con il nome speciale formato dal prefisso "/#undel" e dal nome del
+file system dove il file risiede.
 .PP
-For example, to recover deleted files on the second partition of the
-first SCSI disk on Linux, you would use the following path name:
+Per esempio, per recuperare file cancellati sulla seconda partizione
+del primo disco SCSI su Linux, si dovrà usare il seguente percorso:
 .PP
 .nf
     /#undel:sda2
 .fi
 .PP
-It may take a while for the undelfs to load the required information
-before you start browsing files there. 
+Il recupero può metterci un po' di tempo per caricare le informazioni
+necessarie per poter cominciare a navigare attraverso i file.
 .PP
-.SH "  SMB File System"
-The smbfs allows you to manipulate files on remote machines with SMB
-(or CIFS) protocol.  These include Windows for Workgroups, 
-Windows 9x, Windows NT, Windows 2000, OS/2 and Samba.
-To actually use it, you may try 
-to use the panel command "SMB link..."
-(accessible from the menubar) or you may directly change your current
-directory to it using the cd command to a path name that looks like this:
+.\"NODE "  SMB File System"
+.SH "  File system SMB"
+Il file system smb permette di gestire file su macchine remote con
+protocollo SMB (o CIFS). Queste includono Windows for Workgroups, 
+Windows 9x, Windows NT, Windows 2000, Windows XP, OS/2 e Samba.
+Per usarlo, si può provare il comando dal pannello 
+"Connessione SMB..." (accessibile dalla barra dei menu) o si può 
+direttamente cambiare directory corrente usando il comando cd verso
+un percorso simile a questo:
 .PP
-.I /#smb:machine[/service][/remote-dir]
+.I /#smb:macchina[/servizio][/dir-remota]
 .PP
-The
-.I service
-and
-.I remote-dir
-elements are optional.
-The
-.I username, domain
-and
+L'elemento
+.I servizio
+e
+.I dir-remota
+sono opzionali.
+Il 
+.I nome utente, dominio
+e la
 .I password 
-can be specified in input dialog.
+possono essere specificati nella finestra di dialogo di ingresso.
 .PP
-Examples:
+Esempi:
 .PP
 .nf
-    /#smb:machine/Share
-    /#smb:other_machine
+    /#smb:macchina/Condivisione
+    /#smb:altra_macchina
 .fi
 .PP
-.SH "Colors"
+.\"NODE "Colors"
+.SH "Colori"
 The Midnight Commander will try to detect if your terminal supports
 color using the terminal database and your terminal name.  Sometimes
 it gets confused, so you may force color mode or disable color mode
