@@ -664,9 +664,14 @@ static void init_movelist (int list_type, struct hotlist *item)
     /* add listbox to the dialogs */
 }
 
+/*
+ * Destroy the list dialog.
+ * Don't confuse with done_hotlist() for the list in memory.
+ */
 static void hotlist_done (void)
 {
     destroy_dlg (hotlist_dlg);
+    l_hotlist = NULL;
     if (0)
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
@@ -687,8 +692,15 @@ find_group_section (struct hotlist *grp)
 static struct hotlist *
 add2hotlist (char *label, char *directory, enum HotListType type, int pos)
 {
-    struct hotlist *current;
     struct hotlist *new;
+    struct hotlist *current = NULL;
+
+    /*
+     * Hotlist is neither loaded nor loading.
+     * Must be called by "Ctrl-x a" before using hotlist.
+     */
+    if (!current_group)
+	load_hotlist ();
 
     if (l_hotlist && l_hotlist->current)
 	current = l_hotlist->current->data;
@@ -1569,6 +1581,10 @@ int save_hotlist (void)
     return saved;
 }
 
+/*
+ * Unload list from memory.
+ * Don't confuse with hotlist_done() for GUI.
+ */
 void done_hotlist (void)
 {
     if (hotlist){

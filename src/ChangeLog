@@ -1,5 +1,11 @@
 2001-07-09  Pavel Roskin  <proski@gnu.org>
 
+	* hotlist.c: Add comments to avoid confusion between
+	done_hotlist() and hotlist_done().
+	(hotlist_done): Set l_hotlist to NULL.
+	(add2hotlist): Load hotlist if it's neither loaded nor loading.
+	This fixes Ctrl-x h. Fix compiler warning.
+
 	* hotlist.c: Make more variables and functions static.
 
 2001-07-08  Pavel Roskin  <proski@gnu.org>
