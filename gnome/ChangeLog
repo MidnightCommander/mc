@@ -1,5 +1,9 @@
 2001-07-12  Pavel Roskin  <proski@gnu.org>
 
+	* gdesktop.c (create_desktop_dir): If ~/Desktop doesn't exist
+	make it a symlink to ~/.gnome-desktop.
+	From Ximian patches.
+
 	* gnome-open-dialog.c (gnome_open_dialog_get_tree): Don't set
 	styles for lines and expanders - use default tree settings.
 	From Ximian patches.

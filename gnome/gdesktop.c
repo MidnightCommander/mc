@@ -2506,12 +2506,15 @@ migrate_init (void)
 static void
 create_desktop_dir (void)
 {
+	char *desktop_symlink;
+	
 	if (getenv ("GNOME_DESKTOP_DIR") != NULL)
 		desktop_directory = g_strdup (getenv ("GNOME_DESKTOP_DIR"));
 	else
 		desktop_directory = g_concat_dir_and_file (gnome_user_home_dir, DESKTOP_DIR_NAME);
 
 	if (!g_file_exists (desktop_directory)) {
+
 		/* Create the directory */
 		mkdir (desktop_directory, 0777);
 
@@ -2521,6 +2524,15 @@ create_desktop_dir (void)
 		gmount_setup_devices ();
 		gprint_setup_devices ();
 	}
+
+	/* Create a user-visible symlink at ~/Desktop */
+	desktop_symlink = g_concat_dir_and_file (gnome_user_home_dir, "Desktop");
+
+	if (! g_file_exists (desktop_symlink))
+		symlink (desktop_directory, desktop_symlink);
+
+	g_free (desktop_symlink);
+
 	migrate_init ();
 }
 
