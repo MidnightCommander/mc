@@ -30,6 +30,11 @@
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10
 
+struct lock_s {
+    char *who;
+    pid_t pid;
+};
+
 /* Locking scheme used in mcedit is based on a documentation found
    in JED editor sources. Abstract from lock.c file (by John E. Davis):
 
@@ -61,24 +66,34 @@ lock_build_name (char *fname)
 }
 
 /* Extract pid from user@host.domain.pid string */
-static pid_t
-lock_extract_pid (char *str)
+static struct lock_s *
+lock_extract_info (char *str)
 {
     int i;
-    char *p, pid[PID_BUF_SIZE];
+    char *p, *s;
+    static char pid[PID_BUF_SIZE], who[BUF_SIZE];
+    static struct lock_s lock;
 
-    /* Treat text between '.' and ':' or '\0' as pid */
     for (p = str + strlen (str) - 1; p >= str; p--)
 	if (*p == '.')
 	    break;
 
+    /* Everything before last '.' is user@host */
+    i = 0;
+    for (s = str; s < p && i < BUF_SIZE; s++)
+	who[i++] = *s;
+    who[i] = '\0';
+
+    /* Treat text between '.' and ':' or '\0' as pid */
     i = 0;
     for (p = p + 1;
 	 p < str + strlen (str) && *p != ':' && i < PID_BUF_SIZE; p++)
 	pid[i++] = *p;
     pid[i] = '\0';
 
-    return (pid_t) atol (pid);
+    lock.pid = (pid_t) atol (pid);
+    lock.who = who;
+    return &lock;
 }
 
 /* Extract user@host.domain.pid from lock file (static string)  */
@@ -103,7 +118,7 @@ edit_lock_file (char *fname)
 {
     char *lockfname, *newlock, *msg, *lock;
     struct stat statbuf;
-    pid_t pid;
+    struct lock_s *lockinfo;
 
     /* Just to be sure (and don't lock new file) */
     if (!fname || !*fname)
@@ -121,13 +136,16 @@ edit_lock_file (char *fname)
 	    g_free (lockfname);
 	    return 0;
 	}
-	pid = lock_extract_pid (lock);
+	lockinfo = lock_extract_info (lock);
 
 	/* Check if locking process alive, ask user if required */
-	if (!pid || !(kill (pid, 0) == -1 && errno == ESRCH)) {
+	if (!lockinfo->pid
+	    || !(kill (lockinfo->pid, 0) == -1 && errno == ESRCH)) {
 	    msg =
-		g_strdup_printf (_("File %s is locked by lock %s"), fname,
-				 lock);
+		g_strdup_printf (_
+				 ("File \"%s\" is already being edited\n"
+				  "User: %s\nProcess ID: %d"), fname,
+				 lockinfo->who, lockinfo->pid);
 	    /* TODO: Implement "Abort" - needs to rewind undo stack */
 	    switch (edit_query_dialog2
 		    (_("File locked"), msg, _("&Grab lock"),
@@ -181,7 +199,7 @@ edit_unlock_file (char *fname)
     lock = lock_get_info (lockfname);
     if (lock) {
 	/* Don't touch if lock is not ours */
-	if (lock_extract_pid (lock) != getpid ()) {
+	if (lock_extract_info (lock)->pid != getpid ()) {
 	    g_free (lockfname);
 	    return 0;
 	}

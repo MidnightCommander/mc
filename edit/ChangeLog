@@ -1,3 +1,8 @@
+2003-04-04  Adam Byrtek  <alpha@debian.org>
+
+	* editlock.c: Split lock into user@host and pid and report them
+	separately.
+
 2003-04-02  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (edit_load_file): Use vfs_file_is_local(), not
