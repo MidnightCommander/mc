@@ -1322,11 +1322,11 @@ msgstr ""
 
 #: src/cmd.c:931
 msgid " The command history is empty "
-msgstr " Lo storico comandi è vuoto"
+msgstr " La cronologia comandi è vuota"
 
 #: src/cmd.c:937
 msgid " Command history "
-msgstr " Storico comandi "
+msgstr " Cronologia comandi "
 
 #: src/cmd.c:976
 msgid ""
@@ -2780,7 +2780,7 @@ msgstr "Mostra &dimensione directory"
 
 #: src/main.c:1049
 msgid "command &History"
-msgstr "&Storico comandi"
+msgstr "Cronolo&gia comandi"
 
 #: src/main.c:1050
 msgid "di&Rectory hotlist    C-\\"
@@ -2792,7 +2792,7 @@ msgstr "&Lista VFS attivi           C-x a "
 
 #: src/main.c:1053
 msgid "Fr&ee VFSs now"
-msgstr "&VFS liberi"
+msgstr "Libera i &VFS"
 
 #: src/main.c:1056
 msgid "&Background jobs      C-x j"
@@ -3698,7 +3698,7 @@ msgstr " Vai all'indirizzo "
 
 #: src/view.c:2037
 msgid " Enter regexp:"
-msgstr " Inserisci espressione regolare:"
+msgstr " Inserire espressione regolare:"
 
 #: src/view.c:2155
 msgid "Ascii"
@@ -3758,7 +3758,7 @@ msgstr "Formatt"
 
 #: src/widget.c:901
 msgid " History "
-msgstr " Storico comandi "
+msgstr " Cronologia "
 
 #: src/win.c:121
 msgid "Function key 1"

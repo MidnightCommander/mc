@@ -1,3 +1,7 @@
+2003-03-17  Marco Ciampa  <ciampix@libero.it>
+
+	* doc/it/mc.1.in: some manual fixies.
+
 2003-03-14  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/c.syntax: Allow integer specifiers for %x and %X in C
