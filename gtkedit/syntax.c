@@ -1156,11 +1156,8 @@ void edit_free_syntax_rules (WEdit * edit)
 	syntax_free (edit->rules[i]->keyword_first_chars);
 	syntax_free (edit->rules[i]);
     }
-    for (;;) {
-	struct _syntax_marker *s;
-	if (!edit->syntax_marker)
-	    break;
-	s = edit->syntax_marker->next;
+    while (edit->syntax_marker) {
+	struct _syntax_marker *s = edit->syntax_marker->next;
 	syntax_free (edit->syntax_marker);
 	edit->syntax_marker = s;
     }
@@ -1169,7 +1166,7 @@ void edit_free_syntax_rules (WEdit * edit)
 
 #define CURRENT_SYNTAX_RULES_VERSION "62"
 
-char *syntax_text[] = {
+static const char * const syntax_text[] = {
 "# syntax rules version " CURRENT_SYNTAX_RULES_VERSION,
 "# (after the slash is a Cooledit color, 0-26 or any of the X colors in rgb.txt)",
 "# black",
@@ -1346,7 +1343,7 @@ FILE *upgrade_syntax_file (char *syntax_file)
     char line[80];
     f = fopen (syntax_file, "r");
     if (!f) {
-	char **syntax_line;
+	const char * const *syntax_line;
 	f = fopen (syntax_file, "w");
 	if (!f)
 	    return 0;
@@ -1363,6 +1360,7 @@ FILE *upgrade_syntax_file (char *syntax_file)
     if (atoi (p) < atoi (CURRENT_SYNTAX_RULES_VERSION)) {
 	char s[1024];
       rename_rule_file:
+	fclose (f);
 	strcpy (s, syntax_file);
 	strcat (s, ".OLD");
 	unlink (s);

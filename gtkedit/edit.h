@@ -379,6 +379,8 @@ void edit_push_action (WEdit * edit, long c,...);
 void edit_push_key_press (WEdit * edit);
 void edit_insert_ahead (WEdit * edit, int c);
 int edit_save_file (WEdit * edit, const char *filename);
+long edit_write_stream (WEdit * edit, FILE * f);
+char *edit_get_write_filter (char *writename, const char *filename);
 int edit_save_cmd (WEdit * edit);
 int edit_save_confirm_cmd (WEdit * edit);
 int edit_save_as_cmd (WEdit * edit);
@@ -453,7 +455,7 @@ void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
 void user_menu (WEdit *edit);
-
+void edit_init_file();
 
 #ifdef MIDNIGHT
 

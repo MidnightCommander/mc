@@ -182,7 +182,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 /* detecting an error on read, is not so easy 'cos there is not way to tell
    whether you read everything or not. */
 /* FIXME: add proper `triple_pipe_open' to read, write and check errors. */
-static struct edit_filters {
+static const struct edit_filters {
     char *read, *write, *extension;
 } all_filters[] = {
 
@@ -226,7 +226,7 @@ char *edit_get_filter (const char *filename)
     return p;
 }
 
-char *edit_get_write_filter (char *writename, char *filename)
+char *edit_get_write_filter (char *writename, const char *filename)
 {
     int i, l;
     char *p;
@@ -1811,9 +1811,7 @@ void edit_do_undo (WEdit * edit)
 
 static void edit_delete_to_line_end (WEdit * edit)
 {
-    for (;;) {
-	if (edit_get_byte (edit, edit->curs1) == '\n')
-	    break;
+    while (edit_get_byte (edit, edit->curs1) != '\n') {
 	if (!edit->curs2)
 	    break;
 	edit_delete (edit);
@@ -1822,9 +1820,7 @@ static void edit_delete_to_line_end (WEdit * edit)
 
 static void edit_delete_to_line_begin (WEdit * edit)
 {
-    for (;;) {
-	if (edit_get_byte (edit, edit->curs1 - 1) == '\n')
-	    break;
+    while (edit_get_byte (edit, edit->curs1 - 1) != '\n') {
 	if (!edit->curs1)
 	    break;
 	edit_backspace (edit);
@@ -2765,7 +2761,7 @@ void user_menu (WEdit *edit)
 		if (fd = fopen (block_file, "w")) fclose(fd);
         }
     } else {
-        edit_error_dialog (_(""),
+	edit_error_dialog ("",
         get_sys_error (catstrs (_ ("Error trying to stat file:"),
 	    						    error_file, 0)));
         return;

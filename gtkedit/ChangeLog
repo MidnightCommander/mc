@@ -1,0 +1,15 @@
+2000-07-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* gtkedit/editcmd.c (edit_save_file): check fclose()s return value
+	to prevent loss of data
+	(edit_block_process_cmd): don't translate empty string
+
+	* gtkedit/edit.h (edit_get_write_filter, edit_write_stream,
+	edit_init_file): added declarations 
+
+	* edit.c (edit_filters): constified
+	(edit_get_write_filter): filename constified
+	(user_menu): don't translate empty string
+
+	* syntax.c (syntax_text): constified
+	(upgrade_syntax_file): syntax_line constified, f closed after use

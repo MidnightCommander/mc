@@ -278,7 +278,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	savename = (char *) tempnam (savedir, "cooledit");
 	free (savedir);
 	if (!savename)
-	    goto error_save;
+	    return 0;
     }
     if ((file = fopen (savename, "w+")) == 0)
 	goto error_save;
@@ -309,7 +309,8 @@ int edit_save_file (WEdit * edit, const char *filename)
 #ifdef CR_LF_TRANSLATION
     } else {			/* optimised save */
 	filelen = edit_write_stream (edit, f);
-	fclose (file);
+	if (fclose (file))
+	    filelen = -1;
 #else
     } else {
 	long buf;
@@ -317,8 +318,7 @@ int edit_save_file (WEdit * edit, const char *filename)
 	filelen = edit->last_byte;
 	while (buf <= (edit->curs1 >> S_EDIT_BUF_SIZE) - 1) {
 	    if (fwrite ((char *) edit->buffers1[buf], EDIT_BUF_SIZE, 1, file) != 1) {
-		filelen = -1;
-		break;
+		goto error_save;
 	    }
 	    buf++;
 	}
@@ -341,8 +341,9 @@ int edit_save_file (WEdit * edit, const char *filename)
 	    }
 	    edit->curs2++;
 	}
-	fclose (file);
-#endif
+	if (fclose (file))
+	    goto error_save;
+#endif	/* CR_LF_TRANSLATION */
     }
 
     if (filelen != edit->last_byte)
@@ -2822,8 +2823,6 @@ int edit_sort_cmd (WEdit * edit)
     }
     edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, 0), start_mark, end_mark);
 
-    exp = old ? old : "";
-
     exp = input_dialog (_(" Run Sort "), 
 /* Not essential to translate */
     _(" Enter sort options (see manpage) separated by whitespace: "), "");
@@ -2877,25 +2876,25 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
     
     if (! (script_home = fopen (h, "r"))) {
 	if (! (script_home = fopen (h, "w"))) {
-	    edit_error_dialog (_(""),
+	    edit_error_dialog ("",
             get_sys_error (catstrs (_ ("Error create script:"), h, 0)));
             return;
 	} else {
 	    if (! (script_src = fopen (o, "r"))) {
                 fclose (script_home); unlink (h);
-	        edit_error_dialog (_(""),
+	        edit_error_dialog ("",
                 get_sys_error (catstrs (_ ("Error read script:"), o, 0)));
                 return;
             } else {    
                 while (fgets(buf, sizeof(buf), script_src))
 	                fprintf(script_home, "%s",buf);
                 if (fclose(script_home)) {
-	            edit_error_dialog (_(""),
+	            edit_error_dialog ("",
                     get_sys_error (catstrs (_ ("Error close script:"), h, 0)));
                     return;
                 } else {
                     chmod (h, 0700);
-	            edit_error_dialog (_(""),
+	            edit_error_dialog ("",
                     get_sys_error (catstrs (_ ("Script created:"), h, 0)));
                 }
 	    }
@@ -2931,22 +2930,18 @@ void edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 		if (edit_block_delete_cmd (edit))
 		    return;
 		edit_insert_file (edit, b);
-		if (block_file = fopen (b, "w")) fclose(block_file);
-		return;
 	    } else {
 		edit_insert_file (edit, e);
-		if (block_file = fopen (b, "w")) fclose(block_file);
-		return;
 	    }
 	} else {
-/* Not essential to translate */
-	    edit_error_dialog (_(""),
+	    edit_error_dialog ("",
 /* Not essential to translate */
             get_sys_error (catstrs (_ ("Error trying to stat file:"), e, 0)));
 	    edit->force |= REDRAW_COMPLETELY;
-	    if (block_file = fopen (b, "w")) fclose(block_file);
-	    return;
 	}
+	if ((block_file = fopen (b, "w")))
+	    fclose (block_file);
+	return;
     }
     return;
 }
