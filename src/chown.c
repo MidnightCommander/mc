@@ -76,11 +76,11 @@ static struct {
     int ret_cmd, flags, y, x;
     char *text;
 } chown_but[BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON,  0, 54, N_("&Cancel") },
-    { B_ENTER,  DEFPUSH_BUTTON, 0, 44, N_("&Set") },
-    { B_SETUSR, NORMAL_BUTTON,  0, 30, N_("Set &users") },
-    { B_SETGRP, NORMAL_BUTTON,  0, 15, N_("Set &groups") },
-    { B_SETALL, NORMAL_BUTTON,  0, 3,  N_("Set &all") },
+    { B_CANCEL, NORMAL_BUTTON,  0, 53, N_("&Cancel") },
+    { B_ENTER,  DEFPUSH_BUTTON, 0, 40, N_("&Set") },
+    { B_SETUSR, NORMAL_BUTTON,  0, 25, N_("Set &users") },
+    { B_SETGRP, NORMAL_BUTTON,  0, 11, N_("Set &groups") },
+    { B_SETALL, NORMAL_BUTTON,  0, 0,  N_("Set &all") },
 };
 
 #define LABELS 5 
@@ -109,25 +109,25 @@ chown_refresh (void)
 
     attrset (COLOR_NORMAL);
     dlg_move (ch_dlg, TY + 1, TX + 1);
-    addstr (N_(" Name "));
+    addstr (_(" Name "));
     dlg_move (ch_dlg, TY + 3, TX + 1);
-    addstr (N_(" Owner name "));
+    addstr (_(" Owner name "));
     dlg_move (ch_dlg, TY + 5, TX + 1);
-    addstr (N_(" Group name "));
+    addstr (_(" Group name "));
     dlg_move (ch_dlg, TY + 7, TX + 1);
-    addstr (N_(" Size "));
+    addstr (_(" Size "));
     dlg_move (ch_dlg, TY + 9, TX + 1);
-    addstr (N_(" Permission "));
+    addstr (_(" Permission "));
     
     attrset (COLOR_HOT_NORMAL);
     dlg_move (ch_dlg, 1, 28);
-    addstr (N_(" Chown command "));
+    addstr (_(" Chown command "));
     dlg_move (ch_dlg, UY, UX + 1);
-    addstr (N_(" User name "));
+    addstr (_(" User name "));
     dlg_move (ch_dlg, GY, GX + 1);
-    addstr (N_(" Group name "));
+    addstr (_(" Group name "));
     dlg_move (ch_dlg, TY, TX + 1);
-    addstr (N_(" File "));
+    addstr (_(" File "));
 }
 #endif
 

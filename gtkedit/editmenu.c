@@ -35,7 +35,7 @@ extern Dlg_head *edit_dlg;
 extern WMenu *edit_menubar;
 
 #undef edit_message_dialog
-#define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, "&Ok")
+#define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&Ok"))
 #define CFocus(x) 
 
 static void menu_cmd (int i)
@@ -66,14 +66,14 @@ void edit_wrap_cmd ()
 
 void edit_about_cmd ()
 {
-    edit_message_dialog (wedit->mainid, 20, 20, " About ",
-		      "\n"
+    edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
+		      _("\n"
 		      "                 Cooledit  v2.1\n"
 		      "\n"
 		      " Copyright (C) 1996 the Free Software Foundation\n"
 		      "\n"
 		      "       A user friendly text editor written\n"
-		      "           for the Midnight Commander.\n"
+		      "           for the Midnight Commander.\n")
 	);
 }
 

@@ -793,7 +793,7 @@ symlink_dialog (char *existing, char *new, char **ret_existing,
     
     Quick_input.xlen  = 64;
     Quick_input.ylen  = 8;
-    Quick_input.title = "Symbolic link";
+    Quick_input.title = _("Symbolic link");
     Quick_input.help  = "[File Menu]";
     Quick_input.class = "quick_symlink";
     Quick_input.i18n  = 0;
