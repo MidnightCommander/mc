@@ -12,9 +12,9 @@
 /* These lines are modified version from the lines appearing in the */
 /* gpm.h include file of the Linux General Purpose Mouse server */
 
-#define GPM_B_LEFT      4
-#define GPM_B_MIDDLE    2
-#define GPM_B_RIGHT     1
+#define GPM_B_LEFT	(1 << 2)
+#define GPM_B_MIDDLE    (1 << 1)
+#define GPM_B_RIGHT     (1 << 0)
 
 /* Xterm mouse support supports only GPM_DOWN and GPM_UP */
 /* If you use others make sure your code also works without them */
@@ -73,11 +73,11 @@ void disable_mouse (void);
 
 /* Mouse wheel events */
 #ifndef GPM_B_DOWN
-#define GPM_B_DOWN      32
+#define GPM_B_DOWN	(1 << 5)
 #endif
 
 #ifndef GPM_B_UP
-#define GPM_B_UP        16
+#define GPM_B_UP	(1 << 4)
 #endif
 
 #ifdef HAVE_LIBGPM

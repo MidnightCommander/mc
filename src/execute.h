@@ -1,9 +1,10 @@
 #ifndef MC_EXECUTE_H
 #define MC_EXECUTE_H
 
-#define EXECUTE_INTERNAL   1
-#define EXECUTE_AS_SHELL   4
-#define EXECUTE_HIDE       8
+/* flags for shell_execute */
+#define EXECUTE_INTERNAL	(1 << 0)
+#define EXECUTE_AS_SHELL	(1 << 2)
+#define EXECUTE_HIDE		(1 << 3)
 
 /* Execute functions that use the shell to execute */
 void shell_execute (const char *command, int flags);

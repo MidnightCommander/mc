@@ -121,20 +121,19 @@ typedef cb_ret_t (*callback_fn) (Widget *widget, widget_msg_t msg, int parm);
 struct Widget {
     int x, y;
     int cols, lines;
+
+#define  W_WANT_HOTKEY		(1 << 1)
+#define  W_WANT_CURSOR		(1 << 2)
+#define  W_WANT_IDLE		(1 << 3)
+#define  W_IS_INPUT		(1 << 4)
     int options;
-    int dlg_id;		   /* Number of the widget, starting with 0 */
+    int dlg_id;			/* Number of the widget, starting with 0 */
     struct Widget *next;
     struct Widget *prev;
-    callback_fn callback;  /* The callback function */
+    callback_fn callback;
     mouse_h mouse;
     struct Dlg_head *parent;
 };
-
-/* The options for the widgets */
-#define  W_WANT_HOTKEY       2
-#define  W_WANT_CURSOR       4
-#define  W_WANT_IDLE         8
-#define  W_IS_INPUT         16
 
 /* draw box in window */
 void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
@@ -142,21 +141,19 @@ void draw_box (Dlg_head *h, int y, int x, int ys, int xs);
 /* doubled line if possible */
 void draw_double_box (Dlg_head *h, int y, int x, int ys, int xs);
 
+/* Flags for create_dlg: */
+#define DLG_REVERSE	(1 << 5) /* Tab order is opposite to the add order */
+#define DLG_WANT_TAB	(1 << 4) /* Should the tab key be sent to the dialog? */
+#define DLG_WANT_IDLE	(1 << 3) /* Dialog wants idle events */
+#define DLG_COMPACT	(1 << 2) /* Suppress spaces around the frame */
+#define DLG_TRYUP	(1 << 1) /* Try to move two lines up the dialog */
+#define DLG_CENTER	(1 << 0) /* Center the dialog */
+#define DLG_NONE	(000000) /* No options */
+
 /* Creates a dialog head  */
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
 		      const int *color_set, dlg_cb_fn callback,
 		      const char *help_ctx, const char *title, int flags);
-
-
-/* The flags: */
-#define DLG_REVERSE     32	/* Tab order is opposite to the add order */
-#define DLG_WANT_TAB    16	/* Should the tab key be sent to the dialog? */
-#define DLG_WANT_IDLE    8	/* Dialog wants idle events */
-#define DLG_COMPACT      4	/* Suppress spaces around the frame */
-#define DLG_TRYUP        2	/* Try to move two lines up the dialog */
-#define DLG_CENTER       1	/* Center the dialog */
-#define DLG_NONE         0	/* No options */
-
 int  add_widget           (Dlg_head *dest, void *Widget);
 
 /* Runs dialog d */

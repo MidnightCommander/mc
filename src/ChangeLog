@@ -1,5 +1,8 @@
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
+	* dialog.h: Moved and reformatted #definitions.
+	* execute.h: Likewise.
+	* mouse.h: Likewise.
 	* widget.h: Moved constants to the appropriate places (just
 	before the variable they will be used with).
 	* widget.c: HISTORY_FILE_NAME was not needed in widget.h,
