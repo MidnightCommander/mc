@@ -49,7 +49,7 @@
 #include "callback.h"
 
 #ifndef VFS_STANDALONE
-#error This has only sense when compiling standalone version
+ #error "This file should only be used in standalone VFS"
 #endif
 
 int source_route = 0;

@@ -1,3 +1,9 @@
+2001-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* util-alone.c: Use indented #error.
+	* vfs.h: Use indented #warning instead of hiding it from non-gcc
+	compilers.
+
 2001-06-11  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c (vfs_cpiofs_ops): Use short name for the filesystem.

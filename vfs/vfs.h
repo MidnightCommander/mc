@@ -391,9 +391,7 @@ extern void mc_vfs_done( void );
    listed above and O_APPEND */
 
 #if (O_ALL & O_APPEND)
-#ifdef __GNUC__
-#warning Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz
-#endif
+ #warning "Unexpected problem with flags, O_LINEAR disabled, contact pavel@ucw.cz"
 #define O_LINEAR 0
 #define IS_LINEAR(a) 0
 #define NO_LINEAR(a) a
