@@ -1,5 +1,10 @@
 2000-08-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: use AM_GNOME_GETTEXT
+	* gettext.m4: removed
+	* Makefile.am: adjusted files to distribute, previous change
+	reverted
+
 	* mc-aclocal.m4: renamed to ...
 	* acinclude.m4: ... this
 	* autogen.sh: simplified - no more tricks with mc-aclocal.m4

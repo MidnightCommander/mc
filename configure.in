@@ -68,7 +68,7 @@ fi
 ALL_LINGUAS="ca cs da de el es es_ES fi fr hu it ja ko nl no pl pt_BR ro ru sl sv sk uk wa zh_TW.Big5 tr zh_CN.GB2312"
 
 dnl ultra ulgy hack to get MKINSTALLDIRS right
-AM_GNU_GETTEXT
+AM_GNOME_GETTEXT
 
 AC_LINK_FILES($nls_cv_header_libgt, $nls_cv_header_intl)
 
