@@ -1,3 +1,8 @@
+2001-05-17  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c (pty_open_master) [HAVE_SCO]: Fix ambigous `else'.
+	[!HAVE_SCO && !HAVE_GRANTPT]: Likewise.
+
 2001-05-16  Pavel Roskin  <proski@gnu.org>
 
 	* subshell.c: Define _GNU_SOURCE to enable prototypes for

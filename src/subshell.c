@@ -1102,11 +1102,12 @@ static int pty_open_master (char *pty_name)
     {
 	g_snprintf(ptr, 9, "%d",num);	/* surpriiise ... SCO lacks itoa() */
 	/* Try to open master */
-	if ((pty_master = open (pty_name, O_RDWR)) == -1)
+	if ((pty_master = open (pty_name, O_RDWR)) == -1) {
 	    if (errno == ENOENT)  /* Different from EIO */
 		return -1;	      /* Out of pty devices */
 	    else
 		continue;	      /* Try next pty device */
+	}
 	pty_name [5] = 't';	      /* Change "pty" to "tty" */
 	if (access (pty_name, 6)){
 	    close (pty_master);
@@ -1140,7 +1141,7 @@ static int pty_open_slave (const char *pty_name)
 
 /* }}} */
 
-#elif HAVE_GRANTPT
+#elif HAVE_GRANTPT /* !HAVE_SCO */
 
 /* {{{ System V version of pty_open_master */
 
@@ -1217,7 +1218,7 @@ static int pty_open_slave (const char *pty_name)
 
 /* }}} */
 
-#else
+#else /* !HAVE_SCO && !HAVE_GRANTPT */
 
 /* {{{ BSD version of pty_open_master */
 
@@ -1235,11 +1236,12 @@ static int pty_open_master (char *pty_name)
 	    pty_name [9] = *ptr2;
 
 	    /* Try to open master */
-	    if ((pty_master = open (pty_name, O_RDWR)) == -1)
+	    if ((pty_master = open (pty_name, O_RDWR)) == -1) {
 		if (errno == ENOENT)  /* Different from EIO */
 		    return -1;	      /* Out of pty devices */
 		else
 		    continue;	      /* Try next pty device */
+	    }
 	    pty_name [5] = 't';	      /* Change "pty" to "tty" */
 	    if (access (pty_name, 6)){
 		close (pty_master);
@@ -1274,7 +1276,7 @@ static int pty_open_slave (const char *pty_name)
 
 /* }}} */
 
-#endif
+#endif /* !HAVE_SCO && !HAVE_GRANTPT */
 
 /* }}} */
 
