@@ -1,5 +1,5 @@
-! This file causes when loaded using xrdb correct behaviour of xterm
-! is you are using enclosed xterm.tcap and xterm.ti.
+! This file causes when loaded using xrdb correct behavior of xterm
+! if you are using enclosed xterm.tcap and xterm.ti.
 ! Some keys would never normally work if they weren't here (like Alt
 ! something), some key definitions differ from one termcap/terminfo
 ! to the other. You may delete any line if you find out that mc
@@ -9,7 +9,7 @@
 ! or wherever it will be loaded into xrm from.
 ! To know, why this works, see Xt documentation (appendix B).
 ! On some systems you may want to replace the a (alt) modifiers with
-! m (meta) modifier in fron of some <Key> events.
+! m (meta) modifier in front of some <Key> events.
 *vt100.translations: #override \
      <Key>Home: string(0x1b) string("[7~") \n\
      <Key>End: string(0x1b) string("[8~") \n\
