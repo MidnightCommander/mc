@@ -19,7 +19,7 @@
       <year>1998,1999, 2000</year>
       <holder>Red Hat Software</holder>
     </copyright>
-    <legalnotice>
+    <legalnotice id="legalnotice">
       <para>
 	Permission is granted to copy, distribute and/or modify this document
 	under the terms of the <citetitle>GNU Free Documentation
@@ -46,7 +46,7 @@
     </legalnotice>
     <title>Gnome Midnight Commander Documentation</title>
   </artheader>
-    <sect1>
+    <sect1 id="unnamed1">
       <title>The Gnome File Manager</title>
       <para>
         GNOME includes a file manager that allows you to manipulate the files on
@@ -68,7 +68,7 @@
           <title>GNU Midnight Commander - The GNOME File Manager</title>
           <screenshot>
             <screeninfo>GMC</screeninfo>
-            <Graphic Format="png" Fileref="./figs/gmc1" srccredit="dcm">
+            <graphic Format="png" Fileref="./figs/gmc1" srccredit="dcm">
             </graphic>
           </screenshot>
         </figure>
@@ -115,7 +115,7 @@
         the Size title will change the sorting from smallest to largest.
       </para>
     </sect1>
-    <sect1 id="gmcnav" >
+    <sect1 id="gmcnav">
       <title>Moving Around the GNOME File Manager</title>
       <para>
         <indexterm>
@@ -165,7 +165,7 @@
         </para>
       </tip>
     </sect1>
-    <sect1 id="gmcselect" >
+    <sect1 id="gmcselect">
       <title>Selecting Files</title>
       <para>
         <indexterm>
@@ -192,7 +192,7 @@
         <title>"Rubber Band Select"</title>
         <screenshot>
           <screeninfo>Rubber Band Select</screeninfo>
-          <Graphic format="png" Fileref="./figs/rubberband" srccredit="dcm">
+          <graphic format="png" Fileref="./figs/rubberband" srccredit="dcm">
           </graphic>
         </screenshot>
       </figure>
@@ -234,7 +234,7 @@
         case-sensitive).
       </para>
     </sect1>
-    <sect1 id="gmccopy" >
+    <sect1 id="gmccopy">
       <title>Copying and Moving Files</title>
       <para>
         <indexterm>
@@ -283,7 +283,7 @@
           <title>The Move Dialog</title>
           <screenshot>
             <screeninfo>Move Dialog</screeninfo>
-            <Graphic Format="png" Fileref="./figs/gmc_move" srccredit="dcm">
+            <graphic Format="png" Fileref="./figs/gmc_move" srccredit="dcm">
             </graphic>
           </screenshot>
         </figure>
@@ -309,7 +309,7 @@
         It is recommended that you use this method of moving a symbolic link.
       </para>
     </sect1>
-    <sect1 id="gmcrename" >
+    <sect1 id="gmcrename">
       <title>Renaming Files</title>
       <para>
         <indexterm>
@@ -330,7 +330,7 @@
         <title>File Properties</title>
         <screenshot>
           <screeninfo>File Properties</screeninfo>
-          <Graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
+          <graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
           </graphic>
         </screenshot>
       </figure>
@@ -344,7 +344,7 @@
         you may press the <keycap>Enter</keycap> key to end the editing process.
       </para>
     </sect1>
-    <sect1 id="gmclaunch" >
+    <sect1 id="gmclaunch">
       <title>Launching Applications From the GNOME File Manager</title>
       <para>
         <indexterm>
@@ -398,7 +398,7 @@
         and choose a variety of properties and actions for it from the
         <guimenu>pop-up</guimenu> menu:
       </para>
-      <ITEMIZEDLIST mark="bullet">
+      <itemizedlist mark="bullet">
         <listitem>
           <para>
             <guimenuitem>Open</guimenuitem> - This will open the file with the
@@ -475,11 +475,11 @@
             <title>File Properties</title>
             <screenshot>
               <screeninfo>File Properties</screeninfo>
-              <Graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
+              <graphic format="png" Fileref="./figs/fileprops" srccredit="dcm">
               </graphic>
             </screenshot>
           </figure>
-          <ITEMIZEDLIST mark="bullet">
+          <itemizedlist mark="bullet">
             <listitem>
               <para>
                 <guilabel>Statistics</guilabel> - This tab will show you the
@@ -561,7 +561,7 @@
             </graphic>
           </screenshot>
         </figure>
-        <ITEMIZEDLIST MARK="bullet">
+        <itemizedlist MARK="bullet">
           <listitem>
             <para>
               <indexterm>
@@ -572,7 +572,7 @@
               The <guilabel>File Display</guilabel> tab allows you to change the way 
               files are displayed in GMC.
             </para>
-            <ITEMIZEDLIST MARK="bullet">
+            <itemizedlist MARK="bullet">
               <listitem>
                 <para>
                   <guilabel>Show backup files</guilabel> - This will show any backup
@@ -626,7 +626,7 @@
             </graphic>
           </screenshot>
         </figure>
-        <ITEMIZEDLIST MARK="bullet">
+        <itemizedlist MARK="bullet">
           <listitem>
             <para>
               <indexterm>
@@ -637,7 +637,7 @@
               This tab allows you to change which functions ask for your confirmation  
               before continuing.
             </para>
-            <ITEMIZEDLIST MARK="bullet">
+            <itemizedlist MARK="bullet">
               <listitem>
                 <para>
                   <guilabel>Confirm when deleting file</guilabel> - This will bring up 
@@ -678,7 +678,7 @@
             </graphic>
           </screenshot>
         </figure>
-        <ITEMIZEDLIST MARK="bullet">
+        <itemizedlist MARK="bullet">
           <listitem>
             <para>
               <indexterm>
@@ -706,7 +706,7 @@
                 The .tar file is the standard UNIX archive format
               </para>
             </note>
-            <ITEMIZEDLIST MARK="bullet">
+            <itemizedlist MARK="bullet">
               <listitem>
                 <para>   
                   <guilabel>VFS Timeout</guilabel> - This will determine how long 
@@ -741,13 +741,13 @@
           </graphic>
          </screenshot>
         </figure>
-      <ITEMIZEDLIST MARK="bullet">
+      <itemizedlist MARK="bullet">
        <listitem>
         <para>
          This tab allows you to configure items that will enhance the speed of
 	 GMC by using caching.
         </para>
-        <ITEMIZEDLIST MARK="bullet">
+        <itemizedlist MARK="bullet">
          <listitem>
           <para> 
            <guilabel>Fast directory reload</guilabel> - This option will store 
@@ -814,7 +814,7 @@
           <title>The Desktop Dialog</title>
            <screenshot>
 	    <screeninfo>The Desktop Dialog</screeninfo>
-	    <Graphic Format="png" Fileref="./figs/gmcprops5" srccredit="dcm">
+	    <graphic Format="png" Fileref="./figs/gmcprops5" srccredit="dcm">
              </graphic>
 	    </screenshot>
 	    </figure>
@@ -863,7 +863,7 @@
       <title>The Custom View Dialog</title>
       <screenshot>
        <screeninfo>The Custom View Dialog</screeninfo>
-       <Graphic Format="png" Fileref="./figs/gmcprops6" srccredit="dcm">
+       <graphic Format="png" Fileref="./figs/gmcprops6" srccredit="dcm">
        </graphic>
       </screenshot>
      </figure>
@@ -890,7 +890,7 @@
     </para>
    </sect2>
   </sect1>
-  <sect1 id="gmcmenus" >
+  <sect1 id="gmcmenus">
    <title>Menu Guide to the GNOME File Manager</title>
    <para>
    <indexterm>
@@ -908,13 +908,13 @@
      window simply select the perforation line at the top of the menu.
     </para>
    </tip>
-   <ITEMIZEDLIST MARK="bullet">
+   <itemizedlist MARK="bullet">
     <listitem>
      <para>
       <guimenu>File</guimenu> - The File Menu contains items associated with 
       files and higher level activity.
      </para>
-      <ITEMIZEDLIST MARK="bullet">
+      <itemizedlist MARK="bullet">
        <listitem>
         <para>
          <guimenuitem>Create New Window</guimenuitem> - This will open a new File 
@@ -987,13 +987,13 @@
      </itemizedlist>
     </listitem>
    </itemizedlist>
-   <ITEMIZEDLIST MARK="bullet">
+   <itemizedlist MARK="bullet">
     <listitem>
      <para>
       <guimenu>Edit</guimenu> - The Edit menu contains items that are associated 
       with editing and selecting files.
      </para>
-     <ITEMIZEDLIST MARK="bullet">
+     <itemizedlist MARK="bullet">
       <listitem>
        <para>
         <guimenuitem>Select All</guimenuitem> - This will select all of the
@@ -1041,12 +1041,12 @@
       </itemizedlist>
      </listitem>
     </itemizedlist>
-   <ITEMIZEDLIST MARK="bullet">
+   <itemizedlist MARK="bullet">
       <listitem>
        <para>
         <guimenu>Settings</guimenu> - This contains the Preferences menu item.
        </para>
-      <ITEMIZEDLIST MARK="bullet">
+      <itemizedlist MARK="bullet">
        <listitem>
         <para>
         <guimenuitem>Preferences</guimenuitem> - This will launch the
@@ -1056,20 +1056,20 @@
      </itemizedlist>
     </listitem>
    </itemizedlist>
-   <ITEMIZEDLIST MARK="bullet">
+   <itemizedlist MARK="bullet">
     <listitem>
      <para>
       <guimenu>Layout</guimenu> - This menu contains items that are associated 
       with the layout in GNOME File Manager.
      </para>
-      <ITEMIZEDLIST MARK="bullet">
+      <itemizedlist MARK="bullet">
        <listitem>
         <para>
          <guimenuitem>Sort By</guimenuitem> - This will launch a dialog box 
 	 which will allow you to select how you wish the files to be sorted in
 	 the current directory. You may sort by one of the following:
         </para>
-         <ITEMIZEDLIST mark="none">
+         <itemizedlist mark="none">
           <listitem>
            <para>Name</para>
           </listitem>
@@ -1132,13 +1132,13 @@
       </itemizedlist>
      </listitem>
     </itemizedlist>
-   <ITEMIZEDLIST MARK="bullet">
+   <itemizedlist MARK="bullet">
      <listitem>
       <para>
        <guimenu>Commands</guimenu> - The Command menu contains items that are 
        commands to run on files in the GNOME File Manager.
       </para>
-      <ITEMIZEDLIST MARK="bullet">
+      <itemizedlist MARK="bullet">
        <listitem>
         <para>
          <guimenuitem>Find File</guimenuitem> - Find File brings up a dialog
@@ -1219,7 +1219,7 @@
      using GNOME Drag and Drop. This is a good tour of GNOME and will show you 
      how to utilize GNOME to its fullest extent.
     </para>
-   <ITEMIZEDLIST  MARK="bullet">
+   <itemizedlist  MARK="bullet">
     <listitem>
      <para>
       Drag a Color onto the Panel - Whenever you have a color selector displayed 
