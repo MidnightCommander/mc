@@ -1,3 +1,7 @@
+2004-10-06  Alexander Savelyev  <i@fano.com.ua>
+
+        * fileopctx.h (struct FileOpContext): Use off_t for offset.
+
 2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
 
         * util.c(strip_password): Add support for '@' in username.

@@ -55,7 +55,7 @@ typedef struct FileOpContext {
 	int recursive_result;
 
 	/* Whether to do a reget */
-	int do_reget;
+	off_t do_reget;
 
 	/* Controls appending to files */
 	int do_append;
