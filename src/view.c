@@ -369,16 +369,31 @@ save_edit_changes (WView *view)
 {
     struct hexedit_change_node *node = view->change_list;
     int fp;
-    
-    fp = open (view->filename, O_WRONLY);
-    if (fp >= 0) {
-        while (node) {
-            lseek (fp, node->offset, SEEK_SET);
-            write (fp, &node->value, 1);
-            node = node->next;
-        }
-        close (fp);
-    }
+
+    do {
+	fp = open (view->filename, O_WRONLY);
+	if (fp >= 0) {
+	    while (node) {
+		if (lseek (fp, node->offset, SEEK_SET) == -1 ||
+		    write (fp, &node->value, 1) != 1) {
+		    close (fp);
+		    fp = -1;
+		    break;
+		}
+		node = node->next;
+	    }
+	    close (fp);
+	}
+
+	if (fp == -1) {
+	    fp = query_dialog (_(" Error trying to save file. "), 
+			       _(" Try again ? "),
+			       2, 3, _("&Yes"), _("&No"), _("&Cancel"));
+	    if (fp == 0)
+		fp = -1;
+	}
+    } while (fp == -1);
+
     free_change_list (view);
 }
 
@@ -534,12 +549,13 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
     for (i = 0; i < 10; i++)
 	view->marks [i] = 0;
     
-
     if (!view->have_frame){
 	view->start_col = 0;
     }
 
-    if (_file[0]) {
+    if (_command && (view->viewer_magic_flag || _file[0] == '\0')) {
+	error = init_growing_view (view, _command, view->filename);
+    } else if (_file[0]) {
 	/* Make sure we are working with a regular file */
 	if (mc_stat (view->filename, &view->s) == -1) {
 	    g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
@@ -567,14 +583,9 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	    g_free (view->filename);
 	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
 	}
-    }
 
-    if (_command && (view->viewer_magic_flag || _file[0] == '\0')) {
-	error = init_growing_view (view, _command, view->filename);
-	if (fd != -1)
-	    mc_close (fd);
-    } else
 	error = load_view_file (view, fd);
+    }
 
 finish:
     if (error){

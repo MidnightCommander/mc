@@ -1,3 +1,9 @@
+2002-05-27  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* view.c (save_edit_changes): Handle errors.
+	(do_view_init): Don't open and check file type
+	if _command is not null or _file is empty string.
+
 2002-05-22  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: doc/mc.1 is in top_builddir, not in top_srcdir.
