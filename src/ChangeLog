@@ -1,3 +1,13 @@
+2003-08-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* cmd.c (edit_symlink_cmd): Fix possible off-by-one after
+	readlink().
+	* file.c (make_symlink): Likewise.
+	* main.c (copy_readlink): Likewise.
+	* screen.c (display_mini_info): Likewise.
+	(chdir_to_readlink): Likewise.
+	* util.c (resolve_symlinks): Likewise.
+
 2003-08-18  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (delete_cmd_local): New function.  Remove file under the

@@ -366,7 +366,7 @@ make_symlink (FileOpContext *ctx, char *src_path, char *dst_path)
 	dst_is_symlink = 0;
 
   retry_src_readlink:
-    len = mc_readlink (src_path, link_target, MC_MAXPATHLEN);
+    len = mc_readlink (src_path, link_target, MC_MAXPATHLEN - 1);
     if (len < 0) {
 	return_status =
 	    file_error (_(" Cannot read source link \"%s\" \n %s "),

@@ -669,7 +669,7 @@ display_mini_info (WPanel *panel)
 	int  len;
 
 	link = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
-	len = mc_readlink (link, link_target, MC_MAXPATHLEN);
+	len = mc_readlink (link, link_target, MC_MAXPATHLEN - 1);
 	g_free (link);
 	if (len > 0){
 	    link_target[len] = 0;
@@ -2015,7 +2015,7 @@ chdir_to_readlink (WPanel *panel)
 	int i;
 	struct stat st;
 
-	i = readlink (selection (panel)->fname, buffer, MC_MAXPATHLEN);
+	i = readlink (selection (panel)->fname, buffer, MC_MAXPATHLEN - 1);
 	if (i < 0)
 	    return;
 	if (mc_stat (selection (panel)->fname, &st) < 0)

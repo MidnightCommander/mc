@@ -1025,7 +1025,7 @@ void edit_symlink_cmd (void)
 
 	q = g_strdup_printf (_(" Symlink `%s\' points to: "), name_trunc (p, 32));
 
-	i = readlink (p, buffer, MC_MAXPATHLEN);
+	i = readlink (p, buffer, MC_MAXPATHLEN - 1);
 	if (i > 0) {
 	    buffer [i] = 0;
 	    dest = input_expand_dialog (_(" Edit symlink "), q, buffer);

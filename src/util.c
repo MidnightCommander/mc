@@ -1069,7 +1069,7 @@ static char *resolve_symlinks (char *path)
 	if (!S_ISLNK (mybuf.st_mode))
 	    strcpy (r, p + 1);
 	else {
-	    len = mc_readlink (path, buf2, MC_MAXPATHLEN);
+	    len = mc_readlink (path, buf2, MC_MAXPATHLEN - 1);
 	    if (len < 0) {
 		 g_free (buf);
 		 g_free (buf2);
