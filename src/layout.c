@@ -92,7 +92,7 @@ int output_lines = 0;
 /* Set if the command prompt is to be displayed */
 int command_prompt = 1;
 
-/* Set if the nice and usefull keybar is visible */
+/* Set if the nice and useful keybar is visible */
 int keybar_visible = 1;
 
 /* Set if the nice message (hint) bar is visible */

@@ -130,7 +130,7 @@ mc_addch (char c)
 #ifdef HAS_ACS_AS_PCCHARS
 #   define one_vline() addch(ACS_VLINE)
 #   define one_hline() addch(ACS_HLINE)
-    /* This is fast, but unusefull if ! pc_system - doesn't use
+    /* This is fast, but only useful on PC system as it doesn't use
        Alt_Char_Pairs [] :( */
 #else
     /* This is slow, but works well :| */ 

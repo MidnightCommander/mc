@@ -2121,7 +2121,7 @@ panel_key (WPanel *panel, int key)
     }
 
     /* We do not want to take a key press if nothing can be done with it */
-    /* The command line widget may do something more usefull */
+    /* The command line widget may do something more useful */
     if (key == KEY_LEFT)
 	return move_left (panel, key);
 

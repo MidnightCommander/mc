@@ -85,7 +85,7 @@ typedef struct {
 	int dive_into_subdirs;
 
 	/* When moving directories cross filesystem boundaries delete the
-	 * successfull copied files when all files below the directory and its
+	 * successfully copied files when all files below the directory and its
 	 * subdirectories were processed.
 	 *
 	 * If erase_at_end is zero files will be deleted immediately after their

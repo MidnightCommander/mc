@@ -6,7 +6,7 @@
 #ifndef __MC_GLOBAL_H
 #define __MC_GLOBAL_H
 
-#include <stdlib.h>	/* for free() and other usefull routins */
+#include <stdlib.h>	/* for free() and other useful routins */
 
 #if defined(STDC_HEADERS) || defined(HAVE_STRING_H)
 #  include <string.h>

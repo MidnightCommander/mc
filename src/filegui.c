@@ -714,7 +714,7 @@ file_progress_real_query_replace (FileOpContext *ctx,
 	    return FILE_CONT;
 
     case REPLACE_REGET:
-	/* Carefull: we fall through and set do_append */
+	/* Careful: we fall through and set do_append */
 	ctx->do_reget = _d_stat->st_size;
 
     case REPLACE_APPEND:
