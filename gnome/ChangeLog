@@ -1,3 +1,8 @@
+1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gcorba.c (do_window_close): Removed call to CORBA_free, as
+	PortableServer_POA_deactivate_object already calls CORBA_free on
+	the object.
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* glayout.c (gnome_close_panel_event): This function should return
@@ -16,7 +21,7 @@
 
 1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
-	* gcorba.c (impl_GNOME_FileManagerFactory_create_window): Fix bug
+	(impl_GNOME_FileManagerFactory_create_window): Fix bug
 	spooted by federico.  I was connecting to the wrong signal.
 
 1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
