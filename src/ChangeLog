@@ -1,3 +1,7 @@
+Tue Jan 12 13:40:46 1999  Timur Bakeyev <mc@bat.ru>
+
+	* gtkedit(syntax.c): Fixed a typo in Pascal syntax.
+
 1999-01-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* treestore.c (tree_store_save): Add signature for version 2.0 of
