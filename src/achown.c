@@ -332,10 +332,9 @@ static void do_enter_key (Dlg_head *h, int f_pos)
 
 static void chown_refresh (void)
 {
-    attrset (COLOR_NORMAL);
-    dlg_erase (ch_dlg);
+    common_dialog_repaint (ch_dlg);
 
-    draw_box (ch_dlg, 1, 2, 11, 70);
+    attrset (COLOR_NORMAL);
 
     dlg_move (ch_dlg, BY - 1, 8);
     addstr (_("owner"));
@@ -355,7 +354,6 @@ static void chown_refresh (void)
     addstr (_("Flag"));
     dlg_move (ch_dlg, BY + 2, 4);
     addstr (_("Mode"));
-    
 
     if (!single_set){
 	dlg_move (ch_dlg, 3, 54);
@@ -364,10 +362,6 @@ static void chown_refresh (void)
     }
 
     print_flags ();
-
-    attrset (COLOR_HOT_NORMAL);
-    dlg_move (ch_dlg, 1, 24);
-    addstr (_(" Chown advanced command "));
 }
 
 static void chown_info_update (void)
@@ -546,6 +540,7 @@ static void init_chown_advanced (void)
 
     ch_dlg = create_dlg (0, 0, 13, 74, dialog_colors, advanced_chown_callback,
 			 "[Advanced Chown]", "achown", DLG_CENTER);
+    x_set_dialog_title (ch_dlg, _(" Chown advanced command "));
 
 #define XTRACT(i) BY+chown_advanced_but[i].y, BX+chown_advanced_but[i].x, \
 	chown_advanced_but[i].ret_cmd, chown_advanced_but[i].flags, _(chown_advanced_but[i].text), \

@@ -1,5 +1,7 @@
 2002-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* achown.c (chown_refresh): Use common_dialog_repaint().
+
 	* dlg.h (struct Dlg_head): Separate user flags and internal
 	flags.  Make "direction" a user flag.  Adjust all dependencies.
 	* dlg.c (run_dlg): Return ret_value.
