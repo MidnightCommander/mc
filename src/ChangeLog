@@ -1,5 +1,7 @@
 2003-10-23  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (process_args): Use cast to avoid warning.
+
 	* view.c (view_callback): Don't close the current dialog when
 	the viewer is framed.
 

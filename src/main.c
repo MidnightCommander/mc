@@ -1908,7 +1908,7 @@ process_args (poptContext ctx, int c, const char *option_arg)
 
 #ifdef USE_NETCODE
     case 'l':
-	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, option_arg);
+	mc_setctl ("/#ftp:", VFS_SETCTL_LOGFILE, (void *) option_arg);
 #ifdef WITH_SMBFS
 	smbfs_set_debugf (option_arg);
 #endif				/* WITH_SMBFS */
