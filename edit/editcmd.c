@@ -624,17 +624,13 @@ edit_delete_macro (WEdit * edit, int k)
 	    return 0;
     g = fopen (catstrs (home_dir, TEMP_FILE, (char *) NULL), "w");
     if (!g) {
-/* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
-/* 'Open' = load temp file */
 		 get_sys_error (_(" Cannot open temp file ")));
 	return 1;
     }
     f = edit_open_macro_file ("r");
     if (!f) {
-/* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
-/* 'Open' = load temp file */
 		get_sys_error (_(" Cannot open macro file ")));
 	fclose (g);
 	return 1;
@@ -657,7 +653,6 @@ edit_delete_macro (WEdit * edit, int k)
     fclose (f);
     fclose (g);
     if (rename (catstrs (home_dir, TEMP_FILE, (char *) NULL), catstrs (home_dir, MACRO_FILE, (char *) NULL)) == -1) {
-/* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
 	   get_sys_error (_(" Cannot overwrite macro file ")));
 	return 1;
@@ -674,10 +669,8 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
     int s, i;
 
     edit_push_action (edit, KEY_PRESS + edit->start_display);
-/* This heads the 'Macro' dialog box */
     s = edit_raw_key_query (_(" Save macro "),
-/* Input line for a single key press follows the ':' */
-    _(" Press the macro's new hotkey: "), 1);
+        _(" Press the macro's new hotkey: "), 1);
     edit->force |= REDRAW_COMPLETELY;
     if (s) {
 	if (edit_delete_macro (edit, s))
@@ -695,7 +688,6 @@ int edit_save_macro_cmd (WEdit * edit, struct macro macro[], int n)
 	    }
 	    return 1;
 	} else
-/* This heads the 'Save Macro' dialog box */
 	    edit_error_dialog (_(" Save macro "), get_sys_error (_(" Cannot open macro file ")));
     }
     return 0;
@@ -751,7 +743,6 @@ int edit_load_macro_cmd (WEdit * edit, struct macro macro[], int *n, int k)
 	fclose (f);
 	return found;
     } else
-/* This heads the 'Load Macro' dialog box */
 	edit_error_dialog (_(" Load macro "),
 		get_sys_error (_(" Cannot open macro file ")));
     return 0;
@@ -766,7 +757,6 @@ int edit_save_confirm_cmd (WEdit * edit)
 
     if (edit_confirm_save) {
 	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
-/* Buttons to 'Confirm save file' query */
 	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel")))
 	    return 0;
     }
@@ -1743,7 +1733,6 @@ err:
 
 static void regexp_error (WEdit *edit)
 {
-/* "Error: Syntax error in regular expression, or scanf expression contained too many %'s */
     edit_error_dialog (_("Error"), _(" Invalid regular expression, or scanf expression with too many conversions "));
 }
 

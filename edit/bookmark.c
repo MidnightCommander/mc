@@ -32,6 +32,8 @@
 
 static inline struct _book_mark *double_marks (WEdit * edit, struct _book_mark *p)
 {
+    (void) edit;
+
     if (p->next)
 	while (p->next->line == p->line)
 	    p = p->next;

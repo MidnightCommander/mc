@@ -1,6 +1,9 @@
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
 	* *.c: Removed trailing whitespace.
+	* *.c: Removed unused parameters for static functions. Marked
+	unused parameters for global functions. Removed redundant
+	comments.
 
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 

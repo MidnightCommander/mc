@@ -50,15 +50,16 @@ struct lock_s {
 
 /* Build user@host.domain.pid string (need to be freed) */
 static char *
-lock_build_name (const char *fname)
+lock_build_name (void)
 {
     char host[BUF_SIZE];
     const char *user;
 
-    if (!
-	((user = getpwuid (getuid ())->pw_name) || (user = getenv ("USER"))
-	 || (user = getenv ("USERNAME")) || (user = getenv ("LOGNAME"))))
-	user = "";
+    user = getpwuid (getuid ())->pw_name;
+    if (!user) user = getenv ("USER");
+    if (!user) user = getenv ("USERNAME");
+    if (!user) user = getenv ("LOGNAME");
+    if (!user) user = "";
 
     /* TODO: Use FQDN, no clean interface, so requires lot of code */
     if (gethostname (host, BUF_SIZE - 1) == -1)
@@ -167,7 +168,7 @@ edit_lock_file (const char *fname)
     }
 
     /* Create lock symlink */
-    newlock = lock_build_name (fname);
+    newlock = lock_build_name ();
     if (symlink (newlock, lockfname) == -1) {
 	g_free (lockfname);
 	g_free (newlock);
