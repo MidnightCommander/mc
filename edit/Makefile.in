@@ -75,10 +75,9 @@ distclean: clean
 	rm -f *~
 	rm -f Makefile
 
-install: @MCEDIT@
+install:
 
 uninstall:
-	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 

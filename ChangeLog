@@ -1,6 +1,12 @@
 2001-01-11  Pavel Roskin  <proski@gnu.org>
 
-	* macros/gnome-gettext.m4: Propagateg change by Owen Taylor
+	* edit/Makefile.in: Don't install or uninstall mcedit -
+	it cannot be installed before mc on systems without symlinks.
+	* gtkedit/Makefile.in: Likewise.
+	* src/Makefile.in: Install mcedit (if enabled) and mcview.
+	Uninstall them.
+
+	* macros/gnome-gettext.m4: Propagated change by Owen Taylor
 	from acinclude.m4 in gtk+:
 	Don't define ENABLE_NLS unless we have a working NLS.
 	(This should keep libintl.h from being included when it doesn't

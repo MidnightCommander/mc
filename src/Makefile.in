@@ -110,10 +110,27 @@ distclean: clean
 	rm -f *~
 	rm -f Makefile
 
+#
+# Make sure to install mcview and mcedit after mc - important
+# on systems without symlinks.
+#
 install: mc mcmfmt @saver@
 	$(INSTALL_PROGRAM) mc     $(DESTDIR)$(bindir)/$(binprefix)mc
 	$(INSTALL_PROGRAM) mcmfmt $(DESTDIR)$(bindir)/$(binprefix)mcmfmt
 	$(SEDCMD2) < $(srcdir)/mc.hlp > $(DESTDIR)$(mclibdir)/$(libprefix)mc.hlp 
+	$(MAKE) install_mcview
+	$(MAKE) install_@MCEDIT@
+
+install_:
+
+#
+# Make relative symlinks, but do the right thing if LN_S is `ln' or `cp'.
+#
+install_mcview:
+	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcview && $(LN_S) mc mcview
+
+install_mcedit:
+	cd $(DESTDIR)$(bindir)/$(binprefix) && rm -f mcedit && $(LN_S) mc mcedit
 
 install.saver: cons.saver
 	$(INSTALL_PROGRAM) -m 4755 cons.saver $(DESTDIR)$(suppbindir)/cons.saver
@@ -123,6 +140,8 @@ uninstall:
 	rm -f $(DESTDIR)$(bindir)/$(binprefix)/mcmfmt
 	rm -f $(DESTDIR)$(suppbindir)/cons.saver
 	rm -f $(DESTDIR)$(mclibdir)/$(libprefix)/mc.hlp
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcedit
+	rm -f $(DESTDIR)$(bindir)/$(binprefix)mcview
 
 distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
 
