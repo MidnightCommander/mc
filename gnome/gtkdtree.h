@@ -21,6 +21,7 @@ typedef struct {
 	int          drag_motion_y;
 	int          timer_id;
 	char         *drag_dir;
+        GList        *auto_expanded_nodes;
 	
 	GtkCTreeNode *root_node;	/* root node */
 	GtkCTreeNode *last_node;	/* last visited node */

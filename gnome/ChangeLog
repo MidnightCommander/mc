@@ -1,5 +1,22 @@
 1998-12-12  Owen Taylor  <otaylor@gtk.org>
 
+	* gscreen.c (panel_tree_drag_motion): Doubled timeout
+	for autoexpand - reducing opening unwanted directories.
+
+	* gscreen.c (tree_drag_open_directory): Use 
+	gtk_ctree_expand() not gtk_ctree_expand_recursive,
+	which increases confusion and could be
+	_vvveeerrrryyyy_ expensive. (/afs ?)
+
+	* gscreen.c (panel_tree_drag_leave): Fixed up
+	signature - "drag_leave" has no x,y.
+
+	* gscreen.[ch] (panel_tree_check_auto_expand): When
+	we've expanded rows during a drag, collapse them
+	again when the drag leaves that row.
+
+1998-12-12  Owen Taylor  <otaylor@gtk.org>
+
 	* gtkdtree.c (gtk_dtree_destroy): Remove timer upon
 	destruction to be safe. (Should this, and
 	dtree->timer_id itself be in gscreen.c instead?)

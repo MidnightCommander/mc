@@ -488,6 +488,7 @@ static void
 gtk_dtree_init (GtkDTree *dtree)
 {
 	dtree->current_path = NULL;
+	dtree->auto_expanded_nodes = NULL;
 	dtree->timer_id = -1;
 }
 
