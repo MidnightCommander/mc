@@ -16,9 +16,10 @@ INSTALL_DATA = @INSTALL_DATA@
 
 DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
-		config.h.in mc-aclocal.m4 aclocal.m4 acconfig.h VERSION mcfn_install.in \
-		Make.common.in README.NT mc.spec Specfile README.QNX \
-		README.OS2 VERSION.in NLS mkinstalldirs autogen.sh ABOUT-NLS
+		config.h.in mc-aclocal.m4 aclocal.m4 acconfig.h \
+		VERSION mcfn_install.in Make.common.in README.NT \
+		mc.spec Specfile README.QNX README.OS2 VERSION.in \
+		mkinstalldirs autogen.sh ABOUT-NLS
 
 all: 
 	@for dir in @INTLSUB@ ${codedirs} @POSUB@; do \
@@ -125,7 +126,7 @@ distcopy:
 	make -C po
 	cp po/Makefile.in.in ../mc-$(VERSION)/po;
 	cp po/POTFILES.in ../mc-$(VERSION)/po;
-	cp po/*.po po/*.gmo po/mc.pot po/stamp-cat-od po/cat-id-tbl.c ../mc-$(VERSION)/po;
+	cp po/*.po po/*.gmo po/mc.pot po/stamp-cat-id po/cat-id-tbl.c ../mc-$(VERSION)/po;
 	(cd ..; tar cvf - mc-$(VERSION) | \
 	gzip -f9 > mc-$(VERSION).tar.gz); \
 
