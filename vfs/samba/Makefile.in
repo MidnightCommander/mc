@@ -28,7 +28,6 @@ BINDIR = @bindir@
 SBINDIR = @bindir@
 LIBDIR = @libdir@
 VARDIR = @localstatedir@
-MANDIR = @mandir@
 
 # The permissions to give the executables
 INSTALLPERMS = 0755
@@ -36,8 +35,6 @@ INSTALLPERMS = 0755
 # set these to where to find various files
 # These can be overridden by command line switches (see smbd(8))
 # or in smb.conf (see smb.conf(5))
-SMBLOGFILE = $(VARDIR)/log.smb
-NMBLOGFILE = $(VARDIR)/log.nmb
 CONFIGFILE = @configdir@/smb.conf
 LMHOSTSFILE = @configdir@/lmhosts
 DRIVERFILE = $(LIBDIR)/printers.def
@@ -54,8 +51,8 @@ CODEPAGEDIR = @codepagedir@
 CODEPAGELIST= 437 737 850 852 861 932 866 949 950 936
 
 PASSWD_FLAGS = -DPASSWD_PROGRAM=\"$(PASSWD_PROGRAM)\" -DSMB_PASSWD_FILE=\"$(SMB_PASSWD_FILE)\"
-FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include $(CPPFLAGS) -DSMBLOGFILE=\"$(SMBLOGFILE)\" -DNMBLOGFILE=\"$(NMBLOGFILE)\"
-FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"  
+FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include $(CPPFLAGS)
+FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"
 FLAGS3 = -DSWATDIR=\"$(SWATDIR)\" -DSBINDIR=\"$(SBINDIR)\" -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
 FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\" -DBINDIR=\"$(BINDIR)\"
 FLAGS5 = $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
