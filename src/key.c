@@ -459,33 +459,67 @@ int define_sequence (int code, char *seq, int action)
 
 static int *pending_keys;
 
+/* Apply corrections for the keycode generated in get_key_code() */
 static int
-correct_key_code (int c)
+correct_key_code (int code)
 {
-    /* Add key modifiers that cannot be deduced from the sequences */
-    c |= get_modifier ();
+    unsigned int c = code & ~KEY_M_MASK;	/* code without modifier */
+    unsigned int mod = code & KEY_M_MASK;	/* modifier */
 
-    /* This is needed on some OS that do not support ncurses and */
-    /* do some magic after read()ing the data */
+    /* Add key modifiers directly from X11 or OS */
+    mod |= get_modifier ();
+
+    /* This is needed if the newline is reported as carriage return */
     if (c == '\r')
-	return '\n';
+	c = '\n';
 
-#ifdef IS_AIX
+    /* This is reported to be useful on AIX */
     if (c == KEY_SCANCEL)
-	return '\t';
-#endif
+	c = '\t';
 
-    if (c == KEY_F(0))
-	return KEY_F(10);
+    /* F0 is the same as F10 for out purposes */
+    if (c == KEY_F (0))
+	c = KEY_F (10);
 
-    if (!alternate_plus_minus) 
-        switch (c) {
-            case KEY_KP_ADD: c = '+'; break;
-            case KEY_KP_SUBTRACT: c = '-'; break;
-            case KEY_KP_MULTIPLY: c = '*'; break;
-        }
+    /*
+     * We are not interested if Ctrl was pressed when entering control
+     * characters, so assume that it was.  When checking for such keys,
+     * XCTRL macro should be used.  In some cases, we are interested,
+     * e.g. to distinguish Ctrl-Enter from Enter.
+     */
+    if (c < 32 && c != ESC_CHAR && c != '\t' && c != '\n') {
+	mod |= KEY_M_CTRL;
+    }
 
-    return c;
+    /* Remove Shift and Ctrl information from ordinary characters */
+    if (c >= 32 && c < 256) {
+	mod &= ~(KEY_M_SHIFT | KEY_M_CTRL);
+    }
+
+    /* Convert Shift+Fn to F(n+10) */
+    if (c >= KEY_F (1) && c <= KEY_F (10) && (mod & KEY_M_SHIFT)) {
+	c += 10;
+    }
+
+    /* Remove Shift information from function keys */
+    if (c >= KEY_F (1) && c <= KEY_F (20)) {
+	mod &= ~KEY_M_SHIFT;
+    }
+
+    if (!alternate_plus_minus)
+	switch (c) {
+	case KEY_KP_ADD:
+	    c = '+';
+	    break;
+	case KEY_KP_SUBTRACT:
+	    c = '-';
+	    break;
+	case KEY_KP_MULTIPLY:
+	    c = '*';
+	    break;
+	}
+
+    return (mod | c);
 }
 
 int get_key_code (int no_delay)
@@ -1003,11 +1037,9 @@ get_modifier (void)
 	int root_x, root_y;
 	int win_x, win_y;
 	unsigned int mask;
-	Bool b;
-	int result = 0;
 
-	b = XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
-			   &root_y, &win_x, &win_y, &mask);
+	XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
+		       &root_y, &win_x, &win_y, &mask);
 
 	if (mask & ShiftMask)
 	    result |= KEY_M_SHIFT;
@@ -1026,9 +1058,7 @@ get_modifier (void)
 	/* Translate Linux modifiers into mc modifiers */
 	if (modifiers & SHIFT_PRESSED)
 	    result |= KEY_M_SHIFT;
-	if (modifiers & ALTL_PRESSED)
-	    result |= KEY_M_ALT;
-	if (modifiers & ALTR_PRESSED)
+	if (modifiers & (ALTL_PRESSED | ALTR_PRESSED))
 	    result |= KEY_M_ALT;
 	if (modifiers & CONTROL_PRESSED)
 	    result |= KEY_M_CTRL;
