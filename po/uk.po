@@ -43,6 +43,10 @@ msgid ""
 "\n"
 "Please check it to see if it points to a valid command."
 msgstr ""
+"Неможливо виконати\n"
+"\"%s\".\n"
+"\n"
+"Перев╕рте, будь ласка, чи вказу╓ це посилання на в╕рну команду."
 
 #: gnome/gaction.c:40
 #, c-format
@@ -52,6 +56,10 @@ msgid ""
 "To fix this, bring up the mime-properties editor in the GNOME Control "
 "Center, and edit the default %s-action for \"%s\"."
 msgstr ""
+"\".\n"
+"\n"
+"Для виправлення, запуст╕ть редактор mime-властивостей в Центр╕ Керування GNOME, "
+"та виправте типову %s-д╕ю для \"%s\"."
 
 #: gnome/gaction.c:46
 #, c-format
@@ -61,6 +69,10 @@ msgid ""
 "To fix this error, bring up this file's properties and change the default "
 "%s-action."
 msgstr ""
+"\".\n"
+"\n"
+"Для виправлення, в╕дкрийте д╕алог властивостей файлу та зм╕н╕ть типову "
+"%s-д╕ю."
 
 #: gnome/gaction.c:51
 #, c-format
@@ -70,6 +82,10 @@ msgid ""
 "with the command:\n"
 "\"%s\"%s"
 msgstr ""
+"Неможливо %s\n"
+"\"%s\"\n"
+"командою:\n"
+"\"%s\"%s"
 
 #: gnome/gaction.c:134 gnome/gaction.c:150
 msgid "open"
@@ -81,11 +97,11 @@ msgstr "редагувати"
 
 #: gnome/gaction.c:331
 msgid "view"
-msgstr "перегляд"
+msgstr "переглядати"
 
 #: gnome/gcmd.c:49
 msgid " There is no other panel to compare contents to "
-msgstr ""
+msgstr " Нема╓ ╕ншо╖ панел╕ для пор╕вняння вм╕сту "
 
 #: gnome/gcmd.c:100
 msgid "The Midnight Commander Team"
@@ -147,7 +163,7 @@ msgstr "Зм╕нити порядок"
 
 #: gnome/gcmd.c:395
 msgid "Enter name."
-msgstr ""
+msgstr "Введ╕ть назву."
 
 #: gnome/gcmd.c:401
 msgid "Enter label for command:"
@@ -227,11 +243,11 @@ msgstr "Введ╕ть додатков╕ аргументи:"
 
 #: gnome/gcmd.c:835
 msgid "Desktop entry properties"
-msgstr ""
+msgstr "Властивост╕ елементу робочого столу"
 
 #: gnome/gcmd.c:861
 msgid "Select File"
-msgstr ""
+msgstr "Вибрати файл"
 
 #: gnome/gcmd.c:869
 msgid ""
@@ -255,11 +271,11 @@ msgstr " Погано сформований регулярний вираз "
 
 #: gnome/gcmd.c:962
 msgid "Creating a desktop link"
-msgstr ""
+msgstr "Сворення посилання на робочому стол╕"
 
 #: gnome/gcmd.c:963
 msgid "Enter the URL:"
-msgstr ""
+msgstr "Введ╕ть URL:"
 
 #: gnome/gcustom-layout.c:34
 msgid "Access Time"
@@ -534,11 +550,11 @@ msgstr "Зам╕нити його?"
 #: gnome/gdialogs.c:568 gtkedit/editwidget.c:1097 gtkedit/gtkedit.c:1250
 #: src/file.c:802 src/screen.c:2399 src/screen.c:2429 src/tree.c:1014
 msgid "Copy"
-msgstr "Коп╕ювання"
+msgstr "Коп╕ювати"
 
 #: gnome/gdialogs.c:571 gtkedit/editwidget.c:1098 gtkedit/gtkedit.c:1252
 msgid "Move"
-msgstr "Перенесення"
+msgstr "Перенести"
 
 #: gnome/gdialogs.c:583
 msgid "Destination"
@@ -1262,7 +1278,7 @@ msgstr "Коп╕ювання..."
 #: gnome/gpopup2.c:208 gtkedit/editwidget.c:1100 src/screen.c:2402
 #: src/screen.c:2432
 msgid "Delete"
-msgstr "Видал"
+msgstr "Видалити"
 
 #: gnome/gpopup2.c:209
 msgid "Move..."
@@ -1793,12 +1809,12 @@ msgstr " Завантажити макрос "
 
 #: gtkedit/editcmd.c:805 gtkedit/editcmd.c:807
 msgid " Confirm save file? : "
-msgstr ""
+msgstr " П╕дтверд╕ть збереження файлу : "
 
 #. Buttons to 'Confirm save file' query
 #: gtkedit/editcmd.c:810
 msgid " Save file "
-msgstr ""
+msgstr " Збереження файлу "
 
 #: gtkedit/editcmd.c:810 gtkedit/editwidget.c:1094 gtkedit/gtkedit.c:1247
 #: src/view.c:2075
@@ -1815,12 +1831,12 @@ msgstr ""
 
 #: gtkedit/editcmd.c:836 gtkedit/editcmd.c:869 gtkedit/editcmd.c:1020
 msgid "Continue"
-msgstr ""
+msgstr "Продовжити"
 
 #. Heads the 'Load' file dialog box
 #: gtkedit/editcmd.c:859 gtkedit/editcmd.c:875
 msgid " Load "
-msgstr ""
+msgstr " Завантаження "
 
 #: gtkedit/editcmd.c:859
 msgid " Error trying to open file for reading "
@@ -1828,11 +1844,11 @@ msgstr " Помилка на спроб╕ в╕дкрити файл на зчитування "
 
 #: gtkedit/editcmd.c:1020 gtkedit/editcmd.c:1117
 msgid " Block is large, you may not be able to undo this action. "
-msgstr ""
+msgstr " Блок надто великий, ви не зможете зробити в╕дкат ц╕╓╖ д╕╖. "
 
 #: gtkedit/editcmd.c:1117
 msgid " Continue "
-msgstr ""
+msgstr " Продовжити "
 
 #: gtkedit/editcmd.c:1117
 msgid " Cancel "
@@ -1840,11 +1856,11 @@ msgstr " В╕дм╕на "
 
 #: gtkedit/editcmd.c:1173
 msgid "o&Ne"
-msgstr ""
+msgstr "один"
 
 #: gtkedit/editcmd.c:1175 src/filegui.c:597
 msgid "al&L"
-msgstr ""
+msgstr "вс╕"
 
 #: gtkedit/editcmd.c:1177 src/file.c:2190 src/filegui.c:267
 msgid "&Skip"
@@ -1860,7 +1876,7 @@ msgstr " Зам╕нити на: "
 
 #: gtkedit/editcmd.c:1189
 msgid " Confirm replace "
-msgstr ""
+msgstr " П╕дтвердження зам╕ни "
 
 #: gtkedit/editcmd.c:1221 gtkedit/editcmd.c:1306
 msgid "scanf &Expression"
@@ -2144,7 +2160,7 @@ msgstr " Введ╕ть параметри sort розд╕лен╕ пропусками: "
 
 #: gtkedit/editcmd.c:2772 gtkedit/editcmd.c:2778
 msgid " Sort "
-msgstr ""
+msgstr " Сортування "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2774
@@ -2159,7 +2175,7 @@ msgstr ""
 #. Not essential to translate
 #: gtkedit/editcmd.c:2804 gtkedit/editcmd.c:2834
 msgid " Process block "
-msgstr ""
+msgstr " Обробка блоку "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2836
@@ -2637,7 +2653,7 @@ msgstr "Помилка ╕н╕ц╕ал╕зац╕╖ редактора.\n"
 #: src/main.c:1719 src/screen.c:2395 src/screen.c:2425 src/tree.c:1008
 #: src/view.c:2068
 msgid "Help"
-msgstr "Пом╕ч"
+msgstr "Допомога"
 
 #: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
@@ -4229,11 +4245,11 @@ msgstr "Шукати знову"
 
 #: src/find.c:761
 msgid "View this file"
-msgstr ""
+msgstr "Переглянути цей файл"
 
 #: src/find.c:762
 msgid "Edit this file"
-msgstr ""
+msgstr "Редагувати цей файл"
 
 #: src/find.c:763
 msgid "Send the results to a Panel"
@@ -4270,7 +4286,7 @@ msgstr ""
 
 #: src/help.c:741
 msgid " Help "
-msgstr ""
+msgstr " Дов╕дка "
 
 #: src/help.c:766 src/user.c:637
 #, c-format
@@ -4278,6 +4294,8 @@ msgid ""
 " Can't open file %s \n"
 " %s "
 msgstr ""
+" Неможливо в╕дкрити файл %s \n"
+" %s "
 
 #: src/help.c:771
 #, c-format
@@ -4286,7 +4304,7 @@ msgstr ""
 
 #: src/help.c:808
 msgid "Index"
-msgstr ""
+msgstr "Покажчик"
 
 #: src/help.c:810
 msgid "Prev"
@@ -4376,15 +4394,15 @@ msgstr "Назва ново╖ групи"
 #: src/hotlist.c:988
 #, c-format
 msgid "Label for \"%s\":"
-msgstr ""
+msgstr "Позначка до \"%s\":"
 
 #: src/hotlist.c:992
 msgid " Add to hotlist "
-msgstr ""
+msgstr " Додати до списку "
 
 #: src/hotlist.c:1029
 msgid " Remove: "
-msgstr ""
+msgstr " Видалити: "
 
 #: src/hotlist.c:1033
 msgid ""
@@ -4402,11 +4420,11 @@ msgstr " Група верхнього р╕вня "
 
 #: src/hotlist.c:1394
 msgid "Hotlist is now kept in file ~/"
-msgstr ""
+msgstr "Список збережено у файл╕ ~/"
 
 #: src/hotlist.c:1396
 msgid "MC will load hotlist from ~/"
-msgstr ""
+msgstr "Завантажено список з ~/"
 
 #: src/hotlist.c:1398
 msgid "and then delete [Hotlist] section there"
@@ -4414,11 +4432,11 @@ msgstr ""
 
 #: src/hotlist.c:1400 src/hotlist.c:1419 src/hotlist.c:1442 src/hotlist.c:1467
 msgid " Hotlist Load "
-msgstr ""
+msgstr " Завантаження списку "
 
 #: src/hotlist.c:1416 src/hotlist.c:1464
 msgid "MC was unable to write ~/"
-msgstr ""
+msgstr "Неможливо записати ~/"
 
 #: src/hotlist.c:1417
 msgid " file, your old hotlist entries were not deleted"
@@ -5266,7 +5284,7 @@ msgstr ""
 
 #: src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
 msgid "Other command"
-msgstr ""
+msgstr "╤нша команда"
 
 #: src/panelize.c:260
 msgid " Add to external panelize "
@@ -5318,7 +5336,7 @@ msgstr "ЧасС"
 
 #: src/screen.c:421
 msgid "Perm"
-msgstr ""
+msgstr "Права"
 
 #: src/screen.c:422
 msgid "Nl"
@@ -5445,6 +5463,8 @@ msgid ""
 " Can't chdir to \"%s\" \n"
 " %s "
 msgstr ""
+" Неможливо зм╕нити каталог на \"%s\" \n"
+" %s "
 
 #: src/tree.c:1012
 msgid "Forget"
@@ -5460,6 +5480,8 @@ msgid ""
 "Can't write to the %s file:\n"
 "%s\n"
 msgstr ""
+"Неможливо записати у файл %s:\n"
+"%s\n"
 
 #: src/user.c:250
 #, c-format
@@ -5468,7 +5490,7 @@ msgstr ""
 
 #: src/user.c:383
 msgid " Debug "
-msgstr ""
+msgstr " Налагодження "
 
 #: src/user.c:392
 msgid " ERROR: "
