@@ -408,7 +408,7 @@ regex/\.(tar|TAR)$
 	View=%view{ascii} tar tvvf %f
 
 # zip
-type/^Zip\ archive
+type/^(Zip|ZIP)\ archive
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
 
