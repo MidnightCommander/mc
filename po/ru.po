@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2002-09-22 15:44-0400\n"
+"POT-Creation-Date: 2002-09-26 21:21-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -21,42 +21,37 @@ msgstr ""
 "Content-Type: text/plain; charset=koi8-r\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: edit/edit.c:175 edit/edit.c:341 edit/edit.c:346 edit/edit.c:360
-#: edit/edit.c:364 edit/edit.c:402 edit/edit.c:408 edit/edit.c:415
-#: edit/edit.c:427 edit/editcmd.c:257 edit/editcmd.c:263 edit/editcmd.c:1573
-#: src/wtools.c:134 vfs/vfs.c:1845
+#: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
+#: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:255
+#: edit/editcmd.c:261 edit/editcmd.c:1564 src/wtools.c:132 vfs/vfs.c:1848
 msgid " Error "
 msgstr " Ошибка "
 
-#: edit/edit.c:175 edit/edit.c:364 edit/edit.c:408
+#: edit/edit.c:163 edit/edit.c:338
 msgid " Failed trying to open file for reading: "
 msgstr " Сбой открытия файла для чтения: "
 
-#: edit/edit.c:341
+#: edit/edit.c:289
 msgid " Error reading from pipe: "
 msgstr " Ошибка чтения из канала: "
 
-#: edit/edit.c:346
+#: edit/edit.c:294
 msgid " Failed trying to open pipe for reading: "
 msgstr " Сбой открытия канала для чтения: "
 
-#: edit/edit.c:360
-msgid " Error reading file: "
-msgstr " Ошибка чтения файла: "
-
-#: edit/edit.c:402
+#: edit/edit.c:332
 msgid " Not an ordinary file: "
 msgstr " Необычный файл: "
 
-#: edit/edit.c:415
+#: edit/edit.c:345
 msgid " Cannot get size/permissions info on file: "
 msgstr " Невозможно получить размер/права доступа для файла: "
 
-#: edit/edit.c:427
+#: edit/edit.c:357
 msgid " File is too large: "
 msgstr " Слишком большой файл: "
 
-#: edit/edit.c:428
+#: edit/edit.c:358
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -64,24 +59,24 @@ msgstr ""
 " \n"
 " Увеличьте edit.h:MAXBUF и перекомпилируйте редактор. "
 
-#: edit/edit.c:2532
+#: edit/edit.c:2459
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
-#: edit/edit.h:343 edit/edit.h:344
+#: edit/edit.h:319 edit/edit.h:320
 msgid " Enter file name: "
 msgstr " Введите имя файла: "
 
-#: edit/edit.h:347
+#: edit/edit.h:323
 msgid "&Dismiss"
 msgstr "Закрыть"
 
-#: edit/edit.h:349 edit/editcmd.c:344 edit/editcmd.c:1092 edit/editcmd.c:1173
-#: edit/editcmd.c:2346 edit/editmenu.c:32 edit/editoptions.c:65
-#: src/boxes.c:137 src/boxes.c:274 src/boxes.c:372 src/boxes.c:464
-#: src/boxes.c:587 src/boxes.c:710 src/boxes.c:938 src/boxes.c:1007
-#: src/filegui.c:772 src/find.c:149 src/layout.c:365 src/option.c:148
-#: src/wtools.c:378
+#: edit/edit.h:325 edit/editcmd.c:335 edit/editcmd.c:1083 edit/editcmd.c:1164
+#: edit/editcmd.c:2341 edit/editmenu.c:30 edit/editoptions.c:65
+#: src/boxes.c:139 src/boxes.c:276 src/boxes.c:374 src/boxes.c:466
+#: src/boxes.c:589 src/boxes.c:712 src/boxes.c:940 src/boxes.c:1009
+#: src/filegui.c:771 src/find.c:148 src/layout.c:363 src/option.c:148
+#: src/wtools.c:376
 msgid "&Ok"
 msgstr "&Дальше"
 
@@ -94,7 +89,7 @@ msgid " Execute Macro "
 msgstr " Выполнить макрос "
 
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
-#: edit/editcmd.c:632
+#: edit/editcmd.c:623
 msgid " Press macro hotkey: "
 msgstr " Нажмите горячую клавишу для макроса: "
 
@@ -106,124 +101,124 @@ msgstr " Вставить литерал "
 msgid " Press any key: "
 msgstr " Нажмите любую клавишу: "
 
-#: edit/editcmd.c:257
+#: edit/editcmd.c:255
 msgid " Error writing to pipe: "
 msgstr " Ошибка записи в канал: "
 
-#: edit/editcmd.c:263
+#: edit/editcmd.c:261
 msgid " Failed trying to open pipe for writing: "
 msgstr " Сбой открытия канала для записи: "
 
-#: edit/editcmd.c:337
+#: edit/editcmd.c:328
 msgid "Quick save "
 msgstr "Быстрое сохранение"
 
-#: edit/editcmd.c:338
+#: edit/editcmd.c:329
 msgid "Safe save "
 msgstr "Безопасное сохранение"
 
-#: edit/editcmd.c:339
+#: edit/editcmd.c:330
 msgid "Do backups -->"
 msgstr "Резервные копии -->"
 
-#: edit/editcmd.c:342 edit/editcmd.c:1034 edit/editcmd.c:1090
-#: edit/editcmd.c:1171 edit/editcmd.c:2344 edit/editoptions.c:62
-#: src/achown.c:71 src/boxes.c:138 src/boxes.c:275 src/boxes.c:370
-#: src/boxes.c:462 src/boxes.c:584 src/boxes.c:708 src/boxes.c:1007
-#: src/chmod.c:103 src/chown.c:75 src/cmd.c:872 src/filegui.c:755
-#: src/find.c:149 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:811
-#: src/hotlist.c:907 src/layout.c:366 src/learn.c:60 src/option.c:149
-#: src/panelize.c:74 src/view.c:390 src/view.c:412 src/wtools.c:59
-#: src/wtools.c:376
+#: edit/editcmd.c:333 edit/editcmd.c:1025 edit/editcmd.c:1081
+#: edit/editcmd.c:1162 edit/editcmd.c:2339 edit/editoptions.c:62
+#: src/achown.c:71 src/boxes.c:140 src/boxes.c:277 src/boxes.c:372
+#: src/boxes.c:464 src/boxes.c:586 src/boxes.c:710 src/boxes.c:1009
+#: src/chmod.c:103 src/chown.c:75 src/cmd.c:871 src/filegui.c:754
+#: src/find.c:148 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:811
+#: src/hotlist.c:907 src/layout.c:364 src/learn.c:60 src/option.c:149
+#: src/panelize.c:74 src/view.c:387 src/view.c:409 src/wtools.c:57
+#: src/wtools.c:374
 msgid "&Cancel"
 msgstr "&Прервать"
 
-#: edit/editcmd.c:348
+#: edit/editcmd.c:339
 msgid "Extension:"
 msgstr "Расширение"
 
-#: edit/editcmd.c:354
+#: edit/editcmd.c:345
 msgid " Edit Save Mode "
 msgstr " Режим сохранения "
 
-#: edit/editcmd.c:419 edit/editcmd.c:454
+#: edit/editcmd.c:410 edit/editcmd.c:445
 msgid " Save As "
 msgstr " Сохранить как "
 
-#: edit/editcmd.c:433 edit/editcmd.c:717 edit/editcmd.c:742 edit/editcmd.c:886
-#: edit/editcmd.c:984 src/file.c:592 src/help.c:317 src/main.c:466
-#: src/screen.c:1375 src/screen.c:1995 src/selcodepage.c:101
-#: src/subshell.c:703 src/utilunix.c:352 src/utilunix.c:356 src/utilunix.c:378
-#: src/utilunix.c:430 vfs/mcfs.c:127
+#: edit/editcmd.c:424 edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
+#: edit/editcmd.c:975 src/file.c:613 src/help.c:317 src/main.c:463
+#: src/screen.c:1374 src/screen.c:1944 src/selcodepage.c:101
+#: src/subshell.c:702 src/utilunix.c:351 src/utilunix.c:355 src/utilunix.c:377
+#: src/utilunix.c:429 vfs/mcfs.c:124
 msgid " Warning "
 msgstr " Предупреждение "
 
-#: edit/editcmd.c:434
+#: edit/editcmd.c:425
 msgid " A file already exists with this name. "
 msgstr " Файл с таким именем уже существует. "
 
-#: edit/editcmd.c:436
+#: edit/editcmd.c:427
 msgid "Overwrite"
 msgstr "Переписать"
 
-#: edit/editcmd.c:436 edit/editcmd.c:493 edit/editcmd.c:693 edit/editcmd.c:717
-#: edit/editcmd.c:742 edit/editcmd.c:886
+#: edit/editcmd.c:427 edit/editcmd.c:484 edit/editcmd.c:684 edit/editcmd.c:708
+#: edit/editcmd.c:733 edit/editcmd.c:877
 msgid "Cancel"
 msgstr "Прервать"
 
-#: edit/editcmd.c:454 edit/editcmd.c:2098 src/view.c:389
+#: edit/editcmd.c:445 edit/editcmd.c:2093 src/view.c:386
 msgid " Error trying to save file. "
 msgstr " Ошибка при сохранении файла "
 
-#: edit/editcmd.c:551 edit/editcmd.c:559 edit/editcmd.c:584
+#: edit/editcmd.c:542 edit/editcmd.c:550 edit/editcmd.c:575
 msgid " Delete macro "
 msgstr " Удалить макрос "
 
-#: edit/editcmd.c:553
+#: edit/editcmd.c:544
 msgid " Error trying to open temp file "
 msgstr " Ошибка при открытии временного файла "
 
-#: edit/editcmd.c:561 edit/editcmd.c:622 edit/editcmd.c:679
+#: edit/editcmd.c:552 edit/editcmd.c:613 edit/editcmd.c:670
 msgid " Error trying to open macro file "
 msgstr " Ошибка при открытии файла макросов "
 
-#: edit/editcmd.c:585
+#: edit/editcmd.c:576
 msgid " Error trying to overwrite macro file "
 msgstr " Ошибка при перезаписи файла макросов "
 
-#: edit/editcmd.c:601
+#: edit/editcmd.c:592
 msgid " Macro "
 msgstr " Макрос "
 
-#: edit/editcmd.c:603
+#: edit/editcmd.c:594
 msgid " Press the macro's new hotkey: "
 msgstr " Нажмите новую клавишу макроса "
 
-#: edit/editcmd.c:622
+#: edit/editcmd.c:613
 msgid " Save macro "
 msgstr " Сохранить макрос "
 
-#: edit/editcmd.c:631
+#: edit/editcmd.c:622
 msgid " Delete Macro "
 msgstr " Удалить макрос "
 
-#: edit/editcmd.c:678
+#: edit/editcmd.c:669
 msgid " Load macro "
 msgstr " Загрузить макрос "
 
-#: edit/editcmd.c:691
+#: edit/editcmd.c:682
 msgid " Confirm save file? : "
 msgstr " Подтверждаете запись файла?: "
 
-#: edit/editcmd.c:693 src/view.c:388
+#: edit/editcmd.c:684 src/view.c:385
 msgid " Save file "
 msgstr " Сохранить файл "
 
-#: edit/editcmd.c:693 edit/editwidget.c:258 src/view.c:2048
+#: edit/editcmd.c:684 edit/editwidget.c:287 src/view.c:2045
 msgid "Save"
 msgstr "Запись"
 
-#: edit/editcmd.c:717 edit/editcmd.c:742
+#: edit/editcmd.c:708 edit/editcmd.c:733
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -231,267 +226,267 @@ msgstr ""
 " Текущий текст был модифицирован и не сохранен. \n"
 " Продолжение операции приведет к потере изменений. "
 
-#: edit/editcmd.c:717 edit/editcmd.c:742 edit/editcmd.c:886
+#: edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
 msgid "Continue"
 msgstr "Продолжить"
 
-#: edit/editcmd.c:748
+#: edit/editcmd.c:739
 msgid " Load "
 msgstr " Загрузить "
 
-#: edit/editcmd.c:886 edit/editcmd.c:984
+#: edit/editcmd.c:877 edit/editcmd.c:975
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Блок слишком велик, вам может не удастся откатить эту операцию "
 
-#: edit/editcmd.c:984
+#: edit/editcmd.c:975
 msgid " Continue "
 msgstr " Продолжить "
 
-#: edit/editcmd.c:984
+#: edit/editcmd.c:975
 msgid " Cancel "
 msgstr " Прервать "
 
-#: edit/editcmd.c:1036
+#: edit/editcmd.c:1027
 msgid "o&Ne"
 msgstr "&Один"
 
-#: edit/editcmd.c:1038 src/filegui.c:528
+#: edit/editcmd.c:1029 src/filegui.c:527
 msgid "al&L"
 msgstr "&Все"
 
-#: edit/editcmd.c:1040 src/file.c:2076 src/filegui.c:230
+#: edit/editcmd.c:1031 src/file.c:2129 src/filegui.c:229
 msgid "&Skip"
 msgstr "П&ропустить"
 
-#: edit/editcmd.c:1042
+#: edit/editcmd.c:1033
 msgid "&Replace"
 msgstr "&Заменить"
 
-#: edit/editcmd.c:1049 edit/editcmd.c:1056
+#: edit/editcmd.c:1040 edit/editcmd.c:1047
 msgid " Replace with: "
 msgstr " Заменить на: "
 
-#: edit/editcmd.c:1061
+#: edit/editcmd.c:1052
 msgid " Confirm replace "
 msgstr " Подтвердить замену "
 
-#: edit/editcmd.c:1094 edit/editcmd.c:1175
+#: edit/editcmd.c:1085 edit/editcmd.c:1166
 msgid "scanf &Expression"
 msgstr "выражение &scanf"
 
-#: edit/editcmd.c:1096
+#: edit/editcmd.c:1087
 msgid "replace &All"
 msgstr "Заменить &Все"
 
-#: edit/editcmd.c:1098
+#: edit/editcmd.c:1089
 msgid "pr&Ompt on replace"
 msgstr "Подтверждать &замену"
 
-#: edit/editcmd.c:1100 edit/editcmd.c:1177
+#: edit/editcmd.c:1091 edit/editcmd.c:1168
 msgid "&Backwards"
 msgstr "&Назад"
 
-#: edit/editcmd.c:1102 edit/editcmd.c:1179
+#: edit/editcmd.c:1093 edit/editcmd.c:1170
 msgid "&Regular expression"
 msgstr "&Регулярное выражение"
 
-#: edit/editcmd.c:1104 edit/editcmd.c:1181
+#: edit/editcmd.c:1095 edit/editcmd.c:1172
 msgid "&Whole words only"
 msgstr "Только полные &слова"
 
-#: edit/editcmd.c:1106 edit/editcmd.c:1183 src/find.c:141
+#: edit/editcmd.c:1097 edit/editcmd.c:1174 src/find.c:140
 msgid "case &Sensitive"
 msgstr "Учет ре&гистра"
 
-#: edit/editcmd.c:1110
+#: edit/editcmd.c:1101
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Введите порядок аргументов замены, напр. 3,2,1,4 "
 
-#: edit/editcmd.c:1114
+#: edit/editcmd.c:1105
 msgid " Enter replacement string:"
 msgstr " Введите текст для замены: "
 
-#: edit/editcmd.c:1118 edit/editcmd.c:1187 src/view.c:1963
+#: edit/editcmd.c:1109 edit/editcmd.c:1178 src/view.c:1960
 msgid " Enter search string:"
 msgstr " Введите строку для поиска"
 
-#: edit/editcmd.c:1137 edit/editcmd.c:1770 edit/editcmd.c:1800
-#: edit/editcmd.c:1802
+#: edit/editcmd.c:1128 edit/editcmd.c:1761 edit/editcmd.c:1791
+#: edit/editcmd.c:1793
 msgid " Replace "
 msgstr " Заменить "
 
-#: edit/editcmd.c:1201 edit/editcmd.c:1878 edit/editcmd.c:1880
-#: edit/editcmd.c:1908 src/view.c:1493 src/view.c:1572 src/view.c:1692
-#: src/view.c:1704 src/view.c:1921 src/view.c:1963
+#: edit/editcmd.c:1192 edit/editcmd.c:1869 edit/editcmd.c:1871
+#: edit/editcmd.c:1899 src/view.c:1490 src/view.c:1569 src/view.c:1689
+#: src/view.c:1701 src/view.c:1918 src/view.c:1960
 msgid " Search "
 msgstr " Поиск "
 
-#: edit/editcmd.c:1573
+#: edit/editcmd.c:1564
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Неверное регулярное выражение или в scanf-формате много преобразований"
 
-#: edit/editcmd.c:1772
+#: edit/editcmd.c:1763
 msgid " Error in replacement format string. "
 msgstr " Ошибка в формате строки замены "
 
-#: edit/editcmd.c:1800
+#: edit/editcmd.c:1791
 #, c-format
 msgid " %ld replacements made. "
 msgstr " Осуществлено подстановок: %ld "
 
-#: edit/editcmd.c:1802 edit/editcmd.c:1880 edit/editcmd.c:1908 src/view.c:1572
-#: src/view.c:1704
+#: edit/editcmd.c:1793 edit/editcmd.c:1871 edit/editcmd.c:1899 src/view.c:1569
+#: src/view.c:1701
 msgid " Search string not found "
 msgstr " Искомая строка не найдена "
 
-#: edit/editcmd.c:1878
+#: edit/editcmd.c:1869
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d найдено, %d закладок добавлено "
 
-#: edit/editcmd.c:1926
+#: edit/editcmd.c:1917
 msgid " Quit "
 msgstr " Выход "
 
-#: edit/editcmd.c:1926
+#: edit/editcmd.c:1917
 msgid " File was modified, Save with exit? "
 msgstr " Файл был изменен, сохранить при выходе? "
 
-#: edit/editcmd.c:1926
+#: edit/editcmd.c:1917
 msgid "Cancel quit"
 msgstr "Прервать выход"
 
-#: edit/editcmd.c:1926 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:534 src/hotlist.c:1030 src/main.c:627 src/screen.c:1984
-#: src/subshell.c:704 src/tree.c:756 src/view.c:412
+#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
+#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
+#: src/subshell.c:703 src/tree.c:754 src/view.c:409
 msgid "&Yes"
 msgstr "&Да"
 
-#: edit/editcmd.c:1926 src/cmd.c:223 src/file.c:1775 src/file.c:2134
-#: src/filegui.c:533 src/hotlist.c:1030 src/main.c:627 src/screen.c:1984
-#: src/subshell.c:704 src/tree.c:756 src/view.c:412
+#: edit/editcmd.c:1917 src/cmd.c:222 src/file.c:1828 src/file.c:2187
+#: src/filegui.c:532 src/hotlist.c:1030 src/main.c:624 src/screen.c:1933
+#: src/subshell.c:703 src/tree.c:754 src/view.c:409
 msgid "&No"
 msgstr "&Нет"
 
-#: edit/editcmd.c:2033
+#: edit/editcmd.c:2028
 msgid " Copy to clipboard "
 msgstr " Копировать в буфер "
 
-#: edit/editcmd.c:2033 edit/editcmd.c:2046
+#: edit/editcmd.c:2028 edit/editcmd.c:2041
 msgid " Unable to save to file. "
 msgstr " Невозможно сохранить в файл. "
 
-#: edit/editcmd.c:2046
+#: edit/editcmd.c:2041
 msgid " Cut to clipboard "
 msgstr " Вырезать в буфер "
 
-#: edit/editcmd.c:2066 src/view.c:1867
+#: edit/editcmd.c:2061 src/view.c:1864
 msgid " Goto line "
 msgstr " Перейти к строке "
 
-#: edit/editcmd.c:2066
+#: edit/editcmd.c:2061
 msgid " Enter line: "
 msgstr " Введите номер строки: "
 
-#: edit/editcmd.c:2085 edit/editcmd.c:2098
+#: edit/editcmd.c:2080 edit/editcmd.c:2093
 msgid " Save Block "
 msgstr " Сохранить блок "
 
-#: edit/editcmd.c:2110
+#: edit/editcmd.c:2105
 msgid " Insert File "
 msgstr " Вставить файл "
 
-#: edit/editcmd.c:2123
+#: edit/editcmd.c:2118
 msgid " Insert file "
 msgstr " Вставить файл "
 
-#: edit/editcmd.c:2123
+#: edit/editcmd.c:2118
 msgid " Error trying to insert file. "
 msgstr " Ошибка при вставке файла. "
 
-#: edit/editcmd.c:2140
+#: edit/editcmd.c:2135
 msgid " Sort block "
 msgstr " Сортировать блок "
 
-#: edit/editcmd.c:2140 edit/editcmd.c:2234
+#: edit/editcmd.c:2135 edit/editcmd.c:2229
 msgid " You must first highlight a block of text. "
 msgstr " Вы должны сначала выделить блок текста. "
 
-#: edit/editcmd.c:2147
+#: edit/editcmd.c:2142
 msgid " Run Sort "
 msgstr " Выполнить сортировку "
 
-#: edit/editcmd.c:2148
+#: edit/editcmd.c:2143
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Введите параметры сортировки (man sort(1)), разделенные пробелами "
 
-#: edit/editcmd.c:2159 edit/editcmd.c:2164
+#: edit/editcmd.c:2154 edit/editcmd.c:2159
 msgid " Sort "
 msgstr " Сортировка "
 
-#: edit/editcmd.c:2160
+#: edit/editcmd.c:2155
 msgid " Error trying to execute sort command "
 msgstr " Ошибка при выполнении команды sort "
 
-#: edit/editcmd.c:2165
+#: edit/editcmd.c:2160
 msgid " Sort returned non-zero: "
 msgstr " Сортировка вернула ненулевой код: "
 
-#: edit/editcmd.c:2201
+#: edit/editcmd.c:2196
 msgid "Error creating script:"
 msgstr "Ошибка создания скрипта:"
 
-#: edit/editcmd.c:2209
+#: edit/editcmd.c:2204
 msgid "Error reading script:"
 msgstr "Ошибка чтения скрипта:"
 
-#: edit/editcmd.c:2218
+#: edit/editcmd.c:2213
 msgid "Error closing script:"
 msgstr "Ошибка закрытия скрипта:"
 
-#: edit/editcmd.c:2224
+#: edit/editcmd.c:2219
 msgid "Script created:"
 msgstr "Скрипт создан:"
 
-#: edit/editcmd.c:2232
+#: edit/editcmd.c:2227
 msgid "Process block"
 msgstr "Обработать блок"
 
-#: edit/editcmd.c:2339
+#: edit/editcmd.c:2334
 msgid " Mail "
 msgstr " Почта "
 
-#: edit/editcmd.c:2350
+#: edit/editcmd.c:2345
 msgid " Copies to"
 msgstr " Отправить копии адресатам"
 
-#: edit/editcmd.c:2354
+#: edit/editcmd.c:2349
 msgid " Subject"
 msgstr " Тема"
 
-#: edit/editcmd.c:2358
+#: edit/editcmd.c:2353
 msgid " To"
 msgstr " Кому"
 
-#: edit/editcmd.c:2360
+#: edit/editcmd.c:2355
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <Тема> -c <Копии> <Кому>"
 
-#: edit/editmenu.c:50
+#: edit/editmenu.c:48
 msgid " Word wrap "
 msgstr " Перенос слов "
 
-#: edit/editmenu.c:51
+#: edit/editmenu.c:49
 msgid " Enter line length, 0 for off: "
 msgstr " Введите длину строки, 0 для отключения переноса: "
 
-#: edit/editmenu.c:62
+#: edit/editmenu.c:60
 msgid " About "
 msgstr " О программе "
 
-#: edit/editmenu.c:63
+#: edit/editmenu.c:61
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -509,191 +504,191 @@ msgstr ""
 " Текстовый редактор с дружественным интерфейсом пользователя.\n"
 "               Создан для Midnight Commander.\n"
 
-#: edit/editmenu.c:115 edit/editmenu.c:134
+#: edit/editmenu.c:113 edit/editmenu.c:132
 msgid "&Open file..."
 msgstr "&Открыть файл..."
 
-#: edit/editmenu.c:116
+#: edit/editmenu.c:114
 msgid "&New              C-n"
 msgstr "&Новый файл           C-n"
 
-#: edit/editmenu.c:118 edit/editmenu.c:137
+#: edit/editmenu.c:116 edit/editmenu.c:135
 msgid "&Save              F2"
 msgstr "&Сохранить             F2"
 
-#: edit/editmenu.c:119 edit/editmenu.c:138
+#: edit/editmenu.c:117 edit/editmenu.c:136
 msgid "save &As...       F12"
 msgstr "Сохранить &как...     F12"
 
-#: edit/editmenu.c:121 edit/editmenu.c:140
+#: edit/editmenu.c:119 edit/editmenu.c:138
 msgid "&Insert file...   F15"
 msgstr "&Вставить файл...     F15"
 
-#: edit/editmenu.c:122
+#: edit/editmenu.c:120
 msgid "copy to &File...  C-f"
 msgstr "&Копировать в файл... C-f"
 
-#: edit/editmenu.c:124 edit/editmenu.c:143
+#: edit/editmenu.c:122 edit/editmenu.c:141
 msgid "&User menu...     F11"
 msgstr "&Меню пользователя... F11"
 
-#: edit/editmenu.c:127 edit/editmenu.c:146
+#: edit/editmenu.c:125 edit/editmenu.c:144
 msgid "a&Bout...            "
 msgstr "Об &авторах..."
 
-#: edit/editmenu.c:129 edit/editmenu.c:148
+#: edit/editmenu.c:127 edit/editmenu.c:146
 msgid "&Quit             F10"
 msgstr "Вы&ход                F10"
 
-#: edit/editmenu.c:135
+#: edit/editmenu.c:133
 msgid "&New            C-x k"
 msgstr "&Новый файл         C-x k"
 
-#: edit/editmenu.c:141
+#: edit/editmenu.c:139
 msgid "copy to &File...     "
 msgstr "&Копировать в файл..."
 
-#: edit/editmenu.c:153 edit/editmenu.c:170
+#: edit/editmenu.c:151 edit/editmenu.c:168
 msgid "&Toggle Mark       F3"
 msgstr "&Выделение блока        F3"
 
-#: edit/editmenu.c:154 edit/editmenu.c:171
+#: edit/editmenu.c:152 edit/editmenu.c:169
 msgid "&Mark Columns    S-F3"
 msgstr "Выделить &столбцы     S-F3"
 
-#: edit/editmenu.c:156 edit/editmenu.c:173
+#: edit/editmenu.c:154 edit/editmenu.c:171
 msgid "toggle &Ins/overw Ins"
 msgstr "&Режим вставки/замены  Ins"
 
-#: edit/editmenu.c:158 edit/editmenu.c:175
+#: edit/editmenu.c:156 edit/editmenu.c:173
 msgid "&Copy              F5"
 msgstr "&Копировать блок        F5"
 
-#: edit/editmenu.c:159 edit/editmenu.c:176
+#: edit/editmenu.c:157 edit/editmenu.c:174
 msgid "&Move              F6"
 msgstr "&Переместить блок       F6"
 
-#: edit/editmenu.c:160 edit/editmenu.c:177
+#: edit/editmenu.c:158 edit/editmenu.c:175
 msgid "&Delete            F8"
 msgstr "&Удалить блок           F8"
 
-#: edit/editmenu.c:162 edit/editmenu.c:179
+#: edit/editmenu.c:160 edit/editmenu.c:177
 msgid "&Undo             C-u"
 msgstr "&Откат операции        C-u"
 
-#: edit/editmenu.c:164 edit/editmenu.c:181
+#: edit/editmenu.c:162 edit/editmenu.c:179
 msgid "&Beginning     C-PgUp"
 msgstr "&Начало файла       C-PgUp"
 
-#: edit/editmenu.c:165 edit/editmenu.c:182
+#: edit/editmenu.c:163 edit/editmenu.c:180
 msgid "&End           C-PgDn"
 msgstr "Конец &файла        C-PgDn"
 
-#: edit/editmenu.c:187 edit/editmenu.c:194
+#: edit/editmenu.c:185 edit/editmenu.c:192
 msgid "&Search...         F7"
 msgstr "&Поиск...          F7"
 
-#: edit/editmenu.c:188 edit/editmenu.c:195
+#: edit/editmenu.c:186 edit/editmenu.c:193
 msgid "search &Again     F17"
 msgstr "П&родолжить поиск F17"
 
-#: edit/editmenu.c:189 edit/editmenu.c:196
+#: edit/editmenu.c:187 edit/editmenu.c:194
 msgid "&Replace...        F4"
 msgstr "&Замена...         F4"
 
-#: edit/editmenu.c:201 edit/editmenu.c:224
+#: edit/editmenu.c:199 edit/editmenu.c:222
 msgid "&Goto line...            M-l"
 msgstr "&Перейти к строке           M-l"
 
-#: edit/editmenu.c:202 edit/editmenu.c:225
+#: edit/editmenu.c:200 edit/editmenu.c:223
 msgid "goto matching &Bracket   M-b"
 msgstr "Перейти к парной ско&бке    M-b"
 
-#: edit/editmenu.c:204 edit/editmenu.c:227
+#: edit/editmenu.c:202 edit/editmenu.c:225
 msgid "insert &Literal...       C-q"
 msgstr "Вставить &литерал...        C-q"
 
-#: edit/editmenu.c:206 edit/editmenu.c:229
+#: edit/editmenu.c:204 edit/editmenu.c:227
 msgid "&Refresh screen          C-l"
 msgstr "Пере&рисовать экран         C-l"
 
-#: edit/editmenu.c:208 edit/editmenu.c:231
+#: edit/editmenu.c:206 edit/editmenu.c:229
 msgid "&Start record macro      C-r"
 msgstr "&Начать запись макроса      C-r"
 
-#: edit/editmenu.c:209 edit/editmenu.c:232
+#: edit/editmenu.c:207 edit/editmenu.c:230
 msgid "&Finish record macro...  C-r"
 msgstr "&Окончить запись макроса... C-r"
 
-#: edit/editmenu.c:210
+#: edit/editmenu.c:208
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Выполнить макрос...   C-a, KEY"
 
-#: edit/editmenu.c:211 edit/editmenu.c:234
+#: edit/editmenu.c:209 edit/editmenu.c:232
 msgid "delete macr&O...            "
 msgstr "&Удалить макрос"
 
-#: edit/editmenu.c:213 edit/editmenu.c:236
+#: edit/editmenu.c:211 edit/editmenu.c:234
 msgid "insert &Date/time           "
 msgstr "Вставить &Дату/время"
 
-#: edit/editmenu.c:215 edit/editmenu.c:238
+#: edit/editmenu.c:213 edit/editmenu.c:236
 msgid "format p&Aragraph        M-p"
 msgstr "Форматировать &абзац        M-p"
 
-#: edit/editmenu.c:216
+#: edit/editmenu.c:214
 msgid "'ispell' s&Pell check    C-p"
 msgstr "&Контроль орфографии        C-p"
 
-#: edit/editmenu.c:217 edit/editmenu.c:240
+#: edit/editmenu.c:215 edit/editmenu.c:238
 msgid "sor&T...                 M-t"
 msgstr "&Сортировка                 M-t"
 
-#: edit/editmenu.c:218 edit/editmenu.c:241
+#: edit/editmenu.c:216 edit/editmenu.c:239
 msgid "E&xternal Formatter      F19"
 msgstr "&Форматирование             F19"
 
-#: edit/editmenu.c:219 edit/editmenu.c:242
+#: edit/editmenu.c:217 edit/editmenu.c:240
 msgid "&Mail...                    "
 msgstr "&Электронная почта..."
 
-#: edit/editmenu.c:233
+#: edit/editmenu.c:231
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Выполнить макрос... C-x e, KEY"
 
-#: edit/editmenu.c:239
+#: edit/editmenu.c:237
 msgid "'ispell' s&Pell check    M-$"
 msgstr "&Контроль орфографии        M-$"
 
-#: edit/editmenu.c:247 edit/editmenu.c:256
+#: edit/editmenu.c:245 edit/editmenu.c:254
 msgid "&General...  "
 msgstr "&Разное..."
 
-#: edit/editmenu.c:248 edit/editmenu.c:257
+#: edit/editmenu.c:246 edit/editmenu.c:255
 msgid "&Save mode..."
 msgstr "Режим &сохранения..."
 
-#: edit/editmenu.c:250 edit/editmenu.c:259 src/main.c:1070
+#: edit/editmenu.c:248 edit/editmenu.c:257 src/main.c:1067
 msgid "&Layout..."
 msgstr "&Внешний вид"
 
-#: edit/editmenu.c:269 edit/editmenu.c:283 src/chmod.c:155 src/chown.c:122
+#: edit/editmenu.c:267 edit/editmenu.c:281 src/chmod.c:155 src/chown.c:122
 msgid " File "
 msgstr " Файл "
 
-#: edit/editmenu.c:271 edit/editmenu.c:285
+#: edit/editmenu.c:269 edit/editmenu.c:283
 msgid " Edit "
 msgstr " Редактирование "
 
-#: edit/editmenu.c:273 edit/editmenu.c:287
+#: edit/editmenu.c:271 edit/editmenu.c:285
 msgid " Sear/Repl "
 msgstr " Поиск/Замена "
 
-#: edit/editmenu.c:275 edit/editmenu.c:289
+#: edit/editmenu.c:273 edit/editmenu.c:287
 msgid " Command "
 msgstr " Команда "
 
-#: edit/editmenu.c:277 edit/editmenu.c:291
+#: edit/editmenu.c:275 edit/editmenu.c:289
 msgid " Options "
 msgstr " Настройка "
 
@@ -761,53 +756,53 @@ msgstr "Эмуляция раскладки клавиш"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-#: edit/editwidget.c:257 src/help.c:800 src/help.c:821 src/main.c:1395
-#: src/screen.c:2206 src/tree.c:1019 src/view.c:2041
+#: edit/editwidget.c:286 src/help.c:800 src/help.c:821 src/main.c:1392
+#: src/screen.c:2155 src/tree.c:1017 src/view.c:2038
 msgid "Help"
 msgstr "Помощь"
 
-#: edit/editwidget.c:259
+#: edit/editwidget.c:288
 msgid "Mark"
 msgstr "Блок"
 
-#: edit/editwidget.c:260
+#: edit/editwidget.c:289
 msgid "Replac"
 msgstr "Замена"
 
-#: edit/editwidget.c:261 src/file.c:770 src/screen.c:2210 src/tree.c:1025
+#: edit/editwidget.c:290 src/file.c:818 src/screen.c:2159 src/tree.c:1023
 msgid "Copy"
 msgstr "Копия"
 
-#: edit/editwidget.c:262
+#: edit/editwidget.c:291
 msgid "Move"
 msgstr "Переместить"
 
-#: edit/editwidget.c:263 src/view.c:2056
+#: edit/editwidget.c:292 src/view.c:2053
 msgid "Search"
 msgstr "Поиск"
 
-#: edit/editwidget.c:264 src/screen.c:2213
+#: edit/editwidget.c:293 src/screen.c:2162
 msgid "Delete"
 msgstr "Удалить"
 
-#: edit/editwidget.c:266 src/main.c:1397
+#: edit/editwidget.c:295 src/main.c:1394
 msgid "PullDn"
 msgstr "МенюMC"
 
-#: edit/editwidget.c:267 src/help.c:833 src/main.c:1398 src/view.c:2043
-#: src/view.c:2065
+#: edit/editwidget.c:296 src/help.c:833 src/main.c:1395 src/view.c:2040
+#: src/view.c:2062
 msgid "Quit"
 msgstr "Выход"
 
-#: edit/syntax.c:979 edit/syntax.c:984
+#: edit/syntax.c:967 edit/syntax.c:972
 msgid " Load syntax file "
 msgstr " Загрузить синтаксический файл "
 
-#: edit/syntax.c:979
+#: edit/syntax.c:967
 msgid " File access error "
 msgstr " Ошибка доступа к файлу "
 
-#: edit/syntax.c:985
+#: edit/syntax.c:973
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Ошибка в файле %s в строке %d "
@@ -877,27 +872,27 @@ msgstr ""
 " Невозможно изменить владельца \"%s\" \n"
 " %s "
 
-#: src/background.c:178
+#: src/background.c:177
 msgid "Background process:"
 msgstr "Фоновый процесс:"
 
-#: src/background.c:276 src/file.c:2075
+#: src/background.c:275 src/file.c:2128
 msgid " Background process error "
 msgstr " Ошибка фонового процесса "
 
-#: src/background.c:279
+#: src/background.c:278
 msgid " Child died unexpectedly "
 msgstr " Дочерний процесс неожиданно скончался "
 
-#: src/background.c:281
+#: src/background.c:280
 msgid " Unknown error in child "
 msgstr " Неизвестная ошибка в дочернем процессе "
 
-#: src/background.c:296
+#: src/background.c:295
 msgid " Background protocol error "
 msgstr " Ошибка фонового протокола "
 
-#: src/background.c:297
+#: src/background.c:296
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
@@ -921,172 +916,168 @@ msgstr "&Расширенный"
 msgid "&User defined:"
 msgstr "&Определенный пользователем"
 
-#: src/boxes.c:78
-msgid "&Icon view"
-msgstr "&Пиктограммы"
-
-#: src/boxes.c:134
+#: src/boxes.c:136
 msgid "Listing mode"
 msgstr "Формат списка файлов"
 
-#: src/boxes.c:136
+#: src/boxes.c:138
 msgid "user &Mini status"
 msgstr "Строка &мини-статуса в формате пользователя"
 
-#: src/boxes.c:276
+#: src/boxes.c:278
 msgid "&Reverse"
 msgstr "&Обратный"
 
-#: src/boxes.c:277
+#: src/boxes.c:279
 msgid "case sensi&tive"
 msgstr "Учет ре&гистра"
 
-#: src/boxes.c:278
+#: src/boxes.c:280
 msgid "Sort order"
 msgstr "Порядок сортировки"
 
-#: src/boxes.c:375
+#: src/boxes.c:377
 msgid " confirm &Exit "
 msgstr "перед &Выходом"
 
-#: src/boxes.c:377
+#: src/boxes.c:379
 msgid " confirm e&Xecute "
 msgstr "перед &Исполнением"
 
-#: src/boxes.c:379
+#: src/boxes.c:381
 msgid " confirm o&Verwrite "
 msgstr "перед &Перезаписью"
 
-#: src/boxes.c:381
+#: src/boxes.c:383
 msgid " confirm &Delete "
 msgstr "перед &Удалением"
 
-#: src/boxes.c:387
+#: src/boxes.c:389
 msgid " Confirmation "
 msgstr " Запрос подтверждения "
 
-#: src/boxes.c:459
+#: src/boxes.c:461
 msgid "Full 8 bits output"
 msgstr "Полный &8-битный вывод"
 
-#: src/boxes.c:459
+#: src/boxes.c:461
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
 
-#: src/boxes.c:459
+#: src/boxes.c:461
 msgid "7 bits"
 msgstr "&7 бит"
 
-#: src/boxes.c:466 src/boxes.c:590
+#: src/boxes.c:468 src/boxes.c:592
 msgid "F&ull 8 bits input"
 msgstr "Полный 8-битный &ввод"
 
-#: src/boxes.c:474 src/boxes.c:571
+#: src/boxes.c:476 src/boxes.c:573
 msgid " Display bits "
 msgstr " Отображение символов "
 
-#: src/boxes.c:555 src/selcodepage.c:67
+#: src/boxes.c:557 src/selcodepage.c:67
 msgid "Other 8 bit"
 msgstr "Другая 8-битная"
 
-#: src/boxes.c:574
+#: src/boxes.c:576
 msgid "Input / display codepage:"
 msgstr "Кодировка ввода / вывода:"
 
-#: src/boxes.c:593
+#: src/boxes.c:595
 msgid "&Select"
 msgstr "Выбрать"
 
-#: src/boxes.c:713
+#: src/boxes.c:715
 msgid "&Use ~/.netrc"
 msgstr "&Использовать ~/.netrc"
 
-#: src/boxes.c:717
+#: src/boxes.c:719
 msgid "&Always use ftp proxy"
 msgstr "&Всегда использовать FTP прокси"
 
-#: src/boxes.c:719
+#: src/boxes.c:721
 msgid "sec"
 msgstr "сек"
 
-#: src/boxes.c:723
+#: src/boxes.c:725
 msgid "ftpfs directory cache timeout:"
 msgstr "Тайм-аут кеша каталога FTP:"
 
-#: src/boxes.c:727
+#: src/boxes.c:729
 msgid "ftp anonymous password:"
 msgstr "Пароль анонимного FTP:"
 
-#: src/boxes.c:734
+#: src/boxes.c:736
 msgid "Timeout for freeing VFSs:"
 msgstr "Тайм-аут высвобождения ВФС:"
 
-#: src/boxes.c:740
+#: src/boxes.c:742
 msgid " Virtual File System Setting "
 msgstr " Настройки Виртуальной Файловой Системы "
 
-#: src/boxes.c:794
+#: src/boxes.c:796
 msgid "Quick cd"
 msgstr " Смена рабочего каталога "
 
-#: src/boxes.c:798
+#: src/boxes.c:800
 msgid "cd"
 msgstr "Перейти в"
 
-#: src/boxes.c:838
+#: src/boxes.c:840
 msgid "Symbolic link"
 msgstr " Символическая ссылка "
 
-#: src/boxes.c:842
+#: src/boxes.c:844
 msgid "Symbolic link filename:"
 msgstr "Имя символической ссылки:"
 
-#: src/boxes.c:844
+#: src/boxes.c:846
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Имя существующего файла (для ссылки):"
 
-#: src/boxes.c:873
+#: src/boxes.c:875
 msgid "Running "
 msgstr "Выполняется "
 
-#: src/boxes.c:874 src/find.c:713
+#: src/boxes.c:876 src/find.c:712
 msgid "Stopped"
 msgstr "Остановлен"
 
-#: src/boxes.c:935
+#: src/boxes.c:937
 msgid "&Stop"
 msgstr "&Остановить"
 
-#: src/boxes.c:936
+#: src/boxes.c:938
 msgid "&Resume"
 msgstr "&Возобновить"
 
-#: src/boxes.c:937
+#: src/boxes.c:939
 msgid "&Kill"
 msgstr "&Снять"
 
-#: src/boxes.c:974
+#: src/boxes.c:976
 msgid "Background Jobs"
 msgstr " Фоновые задания "
 
-#: src/boxes.c:1006
+#: src/boxes.c:1008
 msgid "Domain:"
 msgstr "Домен:"
 
-#: src/boxes.c:1006
+#: src/boxes.c:1008
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-#: src/boxes.c:1006 vfs/vfs.c:1880
+#: src/boxes.c:1008 vfs/vfs.c:1883
 msgid "Password:"
 msgstr "Пароль:"
 
-#: src/boxes.c:1057
+#: src/boxes.c:1059
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "Пароль для \\\\%s\\%s"
 
-#: src/charsets.c:50 vfs/extfs.c:1333 vfs/sfs.c:306
+#: src/charsets.c:50 vfs/extfs.c:1330 vfs/sfs.c:303
 #, c-format
 msgid "Warning: file %s not found\n"
 msgstr "Предупреждение: файл %s не найден\n"
@@ -1156,7 +1147,7 @@ msgstr "&Установить помеченное"
 msgid "&Marked all"
 msgstr "Отметить &все"
 
-#: src/chmod.c:133 src/screen.c:376
+#: src/chmod.c:133 src/screen.c:375
 msgid "Name"
 msgstr "Имя"
 
@@ -1236,140 +1227,140 @@ msgstr "<Неизвестный>"
 msgid "<Unknown group>"
 msgstr "<Неизвестная>"
 
-#: src/cmd.c:172
+#: src/cmd.c:171
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " Невозможно получить локальную копию %s "
 
-#: src/cmd.c:222
+#: src/cmd.c:221
 msgid " CD "
 msgstr " Сменить каталог "
 
-#: src/cmd.c:222
+#: src/cmd.c:221
 msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
 
-#: src/cmd.c:228 src/cmd.c:726 src/cmd.c:745 src/main.c:845
+#: src/cmd.c:227 src/cmd.c:725 src/cmd.c:744 src/main.c:842
 msgid "Could not change directory"
 msgstr "Невозможно сменить каталог"
 
-#: src/cmd.c:257
+#: src/cmd.c:256
 msgid " View file "
 msgstr " Просмотр файла "
 
-#: src/cmd.c:257
+#: src/cmd.c:256
 msgid " Filename:"
 msgstr " Имя файла:"
 
-#: src/cmd.c:274
+#: src/cmd.c:273
 msgid " Filtered view "
 msgstr " Просмотр вывода команды "
 
-#: src/cmd.c:274
+#: src/cmd.c:273
 msgid " Filter command and arguments:"
 msgstr " Введите команду и ее аргументы: "
 
-#: src/cmd.c:375
+#: src/cmd.c:374
 msgid "Create a new Directory"
 msgstr " Создать новый каталог "
 
-#: src/cmd.c:375
+#: src/cmd.c:374
 msgid " Enter directory name:"
 msgstr " Введите имя каталога:"
 
-#: src/cmd.c:435
+#: src/cmd.c:434
 msgid " Filter "
 msgstr " Фильтр "
 
-#: src/cmd.c:436
+#: src/cmd.c:435
 msgid " Set expression for filtering filenames"
 msgstr " Задайте выражение для отбора имен файлов"
 
-#: src/cmd.c:502
+#: src/cmd.c:501
 msgid " Select "
 msgstr " Отметить группу "
 
-#: src/cmd.c:530 src/cmd.c:581 src/find.c:262
+#: src/cmd.c:529 src/cmd.c:580 src/find.c:261
 msgid "  Malformed regular expression  "
 msgstr "  Регулярное выражение сформировано неверно  "
 
-#: src/cmd.c:554
+#: src/cmd.c:553
 msgid " Unselect "
 msgstr " Снять отметку "
 
-#: src/cmd.c:627
+#: src/cmd.c:626
 msgid "Extension file edit"
 msgstr " Редактирование файла расширений "
 
-#: src/cmd.c:628
+#: src/cmd.c:627
 msgid " Which extension file you want to edit? "
 msgstr " Какой файл расширений Вы хотите редактировать? "
 
-#: src/cmd.c:629 src/cmd.c:655
+#: src/cmd.c:628 src/cmd.c:654
 msgid "&User"
 msgstr "&Пользовательский"
 
-#: src/cmd.c:629 src/cmd.c:655 src/cmd.c:683
+#: src/cmd.c:628 src/cmd.c:654 src/cmd.c:682
 msgid "&System Wide"
 msgstr "&Общесистемный"
 
-#: src/cmd.c:653
+#: src/cmd.c:652
 msgid "Syntax file edit"
 msgstr "Правка файла синтаксиса"
 
-#: src/cmd.c:654
+#: src/cmd.c:653
 msgid " Which syntax file you want to edit? "
 msgstr " Какой файл синтаксиса Вы хотите редактировать? "
 
-#: src/cmd.c:680
+#: src/cmd.c:679
 msgid " Menu edit "
 msgstr " Правка файла меню "
 
-#: src/cmd.c:681
+#: src/cmd.c:680
 msgid " Which menu file will you edit ? "
 msgstr " Какой файл меню Вы хотите редактировать? "
 
-#: src/cmd.c:683
+#: src/cmd.c:682
 msgid "&Local"
 msgstr "&Местный"
 
-#: src/cmd.c:683
+#: src/cmd.c:682
 msgid "&Home"
 msgstr "&Персональный"
 
-#: src/cmd.c:871
+#: src/cmd.c:870
 msgid " Compare directories "
 msgstr " Сравнить каталоги "
 
-#: src/cmd.c:871
+#: src/cmd.c:870
 msgid " Select compare method: "
 msgstr " Выберите метод сравнения: "
 
-#: src/cmd.c:872
+#: src/cmd.c:871
 msgid "&Quick"
 msgstr "&Быстрый"
 
-#: src/cmd.c:872
+#: src/cmd.c:871
 msgid "&Size only"
 msgstr "По &размеру"
 
-#: src/cmd.c:872
+#: src/cmd.c:871
 msgid "&Thorough"
 msgstr "По&байтный"
 
-#: src/cmd.c:882
+#: src/cmd.c:881
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr "Для выполнения этой команды обе панели должны быть в режиме списка"
 
-#: src/cmd.c:897
+#: src/cmd.c:896
 msgid " The command history is empty "
 msgstr " История командной строки пуста "
 
-#: src/cmd.c:903
+#: src/cmd.c:902
 msgid " Command history "
 msgstr " История командной строки "
 
-#: src/cmd.c:942
+#: src/cmd.c:941
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1377,99 +1368,99 @@ msgstr ""
 " Это не xterm и не консоль Linux/SCO; \n"
 "    Панели не могут быть отключены. "
 
-#: src/cmd.c:976
+#: src/cmd.c:975
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Введите `exit' для возврата в Midnight Commander"
 
-#: src/cmd.c:1025
+#: src/cmd.c:1024
 #, c-format
 msgid "Link %s to:"
 msgstr "Создать ссылку с %s на:"
 
-#: src/cmd.c:1026
+#: src/cmd.c:1025
 msgid " Link "
 msgstr " Ссылка "
 
-#: src/cmd.c:1036
+#: src/cmd.c:1035
 #, c-format
 msgid " link: %s "
 msgstr " ссылка: %s "
 
-#: src/cmd.c:1064
+#: src/cmd.c:1063
 #, c-format
 msgid " symlink: %s "
 msgstr " символическая ссылка: %s "
 
-#: src/cmd.c:1098
+#: src/cmd.c:1097
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Символическая ссылка `%s' указывает на: "
 
-#: src/cmd.c:1103
+#: src/cmd.c:1102
 msgid " Edit symlink "
 msgstr " Правка символической ссылки "
 
-#: src/cmd.c:1108
+#: src/cmd.c:1107
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " правка символической ссылки, невозможно удалить %s: %s "
 
-#: src/cmd.c:1112
+#: src/cmd.c:1111
 #, c-format
 msgid " edit symlink: %s "
 msgstr " правка символической ссылки: %s "
 
-#: src/cmd.c:1123
+#: src/cmd.c:1122
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' не является символической ссылкой"
 
-#: src/cmd.c:1264
+#: src/cmd.c:1263
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " Невозможно перейти в %s "
 
-#: src/cmd.c:1273
+#: src/cmd.c:1272
 msgid " Enter machine name (F1 for details): "
 msgstr " Введите имя машины (детали по F1): "
 
-#: src/cmd.c:1278 src/widget.c:1045
+#: src/cmd.c:1277 src/widget.c:1044
 msgid " Link to a remote machine "
 msgstr " Соединение с удаленной машиной "
 
-#: src/cmd.c:1285 src/widget.c:1046
+#: src/cmd.c:1284 src/widget.c:1045
 msgid " FTP to machine "
 msgstr " FTP-соединение с удаленной машиной "
 
-#: src/cmd.c:1291
+#: src/cmd.c:1290
 msgid " Shell link to machine "
 msgstr " Shell-соединение с удаленной машиной "
 
-#: src/cmd.c:1298 src/widget.c:1047
+#: src/cmd.c:1297 src/widget.c:1046
 msgid " SMB link to machine "
 msgstr " SMB связь с машиной "
 
-#: src/cmd.c:1309
+#: src/cmd.c:1308
 msgid " Socket source routing setup "
 msgstr " Настройка распределения источника гнезд"
 
-#: src/cmd.c:1310
+#: src/cmd.c:1309
 msgid " Enter host name to use as a source routing hop: "
 msgstr " Введите имя распределяющего ретранслятора-источника: "
 
-#: src/cmd.c:1318
+#: src/cmd.c:1317
 msgid " Host name "
 msgstr " Имя системы "
 
-#: src/cmd.c:1318
+#: src/cmd.c:1317
 msgid " Error while looking up IP address "
 msgstr " Ошибка поиска IP адреса "
 
-#: src/cmd.c:1329
+#: src/cmd.c:1328
 msgid " Undelete files on an ext2 file system "
 msgstr " Восстановление файлов на файловой системе ext2 "
 
-#: src/cmd.c:1330
+#: src/cmd.c:1329
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -1477,21 +1468,21 @@ msgstr ""
 " Введите имя устройства (без /dev/) на котором\n"
 " восстанавливать файлы после удаления: (детали по F1)"
 
-#: src/cmd.c:1380
+#: src/cmd.c:1379
 msgid " Setup saved to ~/"
 msgstr " Параметры сохранены в ~/"
 
-#: src/cmd.c:1382
+#: src/cmd.c:1381
 msgid " Setup "
 msgstr " Настройка "
 
-#: src/command.c:170
+#: src/command.c:170 src/screen.c:2147 src/tree.c:875
 #, c-format
 msgid ""
-" Cannot chdir to '%s' \n"
+" Cannot chdir to \"%s\" \n"
 " %s "
 msgstr ""
-" Невозможно перейти в '%s' \n"
+" Невозможно перейти в \"%s\" \n"
 " %s "
 
 #: src/command.c:201
@@ -1514,68 +1505,68 @@ msgstr ""
 "\n"
 "\n"
 
-#: src/dir.c:53
+#: src/dir.c:51
 msgid "&Unsorted"
 msgstr "&Без сортировки"
 
-#: src/dir.c:54
+#: src/dir.c:52
 msgid "&Name"
 msgstr "&Имя"
 
-#: src/dir.c:55
+#: src/dir.c:53
 msgid "&Extension"
 msgstr "Рас&ширение"
 
-#: src/dir.c:56
+#: src/dir.c:54
 msgid "&Modify time"
 msgstr "Время &модификации"
 
-#: src/dir.c:57
+#: src/dir.c:55
 msgid "&Access time"
 msgstr "Время &доступа"
 
-#: src/dir.c:58
+#: src/dir.c:56
 msgid "&Change time"
 msgstr "Время &изменения"
 
-#: src/dir.c:59
+#: src/dir.c:57
 msgid "&Size"
 msgstr "&Размер"
 
-#: src/dir.c:60
+#: src/dir.c:58
 msgid "&Inode"
 msgstr "&Узел"
 
-#: src/dir.c:63
+#: src/dir.c:61
 msgid "&Type"
 msgstr "&Тип"
 
-#: src/dir.c:64
+#: src/dir.c:62
 msgid "&Links"
 msgstr "&Ссылки"
 
-#: src/dir.c:65
+#: src/dir.c:63
 msgid "N&GID"
 msgstr "N&GID"
 
-#: src/dir.c:66
+#: src/dir.c:64
 msgid "N&UID"
 msgstr "N&UID"
 
-#: src/dir.c:67
+#: src/dir.c:65
 msgid "&Owner"
 msgstr "&Владелец"
 
-#: src/dir.c:68
+#: src/dir.c:66
 msgid "&Group"
 msgstr "&Группа"
 
-#: src/dir.c:388
+#: src/dir.c:386
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Файл '%s' существует, но невозможно получить свойства: %s"
 
-#: src/ext.c:106 src/user.c:557
+#: src/ext.c:105 src/user.c:565
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -1584,19 +1575,19 @@ msgstr ""
 " Невозможно создать временный командный файл \n"
 " %s "
 
-#: src/ext.c:119 src/user.c:578
+#: src/ext.c:118 src/user.c:586
 msgid " Parameter "
 msgstr " Параметр "
 
-#: src/ext.c:491 src/ext.c:510
+#: src/ext.c:490 src/ext.c:509
 msgid " file error "
 msgstr " ошибка файла "
 
-#: src/ext.c:493 src/ext.c:512
+#: src/ext.c:492 src/ext.c:511
 msgid "Format of the "
 msgstr "Формат "
 
-#: src/ext.c:494
+#: src/ext.c:493
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -1608,7 +1599,7 @@ msgstr ""
 "Пожалуйста возьмите свежую копию из пакета\n"
 "Midnight Commander."
 
-#: src/ext.c:513
+#: src/ext.c:512
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -1618,7 +1609,7 @@ msgstr ""
 "в версии 3.0. Вы можете или\n"
 "скопировать его из "
 
-#: src/ext.c:516
+#: src/ext.c:515
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -1626,31 +1617,31 @@ msgstr ""
 "mc.ext или использовать этот\n"
 "файл как пример написания.\n"
 
-#: src/ext.c:519
+#: src/ext.c:518
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext будет использован в настоящий момент."
 
-#: src/file.c:143 src/tree.c:642
+#: src/file.c:140 src/tree.c:640
 msgid " Copy "
 msgstr " Копирование "
 
-#: src/file.c:144 src/tree.c:683
+#: src/file.c:141 src/tree.c:681
 msgid " Move "
 msgstr " Перемещение "
 
-#: src/file.c:145 src/tree.c:756
+#: src/file.c:142 src/tree.c:754
 msgid " Delete "
 msgstr " Удаление "
 
-#: src/file.c:230
+#: src/file.c:227
 msgid " Invalid target mask "
 msgstr " Неправильный шаблон цели "
 
-#: src/file.c:328
+#: src/file.c:325
 msgid " Could not make the hardlink "
 msgstr " Невозможно создать жесткую ссылку "
 
-#: src/file.c:370
+#: src/file.c:367
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -1659,7 +1650,7 @@ msgstr ""
 " Невозможно прочесть исходную ссылку \"%s\" \n"
 " %s "
 
-#: src/file.c:380
+#: src/file.c:377
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -1670,7 +1661,7 @@ msgstr ""
 "\n"
 " Опция Устойчивые символические ссылки будет отменена "
 
-#: src/file.c:428
+#: src/file.c:425
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -1679,7 +1670,7 @@ msgstr ""
 " Невозможно создать целевую симв. ссылку \"%s\" \n"
 " %s "
 
-#: src/file.c:495
+#: src/file.c:497
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -1688,7 +1679,7 @@ msgstr ""
 " Невозможно переписать каталог \"%s\" \n"
 " %s "
 
-#: src/file.c:504
+#: src/file.c:508
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -1697,12 +1688,12 @@ msgstr ""
 " Невозможно получить свойства исходного файла \"%s\" \n"
 " %s "
 
-#: src/file.c:516
+#: src/file.c:522
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' и `%s' один и тот же файл. "
 
-#: src/file.c:553
+#: src/file.c:564
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -1711,7 +1702,7 @@ msgstr ""
 " Невозможно создать специальный файл \"%s\" \n"
 " %s "
 
-#: src/file.c:562 src/file.c:780
+#: src/file.c:577 src/file.c:829
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -1720,7 +1711,7 @@ msgstr ""
 " Невозможно сменить владельца целевого файла \"%s\" \n"
 " %s "
 
-#: src/file.c:570 src/file.c:796
+#: src/file.c:589 src/file.c:847
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -1729,7 +1720,7 @@ msgstr ""
 " Невозможно сменить режим доступа целевого файла \"%s\" \n"
 " %s "
 
-#: src/file.c:582
+#: src/file.c:603
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -1738,11 +1729,11 @@ msgstr ""
 " Невозможно открыть исходный файл \"%s\" \n"
 " %s "
 
-#: src/file.c:592
+#: src/file.c:614
 msgid " Reget failed, about to overwrite file "
 msgstr " Сбой докачки файла, файл будет переписан "
 
-#: src/file.c:598
+#: src/file.c:621
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -1751,7 +1742,7 @@ msgstr ""
 " Невозможно получить свойства исходного файла \"%s\" \n"
 " %s "
 
-#: src/file.c:619
+#: src/file.c:647
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -1760,7 +1751,7 @@ msgstr ""
 " Невозможно создать целевой файл \"%s\" \n"
 " %s "
 
-#: src/file.c:633
+#: src/file.c:662
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -1769,7 +1760,7 @@ msgstr ""
 " Невозможно получить свойства целевого файла \"%s\" \n"
 " %s "
 
-#: src/file.c:664
+#: src/file.c:696
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -1778,7 +1769,7 @@ msgstr ""
 " Невозможно прочесть исходный файл \"%s\" \n"
 " %s "
 
-#: src/file.c:694
+#: src/file.c:729
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -1787,11 +1778,11 @@ msgstr ""
 " Невозможно записать целевой файл \"%s\" \n"
 " %s "
 
-#: src/file.c:713
+#: src/file.c:748
 msgid "(stalled)"
 msgstr "(застрял)"
 
-#: src/file.c:751
+#: src/file.c:795
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -1800,7 +1791,7 @@ msgstr ""
 " Невозможно закрыть исходный файл \"%s\" \n"
 " %s "
 
-#: src/file.c:760
+#: src/file.c:806
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -1809,19 +1800,19 @@ msgstr ""
 " Невозможно закрыть целевой файл \"%s\" \n"
 " %s "
 
-#: src/file.c:770
+#: src/file.c:819
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Был получен неполный файл. Сохранить?"
 
-#: src/file.c:771
+#: src/file.c:820
 msgid "&Delete"
 msgstr "&Удалить"
 
-#: src/file.c:771 src/hotlist.c:1428
+#: src/file.c:820
 msgid "&Keep"
 msgstr "&Сохранить"
 
-#: src/file.c:837
+#: src/file.c:890
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -1830,7 +1821,7 @@ msgstr ""
 " Невозможно получить свойства исходного каталога \"%s\" \n"
 " %s "
 
-#: src/file.c:860
+#: src/file.c:913
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -1839,7 +1830,7 @@ msgstr ""
 " Исходный каталог \"%s\" каталогом не является \n"
 " %s "
 
-#: src/file.c:868
+#: src/file.c:921
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -1848,7 +1839,7 @@ msgstr ""
 " Невозможно скопировать циклическую символическую ссылку \n"
 " `%s' "
 
-#: src/file.c:901 src/file.c:1924
+#: src/file.c:954 src/file.c:1977
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -1857,7 +1848,7 @@ msgstr ""
 " Назначение \"%s\" должно быть каталогом \n"
 " %s "
 
-#: src/file.c:929
+#: src/file.c:982
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -1866,7 +1857,7 @@ msgstr ""
 " Невозможно создать целевой каталог \"%s\" \n"
 " %s "
 
-#: src/file.c:947
+#: src/file.c:1000
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -1875,7 +1866,7 @@ msgstr ""
 " Невозможно сменить владельца целевого каталога \"%s\" \n"
 " %s "
 
-#: src/file.c:1048
+#: src/file.c:1101
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -1884,17 +1875,17 @@ msgstr ""
 " Невозможно получить свойства файла \"%s\" \n"
 " %s "
 
-#: src/file.c:1070
+#: src/file.c:1123
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' и `%s' один и тот же файл "
 
-#: src/file.c:1077
+#: src/file.c:1130
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Невозможно переписать каталог `%s' "
 
-#: src/file.c:1111
+#: src/file.c:1164
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -1903,7 +1894,7 @@ msgstr ""
 " Невозможно переместить файл \"%s\" в \"%s\" \n"
 " %s "
 
-#: src/file.c:1131
+#: src/file.c:1184
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -1912,22 +1903,22 @@ msgstr ""
 " Невозможно удалить файл \"%s\" \n"
 " %s "
 
-#: src/file.c:1182
+#: src/file.c:1235
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' и `%s' один и тот же каталог "
 
-#: src/file.c:1201
+#: src/file.c:1254
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Невозможно переписать каталог \"%s\" %s "
 
-#: src/file.c:1203
+#: src/file.c:1256
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Невозможно переписать файл \"%s\" %s "
 
-#: src/file.c:1226
+#: src/file.c:1279
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -1936,7 +1927,7 @@ msgstr ""
 " Невозможно переместить каталог \"%s\" в \"%s\" \n"
 " %s "
 
-#: src/file.c:1289
+#: src/file.c:1342
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -1945,7 +1936,7 @@ msgstr ""
 " Невозможно удалить файл \"%s\" \n"
 " %s "
 
-#: src/file.c:1344 src/file.c:1409 src/file.c:1436
+#: src/file.c:1397 src/file.c:1462 src/file.c:1489
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -1954,82 +1945,82 @@ msgstr ""
 " Невозможно удалить каталог \"%s\" \n"
 " %s "
 
-#: src/file.c:1592
+#: src/file.c:1645
 msgid "1Copy"
 msgstr "1Копировать"
 
-#: src/file.c:1592
+#: src/file.c:1645
 msgid "1Move"
 msgstr "1Перенести"
 
-#: src/file.c:1592
+#: src/file.c:1645
 msgid "1Delete"
 msgstr "1Удалить"
 
-#: src/file.c:1607
+#: src/file.c:1660
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
 # msgfmt warnings/errors must be ignored. mc parse this pattern itself.
-#: src/file.c:1609
+#: src/file.c:1662
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o эти %f (%d шт.)%m"
 
-#: src/file.c:1612 vfs/fish.c:552
+#: src/file.c:1665 vfs/fish.c:550
 msgid "file"
 msgstr "файл"
 
-#: src/file.c:1612
+#: src/file.c:1665
 msgid "files"
 msgstr "файлы"
 
-#: src/file.c:1612
+#: src/file.c:1665
 msgid "directory"
 msgstr "каталог"
 
-#: src/file.c:1612
+#: src/file.c:1665
 msgid "directories"
 msgstr "каталоги"
 
-#: src/file.c:1613
+#: src/file.c:1666
 msgid "files/directories"
 msgstr "файлы/каталоги"
 
-#: src/file.c:1613
+#: src/file.c:1666
 msgid " with source mask:"
 msgstr " с исходным шаблоном:"
 
-#: src/file.c:1613
+#: src/file.c:1666
 msgid " to:"
 msgstr " в:"
 
-#: src/file.c:1756
+#: src/file.c:1809
 msgid " Cannot operate on \"..\"! "
 msgstr " Невозможно выполнить указанную операцию на \"..\"! "
 
-#: src/file.c:1825
+#: src/file.c:1878
 msgid " Sorry, I could not put the job in background "
 msgstr " Извините, сделать это в фоновом режиме невозможно "
 
-#: src/file.c:1910 src/file.c:1993
+#: src/file.c:1963 src/file.c:2046
 msgid " Internal failure "
 msgstr " Внутренняя ошибка "
 
-#: src/file.c:1910 src/file.c:1993
+#: src/file.c:1963 src/file.c:2046
 msgid " Unknown file operation "
 msgstr " Неизвестная файловая операция "
 
-#: src/file.c:2076 src/view.c:390
+#: src/file.c:2129 src/view.c:387
 msgid "&Retry"
 msgstr "По&вторить"
 
-#: src/file.c:2076 src/file.c:2136 src/filegui.c:228 src/filegui.c:523
+#: src/file.c:2129 src/file.c:2189 src/filegui.c:227 src/filegui.c:522
 msgid "&Abort"
 msgstr "&Прервать"
 
-#: src/file.c:2127
+#: src/file.c:2180
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2039,7 +2030,7 @@ msgstr ""
 "   Каталог не пуст.    \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2128
+#: src/file.c:2181
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2049,162 +2040,162 @@ msgstr ""
 "   Фоновый процесс: каталог не пуст \n"
 "   Удалить рекурсивно? "
 
-#: src/file.c:2129
+#: src/file.c:2182
 msgid " Delete: "
 msgstr " Удалить: "
 
-#: src/file.c:2135
+#: src/file.c:2188
 msgid "a&ll"
 msgstr "&Все"
 
-#: src/file.c:2135 src/filegui.c:526
+#: src/file.c:2188 src/filegui.c:525
 msgid "non&E"
 msgstr "ни &Одного"
 
-#: src/file.c:2145
+#: src/file.c:2198
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Наберите 'yes' если Вы ДЕЙСТВИТЕЛЬНО хотите удалить "
 
-#: src/file.c:2147
+#: src/file.c:2200
 msgid "all the directories "
 msgstr "удалить все каталоги"
 
-#: src/file.c:2149
+#: src/file.c:2202
 msgid " Recursive Delete "
 msgstr " Рекурсивное удаление "
 
-#: src/file.c:2150
+#: src/file.c:2203
 msgid " Background process: Recursive Delete "
 msgstr " Фоновый процесс: Рекурсивное удаление "
 
-#: src/file.c:2151
+#: src/file.c:2204
 msgid "no"
 msgstr "нет"
 
-#: src/file.c:2153
+#: src/file.c:2206
 msgid "yes"
 msgstr "да"
 
-#: src/filegui.c:330
+#: src/filegui.c:329
 #, c-format
 msgid "ETA %d:%02d.%02d"
 msgstr "ETA %d:%02d.%02d"
 
-#: src/filegui.c:352
+#: src/filegui.c:351
 #, c-format
 msgid "%.2f MB/s"
 msgstr "%.2f МБ/с"
 
-#: src/filegui.c:354
+#: src/filegui.c:353
 #, c-format
 msgid "%.2f KB/s"
 msgstr "%.2f КБ/с"
 
-#: src/filegui.c:356
+#: src/filegui.c:355
 #, c-format
 msgid "%ld B/s"
 msgstr "%ld Б/с"
 
-#: src/filegui.c:378
+#: src/filegui.c:377
 msgid "File"
 msgstr "Файл"
 
-#: src/filegui.c:401
+#: src/filegui.c:400
 msgid "Count"
 msgstr "Счет"
 
-#: src/filegui.c:422
+#: src/filegui.c:421
 msgid "Bytes"
 msgstr "Байт"
 
-#: src/filegui.c:455
+#: src/filegui.c:454
 msgid "Source"
 msgstr "Источник"
 
-#: src/filegui.c:478
+#: src/filegui.c:477
 msgid "Target"
 msgstr "Приемник"
 
-#: src/filegui.c:500
+#: src/filegui.c:499
 msgid "Deleting"
 msgstr "Удаляем"
 
-#: src/filegui.c:521
+#: src/filegui.c:520
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Целевой файл \"%s\" уже существует!"
 
-#: src/filegui.c:524
+#: src/filegui.c:523
 msgid "if &Size differs"
 msgstr "&Различающиеся по длине"
 
-#: src/filegui.c:527
+#: src/filegui.c:526
 msgid "&Update"
 msgstr "&Устаревшие"
 
-#: src/filegui.c:529
+#: src/filegui.c:528
 msgid "Overwrite all targets?"
 msgstr "Переписать все файлы?"
 
-#: src/filegui.c:531
+#: src/filegui.c:530
 msgid "&Reget"
 msgstr "пере&Читать"
 
-#: src/filegui.c:532
+#: src/filegui.c:531
 msgid "ap&Pend"
 msgstr "дописать в &Конец"
 
-#: src/filegui.c:535
+#: src/filegui.c:534
 msgid "Overwrite this target?"
 msgstr "Переписать этот файл?"
 
-#: src/filegui.c:537
+#: src/filegui.c:536
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Дата модификации приемника: %s, длина %d"
 
-#: src/filegui.c:539
+#: src/filegui.c:538
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Дата модификации источника: %s, длина %d"
 
-#: src/filegui.c:615
+#: src/filegui.c:614
 msgid " File exists "
 msgstr " Файл существует "
 
-#: src/filegui.c:617
+#: src/filegui.c:616
 msgid " Background process: File exists "
 msgstr " Фоновый процесс: файл существует "
 
-#: src/filegui.c:738
+#: src/filegui.c:737
 msgid "preserve &Attributes"
 msgstr "Сохранять &атрибуты"
 
-#: src/filegui.c:740
+#: src/filegui.c:739
 msgid "follow &Links"
 msgstr "&Разыменовывать ссылки"
 
-#: src/filegui.c:742
+#: src/filegui.c:741
 msgid "to:"
 msgstr "в:"
 
-#: src/filegui.c:743
+#: src/filegui.c:742
 msgid "&Using shell patterns"
 msgstr "&Метасимволы shell"
 
-#: src/filegui.c:764
+#: src/filegui.c:763
 msgid "&Background"
 msgstr "На &фоне"
 
-#: src/filegui.c:773
+#: src/filegui.c:772
 msgid "&Stable Symlinks"
 msgstr "&Сохранять символические ссылки"
 
-#: src/filegui.c:775
+#: src/filegui.c:774
 msgid "&Dive into subdir if exists"
 msgstr "&Внутрь каталога, если есть"
 
-#: src/filegui.c:929
+#: src/filegui.c:928
 #, c-format
 msgid ""
 "Invalid source pattern `%s' \n"
@@ -2213,73 +2204,73 @@ msgstr ""
 "Неправильный образец `%s' \n"
 " %s "
 
-#: src/find.c:101
+#: src/find.c:100
 msgid "&Suspend"
 msgstr "При&остановить"
 
-#: src/find.c:102
+#: src/find.c:101
 msgid "Con&tinue"
 msgstr "Продолжить"
 
-#: src/find.c:103
+#: src/find.c:102
 msgid "&Chdir"
 msgstr "Пере&ход"
 
-#: src/find.c:104
+#: src/find.c:103
 msgid "&Again"
 msgstr "Пов&тор"
 
-#: src/find.c:105
+#: src/find.c:104
 msgid "&Quit"
 msgstr "&Выход"
 
-#: src/find.c:106 src/panelize.c:77
+#: src/find.c:105 src/panelize.c:77
 msgid "Pane&lize"
 msgstr "Па&нелизация"
 
-#: src/find.c:107
+#: src/find.c:106
 msgid "&View - F3"
 msgstr "Прос&мотр - F3"
 
-#: src/find.c:108
+#: src/find.c:107
 msgid "&Edit - F4"
 msgstr "&Правка - F4"
 
-#: src/find.c:148
+#: src/find.c:147
 msgid "Start at:"
 msgstr "От каталога:"
 
-#: src/find.c:148
+#: src/find.c:147
 msgid "Filename:"
 msgstr "Шаблон имени:"
 
-#: src/find.c:148
+#: src/find.c:147
 msgid "Content: "
 msgstr "Содержит текст:"
 
-#: src/find.c:149 src/main.c:950 src/main.c:977
+#: src/find.c:148 src/main.c:947 src/main.c:974
 msgid "&Tree"
 msgstr "Д&ерево"
 
-#: src/find.c:196 src/find.c:783
+#: src/find.c:195 src/find.c:782
 msgid "Find File"
 msgstr "Поиск файла"
 
-#: src/find.c:444
+#: src/find.c:443
 #, c-format
 msgid "Grepping in %s"
 msgstr "Ищем в %s"
 
-#: src/find.c:515
+#: src/find.c:514
 msgid "Finished"
 msgstr "Готово"
 
-#: src/find.c:539 src/view.c:1493
+#: src/find.c:538 src/view.c:1490
 #, c-format
 msgid "Searching %s"
 msgstr "Ищем %s"
 
-#: src/find.c:713 src/find.c:817
+#: src/find.c:712 src/find.c:816
 msgid "Searching"
 msgstr "Ищем"
 
@@ -2300,7 +2291,7 @@ msgstr " Внутренняя ошибка: Двойное начало области ссылки "
 msgid " Cannot find node %s in help file "
 msgstr " Невозможно найти узел %s в файле помощи "
 
-#: src/help.c:771 src/user.c:688
+#: src/help.c:771 src/user.c:696
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -2321,7 +2312,7 @@ msgstr "Назад"
 msgid "&Move"
 msgstr "Пере&местить"
 
-#: src/hotlist.c:118 src/hotlist.c:1428 src/panelize.c:76
+#: src/hotlist.c:118 src/panelize.c:76
 msgid "&Remove"
 msgstr "&Удалить"
 
@@ -2421,81 +2412,21 @@ msgstr ""
 " Группа не пуста.\n"
 " Удалить ее?"
 
-#: src/hotlist.c:1373
+#: src/hotlist.c:1371
 msgid " Top level group "
 msgstr "Группа верхнего уровня"
 
-#: src/hotlist.c:1401 src/hotlist.c:1449
+#: src/hotlist.c:1394
 msgid "MC was unable to write ~/"
 msgstr "MC не может писать в файл ~/,"
 
-#: src/hotlist.c:1402 src/hotlist.c:1450
+#: src/hotlist.c:1395
 msgid " file, your old hotlist entries were not deleted"
 msgstr "Ваш старый справочник каталогов не удален"
 
-#: src/hotlist.c:1404 src/hotlist.c:1427 src/hotlist.c:1452
+#: src/hotlist.c:1397
 msgid " Hotlist Load "
 msgstr " Загрузка справочника "
-
-#: src/hotlist.c:1416
-msgid "You have ~/"
-msgstr "У Вас есть файл ~/"
-
-#: src/hotlist.c:1416
-msgid " file and [Hotlist] section in ~/"
-msgstr "и секция [Hotlist] в ~/"
-
-#: src/hotlist.c:1417
-msgid "Your ~/"
-msgstr "Ваш ~/"
-
-#: src/hotlist.c:1417
-msgid " most probably was created\n"
-msgstr " скорее всего создан\n"
-
-#: src/hotlist.c:1418
-msgid ""
-"by an earlier development version of MC\n"
-"and is more actual than ~/"
-msgstr ""
-"более ранней промежуточной версией MC\n"
-"и более актуален, чем найденные в ~/"
-
-#: src/hotlist.c:1419
-msgid ""
-" entries\n"
-"\n"
-msgstr ""
-" элементы\n"
-"\n"
-
-#: src/hotlist.c:1420
-msgid ""
-"You can choose between\n"
-"\n"
-"  Remove - remove old hotlist entries from ~/"
-msgstr ""
-"Вы можете выбрать между\n"
-"\n"
-"  Удалить    - удалить элементы старого справочника из ~/"
-
-#: src/hotlist.c:1422
-msgid ""
-"  Keep   - keep your old entries; you will be asked\n"
-"           the same question next time\n"
-"  Merge  - add old entries to hotlist as group \"Entries from ~/"
-msgstr ""
-"  Сохранить  - сохранить ваши старые элементы; в следующий раз\n"
-"               этот вопрос будет повторен\n"
-"  Объединить - добавить старые элементы в группу \"Entries from ~/"
-
-#: src/hotlist.c:1428
-msgid "&Merge"
-msgstr "&Объединить"
-
-#: src/hotlist.c:1440
-msgid " Entries from ~/"
-msgstr "Элементы из ~/"
 
 #: src/info.c:74
 #, c-format
@@ -2598,71 +2529,71 @@ msgstr "Положение: %Xh:%Xh"
 msgid "File:       None"
 msgstr "Файл:      Отсутствует"
 
-#: src/layout.c:155
+#: src/layout.c:153
 msgid "&Vertical"
 msgstr "&Вертикальное"
 
-#: src/layout.c:156
+#: src/layout.c:154
 msgid "&Horizontal"
 msgstr "&Горизонтальное"
 
-#: src/layout.c:167
+#: src/layout.c:165
 msgid "&Xterm hintbar"
 msgstr "Подсказка в &xterm"
 
-#: src/layout.c:168
+#: src/layout.c:166
 msgid "h&Intbar visible"
 msgstr "С&трока подсказки"
 
-#: src/layout.c:169
+#: src/layout.c:167
 msgid "&Keybar visible"
 msgstr "М&етки клавиш"
 
-#: src/layout.c:170
+#: src/layout.c:168
 msgid "command &Prompt"
 msgstr "&Командная строка"
 
-#: src/layout.c:171
+#: src/layout.c:169
 msgid "show &Mini status"
 msgstr "&Мини-статус"
 
-#: src/layout.c:172
+#: src/layout.c:170
 msgid "menu&Bar visible"
 msgstr "&Линейка меню"
 
-#: src/layout.c:173
+#: src/layout.c:171
 msgid "&Equal split"
 msgstr "&Равные размеры"
 
-#: src/layout.c:174
+#: src/layout.c:172
 msgid "pe&Rmissions"
 msgstr "Права д&оступа"
 
-#: src/layout.c:175
+#: src/layout.c:173
 msgid "&File types"
 msgstr "Типы &файлов"
 
-#: src/layout.c:367 src/learn.c:61 src/learn.c:173 src/option.c:150
+#: src/layout.c:365 src/learn.c:61 src/learn.c:173 src/option.c:150
 msgid "&Save"
 msgstr "&Сохранить"
 
-#: src/layout.c:375
+#: src/layout.c:373
 msgid " Panel split "
 msgstr " Разбиение панелей "
 
-#: src/layout.c:376
+#: src/layout.c:374
 msgid " Highlight... "
 msgstr " Цветовыделение "
 
-#: src/layout.c:377 src/option.c:159
+#: src/layout.c:375 src/option.c:159
 msgid " Other options "
 msgstr " Прочие настройки "
 
-#: src/layout.c:378
+#: src/layout.c:376
 msgid "output lines"
 msgstr "строки вывода"
 
-#: src/layout.c:443
+#: src/layout.c:441
 msgid "Layout"
 msgstr "Внешний вид"
 
@@ -2744,7 +2675,7 @@ msgstr "какие клавиши не имеют пометки √. Для обучения клавише выберите"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
-#: src/main.c:467
+#: src/main.c:464
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2756,284 +2687,284 @@ msgstr ""
 " удалили рабочий каталог или дали себе дополнительные \n"
 " привилегии доступа при помощи команды \"su\"? "
 
-#: src/main.c:542
+#: src/main.c:539
 msgid "Press any key to continue..."
 msgstr "Для продолжения нажмите любую клавишу..."
 
-#: src/main.c:588
+#: src/main.c:585
 msgid " The shell is already running a command "
 msgstr " Интерпретатор уже озабочен выполнением команды "
 
-#: src/main.c:625 src/screen.c:1982
+#: src/main.c:622 src/screen.c:1931
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:626
+#: src/main.c:623
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Вы действительно хотите выйти из Midnight Commander? "
 
-#: src/main.c:940
+#: src/main.c:937
 msgid " Listing format edit "
 msgstr "&Редактирование формата списка"
 
-#: src/main.c:940
+#: src/main.c:937
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Новый формат: \"%s\" "
 
-#: src/main.c:947 src/main.c:974
+#: src/main.c:944 src/main.c:971
 msgid "&Listing mode..."
 msgstr "Фор&мат списка..."
 
-#: src/main.c:948 src/main.c:975
+#: src/main.c:945 src/main.c:972
 msgid "&Quick view     C-x q"
 msgstr "&Быстрый просмотр   C-x q"
 
-#: src/main.c:949 src/main.c:976
+#: src/main.c:946 src/main.c:973
 msgid "&Info           C-x i"
 msgstr "&Информация         C-x i"
 
-#: src/main.c:952 src/main.c:979
+#: src/main.c:949 src/main.c:976
 msgid "&Sort order..."
 msgstr "Порядок &сортировки"
 
-#: src/main.c:954 src/main.c:981
+#: src/main.c:951 src/main.c:978
 msgid "&Filter..."
 msgstr "&Фильтр"
 
-#: src/main.c:958 src/main.c:985
+#: src/main.c:955 src/main.c:982
 msgid "&Network link..."
 msgstr "Се&тевое соединение..."
 
-#: src/main.c:960 src/main.c:987
+#: src/main.c:957 src/main.c:984
 msgid "FT&P link..."
 msgstr "&FTP-соединение"
 
-#: src/main.c:961 src/main.c:988
+#: src/main.c:958 src/main.c:985
 msgid "S&hell link..."
 msgstr "S&hell связь..."
 
-#: src/main.c:963 src/main.c:990
+#: src/main.c:960 src/main.c:987
 msgid "SM&B link..."
 msgstr "SM&B связь..."
 
-#: src/main.c:968 src/main.c:995
+#: src/main.c:965 src/main.c:992
 msgid "&Drive...       M-d"
 msgstr "&Диск...              M-d"
 
-#: src/main.c:970 src/main.c:997
+#: src/main.c:967 src/main.c:994
 msgid "&Rescan         C-r"
 msgstr "&Пересмотреть         C-r"
 
-#: src/main.c:1001
+#: src/main.c:998
 msgid "&User menu          F2"
 msgstr "&Меню пользователя     F2"
 
-#: src/main.c:1002
+#: src/main.c:999
 msgid "&View               F3"
 msgstr "Просмотр &файла        F3"
 
-#: src/main.c:1003
+#: src/main.c:1000
 msgid "Vie&w file...         "
 msgstr "&Просмотр файла..."
 
-#: src/main.c:1004
+#: src/main.c:1001
 msgid "&Filtered view     M-!"
 msgstr "&Просмотр команды     M-!"
 
-#: src/main.c:1005
+#: src/main.c:1002
 msgid "&Edit               F4"
 msgstr "&Редактирование        F4"
 
-#: src/main.c:1006
+#: src/main.c:1003
 msgid "&Copy               F5"
 msgstr "&Копирование           F5"
 
-#: src/main.c:1007
+#: src/main.c:1004
 msgid "c&Hmod           C-x c"
 msgstr "Права &доступа      C-x c"
 
-#: src/main.c:1009
+#: src/main.c:1006
 msgid "&Link            C-x l"
 msgstr "&Жесткая ссылка     C-x l"
 
-#: src/main.c:1010
+#: src/main.c:1007
 msgid "&SymLink         C-x s"
 msgstr "&Символич. ссылка   C-x s"
 
-#: src/main.c:1011
+#: src/main.c:1008
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "Правка ссы&лки    C-x C-s"
 
-#: src/main.c:1012
+#: src/main.c:1009
 msgid "ch&Own           C-x o"
 msgstr "&Владелец/группа    C-x o"
 
-#: src/main.c:1013
+#: src/main.c:1010
 msgid "&Advanced chown       "
 msgstr "Пр&ава (расширенные)    "
 
-#: src/main.c:1015
+#: src/main.c:1012
 msgid "&Rename/Move        F6"
 msgstr "Пере&именование        F6"
 
-#: src/main.c:1016
+#: src/main.c:1013
 msgid "&Mkdir              F7"
 msgstr "Со&здание каталога     F7"
 
-#: src/main.c:1017
+#: src/main.c:1014
 msgid "&Delete             F8"
 msgstr "&Удаление              F8"
 
-#: src/main.c:1018
+#: src/main.c:1015
 msgid "&Quick cd          M-c"
 msgstr "Сме&на каталога       M-c"
 
-#: src/main.c:1020
+#: src/main.c:1017
 msgid "select &Group      M-+"
 msgstr "Отметить &группу      M-+"
 
-#: src/main.c:1021
+#: src/main.c:1018
 msgid "u&Nselect group    M-\\"
 msgstr "Снять &отметку        M-\\"
 
-#: src/main.c:1022
+#: src/main.c:1019
 msgid "reverse selec&Tion M-*"
 msgstr "Инвер&тировать отметку  *"
 
-#: src/main.c:1024
+#: src/main.c:1021
 msgid "e&Xit              F10"
 msgstr "Вы&ход                F10"
 
-#: src/main.c:1032
+#: src/main.c:1029
 msgid "&Directory tree"
 msgstr "&Дерево каталогов"
 
-#: src/main.c:1033
+#: src/main.c:1030
 msgid "&Find file            M-?"
 msgstr "Поиск &файла           M-?"
 
-#: src/main.c:1034
+#: src/main.c:1031
 msgid "s&Wap panels          C-u"
 msgstr "&Переставить панели    C-u"
 
-#: src/main.c:1035
+#: src/main.c:1032
 msgid "switch &Panels on/off C-o"
 msgstr "&Отключить панели      C-o"
 
-#: src/main.c:1036
+#: src/main.c:1033
 msgid "&Compare directories  C-x d"
 msgstr "&Сравнить каталоги     C-x d"
 
-#: src/main.c:1037
+#: src/main.c:1034
 msgid "e&Xternal panelize    C-x !"
 msgstr "&Критерий панелизации  C-x !"
 
-#: src/main.c:1038
+#: src/main.c:1035
 msgid "show directory s&Izes"
 msgstr "&Размеры каталогов"
 
-#: src/main.c:1040
+#: src/main.c:1037
 msgid "command &History"
 msgstr "&История команд"
 
-#: src/main.c:1041
+#: src/main.c:1038
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Справочник ката&логов  C-\\"
 
-#: src/main.c:1043
+#: src/main.c:1040
 msgid "&Active VFS list      C-x a"
 msgstr "Список &активных ВФС   C-x a"
 
-#: src/main.c:1044
+#: src/main.c:1041
 msgid "Fr&ee VFSs now"
 msgstr "Освободить ВФС сейчас"
 
-#: src/main.c:1047
+#: src/main.c:1044
 msgid "&Background jobs      C-x j"
 msgstr "Фо&новые задания       C-x j"
 
-#: src/main.c:1051
+#: src/main.c:1048
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Восстановление файлов"
 
-#: src/main.c:1054
+#: src/main.c:1051
 msgid "&Listing format edit"
 msgstr "&Редактирование формата"
 
-#: src/main.c:1059
+#: src/main.c:1056
 msgid "&Extension file edit"
 msgstr "Файл рас&ширений"
 
-#: src/main.c:1060
+#: src/main.c:1057
 msgid "&Menu file edit"
 msgstr "Файл &меню"
 
-#: src/main.c:1062
+#: src/main.c:1059
 msgid "Menu edi&Tor edit"
 msgstr "Правка меню р&едактора"
 
-#: src/main.c:1063
+#: src/main.c:1060
 msgid "&Syntax file edit"
 msgstr "Файл синтаксиса"
 
-#: src/main.c:1069
+#: src/main.c:1066
 msgid "&Configuration..."
 msgstr "&Конфигурация"
 
-#: src/main.c:1071
+#: src/main.c:1068
 msgid "c&Onfirmation..."
 msgstr "&Подтверждение"
 
-#: src/main.c:1072
+#: src/main.c:1069
 msgid "&Display bits..."
 msgstr "&Биты символов..."
 
-#: src/main.c:1074
+#: src/main.c:1071
 msgid "learn &Keys..."
 msgstr "&Распознавание клавиш..."
 
-#: src/main.c:1077
+#: src/main.c:1074
 msgid "&Virtual FS..."
 msgstr "Виртуальные &ФС..."
 
-#: src/main.c:1080
+#: src/main.c:1077
 msgid "&Save setup"
 msgstr "&Сохранить настройки"
 
-#: src/main.c:1090
+#: src/main.c:1087
 msgid " &Above "
 msgstr " Верхняя "
 
-#: src/main.c:1090
+#: src/main.c:1087
 msgid " &Left "
 msgstr " &Левая панель "
 
-#: src/main.c:1093
+#: src/main.c:1090
 msgid " &File "
 msgstr " &Файл "
 
-#: src/main.c:1095
+#: src/main.c:1092
 msgid " &Command "
 msgstr " &Команда "
 
-#: src/main.c:1097
+#: src/main.c:1094
 msgid " &Options "
 msgstr " &Настройки "
 
-#: src/main.c:1099
+#: src/main.c:1096
 msgid " &Below "
 msgstr " Нижняя "
 
-#: src/main.c:1099
+#: src/main.c:1096
 msgid " &Right "
 msgstr " &Правая панель "
 
-#: src/main.c:1142
+#: src/main.c:1139
 msgid " Information "
 msgstr " Информация "
 
-#: src/main.c:1143
+#: src/main.c:1140
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -3045,24 +2976,24 @@ msgstr ""
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
-#: src/main.c:1396 src/screen.c:2207
+#: src/main.c:1393 src/screen.c:2156
 msgid "Menu"
 msgstr "Меню"
 
-#: src/main.c:1534
+#: src/main.c:1531
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
-#: src/main.c:1633
+#: src/main.c:1630
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Благодарим Вас за использование GNU Midnight Commander"
 
-#: src/main.c:1825 src/textconf.c:112
+#: src/main.c:1822 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
-#: src/main.c:2079
+#: src/main.c:2076
 msgid ""
 "Usage is:\n"
 "\n"
@@ -3074,15 +3005,15 @@ msgstr ""
 "mc [флаги] [этот_каталог] [каталог_другой_панели]\n"
 "\n"
 
-#: src/main.c:2085
+#: src/main.c:2082
 msgid "+number"
 msgstr "+число"
 
-#: src/main.c:2086
+#: src/main.c:2083
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
 
-#: src/main.c:2088
+#: src/main.c:2085
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -3092,7 +3023,7 @@ msgstr ""
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-devel@gnome.org\n"
 
-#: src/main.c:2097
+#: src/main.c:2094
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -3130,95 +3061,95 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#: src/main.c:2189
+#: src/main.c:2186
 msgid "Use to debug the background code"
 msgstr "Использовать для отладки фонового кода"
 
-#: src/main.c:2192
+#: src/main.c:2189
 msgid "Request to run in color mode"
 msgstr "Принудительно установить цветной режим"
 
-#: src/main.c:2194
+#: src/main.c:2191
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
-#: src/main.c:2198
+#: src/main.c:2195
 msgid "Edits one file"
 msgstr "Редактировать файл"
 
-#: src/main.c:2202
+#: src/main.c:2199
 msgid "Displays this help message"
 msgstr "Показать это справочное сообщение"
 
-#: src/main.c:2204
+#: src/main.c:2201
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Показать справку, как изменить цветовую схему"
 
-#: src/main.c:2207
+#: src/main.c:2204
 msgid "Log ftp dialog to specified file"
 msgstr "Записывать диалог с FTP в заданный файл"
 
-#: src/main.c:2210
+#: src/main.c:2207
 msgid "Set debug level"
 msgstr "Установить уровень отладки"
 
-#: src/main.c:2214
+#: src/main.c:2211
 msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
-#: src/main.c:2216
+#: src/main.c:2213
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
 
-#: src/main.c:2218
+#: src/main.c:2215
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
-#: src/main.c:2221
+#: src/main.c:2218
 msgid "Disables subshell support"
 msgstr "Отключить поддержку встроенной командной оболочки"
 
-#: src/main.c:2223
+#: src/main.c:2220
 msgid "Force subshell execution"
 msgstr "Принудетельное исполнение во встроенной командной оболочке"
 
-#: src/main.c:2226
+#: src/main.c:2223
 msgid "Prints working directory at program exit"
 msgstr "Печатать рабочий каталог при выходе из программы"
 
-#: src/main.c:2228
+#: src/main.c:2225
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#: src/main.c:2230
+#: src/main.c:2227
 msgid "To run on slow terminals"
 msgstr "Подразумевать медленный терминал"
 
-#: src/main.c:2233
+#: src/main.c:2230
 msgid "Use stickchars to draw"
 msgstr "Использовать псевдографику для рисования"
 
-#: src/main.c:2237
+#: src/main.c:2234
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
-#: src/main.c:2241
+#: src/main.c:2238
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Пытаться использовать termcap вместо terminfo"
 
-#: src/main.c:2244
+#: src/main.c:2241
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
 
-#: src/main.c:2246
+#: src/main.c:2243
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
-#: src/main.c:2248
+#: src/main.c:2245
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
 
-#: src/main.c:2439
+#: src/main.c:2436
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -3226,11 +3157,11 @@ msgstr ""
 "Невозможно открыть tty линию. Вы должны запустить mc без флага -P.\n"
 "На некоторых системах вы можете захотеть запустить # `which mc`\n"
 
-#: src/main.c:2502
+#: src/main.c:2499
 msgid " Notice "
 msgstr " Предупреждение "
 
-#: src/main.c:2503
+#: src/main.c:2500
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -3360,7 +3291,7 @@ msgstr " Добавить в список команд "
 msgid " Enter command label: "
 msgstr " Введите название команды: "
 
-#: src/panelize.c:269 src/user.c:670
+#: src/panelize.c:269 src/user.c:678
 msgid " Oops... "
 msgstr " Ой... "
 
@@ -3396,118 +3327,109 @@ msgstr "Показать это сообщение помощи"
 msgid "Display brief usage message"
 msgstr "Показать краткую инструкцию"
 
-#: src/screen.c:177
+#: src/screen.c:173
 msgid "UP--DIR"
 msgstr "-ВВЕРХ-"
 
-#: src/screen.c:198
+#: src/screen.c:194
 msgid "SYMLINK"
 msgstr "ССЫЛКА"
 
-#: src/screen.c:202
+#: src/screen.c:198
 msgid "SUB-DIR"
 msgstr "ПОД-КАТ"
 
-#: src/screen.c:377 src/screen.c:378
+#: src/screen.c:376 src/screen.c:377
 msgid "Size"
 msgstr "Размер"
 
-#: src/screen.c:380
+#: src/screen.c:379
 msgid "MTime"
 msgstr "Время правки"
 
-#: src/screen.c:381
+#: src/screen.c:380
 msgid "ATime"
 msgstr "Посл. доступ"
 
-#: src/screen.c:382
+#: src/screen.c:381
 msgid "CTime"
 msgstr "Изм. узла"
 
-#: src/screen.c:383
+#: src/screen.c:382
 msgid "Permission"
 msgstr "Атрибуты"
 
-#: src/screen.c:384
+#: src/screen.c:383
 msgid "Perm"
 msgstr "Права"
 
-#: src/screen.c:385
+#: src/screen.c:384
 msgid "Nl"
 msgstr "Кс"
 
-#: src/screen.c:386
+#: src/screen.c:385
 msgid "Inode"
 msgstr "Узел"
 
-#: src/screen.c:387
+#: src/screen.c:386
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:388
+#: src/screen.c:387
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:389
+#: src/screen.c:388
 msgid "Owner"
 msgstr "Владелец"
 
-#: src/screen.c:390
+#: src/screen.c:389
 msgid "Group"
 msgstr "Группа"
 
-#: src/screen.c:623
+#: src/screen.c:622
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s байт в %d файле"
 
-#: src/screen.c:623
+#: src/screen.c:622
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s байт в %d файлах"
 
-#: src/screen.c:649
+#: src/screen.c:648
 msgid "<readlink failed>"
 msgstr "<сбой чтения ссылки>"
 
-#: src/screen.c:1249
+#: src/screen.c:1248
 msgid "Unknown tag on display format: "
 msgstr "Неизвестный тег в формате отображения: "
 
-#: src/screen.c:1375
+#: src/screen.c:1374
 msgid "User supplied format looks invalid, reverting to default."
 msgstr "Пользовательский формат выглядит неверным, возвращаю к стандартному."
 
-#: src/screen.c:1983
+#: src/screen.c:1932
 msgid " Do you really want to execute? "
 msgstr " Вы действительно хотите выполнить это? "
 
-#: src/screen.c:1995
+#: src/screen.c:1944
 msgid " No action taken "
 msgstr " Действие не выполнено "
 
-#: src/screen.c:2198 src/tree.c:877
-#, c-format
-msgid ""
-" Cannot chdir to \"%s\" \n"
-" %s "
-msgstr ""
-" Невозможно перейти в \"%s\" \n"
-" %s "
-
-#: src/screen.c:2208
+#: src/screen.c:2157
 msgid "View"
 msgstr "Просмотр"
 
-#: src/screen.c:2209 src/view.c:2052
+#: src/screen.c:2158 src/view.c:2049
 msgid "Edit"
 msgstr "Правка"
 
-#: src/screen.c:2211 src/tree.c:1027
+#: src/screen.c:2160 src/tree.c:1025
 msgid "RenMov"
 msgstr "Перемес"
 
-#: src/screen.c:2212 src/tree.c:1031
+#: src/screen.c:2161 src/tree.c:1029
 msgid "Mkdir"
 msgstr "НвКтлог"
 
@@ -3529,7 +3451,7 @@ msgstr ""
 "кодировку в меню Настройки / Биты символов...!\n"
 "Не забудьте сохранить настройки."
 
-#: src/slint.c:193
+#: src/slint.c:191
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
@@ -3538,105 +3460,81 @@ msgstr ""
 "Размер экрана %dx%d не поддерживается.\n"
 "Проверьте переменную окружения TERM.\n"
 
-#: src/subshell.c:418
+#: src/subshell.c:417
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Невозможно открыть именованный канал %s\n"
 
-#: src/subshell.c:703
+#: src/subshell.c:702
 msgid " The shell is still active. Quit anyway? "
 msgstr " Оболочка все еще активна. Выйти все-таки? "
 
-#: src/subshell.c:831
+#: src/subshell.c:830
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Внимание: Невозможно перейти в %s. \n"
 
-#: src/textconf.c:27
-msgid "Virtual File System: tarfs, extfs"
-msgstr "Виртуальная Файловая Система: tarfs, extfs"
-
-#: src/textconf.c:28
-msgid ", cpiofs"
-msgstr ", cpiofs"
-
-#: src/textconf.c:30
-msgid ", ftpfs"
-msgstr ", ftpfs"
-
-#: src/textconf.c:31
-msgid ", fish"
-msgstr ", fish"
-
-#: src/textconf.c:33
-msgid ", mcfs"
-msgstr ", mcfs"
-
-#: src/textconf.c:36
-msgid ", smbfs"
-msgstr ", smbfs"
-
-#: src/textconf.c:40
-msgid ", undelfs"
-msgstr ", undelfs"
-
-#: src/textconf.c:46
+#: src/textconf.c:50
 msgid "With builtin Editor\n"
 msgstr "Со встроенным редактором\n"
 
-#: src/textconf.c:52
+#: src/textconf.c:56
 msgid "Using system-installed S-Lang library"
 msgstr "С установленной в системе библиотекой S-Lang"
 
-#: src/textconf.c:54
+#: src/textconf.c:58
 msgid "Using included S-Lang library"
 msgstr "С включенной библиотекой S-Lang"
 
-#: src/textconf.c:60
+#: src/textconf.c:64
 msgid "with termcap database"
 msgstr "с базой данных termcap"
 
-#: src/textconf.c:62
+#: src/textconf.c:66
 msgid "with terminfo database"
 msgstr "с базой данных terminfo"
 
-#: src/textconf.c:66
+#: src/textconf.c:70
 msgid "Using the ncurses library"
 msgstr "С библиотекой ncurses"
 
-#: src/textconf.c:75
+#: src/textconf.c:79
 msgid "With optional subshell support"
 msgstr "С опциональной поддержкой внутренней командной оболочки"
 
-#: src/textconf.c:77
+#: src/textconf.c:81
 msgid "With subshell support as default"
 msgstr "C поддержкой внутренней командной оболочки"
 
-#: src/textconf.c:83
+#: src/textconf.c:87
 msgid "With support for background operations\n"
 msgstr "С поддержкой фоновых операций\n"
 
-#: src/textconf.c:87
+#: src/textconf.c:91
 msgid "With mouse support on xterm and Linux console\n"
 msgstr "С поддержкой мыши в xterm и консоли Linux\n"
 
-#: src/textconf.c:89
+#: src/textconf.c:93
 msgid "With mouse support on xterm\n"
 msgstr "С поддержкой мыши в xterm\n"
 
-#: src/textconf.c:93
+#: src/textconf.c:97
 msgid "With support for X11 events\n"
 msgstr "С поддержкой событий X11\n"
 
-#: src/textconf.c:97
+#: src/textconf.c:101
 msgid "With internationalization support\n"
 msgstr "С поддержкой интернационализации\n"
 
-#: src/textconf.c:101
+#: src/textconf.c:105
 msgid "With multiple codepages support\n"
 msgstr "С поддержкой многих кодировок\n"
 
-#: src/tree.c:196
+#: src/textconf.c:121
+msgid "Virtual File System:"
+msgstr "Виртуальная Файловая Система:"
+
+#: src/tree.c:194
 #, c-format
 msgid ""
 "Cannot open the %s file for writing:\n"
@@ -3645,17 +3543,17 @@ msgstr ""
 "Невозможно открыть файл %s на запись:\n"
 "%s\n"
 
-#: src/tree.c:640
+#: src/tree.c:638
 #, c-format
 msgid "Copy \"%s\" directory to:"
 msgstr " Копировать каталог \"%s\" в:"
 
-#: src/tree.c:681
+#: src/tree.c:679
 #, c-format
 msgid "Move \"%s\" directory to:"
 msgstr " Переместить каталог \"%s\" в:"
 
-#: src/tree.c:691
+#: src/tree.c:689
 #, c-format
 msgid ""
 " Cannot stat the destination \n"
@@ -3664,36 +3562,36 @@ msgstr ""
 " Невозможно получить свойства места назначения \n"
 " %s "
 
-#: src/tree.c:697
+#: src/tree.c:695
 msgid " The destination isn't a directory "
 msgstr " Место назначения не является каталогом "
 
-#: src/tree.c:755
+#: src/tree.c:753
 #, c-format
 msgid "  Delete %s?  "
 msgstr "  Удалить %s?  "
 
-#: src/tree.c:787
+#: src/tree.c:785
 msgid "Static"
 msgstr "Статич"
 
-#: src/tree.c:787
+#: src/tree.c:785
 msgid "Dynamc"
 msgstr "Динамч"
 
-#: src/tree.c:1021
+#: src/tree.c:1019
 msgid "Rescan"
 msgstr "Пересм."
 
-#: src/tree.c:1023
+#: src/tree.c:1021
 msgid "Forget"
 msgstr "Забыть"
 
-#: src/tree.c:1036
+#: src/tree.c:1034
 msgid "Rmdir"
 msgstr "УдКтлог"
 
-#: src/treestore.c:353
+#: src/treestore.c:352
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
@@ -3702,46 +3600,41 @@ msgstr ""
 "Невозможно писать в файл %s:\n"
 "%s\n"
 
-#: src/user.c:134
+#: src/user.c:131
 msgid " Format error on file Extensions File "
 msgstr " Ошибка формата в файле Расширений файлов "
 
-#: src/user.c:135
+#: src/user.c:132
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " Макрос %%var не имеет значения по умолчанию "
 
-#: src/user.c:136
+#: src/user.c:133
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " Макрос %%var не имеет переменной "
 
-#: src/user.c:284
-#, c-format
-msgid " Invalid shell pattern definition \"%c\". "
-msgstr " Неверное определение образца оболочки \"%c\". "
-
-#: src/user.c:437
+#: src/user.c:445
 msgid " Debug "
 msgstr " Отладка "
 
-#: src/user.c:446
+#: src/user.c:454
 msgid " ERROR: "
 msgstr " ОШИБКА: "
 
-#: src/user.c:450
+#: src/user.c:458
 msgid " True:  "
 msgstr " Истина: "
 
-#: src/user.c:452
+#: src/user.c:460
 msgid " False: "
 msgstr " Ложь: "
 
-#: src/user.c:647
+#: src/user.c:655
 msgid " Warning -- ignoring file "
 msgstr " Предупреждение - файл игнорируется "
 
-#: src/user.c:648
+#: src/user.c:656
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -3751,45 +3644,45 @@ msgstr ""
 "или доступен другим на запись. Использование такого файла неприемлемо\n"
 "c точки зрения безопасности."
 
-#: src/user.c:671
+#: src/user.c:679
 msgid " I can't run programs while logged on a non local directory "
 msgstr " Невозможно исполнять программы, будучи не в локальном каталоге "
 
-#: src/user.c:769
+#: src/user.c:777
 #, c-format
 msgid " No suitable entries found in %s "
 msgstr " Не найдено подходящих записей в %s"
 
-#: src/user.c:775
+#: src/user.c:783
 msgid " User menu "
 msgstr " Меню пользователя "
 
-#: src/util.c:223
+#: src/util.c:220
 msgid "name_trunc: too big"
 msgstr "name_trunc: Слишком большой"
 
-#: src/util.c:673 src/util.c:699
+#: src/util.c:670 src/util.c:696
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
-#: src/util.c:674 src/util.c:697
+#: src/util.c:671 src/util.c:694
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
-#: src/utilunix.c:330
+#: src/utilunix.c:329
 #, c-format
 msgid "Cannot create temporary directory %s: %s\n"
 msgstr "Невозможно создать временный каталог %s: %s\n"
 
-#: src/utilunix.c:352
+#: src/utilunix.c:351
 msgid " Pipe failed "
 msgstr " Сбой канала "
 
-#: src/utilunix.c:356
+#: src/utilunix.c:355
 msgid " Dup failed "
 msgstr " Сбой дублирования дескриптора "
 
-#: src/view.c:409
+#: src/view.c:406
 msgid ""
 "File: \n"
 "\n"
@@ -3799,7 +3692,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:410
+#: src/view.c:407
 msgid ""
 "\n"
 "\n"
@@ -3809,19 +3702,19 @@ msgstr ""
 "\n"
 "был модифицирован, сохранить изменения?\n"
 
-#: src/view.c:412
+#: src/view.c:409
 msgid " Save changes "
 msgstr " Сохранить изменения "
 
-#: src/view.c:457
+#: src/view.c:454
 msgid " Cannot spawn child program "
 msgstr " Невозможно породить дочерний процесс "
 
-#: src/view.c:474
+#: src/view.c:471
 msgid " Could not open file "
 msgstr " Невозможно открыть файл "
 
-#: src/view.c:566
+#: src/view.c:563
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -3830,11 +3723,11 @@ msgstr ""
 " Невозможно получить свойства \"%s\"\n"
 " %s "
 
-#: src/view.c:574
+#: src/view.c:571
 msgid " Cannot view: not a regular file "
 msgstr " Просмотр невозможен: не обычный файл "
 
-#: src/view.c:581
+#: src/view.c:578
 #, c-format
 msgid ""
 " Cannot open \"%s\"\n"
@@ -3843,39 +3736,39 @@ msgstr ""
 " Невозможно открыть \"%s\"\n"
 " %s "
 
-#: src/view.c:711
+#: src/view.c:708
 #, c-format
 msgid "File: %s"
 msgstr "Файл: %s"
 
-#: src/view.c:725
+#: src/view.c:722
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Смещение 0x%08x"
 
-#: src/view.c:727
+#: src/view.c:724
 #, c-format
 msgid "Col %d"
 msgstr "Ст. %d"
 
-#: src/view.c:731
+#: src/view.c:728
 #, c-format
 msgid "%s bytes"
 msgstr "%s байт"
 
-#: src/view.c:736
+#: src/view.c:733
 msgid "  [grow]"
 msgstr "  [рост]"
 
-#: src/view.c:1692
+#: src/view.c:1689
 msgid "Invalid hex search expression"
 msgstr "Неверное выражение для поиска байтов"
 
-#: src/view.c:1743
+#: src/view.c:1740
 msgid " Invalid regular expression "
 msgstr " Неверное регулярное выражение "
 
-#: src/view.c:1865
+#: src/view.c:1862
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -3884,7 +3777,7 @@ msgstr ""
 " Номер текущей строки %d.\n"
 " Введите номер новой строки:"
 
-#: src/view.c:1887
+#: src/view.c:1884
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -3893,267 +3786,267 @@ msgstr ""
 " Текущий адрес - 0x%lx.\n"
 " Введите новый адрес:"
 
-#: src/view.c:1889
+#: src/view.c:1886
 msgid " Goto Address "
 msgstr " Перейти на адрес "
 
-#: src/view.c:1921
+#: src/view.c:1918
 msgid " Enter regexp:"
 msgstr " Введите регулярное выражение:"
 
-#: src/view.c:2044
+#: src/view.c:2041
 msgid "Ascii"
 msgstr "Текст"
 
-#: src/view.c:2044
+#: src/view.c:2041
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2045
+#: src/view.c:2042
 msgid "Goto"
 msgstr "Переход"
 
-#: src/view.c:2045
+#: src/view.c:2042
 msgid "Line"
 msgstr "Строка"
 
-#: src/view.c:2048
+#: src/view.c:2045
 msgid "RxSrch"
 msgstr "РегВыр"
 
-#: src/view.c:2051
+#: src/view.c:2048
 msgid "EdText"
 msgstr "ТкстРед"
 
-#: src/view.c:2051
+#: src/view.c:2048
 msgid "EdHex"
 msgstr "HxРедак"
 
-#: src/view.c:2053
+#: src/view.c:2050
 msgid "UnWrap"
 msgstr "НеПерен"
 
-#: src/view.c:2053
+#: src/view.c:2050
 msgid "Wrap"
 msgstr "Перенос"
 
-#: src/view.c:2056
+#: src/view.c:2053
 msgid "HxSrch"
 msgstr "HxПоиск"
 
-#: src/view.c:2059
+#: src/view.c:2056
 msgid "Raw"
 msgstr "Сырой"
 
-#: src/view.c:2059
+#: src/view.c:2056
 msgid "Parse"
 msgstr "Готовый"
 
-#: src/view.c:2063
+#: src/view.c:2060
 msgid "Unform"
 msgstr "НеФормт"
 
-#: src/view.c:2063
+#: src/view.c:2060
 msgid "Format"
 msgstr "Формат"
 
-#: src/widget.c:898
+#: src/widget.c:897
 msgid " History "
 msgstr "История команд"
 
-#: src/win.c:188
+#: src/win.c:186
 msgid "Function key 1"
 msgstr "Функциональная 1 "
 
-#: src/win.c:189
+#: src/win.c:187
 msgid "Function key 2"
 msgstr "Функциональная 2 "
 
-#: src/win.c:190
+#: src/win.c:188
 msgid "Function key 3"
 msgstr "Функциональная 3 "
 
-#: src/win.c:191
+#: src/win.c:189
 msgid "Function key 4"
 msgstr "Функциональная 4 "
 
-#: src/win.c:192
+#: src/win.c:190
 msgid "Function key 5"
 msgstr "Функциональная 5 "
 
-#: src/win.c:193
+#: src/win.c:191
 msgid "Function key 6"
 msgstr "Функциональная 6 "
 
-#: src/win.c:194
+#: src/win.c:192
 msgid "Function key 7"
 msgstr "Функциональная 7 "
 
-#: src/win.c:195
+#: src/win.c:193
 msgid "Function key 8"
 msgstr "Функциональная 8 "
 
-#: src/win.c:196
+#: src/win.c:194
 msgid "Function key 9"
 msgstr "Функциональная 9 "
 
-#: src/win.c:197
+#: src/win.c:195
 msgid "Function key 10"
 msgstr "Функциональная 10"
 
-#: src/win.c:198
+#: src/win.c:196
 msgid "Function key 11"
 msgstr "Функциональная 11"
 
-#: src/win.c:199
+#: src/win.c:197
 msgid "Function key 12"
 msgstr "Функциональная 12"
 
-#: src/win.c:200
+#: src/win.c:198
 msgid "Function key 13"
 msgstr "Функциональная 13"
 
-#: src/win.c:201
+#: src/win.c:199
 msgid "Function key 14"
 msgstr "Функциональная 14"
 
-#: src/win.c:202
+#: src/win.c:200
 msgid "Function key 15"
 msgstr "Функциональная 15"
 
-#: src/win.c:203
+#: src/win.c:201
 msgid "Function key 16"
 msgstr "Функциональная 16"
 
-#: src/win.c:204
+#: src/win.c:202
 msgid "Function key 17"
 msgstr "Функциональная 17"
 
-#: src/win.c:205
+#: src/win.c:203
 msgid "Function key 18"
 msgstr "Функциональная 18"
 
-#: src/win.c:206
+#: src/win.c:204
 msgid "Function key 19"
 msgstr "Функциональная 19"
 
-#: src/win.c:207
+#: src/win.c:205
 msgid "Function key 20"
 msgstr "Функциональная 20"
 
-#: src/win.c:208
+#: src/win.c:206
 msgid "Backspace key"
 msgstr "Клавиша Backspace"
 
-#: src/win.c:209
+#: src/win.c:207
 msgid "End key"
 msgstr "Клавиша End      "
 
-#: src/win.c:210
+#: src/win.c:208
 msgid "Up arrow key"
 msgstr "Стрелка вверх    "
 
-#: src/win.c:211
+#: src/win.c:209
 msgid "Down arrow key"
 msgstr "Стрелка вниз     "
 
-#: src/win.c:212
+#: src/win.c:210
 msgid "Left arrow key"
 msgstr "Стрелка влево    "
 
-#: src/win.c:213
+#: src/win.c:211
 msgid "Right arrow key"
 msgstr "Стрелка вправо   "
 
-#: src/win.c:214
+#: src/win.c:212
 msgid "Home key"
 msgstr "Клавиша Home     "
 
-#: src/win.c:215
+#: src/win.c:213
 msgid "Page Down key"
 msgstr "Клавиша Page Down"
 
-#: src/win.c:216
+#: src/win.c:214
 msgid "Page Up key"
 msgstr "Клавиша Page Up  "
 
-#: src/win.c:217
+#: src/win.c:215
 msgid "Insert key"
 msgstr "Клавиша Insert   "
 
-#: src/win.c:218
+#: src/win.c:216
 msgid "Delete key"
 msgstr "Клавиша Delete   "
 
-#: src/win.c:219
+#: src/win.c:217
 msgid "Completion/M-tab"
 msgstr "Завершение/M-Tab "
 
-#: src/win.c:220
+#: src/win.c:218
 msgid "+ on keypad"
 msgstr "+ доп.клавиатуры "
 
-#: src/win.c:221
+#: src/win.c:219
 msgid "- on keypad"
 msgstr "- доп.клавиатуры "
 
-#: src/win.c:222
+#: src/win.c:220
 msgid "* on keypad"
 msgstr "* доп.клавиатуры "
 
-#: src/win.c:224
+#: src/win.c:222
 msgid "Left arrow keypad"
 msgstr "Left arrow keypad"
 
-#: src/win.c:225
+#: src/win.c:223
 msgid "Right arrow keypad"
 msgstr "Right arrow keypad"
 
-#: src/win.c:226
+#: src/win.c:224
 msgid "Up arrow keypad"
 msgstr "Up arrow keypad"
 
-#: src/win.c:227
+#: src/win.c:225
 msgid "Down arrow keypad"
 msgstr "Down arrow keypad"
 
-#: src/win.c:228
+#: src/win.c:226
 msgid "Home on keypad"
 msgstr "Home on keypad"
 
-#: src/win.c:229
+#: src/win.c:227
 msgid "End on keypad"
 msgstr "End on keypad"
 
-#: src/win.c:230
+#: src/win.c:228
 msgid "Page Down keypad"
 msgstr "Page Down keypad"
 
-#: src/win.c:231
+#: src/win.c:229
 msgid "Page Up keypad"
 msgstr "Page Up keypad"
 
-#: src/win.c:232
+#: src/win.c:230
 msgid "Insert on keypad"
 msgstr "Insert on keypad"
 
-#: src/win.c:233
+#: src/win.c:231
 msgid "Delete on keypad"
 msgstr "Delete on keypad"
 
-#: src/win.c:234
+#: src/win.c:232
 msgid "Enter on keypad"
 msgstr "Enter on keypad"
 
-#: src/win.c:235
+#: src/win.c:233
 msgid "Slash on keypad"
 msgstr "Slash on keypad"
 
-#: src/win.c:236
+#: src/win.c:234
 msgid "NumLock on keypad"
 msgstr "NumLock on keypad"
 
-#: vfs/cpio.c:143 vfs/cpio.c:159
+#: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -4162,7 +4055,7 @@ msgstr ""
 "Невозможно открыть cpio-архив\n"
 "%s"
 
-#: vfs/cpio.c:225
+#: vfs/cpio.c:223
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -4171,7 +4064,7 @@ msgstr ""
 "Преждевременный конец архива cpio\n"
 "%s"
 
-#: vfs/cpio.c:311 vfs/cpio.c:361
+#: vfs/cpio.c:309 vfs/cpio.c:359
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -4180,7 +4073,7 @@ msgstr ""
 "Поврежденный заголовок cpio обнаружен в\n"
 "%s"
 
-#: vfs/cpio.c:432
+#: vfs/cpio.c:430
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -4193,12 +4086,12 @@ msgstr ""
 "в архиве cpio\n"
 "%s"
 
-#: vfs/cpio.c:455
+#: vfs/cpio.c:453
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
 msgstr "%s содержит сдвоенные записи! Пропущено!"
 
-#: vfs/cpio.c:524
+#: vfs/cpio.c:522
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -4207,20 +4100,20 @@ msgstr ""
 "Неожиданный конец файла\n"
 "%s"
 
-#: vfs/direntry.c:303
+#: vfs/direntry.c:301
 #, c-format
 msgid "Dir cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
-#: vfs/direntry.c:787
+#: vfs/direntry.c:785
 msgid "Starting linear transfer..."
 msgstr "Запуск линейной передачи..."
 
-#: vfs/direntry.c:959
+#: vfs/direntry.c:957
 msgid "Getting file"
 msgstr "Получение файла"
 
-#: vfs/extfs.c:298
+#: vfs/extfs.c:295
 #, c-format
 msgid ""
 "Couldn't open %s archive\n"
@@ -4229,203 +4122,203 @@ msgstr ""
 "Невозможно открыть %s-архив\n"
 "%s"
 
-#: vfs/extfs.c:330 vfs/extfs.c:349
+#: vfs/extfs.c:327 vfs/extfs.c:346
 msgid "Inconsistent extfs archive"
 msgstr "Несогласованный архив extfs"
 
-#: vfs/fish.c:147
+#: vfs/fish.c:145
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Отсоединение от %s"
 
-#: vfs/fish.c:225
+#: vfs/fish.c:223
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Ожидается начальная строка..."
 
-#: vfs/fish.c:235
+#: vfs/fish.c:233
 msgid "Sorry, we can not do password authenticated connections for now."
 msgstr "Извините, невозможно создать авторизованные паролем соединения сейчас."
 
-#: vfs/fish.c:240
+#: vfs/fish.c:238
 msgid " fish: Password required for "
 msgstr "fish: Требуется пароль для "
 
-#: vfs/fish.c:249
+#: vfs/fish.c:247
 msgid "fish: Sending password..."
 msgstr "fish: Посылается пароль..."
 
-#: vfs/fish.c:255
+#: vfs/fish.c:253
 msgid "fish: Sending initial line..."
 msgstr "fish: Посылается начальная строка..."
 
-#: vfs/fish.c:265
+#: vfs/fish.c:263
 msgid "fish: Handshaking version..."
 msgstr "fish: Версия подтверждения связи..."
 
-#: vfs/fish.c:275
+#: vfs/fish.c:273
 msgid "fish: Setting up current directory..."
 msgstr "fish: Устанавливается текущий каталог..."
 
-#: vfs/fish.c:277
+#: vfs/fish.c:275
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Соединение успешно, персональный каталог %s."
 
-#: vfs/fish.c:366
+#: vfs/fish.c:364
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Чтение каталога %s..."
 
-#: vfs/fish.c:469 vfs/ftpfs.c:1308 vfs/undelfs.c:313
+#: vfs/fish.c:467 vfs/ftpfs.c:1306 vfs/undelfs.c:310
 #, c-format
 msgid "%s: done."
 msgstr "%s: готово."
 
-#: vfs/fish.c:474 vfs/ftpfs.c:1260 vfs/undelfs.c:316
+#: vfs/fish.c:472 vfs/ftpfs.c:1258 vfs/undelfs.c:313
 #, c-format
 msgid "%s: failure"
 msgstr "%s: ошибка"
 
-#: vfs/fish.c:495
+#: vfs/fish.c:493
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: запись %s: посылается команда..."
 
-#: vfs/fish.c:539
+#: vfs/fish.c:537
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Сбой локального чтения, посылаются нули"
 
-#: vfs/fish.c:551
+#: vfs/fish.c:549
 #, c-format
 msgid "fish: storing %s %d (%lu)"
 msgstr "fish: запись %s %d (%lu)"
 
-#: vfs/fish.c:552
+#: vfs/fish.c:550
 msgid "zeros"
 msgstr "нули"
 
-#: vfs/fish.c:601
+#: vfs/fish.c:599
 msgid "Aborting transfer..."
 msgstr "Прерывание передачи..."
 
-#: vfs/fish.c:610
+#: vfs/fish.c:608
 msgid "Error reported after abort."
 msgstr "Отмечена ошибка после прерывания."
 
-#: vfs/fish.c:612
+#: vfs/fish.c:610
 msgid "Aborted transfer would be successful."
 msgstr "Передача успешно прервана."
 
-#: vfs/ftpfs.c:378
+#: vfs/ftpfs.c:376
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Отсоединение от %s"
 
-#: vfs/ftpfs.c:432
+#: vfs/ftpfs.c:430
 msgid " FTP: Password required for "
 msgstr " FTP: Требуется пароль для "
 
-#: vfs/ftpfs.c:466
+#: vfs/ftpfs.c:464
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: Посылается имя пользователя"
 
-#: vfs/ftpfs.c:471
+#: vfs/ftpfs.c:469
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: Посылается пароль пользователя"
 
-#: vfs/ftpfs.c:476
+#: vfs/ftpfs.c:474
 msgid "ftpfs: logged in"
 msgstr "ftpfs: зарегистрирован"
 
-#: vfs/ftpfs.c:491
+#: vfs/ftpfs.c:489
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Ошибка регистрации пользователя %s "
 
-#: vfs/ftpfs.c:523
+#: vfs/ftpfs.c:521
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr "Невозможно установить распределение источника (%s)"
 
-#: vfs/ftpfs.c:644
+#: vfs/ftpfs.c:642
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Неверное имя системы."
 
-#: vfs/ftpfs.c:664
+#: vfs/ftpfs.c:662
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Неверный адрес системы."
 
-#: vfs/ftpfs.c:687
+#: vfs/ftpfs.c:685
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: осуществляется соединение с %s"
 
-#: vfs/ftpfs.c:697
+#: vfs/ftpfs.c:695
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: соединение прервано пользователем"
 
-#: vfs/ftpfs.c:699
+#: vfs/ftpfs.c:697
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: сбой соединения с сервером: %s"
 
-#: vfs/ftpfs.c:740
+#: vfs/ftpfs.c:738
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Ожидание повтора попытки... %d (Control-C для отмены)"
 
-#: vfs/ftpfs.c:923
+#: vfs/ftpfs.c:921
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: невозможно установить пассивный режим"
 
-#: vfs/ftpfs.c:996
+#: vfs/ftpfs.c:994
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: прерывание передачи."
 
-#: vfs/ftpfs.c:998
+#: vfs/ftpfs.c:996
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: Ошибка прерывания: %s"
 
-#: vfs/ftpfs.c:1003
+#: vfs/ftpfs.c:1001
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: сбой прерывания"
 
-#: vfs/ftpfs.c:1092 vfs/ftpfs.c:1197
+#: vfs/ftpfs.c:1090 vfs/ftpfs.c:1195
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: невозможно изменить текущий рабочий каталог."
 
-#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1109
+#: vfs/ftpfs.c:1100 vfs/ftpfs.c:1107
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: невозможно распознать символическую ссылку"
 
-#: vfs/ftpfs.c:1160
+#: vfs/ftpfs.c:1158
 msgid "Resolving symlink..."
 msgstr "Распознается символическая ссылка..."
 
-#: vfs/ftpfs.c:1185
+#: vfs/ftpfs.c:1183
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Чтение каталога FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1186
+#: vfs/ftpfs.c:1184
 msgid "(strict rfc959)"
 msgstr "(ограничение rfc959)"
 
-#: vfs/ftpfs.c:1187
+#: vfs/ftpfs.c:1185
 msgid "(chdir first)"
 msgstr "(сначала chdir)"
 
-#: vfs/ftpfs.c:1321
+#: vfs/ftpfs.c:1319
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: ошибка; некуда перейти на аварийный режим"
 
-#: vfs/ftpfs.c:1386
+#: vfs/ftpfs.c:1384
 #, c-format
 msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: запись файла %lu (%lu)"
 
-#: vfs/ftpfs.c:1845
+#: vfs/ftpfs.c:1843
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -4433,15 +4326,15 @@ msgstr ""
 "Файл ~/.netrc имеет неверный режим доступа/владения.\n"
 "Удалите пароль или исправьте режим доступа/владения."
 
-#: vfs/mcfs.c:112 vfs/mcfs.c:155
+#: vfs/mcfs.c:109 vfs/mcfs.c:152
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfs.c:112
+#: vfs/mcfs.c:109
 msgid " The server does not support this version "
 msgstr " Сервер не поддерживает данную версию "
 
-#: vfs/mcfs.c:128
+#: vfs/mcfs.c:125
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
@@ -4451,42 +4344,42 @@ msgstr ""
 " Требуется пароль для входа в систему, но это может быть \n"
 " небезопасно для информации на удаленной стороне. Продолжать?\n"
 
-#: vfs/mcfs.c:131
+#: vfs/mcfs.c:128
 msgid " Yes "
 msgstr " Да "
 
-#: vfs/mcfs.c:131
+#: vfs/mcfs.c:128
 msgid " No "
 msgstr " Нет "
 
-#: vfs/mcfs.c:141
+#: vfs/mcfs.c:138
 msgid " MCFS Password required "
 msgstr " Требуется пароль MCFS "
 
-#: vfs/mcfs.c:155
+#: vfs/mcfs.c:152
 msgid " Invalid password "
 msgstr " Неверный пароль "
 
-#: vfs/mcfs.c:186
+#: vfs/mcfs.c:183
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Невозможно определить имя машины: %s"
 
-#: vfs/mcfs.c:204
+#: vfs/mcfs.c:201
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Невозможно создать сокет: %s "
 
-#: vfs/mcfs.c:210
+#: vfs/mcfs.c:207
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr "Невозможно соединиться с сервером: %s "
 
-#: vfs/mcfs.c:276
+#: vfs/mcfs.c:273
 msgid " Too many open connections "
 msgstr " Слишком много открытых соединений "
 
-#: vfs/sfs.c:334
+#: vfs/sfs.c:331
 #, c-format
 msgid ""
 "Warning: Invalid line in %s:\n"
@@ -4495,7 +4388,7 @@ msgstr ""
 "Предупреждение: неправильная строка в %s:\n"
 "%s\n"
 
-#: vfs/sfs.c:345
+#: vfs/sfs.c:343
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in %s:\n"
@@ -4504,7 +4397,7 @@ msgstr ""
 "Предупреждение: неправильный флаг %c в %s:\n"
 "%s\n"
 
-#: vfs/smbfs.c:566
+#: vfs/smbfs.c:564
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -4513,31 +4406,31 @@ msgstr ""
 " Сбой повторного соединения к %s\n"
 " "
 
-#: vfs/smbfs.c:1124
+#: vfs/smbfs.c:1122
 msgid " Authentication failed "
 msgstr " Сбой идентификации "
 
-#: vfs/smbfs.c:1585
+#: vfs/smbfs.c:1583
 #, c-format
 msgid " Error %s creating directory %s "
 msgstr " %s при создании каталога %s "
 
-#: vfs/smbfs.c:1608
+#: vfs/smbfs.c:1606
 #, c-format
 msgid " Error %s removing directory %s "
 msgstr " %s при удалении каталога %s "
 
-#: vfs/smbfs.c:1712 vfs/smbfs.c:1732
+#: vfs/smbfs.c:1710 vfs/smbfs.c:1730
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s при открытии файла %s с удаленной машины "
 
-#: vfs/smbfs.c:1800
+#: vfs/smbfs.c:1798
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s при удалении файла %s с удаленной машины "
 
-#: vfs/smbfs.c:1838
+#: vfs/smbfs.c:1836
 #, c-format
 msgid " %s renaming files\n"
 msgstr " %s при переименовывании файлa\n"
@@ -4570,61 +4463,61 @@ msgstr ""
 "%s\n"
 "не похож на tar-архив."
 
-#: vfs/undelfs.c:79
+#: vfs/undelfs.c:76
 msgid " undelfs: error "
 msgstr " undelfs: ошибка "
 
-#: vfs/undelfs.c:182
+#: vfs/undelfs.c:179
 msgid " not enough memory "
 msgstr " недостаточно памяти "
 
-#: vfs/undelfs.c:187
+#: vfs/undelfs.c:184
 msgid " while allocating block buffer "
 msgstr " при получении блока буферов "
 
-#: vfs/undelfs.c:191
+#: vfs/undelfs.c:188
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
-#: vfs/undelfs.c:195
+#: vfs/undelfs.c:192
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " при начале сканирования узла %d "
 
-#: vfs/undelfs.c:202
+#: vfs/undelfs.c:199
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: загрузка информации об удаленных файлах %d inodes"
 
-#: vfs/undelfs.c:217
+#: vfs/undelfs.c:214
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " при вызове ext2_block_iterate %d "
 
-#: vfs/undelfs.c:225
+#: vfs/undelfs.c:222
 msgid " no more memory while reallocating array "
 msgstr " не хватило памяти при переоткрытии массива "
 
-#: vfs/undelfs.c:244
+#: vfs/undelfs.c:241
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " при сканировании узла %d "
 
-#: vfs/undelfs.c:268
+#: vfs/undelfs.c:265
 msgid " Ext2lib error "
 msgstr " Сбой Ext2lib "
 
-#: vfs/undelfs.c:295 vfs/undelfs.c:614
+#: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
 msgid " Could not open file %s "
 msgstr " Невозможно открыть файл %s "
 
-#: vfs/undelfs.c:298
+#: vfs/undelfs.c:295
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: чтение битовой карты узлов..."
 
-#: vfs/undelfs.c:301
+#: vfs/undelfs.c:298
 #, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
@@ -4633,11 +4526,11 @@ msgstr ""
 " Невозможно загрузить битовую карту узлов с:\n"
 " %s \n"
 
-#: vfs/undelfs.c:304
+#: vfs/undelfs.c:301
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: чтение блока битовой карты..."
 
-#: vfs/undelfs.c:307
+#: vfs/undelfs.c:304
 #, c-format
 msgid ""
 " Could not load block bitmap from: \n"
@@ -4646,40 +4539,40 @@ msgstr ""
 "  Невозможно загрузить блок битовой карты с:\n"
 " %s \n"
 
-#: vfs/undelfs.c:330
+#: vfs/undelfs.c:327
 msgid " vfs_info is not fs! "
 msgstr " vfs_info не файловая система! "
 
-#: vfs/undelfs.c:386 vfs/undelfs.c:570
+#: vfs/undelfs.c:383 vfs/undelfs.c:567
 msgid " You have to chdir to extract files first "
 msgstr " Вы должны сначала сменить каталог чтобы извлечь файлы "
 
-#: vfs/undelfs.c:509
+#: vfs/undelfs.c:506
 msgid " while iterating over blocks "
 msgstr " при переборе блоков "
 
-#: vfs/vfs.c:1177
+#: vfs/vfs.c:1174
 msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
-#: vfs/vfs.c:1843
+#: vfs/vfs.c:1846
 msgid "Could not parse:"
 msgstr "Невозможно проанализировать:"
 
-#: vfs/vfs.c:1845
+#: vfs/vfs.c:1848
 msgid "More parsing errors will be ignored."
 msgstr "Остальные ошибки анализа будут проигнорированы."
 
-#: vfs/vfs.c:1855
+#: vfs/vfs.c:1858
 msgid "Internal error:"
 msgstr "Внутренняя ошибка:"
 
-#: vfs/vfs.c:1865
+#: vfs/vfs.c:1868
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu байт перенесено)"
 
-#: vfs/vfs.c:1866
+#: vfs/vfs.c:1869
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu байт перенесено"
