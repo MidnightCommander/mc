@@ -67,3 +67,10 @@ the need to embed this logic into configure.in.
 #    undef USE_EXT2FSLIB
 #endif
 
+#if defined (__QNX__) && !defined (HAVE_INFOMOUNT_LIST)
+#    define HAVE_INFOMOUNT_QNX
+#endif
+
+#if defined(HAVE_INFOMOUNT_LIST) || defined(HAVE_INFOMOUNT_QNX)
+#    define HAVE_INFOMOUNT
+#endif

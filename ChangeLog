@@ -1,3 +1,11 @@
+2001-06-22  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_GET_FS_INFO): Warn only once that the list of
+	mounted filesystems cannot be read. Don't define NO_INFOMOUNT.
+	Define HAVE_INFOMOUNT_LIST if a any suitable function has been
+	found.
+	* extraconf.h: Define HAVE_INFOMOUNT and HAVE_INFOMOUNT_QNX.
+
 2001-06-19  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Check for telldir and seekdir. Join adjacent

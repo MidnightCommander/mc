@@ -117,11 +117,6 @@ AC_DEFUN([AC_GET_FS_INFO], [
 	fi
       fi
 
-      if test -z "$list_mounted_fs"; then
-	AC_MSG_WARN([could not determine how to read list of mounted fs])
-	CPPFLAGS="$CPPFLAGS -DNO_INFOMOUNT"
-      fi
-
     fi
 
     if test -z "$list_mounted_fs"; then
@@ -239,9 +234,9 @@ AC_DEFUN([AC_GET_FS_INFO], [
 
     if test -z "$list_mounted_fs"; then
       AC_MSG_WARN([could not determine how to read list of mounted fs])
-      CPPFLAGS="$CPPFLAGS -DNO_INFOMOUNT"
-      # FIXME -- no need to abort building the whole package
-      # Can't build mountlist.c or anything that needs its functions
+    else
+      AC_DEFINE(HAVE_INFOMOUNT_LIST, 1,
+		[Can determine list of mounted filesystems])
     fi
 
 dnl This configure.in code has been stolen from GNU fileutils-3.12.  Its
