@@ -1,6 +1,7 @@
 2002-08-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
-	* mc.spec.in: Add /usr/lib/mc/mc.charsets.
+	* mc.spec.in: Add /usr/lib/mc/mc.charsets and
+	%{_mandir}/*/man1/*.
 
 2002-08-20  Pavel Roskin  <proski@gnu.org>
 

@@ -60,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/lib/mc/bin/cons.saver
 %{_prefix}/lib/mc/term/*
 %{_mandir}/man1/*
+%{_mandir}/*/man1/*
 %config /etc/profile.d/*
 %dir %{_prefix}/lib/mc/bin
 %dir %{_prefix}/lib/mc/term
@@ -84,6 +85,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Tue Aug 20 2002 Andrew V. Samoilov <sav@bcs.zp.ua>
 - Add /usr/lib/mc/mc.charsets.
+- Add %{_mandir}/*/man1/*.
 
 * Fri Aug 16 2002 Pavel Roskin <proski@gnu.org>
 - Remove mc.global.
