@@ -1,3 +1,9 @@
+1999-05-03  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* i-directory.png
+	* i-directory.png: Added new icons for normal and locked folder..
+	I hope you like them - imho they look way better than the old ones.
+
 1999-05-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gcmd.c (gnome_new_link): Allow users to create url shortcuts on
