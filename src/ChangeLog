@@ -1,5 +1,8 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* boxes.c (init_disp_bits_box): Use common_dialog_callback().
+	Return the new dialog.
+
 	* boxes.c (display_callback): Use common_dialog_repaint().
 	(display_init): Avoid using two different translations.
 

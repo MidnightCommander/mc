@@ -391,7 +391,7 @@ static QuickDialog confirmation =
       conf_widgets, 0 };
 
 void
-confirm_box ()
+confirm_box (void)
 {
 
 #ifdef ENABLE_NLS
@@ -477,7 +477,7 @@ static QuickDialog display_bits =
   "dbits", display_widgets, 0 };
 
 void
-display_bits_box ()
+display_bits_box (void)
 {
     int current_mode;
 
@@ -544,30 +544,6 @@ display_bits_box ()
 #else /* HAVE_CHARSET */
 
 
-static Dlg_head *dbits_dlg;
-
-static void dbits_refresh()
-{
-    attrset( COLOR_NORMAL );
-    dlg_erase( dbits_dlg );
-    
-    draw_box( dbits_dlg, 1, 2, dbits_dlg->lines - 2, dbits_dlg->cols - 4 );
-    
-    attrset( COLOR_HOT_NORMAL );
-    dlg_move( dbits_dlg, 1, (dbits_dlg->cols - strlen(dbits_dlg->title)) / 2 );
-    addstr( dbits_dlg->title );
-}
-
-static int dbits_callback( Dlg_head * h, int Par, int Msg )
-{
-    switch (Msg) {
-	case DLG_DRAW:
-	    dbits_refresh();
-	    break;
-    }
-    return 0;
-}
-
 static int new_display_codepage;
 
 static WLabel *cplabel;
@@ -585,14 +561,16 @@ static int sel_charset_button( int action, void *param )
     return 0;
 }
 
-void init_disp_bits_box()
+Dlg_head *
+init_disp_bits_box (void)
 {
     char *cpname;
+    Dlg_head *dbits_dlg;
 
     do_refresh();
 
     dbits_dlg = create_dlg( 0, 0, DISPY, DISPX, dialog_colors,
-		dbits_callback, "[Display bits]", "Display bits",
+		common_dialog_callback, "[Display bits]", "Display bits",
 		DLG_CENTER );
     x_set_dialog_title( dbits_dlg, _(" Display bits "));
 
@@ -621,16 +599,20 @@ void init_disp_bits_box()
 		button_new( 4, DISPX - 8 - strlen(cpname) , B_USER,
 			    NORMAL_BUTTON, cpname,
 			    sel_charset_button, 0, NULL ) );
+
+    return dbits_dlg;
 }
 
-void display_bits_box()
+void
+display_bits_box (void)
 {
+    Dlg_head *dbits_dlg;
     new_display_codepage = display_codepage;
 
     application_keypad_mode ();
-    init_disp_bits_box();
+    dbits_dlg = init_disp_bits_box ();
 
-    run_dlg( dbits_dlg );
+    run_dlg (dbits_dlg);
 
     if (dbits_dlg->ret_value == B_ENTER) {
 	char *errmsg;
