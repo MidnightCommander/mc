@@ -1,3 +1,7 @@
+2000-09-13  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: MCFGR variable removed
+
 2000-09-12  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: enable AM_MAINTAINER_MODE to be consistent with
