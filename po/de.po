@@ -7,10 +7,10 @@
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.30\n"
+"Project-Id-Version: mc 4.5.51\n"
 "POT-Creation-Date: 2000-07-13 02:56+0200\n"
-"PO-Revision-Date: 2000-05-15 21:34+02:00\n"
-"Last-Translator: Matthias Warkus <mawa@iname.com>\n"
+"PO-Revision-Date: 2000-07-14 21:34+02:00\n"
+"Last-Translator: Kai Lahmann <kl@linuxfaqs.de>\n"
 "Language-Team: GNOME German <gnome-i18n@nuclecu.unam.mx>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -410,7 +410,7 @@ msgid "Creates a new directory"
 msgstr "Legt ein neues Verzeichnis an"
 
 #: gnome/gdesktop.c:2864
-msgid "URL L_ink.."
+msgid "URL L_ink..."
 msgstr "URL-L_ink..."
 
 #: gnome/gdesktop.c:2864
@@ -582,7 +582,7 @@ msgstr "Kopieren"
 msgid "Move"
 msgstr "Verschieben"
 
-#: gnome/gdialogsc:583
+#: gnome/gdialogs.c:583
 msgid "Destination"
 msgstr "Ziel"
 
@@ -698,7 +698,7 @@ msgstr "Vorhandene Datei (Symbolischer Link wird dorthin zeigen):"
 msgid "Symbolic link filename:"
 msgstr "Name des symbolischen Links:"
 
-#: gnome/gdndc:53
+#: gnome/gdnd.c:53
 msgid "_Move here"
 msgstr " Hierher verschieben"
 
@@ -867,7 +867,7 @@ msgid "Select all files in the current Panel"
 msgstr "Alle Dateien im aktuellen Fenster markieren"
 
 #: gnome/glayout.c:404
-msgid "_Select Files.."
+msgid "_Select Files..."
 msgstr "Dateien markieren..."
 
 #: gnome/glayout.c:404
@@ -922,10 +922,10 @@ msgstr "Datei suchen..."
 msgid "Locate files on disk"
 msgstr "Datei auf der Festplatte finden"
 
-#. { GNOME_APP_UI_ITEM, N_("_Compare panels.."), N_("Compare two panel contents"), gnome_compare_panels },
+#. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:432
 msgid "_Edit mime types..."
-msgstr "MIME-Typen editieren.."
+msgstr "MIME-Typen editieren..."
 
 #: gnome/glayout.c:432
 msgid "Edits the MIME type bindings"
@@ -1040,7 +1040,7 @@ msgstr "Gerät %d"
 msgid "Full Name: "
 msgstr "Voller Name: "
 
-#: gnome/gnome-file-property-dialogc:179
+#: gnome/gnome-file-property-dialog.c:179
 msgid "File Name"
 msgstr "Dateiname"
 
@@ -1153,7 +1153,7 @@ msgstr "Anzeigen"
 msgid "Use default View options"
 msgstr "Standard-Ansichtsoptionen verwenden"
 
-#: gnome/gnome-file-property-dialogc:449
+#: gnome/gnome-file-property-dialog.c:449
 msgid "Select an Icon"
 msgstr "Ein Icon auswählen"
 
@@ -1268,7 +1268,7 @@ msgstr "Statistiken"
 msgid "Options"
 msgstr "Optionen"
 
-#: gnome/gnome-file-property-dialogc:1109
+#: gnome/gnome-file-property-dialog.c:1109
 msgid "Permissions"
 msgstr "Zugriffsrechte"
 
@@ -1358,7 +1358,7 @@ msgstr "Symbolischer Link..."
 
 #: gnome/gpopup2.c:297
 msgid "Edit Symlink..."
-msgstr "Symbolischen Link bearbeiten.."
+msgstr "Symbolischen Link bearbeiten..."
 
 #: gnome/gpopup2.c:299
 msgid "Properties..."
@@ -1508,7 +1508,7 @@ msgstr "Legt hier ein neues Verzeichnis an"
 msgid "Empty _Trash"
 msgstr "Papierkorb leeren"
 
-#: gnome/gscreenc:1437
+#: gnome/gscreen.c:1437
 msgid "Empties the Trash"
 msgstr "leert den Papierkorb"
 
@@ -1810,7 +1810,7 @@ msgstr "Backups machen -->"
 
 #. NLS  for hotkeys?
 #: gtkedit/editcmd.c:384 gtkedit/editcmd.c:1189 gtkedit/editcmd.c:1233
-#: gtkedit/editcmd.c:1318 gtkedit/editcmdc:3025 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:1318 gtkedit/editcmd.c:3025 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:858 src/filegui.c:822
@@ -2006,13 +2006,13 @@ msgstr "&Regulärer Ausdruck"
 msgid "&Whole words only"
 msgstr "Nur ganze &Wörter"
 
-#: gtkedit/editcmdc:1249 gtkedit/editcmd.c:1330
+#: gtkedit/editcmd.c:1249 gtkedit/editcmd.c:1330
 msgid "case &Sensitive"
 msgstr "Groß-/Klein&schreibung"
 
 #: gtkedit/editcmd.c:1253
 msgid " Enter replacement argument order eg. 3,2,1,4 "
-msgstr " Argumentreihenfolge eingeben, z.B 3,2,1,4 "
+msgstr " Argumentreihenfolge eingeben, z.B. 3,2,1,4 "
 
 #: gtkedit/editcmd.c:1257
 msgid " Enter replacement string:"
@@ -2044,7 +2044,7 @@ msgstr " Suchtext eingeben : "
 msgid " Enter replace text : "
 msgstr " Ersetzungstext eingeben : "
 
-#: gtkedit/editcmd.c:1412 gtkedit/editcmdc:1413
+#: gtkedit/editcmd.c:1412 gtkedit/editcmd.c:1413
 #, c-format
 msgid ""
 "You can enter regexp substrings with %s\n"
@@ -2109,7 +2109,7 @@ msgstr "Vor jedem Ersetzen fragen"
 msgid " Replace all "
 msgstr " Alle ersetzen "
 
-# Tool hint
+#. Tool hint
 #: gtkedit/editcmd.c:1470
 msgid "Replace repeatedly"
 msgstr "Wiederholt ersetzen"
@@ -2524,7 +2524,7 @@ msgstr "E&xterner Formatierer    F19"
 msgid "&Mail...                    "
 msgstr "&Mail...                    "
 
-#: gtkedit/editmenuc:246
+#: gtkedit/editmenu.c:246
 msgid "&Execute macro... C-x e, KEY"
 msgstr "Makro aufruf&en..C-x e,TASTE"
 
@@ -2537,7 +2537,7 @@ msgid "&General...  "
 msgstr "All&gemein..."
 
 #: gtkedit/editmenu.c:262 gtkedit/editmenu.c:271
-msgid "&Save mode.."
+msgid "&Save mode..."
 msgstr "&Speichermodus..."
 
 #: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1360
@@ -2568,7 +2568,7 @@ msgstr " Optionen "
 
 #: gtkedit/editmenu.c:410
 msgid "Open...\tC-o"
-msgstr "Öffnen..\tC-o"
+msgstr "Öffnen...\tC-o"
 
 #: gtkedit/editmenu.c:411
 msgid "New\tC-n"
@@ -2590,7 +2590,7 @@ msgstr "Datei einfügen...\tF15"
 msgid "Copy to file...\tC-f"
 msgstr "In Datei kopieren...\tC-f"
 
-# Tool hint
+#. Tool hint
 #: gtkedit/editmenu.c:420
 msgid "Disk operations and file indexing/searching"
 msgstr "Plattenoperationen und Dateiindizierung/-suche"
@@ -2707,7 +2707,7 @@ msgstr "Makro ausführen...\tC-a, TASTE"
 
 #: gtkedit/editmenu.c:472
 msgid "Delete macro...\t"
-msgstr "Makro löschen..\t"
+msgstr "Makro löschen...\t"
 
 #: gtkedit/editmenu.c:474
 msgid "Insert date/time\tC-d"
@@ -2911,7 +2911,7 @@ msgstr "Editorpuffer löschen"
 msgid "Insert File"
 msgstr "Datei Einfügen"
 
-#: gtkedit/gtkeditc:1295
+#: gtkedit/gtkedit.c:1295
 msgid "Insert text from a file"
 msgstr "Text aus einer Datei einfügen"
 
@@ -2923,7 +2923,7 @@ msgstr "In Datei kopieren"
 msgid "copy a block to a file"
 msgstr "inen Block in eine Datei kopieren"
 
-#: gtkedit/gtkeditc:1337
+#: gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
 msgstr "Suchen/Ersetzen"
 
@@ -2970,7 +2970,7 @@ msgstr ""
 " Fehler beim Lesen von ispell. \n"
 " Ispell wird neu gestartet. "
 
-#: gtkedit/syntax.c:1372 gtkedit/syntaxc:1374
+#: gtkedit/syntax.c:1372 gtkedit/syntax.c:1374
 msgid " Load Syntax Rules "
 msgstr " Lade Syntaxregeln "
 
@@ -3058,7 +3058,7 @@ msgstr ""
 " Kann chown für \"%s\" nicht durchführen \n"
 " %s "
 
-#: src/achownc:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
+#: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
 #: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
 msgid " Oops... "
 msgstr " Autsch... "
@@ -3096,7 +3096,7 @@ msgstr " Fehler im Hintergrundprotokoll "
 #: src/background.c:312
 msgid ""
 " Background process sent us a request for more arguments \n"
-" than we can handle \n"
+" than we can handle. \n"
 msgstr ""
 " Der Hintergrundprozeß hat uns eine Anfrage nach mehr Argumenten \n"
 " als wir behandeln können geschickt. \n"
@@ -3428,7 +3428,7 @@ msgstr " Datei anzeigen "
 msgid " Filename:"
 msgstr "Dateiname:"
 
-#: src/cmdc:297
+#: src/cmd.c:297
 msgid " Filtered view "
 msgstr " Gefilterte Ansicht "
 
@@ -3582,7 +3582,7 @@ msgstr " symbolischen Link bearbeiten, kann %s nicht entfernen: %s"
 msgid " edit symlink: %s "
 msgstr " symbolschen Link barbeiten: %s"
 
-#: src/cmdc:1173
+#: src/cmd.c:1173
 msgid " Link symbolically "
 msgstr " Symbolischer Link "
 
@@ -3794,7 +3794,7 @@ msgstr "Format der "
 #: src/ext.c:417
 msgid ""
 "mc.ext file has changed\n"
-"with version 3.0 It seems that installation\n"
+"with version 3.0. It seems that installation\n"
 "failed. Please fetch a fresh new copy from the\n"
 "Midnight Commander package or in case you don't\n"
 "have any, get it from ftp://ftp.nuclecu.unam.mx."
@@ -4117,7 +4117,7 @@ msgstr ""
 " %s "
 
 #: src/file.c:802
-msgid "Incomplete file was retrieved Keep it?"
+msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Unvollständige Datei empfangen. Behalten?"
 
 #: src/file.c:803
@@ -4128,7 +4128,7 @@ msgstr "&Löschen"
 msgid "&Keep"
 msgstr "&Behalten"
 
-#: src/filec:876
+#: src/file.c:876
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -4408,7 +4408,7 @@ msgstr " Rekursives Löschen "
 msgid " Background process: Recursive Delete "
 msgstr " Hintergrundprozeß: Rekursives Löschen "
 
-#: src/fileguic:424
+#: src/filegui.c:424
 msgid "File"
 msgstr "Datei"
 
@@ -4768,7 +4768,7 @@ msgstr "Verzeichnis-Pfad"
 msgid " New hotlist group "
 msgstr " Neue Hotlist Gruppe "
 
-#: src/hotlistc:973
+#: src/hotlist.c:973
 msgid "Name of new group"
 msgstr "Name der neuen Gruppe"
 
@@ -5098,7 +5098,7 @@ msgstr " Sie haben \"%s\" einggeben"
 msgid "OK"
 msgstr "OK"
 
-#: src/learnc:177
+#: src/learn.c:177
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -5369,7 +5369,7 @@ msgstr "&Darstellungsbits..."
 msgid "learn &Keys..."
 msgstr "&Tasten lernen..."
 
-#: src/mainc:1367
+#: src/main.c:1367
 msgid "&Virtual FS..."
 msgstr "&Virtuelle FS..."
 
@@ -5532,7 +5532,7 @@ msgid ""
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
 msgstr ""
-"-v, --view dname   In Anzeigemodus starten\n"
+"-v, --view dname   In Anzeigemodus starten.\n"
 "-V, --version      Version und Konfigurationsoptionen ausgeben.\n"
 "-x, --xterm        XTerm-Mausunterstützung und -Bildschirmerhalt erzwingen.\n"
 "+zahl              zahl ist die Startzeilennummer der Datei für `mcedit'.\n"
@@ -5704,7 +5704,7 @@ msgstr "Mehr wie traditioneller GMC aussehen"
 
 #: src/main.c:2771
 msgid "Display the directory that holds the .links startup files and exit"
-msgstr "Das Verzeichnis mit den links-Startdateien anzeigen und abbrechen"
+msgstr "Das Verzeichnis mit den .links-Startdateien anzeigen und abbrechen"
 
 #: src/main.c:3087
 msgid ""
@@ -5935,7 +5935,7 @@ msgstr "GID"
 msgid "Unknow tag on display format: "
 msgstr "Unbekannte Sequenz in Anzeigeformat: "
 
-#: src/screenc:1448
+#: src/screen.c:1448
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Benutzerdefiniertes Format sieht ungültig aus, benutze Standard."
 
@@ -6616,7 +6616,7 @@ msgid "fish: Disconnecting from %s"
 msgstr "fish: Trenne von %s"
 
 #: vfs/fish.c:218
-msgid "fish: Waiting for initial line.."
+msgid "fish: Waiting for initial line..."
 msgstr "fish: Warte auf erste Zeile..."
 
 #: vfs/fish.c:228
@@ -6634,7 +6634,7 @@ msgid "fish: Sending password..."
 msgstr "fish: sende Passwort..."
 
 #: vfs/fish.c:248
-msgid "fish: Sending initial line.."
+msgid "fish: Sending initial line..."
 msgstr "fish: Sende erste Zeile..."
 
 #: vfs/fish.c:252
@@ -6682,7 +6682,7 @@ msgstr "Nullen"
 msgid "Aborting transfer..."
 msgstr "Breche Transfer ab..."
 
-#: vfs/fishc:565
+#: vfs/fish.c:565
 msgid "Error reported after abort."
 msgstr "Fehler nach Abbruch gemeldet."
 
@@ -6836,7 +6836,7 @@ msgstr ""
 msgid " MCFS "
 msgstr " MCFS "
 
-#: vfs/mcfsc:156
+#: vfs/mcfs.c:156
 msgid " The server does not support this version "
 msgstr " Der Server unterstützt diese Version nicht "
 
@@ -6976,7 +6976,7 @@ msgstr ""
 msgid "Changes to file lost"
 msgstr "Änderungen an Datei verlorengegangen"
 
-#: vfs/vfsc:1781
+#: vfs/vfs.c:1781
 msgid "Could not parse:"
 msgstr "Konnte nicht verarbeiten:"
 
@@ -7052,7 +7052,7 @@ msgid " Could not open file %s "
 msgstr " Konnte Datei %s nicht öffnen "
 
 #: vfs/undelfs.c:300
-msgid "undelfs: reading inode bitmap.."
+msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: lese Inode-Bitmap..."
 
 #: vfs/undelfs.c:303
