@@ -5,7 +5,7 @@ tidir      = $(mclibdir)/term
 confdir    = $(sysconfdir)
 
 LIBFILES_OUT = mc.ext mc-gnome.ext
-LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.ru \
+LIBFILES_CONST = mc.hint mc.hint.es mc.hint.cs mc.hint.it mc.hint.ru \
 	mc.lib mc.menu cedit.menu edit.indent.rc
 
 noinst_DATA = \

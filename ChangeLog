@@ -1,3 +1,8 @@
+2000-09-19  Pavel Roskin  <proski@gnu.org>
+
+	* lib/Makefile.in (LIBFILES_CONST): Added mc.hint.it from
+	Marco Ciampa
+
 2000-09-18  Pavel Roskin  <proski@gnu.org>
 
 	* Make.common.in: Added installcheck to placate "make distcheck"
