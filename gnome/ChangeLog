@@ -1,3 +1,8 @@
+Tue Mar 17 00:43:50 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* glayout.c (gnome_panel_about_menu): "About" item now a stock
+	menu item.
+
 1998-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (filter_item_activate): Make it convert the glob
