@@ -1,5 +1,7 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.in: Don't use SEDCMD2, use sed.
+
 	* cons.saver.c: New variable console_minor. Eliminate variables
 	len and vcs_name.
 	(check_file): Set console_minor to the minor device number of
