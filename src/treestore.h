@@ -62,10 +62,22 @@ void        tree_store_add_entry_add_hook    (tree_store_add_fn callback, void *
 void        tree_store_remove_entry_add_hook (tree_store_add_fn callback);
 
 /*
+ * Register/unregister freeze/unfreeze functions for the tree
+ */
+typedef void (*tree_freeze_fn)(int freeze, void *data);
+void tree_store_add_freeze_hook              (tree_freeze_fn callback, void *data);
+void tree_store_remove_freeze_hook           (tree_freeze_fn);
+
+/*
  * Changes in the tree_entry are notified with these
  */
 void        tree_store_notify_remove   (tree_entry *entry);
 void        tree_store_notify_add      (char *directory);
+
+/*
+ * Freeze unfreeze notification
+ */
+void        tree_store_set_freeze    (int freeze);
 
 tree_scan  *tree_store_opendir       (char *path);
 tree_entry *tree_store_readdir       (tree_scan *scanner);

@@ -597,6 +597,8 @@ tree_store_start_check (char *path)
 	g_assert (ts.check_name == NULL);
 	ts.check_start = NULL;
 
+	tree_store_set_freeze (TRUE);
+	
 	/* Search for the start of subdirectories */
 	current = tree_store_whereis (path);
 	if (!current){
@@ -681,6 +683,8 @@ tree_store_end_check (void)
 	}
 	
 	g_list_free (the_queue);
+
+	tree_store_set_freeze (FALSE);
 }
 
 tree_entry *
@@ -722,6 +726,7 @@ tree_store_rescan (char *dir)
 
 static Hook *remove_entry_hooks;
 static Hook *add_entry_hooks;
+static Hook *freeze_hooks;
 
 void
 tree_store_add_entry_remove_hook (tree_store_remove_fn callback, void *data)
@@ -748,7 +753,6 @@ tree_store_notify_remove (tree_entry *entry)
 		p = p->next;
 	}
 }
-
 void
 tree_store_add_entry_add_hook (tree_store_add_fn callback, void *data)
 {
@@ -770,6 +774,31 @@ tree_store_notify_add (char *directory)
 	while (p) {
 		r = (tree_store_add_fn) p->hook_fn;
 		r (directory, p->hook_data);
+		p = p->next;
+	}
+}
+
+void
+tree_store_add_freeze_hook (tree_freeze_fn callback, void *data)
+{
+	add_hook (&freeze_hooks, (void (*)(void *)) callback, data);
+}
+
+void
+tree_store_remove_freeze_hook (tree_freeze_fn callback)
+{
+	delete_hook (&freeze_hooks, (void (*)(void *))callback);
+}
+
+void
+tree_store_set_freeze (int freeze)
+{
+	Hook *p = freeze_hooks;
+	tree_freeze_fn f;
+	
+	while (p) {
+		f = (tree_freeze_fn) p->hook_fn;
+		f (freeze, p->hook_data);
 		p = p->next;
 	}
 }

@@ -1,3 +1,9 @@
+1999-02-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* treestore.c: Add a new hook system to hint a tree freeze/thaw. 
+
+	* setup.c: In the GNOME version, we do not show the dot files by default.
+
 1999-02-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* file.c (copy_file_file): Add support for the GNOME metadata here.

@@ -1217,6 +1217,9 @@ AC_SUBST(PCENTRULE)
 AC_SUBST(builddir)
 builddir=`pwd`
 
+SHELL=${SHELL-"/bin/sh"}
+AC_SUBST(SHELL)
+
 dnl
 dnl Output configuration filesn
 dnl

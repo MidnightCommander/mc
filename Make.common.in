@@ -1,6 +1,6 @@
 VERSION = @VERSION@
 
-SHELL = /bin/sh
+SHELL = @SHELL@
 
 # This variable makes it possible to move the installation root to another
 # directory. This is useful when you're creating a binary distribution of mc.

@@ -478,6 +478,21 @@ entry_added_callback (char *dirname, void *data)
 	g_free (dirname);
 }
 
+/*
+ * Callback routine invoked from the treestore to hint us
+ * about the progress of the freezing
+ */
+static void
+tree_set_freeze (int state, void *data)
+{
+	GtkDTree *dtree = GTK_DTREE (data);
+
+	if (state)
+		gtk_clist_freeze (GTK_CLIST (dtree));
+	else
+		gtk_clist_thaw (GTK_CLIST (dtree));
+}
+
 static void
 gtk_dtree_destroy (GtkObject *object)
 {
@@ -485,6 +500,8 @@ gtk_dtree_destroy (GtkObject *object)
 
 	tree_store_remove_entry_remove_hook (entry_removed_callback);
 	tree_store_remove_entry_add_hook (entry_added_callback);
+	tree_store_remove_freeze_hook (tree_set_freeze);
+	
 	gdk_pixmap_unref (dtree->pixmap_open);
 	gdk_pixmap_unref (dtree->pixmap_close);
 	gdk_bitmap_unref (dtree->bitmap_open);
@@ -648,6 +665,7 @@ gtk_dtree_init (GtkDTree *dtree)
 
 	tree_store_add_entry_remove_hook (entry_removed_callback, dtree);
 	tree_store_add_entry_add_hook (entry_added_callback, dtree);
+	tree_store_add_freeze_hook (tree_set_freeze, dtree);
 }
 
 void

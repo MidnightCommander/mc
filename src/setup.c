@@ -166,7 +166,11 @@ static struct {
     int  *opt_addr;
 } options [] = {
     { "show_backups", &show_backups },
+#ifdef HAVE_GNOME
+    { "gnome_show_dot_files", &show_dot_files },
+#else
     { "show_dot_files", &show_dot_files },
+#endif
     { "verbose", &verbose },
     { "mark_moves_down", &mark_moves_down },
     { "pause_after_run", &pause_after_run },

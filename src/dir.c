@@ -32,8 +32,16 @@
 
 /* "$Id$" */
 
-/* If true show files starting with a dot */
+/*
+ * If true show files starting with a dot.
+ *
+ * In GNOME we default to not showing them.
+ */
+#ifdef HAVE_GNOME
+int show_dot_files = 0;
+#else
 int show_dot_files = 1;
+#endif
 
 /* If true show files ending in ~ */
 int show_backups = 0;
