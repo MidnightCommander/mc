@@ -1,5 +1,7 @@
 2002-07-25  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* wtools.c (message): Fix possible buffer overflow.
+
 	* slint.c [HAVE_MAD] (dealloc_color_pairs): Move ...
 	* color.c [HAVE_MAD]: ... here and make accessible from 
 	other files to fix compilation.
