@@ -80,9 +80,6 @@ static int user_hotkey = 'u';
 static int display_callback (struct Dlg_head *h, int id, int Msg)
 {
 #ifndef HAVE_X
-    char *text;
-    WInput *input;
-    
     switch (Msg){
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
@@ -617,7 +614,6 @@ extern int ftpfs_always_use_proxy;
 #if defined(USE_NETCODE)
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
-extern ftpfs_directory_timeout;
 extern int use_netrc;
 #endif
 

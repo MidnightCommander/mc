@@ -2639,7 +2639,6 @@ files_error (char *format, char *file1, char *file2)
     return do_file_error (cmd_buf);
 }
 
-static char *format = N_("Target file \"%s\" already exists!");
 static int
 replace_callback (struct Dlg_head *h, int Id, int Msg)
 {
