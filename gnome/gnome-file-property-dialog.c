@@ -911,7 +911,7 @@ perm_ownership_new (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *frame;
 	GtkWidget *table;
 
-	frame = gtk_frame_new ("File ownership");
+	frame = gtk_frame_new (_("File ownership"));
 
 	table = gtk_table_new (2, 2, FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (table), 6);
