@@ -1,5 +1,10 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (init_xterm_support): Don't enable xterm_flag just
+	because of "kmous" in terminfo.  Setiing this flag means much
+	more than just mouse support.  Recognize terminals beginning
+	with "rxvt" and set xterm_flag for them.
+
 	* cmd.c (view_other_cmd): Don't check use_mouse_p before calling
 	init_mouse() and shut_mouse(), since those functions decide
 	themselves what to do.

@@ -1742,9 +1742,9 @@ init_xterm_support (void)
     }
 
     if (force_xterm
-	    || (strncmp (termvalue, "xterm", 5) == 0
-	    || strcmp (termvalue, "dtterm") == 0)
-	    || xmouse_seq != NULL) {
+	    || strncmp (termvalue, "xterm", 5) == 0
+	    || strncmp (termvalue, "rxvt", 4) == 0
+	    || strcmp (termvalue, "dtterm") == 0) {
 	xterm_flag = 1;
 
 	/* Default to the standard xterm sequence */
