@@ -1,3 +1,7 @@
+2003-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* vfs.c (mc_open): Fix rare memory leak on failure.
+
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
 	* direntry.c (vfs_s_setctl): Implement VFS_SETCTL_FLUSH.

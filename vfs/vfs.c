@@ -390,6 +390,7 @@ mc_open (const char *filename, int flags, ...)
     va_end (ap);
     
     if (!vfs->open) {
+	g_free (file);
 	errno = -EOPNOTSUPP;
 	return -1;
     }
