@@ -575,6 +575,7 @@ completion_matches (char *text, CompletionFunction entry_function)
 		    j++;
 		    if (j > matches)
 		        break;
+		    continue; /* Look for a run of equal strings */
 		} else
 	            if (low > si) low = si;
 		if (i + 1 != j) /* So there's some gap */

@@ -1,3 +1,8 @@
+2004-10-29  Pavel Tsekov <ptsekov@gmx.net>
+
+	* complete.c (completion_matches): Fix duplicate completion matches
+	if there are more than two matches available.
+
 2004-10-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cmd.c (select_unselect_cmd): Collect repeated code from
