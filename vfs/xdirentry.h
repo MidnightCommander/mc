@@ -37,7 +37,7 @@ typedef struct vfs_s_entry {
     struct vfs_s_inode *dir;	/* Directory we are in - needed for invalidating directory when file in it changes */
     char *name;			/* Name of this entry */
     struct vfs_s_inode *ino;	/* ... and its inode */
-    int magic;
+/*  int magic; */
 #define ENTRY_MAGIC 0x014512563
 } vfs_s_entry;
 
@@ -66,7 +66,7 @@ typedef struct vfs_s_inode {
 	    struct timeval timestamp;
 	} ftp;
     } u;
-    int magic;
+/*  int magic; */
 #define INODE_MAGIC 0x93451656
 } vfs_s_inode;
 
@@ -122,7 +122,7 @@ typedef struct vfs_s_super {
 	    struct defer_inode *defered; /* List of inodes for which another entries may appear */
 	} cpio;
     } u;
-    int magic;
+/*  int magic; */
 #define SUPER_MAGIC 0x915ac312
 } vfs_s_super;
 
@@ -140,7 +140,7 @@ typedef struct vfs_s_fh {
 	    int sock, append;
 	} ftp;
     } u;
-    int magic;
+/*  int magic; */
 #define FH_MAGIC 0x91324682
 } vfs_s_fh;
 
