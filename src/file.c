@@ -25,6 +25,7 @@
                1994, 1995, 1996 Miguel de Icaza
                1995, 1996       Jakub Jelinek
 	       1997             Norbert Warmuth
+	       1998		Pavel Machek
 
    The copy code was based in GNU's cp, and was written by:
    Torbjorn Granlund, David MacKenzie, and Jim Meyering.
@@ -1075,8 +1076,8 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
 	    goto ret;
         }
 	resources |= 2; /* dst_path exists/dst_path opened */
-	resources |= 4; /* remove short file */
     }
+    resources |= 4; /* remove short file */
     appending = do_append;
     do_append = 0;
 
@@ -1146,11 +1147,13 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
         for (i = 1; i;) {
             switch (size = mc_ctl (source_desc, MCCTL_REMOTECOPYCHUNK, 8192)) {
                 case MCERR_TARGETOPEN:
-                    break;
+		    message_1s (1, " Error ", " Can't open target file ");
+		    goto ret;
                 case MCERR_READ:
-                    break;
+		    goto ret;
                 case MCERR_WRITE:
-                    break;
+		    message_1s (1, " Error ", " Can't write to local target file ");
+		    goto ret;
 	        case MCERR_DATA_ON_STDIN:
 		    break;
                 case MCERR_FINISH:
@@ -1158,13 +1161,6 @@ copy_file_file (char *src_path, char *dst_path, int ask_overwrite)
                     i = 0;
                     break;
             }
-	    if (size == MCERR_TARGETOPEN){
-		message_1s (1, " Error ", " Can't open target file ");
-		goto ret;
-	    }
-	    if (size == MCERR_READ)
-		goto ret;
-
 	    if (i && size != MCERR_DATA_ON_STDIN){
 		n_read_total += size;
 

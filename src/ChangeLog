@@ -1,3 +1,7 @@
+Tue Mar 17 23:58:40 1998  Pavel Machek <pavel@elf.ucw.cz>
+
+	* src/file.c: Fix for the case where the disk gets full. 
+
 Tue Mar 16 18:35:53 1998 Stas Maximov <stmax@u213.srcc.msu.su>
 
 	* src/hotlist.c default values for dialogs which add entries to hotlist
