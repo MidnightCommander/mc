@@ -2600,9 +2600,9 @@ void edit_mail_dialog (WEdit * edit)
 	    g_free (mail_subject_last);
 	if (mail_to_last)
 	    g_free (mail_to_last);
-	mail_cc_last = *(quick_widgets[2].str_result);
-	mail_subject_last = *(quick_widgets[4].str_result);
-	mail_to_last = *(quick_widgets[6].str_result);
+	mail_cc_last = tmail_cc;
+	mail_subject_last = tmail_subject;
+	mail_to_last = tmail_to;
 	pipe_mail (edit, mail_to_last, mail_subject_last, mail_cc_last);
     }
 }

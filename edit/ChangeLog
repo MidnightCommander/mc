@@ -1,3 +1,7 @@
+2003-11-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* editcmd.c (edit_mail_dialog): Trivial clean-up.
+
 2003-10-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* edit-widget.h (struct WEdit): Add GTree *defines field.
