@@ -416,19 +416,19 @@ save_setup (void)
     saving_setup = 1;
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
+    save_configure ();
+
 #ifndef HAVE_X
     save_layout ();
-#endif /* !HAVE_X */
-    save_configure ();
     save_string ("Dirs", "other_dir",
 			       get_other_type () == view_listing
 			       ? opanel->cwd : ".", profile);
     if (get_current_panel () != NULL)
 	    WritePrivateProfileString ("Dirs", "current_is_left",
 				       get_current_index () == 0 ? "1" : "0", profile);
-#ifndef HAVE_X
     save_hotlist ();
 #endif /* !HAVE_X */
+
     save_panelize ();
     save_panel_types ();
 /*     directory_history_save (); */
@@ -602,6 +602,7 @@ load_setup (void)
     if (startup_left_mode != view_listing && startup_right_mode!=view_listing)
 	startup_left_mode = view_listing;
 
+#ifndef HAVE_X
     if (!other_dir){
 	char *buffer;
 
@@ -613,11 +614,14 @@ load_setup (void)
 	else
 	    g_free (buffer);
     }
+
+    boot_current_is_left =
+	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);
+#endif /* !HAVE_X */
+
 #ifdef USE_NETCODE
     ftpfs_proxy_host = do_load_string ("Misc", "ftp_proxy_host", "gate");
 #endif
-    boot_current_is_left =
-	GetPrivateProfileInt ("Dirs", "current_is_left", 1, profile);
 
     load_string ("Misc", "find_ignore_dirs", "", setup_color_string,
 		 sizeof (setup_color_string));

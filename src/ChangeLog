@@ -1,3 +1,10 @@
+2001-06-20  Pavel Roskin  <proski@gnu.org>
+
+	* setup.c (save_setup) [HAVE_X]: Don't save the [Dirs] section.
+	(load_setup) [HAVE_X]: Don't load the [Dirs] section.
+	* main.c [HAVE_X]: Disable other_dir and boot_current_is_left.
+	Adjust all users.
+
 2001-06-19  Pavel Roskin  <proski@gnu.org>
 
 	* background.h: Correct condition when WITH_BACKGROUND is

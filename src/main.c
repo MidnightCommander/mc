@@ -306,8 +306,14 @@ char *program_name;
 /* The home directory */
 char *home_dir;
 
+#ifndef HAVE_X
 /* The value of the other directory, only used when loading the setup */
 char *other_dir = 0;
+
+/* Only used at program boot */
+int boot_current_is_left = 1;
+#endif /* !HAVE_X */
+
 char *this_dir = 0;
 
 /* If this is true, then when browsing the tree the other window will
@@ -348,9 +354,6 @@ int midnight_shutdown = 0;
 
 /* to show nice prompts */
 static int last_paused = 0;
-
-/* Only used at program boot */
-int boot_current_is_left = 1;
 
 /* Used for keeping track of the original stdout */
 int stdout_fd = 0;
@@ -2913,8 +2916,10 @@ handle_args (int argc, char *argv [])
     	    char buffer[MC_MAXPATHLEN + 2];
 	    this_dir = g_strdup (tmp);
 	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
+#ifndef HAVE_X
 	    if ((tmp = poptGetArg (ctx)))
 	        other_dir = g_strdup (tmp);
+#endif /* !HAVE_X */
 	}
     }
 
