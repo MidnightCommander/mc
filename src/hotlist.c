@@ -841,7 +841,7 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
 	  0, 0, "input-lbl" },
     { quick_label,  3, 80, 2, 0, 0, 0, 0, 
 	  0, 0, "label-lbl" },
-    { 0 } };
+    NULL_QuickWidget };
     
     int len;
     int i;
@@ -931,7 +931,7 @@ static int add_new_group_input (char *header, char *label, char **result)
 	  "button-append" },
     { quick_input,  4, 80,  0, 0, "", 58, 0, 0, 0, "input" },
     { quick_label,  3, 80,  2, 0,  0,  0, 0, 0, 0, "label" },
-    { 0 } };
+    NULL_QuickWidget };
     int relative_y[] = {1, 1, 1, 0, 2}; /* the relative_x component from the
                                            quick_widgets variable above */
     int len;
