@@ -133,10 +133,8 @@ WPanel *right_panel;
 /* The pointer to the tree */
 WTree *the_tree;
 
-#ifndef HAVE_X
 /* The Menubar */
 WMenu *the_menubar;
-#endif /* HAVE_X */
 
 /* Pointers to the selected and unselected panel */
 WPanel *current_panel = NULL;
@@ -151,11 +149,7 @@ volatile int quit = 0;
 int show_all_if_ambiguous = 0;
 
 /* Set when cd symlink following is desirable (bash mode) */
-#ifndef HAVE_GNOME
 int cd_symlinks = 1;
-#else
-int cd_symlinks = 0;
-#endif
 
 /* If set then dialogs just clean the screen when refreshing, else */
 /* they do a complete refresh, refreshing all the parts of the program */
@@ -184,14 +178,14 @@ int   pause_after_run = pause_on_dumb_terminals;
 /* It true saves the setup when quitting */
 int auto_save_setup = 1;
 
-#if !defined(HAVE_CHARSET) && !defined(HAVE_X)
+#ifndef HAVE_CHARSET
 /* If true, be eight bit clean */
 int eight_bit_clean = 1;
 
 /* If true, then display chars 0-255, else iso-8859-1,
    requires eight_bit_clean */
 int full_eight_bits = 1;
-#endif /* !HAVE_CHARSET && !HAVE_X */
+#endif /* !HAVE_CHARSET */
 
 /* If true use the internal viewer */
 int use_internal_view = 1;
@@ -204,11 +198,6 @@ int mouse_move_pages = 1;
 
 /* If true: l&r arrows are used to chdir if the input line is empty */
 int navigate_with_arrows = 0;
-
-#if 0
-/* If it is set, the commander will iconify itself when executing a program */
-int iconify_on_exec = 1;
-#endif
 
 /* If true use +, -, | for line drawing */
 int force_ugly_line_drawing = 0;
@@ -277,13 +266,11 @@ char *program_name;
 /* The home directory */
 char *home_dir;
 
-#ifndef HAVE_X
 /* The value of the other directory, only used when loading the setup */
 char *other_dir = 0;
 
 /* Only used at program boot */
 int boot_current_is_left = 1;
-#endif /* !HAVE_X */
 
 char *this_dir = 0;
 
@@ -343,20 +330,11 @@ char cmd_buf [512];
 /* Used during argument processing */
 int finish_program = 0;
 
-#ifdef HAVE_GNOME
-/* If set, then no windows are displayed in the GNOME edition */
-int   nowindows = 0, nodesktop = 0, twopanel;
-
-/* If set it displays the directory that holds the gnome .links files */
-int display_linksdir = 0;
-#endif
-
 /* Forward declarations */
 char *get_mc_lib_dir (void);
 int panel_event    (Gpm_Event *event, WPanel *panel);
 int menu_bar_event (Gpm_Event *event, void *);
 
-#ifndef HAVE_GNOME
 WPanel *
 get_current_panel (void)
 {
@@ -368,15 +346,12 @@ get_other_panel (void)
 {
 	return (WPanel *) get_panel_widget (get_other_index ());
 }
-#endif
 
 void
 try_to_select (WPanel *panel, char *name)
 {
     Xtry_to_select (panel, name);
-#ifndef HAVE_X
     select_item (panel);
-#endif
     display_mini_info (panel);
 }
 
@@ -450,11 +425,6 @@ update_one_panel_widget (WPanel *panel, int force_update, char *current_file)
 
     if (free_pointer)
 	g_free (current_file);
-
-#ifdef HAVE_X
-    paint_panel (panel);
-    panel->dirty = 0;
-#endif
 }
 
 void
@@ -542,7 +512,6 @@ static void select_by_index (WPanel *panel, int i)
     unselect_item (panel);
     panel->selected = i;
 
-#ifndef HAVE_X    
     while (panel->selected - panel->top_file >= ITEMS (panel)){
 	/* Scroll window half screen */
 	panel->top_file += ITEMS (panel)/2;
@@ -555,7 +524,6 @@ static void select_by_index (WPanel *panel, int i)
 	if (panel->top_file < 0) panel->top_file = 0;
 	paint_dir (panel);
     } 
-#endif
     select_item (panel);
 }
 
@@ -586,7 +554,7 @@ static void parse_control_file (void)
 	fclose (file);
 	return;
     }
-#endif
+#endif /* !OS2_NT */
     data = (char *) g_malloc (s.st_size+1);
     if (!data){
 	fclose (file);
@@ -700,7 +668,7 @@ do_update_prompt (void)
 	update_prompt = 0;
     }
 }
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 void
 restore_console (void)
@@ -719,14 +687,14 @@ do_execute (const char *shell, const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     char *new_dir = NULL;
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 #ifdef USE_VFS
     char *old_vfs_dir = 0;
 
     if (!vfs_current_is_local ())
 	old_vfs_dir = g_strdup (vfs_get_current_dir ());
-#endif
+#endif /* USE_VFS */
 
     save_cwds_stat ();
     pre_exec ();
@@ -750,12 +718,11 @@ do_execute (const char *shell, const char *command, int flags)
 	invoke_subshell (command, VISIBLY, old_vfs_dir ? 0 : &new_dir);
 #else
 	invoke_subshell (command, VISIBLY, &new_dir);
-#endif
+#endif /* !USE_VFS */
     } else
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 	my_system (flags, shell, command);
 
-#ifndef HAVE_GNOME
     if (!(flags & EXECUTE_INTERNAL)){
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
@@ -773,7 +740,6 @@ do_execute (const char *shell, const char *command, int flags)
 	    }
 	}
     }
-#endif
 
     if (console_flag)
 	handle_console (CONSOLE_SAVE);
@@ -783,13 +749,14 @@ do_execute (const char *shell, const char *command, int flags)
 	if (new_dir)
 	    do_possible_cd (new_dir);
 
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
+
 #ifdef USE_VFS
 	if (old_vfs_dir){
 	    mc_chdir (old_vfs_dir);
 	    g_free (old_vfs_dir);
 	}
-#endif
+#endif /* USE_VFS */
 
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     
@@ -812,7 +779,7 @@ shell_execute (char *command, int flags)
 	else
 	    message (1, MSG_ERROR, _(" The shell is already running a command "));
     else
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 	do_execute (shell, command, flags | EXECUTE_AS_SHELL);
 }
 
@@ -822,14 +789,12 @@ execute (char *command)
     shell_execute (command, 0);
 }
 
-#ifndef HAVE_X
 void
 change_panel (void)
 {
     free_completions (input_w (cmdline));
     dlg_one_down (midnight_dlg);
 }
-#endif /* !HAVE_X */
 
 static int
 quit_cmd_internal (int quiet)
@@ -878,19 +843,6 @@ int quiet_quit_cmd (void)
 /* This routine untouches the first line on both panels in order */
 /* to avoid the refreshing the menu bar */
 
-#ifdef HAVE_X
-void
-untouch_bar (void)
-{
-}
-
-void
-repaint_screen (void)
-{
-    do_refresh ();
-}
-
-#else /* HAVE_X */
 void
 untouch_bar (void)
 {
@@ -903,7 +855,6 @@ repaint_screen (void)
     do_refresh ();
     mc_refresh ();
 }
-#endif /* HAVE_X */
 
 /* Wrapper for do_subshell_chdir, check for availability of subshell */
 void
@@ -914,7 +865,7 @@ subshell_chdir (char *directory)
 	if (vfs_current_is_local ())
 	    do_subshell_chdir (directory, 0, 1);
     }
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 }
 
 void
@@ -990,15 +941,6 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     }
     directory = *new_dir ? new_dir : home_dir;
     
-#ifdef HAVE_GNOME
-    if (is_a_desktop_panel (panel)) {
-	new_panel_at (directory);
-	g_free (olddir);
-	g_free (translated_url);
-	return 0;		/* Don't add to history */
-    }
-#endif
-
     if (mc_chdir (directory) == -1){
 	strcpy (panel->cwd, olddir);
 	g_free (olddir);
@@ -1009,9 +951,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
-#ifndef HAVE_X
     free_completions (input_w (cmdline));
-#endif /* !HAVE_X */
     
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
@@ -1074,7 +1014,6 @@ directory_history_prev (WPanel * panel)
     panel_update_marks (panel);
 }
 
-#ifndef HAVE_X
 void
 directory_history_list (WPanel * panel)
 {
@@ -1093,7 +1032,6 @@ directory_history_list (WPanel * panel)
 	}
     }
 }
-#endif /* !HAVE_X */
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 int
@@ -1127,7 +1065,7 @@ load_prompt (int fd, void *unused)
     update_prompt = 1;
     return 0;
 }
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 
 /* The user pressed the enter key */
 int
@@ -1143,7 +1081,6 @@ menu_bar_event (Gpm_Event *event, void *x)
 int
 maybe_cd (int char_code, int move_up_dir)
 {
-#ifndef HAVE_X
     if (navigate_with_arrows){
 	if (!input_w (cmdline)->buffer [0]){
 	    if (!move_up_dir){
@@ -1157,29 +1094,9 @@ maybe_cd (int char_code, int move_up_dir)
 	    }
 	}
     }
-#endif /* !HAVE_X */
     return 0;
 }
 
-#if 0
-static void
-set_sort_to (WPanel *p, sortfn *sort_order)
-{
-    p->sort_type = sort_order;
-    
-    /* The directory is already sorted, we have to load the unsorted stuff */
-    if (sort_order == (sortfn *) unsorted){
-	char *current_file;
-	
-	current_file = g_strdup (cpanel->dir.list [cpanel->selected].fname);
-	panel_reload (cpanel);
-	try_to_select (cpanel, current_file);
-	g_free (current_file);
-    }
-    do_re_sort (p);
-}
-#endif
-#ifndef HAVE_GNOME
 void
 sort_cmd (void)
 {
@@ -1218,9 +1135,7 @@ listmode_cmd (void)
     g_free (newmode);
 }
 #endif /* LISTMODE_EDITOR */
-#endif /* !HAVE_GNOME */
 
-#ifndef HAVE_GNOME
 /* NOTICE: hotkeys specified here are overriden in menubar_paint_idx (alex) */
 static menu_entry PanelMenu [] = {
     { ' ', N_("&Listing mode..."),          'L', listing_cmd },
@@ -1355,7 +1270,7 @@ static menu_entry OptMenu [] = {
 
 #define menu_entries(x) sizeof(x)/sizeof(menu_entry)
 
-Menu MenuBar [5];
+static Menu MenuBar [5];
 
 void
 init_menu (void)
@@ -1400,7 +1315,6 @@ menu_cmd (void)
 	the_menubar->selected = 4;
     menu_last_selected_cmd ();
 }
-#endif /* !HAVE_GNOME */
 
 /* Flag toggling functions */
 void
@@ -1532,18 +1446,15 @@ create_panels (void)
     the_prompt->transparent = 1;
     the_bar     = buttonbar_new (keybar_visible);
 
-#ifndef HAVE_GNOME
     the_hint    = label_new (0, 0, 0, NULL);
     the_hint->transparent = 1;
     the_hint->auto_adjust_cols = 0;
     the_hint->widget.cols = COLS;
-#endif
     
     the_menubar = menubar_new (0, 0, COLS, MenuBar, 5);
 }
 #endif
 
-#ifndef HAVE_GNOME
 static void copy_current_pathname (void)
 {
     if (!command_prompt)
@@ -1734,14 +1645,12 @@ static void ctl_x_cmd (int ignore)
 {
 	ctl_x_map_enabled = 1;
 }
-#endif /* !HAVE_GNOME */
 
 static void nothing (void)
 {
 }
 
 static const key_map default_map [] = {
-#ifndef HAVE_GNOME
     { KEY_F(19),  menu_last_selected_cmd },
     { KEY_F(20),  (key_callback) quiet_quit_cmd },
 
@@ -1758,7 +1667,6 @@ static const key_map default_map [] = {
 
     /* Suspend */
     { XCTRL('z'), suspend_cmd },
-#endif
     /* The filtered view command */
     { ALT('!'),   filtered_view_cmd_cpanel },
     
@@ -1768,7 +1676,6 @@ static const key_map default_map [] = {
     /* Panel refresh */
     { XCTRL('r'), reread_cmd },
 
-#ifndef HAVE_X
     /* Toggle listing between long, user defined and full formats */
     { ALT('t'),   toggle_listing_cmd },
     
@@ -1780,7 +1687,6 @@ static const key_map default_map [] = {
     
     /* Control-X keybindings */
     { XCTRL('x'), ctl_x_cmd },
-#endif /* !HAVE_X */
 
     /* Trap dlg's exit commands */
     { ESC_CHAR,   nothing },
@@ -1789,7 +1695,6 @@ static const key_map default_map [] = {
     { 0, 0 },
 };
 
-#ifndef HAVE_X
 static void setup_sigwinch (void)
 {
 #if (defined(HAVE_SLANG) || (NCURSES_VERSION_MAJOR >= 4)) && \
@@ -1841,11 +1746,9 @@ setup_post (void)
     midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
     midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
 }
-#endif /* !HAVE_X */
 
 static void setup_mc (void)
 {
-#ifndef HAVE_X
     setup_pre ();
     init_menu ();
     create_panels ();
@@ -1857,9 +1760,6 @@ static void setup_mc (void)
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
     setup_post ();
-#else
-    create_panels ();
-#endif /* !HAVE_X */
 }
 
 static void setup_dummy_mc (const char *file)
@@ -1881,9 +1781,7 @@ static void setup_dummy_mc (const char *file)
 
 static void done_mc (void)
 {
-#ifndef HAVE_X
     done_menu ();
-#endif /* !HAVE_X */
     
     /* Setup shutdown
      *
@@ -1892,16 +1790,12 @@ static void done_mc (void)
      */
     if (auto_save_setup)
 	save_setup ();   /* does also call save_hotlist */
-#ifndef HAVE_X
     else
 	save_hotlist();
     done_screen ();
-#endif /* !HAVE_X */
     vfs_add_current_stamps ();
-#ifndef HAVE_X
     if (xterm_flag && xterm_hintbar)
         set_hintbar(_("Thank you for using GNU Midnight Commander"));
-#endif /* !HAVE_X */
 }
 
 /* This should be called after destroy_dlg since panel widgets
@@ -1949,7 +1843,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	return MSG_HANDLED;
 	
     case DLG_KEY:
-#ifndef HAVE_X
 	if (ctl_x_map_enabled){
 		ctl_x_map_enabled = 0;
 		for (i = 0; ctl_x_map [i].key_code; i++)
@@ -2022,7 +1915,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    }   
 	} 
 	break;
-#endif /* !HAVE_X */
 
     case DLG_HOTKEY_HANDLED:
 	if (get_current_type () == view_listing)
@@ -2030,7 +1922,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	break;
 	
     case DLG_UNHANDLED_KEY:
-#ifndef HAVE_X
 	if (command_prompt){
 	    int v;
 	    
@@ -2046,7 +1937,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 				return MSG_HANDLED;
 			}
 	} else
-#endif /* !HAVE_X */
 	{
 		for (i = 0; default_map [i].key_code; i++){
 			if (id == default_map [i].key_code){
@@ -2057,7 +1947,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 	return MSG_NOT_HANDLED;
 	
-#ifndef HAVE_X
 	/* We handle the special case of the output lines */
     case DLG_DRAW:
 	attrset (SELECTED_COLOR);
@@ -2066,44 +1955,12 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 				   LINES-output_lines-keybar_visible-1,
 				   LINES-keybar_visible-1);
 	break;
-#endif
 	
     }
     return default_dlg_callback (h, id, msg);
 }
 
-#ifdef HAVE_X
-/* This should be rewritten in order to support as many panel containers as
-   the user wants */
-
-#ifndef HAVE_GNOME
-widget_data containers [2];
-int containers_no = 2;
-
-void
-xtoolkit_panel_setup (void)
-{
-    containers [0] = x_create_panel_container (0);
-    containers [1] = x_create_panel_container (1);
-    input_w (cmdline)->widget.wcontainer = containers [0];
-    input_w (cmdline)->widget.area = AREA_BOTTOM;
-    the_prompt->widget.wcontainer = containers [0];
-    the_prompt->widget.area = AREA_BOTTOM;
-    the_bar->widget.wcontainer = containers [0];
-    the_bar->widget.area = AREA_TOP;
-    get_panel_widget (0)->wcontainer = containers [0];
-    get_panel_widget (0)->area = AREA_RIGHT;
-    get_panel_widget (1)->wcontainer = containers [1];
-    get_panel_widget (1)->area = AREA_RIGHT;
-    the_menubar->widget.wcontainer = (widget_data) NULL;
-}
-#else
-#    define xtoolkit_panel_setup()
-#endif
-
-#else
-#    define xtoolkit_panel_setup()
-#endif
+#define xtoolkit_panel_setup()
 
 #ifndef PORT_HAS_LOAD_HINT
 void load_hint (void)
@@ -2129,7 +1986,6 @@ void load_hint (void)
 }
 #endif
 
-#ifndef HAVE_GNOME
 static void
 setup_panels_and_run_mc (void)
 {
@@ -2159,7 +2015,6 @@ setup_panels_and_run_mc (void)
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);
 }
-#endif /* !HAVE_GNOME */
 
 /* result must be free'd (I think this should go in util.c) */
 static char *
@@ -2200,14 +2055,8 @@ mc_maybe_editor_or_viewer (void)
 #ifdef USE_INTERNAL_EDIT
     else {
 	    path = prepend_cwd_on_local ("");
-#ifndef HAVE_GNOME
 	    setup_dummy_mc (path);
-#endif
 	    edit (edit_one_file, edit_one_file_start_line);
-#ifdef HAVE_GNOME
-	    gtk_main ();
-	    exit (1);
-#endif
     }
 #endif /* USE_INTERNAL_EDIT */
     g_free (path);
@@ -2228,9 +2077,7 @@ do_nc (void)
     
     setup_mc ();
 
-#ifndef HAVE_GNOME
     setup_panels_and_run_mc ();
-#endif
     
     /* Program end */
     midnight_shutdown = 1;
@@ -2244,10 +2091,8 @@ do_nc (void)
     }
     done_mc ();
     
-#ifndef HAVE_GNOME
     destroy_dlg (midnight_dlg);
     current_panel = 0;
-#endif
     done_mc_profile ();
 }
 
@@ -2334,7 +2179,6 @@ static void
 OS_Setup (void)
 {
     char   *mc_libdir;
-#ifndef HAVE_X
     char   *termvalue;
 	
     termvalue = getenv ("TERM");
@@ -2349,7 +2193,6 @@ OS_Setup (void)
 	printf ("\33]0;GNU Midnight Commander\7");
 #    endif
     }
-#endif /* ! HAVE_X */
     shell = getenv ("SHELL");
     if (!shell || !*shell)
 	shell = g_strdup (getpwuid (geteuid ())->pw_shell);
@@ -2371,7 +2214,6 @@ OS_Setup (void)
 static void
 sigchld_handler_no_subshell (int sig)
 {
-#ifndef HAVE_X
 #if defined(linux) || defined(__linux__)
     int pid, status;
 
@@ -2404,7 +2246,6 @@ sigchld_handler_no_subshell (int sig)
 #endif /* linux || __linux__ */
 
     /* If we get here, some other child exited; ignore it */
-#endif /* !HAVE_X */
 }
 
 void
@@ -2439,13 +2280,10 @@ init_sigchld (void)
 
 #endif /* _OS_NT, __os2__, UNIX */
 
-#ifndef HAVE_X
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     extern int SLtt_Try_Termcap;
 #endif
-#endif
 
-#ifndef HAVE_X
 static void
 print_mc_usage (void)
 {
@@ -2528,7 +2366,6 @@ print_color_usage (void)
 	     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 	     "   brightcyan, lightgray and white\n\n"), stderr);
 }
-#endif /* !HAVE_X */
 
 static void
 probably_finish_program (void)
@@ -2549,7 +2386,6 @@ static void
 process_args (int c, const char *option_arg)
 {
     switch (c) {
-#ifndef HAVE_X
     case 'V':
 	version (1);
 	finish_program = 1;
@@ -2561,7 +2397,6 @@ process_args (int c, const char *option_arg)
 	force_colors = 1;
 #endif
 	break;
-#endif /* !HAVE_X */
 		
     case 'f':
 	fprintf (stderr, _("Library directory for the Midnight Commander: %s\n"), mc_home);
@@ -2605,7 +2440,6 @@ process_args (int c, const char *option_arg)
 	break;
 #endif	/* HAVE_SUBSHELL_SUPPORT */
 	    
-#ifndef HAVE_X
     case 'H':
 	print_color_usage ();
 	finish_program = 1;
@@ -2614,27 +2448,10 @@ process_args (int c, const char *option_arg)
     case 'h':
 	print_mc_usage ();
 	finish_program = 1;
-#endif
     }
 }
 
-#ifdef HAVE_GNOME
-static void parse_an_arg (poptContext state,
-			  enum poptCallbackReason reason,
-			  const struct poptOption *opt,
-			  const char *arg, void *data)
-{
-	process_args (opt->shortName, arg);
-}
-
-char *cmdline_geometry = NULL;
-
-#endif
-
 static const struct poptOption argument_table [] = {
-#ifdef HAVE_GNOME
-	{ NULL, '\0', POPT_ARG_CALLBACK, parse_an_arg, 0},
-#endif
 #ifdef WITH_BACKGROUND
     { "background",	'B', POPT_ARG_NONE, 	&background_wait, 	 0,
       N_("Use to debug the background code") },
@@ -2655,10 +2472,8 @@ static const struct poptOption argument_table [] = {
       N_("Edits one file") },
 #endif
 
-#ifndef HAVE_GNOME
     { "help", 		'h', POPT_ARG_NONE, 	NULL, 			 'h',
       N_("Displays this help message") },
-#endif
     { "help-colors",	'H', POPT_ARG_NONE, 	NULL, 			 'H',
       N_("Displays a help screen on how to change the color scheme") },
 #ifdef USE_NETCODE
@@ -2694,11 +2509,9 @@ static const struct poptOption argument_table [] = {
     { "subshell", 	'U', POPT_ARG_NONE, 	&use_subshell,		  0,
       N_("Enables subshell support (default)")},
 #endif
-#if !defined(HAVE_X)
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
     { "termcap", 	't', 0, 		&SLtt_Try_Termcap, 	  0,
       N_("Tries to use termcap instead of terminfo") },
-#endif
 #endif
     { "version", 	'V', 			POPT_ARG_NONE, NULL,      'V',
       N_("Displays the current version") },
@@ -2706,115 +2519,24 @@ static const struct poptOption argument_table [] = {
       N_("Launches the file viewer on a file") },
     { "xterm", 		'x', 			POPT_ARG_NONE, &force_xterm, 0,
       N_("Forces xterm features") },
-#ifdef HAVE_GNOME
-    { "geometry", '\0', POPT_ARG_STRING, &cmdline_geometry, 0, N_("Geometry for the window"), N_("GEOMETRY")},
-    {"nowindows", '\0', POPT_ARG_NONE, &nowindows, 0, N_("No windows opened at startup"), NULL},
-    {"nodesktop", '\0', POPT_ARG_NONE, &nodesktop, 0, N_("No desktop icons"), NULL},
-    {"twopanel", '\0', POPT_ARG_NONE, &twopanel, 0, N_("Look more like traditional gmc"), NULL},
-    {"desktop-linksdir", '\0', POPT_ARG_NONE, &display_linksdir, 0,
-     N_("Display the directory that holds the .links startup files and exit")},
-#endif
 
     { NULL, 		0,			0, NULL, 0 }
 };
-
-#if defined(HAVE_CORBA) || defined(HAVE_GNOME)
-/* Convenience function to display the desktop initialization directory and exit */
-static void
-maybe_display_linksdir (void)
-{
-	if (display_linksdir) {
-		puts (DESKTOP_INIT_DIR);
-		exit (1);
-	}
-}
-#endif
-
-#ifdef HAVE_CORBA
-/* Initializes the ORB and does the initial argument processing */
-static void
-init_corba_with_args (int *argc, char **argv, poptContext *ctx)
-{
-    CORBA_Environment ev;
-
-    CORBA_exception_init (&ev);
-    orb = gnome_CORBA_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, ctx,
-					    GNORBA_INIT_SERVER_FUNC, &ev);
-
-    maybe_display_linksdir ();
-
-    if (ev._major != CORBA_NO_EXCEPTION) {
-	    CORBA_exception_free (&ev);
-	    g_warning ("Could not initialize CORBA");
-	    exit (1);
-    }
-
-    CORBA_exception_free (&ev);
-
-    if (!corba_init_server ()) {
-	    g_warning ("Could not initialize the CORBA server");
-	    exit (1);
-    }
-}
-#endif
-
-#ifndef HAVE_CORBA
-void
-corba_activate_server (void)
-{
-	/* nothing */
-}
-
-void
-corba_create_window (char *startup_dir)
-{
-	/* nothing */
-}
-#endif
 
 static void
 handle_args (int argc, char *argv [])
 {
     char   *tmp;
     poptContext   ctx;
-#ifndef HAVE_GNOME
     char   *option_arg, *base;
     int    c;
-#endif /* !HAVE_GNOME */
 
-#ifdef HAVE_GNOME
-    /* special case, handle --desktop-linksdir without initing X */
-    if (argc > 1){
-	    if (strcmp (argv [1], "--desktop-linksdir") == 0){
-		    puts (DESKTOP_INIT_DIR);
-		    exit (1);
-	    }
-    }
-#ifdef HAVE_CORBA
-    init_corba_with_args (&argc, argv, &ctx);
-#else
-    gnome_init_with_popt_table ("gmc", VERSION, argc, argv, argument_table, 0, &ctx);
-    maybe_display_linksdir ();
-#endif
-
-#ifdef HAVE_GNOME_WINDOW_ICON
-    gnome_window_icon_set_default_from_file (ICONDIR"/i-directory.png");
-#endif
-    gtk_widget_push_visual (gdk_imlib_get_visual ());
-    gtk_widget_push_colormap (gdk_imlib_get_colormap ());
-	
-/*    poptResetContext (ctx); */
-#else
     ctx = poptGetContext ("mc", argc, argv, argument_table, 0);
-#endif
 
-#ifndef HAVE_X
 #ifdef USE_TERMCAP
     SLtt_Try_Termcap = 1;
 #endif
-#endif
 
-#ifndef HAVE_GNOME
     while ((c = poptGetNextOpt (ctx)) > 0){
 	option_arg = poptGetOptArg (ctx);
 
@@ -2829,11 +2551,9 @@ handle_args (int argc, char *argv [])
 	finish_program = 1;
     }
     probably_finish_program ();
-#endif /* !HAVE_GNOME */
 
     tmp = poptGetArg (ctx);
 
-#ifndef HAVE_GNOME
     /*
      * Check for special invocation names mcedit and mcview,
      * if none apply then set the current directory and the other
@@ -2866,17 +2586,14 @@ handle_args (int argc, char *argv [])
 	    probably_finish_program ();
  	}
     } else
-#endif /* !HAVE_GNOME */
     {
        	/* sets the current dir and the other dir */
 	if (tmp) {
     	    char buffer[MC_MAXPATHLEN + 2];
 	    this_dir = g_strdup (tmp);
 	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
-#ifndef HAVE_X
 	    if ((tmp = poptGetArg (ctx)))
 	        other_dir = g_strdup (tmp);
-#endif /* !HAVE_X */
 	}
     }
 
@@ -2979,37 +2696,7 @@ main (int argc, char *argv [])
     }
     
     vfs_init ();
-    
-#ifdef HAVE_X
-    /* NOTE: This call has to be before any our argument handling :) */
 
-#ifdef HAVE_GNOME
-    {
-	char *base = x_basename (argv [0]);
-
-	if (base){
-	    if (strcmp (base, "mcedit") == 0)
-		edit_one_file = "";
-	    else
-	    if (strcmp (base, "mcview") == 0)
-		view_one_file = "";
-	}
-    }
-
-    handle_args(argc, argv);
-
-    tree_store_load ();
-
-    session_init ();
-    probably_finish_program ();
-#endif
-    
-    if (xtoolkit_init (&argc, argv) == -1)
-	exit (1);
-#endif /* HAVE_X */
-
-
-#ifndef HAVE_X
 #ifdef HAVE_SLANG
     SLtt_Ignore_Beep = 1;
 #endif
@@ -3019,7 +2706,6 @@ main (int argc, char *argv [])
     init_key ();
 
     handle_args (argc, argv);
-#endif /* HAVE_X */
     
     /* Used to report the last working directory at program end */
     if (print_last_wd){
@@ -3044,16 +2730,8 @@ main (int argc, char *argv [])
 #endif
     }
 
-#   ifdef HAVE_X
-    /* This is to avoid subshell trying to restard any child pid
-     * that happends to have cons_saver_pid (a random startup value).
-     * and PID 1 is init, unlikely we could be the parent of it.
-     */
-/*    cons_saver_pid = 1; */
-#   else
     /* Must be done before installing the SIGCHLD handler [[FIXME]] */
     handle_console (CONSOLE_INIT);
-#   endif
     
 #   ifdef HAVE_SUBSHELL_SUPPORT
     subshell_get_console_attributes ();
@@ -3064,13 +2742,11 @@ main (int argc, char *argv [])
     
     compatibility_move_mc_files ();
     
-#ifdef HAVE_X
+#if 0
     /* We need this, since ncurses endwin () doesn't restore the signals */
-    /* Very strange comment given that ifdef HAVE_X stands here since
-       revision 1.1 - Pavel Roskin */
+    /* FIXME: Check if it's needed */
     save_stop_handler ();
-
-#else /* !HAVE_X */
+#endif
 
     /* Must be done before init_subshell, to set up the terminal size: */
     /* FIXME: Should be removed and LINES and COLS computed on subshell */
@@ -3080,22 +2756,15 @@ main (int argc, char *argv [])
     /* NOTE: This call has to be after slang_init. It's the small part from
     the previous init_key which had to be moved after the call of slang_init */ 
     init_key_input_fd ();
-#endif /* !HAVE_X */
 
     load_setup ();
 
-#ifdef HAVE_GNOME
-    init_colors ();
-#else
     init_curses ();
-#endif
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 
     /* Don't use subshell in GNOME and when invoked as a viewer or editor */
-#ifndef HAVE_GNOME
     if (edit_one_file || view_one_file)
-#endif /* !HAVE_GNOME */
 	use_subshell = 0;
 
     /* Done here to ensure that the subshell doesn't  */
@@ -3105,7 +2774,6 @@ main (int argc, char *argv [])
 
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
-#ifndef HAVE_X
     /* Removing this from the X code let's us type C-c */
     load_key_defs ();
 
@@ -3115,11 +2783,6 @@ main (int argc, char *argv [])
     
     if (alternate_plus_minus)
         application_keypad_mode ();
-#endif /* !HAVE_X */
-
-#ifdef HAVE_GNOME
-    gnome_check_super_user ();
-#endif
 
     if (show_change_notice){
 	message (1, _(" Notice "),
@@ -3128,13 +2791,13 @@ main (int argc, char *argv [])
 		   " files have been moved now\n"));
     }
     
-#   ifdef HAVE_SUBSHELL_SUPPORT
+#ifdef HAVE_SUBSHELL_SUPPORT
 	if (use_subshell){
 	    prompt = strip_ctrl_codes (subshell_prompt);
 	    if (!prompt)
 		prompt = "";
 	} else
-#   endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 	    prompt = (geteuid () == 0) ? "# " : "$ ";
 
     /* Program main loop */
@@ -3151,7 +2814,6 @@ main (int argc, char *argv [])
 
     flush_extension_file (); /* does only free memory */
 
-#   ifndef HAVE_X
     /* Miguel, maybe the fix in slang is not required and
      * it could be done by removing the slang_done_screen.
      * Do I need to call slang_reset_tty then?
@@ -3163,17 +2825,14 @@ main (int argc, char *argv [])
 	restore_console ();
     if (alternate_plus_minus)
         numeric_keypad_mode ();
-#   endif
 
 #ifndef OS2_NT
     signal (SIGCHLD, SIG_DFL);  /* Disable the SIGCHLD handler */
 #endif
     
-#   ifndef HAVE_X
     if (console_flag)
 	handle_console (CONSOLE_DONE);
     putchar ('\n');  /* Hack to make shell's prompt start at left of screen */
-#   endif
 
 #ifdef _OS_NT
     /* On NT, home_dir is malloced */
@@ -3203,13 +2862,10 @@ main (int argc, char *argv [])
 	g_free (last_wd_string);
     }
 
-#if defined(HAVE_MAD) && !defined(HAVE_X)
+#ifdef HAVE_MAD
     done_key ();
 #endif
 
     mad_finalize (__FILE__, __LINE__);
-#ifdef HAVE_X
-    xtoolkit_end ();
-#endif
     return 0;
 }
