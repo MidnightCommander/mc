@@ -1,13 +1,15 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
-AM_CPPFLAGS = -DLIBDIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
-suppbindir = $(pkglibdir)/bin
 localedir = $(datadir)/locale
 
 bin_PROGRAMS = mc mcmfmt
 
 if CONS_SAVER
-suppbin_PROGRAMS = cons.saver
+pkglib_PROGRAMS = cons.saver
+AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\" \
+	-DLIBDIR=\""$(pkglibdir)"\"
+else
+AM_CPPFLAGS = -DDATADIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 endif
 
 noinst_PROGRAMS = man2hlp

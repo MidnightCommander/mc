@@ -1997,12 +1997,12 @@ OS_Setup (void)
     if (!shell || !*shell)
 	shell = "/bin/sh";
 
-    /* This is the directory, where MC was installed, on Unix this is LIBDIR */
-    /* and can be overriden by the MC_LIBDIR environment variable */
-    if ((mc_libdir = getenv ("MC_LIBDIR")) != NULL) {
+    /* This is the directory, where MC was installed, on Unix this is DATADIR */
+    /* and can be overriden by the MC_DATADIR environment variable */
+    if ((mc_libdir = getenv ("MC_DATADIR")) != NULL) {
 	mc_home = g_strdup (mc_libdir);
     } else {
-	mc_home = g_strdup (LIBDIR);
+	mc_home = g_strdup (DATADIR);
     }
 }
 

@@ -1,5 +1,12 @@
 2002-09-21  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Rename LIBDIR to DATADIR, since it refers to
+	pkgdatadir now.  Install cons.saver to pkglibdir, pass it to the
+	compiler as LIBDIR.
+	* cons.handler.c (handle_console): Use LIBDIR.
+	* main.c (OS_Setup): Use DATADIR instead of LIBDIR.  Rename
+	MC_LIBDIR to MC_DATADIR.
+
 	* panelize,c: Remove unused variable panelize_title.
 
 	* view.c (view_event): Add mouse wheel support.

@@ -144,7 +144,7 @@ void handle_console (unsigned char action)
 	    open ("/dev/null", O_WRONLY);
 	    if (tty_name) {
 		/* Exec the console save/restore handler */
-		mc_conssaver = concat_dir_and_file (mc_home, "bin/cons.saver");
+		mc_conssaver = concat_dir_and_file (LIBDIR, "cons.saver");
 		execl (mc_conssaver, "cons.saver", tty_name, NULL);
 	    }
 	    /* Console is not a tty or execl() failed */
