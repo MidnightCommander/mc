@@ -398,6 +398,7 @@ int edit_insert_file (WEdit * edit, const char *filename)
     return 1;
 }
 
+/* Open file and create it if necessary.  Return 0 for success, 1 for error.  */
 static int check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
@@ -417,7 +418,7 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     /* Open the file, create it if needed */
     if ((file = mc_open (filename, O_RDONLY | O_CREAT, 0666)) < 0) {
 	edit_error_dialog (_ (" Error "), get_sys_error (catstrs (_ (" Failed trying to open file for reading: "), filename, " ", 0)));
-	return 2;
+	return 1;
     }
 
     /* If the file has just been created, we don't have valid stat yet, so do it now */
@@ -427,6 +428,11 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 	return 1;
     }
     mc_close (file);
+
+    /* If it's a new file, delete it if it's not modified or saved */
+    if (!stat_ok && st->st_size == 0) {
+	edit->delete_file = 1;
+    }
 
     if (st->st_size >= SIZE_LIMIT) {
 /* The file-name is printed after the ':' */
@@ -447,8 +453,6 @@ int edit_open_file (WEdit * edit, const char *filename, const char *text, unsign
     } else {
 	int r;
 	r = check_file_access (edit, filename, &st);
-	if (r == 2)
-	    return edit->delete_file = 1;
 	if (r)
 	    return 1;
 	edit->stat1 = st;

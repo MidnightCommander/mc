@@ -1,7 +1,16 @@
+2002-06-24  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (check_file_access): Return 1 on all errors, document
+	this behavior.  Set edit->delete_file to 1 for newly created
+	files.
+	(edit_open_file): Don't set edit->delete_file, it's now done in
+	check_file_access().
+	Reported by Saso <saso@bojler.dhs.org>
+
 2002-05-13  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* editcmd.c (edit_save_file): Call mc_chown () and mc_chmod ()
-	before mc_open () to prevent hangs over ftpfs. 
+	* editcmd.c (edit_save_file): Call mc_chown() and mc_chmod()
+	before mc_open() to prevent hangs over ftpfs.
 
 	* edit.h: Remove open, close, write, read and mkdir definitions.
 	* edit.c: Use mc_open, mc_close, mc_write, mc_read, mc_rename,
