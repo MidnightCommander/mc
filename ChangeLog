@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Fix USE_VFS_NET conditional.  Don't substitute
+	NETFILES - it's unused.
+
 	* configure.in: Check for arpa/inet.h.
 
 	* mcfn_install: Remove.  Also remove all references to it.
