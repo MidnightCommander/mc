@@ -1732,7 +1732,7 @@ static keyword_t ftpfs_netrc_next (void)
     return NETRC_UNKNOWN;
 }
 
-static int ftpfs_netrc_bad_mode (char *netrcname, char *netrc)
+static int ftpfs_netrc_bad_mode (const char *netrcname, const char *arg_netrc)
 {
     static int be_angry = 1;
     struct stat mystat;
@@ -1809,7 +1809,8 @@ static int ftpfs_netrc_lookup (const char *host, char **login, char **pass)
 {
     char *netrcname;
     char *tmp_pass = NULL;
-    char hostname[MAXHOSTNAMELEN], *domain;
+    char hostname[MAXHOSTNAMELEN];
+    const char *domain;
     keyword_t keyword;
     static struct rupcache {
 	struct rupcache *next;
