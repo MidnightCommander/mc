@@ -23,5 +23,5 @@ The next version, mc-4.6.0, is expected to be released using the latest
 versions of the GNU tools, which are currently:
 
 Autoconf 2.57
-Automake 1.7.1
+Automake 1.7.2
 Gettext 0.11.5
