@@ -22,6 +22,7 @@
 */
 
 #include <config.h>
+#include <signal.h>		/* kill() */
 #include "edit.h"
 #include "editlock.h"
 

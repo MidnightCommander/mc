@@ -32,6 +32,7 @@
 #    include <unistd.h>
 #endif
 #include <sys/stat.h>
+#include <signal.h>	/* kill() */
 #include <string.h>
 #include <stdio.h>
 

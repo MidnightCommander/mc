@@ -91,7 +91,7 @@ vfs_op (int handle)
     GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
 			     vfs_cmp_handle);
     if (!l)
 	return NULL;
@@ -108,7 +108,7 @@ vfs_info (int handle)
     GSList *l;
     struct vfs_openfile *h;
 
-    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
 			     vfs_cmp_handle);
     if (!l)
 	return NULL;
@@ -124,7 +124,7 @@ vfs_free_handle (int handle)
 {
     GSList *l;
 
-    l = g_slist_find_custom (vfs_openfiles, (gconstpointer) handle,
+    l = g_slist_find_custom (vfs_openfiles, (void *) handle,
 			     vfs_cmp_handle);
     vfs_openfiles = g_slist_delete_link (vfs_openfiles, l);
 }

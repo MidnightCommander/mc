@@ -24,6 +24,7 @@
 
 #include <config.h>
 #include <glib.h>
+#include <string.h>	/* strlcpy() */
 #include "glibcompat.h"
 
 #if GLIB_MAJOR_VERSION < 2
