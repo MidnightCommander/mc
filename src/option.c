@@ -46,7 +46,6 @@ static Dlg_head *conf_dlg;
 #define TOGGLE_VARIABLE 0
 
 static int first_width, second_width;
-static char *title1, *title2, *title3;
 
 static struct {
     char   *text;
@@ -115,6 +114,7 @@ init_configure (void)
     char *ok_button = _("&OK");
     char *cancel_button = _("&Cancel");
     char *save_button = _("&Save");
+    static char *title1, *title2, *title3;
 
     if (!i18n_config_flag) {
 	register int l1;
