@@ -286,7 +286,7 @@ const: For every function taking a string argument, decide whether you
 	"const char *". If your implementation needs to modify the string,
 	use g_strdup to create a local copy.
 
-g_strlcpy: Whenever you use this function, be sure to add "glib-compat.h"
+g_strlcpy: Whenever you use this function, be sure to add "glibcompat.h"
 	to the included headers. This is because in glib-1.2 there is
 	no such function.
 
