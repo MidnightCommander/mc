@@ -1,12 +1,13 @@
 # Midnight Commander - hu.po
 # Copyright (C) 2000 Free Software Foundation, Inc.
-# Szabolcs Szasz <sz@szasz.hu>, 2000
+# Szabolcs Szasz <sz@szasz.hu>, 2001
+# Szabolcs Ban <shooby@gnome.hu>, 2001
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2001-01-24 15:50+0100\n"
-"PO-Revision-Date: 2001-01-24 15:51+01:00\n"
+"POT-Creation-Date: 2001-02-13 11:46+0100\n"
+"PO-Revision-Date: 2001-02-13 22:21+01:00\n"
 "Last-Translator: Szabolcs Szasz <sz@szasz.hu>\n"
 "Language-Team: Hungarian GNOME team <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -787,7 +788,7 @@ msgstr ""
 "A könyvtár nem üres. Töröljük a tartalmával együtt?"
 
 # gnome/gdialogs.c:790 src/file.c:2244
-#: gnome/gdialogs.c:790 src/file.c:2244
+#: gnome/gdialogs.c:790 src/file.c:2248
 msgid " Delete: "
 msgstr " Törlés: "
 
@@ -1254,7 +1255,7 @@ msgstr "_Ikon nézet"
 # gnome/gmc-window.c:102
 #: gnome/gmc-window.c:102
 msgid "Display _tree view"
-msgstr " Képernyõ-bitek "
+msgstr "Könyv_tárfa nézet"
 
 # gnome/gmc-window.c:112
 #: gnome/gmc-window.c:112
@@ -1811,7 +1812,7 @@ msgstr "Másolás elõtt összméret-számítás"
 # gnome/gprefs.c:163
 #: gnome/gprefs.c:163
 msgid "FTP directory cache timeout :"
-msgstr "FTP könyvtár gyorstárának elévülési idõ:"
+msgstr "FTP könyvtár gyorstárának elévülési ideje:"
 
 # gnome/gprefs.c:167
 # gnome/gprefs.c:167
@@ -1941,7 +1942,7 @@ msgstr "%s bájt %d fájlban"
 # gnome/gscreen.c:1689 src/screen.c:689
 #: gnome/gscreen.c:1689 src/screen.c:689
 msgid "<readlink failed>"
-msgstr "<readlink hiba>"
+msgstr "<hibás szim. link>"
 
 # gnome/gscreen.c:2118
 #: gnome/gscreen.c:2118
@@ -2120,12 +2121,12 @@ msgid "help"
 msgstr "súgó"
 
 # gnome/gwidget.c:101 src/file.c:2268
-#: gnome/gwidget.c:101 src/file.c:2268
+#: gnome/gwidget.c:101 src/file.c:2272
 msgid "yes"
 msgstr "igen"
 
 # gnome/gwidget.c:103 src/file.c:2266
-#: gnome/gwidget.c:103 src/file.c:2266
+#: gnome/gwidget.c:103 src/file.c:2270
 msgid "no"
 msgstr "nem"
 
@@ -2203,7 +2204,7 @@ msgstr "Elérhetetlen könyvtárakra hivatkozó ablakokat bezárni"
 #: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
 #: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
 #: gtkedit/editcmd.c:311 gtkedit/editcmd.c:2038 gtkedit/editwidget.c:1024
-#: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
+#: src/dir.c:396 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Hiba "
 
@@ -2474,7 +2475,7 @@ msgid "al&L"
 msgstr "&Mindet"
 
 # gtkedit/editcmd.c:1196 src/file.c:2190 src/filegui.c:267
-#: gtkedit/editcmd.c:1196 src/file.c:2190 src/filegui.c:267
+#: gtkedit/editcmd.c:1196 src/file.c:2194 src/filegui.c:267
 msgid "&Skip"
 msgstr "&Kihagy"
 
@@ -2771,7 +2772,7 @@ msgstr "Mégse lépünk ki"
 # gtkedit/editcmd.c:2380 src/cmd.c:247 src/file.c:1878 src/file.c:2249
 # src/filegui.c:603 src/hotlist.c:1022 src/main.c:867 src/screen.c:2162
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
-#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
 #: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&Yes"
@@ -2780,7 +2781,7 @@ msgstr "&Igen"
 # gtkedit/editcmd.c:2380 src/cmd.c:247 src/file.c:1878 src/file.c:2249
 # src/filegui.c:602 src/hotlist.c:1022 src/main.c:867 src/screen.c:2162
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
-#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1878 src/file.c:2249
+#: gtkedit/editcmd.c:2390 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
 #: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
 msgid "&No"
@@ -2900,7 +2901,7 @@ msgstr "Nem sikerült a parancsfált olvasni: "
 # gtkedit/editcmd.c:2893
 #: gtkedit/editcmd.c:2897
 msgid "Error close script:"
-msgstr "Nem sikerült a parancsfált bezárni: "
+msgstr "Nem sikerült a parancsfált lezárni: "
 
 # gtkedit/editcmd.c:2898
 #: gtkedit/editcmd.c:2902
@@ -3840,7 +3841,7 @@ msgid "Background process:"
 msgstr "Háttérfolyamat:"
 
 # src/background.c:277 src/file.c:2189
-#: src/background.c:277 src/file.c:2189
+#: src/background.c:277 src/file.c:2193
 msgid " Background process error "
 msgstr " Hiba a háttérfolyamatban "
 
@@ -3963,7 +3964,7 @@ msgstr "ISO 8859-1"
 # src/boxes.c:461
 #: src/boxes.c:461
 msgid "7 bits"
-msgstr "7-bites"
+msgstr "7 bites"
 
 # src/boxes.c:468
 # src/boxes.c:468
@@ -4437,7 +4438,7 @@ msgstr " 'Hard' link "
 
 # ! promptokban, mint pl. "copy ... to:"
 # src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
-#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1704
+#: src/cmd.c:1037 src/cmd.c:1176 src/file.c:1708
 msgid " to:"
 msgstr " ide: "
 
@@ -4677,13 +4678,13 @@ msgid "&Group"
 msgstr "&Csoport"
 
 # src/dir.c:386
-#: src/dir.c:386
+#: src/dir.c:396
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "A '%s' fájl létezik, de nem lehet elérni: %s"
 
 # src/dir.c:657
-#: src/dir.c:657
+#: src/dir.c:667
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -5052,7 +5053,7 @@ msgid ""
 " Cannot create target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nem sikerült a \"%s\" célfájlt létrehozni. \n"
+" Nem sikerült a \"%s\" fájlt létrehozni. \n"
 " %s "
 
 # src/file.c:665
@@ -5082,7 +5083,7 @@ msgid ""
 " Cannot write target file \"%s\" \n"
 " %s "
 msgstr ""
-" A \"%s\" célfájlt írása nem sikerült. \n"
+" A \"%s\" fájl írása nem sikerült. \n"
 " %s "
 
 # src/file.c:745
@@ -5097,7 +5098,7 @@ msgid ""
 " Cannot close source file \"%s\" \n"
 " %s "
 msgstr ""
-" Nem sikerült a \"%s\" fájlt bezárni. \n"
+" Nem sikerült a \"%s\" fájlt lezárni. \n"
 " %s "
 
 # src/file.c:792
@@ -5107,7 +5108,7 @@ msgid ""
 " Cannot close target file \"%s\" \n"
 " %s "
 msgstr ""
-" Nem sikerült a \"%s\" célfájlt bezárni. \n"
+" Nem sikerült a \"%s\" fájlt lezárni. \n"
 " %s "
 
 # src/file.c:802
@@ -5299,92 +5300,101 @@ msgstr "1törlése"
 # pl.: "dfdsfds" nevû fájl törlése?
 # (Copy, Move, Delete)
 # src/file.c:1695
-#: src/file.c:1695
-#, c-format
-msgid "%o %f \"%s\"%m"
-msgstr "%o %f \"%s\"%m"
-
-# pl.: 44 kijelölt könyvtár törlése?
-# (Copy, Move, Delete)
+#.
+#. * These are formats for building a prompt. Parts encoded as follows:
+#. * %o - operation from op_names1
+#. * %f - file/files or files/directories, as appropriate
+#. * %m - "with source mask" or question mark for delete
+#. * %s - source name (truncated)
+#. * %d - number of marked files
+#. * %e - "to:" or question mark for delete
+#. *
 #: src/file.c:1696
-#, c-format
+#, no-c-format
+msgid "%o %f \"%s\"%m"
+msgstr "\"%s\" nevû %f %o%m"
+
+# pl.: "44 kijelolt konyvtar torlese?"
+# (Copy, Move, Delete)
+#: src/file.c:1698
+#, no-c-format
 msgid "%o %d %f%m"
-msgstr "%o %d %f%m"
+msgstr "%d kijelölt %f %o%m"
 
 # src/file.c:1698
-#: src/file.c:1698
-#, c-format
+#: src/file.c:1701
+#, no-c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
 
 # src/file.c:1699
-#: src/file.c:1699
-#, c-format
+#: src/file.c:1703
+#, no-c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
 # src/file.c:1703 vfs/fish.c:509
-#: src/file.c:1703 vfs/fish.c:509
+#: src/file.c:1707 vfs/fish.c:509
 msgid "file"
 msgstr "fájl"
 
 # tobb kijelolt dolog eseten hasznalatos ("4 files")
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "files"
 msgstr "fájl"
 
 # src/file.c:1703
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "directory"
 msgstr "könyvtár"
 
 # tobb kijelolt dolog eseten hasznalatos
-#: src/file.c:1703
+#: src/file.c:1707
 msgid "directories"
 msgstr "könyvtár"
 
 # tobb kijelolt dolog eseten hasznalatos
-#: src/file.c:1704
+#: src/file.c:1708
 msgid "files/directories"
 msgstr "fájl/könyvtár"
 
 # src/file.c:1704
-#: src/file.c:1704
+#: src/file.c:1708
 msgid " with source mask:"
 msgstr " az alábbi a maszkkal:"
 
 # src/file.c:1856
-#: src/file.c:1856
+#: src/file.c:1860
 msgid " Can't operate on \"..\"! "
 msgstr " A \"..\" könyvtárat nem lehet erre haszálni... "
 
 # Copy, Move, Delete...
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1879 src/screen.c:2115
 msgid "Yes"
 msgstr "Igen"
 
 # src/file.c:1875 src/screen.c:2115
-#: src/file.c:1875 src/screen.c:2115
+#: src/file.c:1879 src/screen.c:2115
 msgid "No"
 msgstr "Nem"
 
 # src/file.c:1928
-#: src/file.c:1928
+#: src/file.c:1932
 msgid " Sorry, I could not put the job in background "
 msgstr " Nem lehet a mûveletet a háttérben végezni. "
 
 # src/file.c:2014 src/file.c:2098
-#: src/file.c:2014 src/file.c:2098
+#: src/file.c:2018 src/file.c:2102
 msgid " Internal failure "
 msgstr " Belsõ hiba "
 
 # src/file.c:2014 src/file.c:2098
-#: src/file.c:2014 src/file.c:2098
+#: src/file.c:2018 src/file.c:2102
 msgid " Unknown file operation "
 msgstr " Ismeretlen fájlmûvelet "
 
 # src/file.c:2029
-#: src/file.c:2029
+#: src/file.c:2033
 #, c-format
 msgid ""
 " Destination \"%s\" must be a directory \n"
@@ -5394,17 +5404,17 @@ msgstr ""
 " %s "
 
 # src/file.c:2190
-#: src/file.c:2190
+#: src/file.c:2194
 msgid "&Retry"
 msgstr "Új&ra"
 
 # src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
-#: src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
+#: src/file.c:2194 src/file.c:2255 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
 msgstr "Megsz&akít"
 
 # src/file.c:2242
-#: src/file.c:2242
+#: src/file.c:2246
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -5415,7 +5425,7 @@ msgstr ""
 "   Töröljük a tartalmával együtt? "
 
 # src/file.c:2243
-#: src/file.c:2243
+#: src/file.c:2247
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -5426,32 +5436,32 @@ msgstr ""
 "   Töröljük a tartalmával együtt? "
 
 # src/file.c:2250
-#: src/file.c:2250
+#: src/file.c:2254
 msgid "a&ll"
 msgstr "&Mindet"
 
 # src/file.c:2250 src/filegui.c:595
-#: src/file.c:2250 src/filegui.c:595
+#: src/file.c:2254 src/filegui.c:595
 msgid "non&E"
 msgstr "&Egyiket sem"
 
 # src/file.c:2260
-#: src/file.c:2260
+#: src/file.c:2264
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Írj be 'yes'-t, ha TÉNYLEG törölni akarod "
 
 # src/file.c:2262
-#: src/file.c:2262
+#: src/file.c:2266
 msgid "all the directories "
 msgstr "az összes könyvtárat "
 
 # src/file.c:2264
-#: src/file.c:2264
+#: src/file.c:2268
 msgid " Recursive Delete "
 msgstr " Rekurzív törlés "
 
 # src/file.c:2265
-#: src/file.c:2265
+#: src/file.c:2269
 msgid " Background process: Recursive Delete "
 msgstr " Háttérfolyamat: rekurzív törlés "
 
@@ -5504,7 +5514,7 @@ msgstr "Ha ú&jabb"
 # src/filegui.c:598
 #: src/filegui.c:598
 msgid "Overwrite all targets?"
-msgstr "Minden célfájlt felülírni?"
+msgstr "Minden fájlt felülírni?"
 
 # src/filegui.c:600
 #: src/filegui.c:600
@@ -5519,7 +5529,7 @@ msgstr "&Hozzáírás"
 # src/filegui.c:604
 #: src/filegui.c:604
 msgid "Overwrite this target?"
-msgstr "Felülírjuk ezt a célfájlt?"
+msgstr "Felülírjuk ezt a fájlt?"
 
 # src/filegui.c:606
 #: src/filegui.c:606
@@ -5661,7 +5671,7 @@ msgstr "Fájl keresése"
 #: src/find.c:452
 #, c-format
 msgid "Grepping in %s"
-msgstr "Keresés \"%s\" tartalmában..."
+msgstr "Keresés: \"%s\"..."
 
 # src/find.c:490
 #: src/find.c:490
@@ -6359,7 +6369,7 @@ msgstr "Listázási formátum szerk."
 #: src/main.c:1236
 #, c-format
 msgid " New mode is \"%s\" "
-msgstr " Az új mód \"%s\" "
+msgstr " Az új mód: \"%s\" "
 
 # src/main.c:1246 src/main.c:1270
 #: src/main.c:1248 src/main.c:1272
@@ -6609,7 +6619,7 @@ msgstr "Mege&rõsítés..."
 # src/main.c:1365
 #: src/main.c:1371
 msgid "&Display bits..."
-msgstr "&Képernyõ-bitek..."
+msgstr "&Képernyõbitek..."
 
 # src/main.c:1367
 #: src/main.c:1373
@@ -6870,7 +6880,7 @@ msgstr "Midnight Commander rendszerkönyvtár: %s\n"
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
-"A -m kapcsoló elavult. Lásd a 'Képernyõ-bitek'-et a 'Beállítások' menüben!\n"
+"A -m kapcsoló elavult. Lásd a 'Képernyõbitek'-et a 'Beállítások' menüben!\n"
 
 # src/main.c:2681
 # src/main.c:2687
@@ -6946,7 +6956,7 @@ msgstr "Lassú terminálokon kevesebb adatforgalommal mûködik."
 # src/main.c:2729
 #: src/main.c:2735
 msgid "Use stickchars to draw"
-msgstr "Sima 7-bites ASCII karakterekkel rajzoljon."
+msgstr "Sima 7 bites ASCII karakterekkel rajzoljon."
 
 # src/main.c:2733
 #: src/main.c:2739
@@ -7005,7 +7015,7 @@ msgstr "A '.links' inicializációs fájlok könyvtárának kiírása, aztán kilépés."
 
 # src/main.c:3069
 # src/main.c:3077
-#: src/main.c:3077
+#: src/main.c:3086
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -7015,12 +7025,12 @@ msgstr ""
 
 # src/main.c:3147
 # src/main.c:3155
-#: src/main.c:3155
+#: src/main.c:3167
 msgid " Notice "
 msgstr " Megjegyzés "
 
 # src/main.c:3148
-#: src/main.c:3156
+#: src/main.c:3168
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -7221,12 +7231,12 @@ msgstr "Nem sikerült a parancsot elindítani."
 # src/panelize.c:458
 #: src/panelize.c:458
 msgid "Pipe close failed"
-msgstr "Csõfájl bezárása nem sikerült."
+msgstr "Csõfájl lezárása nem sikerült."
 
 # src/popthelp.c:31
 #: src/popthelp.c:31
 msgid "Show this help message"
-msgstr "Ezt a használati utasíást mutatja."
+msgstr "Ezt a használati utasítást mutatja."
 
 # src/popthelp.c:32
 #: src/popthelp.c:32
@@ -7986,7 +7996,7 @@ msgid "NumLock on keypad"
 msgstr "'Num Lock' a num. blokkban"
 
 # vfs/cpio.c:141 vfs/cpio.c:157
-#: vfs/cpio.c:141 vfs/cpio.c:157
+#: vfs/cpio.c:142 vfs/cpio.c:158
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -7996,7 +8006,7 @@ msgstr ""
 "%s"
 
 # vfs/cpio.c:224
-#: vfs/cpio.c:224
+#: vfs/cpio.c:225
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -8006,7 +8016,7 @@ msgstr ""
 "%s"
 
 # vfs/cpio.c:309 vfs/cpio.c:358
-#: vfs/cpio.c:309 vfs/cpio.c:358
+#: vfs/cpio.c:310 vfs/cpio.c:359
 #, c-format
 msgid ""
 "Corrupt cpio header encountered in\n"
@@ -8016,7 +8026,7 @@ msgstr ""
 "%s"
 
 # !! ...
-#: vfs/cpio.c:427
+#: vfs/cpio.c:428
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -8035,13 +8045,13 @@ msgstr ""
 #. file and than a record for a directory it is in; cpio would die with
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
-#: vfs/cpio.c:450
+#: vfs/cpio.c:451
 #, c-format
 msgid "%s contains duplicit entries! Skiping!"
 msgstr "\"%s\" ismétlõdõ bejegyzéseket tartalmaz! Kihagyva!..."
 
 # vfs/cpio.c:517
-#: vfs/cpio.c:517
+#: vfs/cpio.c:518
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -8641,7 +8651,7 @@ msgstr " Nem sikerült megyitni a fájlt: %s "
 # vfs/undelfs.c:300
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
-msgstr "undelfs: Inode-bittérkép betöltése..."
+msgstr "undelfs: inode-bittérkép betöltése..."
 
 # vfs/undelfs.c:303
 #: vfs/undelfs.c:303
