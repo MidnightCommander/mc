@@ -209,7 +209,7 @@ enter (WInput *cmdline)
 	return MSG_HANDLED;
     } else {
 	char *command, *s;
-	size_t i, j;
+	size_t i, j, cmd_len;
 
 	if (!vfs_current_is_local ()) {
 	    message (1, MSG_ERROR,
@@ -227,16 +227,15 @@ enter (WInput *cmdline)
 	    return MSG_NOT_HANDLED;
 	}
 #endif
-
-	command = g_malloc (strlen (cmd) + 1);
+	cmd_len = strlen (cmd);
+	command = g_malloc (cmd_len + 1);
 	command[0] = 0;
-	for (i = j = 0; i < strlen (cmd); i++) {
+	for (i = j = 0; i < cmd_len; i++) {
 	    if (cmd[i] == '%') {
 		i++;
 		s = expand_format (NULL, cmd[i], 1);
-		command = g_realloc (command, strlen (command) + strlen (s)
-				     + strlen (cmd) - i + 1);
-		strcat (command, s);
+		command = g_realloc (command, j + strlen (s) + cmd_len - i + 1);
+		strcpy (command + j, s);
 		g_free (s);
 		j = strlen (command);
 	    } else {
