@@ -1,3 +1,7 @@
+2001-11-14  Pavel Roskin  <proski@gnu.org>
+
+	* mouse.c: Add default cases to fix warnings with gcc-2.96.
+
 2001-11-12  Pavel Roskin  <proski@gnu.org>
 
 	* main.c: Remove support for subshell debugging.  Firstly, it

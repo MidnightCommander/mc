@@ -56,6 +56,8 @@ void init_mouse (void)
     case MOUSE_XTERM:
 	define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
 	break;
+    default:
+	break;
     }
     enable_mouse ();
 }
@@ -97,6 +99,8 @@ void enable_mouse (void)
 	fflush (stdout);
 	mouse_enabled = 1; 
 	break;
+    default:
+	break;
     }
 }
 
@@ -122,6 +126,8 @@ void disable_mouse (void)
 	printf(ESC_STR "[?1001r");
 
 	fflush (stdout);
+	break;
+    default:
 	break;
     }
 }
