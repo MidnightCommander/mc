@@ -1,5 +1,7 @@
 2001-08-13  Pavel Roskin  <proski@gnu.org>
 
+	* lib/mc.ext.in: Move ls-lR.gz before generic gzip support.
+
 	Replace "Can't" with "Cannot" everywhere.
 
 2001-08-12  Pavel Roskin  <proski@gnu.org>

@@ -462,6 +462,17 @@ shell/.cpio
 	View=%view{ascii} cat '%f' | cpio -ictv
 	Extract=cat '%f' | cpio -ic
 
+# ls-lR
+regex/(^|\.)ls-?lR$
+	Open=%cd %p#lslR
+regex/(^|\.)ls-?lR\.(g?z|Z)$
+	Open=%cd %p#lslR
+	View=%view{ascii} gunzip -c %f
+
+# ftplist
+regex/\.ftplist$
+	Open=%cd %p#ftplist
+
 # gzip
 type/^gzip
 	Open=gzip -dc %f | %var{PAGER:more}
@@ -494,17 +505,6 @@ regex/\.s?a$
 	Open=%cd %p#uar
 	#Open=%view{ascii} ar tv %f
 	View=%view{ascii} nm %f
-
-# ls-lR
-regex/(^|\.)ls-?lR$
-	Open=%cd %p#lslR
-regex/(^|\.)ls-?lR\.(g?z|Z)$
-	Open=%cd %p#lslR
-	View=%view{ascii} gunzip -c %f
-
-# ftplist
-regex/\.ftplist$
-	Open=%cd %p#ftplist
 
 # trpm
 regex/\.trpm$
