@@ -1,5 +1,10 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (common_dialog_callback): Fold into ...
+	* dlg.c (default_dlg_callback): ... this.  Don't redraw dialogs
+	that don't have colors.  Adjust all dependencies.
+	(std_callback): Elimitate.
+
 	* panelize.c (panelize_refresh): Eliminate in favor of
 	common_dialog_callback().
 

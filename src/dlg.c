@@ -141,6 +141,7 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
     w->options = W_WANT_CURSOR;
 }
 
+/* Default callback for widgets */
 int default_proc (Dlg_head *h, int Msg, int Par)
 {
     switch (Msg){
@@ -177,12 +178,36 @@ int default_proc (Dlg_head *h, int Msg, int Par)
     return 1;
 }
 
+/* Clean the dialog area, draw the frame and the title */
+void
+common_dialog_repaint (struct Dlg_head *h)
+{
+    int space;
+
+    space = (h->flags & DLG_COMPACT) ? 0 : 1;
+
+    attrset (NORMALC);
+    dlg_erase (h);
+    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
+    attrset (HOT_NORMALC);
+    if (h->title) {
+	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
+	addstr (h->title);
+    }
+}
+
+/* Default dialog callback */
 int default_dlg_callback (Dlg_head *h, int id, int msg)
 {
+    if (msg == DLG_DRAW && h->color) {
+	common_dialog_repaint (h);
+	return MSG_HANDLED;
+    }
     if (msg == DLG_IDLE){
 	dlg_broadcast_msg_to (h, WIDGET_IDLE, 0, W_WANT_IDLE);
+	return MSG_HANDLED;
     }
-    return 0;
+    return MSG_NOT_HANDLED;
 }
 
 Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
@@ -881,11 +906,6 @@ destroy_dlg (Dlg_head *h)
 
     if (refresh_list)
 	do_refresh ();
-}
-
-int std_callback (Dlg_head *h, int Msg, int Par)
-{
-    return 0;
 }
 
 void widget_set_size (Widget *widget, int y, int x, int lines, int cols)

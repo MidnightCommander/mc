@@ -195,9 +195,8 @@ find_par_start:
     if (!in_contents)
 	in_contents = g_strdup ("");
     
-    find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors,
-			   common_dialog_callback, "[Find File]", "findfile",
-			   DLG_CENTER);
+    find_dlg = create_dlg (0, 0, FIND_Y, FIND_X, dialog_colors, NULL,
+			   "[Find File]", "findfile", DLG_CENTER);
 
     x_set_dialog_title (find_dlg, _("Find File"));
 

@@ -945,8 +945,8 @@ show_hist (Hist * history, int widget_x, int widget_y)
     }
 
     query_dlg =
-	create_dlg (y, x, h, w, dialog_colors, common_dialog_callback,
-		    "[History-query]", "history", DLG_COMPACT);
+	create_dlg (y, x, h, w, dialog_colors, NULL, "[History-query]",
+		    "history", DLG_COMPACT);
     x_set_dialog_title (query_dlg, i18n_htitle ());
     query_list = listbox_new (1, 1, w - 2, h - 2, listbox_finish, 0, NULL);
     add_widget (query_dlg, query_list);

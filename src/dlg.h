@@ -172,10 +172,14 @@ void init_widget (Widget *w, int y, int x, int lines, int cols,
 		  callback_fn callback, destroy_fn destroy,
 		  mouse_h mouse_handler, char *tkname);
 
-/* Various default service provision */
+/* Default callback for dialogs */
 int default_dlg_callback  (Dlg_head *h, int id, int msg);
-int std_callback          (Dlg_head *h, int Msg, int Par);
+
+/* Default callback for widgets */
 int default_proc          (Dlg_head *h, int Msg, int Par);
+
+/* Default paint routine for dialogs */
+void common_dialog_repaint (struct Dlg_head *h);
 
 #define real_widget_move(w, _y, _x) move((w)->y + _y, (w)->x + _x)
 #define dlg_move(h, _y, _x) move(((Dlg_head *) h)->y + _y, \

@@ -1,12 +1,6 @@
 #ifndef __WTOOLS_H
 #define __WTOOLS_H
 
-/* Repaint the area, the frame and the title */
-void common_dialog_repaint (struct Dlg_head *h);
-
-/* For common dialogs, just repaint */
-int common_dialog_callback (struct Dlg_head *h, int id, int msg);
-
 /* Listbox utility functions */
 typedef struct {
     Dlg_head *dlg;

@@ -218,7 +218,7 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
     x_size = (WX + 4) + ui->eta_extra;
 
     ui->op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
-			     common_dialog_callback, "", "opwin", DLG_CENTER);
+			     NULL, "", "opwin", DLG_CENTER);
 
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
@@ -610,8 +610,7 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 
     ui = ctx->ui;
 
-    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, alarm_colors,
-				  common_dialog_callback,
+    ui->replace_dlg = create_dlg (0, 0, 16, rd_xlen, alarm_colors, NULL,
 				  "[ Replace ]", "replace", DLG_CENTER);
     
     x_set_dialog_title (ui->replace_dlg,

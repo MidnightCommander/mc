@@ -50,36 +50,6 @@
 
 /* }}} */
 
-/* {{{ Common dialog callback */
-
-void
-common_dialog_repaint (struct Dlg_head *h)
-{
-    int space;
-
-    space = (h->flags & DLG_COMPACT) ? 0 : 1;
-
-    attrset (NORMALC);
-    dlg_erase (h);
-    draw_box (h, space, space, h->lines - 2 * space, h->cols - 2 * space);
-    attrset (HOT_NORMALC);
-    if (h->title) {
-	dlg_move (h, space, (h->cols - strlen (h->title)) / 2);
-	addstr (h->title);
-    }
-}
-
-int
-common_dialog_callback (struct Dlg_head *h, int id, int msg)
-{
-    if (msg == DLG_DRAW) {
-	common_dialog_repaint (h);
-	return MSG_HANDLED;
-    }
-    return MSG_NOT_HANDLED;
-}
-
-/* }}} */
 /* {{{ Listbox utility functions */
 
 Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
@@ -106,8 +76,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     /* Create components */
     listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
-			       common_dialog_callback, help, "listbox",
-			       DLG_CENTER);
+			       NULL, help, "listbox", DLG_CENTER);
     x_set_dialog_title (listbox->dlg, title);	       
     
     listbox->list = listbox_new (2, 2, cols, lines, listbox_finish, 0, "li");
@@ -184,9 +153,8 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     ypos = LINES/3 - (lines-3)/2;
 
     /* prepare dialog */
-    query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors,
-			    common_dialog_callback, "[QueryBox]",
-			    "query", DLG_BACKWARD);
+    query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors, NULL,
+			    "[QueryBox]", "query", DLG_BACKWARD);
     x_set_dialog_title (query_dlg, header);
 
     if (count > 0){
@@ -287,7 +255,7 @@ Chooser *new_chooser (int lines, int cols, char *help, int flags)
     int      button_lines;
 
     c =g_new (Chooser, 1);
-    c->dialog = create_dlg (0, 0, lines, cols, dialog_colors, common_dialog_callback,
+    c->dialog = create_dlg (0, 0, lines, cols, dialog_colors, NULL,
 			    help, "chooser", DLG_CENTER);
     
     c->dialog->lines = lines;
