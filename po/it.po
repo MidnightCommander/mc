@@ -92,7 +92,7 @@ msgstr " Esegue macro "
 #: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
 #: edit/editcmd.c:632
 msgid " Press macro hotkey: "
-msgstr " Premi tasto veloce macro: "
+msgstr " Premere tasto macro: "
 
 #: edit/edit_key_translator.c:168
 msgid " Insert Literal "
@@ -100,7 +100,7 @@ msgstr " Ins. letteralmente "
 
 #: edit/edit_key_translator.c:168
 msgid " Press any key: "
-msgstr " Premi un tasto: "
+msgstr " Premere un tasto: "
 
 #: edit/editcmd.c:257
 msgid " Error writing to pipe: "
@@ -1030,7 +1030,7 @@ msgstr "sec"
 
 #: src/boxes.c:723
 msgid "ftpfs directory cache timeout:"
-msgstr "Timeout cache directory ftpfs:"
+msgstr "Scadenza cache directory ftpfs:"
 
 #: src/boxes.c:727
 msgid "ftp anonymous password:"
@@ -1038,11 +1038,11 @@ msgstr "password ftp anonimo:"
 
 #: src/boxes.c:734
 msgid "Timeout for freeing VFSs:"
-msgstr "Timeout per aggiornamento VFS:"
+msgstr "Scadenza svuotamento dei VFS:"
 
 #: src/boxes.c:740
 msgid " Virtual File System Setting "
-msgstr " Configurazione Virtual File System (VFS) "
+msgstr " Impostazione File System Virtuale (VFS) "
 
 #: src/boxes.c:794
 msgid "Quick cd"
@@ -1214,7 +1214,7 @@ msgstr " Permessi "
 
 #: src/chmod.c:202
 msgid "Chmod command"
-msgstr "Comando Chmod"
+msgstr "Permessi"
 
 #: src/chown.c:77
 msgid "Set &users"
@@ -1246,7 +1246,7 @@ msgstr " Nome utente "
 
 #: src/chown.c:165
 msgid " Chown command "
-msgstr " Comando Chown "
+msgstr " Proprietario "
 
 #. add fields for unknown names (numbers)
 #: src/chown.c:185
@@ -1509,8 +1509,8 @@ msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
 msgstr ""
-" Inserisci il nome del file system sul quale volete \n"
-"  eseguire il comando di ripristino: (F1 per i dettagli) "
+" Inserire il nome del dispositivo (senza /dev/) dal quale\n"
+"   volete ripristinare i file: (F1 per i dettagli)"
 
 #: src/cmd.c:1419
 msgid " Setup saved to ~/"
@@ -2115,7 +2115,7 @@ msgstr "non&E"
 
 #: src/file.c:2145
 msgid " Type 'yes' if you REALLY want to delete "
-msgstr " Batti `si' se VERAMENTE vuoi cancellare "
+msgstr " Scrivi 'si' se VERAMENTE vuoi cancellare "
 
 #: src/file.c:2147
 msgid "all the directories "
@@ -2633,12 +2633,12 @@ msgstr " (%d blocchi)"
 #: src/info.c:179
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Propriet.:  %s/%s"
+msgstr "Proprietà:  %s/%s"
 
 #: src/info.c:184
 #, c-format
 msgid "Links:     %d"
-msgstr "Links:      %d"
+msgstr "Collegam.:  %d"
 
 #: src/info.c:188
 #, c-format
@@ -2787,19 +2787,19 @@ msgstr ""
 
 #: src/learn.c:260
 msgid "Learn keys"
-msgstr "Apprendi tasti"
+msgstr "Impara tasti"
 
 #: src/learn.c:293
 msgid "Press all the keys mentioned here. After you have done it, check"
-msgstr "Premi tutti i tasti riportati qui. Una volta completato, controlla"
+msgstr "Premere tutti i tasti riportati. Una volta fatto, controllare"
 
 #: src/learn.c:295
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "quali tasti non siano marcati con OK. Premi Barra spazio sui tasti"
+msgstr "quali tasti non sono OK. Premere la Barra spazio sui tasti"
 
 #: src/learn.c:297
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "mancanti, o usa il mouse per ridefinirli. Spostati con il Tab."
+msgstr "mancanti, o usare il mouse per ridefinirli. Spostarsi con il Tab."
 
 #: src/main.c:475
 msgid ""
@@ -3056,7 +3056,7 @@ msgstr "&Impara tasti..."
 
 #: src/main.c:1085
 msgid "&Virtual FS..."
-msgstr "Opzioni &VFS..."
+msgstr "FS &Virtuale..."
 
 #: src/main.c:1088
 msgid "&Save setup"
@@ -3388,15 +3388,15 @@ msgstr ""
 
 #: src/option.c:72
 msgid "safe de&Lete"
-msgstr "unde&Lete"
+msgstr "cance&Llazione sicura"
 
 #: src/option.c:73
 msgid "cd follows lin&Ks"
-msgstr "cd segue i lin&K"
+msgstr "cd segue i collegamenti (&K)"
 
 #: src/option.c:74
 msgid "advanced cho&Wn"
-msgstr "opzioni avanzate cho&Wn"
+msgstr "proprietario avanzato (&W)"
 
 #: src/option.c:75
 msgid "l&Ynx-like motion"
@@ -3408,7 +3408,7 @@ msgstr "barre che &Girano"
 
 #: src/option.c:77
 msgid "co&Mplete: show all"
-msgstr "completo: visuali&Zza tutto"
+msgstr "completamento: visuali&Zza tutto"
 
 #: src/option.c:78
 msgid "&Use internal view"
@@ -3420,11 +3420,11 @@ msgstr "usa &Editor interno"
 
 #: src/option.c:80
 msgid "auto m&Enus"
-msgstr "auto men&U"
+msgstr "menu a&Utomatici"
 
 #: src/option.c:81
 msgid "&Auto save setup"
-msgstr "salva setu&P automaticamente"
+msgstr "&Autosalva configurazione"
 
 #: src/option.c:82
 msgid "shell &Patterns"
@@ -3436,11 +3436,11 @@ msgstr "calcola &Totali"
 
 #: src/option.c:84
 msgid "&Verbose operation"
-msgstr "operazioni &Dettagliate"
+msgstr "operazioni &Prolisse"
 
 #: src/option.c:85
 msgid "&Fast dir reload"
-msgstr "aggiornamento &Rapido directory"
+msgstr "aggiornamento rapido &Directory"
 
 #: src/option.c:86
 msgid "mi&X all files"
@@ -3448,7 +3448,7 @@ msgstr "mescola tutti i &File"
 
 #: src/option.c:87
 msgid "&Drop down menus"
-msgstr "menu a c&Ascata"
+msgstr "&Rilascia menu a cascata"
 
 #: src/option.c:88
 msgid "ma&Rk moves down"
