@@ -29,6 +29,7 @@
 #include <config.h>
 #include <string.h>
 #include <errno.h>
+#include <stdio.h>
 #include "tty.h"
 #include "mad.h"
 #include "global.h"
