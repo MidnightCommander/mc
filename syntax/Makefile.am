@@ -15,6 +15,7 @@ syntax_DATA =			\
 	latex.syntax		\
 	lisp.syntax		\
 	lsm.syntax		\
+	m4.syntax		\
 	mail.syntax		\
 	makefile.syntax		\
 	ml.syntax		\

@@ -101,6 +101,9 @@ include changelog.syntax
 file .\*[Mm]akefile[\\\.a-z]\*$ Makefile
 include makefile.syntax
 
+file (..\*\\.m4$|configure\\.in|configure\\.ac) M4\sMacroprocessor\sSource
+include m4.syntax
+
 file ..\*\\.(bat|cmd)$ DOS\sBatch
 include dos.syntax
 

@@ -1,0 +1,150 @@
+#
+# M4 Macroprocessor/Autoconf syntax highlighting
+# for MC Editor/CoolEdit
+#
+# Author: Vlad Romanenko <VladRomanenko@ukr.net>
+#
+# 2002-09-19  Vlad Romanenko <VladRomanenko@ukr.net>
+#	* Initial public release.
+#
+
+context default
+
+	#=========================
+	# Macros with parameters
+	keyword wholeleft builtin\[\s\]\(	yellow/24
+	keyword wholeleft decr\[\s\]\(		yellow/24
+	keyword wholeleft define\[\s\]\(	yellow/24
+	keyword wholeleft defn\[\s\]\(		yellow/24
+	keyword wholeleft esyscmd\[\s\]\(	yellow/24
+	keyword wholeleft eval\[\s\]\(		yellow/24
+	keyword wholeleft format\[\s\]\(	yellow/24
+	keyword wholeleft ifdef\[\s\]\(		yellow/24
+	keyword wholeleft ifelse\[\s\]\(	yellow/24
+	keyword wholeleft include\[\s\]\(	yellow/24
+	keyword wholeleft incr\[\s\]\(		yellow/24
+	keyword wholeleft index\[\s\]\(		yellow/24
+	keyword wholeleft len\[\s\]\(		yellow/24
+	keyword wholeleft maketemp\[\s\]\(	yellow/24
+	keyword wholeleft patsubst\[\s\]\(	yellow/24
+	keyword wholeleft popdef\[\s\]\(	yellow/24
+	keyword wholeleft pushdef\[\s\]\(	yellow/24
+	keyword wholeleft regexp\[\s\]\(	yellow/24
+	keyword wholeleft sinclude\[\s\]\(	yellow/24
+	keyword wholeleft substr\[\s\]\(	yellow/24
+	keyword wholeleft syscmd\[\s\]\(	yellow/24
+	keyword wholeleft translit\[\s\]\(	yellow/24
+	keyword wholeleft undefine\[\s\]\(	yellow/24
+
+	#=========================
+	# Macros with optional parameters
+	keyword whole changecom			yellow/24
+	keyword whole changequote		yellow/24
+	keyword whole debugfile			yellow/24
+	keyword whole debugmode			yellow/24
+	keyword whole divert			yellow/24
+	keyword whole divnum			yellow/24
+	keyword whole dumpdef			yellow/24
+	keyword whole errprint			yellow/24
+	keyword whole indir			yellow/24
+	keyword whole m4exit			yellow/24
+	keyword whole m4wrap			yellow/24
+	keyword whole shift			yellow/24
+	keyword whole sysval			yellow/24
+	keyword whole traceoff			yellow/24
+	keyword whole traceon			yellow/24
+	keyword whole undivert			yellow/24
+
+	#=========================
+	# Autoconf macros
+	keyword whole AC_ARG_ENABLE		cyan/16
+	keyword whole AC_ARG_WITH		cyan/16
+	keyword whole AC_BEFORE			cyan/16
+	keyword whole AC_CACHE_CHECK		cyan/16
+	keyword whole AC_CACHE_VAL		cyan/16
+	keyword whole AC_CHECK_FILE		cyan/16
+	keyword whole AC_CHECK_FUNC		cyan/16
+	keyword whole AC_CHECK_FUNCS		cyan/16
+	keyword whole AC_CHECK_HEADER		cyan/16
+	keyword whole AC_CHECK_HEADERS		cyan/16
+	keyword whole AC_CHECK_LIB		cyan/16
+	keyword whole AC_CHECK_PROG		cyan/16
+	keyword whole AC_CHECK_PROGS		cyan/16
+	keyword whole AC_CHECK_SIZEOF		cyan/16
+	keyword whole AC_CHECK_TOOL		cyan/16
+	keyword whole AC_CHECK_TYPE		cyan/16
+	keyword whole AC_CHECKING		cyan/16
+	keyword whole AC_DEFINE			cyan/16
+	keyword whole AC_DEFINE_UNQUOTED	cyan/16
+	keyword whole AC_DEFUN			cyan/16
+	keyword whole AC_EGREP_CPP		cyan/16
+	keyword whole AC_EGREP_HEADER		cyan/16
+	keyword whole AC_INIT			cyan/16
+	keyword whole AC_MSG_CHECKING		cyan/16
+	keyword whole AC_MSG_ERROR		cyan/16
+	keyword whole AC_MSG_NOTICE		cyan/16
+	keyword whole AC_MSG_RESULT		cyan/16
+	keyword whole AC_MSG_WARN		cyan/16
+	keyword whole AC_OBSOLETE		cyan/16
+	keyword whole AC_OUTPUT			cyan/16
+	keyword whole AC_PATH_PROG		cyan/16
+	keyword whole AC_PATH_PROGS		cyan/16
+	keyword whole AC_PREREQ			cyan/16
+	keyword whole AC_PROVIDE		cyan/16
+	keyword whole AC_REQUIRE		cyan/16
+	keyword whole AC_SUBST			cyan/16
+	keyword whole AC_SUBST_FILE		cyan/16
+	keyword whole AC_TRY_EVAL		cyan/16
+	keyword whole AC_TRY_COMPILE		cyan/16
+	keyword whole AC_TRY_CPP		cyan/16
+	keyword whole AC_TRY_LINK		cyan/16
+	keyword whole AC_TRY_RUN		cyan/16
+
+	#=========================
+	# Variables
+	keyword whole __file__		brightred/18
+	keyword whole __gnu__		brightred/18
+	keyword whole __line__		brightred/18
+	keyword whole __unix__		brightred/18
+	keyword wholeright $\{0123456789\}\[0123456789\] brightred/18
+	keyword wholeright $\{@\*#\}	brightred/18
+
+	#=========================
+	# Special symbols
+	keyword `	brightcyan/17
+	keyword '	brightcyan/17
+	keyword [	brightcyan/17
+	keyword ]	brightcyan/17
+	keyword ,	yellow/24
+	keyword (	yellow/24
+	keyword )	yellow/24
+
+
+#=============================
+# Comments
+
+context # \n brown/22
+	spellcheck
+	keyword whole BUG	brightred/18
+	keyword whole FixMe	brightred/18
+	keyword whole FIXME	brightred/18
+	keyword whole Note	brightred/18
+	keyword whole NOTE	brightred/18
+	keyword whole ToDo	brightred/18
+	keyword whole TODO	brightred/18
+	keyword !!\[!\]		brightred/18
+	keyword ??\[?\]		brightred/18
+
+
+context dnl \n brown/22
+	spellcheck
+	keyword whole BUG	brightred/18
+	keyword whole FixMe	brightred/18
+	keyword whole FIXME	brightred/18
+	keyword whole Note	brightred/18
+	keyword whole NOTE	brightred/18
+	keyword whole ToDo	brightred/18
+	keyword whole TODO	brightred/18
+	keyword !!\[!\]		brightred/18
+	keyword ??\[?\]		brightred/18
+

@@ -1,5 +1,10 @@
 2002-09-19  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/m4.syntax: New file.
+	* syntax/Syntax: Add m4.syntax.
+	* syntax/Makefile.am: Likewise.
+	From Vlad Romanenko <VladRomanenko@ukr.net>
+
 	* syntax/sql.syntax: Only recognize non-standard MySQL comments
 	at the beginning of line.
 
