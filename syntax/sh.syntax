@@ -145,6 +145,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole tar cyan
     keyword whole tcsh cyan
     keyword whole test cyan
+    keyword whole time cyan
     keyword whole touch cyan
     keyword whole true cyan
     keyword whole umount cyan
@@ -317,6 +318,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole tar cyan
     keyword whole tcsh cyan
     keyword whole test cyan
+    keyword whole time cyan
     keyword whole touch cyan
     keyword whole true cyan
     keyword whole umount cyan
