@@ -102,7 +102,7 @@ include po.syntax
 file Don_t_match_me Mail\sfolder ^From\s
 include mail.syntax
 
-file (.\\.syntax$)|(^Syntax$) Syntax\sHighlighting\sdefinitions
+file [Ss]yntax$ Syntax\sHighlighting\sdefinitions ^#\ssyntax\srules\sversion\s
 
 context default
     keyword whole spellch\eck yellow/24
