@@ -241,11 +241,11 @@ msgstr "Питатися пр&o зам╕ну"
 
 #: edit/editcmd.c:1211 edit/editcmd.c:1289 src/view.c:2150
 msgid "&Backwards"
-msgstr "&Назад"
+msgstr "&Hазад"
 
 #: edit/editcmd.c:1213 edit/editcmd.c:1291
 msgid "&Regular expression"
-msgstr "&Pегулярний вираз"
+msgstr "Р&eгулярний вираз"
 
 #: edit/editcmd.c:1215 edit/editcmd.c:1293
 msgid "&Whole words only"
@@ -2138,7 +2138,7 @@ msgstr " Фоновий процес: Файл ╕сну╓ "
 
 #: src/filegui.c:746
 msgid "preserve &Attributes"
-msgstr "Збе&p╕гати атрибути"
+msgstr "Збер╕гати атриб&yти"
 
 #: src/filegui.c:748
 msgid "follow &Links"
