@@ -37,6 +37,7 @@
 #include "gtkflist.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
+#include <glib.h>
 
 /* Whether to display the tree view on the left */
 int tree_panel_visible = -1;
@@ -45,7 +46,7 @@ int tree_panel_visible = -1;
 #include "dir-close.xpm"
 #include "link.xpm"
 #include "dev.xpm"
-
+#include "gl
 /* Timeout for auto-scroll on drag */
 #define SCROLL_TIMEOUT 100
 

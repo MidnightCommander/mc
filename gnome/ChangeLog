@@ -1,3 +1,7 @@
+1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Include the glib.h header file here.
+
 1999-04-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gtkdtree.c (gtk_dtree_save_tree): Use tree_store_save().
