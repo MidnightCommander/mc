@@ -114,7 +114,7 @@ static void stop_idle (void *data);
 static void status_update (char *text);
 static void get_list_info (char **file, char **dir);
 
-/* FIXME: r should be local variables */
+/* FIXME: r should be local variable */
 static regex_t *r; /* Pointer to compiled content_pattern */
  
 static int case_sensitive = 1;
@@ -509,7 +509,6 @@ do_search (struct Dlg_head *h)
     struct stat tmp_stat;
     static int pos;
     static int subdirs_left = 0;
-    char *tmp_name;		/* For building file names */
 
     if (!h) { /* someone forces me to close dirp */
 	if (dirp) {
@@ -552,27 +551,31 @@ do_search (struct Dlg_head *h)
 		} else
 		    break;
 	    } 
-	    
-	    strcpy (directory, tmp);
+
+	    strncpy (directory, tmp, sizeof (directory));
+	    directory [sizeof (directory) - 1] = 0;
 	    g_free (tmp);
 
 	    if (verbose){
-		    char buffer [BUF_SMALL];
+		char buffer [BUF_SMALL];
 
-		    g_snprintf (buffer, sizeof (buffer), _("Searching %s"), name_trunc (directory, FIND2_X_USE));
-		    status_update (buffer);
+		g_snprintf (buffer, sizeof (buffer), _("Searching %s"), 
+			    name_trunc (directory, FIND2_X_USE));
+		status_update (buffer);
 	    }
 	    /* mc_stat should not be called after mc_opendir
 	       because vfs_s_opendir modifies the st_nlink
 	    */
-	    mc_stat (directory, &tmp_stat);
-	    subdirs_left = tmp_stat.st_nlink - 2;
+	    if (!mc_stat (directory, &tmp_stat))
+		subdirs_left = tmp_stat.st_nlink - 2;
+	    else
+		subdirs_left = 0;
 	    /* Commented out as unnecessary
 	       if (subdirs_left < 0)
 	       subdirs_left = MAXINT;
 	    */
 	    dirp = mc_opendir (directory);
-	}
+	}   /* while (!dirp) */
 	dp = mc_readdir (dirp);
     }
 
@@ -582,14 +585,14 @@ do_search (struct Dlg_head *h)
 	return 1;
     }
     
-    tmp_name = concat_dir_and_file (directory, dp->d_name);
-
-    if (subdirs_left){
-	mc_lstat (tmp_name, &tmp_stat);
-	if (S_ISDIR (tmp_stat.st_mode)){
+    if (subdirs_left) {
+	char *tmp_name = concat_dir_and_file (directory, dp->d_name);
+	if (!mc_lstat (tmp_name, &tmp_stat)
+	    && S_ISDIR (tmp_stat.st_mode)) {
 	    push_directory (tmp_name);
 	    subdirs_left--;
 	}
+	g_free (tmp_name);
     }
 
     if (regexp_match (find_pattern, dp->d_name, match_file)){
@@ -599,7 +602,6 @@ do_search (struct Dlg_head *h)
 	    find_add_match (h, directory, dp->d_name);
     }
     
-    g_free (tmp_name);
     dp = mc_readdir (dirp);
 
     /* Displays the nice dot */
