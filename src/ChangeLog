@@ -1,5 +1,7 @@
 2003-10-15  Pavel Roskin  <proski@gnu.org>
 
+	* glibcompat.h: Define g_try_malloc as malloc for glib 1.2.x.
+
 	* view.c (load_view_file): Use g_try_malloc() because the
 	failure to allcate memory is acceptable here.
 	Reported by Pavel S. Shirshov <pavelsh@mail.ru>
