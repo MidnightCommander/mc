@@ -455,15 +455,15 @@ msgid " Sort returned non-zero: "
 msgstr " Polecenie 'sort' zwróci³o kod b³êdu: "
 
 #: edit/editcmd.c:1
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "B³±d przy tworzeniu skryptu:"
 
 #: edit/editcmd.c:1
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "B³±d przy odczycie skryptu:"
 
 #: edit/editcmd.c:1
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "B³±d przy zamykaniu skryptu:"
 
 #: edit/editcmd.c:1

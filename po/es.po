@@ -452,15 +452,15 @@ msgid " Sort returned non-zero: "
 msgstr " \"sort\" regresó un valor distinto de cero "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Error al crear guión:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Error al leer guión:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Error al cerrar guión:"
 
 #: edit/editcmd.c:2232

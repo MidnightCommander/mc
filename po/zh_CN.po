@@ -450,15 +450,15 @@ msgid " Sort returned non-zero: "
 msgstr " Sort 返回非零值："
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr " 创建脚本时发生错误："
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr " 读取脚本时发生错误："
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr " 关闭脚本时发生错误："
 
 #: edit/editcmd.c:2232

@@ -451,15 +451,15 @@ msgid " Sort returned non-zero: "
 msgstr " Program sort je vrnil neničelno vrednost: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Napaka ob ustvarjanju skripte:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Napaka ob branju skripte:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Napaka ob zapiranju skripte:"
 
 #: edit/editcmd.c:2232

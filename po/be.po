@@ -447,15 +447,15 @@ msgid " Sort returned non-zero: "
 msgstr " Сартаваньне вернула ненулявы код: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Памылка стварэньня скрыпту:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Памылка чытаньня скрыпту:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Памылка закрыцьця скрыпту:"
 
 #: edit/editcmd.c:2232

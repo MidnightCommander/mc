@@ -458,15 +458,15 @@ msgid " Sort returned non-zero: "
 msgstr " Le code de retour du tri est non nul : "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Erreur de création du script :"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Erreur de lecture du script :"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Erreur de fermeture du script :"
 
 #: edit/editcmd.c:2232

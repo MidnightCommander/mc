@@ -453,15 +453,15 @@ msgid " Sort returned non-zero: "
 msgstr " Süzmə sıfır xarici nəticə verdi: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Script yaradarkən bir xəta oldu :"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Scripti oxuduğum vaxt bir xəta oldu :"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Script qapadılarkən xəta oldu:"
 
 #: edit/editcmd.c:2232

@@ -453,15 +453,15 @@ msgid " Sort returned non-zero: "
 msgstr " Sýralama sýfýrdan farklý deðer döndürdü: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Betiði oluþtururken hata:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Betik okunurken hata:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Betik kapatýlýrken hata:"
 
 #: edit/editcmd.c:2232

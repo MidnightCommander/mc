@@ -450,15 +450,15 @@ msgid " Sort returned non-zero: "
 msgstr " ソートコマンドがゼロ以外の返り値: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "スクリプト作成でエラー:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "スクリプト読み込みでエラー:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "スクリプトクローズエラー:"
 
 #: edit/editcmd.c:2232

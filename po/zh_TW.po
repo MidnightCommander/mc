@@ -450,15 +450,15 @@ msgid " Sort returned non-zero: "
 msgstr " sort 傳回非零的值： "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "建立指令稿時發生錯誤: "
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "讀取指令稿時時發生錯誤: "
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "關閉指令稿錯誤:"
 
 #: edit/editcmd.c:2232

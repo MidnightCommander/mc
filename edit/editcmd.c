@@ -2202,7 +2202,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	if (!(script_home = fopen (h, "w"))) {
 	    edit_error_dialog ("", get_sys_error (catstrs
 						  (_
-						   ("Error create script:"),
+						   ("Error creating script:"),
 						   h, 0)));
 	    return;
 	}
@@ -2210,7 +2210,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	    fclose (script_home);
 	    unlink (h);
 	    edit_error_dialog ("", get_sys_error (catstrs
-						  (_("Error read script:"),
+						  (_("Error reading script:"),
 						   o, 0)));
 	    return;
 	}
@@ -2219,7 +2219,7 @@ edit_block_process_cmd (WEdit * edit, const char *shell_cmd, int block)
 	if (fclose (script_home)) {
 	    edit_error_dialog ("", get_sys_error (catstrs
 						  (_
-						   ("Error close script:"),
+						   ("Error closing script:"),
 						   h, 0)));
 	    return;
 	}

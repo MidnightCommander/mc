@@ -453,15 +453,15 @@ msgid " Sort returned non-zero: "
 msgstr " Kârtoðana atgrieza ne-nulli: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Kïûda izveidojot skriptu:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Kïûda lasot skriptu:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Kïûda aizverot skriptu:"
 
 #: edit/editcmd.c:2232

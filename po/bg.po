@@ -450,15 +450,15 @@ msgid " Sort returned non-zero: "
 msgstr " Sort върна не нулев код: "
 
 #: edit/editcmd.c:2209
-msgid "Error create script:"
+msgid "Error creating script:"
 msgstr "Грешка при създаване на скрипт:"
 
 #: edit/editcmd.c:2217
-msgid "Error read script:"
+msgid "Error reading script:"
 msgstr "Грешка при четене на скрипт:"
 
 #: edit/editcmd.c:2226
-msgid "Error close script:"
+msgid "Error closing script:"
 msgstr "Грешка при затваряне на скрипт:"
 
 #: edit/editcmd.c:2232
