@@ -35,6 +35,7 @@
 /* Define this if your ssh can take -I option */
 
 #include <config.h>
+#include <errno.h>
 
 #undef HAVE_HACKED_SSH
 

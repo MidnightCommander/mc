@@ -1,18 +1,6 @@
 #ifndef DIRENTRY_H
 #define DIRENTRY_H
 
-#include <stdio.h>
-#include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <signal.h>
-#include <errno.h>
-#include <pwd.h>
-#include <grp.h>
-
 #include "vfs.h"
 
 

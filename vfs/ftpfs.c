@@ -68,6 +68,8 @@ What to do with this?
 #include <arpa/ftp.h>
 #include <arpa/telnet.h>
 #include <sys/param.h>
+#include <errno.h>
+#include <ctype.h>
 
 #include "utilvfs.h"
 

@@ -1,5 +1,7 @@
 2003-10-16  Pavel Roskin  <proski@gnu.org>
 
+	* xdirentry.h: Move system includes to the files that need them.
+
 	* xdirentry.h: Fix typos in field names.
 
 	* xdirentry.h: Cleanup unused or write-only fields.  Adjust all

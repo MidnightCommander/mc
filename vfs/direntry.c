@@ -25,6 +25,7 @@
  * archive/site is simply "". Beware. */
 
 #include <config.h>
+#include <errno.h>
 
 #include "utilvfs.h"
 #include "xdirentry.h"
