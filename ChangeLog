@@ -1,3 +1,12 @@
+2002-12-11  David Martin  <dmartina@excite.com>
+
+	* doc/xnc.hlp: Update GPL (change FSF address
+	and move 19xx entries to "year").
+	* doc/es/xnc.hlp: Likewise.
+	* doc/hu/xnc.hlp: Likewise.
+	* doc/it/xnc.hlp: Likewise.
+	* doc/ru/xnc.hlp: Likewise.
+
 2002-12-09  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Remove ftplist.  Add patchfs.
