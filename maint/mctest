@@ -5,7 +5,7 @@
 
 set -e
 
-function distcheck () {
+distcheck() {
     id="$1"
     shift
     make distcheck MSGMERGE="msgmerge -q" "$@" >test-$id.out 2>test-$id.err

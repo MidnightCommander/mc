@@ -11,7 +11,7 @@
 
 
 # $1 - file to upload, $2 - shell mask to erase
-function upload() {
+upload() {
   echo "Uploading $1 to $SITE"
   name="`basename $1`"
   scp "$1" "$SITE:$DIR/.in.$name"

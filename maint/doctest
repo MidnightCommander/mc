@@ -5,7 +5,7 @@
 
 set -e
 
-function one_test () {
+one_test() {
 	"$@" >/dev/null 2>doctest.err
 	if test -s doctest.err; then
 		echo "ERROR messages follow:" 2>&1
