@@ -1497,7 +1497,7 @@ static int ftpfs_chown (vfs *me, char *path, int owner, int group)
 
 static int ftpfs_unlink (vfs *me, char *path)
 {
-    return send_ftp_command(me, path, "DELE %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "DELE /%s", OPT_FLUSH);
 }
 
 /* Return true if path is the same directoy as the one we are on now */
@@ -1537,18 +1537,18 @@ ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path)
 
 static int ftpfs_rename (vfs *me, char *path1, char *path2)
 {
-    send_ftp_command(me, path1, "RNFR %s", OPT_FLUSH);
-    return send_ftp_command(me, path2, "RNTO %s", OPT_FLUSH);
+    send_ftp_command(me, path1, "RNFR /%s", OPT_FLUSH);
+    return send_ftp_command(me, path2, "RNTO /%s", OPT_FLUSH);
 }
 
 static int ftpfs_mkdir (vfs *me, char *path, mode_t mode)
 {
-    return send_ftp_command(me, path, "MKD %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "MKD /%s", OPT_FLUSH);
 }
 
 static int ftpfs_rmdir (vfs *me, char *path)
 {
-    return send_ftp_command(me, path, "RMD %s", OPT_FLUSH);
+    return send_ftp_command(me, path, "RMD /%s", OPT_FLUSH);
 }
 
 void ftpfs_set_debug (const char *file)
