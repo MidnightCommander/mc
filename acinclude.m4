@@ -724,8 +724,6 @@ dnl If not, and $1 is "strict", exit, otherwise fall back to mcslang.
 dnl
 AC_DEFUN([MC_WITH_SLANG], [
     with_screen=slang
-    AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
-		 [with_screen=mcslang])
 
     dnl Unless external S-Lang was requested, reject S-Lang with UTF-8 hacks
     m4_if([$1], strict, ,
@@ -733,6 +731,11 @@ AC_DEFUN([MC_WITH_SLANG], [
 			[AC_MSG_WARN([Rejecting S-Lang with UTF-8 support, \
 it doesn't work well])
 			with_screen=mcslang])])
+
+    if test x$with_screen = xslang; then
+	AC_CHECK_LIB([slang], [SLang_init_tty], [MCLIBS="$MCLIBS -lslang"],
+		     [with_screen=mcslang])
+    fi
 
     dnl Check the header
     if test x$with_screen = xslang; then
