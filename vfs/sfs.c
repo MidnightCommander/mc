@@ -3,6 +3,8 @@
  *
  * Copyright 1998 Pavel Machek, distribute under GPL
  *
+ * $Id$
+ *
  * This defines whole class of filesystems which contain single file
  * inside. It is somehow similar to extfs, except that extfs makes
  * whole virtual trees and we do only single virtual files. 
@@ -146,6 +148,8 @@ redirect (vfs *me, char *name)
 
 	return cache;
     }
+    
+    unlink (cache);
     g_free (cache);
     return "/I_MUST_NOT_EXIST";
 }
@@ -177,7 +181,7 @@ static int sfs_lstat (vfs *me, char *path, struct stat *buf)
 {
     path = redirect (me, path);
 #ifndef HAVE_STATLSTAT
-    return lstat (path,buf);
+    return lstat (path, buf);
 #else
     return statlstat (path, buf);
 #endif
@@ -294,7 +298,7 @@ static int sfs_init (vfs *me)
     FILE *cfg = fopen (LIBDIR "extfs/sfs.ini", "r");
 
     if (!cfg){
-        fprintf (stderr, "Warning: " LIBDIR "extfs/sfs.ini not found\n");
+	fprintf (stderr, _("Warning: %sextfs/sfs.ini not found\n"), LIBDIR);
         return 0;
     }
 
@@ -321,7 +325,7 @@ static int sfs_init (vfs *me)
 	    }
 
 	if (!semi){
-	    fprintf (stderr, "Warning: Invalid line %s in sfs.ini.\n", key);
+	    fprintf (stderr, _("Warning: Invalid line %s in sfs.ini.\n"), key);
 	    continue;
 	}
 
@@ -332,7 +336,7 @@ static int sfs_init (vfs *me)
 	    case '2': flags |= F_2; break;
 	    case 'R': flags |= F_NOLOCALCOPY; break;
 	    default:
-	      fprintf (stderr, "Warning: Invalid flag %c in sfs.ini line %s.\n", *c, key);
+	      fprintf (stderr, _("Warning: Invalid flag %c in sfs.ini line %s.\n"), *c, key);
 	    }	    
 	    c++;
 	}
@@ -376,13 +380,12 @@ sfs_which (vfs *me, char *path)
 	    if (!strncmp (path, sfs_prefix [i], strlen (sfs_prefix [i])))
 	        return i;
 
-    
     return -1;
 }
 
 vfs vfs_sfs_ops = {
     NULL,	/* This is place of next pointer */
-    "Signle file filesystems",
+    N_ ("Signle file filesystems"),
     F_EXEC,	/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
