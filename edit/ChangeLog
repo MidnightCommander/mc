@@ -1,3 +1,9 @@
+2002-12-25  Pavel Roskin  <proski@gnu.org>
+
+	* editkeys.c (edit_translate_key): Treat Shift-Enter as return
+	without indent.  Useful when pasting multiline text with
+	Shift-button3 or Shift-Insert with autoindent enabled.
+
 2002-12-23  Pavel Roskin  <proski@gnu.org>
 
 	* editkeys.c (edit_translate_key): Treat Ctrl-Home and Ctrl-End

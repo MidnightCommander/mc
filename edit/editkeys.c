@@ -298,6 +298,10 @@ edit_translate_key (WEdit *edit, unsigned int x_keycode, long x_key,
     case KEY_M_SHIFT | KEY_DC:
 	command = CK_XCut;
 	goto fin;
+    case KEY_M_SHIFT | '\n':
+	/* useful for pasting multiline text */
+	command = CK_Return;
+	goto fin;
 
 	/* ctrl */
     case KEY_M_CTRL | (KEY_F (2)):
