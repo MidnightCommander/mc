@@ -430,8 +430,11 @@ vfs_parse_filetype (char c)
 #endif
     case 'p':
 	return S_IFIFO;
-    case 'm':
-    case 'n':			/* Don't know what these are :-) */
+    case 'n':			/* Special named files */
+#ifdef S_IFNAM
+	return S_IFNAM;
+#endif /* S_IFNAM */
+    case 'm':			/* Don't know what these are :-) */
     case '-':
     case '?':
 	return S_IFREG;

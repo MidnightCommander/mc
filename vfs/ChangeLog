@@ -2,6 +2,7 @@
 
         * cpio.c (cpio_create_entry): Added initial support for the Special
 	Named Files. Needed on QNX Neutrino.
+	* utilvfs.c (vfs_parse_filetype): Likewise.
 
 2004-11-02  Roland Illig  <roland.illig@gmx.de>
 
