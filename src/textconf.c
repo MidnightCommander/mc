@@ -4,16 +4,8 @@
 #include <stdio.h>
 
 #include "global.h"
-#include "cmd.h"
 
 static const char * const features [] =  {
-    N_("Edition: "),
-    N_("text mode"),
-#ifdef HAVE_TEXTMODE_X11_SUPPORT
-    N_(" with X11 support to read modifiers"),
-#endif
-    "\n",
-
 #ifdef USE_VFS
     N_("Virtual File System: tarfs, extfs"),
 #ifdef USE_NETCODE
@@ -44,7 +36,7 @@ static const char * const features [] =  {
 #   ifdef HAVE_SYSTEM_SLANG
     N_("Using system-installed S-Lang library"),
 #   else
-    N_("Using S-Lang library"),
+    N_("Using included S-Lang library"),
 #   endif
 
     " ",
@@ -83,6 +75,15 @@ static const char * const features [] =  {
 #else
     N_("With mouse support on xterm\n"),
 #endif
+
+#ifdef HAVE_TEXTMODE_X11_SUPPORT
+    N_("With support for X11 events\n"),
+#endif
+
+#ifdef ENABLE_NLS
+    N_("With internationalization support\n"),
+#endif
+
 #ifdef HAVE_CHARSET
     N_("With multiple codepages support\n"),
 #endif
@@ -93,7 +94,6 @@ static const char * const features [] =  {
 void
 version (int verbose)
 {
-    char *str;
     int i;
 
     fprintf (stderr, _("GNU Midnight Commander %s\n"), VERSION);
@@ -102,8 +102,4 @@ version (int verbose)
     
     for (i = 0; features [i]; i++) 
 	fputs (_(features [i]), stderr);
-
-    str = guess_message_value (1);
-    fprintf (stderr, "%s\n", str);
-    g_free (str);
 }

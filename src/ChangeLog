@@ -1,5 +1,9 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* textconf.c (features): Remove "edition", minor fixes.
+	(version): Don't report the current locale - it's meaningless,
+	especially if ENABLE_NLS is not defined.
+
 	* textconf.h: Remove status_using_ncurses - it's useless now.
 	Adjust all users.  Call do_exit_ca_mode() and do_enter_ca_mode()
 	even with ncurses.
