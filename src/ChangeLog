@@ -1,3 +1,11 @@
+2002-02-28  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* find.c (find_parameters): Compile content_pattern here.
+	Inform user about alformed regular expression.
+	(search_content): Use compiled regular expression.
+	(do_find): Eliminate `done'.  Call regfree for compiled
+	content_pattern.
+
 2002-02-24  Pavel Roskin  <proski@gnu.org>
 
 	* chown.c (chown_cmd): Use size_trunc_len() to show the file

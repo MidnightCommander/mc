@@ -119,6 +119,9 @@ static void stop_idle (void *data);
 static void status_update (char *text);
 static void get_list_info (char **file, char **dir);
 
+/* FIXME: r should be local variables */
+static regex_t *r; /* Pointer to compiled content_pattern */
+ 
 /*
  * find_parameters: gets information from the user
  *
@@ -147,10 +150,10 @@ find_parameters (char **start_dir, char **pattern, char **content)
     static char *in_start_dir = NULL;
     static char *in_start_name = NULL;
 
-	static char* labs[] = {N_("Start at:"), N_("Filename:"), N_("Content: ")};
-	static char* buts[] = {N_("&Ok"), N_("&Tree"), N_("&Cancel")};
-	static int ilen = 30, istart = 14;
-	static int b0 = 3, b1 = 16, b2 = 36;
+    static char* labs[] = {N_("Start at:"), N_("Filename:"), N_("Content: ")};
+    static char* buts[] = {N_("&Ok"), N_("&Tree"), N_("&Cancel")};
+    static int ilen = 30, istart = 14;
+    static int b0 = 3, b1 = 16, b2 = 36;
 
 #ifdef ENABLE_NLS
 	static int i18n_flag = 0;
@@ -240,12 +243,12 @@ find_par_start:
 	destroy_dlg (find_dlg);
 	g_free (in_start_dir);
 	if (strcmp (temp_dir, ".") == 0){
-	   g_free (temp_dir);
+	    g_free (temp_dir);
 	    temp_dir = g_strdup (cpanel->cwd);
 	}
 	in_start_dir = tree_box (temp_dir);
 	if (in_start_dir)
-	   g_free (temp_dir);
+	    g_free (temp_dir);
 	else
 	    in_start_dir = temp_dir;
 	/* Warning: Dreadful goto */
@@ -253,17 +256,31 @@ find_par_start:
 	break;
 	
     default:
+	g_free (in_contents);
+	if (in_with->buffer [0]){
+	    int flags = REG_EXTENDED|REG_NOSUB;
+
+	    if ((case_sense->state & C_BOOL))
+		flags |= REG_ICASE;
+
+	    if (regcomp (r, in_with->buffer, flags)) {
+		*content = in_contents = NULL;
+		r = 0;
+		message (1, MSG_ERROR, _("  Malformed regular expression  "));
+		return_value = 0;
+		break;
+	    }
+	    *content    = g_strdup (in_with->buffer);
+	    in_contents = g_strdup (*content);
+	} else {
+	    *content = in_contents = NULL;
+	    r = 0;
+	}
+
 	case_sensitive = case_sense->state & C_BOOL;
 	return_value = 1;
 	*start_dir = g_strdup (in_start->buffer);
 	*pattern   = g_strdup (in_name->buffer);
-
-	g_free (in_contents);
-	if (in_with->buffer [0]){
-	    *content    = g_strdup (in_with->buffer);
-	    in_contents = g_strdup (*content);
-	} else 
-	    *content = in_contents = NULL;
 
 	g_free (in_start_dir);
 	in_start_dir = g_strdup (*start_dir);
@@ -407,7 +424,7 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size, int *h
 /* 
  * search_content:
  *
- * Search the global (FIXME) content_pattern string in the
+ * Search the global (FIXME) regexp compiled content_pattern string in the
  * DIRECTORY/FILE.  It will add the found entries to the find listbox.
  */
 static void
@@ -417,8 +434,6 @@ search_content (Dlg_head *h, char *directory, char *filename)
     char buffer [BUF_SMALL];
     char *fname;
     int file_fd;
-    regex_t r; /* FIXME: move from search_content and make static */
-    int flags = REG_EXTENDED|REG_NOSUB;
 
     fname = concat_dir_and_file (directory, filename);
 
@@ -441,13 +456,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
     enable_interrupt_key ();
     got_interrupt ();
 
-    if (!case_sensitive)
-	flags |= REG_ICASE;
-
-    /* FIXME: Move regcomp/regfree from search_content;
-     *	      Inform user about malformed regular expression.
-     */
-    if (regcomp (&r, content_pattern, flags) == 0){
+    {
 	int line = 1;
 	int pos = 0;
 	int n_read = 0;
@@ -457,7 +466,7 @@ search_content (Dlg_head *h, char *directory, char *filename)
 
 	while ((p = get_line_at (file_fd, buffer, &pos, &n_read, sizeof (buffer), &has_newline))){
 	    if (found == 0){	/* Search in binary line once */
-		if (regexec (&r, p, 1, 0, 0) == 0){
+		if (regexec (r, p, 1, 0, 0) == 0){
 		    g_free (p);
 		    p = g_strdup_printf ("%d:%s", line, filename);
 		    find_add_match (h, directory, p);
@@ -470,7 +479,6 @@ search_content (Dlg_head *h, char *directory, char *filename)
 	    }
 	    g_free (p);
 	}
-	regfree (&r);
     }
     disable_interrupt_key ();
     mc_close (file_fd);
@@ -952,17 +960,17 @@ do_find (void)
     char *start_dir, *pattern, *content;
     char *filename, *dirname;
     int  v, dir_and_file_set;
-    int done = 0;
-    
-    while (!done){
-	if (!find_parameters (&start_dir, &pattern, &content))
-	    break;
+    regex_t rx; /* Compiled content_pattern to search inside files */
+
+    for (r = &rx; find_parameters (&start_dir, &pattern, &content); r = &rx){
 
 	dirname = filename = NULL;
 	is_start = 0;
 	v = find_file (start_dir, pattern, content, &dirname, &filename);
 	g_free (start_dir);
 	g_free (pattern);
+	if (r)
+	    regfree (r);
 	
 	if (v == B_ENTER){
 	    if (dirname || filename){
