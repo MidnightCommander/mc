@@ -16,6 +16,8 @@
 #include "gmain.h"
 #include "cmd.h"
 #include "boxes.h"
+#include "profile.h"
+#include "setup.h"
 #include "panelize.h"
 #include "gcmd.h"
 #include "dialog.h"
@@ -30,6 +32,7 @@ static enum {
 	SORT_CHANGE,
 	SORT_SIZE
 } SortOrderCode;
+static char *panelize_section = "Panelize";
 
 void
 gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
@@ -299,57 +302,146 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	}
 	gtk_widget_destroy (sort_box);
 }
+typedef struct ep_dlg_data {
+	GtkWidget *ep_dlg;
+	GtkWidget *clist;
+	GtkWidget *entry;
+	GtkWidget *remove_button;
+	gboolean setting_text;
+	gint selected; /* if this is -1 then nothing is selected, otherwise, it's the row selected */
+} ep_dlg_data;
+
+static void
+ep_add_callback (GtkWidget *widget, ep_dlg_data *data)
+{
+
+}
+static void
+ep_remove_callback (GtkWidget *widget, ep_dlg_data *data)
+{
+	
+}
+
+static void
+ep_select_callback (GtkWidget *widget,
+		    gint row,
+		    gint column,
+		    GdkEventButton *event,
+		    ep_dlg_data *data)
+{
+	data->setting_text = TRUE;
+	gtk_entry_set_text (GTK_ENTRY (data->entry),
+			    (gchar *) gtk_clist_get_row_data (GTK_CLIST (widget), row));
+	data->setting_text = FALSE;
+	data->selected = row;
+	gtk_widget_set_sensitive (data->remove_button, TRUE);
+}
+static void
+ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
+{
+	if (data->setting_text)
+		/* we don't want to deselect text if we just clicked on something */
+		return;
+	if (data->selected > -1) {
+		gtk_widget_set_sensitive (data->remove_button, FALSE);
+		gtk_clist_unselect_row (GTK_CLIST (data->clist), data->selected, 0);
+		data->selected = -1;
+	}
+}
+static void
+load_settings (GtkCList *clist)
+{
+	char *insert_tab[1];
+	void *profile_keys;
+	char *key, *value;
+	gint i = 0;
+
+	profile_keys = profile_init_iterator (panelize_section, profile_name);
+    
+	if (!profile_keys){
+		insert_tab[0] = _("Find all core files");
+		gtk_clist_insert (clist, i, insert_tab);
+		gtk_clist_set_row_data (clist, i++, g_strdup ("find / -name core"));
+		insert_tab[0] = _("Find rejects after patching");
+		gtk_clist_insert (clist, i, insert_tab);
+		gtk_clist_set_row_data (clist, i++, g_strdup ("find . -name \\*.rej -print"));
+	} else {
+		while (profile_keys) {
+			profile_keys = profile_iterator_next (profile_keys, &key, &value);
+			insert_tab[0] = key;
+			gtk_clist_insert (clist, i, insert_tab);
+			gtk_clist_set_row_data (clist, i++, value);
+		}
+	}
+}
 void
 gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 {
-	GtkWidget *ep_dlg;
+	ep_dlg_data *data;
 	GtkWidget *frame;
-	GtkWidget *clist;
 	GtkWidget *sw;
 	GtkWidget *vbox;
 	GtkWidget *hbox;
 	GtkWidget *button;
-	GtkWidget *entry;
 
-	ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK, 
+
+	data = g_new0 (ep_dlg_data, 1);
+	data->setting_text = FALSE;
+	data->selected = -1;
+	data->ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK, 
 				   GNOME_STOCK_BUTTON_CANCEL, NULL);
 
 				/* Frame 1 */
 	frame = gtk_frame_new (_("Preset Commands"));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ep_dlg)->vbox),
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (data->ep_dlg)->vbox),
 			    frame, FALSE, FALSE, 0);
-	clist = gtk_clist_new (1);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (clist), 1, TRUE);
+	data->clist = gtk_clist_new (1);
+	load_settings (GTK_CLIST (data->clist));
+	gtk_signal_connect (GTK_OBJECT (data->clist), "select_row", GTK_SIGNAL_FUNC (ep_select_callback), (gpointer) data);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (data->clist), 1, TRUE);
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
-	sw = gtk_scrolled_window_new (GTK_CLIST (clist)->hadjustment, GTK_CLIST (clist)->vadjustment);
+	sw = gtk_scrolled_window_new (GTK_CLIST (data->clist)->hadjustment, GTK_CLIST (data->clist)->vadjustment);
 	gtk_widget_set_usize (sw, 300, 100);
-	gtk_container_add (GTK_CONTAINER (sw), clist);
+	gtk_container_add (GTK_CONTAINER (sw), data->clist);
 	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	button = gtk_button_new_with_label (_("Add"));
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (ep_add_callback), (gpointer) data);
 	gtk_widget_set_usize (button, 75, 25);
 	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
-	button = gtk_button_new_with_label (_("Remove"));
-	gtk_widget_set_usize (button, 75, 25);
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	data->remove_button = gtk_button_new_with_label (_("Remove"));
+	gtk_widget_set_sensitive (data->remove_button, FALSE);
+	gtk_signal_connect (GTK_OBJECT (data->remove_button), "clicked", GTK_SIGNAL_FUNC (ep_remove_callback), (gpointer) data);
+	gtk_widget_set_usize (data->remove_button, 75, 25);
+	gtk_box_pack_end (GTK_BOX (hbox), data->remove_button, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
 
 				/* Frame 2 */
 	frame = gtk_frame_new (_("Run this Command"));
-	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ep_dlg)->vbox),
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (data->ep_dlg)->vbox),
 			    frame, FALSE, FALSE, 0);
-	entry = gtk_entry_new ();
+	data->entry = gtk_entry_new ();
+	gtk_signal_connect (GTK_OBJECT (data->entry), "changed", GTK_SIGNAL_FUNC (ep_text_changed_callback), (gpointer) data);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
 	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Command: ")), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), data->entry, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (frame), hbox);
-	gtk_widget_show_all (GNOME_DIALOG (ep_dlg)->vbox);
-	gnome_dialog_run_and_close (GNOME_DIALOG (ep_dlg));
-
+	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
+	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
+	case 0:
+		g_print ("ok\n");
+		g_print ("%s\n", gtk_entry_get_text (GTK_ENTRY (data->entry)));
+		do_external_panelize (gtk_entry_get_text (GTK_ENTRY (data->entry)));
+		break;
+	case 1:
+	default:
+	}
+	gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
+	g_free (data);
 }
 void
 gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
