@@ -177,7 +177,7 @@ void button_set_text (WButton *b, char *text);
 WLEntry *listbox_get_data (WListbox *l, int pos);
 
 /* search text int listbox entries */
-WLEntry *listbox_search_text (WListbox *l, char *text);
+WLEntry *listbox_search_text (WListbox *l, const char *text);
 void listbox_select_entry (WListbox *l, WLEntry *dest);
 void listbox_select_by_number (WListbox *l, int n);
 void listbox_select_last (WListbox *l, int set_top);
@@ -192,7 +192,7 @@ enum append_pos {
 };
 
 char *listbox_add_item (WListbox *l, enum append_pos pos, int
-			hotkey, char *text, void *data);
+			hotkey, const char *text, void *data);
 
 /* Hintbar routines */
 

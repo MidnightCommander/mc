@@ -2163,8 +2163,8 @@ listbox_append_item (WListbox *l, WLEntry *e, enum append_pos pos)
 }
 
 char *
-listbox_add_item (WListbox *l, enum append_pos pos, int hotkey, char *text,
-			void *data)
+listbox_add_item (WListbox *l, enum append_pos pos, int hotkey,
+		  const char *text, void *data)
 {
     WLEntry *entry;
 
@@ -2193,7 +2193,7 @@ listbox_select_by_number (WListbox *l, int n)
 }
 
 WLEntry *
-listbox_search_text (WListbox *l, char *text)
+listbox_search_text (WListbox *l, const char *text)
 {
     WLEntry *e;
 

@@ -1,3 +1,23 @@
+2003-10-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* widget.[ch] (listbox_search_text): Constify "text" argument.
+	(listbox_add_item): Ditto.
+
+	* find.c (add_to_list): Make inline.
+	(stop_idle): Ditto.
+	(status_update): Ditto.
+	(get_list_info): Ditto.
+
+	(push_directory): Constify "dir" argument and use
+	concat_dir_and_file() instead of g_strdup().
+
+	(find_add_match): Constify "dir" and "file" arguments.
+	(insert_file): Ditto. Don't append trailing PATH_SEP, it's done
+	in push_directory().
+
+	(search_content): Constify "directory" and "filename" arguments.
+	(do_search): Make "directory" char * instead of char[].
+
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
 	* fsusage.c: Merge ...

@@ -106,10 +106,18 @@ static struct {
 	{ N_("&Edit - F4"), 13, 38 }
 };
 
-static char *add_to_list (char *text, void *closure);
-static void stop_idle (void *data);
-static void status_update (char *text);
-static void get_list_info (char **file, char **dir);
+static inline char * add_to_list (const char *text, void *data) {
+    return listbox_add_item (find_list, 0, 0, text, data);
+}
+static inline void stop_idle (void *data) {
+    set_idle_proc (data, 0);
+}
+static inline void status_update (char *text) {
+    label_set_text (status_label, text);
+}
+static void get_list_info (char **file, char **dir) {
+    listbox_get_current (find_list, file, dir);
+}
 
 /* FIXME: r should be local variable */
 static regex_t *r; /* Pointer to compiled content_pattern */
@@ -304,12 +312,12 @@ find_parameters (char **start_dir, char **pattern, char **content)
 }
 
 static void
-push_directory (char *dir)
+push_directory (const char *dir)
 {
     dir_stack *new;
 
     new = g_new (dir_stack, 1);
-    new->name = g_strdup (dir);
+    new->name = concat_dir_and_file (dir, "");
     new->prev = dir_stack_base;
     dir_stack_base = new;
 }
@@ -331,25 +339,17 @@ pop_directory (void)
 }
 
 static void
-insert_file (char *dir, char *file)
+insert_file (const char *dir, const char *file)
 {
     char *tmp_name;
     static char *dirname;
-    int i;
 
-    if (dir [0] == PATH_SEP && dir [1] == PATH_SEP)
+    while (dir [0] == PATH_SEP && dir [1] == PATH_SEP)
 	dir++;
-    i = strlen (dir);
-    if (i){
-	if (dir [i - 1] != PATH_SEP){
-	    dir [i] = PATH_SEP;
-	    dir [i + 1] = 0;
-	}
-    }
 
     if (old_dir){
 	if (strcmp (old_dir, dir)){
-	   g_free (old_dir);
+	    g_free (old_dir);
 	    old_dir = g_strdup (dir);
 	    dirname = add_to_list (dir, NULL);
 	}
@@ -364,7 +364,7 @@ insert_file (char *dir, char *file)
 }
 
 static void
-find_add_match (Dlg_head *h, char *dir, char *file)
+find_add_match (Dlg_head *h, const char *dir, const char *file)
 {
     int p = ++matches & 7;
 
@@ -441,7 +441,7 @@ get_line_at (int file_fd, char *buf, int *pos, int *n_read, int buf_size,
  * DIRECTORY/FILE.  It will add the found entries to the find listbox.
  */
 static void
-search_content (Dlg_head *h, char *directory, char *filename)
+search_content (Dlg_head *h, const char *directory, const char *filename)
 {
     struct stat s;
     char buffer [BUF_SMALL];
@@ -502,7 +502,7 @@ do_search (struct Dlg_head *h)
 {
     static struct dirent *dp   = 0;
     static DIR  *dirp = 0;
-    static char directory [MC_MAXPATHLEN+2];
+    static char *directory;
     struct stat tmp_stat;
     static int pos;
     static int subdirs_left = 0;
@@ -511,6 +511,10 @@ do_search (struct Dlg_head *h)
 	if (dirp) {
 	    mc_closedir (dirp);
 	    dirp = 0;
+	}
+	if (directory) {
+	    g_free (directory);
+	    directory = NULL;
 	}
         dp = 0;
 	return 1;
@@ -549,9 +553,11 @@ do_search (struct Dlg_head *h)
 		    break;
 	    } 
 
-	    strncpy (directory, tmp, sizeof (directory));
-	    directory [sizeof (directory) - 1] = 0;
-	    g_free (tmp);
+	    if (directory) {
+		g_free (directory);
+		directory = NULL;
+	    }
+	    directory = tmp;
 
 	    if (verbose){
 		char buffer [BUF_SMALL];
@@ -574,15 +580,15 @@ do_search (struct Dlg_head *h)
 	    dirp = mc_opendir (directory);
 	}   /* while (!dirp) */
 	dp = mc_readdir (dirp);
-    }
+    }	/* while (!dp) */
 
     if (strcmp (dp->d_name, ".") == 0 ||
 	strcmp (dp->d_name, "..") == 0){
 	dp = mc_readdir (dirp);
 	return 1;
     }
-    
-    if (subdirs_left) {
+
+    if (subdirs_left && directory) { /* Can directory be NULL ? */
 	char *tmp_name = concat_dir_and_file (directory, dp->d_name);
 	if (!mc_lstat (tmp_name, &tmp_stat)
 	    && S_ISDIR (tmp_stat.st_mode)) {
@@ -661,24 +667,6 @@ find_do_view_edit (int unparsed_view, int edit, char *dir, char *file)
     else
         view_file_at_line (fullname, unparsed_view, use_internal_view, line);
     g_free (fullname);
-}
-
-static void
-get_list_info (char **file, char **dir)
-{
-    listbox_get_current (find_list, file, dir);
-}
-
-static char *
-add_to_list (char *text, void *data)
-{
-	return listbox_add_item (find_list, 0, 0, text, data);
-}
-
-static void
-stop_idle (void *data)
-{
-	set_idle_proc (data, 0);
 }
 
 static int
@@ -841,12 +829,6 @@ run_process (void)
     set_idle_proc (find_dlg, 1);
     run_dlg (find_dlg);
     return find_dlg->ret_value;
-}
-
-static void
-status_update (char *text)
-{
-	label_set_text (status_label, text);
 }
 
 static void
