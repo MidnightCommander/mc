@@ -1,3 +1,8 @@
+1999-02-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_info_destroy): Delete the metadata
+	associated with this icon.
+
 1999-02-07  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (entry_click): On mouse clicks, mark the input as

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 1999-02-07 09:36-0600\n"
+"POT-Creation-Date: 1999-02-08 17:07-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,8 +263,8 @@ msgstr ""
 msgid "Replace it?"
 msgstr ""
 
-#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 gtkedit/gtkedit.c:1318
-#: src/file.c:784 src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
+#: gnome/gdialogs.c:532 gtkedit/editwidget.c:1064 src/file.c:784
+#: src/screen.c:2288 src/screen.c:2318 src/tree.c:1024
 msgid "Copy"
 msgstr ""
 
@@ -403,27 +403,7 @@ msgstr ""
 msgid "Opens a new window"
 msgstr ""
 
-#. We want to make a new menu entry here...
-#. For example:
-#. New->
-#. Command Prompt
-#. Gimp Image
-#. Gnumeric Spreadsheet
-#. Text Document
-#. etc...
-#: gnome/glayout.c:302
-msgid "_New"
-msgstr ""
-
-#: gnome/glayout.c:304
-msgid "_Open"
-msgstr ""
-
-#: gnome/glayout.c:304
-msgid "Opens the selected files"
-msgstr ""
-
-#. { GNOME_APP_UI_ITEM, N_("Open _FTP site"),     N_("Opens an FTP site"), ftplink_cmd },
+#. GNOMEUIINFO_ITEM_NONE( N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
 #: gnome/glayout.c:306
 msgid "_Copy..."
 msgstr ""
@@ -437,7 +417,7 @@ msgid "_Delete..."
 msgstr ""
 
 #: gnome/glayout.c:307
-msgid "Delete files from disk"
+msgid "Delete files"
 msgstr ""
 
 #: gnome/glayout.c:308
@@ -448,149 +428,120 @@ msgstr ""
 msgid "Rename or move files"
 msgstr ""
 
-#: gnome/glayout.c:310
-msgid "C_lose"
-msgstr ""
-
-#: gnome/glayout.c:310
-msgid "Close this panel"
-msgstr ""
-
-#: gnome/glayout.c:317
+#: gnome/glayout.c:315
 msgid "Select _All"
 msgstr ""
 
-#: gnome/glayout.c:317
+#: gnome/glayout.c:315
 msgid "Select all files in the current Panel"
 msgstr ""
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:317
 msgid "_Select Files..."
 msgstr ""
 
-#: gnome/glayout.c:318
+#: gnome/glayout.c:317
 msgid "Select a group of files"
 msgstr ""
 
-#: gnome/glayout.c:319
+#: gnome/glayout.c:318
 msgid "_Invert Selection"
 msgstr ""
 
-#: gnome/glayout.c:319
+#: gnome/glayout.c:318
 msgid "Reverses the list of tagged files"
 msgstr ""
 
-#: gnome/glayout.c:321
+#: gnome/glayout.c:320
 msgid "_Rescan Directory"
 msgstr ""
 
-#: gnome/glayout.c:321
+#: gnome/glayout.c:320
 msgid "Rescan the directory contents"
 msgstr ""
 
-#: gnome/glayout.c:328
+#: gnome/glayout.c:327
 msgid "Icon View"
 msgstr ""
 
-#: gnome/glayout.c:329
+#: gnome/glayout.c:328
 msgid "Partial View"
 msgstr ""
 
-#: gnome/glayout.c:330
+#: gnome/glayout.c:329
 msgid "Full View"
 msgstr ""
 
-#: gnome/glayout.c:331
+#: gnome/glayout.c:330
 msgid "Custom View"
 msgstr ""
 
-#: gnome/glayout.c:337
+#: gnome/glayout.c:335
 msgid "_Sort By..."
 msgstr ""
 
-#: gnome/glayout.c:337
+#: gnome/glayout.c:335
 msgid "Confirmation settings"
 msgstr ""
 
-#: gnome/glayout.c:338
+#: gnome/glayout.c:336
 msgid "_Filter View..."
 msgstr ""
 
-#: gnome/glayout.c:338
+#: gnome/glayout.c:336
 msgid "Global option settings"
 msgstr ""
 
-#: gnome/glayout.c:345
+#: gnome/glayout.c:343
 msgid "_Find File..."
 msgstr ""
 
-#: gnome/glayout.c:345
+#: gnome/glayout.c:343
 msgid "Locate files on disk"
 msgstr ""
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:349
+#: gnome/glayout.c:347
 msgid "_Run Command..."
 msgstr ""
 
-#: gnome/glayout.c:349
+#: gnome/glayout.c:347
 msgid "Runs a command"
 msgstr ""
 
-#: gnome/glayout.c:351
+#: gnome/glayout.c:349
 msgid "_Run Command in panel..."
 msgstr ""
 
-#: gnome/glayout.c:351
+#: gnome/glayout.c:349
 msgid "Run a command and put the results in a panel"
 msgstr ""
 
-#: gnome/glayout.c:354
+#: gnome/glayout.c:352
 msgid "_Active VFS list..."
 msgstr ""
 
-#: gnome/glayout.c:354
+#: gnome/glayout.c:352
 msgid "List of active virtual file systems"
 msgstr ""
 
-#: gnome/glayout.c:361
+#: gnome/glayout.c:359
 msgid "_Background jobs..."
 msgstr ""
 
-#: gnome/glayout.c:361
+#: gnome/glayout.c:359
 msgid "List of background operations"
 msgstr ""
 
-#. GNOMEUIINFO_HELP ("midnight-commander"),
-#: gnome/glayout.c:369
-msgid "_About"
-msgstr ""
-
-#: gnome/glayout.c:369
-msgid "Information on this program"
-msgstr ""
-
-#: gnome/glayout.c:375 gnome/gview.c:323
-msgid "_File"
-msgstr ""
-
-#: gnome/glayout.c:376
-msgid "_Edit"
-msgstr ""
-
-#: gnome/glayout.c:377
+#: gnome/glayout.c:374
 msgid "_Layout"
 msgstr ""
 
-#: gnome/glayout.c:378
+#: gnome/glayout.c:375
 msgid "_Commands"
 msgstr ""
 
-#: gnome/glayout.c:379
-msgid "_Help"
-msgstr ""
-
-#: gnome/glayout.c:474
+#: gnome/glayout.c:471
 msgid "File/New/Directory..."
 msgstr ""
 
@@ -614,8 +565,7 @@ msgstr ""
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gpopup.c:230 gtkedit/gtkedit.c:1366 src/screen.c:2287
-#: src/screen.c:2317 src/view.c:1968
+#: gnome/gpopup.c:230 src/screen.c:2287 src/screen.c:2317 src/view.c:1968
 msgid "Edit"
 msgstr ""
 
@@ -1026,24 +976,25 @@ msgstr ""
 msgid "_Wrap"
 msgstr ""
 
-#: gnome/gview.c:309
+#: gnome/gview.c:310
 msgid "Wrap the text"
 msgstr ""
 
-#: gnome/gview.c:315
+#. Can not use this one yet, as it destroys the viewer, need to fix that
+#: gnome/gview.c:313
+msgid "_Parsed view"
+msgstr ""
+
+#: gnome/gview.c:316
 msgid "_Formatted"
 msgstr ""
 
-#: gnome/gview.c:317
+#: gnome/gview.c:318
 msgid "_Hex"
 msgstr ""
 
 #: gnome/gview.c:324
 msgid "_Search"
-msgstr ""
-
-#: gnome/gview.c:325
-msgid "_Mode"
 msgstr ""
 
 #: gnome/gwidget.c:90
@@ -1202,8 +1153,7 @@ msgstr ""
 msgid " Save file "
 msgstr ""
 
-#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 gtkedit/gtkedit.c:1296
-#: src/view.c:1964
+#: gtkedit/editcmd.c:774 gtkedit/editwidget.c:1061 src/view.c:1964
 msgid "Save"
 msgstr ""
 
@@ -1482,352 +1432,6 @@ msgstr ""
 msgid " Mail "
 msgstr ""
 
-#: gtkedit/editmenu.c:56
-msgid " Word wrap "
-msgstr ""
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:58
-msgid " Enter line length, 0 for off: "
-msgstr ""
-
-#: gtkedit/editmenu.c:69
-msgid " About "
-msgstr ""
-
-#: gtkedit/editmenu.c:70
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-
-#: gtkedit/editmenu.c:118 gtkedit/editmenu.c:134
-msgid "&Open/load...     C-o"
-msgstr ""
-
-#: gtkedit/editmenu.c:119
-msgid "&New              C-n"
-msgstr ""
-
-#: gtkedit/editmenu.c:121 gtkedit/editmenu.c:137
-msgid "&Save              F2"
-msgstr ""
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-msgid "save &As...       F12"
-msgstr ""
-
-#: gtkedit/editmenu.c:124 gtkedit/editmenu.c:140
-msgid "&Insert file...   F15"
-msgstr ""
-
-#: gtkedit/editmenu.c:125
-msgid "copy to &File...  C-f"
-msgstr ""
-
-#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
-msgid "a&Bout...            "
-msgstr ""
-
-#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
-msgid "&Quit             F10"
-msgstr ""
-
-#: gtkedit/editmenu.c:135
-msgid "&New            C-x k"
-msgstr ""
-
-#: gtkedit/editmenu.c:141
-msgid "copy to &File...     "
-msgstr ""
-
-#: gtkedit/editmenu.c:150 gtkedit/editmenu.c:167
-msgid "&Toggle Mark       F3"
-msgstr ""
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Mark Columns    S-F3"
-msgstr ""
-
-#: gtkedit/editmenu.c:153 gtkedit/editmenu.c:170
-msgid "toggle &Ins/overw Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
-msgid "&Copy              F5"
-msgstr ""
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-msgid "&Move              F6"
-msgstr ""
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-msgid "&Delete            F8"
-msgstr ""
-
-#: gtkedit/editmenu.c:159 gtkedit/editmenu.c:176
-msgid "&Undo             C-u"
-msgstr ""
-
-#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
-msgid "&Beginning     C-PgUp"
-msgstr ""
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-msgid "&End           C-PgDn"
-msgstr ""
-
-#: gtkedit/editmenu.c:184 gtkedit/editmenu.c:191
-msgid "&Search...         F7"
-msgstr ""
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "search &Again     F17"
-msgstr ""
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-msgid "&Replace...        F4"
-msgstr ""
-
-#: gtkedit/editmenu.c:198 gtkedit/editmenu.c:220
-msgid "&Goto line...            M-l"
-msgstr ""
-
-#: gtkedit/editmenu.c:200 gtkedit/editmenu.c:222
-msgid "insert &Literal...       C-q"
-msgstr ""
-
-#: gtkedit/editmenu.c:202 gtkedit/editmenu.c:224
-msgid "&Refresh screen          C-l"
-msgstr ""
-
-#: gtkedit/editmenu.c:204 gtkedit/editmenu.c:226
-msgid "&Start record macro      C-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Finish record macro...  C-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:206
-msgid "&Execute macro...   C-a, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
-msgid "delete macr&O...            "
-msgstr ""
-
-#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
-msgid "insert &Date/time           "
-msgstr ""
-
-#: gtkedit/editmenu.c:211 gtkedit/editmenu.c:233
-msgid "format p&Aragraph        M-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:212
-msgid "'ispell' s&Pell check    C-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:213 gtkedit/editmenu.c:235
-msgid "sor&T...                 M-t"
-msgstr ""
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "'indent' &C Formatter    F19"
-msgstr ""
-
-#: gtkedit/editmenu.c:215
-msgid "&Mail...                    "
-msgstr ""
-
-#: gtkedit/editmenu.c:228
-msgid "&Execute macro... C-x e, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:234
-msgid "'ispell' s&Pell check    M-$"
-msgstr ""
-
-#: gtkedit/editmenu.c:243 gtkedit/editmenu.c:252
-msgid "&General...  "
-msgstr ""
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-msgid "&Save mode..."
-msgstr ""
-
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1302
-msgid "&Layout..."
-msgstr ""
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:265 gtkedit/editmenu.c:274 gtkedit/editmenu.c:391
-#: src/chmod.c:164 src/chown.c:130
-msgid " File "
-msgstr ""
-
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:407
-msgid " Edit "
-msgstr ""
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276
-msgid " Sear/Repl "
-msgstr ""
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277 gtkedit/editmenu.c:442
-msgid " Command "
-msgstr ""
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278
-msgid " Options "
-msgstr ""
-
-#: gtkedit/editmenu.c:392
-msgid "Open...\tC-o"
-msgstr ""
-
-#: gtkedit/editmenu.c:393
-msgid "New\tC-n"
-msgstr ""
-
-#: gtkedit/editmenu.c:395
-msgid "Save\tF2"
-msgstr ""
-
-#: gtkedit/editmenu.c:396
-msgid "Save as...\tF12"
-msgstr ""
-
-#: gtkedit/editmenu.c:398
-msgid "Insert file...\tF15"
-msgstr ""
-
-#: gtkedit/editmenu.c:399
-msgid "Copy to file...\tC-f"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:402
-msgid "Disk operations"
-msgstr ""
-
-#: gtkedit/editmenu.c:408
-msgid "Toggle mark\tF3"
-msgstr ""
-
-#: gtkedit/editmenu.c:409
-msgid "Toggle mark columns\tC-b"
-msgstr ""
-
-#: gtkedit/editmenu.c:411
-msgid "Toggle insert/overwrite\tIns"
-msgstr ""
-
-#: gtkedit/editmenu.c:413
-msgid "Copy block to cursor\tF5"
-msgstr ""
-
-#: gtkedit/editmenu.c:414
-msgid "Move block to cursor\tF6"
-msgstr ""
-
-#: gtkedit/editmenu.c:415
-msgid "Delete block\tF8/C-Del"
-msgstr ""
-
-#: gtkedit/editmenu.c:417
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:418
-msgid "Cut block to clipbrd\tS-Del"
-msgstr ""
-
-#: gtkedit/editmenu.c:419
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:420
-msgid "Selection history\tM-Ins"
-msgstr ""
-
-#: gtkedit/editmenu.c:422
-msgid "Undo\tC-BackSpace"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:425
-msgid "Manipulating blocks of text"
-msgstr ""
-
-#: gtkedit/editmenu.c:430
-msgid " Srch/Replce "
-msgstr ""
-
-#: gtkedit/editmenu.c:431
-msgid "Search...\tF7"
-msgstr ""
-
-#: gtkedit/editmenu.c:432
-msgid "Search again\tF17"
-msgstr ""
-
-#: gtkedit/editmenu.c:433
-msgid "Replace...\tF4"
-msgstr ""
-
-#: gtkedit/editmenu.c:434
-msgid "Replace again\tF14"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:437
-msgid "Search for and replace text"
-msgstr ""
-
-#: gtkedit/editmenu.c:443
-msgid "Goto line...\tM-l"
-msgstr ""
-
-#: gtkedit/editmenu.c:445
-msgid "Start record macro\tC-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:446
-msgid "Finish record macro...\tC-r"
-msgstr ""
-
-#: gtkedit/editmenu.c:447
-msgid "Execute macro...\tC-a, KEY"
-msgstr ""
-
-#: gtkedit/editmenu.c:448
-msgid "Delete macro...\t"
-msgstr ""
-
-#: gtkedit/editmenu.c:450
-msgid "Insert date/time\tC-d"
-msgstr ""
-
-#: gtkedit/editmenu.c:451
-msgid "Format paragraph\tM-p"
-msgstr ""
-
-#: gtkedit/editmenu.c:453
-msgid "Refresh display\tC-l"
-msgstr ""
-
-#. Tool hint
-#: gtkedit/editmenu.c:456
-msgid "Macros and internal commands"
-msgstr ""
-
 #: gtkedit/editoptions.c:37
 msgid "None"
 msgstr ""
@@ -1855,9 +1459,8 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: gtkedit/editwidget.c:1060 gtkedit/gtkedit.c:1368 src/help.c:806
-#: src/main.c:1668 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
-#: src/view.c:1959
+#: gtkedit/editwidget.c:1060 src/help.c:806 src/main.c:1668 src/screen.c:2284
+#: src/screen.c:2314 src/tree.c:1018 src/view.c:1959
 msgid "Help"
 msgstr ""
 
@@ -1896,119 +1499,27 @@ msgid ""
 msgstr ""
 
 #: gtkedit/gtkedit.c:1289
-msgid "Open/Load"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1289
-msgid "Load a different/new file"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1292
-msgid "New"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1296
-msgid "Save the current edit buffer to filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save As"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1299
-msgid "Save the current edit buffer as filename"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 msgid "Insert File"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1303
+#: gtkedit/gtkedit.c:1294
 msgid "Insert text from a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "Copy to file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1306
+#: gtkedit/gtkedit.c:1296
 msgid "copy a block to a file"
 msgstr ""
 
-#: gtkedit/gtkedit.c:1310
-msgid "Exit"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1310
-msgid "Quit editor"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1318
-msgid "Copy selection to clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1321
-msgid "Cut selection to clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1324
-msgid "Paste clipboard"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1328
-msgid "Undo"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1328
-msgid "Go back in time one key press"
-msgstr ""
-
 #: gtkedit/gtkedit.c:1336
-msgid "Find"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1336
-msgid "Find string/regular expression"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1339
-msgid "Find again"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1339
-msgid "Repeat most recent search"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1342 gtkedit/gtkedit.c:1367
 msgid "Search/Replace"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1342
-msgid "Find and replace text/regular expressions"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1351
-msgid "About..."
-msgstr ""
-
-#: gtkedit/gtkedit.c:1351
-msgid "Info about Mcedit"
-msgstr ""
-
-#: gtkedit/gtkedit.c:1365 src/filegui.c:404
-msgid "File"
 msgstr ""
 
 #: gtkedit/syntax.c:3180 gtkedit/syntax.c:3187
@@ -2365,6 +1876,10 @@ msgstr ""
 
 #: src/chmod.c:162 src/chown.c:120
 msgid " Permission "
+msgstr ""
+
+#: src/chmod.c:164 src/chown.c:130
+msgid " File "
 msgstr ""
 
 #: src/chmod.c:169
@@ -3226,6 +2741,10 @@ msgstr ""
 msgid " Background process: Recursive Delete "
 msgstr ""
 
+#: src/filegui.c:404
+msgid "File"
+msgstr ""
+
 #: src/filegui.c:425
 msgid "Count"
 msgstr ""
@@ -4084,6 +3603,10 @@ msgstr ""
 
 #: src/main.c:1301
 msgid "&Configuration..."
+msgstr ""
+
+#: src/main.c:1302
+msgid "&Layout..."
 msgstr ""
 
 #: src/main.c:1303

@@ -1494,6 +1494,7 @@ desktop_icon_info_destroy (DesktopIconInfo *dii)
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
 
+	gnome_metadata_delete (dii->filename);
 	g_free (dii->url);
 	g_free (dii->filename);
 	g_free (dii);

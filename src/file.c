@@ -628,6 +628,11 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
        do not create a security hole.  FIXME: You have security hole
        here, btw. Imagine copying to /tmp and symlink attack :-( */
 
+#ifdef HAVE_GNOME
+    if (!ctx->do_append)
+        gnome_metadata_delete (dst_path);
+#endif
+	    
     while ((dest_desc = mc_open (dst_path, O_WRONLY | 
       (ctx->do_append ? O_APPEND : (O_CREAT | O_TRUNC)), 0600)) < 0){
         return_status = file_error (_(" Cannot create target file \"%s\" \n %s "), dst_path);
@@ -800,6 +805,9 @@ copy_file_file (FileOpContext *ctx, char *src_path, char *dst_path, int ask_over
 	}
 #endif
 
+#ifdef HAVE_GNOME
+    gnome_metadata_copy (src_path, dst_path);
+#endif
      /*
       * .ado: according to the XPG4 standard, the file must be closed before
       * chmod can be invoked
@@ -1113,8 +1121,12 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 		return return_status;
 	}
 
-        if (mc_rename (s, d) == 0)
+        if (mc_rename (s, d) == 0){
+#ifdef HAVE_GNOME
+	    gnome_metadata_rename (s, d);
+#endif
 	    return FILE_CONT;
+	}
     }
 #if 0
 /* Comparison to EXDEV seems not to work in nfs if you're moving from
@@ -1150,7 +1162,10 @@ move_file_file (FileOpContext *ctx, char *s, char *d, long *progress_count, doub
 	    goto retry_src_remove;
 	return return_status;
     }
-
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (s);
+#endif
+    
     if (return_status == FILE_CONT)
         return_status = progress_update_one (ctx,
 					     progress_count, 
@@ -1287,6 +1302,9 @@ erase_file (FileOpContext *ctx, char *s, long *progress_count, double *progress_
 	if (return_status != FILE_RETRY)
 	    return return_status;
     }
+#ifdef HAVE_GNOME
+    gnome_metadata_delete (s);
+#endif
     if (progress_count)
         return progress_update_one (ctx, progress_count, progress_bytes, buf.st_size,
 				    is_toplevel_file);
