@@ -46,6 +46,8 @@ get_current_index (void)
 			return i;
 	}
 	printf ("FATAL: current panel is not in the list\n");
+	g_assert_not_reached ();
+	return -1; /* keep -Wall happy */
 }
 
 int

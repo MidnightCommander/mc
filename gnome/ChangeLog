@@ -1,3 +1,19 @@
+1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtools.c (message): Added return NULL.  This needs to be fixed.
+	(translate_gdk_keysym_to_curses): FIXME: Replace KEY_BACKTAB by '\t'
+	while KEY_BACKTAB is added somewhere else.
+	(translate_gdk_keysym_to_curses): return -1 as last resort.
+
+	* glayout.c (get_current_index): Add g_assert_not_reached() for
+	fatal case.
+
+	* gmenu.c (menubar_new): Cast g_menubar to unsigned long.
+
+	* gwidget.c (x_create_input): Cast entry to GTK_OBJECT.
+
+	* gkey.c (find_select_closure_callback): Fix = -> == typo.
+
 Tue Mar 10 14:01:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_adjust_top_file): We no longer adjust the top
@@ -8,6 +24,12 @@ Tue Mar 10 14:01:47 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 	(panel_drop_data_available): Now drop support uses the new
 	coords.x and coords.y fields from the DropDataAvailableEvent to
 	find out which directory receives the drop.
+
+Tue Mar 10 00:10:32 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_drop_data_available): Now drop support uses the
+	new coords.x and coords.y fields from the DropDataAvailableEvent
+	to find out which directory receives the drop. 
 
 	* gwidget.c (x_radio_focus_item): Add support for focusing radio
 	buttons.

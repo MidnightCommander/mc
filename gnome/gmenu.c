@@ -65,7 +65,7 @@ WMenu *menubar_new (int y, int x, int cols, Menu menu [], int items)
     
     g_menubar = gtk_menu_bar_new ();
     gtk_widget_show (g_menubar);
-    menubar->widget.wdata = g_menubar;
+    menubar->widget.wdata = (unsigned long) g_menubar;
 
     for (i = 0; i < items; i++){
 	    GtkWidget *child;

@@ -114,6 +114,10 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	va_end (args);
 	
 	query_dialog (header, buffer, error, 1, "&Ok");
+
+	/* FIXME: return what? */
+
+	return NULL;
 }
 
 int
@@ -126,7 +130,7 @@ translate_gdk_keysym_to_curses (GdkEventKey *event)
 		return KEY_BACKSPACE;
 	case GDK_Tab:
 		if (event->state & GDK_SHIFT_MASK)
-			return KEY_BACKTAB;
+			return '\t'; /* return KEY_BACKTAB */
 		return '\t';
 	case GDK_KP_Enter:
 	case GDK_Return:
@@ -232,7 +236,8 @@ translate_gdk_keysym_to_curses (GdkEventKey *event)
 			return key;
 		}
 	}
-	
+
+	return -1;
 }
 
 

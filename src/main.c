@@ -2673,7 +2673,7 @@ static void handle_args (int argc, char *argv [])
     	    char buffer[MC_MAXPATHLEN + 2];
 	    this_dir = strdup (tmp);
 	    mc_get_current_wd (buffer, sizeof (buffer) - 2);
-	    if (tmp = poptGetArg (optCon))
+	    if ((tmp = poptGetArg (optCon)))
 	        other_dir = strdup (tmp);
 	}
     }

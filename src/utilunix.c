@@ -90,7 +90,7 @@ void init_groups (void)
        return;
     
     setgrent ();
-    while (grp = getgrent ())
+    while ((grp = getgrent ()))
        for (i = 0; grp->gr_mem[i]; i++)
            if (!strcmp (pwd->pw_name,grp->gr_mem[i]))
                {

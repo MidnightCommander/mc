@@ -1,3 +1,17 @@
+1998-03-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* xslint.c (getch): Added missing "return".
+
+	* utilunix.c (init_groups): Added parentheses around
+	assignment/truth value.
+
+	* boxes.c: #include <stdlib.h>
+
+	* screen.c (string_inode): Cast fe->buf.st_ino to long to be
+	consistent with sprintf format.
+
+	* main.c (handle_args): Added parentheses around assignment/truth value.
+
 Sat Mar  7 14:33:38 1998  Pavel Roskin <pavel@absolute.spb.su>
 
         * src/complete.c: obsolete hack for OS/2 and NT removed.

@@ -618,7 +618,9 @@ match_file_output:
     	                if (p < q) { 
 			    char *filename_copy = strdup (filename);
 			    
-    	                    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number);
+			    /* FIXME: drops is passed from an incompatible pointer type */
+
+			    exec_extension (filename_copy, r + 1, drops, move_dir, view_at_line_number);
 			    free (filename_copy);
 			    
     	                    to_return = "Success";

@@ -368,7 +368,7 @@ string_inode (file_entry *fe, int len)
 {
     static char buffer [9];
 
-    sprintf (buffer, "%ld", fe->buf.st_ino);
+    sprintf (buffer, "%ld", (long) fe->buf.st_ino);
     return buffer;
 }
 

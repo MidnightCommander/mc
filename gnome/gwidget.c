@@ -171,7 +171,7 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	in->widget.wdata = (widget_data) entry;
 	gtk_entry_set_text (GTK_ENTRY (entry), in->buffer);
 	gtk_entry_set_position (GTK_ENTRY (entry), in->point);
-	gtk_signal_connect (GTK_ENTRY (entry), "button_press_event",
+	gtk_signal_connect (GTK_OBJECT (entry), "button_press_event",
 			    GTK_SIGNAL_FUNC (entry_click), in);
 	return 1;
 }

@@ -86,9 +86,10 @@ do_define_key (int code, char *strcap) {}
 void
 load_terminfo_keys () {}
 
-int getch ()
+int
+getch ()
 {
-    getchar ();
+    return getchar ();
 }
 
 void
