@@ -137,7 +137,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 
         /* first, we set the icon */
 	direc = g_strdup (fp_dlg->file_name);
-	rindex (direc, '/')[0] = '\0';
+	strrchr (direc, '/')[0] = '\0';
 	fe = file_entry_from_file (fp_dlg->file_name);
 	fp_dlg->im = gicon_get_icon_for_file (direc, fe);
 	g_free (direc);

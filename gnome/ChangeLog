@@ -1,3 +1,8 @@
+1999-02-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (create_general_properties): Use
+	strrchr instead of rindex
+
 1999-02-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c: Init gicon here to avoid crashing when we have the
