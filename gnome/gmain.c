@@ -208,7 +208,7 @@ bind_gtk_keys (GtkWidget *w, Dlg_head *h)
 widget_data
 xtoolkit_create_dialog (Dlg_head *h, int flags)
 {
-	GtkWidget *win, *ted;
+	GtkWidget *win;
 
 	if (!(flags & DLG_NO_TOPLEVEL)){
 		if (flags & DLG_GNOME_APP)
@@ -226,14 +226,8 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
-		char *layout = concat_dir_and_file (mc_home, "layout");
 		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
-    		ted = gtk_ted_new_layout (h->name, layout);
-		g_free (layout);
-		gtk_container_add (GTK_CONTAINER (win), ted);
-		gtk_widget_show (ted);
-
-		bind_gtk_keys (GTK_WIDGET (ted), h);
+		g_assert_not_reached ();
 	}
 	if (win){
 		bind_gtk_keys (GTK_WIDGET (win), h);

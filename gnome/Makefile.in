@@ -204,7 +204,6 @@ FileManager-impl.c: FileManager.h
 
 EXTRA_DIST =			\
 	gnome.TODO		\
-	layout			\
 	gmc.gnorba		\
 	mc.keys.in.in		\
 	gimp.image.desktop	\
@@ -314,7 +313,6 @@ install_mx: all
 	$(INSTALL_PROGRAM) gmc-client $(DESTDIR)$(bindir)/$(binprefix)gmc-client
 	for I in $(ICONS); \
 	do $(INSTALL_DATA) $(srcdir)/$$I $(DESTDIR)$(icondir)/$$I; done
-	$(INSTALL_DATA) $(srcdir)/layout $(DESTDIR)$(mclibdir)/layout
 	$(INSTALL_DATA) mc.keys $(DESTDIR)$(datadir)/mime-info
 	$(INSTALL_DATA) $(srcdir)/gmc.gnorba $(DESTDIR)$(corbadir)
 
@@ -325,7 +323,6 @@ uninstall:
 	for I in $(ICONS); \
 	do rm -f $(DESTDIR)$(icondir)/$$I; done
 	-rmdir $(DESTDIR)$(icondir)
-	rm -f $(DESTDIR)$(mclibdir)/layout
 	rm -f $(DESTDIR)$(datadir)/mime-info/mc.keys
 	-rmdir $(DESTDIR)$(datadir)/mime-info
 	-rmdir $(DESTDIR)$(gnewdir)

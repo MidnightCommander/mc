@@ -1,6 +1,11 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
-	* gnome/gdialogs.c [WITH_SMBFS] (vfs_smb_get_authinfo): New
+	* gmain.c (xtoolkit_create_dialog): Don't use "layout" - abort
+	instead.
+	* layout: Remove.
+	* Makefile: Remove all references to file `layout'.
+
+	* gdialogs.c [WITH_SMBFS] (vfs_smb_get_authinfo): New
 	function implementing SMB password dialog.
 
 	* gmain.c (gmc_window_setup_from_panel): Fix crash when called
