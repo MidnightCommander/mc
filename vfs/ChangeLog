@@ -1,3 +1,11 @@
+2001-12-31  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: rename to ...
+	* Make-alone.am: ... this.  Automake 1.5b doesn't allow Makefile
+	and Makefile.am to coexist peacefully unless the former is
+	generated from the later.
+	* Make-mc.in: Remove all references to the standalone VFS.
+
 2001-12-18  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/ulha.in: Support for "[unknown]" and other permissions
