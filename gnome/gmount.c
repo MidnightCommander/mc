@@ -80,7 +80,7 @@ void free (void *ptr);
 #ifdef HAVE_CORBA
 #include <libgnorba/gnorba.h>
 #include "magicdev.h"
-#endif HAVE_CORBA
+#endif /* HAVE_CORBA */
 
 #include <dirent.h>
 #include <sys/types.h>
