@@ -113,7 +113,9 @@ typedef struct {
    
     int      has_dir_sizes;	/* Set if directories have sizes = to du -s */
 
-#ifdef HAVE_GNOME
+    void     *port_ui;		/* UI stuff specific to each GUI port */
+
+#Ifdef HAVE_GNOME
     /* These are standard GtkWidgets */
 	
     void *xwindow;		/* The toplevel window */

@@ -1,3 +1,10 @@
+1998-11-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* panel.h (WPanel): Instead of the "#ifdef GNOME" mess in the
+	WPanel structure, we now have a single opaque pointer to UI data,
+	called port_ui.  GUI stuff specific to each port should be here.
+	This is a work in progress.
+
 1998-11-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* setup.c: Removed the icons_snap_to_grid and
