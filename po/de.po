@@ -10,7 +10,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.x\n"
-"POT-Creation-Date: 2003-02-05 12:58-0500\n"
+"POT-Creation-Date: 2003-02-14 02:36-0500\n"
 "PO-Revision-Date: 2001-12-06 01:10+0100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -71,9 +71,8 @@ msgid "&OK"
 msgstr "&OK"
 
 #: edit/editcmd.c:43 edit/editcmd.c:44
-#, fuzzy
 msgid " Enter file name: "
-msgstr " Zeilennummer eingeben: "
+msgstr " Dateiname eingeben: "
 
 #: edit/editcmd.c:268
 msgid " Error writing to pipe: "
@@ -694,9 +693,8 @@ msgid "Synta&x highlighting"
 msgstr "synta&Xhervorhebung"
 
 #: edit/editoptions.c:91
-#, fuzzy
 msgid "Save file &position"
-msgstr " Datei speichern "
+msgstr "Cursorstelle speichern"
 
 #: edit/editoptions.c:94
 msgid "Confir&m before saving"
@@ -959,13 +957,12 @@ msgid "&Select"
 msgstr "&Auswahl "
 
 #: src/boxes.c:715
-#, fuzzy
 msgid "Use &passive mode"
-msgstr "&Speichermodus..."
+msgstr "Passiver modus benutzen"
 
 #: src/boxes.c:717
 msgid "&Use ~/.netrc"
-msgstr ""
+msgstr "~/.netrc benutzen"
 
 #: src/boxes.c:721
 msgid "&Always use ftp proxy"
@@ -1292,14 +1289,12 @@ msgid "&Home"
 msgstr "&Home"
 
 #: src/cmd.c:738
-#, fuzzy
 msgid "Syntax file edit"
-msgstr "&Menüdatei bearbeiten"
+msgstr "Syntaxdatei bearbeiten"
 
 #: src/cmd.c:739
-#, fuzzy
 msgid " Which syntax file you want to edit? "
-msgstr " Welcher Erweiterungsdatei möchten Sie bearbeiten? "
+msgstr " Welcher Syntaxdatei möchten Sie bearbeiten? "
 
 #: src/cmd.c:898
 msgid " Compare directories "
@@ -1343,12 +1338,12 @@ msgstr ""
 
 #: src/cmd.c:1010
 msgid "Type `exit' to return to the Midnight Commander"
-msgstr "Geben Sie `exit' ein, um den Midnight Commander zu beenden"
+msgstr "Geben Sie `exit' ein, um zu Midnight Commander zurückzukehren"
 
 #: src/cmd.c:1060
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " link: %s "
+msgstr "Link %s zu:"
 
 #: src/cmd.c:1061
 msgid " Link "
@@ -1406,9 +1401,8 @@ msgid " FTP to machine "
 msgstr " FTP zu Maschine "
 
 #: src/cmd.c:1314
-#, fuzzy
 msgid " Shell link to machine "
-msgstr "SMB-Verbindung zu Maschine "
+msgstr " Shell-Verbindung zu Maschine "
 
 #: src/cmd.c:1321 src/widget.c:1050
 msgid " SMB link to machine "
@@ -1536,9 +1530,8 @@ msgid "&Group"
 msgstr "&Group"
 
 #: src/dir.c:478 src/dir.c:584
-#, fuzzy
 msgid "Cannot read directory contents"
-msgstr "Konnte Verzeichnis nicht wechseln"
+msgstr "Konnte Verzeichnis nicht lesen"
 
 #: src/ext.c:106 src/user.c:568
 #, c-format
@@ -2456,9 +2449,8 @@ msgid "&Horizontal"
 msgstr "&Horizontal"
 
 #: src/layout.c:164
-#, fuzzy
 msgid "&Xterm window title"
-msgstr "&Xterm Ideenleiste"
+msgstr "&Xterm Fenstertitel"
 
 #: src/layout.c:165
 msgid "h&Intbar visible"
@@ -2659,9 +2651,8 @@ msgid "FT&P link..."
 msgstr "FT&P-Verbindung..."
 
 #: src/main.c:970 src/main.c:997
-#, fuzzy
 msgid "S&hell link..."
-msgstr "SM&B-Verbindung..."
+msgstr "Shell-Verbindung..."
 
 #: src/main.c:972 src/main.c:999
 msgid "SM&B link..."
@@ -2824,9 +2815,8 @@ msgid "Edit edi&tor menu file"
 msgstr "Menüedi&Tor"
 
 #: src/main.c:1072
-#, fuzzy
 msgid "Edit &syntax file"
-msgstr "&Menüdatei bearbeiten"
+msgstr "Syntaxdatei bearbeiten"
 
 #: src/main.c:1078
 msgid "&Configuration..."
@@ -3004,9 +2994,8 @@ msgid "Set debug level"
 msgstr ""
 
 #: src/main.c:2254
-#, fuzzy
 msgid "Print data directory"
-msgstr "Verzeichnis"
+msgstr "Datenverzeichnis anzeigen"
 
 #: src/main.c:2256
 msgid "Requests to run in black and white"
@@ -3227,9 +3216,8 @@ msgid "missing argument"
 msgstr ""
 
 #: src/popt.c:549
-#, fuzzy
 msgid "unknown option"
-msgstr "<unbekannte group>"
+msgstr "<unbekannte Option>"
 
 #: src/popt.c:555
 msgid "invalid numeric value"
@@ -3248,9 +3236,8 @@ msgid "ARG"
 msgstr ""
 
 #: src/popthelp.c:179
-#, fuzzy
 msgid "Usage:"
-msgstr "Benutzername:"
+msgstr "Aufruf:"
 
 #: src/screen.c:202
 msgid "UP--DIR"
@@ -3574,18 +3561,18 @@ msgstr " keine verwendbaren Einträge in %s gefunden "
 msgid " User menu "
 msgstr " Benutzermenü "
 
-#: src/util.c:670 src/util.c:696
+#: src/util.c:668 src/util.c:694
 msgid "%b %e %H:%M"
 msgstr "%d. %b %H.%M"
 
-#: src/util.c:671 src/util.c:694
+#: src/util.c:669 src/util.c:692
 msgid "%b %e  %Y"
 msgstr "%d. %b %Y"
 
 #: src/utilunix.c:333
-#, fuzzy, c-format
+#, c-format
 msgid "%s is not a directory\n"
-msgstr "Verzeichnis"
+msgstr "%s ist kein Verzeichnis\n"
 
 #: src/utilunix.c:335
 #, c-format
@@ -4238,9 +4225,9 @@ msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: fehlgeschlagen; alle Stricke gerissen"
 
 #: vfs/ftpfs.c:1403
-#, fuzzy, c-format
+#, c-format
 msgid "ftpfs: storing file %lu (%lu)"
-msgstr "ftpfs: speichere Datei %d (%lu)"
+msgstr "ftpfs: speichere Datei %lu (%lu)"
 
 #: vfs/ftpfs.c:1860
 msgid ""
