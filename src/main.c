@@ -1715,20 +1715,52 @@ setup_pre (void)
 }
 
 static void
-setup_post (void)
+init_xterm_support (void)
 {
-    setup_sigwinch ();
-    
-    if (baudrate () < 9600 || slow_terminal){
-	verbose = 0;
+    char   *termvalue;
+#ifdef HAVE_SLANG
+    char   *term_entry;
+#endif
+	
+    termvalue = getenv ("TERM");
+    if (!termvalue || !(*termvalue)){
+	fprintf (stderr, _("The TERM environment variable is unset!\n"));
+	exit (1);
     }
-    if (use_mouse_p)
-	init_mouse ();
 
-    midnight_colors [0] = 0;
-    midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
-    midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
-    midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
+    /* Check mouse capabilities */
+#ifdef HAVE_SLANG
+    term_entry = SLtt_tigetent (termvalue);
+    xmouse_seq = SLtt_tigetstr ("Km", &term_entry);
+#else
+    xmouse_seq = tigetstr ("kmous");
+#endif
+
+     /* -1 means invalid capability, shouldn't happen, but let's make it 0 */
+    if ((int) xmouse_seq == -1) {
+	xmouse_seq = NULL;
+    }
+
+    if (force_xterm
+	    || (strncmp (termvalue, "xterm", 5) == 0
+	    || strcmp (termvalue, "dtterm") == 0)
+	    || xmouse_seq != NULL) {
+	xterm_flag = 1;
+
+	/* Default to the standard xterm sequence */
+	if (!xmouse_seq) {
+	    xmouse_seq = ESC_STR "[M";
+	}
+
+	/* Enable mouse unless explicitly disabled by --nomouse */
+	if (use_mouse_p != NO_MOUSE) {
+	    use_mouse_p = XTERM_MOUSE;
+	}
+
+#if 0 /* It works on xterm, but not on rxvt */
+	printf (ESC_STR "]0;GNU Midnight Commander\7");
+#endif
+    }
 }
 
 static void setup_mc (void)
@@ -1743,7 +1775,18 @@ static void setup_mc (void)
 	add_select_channel (subshell_pty, load_prompt, 0);
 #endif /* !HAVE_SUBSHELL_SUPPORT */
 
-    setup_post ();
+    setup_sigwinch ();
+    
+    if (baudrate () < 9600 || slow_terminal){
+	verbose = 0;
+    }
+    if (use_mouse_p)
+	init_mouse ();
+
+    midnight_colors [0] = 0;
+    midnight_colors [1] = REVERSE_COLOR;     /* FOCUSC */
+    midnight_colors [2] = INPUT_COLOR;       /* HOT_NORMALC */
+    midnight_colors [3] = NORMAL_COLOR;	     /* HOT_FOCUSC */
 }
 
 static void setup_dummy_mc (const char *file)
@@ -2163,20 +2206,6 @@ static void
 OS_Setup (void)
 {
     char   *mc_libdir;
-    char   *termvalue;
-	
-    termvalue = getenv ("TERM");
-    if (!termvalue || !(*termvalue)){
-	fprintf (stderr, _("The TERM environment variable is unset!\n"));
-	exit (1);
-    }
-    if (force_xterm || (strncmp (termvalue, "xterm", 5) == 0 || strcmp (termvalue, "dtterm") == 0)){
-	use_mouse_p = XTERM_MOUSE;
-	xterm_flag = 1;
-#    ifdef SET_TITLE
-	printf ("\33]0;GNU Midnight Commander\7");
-#    endif
-    }
     shell = getenv ("SHELL");
     if (!shell || !*shell)
 	shell = g_strdup (getpwuid (geteuid ())->pw_shell);
@@ -2675,7 +2704,7 @@ main (int argc, char *argv [])
     init_key ();
 
     handle_args (argc, argv);
-    
+
     /* Used to report the last working directory at program end */
     if (print_last_wd){
 #ifndef OS2_NT	
@@ -2726,6 +2755,8 @@ main (int argc, char *argv [])
     load_setup ();
 
     init_curses ();
+
+    init_xterm_support ();
 
 #ifdef HAVE_SUBSHELL_SUPPORT
 

@@ -1,3 +1,12 @@
+2001-09-15  Pavel Roskin  <proski@gnu.org>
+
+	* mouse.h: Export xmouse_seq.
+	* mouse.c (init_mouse): Use xmouse_seq instead of hardcoded
+	xterm mouse sequence.
+	* main.c (setup_post): Join with setup_mc().
+	(init_xterm_support): New function.  Check mouse capability.
+	(OS_Setup): Remove parts that are now in init_xterm_support().
+
 2001-09-14  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (get_event): Recognize KEY_MOUSE, not just MCKEY_MOUSE.

@@ -60,6 +60,9 @@ extern int use_mouse_p;
 /* If use_mouse_p is XTERM_MOUSE: is mouse currently active? */
 extern int xmouse_flag;
 
+/* String indicating that a mouse event has occured, usually "\E[M" */
+extern char *xmouse_seq;
+
 int mouse_handler (Gpm_Event *gpm_event);
 int redo_mouse (Gpm_Event *event);
 

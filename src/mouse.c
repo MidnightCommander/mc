@@ -37,6 +37,7 @@
 #include "tty.h"		/* get ncurses header */
 
 int xmouse_flag = 0;
+char *xmouse_seq;
 
 #ifdef HAVE_LIBGPM
 static int mouse_d;		/* Handle to the mouse server */
@@ -129,15 +130,15 @@ void init_mouse (void)
 	    if (!xmouse_flag) {
 
 		/* save old highlight mouse tracking */
-		printf("%c[?1001s",27);
+		printf(ESC_STR "[?1001s");
 
 		/* enable mouse tracking */
-		printf("%c[?1000h",27);
+		printf(ESC_STR "[?1000h");
 
 		fflush (stdout);
 		/* turn on */
 		xmouse_flag = 1; 
-		define_sequence (MCKEY_MOUSE, ESC_STR "[M", MCKEY_NOACTION);
+		define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
 	    }
 	    break;
 	default:
