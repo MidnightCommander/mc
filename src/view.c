@@ -592,12 +592,13 @@ load_view_file (WView *view, int fd)
     /* Make sure view->s.st_size is not truncated when passed to g_malloc */
     if ((gulong) view->s.st_size == view->s.st_size)
 	view->data = (unsigned char *) g_malloc ((gulong) view->s.st_size);
+    else
+	view->data = NULL;
 
     if (view->data == NULL || mc_lseek (view->file, 0, SEEK_SET) != 0
 	|| mc_read (view->file, view->data,
 		    view->s.st_size) != view->s.st_size) {
-	if (view->data != NULL)
-	    g_free (view->data);
+	g_free (view->data);
 	close_view_file (view);
 	return init_growing_view (view, 0, view->filename);
     }
