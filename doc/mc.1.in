@@ -469,7 +469,11 @@ entering shell commands.
 copy the currently selected file name to the command line.
 .TP
 .B C-Enter
-same a M-Enter, this one only works on the Linux console.
+same a M-Enter.  May not work on remote systems and some terminals.
+.TP
+.B C-S-Enter
+copy the full path name of the currently selected file to the command
+line.  May not work on remote systems and some terminals.
 .TP
 .B M-Tab
 does the filename, command, variable, username and hostname
