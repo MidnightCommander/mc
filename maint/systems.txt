@@ -1,0 +1,9 @@
+This is a list of system configurations that we test the Midnight
+Commander on. Feel free to add your own entries. To get your system
+identification, run config.guess from the config subdirectory.
+
+i386-unknown-freebsd4.11	Roland Illig <roland.illig@gmx.de>
+i386-unknown-netbsdelf1.6.2	Roland Illig <roland.illig@gmx.de>
+i686-pc-linux-gnu (SuSE 7.2)	Roland Illig <roland.illig@gmx.de>
+powerpc-ibm-aix4.3.3.0		Roland Illig <roland.illig@gmx.de>
+sparc-sun-solaris2.8		Roland Illig <roland.illig@gmx.de>
