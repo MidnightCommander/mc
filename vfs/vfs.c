@@ -331,7 +331,7 @@ vfs_stamp (vfs *v, vfsid id)
         }
 }
 
-void
+static void
 vfs_rm_parents (struct vfs_stamping *stamp)
 {
     struct vfs_stamping *parent;
@@ -765,8 +765,8 @@ is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
     return (stamp ? 1 : 0);
 }
 
-void
-vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
+static void
+_vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
 {
     vfs *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
@@ -845,6 +845,14 @@ vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *pa
     }
 }
 
+void
+vfs_add_noncurrent_stamps (vfs *oldvfs, vfsid oldvfsid,
+			   struct vfs_stamping *parent)
+{
+    _vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
+    vfs_rm_parents (parent);
+}
+
 static void
 vfs_stamp_path (char *path)
 {
@@ -916,7 +924,6 @@ mc_chdir (char *path)
 
     /* This function uses the new current_dir implicitly */
     vfs_add_noncurrent_stamps (old_vfs, old_vfsid, parent);
-    vfs_rm_parents (parent);
 
     /* Sometimes we assume no trailing slash on cwd */
     if (*current_dir) {
@@ -1868,5 +1875,4 @@ vfs_release_path (const char *dir)
     oldvfs = vfs_get_class (dir);
     oldvfsid = vfs_ncs_getid (oldvfs, dir, &parent);
     vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
-    vfs_rm_parents (parent);
 }

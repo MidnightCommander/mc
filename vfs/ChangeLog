@@ -1,5 +1,9 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (vfs_add_noncurrent_stamps): Call vfs_rm_parents() at
+	the end.  Change all callers not to call it.
+	(vfs_rm_parents): Make static.
+
 	* direntry.c: Don't use vfs_local_fs directly, use VFSF_LOCAL.
 	* extfs.c: Likewise.
 	* vfs.c (vfs_addstamp): Likewise.

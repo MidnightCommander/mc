@@ -137,7 +137,6 @@ redirect (vfs *me, char *name)
 	head = cur;
 
 	vfs_add_noncurrent_stamps (&vfs_sfs_ops, (vfsid) head, NULL);
-	vfs_rm_parents (NULL);
 
 	return cache;
     }

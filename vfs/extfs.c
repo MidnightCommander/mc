@@ -462,7 +462,6 @@ get_path_mangle (char *inname, struct archive **archive, int is_dir,
 	    parent->id = (*v->getid) (v, archive_name, &(parent->parent));
 	}
 	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) parc, parent);
-	vfs_rm_parents (parent);
     }
   return_success:
     *archive = parc;
@@ -763,7 +762,6 @@ extfs_close (void *data)
 	}
 	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) (file->archive),
 				   parent);
-	vfs_rm_parents (parent);
     }
 
     g_free (data);

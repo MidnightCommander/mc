@@ -125,7 +125,6 @@ void vfs_shut (void);
 
 struct vfs_class *vfs_get_class (const char *path);
 vfs *vfs_split (const char *path, char **inpath, char **op);
-void vfs_rm_parents (struct vfs_stamping *stamp);
 char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);

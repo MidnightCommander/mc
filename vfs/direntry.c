@@ -471,7 +471,6 @@ vfs_s_stamp_me (vfs *me, struct vfs_s_super *psup, char *fs_name)
 	parent->id = (*v->getid) (v, fs_name, &(parent->parent));
     }
     vfs_add_noncurrent_stamps (me, (vfsid) psup, parent);
-    vfs_rm_parents (parent);
 }
 
 char *
@@ -896,7 +895,6 @@ vfs_s_close (void *fh)
 	    parent->id = (*v->getid) (v, FH_SUPER->name, &(parent->parent));
 	}
         vfs_add_noncurrent_stamps (me, (vfsid) (FH_SUPER), parent);
-	vfs_rm_parents (parent);
     }
     if (FH->linear == LS_LINEAR_OPEN)
 	MEDATA->linear_close (me, fh);
