@@ -1,3 +1,8 @@
+2001-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c: Use indented #error for compatibility with old C
+	compilers.
+
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
 	* edit.c (edit_execute_cmd) [GTK]: Disable user menu - it

@@ -120,7 +120,7 @@ char *edit_get_buffer_as_text (WEdit * e)
 /* Note on CRLF->LF translation: */
 
 #if MY_O_TEXT
-#error MY_O_TEXT is depreciated. CR_LF_TRANSLATION must be defined which does CR-LF translation internally. See note in source.
+ #error "MY_O_TEXT is depreciated. CR_LF_TRANSLATION must be defined which does CR-LF translation internally. See note in source."
 #endif
 
 /* 
