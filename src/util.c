@@ -628,7 +628,7 @@ char *load_mc_home_file (const char *filename, char ** allocated_filename)
     char *data;
 
     hintfile_base = concat_dir_and_file (mc_home, filename);
-    lang = guess_message_value (0);
+    lang = guess_message_value ();
 
     hintfile = g_strdup_printf ("%s.%s", hintfile_base, lang);
     data = load_file (hintfile);

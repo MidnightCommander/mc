@@ -1191,7 +1191,7 @@ void mkdir_panel_cmd (void)
 
 /* partly taken from dcigettext.c, returns "" for default locale */
 /* value should be freed by calling function g_free() */
-char *guess_message_value (unsigned want_info)
+char *guess_message_value (void)
 {
     const char *var[] = {
 	/* The highest priority value is the `LANGUAGE' environment
@@ -1206,9 +1206,9 @@ char *guess_message_value (unsigned want_info)
 	/* NULL exit loops */
 	NULL
     };
-    
+
     gchar *retval;
-    
+
     unsigned i = 0;
     char *locale = NULL;
 
@@ -1217,20 +1217,12 @@ char *guess_message_value (unsigned want_info)
 	if (locale != NULL && locale[0] != '\0')
 	    break;
 	i++;
-	}
+    }
 
-    if (var[i] == NULL)
+    if (locale == NULL)
 	locale = "";
-		
-    if (want_info == 0)
-	retval = g_strdup (locale);
-    else
-	if (var[i] == NULL)
-	    retval = g_strdup (_("Using default locale"));
-	else
-	    retval = g_strdup_printf (_("Using locale \"%s\" (from environment variable %s)"), locale, var[i]);
-	     	
-    return retval;
+
+    return g_strdup (locale);
 }
 
 /* Returns a random hint */

@@ -1,5 +1,8 @@
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (guess_message_value): Remove the argument.  Adjust all
+	callers.
+
 	* textconf.c (features): Remove "edition", minor fixes.
 	(version): Don't report the current locale - it's meaningless,
 	especially if ENABLE_NLS is not defined.

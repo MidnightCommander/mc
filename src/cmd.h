@@ -63,7 +63,7 @@ void save_setup_cmd (void);
 char *get_random_hint (void);
 void source_routing (void);
 void user_file_menu_cmd (void);
-char *guess_message_value (unsigned want_info);
+char *guess_message_value (void);
 int check_for_default(char *default_file, char *file);
 
 /* Display mode code */
