@@ -42,6 +42,7 @@
 #include "cmd.h"		/* guess_message_value */
 #include "../vfs/vfs.h"
 #include "mountlist.h"
+#include "win.h"		/* xterm_flag */
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"
@@ -52,39 +53,46 @@
 static const char app_text [] = "Midnight-Commander";
 int easy_patterns = 1;
 
-int is_printable (int c)
+static inline int
+is_7bit_printable (unsigned char c)
 {
-    static const unsigned char xterm_printable[] = {
-        0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,
-        1,1,1,1,0,0,1,1,0,1,1,1,1,0,0,0,0,1,1,1,1,1,0,0,0,1,0,0,0,0,0,0,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-        1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
-    };
+    return (c > 31 && c < 127);
+}
 
-    extern int xterm_flag;
+static inline int
+is_iso_printable (unsigned char c)
+{
+    return ((c > 31 && c < 127) || c >= 160);
+}
 
-    c &= 0xff;
-#ifdef HAVE_CHARSET
+static inline int
+is_8bit_printable (unsigned char c)
+{
+    /* "Full 8 bits output" doesn't work on xterm */
     if (xterm_flag)
-	return xterm_printable[c];
-    else
-	return (c > 31 && c != 127 && c != 155);
+	return is_iso_printable (c);
+
+    return (c > 31 && c != 127 && c != 155);
+}
+
+int
+is_printable (int c)
+{
+    c &= 0xff;
+
+#ifdef HAVE_CHARSET
+    /* "Display bits" is ignored, since the user controls the output
+       by setting the output codepage */
+    return is_8bit_printable (c);
 #else
-    if (eight_bit_clean){
-        if (full_eight_bits){
-	    if (xterm_flag)
-	        return xterm_printable [c];
-	    else
-	        return (c > 31 && c != 127 && c != 155);
-	} else
-	    return ((c >31 && c < 127) || c >= 160);
+    if (!eight_bit_clean)
+	return is_7bit_printable (c);
+
+    if (full_eight_bits) {
+	return is_8bit_printable (c);
     } else
-	return (c > 31 && c < 127);
-#endif /* !HAVE_CHARSET */
+	return is_iso_printable (c);
+#endif				/* !HAVE_CHARSET */
 }
 
 /* Returns the message dimensions (lines and columns) */

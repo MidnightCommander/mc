@@ -1,5 +1,10 @@
 2002-09-22  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (is_printable): Disable "Full 8 bits output" on xterm,
+	fall back to "ISO 8859-1" due to problems with gnome-terminal,
+	which identifies itself as xterm.
+	Reported by Miven Dooligan <dooligan@intergate.ca>
+
 	* mouse.h: Put return codes from the mouse callback to an enum.
 	Remove MOU_ENDLOOP and MOU_LOCK - they are interpreted like
 	MOU_NORMAL.  Adjust all dependencies.
