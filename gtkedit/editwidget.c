@@ -1080,52 +1080,54 @@ static void edit_my_define (Dlg_head * h, int idx, char *text,
 }
 
 
-void cmd_F1 (WEdit * edit)
+static void cmd_F1 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (1));
 }
 
-void cmd_F2 (WEdit * edit)
+static void cmd_F2 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (2));
 }
 
-void cmd_F3 (WEdit * edit)
+static void cmd_F3 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (3));
 }
 
-void cmd_F4 (WEdit * edit)
+static void cmd_F4 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (4));
 }
 
-void cmd_F5 (WEdit * edit)
+static void cmd_F5 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (5));
 }
 
-void cmd_F6 (WEdit * edit)
+static void cmd_F6 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (6));
 }
 
-void cmd_F7 (WEdit * edit)
+static void cmd_F7 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (7));
 }
 
-void cmd_F8 (WEdit * edit)
+static void cmd_F8 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (8));
 }
 
-void cmd_F9 (WEdit * edit)
+#if 0
+static void cmd_F9 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (9));
 }
+#endif
 
-void cmd_F10 (WEdit * edit)
+static void cmd_F10 (WEdit * edit)
 {
     send_message (edit->widget.parent, (Widget *) edit, WIDGET_KEY, KEY_F (10));
 }

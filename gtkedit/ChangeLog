@@ -1,5 +1,7 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* edit.c: Declare cmd_F* static. Comment out cmd_F9.
+
 	* edit.c: Use indented #error for compatibility with old C
 	compilers.
 
