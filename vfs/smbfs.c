@@ -21,10 +21,10 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 /* Namespace: exports smbfs_vfs_ops */
+#include <config.h>
 #include <stdio.h>
 #include <sys/types.h>
 
-#include <config.h>
 #include "utilvfs.h"
 #include "samba/include/config.h"
 /* don't load crap in "samba/include/includes.h" we don't use and which 
