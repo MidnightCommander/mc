@@ -57,8 +57,7 @@ struct vfs_class {
     int (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (struct vfs_class *me, char *path, int mode, int dev);
 
-    vfsid (*getid) (struct vfs_class *me, const char *path,
-		    struct vfs_stamping ** parent);
+    vfsid (*getid) (struct vfs_class *me, const char *path);
 
     int (*nothingisopen) (vfsid id);
     void (*free) (vfsid id);

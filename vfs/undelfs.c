@@ -655,13 +655,10 @@ undelfs_lseek(void *vfs_info, off_t offset, int whence)
 }
 
 static vfsid
-undelfs_getid (struct vfs_class *me, const char *path,
-	       struct vfs_stamping **parent)
+undelfs_getid (struct vfs_class *me, const char *path)
 {
     char *fname, *fsname;
 
-    /* We run only on the local fs */
-    *parent = NULL;
     undelfs_get_path (path, &fsname, &fname);
 
     if (!fsname)

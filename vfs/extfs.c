@@ -468,9 +468,6 @@ extfs_get_path_mangle (char *inname, struct archive **archive, int is_dir,
     if (result == -1)
 	ERRNOR (EIO, NULL);
 
-    if (archive_name)
-	vfs_stamp_create (&vfs_extfs_ops, parc, archive_name);
-
   return_success:
     *archive = parc;
     return local;
@@ -713,7 +710,7 @@ extfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     extfs_info->local_handle = local_handle;
 
     /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (&vfs_extfs_ops, (vfsid) archive, 1);
+    vfs_rmstamp (&vfs_extfs_ops, (vfsid) archive);
     archive->fd_usage++;
     return extfs_info;
 }
@@ -753,10 +750,8 @@ extfs_close (void *data)
     }
 
     file->archive->fd_usage--;
-    if (!file->archive->fd_usage) {
-	vfs_stamp_create (&vfs_extfs_ops, file->archive,
-			  file->archive->name);
-    }
+    if (!file->archive->fd_usage)
+	vfs_stamp_create (&vfs_extfs_ops, file->archive);
 
     g_free (data);
     if (errno_code)
@@ -1108,30 +1103,16 @@ static int extfs_lseek (void *data, off_t offset, int whence)
     return lseek (file->local_handle, offset, whence);
 }
 
-static vfsid extfs_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
+static vfsid
+extfs_getid (struct vfs_class *me, const char *path)
 {
     struct archive *archive;
-    struct vfs_class *v;
-    vfsid id;
-    struct vfs_stamping *par;
     char *p;
 
-    *parent = NULL;
     if (!(p = extfs_get_path (path, &archive, 1, 1)))
 	return NULL;
-    g_free(p);
-    if (archive->name){
-	v = vfs_get_class (archive->name);
-	id = vfs_getid (v, archive->name, &par);
-	if (id) {
-	    *parent = g_new (struct vfs_stamping, 1);
-	    (*parent)->v = v;
-	    (*parent)->id = id;
-	    (*parent)->parent = par;
-	    (*parent)->next = NULL;
-	}
-    }
-    return (vfsid) archive;    
+    g_free (p);
+    return (vfsid) archive;
 }
 
 static int extfs_nothingisopen (vfsid id)

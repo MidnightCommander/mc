@@ -1455,7 +1455,7 @@ ftpfs_send_command(struct vfs_class *me, char *filename, char *cmd, int flags)
     p = ftpfs_translate_path (me, super, rpath);
     r = ftpfs_command (me, super, WAIT_REPLY, cmd, p);
     g_free (p);
-    vfs_stamp_create (&vfs_ftpfs_ops, super, NULL);
+    vfs_stamp_create (&vfs_ftpfs_ops, super);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
     if (r != COMPLETE)

@@ -475,7 +475,7 @@ vfs_s_get_path_mangle (struct vfs_class *me, char *inname,
 	vfs_die ("You have to fill root inode\n");
 
     vfs_s_insert_super (me, super);
-    vfs_stamp_create (me, super, archive_name);
+    vfs_stamp_create (me, super);
 
   return_success:
     *archive = super;
@@ -767,7 +767,7 @@ vfs_s_open (struct vfs_class *me, const char *file, int flags, int mode)
     }
 
     /* i.e. we had no open files and now we have one */
-    vfs_rmstamp (me, (vfsid) super, 1);
+    vfs_rmstamp (me, (vfsid) super);
     super->fd_usage++;
     fh->ino->st.st_nlink++;
     return fh;
@@ -850,7 +850,7 @@ vfs_s_close (void *fh)
 
     FH_SUPER->fd_usage--;
     if (!FH_SUPER->fd_usage)
-	vfs_stamp_create (me, FH_SUPER, FH_SUPER->name);
+	vfs_stamp_create (me, FH_SUPER);
 
     if (FH->linear == LS_LINEAR_OPEN)
 	MEDATA->linear_close (me, fh);
@@ -1043,27 +1043,14 @@ vfs_s_setctl (struct vfs_class *me, char *path, int ctlop, void *arg)
 /* ----------------------------- Stamping support -------------------------- */
 
 static vfsid
-vfs_s_getid (struct vfs_class *me, const char *path, struct vfs_stamping **parent)
+vfs_s_getid (struct vfs_class *me, const char *path)
 {
     struct vfs_s_super *archive;
-    struct vfs_class *v;
     char *p;
-    vfsid id;
-    struct vfs_stamping *par;
 
-    *parent = NULL;
     if (!(p = vfs_s_get_path (me, path, &archive, FL_NO_OPEN)))
 	return NULL;
     g_free(p);
-    v = vfs_get_class (archive->name);
-    id = vfs_getid (v, archive->name, &par);
-    if (id) {
-        *parent = g_new (struct vfs_stamping, 1);
-        (*parent)->v = v;
-        (*parent)->id = id;
-        (*parent)->parent = par;
-        (*parent)->next = NULL;
-    }
     return (vfsid) archive;    
 }
 

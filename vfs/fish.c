@@ -687,7 +687,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, in
     int r;
 
     r = fish_command (me, super, WAIT_REPLY, cmd);
-    vfs_stamp_create (&vfs_fish_ops, super, NULL);
+    vfs_stamp_create (&vfs_fish_ops, super);
     if (r != COMPLETE) ERRNOR (E_REMOTE, -1);
     if (flags & OPT_FLUSH)
 	vfs_s_invalidate(me, super);

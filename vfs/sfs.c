@@ -173,7 +173,7 @@ sfs_redirect (struct vfs_class *me, const char *name)
 	cur->next = head;
 	head = cur;
 
-	vfs_stamp_create (&vfs_sfs_ops, head, NULL);
+	vfs_stamp_create (&vfs_sfs_ops, head);
 
 	return cache;
     }
@@ -241,14 +241,9 @@ static int sfs_readlink (struct vfs_class *me, char *path, char *buf, int size)
 }
 
 static vfsid
-sfs_getid (struct vfs_class *me, const char *path,
-	   struct vfs_stamping **parent)
+sfs_getid (struct vfs_class *me, const char *path)
 {
-    struct vfs_class *v;
-    vfsid id;
-    struct vfs_stamping *par;
     struct cachedfile *cur = head;
-    char *path2;
 
     while (cur) {
 	if (!strcmp (path, cur->name))
@@ -256,29 +251,6 @@ sfs_getid (struct vfs_class *me, const char *path,
 	cur = cur->next;
     }
 
-    *parent = NULL;
-
-    if (!cur)
-	return NULL;
-
-    path2 = g_strdup (path);
-
-    /* Strip suffix which led to this being sfs */
-    v = vfs_split (path2, NULL, NULL);
-
-    /* ... and learn whoever was the parent system */
-    v = vfs_split (path2, NULL, NULL);
-
-    id = vfs_getid (v, path2, &par);
-    g_free (path2);
-
-    if (id) {
-	*parent = g_new (struct vfs_stamping, 1);
-	(*parent)->v = v;
-	(*parent)->id = id;
-	(*parent)->parent = par;
-	(*parent)->next = NULL;
-    }
     return (vfsid) cur;
 }
 

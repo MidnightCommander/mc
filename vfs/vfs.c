@@ -669,7 +669,6 @@ mc_chdir (const char *path)
     char *new_dir;
     struct vfs_class *old_vfs, *new_vfs;
     vfsid old_vfsid;
-    struct vfs_stamping *parent;
     int result;
 
     new_dir = vfs_canon (path);
@@ -685,7 +684,7 @@ mc_chdir (const char *path)
 	return -1;
     }
 
-    old_vfsid = vfs_ncs_getid (current_vfs, current_dir, &parent);
+    old_vfsid = vfs_ncs_getid (current_vfs, current_dir);
     old_vfs = current_vfs;
 
     /* Actually change directory */
@@ -694,7 +693,7 @@ mc_chdir (const char *path)
     current_vfs = new_vfs;
 
     /* This function uses the new current_dir implicitly */
-    vfs_add_noncurrent_stamps (old_vfs, old_vfsid, parent);
+    vfs_stamp_create (old_vfs, old_vfsid);
 
     /* Sometimes we assume no trailing slash on cwd */
     if (*current_dir) {

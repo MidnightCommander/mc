@@ -45,7 +45,7 @@ static struct vfs_stamping *stamps;
 
 
 static void
-vfs_addstamp (struct vfs_class *v, vfsid id, struct vfs_stamping *parent)
+vfs_addstamp (struct vfs_class *v, vfsid id)
 {
     if (!(v->flags & VFSF_LOCAL) && id != NULL) {
 	struct vfs_stamping *stamp;
@@ -61,17 +61,6 @@ vfs_addstamp (struct vfs_class *v, vfsid id, struct vfs_stamping *parent)
 	stamp = g_new (struct vfs_stamping, 1);
 	stamp->v = v;
 	stamp->id = id;
-	if (parent) {
-	    struct vfs_stamping *st = stamp;
-	    while (parent) {
-		st->parent = g_new (struct vfs_stamping, 1);
-		*st->parent = *parent;
-		parent = parent->parent;
-		st = st->parent;
-	    }
-	    st->parent = 0;
-	} else
-	    stamp->parent = 0;
 
 	gettimeofday (&(stamp->time), NULL);
 	stamp->next = 0;
@@ -94,44 +83,20 @@ vfs_stamp (struct vfs_class *v, vfsid id)
 
     for (stamp = stamps; stamp != NULL; stamp = stamp->next)
 	if (stamp->v == v && stamp->id == id) {
-
 	    gettimeofday (&(stamp->time), NULL);
-	    if (stamp->parent != NULL)
-		vfs_stamp (stamp->parent->v, stamp->parent->id);
-
 	    return;
 	}
 }
 
 
-static void
-vfs_rm_parents (struct vfs_stamping *stamp)
-{
-    struct vfs_stamping *parent;
-
-    while (stamp) {
-	parent = stamp->parent;
-	g_free (stamp);
-	stamp = parent;
-    }
-}
-
-
 void
-vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
+vfs_rmstamp (struct vfs_class *v, vfsid id)
 {
     struct vfs_stamping *stamp, *st1;
 
     for (stamp = stamps, st1 = NULL; stamp != NULL;
 	 st1 = stamp, stamp = stamp->next)
 	if (stamp->v == v && stamp->id == id) {
-	    if (stamp->parent != NULL) {
-		if (removeparents)
-		    vfs_rmstamp (stamp->parent->v, stamp->parent->id, 1);
-		vfs_rm_parents (stamp->parent);
-		stamp->parent = NULL;
-		continue;	/* rescan the tree */
-	    }
 	    if (st1 == NULL) {
 		stamps = stamp->next;
 	    } else {
@@ -146,14 +111,12 @@ vfs_rmstamp (struct vfs_class *v, vfsid id, int removeparents)
 
 /* Wrapper around getid methods */
 vfsid
-vfs_getid (struct vfs_class *vclass, const char *path,
-	   struct vfs_stamping **parent)
+vfs_getid (struct vfs_class *vclass, const char *path)
 {
     vfsid id = NULL;
 
-    *parent = NULL;
     if (vclass->getid)
-	id = (*vclass->getid) (vclass, path, parent);
+	id = (*vclass->getid) (vclass, path);
 
     return id;
 }
@@ -161,61 +124,15 @@ vfs_getid (struct vfs_class *vclass, const char *path,
 
 /* Same as vfs_getid, but append slash to the path if needed */
 vfsid
-vfs_ncs_getid (struct vfs_class *nvfs, const char *dir,
-	       struct vfs_stamping **par)
+vfs_ncs_getid (struct vfs_class *nvfs, const char *dir)
 {
     vfsid nvfsid;
     char *dir1;
 
     dir1 = concat_dir_and_file (dir, "");
-    nvfsid = vfs_getid (nvfs, dir1, par);
+    nvfsid = vfs_getid (nvfs, dir1);
     g_free (dir1);
     return nvfsid;
-}
-
-
-/*
- * Create a new timestamp item by VFS class and VFS id.
- * If parent_name is provided, get ID for it and make it our parent.
- * This should be an archive name, so that the parent archive could be
- * freed in the same time as the VFS object for the given VFS id.
- */
-void
-vfs_stamp_create (struct vfs_class *vclass, vfsid id,
-		  const char *parent_name)
-{
-    struct vfs_stamping *parent, *pparent;
-    struct vfs_class *pclass;
-    vfsid par_id;
-
-    parent = NULL;
-    if (parent_name) {
-	pclass = vfs_get_class (parent_name);
-	par_id = vfs_getid (pclass, parent_name, &pparent);
-	if (par_id) {
-	    parent = g_new (struct vfs_stamping, 1);
-	    parent->v = pclass;
-	    parent->next = 0;
-	    parent->id = par_id;
-	    parent->parent = pparent;
-	}
-    }
-
-    vfs_add_noncurrent_stamps (vclass, id, parent);
-}
-
-
-static int
-is_parent (struct vfs_class *nvfs, vfsid nvfsid,
-	   struct vfs_stamping *parent)
-{
-    struct vfs_stamping *stamp;
-
-    for (stamp = parent; stamp; stamp = stamp->parent)
-	if (stamp->v == nvfs && stamp->id == nvfsid)
-	    break;
-
-    return (stamp ? 1 : 0);
 }
 
 
@@ -224,33 +141,21 @@ vfs_stamp_path (char *path)
 {
     struct vfs_class *vfs;
     vfsid id;
-    struct vfs_stamping *par, *stamp;
 
     vfs = vfs_get_class (path);
-    id = vfs_ncs_getid (vfs, path, &par);
-    vfs_addstamp (vfs, id, par);
-
-    for (stamp = par; stamp != NULL; stamp = stamp->parent)
-	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
-    vfs_rm_parents (par);
+    id = vfs_ncs_getid (vfs, path);
+    vfs_addstamp (vfs, id);
 }
 
 
-static void
-_vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
-			    struct vfs_stamping *parent)
+/*
+ * Create a new timestamp item by VFS class and VFS id.
+ */
+void
+vfs_stamp_create (struct vfs_class *oldvfs, vfsid oldvfsid)
 {
     struct vfs_class *nvfs, *n2vfs, *n3vfs;
     vfsid nvfsid, n2vfsid, n3vfsid;
-    struct vfs_stamping *par, *stamp;
-    int f;
-
-    /* FIXME: As soon as we convert to multiple panels, this stuff
-       has to change. It works like this: We do not time out the
-       vfs's which are current in any panel and on the other
-       side we add the old directory with all its parents which
-       are not in any panel (if we find such one, we stop adding
-       parents to the time-outing structure. */
 
     /* There are three directories we have to take care of: current_dir,
        current_panel->cwd and other_panel->cwd. Athough most of the time either
@@ -261,22 +166,17 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 	return;
 
     nvfs = vfs_get_class (vfs_get_current_dir ());
-    nvfsid = vfs_ncs_getid (nvfs, vfs_get_current_dir (), &par);
-    vfs_rmstamp (nvfs, nvfsid, 1);
+    nvfsid = vfs_ncs_getid (nvfs, vfs_get_current_dir ());
+    vfs_rmstamp (nvfs, nvfsid);
 
-    f = is_parent (oldvfs, oldvfsid, par);
-    vfs_rm_parents (par);
-    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == NULL
-	|| f) {
+    if ((nvfs == oldvfs && nvfsid == oldvfsid) || oldvfsid == NULL) {
 	return;
     }
 
     if (get_current_type () == view_listing) {
 	n2vfs = vfs_get_class (current_panel->cwd);
-	n2vfsid = vfs_ncs_getid (n2vfs, current_panel->cwd, &par);
-	f = is_parent (oldvfs, oldvfsid, par);
-	vfs_rm_parents (par);
-	if ((n2vfs == oldvfs && n2vfsid == oldvfsid) || f)
+	n2vfsid = vfs_ncs_getid (n2vfs, current_panel->cwd);
+	if (n2vfs == oldvfs && n2vfsid == oldvfsid)
 	    return;
     } else {
 	n2vfs = NULL;
@@ -285,10 +185,8 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
 
     if (get_other_type () == view_listing) {
 	n3vfs = vfs_get_class (other_panel->cwd);
-	n3vfsid = vfs_ncs_getid (n3vfs, other_panel->cwd, &par);
-	f = is_parent (oldvfs, oldvfsid, par);
-	vfs_rm_parents (par);
-	if ((n3vfs == oldvfs && n3vfsid == oldvfsid) || f)
+	n3vfsid = vfs_ncs_getid (n3vfs, other_panel->cwd);
+	if (n3vfs == oldvfs && n3vfsid == oldvfsid)
 	    return;
     } else {
 	n3vfs = NULL;
@@ -298,25 +196,7 @@ _vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
     if (!oldvfs->nothingisopen || !(*oldvfs->nothingisopen) (oldvfsid))
 	return;
 
-    vfs_addstamp (oldvfs, oldvfsid, parent);
-    for (stamp = parent; stamp != NULL; stamp = stamp->parent) {
-	if ((stamp->v == nvfs && stamp->id == nvfsid)
-	    || (stamp->v == n2vfs && stamp->id == n2vfsid)
-	    || (stamp->v == n3vfs && stamp->id == n3vfsid)
-	    || !stamp->id || !stamp->v->nothingisopen
-	    || !(*stamp->v->nothingisopen) (stamp->id))
-	    break;
-	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
-    }
-}
-
-
-void
-vfs_add_noncurrent_stamps (struct vfs_class *oldvfs, vfsid oldvfsid,
-			   struct vfs_stamping *parent)
-{
-    _vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
-    vfs_rm_parents (parent);
+    vfs_addstamp (oldvfs, oldvfsid);
 }
 
 
@@ -370,7 +250,7 @@ vfs_expire (int now)
 	    st = stamp->next;
 	    if (stamp->v->free)
 		(*stamp->v->free) (stamp->id);
-	    vfs_rmstamp (stamp->v, stamp->id, 0);
+	    vfs_rmstamp (stamp->v, stamp->id);
 	    stamp = st;
 	} else
 	    stamp = stamp->next;
@@ -403,11 +283,10 @@ vfs_release_path (const char *dir)
 {
     struct vfs_class *oldvfs;
     vfsid oldvfsid;
-    struct vfs_stamping *parent;
 
     oldvfs = vfs_get_class (dir);
-    oldvfsid = vfs_ncs_getid (oldvfs, dir, &parent);
-    vfs_add_noncurrent_stamps (oldvfs, oldvfsid, parent);
+    oldvfsid = vfs_ncs_getid (oldvfs, dir);
+    vfs_stamp_create (oldvfs, oldvfsid);
 }
 
 
@@ -426,5 +305,5 @@ vfs_gc_done (void)
     }
 
     if (stamps)
-	vfs_rmstamp (stamps->v, stamps->id, 1);
+	vfs_rmstamp (stamps->v, stamps->id);
 }

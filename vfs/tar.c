@@ -608,7 +608,7 @@ tar_super_same (struct vfs_class *me, struct vfs_s_super *parc,
     if (parc->u.arch.st.st_mtime < archive_stat->st_mtime) {
 	/* Yes, reload! */
 	(*vfs_tarfs_ops.free) ((vfsid) parc);
-	vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc, 0);
+	vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc);
 	return 2;
     }
     /* Hasn't been modified, give it a new timeout */
