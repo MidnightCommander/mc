@@ -1,3 +1,17 @@
+Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
+
+	* Makefile.in: Remove references and dependences to/from libslang -
+	we don't need this in GNOME. Changed the order of linking - libgtkedit
+	require libgnomeui.a, so swap $(LDFLAGS) and $(EXTRALIBS). The same for
+	corba edition.
+	
+	gdnd.c, gmetadata.c, gpopup2.c, gtools.c: Adde #include "global.h" or
+	move it before #include <gnome.h> to avoid warnings about redefining
+	MIN, MAX nad RE_DUP_MAX. More clean compiling.
+	
+	* gpopup2.h: New file - to avoid errors during "make distcheck". What
+	it is for, really?
+
 1999-02-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gnome-file-property-dialog.c (apply_metadata_change): #include
