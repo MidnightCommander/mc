@@ -4746,20 +4746,20 @@ msgstr " 接続が多すぎます "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"警告: sfs.ini に無効な行があります:\n"
+"警告: %s に無効な行があります:\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"警告: sfs.ini に無効なフラグ %c があります:\n"
-"%s\n"
+"警告: %2$s に無効なフラグ %1$c があります:\n"
+"%3$s\n"
 
 #: vfs/smbfs.c:534
 #, c-format

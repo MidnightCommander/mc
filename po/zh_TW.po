@@ -4746,20 +4746,20 @@ msgstr " 太多開啟的連結了 "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"警告：sfs.ini 中此行不正確：\n"
+"警告：%s 中此行不正確：\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"警告：sfs.ini 中的旗標 %c 不正確：\n"
-"%s\n"
+"警告：%2$s 中的旗標 %1$c 不正確：\n"
+"%3$s\n"
 
 #: vfs/smbfs.c:534
 #, c-format

@@ -4489,19 +4489,19 @@ msgstr " Слишком много открытых соединений "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Предупреждение: неправильная строка в sfs.ini:\n"
+"Предупреждение: неправильная строка в %s:\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Предупреждение: неправильный флаг %c в sfs.ini:\n"
+"Предупреждение: неправильный флаг %c в %s:\n"
 "%s\n"
 
 #: vfs/smbfs.c:566

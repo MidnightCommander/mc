@@ -4811,19 +4811,19 @@ msgstr " För många aktiva anslutningar "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Varning: Ogiltig rad i sfs.ini:\n"
+"Varning: Ogiltig rad i %s:\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Varning: Flaggan %c i sfs.ini är ogiltig:\n"
+"Varning: Flaggan %c i %s är ogiltig:\n"
 "%s\n"
 
 #: vfs/smbfs.c:534

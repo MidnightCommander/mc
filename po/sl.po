@@ -4758,19 +4758,19 @@ msgstr " Preveč odprtih povezav "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Opozorilo: Neveljavna vrstica v sfs.ini:\n"
+"Opozorilo: Neveljavna vrstica v %s:\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Opozorilo: Neveljavna zastavica %c v sfs.ini:\n"
+"Opozorilo: Neveljavna zastavica %c v %s:\n"
 "%s\n"
 
 #: vfs/smbfs.c:534

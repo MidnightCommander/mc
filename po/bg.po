@@ -4744,19 +4744,19 @@ msgstr " Прекалено много отворени връзки "
 #: vfs/sfs.c:334
 #, c-format
 msgid ""
-"Warning: Invalid line in sfs.ini:\n"
+"Warning: Invalid line in %s:\n"
 "%s\n"
 msgstr ""
-"Внимание: Невалиден ред в sfs.ini:\n"
+"Внимание: Невалиден ред в %s:\n"
 "%s\n"
 
 #: vfs/sfs.c:345
 #, c-format
 msgid ""
-"Warning: Invalid flag %c in sfs.ini:\n"
+"Warning: Invalid flag %c in %s:\n"
 "%s\n"
 msgstr ""
-"Внимание: Невалиден флаг %c в sfs.ini:\n"
+"Внимание: Невалиден флаг %c в %s:\n"
 "%s\n"
 
 #: vfs/smbfs.c:534
