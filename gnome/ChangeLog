@@ -1,3 +1,20 @@
+1999-08-30  Federico Mena Quintero  <federico@redhat.com>
+
+	* gdnd.c (file_has_drop_action): New function to test whether a
+	file has the drop-action metadata or MIME action property.
+	(gdnd_validate_action): Take the drop-action metadata/MIME
+	property into account.
+	(gdnd_can_drop_on_file): New function to see whether a
+	non-directory file can take drops.
+
+	* gscreen.c (drop_on_panel): New helper function to drop stuff on
+	a panel.  This uses gdnd_can_drop_on_file so that we have the
+	correct behavior.  This enables dropping on executables and files
+	with the drop-action metadata/MIME property again.
+	(panel_icon_list_drag_data_received): Use drop_on_panel().
+	(panel_clist_drag_data_received): Use drop_on_panel().  Normalize
+	the Y coordinate to the clist_window.
+
 1999-08-26  Federico Mena Quintero  <federico@redhat.com>
 
 	* gscreen.c (panel_clist_drag_motion): Pass the full name to

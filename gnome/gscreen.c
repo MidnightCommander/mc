@@ -757,6 +757,58 @@ panel_drag_data_delete (GtkWidget *widget, GdkDragContext *context, WPanel *pane
 	/* Things is: The File manager already handles file moving */
 }
 
+/* Performs a drop on a panel.  If idx is -1, then drops on the panel's cwd
+ * itself.
+ */
+static void
+drop_on_panel (WPanel *panel, int idx, GdkDragContext *context, GtkSelectionData *selection_data)
+{
+	char *file;
+	file_entry *fe;
+	int drop_on_dir;
+	int reload;
+
+	g_assert (panel != NULL);
+	g_assert (idx == -1 || idx < panel->count);
+	g_assert (context != NULL);
+	g_assert (selection_data != NULL);
+
+	drop_on_dir = FALSE;
+
+	if (idx == -1)
+		drop_on_dir = TRUE;
+	else {
+		fe = &panel->dir.list[idx];
+		file = g_concat_dir_and_file (panel->cwd, fe->fname);
+
+		if (!((S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir)
+		      || gdnd_can_drop_on_file (file, fe))) {
+			g_free (file);
+			drop_on_dir = TRUE;
+		}
+	}
+
+	if (drop_on_dir) {
+		file = panel->cwd;
+		fe = file_entry_from_file (file);
+		if (!fe)
+			return; /* eeeek */
+	}
+
+	reload = gdnd_perform_drop (context, selection_data, file, fe);
+
+	if (file != panel->cwd)
+		g_free (file);
+
+	if (drop_on_dir)
+		file_entry_free (fe);
+
+	if (reload) {
+		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+		repaint_screen ();
+	}
+}
+
 /**
  * panel_icon_list_drag_data_received:
  *
@@ -773,48 +825,10 @@ panel_icon_list_drag_data_received (GtkWidget          *widget,
 				    guint32             time,
 				    WPanel              *panel)
 {
-	GnomeIconList *gil = GNOME_ICON_LIST (widget);
-	file_entry *fe;
-	char *file;
-	int free_file, free_fe;
 	int idx;
-	gboolean reload;
 
-	idx = gnome_icon_list_get_icon_at (gil, x, y);
-	if (idx == -1) {
-		file = panel->cwd;
-		fe = file_entry_from_file (file);
-		if (!fe)
-			return; /* eeeek */
-
-		free_file = FALSE;
-		free_fe = TRUE;
-	} else {
-		fe = &panel->dir.list[idx];
-
-		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir){
-			file = g_concat_dir_and_file (panel->cwd, panel->dir.list[idx].fname);
-			free_file = TRUE;
-		} else {
-			file = panel->cwd;
-			free_file = FALSE;
-		}
-
-		free_fe = FALSE;
-	}
-
-	reload = gdnd_perform_drop (context, selection_data, file, fe);
-
-	if (free_file)
-		g_free (file);
-
-	if (free_fe)
-		file_entry_free (fe);
-
-	if (reload) {
-		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-		repaint_screen ();
-	}
+	idx = gnome_icon_list_get_icon_at (GNOME_ICON_LIST (widget), x, y);
+	drop_on_panel (panel, idx, context, selection_data);
 }
 
 /**
@@ -833,49 +847,21 @@ panel_clist_drag_data_received (GtkWidget          *widget,
 				guint32             time,
 				WPanel              *panel)
 {
-	GtkCList *clist = GTK_CLIST (widget);
-	file_entry *fe;
-	char *file;
-	int free_file, free_fe;
+	GtkCList *clist;
 	int row;
-	int reload;
 
-	if (gtk_clist_get_selection_info (clist, x, y, &row, NULL) == 0) {
-		file = panel->cwd;
-		fe = file_entry_from_file (file);
-		if (!fe)
-			return; /* eeeek */
+	clist = GTK_CLIST (widget);
 
-		free_file = FALSE;
-		free_fe = TRUE;
-	} else {
-		g_assert (row < panel->count);
+	/* Normalize the y coordinate to the clist_window */
 
-		fe = &panel->dir.list[row];
+	y -= (GTK_CONTAINER (clist)->border_width
+	      + clist->column_title_area.y
+	      + clist->column_title_area.height);
 
-		if (S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir){
-			file = g_concat_dir_and_file (panel->cwd, panel->dir.list[row].fname);
-			free_file = TRUE;
-		} else {
-			file = panel->cwd;
-			free_file = FALSE;
-		}
+	if (gtk_clist_get_selection_info (GTK_CLIST (widget), x, y, &row, NULL) == 0)
+		row = -1;
 
-		free_fe = FALSE;
-	}
-
-	reload = gdnd_perform_drop (context, selection_data, file, fe);
-
-	if (free_file)
-		g_free (file);
-
-	if (free_fe)
-		file_entry_free (fe);
-
-	if (reload) {
-		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
-		repaint_screen ();
-	}
+	drop_on_panel (panel, row, context, selection_data);
 }
 
 /**

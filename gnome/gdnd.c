@@ -298,6 +298,31 @@ drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
 	return retval;
 }
 
+/* Returns whether a file has the drop-action metadata or MIME property defined
+ * for it.
+ */
+static int
+file_has_drop_action (char *filename)
+{
+	char *buf;
+	int size;
+	const char *mime_type;
+
+	if (gnome_metadata_get (filename, "drop-action", &size, &buf) == 0) {
+		g_free (buf);
+		return TRUE;
+	} else {
+		mime_type = gnome_mime_type_or_default (filename, NULL);
+		if (!mime_type)
+			return FALSE;
+
+		if (gnome_mime_get_value (mime_type, "drop-action") != NULL)
+			return TRUE;
+		else
+			return FALSE;
+	}
+}
+
 /* Drop stuff on a non-directory file.  This uses metadata and MIME as well. */
 static int
 drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
@@ -374,6 +399,17 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 	return retval;
 }
 
+/**
+ * gdnd_perform_drop:
+ * @context: Drag context for operation.
+ * @selection_data: Selection data from drag_data_received.
+ * @dest_full_name: Complete name of the destination file or directory.
+ * @dest_fe: File entry for the destination file or directory.
+ * 
+ * Performs a drop operation on a directory or file.
+ * 
+ * Return value: TRUE if the drop is successful, FALSE otherwise.
+ **/
 int
 gdnd_perform_drop (GdkDragContext *context, GtkSelectionData *selection_data,
 		   char *dest_full_name, file_entry *dest_fe)
@@ -471,7 +507,8 @@ gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **source_wid
  * @on_desktop: Whether we are dragging onto the desktop or a desktop icon.
  * @same_process: Whether the drag comes from the same process or not.
  * @same_source: If same_process, then whether the source and dest widgets are the same.
- * @dest: The destination file entry, or NULL if dropping on empty space.
+ * @dest_full_name: Complete name of the destination file or directory.
+ * @dest_fe: File entry for the destination file, or NULL if directory.
  * @dest_selected: If dest is non-NULL, whether it is selected or not.
  *
  * Computes the final drag action based on the suggested action of the specified
@@ -520,6 +557,9 @@ gdnd_validate_action (GdkDragContext *context,
 			} else if (on_exe) {
 				if (context->actions & GDK_ACTION_COPY)
 					return GDK_ACTION_COPY;
+			} else if (file_has_drop_action (dest_full_name)) {
+				if (context->actions & GDK_ACTION_COPY)
+					return GDK_ACTION_COPY;
 			} else if (same_source)
 				return 0;
 			else if (same_process
@@ -556,4 +596,26 @@ gdnd_validate_action (GdkDragContext *context,
 	}
 
 	return 0;
+}
+
+/**
+ * gdnd_can_drop_on_file:
+ * @full_name: Complete name of the file.
+ * @fe: File entry for the file.
+ * 
+ * Computes whether a non-directory file can take drops.
+ * 
+ * Return value: TRUE if the file can take drops, FALSE otherwise.
+ **/
+int
+gdnd_can_drop_on_file (char *full_name, file_entry *fe)
+{
+	g_return_val_if_fail (full_name != NULL, FALSE);
+	g_return_val_if_fail (fe != NULL, FALSE);
+
+	if ((is_exe (fe->buf.st_mode) && if_link_is_exe (full_name, fe))
+	    || file_has_drop_action (full_name))
+		return TRUE;
+	else
+		return FALSE;
 }

@@ -55,5 +55,8 @@ GdkDragAction gdnd_validate_action (GdkDragContext *context,
 				    int on_desktop, int same_process, int same_source,
 				    char *dest_full_name, file_entry *dest_fe, int dest_selected);
 
+/* Returns whether a non-directory file can take drops */
+int gdnd_can_drop_on_file (char *full_name, file_entry *fe);
+
 
 #endif

@@ -2039,7 +2039,7 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 
 		full_name = g_concat_dir_and_file (desktop_directory, dii->filename);
 		fe = file_entry_from_file (full_name);
-		if (!fe){
+		if (!fe) {
 			g_free (full_name);
 			return;
 		}
