@@ -490,7 +490,7 @@ type/executable
 	Icon=application.xpm
 
 # MPegs
-reges/\.mpe?g$
+regex/\.mpe?g$
 	Open=mpeg_play %f &
 	View (big)=mpeg_play -dither 2x2 %f &
 	View (gray)=mpeg_play -dither gray %f &
