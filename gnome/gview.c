@@ -250,8 +250,10 @@ gview_status (WView *view)
 static void
 gview_quit (GtkWidget *widget, WView *view)
 {
-	dlg_run_done (view->widget.parent);
-	destroy_dlg (view->widget.parent);
+	if (view_ok_to_quit (view)) {
+		dlg_run_done (view->widget.parent);
+		destroy_dlg (view->widget.parent);
+	}
 }
 
 static void
@@ -346,8 +348,7 @@ GnomeUIInfo gview_top_menu [] = {
 static int
 quit_view (GtkWidget *widget, GdkEvent *event, WView *view)
 {
-	gview_quit (widget, view);
-	return TRUE;
+	return !view_ok_to_quit (view);
 }
 	   
 int

@@ -330,8 +330,10 @@ x_init_dlg (Dlg_head *h)
 		gtk_widget_show (GTK_WIDGET (h->wdata));
 	}
 
-	gtk_signal_connect (GTK_OBJECT ((void *)h->wdata), "delete_event",
-			    GTK_SIGNAL_FUNC (gnome_dlg_send_destroy), h);
+	if (!(h->grided & DLG_GNOME_APP)) {
+		gtk_signal_connect (GTK_OBJECT ((void *)h->wdata), "delete_event",
+				    GTK_SIGNAL_FUNC (gnome_dlg_send_destroy), h);
+	}
 
 	if (h->current)
 		x_focus_widget (h->current);

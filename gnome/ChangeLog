@@ -1,3 +1,10 @@
+2001-07-28  Pavel Roskin  <proski@gnu.org>
+
+	* gmain.c (x_init_dlg): Don't install handler for "delete_event"
+	if DLG_GNOME_APP flag is set.
+	* gview.c (gview_quit): Check view_ok_to_quit().
+	(quit_view): Likewise.
+
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
 	* gmc-chargrid.c: Try 14-point clean and monospaced fonts
