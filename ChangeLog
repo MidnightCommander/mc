@@ -1,3 +1,7 @@
+2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* doc/mc.1.in: Document %p macro.
+
 2001-10-24  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Move AC_FUNC_MMAP before it's used indirectly.

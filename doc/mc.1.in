@@ -1966,6 +1966,8 @@ The error file name.
 The current menu name.
 .PP
 .I "%f"
+and
+.I "%p"
 .IP
 The current file name.
 .PP
