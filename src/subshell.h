@@ -1,14 +1,14 @@
 #ifndef __SUBSHELL_H
 #define __SUBSHELL_H
 
-/* If using a subshell for evaluating commands this is true */
-extern int use_subshell;
-
 /* Used to distinguish between a normal MC termination and */
 /* one caused by typing `exit' or `logout' in the subshell */
 #define SUBSHELL_EXIT 128
 
 #ifdef HAVE_SUBSHELL_SUPPORT
+
+/* If using a subshell for evaluating commands this is true */
+extern int use_subshell;
 
 /* File descriptor of the pseudoterminal used by the subshell */
 extern int subshell_pty;
@@ -39,5 +39,8 @@ void do_subshell_chdir (char *command, int update_prompt, int reset_prompt);
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
-#endif /* HAVE_SUBSHELL_SUPPORT */
+#else
+int use_subshell = 0;
+#endif /* not HAVE_SUBSHELL_SUPPORT */
+
 #endif /* __SUBSHELL_H */

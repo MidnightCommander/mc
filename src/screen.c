@@ -1923,12 +1923,7 @@ do_search (WPanel *panel, int c_code)
 		break;
 	    wrapped = 1;
 	}
-#ifdef OS2_NT
-#   define FILENAME_COMPARE strncasecmp
-#else
-#   define FILENAME_COMPARE strncmp
-#endif
-	if (FILENAME_COMPARE (panel->dir.list [i].fname, panel->search_buffer, l) == 0){
+	if (STRNCOMP (panel->dir.list [i].fname, panel->search_buffer, l) == 0){
 	    unselect_item (panel);
 	    panel->selected = i;
 	    select_item (panel);

@@ -1195,8 +1195,6 @@ static int pty_open_slave (const char *pty_name)
 
 /* }}} */
 
-#else
-const int use_subshell = 0;
 #endif /* HAVE_SUBSHELL_SUPPORT */
 
 /* {{{ Emacs local variables */
