@@ -593,10 +593,8 @@ edit_clean (WEdit *edit)
     edit_free_syntax_rules (edit);
     book_mark_flush (edit, -1);
     for (; j <= MAXBUFF; j++) {
-	if (edit->buffers1[j] != NULL)
-	    g_free (edit->buffers1[j]);
-	if (edit->buffers2[j] != NULL)
-	    g_free (edit->buffers2[j]);
+	g_free (edit->buffers1[j]);
+	g_free (edit->buffers2[j]);
     }
 
     g_free (edit->undo_stack);
@@ -1053,8 +1051,7 @@ edit_move_backward_lots (WEdit *edit, long increment)
 	    edit->buffers2[edit->curs2 >> S_EDIT_BUF_SIZE] =
 		g_malloc (EDIT_BUF_SIZE);
     } else {
-	if (p)
-	    g_free (p);
+	g_free (p);
     }
 
     s = edit->curs1 & M_EDIT_BUF_SIZE;

@@ -1,3 +1,16 @@
+2004-09-25  Pavel S. Shirshov <pavelsh@mail.ru>
+
+	* edit.c (edit_clean): g_free handles NULL argument too, 
+	no need for the comparison.
+	    (edit_move_backward_lots): Likewise.
+	* editcmd.c (edit_set_filename): Likewise.
+	    (edit_replace_cmd): Likewise.
+	    (edit_search_cmd): Likewise.
+	    (edit_sort_cmd): Likewise.
+	    (edit_mail_dialog): Likewise.
+	* syntax.c (syntax_g_free): Likewise.
+	    (edit_read_syntax_rules): Likewise.
+
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
 	* editdraw.c (status_string): Removed unused parameter.

@@ -440,8 +440,7 @@ void menu_save_mode_cmd (void)
 void
 edit_set_filename (WEdit *edit, const char *f)
 {
-    if (edit->filename)
-	g_free (edit->filename);
+    g_free (edit->filename);
     if (!f)
 	f = "";
     edit->filename = g_strdup (f);
@@ -1759,18 +1758,12 @@ edit_replace_cmd (WEdit *edit, int again)
     int argord[NUM_REPL_ARGS];
 
     if (!edit) {
-	if (old1) {
-	    g_free (old1);
-	    old1 = 0;
-	}
-	if (old2) {
-	    g_free (old2);
-	    old2 = 0;
-	}
-	if (old3) {
-	    g_free (old3);
-	    old3 = 0;
-	}
+	g_free (old1);
+	old1 = 0;
+	g_free (old2);
+	old2 = 0;
+	g_free (old3);
+	old3 = 0;
 	return;
     }
     last_search = edit->last_byte;
@@ -2008,10 +2001,8 @@ void edit_search_cmd (WEdit * edit, int again)
     char *exp = "";
 
     if (!edit) {
-	if (old) {
-	    g_free (old);
-	    old = 0;
-	}
+	g_free (old);
+	old = 0;
 	return;
     }
     exp = old ? old : exp;
@@ -2039,8 +2030,7 @@ void edit_search_cmd (WEdit * edit, int again)
     if (exp) {
 	if (*exp) {
 	    int len = 0;
-	    if (old)
-		g_free (old);
+	    g_free (old);
 	    old = g_strdup (exp);
 
 	    if (search_create_bookmark) {
@@ -2378,8 +2368,7 @@ int edit_sort_cmd (WEdit * edit)
 
     if (!exp)
 	return 1;
-    if (old)
-	g_free (old);
+    g_free (old);
     old = exp;
 
     e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, (char *) NULL));
@@ -2624,12 +2613,9 @@ void edit_mail_dialog (WEdit * edit)
     Quick_input.widgets = quick_widgets;
 
     if (quick_dialog (&Quick_input) != B_CANCEL) {
-	if (mail_cc_last)
-	    g_free (mail_cc_last);
-	if (mail_subject_last)
-	    g_free (mail_subject_last);
-	if (mail_to_last)
-	    g_free (mail_to_last);
+	g_free (mail_cc_last);
+	g_free (mail_subject_last);
+	g_free (mail_to_last);
 	mail_cc_last = tmail_cc;
 	mail_subject_last = tmail_subject;
 	mail_to_last = tmail_to;

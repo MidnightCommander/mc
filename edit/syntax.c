@@ -86,7 +86,7 @@ struct _syntax_marker {
 
 int option_syntax_highlighting = 1;
 
-#define syntax_g_free(x) do {if(x) {g_free(x); (x)=0;}} while (0)
+#define syntax_g_free(x) do {g_free(x); (x)=0;} while (0)
 
 static gint
 mc_defines_destroy (gpointer key, gpointer value, gpointer data)
@@ -673,8 +673,7 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 		g = 0;
 		line = save_line + 1;
 		syntax_g_free (error_file_name);
-		if (l)
-		    syntax_g_free (l);
+		syntax_g_free (l);
 		if (!read_one_line (&l, f))
 		    break;
 	    } else {
