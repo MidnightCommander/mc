@@ -1,3 +1,8 @@
+1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (create_popup_submenu): Use continue, not break on
+	this loop. 
+
 Sat May 16 02:29:51 1998  Tom Tromey  <tromey@cygnus.com>
 
 	* gdesktop.c (url_dropped): `exec' field of desktop entry now a

@@ -1,3 +1,7 @@
+1998-05-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* menu.c (menubar_drop_compute): Check for inrange items.
+
 1998-05-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* color.c (init_colors): Provide X-only version of color

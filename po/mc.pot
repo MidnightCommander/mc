@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-13 21:20:19-0500\n"
+"Date: 1998-05-18 14:24:05-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -62,7 +62,7 @@ msgstr ""
 msgid " Save As "
 msgstr ""
 
-#: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1303 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
+#: edit/editcmd.c:413 edit/editcmd.c:722 edit/editcmd.c:734 edit/editcmd.c:835 edit/editcmd.c:918 gnome/gdesktop.c:1306 src/ext.c:295 src/help.c:320 src/main.c:685 src/subshell.c:696 src/subshell.c:722 src/utilunix.c:374 src/utilunix.c:378 src/utilunix.c:444
 msgid " Warning "
 msgstr ""
 
@@ -308,11 +308,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2654 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1121 src/cmd.c:248 src/file.c:2328 src/file.c:2654 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2653 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1121 src/cmd.c:248 src/file.c:2328 src/file.c:2653 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:2040 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&No"
 msgstr ""
 
@@ -2605,7 +2605,7 @@ msgstr ""
 msgid " The shell is already running a command "
 msgstr ""
 
-#: gnome/gcmd.c:92 gnome/gdesktop.c:1116 src/main.c:838 src/screen.c:2038
+#: gnome/gcmd.c:92 gnome/gdesktop.c:1119 src/main.c:838 src/screen.c:2038
 msgid " The Midnight Commander "
 msgstr ""
 
@@ -3208,7 +3208,7 @@ msgstr ""
 msgid "  %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1490 src/screen.c:671
+#: gnome/gscreen.c:1492 src/screen.c:671
 msgid "<readlink failed>"
 msgstr ""
 
@@ -3216,11 +3216,11 @@ msgstr ""
 msgid "Unknow tag on display format: "
 msgstr ""
 
-#: gnome/gdesktop.c:1117 src/screen.c:2039
+#: gnome/gdesktop.c:1120 src/screen.c:2039
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:274 gnome/gscreen.c:515 src/screen.c:2258 src/screen.c:2292
+#: gnome/glayout.c:274 gnome/gscreen.c:516 src/screen.c:2258 src/screen.c:2292
 msgid "View"
 msgstr ""
 
@@ -3732,19 +3732,19 @@ msgstr ""
 msgid "Do you want to delete "
 msgstr ""
 
-#: gnome/gdesktop.c:1008 gnome/gscreen.c:511
+#: gnome/gdesktop.c:1008 gnome/gscreen.c:512
 msgid "Properties"
 msgstr ""
 
-#: gnome/gdesktop.c:1127
+#: gnome/gdesktop.c:1130
 msgid "Open with..."
 msgstr ""
 
-#: gnome/gdesktop.c:1128 gnome/gscreen.c:463
+#: gnome/gdesktop.c:1131 gnome/gscreen.c:464
 msgid "Enter extra arguments:"
 msgstr ""
 
-#: gnome/gdesktop.c:1303
+#: gnome/gdesktop.c:1306
 msgid " Could not open %s directory"
 msgstr ""
 
@@ -3756,7 +3756,7 @@ msgstr ""
 msgid "Opens a terminal"
 msgstr ""
 
-#: gnome/glayout.c:269 gnome/gscreen.c:530
+#: gnome/glayout.c:269 gnome/gscreen.c:531
 msgid "Copy..."
 msgstr ""
 
@@ -3780,7 +3780,7 @@ msgstr ""
 msgid "Creates a new folder"
 msgstr ""
 
-#: gnome/glayout.c:272 gnome/gscreen.c:532
+#: gnome/glayout.c:272 gnome/gscreen.c:533
 msgid "Delete..."
 msgstr ""
 
@@ -4077,115 +4077,115 @@ msgstr ""
 msgid "Select icon"
 msgstr ""
 
-#: gnome/gscreen.c:462
+#: gnome/gscreen.c:463
 msgid " Open with..."
 msgstr ""
 
-#: gnome/gscreen.c:513
+#: gnome/gscreen.c:514
 msgid "Open"
 msgstr ""
 
-#: gnome/gscreen.c:514
+#: gnome/gscreen.c:515
 msgid "Open with"
 msgstr ""
 
-#: gnome/gscreen.c:516
+#: gnome/gscreen.c:517
 msgid "View unfiltered"
 msgstr ""
 
-#: gnome/gscreen.c:518
+#: gnome/gscreen.c:519
 msgid "Link..."
 msgstr ""
 
-#: gnome/gscreen.c:519
+#: gnome/gscreen.c:520
 msgid "Symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:520
+#: gnome/gscreen.c:521
 msgid "Edit symlink..."
 msgstr ""
 
-#: gnome/gscreen.c:531
+#: gnome/gscreen.c:532
 msgid "Rename/move.."
 msgstr ""
 
-#: gnome/gscreen.c:1298
+#: gnome/gscreen.c:1300
 msgid "All files"
 msgstr ""
 
-#: gnome/gscreen.c:1300
+#: gnome/gscreen.c:1302
 msgid "Archives and compressed files"
 msgstr ""
 
-#: gnome/gscreen.c:1302
+#: gnome/gscreen.c:1304
 msgid "RPM/DEB files"
 msgstr ""
 
-#: gnome/gscreen.c:1304
+#: gnome/gscreen.c:1306
 msgid "Text/Document files"
 msgstr ""
 
-#: gnome/gscreen.c:1306
+#: gnome/gscreen.c:1308
 msgid "HTML and SGML files"
 msgstr ""
 
-#: gnome/gscreen.c:1308
+#: gnome/gscreen.c:1310
 msgid "Postscript and PDF files"
 msgstr ""
 
-#: gnome/gscreen.c:1310
+#: gnome/gscreen.c:1312
 msgid "Spreadsheet files"
 msgstr ""
 
-#: gnome/gscreen.c:1312
+#: gnome/gscreen.c:1314
 msgid "Image files"
 msgstr ""
 
-#: gnome/gscreen.c:1315
+#: gnome/gscreen.c:1317
 msgid "Video/animation files"
 msgstr ""
 
-#: gnome/gscreen.c:1317
+#: gnome/gscreen.c:1319
 msgid "Audio files"
 msgstr ""
 
-#: gnome/gscreen.c:1319
+#: gnome/gscreen.c:1321
 msgid "C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1321
+#: gnome/gscreen.c:1323
 msgid "C++ program files"
 msgstr ""
 
-#: gnome/gscreen.c:1323
+#: gnome/gscreen.c:1325
 msgid "Objective-C program files"
 msgstr ""
 
-#: gnome/gscreen.c:1325
+#: gnome/gscreen.c:1327
 msgid "Scheme program files"
 msgstr ""
 
-#: gnome/gscreen.c:1327
+#: gnome/gscreen.c:1329
 msgid "Assembler program files"
 msgstr ""
 
-#: gnome/gscreen.c:1329
+#: gnome/gscreen.c:1331
 msgid "Misc. program files"
 msgstr ""
 
-#: gnome/gscreen.c:1331
+#: gnome/gscreen.c:1333
 msgid "Font files"
 msgstr ""
 
-#: gnome/gscreen.c:1456
+#: gnome/gscreen.c:1458
 msgid "Search: "
 msgstr ""
 
-#: gnome/gscreen.c:1466
+#: gnome/gscreen.c:1468
 msgid " %s bytes in %d file%s"
 msgstr ""
 
-#: gnome/gscreen.c:1541
+#: gnome/gscreen.c:1543
 msgid "Filter"
 msgstr ""
 

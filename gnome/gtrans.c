@@ -23,154 +23,6 @@ int want_transparent_text = 0;
  * - Federico
  */
 
-struct text_info {
-	GList *rows;
-	GdkFont *font;
-	int width;
-	int height;
-	int baseline_skip;
-};
-
-
-static void
-free_string (gpointer data, gpointer user_data)
-{
-	if (data)
-		g_free (data);
-}
-
-static void
-text_info_free (struct text_info *ti)
-{
-	g_list_foreach (ti->rows, free_string, NULL);
-	g_list_free (ti->rows);
-	g_free (ti);
-}
-
-static struct text_info *
-layout_text (GtkWidget *widget, char *text)
-{
-	struct text_info *ti;
-	char *row_end, *row_text, *break_pos;
-	int i, row_width, window_width;
-	size_t len;
-
-	ti = g_new (struct text_info, 1);
-
-	ti->rows = NULL;
-	ti->font = widget->style->font;
-	ti->width = 0;
-	ti->height = 0;
-
-	ti->baseline_skip = ti->font->ascent + ti->font->descent;
-
-	window_width = 0;
-
-	while (*text) {
-		row_end = strchr (text, '\n');
-		if (!row_end)
-			row_end = strchr (text, '\0');
-
-		len = row_end - text + 1;
-		row_text = g_new (char, len);
-		memcpy (row_text, text, len - 1);
-		row_text[len - 1] = '\0';
-
-		/* Adjust the window's width or shorten the row until
-		 * it fits in the window.
-		 */
-
-		while (1) {
-			row_width = gdk_string_width (ti->font, row_text);
-			if (!window_width) {
-				/* make an initial guess at window's width */
-
-				if (row_width > SNAP_X)
-					window_width = SNAP_X;
-				else
-					window_width = row_width;
-			}
-
-			if (row_width <= window_width)
-				break;
-
-			if (strchr (row_text, ' ')) {
-				/* the row is currently too wide, but we have
-				 * blanks in the row so we can break it into
-				 * smaller pieces
-				 */
-
-				int avg_width = row_width / strlen (row_text);
-
-				i = window_width;
-
-				if (avg_width != 0)
-					i /= avg_width;
-
-				if ((size_t) i >= len)
-					i = len - 1;
-
-				break_pos = strchr (row_text + i, ' ');
-				if (!break_pos) {
-					break_pos = row_text+ i;
-					while (*--break_pos != ' ');
-				}
-
-				*break_pos = '\0';
-			} else {
-				/* We can't break this row into any smaller
-				 * pieces, so we have no choice but to widen
-				 * the window
-				 *
-				 * For MC, we may want to modify the code above
-				 * so that it can also split the string on the
-				 * slahes of filenames.
-				 */
-
-				window_width = row_width;
-				break;
-			}
-		}
-
-		if (row_width > ti->width)
-			ti->width = row_width;
-
-		ti->rows = g_list_append (ti->rows, row_text);
-		ti->height += ti->baseline_skip;
-
-		text += strlen (row_text);
-		if (!*text)
-			break;
-
-		if (text[0] == '\n' && text[1]) {
-			/* end of paragraph and there is more text to come */
-			ti->rows = g_list_append (ti->rows, NULL);
-			ti->height += ti->baseline_skip / 2;
-		}
-
-		text++; /* skip blank or newline */
-	}
-
-	return ti;
-}
-
-static void
-paint_text (struct text_info *ti, GdkDrawable *drawable, GdkGC *gc, int x_ofs, int y_ofs)
-{
-	int y, w;
-	GList *item;
-
-	y = y_ofs + ti->font->ascent;
-
-	for (item = ti->rows; item; item = item->next) {
-		if (item->data) {
-			w = gdk_string_width (ti->font, item->data);
-			gdk_draw_string (drawable, ti->font, gc, x_ofs + (ti->width - w) / 2, y, item->data);
-			y += ti->baseline_skip;
-		} else
-			y += ti->baseline_skip / 2;
-	}
-}
 
 static void
 set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
@@ -179,12 +31,12 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	GdkPixmap *im_pixmap;
 	GdkBitmap *mask;
 	GdkBitmap *im_mask;
-	struct text_info *ti;
+	struct gnome_icon_text_info *ti;
 	GdkColor color;
 	GdkGC *p_gc, *m_gc;
 	int width, height;
 
-	ti = layout_text (window, text);
+	ti = gnome_icon_layout_text (window->style->font, text, SNAP_X);
 
 	width = MAX (ti->width, im->rgb_width);
 	height = im->rgb_height + SPACING + ti->height;
@@ -296,16 +148,18 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	} else {
 		color.pixel = 1;
 		gdk_gc_set_foreground (m_gc, &color);
-		paint_text (ti, mask, m_gc,
-			    (width - ti->width) / 2,
-			    im->rgb_height + SPACING);
+		gnome_icon_paint_text (ti, mask, m_gc,
+				       (width - ti->width) / 2,
+				       im->rgb_height + SPACING,
+				       ti->width);
 	}
 	
 	gdk_color_white (gdk_imlib_get_colormap (), &color);
 	gdk_gc_set_foreground (p_gc, &color);
-	paint_text (ti, pixmap, p_gc,
-		    (width - ti->width) / 2,
-		    im->rgb_height + SPACING);
+	gnome_icon_paint_text (ti, pixmap, p_gc,
+			       (width - ti->width) / 2,
+			       im->rgb_height + SPACING,
+			       ti->width);
 
 	/* Set contents of window */
 
@@ -319,7 +173,7 @@ set_window_text (GtkWidget *window, GdkImlibImage *im, char *text)
 	gdk_pixmap_unref (pixmap);
 	gdk_pixmap_unref (mask);
 
-	text_info_free (ti);
+	gnome_icon_text_info_free (ti);
 }
 
 static void
