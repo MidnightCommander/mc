@@ -70,10 +70,9 @@ termcap/terminfo. Этот ключ используется только на терминалах HP, где
 каталог, в котором вы были (спасибо Torben Fjerdingstad и Sergey за
 создание этой функции и кода, который реализует этот ключ).
 .IP
-Для того чтобы эти функции были определены для оболочек bash и zsh
-используйте файл
+Для того чтобы эта функция была определена, используйте файл
 .B @prefix@/share/mc/bin/mc.sh
-а для оболочки tcsh соответственно файл
+для оболочек bash и zsh, а для оболочки tcsh соответственно файл
 .B @prefix@/share/mc/bin/mc.csh
 .TP
 .I \-s
@@ -760,8 +759,7 @@ Commander-ом (например, символ '+').
 (ссылок, указывающих в никуда).
 .TP
 .B mark
-Звездочка (asterisk) если файл помечен, пробел -
-если не помечен.
+Звездочка (asterisk) если файл помечен, пробел - если не помечен.
 .TP
 .B mtime
 время последней модификации файла.
@@ -1473,7 +1471,7 @@ CDPATH (смотрите описание
 .I keyword=command
 (без пробелов возле "="), где
 .I keyword
-должно быть :
+должно быть:
 .PP
 .I Open
 (строка задает действия, выполняемые в том случае, когда пользователь
@@ -1571,7 +1569,7 @@ K	Make a release of the current subdirectory
 	tar cvhf ${tar}.tar $tar
 
 = f *.tar.gz | f *.tgz & t n
-X       Extract the contents of a compressed tar file
+X	Extract the contents of a compressed tar file
 	tar xzvf %f
 .fi
 .PP
@@ -1584,8 +1582,8 @@ X       Extract the contents of a compressed tar file
 .PP
 .nf
 Синтаксис строки условия:   = <sub-cond>
-                или:	    = <sub-cond> | <sub-cond> ...
-                или:	    = <sub-cond> & <sub-cond> ...
+                или:        = <sub-cond> | <sub-cond> ...
+                или:        = <sub-cond> & <sub-cond> ...
 
 где <sub-condition> может принимать следующие значения:
 
