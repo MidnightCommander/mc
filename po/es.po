@@ -2154,7 +2154,6 @@ msgid ""
 " Help file format error\n"
 "\004"
 msgstr ""
-"\n"
 " Error en el formato del archivo de ayuda\n"
 ""
 
