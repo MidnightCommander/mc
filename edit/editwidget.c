@@ -173,7 +173,6 @@ edit (const char *_file, int line)
     if (!(wedit = edit_init (NULL, LINES - 2, COLS, _file, line))) {
 	return 0;
     }
-    wedit->macro_i = -1;
 
     /* Create a new dialog and add it widgets to it */
     edit_dlg =

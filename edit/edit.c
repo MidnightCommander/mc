@@ -635,7 +635,6 @@ edit_reload (WEdit *edit, const char *filename)
     int columns = edit->num_widget_columns;
     e = g_malloc0 (sizeof (WEdit));
     e->widget = edit->widget;
-    e->macro_i = -1;
     if (!edit_init (e, lines, columns, filename, 0)) {
 	g_free (e);
 	return 0;
