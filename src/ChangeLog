@@ -1,5 +1,8 @@
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
+	* execute.c (toggle_panels): Refresh panels after returning from
+	Ctrl-O.
+
 	* cmd.c (view_file_cmd): Use input_expand_dialog().
 
 	* wtools.c (quick_dialog_skip): Perform tilde expansion on input

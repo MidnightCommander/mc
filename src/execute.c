@@ -268,10 +268,10 @@ toggle_panels (void)
 				   1, LINES - keybar_visible - 1);
     }
 #endif				/* HAVE_SUBSHELL_SUPPORT */
-    touchwin (stdscr);
 
-    repaint_screen ();
+    update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     update_xterm_title_path ();
+    do_refresh ();
 }
 
 
