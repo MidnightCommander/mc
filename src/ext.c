@@ -139,6 +139,7 @@ exec_extension (char *filename, char *data, char **drops, int *move_dir, int sta
      */
     file_name = strdup (tmpnam (NULL));
 
+    /* #warning FIXME: this is ugly */
     if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));

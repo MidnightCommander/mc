@@ -125,9 +125,6 @@ int file_op_compute_totals = 1;
 /* If on, it gets a little scrict with dangerous operations */
 int know_not_what_am_i_doing = 0;
 
-/* mapping operations into names */
-char *operation_names [] = { N_("Copy"), N_("Move"), N_("Delete") };
-
 /* This is a hard link cache */
 struct link {
     struct link *next;
@@ -1843,7 +1840,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     if (do_bg){
 	int v;
 
-	v = do_background (ctx, copy_strings (_(operation_names [operation]), ": ", panel->cwd, 0));
+	v = do_background (ctx, copy_strings (_(op_names [operation]), ": ", panel->cwd, 0));
 	if (v == -1){
 	    message (1, MSG_ERROR, _(" Sorry, I could not put the job in background "));
 	}

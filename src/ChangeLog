@@ -1,3 +1,13 @@
+1999-01-18  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* file.c: Killed operation_names: they seemed same to op_names to
+	me, and compilation failed on them (initializer element is not a
+	constant). Maybe miguel tagged too many strings for localization?
+	:-).
+
+	* ext.c: we use /tmp in "creative" way: creating there file and
+	then executing it. I do not see how it is needed. Marked with FIXME.
+
 Thu Jan 21 01:11:24 1999  Timur Bakeyev <mc@bat.ru>
 
 	* mad.[ch], util.[ch]: commit changes, that allow coexist (temporary) 
