@@ -111,7 +111,7 @@ La riga più in alto è la
 .\"LINK2"
 riga dei menu.
 .\"Menu Bar"
-La riga dei menu può essere invisibile, ma compare se clicchi la
+La barra dei menu può essere invisibile, ma compare se clicchi la
 riga più in alto con il mouse o se premi il tasto F9.
 .PP
 Il Midnight Commander fornisce la vista di due directory 
@@ -537,8 +537,8 @@ Si sposta di mezza pagina in alto o in basso.
 Si sposta all'inizio o alla fine.
 .PP
 .\"NODE "  Input Line Keys"
-.SH "  Tasti di Linea di Ingresso"
-I tasti di linea di ingresso (sono usati
+.SH "  Tasti di Riga di Ingresso"
+I tasti di riga di ingresso (sono usati
 per la
 .\"LINK2"
 riga di comando
@@ -601,46 +601,49 @@ completamento
 automatico.
 .PP
 .SH ""
-.SH "Menu Bar"
-The menu bar pops up when you press F9 or click the mouse on the top
-row of the screen. The menu bar has five menus: "Left", "File",
-"Command", "Options" and "Right".
+.\"NODE "Menu Bar"
+.SH "Barra dei Menu"
+La barra dei menu compare premendo F9 o cliccando con il mouse sopra la riga
+superiore dello schermo. La barra menu possiede cinque menu: "Sinistra", "File",
+"Comando", "Opzioni" e "Destra".
 .PP
-The
+I
 .\"LINK2"
-Menu Sinistro e Destro
+Menu Sinistra e Destra
 .\"Left and Right Menus"
-permette di modificare l'apparenza dei pannelli directory di sinistra
-e destra.
+permettono di modificare l'apparenza dei pannelli directory di sinistra
+e di destra.
 .PP
-The
+Il
 .\"LINK2"
 Menu File
 .\"File Menu"
-lists the actions you can perform on the currently selected file or
-the tagged files.
+elenca le azioni che possono essere condotte sui file correntemente selezionati 
+o marcati.
 .PP
-The
+Il
 .\"LINK2"
-Command Menu
+Menu Comando 
 .\"Command Menu"
-lists the actions which are more general and bear no relation to the
-currently selected file or the tagged files.
+elenca le azioni più generali e non ha relazione con il file correntemente
+selezionati o marcati.
 .PP
-The
+Il
 .\"LINK2"
-Options Menu
+Menu Opzioni
 .\"Options Menu"
-lists the actions which allow you to customize the Midnight Commander.
+elenca le azioni che permettono di personalizzare il Midnight Commander.
 .PP
-.SH "  Left and Right Menus"
-The outlook of the directory panels can be changed from the
-.B "Left"
-and
-.B "Right"
-menus.
+.\"NODE "  Left and Right Menus"
+.SH "  Menu Sinistra e Destra"
+L'apparenza dei pannelli directory è modificabile tramite i menu
+.B "Sinistra"
+e
+.B "Destra"
+.
 .PP
-.SH "    Listing Mode..."
+.\"NODE ""    Listing Mode..."
+.SH "    Modalità vista..."
 The listing mode view is used to display a listing of files, there are
 four different listing modes available:
 .B Full,
