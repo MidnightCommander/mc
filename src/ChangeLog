@@ -1,3 +1,9 @@
+1999-03-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* utilunix.c (close_error_pipe): Inform parent of the return value
+	of any command here.  This allows the desktop to launch a terminal
+	only if it succeeded in mounting the directory.
+
 Thu Mar 18 16:09:09 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* panel.h, screen.c: Add an ability to center justify fields in

@@ -1003,20 +1003,21 @@ do_mount_umount (char *filename, gboolean is_mount)
 		return FALSE;
 	
 	if (op){
+		gboolean success = TRUE;
 		char *command;
 		FILE *f;
 		
 		command = g_strconcat (op, " ", buffer, NULL);
 		open_error_pipe ();
 		f = popen (command, "r");
-		if (f == NULL)
-			close_error_pipe (1, _("While running the mount/umount command"));
-		else 
-			close_error_pipe (0, 0);
+		if (f == NULL){
+			success = !close_error_pipe (1, _("While running the mount/umount command"));
+		} else 
+			success = !close_error_pipe (0, 0);
 		pclose (f);
 		
 		g_free (buffer);
-		return TRUE;
+		return success;
 	}
 	g_free (buffer);
 	return FALSE;
@@ -1140,6 +1141,8 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 		if (!is_mounted){
 			if (try_to_mount (filename, fe))
 				launch = TRUE;
+			else
+				launch = FALSE;
 		} else
 			launch = TRUE;
 		

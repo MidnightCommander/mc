@@ -102,7 +102,7 @@ int regexp_match (char *pattern, char *string, int match_type);
 /* Error pipes */
 void open_error_pipe (void);
 void check_error_pipe (void);
-void close_error_pipe (int error, char *text);
+int close_error_pipe (int error, char *text);
 
 /* Process spawning */
 void my_putenv (char*, char*);

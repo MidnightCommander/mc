@@ -2751,7 +2751,7 @@ handle_args (int argc, char *argv [])
     gtk_widget_push_visual (gdk_imlib_get_visual ());
     gtk_widget_push_colormap (gdk_imlib_get_colormap ());
 	
-    poptResetContext (ctx);
+/*    poptResetContext (ctx); */
 #else
     ctx = poptGetContext ("mc", argc, argv, argument_table, 0);
 #endif
