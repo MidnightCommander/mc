@@ -1,5 +1,5 @@
 .\"TOPICS "Tartalomjegyzék"
-.TH mc 1
+.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NÉV"
 mc \- Fájlkezelõ Unix típusú rendszerekhez

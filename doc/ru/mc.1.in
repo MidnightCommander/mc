@@ -1,5 +1,5 @@
 .\"TOPICS "Разделы помощи:"
-.TH mc 1 "15 October 2002"
+.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "НАИМЕНОВАНИЕ"
 mc \- Визуальная оболочка для Unix-подобных систем.

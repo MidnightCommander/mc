@@ -15,7 +15,7 @@
 .\" Prego mantenere la linea di traduzione generale (per quanto possibile).
 .\"
 .\"TOPICS "Indice degli argomenti:"
-.TH mc 1 "30 Ottobre 1998"
+.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOME"
 mc \- interfaccia visuale per sistemi tipo Unix.

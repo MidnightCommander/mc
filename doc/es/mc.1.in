@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH MC 1 "26 de Diciembre de 2002" "MC Versión 4.6.0" "GNU Midnight Commander"
+.TH MC 1 "Enero de 2003" "MC Versión 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.

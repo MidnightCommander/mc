@@ -1,5 +1,5 @@
 .\"Przet³umaczone przez by Macieja Wojciechowskiego    wojciech@staszic.waw.pl
-.TH mc 1 "30 October 1998"
+.TH MC 1 "January 2003" "MC Version 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH NAZWA
 mc - wizualny interpetator poleceñ dla systemów Unixopodobnych
