@@ -1,5 +1,7 @@
 2001-01-11  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Check for ext2 libraries only if VFS is enabled.
+
 	* src/Makefile.in: Create directories before installing files.
 	Removed all occurences of libprefix - it's never defined.
 

@@ -755,7 +755,8 @@ AC_ARG_WITH(netrc,
 
 undelfs_o=""
 
-AC_ARG_WITH(ext2undel,
+if test $use_vfs = yes; then
+    AC_ARG_WITH(ext2undel,
         [--with-ext2undel           Compile with ext2 undelete code],[
 	if test x$withval != xno;
 	then
@@ -768,7 +769,8 @@ AC_ARG_WITH(ext2undel,
 	fi],[
 	dnl Default: detect
 	AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL],,-lcom_err)
-])
+    ])
+fi
 
 AC_SUBST(undelfs_o)
 	
