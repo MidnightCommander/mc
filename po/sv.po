@@ -13,9 +13,9 @@
 # att lägga till ett 's'. Fixa källkoden!!! (Någon med CVS rättighet.)
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2000-10-18 00:25+0200\n"
-"PO-Revision-Date: 2000-10-18 00:29+0200\n"
+"Project-Id-Version: mc\n"
+"POT-Creation-Date: 2000-10-29 21:41+0100\n"
+"PO-Revision-Date: 2000-10-29 21:43+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1616,7 +1616,7 @@ msgid "Up"
 msgstr "Upp"
 
 #: gnome/gscreen.c:2280
-msgid "Go up a level in the directory heirarchy"
+msgid "Go up a level in the directory hierarchy"
 msgstr "Gå upp en nivå i kataloghierarkin"
 
 #: gnome/gscreen.c:2282
