@@ -1,3 +1,7 @@
+2004-09-19  Roland Illig  <roland.illig@gmx.de>
+
+	* HACKING: added explanation for const_cast.
+
 2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru> 
 
 	* syntax/makefile.syntax.diff: adds define and ended keyrowrds
