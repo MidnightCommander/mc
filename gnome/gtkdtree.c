@@ -32,6 +32,8 @@ static GtkCTreeClass *parent_class = NULL;
 
 enum {
 	DIRECTORY_CHANGED,
+	SCAN_BEGIN,
+	SCAN_END,
 	LAST_SIGNAL
 };
 
@@ -158,6 +160,26 @@ gtk_dtree_load_path (GtkDTree *dtree, char *path, GtkCTreeNode *parent, int leve
 }
 
 static void
+scan_begin (GtkDTree *dtree)
+{
+	if (++dtree->scan_level == 1) {
+		gtk_clist_freeze (GTK_CLIST (dtree));
+		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[SCAN_BEGIN]);
+	}
+}
+
+static void
+scan_end (GtkDTree *dtree)
+{
+	g_assert (dtree->scan_level > 0);
+
+	if (--dtree->scan_level == 0) {
+		gtk_signal_emit (GTK_OBJECT (dtree), gtk_dtree_signals[SCAN_END]);
+		gtk_clist_thaw (GTK_CLIST (dtree));
+	}
+}
+
+static void
 gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 {
 	GtkDTree *dtree = GTK_DTREE (ctree);
@@ -174,7 +196,7 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	dtree->loading_dir++;
 	dtree->last_node = row;
 
-	gtk_clist_freeze (GTK_CLIST (ctree));
+	scan_begin (dtree);
 	path = gtk_dtree_get_row_path (GTK_DTREE (ctree), row, 0);
 	
 	if (dtree->current_path)
@@ -202,7 +224,7 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 #endif
 
 	dtree->loading_dir--;
-	gtk_clist_thaw (GTK_CLIST (ctree));
+	scan_end (dtree);
 }
 
 static GtkCTreeNode *
@@ -367,8 +389,19 @@ gtk_dtree_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 static void
 gtk_dtree_expand (GtkCTree *ctree, GtkCTreeNode *node)
 {
+	scan_begin (GTK_DTREE (ctree));
+
 	parent_class->tree_expand (ctree, node);
-	gtk_dtree_select_row (ctree, node, 0);
+	gtk_ctree_select (ctree, node);
+
+	scan_end (GTK_DTREE (ctree));
+}
+
+static void
+gtk_dtree_collapse (GtkCTree *ctree, GtkCTreeNode *node)
+{
+	parent_class->tree_collapse (ctree, node);
+	gtk_ctree_select (ctree, node);
 }
 
 /*
@@ -469,24 +502,38 @@ gtk_dtree_class_init (GtkDTreeClass *klass)
 	
 	parent_class = gtk_type_class (GTK_TYPE_CTREE);
 
-	gtk_dtree_signals [DIRECTORY_CHANGED] =
-		gtk_signal_new (
-			"directory_changed",
-			GTK_RUN_FIRST, object_class->type,
-			GTK_SIGNAL_OFFSET (GtkDTreeClass, directory_changed),
-			gtk_marshal_NONE__POINTER,
-			GTK_TYPE_NONE,
-			1,
-			GTK_TYPE_POINTER);
+	gtk_dtree_signals[DIRECTORY_CHANGED] =
+		gtk_signal_new ("directory_changed",
+				GTK_RUN_FIRST, object_class->type,
+				GTK_SIGNAL_OFFSET (GtkDTreeClass, directory_changed),
+				gtk_marshal_NONE__POINTER,
+				GTK_TYPE_NONE,
+				1,
+				GTK_TYPE_POINTER);
+	gtk_dtree_signals[SCAN_BEGIN] =
+		gtk_signal_new ("scan_begin",
+				GTK_RUN_FIRST, object_class->type,
+				GTK_SIGNAL_OFFSET (GtkDTreeClass, scan_begin),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE,
+				0);
+	gtk_dtree_signals[SCAN_END] =
+		gtk_signal_new ("scan_end",
+				GTK_RUN_FIRST, object_class->type,
+				GTK_SIGNAL_OFFSET (GtkDTreeClass, scan_end),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE,
+				0);
 
 	gtk_object_class_add_signals (object_class, gtk_dtree_signals, LAST_SIGNAL);
 
 	object_class->destroy        = gtk_dtree_destroy;
 
 	widget_class->size_allocate  = gtk_dtree_size_allocate;
-	
+
 	ctree_class->tree_select_row = gtk_dtree_select_row;
 	ctree_class->tree_expand     = gtk_dtree_expand;
+	ctree_class->tree_collapse   = gtk_dtree_collapse;
 }
 
 static void

@@ -1842,6 +1842,28 @@ panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
 		do_panel_cd (panel, path, cd_exact);
 }
 
+static void
+set_cursor (WPanel *panel, GdkCursorType type)
+{
+	GdkCursor *cursor;
+
+	cursor = gdk_cursor_new (type);
+	gdk_window_set_cursor (GTK_WIDGET (panel->xwindow)->window, cursor);
+	gdk_cursor_destroy (cursor);
+}
+
+static void
+panel_tree_scan_begin (GtkWidget *widget, gpointer data)
+{
+	set_cursor (data, GDK_WATCH);
+}
+
+static void
+panel_tree_scan_end (GtkWidget *widget, gpointer data)
+{
+	set_cursor (data, GDK_TOP_LEFT_ARROW);
+}
+
 /**
  * tree_drag_open_directory:
  *
@@ -2125,7 +2147,11 @@ panel_create_tree_view (WPanel *panel)
         gtk_ctree_set_indent (GTK_CTREE (tree), 10);
 
 	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
-			    GTK_SIGNAL_FUNC (panel_chdir), panel);
+			    (GtkSignalFunc) panel_chdir, panel);
+	gtk_signal_connect (GTK_OBJECT (tree), "scan_begin",
+			    (GtkSignalFunc) panel_tree_scan_begin, panel);
+	gtk_signal_connect (GTK_OBJECT (tree), "scan_end",
+			    (GtkSignalFunc) panel_tree_scan_end, panel);
 
 	gtk_drag_dest_set (GTK_WIDGET (tree), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),

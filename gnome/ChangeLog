@@ -1,3 +1,16 @@
+1999-02-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gtkdtree.c (gtk_dtree_class_init): Added two new signals,
+	scan_begin and scan_end.
+	(gtk_dtree_expand): Call scan_begin() and scan_end().
+	(gtk_dtree_select_row): Call scan_begin() and scan_end().
+	(gtk_dtree_expand): Use gtk_ctree_select(), not gtk_dtree_select_row().
+	(gtk_dtree_collapse): Select the node when it is collapsed.
+
+	* gscreen.c (panel_create_tree_view): Added handlers for the
+	scan_begin and scan_end signals of the tree -- these will set the
+	cursor to a watch while the tree is being scanned.
+
 1999-02-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_info_destroy): Delete the metadata

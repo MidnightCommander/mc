@@ -16,6 +16,7 @@ typedef struct {
 	char	     *requested_path;
 
 	int          visible;
+	int          scan_level;
 
 	char         *drag_dir;
         GList        *auto_expanded_nodes;
@@ -41,6 +42,8 @@ typedef struct {
 	GtkCTreeClass parent_class;
 	
 	void (* directory_changed) (GtkDTree *dtree, char *directory);
+	void (* scan_begin) (GtkDTree *dtree);
+	void (* scan_end) (GtkDTree *dtree);
 } GtkDTreeClass;
 
 guint      gtk_dtree_get_type           (void);

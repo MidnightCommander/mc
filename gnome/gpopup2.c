@@ -265,11 +265,12 @@ get_active_index (GtkMenu *menu)
  * It can take either a WPanel or a GnomeDesktopEntry.  One of them should
  * be set to NULL.
  */
-#define REMOVE(x,f) if (x&f)x-=f
+#define REMOVE(x,f) x &= ~f
 
-int gpopup_do_popup2 (GdkEventButton *event,
-		      WPanel *panel, GList *file_list,
-		      gboolean on_selected)
+int
+gpopup_do_popup2 (GdkEventButton *event,
+		  WPanel *panel, GList *file_list,
+		  gboolean on_selected)
 {
 	GtkWidget *menu;
 	GList *list;
@@ -354,44 +355,54 @@ panel_action_open_with (GtkWidget *widget, WPanel *panel)
 	char *command;
 	
 	command = input_expand_dialog (_(" Open with..."),
-				       _("Enter extra arguments:"), panel->dir.list [panel->selected].fname);
+				       _("Enter extra arguments:"),
+				       panel->dir.list [panel->selected].fname);
 	if (!command)
 		return;
+
 	execute (command);
-	 g_free (command);
+	g_free (command);
 }
+
 static void
 popup_handle_open (GtkWidget *widget, WPanel *panel)
 {
 	if (do_enter (panel))
 		return;
+
 	panel_action_open_with (widget, panel);
 }
+
 static void
 popup_handle_view (GtkWidget *widget, WPanel *panel)
 {
 	view_cmd (panel);
 }
+
 static void
 popup_handle_view_unfiltered (GtkWidget *widget, WPanel *panel)
 {
 	view_simple_cmd (panel);
 }
+
 static void
 popup_handle_edit (GtkWidget *widget, WPanel *panel)
 {
 	edit_cmd (panel);
 }
+
 static void
 popup_handle_copy (GtkWidget *widget, WPanel *panel)
 {
 	copy_cmd ();
 }
+
 static void
 popup_handle_delete (GtkWidget *widget, WPanel *panel)
 {
 	delete_cmd ();
 }
+
 static void
 popup_handle_move (GtkWidget *widget, WPanel *panel)
 {
@@ -399,7 +410,8 @@ popup_handle_move (GtkWidget *widget, WPanel *panel)
 }
 
 /* F_SINGLE file commands */
-static void popup_handle_properties (GtkWidget *widget, WPanel *panel)
+static void
+popup_handle_properties (GtkWidget *widget, WPanel *panel)
 {
 	gint retval;
 	file_entry *fe = &panel->dir.list [panel->selected];
@@ -409,52 +421,76 @@ static void popup_handle_properties (GtkWidget *widget, WPanel *panel)
 /*	if (item_properties (GTK_WIDGET (CLIST_FROM_SW (panel->list)), full_name, NULL) != 0)
 	reread_cmd ();*/
 	dlg = gnome_file_property_dialog_new (full_name, we_can_afford_the_speed);
-	gnome_dialog_set_parent (GNOME_DIALOG (dlg), GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
+	gnome_dialog_set_parent (GNOME_DIALOG (dlg),
+				 GTK_WINDOW (gtk_widget_get_toplevel (panel->ministatus)));
+
 	if (gnome_dialog_run (GNOME_DIALOG (dlg)) == 0)
 		retval = gnome_file_property_dialog_make_changes (GNOME_FILE_PROPERTY_DIALOG (dlg));
-	
+
 	gtk_widget_destroy (dlg);
-	 g_free (full_name);
+	g_free (full_name);
 	if (retval)
 		reread_cmd ();
 }
-static void popup_handle_open_with (GtkWidget *widget, WPanel *panel)
+
+static void
+popup_handle_open_with (GtkWidget *widget, WPanel *panel)
 {
 	char *command;
 	
 	command = input_expand_dialog (_(" Open with..."),
-				       _("Enter extra arguments:"), panel->dir.list [panel->selected].fname);
+				       _("Enter extra arguments:"),
+				       panel->dir.list [panel->selected].fname);
 	if (!command)
 		return;
+
 	execute (command);
 	g_free (command);
 }
-static void popup_handle_hard_link (GtkWidget *widget, WPanel *panel)
+
+static void
+popup_handle_hard_link (GtkWidget *widget, WPanel *panel)
 {
 	/* yeah right d:  -jrb */
 	link_cmd ();
 }
-static void popup_handle_symlink (GtkWidget *widget, WPanel *panel)
+
+static void
+popup_handle_symlink (GtkWidget *widget, WPanel *panel)
 {
 	symlink_cmd ();
 }
-static void popup_handle_edit_symlink (GtkWidget *widget, WPanel *panel)
+
+static void
+popup_handle_edit_symlink (GtkWidget *widget, WPanel *panel)
 {
 	edit_symlink_cmd ();
 }
-static void popup_handle_display_properties (GtkWidget *widget, WPanel *panel)
-{
 
+static void
+popup_handle_display_properties (GtkWidget *widget, WPanel *panel)
+{
+	/* FIXME */
+	g_warning ("FIXME: implement popup_handle_display_properties()");
 }
-static void popup_handle_refresh (GtkWidget *widget, WPanel *panel)
-{
 
+static void
+popup_handle_refresh (GtkWidget *widget, WPanel *panel)
+{
+	/* FIXME */
+	g_warning ("FIXME: implement popup_handle_refresh()");
 }
-static void popup_handle_arrange_icons (GtkWidget *widget, WPanel *panel)
-{
 
+static void
+popup_handle_arrange_icons (GtkWidget *widget, WPanel *panel)
+{
+	/* FIXME */
+	g_warning ("FIXME: implement popup_handle_arrange_icons()");
 }
-static void popup_handle_logout (GtkWidget *widget, WPanel *panel)
-{
 
+static void
+popup_handle_logout (GtkWidget *widget, WPanel *panel)
+{
+	/* FIXME */
+	g_warning ("FIXME: implement popup_handle_logout()");
 }
