@@ -1,5 +1,8 @@
 2001-06-07  Pavel Roskin  <proski@gnu.org>
 
+	* setup.c (load_setup): Call init_printable_table() and
+	init_translation_table() regardless of other failures.
+
 	* charsets.c (get_codepage_index): Warning fix.
 	(init_printable_table): New function.
 	* charsets.h: Declare init_printable_table().

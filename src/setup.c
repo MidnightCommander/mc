@@ -646,15 +646,16 @@ load_setup (void)
 	char cpname[128];
 	load_string( "Misc", "display_codepage", "",
 		     cpname, sizeof(cpname) );
-	if ( cpname[0] != '\0' ) {
-	    char *errmsg;
-
+	if ( cpname[0] != '\0' )
 	    display_codepage = get_codepage_index( cpname );
-	    init_printable_table( display_codepage );
-	    errmsg = init_translation_table( source_codepage, display_codepage );
-	    if (errmsg)
-		message( 1, MSG_ERROR, "%s", errmsg );
-	}
+    }
+
+    init_printable_table( display_codepage );
+    {
+	char *errmsg = init_translation_table( source_codepage,
+					       display_codepage );
+	if (errmsg)
+	    message( 1, MSG_ERROR, "%s", errmsg );
     }
 #endif
 }
