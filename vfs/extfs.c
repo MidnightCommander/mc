@@ -37,10 +37,6 @@
 #include <sys/wait.h>
 #endif
 #include <errno.h>
-#ifdef SCO_FLAVOR
-#include <sys/timeb.h>	/* alex: for struct timeb definition */
-#endif /* SCO_FLAVOR */
-#include <time.h>
 #include "utilvfs.h"
 #include "../src/dialog.h"
 #include "../src/main.h"	/* For shell_execute */

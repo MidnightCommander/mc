@@ -22,10 +22,6 @@
 
 #include "xdirentry.h"
 #include <errno.h>
-#ifdef SCO_FLAVOR
-#include <sys/timeb.h>	/* alex: for struct timeb definition */
-#endif /* SCO_FLAVOR */
-#include <time.h>
 
 #include "utilvfs.h"
 

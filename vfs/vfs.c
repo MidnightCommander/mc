@@ -42,11 +42,6 @@
 #include <sys/types.h>
 #include <fcntl.h>
 #include <signal.h>
-#ifdef SCO_FLAVOR
-#include <sys/timeb.h>	/* alex: for struct timeb definition */
-#endif /* SCO_FLAVOR */
-#include <time.h>
-#include <sys/time.h>
 
 #include "utilvfs.h"
 
@@ -59,6 +54,7 @@
 #include "../src/dialog.h"
 #endif
 
+#include "xdirentry.h"
 #include "vfs.h"
 #include "extfs.h"		/* FIXME: we should not know anything about our modules */
 #include "names.h"

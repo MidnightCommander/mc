@@ -66,9 +66,6 @@ What to do with this?
 #include <arpa/inet.h>
 #include <arpa/ftp.h>
 #include <arpa/telnet.h>
-#ifndef SCO_FLAVOR
-#	include <sys/time.h>	/* alex: this redefines struct timeval */
-#endif /* SCO_FLAVOR */
 #include <sys/param.h>
 
 #ifdef USE_TERMNET

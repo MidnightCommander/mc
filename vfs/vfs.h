@@ -6,12 +6,19 @@
 #include <sys/stat.h>
 #include <dirent.h>
 
-#if !defined(SCO_FLAVOR) || !defined(_SYS_SELECT_H) || defined(IS_AIX)
-#	include <sys/time.h>	/* alex: this redefines struct timeval */
-#  ifdef IS_AIX
-#       include <time.h>
+#ifdef HAVE_SYS_TIMEB_H
+#  include <sys/timeb.h>
+#endif
+#ifdef TIME_WITH_SYS_TIME
+#  include <sys/time.h>
+#  include <time.h>
+#else
+#  ifdef HAVE_SYS_TIME_H
+#    include <sys/time.h>
+#  else
+#    include <time.h>
 #  endif
-#endif /* SCO_FLAVOR */
+#endif
 
 #ifdef HAVE_UTIME_H
 #    include <utime.h>

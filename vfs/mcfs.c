@@ -38,10 +38,6 @@
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
 #include <arpa/inet.h>
-#ifdef SCO_FLAVOR
-#include <sys/timeb.h>	/* alex: for struct timeb definition */
-#endif /* SCO_FLAVOR */
-#include <time.h>
 
 #ifdef USE_TERMNET
 #include <termnet.h>

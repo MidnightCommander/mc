@@ -23,10 +23,6 @@
 #include "../src/util.h"
 #include <glib.h>
 #include <errno.h>
-#ifdef SCO_FLAVOR
-#include <sys/timeb.h>
-#endif /* SCO_FLAVOR */
-#include <time.h>
 
 /* #include "utilvfs.h" */
 

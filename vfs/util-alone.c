@@ -19,18 +19,11 @@
 #include <fcntl.h>
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
-#ifndef SCO_FLAVOR
-#	include <sys/time.h>	/* alex: sys/select.h defines struct timeval */
-#endif /* SCO_FLAVOR */
 #include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <errno.h>		/* my_system */
-#ifdef SCO_FLAVOR
-#	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
-#endif /* SCO_FLAVOR */
-#include <time.h>
 #ifndef OS2_NT
 #   include <pwd.h>
 #   include <grp.h>

@@ -1,5 +1,16 @@
 2001-02-20  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Include sys/timeb.h if it's present. Include time.h and
+	sys/time.h as recommended by Autoconf documentation.
+	* cpio.c: Remove all time-related includes - they are in vfs.h.
+	* extfs.c: Likewise.
+	* ftpfs.c: Likewise.
+	* mcfs.c: Likewise.
+	* mcserv.c: Likewise.
+	* tar.c: Likewise.
+	* util-alone.c: Likewise.
+	* vfs.c: Likewise. Include xdirentry.h.
+
 	* extfs.c: Include xdirentry.h. Undefine ERRNOR before
 	redefining it.
 
