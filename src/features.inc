@@ -4,85 +4,86 @@
 #    define VERSION "undefined"
 #endif
 
-char *features = 
-    "Edition: "
+static const char * const features [] =  {
+    N_("Edition: "),
 #ifdef HAVE_X
 #    ifdef HAVE_XVIEW
-         "XView"
+         N_("XView"),
 #    else
-         "Tk"
+         N_("Tk"),
 #    endif
 #else
-    "text mode"
+    N_("text mode"),
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
-    " with X11 support to read modifiers"
+    N_(" with X11 support to read modifiers"),
 #endif
 #endif
-    ".\n"
+    ".\n",
 
 #ifdef USE_VFS
-    "Virtual File System: tarfs, extfs"
+    N_("Virtual File System: tarfs, extfs"),
 #ifdef USE_NETCODE
-    ", ftpfs"
+    N_(", ftpfs"),
 #   ifdef HSC_PROXY
-    " (proxies: hsc proxy)"
+    N_(" (proxies: hsc proxy)"),
 #   endif
-    ", mcfs"
+    N_(", mcfs"),
 #   ifdef USE_TERMNET
-    " (with termnet support)"
+    N_(" (with termnet support)"),
 #   endif
 #   ifdef WITH_SMBFS
-    ", smbfs"
+    N_(", smbfs"),
 #   endif
 #endif
 #ifdef USE_EXT2FSLIB
-    ", undelfs"
+    N_(", undelfs"),
 #endif
-    ".\n"
+    ".\n",
 #endif
     
 #ifdef USE_INTERNAL_EDIT
-    "With builtin Editor\n"
+    N_("With builtin Editor\n"),
 #endif
 
-    "Using "
+    N_("Using "),
 #ifdef HAVE_SLANG
 #   ifdef HAVE_SYSTEM_SLANG
-	"system-installed "
+	N_("system-installed "),
 #   endif
-    "S-lang library with "
+    N_("S-lang library with "),
 
 #   ifdef SLANG_TERMINFO
-        "terminfo"
+        N_("terminfo"),
 #   else
 #       ifdef USE_TERMCAP
-            "termcap"
+            N_("termcap"),
 #       else
-            "an unknown terminal"
+            N_("an unknown terminal"),
 #       endif
 #   endif
-    " database"
+    N_(" database"),
 #else
 #   ifdef USE_NCURSES
-        "the ncurses library"
+        N_("the ncurses library"),
 #   else
-        "some unknown curses library"
+        N_("some unknown curses library"),
 #   endif
 #endif
-    "\n"
+    "\n",
 #ifdef HAVE_SUBSHELL_SUPPORT
-    "With subshell support: "
+    N_("With subshell support: "),
 #   ifdef SUBSHELL_OPTIONAL
-        "optional"
+        N_("optional"),
 #   else
-        "as default"
+        N_("as default"),
 #   endif
-    "\n"
+    "\n",
 #endif
 
 #ifdef WITH_BACKGROUND
-    "With support for background operations\n"
+    N_("With support for background operations\n"),
 #endif
+	NULL }
 ;
 
 static const int status_mouse_support = 
@@ -102,5 +103,4 @@ const int status_using_ncurses =
     0;
 #endif
 #endif
-
 

@@ -2283,8 +2283,8 @@ version (int verbose)
 	    _("with mouse support on xterm%s.\n"),
 	     status_mouse_support ? _(" and the Linux console") : "");
 #endif /* HAVE_X */
-
-    fprintf (stderr, features);
+    for (verbose = 0; features [verbose]; verbose++) 
+    	fprintf (stderr, _(features [verbose]));
     if (print_last_wd)
 	write (stdout_fd, ".", 1);
 }
@@ -2480,63 +2480,69 @@ init_sigchld (void)
 static void
 print_mc_usage (void)
 {
-    version (0);
-    fprintf (stderr,
-	"Usage is:\n\n"
-        "mc [flags] [this_dir] [other_panel_dir]\n\n"	
+    const char * const ptr;
+    const char * const usage [] = {
+	    
+    N_("Usage is:\n\n"
+       "mc [flags] [this_dir] [other_panel_dir]\n\n"),
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
-    "-a, --stickchars   Force use of +, -, | for line drawing.\n"
+    N_("-a, --stickchars   Force use of +, -, | for line drawing.\n"),
 #endif
-    "-b, --nocolor      Force black and white display.\n"
+    N_("-b, --nocolor      Force black and white display.\n"),
 #ifdef WITH_BACKGROUND
-    "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
+    N_("-B, --background   [DEVEL-ONLY: Debug the background code]\n"),
 #endif
-    "-c, --color        Force color mode.\n"
-    "-C, --colors       Specify colors (use --help-colors to get a list).\n"
-    "-d, --nomouse      Disable mouse support.\n"
+    N_("-c, --color        Force color mode.\n"
+       "-C, --colors       Specify colors (use --help-colors to get a list).\n"
+       "-d, --nomouse      Disable mouse support.\n"),
 #ifdef USE_INTERNAL_EDIT
-    "-e, --edit         Startup the internal editor.\n"
+    N_("-e, --edit         Startup the internal editor.\n"),
 #endif
-    "-f, --libdir       Print configured paths.\n"
-    "-h, --help         Shows this help message.\n"
-    "-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/termcap\n"
-    "                   default.\n"
+    N_("-f, --libdir       Print configured paths.\n"
+       "-h, --help         Shows this help message.\n"
+       "-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/termcap\n"
+       "                   default.\n"),
 #ifdef USE_NETCODE
-    "-l, --ftplog file  Log ftpfs commands to the file.\n"
+    N_("-l, --ftplog file  Log ftpfs commands to the file.\n"),
 #endif
 #ifdef HAVE_MAD
-    "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
+    N_("-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"),
 #endif
-    "-P, --printwd      At exit, print the last working directory.\n"
-    "-s, --slow         Disables verbose operation (for slow terminals).\n"
+    N_("-P, --printwd      At exit, print the last working directory.\n"
+       "-s, --slow         Disables verbose operation (for slow terminals).\n"),
 #if defined(HAVE_SLANG) && !defined(OS2_NT)
-    "-t, --termcap      Activate support for the TERMCAP variable.\n"
+    N_("-t, --termcap      Activate support for the TERMCAP variable.\n"),
 #endif
 #if defined(HAVE_SLANG) && defined(OS2_NT)
-    "-S, --createcmdile Create command file to set default directory upon exit.\n"
+    N_("-S, --createcmdile Create command file to set default directory upon exit.\n"),
 #endif
-		 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    "-u, --nosubshell   Disable the concurrent subshell mode.\n"
-    "-U, --subshell     Force the concurrent subshell mode.\n"
-    "-r, --forceexec    Force subshell execution.\n"
+    N_("-u, --nosubshell   Disable the concurrent subshell mode.\n"
+       "-U, --subshell     Force the concurrent subshell mode.\n"
+       "-r, --forceexec    Force subshell execution.\n"),
 #endif
-    "-v, --view fname   Start up into the viewer mode.\n"
-    "-V, --version      Report version and configuration options.\n"
-    "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
+    N_("-v, --view fname   Start up into the viewer mode.\n"
+       "-V, --version      Report version and configuration options.\n"
+       "-x, --xterm        Force xterm mouse support and screen save/restore.\n"),
 #ifdef HAVE_SUBSHELL_SUPPORT
-    "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
+    N_("-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"),
 #endif
-    "\n"
-    "Please send any bug reports (including the output of `mc -V')\n"
-    "to mc-bugs@nuclecu.unam.mx\n"
-    );
+    N_("\n"
+       "Please send any bug reports (including the output of `mc -V')\n"
+       "to mc-bugs@nuclecu.unam.mx\n"),
+    NULL    
+    };
+
+    version (0);
+    
+    for (ptr = usage; *ptr; ptr++)
+	fprintf (stderr, _(*ptr));
 }
 
 static void
 print_color_usage (void)
 {
-    fprintf (stderr,
+    fprintf (stderr, _(
 	     "--colors KEYWORD={FORE},{BACK}\n\n"
 	     "{FORE} and {BACK} can be ommited, and the default will be used\n"
 	     "\n"
@@ -2551,10 +2557,8 @@ print_color_usage (void)
 	     "Colors:\n"
 	     "   black, gray, red, brightred, green, brightgreen, brown,\n"
 	     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-	     "   brightcyan, lightgray and white\n\n");
-
+	     "   brightcyan, lightgray and white\n\n"));
 }
-
 
 static void
 probably_finish_program (void)
@@ -2755,6 +2759,7 @@ static struct poptOption argument_table [] = {
     { NULL, 		0,			0, NULL, 0 }
 };
 
+#if defined(HAVE_CORBA) || defined(HAVE_GNOME)
 /* Convenience function to display the desktop initialization directory and exit */
 static void
 maybe_display_linksdir (void)
@@ -2764,6 +2769,7 @@ maybe_display_linksdir (void)
 		exit (1);
 	}
 }
+#endif
 
 #ifdef HAVE_CORBA
 /* Initializes the ORB and does the initial argument processing */
@@ -3008,7 +3014,7 @@ main (int argc, char *argv [])
 	if (base){
 	    if (strcmp (base, "mcedit") == 0)
 		edit_one_file = "";
-	    
+	    else
 	    if (strcmp (base, "mcview") == 0)
 		view_one_file = "";
 	}

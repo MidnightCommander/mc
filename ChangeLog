@@ -1,3 +1,14 @@
+2000-01-03  Aaron Lehmann  <aaronl@vitelus.com>
+
+	* gdesktop.c, gdnd.c, gaction.c, gicon.c, 
+	gnome-file-property-dialog.c, gpopup.c, gpopup2.c, gprefs.cgmain.h, 
+	setup.c: Add option of using GNOME "magic" routines to determine file
+	types. This makes MC intelligently look at the data in the file to see
+	what type of file it is, rather than looking at the filename extension.
+	This slows down MC quite a bit, so it has been made an optional
+	preference item. Type detection is expected to improve as mime-magic
+	matures.
+	
 2000-01-15  Federico Mena Quintero  <federico@helixcode.com>
 
 	* lib/mc.menu (shell_patterns): Add a missing "esac".  Thanks to

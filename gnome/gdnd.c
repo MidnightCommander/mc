@@ -20,6 +20,7 @@
 #include <gdk/gdkprivate.h>
 #include "gdesktop.h"
 #include "gdnd.h"
+#include "gmain.h"
 
 
 /* Atoms for the DnD target types */
@@ -304,6 +305,9 @@ drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_data,
 static int
 file_has_drop_action (char *filename)
 {
+	/* This function should be called with a full name,
+	so no full_name is necessary */
+
 	char *buf;
 	int size;
 	const char *mime_type;
@@ -312,7 +316,11 @@ file_has_drop_action (char *filename)
 		g_free (buf);
 		return TRUE;
 	} else {
-		mime_type = gnome_mime_type_or_default (filename, NULL);
+		if (use_magic)
+			mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+		else
+			mime_type = gnome_mime_type_or_default (filename, NULL);
+
 		if (!mime_type)
 			return FALSE;
 
@@ -365,7 +373,11 @@ drop_on_file (GdkDragContext *context, GtkSelectionData *selection_data,
 
 	/* 2. Try a drop action from the MIME-type */
 
-	mime_type = gnome_mime_type_or_default (dest_full_name, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (dest_full_name, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (dest_full_name, NULL);
+
 	if (mime_type) {
 		const char *action;
 

@@ -305,7 +305,10 @@ mime_action_callback (GtkWidget *widget, gpointer data)
 	g_assert (filename != NULL);
 	g_assert (key != NULL);
 
-	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (filename, NULL);
 	g_assert (mime_type != NULL);
 
 	/*
@@ -371,8 +374,10 @@ create_mime_actions (GtkWidget *menu, WPanel *panel, int pos, DesktopIconInfo *d
 	} else
 		full_name = g_concat_dir_and_file (panel->cwd,
 						   panel->dir.list[panel->selected].fname);
-	mime_type = gnome_mime_type_or_default (full_name, NULL);
-
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (full_name, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (full_name, NULL);
 	if (!mime_type) {
 		g_free (full_name);
 		return pos;

@@ -11,6 +11,7 @@ void xtoolkit_end (void);
 extern Dlg_head *desktop_dlg;
 extern int nowindows;
 extern int corba_have_server;
+extern int use_magic;
 
 /* Required by the standard code */
 widget_data xtoolkit_create_dialog   (Dlg_head *h, int with_grid);

@@ -103,13 +103,18 @@ gmc_check_exec_string (const char *buf)
 int
 gmc_open_filename (char *fname, GList *args)
 {
+	/* fname is a full name */
+
 	const char *mime_type;
 	const char *cmd;
 	char *buf = NULL;
 	int size;
 	int needs_terminal = 0;
 
-	mime_type = gnome_mime_type_or_default (fname, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (fname, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (fname, NULL);
 	/*
 	 * We accept needs_terminal as -1, which means our caller
 	 * did not want to do the work
@@ -167,6 +172,8 @@ gmc_open_filename (char *fname, GList *args)
 int
 gmc_edit (char *fname)
 {
+	/* fname is a full path */
+
 	const char *mime_type;
 	const char *cmd;
 	char *buf;
@@ -183,7 +190,11 @@ gmc_edit (char *fname)
 		return 1;
 	}
 
-	mime_type = gnome_mime_type_or_default (fname, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (fname, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (fname, NULL);
+
 	if (mime_type){
 		cmd = gnome_mime_get_value (mime_type, "edit");
 
@@ -296,7 +307,11 @@ gmc_view_command (gchar *filename)
 	if (gnome_metadata_get (filename, "view", &size, &buf) == 0)
 		return buf;
 
-	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (filename, NULL);
+
 	if (!mime_type)
 		return NULL;
 
@@ -318,7 +333,10 @@ gmc_view (char *filename, int start_line)
 {
 	gchar *cmd;
 	const gchar *mime_type;
-	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (filename, NULL);
 	cmd = gmc_view_command (filename);
 	if (cmd) {
 		if (gmc_check_exec_string (cmd))

@@ -104,6 +104,10 @@ static Property file_display_props [] =
                 N_("Use shell patterns instead of regular expressions"), PROPERTY_BOOL,
                 &easy_patterns, NULL, NULL, NULL
         },
+	{
+		N_("Determine file types from file content instead of extensions"), PROPERTY_BOOL,
+		&use_magic, NULL, NULL, NULL
+	},
         PROPERTIES_DONE
 };
 

@@ -15,6 +15,7 @@
 
 #include <gnome.h>
 #include "gicon.h"
+#include "gmain.h"
 
 
 /* What kinds of images can an icon set contain */
@@ -58,7 +59,6 @@ static gid_t our_gid;
 
 /* Whether we should always use (expensive) metadata lookups for file panels or not */
 int we_can_afford_the_speed = 0;
-
 
 /* Builds a composite of the plain image and the litle symlink icon */
 static GdkImlibImage *
@@ -474,7 +474,15 @@ gicon_get_icon_for_file (char *directory, file_entry *fe, gboolean do_quick)
 
 	/* 4. Try MIME-types */
 
-	mime_type = gnome_mime_type_or_default (fe->fname, NULL);
+	if (use_magic) {
+		char *full_name;
+		full_name = g_concat_dir_and_file (directory, fe->fname);
+		mime_type = gnome_mime_type_or_default_of_file (full_name, NULL);
+		g_free (full_name);
+	}
+	else
+		mime_type = gnome_mime_type_or_default (fe->fname, NULL);
+
 	if (mime_type) {
 		const char *icon_name;
 

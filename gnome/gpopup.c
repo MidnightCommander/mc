@@ -483,7 +483,10 @@ mime_command_from_desktop_icon (GtkMenuItem *item, char *filename)
 	action = get_label_text (item);
 	
 	key = gtk_object_get_user_data (GTK_OBJECT (item));
-	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (filename, NULL);
 	if (!mime_type)
 		return;
 
@@ -534,7 +537,10 @@ create_regexp_actions (GtkWidget *menu, WPanel *panel,
 
 	/* Fill in the regex command part */
 
-	mime_type = gnome_mime_type_or_default (filename, NULL);
+	if (use_magic)
+		mime_type = gnome_mime_type_or_default_of_file (filename, NULL);
+	else
+		mime_type = gnome_mime_type_or_default (filename, NULL);
 	if (!mime_type)
 		return;
 	

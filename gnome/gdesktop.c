@@ -43,12 +43,21 @@ struct layout_slot {
 /* Configuration options for the desktop */
 
 int desktop_use_shaped_icons = TRUE;
-int desktop_use_shaped_text = FALSE;
 int desktop_auto_placement = FALSE;
 int desktop_snap_icons = FALSE;
 int desktop_arr_r2l = FALSE;
 int desktop_arr_b2t = FALSE;
 int desktop_arr_rows = FALSE;
+
+/*
+ * Possible values for this one:
+ *
+ * 0 -- Enable shaped text only if window manager is GNOME compliant
+ * 1 -- Enable shaped text always
+ * 2 -- Disable shaped text
+ *
+ * This might seem a bit stra
+int desktop_use_shaped_text = 0;
 
 /* The computed name of the user's desktop directory */
 char *desktop_directory;
@@ -661,7 +670,15 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 		/* If the file dropped was a .desktop file, pull the suggested
 		 * title and icon from there
 		 */
-		mime = gnome_mime_type_or_default (fau->filename, NULL);
+		if (use_magic)
+		{
+			char *full_name;
+			full_name = g_concat_dir_and_file (desktop_directory, fau->filename);
+			mime = gnome_mime_type_or_default_of_file (full_name, NULL);
+			g_free (full_name);
+		}
+		else
+			mime = gnome_mime_type_or_default (fau->filename, NULL);
 		if (mime && strcmp (mime, "application/x-gnome-app-info") == 0) {
 			GnomeDesktopEntry *entry;
 			char *fullname;

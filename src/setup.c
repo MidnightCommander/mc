@@ -67,6 +67,7 @@ extern int ftpfs_first_cd_then_ls;
 #ifdef HAVE_GNOME
 extern int tree_panel_visible;
 extern int we_can_afford_the_speed;
+int use_magic = 0;
 #endif
 
 /* "$Id$" */
@@ -219,6 +220,9 @@ static struct {
     { "xtree_mode", &xtree_mode },
     { "num_history_items_recorded", &num_history_items_recorded },
     { "file_op_compute_totals", &file_op_compute_totals },
+#ifdef HAVE_GNOME
+    { "use_magic", &use_magic },
+#endif
 #ifdef SAVE_CHANGES_OUTSIDE_OPTIONS_MENU
     { "dive_into_subdirs", &dive_into_subdirs },
     { "preserve_uidgid", &preserve_uidgid },
