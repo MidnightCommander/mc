@@ -367,7 +367,7 @@ static void show (Dlg_head *h, char *paint_start)
 	if (selected_item < paint_start)
 	    selected_item = NULL;
 	
-	for (p = paint_start; *p != CHAR_NODE_END && line < help_lines; p++){
+	for (p = paint_start; *p && *p != CHAR_NODE_END && line < help_lines; p++) {
 	    c = (unsigned char)*p;
 	    switch (c){
 	    case CHAR_LINK_START:

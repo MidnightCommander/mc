@@ -1,5 +1,8 @@
 2002-08-31  Pavel Roskin  <proski@gnu.org>
 
+	* help.c (show): Fix segfault on unterminated help files.
+	From David Martin <dmartina@excite.com>
+
 	* key.c (get_event): Reduce scope of select_set.  Don't check
 	mouse_enabled all the time, instead break out of the loop if it
 	becomes 0.
