@@ -73,7 +73,7 @@ AC_DEFUN([MC_WITH_VFS],[
     done
   fi
 
-  vfs_flags="tarfs"
+  vfs_flags="cpiofs, extfs, tarfs"
   use_net_code=false
   if test $have_socket = yes; then
       AC_STRUCT_LINGER

@@ -1,3 +1,8 @@
+2002-10-21  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_WITH_VFS): cpiofs and extfs were never added
+	to the final configuration message.
+
 2002-10-17  Pavel Roskin  <proski@gnu.org>
 
 	* doc/hu/Makefile.am: Generate Hungarian help file from the
