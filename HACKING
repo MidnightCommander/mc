@@ -1,62 +1,147 @@
--*-outline-*-
+This document
+=============
 
-This is the developers' hint guide.
-Some parts are based on mail messages.
+This document is a guide how to develop GNU Midnight Commander.  It's
+quite incomplete, but may be worth reading anyway.
 
-Please feel free to add your name to this list:
-by Miguel de Icaza
+The document was written by Miguel de Icaza and reworked by Pavel
+Roskin.  Some parts were taken from the messages posted in the mailing
+lists.
 
-* Working with the Midnight Commander
 
-   If you plan on working on the Midnight Commander, here are some
-   tips on how to make your development easier and my job of merging
-   your code easier, I find them useful.
+Working with GNU Midnight Commander
+===================================
 
-o  Run make depend if you modify the source code structure (e.g. you
-   add/remove include files).  This is very important, it will help you
-   to get an accurate compilation.
+Please use the CVS version.  It may be quite different from the released
+versions.  A lot of cleanup is going on.  The CVS version may be easier
+to understand, in addition to the obvious fact that the merging is
+easier with the CVS version.
 
-o  It's recommended that you use GNU Make (if you want to use the
-   depend feature).
+There are some tools in the maint directory on CVS.  They are not
+included with releases or snapshots.  You may be interested to look at
+them if you are going to work on the project for an extended period of
+time.  In particular, the release procedure is described there.
 
-o  I work with the tags feature of GNU emacs.  Run the make tags
-   command to get an updated TAGS file.  The command Alt-. will take
-   you to any function or variable definition.
+In order to compile GNU Midnight Commander from a clean CVS checkout you
+should use autogen.sh instead of configure.  Arguments passed to
+autogen.sh are passed to configure after it's generated.  See README.CVS
+for details and required software.
 
-o  Try to keep the indenting style as it is currently.  Normally if you
-   just created a new file with a different coding style, run the GNU
-   indent program on it (remember to make a backup copy first) like
-   this: indent -kr -i4 -psl -pcs filename.c
+GNU Midnight Commander uses Autoconf and Automake, with make it fairly
+portable.  However, GNU Make is strongly recommended for development
+because other versions of make may not track dependencies properly. 
+This is very important for correct compilation, especially if you change
+any header files.
 
-o  This code is distributed under the GNU General Public License and
-   Keep this in mind when adding code to the program.
+If you add or remove any files, please change Makefile.am in the same
+directory accordingly.  When doing significant changes in the tree
+structure, "make distcheck" is strongly recommended.
 
-* Code structure.
+If you have etags installed, you can run "make tags" and use tags in
+emacs to find functions or variables.  But you can also use the internal
+editor and the "Find File" command to find any text in the source tree.
 
-   The program uses extensively the dialog manager written by Radek
-   Doulik.  To understand how the dialog manager works, please read the
-   dialog.c and dialog.h.  You will find the basic widgets in the files
-   widget.c and widget.h.  If you understand these files, you are done. 
-   The files option.c and boxes.c contain some examples of how the
-   dialog manager functions are used.  For a more complete example, take
-   a look at the main.c file.
+GNU Autoconf allows you to test several different configurations are
+once.  To do so, use the so called out-of-tree (or VPATH) compilation. 
+Create separate empty directories and run configure with full path from
+those directories, like this:
 
-   The file util.c has a lot of utility functions.  Get familiar with
-   them, they are very simple. 
+cd /usr/local/src
+mkdir mc-slang
+mkdir mc-ncurses
+cd mc-slang
+/usr/local/src/mc/configure && make all
+cd ../mc-ncurses
+/usr/local/src/mc/configure --with-screen=ncurses && make all
 
-   The code has almost no hardcoded limits, there are a lot of ways of
-   avoiding them.  For example, when you want to concatenate strings,
-   use the g_strconcat functions, it is used like this:
+Please use the same indentation as other developers.  To indent a block,
+select in the internal editor and use Shift-F9 to call the external
+indent.  For historic reasons, GNU Midnight Commander used formatting
+that is not default for GNU Indent.  Please put following text to your
+~/.indent.pro file to make GNU Indent follow the style used in GNU
+Midnight Commander:
+
+-kr -i4 -pcs -psl --ignore-newlines
+
+It's OK to indent the whole function if you edit it.  However, please
+refrain from it if you are posting your patch for review.  In this case
+you would save time of other developers if you only include significant
+changes.  The developer applying your patch can format the code for you.
+
+Please keep in mind that the VFS subsystem is licensed under LGPL, while
+the rest of the code uses GPL.
+
+
+Code structure - outline
+========================
+
+The code is located in following directories.
+
+vfs - Virtual File System.
+
+This library provides filesystem-like access to various data, such are
+archives and remote filesystems.  To use VFS, you should use wrappers
+around POSIX calls.  The wrappers have names composed from "mc_" and the
+standard name of the function.  For example, to open a file on VFS, use
+mc_open() in stead
+
+edit - the internal editor.
+
+This code has been contributed by Paul Sheer, the author of Cooledit. 
+The internal editor shares some code with Cooledit, but now it's
+developed as part of GNU Midnight Commander.
+
+src - the main part of the code.
+
+This code includes the dialog manager written by Radek Doulik and source
+code of the main application.
+
+slang - stripped down S-Lang library.
+
+It's provided to allow compilation that don't have the S-Lang library
+with complete headers or the library is broken.  Please avoid changing
+this code.  If you do change it, please consider contributing your
+changes to the maintainers of S-Lang.
+
+
+Code structure - details
+========================
+
+GNU Midnight Commander uses extensively the dialog manager written by
+Radek Doulik.  To understand how the dialog manager works, please read
+the dialog.c.  You will find the basic widgets in the files widget.c. 
+Some more high-level functions, e.g. to display a message box, are
+located in wtools.c.  This file also contains the Quick Dialog code,
+which makes it easier to create complex dialogs.
+
+Files findme.c, popt.c, poptconfig.c, popthelp.c and poptparse.c come
+from the popt library used to parse the command line.  They should not
+be modified unless absolutely necessary.
+
+The files util.c and utilunix.c have a lot of utility functions.  Get
+familiar with them, they are very simple. 
+
+glib is used for memory allocation and for some utility functions, such
+as manipulation with lists and trees.  gmodule (part of the glib
+distribution) is used to load some libraries dynamically at the run
+time.
+
+Thanks to glib, the code has almost no hardcoded limits, since there are
+many ways to avoid them.  For example, when you want to concatenate
+strings, use the g_strconcat() function:
 
 	new_text = g_strconcat (username, " ", password, NULL);
 
-   This mallocs the required area, so it still needs to be freed.
+This allocates new memory for the string, so you should use g_free() on
+the result.
 
-* Upcoming changes.
+The parent of all dialogs is called midnight_dlg.  Both panels are
+widgets in that dialog.  Other widgets include the menu, the command
+line and the button bar.
 
-* Panels
 
-* Input handling
+Input handling
+==============
 
 The routines for input handling on the Midnight Commander are:
 getch, get_key_code, mi_getch and get_event.
@@ -92,20 +177,25 @@ events.  It's used only in a couple of places, this routine may return
 ncurses or S-Lang with nodelay) or a character code if no such option is
 available. 
 
-* Mouse support.
+
+Mouse support
+=============
 
 The mouse support in the Midnight Commander is based on the get_event
 routine.  The core of the mouse event dispatching is in the
 dlg.c:run_dlg routine.
 
-* ncurses
+
+ncurses
+=======
 
 Although S-Lang is now used by default, we still support it ncurses.  We
 basically are using a small subset of ncurses because we want to be
 compatible with Slang.
 
 
-* The Dialog manager and the Widgets
+The Dialog manager and the Widgets
+==================================
 
 The Dialog manager and the Widget structure are implemented in
 src/dialog.c.  Everything shown on screen is a dialog.  Dialogs contain
@@ -154,14 +244,3 @@ widgets.  Some widgets also have user callbacks.
 To create your own widget, use init_widget().  In this case, you must
 provide a callback function.  Please note that it's not the same as the
 user callback in some widgets.
-
-** Button widget
-
-** Check box widget
-
-** Radio widget
-
-** Input widget
-
-** Listbox widget
-
