@@ -1355,13 +1355,6 @@ concat_dir_and_file (const char *dir, const char *file)
 
 /* Following code heavily borrows from libiberty, mkstemps.c */
 
-/* Use 64-bit "enthropy" if available */
-#ifdef __GNUC__
-__extension__ typedef unsigned long long gcc_uint64_t;
-#else
-typedef unsigned long gcc_uint64_t;
-#endif
-
 /* Number of attempts to create a temporary file */
 #ifndef TMP_MAX
 #define TMP_MAX 16384
@@ -1381,7 +1374,7 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
 {
     static const char letters[]
 	= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    static gcc_uint64_t value;
+    static unsigned long value;
     struct timeval tv;
     char *tmpdir;
     char *tmpbase;
@@ -1407,7 +1400,7 @@ int mc_mkstemps(char **pname, const char *prefix, const char *suffix)
     value += (tv.tv_usec << 16) ^ tv.tv_sec ^ getpid ();
 
     for (count = 0; count < TMP_MAX; ++count) {
-	gcc_uint64_t v = value;
+	unsigned long v = value;
 	int fd;
 
 	/* Fill in the random bits.  */
