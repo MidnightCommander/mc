@@ -949,9 +949,9 @@ int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
 char *
 g_readlink (char *path)
 {
-	char small_buffer [10];
+	char small_buffer [80];
 	char *str;
-	int n;
+	int n, size;
 
 	n = readlink (path, small_buffer, sizeof (small_buffer)-1);
 	if (n == -1)
@@ -974,7 +974,7 @@ g_readlink (char *path)
 		if (n < size-1){
 			char *s;
 			
-			size [n] = 0;
+			s [n] = 0;
 			s = g_strdup (str);
 			g_free (str);
 			return s;
