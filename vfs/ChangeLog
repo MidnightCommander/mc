@@ -1,3 +1,10 @@
+Sat Jan  9 22:49:02 1999  Timur I. Bakeyev <timur@com.bat.ru>
+
+	* vfs.c (parse_ls_lga): Rewrite function to make it more stright.
+	Also, fixed some bugs in parsing (and add new ones:), which diasallowed
+	proper parsing of device major and minor numbers. Some other fixes. Add
+	several new is_*() functions to make code readable.
+
 1999-01-08  Ilya Zakharevich <ilya@math.ohio-state.edu>
 
 	* vfs.h (vfs_strip_suffix_from_filename): Typo fix.  Include

@@ -1268,7 +1268,7 @@ vfs_fill_names (void (*func)(char *))
 }
 
 /* Following stuff (parse_ls_lga) is used by ftpfs and extfs */
-#define MAXCOLS 30
+#define MAXCOLS		30
 
 static char *columns [MAXCOLS];	/* Points to the string in column n */
 static int   column_ptr [MAXCOLS]; /* Index from 0 to the starting positions of the columns */
@@ -1302,6 +1302,43 @@ is_num (int idx)
 }
 
 static int
+is_dos_date(char *str)
+{
+    if (strlen(str) == 8 && str[2] == str[5] && strchr("\\-/", (int)str[2]) != NULL)
+	return (1);
+
+    return (0);
+}
+
+static int
+is_week (char *str, struct tm *tim)
+{
+    static char *week = "SunMonTueWedThuFriSat";
+    char *pos;
+
+    if((pos=strstr(week, str)) != NULL){
+        if(tim != NULL)
+	    tim->tm_wday = (pos - week)/3;
+	return (1);
+    }
+    return (0);    
+}
+
+static int
+is_month (char *str, struct tm *tim)
+{
+    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    char *pos;
+    
+    if((pos=strstr(month, str)) != NULL){
+        if(tim != NULL)
+	    tim->tm_mon = (pos - month)/3;
+	return (1);
+    }
+    return (0);
+}
+
+static int
 is_time (char *str, struct tm *tim)
 {
     char *p, *p2;
@@ -1327,20 +1364,20 @@ static int is_year(char *str, struct tm *tim)
     long year;
 
     if (strchr(str,':'))
-        return 0;
+        return (0);
 
     if (strlen(str)!=4)
-        return 0;
+        return (0);
 
     if (sscanf(str, "%ld", &year) != 1)
-        return 0;
+        return (0);
 
     if (year < 1900 || year > 3000)
-        return 0;
+        return (0);
 
     tim->tm_year = (int) (year - 1900);
 
-    return 1;
+    return (1);
 }
 
 /*
@@ -1427,12 +1464,11 @@ int vfs_parse_filemode (char *p)
 
 int vfs_parse_filedate(int idx, time_t *t)
 {	/* This thing parses from idx in columns[] array */
-    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
-    static char *week = "SunMonTueWedThuFriSat";
-    char *p, *pos;
-    int extfs_format_date = 0;
+
+    char *p;
     struct tm tim;
-    int	got_year = 0;
+    int d[3];
+    int	swap, got_year = 0;
 
     /* Let's setup default time values */
     tim.tm_year = current_year;
@@ -1441,63 +1477,74 @@ int vfs_parse_filedate(int idx, time_t *t)
     tim.tm_hour = 0;
     tim.tm_min  = 0;
     tim.tm_sec  = 0;
-    tim.tm_isdst = -1; /* My man says, in this case mktime computes
-    			* correct dst offset
-			*/
+    tim.tm_isdst = -1; /* Let mktime() try to guess correct dst offset */
     
     p = columns [idx++];
     
-    if((pos=strstr(week, p)) != NULL){
-        tim.tm_wday = (pos - week)/3;
+    /* We eat weekday name in case of extfs */
+    if(is_week(p, &tim))
 	p = columns [idx++];
-	}
 
-    if((pos=strstr(month, p)) != NULL)
-        tim.tm_mon = (pos - month)/3;
-    else {
-        /* This case should not normaly happen, but in extfs we allow these
-           date formats:
+    /* Month name */
+    if(is_month(p, &tim)){
+	/* And we expect, it followed by day number */
+	if (is_num (idx))
+    	    tim.tm_mday = (int)atol (columns [idx++]);
+	else
+	    return 0; /* No day */
+
+    } else {
+        /* We usually expect:
            Mon DD hh:mm
-           Mon DD YYYY
+           Mon DD  YYYY
+	   But in case of extfs we allow these date formats:
            Mon DD YYYY hh:mm
+	   Mon DD hh:mm YYYY
 	   Wek Mon DD hh:mm:ss YYYY
            MM-DD-YY hh:mm
            where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
-           YYYY four digit year, hh, mm two digit hour and minute. */
+           YYYY four digit year, hh, mm, ss two digit hour, minute or second. */
 
-        if (strlen (p) == 8 && p [2] == '-' && p [5] == '-'){
-            p [2] = 0;
-            p [5] = 0;
-            tim.tm_mon = (int) atol (p);
-            if (!tim.tm_mon)
-                return 0;
-            else
-                tim.tm_mon--;
-            tim.tm_mday = (int) atol (p + 3);
-            tim.tm_year = (int) atol (p + 6);
-	    /* Y2K madness */
-            if (tim.tm_year < 70)
-                tim.tm_year += 100;
-            extfs_format_date = 1;
-	    got_year = 1;
+	/* Here just this special case with MM-DD-YY */
+        if (is_dos_date(p)){
+            p[2] = p[5] = '-';
+	    
+	    if(sscanf(p, "%2d-%2d-%2d", &d[0], &d[1], &d[2]) == 3){
+	    /*  We expect to get:
+		1. MM-DD-YY
+		2. DD-MM-YY
+		3. YY-MM-DD
+		4. YY-DD-MM  */
+		
+		/* Hmm... maybe, next time :)*/
+		
+		/* At last, MM-DD-YY */
+		d[0]--; /* Months are zerobased */
+		/* Y2K madness */
+		if(d[2] < 70)
+		    d[2] += 100;
+
+        	tim.tm_mon  = d[0];
+        	tim.tm_mday = d[1];
+        	tim.tm_year = d[2];
+		got_year = 1;
+	    } else
+		return 0; /* sscanf failed */
         } else
-            return 0;
+            return 0; /* unsupported format */
     }
 
-    if (!extfs_format_date){
-        if (!is_num (idx))
-	    return 0;
-        tim.tm_mday = (int)atol (columns [idx++]);
-    }
+    /* Here we expect to find time and/or year */
     
     if (is_num (idx)) {
         if(is_time(columns[idx], &tim) || (got_year = is_year(columns[idx], &tim))) {
 	idx++;
-	 
+
+	/* This is a special case for ctime() or Mon DD YYYY hh:mm */
 	if(is_num (idx) && 
 	    ((got_year = is_year(columns[idx], &tim)) || is_time(columns[idx], &tim)))
-	    idx++; /* time & year or reverse */
-	 } /* only time or date */
+		idx++; /* time & year or reverse */
+	} /* only time or date */
     }
     else 
         return 0; /* Nor time or date */
@@ -1509,13 +1556,12 @@ int vfs_parse_filedate(int idx, time_t *t)
      * to represent them at all
      */
     if (!got_year &&
-         current_mon < 6 &&
-	 current_mon < tim.tm_mon &&
-	 tim.tm_mon - current_mon >= 6)
+	current_mon < 6 && current_mon < tim.tm_mon && 
+	tim.tm_mon - current_mon >= 6)
 
-	 tim.tm_year--;
+	tim.tm_year--;
 
-    if ((*t = mktime(&tim)) ==-1)
+    if ((*t = mktime(&tim)) < 0)
         *t = 0;
     return idx;
 }
@@ -1570,20 +1616,17 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 
     /* Mhm, the ls -lg did not produce a group field */
     for (idx = 3; idx <= 5; idx++) 
-        if ((*columns [idx] >= 'A' && *columns [idx] <= 'S' &&
-            strlen (columns[idx]) == 3) || (strlen (columns[idx])==8 &&
-            columns [idx][2] == '-' && columns [idx][5] == '-'))
+        if (is_month(columns [idx], NULL) || is_week(columns [idx], NULL) || is_dos_date(columns[idx]))
             break;
+
     if (idx == 6 || (idx == 5 && !S_ISCHR (s->st_mode) && !S_ISBLK (s->st_mode)))
-        goto error;
-    if (idx < 5){
-        char *p = strchr(columns [idx - 1], ',');
-        if (p && p[1] >= '0' && p[1] <= '9')
-            isconc = 1;
-    }
-    if (idx == 3 || (idx == 4 && !isconc && (S_ISCHR(s->st_mode) || S_ISBLK (s->st_mode))))
+	goto error;
+
+    /* We don't have gid */	
+    if (idx == 3 || (idx == 4 && (S_ISCHR(s->st_mode) || S_ISBLK (s->st_mode))))
         idx2 = 2;
-    else {
+    else { 
+	/* We have gid field */
 	if (is_num (2))
 	    s->st_gid = (gid_t) atol (columns [2]);
 	else
@@ -1591,29 +1634,24 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	idx2 = 3;
     }
 
+    /* This is device */
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)){
-        char *p;
-	if (!is_num (idx2))
+
+	int maj, min;
+	
+	if (!is_num (idx2) || sscanf(columns [idx2], " %d,", &maj) != 1)
 	    goto error;
-#ifdef HAVE_ST_RDEV
-	s->st_rdev = (atol (columns [idx2]) & 0xff) << 8;
-#endif
-	if (isconc){
-	    p = strchr (columns [idx2], ',');
-	    if (!p || p [1] < '0' || p [1] > '9')
-	        goto error;
-	    p++;
-	} else {
-	    p = columns [idx2 + 1];
-	    if (!is_num (idx2+1))
-	        goto error;
-	}
+	
+	if (!is_num (++idx2) || sscanf(columns [idx2], " %li", &min) != 1)
+	    goto error;
 	
 #ifdef HAVE_ST_RDEV
-	s->st_rdev |= (atol (p) & 0xff);
+	s->st_rdev = ((maj & 0xff) << 8) | (min & 0xffff00ff);
 #endif
 	s->st_size = 0;
+	
     } else {
+	/* Common file size */
 	if (!is_num (idx2))
 	    goto error;
 	
