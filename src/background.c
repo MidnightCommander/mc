@@ -313,7 +313,7 @@ background_attention (int fd, void *closure)
 
     /* Handle the call */
     if (type == Return_Integer){
-	if (have_ctx)
+	if (!have_ctx)
 	    switch (argc){
 	    case 1:
 		result = (*(int (*)(int, char *))routine)(Background, data [0]);

@@ -1,3 +1,8 @@
+2002-09-28  Pavel Roskin  <proski@gnu.org>
+
+	* background.c (background_attention): Fix calling functions
+	with wrong arguments, which resulted in segmentation faults.
+
 2002-09-27  Pavel Roskin  <proski@gnu.org>
 
 	* file.c (panel_operate): Replace fancy internationalized
