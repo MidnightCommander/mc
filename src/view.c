@@ -426,7 +426,7 @@ set_view_init_error (WView *view, char *msg)
 
 /* return values: NULL for success, else points to error message */
 static char *
-init_growing_view (WView *view, char *name, char *filename) 
+init_growing_view (WView *view, char *name, int fd)
 {
     view->growing_buffer = 1;
 
@@ -450,8 +450,7 @@ init_growing_view (WView *view, char *name, char *filename)
 	}
     } else {
         view->stdfile = NULL;
-	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
-	    return set_view_init_error (view, _(" Could not open file "));
+	view->file = fd;
     }
     return NULL;
 }
@@ -462,30 +461,14 @@ init_growing_view (WView *view, char *name, char *filename)
    if (have_frame), we return success, but data points to a
    error message instead of the file buffer (quick_view feature).
 */
-static char *load_view_file (WView *view, char *filename)
+static char *load_view_file (WView *view, int fd)
 {
-    if ((view->file = mc_open (filename, O_RDONLY)) < 0){
-	set_view_init_error (view, 0);
-	return ( g_strconcat (_(" Cannot open file \""),
-			      filename, "\"\n ",
-			      unix_error_string (errno), " ", NULL));
-    }
-    if (mc_fstat (view->file, &view->s) < 0){
-	set_view_init_error (view, 0);
-	close_view_file (view);
-	return  g_strconcat (_(" Cannot stat file \n "),
-			     unix_error_string (errno), " ", NULL);
-    }
-    if (S_ISDIR (view->s.st_mode) || S_ISSOCK (view->s.st_mode)
-	|| S_ISFIFO (view->s.st_mode)){
-	close_view_file (view);
-	return set_view_init_error (view, _(" Cannot view: not a regular file "));
-    }
+    view->file = fd;
 
     if (view->s.st_size == 0){
 	/* Must be one of those nice files that grow (/proc) */
 	close_view_file (view);
-	return init_growing_view (view, 0, filename);
+	return init_growing_view (view, 0, fd);
     }
 
 #ifdef HAVE_MMAP
@@ -511,7 +494,7 @@ static char *load_view_file (WView *view, char *filename)
         if (view->data != NULL)
 	    g_free (view->data);
 	close_view_file (view);
-	return init_growing_view (view, 0, filename);
+	return init_growing_view (view, 0, fd);
     }
     view->first = 0;
     view->bytes_read = view->s.st_size;
@@ -524,6 +507,8 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 {
     char *error = 0;
     int i, type;
+    int fd;
+    char tmp[BUF_MEDIUM];
 
     if (view->view_active)
 	view_done (view);
@@ -538,7 +523,7 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
     view->block_ptr = 0;
     view->first = view->bytes_read = 0;
     view->last_byte = 0;
-    view->filename = 0;
+    view->filename = g_strdup (_file);
     view->localcopy = 0;
     view->command = 0;
     view->last = view->first + ((LINES-2) * view->bytes_per_line);
@@ -553,40 +538,40 @@ do_view_init (WView *view, char *_command, const char *_file, int start_line)
 	view->start_col = 0;
     }
 
-    {
-        int fd;
+    /* Make sure we are working with a regular file */
+    if (mc_stat (view->filename, &view->s) == -1) {
+	g_snprintf (tmp, sizeof (tmp), _(" Cannot stat \"%s\"\n %s "),
+		    _file, unix_error_string (errno));
+	error = set_view_init_error (view, tmp);
+	goto finish;
+    }
 
-	if ((fd = mc_open(_file, O_RDONLY)) == -1) {
-            char tmp[BUF_MEDIUM];
-	    g_snprintf (tmp, sizeof (tmp), 
-                        _(" Cannot open \"%s\"\n %s "),
-			_file, unix_error_string (errno));
-	    view->filename = g_strdup (_file);
-            error = set_view_init_error (view, tmp);
-	    goto finish;
-	}
-	if (mc_fstat (fd, &view->s) == -1) {
-            char tmp[BUF_MEDIUM];
-	    g_snprintf (tmp, sizeof (tmp), 
-                        _(" Cannot stat \"%s\"\n %s "),
-			_file, unix_error_string (errno));
-	    mc_close(fd);
-	    view->filename = g_strdup (_file);
-            error = set_view_init_error (view, tmp);
-	    goto finish;
-	}
+    if (!S_ISREG (view->s.st_mode)) {
+	g_snprintf (tmp, sizeof (tmp),
+		    _(" Cannot view: not a regular file "));
+	error = set_view_init_error (view, tmp);
+	goto finish;
+    }
 
-	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
-	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
-	else 
-	    view->filename = g_strdup (_file);
-	mc_close(fd);
+    /* Actually open the file */
+    if ((fd = mc_open(_file, O_RDONLY)) == -1) {
+	g_snprintf (tmp, sizeof (tmp), _(" Cannot open \"%s\"\n %s "),
+		    _file, unix_error_string (errno));
+	error = set_view_init_error (view, tmp);
+	goto finish;
+    }
+
+    if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0) {
+	g_free (view->filename);
+	view->filename = g_strconcat (_file, decompress_extension(type), NULL);
+    } else {
+	view->filename = g_strdup (_file);
     }
 
     if (_command && (view->viewer_magic_flag || _file[0] == '\0'))
-	error = init_growing_view (view, _command, view->filename);
+	error = init_growing_view (view, _command, fd);
     else
-	error = load_view_file (view, view->filename);
+	error = load_view_file (view, fd);
 
 finish:
     if (error){
