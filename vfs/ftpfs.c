@@ -836,6 +836,12 @@ archive_same(vfs *me, vfs_s_super *super, char *archive_name, char *op, void *co
     return port;
 }
 
+void
+ftpfs_flushdir (void)
+{
+    force_expiration = 1;
+}
+
 static int
 dir_uptodate(vfs *me, vfs_s_inode *ino)
 {
@@ -955,7 +961,7 @@ initconn (vfs *me, vfs_s_super *super)
     /* If passive setup fails, fallback to active connections */
     /* Active FTP connection */
     if ((bind (data, (struct sockaddr *)&data_addr, len) == 0) &&
-	(getsockname(data, (struct sockaddr *) &data_addr, &len) == 0) && 
+	(getsockname (data, (struct sockaddr *) &data_addr, &len) == 0) && 
 	(listen (data, 1) == 0))
     {
 	unsigned char *a = (unsigned char *)&data_addr.sin_addr;
@@ -1205,7 +1211,7 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 #endif
     char buffer[BUF_8K];
     
-    int cd_first = (strchr (remote_path, ' ') != NULL) || ftpfs_first_cd_then_ls || (SUP.strict == RFC_STRICT);
+    int cd_first = ftpfs_first_cd_then_ls || (strchr (remote_path, ' ') != NULL) || (SUP.strict == RFC_STRICT);
 again:
     print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,
 		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "",

@@ -1,3 +1,8 @@
+2002-02-07  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ftpfs.c (dir_load): Speed up cd_first calculation.
+	(ftpfs_flushdir): Resurrect.
+
 2002-02-06  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ftpfs.c (dir_load): Use "LIST -la" instead of "LIST -la ."
