@@ -1,5 +1,8 @@
 2003-04-04  Adam Byrtek  <alpha@debian.org>
 
+	* edit.c: Move edit_modification() before actions to provide
+	proper repainting if there are dialogs invoked by actions.
+
 	* editlock.c: Split lock into user@host and pid and report them
 	separately.
 

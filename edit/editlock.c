@@ -112,7 +112,8 @@ lock_get_info (char *lockfname)
 
 
 /* Tries to raise file lock
-   Returns 1 on success,  0 on failure, -1 if abort */
+   Returns 1 on success,  0 on failure, -1 if abort 
+   Warning: Might do screen refresh and lose edit->force */
 int
 edit_lock_file (char *fname)
 {

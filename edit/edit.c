@@ -838,6 +838,10 @@ edit_insert (WEdit *edit, int c)
 	if (c == '\n')
 	    edit->start_line++;
     }
+
+    /* tell that we've modified the file */
+    edit_modification (edit);
+    
     /* now we must update some info on the file and check if a redraw is required */
     if (c == '\n') {
 	if (edit->book_mark)
@@ -846,8 +850,6 @@ edit_insert (WEdit *edit, int c)
 	edit->total_lines++;
 	edit->force |= REDRAW_LINE_ABOVE | REDRAW_AFTER_CURSOR;
     }
-    /* tell that we've modified the file */
-    edit_modification (edit);
 
     /* save the reverse command onto the undo stack */
     edit_push_action (edit, BACKSPACE);
@@ -885,13 +887,13 @@ void edit_insert_ahead (WEdit * edit, int c)
 	if (c == '\n')
 	    edit->start_line++;
     }
+    edit_modification (edit);
     if (c == '\n') {
 	if (edit->book_mark)
 	    book_mark_inc (edit, edit->curs_line);
 	edit->total_lines++;
 	edit->force |= REDRAW_AFTER_CURSOR;
     }
-    edit_modification (edit);
     edit_push_action (edit, DELCHAR);
 
     edit->mark1 += (edit->mark1 >= edit->curs1);
@@ -926,6 +928,7 @@ int edit_delete (WEdit * edit)
     edit->last_byte--;
     edit->curs2--;
 
+    edit_modification (edit);
     if (p == '\n') {
 	if (edit->book_mark)
 	    book_mark_dec (edit, edit->curs_line);
@@ -938,7 +941,6 @@ int edit_delete (WEdit * edit)
 	if (p == '\n')
 	    edit->start_line--;
     }
-    edit_modification (edit);
 
     return p;
 }
@@ -963,6 +965,7 @@ edit_backspace (WEdit * edit)
     edit->last_byte--;
     edit->curs1--;
 
+    edit_modification (edit);
     if (p == '\n') {
 	if (edit->book_mark)
 	    book_mark_dec (edit, edit->curs_line);
@@ -977,7 +980,6 @@ edit_backspace (WEdit * edit)
 	if (p == '\n')
 	    edit->start_line--;
     }
-    edit_modification (edit);
 
     return p;
 }
