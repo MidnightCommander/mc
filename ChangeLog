@@ -1,6 +1,11 @@
+2003-03-21  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/sh.syntax: Highlight "find".  Highlight whole string
+	after "#!".  Make unrecognized text inside `` less bright.
+
 2003-03-17  Marco Ciampa  <ciampix@libero.it>
 
-	* doc/it/mc.1.in: some manual fixies.
+	* doc/it/mc.1.in: Some manual fixes.
 
 2003-03-14  Pavel Roskin  <proski@gnu.org>
 

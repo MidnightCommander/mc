@@ -14,7 +14,7 @@ context default
     keyword { brightcyan
     keyword } brightcyan
 
-    keyword whole linestart #!\[\s\]/bin/\[abkpct\]sh brightcyan black
+    keyword whole linestart #!\[\s\]*\n brightcyan black
 
     keyword $\* brightred
     keyword $@ brightred
@@ -97,6 +97,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole ex cyan
     keyword whole false cyan
     keyword whole fgrep cyan
+    keyword whole find cyan
     keyword whole fsconf cyan
     keyword whole gawk cyan
     keyword whole grep cyan
@@ -193,7 +194,7 @@ context " " green
 
     keyword $ brightgreen
 
-context exclusive ` ` white black
+context exclusive ` ` lightgray black
     keyword '*' green
     keyword " green
     keyword \\` green
@@ -270,6 +271,7 @@ wholechars abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
     keyword whole ex cyan
     keyword whole false cyan
     keyword whole fgrep cyan
+    keyword whole find cyan
     keyword whole fsconf cyan
     keyword whole gawk cyan
     keyword whole grep cyan
