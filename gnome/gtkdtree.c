@@ -163,6 +163,9 @@ gtk_dtree_select_row (GtkCTree *ctree, GtkCTreeNode *row, gint column)
 	GtkDTree *dtree = GTK_DTREE (ctree);
 	char *path;
 
+	if (dtree->removing_rows)
+		return;
+	
 	parent_class->tree_select_row (ctree, row, column);
 
 	if (row == dtree->last_node)
@@ -392,8 +395,11 @@ entry_removed_callback (tree_entry *tree, void *data)
 			break;
 		copy = NULL;
 	}
-	if (current == NULL && current_node)
+	if (current == NULL && current_node){
+		dtree->removing_rows = 1;
 		gtk_ctree_remove_node (GTK_CTREE (data), current_node);
+		dtree->removing_rows = 0;
+	}
 	
 	g_free (dirname);
 }

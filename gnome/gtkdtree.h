@@ -34,6 +34,7 @@ typedef struct {
 	unsigned short internal;
 	unsigned short loading_dir;
 	int *show_dot_files;
+	unsigned short removing_rows;
 } GtkDTree;
 
 typedef struct {
