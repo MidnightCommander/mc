@@ -1,3 +1,14 @@
+2002-11-01  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't substitute mc.sh and mc.csh - it's now
+	done ...
+	* lib/Makefile.am: ... here.  Add wrappers for mc to avoid
+	defining complex shell scripts in functions and aliases.
+	* lib/mc-wrapper.csh.in: New file - template for the script
+	that runs mc and changes directory in csh.
+	* lib/mc-wrapper.sh.in: New file - template for the script
+	that runs mc and changes directory in sh.
+
 2002-11-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* doc/mc.1.in (Keys): Document S-<chr>.

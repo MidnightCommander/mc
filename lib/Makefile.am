@@ -18,10 +18,12 @@ noinst_DATA = \
 
 noinst_SCRIPTS = tdiff
 
-suppbin_SCRIPTS = mc.csh mc.sh
+suppbin_SCRIPTS = mc.csh mc.sh mc-wrapper.csh mc-wrapper.sh
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
 pkgdata_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
+
+CLEANFILES = $(suppbin_SCRIPTS)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
@@ -30,4 +32,16 @@ EXTRA_DIST = \
 	$(noinst_DATA) \
 	$(noinst_SCRIPTS) \
 	mc.charsets
+
+mc.csh: mc.csh.in
+	sed "s%@""suppbindir@%$(suppbindir)%" mc.csh.in > mc.csh
+
+mc.sh: mc.sh.in
+	sed "s%@""suppbindir@%$(suppbindir)%" mc.sh.in > mc.sh
+
+mc-wrapper.csh: mc-wrapper.csh.in
+	sed "s%@""bindir@%$(bindir)%" mc-wrapper.csh.in > mc-wrapper.csh
+
+mc-wrapper.sh: mc-wrapper.sh.in
+	sed "s%@""bindir@%$(bindir)%" mc-wrapper.sh.in > mc-wrapper.sh
 

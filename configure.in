@@ -577,8 +577,6 @@ pc/Makefile
 m4/Makefile
 
 lib/mc.ext
-lib/mc.sh
-lib/mc.csh
 
 vfs/extfs/deb
 vfs/extfs/ftplist
