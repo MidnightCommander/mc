@@ -9,4 +9,6 @@ mc ()
         unset MC;
 }
 
-export -f mc
+if test -n "$BASH_VERSION"; then
+	export -f mc
+fi
