@@ -254,12 +254,20 @@ int vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd);
 
 /* misc */
 int vfs_s_retrieve_file (vfs *me, struct vfs_s_inode *ino);
+/* alloc temp name which can be safely free'd with g_free() */
+char *g_tempnam( const char *dir, const char *prefix );
 
+#if 0
 /* If non-null, FREE */
 #define ifree(ptr) do { if (ptr) g_free(ptr); } while (0)
+#define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
+#else
+#define ifree(ptr) { if (ptr) g_free(ptr); }
+#define ERRNOR(a, b) { me->verrno = a; return b; }
+#endif
 
 #define MEDATA ((struct vfs_s_data *) me->data)
-#define ERRNOR(a, b) do { me->verrno = a; return b; } while (0)
+
 #define FH ((struct vfs_s_fh *) fh)
 #define FH_SUPER FH->ino->super
 

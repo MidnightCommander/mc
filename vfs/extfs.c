@@ -605,7 +605,7 @@ static void *extfs_open (vfs *me, char *file, int flags, int mode)
         char *cmd;
 	char *archive_name, *p;
         
-        entry->inode->local_filename = tempnam (NULL, "extfs");
+        entry->inode->local_filename = g_tempnam (NULL, "extfs");
 	{
 	    int handle;
 

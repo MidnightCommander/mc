@@ -766,7 +766,7 @@ vfs_s_open (vfs *me, char *file, int flags, int mode)
 	ent = vfs_s_generate_entry (me, name, dir, 0755);
 	ino = ent->ino;
 	vfs_s_insert_entry (me, dir, ent);
-	ino->localname = tempnam (NULL, me->name);
+	ino->localname = g_tempnam (NULL, me->name);
 	was_changed = 1;
     }
 
@@ -935,7 +935,7 @@ vfs_s_retrieve_file(vfs *me, struct vfs_s_inode *ino)
     memset(&fh, 0, sizeof(fh));
     
     fh.ino = ino;
-    if (!(ino->localname = tempnam (NULL, me->name))) ERRNOR (ENOMEM, 0);
+    if (!(ino->localname = g_tempnam (NULL, me->name))) ERRNOR (ENOMEM, 0);
 
     handle = open(ino->localname, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (handle == -1) {
@@ -1185,3 +1185,20 @@ vfs_s_get_line_interruptible (vfs *me, char *buffer, int size, int fd)
     buffer [size-1] = 0;
     return 0;
 }
+
+
+/* Roland: on most non-GNU/Linux platforms malloc()!=g_malloc() which 
+ * may cause crashes. This wrapper ensures that memory from tempnam 
+ * can safely free'ed with g_free() 
+ */
+char *
+g_tempnam( const char *dir, const char *prefix )
+{
+    char *tmp = (char *)tempnam( dir, prefix );
+    char *name;
+    
+    name = g_strdup( tmp );
+    free( tmp );
+    return( name );
+}
+

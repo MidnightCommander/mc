@@ -1,3 +1,13 @@
+2000-10-31  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
+
+	* ftpfs.c (dir_load): From Roland Mainz
+	<Roland.Mainz@informatik.med.uni-giessen.de>: add '.' and '..'
+	directories
+
+	* *.c: From Roland: it is not possible to g_free() something
+	allocated by strdup(), because g_malloc might be different for
+	malloc. Therefore wrapped strdup into g_strdup() wrapper.
+
 2000-10-22  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* samba/libsmb/nterr.c (nt_errs): constified

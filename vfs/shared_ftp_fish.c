@@ -330,7 +330,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 			ent->local_filename = NULL;
 		    }
 		    if (flags & O_TRUNC) {
-			ent->local_filename = tempnam (NULL, X "fs");
+			ent->local_filename = g_tempnam (NULL, X "fs");
 			if (ent->local_filename == NULL) ERRNOR (ENOMEM, NULL);
 			handle = open(ent->local_filename, O_CREAT | O_TRUNC | O_RDWR | O_EXCL, 0600);
 			if (handle < 0) ERRNOR (EIO, NULL);
@@ -368,7 +368,7 @@ _get_file_entry(struct connection *bucket, char *file_name,
 	ent->bucket = bucket;
 	ent->name = g_strdup(p);
 	ent->remote_filename = g_strdup(file_name);
-	ent->local_filename = tempnam (NULL, X "fs");
+	ent->local_filename = g_tempnam (NULL, X "fs");
 	if (!ent->name || !ent->remote_filename || !ent->local_filename) {
 	    direntry_destructor(ent);
 	    ERRNOR (ENOMEM, NULL);
@@ -841,7 +841,7 @@ static int retrieve_file(struct direntry *fe)
     
     if (fe->local_filename)
         return 1;
-    if (!(fe->local_filename = tempnam (NULL, X))) ERRNOR (ENOMEM, 0);
+    if (!(fe->local_filename = g_tempnam (NULL, X))) ERRNOR (ENOMEM, 0);
     fe->local_is_temp = 1;
 
     local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);

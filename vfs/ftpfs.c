@@ -1219,7 +1219,31 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
 
     /* Clear the interrupt flag */
     enable_interrupt_key ();
-    
+
+#if 1
+    {
+      /* added 20001006 by gisburn
+       * add dots '.' and '..'. This must be _executed_ before scanning the dir as the 
+       * code below may jump directly into error handling code (without executing 
+       * remaining code). And C doesn't have try {...} finally {}; :-)
+       */
+      vfs_s_inode *parent = dir->ent->dir;
+      
+      if( parent==NULL )
+        parent = dir;
+ 
+      ent = vfs_s_generate_entry(me, ".", dir, 0);
+      ent->ino->st=dir->st;
+      num_entries++;
+      vfs_s_insert_entry(me, dir, ent);
+      
+      ent = vfs_s_generate_entry(me, "..", parent, 0);
+      ent->ino->st=parent->st;
+      num_entries++;
+      vfs_s_insert_entry(me, dir, ent);      
+    }
+#endif
+
     while (1) {
 	int i;
 	int res = vfs_s_get_line_interruptible (me, buffer, sizeof (buffer), sock);
@@ -1729,6 +1753,7 @@ static int netrc_next (void)
     static const char * const keywords [] = { "default", "machine", 
         "login", "password", "passwd", "account", "macdef" };
 
+    
     while (1) {
         netrcp = skip_separators (netrcp);
         if (*netrcp != '\n')
