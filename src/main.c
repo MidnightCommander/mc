@@ -236,8 +236,10 @@ int mouse_move_pages = 1;
 /* If true: l&r arrows are used to chdir if the input line is empty */
 int navigate_with_arrows = 0;
 
+#if 0
 /* If it is set, the commander will iconify itself when executing a program */
 int iconify_on_exec = 1;
+#endif
 
 /* If true use +, -, | for line drawing */
 int force_ugly_line_drawing = 0;
@@ -372,11 +374,13 @@ char cmd_buf [512];
 /* Used during argument processing */
 int finish_program = 0;
 
+#ifdef HAVE_GNOME
 /* If set, then no windows are displayed in the GNOME edition */
 int   nowindows = 0, nodesktop = 0, twopanel;
 
 /* If set it displays the directory that holds the gnome .links files */
 int display_linksdir = 0;
+#endif
 
 /* Forward declarations */
 char *get_mc_lib_dir (void);
@@ -384,8 +388,6 @@ int panel_event    (Gpm_Event *event, WPanel *panel);
 int menu_bar_event (Gpm_Event *event, void *);
 
 #ifndef HAVE_GNOME
-static void menu_cmd (void);
-
 WPanel *
 get_current_panel (void)
 {
@@ -1886,9 +1888,7 @@ static void setup_mc (void)
     init_menu ();
     create_panels ();
 
-#ifdef HAVE_GNOME
-    return;
-#endif
+#ifndef HAVE_GNOME
     setup_panels ();
     
 #ifdef HAVE_SUBSHELL_SUPPORT
@@ -1897,6 +1897,7 @@ static void setup_mc (void)
 #endif
     
     setup_post ();
+#endif
 }
 
 static void setup_dummy_mc (const char *file)
@@ -2057,7 +2058,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    }   
 	} 
 	break;
-#endif /* HAVE_X */
+#endif /* !HAVE_X */
 
     case DLG_HOTKEY_HANDLED:
 	if (get_current_type () == view_listing)
@@ -2073,7 +2074,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    if (v)
 		return v;
 	}
-#endif /* HAVE_X */
+#endif /* !HAVE_X */
 	if (ctl_x_map_enabled){
 		ctl_x_map_enabled = 0;
 		for (i = 0; ctl_x_map [i].key_code; i++)
@@ -2434,7 +2435,7 @@ sigchld_handler_no_subshell (int sig)
 	else
 #endif /* SIGTSTP */
 	{
-	    /* cons.saver has died - disable confole saving */
+	    /* cons.saver has died - disable console saving */
 	    handle_console (CONSOLE_DONE);
 	    console_flag = 0;
 	}
@@ -2536,14 +2537,13 @@ print_mc_usage (void)
     version (0);
     
     for (ptr = usage; *ptr; ptr++)
-	fprintf (stderr, _(*ptr));
+	fputs (_(*ptr), stderr);
 }
 
 static void
 print_color_usage (void)
 {
-    fprintf (stderr, _(
-	     "--colors KEYWORD={FORE},{BACK}\n\n"
+    fputs (_("--colors KEYWORD={FORE},{BACK}\n\n"
 	     "{FORE} and {BACK} can be ommited, and the default will be used\n"
 	     "\n"
 	     "Keywords:\n"
@@ -2557,7 +2557,7 @@ print_color_usage (void)
 	     "Colors:\n"
 	     "   black, gray, red, brightred, green, brightgreen, brown,\n"
 	     "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
-	     "   brightcyan, lightgray and white\n\n"));
+	     "   brightcyan, lightgray and white\n\n"), stderr);
 }
 #endif /* !HAVE_X */
 
@@ -2631,20 +2631,8 @@ process_args (int c, const char *option_arg)
 	break;
 		
 #ifdef HAVE_SUBSHELL_SUPPORT
-    case 'X':
-	debug_subshell = 1;
-	break;
-		
-    case 'U':
-	use_subshell = 1;
-	break;
-		
     case 'u':
 	use_subshell = 0;
-	break;
-
-    case 'r':
-	force_subshell_execution = 1;
 	break;
 #endif	/* HAVE_SUBSHELL_SUPPORT */
 	    
@@ -2670,9 +2658,9 @@ static void parse_an_arg (poptContext state,
 	process_args (opt->shortName, arg);
 }
 
-#endif
-
 char *cmdline_geometry = NULL;
+
+#endif
 
 static const struct poptOption argument_table [] = {
 #ifdef HAVE_GNOME
@@ -2718,7 +2706,7 @@ static const struct poptOption argument_table [] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     { "nosubshell", 	'u', POPT_ARG_NONE, 	NULL, 			 'u',
       N_("Disables subshell support") },
-    { "forceexec", 	'r', POPT_ARG_NONE, 	NULL, 			 'r' },
+    { "forceexec",	'r', POPT_ARG_NONE, 	&force_subshell_execution,0 },
 #endif
     { "printwd", 	'P', POPT_ARG_NONE, 	&print_last_wd, 	  0,
       N_("Prints working directory at program exit") },
@@ -2731,7 +2719,7 @@ static const struct poptOption argument_table [] = {
       N_("Use stickchars to draw") },
 #endif
 #ifdef HAVE_SUBSHELL_SUPPORT
-    { "subshell", 	'U', POPT_ARG_NONE, 	NULL, 			  'U',
+    { "subshell", 	'U', POPT_ARG_NONE, 	&use_subshell,		  0,
       N_("Enables subshell support (default)")},
 #endif
 #if !defined(HAVE_X)
