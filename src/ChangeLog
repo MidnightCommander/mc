@@ -2,6 +2,8 @@
 
 	* regex.c: Fix the C preprocessor feature tests. They produced
 	warnings before.
+	* view.c (display): Fixed bug that displayed an empty file in
+	hexview mode with growing buffers.
 
 2004-09-25  Pavel Shirshov  <me@pavelsh.pp.ru>
 

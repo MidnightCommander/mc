@@ -941,7 +941,8 @@ display (WView *view)
 	/* Start of text column */
 	int text_start = width - view->bytes_per_line - 1 + frame_shift;
 
-	for (; row < height && from < view->last_byte; row++) {
+	for (; (void) get_byte (view, from + view->bytes_per_line),
+	       row < height && from < view->last_byte; row++) {
 	    /* Print the hex offset */
 	    attrset (MARKED_COLOR);
 	    g_snprintf (hex_buff, sizeof (hex_buff), "%08X",
