@@ -1,3 +1,18 @@
+1999-01-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (icon_event): Rewrote event handling for icons on the
+	desktop.  This function handles button presses and releases and
+	does some anal-retentive checking to avoid stuck pointer grabs.
+	(icon_event_after): New fallback function for button presses.
+	This is only called when an icon is being edited and the user
+	clicks outside the icon's text item, indicating that editing
+	should be accepted and terminated.
+	(selection_stopped): New callback used to re-install the mouse
+	grab once the icon text item stops selecting text.
+
+	* gdesktop.h (DesktopIconInfo): Removed the finishing_selection
+	flag now that the event handling code is cleaned up.
+
 1999-01-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gpageprop.c (item_properties): Use the metadata information for this.

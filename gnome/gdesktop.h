@@ -42,9 +42,6 @@ typedef struct {
 					 */
 	int selected : 1;		/* Is the icon selected? */
 	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
-	int finishing_selection : 1;	/* Flag set while we are releasing
-					 * button after selecting in the text
-					 */
 } DesktopIconInfo;
 
 void desktop_icon_info_destroy   (DesktopIconInfo *dii);

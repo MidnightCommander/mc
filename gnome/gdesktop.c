@@ -113,6 +113,11 @@ static int dnd_press_x, dnd_press_y;
  * icon had the GDK_CONTROL_MASK in it.  */
 static int dnd_select_icon_pending;
 
+/* Whether the button release signal on a desktop icon should be stopped due to
+ * the icon being selected by clicking on the text item.
+ */
+static int icon_select_on_text;
+
 /* Proxy window for clicks on the root window */
 static GdkWindow *click_proxy_gdk_window;
 static GtkWidget *click_proxy_invisible;
@@ -640,25 +645,11 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	return retval;
 }
 
-/*
- * Callback used when the user begins editing the icon text item in a
- * desktop icon.  It installs the mouse and keyboard grabs that are
- * required while an icon is being edited.
- */
+/* Sets up the mouse grab for when a desktop icon is being edited */
 static void
-editing_started (GnomeIconTextItem *iti, gpointer data)
+setup_editing_grab (DesktopIconInfo *dii)
 {
-	DesktopIconInfo *dii;
 	GdkCursor *ibeam;
-
-	dii = data;
-
-	/* Disable drags from this icon until editing is finished */
-
-	gtk_drag_source_unset (DESKTOP_ICON (dii->dicon)->canvas);
-
-	/* Unselect all icons but this one */
-	unselect_all (dii);
 
 	ibeam = gdk_cursor_new (GDK_XTERM);
 	gdk_pointer_grab (dii->dicon->window,
@@ -671,10 +662,31 @@ editing_started (GnomeIconTextItem *iti, gpointer data)
 			  NULL,
 			  ibeam,
 			  GDK_CURRENT_TIME);
-	gtk_grab_add (dii->dicon);
 	gdk_cursor_destroy (ibeam);
+}
 
-	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window, FALSE, GDK_CURRENT_TIME);
+/*
+ * Callback used when the user begins editing the icon text item in a
+ * desktop icon.  It installs the mouse and keyboard grabs that are
+ * required while an icon is being edited.
+ */
+static void
+editing_started (GnomeIconTextItem *iti, gpointer data)
+{
+	DesktopIconInfo *dii;
+
+	dii = data;
+
+	/* Disable drags from this icon until editing is finished */
+
+	gtk_drag_source_unset (DESKTOP_ICON (dii->dicon)->canvas);
+
+	/* Unselect all icons but this one */
+	unselect_all (dii);
+
+	gtk_grab_add (dii->dicon);
+	gdk_keyboard_grab (GTK_LAYOUT (DESKTOP_ICON (dii->dicon)->canvas)->bin_window,
+			   FALSE, GDK_CURRENT_TIME);
 }
 
 /* Sets up the specified icon as a drag source, but does not connect the signals */
@@ -706,6 +718,19 @@ editing_stopped (GnomeIconTextItem *iti, gpointer data)
 	/* Re-enable drags from this icon */
 
 	setup_icon_dnd_actions (dii);
+}
+
+/* Callback used when the user stops selecting text in a desktop icon.  This function
+ * restores the mouse grab that we had set up initially (the selection process changes
+ * the grab and then removes it, so we need to restore the initial grab).
+ */
+static void
+selection_stopped (GnomeIconTextItem *iti, gpointer data)
+{
+	DesktopIconInfo *dii;
+
+	dii = data;
+	setup_editing_grab (dii);
 }
 
 /**
@@ -782,156 +807,144 @@ do_popup_menu (DesktopIconInfo *dii, GdkEventButton *event)
 	g_free (filename);
 }
 
-/* Callback activated when a button is redirected from the desktop to
- * the icon during a grab.
+/* Idle handler that opens a desktop icon.  See below for information on why we
+ * do things this way.
  */
 static gint
-window_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+idle_open_icon (gpointer data)
 {
-	DesktopIconInfo *dii;
-	GtkWidget *parent;
-
-	dii = data;
-
-	/* We should only get this while editing. But check anyways -
-	 * we ignore events in a child of our a event widget
-	 */
-	parent = gtk_get_event_widget ((GdkEvent *)event);
-	if (parent)
-		parent = parent->parent;
-
-	while (parent) {
-		if (widget == parent)
-			return FALSE;
-		parent = parent->parent;
-	}
-	
-	if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing) {
-		gnome_icon_text_item_stop_editing (
-			GNOME_ICON_TEXT_ITEM (
-				DESKTOP_ICON (dii->dicon)->text), TRUE);
-		return TRUE;
-	}
-
+	desktop_icon_info_open (data);
 	return FALSE;
 }
 
-/* Callback used when a button is pressed on a desktop icon */
+/* Event handler for desktop icons.  Button events are ignored when the icon is
+ * being edited; these will be handled either by the icon's text item or the
+ * icon_event_after() fallback.
+ */
 static gint
-icon_button_press (GtkWidget *widget, GdkEventButton *event, gpointer data)
+icon_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 {
 	DesktopIconInfo *dii;
+	GnomeIconTextItem *iti;
+	int on_text;
 	int retval;
 
 	dii = data;
+	iti = GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text);
 
-	/* If the text is being edited, do not handle clicks by ourselves */
-
-	if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->editing)
-		return FALSE;
-
-	/* Save the mouse position for DnD */
-
-	dnd_press_x = event->x;
-	dnd_press_y = event->y;
-
-	/* Process the event */
-
+	on_text = item == GNOME_CANVAS_ITEM (iti);
 	retval = FALSE;
 
 	switch (event->type) {
 	case GDK_BUTTON_PRESS:
-		if (event->button == 1) {
-			/* If (only) the Control key is down, then we have to delay the icon selection */
+		if (event->button.button == 1) {
+			/* If se are editing, do not handle the event ourselves
+			 * -- either let the text item handle it, or wait until
+			 * we fall back to the icon_event_after() callback.
+			 */
+			if (iti->editing)
+				break;
 
-			dnd_select_icon_pending = ((event->state & GDK_CONTROL_MASK)
-						   && !((event->state & GDK_CONTROL_MASK)
-							&& (event->state & GDK_SHIFT_MASK)));
+			/* Save the mouse position for DnD */
 
-			if (!dnd_select_icon_pending) {
-				select_icon (dii, event->state);
+			dnd_press_x = event->button.x;
+			dnd_press_y = event->button.y;
+
+			/* Handle icon selection if we are not on the text item
+			 * or if the icon is not selected in the first place.
+			 * Otherwise, if there are modifier keys pressed, handle
+			 * icon selection instead of starting editing.
+			 */
+			if (!on_text
+			    || !dii->selected
+			    || (event->button.state & (GDK_CONTROL_MASK | GDK_SHIFT_MASK))) {
+				/* If click on text, and the icon was not
+				 * selected in the first place or shift is down,
+				 * save this flag.
+				 */
+				if (on_text
+				    && (!dii->selected || (event->button.state & GDK_SHIFT_MASK)))
+					icon_select_on_text = TRUE;
+
+				if ((event->button.state & GDK_CONTROL_MASK)
+				    && !(event->button.state & GDK_SHIFT_MASK))
+					dnd_select_icon_pending = TRUE;
+				else
+					select_icon (dii, event->button.state);
+
 				retval = TRUE;
 			}
-		} else if (event->button == 3) {
-			do_popup_menu (dii, event);
+		} else if (event->button.button == 3) {
+			do_popup_menu (dii, (GdkEventButton *) event);
 			retval = TRUE;
 		}
-
 		break;
 
 	case GDK_2BUTTON_PRESS:
-		if (event->button != 1)
+		if (event->button.button != 1 || iti->editing)
 			break;
 
-		desktop_icon_info_open (dii);
+		/* We have an interesting race condition here.  If we open the
+		 * desktop icon here instead of doing it in the idle handler,
+		 * the icon thinks it must begin editing itself, even when the
+		 * icon_select_on_text flag tries to prevent it.  I have no idea
+		 * why this happens :-( - Federico
+		 */
+		gtk_idle_add (idle_open_icon, dii);
+/*  		desktop_icon_info_open (dii); */
+		icon_select_on_text = TRUE;
 		retval = TRUE;
+		break;
+
+	case GDK_BUTTON_RELEASE:
+		if (event->button.button != 1)
+			break;
+
+		if (on_text && icon_select_on_text) {
+			icon_select_on_text = FALSE;
+			retval = TRUE;
+		}
+
+		if (dnd_select_icon_pending) {
+			select_icon (dii, GDK_CONTROL_MASK);
+			dnd_select_icon_pending = FALSE;
+			retval = TRUE;
+		}
 		break;
 
 	default:
 		break;
 	}
 
-	/* Keep the canvas items from getting the signal */
-#if 0
-	if (retval)
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event");
-#endif
+	/* If the click was on the text and we actually did something, then we
+	 * need to stop the text item's event handler from executing.
+	 */
+	if (on_text && retval)
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (iti), "event");
+
 	return retval;
 }
 
-/* Handler for button releases on desktop icons.  If there was a pending
- * selection on the icon, then the function performs the selection.
+/* Fallback handler for when the icon is being edited and the user clicks
+ * outside the icon's text item.  This indicates that editing should be accepted
+ * and terminated.
  */
 static gint
-icon_button_release (GtkWidget *widget, GdkEventButton *event, gpointer data)
+icon_event_after (GtkWidget *widget, GdkEventButton *event, gpointer data)
 {
 	DesktopIconInfo *dii;
+	GnomeIconTextItem *iti;
 
 	dii = data;
+	iti = GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text);
 
-	if (dnd_select_icon_pending) {
-		select_icon (dii, GDK_CONTROL_MASK);
-		dnd_select_icon_pending = FALSE;
+	if (event->type != GDK_BUTTON_PRESS)
+		return FALSE;
 
-		return TRUE;
-	} else if (GNOME_ICON_TEXT_ITEM (DESKTOP_ICON (dii->dicon)->text)->selecting) {
-		dii->finishing_selection = TRUE;
-	}
+	g_return_val_if_fail (iti->editing, FALSE); /* sanity check for dropped events */
 
-	return FALSE;
-}
-
-/* Handler for button releases on desktop icons.  If there was a pending
- * selection on the icon, then the function performs the selection.
- */
-static gint
-icon_button_release_after (GtkWidget *widget, GdkEventButton *event, gpointer data)
-{
-	DesktopIconInfo *dii;
-
-	dii = data;
-
-	if (dii->finishing_selection) {
-		/* Restore the pointer grab here because the icon item just
-		 * called gdk_pointer_ungrab()
-		 */
-		GdkCursor *ibeam = gdk_cursor_new (GDK_XTERM);
-		gdk_pointer_grab (dii->dicon->window,
-				  TRUE,
-				  (GDK_BUTTON_PRESS_MASK
-				   | GDK_BUTTON_RELEASE_MASK
-				   | GDK_POINTER_MOTION_MASK
-				   | GDK_ENTER_NOTIFY_MASK
-				   | GDK_LEAVE_NOTIFY_MASK),
-				  NULL,
-				  ibeam,
-				  GDK_CURRENT_TIME);
-		gdk_cursor_destroy (ibeam);
-
-		dii->finishing_selection = FALSE;
-	}
-
-	return FALSE;
+	gnome_icon_text_item_stop_editing (iti, TRUE);
+	return TRUE;
 }
 
 /* Callback used when a drag from the desktop icons is started.  We set the drag icon to the proper
@@ -1183,7 +1196,7 @@ desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSe
 
 	}
 
-out:
+ out:
 	file_entry_free (fe);
 }
 
@@ -1279,19 +1292,28 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	file_entry_free (fe);
 	g_free (full_name);
 
-	/* Connect to the icon's signals */
+	/* Connect to the icon's signals.  We connect to the image/stipple and
+	 * text items separately so that the callback can distinguish between
+	 * them.  This is not a hack.
+	 */
 
-	gtk_signal_connect_after (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_press_event",
-			    (GtkSignalFunc) icon_button_press,
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->icon), "event",
+			    (GtkSignalFunc) icon_event,
 			    dii);
-	gtk_signal_connect (GTK_OBJECT (dii->dicon), "button_press_event",
-			    (GtkSignalFunc) window_button_press,
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->stipple), "event",
+			    (GtkSignalFunc) icon_event,
 			    dii);
-	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
-				  (GtkSignalFunc) icon_button_release,
-				  dii);
-	gtk_signal_connect_after (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->canvas), "button_release_event",
-				  (GtkSignalFunc) icon_button_release_after,
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "event",
+			    (GtkSignalFunc) icon_event,
+			    dii);
+
+	/* Connect_after to button presses on the icon's window.  This is a
+	 * fallback for when the icon is being edited and a button press is not
+	 * handled by the icon's text item -- this means the user has clicked
+	 * outside the text item and wishes to accept and terminate editing.
+	 */
+	gtk_signal_connect_after (GTK_OBJECT (dii->dicon), "button_press_event",
+				  (GtkSignalFunc) icon_event_after,
 				  dii);
 
 	/* Connect to the text item's signals */
@@ -1304,6 +1326,9 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_stopped",
 			    (GtkSignalFunc) editing_stopped,
+			    dii);
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "selection_stopped",
+			    (GtkSignalFunc) selection_stopped,
 			    dii);
 
 	/* Prepare the DnD functionality for this icon */
