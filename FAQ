@@ -258,6 +258,12 @@ Frequently Asked Questions
    convention for PC keyboards is that F11-20 always means Shift with
    F1-10.
 
+   You may find that on the Linux console with some keyboard layouts
+   Shift-Fn is interpreted as F(n+12), not as F(n+10).  This is a result
+   of non-uniformity of keyboard layouts.  This is not an intended
+   behavior and it may be fixed some day.  In the meantime, use "Learn
+   Keys" to remedy this inconvenience.
+
 2.4 Why does the ESC key behave funny?
 
    Midnight Commander uses the ESC key as a prefix for simulating the
