@@ -60,7 +60,7 @@
 /* "$Id$" */
 
 static char *data;		/* Pointer to the loaded data file */
-static int help_lines = 18;	/* Lines in help viewer */
+static int help_lines;		/* Lines in help viewer */
 static int  history_ptr;	/* For the history queue */
 static char *main_node;		/* The main node */
 static char *last_shown = 0;	/* Last byte shown in a screen */
@@ -780,8 +780,7 @@ interactive_display (char *filename, char *node)
 	return;
     }
 
-    if (help_lines > LINES - 4)
-	help_lines = LINES - 4;
+    help_lines = min (LINES - 4, max (2 * LINES / 3, 18));
 
     whelp = create_dlg (0, 0, help_lines+4, HELP_WINDOW_WIDTH+4, dialog_colors,
 			help_callback, "[Help]", "help",

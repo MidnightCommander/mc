@@ -1,5 +1,9 @@
 2002-09-01  Pavel Roskin  <proski@gnu.org>
 
+	* help.c (interactive_display): Don't reuse the old value of
+	help_lines - LINES could have changed.  Scale height better for
+	terminals with many lines - use 2/3 of the full screen.
+
 	* man2hlp.c: Move handling of .SH and NODE to a separate
 	function handle_node().  Don't output empty nodes except in the
 	table of contents.
