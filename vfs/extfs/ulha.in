@@ -44,7 +44,7 @@ fi
 # Define which archiver you are using with appropriate options
 LHA_LIST="lha l"
 LHA_GET="lha pq"
-LHA_PUT="lha a"
+LHA_PUT="lha aq"
 
 # Define the temporary name of a command to be run from the archive
 TMPCMD=/tmp/mc-cmd.$$
@@ -117,8 +117,20 @@ mc_lha_fs_copyout()
 
 mc_lha_fs_copyin ()
 {
-   # This isn't called from this version of mc
-   $LHA_PUT $1 $3  2> /dev/null
+   NAME2=`basename $2`; DIR2=${2%$NAME2}
+   NAME3=`basename $3`; DIR3=${3%$NAME3}
+
+   cd ${DIR3}
+
+   ONE2=${2%%/*}
+   [ -n ${ONE2} ] || exit
+   [ -e ${ONE2} ] && exit
+
+   [ -e ${DIR2} ] || mkdir -p ${DIR2}
+   ln $3 $2       || exit
+
+   $LHA_PUT $1 $2  2> /dev/null
+   rm -r ${ONE2}
 }
 
 # The 'run' command executive to run a command from within an archive
