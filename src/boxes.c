@@ -769,14 +769,14 @@ cd_dialog (void)
 	return 0;
 }
 
+#ifndef HAVE_GNOME
 void
-symlink_dialog (char *existing, char *new, char **ret_existing, 
-		char **ret_new)
+symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
 #undef INPUT_INDEX
-#if defined(HAVE_TK) || defined(HAVE_GNOME)
+#if defined(HAVE_TK)
 #define INPUT_INDEX 2
     { quick_button, 0, 1, 0, 1, _("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "cancel" },
@@ -811,6 +811,7 @@ symlink_dialog (char *existing, char *new, char **ret_existing,
         *ret_existing = NULL;
     }
 }
+#endif
 
 #ifdef WITH_BACKGROUND
 #define B_STOP   B_USER+1

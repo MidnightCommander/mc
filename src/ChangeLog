@@ -1,5 +1,10 @@
 1999-03-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* boxes.c (symlink_dialog): Put this inside an "#ifndef
+	HAVE_GNOME" since we now provide a nicer version of the dialog.
+
+	* wtools.c (real_input_dialog_help): Removed un-needed #ifdef.
+
 	* cmd.c (edit_symlink_cmd): Generate the title of the dialog after
 	we have computed the source filename.
 	(edit_symlink_cmd): Use g_strdup_printf() instead of g_strconcat()

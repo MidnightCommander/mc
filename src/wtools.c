@@ -575,11 +575,7 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
 /* we need a unique name for tkname because widget.c:history_tool()
    needs a unique name for each dialog - using the header is ideal */
 
-#ifdef HAVE_GNOME
-    strncpy (tk_name + 4, header, 59);
-#else
     strncpy (tk_name + 3, header, 60);
-#endif
     tk_name[63] = '\0';
     quick_widgets[2].tkname = tk_name;
 

@@ -1,5 +1,8 @@
 1999-03-16  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdialogs.c (symlink_dialog): Finished implementing the new
+	symlink dialog.
+
 	* gdesktop.c (icon_event): I'm an idiot.  Someone teach me boolean
 	logic again.  Fixed edit-on-release for icons.
 

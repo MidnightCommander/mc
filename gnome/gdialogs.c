@@ -8,6 +8,7 @@
 #include "filegui.h"
 #include "fileopctx.h"
 #include "eregex.h"
+#include "main.h"
 #include "../vfs/vfs.h"
 
 enum {
@@ -975,44 +976,70 @@ symlink_dialog (char *existing, char *new, char **ret_existing, char **ret_new)
 {
         GtkWidget *dialog;
         GtkWidget *vbox;
+        GtkWidget *w;
         GtkWidget *entry1, *entry2;
+        WPanel *panel;
         int ret;
+
+        g_return_if_fail (existing != NULL);
+        g_return_if_fail (new != NULL);
+        g_return_if_fail (ret_existing != NULL);
+        g_return_if_fail (ret_new != NULL);
+
+        /* Create the dialog */
 
         dialog = gnome_dialog_new (_("Symbolic Link"),
                                    GNOME_STOCK_BUTTON_OK,
-                                   GNOME_STOCK_BUTTON_CANCEL);
+                                   GNOME_STOCK_BUTTON_CANCEL,
+                                   NULL);
         gnome_dialog_close_hides (GNOME_DIALOG (dialog), TRUE);
+        gnome_dialog_set_default (GNOME_DIALOG (dialog), 0);
+
+        panel = cpanel;
+        if (!is_a_desktop_panel (panel))
+                gnome_dialog_set_parent (GNOME_DIALOG (dialog), panel->xwindow);
 
         /* File symlink will point to */
 
         vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
-                            gtk_label_new (_("File symlink will point to:")),
-                            FALSE, FALSE, 0);
+        w = gtk_label_new (_("Existing filename (filename symlink will point to):"));
+        gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
+        gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 
         entry1 = gtk_entry_new ();
         gtk_entry_set_text (GTK_ENTRY (entry1), existing);
         gtk_box_pack_start (GTK_BOX (vbox), entry1, FALSE, FALSE, 0);
+        gnome_dialog_editable_enters (GNOME_DIALOG (dialog), GTK_EDITABLE (entry1));
 
         /* Name of symlink */
 
         vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
         gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dialog)->vbox), vbox, FALSE, FALSE, 0);
 
-        gtk_box_pack_start (GTK_BOX (vbox),
-                            gtk_label_new (_("Symlink name:")),
-                            FALSE, FALSE, 0);
+        w = gtk_label_new (_("Symbolic link filename:"));
+        gtk_misc_set_alignment (GTK_MISC (w), 0.0, 0.5);
+        gtk_box_pack_start (GTK_BOX (vbox), w, FALSE, FALSE, 0);
 
         entry2 = gtk_entry_new ();
         gtk_entry_set_text (GTK_ENTRY (entry2), new);
         gtk_box_pack_start (GTK_BOX (vbox), entry2, FALSE, FALSE, 0);
+        gnome_dialog_editable_enters (GNOME_DIALOG (dialog), GTK_EDITABLE (entry2));
+        gtk_widget_grab_focus (entry2);
 
         /* Run */
 
+        gtk_widget_show_all (GNOME_DIALOG (dialog)->vbox);
         ret = gnome_dialog_run (GNOME_DIALOG (dialog));
 
-        
-        
+        if (ret != 0) {
+                *ret_existing = NULL;
+                *ret_new = NULL;
+        } else {
+                *ret_existing = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry1)));
+                *ret_new = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry2)));
+        }
+
+        gtk_widget_destroy (dialog);
 }
