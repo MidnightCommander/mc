@@ -214,7 +214,7 @@ void init_subshell (void)
 
     /* This must be remembered across calls to init_subshell() */
     static char pty_name[BUF_SMALL];
-    int pty_slave;
+    int pty_slave = -1;
 
     /* Braindead tcsh can't redirect output to a file descriptor? */
     char tcsh_fifo[sizeof "/tmp/mc.pipe.1234567890"];
@@ -479,7 +479,10 @@ void init_subshell (void)
 	/* }}} */
     }
 
-    close(pty_slave);
+    /* pty_slave is only opened when called the first time */
+    if (pty_slave != -1) {
+	close(pty_slave);
+    }
 
 #ifdef SYNC_PTY_SIDES
 	sigsuspend (&old_mask);
