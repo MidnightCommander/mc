@@ -1,3 +1,8 @@
+1998-03-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gmain.c (xtoolkit_init): Changed gnome_init() to new version.
+	(xtoolkit_init): Call gnome_init() properly.  Also, return 0.
+
 Sat Mar  7 15:24:49 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (entry_click): Focus the entry on clicks.

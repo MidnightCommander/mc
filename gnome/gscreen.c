@@ -76,10 +76,27 @@ panel_file_list_set_type_bitmap (GtkCList *cl, int row, int column, int color, f
 static void
 panel_file_list_set_row_colors (GtkCList *cl, int row, int color_pair)
 {
+	GtkCListRow *row;
+
+	row = 0;
+	
 	if (gmc_color_pairs [color_pair].fore)
 		gtk_clist_set_foreground (cl, row, gmc_color_pairs [color_pair].fore);
+	else {
+		/* ARREGLAME GUEY */
+		row = g_list_nth (cl->rows, row);
+		row->fg_set = 0;
+	}
+
 	if (gmc_color_pairs [color_pair].back)
 		gtk_clist_set_background (cl, row, gmc_color_pairs [color_pair].back);
+	else {
+		if (!row)
+			row = g_list_nth (cl->rows, row);
+		
+		row->bg_set = 0;
+	}
+		
 }
 
 void
@@ -157,7 +174,8 @@ x_panel_set_size (int index)
 void
 x_panel_select_item (WPanel *panel, int index, int value)
 {
-	/* Not required */
+	printf ("x_panel_select_item: value = %d\n", value);
+	panel_file_list_set_row_colors (GTK_CLIST (panel->list), index, MARKED_COLOR);
 }
 
 void
@@ -453,13 +471,25 @@ panel_file_list_select_row (GtkWidget *file_list, int row, int column, GdkEvent 
 	case GDK_BUTTON_PRESS:
 		internal_select_item (file_list, panel, row);
 
-		if (event->button.button == 3)
+		switch (event->button.button) {
+		case 2:
+			printf("Llamando a do_file_mark()\n");
+			do_file_mark (panel, row, !panel->dir.list[row].f.marked);
+			break;
+
+		case 3:
 			file_popup (event, panel, panel->dir.list[row].fname);
+			break;
+
+		default:
+			break;
+		}
 
 		break;
 
 	case GDK_2BUTTON_PRESS:
-		do_enter (panel);
+		if (event->button.button == 1)
+			do_enter (panel);
 		break;
 
 	default:

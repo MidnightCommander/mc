@@ -28,7 +28,9 @@ GdkColorContext *mc_cc;
 struct gmc_color_pairs_s gmc_color_pairs [MAX_COLOR_PAIRS];
 
 char *default_edition_colors =
+"normal=black,white:"
 "directory=blue:"
+"marked=white,blue:"
 "execute=green:"
 "link=yellow:"
 "device=magenta:"
@@ -73,8 +75,10 @@ xtoolkit_init (int *argc, char *argv [])
 {
 	LINES = 40;
 	COLS = 80;
-	gnome_init ("gmc", argc, &argv);
+	gnome_init ("gmc", NULL, *argc, argv, 0, NULL);
 	gmc_color_init ();
+	/* FIXME: Maybe this should return something from gnome_init() */
+	return 0;
 }
 
 int
