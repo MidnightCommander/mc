@@ -1,3 +1,12 @@
+1998-04-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gview.c (x_init_view): Initialize view->sadj.
+
+	* gdesktop.c (start_desktop): use destkop_load instead of
+	desktop_reload. 
+	(desktop_load): This reloads + shows every widget on the
+	desktop_icons list.
+
 1998-04-14  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.h: Added extern declarations for the

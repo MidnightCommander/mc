@@ -18,6 +18,7 @@
 #include "panelize.h"
 #include "gcmd.h"
 #include "gcliplabel.h"
+#include "gdesktop.h"
 
 #define UNDEFINED_INDEX -1
 
@@ -184,6 +185,7 @@ void save_panel_types (void)
 }
 
 void configure_box (void);
+GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("New panel"),         N_("Opens a new panel"), gnome_open_panel },
@@ -248,6 +250,12 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
+GnomeUIInfo gnome_panel_desktop_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("Arrange icons"),     N_("Arranges the icons on the desktop"), gnome_arrange_icons },
+/*	{ GNOME_APP_UI_TOGGLEITEM, N_("Desktop grid"), N_("Use a grid for laying out icons"), gnome_toggle_snap }, */
+	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
+};
+
 GnomeUIInfo gnome_panel_about_menu [] = {
 	{ GNOME_APP_UI_ITEM, N_("About"),              N_("Information on this program"), gnome_about_cmd, NULL, NULL,
 	  GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_ABOUT },
@@ -260,9 +268,16 @@ GnomeUIInfo gnome_panel_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("Panel"),    NULL, &gnome_panel_panel_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Commands"), NULL, &gnome_panel_commands_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Options"),  NULL, &gnome_panel_options_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("Desktop"),  NULL, &gnome_panel_desktop_menu },
 	{ GNOME_APP_UI_SUBTREE, N_("Help"),     NULL, &gnome_panel_about_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
+
+GtkCheckMenuItem *
+gnome_toggle_snap (void)
+{
+	return GTK_CHECK_MENU_ITEM (gnome_panel_desktop_menu [1].widget);
+}
 
 void
 gnome_init_panels ()
@@ -293,7 +308,7 @@ create_container (Dlg_head *h, char *name)
 
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
-	gtk_widget_set_usize (GTK_WIDGET (app), 400, 300);
+	gtk_widget_set_usize (GTK_WIDGET (app), 500, 360);
 	panel = panel_new (name);
 
 	vbox = gtk_vbox_new (0, 0);

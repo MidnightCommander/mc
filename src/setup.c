@@ -45,6 +45,10 @@
 #include "cmd.h"
 #include "x.h"
 
+#ifdef HAVE_GNOME
+#    include "gdesktop.h"
+#endif
+
 #include "../vfs/vfs.h"
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
@@ -220,7 +224,11 @@ static struct {
     { "editor_edit_confirm_save", &edit_confirm_save },
 #endif
 
-#ifndef HAVE_GNOME
+#ifdef HAVE_GNOME
+    { "want_transparent_text", &want_transparent_text },
+    { "want_transparent_icons", &want_transparent_icons },
+    { "icons_snap_to_grid", &icons_snap_to_grid },
+#else
     { "nice_rotating_dash", &nice_rotating_dash },
     { "horizontal_split", &horizontal_split },
 #endif

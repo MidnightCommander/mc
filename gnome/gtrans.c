@@ -14,7 +14,6 @@
 /* The spacing between the cute little icon and the text */
 #define SPACING 2
 
-
 int want_transparent_icons = 1;
 int want_transparent_text = 0;
 
@@ -86,8 +85,8 @@ layout_text (GtkWidget *widget, char *text)
 			if (!window_width) {
 				/* make an initial guess at window's width */
 
-				if (row_width > (gdk_screen_width () / 12))
-					window_width = gdk_screen_width () / 12;
+				if (row_width > SNAP_X)
+					window_width = SNAP_X;
 				else
 					window_width = row_width;
 			}

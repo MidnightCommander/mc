@@ -23,6 +23,7 @@ void
 x_init_view (WView *view)
 {
 	view->current_x = view->current_y = 0;
+	view->sadj = 0;
 }
 
 void

@@ -22,6 +22,12 @@
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
 
+/* places used in the grid */
+static char *spot_array;
+
+/* number of icons that fit along the x and y axis */
+static int x_spots, y_spots;
+
 /* operations on drops */
 enum {
 	OPER_COPY,
@@ -31,6 +37,9 @@ enum {
 
 /* The X11 root window */
 static GnomeRootWin *root_window;
+
+/* use grid? */
+int icons_snap_to_grid = 1;
 
 /* The full name of the desktop directory ~/desktop */
 char *desktop_directory;
@@ -43,17 +52,106 @@ static GList *desktop_icons;
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
+static void
+init_spot_list (void)
+{
+	int size;
+	
+	x_spots = gdk_screen_width () / SNAP_X;
+	y_spots = gdk_screen_height () / SNAP_Y;
+	size = (x_spots * y_spots) / 8;
+	spot_array = xmalloc (size+1, "spot_array");
+	memset (spot_array, 0, size);
+}
+
+static int
+is_spot_set (int x, int y)
+{
+	int o = (x * x_spots + y);
+	int idx = o / 8;
+	int bit = o % 8;
+	
+	return spot_array [idx] & (1 << bit);
+}
+
+static void
+set_spot_val (int x, int y, int set)
+{
+	int o = (x * x_spots + y);
+	int idx = o / 8;
+	int bit = o % 8;
+
+	if (set)
+		spot_array [idx] |= (1 << bit);
+	else
+		spot_array [idx] &= ~(1 << bit);
+}
+
+static void
+allocate_free_spot (int *rx, int *ry)
+{
+	int x, y;
+	
+	for (x = 0; x < x_spots; x++)
+		for (y = 0; y < y_spots; y++)
+			if (!is_spot_set (x, y)){
+				*rx = x;
+				*ry = y;
+				set_spot_val (x, y, 1);
+				return;
+			}
+}
+
+static void
+snap_to (desktop_icon_t *di, int absolute, int x, int y)
+{
+	int nx = x/SNAP_X;
+	int ny = y/SNAP_Y;
+
+	if (!absolute && is_spot_set (nx, ny))
+		allocate_free_spot (&di->grid_x, &di->grid_y);
+	else {
+		set_spot_val (nx, ny, 1);
+		di->grid_x = nx;
+		di->grid_y = ny;
+	}
+
+}
+
+/* Get snapped position for an icon */
+static void
+get_icon_screen_x_y (desktop_icon_t *di, int *x, int *y)
+{
+	if (di->grid_x != -1){
+		*x = di->grid_x * SNAP_X;
+		*y = di->grid_y * SNAP_Y;
+		
+		*x = *x + (SNAP_X - di->widget->requisition.width)/2;
+		if (*x < 0)
+			*x = 0;
+		
+		if (di->widget->requisition.height > SNAP_Y)
+			*y = *y + (SNAP_Y - di->widget->requisition.height)/2;
+		else
+			*y = *y + (SNAP_Y - di->widget->requisition.height);
+	} else {
+		*x = di->x;
+		*y = di->y;
+	}
+}
+
 /*
  * If the dentry is zero, then no information from the on-disk .desktop file is used
  * In this case, we probably will have to store the geometry for a file somewhere
  * else.
  */
+static int current_x, current_y;
+
 static void
 desktop_icon_set_position (desktop_icon_t *di)
 {
 	static int x, y = 10;
-	static int current_x, current_y;
-	
+
 	x = -1;
 	if (di->dentry && di->dentry->geometry){
 		char *comma = strchr (di->dentry->geometry, ',');
@@ -65,23 +163,45 @@ desktop_icon_set_position (desktop_icon_t *di)
 		}
 	}
 
-	/* This find-spot routine can obviously be improved, left as an excercise
-	 * to the hacker
-	 */
-	if (x == -1){
-		x = current_x;
-		y = current_y;
+	gtk_widget_size_request (di->widget, &di->widget->requisition);
+	
+	if (icons_snap_to_grid){
+		if (x == -1){
+			x = current_x;
+			y = current_y;
 
-		gtk_widget_size_request (di->widget, &di->widget->requisition);
-		current_y += di->widget->requisition.height + 8;
-		if (current_y > gdk_screen_height ()){
-			current_x += 0;
-			current_y = 0;
+			current_y += SNAP_Y;
+			if (current_y > gdk_screen_height ())
+				current_x += SNAP_X;
+
+			snap_to (di, 1, x, y);
+		} else
+			snap_to (di, 0, x, y);
+
+		get_icon_screen_x_y (di, &x, &y);
+	} else {
+		/* This find-spot routine can obviously be improved, left as an excercise
+		 * to the hacker
+		 */
+		if (x == -1){
+			x = current_x;
+			y = current_y;
+			
+			current_y += di->widget->requisition.height + 8;
+			if (current_y > gdk_screen_height ()){
+				current_x += SNAP_X;
+				current_y = 0;
+			}
 		}
+		x += 6;
+		di->grid_x = di->grid_y = -1;
 	}
+
 	di->x = x;
 	di->y = y;
-	gtk_widget_set_uposition (di->widget, 6 + x, y);
+	
+	gdk_window_lower (di->widget->window);
+	gtk_widget_set_uposition (di->widget, x, y);
 }
 
 /*
@@ -137,7 +257,7 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 
 	if (!wp->dnd_drag_enabled)
 		return;
-#if 0
+#if 1
 	if (!gdk_dnd.drag_perhaps)
 		return;
 	if (gdk_dnd.dnd_grabbed)
@@ -153,7 +273,7 @@ artificial_drag_start (GdkWindow *window, int x, int y)
 	gdk_dnd.dnd_grabbed = TRUE;
 	gdk_dnd.drag_really = 1;
 	gdk_dnd_display_drag_cursor (x, y, FALSE, TRUE);
-#endif
+#else
 	gdk_dnd.real_sw = wp;
 	gdk_dnd.dnd_drag_start.x = x;
 	gdk_dnd.dnd_drag_start.y = y;
@@ -183,7 +303,7 @@ artificial_drag_start (GdkWindow *window, int x, int y)
             XChangeWindowAttributes(gdk_display, wp->xwindow,
                                     CWEventMask, &dnd_setwinattr);
         }
-
+#endif
 }
 
 static int operation_value;
@@ -403,6 +523,7 @@ url_dropped (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t
 	int len;
 	int is_directory = 0;
 
+	printf ("URL dropped\n");
 	/* if DI is set to zero, then it is a drop on the root window */
 	if (di)
 		is_directory = strcasecmp (di->dentry->type, "directory") == 0;
@@ -439,12 +560,18 @@ drop_cb (GtkWidget *widget, GdkEventDropDataAvailable *event, desktop_icon_t *di
 }
 
 static void
+drop_enter_leave ()
+{
+/*	printf ("Enter/Leave\n");  */
+}
+
+static void
 connect_drop_signals (GtkWidget *widget, desktop_icon_t *di)
 {
 	GtkObject *o = GTK_OBJECT (widget);
 	
-	gtk_signal_connect (o, "drop_enter_event", GTK_SIGNAL_FUNC (gtk_true), di);
-	gtk_signal_connect (o, "drop_leave_event", GTK_SIGNAL_FUNC (gtk_true), di);
+	gtk_signal_connect (o, "drop_enter_event", GTK_SIGNAL_FUNC (drop_enter_leave), di);
+	gtk_signal_connect (o, "drop_leave_event", GTK_SIGNAL_FUNC (drop_enter_leave), di);
 	gtk_signal_connect (o, "drop_data_available_event", GTK_SIGNAL_FUNC (drop_cb), di);
 }
 
@@ -473,6 +600,22 @@ start_icon_drag (GtkWidget *wi, GdkEventMotion *event)
 GdkPoint root_icon_drag_hotspot = { 15, 15 };
 
 static void
+desktop_icon_configure_position (desktop_icon_t *di, int x, int y)
+{
+	gtk_widget_set_uposition (di->widget, x, y);
+
+	if (di->dentry){
+		char buffer [40];
+
+		sprintf (buffer, "%d,%d", x, y);
+		if (di->dentry->geometry)
+			g_free (di->dentry->geometry);
+		di->dentry->geometry = g_strdup (buffer);
+		gnome_desktop_entry_save (di->dentry);
+	}
+}
+
+static void
 desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, desktop_icon_t *di)
 {
 	printf ("Drag type: %s\n", event->data_type);
@@ -487,16 +630,19 @@ desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, deskto
 		
 		/* Icon dropped on root.  We take care of it */
 		printf ("Dropped at %d %d\n", drop_x, drop_y);
-		gtk_widget_set_uposition (di->widget, drop_x, drop_y);
-		if (di->dentry){
-			char buffer [40];
+		
+		if (di->grid_x != -1)
+			set_spot_val (di->grid_x, di->grid_y, 0);
 
-			sprintf (buffer, "%d,%d", drop_x, drop_y);
-			if (di->dentry->geometry)
-				g_free (di->dentry->geometry);
-			di->dentry->geometry = g_strdup (buffer);
-			gnome_desktop_entry_save (di->dentry);
+		if (icons_snap_to_grid){
+			int px, py;
+
+			snap_to (di, 0, drop_x, drop_y);
+
+			get_icon_screen_x_y (di, &drop_x, &drop_y);
 		}
+
+		desktop_icon_configure_position (di, drop_x, drop_y);
 	}
 }
 
@@ -517,21 +663,42 @@ destroy_shaped_dnd_windows (void)
 	}
 }
 
+void
+gnome_arrange_icons (void)
+{
+	GList *l;
+	
+	current_x = current_y = 0;
+	memset (spot_array, 0, (x_spots * y_spots)/8);
+	
+	for (l = desktop_icons; l; l = l->next){
+		desktop_icon_t *di = l->data;
+		int x, y;
+		
+		snap_to (di, 1, current_x, current_y);
+		get_icon_screen_x_y (di, &x, &y);
+		desktop_icon_configure_position (di, x, y);
+
+		current_y += SNAP_Y;
+		if (current_y == gdk_screen_height ()){
+			current_y = 0;
+			current_x += SNAP_X;
+		}
+	}
+}
+
 /* As Elliot can not be bothered to fix his DnD code in Gdk and it is an absolute mess */
-/* static int in_desktop_dnd; */
+static int in_desktop_dnd;
 
 static void
 desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
 	char *fname;
 
-	g_print("!!!!! desktop_icon_drag_start");
-#if 0
 	if (in_desktop_dnd)
 		return;
 
 	in_desktop_dnd = 1;
-#endif
 
 	/* This should not happen, as the drag end routine should destroy those widgets */
 	destroy_shaped_dnd_windows ();
@@ -545,7 +712,6 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 		/* FIXME: we are using the same icon for ok and not ok drags */
 		root_drag_ok_window     = make_transparent_window (fname);
 		root_drag_not_ok_window = make_transparent_window (fname);
-
 		gdk_dnd_set_drag_shape (root_drag_ok_window->window, &root_icon_drag_hotspot,
 					root_drag_not_ok_window->window, &root_icon_drag_hotspot);
 		gtk_widget_show (root_drag_not_ok_window);
@@ -557,9 +723,7 @@ desktop_icon_drag_start (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 static void
 desktop_icon_drag_end (GtkWidget *widget, GdkEvent *event, desktop_icon_t *di)
 {
-#if 0
 	in_desktop_dnd = 0;
-#endif
 	printf ("!!!!!!!! drag end!\n");
 	destroy_shaped_dnd_windows ();
 }
@@ -696,7 +860,7 @@ char *drop_types [] = {
 };
 
 static void
-post_setup_desktop_icon (desktop_icon_t *di)
+post_setup_desktop_icon (desktop_icon_t *di, int show)
 {
 	desktop_icon_make_draggable (di);
 
@@ -709,7 +873,8 @@ post_setup_desktop_icon (desktop_icon_t *di)
 	/* 2. Double clicking executes the command */
 	gtk_signal_connect (GTK_OBJECT (di->widget), "button_press_event", GTK_SIGNAL_FUNC (dentry_button_click), di);
 
-	gtk_widget_show (di->widget);
+	if (show)
+		gtk_widget_show (di->widget);
 }
 
 /* Pops up the icon properties pages */
@@ -725,7 +890,7 @@ icon_properties (GtkWidget *widget, desktop_icon_t *di)
 
 		di->widget = get_transparent_window_for_dentry (di->dentry);
 
-		post_setup_desktop_icon (di);
+		post_setup_desktop_icon (di, 1);
 		gnome_desktop_entry_save (di->dentry);
 	}
 }
@@ -785,7 +950,7 @@ desktop_load_from_dentry (GnomeDesktopEntry *dentry)
 
 	desktop_icons = g_list_prepend (desktop_icons, di);
 
-	post_setup_desktop_icon (di);
+	post_setup_desktop_icon (di, 0);
 	desktop_icon_set_position (di);
 }
 
@@ -976,8 +1141,6 @@ desktop_create_launch_entry (char *pathname, char *short_name)
 			    GTK_SIGNAL_FUNC (drop_on_launch_entry), di);
 
 	gtk_widget_dnd_drop_set (window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
-
-	gtk_widget_show (window);
 }
 
 static int 
@@ -1062,6 +1225,19 @@ desktop_reload (char *desktop_dir)
 	}
 }
 
+static void
+desktop_load (char *desktop_dir)
+{
+	GList *l;
+	
+	desktop_reload (desktop_dir);
+	for (l = desktop_icons; l; l = l->next){
+		desktop_icon_t *di = l->data;
+		
+		gtk_widget_show (di->widget);
+	}
+}
+
 /*
  * Copy the system defaults to the user ~/desktop directory and setup a
  * Home directory link
@@ -1111,13 +1287,14 @@ desktop_root (void)
 void
 start_desktop (void)
 {
+	init_spot_list ();
 	desktop_directory = concat_dir_and_file (home_dir, "desktop");
 
 	if (!exist_file (desktop_directory))
 		desktop_setup_default (desktop_directory);
 
 	desktop_root ();
-	desktop_reload (desktop_directory);
+	desktop_load (desktop_directory);
 }
 
 /*
