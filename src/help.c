@@ -691,7 +691,7 @@ static int help_handle_key (struct Dlg_head *h, int c)
 	    new_item++;
 	if (*++new_item == '['){
 	    while (*++new_item) {
-		if (*new_item == ']' && *++newitem && *++newitem) {
+		if (*new_item == ']' && *++new_item && *++new_item) {
 		    currentpoint = new_item;
 		    selected_item = NULL;
 		    break;
