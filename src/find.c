@@ -892,7 +892,7 @@ get_list_info (char **file, char **dir)
 static char *
 add_to_list (char *text, void *data)
 {
-	return listbox_add_item (find_list, 0, 0, text, 0);
+	return listbox_add_item (find_list, 0, 0, text, data);
 }
 
 static void
