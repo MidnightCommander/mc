@@ -393,10 +393,11 @@ void destroy_chooser (Chooser *c)
 
 /* {{{ Quick dialog routines */
 
+#ifndef HAVE_X
+
 static int quick_callback (struct Dlg_head *h, int id, int Msg)
 {
     switch (Msg){
-#ifndef HAVE_X    
     case DLG_DRAW:
 	attrset (COLOR_NORMAL);
 	dlg_erase (h);
@@ -406,7 +407,6 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
 	dlg_move (h, 1,((h->cols-strlen (h->data))/2));
 	addstr (h->data);
 	break;
-#endif	
     case DLG_KEY:
 	if (id == '\n'){
 	    h->ret_value = B_ENTER;
@@ -455,12 +455,8 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     dd->data  = qd->title;
 
     for (qw = qd->widgets; qw->widget_type; qw++){
-#ifdef HAVE_X
-	xpos = ypos = 0;
-#else
 	xpos = (qd->xlen * qw->relative_x)/qw->x_divisions;
 	ypos = (qd->ylen * qw->relative_y)/qw->y_divisions;
-#endif
 	
 	switch (qw->widget_type){
 	case quick_checkbox:
@@ -540,7 +536,6 @@ int quick_dialog (QuickDialog *qd)
 
 /* {{{ Input routines */
 
-#ifndef HAVE_GNOME
 #define INPUT_INDEX 2
 char *real_input_dialog_help (char *header, char *text, char *help, char *def_text)
 {
@@ -615,7 +610,7 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
     } else
 	return 0;
 }
-#endif
+#endif /* !HAVE_X */
 
 char *input_dialog (char *header, char *text, char *def_text)
 {
