@@ -112,7 +112,7 @@ rm -rf $RPM_BUILD_ROOT
 
 /usr/bin/gmc
 /usr/lib/mc/layout
-/usr/share/icons/mc/*
+/usr/share/pixmaps/mc/*
 
 %changelog
 * Thu Aug 20 1998 Michael Fulbright <msf@redhat.com>
