@@ -57,7 +57,6 @@ enum {
 #endif
 
 #define COLOR_PAIR(x) x
-#define ERR -1
 
 #ifndef TRUE
 #    define TRUE 1

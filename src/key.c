@@ -497,13 +497,13 @@ int get_key_code (int no_delay)
 #endif
     if (no_delay) {
         nodelay (stdscr, FALSE);
-        if (c == ERR) {
+        if (c == -1) {
             if (this != NULL && parent != NULL && 
                 parent->action == MCKEY_ESCAPE && old_esc_mode) {
                 struct timeval current, timeout;
                 
                 if (esctime.tv_sec == -1)
-                    return ERR;
+                    return -1;
                 GET_TIME (current);
                 timeout.tv_sec = ESCMODE_TIMEOUT / 1000000 + esctime.tv_sec;
                 timeout.tv_usec = ESCMODE_TIMEOUT % 1000000 + esctime.tv_usec;
@@ -512,26 +512,26 @@ int get_key_code (int no_delay)
                     timeout.tv_sec++;
                 }
                 if (current.tv_sec < timeout.tv_sec)
-                    return ERR;
+                    return -1;
                 if (current.tv_sec == timeout.tv_sec && 
                     current.tv_usec < timeout.tv_usec)
-                    return ERR;
+                    return -1;
                 this = NULL;
 		pending_keys = seq_append = NULL;
 		return ESC_CHAR;
             }
-            return ERR;
+            return -1;
         }
-    } else if (c == ERR){
+    } else if (c == -1){
 	/* Maybe we got an incomplete match.
 	   This we do only in delay mode, since otherwise
-	   getch can return ERR at any time. */
+	   getch can return -1 at any time. */
 	if (seq_append) {
 	    pending_keys = seq_buffer;
 	    goto pend_send;
 	}
 	this = NULL;
-	return ERR;
+	return -1;
     }
     
     /* Search the key on the root */
@@ -568,7 +568,7 @@ int get_key_code (int no_delay)
 		    }
 		    esctime.tv_sec = -1;
 		    c = xgetch_second ();
-		    if (c == ERR) {
+		    if (c == -1) {
 		        pending_keys = seq_append = NULL;
 		        this = NULL;
 		        return ESC_CHAR;
@@ -664,7 +664,7 @@ static int getch_with_delay (void)
 
 	/* Try to get a character */
 	c = get_key_code (0);
-	if (c != ERR)
+	if (c != -1)
 	    break;
 	/* Failed -> wait 0.1 secs and try again */
 	try_channels (1);
@@ -878,7 +878,7 @@ char *learn_key (void)
     
     keypad(stdscr, FALSE); /* disable intepreting keys by ncurses */
     c = getch ();
-    while (c == ERR)
+    while (c == -1)
         c = getch (); /* Sanity check, should be unnecessary */
     learn_store_key (buffer, &p, c);
     GET_TIME (endtime);
@@ -889,7 +889,7 @@ char *learn_key (void)
     }
     nodelay (stdscr, TRUE);
     for (;;) {
-        while ((c = getch ()) == ERR) {
+        while ((c = getch ()) == -1) {
             GET_TIME (timeout);
             timeout.tv_usec = endtime.tv_usec - timeout.tv_usec;
             if (timeout.tv_usec < 0)
@@ -902,7 +902,7 @@ char *learn_key (void)
             } else
             	break;
         }
-        if (c == ERR)
+        if (c == -1)
             break;
 	learn_store_key (buffer, &p, c);
     }
