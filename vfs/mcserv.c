@@ -86,6 +86,10 @@
 #    include <crypt.h>
 #endif				/* !HAVE_CRYPT_H */
 
+#if defined(HAVE_LIBCRYPT) || defined(HAVE_LIBCRYPT_I)
+#    define USE_CRYPT
+#endif
+
 #ifdef HAVE_SHADOW_H
 #    include <shadow.h>
 #else
@@ -254,9 +258,8 @@ do_lseek (void)
 {
     int handle, offset, whence, status;
 
-    rpc_get (msock,
-	     RPC_INT, &handle,
-	     RPC_INT, &offset, RPC_INT, &whence, RPC_END);
+    rpc_get (msock, RPC_INT, &handle, RPC_INT, &offset, RPC_INT, &whence,
+	     RPC_END);
     status = lseek (handle, offset, whence);
     send_status (status, errno);
 }
@@ -337,14 +340,11 @@ send_stat_info (struct stat *st)
 #else
     mylong = 0;
 #endif
-    rpc_send (msock, RPC_INT, (long) mylong,
-	      RPC_INT, (long) st->st_ino,
-	      RPC_INT, (long) st->st_mode,
-	      RPC_INT, (long) st->st_nlink,
-	      RPC_INT, (long) st->st_uid,
-	      RPC_INT, (long) st->st_gid,
-	      RPC_INT, (long) st->st_size,
-	      RPC_INT, (long) blocks, RPC_END);
+    rpc_send (msock, RPC_INT, (long) mylong, RPC_INT, (long) st->st_ino,
+	      RPC_INT, (long) st->st_mode, RPC_INT, (long) st->st_nlink,
+	      RPC_INT, (long) st->st_uid, RPC_INT, (long) st->st_gid,
+	      RPC_INT, (long) st->st_size, RPC_INT, (long) blocks,
+	      RPC_END);
     send_time (msock, st->st_atime);
     send_time (msock, st->st_mtime);
     send_time (msock, st->st_ctime);
@@ -695,13 +695,13 @@ do_utime (void)
     char *ms;
     struct utimbuf times;
 
-    rpc_get (msock, RPC_STRING, &file,
-	     RPC_STRING, &as, RPC_STRING, &ms, RPC_END);
+    rpc_get (msock, RPC_STRING, &file, RPC_STRING, &as, RPC_STRING, &ms,
+	     RPC_END);
     sscanf (as, "%lx", &atime);
     sscanf (ms, "%lx", &mtime);
     if (verbose)
-	printf ("Got a = %s, m = %s, comp a = %ld, m = %ld\n",
-		as, ms, atime, mtime);
+	printf ("Got a = %s, m = %s, comp a = %ld, m = %ld\n", as, ms,
+		atime, mtime);
     g_free (as);
     g_free (ms);
     times.actime = (time_t) atime;
@@ -797,7 +797,7 @@ mc_pam_auth (char *username, char *password)
     return 1;
 }
 
-#else				/* Code for non-PAM authentication */
+#else				/* !HAVE_PAM */
 
 /* Keep reading until we find a \n */
 static int
@@ -856,8 +856,9 @@ do_ftp_auth (char *username, char *password)
 	    fprintf (stderr, "do_auth: can't create socket\n");
 	return 0;
     }
-    if (connect (my_socket, (struct sockaddr *) &local_address,
-		 sizeof (local_address)) < 0) {
+    if (connect
+	(my_socket, (struct sockaddr *) &local_address,
+	 sizeof (local_address)) < 0) {
 	fprintf (stderr,
 		 "do_auth: can't connect to ftp daemon for authentication\n");
 	close (my_socket);
@@ -885,6 +886,7 @@ do_ftp_auth (char *username, char *password)
     return 0;
 }
 
+#ifdef USE_CRYPT
 static int
 do_classic_auth (char *username, char *password)
 {
@@ -918,7 +920,8 @@ do_classic_auth (char *username, char *password)
     endpwent ();
     return ret;
 }
-#endif				/* non-PAM authentication */
+#endif				/* USE_CRYPT */
+#endif				/* !HAVE_PAM */
 
 /* Try to authenticate the user based on:
    - PAM if the system has it, else it checks:
@@ -944,7 +947,7 @@ do_auth (char *username, char *password)
 	auth = 1;
     else
 #endif
-#ifdef HAVE_CRYPT
+#ifdef USE_CRYPT
     if (do_classic_auth (username, password))
 	auth = 1;
     else
@@ -1035,8 +1038,8 @@ do_rauth (int msock)
 static void
 login_reply (int logged_in)
 {
-    rpc_send (msock, RPC_INT,
-	      logged_in ? MC_LOGINOK : MC_INVALID_PASS, RPC_END);
+    rpc_send (msock, RPC_INT, logged_in ? MC_LOGINOK : MC_INVALID_PASS,
+	      RPC_END);
 }
 
 /* FIXME: Implement the anonymous login */
@@ -1118,8 +1121,8 @@ static int ncommands = sizeof (commands) / sizeof (struct _command);
 static void
 exec_command (int command)
 {
-    if (command < 0 ||
-	command >= ncommands || commands[command].command == 0) {
+    if (command < 0 || command >= ncommands
+	|| commands[command].command == 0) {
 	fprintf (stderr, "Got unknown command: %d\n", command);
 	DO_QUIT_VOID ();
     }
@@ -1161,8 +1164,8 @@ server (int sock)
 
     check_version ();
     do {
-	if (rpc_get (sock, RPC_INT, &command, RPC_END) &&
-	    (logged_in || command == MC_LOGIN))
+	if (rpc_get (sock, RPC_INT, &command, RPC_END)
+	    && (logged_in || command == MC_LOGIN))
 	    exec_command (command);
     } while (!quit_server);
 }
@@ -1191,8 +1194,9 @@ get_client (int portnum)
     server_address.sin_addr.s_addr = htonl (INADDR_ANY);
     server_address.sin_port = htons (portnum);
 
-    if (bind (sock, (struct sockaddr *) &server_address,
-	      sizeof (server_address)) < 0)
+    if (bind
+	(sock, (struct sockaddr *) &server_address,
+	 sizeof (server_address)) < 0)
 	return "Cannot bind";
 
     listen (sock, 5);
@@ -1201,8 +1205,8 @@ get_client (int portnum)
 	int child;
 
 	clilen = sizeof (client_address);
-	newsocket = accept (sock, (struct sockaddr *) &client_address,
-			    &clilen);
+	newsocket =
+	    accept (sock, (struct sockaddr *) &client_address, &clilen);
 
 	if (isDaemon && (child = fork ())) {
 	    int status;
@@ -1322,9 +1326,10 @@ main (int argc, char *argv[])
 	    break;
 
 	default:
-	    fprintf (stderr, "Usage is: mcserv [options] [-p portnum]\n\n"
-		     "options are:\n"
-		     "-d  become a daemon (sets -q)\n" "-q  quiet mode\n"
+	    fprintf (stderr,
+		     "Usage is: mcserv [options] [-p portnum]\n\n"
+		     "options are:\n" "-d  become a daemon (sets -q)\n"
+		     "-q  quiet mode\n"
 		     /*    "-r  use rhost based authentication\n" */
 #ifndef HAVE_PAM
 		     "-f  force ftp authentication\n"

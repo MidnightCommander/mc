@@ -636,10 +636,6 @@ extern int errno;
 #define INADDR_NONE 0xffffffff
 #endif
 
-#ifndef HAVE_CRYPT
-#define crypt ufc_crypt
-#endif
-
 #ifndef O_ACCMODE
 #define O_ACCMODE (O_RDONLY | O_WRONLY | O_RDWR)
 #endif
@@ -674,11 +670,6 @@ int ftruncate(int f,long l);
 
 #ifndef HAVE_STRTOUL
 unsigned long strtoul(const char *nptr, char **endptr, int base);
-#endif
-
-#if (defined(HAVE_CRYPT) && !defined(HAVE_CRYPT_DECL) && !defined(KRB4_AUTH))
-/* stupid glibc */
-int crypt(const char *key, const char *salt);
 #endif
 
 #if !defined(HAVE_BZERO) && defined(HAVE_MEMSET)
