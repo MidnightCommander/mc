@@ -304,11 +304,8 @@ put_editkey (WView *view, unsigned char key)
  
     /* Has there been a change at this position ? */
     node = view->change_list;
-    while (node) { 
-        if (node->offset != view->edit_cursor)
-            node = node->next;
-        else
-            break;
+    while (node && (node->offset != view->edit_cursor)) { 
+ 	node = node->next;
     }
 
     if (view->view_side == view_side_left) {
@@ -532,7 +529,7 @@ no_mmap:
 
 /* Return zero on success, -1 on failure */
 static int
-do_view_init (WView *view, char *_command, char *_file, int start_line)
+do_view_init (WView *view, char *_command, const char *_file, int start_line)
 {
     char *error = 0;
     int i, type;
@@ -667,7 +664,7 @@ view_update_bytes_per_line(WView *view)
 /* Both views */
 /* Return zero on success, -1 on failure */
 int
-view_init (WView *view, char *_command, char *_file, int start_line)
+view_init (WView *view, char *_command, const char *_file, int start_line)
 {
     view_update_bytes_per_line(view);
     
@@ -2408,7 +2405,7 @@ Dlg_head   *view_dlg;
 
 /* Real view only */
 int
-view (char *_command, char *_file, int *move_dir_p, int start_line)
+view (char *_command, const char *_file, int *move_dir_p, int start_line)
 {
     int midnight_colors [4];
     int error;
@@ -2491,9 +2488,8 @@ view_hook (void *v)
 }
 
 static int
-view_callback (Dlg_head *h, WView *v, int msg, int par)
+view_callback (Dlg_head *h, WView *view, int msg, int par)
 {
-    WView *view = (WView *) v;
     int i;
     
     switch (msg){

@@ -63,7 +63,6 @@
 #endif
 #include "global.h"
 #include "fsusage.h"
-#include "fsusage.h"
 #include "mountlist.h"
 #include "dialog.h"		/* message() */
 #include "../vfs/vfs.h"		/* mc_read() */
@@ -320,12 +319,11 @@ int my_system (int flags, const char *shell, const char *command)
 #endif
 
 /* Returns a newly allocated string, if directory does not exist, return 0 */
-char *tilde_expand (char *directory)
+char *tilde_expand (const char *directory)
 {
     struct passwd *passwd;
-    char *p;
+    const char *p;
     char *name;
-    int  len;
     
     if (*directory != '~')
 	return g_strdup (directory);
@@ -340,14 +338,13 @@ char *tilde_expand (char *directory)
 	p = (*directory == PATH_SEP) ? directory+1 : "";
     } else {
 	if (!p){
-	    p = "";
 	    passwd = getpwnam (directory);
 	} else {
 	    name = g_malloc (p - directory + 1);
 	    strncpy (name, directory, p - directory);
 	    name [p - directory] = 0;
 	    passwd = getpwnam (name);
-	   g_free (name);
+	    g_free (name);
 	}
     }
 
@@ -355,12 +352,7 @@ char *tilde_expand (char *directory)
     if (!passwd)
 	return 0;
 
-    len = strlen (passwd->pw_dir) + strlen (p) + 2;
-    directory = g_malloc (len);
-    strcpy (directory, passwd->pw_dir);
-    strcat (directory, PATH_SEP_STR);
-    strcat (directory, p);
-    return directory;
+    return g_strconcat (passwd->pw_dir, PATH_SEP_STR, p, NULL);
 }
 
 #ifndef VFS_STANDALONE
@@ -411,7 +403,7 @@ close_error_pipe (int error, char *text)
     if (error)
 	title = MSG_ERROR;
     else
-	title = " Warning ";
+	title = _(" Warning ");
     if (old_error >= 0){
 	close (2);
 	dup (old_error);
@@ -601,9 +593,7 @@ char *canonicalize_pathname (char *path)
 
     /* Walk along path looking for things to compact. */
     i = 0;
-    for (;;) {
-        if (!path[i])
-	    break;
+    while (path[i]) {
 
       	while (path[i] && path[i] != PATH_SEP)
 	    i++;

@@ -737,7 +737,6 @@ void reselect_vfs (void)
 static int compare_files (char *name1, char *name2, long size)
 {
     int file1, file2;
-    char *data1, *data2;
     int result = -1;		/* Different by default */
 
     file1 = open (name1, O_RDONLY);
@@ -745,6 +744,7 @@ static int compare_files (char *name1, char *name2, long size)
 	file2 = open (name2, O_RDONLY);
 	if (file2 >= 0){
 #ifdef HAVE_MMAP
+	    char *data1, *data2;
 	    /* Ugly if jungle */
 	    data1 = mmap (0, size, PROT_READ, MAP_FILE | MAP_PRIVATE, file1, 0);
 	    if (data1 != (char*) -1){
@@ -1360,7 +1360,7 @@ static void nice_cd (char *text, char *xtext, char *help, char *prefix, int to_h
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-	message (1, MSG_ERROR, N_(" Could not chdir to %s "), cd_path);
+	message (1, MSG_ERROR, _(" Could not chdir to %s "), cd_path);
     g_free (cd_path);
     g_free (machine);
 }
@@ -1390,12 +1390,13 @@ void source_routing (void)
     struct hostent *hp;
     
     source = input_dialog (_(" Socket source routing setup "),
-			   _(" Enter host name to use as a source routing hop: ")n,
+			   _(" Enter host name to use as a source routing hop: "),
 			   "");
     if (!source)
 	return;
 
     hp = gethostbyname (source);
+    g_free (source);
     if (!hp){
 	message (1, _(" Host name "), _(" Error while looking up IP address "));
 	return;

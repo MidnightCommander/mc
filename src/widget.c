@@ -79,7 +79,7 @@ static int
 button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 {
 #ifndef HAVE_X
-    char *txt, buf[BUF_SMALL];
+    char buf[BUF_SMALL];
 #endif
     int stop = 0;
     int off = 0;
@@ -154,12 +154,11 @@ button_callback (Dlg_head *h, WButton *b, int Msg, int Par)
 		off = 0;
 		break;
 	}
-	txt = buf;
 
 	attrset ((b->selected) ? FOCUSC : NORMALC);
 	widget_move (&b->widget, 0, 0);
 
-	addstr (txt);
+	addstr (buf);
 
 	if (b->hotpos >= 0){
 	    attrset ((b->selected) ? HOT_FOCUSC : HOT_NORMALC);
@@ -927,9 +926,9 @@ Hist *history_get (char *input_name)
     return new;			/* return pointer to last entry in list */
 }
 
-#ifdef PORT_WIDGET_WANTS_HISTORY
 void history_put (char *input_name, Hist *h)
 {
+#ifdef PORT_WIDGET_WANTS_HISTORY
     int i;
     char *profile;
 
@@ -950,8 +949,10 @@ void history_put (char *input_name, Hist *h)
     if ((i = open (profile, O_CREAT | O_EXCL, S_IRUSR | S_IWUSR)) != -1)
 	close (i);
     /* Just in case I forgot to strip passwords somewhere -- Norbert */
-    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT)
+    if (chmod (profile, S_IRUSR | S_IWUSR) == -1 && errno != ENOENT){
+	g_free (profile);
 	return;
+    }
 
     while (h->next)		/* go to end of list */
 	h = h->next;
@@ -959,7 +960,6 @@ void history_put (char *input_name, Hist *h)
     /* go back 60 places */
     for (i = 0; i < num_history_items_recorded - 1 && h->prev; i++)	
 	h = h->prev;
-    i = 0;
 
     if (input_name)
 	profile_clean_section (input_name, profile);
@@ -978,12 +978,8 @@ void history_put (char *input_name, Hist *h)
 	h = h->next;
     }
     g_free (profile);
-}
-#else
-void history_put (char *input_name, Hist *h)
-{
-}
 #endif
+}
 
 /* }}} history saving and loading */
 
@@ -1164,9 +1160,9 @@ push_history (WInput *in, char *text)
     /* input widget where urls with passwords are entered without any
        vfs prefix */
     static const char *password_input_fields[] = {
-	" Link to a remote machine ",
-	" FTP to machine ",
-	" SMB link to machine "
+	N_(" Link to a remote machine "),
+	N_(" FTP to machine "),
+	N_(" SMB link to machine ")
     };
     Hist *new;
     char *p;
@@ -1510,7 +1506,7 @@ hist_next (WInput *in)
     in->need_push = 0;
 }
 
-static struct {
+static const struct {
     int key_code;
     void (*fn)(WInput *in);
 } input_map [] = {
@@ -1752,7 +1748,7 @@ input_new (int y, int x, int color, int len, const char *def_text, char *tkname)
     }
     
     if (!def_text)
-	def_text="";
+	def_text = "";
     
     if (def_text == INPUT_LAST_TEXT) {
 	def_text = "";
@@ -1841,14 +1837,13 @@ listbox_draw (WListbox *l, Dlg_head *h, int focused)
     WLEntry *e;
     int i;
     int sel_line;
-    int normalc, selc;
+    int normalc = NORMALC; 
+    int selc;
     char *text; 
 
     if (focused){
-	normalc = NORMALC;
 	selc    = FOCUSC;
     } else {
-	normalc = NORMALC;
 	selc    = HOT_FOCUSC;
     }
     sel_line = -1;

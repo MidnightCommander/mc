@@ -224,7 +224,7 @@ string_file_size_brief (file_entry *fe, int len)
     static char buffer [BUF_TINY];
 
     if (S_ISDIR (fe->buf.st_mode)){
-       strcpy (buffer, (strcmp (fe->fname, "..") ? "SUB-DIR" : "UP--DIR"));
+       strcpy (buffer, _(strcmp (fe->fname, "..") ? N_("SUB-DIR") : N_("UP--DIR")));
        return buffer;
     }
 
@@ -2112,12 +2112,11 @@ do_enter_on_file_entry (file_entry *fe)
 		{
 			char *tmp = name_quote (fe->fname, 0);
 			char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+			g_free (tmp);
 			if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
 							       _(" Do you really want to execute? "),
 							       0, 2, _("Yes"), _("No")) == 0))
 				execute (cmd);
-
-			g_free (tmp);
 			g_free (cmd);
 		}
 #ifdef USE_VFS
@@ -2160,11 +2159,11 @@ do_enter_on_file_entry (file_entry *fe)
 	    {
 	        char *tmp = name_quote (fe->fname, 0);
 	        char *cmd = g_strconcat (".", PATH_SEP_STR, tmp, NULL);
+	        g_free (tmp);
 	        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
 						       _(" Do you really want to execute? "),
 						       0, 2, _("&Yes"), _("&No")) == 0))
 	            execute (cmd);
-	        g_free (tmp);
 	        g_free (cmd);
 	    }
 #ifdef USE_VFS
@@ -2268,7 +2267,7 @@ chdir_to_readlink (WPanel *panel)
     }
 }
 
-static key_map panel_keymap [] = {
+static const key_map panel_keymap [] = {
     { KEY_DOWN,   move_down },
     { KEY_UP, 	move_up },
 
@@ -2414,7 +2413,7 @@ panel_callback (Dlg_head *h, WPanel *panel, int msg, int par)
 #endif
 	panel->active = 1;
 	if (mc_chdir (panel->cwd) != 0){
-	    message (1, _(" Error "), _(" Can't chdir to %s \n %s "),
+	    message (1, MSG_ERROR, _(" Can't chdir to \"%s\" \n %s "),
 		     panel->cwd, unix_error_string (errno));
 	} else
 	    subshell_chdir (panel->cwd);

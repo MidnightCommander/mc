@@ -1,3 +1,13 @@
+2000-04-17  Andrew V. Samoilov <sav@bcs.zp.ua>
+	
+	* widget.c: (history_put): profile is free()d if chmod failed, 
+	  (input_map): added const qualifier
+	* utilunix.c, util.h: (tilde_expand): added const qualifier
+	* cmd.c: (nice_cd): i18n update,
+	  (source_routing): typo fixed, source is free()d after use
+	* screen.c: i18n changes, (panel_keymap): added const qualifier
+	* view.[ch]: (view, view_init, do_view_init): added const qualifier
+
 2000-04-15  Timur Bakeyev  <mc@bat.ru>
 
 	* dir.c (string_sortcomp): strcmp() replaced with strcoll() to make 

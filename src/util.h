@@ -113,7 +113,7 @@ void save_stop_handler (void);
 extern struct sigaction startup_handler;
 
 /* Tilde expansion */
-char *tilde_expand (char *);
+char *tilde_expand (const char *);
 
 /* Pathname canonicalization */
 char *canonicalize_pathname (char *);
