@@ -1,3 +1,8 @@
+Wed Sep 23 11:51:12 1998  Pavel Roskin <pavel_roskin@geocities.com)
+
+	* ftpfs.c: Special characters were printed via print_vfs_message.
+	This caused funny effects if "XTerm hintbar" was on.
+
 Mon Sep 21 11:40:30 1998  Pavel Machek <pavel@ucw.cz>
 	
 	* ftpfs.c, fish.c: added O_LINEAR mode to handle linear read of

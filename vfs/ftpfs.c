@@ -739,7 +739,7 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 		retry_seconds = ftpfs_retry_seconds;
 		enable_interrupt_key ();
 		for (count_down = retry_seconds; count_down; count_down--){
-		    print_vfs_message ("Waiting to retry... %d (Control-C to cancel)\n", count_down);
+		    print_vfs_message ("Waiting to retry... %d (Control-C to cancel)", count_down);
 		    sleep (1);
 		    if (got_interrupt ()){
 			/* my_errno = E; */
