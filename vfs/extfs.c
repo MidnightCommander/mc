@@ -408,6 +408,14 @@ static char *extfs_get_path_mangle (char *inname, struct extfs_archive **archive
     for (parc = first_archive; parc != NULL; parc = parc->next)
         if (parc->name) {
 	    if (!strcmp (parc->name, archive_name)) {
+		struct stat *s=&(parc->extfsstat);
+		if (vfs_uid && (!(s->st_mode & 0004)))
+		    if ((s->st_gid != vfs_gid) || !(s->st_mode & 0040))
+			if ((s->st_uid != vfs_uid) || !(s->st_mode & 0400))
+			    return NULL; 
+ /* This is not too secure - in some cases (/#mtools) files created
+    under user a are probably visible to everyone else since / usually
+    has permissions 755 */
 	        vfs_stamp (&extfs_vfs_ops, (vfsid) parc);
 		goto return_success;
 	    }
@@ -601,7 +609,7 @@ static void *extfs_open (char *file, int flags, int mode)
                             " ", q, " ", entry->inode->local_filename, 0);
 	free (q);
 	free (archive_name);
-        if (my_system (EXECUTE_AS_SHELL, shell, cmd) && !do_create){
+        if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd) && !do_create){
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             free (cmd);
@@ -664,7 +672,7 @@ static int extfs_close (void *data)
 			    file->entry->inode->local_filename, 0);
 	free (archive_name);
 	free (file_name);
-	if (my_system (EXECUTE_AS_SHELL, shell, cmd))
+	if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID, shell, cmd))
 	    errno_code = EIO;
 	free (cmd);
         {

@@ -826,6 +826,10 @@ static char *tarfs_get_path_mangle (char *inname, struct tarfs_archive **archive
 
     for (parc = first_archive; parc != NULL; parc = parc->next)
         if (!strcmp (parc->name, archive_name)) {
+	    if (vfs_uid && (!(stat_buf.st_mode & 0004)))
+		if ((stat_buf.st_gid != vfs_gid) || !(stat_buf.st_mode & 0040))
+		    if ((stat_buf.st_uid != vfs_uid) || !(stat_buf.st_mode & 0400))
+			return NULL;
 /* Has the cached archive been changed on the disk? */
 	    if (parc->tarstat.st_mtime < stat_buf.st_mtime) { /* Yes, reload! */
 		(*tarfs_vfs_ops.free) ((vfsid) parc);
@@ -1146,8 +1150,8 @@ static vfsid tar_getid (char *path, struct vfs_stamping **parent)
 {
     struct tarfs_archive *archive;
     vfs *v;
-    vfsid id;
     char *p;
+    vfsid id;
     struct vfs_stamping *par;
 
     *parent = NULL;

@@ -1,3 +1,15 @@
+Tue Aug 25 17:54:17 1998  Pavel Machek <pavel@ucw.cz>
+	
+	* Added vfs_uid for use by libvfs.so users (rpc.nfsd)
+
+	* Added single file filesystem (sfs)
+
+	* Added vfs_flags so library users can disable selected
+ 	filesystems
+
+	* Minor shuffling of functions so garbage collection works for
+ 	library
+	
 1998-08-20  Raja R Harinath  <harinath@cs.umn.edu>
 
 	* Makefile.am (mad.c, mad.h): Create symlinks to counterparts in

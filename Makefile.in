@@ -95,7 +95,8 @@ distclean:
 	rm -f $(srcdir)/mcfn_install
 	@for I in $(alldirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
 	rm -f $(srcdir)/Makefile $(srcdir)/Make.common
-	rm -f lib/mc.ext mcfn_install vfs/extfs/ftplist vfs/extfs/zip vfs/extfs/zoo vfs/extfs/lslR vfs/extfs/lha vfs/extfs/cpio vfs/extfs/deb vfs/extfs/rar
+	rm -f lib/mc.ext mcfn_install 
+	rm -f vfs/extfs/{ftplist,uzip,uzoo,lslR,ulha,ucpio,deb,urar,uar}
 	rm -f $(srcdir)/config.log $(srcdir)/config.status 
 
 distdirs:

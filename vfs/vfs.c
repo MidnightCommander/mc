@@ -19,8 +19,6 @@
    along with this program; if not, write to the Free Software
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
-#define _VFS_VFS_C 1
-
 #include <config.h>
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
@@ -58,6 +56,12 @@ extern int get_other_type (void);
 extern int extfs_which (char *path);
 
 int vfs_timeout = 60; /* VFS timeout in seconds */
+int vfs_flags =       /* Flags */
+#ifdef VFS_STANDALONE
+                0;
+#else
+                FL_ALWAYS_MAGIC;
+#endif
 
 extern int cd_symlinks; /* Defined in main.c */
 
@@ -65,9 +69,15 @@ extern int cd_symlinks; /* Defined in main.c */
 static vfs *current_vfs = &local_vfs_ops;
 char *current_dir = NULL;
 
+/*
+ * FIXME: this is broken. It depends on mc not crossing border on month!
+ */
 static int current_mday;
 static int current_mon;
 static int current_year;
+
+uid_t vfs_uid = 0;
+gid_t vfs_gid = 0;
 
 /* Open files managed by the vfs layer */
 #define MAX_VFS_FILES 100
@@ -92,24 +102,36 @@ static int get_bucket ()
 vfs *vfs_type_from_op (char *path)
 {
 #ifdef USE_NETCODE
-    if (!strncmp (path, "mc:", 3))
+    if (!(vfs_flags & FL_NO_MCFS) && !strncmp (path, "mc:", 3))
 	return  &mcfs_vfs_ops;
-    if (!strncmp (path, "ftp:", 4))
+    if (!(vfs_flags & FL_NO_FTPFS) && !strncmp (path, "ftp:", 4))
         return &ftpfs_vfs_ops;
 #endif
 #ifdef USE_EXT2FSLIB
-    if (!strcmp (path, "undel"))
+    if (!(vfs_flags & FL_NO_UNDELFS) && !strcmp (path, "undel"))
 	return &undelfs_vfs_ops;
 #endif
-    if (!strcmp (path, "utar"))
+    if (!(vfs_flags & FL_NO_TARFS) && !strcmp (path, "utar"))
         return &tarfs_vfs_ops;
-    if (extfs_which (path) != -1)
+    if (!(vfs_flags & FL_NO_EXTFS) && extfs_which (path) != -1)
         return &extfs_vfs_ops;
+    if (!(vfs_flags & FL_NO_SFS) && sfs_which (path) != -1)
+        return &sfs_vfs_ops;
     return NULL;
 }
 
+int path_magic( char *path )
+{
+int res;
+
+res = !strncmp( path, "/#/", 3 );
+if (res)
+    path[1] = '/';
+return res || (vfs_flags & FL_ALWAYS_MAGIC);
+}
+
 /*
- * Splits path '/p1:op/inpath' into inpath,op; returns which vfs it is.
+ * Splits path '/p1#op/inpath' into inpath,op; returns which vfs it is.
  * What is left in path is p1. You still want to free(path), you DON'T
  * want to free neither *inpath nor *op
  */
@@ -651,7 +673,7 @@ char *vfs_canon (char *path)
 	return result;
     }
     /* So we have path of following form:
-     * /p1/p2:op/.././././p3:op/p4. Good luck.
+     * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
     canonicalize_pathname (path);
 
@@ -673,7 +695,6 @@ vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par)
     return nvfsid;
 }
 
-#ifndef VFS_STANDALONE
 static int is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 {
     struct vfs_stamping *stamp;
@@ -682,7 +703,6 @@ static int is_parent (vfs * nvfs, vfsid nvfsid, struct vfs_stamping *parent)
 	    break;
     return (stamp ? 1 : 0);
 }
-#endif
 
 void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stamping *parent)
 {
@@ -762,10 +782,11 @@ void vfs_add_noncurrent_stamps (vfs * oldvfs, vfsid oldvfsid, struct vfs_stampin
 		vfs_addstamp (stamp->v, stamp->id, stamp->parent);
 	}
     }
+#else
+    vfs_addstamp (oldvfs, oldvfsid, parent);
 #endif
 }
 
-#ifndef VFS_STANDALONE
 static void vfs_stamp_path (char *path)
 {
     vfs *vfs;
@@ -780,7 +801,6 @@ static void vfs_stamp_path (char *path)
 	vfs_addstamp (stamp->v, stamp->id, stamp->parent);
     vfs_rm_parents (par);
 }
-#endif
 
 #ifndef VFS_STANDALONE
 void vfs_add_current_stamps (void)
@@ -1041,6 +1061,9 @@ void mc_ungetlocalcopy (char *path, char *local, int has_changed)
     free (path);
 }
 
+/*
+ * Hmm, as timeout is minute or so, do we need to care about usecs?
+ */
 inline int timeoutcmp (struct timeval *t1, struct timeval *t2)
 {
     return ((t1->tv_sec < t2->tv_sec)
@@ -1082,6 +1105,7 @@ void vfs_init (void)
     ftpfs_init();
 #endif
     extfs_init ();
+    sfs_init ();
     vfs_setup_wd ();
 }
 

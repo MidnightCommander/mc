@@ -13,6 +13,10 @@
 
 #include "vfs.h"
 
+/* Note: Some of this functions are not static. This has rather good
+ * reason: exactly same functions would have to appear in sfs.c. This
+ * saves both computer's memory and my work.  <pavel@ucw.cz>
+ * */
     
 static void *local_open (char *file, int flags, int mode)
 {
@@ -29,7 +33,7 @@ static void *local_open (char *file, int flags, int mode)
     return local_info;
 }
 
-static int local_read (void *data, char *buffer, int count)
+int local_read (void *data, char *buffer, int count)
 {
     int n;
 
@@ -48,7 +52,7 @@ static int local_read (void *data, char *buffer, int count)
     return n;
 }
 
-static int local_close (void *data)
+int local_close (void *data)
 {
     int fd;
 
@@ -60,7 +64,7 @@ static int local_close (void *data)
     return close (fd);
 }
 
-static int local_errno (void)
+int local_errno (void)
 {
     return errno;
 }
@@ -119,7 +123,7 @@ static int local_lstat (char *path, struct stat *buf)
 #endif
 }
 
-static int local_fstat (void *data, struct stat *buf)
+int local_fstat (void *data, struct stat *buf)
 {
     return fstat (*((int *) data), buf);    
 }
@@ -185,7 +189,7 @@ static int local_chdir (char *path)
     return chdir (path);
 }
 
-static int local_lseek (void *data, off_t offset, int whence)
+int local_lseek (void *data, off_t offset, int whence)
 {
     int fd = * (int *) data;
 

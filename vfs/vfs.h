@@ -2,7 +2,6 @@
 #define __VFS_H
 
 #ifdef VFS_STANDALONE
-#include "util-alone.h"
 #undef USE_EXT2FSLIB
 #else
 #define BROKEN_PATHS
@@ -27,7 +26,6 @@ struct utimbuf {
 #endif
 
 #ifdef USE_VFS
-
 #ifdef HAVE_MMAP
 #include <sys/mman.h>
 #endif
@@ -95,6 +93,7 @@ struct utimbuf {
     extern vfs mcfs_vfs_ops;
     
     extern vfs extfs_vfs_ops;
+    extern vfs sfs_vfs_ops;
 
     extern vfs undelfs_vfs_ops;
 
@@ -312,6 +311,20 @@ extern char *vfs_get_password (char *msg);
     /* Finished transfer */
 #define MCERR_DATA_ON_STDIN     -5
     /* Data waiting on stdin to be processed */
+
+extern int vfs_flags;
+extern uid_t vfs_uid;
+extern gid_t vfs_gid;
+
+
+
+#define FL_ALWAYS_MAGIC 1
+#define FL_NO_MCFS 2
+#define FL_NO_FTPFS 4
+#define FL_NO_UNDELFS 8
+#define FL_NO_TARFS 16
+#define FL_NO_EXTFS 32
+#define FL_NO_SFS 64
 
 #endif /* __VFS_H */
 
