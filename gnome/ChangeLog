@@ -1,5 +1,8 @@
 1999-09-21  Federico Mena Quintero  <federico@redhat.com>
 
+	* gdesktop.c (desktop_reload_icons): Do not call x_flush_events()
+	when we are done.
+
 	* gsession.c (create_panel_from_info): The widgets are not created
 	yet, so just set the panel->list_type field.
 

@@ -421,8 +421,10 @@ void dlg_broadcast_msg_to (Dlg_head *h, int message, int reverse, int flags)
 
 	wi = p;
 /*	if (p->widget->options & flags) */
+#ifdef HAVE_GNOME
 	if (is_a_panel (wi->widget))
 	    was_panel |= TRUE;
+#endif
 	send_message (h, wi->widget, message, 0);
     } while (first != p);
 #ifdef HAVE_GNOME

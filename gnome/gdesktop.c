@@ -704,9 +704,6 @@ desktop_reload_icons (int user_pos, int xpos, int ypos)
 
 	g_slist_free (need_position_list);
 	gnome_metadata_unlock ();
-
-	/* Flush events to make the icons paint themselves */
-	x_flush_events ();
 }
 
 static WPanel *create_panel_from_desktop(); /* Fwd decl */
