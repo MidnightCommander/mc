@@ -61,7 +61,7 @@ static int layout_cols;
 static int layout_rows;
 static struct layout_slot *layout_slots;
 
-#define l_slots(x, y) (layout_slots[(x) * layout_rows + (y)])
+#define l_slots(u, v) (layout_slots[(u) * layout_rows + (v)])
 
 /* The last icon to be selected */
 static struct desktop_icon_info *last_selected_icon;
@@ -130,7 +130,7 @@ get_icon_snap_pos (int *x, int *y)
 			dy = sy - v;
 			dist = dx * dx + dy * dy;
 
-			if (((val == min) && (dist < min_dist)) || (val < min)) {
+			if ((val == min && dist < min_dist) || (val < min)) {
 				min_dist = dist;
 				min_x = u;
 				min_y = v;
@@ -212,41 +212,65 @@ unselect_all (void)
 static void
 select_range (struct desktop_icon_info *dii, int sel)
 {
-	int min, max;
-	int i;
+	int du, dv, lu, lv;
+	int min_u, min_v;
+	int max_u, max_v;
+	int u, v;
 	GList *l;
-	struct desktop_icon_info *ldii, *min_dii, *max_dii;
+	struct desktop_icon_info *ldii;
+	struct desktop_icon_info *min_udii, *min_vdii;
+	struct desktop_icon_info *max_udii, *max_vdii;
 
 	/* Find out the selection range */
 
 	if (!last_selected_icon)
 		last_selected_icon = dii;
 
-	if (last_selected_icon->slot < dii->slot) {
-		min = last_selected_icon->slot;
-		max = dii->slot;
-		min_dii = last_selected_icon;
-		max_dii = dii;
+	du = dii->slot / layout_rows;
+	dv = dii->slot % layout_rows;
+	lu = last_selected_icon->slot / layout_rows;
+	lv = last_selected_icon->slot % layout_rows;
+
+	if (du < lu) {
+		min_u = du;
+		max_u = lu;
+		min_udii = dii;
+		max_udii = last_selected_icon;
 	} else {
-		min = dii->slot;
-		max = last_selected_icon->slot;
-		min_dii = dii;
-		max_dii = last_selected_icon;
+		min_u = lu;
+		max_u = du;
+		min_udii = last_selected_icon;
+		max_udii = dii;
+	}
+
+	if (dv < lv) {
+		min_v = dv;
+		max_v = lv;
+		min_vdii = dii;
+		max_vdii = last_selected_icon;
+	} else {
+		min_v = lv;
+		max_v = dv;
+		min_vdii = last_selected_icon;
+		max_vdii = dii;
 	}
 
 	/* Select! */
 
-	for (i = min; i <= max; i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			ldii = l->data;
+	for (u = min_u; u <= max_u; u++)
+		for (v = min_v; v <= max_v; v++)
+			for (l = l_slots (u, v).icons; l; l = l->next) {
+				ldii = l->data;
 
-			if (((i == min) && ((ldii->x < min_dii->x) || (ldii->y < min_dii->y)))
-			    || ((i == max) && ((ldii->x > max_dii->x) || (ldii->y > max_dii->y))))
-				continue;
+				if ((u == min_u && ldii->x < min_udii->x)
+				    || (v == min_v && ldii->y < min_vdii->y)
+				    || (u == max_u && ldii->x > max_udii->x)
+				    || (v == max_v && ldii->y > max_vdii->y))
+					continue;
 
-			desktop_icon_select (DESKTOP_ICON (dii->dicon), sel);
-			dii->selected = sel;
-		}
+				desktop_icon_select (DESKTOP_ICON (ldii->dicon), sel);
+				ldii->selected = sel;
+			}
 }
 
 /* Handles icon selection and unselection due to button presses */

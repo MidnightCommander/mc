@@ -1,5 +1,9 @@
 1998-11-02  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (select_range): Doh.  Fix dii -> ldii typo.  Also,
+	use Windows semantics -- ranges are considered rectangular instead
+	of linear.
+
 	* gdesktop.c: Now desktop icons are stored in the layout_slots
 	array.  We need to know which icons are in which slots.
 	(unselect_all): Use the layout_slots array.
