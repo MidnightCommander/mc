@@ -88,19 +88,15 @@ dnl Ovverriding mmap support.  This has to be before AC_FUNC_MMAP is used.
 dnl We use only part of the functionality of mmap, so on AIX,
 dnl it's possible to use mmap, even if it doesn't pass the autoconf test.
 dnl
-AC_ARG_WITH(mmap, 
-	[  --with-mmap              Force using the mmap call (only useful on AIX)],
-	[case $withval in
-yes)
-	ac_cv_func_mmap_fixed_mapped=yes
-	AC_MSG_NOTICE([forcing MMAP support])
-	;;
-no)
-	ac_cv_func_mmap_fixed_mapped=no
-	AC_MSG_NOTICE([disabling MMAP support])
-	;;
-esac])
-AC_FUNC_MMAP
+AC_ARG_WITH(mmap,
+	[  --with-mmap              Use the mmap call [[yes if found]]])
+if test x$with_mmap != xno; then
+    if test x$with_mmap = x; then
+	AC_FUNC_MMAP
+    else
+	AC_DEFINE(HAVE_MMAP, 1)
+    fi
+fi
 
 dnl
 dnl Internationalization
@@ -371,44 +367,44 @@ MAN_FLAGS=
 
 if $HAVE_nroff; then
     AC_MSG_CHECKING([for manual formatting macros])
-    AC_CACHE_VAL(ac_cv_mandoc, [
+    AC_CACHE_VAL(mc_cv_mandoc, [
     nroff -mandoc < /dev/null > /dev/null 2>&1
     if test $? = 0; then
-	ac_cv_mandoc=-mandoc
+	mc_cv_mandoc=-mandoc
     else
-	ac_cv_mandoc=-man
+	mc_cv_mandoc=-man
     fi
     ])
-    MANDOC=$ac_cv_mandoc
+    MANDOC=$mc_cv_mandoc
     AC_MSG_RESULT([$MANDOC])
 
     AC_MSG_CHECKING([for option to disable ANSI color in manuals])
-    AC_CACHE_VAL(ac_cv_man_nocolor, [
+    AC_CACHE_VAL(mc_cv_man_nocolor, [
     nroff -c < /dev/null > /dev/null 2>&1
     if test $? = 0; then
-	ac_cv_man_nocolor=-c
+	mc_cv_man_nocolor=-c
     else
-	ac_cv_man_nocolor=
+	mc_cv_man_nocolor=
     fi
     ])
-    MAN_FLAGS=$ac_cv_man_nocolor
+    MAN_FLAGS=$mc_cv_man_nocolor
     AC_MSG_RESULT([${MAN_NOCOLOR-none}])
 
     AC_MSG_CHECKING([if nroff accepts -Tlatin1 or -Tascii])
-    AC_CACHE_VAL(ac_cv_nroff_tascii, [
-    ac_cv_nroff_tascii=
+    AC_CACHE_VAL(mc_cv_nroff_tascii, [
+    mc_cv_nroff_tascii=
     nroff -Tlatin1 < /dev/null > /dev/null 2>&1 /dev/null
     if test $? = 0; then
-	ac_cv_nroff_tascii=-Tlatin1
+	mc_cv_nroff_tascii=-Tlatin1
     else
         nroff -Tascii < /dev/null > /dev/null 2>&1 /dev/null
         if test $? = 0; then
-	    ac_cv_nroff_tascii=-Tascii
+	    mc_cv_nroff_tascii=-Tascii
 	fi
     fi
     ])
-    AC_MSG_RESULT([${ac_cv_nroff_tascii-no}])
-    MAN_FLAGS="$MAN_FLAGS $ac_cv_nroff_tascii"
+    AC_MSG_RESULT([${mc_cv_nroff_tascii-no}])
+    MAN_FLAGS="$MAN_FLAGS $mc_cv_nroff_tascii"
 fi
 
 AC_SUBST(MANDOC)
@@ -421,18 +417,18 @@ dnl
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
     AC_MSG_CHECKING([for -L option to file command])
-    AC_CACHE_VAL(ac_cv_filel, [
+    AC_CACHE_VAL(mc_cv_filel, [
     file -L . > /dev/null 2>&1
     if test $? = 0; then
-	ac_cv_filel=yes
+	mc_cv_filel=yes
     else
-	ac_cv_filel=no
+	mc_cv_filel=no
     fi
     ])
-    if test x$ac_cv_filel = xyes; then
+    if test x$mc_cv_filel = xyes; then
 	AC_DEFINE(FILE_L, 1, [Define if the file command accepts the -L option])
     fi
-    filel=$ac_cv_filel
+    filel=$mc_cv_filel
     AC_MSG_RESULT([$filel])
 fi
 

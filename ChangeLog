@@ -1,5 +1,8 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Rewrite check for mmap() to avoid using internal
+	variables of Autoconf.  Rename the rest of ac_cv_* to mc_cv_*.
+
 	* configure.in: Use AC_CHECK_MEMBERS to check fields of struct
 	stat.  Adjust all dependencies.
 
