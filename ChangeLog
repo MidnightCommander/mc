@@ -1,3 +1,7 @@
+2003-02-05  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Version 4.6.0 released.
+
 2003-02-04  Arpi  <arpi@mplayerhq.hu>
 
 	* syntax/Syntax: Match *.syntax before other files to fix
