@@ -496,9 +496,11 @@ main (int argc, char **argv)
     cont_start = ftell (stdout);
     printf ("\004[Contents]\n%s\n\n", Topics);
 
-    for (cnode = &nodes; cnode && cnode->node; cnode = cnode->next) {
+    for (cnode = &nodes; cnode && cnode->node;) {
 	char *node = cnode->node;
 	int heading_level = 0;
+	struct node *next = cnode->next;
+
 	while (*node == ' ') {
 	    heading_level++;
 	    node++;
@@ -513,6 +515,7 @@ main (int argc, char **argv)
 	    free (cnode->lname);
 	if (cnode != &nodes)
 	    free (cnode);
+	cnode = next;
     }
 
     file_end = ftell (stdout);

@@ -1,3 +1,7 @@
+2002-07-31  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* man2hlp.c (main): Don't use freed structure member.
+
 2002-07-30  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (main): Use only stream I/O.  Fix checks for error
