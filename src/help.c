@@ -50,7 +50,6 @@
 #include "mouse.h"
 #include "key.h"	/* For mi_getch() */
 #include "help.h"
-#include "layout.h"		/* keybar_visible */
 #include "dlg.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 
@@ -799,7 +798,7 @@ interactive_display (char *filename, char *node)
 	history [history_ptr].link = selected_item;
     }
 
-    help_bar = buttonbar_new (keybar_visible);
+    help_bar = buttonbar_new (1);
     help_bar->widget.y -= whelp->y;
     help_bar->widget.x -= whelp->x;
     

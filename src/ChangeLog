@@ -1,5 +1,7 @@
 2002-08-21  Pavel Roskin  <proski@gnu.org>
 
+	* help.c (interactive_display): Always show button bar.
+
 	* widget.c (buttonbar_callback): Fix a bug that prevented the
 	last byte from being redrawn.
 	Reported by David Martin <dmartina@excite.com>
