@@ -1,3 +1,8 @@
+2002-02-12  Pavel Roskin  <proski@gnu.org>
+
+	* extfs/lslR.in: Fix parsing of old entries (with year number).
+	From Daniel Skarda <0rfelyus@atrey.karlin.mff.cuni.cz>
+
 2002-02-08  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* direntry.c (vfs_s_retrieve_file): Use off_t for total

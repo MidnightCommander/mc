@@ -16,7 +16,12 @@ case "$1" in
 esac
 
 $MYCAT "$1" | @AWK@ '
-BEGIN { dir="" }
+BEGIN {
+  dir="";
+  # Pattern to match 8 first fields.
+  rx = "[^ 	]+[ 	]+";
+  rx = "^" rx rx rx rx rx rx rx rx;
+}
 /^total\ [0-9]*$/ { next }
 /^$/ { next }
 /^[^ 	].*:$/ {
@@ -26,10 +31,11 @@ BEGIN { dir="" }
   else sub(/:$/, "/", dir);
   next;
 }
-/:/ {
-  # gensub is not portable.
+{ $9 != "" } {
+  # gensub() is not portable.
   name=$0
-  sub(/^[^:]+:[^ 	]+[ 	]+/, "", name)
+  sub(rx, "", name)
+  # Cannot assign to $9, or spaces in the filename would be reduced.
   attr=substr($0, 1, length($0)-length(name))
   printf "%s%s%s\n", attr, dir, name
 }' 2>/dev/null
