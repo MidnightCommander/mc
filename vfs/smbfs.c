@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 
-#include "../config.h"
+#include "utilvfs.h"
 #include "samba/include/config.h"
 /* don't load crap in "samba/include/includes.h" we don't use and which 
    conflicts with definitions in other includes */
@@ -34,12 +34,6 @@
 #include "samba/include/includes.h"
 
 #include <string.h>
-#include <errno.h>
-
-#include "../src/global.h"
-
-#include "../src/tty.h"         /* enable/disable interrupt key */
-#include "../src/main.h"
 
 #include "vfs.h"
 #include "smbfs.h"
@@ -65,8 +59,8 @@ extern pstring global_myname;
 static int smbfs_open_connections = 0;
 gboolean got_user = FALSE;
 gboolean got_pass = FALSE;
-pstring password;
-pstring username;
+static pstring password;
+static pstring username;
 
 static struct _smbfs_connection {
 	struct cli_state *cli;
@@ -515,12 +509,11 @@ gboolean first_direntry;
 static void
 browsing_helper(const char *name, uint32 type, const char *comment)
 {
-	fstring typestr;
-	dir_entry *new_entry;
-	new_entry = g_new (dir_entry, 1);
-    new_entry->text = dos_to_unix (g_strdup (name), 1);
+	char *typestr = "";
 
-    new_entry->next = 0;
+	dir_entry *new_entry;
+	new_entry = g_new0 (dir_entry, 1);
+	new_entry->text = dos_to_unix (g_strdup (name), 1);
 
 	if (first_direntry) {
 		current_info->entries = new_entry;
@@ -530,23 +523,20 @@ browsing_helper(const char *name, uint32 type, const char *comment)
 	}
 	current_info->current = new_entry;
 
-	bzero(&new_entry->my_stat, sizeof(struct stat));
-	new_entry->merrno = 0;
-	*typestr=0;
 	switch (type) {
 		case STYPE_DISKTREE:
-			fstrcpy(typestr,"Disk");
+			typestr = "Disk";
 			/*	show this as dir	*/
 			new_entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
 			break;
 		case STYPE_PRINTQ:
-			fstrcpy(typestr,"Printer"); break;
+			typestr = "Printer"; break;
 		case STYPE_DEVICE:
-			fstrcpy(typestr,"Device"); break;
+			typestr = "Device"; break;
 		case STYPE_IPC:
-			fstrcpy(typestr, "IPC"); break;
+			typestr = "IPC"; break;
 	}
-	DEBUG(3, ("\t%-15.15s%-10.10s%s\n", name, typestr,comment)); 
+	DEBUG(3, ("\t%-15.15s%-10.10s%s\n", name, typestr, comment));
 }
 
 static void
@@ -554,25 +544,21 @@ loaddir_helper(file_info *finfo, const char *mask)
 {
 	dir_entry *new_entry;
 	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
-
+#if 0	/* I want to see dot files */
 	if (finfo->mode & aHIDDEN)
 		return;	/* dont bother with hidden files, "~$" screws up mc */
-
-	new_entry = g_new (dir_entry, 1);
-    new_entry->text = dos_to_unix (g_strdup(finfo->name), 1);
-
-    new_entry->next = 0;
+#endif
+	new_entry = g_new0 (dir_entry, 1);
+	new_entry->text = dos_to_unix (g_strdup(finfo->name), 1);
 
 	if (first_direntry) {
 		current_info->entries = new_entry;
-		current_info->current = new_entry;
 		first_direntry = FALSE;
 	} else {
 		current_info->current->next = new_entry;
-		current_info->current = new_entry;
 	}
+	current_info->current = new_entry;
 
-	bzero(&new_entry->my_stat, sizeof(struct stat));
 	new_entry->my_stat.st_size = finfo->size;
 	new_entry->my_stat.st_mtime = finfo->mtime;
 	new_entry->my_stat.st_atime = finfo->atime;
@@ -581,8 +567,8 @@ loaddir_helper(file_info *finfo, const char *mask)
 	new_entry->my_stat.st_gid = finfo->gid;
 
 
-	new_entry->my_stat.st_mode =	S_IRUSR|S_IRGRP|S_IROTH |
-									S_IWUSR|S_IWGRP|S_IWOTH;
+	new_entry->my_stat.st_mode =
+		S_IRUSR|S_IRGRP|S_IROTH|S_IWUSR|S_IWGRP|S_IWOTH;
 								
 /*  if (finfo->mode & aVOLID);	 nothing similar in real world */
 	if (finfo->mode & aDIR)
@@ -592,9 +578,9 @@ loaddir_helper(file_info *finfo, const char *mask)
 /*  if (finfo->mode & aARCH);	DOS archive	*/
 /*  if (finfo->mode & aHIDDEN);	like a dot file? */
 /*  if (finfo->mode & aSYSTEM); like a kernel? */
-  if (finfo->mode & aRONLY)
+	if (finfo->mode & aRONLY)
 		new_entry->my_stat.st_mode &= ~(S_IRUSR|S_IRGRP|S_IROTH);
- 
+
 	DEBUG(3, ("  %-30s%7.7s%8.0f  %s",
 		CNV_LANG(finfo->name),
 		attrib_string(finfo->mode),
@@ -637,22 +623,16 @@ static void
 server_browsing_helper(const char *name, uint32 m, const char *comment)
 {
 	dir_entry *new_entry;
-	new_entry = g_new (dir_entry, 1);
-    new_entry->text = dos_to_unix (g_strdup (name), 1);
-
-    new_entry->next = 0;
+	new_entry = g_new0 (dir_entry, 1);
+	new_entry->text = dos_to_unix (g_strdup (name), 1);
 
 	if (first_direntry) {
 		current_info->entries = new_entry;
-		current_info->current = new_entry;
 		first_direntry = FALSE;
 	} else {
 		current_info->current->next = new_entry;
-		current_info->current = new_entry;
 	}
-
-	bzero(&new_entry->my_stat, sizeof(struct stat));
-	new_entry->merrno = 0;
+	current_info->current = new_entry;
 
 	/*	show this as dir	*/
 	new_entry->my_stat.st_mode = S_IFDIR|S_IRUSR|S_IRGRP|S_IROTH;
@@ -661,7 +641,8 @@ server_browsing_helper(const char *name, uint32 m, const char *comment)
 }
 
 static BOOL
-reconnect(smbfs_connection *conn, int *retries) {
+reconnect(smbfs_connection *conn, int *retries)
+{
 	char *host;
 	DEBUG(3, ("RECONNECT\n"));
 
@@ -852,6 +833,7 @@ done:
 	return 1; /* 1 = ok */
 }
 
+#ifdef	SMBFS_FREE_DIR
 static void
 smbfs_free_dir (dir_entry *de)
 {
@@ -861,6 +843,7 @@ smbfs_free_dir (dir_entry *de)
     g_free (de->text);
     g_free (de);
 }
+#endif
 
 /* Explanation:
  * On some operating systems (Slowaris 2 for example)
@@ -883,9 +866,9 @@ static void *
 smbfs_readdir (void *info)
 {
     char *dirent_dest;
-	opendir_info  *smbfs_info = (opendir_info *) info;
+    opendir_info  *smbfs_info = (opendir_info *) info;
 
-	DEBUG(4, ("smbfs_readdir(%s)\n", smbfs_info->dirname));
+    DEBUG(4, ("smbfs_readdir(%s)\n", smbfs_info->dirname));
 	
     if (!smbfs_info->entries)
 	    if (!smbfs_loaddir (smbfs_info))
@@ -893,9 +876,11 @@ smbfs_readdir (void *info)
 
     if (smbfs_info->current == 0) {	/* reached end of dir entries */
 		DEBUG(3, ("smbfs_readdir: smbfs_info->current = 0\n"));
-/*	    cached_lstat_info = 0;
+#ifdef	SMBFS_FREE_DIR
+	    cached_lstat_info = 0;
 	    smbfs_free_dir (smbfs_info->entries);
-	    smbfs_info->entries = 0;	*/
+	    smbfs_info->entries = 0;
+#endif
 	    return NULL;
     }
     dirent_dest = &(smbfs_readdir_data.dent.d_name [0]);
@@ -1066,6 +1051,8 @@ do_connect (char *server, char *share)
 			       current_bucket->domain)) {
 		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1,("session setup failed: %s\n", cli_errstr(c)));
+		cli_shutdown(c);
+		authinfo_remove (server, share);
 		return NULL;
 	}
 
@@ -1233,7 +1220,7 @@ smbfs_open_link(char *host, char *path, char *user, int *port, char *this_pass)
 	bucket->user = g_strdup(user);
 	bucket->service = g_strdup (service);
 
-	if (!strlen(host)) {	/* if blank host name, browse for servers */
+	if (!(*host)) {		/* if blank host name, browse for servers */
 		if (!get_master_browser(&host))	/* set host to ip of master browser */
 			return 0;		/* couldnt find master browser? */
 		bucket->host = g_strdup("");	/* blank host means master browser */
@@ -1311,6 +1298,7 @@ smbfs_get_path(smbfs_connection **sc, char *path)
 	return remote_path;
 }
 
+#if 0
 static int
 is_error (int result, int errno_num)
 {
@@ -1320,6 +1308,7 @@ is_error (int result, int errno_num)
 		my_errno = errno_num;
     return 1;
 }
+#endif
 
 static void *
 smbfs_opendir (vfs *me, char *dirname)
