@@ -117,6 +117,14 @@ if test "x$CCOPTS" = x; then
 fi
 CFLAGS="$CCOPTS"
 
+
+dnl
+dnl We now use glib
+dnl 
+AM_PATH_GLIB
+LIBS="$LIBS $GLIB_LIBS"
+CFLAGS="$CFLAGS $GLIB_CFLAGS"
+
 dnl
 dnl For A/UX.  Do not move
 dnl

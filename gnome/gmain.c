@@ -45,6 +45,8 @@ char *default_edition_colors =
 "reverse=black,lightcyan:"
 "special=black";
 
+int dialog_panel_callback (struct Dlg_head *h, int id, int msg);
+
 /* The Dlg_head for the whole desktop */
 Dlg_head *desktop_dlg;
 
@@ -174,8 +176,10 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 		
 		bind_gtk_keys (GTK_WIDGET (ted), h);
 	}
-	if (win)
-		bind_gtk_keys (GTK_WIDGET (win), h);
+	if (win){
+		if (h->callback != dialog_panel_callback)
+			bind_gtk_keys (GTK_WIDGET (win), h);
+	}
 	return (widget_data) win;
 }
 

@@ -73,6 +73,9 @@
 #	include <sys/time.h>	/* alex: this redefines struct timeval */
 #endif /* SCO_FLAVOR */
 #include <sys/param.h>
+#undef MIN
+#undef MAX
+#include <glib.h>
 
 #ifdef USE_TERMNET
 #include <termnet.h>
@@ -101,9 +104,9 @@ int ftpfs_retry_seconds = 30;
 int ftpfs_use_passive_connections = 1;
 
 /* Method used to get directory listings:
-   1: try 'LIST -la <path>', if it fails
-      fall back to CWD <path>; LIST 
-   0: always use CWD <path>; LIST  
+ * 1: try 'LIST -la <path>', if it fails
+ *    fall back to CWD <path>; LIST 
+ * 0: always use CWD <path>; LIST  
  */
 int ftpfs_use_unix_list_options = 1;
 
@@ -139,33 +142,42 @@ static struct linklist *connections_list;
 #define WANT_STRING 0x02
 static char reply_str [80];
 
-static char *ftpfs_get_current_directory(struct connection *bucket);
-static int __ftpfs_chdir (struct connection *bucket ,char *remote_path);
 static struct direntry *_get_file_entry(struct connection *bucket, 
                 char *file_name, int op, int flags);
-static void free_bucket (void *data);
-static void connection_destructor(void *data);
-static void flush_all_directory(struct connection *bucket);
-static int get_line (int sock, char *buf, int buf_len, char term);
-static char *get_path (struct connection **bucket, char *path);
+
+static char    *ftpfs_get_current_directory (struct connection *bucket);
+static int      ftpfs_chdir_internal        (struct connection *bucket,
+					     char *remote_path);
+static void     free_bucket                 (void *data);
+static void     connection_destructor       (void *data);
+static void     flush_all_directory         (struct connection *bucket);
+static int      get_line                    (int sock, char *buf, int buf_len,
+					     char term);
+static char    *get_path                    (struct connection **bucket,
+					     char *path);
 
 /* Extract the hostname and username from the path */
-/* path is in the form: [user@]hostname:port/remote-dir, e.g.:
+
+/*
+ * path is in the form: [user@]hostname:port/remote-dir, e.g.:
  * ftp://sunsite.unc.edu/pub/linux
  * ftp://miguel@sphinx.nuclecu.unam.mx/c/nc
  * ftp://tsx-11.mit.edu:8192/
  * ftp://joe@foo.edu:11321/private
  * If the user is empty, e.g. ftp://@roxanne/private, then your login name
  * is supplied.
- * */
+ *
+ */
 
-static char *my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
+static char *
+my_get_host_and_username (char *path, char **host, char **user, int *port, char **pass)
 {
     return vfs_get_host_and_username (path, host, user, port, 21, 1, pass);
 }
 
 /* Returns a reply code, check /usr/include/arpa/ftp.h for possible values */
-static int get_reply (int sock, char *string_buf, int string_len)
+static int
+get_reply (int sock, char *string_buf, int string_len)
 {
     char answer[1024];
     int i;
@@ -208,8 +220,8 @@ static int get_reply (int sock, char *string_buf, int string_len)
     }
 }
 
-static int command (struct connection *bucket, int wait_reply,
-		    char *fmt, ...)
+static int
+command (struct connection *bucket, int wait_reply, char *fmt, ...)
 {
     va_list ap;
     char buf[2048]; /* FIXME: buffer exceed ?? */
@@ -1139,7 +1151,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     else
         print_vfs_message("ftpfs: Reading FTP directory...");
     if (has_spaces || bucket->strict_rfc959_list_cmd) 
-        if (__ftpfs_chdir(bucket, remote_path) != COMPLETE) {
+        if (ftpfs_chdir_internal (bucket, remote_path) != COMPLETE) {
             my_errno = ENOENT;
 	    print_vfs_message("ftpfs: CWD failed.");
 	    return NULL;
@@ -1528,7 +1540,7 @@ is_same_dir (char *path, struct connection *bucket)
 }
 
 static int
-__ftpfs_chdir (struct connection *bucket ,char *remote_path)
+ftpfs_chdir_internal (struct connection *bucket ,char *remote_path)
 {
     int r;
     

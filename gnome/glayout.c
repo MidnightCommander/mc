@@ -343,11 +343,11 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 
 GnomeUIInfo gnome_panel_menu [] = {
 	{ GNOME_APP_UI_SUBTREE, N_("_File"),     NULL, &gnome_panel_file_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Window"),    NULL, &gnome_panel_panel_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Commands"), NULL, &gnome_panel_commands_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Options"),  NULL, &gnome_panel_options_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Desktop"),  NULL, &gnome_panel_desktop_menu },
-	{ GNOME_APP_UI_SUBTREE, N_("Help"),     NULL, &gnome_panel_about_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Window"),    NULL, &gnome_panel_panel_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Commands"), NULL, &gnome_panel_commands_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Options"),  NULL, &gnome_panel_options_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Desktop"),  NULL, &gnome_panel_desktop_menu },
+	{ GNOME_APP_UI_SUBTREE, N_("_Help"),     NULL, &gnome_panel_about_menu },
 	{ GNOME_APP_UI_ENDOFINFO, 0, 0 }
 };
 
@@ -483,7 +483,7 @@ create_container (Dlg_head *h, char *name, char *geometry)
 	} else if (!other_panel_ptr)
 		other_panel_ptr = container;
 
-	bind_gtk_keys (GTK_WIDGET (app), h);
+/*	bind_gtk_keys (GTK_WIDGET (app), h); */
 	return panel;
 }
 

@@ -34,12 +34,16 @@ struct utimbuf {
 
     struct vfs_stamping;
 
-/* Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
-(RelianUNIX), where it is bad idea to define struct vfs. That system
-mas include called <sys/vfs.h>, which contains things like vfs_t.
+/*
+ * Notice: Andrej Borsenkow <borsenkow.msk@sni.de> reports system
+ * (RelianUNIX), where it is bad idea to define struct vfs. That system
+ * umust include called <sys/vfs.h>, which contains things like vfs_t.
  */
-    typedef struct vfs_struct {
-        struct vfs_struct *next;
+
+    typedef struct _vfs vfs;
+
+    struct _vfs {
+        vfs   *next;
         char  *name;		/* "FIles over SHell" */
         int   flags;
 #define F_EXEC 1
@@ -47,57 +51,64 @@ mas include called <sys/vfs.h>, which contains things like vfs_t.
         char  *prefix;		/* "#fish:" */
         void  *data;		/* this is for filesystem's own use */
         int   verrno;           /* can't use errno because glibc2 might define errno as function */
-        int   (*init)(struct vfs *me);	/* 1..initialized succesfully */
-        void  (*done)(struct vfs *me);
-        void  (*fill_names)(struct vfs *me, void (*)(char *));
-        int   (*which)(struct vfs *me, char *path); /* Returns '-1' if this path does not belong to this filesystem */
 
-	void  *(*open)(struct vfs *me, char *fname, int flags, int mode);
-	int   (*close)(void *vfs_info);
-	int   (*read)(void *vfs_info, char *buffer, int count);
-	int   (*write)(void *vfs_info, char *buf, int count);
-
-	void  *(*opendir)(struct vfs *me, char *dirname);
-	void  *(*readdir)(void *vfs_info);
-	int   (*closedir)(void *vfs_info);
- 	int   (*telldir)(void *vfs_info);
- 	void  (*seekdir)(void *vfs_info, int offset);
-
-	int  (*stat)(struct vfs *me, char *path, struct stat *buf);
-	int  (*lstat)(struct vfs *me, char *path, struct stat *buf);
-	int  (*fstat)(void *vfs_info, struct stat *buf);
-
-	int  (*chmod)(struct vfs *me, char *path, int mode);
-	int  (*chown)(struct vfs *me, char *path, int owner, int group);
-	int  (*utime)(struct vfs *me, char *path, struct utimbuf *times);
-
-	int  (*readlink)(struct vfs *me, char *path, char *buf, int size);
-	int  (*symlink)(struct vfs *me, char *n1, char *n2);
-	int  (*link)(struct vfs *me, char *p1, char *p2);
-	int  (*unlink)(struct vfs *me, char *path);
-	int  (*rename)(struct vfs *me, char *p1, char *p2);
-	int  (*chdir)(struct vfs *me, char *path);
-	int  (*ferrno)(struct vfs *me);
-	int  (*lseek)(void *vfs_info, off_t offset, int whence);
-	int  (*mknod)(struct vfs *me, char *path, int mode, int dev);
+        int   (*init)          (vfs *me);
+        void  (*done)          (vfs *me);
+        void  (*fill_names)    (vfs *me, void (*)(char *));
+			       
+        int   (*which)         (vfs *me, char *path);
+			       
+	void  *(*open) 	       (vfs *me, char *fname, int flags, int mode);
+	int   (*close) 	       (void *vfs_info);
+	int   (*read)  	       (void *vfs_info, char *buffer, int count);
+	int   (*write) 	       (void *vfs_info, char *buf, int count);
+			       
+	void  *(*opendir)      (vfs *me, char *dirname);
+	void  *(*readdir)      (void *vfs_info);
+	int   (*closedir)      (void *vfs_info);
+ 	int   (*telldir)       (void *vfs_info);
+ 	void  (*seekdir)       (void *vfs_info, int offset);
+			       
+	int  (*stat)           (vfs *me, char *path, struct stat *buf);
+	int  (*lstat)  	       (vfs *me, char *path, struct stat *buf);
+	int  (*fstat)  	       (void *vfs_info, struct stat *buf);
+			       
+	int  (*chmod)  	       (vfs *me, char *path, int mode);
+	int  (*chown)  	       (vfs *me, char *path, int owner, int group);
+	int  (*utime)  	       (vfs *me, char *path, struct utimbuf *times);
+			       
+	int  (*readlink)       (vfs *me, char *path, char *buf, int size);
+	int  (*symlink)        (vfs *me, char *n1, char *n2);
+	int  (*link)           (vfs *me, char *p1, char *p2);
+	int  (*unlink)         (vfs *me, char *path);
+	int  (*rename)         (vfs *me, char *p1, char *p2);
+	int  (*chdir)          (vfs *me, char *path);
+	int  (*ferrno)         (vfs *me);
+	int  (*lseek)          (void *vfs_info, off_t offset, int whence);
+	int  (*mknod)          (vfs *me, char *path, int mode, int dev);
 	
-	vfsid (*getid)(struct vfs *me, char *path, struct vfs_stamping **parent);
-	int  (*nothingisopen)(vfsid id);
-	void (*free)(vfsid id);
+	vfsid (*getid)         (vfs *me, char *path, struct vfs_stamping **
+				parent);
+	    
+	int  (*nothingisopen)  (vfsid id);
+	void (*free)           (vfsid id);
 	
-	char *(*getlocalcopy)(struct vfs *me, char *filename);
-	void (*ungetlocalcopy)(struct vfs *me, char *filename, char *local, int has_changed);
+	char *(*getlocalcopy)  (vfs *me, char *filename);
+	void (*ungetlocalcopy) (vfs *me, char *filename, char *local,
+				int has_changed);
 
-	int  (*mkdir)(struct vfs *me, char *path, mode_t mode);
-	int  (*rmdir)(struct vfs *me, char *path);
+	int  (*mkdir)          (vfs *me, char *path, mode_t mode);
+	int  (*rmdir)          (vfs *me, char *path);
 	
-	int  (*ctl)(void *vfs_info, int ctlop, int arg);
-	int  (*setctl)(struct vfs *me, char *path, int ctlop, char *arg);
+	int  (*ctl)            (void *vfs_info, int ctlop, int arg);
+	int  (*setctl)         (vfs *me, char *path, int ctlop, char *arg);
 #ifdef HAVE_MMAP
-	caddr_t (*mmap)(struct vfs *me, caddr_t addr, size_t len, int prot, int flags, void *vfs_info, off_t offset);
-	int (*munmap)(struct vfs *me, caddr_t addr, size_t len, void *vfs_info);
+	caddr_t (*mmap)        (vfs *me, caddr_t addr, size_t len, int prot,
+				int flags, void *vfs_info, off_t offset);
+	int (*munmap)          (vfs *me, caddr_t addr, size_t len,
+				void *vfs_info);
 #endif	
-    } vfs;
+    };
 
     /* Other file systems */
     extern vfs vfs_local_ops;
@@ -163,35 +174,36 @@ mas include called <sys/vfs.h>, which contains things like vfs_t.
     
     /* Only the routines outside of the VFS module need the emulation macros */
 
-	int mc_open (char *file, int flags, ...);
-	int mc_close (int handle);
-	int mc_read (int handle, char *buffer, int count);
-	int mc_write (int hanlde, char *buffer, int count);
+	int   mc_open  (char *file, int flags, ...);
+	int   mc_close (int handle);
+	int   mc_read  (int handle, char *buffer, int count);
+	int   mc_write (int hanlde, char *buffer, int count);
 	off_t mc_lseek (int fd, off_t offset, int whence);
-	int mc_chdir (char *);
+	int   mc_chdir (char *);
 
-	DIR *mc_opendir (char *dirname);
+	DIR  *mc_opendir (char *dirname);
 	struct dirent *mc_readdir(DIR *dirp);
 	int mc_closedir (DIR *dir);
  	int mc_telldir (DIR *dir);
  	void mc_seekdir (DIR *dir, int offset);
 
-	int mc_stat (char *path, struct stat *buf);
+	int mc_stat  (char *path, struct stat *buf);
 	int mc_lstat (char *path, struct stat *buf);
 	int mc_fstat (int fd, struct stat *buf);
 
-	int mc_chmod (char *path, int mode);
-	int mc_chown (char *path, int owner, int group);
-	int mc_utime (char *path, struct utimbuf *times);
-	int mc_readlink(char *path, char *buf, int bufsiz);
-	int mc_unlink (char *path);
-	int mc_symlink (char *name1, char *name2);
-        int mc_link (char *name1, char *name2);
-        int mc_mknod (char *, int, int);
-	int mc_rename (char *original, char *target);
-	int mc_write (int fd, char *buf, int nbyte);
-        int mc_rmdir (char *path);
-        int mc_mkdir (char *path, mode_t mode);
+	int mc_chmod    (char *path, int mode);
+	int mc_chown    (char *path, int owner, int group);
+	int mc_utime    (char *path, struct utimbuf *times);
+	int mc_readlink (char *path, char *buf, int bufsiz);
+	int mc_unlink   (char *path);
+	int mc_symlink  (char *name1, char *name2);
+        int mc_link     (char *name1, char *name2);
+        int mc_mknod    (char *, int, int);
+	int mc_rename   (char *original, char *target);
+	int mc_write    (int fd, char *buf, int nbyte);
+        int mc_rmdir    (char *path);
+        int mc_mkdir    (char *path, mode_t mode);
+
         char *mc_getlocalcopy (char *filename);
         void mc_ungetlocalcopy (char *filename, char *local, int has_changed);
         char *mc_def_getlocalcopy (vfs *vfs, char *filename);

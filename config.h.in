@@ -101,9 +101,9 @@
 /* If using the C implementation of alloca, define if you know the
    direction of stack growth for your system; otherwise it will be
    automatically deduced at run-time.
-	STACK_DIRECTION > 0 => grows toward higher addresses
-	STACK_DIRECTION < 0 => grows toward lower addresses
-	STACK_DIRECTION = 0 => direction of growth unknown
+ STACK_DIRECTION > 0 => grows toward higher addresses
+ STACK_DIRECTION < 0 => grows toward lower addresses
+ STACK_DIRECTION = 0 => direction of growth unknown
  */
 #undef STACK_DIRECTION
 
@@ -112,6 +112,9 @@
 
 /* Define to `int' if <sys/types.h> doesn't define.  */
 #undef uid_t
+
+/* Define if the X Window System is missing or not being used.  */
+#undef X_DISPLAY_MISSING
 
 #undef VERSION
 #undef PACKAGE
@@ -404,9 +407,6 @@
 
 /* Define if you have the truncate function.  */
 #undef HAVE_TRUNCATE
-
-/* Define if you have the valloc function.  */
-#undef HAVE_VALLOC
 
 /* Define if you have the <argz.h> header file.  */
 #undef HAVE_ARGZ_H

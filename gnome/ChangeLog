@@ -1,3 +1,7 @@
+1998-10-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c: Use the new icon list. 
+
 1998-09-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Hook to invoke the editor from the context menu.

@@ -254,8 +254,8 @@ panel_fill_panel_icons (WPanel *panel)
 	}
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
-	select_item (panel);
 	gnome_icon_list_thaw (icons);
+	select_item (panel);
 }
 
 /*
@@ -318,7 +318,7 @@ x_select_item (WPanel *panel)
 		display_mini_info (panel);
 		gnome_icon_list_select_icon (list, panel->selected);
 
-		if (list->icon_rows){
+		if (list->icon_list){
 			if (gnome_icon_list_icon_is_visible (list, panel->selected) != GTK_VISIBILITY_FULL)
 				gnome_icon_list_moveto (list, panel->selected, 0.5);
 		}
@@ -1124,7 +1124,7 @@ panel_icon_list_drag_begin (GtkWidget *widget, GdkEvent *event, WPanel *panel)
 {
 	GnomeIconList *icons = GNOME_ICON_LIST (panel->icons);
 	
-	icons->last_clicked = -1;
+	icons->last_clicked = NULL;
 	panel_drag_begin (widget, event, panel);
 }
 
@@ -1299,13 +1299,11 @@ load_imlib_icons (void)
 
 	loaded = 1;
 }
-		  
+
 static void
 panel_icon_list_artificial_drag_start (GtkObject *obj, GdkEventMotion *event)
 {
-	GnomeIconList *ilist = GNOME_ICON_LIST (obj);
-
-	artificial_drag_start (ilist->ilist_window, event->x, event->y);
+	artificial_drag_start (GTK_WIDGET (obj)->window, event->x, event->y);
 }
 
 /*
@@ -1314,14 +1312,13 @@ panel_icon_list_artificial_drag_start (GtkObject *obj, GdkEventMotion *event)
 static void
 panel_icon_list_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
 {
-	GnomeIconList *ilist = GNOME_ICON_LIST (widget);
 	char *data;
 	int len;
 
 	panel_drag_request (widget, event, panel, &len, &data);
 
 	if (len && data){
-		gdk_window_dnd_data_set (ilist->ilist_window, (GdkEvent *) event, data, len);
+		gdk_window_dnd_data_set (widget->window, (GdkEvent *) event, data, len);
 		free (data);
 	}
 }
@@ -1335,7 +1332,7 @@ panel_icon_list_drop_data_available (GtkWidget *widget, GdkEventDropDataAvailabl
 	gint item;
 	char *drop_dir;
 	
-	gdk_window_get_origin (ilist->ilist_window, &winx, &winy);
+	gdk_window_get_origin (widget->window, &winx, &winy);
 	dropx = data->coords.x - winx;
 	dropy = data->coords.y - winy;
 
@@ -1376,7 +1373,8 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);
 	gtk_signal_connect (obj, "drag_begin_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_begin), panel);
-	gdk_window_dnd_drag_set (icon->ilist_window, TRUE, drag_types, ELEMENTS (drag_types));
+	gdk_window_dnd_drag_set (GTK_WIDGET (icon)->window,
+				 TRUE, drag_types, ELEMENTS (drag_types));
 	
 	/* DND: Drop setup */
 	gtk_signal_connect (obj, "drop_data_available_event",
@@ -1384,7 +1382,7 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	
 	gtk_signal_connect (obj, "motion_notify_event",
 			    GTK_SIGNAL_FUNC (panel_icon_list_artificial_drag_start), panel);
-	gdk_window_dnd_drop_set (icon->ilist_window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
+	gdk_window_dnd_drop_set (GTK_WIDGET (icon)->window, TRUE, drop_types, ELEMENTS (drop_types), FALSE);
 }
 
 /*
@@ -1395,24 +1393,29 @@ panel_create_icon_display (WPanel *panel)
 {
 	GnomeIconList *icon_field;
 
-	icon_field = GNOME_ICON_LIST (gnome_icon_list_new ());
+	icon_field = GNOME_ICON_LIST (gnome_icon_list_new (100, NULL, TRUE));
 	gnome_icon_list_set_separators (icon_field, " /-_.");
 	gnome_icon_list_set_row_spacing (icon_field, 2);
 	gnome_icon_list_set_col_spacing (icon_field, 2);
-	gnome_icon_list_set_icon_border (icon_field, 4);
+	gnome_icon_list_set_icon_border (icon_field, 2);
 	gnome_icon_list_set_text_spacing (icon_field, 2);
 	
-	icon_field->desired_text_width = 100;
-		
 	gnome_icon_list_set_selection_mode (icon_field, GTK_SELECTION_MULTIPLE);
+	GTK_WIDGET_SET_FLAGS (icon_field, GTK_CAN_FOCUS);
+	
+	gtk_signal_connect (
+		GTK_OBJECT (icon_field), "select_icon",
+		GTK_SIGNAL_FUNC (panel_icon_list_select_icon), panel);
+	gtk_signal_connect (
+		GTK_OBJECT (icon_field), "unselect_icon",
+		GTK_SIGNAL_FUNC (panel_icon_list_unselect_icon), panel);
 
-	gtk_signal_connect (GTK_OBJECT (icon_field), "select_icon",
-			    GTK_SIGNAL_FUNC (panel_icon_list_select_icon), panel);
-	gtk_signal_connect (GTK_OBJECT (icon_field), "unselect_icon",
-			    GTK_SIGNAL_FUNC (panel_icon_list_unselect_icon), panel);
+	gtk_signal_connect (
+		GTK_OBJECT (icon_field), "realize",
+		GTK_SIGNAL_FUNC (panel_icon_list_realized), panel);
 
-	gtk_signal_connect (GTK_OBJECT (icon_field), "realize",
-			    GTK_SIGNAL_FUNC (panel_icon_list_realized), panel);
+	gnome_icon_list_thaw (icon_field);
+	
 	return GTK_WIDGET (icon_field);
 }
 
@@ -1787,12 +1790,16 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	GtkWidget *status_line, *filter, *vbox;
 	GtkWidget *frame, *cwd, *back_p, *fwd_p;
 	GtkWidget *display;
-
+	GtkWidget *scrollbar;
+		
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
 	
 	panel->table = gtk_table_new (2, 1, 0);
 
 	panel->icons = panel_create_icon_display (panel);
+	scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
+	gtk_widget_show (scrollbar);
+	
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
 	gtk_widget_ref (panel->list);
@@ -1859,6 +1866,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/* Add both the icon view and the listing view */
 	gtk_table_attach (GTK_TABLE (panel->table), panel->icons, 0, 1, 1, 2,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_table_attach (GTK_TABLE (panel->table), scrollbar, 1, 2, 1, 2,
+			  0,
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
