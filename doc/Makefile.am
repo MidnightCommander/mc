@@ -1,4 +1,4 @@
-DIST_SUBDIRS = es hu it pl ru
+DIST_SUBDIRS = es hu it pl ru sr
 SUBDIRS = $(DOC_LINGUAS)
 
 if USE_MCFS

@@ -114,7 +114,7 @@ if test "x$USE_INCLUDED_LIBINTL" = xyes; then
 fi
 
 dnl Determine which help translations we want to install.
-ALL_DOC_LINGUAS="es hu it pl ru"
+ALL_DOC_LINGUAS="es hu it pl ru sr"
 
 DOC_LINGUAS=
 if test "x$USE_NLS" = xyes; then
@@ -670,6 +670,7 @@ doc/hu/mc.1 doc/hu/Makefile
 doc/it/mc.1 doc/it/Makefile
 doc/pl/mc.1 doc/pl/Makefile
 doc/ru/mc.1 doc/ru/Makefile
+doc/sr/mc.1 doc/sr/mcserv.8 doc/sr/Makefile
 
 intl/Makefile
 po/Makefile.in

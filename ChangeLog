@@ -1,3 +1,12 @@
+2003-09-22  Strahinya Radich  <mr99164@alas.matf.bg.ac.yu>
+
+	* lib/mc.hint.sr: Updated.
+	* lib/mc.menu.sr: New file - translated menu.
+	* lib/Makefile.am: Add mc.menu.sr.
+	* doc/sr/: New Serbian documentation.
+	* doc/Makefile.am: Add "sr" directory.
+	* configure.in: Add substitutions for new files.
+
 2003-09-22  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Check for strlcpy() is glib 1.2.x is used.
