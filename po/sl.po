@@ -96,7 +96,7 @@ msgstr "odprtje"
 
 #: gnome/gaction.c:194 gnome/gaction.c:211
 msgid "edit"
-msgstr "ureditev"
+msgstr "urejanje"
 
 #: gnome/gaction.c:351
 msgid "view"
@@ -104,7 +104,7 @@ msgstr "pogled"
 
 #: gnome/gcmd.c:50
 msgid " There is no other panel to compare contents to "
-msgstr " Drug pult, da bi lahko primerjal vsebino, ne obstaja"
+msgstr " Ne obstaja drug pult za primerjanje vsebine z "
 
 #: gnome/gcmd.c:86
 msgid " Could not start a terminal "
@@ -250,7 +250,7 @@ msgstr "Vnessite dodatne argumente:"
 
 #: gnome/gcmd.c:877
 msgid "Desktop entry properties"
-msgstr "Lastnosti vnosa v namizju"
+msgstr "Lastnosti vnosa na namizju"
 
 #: gnome/gcmd.c:903
 msgid "Select File"
@@ -756,7 +756,7 @@ msgstr "Preklopi pogled, da prika¾e stanje po meri"
 
 #: gnome/glayout.c:57
 msgid "Icons"
-msgstr "Ikonsko"
+msgstr "Ikone"
 
 #: gnome/glayout.c:60
 msgid "Brief"
@@ -1312,7 +1312,7 @@ msgstr "Izvrzi napravo"
 
 #: gnome/gpopup2.c:283
 msgid "Empty Trash"
-msgstr "Sprazni Smetnjak"
+msgstr "Sprazni smeti"
 
 #: gnome/gpopup2.c:286
 msgid "Open with..."
@@ -1320,7 +1320,7 @@ msgstr "Odpri z..."
 
 #: gnome/gpopup2.c:288
 msgid "View Unfiltered"
-msgstr "Poglej nefiltrirano"
+msgstr "Nefiltriran pogled"
 
 #: gnome/gpopup2.c:291
 msgid "Copy..."
@@ -1328,7 +1328,7 @@ msgstr "Kopiraj..."
 
 #: gnome/gpopup2.c:292
 msgid "Move to Trash"
-msgstr "Prestavi v Smetnjak"
+msgstr "Prestavi v smeti"
 
 #: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2399
 #: src/screen.c:2429
@@ -1497,11 +1497,11 @@ msgstr "Tu ustvari nov imenik"
 
 #: gnome/gscreen.c:1437
 msgid "Empty _Trash"
-msgstr "Sprazni _Smetnjak"
+msgstr "Sprazni _smeti"
 
 #: gnome/gscreen.c:1437
 msgid "Empties the Trash"
-msgstr "Sprazni Smetnjak"
+msgstr "Sprazni smeti"
 
 #: gnome/gscreen.c:1653
 #, c-format
@@ -1605,11 +1605,11 @@ msgstr "%s bajtov"
 
 #: gnome/gview.c:306
 msgid "_Goto line"
-msgstr "Skoèi na vrstico"
+msgstr "Pojdi v vrstico"
 
 #: gnome/gview.c:307
 msgid "Jump to a specified line number"
-msgstr "Skoèi na doloèeno ¹tevilko vrstice"
+msgstr "Pojdi v doloèeno ¹tevilko vrstice"
 
 #: gnome/gview.c:309
 msgid "_Monitor file"
@@ -1633,7 +1633,7 @@ msgstr "_Prevoj"
 
 #: gnome/gview.c:327
 msgid "Wrap the text"
-msgstr "Previjaj text"
+msgstr "Prevoj besedila"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:330
@@ -2238,7 +2238,7 @@ msgstr " Izre¾i in postavi na odlo¾i¹èe "
 #: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
 #: gtkedit/editcmd.c:2737 src/view.c:1915
 msgid " Goto line "
-msgstr " Skoèi na vrstico "
+msgstr " Pojdi v vrstico "
 
 #: gtkedit/editcmd.c:2725 gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2734
 #: gtkedit/editcmd.c:2737
@@ -2361,8 +2361,8 @@ msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
 "\n"
-" Avtorsko za¹èiteno (C) 1996 the Free Software Foundation (fundacija za "
-"prosto programje)\n"
+"       Avtorske pravice pridr¾ane (C) 1996\n"
+"          Fundacija za prosto programje\n"
 "\n"
 "       Uporabniku prijazen urejevalnik besedil\n"
 "           za Polnoènega Poveljnika.\n"
@@ -2477,7 +2477,7 @@ msgstr "&Obnovi zaslon"
 
 #: gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
 msgid "&Start record macro      C-r"
-msgstr "&Zaèni snemati marko     C-r"
+msgstr "&Zaèni snemanje marka     C-r"
 
 #: gtkedit/editmenu.c:222 gtkedit/editmenu.c:245
 msgid "&Finish record macro...  C-r"
@@ -2678,7 +2678,7 @@ msgstr "I¹èi za in zamenjaj besedilo"
 
 #: gtkedit/editmenu.c:466
 msgid "Goto line...\tM-l"
-msgstr "Skoèi v vrstico...\tM-l"
+msgstr "Pojdi v vrstico...\tM-l"
 
 #: gtkedit/editmenu.c:467
 msgid "Goto matching bracket\tM-b"
@@ -2690,7 +2690,7 @@ msgstr "Zaèni snemanje makra\tC-r"
 
 #: gtkedit/editmenu.c:470
 msgid "Finish record macro...\tC-r"
-msgstr "Konèaj snemanje marka...\tC-r"
+msgstr "Konèaj snemanje makra...\tC-r"
 
 #: gtkedit/editmenu.c:471
 msgid "Execute macro...\tC-a, KEY"
@@ -3411,7 +3411,7 @@ msgstr "Ne morem spremeniti imenika"
 
 #: src/cmd.c:280
 msgid " View file "
-msgstr " Poglej datoteko"
+msgstr " Pogled datoteke"
 
 #: src/cmd.c:280
 msgid " Filename:"
@@ -3621,12 +3621,12 @@ msgstr " Nastavitev usmerjanja vtièev z izvora"
 #: src/cmd.c:1405
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
-" Vpi¹ite ime gostitelja, ki naj ga uporabim za preskok pri usmerjanju z "
+" Vpi¹ite ime raèunalnika, ki naj ga uporabim za preskok pri usmerjanju z "
 "izvora: "
 
 #: src/cmd.c:1413
 msgid " Host name "
-msgstr " Ime gostitelja "
+msgstr " Ime raèunalnika "
 
 #: src/cmd.c:1413
 msgid " Error while looking up IP address "
@@ -3658,7 +3658,7 @@ msgid ""
 " Can't chdir to '%s' \n"
 " %s "
 msgstr ""
-" Ne morem zamenjati imenika v '%s' \n"
+" Ne morem iti v imenik '%s' \n"
 " %s "
 
 #: src/command.c:198
@@ -4000,7 +4000,7 @@ msgstr ""
 #: src/file.c:531
 #, c-format
 msgid " `%s' and `%s' are the same file. "
-msgstr " datoteki `%s' and `%s' sta isti. "
+msgstr " datoteki `%s' in `%s' sta isti. "
 
 #: src/file.c:574
 #, c-format
@@ -4539,11 +4539,11 @@ msgstr "Daj v Pu&lt"
 
 #: src/find.c:136
 msgid "&View - F3"
-msgstr "&Poglej - F3"
+msgstr "&Pogled - F3"
 
 #: src/find.c:137
 msgid "&Edit - F4"
-msgstr "&Utrfi - F4"
+msgstr "&Uredi - F4"
 
 #: src/find.c:170
 msgid "Start at:"
@@ -4814,7 +4814,7 @@ msgstr "Polnoèni Poveljnik ni mogel zapisati ~/"
 
 #: src/hotlist.c:1417
 msgid " file, your old hotlist entries were not deleted"
-msgstr " datoteke, va¹i stari vpisi v vroèi seznam ne bodo izbrisani"
+msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
 #: src/hotlist.c:1431
 msgid "You have ~/"
@@ -4878,7 +4878,7 @@ msgstr " Vnosi iz ~/"
 
 #: src/hotlist.c:1465
 msgid " file your old hotlist entries were not deleted"
-msgstr " datoteke, va¹e stari vpisi v vroèi seznam niso bili izbrisani"
+msgstr " datoteke, va¹i stari vpisi v vroèi seznam niso bili zbrisani"
 
 #: src/info.c:83
 #, c-format
@@ -4917,7 +4917,7 @@ msgstr "Tip:       %s "
 
 #: src/info.c:143
 msgid "non-local vfs"
-msgstr "ne-lokalen navidezni datoteèni sistem (vfs)"
+msgstr "ne-krajeven navidezni datoteèni sistem (vfs)"
 
 #: src/info.c:149
 #, c-format
@@ -5396,7 +5396,7 @@ msgstr " &Desno "
 
 #: src/main.c:1397
 msgid " &Below "
-msgstr " &Spodaj "
+msgstr " &Pod "
 
 #: src/main.c:1452
 msgid " Information "
@@ -5860,7 +5860,7 @@ msgstr " Vnesite oznèbo ukaza: "
 msgid " I can't run external panelize while logged on a non local directory "
 msgstr ""
 " Ne morem pognati dodajanja v pult od zunaj dokler sem prijavljen na "
-"ne-lokalen imenik "
+"ne-krajeven imenik "
 
 #: src/panelize.c:351
 msgid "Find *.orig after patching"
@@ -6253,7 +6253,7 @@ msgstr ""
 
 #: src/view.c:1937
 msgid " Goto Address "
-msgstr " Skoèi na naslov"
+msgstr " Pojdi na naslov"
 
 #: src/view.c:1968
 msgid " Enter regexp:"
@@ -6269,7 +6269,7 @@ msgstr "©estnajsti¹ko"
 
 #: src/view.c:2074
 msgid "Goto"
-msgstr "Skoèi na"
+msgstr "Pojdi v"
 
 #: src/view.c:2074
 msgid "Line"
@@ -6289,11 +6289,11 @@ msgstr "Uredi Heksadeicmalno"
 
 #: src/view.c:2082
 msgid "UnWrap"
-msgstr "Ne previjaj vrstic"
+msgstr "Izklopi prevoj"
 
 #: src/view.c:2082
 msgid "Wrap"
-msgstr "Previjaj vrstice"
+msgstr "Prevoj"
 
 #: src/view.c:2085
 msgid "HxSrch"
@@ -7008,7 +7008,7 @@ msgstr " undelfs: napaka "
 
 #: vfs/undelfs.c:184
 msgid " not enough memory "
-msgstr " pomnilnika ni dovolj "
+msgstr " ni dovolj pomnilnika "
 
 #: vfs/undelfs.c:189
 msgid " while allocating block buffer "
