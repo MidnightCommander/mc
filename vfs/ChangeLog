@@ -1,4 +1,4 @@
-2004-10-05  Andrew V. Samoilov  <sav@bcs.zp.ua>
+2004-10-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* cpio.c (cpio_find_head): Check mc_read() return value.
 	(cpio_read_crc_head): Handle mc_read() return value properly.
@@ -8,6 +8,8 @@
 2004-10-06  Alexander Savelyev  <i@fano.com.ua>
 
 	* xdirentry.h (linear_start): Use off_t for offset.
+	* ftpfs.c (ftpfs_linear_start): Likewise.
+	* fish.c (fish_linear_start): Likewise.
 
 2004-10-05  Miroslav Rudisin  <miero+gnu@atrey.karlin.mff.cuni.cz>
 
@@ -19,10 +21,9 @@
 	to avoid possible segmentation fault.  Close
 	https://savannah.gnu.org/bugs/index.php?func=detailitem&item_id=8974
 
-
 2004-09-26  Roland Illig  <roland.illig@gmx.de>
 
-	* vfs.c (_vfs_get_class): Reverted my last patch because
+	* vfs.c (_vfs_get_class): Revert my last patch because
 	Leonard reported it to make mc crash.
 
 2004-09-25  Roland Illig  <roland.illig@gmx.de>

@@ -1366,7 +1366,7 @@ error_return:
 }
 
 static int 
-ftpfs_linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
+ftpfs_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 {
     char *name = vfs_s_fullpath (me, fh->ino);
 

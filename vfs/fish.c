@@ -572,7 +572,8 @@ error_return:
     return -1;
 }
 
-static int fish_linear_start(struct vfs_class *me, struct vfs_s_fh *fh, int offset)
+static int
+fish_linear_start (struct vfs_class *me, struct vfs_s_fh *fh, off_t offset)
 {
     char *name;
     char *quoted_name;
