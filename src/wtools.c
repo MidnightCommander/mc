@@ -1,7 +1,3 @@
-/* {{{  */
-
-/* {{{ Copyright Notice */
-
 /* Widget based utility functions.
    Copyright (C) 1994, 1995 the Free Software Foundation
    
@@ -26,8 +22,6 @@
 
  */
 
-/* }}} */
-
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,9 +39,6 @@
 #include "key.h"	/* For mi_getch() */
 #include "complete.h"   /* INPUT_COMPLETE_CD */
 
-/* }}} */
-
-/* {{{ Listbox utility functions */
 
 Listbox *
 create_listbox_window (int cols, int lines, char *title, char *help)
@@ -100,17 +91,14 @@ int run_listbox (Listbox *l)
     return val;
 }
 
-/* }}} */
 
-
-/* {{{ Query Dialog functions */
 static Dlg_head *last_query_dlg;
 
 static int sel_pos = 0;
 
 /* Used to ask questions to the user */
 int
-query_dialog (char *header, char *text, int flags, int count, ...)
+query_dialog (const char *header, const char *text, int flags, int count, ...)
 {
     va_list ap;
     Dlg_head *query_dlg;
@@ -205,38 +193,70 @@ void query_set_sel (int new_sel)
     sel_pos = new_sel;
 }
 
-/* }}} */
 
-/* {{{ The message function */
-
-/* To show nice messages to the users */
-struct Dlg_head *
-message (int error, char *header, const char *text, ...)
+/* Create message dialog */
+static struct Dlg_head *
+do_create_message (int flags, const char *title, const char *text)
 {
-    va_list  args;
-    char     buffer [4096];
+    char *p;
     Dlg_head *d;
 
-    /* Setup the display information */
-    strcpy (buffer, "\n");
-    va_start (args, text);
-    g_vsnprintf (&buffer [1], sizeof (buffer) - 2, text, args);
-    strcat (buffer, "\n");
-    va_end (args);
-    
-    query_dialog (header, buffer, error, 0);
-
+    /* Add empty lines before and after the message */
+    p = g_strdup_printf ("\n%s\n", text);
+    query_dialog (title, p, flags, 0);
     d = last_query_dlg;
     init_dlg (d);
-    if (!(error & D_INSERT)){
-	mi_getch ();
-	dlg_run_done (d);
-	destroy_dlg (d);
-    } else
-	return d;
-    return 0;
+    g_free (p);
+
+    return d;
 }
-/* }}} */
+
+
+/*
+ * Create message dialog.  The caller must call dlg_run_done() and
+ * destroy_dlg() to dismiss it.  Not safe to call from background.
+ */
+struct Dlg_head *
+create_message (int flags, const char *title, const char *text, ...)
+{
+    va_list args;
+    Dlg_head *d;
+    char *p;
+
+    va_start (args, text);
+    p = g_strdup_vprintf (text, args);
+    va_end (args);
+
+    d = do_create_message (flags, title, p);
+    g_free (p);
+
+    return d;
+}
+
+
+/*
+ * Show message dialog.  Dismiss it when any key is pressed.
+ * Not safe to call from background.
+ */
+void
+message (int flags, const char *title, const char *text, ...)
+{
+    va_list args;
+    Dlg_head *d;
+    char *p;
+
+    va_start (args, text);
+    p = g_strdup_vprintf (text, args);
+    va_end (args);
+
+    d = do_create_message (flags, title, p);
+    g_free (p);
+
+    mi_getch ();
+    dlg_run_done (d);
+    destroy_dlg (d);
+}
+
 
 /* {{{ Quick dialog routines */
 

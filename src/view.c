@@ -1595,7 +1595,7 @@ search (WView *view, char *text,
     got_interrupt ();
 
     if (verbose) {
-	d = message (D_INSERT, _("Search"), _("Searching %s"), text);
+	d = create_message (D_NORMAL, _("Search"), _("Searching %s"), text);
 	mc_refresh ();
     }
 

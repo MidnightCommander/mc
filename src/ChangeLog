@@ -1,5 +1,11 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (msglen): Constify first argument.
+	* wtools.c (query_dialog): Constify string argments.
+	(create_message): New function, forked from message().
+	(message): Return void.  Allocate memory dynamically.
+	* wtools.h: Eliminate D_INSERT.  Adjust all users.
+
 	* background.c: Replace all message stubs with a new function
 	mc_message().  Protect against strlen(MSG_ERROR).  Adjust all
 	dependencies.

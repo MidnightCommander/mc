@@ -68,19 +68,21 @@ char *real_input_dialog_help (char *header, char *text, char *help, char *def_te
 
 void query_set_sel (int new_sel);
 
-struct Dlg_head *message (int error, char *header, const char *text, ...)
+struct Dlg_head *create_message (int flags, const char *title,
+				 const char *text, ...)
+    __attribute__ ((format (printf, 3, 4)));
+void message (int flags, const char *title, const char *text, ...)
     __attribute__ ((format (printf, 3, 4)));
 
 /* Use this as header for message() - it expands to "Error" */
 #define MSG_ERROR ((char *) -1)
 
-int query_dialog (char *header, char *text, int flags, int count, ...);
+int query_dialog (const char *header, const char *text, int flags, int count, ...);
 
 /* flags for message() and query_dialog() */
 enum {
    D_NORMAL = 0,
    D_ERROR  = 1,
-   D_INSERT = 2
 } /* dialog options */;
 
 #endif	/* __WTOOLS_H */

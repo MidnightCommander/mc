@@ -90,7 +90,7 @@ is_printable (int c)
 }
 
 /* Returns the message dimensions (lines and columns) */
-int msglen (char *text, int *lines)
+int msglen (const char *text, int *lines)
 {
     int max = 0;
     int line_len = 0;

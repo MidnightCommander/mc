@@ -7,7 +7,7 @@
 /* String managing functions */
 
 int  is_printable (int c);
-int  msglen (char *text, int *lines);
+int  msglen (const char *text, int *lines);
 char *trim (char *s, char *d, int len);
 char *name_quote (const char *c, int quote_percent);
 char *fake_name_quote (const char *c, int quote_percent);
