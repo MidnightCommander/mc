@@ -97,7 +97,7 @@ execute_with_vfs_arg (const char *command, const char *filename)
     time_t mtime;
 
     /* Simplest case, this file is local */
-    if (vfs_file_is_local (filename)) {
+    if (!filename || vfs_file_is_local (filename)) {
 	execute_internal (command, filename);
 	return;
     }
@@ -348,7 +348,7 @@ edit_cmd (void)
 void
 edit_cmd_new (void)
 {
-    do_edit ("");
+    do_edit (NULL);
 }
 
 /* Invoked by F5.  Copy, default to the other panel.  */

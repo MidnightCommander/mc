@@ -1,3 +1,11 @@
+2003-02-11  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (edit_cmd_new): Call editor with NULL argiment, not with
+	an empty string.  nvi won't save the file if invoked with an
+	empty argument.
+	(execute_with_vfs_arg): Don't call vfs_file_is_local() on NULL.
+	Reported by Adam Byrtek <alpha@debian.org>
+
 2003-02-04  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (get_random_hint): Add "force" argument to ignore
