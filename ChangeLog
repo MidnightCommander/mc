@@ -1,6 +1,11 @@
-2001-12-27 Duarte Loreto <happyguy_pt@hotmail.com>
+2001-12-31  Pavel Roskin  <proski@gnu.org>
 
-        * configure.in: Added portuguese to ALL_LINGUAS
+	* configure.in: Generate vfs/Makefile from vfs/Makefile.in, not
+	from vfs/Make-mc.in.
+
+2001-12-27 Duarte Loreto  <happyguy_pt@hotmail.com>
+
+	* configure.in: Added portuguese to ALL_LINGUAS
 
 2001-12-21  Pavel Roskin  <proski@gnu.org>
 

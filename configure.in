@@ -760,7 +760,7 @@ AC_CONFIG_FILES([
 Makefile 
 mc.spec
 doc/Makefile 
-vfs/Makefile:vfs/Make-mc.in
+vfs/Makefile
 vfs/extfs/Makefile
 lib/Makefile
 src/Makefile
