@@ -27,6 +27,7 @@
 #include "src/tty.h"		/* LINES */
 #include "src/widget.h"		/* redraw_labels() */
 #include "src/menu.h"		/* menubar_new() */
+#include "src/key.h"		/* is_idle() */
 
 WEdit *wedit;
 struct WMenu *edit_menubar;
