@@ -43,8 +43,6 @@
 #	include <sys/time.h>	/* select(), gettimeofday(), etc.     */
 #endif /* SCO_FLAVOR */
 #include <sys/stat.h>	/* Required by dir.h & panel.h below  */
-#include <sys/param.h>	/* Required by panel.h below	      */
-#include "tty.h"
 
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For pipe, fork, setsid, access etc */
@@ -78,12 +76,13 @@
 #   include <unix.h>	/* exec*() from <process.h> */
 #endif
 
+#include "global.h"	/* For home_dir			      */
+#include "tty.h"
 #include "dir.h"	/* Required by panel.h below	      */
 #include "util.h"	/* Required by panel.h		      */
 #include "panel.h"	/* For WPanel and current_panel	      */
 #include "dialog.h"	/* For query_dialog()		      */
 #include "main.h"	/* For cpanel, quit & init_sigchld()  */
-#include "global.h"	/* For home_dir			      */
 #include "cons.saver.h"	/* For handle_console(), etc.	      */
 #include "key.h"	/* XCTRL and ALT macros		      */
 #include "subshell.h"

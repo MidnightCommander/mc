@@ -7,7 +7,6 @@
 #include <iconv.h>
 
 #include "global.h"
-#include "x.h"
 #include "charsets.h"
 
 int n_codepages = 0;

@@ -20,13 +20,13 @@
 #ifdef NEEDS_IO_H
 #    include <io.h>
 #endif
-#include "tty.h"
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
+
 #include "global.h"
-#include "x.h"
+#include "tty.h"
 #include "dialog.h"
 #include "color.h"
 #include "dir.h"

@@ -23,7 +23,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/param.h>		/* Required by tree.h */
 #include <sys/types.h>
 #include <sys/stat.h>
 #if (!defined(__IBMC__) && !defined(__IBMCPP__)) && !defined(HAS_NO_TERMIOS_H)
@@ -40,16 +39,15 @@
 #   include <unistd.h>
 #endif
 #include <signal.h>
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "key.h"
-
 #include "dlg.h"
 #include "widget.h"
 #include "command.h"
-
 #include "dialog.h"		/* For do_refresh() */
 #include "profile.h"		/* For sync_profiles() */
 #include "mouse.h"
@@ -70,8 +68,6 @@
 
 #define WANT_WIDGETS
 #include "setup.h"		/* For save_setup() */
-
-#include "x.h"
 
 /* "$Id$" */
 

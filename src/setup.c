@@ -18,11 +18,11 @@
 #include <config.h>
 #include <sys/types.h>		/* Needed to include local .h files */
 #include <sys/stat.h>
-#include <sys/param.h>
 #include <string.h>
-#include "tty.h"
 #include <stdio.h>
+
 #include "global.h"
+#include "tty.h"
 #include "dir.h"
 #include "panel.h"
 #include "main.h"
@@ -40,11 +40,6 @@
 #include "win.h"		/* lookup_key */
 #include "cmd.h"
 #include "file.h"
-#include "x.h"
-
-#ifdef HAVE_GNOME
-#    include "gdesktop.h"
-#endif
 
 #ifndef PORT_LIST_MODE_NAME
 #     define PORT_LIST_MODE_NAME "list_mode"

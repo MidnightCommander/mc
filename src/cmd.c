@@ -31,11 +31,6 @@
 
 #include <stdio.h>
 #include <sys/types.h>
-
-#ifdef HAVE_SYS_PARAM_H
-#   include <sys/param.h>
-#endif
-
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <string.h>
@@ -54,8 +49,8 @@
 #   include <sys/mman.h>
 #endif
 
-#include "tty.h"
 #include "global.h"
+#include "tty.h"
 #include "dir.h"
 #include "panel.h"
 #include "cmd.h"		/* Our definitions */
@@ -75,14 +70,12 @@
 #include "win.h"		/* do_exit_ca_mode */
 #include "layout.h"		/* get_current/other_type */
 #include "ext.h"		/* regex_command */
-#include "view.h"		/* view */
 #include "key.h"		/* get_key_code */
 #include "help.h"		/* interactive_display */
 #include "boxes.h"		/* cd_dialog */
 #include "color.h"
 #include "user.h"
 #include "setup.h"
-#include "x.h"
 #include "profile.h"
 
 #define MIDNIGHT

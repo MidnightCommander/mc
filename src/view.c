@@ -46,11 +46,14 @@
 #include <ctype.h>	/* For toupper() */
 #include <errno.h>
 #include <limits.h>
-#include <sys/param.h>
+#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
+#    include <rx.h>
+#else
+#    include <regex.h>
+#endif
 
 #include "global.h"
 #include "tty.h"
-#include "x.h"
 #include "cmd.h"		/* For view_other_cmd */
 #include "dlg.h"		/* Needed by widget.h */
 #include "widget.h"		/* Needed for buttonbar_new */
@@ -62,11 +65,6 @@
 #include "layout.h"
 #include "setup.h"
 #include "wtools.h"		/* For query_set_sel() */
-#if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
-#    include <rx.h>
-#else
-#    include <regex.h>
-#endif
 #include "../vfs/vfs.h"
 #include "dir.h"
 #include "panel.h" /* Needed for current_panel and other_panel */

@@ -31,7 +31,6 @@
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
 #include <sys/time.h>		/* select: timeout */
-#include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
@@ -61,12 +60,12 @@
 #ifdef __QNX__
 #   include <unix.h>		/* exec*() from <process.h> */
 #endif
+
 #include "global.h"
 #include "fsusage.h"
 #include "mountlist.h"
 #include "dialog.h"		/* message() */
 #include "../vfs/vfs.h"		/* mc_read() */
-#include "x.h"
 
 struct sigaction startup_handler;
 

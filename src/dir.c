@@ -23,7 +23,6 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <sys/stat.h>
-#include "x.h"
 #include "global.h"
 #include "dir.h"
 #include "dialog.h"

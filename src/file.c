@@ -65,21 +65,21 @@
 #    include <io.h>
 #endif /* NEEDS_IO_H */
 #include <errno.h>
-#include "tty.h"
 #include <ctype.h>
 #include <string.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif /* HAVE_UNISTD_H */
 #include <sys/stat.h>
-#include <sys/param.h>
 #include <fcntl.h>
 #ifdef SCO_FLAVOR
 #	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
 #endif /* SCO_FLAVOR */
 #include <time.h>
 #include <utime.h>
+
 #include "global.h"
+#include "tty.h"
 #include "eregex.h"
 #include "dialog.h"
 #include "setup.h"
@@ -102,8 +102,6 @@
 #include "tree.h"
 #include "key.h"
 #include "../vfs/vfs.h"
-
-#include "x.h"
 
 /* }}} */
 

@@ -24,9 +24,8 @@
 #include <config.h>
 #include <errno.h>
 #include <string.h>
-#include "tty.h"
-#include "x.h"
 #include "global.h"		/* home_dir */
+#include "tty.h"
 #include "dlg.h"
 #include "widget.h"
 #include "command.h"

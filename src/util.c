@@ -36,7 +36,6 @@
 #ifndef SCO_FLAVOR
 #	include <sys/time.h>	/* alex: sys/select.h defines struct timeval */
 #endif /* SCO_FLAVOR */
-#include <sys/param.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdarg.h>
@@ -64,19 +63,18 @@
 #  include <sys/ioctl.h>
 #endif
 
-#include "mountlist.h"
-
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #include <rx.h>
 #else
 #include <regex.h>
 #endif
+
 #include "global.h"
-#include "x.h"
 #include "profile.h"
 #include "main.h"		/* mc_home */
 #include "cmd.h"		/* guess_message_value */
 #include "../vfs/vfs.h"
+#include "mountlist.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"

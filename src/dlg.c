@@ -21,10 +21,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "tty.h"
 #include <stdarg.h>
 #include "global.h"
-#include "x.h"
+#include "tty.h"
 #include "menu.h"
 #include "win.h"
 #include "color.h"

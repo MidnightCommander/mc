@@ -20,15 +20,15 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
 #include <string.h>
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/param.h>
 #include <signal.h>
 #include <ctype.h>
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"		/* Our window tools */
 #include "color.h"		/* Color definitions */
 #include "dlg.h"		/* The nice dialog manager */
@@ -47,7 +47,6 @@
 #include "layout.h"		/* for get_nth_panel_name proto */
 #include "fileopctx.h"
 #include "background.h"
-#include "x.h"
 
 #ifdef HAVE_CHARSET
 #include "charsets.h"

@@ -31,9 +31,9 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include "tty.h"
 #include <ctype.h>
 #include "global.h"
+#include "tty.h"
 #include "color.h"
 #include "mouse.h"
 #include "dlg.h"
@@ -41,7 +41,6 @@
 #include "win.h"
 #include "complete.h"
 #include "key.h"		/* XCTRL and ALT macros  */
-#include "x.h"
 #include "profile.h"	/* for history loading and saving */
 
 #ifndef HAVE_X

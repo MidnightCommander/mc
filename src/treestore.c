@@ -36,19 +36,18 @@
 #include <unistd.h>
 #endif
 #include <fcntl.h>
-#include <sys/param.h>
 #include <sys/stat.h>
 #include <errno.h>
 #include <dirent.h>
 #include <stdio.h>
 #include <string.h>
-#include "global.h"
-#include "x.h"
-#include "treestore.h"
-#include "../vfs/vfs.h"
 #ifdef NEEDS_IO_H
 #   include <io.h>
 #endif
+
+#include "global.h"
+#include "treestore.h"
+#include "../vfs/vfs.h"
 #include "profile.h"
 #include "setup.h"
 

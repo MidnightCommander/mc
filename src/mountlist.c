@@ -34,10 +34,6 @@ void free (void *ptr);
 #include <strings.h>
 #endif
 
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
-
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
@@ -96,6 +92,7 @@ void free (void *ptr);
 #include <sys/fsys.h>
 #endif
 
+#include "global.h"
 #include "mountlist.h"
 #include "fsusage.h"
 #include "util.h"

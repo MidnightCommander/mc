@@ -33,10 +33,10 @@
 #if HAVE_SYS_SELECT_H
 #   include <sys/select.h>
 #endif
-#include "tty.h"
 #include <ctype.h>
 #include <errno.h>
 #include "global.h"
+#include "tty.h"
 #include "mouse.h"
 #include "key.h"
 #include "main.h"
@@ -56,8 +56,6 @@
 #    endif
 #    include <sys/ioctl.h>
 #endif
-
-#include "x.h"
 
 #define GET_TIME(tv)    (gettimeofday(&tv, (struct timezone *)NULL))
 #define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \

@@ -19,15 +19,15 @@
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
 #include <config.h>
-#include "tty.h"
-#include <sys/param.h>
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>	/* For chdir(), readlink() and getwd()/getcwd() */
 #endif
+
 #include "global.h"
+#include "tty.h"
 #include "dir.h"
 #include "panel.h"
 #include "color.h"
@@ -45,12 +45,9 @@
 #include "profile.h"
 #include "widget.h"
 #include "../vfs/vfs.h"
-#include "../vfs/extfs.h"
 #ifdef NEEDS_DRIVE_H
 # include "drive.h"
 #endif
-
-#include "x.h"
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )
 

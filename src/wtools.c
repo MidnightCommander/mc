@@ -33,9 +33,10 @@
 #include <config.h>
 #include <string.h>
 #include <stdio.h>
-#include "tty.h"
 #include <stdarg.h>
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "mouse.h"
@@ -46,7 +47,6 @@
 #include "key.h"	/* For mi_getch() */
 #include "dialog.h"	/* For do_refresh() */
 #include "complete.h"   /* INPUT_COMPLETE_CD */
-#include "x.h"
 
 /* }}} */
 

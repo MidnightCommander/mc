@@ -25,7 +25,6 @@
 # include <io.h>
 #endif
 
-#include "tty.h"
 #ifdef HAVE_UNISTD_H
 #    include <unistd.h>
 #endif
@@ -34,6 +33,7 @@
 #include <errno.h>
 
 #include "global.h"
+#include "tty.h"
 #include "user.h"
 #include "main.h"
 #include "dialog.h"
@@ -41,16 +41,12 @@
 #include "view.h"
 #include "main.h"
 #include "../vfs/vfs.h"
-#include "x.h"
 
 #include "cons.saver.h"
 #include "layout.h"
 #ifdef SCO_FLAVOR
 #include <sys/wait.h>
 #endif /* SCO_FLAVOR */
-#ifdef HAVE_GNOME
-#include "gcmd.h"
-#endif
 
 /* If set, we execute the file command to check the file type */
 int use_file_to_check_type = 1;

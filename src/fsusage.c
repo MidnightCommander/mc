@@ -21,10 +21,6 @@
 
 #include <sys/types.h>
 
-#ifdef HAVE_SYS_PARAM_H
-#include <sys/param.h>
-#endif
-
 #ifdef HAVE_SYS_MOUNT_H
 #include <sys/mount.h>
 #endif
@@ -55,6 +51,7 @@
 #include <sys/statvfs.h>
 #endif
 
+#include "global.h"
 #include "fsusage.h"
 
 

@@ -27,7 +27,6 @@
 #include <stdio.h>
 #include <errno.h>
 #include <sys/types.h>
-#include <sys/param.h>
 #include <sys/stat.h>
 #ifdef HAVE_SYS_WAIT_H
 #   include <sys/wait.h>
@@ -39,9 +38,8 @@
 
 /* Needed for the extern declarations of integer parameters */
 #define DIR_H_INCLUDE_HANDLE_DIRENT
-#include "tty.h"
-#include "x.h"
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

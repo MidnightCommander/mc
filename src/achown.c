@@ -19,7 +19,6 @@
 #include <config.h>
 /* Needed for the extern declarations of integer parameters */
 #include <sys/types.h>
-#include <sys/param.h>
 #include <sys/stat.h>
 #include <grp.h>
 #include <pwd.h>

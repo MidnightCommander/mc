@@ -1,12 +1,11 @@
 /* Print features specific for this build */
 
 #include <config.h>
-#include <sys/param.h>
 #include <stdio.h>
 #include <glib.h>
-#include "i18n.h"
+
+#include "global.h"
 #include "cmd.h"
-#include "textconf.h"
 
 static const char * const features [] =  {
     N_("Edition: "),

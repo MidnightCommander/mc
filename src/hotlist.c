@@ -34,7 +34,6 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <sys/types.h>
-#include <sys/param.h>
 #include <sys/stat.h>
 #ifdef SCO_FLAVOR
 #	include <sys/timeb.h>	/* alex: for struct timeb, used in time.h */
@@ -47,8 +46,9 @@
 #ifdef NEEDS_IO_H
 #    include <io.h>
 #endif
-#include "tty.h"
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

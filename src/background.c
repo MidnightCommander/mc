@@ -32,15 +32,12 @@
 #    include <unistd.h>
 #endif
 #include <sys/stat.h>
-#ifdef HAVE_SYS_PARAM_H
-#    include <sys/param.h>
-#endif
 #include <string.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include "tty.h"
-#include "x.h"
+
 #include "global.h"
+#include "tty.h"
 #include "dlg.h"
 #include "widget.h"
 #include "wtools.h"

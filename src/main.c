@@ -33,12 +33,10 @@
 #    include <os2.h>
 #endif
 
-#include "tty.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sys/param.h>
 
 #include <sys/stat.h>
 
@@ -79,17 +77,19 @@
 #include <fcntl.h>	/* For O_RDWR */
 #include <signal.h>
 
-#ifdef HAVE_CORBA
-#    include <libgnorba/gnorba.h>
+#ifdef NEEDS_IO_H
+#    include <io.h>
 #endif
 
-#include <glib.h>
+#ifdef NEEDS_DRIVE_H
+#    include <drive.h>
+#endif
 
 /* Program include files */
-#include "x.h"
+#include "global.h"
+#include "tty.h"
 #include "dir.h"
 #include "color.h"
-#include "global.h"
 #include "dialog.h"
 #include "menu.h"
 #include "file.h"
@@ -122,33 +122,13 @@
 #include "command.h"
 #include "wtools.h"
 #include "complete.h"		/* For the free_completion */
-#ifndef HAVE_X
-#include "textconf.h"
-#endif
 
 #include "chmod.h"
 #include "chown.h"
 
-#ifdef NEEDS_IO_H
-#    include <io.h>
-#endif
-#ifdef NEEDS_DRIVE_H
-#    include <drive.h>
-#endif
-
 #include "../vfs/vfs.h"
-#include "../vfs/extfs.h"
 
 #include "popt.h"
-
-#ifdef HAVE_GNOME
-#include "gcorba.h"
-#include "gmain.h"
-#include "gsession.h"
-#ifdef HAVE_GNOME_WINDOW_ICON
-#    include <libgnomeui/gnome-window-icon.h>
-#endif
-#endif
 
 /* "$Id$" */
 

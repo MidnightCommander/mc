@@ -25,12 +25,11 @@
 #    include <io.h>
 #endif
 #include <sys/stat.h>
-#include <sys/param.h>
 #include <fcntl.h>
 #include <ctype.h>
-#include "tty.h"
-#include "x.h"
+
 #include "global.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "setup.h"

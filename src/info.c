@@ -18,11 +18,11 @@
 
 #include <config.h>
 #include <stdio.h>
-#include "tty.h"
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sys/param.h>
+
 #include "global.h"
+#include "tty.h"
 #include "mouse.h"		/* Gpm_Event */
 #include "color.h"
 #include "dlg.h"
@@ -33,7 +33,6 @@
 #include "util.h"		/* size_trunc_len */
 #include "layout.h"
 #include "key.h"		/* is_idle() */
-#include "x.h"
 #include "mountlist.h"
 
 #ifndef VERSION

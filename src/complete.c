@@ -56,9 +56,8 @@
 #   include <pwd.h>
 #endif
 
-#include "tty.h"
 #include "global.h"
-#include "x.h"
+#include "tty.h"
 #include "win.h"
 #include "color.h"
 #include "dlg.h"

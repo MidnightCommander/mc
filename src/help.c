@@ -42,6 +42,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <errno.h>
+
 #include "global.h"
 #include "color.h"
 #include "dialog.h"
@@ -50,7 +51,6 @@
 #include "key.h"	/* For mi_getch() */
 #include "help.h"
 #include "layout.h"		/* keybar_visible */
-#include "x.h"
 #include "dlg.h"		/* For Dlg_head */
 #include "widget.h"		/* For Widget */
 
