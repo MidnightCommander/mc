@@ -575,7 +575,7 @@ undelfs_stat_int (int inode_index, struct stat *buf)
 }
 
 static int
-undelfs_lstat(struct vfs_class *me, char *path, struct stat *buf)
+undelfs_lstat (struct vfs_class *me, const char *path, struct stat *buf)
 {
     int inode_index;
     char *file, *f;
@@ -612,12 +612,7 @@ undelfs_lstat(struct vfs_class *me, char *path, struct stat *buf)
     return undelfs_stat_int (inode_index, buf);
 }
 
-static int
-undelfs_stat(struct vfs_class *me, char *path, struct stat *buf)
-{
-    return undelfs_lstat (me, path, buf);
-}
-
+#define undelfs_stat undelfs_lstat
 
 static int
 undelfs_fstat (void *vfs_info, struct stat *buf)
