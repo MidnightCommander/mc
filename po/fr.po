@@ -1311,7 +1311,7 @@ msgstr "Copier un bloc dans un fichier"
 
 #: edit/gtkedit.c:1337 gtkedit/gtkedit.c:1337
 msgid "Search/Replace"
-msgstr "Chercher / remplacer"
+msgstr "Chercher/remplacer"
 
 #: edit/syntax.c:1339 edit/syntax.c:1346 gtkedit/syntax.c:1339
 #: gtkedit/syntax.c:1346
@@ -1597,7 +1597,7 @@ msgstr "Processus en tâche de fond"
 
 #: gnome/chmod.c:95 src/chmod.c:95
 msgid "execute/search by others"
-msgstr "exécution / recherche par les autres"
+msgstr "exécution/recherche par les autres"
 
 #: gnome/chmod.c:96 src/chmod.c:96
 msgid "write by others"
@@ -1609,7 +1609,7 @@ msgstr "lecture par les autres"
 
 #: gnome/chmod.c:98 src/chmod.c:98
 msgid "execute/search by group"
-msgstr "exécution / recherche par le groupe"
+msgstr "exécution/recherche par le groupe"
 
 #: gnome/chmod.c:99 src/chmod.c:99
 msgid "write by group"
@@ -1621,7 +1621,7 @@ msgstr "lecture par le groupe"
 
 #: gnome/chmod.c:101 src/chmod.c:101
 msgid "execute/search by owner"
-msgstr "exécution / recherche par le propriétaire"
+msgstr "exécution/recherche par le propriétaire"
 
 #: gnome/chmod.c:102 src/chmod.c:102
 msgid "write by owner"
@@ -2559,7 +2559,7 @@ msgstr "répertoires"
 
 #: gnome/file.c:1704 src/file.c:1704
 msgid "files/directories"
-msgstr "fichiers / répertoires"
+msgstr "fichiers/répertoires"
 
 #: gnome/file.c:1704 src/file.c:1704
 msgid " with source mask:"
@@ -2835,7 +2835,7 @@ msgstr "Recherche dans %s"
 
 #: gnome/find.c:490 src/find.c:490
 msgid " Find/read "
-msgstr " Chercher / lire "
+msgstr " Chercher/lire "
 
 #: gnome/find.c:490 src/find.c:490
 msgid " Problem reading from child "
@@ -3406,7 +3406,7 @@ msgstr "Préserver les attributs des fichiers."
 
 #: gnome/gdialogs.c:647
 msgid "Preserves the permissions and the UID/GID if possible"
-msgstr "Préserve les permissions et UID / GID si possible"
+msgstr "Préserve les permissions et UID/GID si possible"
 
 #: gnome/gdialogs.c:653
 msgid "Recursively copy subdirectories."
@@ -3740,7 +3740,7 @@ msgstr "_Aide"
 
 #: gnome/glayout.c:613
 msgid "File/New/Directory..."
-msgstr "Fichier / Nouveau / Répertoire..."
+msgstr "Fichier/Nouveau/Répertoire..."
 
 #: gnome/gmain.c:551
 msgid ""
@@ -4119,7 +4119,7 @@ msgstr "Vue non filtrée"
 
 #: gnome/gpopup.c:276
 msgid "Move/rename..."
-msgstr "Déplacer / renommer..."
+msgstr "Déplacer/renommer..."
 
 #: gnome/gpopup.c:277 gnome/gpopup2.c:198
 msgid "Copy..."
@@ -4794,7 +4794,7 @@ msgstr " (%d blocs)"
 #: gnome/info.c:188 src/info.c:188
 #, c-format
 msgid "Owner:     %s/%s"
-msgstr "Propriétaire : %s / %s"
+msgstr "Propriétaire : %s/%s"
 
 #: gnome/info.c:193 src/info.c:193
 #, c-format
