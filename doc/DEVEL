@@ -81,14 +81,14 @@ constants the Midnight Commander uses.
     the mouse support.
 
 get_event is the routine you want to use if you want to handle mouse
-events, it will return 0 on a mouse event, ERR if no input is
-available or a key code if there is some input available.  This
-routine in turn uses get_key_code to decode the input stream and
-convert it to useful constants.
+events, it will return 0 on a mouse event, -1 if no input is available
+or a key code if there is some input available.  This routine in turn
+uses get_key_code to decode the input stream and convert it to useful
+constants.
 
 mi_getch is just a wrapper around get_event that ignores all the mouse
 events.  It's used only in a couple of places, this routine may return
-ERR if no input is available (if you have set the nodelay option of
+-1 if no input is available (if you have set the nodelay option of
 ncurses or S-Lang with nodelay) or a character code if no such option is
 available. 
 
@@ -100,7 +100,7 @@ dlg.c:run_dlg routine.
 
 * ncurses
 
-Althougt S-Lang is now used by default, we still support it ncurses.  We
+Although S-Lang is now used by default, we still support it ncurses.  We
 basically are using a small subset of ncurses because we want to be
 compatible with Slang.
 
