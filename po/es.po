@@ -32,7 +32,7 @@ msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr ""
-"\n"
+" \n"
 " Increlmente el tama\361o de edit.h:MAXBUG y recompile el editor"
 
 #: edit/edit.c:227 edit/edit.c:259
