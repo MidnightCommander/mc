@@ -831,7 +831,7 @@ char *gtk_edit_dialog_get_load_file (guchar * dir, guchar * def, guchar * title)
 void gtk_edit_dialog_message (guchar * heading, char *fmt,...)
 {
     gchar s[8192];
-    va_list *ap;
+    va_list ap;
     va_start (ap, fmt);
     vsprintf (s, fmt, ap);
     va_end (ap);
@@ -849,7 +849,7 @@ int gtk_edit_dialog_query (guchar * heading, guchar * first,...)
     char *buttons[16];
     char s[1024], *r;
     int n;
-    va_list *ap;
+    va_list ap;
     va_start (ap, first);
     n = 0;
     while ((buttons[n++] = va_arg (ap, char *)) && n < 15);
@@ -885,7 +885,7 @@ int gtk_edit_dialog_query (guchar * heading, guchar * first,...)
 void gtk_edit_dialog_error (guchar * heading, char *fmt, ...)
 {
     gchar s[8192];
-    va_list *ap;
+    va_list ap;
     va_start (ap, fmt);
     vsprintf (s, fmt, ap);
     va_end (ap);

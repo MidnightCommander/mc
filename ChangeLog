@@ -1,3 +1,7 @@
+1998-11-26  Herbert Valerio Riedel  <hvr@hvrlab.ml.org>
+
+	* gtkedit.c: changed occurence of 'va_list *ap' to 'va_list ap'
+
 Thu Nov 26 12:20:06 1998  Pavel Roskin  <pavel_roskin@geocities.com>
 
 	* config.h.in: Removed from CVS, added to .cvsignore
