@@ -1112,7 +1112,7 @@ msgstr "File creato il: "
 #: gnome/gnome-file-property-dialog.c:290
 #: gnome/gnome-file-property-dialog.c:299
 msgid "%a, %b %d %Y,  %I:%M:%S %p"
-msgstr ""
+msgstr "%a, %b %d %Y,  %I:%M:%S %p"
 
 #: gnome/gnome-file-property-dialog.c:286
 msgid "Last Modified on: "
@@ -1769,7 +1769,7 @@ msgstr ""
 
 #: gtkedit/edit.c:2571
 msgid "User menu avalaible only in mcedit invoked from mc"
-msgstr ""
+msgstr "Menu utente disponibile solo in mcedit se chiamato da mc"
 
 #. Not essential to translate
 #: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
@@ -3589,7 +3589,7 @@ msgstr "Uso locale predefinita"
 #: src/cmd.c:1262
 #, c-format
 msgid "Using locale \"%s\" (from environment variable %s)"
-msgstr ""
+msgstr "Uso locale \"%s\" (dalla variabile d'ambiente %s)"
 
 #: src/cmd.c:1348
 msgid " Enter machine name (F1 for details): "
@@ -5064,7 +5064,7 @@ msgstr " Non posso accettare il tasto "
 #: src/learn.c:123
 #, c-format
 msgid " You have entered \"%s\""
-msgstr " Hai scelto il tasto `%s' "
+msgstr " Hai inserito \"%s\""
 
 #: src/learn.c:170
 msgid "OK"
@@ -5858,11 +5858,11 @@ msgstr "Mostra breve messaggio di utilizzo"
 
 #: src/screen.c:227
 msgid "SUB-DIR"
-msgstr ""
+msgstr "SUB-DIR"
 
 #: src/screen.c:227
 msgid "UP--DIR"
-msgstr ""
+msgstr "UP--DIR"
 
 #: src/screen.c:417
 msgid "MTime"
@@ -7057,12 +7057,3 @@ msgstr " Non posso aprire il file: %s "
 msgid "Undelete filesystem for ext2"
 msgstr "Ripristina filesystem per ext2"
 
-#~ msgid " and the Linux console"
-#~ msgstr " e la console Linux"
-
-#~ msgid ""
-#~ " Can't chdir to %s \n"
-#~ " %s "
-#~ msgstr ""
-#~ " Non posso cambiare directory ( '%s') \n"
-#~ " %s "
