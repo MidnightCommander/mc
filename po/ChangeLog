@@ -1,3 +1,7 @@
+1999-02-17  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* da.po: Fixed a syntax error in the .po file.
+
 Tue Feb 16 20:46:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* es.po: Update es.po with the version sent by David Martin 

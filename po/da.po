@@ -1921,8 +1921,6 @@ msgstr "set gruppe ID ved køring"
 msgid "set user ID on execution"
 msgstr "set bruger ID ved køring"
 
-<---slet 1--->
-
 #: src/chmod.c:116
 msgid "C&lear marked"
 msgstr "B&lank markerede"
