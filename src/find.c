@@ -64,7 +64,7 @@ enum {
     B_VIEW
 };
 
-/* A list of directories to be ignores, separated with ':' */
+/* List of directories to be ignored, separated by ':' */
 char *find_ignore_dirs = 0;
 
 static WInput *in_start;	/* Start path */
@@ -884,13 +884,14 @@ find_file (char *start_dir, char *pattern, char *content, char **dirname,  char 
 	for (i = 0; entry && i < find_list->count; entry = entry->next, i++){
 	    char *filename;
 
+	    if (!entry->text || !entry->data)
+		continue;
+
 	    if (content_pattern)
 		filename = strchr (entry->text+4, ':')+1;
 	    else
 		filename = entry->text+4;
 
-	    if (!entry->text || !entry->data)
-		continue;
 	    dir = entry->data;
 	    if (dir [0] == '.' && dir [1] == 0)
 		name = g_strdup (filename);

@@ -1,5 +1,8 @@
 2002-12-11  Pavel Roskin  <proski@gnu.org>
 
+	* find.c (find_file): Skip entries without data when panelizing.
+	Found by Valgrind.
+
 	* eregex.h: Undefine __restrict_arr before redefining to avoid a
 	warning if it's defined.
 
