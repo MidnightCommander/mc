@@ -65,7 +65,7 @@ include latex.syntax
 file ..\*\.(texi|texinfo|TEXI|TEXINFO)$ Texinfo\sDocument
 include texinfo.syntax
 
-file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX)$ C/C\+\+\sProgram
+file ..\*\\.([chC]|CC|cxx|cc|cpp|CPP|CXX|hxx|h\.in)$ C/C\+\+\sProgram
 include c.syntax
 
 file ..\*\\.[fF]$ Fortran\sProgram
@@ -101,7 +101,7 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
-file ..\*\\.spec$ RPM\sSpecfile
+file ..\*\\.(spec|spec\.in)$ RPM\sSpecfile
 include spec.syntax
 
 file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
