@@ -34,8 +34,10 @@ gettext_ver=`$GETTEXTIZE --version | \
        s/.* //;			# take text after the last space
        s/-.*//;			# strip "-pre" or "-rc" at the end
        s/\([^.][^.]*\)/0\1/g;	# prepend 0 to every token
-       s/0\([^.][^.]\)/\1/g;	# trim 0 from long tokens
+       s/0\([^.][^.]\)/\1/g;	# strip leading 0 from long tokens
+       s/$/.00.00/;		# add .00.00 for short version strings
        s/\.//g;			# remove dots
+       s/\(......\).*/\1/;	# leave only 6 leading digits
        '`
 
 if test $gettext_ver -lt 01038; then
