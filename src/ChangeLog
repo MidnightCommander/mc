@@ -1,5 +1,10 @@
 2003-03-22  Adam Byrtek  <alpha@debian.org>
 
+	* command.c (enter): Check subshell state early and return if
+	inactive before clearing the command line.
+	* main.c (force_subshell_execution): Remove magic, unusable,
+	undocumented command line option "-r".
+
 	* subshell.c: Remove dead code (SYNC_PTY_SIDES).
 	(init_subshell_child): Remove dead code (initfile for TCSH).
 	(init_subshell): Use ZSH_VERSION environment variable to detect

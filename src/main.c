@@ -179,9 +179,6 @@ int navigate_with_arrows = 0;
 /* If true use +, -, | for line drawing */
 int force_ugly_line_drawing = 0;
 
-/* If true message "The shell is already running a command" never */
-int force_subshell_execution = 0;
-
 /* If true program softkeys (HP terminals only) on startup and after every 
    command ran in the subshell to the description found in the termcap/terminfo 
    database */
@@ -582,7 +579,7 @@ shell_execute (char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
-	if (subshell_state == INACTIVE || force_subshell_execution)
+	if (subshell_state == INACTIVE)
 	    do_execute (shell, command, flags | EXECUTE_AS_SHELL);
 	else
 	    message (1, MSG_ERROR,
@@ -2259,8 +2256,6 @@ static const struct poptOption argument_table[] = {
 #ifdef HAVE_SUBSHELL_SUPPORT
     {"nosubshell", 'u', POPT_ARG_NONE, NULL, 'u',
      N_("Disables subshell support")},
-    {"forceexec", 'r', POPT_ARG_NONE, &force_subshell_execution, 0,
-     N_("Force subshell execution")},
 #endif
     {"printwd", 'P', POPT_ARG_STRING, &last_wd_file, 0,
      N_("Print last working directory to specified file")},

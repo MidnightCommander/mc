@@ -172,7 +172,7 @@ void do_cd_command (char *cmd)
 
 /* Returns 1 if the we could handle the enter, 0 if not */
 static int
-enter (WInput * cmdline)
+enter (WInput *cmdline)
 {
     Dlg_head *old_dlg;
 
@@ -199,6 +199,16 @@ enter (WInput * cmdline)
 
 		return MSG_NOT_HANDLED;
 	    }
+#ifdef HAVE_SUBSHELL_SUPPORT
+	    /* Check this early before we clean command line
+	     * (will be checked again by shell_execute) */
+	    if (use_subshell && subshell_state != INACTIVE) {
+		message (1, MSG_ERROR,
+			 _(" The shell is already running a command "));
+		return MSG_NOT_HANDLED;
+	    }
+#endif
+
 	    command = g_malloc (strlen (cmd) + 1);
 	    command[0] = 0;
 	    for (i = j = 0; i < strlen (cmd); i++) {
