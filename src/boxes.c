@@ -771,8 +771,7 @@ configure_vfs (void)
 #if defined(USE_NETCODE)
 	g_free (ftpfs_anonymous_passwd);
 	ftpfs_anonymous_passwd = ret_passwd;
-	if (ftpfs_proxy_host)
-	    g_free (ftpfs_proxy_host);
+	g_free (ftpfs_proxy_host);
 	ftpfs_proxy_host = ret_ftp_proxy;
 	ftpfs_directory_timeout = atoi(ret_directory_timeout);
 	use_netrc = ret_use_netrc;

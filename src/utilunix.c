@@ -150,8 +150,7 @@ static char *i_cache_match (int id, int_cache *cache, int size)
 static void i_cache_add (int id, int_cache *cache, int size, char *text,
 			 int *last)
 {
-    if (cache [*last].string)
-	g_free (cache [*last].string);
+    g_free (cache [*last].string);
     cache [*last].string = g_strdup (text);
     cache [*last].index = id;
     *last = ((*last)+1) % size;
@@ -653,8 +652,7 @@ putenv (char *string)
 		       size * sizeof (char *));
 	new_environ[size] = (char *) string;
 	new_environ[size + 1] = NULL;
-	if (last_environ != NULL)
-	    g_free ((void *) last_environ);
+	g_free ((void *) last_environ);
 	last_environ = new_environ;
 	__environ = new_environ;
     }

@@ -544,8 +544,7 @@ alloc_dir_copy (int size)
 	if (dir_copy.list){
 
 	    for (i = 0; i < dir_copy.size; i++) {
-		if (dir_copy.list [i].fname)
-		    g_free (dir_copy.list [i].fname);
+		g_free (dir_copy.list [i].fname);
 	    }
 	    g_free (dir_copy.list);
 	    dir_copy.list = 0;

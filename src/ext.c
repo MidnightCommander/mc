@@ -52,10 +52,8 @@ static char *data = NULL;
 void
 flush_extension_file (void)
 {
-    if (data) {
-	g_free (data);
-	data = NULL;
-    }
+    g_free (data);
+    data = NULL;
 }
 
 typedef char *(*quote_func_t) (const char *name, int quote_percent);

@@ -1025,11 +1025,9 @@ static void remove_group (struct hotlist *grp)
 	if (current->type == HL_TYPE_GROUP)
 	    remove_group (current);
 
-	if (current->label)
-	    g_free (current->label);
-	if (current->directory)
-	    g_free (current->directory);
-	 g_free (current);
+	g_free (current->label);
+	g_free (current->directory);
+	g_free (current);
 
 	current = next;
     }
@@ -1061,10 +1059,8 @@ static void remove_from_hotlist (struct hotlist *entry)
 
     unlink_entry (entry);
 
-    if (entry->label)
-          g_free (entry->label);
-    if (entry->directory)
-        g_free (entry->directory);
+    g_free (entry->label);
+    g_free (entry->directory);
     g_free (entry);
     /* now remove list entry from screen */
     listbox_remove_current (l_hotlist, 1);
@@ -1564,20 +1560,16 @@ void done_hotlist (void)
 {
     if (hotlist){
 	remove_group (hotlist);
-	if (hotlist->label)
-	   g_free (hotlist->label);
-        if (hotlist->directory)
-            g_free (hotlist->directory);
-        g_free (hotlist);
+	g_free (hotlist->label);
+	g_free (hotlist->directory);
+	g_free (hotlist);
 	hotlist = 0;
     }
     
     hotlist_state.loaded = 0;
 
-    if (hotlist_file_name){
-        g_free (hotlist_file_name);
-	hotlist_file_name = 0;
-    }
+    g_free (hotlist_file_name);
+    hotlist_file_name = 0;
     l_hotlist = 0;
     current_group = 0;
     if (tkn_buf){

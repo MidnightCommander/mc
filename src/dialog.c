@@ -804,9 +804,7 @@ destroy_dlg (Dlg_head *h)
     c = h->current;
     for (i = 0; i < h->count; i++) {
 	c = c->next;
-	if (h->current) {
-	    g_free (h->current);
-	}
+	g_free (h->current);
 	h->current = c;
     }
     g_free (h->title);

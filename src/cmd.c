@@ -405,10 +405,9 @@ void find_cmd (void)
 static void
 set_panel_filter_to (WPanel *p, char *allocated_filter_string)
 {
-    if (p->filter){
-	g_free (p->filter);
-	p->filter = 0;
-    }
+    g_free (p->filter);
+    p->filter = 0;
+
     if (!(allocated_filter_string [0] == '*' && allocated_filter_string [1] == 0))
 	p->filter = allocated_filter_string;
     else
@@ -970,11 +969,10 @@ do_link (int symbolic_link, const char *fname)
     }
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
+
 cleanup:
-    if (src != NULL)
-        g_free (src);
-    if (dest != NULL)
-        g_free (dest);
+    g_free (src);
+    g_free (dest);
 }
 
 void link_cmd (void)
@@ -1205,8 +1203,7 @@ void quick_cd_cmd (void)
         do_cd_command (q);
         g_free (q);
     }
-    if (p)
-       g_free (p);
+    g_free (p);
 }
 
 void 

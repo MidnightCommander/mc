@@ -1,3 +1,33 @@
+2004-09-25  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* boxes.c (configure_vfs): g_free handles NULL argument too,
+        no need for the comparison.
+	* cmd.c (set_panel_filter_to): Likewise.
+	    (do_link): Likewise.
+	    (quick_cd_cmd): Likewise.
+	* color.c (done_colors): Likewise.
+	* dialog.c (destroy_dlg): Likewise.
+	* dir.c (alloc_dir_copy): Likewise.
+	* ext.c (flush_extension_file): Likewise.
+	* file.c (copy_file_file): Likewise.
+    	    (panel_operate): Likewise.
+	* hotlist.c (remove_group): Likewise.
+    	    (remove_from_hotlist): Likewise.
+    	    (done_hotlist): Likewise.
+	* main.c (main): Likewise.
+	* setup.c (panel_load_setup): Likewise.
+	* tree.c (tree_destroy): Likewise.
+    	    (show_tree): Likewise.
+	* user.c (user_menu_cmd): Likewise.
+	* utilunix.c (i_cache_add): Likewise.
+    	    (putenv): Likewise.
+	* view.c (view_done): Likewise.
+    	    (regexp_search): Likewise.
+    	    (normal_search): Likewise.
+    	    (change_viewer): Likewise.
+	* widget.c (label_set_text): Likewise.
+    	    (set_label_text): Likewise.
+
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
 	* file.c (progress_update_one): Changed parameter type from int

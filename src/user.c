@@ -809,8 +809,7 @@ user_menu_cmd (struct WEdit *edit_widget)
     easy_patterns = old_patterns;
     g_free (menu);
     menu = NULL;
-    if (entries)
-	g_free (entries);
+    g_free (entries);
     g_free (data);
 }
 

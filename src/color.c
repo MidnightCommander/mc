@@ -458,10 +458,8 @@ done_colors (void)
 
     for (p = c.next; p; p = next) {
 	next = p->next;
-	if (p->fg)
-	    g_free (p->fg);
-	if (p->bg)
-	    g_free (p->bg);
+	g_free (p->fg);
+	g_free (p->bg);
 	g_free (p);
     }
     c.next = NULL;

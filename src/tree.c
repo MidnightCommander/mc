@@ -120,10 +120,8 @@ static void tree_destroy (WTree *tree)
     tree_store_remove_entry_remove_hook (remove_callback);
     save_tree (tree);
 
-    if (tree->tree_shown){
-	g_free (tree->tree_shown);
-	tree->tree_shown = 0;
-    }
+    g_free (tree->tree_shown);
+    tree->tree_shown = 0;
     tree->selected_ptr = NULL;
 }
 
@@ -202,8 +200,7 @@ static void show_tree (WTree *tree)
 	x = y = 1;
     }
 
-    if (tree->tree_shown)
-	g_free (tree->tree_shown);
+    g_free (tree->tree_shown);
     tree->tree_shown = g_new (tree_entry*, tree_lines);
 
     for (i = 0; i < tree_lines; i++)

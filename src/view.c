@@ -269,8 +269,7 @@ view_done (WView *view)
     if (view->view_active) {
 	free_file (view);
 	g_free (view->filename);
-	if (view->command)
-	    g_free (view->command);
+	g_free (view->command);
     }
     view->view_active = 0;
     default_hex_mode = view->hex_mode;
@@ -2107,8 +2106,7 @@ regexp_search (WView *view, int direction)
 	g_free (regexp);
 	return;
     }
-    if (old)
-	g_free (old);
+    g_free (old);
     old = regexp;
 #if 0
     /* Mhm, do we really need to load all the file in the core? */
@@ -2184,8 +2182,7 @@ normal_search (WView *view, int direction)
 	return;
     }
 
-    if (old)
-	g_free (old);
+    g_free (old);
     old = exp;
 
     convert_from_input (exp);
@@ -2220,8 +2217,7 @@ change_viewer (WView *view)
 	view_done (view);
 	view_init (view, t, s, 0);
 	g_free (s);
-	if (t)
-	    g_free (t);
+	g_free (t);
 	view_labels (view);
 	view->dirty++;
 	view_update (view, TRUE);

@@ -774,8 +774,7 @@ copy_file_file (FileOpContext *ctx, const char *src_path, const char *dst_path,
     dst_status = DEST_FULL;	/* copy successful, don't remove target file */
 
   ret:
-    if (buf)
-	g_free (buf);
+    g_free (buf);
 
     while (src_desc != -1 && mc_close (src_desc) < 0) {
 	temp_status =
@@ -2011,8 +2010,7 @@ panel_operate (void *source_panel, FileOperation operation,
 	    src_stat = panel->dir.list[i].st;
 
 #ifdef WITH_FULL_PATHS
-	    if (source_with_path)
-		g_free (source_with_path);
+	    g_free (source_with_path);
 	    source_with_path = concat_dir_and_file (panel->cwd, source);
 #endif				/* WITH_FULL_PATHS */
 
@@ -2106,17 +2104,11 @@ panel_operate (void *source_panel, FileOperation operation,
     free_linklist (&linklist);
     free_linklist (&dest_dirs);
 #ifdef WITH_FULL_PATHS
-    if (source_with_path)
-	g_free (source_with_path);
+    g_free (source_with_path);
 #endif				/* WITH_FULL_PATHS */
-
-    if (dest)
-	g_free (dest);
-
-    if (ctx->dest_mask) {
-	g_free (ctx->dest_mask);
-	ctx->dest_mask = NULL;
-    }
+    g_free (dest);
+    g_free (ctx->dest_mask);
+    ctx->dest_mask = NULL;
 #ifdef WITH_BACKGROUND
     /* Let our parent know we are saying bye bye */
     if (we_are_background) {

@@ -386,16 +386,12 @@ panel_load_setup (WPanel *panel, const char *section)
 	}
 
     /* User formats */
-    if (panel->user_format){
-	g_free (panel->user_format);
-	panel->user_format = 0;
-    }
+    g_free (panel->user_format);
     panel->user_format = g_strdup (get_profile_string (section, "user_format",
 						     DEFAULT_USER_FORMAT,
 						     profile_name));
     for (i = 0; i < LIST_TYPES; i++){
-        if (panel->user_status_format [i])
-	    g_free (panel->user_status_format [i]);
+	g_free (panel->user_status_format [i]);
 	g_snprintf (buffer, sizeof (buffer), "user_status%d", i);
 	panel->user_status_format [i] =
 	    g_strdup (get_profile_string (section, buffer,

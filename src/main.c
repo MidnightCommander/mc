@@ -2286,10 +2286,8 @@ main (int argc, char *argv[])
 #ifdef HAVE_CHARSET
     free_codepages_list ();
 #endif
-    if (this_dir)
-	g_free (this_dir);
-    if (other_dir)
-	g_free (other_dir);
+    g_free (this_dir);
+    g_free (other_dir);
 
     return 0;
 }
