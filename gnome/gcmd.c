@@ -199,7 +199,7 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	GtkWidget *cbox1, *cbox2;
 	sortfn *sfn;
 
-	sort_box = gnome_dialog_new ("Sort By", GNOME_STOCK_BUTTON_OK, 
+	sort_box = gnome_dialog_new (_("Sort By"), GNOME_STOCK_BUTTON_OK, 
 				     GNOME_STOCK_BUTTON_CANCEL, NULL);
 	/* we define this up here so we can pass it in to our callback */
 	cbox1 = gtk_check_button_new_with_label (N_("Ignore case sensitivity."));
@@ -302,7 +302,54 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 void
 gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 {
-	
+	GtkWidget *ep_dlg;
+	GtkWidget *frame;
+	GtkWidget *clist;
+	GtkWidget *sw;
+	GtkWidget *vbox;
+	GtkWidget *hbox;
+	GtkWidget *button;
+	GtkWidget *entry;
+
+	ep_dlg = gnome_dialog_new (_("Run Command"), GNOME_STOCK_BUTTON_OK, 
+				   GNOME_STOCK_BUTTON_CANCEL, NULL);
+
+				/* Frame 1 */
+	frame = gtk_frame_new (_("Preset Commands"));
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ep_dlg)->vbox),
+			    frame, FALSE, FALSE, 0);
+	clist = gtk_clist_new (1);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (clist), 1, TRUE);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
+	sw = gtk_scrolled_window_new (GTK_CLIST (clist)->hadjustment, GTK_CLIST (clist)->vadjustment);
+	gtk_widget_set_usize (sw, 300, 100);
+	gtk_container_add (GTK_CONTAINER (sw), clist);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	button = gtk_button_new_with_label (_("Add"));
+	gtk_widget_set_usize (button, 75, 25);
+	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	button = gtk_button_new_with_label (_("Remove"));
+	gtk_widget_set_usize (button, 75, 25);
+	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), hbox, FALSE, FALSE, 0);
+
+				/* Frame 2 */
+	frame = gtk_frame_new (_("Run this Command"));
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (ep_dlg)->vbox),
+			    frame, FALSE, FALSE, 0);
+	entry = gtk_entry_new ();
+	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (hbox), GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (hbox), gtk_label_new (_("Command: ")), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), entry, TRUE, TRUE, 0);
+	gtk_container_add (GTK_CONTAINER (frame), hbox);
+	gtk_widget_show_all (GNOME_DIALOG (ep_dlg)->vbox);
+	gnome_dialog_run_and_close (GNOME_DIALOG (ep_dlg));
+
 }
 void
 gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)

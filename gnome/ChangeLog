@@ -1,3 +1,11 @@
+1999-01-04  Jonathan Blandford  <jrb@redhat.com>
+
+	* glayout.c: menu changes.
+
+	* gcmd.c (gnome_external_panelize): new function.  Does absolutely
+	nothing yet but look pretty (and it doesn't do that all that well,
+	yet...)  I'll hook it up to it's actual functions, tomorrow.
+
 1999-01-03  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (x_reset_sort_labels): Various fixes to fix some of my

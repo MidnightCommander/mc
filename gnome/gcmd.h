@@ -14,4 +14,6 @@ void gnome_full_view_cmd       (GtkWidget *widget, WPanel *panel);
 void gnome_custom_view_cmd     (GtkWidget *widget, WPanel *panel);
 void gnome_sort_cmd       (GtkWidget *widget, WPanel *panel);
 void gnome_select_all_cmd (GtkWidget *widget, WPanel *panel);
+void gnome_external_panelize (GtkWidget *widget, WPanel *panel);
+
 #endif /* __GCMD_H */

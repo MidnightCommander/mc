@@ -327,7 +327,7 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 	  NULL, GNOME_APP_PIXMAP_STOCK, GNOME_STOCK_MENU_JUMP_TO},
 	  
 	{ GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),    N_("Run a command and put the results in a panel"), external_panelize },
+	{ GNOME_APP_UI_ITEM, N_("_Run Command..."),    N_("Run a command and put the results in a panel"), gnome_external_panelize },
 #ifdef USE_VFS					  
 	{ GNOME_APP_UI_ITEM, N_("_Active VFS list..."),N_("List of active virtual file systems"), reselect_vfs },
 #endif
