@@ -3031,9 +3031,9 @@ usata per collegamenti simbolici interrotti;
 .I device
 - dispositivi a caratteri e blocchi;
 .I special
-usata per file speciali, come pipe e socket;
+usata per i file speciali, come pipe e socket;
 .I core
-usata per il file core.
+usata per i file core.
 .PP
 I colori possibili sono: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
@@ -3047,125 +3047,131 @@ base_color=normal=white,default:marked=magenta,default
 .PP
 .\"NODE "Special Settings"
 .SH "Impostazioni Speciali"
-Most of the settings of the Midnight Commander can be changed from the
-menus. However, there are a small number of settings which can only be
-changed by editing the setup file.
+Molte delle impostazioni del Midnight Commander possono essere cambiate
+dai menu. Comunque, c'è un piccolo numero di impostazioni che possono
+essere cambiate solo agendo sul file di configurazione.
 .PP
-These variables may be set in your ~/.mc/ini file:
+Queste sono le variabili che possono essere impostate nel file ~/.mc/ini:
 .PP
 .I clear_before_exec.
 .IP
-By default the Midnight Commander clears the screen before executing a
-command. If you would prefer to see the output of the command at the
-bottom of the screen, edit your ~/.mc/ini file and change the value of
-the field clear_before_exec to 0.
+Il valore predefinito del Midnight Commander è di cancellare lo schermo
+prima dell'esecuzione di un comando. Se si preferisce vedere il risultato
+di un comando in fondo allo schermo, si modifichi la copia locale del file
+~/.mc/ini e si cambi il valore del campo clear_before_exec a 0.
 .PP
 .I confirm_view_dir.
 .IP
-If you press F3 on a directory, normally MC enters that directory. If
-this flag is set to 1, then MC will ask for confirmation before
-changing the directory if you have files tagged.
+Se si preme F3 su di una directory, normalmente MC entra nella directory.
+Se questa opzione è impostata a 1, MC chiederà una conferma prima di
+cambiare directory se si hanno dei file marcati.
 .PP
 .I ftpfs_retry_seconds.
 .IP
-This value is the number of seconds the Midnight Commander will wait
-before attempting to reconnect to an ftp server that has denied the login.
-If the value is zero, the login will no be retried.
+Questo valore è il numero di secondi che il Midnight Commander aspetta
+prima di tentare di riconnettersi ad un ftp server che ha negato
+l'autenticazione. Se il valore è zero, l'autenticazione non verrà ritentata.
 .PP
 .I ftpfs_use_passive_connections.
 .IP
-This option is off by default.  This makes the ftpfs code use the
-passive open mode for transferring files.  This is used by people that
-are behind a filtering packet router.  This option just works if you
-are not using an ftp proxy.
+Il valore predefinito per questa opzione è spento. Essa fa in modo che
+il codice dell'fsftp usi la modalità passiva di apertura per il
+trasferimento dei file. Viene usata dalle persone che stanno dietro
+un router che filtra i pacchetti. Quest'opzione funziona solo se non
+si sta usando un proxy ftp.
 .PP
 .I max_dirt_limit.
 .IP
-Specifies how many screen updates can be skipped at most in the internal
-file viewer.  Normally this value is not significant, because the code
-automatically adjusts the number of updates to skip according to the rate
-of incoming keystrokes.  However, on very slow machines or terminals
-with a fast keyboard auto repeat, a big value can make screen updates
-too jumpy.
+Specifica al massimo quanti aggiornamenti possono essere saltati nel
+visualizzatore di file interno. Normalmente questo valore non è 
+significativo, dato che il codice automaticamente aggiusta il numero 
+da saltare a seconda della velocità con cui arrivano le pressioni dei 
+tasti. Comunque, su macchine molto lente o su terminali con un'auto
+ripetizione dei tasti molto veloce, un grande valore può rendere gli
+aggiornamenti dello schermo troppo instabili.
 .IP
-It seems that setting max_dirt_limit to 10 causes the best behavior,
-and that is the default value.
+Sembra che impostare max_dirt_limit a 10 porta i migliori risultati,
+e questo è il valore predefinito.
 .PP
 .I mouse_move_pages.
 .IP
-Controls whenever scrolling with the mouse is done by pages or line by
-line on the panels.
+Controlla il fatto che lo scorrimento con il mouse sui pannelli sia fatto 
+per pagine o per righe.
 .PP
 .I mouse_move_pages_viewer.
 .IP
-Controls if scrolling with the mouse is done by pages or line by line
-on the internal file viewer.
+Controlla se lo scorrimento del mouse nel visualizzatore di file interno 
+sia fatto per pagine o per righe.
 .PP
 .I old_esc_mode
 .IP
-By default the Midnight Commander treats the ESC key as a key prefix
-(old_esc_mode=0), if you set this option (old_esc_mode=1), then the
-ESC key will act as a prefix key for one second, and if no extra keys
-have arrived, then the ESC key is interpreted as a cancel key (ESC
-ESC).
+Normalmente il Midnight Commander tratta il tasto ESC come un prefisso
+(old_esc_mode=0), ma se si imposta quest'opzione (old_esc_mode=1),
+allora il tasto ESC agirà come un tasto di prefisso per un secondo, e 
+se non vengono premuti altri tasti, allora il tasto ESC sarà interpretato
+come un tasto di cancellazione (ESC ESC).
 .PP
 .PP
 .I only_leading_plus_minus
 .IP
-set special treatment for '+', '-', '*' in command line (select,
-unselect, reverse selection) only if command line is empty. No need to
-quote this characters in the middle of the command line. But we can not
-change selection when command line is not empty.
+Imposta una gestione speciale per '+', '-', '*' nella riga di comando 
+(selezione, de-selezione, selezione inversa) solo se la riga di comando è
+vuota. Non è necessario proteggere questi caratteri nel mezzo della riga
+di comando ma non è possibile cambiare selezione se la riga di comando
+non è vuota.
 .I panel_scroll_pages
 .IP
-If set (the default), panel will scroll by half the display when the
-cursor reaches the end or the beginning of the panel, otherwise it
-will just scroll a file at a time.
+Se impostata (valore predefinito), i pannelli scorrono di metà
+quando il cursore raggiunge la fine o l'inizio del pannello, 
+altrimenti scorrono di un file per volta.
 .PP
 .I preserve_uidgid
 .IP
-If this option is set (the default), when logged in as root the
-default will be to preserve the UID and the GID of files.  Some users
-prefer to disable this option, so that's why it's configurable.
+Se quest'opzione è impostata (valore predefinito), quando si è
+collegati come root verranno presevati gli attributi UID e GID dei
+file. Alcuni utenti preferiscono disabilitare questa opzione,
+ecco perché è configurabile.
 .PP
 .I show_output_starts_shell
 .IP
-This variable only works if you are not using the subshell support.
-When you use the C-o keystroke to go back to the user screen, if this
-one is set, you will get a fresh shell.  Otherwise, pressing any key
-will bring you back to the Midnight Commander.
+Questa variabile lavora solo se non si sta usando il supporto della 
+subshell. Quando si usano i tasti C-o per tornare allo schermo utente,
+se quest'opzione è impostata, si avrà una nuova shell. Altrimenti,
+premendo qualsiasi tasto si tornerà al Midnight Commander.
 .PP
 .I torben_fj_mode
 .IP
-If this flag is set, then the home and end keys will work slightly
-different on the panels, instead of moving the selection to the first
-and last files in the panels, they will act as follows:
+Se quest'opzione è impostata, allora i tasti inizio e fine lavoreranno
+leggermente differentemente sui pannelli. Invece che muovere le selezioni
+al primo e ultimo file del pannello, agiranno nel modo seguente:
 .IP
-The home key will: Go up to the middle line, if below it; else go to
-the top line unless it is already on the top line, in this case it
-will go to the first file in the panel.
+Il tasto inizio: va alla riga centrale, se sotto di essa, altrimenti
+va alla riga in cima a meno che non ci sia già; in tal caso andrà al
+primo file del pannello.
 .IP
-The end key has a similar behavior: Go down to the middle line, if
-over it; else go to the bottom line unless you already are at the
-bottom line, in such case it will move the selection to the last file
-name in the panel.
+Il tasto fine ha un comportamento simile: va giu alla riga centrale
+se era sopra di essa, altrimenti va alla riga di fondo a meno che non 
+ci sia già; in tal caso sposterà la selezione all'ultimo file del
+pannello.
 .PP
 .I use_file_to_guess_type
 .IP
-If this variable is on (the default) it will spawn the file command to
-match the file types listed on the
+Se questa variabile è abilitata (valore predefinito) userà il comando
+file per trovare delle corrispondenze sui tipi di file elencati nel file
 .\"LINK2"
-mc.ext file.
+mc.ext .
 .\"Extension File Edit"
 .PP
 .I xterm_mode
 .IP
-If this variable is on (default is off) when you browse the file
-system on a Tree panel, it will automatically reload the other panel
-with the contents of the selected directory.
+Se questa variabile è impostata (il valore predefinito è no) quando
+si naviga il file system su un pannello ad albero, automaticamente
+ricaricherà l'altro pannello con il contenuto della directory 
+selezionata.
 .PP
-.SH "Terminal databases"
-The Midnight Commander provides a way to fix your system terminal
+.\NODE "Terminal databases"
+.SH "Database di terminali"
+Il Midnight Commander fornisce una maniera per fix your system terminal
 database without requiring root privileges.  The Midnight Commander
 searches in the system initialization file (the mc.lib file located in
 the Midnight Commander library directory) and in the ~/.mc/ini file
