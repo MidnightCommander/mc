@@ -246,7 +246,13 @@ open_archive_int (vfs *me, vfs_s_super *super)
     }
 
     print_vfs_message( _("fish: Sending initial line...") );
-    if (command (me, super, WAIT_REPLY, "#FISH\necho; start_fish_server; echo '### 200'\n") != COMPLETE)
+    /*
+     * Run `start_fish_server'. If it doesn't exist - no problem,
+     * we'll talk directly to the shell.
+     */
+    if (command (me, super, WAIT_REPLY,
+                 "#FISH\necho; start_fish_server 2>&1;"
+                 " echo '### 200'\n") != COMPLETE)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message( _("fish: Handshaking version...") );

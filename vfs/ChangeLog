@@ -1,3 +1,8 @@
+2001-04-17  Pavel Roskin  <proski@gnu.org>
+
+	* fish.c (open_archive_int): Redirect stderr of start_fish_server
+	to stdout so we don't get confused if it doesn't exist.
+
 2001-04-09  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* samba/includes/proto.h, samba/libsmb/nterr.c (get_nt_error): return
