@@ -1,5 +1,4 @@
-mclibdir = $(libdir)/mc
-syntaxdir = $(mclibdir)/syntax
+syntaxdir = $(pkgdatadir)/syntax
 
 syntax_DATA =			\
 	Syntax			\

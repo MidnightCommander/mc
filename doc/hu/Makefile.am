@@ -1,4 +1,3 @@
-mclibdir = $(libdir)/mc
-mclib_DATA = mc.hlp.hu
+pkgdata_DATA = mc.hlp.hu
 
-EXTRA_DIST = $(mclib_DATA)
+EXTRA_DIST = $(pkgdata_DATA)

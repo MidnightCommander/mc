@@ -1,11 +1,10 @@
 mandir = @mandir@/ru
 man_MANS = mc.1
 
-mclibdir = $(libdir)/mc
-mclib_DATA = mc.hlp.ru
+pkgdata_DATA = mc.hlp.ru
 
 EXTRA_DIST = xnc.hlp
-CLEANFILES = $(mclib_DATA)
+CLEANFILES = $(pkgdata_DATA)
 
 mc.hlp.ru: mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp
 	- $(top_builddir)/src/man2hlp 58 mc.1 $(srcdir)/xnc.hlp mc.hlp.ru

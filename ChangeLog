@@ -1,3 +1,8 @@
+2002-09-21  Pavel Roskin  <proski@gnu.org>
+
+	* */Makefile.am: Replace mclibdir with pkgdatadir to use "share"
+	directory for architecture-independent files.
+
 2002-09-19  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/m4.syntax: New file.

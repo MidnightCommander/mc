@@ -1,5 +1,4 @@
-mclibdir = $(libdir)/mc
-extfsdir = $(mclibdir)/extfs
+extfsdir = $(pkgdatadir)/extfs
 
 # Files to install and distribute, but not filters
 EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini

@@ -1,8 +1,7 @@
 AM_CFLAGS = $(GLIB_CFLAGS)
-AM_CPPFLAGS = -DLIBDIR=\""$(mclibdir)/"\" -DLOCALEDIR=\""$(localedir)"\"
+AM_CPPFLAGS = -DLIBDIR=\""$(pkgdatadir)/"\" -DLOCALEDIR=\""$(localedir)"\"
 
-mclibdir = $(libdir)/mc
-suppbindir = $(mclibdir)/bin
+suppbindir = $(pkglibdir)/bin
 localedir = $(datadir)/locale
 
 bin_PROGRAMS = mc mcmfmt

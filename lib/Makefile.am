@@ -1,6 +1,5 @@
-mclibdir   = $(libdir)/mc
-suppbindir = $(mclibdir)/bin
-tidir      = $(mclibdir)/term
+suppbindir = $(pkgdatadir)/bin
+tidir      = $(pkgdatadir)/term
 
 if CHARSET
 LIBFILES_ADD = mc.charsets
@@ -22,7 +21,7 @@ noinst_SCRIPTS = tdiff
 suppbin_SCRIPTS = mc.csh mc.sh
 ti_DATA = README.xterm linux.ti xterm.ad xterm.ti ansi.ti vt100.ti xterm.tcap
 
-mclib_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
+pkgdata_DATA = $(LIBFILES_CONST) $(LIBFILES_ADD) $(LIBFILES_OUT)
 
 # Files processed by configure don't need to be here
 EXTRA_DIST = \
