@@ -1781,7 +1781,7 @@ static int ftpfs_find_machine (const char *host, const char *domain)
 
 	if (g_strcasecmp (host, buffer)) {
 	    /* Try adding our domain to short names in .netrc */
-	    char *host_domain = strchr (host, '.');
+	    const char *host_domain = strchr (host, '.');
 	    if (!host_domain)
 		continue;
 

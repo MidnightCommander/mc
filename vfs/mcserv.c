@@ -126,7 +126,7 @@ static int clnt_version;
 int logged_in = 0;
 
 /* Home directory */
-char *home_dir = NULL;
+const char *home_dir = NULL;
 
 char *up_dir = NULL;
 
@@ -972,10 +972,11 @@ do_auth (const char *username, const char *password)
     if (this->pw_dir[strlen (this->pw_dir) - 1] == '/')
 	home_dir = strdup (this->pw_dir);
     else {
-	home_dir = malloc (strlen (this->pw_dir) + 2);
-	if (home_dir) {
-	    strcpy (home_dir, this->pw_dir);
-	    strcat (home_dir, "/");
+    	char *new_home_dir = malloc (strlen (this->pw_dir) + 2);
+	if (new_home_dir) {
+	    strcpy (new_home_dir, this->pw_dir);
+	    strcat (new_home_dir, "/");
+	    home_dir = new_home_dir;
 	} else
 	    home_dir = "/";
     }

@@ -48,8 +48,8 @@ vfs_split_url (const char *path, char **host, char **user, int *port,
     struct passwd *passwd_info;
     char *dir, *colon, *inner_colon, *at, *rest;
     char *retval;
-    char *pcopy = g_strdup (path);
-    char *pend = pcopy + strlen (pcopy);
+    char * const pcopy = g_strdup (path);
+    const char *pend = pcopy + strlen (pcopy);
 
     if (pass)
 	*pass = NULL;
@@ -299,7 +299,7 @@ static int
 is_week (const char *str, struct tm *tim)
 {
     static const char *week = "SunMonTueWedThuFriSat";
-    char *pos;
+    const char *pos;
 
     if (!str)
 	return 0;
@@ -316,7 +316,7 @@ static int
 is_month (const char *str, struct tm *tim)
 {
     static const char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
-    char *pos;
+    const char *pos;
 
     if (!str)
 	return 0;
@@ -351,7 +351,7 @@ is_localized_month (const unsigned char *month)
 static int
 is_time (const char *str, struct tm *tim)
 {
-    char *p, *p2;
+    const char *p, *p2;
 
     if (!str)
 	return 0;

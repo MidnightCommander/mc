@@ -1,3 +1,14 @@
+2004-09-25  Roland Illig  <roland.illig@gmx.de>
+
+	* ftpfs.c (ftpfs_find_machine): Added const qualifier.
+	* mcserv.c (do_auth): Likewise.
+	* utilvfs.c (is_month): Likewise. (is_time): Likewise.
+	(is_week): Likewise.
+	* vfs.c (_vfs_get_class): Added const qualifier.
+	(vfs_prefix_to_class): Added a string length parameter to
+	reduce the use of g_strdup. (vfs_split): Changes due to the
+	new string length parameter.
+
 2004-09-25  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* direntry.c (vfs_s_free_entry): g_free handles NULL argument too, 

@@ -150,7 +150,7 @@ vfs_register_class (struct vfs_class *vfs)
 
 /* Return VFS class for the given prefix */
 static struct vfs_class *
-vfs_prefix_to_class (char *prefix)
+vfs_prefix_to_class (const char *prefix, size_t prefix_len)
 {
     struct vfs_class *vfs;
 
@@ -161,7 +161,7 @@ vfs_prefix_to_class (char *prefix)
 	    return vfs;
 	}
 	if (vfs->prefix
-	    && !strncmp (prefix, vfs->prefix, strlen (vfs->prefix)))
+	    && !strncmp (prefix, vfs->prefix, prefix_len))
 	    return vfs;
     }
     return NULL;
@@ -243,7 +243,7 @@ vfs_split (char *path, char **inpath, char **op)
     if (slash)
 	*slash = 0;
 
-    if ((ret = vfs_prefix_to_class (semi+1))){
+    if ((ret = vfs_prefix_to_class (semi+1, strlen (semi+1)))){
 	if (op) 
 	    *op = semi + 1;
 	if (inpath)
@@ -262,8 +262,8 @@ vfs_split (char *path, char **inpath, char **op)
 static struct vfs_class *
 _vfs_get_class (const char *path)
 {
-    char *semi;
-    char *slash;
+    const char *semi;
+    const char *slash;
     struct vfs_class *ret;
 
     g_return_val_if_fail(path, NULL);
@@ -273,18 +273,14 @@ _vfs_get_class (const char *path)
 	return NULL;
     
     slash = strchr (semi, PATH_SEP);
-    *semi = 0;
-    if (slash)
-	*slash = 0;
+    if (slash == NULL)
+        slash += strlen (slash);
     
-    ret = vfs_prefix_to_class (semi+1);
+    ret = vfs_prefix_to_class (semi+1, slash - (semi + 1));
 
-    if (slash)
-	*slash = PATH_SEP;
     if (!ret)
 	ret = _vfs_get_class (path);
 
-    *semi = '#';
     return ret;
 }
 
