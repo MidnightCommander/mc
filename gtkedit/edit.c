@@ -114,7 +114,7 @@ int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *t
 #endif
  
     long buf;
-    int j, file = 0, buf2;
+    int j, file = -1, buf2;
 
     for (j = 0; j <= MAXBUFF; j++) {
 	edit->buffers1[j] = NULL;
@@ -192,7 +192,7 @@ which indicates an invalid file handle.
     }
 
     edit->curs1 = 0;
-    if (filename)
+    if (file != -1)
 	close (file);
 
     return 0;
@@ -574,13 +574,12 @@ long pop_action (WEdit * edit)
     return c;
 }
 
-
 /* is called whenever a modification is made by one of the four routines below */
 static inline void edit_modification (WEdit * edit)
 {
+    edit->caches_valid = 0;
     edit->modified = 1;
 }
-
 
 /*
    Basic low level single character buffer alterations and movements at the cursor.
@@ -906,11 +905,7 @@ long edit_eol (WEdit * edit, long current)
 {
     if (current < edit->last_byte) {
 	for (;; current++)
-#if 0
-	    if (current == edit->last_byte || edit_get_byte (edit, current) == '\n')
-#else
 	    if (edit_get_byte (edit, current) == '\n')
-#endif
 		break;
     } else
 	return edit->last_byte;
@@ -922,11 +917,7 @@ long edit_bol (WEdit * edit, long current)
 {
     if (current > 0) {
 	for (;; current--)
-#if 0
-	    if (current == 0 || edit_get_byte (edit, current - 1) == '\n')
-#else
 	    if (edit_get_byte (edit, current - 1) == '\n')
-#endif
 		break;
     } else
 	return 0;
@@ -1125,7 +1116,7 @@ void edit_move_to_prev_col (WEdit * edit, long p)
 
 
 /* move i lines */
-static void edit_move_up (WEdit * edit, unsigned long i, int scroll)
+void edit_move_up (WEdit * edit, unsigned long i, int scroll)
 {
     long p, l = edit->curs_line;
 
@@ -1160,19 +1151,48 @@ int is_blank (WEdit * edit, long offset)
     return 1;
 }
 
+
+/* returns the offset of line i */
+long edit_find_line (WEdit * edit, int line)
+{
+    int i, j = 0;
+    int m = 1000000000;
+    if (!edit->caches_valid) {
+	for (i = 0; i < N_LINE_CACHES; i++)
+	    edit->line_numbers[i] = edit->line_offsets[i] = 0;
+/* three offsets that we *know* are line 0 at 0 and these two: */
+	edit->line_numbers[1] = edit->curs_line;
+	edit->line_offsets[1] = edit_bol (edit, edit->curs1);
+	edit->line_numbers[2] = edit->total_lines;
+	edit->line_offsets[2] = edit_bol (edit, edit->last_byte);
+	edit->caches_valid = 1;
+    }
+/* find the closest known point */
+    for (i = 0; i < N_LINE_CACHES; i++) {
+	int n;
+	n = abs (edit->line_numbers[i] - line);
+	if (n < m) {
+	    m = n;
+	    j = i;
+	}
+    }
+    if (m == 0)
+	return edit->line_offsets[j];	/* know the offset exactly */
+    if (m == 1)
+	i = j;			/* one line different - caller might be looping, so stay in this cache */
+    else
+	i = 3 + (rand () % (N_LINE_CACHES - 3));
+    if (line > edit->line_numbers[j])
+	edit->line_offsets[i] = edit_move_forward (edit, edit->line_offsets[j], line - edit->line_numbers[j], 0);
+    else
+	edit->line_offsets[i] = edit_move_backward (edit, edit->line_offsets[j], edit->line_numbers[j] - line);
+    edit->line_numbers[i] = line;
+    return edit->line_offsets[i];
+}
+
 int line_is_blank (WEdit * edit, long line)
 {
-    static long p = -1, l = 0;
-    if (p == -1 || abs (l - line) > abs (edit->curs_line - line)) {
-	l = edit->curs_line;
-	p = edit->curs1;
-    }
-    if (line < l)
-	p = edit_move_backward (edit, p, l - line);
-    else if (line > l)
-	p = edit_move_forward (edit, p, line - l, 0);
-    l = line;
-    return is_blank (edit, p);
+    return is_blank (edit, edit_find_line (edit, line));
 }
 
 /* moves up until a blank line is reached, or until just 
@@ -1205,7 +1225,7 @@ static void edit_move_up_paragraph (WEdit * edit, int scroll)
 }
 
 /* move i lines */
-static void edit_move_down (WEdit * edit, int i, int scroll)
+void edit_move_down (WEdit * edit, int i, int scroll)
 {
     long p, l = edit->total_lines - edit->curs_line;
 

@@ -472,7 +472,7 @@ void edit_get_syntax_color (WEdit * edit, long byte_index, int *fg, int *bg)
     unsigned long rule;
     if (!edit->rules || byte_index >= edit->last_byte || !option_syntax_highlighting) {
 #ifdef MIDNIGHT
-	*fg = NORMAL_COLOR;
+	*fg = EDITOR_NORMAL_COLOR;
 #else
 	*fg = NO_COLOR;
 	*bg = NO_COLOR;
@@ -3157,7 +3157,7 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
     edit_free_syntax_rules (edit);
 
 #ifdef MIDNIGHT
-    if (!SLtt_Use_Ansi_Colors)
+    if (!SLtt_Use_Ansi_Colors || !use_colors)
 	return;
 #endif
 
