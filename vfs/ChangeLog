@@ -1,3 +1,8 @@
+1998-08-06  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (BUILT_SOURCES): Make it `make dist' friendly.
+	Don't try building this, yet.
+
 1998-07-31  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
 
 	* Make-mc.in (install.extfs): Splitted install of $(EXTFS_CONST)
