@@ -2249,18 +2249,39 @@ view_labels (WView *view)
     redraw_labels (h);
 }
 
-/* Both views */
-static int
+/* Check for left and right arrows, possibly with modifiers */
+static cb_ret_t
 check_left_right_keys (WView *view, int c)
 {
-    if (c == KEY_LEFT)
+    if (c == KEY_LEFT) {
 	move_left (view);
-    else if (c == KEY_RIGHT)
-	move_right (view);
-    else
-	return 0;
+	return MSG_HANDLED;
+    }
 
-    return 1;
+    if (c == KEY_RIGHT) {
+	move_right (view);
+	return MSG_HANDLED;
+    }
+
+    /* Ctrl with arrows moves by 10 postions in the unwrap mode */
+    if (view->hex_mode || view->wrap_mode)
+	return MSG_NOT_HANDLED;
+
+    if (c == (KEY_M_CTRL | KEY_LEFT)) {
+	view->start_col = view->start_col + 10;
+	if (view->start_col > 0)
+	    view->start_col = 0;
+	view->dirty++;
+	return MSG_HANDLED;
+    }
+
+    if (c == (KEY_M_CTRL | KEY_RIGHT)) {
+	view->start_col = view->start_col - 10;
+	view->dirty++;
+	return MSG_HANDLED;
+    }
+
+    return MSG_NOT_HANDLED;
 }
 
 static void

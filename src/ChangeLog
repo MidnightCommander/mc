@@ -1,5 +1,8 @@
 2003-11-21  Pavel Roskin  <proski@gnu.org>
 
+	* view.c (check_left_right_keys): Implement fast scrolling if
+	Ctrl is pressed.  Idea by Arpad Biro <biro_arpad@yahoo.com>
+
 	* execute.c (do_execute): Use get_key_code(), not getch() to
 	consume all characters from a single sequence.
 	Reported by Miven Dooligan <dooligan@intergate.ca>
