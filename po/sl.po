@@ -6349,7 +6349,7 @@ msgstr "%s: %s: %s %ld prene¹enih bajtov"
 #~ msgstr " Vpnesi ime datoteke: "
 
 #~ msgid "The Quick Brown Fox Jumps Over The Lazy Dog"
-#~ msgstr "Pi¹kur Molèe Grabi Fi¾ol Iz Dna Cezijeve Hoste"
+#~ msgstr "Pi¹kur molèe grabi fi¾ol iz dna cezijeve hoste"
 
 #~ msgid ""
 #~ "gtkedit.c: HOME environment variable not set and no passwd entry - "
