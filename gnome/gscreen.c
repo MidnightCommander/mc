@@ -32,7 +32,6 @@
 #include "gpageprop.h"
 #include "gpopup.h"
 #include "gcliplabel.h"
-#include "gblist.h"
 #include "gicon.h"
 #include "../vfs/vfs.h"
 #include <gdk/gdkprivate.h>
