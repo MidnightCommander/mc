@@ -1,3 +1,10 @@
+2002-07-03  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c (setup_passive): Cast arguments to isdigit() to
+	unsigned char for compatibility with non-GNU libc.
+	* tar.c (from_oct): Likewise with isspace().
+	Reported by Roland Illig <1illig@informatik.uni-hamburg.de>
+
 2002-07-03  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* extfs.c (extfs_fill_names): Generate filename#vfsname/dir

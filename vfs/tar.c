@@ -40,7 +40,7 @@ static long from_oct (int digs, char *where)
 {
     register long value;
 
-    while (isspace (*where)) {	/* Skip spaces */
+    while (isspace ((unsigned char) *where)) {	/* Skip spaces */
 	where++;
 	if (--digs <= 0)
 	    return -1;		/* All blank field */
@@ -51,7 +51,7 @@ static long from_oct (int digs, char *where)
 	--digs;
     }
 
-    if (digs > 0 && *where && !isspace (*where))
+    if (digs > 0 && *where && !isspace ((unsigned char) *where))
 	return -1;		/* Ended on non-space/nul */
 
     return value;

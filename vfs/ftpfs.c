@@ -911,11 +911,11 @@ setup_passive (vfs *me, vfs_s_super *super, int my_socket, struct sockaddr_in *s
 	return 0;
 
     /* Parse remote parameters */
-    for (c = reply_str + 4; (*c) && (!isdigit (*c)); c++)
+    for (c = reply_str + 4; (*c) && (!isdigit ((unsigned char) *c)); c++)
 	;
     if (!*c)
 	return 0;
-    if (!isdigit (*c))
+    if (!isdigit ((unsigned char) *c))
 	return 0;
     if (sscanf (c, "%d,%d,%d,%d,%d,%d", &xa, &xb, &xc, &xd, &xe, &xf) != 6)
 	return 0;
