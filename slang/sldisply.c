@@ -462,7 +462,7 @@ static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
 
 	   case '2':
 	   case '3':
-	     if (fmt == fmt_max)
+	     if (fmt == fmt_max) break;
 	     if (*fmt == 'x')
 	       {
 		  char x_fmt_buf [4];
@@ -798,7 +798,7 @@ void SLtt_delete_char (void)
 
 void SLtt_erase_line (void)
 {
-   tt_write_string("\r");
+   tt_write ("\r", 1);
    Cursor_Set = 1; Cursor_c = 0;
    SLtt_del_eol();
 }

@@ -1,3 +1,9 @@
+2004-10-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* sldisply.c (tt_sprintf): Add missed break.
+	* sldisply.c (SLtt_erase_line): Use tt_write() instead
+	tt_write_string().
+
 2004-09-26  Mike Gorchak  <mike@malva.ua> 
 
 	* sldisplay.c (SLtt_goto_rc): Disable cursor movement optimizations
