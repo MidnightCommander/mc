@@ -59,6 +59,9 @@ avoid using a superlong line to redefine all colors.
 Find file dialog should not be closed if the regex is invalid.  Make it
 possible to search for string verbatim.
 
+Filters in the editor should operate on the open file.  They don't work
+on VFS now.  Don't close and reopen the file.
+
 
 After 4.6.1 on 4.6.x branch
 ===========================
