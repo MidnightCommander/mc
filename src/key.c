@@ -109,17 +109,24 @@ void add_select_channel (int fd, select_fn callback, void *info)
 void delete_select_channel (int fd)
 {
     SelectList *p = select_list;
-    SelectList *prev = 0;
-    
-    while (p){
-	if (p->fd == fd){
-	    if (prev)
-		prev->next = p->next;
+    SelectList *p_prev = 0;
+    SelectList *p_next;
+
+    while (p) {
+	if (p->fd == fd) {
+	    p_next = p->next;
+
+	    if (p_prev)
+		p_prev->next = p_next;
 	    else
-		select_list = p->next;
+		select_list = p_next;
+
 	    g_free (p);
+	    p = p_next;
+	    continue;
 	}
-	prev = p;
+
+	p_prev = p;
 	p = p->next;
     }
 }
