@@ -1,5 +1,9 @@
 2001-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4: Put -lncurses to MCLIBS, not LIBS.
+	* configure.in: Likewise.  Add MCLIBS to LIBS temporarily when
+	testing for functions in ncurses.
+
 	* acinclude.m4: Provide descriptions in all AC_DEFINE macros.
 	* configure.in: Likewise.  Use AH_BOTTOM to include extraconf.h.
 	* acconfig.h: Remove.

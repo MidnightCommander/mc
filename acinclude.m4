@@ -740,7 +740,7 @@ AC_DEFUN([AC_NCURSES], [
         if test -f $1/$2
 	then
 	    AC_MSG_RESULT([Found ncurses on $1/$2])
- 	    LIBS="$LIBS $3"
+ 	    MCLIBS="$MCLIBS $3"
 	    CPPFLAGS="$CPPFLAGS $4"
 	    search_ncurses=false
 	    screen_manager=$5

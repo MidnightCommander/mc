@@ -320,7 +320,7 @@ AC_ARG_WITH(ncurses,
 	then
 		search_ncurses=true
 	else
-		LIBS="$LIBS -L$withval/lib -lncurses"
+		MCLIBS="$MCLIBS -L$withval/lib -lncurses"
 		CPPFLAGS="$CPPFLAGS -I$withval/include"
 		search_ncurses=false
 		screen_manager="ncurses"
@@ -692,6 +692,8 @@ dnl If ncurses exports the ESCDELAY variable it should be set to 0
 dnl or you'll have to press Esc three times to dismiss a dialog box.
 dnl
 if test -n "$ncurses_version"; then
+  save_LIBS="$LIBS"
+  LIBS="$MCLIBS $LIBS"
   AC_CACHE_CHECK([for ESCDELAY variable],
 		 [mc_cv_ncurses_escdelay],
 		 [AC_TRY_COMPILE([], [
@@ -711,6 +713,7 @@ if test -n "$ncurses_version"; then
   fi
 
   AC_CHECK_FUNCS(resizeterm keyok)
+  LIBS="$save_LIBS"
 fi
 
 if test "x$screen_manager" = "xunknown"; then
