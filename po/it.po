@@ -1462,7 +1462,7 @@ msgstr " coll. simbolico relativo: %s "
 #: src/cmd.c:1303
 #, c-format
 msgid " Could not chdir to %s "
-msgstr " Impossibile eseguire chdir su %s "
+msgstr " Impossibile entrare in %s "
 
 #: src/cmd.c:1312
 msgid " Enter machine name (F1 for details): "
@@ -2279,7 +2279,7 @@ msgstr "Con&tinua"
 
 #: src/find.c:103
 msgid "&Chdir"
-msgstr "&Chdir"
+msgstr "&CambiaDir"
 
 #: src/find.c:104
 msgid "&Again"
