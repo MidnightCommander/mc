@@ -1,3 +1,8 @@
+2004-09-04  Jakub Jelinek  <jakub@redhat.com>
+
+	* configure.ac: grantpt is only available with -D_XOPEN_SOURCE
+	or -D_GNU_SOURCE under Linux.
+
 2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* HACKING: Add to section "Programming Tips" g_free tip.
