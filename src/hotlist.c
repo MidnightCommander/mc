@@ -151,27 +151,21 @@ hotlist_refresh (Dlg_head * dlg)
 }
 
 /* If current->data is 0, then we are dealing with a VFS pathname */
-static inline void update_path_name (void)
+static inline void
+update_path_name (void)
 {
     char *text, *p;
-    WListbox  *list = hotlist_state.moving ? l_movelist : l_hotlist;
-    Dlg_head  *dlg = hotlist_state.moving ? movelist_dlg : hotlist_dlg;
+    WListbox *list = hotlist_state.moving ? l_movelist : l_hotlist;
+    Dlg_head *dlg = hotlist_state.moving ? movelist_dlg : hotlist_dlg;
 
-    if (list->current){
+    if (list->current) {
 	if (list->current->data != 0) {
-	    struct hotlist *hlp = (struct hotlist *)list->current->data;
-	    
+	    struct hotlist *hlp = (struct hotlist *) list->current->data;
+
 	    if (hlp->type == HL_TYPE_ENTRY)
 		text = hlp->directory;
 	    else
 		text = _("Subgroup - press ENTER to see list");
-	    
-	    p = g_strconcat (" ", current_group->label, " ", NULL);
-	    if (!hotlist_state.moving)
-		label_set_text (pname_group, name_trunc (p, dlg->cols - (UX*2+4)));
-	    else
-		label_set_text (movelist_group, name_trunc (p, dlg->cols - (UX*2+4)));
-	    g_free (p);
 	} else {
 	    text = list->current->text;
 	}
@@ -179,7 +173,18 @@ static inline void update_path_name (void)
 	text = "";
     }
     if (!hotlist_state.moving)
-	label_set_text (pname, name_trunc (text, dlg->cols - (UX*2+4)));
+	label_set_text (pname,
+			name_trunc (text, dlg->cols - (UX * 2 + 4)));
+
+    p = g_strconcat (" ", current_group->label, " ", NULL);
+    if (!hotlist_state.moving)
+	label_set_text (pname_group,
+			name_trunc (p, dlg->cols - (UX * 2 + 4)));
+    else
+	label_set_text (movelist_group,
+			name_trunc (p, dlg->cols - (UX * 2 + 4)));
+    g_free (p);
+
     dlg_redraw (dlg);
 }
 
