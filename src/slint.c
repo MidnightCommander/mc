@@ -472,7 +472,8 @@ int has_colors (void)
     char *cts = color_terminal_string, *s;
     int  i;
 
-    SLtt_Use_Ansi_Colors = force_colors;
+    if (force_colors)
+       SLtt_Use_Ansi_Colors = 1;
     if (NULL != getenv ("COLORTERM"))
 	SLtt_Use_Ansi_Colors = 1;
 
