@@ -24,6 +24,7 @@
 
 /* Namespace: exports mcfs_vfs_ops, tcp_invalidate_socket */
 
+#ifdef WITH_MCFS
 #include <config.h>
 #include <stdio.h>
 #include <errno.h>
@@ -59,7 +60,6 @@ static struct _mcfs_connection {
     int  version;
 } mcfs_connections [MCFS_MAX_CONNECTIONS];
 
-#ifdef WITH_MCFS
 
 #define mcserver_port 9876
 
@@ -1120,8 +1120,6 @@ vfs vfs_mcfs_ops = {
 MMAPNULL
 };
 
-#endif /* WITH_MCFS */
-
 
 /* FIXME: This part should go to another c module, perhaps tcp.c */
 
@@ -1162,3 +1160,5 @@ void tcp_invalidate_socket (int sock)
      mcfs_invalidate_socket (sock);
 }
 /* FIXME end: 'cause it is used not only by mcfs */
+
+#endif	/* WITH_MCFS */

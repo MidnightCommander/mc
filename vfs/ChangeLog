@@ -1,3 +1,8 @@
+2002-09-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* tcputil.c [!WITH_MCFS]: Disable mcfs related code.
+	* mcfs.c [!WITH_MCFS]: Disable all code.
+
 2002-09-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c: Don't define BOOL_DEFINED to fix compilation on

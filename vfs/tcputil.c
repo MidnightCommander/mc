@@ -56,6 +56,7 @@ extern void vfs_die (char *);
 
 int got_sigpipe;
 
+#ifdef	WITH_MCFS
 /* Reads a block on dest for len bytes from sock */
 /* Returns a boolean indicating the success status */
 int socket_read_block (int sock, char *dest, int len)
@@ -245,6 +246,7 @@ void rpc_add_get_callback (int sock, void (*cback)(int))
     new->link = sock_callbacks;
     sock_callbacks = new;
 }
+#endif	/* WITH_MCFS */
 
 static void sig_pipe (int unused)
 {
@@ -262,6 +264,7 @@ void tcp_init (void)
     sigaction (SIGPIPE, &sa, NULL);
 }
 
+#ifdef	WITH_MCFS
 int get_remote_port (struct sockaddr_in *sin, int *version)
 {
 #ifdef HAVE_PMAP_GETMAPS
@@ -289,5 +292,5 @@ int get_remote_port (struct sockaddr_in *sin, int *version)
     *version = 1;
     return mcserver_port;
 }
-
+#endif	/* WITH_MCFS */
 
