@@ -1,5 +1,8 @@
 2002-09-27  Pavel Roskin  <proski@gnu.org>
 
+	* util.c (name_trunc): Remove unused code, unhelpful error
+	message and workaround for bugs in the callers.
+
 	* file.c (copy_file_file): Rename DST_* names to DEST_*, since
 	DST_NONE is used in FreeBSD libc.
 	Reported by Pavel Shirshov <pavelsh@mail.ru>

@@ -203,39 +203,34 @@ fake_name_quote (const char *s, int quote_percent)
     return g_strdup (s);
 }
 
-/* If passed an empty txt (this usually means that there is an error)
- * in the upper layers, we return "/"
+/*
+ * Remove the middle part of the string to fit given length.
+ * Use "~" to show where the string was truncated.
+ * Return static buffer, no need to free() it.
  */
-char *name_trunc (const char *txt, int trunc_len)
+char *
+name_trunc (const char *txt, int trunc_len)
 {
-    static char x [MC_MAXPATHLEN+MC_MAXPATHLEN];
-    int    txt_len;
+    static char x[MC_MAXPATHLEN + MC_MAXPATHLEN];
+    int txt_len;
     char *p;
-    const int tilde_trunc = 1;
 
-    if (!txt)
-	txt = PATH_SEP_STR;
-    
-    if (trunc_len > sizeof (x)-1){
-	fprintf (stderr, _("name_trunc: too big"));
-	trunc_len = sizeof (x)-1;
+    if (trunc_len > sizeof (x) - 1) {
+	trunc_len = sizeof (x) - 1;
     }
     txt_len = strlen (txt);
-    if (txt_len <= trunc_len)
+    if (txt_len <= trunc_len) {
 	strcpy (x, txt);
-    else if (tilde_trunc){
-	int y = (trunc_len/2) + (trunc_len % 2);
-	strncpy (x, txt, y);
-	strncpy (x+y, txt+txt_len-(trunc_len/2), trunc_len/2);
-	x [y] = '~';
     } else {
-	strncpy (x, txt, trunc_len-1);
-	x [trunc_len-1] = '>';
+	int y = (trunc_len / 2) + (trunc_len % 2);
+	strncpy (x, txt, y);
+	strncpy (x + y, txt + txt_len - (trunc_len / 2), trunc_len / 2);
+	x[y] = '~';
     }
-    x [trunc_len] = 0;
+    x[trunc_len] = 0;
     for (p = x; *p; p++)
-        if (!is_printable (*p))
-            *p = '?';
+	if (!is_printable (*p))
+	    *p = '?';
     return x;
 }
 
