@@ -959,9 +959,17 @@ AC_SUBST(PCENTRULE)
 dnl
 dnl Output configuration files
 dnl
+dnl It's a hack to accomodate both Autoconf 2.13 and the 2.49x series,
+dnl It's needed until Autoconf 2.50 is released.
+ifelse(AC_ACVERSION, [2.13],
+[mc_subdirs=
 if test "x$SAMBAFILES" != x; then
-  AC_CONFIG_SUBDIRS(vfs/samba)
-fi
+  mc_subdirs=vfs/samba
+  AC_CONFIG_SUBDIRS([$mc_subdirs])
+fi],
+[if test "x$SAMBAFILES" != x; then
+  AC_CONFIG_SUBDIRS([vfs/samba])
+fi])
 
 AC_OUTPUT([
 Make.common 

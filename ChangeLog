@@ -1,3 +1,8 @@
+2001-02-07  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Only configure in vfs/samba if smbfs support is
+	enabled even with Autoconf 2.13.
+
 2001-01-30  Pavel Roskin  <proski@gnu.org>
 
 	* macros/gnome-vfs.m4 (GNOME_WITH_VFS): Fix mishandling of
