@@ -18,6 +18,17 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 		[Define to enable undelete support on ext2])
       ext2fs_undel=yes
       EXT2FS_UNDEL_LIBS="-lext2fs -lcom_err"
+      AC_CHECK_TYPE(ext2_ino_t, ,
+		    [AC_DEFINE(ext2_ino_t, ino_t,
+			       [Define to ino_t if undefined.])],
+		    [#include <errno.h>
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+/* asm/types.h defines its own umode_t :-( */
+#undef umode_t
+#include <linux/ext2_fs.h>
+#include <ext2fs/ext2fs.h>])
     fi
   fi
 ])
