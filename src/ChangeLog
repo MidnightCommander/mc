@@ -1,3 +1,13 @@
+2001-06-06  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* main.c [HAVE_CHARSET]: Remove source_codepage and display_codepage.
+	They are declared in selcodepage.c.
+	* setup.c [USE_VFS]: Remove declarations for variables which are
+	declared in vfs/ftpfs.c.
+	(load_setup) [HAVE_CHARSET]: init_printable_table commented
+	out to enable compilation. Error strings tagged for translation.
+	(init_setup): Optimized.
+
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
 	* boxes.c [HAVE_CHARSET]: New charset selection dialog.

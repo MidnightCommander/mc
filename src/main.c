@@ -213,11 +213,7 @@ int   pause_after_run = pause_on_dumb_terminals;
 /* It true saves the setup when quitting */
 int auto_save_setup = 1;
 
-#ifdef HAVE_CHARSET
-/* For charset translation */
-int source_codepage = -1;
-int display_codepage = -1;
-#else
+#ifndef HAVE_CHARSET
 /* If true, be eight bit clean */
 int eight_bit_clean = 1;
 

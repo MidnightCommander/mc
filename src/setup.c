@@ -62,11 +62,6 @@
 #include "../vfs/vfs.h"
 #ifdef USE_NETCODE
 #   include "../vfs/ftpfs.h"
-extern int use_netrc;
-extern int ftpfs_retry_seconds;
-extern int ftpfs_use_passive_connections;
-extern int ftpfs_use_unix_list_options;
-extern int ftpfs_first_cd_then_ls;
 #endif
 
 #ifdef HAVE_GNOME
@@ -415,12 +410,7 @@ void
 save_setup (void)
 {
     char *profile;
-#ifdef USE_VFS
-#ifdef USE_NETCODE
-    extern char *ftpfs_anonymous_passwd;
-    extern char *ftpfs_proxy_host;
-#endif
-#endif
+
     saving_setup = 1;
     profile = concat_dir_and_file (home_dir, PROFILE_NAME);
 
@@ -557,24 +547,21 @@ do_load_string (char *s, char *ss, char *def)
 char *
 setup_init (void)
 {
-    char *buffer;
     char   *profile;
     char   *inifile;
 
     if (profile_name)
 	    return profile_name;
 
-    buffer = concat_dir_and_file (home_dir, PROFILE_NAME);
-    inifile = concat_dir_and_file (mc_home, "mc.ini");
-    if (exist_file (buffer)){
-	profile = buffer;
-    } else if (exist_file (inifile)){
-	profile = g_strdup (inifile);
-	g_free (buffer);
-    } else {
-	profile = buffer;
+    profile = concat_dir_and_file (home_dir, PROFILE_NAME);
+    if (!exist_file (profile)){
+	inifile = concat_dir_and_file (mc_home, "mc.ini");
+	if (exist_file (inifile)){
+	    g_free (profile);
+	    profile = inifile;
+	} else
+	    g_free (inifile);
     }
-    g_free (inifile);
 
     profile_name = profile;
 
@@ -585,11 +572,7 @@ void
 load_setup (void)
 {
     char *profile;
-
     int    i;
-#ifdef USE_NETCODE
-    extern char *ftpfs_proxy_host;
-#endif
 
     profile = setup_init ();
     /* Load integer boolean options */
@@ -657,20 +640,20 @@ load_setup (void)
 #ifdef HAVE_CHARSET
     if ( load_codepages_list() <= 0 ) {
 	char errmsg[256];
-	sprintf( errmsg, "Can't load %s", CHARSETS_INDEX );
-	message( 1, MSG_ERROR, errmsg );
+	sprintf( errmsg, _("Can't load %s"), CHARSETS_INDEX );
+	message( 1, MSG_ERROR, "%s", errmsg );
     } else {
- 	char cpname[128];
- 	load_string( "Misc", "display_codepage", "",
- 		     cpname, sizeof(cpname) );
+	char cpname[128];
+	load_string( "Misc", "display_codepage", "",
+		     cpname, sizeof(cpname) );
 	if ( cpname[0] != '\0' ) {
- 	    char *errmsg;
+	    char *errmsg;
 
 	    display_codepage = get_codepage_index( cpname );
-	    init_printable_table( display_codepage );
+/*	    init_printable_table( display_codepage ); */
 	    errmsg = init_translation_table( source_codepage, display_codepage );
 	    if (errmsg)
-		message( 1, _(" Error "), errmsg );
+		message( 1, MSG_ERROR, "%s", errmsg );
 	}
     }
 #endif
