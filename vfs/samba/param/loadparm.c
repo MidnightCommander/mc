@@ -71,6 +71,7 @@ BOOL bLoaded = False;
 extern int DEBUGLEVEL;
 extern pstring user_socket_options;
 extern pstring global_myname;
+pstring global_scope = "";
 
 #ifndef GLOBAL_NAME
 #define GLOBAL_NAME "global"
@@ -521,8 +522,9 @@ static struct parm_struct parm_table[] =
   {"path",             P_STRING,  P_LOCAL,  &sDefault.szPath,           NULL,   NULL,  FLAG_BASIC|FLAG_SHARE|FLAG_PRINT},
   {"directory",        P_STRING,  P_LOCAL,  &sDefault.szPath,           NULL,   NULL,  0},
   {"workgroup",        P_USTRING, P_GLOBAL, &Globals.szWorkGroup,       NULL,   NULL,  FLAG_BASIC},
-  {"netbios name",     P_UGSTRING,P_GLOBAL, global_myname,                     NULL,   NULL,  FLAG_BASIC},
+  {"netbios name",     P_UGSTRING,P_GLOBAL, global_myname,              NULL,   NULL,  FLAG_BASIC},
   {"netbios aliases",  P_STRING,  P_GLOBAL, &Globals.szNetbiosAliases,  NULL,   NULL,  0},
+  {"netbios scope",    P_UGSTRING,P_GLOBAL, global_scope,               NULL,   NULL,  0},
   {"server string",    P_STRING,  P_GLOBAL, &Globals.szServerString,    NULL,   NULL,  FLAG_BASIC},
   {"interfaces",       P_STRING,  P_GLOBAL, &Globals.szInterfaces,      NULL,   NULL,  FLAG_BASIC},
   {"bind interfaces only", P_BOOL,P_GLOBAL, &Globals.bBindInterfacesOnly,NULL,   NULL,  0},
@@ -1159,9 +1161,10 @@ static FN_GLOBAL_STRING(lp_announce_version,&Globals.szAnnounceVersion)
 FN_GLOBAL_STRING(lp_netbios_aliases,&Globals.szNetbiosAliases)
 FN_GLOBAL_STRING(lp_driverfile,&Globals.szDriverFile)
 FN_GLOBAL_STRING(lp_panic_action,&Globals.szPanicAction)
+#if 0
 FN_GLOBAL_STRING(lp_adduser_script,&Globals.szAddUserScript)
 FN_GLOBAL_STRING(lp_deluser_script,&Globals.szDelUserScript)
-
+#endif
 FN_GLOBAL_STRING(lp_domain_groups,&Globals.szDomainGroups)
 FN_GLOBAL_STRING(lp_domain_admin_group,&Globals.szDomainAdminGroup)
 FN_GLOBAL_STRING(lp_domain_guest_group,&Globals.szDomainGuestGroup)
@@ -1518,7 +1521,7 @@ static BOOL lp_add_ipc(void)
   return(True);
 }
 
-
+#if 0
 /***************************************************************************
 add a new printer service, with defaults coming from service iFrom
 ***************************************************************************/
@@ -1552,7 +1555,7 @@ BOOL lp_add_printer(char *pszPrintername, int iDefaultService)
   
   return(True);
 }
-
+#endif /* 0 */
 
 /***************************************************************************
 Do a case-insensitive, whitespace-ignoring string compare.
@@ -2430,7 +2433,7 @@ static void lp_add_auto_services(char *str)
 	}
 	free(s);
 }
-
+#if 0
 /***************************************************************************
 auto-load one printer
 ***************************************************************************/
@@ -2445,7 +2448,7 @@ void lp_add_one_printer(char *name,char *comment)
 			string_set(&iSERVICE(i).comment,comment);
 	}
 }
-
+#endif /* 0 */
 /***************************************************************************
 have we loaded a services file yet?
 ***************************************************************************/

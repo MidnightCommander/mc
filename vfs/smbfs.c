@@ -860,8 +860,8 @@ smbfs_do_connect (const char *server, char *share)
 		share++;
 	}
 
-	make_nmb_name(&calling, global_myname, 0x0, "");
-	make_nmb_name(&called , server, current_bucket->name_type, "");
+	make_nmb_name(&calling, global_myname, 0x0);
+	make_nmb_name(&called , server, current_bucket->name_type);
 
     for (;;) {
 
@@ -887,7 +887,7 @@ smbfs_do_connect (const char *server, char *share)
 		DEBUG(1, ("session request to %s failed\n", called.name));
 		cli_shutdown(c);
 		if (strcmp(called.name, "*SMBSERVER")) {
-			make_nmb_name(&called , "*SMBSERVER", 0x20, "");
+			make_nmb_name(&called , "*SMBSERVER", 0x20);
 			continue;
 		}
 		return NULL;

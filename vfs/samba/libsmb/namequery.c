@@ -120,7 +120,7 @@ BOOL name_status(int fd,char *name,int name_type,BOOL recurse,
   nmb->header.nscount = 0;
   nmb->header.arcount = 0;
 
-  make_nmb_name(&nmb->question.question_name,name,name_type,scope);
+  make_nmb_name(&nmb->question.question_name,name,name_type);
 
   nmb->question.question_type = 0x21;
   nmb->question.question_class = 0x1;
@@ -228,7 +228,7 @@ struct in_addr *name_query(int fd,const char *name,int name_type, BOOL bcast,BOO
   nmb->header.nscount = 0;
   nmb->header.arcount = 0;
 
-  make_nmb_name(&nmb->question.question_name,name,name_type,scope);
+  make_nmb_name(&nmb->question.question_name,name,name_type);
 
   nmb->question.question_type = 0x20;
   nmb->question.question_class = 0x1;

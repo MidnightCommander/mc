@@ -1,3 +1,24 @@
+2002-09-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* samba/param/loadparm.c: Add global_scope variable.
+	(parm_table): Add netbios scope parameter.
+	* samba/lib/util.c: Remove scope variable.  Use global_scope instead.
+	* samba/libsmb/nmblib.c (make_nmb_name): Remove scope parameter and
+	use global_scope instead.
+	* samba/libsmb/namequery.c: Adjust make_nmb_name() calls.
+	* samba/include/proto.h: Adjust make_nmb_name() declaration.
+
+	From samba 2.0.7 patchset.
+
+	* samba/param/loadparm.c (lp_adduser_script): Commented out.
+	(lp_deluser_script): Likewise.
+	(lp_add_printer): Likewise.
+	(lp_add_one_printer): Likewise.
+	* samba/lib/util.c (reduce_name): Likewise.
+	(transfer_file): Likewise.
+
+	* smbfs.c (smbfs_do_connect): Adjust make_nmb_name() calls.
+
 2002-08-26  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/urar.in: Use rar if unrar is missing.
