@@ -159,7 +159,10 @@
     int vfs_file_is_ftp (char *filename);
     int vfs_file_is_smb (char *filename);
     char *vfs_get_current_dir (void);
-    
+
+    extern int vfs_timeout;
+    extern int tar_gzipped_memlimit;
+
     void vfs_stamp (vfs *, vfsid);
     void vfs_rmstamp (vfs *, vfsid, int);
     void vfs_addstamp (vfs *, vfsid, struct vfs_stamping *);
