@@ -13,7 +13,6 @@ Group:     System Environment/Shells
 Source0:   ftp://ftp.nuclecu.unam.mx/linux/local/devel/mc-%{PACKAGE_VERSION}.tar.gz
 URL:       http://www.gnome.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
-Requires:  pam >= 0.59
 Requires:  mc-common >= %{PACKAGE_VERSION}
 Prereq:    /sbin/chkconfig
 
@@ -44,15 +43,6 @@ way more features.  This is the GNOME version. It's coolest feature is the
 ability to ftp, view tar, zip files and poke into RPMs for specific files.
 The GNOME version of Midnight Commander is not yet finished though. :-(
  
-%package -n mcserv
-Summary:  Midnight Commander file server
-Group:    System Environment/Daemons
-Requires: portmap
-%description -n mcserv
-mcserv is the server program for the Midnight Commander networking file
-system. It provides access to the host file system to clients running the
-Midnight file system (currently, only the Midnight Commander file manager).
-
 %prep
 %setup -q
 
@@ -72,24 +62,13 @@ fi
 %install
 echo $RPM_BUILD_ROOT
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,profile.d}
-
-
 make install DESTDIR=$RPM_BUILD_ROOT
-install lib/mcserv.init $RPM_BUILD_ROOT/etc/rc.d/init.d/mcserv
-
-install -m 644 lib/mcserv.pamd $RPM_BUILD_ROOT/etc/pam.d/mcserv
+install -d $RPM_BUILD_ROOT/etc/profile.d
 install lib/{mc.sh,mc.csh} $RPM_BUILD_ROOT/etc/profile.d
 
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post   -n mcserv
-/sbin/chkconfig --add mcserv
-
-%preun  -n mcserv
-/sbin/chkconfig --del mcserv
 
 %files
 %defattr(-, root, root)
@@ -119,13 +98,6 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/lib/mc/extfs
 %dir %{prefix}/lib/mc/syntax
 
-%files -n mcserv
-%defattr(-, root, root)
-%config /etc/pam.d/mcserv
-%config /etc/rc.d/init.d/mcserv
-%attr(-, root, man)  %{prefix}/man/man8/mcserv.8*
-%{prefix}/bin/mcserv
-
 %files -n gmc
 %defattr(-, root, root)
 %{prefix}/bin/gmc
@@ -143,6 +115,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{prefix}/share/pixmaps/mc
 
 %changelog
+* Thu Apr 19 2001 Pavel Roskin <proski@gnu.org>
+- Remove package mcserv. Drop dependency on PAM.
+
 * Mon Feb 26 2001 Pavel Roskin <proski@gnu.org>
 - Remove mc-gnome.ext.
 
