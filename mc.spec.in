@@ -84,7 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_prefix}/share/mc/extfs/*
 %{_prefix}/share/mc/mc.ext
 %{_prefix}/share/mc/mc.lib
-%{_prefix}/share/mc/mc.menu
+%{_prefix}/share/mc/mc.menu*
 %{?_with_charset:%config %{_prefix}/share/mc/mc.charsets}
 
 %{_prefix}/share/mc/mc.hint*
@@ -98,8 +98,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/syntax
 
 %changelog
-* Tue Sep 22 2003 Pavel Roskin <proski@gnu.org>
+* Tue Sep 23 2003 Pavel Roskin <proski@gnu.org>
 - Remove term directory, it's obsolete and irrelevant on modern systems.
+- Include translated menu files.
 
 * Sun Feb 16 2003 Pavel Roskin <proski@gnu.org>
 - Remove obsolete dependency on /sbin/chkconfig.
