@@ -1,7 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR Free Software Foundation, Inc.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Slovenian translation file for mc.
+# Copyright (C) 2000 Free Software Foundation, Inc.
+# Andraz Tori <andraz.tori1@guest.arnes.si> 2000
 #
+
+
+
 #. Not essential to translate
 #: gtkedit/edit.c:2768 gtkedit/editcmd.c:2880 gtkedit/editcmd.c:2886
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
@@ -9,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc \n"
 "POT-Creation-Date: 2000-06-22 00:00+0200\n"
-"PO-Revision-Date: 2000-05-18 00:47+0200\n"
+"PO-Revision-Date: 2000-06-22 00:00+0200\n"
 "Last-Translator: Andraz Tori <andraz.tori1@guest.arnes.si>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
