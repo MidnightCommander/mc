@@ -408,22 +408,10 @@ AC_CHECK_LIB(seq, get_process_stats, [
 	LIBS="$LIBS -lseq"
 	AC_DEFINE(HAVE_GET_PROCESS_STATS)])
 
-NETFILES=""
-vfs_flags="tarfs"
-use_net_code=false
+GNOME_VFS_CHECKS
+NETFILES=
 if test $have_socket = yes; then
-    AC_STRUCT_LINGER
-    AC_CHECK_FUNCS(pmap_set, , [
-       AC_CHECK_LIB(rpc, pmap_set, [
-	 LIBS="-lrpc $LIBS"
-	AC_DEFINE(HAVE_PMAP_SET)
-	])])
-    AC_CHECK_FUNCS(pmap_getport pmap_getmaps rresvport)
-dnl add for source routing support setsockopt
-    AC_CHECK_HEADERS(rpc/pmap_clnt.h)
-    vfs_flags="$vfs_flags, mcfs, ftpfs"
-    NETFILES="\$(NETFILES)"
-    use_net_code=true
+   NETFILES="\$(NETFILES)"
 fi
 AC_SUBST(NETFILES)
 
@@ -1091,12 +1079,6 @@ AC_DEFUN(AC_WITH_VFS, [
 	LIBVFS="libvfs-mc.a"
 	LVFS="-lvfs-mc"
 	fastdepvfs=fastdepvfs
-	if test $have_socket = yes; then
-	    mcserv="mcserv"
-	    if $termnet; then
-		TERMNET="-ltermnet"
-	    fi
-        fi
 	CPPFLAGS="$CPPFLAGS -I\$(vfsdir)"
 	AC_MSG_RESULT(Using the VFS switch code)
 	vfs_type="Midnight Commander Virtual File System"
@@ -1106,7 +1088,6 @@ AC_SUBST(TERMNET)
 LIBVFS=""
 LVFS=""
 fastdepvfs=""
-mcserv=""
 vfs_type="normal"
 AC_ARG_WITH(vfs,
 	[--with-vfs		   Compile with the VFS code],
@@ -1115,6 +1096,8 @@ AC_ARG_WITH(vfs,
 		AC_WITH_VFS
 	else
 		vfs_flags=""
+		TERMNET=""
+		mcserv=""
 	fi,
 	dnl Default: provide the VFS code
 	AC_WITH_VFS	
@@ -1122,7 +1105,6 @@ AC_ARG_WITH(vfs,
 AC_SUBST(LIBVFS)
 AC_SUBST(LVFS)
 AC_SUBST(fastdepvfs)
-AC_SUBST(mcserv)
 
 AC_DEFUN(AC_WITH_EDIT, [
 	AC_DEFINE(USE_INTERNAL_EDIT)
@@ -1161,22 +1143,15 @@ AC_ARG_WITH(netrc,
 
 undelfs_o=""
 AC_DEFUN(AC_EXT2_UNDEL, [
-	AC_CHECK_HEADERS(ext2fs/ext2fs.h linux/ext2_fs.h)
-	if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
-	then
-	    if test x$ac_cv_header_linux_ext2_fs_h = xyes
-	    then
-		AC_DEFINE(USE_EXT2FSLIB)
-		AC_MSG_RESULT(With ext2fs file recovery code)
-		vfs_flags="${vfs_flags} undelfs"
-		undelfs_o="undelfs.o"
-		LIBS="$LIBS -lext2fs -lcom_err"
-	    else
-		AC_MSG_WARN(No ext2fs file recovery code: linux/ext2_fs.h is missing)
-	    fi
-	else
-	    AC_MSG_WARN(No ext2fs file recovery code: ext2fs/ext2fs.h is missing)
-	fi
+  GNOME_UNDELFS_CHECKS
+  if test "$ext2fs_undel" = yes; then
+     AC_MSG_RESULT(With ext2fs file recovery code)
+     vfs_flags="${vfs_flags} undelfs"
+     undelfs_o="undelfs.o"
+     LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
+  else
+     AC_MSG_WARN(No ext2fs file recovery code)
+  fi
 ])
 
 AC_ARG_WITH(ext2undel,
@@ -1438,7 +1413,7 @@ AC_OUTPUT([
 Make.common 
 Makefile 
 doc/Makefile 
-vfs/Makefile 
+vfs/Makefile:vfs/Make-mc.in
 lib/Makefile
 tk/Makefile 
 gnome/Makefile 

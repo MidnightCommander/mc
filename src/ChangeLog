@@ -1,3 +1,14 @@
+Thu Jul 23 22:44:16 1998  Tom Tromey  <tromey@cygnus.com>
+
+	* Makefile.in (aclocal.m4): Depend on all source files.  Include
+	gnome-vfs.m4 and gnome-undelfs.m4.
+	(GNOME_M4_FILES): New macro.
+	* autogen.sh: Include gnome-vfs.m4 and gnome-undelfs.m4 in
+	aclocal.m4.
+	* configure.in: Use GNOME_VFS_CHECKS and GNOME_UNDELFS_CHECKS
+	macros instead of in-line checks.  Create vfs/Makefile from
+	vfs/Make-mc.in.
+
 Thu Jul 23 19:49:12 1998  Pavel Roskin <pavel.roski@ecsoft.co.uk>
 
 	* hotlist.c: corrected layout of the warning which appears
