@@ -50,38 +50,7 @@ if ($1 ~ /^ftp:\/\//) {
 }' 2>/dev/null
 }
 
-mcftplistfs_run ()
-{
-if [ -n "$MC_CONTROL_FILE" ]
-then
-    cat $1 | @AWK@ -v name=$2 '
-/^[\ \	]*(#.*)?$/ { next }
-{
-if ($1 ~ /^ftp:\/\//) {
-    if ($1 ~ /\/$/) {
-	a[4]=substr($1, 7, length($1) - 7)
-	a[5]=$1
-    } else {
-        a[4]=substr($1, 7)
-	a[5]=sprintf("%s/", $1)
-    }
-    if (NF >= 2)
-	a[4]=$2
-    else {
-        i=split(a[4], b, "/")
-        a[4]=b[1]
-        for (j = 2; j <= i; j++)
-            a[4]=sprintf("%s_%s", a[4], b[j])
-    }
-    if (a[4] ~ name)
-	printf "cd %s\n", a[5]
-}
-}' 2>/dev/null > $MC_CONTROL_FILE
-fi
-}
-
 case "$1" in
   list) mcftplistfs_list $2; exit 0;;
-  run) mcftplistfs_run $2 $3; exit 0;;
 esac
 exit 1

@@ -1,3 +1,8 @@
+2002-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* vfs/extfs/ftplist.in: Remove support for running commands, it
+	makes no sence.
+
 2002-08-16  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.global: Remove, it duplicates the role of mc.lib.
