@@ -1,3 +1,8 @@
+1999-01-17  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gpageprop.c (item_properties): Use the metadata information for this.
+	(item_properties): Set the icon-filename metadata bit
+
 1999-01-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* glayout.c (create_new_menu_from): Handle both the system dir and

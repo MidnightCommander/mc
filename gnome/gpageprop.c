@@ -66,6 +66,9 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 	char          *new_title;
 	char          *new_name;
 	char          *base;
+	char          *icon_filename;
+	int            size;
+		
 
 	struct stat s;
 	int retval = 0;
@@ -84,15 +87,15 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 
 	/* Create the property widgets */
 	mc_stat (fname, &s);
-	base = x_basename (fname);
 
 	vbox = gtk_vbox_new (FALSE, 6);
 
 	name = gprop_filename_new (fname, base);
 	gtk_box_pack_start (GTK_BOX (vbox), name->top, FALSE, FALSE, 0);
 	if (dii) {
-	  gene = gprop_general_new(fname, base);
-	  gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
+		gnome_metadata_get (fname, "icon-filename", &size, &icon_filename);
+		gene = gprop_general_new(fname, icon_filename);
+		gtk_box_pack_start (GTK_BOX (vbox), gene->top, FALSE, FALSE, 0);
 	}
 
 	perm = gprop_perm_new (s.st_mode, get_owner (s.st_uid), get_group (s.st_gid));
@@ -133,6 +136,7 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 
 	if (prop_dialog_result != 0) {
 		gtk_widget_destroy (GTK_WIDGET (toplevel));
+		g_free (icon_filename);
 		return 0; /* nothing changed */
 	}
 
@@ -218,17 +222,24 @@ item_properties (GtkWidget *parent, char *fname, DesktopIconInfo *dii)
 			
 		retval |= GPROP_FILENAME;
 	}
-	
+
 	/* Check and change title and icon -- change is handled by caller */
 
 	if (dii) {
-	  gprop_general_get_data (gene, &new_title, NULL);
-	  desktop_icon_set_text(DESKTOP_ICON(dii->dicon), new_title);
-	  g_free(new_title);
+		char *new_icon;
 
-	  retval |= GPROP_TITLE;
+		gprop_general_get_data (gene, &new_title, &new_icon);
+
+		if (strcmp (new_icon, icon_filename) != 0)
+			gnome_metadata_set (fname, "icon-filename", strlen (new_icon)+1, new_icon);
+
+		desktop_icon_set_text(DESKTOP_ICON(dii->dicon), new_title);
+		g_free(new_title);
+
+		retval |= GPROP_TITLE;
 	}
 
 	gtk_widget_destroy (GTK_WIDGET (toplevel));
+	g_free (icon_filename);
 	return retval;
 }
