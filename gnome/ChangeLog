@@ -1,3 +1,9 @@
+2000-08-31  Pavel Roskin  <proski@gnu.org>
+
+	* directory-ok.xpm gpopup.c i-device.png image.metadata.in
+	make-thumb.c mc.metadata.in multi-ok.png multi-ok.xpm multi.xpm
+	not.png olddnd.c: removed
+
 2000-08-29  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* Makefile.in (CFLAGS): -I$(rootdir)/src removed from CFLAGS -- it
