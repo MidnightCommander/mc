@@ -218,20 +218,20 @@ open_tcp_link  (char *host, int *port, int *version, char *caller)
     if (!*host)
 	return 0;
     
-    bzero ((char *) &server_address, sizeof (server_address));
+    memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = AF_INET;
     
     /*  Try to use the dotted decimal number */
     if ((inaddr = inet_addr (host)) != -1)
-	bcopy ((char *) &inaddr, (char *) &server_address.sin_addr,
-	       sizeof (inaddr));
+	memcpy ((char *) &server_address.sin_addr, (char *) &inaddr,
+		sizeof (inaddr));
     else {
 	if ((hp = gethostbyname (host)) == NULL){
 	    message_2s (1, caller, _(" Cannot locate hostname: %s "), host);
 	    return 0;
 	}
-	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr,
-	       hp->h_length);
+	memcpy ((char *) &server_address.sin_addr, (char *) hp->h_addr,
+		hp->h_length);
     }
 
     /* Try to contact a remote portmapper to obtain the listening port */

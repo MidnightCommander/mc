@@ -776,7 +776,7 @@ static int do_ftp_auth (char *username, char *password)
     int      my_socket;
     char     answer [4];
 
-    bzero ((char *) &local_address, sizeof (local_address));
+    memset ((char *) &local_address, 0, sizeof (local_address));
     
     local_address.sin_family = AF_INET;
     /* FIXME: extract the ftp port with the proper function */
@@ -784,8 +784,8 @@ static int do_ftp_auth (char *username, char *password)
 
     /*  Convert localhost to usable format */
     if ((inaddr = inet_addr ("127.0.0.1")) != -1)
-	bcopy ((char *) &inaddr, (char *) &local_address.sin_addr,
-	       sizeof (inaddr));
+	memcpy ((char *) &local_address.sin_addr, (char *) &inaddr,
+		sizeof (inaddr));
     
     if ((my_socket = socket (AF_INET, SOCK_STREAM, 0)) < 0){
 	if (!isDaemon) fprintf (stderr, "do_auth: can't create socket\n");
@@ -1126,7 +1126,7 @@ static char *get_client (int portnum)
     if (hp == 0)
 	return "hp = 0!";
     
-    bzero ((char *) &server_address, sizeof (server_address));
+    memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = hp->h_addrtype;
     server_address.sin_addr.s_addr = htonl (INADDR_ANY);
     server_address.sin_port = htons (portnum);

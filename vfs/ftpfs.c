@@ -560,17 +560,17 @@ setup_source_route (int socket, int dest)
 
     if (!source_route)
 	return;
-    bzero (buffer, sizeof (buffer));
+    memset (buffer, 0, sizeof (buffer));
     *ptr++ = IPOPT_LSRR;
     *ptr++ = 3 + 8;
     *ptr++ = 4;			/* pointer */
 
     /* First hop */
-    bcopy ((char *) &source_route, ptr, sizeof (int));
+    memcpy (ptr, (char *) &source_route, sizeof (int));
     ptr += 4;
 
     /* Second hop (ie, final destination) */
-    bcopy ((char *) &dest, ptr, sizeof (int));
+    memcpy (ptr, (char *) &dest, sizeof (int));
     ptr += 4;
     while ((ptr - buffer) & 3)
 	ptr++;
@@ -715,7 +715,7 @@ ftpfs_open_socket (vfs *me, vfs_s_super *super)
     }
     
     /* Get host address */
-    bzero ((char *) &server_address, sizeof (server_address));
+    memset ((char *) &server_address, 0, sizeof (server_address));
     server_address.sin_family = AF_INET;
     server_address.sin_addr.s_addr = inet_addr (host);
     if (server_address.sin_addr.s_addr != -1)
@@ -732,7 +732,7 @@ ftpfs_open_socket (vfs *me, vfs_s_super *super)
 	server_address.sin_family = hp->h_addrtype;
 
 	/* We copy only 4 bytes, we can not trust hp->h_length, as it comes from the DNS */
-	bcopy ((char *) hp->h_addr, (char *) &server_address.sin_addr, 4);
+	memcpy ((char *) &server_address.sin_addr, (char *) hp->h_addr, 4);
     }
 
     server_address.sin_port = htons (port);
@@ -951,8 +951,8 @@ setup_passive (vfs *me, vfs_s_super *super, int my_socket, struct sockaddr_in *s
     n [4] = (unsigned char) xe;
     n [5] = (unsigned char) xf;
 
-    bcopy ((void *)n,     &(sa->sin_addr.s_addr), 4);
-    bcopy ((void *)&n[4], &(sa->sin_port), 2);
+    memcpy (&(sa->sin_addr.s_addr), (void *)n, 4);
+    memcpy (&(sa->sin_port), (void *)&n[4], 2);
     setup_source_route (my_socket, sa->sin_addr.s_addr);
     if (connect (my_socket, (struct sockaddr *) sa, sizeof (struct sockaddr_in)) < 0)
 	return 0;

@@ -982,7 +982,7 @@ free_bucket (smbfs_connection *bucket)
 	g_free (bucket->user);
 	wipe_password (bucket->password);
 	if (bucket->home) g_free (bucket->home);
-	bzero (bucket, sizeof (smbfs_connection));
+	memset (bucket, 0, sizeof (smbfs_connection));
 }
 
 static smbfs_connection *
@@ -1380,7 +1380,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		if ((p = strrchr(mydir, '/')))
 			mydir = p + 1;			/* advance util last '/' */
 		if (strcmp(mydir, mypath) == 0) {	/* fake a stat for ".." */
-			bzero(buf, sizeof(struct stat));
+			memset(buf, 0, sizeof(struct stat));
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
 			g_free(mdp);
@@ -1400,7 +1400,7 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 			return -1;
 		}
 		if (strcmp(mypath, dnp) == 0) {
-			bzero(buf, sizeof(struct stat));
+			memset(buf, 0, sizeof(struct stat));
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
 			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
 			DEBUG(1, ("	CURRENT:found in %s\n", current_info->dirname));
@@ -1522,7 +1522,7 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		if (strcmp(sp, pp) == 0) {
 			/* make server name appear as directory */
 			DEBUG(1, ("smbfs_stat: showing server as directory\n"));
-			bzero(buf, sizeof(struct stat));
+			memset(buf, 0, sizeof(struct stat));
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
     		return 0;
 		}

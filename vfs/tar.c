@@ -284,7 +284,7 @@ read_header (vfs *me, vfs_s_super *archive, int tard)
 	    if (written > size)
 		written = size;
 
-	    bcopy (data, bp, written);
+	    memcpy (bp, data, written);
 	    bp += written;
 	}
 #if 0

@@ -1,3 +1,11 @@
+2002-07-15  Pavel Roskin  <proski@gnu.org>
+
+	* ftpfs.c: Replace bzero and bcopy with memset and memcpy.
+	* mcfs.c: Likewise.
+	* mcserv.c: Likewise.
+	* smbfs.c: Likewise.
+	* tar.c: Likewise.
+
 2002-07-14  Pavel Roskin  <proski@gnu.org>
 
 	* fish.c (open_archive_int): Don't combine "export" and
