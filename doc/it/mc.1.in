@@ -1,5 +1,6 @@
 .\" Tradotto dal 15 agosto 2002 da
 .\"     Marco Ciampa <ciampix@libero.it>
+.\" Chi vuole contribuire si aggiunga il nome qui sotto.
 .\"
 .TH mc 1 "30 Ottobre 1998"
 .\"SKIP_SECTION"
@@ -31,75 +32,77 @@ Colori
 per informazioni aggiuntive.
 .TP
 .I "\-C arg"
-Used to specify a different color set in the command line.  The format
-of arg is documented in the
+Usato per specificare un set di colori differente a riga di comando.
+Il formato di arg è documentato nella sezione
 .\"LINK2"
-Colors
+Colori
 .\"Colors"
-section.
+.
 .TP
 .I "\-d"
-Disables mouse support.
+Disabilita il supporto mouse.
 .TP
 .I "\-f"
-Displays the compiled-in search paths for Midnight Commander files.
+Mostra i percorsi di ricerca compilati per i file del Midnight Commander.
 .TP
 .I "\-k"
-Reset softkeys to their default from the termcap/terminfo
-database. Only useful on HP terminals when the function keys don't work.
+Reimposta i softkeys ai valori predefiniti dal database termcap/terminfo.
+Utile solo su terminali HP quando non vanno i tasti funzione.
 .TP
 .I "-l file" 
-Save the ftpfs dialog with the server in file.
+Salva il dialogo ftpfs con il server in file.
 .TP
 .I "\-P"
-At program end, the Midnight Commander will print the last working
-directory. This function should not be used directly, instead, it should
-be used from a special shell function that will automatically change the
-current directory of the shell to the last directory the Midnight
-Commander was in (thanks to Torben Fjerdingstad and Sergey for
-contributing this function and the code implementing this option).
-Source the files
+All'uscita, il Midnight Commander stampa l'ultima directory in uso.
+Questa funzione non è fatta per un uso diretto, ma dovrebbe essere 
+utilizzata da una speciale funzione shell che imposti automaticamente 
+l'ultima directory corrente della shell come l'ultima directory in cui
+stava il Midnight Commander (grazie a Torben Fjerdingstad e Sergey per
+il contributo di questa funzione e per il codice che la implementa).
+Prelevate i file
 .B @prefix@/lib/mc/bin/mc.sh
-(bash and zsh users) respectively
+(utenti bash e zsh) e rispettivamente
 .B @prefix@/lib/mc/bin/mc.csh
-(tcsh users) in order to have this function defined.
+(utenti tcsh) per avere questa funzione definita.
 .TP
 .I "\-s"
-Turns on the slow terminal mode, in this mode the program will not
-draw expensive line drawing characters and will toggle verbose mode
-off.
+Abilita il modo terminale lento, in questa modalità il programma
+non disegna le linee e disabilita la modalità prolissa.
 .TP
 .I "\-t"
-Used only if the code was compiled with Slang and terminfo: it makes
-the Midnight Commander use the value of the 
+Usata solo se il codice è stato compilato con Slang e terminfo: fa
+in modo che il Midnight Commander usi il valore della variabile
 .B TERMCAP
-variable for the terminal information instead of the information on
-the system wide terminal database
+per le informazioni sul terminale invece delle informazioni di sistema
+sul database terminali.
 .TP
 .I "\-u"
-Disables the use of a concurrent shell (only makes sense if the
-Midnight Commander has been built with concurrent shell support).
+Disabilita l'uso della shell concorrente (ha senso solo se il
+Midnight Commander è stato compilato con il supporto per la shell
+concorrente).
 .TP
 .I "\-U"
-Enables the use of the concurrent shell support (only makes sense if
-the Midnight Commander was built with the subshell support set as an
-optional feature).
+Abilita l'uso della shell concorrente (ha senso solo se il
+Midnight Commander è stato compilato con il supporto per la shell
+concorrente impostato come una caratteristica opzionale).
 .TP
 .I "\-v file"
-Enters the internal viewer to view the file specified.
+Lancia il visualizzatore interno per il file specificato.
 .TP
 .I "\-V"
-Displays the version of the program.
+Mostra la versione del programma.
 .TP
 .I "\-x"
-Forces xterm mode.  Used when running on xterm-capable terminals (two
-screen modes, and able to send mouse escape sequences).
+Forza la modalità xterm. Usata quando è in funzione su terminali
+abilitati-xterm (due modalità video e in grado di spedire sequenze
+mouse di escape).
 .PP
-If specified, the first path name is the directory to show in the
-selected panel; the second path name is the directory to be shown in
-the other panel.
+Se specificato, il primo percorso è la directory mostrata nel
+pannello selezionato; il secondo è la directory mostrata nell'altro
+pannello.
 .PP
-.SH "Overview"
+.\"NODE "Overview"
+.SH "Panoramica"
 The screen of the Midnight Commander is divided into four parts.
 Almost all of the screen space is taken up by two directory panels.
 By default, the second line from the bottom of the screen is the
