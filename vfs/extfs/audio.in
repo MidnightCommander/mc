@@ -29,6 +29,9 @@ audiofs_copyout ()
 {
     if [ "$2" == "CDDB" ]; then
         DISCID=`cd-discid $1 | tr " " "+"`
+	if [ -z "$DISCID" ]; then
+	    exit 1
+	fi
         RESPONSE=`wget -q -T 60 -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+query+$DISCID&$CDDB_HANDSHAKE"  | @AWK@ '/^200/ { print $2,$3; }'`
 	wget -q -T 60 -O - "$CDDB_SERVER/~cddb/cddb.cgi?cmd=cddb+read+$RESPONSE&$CDDB_HANDSHAKE" | grep -v "^#" > $3
     else
