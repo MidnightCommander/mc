@@ -1,5 +1,8 @@
 2001-02-08  Pavel Roskin  <proski@gnu.org>
 
+	* Make-mc.in: Use mkinstalldirs to create $(distdir)/extfs,
+	since CVS Automake already creates that directory.
+
 	* Make-mc.in: Don't add _LARGEFILE64_SOURCE to CFLAGS without
 	testing - it breaks on HP-UX 10.20.
 

@@ -293,7 +293,7 @@ distdir:
 	for I in $(DISTVFS); \
 	  do cp -p $(srcdir)/$$I $(distdir) || exit 1; \
 	done
-	mkdir $(distdir)/extfs
+	$(mkinstalldirs) $(distdir)/extfs
 	(cd extfs && $(MAKE) $(AM_MAKEFLAGS) top_distdir=../$(top_distdir) \
 		distdir=../$(distdir)/extfs distdir) || exit 1
 	mkdir $(distdir)/samba
