@@ -1472,7 +1472,7 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
 
 	if ((count++ % 32) == 0)
 	    x_flush_events ();
-	if (!d->running)
+	if (verbose && !d->running)
 	    break;
 #endif
 	if (p >= update_activate){

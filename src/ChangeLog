@@ -1,3 +1,10 @@
+1999-01-13  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* view.c (search): Missing condition.
+
+	* treestore.c (tree_store_opendir): Simplistic fix.  This is not
+	quite correct.
+
 1999-01-12  Jonathan Blandford  <jrb@redhat.com>
 
 	* cmd.c (mkdir_cmd): now mkdir_cmd will accept relative, and
