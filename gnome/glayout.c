@@ -629,10 +629,10 @@ create_new_menu (GnomeApp *app, WPanel *panel)
 	if (file2 != NULL){
 		if (strcmp (file, file2) != 0)
 			create_new_menu_from (file2, shell, pos);
+		g_free (file2);
 	}
 
 	g_free (file);
-	g_free (file2);
 }
 
 /*
