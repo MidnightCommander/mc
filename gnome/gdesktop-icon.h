@@ -37,9 +37,8 @@ struct _DesktopIcon {
 
 	GnomeCanvasItem *icon;		/* The item that contains the icon */
 	GnomeCanvasItem *text;		/* The item that contains the editable text */
-	GnomeCanvasItem *stipple;	/* The rectangle used as a stipple when the icon is selected */
-	GnomeCanvasItem *background;    /* A background we can control */
-					   
+	GnomeCanvasItem *stipple;	/* The stippled rectangle used when the icon is selected */
+
 	int width, height;		/* Total size of the window */
 
 	int icon_x, icon_y;		/* Icon offsets */

@@ -91,15 +91,9 @@ size_changed (GnomeIconTextItem *text, gpointer data)
 static void
 canvas_size_allocated (GtkWidget *widget, GtkAllocation *allocation, gpointer data)
 {
-	DesktopIcon *dicon = data;
-	
-	gnome_canvas_set_scroll_region (GNOME_CANVAS (widget), 0, 0, allocation->width, allocation->height);
-
-	gnome_canvas_item_set (dicon->background,
-			       "x2", (double) allocation->width,
-			       "y2", (double) allocation->height,
-			       NULL);
-			       
+	gnome_canvas_set_scroll_region (GNOME_CANVAS (widget),
+					0, 0,
+					allocation->width, allocation->height);
 }
 
 static void
@@ -116,22 +110,13 @@ desktop_icon_init (DesktopIcon *dicon)
 	dicon->canvas = gnome_canvas_new ();
 	gtk_signal_connect (GTK_OBJECT (dicon->canvas), "size_allocate",
 			    (GtkSignalFunc) canvas_size_allocated,
-			    dicon);
+			    NULL);
 
 	gtk_container_add (GTK_CONTAINER (dicon), dicon->canvas);
 	gtk_widget_show (dicon->canvas);
 
 	/* Create the icon and the text items */
 
-	dicon->background = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (dicon->canvas)),
-						   gnome_canvas_rect_get_type (),
-						   "x1", 0.0,
-						   "y1", 0.0,
-						   "x2", 0.0,
-						   "y2", 0.0,
-						   NULL);
-	gnome_canvas_item_hide (dicon->background);
-	
 	dicon->icon = gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (dicon->canvas)),
 					     gnome_canvas_image_get_type (),
 					     "anchor", GTK_ANCHOR_NW,
@@ -200,9 +185,6 @@ desktop_icon_realize (GtkWidget *widget)
 	/* Set the stipple color now that we have a style */
 
 	gnome_canvas_item_set (dicon->stipple,
-			       "fill_color_gdk", &widget->style->bg[GTK_STATE_SELECTED],
-			       NULL);
-	gnome_canvas_item_set (dicon->background,
 			       "fill_color_gdk", &widget->style->bg[GTK_STATE_SELECTED],
 			       NULL);
 }
@@ -395,8 +377,8 @@ desktop_icon_reshape (DesktopIcon *dicon)
 
 	gnome_canvas_item_get_bounds (dicon->text, &x1, &y1, &x2, &y2);
 
-	text_width = x2 - x1 + 1;
-	text_height = y2 - y1 + 1;
+	text_width = x2 - x1;
+	text_height = y2 - y1;
 
 	/* Calculate new size of widget */
 
@@ -455,13 +437,10 @@ desktop_icon_select (DesktopIcon *dicon, int sel)
 	g_return_if_fail (dicon != NULL);
 	g_return_if_fail (IS_DESKTOP_ICON (dicon));
 
-	if (sel){
+	if (sel)
 		gnome_canvas_item_show (dicon->stipple);
-		gnome_canvas_item_show (dicon->background);
-	} else {
+	else
 		gnome_canvas_item_hide (dicon->stipple);
-		gnome_canvas_item_hide (dicon->background);
-	}
 
 	gnome_icon_text_item_select (GNOME_ICON_TEXT_ITEM (dicon->text), sel);
 }

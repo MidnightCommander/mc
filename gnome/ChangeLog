@@ -1,3 +1,11 @@
+1999-06-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop-icon.[ch]: Removed the background hack for desktop
+	icons.  Now the GnomeIconTextItem does the right thing.
+
+	* gdesktop-icon.c (desktop_icon_reshape): Use the correct size for
+	the icon text item.
+
 1999-06-07  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gdesktop.c (new_terminal): New function to open a terminal from
