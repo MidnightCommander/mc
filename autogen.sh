@@ -45,7 +45,7 @@ if test $gettext_ver -ge 01100; then
   done
   # Does we need po/Makevars.in and family for gettext 0.11 ?
   if test ! -e po/Makevars; then
-    cat > po/Makevars <<EOF
+    cat > po/Makevars <<\EOF
 # Usually the message domain is the same as the package name.
 DOMAIN = $(PACKAGE)
 
