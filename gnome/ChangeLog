@@ -1,3 +1,16 @@
+1998-11-27  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (x_create_panel): Set the usize for the ministatus
+	label to be (0, -1), this means: do not request any horizontal
+	space, use any vertical space given.
+
+	Put the ministatus inside an hbox, and use
+	gtk_container_set_resize_mode in this hbox to stop any queue
+	events from being propagated up in the hierachy of widgets 
+
+	This kills all of the CList/GnomeIconList/Scrollbar/Toolbar
+	flickering now.
+
 1998-11-26  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gtree.c: More work on gtree.  It is basically ready to stick
