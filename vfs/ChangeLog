@@ -25,7 +25,7 @@ Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	When we don't get a directory listing with 'LIST -la <path>' then
 	try to get it with `CWD <path>; LIST'.
 
-Tue Sep 15 20:27:29 1998  Norbert Warmuth  <k3190@fh-sw.de
+Tue Sep 15 20:27:29 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (login_server): s/ftpfs_get_host/my_get_host/
 	
@@ -37,7 +37,7 @@ Tue Sep 15 20:27:29 1998  Norbert Warmuth  <k3190@fh-sw.de
 Tue Sep 15 20:15:42 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.h (struct connection): added boolean which indicates that
-	the ftp server doesn't unterstand Unix ls options
+	the ftp server doesn't understand Unix ls options
 
 	* ftpfs.h (struct dir): added enum to store symlink status of the
 	in memory directory cache (directory has no symbolic links;
@@ -48,7 +48,7 @@ Tue Sep 15 20:02:08 1998  Norbert Warmuth  <k3190@fh-sw.de>
 	* shared_ftp_fish.c, fish.c: updated references to retrieve_dir to
 	honour the additional boolean parameter
 
-Tue Sep 15 00:42:15 1998  Yimur Bakeyev <mc@bat.ru>
+Tue Sep 15 00:42:15 1998  Timur Bakeyev <mc@bat.ru>
 
 	* vfs.h: add vfs_split() declaration, to make sfs.c happy.
 
