@@ -949,9 +949,9 @@ view_other_cmd (void)
 #ifndef HAVE_X
 	keypad(stdscr, FALSE);
 	endwin ();
-#endif
 	if (!status_using_ncurses)
 	    do_exit_ca_mode ();
+#endif
 	mc_raw_mode ();
 	if (console_flag)
 	    restore_console ();
@@ -976,10 +976,10 @@ view_other_cmd (void)
 	if (console_flag)
 	    handle_console (CONSOLE_SAVE);
 
+#ifndef HAVE_X	
 	if (!status_using_ncurses)
 	    do_enter_ca_mode ();
 
-#ifndef HAVE_X	
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
 	if (use_mouse_p)
