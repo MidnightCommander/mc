@@ -119,6 +119,8 @@ static int cpio_skip_padding(vfs_s_super *super)
     case CPIO_NEWC:
     case CPIO_CRC:
 	return CPIO_SEEK_CUR(super, (4 - (CPIO_POS(super) % 4)) % 4);
+    case CPIO_OLDC:
+	return CPIO_POS(super);
     default:
 	g_assert_not_reached();
 	return 42; /* & the compiler is happy :-) */
@@ -449,7 +451,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 		   'No such file or directory' is such case) */
 
 	if(!S_ISDIR(entry->ino->st.st_mode)) { /* This can be considered archive inconsistency */
-	    message_2s(1, MSG_ERROR, _("%s contains duplicit entries! Skiping!"), super->name);
+	    message_2s(1, MSG_ERROR, _("%s contains duplicit entries! Skipping!"), super->name);
 	} else {
 	    entry->ino->st.st_mode = stat->st_mode;
 	    entry->ino->st.st_uid = stat->st_uid;
