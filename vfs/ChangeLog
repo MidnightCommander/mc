@@ -36,7 +36,7 @@
 	optional.  Eliminate trivial implementations.
 	(vfs_getid): New function - safe wrapper around getid().  Use
 	it everywhere.
-	(vfs_ncs_getid): Remove dead code, inprove readability.
+	(vfs_ncs_getid): Remove dead code, improve readability.
 
 2003-11-07  Pavel Roskin  <proski@gnu.org>
 
@@ -72,7 +72,7 @@
 
 	* vfs.c (vfs_rmstamp): Rescan the tree after the parents have
 	been removed.  Otherwise using old data causes data corruption
-	in some combinations (e.g. extfs inside tatfs).
+	in some combinations (e.g. extfs inside tarfs).
 
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
