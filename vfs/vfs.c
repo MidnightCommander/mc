@@ -116,15 +116,12 @@ static vfs *vfs_list = &vfs_local_ops;
 int
 vfs_register (vfs *vfs)
 {
-    int res;
-
     if (!vfs)
 	vfs_die("You can not register NULL.");
     
-    res = (vfs->init) ? (*vfs->init)(vfs) : 1;
-
-    if (!res)
-	return 0;
+    if (vfs->init)		/* vfs has own initialization function */
+	if (!(*vfs->init)(vfs))	/* but it failed */
+	    return 0;
 
     vfs->next = vfs_list;
     vfs_list = vfs;
@@ -397,16 +394,15 @@ ferrno (vfs *vfs)
 }
 
 int
-mc_open (char *file, int flags, ...)
+mc_open (const char *filename, int flags, ...)
 {
     int  handle;
     int  mode;
     void *info;
-    vfs  *vfs;
     va_list ap;
-    
-    file = vfs_canon (file);
-    vfs = vfs_type (file);
+
+    char *file = vfs_canon (filename);
+    vfs  *vfs  = vfs_type (file);
 
     /* Get the mode flag */	/* FIXME: should look if O_CREAT is present */
     va_start (ap, flags);
@@ -690,7 +686,7 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 #define ISSLASH(a) (!a || (a == '/'))
 
 char *
-vfs_canon (char *path)
+vfs_canon (const char *path)
 {
     if (!path)
 	vfs_die("Can not canonize NULL");
@@ -704,18 +700,14 @@ vfs_canon (char *path)
 	    result = vfs_canon (local);
 	    g_free (local);
 	    return result;
-	} else 
-	    return g_strdup (path);
+	}
     }
 
     /* Relative to current directory */
     if (*path != PATH_SEP){ 
     	char *local, *result;
 
-	if (current_dir [strlen (current_dir) - 1] == PATH_SEP)
-	    local = g_strconcat (current_dir, path, NULL);
-	else
-	    local = g_strconcat (current_dir, PATH_SEP_STR, path, NULL);
+	local = concat_dir_and_file (current_dir, path);
 
 	result = vfs_canon (local);
 	g_free (local);
@@ -726,11 +718,15 @@ vfs_canon (char *path)
      * So we have path of following form:
      * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
-    mad_check("(pre-canonicalize)", 0);
-    canonicalize_pathname (path);
-    mad_check("(post-canonicalize)", 0);
+    {
+	char *result = g_strdup (path);
+        
+	mad_check("(pre-canonicalize)", 0);
+	canonicalize_pathname (result);
+	mad_check("(post-canonicalize)", 0);
 
-    return g_strdup (path);
+        return result;
+    }
 }
 
 vfsid
@@ -946,12 +942,11 @@ vfs_current_is_cpiofs (void)
 #endif
 
 int
-vfs_file_is_local (char *filename)
+vfs_file_is_local (const char *file)
 {
-    vfs *vfs;
+    char *filename = vfs_canon (file);
+    vfs *vfs = vfs_type (filename);
     
-    filename = vfs_canon (filename);
-    vfs = vfs_type (filename);
     g_free (filename);
     return vfs == &vfs_local_ops;
 }
@@ -971,10 +966,10 @@ vfs_file_is_ftp (char *filename)
 #endif
 }
 
-#ifdef WITH_SMBFS
 int
 vfs_file_is_smb (char *filename)
 {
+#ifdef WITH_SMBFS
 #ifdef USE_NETCODE
     vfs *vfs;
     
@@ -982,17 +977,11 @@ vfs_file_is_smb (char *filename)
     vfs = vfs_type (filename);
     g_free (filename);
     return vfs == &vfs_smbfs_ops;
+#endif /* USE_NETCODE */
 #else
     return 0;
-#endif
+#endif /* WITH_SMBFS */
 }
-#else
-int
-vfs_file_is_smb (char *filename)
-{
-	return 0;
-}
-#endif
 
 char *vfs_get_current_dir (void)
 {
@@ -1007,8 +996,6 @@ static void vfs_setup_wd (void)
 
     if (strlen(current_dir)>MC_MAXPATHLEN-2)
         vfs_die ("Current dir too long.\n");
-
-    return;
 }
 
 MC_NAMEOP (mkdir, (char *path, mode_t mode), (vfs, vfs_name (path), mode))
@@ -1107,18 +1094,17 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
  fail:
     if (fdout) close(fdout);
     if (fdin) mc_close (fdin);
-    g_free (tmp);
+    free (tmp);
     return NULL;
 }
 
 char *
-mc_getlocalcopy (char *path)
+mc_getlocalcopy (const char *pathname)
 {
-    vfs *vfs;
     char *result;
+    char *path = vfs_canon (pathname);
+    vfs  *vfs  = vfs_type (path);    
 
-    path = vfs_canon (path);
-    vfs = vfs_type (path);    
     result = vfs->getlocalcopy ? (*vfs->getlocalcopy)(vfs, vfs_name (path)) :
                                  mc_def_getlocalcopy (vfs, vfs_name (path));
     g_free (path);
@@ -1170,12 +1156,11 @@ mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed)
 }
 
 int
-mc_ungetlocalcopy (char *path, char *local, int has_changed)
+mc_ungetlocalcopy (const char *pathname, char *local, int has_changed)
 {
-    vfs *vfs;
+    char *path = vfs_canon (pathname);
+    vfs *vfs = vfs_type (path);
 
-    path = vfs_canon (path);
-    vfs = vfs_type (path);
     vfs->ungetlocalcopy ? (*vfs->ungetlocalcopy)(vfs, vfs_name (path), local, has_changed) :
                           mc_def_ungetlocalcopy (vfs, vfs_name (path), local, has_changed);
     /* FIXME: errors are ignored at this point */

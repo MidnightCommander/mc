@@ -223,7 +223,7 @@ open_archive_int (vfs *me, vfs_s_super *super)
        /dev/tty, not from stdin :-(. */
 
 #ifndef HAVE_HACKED_SSH
-	    message_1s (1, _(" Error "), _("Sorry, we can not do password authenticated connections for now."));
+	    message_1s (1, MSG_ERROR, _("Sorry, we can not do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);
 #endif
 	    if (!SUP.password){
@@ -472,7 +472,7 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 	disable_interrupt_key();
 	total += n;
 	print_vfs_message(_("fish: storing %s %d (%d)"), 
-			  was_error ? "zeros" : "file", total, s.st_size);
+			  was_error ? _("zeros") : _("file"), total, s.st_size);
     }
     if ((get_reply (me, SUP.sockr, NULL, 0) != COMPLETE) || was_error)
         ERRNOR (E_REMOTE, -1);

@@ -3,6 +3,8 @@
    
    Written by: 2000 Jan Hudec
 
+   $Id$
+
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
    as published by the Free Software Foundation; either version 2 of
@@ -422,7 +424,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 	if((l = defer_find(super->u.cpio.defered, &i)) != NULL) {
 	    inode = l->inode;
 	    if(inode->st.st_size && stat->st_size && (inode->st.st_size != stat->st_size)) {
-		message_3s(1, MSG_ERROR, "Inconsistent hardlinks of\n%s\nin cpio archive\n%s",
+		message_3s(1, MSG_ERROR, _("Inconsistent hardlinks of\n%s\nin cpio archive\n%s"),
 			   name, super->name);
 		inode = NULL;
 	    }
@@ -512,7 +514,7 @@ static int cpio_open_archive(vfs *me, vfs_s_super *super, char *name, char *op)
 
 	switch(status) {
 	case STATUS_EOF:
-	    message_2s(1, MSG_ERROR, "Unexpected end of file\n%s", name);
+	    message_2s(1, MSG_ERROR, _("Unexpected end of file\n%s"), name);
 	    return 0;
 	case STATUS_OK:
 	    continue;

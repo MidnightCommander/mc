@@ -194,7 +194,7 @@ struct utimbuf {
     
     /* Only the routines outside of the VFS module need the emulation macros */
 
-	int   mc_open  (char *file, int flags, ...);
+	int   mc_open  (const char *filename, int flags, ...);
 	int   mc_close (int handle);
 	int   mc_read  (int handle, char *buffer, int count);
 	int   mc_write (int hanlde, char *buffer, int count);
@@ -224,8 +224,8 @@ struct utimbuf {
         int mc_rmdir    (char *path);
         int mc_mkdir    (char *path, mode_t mode);
 
-        char *mc_getlocalcopy (char *filename);
-        int mc_ungetlocalcopy (char *filename, char *local, int has_changed);
+        char *mc_getlocalcopy (const char *pathname);
+        int mc_ungetlocalcopy (const char *pathname, char *local, int has_changed);
         char *mc_def_getlocalcopy (vfs *vfs, char *filename);
         int mc_def_ungetlocalcopy (vfs *vfs, char *filename, char *local, int has_changed);
         int mc_ctl (int fd, int ctlop, int arg);
