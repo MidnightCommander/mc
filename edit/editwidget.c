@@ -28,7 +28,7 @@
 #include "edit-widget.h"
 
 #include "../src/tty.h"		/* LINES */
-#include "../src/widget.h"	/* redraw_labels() */
+#include "../src/widget.h"	/* buttonbar_redraw() */
 #include "../src/menu.h"	/* menubar_new() */
 #include "../src/key.h"		/* is_idle() */
 
@@ -227,7 +227,7 @@ edit_file (const char *_file, int line)
 static void edit_my_define (Dlg_head * h, int idx, const char *text,
 			    void (*fn) (WEdit *), WEdit * edit)
 {
-    define_label_data (h, idx, text, (buttonbarfn) fn, edit);
+    buttonbar_set_label_data (h, idx, text, (buttonbarfn) fn, edit);
 }
 
 
@@ -299,7 +299,7 @@ edit_labels (WEdit *edit)
     edit_my_define (h, 9, _("PullDn"), edit_menu_cmd, edit);
     edit_my_define (h, 10, _("Quit"), cmd_F10, edit);
 
-    redraw_labels (h);
+    buttonbar_redraw (h);
 }
 
 void edit_update_screen (WEdit * e)

@@ -29,7 +29,7 @@
 
 #include "../src/color.h"	/* EDITOR_NORMAL_COLOR */
 #include "../src/tty.h"		/* attrset() */
-#include "../src/widget.h"	/* redraw_labels() */
+#include "../src/widget.h"	/* buttonbar_redraw() */
 #include "../src/key.h"		/* is_idle() */
 #include "../src/charsets.h"
 
@@ -468,7 +468,7 @@ edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, 
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;
 
     if (edit->force & REDRAW_COMPLETELY)
-	redraw_labels (edit->widget.parent);
+	buttonbar_redraw (edit->widget.parent);
     render_edit_text (edit, row_start, col_start, row_end, col_end);
     /*
      * edit->force != 0 means a key was pending and the redraw
