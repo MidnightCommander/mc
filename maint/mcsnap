@@ -26,11 +26,19 @@ BASE_VERSION="4.6.0-pre1"
 
 # Local directories
 MC_BASE_DIR="/usr/src/mc-$BASE_VERSION"
+MC_CVS_DIR="/usr/src/mc"
+MC_BUILD_DIR="/usr/src/mc.snap"
 RPM_SRC_DIR="/usr/src/redhat"
 
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
 DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
+
+cd "$MC_CVS_DIR"
+cvs up -dPA
+rm -rf "$MC_BUILD_DIR"
+cp -a "$MC_CVS_DIR" "$MC_BUILD_DIR"
+cd "$MC_BUILD_DIR"
 
 # Sanity check
 if ! test -f ./autogen.sh || ! test -f src/screen.c; then
