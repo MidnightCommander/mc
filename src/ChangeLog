@@ -1,3 +1,8 @@
+Tue Sep 29 14:02:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
+
+	* layout.c (print_vfs_message): fixed buffer overrun by
+ 	vsnprintf. Unfortunately I have no clue how to do this portably.
+
 Tue Sep 29 11:42:32 1998  Pavel Roskin <pavel_roskin@geocities.com>
 
 	* setup.c: Corrected code which prevents using icon view by
