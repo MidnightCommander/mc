@@ -449,9 +449,9 @@ regex/(^|\.)ls-?lR\.(g?z|Z)$
 	Open=%cd %p#lslR
 	View=%view{ascii} gzip -dc %f
 
-# ftplist
-regex/\.ftplist$
-	Open=%cd %p#ftplist
+# patch
+regex/\.(diff|patch)(\.(bz2|gz|Z))?$
+        Open=%cd %p#patchfs
 
 # gzip
 type/^gzip

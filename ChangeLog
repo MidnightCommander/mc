@@ -1,3 +1,7 @@
+2002-12-09  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Remove ftplist.  Add patchfs.
+
 2002-11-29  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* autogen.sh: Use $srcdir/configure.mc instead of
