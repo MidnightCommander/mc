@@ -5,6 +5,9 @@
 	* editcmd.c (edit_replace_prompt): Allocate the label text
 	dynamically instead of using catstrs. Don't handle
 	ENABLE_CHARSET specially.
+	* edit.h: renamed edit() to edit_file() to avoid GCC shadow
+	warnings (many variables are also called edit).
+	* editwidget.c: likewise.
 
 2004-09-17  Andrew V. Samoilov  <andrew@email.zp.ua>
 

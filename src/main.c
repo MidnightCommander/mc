@@ -1713,7 +1713,7 @@ mc_maybe_editor_or_viewer (void)
     else {
 	path = prepend_cwd_on_local ("");
 	setup_dummy_mc (path);
-	edit (edit_one_file, edit_one_file_start_line);
+	edit_file (edit_one_file, edit_one_file_start_line);
     }
 #endif				/* USE_INTERNAL_EDIT */
     g_free (path);

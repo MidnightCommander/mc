@@ -163,7 +163,7 @@ edit_dialog_callback (Dlg_head *h, dlg_msg_t msg, int parm)
 }
 
 int
-edit (const char *_file, int line)
+edit_file (const char *_file, int line)
 {
     static int made_directory = 0;
     Dlg_head *edit_dlg;

@@ -18,6 +18,9 @@
 	* widget.c: likewise.
 	* complete.c: Surrounded the declaration of environ by and #ifdef
 	guard to avoid a GCC warning about a redundant declaration.
+	* cmd.c: renamed edit() to edit_file() to avoid GCC shadow
+	warnings (many variables are also called edit).
+	* main.c: likewise.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 

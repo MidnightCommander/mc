@@ -131,7 +131,7 @@ void edit_init_menu_normal (void);
 void edit_done_menu (void);
 void menu_save_mode_cmd (void);
 int edit_raw_key_query (const char *heading, const char *query, int cancel);
-int edit (const char *_file, int line);
+int edit_file (const char *_file, int line);
 int edit_translate_key (WEdit *edit, long x_key, int *cmd, int *ch);
 
 #ifndef NO_INLINE_GETBYTE

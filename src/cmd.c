@@ -269,7 +269,7 @@ void do_edit_at_line (const char *what, int start_line)
 
 #ifdef USE_INTERNAL_EDIT
     if (use_internal_edit){
-	edit (what, start_line);
+	edit_file (what, start_line);
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
 	return;
