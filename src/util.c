@@ -55,7 +55,7 @@
 
 /* "$Id$" */
 
-char app_text [] = "Midnight-Commander";
+const char app_text [] = "Midnight-Commander";
 
 int easy_patterns = 1;
 int tilde_trunc = 1;
