@@ -1422,7 +1422,7 @@ X       Estrae il contenuto di un file tar compresso
 	tar xzvf %f
 .fi
 .PP
-.B Condizioni predefinite
+.B Condizioni Predefinite
 .PP
 Ogni voce di menu può essere preceduta da una condizione. La condizione
 deve cominciare nella prima colonna con un carattere '='. Se la condizione
@@ -1500,71 +1500,75 @@ una condizione addizione. Se la condizione è vera la voce di menu sarà
 inclusa nel menu. Se la condizione è falsa la voce di menu non sarà 
 inclusa nel menu.
 .PP
-You can combine default and addition conditions by starting condition
-with '+=' or '=+' (or '+=?' or '=+?' if you want debug trace). If you
-want to use two different conditions, one for adding and another for
-defaulting, you can precede a menu entry with two condition lines, one
-starting with '+' and another starting with '='.
+E' possibile combinare condizioni predefinite e addizione iniziando
+la condizione con '+=' o '=+' (o '+=?' o '=+?' se vuoi una traccia di
+debug). Se si vuole usare due differenti condizioni, una per addizionale
+e l'altra per predefinita, si può precedere una voce di menu con due righe
+di condizione, una che comincia con '+' e l'altra con '='.
 .PP
-Comments are started with '#'. The additional comment lines must start
-with '#', space or tab.
+I commenti cominciano con '#'. Linee di commento aggiuntive devono cominciare con
+'#', spazi o tabulazioni.
 .PP
-.SH "  Options Menu"
-The Midnight Commander has some options that may be toggled on and
-off in several dialogs which are accessible from this menu. Options 
-are enabled if they have an asterisk or "x" in front of them. 
+.\"NODE "  Options Menu"
+.SH "  Menu Opzioni"
+Il Midnight Commander possiede alcune opzioni che possono essere
+abilitate e disabilitate in molte finestre di dialogo accessibili 
+da questo menu. Le opzioni sono abilitate se hanno un "x" di fronte 
+ad esse.
 .PP
-The
+Il comando
 .\"LINK2"
-Configuration
+Configurazione
 .\"Configuration"
-command pops up a dialog from which you can change most of settings of
-the Midnight Commander.
+mostra una finestra di dialogo dalla quale è possibile cambiare 
+molte delle inpostazioni del Midnight Commander.
 .PP
-The
+Il comando
 .\"LINK2"
-Display bits
+Mostra bit
 .\"Display bits"
-command pops up a dialog from which you may select which characters is your
-terminal able to display.
+mostra una finestra di dialogo dalla quale è possibile selezionare quali
+caratteri il vostro terminale è capace di mostrare.
 .PP
-The
+Il coamndo
 .\"LINK2"
-Confirmation
+Conferme
 .\"Confirmation"
-command pops up a dialog from which you specify which actions you want to
-confirm.
+mostra una finestra di dialogo dalla quale è possibile specificare per 
+quali azioni si vuole una richiesta di conferma.
 .PP
-The
+Il comando
 .\"LINK2"
-Learn keys
+Impara tasti
 .\"Learn keys"
-command pops up a dialog from which you test some keys which are not working
-on some terminals and you may fix them.
+mostra una finestra di dialogo dalla quale è possibile controllare i tasti
+che non appaiono funzionare su alcuni terminali ed è possibile aggiustare.
 .PP
-The
+Il comando
 .\"LINK2"
-Virtual FS
+Opzioni VFS
 .\"Virtual FS"
-command pops up a dialog from which you specify some VFS related options.
+mostra una finestra di dialogo con la quale è possibile impostare alcune
+opzioni relative al VFS.
 .PP
-The
+Il comando
 .\"LINK2"
-Layout
+Aspetto
 .\"Layout"
-command pops up a dialog from which you specify a bunch of options how mc
-looks like on the screen.
+mostra una finestra di dialogo con la quale è possibile impostare molte
+opzioni relative a come mc appare sullo schermo.
 .PP
-The
+Il comando 
 .\"LINK2"
-Save setup
+Salva configurazione
 .\"Save Setup"
-command saves the current settings of the Left, Right and Options
-menus. A small number of other settings is saved, too.
+salva le impostazioni correnti dei menu Sinistra, Destra e Opzioni. Viene salvato
+anche un piccolo numero di altre opzioni.
 .PP
-.SH "    Configuration"
-The options in this dialog are divided into three groups:
-Panel Options, Pause after run and Other Options.
+.\"NODE "    Configuration"
+.SH "    Configurazione"
+Le opzioni in questa finestra sono divise in tre gruppi:
+Opzioni del pannello, Pausa dopo l'esecuzione e Altre opzioni.
 .PP
 .B Panel Options
 .PP
