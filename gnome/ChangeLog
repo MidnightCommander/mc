@@ -1,3 +1,11 @@
+1998-03-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (desktop_icon_context_popup): It is not necessary to
+	set the menu position.
+	(desktop_icon_context_popup): gtk_signal_connect_object_after to the menu
+	items with gtk_widget_destroy as a callback so that we can destroy
+	the menu widget appropriately.
+
 1998-03-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (display_mini_info): Implement mini status. 

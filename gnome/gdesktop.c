@@ -691,20 +691,24 @@ desktop_icon_context_popup (GdkEventButton *event, desktop_icon_t *di)
 
 	menu = gtk_menu_new ();
 
+	/* We connect_object_after to the items so that we can destroy
+         * the menu at the proper time.
+	 */
+
 	item = gtk_menu_item_new_with_label (_("Properties"));
 	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_properties), di);
+	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
+					 GTK_SIGNAL_FUNC (gtk_widget_destroy), menu);
 	gtk_menu_append (GTK_MENU (menu), item);
 	gtk_widget_show (item);
 
 	item = gtk_menu_item_new_with_label (_("Delete"));
 	gtk_signal_connect (GTK_OBJECT (item), "activate", GTK_SIGNAL_FUNC (icon_delete), di);
+	gtk_signal_connect_object_after (GTK_OBJECT (item), "activate",
+					 GTK_SIGNAL_FUNC (gtk_widget_destroy), menu);
 	gtk_menu_append (GTK_MENU (menu), item);
 	gtk_widget_show (item);
-	
-	gtk_widget_set_uposition (menu, event->x, event->y);
 
-	gtk_signal_connect (GTK_OBJECT (menu), "deactivate", GTK_SIGNAL_FUNC (gtk_widget_destroy), NULL);
-	
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, 0, NULL, 3, event->time);
 }
 
