@@ -591,11 +591,7 @@ load_keys_from_section (char *terminal, char *profile_name)
 
     section_name = g_strconcat ("terminal:", terminal, NULL);
     profile_keys = profile_init_iterator (section_name, profile_name);
-    if (!profile_keys){
-	g_free (section_name);
-	return;
-    }
-
+    g_free (section_name);
     while (profile_keys){
 	profile_keys = profile_iterator_next (profile_keys, &key, &value);
 	key_code = lookup_key (key);
@@ -605,8 +601,6 @@ load_keys_from_section (char *terminal, char *profile_name)
 	    g_free (valcopy);
 	}
     }
-    g_free (section_name);
-    return;
 }
 
 void load_key_defs (void)
