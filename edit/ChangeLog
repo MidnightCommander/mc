@@ -1,3 +1,8 @@
+2002-12-04  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c: Include dialog.h.
+	Reported by Frédéric L. W. Meunier <lists@pervalidus.net>
+
 2002-11-30  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Remove "dir" field in WEdit - it's always an empty

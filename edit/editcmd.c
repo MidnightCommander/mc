@@ -36,6 +36,7 @@
 #include "src/main.h"		/* mc_home */
 #include "src/help.h"		/* interactive_display() */
 #include "src/key.h"		/* XCTRL */
+#include "src/dialog.h"		/* do_refresh() */
 #include "src/wtools.h"		/* message() */
 #include "src/charsets.h"
 
