@@ -1,3 +1,7 @@
+2004-09-04  Pavel S. Shirshov  <pavelsh@mail.ru>
+
+	* HACKING: Add to section "Programming Tips" g_free tip.
+
 2004-09-02  Roland Illig  <roland.illig@gmx.de>
 
 	* HACKING: Added a section "Programming Tips" which lists mistakes

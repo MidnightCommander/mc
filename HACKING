@@ -296,3 +296,9 @@ size_t: This data type is suitable for expressing sizes of memory or the
 
 strncpy: Don't use this function in newly created code. It is slow, insecure
 	and hard to use. A much better alternative is g_strlcpy (see there).
+
+g_free: g_free handles NULL argument too, no need for the comparison.
+	Bad way:
+	    if (old_dir) g_free (old_dir);
+	Right way:
+	    g_free (old_dir);
