@@ -12,7 +12,7 @@ void flush_extension_file (void);
 #    define MC_USER_EXT "mc.ext"
 #    define MC_LIB_EXT  "mc.ext"
 #else
-#    define MC_USER_EXT ".mc/ext-n"
+#    define MC_USER_EXT ".mc/ext-n" 
 #    define MC_LIB_EXT  "mc.ext"
 #endif
 #endif

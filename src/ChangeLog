@@ -1,3 +1,9 @@
+1998-05-25  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ext.h (MC_USER_EXT): New name for the per-user extension file
+	(this needs redoing to concatenate this + the system stuff instead
+	of the overwrite stuff we have now).  Now it is called the ~/.mc/ext-n
+
 Mon May 25 23:32:35 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* editdraw.c (print_to_widget): Ifdef'd SLang specific code in order 
