@@ -73,7 +73,9 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		for (i = 3; i < top; i++)
 			close (i);
 
-		*pid = fork ();
+		if (!(flags & EXECUTE_WAIT))
+			*pid = fork ();
+		
 		if (*pid == 0){
 			if (flags & EXECUTE_AS_SHELL)
 				execl (shell, shell, "-c", command, (char *) 0);
@@ -94,13 +96,14 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 		 */
 		_exit (0);
 	}
+	if (*pid != 0 && (flags & EXECUTE_WAIT)){
+		int status;
+		
+		waitpid (*pid, &status, 0);
+	}
 	sigaction (SIGINT,  &save_intr, NULL);
 	sigaction (SIGQUIT, &save_quit, NULL);
 	sigaction (SIGTSTP, &save_stop, NULL);
-
-#ifdef SCO_FLAVOR 
-	waitpid(-1, NULL, WNOHANG);
-#endif /* SCO_FLAVOR */
 
 	return WEXITSTATUS(status);
 }

@@ -104,7 +104,7 @@ static int command (vfs *me, vfs_s_super *super, int wait_reply, char *fmt, ...)
 {
     va_list ap;
     char *str;
-    int n, status;
+    int status;
     FILE *logfile = MEDATA->logfile;
 
     va_start (ap, fmt);

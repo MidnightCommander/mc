@@ -116,10 +116,13 @@ vfs_register (vfs *vfs)
 {
     int res;
 
-    if (!vfs) vfs_die("You can not register NULL.");
+    if (!vfs)
+	vfs_die("You can not register NULL.");
+    
     res = (vfs->init) ? (*vfs->init)(vfs) : 1;
 
-    if (!res) return 0;
+    if (!res)
+	return 0;
 
     vfs->next = vfs_list;
     vfs_list = vfs;
@@ -132,7 +135,8 @@ vfs_type_from_op (char *path)
 {
     vfs *vfs;
 
-    if (!path) vfs_die( "vfs_type_from_op got NULL: impossible" );
+    if (!path)
+	vfs_die ("vfs_type_from_op got NULL: impossible");
     
     for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
         if (vfs->which) {
@@ -156,14 +160,15 @@ vfs_strip_suffix_from_filename (char *filename)
     char *semi;
     char *p;
 
-    if (!filename) vfs_die( "vfs_strip_suffix_from_path got NULL: impossible" );
+    if (!filename)
+	vfs_die("vfs_strip_suffix_from_path got NULL: impossible");
     
     p = strdup (filename);
     if (!(semi = strrchr (p, '#')))
 	return p;
 
     for (vfs = vfs_list; vfs != &vfs_local_ops; vfs = vfs->next){
-        if (vfs->which) {
+        if (vfs->which){
 	    if ((*vfs->which) (vfs, semi + 1) == -1)
 		continue;
 	    *semi = '\0'; /* Found valid suffix */
@@ -203,7 +208,8 @@ vfs_split (char *path, char **inpath, char **op)
     char *slash;
     vfs *ret;
 
-    if (!path) vfs_die("Can not split NULL");
+    if (!path)
+	vfs_die("Can not split NULL");
     
     semi = strrchr (path, '#');
     if (!semi || !path_magic(path))
@@ -243,7 +249,9 @@ vfs_rosplit (char *path)
     char *slash;
     vfs *ret;
 
-    if (!path) vfs_die( "Can not rosplit NULL" );
+    if (!path)
+	vfs_die ("Can not rosplit NULL");
+    
     semi = strrchr (path, '#');
     
     if (!semi || !path_magic (path))
@@ -463,7 +471,8 @@ mc_setctl (char *path, int ctlop, char *arg)
     int result;
 
     if (!path)
-	vfs_die( "You don't want to pass NULL to mc_setctl." );
+	vfs_die("You don't want to pass NULL to mc_setctl.");
+    
     path = vfs_canon (path);
     vfs = vfs_type (path);    
     result = vfs->setctl ? (*vfs->setctl)(vfs, path, ctlop, arg) : 0;
@@ -693,7 +702,8 @@ off_t mc_lseek (int fd, off_t offset, int whence)
 char *
 vfs_canon (char *path)
 {
-    if (!path) vfs_die("Can not canonize NULL");
+    if (!path)
+	vfs_die("Can not canonize NULL");
 
     /* Tilde expansion */
     if (*path == '~'){ 
@@ -726,9 +736,9 @@ vfs_canon (char *path)
      * So we have path of following form:
      * /p1/p2#op/.././././p3#op/p4. Good luck.
      */
-    mad_check( "(pre-canonicalize)", 0);
+    mad_check("(pre-canonicalize)", 0);
     canonicalize_pathname (path);
-    mad_check( "(post-canonicalize)", 0);
+    mad_check("(post-canonicalize)", 0);
 
     return strdup (path);
 }
@@ -1476,7 +1486,7 @@ int vfs_parse_filedate(int idx, time_t *t)
     char *p;
     struct tm tim;
     int d[3];
-    int	swap, got_year = 0;
+    int	got_year = 0;
 
     /* Let's setup default time values */
     tim.tm_year = current_year;
@@ -1577,7 +1587,7 @@ int vfs_parse_filedate(int idx, time_t *t)
 int
 vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
-    int idx, idx2, num_cols, isconc = 0;
+    int idx, idx2, num_cols;
     int i;
     char *p_copy;
     
@@ -1644,13 +1654,12 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 
     /* This is device */
     if (S_ISCHR (s->st_mode) || S_ISBLK (s->st_mode)){
-
 	int maj, min;
 	
 	if (!is_num (idx2) || sscanf(columns [idx2], " %d,", &maj) != 1)
 	    goto error;
 	
-	if (!is_num (++idx2) || sscanf(columns [idx2], " %li", &min) != 1)
+	if (!is_num (++idx2) || sscanf(columns [idx2], " %d", &min) != 1)
 	    goto error;
 	
 #ifdef HAVE_ST_RDEV

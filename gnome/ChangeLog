@@ -1,3 +1,18 @@
+1999-01-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gutil.c (my_system_get_child_pid): Acknowledge new EXECUTE_WAIT
+	flag.  This is required by the vfs code.
+
+1999-01-06  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_file_list, panel_create_icon_display):
+	I got excited adding the gtk_drag_source_set.  I generate those
+	events myself, no need to put them here.
+
+1999-01-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (stock_from_text): Return this value.
+
 1999-01-08  Jonathan Blandford  <jrb@redhat.com>
 
 	* glayout.c: now open the new (non-functional) dialog box.  If you

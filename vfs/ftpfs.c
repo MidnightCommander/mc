@@ -143,8 +143,8 @@ static struct linklist *connections_list;
 #define WANT_STRING 0x02
 static char reply_str [80];
 
-static struct direntry *_get_file_entry(struct connection *bucket, 
-                char *file_name, int op, int flags);
+static struct direntry *_get_file_entry     (struct connection *bucket, 
+					     char *file_name, int op, int flags);
 
 static char    *ftpfs_get_current_directory (struct connection *bucket);
 static int      ftpfs_chdir_internal        (struct connection *bucket,
@@ -184,16 +184,16 @@ get_reply (int sock, char *string_buf, int string_len)
     int i;
     
     for (;;) {
-        if (!get_line(sock, answer, sizeof(answer), '\n')) {
+        if (!get_line (sock, answer, sizeof (answer), '\n')){
 	    if (string_buf)
 		*string_buf = 0;
 	    code = 421;
 	    return 4;
 	}
-	switch(sscanf(answer, "%d", &code)) {
+	switch (sscanf(answer, "%d", &code)){
 	    case 0:
 	        if (string_buf) {
-		    strncpy(string_buf, answer, string_len - 1);
+		    strncpy (string_buf, answer, string_len - 1);
 		    *(string_buf + string_len - 1) = 0;
 		}
 	        code = 500;
@@ -201,19 +201,19 @@ get_reply (int sock, char *string_buf, int string_len)
 	    case 1:
  		if (answer[3] == '-') {
 		    while (1) {
-			if (!get_line(sock, answer, sizeof(answer), '\n')) {
+			if (!get_line (sock, answer, sizeof(answer), '\n')){
 			    if (string_buf)
 				*string_buf = 0;
 			    code = 421;
 			    return 4;
 			}
-			if ((sscanf(answer, "%d", &i) > 0) && 
+			if ((sscanf (answer, "%d", &i) > 0) && 
 			    (code == i) && (answer[3] == ' '))
 			    break;
 		    }
 		}
-	        if (string_buf) {
-		    strncpy(string_buf, answer, string_len - 1);
+	        if (string_buf){
+		    strncpy (string_buf, answer, string_len - 1);
 		    *(string_buf + string_len - 1) = 0;
 		}
 		return code / 100;
@@ -226,7 +226,7 @@ command (struct connection *bucket, int wait_reply, char *fmt, ...)
 {
     va_list ap;
     char *str, *fmt_str;
-    int n, status;
+    int status;
     int sock = qsock (bucket);
     
     va_start (ap, fmt);
@@ -275,7 +275,7 @@ connection_close (void *data)
     struct connection *bucket = data;
 
     if (qsock (bucket) != -1){
-	print_vfs_message ("ftpfs: Disconnecting from %s", qhost(bucket));
+	print_vfs_message ("ftpfs: Disconnecting from %s", qhost (bucket));
 	command(bucket, NONE, "QUIT");
 	close(qsock(bucket));
     }
@@ -294,7 +294,8 @@ static int
 changetype (struct connection *bucket, int binary)
 {
     if (binary != bucket->isbinary) {
-        if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE) ERRNOR (EIO, -1);
+        if (command (bucket, WAIT_REPLY, "TYPE %c", binary ? 'I' : 'A') != COMPLETE)
+		ERRNOR (EIO, -1);
         bucket->isbinary = binary;
     }
     return binary;
@@ -316,19 +317,20 @@ login_server (struct connection *bucket, char *netrcpass)
     if (netrcpass)
         op = strdup (netrcpass);
     else {
-        if (!strcmp (quser(bucket), "anonymous") || 
-            !strcmp (quser(bucket), "ftp")) {
-	    op = strdup(ftpfs_anonymous_passwd);
+        if (!strcmp (quser (bucket), "anonymous") || 
+            !strcmp (quser (bucket), "ftp")) {
+	    op = strdup (ftpfs_anonymous_passwd);
 	    anon = 1;
          } else {
             char *p;
 
 	    if (!bucket->password){
-		p = copy_strings (" FTP: Password required for ", quser(bucket), 
+		p = copy_strings (" FTP: Password required for ", quser (bucket), 
 				  " ", NULL);
 		op = vfs_get_password (p);
 		free (p);
-		if (op == NULL) ERRNOR (EPERM, 0);
+		if (op == NULL)
+			ERRNOR (EPERM, 0);
 		bucket->password = strdup (op);
 	    } else
 		op = strdup (bucket->password);
@@ -347,44 +349,47 @@ login_server (struct connection *bucket, char *netrcpass)
 #if defined(HSC_PROXY)
 	char *p, *host;
 	int port;
-	p = my_get_host_and_username(ftpfs_proxy_host, &host, &proxyname,
-					&port, &proxypass);
+	p = my_get_host_and_username (ftpfs_proxy_host, &host, &proxyname,
+				      &port, &proxypass);
 	if (p)
 	    free (p);
 	
-	free(host);
+	free (host);
 	if (proxypass)
 	    wipe_password (proxypass);
-	p = copy_strings(" Proxy: Password required for ", proxyname, " ",
-			 NULL);
+	p = copy_strings (" Proxy: Password required for ", proxyname, " ",
+			  NULL);
 	proxypass = vfs_get_password (p);
-	free(p);
+	free (p);
 	if (proxypass == NULL) {
 	    wipe_password (pass);
 	    free (proxyname);
 	    ERRNOR (EPERM, 0);
 	}
-	name = strdup(quser (bucket));
+	name = strdup (quser (bucket));
 #else
-	name = copy_strings (quser(bucket), "@", 
-		qhost(bucket)[0] == '!' ? qhost(bucket)+1 : qhost(bucket), 0);
+	name = copy_strings (quser (bucket), "@", 
+		qhost (bucket)[0] == '!' ? qhost (bucket)+1 : qhost (bucket), 0);
 #endif
     } else 
 	name = strdup (quser (bucket));
     
-    if (get_reply (qsock(bucket), NULL, 0) == COMPLETE) {
+    if (get_reply (qsock (bucket), NULL, 0) == COMPLETE) {
 #if defined(HSC_PROXY)
-	if (qproxy(bucket)) {
-	    print_vfs_message("ftpfs: sending proxy login name");
+	if (qproxy (bucket)){
+	    print_vfs_message ("ftpfs: sending proxy login name");
 	    if (command (bucket, 1, "USER %s", proxyname) != CONTINUE)
 		goto proxyfail;
-	    print_vfs_message("ftpfs: sending proxy user password");
+
+	    print_vfs_message ("ftpfs: sending proxy user password");
 	    if (command (bucket, 1, "PASS %s", proxypass) != COMPLETE)
 		goto proxyfail;
-	    print_vfs_message("ftpfs: proxy authentication succeeded");
-	    if (command (bucket, 1, "SITE %s", qhost(bucket)+1) != COMPLETE)
+
+	    print_vfs_message ("ftpfs: proxy authentication succeeded");
+	    if (command (bucket, 1, "SITE %s", qhost (bucket)+1) != COMPLETE)
 		goto proxyfail;
-	    print_vfs_message("ftpfs: connected to %s", qhost(bucket)+1);
+
+	    print_vfs_message ("ftpfs: connected to %s", qhost (bucket)+1);
 	    if (0) {
 	    proxyfail:
 		bucket->failed_on_login = 1;
@@ -401,17 +406,17 @@ login_server (struct connection *bucket, char *netrcpass)
 	    free (proxyname);
 	}
 #endif
-	print_vfs_message("ftpfs: sending login name");
+	print_vfs_message ("ftpfs: sending login name");
 	code = command (bucket, WAIT_REPLY, "USER %s", name);
 
 	switch (code){
 	case CONTINUE:
-	    print_vfs_message("ftpfs: sending user password");
+	    print_vfs_message ("ftpfs: sending user password");
             if (command (bucket, WAIT_REPLY, "PASS %s", pass) != COMPLETE)
 		break;
 
 	case COMPLETE:
-	    print_vfs_message("ftpfs: logged in");
+	    print_vfs_message ("ftpfs: logged in");
 	    wipe_password (pass);
 	    free (name);
 	    return 1;
@@ -426,7 +431,7 @@ login_server (struct connection *bucket, char *netrcpass)
 	    goto login_fail;
 	}
     }
-    print_vfs_message ("ftpfs: Login incorrect for user %s ", quser(bucket));
+    print_vfs_message ("ftpfs: Login incorrect for user %s ", quser (bucket));
 login_fail:
     wipe_password (pass);
     free (name);
@@ -566,17 +571,17 @@ ftpfs_get_proxy_host_and_port (char *proxy, char **host, int *port)
 #else
 #define PORT 21
 #endif
-    dir = vfs_split_url(proxy, host, &user, port, &pass, PORT, URL_DEFAULTANON);
+    dir = vfs_split_url (proxy, host, &user, port, &pass, PORT, URL_DEFAULTANON);
 
-    free(user);
+    free (user);
     if (pass)
 	wipe_password (pass);
     if (dir)
-	free(dir);
+	free (dir);
 }
 
 static int
-ftpfs_open_socket(struct connection *bucket)
+ftpfs_open_socket (struct connection *bucket)
 {
     struct   sockaddr_in server_address;
     struct   hostent *hp;
@@ -586,7 +591,7 @@ ftpfs_open_socket(struct connection *bucket)
     int      free_host = 0;
     
     /* Use a proxy host? */
-    host = qhost(bucket);
+    host = qhost (bucket);
 
     if (!host || !*host){
 	print_vfs_message ("ftpfs: Invalid host name.");
@@ -595,7 +600,7 @@ ftpfs_open_socket(struct connection *bucket)
     }
 
     /* Hosts to connect to that start with a ! should use proxy */
-    if (qproxy(bucket)) {
+    if (qproxy (bucket)){
 	ftpfs_get_proxy_host_and_port (ftpfs_proxy_host, &host, &port);
 	free_host = 1;
     }
@@ -607,9 +612,9 @@ ftpfs_open_socket(struct connection *bucket)
     if (server_address.sin_addr.s_addr != -1)
 	server_address.sin_family = AF_INET;
     else {
-	hp = gethostbyname(host);
+	hp = gethostbyname (host);
 	if (hp == NULL){
-	    print_vfs_message("ftpfs: Invalid host address.");
+	    print_vfs_message ("ftpfs: Invalid host address.");
 	    my_errno = EINVAL;
 	    if (free_host)
 		free (host);
@@ -634,20 +639,20 @@ ftpfs_open_socket(struct connection *bucket)
     }
     setup_source_route (my_socket, server_address.sin_addr.s_addr);
     
-    print_vfs_message("ftpfs: making connection to %s", host);
+    print_vfs_message ("ftpfs: making connection to %s", host);
     if (free_host)
 	free (host);
 
-    enable_interrupt_key(); /* clear the interrupt flag */
+    enable_interrupt_key (); /* clear the interrupt flag */
 
     if (connect (my_socket, (struct sockaddr *) &server_address,
 	     sizeof (server_address)) < 0){
 	my_errno = errno;
-	if (errno == EINTR && got_interrupt())
-	    print_vfs_message("ftpfs: connection interrupted by user");
+	if (errno == EINTR && got_interrupt ())
+	    print_vfs_message ("ftpfs: connection interrupted by user");
 	else
-	    print_vfs_message("ftpfs: connection to server failed: %s",
-			      unix_error_string(errno));
+	    print_vfs_message ("ftpfs: connection to server failed: %s",
+				   unix_error_string(errno));
 	disable_interrupt_key();
 	close (my_socket);
 	return -1;
@@ -665,7 +670,8 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     bucket = xmalloc(sizeof(struct connection), 
 		     "struct connection");
     
-    if (bucket == NULL) ERRNOR (ENOMEM, NULL);
+    if (bucket == NULL)
+	    ERRNOR (ENOMEM, NULL);
 #ifdef HAVE_MAD
     {
 	extern void *watch_free_pointer;
@@ -674,15 +680,15 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 	    watch_free_pointer = host;
     }
 #endif
-    qhost(bucket) = strdup (host);
-    quser(bucket) = strdup (user);
-    qcdir(bucket) = NULL;
-    qport(bucket) = port;
-    qlock(bucket) = 0;
-    qhome(bucket) = NULL;
-    qproxy(bucket)= 0;
-    qupdir(bucket)= 0;
-    qdcache(bucket)=0;
+    qhost (bucket) = strdup (host);
+    quser (bucket) = strdup (user);
+    qcdir (bucket) = NULL;
+    qport (bucket) = port;
+    qlock (bucket) = 0;
+    qhome (bucket) = NULL;
+    qproxy (bucket)= 0;
+    qupdir (bucket)= 0;
+    qdcache (bucket)=0;
     bucket->__inode_counter = 0;
     bucket->lock = 0;
     bucket->use_proxy = ftpfs_check_proxy (host);
@@ -696,10 +702,10 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     if (bucket->use_proxy)
 	bucket->use_passive_connection = 0;
 
-    if ((qdcache(bucket) = linklist_init()) == NULL) {
+    if ((qdcache (bucket) = linklist_init ()) == NULL) {
 	my_errno = ENOMEM;
-	free (qhost(bucket));
-	free (quser(bucket));
+	free (qhost (bucket));
+	free (quser (bucket));
 	free (bucket);
 	return NULL;
     }
@@ -708,13 +714,13 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
     do { 
 	bucket->failed_on_login = 0;
 
-	qsock(bucket) = ftpfs_open_socket(bucket);
-	if (qsock(bucket) == -1)  {
+	qsock (bucket) = ftpfs_open_socket (bucket);
+	if (qsock (bucket) == -1)  {
 	    free_bucket (bucket);
 	    return NULL;
 	}
 
-	if (login_server(bucket, netrcpass)) {
+	if (login_server (bucket, netrcpass)) {
 	    /* Logged in, no need to retry the connection */
 	    break;
 	} else {
@@ -743,15 +749,15 @@ open_command_connection (char *host, char *user, int port, char *netrcpass)
 	}
     } while (retry_seconds);
     
-    qhome(bucket) = ftpfs_get_current_directory (bucket);
-    if (!qhome(bucket))
-        qhome(bucket) = strdup ("/");
-    qupdir(bucket) = strdup ("/"); /* FIXME: I changed behavior to ignore last_current_dir */
+    qhome (bucket) = ftpfs_get_current_directory (bucket);
+    if (!qhome (bucket))
+        qhome (bucket) = strdup ("/");
+    qupdir (bucket) = strdup ("/"); /* FIXME: I changed behavior to ignore last_current_dir */
     return bucket;
 }
 
 static int
-is_connection_closed(struct connection *bucket)
+is_connection_closed (struct connection *bucket)
 {
     fd_set rset;
     struct timeval t;
@@ -761,16 +767,16 @@ is_connection_closed(struct connection *bucket)
     }
     t.tv_sec = 0;
     t.tv_usec = 0;
-    FD_ZERO(&rset);
-    FD_SET(qsock(bucket), &rset);
+    FD_ZERO (&rset);
+    FD_SET (qsock (bucket), &rset);
     while (1) {
-	if (select(qsock(bucket) + 1, &rset, NULL, NULL, &t) < 0)
+	if (select (qsock (bucket) + 1, &rset, NULL, NULL, &t) < 0)
 	    if (errno != EINTR)
 		return 1;
 	return 0;
 #if 0
-	if (FD_ISSET(qsock(bucket), &rset)) {
-	    n = read(qsock(bucket), &read_ahead, sizeof(read_ahead));
+	if (FD_ISSET (qsock(bucket), &rset)) {
+	    n = read (qsock(bucket), &read_ahead, sizeof (read_ahead));
 	    if (n <= 0) 
 		return 1;
 	} 	else
@@ -790,47 +796,48 @@ open_link (char *host, char *user, int port, char *netrcpass)
     for (lptr = connections_list->next; 
 	 lptr != connections_list; lptr = lptr->next) {
 	bucket = lptr->data;
-	if ((strcmp (host, qhost(bucket)) == 0) &&
-	    (strcmp (user, quser(bucket)) == 0) &&
-	    (port == qport(bucket))) {
+	if ((strcmp (host, qhost (bucket)) == 0) &&
+	    (strcmp (user, quser (bucket)) == 0) &&
+	    (port == qport (bucket))) {
 	    
 	    /* check the connection is closed or not, just hack */
-	    if (is_connection_closed(bucket)) {
-		flush_all_directory(bucket);
-		sock = ftpfs_open_socket(bucket);
+	    if (is_connection_closed (bucket)) {
+		flush_all_directory (bucket);
+		sock = ftpfs_open_socket (bucket);
 		if (sock != -1) {
-		    close(qsock(bucket));
-		    qsock(bucket) = sock;
-		    if (login_server(bucket, netrcpass))
+		    close (qsock (bucket));
+		    qsock (bucket) = sock;
+		    if (login_server (bucket, netrcpass))
 			return bucket;
 		} 
 		
 		/* connection refused */
 		lptr->prev->next = lptr->next;
 		lptr->next->prev = lptr->prev;
-		connection_destructor(bucket);
+		connection_destructor (bucket);
 		return NULL;
 	    }
 	    return bucket;
 	}
     }
-    bucket = open_command_connection(host, user, port, netrcpass);
+    bucket = open_command_connection (host, user, port, netrcpass);
     if (bucket == NULL)
 	return NULL;
-    if (!linklist_insert(connections_list, bucket)) {
+    if (!linklist_insert (connections_list, bucket)) {
 	my_errno = ENOMEM;
-	connection_destructor(bucket);
+	connection_destructor (bucket);
 	return NULL;
     }
     return bucket;
 }
 
 /* The returned directory should always contain a trailing slash */
-static char *ftpfs_get_current_directory(struct connection *bucket)
+static char *
+ftpfs_get_current_directory (struct connection *bucket)
 {
     char buf[4096], *bufp, *bufq;
 
-    if (command(bucket, NONE, "PWD") == COMPLETE &&
+    if (command (bucket, NONE, "PWD") == COMPLETE &&
         get_reply(qsock(bucket), buf, sizeof(buf)) == COMPLETE) {
     	bufp = NULL;
 	for (bufq = buf; *bufq; bufq++)
@@ -900,9 +907,11 @@ initconn (struct connection *bucket)
     data_addr.sin_port = 0;
     
     pe = getprotobyname("tcp");
-    if (pe == NULL) ERRNOR (EIO, -1);
+    if (pe == NULL)
+	    ERRNOR (EIO, -1);
     data = socket (AF_INET, SOCK_STREAM, pe->p_proto);
-    if (data < 0) ERRNOR (EIO, -1);
+    if (data < 0)
+	    ERRNOR (EIO, -1);
 
 #ifdef ORIGINAL_CONNECT_CODE
     if (bucket->use_source_route){
@@ -965,7 +974,8 @@ open_data_connection (struct connection *bucket, char *cmd, char *remote,
         j = command (bucket, WAIT_REPLY, "%s %s", cmd, remote);
     else
     	j = command (bucket, WAIT_REPLY, "%s", cmd);
-    if (j != PRELIM) ERRNOR (EPERM, -1);
+    if (j != PRELIM)
+	    ERRNOR (EPERM, -1);
     enable_interrupt_key();
     if (bucket->use_passive_connection)
 	data = s;
@@ -1222,7 +1232,8 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         }
 
     file_list = linklist_init();
-    if (file_list == NULL) ERRNOR (ENOMEM, NULL);
+    if (file_list == NULL)
+	    ERRNOR (ENOMEM, NULL);
     dcache = xmalloc(sizeof(struct dir), 
 		     "struct dir");
     if (dcache == NULL) {
@@ -1384,7 +1395,8 @@ store_file(struct direntry *fe)
 
     local_handle = open(fe->local_filename, O_RDONLY);
     unlink (fe->local_filename);
-    if (local_handle == -1) ERRNOR (EIO, 0);
+    if (local_handle == -1)
+	    ERRNOR (EIO, 0);
     fstat(local_handle, &s);
     sock = open_data_connection(fe->bucket, "STOR", fe->remote_filename, TYPE_BINARY, 0);
     if (sock < 0) {
@@ -1435,7 +1447,8 @@ store_file(struct direntry *fe)
     disable_interrupt_key();
     close(sock);
     close(local_handle);
-    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE) ERRNOR (EIO, 0);
+    if (get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)
+	    ERRNOR (EIO, 0);
     return 1;
 error_return:
     disable_interrupt_key();
@@ -1473,7 +1486,8 @@ linear_read (struct direntry *fe, void *buf, int len)
 	break;
     }
 
-    if (n<0) linear_abort(fe);
+    if (n<0)
+	    linear_abort(fe);
 
     if (!n) {
         if ((get_reply (qsock (fe->bucket), NULL, 0) != COMPLETE)) {
@@ -1531,7 +1545,8 @@ send_ftp_command(char *filename, char *cmd, int flags)
     vfs_add_noncurrent_stamps (&vfs_ftpfs_ops, (vfsid) bucket, NULL);
     if (flags & OPT_IGNORE_ERROR)
 	r = COMPLETE;
-    if (r != COMPLETE) ERRNOR (EPERM, -1);
+    if (r != COMPLETE)
+	    ERRNOR (EPERM, -1);
     if (flush_directory_cache)
 	flush_all_directory(bucket);
     return 0;

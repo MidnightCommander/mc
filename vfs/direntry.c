@@ -35,7 +35,8 @@ vfs_s_inode *vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat
     vfs_s_inode *ino;
 
     ino = xmalloc(sizeof (vfs_s_inode), "Dcache inode");
-    if (!ino) return NULL;
+    if (!ino)
+	return NULL;
 
 
     ino->linkname = ino->localname = NULL;
@@ -66,7 +67,8 @@ vfs_s_entry *vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
 
     if (name)
 	entry->name = strdup (name);
-    else entry->name = NULL;
+    else
+	entry->name = NULL;
     entry->dir = NULL;
     entry->next = NULL;
     entry->prevp = NULL;
@@ -79,7 +81,8 @@ vfs_s_entry *vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode)
 
 void vfs_s_free_inode (vfs *me, vfs_s_inode *ino)
 {
-    if (!ino) vfs_die("Don't pass NULL to me");
+    if (!ino)
+	vfs_die ("Don't pass NULL to me");
 
     /* ==0 can happen if freshly created entry is deleted */
     if(ino->st.st_nlink <= 1) {
@@ -106,7 +109,8 @@ void vfs_s_free_entry (vfs *me, vfs_s_entry *ent)
     int is_dot = 0;
     if (ent->prevp) {	/* It is possible that we are deleting freshly created entry */
 	*ent->prevp = ent->next;
-	if (ent->next) ent->next->prevp = ent->prevp;
+	if (ent->next)
+	    ent->next->prevp = ent->prevp;
     }
 
     if (ent->name) {
@@ -129,7 +133,8 @@ void vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent)
 {
     vfs_s_entry **ep;
 
-    for(ep = &dir->subdir; *ep != NULL; ep = &((*ep)->next));
+    for (ep = &dir->subdir; *ep != NULL; ep = &((*ep)->next))
+	;
     ent->prevp = ep;
     ent->next = NULL;
     ent->dir = dir;
@@ -251,7 +256,6 @@ static void split_dir_name(vfs *me, char *path, char **dir, char **name, char **
 
 vfs_s_entry *vfs_s_find_entry_linear(vfs *me, vfs_s_inode *root, char *path, int follow, int flags)
 {
-    char *s;
     vfs_s_entry* ent = NULL;
 
     if (!(flags & FL_DIR)) {
@@ -435,7 +439,8 @@ char *vfs_s_get_path_mangle (vfs *me, char *inname, struct vfs_s_super **archive
 	}
     }
 
-    if (flags & FL_NO_OPEN) ERRNOR (EIO, NULL);
+    if (flags & FL_NO_OPEN)
+	ERRNOR (EIO, NULL);
 
     super = vfs_s_new_super (me);
     result = MEDATA->open_archive (me, super, archive_name, op);
@@ -523,8 +528,10 @@ void * vfs_s_opendir (vfs *me, char *dirname)
     struct dirhandle *info;
 
     dir = vfs_s_inode_from_path (me, dirname, FL_DIR | FL_FOLLOW);
-    if (!dir) return NULL;
-    if (!S_ISDIR (dir->st.st_mode)) ERRNOR (ENOTDIR, NULL);
+    if (!dir)
+	return NULL;
+    if (!S_ISDIR (dir->st.st_mode))
+	ERRNOR (ENOTDIR, NULL);
 
     dir->st.st_nlink++;
 #if 0
@@ -556,7 +563,7 @@ void * vfs_s_readdir (void *data)
 	strcpy (&(dir.dir.d_name [0]), info->cur->name);
     else
 	vfs_die( "Null in structure-can not happen");
-    
+
 #ifndef DIRENT_LENGTH_COMPUTED
     dir.d_namlen = strlen (dir.dir.d_name);
 #endif
@@ -573,7 +580,8 @@ int vfs_s_telldir (void *data)
 
     cur = info->dir->subdir;
     while (cur!=NULL) {
-        if (cur == info->cur) return num;
+        if (cur == info->cur)
+	    return num;
 	num++;
 	cur = cur->next;
     }
@@ -614,7 +622,8 @@ static int vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
 {
     struct vfs_s_inode *ino;
 
-    if (!(ino = vfs_s_inode_from_path( me, path, flag ))) return -1;
+    if (!(ino = vfs_s_inode_from_path( me, path, flag )))
+	return -1;
     *buf = ino->st;
     return 0;
 }
@@ -640,9 +649,11 @@ int vfs_s_readlink (vfs *me, char *path, char *buf, int size)
     struct vfs_s_inode *ino;
 
     ino = vfs_s_inode_from_path(me, path, 0);
-    if (!ino) return -1;
+    if (!ino)
+	return -1;
 
-    if (!S_ISLNK (ino->st.st_mode)) ERRNOR (EINVAL, -1);
+    if (!S_ISLNK (ino->st.st_mode))
+	ERRNOR (EINVAL, -1);
     strncpy (buf, ino->linkname, size);
     *(buf+size-1) = 0;
     return strlen(buf);
@@ -681,7 +692,8 @@ void *vfs_s_open (vfs *me, char *file, int flags, int mode)
 	was_changed = 1;
     }
 
-    if (S_ISDIR (ino->st.st_mode)) ERRNOR (EISDIR, NULL);
+    if (S_ISDIR (ino->st.st_mode))
+	ERRNOR (EISDIR, NULL);
     
     fh = (struct vfs_s_fh *) xmalloc (sizeof (struct vfs_s_fh), "Direntry: filehandle");
     fh->pos = 0;
@@ -810,8 +822,10 @@ int vfs_s_close (void *fh)
 	res = MEDATA->fh_close (me, fh);
     if (FH->changed && MEDATA->file_store) {
 	char *s = vfs_s_fullpath( me, FH->ino );
-	if (!s) res = -1;
-	   else res = MEDATA->file_store (me, FH_SUPER, s, FH->ino->localname);
+	if (!s)
+	    res = -1;
+	else
+	    res = MEDATA->file_store (me, FH_SUPER, s, FH->ino->localname);
 	vfs_s_invalidate(me, FH_SUPER);
     }
     if (FH->handle)
@@ -848,7 +862,9 @@ void
 vfs_s_dump(vfs *me, char *prefix, vfs_s_inode *ino)
 {
     printf( "%s %s %d ", prefix, S_ISDIR(ino->st.st_mode) ? "DIR" : "FILE", ino->st.st_mode );
-    if (!ino->subdir) printf ("FILE\n");
+    if (!ino->subdir)
+	printf ("FILE\n");
+
     else
     {
 	struct vfs_s_entry *ent;

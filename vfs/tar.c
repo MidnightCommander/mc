@@ -124,9 +124,13 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 
 static union record rec_buf;
 
-static union record *get_next_record (vfs_s_super *archive, int tard)
+static union record *
+get_next_record (vfs_s_super *archive, int tard)
 {
-    if (mc_read (tard, rec_buf.charptr, RECORDSIZE) != RECORDSIZE)
+    int n;
+
+    n = mc_read (tard, rec_buf.charptr, RECORDSIZE);
+    if (n != RECORDSIZE)
 	return NULL;		/* An error has occurred */
     current_tar_position += RECORDSIZE;
     return &rec_buf;
@@ -183,12 +187,19 @@ static void fill_stat_from_header (vfs *me, struct stat *st, union record *heade
 }
 
 
+typedef enum {
+    STATUS_BADCHECKSUM,
+    STATUS_SUCCESS,
+    STATUS_EOFMARK,
+    STATUS_EOF,
+} ReadStatus;
 /*
  * Return 1 for success, 0 if the checksum is bad, EOF on eof,
  * 2 for a record full of zeros (EOF marker).
  *
  */
-static int read_header (vfs *me, vfs_s_super *archive, int tard)
+static ReadStatus
+read_header (vfs *me, vfs_s_super *archive, int tard)
 {
     register int i;
     register long sum, signed_sum, recsum;
@@ -204,7 +215,7 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 
     header = get_next_record (archive, tard);
     if (NULL == header)
-	return EOF;
+	return STATUS_EOF;
 
     recsum = from_oct (8, header->header.chksum);
 
@@ -227,25 +238,25 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
     sum += ' ' * sizeof header->header.chksum;
     signed_sum += ' ' * sizeof header->header.chksum;
 
-    if (sum == 8 * ' ') {
-	/*
-	 * This is a zeroed record...whole record is 0's except
-	 * for the 8 blanks we faked for the checksum field.
-	 */
-	return 2;
-    }
+    /*
+     * This is a zeroed record...whole record is 0's except
+     * for the 8 blanks we faked for the checksum field.
+     */
+    if (sum == 8 * ' ')
+	return STATUS_EOFMARK;
+
     if (sum != recsum && signed_sum != recsum)
-	return 0;
+	return STATUS_BADCHECKSUM;
     
     /*
      * linkflag on BSDI tar (pax) always '\000'
      */
-    if(header->header.linkflag == '\000' &&
-       strlen(header->header.arch_name) &&
-       header->header.arch_name[strlen(header->header.arch_name) - 1] == '/')
+    if (header->header.linkflag == '\000' &&
+	strlen(header->header.arch_name) &&
+	header->header.arch_name[strlen(header->header.arch_name) - 1] == '/')
 	header->header.linkflag = LF_DIR;
     
-     /*
+    /*
      * Good record.  Decode file size and return.
      */
     if (header->header.linkflag == LF_LINK || header->header.linkflag == LF_DIR)
@@ -270,7 +281,7 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	    data = get_next_record (archive, tard)->charptr;
 	    if (data == NULL) {
 		message_1s (1, MSG_ERROR, _("Unexpected EOF on archive file"));
-		return 0;
+		return STATUS_BADCHECKSUM;
 	    }
 	    written = RECORDSIZE;
 	    if (written > size)
@@ -325,7 +336,7 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	parent = vfs_s_find_inode (me, archive->root, q, LINK_NO_FOLLOW, FL_MKDIR);
 	if (parent == NULL) {
 	    message_1s (1, MSG_ERROR, _("Inconsistent tar archive"));
-	    return 0;
+	    return STATUS_BADCHECKSUM;
 	}
 
 	if (header->header.linkflag == LF_LINK) {
@@ -357,7 +368,7 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
 	    while (get_next_record (archive, tard)->ext_hdr.isextended);
 	    inode->u.tar.data_offset = current_tar_position;
 	}
-	return 1;
+	return STATUS_SUCCESS;
     }
 }
 
@@ -367,8 +378,8 @@ static int read_header (vfs *me, vfs_s_super *archive, int tard)
  */
 static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
 {
-    int status = 3;		/* Initial status at start of archive */
-    int prev_status;
+    ReadStatus status = STATUS_EOFMARK;		/* Initial status at start of archive */
+    ReadStatus prev_status;
     int tard;
 
     current_tar_position = 0;
@@ -378,33 +389,45 @@ static int open_archive (vfs *me, vfs_s_super *archive, char *name, char *op)
     for (;;) {
 	prev_status = status;
 	status = read_header (me, archive, tard);
+
+
 	switch (status) {
 
-	case 1:		/* Valid header */
-		skip_n_records (archive, tard, (hstat.st_size + RECORDSIZE - 1) / RECORDSIZE);
-		continue;
-	                /*
-			 * If the previous header was good, tell them
-			 * that we are skipping bad ones.
-			 */
-	case 0:		/* Invalid header */
-	    switch (prev_status) {
-	    case 3:		/* Error on first record */
+	case STATUS_SUCCESS:
+	    skip_n_records (archive, tard, (hstat.st_size + RECORDSIZE - 1) / RECORDSIZE);
+	    continue;
+
+	    /*
+	     * Invalid header:
+	     *
+	     * If the previous header was good, tell them
+	     * that we are skipping bad ones.
+	     */
+	case STATUS_BADCHECKSUM:	
+	    switch (prev_status){
+
+		/* Error on first record */
+	    case STATUS_EOFMARK:
 		message_2s (1, MSG_ERROR, _("Hmm,...\n%s\ndoesn't look like a tar archive."), name);
 		/* FALL THRU */
-	    case 2:		/* Error after record of zeroes */
-	    case 1:		/* Error after header rec */
-#if 0
-		message_1s (0, " Warning ", "Skipping to next file header...");
-#endif
-	    case 0:		/* Error after error */
+
+		/* Error after header rec */
+	    case STATUS_SUCCESS:
+		/* Error after error */
+
+	    case STATUS_BADCHECKSUM:
 		return -1;
+
+	    case STATUS_EOF:
+		return 0;
 	    }
 
-	case 2:		/* Record of zeroes */
+	    /* Record of zeroes */
+	case STATUS_EOFMARK:	
 	    status = prev_status;	/* If error after 0's */
 	    /* FALL THRU */
-	case EOF:		/* End of archive */
+
+	case STATUS_EOF:	/* End of archive */
 	    break;
 	}
 	break;

@@ -145,35 +145,52 @@ struct vfs_s_data {
 };
 
 /* entries and inodes */
-vfs_s_inode *vfs_s_new_inode (vfs *me, vfs_s_super *super, struct stat *initstat);
-vfs_s_entry *vfs_s_new_entry (vfs *me, char *name, vfs_s_inode *inode);
-void vfs_s_free_entry (vfs *me, vfs_s_entry *ent);
-void vfs_s_insert_entry (vfs *me, vfs_s_inode *dir, vfs_s_entry *ent);
-struct stat *vfs_s_default_stat (vfs *me, mode_t mode);
-void vfs_s_add_dots (vfs *me, vfs_s_inode *dir, vfs_s_inode *parent);
-struct vfs_s_entry *vfs_s_generate_entry (vfs *me, char *name, struct vfs_s_inode *parent, mode_t mode);
-vfs_s_entry *vfs_s_automake(vfs *me, vfs_s_inode *dir, char *path, int flags);
-vfs_s_entry *vfs_s_find_entry_tree(vfs *me, vfs_s_inode *root, char *path, int follow, int flags);
-vfs_s_entry *vfs_s_find_entry_linear(vfs *me, vfs_s_inode *root, char *path, int follow, int flags);
-vfs_s_inode *vfs_s_find_inode(vfs *me, vfs_s_inode *root, char *path, int follow, int flags);
-vfs_s_inode *vfs_s_find_root(vfs *me, vfs_s_entry *entry);
-struct vfs_s_entry *vfs_s_resolve_symlink (vfs *me,  vfs_s_entry *entry, int follow);
+vfs_s_inode *vfs_s_new_inode         (vfs *me, vfs_s_super *super,
+				      struct stat *initstat);
+vfs_s_entry *vfs_s_new_entry         (vfs *me, char *name, vfs_s_inode *inode);
+void         vfs_s_free_entry        (vfs *me, vfs_s_entry *ent);
+void         vfs_s_insert_entry      (vfs *me, vfs_s_inode *dir,
+				      vfs_s_entry *ent);
+struct stat *vfs_s_default_stat      (vfs *me, mode_t mode);
+
+void         vfs_s_add_dots          (vfs *me, vfs_s_inode *dir,
+				      vfs_s_inode *parent);
+vfs_s_entry *vfs_s_generate_entry    (vfs *me, char *name,
+				      struct vfs_s_inode *parent, mode_t mode);
+vfs_s_entry *vfs_s_automake          (vfs *me, vfs_s_inode *dir, char *path,
+				      int flags);
+vfs_s_entry *vfs_s_find_entry_tree   (vfs *me, vfs_s_inode *root, char *path,
+				      int follow, int flags);
+vfs_s_entry *vfs_s_find_entry_linear (vfs *me, vfs_s_inode *root, char *path,
+				      int follow, int flags);
+vfs_s_inode *vfs_s_find_inode        (vfs *me, vfs_s_inode *root, char *path,
+				      int follow, int flags);
+vfs_s_inode *vfs_s_find_root         (vfs *me, vfs_s_entry *entry);
+vfs_s_entry *vfs_s_resolve_symlink   (vfs *me,  vfs_s_entry *entry,
+				      int follow);
+
 /* superblock games */
-vfs_s_super *vfs_s_new_super (vfs *me);
-void vfs_s_free_super (vfs *me, vfs_s_super *super); 
+vfs_s_super *vfs_s_new_super         (vfs *me);
+void vfs_s_free_super                (vfs *me, vfs_s_super *super); 
+
 /* outside interface */
-char *vfs_s_get_path_mangle (vfs *me, char *inname, vfs_s_super **archive, int flags);
-char *vfs_s_get_path (vfs *me, char *inname, vfs_s_super **archive, int flags);
-void vfs_s_invalidate (vfs *me, vfs_s_super *super);
+char *vfs_s_get_path_mangle          (vfs *me, char *inname, vfs_s_super **archive,
+				      int flags);
+char *vfs_s_get_path                 (vfs *me, char *inname, vfs_s_super **archive,
+				      int flags);
+void  vfs_s_invalidate               (vfs *me, vfs_s_super *super);
+char *vfs_s_fullpath                 (vfs *me, vfs_s_inode *ino);
+
 /* readdir & friends */
-vfs_s_super *vfs_s_super_from_path (vfs *me, char *name);
-vfs_s_inode *vfs_s_inode_from_path (vfs *me, char *name, int flags);
-void * vfs_s_opendir (vfs *me, char *dirname);
-void * vfs_s_readdir (void *data);
+vfs_s_super *vfs_s_super_from_path   (vfs *me, char *name);
+vfs_s_inode *vfs_s_inode_from_path   (vfs *me, char *name, int flags);
+void *vfs_s_opendir (vfs *me, char *dirname);
+void *vfs_s_readdir (void *data);
 int vfs_s_telldir (void *data);
 void vfs_s_seekdir (void *data, int offset);
 int vfs_s_closedir (void *data);
 int vfs_s_chdir (vfs *me, char *path);
+
 /* stat & friends */
 int vfs_s_stat (vfs *me, char *path, struct stat *buf);
 int vfs_s_lstat (vfs *me, char *path, struct stat *buf);
@@ -184,16 +201,19 @@ int vfs_s_read (void *fh, char *buffer, int count);
 int vfs_s_write (void *fh, char *buffer, int count);
 int vfs_s_lseek (void *fh, off_t offset, int whence);
 int vfs_s_close (void *fh);
+
 /* mc support */
 void vfs_s_fill_names (vfs *me, void (*func)(char *));
 int vfs_s_ferrno(vfs *me);
 void vfs_s_dump(vfs *me, char *prefix, vfs_s_inode *ino);
 char *vfs_s_getlocalcopy (vfs *me, char *path);
+
 /* stamping support */
 vfsid vfs_s_getid (vfs *me, char *path, struct vfs_stamping **parent);
 int vfs_s_nothingisopen (vfsid id);
 void vfs_s_free (vfsid id);
 int vfs_s_setctl (vfs *me, char *path, int ctlop, char *arg);
+
 /* network filesystems support */
 int vfs_s_select_on_two (int fd1, int fd2);
 int vfs_s_get_line (vfs *me, int sock, char *buf, int buf_len, char term);

@@ -108,6 +108,7 @@ void my_putenv (char*, char*);
 #define EXECUTE_TEMPFILE   2
 #define EXECUTE_AS_SHELL   4
 #define EXECUTE_SETUID     8
+#define EXECUTE_WAIT      16
 int my_system (int flags, const char *shell, const char *command);
 int my_system_get_child_pid (int flags, const char *shell, const char *command, pid_t *pid);
 void save_stop_handler (void);
