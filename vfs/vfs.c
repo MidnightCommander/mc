@@ -1847,8 +1847,8 @@ vfs_print_stats (const char *fs_name, const char *action, const char *file_name,
     static char *i18n_percent_transf_format = NULL, *i18n_transf_format = NULL;
 
     if (i18n_percent_transf_format == NULL) {
-	i18n_percent_transf_format = _("%s: %s: %s %3d%% (%lu bytes transfered)");
-	i18n_transf_format = _("%s: %s: %s %lu bytes transfered");
+	i18n_percent_transf_format = _("%s: %s: %s %3d%% (%lu bytes transferred)");
+	i18n_transf_format = _("%s: %s: %s %lu bytes transferred");
     }
 
     if (need) 

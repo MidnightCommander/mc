@@ -1,5 +1,7 @@
 2002-04-24  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* vfs.c (vfs_print_stats): s/transfered/transferred/
+
 	* samba/lib/signal.c: Remove.
 
 	* samba/lib/debug.c (sig_usr2): Commented out.
