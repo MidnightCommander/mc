@@ -29,11 +29,8 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <sys/types.h>		/* FD_ZERO et al */
-#ifndef SCO_FLAVOR
-	/* alex: sys/select.h defines struct timeval */
-#	include <sys/time.h>		/* struct timeval */
-#endif /* SCO_FLAVOR */
+#include <sys/types.h>
+#include <sys/time.h>
 #if HAVE_SYS_SELECT_H
 #   include <sys/select.h>
 #endif
@@ -62,10 +59,7 @@
 
 #include "x.h"
 
-/* "$Id$" */
-
-/* This macros were stolen from gpm 0.15 */
-#define GET_TIME(tv) (gettimeofday(&tv, (struct timezone *)NULL))
+#define GET_TIME(tv)    (gettimeofday(&tv, (struct timezone *)NULL))
 #define DIF_TIME(t1,t2) ((t2.tv_sec -t1.tv_sec) *1000+ \
 			 (t2.tv_usec-t1.tv_usec)/1000)
 			 

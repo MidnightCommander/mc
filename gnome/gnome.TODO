@@ -1,5 +1,11 @@
 New task list:
 
+	- Use notebook to hold CLIst/IconList on the main windown
+
+	- Put stuff inside a frame to make it look shrunken
+
+	- Menu option to toggle tree on/off.
+
 	- Make the tree faster (cache loaded directories)
 	
 	- Sync the tree to the panel view
@@ -11,6 +17,14 @@ New task list:
 	- Add drag and drop to the tree view.
 
 	- Add to the gnome-panel mime-type support
+
+	- Drop the MC event handling off for the main window.
+
+Federico:
+
+	- Make the popup menus work on the desktop
+
+	- Root window stuff.
 
 Other features requested:
 

@@ -1703,6 +1703,81 @@ panel_chdir (GtkDTree *dtree, char *path, WPanel *panel)
 	do_panel_cd (panel, path, cd_exact);
 }
 
+/**
+ * tree_drag_open_directory:
+ *
+ * This routine is invoked in a delayed fashion if the user
+ * keeps the drag cursor still over the widget.
+ */
+static gint
+tree_drag_open_directory (gpointer data)
+{
+	WPanel *panel = data;
+	GtkCTreeNode *node;
+	int row, col;
+	int r;
+	
+	r = gtk_clist_get_selection_info (
+		GTK_CLIST (panel->tree),
+		GTK_DTREE (panel->tree)->drag_motion_x,
+		GTK_DTREE (panel->tree)->drag_motion_y,
+		&row, &col);
+
+	if (!r)
+		return FALSE;
+	
+	node = gtk_ctree_node_nth (GTK_CTREE (panel->tree), row);
+	if (!node)
+		return FALSE;
+
+	gtk_ctree_expand_recursive (GTK_CTREE (panel->tree), node);
+	return FALSE;
+}
+
+/** 
+ * panel_tree_drag_motion:
+ *
+ * This routine is invoked by GTK+ when an item is being dragged on
+ * top of our widget.  We setup a timed function that will open the
+ * Tree node
+ */
+static gboolean
+panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+{
+	GtkDTree *dtree = GTK_DTREE (widget);
+	WPanel *panel = data;
+	int r, row, col;
+	
+        if (dtree->timer_id != -1)
+		gtk_timeout_remove (dtree->timer_id);
+
+	r = gtk_clist_get_selection_info (
+		GTK_CLIST (widget), x, y, &row, &col);
+
+	dtree->drag_motion_x = x;
+	dtree->drag_motion_y = y;
+	dtree->timer_id = gtk_timeout_add (500, tree_drag_open_directory, data);
+
+	return TRUE;
+}
+
+/**
+ * panel_tree_drag_leave:
+ *
+ * Invoked by GTK+ when the dragging cursor has abandoned our widget.
+ * We kill any pending timers.
+ */
+static void
+panel_tree_drag_leave (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+{
+	GtkDTree *dtree = GTK_DTREE (widget);
+	
+	if (dtree->timer_id == -1){
+		gtk_timeout_remove (dtree->timer_id);
+		dtree->timer_id = -1;
+	}
+}
+
 /** 
  * panel_create_tree_view:
  *
@@ -1721,10 +1796,20 @@ panel_create_tree_view (WPanel *panel)
 	gtk_drag_dest_set (GTK_WIDGET (tree), GTK_DEST_DEFAULT_ALL,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK);
-	
+
+	/*
+	 * Drag and drop signals.
+	 */
+
+	/* Data has been dropped signal handler */
 	gtk_signal_connect (GTK_OBJECT (tree), "drag_data_received",
 			    GTK_SIGNAL_FUNC (panel_tree_drag_data_received), panel);
-			    
+
+	/* Mouse is being moved over ourselves */
+	gtk_signal_connect (GTK_OBJECT (tree), "drag_motion",
+			    GTK_SIGNAL_FUNC (panel_tree_drag_motion), panel);
+	gtk_signal_connect (GTK_OBJECT (tree), "drag_leave",
+			    GTK_SIGNAL_FUNC (panel_tree_drag_leave), panel);
 	return tree;
 }
 
