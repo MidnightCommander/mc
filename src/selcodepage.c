@@ -38,73 +38,78 @@
 int source_codepage = -1;
 int display_codepage = -1;
 
-static unsigned char get_hotkey( int n )
+static unsigned char
+get_hotkey (int n)
 {
     return (n <= 9) ? '0' + n : 'a' + n - 10;
 }
 
-int select_charset( int current_charset, int seldisplay )
+int
+select_charset (int current_charset, int seldisplay)
 {
     int i, menu_lines = n_codepages + 1;
     char buffer[255];
- 
+
     /* Create listbox */
-    Listbox* listbox =
-	create_listbox_window ( ENTRY_LEN + 2, menu_lines,
-				_(" Choose input codepage "),
-				"[Codepages Translation]");
+    Listbox *listbox = create_listbox_window (ENTRY_LEN + 2, menu_lines,
+					      _(" Choose input codepage "),
+					      "[Codepages Translation]");
 
     if (!seldisplay)
-	LISTBOX_APPEND_TEXT( listbox, '-', _("-  < No translation >"), NULL );
+	LISTBOX_APPEND_TEXT (listbox, '-', _("-  < No translation >"),
+			     NULL);
 
     /* insert all the items found */
     for (i = 0; i < n_codepages; i++) {
 	char *name = codepages[i].name;
-	snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey(i), name);
-	LISTBOX_APPEND_TEXT( listbox, get_hotkey(i), buffer, NULL );
+	g_snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey (i),
+		    name);
+	LISTBOX_APPEND_TEXT (listbox, get_hotkey (i), buffer, NULL);
     }
     if (seldisplay) {
-	snprintf (buffer, sizeof (buffer), "%c  %s", get_hotkey(n_codepages), _("Other 8 bit"));
-	LISTBOX_APPEND_TEXT( listbox, get_hotkey(n_codepages), buffer, NULL );
+	g_snprintf (buffer, sizeof (buffer), "%c  %s",
+		    get_hotkey (n_codepages), _("Other 8 bit"));
+	LISTBOX_APPEND_TEXT (listbox, get_hotkey (n_codepages), buffer,
+			     NULL);
     }
-	
+
     /* Select the default entry */
     i = (seldisplay)
-	?
-	( (current_charset < 0) ? n_codepages : current_charset )
-	:
-	( current_charset + 1 );
+	? ((current_charset < 0) ? n_codepages : current_charset)
+	: (current_charset + 1);
 
-    listbox_select_by_number( listbox->list, i );
+    listbox_select_by_number (listbox->list, i);
 
-    i = run_listbox( listbox );
+    i = run_listbox (listbox);
 
-    return (seldisplay) ? ( (i >= n_codepages) ? -1 : i )
-			: ( i - 1 );
+    return (seldisplay) ? ((i >= n_codepages) ? -1 : i)
+	: (i - 1);
 }
 
 /* Helper functions for codepages support */
 
 
-int do_select_codepage(void)
+int
+do_select_codepage (void)
 {
     char *errmsg;
 
     if (display_codepage > 0) {
-	source_codepage = select_charset( source_codepage, 0 );
-	errmsg = init_translation_table( source_codepage, display_codepage );
+	source_codepage = select_charset (source_codepage, 0);
+	errmsg =
+	    init_translation_table (source_codepage, display_codepage);
 	if (errmsg) {
-	    message( 1, MSG_ERROR, "%s", errmsg );
+	    message (1, MSG_ERROR, "%s", errmsg);
 	    return -1;
 	}
     } else {
-	message( 1, _(" Warning "),
-	       _("To use this feature select your codepage in\n"
-		 "Setup / Display Bits dialog!\n"
-		 "Do not forget to save options." ));
+	message (1, _(" Warning "),
+		 _("To use this feature select your codepage in\n"
+		   "Setup / Display Bits dialog!\n"
+		   "Do not forget to save options."));
 	return -1;
     }
     return 0;
 }
 
-#endif /* HAVE_CHARSET */
+#endif				/* HAVE_CHARSET */

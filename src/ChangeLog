@@ -1,5 +1,8 @@
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
+	* selcodepage.c (select_charset): Use g_snprintf() instead
+	of non-portable snprintf().
+
 	* myslang.h [!HAVE_SYSTEM_SLANG]: Update location of slang.h.
 
 2002-09-29  Pavel Roskin  <proski@gnu.org>
