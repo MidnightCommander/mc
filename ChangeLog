@@ -1,5 +1,9 @@
 2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* slang/slvideo.c (SLtt_set_color): Eliminate C++ comments.
+	http://bugzilla.gnome.org/show_bug.cgi?id=60935
+	By drk@sgi.com.
+
 	* doc/mc.1.in: Document %p macro.
 
 2001-10-24  Pavel Roskin  <proski@gnu.org>

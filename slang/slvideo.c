@@ -1342,7 +1342,7 @@ void SLtt_set_color (int obj, char *what, char *fg, char *bg)
       case 14: newcolor = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY; break;
       case 15: newcolor = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY; break;
      }
-   // switch
+   /* switch (f) */
    
    /*
      0        1       2        3
@@ -1377,7 +1377,7 @@ void SLtt_set_color (int obj, char *what, char *fg, char *bg)
       case 14: newcolor |= BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY; break;
       case 15: newcolor |= BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY; break;
      }
-   // switch
+   /* switch (b) */
    
    Color_Map [obj] = newcolor;
    
