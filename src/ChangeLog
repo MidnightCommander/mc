@@ -1,5 +1,8 @@
 2002-01-20  Pavel Roskin  <proski@gnu.org>
 
+	* screen.c (string_file_size): Translate "UP--DIR".
+	(string_file_size_brief): Translate "SUB-DIR" and "SYMLINK".
+
 	* dir.c (add_dotdot_to_list): Don't use costly stat() - just put
 	realistic (i.e. bogus) data to the list.
 

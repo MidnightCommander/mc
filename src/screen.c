@@ -174,7 +174,7 @@ string_file_size (file_entry *fe, int len)
 
     /* Don't ever show size of ".." since we don't calculate it */
     if (!strcmp (fe->fname, "..")) {
-       strcpy (buffer, N_("UP--DIR"));
+       strcpy (buffer, _("UP--DIR"));
        return buffer;
     }
 
@@ -198,12 +198,12 @@ string_file_size_brief (file_entry *fe, int len)
     static char buffer [BUF_TINY];
 
     if (S_ISLNK (fe->buf.st_mode) && !fe->f.link_to_dir) {
-       strcpy (buffer, N_("SYMLINK"));
+       strcpy (buffer, _("SYMLINK"));
        return buffer;
     }
 
     if ((S_ISDIR (fe->buf.st_mode) || fe->f.link_to_dir) && strcmp (fe->fname, "..")) {
-       strcpy (buffer, N_("SUB-DIR"));
+       strcpy (buffer, _("SUB-DIR"));
        return buffer;
     }
 
