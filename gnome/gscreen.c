@@ -79,6 +79,7 @@ GtkWidget *drag_multiple_ok  = NULL;
 
 
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
+#define ILIST_FROM_SW(panel_list) GNOME_ICON_LIST (GTK_BIN (panel_list)->child)
 
 
 void
@@ -220,7 +221,7 @@ panel_fill_panel_list (WPanel *panel)
 static void
 panel_fill_panel_icons (WPanel *panel)
 {
-	GnomeIconList *icons = GNOME_ICON_LIST (panel->icons);
+	GnomeIconList *icons = ILIST_FROM_SW (panel->icons);
 	const int top       = panel->count;
 	const int selected  = panel->selected;
 	int i;
@@ -313,7 +314,7 @@ x_select_item (WPanel *panel)
 	display_mini_info (panel);
 	
 	if (panel->list_type == list_icons){
-		GnomeIconList *list = GNOME_ICON_LIST (panel->icons);
+		GnomeIconList *list = ILIST_FROM_SW (panel->icons);
 
 		gnome_icon_list_select_icon (list, panel->selected);
 
@@ -340,7 +341,7 @@ x_unselect_item (WPanel *panel)
 	int selected = panel->selected;
 	
 	if (panel->list_type == list_icons)
-		gnome_icon_list_unselect_all (GNOME_ICON_LIST (panel->icons), NULL, NULL);
+		gnome_icon_list_unselect_all (ILIST_FROM_SW (panel->icons), NULL, NULL);
 	else
 		gtk_clist_unselect_all (CLIST_FROM_SW (panel->list));
 
@@ -1023,7 +1024,7 @@ panel_clist_scrolling_is_desirable (WPanel *panel, int x, int y)
 {
 	GtkAdjustment *va;
 
-	va = scrolled_window_get_vadjustment (panel->list);
+	va = scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel->list));
 
 	if (y < 10){
 		if (va->value > va->lower)
@@ -1146,13 +1147,13 @@ panel_icon_list_scrolling_is_desirable (WPanel *panel, int x, int y)
 {
 	GtkAdjustment *va;
 
-	va = GNOME_ICON_LIST (panel->icons)->adj;
+	va = scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel->icons));
 
-	if (y < 10){
+	if (y < 10) {
 		if (va->value > va->lower)
 			return TRUE;
 	} else {
-		if (y > (GTK_WIDGET (panel->icons)->allocation.height - 10)){
+		if (y > (GTK_WIDGET (ILIST_FROM_SW (panel->icons))->allocation.height - 10)) {
 			if (va->value < va->upper - va->page_size)
 				return TRUE;
 		}
@@ -1174,7 +1175,7 @@ panel_icon_list_scroll (gpointer data)
 	GtkAdjustment *va;
 	double v;
 
-	va = GNOME_ICON_LIST (panel->icons)->adj;
+	va = scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (panel->icons));
 
 	if (panel->drag_motion_y < 10) {
 		v = va->value - va->step_increment;
@@ -1268,7 +1269,8 @@ panel_create_file_list (WPanel *panel)
 			titles [i++] = format->title;
 
 	sw = gtk_scrolled_window_new (NULL, NULL);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw), GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
 
 	file_list = gtk_clist_new_with_titles (items, titles);
 	gtk_container_add (GTK_CONTAINER (sw), file_list);
@@ -1453,13 +1455,19 @@ panel_icon_list_button_release (GtkWidget *widget, GdkEventButton *event, WPanel
 static GtkWidget *
 panel_create_icon_display (WPanel *panel)
 {
+	GtkWidget *sw;
 	GnomeIconList *ilist;
-			       
+
+	sw = gtk_scrolled_window_new (NULL, NULL);
+	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (sw),
+					GTK_POLICY_AUTOMATIC, GTK_POLICY_AUTOMATIC);
+
 	ilist = GNOME_ICON_LIST (
-		gnome_icon_list_new_flags (
-			90, NULL,
-			GNOME_ICON_LIST_IS_EDITABLE|
-			GNOME_ICON_LIST_STATIC_TEXT));
+		gnome_icon_list_new_flags (90, NULL,
+					   (GNOME_ICON_LIST_IS_EDITABLE
+					    | GNOME_ICON_LIST_STATIC_TEXT)));
+	gtk_container_add (GTK_CONTAINER (sw), GTK_WIDGET (ilist));
+	gtk_widget_show (GTK_WIDGET (ilist));
 
 	gnome_icon_list_set_separators (ilist, " /-_.");
 	gnome_icon_list_set_row_spacing (ilist, 2);
@@ -1515,16 +1523,15 @@ panel_create_icon_display (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_widget_motion),
 			    panel);
 
-	/*
-	 * This signal is provide for scrolling the main window if
-	 * data is being dragged
+	/* This signal is provide for scrolling the main window if data is being
+	 * dragged.
 	 */
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_motion",
 			    GTK_SIGNAL_FUNC (panel_icon_list_drag_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (ilist), "drag_leave",
 			    GTK_SIGNAL_FUNC (panel_icon_list_drag_leave), panel);
-	
-	return GTK_WIDGET (ilist);
+
+	return sw;
 }
 
 static void
@@ -2346,7 +2353,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
 	GtkWidget *status_line, *filter, *vbox, *ministatus_box;
 	GtkWidget *cwd;
-	GtkWidget *dock, *box;
+	GtkWidget *dock;
 	GnomeUIBuilderData uibdata;
 
 	panel->xwindow = gtk_widget_get_toplevel (GTK_WIDGET (panel->widget.wdata));
@@ -2373,27 +2380,19 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	
 	panel->icons = panel_create_icon_display (panel);
 	gtk_widget_show (panel->icons);
-	panel->scrollbar = gtk_vscrollbar_new (GNOME_ICON_LIST (panel->icons)->adj);
-	gtk_widget_show (panel->scrollbar);
 
 	panel->list  = panel_create_file_list (panel);
 	gtk_widget_ref (panel->icons);
 	gtk_widget_ref (panel->list);
 
-	box = gtk_hbox_new (FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (box), panel->icons, TRUE, TRUE, 0);
-	gtk_box_pack_end (GTK_BOX (box), panel->scrollbar, FALSE, TRUE, 0);
-	gtk_widget_show (box);
-	
 	panel->panel_listbox = gtk_event_box_new ();
 	gtk_widget_show (panel->panel_listbox);
 	gtk_container_add (GTK_CONTAINER (panel->panel_listbox), panel->list);
-
 	
-	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), box, NULL);
+	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), panel->icons, NULL);
 	gtk_notebook_append_page (GTK_NOTEBOOK (panel->notebook), panel->panel_listbox, NULL);
 	gtk_notebook_set_page (GTK_NOTEBOOK (panel->notebook), panel->list_type == list_icons ? 0 : 1);
-	gtk_widget_show_all (box);
+	gtk_widget_show (panel->icons);
 	gtk_widget_show (panel->list);
 	gtk_widget_show (panel->notebook);
 	

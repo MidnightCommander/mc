@@ -1,5 +1,11 @@
 1999-02-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c (ILIST_FROM_SW): New macro to extract the icon list
+	from the scrolled window.
+	(panel_create_icon_display): Create a scrolled window and put the
+	icon list inside it.  Changed the rest of the code to know about
+	this.
+
 	* gcorba.c (do_window_close): It turns out that we *do* need to
 	call CORBA_free().  It was a bug in ORBit which was causing this
 	to crash.

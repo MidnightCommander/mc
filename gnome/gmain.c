@@ -20,6 +20,7 @@
 #include "dir.h"
 #include "panel.h"
 #include "gscreen.h"
+#include "gcmd.h"
 #include "command.h"
 #include "cmd.h"
 #include "gdesktop.h"
@@ -502,15 +503,9 @@ create_one_panel (char *dir, char *geometry)
 void
 create_panels (void)
 {
-	GList *p, *g;
-	char  *geo;
 	WPanel *panel;
 
-#if 1
 	desktop_init ();
-#else
-	start_desktop ();
-#endif
 	cmdline = command_new (0, 0, 0);
 	the_hint = label_new (0, 0, 0, NULL);
 
@@ -544,11 +539,8 @@ create_panels (void)
 	run_dlg (desktop_dlg);
 
 	/* shutdown gnome specific bits of midnight commander */
-#if 1
+
 	desktop_destroy ();
-#else
-	stop_desktop ();
-#endif
 }
 
 static void

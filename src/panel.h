@@ -135,7 +135,6 @@ typedef struct {
     void *tree;
     void *icons;
     void *notebook;
-    void *scrollbar;
     void *status;
     void *ministatus;
     void *tree_scrolled_window;

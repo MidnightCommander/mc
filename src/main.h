@@ -187,6 +187,8 @@ void done_menu (void);
 void init_menu (void);
 void exec_shell (void);
 
+void main_corba_register_server (void);
+
 #ifdef OS2_NT
 #    define MC_BASE ""
 #else
