@@ -48,6 +48,7 @@ GNOMESRCS = 		\
 	gmetadata.c	\
 	gpageprop.c	\
 	gpopup.c	\
+	gpopup2.c	\
 	gprefs.c	\
 	gprop.c		\
 	gnome-file-property-dialog.c \
@@ -74,6 +75,7 @@ GNOMEHDRS = 		\
 	gmetadata.h	\
 	gpageprop.h	\
 	gpopup.h	\
+	gpopup2.h	\
 	gprefs.h	\
 	gprop.h		\
 	gnome-file-property-dialog.h \
@@ -140,6 +142,7 @@ OBJS = 			\
 	gmetadata.o	\
 	gpageprop.o	\
 	gpopup.o	\
+	gpopup2.o	\
 	gprefs.o	\
 	gprop.o		\
 	gnome-file-property-dialog.o \

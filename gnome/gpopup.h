@@ -13,6 +13,9 @@
 #include <gdk/gdktypes.h>
 #include "panel.h"
 #include "gdesktop.h"
+int gpopup_do_popup2 (GdkEventButton *event,
+		      WPanel *panel, GList *file_list,
+		      gboolean on_selected);
 
 int gpopup_do_popup (GdkEventButton *event, WPanel *from_panel,
 		     DesktopIconInfo *dii,

@@ -529,7 +529,6 @@ gpopup_do_popup (GdkEventButton *event, WPanel *from_panel,
 
 	/* Connect to the deactivation signal to be able to quit our
            modal main loop */
-
 	id = gtk_signal_connect (GTK_OBJECT (menu), "deactivate",
 				 (GtkSignalFunc) menu_shell_deactivated,
 				 NULL);

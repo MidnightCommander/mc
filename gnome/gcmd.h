@@ -19,5 +19,6 @@ void gnome_external_panelize (GtkWidget *widget, WPanel *panel);
 void gnome_open_files        (GtkWidget *widget, WPanel *panel);
 void gnome_run_new           (GtkWidget *widget, GnomeDesktopEntry *gde);
 void gnome_mkdir_cmd         (GtkWidget *widget, WPanel *panel);
+void gnome_reverse_selection_cmd_panel (WPanel *panel);
 
 #endif /* __GCMD_H */

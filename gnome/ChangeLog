@@ -1,3 +1,15 @@
+1999-02-05  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (gnome_reverse_selection_cmd_panel): new function -- does
+	good things
+
+	* gscreen.c (panel_icon_list_select_icon): uses new popup menu
+	(panel_icon_list_button_press): ditto
+
+	* gpopup2.c (gpopup_do_popup2): new implementation of popup
+	menu.  Many changes -- almost all internal.  Much cleaner now...
+	Off to England.
+
 1999-02-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gicon.c (gicon_get_url_image): Return an image for url types.
@@ -6,6 +18,10 @@
 	* gdesktop.c (desktop_icon_info_new): Use an URL image for
 	desktop-urls.   Use the url as the caption for those icons. 
 	
+
+1999-02-04  Jonathan Blandford  <jrb@redhat.com>
+
+	* gprefs.c (caching_and_optimization_props): wording changes
 
 1999-02-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 

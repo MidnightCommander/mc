@@ -539,13 +539,30 @@ gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
 {
 	gint i;
 	for (i = 0; i < panel->count; i++){
-		if (!strcmp (panel->dir.list [i].fname, ".."))
+		if (!strcmp (panel->dir.list [i].fname, "..")) {
 			continue;
+		}
 		do_file_mark (panel, i, 1);
 	}
 	paint_panel (panel);
 	do_refresh ();
 }
+void
+gnome_reverse_selection_cmd_panel (WPanel *panel)
+{
+    file_entry *file;
+    int i;
+
+    for (i = 0; i < panel->count; i++){
+	    if (!strcmp (panel->dir.list [i].fname, "..")) {
+		    continue;
+	    }
+	    file = &panel->dir.list [i];
+	    do_file_mark (panel, i, !file->f.marked);
+    }
+    paint_panel (panel);
+}
+
 void
 gnome_filter_cmd (GtkWidget *widget, WPanel *panel)
 {
