@@ -1,3 +1,9 @@
+1999-07-01  Tuomas Kuosmanen  <tigert@gimp.org>
+
+	* gnome/i-zipdisk2.png: Added another zip-disk icon
+	by <scarab@egyptian.net> - It looks very nice. Variation
+	is good.
+
 1999-06-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* acconfig.h: Add WITH_SMBFS

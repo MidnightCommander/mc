@@ -113,7 +113,8 @@ ICONS = 			\
 	i-sock.png		\
 	i-stalled.png		\
 	i-symlink.png		\
-	i-zipdisk.png
+	i-zipdisk.png		\
+	i-zipdisk2.png
 
 #
 # These objects from ../src do not depend on HAVE_X / HAVE_GNOME??
