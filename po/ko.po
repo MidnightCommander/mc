@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
 "POT-Creation-Date: 2000-09-05 20:33+0900\n"
-"PO-Revision-Date: 2000-09-05 11:36:23+0900\n"
+"PO-Revision-Date: 2000-09-05 12:12+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@kldp.org>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -6058,15 +6058,15 @@ msgstr ""
 
 #: src/user.c:137
 msgid " Format error on file Extensions File "
-msgstr ""
+msgstr " 확장자 파일의 형식 에러 "
 
 #: src/user.c:138
 msgid " The %%var macro does not have a default "
-msgstr ""
+msgstr " %%var 매크로가 기본값을 가지고 있지 않습니다 "
 
 #: src/user.c:139
 msgid " The %%var macros does not have a variable "
-msgstr ""
+msgstr " %%var 매크로가 변수를 가지고 있지 않습니다 "
 
 #: src/user.c:273
 #, c-format
@@ -6109,7 +6109,7 @@ msgstr " 원격지로 로깅한 상태에서는 풀그림을 실행할 수 없습니다 "
 #: src/user.c:770
 #, c-format
 msgid " No appropriative entries found in %s "
-msgstr ""
+msgstr " %s에서 적당한 항목을 찾을 수 없습니다 "
 
 #. Create listbox
 #: src/user.c:776
@@ -6531,6 +6531,8 @@ msgid ""
 "Premature end of cpio archive\n"
 "%s"
 msgstr ""
+"cpio 아카이브의 생각지 못한 끝\n"
+"%s"
 
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
@@ -6538,6 +6540,8 @@ msgid ""
 "Corrupt cpio header encountered in\n"
 "%s"
 msgstr ""
+"%s에서\n"
+"깨진 cpio 헤더를 만났습니다"
 
 #: vfs/cpio.c:427
 #, c-format
