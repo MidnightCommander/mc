@@ -5,6 +5,8 @@
 	Undefine "close" before closing file created by mc_mkstemps.
 	Define close to mc_close after it - temporary fix.
 
+	(sprintf_p): Don't cast (char *) to (unsigned long).
+
 	* syntax.c (read_one_line): Undo last patch - errno is a
 	function on some systems.  Check ferror() status before
 	everithing else if fgetc returns EOF.

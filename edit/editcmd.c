@@ -1491,7 +1491,7 @@ static int sprintf_p (char *str, const char *fmt,...)
     p = q = (char *) fmt;
 
     while ((p = strchr (p, '%'))) {
-	n = (int) ((unsigned long) p - (unsigned long) q);
+	n = p - q;
 	strncpy (s, q, n);	/* copy stuff between format specifiers */
 	s += n;
 	*s = 0;
@@ -1563,7 +1563,7 @@ static int sprintf_p (char *str, const char *fmt,...)
     }
     va_end (ap);
     sprintf (s, q);		/* print trailing leftover */
-    return (unsigned long) s - (unsigned long) str + strlen (s);
+    return s - str + strlen (s);
 }
 
 static void regexp_error (WEdit *edit)
