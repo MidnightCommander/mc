@@ -5,7 +5,7 @@ rootdir = $(srcdir)
 @MCFGR@@MCF@
 
 foreigndirs=pc
-codedirs=vfs lib doc slang gtkedit edit src gnome new_icons icons idl
+codedirs=vfs lib doc slang gtkedit edit src gnome new_icons icons idl syntax
 unixdirs=intl $(codedirs) @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
@@ -60,7 +60,7 @@ installdirs:
 	$(MKINSTALLDIRS) $(DESTDIR)$(mandir) $(DESTDIR)$(man8dir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(icondir) $(DESTDIR)$(suppbindir)
 	$(MKINSTALLDIRS) $(DESTDIR)$(tidir) $(DESTDIR)$(extfsdir)
-	$(MKINSTALLDIRS) $(DESTDIR)$(idldir)
+	$(MKINSTALLDIRS) $(DESTDIR)$(idldir) $(DESTDIR)$(syntaxdir)
 
 mcfninstall:
 	-/bin/sh ./mcfn_install

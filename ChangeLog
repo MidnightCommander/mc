@@ -1,3 +1,8 @@
+Mon Mar 22 01:52:32 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in, Makefile.in, Makefile-common: Add syntax/Makefile.in,
+	as requested by Paul. Still, need some checking...
+
 Sun Mar 21 03:55:24 1999 Paul Sheer <psheer@obsidian.co.za>
 
 	* edit/*.[ch] gtkedit/*.[ch]: brought the editor up
@@ -83,7 +88,7 @@ Wed Feb 10 02:48:51 1999  Timur Bakeyev  <mc@bat.ru>
 	* configure.in: Add check, which, in case of system-installed SLang
 	library tries to run a test program, which determines, does we need
 	linking with libtermcap.a. Also, set of if's for finding terminfo
-	dir changed do for cycle - a bit nicer :)
+	dir changed to for cycle - a bit nicer :)
 
 Tue Feb  9 20:52:19 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 

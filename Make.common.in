@@ -29,6 +29,7 @@ extfsdir   = $(libdir)/extfs
 confdir    = $(prefix)/etc
 datadir    = @datadir@
 icondir    = $(datadir)/pixmaps/mc
+syntaxdir  = $(libdir)/cooledit/syntax
 gnomeicondir = @gnomeicondir@
 localedir  = $(datadir)/locale
 mandir     = @mandir@

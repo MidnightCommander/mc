@@ -1254,8 +1254,8 @@ lib/mc.ext
 lib/mc-gnome.ext
 
 mcfn_install
-vfs/extfs/ftplist vfs/extfs/uzip vfs/extfs/uzoo vfs/extfs/lslR
-vfs/extfs/ulha vfs/extfs/ucpio vfs/extfs/deb vfs/extfs/urar vfs/extfs/uar
+vfs/extfs/ftplist vfs/extfs/uzip vfs/extfs/uzoo vfs/extfs/lslR vfs/extfs/ulha 
+vfs/extfs/uha vfs/extfs/ucpio vfs/extfs/deb vfs/extfs/urar vfs/extfs/uar
 
 doc/mc.1 doc/mcedit.1 doc/mcserv.8
 
