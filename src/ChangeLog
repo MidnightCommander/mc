@@ -1,5 +1,8 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (midnight_callback): Fix for the last commit - repaint
+	the panel if the search mode is unset.
+
 	* dlg.h: Remove DLG_PRE_EVENT, it's unused now.
 
 	* main.c (make_panels_dirty): Remove, it's unneded now.

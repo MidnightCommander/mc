@@ -1570,7 +1570,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
     case DLG_HOTKEY_HANDLED:
 	if ((get_current_type () == view_listing) && cpanel->searching) {
 	    cpanel->searching = 0;
-	    cpanel->dirty = 1;
+	    panel_update_contents (cpanel);
 	}
 	break;
 
