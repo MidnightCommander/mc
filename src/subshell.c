@@ -384,8 +384,8 @@ init_subshell (void)
 
 	subshell_pty = pty_open_master (pty_name);
 	if (subshell_pty == -1) {
-	    fprintf (stderr, "Cannot open master side of pty (%s): %s\r\n",
-		     pty_name, unix_error_string (errno));
+	    fprintf (stderr, "Cannot open master side of pty: %s\r\n",
+		     unix_error_string (errno));
 	    use_subshell = FALSE;
 	    return;
 	}
