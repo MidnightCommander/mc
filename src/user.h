@@ -4,7 +4,7 @@
 #ifndef MIDNIGHT
 #include "panel.h"
 #define MIDNIGHT
-#include "../gtkedit/edit-widget.h"
+#include "../edit/edit-widget.h"
 #undef MIDNIGHT
 #endif
 
