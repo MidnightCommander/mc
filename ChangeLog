@@ -1,3 +1,7 @@
+2001-06-05  Pavel Roskin  <proski@gnu.org>
+
+	* extraconf.h [HAVE_X]: Undefine HAVE_TEXTMODE_X11_SUPPORT.
+
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.charsets: Synchronize with the latest patch - remove

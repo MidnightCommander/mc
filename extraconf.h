@@ -59,6 +59,7 @@ the need to embed this logic into configure.in.
 #    undef HAS_CURSES
 #    undef USE_NCURSES
 #    undef HAVE_CHARSET
+#    undef HAVE_TEXTMODE_X11_SUPPORT
 #endif
 
 #ifndef USE_VFS
