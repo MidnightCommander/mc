@@ -74,6 +74,101 @@
 #   define IFAIX(x)
 #endif
 
+#define vwidth (view->widget.cols - (view->have_frame ? 2 : 0))
+#define vheight (view->widget.lines - (view->have_frame ? 2 : 0))
+
+/* The growing buffers data types */
+typedef struct block_ptr_t {
+    unsigned char *data;
+} block_ptr_t;
+
+/* A node for building a change list on change_list */
+struct hexedit_change_node {
+   struct hexedit_change_node *next;
+   long                       offset;
+   unsigned char              value;
+};
+
+enum ViewSide {
+    view_side_left,
+    view_side_right
+};
+
+struct WView {
+    Widget widget;
+
+    char *filename;		/* Name of the file */
+    char *command;		/* Command used to pipe data in */
+    char *localcopy;
+    int view_active;
+    int have_frame;
+    
+    unsigned char *data;	/* Memory area for the file to be viewed */
+
+    /* File information */
+    int file;			/* File descriptor (for mmap and munmap) */
+    FILE *stdfile;		/* Stdio struct for reading file in parts */
+    int reading_pipe;		/* Flag: Reading from pipe(use popen/pclose) */
+    unsigned long bytes_read;   /* How much of file is read */
+    int mmapping;		/* Did we use mmap on the file? */
+
+    /* Display information */
+    unsigned long last;         /* Last byte shown */
+    unsigned long last_byte;    /* Last byte of file */
+    long first;			/* First byte in file */
+    long bottom_first;	/* First byte shown when very last page is displayed */
+				/* For the case of WINCH we should reset it to -1 */
+    unsigned long start_display;/* First char displayed */
+    int  start_col;		/* First displayed column, negative */
+    unsigned long edit_cursor;  /* HexEdit cursor position in file */
+    char hexedit_mode;          /* Hexidecimal editing mode flag */ 
+    char nib_shift;             /* A flag for inserting nibbles into bytes */
+    enum ViewSide view_side;	/* A flag for the active editing panel */
+    int  file_dirty;            /* Number of changes */
+    int  start_save;            /* Line start shift between Ascii and Hex */ 
+    int  cursor_col;		/* Cursor column */
+    int  cursor_row;		/* Cursor row */
+    struct hexedit_change_node *change_list;   /* Linked list of changes */
+
+    int dirty;			/* Number of skipped updates */
+    int wrap_mode;		/* wrap_mode */
+	
+    /* Mode variables */
+    int hex_mode;		/* Hexadecimal mode flag */
+    int bytes_per_line;		/* Number of bytes per line in hex mode */
+    int viewer_magic_flag;	/* Selected viewer */
+    int viewer_nroff_flag;	/* Do we do nroff style highlighting? */
+    
+    /* Growing buffers information */
+    int growing_buffer;		/* Use the growing buffers? */
+    struct block_ptr_t *block_ptr;	/* Pointer to the block pointers */
+    int          blocks;	/* The number of blocks in *block_ptr */
+
+    
+    /* Search variables */
+    int search_start;		/* First character to start searching from */
+    int found_len;		/* Length of found string or 0 if none was found */
+    char *search_exp;		/* The search expression */
+    int  direction;		/* 1= forward; -1 backward */
+    void (*last_search)(void *, char *);
+                                /* Pointer to the last search command */
+    int view_quit;		/* Quit flag */
+
+    int monitor;		/* Monitor file growth (like tail -f) */
+    /* Markers */
+    int marker;			/* mark to use */
+    int marks [10];		/* 10 marks: 0..9 */
+    
+	
+    int  move_dir;		/* return value from widget:  
+				 * 0 do nothing
+				 * -1 view previous file
+				 * 1 view next file
+				 */
+    struct stat s;		/* stat for file */
+};
+
+
 /* Maxlimit for skipping updates */
 static int max_dirt_limit =
 #ifdef NATIVE_WIN32
