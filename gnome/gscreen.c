@@ -1391,7 +1391,7 @@ panel_create_icon_display (WPanel *panel)
 	gnome_icon_list_set_separators (icon_field, " /-_.");
 	gnome_icon_list_set_row_spacing (icon_field, 2);
 	gnome_icon_list_set_col_spacing (icon_field, 2);
-	gnome_icon_list_set_icon_border (icon_field, 2);
+	gnome_icon_list_set_icon_border (icon_field, 4);
 	gnome_icon_list_set_text_spacing (icon_field, 2);
 	
 	icon_field->desired_text_width = 100;
