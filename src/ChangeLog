@@ -1,3 +1,10 @@
+Thu Sep 17 07:32:23 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* Makefile.in: After creating symlinks invoke another instance of
+	make to build libvfs.a. Otherwise make will not know how to build
+	the object files if symlinks have been created.
+	Added target cleansourcelinks (invoked with make distclean).
+
 Tue Sep 15 22:41:24 1998  Paul Sheer <psheer@obsidian.co.za>
 
 	* edit.c, editwidget.c, gtkedit.c: fixed segfault when trying to

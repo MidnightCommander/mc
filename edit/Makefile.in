@@ -26,7 +26,7 @@ EDITOBJS = edit.o editcmd.o editwidget.o editdraw.o editmenu.o wordproc.o \
 
 DIST = 	Makefile.in README.edit $(EDITSRC)
 
-all: checklinks @LIBEDIT_A@
+all: @LIBEDIT_A@
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) -DMIDNIGHT $<
@@ -41,10 +41,19 @@ checklinks:
 sourcelinks:
 	-cd $(rootdir)/edit ; $(LN_S) ../gtkedit/*.[ch] . >/dev/null 2>&1 ; true
 
-libedit.a: $(EDITOBJS)
-	$(RMF) $@
-	$(AR) cr $@ $(EDITOBJS)
-	-$(RANLIB) $@
+cleansourcelinks:
+	-if test -f $(rootdir)/edit/edit.c; then \
+	    cd $(rootdir)/edit; find . -lname '*.[ch]' | xargs $(RM); \
+	fi
+
+libedit.a: checklinks
+	$(MAKE) mx
+	touch mx
+
+mx: $(EDITOBJS)
+	$(RMF) libedit.a
+	$(AR) cr libedit.a $(EDITOBJS)
+	-$(RANLIB) libedit.a
 
 mcedit:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
@@ -61,14 +70,14 @@ TAGS: $(EDITSRC)
 	etags $(EDITSRC)
 
 clean:
-	$(RMF) *.o core a.out libedit.a
+	$(RMF) *.o core a.out libedit.a mx
 
 realclean: clean
 	$(RMF) .depend
 	$(RMF) TAGS
 	$(RMF) *~
 
-distclean:
+distclean: cleansourcelinks
 	-$(RMF) $(srcdir)/*~ $(srcdir)/*.o $(srcdir)/a.out
 	-$(RMF) $(srcdir)/core $(srcdir)/libedit.a
 	-if test $(srcdir) = .; then $(MAKE) realclean; fi
