@@ -32,7 +32,9 @@
 #    include <unistd.h>
 #endif
 #include <sys/stat.h>
-#include <sys/param.h>
+#ifdef HAVE_SYS_PARAM_H
+#    include <sys/param.h>
+#endif
 #include <string.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -47,7 +49,7 @@
  * We currenlty only support one way of comunicating the background
  * and foreground process by using the socketpair system call
  */
-#ifdef USE_NETCODE
+#ifdef WITH_BACKGROUND
 #    include <sys/socket.h>
 #endif
 #include "dialog.h"
@@ -404,7 +406,7 @@ background_attention (int fd, void *closure)
     mc_refresh ();
 #ifndef HAVE_X
     doupdate ();
-#endif
+#endif /* !HAVE_X */
     return 0;
 }
 
@@ -565,7 +567,7 @@ input_dialog_help (char *header, char *text, char *help, char *def_text)
 }
 /* }}} */
 
-#endif
+#endif /* !WITH_BACKGROUND */
 
 /* {{{ Functions shared between background and foreground */
 

@@ -1,12 +1,6 @@
 #ifndef __BACKGROUND_H
 #define __BACKGROUND_H
 
-/* Background code requires socketpair to be available */
-/* Do not add the background code if it is not supported */
-#ifdef HAVE_SOCKETPAIR
-#    define WITH_BACKGROUND
-#endif
-
 /* Used for parent/child communication.  These are numbers that
  * could not possible be a routine address.
  */

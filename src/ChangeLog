@@ -1,5 +1,8 @@
 2001-07-27  Pavel Roskin  <proski@gnu.org>
 
+	* background.h: Remove WITH_BACKGROUND, it's now in extraconf.h.
+	* background.c: Use WITH_BACKGROUND instead of USE_NETCODE.
+
 	* util.c (mc_mkstemps): Don't prepend $TMPDIR if prefix contains
 	path separator.
 
