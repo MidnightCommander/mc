@@ -1,5 +1,8 @@
 1998-03-12  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gmc-chargrid.c (gmc_char_grid_draw): Someone teach me how to
+	subtract.  Fixed a stupid offsetting bug.
+
 	* gmc-chargrid.c: Changed the struct attr with pointers mess with
 	something saner.
 	Added an in_resize flag to avoid calling our internal signal
