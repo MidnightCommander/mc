@@ -1,3 +1,9 @@
+Tue Feb 16 20:46:38 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* es.po: Update es.po with the version sent by David Martin 
+	<dmartina@usa.net> on Feb 14. Removed messages from editmenu.c
+	first (this needs fixing).
+
 1999-02-05  Christopher Blizzard  <blizzard@redhat.com>
 
 	* es.po: Remove " from middle of line.

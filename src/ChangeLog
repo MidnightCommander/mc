@@ -1,3 +1,12 @@
+Tue Feb 16 21:21:32 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* popt.c: Compilation fix: on systems without setreuid use setuid.
+
+Tue Feb 16 21:18:08 1999  David Martin <dmartina@usa.net>
+
+	* achown.c: Make buttons fit in the (new) translated
+	Advanced Chown dialog.
+
 1999-02-16  Alexaander Savelyev <fano@ham.kiev.ua>
 
 	* subshell.c (exit_subshell): Use the size of the buffer, not

@@ -68,10 +68,10 @@ struct {
     int ret_cmd, flags, y, x;
     char *text;
 } chown_advanced_but [BUTTONS] = {
-    { B_CANCEL, NORMAL_BUTTON, 4, 55, N_("&Cancel") },
-    { B_ENTER,  DEFPUSH_BUTTON,4, 45, N_("&Set") },
-    { B_SKIP,   NORMAL_BUTTON, 4, 36, N_("S&kip") },
-    { B_SETALL, NORMAL_BUTTON, 4, 24, N_("Set &all")},
+    { B_CANCEL, NORMAL_BUTTON, 4, 53, N_("&Cancel") },
+    { B_ENTER,  DEFPUSH_BUTTON,4, 40, N_("&Set") },
+    { B_SKIP,   NORMAL_BUTTON, 4, 23, N_("S&kip") },
+    { B_SETALL, NORMAL_BUTTON, 4, 0, N_("Set &all")},
     { B_ENTER,  NARROW_BUTTON, 0, 47, "               "},
     { B_ENTER,  NARROW_BUTTON, 0, 29, "               "},
     { B_ENTER,  NARROW_BUTTON, 0, 19, "   "},

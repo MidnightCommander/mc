@@ -62,7 +62,8 @@ int gtk_edit_option_font_mean_width;
 int gtk_edit_fixed_font;
 
 #if defined NEVER_DEFINED_ONLY_A_HACK
-const char *txt = _("&Dismiss");
+const char *dummy_txt_0 = _("&Dismiss");
+const char *dummy_txt_1 = _(" Enter file name: ");
 #endif
 
 static void clear_focus_area (GtkEdit *edit, gint area_x, gint area_y, gint area_width, gint area_height)

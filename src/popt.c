@@ -225,7 +225,14 @@ static void execCommand(poptContext con) {
     setresuid(getuid(), getuid(),-1);
 #else
 #ifndef OS2_NT
-    setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
+#   if defined (HAVE_SETUID)
+        setuid(getuid());
+#   elif defined (HAVE_SETREUID)
+        setreuid(getuid(), getuid()); /*hlauer: not portable to hpux9.01 */
+#   else
+        ; /* Can't drop privileges */
+#    endif
+
 #endif
 #endif
 
