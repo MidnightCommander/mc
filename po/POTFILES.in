@@ -17,6 +17,7 @@ gtkedit/edit.h
 gtkedit/editcmd.c
 gtkedit/editoptions.c
 gtkedit/editwidget.c
+gtkedit/editmenu.c
 gtkedit/gtkedit.c
 gtkedit/syntax.c
 src/achown.c
