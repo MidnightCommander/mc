@@ -1,5 +1,8 @@
 2001-05-22  Pavel Roskin  <proski@gnu.org>
 
+	* doc-gnome/C/mkhtml: Support $JADE. Check that $DSL exists.
+	By default exit after the first error in jade.
+
 	* doc-gnome/C/mkhtml: Use jade directly, not jw. Support DSL and
 	JADEFLAGS environment variables. Report progress. Clean up on
 	failure.
