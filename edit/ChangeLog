@@ -1,5 +1,10 @@
 2001-12-22  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* editcmd.c (edit_goto_cmd): Use g_free to release f.
+	(edit_save_file): Use PATH_SEP instead of '/'.
+	Undefine "close" before closing file created by mc_mkstemps.
+	Define close to mc_close after it - temporary fix.
+
 	* syntax.c (read_one_line): Undo last patch - errno is a
 	function on some systems.  Check ferror() status before
 	everithing else if fgetc returns EOF.

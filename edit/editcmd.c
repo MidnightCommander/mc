@@ -201,20 +201,27 @@ int edit_save_file (WEdit * edit, const char *filename)
 
     if (this_save_mode > 0) {
 	char *savedir, *slashpos, *saveprefix;
-	savedir = (char *) strdup (".");
-	slashpos = strrchr (filename, '/');
+	slashpos = strrchr (filename, PATH_SEP);
 	if (slashpos) {
-	    free (savedir);
 	    savedir = (char *) strdup (filename);
 	    savedir[slashpos - filename + 1] = '\0';
-	}
+	} else
+	    savedir = (char *) strdup (".");
 	saveprefix = concat_dir_and_file (savedir, "cooledit");
 	free (savedir);
 	fd = mc_mkstemps(&savename, saveprefix, NULL);
 	g_free (saveprefix);
 	if (!savename)
 	    return 0;
+/*
+ * FIXME: mc_mkstemps use pure open system call to create temporary file...
+ * This file handle must be close()d, but there is next line in edit.h:
+ * #define close mc_close
+ * So this hack needed.
+ */
+#undef	close
 	close (fd);
+#define close mc_close
     } else
 	savename = g_strdup (filename);
 
@@ -391,8 +398,8 @@ void edit_split_filename (WEdit * edit, const char *f)
     edit->dir = (char *) strdup ("");
 }
 
-/*  here we want to warn the user of overwriting an existing file, but only if they
-   have made a change to the filename */
+/* Here we want to warn the users of overwriting an existing file,
+   but only if they have made a change to the filename */
 /* returns 1 on success */
 int edit_save_as_cmd (WEdit * edit)
 {
@@ -2067,7 +2074,7 @@ void edit_goto_cmd (WEdit *edit)
 	    edit_move_to_line (edit, l - 1);
 	    edit->force |= REDRAW_COMPLETELY;
 	}
-	free (f);
+	g_free (f);
     }
 }
 
