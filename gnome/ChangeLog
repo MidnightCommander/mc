@@ -1,5 +1,14 @@
 1998-12-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (file_entry_from_file): Finished implementing
+	file_entry_from_file().
+	(struct desktop_icon_info): Removed the `type' field.  We now stat
+	the file when needed to figure out the file type.
+	(desktop_icon_info_event): Test whether the file is a directory by
+	ourselves, and if it is, open a new panel for it.
+	(drag_data_get): Generate the uri-list for internal desktop icon
+	drags as well.
+
 	* gdesktop.c (drag_data_received): We do not need to call
 	gtk_drag_finish(), since we are using the GTK_DEST_DEFAULT_DROP
 	flag for drops on the desktop.

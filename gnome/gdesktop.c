@@ -32,8 +32,11 @@
 #include <gtk/gtkinvisible.h>
 #include <gnome.h>
 #include "dialog.h"
+#define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
+#include "dir.h"
 #include "gdesktop.h"
 #include "gdesktop-icon.h"
+#include "gmain.h"
 #include "gmetadata.h"
 #include "gdnd.h"
 #include "gpopup.h"
@@ -44,20 +47,12 @@
 #define DESKTOP_DIR_NAME "desktop"
 
 
-/* Types of desktop icons */
-enum icon_type {
-	ICON_FILE,		/* Denotes a file (or symlink to a file) */
-	ICON_DIRECTORY		/* Denotes a directory (or symlink to one) */
-};
-
-
 /* This structure defines the information carried by a desktop icon */
 struct desktop_icon_info {
 	GtkWidget *dicon;	/* The desktop icon widget */
 	int x, y;		/* Position in the desktop */
 	int slot;		/* Index of the slot the icon is in, or -1 for none */
 	char *filename;		/* The file this icon refers to (relative to the desktop_directory) */
-	enum icon_type type;	/* Type of icon, used to determine menu and DnD behavior */
 	int press_x, press_y;	/* Button press position to compute hot spot offset */
 	int selected : 1;	/* Is the icon selected? */
 };
@@ -107,6 +102,10 @@ static int dnd_ntargets = sizeof (dnd_targets) / sizeof (dnd_targets[0]);
 
 /* Proxy window for DnD on the root window */
 static GtkWidget *dnd_proxy_window;
+
+
+static struct desktop_icon_info *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
+static void desktop_icon_info_free (struct desktop_icon_info *dii);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -472,9 +471,42 @@ select_icon (struct desktop_icon_info *dii, GdkEventButton *event)
 static file_entry *
 file_entry_from_file (char *filename)
 {
-	/* FIXME */
+	file_entry *fe;
+	struct stat s;
 
-	return NULL;
+	if (mc_lstat (filename, &s) == -1) {
+		g_warning ("Could not stat %s, bad things will happen", filename);
+		return NULL;
+	}
+
+	fe = g_new (file_entry, 1);
+	fe->fname = g_strdup (x_basename (filename));
+	fe->fnamelen = strlen (fe->fname);
+	fe->buf = s;
+	fe->f.marked = FALSE;
+	fe->f.link_to_dir = FALSE;
+	fe->f.stalled_link = FALSE;
+
+	if (S_ISLNK (s.st_mode)) {
+		struct stat s2;
+
+		if (mc_stat (filename, &s2) == 0)
+			fe->f.link_to_dir = S_ISDIR (s2.st_mode) != 0;
+		else
+			fe->f.stalled_link = TRUE;
+	}
+
+	return fe;
+}
+
+/* Frees a file entry structure */
+static void
+file_entry_free (file_entry *fe)
+{
+	if (fe->fname)
+		g_free (fe->fname);
+
+	g_free (fe);
 }
 
 /* Handler for events on desktop icons.  The on_text flag specifies whether the event ocurred on the
@@ -485,6 +517,7 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 {
 	int retval;
 	char *filename;
+	file_entry *fe;
 
 	retval = FALSE;
 
@@ -502,7 +535,7 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 			if (gpopup_do_popup ((GdkEventButton *) event, NULL, 0, filename) != -1)
-				reload_desktop_icons (FALSE, 0, 0); /* blean */
+				reload_desktop_icons (FALSE, 0, 0); /* bleah */
 
 			g_free (filename);
 			retval = TRUE;
@@ -516,15 +549,14 @@ desktop_icon_info_event (struct desktop_icon_info *dii, GdkEvent *event, int on_
 
 		filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
-		if (dii->type == ICON_DIRECTORY)
-			new_panel_at (filename);
-		else {
-			file_entry *fe;
+		fe = file_entry_from_file (filename);
 
-			fe = file_entry_from_file (filename);
+		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
+			new_panel_at (filename);
+		else
 			do_enter_on_file_entry (fe);
-			/* FIXME: free the file entry */
-		}
+
+		file_entry_free (fe);
 
 		retval = TRUE;
 		break;
@@ -757,10 +789,6 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
-		printf ("Getting data for desktop icons\n");
-		/* Do nothing, as we will know when we get a root window drop */
-		break;
-
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
 		filelist = build_selected_icons_uri_list (&len);
@@ -807,7 +835,6 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	dii->y = 0;
 	dii->slot = -1;
 	dii->filename = g_strdup (filename);
-	dii->type = S_ISDIR (s.st_mode) ? ICON_DIRECTORY : ICON_FILE;
 	dii->selected = FALSE;
 
 	g_free (full_name);

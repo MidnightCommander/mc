@@ -8,7 +8,7 @@
 #include "x.h"
 #include "gmc-chargrid.h"
 #include "dlg.h"
-#define WANT_WIDGETS
+#define WANT_WIDGETS /* bleah */
 #include "view.h"
 
 enum {
