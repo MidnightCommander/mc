@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.34\n"
-"POT-Creation-Date: 1999-07-02 02:14+0200\n"
-"PO-Revision-Date: 1999-07-04 10:33+0200\n"
+"POT-Creation-Date: 1999-08-14 13:53+0200\n"
+"PO-Revision-Date: 1999-08-14 18:26+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@online.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr " Kjør makro "
 
 #. Input line for a single key press follows the ':'
 #: edit/edit_key_translator.c:133 edit/edit_key_translator.c:148
-#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:715
+#: gtkedit/editcmd.c:712 gtkedit/editcmd.c:721
 msgid " Press macro hotkey: "
 msgstr " Trykk hurtigtast for makro: "
 
@@ -34,125 +34,185 @@ msgstr " Sett inn literal "
 msgid " Press any key: "
 msgstr " Trykk en tast: "
 
-#: gnome/gcmd.c:58
+#: gnome/gaction.c:33
+#, c-format
+msgid ""
+"Unable to execute\n"
+"\"%s\".\n"
+"\n"
+"Please check it to see if it points to a valid command."
+msgstr ""
+"Kunne ikke kjøre\n"
+"\"%s\"."
+
+#: gnome/gaction.c:40
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this, bring up the mime-properties editor in the GNOME Control "
+"Center, and edit the default %s-action for \"%s\"."
+msgstr ""
+"\".\n"
+"\n"
+"For å fikse dette, hent opp mime-egenskaper redigering i GNOME kontroll- senter, og rediger standard %s-handling for \"%s\"."
+
+#: gnome/gaction.c:46
+#, c-format
+msgid ""
+"\".\n"
+"\n"
+"To fix this error, bring up this file's properties and change the default "
+"%s-action."
+msgstr ""
+"\".\n"
+"\n"
+"For å ordne denne feilen, hent opp filens egenskaper og endre standard %s-handling"
+
+#: gnome/gaction.c:51
+#, c-format
+msgid ""
+"Unable to %s\n"
+"\"%s\"\n"
+"with the command:\n"
+"\"%s\"%s"
+msgstr ""
+"Kunne ikke %s\n"
+"\"%s\"\n"
+"med kommandoen:\n"
+"\"%s\"%s"
+
+#: gnome/gaction.c:134 gnome/gaction.c:150
+msgid "open"
+msgstr "åpne"
+
+#: gnome/gaction.c:185 gnome/gaction.c:198
+msgid "edit"
+msgstr "rediger"
+
+#: gnome/gaction.c:331
+msgid "view"
+msgstr "se på"
+
+#: gnome/gcmd.c:48
 msgid " There is no other panel to compare contents to "
 msgstr " Det er ingen andre paneler å sammenligne innholdet med "
 
-#: gnome/gcmd.c:109
+#: gnome/gcmd.c:99
 msgid "The Midnight Commander Team"
 msgstr "Midnight Commander Teamet"
 
-#: gnome/gcmd.c:111
+#: gnome/gcmd.c:101
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "feilrapporter: http://bugs.gnome.org, eller bruk gnome-bug"
 
-#: gnome/gcmd.c:123
+#: gnome/gcmd.c:113
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:126
+#: gnome/gcmd.c:116
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "GNOME utgaven av Midnight Commander."
 
-#: gnome/gcmd.c:261
+#: gnome/gcmd.c:289
 msgid "Sort By"
 msgstr "Sorter etter"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:266
+#: gnome/gcmd.c:294
 msgid "Ignore case sensitivity."
 msgstr "Ikke skill mellom store/små tegn"
 
-#: gnome/gcmd.c:269
+#: gnome/gcmd.c:297
 msgid "Sort files by "
 msgstr "Sorter filer etter "
 
-#: gnome/gcmd.c:274 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:395
+#: gnome/gcmd.c:302 gnome/gcustom-layout.c:43 src/chmod.c:150 src/screen.c:413
 msgid "Name"
 msgstr "Navn"
 
-#: gnome/gcmd.c:281
+#: gnome/gcmd.c:309
 msgid "File Type"
 msgstr "Filtype"
 
-#: gnome/gcmd.c:287 gnome/gcustom-layout.c:47 src/screen.c:396
-#: src/screen.c:397
+#: gnome/gcmd.c:315 gnome/gcustom-layout.c:47 src/screen.c:414
+#: src/screen.c:415
 msgid "Size"
 msgstr "Størrelse"
 
-#: gnome/gcmd.c:293
+#: gnome/gcmd.c:321
 msgid "Time Last Accessed"
 msgstr "Tid for siste aksess"
 
-#: gnome/gcmd.c:299
+#: gnome/gcmd.c:327
 msgid "Time Last Modified"
 msgstr "Tid for siste modifikasjon"
 
-#: gnome/gcmd.c:305
+#: gnome/gcmd.c:333
 msgid "Time Last Changed"
 msgstr "Tid for siste endring"
 
-#: gnome/gcmd.c:319
+#: gnome/gcmd.c:347
 msgid "Reverse the order."
 msgstr "Reverser rekkefølgen."
 
-#: gnome/gcmd.c:384
+#: gnome/gcmd.c:394
 msgid "Enter name."
 msgstr "Skriv inn navn."
 
-#: gnome/gcmd.c:390
+#: gnome/gcmd.c:400
 msgid "Enter label for command:"
 msgstr "Skriv inn kommandomerkelapp:"
 
-#: gnome/gcmd.c:495
+#: gnome/gcmd.c:505
 msgid "Find all core files"
 msgstr "Finn alle core-filer"
 
-#: gnome/gcmd.c:498 src/panelize.c:350
+#: gnome/gcmd.c:508 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr "Finn avviste etter patching"
 
-#: gnome/gcmd.c:543
+#: gnome/gcmd.c:553
 msgid "Run Command"
 msgstr "Kjør kommando"
 
 #. Frame 1
-#: gnome/gcmd.c:548
+#: gnome/gcmd.c:558
 msgid "Preset Commands"
 msgstr "Forhåndsinnstilte kommandoer"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:565 gnome/gcustom-layout.c:185
+#: gnome/gcmd.c:575 gnome/gcustom-layout.c:185
 msgid "Add"
 msgstr "Legg til"
 
-#: gnome/gcmd.c:569 gnome/gcustom-layout.c:186
+#: gnome/gcmd.c:579 gnome/gcustom-layout.c:186
 msgid "Remove"
 msgstr "Fjern"
 
 #. Frame 2
-#: gnome/gcmd.c:577
+#: gnome/gcmd.c:587
 msgid "Run this Command"
 msgstr "Kjør denne kommandoen"
 
-#: gnome/gcmd.c:584
+#: gnome/gcmd.c:594
 msgid "Command: "
 msgstr "Kommando: "
 
-#: gnome/gcmd.c:662
+#: gnome/gcmd.c:673
 msgid "Set Filter"
 msgstr "Sett filter"
 
-#: gnome/gcmd.c:667 gnome/gcmd.c:708 gnome/gcmd.c:713 gnome/gcmd.c:717
-#: gnome/gscreen.c:2403
+#: gnome/gcmd.c:678 gnome/gcmd.c:719 gnome/gcmd.c:724 gnome/gcmd.c:728
+#: gnome/gscreen.c:2473
 msgid "Show all files"
 msgstr "Vis alle filer"
 
-#: gnome/gcmd.c:674
+#: gnome/gcmd.c:685
 msgid "."
 msgstr "."
 
-#: gnome/gcmd.c:690
+#: gnome/gcmd.c:701
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -164,27 +224,27 @@ msgstr ""
 "For eksempel:\n"
 "*.png vil kun vise png bilder"
 
-#: gnome/gcmd.c:692
+#: gnome/gcmd.c:703
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "Skriv inn et regulært uttrykk for bruk som filter i panelvisningen."
 
-#: gnome/gcmd.c:752
+#: gnome/gcmd.c:763
 msgid " Open with..."
 msgstr " Åpne med..."
 
-#: gnome/gcmd.c:753
+#: gnome/gcmd.c:764
 msgid "Enter extra arguments:"
 msgstr "Skriv inn ekstra argumenter:"
 
-#: gnome/gcmd.c:816
+#: gnome/gcmd.c:827
 msgid "Desktop entry properties"
 msgstr "Egenskaper for skrivebordsoppføring"
 
-#: gnome/gcmd.c:842
+#: gnome/gcmd.c:853
 msgid "Select File"
 msgstr "Velg fil"
 
-#: gnome/gcmd.c:850
+#: gnome/gcmd.c:861
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -196,19 +256,19 @@ msgstr ""
 "For eksempel:\n"
 "*.png vil vise alle png bilder"
 
-#: gnome/gcmd.c:852
+#: gnome/gcmd.c:863
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Skriv inn et vanlig uttrykk for bruk som filter i panelvisningen."
 
-#: gnome/gcmd.c:898 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:909 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
 msgstr "  Malformert vanlig uttrykk  "
 
-#: gnome/gcmd.c:943
+#: gnome/gcmd.c:954
 msgid "Creating a desktop link"
 msgstr "Oppretter en skrivebordssnarvei"
 
-#: gnome/gcmd.c:944
+#: gnome/gcmd.c:955
 msgid "Enter the URL:"
 msgstr "Skriv inn URL:"
 
@@ -222,8 +282,8 @@ msgstr "Opprettelsestid"
 
 #. Group
 #: gnome/gcustom-layout.c:38 gnome/gnome-file-property-dialog.c:776
-#: gnome/gnome-file-property-dialog.c:940 gnome/gprop.c:280 gnome/gprop.c:405
-#: src/screen.c:409
+#: gnome/gnome-file-property-dialog.c:945 gnome/gprop.c:280 gnome/gprop.c:405
+#: src/screen.c:427
 msgid "Group"
 msgstr "Gruppe"
 
@@ -248,12 +308,12 @@ msgid "Number of Hard Links"
 msgstr "Antall harde lenker"
 
 #. Owner
-#: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:925
-#: gnome/gprop.c:390 src/screen.c:408
+#: gnome/gcustom-layout.c:45 gnome/gnome-file-property-dialog.c:930
+#: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
 msgstr "Eier"
 
-#: gnome/gcustom-layout.c:46 src/screen.c:402
+#: gnome/gcustom-layout.c:46 src/screen.c:420
 msgid "Permission"
 msgstr "Rettighet"
 
@@ -281,39 +341,39 @@ msgstr "Synlige kolonner"
 msgid "Custom View"
 msgstr "Egendefinert visning"
 
-#: gnome/gdesktop.c:425 gnome/gdesktop.c:2081 gnome/gmount.c:321
+#: gnome/gdesktop.c:519 gnome/gdesktop.c:2206 gnome/gmount.c:324
 msgid "Warning"
 msgstr "Advarsel"
 
-#: gnome/gdesktop.c:426
+#: gnome/gdesktop.c:520
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kunne ikke åpne %s; vil ikke ha skrivebordsikoner"
 
-#: gnome/gdesktop.c:1043
+#: gnome/gdesktop.c:1177
 msgid "While running the mount/umount command"
 msgstr "Under kjøring av mount/umount kommandoen"
 
-#: gnome/gdesktop.c:1112
+#: gnome/gdesktop.c:1246
 msgid "While running the eject command"
 msgstr "Under kjøring av eject kommandoen"
 
-#: gnome/gdesktop.c:1296 gnome/gicon.c:154 gnome/gtools.c:46
+#: gnome/gdesktop.c:1430 gnome/gicon.c:154 gnome/gtools.c:46
 msgid "Error"
 msgstr "Feil"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:2077
+#: gnome/gdesktop.c:2202
 msgid "Home directory"
 msgstr "Hjemmekatalog"
 
-#: gnome/gdesktop.c:2082
+#: gnome/gdesktop.c:2207
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
 "Kunne ikke lage symbolsk lenke fra %s til %s; får ikke skrivebordsikoner."
 
-#: gnome/gdesktop.c:2427
+#: gnome/gdesktop.c:2586
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -327,58 +387,82 @@ msgstr ""
 "\n"
 "Kan ikke sette bakgrunnen."
 
-#: gnome/gdesktop.c:2450 gnome/glayout.c:361
+#: gnome/gdesktop.c:2609 gnome/glayout.c:361
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2450 gnome/glayout.c:361
+#: gnome/gdesktop.c:2609 gnome/glayout.c:361
 msgid "Launch a new terminal in the current directory"
 msgstr "Starter en ny terminal i aktiv katalog"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2452 gnome/glayout.c:363
+#: gnome/gdesktop.c:2611 gnome/glayout.c:363
 msgid "_Directory..."
 msgstr "Katalog..."
 
-#: gnome/gdesktop.c:2452 gnome/glayout.c:363
+#: gnome/gdesktop.c:2611 gnome/glayout.c:363
 msgid "Creates a new directory"
 msgstr "Oppretter en ny katalog"
 
-#: gnome/gdesktop.c:2453
+#: gnome/gdesktop.c:2612
 msgid "URL L_ink..."
 msgstr "URL-snarve_i..."
 
-#: gnome/gdesktop.c:2453
+#: gnome/gdesktop.c:2612
 msgid "Creates a new URL link"
 msgstr "Oppretter en ny URL-snarvei"
 
-#: gnome/gdesktop.c:2454
+#: gnome/gdesktop.c:2613
 msgid "_Launcher..."
 msgstr "_Oppstarter..."
 
-#: gnome/gdesktop.c:2454
+#: gnome/gdesktop.c:2613
 msgid "Creates a new launcher"
 msgstr "Oppretter en ny oppstarter"
 
-#: gnome/gdesktop.c:2462 gnome/glayout.c:451
-msgid "Arrange Icons"
-msgstr "Plasser ikonene"
+#: gnome/gdesktop.c:2619
+msgid "By _Name"
+msgstr "Etter _navn"
 
-#: gnome/gdesktop.c:2463
-msgid "Create New Window"
-msgstr "Nytt vindu"
+#: gnome/gdesktop.c:2620
+msgid "By File _Type"
+msgstr "Etter _filtype"
 
-#: gnome/gdesktop.c:2465
-msgid "Recreate Desktop Shortcuts"
-msgstr "Lag skrivebordsnarveiene på nytt"
+#: gnome/gdesktop.c:2621
+msgid "By _Size"
+msgstr "Etter _størrelse"
 
-#: gnome/gdesktop.c:2466 gnome/glayout.c:454
-msgid "Rescan Desktop"
-msgstr "Oppdater skrivebordet"
+#: gnome/gdesktop.c:2622
+msgid "By Time Last _Accessed"
+msgstr "Etter tid for siste _aksess"
 
-#: gnome/gdesktop.c:2467
-msgid "Configure Background Image"
-msgstr "Konfigurer bakgrunnsbilde"
+#: gnome/gdesktop.c:2623
+msgid "By Time Last _Modified"
+msgstr "Etter tid for siste _modifikasjon"
+
+#: gnome/gdesktop.c:2624
+msgid "By Time Last _Changed"
+msgstr "Etter tid for siste _endring"
+
+#: gnome/gdesktop.c:2632 gnome/glayout.c:455
+msgid "_Arrange Icons"
+msgstr "_Plasser ikonene"
+
+#: gnome/gdesktop.c:2633
+msgid "Create _New Window"
+msgstr "Opprett _nytt vindu"
+
+#: gnome/gdesktop.c:2635 gnome/glayout.c:457
+msgid "Recreate Desktop _Shortcuts"
+msgstr "Lag _skrivebordsnarveiene på nytt"
+
+#: gnome/gdesktop.c:2636 gnome/glayout.c:458
+msgid "Rescan _Desktop"
+msgstr "Oppdater skrivebor_det"
+
+#: gnome/gdesktop.c:2637
+msgid "Configure _Background Image"
+msgstr "Konfigurer _bakgrunnsbilde"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -392,11 +476,11 @@ msgstr "Kopierer fra: "
 msgid "Deleting file: "
 msgstr "Sletter fil: "
 
-#: gnome/gdialogs.c:370
+#: gnome/gdialogs.c:371
 msgid "Files Exist"
 msgstr "Filene eksisterer"
 
-#: gnome/gdialogs.c:385
+#: gnome/gdialogs.c:386
 msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
@@ -404,77 +488,77 @@ msgstr ""
 "Noen av filene du forsøker å kopiere eksisterer allerede i målkatalogen.Vær "
 "snill og velg handling som skal utføres."
 
-#: gnome/gdialogs.c:398
+#: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
 msgstr "Spør meg før filer overskrives."
 
-#: gnome/gdialogs.c:405
+#: gnome/gdialogs.c:406
 msgid "Don't overwrite any files."
 msgstr "Ikke overskriv filer."
 
-#: gnome/gdialogs.c:421
+#: gnome/gdialogs.c:422
 msgid "Overwrite:"
 msgstr "Overskriv:"
 
-#: gnome/gdialogs.c:428
+#: gnome/gdialogs.c:429
 msgid "Older files."
 msgstr "Eldre filer."
 
-#: gnome/gdialogs.c:434
+#: gnome/gdialogs.c:435
 msgid "Files only if size differs."
 msgstr "Filer bare hvis størrelsen er forskjellig."
 
-#: gnome/gdialogs.c:440
+#: gnome/gdialogs.c:441
 msgid "All files."
 msgstr "Alle filer."
 
-#: gnome/gdialogs.c:480
+#: gnome/gdialogs.c:481
 msgid "File Exists"
 msgstr "Filen eksisterer"
 
-#: gnome/gdialogs.c:486
+#: gnome/gdialogs.c:487
 #, c-format
 msgid "The target file already exists: %s"
 msgstr "Målfilen eksisterer allerede: %s"
 
-#: gnome/gdialogs.c:493
+#: gnome/gdialogs.c:494
 msgid "Replace it?"
 msgstr "Erstatt den?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1069 gtkedit/gtkedit.c:1250
-#: src/file.c:802 src/screen.c:2368 src/screen.c:2398 src/tree.c:1015
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1097 gtkedit/gtkedit.c:1250
+#: src/file.c:802 src/screen.c:2386 src/screen.c:2416 src/tree.c:1015
 msgid "Copy"
 msgstr "Kopier"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1070 gtkedit/gtkedit.c:1252
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1098 gtkedit/gtkedit.c:1252
 msgid "Move"
 msgstr "Flytt"
 
-#: gnome/gdialogs.c:588
+#: gnome/gdialogs.c:583
 msgid "Destination"
 msgstr "Mål"
 
-#: gnome/gdialogs.c:592
+#: gnome/gdialogs.c:597
 msgid "Find Destination Folder"
 msgstr "Finn målkatalog"
 
-#: gnome/gdialogs.c:597
+#: gnome/gdialogs.c:611
 msgid "Copy as a background process"
 msgstr "Kopier i bakgrunnen"
 
-#: gnome/gdialogs.c:617
+#: gnome/gdialogs.c:629
 msgid "Advanced Options"
 msgstr "Avanserte alternativer"
 
-#: gnome/gdialogs.c:621
+#: gnome/gdialogs.c:633
 msgid "Preserve symlinks"
 msgstr "Behold symbolske lenker"
 
-#: gnome/gdialogs.c:631
+#: gnome/gdialogs.c:643
 msgid "Follow links."
 msgstr "Følg lenker"
 
-#: gnome/gdialogs.c:637
+#: gnome/gdialogs.c:649
 msgid ""
 "Selecting this will copy the files that symlinks point to instead of just "
 "copying the link."
@@ -482,23 +566,23 @@ msgstr ""
 "Dette valget vil kopiere filene som symlenken peker til i stedet for bare å "
 "kopiere lenken."
 
-#: gnome/gdialogs.c:642
+#: gnome/gdialogs.c:654
 msgid "Preserve file attributes."
 msgstr "Behold filattributter."
 
-#: gnome/gdialogs.c:647
+#: gnome/gdialogs.c:660
 msgid "Preserves the permissions and the UID/GID if possible"
 msgstr "Tar vare på rettighetene og UID/GID hvis mulig"
 
-#: gnome/gdialogs.c:653
+#: gnome/gdialogs.c:666
 msgid "Recursively copy subdirectories."
 msgstr "Kopier kataloger rekursivt."
 
-#: gnome/gdialogs.c:658
+#: gnome/gdialogs.c:673
 msgid "If set, this will copy the directories recursively"
 msgstr "Hvis satt, vil dette kopiere katalogen rekursivt"
 
-#: gnome/gdialogs.c:767
+#: gnome/gdialogs.c:780
 #, c-format
 msgid ""
 "%s\n"
@@ -509,58 +593,58 @@ msgstr ""
 "\n"
 "Katalogen er ikke tom. Slett den rekursivt?"
 
-#: gnome/gdialogs.c:776 src/file.c:2247
+#: gnome/gdialogs.c:790 src/file.c:2247
 msgid " Delete: "
 msgstr " Slett: "
 
-#: gnome/gdialogs.c:780
+#: gnome/gdialogs.c:794
 msgid "Do the same for the rest"
 msgstr "Gjør det samme for resten"
 
-#: gnome/gdialogs.c:863
+#: gnome/gdialogs.c:877
 msgid "Move Progress"
 msgstr "Fremgang for flytting"
 
-#: gnome/gdialogs.c:866
+#: gnome/gdialogs.c:880
 msgid "Copy Progress"
 msgstr "Fremgang for kopiering"
 
-#: gnome/gdialogs.c:869
+#: gnome/gdialogs.c:883
 msgid "Delete Progress"
 msgstr "Fremgang for sletting"
 
-#: gnome/gdialogs.c:919
+#: gnome/gdialogs.c:939
 msgid "File "
 msgstr "Fil "
 
-#: gnome/gdialogs.c:923
+#: gnome/gdialogs.c:943
 msgid "is "
 msgstr "er "
 
-#: gnome/gdialogs.c:926
+#: gnome/gdialogs.c:946
 msgid "done."
 msgstr "ferdig."
 
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:986 src/wtools.c:587 vfs/vfs.c:1801
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1801
 msgid "Password:"
 msgstr "Passord:"
 
-#: gnome/gdialogs.c:986
+#: gnome/gdialogs.c:1007
 msgid "Password"
 msgstr "Passord"
 
 #. Create the dialog
-#: gnome/gdialogs.c:1018
+#: gnome/gdialogs.c:1039
 msgid "Symbolic Link"
 msgstr "Symbolsk lenke"
 
-#: gnome/gdialogs.c:1034 src/boxes.c:803
+#: gnome/gdialogs.c:1055 src/boxes.c:803
 msgid "Existing filename (filename symlink will point to):"
 msgstr "Eksisterende filnavn (filnavnet symlinken skal peke til):"
 
-#: gnome/gdialogs.c:1048 src/boxes.c:801
+#: gnome/gdialogs.c:1069 src/boxes.c:801
 msgid "Symbolic link filename:"
 msgstr "Filnavn for symbolsk lenke:"
 
@@ -675,7 +759,7 @@ msgstr ""
 "Trykk OK for å terminere applikasjonen, eller avbryt for å fortsette."
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384 gnome/gscreen.c:2072
+#: gnome/glayout.c:384 gnome/gscreen.c:2142
 msgid "_Copy..."
 msgstr "Kopier..."
 
@@ -683,7 +767,7 @@ msgstr "Kopier..."
 msgid "Copy files"
 msgstr "Kopier filer"
 
-#: gnome/glayout.c:385 gnome/gscreen.c:2073
+#: gnome/glayout.c:385 gnome/gscreen.c:2143
 msgid "_Delete..."
 msgstr "Slett..."
 
@@ -691,7 +775,7 @@ msgstr "Slett..."
 msgid "Delete files"
 msgstr "Slett filer"
 
-#: gnome/glayout.c:386 gnome/gscreen.c:2074
+#: gnome/glayout.c:386 gnome/gscreen.c:2144
 msgid "_Move..."
 msgstr "Flytt..."
 
@@ -731,108 +815,108 @@ msgstr "_Reverser valg"
 msgid "Reverses the list of tagged files"
 msgstr "Reverserer listen med merkede filer"
 
-#: gnome/glayout.c:400 gtkedit/editwidget.c:1071 src/view.c:2083
+#: gnome/glayout.c:401 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
 msgstr "Søk"
 
-#: gnome/glayout.c:400
+#: gnome/glayout.c:401
 msgid "Search for a file in the current Panel"
 msgstr "Søk etter en fil i det aktive panelet"
 
-#: gnome/glayout.c:403 gnome/gscreen.c:1445
+#: gnome/glayout.c:404 gnome/gscreen.c:1494
 msgid "_Rescan Directory"
 msgstr "Oppdate_r kataloginnholdet"
 
-#: gnome/glayout.c:403
+#: gnome/glayout.c:404
 msgid "Rescan the directory contents"
 msgstr "Oppdater kataloginnholdet"
 
-#: gnome/glayout.c:410
+#: gnome/glayout.c:414
 msgid "_Sort By..."
 msgstr "_Sorter etter..."
 
-#: gnome/glayout.c:410
+#: gnome/glayout.c:414
 msgid "Confirmation settings"
 msgstr "Innstillinger for bekreftelse"
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:415
 msgid "_Filter View..."
 msgstr "_Filtrert visning..."
 
-#: gnome/glayout.c:411
+#: gnome/glayout.c:415
 msgid "Global option settings"
 msgstr "Innstillinger for globale alternativer"
 
-#: gnome/glayout.c:418
+#: gnome/glayout.c:422
 msgid "_Find File..."
 msgstr "_Finn fil..."
 
-#: gnome/glayout.c:418
+#: gnome/glayout.c:422
 msgid "Locate files on disk"
 msgstr "Lokaliser filer på disken"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "_Edit mime types..."
 msgstr "R_ediger mime-typer..."
 
-#: gnome/glayout.c:421
+#: gnome/glayout.c:425
 msgid "Edits the MIME type bindings"
 msgstr "Redigerer MIME-type bindingene"
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:427
 msgid "_Run Command..."
 msgstr "_Kjør kommando..."
 
-#: gnome/glayout.c:423
+#: gnome/glayout.c:427
 msgid "Runs a command"
 msgstr "Kjører en kommando"
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:429
 msgid "_Run Command in panel..."
 msgstr "_Kjør kommando i panelet..."
 
-#: gnome/glayout.c:425
+#: gnome/glayout.c:429
 msgid "Run a command and put the results in a panel"
 msgstr "Kjør en kommando og legg resultatene i panelet"
 
-#: gnome/glayout.c:435
+#: gnome/glayout.c:439
 msgid "_Background jobs..."
 msgstr "_Bakgrunnsjobber..."
 
-#: gnome/glayout.c:435
+#: gnome/glayout.c:439
 msgid "List of background operations"
 msgstr "Liste over bakgrunnsjobber"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:442
 msgid "Exit"
 msgstr "Avslutt"
 
-#: gnome/glayout.c:438
+#: gnome/glayout.c:442
 msgid "Terminates the file manager and the desktop"
 msgstr "Terminerer filbehandleren og skrivebordet"
 
-#: gnome/glayout.c:453
-msgid "Rescan System Devices"
-msgstr "Oppdater systemenhetene"
+#: gnome/glayout.c:465 gnome/glayout.c:476
+msgid "_Settings"
+msgstr "_Innstillinger"
 
-#: gnome/glayout.c:461 gnome/glayout.c:471
+#: gnome/glayout.c:466 gnome/glayout.c:477
 msgid "_Layout"
 msgstr "_Utseende"
 
-#: gnome/glayout.c:462 gnome/glayout.c:472
+#: gnome/glayout.c:467 gnome/glayout.c:478
 msgid "_Commands"
 msgstr "_Kommandoer"
 
-#: gnome/glayout.c:463
+#: gnome/glayout.c:468
 msgid "_Desktop"
 msgstr "S_krivebord"
 
-#: gnome/glayout.c:464 gnome/glayout.c:473
+#: gnome/glayout.c:469 gnome/glayout.c:479
 msgid "_Help"
 msgstr "_Hjelp"
 
-#: gnome/glayout.c:613
+#: gnome/glayout.c:619
 msgid "File/New/Directory..."
 msgstr "Fil/Ny/Katalog..."
 
@@ -847,6 +931,40 @@ msgstr ""
 "\n"
 "Som root kan du påføre systemet ditt stor skade hvis du ikke er forsiktig, "
 "og GNOME filbehandleren vil ikke hindre deg i å gjøre dette."
+
+#: gnome/gmount.c:195
+msgid "Could not open the /etc/fstab file"
+msgstr " Kunne ikke åpne /etc/fstab filen"
+
+#: gnome/gmount.c:325
+#, c-format
+msgid "Could not symlink %s to %s; will not have such a desktop device icon."
+msgstr "Kunne ikke lage symlenke fra %s til %s; får ikke et slikt skrivebordsikon."
+
+#: gnome/gmount.c:377 gnome/gmount.c:392
+#, c-format
+msgid "CD-ROM %d"
+msgstr "CD-ROM %d"
+
+#: gnome/gmount.c:382
+#, c-format
+msgid "Floppy %d"
+msgstr "Diskett %d"
+
+#: gnome/gmount.c:388
+#, c-format
+msgid "Disk %d"
+msgstr "Disk %d"
+
+#: gnome/gmount.c:398
+#, c-format
+msgid "NFS dir %s"
+msgstr "NFS katalog %s"
+
+#: gnome/gmount.c:402
+#, c-format
+msgid "Device %d"
+msgstr "Enhet %d"
 
 #. we set the file part
 #: gnome/gnome-file-property-dialog.c:170
@@ -951,7 +1069,7 @@ msgstr "Bruk standard alternativer for slipp"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
-#: src/screen.c:2366 src/screen.c:2396
+#: src/screen.c:2384 src/screen.c:2414
 msgid "View"
 msgstr "Se på"
 
@@ -981,7 +1099,7 @@ msgid "Use default View action"
 msgstr "Bruk standard handling for visning"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
-#: src/screen.c:2367 src/screen.c:2397 src/view.c:2079
+#: src/screen.c:2385 src/screen.c:2415 src/view.c:2079
 msgid "Edit"
 msgstr "Rediger"
 
@@ -1053,39 +1171,45 @@ msgstr "Sett GID"
 msgid "Sticky"
 msgstr "Sticky"
 
-#: gnome/gnome-file-property-dialog.c:914
+#: gnome/gnome-file-property-dialog.c:815
+#: gnome/gnome-file-property-dialog.c:905
+#, c-format
+msgid "<Unknown> (%d)"
+msgstr "<Ukjent> (%d)"
+
+#: gnome/gnome-file-property-dialog.c:919
 msgid "File ownership"
 msgstr "Eierskap for fil"
 
-#: gnome/gnome-file-property-dialog.c:1074
+#: gnome/gnome-file-property-dialog.c:1079
 msgid "URL"
 msgstr "URL"
 
-#: gnome/gnome-file-property-dialog.c:1077
+#: gnome/gnome-file-property-dialog.c:1082
 msgid "Statistics"
 msgstr "Statistikk"
 
-#: gnome/gnome-file-property-dialog.c:1083
+#: gnome/gnome-file-property-dialog.c:1088
 msgid "Options"
 msgstr "Alternativer"
 
-#: gnome/gnome-file-property-dialog.c:1086
+#: gnome/gnome-file-property-dialog.c:1091
 msgid "Permissions"
 msgstr "Rettigheter"
 
-#: gnome/gnome-file-property-dialog.c:1089
+#: gnome/gnome-file-property-dialog.c:1094
 msgid " Properties"
 msgstr " Egenskaper"
 
-#: gnome/gnome-file-property-dialog.c:1140
+#: gnome/gnome-file-property-dialog.c:1145
 msgid "You entered an invalid username"
 msgstr "Du skrev inn et ugyldig brukernavn"
 
-#: gnome/gnome-file-property-dialog.c:1185
+#: gnome/gnome-file-property-dialog.c:1190
 msgid "You must rename your file to something"
 msgstr "Du må gi filen din et nytt navn"
 
-#: gnome/gnome-file-property-dialog.c:1191
+#: gnome/gnome-file-property-dialog.c:1196
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Du kan ikke gi nytt navn til noe som inneholde tegnet '/'"
 
@@ -1131,8 +1255,8 @@ msgstr "Se på ufiltrert"
 msgid "Copy..."
 msgstr "Kopier..."
 
-#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1072 src/screen.c:2371
-#: src/screen.c:2401
+#: gnome/gpopup2.c:199 gtkedit/editwidget.c:1100 src/screen.c:2389
+#: src/screen.c:2419
 msgid "Delete"
 msgstr "Slett"
 
@@ -1232,27 +1356,39 @@ msgstr "Autoplasser ikoner"
 msgid "Snap icons to grid"
 msgstr "Fest ikoner til rutenettet"
 
-#: gnome/gprefs.c:184
+#: gnome/gprefs.c:179
+msgid "Layout icons from right to left"
+msgstr "Plasser ikonene fra høyre til venstre"
+
+#: gnome/gprefs.c:183
+msgid "Layout icons from bottom to top"
+msgstr "Plasser ikonene fra bunn til topp"
+
+#: gnome/gprefs.c:187
+msgid "Layout icons in rows instead of columns"
+msgstr "Plasser ikonene i rader istedet for kolonner"
+
+#: gnome/gprefs.c:196
 msgid "File display"
 msgstr "Filvisning"
 
-#: gnome/gprefs.c:188
+#: gnome/gprefs.c:200
 msgid "Confirmation"
 msgstr "Bekreftelse"
 
-#: gnome/gprefs.c:192
+#: gnome/gprefs.c:204
 msgid "VFS"
 msgstr "VFS"
 
-#: gnome/gprefs.c:196
+#: gnome/gprefs.c:208
 msgid "Caching"
 msgstr "Mellomlagring"
 
-#: gnome/gprefs.c:200
+#: gnome/gprefs.c:212
 msgid "Desktop"
 msgstr "Skrivebord"
 
-#: gnome/gprefs.c:479
+#: gnome/gprefs.c:503
 msgid "Preferences"
 msgstr "Innstillinger"
 
@@ -1296,96 +1432,96 @@ msgstr "Tittel"
 msgid "Select icon"
 msgstr "Velg ikon"
 
-#: gnome/gscreen.c:1445
+#: gnome/gscreen.c:1494
 msgid "Reloads the current directory"
 msgstr "Leser aktiv katalog på nytt"
 
-#: gnome/gscreen.c:1447
+#: gnome/gscreen.c:1496
 msgid "New _Directory..."
 msgstr "Ny _Katalog..."
 
-#: gnome/gscreen.c:1447
+#: gnome/gscreen.c:1496
 msgid "Creates a new directory here"
 msgstr "Oppretter en ny katalog her"
 
-#: gnome/gscreen.c:1630
+#: gnome/gscreen.c:1697
 #, c-format
 msgid "Search: %s"
 msgstr "Søk: %s"
 
-#: gnome/gscreen.c:1640
+#: gnome/gscreen.c:1707
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes i %d fil"
 
-#: gnome/gscreen.c:1640
+#: gnome/gscreen.c:1707
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes i %d filer"
 
-#: gnome/gscreen.c:1666 src/screen.c:670
+#: gnome/gscreen.c:1733 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
-#: gnome/gscreen.c:2072
+#: gnome/gscreen.c:2142
 msgid "Copy directory"
 msgstr "Kopier katalog"
 
-#: gnome/gscreen.c:2073
+#: gnome/gscreen.c:2143
 msgid "Delete directory"
 msgstr "Slett katalog"
 
-#: gnome/gscreen.c:2074
+#: gnome/gscreen.c:2144
 msgid "Rename or move directory"
 msgstr "Omdøp eller flytt katalog"
 
-#: gnome/gscreen.c:2230
+#: gnome/gscreen.c:2300
 msgid "Back"
 msgstr "Tilbake"
 
-#: gnome/gscreen.c:2230
+#: gnome/gscreen.c:2300
 msgid "Go to the previously visited directory"
 msgstr "Gå til tidligere vist katalog"
 
-#: gnome/gscreen.c:2232
+#: gnome/gscreen.c:2302
 msgid "Up"
 msgstr "Opp"
 
-#: gnome/gscreen.c:2232
+#: gnome/gscreen.c:2302
 msgid "Go up a level in the directory heirarchy"
 msgstr "Gå opp ett nivå i kataloghierarkiet"
 
-#: gnome/gscreen.c:2234
+#: gnome/gscreen.c:2304
 msgid "Forward"
 msgstr "Fram"
 
-#: gnome/gscreen.c:2234
+#: gnome/gscreen.c:2304
 msgid "Go to the next directory"
 msgstr "Gå til neste katalog"
 
-#: gnome/gscreen.c:2237 src/tree.c:1011
+#: gnome/gscreen.c:2307 src/tree.c:1011
 msgid "Rescan"
 msgstr "Oppdater"
 
-#: gnome/gscreen.c:2237
+#: gnome/gscreen.c:2307
 msgid "Rescan the current directory"
 msgstr "Oppdater aktiv katalog"
 
-#: gnome/gscreen.c:2240
+#: gnome/gscreen.c:2310
 msgid "Home"
 msgstr "Hjem"
 
-#: gnome/gscreen.c:2240
+#: gnome/gscreen.c:2310
 msgid "Go to your home directory"
 msgstr "Gå til din hjemmekatalog"
 
-#: gnome/gscreen.c:2381
+#: gnome/gscreen.c:2451
 msgid "Location:"
 msgstr "Plassering:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:341 gtkedit/editcmd.c:1184
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:2865 gtkedit/editoptions.c:71
+#: gnome/gtools.c:105 gtkedit/editcmd.c:342 gtkedit/editcmd.c:1197
+#: gtkedit/editcmd.c:1282 gtkedit/editcmd.c:2893 gtkedit/editoptions.c:71
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:144
@@ -1393,10 +1529,10 @@ msgstr "Plassering:"
 msgid "&Ok"
 msgstr "&Ok"
 
-#: gnome/gview.c:136 src/view.c:728
+#: gnome/gview.c:136
 #, c-format
-msgid "Offset 0x%08x"
-msgstr "Offset 0x%08x"
+msgid "Offset 0x%08lx"
+msgstr "Offset 0x%08lx"
 
 #: gnome/gview.c:138 src/view.c:730
 #, c-format
@@ -1485,69 +1621,32 @@ msgstr "avslutt"
 msgid "abort"
 msgstr "avbryt"
 
-#: gnome/gmount.c:195
-msgid "Could not open the /etc/fstab file"
-msgstr " Kunne ikke åpne /etc/fstab filen"
-
-#: gnome/gmount.c:322
-#, c-format
-msgid "Could not symlink %s to %s; will not have such a desktop device icon."
-msgstr ""
-"Kunne ikke lage symlenke fra %s til %s; får ikke et slikt "
-"skrivebordsikon.Kunne ikke lage symbolsk lenke fra %s til %s; får ikke "
-"skrivebordsikoner."
-
-#: gnome/gmount.c:374 gnome/gmount.c:389
-#, c-format
-msgid "CD-ROM %d"
-msgstr "CD-ROM %d"
-
-#: gnome/gmount.c:379
-#, c-format
-msgid "Floppy %d"
-msgstr "Diskett %d"
-
-#: gnome/gmount.c:385
-#, c-format
-msgid "Disk %d"
-msgstr "Disk %d"
-
-#: gnome/gmount.c:395
-#, c-format
-msgid "NFS dir %s"
-msgstr "NFS katalog %s"
-
-#: gnome/gmount.c:399
-#, c-format
-msgid "Device %d"
-msgstr "Enhet %d"
-
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:131 gtkedit/edit.c:226 gtkedit/edit.c:233 gtkedit/edit.c:240
-#: gtkedit/edit.c:247 gtkedit/edit.c:253 gtkedit/edit.c:310 gtkedit/edit.c:346
-#: gtkedit/editcmd.c:1951 gtkedit/editwidget.c:952 src/dir.c:386
-#: src/screen.c:2386 src/tree.c:683 src/tree.c:689 src/wtools.c:222
+#: gtkedit/edit.c:132 gtkedit/edit.c:227 gtkedit/edit.c:234 gtkedit/edit.c:241
+#: gtkedit/edit.c:248 gtkedit/edit.c:254 gtkedit/edit.c:311 gtkedit/edit.c:347
+#: gtkedit/editcmd.c:1947 gtkedit/editwidget.c:980 src/dir.c:386
+#: src/screen.c:2404 src/tree.c:683 src/tree.c:689 src/wtools.c:222
 #: vfs/fish.c:224
 msgid " Error "
 msgstr " Feil "
 
-#: gtkedit/edit.c:131 gtkedit/edit.c:233
+#: gtkedit/edit.c:132 gtkedit/edit.c:234
 msgid " Failed trying to open file for reading: "
 msgstr " Feil under åpning av fil for lesing: "
 
-#: gtkedit/edit.c:240
+#: gtkedit/edit.c:241
 msgid " Cannot get size/permissions info on file: "
 msgstr " Kan ikke finne størrelse-/rettighetsinformasjon for filen: "
 
-#: gtkedit/edit.c:247
+#: gtkedit/edit.c:248
 msgid " Not an ordinary file: "
 msgstr " Ikke en vanlig fil: "
 
-#: gtkedit/edit.c:253
+#: gtkedit/edit.c:254
 msgid " File is too large: "
 msgstr " Filen er for stor: "
 
-#: gtkedit/edit.c:254
+#: gtkedit/edit.c:255
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -1555,25 +1654,25 @@ msgstr ""
 " \n"
 " Gjør edit.h:MAXBUF større og rekompiler editoren. "
 
-#: gtkedit/edit.c:310 gtkedit/edit.c:346
+#: gtkedit/edit.c:311 gtkedit/edit.c:347
 msgid " Error allocating memory "
 msgstr " Feil under minneallokering "
 
-#: gtkedit/editcmd.c:334
+#: gtkedit/editcmd.c:335
 msgid "Quick save "
 msgstr "Hurtiglagring"
 
-#: gtkedit/editcmd.c:335
+#: gtkedit/editcmd.c:336
 msgid "Safe save "
 msgstr "Trygg lagring"
 
-#: gtkedit/editcmd.c:336
+#: gtkedit/editcmd.c:337
 msgid "Do backups -->"
 msgstr "Lag sikkerhetskopi -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:339 gtkedit/editcmd.c:1136 gtkedit/editcmd.c:1182
-#: gtkedit/editcmd.c:1267 gtkedit/editcmd.c:2863 gtkedit/editoptions.c:68
+#: gtkedit/editcmd.c:340 gtkedit/editcmd.c:1149 gtkedit/editcmd.c:1195
+#: gtkedit/editcmd.c:1280 gtkedit/editcmd.c:2891 gtkedit/editoptions.c:68
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:854 src/filegui.c:822
@@ -1583,115 +1682,115 @@ msgstr "Lag sikkerhetskopi -->"
 msgid "&Cancel"
 msgstr "&Avbryt"
 
-#: gtkedit/editcmd.c:345
+#: gtkedit/editcmd.c:346
 msgid "Extension:"
 msgstr "Utvidelse:"
 
 #. NLS ?
-#: gtkedit/editcmd.c:352
+#: gtkedit/editcmd.c:353
 msgid " Edit Save Mode "
 msgstr " Rediger lagringsmodus "
 
-#: gtkedit/editcmd.c:476
+#: gtkedit/editcmd.c:477
 msgid " Save As "
 msgstr " Lagre som "
 
 #. Warning message with a query to continue or cancel the operation
-#: gtkedit/editcmd.c:490 gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
-#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083 src/ext.c:303 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:1432 src/screen.c:2106
-#: src/screen.c:2149 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
+#: gtkedit/editcmd.c:491 gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
+#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095 src/ext.c:306 src/file.c:619
+#: src/help.c:318 src/main.c:699 src/screen.c:1450 src/screen.c:2124
+#: src/screen.c:2167 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
 #: src/utilunix.c:394 src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
 msgstr " Advarsel "
 
-#: gtkedit/editcmd.c:491
+#: gtkedit/editcmd.c:492
 msgid " A file already exists with this name. "
 msgstr " En fil med dette navnet eksisterer allerede. "
 
 #. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:493
+#: gtkedit/editcmd.c:494
 msgid "Overwrite"
 msgstr "Overskriv"
 
-#: gtkedit/editcmd.c:493 gtkedit/editcmd.c:555 gtkedit/editcmd.c:782
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:494 gtkedit/editcmd.c:561 gtkedit/editcmd.c:788
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
+#: gtkedit/editcmd.c:1585
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: gtkedit/editcmd.c:509
+#: gtkedit/editcmd.c:513
 msgid " Save as "
 msgstr " Lagre som "
 
-#: gtkedit/editcmd.c:509 gtkedit/editcmd.c:2633
+#: gtkedit/editcmd.c:513 gtkedit/editcmd.c:2657
 msgid " Error trying to save file. "
 msgstr " Feil under lagring av fil. "
 
 #. This heads the delete macro error dialog box
-#: gtkedit/editcmd.c:625 gtkedit/editcmd.c:633 gtkedit/editcmd.c:658
+#: gtkedit/editcmd.c:631 gtkedit/editcmd.c:639 gtkedit/editcmd.c:664
 msgid " Delete macro "
 msgstr " Slett makro "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:627
+#: gtkedit/editcmd.c:633
 msgid " Error trying to open temp file "
 msgstr " Feil under åpning av midlertidig fil "
 
 #. 'Open' = load temp file
-#: gtkedit/editcmd.c:635 gtkedit/editcmd.c:696 gtkedit/editcmd.c:764
+#: gtkedit/editcmd.c:641 gtkedit/editcmd.c:702 gtkedit/editcmd.c:770
 msgid " Error trying to open macro file "
 msgstr " Feil under åpning av makrofil "
 
-#: gtkedit/editcmd.c:640 gtkedit/editcmd.c:648 gtkedit/editcmd.c:684
-#: gtkedit/editcmd.c:739
+#: gtkedit/editcmd.c:646 gtkedit/editcmd.c:654 gtkedit/editcmd.c:690
+#: gtkedit/editcmd.c:745
 #, c-format
 msgid "key '%d 0': "
 msgstr "tast '%d 0': "
 
-#: gtkedit/editcmd.c:659
+#: gtkedit/editcmd.c:665
 msgid " Error trying to overwrite macro file "
 msgstr " Feil under overskriving av makrofil "
 
 #. This heads the 'Macro' dialog box
-#: gtkedit/editcmd.c:676
+#: gtkedit/editcmd.c:681
 msgid " Macro "
 msgstr " Makro "
 
 #. Input line for a single key press follows the ':'
-#: gtkedit/editcmd.c:678
+#: gtkedit/editcmd.c:683
 msgid " Press the macro's new hotkey: "
 msgstr " Trykk makroens nye hurtigtast: "
 
 #. This heads the 'Save Macro' dialog box
-#: gtkedit/editcmd.c:696
+#: gtkedit/editcmd.c:702
 msgid " Save macro "
 msgstr " Lagre makro "
 
-#: gtkedit/editcmd.c:706 gtkedit/editcmd.c:713
+#: gtkedit/editcmd.c:712 gtkedit/editcmd.c:719
 msgid " Delete Macro "
 msgstr " Slett makro "
 
 #. This heads the 'Load Macro' dialog box
-#: gtkedit/editcmd.c:763
+#: gtkedit/editcmd.c:769
 msgid " Load macro "
 msgstr " Last makro "
 
-#: gtkedit/editcmd.c:777 gtkedit/editcmd.c:779
+#: gtkedit/editcmd.c:783 gtkedit/editcmd.c:785
 msgid " Confirm save file? : "
 msgstr " Bekreft lagre fil? : "
 
 #. Buttons to 'Confirm save file' query
-#: gtkedit/editcmd.c:782
+#: gtkedit/editcmd.c:788
 msgid " Save file "
 msgstr " Lagre fil "
 
-#: gtkedit/editcmd.c:782 gtkedit/editwidget.c:1066 gtkedit/gtkedit.c:1247
+#: gtkedit/editcmd.c:788 gtkedit/editwidget.c:1094 gtkedit/gtkedit.c:1247
 #: src/view.c:2075
 msgid "Save"
 msgstr "Lagre"
 
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -1699,233 +1798,247 @@ msgstr ""
 " Teksten er endret uten å ha vært lagret. \n"
 " Fortsett forkaster disse endringene. "
 
-#: gtkedit/editcmd.c:809 gtkedit/editcmd.c:839 gtkedit/editcmd.c:986
+#: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
 msgid "Continue"
 msgstr "Fortsett"
 
 #. Heads the 'Load' file dialog box
-#: gtkedit/editcmd.c:828 gtkedit/editcmd.c:842
+#: gtkedit/editcmd.c:837 gtkedit/editcmd.c:853
 msgid " Load "
 msgstr " Last "
 
-#: gtkedit/editcmd.c:828
+#: gtkedit/editcmd.c:837
 msgid " Error trying to open file for reading "
 msgstr " Feil under åpning av fil for lesing "
 
-#: gtkedit/editcmd.c:986 gtkedit/editcmd.c:1083
+#: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Blokken er for stor, du kan kanskje ikke angre denne handlingen. "
 
-#: gtkedit/editcmd.c:1083
+#: gtkedit/editcmd.c:1095
 msgid " Continue "
 msgstr " Fortsett "
 
-#: gtkedit/editcmd.c:1083
+#: gtkedit/editcmd.c:1095
 msgid " Cancel "
 msgstr " Avbryt "
 
-#: gtkedit/editcmd.c:1138 src/filegui.c:597
-msgid "al&L"
-msgstr "alle"
+#: gtkedit/editcmd.c:1151
+msgid "o&Ne"
+msgstr "e&N"
 
-#: gtkedit/editcmd.c:1140 src/file.c:2193 src/filegui.c:267
+#: gtkedit/editcmd.c:1153 src/filegui.c:597
+msgid "al&L"
+msgstr "al&Le"
+
+#: gtkedit/editcmd.c:1155 src/file.c:2193 src/filegui.c:267
 msgid "&Skip"
 msgstr "&Hopp over"
 
-#: gtkedit/editcmd.c:1142
+#: gtkedit/editcmd.c:1157
 msgid "&Replace"
 msgstr "E&rstatt"
 
-#. This is for the confirm replace dialog box. The replaced string comes after the ':'
-#: gtkedit/editcmd.c:1148 gtkedit/editcmd.c:1576
+#: gtkedit/editcmd.c:1163 gtkedit/editcmd.c:1585
 msgid " Replace with: "
 msgstr " Erstatt med: "
 
-#: gtkedit/editcmd.c:1152
+#: gtkedit/editcmd.c:1167
 msgid " Confirm replace "
 msgstr " Bekreft erstatt "
 
-#: gtkedit/editcmd.c:1186 gtkedit/editcmd.c:1271
+#: gtkedit/editcmd.c:1199 gtkedit/editcmd.c:1284
 msgid "scanf &Expression"
 msgstr "scanf uttrykk"
 
-#: gtkedit/editcmd.c:1188
+#: gtkedit/editcmd.c:1201
 msgid "replace &All"
 msgstr "erstatt alle"
 
-#: gtkedit/editcmd.c:1190
+#: gtkedit/editcmd.c:1203
 msgid "pr&Ompt on replace"
 msgstr "spør ved erstatning"
 
-#: gtkedit/editcmd.c:1192 gtkedit/editcmd.c:1273
+#: gtkedit/editcmd.c:1205 gtkedit/editcmd.c:1286
 msgid "&Backwards"
 msgstr "Bakover"
 
-#: gtkedit/editcmd.c:1194 gtkedit/editcmd.c:1275
+#: gtkedit/editcmd.c:1207 gtkedit/editcmd.c:1288
 msgid "&Regular expression"
 msgstr "Vanlig uttrykk"
 
-#: gtkedit/editcmd.c:1196 gtkedit/editcmd.c:1277
+#: gtkedit/editcmd.c:1209 gtkedit/editcmd.c:1290
 msgid "&Whole words only"
 msgstr "Kun hele ord"
 
-#: gtkedit/editcmd.c:1198 gtkedit/editcmd.c:1279
+#: gtkedit/editcmd.c:1211 gtkedit/editcmd.c:1292
 msgid "case &Sensitive"
 msgstr "skill mellom &store/små tegn"
 
-#: gtkedit/editcmd.c:1202
+#: gtkedit/editcmd.c:1215
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Skriv inn argumentrekkefølge f.eks. 3,2,1,4 "
 
-#: gtkedit/editcmd.c:1206
+#: gtkedit/editcmd.c:1219
 msgid " Enter replacement string:"
 msgstr " Skriv inn erstatningsstreng:"
 
-#: gtkedit/editcmd.c:1210 gtkedit/editcmd.c:1283 src/view.c:1998
+#: gtkedit/editcmd.c:1223 gtkedit/editcmd.c:1296 src/view.c:1998
 msgid " Enter search string:"
 msgstr " Skriv inn søkestreng:"
 
 #. Heads the 'Replace' dialog box
-#: gtkedit/editcmd.c:1229 gtkedit/editcmd.c:1480 gtkedit/editcmd.c:1574
-#: gtkedit/editcmd.c:2125 gtkedit/editcmd.c:2156 gtkedit/editcmd.c:2158
+#: gtkedit/editcmd.c:1242 gtkedit/editcmd.c:1494 gtkedit/editcmd.c:1585
+#: gtkedit/editcmd.c:2124 gtkedit/editcmd.c:2155 gtkedit/editcmd.c:2157
 msgid " Replace "
 msgstr " Erstatt "
 
 #. Heads the 'Search' dialog box
-#: gtkedit/editcmd.c:1297 gtkedit/editcmd.c:1474 gtkedit/editcmd.c:2227
+#: gtkedit/editcmd.c:1310 gtkedit/editcmd.c:1488 gtkedit/editcmd.c:2226
 #: src/view.c:1526 src/view.c:1625 src/view.c:1748 src/view.c:1966
 #: src/view.c:1998
 msgid " Search "
 msgstr " Søk "
 
 #. An input line comes after the ':'
-#: gtkedit/editcmd.c:1346
+#: gtkedit/editcmd.c:1360
 msgid " Enter search text : "
 msgstr " Skriv inn søketekst : "
 
-#: gtkedit/editcmd.c:1353
+#: gtkedit/editcmd.c:1367
 msgid " Enter replace text : "
 msgstr " Skriv inn erstatningstekst : "
 
-#: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1357
+#: gtkedit/editcmd.c:1370 gtkedit/editcmd.c:1371
 #, c-format
 msgid ""
-"You can enter regexp substrings with %s (not \\1, \\2 like sed) then use "
-"\"Enter...order\""
+"You can enter regexp substrings with %s\n"
+"(not \\1, \\2 like sed) then use \"Enter...order\""
 msgstr ""
-"Du kan skrive inn regexp understrenger med %s (ikke \\1, \\2 som sed) siden "
-"brukes \"Enter...order\""
+"Du kan skrive inn regexp understrenger med %s\n"
+"(ikke \\1, \\2 som sed), siden brukes \"Enter...order\""
 
-#: gtkedit/editcmd.c:1359
+#: gtkedit/editcmd.c:1373
 msgid " Enter argument (or substring) order : "
 msgstr " Skriv inn argument- (eller understreng) rekkefølge : "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1363 gtkedit/editcmd.c:1364
+#: gtkedit/editcmd.c:1377 gtkedit/editcmd.c:1378
 msgid ""
-"Enter the order of replacement of your scanf format specifiers or regexp "
-"substrings"
-msgstr "Skriv inn rekkefølgen for erstatningen av scanf ????"
+"Enter the order of replacement of your scanf\n"
+"format specifiers or regexp substrings, eg 3,1,2"
+msgstr ""
+"Skriv inn rekkefølgen for erstatningen av scanf\n"
+"format spesifikatorene eller regexp understrengene, f.eks. 3,1,2"
 
 #. The following are check boxes
-#: gtkedit/editcmd.c:1369
+#: gtkedit/editcmd.c:1383
 msgid " Whole words only "
 msgstr " Bare hele ord "
 
-#: gtkedit/editcmd.c:1371
+#: gtkedit/editcmd.c:1385
 msgid " Case sensitive "
 msgstr " Skill mellom store og små bokstaver "
 
-#: gtkedit/editcmd.c:1374
+#: gtkedit/editcmd.c:1388
 msgid " Regular expression "
 msgstr " Vanlig uttrykk "
 
-#: gtkedit/editcmd.c:1375 gtkedit/editcmd.c:1376
-msgid "See the regex man page for how to compose a regular expression"
+#: gtkedit/editcmd.c:1389 gtkedit/editcmd.c:1390
+msgid ""
+"See the regex man page for how\n"
+"to compose a regular expression"
 msgstr ""
-"Se manualsiden for regex for eksempel på hvordan et vanlig uttrykk er satt "
-"sammen"
+"Se manualsiden for regex for eksempel\n"
+"på hvordan et vanlig uttrykk er satt sammen"
 
-#: gtkedit/editcmd.c:1382
+#: gtkedit/editcmd.c:1396
 msgid " Backwards "
 msgstr " Bakover "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1384 gtkedit/editcmd.c:1385
+#: gtkedit/editcmd.c:1398 gtkedit/editcmd.c:1399
 msgid "Warning: Searching backward can be slow"
 msgstr "Advarsel: Søking bakover kan være tidkrevende"
 
-#: gtkedit/editcmd.c:1398
+#: gtkedit/editcmd.c:1412
 msgid " Prompt on replace "
 msgstr " Spør ved erstatning "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1400
+#: gtkedit/editcmd.c:1414
 msgid "Ask before making each replacement"
 msgstr "Spør før utførelse av hver erstatning"
 
-#: gtkedit/editcmd.c:1402
+#: gtkedit/editcmd.c:1416
 msgid " Replace all "
 msgstr " Erstatt alle "
 
-#: gtkedit/editcmd.c:1405
+#: gtkedit/editcmd.c:1419
 msgid " Scanf expression "
 msgstr " Scanf uttrykk "
 
 #. Tool hint
-#: gtkedit/editcmd.c:1407
-msgid "Allows entering of a C format string, see the scanf man page"
-msgstr "Tillater inntasting av en streng i C format, se manualsiden for scanf"
+#: gtkedit/editcmd.c:1421
+msgid ""
+"Allows entering of a C format string,\n"
+"see the scanf man page"
+msgstr ""
+"Tillater inntasting av en streng i\n"
+"C-format, se manualsiden for scanf"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1412
+#: gtkedit/editcmd.c:1426
 msgid "Begin search, Enter"
 msgstr "Begynn søk, Linjeskift"
 
 #. Tool hint
-#: gtkedit/editcmd.c:1415
+#: gtkedit/editcmd.c:1429
 msgid "Abort this dialog, Esc"
 msgstr "Avbryt denne dialogen, Esc"
 
-#. Buttons for the confirm replace dialog box.
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:1585
 msgid "Replace"
 msgstr "Erstatt"
 
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:1585
 msgid "Skip"
 msgstr "Hopp over"
 
-#: gtkedit/editcmd.c:1578
+#: gtkedit/editcmd.c:1585
 msgid "Replace all"
 msgstr "Erstatt alle"
 
-#: gtkedit/editcmd.c:1951
+#: gtkedit/editcmd.c:1585
+msgid "Replace one"
+msgstr "Erstatt en"
+
+#: gtkedit/editcmd.c:1947
 msgid ""
 " Invalid regular expression, or scanf expression with to many conversions "
 msgstr ""
 " Ugyldig vanlig uttrykk, eller scanf uttrykk med for mange omsettinger "
 
 #. "Invalid regexp string or scanf string"
-#: gtkedit/editcmd.c:2127
+#: gtkedit/editcmd.c:2126
 msgid " Error in replacement format string. "
 msgstr " Feil i erstatningsstrengen for format. "
 
-#: gtkedit/editcmd.c:2155
+#: gtkedit/editcmd.c:2154
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld erstatninger utført. "
 
-#: gtkedit/editcmd.c:2158 gtkedit/editcmd.c:2227
+#: gtkedit/editcmd.c:2157 gtkedit/editcmd.c:2226
 msgid " Search string not found. "
 msgstr " Søkestrengen ikke funnet. "
 
 #. Confirm 'Quit' dialog box
-#: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2266 gtkedit/editcmd.c:2269
+#: gtkedit/editcmd.c:2250 gtkedit/editcmd.c:2265 gtkedit/editcmd.c:2268
 msgid " Quit "
 msgstr " Avslutt "
 
-#: gtkedit/editcmd.c:2252 gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2251 gtkedit/editcmd.c:2269
 msgid ""
 " Current text was modified without a file save. \n"
 " Save with exit? "
@@ -1933,139 +2046,508 @@ msgstr ""
 " Teksten er endret uten å ha vært lagret. \n"
 " Lagre ved avslutting? "
 
-#: gtkedit/editcmd.c:2266
+#: gtkedit/editcmd.c:2265
 msgid " File was modified, Save with exit? "
 msgstr " Filen ble endret, Lagre ved avslutting? "
 
-#: gtkedit/editcmd.c:2266
+#: gtkedit/editcmd.c:2265
 msgid "Cancel quit"
 msgstr "Avbryt avslutt"
 
-#: gtkedit/editcmd.c:2266 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2135
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2153
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "&Ja"
 
-#: gtkedit/editcmd.c:2266 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2135
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2153
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&No"
 msgstr "&Nei"
 
-#: gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2269
 msgid " &Cancel quit "
 msgstr " &Avbryt avslutt "
 
-#: gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2269
 msgid " &Yes "
 msgstr " &Ja "
 
-#: gtkedit/editcmd.c:2270
+#: gtkedit/editcmd.c:2269
 msgid " &No "
 msgstr " &Nei "
 
-#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2548
+#: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2576
 msgid " Copy to clipboard "
 msgstr " Kopier til utklippstavlen "
 
-#: gtkedit/editcmd.c:2473 gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2548
-#: gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2523 gtkedit/editcmd.c:2576
+#: gtkedit/editcmd.c:2589
 msgid " Unable to save to file. "
 msgstr " Ute av stand til å lagre filen. "
 
-#: gtkedit/editcmd.c:2495 gtkedit/editcmd.c:2561
+#: gtkedit/editcmd.c:2523 gtkedit/editcmd.c:2589
 msgid " Cut to clipboard "
 msgstr " Klipp ut til utklippstavlen "
 
-#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595 src/view.c:1913
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623 src/view.c:1913
 msgid " Goto line "
 msgstr " Gå til linje "
 
-#: gtkedit/editcmd.c:2583 gtkedit/editcmd.c:2587 gtkedit/editcmd.c:2592
-#: gtkedit/editcmd.c:2595
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623
 msgid " Enter line: "
 msgstr " Skriv inn linje: "
 
-#: gtkedit/editcmd.c:2616 gtkedit/editcmd.c:2633
+#: gtkedit/editcmd.c:2644 gtkedit/editcmd.c:2657
 msgid " Save Block "
 msgstr " Lagre blokk "
 
-#: gtkedit/editcmd.c:2667
+#: gtkedit/editcmd.c:2694
 msgid " Insert File "
 msgstr " Sett inn fil "
 
-#: gtkedit/editcmd.c:2682
+#: gtkedit/editcmd.c:2707
 msgid " Insert file "
 msgstr " Sett inn fil "
 
-#: gtkedit/editcmd.c:2682
+#: gtkedit/editcmd.c:2707
 msgid " Error trying to insert file. "
 msgstr " Feil under innsetting av fil. "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2702
+#: gtkedit/editcmd.c:2729
 msgid " Sort block "
 msgstr " Sorter blokk "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2702 gtkedit/editcmd.c:2756
+#: gtkedit/editcmd.c:2729 gtkedit/editcmd.c:2783
 msgid " You must first highlight a block of text. "
 msgstr " Du må først merke en tekstblokk. "
 
-#: gtkedit/editcmd.c:2709
+#: gtkedit/editcmd.c:2736
 msgid " Run Sort "
 msgstr " Kjør sortering "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2711
+#: gtkedit/editcmd.c:2738
 msgid " Enter sort options (see manpage) separated by whitespace: "
 msgstr " Skriv inn flagg for sortering (se manualside), skilt av tomrom: "
 
-#: gtkedit/editcmd.c:2722 gtkedit/editcmd.c:2728
+#: gtkedit/editcmd.c:2749 gtkedit/editcmd.c:2755
 msgid " Sort "
 msgstr " Sorter "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2724
+#: gtkedit/editcmd.c:2751
 msgid " Error trying to execute sort command "
 msgstr " Feil under kjøring av sorteringskommando "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2730
+#: gtkedit/editcmd.c:2757
 msgid " Sort returned non-zero: "
 msgstr " Sortering returnerte ikke-null: "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2754 gtkedit/editcmd.c:2784
+#: gtkedit/editcmd.c:2781 gtkedit/editcmd.c:2811
 msgid " Process block "
 msgstr " Prosesser blokk "
 
 #. Not essential to translate
-#: gtkedit/editcmd.c:2786
+#: gtkedit/editcmd.c:2813
 msgid " Error trying to stat file "
 msgstr " Feil under stat av fil "
 
-#: gtkedit/editcmd.c:2856
+#: gtkedit/editcmd.c:2884
 msgid " Mail "
 msgstr " Send "
 
-#: gtkedit/editcmd.c:2869
+#: gtkedit/editcmd.c:2897
 msgid " Copies to"
 msgstr " Kopier til:"
 
-#: gtkedit/editcmd.c:2873
+#: gtkedit/editcmd.c:2901
 msgid " Subject"
 msgstr " Emne "
 
-#: gtkedit/editcmd.c:2877
+#: gtkedit/editcmd.c:2905
 msgid " To"
 msgstr " Til"
 
-#: gtkedit/editcmd.c:2879
+#: gtkedit/editcmd.c:2907
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <emne> -c <cc> <til>"
+
+#: gtkedit/editmenu.c:61
+msgid " Word wrap "
+msgstr " Ordbryting "
+
+#. Not essential to translate
+#: gtkedit/editmenu.c:63
+msgid " Enter line length, 0 for off: "
+msgstr " Skriv inn linjelengden, 0 for av: "
+
+#: gtkedit/editmenu.c:74
+msgid " About "
+msgstr " Om "
+
+#: gtkedit/editmenu.c:75
+msgid ""
+"\n"
+"                Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       A user friendly text editor written\n"
+"           for the Midnight Commander.\n"
+msgstr ""
+"\n"
+"                 Cooledit  v3.11.5\n"
+"\n"
+" Copyright (C) 1996 the Free Software Foundation\n"
+"\n"
+"       En brukervennlig tekst editor skrevet\n"
+"           for Midnight Commander.\n"
+
+#: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
+msgid "&Open/load...     C-o"
+msgstr "&Åpne/laste...    C-o"
+
+#: gtkedit/editmenu.c:124
+msgid "&New              C-n"
+msgstr "&Ny               C-n"
+
+#: gtkedit/editmenu.c:126 gtkedit/editmenu.c:142
+msgid "&Save              F2"
+msgstr "&Lagre             F2"
+
+#: gtkedit/editmenu.c:127 gtkedit/editmenu.c:143
+msgid "save &As...       F12"
+msgstr "l&Agre som...     F12"
+
+#: gtkedit/editmenu.c:129 gtkedit/editmenu.c:145
+msgid "&Insert file...   F15"
+msgstr "sett &Inn fil...  F15"
+
+#: gtkedit/editmenu.c:130
+msgid "copy to &File...  C-f"
+msgstr "kopier til &Fil...C-f"
+
+#: gtkedit/editmenu.c:132 gtkedit/editmenu.c:148
+msgid "a&Bout...            "
+msgstr "Om                   "
+
+#: gtkedit/editmenu.c:134 gtkedit/editmenu.c:150
+msgid "&Quit             F10"
+msgstr "A&vslutt          F10"
+
+#: gtkedit/editmenu.c:140
+msgid "&New            C-x k"
+msgstr "&Ny             C-x k"
+
+#: gtkedit/editmenu.c:146
+msgid "copy to &File...     "
+msgstr "kopier til &Fil...   "
+
+#: gtkedit/editmenu.c:155 gtkedit/editmenu.c:172
+msgid "&Toggle Mark       F3"
+msgstr "slå av/på merking  F3"
+
+#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
+msgid "&Mark Columns    S-F3"
+msgstr "&Merk kolonner   S-F3"
+
+#: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
+msgid "toggle &Ins/overw Ins"
+msgstr "slå av/på sett inn/overskriv Ins"
+
+#: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
+msgid "&Copy              F5"
+msgstr "Kopier             F5"
+
+#: gtkedit/editmenu.c:161 gtkedit/editmenu.c:178
+msgid "&Move              F6"
+msgstr "Flytt              F6"
+
+#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
+msgid "&Delete            F8"
+msgstr "Slett              F8"
+
+#: gtkedit/editmenu.c:164 gtkedit/editmenu.c:181
+msgid "&Undo             C-u"
+msgstr "Angre             C-u"
+
+#: gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
+msgid "&Beginning     C-PgUp"
+msgstr "&Begynnelsen   C-PgUp"
+
+#: gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
+msgid "&End           C-PgDn"
+msgstr "Slutt          C-PgDn"
+
+#: gtkedit/editmenu.c:189 gtkedit/editmenu.c:196
+msgid "&Search...         F7"
+msgstr "Søk...             F7"
+
+#: gtkedit/editmenu.c:190 gtkedit/editmenu.c:197
+msgid "search &Again     F17"
+msgstr "søk igjen         F17"
+
+#: gtkedit/editmenu.c:191 gtkedit/editmenu.c:198
+msgid "&Replace...        F4"
+msgstr "Erstatt...         F4"
+
+#: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
+msgid "&Goto line...            M-l"
+msgstr "Gå til linje...          M-l"
+
+#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
+msgid "insert &Literal...       C-q"
+msgstr "sett inn &Literal...     C-q"
+
+#: gtkedit/editmenu.c:207 gtkedit/editmenu.c:229
+msgid "&Refresh screen          C-l"
+msgstr "Oppdater skjermen        C-l"
+
+#: gtkedit/editmenu.c:209 gtkedit/editmenu.c:231
+msgid "&Start record macro      C-r"
+msgstr "&Start makroinnspilling  C-r"
+
+#: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
+msgid "&Finish record macro...  C-r"
+msgstr "stopp makroinnspilling...C-r"
+
+#: gtkedit/editmenu.c:211
+msgid "&Execute macro...   C-a, KEY"
+msgstr "Kjør makro...       C-a, TAST"
+
+#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
+msgid "delete macr&O...            "
+msgstr "slett makro...              "
+
+#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
+msgid "insert &Date/time           "
+msgstr "sett inn dato/klokke        "
+
+#: gtkedit/editmenu.c:216 gtkedit/editmenu.c:238
+msgid "format p&Aragraph        M-p"
+msgstr "formater p&Aragraf       M-p"
+
+#: gtkedit/editmenu.c:217
+msgid "'ispell' s&Pell check    C-p"
+msgstr "'ispell' stavekontroll   C-p"
+
+#: gtkedit/editmenu.c:218 gtkedit/editmenu.c:240
+msgid "sor&T...                 M-t"
+msgstr "sor&Ter...               M-t"
+
+#: gtkedit/editmenu.c:219 gtkedit/editmenu.c:241
+msgid "'indent' &C Formatter    F19"
+msgstr "'indent' C formatering   F19"
+
+#: gtkedit/editmenu.c:220
+msgid "&Mail...                    "
+msgstr "Send...                     "
+
+#: gtkedit/editmenu.c:233
+msgid "&Execute macro... C-x e, KEY"
+msgstr "Kjør makro...     C-x e, TAST"
+
+#: gtkedit/editmenu.c:239
+msgid "'ispell' s&Pell check    M-$"
+msgstr "'ispell' stavekontroll   M-$"
+
+#: gtkedit/editmenu.c:248 gtkedit/editmenu.c:257
+msgid "&General...  "
+msgstr "Generelt...  "
+
+#: gtkedit/editmenu.c:249 gtkedit/editmenu.c:258
+msgid "&Save mode..."
+msgstr "Lagringsmodus..."
+
+#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260 src/main.c:1345
+msgid "&Layout..."
+msgstr "Utseende."
+
+#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
+#: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279 gtkedit/editmenu.c:396
+#: src/chmod.c:164 src/chown.c:130
+msgid " File "
+msgstr " Fil "
+
+#: gtkedit/editmenu.c:271 gtkedit/editmenu.c:280 gtkedit/editmenu.c:412
+msgid " Edit "
+msgstr " Rediger "
+
+#: gtkedit/editmenu.c:272 gtkedit/editmenu.c:281
+msgid " Sear/Repl "
+msgstr " Søk/Erstatt "
+
+#: gtkedit/editmenu.c:273 gtkedit/editmenu.c:282 gtkedit/editmenu.c:452
+msgid " Command "
+msgstr " Kommando "
+
+#: gtkedit/editmenu.c:274 gtkedit/editmenu.c:283
+msgid " Options "
+msgstr " Alternativer "
+
+#: gtkedit/editmenu.c:397
+msgid "Open...\tC-o"
+msgstr "Åpne...\tC-o"
+
+#: gtkedit/editmenu.c:398
+msgid "New\tC-n"
+msgstr "Ny\tC-n"
+
+#: gtkedit/editmenu.c:400
+msgid "Save\tF2"
+msgstr "Lagre\tF2"
+
+#: gtkedit/editmenu.c:401
+msgid "Save as...\tF12"
+msgstr "Lagre som...\tF12"
+
+#: gtkedit/editmenu.c:403
+msgid "Insert file...\tF15"
+msgstr "Sett inn fil...\tF15"
+
+#: gtkedit/editmenu.c:404
+msgid "Copy to file...\tC-f"
+msgstr "Kopier til fil...\tC-f"
+
+#. Tool hint
+#: gtkedit/editmenu.c:407
+msgid "Disk operations and file indexing/searching"
+msgstr "Diskoperasjoner og filindeksering-/søking"
+
+#: gtkedit/editmenu.c:413
+msgid "Toggle mark\tF3"
+msgstr "Slå av/på marker\tF3"
+
+#: gtkedit/editmenu.c:414
+msgid "Toggle mark columns\tC-b"
+msgstr "Slå av/på marker kolonner\tC-b"
+
+#: gtkedit/editmenu.c:416
+msgid "Toggle book mark\tC-M-Ins"
+msgstr "Slå av/på bokmerker\tC-M-Ins"
+
+#: gtkedit/editmenu.c:417
+msgid "Previous book mark\tC-M-Up"
+msgstr "Forrige bokmerke\tC-M-Opp"
+
+#: gtkedit/editmenu.c:418
+msgid "Next book mark\tC-M-Down"
+msgstr "Neste bokmerke\tC-M-Ned"
+
+#: gtkedit/editmenu.c:419
+msgid "Flush book marks"
+msgstr "Fjern bokmerker"
+
+#: gtkedit/editmenu.c:421
+msgid "Toggle insert/overwrite\tIns"
+msgstr "Slå av/på overskriv\tIns"
+
+#: gtkedit/editmenu.c:423
+msgid "Copy block to cursor\tF5"
+msgstr "Kopier blokk til markøren\tF5"
+
+#: gtkedit/editmenu.c:424
+msgid "Move block to cursor\tF6"
+msgstr "Flytt blokk til markøren\tF6"
+
+#: gtkedit/editmenu.c:425
+msgid "Delete block\tF8/C-Del"
+msgstr "Slett blokk\tF8/C-Del"
+
+#: gtkedit/editmenu.c:427
+msgid "Copy block to clipbrd\tC-Ins"
+msgstr "Kopier blokk til utklippstavle\tC-Ins"
+
+#: gtkedit/editmenu.c:428
+msgid "Cut block to clipbrd\tS-Del"
+msgstr "Klipp ut blokk til utklippstavle\tS-Del"
+
+#: gtkedit/editmenu.c:429
+msgid "Paste block from clipbrd\tS-Ins"
+msgstr "Lim inn blokk fra utklippstavlen\tS-Ins"
+
+#: gtkedit/editmenu.c:430
+msgid "Selection history\tM-Ins"
+msgstr "Utvalgshistorikk\tM-Ins"
+
+#: gtkedit/editmenu.c:432
+msgid "Undo\tC-BackSpace"
+msgstr "Angre\tC-Tilbake"
+
+#. Tool hint
+#: gtkedit/editmenu.c:435
+msgid "Manipulating blocks of text"
+msgstr "Manipulering av tekstblokker"
+
+#: gtkedit/editmenu.c:440
+msgid " Srch/Replce "
+msgstr " Søk/Erstatt "
+
+#: gtkedit/editmenu.c:441
+msgid "Search...\tF7"
+msgstr "Søk...\tF7"
+
+#: gtkedit/editmenu.c:442
+msgid "Search again\tF17"
+msgstr "Søk igjen\tF17"
+
+#: gtkedit/editmenu.c:443
+msgid "Replace...\tF4"
+msgstr "Erstatt...\tF4"
+
+#: gtkedit/editmenu.c:444
+msgid "Replace again\tF14"
+msgstr "Erstatt igjen\tF14"
+
+#. Tool hint
+#: gtkedit/editmenu.c:447
+msgid "Search for and replace text"
+msgstr "Søk etter og erstatt tekst"
+
+#: gtkedit/editmenu.c:453
+msgid "Goto line...\tM-l"
+msgstr "Gå til linje...\tM-l"
+
+#: gtkedit/editmenu.c:455
+msgid "Start record macro\tC-r"
+msgstr "Start makroinnspilling\tC-r"
+
+#: gtkedit/editmenu.c:456
+msgid "Finish record macro...\tC-r"
+msgstr "Avslutt makroinnspilling...\tC-r"
+
+#: gtkedit/editmenu.c:457
+msgid "Execute macro...\tC-a, KEY"
+msgstr "Kjør makro...\tC-a, TAST"
+
+#: gtkedit/editmenu.c:458
+msgid "Delete macro...\t"
+msgstr "Slett makro...\t"
+
+#: gtkedit/editmenu.c:460
+msgid "Insert date/time\tC-d"
+msgstr "Sett inn dato/klokkeslett\tC-d"
+
+#: gtkedit/editmenu.c:461
+msgid "Format paragraph\tM-p"
+msgstr "Formater paragraf\tM-p"
+
+#: gtkedit/editmenu.c:463
+msgid "Refresh display\tC-l"
+msgstr "Oppdater skjermen\tC-l"
+
+#. Tool hint
+#: gtkedit/editmenu.c:466
+msgid "Macros and internal commands"
+msgstr "Makroer og interne kommandoer"
 
 #: gtkedit/editoptions.c:36
 msgid "Intuitive"
@@ -2141,402 +2623,33 @@ msgid " Editor options "
 msgstr " Alternativer for redigerer "
 
 #. Not essential to translate
-#: gtkedit/editwidget.c:312
+#: gtkedit/editwidget.c:317
 msgid "Error initialising editor.\n"
 msgstr "Feil under initialisering av editor.\n"
 
-#: gtkedit/editwidget.c:1065 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1711 src/screen.c:2364 src/screen.c:2394 src/tree.c:1009
+#: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
+#: src/main.c:1711 src/screen.c:2382 src/screen.c:2412 src/tree.c:1009
 #: src/view.c:2068
 msgid "Help"
 msgstr "Hjelp"
 
-#: gtkedit/editwidget.c:1067 gtkedit/gtkedit.c:1248
+#: gtkedit/editwidget.c:1095 gtkedit/gtkedit.c:1248
 msgid "Mark"
 msgstr "Marker"
 
-#: gtkedit/editwidget.c:1068
+#: gtkedit/editwidget.c:1096
 msgid "Replac"
 msgstr "Erstatt"
 
-#: gtkedit/editwidget.c:1074 src/main.c:1713
+#: gtkedit/editwidget.c:1102 src/main.c:1713
 msgid "PullDn"
 msgstr "Meny"
 
 #. gtk_edit_menu
-#: gtkedit/editwidget.c:1075 gtkedit/gtkedit.c:1256 src/help.c:818
+#: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
 #: src/main.c:1714 src/view.c:2070 src/view.c:2092
 msgid "Quit"
 msgstr "Slutt"
-
-#: gtkedit/editmenu.c:57
-msgid " Word wrap "
-msgstr " Ordbryting "
-
-#. Not essential to translate
-#: gtkedit/editmenu.c:59
-msgid " Enter line length, 0 for off: "
-msgstr " Skriv inn linjelengden, 0 for av: "
-
-#: gtkedit/editmenu.c:70
-msgid " About "
-msgstr " Om "
-
-#: gtkedit/editmenu.c:71
-msgid ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       A user friendly text editor written\n"
-"           for the Midnight Commander.\n"
-msgstr ""
-"\n"
-"                 Cooledit  v2.1\n"
-"\n"
-" Copyright (C) 1996 the Free Software Foundation\n"
-"\n"
-"       En brukervennlig tekst editor skrevet\n"
-"           for Midnight Commander.\n"
-
-#: gtkedit/editmenu.c:119 gtkedit/editmenu.c:135
-msgid "&Open/load...     C-o"
-msgstr "&Åpne/laste...    C-o"
-
-#: gtkedit/editmenu.c:120
-msgid "&New              C-n"
-msgstr "&Ny               C-n"
-
-#: gtkedit/editmenu.c:122 gtkedit/editmenu.c:138
-msgid "&Save              F2"
-msgstr "&Lagre             F2"
-
-#: gtkedit/editmenu.c:123 gtkedit/editmenu.c:139
-msgid "save &As...       F12"
-msgstr "l&Agre som...     F12"
-
-#: gtkedit/editmenu.c:125 gtkedit/editmenu.c:141
-msgid "&Insert file...   F15"
-msgstr "sett &Inn fil...  F15"
-
-#: gtkedit/editmenu.c:126
-msgid "copy to &File...  C-f"
-msgstr "kopier til &Fil...C-f"
-
-#: gtkedit/editmenu.c:128 gtkedit/editmenu.c:144
-msgid "a&Bout...            "
-msgstr "Om                   "
-
-#: gtkedit/editmenu.c:130 gtkedit/editmenu.c:146
-msgid "&Quit             F10"
-msgstr "A&vslutt          F10"
-
-#: gtkedit/editmenu.c:136
-msgid "&New            C-x k"
-msgstr "&Ny             C-x k"
-
-#: gtkedit/editmenu.c:142
-msgid "copy to &File...     "
-msgstr "kopier til &Fil...   "
-
-#: gtkedit/editmenu.c:151 gtkedit/editmenu.c:168
-msgid "&Toggle Mark       F3"
-msgstr "slå av/på merking  F3"
-
-#: gtkedit/editmenu.c:152 gtkedit/editmenu.c:169
-msgid "&Mark Columns    S-F3"
-msgstr "&Merk kolonner   S-F3"
-
-#: gtkedit/editmenu.c:154 gtkedit/editmenu.c:171
-msgid "toggle &Ins/overw Ins"
-msgstr "slå av/på sett inn/overskriv Ins"
-
-#: gtkedit/editmenu.c:156 gtkedit/editmenu.c:173
-msgid "&Copy              F5"
-msgstr "Kopier             F5"
-
-#: gtkedit/editmenu.c:157 gtkedit/editmenu.c:174
-msgid "&Move              F6"
-msgstr "Flytt              F6"
-
-#: gtkedit/editmenu.c:158 gtkedit/editmenu.c:175
-msgid "&Delete            F8"
-msgstr "Slett              F8"
-
-#: gtkedit/editmenu.c:160 gtkedit/editmenu.c:177
-msgid "&Undo             C-u"
-msgstr "Angre             C-u"
-
-#: gtkedit/editmenu.c:162 gtkedit/editmenu.c:179
-msgid "&Beginning     C-PgUp"
-msgstr "&Begynnelsen   C-PgUp"
-
-#: gtkedit/editmenu.c:163 gtkedit/editmenu.c:180
-msgid "&End           C-PgDn"
-msgstr "Slutt          C-PgDn"
-
-#: gtkedit/editmenu.c:185 gtkedit/editmenu.c:192
-msgid "&Search...         F7"
-msgstr "Søk...             F7"
-
-#: gtkedit/editmenu.c:186 gtkedit/editmenu.c:193
-msgid "search &Again     F17"
-msgstr "søk igjen         F17"
-
-#: gtkedit/editmenu.c:187 gtkedit/editmenu.c:194
-msgid "&Replace...        F4"
-msgstr "Erstatt...         F4"
-
-#: gtkedit/editmenu.c:199 gtkedit/editmenu.c:221
-msgid "&Goto line...            M-l"
-msgstr "Gå til linje...          M-l"
-
-#: gtkedit/editmenu.c:201 gtkedit/editmenu.c:223
-msgid "insert &Literal...       C-q"
-msgstr "sett inn &Literal...     C-q"
-
-#: gtkedit/editmenu.c:203 gtkedit/editmenu.c:225
-msgid "&Refresh screen          C-l"
-msgstr "Oppdater skjermen        C-l"
-
-#: gtkedit/editmenu.c:205 gtkedit/editmenu.c:227
-msgid "&Start record macro      C-r"
-msgstr "&Start makroinnspilling  C-r"
-
-#: gtkedit/editmenu.c:206 gtkedit/editmenu.c:228
-msgid "&Finish record macro...  C-r"
-msgstr "stopp makroinnspilling...C-r"
-
-#: gtkedit/editmenu.c:207
-msgid "&Execute macro...   C-a, KEY"
-msgstr "Kjør makro...       C-a, TAST"
-
-#: gtkedit/editmenu.c:208 gtkedit/editmenu.c:230
-msgid "delete macr&O...            "
-msgstr "slett makro...              "
-
-#: gtkedit/editmenu.c:210 gtkedit/editmenu.c:232
-msgid "insert &Date/time           "
-msgstr "sett inn dato/klokke        "
-
-#: gtkedit/editmenu.c:212 gtkedit/editmenu.c:234
-msgid "format p&Aragraph        M-p"
-msgstr "formater p&Aragraf       M-p"
-
-#: gtkedit/editmenu.c:213
-msgid "'ispell' s&Pell check    C-p"
-msgstr "'ispell' stavekontroll   C-p"
-
-#: gtkedit/editmenu.c:214 gtkedit/editmenu.c:236
-msgid "sor&T...                 M-t"
-msgstr "sor&Ter...               M-t"
-
-#: gtkedit/editmenu.c:215 gtkedit/editmenu.c:237
-msgid "'indent' &C Formatter    F19"
-msgstr "'indent' C formatering   F19"
-
-#: gtkedit/editmenu.c:216
-msgid "&Mail...                    "
-msgstr "Send...                     "
-
-#: gtkedit/editmenu.c:229
-msgid "&Execute macro... C-x e, KEY"
-msgstr "Kjør makro...     C-x e, TAST"
-
-#: gtkedit/editmenu.c:235
-msgid "'ispell' s&Pell check    M-$"
-msgstr "'ispell' stavekontroll   M-$"
-
-#: gtkedit/editmenu.c:244 gtkedit/editmenu.c:253
-msgid "&General...  "
-msgstr "Generelt...  "
-
-#: gtkedit/editmenu.c:245 gtkedit/editmenu.c:254
-msgid "&Save mode..."
-msgstr "Lagringsmodus..."
-
-#: gtkedit/editmenu.c:247 gtkedit/editmenu.c:256 src/main.c:1345
-msgid "&Layout..."
-msgstr "Utseende."
-
-#. The following are menu options. Do not change the key bindings (eg. C-o) and preserve '\t'
-#: gtkedit/editmenu.c:266 gtkedit/editmenu.c:275 gtkedit/editmenu.c:392
-#: src/chmod.c:164 src/chown.c:130
-msgid " File "
-msgstr " Fil "
-
-#: gtkedit/editmenu.c:267 gtkedit/editmenu.c:276 gtkedit/editmenu.c:408
-msgid " Edit "
-msgstr " Rediger "
-
-#: gtkedit/editmenu.c:268 gtkedit/editmenu.c:277
-msgid " Sear/Repl "
-msgstr " Søk/Erstatt "
-
-#: gtkedit/editmenu.c:269 gtkedit/editmenu.c:278 gtkedit/editmenu.c:448
-msgid " Command "
-msgstr " Kommando "
-
-#: gtkedit/editmenu.c:270 gtkedit/editmenu.c:279
-msgid " Options "
-msgstr " Alternativer "
-
-#: gtkedit/editmenu.c:393
-msgid "Open...\tC-o"
-msgstr "Åpne...\tC-o"
-
-#: gtkedit/editmenu.c:394
-msgid "New\tC-n"
-msgstr "Ny\tC-n"
-
-#: gtkedit/editmenu.c:396
-msgid "Save\tF2"
-msgstr "Lagre\tF2"
-
-#: gtkedit/editmenu.c:397
-msgid "Save as...\tF12"
-msgstr "Lagre som...\tF12"
-
-#: gtkedit/editmenu.c:399
-msgid "Insert file...\tF15"
-msgstr "Sett inn fil...\tF15"
-
-#: gtkedit/editmenu.c:400
-msgid "Copy to file...\tC-f"
-msgstr "Kopier til fil...\tC-f"
-
-#. Tool hint
-#: gtkedit/editmenu.c:403
-msgid "Disk operations"
-msgstr "Diskoperasjoner"
-
-#: gtkedit/editmenu.c:409
-msgid "Toggle mark\tF3"
-msgstr "Slå av/på marker\tF3"
-
-#: gtkedit/editmenu.c:410
-msgid "Toggle mark columns\tC-b"
-msgstr "Slå av/på marker kolonner\tC-b"
-
-#: gtkedit/editmenu.c:412
-msgid "Toggle book mark\tC-M-Ins"
-msgstr "Slå av/på bokmerker\tC-M-Ins"
-
-#: gtkedit/editmenu.c:413
-msgid "Previous book mark\tC-M-Up"
-msgstr "Forrige bokmerke\tC-M-Opp"
-
-#: gtkedit/editmenu.c:414
-msgid "Next book mark\tC-M-Down"
-msgstr "Neste bokmerke\tC-M-Ned"
-
-#: gtkedit/editmenu.c:415
-msgid "Flush book marks"
-msgstr "Fjern bokmerker"
-
-#: gtkedit/editmenu.c:417
-msgid "Toggle insert/overwrite\tIns"
-msgstr "Slå av/på overskriv\tIns"
-
-#: gtkedit/editmenu.c:419
-msgid "Copy block to cursor\tF5"
-msgstr "Kopier blokk til markøren\tF5"
-
-#: gtkedit/editmenu.c:420
-msgid "Move block to cursor\tF6"
-msgstr "Flytt blokk til markøren\tF6"
-
-#: gtkedit/editmenu.c:421
-msgid "Delete block\tF8/C-Del"
-msgstr "Slett blokk\tF8/C-Del"
-
-#: gtkedit/editmenu.c:423
-msgid "Copy block to clipbrd\tC-Ins"
-msgstr "Kopier blokk til utklippstavle\tC-Ins"
-
-#: gtkedit/editmenu.c:424
-msgid "Cut block to clipbrd\tS-Del"
-msgstr "Klipp ut blokk til utklippstavle\tS-Del"
-
-#: gtkedit/editmenu.c:425
-msgid "Paste block from clipbrd\tS-Ins"
-msgstr "Lim inn blokk fra utklippstavlen\tS-Ins"
-
-#: gtkedit/editmenu.c:426
-msgid "Selection history\tM-Ins"
-msgstr "Utvalgshistorikk\tM-Ins"
-
-#: gtkedit/editmenu.c:428
-msgid "Undo\tC-BackSpace"
-msgstr "Angre\tC-Tilbake"
-
-#. Tool hint
-#: gtkedit/editmenu.c:431
-msgid "Manipulating blocks of text"
-msgstr "Manipulering av tekstblokker"
-
-#: gtkedit/editmenu.c:436
-msgid " Srch/Replce "
-msgstr " Søk/Erstatt "
-
-#: gtkedit/editmenu.c:437
-msgid "Search...\tF7"
-msgstr "Søk...\tF7"
-
-#: gtkedit/editmenu.c:438
-msgid "Search again\tF17"
-msgstr "Søk igjen\tF17"
-
-#: gtkedit/editmenu.c:439
-msgid "Replace...\tF4"
-msgstr "Erstatt...\tF4"
-
-#: gtkedit/editmenu.c:440
-msgid "Replace again\tF14"
-msgstr "Erstatt igjen\tF14"
-
-#. Tool hint
-#: gtkedit/editmenu.c:443
-msgid "Search for and replace text"
-msgstr "Søk etter og erstatt tekst"
-
-#: gtkedit/editmenu.c:449
-msgid "Goto line...\tM-l"
-msgstr "Gå til linje...\tM-l"
-
-#: gtkedit/editmenu.c:451
-msgid "Start record macro\tC-r"
-msgstr "Start makroinnspilling\tC-r"
-
-#: gtkedit/editmenu.c:452
-msgid "Finish record macro...\tC-r"
-msgstr "Avslutt makroinnspilling...\tC-r"
-
-#: gtkedit/editmenu.c:453
-msgid "Execute macro...\tC-a, KEY"
-msgstr "Kjør makro...\tC-a, TAST"
-
-#: gtkedit/editmenu.c:454
-msgid "Delete macro...\t"
-msgstr "Slett makro...\t"
-
-#: gtkedit/editmenu.c:456
-msgid "Insert date/time\tC-d"
-msgstr "Sett inn dato/klokkeslett\tC-d"
-
-#: gtkedit/editmenu.c:457
-msgid "Format paragraph\tM-p"
-msgstr "Formater paragraf\tM-p"
-
-#: gtkedit/editmenu.c:459
-msgid "Refresh display\tC-l"
-msgstr "Oppdater skjermen\tC-l"
-
-#. Tool hint
-#: gtkedit/editmenu.c:462
-msgid "Macros and internal commands"
-msgstr "Makroer og interne kommandoer"
 
 #: gtkedit/gtkedit.c:65
 msgid "&Dismiss"
@@ -2601,7 +2714,7 @@ msgstr "Slett"
 msgid "Delete highlighted text"
 msgstr "Slett markert tekst"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2365 src/screen.c:2395
+#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2383 src/screen.c:2413
 msgid "Menu"
 msgstr "Meny"
 
@@ -2637,15 +2750,72 @@ msgstr "kopier en blokk til en fil"
 msgid "Search/Replace"
 msgstr "Søk/Erstatt"
 
-#: gtkedit/syntax.c:1339 gtkedit/syntax.c:1346
+#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
+#: gtkedit/syntax.c:1078
+msgid " Spelling Message "
+msgstr " Stavemelding "
+
+#: gtkedit/syntax.c:1051
+msgid ""
+" Fail trying to open ispell program. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+" Feil under åpning av ispell-programmet. \n"
+" Sjekk at det er i stien og at det virker med -a flagget. \n"
+" Ellers kan du også slå av stavekontroll i Alternativer menyen."
+
+#: gtkedit/syntax.c:1060
+msgid ""
+" Fail trying to open ispell pipes. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+" Feil under åpning av ispell rør. \n"
+" Sjekk at det er i stien og at det virker med -a flagget. \n"
+" Ellers kan du også slå av stavekontroll i Alternativer menyen. "
+
+#: gtkedit/syntax.c:1069
+msgid ""
+" Fail trying to read ispell pipes. \n"
+" Check that it is in your path and works with the -a option. \n"
+" Alternatively, disable spell checking from the Options menu. "
+msgstr ""
+" Feil under lesing fra ispell rør. \n"
+" Sjekk at programmet er i stien og at det virker med -a flagget. \n"
+" Ellers kan du også slå av stavekontroll i Alternativer menyen. "
+
+#: gtkedit/syntax.c:1078
+msgid ""
+" Error reading from ispell. \n"
+" Ispell is being restarted. "
+msgstr ""
+" Feil under lesing fra ispell. \n"
+" Ispell startes på nytt. "
+
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+msgid " Load Syntax Rules "
+msgstr " Last syntaksregler "
+
+#: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
+msgid ""
+" Your syntax rule file is outdated \n"
+" A new rule file is being installed. \n"
+" Your old rule file has been saved with a .OLD extension. "
+msgstr ""
+" Syntaksregelfilen er gammel \n"
+" En ny regelfil installeres. \n"
+" Din ganle regelfil lagres med .OLD som filtype. "
+
+#: gtkedit/syntax.c:1487 gtkedit/syntax.c:1494
 msgid " Load syntax file "
 msgstr " Les syntaksfil "
 
-#: gtkedit/syntax.c:1339
+#: gtkedit/syntax.c:1487
 msgid " File access error "
 msgstr " Tilgangsfeil for fil "
 
-#: gtkedit/syntax.c:1345
+#: gtkedit/syntax.c:1493
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Feil i filen %s ved linje %d "
@@ -3400,7 +3570,7 @@ msgstr "Filen eksisterer men kan ikke kjøre stat på den: %s %s"
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/ext.c:131 src/user.c:506
+#: src/ext.c:134 src/user.c:506
 #, c-format
 msgid ""
 " Can't generate unique filename \n"
@@ -3409,7 +3579,7 @@ msgstr ""
 " Kan ikke generere et unikt filnavn \n"
 " %s "
 
-#: src/ext.c:138 src/user.c:518
+#: src/ext.c:141 src/user.c:518
 #, c-format
 msgid ""
 " Can't create temporary command file \n"
@@ -3418,31 +3588,31 @@ msgstr ""
 "Kan ikke opprette midlertidig kommandofil \n"
 " %s "
 
-#: src/ext.c:153 src/user.c:547
+#: src/ext.c:156 src/user.c:547
 msgid " Parameter "
 msgstr " Parameter "
 
-#: src/ext.c:303
+#: src/ext.c:306
 msgid " Can't execute commands on a Virtual File System directory "
 msgstr " Kan ikke kjøre kommandoer i en katalog på et virtuelt filsystem "
 
-#: src/ext.c:400
+#: src/ext.c:403
 msgid " file error"
 msgstr " filfeil"
 
-#: src/ext.c:401
+#: src/ext.c:404
 msgid "Format of the "
 msgstr "Formatet til "
 
-#: src/ext.c:419
+#: src/ext.c:422
 msgid " file error "
 msgstr " filfeil "
 
-#: src/ext.c:420
+#: src/ext.c:423
 msgid "Format of the ~/"
 msgstr "Formatet til ~/"
 
-#: src/ext.c:420
+#: src/ext.c:423
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3452,7 +3622,7 @@ msgstr ""
 "siden versjon 3.0. Du kan enten \n"
 "kopiere den fra "
 
-#: src/ext.c:422
+#: src/ext.c:425
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
@@ -3460,7 +3630,7 @@ msgstr ""
 "mc.ext eller bruke denne\n"
 "filen som et eksempel for hvordan den skal skrives.\n"
 
-#: src/ext.c:424
+#: src/ext.c:427
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext vil bli brukt foreløpig."
 
@@ -3853,11 +4023,11 @@ msgstr " med kildemaske:"
 msgid " Can't operate on \"..\"! "
 msgstr " Kan ikke arbeide på \"..\"! "
 
-#: src/file.c:1875 src/screen.c:2095
+#: src/file.c:1875 src/screen.c:2113
 msgid "Yes"
 msgstr "Ja"
 
-#: src/file.c:1875 src/screen.c:2095
+#: src/file.c:1875 src/screen.c:2113
 msgid "No"
 msgstr "Nei"
 
@@ -4681,7 +4851,7 @@ msgstr "Trykk en tast for å fortsette..."
 msgid " The shell is already running a command "
 msgstr " Skallet kjører allerede en kommando "
 
-#: src/main.c:852 src/screen.c:2093 src/screen.c:2133
+#: src/main.c:852 src/screen.c:2111 src/screen.c:2151
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
@@ -5245,68 +5415,68 @@ msgstr "Vis denne hjelpmeldingen"
 msgid "Display brief usage message"
 msgstr "Vis kort bruksmelding"
 
-#: src/screen.c:399
+#: src/screen.c:417
 msgid "MTime"
 msgstr "MTime"
 
-#: src/screen.c:400
+#: src/screen.c:418
 msgid "ATime"
 msgstr "ATime"
 
-#: src/screen.c:401
+#: src/screen.c:419
 msgid "CTime"
 msgstr "CTime"
 
-#: src/screen.c:403
+#: src/screen.c:421
 msgid "Perm"
 msgstr "Rett"
 
-#: src/screen.c:404
+#: src/screen.c:422
 msgid "Nl"
 msgstr "Nl"
 
-#: src/screen.c:405
+#: src/screen.c:423
 msgid "Inode"
 msgstr "Inode"
 
-#: src/screen.c:406
+#: src/screen.c:424
 msgid "UID"
 msgstr "UID"
 
-#: src/screen.c:407
+#: src/screen.c:425
 msgid "GID"
 msgstr "GID"
 
-#: src/screen.c:643
+#: src/screen.c:661
 #, c-format
 msgid "  %s bytes in %d file%s"
 msgstr "  %s bytes i %d file%s"
 
-#: src/screen.c:1306
+#: src/screen.c:1324
 msgid "Unknow tag on display format: "
 msgstr "Ukjent merke på skjermformatet: "
 
-#: src/screen.c:1432
+#: src/screen.c:1450
 msgid "User suplied format looks invalid, reverting to default."
 msgstr "Oppgitt format ser ut til å være ugyldig. Går tilbake til standard."
 
-#: src/screen.c:2094 src/screen.c:2134
+#: src/screen.c:2112 src/screen.c:2152
 msgid " Do you really want to execute? "
 msgstr " Vil du virkelig kjøre? "
 
-#: src/screen.c:2106 src/screen.c:2149
+#: src/screen.c:2124 src/screen.c:2167
 msgid " No action taken "
 msgstr " Ingen handling utført "
 
-#: src/screen.c:2369 src/screen.c:2399 src/tree.c:1017
+#: src/screen.c:2387 src/screen.c:2417 src/tree.c:1017
 msgid "RenMov"
 msgstr "RenMov"
 
-#: src/screen.c:2370 src/screen.c:2400 src/tree.c:1021
+#: src/screen.c:2388 src/screen.c:2418 src/tree.c:1021
 msgid "Mkdir"
 msgstr "Mkdir"
 
-#: src/screen.c:2386
+#: src/screen.c:2404
 #, c-format
 msgid ""
 " Can't chdir to %s \n"
@@ -5462,12 +5632,12 @@ msgid "name_trunc: too big"
 msgstr "name_trunc: for stor"
 
 #. strftime() format string for recent dates
-#: src/util.c:602 src/util.c:627
+#: src/util.c:599 src/util.c:624
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 #. strftime() format string for old dates
-#: src/util.c:603 src/util.c:625
+#: src/util.c:600 src/util.c:622
 msgid "%b %e  %Y"
 msgstr "%b %e %Y"
 
@@ -5553,6 +5723,11 @@ msgstr ""
 #, c-format
 msgid "File: %s"
 msgstr "Fil: %s"
+
+#: src/view.c:728
+#, c-format
+msgid "Offset 0x%08x"
+msgstr "Offset 0x%08x"
 
 #: src/view.c:739
 msgid "  [grow]"
@@ -5652,6 +5827,10 @@ msgstr "Fjern format"
 #: src/view.c:2090
 msgid "Format"
 msgstr "Format"
+
+#: src/widget.c:999
+msgid " History "
+msgstr " Historikk "
 
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
@@ -6061,6 +6240,26 @@ msgstr " Ugyldig passord "
 #: vfs/mcfs.c:322
 msgid " Too many open connections "
 msgstr " For mange åpne forbindelser "
+
+#: vfs/smbfs.c:1443
+#, c-format
+msgid " %s mkdir'ing %s "
+msgstr " %s lager katalog %s "
+
+#: vfs/smbfs.c:1464
+#, c-format
+msgid " %s rmdir'ing %s "
+msgstr " %s sletter katalog %s "
+
+#: vfs/smbfs.c:1572 vfs/smbfs.c:1592 vfs/smbfs.c:1653
+#, c-format
+msgid " %s opening remote file %s "
+msgstr " %s åpner ekstern fil %s"
+
+#: vfs/smbfs.c:1676
+#, c-format
+msgid " %s renaming files\n"
+msgstr " %s endrer navn på filer\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format
