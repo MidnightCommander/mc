@@ -164,7 +164,7 @@ struct utimbuf {
     vfsid vfs_ncs_getid (vfs *nvfs, char *dir, struct vfs_stamping **par);
     void vfs_rm_parents (struct vfs_stamping *stamp);
     char *vfs_path (char *path);
-    char *vfs_strip_suffix_from_filename (char *filename);
+    char *vfs_strip_suffix_from_filename (const char *filename);
     char *vfs_canon (const char *path);
     char *mc_get_current_wd (char *buffer, int bufsize);
     int vfs_current_is_local (void);
@@ -340,10 +340,10 @@ struct utimbuf {
 
 /* These functions are meant for use by vfs modules */
 
-extern int vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname);
+extern int vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linkname);
 extern int vfs_split_text (char *p);
 extern int vfs_parse_filetype (char c);
-extern int vfs_parse_filemode (char *p);
+extern int vfs_parse_filemode (const char *p);
 extern int vfs_parse_filedate(int idx, time_t *t);
 
 extern void vfs_die (char *msg);

@@ -149,7 +149,7 @@ vfs_type_from_op (char *path)
    suffix from last path component). 
    Returns a malloced string which has to be freed. */
 char *
-vfs_strip_suffix_from_filename (char *filename)
+vfs_strip_suffix_from_filename (const char *filename)
 {
     vfs *vfs;
     char *semi;
@@ -178,7 +178,7 @@ vfs_strip_suffix_from_filename (char *filename)
 }
 
 static int
-path_magic (char *path)
+path_magic (const char *path)
 {
     struct stat buf;
 
@@ -1445,7 +1445,7 @@ vfs_parse_filetype (char c)
     }
 }
 
-int vfs_parse_filemode (char *p)
+int vfs_parse_filemode (const char *p)
 {	/* converts rw-rw-rw- into 0666 */
     int res = 0;
     switch (*(p++)){
@@ -1608,12 +1608,13 @@ int vfs_parse_filedate(int idx, time_t *t)
 }
 
 int
-vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
+vfs_parse_ls_lga (const char *p, struct stat *s, char **filename, char **linkname)
 {
     int idx, idx2, num_cols;
     int i;
     char *p_copy;
-    
+    char *t = NULL;
+
     if (strncmp (p, "total", 5) == 0)
         return 0;
 
@@ -1646,7 +1647,7 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 
     g_free(p_copy);
     p_copy = g_strdup(p);
-    num_cols = vfs_split_text (p);
+    num_cols = vfs_split_text (p_copy);
 
     s->st_nlink = atol (columns [0]);
     if (s->st_nlink < 0)
@@ -1729,22 +1730,13 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
     if (((S_ISLNK (s->st_mode) || 
         (num_cols == idx + 3 && s->st_nlink > 1))) /* Maybe a hardlink? (in extfs) */
         && idx2){
-	int p;
-	char *s;
 	    
 	if (filename){
-	    s = g_strndup (p_copy + column_ptr [idx], column_ptr [idx2] - column_ptr [idx] - 1);
-	    *filename = s;
+	    *filename = g_strndup (p + column_ptr [idx], column_ptr [idx2] - column_ptr [idx] - 1);
 	}
 	if (linkname){
-	    s = g_strdup (p_copy + column_ptr [idx2+1]);
-	    p = strlen (s) - 1;
-	    if (s [p] == '\r' || s [p] == '\n')
-		s [p] = 0;
-	    if (s [p-1] == '\r' || s [p-1] == '\n')
-		s [p-1] = 0;
-		
-	    *linkname = s;
+	    t = g_strdup (p + column_ptr [idx2+1]);
+	    *linkname = t;
 	}
     } else {
 	/* Extract the filename from the string copy, not from the columns
@@ -1754,22 +1746,22 @@ vfs_parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    /* 
 	    *filename = g_strdup (columns [idx++]);
 	    */
-	    int p;
-	    char *s;
-	    
-	    s = g_strdup (p_copy + column_ptr [idx++]);
-	    p = strlen (s) - 1;
-	    /* g_strchomp(); */
-	    if (s [p] == '\r' || s [p] == '\n')
-	        s [p] = 0;
-	    if (s [p-1] == '\r' || s [p-1] == '\n')
-		s [p-1] = 0;
-	    
-	    *filename = s;
+
+	    t = g_strdup (p + column_ptr [idx]);
+	    *filename = t;
 	}
 	if (linkname)
 	    *linkname = NULL;
     }
+
+    if (t) {
+	int p = strlen (t);
+	if ((--p > 0) && (t [p] == '\r' || t [p] == '\n'))
+	    t [p] = 0;
+	if ((--p > 0) && (t [p] == '\r' || t [p] == '\n'))
+	    t [p] = 0;
+    }
+
     g_free (p_copy);
     return 1;
 
@@ -1783,8 +1775,7 @@ error:
 	message_1s (1, _("More parsing errors will be ignored."), _("(sorry)"));
     }
 
-    if (p_copy != p)		/* Carefull! */
-	g_free (p_copy);
+    g_free (p_copy);
     return 0;
 }
 

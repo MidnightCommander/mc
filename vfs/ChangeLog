@@ -1,3 +1,10 @@
+2001-03-05  Andrew V. Samoilov <sav@bcs.zp.ua>
+
+	* vfs.[ch] (vfs_parse_ls_lga, vfs_parse_filemode): p constified
+	(vfs_strip_suffix_from_filename): filename constified
+	(vfs_parse_ls_lga): memory leaking fixed when line can't be parsed,
+	chomping unified
+
 2001-03-04  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* extfs/patchfs: LANG overrides LC_TIME at least in glibc, 
