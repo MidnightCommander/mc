@@ -1,3 +1,10 @@
+2002-10-07  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* sldisply.c (Color_Def_Type): Make const.
+	* slsmg.c (Fake_Alt_Char_Pairs): Likewise.
+	* sltermin.c (Tgetstr_Map_Type): Likewise.
+	* slutty.c (Baud_Rate_Type): Likewise.
+
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
 	Update to S-Lang 1.4.5.  Move include files to "include"

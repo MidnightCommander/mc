@@ -91,7 +91,7 @@ typedef struct termios TTY_Termio_Type;
 static TTY_Termio_Type Old_TTY;
 
 #ifdef HAVE_TERMIOS_H
-typedef struct
+typedef const struct
 {
    unsigned int key;
    unsigned int value;

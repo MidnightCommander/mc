@@ -959,12 +959,13 @@ void SLsmg_touch_screen (void)
 
 			  
 #ifndef IBMPC_SYSTEM
-static char Fake_Alt_Char_Pairs [] = "a:j+k+l+m+q-t+u+v+w+x|n+`+f\\g#~o,<+>.v-^h#0#";
+static const char Fake_Alt_Char_Pairs [] = "a:j+k+l+m+q-t+u+v+w+x|n+`+f\\g#~o,<+>.v-^h#0#";
 
 static void init_alt_char_set (void)
 {
    int i;
-   unsigned char *p, *pmax, ch;
+   unsigned const char *p, *pmax;
+   unsigned char ch;
 
    if (Alt_Char_Set[128] == 128) return;
 

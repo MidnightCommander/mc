@@ -911,7 +911,7 @@ void SLtt_del_eol (void)
    del_eol ();
 }
 
-typedef struct
+typedef const struct
 {
    char *name;
    SLtt_Char_Type color;
