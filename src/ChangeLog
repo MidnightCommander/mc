@@ -1,5 +1,8 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* tree.h: Fix unneeded dependency on dialog.h.
+	* layout.h: Likewise.
+
 	* dlg.h: Merge with ...
 	* dialog.h: ... this.  Adjust all dependencies.
 	* dlg.c: Merge with ...

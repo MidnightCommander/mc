@@ -1,8 +1,6 @@
 #ifndef __LAYOUT_H
 #define __LAYOUT_H
 
-#include "dialog.h"
-
 void layout_cmd (void);
 void init_curses (void);
 void done_screen (void);
@@ -20,7 +18,8 @@ int get_current_index (void);
 int get_other_index (void);
 char *get_nth_panel_name (int num);
 
-Widget *get_panel_widget (int index);
+struct Widget;
+struct Widget *get_panel_widget (int index);
 
 void set_hintbar (char *str);
 

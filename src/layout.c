@@ -1090,9 +1090,10 @@ int get_display_type (int index)
     return panels [index].type;
 }
 
-Widget *get_panel_widget (int index)
+struct Widget *
+get_panel_widget (int index)
 {
-    return panels [index].widget;
+    return panels[index].widget;
 }
 
 int get_current_index (void)

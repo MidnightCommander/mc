@@ -1,8 +1,6 @@
 #ifndef __TREE_H
 #define __TREE_H
 
-#include "dialog.h"
-
 struct WTree;
 typedef struct WTree WTree;
 
