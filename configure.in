@@ -24,9 +24,13 @@ dnl
 dnl Find glib 1.2.x.  This check should be kept close to the beginning,
 dnl as it tends to fail often.
 dnl
+
+dnl This temporary variable is a workaround for a bug in Autoconf-2.53
+glib_path=$PATH:/usr/local/bin
+
 dnl Klugde for FreeBSD, where glib-config is renamed to glib12-config.
-AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,
-	      [$PATH:/usr/local/bin])
+AC_PATH_PROGS([GLIB_CONFIG], [glib-config glib12-config],,[$glib_path])
+
 AC_ARG_VAR([GLIB_CONFIG], [Path to glib-config])
 AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
 LIBS="$LIBS $GLIB_LIBS"

@@ -1,5 +1,8 @@
 2002-08-23  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Work around a bug in Autoconf-2.53 that prevents
+	splitting of user-specified path in AC_PATH_PROGS.
+
 	* configure.in: Move glib test earlier, as it tends to fail for
 	many users.  Make GLIB_CONFIG a precious variable.  Check for
 	glib12-config - that's how it's called on FreeBSD.
