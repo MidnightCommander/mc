@@ -1,5 +1,10 @@
 2001-07-06  Pavel Roskin  <proski@gnu.org>
 
+	* cons.saver.c (check_file): Eliminate using text messages to
+	indicate errors. Improve debug messages.
+	(detect_console): Likewise.
+	(main): Adjust call to detect_console.
+
 	* main.c (sigchld_handler_no_subshell): Don't restart cons.saver
 	if it died.
 	* subshell.c (sigchld_handler): Likewise.

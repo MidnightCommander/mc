@@ -103,7 +103,7 @@ static inline void tty_cursormove(int y, int x)
     dwrite (console_fd, buffer);
 }
 
-static int check_file (char *filename, int check_console, char **msg)
+static int check_file (char *filename, int check_console)
 {
     int fd;
     struct stat stat_buf;
@@ -111,8 +111,6 @@ static int check_file (char *filename, int check_console, char **msg)
     /* Avoiding race conditions: use of fstat makes sure that
        both 'open' and 'stat' operate on the same file */
 
-    *msg = 0;
-    
     fd = open (filename, O_RDWR);
     if (fd == -1)
 	return -1;
@@ -123,32 +121,34 @@ static int check_file (char *filename, int check_console, char **msg)
 
 	/* Must be character device */
 	if (!S_ISCHR (stat_buf.st_mode)){
-	    *msg = "Not a character device";
 	    break;
 	}
 
 #ifdef DEBUG
-	fprintf (stderr, "Device: %x\n", stat_buf.st_rdev);
+	fprintf (stderr,
+		 "Device %s: major %d, minor %d\r\n",
+		 filename,
+		 ((int) stat_buf.st_rdev & 0xff00) >> 8,
+		 ((int) stat_buf.st_rdev & 0xff));
 #endif
+
 	if (check_console){
-	    /* Second time: must be console */
+	    /* Major number must be 4 */
 	    if ((stat_buf.st_rdev & 0xff00) != 0x0400){
-		*msg = "Not a console";
 		break;
 	    }
 
+	    /* Minor number must be below 64 */
 	    if ((stat_buf.st_rdev & 0x00ff) > 63){
-		*msg = "Minor device number too big";
 		break;
 	    }
 
 	    /* Must be owned by the user */
 	    if (stat_buf.st_uid != getuid ()){
-		*msg = "Not a owner";
 		break;
 	    }
 	}
-    /* Everything seems to be okay */
+	/* Everything seems to be okay */
 	return fd;
     } while (0);
 
@@ -156,13 +156,12 @@ static int check_file (char *filename, int check_console, char **msg)
     return -1;
 }
 
-/* Detect console */
+/* Detect console. Return 0 if successful, -1 otherwise.  */
 /* Because the name of the tty is supplied by the user and this
    can be a setuid program a lot of checks has to done to avoid
    creating a security hole */
-static char *detect_console (void)
+static int detect_console (void)
 {
-    char *msg;
     int  xlen;
     
     /* Must be console */
@@ -178,14 +177,14 @@ static char *detect_console (void)
 	   strncmp(tty_name+xlen-4,"vc/",3) == 0) ||
 	!isdigit(tty_name[xlen - 1]) ||
 	!isdigit(tty_name[len - 1]))
-	return "Doesn't look like console";
+	return -1;
 
     snprintf (vcs_name, sizeof (vcs_name), "/dev/vcsa%s", tty_name + xlen - 1);
-    vcs_fd = check_file (vcs_name, 0, &msg);
-    console_fd = check_file (tty_name, 1, &msg);
+    vcs_fd = check_file (vcs_name, 0);
+    console_fd = check_file (tty_name, 1);
 
 #ifdef DEBUG
-    fprintf (stderr, "vcs_fd = %d console_fd = %d\n", vcs_fd, console_fd);
+    fprintf (stderr, "vcs_fd = %d console_fd = %d\r\n", vcs_fd, console_fd);
 #endif
     
     if (vcs_fd != -1){
@@ -193,9 +192,9 @@ static char *detect_console (void)
     }
 
     if (console_fd == -1)
-	return msg;
+	return -1;
 
-    return NULL;
+    return 0;
 }
 
 static void save_console (void)
@@ -326,7 +325,6 @@ static void send_contents (void)
 
 int main (int argc, char **argv)
 {
-    char *error;
     unsigned char action = 0;
     int stderr_fd;
     
@@ -360,9 +358,8 @@ int main (int argc, char **argv)
     /* Check that the argument is a legal console */
     tty_name = argv [1];
     len = strlen(tty_name);
-    error = detect_console ();
 
-    if (error){
+    if (detect_console () == -1){
 	/* Not a console -> no need for privileges */
 	setuid (getuid ());
 /*	dwrite (2, error); */
