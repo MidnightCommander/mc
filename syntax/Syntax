@@ -96,7 +96,7 @@ include octave.syntax
 file ..\*\\.(sql|SQL)$ SQL\sProgram
 include sql.syntax
 
-file .\*ChangeLog$ GNU\sDistribution\sChangeLog\sFile
+file .\*ChangeLog[\\\.A-Za-z0-9_]\*$ GNU\sChangeLog\sFile
 include changelog.syntax
 
 file .\*[Mm]akefile[\\\.a-z]\*$ Makefile

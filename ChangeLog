@@ -1,5 +1,9 @@
 2002-07-18  Pavel Roskin  <proski@gnu.org>
 
+	* syntax/changelog.syntax: Highlight functions without
+	filenames.
+	* syntax/Syntax: Match *ChangeLog*.
+
 	* syntax/c.syntax: Reenable highlighting for "/" and preserve
 	highlighting for "//" comments by using exclusive context.
 	* syntax/java.syntax: Likewise.
