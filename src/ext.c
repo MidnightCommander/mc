@@ -309,7 +309,13 @@ get_file_type_local (char *filename, char *buf, int buflen)
     g_free (tmp);
     g_free (command);
     if (f != NULL) {
-	read_bytes = (fgets (buf, buflen - 1, f)
+#ifdef __QNXNTO__
+	if (setvbuf (f, NULL, _IOFBF, 0) != 0) {
+	    (void)pclose (f);
+	    return -1;
+	}
+#endif
+	read_bytes = (fgets (buf, buflen, f)
 		      != NULL);
 	if (read_bytes == 0)
 	    buf[0] = 0;

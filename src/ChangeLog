@@ -1,3 +1,11 @@
+2004-09-17  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* ext.c (get_file_type_local): Fixes <zombies> in
+	QNX 6.x (QNX Neutrino) when guessing file type before
+	viewing file.
+
+	Based on patch from Dmitry Alexeyev <dmi_a@qnx.org.ru> 
+
 2004-09-17  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* hotlist.c (add_new_entry_input): Fix warnings.
