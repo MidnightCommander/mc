@@ -126,7 +126,7 @@ distclean: cleansourcelinks
 	-$(RMF) $(srcdir)/Makefile gui.tcl
 
 distcopy:
-	$(CP) $(DISTTK) ../../mc-$(VERSION)/tk
+	for I in $(DISTTK); do $(CP) $(top_srcdir)/tk/$$I $(top_srcdir)/mc-$(VERSION)/tk; done
 
 install: install_@tkmc@
 

@@ -380,7 +380,9 @@ distclean-am:  distclean-tags distclean-generic clean-am
 distclean: distclean-recursive
 
 distcopy:
-	$(CP) $(DISTDOCS) ../../mc-$(VERSION)/doc-gnome
+	mkdir $(top_srcdir)/mc-$(VERSION)/doc-gnome/C
+	$(MAKE) -C C distcopy VERSION=$(VERSION) PACKAGE=mc
+	for I in $(DISTDOCS); do $(CP) $(top_srcdir)/doc-gnome/$$I $(top_srcdir)/mc-$(VERSION)/doc-gnome; done
 
 maintainer-clean-am:  maintainer-clean-tags maintainer-clean-generic \
 		distclean-am

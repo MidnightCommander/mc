@@ -65,7 +65,7 @@ distclean:
 	-$(RMF) $(srcdir)/Makefile
 
 distcopy: 
-	$(CP) $(DISTSLANG) ../../mc-$(VERSION)/slang
+	for I in $(DISTSLANG); do $(CP) $(top_srcdir)/slang/$$I $(top_srcdir)/mc-$(VERSION)/slang; done
 
 install uninstall:
 

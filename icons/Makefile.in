@@ -67,6 +67,6 @@ distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile
 
 distcopy:
-	$(CP) $(DISTICONS) ../../mc-$(VERSION)/icons
+	for I in $(DISTICONS); do $(CP) $(top_srcdir)/icons/$$I $(top_srcdir)/mc-$(VERSION)/icons; done
 
 depend dep:

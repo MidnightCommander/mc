@@ -355,26 +355,26 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcserv
 
 distcopy:
-	$(CP) $(DISTVFS) ../../mc-$(VERSION)/vfs
-	mkdir ../../mc-$(VERSION)/vfs/extfs
-	(cd extfs; $(CP) $(EXTFSSTUFF) ../../../mc-$(VERSION)/vfs/extfs)
-	mkdir ../../mc-$(VERSION)/vfs/samba
-	mkdir ../../mc-$(VERSION)/vfs/samba/include
-	mkdir ../../mc-$(VERSION)/vfs/samba/lib
-	mkdir ../../mc-$(VERSION)/vfs/samba/libsmb
-	mkdir ../../mc-$(VERSION)/vfs/samba/param
-	mkdir ../../mc-$(VERSION)/vfs/samba/smbwrapper
-	mkdir ../../mc-$(VERSION)/vfs/samba/tests
-	mkdir ../../mc-$(VERSION)/vfs/samba/ubiqx
+	for I in $(DISTVFS); do $(CP) $(top_srcdir)/vfs/$$I $(top_srcdir)/mc-$(VERSION)/vfs; done
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/extfs
+	for I in $(EXTFSSTUFF); do $(CP) $(top_srcdir)/vfs/extfs/$$I $(top_srcdir)/mc-$(VERSION)/vfs/extfs; done
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/include
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/lib
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/libsmb
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/param
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/smbwrapper
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/tests
+	mkdir $(top_srcdir)/mc-$(VERSION)/vfs/samba/ubiqx
 
-	(cd samba; $(CP) $(SAMBA_DIST_TOPLEVEL) ../../../mc-$(VERSION)/vfs/samba)
-	(cd samba/include; $(CP) $(SAMBA_DIST_INCLUDE)* ../../../../mc-$(VERSION)/vfs/samba/include)
-	(cd samba/lib; $(CP) $(SAMBA_DIST_LIB) ../../../../mc-$(VERSION)/vfs/samba/lib)
-	(cd samba/libsmb; $(CP) $(SAMBA_DIST_LIBSMB) ../../../../mc-$(VERSION)/vfs/samba/libsmb)
-	(cd samba/param; $(CP) $(SAMBA_DIST_PARAM) ../../../../mc-$(VERSION)/vfs/samba/param)
-	(cd samba/smbwrapper; $(CP) $(SAMBA_DIST_SMBWRAPPER) ../../../../mc-$(VERSION)/vfs/samba/smbwrapper)
-	(cd samba/tests; $(CP) $(SAMBA_DIST_TESTS) ../../../../mc-$(VERSION)/vfs/samba/tests)
-	(cd samba/ubiqx; $(CP) $(SAMBA_DIST_UBIQX) ../../../../mc-$(VERSION)/vfs/samba/ubiqx)
+	for I in $(SAMBA_DIST_TOPLEVEL); do $(CP) $(top_srcdir)/vfs/samba/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba; done
+	for I in $(SAMBA_DIST_INCLUDE); do $(CP) $(top_srcdir)/vfs/samba/include/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/include; done
+	for I in $(SAMBA_DIST_LIB); do $(CP) $(top_srcdir)/vfs/samba/lib/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/lib; done
+	for I in $(SAMBA_DIST_LIBSMB); do $(CP) $(top_srcdir)/vfs/samba/libsmb/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/libsmb; done
+	for I in $(SAMBA_DIST_PARAM); do $(CP) $(top_srcdir)/vfs/samba/param/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/param; done
+	for I in $(SAMBA_DIST_SMBWRAPPER); do $(CP) $(top_srcdir)/vfs/samba/smbwrapper/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/smbwrapper; done
+	for I in $(SAMBA_DIST_TESTS); do $(CP) $(top_srcdir)/vfs/samba/tests/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/tests; done
+	for I in $(SAMBA_DIST_UBIQX); do $(CP) $(top_srcdir)/vfs/samba/ubiqx/$$I $(top_srcdir)/mc-$(VERSION)/vfs/samba/ubiqx; done
 	
 depend dep: mcdep
 

@@ -90,7 +90,7 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distcopy:
-	$(CP) $(DIST) ../../mc-$(VERSION)/edit
+	for I in $(DIST); do $(CP) $(top_srcdir)/edit/$$I $(top_srcdir)/mc-$(VERSION)/edit; done
 
 depend dep: mcdep
 

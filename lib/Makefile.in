@@ -74,6 +74,6 @@ uninstall:
 	-rmdir $(DESTDIR)$(mclibdir)
 
 distcopy:
-	$(CP) $(DISTLIB) ../../mc-$(VERSION)/lib
+	for I in $(DISTLIB); do $(CP) $(top_srcdir)/lib/$$I $(top_srcdir)/mc-$(VERSION)/lib; done
 
 depend dep:

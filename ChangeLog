@@ -1,3 +1,6 @@
+1999-08-19  Elliot Lee <sopwith@redhat.com>
+	* */Makefile.in: Have 'make dist' work with builddir != srcdir.
+
 1999-08-19  Federico Mena Quintero  <federico@redhat.com>
 
 	* doc-gnome/C/gmc.sgml: Index fixes.

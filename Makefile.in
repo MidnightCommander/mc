@@ -6,7 +6,7 @@ rootdir = $(srcdir)
 
 foreigndirs=pc
 codedirs=vfs lib doc slang gtkedit edit src gnome new_icons icons idl syntax
-unixdirs=intl $(codedirs) @POSUB@
+unixdirs=intl $(codedirs) doc-gnome @POSUB@
 alldirs=$(unixdirs) $(foreigndirs) 
 subdirs=$(alldirs)
 
@@ -18,7 +18,7 @@ DISTMAIN =	configure configure.in NEWS README INSTALL INSTALL.FAST \
 		Makefile.in FAQ COPYING create_vcs install-sh \
 		config.h.in mc-aclocal.m4 aclocal.m4 acconfig.h \
 		VERSION mcfn_install.in Make.common.in README.PC \
-		mc.spec mc.spec.in Specfile README.QNX VERSION.in \
+		mc.spec mc.spec.in README.QNX VERSION.in \
 		mkinstalldirs autogen.sh ABOUT-NLS gettext.m4 \
 		config.guess config.sub README.smbfs
 
@@ -103,36 +103,37 @@ distclean:
 	cd vfs/samba && $(MAKE) $@
 
 distcopy:
-	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile
-	mkdir ../mc-$(VERSION)
-	cp $(DISTMAIN) ../mc-$(VERSION);
-	for I in $(alldirs); do \
-	    mkdir ../mc-$(VERSION)/$$I; \
-	    cd $$I ; \
-	    echo Processing $$I; \
-	    $(MAKE) distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
-	    cd ..; done
-	mkdir ../mc-$(VERSION)/macros
-	cp $(GNOME_M4_FILES) ../mc-$(VERSION)/macros
-	cd po; $(MAKE) || exit 1; cd ..;
-	cp po/Makefile.in.in ../mc-$(VERSION)/po;
-	cp po/POTFILES.in ../mc-$(VERSION)/po;
-	cp po/*.po po/*.gmo po/mc.pot po/stamp-cat-id po/cat-id-tbl.c ../mc-$(VERSION)/po;
-	(cd ..; tar cvf - mc-$(VERSION) | \
-	gzip -f9 > mc-$(VERSION).tar.gz)
+	rm -rf $(top_srcdir)/mc-$(VERSION)
+	mkdir $(top_srcdir)/mc-$(VERSION)
+	for I in $(DISTMAIN); do cp $(top_srcdir)/$$I $(top_srcdir)/mc-$(VERSION) || cp $$I $(top_srcdir)/mc-$(VERSION); done
+	for I in $(unixdirs); do \
+	    mkdir $(top_srcdir)/mc-$(VERSION)/$$I; \
+	    $(MAKE) -C $$I distcopy VERSION=$(VERSION) PACKAGE=mc || exit 1; \
+	    done
+	mkdir $(top_srcdir)/mc-$(VERSION)/macros
+	for I in $(GNOME_M4_FILES); do cp $(top_srcdir)/$$I $(top_srcdir)/mc-$(VERSION)/macros; done
+	$(MAKE) || exit 1; cd ..;
+	cp $(top_srcdir)/po/Makefile.in.in $(top_srcdir)/mc-$(VERSION)/po;
+	cp $(top_srcdir)/po/POTFILES.in $(top_srcdir)/mc-$(VERSION)/po;
+	cp $(top_srcdir)/po/*.po $(top_srcdir)/po/*.gmo $(top_srcdir)/po/mc.pot $(top_srcdir)/po/stamp-cat-id $(top_srcdir)/po/cat-id-tbl.c $(top_srcdir)/mc-$(VERSION)/po;
+	(cd $(top_srcdir); tar cvf - mc-$(VERSION) | \
+	gzip -f9) > mc-$(VERSION).tar.gz
 
 dist: configure config.h.in distcopy
+	@:
+
+#	rm -rf $(top_srcdir)/mc-$(VERSION) mc-$(VERSION)
 
 mycheck: Makefile
-	rm -rf ../mc-$(VERSION)
-	tar xzvf ../mc-$(VERSION).tar.gz
+	rm -rf mc-$(VERSION)
+	tar xzvf $(top_srcdir)/mc-$(VERSION).tar.gz
 	mkdir mc-$(VERSION)/=build
 	mkdir mc-$(VERSION)/=inst
 	dc_install_base=`cd mc-$(VERSION)/=inst && pwd`; \
 	cd mc-$(VERSION)/=build \
 	  && ../configure --srcdir=.. --prefix=$$dc_install_base \
 	  && $(MAKE) \
-	  && make install \
+	  && make install
 	-rm -rf mc-$(VERSION)
 
 mydistcheck: dist mycheck

@@ -75,7 +75,7 @@ uninstall:
 	-$(RMF) $(DESTDIR)$(bindir)/$(binprefix)mcedit
 
 distcopy:
-	$(CP) $(DIST) ../../mc-$(VERSION)/gtkedit
+	for I in $(DIST); do $(CP) $(top_srcdir)/gtkedit/$$I $(top_srcdir)/mc-$(VERSION)/gtkedit; done
 
 depend dep: mcdep
 

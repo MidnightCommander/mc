@@ -78,6 +78,6 @@ distclean:
 	-$(RMF) $(srcdir)/*~ $(srcdir)/Makefile $(srcdir)/*.1 $(srcdir)/*.8
 
 distcopy:
-	$(CP) $(DISTDOC) ../../mc-$(VERSION)/doc
+	for I in $(DISTDOC); do $(CP) $(top_srcdir)/doc/$$I $(top_srcdir)/mc-$(VERSION)/doc; done
 
 depend dep:

@@ -133,11 +133,10 @@ distclean: cleansourcelinks
 	-$(RMF) $(srcdir)/Makefile
 
 distcopy:
-	$(CP) $(DISTXV) ../../mc-$(VERSION)/xv
-	mkdir ../../mc-$(VERSION)/xv/support
-	mkdir ../../mc-$(VERSION)/xv/support/xview_private
-	cd support/xview_private; $(CP) $(XVSUPPXVHDRS) \
-		../../../../mc-$(VERSION)/xv/support/xview_private
+	for I in $(DISTXV); do $(CP) $(top_srcdir)/xv/$$I $(top_srcdir)/mc-$(VERSION)/xv; done
+	mkdir $(top_srcdir)/mc-$(VERSION)/xv/support
+	mkdir $(top_srcdir)/mc-$(VERSION)/xv/support/xview_private
+	for I in $(XVSUPPXVHDRS); do $(CP) $(top_srcdir)/xv/support/xview_private $(top_srcdir)/mc-$(VERSION)/xv/support/xview_private; done
 
 install: install_@mxc@
 

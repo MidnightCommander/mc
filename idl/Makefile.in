@@ -38,7 +38,7 @@ uninstall:
 	do $(RMF) $(DESTDIR)$(idldir)/$$I; done
 
 distcopy:
-	$(CP) $(DISTFILES) ../../mc-$(VERSION)/idl
+	for I in $(DISTFILES); do $(CP) $(top_srcdir)/idl/$$I $(top_srcdir)/mc-$(VERSION)/idl; done
 
 depend dep:
 

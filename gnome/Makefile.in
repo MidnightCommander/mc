@@ -200,7 +200,8 @@ DISTGNOME_NEW = \
 
 DISTGNOME = \
 	Makefile.in ChangeLog $(EXTRA_DIST) $(CORBA_SOURCES) \
-	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) $(DISTGNOME_NEW)
+	$(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) $(DISTGNOME_NEW) \
+	gmc-window.c gmc-window.h
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
@@ -288,7 +289,7 @@ distclean: cleansourcelinks
 	-$(RMF) $(srcdir)/Makefile
 
 distcopy:
-	$(CP) $(DISTGNOME) ../../mc-$(VERSION)/gnome
+	for I in $(DISTGNOME); do $(CP) $(top_srcdir)/gnome/$$I $(top_srcdir)/mc-$(VERSION)/gnome; done
 
 install: install_@mx@
 

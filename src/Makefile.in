@@ -144,7 +144,7 @@ uninstall:
 	$(RMF) $(mclibdir)/$(libprefix)mc.hlp
 
 distcopy: $(srcdir)/mc.hlp
-	$(CP) $(DISTFILES) ../../mc-$(VERSION)/src
+	for I in $(DISTFILES); do $(CP) $(top_srcdir)/src/$$I $(top_srcdir)/mc-$(VERSION)/src; done
 
 depend dep: mcdep
 
