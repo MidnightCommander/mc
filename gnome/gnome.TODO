@@ -1,3 +1,14 @@
+
+
+IMPORTANTE:
+
+>>>>> properties change on desktop object dont lead to refresh  <<<<<
+
+drags onto desktop dont seem to be refreshed when link complete Also,
+panel drag originated in is trashed by shaped window moving around in it during drag event  
+
+file actions dont cause panels to be refreshed automatically
+
 All:
 
 - It leaks objects.
@@ -6,13 +17,11 @@ All:
 Desktop:
 
 - Add special destkop entries ("Network neighborhood")
-- Solid icons on the desktop are required
 
 Panels:
 
 - Global bindings (some shortcuts are not implemented)
 - Split view.
-- External panelize hangs
 
 
 Viewer:

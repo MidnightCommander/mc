@@ -224,13 +224,13 @@ button_len (const char *text, unsigned int flags)
 void
 button_scan_hotkey(WButton* b)
 {
-	char* cp = strchr(b->text,'&');
-    if (cp != NULL && cp[1] != '\0')
-	{
-		strcpy(cp, cp+1);
-		b->hotkey = tolower(*cp);
-		b->hotpos = cp - b->text;
-	}
+    char* cp = strchr (b->text, '&');
+
+    if (cp != NULL && cp[1] != '\0'){
+	strcpy (cp, cp+1);
+	b->hotkey = tolower (*cp);
+	b->hotpos = cp - b->text;
+    }
 }
 
 WButton *
@@ -287,20 +287,20 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 #ifndef HAVE_XVIEW
     case WIDGET_HOTKEY:
 	{
-		int i, lp = tolower(Par);
-		char *cp;
-	    for (i = 0; i < r->count; i++)
-		{
-			cp = strchr(r->texts [i],'&');
-			if (cp != NULL && cp[1] != '\0')
-			{
-				int c = tolower(cp[1]);
-				if (c != lp)
-					continue;
-				r->pos = i;
-				radio_callback (h, r, WIDGET_KEY, ' '); /* Take action */
-				return 1;
-			}
+	    int i, lp = tolower(Par);
+	    char *cp;
+	    
+	    for (i = 0; i < r->count; i++){
+		cp = strchr (r->texts [i], '&');
+		if (cp != NULL && cp[1] != '\0'){
+		    int c = tolower (cp [1]);
+		    
+		    if (c != lp)
+			continue;
+		    r->pos = i;
+		    radio_callback (h, r, WIDGET_KEY, ' '); /* Take action */
+		    return 1;
+		}
 	    }
 	}
 	return 0;
@@ -311,6 +311,7 @@ radio_callback (Dlg_head *h, WRadio *r, int Msg, int Par)
 	    r->sel = r->pos;
     	    (*h->callback) (h, h->current->dlg_id, DLG_ACTION);
 	    radio_callback (h, r, WIDGET_FOCUS, ' ');
+	    x_radio_toggle (r);
 	    return 1;
 
 	case KEY_UP:

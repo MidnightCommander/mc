@@ -32,6 +32,9 @@ typedef struct WRadio {
     int count;			/* number of members */
     char **texts;		/* texts of labels */
     int upper_letter_is_hotkey; /* If true, then the capital letter is a hk */
+#ifdef HAVE_GNOME
+    void *first_gtk_radio;
+#endif
 } WRadio;
 
 typedef struct WCheck {
