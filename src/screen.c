@@ -45,8 +45,9 @@
 #include "profile.h"
 #include "widget.h"
 #include "../vfs/vfs.h"
-#ifdef NEEDS_DRIVE_H
-# include "drive.h"
+
+#ifdef _OS_NT
+#  include "drive.h"
 #endif
 
 #define ELEMENTS(arr) ( sizeof(arr) / sizeof((arr)[0]) )

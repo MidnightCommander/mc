@@ -42,10 +42,6 @@
 #include <fcntl.h>	/* For O_RDWR */
 #include <signal.h>
 
-#ifdef NEEDS_DRIVE_H
-#    include <drive.h>
-#endif
-
 /* Program include files */
 #include "global.h"
 #include "tty.h"
@@ -84,6 +80,10 @@
 
 #include "chmod.h"
 #include "chown.h"
+
+#ifdef _OS_NT
+#    include "drive.h"
+#endif
 
 #include "../vfs/vfs.h"
 

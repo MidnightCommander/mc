@@ -1,5 +1,9 @@
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Include "drive.h", not <drive.h>, do it after panel.h.
+	Use _OS_NT as the condition for including drive.h.
+	* screen.c: Use _OS_NT as the condition for including drive.h.
+
 	* global.h [_OS_NT]: Include io.h, direct.h and windows.h.
 	Don't redefine struct timeval.
 
