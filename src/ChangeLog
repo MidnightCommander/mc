@@ -1,5 +1,7 @@
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* view.c (view_quit_cmd): Use dlg_stop.
+
 	* main.c (ctl_x_cmd): Implement ctl-x handling as a state of the
 	key press events.  Drop the usage of mi_getch to acomplish this
 	task. 

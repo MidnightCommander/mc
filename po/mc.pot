@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-04 12:45:28-0500\n"
+"Date: 1998-05-04 13:16:20-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -758,7 +758,7 @@ msgstr ""
 msgid "Error initialising editor.\n"
 msgstr ""
 
-#: edit/editwidget.c:992 gnome/glayout.c:349 src/help.c:812 src/main.c:1672 src/screen.c:2200 src/screen.c:2234 src/tree.c:1451 src/view.c:1987
+#: edit/editwidget.c:992 gnome/glayout.c:349 src/help.c:812 src/main.c:1672 src/screen.c:2205 src/screen.c:2239 src/tree.c:1451 src/view.c:1987
 msgid "Help"
 msgstr ""
 
@@ -770,7 +770,7 @@ msgstr ""
 msgid "Replac"
 msgstr ""
 
-#: edit/editwidget.c:996 gnome/gdesktop.c:337 src/screen.c:2204 src/screen.c:2238 src/tree.c:1457
+#: edit/editwidget.c:996 gnome/gdesktop.c:337 src/screen.c:2209 src/screen.c:2243 src/tree.c:1457
 msgid "Copy"
 msgstr ""
 
@@ -782,7 +782,7 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: edit/editwidget.c:999 gnome/gdesktop.c:803 gnome/gdesktop.c:1013 src/screen.c:2207 src/screen.c:2241
+#: edit/editwidget.c:999 gnome/gdesktop.c:803 gnome/gdesktop.c:1013 src/screen.c:2212 src/screen.c:2246
 msgid "Delete"
 msgstr ""
 
@@ -2778,7 +2778,7 @@ msgid ""
 " the details.                                           "
 msgstr ""
 
-#: src/main.c:1673 src/screen.c:2201 src/screen.c:2235
+#: src/main.c:1673 src/screen.c:2206 src/screen.c:2240
 msgid "Menu"
 msgstr ""
 
@@ -3157,19 +3157,19 @@ msgstr ""
 msgid " Do you really want to execute? "
 msgstr ""
 
-#: gnome/glayout.c:274 gnome/gscreen.c:369 src/screen.c:2202 src/screen.c:2236
+#: gnome/glayout.c:274 gnome/gscreen.c:369 src/screen.c:2207 src/screen.c:2241
 msgid "View"
 msgstr ""
 
-#: src/screen.c:2203 src/screen.c:2237 src/view.c:1996
+#: src/screen.c:2208 src/screen.c:2242 src/view.c:1996
 msgid "Edit"
 msgstr ""
 
-#: src/screen.c:2205 src/screen.c:2239 src/tree.c:1459
+#: src/screen.c:2210 src/screen.c:2244 src/tree.c:1459
 msgid "RenMov"
 msgstr ""
 
-#: src/screen.c:2206 src/screen.c:2240 src/tree.c:1463
+#: src/screen.c:2211 src/screen.c:2245 src/tree.c:1463
 msgid "Mkdir"
 msgstr ""
 

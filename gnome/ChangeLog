@@ -1,5 +1,12 @@
 1998-05-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gwidget.c (x_update_input): Keep the cursor always visible. 
+
+	* gview.c (view): Use a buttonbar widget. 
+
+	* gwidget.c (buttonbar_clicked): Provide a trivial implementation
+	of the buttonbar that only responds to key sequences. 
+
 	* gmain.c (dialog_panel_callback): Call midnight_callback to get
 	the main bindings working.
 

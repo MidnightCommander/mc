@@ -1975,7 +1975,7 @@ static void
 view_quit_cmd (WView *view)
 {
     if (view_ok_to_quit (view))
-	view->widget.parent->running = 0;
+	dlg_stop (view->widget.parent);
 }
 
 /* Both views */

@@ -327,12 +327,13 @@ quit_view (GtkWidget *widget, GdkEvent *event, WView *view)
 int
 view (char *_command, char *_file, int *move_dir_p, int start_line)
 {
-	Dlg_head  *our_dlg;
-	GtkWidget *toplevel, *status, *scrollbar, *hbox;
-	GtkVBox   *vbox;
-	WView     *wview;
-	int       midnight_colors [4];
-	int       error;
+	Dlg_head   *our_dlg;
+	GtkWidget  *toplevel, *status, *scrollbar, *hbox;
+	GtkVBox    *vbox;
+	WView      *wview;
+	WButtonBar *bar;
+	int        midnight_colors [4];
+	int        error;
 	
 	/* Create dialog and widgets, put them on the dialog */
 	our_dlg = create_dlg (0, 0, 0, 0, midnight_colors,
@@ -349,8 +350,11 @@ view (char *_command, char *_file, int *move_dir_p, int start_line)
 	gtk_window_set_title (GTK_WINDOW (toplevel),
 			      _command ? _command : _file);
 	wview = view_new (0, 0, 80, 25, 0);
+
+	bar = buttonbar_new (1);
 	
 	add_widget (our_dlg, wview);
+	add_widget (our_dlg, bar);
 	
 	error = view_init (wview, _command, _file, start_line);
 	if (move_dir_p)

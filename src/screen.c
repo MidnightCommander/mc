@@ -2137,6 +2137,11 @@ static key_map panel_keymap [] = {
     { '-',        unselect_cmd_panel },
     { '*',	  reverse_selection_cmd_panel },
     { XCTRL('r'), reread_cmd },
+    { KEY_F(3),   view_panel_cmd },
+    { KEY_F(5),   copy_cmd },
+    { KEY_F(6),   ren_cmd },
+    { KEY_F(7),   mkdir_panel_cmd },
+    { KEY_F(8),   delete_cmd },
 #endif
     
     { 0, 0 }

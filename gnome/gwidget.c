@@ -320,8 +320,11 @@ x_update_input (WInput *in)
 		draw = 1;
 	}
 	
-	if (draw)
+	if (draw){
 		gtk_widget_draw (GTK_WIDGET (gnome_entry), NULL);
+		gtk_entry_adjust_scroll (GTK_ENTRY (entry));
+		gtk_widget_queue_draw (entry);
+	}
 }
 
 /* Listboxes */
@@ -501,6 +504,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 	int i;
 	
 	hbox = gtk_hbox_new (0, 0);
+#if 0
 	for (i = 0; i < 10; i++){
 		char buffer [40];
 		GtkButton *b;
@@ -513,6 +517,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 		gtk_box_pack_start_defaults (GTK_BOX (hbox), (GtkWidget *)b);
 	}
 	gtk_widget_show (hbox);
+#endif
 	bb->widget.wdata = (widget_data) hbox;
 	return 1;
 }
@@ -520,6 +525,7 @@ x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb)
 void
 x_redefine_label (WButtonBar *bb, int idx)
 {
+#if 0
 	GtkBox *box = GTK_BOX (bb->widget.wdata);
 	GtkBoxChild *bc = (GtkBoxChild *)g_list_nth (box->children, idx)->data;
 	GtkButton *button = GTK_BUTTON (bc->widget);
@@ -528,6 +534,7 @@ x_redefine_label (WButtonBar *bb, int idx)
 	gtk_widget_show (label);
 	gtk_container_remove (GTK_CONTAINER (button), button->child);
 	gtk_container_add (GTK_CONTAINER (button), label);
+#endif
 }
 
 /* Gauges */
