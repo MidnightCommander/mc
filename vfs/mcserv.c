@@ -51,9 +51,6 @@
 #ifdef HAVE_GRP_H
 #    include <grp.h>
 #endif
-#ifdef HAVE_CRYPT_H
-#    include <crypt.h>
-#endif
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
@@ -82,7 +79,13 @@
 #    ifndef PAM_ESTABLISH_CRED
 #        define PAM_ESTABLISH_CRED PAM_CRED_ESTABLISH
 #    endif
-#endif
+#else
+#ifdef HAVE_CRYPT_H
+#    include <crypt.h>
+#else
+extern char *crypt (const char *, const char *);
+#endif /* !HAVE_CRYPT_H */
+#endif /* !HAVE_PAM */
 
 #include "utilvfs.h"
 
@@ -814,10 +817,6 @@ static int do_ftp_auth (char *username, char *password)
 	return 1;
     return 0;
 }
-
-#ifdef NEED_CRYPT_PROTOTYPE
-extern char *crypt (const char *, const char *);
-#endif
 
 static int do_classic_auth (char *username, char *password)
 {

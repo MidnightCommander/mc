@@ -1,10 +1,15 @@
+2002-09-12  Pavel Roskin  <proski@gnu.org>
+
+	* mcserv.c: Declare crypt if crypt.h is missing and we are not
+	using PAM.
+
 2002-09-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* smbfs.c (statfile_helper): Merge with loaddir_helper().
-	(get_remote_stat): Use loaddir_helper().  Care about 
+	(get_remote_stat): Use loaddir_helper().  Care about
 	single_entry instead of eliminated statfile_helper().
 
-	* samba/libsmb/clientgen.c (cli_NetServerEnum): Add void* 
+	* samba/libsmb/clientgen.c (cli_NetServerEnum): Add void*
 	parameter to (*fn)() and void *state parameter.
 	(cli_list): Likewise.
 	(cli_RNetShareEnum): Likewise.  Return int.
