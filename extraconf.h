@@ -59,3 +59,9 @@ the need to embed this logic into configure.in.
 #    undef HAS_CURSES
 #    undef USE_NCURSES
 #endif
+
+#ifndef USE_VFS
+#    undef USE_NETCODE
+#    undef USE_EXT2FSLIB
+#endif
+

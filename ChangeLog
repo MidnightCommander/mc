@@ -1,5 +1,8 @@
 2001-05-29  Pavel Roskin  <proski@gnu.org>
 
+	* extraconf.h [!USE_VFS]: Undefine USE_NETCODE and
+	USE_EXT2FSLIB.
+
 	* extraconf.h: Remove unused HAS_DIRECT_COLOR_ACCESS.
 	* pc/config.h: Likewise.
 
