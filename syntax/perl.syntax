@@ -35,28 +35,9 @@ context default
     keyword $& red/orange
     keyword $` red/orange
     keyword $' red/orange
-    keyword $+ red/orange
-    keyword $11 red/orange
-    keyword $12 red/orange
-    keyword $13 red/orange
-    keyword $14 red/orange
-    keyword $15 red/orange
-    keyword $16 red/orange
-    keyword $17 red/orange
-    keyword $18 red/orange
-    keyword $19 red/orange
-    keyword $20 red/orange
-    keyword $10 red/orange
-    keyword $1 red/orange
-    keyword $2 red/orange
-    keyword $3 red/orange
-    keyword $4 red/orange
-    keyword $5 red/orange
-    keyword $6 red/orange
-    keyword $7 red/orange
-    keyword $8 red/orange
-    keyword $9 red/orange
-    keyword $0 red/orange
+    keyword $\+ red/orange
+    keyword $\{0123456789\}\{0123456789\} red/orange
+    keyword $\{0123456789\} red/orange
 
     keyword $^A red/orange
     keyword $^D red/orange
@@ -78,12 +59,6 @@ context default
     keyword @OVERLOAD red/orange
     keyword @SIG red/orange
 
-    keyword $ brightgreen/15
-    keyword & brightmagenta/19
-    keyword % brightcyan/17
-    keyword @ white/21
-    keyword \\" brightred/18
-    keyword \\' brightred/18
 
     keyword <+> brightred/18
     keyword -> yellow/24
@@ -98,6 +73,9 @@ context default
     keyword = yellow/24
     keyword != yellow/24
     keyword == yellow/24
+    keyword && yellow/24
+    keyword || yellow/24
+    keyword ! yellow/24
     keyword whole ge yellow/24
     keyword whole le yellow/24
     keyword whole gt yellow/24
@@ -123,6 +101,13 @@ context default
     keyword whole STDERR brightred/18
     keyword whole STDARGV brightred/18
     keyword whole DATA brightred/18
+
+    keyword & brightmagenta/19
+    keyword wholeright $+ brightgreen/PaleGreen
+    keyword wholeright %+ brightcyan/17
+    keyword wholeright @+ white/21
+    keyword \\" brightred/18
+    keyword \\' brightred/18
 
     keyword whole do magenta/23
     keyword whole if magenta/23
@@ -351,6 +336,7 @@ context default
 
 context exclusive whole <\[\s\\\]EOF EOF green/6
 context # \n brown/22
+    spellcheck
 context linestart = =cut brown/22
 context " " green/6
     keyword \\" brightgreen/16
@@ -363,5 +349,4 @@ context exclusive ` ` white/26 black/0
 
 context whole __END__ guacomale_pudding white/26 black/0
 
-###############################################################################
 

@@ -1,5 +1,6 @@
 
 context default
+    spellcheck
     keyword \\fP brightgreen/6
     keyword \\fR brightgreen/6
     keyword \\fB brightgreen/6
@@ -200,16 +201,30 @@ context default
     keyword linestart .i cyan/5
 
 context exclusive linestart .SH \n brightred/18
+    keyword \\fB*\\fP magenta/23
+    keyword \\fI*\\fP yellow/24
+    spellcheck
 context exclusive linestart .TH \n brightred/18
+    keyword \\fB*\\fP magenta/23
+    keyword \\fI*\\fP yellow/24
+    spellcheck
 context exclusive linestart .B \n magenta/23
+    keyword \\fI*\\fP yellow/24
+    spellcheck
 context exclusive linestart .I \n yellow/24
+    keyword \\fB*\\fP magenta/23
+    spellcheck
 context exclusive linestart .nf linestart .fi green/15
+    keyword \\fB*\\fP magenta/23
+    keyword \\fI*\\fP yellow/24
+    spellcheck
 
 # font changes should end in a \fP
-context exclusive \\fB \\fP magenta/23
-context exclusive \\fI \\fP yellow/24
+context exclusive \\fB \\f\{PR\} magenta/23
+    spellcheck
+context exclusive \\fI \\f\{PR\} yellow/24
+    spellcheck
 context linestart .\\" \n brown/22
+    spellcheck
 
-###############################################################################
-# Assumes you've set a dark background, e.g. navy blue.
 

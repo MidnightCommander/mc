@@ -2,6 +2,16 @@ context default
 wholechars left \\ 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
+    spellcheck
+
+    keyword whole {\\it brightgreen/6
+    keyword } brightgreen/6
+    keyword whole {\\bf brightgreen/6
+    keyword } brightgreen/6
+    keyword { brightgreen/6
+
+    keyword whole \\$ yellow/24
+
 # type style
     keyword whole \\tiny yellow/24
     keyword whole \\scriptsize yellow/24
@@ -15,21 +25,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword whole \\Huge yellow/24
 
 # accents and symbols
-    keyword whole \\`{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\'{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\^{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\"{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\~{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\={\[aeiouAEIOU\]} yellow/24
-    keyword whole \\.{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\u{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\v{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\H{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\t{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\c{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\d{\[aeiouAEIOU\]} yellow/24
-    keyword whole \\b{\[aeiouAEIOU\]} yellow/24
-
+    keyword whole \\\{`'^"~=.uvHtcdb\}{\{aeiouAEIOU\}} yellow/24
     keyword whole \\dag yellow/24
     keyword whole \\ddag yellow/24
     keyword whole \\S yellow/24
@@ -68,7 +64,9 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword whole \\item yellow/24
     keyword whole \\\\ yellow/24
     keyword \\\s yellow/24 black/0
+    keyword \\@ yellow/24 black/0
     keyword %% yellow/24
+    keyword \\% yellow/24
 
 # docuement and page styles    
     keyword whole \\documentstyle[*]{*} yellow/20
@@ -109,7 +107,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword whole \\newpage yellow/24
     keyword whole \\clearpage yellow/24
 
-# defintiions
+# definitions
     keyword \\newcommand{*}[*] cyan/5
     keyword \\newcommand{*} cyan/5
     keyword \\newenvironment{*}[*]{*} cyan/5
@@ -120,6 +118,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 # begins and ends
     keyword \\begin{document} brightred/14
     keyword \\begin{equation} brightred/14
+    keyword \\begin{displaymath} brightred/14
     keyword \\begin{eqnarray} brightred/14
     keyword \\begin{quote} brightred/14
     keyword \\begin{quotation} brightred/14
@@ -137,6 +136,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
     keyword \\end{document} brightred/14
     keyword \\end{equation} brightred/14
+    keyword \\end{displaymath} brightred/14
     keyword \\end{eqnarray} brightred/14
     keyword \\end{quote} brightred/14
     keyword \\end{quotation} brightred/14
@@ -158,15 +158,103 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
     keyword \\theorem{*}{*} yellow/24
 
 # if all else fails
+    keyword whole \\begin white/26
+    keyword whole \\+[*][*]{*}{*}{*} brightcyan/17
+    keyword whole \\+[*][*]{*}{*} brightcyan/17
     keyword whole \\+[*]{*}{*}{*} brightcyan/17
     keyword whole \\+[*]{*}{*} brightcyan/17
+    keyword whole \\+[*]{*} brightcyan/17
     keyword whole \\+{*}{*}{*}{*} brightcyan/17
     keyword whole \\+{*}{*}{*} brightcyan/17
     keyword whole \\+{*}{*} brightcyan/17
     keyword whole \\+{*} brightcyan/17
-    keyword \\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]\n brightcyan/17
-    keyword \\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]\s brightcyan/17
-    keyword \\\[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\]\t brightcyan/17
+    keyword whole \\+ brightcyan/17
+
+context exclusive whole {\\bf } brightmagenta/13
+    keyword whole \\tiny yellow/24
+    keyword whole \\scriptsize yellow/24
+    keyword whole \\footnotesize yellow/24
+    keyword whole \\small yellow/24
+    keyword whole \\normalsize yellow/24
+    keyword whole \\large yellow/24
+    keyword whole \\Large yellow/24
+    keyword whole \\LARGE yellow/24
+    keyword whole \\huge yellow/24
+    keyword whole \\Huge yellow/24
+    keyword whole \\\{`'^"~=.uvHtcdb\}{\{aeiouAEIOU\}} yellow/24
+    keyword whole \\dag yellow/24
+    keyword whole \\ddag yellow/24
+    keyword whole \\S yellow/24
+    keyword whole \\P yellow/24
+    keyword whole \\copyright yellow/24
+    keyword whole \\pounds yellow/24
+    keyword whole \\\\ yellow/24
+    keyword \\\s yellow/24 black/0
+    keyword \\@ yellow/24 black/0
+    keyword %% yellow/24
+    keyword whole \\label{*} yellow/24
+    keyword whole \\ref{*} yellow/24
+    keyword whole \\bibitem[*]{*} yellow/24
+    keyword whole \\bibitem{*} yellow/24
+    keyword whole \\cite[*]{*} yellow/24
+    keyword whole \\cite{*} yellow/24
+    keyword whole \\[+] yellow/24
+    keyword whole \\- yellow/24
+    keyword whole \\sloppy yellow/24
+    keyword whole \\+[*][*]{*}{*}{*} brightcyan/17
+    keyword whole \\+[*][*]{*}{*} brightcyan/17
+    keyword whole \\+[*]{*}{*}{*} brightcyan/17
+    keyword whole \\+[*]{*}{*} brightcyan/17
+    keyword whole \\+[*]{*} brightcyan/17
+    keyword whole \\+{*}{*}{*}{*} brightcyan/17
+    keyword whole \\+{*}{*}{*} brightcyan/17
+    keyword whole \\+{*}{*} brightcyan/17
+    keyword whole \\+{*} brightcyan/17
+    keyword whole \\+ brightcyan/17
+
+context exclusive whole {\\it } magenta/23
+    keyword whole \\tiny yellow/24
+    keyword whole \\scriptsize yellow/24
+    keyword whole \\footnotesize yellow/24
+    keyword whole \\small yellow/24
+    keyword whole \\normalsize yellow/24
+    keyword whole \\large yellow/24
+    keyword whole \\Large yellow/24
+    keyword whole \\LARGE yellow/24
+    keyword whole \\huge yellow/24
+    keyword whole \\Huge yellow/24
+    keyword whole \\\{`'^"~=.uvHtcdb\}{\{aeiouAEIOU\}} yellow/24
+    keyword whole \\dag yellow/24
+    keyword whole \\ddag yellow/24
+    keyword whole \\S yellow/24
+    keyword whole \\P yellow/24
+    keyword whole \\copyright yellow/24
+    keyword whole \\pounds yellow/24
+    keyword whole \\\\ yellow/24
+    keyword \\\s yellow/24 black/0
+    keyword \\@ yellow/24 black/0
+    keyword %% yellow/24
+    keyword whole \\label{*} yellow/24
+    keyword whole \\ref{*} yellow/24
+    keyword whole \\bibitem[*]{*} yellow/24
+    keyword whole \\bibitem{*} yellow/24
+    keyword whole \\cite[*]{*} yellow/24
+    keyword whole \\cite{*} yellow/24
+    keyword whole \\[+] yellow/24
+    keyword whole \\- yellow/24
+    keyword whole \\sloppy yellow/24
+    keyword whole \\+[*][*]{*}{*}{*} brightcyan/17
+    keyword whole \\+[*][*]{*}{*} brightcyan/17
+    keyword whole \\+[*]{*}{*}{*} brightcyan/17
+    keyword whole \\+[*]{*}{*} brightcyan/17
+    keyword whole \\+[*]{*} brightcyan/17
+    keyword whole \\+{*}{*}{*}{*} brightcyan/17
+    keyword whole \\+{*}{*}{*} brightcyan/17
+    keyword whole \\+{*}{*} brightcyan/17
+    keyword whole \\+{*} brightcyan/17
+    keyword whole \\+ brightcyan/17
+
+
 
 context \\pagenumbering{ } yellow/20
     keyword arabic brightcyan/17
@@ -180,8 +268,6 @@ context % \n brown/22
 # mathematical formulas
 context $ $ brightgreen/6
 context exclusive \\begin{equation} \\end{equation} brightgreen/6
+context exclusive \\begin{displaymath} \\end{displaymath} brightgreen/6
 context exclusive \\begin{eqnarray} \\end{eqnarray} brightgreen/6
-
-
-###############################################################################
 

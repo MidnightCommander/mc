@@ -2,6 +2,7 @@
 context default
     keyword \s+() brightmagenta/23
     keyword \t+() brightmagenta/23
+    spellcheck
 
 context linestart \t\* : brightcyan/17
 context linestart \s\s\s\s\s\s\s\s\* : brightcyan/17
@@ -25,6 +26,4 @@ context linestart Sat\s+\s+\s+\s \n     yellow/24
 context linestart Sun\s+\s+\s+\s \n     yellow/24
     keyword <+@+> 			brightred/19
 
-
-###############################################################################
 

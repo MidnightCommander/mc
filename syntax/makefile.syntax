@@ -19,6 +19,7 @@ context default
     keyword @+@ brightmagenta/23 black/0
 
 context linestart # \n brown/22
+    spellcheck
     keyword whole @+@ brightmagenta/23 black/0
     keyword @+@ brightmagenta/23 black/0
 
@@ -38,6 +39,5 @@ context exclusive linestart \t \n
     keyword whole @+@ brightmagenta/23 black/0
     keyword @+@ brightmagenta/23 black/0
 
-###############################################################################
 
 

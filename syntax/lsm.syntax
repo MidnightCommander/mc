@@ -1,5 +1,6 @@
 
 context default
+    spellcheck
     keyword linestart Begin3		brightmagenta/20
     keyword linestart Title:\s\s\s\s\s\s\s\s\s\s	red/9  yellow/24
     keyword linestart Version:\s\s\s\s\s\s\s\s	red/9  yellow/24

@@ -39,85 +39,13 @@ context default
     keyword $! brightred/18
     keyword $_ brightred/18
 
-    keyword wholeright $\[0123456789\]0 brightred/18
-    keyword wholeright $\[0123456789\]1 brightred/18
-    keyword wholeright $\[0123456789\]2 brightred/18
-    keyword wholeright $\[0123456789\]3 brightred/18
-    keyword wholeright $\[0123456789\]4 brightred/18
-    keyword wholeright $\[0123456789\]5 brightred/18
-    keyword wholeright $\[0123456789\]6 brightred/18
-    keyword wholeright $\[0123456789\]7 brightred/18
-    keyword wholeright $\[0123456789\]8 brightred/18
-    keyword wholeright $\[0123456789\]9 brightred/18
+    keyword wholeright $\[0123456789\] brightred/18
 
-    keyword wholeright $+A brightgreen/16
-    keyword wholeright $+B brightgreen/16
-    keyword wholeright $+C brightgreen/16
-    keyword wholeright $+D brightgreen/16
-    keyword wholeright $+E brightgreen/16
-    keyword wholeright $+F brightgreen/16
-    keyword wholeright $+G brightgreen/16
-    keyword wholeright $+H brightgreen/16
-    keyword wholeright $+I brightgreen/16
-    keyword wholeright $+J brightgreen/16
-    keyword wholeright $+K brightgreen/16
-    keyword wholeright $+L brightgreen/16
-    keyword wholeright $+M brightgreen/16
-    keyword wholeright $+N brightgreen/16
-    keyword wholeright $+O brightgreen/16
-    keyword wholeright $+P brightgreen/16
-    keyword wholeright $+Q brightgreen/16
-    keyword wholeright $+R brightgreen/16
-    keyword wholeright $+S brightgreen/16
-    keyword wholeright $+T brightgreen/16
-    keyword wholeright $+U brightgreen/16
-    keyword wholeright $+V brightgreen/16
-    keyword wholeright $+W brightgreen/16
-    keyword wholeright $+X brightgreen/16
-    keyword wholeright $+Y brightgreen/16
-    keyword wholeright $+Z brightgreen/16
-
-    keyword wholeright $+a brightgreen/16
-    keyword wholeright $+b brightgreen/16
-    keyword wholeright $+c brightgreen/16
-    keyword wholeright $+d brightgreen/16
-    keyword wholeright $+e brightgreen/16
-    keyword wholeright $+f brightgreen/16
-    keyword wholeright $+g brightgreen/16
-    keyword wholeright $+h brightgreen/16
-    keyword wholeright $+i brightgreen/16
-    keyword wholeright $+j brightgreen/16
-    keyword wholeright $+k brightgreen/16
-    keyword wholeright $+l brightgreen/16
-    keyword wholeright $+m brightgreen/16
-    keyword wholeright $+n brightgreen/16
-    keyword wholeright $+o brightgreen/16
-    keyword wholeright $+p brightgreen/16
-    keyword wholeright $+q brightgreen/16
-    keyword wholeright $+r brightgreen/16
-    keyword wholeright $+s brightgreen/16
-    keyword wholeright $+t brightgreen/16
-    keyword wholeright $+u brightgreen/16
-    keyword wholeright $+v brightgreen/16
-    keyword wholeright $+w brightgreen/16
-    keyword wholeright $+x brightgreen/16
-    keyword wholeright $+y brightgreen/16
-    keyword wholeright $+z brightgreen/16
-
-    keyword wholeright $+0 brightgreen/16
-    keyword wholeright $+1 brightgreen/16
-    keyword wholeright $+2 brightgreen/16
-    keyword wholeright $+3 brightgreen/16
-    keyword wholeright $+4 brightgreen/16
-    keyword wholeright $+5 brightgreen/16
-    keyword wholeright $+6 brightgreen/16
-    keyword wholeright $+7 brightgreen/16
-    keyword wholeright $+8 brightgreen/16
-    keyword wholeright $+9 brightgreen/16
+    keyword wholeright $+ brightgreen/16
 
     keyword $ brightgreen/16
 
-    keyword wholeleft function*() brightblue/11
+    keyword wholeleft linestart function* brightblue/11
 
 wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._
@@ -215,6 +143,7 @@ wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
 
 context # \n brown/22
+    spellcheck
 
 context exclusive whole <\[\s\\\]EOF EOF green/6
 
@@ -237,81 +166,9 @@ context " " green/6
     keyword $$ brightred/18
     keyword $! brightred/18
     keyword $_ brightred/18
-    keyword wholeright $\[0123456789\]0 brightred/18
-    keyword wholeright $\[0123456789\]1 brightred/18
-    keyword wholeright $\[0123456789\]2 brightred/18
-    keyword wholeright $\[0123456789\]3 brightred/18
-    keyword wholeright $\[0123456789\]4 brightred/18
-    keyword wholeright $\[0123456789\]5 brightred/18
-    keyword wholeright $\[0123456789\]6 brightred/18
-    keyword wholeright $\[0123456789\]7 brightred/18
-    keyword wholeright $\[0123456789\]8 brightred/18
-    keyword wholeright $\[0123456789\]9 brightred/18
+    keyword wholeright $\[0123456789\] brightred/18
 
-    keyword wholeright $+A brightgreen/16
-    keyword wholeright $+B brightgreen/16
-    keyword wholeright $+C brightgreen/16
-    keyword wholeright $+D brightgreen/16
-    keyword wholeright $+E brightgreen/16
-    keyword wholeright $+F brightgreen/16
-    keyword wholeright $+G brightgreen/16
-    keyword wholeright $+H brightgreen/16
-    keyword wholeright $+I brightgreen/16
-    keyword wholeright $+J brightgreen/16
-    keyword wholeright $+K brightgreen/16
-    keyword wholeright $+L brightgreen/16
-    keyword wholeright $+M brightgreen/16
-    keyword wholeright $+N brightgreen/16
-    keyword wholeright $+O brightgreen/16
-    keyword wholeright $+P brightgreen/16
-    keyword wholeright $+Q brightgreen/16
-    keyword wholeright $+R brightgreen/16
-    keyword wholeright $+S brightgreen/16
-    keyword wholeright $+T brightgreen/16
-    keyword wholeright $+U brightgreen/16
-    keyword wholeright $+V brightgreen/16
-    keyword wholeright $+W brightgreen/16
-    keyword wholeright $+X brightgreen/16
-    keyword wholeright $+Y brightgreen/16
-    keyword wholeright $+Z brightgreen/16
-
-    keyword wholeright $+a brightgreen/16
-    keyword wholeright $+b brightgreen/16
-    keyword wholeright $+c brightgreen/16
-    keyword wholeright $+d brightgreen/16
-    keyword wholeright $+e brightgreen/16
-    keyword wholeright $+f brightgreen/16
-    keyword wholeright $+g brightgreen/16
-    keyword wholeright $+h brightgreen/16
-    keyword wholeright $+i brightgreen/16
-    keyword wholeright $+j brightgreen/16
-    keyword wholeright $+k brightgreen/16
-    keyword wholeright $+l brightgreen/16
-    keyword wholeright $+m brightgreen/16
-    keyword wholeright $+n brightgreen/16
-    keyword wholeright $+o brightgreen/16
-    keyword wholeright $+p brightgreen/16
-    keyword wholeright $+q brightgreen/16
-    keyword wholeright $+r brightgreen/16
-    keyword wholeright $+s brightgreen/16
-    keyword wholeright $+t brightgreen/16
-    keyword wholeright $+u brightgreen/16
-    keyword wholeright $+v brightgreen/16
-    keyword wholeright $+w brightgreen/16
-    keyword wholeright $+x brightgreen/16
-    keyword wholeright $+y brightgreen/16
-    keyword wholeright $+z brightgreen/16
-
-    keyword wholeright $+0 brightgreen/16
-    keyword wholeright $+1 brightgreen/16
-    keyword wholeright $+2 brightgreen/16
-    keyword wholeright $+3 brightgreen/16
-    keyword wholeright $+4 brightgreen/16
-    keyword wholeright $+5 brightgreen/16
-    keyword wholeright $+6 brightgreen/16
-    keyword wholeright $+7 brightgreen/16
-    keyword wholeright $+8 brightgreen/16
-    keyword wholeright $+9 brightgreen/16
+    keyword wholeright $+ brightgreen/16
 
     keyword $ brightgreen/16
 
@@ -333,81 +190,9 @@ context exclusive ` ` white/26 black/0
     keyword $! brightred/18
     keyword $_ brightred/18
 
-    keyword wholeright $\[0123456789\]0 brightred/18
-    keyword wholeright $\[0123456789\]1 brightred/18
-    keyword wholeright $\[0123456789\]2 brightred/18
-    keyword wholeright $\[0123456789\]3 brightred/18
-    keyword wholeright $\[0123456789\]4 brightred/18
-    keyword wholeright $\[0123456789\]5 brightred/18
-    keyword wholeright $\[0123456789\]6 brightred/18
-    keyword wholeright $\[0123456789\]7 brightred/18
-    keyword wholeright $\[0123456789\]8 brightred/18
-    keyword wholeright $\[0123456789\]9 brightred/18
+    keyword wholeright $\[0123456789\] brightred/18
 
-    keyword wholeright $+A brightgreen/16
-    keyword wholeright $+B brightgreen/16
-    keyword wholeright $+C brightgreen/16
-    keyword wholeright $+D brightgreen/16
-    keyword wholeright $+E brightgreen/16
-    keyword wholeright $+F brightgreen/16
-    keyword wholeright $+G brightgreen/16
-    keyword wholeright $+H brightgreen/16
-    keyword wholeright $+I brightgreen/16
-    keyword wholeright $+J brightgreen/16
-    keyword wholeright $+K brightgreen/16
-    keyword wholeright $+L brightgreen/16
-    keyword wholeright $+M brightgreen/16
-    keyword wholeright $+N brightgreen/16
-    keyword wholeright $+O brightgreen/16
-    keyword wholeright $+P brightgreen/16
-    keyword wholeright $+Q brightgreen/16
-    keyword wholeright $+R brightgreen/16
-    keyword wholeright $+S brightgreen/16
-    keyword wholeright $+T brightgreen/16
-    keyword wholeright $+U brightgreen/16
-    keyword wholeright $+V brightgreen/16
-    keyword wholeright $+W brightgreen/16
-    keyword wholeright $+X brightgreen/16
-    keyword wholeright $+Y brightgreen/16
-    keyword wholeright $+Z brightgreen/16
-
-    keyword wholeright $+a brightgreen/16
-    keyword wholeright $+b brightgreen/16
-    keyword wholeright $+c brightgreen/16
-    keyword wholeright $+d brightgreen/16
-    keyword wholeright $+e brightgreen/16
-    keyword wholeright $+f brightgreen/16
-    keyword wholeright $+g brightgreen/16
-    keyword wholeright $+h brightgreen/16
-    keyword wholeright $+i brightgreen/16
-    keyword wholeright $+j brightgreen/16
-    keyword wholeright $+k brightgreen/16
-    keyword wholeright $+l brightgreen/16
-    keyword wholeright $+m brightgreen/16
-    keyword wholeright $+n brightgreen/16
-    keyword wholeright $+o brightgreen/16
-    keyword wholeright $+p brightgreen/16
-    keyword wholeright $+q brightgreen/16
-    keyword wholeright $+r brightgreen/16
-    keyword wholeright $+s brightgreen/16
-    keyword wholeright $+t brightgreen/16
-    keyword wholeright $+u brightgreen/16
-    keyword wholeright $+v brightgreen/16
-    keyword wholeright $+w brightgreen/16
-    keyword wholeright $+x brightgreen/16
-    keyword wholeright $+y brightgreen/16
-    keyword wholeright $+z brightgreen/16
-
-    keyword wholeright $+0 brightgreen/16
-    keyword wholeright $+1 brightgreen/16
-    keyword wholeright $+2 brightgreen/16
-    keyword wholeright $+3 brightgreen/16
-    keyword wholeright $+4 brightgreen/16
-    keyword wholeright $+5 brightgreen/16
-    keyword wholeright $+6 brightgreen/16
-    keyword wholeright $+7 brightgreen/16
-    keyword wholeright $+8 brightgreen/16
-    keyword wholeright $+9 brightgreen/16
+    keyword wholeright $+ brightgreen/16
 
     keyword $ brightgreen/16
 
@@ -503,5 +288,4 @@ wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-.
     keyword whole zcat cyan/14
     keyword whole zsh cyan/14
 
-###############################################################################
 

@@ -80,35 +80,19 @@ context exclusive (\* \*) brown/22
     keyword <+> brown/22
 
 context " " brightcyan/8
-
     keyword \\" brightmagenta/23
+    keyword \\n brightmagenta/23
     keyword %% brightmagenta/23
-
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]e brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]E brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]f brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]g brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]G brightmagenta/23
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]d brightmagenta/23
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]i brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]o brightmagenta/23
-    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]u brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]x brightmagenta/23
-    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]X brightmagenta/23
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightmagenta/23
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightmagenta/23
     keyword %\[hl\]n brightmagenta/23
     keyword %\[.\]\[0123456789\]s brightmagenta/23
     keyword %[*] brightmagenta/23
     keyword %c brightmagenta/23
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightmagenta/23
     keyword \\\\ brightmagenta/23
     keyword \\' brightmagenta/23
-    keyword \\a brightmagenta/23
-    keyword \\b brightmagenta/23
-    keyword \\t brightmagenta/23
-    keyword \\n brightmagenta/23
-    keyword \\v brightmagenta/23
-    keyword \\f brightmagenta/23
-    keyword \\r brightmagenta/23
-    keyword \\0 brightmagenta/23
+    keyword \\\{abtnvfr\} brightmagenta/23
 
 
 ###################################################################################

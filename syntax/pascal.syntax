@@ -1,3 +1,5 @@
+# Pascal (BP7 IDE alike)
+
 context default yellow/24
     keyword whole absolute white/25
     keyword whole and white/25
@@ -106,7 +108,7 @@ context (\* \*) brown/22
 #    keyword \[ABCDEFGHIJKLMNOPQRSTUVWXYZ\]\[-\+\] brightgreen/16
 #    keyword $* brightgreen/16
 context { } lightgray/22
+    spellcheck
 
 
-###############################################################################
 
