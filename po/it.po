@@ -1466,7 +1466,7 @@ msgstr " Impossibile entrare in %s "
 
 #: src/cmd.c:1312
 msgid " Enter machine name (F1 for details): "
-msgstr " Inserire nome macchina (F1 per aiuto e dettagli): "
+msgstr " Inserire nome macchina (F1 per i dettagli): "
 
 #: src/cmd.c:1317 src/widget.c:1045
 msgid " Link to a remote machine "
@@ -1478,7 +1478,7 @@ msgstr " Connessione FTP "
 
 #: src/cmd.c:1330
 msgid " Shell link to machine "
-msgstr " Collegamento Shell alla macchina "
+msgstr " Connessione Shell alla macchina "
 
 #: src/cmd.c:1337 src/widget.c:1047
 msgid " SMB link to machine "
@@ -1490,7 +1490,7 @@ msgstr " Configurazione del routing "
 
 #: src/cmd.c:1349
 msgid " Enter host name to use as a source routing hop: "
-msgstr " Inserire nome host da usare come routing hop: "
+msgstr " Inserire nome host da usare come source routing hop: "
 
 #: src/cmd.c:1357
 msgid " Host name "
@@ -2860,7 +2860,7 @@ msgstr "&Filtro"
 
 #: src/main.c:963 src/main.c:990
 msgid "&Network link..."
-msgstr "&Connessione rete..."
+msgstr "&Connessione di rete..."
 
 #: src/main.c:965 src/main.c:992
 msgid "FT&P link..."
@@ -2868,7 +2868,7 @@ msgstr "Connessione FT&P..."
 
 #: src/main.c:966 src/main.c:993
 msgid "S&hell link..."
-msgstr "Collegamento S&hell..."
+msgstr "Connessione S&hell..."
 
 #: src/main.c:968 src/main.c:995
 msgid "SM&B link..."
@@ -4702,12 +4702,12 @@ msgstr " Autenticazione fallita "
 #: vfs/smbfs.c:1585
 #, c-format
 msgid " Error %s creating directory %s "
-msgstr " %s creazione dir %s "
+msgstr " Errore %s nella creazione dir %s "
 
 #: vfs/smbfs.c:1608
 #, c-format
 msgid " Error %s removing directory %s "
-msgstr " %s rimozione dir %s "
+msgstr " Errore %s nella rimozione dir %s "
 
 #: vfs/smbfs.c:1712 vfs/smbfs.c:1732
 #, c-format
