@@ -82,7 +82,6 @@ extern int alarm_colors[4];
 #define EDITOR_NORMAL_COLOR          BEST_COLOR (EDITOR_NORMAL_COLOR_INDEX, 0)
 #define EDITOR_BOLD_COLOR            BEST_COLOR (35, A_BOLD)
 #define EDITOR_MARKED_COLOR          BEST_COLOR (36, A_REVERSE)
-#define EDITOR_UNDERLINED_COLOR      VIEW_UNDERLINED_COLOR
 
 #ifdef HAVE_SLANG
 #   define CTYPE char *
