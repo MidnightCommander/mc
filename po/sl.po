@@ -506,7 +506,7 @@ msgstr "Namizje"
 #. Create the link to the user's home directory so that he will have an icon
 #: gnome/gdesktop-init.c:146
 msgid "Home directory"
-msgstr "Domaè imenik"
+msgstr "Domaèi imenik"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -1572,7 +1572,7 @@ msgstr "Dom"
 
 #: gnome/gscreen.c:2288
 msgid "Go to your home directory"
-msgstr "Pojdi v va¹ domaè imenik"
+msgstr "Pojdi v va¹ domaèi imenik"
 
 #: gnome/gscreen.c:2428
 msgid "Location:"
