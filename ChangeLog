@@ -1,3 +1,12 @@
+2005-02-26  Miguel de Icaza  <miguel@novell.com>
+
+	* doc/mc.1.in: Replace M-char with Alt-char everywhere, which is
+	simpler to understand.
+
+2005-01-29  Miguel de Icaza  <miguel@novell.com>
+
+	* configure.ac: Check for getgrouplist API call.
+
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
 	* NEWS: Added the changes between mc-4.6.1-pre3 and now.

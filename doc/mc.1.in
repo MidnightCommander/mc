@@ -209,7 +209,7 @@ use the following abbreviations:
 means hold the Control key while typing the character <chr>.
 Thus C-f would be: hold the Control key and type f.
 .TP
-.B M-<chr>
+.B Alt-<chr>
 means hold the Meta or Alt key down while typing <chr>.
 If there is no Meta or Alt key, type
 .IR ESC , 
@@ -317,20 +317,20 @@ add directory to hotlist
 .\"Hotlist"
 command.
 .TP
-.B M-!
+.B Alt-!
 executes the Filtered view command, described in the
 .\"LINK2"
 view command\&.
 .\"Internal File Viewer"
 .TP
-.B M-?
+.B Alt-?
 executes the
 .\"LINK2"
 Find file
 .\"Find File"
 command.
 .TP
-.B M-c
+.B Alt-c
 pops up the
 .\"LINK2"
 quick cd
@@ -370,11 +370,11 @@ to tag files you may use the Insert key (the kich1 terminfo sequence)
 or the C-t (Control-t) sequence. To untag files, just retag a tagged
 file.
 .TP
-.B M-g, M-r, M-j
+.B Alt-g, Alt-r, Alt-j
 used to select the top file in a panel, the middle file and the bottom one,
 respectively.
 .TP
-.B C-s, M-s
+.B C-s, Alt-s
 start a filename search in the directory listing. When the search is
 active, the user input will be added to the search string instead of
 the command line. If the
@@ -388,7 +388,7 @@ or
 keys can be used to correct typing mistakes. If C-s is pressed
 again, the next match is searched for.
 .TP
-.B M-t
+.B Alt-t
 toggle the current display listing to show the next display listing
 mode.  With this it is possible to quickly switch from long listing
 to regular listing and the user defined listing mode.
@@ -424,19 +424,23 @@ move the selection bar to the previous entry in the panel.
 .B down-key, C-n
 move the selection bar to the next entry in the panel.
 .TP
-.B home, a1, M-<
+.B home, a1, Alt-<
 move the selection bar to the first entry in the panel.
 .TP
-.B end, c1, M->
+.B end, c1, Alt->
 move the selection bar to the last entry in the panel.
 .TP
 .B next-page, C-v
 move the selection bar one page down.
 .TP
-.B prev-page, M-v
+.B prev-page, Alt-v
 move the selection bar one page up.
 .TP
-.B M-o
+.B Alt-o
+If the currently selected file is a directory, load that directory on
+the other panel and moves the selection to the next file.
+.TP
+.B Alt-i
 make the current directory of the current panel also the current
 directory of the other panel.  Put the other panel to the listing mode
 if needed.  If the current panel is panelized, the other panel doesn't
@@ -446,18 +450,18 @@ become panelized.
 only when supported by the terminal: change to ".." and to the currently
 selected directory respectively.
 .TP
-.B M-y
+.B Alt-y
 moves to the previous directory in the history, equivalent to clicking
 the
 .I <
 with the mouse.
 .TP
-.B M-u
+.B Alt-u
 moves to the next directory in the history, equivalent to clicking the
 .I >
 with the mouse.
 .TP
-.B M-S-h, M-H
+.B Alt-Shift-h, Alt-H
 displays the directory history, equivalent to depressing the 'v' with
 the mouse.
 .\"NODE "  Shell Command Line"
@@ -465,17 +469,17 @@ the mouse.
 This section lists keys which are useful to avoid excessive typing when
 entering shell commands.
 .TP
-.B M-Enter
+.B Alt-Enter
 copy the currently selected file name to the command line.
 .TP
 .B C-Enter
-same a M-Enter.  May not work on remote systems and some terminals.
+same a Alt-Enter.  May not work on remote systems and some terminals.
 .TP
-.B C-S-Enter
+.B C-Shift-Enter
 copy the full path name of the currently selected file to the command
 line.  May not work on remote systems and some terminals.
 .TP
-.B M-Tab
+.B Alt-Tab
 does the filename, command, variable, username and hostname
 .\"LINK2"
 completion
@@ -496,11 +500,11 @@ the command line.
 the quote command can be used to insert characters that are otherwise
 interpreted by the Midnight Commander (like the '+' symbol)
 .TP
-.B M-p, M-n
-use these keys to browse through the command history. M-p takes you
-to the last entry, M-n takes you to the next one.
+.B Alt-p, Alt-n
+use these keys to browse through the command history. Alt-p takes you
+to the last entry, Alt-n takes you to the next one.
 .TP
-.B M-h
+.B Alt-h
 displays the history for the current input line.
 .\"NODE "  General Movement Keys"
 .SH "  General Movement Keys"
@@ -517,7 +521,7 @@ moves one line backward.
 .B Down, C-n
 moves one line forward.
 .TP
-.B Prev Page, Page Up, M-v
+.B Prev Page, Page Up, Alt-v
 moves one page up.
 .TP
 .B Next Page, Page Down, C-v
@@ -563,10 +567,10 @@ move the cursor one position left.
 .B C-f, move-right
 move the cursor one position right.
 .TP
-.B M-f
+.B Alt-f
 moves one word forward.
 .TP
-.B M-b
+.B Alt-b
 moves one word backward.
 .TP
 .B C-h, backspace
@@ -582,7 +586,7 @@ sets the mark for cutting.
 copies the text between the cursor and the mark to a kill buffer and
 removes the text from the input line.
 .TP
-.B M-w
+.B Alt-w
 copies the text between the cursor and the mark to a kill buffer.
 .TP
 .B C-y
@@ -591,14 +595,14 @@ yanks back the contents of the kill buffer.
 .B C-k
 kills the text from the cursor to the end of the line.
 .TP
-.B M-p, M-n
-Use these keys to browse through the command history. M-p takes you
-to the last entry, M-n takes you to the next one.
+.B Alt-p, Alt-n
+Use these keys to browse through the command history. Alt-p takes you
+to the last entry, Alt-n takes you to the next one.
 .TP
-.B M-C-h, M-Backspace
+.B Alt-C-h, Alt-Backspace
 delete one word backward.
 .TP
-.B M-Tab
+.B Alt-Tab
 does the filename, command, variable, username and hostname
 .\"LINK2"
 completion
@@ -888,7 +892,7 @@ is undefined, the "view" command is invoked.  If you use Shift-F3
 instead, the viewer will be invoked without doing any formatting or
 preprocessing to the file.
 .PP
-.B Filtered View (M-!)
+.B Filtered View (Alt-!)
 .PP
 This command prompts for a command
 and its arguments (the argument defaults to the currently selected
@@ -922,7 +926,7 @@ Mask copy/rename\&.
 .\"Mask Copy/Rename"
 .PP
 On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing M-b in the dialog
+clicking on the background button (or pressing Alt-b in the dialog
 box).  The
 .\"LINK2"
 Background Jobs
@@ -968,7 +972,7 @@ can press C-c or ESC to abort the operation. For more details look at Copy
 operation above, most of the things are quite similar.
 .PP
 On some systems, it is possible to do the copy in the background by
-clicking on the background button (or pressing M-b in the dialog
+clicking on the background button (or pressing Alt-b in the dialog
 box).  The
 .\"LINK2"
 Background Jobs
@@ -985,7 +989,7 @@ Delete the currently selected file or the tagged files in the
 currently selected panel. During the process, you can press C-c or
 ESC to abort the operation.
 .PP
-.B Quick cd (M-c)
+.B Quick cd (Alt-c)
 Use the
 .\"LINK2"
 quick cd
@@ -1062,7 +1066,7 @@ contents or the date times, it just checks the file size.
 .PP
 The Command history command shows a list of typed commands. The
 selected command is copied to the command line. The command history
-can also be accessed by typing M-p or M-n.
+can also be accessed by typing Alt-p or Alt-n.
 .PP
 The
 .\"LINK2"
@@ -1152,7 +1156,7 @@ Make a new directory below this directory.
 .B F8 (Delete).
 Delete this directory from the file system.
 .PP
-.B C-s, M-s.
+.B C-s, Alt-s.
 Search the next directory matching the search string. If there is
 no such directory these keys will move one line down.
 .PP
@@ -1694,11 +1698,11 @@ By default the Midnight Commander pops up all possible
 completions
 .\"Completion"
 if the completion is ambiguous only when you press
-.B M-Tab
+.B Alt-Tab
 for the second time.  For the first time, it just completes as much as
 possible and beeps in the case of ambiguity.  Enable this option if you
 want to see all possible completions even after pressing
-.B M-Tab
+.B Alt-Tab
 the first time.
 .PP
 .I Rotating dash.
@@ -2429,7 +2433,7 @@ Exit the internal file viewer.
 .B next-page, space, C-v.
 Scroll one page forward.
 .PP
-.B prev-page, M-v, C-b, backspace.
+.B prev-page, Alt-v, C-b, backspace.
 Scroll one page backward.
 .PP
 .B down-key
@@ -2459,7 +2463,7 @@ Jump to the next file.
 .B C-b
 Jump to the previous file.
 .PP
-.B M-r
+.B Alt-r
 Toggle the ruler.
 .PP
 It's possible to instruct the file viewer how to display a file, look
@@ -2602,7 +2606,7 @@ the current position and you can select with the arrow keys and
 the correct entry.  You can also type the first letters in which the
 possibilities differ to move to a subset of all possibilities and
 complete as much as possible.  If you press
-.B M-Tab
+.B Alt-Tab
 again, only the subset will be shown in the listbox, otherwise the first
 item which matches all the previous characters will be highlighted.  As
 soon as there is no ambiguity, dialog disappears, but you can hide it by
@@ -2614,7 +2618,7 @@ and left and right arrow keys. If
 Complete: show all
 .\"Configuration"
 is disabled, the dialog pops up only if you press
-.B M-Tab
+.B Alt-Tab
 for the second time, for the first time MC just beeps.
 .\"NODE "Virtual File System"
 .SH "Virtual File System"
@@ -3221,7 +3225,7 @@ insert=\\e[Op
 The
 .I complete
 key symbol represents the escape sequences used to invoke the completion
-process, this is invoked with M-tab, but you can define other keys to do
+process, this is invoked with Alt-tab, but you can define other keys to do
 the same work (on those keyboard with tons of nice and unused keys
 everywhere).
 .SH ""
