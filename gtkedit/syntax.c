@@ -1352,8 +1352,8 @@ FILE *upgrade_syntax_file (char *syntax_file)
 	fclose (f);
 	return fopen (syntax_file, "r");
     }
-    memset (line, 0, 79);
-    fread (line, 80, 1, f);
+    memset (line, 0, sizeof (line));
+    fread (line, sizeof (line) - 1, 1, f);
     if (!strstr (line, "syntax rules version"))
 	goto rename_rule_file;
     p = strstr (line, "version") + strlen ("version") + 1;
@@ -1366,9 +1366,9 @@ FILE *upgrade_syntax_file (char *syntax_file)
 	rename (syntax_file, s);
 	unlink (syntax_file);	/* might rename() fail ? */
 #if defined(MIDNIGHT) || defined(GTK)
-	edit_message_dialog (" Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
+	edit_message_dialog (_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. "));
 #else
-	CMessageDialog (0, 20, 20, 0, " Load Syntax Rules ", " Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ");
+	CMessageDialog (0, 20, 20, 0,_(" Load Syntax Rules "), _(" Your syntax rule file is outdated \n A new rule file is being installed. \n Your old rule file has been saved with a .OLD extension. ")); 
 #endif
 	return upgrade_syntax_file (syntax_file);
     }

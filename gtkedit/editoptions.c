@@ -42,8 +42,6 @@ extern int option_syntax_highlighting;
 
 void i18n_translate_array (char *array[])
 {
-    size_t maxlen = 0;
-
     while (*array!=NULL) {
 	*array = _(*array);
         array++;

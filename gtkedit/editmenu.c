@@ -71,14 +71,14 @@ void edit_wrap_cmd ()
 
 void edit_about_cmd ()
 {
-    edit_message_dialog (wedit->mainid, 20, 20, " About ",
-		      "\n"
+    edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
+		      _("\n"
 		      "                Cooledit  v3.11.5\n"
 		      "\n"
 		      " Copyright (C) 1996 the Free Software Foundation\n"
 		      "\n"
 		      "       A user friendly text editor written\n"
-		      "           for the Midnight Commander.\n"
+		      "           for the Midnight Commander.\n")
 	);
 }
 

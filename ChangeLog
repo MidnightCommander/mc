@@ -1,3 +1,7 @@
+	* gtkedit/syntax.c (upgrade_syntax_file): possible buffer overflow
+	  fixed, some messages gettext()ed again here and in 
+	gtkedit/editmenu.c:edit_about_cmd()
+
 2000-03-13  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* doc/mc.sgml (Examples): Fixed documentation, thanx
