@@ -479,8 +479,9 @@ static int help_event (Gpm_Event *event, Widget *w)
 	return 0;
 
     /* The event is relative to the dialog window, adjust it: */
+    event->x -= 2;
     event->y -= 2;
-    
+
     if (event->buttons & GPM_B_RIGHT){
 	currentpoint = startpoint = history [history_ptr].page;
 	selected_item = history [history_ptr].link;
