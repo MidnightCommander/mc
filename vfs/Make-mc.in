@@ -124,7 +124,6 @@ VFSSRCS = \
 	mcserv.c 		\
 	sfs.c 			\
 	shared_tar_ext.c 	\
-	shared_ftp_fish.c	\
 	smbfs.c			\
 	tar.c 			\
 	tcputil.c		\

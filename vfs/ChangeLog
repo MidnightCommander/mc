@@ -1,3 +1,9 @@
+2001-06-06  Pavel Roskin  <proski@gnu.org>
+
+	* shared_ftp_fish.c: Remove.
+	* Make-mc.in: Remove shared_ftp_fish.c.
+	* Makefile.am: Likewise.
+
 2001-06-02  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_canon): s/canonize/canonicalize/.

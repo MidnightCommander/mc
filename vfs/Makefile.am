@@ -34,7 +34,6 @@ libvfs_la_SOURCES = \
 	mcserv.c 		\
 	names.c 		\
 	sfs.c 			\
-	shared_ftp_fish.c	\
 	shared_tar_ext.c 	\
 	tar.c 			\
 	tcputil.c		\
