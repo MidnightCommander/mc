@@ -1,5 +1,9 @@
 2004-08-29  Roland Illig  <roland.illig@gmx.de>
 
+	* background.c (do_background): Fixed file descriptor leak.
+
+2004-08-29  Roland Illig  <roland.illig@gmx.de>
+
 	* Code cleanup: Added const qualifier for variables and
 	function declarations where possible. No functional changes.
 

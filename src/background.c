@@ -116,8 +116,13 @@ do_background (struct FileOpContext *ctx, char *info)
     if (pipe (comm) == -1)
 	return -1;
 
-    if ((pid = fork ()) == -1)
+    if ((pid = fork ()) == -1) {
+    	int saved_errno = errno;
+    	(void) close (comm[0]);
+    	(void) close (comm[1]);
+    	errno = saved_errno;
 	return -1;
+    }
 
     if (pid == 0) {
 	int nullfd;
