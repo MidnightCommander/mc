@@ -1,5 +1,8 @@
 2003-10-29  Pavel Roskin  <proski@gnu.org>
 
+	* acinclude.m4 (MC_UNDELFS_CHECKS): Don't use internal Autoconf
+	variables.
+
 	* configure.in: Rewrite check for mmap() to avoid using internal
 	variables of Autoconf.  Rename the rest of ac_cv_* to mc_cv_*.
 

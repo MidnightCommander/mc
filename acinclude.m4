@@ -7,13 +7,14 @@ dnl    Will set EXT2FS_UNDEL_LIBS to required libraries.
 AC_DEFUN([MC_UNDELFS_CHECKS], [
   ext2fs_undel=no
   EXT2FS_UNDEL_LIBS=
-  AC_CHECK_HEADERS(linux/ext2_fs.h)
-  if test x$ac_cv_header_linux_ext2_fs_h = xyes
-  then
-    AC_CHECK_HEADERS(ext2fs/ext2fs.h, , , [#include <stdio.h>
-#include <linux/ext2_fs.h>])
-    if test x$ac_cv_header_ext2fs_ext2fs_h = xyes
-    then
+  AC_CHECK_HEADERS([linux/ext2_fs.h], [linux_ext2_fs_h=yes])
+  if test x$linux_ext2_fs_h = xyes; then
+    AC_CHECK_HEADERS([ext2fs/ext2fs.h], [ext2fs_ext2fs_h=yes], ,
+		     [
+#include <stdio.h>
+#include <linux/ext2_fs.h>
+		     ])
+    if test x$ext2fs_ext2fs_h = xyes; then
       AC_DEFINE(USE_EXT2FSLIB, 1,
 		[Define to enable undelete support on ext2])
       ext2fs_undel=yes
@@ -21,14 +22,16 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
       AC_CHECK_TYPE(ext2_ino_t, ,
 		    [AC_DEFINE(ext2_ino_t, ino_t,
 			       [Define to ino_t if undefined.])],
-		    [#include <errno.h>
+		    [
+#include <errno.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
 /* asm/types.h defines its own umode_t :-( */
 #undef umode_t
 #include <linux/ext2_fs.h>
-#include <ext2fs/ext2fs.h>])
+#include <ext2fs/ext2fs.h>
+		    ])
     fi
   fi
 ])
