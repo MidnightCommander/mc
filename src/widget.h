@@ -170,6 +170,7 @@ void input_enable_update (WInput *in);
 void input_set_point (WInput *in, int pos);
 void input_show_cursor (WInput *in);
 void assign_text (WInput *in, char *text);
+int input_callback (Dlg_head *h, WInput *in, int Msg, int Par);
 
 /* Labels */
 void label_set_text (WLabel *label, char *text);

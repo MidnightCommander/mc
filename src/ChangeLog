@@ -1,3 +1,10 @@
+2002-09-20  Pavel Roskin  <proski@gnu.org>
+
+	* command.c: Make `command' a standard WInput widget, just
+	change its callback.  Eliminate input_w().  Adjust all
+	dependencies.
+	* widget.c (input_callback): Remove static attribute.
+
 2002-09-19  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (argument_table): Improve help for "+number" - it has

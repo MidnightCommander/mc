@@ -600,7 +600,7 @@ execute (char *command)
 void
 change_panel (void)
 {
-    free_completions (input_w (cmdline));
+    free_completions (cmdline);
     dlg_one_down (midnight_dlg);
 }
 
@@ -767,7 +767,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
 
     /* Success: save previous directory, shutdown status of previous dir */
     strcpy (panel->lwd, olddir);
-    free_completions (input_w (cmdline));
+    free_completions (cmdline);
     
     mc_get_current_wd (panel->cwd, sizeof (panel->cwd) - 2);
 
@@ -888,7 +888,7 @@ int
 maybe_cd (int char_code, int move_up_dir)
 {
     if (navigate_with_arrows){
-	if (!input_w (cmdline)->buffer [0]){
+	if (!cmdline->buffer [0]){
 	    if (!move_up_dir){
 		do_cd ("..", cd_exact);
 		return 1;
@@ -1254,9 +1254,9 @@ static void copy_current_pathname (void)
     if (!command_prompt)
 	return;
 
-    stuff (input_w (cmdline), cpanel->cwd, 0);
+    stuff (cmdline, cpanel->cwd, 0);
     if (cpanel->cwd [strlen (cpanel->cwd) - 1] != PATH_SEP)
-        stuff (input_w (cmdline), PATH_SEP_STR, 0);
+        stuff (cmdline, PATH_SEP_STR, 0);
 }
 
 static void copy_other_pathname (void)
@@ -1267,9 +1267,9 @@ static void copy_other_pathname (void)
     if (!command_prompt)
 	return;
 
-    stuff (input_w (cmdline), opanel->cwd, 0);
+    stuff (cmdline, opanel->cwd, 0);
     if (cpanel->cwd [strlen (opanel->cwd) - 1] != PATH_SEP)
-        stuff (input_w (cmdline), PATH_SEP_STR, 0);
+        stuff (cmdline, PATH_SEP_STR, 0);
 }
 
 static void copy_readlink (WPanel *panel)
@@ -1285,7 +1285,7 @@ static void copy_readlink (WPanel *panel)
 	g_free (p);
 	if (i > 0) {
 	    buffer [i] = 0;
-	    stuff (input_w (cmdline), buffer, 0);
+	    stuff (cmdline, buffer, 0);
 	}
     }
 }
@@ -1315,7 +1315,7 @@ void copy_prog_name (void)
 	tmp = name_quote (tree->selected_ptr->name, 1);
     } else
 	tmp = name_quote (selection (cpanel)->fname, 1);
-    stuff (input_w (cmdline), tmp, 1);
+    stuff (cmdline, tmp, 1);
     g_free (tmp);
 }   
 
@@ -1325,20 +1325,20 @@ static void copy_tagged (WPanel *panel)
 
     if (!command_prompt)
 	return;
-    input_disable_update (input_w (cmdline));
+    input_disable_update (cmdline);
     if (panel->marked){
 	for (i = 0; i < panel->count; i++)
 	    if (panel->dir.list [i].f.marked) {
 	    	char *tmp = name_quote (panel->dir.list [i].fname, 1);
-		stuff (input_w (cmdline), tmp, 1);
+		stuff (cmdline, tmp, 1);
 		g_free (tmp);
 	    }
     } else {
     	char *tmp = name_quote (panel->dir.list [panel->selected].fname, 1);
-	stuff (input_w (cmdline), tmp, 1);
+	stuff (cmdline, tmp, 1);
 	g_free (tmp);
     }
-    input_enable_update (input_w (cmdline));
+    input_enable_update (cmdline);
 }
     
 static void copy_current_tagged (void)
@@ -1704,7 +1704,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 
 	if (id == '\t')
-	    free_completions (input_w (cmdline));
+	    free_completions (cmdline);
 
 	/* On Linux, we can tell the difference */
 	if (id == '\n' && ctrl_pressed ()){
@@ -1712,7 +1712,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	    return MSG_HANDLED;
 	}
 
-	if (id == '\n' && input_w (cmdline)->buffer [0]){
+	if (id == '\n' && cmdline->buffer [0]){
 	    send_message_to (h, (Widget *) cmdline, WIDGET_KEY, id);
 	    return MSG_HANDLED;
 	}
@@ -1735,7 +1735,7 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 		    reverse_selection_cmd ();
 		    return MSG_HANDLED;
 		}
-	    } else if (command_prompt && !strlen (input_w (cmdline)->buffer)) {
+	    } else if (command_prompt && !strlen (cmdline->buffer)) {
 		/* Special treatement '+', '-', '\', '*' only when this is 
 		 * first char on input line
 		 */

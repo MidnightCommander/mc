@@ -632,85 +632,86 @@ panel_do_cols (int index)
     }
 }
 
-void setup_panels (void)
+void
+setup_panels (void)
 {
     int start_y;
     int promptl;		/* the prompt len */
 
-    if (console_flag){
+    if (console_flag) {
 	int minimum;
 	if (output_lines < 0)
 	    output_lines = 0;
 	height = LINES - keybar_visible - command_prompt - menubar_visible
-	         - output_lines - message_visible;
-	if (message_visible && xterm_hintbar && xterm_flag) height++;
+	    - output_lines - message_visible;
+	if (message_visible && xterm_hintbar && xterm_flag)
+	    height++;
 	minimum = MINHEIGHT * (1 + horizontal_split);
-	if (height < minimum){
+	if (height < minimum) {
 	    output_lines -= minimum - height;
 	    height = minimum;
 	}
     } else {
 	height = LINES - menubar_visible - command_prompt -
 	    keybar_visible - message_visible;
-	if (message_visible && xterm_hintbar && xterm_flag) height++;
+	if (message_visible && xterm_hintbar && xterm_flag)
+	    height++;
     }
     check_split ();
     start_y = menubar_visible;
 
     /* The column computing is defered until panel_do_cols */
-    if (horizontal_split){
-	widget_set_size (panels [0].widget, start_y, 0, 
+    if (horizontal_split) {
+	widget_set_size (panels[0].widget, start_y, 0,
 			 first_panel_size, 0);
-			
-	widget_set_size (panels [1].widget, start_y+first_panel_size, 0,
-			 height-first_panel_size, 0);
+
+	widget_set_size (panels[1].widget, start_y + first_panel_size, 0,
+			 height - first_panel_size, 0);
     } else {
 	int first_x = first_panel_size;
 
-	widget_set_size (panels [0].widget, start_y, 0,
-			 height, 0);
+	widget_set_size (panels[0].widget, start_y, 0, height, 0);
 
-	widget_set_size (panels [1].widget, start_y, first_x,
-			 height, 0);
-			
+	widget_set_size (panels[1].widget, start_y, first_x, height, 0);
+
     }
     panel_do_cols (0);
     panel_do_cols (1);
-    
+
     promptl = strlen (prompt);
 
     widget_set_size (&the_menubar->widget, 0, 0, 1, COLS);
 
     if (command_prompt) {
-	    widget_set_size (&cmdline->input.widget,
-			     LINES-1-keybar_visible, promptl,
-			     1, COLS-promptl-(keybar_visible ? 0 : 1));
-	    winput_set_origin (&cmdline->input, promptl, COLS-promptl-(keybar_visible ? 0 : 1));
-	    widget_set_size (&the_prompt->widget,
-			     LINES-1-keybar_visible, 0,
-			     1, promptl);
+	widget_set_size (&cmdline->widget, LINES - 1 - keybar_visible,
+			 promptl, 1,
+			 COLS - promptl - (keybar_visible ? 0 : 1));
+	winput_set_origin (cmdline, promptl,
+			   COLS - promptl - (keybar_visible ? 0 : 1));
+	widget_set_size (&the_prompt->widget, LINES - 1 - keybar_visible,
+			 0, 1, promptl);
     } else {
-	    widget_set_size (&cmdline->input.widget, 0, 0, 0, 0);
-	    winput_set_origin (&cmdline->input, 0, 0);
-	    widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
-    }			     
+	widget_set_size (&cmdline->widget, 0, 0, 0, 0);
+	winput_set_origin (cmdline, 0, 0);
+	widget_set_size (&the_prompt->widget, LINES, COLS, 0, 0);
+    }
 
-    widget_set_size (&the_bar->widget, LINES-1, 0, keybar_visible, COLS);
+    widget_set_size (&the_bar->widget, LINES - 1, 0, keybar_visible, COLS);
     the_bar->visible = keybar_visible;
-    
+
     /* Output window */
-    if (console_flag && output_lines){
-	output_start_y = LINES -command_prompt-keybar_visible-
+    if (console_flag && output_lines) {
+	output_start_y = LINES - command_prompt - keybar_visible -
 	    output_lines;
 	show_console_contents (output_start_y,
-			       LINES-output_lines-keybar_visible-1,
-			       LINES-keybar_visible-1);
-    } 
+			       LINES - output_lines - keybar_visible - 1,
+			       LINES - keybar_visible - 1);
+    }
     if (message_visible && (!xterm_hintbar || !xterm_flag))
-	widget_set_size (&the_hint->widget, height+start_y, 0, 1,COLS);
+	widget_set_size (&the_hint->widget, height + start_y, 0, 1, COLS);
     else
 	widget_set_size (&the_hint->widget, 0, 0, 0, 0);
-    
+
     load_hint ();
 }
 

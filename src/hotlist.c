@@ -419,7 +419,7 @@ l1:
 			struct hotlist *hlp = (struct hotlist*) l_hotlist->current->data;
 			if (hlp->type == HL_TYPE_ENTRY) {
 			    char *tmp = g_strconcat ( "cd ", hlp->directory, NULL);
-			    stuff (input_w (cmdline), tmp, 0);
+			    stuff (cmdline, tmp, 0);
 			    g_free (tmp);
 			    dlg_stop (h);
 			    h->ret_value = B_CANCEL;

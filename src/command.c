@@ -42,7 +42,7 @@
 #include "../vfs/vfs.h"
 
 /* This holds the command line */
-WCommand *cmdline;
+WInput *cmdline;
 
 /*Tries variable substitution, and if a variable CDPATH
 of the form e.g. CDPATH=".:~:/usr" exists, we try then all the paths which
@@ -174,57 +174,61 @@ void do_cd_command (char *cmd)
 }
 
 /* Returns 1 if the we could handle the enter, 0 if not */
-static int enter (WCommand *cmdline)
+static int
+enter (WInput * cmdline)
 {
     Dlg_head *old_dlg;
-    
-    if (command_prompt && strlen (input_w (cmdline)->buffer)){
+
+    if (command_prompt && strlen (cmdline->buffer)) {
 	char *cmd;
 
 	/* Any initial whitespace should be removed at this point */
-	cmd = input_w (cmdline)->buffer;
+	cmd = cmdline->buffer;
 	while (*cmd == ' ' || *cmd == '\t' || *cmd == '\n')
 	    cmd++;
 
-	if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0){
+	if (strncmp (cmd, "cd ", 3) == 0 || strcmp (cmd, "cd") == 0) {
 	    do_cd_command (cmd);
-	    new_input (input_w (cmdline));
+	    new_input (cmdline);
 	    return MSG_HANDLED;
 	} else {
 	    char *command, *s;
 	    int i, j;
 
 	    if (!vfs_current_is_local ()) {
-	        message (1, MSG_ERROR, _(" You can not execute commands on non-local filesystems"));
-	        
+		message (1, MSG_ERROR,
+			 _
+			 (" You can not execute commands on non-local filesystems"));
+
 		return MSG_NOT_HANDLED;
 	    }
 	    command = g_malloc (strlen (cmd) + 1);
-	    command [0] = 0;
-	    for (i = j = 0; i < strlen (cmd); i ++){
-		if (cmd [i] == '%'){
-		    i ++;
-		    s = expand_format (NULL, cmd [i], 1);
-		    command = g_realloc (command, strlen (command) + strlen (s)
-				       + strlen (cmd) - i + 1);
+	    command[0] = 0;
+	    for (i = j = 0; i < strlen (cmd); i++) {
+		if (cmd[i] == '%') {
+		    i++;
+		    s = expand_format (NULL, cmd[i], 1);
+		    command =
+			g_realloc (command, strlen (command) + strlen (s)
+				   + strlen (cmd) - i + 1);
 		    strcat (command, s);
 		    g_free (s);
 		    j = strlen (command);
 		} else {
-		    command [j] = cmd [i];
-		    j ++;
+		    command[j] = cmd[i];
+		    j++;
 		}
-		command [j] = 0;
+		command[j] = 0;
 	    }
 	    old_dlg = current_dlg;
 	    current_dlg = 0;
-	    new_input (input_w (cmdline));
+	    new_input (cmdline);
 	    execute (command);
 	    g_free (command);
-	    
+
 #ifdef HAVE_SUBSHELL_SUPPORT
-	    if (quit & SUBSHELL_EXIT){
-	        quiet_quit_cmd ();
+	    if (quit & SUBSHELL_EXIT) {
+		quiet_quit_cmd ();
 		return MSG_HANDLED;
 	    }
 	    if (use_subshell)
@@ -237,38 +241,34 @@ static int enter (WCommand *cmdline)
     return MSG_HANDLED;
 }
 
-static int command_callback (Dlg_head *h, WCommand *cmd, int msg, int par)
+static int
+command_callback (Dlg_head * h, WInput * cmd, int msg, int par)
 {
-    switch (msg){
+    switch (msg) {
     case WIDGET_FOCUS:
-	/* We refuse the focus always: needed not to unselect the panel */
+	/* Never accept focus, otherwise panels will be unselected */
 	return MSG_NOT_HANDLED;
 
     case WIDGET_KEY:
 	/* Special case: we handle the enter key */
-	if (par == '\n'){
+	if (par == '\n') {
 	    return enter (cmd);
 	}
     }
-    return (*cmd->old_callback)(h, cmd, msg, par);
+    return input_callback (h, cmd, msg, par);
 }
 
-WCommand *command_new (int y, int x, int cols)
+WInput *
+command_new (int y, int x, int cols)
 {
-    WInput *in;
-    WCommand *cmd = g_new (WCommand, 1);
+    WInput *cmd = g_new (WInput, 1);
 
-    in = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
-    cmd->input = *in;
-    g_free (in);
+    cmd = input_new (y, x, DEFAULT_COLOR, cols, "", "cmdline");
 
     /* Add our hooks */
-    cmd->old_callback = (callback_fn) cmd->input.widget.callback;
-    cmd->input.widget.callback = (int (*) (Dlg_head *, void *, int, int))
-    			command_callback;
-    
-    cmd->input.completion_flags |= INPUT_COMPLETE_COMMANDS;
+    cmd->widget.callback = (callback_fn) command_callback;
+    cmd->completion_flags |= INPUT_COMPLETE_COMMANDS;
+
     return cmd;
 }
-
 

@@ -56,7 +56,7 @@
 #include "dlg.h"		/* required by wtools.h */
 #include "widget.h"		/* required by wtools.h */
 #include "wtools.h"		/* listbox */
-#include "command.h"		/* for input_w */
+#include "command.h"		/* for cmdline */
 #include "win.h"		/* do_exit_ca_mode */
 #include "layout.h"		/* get_current/other_type */
 #include "ext.h"		/* regex_command */
@@ -883,27 +883,27 @@ void compare_dirs_cmd (void)
     }
 }
 
-void history_cmd (void)
+void
+history_cmd (void)
 {
     Listbox *listbox;
     Hist *current;
 
-    if (input_w (cmdline)->need_push){
-	if (push_history (input_w (cmdline), input_w (cmdline)->buffer) == 2)
-	    input_w (cmdline)->need_push = 0;
+    if (cmdline->need_push) {
+	if (push_history (cmdline, cmdline->buffer) == 2)
+	    cmdline->need_push = 0;
     }
-    if (!input_w (cmdline)->history){
+    if (!cmdline->history) {
 	message (1, MSG_ERROR, _(" The command history is empty "));
 	return;
     }
-    current = input_w (cmdline)->history;
+    current = cmdline->history;
     while (current->prev)
 	current = current->prev;
     listbox = create_listbox_window (60, 10, _(" Command history "),
 				     "[Command Menu]");
-    while (current){
-	LISTBOX_APPEND_TEXT (listbox, 0, current->text,
-			     current);
+    while (current) {
+	LISTBOX_APPEND_TEXT (listbox, 0, current->text, current);
 	current = current->next;
     }
     run_dlg (listbox->dlg);
@@ -916,9 +916,9 @@ void history_cmd (void)
 
     if (!current)
 	return;
-    input_w (cmdline)->history = current;
-    assign_text (input_w (cmdline), input_w (cmdline)->history->text);
-    update_input (input_w (cmdline), 1);
+    cmdline->history = current;
+    assign_text (cmdline, cmdline->history->text);
+    update_input (cmdline, 1);
 }
 
 void swap_cmd (void)

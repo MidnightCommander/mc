@@ -1518,7 +1518,7 @@ input_set_point (WInput *in, int pos)
     update_input (in, 1);
 }
 
-static int
+int
 input_callback (Dlg_head *h, WInput *in, int Msg, int Par)
 {
     switch (Msg){
