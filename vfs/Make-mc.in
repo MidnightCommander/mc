@@ -225,9 +225,7 @@ distclean: clean
 	rm -f *~
 	rm -f Makefile
 
-install: install_@mcserv@ install.extfs
-
-install_:
+install: install.extfs @MCSERV_INSTALL_TRUE@ install_mcserv
 
 install_mcserv:
 	$(mkinstalldirs) $(DESTDIR)$(bindir)

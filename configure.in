@@ -279,6 +279,16 @@ AC_CHECK_LIB(seq, get_process_stats, [
 	AC_DEFINE(HAVE_GET_PROCESS_STATS)])
 
 GNOME_VFS_CHECKS
+
+dnl
+dnl Install mcserv only if explicitly enabled
+dnl
+AC_ARG_ENABLE([mcserv-install],
+	      [--enable-mcserv-install    Install mcserv - Midnight Commander file server])
+
+AM_CONDITIONAL(MCSERV_INSTALL,
+	       [test "x$enable_mcserv_install$mcserv" = xyesmcserv])
+
 NETFILES=
 if test $have_socket = yes; then
    NETFILES="\$(NETFILES)"
@@ -446,7 +456,7 @@ AC_SUBST(mx)
 AC_SUBST(gmcdep)
 AC_SUBST(libgtkedit)
 AC_SUBST(GNOMEGNORBA_LIBS)
-AM_CONDITIONAL(GNOME, test x"$mx" = xmx)
+AM_CONDITIONAL(GNOME, [test x"$mx" = xmx])
 
 dnl
 dnl Check for the -mandoc package
@@ -975,7 +985,7 @@ fi],
   AC_CONFIG_SUBDIRS([vfs/samba])
 fi])
 
-AM_CONDITIONAL([USE_SAMBA_FS], [test "x$SAMBAFILES" != x])
+AM_CONDITIONAL(USE_SAMBA_FS, [test "x$SAMBAFILES" != x])
 
 AC_OUTPUT([
 Make.common 

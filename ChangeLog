@@ -1,3 +1,12 @@
+2001-04-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Don't install mcserv unless
+	"--enable-mcserv-install" has heen specified.
+	Don't quote the first argument in all calls to AM_CONDITIONAL
+	to work around a bug in Automake 1.4.
+	* doc/Makefile.am: Use MCSERV_INSTALL conditional.
+	* vfs/Make-mc.in: Likewise.
+
 2001-04-13  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: Bump version to 4.5.53a.
