@@ -1,3 +1,11 @@
+2004-11-10  Pavel Tsekov  <ptsekov@gmx.net>
+
+	* editdraw.c (edit_status): Don't output extra characters on the
+	status line.
+	(print_to_widget): Don't use addch() with negative offset to skip
+	over excessive columns. Output only those columns that should be
+	displayed on the screen.
+
 2004-11-10  Roland Illig  <roland.illig@gmx.de>
 
 	* editcmd.c (edit_replace_prompt): Fixed codepage conversion bug

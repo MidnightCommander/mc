@@ -21,6 +21,7 @@
 */
 
 #include <config.h>
+#include <stdlib.h>
 #include "edit.h"
 #include "edit-widget.h"
 
@@ -116,8 +117,8 @@ edit_status (WEdit *edit)
     widget_move (edit, 0, 0);
     attrset (SELECTED_COLOR);
     printw ("%-*s", fname_len + gap, fname);
-    if (fname_len + gap < w)
-        printw ("%-*s  ", w - (fname_len + gap), status);
+    if (fname_len + gap + 2 < w)
+        printw ("%-*s  ", w - (fname_len + gap + 2), status);
     attrset (EDITOR_NORMAL_COLOR);
 
     g_free (status);
@@ -191,18 +192,29 @@ print_to_widget (WEdit *edit, long row, int start_col, int start_col_real,
     int x = start_col_real + EDIT_TEXT_HORIZONTAL_OFFSET;
     int x1 = start_col + EDIT_TEXT_HORIZONTAL_OFFSET;
     int y = row + EDIT_TEXT_VERTICAL_OFFSET;
+    int cols_to_skip = abs (x);
 
     set_color (EDITOR_NORMAL_COLOR);
     edit_move (x1, y);
     hline (' ', end_col + 1 - EDIT_TEXT_HORIZONTAL_OFFSET - x1);
 
-    edit_move (x + FONT_OFFSET_X, y + FONT_OFFSET_Y);
+    edit_move (x1 + FONT_OFFSET_X, y + FONT_OFFSET_Y);
     p = line;
 
     while (*p) {
-	int style = *p & 0xFF00;
-	int textchar = *p & 0xFF;
-	int color = *p >> 16;
+	int style;
+	int textchar;
+	int color;
+
+	if (cols_to_skip) {
+	    p++;
+	    cols_to_skip--;
+	    continue;
+	}
+
+	style = *p & 0xFF00;
+	textchar = *p & 0xFF;
+	color = *p >> 16;
 
 	if (style & MOD_ABNORMAL) {
 	    /* Non-printable - use black background */
