@@ -22,6 +22,7 @@ int x_create_listbox (Dlg_head *h, widget_data parent, WListbox *l);
 int x_create_buttonbar (Dlg_head *h, widget_data parent, WButtonBar *bb);
 void x_list_insert (WListbox *l, WLEntry *p, WLEntry *e);
 void x_redefine_label (WButtonBar *bb, int idx);
+void x_add_widget (Dlg_head *h, Widget_Item *w);
 
 struct gmc_color_pairs_s {
 	GdkColor *fore, *back;

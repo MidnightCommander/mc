@@ -231,6 +231,7 @@ Dlg_head *create_dlg (int y1, int x1, int lines, int cols,
     new_d->raw = 0;
     new_d->grided = 0;
     new_d->initfocus = NULL;
+    new_d->running = 0;
 #ifdef HAVE_X
     if (callback != midnight_callback)
         new_d->wdata = xtoolkit_create_dialog (new_d, flags);
@@ -282,6 +283,15 @@ int add_widgetl (Dlg_head *where, void *what, WLay layout)
     where->current->widget->parent = where;
 
     where->count++;
+
+    /* If the widget is inserted in a running dialog */
+    if (where->running){
+	send_message (where, widget, WIDGET_INIT, 0);
+	send_message (where, widget, WIDGET_DRAW, 0);
+#ifdef HAVE_GNOME
+	x_add_widget (where, where->current);
+#endif
+    }
     return (where->count - 1);
 }
 

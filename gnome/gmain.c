@@ -181,6 +181,17 @@ x_focus_widget (Widget_Item *p)
 }
 
 void
+x_add_widget (Dlg_head *h, Widget_Item *w)
+{
+	if (!(h->grided & DLG_NO_TED)){
+		GtkTed *ted = GTK_TED (GTK_BIN (h->wdata)->child);
+
+		gtk_ted_add (ted, GTK_WIDGET (w->widget->wdata), w->widget->tkname);
+		bind_gtk_keys (GTK_WIDGET (w->widget->wdata), h);
+	}
+}
+
+void
 x_init_dlg (Dlg_head *h)
 {
 	if (!(h->grided & DLG_NO_TED)){

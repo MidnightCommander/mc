@@ -36,6 +36,10 @@ GdkBitmap *directory_mask;
 /* button bindings, mc text mode (1) or gui-like  */
 static int mc_bindings;
 
+static char *drag_types [] = { "text/plain", "url:ALL" };
+
+#define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
+
 void
 repaint_file (WPanel *panel, int file_index, int move, int attr, int isstatus)
 {
@@ -611,6 +615,45 @@ panel_file_list_row_selected (GtkWidget *file_list, int row, int col, GdkEvent *
 		panel_list_new_bindings (file_list, row, col, event, panel);
 }
 
+void *
+panel_build_selected_file_list (WPanel *panel, int *file_list_len)
+{
+	if (panel->marked){
+		char *data, *copy;
+		int i, total_len = 0;
+
+		/* first pass, compute the length */
+		for (i = 0; i < panel->count; i++)
+			if (panel->dir.list [i].f.marked)
+				total_len += panel->dir.list [i].fnamelen + 1;
+		
+		data = copy = xmalloc (total_len, "build_selected_file_list");
+		for (i = 0; i < panel->count; i++)
+			if (panel->dir.list [i].f.marked){
+				strcpy (copy, panel->dir.list [i].fname);
+				copy += panel->dir.list [i].fnamelen + 1;
+			}
+		*file_list_len = total_len;
+		return data;
+	} else {
+		*file_list_len = strlen (panel->dir.list [panel->selected].fname) + 1;
+		return strdup (panel->dir.list [panel->selected].fname);
+	}
+}
+
+void
+panel_drag_request (GtkWidget *widget, GdkEventDragRequest *event, WPanel *panel)
+{
+	void *data;
+	int  len;
+	
+	if ((strcmp (event->data_type, "text/plain") == 0) ||
+	    (strcmp (event->data_type, "url:ALL"))){
+		data = panel_build_selected_file_list (panel, &len);
+		gtk_widget_dnd_data_set (widget, (GdkEvent *) event, data, len);
+	}
+}
+
 GtkWidget *
 panel_create_file_list (WPanel *panel)
 {
@@ -638,6 +681,14 @@ panel_create_file_list (WPanel *panel)
 			    "select_row",
 			    GTK_SIGNAL_FUNC (panel_file_list_row_selected),
 			    panel);
+
+#if 0
+	gtk_signal_connect (GTK_OBJECT (file_list),
+			    "drag_request_event",
+			    GTK_SIGNAL_FUNC (panel_drag_request), panel);
+
+	gtk_widget_dnd_drag_set (file_list, TRUE, drag_types, ELEMENTS (drag_types));
+#endif
 
 	return file_list;
 }

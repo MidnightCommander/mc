@@ -193,6 +193,18 @@ gnome_init_panels ()
 	other_panel_ptr = NULL;
 }
 
+static void
+panel_enter_event (GtkWidget *widget, GdkEvent *event, WPanel *panel)
+{
+	/* Avoid unnecessary code execution */
+	if (get_current_panel () == panel)
+		return;
+	
+	set_new_current_panel (panel);
+	dlg_select_widget (panel->widget.parent, panel);
+	send_message (panel->widget.parent, (Widget *) panel, WIDGET_FOCUS, 0);
+}
+
 WPanel *
 create_container (Dlg_head *h, char *name)
 {
@@ -213,6 +225,11 @@ create_container (Dlg_head *h, char *name)
 
 	panel = panel_new (name);
 
+	gtk_signal_connect (GTK_OBJECT (app),
+			    "enter_notify_event",
+			    GTK_SIGNAL_FUNC (panel_enter_event),
+			    panel);
+	
 	/* Ultra nasty hack follows:
 	 * I am setting the panel->widget.wdata value here before the
 	 * panel X stuff gets created in the INIT message section of the
@@ -246,10 +263,6 @@ new_panel_at (char *dir)
 	panel = create_container (h, "Other");
 	add_widget (h, panel);
 
-	/* Gross hack 2: add_widget should know that the dialog is already
-	 * executing and shold call the init method manually.  We do so instead:
-	 */
-	panel->widget.callback (h, panel, WIDGET_INIT, 0);
 	set_new_current_panel (panel);
 }
 
