@@ -1,3 +1,11 @@
+2002-02-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ftpfs.c (translate_path): Remove leading slash(es) more
+	carefully.
+	(initconn): Check getsockname() return value.
+	Eliminate goto.
+	(linear_abort): Make ipbuf const array.
+
 2002-01-29  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ftpfs.c (reconnect): New function to restore closed connection.

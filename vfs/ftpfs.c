@@ -176,18 +176,18 @@ translate_path (vfs *me, vfs_s_super *super, const char *remote_path)
 	    fflush (logfile);
 	}
 
+	/* strip leading slash(es) */
+	while (*remote_path == '/')
+	    remote_path++;
+
 	/*
 	 * Don't change "/" into "", e.g. "CWD " would be
 	 * invalid.
 	 */
-        if (*remote_path == '/' && remote_path[1] == '\0')
+        if (*remote_path == '\0')
 	    return g_strdup ("."); 
 
-	/* strip leading slash */
-	if (*remote_path == '/')
-	    ret = g_strdup (remote_path + 1);
-	else
-	    ret = g_strdup (remote_path);
+	ret = g_strdup (remote_path);
 
 	/* replace first occurance of ":/" with ":" */
 	if ((p = strchr (ret, ':')) && *(p + 1) == '/')
@@ -953,21 +953,17 @@ initconn (vfs *me, vfs_s_super *super)
 
     /* If passive setup fails, fallback to active connections */
     /* Active FTP connection */
-    if (bind (data, (struct sockaddr *)&data_addr, len) < 0)
-	goto error_return;
-    getsockname(data, (struct sockaddr *) &data_addr, &len);
-    if (listen (data, 1) < 0)
-	goto error_return;
+    if ((bind (data, (struct sockaddr *)&data_addr, len) == 0) &&
+	(getsockname(data, (struct sockaddr *) &data_addr, &len) == 0) && 
+	(listen (data, 1) == 0))
     {
 	unsigned char *a = (unsigned char *)&data_addr.sin_addr;
 	unsigned char *p = (unsigned char *)&data_addr.sin_port;
 	
 	if (command (me, super, WAIT_REPLY, "PORT %d,%d,%d,%d,%d,%d", a[0], a[1], 
-		     a[2], a[3], p[0], p[1]) != COMPLETE)
-	    goto error_return;
+		     a[2], a[3], p[0], p[1]) == COMPLETE)
+	    return data;
     }
-    return data;
-error_return:
     close(data);
     my_errno = EIO;
     return -1;
@@ -1018,7 +1014,7 @@ static void
 linear_abort (vfs *me, vfs_s_fh *fh)
 {
     vfs_s_super *super = FH_SUPER;
-    static unsigned char ipbuf[3] = { IAC, IP, IAC };
+    static unsigned char const ipbuf[3] = { IAC, IP, IAC };
     fd_set mask;
     char buf[1024];
     int dsock = FH_SOCK;
