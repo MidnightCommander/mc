@@ -979,3 +979,8 @@ vfs_translate_url (const char *url)
     else
 	return g_strdup (url);
 }
+
+int vfs_file_is_local (const char *filename)
+{
+    return vfs_file_class_flags (filename) & VFSF_LOCAL;
+}

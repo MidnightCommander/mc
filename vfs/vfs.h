@@ -5,96 +5,6 @@
 #include <sys/mman.h>
 #endif
 
-
-typedef void *vfsid;
-struct vfs_stamping;
-
-/* Flags of VFS classes */
-#define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
-#define VFSF_NOLINKS 2		/* Hard links not supported */
-
-typedef void (*fill_names_f) (const char *);
-
-struct vfs_class {
-    struct vfs_class *next;
-    char *name;			/* "FIles over SHell" */
-    int flags;
-    char *prefix;		/* "fish:" */
-    void *data;			/* this is for filesystem's own use */
-    int verrno;			/* can't use errno because glibc2 might define errno as function */
-
-    int (*init) (struct vfs_class *me);
-    void (*done) (struct vfs_class *me);
-    void (*fill_names) (struct vfs_class *me, fill_names_f);
-
-    int (*which) (struct vfs_class *me, const char *path);
-
-    void *(*open) (struct vfs_class *me, const char *fname, int flags,
-		   int mode);
-    int (*close) (void *vfs_info);
-    int (*read) (void *vfs_info, char *buffer, int count);
-    int (*write) (void *vfs_info, const char *buf, int count);
-
-    void *(*opendir) (struct vfs_class *me, const char *dirname);
-    void *(*readdir) (void *vfs_info);
-    int (*closedir) (void *vfs_info);
-
-    int (*stat) (struct vfs_class *me, const char *path, struct stat * buf);
-    int (*lstat) (struct vfs_class *me, const char *path, struct stat * buf);
-    int (*fstat) (void *vfs_info, struct stat * buf);
-
-    int (*chmod) (struct vfs_class *me, const char *path, int mode);
-    int (*chown) (struct vfs_class *me, const char *path, int owner, int group);
-    int (*utime) (struct vfs_class *me, const char *path,
-		  struct utimbuf * times);
-
-    int (*readlink) (struct vfs_class *me, const char *path, char *buf,
-		     int size);
-    int (*symlink) (struct vfs_class *me, const char *n1, const char *n2);
-    int (*link) (struct vfs_class *me, const char *p1, const char *p2);
-    int (*unlink) (struct vfs_class *me, const char *path);
-    int (*rename) (struct vfs_class *me, const char *p1, const char *p2);
-    int (*chdir) (struct vfs_class *me, const char *path);
-    int (*ferrno) (struct vfs_class *me);
-    int (*lseek) (void *vfs_info, off_t offset, int whence);
-    int (*mknod) (struct vfs_class *me, const char *path, int mode, int dev);
-
-    vfsid (*getid) (struct vfs_class *me, const char *path);
-
-    int (*nothingisopen) (vfsid id);
-    void (*free) (vfsid id);
-
-    char *(*getlocalcopy) (struct vfs_class *me, const char *filename);
-    int (*ungetlocalcopy) (struct vfs_class *me, const char *filename,
-			   const char *local, int has_changed);
-
-    int (*mkdir) (struct vfs_class *me, const char *path, mode_t mode);
-    int (*rmdir) (struct vfs_class *me, const char *path);
-
-    int (*ctl) (void *vfs_info, int ctlop, void *arg);
-    int (*setctl) (struct vfs_class *me, const char *path, int ctlop,
-		   void *arg);
-#ifdef HAVE_MMAP
-    caddr_t (*mmap) (struct vfs_class *me, caddr_t addr, size_t len,
-		     int prot, int flags, void *vfs_info, off_t offset);
-    int (*munmap) (struct vfs_class *me, caddr_t addr, size_t len,
-		   void *vfs_info);
-#endif
-};
-
-/*
- * This union is used to ensure that there is enough space for the
- * filename (d_name) when the dirent structure is created.
- */
-union vfs_dirent {
-    struct dirent dent;
-    char _extra_buffer[((int) &((struct dirent *) 0)->d_name) +
-		       MC_MAXPATHLEN + 1];
-};
-
-/* Register a file system class */
-int vfs_register_class (struct vfs_class *vfs);
-
 void init_cpiofs (void);
 void init_extfs (void);
 void init_fish (void);
@@ -109,28 +19,12 @@ void init_undelfs (void);
 void vfs_init (void);
 void vfs_shut (void);
 
-struct vfs_class *vfs_get_class (const char *path);
-struct vfs_class *vfs_split (char *path, char **inpath, char **op);
-char *vfs_path (const char *path);
 char *vfs_strip_suffix_from_filename (const char *filename);
 char *vfs_canon (const char *path);
 char *mc_get_current_wd (char *buffer, int bufsize);
 char *vfs_get_current_dir (void);
 int vfs_current_is_local (void);
-int vfs_file_class_flags (const char *filename);
-
-static inline int
-vfs_file_is_local (const char *filename)
-{
-    return vfs_file_class_flags (filename) & VFSF_LOCAL;
-}
-
-void vfs_fill_names (fill_names_f);
-char *vfs_translate_url (const char *);
-
-#ifdef USE_NETCODE
-extern int use_netrc;
-#endif
+int vfs_file_is_local (const char *filename);
 
 /* Only the routines outside of the VFS module need the emulation macros */
 
@@ -169,22 +63,6 @@ int mc_setctl (const char *path, int ctlop, void *arg);
 caddr_t mc_mmap (caddr_t, size_t, int, int, int, off_t);
 int mc_munmap (caddr_t addr, size_t len);
 #endif				/* HAVE_MMAP */
-
-#ifdef WITH_SMBFS
-/* Interface for requesting SMB credentials.  */
-struct smb_authinfo {
-    char *host;
-    char *share;
-    char *domain;
-    char *user;
-    char *password;
-};
-
-struct smb_authinfo *vfs_smb_get_authinfo (const char *host,
-					   const char *share,
-					   const char *domain,
-					   const char *user);
-#endif				/* WITH_SMBFS */
 
 /* Operations for mc_ctl - on open file */
 enum {

@@ -45,6 +45,7 @@
 #include <string.h>
 
 #include "vfs.h"
+#include "vfs-impl.h"
 #include "smbfs.h"
 
 #define SMBFS_MAX_CONNECTIONS 16

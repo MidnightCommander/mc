@@ -53,6 +53,7 @@
 #include "utilvfs.h"
 
 #include "vfs.h"
+#include "vfs-impl.h"
 
 struct deleted_info {
     ext2_ino_t   ino;

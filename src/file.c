@@ -74,6 +74,7 @@
 #include "filegui.h"
 #include "tree.h"
 #include "key.h"
+#include "../vfs/vfs-impl.h"
 
 /* }}} */
 
