@@ -28,8 +28,8 @@ VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 
 VFSOBJS = $(NONETFILES) @NETFILES@
 
-EXTFSSTUFF = README extfs.ini a cpio.in deb.in ftplist.in lha.in lslR.in \
-	rar.in rpm zip.in zoo.in patchfs mailfs hp48
+EXTFSSTUFF = README extfs.ini a ucpio.in deb.in ftplist.in ulha.in lslR.in \
+	urar.in rpm uzip.in uzoo.in patchfs mailfs hp48
 
 #
 # Commands to build standalone version (.so)
@@ -117,23 +117,25 @@ install.extfs:
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/rpm  $(DESTDIR)$(libdir)/extfs/rpm
 	$(INSTALL_PROGRAM) $(srcdir)/extfs/hp48  $(DESTDIR)$(libdir)/extfs/hp48
 	
-	$(INSTALL_PROGRAM) extfs/cpio $(DESTDIR)$(libdir)/extfs/cpio
+	$(INSTALL_PROGRAM) extfs/ucpio $(DESTDIR)$(libdir)/extfs/ucpio
 	$(INSTALL_PROGRAM) extfs/deb  $(DESTDIR)$(libdir)/extfs/deb
 	$(INSTALL_PROGRAM) extfs/ftplist $(DESTDIR)$(libdir)/extfs/ftplist
 	$(INSTALL_PROGRAM) extfs/lslR $(DESTDIR)$(libdir)/extfs/lslR
-	$(INSTALL_PROGRAM) extfs/lha $(DESTDIR)$(libdir)/extfs/lha
-	$(INSTALL_PROGRAM) extfs/rar $(DESTDIR)$(libdir)/extfs/rar
-	$(INSTALL_PROGRAM) extfs/zip $(DESTDIR)$(libdir)/extfs/zip
-	$(INSTALL_PROGRAM) extfs/zoo $(DESTDIR)$(libdir)/extfs/zoo
+	$(INSTALL_PROGRAM) extfs/ulha $(DESTDIR)$(libdir)/extfs/ulha
+	$(INSTALL_PROGRAM) extfs/urar $(DESTDIR)$(libdir)/extfs/urar
+	$(INSTALL_PROGRAM) extfs/uzip $(DESTDIR)$(libdir)/extfs/uzip
+	$(INSTALL_PROGRAM) extfs/uzoo $(DESTDIR)$(libdir)/extfs/uzoo
 
 uninstall:
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/rpm
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/hp48
-	-$(RMF) $(DESTDIR)$(libdir)/extfs/cpio
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/ucpio
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/deb
-	-$(RMF) $(DESTDIR)$(libdir)/extfs/zip
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/ulha
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/urar
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/uzip
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/a
-	-$(RMF) $(DESTDIR)$(libdir)/extfs/zoo
+	-$(RMF) $(DESTDIR)$(libdir)/extfs/uzoo
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/lslR
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/ftplist
 	-$(RMF) $(DESTDIR)$(libdir)/extfs/extfs.ini

@@ -65,6 +65,8 @@ uninstall:
 	@for I in $(unixdirs); do cd $$I; $(MAKE) $@ || exit 1; cd ..; done
 	-$(RMF) $(DESTDIR)$(libdir)/FAQ
 	-$(RMF) $(DESTDIR)$(suppbindir)/mcfn_install
+	-rmdir $(DESTDIR)$(suppbindir)
+	-rmdir $(DESTDIR)$(libdir)
 	@echo Midnight Commander uninstalled
 
 cross TAGS clean depend dep:
