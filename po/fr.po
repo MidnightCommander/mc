@@ -2,6 +2,7 @@
 # Copyright (C) 1998,1999,2000 Free Software Foundation, Inc.
 # Vincent Renardias <vincent@ldsol.com>, 1998, 1999, 2000.
 # Thibaut Cousin <Thibaut.Cousin@clermont.in2p3.fr>, 1999.
+# Martin Quinson <mquinson@zeppelin-cb.de>, 2000.
 #
 msgid ""
 msgstr ""
@@ -6068,35 +6069,35 @@ msgstr "Pavé numérique *"
 #. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:260
 msgid "Left arrow keypad"
-msgstr ""
+msgstr "Flèche gauche (Pavé numérique)"
 
 #: src/win.c:261
 msgid "Right arrow keypad"
-msgstr ""
+msgstr "Flèche droite (Pavé numérique)"
 
 #: src/win.c:262
 msgid "Up arrow keypad"
-msgstr ""
+msgstr "Flèche haut (Pavé numérique)"
 
 #: src/win.c:263
 msgid "Down arrow keypad"
-msgstr ""
+msgstr "Flèche bas (Pavé numérique)"
 
 #: src/win.c:264
 msgid "Home on keypad"
-msgstr ""
+msgstr "Début de ligne (Pavé numérique)"
 
 #: src/win.c:265
 msgid "End on keypad"
-msgstr ""
+msgstr "Fin de ligne (Pavé numérique)"
 
 #: src/win.c:266
 msgid "Page Down keypad"
-msgstr ""
+msgstr "Page suivante  (Pavé numérique)"
 
 #: src/win.c:267
 msgid "Page Up keypad"
-msgstr ""
+msgstr "Page précédente (Pavé numérique)"
 
 #: src/win.c:268
 msgid "Insert on keypad"
@@ -6388,23 +6389,19 @@ msgid " Invalid password "
 msgstr " Mot de passe incorrect "
 
 #: vfs/mcfs.c:235
-#, fuzzy, c-format
+#, c-format
 msgid " Can't locate hostname: %s "
-msgstr ""
-"Impossible d'accéder à la destination \n"
-" %s "
+msgstr " Impossible de localiser la machine : %s "
 
 #: vfs/mcfs.c:253
-#, fuzzy, c-format
+#, c-format
 msgid " Can't create socket: %s "
-msgstr ""
-" Impossible d'aller dans le répertoire %s \n"
-" %s "
+msgstr " Impossible de creer une socket : %s "
 
 #: vfs/mcfs.c:259
-#, fuzzy, c-format
+#, c-format
 msgid " Can't connect to server: %s "
-msgstr "FTPfs : connexion au serveur échouée : %s"
+msgstr " Impossible de se connecter au serveur : %s"
 
 #: vfs/mcfs.c:324
 msgid " Too many open connections "
@@ -6413,7 +6410,7 @@ msgstr " Trop de connexions ouvertes "
 #. This is place of next pointer
 #: vfs/mcfs.c:1127
 msgid "Midnight Commander's private remote filesystem"
-msgstr ""
+msgstr "Système de fichier distant privé de Midnight Commander"
 
 #: vfs/smbfs.c:115
 msgid "Domain:"
@@ -6490,29 +6487,24 @@ msgstr ""
 "ne ressemble pas à une archive tar."
 
 #: vfs/vfs.c:1157
-#, fuzzy
 msgid "Changes to file lost"
-msgstr "&Liste longue des fichiers"
+msgstr "Les changements au fichier sont perdus"
 
 #: vfs/vfs.c:1797
-#, fuzzy
 msgid "Could not parse:"
-msgstr ""
-" Impossible d'accéder à %s\n"
-"%s"
+msgstr "Impossible d'analyser :"
 
 #: vfs/vfs.c:1799
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "Les prochaines erreurs d'analyse seront ignorées."
 
 #: vfs/vfs.c:1799
 msgid "(sorry)"
-msgstr ""
+msgstr "(désolé)"
 
 #: vfs/vfs.c:1810
-#, fuzzy
 msgid "Internal error:"
-msgstr " Erreur interne : get_file\n"
+msgstr " Erreur interne : "
 
 #: vfs/vfs.c:1820
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
@@ -6522,28 +6514,3 @@ msgstr "%s: %s: %s %3d%% (%ld octets transférés)"
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld octets transférés"
-
-#~ msgid "fish: got listing"
-#~ msgstr "fish : liste obtenue"
-
-#~ msgid "ftpfs: could not setup passive mode for source routing"
-#~ msgstr ""
-#~ "FTPfs : impossible de configurer le mode passif pour le routage par la source"
-
-#~ msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
-#~ msgstr ""
-#~ "FTPfs : lecture du répertoire FTP %s... (pas d'options UNIX pour ls)"
-
-#~ msgid "ftpfs: FAIL"
-#~ msgstr "FTPfs : ÉCHEC"
-
-#~ msgid "ftpfs: reading FTP directory interrupt by user"
-#~ msgstr "FTPfs : lecture du répertoire FTP interrompue par l'utilisateur"
-
-#~ msgid "ftpfs: got listing"
-#~ msgstr "FTPfs : liste obtenue"
-
-#~ msgid "Could not symlink %s to %s; will not have initial home desktop icon."
-#~ msgstr ""
-#~ "Impossible d'établir le lien symbolique vers %s ; il n'y aura pas d'icône "
-#~ "sur le bureau."
