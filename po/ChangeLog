@@ -1,3 +1,7 @@
+2000-08-15  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in.in: Remove *.gmo in $(srcdir) on "make distclean"
+
 2000-08-15  Kjartan Maraas  <kmaraas@gnome.org>
 
 	* no.po: Updated Norwegian translation.
