@@ -72,29 +72,29 @@ edit_options_dialog (void)
 	 B_ENTER, 0, 0, NULL},
 	/* 2 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 5, OPT_DLG_H,
-	 N_("Word wrap line length : "), 0, 0, 0, 0, NULL},
+	 N_("Word wrap line length: "), 0, 0, 0, 0, NULL},
 	/* 3 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 5,
 	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0, "edit-word-wrap"},
 	/* 4 */
 	{quick_label, OPT_DLG_W / 2, OPT_DLG_W, OPT_DLG_H - 6, OPT_DLG_H,
-	 N_("Tab spacing : "), 0, 0, 0, 0, NULL},
+	 N_("Tab spacing: "), 0, 0, 0, 0, NULL},
 	/* 5 */
 	{quick_input, OPT_DLG_W / 2 + 24, OPT_DLG_W, OPT_DLG_H - 6,
 	 OPT_DLG_H, "", OPT_DLG_W / 2 - 4 - 24, 0, 0, 0,
 	 "edit-tab-spacing"},
 	/* 6 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 8,
-	 OPT_DLG_H, N_("synta&X highlighting"), 8, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Synta&x highlighting"), 8, 0, 0, 0, NULL},
 	/* 7 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 9,
 	 OPT_DLG_H, N_("Save file &position"), 0, 0, 0, 0, NULL},
 	/* 8 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 10,
-	 OPT_DLG_H, N_("confir&M before saving"), 6, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Confir&m before saving"), 6, 0, 0, 0, NULL},
 	/* 9 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 11,
-	 OPT_DLG_H, N_("fill tabs with &Spaces"), 0, 0, 0, 0, NULL},
+	 OPT_DLG_H, N_("Fill tabs with &spaces"), 0, 0, 0, 0, NULL},
 	/* 10 */
 	{quick_checkbox, OPT_DLG_W / 2 + 1, OPT_DLG_W, OPT_DLG_H - 12,
 	 OPT_DLG_H, N_("&Return does autoindent"), 0, 0, 0, 0, NULL},

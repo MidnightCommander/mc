@@ -490,7 +490,7 @@ msgid "&Save              F2"
 msgstr "&Зберегти              F2"
 
 #: edit/editmenu.c:117 edit/editmenu.c:136
-msgid "save &As...       F12"
+msgid "Save &as...       F12"
 msgstr "Зберегти &як...       F12"
 
 #: edit/editmenu.c:119 edit/editmenu.c:138
@@ -498,7 +498,7 @@ msgid "&Insert file...   F15"
 msgstr "&Вставити файл...     F15"
 
 #: edit/editmenu.c:120
-msgid "copy to &File...  C-f"
+msgid "Copy to &file...  C-f"
 msgstr "&Коп╕ювати у файл...  C-f"
 
 #: edit/editmenu.c:122 edit/editmenu.c:141
@@ -506,7 +506,7 @@ msgid "&User menu...     F11"
 msgstr "&Меню користувача...  F11"
 
 #: edit/editmenu.c:125 edit/editmenu.c:144
-msgid "a&Bout...            "
+msgid "A&bout...            "
 msgstr "&Про програму..."
 
 #: edit/editmenu.c:127 edit/editmenu.c:146
@@ -518,7 +518,7 @@ msgid "&New            C-x k"
 msgstr "&Новий файл         C-x k"
 
 #: edit/editmenu.c:139
-msgid "copy to &File...     "
+msgid "Copy to &file...     "
 msgstr "&Коп╕ювати у файл..."
 
 #: edit/editmenu.c:151 edit/editmenu.c:168
@@ -530,7 +530,7 @@ msgid "&Mark Columns    S-F3"
 msgstr "В╕дм╕тити &стовпц╕    S-F3"
 
 #: edit/editmenu.c:154 edit/editmenu.c:171
-msgid "toggle &Ins/overw Ins"
+msgid "Toggle &ins/overw Ins"
 msgstr "&Режим вставки/зам╕ни  Ins"
 
 #: edit/editmenu.c:156 edit/editmenu.c:173
@@ -562,7 +562,7 @@ msgid "&Search...         F7"
 msgstr "&Шукати...          F7"
 
 #: edit/editmenu.c:186 edit/editmenu.c:193
-msgid "search &Again     F17"
+msgid "Search &again     F17"
 msgstr "Шукати &знову      F17"
 
 #: edit/editmenu.c:187 edit/editmenu.c:194
@@ -570,15 +570,15 @@ msgid "&Replace...        F4"
 msgstr "&Зам╕нити...        F4"
 
 #: edit/editmenu.c:199 edit/editmenu.c:222
-msgid "&Goto line...            M-l"
+msgid "&Go to line...            M-l"
 msgstr "&Перейти на рядок                M-l"
 
 #: edit/editmenu.c:200 edit/editmenu.c:223
-msgid "goto matching &Bracket   M-b"
+msgid "Go to matching &bracket   M-b"
 msgstr "Перейти до парно╖ &дужки         M-b"
 
 #: edit/editmenu.c:202 edit/editmenu.c:225
-msgid "insert &Literal...       C-q"
+msgid "Insert &literal...       C-q"
 msgstr "Вставити &л╕терал...             C-q"
 
 #: edit/editmenu.c:204 edit/editmenu.c:227
@@ -598,23 +598,23 @@ msgid "&Execute macro...   C-a, KEY"
 msgstr "&Виконати макрос...         C-a, KEY"
 
 #: edit/editmenu.c:209 edit/editmenu.c:232
-msgid "delete macr&O...            "
+msgid "Delete macr&o...            "
 msgstr "&Видалити макрос"
 
 #: edit/editmenu.c:211 edit/editmenu.c:234
-msgid "insert &Date/time           "
+msgid "Insert &date/time           "
 msgstr "Вставити &дату/час"
 
 #: edit/editmenu.c:213 edit/editmenu.c:236
-msgid "format p&Aragraph        M-p"
+msgid "Format p&aragraph        M-p"
 msgstr "Форматувати &абзац               M-p"
 
 #: edit/editmenu.c:214
-msgid "'ispell' s&Pell check    C-p"
+msgid "'ispell' s&pell check    C-p"
 msgstr "&Перев╕рка орфограф╕╖            C-p"
 
 #: edit/editmenu.c:215 edit/editmenu.c:238
-msgid "sor&T...                 M-t"
+msgid "Sor&t...                 M-t"
 msgstr "&Сортувати                       M-t"
 
 #: edit/editmenu.c:216 edit/editmenu.c:239
@@ -630,7 +630,7 @@ msgid "&Execute macro... C-x e, KEY"
 msgstr "&Виконати макрос... C-x e, KEY"
 
 #: edit/editmenu.c:237
-msgid "'ispell' s&Pell check    M-$"
+msgid "'ispell' s&pell check    M-$"
 msgstr "&Перев╕рка орфограф╕╖        M-$"
 
 #: edit/editmenu.c:245 edit/editmenu.c:254
@@ -686,23 +686,23 @@ msgid "Type writer wrap"
 msgstr "Переносити при набор╕"
 
 #: edit/editoptions.c:68
-msgid "Word wrap line length : "
+msgid "Word wrap line length: "
 msgstr "Переносити при довжин╕: "
 
 #: edit/editoptions.c:74
-msgid "Tab spacing : "
+msgid "Tab spacing: "
 msgstr "Крок табуляц╕╖ : "
 
 #: edit/editoptions.c:82
-msgid "synta&X highlighting"
+msgid "Synta&x highlighting"
 msgstr "&П╕дсв╕тка синтаксису"
 
 #: edit/editoptions.c:88
-msgid "confir&M before saving"
+msgid "Confir&m before saving"
 msgstr "Пит&атися перед записуванням"
 
 #: edit/editoptions.c:91
-msgid "fill tabs with &Spaces"
+msgid "Fill tabs with &spaces"
 msgstr "Зам╕няти &табуляц╕ю проб╕лами"
 
 #: edit/editoptions.c:94

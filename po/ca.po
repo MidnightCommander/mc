@@ -498,7 +498,7 @@ msgid "&Save              F2"
 msgstr "&Desa               F2"
 
 #: edit/editmenu.c:117 edit/editmenu.c:136
-msgid "save &As...       F12"
+msgid "Save &as...       F12"
 msgstr "desa com &a...     F12"
 
 #: edit/editmenu.c:119 edit/editmenu.c:138
@@ -506,7 +506,7 @@ msgid "&Insert file...   F15"
 msgstr "&Insereix el fitxer...    F15"
 
 #: edit/editmenu.c:120
-msgid "copy to &File...  C-f"
+msgid "Copy to &file...  C-f"
 msgstr "copia al &Fitxer...   C-f"
 
 #: edit/editmenu.c:122 edit/editmenu.c:141
@@ -514,7 +514,7 @@ msgid "&User menu...     F11"
 msgstr "Menú d'&usuari...     F11"
 
 #: edit/editmenu.c:125 edit/editmenu.c:144
-msgid "a&Bout...            "
+msgid "A&bout...            "
 msgstr "a &Propòsit de...        "
 
 #: edit/editmenu.c:127 edit/editmenu.c:146
@@ -526,7 +526,7 @@ msgid "&New            C-x k"
 msgstr "&Nou                C-x k"
 
 #: edit/editmenu.c:139
-msgid "copy to &File...     "
+msgid "Copy to &file...     "
 msgstr "copia al &Fitxer...      "
 
 #: edit/editmenu.c:151 edit/editmenu.c:168
@@ -538,7 +538,7 @@ msgid "&Mark Columns    S-F3"
 msgstr "&Marca les columnes     S-F3"
 
 #: edit/editmenu.c:154 edit/editmenu.c:171
-msgid "toggle &Ins/overw Ins"
+msgid "Toggle &ins/overw Ins"
 msgstr "Canvia entre &Insereix/sobreescriu Ins"
 
 #: edit/editmenu.c:156 edit/editmenu.c:173
@@ -570,7 +570,7 @@ msgid "&Search...         F7"
 msgstr "&Cerca...             F7"
 
 #: edit/editmenu.c:186 edit/editmenu.c:193
-msgid "search &Again     F17"
+msgid "Search &again     F17"
 msgstr "cerca &de nou   F17"
 
 #: edit/editmenu.c:187 edit/editmenu.c:194
@@ -578,15 +578,15 @@ msgid "&Replace...        F4"
 msgstr "&Reemplaça...            F4"
 
 #: edit/editmenu.c:199 edit/editmenu.c:222
-msgid "&Goto line...            M-l"
+msgid "&Go to line...            M-l"
 msgstr "&Vés a la línia...          M-l"
 
 #: edit/editmenu.c:200 edit/editmenu.c:223
-msgid "goto matching &Bracket   M-b"
+msgid "Go to matching &bracket   M-b"
 msgstr "ves al &Claudàtor coincident  M-b"
 
 #: edit/editmenu.c:202 edit/editmenu.c:225
-msgid "insert &Literal...       C-q"
+msgid "Insert &literal...       C-q"
 msgstr "insereix &Literal...         C-q"
 
 #: edit/editmenu.c:204 edit/editmenu.c:227
@@ -606,23 +606,23 @@ msgid "&Execute macro...   C-a, KEY"
 msgstr "e&Xecuta la macro...   C-a, TECLA"
 
 #: edit/editmenu.c:209 edit/editmenu.c:232
-msgid "delete macr&O...            "
+msgid "Delete macr&o...            "
 msgstr "&Esborra la macro...             "
 
 #: edit/editmenu.c:211 edit/editmenu.c:234
-msgid "insert &Date/time           "
+msgid "Insert &date/time           "
 msgstr "insereix &Data/hora             "
 
 #: edit/editmenu.c:213 edit/editmenu.c:236
-msgid "format p&Aragraph        M-p"
+msgid "Format p&aragraph        M-p"
 msgstr "&Formateja el paràgraf          M-p"
 
 #: edit/editmenu.c:214
-msgid "'ispell' s&Pell check    C-p"
+msgid "'ispell' s&pell check    C-p"
 msgstr "comprova l'or&Tografia: ispell  C-p"
 
 #: edit/editmenu.c:215 edit/editmenu.c:238
-msgid "sor&T...                 M-t"
+msgid "Sor&t...                 M-t"
 msgstr "&Ordena...                 M-t"
 
 #: edit/editmenu.c:216 edit/editmenu.c:239
@@ -638,7 +638,7 @@ msgid "&Execute macro... C-x e, KEY"
 msgstr "e&Xecuta la macro... C-x e, TECLA"
 
 #: edit/editmenu.c:237
-msgid "'ispell' s&Pell check    M-$"
+msgid "'ispell' s&pell check    M-$"
 msgstr "comprova l'or&Tografia: ispell  M-$"
 
 #: edit/editmenu.c:245 edit/editmenu.c:254
@@ -695,23 +695,23 @@ msgid "Type writer wrap"
 msgstr "Ajustament de màquina d'escriure"
 
 #: edit/editoptions.c:68
-msgid "Word wrap line length : "
+msgid "Word wrap line length: "
 msgstr "Longitud de línia per a l'ajustament: "
 
 #: edit/editoptions.c:74
-msgid "Tab spacing : "
+msgid "Tab spacing: "
 msgstr "Mida del tabulador: "
 
 #: edit/editoptions.c:82
-msgid "synta&X highlighting"
+msgid "Synta&x highlighting"
 msgstr "Ressaltament de la sinta&Xi"
 
 #: edit/editoptions.c:88
-msgid "confir&M before saving"
+msgid "Confir&m before saving"
 msgstr "con&Firma en desar"
 
 #: edit/editoptions.c:91
-msgid "fill tabs with &Spaces"
+msgid "Fill tabs with &spaces"
 msgstr "omple els tabuladors amb e&Spais"
 
 #: edit/editoptions.c:94
