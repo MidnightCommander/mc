@@ -3,28 +3,28 @@
 /* Prototypes for the profile management functions */
 
 #ifndef _OS_NT
-short GetPrivateProfileString (char * AppName, char * KeyName,
+short GetPrivateProfileString (const char * AppName, char * KeyName,
 			       char * Default, char * ReturnedString,
 			       short Size, char * FileName);
 
-int GetProfileString (char * AppName, char * KeyName, char * Default, 
+int GetProfileString (const char * AppName, char * KeyName, char * Default, 
 		      char * ReturnedString, int Size);
 
-int GetPrivateProfileInt (char * AppName, char * KeyName, int Default,
+int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
 			   char * File);
 
-int GetProfileInt (char * AppName, char * KeyName, int Default);
+int GetProfileInt (const char * AppName, char * KeyName, int Default);
 
-int WritePrivateProfileString (char * AppName, char * KeyName, char * String,
+int WritePrivateProfileString (const char * AppName, char * KeyName, char * String,
 				char * FileName);
 
-int WriteProfileString (char * AppName, char * KeyName, char * String);
+int WriteProfileString (const char * AppName, char * KeyName, char * String);
 #endif /* not _OS_NT */
 
 void sync_profiles (void);
 
 void free_profiles (void);
-char *get_profile_string (char *AppName, char *KeyName, char *Default,
+char *get_profile_string (const char *AppName, char *KeyName, char *Default,
 			  char *FileName);
 
 /* New profile functions */

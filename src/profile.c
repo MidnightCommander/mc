@@ -256,7 +256,7 @@ static void new_key (TSecHeader *section, char *KeyName, char *Value)
 }
 
 static char *
-GetSetProfileChar (int set, char *AppName, char *KeyName,
+GetSetProfileChar (int set, const char *AppName, char *KeyName,
 		   char *Default, char *FileName)
 {
     
@@ -308,7 +308,7 @@ GetSetProfileChar (int set, char *AppName, char *KeyName,
     return Default;
 }
 
-static short GetSetProfile (int set, char * AppName, char * KeyName,
+static short GetSetProfile (int set, const char * AppName, char * KeyName,
 			    char * Default, char * ReturnedString,
 			    short Size, char * FileName)
 
@@ -323,21 +323,21 @@ static short GetSetProfile (int set, char * AppName, char * KeyName,
     return 1;
 }
 
-short GetPrivateProfileString (char * AppName, char * KeyName,
+short GetPrivateProfileString (const char * AppName, char * KeyName,
 			       char * Default, char * ReturnedString,
 			       short Size, char * FileName)
 {
     return (GetSetProfile (0, AppName, KeyName, Default, ReturnedString, Size, FileName));
 }
 
-char *get_profile_string (char *AppName, char *KeyName, char *Default,
+char *get_profile_string (const char *AppName, char *KeyName, char *Default,
 			  char *FileName)
 {
     return GetSetProfileChar (0, AppName, KeyName, Default, FileName);
 }
 
 #if 0
-int GetProfileString (char * AppName, char * KeyName, char * Default, 
+int GetProfileString (const char * AppName, char * KeyName, char * Default, 
 		      char * ReturnedString, int Size)
 {
     return GetPrivateProfileString (AppName, KeyName, Default,
@@ -345,7 +345,7 @@ int GetProfileString (char * AppName, char * KeyName, char * Default,
 }
 #endif
 
-int GetPrivateProfileInt (char * AppName, char * KeyName, int Default,
+int GetPrivateProfileInt (const char * AppName, char * KeyName, int Default,
 			   char * File)
 {
     static char IntBuf [BUF_TINY];
@@ -363,20 +363,20 @@ int GetPrivateProfileInt (char * AppName, char * KeyName, int Default,
 }
 
 #if 0
-int GetProfileInt (char * AppName, char * KeyName, int Default)
+int GetProfileInt (const char * AppName, char * KeyName, int Default)
 {
     return GetPrivateProfileInt (AppName, KeyName, Default, INIFILE);
 }
 #endif
 
-int WritePrivateProfileString (char * AppName, char * KeyName, char * String,
+int WritePrivateProfileString (const char * AppName, char * KeyName, char * String,
 				char * FileName)
 {
     return GetSetProfile (1, AppName, KeyName, String, "", 0, FileName);
 }
 
 #if 0
-int WriteProfileString (char * AppName, char * KeyName, char * String)
+int WriteProfileString (const char * AppName, char * KeyName, char * String)
 {
     return (WritePrivateProfileString (AppName, KeyName, String, INIFILE));
 }
