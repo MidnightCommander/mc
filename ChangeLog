@@ -1,4 +1,8 @@
-2002-08-17  Pavel Roskin  <proski@gnu.org>
+2002-09-17  Vlad Romanenko  <VladRomanenko@ukr.net>
+
+	* syntax/js.syntax: Advanced number highliting.
+
+2002-09-17  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/c.syntax: Highlight "?" by the same color as ":".
 	* syntax/java.syntax: Likewise.
@@ -17,7 +21,7 @@
 	be explicitly enabled by `--with-glib2'.
 	From Ali Akcaagac <ali.akcaagac@stud.fh-wilhelmshaven.de>
 
-2002-08-16  Pavel Roskin  <proski@gnu.org>
+2002-09-16  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/js.syntax: New file.
 	* syntax/Syntax: Add js.syntax.
