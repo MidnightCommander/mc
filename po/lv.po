@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc\n"
-"POT-Creation-Date: 2001-10-07 20:11-0400\n"
+"POT-Creation-Date: 2002-08-21 03:42-0400\n"
 "PO-Revision-Date: 2001-11-20 15:15+0200\n"
 "Last-Translator: Artis Trops <hornet@navigators.lv>\n"
 "Language-Team: Latvian <hornet@navigators.lv>\n"
@@ -13,98 +13,56 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-13\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-# edit/edit_key_translator.c:126
-#: edit/edit_key_translator.c:127
-msgid " Emacs key: "
-msgstr "Emacs taustiòð: "
-
-# edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-#: edit/edit_key_translator.c:139
-#: edit/edit_key_translator.c:164
-msgid " Execute Macro "
-msgstr " Palaist Makro "
-
-# edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
-# gtkedit/editcmd.c:763 gtkedit/editcmd.c:772
-#: edit/edit_key_translator.c:139
-#: edit/edit_key_translator.c:164
-#: edit/editcmd.c:636
-msgid " Press macro hotkey: "
-msgstr " Spied makro karsto taustiòu: "
-
-# edit/edit_key_translator.c:149
-#: edit/edit_key_translator.c:160
-msgid " Insert Literal "
-msgstr " Ievietot Burtu "
-
-# edit/edit_key_translator.c:149
-#: edit/edit_key_translator.c:160
-msgid " Press any key: "
-msgstr " Spiest jebkuru taustiòu: "
-
 # gtkedit/edit.c:151 gtkedit/edit.c:320 gtkedit/edit.c:325 gtkedit/edit.c:339
 # gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
 # gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:305
 # gtkedit/editcmd.c:311 gtkedit/editcmd.c:2040 gtkedit/editwidget.c:1024
 # src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 #. The file-name is printed after the ':'
-#: edit/edit.c:145
-#: edit/edit.c:314
-#: edit/edit.c:319
-#: edit/edit.c:333
-#: edit/edit.c:337
-#: edit/edit.c:368
-#: edit/edit.c:375
-#: edit/edit.c:382
-#: edit/edit.c:388
-#: edit/editcmd.c:256
-#: edit/editcmd.c:262
-#: edit/editcmd.c:1587
-#: edit/editwidget.c:121
-#: src/dir.c:427
-#: src/wtools.c:216
+#: edit/edit.c:187 edit/edit.c:353 edit/edit.c:358 edit/edit.c:372
+#: edit/edit.c:376 edit/edit.c:414 edit/edit.c:420 edit/edit.c:427
+#: edit/edit.c:439 edit/editcmd.c:257 edit/editcmd.c:263 edit/editcmd.c:1578
+#: src/wtools.c:204
 msgid " Error "
 msgstr " Kïûda "
 
 # gtkedit/edit.c:151 gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381
-#: edit/edit.c:145
-#: edit/edit.c:337
-#: edit/edit.c:368
+#: edit/edit.c:187 edit/edit.c:376 edit/edit.c:420
 msgid " Failed trying to open file for reading: "
 msgstr " Nevar atvçrt failu lasîðanai: "
 
 # gtkedit/edit.c:320
-#: edit/edit.c:314
+#: edit/edit.c:353
 msgid " Error reading from pipe: "
 msgstr " Kïûda lasot no programkanâla: "
 
 # gtkedit/edit.c:325
-#: edit/edit.c:319
+#: edit/edit.c:358
 msgid " Failed trying to open pipe for reading: "
 msgstr " Nevar atvçrt programkanâlu lasîðanai: "
 
 # gtkedit/edit.c:339
-#: edit/edit.c:333
+#: edit/edit.c:372
 msgid " Error reading file: "
 msgstr " Kïûda lasot failu: "
 
-# gtkedit/edit.c:388
-#: edit/edit.c:375
-msgid " Cannot get size/permissions info on file: "
-msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
-
 # gtkedit/edit.c:395
-#: edit/edit.c:382
+#: edit/edit.c:414
 msgid " Not an ordinary file: "
 msgstr " Neparasts fails: "
 
+# gtkedit/edit.c:388
+#: edit/edit.c:427
+msgid " Cannot get size/permissions info on file: "
+msgstr " Nevar dabût lielumu/atïauju informâciju failam: "
+
 # gtkedit/edit.c:401
-#: edit/edit.c:388
+#: edit/edit.c:439
 msgid " File is too large: "
 msgstr " Fails ir par lielu: "
 
 # gtkedit/edit.c:402
-#: edit/edit.c:389
+#: edit/edit.c:440
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
@@ -112,18 +70,19 @@ msgstr ""
 " \n"
 " Palielini edit.h:MAXBUF un pârkompilç redaktoru. "
 
-#: edit/edit.c:2496
+#: edit/edit.c:2544
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Lietotâja izvçlne pieejama tikai mcedit, kurð palaists no mc"
 
-# gtkedit/edit.c:2767 gtkedit/editcmd.c:2945
-#: edit/edit.c:2675
-#: edit/editcmd.c:2282
-msgid "Error trying to stat file:"
-msgstr "Kïûda mçìinot sâknçt failu:"
+# gtkedit/editcmd.c:2738 gtkedit/editcmd.c:2742 gtkedit/editcmd.c:2747
+# gtkedit/editcmd.c:2750
+#: edit/edit.h:341 edit/edit.h:342
+#, fuzzy
+msgid " Enter file name: "
+msgstr " Ievadîet lîniju: "
 
 # gtkedit/gtkedit.c:67
-#: edit/edit.h:360
+#: edit/edit.h:345
 msgid "&Dismiss"
 msgstr "&Atcelt"
 
@@ -134,52 +93,64 @@ msgstr "&Atcelt"
 # src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
 # src/wtools.c:289 src/wtools.c:563 vfs/smbfs.c:117
 #. 1
-#: edit/edit.h:361
-#: edit/editcmd.c:343
-#: edit/editcmd.c:1102
-#: edit/editcmd.c:1187
-#: edit/editcmd.c:2360
-#: edit/editmenu.c:37
-#: edit/editoptions.c:69
-#: src/boxes.c:144
-#: src/boxes.c:278
-#: src/boxes.c:378
-#: src/boxes.c:469
-#: src/boxes.c:616
-#: src/boxes.c:753
-#: src/boxes.c:986
-#: src/boxes.c:1056
-#: src/filegui.c:798
-#: src/find.c:151
-#: src/layout.c:365
-#: src/option.c:135
-#: src/wtools.c:284
-#: src/wtools.c:546
+#: edit/edit.h:347 edit/editcmd.c:344 edit/editcmd.c:1097 edit/editcmd.c:1178
+#: edit/editcmd.c:2367 edit/editmenu.c:32 edit/editoptions.c:65
+#: src/boxes.c:144 src/boxes.c:278 src/boxes.c:378 src/boxes.c:469
+#: src/boxes.c:616 src/boxes.c:740 src/boxes.c:969 src/boxes.c:1039
+#: src/filegui.c:797 src/find.c:148 src/layout.c:366 src/option.c:135
+#: src/wtools.c:522
 msgid "&Ok"
 msgstr "&Labi"
 
+# edit/edit_key_translator.c:126
+#: edit/edit_key_translator.c:135
+msgid " Emacs key: "
+msgstr "Emacs taustiòð: "
+
+# edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
+#: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
+msgid " Execute Macro "
+msgstr " Palaist Makro "
+
+# edit/edit_key_translator.c:138 edit/edit_key_translator.c:153
+# gtkedit/editcmd.c:763 gtkedit/editcmd.c:772
+#: edit/edit_key_translator.c:147 edit/edit_key_translator.c:172
+#: edit/editcmd.c:637
+msgid " Press macro hotkey: "
+msgstr " Spied makro karsto taustiòu: "
+
+# edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:168
+msgid " Insert Literal "
+msgstr " Ievietot Burtu "
+
+# edit/edit_key_translator.c:149
+#: edit/edit_key_translator.c:168
+msgid " Press any key: "
+msgstr " Spiest jebkuru taustiòu: "
+
 # gtkedit/editcmd.c:305
-#: edit/editcmd.c:256
+#: edit/editcmd.c:257
 msgid " Error writing to pipe: "
 msgstr " Kïûda rakstot programkanâlâ: "
 
 # gtkedit/editcmd.c:311
-#: edit/editcmd.c:262
+#: edit/editcmd.c:263
 msgid " Failed trying to open pipe for writing: "
 msgstr " Nevar atvçrt programkanâlu ierkastîðanai: "
 
 # gtkedit/editcmd.c:386
-#: edit/editcmd.c:336
+#: edit/editcmd.c:337
 msgid "Quick save "
 msgstr "Âtra saglabâðana "
 
 # gtkedit/editcmd.c:387
-#: edit/editcmd.c:337
+#: edit/editcmd.c:338
 msgid "Safe save "
 msgstr "Droða saglabâðana "
 
 # gtkedit/editcmd.c:388
-#: edit/editcmd.c:338
+#: edit/editcmd.c:339
 msgid "Do backups -->"
 msgstr "Veikt dublçjumu -->"
 
@@ -193,52 +164,30 @@ msgstr "Veikt dublçjumu -->"
 # src/view.c:406 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 # vfs/smbfs.c:117
 #. 0
-#: edit/editcmd.c:341
-#: edit/editcmd.c:1041
-#: edit/editcmd.c:1100
-#: edit/editcmd.c:1185
-#: edit/editcmd.c:2358
-#: edit/editoptions.c:66
-#: src/achown.c:71
-#: src/boxes.c:145
-#: src/boxes.c:279
-#: src/boxes.c:376
-#: src/boxes.c:467
-#: src/boxes.c:613
-#: src/boxes.c:751
-#: src/boxes.c:1056
-#: src/chmod.c:107
-#: src/chown.c:77
-#: src/cmd.c:839
-#: src/filegui.c:781
-#: src/find.c:151
-#: src/hotlist.c:123
-#: src/hotlist.c:495
-#: src/hotlist.c:785
-#: src/hotlist.c:882
-#: src/layout.c:366
-#: src/learn.c:59
-#: src/option.c:136
-#: src/panelize.c:74
-#: src/view.c:398
-#: src/wtools.c:107
-#: src/wtools.c:374
-#: src/wtools.c:544
+#: edit/editcmd.c:342 edit/editcmd.c:1039 edit/editcmd.c:1095
+#: edit/editcmd.c:1176 edit/editcmd.c:2365 edit/editoptions.c:62
+#: src/achown.c:71 src/boxes.c:145 src/boxes.c:279 src/boxes.c:376
+#: src/boxes.c:467 src/boxes.c:613 src/boxes.c:738 src/boxes.c:1039
+#: src/chmod.c:107 src/chown.c:76 src/cmd.c:872 src/filegui.c:780
+#: src/find.c:148 src/hotlist.c:123 src/hotlist.c:501 src/hotlist.c:791
+#: src/hotlist.c:888 src/layout.c:367 src/learn.c:59 src/option.c:136
+#: src/panelize.c:73 src/view.c:385 src/view.c:407 src/wtools.c:101
+#: src/wtools.c:352 src/wtools.c:520
 msgid "&Cancel"
 msgstr "&Atsaukt"
 
 # gtkedit/editcmd.c:397
-#: edit/editcmd.c:347
+#: edit/editcmd.c:348
 msgid "Extension:"
 msgstr "Paplaðinâjums:"
 
 # gtkedit/editcmd.c:404
-#: edit/editcmd.c:353
+#: edit/editcmd.c:354
 msgid " Edit Save Mode "
 msgstr " Rediìçt Glabâðanas Reþîmu "
 
 # gtkedit/editcmd.c:528
-#: edit/editcmd.c:418
+#: edit/editcmd.c:419
 msgid " Save As "
 msgstr " Glabât Kâ "
 
@@ -248,141 +197,114 @@ msgstr " Glabât Kâ "
 # src/screen.c:2175 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:382
 # src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:172
 #. Warning message with a query to continue or cancel the operation
-#: edit/editcmd.c:432
-#: edit/editcmd.c:721
-#: edit/editcmd.c:746
-#: edit/editcmd.c:893
-#: edit/editcmd.c:991
-#: src/file.c:609
-#: src/help.c:314
-#: src/main.c:648
-#: src/screen.c:1400
-#: src/screen.c:2077
-#: src/screen.c:2127
-#: src/selcodepage.c:75
-#: src/selcodepage.c:92
-#: src/subshell.c:726
-#: src/subshell.c:752
-#: src/utilunix.c:370
-#: src/utilunix.c:374
-#: src/utilunix.c:394
-#: src/utilunix.c:445
-#: vfs/mcfs.c:167
+#: edit/editcmd.c:433 edit/editcmd.c:722 edit/editcmd.c:747 edit/editcmd.c:891
+#: edit/editcmd.c:989 src/file.c:592 src/help.c:314 src/main.c:473
+#: src/screen.c:1382 src/screen.c:2002 src/selcodepage.c:75
+#: src/selcodepage.c:92 src/subshell.c:702 src/utilunix.c:317
+#: src/utilunix.c:321 src/utilunix.c:341 src/utilunix.c:392 vfs/mcfs.c:129
 msgid " Warning "
 msgstr " Brîdinâjums "
 
 # gtkedit/editcmd.c:543
-#: edit/editcmd.c:433
+#: edit/editcmd.c:434
 msgid " A file already exists with this name. "
 msgstr " Fails ar tâdu nosaukumu jau eksistç. "
 
 # gtkedit/editcmd.c:545
 #. Push buttons to over-write the current file, or cancel the operation
-#: edit/editcmd.c:435
+#: edit/editcmd.c:436
 msgid "Overwrite"
 msgstr "Pârrakstît"
 
 # gtkedit/editcmd.c:545 gtkedit/editcmd.c:612 gtkedit/editcmd.c:839
 # gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
 # gtkedit/editcmd.c:1680
-#: edit/editcmd.c:435
-#: edit/editcmd.c:499
-#: edit/editcmd.c:697
-#: edit/editcmd.c:721
-#: edit/editcmd.c:746
-#: edit/editcmd.c:893
+#: edit/editcmd.c:436 edit/editcmd.c:501 edit/editcmd.c:698 edit/editcmd.c:722
+#: edit/editcmd.c:747 edit/editcmd.c:891
 msgid "Cancel"
 msgstr "Atsaukt"
 
 # gtkedit/editcmd.c:564
-#: edit/editcmd.c:452
+#: edit/editcmd.c:454
 msgid " Save as "
 msgstr " Glabât kâ "
 
 # gtkedit/editcmd.c:564 gtkedit/editcmd.c:2784
-#: edit/editcmd.c:452
-#: edit/editcmd.c:2114
+#: edit/editcmd.c:454 edit/editcmd.c:2103 src/view.c:384
 msgid " Error trying to save file. "
 msgstr " Kïûda mçìinot saglabât failu. "
 
 # gtkedit/editcmd.c:682 gtkedit/editcmd.c:690 gtkedit/editcmd.c:715
 #. This heads the delete macro error dialog box
-#: edit/editcmd.c:555
-#: edit/editcmd.c:563
-#: edit/editcmd.c:588
+#: edit/editcmd.c:556 edit/editcmd.c:564 edit/editcmd.c:589
 msgid " Delete macro "
 msgstr " Dzçst makro "
 
 # gtkedit/editcmd.c:684
 #. 'Open' = load temp file
-#: edit/editcmd.c:557
+#: edit/editcmd.c:558
 msgid " Error trying to open temp file "
 msgstr " Kïûda mçìinot atvçrt temp failu "
 
 # gtkedit/editcmd.c:692 gtkedit/editcmd.c:753 gtkedit/editcmd.c:821
 #. 'Open' = load temp file
-#: edit/editcmd.c:565
-#: edit/editcmd.c:626
-#: edit/editcmd.c:683
+#: edit/editcmd.c:566 edit/editcmd.c:627 edit/editcmd.c:684
 msgid " Error trying to open macro file "
 msgstr " Kïûda mçìinot atvçrt makro failu "
 
 # gtkedit/editcmd.c:716
-#: edit/editcmd.c:589
+#: edit/editcmd.c:590
 msgid " Error trying to overwrite macro file "
 msgstr " Kïûda mçìinot pârrakstît makro failu "
 
 # gtkedit/editcmd.c:732
 #. This heads the 'Macro' dialog box
-#: edit/editcmd.c:605
+#: edit/editcmd.c:606
 msgid " Macro "
 msgstr " Makro "
 
 # gtkedit/editcmd.c:734
 #. Input line for a single key press follows the ':'
-#: edit/editcmd.c:607
+#: edit/editcmd.c:608
 msgid " Press the macro's new hotkey: "
 msgstr " Spied makro jauno karsto taustiòu: "
 
 # gtkedit/editcmd.c:753
 #. This heads the 'Save Macro' dialog box
-#: edit/editcmd.c:626
+#: edit/editcmd.c:627
 msgid " Save macro "
 msgstr " Glabât makro "
 
 # gtkedit/editcmd.c:763 gtkedit/editcmd.c:770
-#: edit/editcmd.c:635
+#: edit/editcmd.c:636
 msgid " Delete Macro "
 msgstr " Dzçst Makro "
 
 # gtkedit/editcmd.c:820
 #. This heads the 'Load Macro' dialog box
-#: edit/editcmd.c:682
+#: edit/editcmd.c:683
 msgid " Load macro "
 msgstr " Ielâdçt makro "
 
 # gtkedit/editcmd.c:834 gtkedit/editcmd.c:836
-#: edit/editcmd.c:695
+#: edit/editcmd.c:696
 msgid " Confirm save file? : "
 msgstr " Apstiprinât faila saglabâðanu? : "
 
 # gtkedit/editcmd.c:839
 #. Buttons to 'Confirm save file' query
-#: edit/editcmd.c:697
+#: edit/editcmd.c:698 src/view.c:383
 msgid " Save file "
 msgstr " Saglabât failu "
 
 # gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
 # src/view.c:2077
-#: edit/editcmd.c:697
-#: edit/editwidget.c:237
-#: src/view.c:2032
+#: edit/editcmd.c:698 edit/editwidget.c:234 src/view.c:2037
 msgid "Save"
 msgstr "Glabât"
 
 # gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
-#: edit/editcmd.c:721
-#: edit/editcmd.c:746
+#: edit/editcmd.c:722 edit/editcmd.c:747
 msgid ""
 " Current text was modified without a file save. \n"
 " Continue discards these changes. "
@@ -391,332 +313,287 @@ msgstr ""
 " Ja turpinâsiet, izmaiòs tiks atsauktas. "
 
 # gtkedit/editcmd.c:865 gtkedit/editcmd.c:890 gtkedit/editcmd.c:1041
-#: edit/editcmd.c:721
-#: edit/editcmd.c:746
-#: edit/editcmd.c:893
+#: edit/editcmd.c:722 edit/editcmd.c:747 edit/editcmd.c:891
 msgid "Continue"
 msgstr "Turpinât"
 
 # gtkedit/editcmd.c:896
-#: edit/editcmd.c:752
+#: edit/editcmd.c:753
 msgid " Load "
 msgstr " Ielâdçt "
 
 # gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139
-#: edit/editcmd.c:893
-#: edit/editcmd.c:991
+#: edit/editcmd.c:891 edit/editcmd.c:989
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " Bloks ir liels, jûs iespçjams nevarçsiet atsaukt ðo darbîbu. "
 
 # gtkedit/editcmd.c:1139
-#: edit/editcmd.c:991
+#: edit/editcmd.c:989
 msgid " Continue "
 msgstr " Turpinât "
 
 # gtkedit/editcmd.c:1139
-#: edit/editcmd.c:991
+#: edit/editcmd.c:989
 msgid " Cancel "
 msgstr " Atsaukt "
 
 # gtkedit/editcmd.c:1194
-#: edit/editcmd.c:1043
+#: edit/editcmd.c:1041
 msgid "o&Ne"
 msgstr "vie&Ns"
 
 # gtkedit/editcmd.c:1196 src/filegui.c:597
-#: edit/editcmd.c:1045
-#: src/filegui.c:558
+#: edit/editcmd.c:1043 src/filegui.c:557
 msgid "al&L"
 msgstr "vi&Si"
 
 # gtkedit/editcmd.c:1198 src/file.c:2190 src/filegui.c:267
-#: edit/editcmd.c:1047
-#: src/file.c:2185
-#: src/filegui.c:249
+#: edit/editcmd.c:1045 src/file.c:2076 src/filegui.c:248
 msgid "&Skip"
 msgstr "&Izlaist"
 
 # gtkedit/editcmd.c:1200
-#: edit/editcmd.c:1049
+#: edit/editcmd.c:1047
 msgid "&Replace"
 msgstr "&Aizvietot"
 
 # gtkedit/editcmd.c:1206 gtkedit/editcmd.c:1680
-#: edit/editcmd.c:1058
-#: edit/editcmd.c:1063
+#: edit/editcmd.c:1054 edit/editcmd.c:1061
 msgid " Replace with: "
 msgstr " Aizvietot ar: "
 
 # gtkedit/editcmd.c:1210
-#: edit/editcmd.c:1068
+#: edit/editcmd.c:1066
 msgid " Confirm replace "
 msgstr " Apstirpinât aizvietoðanu "
 
 # gtkedit/editcmd.c:1246 gtkedit/editcmd.c:1331
-#: edit/editcmd.c:1104
-#: edit/editcmd.c:1189
+#: edit/editcmd.c:1099 edit/editcmd.c:1180
 msgid "scanf &Expression"
 msgstr "scan&F izteiksme"
 
 # gtkedit/editcmd.c:1248
-#: edit/editcmd.c:1106
+#: edit/editcmd.c:1101
 msgid "replace &All"
 msgstr "aizvietot vi&Sus"
 
 # gtkedit/editcmd.c:1250
-#: edit/editcmd.c:1108
+#: edit/editcmd.c:1103
 msgid "pr&Ompt on replace"
 msgstr "jau&Tât pie aizvietoðanas"
 
 # gtkedit/editcmd.c:1252 gtkedit/editcmd.c:1333
-#: edit/editcmd.c:1110
-#: edit/editcmd.c:1191
+#: edit/editcmd.c:1105 edit/editcmd.c:1182
 msgid "&Backwards"
 msgstr "at&Pakaï"
 
 # gtkedit/editcmd.c:1254 gtkedit/editcmd.c:1335
-#: edit/editcmd.c:1112
-#: edit/editcmd.c:1193
+#: edit/editcmd.c:1107 edit/editcmd.c:1184
 msgid "&Regular expression"
 msgstr "&Regulâra izteiksme"
 
 # gtkedit/editcmd.c:1256 gtkedit/editcmd.c:1337
-#: edit/editcmd.c:1114
-#: edit/editcmd.c:1195
+#: edit/editcmd.c:1109 edit/editcmd.c:1186
 msgid "&Whole words only"
 msgstr "&Tikai veselus vârdus"
 
 # gtkedit/editcmd.c:1258 gtkedit/editcmd.c:1339
-#: edit/editcmd.c:1116
-#: edit/editcmd.c:1197
-#: src/find.c:144
+#: edit/editcmd.c:1111 edit/editcmd.c:1188 src/find.c:141
 msgid "case &Sensitive"
 msgstr "lielo/mazo burtu &Jûtigs"
 
 # gtkedit/editcmd.c:1262
-#: edit/editcmd.c:1120
+#: edit/editcmd.c:1115
 msgid " Enter replacement argument order eg. 3,2,1,4 "
 msgstr " Ievadi aizvietojamâ argumenta secîbu, piem., 3,2,1,4 "
 
 # gtkedit/editcmd.c:1266
-#: edit/editcmd.c:1124
+#: edit/editcmd.c:1119
 msgid " Enter replacement string:"
 msgstr " Ievadiet aizvietotâjvirkni:"
 
 # gtkedit/editcmd.c:1270 gtkedit/editcmd.c:1343 src/view.c:2000
-#: edit/editcmd.c:1128
-#: edit/editcmd.c:1201
-#: src/view.c:1947
+#: edit/editcmd.c:1123 edit/editcmd.c:1192 src/view.c:1952
 msgid " Enter search string:"
 msgstr " Ievadiet meklçjamo virkni:"
 
 # gtkedit/editcmd.c:1289 gtkedit/editcmd.c:1593 gtkedit/editcmd.c:1680
 # gtkedit/editcmd.c:2223 gtkedit/editcmd.c:2254 gtkedit/editcmd.c:2256
-#: edit/editcmd.c:1147
-#: edit/editcmd.c:1783
-#: edit/editcmd.c:1814
-#: edit/editcmd.c:1816
+#: edit/editcmd.c:1142 edit/editcmd.c:1775 edit/editcmd.c:1805
+#: edit/editcmd.c:1807
 msgid " Replace "
 msgstr " Aizvietot "
 
 # gtkedit/editcmd.c:1357 gtkedit/editcmd.c:1587 gtkedit/editcmd.c:2322
 # gtkedit/editcmd.c:2324 gtkedit/editcmd.c:2352 src/view.c:1528
 # src/view.c:1627 src/view.c:1750 src/view.c:1968 src/view.c:2000
-#: edit/editcmd.c:1215
-#: edit/editcmd.c:1894
-#: edit/editcmd.c:1896
-#: edit/editcmd.c:1924
-#: src/view.c:1478
-#: src/view.c:1557
-#: src/view.c:1677
-#: src/view.c:1689
-#: src/view.c:1905
-#: src/view.c:1947
+#. in response to number of bookmarks added because of string being found %d times
+#: edit/editcmd.c:1206 edit/editcmd.c:1883 edit/editcmd.c:1885
+#: edit/editcmd.c:1913 src/view.c:1482 src/view.c:1561 src/view.c:1681
+#: src/view.c:1693 src/view.c:1910 src/view.c:1952
 msgid " Search "
 msgstr " Meklçt "
 
 # gtkedit/editcmd.c:2040
-#: edit/editcmd.c:1587
-msgid " Invalid regular expression, or scanf expression with to many conversions "
-msgstr " Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm konversijâm "
+#: edit/editcmd.c:1578
+msgid ""
+" Invalid regular expression, or scanf expression with to many conversions "
+msgstr ""
+" Nepareiza regulârâ izteiksme vai scanf izteiksme ar pârâk daudzâm "
+"konversijâm "
 
 # gtkedit/editcmd.c:2225
 #. "Invalid regexp string or scanf string"
-#: edit/editcmd.c:1785
+#: edit/editcmd.c:1777
 msgid " Error in replacement format string. "
 msgstr " Kïûda aizstâðanas formâta rinâ. "
 
 # gtkedit/editcmd.c:2253
-#: edit/editcmd.c:1813
+#: edit/editcmd.c:1805
 #, c-format
 msgid " %ld replacements made. "
 msgstr " %ld aizstâðanas reþîms. "
 
 # gtkedit/editcmd.c:2256 gtkedit/editcmd.c:2324 gtkedit/editcmd.c:2352
-#: edit/editcmd.c:1816
-#: edit/editcmd.c:1896
-#: edit/editcmd.c:1924
+#: edit/editcmd.c:1807 edit/editcmd.c:1885 edit/editcmd.c:1913
 msgid " Search string not found. "
 msgstr " Meklçtâ rindiòa nav atrasta. "
 
 # gtkedit/editcmd.c:2321
-#. in response to number of bookmarks added because of string being found %d times
-#: edit/editcmd.c:1893
+#: edit/editcmd.c:1883
 #, c-format
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d meklçjumi izdarît, %d grâmatzîmes pievienotas"
 
 # gtkedit/editcmd.c:2377 gtkedit/editcmd.c:2392 gtkedit/editcmd.c:2395
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1931
 msgid " Quit "
 msgstr " Iziet "
 
 # gtkedit/editcmd.c:2392
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1931
 msgid " File was modified, Save with exit? "
 msgstr " Fails tika mainîts, saglabât izejot?"
 
 # gtkedit/editcmd.c:2392
-#: edit/editcmd.c:1942
+#: edit/editcmd.c:1931
 msgid "Cancel quit"
 msgstr "Atcelt izieðanu"
 
 # gtkedit/editcmd.c:2392 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 # src/filegui.c:603 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
-#: edit/editcmd.c:1942
-#: src/cmd.c:228
-#: src/file.c:1873
-#: src/file.c:2244
-#: src/filegui.c:564
-#: src/hotlist.c:1006
-#: src/main.c:802
-#: src/screen.c:2114
-#: src/subshell.c:727
-#: src/subshell.c:753
-#: src/tree.c:755
-#: src/view.c:398
+#: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: src/filegui.c:563 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
+#: src/subshell.c:703 src/tree.c:755 src/view.c:407
 msgid "&Yes"
 msgstr "&Jâ"
 
 # gtkedit/editcmd.c:2392 src/cmd.c:249 src/file.c:1878 src/file.c:2249
 # src/filegui.c:602 src/hotlist.c:1022 src/main.c:869 src/screen.c:2162
 # src/subshell.c:706 src/subshell.c:732 src/tree.c:745 src/view.c:406
-#: edit/editcmd.c:1942
-#: src/cmd.c:228
-#: src/file.c:1873
-#: src/file.c:2244
-#: src/filegui.c:563
-#: src/hotlist.c:1006
-#: src/main.c:802
-#: src/screen.c:2114
-#: src/subshell.c:727
-#: src/subshell.c:753
-#: src/tree.c:755
-#: src/view.c:398
+#: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
+#: src/filegui.c:562 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
+#: src/subshell.c:703 src/tree.c:755 src/view.c:407
 msgid "&No"
 msgstr "&Nç"
 
 # gtkedit/editcmd.c:2628 gtkedit/editcmd.c:2703
-#: edit/editcmd.c:2049
+#: edit/editcmd.c:2038
 msgid " Copy to clipboard "
 msgstr " Kopçt uz starpliktuvi "
 
 # gtkedit/editcmd.c:2628 gtkedit/editcmd.c:2650 gtkedit/editcmd.c:2703
 # gtkedit/editcmd.c:2716
-#: edit/editcmd.c:2049
-#: edit/editcmd.c:2062
+#: edit/editcmd.c:2038 edit/editcmd.c:2051
 msgid " Unable to save to file. "
 msgstr " Nevar saglabât failu. "
 
 # gtkedit/editcmd.c:2650 gtkedit/editcmd.c:2716
-#: edit/editcmd.c:2062
+#: edit/editcmd.c:2051
 msgid " Cut to clipboard "
 msgstr " Aiznest uz starpliktuvi "
 
 # gtkedit/editcmd.c:2738 gtkedit/editcmd.c:2742 gtkedit/editcmd.c:2747
 # gtkedit/editcmd.c:2750 src/view.c:1915
-#: edit/editcmd.c:2082
-#: src/view.c:1852
+#: edit/editcmd.c:2071 src/view.c:1856
 msgid " Goto line "
 msgstr " Iet uz lîniju "
 
 # gtkedit/editcmd.c:2738 gtkedit/editcmd.c:2742 gtkedit/editcmd.c:2747
 # gtkedit/editcmd.c:2750
-#: edit/editcmd.c:2082
+#: edit/editcmd.c:2071
 msgid " Enter line: "
 msgstr " Ievadîet lîniju: "
 
 # gtkedit/editcmd.c:2771 gtkedit/editcmd.c:2784
-#: edit/editcmd.c:2101
-#: edit/editcmd.c:2114
+#: edit/editcmd.c:2090 edit/editcmd.c:2103
 msgid " Save Block "
 msgstr " Saglabât Bloku "
 
 # gtkedit/editcmd.c:2798
-#: edit/editcmd.c:2126
+#: edit/editcmd.c:2115
 msgid " Insert File "
 msgstr " Ievietot Failu "
 
 # gtkedit/editcmd.c:2811
-#: edit/editcmd.c:2139
+#: edit/editcmd.c:2128
 msgid " Insert file "
 msgstr " Ievietot failu "
 
 # gtkedit/editcmd.c:2811
-#: edit/editcmd.c:2139
+#: edit/editcmd.c:2128
 msgid " Error trying to insert file. "
 msgstr " Kïûda mçìinot ievietot failu. "
 
 # gtkedit/editcmd.c:2832
-#: edit/editcmd.c:2156
+#: edit/editcmd.c:2145
 msgid " Sort block "
 msgstr " Sakârtot bloku "
 
 # gtkedit/editcmd.c:2832 gtkedit/editcmd.c:2914
-#: edit/editcmd.c:2156
-#: edit/editcmd.c:2240
+#: edit/editcmd.c:2145 edit/editcmd.c:2239
 msgid " You must first highlight a block of text. "
 msgstr " Jums pa priekðu ir jâiezîmç teksta bloks. "
 
 # gtkedit/editcmd.c:2837
-#: edit/editcmd.c:2163
+#: edit/editcmd.c:2152
 msgid " Run Sort "
 msgstr " Palaist Kârtoðanu "
 
 # gtkedit/editcmd.c:2838
-#: edit/editcmd.c:2164
+#: edit/editcmd.c:2153
 msgid " Enter sort options (see manpage) separated by whitespace: "
-msgstr " Ievadi kârtoðanas opcijas (apskati man lapas) atdalîtas ar tukðumiem: "
+msgstr ""
+" Ievadi kârtoðanas opcijas (apskati man lapas) atdalîtas ar tukðumiem: "
 
 # gtkedit/editcmd.c:2849 gtkedit/editcmd.c:2854
-#: edit/editcmd.c:2175
-#: edit/editcmd.c:2180
+#: edit/editcmd.c:2164 edit/editcmd.c:2169
 msgid " Sort "
 msgstr " Kârtot "
 
 # gtkedit/editcmd.c:2850
-#: edit/editcmd.c:2176
+#: edit/editcmd.c:2165
 msgid " Error trying to execute sort command "
 msgstr " Kïûda mçìinot palaist sort komandu "
 
 # gtkedit/editcmd.c:2855
-#: edit/editcmd.c:2181
+#: edit/editcmd.c:2170
 msgid " Sort returned non-zero: "
 msgstr " Kârtoðana atgrieza ne-nulli: "
 
 # gtkedit/editcmd.c:2888
-#: edit/editcmd.c:2214
+#: edit/editcmd.c:2209
 msgid "Error create script:"
 msgstr "Kïûda izveidojot skriptu:"
 
 # gtkedit/editcmd.c:2894
-#: edit/editcmd.c:2220
+#: edit/editcmd.c:2217
 msgid "Error read script:"
 msgstr "Kïûda lasot skriptu:"
 
 # gtkedit/editcmd.c:2901
-#: edit/editcmd.c:2227
+#: edit/editcmd.c:2226
 msgid "Error close script:"
 msgstr "Kïûda aizverot skriptu:"
 
@@ -726,52 +603,57 @@ msgid "Script created:"
 msgstr "Skripts izveidots:"
 
 # gtkedit/editcmd.c:2913
-#: edit/editcmd.c:2239
+#: edit/editcmd.c:2237
 msgid "Process block"
 msgstr "Procesa bloks"
 
+# gtkedit/edit.c:2767 gtkedit/editcmd.c:2945
+#: edit/editcmd.c:2283
+msgid "Error trying to stat file:"
+msgstr "Kïûda mçìinot sâknçt failu:"
+
 # gtkedit/editcmd.c:3020
-#: edit/editcmd.c:2353
+#: edit/editcmd.c:2360
 msgid " Mail "
 msgstr " Pasts"
 
 # gtkedit/editcmd.c:3033
-#: edit/editcmd.c:2364
+#: edit/editcmd.c:2371
 msgid " Copies to"
 msgstr " Kopét uz"
 
 # gtkedit/editcmd.c:3037
-#: edit/editcmd.c:2368
+#: edit/editcmd.c:2375
 msgid " Subject"
 msgstr " Subjekts"
 
 # gtkedit/editcmd.c:3041
-#: edit/editcmd.c:2372
+#: edit/editcmd.c:2379
 msgid " To"
 msgstr " Uz"
 
 # gtkedit/editcmd.c:3043
-#: edit/editcmd.c:2374
+#: edit/editcmd.c:2381
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <subjekts> -c <cc> <kam>"
 
 # gtkedit/editmenu.c:62
-#: edit/editmenu.c:55
+#: edit/editmenu.c:50
 msgid " Word wrap "
 msgstr " Vârdu iekïauðana"
 
 # gtkedit/editmenu.c:64
-#: edit/editmenu.c:56
+#: edit/editmenu.c:51
 msgid " Enter line length, 0 for off: "
 msgstr "Ievadi lînijas garumu, 0 izslçdz"
 
 # gtkedit/editmenu.c:75
-#: edit/editmenu.c:67
+#: edit/editmenu.c:62
 msgid " About "
 msgstr " Par "
 
 # gtkedit/editmenu.c:76
-#: edit/editmenu.c:68
+#: edit/editmenu.c:63
 msgid ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -780,7 +662,6 @@ msgid ""
 "\n"
 "       A user friendly text editor written\n"
 "           for the Midnight Commander.\n"
-""
 msgstr ""
 "\n"
 "                Cooledit  v3.11.5\n"
@@ -789,460 +670,402 @@ msgstr ""
 "\n"
 "       Lietotâjam draudzîgs teksta redaktors, uzrakstîts\n"
 "           priekð Pusnakts Komandiera.\n"
-""
 
 # gnome/gpopup2.c:286
-#: edit/editmenu.c:120
-#: edit/editmenu.c:139
+#: edit/editmenu.c:115 edit/editmenu.c:134
 msgid "&Open file..."
 msgstr "&Atvçrt failu..."
 
 # gtkedit/editmenu.c:129
-#: edit/editmenu.c:121
+#: edit/editmenu.c:116
 msgid "&New              C-n"
 msgstr "&Jauns            C-n"
 
 # gtkedit/editmenu.c:131 gtkedit/editmenu.c:150
-#: edit/editmenu.c:123
-#: edit/editmenu.c:142
+#: edit/editmenu.c:118 edit/editmenu.c:137
 msgid "&Save              F2"
 msgstr "&Saglabât          F2"
 
 # gtkedit/editmenu.c:132 gtkedit/editmenu.c:151
-#: edit/editmenu.c:124
-#: edit/editmenu.c:143
+#: edit/editmenu.c:119 edit/editmenu.c:138
 msgid "save &As...       F12"
 msgstr "saglabât &Kâ...   F12"
 
 # gtkedit/editmenu.c:134 gtkedit/editmenu.c:153
-#: edit/editmenu.c:126
-#: edit/editmenu.c:145
+#: edit/editmenu.c:121 edit/editmenu.c:140
 msgid "&Insert file...   F15"
 msgstr "&Ievietot failu.. F15"
 
 # gtkedit/editmenu.c:135
-#: edit/editmenu.c:127
+#: edit/editmenu.c:122
 msgid "copy to &File...  C-f"
 msgstr "kopçt uz &Failu.. C-f"
 
 # gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
-#: edit/editmenu.c:129
-#: edit/editmenu.c:148
+#: edit/editmenu.c:124 edit/editmenu.c:143
 msgid "&User menu...     F11"
 msgstr "&Lietotâja izvçlne F11"
 
 # gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
-#: edit/editmenu.c:132
-#: edit/editmenu.c:151
+#: edit/editmenu.c:127 edit/editmenu.c:146
 msgid "a&Bout...            "
 msgstr "&Par...              "
 
 # gtkedit/editmenu.c:142 gtkedit/editmenu.c:161
-#: edit/editmenu.c:134
-#: edit/editmenu.c:153
+#: edit/editmenu.c:129 edit/editmenu.c:148
 msgid "&Quit             F10"
 msgstr "&Iziet            F10"
 
 # gtkedit/editmenu.c:148
-#: edit/editmenu.c:140
+#: edit/editmenu.c:135
 msgid "&New            C-x k"
 msgstr "&Jauns          C-x k"
 
 # gtkedit/editmenu.c:154
-#: edit/editmenu.c:146
+#: edit/editmenu.c:141
 msgid "copy to &File...     "
 msgstr "kopçt uz &Failu...   "
 
 # gtkedit/editmenu.c:166 gtkedit/editmenu.c:183
-#: edit/editmenu.c:158
-#: edit/editmenu.c:175
+#: edit/editmenu.c:153 edit/editmenu.c:170
 msgid "&Toggle Mark       F3"
 msgstr "&Ieslçgt Iezîmçðanau       F3"
 
 # gtkedit/editmenu.c:167 gtkedit/editmenu.c:184
-#: edit/editmenu.c:159
-#: edit/editmenu.c:176
+#: edit/editmenu.c:154 edit/editmenu.c:171
 msgid "&Mark Columns    S-F3"
 msgstr "&Iezîmçt Kolonnas    S-F3"
 
 # gtkedit/editmenu.c:169 gtkedit/editmenu.c:186
-#: edit/editmenu.c:161
-#: edit/editmenu.c:178
+#: edit/editmenu.c:156 edit/editmenu.c:173
 msgid "toggle &Ins/overw Ins"
 msgstr "slçgt &Iev/pârr"
 
 # gtkedit/editmenu.c:171 gtkedit/editmenu.c:188
-#: edit/editmenu.c:163
-#: edit/editmenu.c:180
+#: edit/editmenu.c:158 edit/editmenu.c:175
 msgid "&Copy              F5"
 msgstr "&Kopçt             F5"
 
 # gtkedit/editmenu.c:172 gtkedit/editmenu.c:189
-#: edit/editmenu.c:164
-#: edit/editmenu.c:181
+#: edit/editmenu.c:159 edit/editmenu.c:176
 msgid "&Move              F6"
 msgstr "p&Ârvietot         F6"
 
 # gtkedit/editmenu.c:173 gtkedit/editmenu.c:190
-#: edit/editmenu.c:165
-#: edit/editmenu.c:182
+#: edit/editmenu.c:160 edit/editmenu.c:177
 msgid "&Delete            F8"
 msgstr "&Dzçst             F8"
 
 # gtkedit/editmenu.c:175 gtkedit/editmenu.c:192
-#: edit/editmenu.c:167
-#: edit/editmenu.c:184
+#: edit/editmenu.c:162 edit/editmenu.c:179
 msgid "&Undo             C-u"
 msgstr "&Atsaukt          C-u"
 
 # gtkedit/editmenu.c:177 gtkedit/editmenu.c:194
-#: edit/editmenu.c:169
-#: edit/editmenu.c:186
+#: edit/editmenu.c:164 edit/editmenu.c:181
 msgid "&Beginning     C-PgUp"
 msgstr "&Sâkums        C-PgUp"
 
 # gtkedit/editmenu.c:178 gtkedit/editmenu.c:195
-#: edit/editmenu.c:170
-#: edit/editmenu.c:187
+#: edit/editmenu.c:165 edit/editmenu.c:182
 msgid "&End           C-PgDn"
 msgstr "&Beigas        C-PgDn"
 
 # gtkedit/editmenu.c:200 gtkedit/editmenu.c:207
-#: edit/editmenu.c:192
-#: edit/editmenu.c:199
+#: edit/editmenu.c:187 edit/editmenu.c:194
 msgid "&Search...         F7"
 msgstr "&Meklçt...         F7"
 
 # gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
-#: edit/editmenu.c:193
-#: edit/editmenu.c:200
+#: edit/editmenu.c:188 edit/editmenu.c:195
 msgid "search &Again     F17"
 msgstr "meklçt &Vçlreiz   F17"
 
 # gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
-#: edit/editmenu.c:194
-#: edit/editmenu.c:201
+#: edit/editmenu.c:189 edit/editmenu.c:196
 msgid "&Replace...        F4"
 msgstr "&Aizvietot...      F4"
 
 # gtkedit/editmenu.c:214 gtkedit/editmenu.c:237
-#: edit/editmenu.c:206
-#: edit/editmenu.c:229
+#: edit/editmenu.c:201 edit/editmenu.c:224
 msgid "&Goto line...            M-l"
 msgstr "&Iet uz lîniju...            M-l"
 
 # gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
-#: edit/editmenu.c:207
-#: edit/editmenu.c:230
+#: edit/editmenu.c:202 edit/editmenu.c:225
 msgid "goto matching &Bracket   M-b"
 msgstr "iet uz atbilstoðo ie&Kavu M-b"
 
 # gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
-#: edit/editmenu.c:209
-#: edit/editmenu.c:232
+#: edit/editmenu.c:204 edit/editmenu.c:227
 msgid "insert &Literal...       C-q"
 msgstr "ievietot &Burtu...       C-q"
 
 # gtkedit/editmenu.c:219 gtkedit/editmenu.c:242
-#: edit/editmenu.c:211
-#: edit/editmenu.c:234
+#: edit/editmenu.c:206 edit/editmenu.c:229
 msgid "&Refresh screen          C-l"
 msgstr "&Atsvaidzinât ekrânu          C-l"
 
 # gtkedit/editmenu.c:221 gtkedit/editmenu.c:244
-#: edit/editmenu.c:213
-#: edit/editmenu.c:236
+#: edit/editmenu.c:208 edit/editmenu.c:231
 msgid "&Start record macro      C-r"
 msgstr "&Sâkt macro rakstîðanu      C-r"
 
 # gtkedit/editmenu.c:222 gtkedit/editmenu.c:245
-#: edit/editmenu.c:214
-#: edit/editmenu.c:237
+#: edit/editmenu.c:209 edit/editmenu.c:232
 msgid "&Finish record macro...  C-r"
 msgstr "&Pabeigt makro rakstîðanu...  C-r"
 
 # gtkedit/editmenu.c:223
-#: edit/editmenu.c:215
+#: edit/editmenu.c:210
 msgid "&Execute macro...   C-a, KEY"
 msgstr "&Palaist makro...   C-a, KEY"
 
 # gtkedit/editmenu.c:224 gtkedit/editmenu.c:247
-#: edit/editmenu.c:216
-#: edit/editmenu.c:239
+#: edit/editmenu.c:211 edit/editmenu.c:234
 msgid "delete macr&O...            "
 msgstr "dzçst makr&O...            "
 
 # gtkedit/editmenu.c:226 gtkedit/editmenu.c:249
-#: edit/editmenu.c:218
-#: edit/editmenu.c:241
+#: edit/editmenu.c:213 edit/editmenu.c:236
 msgid "insert &Date/time           "
 msgstr "ievietot &Datumu/laiku           "
 
 # gtkedit/editmenu.c:228 gtkedit/editmenu.c:251
-#: edit/editmenu.c:220
-#: edit/editmenu.c:243
+#: edit/editmenu.c:215 edit/editmenu.c:238
 msgid "format p&Aragraph        M-p"
 msgstr "formatçt p&Aragrâfu        M-p"
 
 # gtkedit/editmenu.c:229
-#: edit/editmenu.c:221
+#: edit/editmenu.c:216
 msgid "'ispell' s&Pell check    C-p"
 msgstr "'ispell'&Pareizrakst. pârb. C-p"
 
 # gtkedit/editmenu.c:230 gtkedit/editmenu.c:253
-#: edit/editmenu.c:222
-#: edit/editmenu.c:245
+#: edit/editmenu.c:217 edit/editmenu.c:240
 msgid "sor&T...                 M-t"
 msgstr "kârto&T...                 M-t"
 
 # gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#: edit/editmenu.c:223
-#: edit/editmenu.c:246
+#: edit/editmenu.c:218 edit/editmenu.c:241
 msgid "E&xternal Formatter      F19"
 msgstr "Â&rçjais Formatçtâjs      F19"
 
 # gtkedit/editmenu.c:232
-#: edit/editmenu.c:224
+#: edit/editmenu.c:219 edit/editmenu.c:242
 msgid "&Mail...                    "
 msgstr "&Pasts..."
 
 # gtkedit/editmenu.c:246
-#: edit/editmenu.c:238
+#: edit/editmenu.c:233
 msgid "&Execute macro... C-x e, KEY"
 msgstr "&Palaist makro... C-x e, TAUSTIÒÐ"
 
 # gtkedit/editmenu.c:252
-#: edit/editmenu.c:244
+#: edit/editmenu.c:239
 msgid "'ispell' s&Pell check    M-$"
 msgstr "'ispell' s&Pareizrakst. pârb. M-$"
 
 # gtkedit/editmenu.c:261 gtkedit/editmenu.c:270
-#: edit/editmenu.c:253
-#: edit/editmenu.c:262
+#: edit/editmenu.c:247 edit/editmenu.c:256
 msgid "&General...  "
 msgstr "&Galvenais...  "
 
 # gtkedit/editmenu.c:262 gtkedit/editmenu.c:271
-#: edit/editmenu.c:254
-#: edit/editmenu.c:263
+#: edit/editmenu.c:248 edit/editmenu.c:257
 msgid "&Save mode..."
 msgstr "&Saglabât veidu..."
 
 # gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1367
-#: edit/editmenu.c:256
-#: edit/editmenu.c:265
-#: src/main.c:1240
+#: edit/editmenu.c:250 edit/editmenu.c:259 src/main.c:1077
 msgid "&Layout..."
 msgstr "&Izkârtojums..."
 
 # gtkedit/editmenu.c:283 gtkedit/editmenu.c:292 gtkedit/editmenu.c:409
 # src/chmod.c:164 src/chown.c:130
-#: edit/editmenu.c:275
-#: edit/editmenu.c:284
-#: src/chmod.c:151
-#: src/chown.c:128
+#: edit/editmenu.c:269 edit/editmenu.c:283 src/chmod.c:151 src/chown.c:126
 msgid " File "
 msgstr " Fails "
 
 # gtkedit/editmenu.c:284 gtkedit/editmenu.c:293 gtkedit/editmenu.c:425
-#: edit/editmenu.c:276
-#: edit/editmenu.c:285
+#: edit/editmenu.c:271 edit/editmenu.c:285
 msgid " Edit "
 msgstr " Rediìçt "
 
 # gtkedit/editmenu.c:285 gtkedit/editmenu.c:294
-#: edit/editmenu.c:277
-#: edit/editmenu.c:286
+#: edit/editmenu.c:273 edit/editmenu.c:287
 msgid " Sear/Repl "
 msgstr " Mekl/Aizv "
 
 # gtkedit/editmenu.c:286 gtkedit/editmenu.c:295 gtkedit/editmenu.c:465
-#: edit/editmenu.c:278
-#: edit/editmenu.c:287
+#: edit/editmenu.c:275 edit/editmenu.c:289
 msgid " Command "
 msgstr " Komanda "
 
 # gtkedit/editmenu.c:287 gtkedit/editmenu.c:296
-#: edit/editmenu.c:279
-#: edit/editmenu.c:288
+#: edit/editmenu.c:277 edit/editmenu.c:291
 msgid " Options "
 msgstr " Opcijas "
 
 # gtkedit/editoptions.c:36
-#: edit/editoptions.c:36
+#: edit/editoptions.c:34
 msgid "Intuitive"
 msgstr "Intuitîvi"
 
 # gtkedit/editoptions.c:36
-#: edit/editoptions.c:36
+#: edit/editoptions.c:34
 msgid "Emacs"
 msgstr "Emacs"
 
 # gtkedit/editoptions.c:39
-#: edit/editoptions.c:39
+#: edit/editoptions.c:37
 msgid "None"
 msgstr "Nekas"
 
 # gtkedit/editoptions.c:39
-#: edit/editoptions.c:39
+#: edit/editoptions.c:37
 msgid "Dynamic paragraphing"
 msgstr "Dinamiska paragrâfoðana"
 
 # gtkedit/editoptions.c:39
-#: edit/editoptions.c:39
+#: edit/editoptions.c:37
 msgid "Type writer wrap"
 msgstr "Maðînrakstîðanas iekïauðana"
 
 # gtkedit/editoptions.c:72
 #. 2
-#: edit/editoptions.c:72
+#: edit/editoptions.c:68
 msgid "Word wrap line length : "
 msgstr "Vârdu iekïauðanas lînijas garums: "
 
 # gtkedit/editoptions.c:78
 #. 4
-#: edit/editoptions.c:78
+#: edit/editoptions.c:74
 msgid "Tab spacing : "
 msgstr "Tab atstarpes : "
 
 # gtkedit/editoptions.c:86
-#: edit/editoptions.c:86
+#: edit/editoptions.c:82
 msgid "synta&X highlighting"
 msgstr "sinta&Kses izgaismoðana"
 
 # gtkedit/editoptions.c:92
 #. 7
-#: edit/editoptions.c:92
+#: edit/editoptions.c:88
 msgid "confir&M before saving"
 msgstr "a&Pstiprinât pirms saglabâðanas"
 
 # gtkedit/editoptions.c:95
 #. 8
-#: edit/editoptions.c:95
+#: edit/editoptions.c:91
 msgid "fill tabs with &Spaces"
 msgstr "piepildît tabulâcijas ar at&Starpçm"
 
 # gtkedit/editoptions.c:98
 #. 9
-#: edit/editoptions.c:98
+#: edit/editoptions.c:94
 msgid "&Return does autoindent"
 msgstr "&Enter veido autom.atkâpi"
 
 # gtkedit/editoptions.c:101
 #. 10
-#: edit/editoptions.c:101
+#: edit/editoptions.c:97
 msgid "&Backspace through tabs"
 msgstr ""
 
 # gtkedit/editoptions.c:104
 #. 11
-#: edit/editoptions.c:104
+#: edit/editoptions.c:100
 msgid "&Fake half tabs"
 msgstr ""
 
 # gtkedit/editoptions.c:110
 #. 13
-#: edit/editoptions.c:110
+#: edit/editoptions.c:106
 msgid "Wrap mode"
 msgstr "Iekïauðanas reþîms"
 
 # gtkedit/editoptions.c:116
 #. 15
-#: edit/editoptions.c:116
+#: edit/editoptions.c:112
 msgid "Key emulation"
 msgstr "Taustiòu emulâcija"
 
 # gtkedit/editoptions.c:157
-#: edit/editoptions.c:157
+#: edit/editoptions.c:153
 msgid " Editor options "
 msgstr " Redaktora opcijas "
 
 # gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 # src/main.c:1733 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 # src/view.c:2070
-#: edit/editwidget.c:236
-#: src/help.c:811
-#: src/main.c:1583
-#: src/screen.c:2378
-#: src/tree.c:1018
-#: src/view.c:2025
+#: edit/editwidget.c:233 src/help.c:811 src/main.c:1404 src/screen.c:2213
+#: src/tree.c:1018 src/view.c:2030
 msgid "Help"
 msgstr "Palîdzîba"
 
 # gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
-#: edit/editwidget.c:238
+#: edit/editwidget.c:235
 msgid "Mark"
 msgstr "Atzîmçt"
 
 # gtkedit/editwidget.c:1140
-#: edit/editwidget.c:239
+#: edit/editwidget.c:236
 msgid "Replac"
 msgstr "Aizvietot"
 
 # gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
 # src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
-#: edit/editwidget.c:240
-#: src/file.c:792
-#: src/screen.c:2382
-#: src/tree.c:1024
+#: edit/editwidget.c:237 src/file.c:770 src/screen.c:2217 src/tree.c:1024
 msgid "Copy"
 msgstr "Kopçt"
 
 # gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
-#: edit/editwidget.c:241
+#: edit/editwidget.c:238
 msgid "Move"
 msgstr "Pârvietot"
 
 # gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2085
-#: edit/editwidget.c:242
-#: src/view.c:2040
+#: edit/editwidget.c:239 src/view.c:2045
 msgid "Search"
 msgstr "Meklçt"
 
 # gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 # src/screen.c:2430
-#: edit/editwidget.c:243
-#: src/screen.c:2385
+#: edit/editwidget.c:240 src/screen.c:2220
 msgid "Delete"
 msgstr "Dzçst"
 
 # gtkedit/editwidget.c:1146 src/main.c:1735
-#: edit/editwidget.c:245
-#: src/main.c:1585
+#: edit/editwidget.c:242 src/main.c:1406
 msgid "PullDn"
 msgstr "IzvLej"
 
 # gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
 # src/main.c:1736 src/view.c:2072 src/view.c:2094
-#: edit/editwidget.c:246
-#: src/help.c:823
-#: src/main.c:1586
-#: src/view.c:2027
-#: src/view.c:2049
+#: edit/editwidget.c:243 src/help.c:823 src/main.c:1407 src/view.c:2032
+#: src/view.c:2054
 msgid "Quit"
 msgstr "Iziet"
 
 # gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
-#: edit/syntax.c:997
-#: edit/syntax.c:1004
+#: edit/syntax.c:979 edit/syntax.c:984
 msgid " Load syntax file "
 msgstr " Ielâdçt sintakses failu "
 
 # gtkedit/syntax.c:1518
-#: edit/syntax.c:997
+#: edit/syntax.c:979
 msgid " File access error "
 msgstr " Faila pieejas kïûda "
 
 # gtkedit/syntax.c:1524
-#: edit/syntax.c:1003
+#: edit/syntax.c:985
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Kïûda faila %s %d rindiòâ "
 
 # src/achown.c:72 src/chmod.c:115 src/chown.c:80
-#: src/achown.c:72
-#: src/chmod.c:108
-#: src/chown.c:78
+#: src/achown.c:72 src/chmod.c:108 src/chown.c:77
 msgid "&Set"
 msgstr "&Uzstâdît"
 
@@ -1252,21 +1075,17 @@ msgid "S&kip"
 msgstr "Iz&laist"
 
 # src/achown.c:74 src/chmod.c:119 src/chown.c:83
-#: src/achown.c:74
-#: src/chmod.c:112
-#: src/chown.c:81
+#: src/achown.c:74 src/chmod.c:112 src/chown.c:80
 msgid "Set &all"
 msgstr "Uzstâdît &visus"
 
 # src/achown.c:362 src/achown.c:369
-#: src/achown.c:343
-#: src/achown.c:350
+#: src/achown.c:343 src/achown.c:350
 msgid "owner"
 msgstr "îpaðnieks"
 
 # src/achown.c:364 src/achown.c:371
-#: src/achown.c:345
-#: src/achown.c:352
+#: src/achown.c:345 src/achown.c:352
 msgid "group"
 msgstr "grupa"
 
@@ -1303,10 +1122,7 @@ msgstr " Paplaðinâtâ chown komanda "
 
 # src/achown.c:629 src/achown.c:645 src/achown.c:708 src/chmod.c:285
 # src/chmod.c:370
-#: src/achown.c:607
-#: src/achown.c:623
-#: src/achown.c:669
-#: src/chmod.c:267
+#: src/achown.c:607 src/achown.c:623 src/achown.c:669 src/chmod.c:267
 #: src/chmod.c:336
 #, c-format
 msgid ""
@@ -1318,11 +1134,8 @@ msgstr ""
 
 # src/achown.c:634 src/achown.c:649 src/achown.c:712 src/chown.c:223
 # src/chown.c:345
-#: src/achown.c:612
-#: src/achown.c:627
-#: src/achown.c:673
-#: src/chown.c:221
-#: src/chown.c:328
+#: src/achown.c:612 src/achown.c:627 src/achown.c:673 src/chown.c:216
+#: src/chown.c:323
 #, c-format
 msgid ""
 " Couldn't chown \"%s\" \n"
@@ -1337,8 +1150,7 @@ msgid "Background process:"
 msgstr "Fona process:"
 
 # src/background.c:277 src/file.c:2189
-#: src/background.c:276
-#: src/file.c:2184
+#: src/background.c:276 src/file.c:2075
 msgid " Background process error "
 msgstr " Fona procesa kïûda "
 
@@ -1362,11 +1174,9 @@ msgstr " Fona darba kïûda "
 msgid ""
 " Background process sent us a request for more arguments \n"
 " than we can handle. \n"
-""
 msgstr ""
 " Fona process atsûtîja pieprasîjumu pçc vairâk argumentiem, \n"
 " kâ mçs varam norîkot. \n"
-""
 
 # src/boxes.c:63
 #: src/boxes.c:71
@@ -1464,20 +1274,17 @@ msgid "7 bits"
 msgstr "7 biti"
 
 # src/boxes.c:468
-#: src/boxes.c:471
-#: src/boxes.c:619
+#: src/boxes.c:471 src/boxes.c:619
 msgid "F&ull 8 bits input"
 msgstr "P&ilna 8 bitu ievade"
 
 # src/boxes.c:476
-#: src/boxes.c:479
-#: src/boxes.c:600
+#: src/boxes.c:479 src/boxes.c:600
 msgid " Display bits "
 msgstr " Displeja biti "
 
 # gnome/gnome-file-property-dialog.c:789 gnome/gprop.c:281
-#: src/boxes.c:584
-#: src/selcodepage.c:49
+#: src/boxes.c:584 src/selcodepage.c:49
 msgid "Other 8 bit"
 msgstr "Citi 8 bitu"
 
@@ -1490,128 +1297,125 @@ msgstr "Ievades / displeja kodu tabula:"
 msgid "&Select"
 msgstr "a&tlasît"
 
+#: src/boxes.c:743
+msgid "&Use ~/.netrc"
+msgstr ""
+
 # src/boxes.c:651
-#: src/boxes.c:758
+#: src/boxes.c:747
 msgid "&Always use ftp proxy"
 msgstr "&Vienmçr lietot ftp proxy"
 
 # src/boxes.c:653
-#: src/boxes.c:760
+#: src/boxes.c:749
 msgid "sec"
 msgstr "sek"
 
 # src/boxes.c:657
-#: src/boxes.c:764
+#: src/boxes.c:753
 msgid "ftpfs directory cache timeout:"
 msgstr "ftpfs direktorija keða taimauts:"
 
 # src/boxes.c:661
-#: src/boxes.c:768
+#: src/boxes.c:757
 msgid "ftp anonymous password:"
 msgstr "anonîmâ ftp parole:"
 
 # src/boxes.c:668
-#: src/boxes.c:775
+#: src/boxes.c:764
 msgid "Timeout for freeing VFSs:"
 msgstr "Taimauts atbrîvojot VFSas:"
 
 # src/boxes.c:674
-#: src/boxes.c:781
+#: src/boxes.c:770
 msgid " Virtual File System Setting "
 msgstr " Virtuâlo Failsistçmas Uzstâdîjumi "
 
 # src/boxes.c:740
-#: src/boxes.c:840
+#: src/boxes.c:823
 msgid "Quick cd"
 msgstr "Âtrs cd"
 
 # src/boxes.c:745
 #. want cd like completion
-#: src/boxes.c:845
+#: src/boxes.c:828
 msgid "cd"
 msgstr "cd"
 
 # src/boxes.c:796
-#: src/boxes.c:885
+#: src/boxes.c:868
 msgid "Symbolic link"
 msgstr "Simbolsaite"
 
 # gnome/gdialogs.c:1069 src/boxes.c:801
-#: src/boxes.c:890
+#: src/boxes.c:873
 msgid "Symbolic link filename:"
 msgstr "Simbolsaites faila nosaukums:"
 
 # gnome/gdialogs.c:1055 src/boxes.c:803
-#: src/boxes.c:892
+#: src/boxes.c:875
 msgid "Existing filename (filename symlink will point to):"
-msgstr "Eksistçjoðs faila nosaukums (faila nosaukums, uz kuru simbolsaite norâdîs):"
+msgstr ""
+"Eksistçjoðs faila nosaukums (faila nosaukums, uz kuru simbolsaite norâdîs):"
 
 # src/boxes.c:833
-#: src/boxes.c:921
+#: src/boxes.c:904
 msgid "Running "
 msgstr "Darbojas"
 
 # src/boxes.c:834 src/find.c:719 src/find.c:960
-#: src/boxes.c:922
-#: src/find.c:712
+#: src/boxes.c:905 src/find.c:714
 msgid "Stopped"
 msgstr "Apstâdînâts"
 
 # src/boxes.c:895
-#: src/boxes.c:983
+#: src/boxes.c:966
 msgid "&Stop"
 msgstr "&Stop"
 
 # src/boxes.c:896
-#: src/boxes.c:984
+#: src/boxes.c:967
 msgid "&Resume"
 msgstr "&Rezumçt"
 
 # src/boxes.c:897
-#: src/boxes.c:985
+#: src/boxes.c:968
 msgid "&Kill"
 msgstr "&Nokaut"
 
 # src/boxes.c:936
-#: src/boxes.c:1024
+#: src/boxes.c:1007
 msgid "Background Jobs"
 msgstr "Fona Darbi"
 
 # vfs/smbfs.c:116
-#: src/boxes.c:1055
+#: src/boxes.c:1038
 msgid "Domain:"
 msgstr "Domçns:"
 
 # vfs/smbfs.c:116
-#: src/boxes.c:1055
+#: src/boxes.c:1038
 msgid "Username:"
 msgstr "Lietotâjvârds:"
 
 # vfs/smbfs.c:116
-#: src/boxes.c:1055
+#: src/boxes.c:1038
 msgid "Password: "
 msgstr "Parole: "
 
 # vfs/smbfs.c:171
-#: src/boxes.c:1110
+#: src/boxes.c:1093
 #, c-format
 msgid "Password for \\\\%s\\%s"
 msgstr "\\\\%s\\%s Parole"
 
-#: src/charsets.c:32
-#: vfs/extfs.c:1337
-#: vfs/sfs.c:302
+#: src/charsets.c:31 vfs/extfs.c:1337 vfs/sfs.c:306
 #, c-format
-msgid ""
-"Warning: file %s not found\n"
-""
-msgstr ""
-"Brîdinâjums: fails %s nav atrasts\n"
-""
+msgid "Warning: file %s not found\n"
+msgstr "Brîdinâjums: fails %s nav atrasts\n"
 
 # src/file.c:1100
-#: src/charsets.c:173
-#: src/charsets.c:186
+#: src/charsets.c:171 src/charsets.c:184
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Nevar tulkot %s uz %s"
@@ -1692,8 +1496,7 @@ msgid "&Marked all"
 msgstr "&Izvçlçti visi"
 
 # gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
-#: src/chmod.c:137
-#: src/screen.c:387
+#: src/chmod.c:137 src/screen.c:386
 msgid "Name"
 msgstr "Nosaukums"
 
@@ -1718,8 +1521,7 @@ msgid " Chmod command "
 msgstr " Komanda chmod "
 
 # src/chmod.c:162 src/chown.c:120
-#: src/chmod.c:149
-#: src/chown.c:118
+#: src/chmod.c:149 src/chown.c:116
 msgid " Permission "
 msgstr " Atïauja "
 
@@ -1749,219 +1551,226 @@ msgid "Chmod command"
 msgstr "Komanda chmod"
 
 # src/chown.c:81
-#: src/chown.c:79
+#: src/chown.c:78
 msgid "Set &users"
 msgstr "Uzstâdît &lietotâjus"
 
 # src/chown.c:82
-#: src/chown.c:80
+#: src/chown.c:79
 msgid "Set &groups"
 msgstr "Uzstâdît &grupas"
 
 # src/chown.c:112
-#: src/chown.c:110
+#: src/chown.c:108
 msgid " Name "
 msgstr " Vârds "
 
 # src/chown.c:114
-#: src/chown.c:112
+#: src/chown.c:110
 msgid " Owner name "
 msgstr " Îpaðnieka vârds "
 
 # src/chown.c:116 src/chown.c:128
-#: src/chown.c:114
-#: src/chown.c:126
+#: src/chown.c:112 src/chown.c:124
 msgid " Group name "
 msgstr " Grupas vârds "
 
 # src/chown.c:118
-#: src/chown.c:116
+#: src/chown.c:114
 msgid " Size "
 msgstr " Izmçrs "
 
 # src/chown.c:124
-#: src/chown.c:122
+#: src/chown.c:120
 msgid " Chown command "
 msgstr " Komanda chown "
 
 # src/chown.c:126
-#: src/chown.c:124
+#: src/chown.c:122
 msgid " User name "
 msgstr " Lietotâja vârds "
 
 # src/chown.c:192
-#: src/chown.c:190
+#: src/chown.c:185
 msgid "<Unknown user>"
 msgstr "<Nezinâms lietotâjs>"
 
 # src/chown.c:193
 #. add fields for unknown names (numbers)
-#: src/chown.c:191
+#: src/chown.c:186
 msgid "<Unknown group>"
 msgstr "<Nezinâma grupa>"
 
 # src/cmd.c:198
-#: src/cmd.c:177
+#: src/cmd.c:172
 #, c-format
 msgid " Can not fetch a local copy of %s "
 msgstr " Nevaru dabût vietçjo %s kopiju "
 
 # src/cmd.c:248
-#: src/cmd.c:227
+#: src/cmd.c:222
 msgid " CD "
 msgstr " CD "
 
 # src/cmd.c:248
-#: src/cmd.c:227
+#: src/cmd.c:222
 msgid "Files tagged, want to cd?"
 msgstr "Faili tagoti, gribat cd?"
 
 # src/cmd.c:254 src/cmd.c:715 src/cmd.c:734
-#: src/cmd.c:233
-#: src/cmd.c:693
-#: src/cmd.c:712
+#: src/cmd.c:228 src/cmd.c:726 src/cmd.c:745 src/main.c:852
 msgid "Could not change directory"
 msgstr "Nevar nomainît direktoriju"
 
 # src/cmd.c:283
-#: src/cmd.c:262
+#: src/cmd.c:257
 msgid " View file "
 msgstr " Skatît failu "
 
 # src/cmd.c:283
-#: src/cmd.c:262
+#: src/cmd.c:257
 msgid " Filename:"
 msgstr " Faila Nosaukums:"
 
 # src/cmd.c:300
-#: src/cmd.c:279
+#: src/cmd.c:274
 msgid " Filtered view "
 msgstr " Filtrçts skatîjums "
 
 # src/cmd.c:300
-#: src/cmd.c:279
+#: src/cmd.c:274
 msgid " Filter command and arguments:"
 msgstr " Filtrçðanas komanda un argumenti:"
 
 # src/cmd.c:388
-#: src/cmd.c:367
+#: src/cmd.c:375
 msgid "Create a new Directory"
 msgstr "Izveidot Jaunu Direktoriju"
 
 # src/cmd.c:388
-#: src/cmd.c:367
+#: src/cmd.c:375
 msgid " Enter directory name:"
 msgstr " Ievadiet direktorijas nosaukumu:"
 
 # src/cmd.c:449
-#: src/cmd.c:427
+#: src/cmd.c:435
 msgid " Filter "
 msgstr " Filtrs "
 
 # src/cmd.c:449
-#: src/cmd.c:428
+#: src/cmd.c:436
 msgid " Set expression for filtering filenames"
 msgstr " Iestatît izteiksmi failu nosaukumu filtrçðanai"
 
 # src/cmd.c:515
-#: src/cmd.c:495
+#: src/cmd.c:502
 msgid " Select "
 msgstr " Atlasît "
 
 # gnome/gcmd.c:959 src/cmd.c:543 src/cmd.c:594
-#: src/cmd.c:523
-#: src/cmd.c:574
+#: src/cmd.c:530 src/cmd.c:581 src/find.c:263
 msgid "  Malformed regular expression  "
 msgstr "  Nepareizi veidota regulâra izteiksme  "
 
 # src/cmd.c:567
-#: src/cmd.c:547
+#: src/cmd.c:554
 msgid " Unselect "
 msgstr " Neatlasît "
 
 # src/cmd.c:640
-#: src/cmd.c:620
+#: src/cmd.c:627
 msgid "Extension file edit"
 msgstr "Paplaðinâjuma faila rediìçðana"
 
 # src/cmd.c:641
-#: src/cmd.c:621
+#: src/cmd.c:628
 msgid " Which extension file you want to edit? "
 msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
 
 # src/cmd.c:642
-#: src/cmd.c:622
+#: src/cmd.c:629 src/cmd.c:655
 msgid "&User"
 msgstr "&Lietotâjs"
 
 # src/cmd.c:642 src/cmd.c:670
-#: src/cmd.c:622
-#: src/cmd.c:650
+#: src/cmd.c:629 src/cmd.c:655 src/cmd.c:683
 msgid "&System Wide"
 msgstr "&Sistçmas Mçroga"
 
+# src/main.c:1360
+#: src/cmd.c:653
+#, fuzzy
+msgid "Syntax file edit"
+msgstr "&Izvçlnes faila rediìçðana"
+
+# src/cmd.c:641
+#: src/cmd.c:654
+#, fuzzy
+msgid " Which syntax file you want to edit? "
+msgstr " Kuru paplaðinâjuma failu jûs vçlaties rediìçt? "
+
 # src/cmd.c:667
-#: src/cmd.c:647
+#: src/cmd.c:680
 msgid " Menu edit "
 msgstr " Izvçlòu rediìçðana "
 
 # src/cmd.c:668
-#: src/cmd.c:648
+#: src/cmd.c:681
 msgid " Which menu file will you edit ? "
 msgstr " Kuru izvçlnes failu jûs rediìçsiet ? "
 
 # src/cmd.c:670
-#: src/cmd.c:650
+#: src/cmd.c:683
 msgid "&Local"
 msgstr "&Vietçji"
 
 # src/cmd.c:670
-#: src/cmd.c:650
+#: src/cmd.c:683
 msgid "&Home"
 msgstr "&Mâjas"
 
 # src/cmd.c:860
-#: src/cmd.c:838
+#: src/cmd.c:871
 msgid " Compare directories "
 msgstr " Salîdzinât direktorijas "
 
 # src/cmd.c:860
-#: src/cmd.c:838
+#: src/cmd.c:871
 msgid " Select compare method: "
 msgstr " Izvçlçties salîdzinâðanas metodi: "
 
 # src/cmd.c:861
-#: src/cmd.c:839
+#: src/cmd.c:872
 msgid "&Quick"
 msgstr "&Âtri"
 
 # src/cmd.c:861
-#: src/cmd.c:839
+#: src/cmd.c:872
 msgid "&Size only"
 msgstr "&Tikai izmçrs"
 
 # src/cmd.c:861
-#: src/cmd.c:839
+#: src/cmd.c:872
 msgid "&Thorough"
 msgstr "&Pamatîgi"
 
 # src/cmd.c:871
-#: src/cmd.c:849
+#: src/cmd.c:882
 msgid " Both panels should be on the listing view mode to use this command "
 msgstr " Abiem paneïiem jâbût saraksta skata reþîmâ, lai lietotu ðo komandu "
 
 # src/cmd.c:885
-#: src/cmd.c:863
+#: src/cmd.c:896
 msgid " The command history is empty "
 msgstr " Komandu vçsture ir tukða "
 
 # src/cmd.c:891
-#: src/cmd.c:869
+#: src/cmd.c:902
 msgid " Command history "
 msgstr " Komandu vçsture "
 
 # src/cmd.c:933
-#: src/cmd.c:909
+#: src/cmd.c:942
 msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
@@ -1970,136 +1779,136 @@ msgstr ""
 " paneïi nevar tikt slçdzelçti. "
 
 # src/cmd.c:972
-#: src/cmd.c:942
+#: src/cmd.c:976
 msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Ievadiet 'exit', lai atgrieztos Pusnakts Komandierî"
 
 # src/cmd.c:1036 src/cmd.c:1038
-#: src/cmd.c:987
-#: src/cmd.c:989
+#: src/cmd.c:1025 src/cmd.c:1027
 msgid " Link "
 msgstr " Saite "
 
 # src/cmd.c:1037 src/cmd.c:1176 src/file.c:1704
-#: src/cmd.c:988
-#: src/cmd.c:1120
-#: src/file.c:1699
+#: src/cmd.c:1026 src/cmd.c:1140 src/file.c:1613
 msgid " to:"
 msgstr " uz:"
 
 # src/cmd.c:1048
-#: src/cmd.c:999
+#: src/cmd.c:1037
 #, c-format
 msgid " link: %s "
 msgstr " saite: %s "
 
 # src/cmd.c:1081
-#: src/cmd.c:1026
+#: src/cmd.c:1064
 #, c-format
 msgid " symlink: %s "
 msgstr " simbolsaite: %s "
 
 # src/cmd.c:1135
-#: src/cmd.c:1078
+#: src/cmd.c:1098
 #, c-format
 msgid " Symlink `%s' points to: "
 msgstr " Simbolsaite '%s' norâda uz: "
 
 # src/cmd.c:1140
-#: src/cmd.c:1083
+#: src/cmd.c:1103
 msgid " Edit symlink "
 msgstr " Rediìçt simbolsaiti "
 
 # src/cmd.c:1145
-#: src/cmd.c:1088
+#: src/cmd.c:1108
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " rediìçt simbolsaiti, nevarçja izòemt %s: %s "
 
 # src/cmd.c:1149
-#: src/cmd.c:1092
+#: src/cmd.c:1112
 #, c-format
 msgid " edit symlink: %s "
 msgstr " rediìçt simbolsaiti: %s "
 
 # src/boxes.c:796
-#: src/cmd.c:1103
+#: src/cmd.c:1123
 #, c-format
 msgid "`%s' is not a symbolic link"
 msgstr "`%s' nav simbolsaite"
 
 # src/cmd.c:1176
-#: src/cmd.c:1120
+#: src/cmd.c:1140
 msgid " Link symbolically "
 msgstr " Saitçt simboliski "
 
 # src/cmd.c:1177
-#: src/cmd.c:1121
+#: src/cmd.c:1141
 msgid " Relative symlink "
 msgstr " Relatîva simbolsaite "
 
 # src/cmd.c:1188
-#: src/cmd.c:1132
+#: src/cmd.c:1152
 #, c-format
 msgid " relative symlink: %s "
 msgstr " ralatîva simbolsaite: %s "
 
 # src/cmd.c:1351
-#: src/cmd.c:1258
+#: src/cmd.c:1278
 msgid " Enter machine name (F1 for details): "
 msgstr " Ievadiet datora vârdu (F1 detalizçtâk): "
 
 # src/cmd.c:1378
-#: src/cmd.c:1285
+#: src/cmd.c:1305
 #, c-format
 msgid " Could not chdir to %s "
 msgstr " nevarçja chdir uz %s "
 
 # src/cmd.c:1385 src/widget.c:1162
-#: src/cmd.c:1292
-#: src/widget.c:1083
+#: src/cmd.c:1312 src/widget.c:1060
 msgid " Link to a remote machine "
 msgstr " Saite uz attâlinâto maðînu "
 
 # src/cmd.c:1391 src/widget.c:1163
-#: src/cmd.c:1298
-#: src/widget.c:1084
+#: src/cmd.c:1318 src/widget.c:1061
 msgid " FTP to machine "
 msgstr " FTP uz datoru "
 
 # src/cmd.c:1397 src/widget.c:1164
-#: src/cmd.c:1304
-#: src/widget.c:1085
+#: src/cmd.c:1323
+#, fuzzy
+msgid " Shell link to machine "
+msgstr " SMB saite uz datoru "
+
+# src/cmd.c:1397 src/widget.c:1164
+#: src/cmd.c:1329 src/widget.c:1062
 msgid " SMB link to machine "
 msgstr " SMB saite uz datoru "
 
 # src/cmd.c:1407
-#: src/cmd.c:1314
+#: src/cmd.c:1339
 msgid " Socket source routing setup "
 msgstr ""
 
 # src/cmd.c:1408
-#: src/cmd.c:1315
+#: src/cmd.c:1340
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
 # src/cmd.c:1416
-#: src/cmd.c:1323
+#: src/cmd.c:1348
 msgid " Host name "
 msgstr " Resursdatora nosaukums "
 
 # src/cmd.c:1416
-#: src/cmd.c:1323
+#: src/cmd.c:1348
 msgid " Error while looking up IP address "
 msgstr " Kïûda kâmçr skatoties IP adresi "
 
 # src/cmd.c:1427
-#: src/cmd.c:1334
+#: src/cmd.c:1359
 msgid " Undelete files on an ext2 file system "
 msgstr " Atjaunot failus uz ext2 failsistçmas "
 
 # src/cmd.c:1428
-#: src/cmd.c:1335
+#: src/cmd.c:1360
 msgid ""
 " Enter device (without /dev/) to undelete\n"
 "   files on: (F1 for details)"
@@ -2108,12 +1917,12 @@ msgstr ""
 "   atjaunot failus: (F1 detalizçtâk)"
 
 # src/cmd.c:1478
-#: src/cmd.c:1385
+#: src/cmd.c:1410
 msgid " Setup saved to ~/"
 msgstr " Uzstâdîjumi saglabâti iekð ~/"
 
 # src/cmd.c:1483
-#: src/cmd.c:1387
+#: src/cmd.c:1412
 msgid " Setup "
 msgstr " Uzstâdîðana "
 
@@ -2141,7 +1950,6 @@ msgid ""
 "refresh stack underflow!\n"
 "\n"
 "\n"
-""
 msgstr ""
 "\n"
 "\n"
@@ -2149,93 +1957,86 @@ msgstr ""
 "atsvaidzinât pârpilnîbas noplûdi!\n"
 "\n"
 "\n"
-""
 
 # src/dir.c:61
-#: src/dir.c:61
+#: src/dir.c:53
 msgid "&Unsorted"
 msgstr "&Nesakârtots"
 
 # src/dir.c:62
-#: src/dir.c:62
+#: src/dir.c:54
 msgid "&Name"
 msgstr "&Vârds"
 
 # src/dir.c:63
-#: src/dir.c:63
+#: src/dir.c:55
 msgid "&Extension"
 msgstr "&Paplaðinâjums"
 
 # src/dir.c:64
-#: src/dir.c:64
+#: src/dir.c:56
 msgid "&Modify time"
 msgstr "&Modificçðanas laiks"
 
 # src/dir.c:65
-#: src/dir.c:65
+#: src/dir.c:57
 msgid "&Access time"
 msgstr "&Pieejas laiks"
 
 # src/dir.c:66
-#: src/dir.c:66
+#: src/dir.c:58
 msgid "&Change time"
 msgstr "&Izmainîðanas laiks"
 
 # src/dir.c:67
-#: src/dir.c:67
+#: src/dir.c:59
 msgid "&Size"
 msgstr "&Lielums"
 
 # src/dir.c:68
-#: src/dir.c:68
+#: src/dir.c:60
 msgid "&Inode"
 msgstr "&Inode"
 
 # src/dir.c:71
 #. New sort orders
-#: src/dir.c:71
+#: src/dir.c:63
 msgid "&Type"
 msgstr "&Tips"
 
 # src/dir.c:72
-#: src/dir.c:72
+#: src/dir.c:64
 msgid "&Links"
 msgstr "&Saites"
 
 # src/dir.c:73
-#: src/dir.c:73
+#: src/dir.c:65
 msgid "N&GID"
 msgstr "N&GID"
 
 # src/dir.c:74
-#: src/dir.c:74
+#: src/dir.c:66
 msgid "N&UID"
 msgstr "N&UID"
 
 # src/dir.c:75
-#: src/dir.c:75
+#: src/dir.c:67
 msgid "&Owner"
 msgstr "Î&Paðnieks"
 
 # src/dir.c:76
-#: src/dir.c:76
+#: src/dir.c:68
 msgid "&Group"
 msgstr "&Grupa"
 
 # src/dir.c:386
-#: src/dir.c:427
+#: src/dir.c:388
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Fails '%s' eksistç, bet statuss nevar tikt noteikts: %s"
 
-# src/dir.c:657
-#: src/dir.c:698
-msgid "Unknown"
-msgstr "Nezinâms"
-
 # src/ext.c:150 src/user.c:556
-#: src/ext.c:141
-#: src/user.c:555
+#: src/ext.c:106 src/user.c:554
 #, c-format
 msgid ""
 " Cannot create temporary command file \n"
@@ -2245,23 +2046,22 @@ msgstr ""
 " %s "
 
 # src/ext.c:165 src/user.c:578
-#: src/ext.c:154
-#: src/user.c:576
+#: src/ext.c:119 src/user.c:575
 msgid " Parameter "
 msgstr " Parametrs "
 
 # src/ext.c:414
-#: src/ext.c:396
+#: src/ext.c:348
 msgid " file error"
 msgstr " faila kïûda"
 
 # src/ext.c:415
-#: src/ext.c:397
+#: src/ext.c:349
 msgid "Format of the "
 msgstr "Formatçt "
 
 # src/ext.c:417
-#: src/ext.c:399
+#: src/ext.c:351
 msgid ""
 "mc.ext file has changed\n"
 "with version 3.0. It seems that installation\n"
@@ -2274,17 +2074,17 @@ msgstr ""
 "Midnight Commander pakotnes."
 
 # src/ext.c:432
-#: src/ext.c:413
+#: src/ext.c:365
 msgid " file error "
 msgstr " faila kïûda "
 
 # src/ext.c:433
-#: src/ext.c:414
+#: src/ext.c:366
 msgid "Format of the ~/"
 msgstr "~/ formâts"
 
 # src/ext.c:433
-#: src/ext.c:414
+#: src/ext.c:366
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -2295,51 +2095,46 @@ msgstr ""
 "kopçt to no "
 
 # src/ext.c:435
-#: src/ext.c:416
+#: src/ext.c:368
 msgid ""
 "mc.ext or use that\n"
 "file as an example of how to write it.\n"
-""
 msgstr ""
 "mc.ext vai lietot to\n"
 "failu kâ piemçru tam, kâ to uzrakstît.\n"
-""
 
 # src/ext.c:437
-#: src/ext.c:418
+#: src/ext.c:370
 msgid "mc.ext will be used for this moment."
 msgstr "mc.ext tiks lietots ðim brîdim."
 
 # src/file.c:154 src/tree.c:639
-#: src/file.c:144
-#: src/tree.c:641
+#: src/file.c:143 src/tree.c:641
 msgid " Copy "
 msgstr " Kopçt "
 
 # src/file.c:155 src/tree.c:677
-#: src/file.c:145
-#: src/tree.c:682
+#: src/file.c:144 src/tree.c:682
 msgid " Move "
 msgstr " Pârvietot "
 
 # src/file.c:156 src/tree.c:745
-#: src/file.c:146
-#: src/tree.c:755
+#: src/file.c:145 src/tree.c:755
 msgid " Delete "
 msgstr " Dzçst "
 
 # src/file.c:244
-#: src/file.c:234
+#: src/file.c:230
 msgid " Invalid target mask "
 msgstr " Nepareiza mçría maska "
 
 # src/file.c:342
-#: src/file.c:332
+#: src/file.c:328
 msgid " Could not make the hardlink "
 msgstr " Nevarçja izveidot cietsaiti "
 
 # src/file.c:384
-#: src/file.c:374
+#: src/file.c:370
 #, c-format
 msgid ""
 " Cannot read source link \"%s\" \n"
@@ -2349,7 +2144,7 @@ msgstr ""
 " %s "
 
 # src/file.c:394
-#: src/file.c:384
+#: src/file.c:380
 msgid ""
 " Cannot make stable symlinks across non-local filesystems: \n"
 "\n"
@@ -2360,7 +2155,7 @@ msgstr ""
 " Opciju Stabilâs Simbolsaites tiks atslçgtas "
 
 # src/file.c:442
-#: src/file.c:432
+#: src/file.c:428
 #, c-format
 msgid ""
 " Cannot create target symlink \"%s\" \n"
@@ -2370,7 +2165,7 @@ msgstr ""
 " %s "
 
 # src/file.c:509
-#: src/file.c:499
+#: src/file.c:495
 #, c-format
 msgid ""
 " Cannot overwrite directory \"%s\" \n"
@@ -2380,7 +2175,7 @@ msgstr ""
 " %s "
 
 # src/file.c:518
-#: src/file.c:508
+#: src/file.c:504
 #, c-format
 msgid ""
 " Cannot stat source file \"%s\" \n"
@@ -2390,13 +2185,13 @@ msgstr ""
 " %s "
 
 # src/file.c:531
-#: src/file.c:521
+#: src/file.c:516
 #, c-format
 msgid " `%s' and `%s' are the same file. "
 msgstr " `%s' un `%s' ir tas pats fails. "
 
 # src/file.c:574
-#: src/file.c:564
+#: src/file.c:553
 #, c-format
 msgid ""
 " Cannot create special file \"%s\" \n"
@@ -2406,8 +2201,7 @@ msgstr ""
 " %s "
 
 # src/file.c:583 src/file.c:812
-#: src/file.c:573
-#: src/file.c:802
+#: src/file.c:562 src/file.c:780
 #, c-format
 msgid ""
 " Cannot chown target file \"%s\" \n"
@@ -2417,8 +2211,7 @@ msgstr ""
 " %s "
 
 # src/file.c:592 src/file.c:831
-#: src/file.c:582
-#: src/file.c:821
+#: src/file.c:570 src/file.c:796
 #, c-format
 msgid ""
 " Cannot chmod target file \"%s\" \n"
@@ -2428,7 +2221,7 @@ msgstr ""
 " %s "
 
 # src/file.c:609
-#: src/file.c:599
+#: src/file.c:582
 #, c-format
 msgid ""
 " Cannot open source file \"%s\" \n"
@@ -2438,12 +2231,12 @@ msgstr ""
 " %s "
 
 # src/file.c:619
-#: src/file.c:609
+#: src/file.c:592
 msgid " Reget failed, about to overwrite file "
 msgstr " Pârdabûðana neizdevâs, tûlît pârrakstîðu failu "
 
 # src/file.c:625
-#: src/file.c:615
+#: src/file.c:598
 #, c-format
 msgid ""
 " Cannot fstat source file \"%s\" \n"
@@ -2453,7 +2246,7 @@ msgstr ""
 " %s "
 
 # src/file.c:651
-#: src/file.c:641
+#: src/file.c:619
 #, c-format
 msgid ""
 " Cannot create target file \"%s\" \n"
@@ -2463,7 +2256,7 @@ msgstr ""
 " %s "
 
 # src/file.c:665
-#: src/file.c:655
+#: src/file.c:633
 #, c-format
 msgid ""
 " Cannot fstat target file \"%s\" \n"
@@ -2473,7 +2266,7 @@ msgstr ""
 " %s "
 
 # src/file.c:696
-#: src/file.c:686
+#: src/file.c:664
 #, c-format
 msgid ""
 " Cannot read source file \"%s\" \n"
@@ -2483,7 +2276,7 @@ msgstr ""
 " %s "
 
 # src/file.c:726
-#: src/file.c:716
+#: src/file.c:694
 #, c-format
 msgid ""
 " Cannot write target file \"%s\" \n"
@@ -2493,12 +2286,12 @@ msgstr ""
 " %s "
 
 # src/file.c:745
-#: src/file.c:735
+#: src/file.c:713
 msgid "(stalled)"
 msgstr "(staïïots)"
 
 # src/file.c:783
-#: src/file.c:773
+#: src/file.c:751
 #, c-format
 msgid ""
 " Cannot close source file \"%s\" \n"
@@ -2508,7 +2301,7 @@ msgstr ""
 " %s "
 
 # src/file.c:792
-#: src/file.c:782
+#: src/file.c:760
 #, c-format
 msgid ""
 " Cannot close target file \"%s\" \n"
@@ -2518,23 +2311,22 @@ msgstr ""
 " %s "
 
 # src/file.c:802
-#: src/file.c:792
+#: src/file.c:770
 msgid "Incomplete file was retrieved. Keep it?"
 msgstr "Tika saòemts nepilns fails. Paturçt to?"
 
 # src/file.c:803
-#: src/file.c:793
+#: src/file.c:771
 msgid "&Delete"
 msgstr "&Dzçst"
 
 # src/file.c:803 src/hotlist.c:1430
-#: src/file.c:793
-#: src/hotlist.c:1404
+#: src/file.c:771 src/hotlist.c:1410
 msgid "&Keep"
 msgstr "&Paturçt"
 
 # src/file.c:876
-#: src/file.c:866
+#: src/file.c:837
 #, c-format
 msgid ""
 " Cannot stat source directory \"%s\" \n"
@@ -2544,7 +2336,7 @@ msgstr ""
 " %s "
 
 # src/file.c:899
-#: src/file.c:889
+#: src/file.c:860
 #, c-format
 msgid ""
 " Source directory \"%s\" is not a directory \n"
@@ -2555,7 +2347,7 @@ msgstr ""
 
 # src/file.c:907
 #. we found a cyclic symbolic link
-#: src/file.c:897
+#: src/file.c:868
 #, c-format
 msgid ""
 " Cannot copy cyclic symbolic link \n"
@@ -2564,8 +2356,18 @@ msgstr ""
 " Nevar kopçt ciklisko simbolsaiti \n"
 " `%s' "
 
+# src/file.c:2029
+#: src/file.c:901 src/file.c:1924
+#, c-format
+msgid ""
+" Destination \"%s\" must be a directory \n"
+" %s "
+msgstr ""
+" Mçríim \"%s\" ir jâbût direktorijam \n"
+" %s "
+
 # src/file.c:964
-#: src/file.c:954
+#: src/file.c:929
 #, c-format
 msgid ""
 " Cannot create target directory \"%s\" \n"
@@ -2575,7 +2377,7 @@ msgstr ""
 " %s "
 
 # src/file.c:987
-#: src/file.c:977
+#: src/file.c:947
 #, c-format
 msgid ""
 " Cannot chown target directory \"%s\" \n"
@@ -2586,7 +2388,7 @@ msgstr ""
 
 # src/file.c:1100
 #. Source doesn't exist
-#: src/file.c:1091
+#: src/file.c:1048
 #, c-format
 msgid ""
 " Cannot stat file \"%s\" \n"
@@ -2596,19 +2398,19 @@ msgstr ""
 " %s "
 
 # src/file.c:1122
-#: src/file.c:1113
+#: src/file.c:1070
 #, c-format
 msgid " `%s' and `%s' are the same file "
 msgstr " `%s' un `%s' ir tas pats fails "
 
 # src/file.c:1129
-#: src/file.c:1120
+#: src/file.c:1077
 #, c-format
 msgid " Cannot overwrite directory `%s' "
 msgstr " Nevar pârrakstît direktoriju `%s' "
 
 # src/file.c:1172
-#: src/file.c:1163
+#: src/file.c:1111
 #, c-format
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
@@ -2618,7 +2420,7 @@ msgstr ""
 " %s "
 
 # src/file.c:1192
-#: src/file.c:1183
+#: src/file.c:1131
 #, c-format
 msgid ""
 " Cannot remove file \"%s\" \n"
@@ -2628,25 +2430,25 @@ msgstr ""
 " %s "
 
 # src/file.c:1246
-#: src/file.c:1238
+#: src/file.c:1182
 #, c-format
 msgid " `%s' and `%s' are the same directory "
 msgstr " `%s' un `%s' ir tas pats direktorijs "
 
 # src/file.c:1265
-#: src/file.c:1257
+#: src/file.c:1201
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Nevar pârrakstît direktoriju \"%s\" %s "
 
 # src/file.c:1267
-#: src/file.c:1259
+#: src/file.c:1203
 #, c-format
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr " Nevar pârrakstît failu \"%s\" %s "
 
 # src/file.c:1294
-#: src/file.c:1286
+#: src/file.c:1226
 #, c-format
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
@@ -2656,7 +2458,7 @@ msgstr ""
 " %s "
 
 # src/file.c:1357
-#: src/file.c:1349
+#: src/file.c:1289
 #, c-format
 msgid ""
 " Cannot delete file \"%s\" \n"
@@ -2666,9 +2468,7 @@ msgstr ""
 " %s "
 
 # src/file.c:1418 src/file.c:1488 src/file.c:1520
-#: src/file.c:1410
-#: src/file.c:1480
-#: src/file.c:1512
+#: src/file.c:1344 src/file.c:1409 src/file.c:1436
 #, c-format
 msgid ""
 " Cannot remove directory \"%s\" \n"
@@ -2687,17 +2487,17 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:1671
+#: src/file.c:1592
 msgid "1Copy"
 msgstr "1Kopçt"
 
 # src/file.c:1680
-#: src/file.c:1671
+#: src/file.c:1592
 msgid "1Move"
 msgstr "1Pârvietot"
 
 # src/file.c:1680
-#: src/file.c:1671
+#: src/file.c:1592
 msgid "1Delete"
 msgstr "1Izdzçst"
 
@@ -2711,119 +2511,79 @@ msgstr "1Izdzçst"
 #. * %d - number of marked files
 #. * %e - "to:" or question mark for delete
 #. *
-#: src/file.c:1687
+#: src/file.c:1607
 #, no-c-format
 msgid "%o %f \"%s\"%m"
 msgstr "%o %f \"%s\"%m"
 
 # src/file.c:1696
-#: src/file.c:1689
+#: src/file.c:1609
 #, no-c-format
 msgid "%o %d %f%m"
 msgstr "%o %d %f%m"
 
-# src/file.c:1698
-#: src/file.c:1692
-#, no-c-format
-msgid "%o %f \"%s\"%e"
-msgstr "%o %f \"%s\"%e"
-
-# src/file.c:1699
-#: src/file.c:1694
-#, no-c-format
-msgid "%o %d %f%e"
-msgstr "%o %d %f%e"
-
 # src/file.c:1703 vfs/fish.c:509
-#: src/file.c:1698
-#: vfs/fish.c:518
+#: src/file.c:1612 vfs/fish.c:552
 msgid "file"
 msgstr "failu"
 
 # src/file.c:1703
-#: src/file.c:1698
+#: src/file.c:1612
 msgid "files"
 msgstr "failus"
 
 # src/file.c:1703
-#: src/file.c:1698
+#: src/file.c:1612
 msgid "directory"
 msgstr "direktoriju"
 
 # src/file.c:1703
-#: src/file.c:1698
+#: src/file.c:1612
 msgid "directories"
 msgstr "direktoriji"
 
 # src/file.c:1704
-#: src/file.c:1699
+#: src/file.c:1613
 msgid "files/directories"
 msgstr "failus/direktorijas"
 
 # src/file.c:1704
-#: src/file.c:1699
+#: src/file.c:1613
 msgid " with source mask:"
 msgstr " ar avota masku:"
 
 # src/file.c:1856
-#: src/file.c:1851
+#: src/file.c:1756
 msgid " Cannot operate on \"..\"! "
 msgstr " Nevar operçt uz \"..\"! "
 
-# src/file.c:1875 src/screen.c:2115
-#: src/file.c:1870
-#: src/screen.c:2067
-msgid "Yes"
-msgstr "Jâ"
-
-# src/file.c:1875 src/screen.c:2115
-#: src/file.c:1870
-#: src/screen.c:2067
-msgid "No"
-msgstr "Nç"
-
 # src/file.c:1928
-#: src/file.c:1923
+#: src/file.c:1825
 msgid " Sorry, I could not put the job in background "
 msgstr " Atvaino, bet nevarçju darbu nosûtît fonâ "
 
 # src/file.c:2014 src/file.c:2098
-#: src/file.c:2009
-#: src/file.c:2093
+#: src/file.c:1910 src/file.c:1993
 msgid " Internal failure "
 msgstr " Iekðçja neveiksme "
 
 # src/file.c:2014 src/file.c:2098
-#: src/file.c:2009
-#: src/file.c:2093
+#: src/file.c:1910 src/file.c:1993
 msgid " Unknown file operation "
 msgstr " Nepazîstama faila operâcija "
 
-# src/file.c:2029
-#: src/file.c:2024
-#, c-format
-msgid ""
-" Destination \"%s\" must be a directory \n"
-" %s "
-msgstr ""
-" Mçríim \"%s\" ir jâbût direktorijam \n"
-" %s "
-
 # src/file.c:2190
-#: src/file.c:2185
+#: src/file.c:2076 src/view.c:385
 msgid "&Retry"
 msgstr "&Vçlreiz"
 
 # src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
-#: src/file.c:2185
-#: src/file.c:2246
-#: src/filegui.c:247
-#: src/filegui.c:553
+#: src/file.c:2076 src/file.c:2136 src/filegui.c:246 src/filegui.c:552
 msgid "&Abort"
 msgstr "&Atsaukt"
 
 # src/file.c:2242
-#: src/file.c:2237
+#: src/file.c:2127
 msgid ""
 "\n"
 "   Directory not empty.   \n"
@@ -2834,7 +2594,7 @@ msgstr ""
 "   Dzçst to rekursîvi? "
 
 # src/file.c:2243
-#: src/file.c:2238
+#: src/file.c:2128
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
@@ -2845,175 +2605,194 @@ msgstr ""
 "   Dzçst to rekursîvi? "
 
 # gnome/gdialogs.c:790 src/file.c:2244
-#: src/file.c:2239
+#: src/file.c:2129
 msgid " Delete: "
 msgstr " Dzçst: "
 
 # src/file.c:2250
-#: src/file.c:2245
+#: src/file.c:2135
 msgid "a&ll"
 msgstr "&visus"
 
 # src/file.c:2250 src/filegui.c:595
-#: src/file.c:2245
-#: src/filegui.c:556
+#: src/file.c:2135 src/filegui.c:555
 msgid "non&E"
 msgstr "n&Evienu"
 
 # src/file.c:2260
-#: src/file.c:2255
+#: src/file.c:2145
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Uzraksti `yes`, ja PATIEÐÂM vçlies izdzçst "
 
 # src/file.c:2262
-#: src/file.c:2257
+#: src/file.c:2147
 msgid "all the directories "
 msgstr "visas direktorijas "
 
 # src/file.c:2264
-#: src/file.c:2259
+#: src/file.c:2149
 msgid " Recursive Delete "
 msgstr " Dzçst Rekursîvi "
 
 # src/file.c:2265
-#: src/file.c:2260
+#: src/file.c:2150
 msgid " Background process: Recursive Delete "
 msgstr " Fona process: Rekursîva Dzçðana "
 
 # gnome/gwidget.c:103 src/file.c:2266
-#: src/file.c:2261
+#: src/file.c:2151
 msgid "no"
 msgstr "nç"
 
 # gnome/gwidget.c:101 src/file.c:2268
-#: src/file.c:2263
+#: src/file.c:2153
 msgid "yes"
 msgstr "jâ"
 
+#: src/filegui.c:348
+#, c-format
+msgid "ETA %d:%02d.%02d"
+msgstr ""
+
+#: src/filegui.c:370
+#, c-format
+msgid "%.2f MB/s"
+msgstr ""
+
+#: src/filegui.c:372
+#, c-format
+msgid "%.2f KB/s"
+msgstr ""
+
+#: src/filegui.c:374
+#, c-format
+msgid "%ld B/s"
+msgstr ""
+
 # src/filegui.c:424
-#: src/filegui.c:397
+#: src/filegui.c:396
 msgid "File"
 msgstr "Fails"
 
 # src/filegui.c:447
-#: src/filegui.c:420
+#: src/filegui.c:419
 msgid "Count"
 msgstr "Skaitît"
 
 # src/filegui.c:468
-#: src/filegui.c:441
+#: src/filegui.c:440
 msgid "Bytes"
 msgstr "Baiti"
 
 # src/filegui.c:505
-#: src/filegui.c:474
+#: src/filegui.c:473
 msgid "Source"
 msgstr "Avots"
 
 # src/filegui.c:528
-#: src/filegui.c:497
+#: src/filegui.c:496
 msgid "Target"
 msgstr "Mçríis"
 
 # src/filegui.c:550
-#: src/filegui.c:519
+#: src/filegui.c:518
 msgid "Deleting"
 msgstr "Dzçðana"
 
 # src/filegui.c:590
-#: src/filegui.c:551
+#: src/filegui.c:550
 #, c-format
 msgid "Target file \"%s\" already exists!"
 msgstr "Mçría fails \"%s\" jau eksistç!"
 
 # src/filegui.c:593
-#: src/filegui.c:554
+#: src/filegui.c:553
 msgid "if &Size differs"
 msgstr "ja i&Zmçrs atðíiras"
 
 # src/filegui.c:596
-#: src/filegui.c:557
+#: src/filegui.c:556
 msgid "&Update"
 msgstr "&Atjauninât"
 
 # src/filegui.c:598
-#: src/filegui.c:559
+#: src/filegui.c:558
 msgid "Overwrite all targets?"
 msgstr "Pârrakstît visus mçrïus?"
 
 # src/filegui.c:600
-#: src/filegui.c:561
+#: src/filegui.c:560
 msgid "&Reget"
 msgstr "&Pârdabût"
 
 # src/filegui.c:601
-#: src/filegui.c:562
+#: src/filegui.c:561
 msgid "ap&Pend"
 msgstr "pie&Vienot"
 
 # src/filegui.c:604
-#: src/filegui.c:565
+#: src/filegui.c:564
 msgid "Overwrite this target?"
 msgstr "Pârrakstît mçríi?"
 
 # src/filegui.c:606
-#: src/filegui.c:567
+#: src/filegui.c:566
 #, c-format
 msgid "Target date: %s, size %d"
 msgstr "Mçría datums: %s, lielums %d"
 
 # src/filegui.c:608
-#: src/filegui.c:569
+#: src/filegui.c:568
 #, c-format
 msgid "Source date: %s, size %d"
 msgstr "Avota datums: %s, lielums %d"
 
 # src/filegui.c:692
-#: src/filegui.c:651
+#: src/filegui.c:650
 msgid " File exists "
 msgstr " Fails eksistç "
 
 # src/filegui.c:693
-#: src/filegui.c:652
+#: src/filegui.c:651
 msgid " Background process: File exists "
 msgstr " Fona darbs: Fails eksistç "
 
 # src/filegui.c:805
 #. follow symlinks and preserve Attributes must be the first
-#: src/filegui.c:764
+#: src/filegui.c:763
 msgid "preserve &Attributes"
 msgstr "saglabât &Atribûtus"
 
 # src/filegui.c:807
 #. &op_preserve
-#: src/filegui.c:766
+#: src/filegui.c:765
 msgid "follow &Links"
 msgstr "sekot &Saitçm"
 
 # src/filegui.c:809
 #. &file_mask_op_follow_links
-#: src/filegui.c:768
+#: src/filegui.c:767
 msgid "to:"
 msgstr "uz:"
 
 # src/filegui.c:810
-#: src/filegui.c:769
+#: src/filegui.c:768
 msgid "&Using shell patterns"
 msgstr "&Lietoj"
 
 # src/filegui.c:831
-#: src/filegui.c:790
+#: src/filegui.c:789
 msgid "&Background"
 msgstr "&Fonâ"
 
 # src/filegui.c:840
-#: src/filegui.c:799
+#: src/filegui.c:798
 msgid "&Stable Symlinks"
 msgstr "&Stabilas Simbolsaites"
 
 # src/filegui.c:842
 #. &file_mask_stable_symlinks
-#: src/filegui.c:801
+#: src/filegui.c:800
 msgid "&Dive into subdir if exists"
 msgstr "&Ieiet apakðdirektorijâ, ja tâds eksistç"
 
@@ -3028,99 +2807,94 @@ msgstr ""
 " %s "
 
 # src/find.c:130
-#: src/find.c:107
+#: src/find.c:101
 msgid "&Suspend"
 msgstr "At&likt"
 
 # src/find.c:131
-#: src/find.c:108
+#: src/find.c:102
 msgid "Con&tinue"
 msgstr "Tu&rpinât"
 
 # src/find.c:132
-#: src/find.c:109
+#: src/find.c:103
 msgid "&Chdir"
 msgstr "&Chdir"
 
 # src/find.c:133
-#: src/find.c:110
+#: src/find.c:104
 msgid "&Again"
 msgstr "%Atkal"
 
 # src/find.c:134
-#: src/find.c:111
+#: src/find.c:105
 msgid "&Quit"
 msgstr "I&Ziet"
 
 # src/find.c:135 src/panelize.c:89
-#: src/find.c:112
-#: src/panelize.c:77
+#: src/find.c:106 src/panelize.c:76
 msgid "Pane&lize"
 msgstr "Pa&nelçt"
 
 # src/find.c:136
-#: src/find.c:113
+#: src/find.c:107
 msgid "&View - F3"
 msgstr "&Skatît - F3"
 
 # src/find.c:137
-#: src/find.c:114
+#: src/find.c:108
 msgid "&Edit - F4"
 msgstr "&Rediìçt - F4"
 
 # src/find.c:170
-#: src/find.c:150
+#: src/find.c:147
 msgid "Start at:"
 msgstr "Sâknçt iekð:"
 
 # src/find.c:170
-#: src/find.c:150
+#: src/find.c:147
 msgid "Filename:"
 msgstr "Faila nosaukums:"
 
 # src/find.c:170
-#: src/find.c:150
+#: src/find.c:147
 msgid "Content: "
 msgstr "SAturs"
 
 # src/find.c:171 src/main.c:1251 src/main.c:1275
-#: src/find.c:151
-#: src/main.c:1127
-#: src/main.c:1151
+#: src/find.c:148 src/main.c:957 src/main.c:984
 msgid "&Tree"
 msgstr "&Koks"
 
 # src/find.c:223
-#: src/find.c:205
+#: src/find.c:202
 msgid "Find File"
 msgstr "Atrast Failu"
 
 # src/find.c:452
-#: src/find.c:436
+#: src/find.c:445
 #, c-format
 msgid "Grepping in %s"
 msgstr "Grepoju iekð %s"
 
 # src/find.c:537
-#: src/find.c:514
+#: src/find.c:516
 msgid "Finished"
 msgstr "Babeigts"
 
 # src/find.c:561 src/view.c:1528
-#: src/find.c:538
-#: src/view.c:1478
+#: src/find.c:540 src/view.c:1482
 #, c-format
 msgid "Searching %s"
 msgstr "Meklçju %s"
 
 # src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
-#: src/find.c:712
-#: src/find.c:808
+#: src/find.c:714 src/find.c:810
 msgid "Searching"
 msgstr "Meklçju"
 
 # src/find.c:750 src/find.c:1031
-#: src/find.c:783
+#: src/find.c:785
 msgid "Find file"
 msgstr "Atrast failu"
 
@@ -3149,8 +2923,7 @@ msgid " Help "
 msgstr " Palîdzîba "
 
 # src/help.c:766 src/user.c:689
-#: src/help.c:768
-#: src/user.c:686
+#: src/help.c:768 src/user.c:685
 #, c-format
 msgid ""
 " Cannot open file %s \n"
@@ -3181,24 +2954,17 @@ msgid "&Move"
 msgstr "&Pârvietot"
 
 # src/hotlist.c:133 src/hotlist.c:1430 src/panelize.c:88 src/wtools.c:383
-#: src/hotlist.c:118
-#: src/hotlist.c:1404
-#: src/panelize.c:76
-#: src/wtools.c:371
+#: src/hotlist.c:118 src/hotlist.c:1410 src/panelize.c:75 src/wtools.c:349
 msgid "&Remove"
 msgstr "&Izòemt"
 
 # src/hotlist.c:134 src/hotlist.c:805 src/hotlist.c:902
-#: src/hotlist.c:119
-#: src/hotlist.c:789
-#: src/hotlist.c:886
+#: src/hotlist.c:119 src/hotlist.c:795 src/hotlist.c:892
 msgid "&Append"
 msgstr "pie&Likt"
 
 # src/hotlist.c:135 src/hotlist.c:803 src/hotlist.c:900
-#: src/hotlist.c:120
-#: src/hotlist.c:787
-#: src/hotlist.c:884
+#: src/hotlist.c:120 src/hotlist.c:793 src/hotlist.c:890
 msgid "&Insert"
 msgstr "ie&Vietot"
 
@@ -3233,76 +2999,75 @@ msgid "Subgroup - press ENTER to see list"
 msgstr "Apakðgrupa - nospied ENTER, lai redzçtu sarakstu"
 
 # src/hotlist.c:607
-#: src/hotlist.c:581
+#: src/hotlist.c:587
 msgid "Active VFS directories"
 msgstr "Aktîvie VFS direktoriji"
 
 # src/hotlist.c:607
-#: src/hotlist.c:581
+#: src/hotlist.c:587
 msgid "Directory hotlist"
 msgstr "Direktoriju karstais saraksts"
 
 # src/hotlist.c:626
-#: src/hotlist.c:598
+#: src/hotlist.c:604
 msgid " Directory path "
 msgstr " Direktorija ceïð "
 
 # src/hotlist.c:629 src/hotlist.c:676
 #. This one holds the displayed pathname
-#: src/hotlist.c:601
-#: src/hotlist.c:647
+#: src/hotlist.c:607 src/hotlist.c:653
 msgid " Directory label "
 msgstr " Direktorija nosaukums "
 
 # src/hotlist.c:650
-#: src/hotlist.c:623
+#: src/hotlist.c:629
 #, c-format
 msgid "Moving %s"
 msgstr "Pârvietoju %s"
 
 # src/hotlist.c:879
-#: src/hotlist.c:863
+#: src/hotlist.c:869
 msgid "New hotlist entry"
 msgstr "Jauna karstâ saraksta ieraksts"
 
 # src/hotlist.c:879
-#: src/hotlist.c:863
+#: src/hotlist.c:869
 msgid "Directory label"
 msgstr "Direktorija nosaukums"
 
 # src/hotlist.c:879
-#: src/hotlist.c:863
+#: src/hotlist.c:869
 msgid "Directory path"
 msgstr "Direktorija ceïð"
 
 # src/hotlist.c:960
-#: src/hotlist.c:944
+#: src/hotlist.c:950
 msgid " New hotlist group "
 msgstr " Jauna karstâ saraksta grupa "
 
 # src/hotlist.c:960
-#: src/hotlist.c:944
+#: src/hotlist.c:950
 msgid "Name of new group"
 msgstr "Jaunâs grupas nosaukums"
 
 # src/hotlist.c:975
-#: src/hotlist.c:959
+#: src/hotlist.c:965
 #, c-format
 msgid "Label for \"%s\":"
 msgstr "Nosaukums priekð \"%s\":"
 
 # src/hotlist.c:979
-#: src/hotlist.c:963
+#: src/hotlist.c:969
 msgid " Add to hotlist "
 msgstr "Pievienot karstajam sarakstam"
 
 # src/hotlist.c:1016
-#: src/hotlist.c:1000
+#: src/hotlist.c:1006
 msgid " Remove: "
 msgstr " Izòemt: "
 
 # src/hotlist.c:1020
-#: src/hotlist.c:1004
+#: src/hotlist.c:1010
 msgid ""
 "\n"
 " Group not empty.\n"
@@ -3313,54 +3078,47 @@ msgstr ""
 " Izòemt to?"
 
 # src/hotlist.c:1365
-#: src/hotlist.c:1349
+#: src/hotlist.c:1355
 msgid " Top level group "
 msgstr " Augðlîmeòa grupa "
 
 # src/hotlist.c:1403 src/hotlist.c:1451
-#: src/hotlist.c:1377
-#: src/hotlist.c:1425
+#: src/hotlist.c:1383 src/hotlist.c:1431
 msgid "MC was unable to write ~/"
 msgstr "MC nevarçja ierakstît ~/"
 
 # src/hotlist.c:1404
-#: src/hotlist.c:1378
+#: src/hotlist.c:1384
 msgid " file, your old hotlist entries were not deleted"
 msgstr " fails, tavi vecie karstâ saraksta ieraksti netika izdzçsti"
 
 # src/hotlist.c:1387 src/hotlist.c:1406 src/hotlist.c:1429 src/hotlist.c:1454
-#: src/hotlist.c:1380
-#: src/hotlist.c:1403
-#: src/hotlist.c:1428
+#: src/hotlist.c:1386 src/hotlist.c:1409 src/hotlist.c:1434
 msgid " Hotlist Load "
 msgstr " Karstâ Saraksta Ielâde "
 
 # src/hotlist.c:1418
-#: src/hotlist.c:1392
+#: src/hotlist.c:1398
 msgid "You have ~/"
 msgstr "Tev ir ~/"
 
 # src/hotlist.c:1418
-#: src/hotlist.c:1392
+#: src/hotlist.c:1398
 msgid " file and [Hotlist] section in ~/"
 msgstr " fails un [Karstâ saraksta] sekcija iekð ~/"
 
 # src/hotlist.c:1419
-#: src/hotlist.c:1393
+#: src/hotlist.c:1399
 msgid "Your ~/"
 msgstr "Tavs ~/"
 
 # src/hotlist.c:1419
-#: src/hotlist.c:1393
-msgid ""
-" most probably was created\n"
-""
-msgstr ""
-" visdrîzâk tika izveidots\n"
-""
+#: src/hotlist.c:1399
+msgid " most probably was created\n"
+msgstr " visdrîzâk tika izveidots\n"
 
 # src/hotlist.c:1420
-#: src/hotlist.c:1394
+#: src/hotlist.c:1400
 msgid ""
 "by an earlier development version of MC\n"
 "and is more actual than ~/"
@@ -3369,18 +3127,16 @@ msgstr ""
 "un ir daudz aktuâlâka, kâ ~/"
 
 # src/hotlist.c:1421
-#: src/hotlist.c:1395
+#: src/hotlist.c:1401
 msgid ""
 " entries\n"
 "\n"
-""
 msgstr ""
 " ieraksti\n"
 "\n"
-""
 
 # src/hotlist.c:1422
-#: src/hotlist.c:1396
+#: src/hotlist.c:1402
 msgid ""
 "You can choose between\n"
 "\n"
@@ -3391,7 +3147,7 @@ msgstr ""
 "  Izòemt - izòemt vecos karstâ saraksta ierakstus no ~/"
 
 # src/hotlist.c:1424
-#: src/hotlist.c:1398
+#: src/hotlist.c:1404
 msgid ""
 "  Keep   - keep your old entries; you will be asked\n"
 "           the same question next time\n"
@@ -3399,20 +3155,21 @@ msgid ""
 msgstr ""
 "  Paturçt   - paturçt savus vecos ierakstus; tev jautâs ðo paðu\n"
 "           jautâjumu nâkamreiz\n"
-"  Apvienot  - pievienot vecos ierakstus karstajam sarakstam kâ grupu \"Ierakstus no ~/"
+"  Apvienot  - pievienot vecos ierakstus karstajam sarakstam kâ grupu "
+"\"Ierakstus no ~/"
 
 # src/hotlist.c:1430
-#: src/hotlist.c:1404
+#: src/hotlist.c:1410
 msgid "&Merge"
 msgstr "&Apvienot"
 
 # src/hotlist.c:1442
-#: src/hotlist.c:1416
+#: src/hotlist.c:1422
 msgid " Entries from ~/"
 msgstr " Ieraksti no ~/"
 
 # src/hotlist.c:1452
-#: src/hotlist.c:1426
+#: src/hotlist.c:1432
 msgid " file your old hotlist entries were not deleted"
 msgstr " failâ tavi vecie karstâ saraksta ieraksti netika izdzçsti"
 
@@ -3550,87 +3307,83 @@ msgid "&Horizontal"
 msgstr "&Horizontâli"
 
 # src/layout.c:170
-#: src/layout.c:166
+#: src/layout.c:167
 msgid "&Xterm hintbar"
 msgstr "&Xterm padomjosla"
 
 # src/layout.c:171
-#: src/layout.c:167
+#: src/layout.c:168
 msgid "h&Intbar visible"
 msgstr "pa&domjosla redzama"
 
 # src/layout.c:172
-#: src/layout.c:168
+#: src/layout.c:169
 msgid "&Keybar visible"
 msgstr "&Taustiòjosla redzama"
 
 # src/layout.c:173
-#: src/layout.c:169
+#: src/layout.c:170
 msgid "command &Prompt"
 msgstr "komandu ie&vade"
 
 # src/layout.c:174
-#: src/layout.c:170
+#: src/layout.c:171
 msgid "show &Mini status"
 msgstr "râdît &Mini statusu"
 
 # src/layout.c:175
-#: src/layout.c:171
+#: src/layout.c:172
 msgid "menu&Bar visible"
 msgstr "izvçlnes &Josla redzama"
 
 # src/layout.c:176
-#: src/layout.c:172
+#: src/layout.c:173
 msgid "&Equal split"
 msgstr "&Vienâds sadalîjums"
 
 # src/layout.c:177
-#: src/layout.c:173
+#: src/layout.c:174
 msgid "pe&Rmissions"
 msgstr "a&tïaujas"
 
 # src/layout.c:178
-#: src/layout.c:174
+#: src/layout.c:175
 msgid "&File types"
 msgstr "&Failu tipi"
 
 # src/layout.c:372 src/learn.c:60 src/learn.c:179 src/option.c:145
-#: src/layout.c:367
-#: src/learn.c:60
-#: src/learn.c:183
-#: src/option.c:137
+#: src/layout.c:368 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "&Saglabât"
 
 # src/layout.c:380
 #. length of line with '<' '>' buttons
-#: src/layout.c:375
+#: src/layout.c:376
 msgid " Layout "
 msgstr " Izkârtojums "
 
 # src/layout.c:381
-#: src/layout.c:376
+#: src/layout.c:377
 msgid " Panel split "
 msgstr "Paneïu sadalîjums"
 
 # src/layout.c:382
-#: src/layout.c:377
+#: src/layout.c:378
 msgid " Highlight... "
 msgstr " Izgaismot... "
 
 # src/layout.c:383 src/option.c:156
-#: src/layout.c:378
-#: src/option.c:148
+#: src/layout.c:379 src/option.c:148
 msgid " Other options "
 msgstr " Citas opcijas"
 
 # src/layout.c:384
-#: src/layout.c:379
+#: src/layout.c:380
 msgid "output lines"
 msgstr "izvades lînijas"
 
 # src/layout.c:451
-#: src/layout.c:446
+#: src/layout.c:447
 msgid "Layout"
 msgstr "Izkârtojums"
 
@@ -3718,15 +3471,18 @@ msgstr "Nospied visus ðeit minçtos taustiòus. Kad tas ir izdarîts, pârbaudi"
 # src/learn.c:302
 #: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "kuri taustiòi nav atzîmçti kâ OK. Nospiediet atstarpes taustiòu pie trûkstoðajiem"
+msgstr ""
+"kuri taustiòi nav atzîmçti kâ OK. Nospiediet atstarpes taustiòu pie "
+"trûkstoðajiem"
 
 # src/learn.c:304
 #: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
-msgstr "taustiòu, vai klikðíini ar peli, lai to definçtu. Kosties apkârt ar Tab."
+msgstr ""
+"taustiòu, vai klikðíini ar peli, lai to definçtu. Kosties apkârt ar Tab."
 
 # src/main.c:715
-#: src/main.c:649
+#: src/main.c:474
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -3739,193 +3495,187 @@ msgstr ""
 "papildus pieejas atïaujas ar \"su\" komandu? "
 
 # src/main.c:790
-#: src/main.c:723
+#: src/main.c:549
 msgid "Press any key to continue..."
 msgstr "Nospied jebkuru taustiòu, lai turpinâtu..."
 
 # src/main.c:840
-#: src/main.c:773
+#: src/main.c:595
 msgid " The shell is already running a command "
 msgstr " Èaulâ jau ir palaista komanda "
 
 # src/main.c:867 src/screen.c:2113 src/screen.c:2160
-#: src/main.c:800
-#: src/screen.c:2065
-#: src/screen.c:2112
+#: src/main.c:632 src/screen.c:1989
 msgid " The Midnight Commander "
 msgstr " Pusnakts Komandieris "
 
 # src/main.c:868
-#: src/main.c:801
+#: src/main.c:633
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Vai patiesi vçlaties iziet no Pusnakts Komandiera? "
 
-#: src/main.c:1117
+#: src/main.c:947
 msgid " Listing format edit "
 msgstr " Saraksta formâta rediìçðana"
 
-#: src/main.c:1117
+#: src/main.c:947
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Jaunais reþîms ir \"%s\" "
 
 # src/main.c:1248 src/main.c:1272
-#: src/main.c:1124
-#: src/main.c:1148
+#: src/main.c:954 src/main.c:981
 msgid "&Listing mode..."
 msgstr "&Saraksta reþîms..."
 
 # src/main.c:1249 src/main.c:1273
-#: src/main.c:1125
-#: src/main.c:1149
+#: src/main.c:955 src/main.c:982
 msgid "&Quick view     C-x q"
 msgstr "&Âtrais skatîjums     C-x q"
 
 # src/main.c:1250 src/main.c:1274
-#: src/main.c:1126
-#: src/main.c:1150
+#: src/main.c:956 src/main.c:983
 msgid "&Info           C-x i"
 msgstr "&Info           C-x i"
 
 # src/main.c:1253 src/main.c:1277
-#: src/main.c:1129
-#: src/main.c:1153
+#: src/main.c:959 src/main.c:986
 msgid "&Sort order..."
 msgstr "&Kârtotâ secîbâ..."
 
 # src/main.c:1255 src/main.c:1279
-#: src/main.c:1131
-#: src/main.c:1155
+#: src/main.c:961 src/main.c:988
 msgid "&Filter..."
 msgstr "&Filtrs..."
 
 # src/main.c:1258 src/main.c:1282
-#: src/main.c:1134
-#: src/main.c:1158
+#: src/main.c:965 src/main.c:992
 msgid "&Network link..."
 msgstr "&Tîkla saite..."
 
 # src/main.c:1259 src/main.c:1283
-#: src/main.c:1135
-#: src/main.c:1159
+#: src/main.c:967 src/main.c:994
 msgid "FT&P link..."
 msgstr "FT&P saite..."
 
 # src/main.c:1261 src/main.c:1285
-#: src/main.c:1137
-#: src/main.c:1161
+#: src/main.c:968 src/main.c:995
+#, fuzzy
+msgid "S&hell link..."
+msgstr "SM&B saite..."
+
+# src/main.c:1261 src/main.c:1285
+#: src/main.c:970 src/main.c:997
 msgid "SM&B link..."
 msgstr "SM&B saite..."
 
 # src/main.c:1266 src/main.c:1290
-#: src/main.c:1142
-#: src/main.c:1166
+#: src/main.c:975 src/main.c:1002
 msgid "&Drive...       M-d"
 msgstr "&Iekârta...       M-d"
 
 # src/main.c:1268 src/main.c:1292
-#: src/main.c:1144
-#: src/main.c:1168
+#: src/main.c:977 src/main.c:1004
 msgid "&Rescan         C-r"
 msgstr "&Pârskançt         C-r"
 
 # src/main.c:1297
-#: src/main.c:1172
+#: src/main.c:1008
 msgid "&User menu          F2"
 msgstr "&Lietotâja izvçlne          F2"
 
 # src/main.c:1298
-#: src/main.c:1173
+#: src/main.c:1009
 msgid "&View               F3"
 msgstr "Ska&tît               F3"
 
 # src/main.c:1299
-#: src/main.c:1174
+#: src/main.c:1010
 msgid "Vie&w file...         "
 msgstr "S&katît failu...         "
 
 # src/main.c:1300
-#: src/main.c:1175
+#: src/main.c:1011
 msgid "&Filtered view     M-!"
 msgstr "&Filtrçts skatîjums     M-!"
 
 # src/main.c:1301
-#: src/main.c:1176
+#: src/main.c:1012
 msgid "&Edit               F4"
 msgstr "&Rediìçt               F4"
 
 # src/main.c:1302
-#: src/main.c:1177
+#: src/main.c:1013
 msgid "&Copy               F5"
 msgstr "&Kopçt               F5"
 
 # src/main.c:1303
-#: src/main.c:1178
+#: src/main.c:1014
 msgid "c&Hmod           C-x c"
 msgstr "c&Hmod           C-x c"
 
 # src/main.c:1305
-#: src/main.c:1180
+#: src/main.c:1016
 msgid "&Link            C-x l"
 msgstr "Sait&e            C-x l"
 
 # src/main.c:1306
-#: src/main.c:1181
+#: src/main.c:1017
 msgid "&SymLink         C-x s"
 msgstr "Si&mbolSaite         C-x s"
 
 # src/main.c:1307
-#: src/main.c:1182
+#: src/main.c:1018
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "rediìçt si&mbolsait  C-x C-s"
 
 # src/main.c:1308
-#: src/main.c:1183
+#: src/main.c:1019
 msgid "ch&Own           C-x o"
 msgstr "ch&Own           C-x o"
 
 # src/main.c:1309
-#: src/main.c:1184
+#: src/main.c:1020
 msgid "&Advanced chown       "
 msgstr "&Paplaðinâts chown"
 
 # src/main.c:1311
-#: src/main.c:1186
+#: src/main.c:1022
 msgid "&Rename/Move        F6"
 msgstr "Pâ&rsaukt/Pârvietot        F6"
 
 # src/main.c:1312
-#: src/main.c:1187
+#: src/main.c:1023
 msgid "&Mkdir              F7"
 msgstr "&Izvdir              F7"
 
 # src/main.c:1313
-#: src/main.c:1188
+#: src/main.c:1024
 msgid "&Delete             F8"
 msgstr "&Dzçst             F8"
 
 # src/main.c:1314
-#: src/main.c:1189
+#: src/main.c:1025
 msgid "&Quick cd          M-c"
 msgstr "&Âtrs cd          M-c"
 
 # src/main.c:1316
-#: src/main.c:1191
+#: src/main.c:1027
 msgid "select &Group      M-+"
 msgstr "izvçlçties &Grupu      M-+"
 
 # src/main.c:1317
-#: src/main.c:1192
+#: src/main.c:1028
 msgid "u&Nselect group    M-\\"
 msgstr "at&Celt izvçlçto grupu    M-\\"
 
 # src/main.c:1318
-#: src/main.c:1193
+#: src/main.c:1029
 msgid "reverse selec&Tion M-*"
 msgstr "pretçji izvçlç&Tajam M-*"
 
 # src/main.c:1320
-#: src/main.c:1195
+#: src/main.c:1031
 msgid "e&Xit              F10"
 msgstr "i&Ziet              F10"
 
@@ -3934,162 +3684,168 @@ msgstr "i&Ziet              F10"
 #. * as a panel still has some problems, I have not yet finished
 #. * the WTree widget port, sorry.
 #.
-#: src/main.c:1203
+#: src/main.c:1039
 msgid "&Directory tree"
 msgstr "&Direktoriju koks"
 
 # src/main.c:1333
-#: src/main.c:1204
+#: src/main.c:1040
 msgid "&Find file            M-?"
 msgstr "&Meklçt failu            M-?"
 
 # src/main.c:1334
-#: src/main.c:1205
+#: src/main.c:1041
 msgid "s&Wap panels          C-u"
 msgstr "mai&Nît paneïus          C-u"
 
 # src/main.c:1335
-#: src/main.c:1206
+#: src/main.c:1042
 msgid "switch &Panels on/off C-o"
 msgstr "ieslçgt/izslçgt &Paneïus C-o"
 
 # src/main.c:1336
-#: src/main.c:1207
+#: src/main.c:1043
 msgid "&Compare directories  C-x d"
 msgstr "&Salîdzinât direktorijus  C-x d"
 
 # src/main.c:1337
-#: src/main.c:1208
+#: src/main.c:1044
 msgid "e&Xternal panelize    C-x !"
 msgstr "e&Xternal panelize    C-x !"
 
 # src/main.c:1338
-#: src/main.c:1209
+#: src/main.c:1045
 msgid "show directory s&Izes"
 msgstr "parâdît direktoriju l&ielumus"
 
 # src/main.c:1340
-#: src/main.c:1211
+#: src/main.c:1047
 msgid "command &History"
 msgstr "komandu &Vçsture"
 
 # src/main.c:1341
-#: src/main.c:1212
+#: src/main.c:1048
 msgid "di&Rectory hotlist    C-\\"
 msgstr "di&Rektoriju karstais saraksts    C-\\"
 
 # src/main.c:1343
-#: src/main.c:1214
+#: src/main.c:1050
 msgid "&Active VFS list      C-x a"
 msgstr "&Aktîvo VFS saraksts      C-x a"
 
 # src/main.c:1344
-#: src/main.c:1215
+#: src/main.c:1051
 msgid "Fr&ee VFSs now"
 msgstr "At&brîvot VFS tûlît"
 
 # src/main.c:1347
-#: src/main.c:1218
+#: src/main.c:1054
 msgid "&Background jobs      C-x j"
 msgstr "&Fona darbi      C-x j"
 
 # src/main.c:1351
-#: src/main.c:1222
+#: src/main.c:1058
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Atjaunot izdzçstos failus (ext2fs tikai)"
 
 # src/main.c:1354
-#: src/main.c:1225
+#: src/main.c:1061
 msgid "&Listing format edit"
 msgstr "&Saraksta formâta rediìçðana"
 
 # src/main.c:1359
-#: src/main.c:1230
+#: src/main.c:1066
 msgid "&Extension file edit"
 msgstr "&Paplaðinâjumu faila rediìçðana"
 
 # src/main.c:1360
-#: src/main.c:1231
+#: src/main.c:1067
 msgid "&Menu file edit"
 msgstr "&Izvçlnes faila rediìçðana"
 
 # src/main.c:1361
-#: src/main.c:1233
+#: src/main.c:1069
 msgid "Menu edi&Tor edit"
 msgstr "Izvçlòu re&Daktora rediìçðana"
 
+# src/main.c:1360
+#: src/main.c:1070
+#, fuzzy
+msgid "&Syntax file edit"
+msgstr "&Izvçlnes faila rediìçðana"
+
 # src/main.c:1366
-#: src/main.c:1239
+#: src/main.c:1076
 msgid "&Configuration..."
 msgstr "&Konfigurâcija..."
 
 # src/main.c:1368
-#: src/main.c:1241
+#: src/main.c:1078
 msgid "c&Onfirmation..."
 msgstr "a&Pstiprinâðana..."
 
 # src/main.c:1369
-#: src/main.c:1242
+#: src/main.c:1079
 msgid "&Display bits..."
 msgstr "&Displeja biti..."
 
 # src/main.c:1371
-#: src/main.c:1244
+#: src/main.c:1081
 msgid "learn &Keys..."
 msgstr "mâcîbu &Taustiòi..."
 
 # src/main.c:1374
-#: src/main.c:1247
+#: src/main.c:1084
 msgid "&Virtual FS..."
 msgstr "&Virtuâlâ FS..."
 
 # src/main.c:1377
-#: src/main.c:1250
+#: src/main.c:1087
 msgid "&Save setup"
 msgstr "&Saglabât uzstâdîjumus"
 
 # src/main.c:1395
-#: src/main.c:1260
+#: src/main.c:1097
 msgid " &Above "
 msgstr " &Virs "
 
 # src/main.c:1393 src/main.c:1395
-#: src/main.c:1260
+#: src/main.c:1097
 msgid " &Left "
 msgstr " &Kreisais "
 
 # src/main.c:1398
-#: src/main.c:1262
+#: src/main.c:1100
 msgid " &File "
 msgstr " &Fails "
 
 # src/main.c:1399
-#: src/main.c:1263
+#: src/main.c:1102
 msgid " &Command "
 msgstr " &Komanda "
 
 # src/main.c:1400
-#: src/main.c:1264
+#: src/main.c:1104
 msgid " &Options "
 msgstr " &Opcijas "
 
 # src/main.c:1404
-#: src/main.c:1265
+#: src/main.c:1106
 msgid " &Below "
 msgstr " &Zem "
 
 # src/main.c:1402 src/main.c:1404
-#: src/main.c:1265
+#: src/main.c:1106
 msgid " &Right "
 msgstr " &Labais "
 
 # src/main.c:1459
-#: src/main.c:1313
+#: src/main.c:1149
 msgid " Information "
 msgstr " Informâcija "
 
 # src/main.c:1460
-#: src/main.c:1314
+#: src/main.c:1150
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -4103,203 +3859,145 @@ msgstr ""
 "                                        "
 
 # gtkedit/gtkedit.c:1257 src/main.c:1734 src/screen.c:2394 src/screen.c:2424
-#: src/main.c:1584
-#: src/screen.c:2379
+#: src/main.c:1405 src/screen.c:2214
 msgid "Menu"
 msgstr "Izvçlne"
 
 # src/main.c:2374
-#: src/main.c:1723
-msgid ""
-"The TERM environment variable is unset!\n"
-""
-msgstr ""
-"TERM mainîgais nav ieslçgts!\n"
-""
+#: src/main.c:1544
+msgid "The TERM environment variable is unset!\n"
+msgstr "TERM mainîgais nav ieslçgts!\n"
 
 # src/main.c:1941
-#: src/main.c:1820
+#: src/main.c:1641
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Paldies, ka lietojât GNU Pusnakts Komandieri"
 
 # src/main.c:2481
-#: src/main.c:2295
+#: src/main.c:2076
 msgid ""
 "Usage is:\n"
 "\n"
 "mc [flags] [this_dir] [other_panel_dir]\n"
 "\n"
-""
 msgstr ""
 "Lietoðana ir:\n"
 "\n"
 "mc [karodziòi] [ðis_dir] [cita_paneïa_dir]\n"
 "\n"
-""
 
 # src/main.c:2484
-#: src/main.c:2298
-msgid ""
-"-a, --stickchars   Force use of +, -, | for line drawing.\n"
-""
-msgstr ""
-"-a, --stickchars   Likt lietot +, -, | lîniju zîmçðanai.\n"
-""
+#: src/main.c:2079
+msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
+msgstr "-a, --stickchars   Likt lietot +, -, | lîniju zîmçðanai.\n"
 
 # src/main.c:2486
-#: src/main.c:2300
-msgid ""
-"-b, --nocolor      Force black and white display.\n"
-""
-msgstr ""
-"-b, --nocolor      Melnbalts ekrâns.\n"
-""
+#: src/main.c:2081
+msgid "-b, --nocolor      Force black and white display.\n"
+msgstr "-b, --nocolor      Melnbalts ekrâns.\n"
 
 # src/main.c:2488
-#: src/main.c:2302
-msgid ""
-"-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-""
-msgstr ""
-"-B, --background   [DEVEL-ONLY: Debug the background code]\n"
-""
+#: src/main.c:2083
+msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
+msgstr "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 
 # src/main.c:2490
-#: src/main.c:2304
+#: src/main.c:2085
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
 "-d, --nomouse      Disable mouse support.\n"
-""
 msgstr ""
 "-c, --color        Krâsu reþîms.\n"
-"-C, --colors       Specificçt krâsas (lieto --help-colors lai dabûtu sarakstu).\n"
+"-C, --colors       Specificçt krâsas (lieto --help-colors lai dabûtu "
+"sarakstu).\n"
 "-d, --nomouse      Atslçdz peles atbalstu.\n"
-""
 
 # src/main.c:2494
-#: src/main.c:2308
-msgid ""
-"-e, --edit         Startup the internal editor.\n"
-""
-msgstr ""
-"-e, --edit         Startçt iekðçjo redaktoru.\n"
-""
+#: src/main.c:2089
+msgid "-e, --edit         Startup the internal editor.\n"
+msgstr "-e, --edit         Startçt iekðçjo redaktoru.\n"
 
 # src/main.c:2496
-#: src/main.c:2310
+#: src/main.c:2091
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
-"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/termcap\n"
+"-k, --resetsoft    Reset softkeys (HP terminals only) to their terminfo/"
+"termcap\n"
 "                   default.\n"
-""
 msgstr ""
 "-f, --libdir       Parâdît konfigurçtos ceïus.\n"
 "-h, --help         Parâdît ðo palîdzîbas paziòojumu.\n"
-"-k, --resetsoft    Pârstatît mîkstos taustiòus (tikai HP terminâïiem) uz to terminfo/termcap\n"
+"-k, --resetsoft    Pârstatît mîkstos taustiòus (tikai HP terminâïiem) uz to "
+"terminfo/termcap\n"
 "                   noklusçjumu.\n"
-""
 
 # src/main.c:2501
-#: src/main.c:2315
-msgid ""
-"-l, --ftplog file  Log ftpfs commands to the file.\n"
-""
-msgstr ""
-"-l, --ftplog fails  Iegrâmato ftpfs komandas failâ.\n"
-""
-
-# src/main.c:2504
-#: src/main.c:2318
-msgid ""
-"-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
-""
-msgstr ""
-"-M, --memory fails  [TIKAI-IZSTRÂDEI: Iegrâmatot MAD ziòojumus failâ.]\n"
-""
+#: src/main.c:2096
+msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
+msgstr "-l, --ftplog fails  Iegrâmato ftpfs komandas failâ.\n"
 
 # src/main.c:2506
-#: src/main.c:2320
+#: src/main.c:2098
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
-""
 msgstr ""
 "-P, --printwd      Pie iezieðanas, parâdît beidzamo darba direktoriju.\n"
 "-s, --slow         Atslçdz vârdiskâs operâcijas (lçniem terminâïiem).\n"
-""
 
 # src/main.c:2509
-#: src/main.c:2323
-msgid ""
-"-t, --termcap      Activate support for the TERMCAP variable.\n"
-""
-msgstr ""
-"-t, --termcap      Aktivizçt atbalstu TERMCAP mainîgajam.\n"
-""
+#: src/main.c:2101
+msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
+msgstr "-t, --termcap      Aktivizçt atbalstu TERMCAP mainîgajam.\n"
 
 # src/main.c:2512
-#: src/main.c:2326
+#: src/main.c:2104
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
-""
 msgstr ""
-"-S, --createcmdile Izveidot komandas failu, lai iestatîtu noklusçto direktoriju pirms izieðanas.\n"
-""
+"-S, --createcmdile Izveidot komandas failu, lai iestatîtu noklusçto "
+"direktoriju pirms izieðanas.\n"
 
 # src/main.c:2515
-#: src/main.c:2329
+#: src/main.c:2107
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
 "-r, --forceexec    Force subshell execution.\n"
-""
 msgstr ""
 "-u, --nosubshell   Atslçgt konkurçjoðo zemèaulas reþîmu.\n"
 "-U, --subshell     Ieslçgt konkurçjoðo zemèaulas reþîmu.\n"
 "-r, --forceexec    Aktivizçt zemèaulas palaiðanu.\n"
-""
 
 # src/main.c:2519
-#: src/main.c:2333
+#: src/main.c:2111
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
 "-x, --xterm        Force xterm mouse support and screen save/restore.\n"
 "+number            number it is the start line number of file for `mcedit'.\n"
-""
 msgstr ""
 "-v, --view fname   Sâknçt skatîtâja reþîmâ.\n"
 "-V, --version      Parâda versiju un konfigurâcijas opcijas.\n"
-"-x, --xterm        Aktivizç xterm peles atbalstu un ekrâna saglabâðanu/atjaunoðanu.\n"
+"-x, --xterm        Aktivizç xterm peles atbalstu un ekrâna saglabâðanu/"
+"atjaunoðanu.\n"
 "+numurs            numurs ir sâkuma lînijas numurs failâ iekð `mcedit'.\n"
-""
-
-# src/main.c:2524
-#: src/main.c:2338
-msgid ""
-"-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
-""
-msgstr ""
-"-X, --dbgsubshell  [TIKAI-IZSTRÂDEI: Atkïûdot zemèaulu].\n"
-""
 
 # src/main.c:2526
-#: src/main.c:2340
+#: src/main.c:2115
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
 "to mc-devel@gnome.org\n"
-""
 msgstr ""
 "\n"
 "Lûdzu sûtiet jebkâdus kïûdu paziòojumus (ieskaitot `mc -V' izvadi)\n"
 "uz mc-bugs@gnome.org\n"
-""
 
 # src/main.c:2542
-#: src/main.c:2355
+#: src/main.c:2130
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -4318,7 +4016,6 @@ msgid ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
-""
 msgstr ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -4337,155 +4034,143 @@ msgstr ""
 "   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
 "   brightcyan, lightgray and white\n"
 "\n"
-""
 
 # src/main.c:2594
-#: src/main.c:2404
+#: src/main.c:2179
 #, c-format
-msgid ""
-"Library directory for the Midnight Commander: %s\n"
-""
-msgstr ""
-"Pusnakts Komandiera bibliotçku direktorijs: %s\n"
-""
+msgid "Library directory for the Midnight Commander: %s\n"
+msgstr "Pusnakts Komandiera bibliotçku direktorijs: %s\n"
 
 # src/main.c:2608
-#: src/main.c:2418
+#: src/main.c:2193
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
-""
-msgstr ""
-"Opcija -m ir novecojusi. Displeja Biti... Optciju izvçlnç\n"
-""
+msgstr "Opcija -m ir novecojusi. Displeja Biti... Optciju izvçlnç\n"
 
 # src/main.c:2685
-#: src/main.c:2459
+#: src/main.c:2228
 msgid "Use to debug the background code"
 msgstr "Lietot, lai atkïûdotu fona kodu"
 
 # src/main.c:2691
-#: src/main.c:2465
+#: src/main.c:2234
 msgid "Request to run in color mode"
 msgstr "Pieprasîjums darboties krâsu reþîmâ"
 
 # src/main.c:2693
-#: src/main.c:2467
+#: src/main.c:2236
 msgid "Specifies a color configuration"
 msgstr "Nosaka krâsas konfigurâciju"
 
 # src/main.c:2698
-#: src/main.c:2474
+#: src/main.c:2240
 msgid "Edits one file"
 msgstr "Rediìç vienu failu"
 
 # src/main.c:2702
-#: src/main.c:2478
+#: src/main.c:2244
 msgid "Displays this help message"
 msgstr "Pârâda ðo palîdzîbas paziòojumu"
 
 # src/main.c:2705
-#: src/main.c:2480
+#: src/main.c:2246
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Parâda palîdzîbas ekrânu par to, kâ nomainît krâsu shçmu"
 
 # src/main.c:2708
-#: src/main.c:2483
+#: src/main.c:2249
 msgid "Log ftp dialog to specified file"
 msgstr "Iegrâmatot ftp dialogu noteiktâ failâ"
 
 # src/main.c:2715
-#: src/main.c:2490
+#: src/main.c:2253
 msgid "Obsolete"
 msgstr "Novecojis"
 
 # src/main.c:2717
-#: src/main.c:2492
+#: src/main.c:2255
 msgid "Requests to run in black and white"
 msgstr "Pieprasa, lai darbotos melnbaltâ reþîmâ"
 
 # src/main.c:2719
-#: src/main.c:2494
+#: src/main.c:2257
 msgid "Disable mouse support in text version"
 msgstr "Atslçdz peles atbalstu teksta reþîmâ"
 
 # src/main.c:2722
-#: src/main.c:2497
+#: src/main.c:2260
 msgid "Disables subshell support"
 msgstr "Atslçdz zemèaulas atbalstu"
 
 # src/main.c:2726
-#: src/main.c:2501
+#: src/main.c:2264
 msgid "Prints working directory at program exit"
 msgstr "Pie iezieðanas parâda darba direktoriju"
 
 # src/main.c:2728
-#: src/main.c:2503
+#: src/main.c:2266
 msgid "Resets soft keys on HP terminals"
 msgstr "Pârslçdz mîkstos taustiòus uz HP terminâïiem"
 
 # src/main.c:2730
-#: src/main.c:2505
+#: src/main.c:2268
 msgid "To run on slow terminals"
 msgstr "Lai palaistu uz lçniem terminâïiem"
 
 # src/main.c:2733
-#: src/main.c:2508
+#: src/main.c:2271
 msgid "Use stickchars to draw"
 msgstr ""
 
 # src/main.c:2737
-#: src/main.c:2512
+#: src/main.c:2275
 msgid "Enables subshell support (default)"
 msgstr "Ieslçdz zemèaulas atbalstu (noklusçtais)"
 
 # src/main.c:2742
-#: src/main.c:2516
+#: src/main.c:2279
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Mçìina lietot termcap terminfo vietâ"
 
 # src/main.c:2746
-#: src/main.c:2519
+#: src/main.c:2282
 msgid "Displays the current version"
 msgstr "Parâda paðreizçjo versiju"
 
 # src/main.c:2748
-#: src/main.c:2521
+#: src/main.c:2284
 msgid "Launches the file viewer on a file"
 msgstr "Palaiþ failam failu skatîtâju"
 
 # src/main.c:2750
-#: src/main.c:2523
+#: src/main.c:2286
 msgid "Forces xterm features"
 msgstr "Aktivizç xterm iespçjas"
 
 # src/main.c:3073
-#: src/main.c:2715
+#: src/main.c:2476
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
-""
 msgstr ""
 "Nevarçja atvçrt tty lîniju. Tev jâpalaiþ mc bez -P karodziòa.\n"
 "Uz daþâm sisçmâm tu varçtu gribçt palaist # `which mc`\n"
-""
 
 # src/main.c:3151
-#: src/main.c:2778
+#: src/main.c:2539
 msgid " Notice "
 msgstr " Paziòojums "
 
 # src/main.c:3152
-#: src/main.c:2779
+#: src/main.c:2540
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
 " files have been moved now\n"
-""
 msgstr ""
 " Pusnakts Komandiera konfigurâcijas fails \n"
 " tagad tiek glabâtas ~/.mc direktorijâ,\n"
 " faili tagad ir pârvietoti\n"
-""
 
 # src/option.c:74
 #: src/option.c:72
@@ -4619,78 +4304,74 @@ msgid "Configure options"
 msgstr "Konfigurçt opcijas"
 
 # src/panelize.c:87
-#: src/panelize.c:75
+#: src/panelize.c:74
 msgid "&Add new"
 msgstr "&Pievienot jaunu"
 
 # src/panelize.c:99
-#: src/panelize.c:91
+#: src/panelize.c:88
 msgid " External panelize "
 msgstr " Ârçjâ panelçðana"
 
 # src/panelize.c:194 src/panelize.c:458
-#: src/panelize.c:182
-#: src/panelize.c:448
+#: src/panelize.c:179 src/panelize.c:442
 msgid "External panelize"
 msgstr "Ârçjâ panelçðana"
 
 # gnome/gprop.c:109 src/panelize.c:205
-#: src/panelize.c:192
+#: src/panelize.c:189
 msgid "Command"
 msgstr "Komanda"
 
 # src/panelize.c:219 src/panelize.c:276 src/panelize.c:347 src/panelize.c:368
-#: src/panelize.c:206
-#: src/panelize.c:265
-#: src/panelize.c:337
-#: src/panelize.c:358
+#: src/panelize.c:203 src/panelize.c:260 src/panelize.c:331 src/panelize.c:352
 msgid "Other command"
 msgstr "Cita omanda"
 
 # src/panelize.c:260
-#: src/panelize.c:249
+#: src/panelize.c:244
 msgid " Add to external panelize "
 msgstr " Pievienot ârçjai panelçðanai "
 
 # src/panelize.c:261
-#: src/panelize.c:250
+#: src/panelize.c:245
 msgid " Enter command label: "
 msgstr " Ievadi komandas nosaukumu: "
 
 # src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
 # src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:671
-#: src/panelize.c:289
-#: src/user.c:668
+#: src/panelize.c:284 src/user.c:667
 msgid " Oops... "
 msgstr " Oops... "
 
 # src/panelize.c:301
-#: src/panelize.c:290
+#: src/panelize.c:285
 msgid " I can't run external panelize while logged on a non local directory "
-msgstr " Nevar palaist ârçjo panelçðanu kamçr ielogojoes ne-vietçjâ direktorijâ "
+msgstr ""
+" Nevar palaist ârçjo panelçðanu kamçr ielogojoes ne-vietçjâ direktorijâ "
 
 # gnome/gcmd.c:510 src/panelize.c:350
-#: src/panelize.c:340
+#: src/panelize.c:334
 msgid "Find rejects after patching"
 msgstr "Atrast atraidîjumus pçc ielâpoðanas"
 
 # src/panelize.c:351
-#: src/panelize.c:341
+#: src/panelize.c:335
 msgid "Find *.orig after patching"
 msgstr "Atrast *.orig pçc ielâpoðanas"
 
 # src/panelize.c:352
-#: src/panelize.c:342
+#: src/panelize.c:336
 msgid "Find SUID and SGID programs"
 msgstr "Atrast SUID un SGID programmas"
 
 # src/panelize.c:403
-#: src/panelize.c:393
+#: src/panelize.c:387
 msgid "Cannot invoke command."
 msgstr "Nevar palais komandu."
 
 # src/panelize.c:458
-#: src/panelize.c:448
+#: src/panelize.c:442
 msgid "Pipe close failed"
 msgstr "Kanâla aizvçrðana neizdevâs"
 
@@ -4705,122 +4386,123 @@ msgid "Display brief usage message"
 msgstr "Parâdît îsu lietoðanas pamâcîbu"
 
 # src/screen.c:227
-#: src/screen.c:201
-msgid "SUB-DIR"
-msgstr "ZEM-DIR"
-
-# src/screen.c:227
-#: src/screen.c:201
+#: src/screen.c:178
 msgid "UP--DIR"
 msgstr "AUGÐ--DIR"
 
+#: src/screen.c:202
+msgid "SYMLINK"
+msgstr ""
+
+# src/screen.c:227
+#: src/screen.c:207
+msgid "SUB-DIR"
+msgstr "ZEM-DIR"
+
 # gnome/gcmd.c:317 gnome/gcustom-layout.c:45 src/screen.c:414
 # src/screen.c:415
-#: src/screen.c:388
-#: src/screen.c:389
+#: src/screen.c:387 src/screen.c:388
 msgid "Size"
 msgstr "Lielums"
 
 # src/screen.c:417
-#: src/screen.c:391
+#: src/screen.c:390
 msgid "MTime"
 msgstr "MLaiks"
 
 # src/screen.c:418
-#: src/screen.c:392
+#: src/screen.c:391
 msgid "ATime"
 msgstr "ALaiks"
 
 # src/screen.c:419
-#: src/screen.c:393
+#: src/screen.c:392
 msgid "CTime"
 msgstr "CLaiks"
 
 # gnome/gcustom-layout.c:44 src/screen.c:420
-#: src/screen.c:394
+#: src/screen.c:393
 msgid "Permission"
 msgstr "Atïauja"
 
 # src/screen.c:421
-#: src/screen.c:395
+#: src/screen.c:394
 msgid "Perm"
 msgstr "Atï"
 
 # src/screen.c:422
-#: src/screen.c:396
+#: src/screen.c:395
 msgid "Nl"
 msgstr "Nl"
 
 # src/screen.c:423
-#: src/screen.c:397
+#: src/screen.c:396
 msgid "Inode"
 msgstr "Inode"
 
 # src/screen.c:424
-#: src/screen.c:398
+#: src/screen.c:397
 msgid "UID"
 msgstr "UID"
 
 # src/screen.c:425
-#: src/screen.c:399
+#: src/screen.c:398
 msgid "GID"
 msgstr "GID"
 
 # gnome/gcustom-layout.c:43 gnome/gnome-file-property-dialog.c:942
 # gnome/gprop.c:390 src/screen.c:426
-#: src/screen.c:400
+#: src/screen.c:399
 msgid "Owner"
 msgstr "Îpaðnieks"
 
 # gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:788
 # gnome/gnome-file-property-dialog.c:957 gnome/gprop.c:280 gnome/gprop.c:405
 # src/screen.c:427
-#: src/screen.c:401
+#: src/screen.c:400
 msgid "Group"
 msgstr "Grupa"
 
 # gnome/gscreen.c:1663 src/screen.c:663
-#: src/screen.c:635
+#: src/screen.c:631
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s baiti %d failâ"
 
 # gnome/gscreen.c:1663 src/screen.c:663
-#: src/screen.c:635
+#: src/screen.c:631
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s baiti %d failos"
 
 # gnome/gscreen.c:1689 src/screen.c:689
-#: src/screen.c:661
+#: src/screen.c:657
 msgid "<readlink failed>"
 msgstr "<lasîtsaiti neveiksme>"
 
 # src/screen.c:1322
-#: src/screen.c:1274
+#: src/screen.c:1256
 msgid "Unknown tag on display format: "
 msgstr "Nezinâma zime displeja formâtâ: "
 
 # src/screen.c:1448
-#: src/screen.c:1400
+#: src/screen.c:1382
 msgid "User suplied format looks invalid, reverting to default."
-msgstr "Lietotâja piedâvâtais formâts izskatâs nepareizs, atgrieþamies pie noklusçtâ."
+msgstr ""
+"Lietotâja piedâvâtais formâts izskatâs nepareizs, atgrieþamies pie noklusçtâ."
 
 # src/screen.c:2114 src/screen.c:2161
-#: src/screen.c:2066
-#: src/screen.c:2113
+#: src/screen.c:1990
 msgid " Do you really want to execute? "
 msgstr " Vai tu patieðâm vçlies palaist? "
 
 # src/screen.c:2125 src/screen.c:2175
-#: src/screen.c:2077
-#: src/screen.c:2127
+#: src/screen.c:2002
 msgid " No action taken "
 msgstr " Nekâda darbîba nav veikta "
 
 # src/screen.c:2415 src/tree.c:866
-#: src/screen.c:2370
-#: src/tree.c:876
+#: src/screen.c:2205 src/tree.c:876
 #, c-format
 msgid ""
 " Cannot chdir to \"%s\" \n"
@@ -4832,26 +4514,23 @@ msgstr ""
 # gnome/gnome-file-property-dialog.c:413
 # gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
 # src/screen.c:2395 src/screen.c:2425
-#: src/screen.c:2380
+#: src/screen.c:2215
 msgid "View"
 msgstr "Skatît"
 
 # gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
 # src/screen.c:2396 src/screen.c:2426 src/view.c:2081
-#: src/screen.c:2381
-#: src/view.c:2036
+#: src/screen.c:2216 src/view.c:2041
 msgid "Edit"
 msgstr "Rediìçt"
 
 # src/screen.c:2398 src/screen.c:2428 src/tree.c:1016
-#: src/screen.c:2383
-#: src/tree.c:1026
+#: src/screen.c:2218 src/tree.c:1026
 msgid "RenMov"
 msgstr "PârsPârv"
 
 # src/screen.c:2399 src/screen.c:2429 src/tree.c:1020
-#: src/screen.c:2384
-#: src/tree.c:1030
+#: src/screen.c:2219 src/tree.c:1030
 msgid "Mkdir"
 msgstr "Izvdir"
 
@@ -4881,51 +4560,31 @@ msgstr ""
 "iekð Uzstâdîjumi / Displeja Biti izvçlnes!\n"
 "Neaizmirst saglabât uzstâdîjumus."
 
-#: src/slint.c:190
+#: src/slint.c:193
 #, c-format
 msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
-""
 msgstr ""
 "Ekrâna izmçrs %dx%d nav atbalstîts.\n"
 "Pârbaudi TERM vides mainîgo.\n"
-""
 
 # src/subshell.c:287
-#: src/subshell.c:433
+#: src/subshell.c:417
 #, c-format
-msgid ""
-"Couldn't open named pipe %s\n"
-""
-msgstr ""
-"Nevarçja atvçrt nosaukto kanâlu %s\n"
-""
+msgid "Couldn't open named pipe %s\n"
+msgstr "Nevarçja atvçrt nosaukto kanâlu %s\n"
 
 # src/subshell.c:705
-#: src/subshell.c:726
+#: src/subshell.c:702
 msgid " The shell is still active. Quit anyway? "
 msgstr " Èaula joprojâm aktîva. Vienalga iziet? "
 
-# src/subshell.c:731
-#: src/subshell.c:752
-msgid " There are stopped jobs."
-msgstr " Ðeit ir apstâdinâti darbi."
-
-# src/subshell.c:732
-#: src/subshell.c:753
-msgid " Quit anyway? "
-msgstr " Iziet tik un tâ? "
-
 # src/subshell.c:785
-#: src/subshell.c:866
+#: src/subshell.c:813
 #, c-format
-msgid ""
-"Warning: Couldn't change to %s.\n"
-""
-msgstr ""
-"Brîdinâjums: Nevarçja pârmainît uz %s.\n"
-""
+msgid "Warning: Couldn't change to %s.\n"
+msgstr "Brîdinâjums: Nevarçja pârmainît uz %s.\n"
 
 # src/textconf.c:20
 #: src/textconf.c:10
@@ -4943,138 +4602,106 @@ msgid " (proxies: hsc proxy)"
 msgstr " (proxies: hsc proxy)"
 
 # src/textconf.c:26
-#: src/textconf.c:16
+#: src/textconf.c:17
 msgid ", mcfs"
 msgstr ", mcfs"
 
 # src/textconf.c:28
-#: src/textconf.c:18
+#: src/textconf.c:20
 msgid " (with termnet support)"
 msgstr " (ar termnet atbalstu)"
 
 # src/textconf.c:31
-#: src/textconf.c:21
+#: src/textconf.c:23
 msgid ", smbfs"
 msgstr ", smbfs"
 
 # src/textconf.c:35
-#: src/textconf.c:25
+#: src/textconf.c:27
 msgid ", undelfs"
 msgstr ", undelfs"
 
 # src/textconf.c:41
-#: src/textconf.c:31
-msgid ""
-"With builtin Editor\n"
-""
-msgstr ""
-"Ar iebûvçto Redaktoru\n"
-""
+#: src/textconf.c:33
+msgid "With builtin Editor\n"
+msgstr "Ar iebûvçto Redaktoru\n"
 
 # src/textconf.c:47
-#: src/textconf.c:37
+#: src/textconf.c:39
 msgid "Using system-installed S-Lang library"
 msgstr "Lietoju sistçmâ uzinstalçto S-Land bibliotçku"
 
-#: src/textconf.c:39
+#: src/textconf.c:41
 msgid "Using included S-Lang library"
 msgstr "Lietoju iekïauto S-Lang bibliotçku"
 
-#: src/textconf.c:45
+#: src/textconf.c:47
 msgid "with terminfo database"
 msgstr "ar terminfo datubâzi"
 
 # src/textconf.c:60
-#: src/textconf.c:47
+#: src/textconf.c:49
 msgid "with termcap database"
 msgstr "ar termcap datubâzi"
 
 # src/textconf.c:57
-#: src/textconf.c:49
+#: src/textconf.c:51
 msgid "with an unknown terminal database"
 msgstr "ar nezinâmu terminâïa datubâzi"
 
 # src/textconf.c:63
-#: src/textconf.c:53
+#: src/textconf.c:55
 msgid "Using the ncurses library"
 msgstr "Lietoju ncurses bibliotçku"
 
 # src/textconf.c:63
-#: src/textconf.c:55
+#: src/textconf.c:57
 msgid "Using old curses library"
 msgstr "Lietoju veco ncurses bibliotçku"
 
 # src/textconf.c:70
-#: src/textconf.c:62
+#: src/textconf.c:64
 msgid "With optional subshell support"
 msgstr "Ar zemèaulas atbalstu pçc izvçles"
 
 # src/textconf.c:70
-#: src/textconf.c:64
+#: src/textconf.c:66
 msgid "With subshell support as default"
 msgstr "Ar zemèaulas atbalstu kâ noklusçto"
 
 # src/textconf.c:80
-#: src/textconf.c:70
-msgid ""
-"With support for background operations\n"
-""
-msgstr ""
-"Ar atbalstu fona operâcijâm\n"
-""
+#: src/textconf.c:72
+msgid "With support for background operations\n"
+msgstr "Ar atbalstu fona operâcijâm\n"
 
 # src/textconf.c:84
-#: src/textconf.c:74
-msgid ""
-"With mouse support on xterm and Linux console\n"
-""
-msgstr ""
-"Ar peles atbalstu xterm un Linux konsolei\n"
-""
+#: src/textconf.c:76
+msgid "With mouse support on xterm and Linux console\n"
+msgstr "Ar peles atbalstu xterm un Linux konsolei\n"
 
 # src/textconf.c:86
-#: src/textconf.c:76
-msgid ""
-"With mouse support on xterm\n"
-""
-msgstr ""
-"Ar peles atbalstu xterm\n"
-""
+#: src/textconf.c:78
+msgid "With mouse support on xterm\n"
+msgstr "Ar peles atbalstu xterm\n"
 
 # src/textconf.c:80
-#: src/textconf.c:80
-msgid ""
-"With support for X11 events\n"
-""
-msgstr ""
-"Ar atbalstu X11 operâcijâm\n"
-""
+#: src/textconf.c:82
+msgid "With support for X11 events\n"
+msgstr "Ar atbalstu X11 operâcijâm\n"
 
-#: src/textconf.c:84
-msgid ""
-"With internationalization support\n"
-""
-msgstr ""
-"ar internacionalizâcijas atbalstu\n"
-""
+#: src/textconf.c:86
+msgid "With internationalization support\n"
+msgstr "ar internacionalizâcijas atbalstu\n"
 
-#: src/textconf.c:88
-msgid ""
-"With multiple codepages support\n"
-""
-msgstr ""
-"Ar vairâku kodu tabulu atbalstu\n"
-""
+#: src/textconf.c:90
+msgid "With multiple codepages support\n"
+msgstr "Ar vairâku kodu tabulu atbalstu\n"
 
 # gnome/gcmd.c:115 gnome/gmc-window.c:68
-#: src/textconf.c:99
+#: src/textconf.c:101
 #, c-format
-msgid ""
-"GNU Midnight Commander %s\n"
-""
-msgstr ""
-"GNU Pusnakts Komandieris %s\n"
-""
+msgid "GNU Midnight Commander %s\n"
+msgstr "GNU Pusnakts Komandieris %s\n"
 
 # src/tree.c:192
 #: src/tree.c:195
@@ -5082,11 +4709,9 @@ msgstr ""
 msgid ""
 "Cannot open the %s file for writing:\n"
 "%s\n"
-""
 msgstr ""
 "Nevarçja atvçrt failu %s, lai ierakstîtu:\n"
 "%s\n"
-""
 
 # src/tree.c:637
 #: src/tree.c:639
@@ -5147,67 +4772,65 @@ msgid "Rmdir"
 msgstr "Izdzdir"
 
 # src/treestore.c:360
-#: src/treestore.c:357
+#: src/treestore.c:353
 #, c-format
 msgid ""
 "Cannot write to the %s file:\n"
 "%s\n"
-""
 msgstr ""
 "Nevar ierakstît failâ %s:\n"
 "%s\n"
-""
 
 # src/user.c:137
-#: src/user.c:136
+#: src/user.c:134
 msgid " Format error on file Extensions File "
 msgstr " Formatçjuma kïûda Paplaðinâjumu Failâ "
 
 # src/user.c:138
-#: src/user.c:137
+#: src/user.c:135
 #, c-format
 msgid " The %%var macro has no default "
 msgstr " %%var makro nav noklusçtâ "
 
 # src/user.c:139
-#: src/user.c:138
+#: src/user.c:136
 #, c-format
 msgid " The %%var macro has no variable "
 msgstr " %%var makro nav mainîgâ "
 
 # src/user.c:273
-#: src/user.c:282
+#: src/user.c:281
 #, c-format
 msgid " Invalid shell pattern definition \"%c\". "
 msgstr " Nepareiza èaulas modeïa definîcija \"%c\". "
 
 # src/user.c:426
-#: src/user.c:435
+#: src/user.c:434
 msgid " Debug "
 msgstr " Atkïûdoðana "
 
 # src/user.c:435
-#: src/user.c:444
+#: src/user.c:443
 msgid " ERROR: "
 msgstr " KÏÛDA: "
 
 # src/user.c:439
-#: src/user.c:448
+#: src/user.c:447
 msgid " True:  "
 msgstr " Patiess:  "
 
 # src/user.c:441
-#: src/user.c:450
+#: src/user.c:449
 msgid " False: "
 msgstr " Nepatiess: "
 
 # src/user.c:647
-#: src/user.c:645
+#: src/user.c:644
 msgid " Warning -- ignoring file "
 msgstr " Brîdinâjums -- ignorçju failu "
 
 # src/user.c:648
-#: src/user.c:646
+#: src/user.c:645
 #, c-format
 msgid ""
 "File %s is not owned by root or you or is world writable.\n"
@@ -5217,53 +4840,52 @@ msgstr ""
 "Tâ lietoðana var kompromitçt jûsu droðîbu"
 
 # src/user.c:672
-#: src/user.c:669
+#: src/user.c:668
 msgid " I can't run programs while logged on a non local directory "
-msgstr " Es nevaru palaist programmas kamçr ielogojies iekð ne-vietçjâ direktorija "
+msgstr ""
+" Es nevaru palaist programmas kamçr ielogojies iekð ne-vietçjâ direktorija "
 
 # src/user.c:770
-#: src/user.c:767
+#: src/user.c:766
 #, c-format
 msgid " No appropriative entries found in %s "
 msgstr " Neviens atbilstoðs ieraksts netika atrasts iekð %s "
 
 # src/user.c:776
 #. Create listbox
-#: src/user.c:773
+#: src/user.c:772
 msgid " User menu "
 msgstr " Lietotâja izvçlne "
 
 # src/util.c:232
-#: src/util.c:215
+#: src/util.c:200
 msgid "name_trunc: too big"
 msgstr "name_trunc: pârâk liels"
 
 # src/util.c:599 src/util.c:624
 #. strftime() format string for recent dates
-#: src/util.c:669
-#: src/util.c:695
+#: src/util.c:630 src/util.c:656
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
 # src/util.c:600 src/util.c:622
 #. strftime() format string for old dates
-#: src/util.c:670
-#: src/util.c:693
+#: src/util.c:631 src/util.c:654
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
 
 # src/utilunix.c:382
-#: src/utilunix.c:370
+#: src/utilunix.c:317
 msgid " Pipe failed "
 msgstr " Kanâls neizdevâs "
 
 # src/utilunix.c:386
-#: src/utilunix.c:374
+#: src/utilunix.c:321
 msgid " Dup failed "
 msgstr " Dup neizdevâs "
 
 # src/view.c:403
-#: src/view.c:395
+#: src/view.c:404
 msgid ""
 "File: \n"
 "\n"
@@ -5274,69 +4896,38 @@ msgstr ""
 "    "
 
 # src/view.c:404
-#: src/view.c:396
+#: src/view.c:405
 msgid ""
 "\n"
 "\n"
 "has been modified, do you want to save the changes?\n"
-""
 msgstr ""
 "\n"
 "\n"
 "ir ticis mainîts, vçlies saglabât izmaiòas?\n"
-""
 
 # src/view.c:406
-#: src/view.c:398
+#: src/view.c:407
 msgid " Save changes "
 msgstr " Glabât izmaiòas "
 
 # src/view.c:448
-#: src/view.c:440
+#: src/view.c:449
 msgid " Cannot spawn child program "
 msgstr " Nevar pavairot bçrna programmu "
 
 # src/view.c:457
-#: src/view.c:449
+#: src/view.c:458
 msgid " Empty output from child filter "
 msgstr " Tukðs izvads no bçrna filtra "
 
 # src/view.c:462
-#: src/view.c:454
+#: src/view.c:463
 msgid " Could not open file "
 msgstr " Nevarçja atvçrt failu "
 
-# src/view.c:477
-#: src/view.c:469
-msgid " Cannot open file \""
-msgstr " Nevarçja atvçrt failu \""
-
-# src/view.c:484
-#: src/view.c:476
-msgid ""
-" Cannot stat file \n"
-" "
-msgstr ""
-" Nevar sâknçt failu \n"
-" "
-
-# src/view.c:490
-#: src/view.c:482
-msgid " Cannot view: not a regular file "
-msgstr " Nevar skatît: nav regulârs fails "
-
-# src/view.c:571
-#: src/view.c:562
-#, c-format
-msgid ""
-" Cannot open \"%s\"\n"
-" %s "
-msgstr ""
-" Nevar atvçrt \"%s\"\n"
-" %s "
-
 # src/view.c:580
-#: src/view.c:571
+#: src/view.c:555
 #, c-format
 msgid ""
 " Cannot stat \"%s\"\n"
@@ -5345,53 +4936,67 @@ msgstr ""
 " Nevar palaist \"%s\"\n"
 " %s "
 
+# src/view.c:490
+#: src/view.c:563
+msgid " Cannot view: not a regular file "
+msgstr " Nevar skatît: nav regulârs fails "
+
+# src/view.c:571
+#: src/view.c:570
+#, c-format
+msgid ""
+" Cannot open \"%s\"\n"
+" %s "
+msgstr ""
+" Nevar atvçrt \"%s\"\n"
+" %s "
+
 # src/view.c:716
-#: src/view.c:705
+#: src/view.c:700
 #, c-format
 msgid "File: %s"
 msgstr "Fails: %s"
 
 # src/view.c:730
-#: src/view.c:719
+#: src/view.c:714
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Nobîde 0x%08x"
 
 # gnome/gview.c:138 src/view.c:732
-#: src/view.c:721
+#: src/view.c:716
 #, c-format
 msgid "Col %d"
 msgstr "Kol %d"
 
 # gnome/gview.c:142 src/view.c:736
-#: src/view.c:725
+#: src/view.c:720
 #, c-format
 msgid "%s bytes"
 msgstr "%s baiti"
 
 # src/view.c:741
-#: src/view.c:730
+#: src/view.c:725
 msgid "  [grow]"
 msgstr "  [augt]"
 
 # src/view.c:1627 src/view.c:1750
-#: src/view.c:1557
-#: src/view.c:1689
+#: src/view.c:1561 src/view.c:1693
 msgid " Search string not found "
 msgstr " Meklçjamâ rinda nav atrasta "
 
 # src/view.c:1789
-#: src/view.c:1677
+#: src/view.c:1681
 msgid "Invalid hex search expression"
 msgstr " Nepareiza meklçjamâ hex izteiksme "
 
 # src/view.c:1789
-#: src/view.c:1728
+#: src/view.c:1732
 msgid " Invalid regular expression "
 msgstr " Nepareiza regulârâ izteiksme "
 
 # src/view.c:1913
-#: src/view.c:1850
+#: src/view.c:1854
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -5401,7 +5006,7 @@ msgstr ""
 " Ievadi jaunu lînijas numuru:"
 
 # src/view.c:1935
-#: src/view.c:1872
+#: src/view.c:1876
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -5411,344 +5016,342 @@ msgstr ""
 " Ievadi jaunu adresi:"
 
 # src/view.c:1937
-#: src/view.c:1874
+#: src/view.c:1878
 msgid " Goto Address "
 msgstr " Iet uz adresi "
 
 # src/view.c:1968
-#: src/view.c:1905
+#: src/view.c:1910
 msgid " Enter regexp:"
 msgstr " Ievadi regexp:"
 
 # src/view.c:2073
-#: src/view.c:2028
+#: src/view.c:2033
 msgid "Ascii"
 msgstr "Ascii"
 
 # src/view.c:2073
-#: src/view.c:2028
+#: src/view.c:2033
 msgid "Hex"
 msgstr "Hex"
 
 # src/view.c:2074
-#: src/view.c:2029
+#: src/view.c:2034
 msgid "Goto"
 msgstr "Ietuz"
 
 # src/view.c:2074
-#: src/view.c:2029
+#: src/view.c:2034
 msgid "Line"
 msgstr "Lînija"
 
 # src/view.c:2077
-#: src/view.c:2032
+#: src/view.c:2037
 msgid "RxSrch"
 msgstr "RxMekl"
 
 # src/view.c:2080
-#: src/view.c:2035
+#: src/view.c:2040
 msgid "EdText"
 msgstr "ReTektu"
 
 # src/view.c:2080
-#: src/view.c:2035
+#: src/view.c:2040
 msgid "EdHex"
 msgstr "ReHex"
 
 # src/view.c:2082
-#: src/view.c:2037
+#: src/view.c:2042
 msgid "UnWrap"
 msgstr "NeIekïaut"
 
 # src/view.c:2082
-#: src/view.c:2037
+#: src/view.c:2042
 msgid "Wrap"
 msgstr "Iekïaut"
 
 # src/view.c:2085
-#: src/view.c:2040
+#: src/view.c:2045
 msgid "HxSrch"
 msgstr "HxMekl"
 
 # src/view.c:2088
-#: src/view.c:2043
+#: src/view.c:2048
 msgid "Raw"
 msgstr "Jçls"
 
 # src/view.c:2088
-#: src/view.c:2043
+#: src/view.c:2048
 msgid "Parse"
 msgstr "Analizçt"
 
 # src/view.c:2092
-#: src/view.c:2047
+#: src/view.c:2052
 msgid "Unform"
 msgstr "Atform"
 
 # src/view.c:2092
-#: src/view.c:2047
+#: src/view.c:2052
 msgid "Format"
 msgstr "Formatçt"
 
 # src/widget.c:994
-#: src/widget.c:917
+#: src/widget.c:895
 msgid " History "
 msgstr " Vçsture "
 
 # src/win.c:224
 #. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
 #. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
-#: src/win.c:191
+#: src/win.c:188
 msgid "Function key 1"
 msgstr "Funkc. taustiòð 1"
 
 # src/win.c:225
-#: src/win.c:192
+#: src/win.c:189
 msgid "Function key 2"
 msgstr "Funkc. taustiòð 2"
 
 # src/win.c:226
-#: src/win.c:193
+#: src/win.c:190
 msgid "Function key 3"
 msgstr "Funkc. taustiòð 3"
 
 # src/win.c:227
-#: src/win.c:194
+#: src/win.c:191
 msgid "Function key 4"
 msgstr "Funkc. taustiòð 4"
 
 # src/win.c:228
-#: src/win.c:195
+#: src/win.c:192
 msgid "Function key 5"
 msgstr "Funkc. taustiòð 5"
 
 # src/win.c:229
-#: src/win.c:196
+#: src/win.c:193
 msgid "Function key 6"
 msgstr "Funkc. taustiòð 6"
 
 # src/win.c:230
-#: src/win.c:197
+#: src/win.c:194
 msgid "Function key 7"
 msgstr "Funkc. taustiòð 7"
 
 # src/win.c:231
-#: src/win.c:198
+#: src/win.c:195
 msgid "Function key 8"
 msgstr "Funkc. taustiòð 8"
 
 # src/win.c:232
-#: src/win.c:199
+#: src/win.c:196
 msgid "Function key 9"
 msgstr "Funkc. taustiòð 9"
 
 # src/win.c:233
-#: src/win.c:200
+#: src/win.c:197
 msgid "Function key 10"
 msgstr "Funkc. taustiòð 10"
 
 # src/win.c:234
-#: src/win.c:201
+#: src/win.c:198
 msgid "Function key 11"
 msgstr "Funkc. taustiòð 11"
 
 # src/win.c:235
-#: src/win.c:202
+#: src/win.c:199
 msgid "Function key 12"
 msgstr "Funkc. taustiòð 12"
 
 # src/win.c:236
-#: src/win.c:203
+#: src/win.c:200
 msgid "Function key 13"
 msgstr "Funkc. taustiòð 13"
 
 # src/win.c:237
-#: src/win.c:204
+#: src/win.c:201
 msgid "Function key 14"
 msgstr "Funkc. taustiòð 14"
 
 # src/win.c:238
-#: src/win.c:205
+#: src/win.c:202
 msgid "Function key 15"
 msgstr "Funkc. taustiòð 15"
 
 # src/win.c:239
-#: src/win.c:206
+#: src/win.c:203
 msgid "Function key 16"
 msgstr "Funkc. taustiòð 16"
 
 # src/win.c:240
-#: src/win.c:207
+#: src/win.c:204
 msgid "Function key 17"
 msgstr "Funkc. taustiòð 17"
 
 # src/win.c:241
-#: src/win.c:208
+#: src/win.c:205
 msgid "Function key 18"
 msgstr "Funkc. taustiòð 18"
 
 # src/win.c:242
-#: src/win.c:209
+#: src/win.c:206
 msgid "Function key 19"
 msgstr "Funkc. taustiòð 19"
 
 # src/win.c:243
-#: src/win.c:210
+#: src/win.c:207
 msgid "Function key 20"
 msgstr "Funkc. taustiòð 20"
 
 # src/win.c:244
-#: src/win.c:211
+#: src/win.c:208
 msgid "Backspace key"
 msgstr "Backspace taustiòð"
 
 # src/win.c:245
-#: src/win.c:212
+#: src/win.c:209
 msgid "End key"
 msgstr "End taustiòð"
 
 # src/win.c:246
-#: src/win.c:213
+#: src/win.c:210
 msgid "Up arrow key"
 msgstr "Taustiòð ar bûltiòu uz augðu"
 
 # src/win.c:247
-#: src/win.c:214
+#: src/win.c:211
 msgid "Down arrow key"
 msgstr "Taustiòð ar bûltiòu uz leju"
 
 # src/win.c:248
-#: src/win.c:215
+#: src/win.c:212
 msgid "Left arrow key"
 msgstr "Taustiòð ar bûltiòu pa kreisi"
 
 # src/win.c:249
-#: src/win.c:216
+#: src/win.c:213
 msgid "Right arrow key"
 msgstr "Taustiòð ar bûltiòu pa labi"
 
 # src/win.c:250
-#: src/win.c:217
+#: src/win.c:214
 msgid "Home key"
 msgstr "Home taustiòð"
 
 # src/win.c:251
-#: src/win.c:218
+#: src/win.c:215
 msgid "Page Down key"
 msgstr "Page Down taustiòð"
 
 # src/win.c:252
-#: src/win.c:219
+#: src/win.c:216
 msgid "Page Up key"
 msgstr "Page Up taustiòð"
 
 # src/win.c:253
-#: src/win.c:220
+#: src/win.c:217
 msgid "Insert key"
 msgstr "Insert taustiòð"
 
 # src/win.c:254
-#: src/win.c:221
+#: src/win.c:218
 msgid "Delete key"
 msgstr "Delete taustiòð"
 
 # src/win.c:255
-#: src/win.c:222
+#: src/win.c:219
 msgid "Completion/M-tab"
 msgstr "Pabeigðana/M-tab"
 
 # src/win.c:256
-#: src/win.c:223
+#: src/win.c:220
 msgid "+ on keypad"
 msgstr "+ uz klaviatûras"
 
 # src/win.c:257
-#: src/win.c:224
+#: src/win.c:221
 msgid "- on keypad"
 msgstr "- uz klaviatûras"
 
 # src/win.c:258
-#: src/win.c:225
+#: src/win.c:222
 msgid "* on keypad"
 msgstr "* uz klaviatûras"
 
 # src/win.c:260
 #. From here on, these won't be shown in Learn keys (no space)
-#: src/win.c:227
+#: src/win.c:224
 msgid "Left arrow keypad"
 msgstr "Bûltiòa pa kreisi uz klaviatûras"
 
 # src/win.c:261
-#: src/win.c:228
+#: src/win.c:225
 msgid "Right arrow keypad"
 msgstr "Bûltiòa pa labi uz klaviatûras"
 
 # src/win.c:262
-#: src/win.c:229
+#: src/win.c:226
 msgid "Up arrow keypad"
 msgstr "Bûltiòa uz augðu uz klaviatûras"
 
 # src/win.c:263
-#: src/win.c:230
+#: src/win.c:227
 msgid "Down arrow keypad"
 msgstr "Bûltiòa uz leju uz klaviatûras"
 
 # src/win.c:264
-#: src/win.c:231
+#: src/win.c:228
 msgid "Home on keypad"
 msgstr "Home uz klaviatûras"
 
 # src/win.c:265
-#: src/win.c:232
+#: src/win.c:229
 msgid "End on keypad"
 msgstr "End uz klaviatûras"
 
 # src/win.c:266
-#: src/win.c:233
+#: src/win.c:230
 msgid "Page Down keypad"
 msgstr "Page Down uz klaviatûras"
 
 # src/win.c:267
-#: src/win.c:234
+#: src/win.c:231
 msgid "Page Up keypad"
 msgstr "Page Up uz klaviatûras"
 
 # src/win.c:268
-#: src/win.c:235
+#: src/win.c:232
 msgid "Insert on keypad"
 msgstr "Insert uz klaviatûras"
 
 # src/win.c:269
-#: src/win.c:236
+#: src/win.c:233
 msgid "Delete on keypad"
 msgstr "Delete uz klaviatûras"
 
 # src/win.c:270
-#: src/win.c:237
+#: src/win.c:234
 msgid "Enter on keypad"
 msgstr "Enter uz klaviatûras"
 
 # src/win.c:271
-#: src/win.c:238
+#: src/win.c:235
 msgid "Slash on keypad"
 msgstr "/ (Slash) uz klaviatûras"
 
 # src/win.c:272
-#: src/win.c:239
+#: src/win.c:236
 msgid "NumLock on keypad"
 msgstr "NumLock uz klaviatûras"
 
 # gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 #. Translators should take care as "Password" or its translations
 #. are used to identify password boxes and hide characters with "*"
-#: src/wtools.c:570
-#: vfs/vfs.c:1863
+#: src/wtools.c:546 vfs/vfs.c:1894
 msgid "Password:"
 msgstr "Parole:"
 
 # vfs/cpio.c:141 vfs/cpio.c:157
-#: vfs/cpio.c:142
-#: vfs/cpio.c:158
+#: vfs/cpio.c:143 vfs/cpio.c:159
 #, c-format
 msgid ""
 "Couldn't open cpio archive\n"
@@ -5758,7 +5361,7 @@ msgstr ""
 "%s"
 
 # vfs/cpio.c:224
-#: vfs/cpio.c:224
+#: vfs/cpio.c:225
 #, c-format
 msgid ""
 "Premature end of cpio archive\n"
@@ -5768,8 +5371,7 @@ msgstr ""
 "%s"
 
 # vfs/cpio.c:309 vfs/cpio.c:358
-#: vfs/cpio.c:309
-#: vfs/cpio.c:358
+#: vfs/cpio.c:311 vfs/cpio.c:361
 #, c-format
 msgid ""
 "Corrupted cpio header encountered in\n"
@@ -5779,7 +5381,7 @@ msgstr ""
 "%s"
 
 # vfs/cpio.c:427
-#: vfs/cpio.c:427
+#: vfs/cpio.c:432
 #, c-format
 msgid ""
 "Inconsistent hardlinks of\n"
@@ -5798,13 +5400,13 @@ msgstr ""
 #. file and than a record for a directory it is in; cpio would die with
 #. 'No such file or directory' is such case)
 #. This can be considered archive inconsistency
-#: vfs/cpio.c:450
+#: vfs/cpio.c:455
 #, c-format
 msgid "%s contains duplicit entries! Skipping!"
 msgstr "%s satur dubultus ierakstus! Izlaiþu!"
 
 # vfs/cpio.c:517
-#: vfs/cpio.c:517
+#: vfs/cpio.c:524
 #, c-format
 msgid ""
 "Unexpected end of file\n"
@@ -5820,12 +5422,12 @@ msgid "Dir cache expired for %s"
 msgstr "Direktorija keðs priekð %s izbeidzâs"
 
 # vfs/direntry.c:812
-#: vfs/direntry.c:820
+#: vfs/direntry.c:787
 msgid "Starting linear transfer..."
 msgstr "Sâkam lineâro pârraidi..."
 
 # vfs/direntry.c:957
-#: vfs/direntry.c:964
+#: vfs/direntry.c:959
 msgid "Getting file"
 msgstr "Dabûjam failu"
 
@@ -5840,276 +5442,276 @@ msgstr ""
 "%s"
 
 # vfs/extfs.c:302 vfs/extfs.c:322
-#: vfs/extfs.c:330
-#: vfs/extfs.c:349
+#: vfs/extfs.c:330 vfs/extfs.c:349
 msgid "Inconsistent extfs archive"
 msgstr "Nepatstâvîgs extfs arhîvs"
 
 # vfs/fish.c:140
-#: vfs/fish.c:142
+#: vfs/fish.c:147
 #, c-format
 msgid "fish: Disconnecting from %s"
 msgstr "fish: Atvienojamies no %s"
 
 # vfs/fish.c:218
-#: vfs/fish.c:221
+#: vfs/fish.c:225
 msgid "fish: Waiting for initial line..."
 msgstr "fish: Gaidâm sâkotnçjo lîniju..."
 
 # vfs/fish.c:228
-#: vfs/fish.c:231
+#: vfs/fish.c:235
 msgid "Sorry, we can not do password authenticated connections for now."
-msgstr "Piedodiet, mçs patreiz nevaram veikt ar paroli autorizçtus savienojumus."
+msgstr ""
+"Piedodiet, mçs patreiz nevaram veikt ar paroli autorizçtus savienojumus."
 
 # vfs/fish.c:233
-#: vfs/fish.c:236
+#: vfs/fish.c:240
 msgid " fish: Password required for "
 msgstr " fish: Parole pieprasîta "
 
 # vfs/fish.c:242
-#: vfs/fish.c:245
+#: vfs/fish.c:249
 msgid "fish: Sending password..."
 msgstr "fish: Sûtam paroli..."
 
 # vfs/fish.c:248
-#: vfs/fish.c:251
+#: vfs/fish.c:255
 msgid "fish: Sending initial line..."
 msgstr "fish: Sûtam sâkotnçjo lîniju..."
 
 # vfs/fish.c:252
-#: vfs/fish.c:261
+#: vfs/fish.c:265
 msgid "fish: Handshaking version..."
 msgstr "fish: Rokspieðanas versija..."
 
 # vfs/fish.c:256
-#: vfs/fish.c:265
+#: vfs/fish.c:275
 msgid "fish: Setting up current directory..."
 msgstr "fish: Uzstâdam paðreizçjo direktoriju..."
 
 # vfs/fish.c:258
-#: vfs/fish.c:267
+#: vfs/fish.c:277
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Savienojies, mâjas %s."
 
 # vfs/fish.c:347
-#: vfs/fish.c:356
+#: vfs/fish.c:366
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Lasâm direktoriju %s..."
 
-# vfs/fish.c:451
-#: vfs/fish.c:460
-msgid "fish: failed"
-msgstr "fish: neizdevâs"
+# vfs/undelfs.c:315
+#: vfs/fish.c:469 vfs/ftpfs.c:1373 vfs/undelfs.c:313
+#, c-format
+msgid "%s: done."
+msgstr "%s: izdarîts."
+
+# vfs/undelfs.c:318
+#: vfs/fish.c:474 vfs/ftpfs.c:1325 vfs/undelfs.c:316
+#, c-format
+msgid "%s: failure"
+msgstr "%s: neveiksme"
 
 # vfs/fish.c:471
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:480
+#: vfs/fish.c:495
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: glabâjam %s: sutâm komandu..."
 
 # vfs/fish.c:496
-#: vfs/fish.c:505
+#: vfs/fish.c:539
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lokâlâ lasîðana kïûdaina, sûtam nulles"
 
 # vfs/fish.c:508
-#: vfs/fish.c:517
-#, c-format
-msgid "fish: storing %s %d (%d)"
+#: vfs/fish.c:551
+#, fuzzy, c-format
+msgid "fish: storing %s %d (%lu)"
 msgstr "fish: glabâjam %s %d (%d)"
 
 # vfs/fish.c:509
-#: vfs/fish.c:518
+#: vfs/fish.c:552
 msgid "zeros"
 msgstr "nulles"
 
 # vfs/fish.c:556
-#: vfs/fish.c:565
+#: vfs/fish.c:601
 msgid "Aborting transfer..."
 msgstr "Pâtraucam pârraidîðanu..."
 
 # vfs/fish.c:565
-#: vfs/fish.c:574
+#: vfs/fish.c:610
 msgid "Error reported after abort."
 msgstr "Kïûda paziòota pçc pâtraukðanas."
 
 # vfs/fish.c:567
-#: vfs/fish.c:576
+#: vfs/fish.c:612
 msgid "Aborted transfer would be successful."
 msgstr "Pâtraukâ pârraidîðana varçtu bût veiksmîga"
 
 # vfs/ftpfs.c:315
-#: vfs/ftpfs.c:313
+#: vfs/ftpfs.c:381
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: Atvienoðanâs no %s"
 
 # vfs/ftpfs.c:373
-#: vfs/ftpfs.c:371
+#: vfs/ftpfs.c:438
 msgid " FTP: Password required for "
 msgstr " FTP: Parole tiek pieprasîta "
 
 # vfs/ftpfs.c:402
-#: vfs/ftpfs.c:400
+#: vfs/ftpfs.c:466
 msgid " Proxy: Password required for "
 msgstr " Starpniekserveris: Parole tiek pieprasîta "
 
 # vfs/ftpfs.c:428
-#: vfs/ftpfs.c:426
+#: vfs/ftpfs.c:492
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: sûtam starpniekservera pieteikumvârdu"
 
 # vfs/ftpfs.c:432
-#: vfs/ftpfs.c:430
+#: vfs/ftpfs.c:496
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: sûtam starpniekservera lietotâja paroli"
 
 # vfs/ftpfs.c:436
-#: vfs/ftpfs.c:434
+#: vfs/ftpfs.c:500
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: starpniekservera autentificçðana veiksmîga"
 
 # vfs/ftpfs.c:440
-#: vfs/ftpfs.c:438
+#: vfs/ftpfs.c:504
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: savienojies ar %s"
 
 # vfs/ftpfs.c:457
-#: vfs/ftpfs.c:455
+#: vfs/ftpfs.c:521
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: sûtam pieteikumvârdu"
 
 # vfs/ftpfs.c:462
-#: vfs/ftpfs.c:460
+#: vfs/ftpfs.c:526
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: sûtam lietotâja paroli"
 
 # vfs/ftpfs.c:467
-#: vfs/ftpfs.c:465
+#: vfs/ftpfs.c:531
 msgid "ftpfs: logged in"
 msgstr "ftpfs: pieteikðanâs veiksmîga"
 
 # vfs/ftpfs.c:482
-#: vfs/ftpfs.c:480
+#: vfs/ftpfs.c:546
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: lietotâja nepareiza %s pieteikðanâs "
 
 # vfs/ftpfs.c:514
-#: vfs/ftpfs.c:512
+#: vfs/ftpfs.c:578
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Nevarçja uzstâdît kodola marðrutizâciju (%s)"
 
 # vfs/ftpfs.c:640
-#: vfs/ftpfs.c:637
+#: vfs/ftpfs.c:705
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: Nepareizs resursdatora nosaukums."
 
 # vfs/ftpfs.c:660
-#: vfs/ftpfs.c:657
+#: vfs/ftpfs.c:725
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: Nepareiza resursdatora adrese."
 
 # vfs/ftpfs.c:683
-#: vfs/ftpfs.c:680
+#: vfs/ftpfs.c:748
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: veidojam savienojumu ar %s"
 
 # vfs/ftpfs.c:693
-#: vfs/ftpfs.c:690
+#: vfs/ftpfs.c:758
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: savienojumu pâtrauca lietotâjs"
 
 # vfs/ftpfs.c:695
-#: vfs/ftpfs.c:692
+#: vfs/ftpfs.c:760
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: savienojums ar serveri neizdevâs: %s"
 
 # vfs/ftpfs.c:736
-#: vfs/ftpfs.c:733
+#: vfs/ftpfs.c:801
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Gaidam atbildi... %d (Control-C lai atsauktu)"
 
 # vfs/ftpfs.c:922
-#: vfs/ftpfs.c:919
+#: vfs/ftpfs.c:984
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: nevar uzstâdît pasîvo reþîmu"
 
 # vfs/ftpfs.c:997
-#: vfs/ftpfs.c:995
+#: vfs/ftpfs.c:1057
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: patraucu pârraidi."
 
 # vfs/ftpfs.c:999
-#: vfs/ftpfs.c:997
+#: vfs/ftpfs.c:1059
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: pâtraukðanas kïûda: %s"
 
 # vfs/ftpfs.c:1004
-#: vfs/ftpfs.c:1002
+#: vfs/ftpfs.c:1064
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: pâtraukðana neizdevâs"
 
 # vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
-#: vfs/ftpfs.c:1091
-#: vfs/ftpfs.c:1193
+#: vfs/ftpfs.c:1153 vfs/ftpfs.c:1258
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD neizdevâs."
 
 # vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
-#: vfs/ftpfs.c:1101
-#: vfs/ftpfs.c:1108
+#: vfs/ftpfs.c:1163 vfs/ftpfs.c:1170
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nevar iet par simbolsaiti"
 
 # vfs/ftpfs.c:1161
-#: vfs/ftpfs.c:1159
+#: vfs/ftpfs.c:1221
 msgid "Resolving symlink..."
 msgstr "eju pa simbolsaiti"
 
 # vfs/ftpfs.c:1180
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1246
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs: Lasu FTP direktoriju %s... %s%s"
 
 # vfs/ftpfs.c:1181
-#: vfs/ftpfs.c:1182
+#: vfs/ftpfs.c:1247
 msgid "(strict rfc959)"
 msgstr "(strict rfc959)"
 
 # vfs/ftpfs.c:1182
-#: vfs/ftpfs.c:1183
+#: vfs/ftpfs.c:1248
 msgid "(chdir first)"
 msgstr "(chdir vispirms)"
 
-# vfs/ftpfs.c:1283
-#: vfs/ftpfs.c:1307
-msgid "ftpfs: failed"
-msgstr "ftpfs: neizdevâs"
-
 # vfs/ftpfs.c:1293
-#: vfs/ftpfs.c:1317
+#: vfs/ftpfs.c:1386
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: neizdevâs; nav kur atkrist"
 
 # vfs/ftpfs.c:1356
-#: vfs/ftpfs.c:1380
-#, c-format
-msgid "ftpfs: storing file %d (%d)"
+#: vfs/ftpfs.c:1451
+#, fuzzy, c-format
+msgid "ftpfs: storing file %lu (%lu)"
 msgstr "ftpfs: glabâjam failu %d (%d)"
 
 # vfs/ftpfs.c:1771
-#: vfs/ftpfs.c:1812
+#: vfs/ftpfs.c:1910
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6118,106 +5720,94 @@ msgstr ""
 "Noòem paroli vai izlabo reþîmu."
 
 # vfs/mcfs.c:156 vfs/mcfs.c:178 vfs/mcfs.c:204
-#: vfs/mcfs.c:151
-#: vfs/mcfs.c:173
-#: vfs/mcfs.c:199
+#: vfs/mcfs.c:113 vfs/mcfs.c:135 vfs/mcfs.c:161
 msgid " MCFS "
 msgstr " MCFS "
 
 # vfs/mcfs.c:156
-#: vfs/mcfs.c:151
+#: vfs/mcfs.c:113
 msgid " The server does not support this version "
 msgstr " Serveris neatbalsta ðo versiju "
 
 # vfs/mcfs.c:173
-#: vfs/mcfs.c:168
+#: vfs/mcfs.c:130
 msgid ""
 " The remote server is not running on a system port \n"
 " you need a password to log in, but the information may \n"
 " not be safe on the remote side.  Continue? \n"
-""
 msgstr ""
 " Attâlinâtais serveris nestrâdâ ar sistçmas portu, \n"
 " uz kuru jûms bûtu jâpiesakâs, taèu informâcija \n"
 " var nebût droða attâlinâtajâ galâ.  Turpinât? \n"
-""
 
 # vfs/mcfs.c:176
-#: vfs/mcfs.c:171
+#: vfs/mcfs.c:133
 msgid " Yes "
 msgstr " Jâ "
 
 # vfs/mcfs.c:176
-#: vfs/mcfs.c:171
+#: vfs/mcfs.c:133
 msgid " No "
 msgstr " Nç "
 
 # vfs/mcfs.c:178
-#: vfs/mcfs.c:173
-msgid ""
-" The remote server is running on strange port. Giving up.\n"
-""
-msgstr ""
-" Attâlinâtais serveris strâdâ ar dîvainu portu. Padodos.\n"
-""
+#: vfs/mcfs.c:135
+msgid " The remote server is running on strange port. Giving up.\n"
+msgstr " Attâlinâtais serveris strâdâ ar dîvainu portu. Padodos.\n"
 
 # vfs/mcfs.c:190
-#: vfs/mcfs.c:185
+#: vfs/mcfs.c:147
 msgid " MCFS Password required "
 msgstr " pieprasîta MCFS Parole "
 
 # vfs/mcfs.c:204
-#: vfs/mcfs.c:199
+#: vfs/mcfs.c:161
 msgid " Invalid password "
 msgstr " Nepareiza parole "
 
 # vfs/mcfs.c:235
-#: vfs/mcfs.c:230
+#: vfs/mcfs.c:192
 #, c-format
 msgid " Cannot locate hostname: %s "
 msgstr " Nevar atrast resursdatoru: %s "
 
 # vfs/mcfs.c:253
-#: vfs/mcfs.c:248
+#: vfs/mcfs.c:210
 #, c-format
 msgid " Cannot create socket: %s "
 msgstr " Nevar izveidot kontaktu: %s "
 
 # vfs/mcfs.c:259
-#: vfs/mcfs.c:254
+#: vfs/mcfs.c:216
 #, c-format
 msgid " Cannot connect to server: %s "
 msgstr " Nevar savienoties ar serveri: %s "
 
 # vfs/mcfs.c:324
-#: vfs/mcfs.c:320
+#: vfs/mcfs.c:282
 msgid " Too many open connections "
 msgstr " Par daudz atvçrtu konekciju "
 
-#: vfs/sfs.c:330
+#: vfs/sfs.c:334
 #, c-format
 msgid ""
 "Warning: Invalid line in sfs.ini:\n"
 "%s\n"
-""
 msgstr ""
 "Brîdinâjums: Nepareiza rindiòa iekð sfs.ini:\n"
 "%s\n"
-""
 
-#: vfs/sfs.c:341
+#: vfs/sfs.c:345
 #, c-format
 msgid ""
 "Warning: Invalid flag %c in sfs.ini:\n"
 "%s\n"
-""
 msgstr ""
 "Brîdinâjums: Nepareizs karodziòð %c iekð sfs.ini:\n"
 "%s\n"
-""
 
 # vfs/smbfs.c:667
-#: vfs/smbfs.c:527
+#: vfs/smbfs.c:534
 #, c-format
 msgid ""
 " reconnect to %s failed\n"
@@ -6227,48 +5817,42 @@ msgstr ""
 " "
 
 # vfs/smbfs.c:1243
-#: vfs/smbfs.c:1098
+#: vfs/smbfs.c:1092
 msgid " Authentication failed "
 msgstr " Autentificçðana neizdevâs"
 
 # vfs/smbfs.c:1738
-#: vfs/smbfs.c:1590
+#: vfs/smbfs.c:1575
 #, c-format
 msgid " %s mkdir'ing %s "
 msgstr " %s izvdir'oju %s "
 
 # vfs/smbfs.c:1759
-#: vfs/smbfs.c:1613
+#: vfs/smbfs.c:1598
 #, c-format
 msgid " %s rmdir'ing %s "
 msgstr " %s izdzdir'oju %s "
 
 # vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
-#: vfs/smbfs.c:1717
-#: vfs/smbfs.c:1737
+#: vfs/smbfs.c:1702 vfs/smbfs.c:1722
 #, c-format
 msgid " %s opening remote file %s "
 msgstr " %s attâlinâtâs faila atvçrðana %s "
 
 # vfs/smbfs.c:1868 vfs/smbfs.c:1888 vfs/smbfs.c:1949
-#: vfs/smbfs.c:1805
+#: vfs/smbfs.c:1790
 #, c-format
 msgid " %s removing remote file %s "
 msgstr " %s dzçðu attâlinâto failu %s "
 
 # vfs/smbfs.c:1972
-#: vfs/smbfs.c:1843
+#: vfs/smbfs.c:1828
 #, c-format
-msgid ""
-" %s renaming files\n"
-""
-msgstr ""
-" %s failu pârsaukðana\n"
-""
+msgid " %s renaming files\n"
+msgstr " %s failu pârsaukðana\n"
 
 # vfs/tar.c:84 vfs/tar.c:101
-#: vfs/tar.c:81
-#: vfs/tar.c:98
+#: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
 "Couldn't open tar archive\n"
@@ -6278,18 +5862,17 @@ msgstr ""
 "%s"
 
 # vfs/tar.c:284
-#: vfs/tar.c:281
+#: vfs/tar.c:280
 msgid "Unexpected EOF on archive file"
 msgstr "Negaidîtas arhîva faila beigas (EOF)"
 
 # vfs/tar.c:336 vfs/tar.c:343
-#: vfs/tar.c:333
-#: vfs/tar.c:340
+#: vfs/tar.c:332 vfs/tar.c:339
 msgid "Inconsistent tar archive"
 msgstr "Neatbilstîgs tar arhîvs"
 
 # vfs/tar.c:413
-#: vfs/tar.c:410
+#: vfs/tar.c:409
 #, c-format
 msgid ""
 "Hmm,...\n"
@@ -6301,166 +5884,207 @@ msgstr ""
 "neizskatâs pçc tar arhîva."
 
 # vfs/undelfs.c:81
-#: vfs/undelfs.c:81
+#: vfs/undelfs.c:79
 msgid " undelfs: error "
 msgstr " undelfs: kïûda "
 
 # vfs/undelfs.c:184
-#: vfs/undelfs.c:184
+#: vfs/undelfs.c:182
 msgid " not enough memory "
 msgstr " par maz atmiòas "
 
 # vfs/undelfs.c:189
-#: vfs/undelfs.c:189
+#: vfs/undelfs.c:187
 msgid " while allocating block buffer "
 msgstr " pieðíirot bloka buferi "
 
 # vfs/undelfs.c:193
-#: vfs/undelfs.c:193
+#: vfs/undelfs.c:191
 #, c-format
 msgid " open_inode_scan: %d "
 msgstr " open_inode_scan: %d "
 
 # vfs/undelfs.c:197
-#: vfs/undelfs.c:197
+#: vfs/undelfs.c:195
 #, c-format
 msgid " while starting inode scan %d "
 msgstr " sâknçjot inode skenâðanu %d "
 
 # vfs/undelfs.c:204
-#: vfs/undelfs.c:204
+#: vfs/undelfs.c:202
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
 msgstr "undelfs: lâdçju izdzçsto failu informâciju %d inodes"
 
 # vfs/undelfs.c:219
-#: vfs/undelfs.c:219
+#: vfs/undelfs.c:217
 #, c-format
 msgid " while calling ext2_block_iterate %d "
 msgstr " kamçr sauca ext2_block_iterate %d "
 
 # vfs/undelfs.c:227
-#: vfs/undelfs.c:227
+#: vfs/undelfs.c:225
 msgid " no more memory while reallocating array "
 msgstr " nav vairâk atmiòas kamçr pieðíir ietçrpus "
 
 # vfs/undelfs.c:246
-#: vfs/undelfs.c:246
+#: vfs/undelfs.c:244
 #, c-format
 msgid " while doing inode scan %d "
 msgstr " veicot inode skençðanu %d "
 
 # vfs/undelfs.c:270
-#: vfs/undelfs.c:270
+#: vfs/undelfs.c:268
 msgid " Ext2lib error "
 msgstr " Ext2lib kïûda "
 
 # vfs/undelfs.c:297
-#: vfs/undelfs.c:297
+#: vfs/undelfs.c:295
 #, c-format
 msgid " Could not open file %s "
 msgstr " Nevar atvçrt failu %s "
 
 # vfs/undelfs.c:300
-#: vfs/undelfs.c:300
+#: vfs/undelfs.c:298
 msgid "undelfs: reading inode bitmap..."
 msgstr "undelfs: lasu inode bitkarti..."
 
 # vfs/undelfs.c:303
-#: vfs/undelfs.c:303
+#: vfs/undelfs.c:301
 #, c-format
 msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
-""
 msgstr ""
 " Nevarçju ielâdçt inode bitkarti no: \n"
 " %s \n"
-""
 
 # vfs/undelfs.c:306
-#: vfs/undelfs.c:306
+#: vfs/undelfs.c:304
 msgid "undelfs: reading block bitmap..."
 msgstr "undelfs: lasu bloka bitkarti..."
 
 # vfs/undelfs.c:309
-#: vfs/undelfs.c:309
+#: vfs/undelfs.c:307
 #, c-format
 msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
-""
 msgstr ""
 " Nevarçja ielâdçt bloka bitkarti no: \n"
 " %s \n"
-""
-
-# vfs/undelfs.c:315
-#: vfs/undelfs.c:315
-msgid "%s: done."
-msgstr "%s: izdarîts."
-
-# vfs/undelfs.c:318
-#: vfs/undelfs.c:318
-msgid "%s: failure"
-msgstr "%s: neveiksme"
 
 # vfs/undelfs.c:342
-#: vfs/undelfs.c:342
+#: vfs/undelfs.c:330
 msgid " vfs_info is not fs! "
 msgstr " vfs_info nav fs! "
 
 # vfs/undelfs.c:398 vfs/undelfs.c:582
-#: vfs/undelfs.c:398
-#: vfs/undelfs.c:582
+#: vfs/undelfs.c:386 vfs/undelfs.c:570
 msgid " You have to chdir to extract files first "
 msgstr " Tev papriekðu vajag chdir, lai atkompresçtu failus "
 
 # vfs/undelfs.c:521
-#: vfs/undelfs.c:521
+#: vfs/undelfs.c:509
 msgid " while iterating over blocks "
 msgstr " kamçr atkârto blokus"
 
 # vfs/undelfs.c:626
-#: vfs/undelfs.c:626
+#: vfs/undelfs.c:614
 #, c-format
 msgid " Could not open file: %s "
 msgstr " Nevar atvçrt failu: %s "
 
 # vfs/vfs.c:1139
-#: vfs/vfs.c:1179
+#: vfs/vfs.c:1189
 msgid "Changes to file lost"
 msgstr "Izmaiòas failâ pazuduðas"
 
 # vfs/vfs.c:1781
-#: vfs/vfs.c:1824
+#: vfs/vfs.c:1855
 msgid "Could not parse:"
 msgstr "Nevar izanalizçt:"
 
 # vfs/vfs.c:1783
-#: vfs/vfs.c:1826
+#: vfs/vfs.c:1857
 msgid "More parsing errors will be ignored."
 msgstr "Turpmâkâs analîzes kïûdas tiks ignorçtas."
 
 # vfs/vfs.c:1783
-#: vfs/vfs.c:1826
+#: vfs/vfs.c:1857
 msgid "(sorry)"
 msgstr "(atvainojiet)"
 
 # vfs/vfs.c:1794
-#: vfs/vfs.c:1837
+#: vfs/vfs.c:1868
 msgid "Internal error:"
 msgstr "Iekðçjâ kïûda:"
 
 # vfs/vfs.c:1804
-#: vfs/vfs.c:1847
+#: vfs/vfs.c:1878
 #, c-format
 msgid "%s: %s: %s %3d%% (%lu bytes transferred)"
 msgstr "%s: %s: %s %3d%% (%lu baiti pârsûtîti)"
 
 # vfs/vfs.c:1805
-#: vfs/vfs.c:1848
+#: vfs/vfs.c:1879
 #, c-format
 msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu baiti pârsûtîti"
 
+# src/dir.c:657
+#~ msgid "Unknown"
+#~ msgstr "Nezinâms"
+
+# src/file.c:1698
+#~ msgid "%o %f \"%s\"%e"
+#~ msgstr "%o %f \"%s\"%e"
+
+# src/file.c:1699
+#~ msgid "%o %d %f%e"
+#~ msgstr "%o %d %f%e"
+
+# src/file.c:1875 src/screen.c:2115
+#~ msgid "Yes"
+#~ msgstr "Jâ"
+
+# src/file.c:1875 src/screen.c:2115
+#~ msgid "No"
+#~ msgstr "Nç"
+
+# src/main.c:2504
+#~ msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
+#~ msgstr ""
+#~ "-M, --memory fails  [TIKAI-IZSTRÂDEI: Iegrâmatot MAD ziòojumus failâ.]\n"
+
+# src/main.c:2524
+#~ msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
+#~ msgstr "-X, --dbgsubshell  [TIKAI-IZSTRÂDEI: Atkïûdot zemèaulu].\n"
+
+# src/subshell.c:731
+#~ msgid " There are stopped jobs."
+#~ msgstr " Ðeit ir apstâdinâti darbi."
+
+# src/subshell.c:732
+#~ msgid " Quit anyway? "
+#~ msgstr " Iziet tik un tâ? "
+
+# src/view.c:477
+#~ msgid " Cannot open file \""
+#~ msgstr " Nevarçja atvçrt failu \""
+
+# src/view.c:484
+#~ msgid ""
+#~ " Cannot stat file \n"
+#~ " "
+#~ msgstr ""
+#~ " Nevar sâknçt failu \n"
+#~ " "
+
+# vfs/fish.c:451
+#~ msgid "fish: failed"
+#~ msgstr "fish: neizdevâs"
+
+# vfs/ftpfs.c:1283
+#~ msgid "ftpfs: failed"
+#~ msgstr "ftpfs: neizdevâs"
