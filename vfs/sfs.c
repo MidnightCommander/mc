@@ -384,7 +384,7 @@ sfs_which (vfs *me, char *path)
 
 vfs vfs_sfs_ops = {
     NULL,	/* This is place of next pointer */
-    N_ ("Signle file filesystems"),
+    N_ ("Single file filesystems"),
     F_EXEC,	/* flags */
     NULL,	/* prefix */
     NULL,	/* data */
