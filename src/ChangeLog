@@ -1,3 +1,8 @@
+Tue Sep 15 22:41:24 1998  Paul Sheer <psheer@obsidian.co.za>
+
+	* edit.c, editwidget.c, gtkedit.c: fixed segfault when trying to
+	edit a non-file under gmc.
+
 Tue Sep 15 21:52:00 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* mc.hlp, doc/mc.1.in, doc/mc.sgml: updated my EMail address
