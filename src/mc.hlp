@@ -135,7 +135,7 @@ I know the bash function could be shorter for zsh and bash
 but the backquotes on bash won't accept your suspension
 the program with C-z. The temporary file is created in the
 private directory ~/.mc/tmp in order to avoid symlink
-attachs in a world writable /tmp.
+attacks in a world writable /tmp.
 
 "-s" Turns on the slow terminal mode, in this mode the
 program will not draw expensive line drawing characters
@@ -1313,7 +1313,7 @@ Options Menu
 
 The Midnight Commander has some options that may be
 toggled on and off in several dialogs which are accessible
-from this menue. Options are enabled if they have an
+from this menu. Options are enabled if they have an
 asterisk or "x" in front of them.
 
 The ConfigurationConfiguration command pops up a dialog from which you
@@ -1359,7 +1359,7 @@ show all files that start with a dot (like ls -a).
 either C-t or the Insert key) the selection bar will move
 down.
 
-Drop down menues. When this option is enabled, when you
+Drop down menus. When this option is enabled, when you
 press the F9 key, the pull down menus will be activated,
 else, you will only be presented with the menu title, and
 you will have to select the entry with the arrow keys or
@@ -1477,8 +1477,8 @@ present.
 unintentionally will get more difficult. The default
 selection in the confirmation dialog changes from the
 "Yes" to the "No" button and deletion of non empty
-direcories has to be confirmed by entering the word yes By
-default this option is disabled.
+directories has to be confirmed by entering the word yes
+By default this option is disabled.
 
 [Display bits]
 Display bits
@@ -1546,7 +1546,7 @@ the access to the files in the file system (for example,
 directory listings fetched from ftp servers).
 
 Moreover in order to access the contents of compressed
-files (for eaxample, compressed tar files) the Midnight
+files (for example, compressed tar files) the Midnight
 Commander has to create a temporary uncompressed file on
 your disk.
 
@@ -1756,7 +1756,7 @@ pass any arguments to this macro, they should be enclosed
 in brackets. The arguments are: ascii to force the viewer
 into ascii mode; hex to force the viewer into hex mode;
 nroff to tell the viewer that it should interpret the bold
-and underline sequences of nroff; unformated to tell the
+and underline sequences of nroff; unformatted to tell the
 viewer to not interpret nroff commands for making the text
 bold or underlined.
 
@@ -2189,8 +2189,8 @@ You can use scanf search and replace to search and replace
 a C format string. First take a look at the sscanf and
 sprintf man pages to see what a format string is and how
 it works. An example is as follows: Suppose you want to
-replace all occurences of say, an open bracket, three
-comma seperated numbers, and a close bracket, with the
+replace all occurrences of say, an open bracket, three
+comma separated numbers, and a close bracket, with the
 word apples,  the third number, the word oranges and then
 the second number, I would fill in the Replace dialog box
 as follows:
@@ -2297,9 +2297,10 @@ you specify the user element, then the Midnight Commander
 will try to logon on the remote machine as that user,
 otherwise it will use your login name. The optional pass
 element, if present is the password used for the
-connection. This use is not recomented (nor keeping this
-in your hotlist, unless you set the appropiate permissions
-there, and then, it may not be entirely safe anyways).
+connection. This use is not recommended (nor keeping this
+in your hotlist, unless you set the appropriate
+permissions there, and then, it may not be entirely safe
+anyways).
 
 Examples:
 
@@ -2577,7 +2578,7 @@ login.
 
 ftpfs_use_passive_connections. This option is by off
 default. This makes the ftpfs code use the passive open
-mode for transfering files. This is used by people that
+mode for transferring files. This is used by people that
 are behind a filtering packet router. This option just
 works if you are not using an ftp proxy.
 
