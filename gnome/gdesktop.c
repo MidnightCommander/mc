@@ -865,9 +865,9 @@ icon_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gin
 	switch (info) {
 	case TARGET_URI_LIST:
 		if (fe->f.link_to_dir)
-			gdnd_drop_on_directory (context, data, desktop_directory);
+			gdnd_drop_on_directory (context, data, filename);
 		else if (is_exe (fe->buf.st_mode) && if_link_is_exe (fe))
-			; /* FIXME: launch with the dropped files as arguments */
+			printf ("Implement execution of desktop icons!\n"); /* FIXME: launch with the dropped files */
 		else
 			g_assert_not_reached ();
 
