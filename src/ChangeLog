@@ -1,3 +1,10 @@
+2004-03-23  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+        * util.c (load_file_position): Fix mcedit position save bug. Read a
+        number after ';'.
+
+        From Christian Hamar  <krics@linuxforum.hu>
+
 2005-03-21  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (init_key): Load xterm_key_defines for terminals with

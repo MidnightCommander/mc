@@ -1364,7 +1364,7 @@ load_file_position (const char *filename, long *line, long *column)
 
 	*line = strtol(p, const_cast(char **, &p), 10);
 	if (*p == ';') {
-	    *column = strtol(p, const_cast(char **, &p), 10);
+	    *column = strtol(p+1, const_cast(char **, &p), 10);
 	    if (*p != '\n')
 	        *column = 0;
 	} else
