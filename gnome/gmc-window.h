@@ -14,6 +14,13 @@
 BEGIN_GNOME_DECLS
 
 
+/* File listing modes */
+typedef enum {
+	FILE_LIST_LIST,
+	FILE_LIST_ICONS
+} FileListType;
+
+
 typedef struct _GmcWindow Gmcwindow;
 typedef struct _GmcWindowClass GmcWindowClass;
 
@@ -23,13 +30,20 @@ struct _GmcWindow {
 	GtkWidget *paned;	/* Paned container to split into tree/list views */
 	GtkWidget *tree;	/* Tree view */
 	GtkWidget *notebook;	/* Notebook to switch between list and icon views */
+	GtkWidget *sw;		/* Scrolled window for the clist */
 	GtkWidget *clist;	/* List view (column list) */
 	GtkWidget *ilist;	/* Icon view (icon list) */
+
+	FileListType list_type;	/* Current file listing type */
 };
 
 struct _GmcWindowClass {
 	GnomeAppClass parent_class;
 };
+
+
+/* Standard Gtk function */
+GtkType gmc_window_get_type (void);
 
 
 END_GNOME_DECLS
