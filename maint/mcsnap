@@ -32,8 +32,8 @@ RPM_SRC_DIR="/usr/src/redhat"
 
 # Location of the snapshot directory
 SITE="login.ibiblio.org"
-# DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
-DIR="/public/html/mc/snapshots"
+DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
+# DIR="/public/html/mc/snapshots"
 
 cd "$MC_CVS_DIR"
 cvs up -dPA
