@@ -1,3 +1,15 @@
+2001-06-29  Pavel Roskin  <proski@gnu.org>
+
+	* Make.common.in (XCPPFLAGS): Don't add -I$(top_srcdir) - it's
+	now done in configure. Move -I.. to the beginning.
+	* Makefile.am (SUBDIRS): Move intl po to the beginning, since
+	libintl.a may be required to link mc.
+	(ACLOCAL_M4_SOURCES): Remove macros/gnome-gettext.m4.
+	* configure.in: Use AM_GNU_GETTEXT instead of AM_GNOME_GETTEXT.
+	Move all i18n code to one place. Don't substitute INTLSUB - it's
+	unused. Substitute INTLDEPS, since AM_GNU_GETTEXT doesn't do it.
+	Remove SCO-specific i18n hacks. Add -I$(top_srcdir) to CPPFLAGS.
+
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* configure.in: For Autoconf 2.50+, use AC_SYS_LARGEFILE.

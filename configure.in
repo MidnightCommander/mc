@@ -41,7 +41,24 @@ fi
 
 ALL_LINGUAS="az ca cs da de el es es_ES fi fr hu it ja ko lv nl no pl pt_BR ro ru sk sl sv uk ta tr wa zh_TW.Big5 zh_CN.GB2312"
 
-AM_GNOME_GETTEXT
+dnl
+dnl Internationalization
+dnl
+AM_GNU_GETTEXT
+INTLDEPS=
+LINTL=
+if test "x$USE_INCLUDED_LIBINTL" = xyes; then
+    CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)/intl"
+    LINTL='-L$(top_builddir)/intl -lintl'
+    INTLDEPS='$(top_builddir)/intl/libintl.a'
+fi
+AC_SUBST(LINTL)
+AC_SUBST(INTLDEPS)
+
+dnl
+dnl Hack to make extraconf.h visible even if compiling outside srcdir.
+dnl
+CPPFLAGS="$CPPFLAGS -I\$(top_srcdir)"
 
 dnl
 dnl Enforce coding standards
@@ -155,14 +172,6 @@ AC_CHECK_FUNCS(crypt, , [
 AC_SUBST(LCRYPT)
 
 AC_CHECK_FUNCS(grantpt, , [AC_CHECK_LIB(pt, grantpt)])
-
-dnl
-dnl libintl.a required on SCO to provide proper NLS support
-dnl (using native cc links it by default)
-dnl
-if test x$GCC = xyes; then
-    AC_CHECK_LIB(intl, tolower)
-fi
 
 dnl replacing lstat with statlstat on sco makes it more portable between
 dnl sco clones
@@ -613,18 +622,6 @@ AC_ARG_WITH(efence,
 	AC_MSG_RESULT([compiling with Electric fence])
 	mem_debug="Electric Fence"
 fi])
-
-INTLSUB=""
-LINTL=""
-if test x$USE_NLS = xyes; then
-    if test x$USE_INCLUDED_LIBINTL = xyes; then
-	CPPFLAGS="$CPPFLAGS -I\$(top_builddir)/intl"
-	LINTL="-L\$(top_builddir)/intl -lintl"
-    fi
-    INTLSUB=intl
-fi
-AC_SUBST(INTLSUB)
-AC_SUBST(LINTL)
 
 dnl
 dnl To force mmap support
