@@ -39,8 +39,7 @@
 
 #include "src/global.h"
 
-#    define WIDGET_COMMAND (WIDGET_USER + 10)
-#    define N_menus 5
+#define N_menus 5
 
 #define SEARCH_DIALOG_OPTION_NO_SCANF	1
 #define SEARCH_DIALOG_OPTION_NO_REGEX	2

@@ -37,9 +37,11 @@
 #define edit_message_dialog(w,x,y,h,s) query_dialog (h, s, 0, 1, _("&OK"))
 #define CFocus(x) 
 
-static void menu_cmd (int i)
+static void
+menu_cmd (int command)
 {
-    send_message ((Widget *) wedit, WIDGET_COMMAND, i);
+    edit_execute_key_command (wedit, command, -1);
+    edit_update_screen (wedit);
 }
 
 static void menu_key (int i)

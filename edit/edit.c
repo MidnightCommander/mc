@@ -2124,14 +2124,16 @@ static void edit_goto_matching_bracket (WEdit *edit)
     edit_cursor_move (edit, q - edit->curs1);
 }
 
-/* this executes a command as though the user initiated it through a key press. */
-/* callback with WIDGET_KEY as a message calls this after translating the key
-   press */
-/* this can be used to pass any command to the editor. Same as sendevent with
-   msg = WIDGET_COMMAND and par = command  except the screen wouldn't update */
-/* one of command or char_for_insertion must be passed as -1 */
-/* commands are executed, and char_for_insertion is inserted at the cursor */
-/* returns 0 if the command is a macro that was not found, 1 otherwise */
+/*
+ * This executes a command as though the user initiated it through a key
+ * press.  Callback with WIDGET_KEY as a message calls this after
+ * translating the key press.  This function can be used to pass any
+ * command to the editor.  Note that the screen wouldn't update
+ * automatically.  Either of command or char_for_insertion must be
+ * passed as -1.  Commands are executed, and char_for_insertion is
+ * inserted at the cursor.  0 is returned if the command is an undefined
+ * macro, 1 otherwise.
+ */
 int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
 {
     int r;

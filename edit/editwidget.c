@@ -337,10 +337,6 @@ static int edit_callback (WEdit *e, int msg, int par)
 	    edit_update_screen (e);
 	}
 	return 1;
-    case WIDGET_COMMAND:
-	edit_execute_key_command (e, par, -1);
-	edit_update_screen (e);
-	return 1;
     case WIDGET_CURSOR:
 	widget_move (&e->widget, e->curs_row + EDIT_TEXT_VERTICAL_OFFSET, e->curs_col + e->start_col);
 	return 1;
