@@ -1,7 +1,7 @@
 Before 4.6.0
 ============
 
-Contact all translators to update translations.
+Update translations and documentation.
 
 Portability testing.
 
@@ -59,19 +59,39 @@ Have a case match option in the viewer.
 After 4.6.1 on 4.6.x branch
 ===========================
 
-Eliminate all pipes in subshell.c, run pwd after kill.
-
 Consistent support for mc.lib.
 
 Consistent support for per-terminal settings.
 
-New syntax for mc.ext - path check, desktop environment check.
+New syntax for mc.ext - path check, desktop environment check.  Detach X
+programs into a separate process group.  Allow forcing the full path on
+local files.
 
-fxp support in VFS.
+Click on a png image doesn't always work on remote vfs - local copy may
+be deleted before the application has time to load it.
+
+Allow running executables from remote VFS.  Possibly warn the user.
+
+canonicalize_pathname() doesn't strip leading "./"
+
+Add print dialog in the internal editor.
+
+Make find dialog more responsive.
+
+Allow terminal-specific settings.
+
+Implement logging, not just for VFS.
+
+"Find file" should remember full stating path, not "." in the history.
+
+chdir to '~' doesn't work.
 
 
 In the 4.7 branch
 =================
+
+Eliminate all pipes in subshell.c, run pwd after kill.  Add support for
+more shells (e.g. ksh).
 
 Internal terminal - no more console saving.
 
@@ -107,7 +127,7 @@ ideas still waiting for their implementation.
     correct file, do not stop in current file.
 
   - Make C-y yank back all the killed text at once if you've just done
-    several kill operations in a row (C-k, M-d, etc).  [For MC 3.x]
+    several kill operations in a row (C-k, M-d, etc).
 
   - In learn keys, warn the user if he is trying to
     i) define a same sequence as an already defined (if the keycode differs)
@@ -208,11 +228,6 @@ ideas still waiting for their implementation.
   - Add an option that will let listboxes do incremental searches.
 
 * Optimizations and cleanup
-
-  - "How to use help" section should be at the first page of the
-    "Contents" help section.
-
-  - Use RPCbind on SVR4, this currently will be left for 3.5
 
   - Optimize the mcfs read and write code: make the code output 8k
     blocks all the time (if we have called mc_hint_readall) and probe
