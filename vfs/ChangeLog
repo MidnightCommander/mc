@@ -1,5 +1,10 @@
 2002-07-02  Pavel Roskin  <proski@gnu.org>
 
+	* Makefile.am: Add samba to SUBDIRS.  Forcedly set DISTDIRS to
+	extfs.  Remove parts that are now handled by samba/Makefile.
+	* samba/Makefile.in: Add more empty targets for Automake
+	compatibility.
+
 	* ftpfs.c (send_ftp_command): Use "anonymous@" as default
 	anonymous password.
 	From Eduardo Perez Ureta" <eperez@it.uc3m.es>

@@ -1,4 +1,10 @@
+if USE_SAMBA_FS
+SUBDIRS = samba extfs
+else
 SUBDIRS = extfs
+endif
+
+DIST_SUBDIRS = extfs
 
 if USE_SAMBA_FS
 AM_CFLAGS = $(GLIB_CFLAGS) -DCONFIGDIR=\""@configdir@"\"
@@ -49,12 +55,12 @@ EXTRA_DIST = ChangeLog README README.fish \
 	$(VFSHDRS) $(BASICFILES) $(NETFILES) $(SMBFILES) $(UNDELFILES)
 
 dist-hook:
-	mkdir $(distdir)/samba
-	mkdir $(distdir)/samba/include
-	mkdir $(distdir)/samba/lib
-	mkdir $(distdir)/samba/libsmb
-	mkdir $(distdir)/samba/param
-	mkdir $(distdir)/samba/tests
+	$(mkinstalldirs) $(distdir)/samba
+	$(mkinstalldirs) $(distdir)/samba/include
+	$(mkinstalldirs) $(distdir)/samba/lib
+	$(mkinstalldirs) $(distdir)/samba/libsmb
+	$(mkinstalldirs) $(distdir)/samba/param
+	$(mkinstalldirs) $(distdir)/samba/tests
 	for I in $(SAMBA_DIST); do \
 	  cp -p $(srcdir)/samba/$$I $(distdir)/samba/$$I || exit 1; \
 	done
@@ -75,11 +81,7 @@ distclean-local:
 	else :; fi
 
 if USE_VFS
-if USE_SAMBA_FS
-noinst_LIBRARIES = libvfs-mc.a samba/libsamba.a
-else
 noinst_LIBRARIES = libvfs-mc.a
-endif
 else
 noinst_LIBRARIES =
 endif
@@ -89,8 +91,6 @@ libvfs_mc_a_SOURCES = $(NETFILES) $(NONETFILES)
 else
 libvfs_mc_a_SOURCES = $(NONETFILES)
 endif
-
-samba_libsamba_a_SOURCES =
 
 if MCSERV_INSTALL
 sbin_PROGRAMS = mcserv
@@ -103,9 +103,6 @@ endif
 mcserv_SOURCES = mcserv.c tcputil.c
 
 mcserv_LDFLAGS = $(SHADOWLIB) $(TERMNET) $(PAMLIBS) $(LCRYPT)
-
-samba/libsamba.a:
-	cd samba && $(MAKE) libsamba.a
 
 SAMBA_DIST =			\
 	Makefile.in		\

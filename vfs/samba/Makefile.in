@@ -139,10 +139,6 @@ libsamba.a: $(SAMBAFILES)
 	  -o $@
 @BROKEN_CC@	-mv `echo $@ | sed 's%^.*/%%g'` $@
 
-install:
-
-uninstall:
-
 etags:
 	etags `find . -name "*.[ch]"`
 
@@ -206,3 +202,11 @@ $(srcdir)/include/config.h.in: $(srcdir)/include/stamp-h.in
 $(srcdir)/include/stamp-h.in: @MAINT@ $(srcdir)/configure.in
 	cd $(srcdir) && $(AUTOHEADER)
 	@date -u > $@
+
+# Added for compatibility with Automake-generated makefiles
+distdir:
+dvi:
+check:
+install:
+installcheck:
+uninstall:
