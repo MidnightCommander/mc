@@ -594,7 +594,7 @@ void done_screen ()
 	clr_scr ();                                                             
     reset_shell_mode ();                                                        
     mc_noraw_mode ();                                                           
-    shut_mouse ();                                                          
+    disable_mouse ();                                                          
     keypad (stdscr, FALSE);                                                     
 }                                                                               
 

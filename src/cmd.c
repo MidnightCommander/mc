@@ -910,7 +910,7 @@ view_other_cmd (void)
 				     " the panels cannot be toggled. "));
 	message_flag = FALSE;
     } else {
-	shut_mouse ();
+	disable_mouse ();
 	if (clear_before_exec)
 	    clr_scr ();
         if (alternate_plus_minus)
@@ -953,7 +953,7 @@ view_other_cmd (void)
 
 	reset_prog_mode ();
 	keypad(stdscr, TRUE);
-	init_mouse ();
+	enable_mouse ();
         if (alternate_plus_minus)
             application_keypad_mode ();
 

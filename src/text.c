@@ -63,7 +63,7 @@ edition_post_exec (void)
     keypad (stdscr, TRUE);
     mc_raw_mode ();
     channels_up ();
-    init_mouse ();
+    enable_mouse ();
     if (alternate_plus_minus)
         application_keypad_mode ();
 }
@@ -79,7 +79,7 @@ edition_pre_exec (void)
     }
 
     channels_down ();
-    shut_mouse ();
+    disable_mouse ();
     
     reset_shell_mode ();
     keypad (stdscr, FALSE);

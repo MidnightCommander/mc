@@ -655,10 +655,6 @@ static int getch_with_delay (void)
     return c;
 }
 
-#ifndef HAVE_LIBGPM
-#define gpm_flag 0
-#endif
-
 extern int max_dirt_limit;
 
 /* Returns a character read from stdin with appropriate interpretation */
@@ -696,17 +692,15 @@ int get_event (Gpm_Event *event, int redo_event, int block)
     }
 
     /* Repeat if using mouse */
-    while ((xmouse_flag || gpm_flag) && !pending_keys)
-    {
-	if (xmouse_flag || gpm_flag)
-	{
+    while (mouse_enabled && !pending_keys) {
+	if (mouse_enabled) {
 	    FD_ZERO (&select_set);
 	    FD_SET  (input_fd, &select_set);
 	    add_selects (&select_set);
 
 #ifdef HAVE_LIBGPM
-	    if (gpm_flag) {
-		FD_SET  (gpm_fd, &select_set);
+	    if (mouse_enabled && use_mouse_p == MOUSE_GPM) {
+		FD_SET (gpm_fd, &select_set);
 	    }
 #endif
 
@@ -761,11 +755,10 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 	        break;
 	}
 #ifdef HAVE_LIBGPM
-	if (gpm_flag && FD_ISSET (gpm_fd, &select_set)){
-	    if (gpm_flag){
-		Gpm_GetEvent (&ev);
-		Gpm_FitEvent (&ev);
-	    }
+	if (mouse_enabled && use_mouse_p == MOUSE_GPM
+			  && FD_ISSET (gpm_fd, &select_set)) {
+	    Gpm_GetEvent (&ev);
+	    Gpm_FitEvent (&ev);
 	    *event = ev;
 	    return EV_MOUSE;
 	}

@@ -1,3 +1,12 @@
+2001-09-17  Pavel Roskin  <proski@gnu.org>
+
+	* mouse.h: Major cleanup and interface change.  init_mouse()
+	should only be called once, disable_mouse() and enable_mouse()
+	should be used later.  Distinguish between disabled and
+	undetected mouse.  Remove debugging stuff.  Adjust all users.
+	* mouse.c: Implementation of the above.
+	* key.c: Don't use gpm_flag - check mouse_enabled instead.
+
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
 	* view.c: Cleanup of preprocessor directives.

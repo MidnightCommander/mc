@@ -225,8 +225,8 @@ WButtonBar *the_bar;
 /* For slow terminals */
 int slow_terminal = 0;
 
-/* use mouse? */
-int use_mouse_p = GPM_MOUSE;
+/* Mouse type: GPM, xterm or none */
+Mouse_Type use_mouse_p = MOUSE_NONE;
 
 /* If true, assume we are running on an xterm terminal */
 static int force_xterm = 0;
@@ -1749,8 +1749,8 @@ init_xterm_support (void)
 	}
 
 	/* Enable mouse unless explicitly disabled by --nomouse */
-	if (use_mouse_p != NO_MOUSE) {
-	    use_mouse_p = XTERM_MOUSE;
+	if (use_mouse_p != MOUSE_DISABLED) {
+	    use_mouse_p = MOUSE_XTERM;
 	}
 
 #if 0 /* It works on xterm, but not on rxvt */
@@ -2433,7 +2433,7 @@ process_args (int c, const char *option_arg)
 #endif
 		
     case 'd':
-	use_mouse_p = NO_MOUSE;
+	use_mouse_p = MOUSE_DISABLED;
 	break;
 		
 #ifdef HAVE_SUBSHELL_SUPPORT

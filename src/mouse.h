@@ -40,31 +40,31 @@ typedef struct Gpm_Event {
   enum Gpm_Etype type;
 } Gpm_Event;
 
-extern int gpm_fd;
-
-#endif
+#endif /* !HAVE_LIBGPM */
 
 /* General mouse support definitions */
 
 typedef int (*mouse_h)(Gpm_Event *, void *);
 
-#define NO_MOUSE 0
-#define GPM_MOUSE 1
-#define XTERM_MOUSE 2
+typedef enum {
+    MOUSE_NONE,		/* Not detected yet */
+    MOUSE_DISABLED,	/* Explicitly disabled by -d */
+    MOUSE_GPM,		/* Support using GPM on Linux */
+    MOUSE_XTERM		/* Support using xterm-style mouse reporting */
+} Mouse_Type;
 
-void init_mouse (void);
-void shut_mouse (void);
+/* Type of the currently used mouse */
+extern Mouse_Type use_mouse_p;
 
-/* Type of mouse: NO_MOUSE, GPM_MOUSE or XTERM_MOUSE */
-extern int use_mouse_p;
-/* If use_mouse_p is XTERM_MOUSE: is mouse currently active? */
-extern int xmouse_flag;
+/* The mouse is currently: 1 - enabled, 0 - disabled */
+extern int mouse_enabled;
 
 /* String indicating that a mouse event has occured, usually "\E[M" */
 extern char *xmouse_seq;
 
-int mouse_handler (Gpm_Event *gpm_event);
-int redo_mouse (Gpm_Event *event);
+void init_mouse (void);
+void enable_mouse (void);
+void disable_mouse (void);
 
 /* Constants returned from mouse handlers */
 
@@ -72,12 +72,6 @@ int redo_mouse (Gpm_Event *event);
 #define MOU_REPEAT    0x01
 #define MOU_ENDLOOP   0x02
 #define MOU_LOCK      0x04
-
-#ifdef DEBUGMOUSE
-#define DEBUGM(data) fprintf data
-#else
-#define DEBUGM(data) 
-#endif
 
 #ifdef HAVE_LIBGPM
 

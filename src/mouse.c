@@ -25,91 +25,52 @@
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
-#include <signal.h>	/* For kill() and SIGQUIT */
 #include <fcntl.h>
-#if HAVE_TERMIOS_H
-#    include <termios.h>
-#endif
 #include <stdio.h>
+
 #include "global.h"
+#include "tty.h"
 #include "mouse.h"
 #include "key.h"		/* define sequence */
-#include "tty.h"		/* get ncurses header */
 
-int xmouse_flag = 0;
+int mouse_enabled = 0;
 char *xmouse_seq;
 
 #ifdef HAVE_LIBGPM
-static int mouse_d;		/* Handle to the mouse server */
-#endif
-
-#ifdef DEBUGMOUSE
-/* Only used for debugging */
-static int top_event = 0;
-FILE *log;
-#endif
-
-#ifdef HAVE_LIBGPM
-
 void show_mouse_pointer (int x, int y)
 {
-#ifdef HAVE_LIBGPM
-    if (use_mouse_p == GPM_MOUSE){
+    if (use_mouse_p == MOUSE_GPM) {
 	Gpm_DrawPointer (x, y, gpm_consolefd);
     }
-#endif
 }
-
 #endif /* HAVE_LIBGPM */
-#if 0
-int mouse_handler (Gpm_Event *gpm_event)
-{
-    MouseEvent *event = mouse_events;
-    int x = last_x = gpm_event->x;
-    int y = last_y = gpm_event->y;
-    int redo = 0;
-    
-/*    DEBUGM ((log, "Mouse [%d, %d]\n", x, y)); */
-
-    /* Call any registered event handlers */
-    for (; event; event = (MouseEvent *) event->next){
-	if ((event->x1 <= x) && (x <= event->x2)
-	    && (event->y1 <= y) && (y <= event->y2)){
-	    gpm_event->x -= event->x1;
-	    gpm_event->y -= event->y1;
-	    last_mouse_event = event;
-	    redo = (*(event->mouse_callback))(gpm_event, event->data);
-	    gpm_event->x += event->x1;
-	    gpm_event->y += event->y1;
-	    break;
-	}
-    }
-    return redo;
-}
-
-int redo_mouse (Gpm_Event *event)
-{
-    if (last_mouse_event){
-    	int result;
-    	event->x -= last_mouse_event->x1;
-    	event->y -= last_mouse_event->y1;
-	result = (*(last_mouse_event->mouse_callback))
-	         (event,last_mouse_event->data);
-    	event->x += last_mouse_event->x1;
-    	event->y += last_mouse_event->y1;
-    	return result;
-    }
-    return MOU_NORMAL;
-}
-#endif
 
 void init_mouse (void)
 {
-    switch (use_mouse_p)
-    {
+    switch (use_mouse_p) {
 #ifdef HAVE_LIBGPM
-      case GPM_MOUSE:
+    case MOUSE_NONE:
+	use_mouse_p = MOUSE_GPM;
+	break;
+#endif /* HAVE_LIBGPM */
+    case MOUSE_XTERM:
+	define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
+	break;
+    }
+    enable_mouse ();
+}
+
+void enable_mouse (void)
+{
+    if (mouse_enabled) {
+	return;
+    }
+
+    switch (use_mouse_p) {
+#ifdef HAVE_LIBGPM
+    case MOUSE_GPM:
 	{
+	    int mouse_d;
 	    Gpm_Connect conn;
 
 	    conn.eventMask   = ~GPM_MOVE;
@@ -117,69 +78,50 @@ void init_mouse (void)
 	    conn.minMod      = 0;
 	    conn.maxMod      = 0;
 
-	    if ((mouse_d = Gpm_Open (&conn, 0)) == -1)
+	    mouse_d = Gpm_Open (&conn, 0);
+	    if (mouse_d == -1) {
+		use_mouse_p = MOUSE_NONE;
 	        return;
-
-#ifdef DEBUGMOUSE
-	    log = fopen ("mouse.log", "w");
-#endif
+	    }
+	    mouse_enabled = 1;
 	}
 	break;
 #endif /* HAVE_LIBGPM */
-	case XTERM_MOUSE:
-	    if (!xmouse_flag) {
+    case MOUSE_XTERM:
+	/* save old highlight mouse tracking */
+	printf(ESC_STR "[?1001s");
 
-		/* save old highlight mouse tracking */
-		printf(ESC_STR "[?1001s");
+	/* enable mouse tracking */
+	printf(ESC_STR "[?1000h");
 
-		/* enable mouse tracking */
-		printf(ESC_STR "[?1000h");
-
-		fflush (stdout);
-		/* turn on */
-		xmouse_flag = 1; 
-		define_sequence (MCKEY_MOUSE, xmouse_seq, MCKEY_NOACTION);
-	    }
-	    break;
-	default:
-	    /* nothing */
-	break;
-    } /* switch (use_mouse_p) */ 
-}
-
-void shut_mouse (void)
-{
-    switch (use_mouse_p){
-#ifdef HAVE_LIBGPM
-      case GPM_MOUSE:
-	Gpm_Close ();
-	break;
-#endif
-      case XTERM_MOUSE:
-	if (xmouse_flag) {
-
-	    /* disable mouse tracking */
-	    /* Changed the 1 for an 'l' below: */
-	    printf("%c[?1000l",27);
-
-	    /* restore old highlight mouse tracking */
-	    printf("%c[?1001r",27);
-
-	    fflush (stdout);
-	    /* off */
-	    xmouse_flag = 0;
-	}
-	break;
-      default:
-	/* nothing */
+	fflush (stdout);
+	mouse_enabled = 1; 
 	break;
     }
 }
 
-#ifdef DEBUGMOUSE
-void mouse_log (char *function, char *file, int line)
+void disable_mouse (void)
 {
-    fprintf (log, "%s called from %s:%d\n", function, file, line);
-}
-#endif
+    if (!mouse_enabled) {
+	return;
+    }
 
+    mouse_enabled = 0;
+
+    switch (use_mouse_p) {
+#ifdef HAVE_LIBGPM
+    case MOUSE_GPM:
+	Gpm_Close ();
+	break;
+#endif
+    case MOUSE_XTERM:
+	/* disable mouse tracking */
+	printf(ESC_STR "[?1000l");
+
+	/* restore old highlight mouse tracking */
+	printf(ESC_STR "[?1001r");
+
+	fflush (stdout);
+	break;
+    }
+}
