@@ -324,7 +324,7 @@ gnome_exit (void)
 		return;
 
 	w = gnome_message_box_new (
-		N_("The file manager and the desktop handler are now terminating\n\n"
+		_("The file manager and the desktop handler are now terminating\n\n"
 		   "If you want to start up again the desktop handler or the file manager\n"
 		   "you can launch it from the Panel, or you can run the UNIX command `gmc'\n\n"
 		   "Press OK to terminate the application, or cancel to continue using it."),

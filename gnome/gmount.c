@@ -93,6 +93,7 @@ void free (void *ptr);
 #include "gdesktop.h"
 #include "gmount.h"
 #include "util.h"
+#include "i18n.h"
 
 typedef struct {
 	char *devname;
