@@ -20,7 +20,7 @@
    License along with this program; if not, write to the Free Software
    Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.  */
 
-/* Namespace: exports smbfs_vfs_ops, tcp_invalidate_socket */
+/* Namespace: exports smbfs_vfs_ops */
 #include <stdio.h>
 #include <sys/types.h>
 
@@ -32,6 +32,7 @@
 #undef HAVE_LIBREADLINE
 #define NO_CONFIG_H
 #define BOOL_DEFINED
+#undef	VERSION
 #include "samba/include/includes.h"
 
 #include <string.h>
@@ -426,7 +427,7 @@ loaddir_helper(file_info *finfo, const char *mask)
 	time_t t = finfo->mtime; /* the time is assumed to be passed as GMT */
 #if 0	/* I want to see dot files */
 	if (finfo->mode & aHIDDEN)
-		return;	/* dont bother with hidden files, "~$" screws up mc */
+		return;	/* don't bother with hidden files, "~$" screws up mc */
 #endif
 	new_entry = g_new0 (dir_entry, 1);
 	new_entry->text = dos_to_unix (g_strdup(finfo->name), 1);
@@ -490,9 +491,7 @@ convert_path(char **remote_file, gboolean trailing_asterik)
     if (p)
         my_remote = p;   /* strip off share/service name */
     /* create remote filename as understood by smb clientgen */
-    p = *remote_file = g_strconcat (my_remote, 
-							        trailing_asterik ? "/*" : "", 
-								    0);
+    p = *remote_file = g_strconcat (my_remote, trailing_asterik ? "/*" : "", 0);
     unix_to_dos (*remote_file, 1);
     while ((p = strchr(p, '/')))
         *p = '\\';
@@ -848,9 +847,9 @@ smbfs_get_host_and_username
 
 #if 0
 	if ((p = strchr(*path, '@')))	/* user:pass@server */
-		*path = ++p;				/* dont want user:pass@ in path */
+		*path = ++p;		/* don't want user:pass@ in path */
 	if ((p = strchr(ret, '@')))	/* user:pass@server */
-		ret = ++p;				/* dont want user:pass@ in path */
+		ret = ++p;		/* don't want user:pass@ in path */
 #endif
 
 	return ret;
@@ -865,7 +864,6 @@ do_connect (char *server, char *share)
 {
 	struct cli_state *c;
 	struct nmb_name called, calling;
-	char *server_n;
 	struct in_addr ip;
 	extern struct in_addr ipzero;
 
@@ -878,14 +876,13 @@ do_connect (char *server, char *share)
 		share++;
 	}
 
-	server_n = server;
-	
 	ip = ipzero;
 
 	make_nmb_name(&calling, global_myname, 0x0, "");
 	make_nmb_name(&called , server, current_bucket->name_type, "");
 
- again:
+    for (;;) {
+
 	ip = ipzero;
 	if (current_bucket->have_ip) ip = current_bucket->dest_ip;
 
@@ -899,10 +896,9 @@ do_connect (char *server, char *share)
 	pwd_set_cleartext(&(c->pwd), current_bucket->password);
 
 	if ((cli_set_port(c, current_bucket->port) == 0) ||
-			!cli_connect(c, server_n, &ip)) {
-		my_errno = cli_error(c, NULL, &err, NULL);
-		DEBUG(1, ("Connection to %s failed\n", server_n));
-		return NULL;
+			!cli_connect(c, server, &ip)) {
+		DEBUG(1, ("Connection to %s failed\n", server));
+		break;
 	}
 
 	if (!cli_session_request(c, &calling, &called)) {
@@ -911,7 +907,7 @@ do_connect (char *server, char *share)
 		cli_shutdown(c);
 		if (strcmp(called.name, "*SMBSERVER")) {
 			make_nmb_name(&called , "*SMBSERVER", 0x20, "");
-			goto again;
+			continue;
 		}
 		return NULL;
 	}
@@ -919,21 +915,17 @@ do_connect (char *server, char *share)
 	DEBUG(3, (" session request ok\n"));
 
 	if (!cli_negprot(c)) {
-		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1, ("protocol negotiation failed\n"));
-		cli_shutdown(c);
-		return NULL;
+		break;
 	}
 
 	if (!cli_session_setup(c, current_bucket->user, 
 			       current_bucket->password, strlen(current_bucket->password),
 			       current_bucket->password, strlen(current_bucket->password),
 			       current_bucket->domain)) {
-		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1,("session setup failed: %s\n", cli_errstr(c)));
-		cli_shutdown(c);
 		authinfo_remove (server, share);
-		return NULL;
+		break;
 	}
 
 	if (*c->server_domain || *c->server_os || *c->server_type)
@@ -944,16 +936,20 @@ do_connect (char *server, char *share)
 
 	if (!cli_send_tconX(c, share, "?????",
 			    current_bucket->password, strlen(current_bucket->password)+1)) {
-		my_errno = cli_error(c, NULL, &err, NULL);
 		DEBUG(1,("%s: tree connect failed: %s\n", share, cli_errstr(c)));
-		cli_shutdown(c);
-		return NULL;
+		break;
 	}
 
 	DEBUG(3, (" tconx ok\n"));
 
 	my_errno = 0;
 	return c;
+    }
+
+    my_errno = cli_error(c, NULL, &err, NULL);
+    cli_shutdown(c);
+    return NULL;
+    
 }
 
 static int
@@ -1172,7 +1168,7 @@ smbfs_get_path(smbfs_connection **sc, char *path)
 			char *s;
 	        s = concat_dir_and_file( (*sc)->home, remote_path +3-f );
 			g_free (remote_path);
-			remote_path = s;
+		return s;
 		}
 	}
 	return remote_path;
@@ -1370,8 +1366,8 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 	mpp = mypath = g_strdup(path);
 
 	mypath++;				/* cut off leading '/' */
-	while ((p = strchr(mypath, '/')))
-		mypath++;			/* advance until last file/dir name */
+	if ((p = strrchr(mypath, '/')))
+		mypath = p + 1;			/* advance until last file/dir name */
 	DEBUG(3, ("get_stat_info: mypath:%s, current_info->dirname:%s\n",
 		mypath, current_info->dirname));
 #if 0
@@ -1391,13 +1387,10 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 		char *mdp;
 		char *mydir;
 		mdp = mydir = g_strdup(current_info->dirname);
-		while ((p = strchr(mydir, '/')))
-			mydir++;				/* advance util last '/' */
-		mydir--;
-		*mydir = 0;					/* cut off last name	*/
-		mydir = mdp;				/* reset to start */
-		while ((p = strchr(mydir, '/')))
-			mydir++;				/* advance util last '/' */
+		if ((p = strrchr(mydir, '/')))
+			*p = 0;				/* advance util last '/' */
+		if ((p = strrchr(mydir, '/')))
+			mydir = p + 1;			/* advance util last '/' */
 		if (strcmp(mydir, mypath) == 0) {	/* fake a stat for ".." */
 			bzero(buf, sizeof(struct stat));
 			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
@@ -1421,11 +1414,9 @@ get_stat_info (smbfs_connection *sc, char *path, struct stat *buf)
 			return -1;
 		}
 		if (strcmp(mypath, dnp) == 0) {
-			struct stat fake_stat;
-			bzero(&fake_stat, sizeof(struct stat));
-			fake_stat.st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
-			memcpy(buf, &fake_stat, sizeof(struct stat));
-			memcpy(&single_entry->my_stat, &fake_stat, sizeof(struct stat));
+			bzero(buf, sizeof(struct stat));
+			buf->st_mode = S_IFDIR | S_IRUSR | S_IRGRP | S_IROTH;
+			memcpy(&single_entry->my_stat, buf, sizeof(struct stat));
 			g_free(mpp);
 			DEBUG(1, ("	CURRENT:found in %s\n", current_info->dirname));
 			return 0;
@@ -1460,6 +1451,7 @@ smbfs_chdir (vfs *me, char *path)
 	DEBUG(3, ("smbfs_chdir(path:%s)\n", path));
     if (!(remote_dir = smbfs_get_path (&sc, path)))
 		return -1;
+    g_free (remote_dir);
 	
     return 0;
 }
@@ -1494,13 +1486,14 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	char *remote_dir;
 	smbfs_connection *sc;
 	pstring server_url;
-	char *service, *p, *pp;
+	char *service, *pp;
+	const char *p;
 
 	DEBUG(3, ("smbfs_stat(path:%s)\n", path));
 
 #if 0
 	if (p = strchr(path, '@'))	/* user:pass@server */
-		path = ++p;				/* dont want user:pass@ in path */
+		path = ++p;		/* don't want user:pass@ in path */
 #endif
 
 	if (!current_info) {
@@ -1523,22 +1516,22 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	p += HEADER_LEN;
 	if (*p == '/')
 		p++;
-	if (!strchr(p, '/')) {
+	p = strchr(p, '/');	/* advance past next '/' */
+	if (!p) {
 		if (!current_info->server_list) {
 			if (loaddir(me, path) < 0)
 				return -1;
 		}
 		return fake_server_stat(server_url, path, buf);
 	}
-	p = strchr(p, '/');	/* advance past next '/' */
-	if (!p || !strchr(++p, '/')) {
+	if (!strchr(++p, '/')) {
 		return fake_share_stat(server_url, path, buf);
 	}
 
 	/* stating inside share at this point */
-    if (!(remote_dir = smbfs_get_path (&sc, path))) /* connects if necessary */
+	if (!(remote_dir = smbfs_get_path (&sc, path))) /* connects if necessary */
 		return -1;
-
+	g_free (remote_dir);
 	{
 		char *sp, *pp = path;
 		int hostlen = strlen(current_bucket->host);
@@ -1554,11 +1547,12 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 		}
 	}
 	/* check if current_info is in share requested */
-	p = service = g_strdup(path);
+	p = path;
 	if (strcmp(p, URL_HEADER))
 		p += HEADER_LEN;
-	if (*p== '/')
+	if (*p == '/')
 		p++;
+	p = service = g_strdup(p);
 	pp = strchr(p, '/');
 	if (pp)
 		p = ++pp;	/* advance past server name */
@@ -1566,18 +1560,19 @@ smbfs_stat (vfs *me, char *path, struct stat *buf)
 	if (pp)
 		*pp = 0;	/* cut off everthing after service name */
 	else
-		p = g_strdup(IPC);	/* browsing for services */
+		p = IPC;	/* browsing for services */
 	pp = current_info->dirname;
 	if (*pp == '/');
 		pp++;
 	if (strncmp(p, pp, strlen(p)) != 0) {
 		DEBUG(6, ("desired '%s' is not loaded, we have '%s'\n", p, pp));
-		if (loaddir(me, path) < 0)
+		if (loaddir(me, path) < 0) {
+			g_free (service);
 			return -1;
+		}
 		DEBUG(6, ("loaded dir: '%s'\n", current_info->dirname));
 	}
-	if (service)
-		g_free(service);
+	g_free(service);
 	/* stat dirs & files under shares now */
 	return get_stat_info(sc, path, buf);
 }
@@ -1614,7 +1609,7 @@ smbfs_mkdir (vfs *me, char *path, mode_t mode)
 	DEBUG(3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, mode));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
- 
+	g_free (remote_file);
 	convert_path(&path, FALSE);
 
 	if (!cli_mkdir(sc->cli, path)) {
@@ -1635,7 +1630,7 @@ smbfs_rmdir (vfs *me, char *path)
 	DEBUG(3, ("smbfs_rmdir(path:%s)\n", path));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
-
+	g_free (remote_file);
 	convert_path(&path, FALSE);
 
 	if (!cli_rmdir(sc->cli, path)) {
@@ -1700,25 +1695,21 @@ my_forget (char *path)
     if (path[0] == '/' && path[1] == '/')
 	path += 2;
 
-    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL))
-		== 0) {
-		g_free (host);
-		g_free (user);
-		return;
-    }
-    g_free (p);
-    for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
+    if ((p = smbfs_get_host_and_username (&path, &host, &user, &port, NULL)) {
+	g_free (p);
+	for (i = 0; i < SMBFS_MAX_CONNECTIONS; i++) {
 		if ((strcmp (host, smbfs_connections [i].host) == 0) &&
 		    (strcmp (user, smbfs_connections [i].user) == 0) &&
 		    (port == smbfs_connections [i].port)) {
 
 		    /* close socket: the child owns it now */
-			cli_shutdown(smbfs_connections [i].cli);
+		    cli_shutdown(smbfs_connections [i].cli);
 
 		    /* reopen the connection */
 		    smbfs_connections [i].cli =
 				do_connect(host, smbfs_connections[i].service);
 		}
+	}
     }
     g_free (host);
     g_free (user);
@@ -1792,44 +1783,49 @@ static void *
 smbfs_open (vfs *me, char *file, int flags, int mode)
 {
     char *remote_file;
-	void *ret;
+    void *ret;
     smbfs_connection	*sc;
-    smbfs_handle		*remote_handle;
+    smbfs_handle	*remote_handle;
 
-	DEBUG(3, ("smbfs_open(file:%s, flags:%d, mode:%d)\n", file, flags, mode));
+    DEBUG(3, ("smbfs_open(file:%s, flags:%d, mode:%d)\n", file, flags, mode));
 
     if (!(remote_file = smbfs_get_path (&sc, file)))
-		return 0;
+	return 0;
 
-	convert_path(&remote_file, FALSE);
+    convert_path(&remote_file, FALSE);
 
-    remote_handle			= g_new (smbfs_handle, 2);
+    remote_handle		= g_new (smbfs_handle, 2);
     remote_handle->cli		= sc->cli;
-	remote_handle->nread	= 0;
+    remote_handle->nread	= 0;
 
-	if (flags & O_CREAT)
-		ret = open_write(remote_handle, remote_file, flags, mode);
-	else
-		ret = open_read(remote_handle, remote_file, flags, mode);
-	return ret;
+    if (flags & O_CREAT)
+	ret = open_write(remote_handle, remote_file, flags, mode);
+    else
+	ret = open_read(remote_handle, remote_file, flags, mode);
+
+    g_free (remote_file);
+
+    return ret;
 }
 
 static int
 smbfs_unlink (vfs *me, char *path)
 {
     smbfs_connection *sc;
-	char *remote_file;
+    char *remote_file;
 
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
-	    return -1;
+	return -1;
  
-	convert_path(&remote_file, FALSE);
+    convert_path(&remote_file, FALSE);
 
     if (!cli_unlink(sc->cli, remote_file)) {
         message_3s (1, MSG_ERROR, _(" %s opening remote file %s "), 
 			cli_errstr(sc->cli), CNV_LANG(remote_file));
-		return -1;
+	g_free (remote_file);
+	return -1;
     }   
+    g_free (remote_file);
     return 0;
 }
 
@@ -1837,21 +1833,29 @@ static int
 smbfs_rename (vfs *me, char *a, char *b)
 {
     smbfs_connection *sc;
-	char *ra, *rb;
+    char *ra, *rb;
+    int retval;
 
     if ((ra = smbfs_get_path (&sc, a)) == 0)
-	    return -1;
+	return -1;
  
-    if ((rb = smbfs_get_path (&sc, b)) == 0)
-	    return -1;
- 
-	convert_path(&ra, FALSE);
-	convert_path(&rb, FALSE);
+    if ((rb = smbfs_get_path (&sc, b)) == 0) {
+	g_free (ra);
+	return -1;
+    }
 
-    if (!cli_rename(sc->cli, ra, rb)) {
-        message_2s (1, MSG_ERROR, _(" %s renaming files\n"), 
+    convert_path(&ra, FALSE);
+    convert_path(&rb, FALSE);
+
+    retval = cli_rename(sc->cli, ra, rb);
+
+    g_free (ra);
+    g_free (rb);
+
+    if (!retval) {
+	message_2s (1, MSG_ERROR, _(" %s renaming files\n"), 
 			cli_errstr(sc->cli));
-		return -1;
+	return -1;
     }   
     return 0;
 }

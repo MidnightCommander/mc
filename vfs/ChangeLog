@@ -1,3 +1,16 @@
+2001-08-01  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* smbfs.c: Undefine VERSION to prevent warning. Comments fixes.
+	(do_connect): Symplify.
+	(get_stat_info): Symplify. Eliminate another fake_stat.
+	(smbfs_chdir): Release remote_dir after use.
+	(smbfs_stat): Likewise. Fix another 2 memory leaks.
+	(smbfs_mkdir): Release remote_file after use.
+	(smbfs_rmdir): Likewise.
+	(smbfs_open): Likewise. Indentation fixes.
+	(smbfs_unlink): Likewise.
+	(smbfs_rename): Release rb and ra after use.
+
 2001-07-20  Pavel Roskin  <proski@gnu.org>
 
 	* extfs.c (extfs_init) [GTK]: Use mc_home instead of LIBDIR.
