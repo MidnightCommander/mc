@@ -37,7 +37,6 @@
 #include "../src/mad.h"
 
 extern int edit_key_emulation;
-extern WEdit *wedit;
 extern WButtonBar *edit_bar;
 extern Dlg_head *edit_dlg;
 extern WMenu *edit_menubar;

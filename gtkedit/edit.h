@@ -742,6 +742,7 @@ extern int current_selection;
    or EDIT_KEY_EMULATION_EMACS
  */
 extern int edit_key_emulation;
+extern WEdit *wedit;
 #endif	/* ! MIDNIGHT */
 
 extern int option_word_wrap_line_length;

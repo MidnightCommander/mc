@@ -1513,6 +1513,9 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
 
     edit_free_syntax_rules (edit);
 
+    if (!option_syntax_highlighting)
+	return;
+
     if (edit) {
 	if (!edit->filename)
 	    return;

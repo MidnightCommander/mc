@@ -160,6 +160,8 @@ void edit_options_dialog (void)
 	Quick_options.widgets = quick_widgets;
 
 	if (quick_dialog (&Quick_options) != B_CANCEL) {
+	    int old_syntax_hl = option_syntax_highlighting;
+
 	    if (p) {
 		option_word_wrap_line_length = atoi (p);
 		free (p);
@@ -193,6 +195,10 @@ void edit_options_dialog (void)
 	    }
 
 	    edit_key_emulation = *quick_widgets[13 + OA].result;
+
+	    /* Load syntax rules if user turned syntax highlighting on */
+	    if (option_syntax_highlighting && !old_syntax_hl)
+		edit_load_syntax (wedit, 0, 0);
 
 	    return;
 	} else {
