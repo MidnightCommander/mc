@@ -1,0 +1,161 @@
+#! /bin/sh
+#
+# Written by Erik Troan (ewt@redhat.com) 1996
+#            Jakub Jelinek (jj@sunsite.mff.cuni.cz) 1996
+#            Tomasz K³oczko (kloczek@rudy.mif.pg.gda.pl) 1997
+# minor changes by Wojtek Pilorz (wpilorz@bdk.lublin.pl) 1997
+# minor changes by Michele Marziani (marziani@fe.infn.it) 1997
+# slight changes to put rpm to Trpm by Balazs Nagy (julian7@kva.hu) 1998
+# (C) 1996 The Free Software Foundation.
+#
+#
+
+mcrpmfs_list ()
+{
+    # set MCFASTRPM_DFLT to 1 for faster rpm files handling by default, to 0 for
+    # slower handling
+    MCFASTRPM_DFLT=0
+    if test -z "$MCFASTRPM"; then
+      MCFASTRPM=$MCFASTRPM_DFLT
+    fi
+    FILEPREF="-r--r--r--   1 root     root    "
+    DESC=`rpm -qi $1`
+    DATE=`rpm -q --qf "%{BUILDTIME:date}" $1 | cut -c 5-11,21-24`
+    HEADERSIZE=`echo "$DESC" | wc -c`
+    echo "-r--r--r--   1 root     root  $HEADERSIZE $DATE HEADER"
+    echo "-r-xr-xr-x   1 root     root    39 $DATE UNINSTALL"
+    echo "dr-xr-xr-x   3 root     root	   0 $DATE INFO"
+    echo "$FILEPREF 0 $DATE INFO/NAME-VERSION-RELEASE"
+    echo "$FILEPREF 0 $DATE INFO/GROUP"
+    echo "$FILEPREF 0 $DATE INFO/BUILDHOST"
+    echo "$FILEPREF 0 $DATE INFO/SOURCERPM"
+    if test "$MCFASTRPM" = 0 ; then
+     test "`rpm -q --qf \"%{DISTRIBUTION}\" $1`" = "(none)" ||
+ 	 echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
+     test "`rpm -q --qf \"%{VENDOR}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/VENDOR"
+     test "`rpm -q --qf \"%{DESCRIPTION}\" $1`" = "(none)" ||
+         echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
+     test "`rpm -q --qf \"%{SUMMARY}\" $1`" = "(none)" ||
+         echo "$FILEPREF 0 $DATE INFO/SUMMARY"
+     if test "`rpm -q --qf \"%{RPMTAG_PREIN}%{RPMTAG_POSTIN}%{RPMTAG_PREUN}%{RPMTAG_POSTUN}%{VERIFYSCRIPT}\" $1`" != "(none)(none)(none)(none)(none)"; then
+	echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+	test "`rpm -q --qf \"%{RPMTAG_PREIN}\" $1`" = '(none)' ||
+	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
+	test "`rpm -q --qf \"%{RPMTAG_POSTIN}\" $1`" = '(none)' ||
+	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
+	test "`rpm -q --qf \"%{RPMTAG_PREUN}\" $1`" = '(none)' ||
+	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
+	test "`rpm -q --qf \"%{RPMTAG_POSTUN}\" $1`" = '(none)' ||
+	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
+	test "`rpm -q --qf \"%{VERIFYSCRIPT}\" $1`" = '(none)' ||
+	   echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
+        echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
+     fi
+    else
+     echo "$FILEPREF 0 $DATE INFO/DISTRIBUTION"
+     echo "$FILEPREF 0 $DATE INFO/VENDOR"
+     echo "$FILEPREF 0 $DATE INFO/DESCRIPTION"
+     echo "$FILEPREF 0 $DATE INFO/SUMMARY"
+     echo "dr-xr-xr-x   1 root     root     0 $DATE INFO/SCRIPTS"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREIN"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTIN"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/PREUN"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/POSTUN"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/VERIFYSCRIPT"
+     echo "$FILEPREF 0 $DATE INFO/SCRIPTS/ALL"
+    fi
+    if test "$MCFASTRPM" = 0 ; then
+     test "`rpm -q --qf \"%{PACKAGER}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
+     test "`rpm -q --qf \"%{URL}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/URL"
+     test "`rpm -q --qf \"%{SERIAL}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
+     test "`rpm -q --qf \"%{COPYRIGHT}\" $1`" = "(none)" ||
+	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+    else
+	 echo "$FILEPREF 0 $DATE INFO/PACKAGER"
+	 echo "$FILEPREF 0 $DATE INFO/URL"
+	 echo "$FILEPREF 0 $DATE INFO/SERIAL"
+	 echo "$FILEPREF 0 $DATE INFO/COPYRIGHT"
+    fi
+    echo "$FILEPREF 0 $DATE INFO/BUILDTIME"
+    echo "$FILEPREF 0 $DATE INFO/RPMVERSION"
+    echo "$FILEPREF 0 $DATE INFO/OS"
+    echo "$FILEPREF 0 $DATE INFO/SIZE"
+    if test "$MCFASTRPM" != 0 ; then
+    rpm -q --qf "[%{REQUIRENAME}\n]" $1 | grep "(none)" > /dev/null ||
+	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+    rpm -q --qf "[%{PROVIDES}\n]" $1 | grep "(none)" > /dev/null ||
+	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+    test "`rpm -q --qf \"%{CHANGELOGTEXT}\" $1`" = "(none)" ||
+       echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
+    else 
+	echo "$FILEPREF 0 $DATE INFO/REQUIRENAME"
+	echo "$FILEPREF 0 $DATE INFO/PROVIDES"
+        echo "$FILEPREF 0 $DATE INFO/CHANGELOG"
+    fi
+
+    rpm -qlv $1 | sed -e 's/^\(..........\) /\1 1 /'
+}
+
+mcrpmfs_copyout ()
+{
+    case "$2" in
+	HEADER) rpm -qi $1 > $3; exit 0;;
+	UNINSTALL) echo "# Run this to uninstall this RPM package" > $3; exit 0;;
+	INFO/NAME-VERSION-RELEASE)	rpm -q --qf "%{NAME}-%{VERSION}-%{RELEASE}\n" $1 > $3; exit 0;;
+	INFO/RELEASE)		rpm -q --qf "%{RELEASE}\n" $1 > $3; exit 0;;
+	INFO/GROUP)		rpm -q --qf "%{GROUP}\n" $1 > $3; exit 0;;
+	INFO/DISTRIBUTION) 	rpm -q --qf "%{DISTRIBUTION}\n" $1 > $3; exit 0;;
+	INFO/VENDOR)		rpm -q --qf "%{VENDOR}\n" $1 > $3; exit 0;;
+	INFO/BUILDHOST)		rpm -q --qf "%{BUILDHOST}\n" $1 > $3; exit 0;;
+	INFO/SOURCERPM)		rpm -q --qf "%{SOURCERPM}\n" $1 > $3; exit 0;;
+	INFO/DESCRIPTION)	rpm -q --qf "%{DESCRIPTION}\n" $1 > $3; exit 0;;
+	INFO/PACKAGER)		rpm -q --qf "%{PACKAGER}\n" $1 > $3; exit 0;;
+	INFO/URL)		rpm -q --qf "%{URL}\n" $1 >$3; exit 0;;
+	INFO/BUILDTIME)		rpm -q --qf "%{BUILDTIME:date}\n" $1 >$3; exit 0;;
+	INFO/SERIAL)		rpm -q --qf "%{SERIAL}\n" $1 >$3; exit 0;;
+	INFO/COPYRIGHT)		rpm -q --qf "%{COPYRIGHT}\n" $1 >$3; exit 0;;
+	INFO/RPMVERSION)	rpm -q --qf "%{RPMVERSION}\n" $1 >$3; exit 0;;
+	INFO/REQUIRENAME)	rpm -q --qf "[%{REQUIRENAME} %{REQUIREFLAGS:depflags} %{REQUIREVERSION}\n]" $1 >$3; exit 0;;
+	INFO/PROVIDES)		rpm -q --qf "[%{PROVIDES}\n]" $1 >$3; exit 0;;
+	INFO/SCRIPTS/PREIN)	rpm -q --qf "%{RPMTAG_PREIN}\n" $1 >$3; exit 0;;
+	INFO/SCRIPTS/POSTIN)	rpm -q --qf "%{RPMTAG_POSTIN}\n" $1 >$3; exit 0;;
+	INFO/SCRIPTS/PREUN)	rpm -q --qf "%{RPMTAG_PREUN}\n" $1 >$3; exit 0;;
+	INFO/SCRIPTS/POSTUN)	rpm -q --qf "%{RPMTAG_POSTUN}\n" $1 >$3; exit 0;;
+	INFO/SCRIPTS/VERIFYSCRIPT)	rpm -q --qf "%{VERIFYSCRIPT}\n" $1 >$3; exit 0;;
+	INFO/SCRIPTS/ALL)		rpm -q --scripts $1 > $3; exit 0;;
+	INFO/SUMMARY)		rpm -q --qf "%{SUMMARY}\n" $1 > $3; exit 0;;
+	INFO/OS)		rpm -q --qf "%{OS}\n" $1 > $3; exit 0;;
+	INFO/CHANGELOG)		rpm -q --qf "[* %{CHANGELOGTIME:date} %{CHANGELOGNAME}\n%{CHANGELOGTEXT}\n\n]\n" $1 > $3; exit 0;;
+	INFO/SIZE)		rpm -q --qf "%{SIZE} bytes\n" $1 > $3; exit 0;;
+	*)
+	    cp /$2 $3
+    esac
+}
+
+mcrpmfs_run ()
+{
+    case "$2" in
+	UNINSTALL) echo "Uninstalling $1"; rpm -e $1; exit 0;;
+    esac
+}
+
+# override any locale for dates
+LC_ALL=C
+export LC_ALL
+name=$2
+if [ ${name%%.trpm} = $name ]; then
+	name=`head -1 $name`
+fi
+#echo "TRPM: $@ ($name)" >> /tmp/tt
+#name=`echo $(basename $2 .trpm) | sed "s/^\(.*\)\.[^\.]*/\1/"`
+name=`basename $name .trpm`
+case "$1" in
+  list) mcrpmfs_list $name; exit 0;;
+  copyout) mcrpmfs_copyout $name $3 $4; exit 0;;
+  run) mcrpmfs_run $name $3; exit 1;;
+esac
+exit 1

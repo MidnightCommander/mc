@@ -29,7 +29,7 @@ VFSHDRS = vfs.h mcfs.h tcputil.h tar.h container.h ftpfs.h names.h \
 VFSOBJS = $(NONETFILES) @NETFILES@
 
 EXTFS_MISC = README extfs.ini
-EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini
+EXTFS_CONST = a rpm hp48 mailfs patchfs sfs.ini trpm rpms
 EXTFS_IN = deb.in lslR.in ucpio.in urar.in uzoo.in ftplist.in uar.in \
 	ulha.in uzip.in
 EXTFS_OUT = deb lslR ucpio urar uzoo ftplist uar ulha uzip
