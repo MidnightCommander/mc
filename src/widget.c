@@ -965,7 +965,7 @@ void history_put (char *input_name, Hist *h)
 	profile_clean_section (input_name, profile);
 
     /* dump histories into profile */
-    while (h){
+    for (i = 0; h; h = h->next){
 	if (h->text){
 
 	    /* probably aren't any null entries, but lets be sure */
@@ -975,7 +975,6 @@ void history_put (char *input_name, Hist *h)
 		WritePrivateProfileString (input_name, key_name, h->text, profile);
 	    }
 	}
-	h = h->next;
     }
     g_free (profile);
 #endif
@@ -1712,16 +1711,14 @@ input_event (Gpm_Event *event, WInput *in)
 
 	if (event->x >= in->field_len - HISTORY_BUTTON_WIDTH + 1 && should_show_history_button (in)) {
 	    do_show_hist (in);
-	    update_input (in, 1);
 	} else {
 	    in->point = strlen (in->buffer);
 	    if (event->x - in->first_shown - 1 < in->point)
 		in->point = event->x - in->first_shown - 1;
 	    if (in->point < 0)
 		in->point = 0;
-
-	    update_input (in, 1);
-	} 
+	}
+	update_input (in, 1);
     } 
 #endif
     return MOU_NORMAL; 

@@ -132,6 +132,7 @@ slang_intr (int signo)
     slinterrupt = 1;
 }
 
+#if 0
 static int
 interrupts_enabled (void)
 {
@@ -140,6 +141,7 @@ interrupts_enabled (void)
     sigaction (SIGINT, NULL, &current_act);
     return current_act.sa_handler == slang_intr;
 }
+#endif
 
 void
 enable_interrupt_key(void)
@@ -355,7 +357,7 @@ void
 init_pair (int index, char *foreground, char *background)
 {
     /* hack for transparent background for Eterm, rxvt or else */
-    if (!strcmp(background, "default"))
+    if (background && !strcmp (background, "default"))
        background = NULL;
     /* if foreground is default, I guess we should use normal fore-color. */
 

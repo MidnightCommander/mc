@@ -52,7 +52,7 @@
 static int debug_flag = 0;
 static int debug_error = 0;
 static WEdit *s_editwidget;
-static char *menu;
+static char *menu = NULL;
 
 /* Formats defined:
    %%  The % character
@@ -134,9 +134,9 @@ int check_format_var (const char *p, char **v)
 
 	if (!dots || dots == q+5){
 	    message (1,
-		     " Format error on file Extensions File ",
-		     !dots ? " The %%var macro does not have a default "
-		     :       " The %%var macros does not have a variable " );
+		     _(" Format error on file Extensions File "),
+		     _(!dots ? N_(" The %%var macro does not have a default ")
+		     :         N_(" The %%var macros does not have a variable ")));
 	    return 0;
 	}
 	
@@ -218,15 +218,17 @@ char *expand_format (char c, int quote)
         if (s_editwidget && s_editwidget->syntax_type)
 	        return g_strdup (s_editwidget->syntax_type);
         break;
-    case 'e': 
-        /* error file name */
-	return (*quote_func) (g_strconcat (home_dir, ERROR_FILE, NULL), 0);
-    case 'k': 
-        /* block file name */
-	return (*quote_func) (g_strconcat (home_dir, BLOCK_FILE, NULL), 0);
-    case 'm': 
-        /* menu file name */
-	return (*quote_func) (menu, 0);
+    case 'e': /* error file name */
+    case 'k': /* block file name */ {
+	char *file = g_strconcat (home_dir, (c == 'e') ? ERROR_FILE : BLOCK_FILE, NULL);
+	fname = (*quote_func) (file, 0);
+	g_free (file);
+	return fname;
+    }
+    case 'm': /* menu file name */
+	if (menu)
+	    return (*quote_func) (menu, 0);
+	break;
 
 	/* Fall through */
 
@@ -687,6 +689,7 @@ void user_menu_cmd (WEdit *edit_widget)
 	message (1, MSG_ERROR, _(" Can't open file %s \n %s "),
 		 menu, unix_error_string (errno));
 	g_free (menu);
+	menu = NULL;
 	return;
     }
     
@@ -762,16 +765,10 @@ void user_menu_cmd (WEdit *edit_widget)
 	    col++;
 	}
     }
+
     if (menu_lines == 0) {
-	g_free (data);
-	if (entries)
-	    g_free (entries);
-	/* FIXME: this message is not quite right */
-	message (1, MSG_ERROR, _(" Empty file %s "), menu);
-	g_free (menu);
-	easy_patterns = old_patterns;
-	return;
-    }
+	message (1, MSG_ERROR, _(" No appropriative entries found in %s "), menu);
+    } else {
 
     max_cols = min (max (max_cols, col), MAX_ENTRY_LEN);
  
@@ -792,9 +789,13 @@ void user_menu_cmd (WEdit *edit_widget)
     if (selected >= 0)
 	execute_menu_command (entries [selected]);
 
-    easy_patterns = old_patterns;
     do_refresh ();
+    }
+
+    easy_patterns = old_patterns;
     g_free (menu);
-    g_free (entries);
+    menu = NULL;
+    if (entries)
+	g_free (entries);
     g_free (data);
 }

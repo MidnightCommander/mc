@@ -1,3 +1,20 @@
+2000-05-25  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* slint.c (init_pair): segfault fixed when mcedit -b called
+
+	* user.c (check_format_var): error messages are localized
+
+	(expand_format, user_menu_cmd): memory leaking for %e and %k macro 
+	fixed; segfault fixed when %m macro is used outside user_menu_cmd ()
+
+	* ext.c (regex_command): memory leaking fixed when user extension 
+	file is absent
+
+	(exec_extension): error message for changed mc.ext file format
+	are localized -- does we really must be worry about mc 3.0 ?
+
+	* widget.c (history_put): counter is initialized again
+
 2000-05-11  Valery Kornienkov  <vlk@dimavb.st.simbirsk.su>
 
 	src/user.c: fix segfault when Shift-F4, Shift-F1, so when menu

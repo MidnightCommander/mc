@@ -354,9 +354,7 @@ exec_extension (const char *filename, const char *data, char **drops, int *move_
 char *regex_command_title = NULL;
 char *regex_command (char *filename, char *action, char **drops, int *move_dir)
 {
-    char *extension_file;
     char *p, *q, *r, c;
-    char *buffer;
     int  file_len = strlen (filename);
     int found = 0;
     char content_string [2048];
@@ -386,24 +384,28 @@ char *regex_command (char *filename, char *action, char **drops, int *move_dir)
     asked_file = 0;
 
     if (data == NULL) {
+	char *extension_file;
+	int mc_user_ext = 1;
         int home_error = 0;
 
-        buffer = concat_dir_and_file (home_dir, MC_USER_EXT);
-    	if (exist_file (buffer))
-	    extension_file = buffer;
-        else
+	extension_file = concat_dir_and_file (home_dir, MC_USER_EXT);
+	if (!exist_file (extension_file)) {
+	    g_free (extension_file);
 check_stock_mc_ext:
 	    extension_file = concat_dir_and_file (mc_home, MC_LIB_EXT);
-        if ((data = load_file (extension_file)) == NULL) {
-	    g_free (buffer);
-	    return 0;
+	    mc_user_ext = 0;
 	}
+	data = load_file (extension_file);
+	g_free (extension_file);
+	if (data == NULL)
+	    return 0;
+
 	if (!strstr (data, "default/")) {
 	    if (!strstr (data, "regex/") && !strstr (data, "shell/") &&
 	        !strstr (data, "type/")) {
 	        g_free (data);
 	        data = NULL;
-	        if (extension_file == buffer) {
+		if (mc_user_ext) {
 		    home_error = 1;
 		    goto check_stock_mc_ext;
 	        } else {
@@ -412,7 +414,7 @@ check_stock_mc_ext:
                     msg = g_strconcat (" ", mc_home, MC_LIB_EXT, _(" file error"), NULL);
                     msg2 = g_strconcat (_("Format of the "),
                                          mc_home,
-("mc.ext file has changed\n\
+_("mc.ext file has changed\n\
 with version 3.0. It seems that installation\n\
 failed. Please fetch a fresh new copy from the\n\
 Midnight Commander package or in case you don't\n\
@@ -420,7 +422,6 @@ have any, get it from ftp://ftp.nuclecu.unam.mx."), NULL);
 	            message (1, msg, msg2);
                     g_free (msg);
                     g_free (msg2);
-		    g_free (buffer);
 		    return 0;
 	        }
 	    }
@@ -438,7 +439,6 @@ file as an example of how to write it.\n\
             g_free (msg);
             g_free (msg2);
         }
-        g_free (buffer);
     }
     mc_stat (filename, &mystat);
 
