@@ -612,6 +612,7 @@ void unselect_cmd (void)
 	unselect_cmd_panel (cpanel);
 }
 
+#ifndef HAVE_GNOME
 /* Check if the file exists */
 /* If not copy the default */
 static int check_for_default(char *default_file, char *file)
@@ -633,7 +634,6 @@ static int check_for_default(char *default_file, char *file)
     return 0;
 }
 
-#ifndef HAVE_GNOME
 void ext_cmd (void)
 {
     char *buffer;
@@ -659,7 +659,6 @@ void ext_cmd (void)
    g_free (extdir);
    flush_extension_file ();
 }
-#endif /* !HAVE_GNOME */
 
 /* where  = 0 - do edit a file menu for mc */
 /* where  = 1 - do edit a file menu for cool edit */
@@ -712,15 +711,14 @@ void quick_chdir_cmd (void)
     if (!target)
 	return;
 
-#ifndef HAVE_GNOME
     if (get_current_type () == view_tree)
 	tree_chdir (the_tree, target);
     else
-#endif
         if (!do_cd (target, cd_exact))
 	    message (1, MSG_ERROR, _("Could not change directory") );
     g_free (target);
 }
+#endif /* !HAVE_GNOME */
 
 #ifdef USE_VFS
 void free_vfs_now (void)
@@ -878,6 +876,7 @@ void compare_dirs_cmd (void)
     }
 }
 
+#ifndef HAVE_GNOME
 void history_cmd (void)
 {
     Listbox *listbox;
@@ -916,14 +915,12 @@ void history_cmd (void)
     update_input (input_w (cmdline), 1);
 }
 
-#if !defined(HAVE_XVIEW) && !defined(HAVE_GNOME)
 void swap_cmd (void)
 {
     swap_panels ();
     touchwin (stdscr);
     repaint_screen ();
 }
-#endif
 
 void
 view_other_cmd (void)
@@ -1018,6 +1015,7 @@ view_other_cmd (void)
 	    repaint_screen ();
     }
 }
+#endif /* !HAVE_GNOME */
 
 #ifndef OS2_NT
 static void

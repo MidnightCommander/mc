@@ -1293,7 +1293,6 @@ static menu_entry RightMenu [] = {
     { ' ', N_("&Rescan         C-r"),    'R', reread_cmd }
 };
 
-#ifndef HAVE_GNOME
 static menu_entry FileMenu [] = {
     { ' ', N_("&User menu          F2"), 'U', user_file_menu_cmd },
     { ' ', N_("&View               F3"), 'V', view_cmd },
@@ -1320,7 +1319,6 @@ static menu_entry FileMenu [] = {
     { ' ', "", ' ', 0 },
     { ' ', N_("e&Xit              F10"), 'X', (callfn) quit_cmd }
 };
-#endif
 
 void external_panelize (void);
 static menu_entry CmdMenu [] = {
@@ -1328,9 +1326,7 @@ static menu_entry CmdMenu [] = {
      * as a panel still has some problems, I have not yet finished
      * the WTree widget port, sorry.
      */
-#ifndef HAVE_GNOME
     { ' ', N_("&Directory tree"),               'D', tree_box },
-#endif
     { ' ', N_("&Find file            M-?"),     'F', find_cmd },
     { ' ', N_("s&Wap panels          C-u"),     'W', swap_cmd },
     { ' ', N_("switch &Panels on/off C-o"),     'P', view_other_cmd },
@@ -1423,9 +1419,7 @@ done_menu (void)
 #endif
     }
 }
-#endif
     
-#ifndef HAVE_GNOME
 static void
 menu_last_selected_cmd (void)
 {

@@ -1,5 +1,8 @@
 2001-05-14  Pavel Roskin  <proski@gnu.org>
 
+	* main.c [HAVE_GNOME]: Disable more code.
+	* cmd.c [HAVE_GNOME]: Likewise.
+
 	* background.h: Omit definitions that require FileOpContext if
 	fileopctx.h has not been included yet.
 
