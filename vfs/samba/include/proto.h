@@ -20,29 +20,6 @@ void setup_logging( char *pname, BOOL interactive );
 void dbgflush( void );
 BOOL dbghdr( int level, char *file, char *func, int line );
 
-/* The following definitions come from lib/doscalls.c  */
-
-int dos_unlink(char *fname);
-int dos_open(char *fname,int flags,mode_t mode);
-DIR *dos_opendir(char *dname);
-char *dos_readdirname(DIR *p);
-int dos_chown(char *fname, uid_t uid, gid_t gid);
-int dos_stat(char *fname,SMB_STRUCT_STAT *sbuf);
-int dos_lstat(char *fname,SMB_STRUCT_STAT *sbuf);
-int dos_mkdir(char *dname,mode_t mode);
-int dos_rmdir(char *dname);
-int dos_chdir(char *dname);
-int dos_utime(char *fname,struct utimbuf *times);
-int dos_rename(char *from, char *to);
-int dos_chmod(char *fname,mode_t mode);
-char *dos_getwd(char *unix_path);
-BOOL dos_file_exist(char *fname,SMB_STRUCT_STAT *sbuf);
-BOOL dos_directory_exist(char *dname,SMB_STRUCT_STAT *st);
-time_t dos_file_modtime(char *fname);
-SMB_OFF_T dos_file_size(char *file_name);
-int dos_ChDir(char *path);
-char *dos_GetWd(char *path);
-
 /* The following definitions come from lib/genrand.c  */
 
 void generate_random_buffer( unsigned char *out, int len, BOOL re_seed);

@@ -69,7 +69,6 @@ SAMBAFILES=			\
 	lib/util_sock.o 	\
 	lib/genrand.o 	\
 	lib/md4.o 	\
-	lib/doscalls.o 	\
 	lib/util_unistr.o 	\
 	lib/interface.o 	\
 	lib/netmask.o 	\

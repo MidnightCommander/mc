@@ -123,7 +123,6 @@ SAMBA_DIST =			\
 	lib/charcnv.c		\
 	lib/charset.c		\
 	lib/debug.c		\
-	lib/doscalls.c		\
 	lib/genrand.c		\
 	lib/interface.c		\
 	lib/kanji.c		\

@@ -1,3 +1,7 @@
+2003-10-15  Pavel Roskin  <proski@gnu.org>
+
+	* samba/lib/doscalls.c: Remove.  Remove all references to it.
+
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Remove all references to seekdir and telldir.  Adjust
