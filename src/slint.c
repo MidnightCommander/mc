@@ -351,6 +351,10 @@ int max_index = 0;
 void
 init_pair (int index, char *foreground, char *background)
 {
+    /* hack for transparent background for Eterm, rxvt or else */
+    if (!strcmp(background, "default"))
+       background = NULL;
+    /* if foreground is default, I guess we should use normal fore-color. */
 
     SLtt_set_color (index, "", foreground, background);
     if (index > max_index)

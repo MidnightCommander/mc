@@ -126,7 +126,8 @@ struct color_table_s color_table [] = {
     { "cyan",          COLOR_CYAN    },
     { "brightcyan",    COLOR_CYAN    | A_BOLD },
     { "lightgray",     COLOR_WHITE },
-    { "white",         COLOR_WHITE   | A_BOLD }
+    { "white",         COLOR_WHITE   | A_BOLD },
+    { "default",       0 } /* hack for transparent background */
 };
 
 #ifdef HAVE_GNOME

@@ -1,3 +1,8 @@
+1998-10-30  Sung-Hyun Nam  <namsh@lgic.co.kr>
+
+	* color.c, slint.c: support transparent background if user use
+	'default' keyword for background color.
+
 Mon Oct 26 00:31:53 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* configure.in, Make.common.in: Split CPPFLAGS into CPPFLAGS and 
