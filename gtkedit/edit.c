@@ -2570,10 +2570,11 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	    time_t t;
 #ifdef HAVE_STRFTIME
 	    char s[1024];
+	    static const char time_format[] = "%c";
 #endif
 	    time (&t);
 #ifdef HAVE_STRFTIME
-	    strftime (s, sizeof (s), "%c", localtime (&t));
+	    strftime (s, sizeof (s), time_format, localtime (&t));
 	    edit_printf (edit, s);
 #else
 	    edit_printf (edit, ctime (&t));
