@@ -324,7 +324,7 @@ msgstr "Власник"
 
 #: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
-msgstr ""
+msgstr "Права"
 
 #: gnome/gcustom-layout.c:46
 msgid "Size (short)"
@@ -455,7 +455,7 @@ msgstr "Пересканувати пристро╖"
 
 #: gnome/gdesktop.c:2668 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
-msgstr ""
+msgstr "В╕дновити типов╕ п╕ктограми"
 
 #: gnome/gdesktop.c:2670
 msgid "Configure _Background Image"
@@ -477,11 +477,11 @@ msgstr "При╓днувати п╕ктограми до с╕тки"
 
 #: gnome/gdesktop-prefs.c:277
 msgid "Use shaped icons"
-msgstr ""
+msgstr "Використовувати вир╕зан╕ п╕ктограми"
 
 #: gnome/gdesktop-prefs.c:281
 msgid "Use shaped text"
-msgstr ""
+msgstr "Використовувати вир╕заний текст"
 
 #: gnome/gdesktop-prefs.c:335
 msgid "Desktop"
@@ -871,7 +871,7 @@ msgstr "Установки п╕дтверджень "
 
 #: gnome/glayout.c:422
 msgid "_Filter View..."
-msgstr ""
+msgstr "Ф╕льтрований перегляд..."
 
 #: gnome/glayout.c:422
 msgid "Global option settings"
@@ -1268,7 +1268,7 @@ msgstr "Демонтувати пристр╕й"
 
 #: gnome/gpopup2.c:199
 msgid "Eject device"
-msgstr ""
+msgstr "Витягти пристр╕й"
 
 #: gnome/gpopup2.c:202
 msgid "Open with..."
@@ -1345,7 +1345,7 @@ msgstr "Показати поступ виконання операц╕й"
 
 #: gnome/gprefs.c:138
 msgid "VFS Timeout:"
-msgstr ""
+msgstr "Тайм-аут ВФС:"
 
 #: gnome/gprefs.c:139 gnome/gprefs.c:164
 msgid "Seconds"
@@ -1369,7 +1369,7 @@ msgstr "Порахувати загальний розм╕р перед коп╕юванням"
 
 #: gnome/gprefs.c:163
 msgid "FTP directory cache timeout :"
-msgstr ""
+msgstr "Тайм-аут кеша каталогу FTP:"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
@@ -1389,7 +1389,7 @@ msgstr "ВФС"
 
 #: gnome/gprefs.c:188
 msgid "Caching"
-msgstr ""
+msgstr "Кешування"
 
 #: gnome/gprefs.c:478
 msgid "Preferences"
@@ -1417,15 +1417,15 @@ msgstr ""
 
 #: gnome/gprop.c:248
 msgid "File mode (permissions)"
-msgstr ""
+msgstr "Режим файлу (права)"
 
 #: gnome/gprop.c:321 gnome/gprop.c:347
 msgid "<Unknown>"
-msgstr ""
+msgstr "<Нев╕домий>"
 
 #: gnome/gprop.c:494
 msgid "General"
-msgstr ""
+msgstr "Основний"
 
 #: gnome/gprop.c:505
 msgid "Title"
@@ -1573,32 +1573,32 @@ msgstr "Мон╕торинг зб╕льшення файлу"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
-msgstr ""
+msgstr "Пошук за регулярним виразом"
 
 #: gnome/gview.c:317
 msgid "Regular expression search"
-msgstr ""
+msgstr "Пошук за регулярним виразом"
 
 #: gnome/gview.c:326
 msgid "_Wrap"
-msgstr ""
+msgstr "Переноси"
 
 #: gnome/gview.c:327
 msgid "Wrap the text"
-msgstr ""
+msgstr "З переносами тексту"
 
 #. Can not use this one yet, as it destroys the viewer, need to fix that
 #: gnome/gview.c:330
 msgid "_Parsed view"
-msgstr ""
+msgstr "Анал╕зований"
 
 #: gnome/gview.c:333
 msgid "_Formatted"
-msgstr ""
+msgstr "Форматований"
 
 #: gnome/gview.c:335
 msgid "_Hex"
-msgstr ""
+msgstr "Ш╕стнадцятковий"
 
 #: gnome/gview.c:341
 msgid "_Search"
@@ -1630,15 +1630,15 @@ msgstr "вих╕д"
 
 #: gnome/gwidget.c:107
 msgid "abort"
-msgstr ""
+msgstr "припинити"
 
 #: gnome/gmc-client.c:26
 msgid "Could not contact the file manager\n"
-msgstr ""
+msgstr "Не вдалось з'╓днатись з менеджером файл╕в\n"
 
 #: gnome/gmc-client.c:45
 msgid "Could not get the desktop\n"
-msgstr ""
+msgstr "Не вдалось отримати робочий ст╕л\n"
 
 #: gnome/gmc-client.c:142
 #, c-format
@@ -1647,7 +1647,7 @@ msgstr ""
 
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
-msgstr ""
+msgstr "Створити в╕кно, що показу╓ вказаний каталог"
 
 #: gnome/gmc-client.c:206 gnome/gmc-client.c:208
 msgid "DIRECTORY"
@@ -2236,7 +2236,7 @@ msgstr " Обробка блоку "
 #. Not essential to translate
 #: gtkedit/editcmd.c:2903
 msgid " Error trying to stat file "
-msgstr ""
+msgstr " Помилка на спроб╕ отримання атрибут╕в файлу "
 
 #: gtkedit/editcmd.c:2974
 msgid " Mail "
@@ -2419,7 +2419,7 @@ msgstr "В╕дформатувати &параграф      M-p"
 
 #: gtkedit/editmenu.c:219
 msgid "'ispell' s&Pell check    C-p"
-msgstr ""
+msgstr "Перев╕рка орфограф╕╖  \"ispell\" C-p"
 
 #: gtkedit/editmenu.c:220 gtkedit/editmenu.c:243
 msgid "sor&T...                 M-t"
@@ -2435,11 +2435,11 @@ msgstr "&Вислати...                      "
 
 #: gtkedit/editmenu.c:236
 msgid "&Execute macro... C-x e, KEY"
-msgstr ""
+msgstr "Виконати макрос...   C-x e, КЛАВ╤ША"
 
 #: gtkedit/editmenu.c:242
 msgid "'ispell' s&Pell check    M-$"
-msgstr ""
+msgstr "Перев╕рка орфограф╕╖ \"ispell\" C-p"
 
 #: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260
 msgid "&General...  "
@@ -2756,11 +2756,11 @@ msgstr ""
 
 #: gtkedit/gtkedit.c:1246
 msgid "Interactive help browser"
-msgstr ""
+msgstr "╤нтерактивна дов╕дкова система"
 
 #: gtkedit/gtkedit.c:1247
 msgid "Save to current file name"
-msgstr ""
+msgstr "Зберегти з поточною назвою файлу"
 
 #: gtkedit/gtkedit.c:1248
 msgid "Toggle In/Off invisible marker to highlight text"
@@ -2879,11 +2879,11 @@ msgstr ""
 
 #: gtkedit/syntax.c:1519 gtkedit/syntax.c:1526
 msgid " Load syntax file "
-msgstr ""
+msgstr " Завантажити файл синтаксису "
 
 #: gtkedit/syntax.c:1519
 msgid " File access error "
-msgstr ""
+msgstr " Помилка доступу до файлу "
 
 #: gtkedit/syntax.c:1525
 #, c-format
@@ -2904,15 +2904,15 @@ msgstr ""
 
 #: src/achown.c:362 src/achown.c:369
 msgid "owner"
-msgstr ""
+msgstr "власник"
 
 #: src/achown.c:364 src/achown.c:371
 msgid "group"
-msgstr ""
+msgstr "група"
 
 #: src/achown.c:366
 msgid "other"
-msgstr ""
+msgstr "╕нш╕"
 
 #: src/achown.c:374
 msgid "On"
@@ -2925,7 +2925,7 @@ msgstr ""
 #: src/achown.c:383
 #, c-format
 msgid "%6d of %d"
-msgstr ""
+msgstr "%6d з %d"
 
 #: src/achown.c:391
 msgid " Chown advanced command "
@@ -2950,7 +2950,7 @@ msgstr ""
 #: src/achown.c:666 src/achown.c:670 src/chmod.c:320 src/chmod.c:324
 #: src/chown.c:260 src/chown.c:264 src/panelize.c:300 src/user.c:621
 msgid " Oops... "
-msgstr ""
+msgstr " Ой... "
 
 #: src/achown.c:667
 msgid " I can't run the Advanced Chown command on an extfs "
@@ -2974,7 +2974,7 @@ msgstr ""
 
 #: src/background.c:296
 msgid " Unknown error in child "
-msgstr ""
+msgstr " Нев╕дома помилка в нащадку "
 
 #: src/background.c:311
 msgid " Background protocol error "
@@ -6327,7 +6327,7 @@ msgstr "fish: Розрив з'╓днання з %s"
 
 #: vfs/fish.c:218
 msgid "fish: Waiting for initial line..."
-msgstr ""
+msgstr "fish: Оч╕кування початкового рядка..."
 
 #: vfs/fish.c:228
 msgid "Sorry, we can not do password authenticated connections for now."
@@ -6343,20 +6343,20 @@ msgstr "fish: В╕дсилання паролю..."
 
 #: vfs/fish.c:248
 msgid "fish: Sending initial line..."
-msgstr ""
+msgstr "fish: В╕дсилання початкового рядка..."
 
 #: vfs/fish.c:252
 msgid "fish: Handshaking version..."
-msgstr ""
+msgstr "fish: Верс╕я п╕дтримання зв'язку..."
 
 #: vfs/fish.c:256
 msgid "fish: Setting up current directory..."
-msgstr ""
+msgstr "fish: Встановлення поточного каталогу..."
 
 #: vfs/fish.c:258
 #, c-format
 msgid "fish: Connected, home %s."
-msgstr ""
+msgstr "fish: З'╓днано, персональний каталог %s."
 
 #: vfs/fish.c:347
 #, c-format
@@ -6365,13 +6365,13 @@ msgstr "fish: Зчитування каталогу %s..."
 
 #: vfs/fish.c:451
 msgid "fish: failed"
-msgstr ""
+msgstr "fish: помилка"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:471
 #, c-format
 msgid "fish: store %s: sending command..."
-msgstr ""
+msgstr "fish: запис %s: в╕дсила╓ться команда..."
 
 #: vfs/fish.c:496
 msgid "fish: Local read failed, sending zeros"
@@ -6384,7 +6384,7 @@ msgstr "fish: збереження %s %d (%d)"
 
 #: vfs/fish.c:509
 msgid "zeros"
-msgstr ""
+msgstr "нул╕"
 
 #: vfs/fish.c:556
 msgid "Aborting transfer..."
@@ -6421,7 +6421,7 @@ msgstr "ftpfs: в╕дсилання паролю користува прокс╕"
 
 #: vfs/ftpfs.c:443
 msgid "ftpfs: proxy authentication succeeded"
-msgstr "ftpfs: аутенф╕кац╕я на прокс╕ пройшла усп╕шно"
+msgstr "ftpfs: авторизац╕я на прокс╕ пройшла усп╕шно"
 
 #: vfs/ftpfs.c:447
 #, c-format
@@ -6521,7 +6521,7 @@ msgstr ""
 
 #: vfs/ftpfs.c:1286
 msgid "ftpfs: failed"
-msgstr ""
+msgstr "ftpfs: помилка"
 
 #: vfs/ftpfs.c:1296
 msgid "ftpfs: failed; nowhere to fallback to"
@@ -6563,7 +6563,7 @@ msgstr " Н╕ "
 
 #: vfs/mcfs.c:178
 msgid " The remote server is running on strange port. Giving up.\n"
-msgstr ""
+msgstr " В╕ддалений сервер запущено на дивному порту. В╕дмова.\n"
 
 #: vfs/mcfs.c:190
 msgid " MCFS Password required "
@@ -6576,12 +6576,12 @@ msgstr " Нев╕рний пароль "
 #: vfs/mcfs.c:235
 #, c-format
 msgid " Can't locate hostname: %s "
-msgstr ""
+msgstr " Неможливо знайти назву машини: %s "
 
 #: vfs/mcfs.c:253
 #, c-format
 msgid " Can't create socket: %s "
-msgstr " Немодливо створити сокет: %s "
+msgstr " Неможливо створити сокет: %s "
 
 #: vfs/mcfs.c:259
 #, c-format
@@ -6595,7 +6595,7 @@ msgstr " Надто багато в╕дкритих з'╓днань "
 #. This is place of next pointer
 #: vfs/mcfs.c:1127
 msgid "Midnight Commander's private remote filesystem"
-msgstr ""
+msgstr "Власна файлова система Midnight Commander"
 
 #: vfs/smbfs.c:116
 msgid "Domain:"
@@ -6625,7 +6625,7 @@ msgstr ""
 
 #: vfs/smbfs.c:1243
 msgid " Authentication failed "
-msgstr ""
+msgstr " Зб╕й авторизац╕╖ "
 
 #: vfs/smbfs.c:1738
 #, c-format
@@ -6658,7 +6658,7 @@ msgstr ""
 
 #: vfs/tar.c:284
 msgid "Unexpected EOF on archive file"
-msgstr ""
+msgstr "Неоч╕куване завершення арх╕вного файлу"
 
 #: vfs/tar.c:339 vfs/tar.c:346
 msgid "Inconsistent tar archive"
@@ -6677,7 +6677,7 @@ msgstr ""
 
 #: vfs/vfs.c:1152
 msgid "Changes to file lost"
-msgstr ""
+msgstr "Зм╕ни до файлу втрачено"
 
 #: vfs/vfs.c:1795
 msgid "Could not parse:"
@@ -6685,11 +6685,11 @@ msgstr "Не вдалось проанал╕зувати:"
 
 #: vfs/vfs.c:1797
 msgid "More parsing errors will be ignored."
-msgstr ""
+msgstr "╤нш╕ помилки анал╕зу буде про╕гноровано."
 
 #: vfs/vfs.c:1797
 msgid "(sorry)"
-msgstr ""
+msgstr "(вибачте)"
 
 #: vfs/vfs.c:1808
 msgid "Internal error:"
@@ -6706,44 +6706,44 @@ msgstr "%s: %s: %s %ld байт перенесено"
 
 #: vfs/undelfs.c:81
 msgid " undelfs: error "
-msgstr ""
+msgstr " undelfs: помилка "
 
 #: vfs/undelfs.c:184
 msgid " not enough memory "
-msgstr ""
+msgstr " недостатньо пам'ят╕ "
 
 #: vfs/undelfs.c:189
 msgid " while allocating block buffer "
-msgstr ""
+msgstr " на отриман╕ блока буфер╕в "
 
 #: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
-msgstr ""
+msgstr " open_inode_scan: %d "
 
 #: vfs/undelfs.c:197
 #, c-format
 msgid " while starting inode scan %d "
-msgstr ""
+msgstr " на початку сканування i-вузла %d "
 
 #: vfs/undelfs.c:204
 #, c-format
 msgid "undelfs: loading deleted files information %d inodes"
-msgstr ""
+msgstr "undelfs: завантаження ╕нформац╕╖ про видален╕ файли %d i-вузл╕в"
 
 #: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr ""
+msgstr " на виклику ext2_block_iterate %d "
 
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
-msgstr ""
+msgstr " невистачило пам'ят╕ при перев╕дкритт╕ масиву "
 
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
-msgstr ""
+msgstr " на скануванн╕ i-вузла %d "
 
 #: vfs/undelfs.c:270
 msgid " Ext2lib error "
@@ -6756,7 +6756,7 @@ msgstr " Не вдалось в╕дкрити файл %s "
 
 #: vfs/undelfs.c:300
 msgid "undelfs: reading inode bitmap..."
-msgstr ""
+msgstr "undelfs: зчитування б╕тово╖ мапи i-вузл╕в..."
 
 #: vfs/undelfs.c:303
 #, c-format
@@ -6764,10 +6764,12 @@ msgid ""
 " Could not load inode bitmap from: \n"
 " %s \n"
 msgstr ""
+" Не вдалось завантажити б╕тову мапу i-вузл╕в з: \n"
+" %s \n"
 
 #: vfs/undelfs.c:306
 msgid "undelfs: reading block bitmap..."
-msgstr ""
+msgstr "undelfs: зчитування блока б╕тово╖ мапи..."
 
 #: vfs/undelfs.c:309
 #, c-format
@@ -6775,26 +6777,28 @@ msgid ""
 " Could not load block bitmap from: \n"
 " %s \n"
 msgstr ""
+" Не вдалось завантажити блок б╕тово╖ мапи з: \n"
+" %s \n"
 
 #: vfs/undelfs.c:315
 msgid "undelfs: done."
-msgstr ""
+msgstr "undelfs: завершено."
 
 #: vfs/undelfs.c:318
 msgid "undelfs: failure"
-msgstr ""
+msgstr "undelfs: зб╕й"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
-msgstr ""
+msgstr " vfs_info не файлова система! "
 
 #: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
-msgstr ""
+msgstr " Спочатку потр╕бно зм╕нити каталог щоб витягти файли "
 
 #: vfs/undelfs.c:521
 msgid " while iterating over blocks "
-msgstr ""
+msgstr " на проходжен╕ блок╕в "
 
 #: vfs/undelfs.c:626
 #, c-format
@@ -6804,4 +6808,4 @@ msgstr " Не вдалось в╕дкрити файл: %s "
 #. This is place of next pointer
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
-msgstr ""
+msgstr "В╕дновлення файлово╖ системи для ext2"
