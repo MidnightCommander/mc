@@ -1,3 +1,7 @@
+2000-08-23  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.in: don't do anything with *.inc - they are gone
+
 2000-08-22  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: don't use info.o, chmod.o, chown.o, achown.o,

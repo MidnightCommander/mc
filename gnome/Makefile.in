@@ -298,11 +298,11 @@ links:
 	for I in $(LOBJS); do $(RMF) $$I; $(LN_S) ../src/$$I $$I >/dev/null 2>&1; done; true
 
 sourcelinks:
-	-cd $(gnomedir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; $(LN_S) ../src/*.inc .; true
+	-cd $(gnomedir); $(LN_S) ../src/*.[ch] . >/dev/null 2>&1; true
 
 cleansourcelinks:
 	-if test -f $(gnomedir)/regex.c; then \
-	    cd $(gnomedir); find . \( -lname '*.[ch]' -o -lname '*.inc' \) | xargs $(RM); \
+	    cd $(gnomedir); find . -lname '*.[ch]' | xargs $(RM); \
 	fi
 
 check:
