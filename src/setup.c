@@ -415,7 +415,7 @@ void panel_load_setup (WPanel *panel, char *section)
 	}
 #ifndef PORT_HAS_ICON_VIEW
     if (panel->list_type == list_icons)
-        panel->list_type == list_full;
+        panel->list_type = list_full;
 #endif
     /* User formats */
     if (panel->user_format){
