@@ -115,6 +115,8 @@ int
 beep (void)
 {
 	gdk_beep ();
+
+	return 0;
 }
 
 int

@@ -633,7 +633,7 @@ panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 				total_len += (filelen + cwdlen + panel->dir.list [i].fnamelen + seplen);
 
 		total_len++;
-		data = copy = xmalloc (total_len, "build_selected_file_list");
+		data = copy = xmalloc (total_len+1, "build_selected_file_list");
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
 				strcpy (copy, "file:");

@@ -1,5 +1,10 @@
 1998-12-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gscreen.c (panel_build_selected_file_list): Provide space for
+	the terminating NULL.
+
+	* gmain.c (beep): Return a value.
+
 	* gdnd.c (get_action): Typo fix.
 
 1998-12-04  Miguel de Icaza  <miguel@nuclecu.unam.mx>
