@@ -10,7 +10,7 @@
 
 Version 
 
-This is the main help screen for the GNU Midnight Commander. 
+This is the main help screen for the GNU Midnight Commander.
 
 To learn more on how to use the interactive help facility
 just tap enterHow to use help. You may like to go directly to the
@@ -373,7 +373,7 @@ file to most effectively convey the exclusion of warranty;
 and each file should have at least the "copyright" line
 and a pointer to where the full notice is found.
 
-<one line to give the program's name and a brief idea of 
+<one line to give the program's name and a brief idea of
 what it does.>
 Copyright (C) 19yy  <name of author>
 
@@ -465,15 +465,15 @@ The full key list of the help viewer:
 General movement keysGeneral Movement Keys are accepted.
 
 tab           Move to the next item.
-M-tab         Move to the previous item. 
+M-tab         Move to the previous item.
 down          Move to the next item or scroll a line down.
 up            Move to the previous item or scroll a line up.
-right, enter  Follow the current link.    
+right, enter  Follow the current link.
 left, l       Go back in the history of visited nodes.
 F1            Show the help for the help viewer.
 n             Go to the next node.
-p             Go to the previous node.    
-c             Go to the Contents node.    
+p             Go to the previous node.
+c             Go to the Contents node.
 F10, esc      Exit the help viewer.
 
 Local variables:
