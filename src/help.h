@@ -28,5 +28,4 @@
 #define STRING_NODE_END		"\04"
 
 void interactive_display (char *filename, char *node);
-char *help_follow_link (char *start, char *selected_item);
 #endif	/* __HELP_H */

@@ -251,7 +251,7 @@ static void move_to_bottom (int dummy)
     move_backward (help_lines - 1);
 }
 
-char *help_follow_link (char *start, char *selected_item)
+static char *help_follow_link (char *start, char *selected_item)
 {
     char link_name [MAXLINKNAME];
     char *p;
