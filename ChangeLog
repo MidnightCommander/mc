@@ -1,3 +1,8 @@
+2001-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Treat Makefile.PL as a Perl program, not as a
+	Makefile.  Don't allow any suffixes after "Makefile".
+
 2001-10-12  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Add support for *.xcf files (native GIMP

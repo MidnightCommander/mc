@@ -362,12 +362,16 @@ type/^(M|m)ail
 shell/core
 
 # Makefile
-regex/[Mm]akefile
+regex/[Mm]akefile$
 	Open=make -f %f %{Enter parameters}
 
 # Imakefile
 shell/Imakefile
 	Open=xmkmf -a
+
+# Makefile.PL (MakeMaker)
+regex/^Makefile.(PL|pl)$
+	Open=%var{PERL:perl} %f
 
 # Executables
 type/\ executable
