@@ -524,14 +524,15 @@ smbfs_loaddir_helper (file_info * finfo, const char *mask, void *entry)
 }
 
 /* takes "/foo/bar/file" and gives malloced "\\foo\\bar\\file" */
-static int
-smbfs_convert_path(char **remote_file, gboolean trailing_asterik)
+static char *
+smbfs_convert_path (const char *remote_file, gboolean trailing_asterik)
 {
-	char *p, *my_remote;
+    const char *p, *my_remote;
+    char *result;
 
-	my_remote = *remote_file;
+    my_remote = remote_file;
     if (strncmp (my_remote, URL_HEADER, HEADER_LEN) == 0) {	/* if passed directly */
-		my_remote += 6;
+		my_remote += HEADER_LEN;
 		if (*my_remote == '/')		/* from server browsing */
 			my_remote++;
 		p = strchr(my_remote, '/');
@@ -545,11 +546,10 @@ smbfs_convert_path(char **remote_file, gboolean trailing_asterik)
     if (p)
         my_remote = p;   /* strip off share/service name */
     /* create remote filename as understood by smb clientgen */
-    p = *remote_file = g_strconcat (my_remote, trailing_asterik ? "/*" : "", 0);
-    unix_to_dos (*remote_file, 1);
-    while ((p = strchr(p, '/')))
-        *p = '\\';
-	return 0;
+    result = g_strconcat (my_remote, trailing_asterik ? "/*" : "", 0);
+    unix_to_dos (result, /* inplace = */ 1); /* code page conversion */
+    str_replace(result, '/', '\\');
+    return result;
 }
 
 static void
@@ -689,17 +689,18 @@ smbfs_loaddir (opendir_info *smbfs_info)
 {
     uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
     int servlen = strlen (smbfs_info->conn->service);
-    char *my_dirname = smbfs_info->dirname;
+    const char *info_dirname = smbfs_info->dirname;
+    char *my_dirname;
 
-    DEBUG (3, ("smbfs_loaddir: dirname:%s\n", my_dirname));
+    DEBUG (3, ("smbfs_loaddir: dirname:%s\n", info_dirname));
     first_direntry = TRUE;
 
     if (current_info) {
 	DEBUG (3,
-	       ("smbfs_loaddir: new:'%s', cached:'%s'\n", my_dirname,
+	       ("smbfs_loaddir: new:'%s', cached:'%s'\n", info_dirname,
 		current_info->dirname));
 	/* if new desired dir is longer than cached in current_info */
-	if (smbfs_fs (my_dirname) > smbfs_fs (current_info->dirname)) {
+	if (smbfs_fs (info_dirname) > smbfs_fs (current_info->dirname)) {
 	    DEBUG (3, ("saving to previous_info\n"));
 	    previous_info = current_info;
 	}
@@ -707,7 +708,7 @@ smbfs_loaddir (opendir_info *smbfs_info)
 
     current_info = smbfs_info;
 
-    if (strcmp (my_dirname, "/") == 0) {
+    if (strcmp (info_dirname, "/") == 0) {
 	if (!strcmp (smbfs_info->path, URL_HEADER)) {
 	    DEBUG (6, ("smbfs_loaddir: browsing %s\n", IPC));
 	    /* browse for servers */
@@ -730,14 +731,13 @@ smbfs_loaddir (opendir_info *smbfs_info)
     }
 
     /* do regular directory listing */
-    if (strncmp (smbfs_info->conn->service, my_dirname + 1, servlen) == 0) {
+    if (strncmp (smbfs_info->conn->service, info_dirname + 1, servlen) == 0) {
 	/* strip share name from dir */
-	char *p = my_dirname = g_strdup (my_dirname + servlen);
-	*p = '/';
-	smbfs_convert_path (&my_dirname, TRUE);
-	g_free (p);
+	my_dirname = g_strdup (info_dirname + servlen);
+	*my_dirname = '/';
+	my_dirname = free_after(smbfs_convert_path (my_dirname, TRUE), my_dirname);
     } else
-	smbfs_convert_path (&my_dirname, TRUE);
+	my_dirname = smbfs_convert_path (info_dirname, TRUE);
 
     DEBUG (6, ("smbfs_loaddir: service: %s\n", smbfs_info->conn->service));
     DEBUG (6,
@@ -1306,11 +1306,11 @@ static int
 smbfs_get_remote_stat (smbfs_connection * sc, const char *path, struct stat *buf)
 {
     uint16 attribute = aDIR | aSYSTEM | aHIDDEN;
-    char *mypath = g_strdup(path);
+    char *mypath;
 
-    DEBUG (3, ("smbfs_get_remote_stat(): mypath:%s\n", mypath));
+    DEBUG (3, ("smbfs_get_remote_stat(): mypath:%s\n", path));
 
-    smbfs_convert_path (&mypath, FALSE);
+    mypath = smbfs_convert_path (path, FALSE);
 
 #if 0	/* single_entry is never free()d now.  And only my_stat is used */
     single_entry = g_new (dir_entry, 1);
@@ -1628,13 +1628,13 @@ smbfs_mkdir (struct vfs_class * me, const char *path, mode_t mode)
 {
     smbfs_connection *sc;
     char *remote_file;
-    char *cpath = g_strdup(path);
+    char *cpath;
 
     DEBUG (3, ("smbfs_mkdir(path:%s, mode:%d)\n", path, (int) mode));
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
     g_free (remote_file);
-    smbfs_convert_path (&cpath, FALSE);
+    cpath = smbfs_convert_path (path, FALSE);
 
     if (!cli_mkdir (sc->cli, cpath)) {
 	my_errno = cli_error (sc->cli, NULL, &err, NULL);
@@ -1652,13 +1652,13 @@ smbfs_rmdir (struct vfs_class *me, const char *path)
 {
 	smbfs_connection *sc;
 	char *remote_file;
-	char *cpath = g_strdup(path);
+	char *cpath;
 
 	DEBUG(3, ("smbfs_rmdir(path:%s)\n", path));
 	if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 		return -1;
 	g_free (remote_file);
-	smbfs_convert_path(&cpath, FALSE);
+	cpath = smbfs_convert_path (path, FALSE);
 
 	if (!cli_rmdir(sc->cli, cpath)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
@@ -1783,7 +1783,7 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 static void *
 smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
 {
-    char *remote_file, *p;
+    char *remote_file;
     void *ret;
     smbfs_connection	*sc;
     smbfs_handle	*remote_handle;
@@ -1793,9 +1793,7 @@ smbfs_open (struct vfs_class *me, const char *file, int flags, int mode)
     if (!(remote_file = smbfs_get_path (&sc, file)))
 	return 0;
 
-    p = remote_file;
-    smbfs_convert_path (&remote_file, FALSE);
-    g_free (p);
+    remote_file = free_after(smbfs_convert_path (remote_file, FALSE), remote_file);
 
     remote_handle		= g_new (smbfs_handle, 2);
     remote_handle->cli		= sc->cli;
@@ -1814,14 +1812,12 @@ static int
 smbfs_unlink (struct vfs_class *me, const char *path)
 {
     smbfs_connection *sc;
-    char *remote_file, *p;
+    char *remote_file;
 
     if ((remote_file = smbfs_get_path (&sc, path)) == 0)
 	return -1;
 
-    p = remote_file;
-    smbfs_convert_path(&remote_file, FALSE);
-    g_free (p);
+    remote_file = free_after(smbfs_convert_path (remote_file, FALSE), remote_file);
 
     if (!cli_unlink(sc->cli, remote_file)) {
 	message (1, MSG_ERROR, _(" %s removing remote file %s "), 
@@ -1838,7 +1834,6 @@ smbfs_rename (struct vfs_class *me, const char *a, const char *b)
 {
     smbfs_connection *sc;
     char *ra, *rb;
-    char *p;
     int retval;
 
     if ((ra = smbfs_get_path (&sc, a)) == 0)
@@ -1849,12 +1844,8 @@ smbfs_rename (struct vfs_class *me, const char *a, const char *b)
 	return -1;
     }
 
-    p = ra;
-    smbfs_convert_path(&ra, FALSE);
-    g_free (p);
-    p = rb;
-    smbfs_convert_path(&rb, FALSE);
-    g_free (p);
+    ra = free_after (smbfs_convert_path (ra, FALSE), ra);
+    rb = free_after (smbfs_convert_path (rb, FALSE), rb);
 
     retval = cli_rename(sc->cli, ra, rb);
 

@@ -1,3 +1,10 @@
+2004-08-19  Roland Illig  <roland.illig@gmx.de>
+
+	* smbfs.c: Modified smbfs_convert_path based on a patch sent by
+	Andrew V. Samoilov. Adjusted the calls to smbfs_convert_path.
+	Simplified string handling by using free_after from src/util.h.
+	Fixed one memory leak and one accidental modification.
+
 2004-08-18  Pavel S. Shirshov  <pavelsh@mail.ru>
 
 	* extfs/rpm: Command line parameters fix for UPGRADE.
