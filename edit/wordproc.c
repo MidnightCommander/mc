@@ -23,8 +23,6 @@
 
 #define tab_width option_tab_spacing
 
-int line_is_blank (WEdit * edit, long line);
-
 #define NO_FORMAT_CHARS_START "-+*\\,.;:&>"
 
 static long
@@ -255,8 +253,6 @@ static void replace_at (WEdit * edit, long q, int c)
     edit_insert_ahead (edit, c);
 }
 
-void edit_insert_indent (WEdit * edit, int indent);
-
 /* replaces a block of text */
 static void put_paragraph (WEdit * edit, unsigned char *t, long p, long q, int indent, int size)
 {
@@ -295,8 +291,6 @@ static void put_paragraph (WEdit * edit, unsigned char *t, long p, long q, int i
     }
     edit_cursor_move (edit, cursor - edit->curs1);	/* restore cursor position */
 }
-
-int edit_indent_width (WEdit * edit, long p);
 
 static int test_indent (WEdit * edit, long p, long q)
 {

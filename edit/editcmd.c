@@ -84,7 +84,8 @@ static void *memmove (void *dest, const void *src, size_t n)
 #endif /* !HAVE_MEMMOVE */
 
 /* #define itoa MY_itoa  <---- this line is now in edit.h */
-char *itoa (int i)
+static char *
+MY_itoa (int i)
 {
     static char t[14];
     char *s = t + 13;
@@ -451,7 +452,7 @@ int edit_save_as_cmd (WEdit * edit)
 
 /* {{{ Macro stuff starts here */
 
-int
+static int
 raw_callback (struct Dlg_head *h, int key, int Msg)
 {
     switch (Msg) {
@@ -514,7 +515,8 @@ static int saved_macros_loaded = 0;
    This is just to stop the macro file be loaded over and over for keys
    that aren't defined to anything. On slow systems this could be annoying.
  */
-int macro_exists (int k)
+static int
+macro_exists (int k)
 {
     int i;
     for (i = 0; i < MAX_MACROS && saved_macro[i]; i++)
@@ -524,7 +526,8 @@ int macro_exists (int k)
 }
 
 /* returns 1 on error */
-int edit_delete_macro (WEdit * edit, int k)
+static int
+edit_delete_macro (WEdit * edit, int k)
 {
     struct macro macro[MAX_MACRO_LENGTH];
     FILE *f, *g;
@@ -713,7 +716,8 @@ int edit_new_cmd (WEdit * edit)
 }
 
 /* returns 1 on error */
-int edit_load_file_from_filename (WEdit * edit, char *exp)
+static int
+edit_load_file_from_filename (WEdit * edit, char *exp)
 {
     if (!edit_reload (edit, exp, 0, "", 0))
 	return 1;
@@ -770,7 +774,8 @@ int eval_marks (WEdit * edit, long *start_mark, long *end_mark)
 
 #define space_width 1
 
-void edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
+static void
+edit_insert_column_of_text (WEdit * edit, unsigned char *data, int size, int width)
 {
     long cursor;
     int i, col;
@@ -927,7 +932,8 @@ void edit_block_move_cmd (WEdit * edit)
     edit->force |= REDRAW_PAGE;
 }
 
-void edit_delete_column_of_text (WEdit * edit)
+static void
+edit_delete_column_of_text (WEdit * edit)
 {
     long p, q, r, m1, m2;
     int b, c, d;
@@ -1024,7 +1030,8 @@ int edit_block_delete_cmd (WEdit * edit)
 #define B_REPLACE_ONE B_USER+2
 #define B_SKIP_REPLACE B_USER+3
 
-int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
+static int
+edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 {
     QuickWidget quick_widgets[] =
     {
@@ -1072,7 +1079,8 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
     }
 }
 
-void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
+static void
+edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text, char **arg_order)
 {
     int treplace_scanf = replace_scanf;
     int treplace_regexp = replace_regexp;
@@ -1155,7 +1163,8 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
 }
 
 
-void edit_search_dialog (WEdit * edit, char **search_text)
+static void
+edit_search_dialog (WEdit * edit, char **search_text)
 {
     int treplace_scanf = replace_scanf;
     int treplace_regexp = replace_regexp;
@@ -1228,7 +1237,8 @@ static long sargs[NUM_REPL_ARGS][256 / sizeof (long)];
 
 /* This function is a modification of mc-3.2.10/src/view.c:regexp_view_search() */
 /* returns -3 on error in pattern, -1 on not found, found_len = 0 if either */
-int string_regexp_search (char *pattern, char *string, int len, int match_type, int match_bol, int icase, int *found_len, void *d)
+static int
+string_regexp_search (char *pattern, char *string, int len, int match_type, int match_bol, int icase, int *found_len, void *d)
 {
     static regex_t r;
     static char *old_pattern = NULL;
@@ -1265,7 +1275,8 @@ int string_regexp_search (char *pattern, char *string, int len, int match_type, 
 /* thanks to  Liviu Daia <daia@stoilow.imar.ro>  for getting this
    (and the above) routines to work properly - paul */
 
-long edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
+static long
+edit_find_string (long start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
 {
     long p, q = 0;
     long l = strlen ((char *) exp), f = 0;
@@ -1422,7 +1433,8 @@ long edit_find_string (long start, unsigned char *exp, int *len, long last_byte,
 }
 
 
-long edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
+static long
+edit_find_forwards (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, int once_only, void *d)
 {				/*front end to find_string to check for
 				   whole words */
     long p;
@@ -1445,7 +1457,8 @@ long edit_find_forwards (long search_start, unsigned char *exp, int *len, long l
     return p;
 }
 
-long edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d)
+static long
+edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int (*get_byte) (void *, long), void *data, void *d)
 {
     long p;
     if (replace_backwards) {
@@ -1518,7 +1531,7 @@ static int sprintf_p (char *str, const char *fmt,...)
 	    *p1++ = *p++;
 	if (*p == '*') {
 	    p++;
-	    strcpy (p1, itoa (*va_arg (ap, int *)));	/* replace field width with a number */
+	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
 	    p1 += strlen (p1);
 	} else {
 	    while (is_digit (*p))
@@ -1528,7 +1541,7 @@ static int sprintf_p (char *str, const char *fmt,...)
 	    *p1++ = *p++;
 	if (*p == '*') {
 	    p++;
-	    strcpy (p1, itoa (*va_arg (ap, int *)));	/* replace precision with a number */
+	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
 	    p1 += strlen (p1);
 	} else {
 	    while (is_digit (*p))
@@ -2512,7 +2525,8 @@ static int compllist_callback (void *data)
 
 
 /* let the user select its preferred completion */
-void edit_completion_dialog (WEdit *edit, int max_len, int word_len, 
+static void
+edit_completion_dialog (WEdit *edit, int max_len, int word_len, 
     struct selection *compl, int num_compl)
 {
     int start_x, start_y, offset, i;

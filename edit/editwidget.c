@@ -30,7 +30,7 @@ int column_highlighting = 0;
 
 static int edit_callback (WEdit *edit, int msg, int par);
 
-int
+static int
 edit_event (WEdit * edit, Gpm_Event * event, int *result)
 {
     *result = MOU_NORMAL;
@@ -105,7 +105,7 @@ edit_event (WEdit * edit, Gpm_Event * event, int *result)
 }
 
 
-int
+static int
 edit_mouse_event (Gpm_Event *event, void *x)
 {
     int result;
@@ -279,7 +279,7 @@ static void cmd_F10 (WEdit * edit)
     send_message ((Widget *) edit, WIDGET_KEY, KEY_F (10));
 }
 
-void
+static void
 edit_labels (WEdit *edit)
 {
     Dlg_head *h = edit->widget.parent;
@@ -300,7 +300,8 @@ edit_labels (WEdit *edit)
 }
 
 
-long get_key_state (void)
+static long
+get_key_state (void)
 {
     return (long) get_modifier ();
 }

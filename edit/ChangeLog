@@ -1,5 +1,8 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* *.c: Fix all global functions without declarations - declare,
+	make static or remove.
+
 	* syntax.c (syntax_change_callback): Remove, it's unused.
 	(edit_set_syntax_change_callback): Likewise.
 

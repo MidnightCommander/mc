@@ -40,22 +40,8 @@ static void menu_key (int i)
     send_message ((Widget *) wedit, WIDGET_KEY, i);
 }
 
-void edit_wrap_cmd (void)
-{
-    char *f;
-    char s[12];
-    sprintf (s, "%d", option_word_wrap_line_length);
-    f = input_dialog (_(" Word wrap "), 
-	_(" Enter line length, 0 for off: "), s);
-    if (f) {
-	if (*f) {
-	    option_word_wrap_line_length = atoi (f);
-	}
-	g_free (f);
-    }
-}
-
-void edit_about_cmd (void)
+static void
+edit_about_cmd (void)
 {
     edit_message_dialog (wedit->mainid, 20, 20, _(" About "),
 		      _("\n"
@@ -68,45 +54,220 @@ void edit_about_cmd (void)
 	);
 }
 
-void menu_mail_cmd (void)		{ menu_cmd (CK_Mail); }
-void menu_load_cmd (void)		{ menu_cmd (CK_Load); }
-void menu_new_cmd (void)		{ menu_cmd (CK_New); }
-void menu_save_cmd (void)		{ menu_cmd (CK_Save); }
-void menu_save_as_cmd (void)		{ menu_cmd (CK_Save_As); }
-void menu_insert_file_cmd (void)	{ menu_cmd (CK_Insert_File); }
-void menu_quit_cmd (void)		{ menu_cmd (CK_Exit); }
-void menu_mark_cmd (void)		{ menu_cmd (CK_Mark); }
-void menu_markcol_cmd (void)		{ menu_cmd (CK_Column_Mark); }
-void menu_ins_cmd (void)		{ menu_cmd (CK_Toggle_Insert); }
-void menu_copy_cmd (void)		{ menu_cmd (CK_Copy); }
-void menu_move_cmd (void)		{ menu_cmd (CK_Move); }
-void menu_delete_cmd (void)		{ menu_cmd (CK_Remove); }
-void menu_cut_cmd (void)		{ menu_cmd (CK_Save_Block); }
-void menu_search_cmd (void)		{ menu_cmd (CK_Find); }
-void menu_search_again_cmd (void)	{ menu_cmd (CK_Find_Again); }
-void menu_replace_cmd (void)		{ menu_cmd (CK_Replace); }
-void menu_begin_record_cmd (void)	{ menu_cmd (CK_Begin_Record_Macro); }
-void menu_end_record_cmd (void)		{ menu_cmd (CK_End_Record_Macro); }
-void menu_wrap_cmd (void)		{ edit_wrap_cmd (); }
-void menu_exec_macro_cmd (void)		{ menu_key (XCTRL ('a')); }
-void menu_exec_macro_delete_cmd (void)	{ menu_cmd (CK_Delete_Macro); }
-void menu_c_form_cmd (void)		{ menu_key (KEY_F (19)); }
-void menu_ispell_cmd (void)		{ menu_cmd (CK_Pipe_Block (1)); }
-void menu_sort_cmd (void)		{ menu_cmd (CK_Sort); }
-void menu_date_cmd (void)		{ menu_cmd (CK_Date); }
-void menu_undo_cmd (void)		{ menu_cmd (CK_Undo); }
-void menu_beginning_cmd (void)		{ menu_cmd (CK_Beginning_Of_Text); }
-void menu_end_cmd (void)		{ menu_cmd (CK_End_Of_Text); }
-void menu_refresh_cmd (void)		{ menu_cmd (CK_Refresh); }
-void menu_goto_line (void)		{ menu_cmd (CK_Goto); }
-void menu_goto_bracket (void)		{ menu_cmd (CK_Match_Bracket); }
-void menu_lit_cmd (void)		{ menu_key (XCTRL ('q')); }
-void menu_format_paragraph (void)	{ menu_cmd (CK_Paragraph_Format); }
-void edit_options_dialog (void);
-void menu_options (void)		{ edit_options_dialog (); }
-void menu_user_menu_cmd (void)          { menu_key (KEY_F (11)); }
+static void
+menu_mail_cmd (void)
+{
+    menu_cmd (CK_Mail);
+}
 
-void edit_user_menu_cmd (void)          { menu_edit_cmd (1); }
+static void
+menu_load_cmd (void)
+{
+    menu_cmd (CK_Load);
+}
+
+static void
+menu_new_cmd (void)
+{
+    menu_cmd (CK_New);
+}
+
+static void
+menu_save_cmd (void)
+{
+    menu_cmd (CK_Save);
+}
+
+static void
+menu_save_as_cmd (void)
+{
+    menu_cmd (CK_Save_As);
+}
+
+static void
+menu_insert_file_cmd (void)
+{
+    menu_cmd (CK_Insert_File);
+}
+
+static void
+menu_quit_cmd (void)
+{
+    menu_cmd (CK_Exit);
+}
+
+static void
+menu_mark_cmd (void)
+{
+    menu_cmd (CK_Mark);
+}
+
+static void
+menu_markcol_cmd (void)
+{
+    menu_cmd (CK_Column_Mark);
+}
+
+static void
+menu_ins_cmd (void)
+{
+    menu_cmd (CK_Toggle_Insert);
+}
+
+static void
+menu_copy_cmd (void)
+{
+    menu_cmd (CK_Copy);
+}
+
+static void
+menu_move_cmd (void)
+{
+    menu_cmd (CK_Move);
+}
+
+static void
+menu_delete_cmd (void)
+{
+    menu_cmd (CK_Remove);
+}
+
+static void
+menu_cut_cmd (void)
+{
+    menu_cmd (CK_Save_Block);
+}
+
+static void
+menu_search_cmd (void)
+{
+    menu_cmd (CK_Find);
+}
+
+static void
+menu_search_again_cmd (void)
+{
+    menu_cmd (CK_Find_Again);
+}
+
+static void
+menu_replace_cmd (void)
+{
+    menu_cmd (CK_Replace);
+}
+
+static void
+menu_begin_record_cmd (void)
+{
+    menu_cmd (CK_Begin_Record_Macro);
+}
+
+static void
+menu_end_record_cmd (void)
+{
+    menu_cmd (CK_End_Record_Macro);
+}
+
+static void
+menu_exec_macro_cmd (void)
+{
+    menu_key (XCTRL ('a'));
+}
+
+static void
+menu_exec_macro_delete_cmd (void)
+{
+    menu_cmd (CK_Delete_Macro);
+}
+
+static void
+menu_c_form_cmd (void)
+{
+    menu_key (KEY_F (19));
+}
+
+static void
+menu_ispell_cmd (void)
+{
+    menu_cmd (CK_Pipe_Block (1));
+}
+
+static void
+menu_sort_cmd (void)
+{
+    menu_cmd (CK_Sort);
+}
+
+static void
+menu_date_cmd (void)
+{
+    menu_cmd (CK_Date);
+}
+
+static void
+menu_undo_cmd (void)
+{
+    menu_cmd (CK_Undo);
+}
+
+static void
+menu_beginning_cmd (void)
+{
+    menu_cmd (CK_Beginning_Of_Text);
+}
+
+static void
+menu_end_cmd (void)
+{
+    menu_cmd (CK_End_Of_Text);
+}
+
+static void
+menu_refresh_cmd (void)
+{
+    menu_cmd (CK_Refresh);
+}
+
+static void
+menu_goto_line (void)
+{
+    menu_cmd (CK_Goto);
+}
+
+static void
+menu_goto_bracket (void)
+{
+    menu_cmd (CK_Match_Bracket);
+}
+
+static void
+menu_lit_cmd (void)
+{
+    menu_key (XCTRL ('q'));
+}
+
+static void
+menu_format_paragraph (void)
+{
+    menu_cmd (CK_Paragraph_Format);
+}
+
+static void
+menu_options (void)
+{
+    edit_options_dialog ();
+}
+static void
+menu_user_menu_cmd (void)
+{
+    menu_key (KEY_F (11));
+}
+
+void
+edit_user_menu_cmd (void)
+{
+    menu_edit_cmd (1);
+}
 
 static menu_entry FileMenu[] =
 {
@@ -298,7 +459,7 @@ void edit_done_menu (void)
 }
 
 
-void
+static void
 edit_drop_menu_cmd (WEdit * e, int which)
 {
     if (edit_menubar->active)

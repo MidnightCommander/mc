@@ -36,7 +36,8 @@ static char *key_emu_str[] =
 static char *wrap_str[] =
 {N_("None"), N_("Dynamic paragraphing"), N_("Type writer wrap"), NULL};
 
-void i18n_translate_array (char *array[])
+static void
+i18n_translate_array (char *array[])
 {
     while (*array!=NULL) {
 	*array = _(*array);

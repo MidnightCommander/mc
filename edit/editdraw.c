@@ -103,35 +103,6 @@ void edit_status (WEdit * edit)
     free (s);
 }
 
-/* result is boolean */
-int cursor_in_screen (WEdit * edit, long row)
-{
-    if (row < 0 || row >= edit->num_widget_lines)
-	return 0;
-    else
-	return 1;
-}
-
-/* returns rows from the first displayed line to the cursor */
-int cursor_from_display_top (WEdit * edit)
-{
-    if (edit->curs1 < edit->start_display)
-	return -edit_move_forward (edit, edit->curs1, 0, edit->start_display);
-    else
-	return edit_move_forward (edit, edit->start_display, 0, edit->curs1);
-}
-
-/* returns how far the cursor is out of the screen */
-int cursor_out_of_screen (WEdit * edit)
-{
-    int row = cursor_from_display_top (edit);
-    if (row >= edit->num_widget_lines)
-	return row - edit->num_widget_lines + 1;
-    if (row < 0)
-	return row;
-    return 0;
-}
-
 /* this scrolls the text so that cursor is on the screen */
 void edit_scroll_screen_over_cursor (WEdit * edit)
 {
@@ -345,8 +316,9 @@ static void edit_draw_this_char (WEdit * edit, long curs, long row)
 }
 
 /* cursor must be in screen for other than REDRAW_PAGE passed in force */
-void render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
-		       long end_column)
+static void
+render_edit_text (WEdit * edit, long start_row, long start_column, long end_row,
+		  long end_column)
 {
     long row = 0, curs_row;
     static int prev_curs_row = 0;
@@ -458,7 +430,8 @@ void render_edit_text (WEdit * edit, long start_row, long start_column, long end
     return;
 }
 
-void edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
+static void
+edit_render (WEdit * edit, int page, int row_start, int col_start, int row_end, int col_end)
 {
     if (page)			/* if it was an expose event, 'page' would be set */
 	edit->force |= REDRAW_PAGE | REDRAW_IN_BOUNDS;

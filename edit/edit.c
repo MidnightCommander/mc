@@ -145,7 +145,8 @@ char *edit_get_buffer_as_text (WEdit * e)
 /* returns 1 on error */
 /* loads file OR text into buffers. Only one must be none-NULL. */
 /* cursor set to start of file */
-int init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
+static int
+init_dynamic_edit_buffers (WEdit * edit, const char *filename, const char *text)
 {
     long buf;
     int j, file = -1, buf2;
@@ -225,7 +226,8 @@ static int edit_find_filter (const char *filename)
     return -1;
 }
 
-char *edit_get_filter (const char *filename)
+static char *
+edit_get_filter (const char *filename)
 {
     int i, l;
     char *p;
@@ -251,7 +253,8 @@ char *edit_get_write_filter (char *writename, const char *filename)
     return p;
 }
 
-long edit_insert_stream (WEdit * edit, FILE * f)
+static long
+edit_insert_stream (WEdit * edit, FILE * f)
 {
     int c;
     long i = 0;
@@ -360,7 +363,8 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 }
 
 /* returns 1 on error */
-int edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
+static int
+edit_open_file (WEdit * edit, const char *filename, const char *text, unsigned long text_size)
 {
     struct stat st;
     if (text) {
@@ -697,7 +701,8 @@ void edit_push_action (WEdit * edit, long c,...)
    TODO: if the user undos until the stack bottom, and the stack has not wrapped,
    then the file should be as it was when he loaded up. Then set edit->modified to 0.
  */
-long pop_action (WEdit * edit)
+static long
+pop_action (WEdit * edit)
 {
     long c;
     unsigned long sp = edit->stack_pointer;
@@ -851,7 +856,8 @@ int edit_delete (WEdit * edit)
 }
 
 
-int edit_backspace (WEdit * edit)
+static int
+edit_backspace (WEdit * edit)
 {
     int p;
     if (!edit->curs1)
@@ -1245,7 +1251,8 @@ static int is_in_indent (WEdit *edit)
 
 static int left_of_four_spaces (WEdit *edit);
 
-void edit_move_to_prev_col (WEdit * edit, long p)
+static void
+edit_move_to_prev_col (WEdit * edit, long p)
 {
     edit_cursor_move (edit, edit_move_forward3 (edit, p, edit->prev_col, 0) - edit->curs1);
 
@@ -1286,7 +1293,8 @@ void edit_move_up (WEdit * edit, unsigned long i, int scroll)
     }
 }
 
-int is_blank (WEdit * edit, long offset)
+static int
+is_blank (WEdit *edit, long offset)
 {
     long s, f;
     int c;
@@ -1302,7 +1310,8 @@ int is_blank (WEdit * edit, long offset)
 
 
 /* returns the offset of line i */
-long edit_find_line (WEdit * edit, int line)
+static long
+edit_find_line (WEdit *edit, int line)
 {
     int i, j = 0;
     int m = 2000000000;
@@ -1508,18 +1517,6 @@ void edit_push_markers (WEdit * edit)
     edit_push_action (edit, MARK_2 + edit->mark2);
 }
 
-void free_selections (void)
-{
-    int i;
-    for (i = 0; i < NUM_SELECTION_HISTORY; i++)
-	if (selection_history[i].text) {
-	    free (selection_history[i].text);
-	    selection_history[i].text = 0;
-	    selection_history[i].len = 0;
-	}
-    current_selection = 0;
-}
-
 /* return -1 on nothing to store or error, zero otherwise */
 void edit_get_selection (WEdit * edit)
 {
@@ -1689,7 +1686,8 @@ static void edit_left_delete_word (WEdit * edit)
    the start column position is not recorded, and hence does not
    undo as it happed. But who would notice.
  */
-void edit_do_undo (WEdit * edit)
+static void
+edit_do_undo (WEdit * edit)
 {
     long ac;
     long count = 0;
@@ -1839,7 +1837,8 @@ void edit_insert_indent (WEdit * edit, int indent)
 	edit_insert (edit, ' ');
 }
 
-void edit_auto_indent (WEdit * edit, int extra, int no_advance)
+static void
+edit_auto_indent (WEdit * edit, int extra, int no_advance)
 {
     long p;
     int indent;
@@ -1889,8 +1888,6 @@ static void edit_tab_cmd (WEdit * edit)
     }
     return;
 }
-
-void format_paragraph (WEdit * edit, int force);
 
 static void check_and_wrap_line (WEdit * edit)
 {
@@ -2049,7 +2046,6 @@ int edit_execute_key_command (WEdit * edit, int command, int char_for_insertion)
 }
 
 static const char * const shell_cmd[] = SHELL_COMMANDS_i
-void edit_mail_dialog (WEdit * edit);
 
 /* 
    This executes a command at a lower level than macro recording.

@@ -496,7 +496,8 @@ static void get_args (char *l, char **args, int *argc)
 
 int try_alloc_color_pair (char *fg, char *bg);
 
-int this_try_alloc_color_pair (char *fg, char *bg)
+static int
+this_try_alloc_color_pair (char *fg, char *bg)
 {
     char f[80], b[80], *p;
     if (bg)

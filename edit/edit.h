@@ -301,6 +301,12 @@ void book_mark_inc (WEdit * edit, int line);
 void book_mark_dec (WEdit * edit, int line);
 
 void user_menu (WEdit *edit);
+int line_is_blank (WEdit *edit, long line);
+int edit_indent_width (WEdit *edit, long p);
+void edit_insert_indent (WEdit *edit, int indent);
+void edit_options_dialog (void);
+void edit_mail_dialog (WEdit *edit);
+void format_paragraph (WEdit *edit, int force);
 
 /* either command or char_for_insertion must be passed as -1 */
 int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
@@ -312,7 +318,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion);
 #define FONT_MEAN_WIDTH 1
      
 #define get_sys_error(s) (s)
-#define itoa MY_itoa
 
 #define edit_get_load_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(d,f,h) input_dialog (h, _(" Enter file name: "), f)
