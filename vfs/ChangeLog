@@ -1,3 +1,9 @@
+2002-12-03  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs.c (open_archive): Don't use open_error_pipe() and
+	close_error_pipe() - it gets stuck on output that exceeds 4
+	kilobytes.
+
 2002-12-01  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* extfs.c (open_archive): Use open_error_pipe() and close_error_pipe()

@@ -229,9 +229,7 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     if (tmp)
 	g_free (tmp);
     g_free (mc_extfsdir);
-    open_error_pipe ();
     result = popen (cmd, "r");
-    close_error_pipe (1, NULL);
     g_free (cmd);
     if (result == NULL) {
         if (local_name != NULL && uses_archive)
