@@ -1,3 +1,7 @@
+2001-04-06  Pavel Roskin  <proski@gnu.org>
+
+	* layout: New widget "findfile-Widget-find-case-check".
+
 2001-02-28  Christian Meyer  <chrisime@gnome.org>
 
 	* application.x-gnumeric.desktop: Added German strings.

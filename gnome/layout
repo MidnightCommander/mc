@@ -85,6 +85,10 @@ flags=
 geometry=2,2,1,1
 flags=
 
+[findfile-Widget-find-case-check]
+geometry=3,5,1,1
+flags=
+
 [hotlist-Widget-e]
 geometry=3,12,1,1
 flags=ew
