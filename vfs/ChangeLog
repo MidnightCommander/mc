@@ -2,6 +2,15 @@
 
 	* vfs.h: The correct thing to use is PATH_SEP and PATH_SEP_STR 
 
+Sun Jan 17 16:19:48 1999  Timur I. Bakeyev <timur@com.bat.ru>
+
+	* Converted memory managment to Glib. Now we use g_new()/g_malloc()/
+	g_strdup()/g_free() routings. Also, copy_strings() replaced by 
+	g_strconcat(), and sprintf() by g_snprintf().
+	
+	* utilvfs.h: New header file. Introduced as a stock header, which keeps
+	all includes in a right order, to avoid order-dependence mistakes.
+
 Sun Jan 17 15:49:39 1999  Paul Sheer <psheer@obsidian.co.za>
 
 	* direntry.c: vfs_s_find_entry_tree changed to follow
