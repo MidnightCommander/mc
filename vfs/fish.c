@@ -546,7 +546,7 @@ fish_file_store(struct vfs_class *me, struct vfs_s_fh *fh, char *name, char *loc
     
     while (1) {
 	while ((n = read(h, buffer, sizeof(buffer))) < 0) {
-	    if ((errno == EINTR) && got_interrupt)
+	    if ((errno == EINTR) && got_interrupt())
 	        continue;
 	    print_vfs_message(_("fish: Local read failed, sending zeros") );
 	    close(h);
