@@ -1,4 +1,8 @@
 2004-18-19  Roland Illig  <roland.illig@gmx.de>
+	* util.h: Added the function free_after for easier handling
+	of dynamically allocated strings.
+
+2004-18-19  Roland Illig  <roland.illig@gmx.de>
 	* util.c: Added the function str_replace, which replaces
 	all occurences of a character in a string.
 

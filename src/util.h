@@ -172,4 +172,15 @@ void save_file_position (char *filename, long line, long column);
 #define ISASCII(c) isascii(c)
 #endif
 
+/* this function allows you to write:
+ * char *s = g_strdup("hello, world");
+ * s = free_after(g_strconcat(s, s, NULL), s);
+ */
+static inline char *
+free_after (char *result, char *string_to_free)
+{
+	g_free(string_to_free);
+	return result;
+}
+
 #endif				/* !__UTIL_H */
