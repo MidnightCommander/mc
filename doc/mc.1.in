@@ -368,7 +368,9 @@ the command line. If the
 option is enabled the search string is shown on the mini-status
 line. When typing, the selection bar will move to the next file
 starting with the typed letters. The
-.I "backspace" or DEL 
+.I "backspace"
+or
+.I DEL 
 keys can be used to correct typing mistakes. If C-s is pressed
 again, the next match is searched for.
 .PP
@@ -2125,7 +2127,7 @@ tag <filename>		Tag specified file.
 untag <filename>	Untag specified file.
 select <filename>	Move pointer to file.
 change_panel		Switch between panels.
-cd <path>		Change directory.
+cd <path>               Change directory.
 .fi
 .PP
 If the first letter of the instruction is in lower case it operates on
@@ -2528,7 +2530,8 @@ You can use scanf search and replace to search and replace
 a C format string. First take a look at the 
 .B sscanf
 and 
-.B sprintf man pages to see what a format string
+.B sprintf
+man pages to see what a format string
 is and how it works. An example is as follows: Suppose you want
 to replace all occurrences of say, an open bracket, three
 comma separated numbers, and a close bracket, with the
@@ -2854,7 +2857,7 @@ Examples:
 .PP
 .nf
     /#smb:machine/Share
-    /#ftp:other_machine
+    /#smb:other_machine
 .fi
 .PP
 .SH "Colors"
