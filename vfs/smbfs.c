@@ -1751,11 +1751,14 @@ smbfs_open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int m
 	DEBUG (3, ("smbfs_open: O_TRUNC\n"));
 
     remote_handle->fnum =
+#if 1	/* Don't play with flags, it is cli_open() headache */
+	cli_open (remote_handle->cli, rname, flags, DENY_NONE);
+#else	/* What's a reasons to has this code ? */
 	cli_open (remote_handle->cli, rname, ((flags & O_CREAT)
 					      || (flags ==
 						  (O_WRONLY | O_APPEND))) ?
 		  flags : O_RDONLY, DENY_NONE);
-
+#endif
     if (remote_handle->fnum == -1) {
 	message (1, MSG_ERROR, _(" %s opening remote file %s "),
 		    cli_errstr (remote_handle->cli), CNV_LANG (rname));
