@@ -1,3 +1,8 @@
+2004-09-25  Roland Illig  <roland.illig@gmx.de>
+
+	* autoconf.ac: #define _GNU_SOURCE to an empty value instead of 1,
+	which conflicted with src/regex.c.
+
 2004-09-24  Roland Illig  <roland.illig@gmx.de>
 
 	* HACKING (Programming tips): added a tip concerning the NULL

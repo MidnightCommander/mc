@@ -143,7 +143,7 @@ aux*)
     AC_DEFINE(_POSIX_SOURCE)
     ;;
 linux*)
-    AC_DEFINE(_GNU_SOURCE, 1, [Define to request GNU feature set on Linux])
+    AC_DEFINE(_GNU_SOURCE,, [Define to request GNU feature set on Linux])
     ;;
 esac
 
