@@ -427,6 +427,12 @@ regex/\.tar\.bz2$
 	View=%view{ascii} bzip2 -dc %f 2>/dev/null | tar tvvf -
 	Extract=bzip2 -dc %f 2>/dev/null | tar xf -
 
+# .tar.F - used in QNX
+regex/\.tar\.F$
+	# Open=%cd %p#utar
+	View=%view{ascii} freeze -dc %f 2>/dev/null | tar tvvf -
+	Extract=freeze -dc %f 2>/dev/null | tar xf -
+
 # tar
 regex/\.(tar|TAR)$
 	Open=%cd %p#utar

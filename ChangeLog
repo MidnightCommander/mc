@@ -1,3 +1,9 @@
+2001-03-02  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Add support for "freeze" - old compression
+	program used mostly on QNX.
+	* lib/mc.ext.in.qnx.diff: Remove, it's obsolete.
+
 2001-02-26  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc-gnome.ext.in: Remove, it's not used.
