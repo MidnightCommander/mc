@@ -1,0 +1,109 @@
+
+Midnight Commander for Win32 and OS/2
+-------------------------------------
+
+0. Introduction
+1. Compiling
+2. Changes made
+3. Authors and maintainers
+
+0. Introduction
+---------------
+Yes, Midnight Commander can be compiled for Win32 (Microsoft Windows 95, 98 and
+NT) and OS/2. It has many bugs, but is quite stable now. Maybe you can help as
+a beta tester or as a programmer. In either case you would like subscribe to
+mc-devel list (see readme files in main doc on how to do this) and contact us.
+Please note, that Midnight Commander remains primarily a file manager for
+UNIX-like systems, so recent changes may occasionally break something.
+You should not expect that it will work on your system better than file
+managers written natively for your OS.
+
+1. Compiling
+------------
+
+1.1. Compiler
+-------------
+If you really want to enjoy free software under your non-free OS, you should
+try free compilers. Three of them are supported: EMX (OS/2), RSX and Mingw32
+(Win32). RSX is based on EMX, and can also cross-compile for OS/2 under
+Windows. Mingw32 is concieved as a free clone for Microsoft Visual C++.
+Please note, that all above compiler are based on GCC (GNU C compiler), but
+use different libraries.
+CygWin32 is not (yet) powerful enough to compile Windows-specipic portion of
+the Midnight Commander, but you may try to compile MC using UNIX configuration
+files. As you can easily imagine, resulting binary will need termcap or
+terminfo and use ANSI-sequences for output which is probably not what you want.
+You may also try non-free compilers. Microsoft Visual C++ (4.0 and above),
+Borland C++ (both for Win32 and OS/2) and IBC CSet are supported. "Supported"
+means merely that there are specific makefiles for those compilers, but it
+does not even assume that you will compile MC using them out-of-box.
+
+1.2. General issues
+-------------------
+See pc/README, pc/BUGS, pc/TODO for the information concerning current state
+of the port.
+You may need to create some fake includes to compile. You may also need to
+change something in the MC sources.
+
+1.3 Windowing Library
+---------------------
+Currently only support for SLang windowing library is given. There are
+curses clones ported to Win32 and OS/2, but I believe that since there is
+no analogs for autoconf for those systems, we should avoid unnecessary
+difficulties.
+Currently the PC port SLang included in this distribution (see slang/
+subdirectory). This is a subset of SLang 0.99.38 distribution with some
+bugs fixed. There are also MC-specific changes in the code.
+SLang 0.99.38 has problems with OS/2 if you like console with more than
+80x25 characters. You may try to use a newer SLang. It is possible, but it
+is also quite tricky.
+
+1.4 Features and Limitations
+----------------------------
+Internal editor is supported (including syntax highlighting).
+VFS (virtual file system) is not supported.
+X11 ports are not supported.
+
+2. Changes made
+---------------
+
+2.1. Changes to main code
+-------------------------
+Changes in the main code are enclosed in #ifdef _OS_NT, __os2__  or OS2_NT
+blocks.
+
+In some cases we supressed code. This is temporal (so that mc can compile). In
+the future we will provide fake or true interfaces for these features.
+   - Links: creation and information on links are not supported. We
+            should provide a fake interface for the local filesystem and
+            a true one for networked.
+   - GID/UID queries (get_user, owner, preserve UID/GID on copy, ...).
+   - TERMinals: all the code directly done with terminals must be supressed.
+   - Signals: deleted. Should support the native ones.
+   - pipes: had some trouble in ext.c and with error_pipes but soon will be
+            fixed.
+   - Chown command: Not supported yet.
+
+2.2. Files rewritten
+--------------------
+There are several files with so many changes that they have been moved to pc/
+subdirectory. Some of them are common for Win32 and OS/2, some of them are
+system-specific. System-specific files bear a clear mark in their names
+(for example, dirent_nt.c)
+Our intension should be, however, to make most code system-independent. This
+would increase code reuseabilibity and maintainability :-)
+See pc/ subdirectory for further details.
+
+3. Authors and maintainers
+--------------------------
+This port is based on the port for Windows NT by
+    Juan Grigera <grigera@isis.unlp.edu.ar>
+and the port for OS/2 by
+    Alexander Dong <ado@software-ag.de>
+Both ports were merged to one PC port by me,
+    Pavel Roskin <pavel_roskin@geocities.com>
+Please note, that I'm using Linux now. I have access to Windows 95 machines,
+but I have no access to OS/2 machines. If you are really keen to continue my
+work, please drop me a letter.
+
+Pavel Roskin <pavel_roskin@geocities.com>
