@@ -1,3 +1,8 @@
+1999-02-12  Sergey Korshunoff <seyko@p5.f434.n5020.z2.fidonet.org>
+
+	* unlha.in: Fix the problem of having incorrect pathnames when
+	pulling out files from the LHA file.
+
 Sat Feb  6 23:44:28 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* tar.c (read_header): Treat hardlinks correctly.
