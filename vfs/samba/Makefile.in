@@ -38,27 +38,15 @@ INSTALLPERMS = 0755
 CONFIGFILE = @configdir@/smb.conf
 LMHOSTSFILE = @configdir@/lmhosts
 DRIVERFILE = $(LIBDIR)/printers.def
-PASSWD_PROGRAM = /bin/passwd
-# This is where smbpasswd et al go
-PRIVATEDIR = @privatedir@
-
-SMB_PASSWD_FILE = $(PRIVATEDIR)/smbpasswd
 
 # The directory where code page definition files go
 CODEPAGEDIR = @codepagedir@
 
-# The current codepage definition list.
-CODEPAGELIST= 437 737 850 852 861 932 866 949 950 936
-
-PASSWD_FLAGS = -DPASSWD_PROGRAM=\"$(PASSWD_PROGRAM)\" -DSMB_PASSWD_FILE=\"$(SMB_PASSWD_FILE)\"
 FLAGS1 = $(CFLAGS) -Iinclude -I$(srcdir)/include $(CPPFLAGS)
 FLAGS2 = -DCONFIGFILE=\"$(CONFIGFILE)\" -DLMHOSTSFILE=\"$(LMHOSTSFILE)\"
 FLAGS3 = -DSWATDIR=\"$(SWATDIR)\" -DSBINDIR=\"$(SBINDIR)\" -DCODEPAGEDIR=\"$(CODEPAGEDIR)\"
 FLAGS4 = -DDRIVERFILE=\"$(DRIVERFILE)\" -DBINDIR=\"$(BINDIR)\"
-FLAGS5 = $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
-FLAGS  = $(ISA) $(FLAGS5) $(PASSWD_FLAGS)
-
-SCRIPTS = $(srcdir)/script/smbtar $(srcdir)/script/addtosmbpass $(srcdir)/script/convert_smbpasswd
+FLAGS = $(ISA) $(FLAGS1) $(FLAGS2) $(FLAGS3) $(FLAGS4) -DHAVE_INCLUDES_H
 
 ######################################################################
 # object file lists
@@ -141,14 +129,6 @@ distclean: clean
 	rm -f config.log
 	rm -f include/config.h include/stamp-h Makefile
 	rm -f config.status config.cache so_locations
-
-#
-# This target is for documenation updators. It regenerates
-# the man pages and HTML docs from the YODL source files.
-# In order for this target to work YODL must be installed
-# and working on your system. JRA.
-yodldocs:
-	@$(SHELL) $(srcdir)/script/makeyodldocs.sh $(srcdir)
 
 # this target is really just for my use. It only works on a limited
 # range of machines and is used to produce a list of potentially

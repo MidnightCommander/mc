@@ -561,27 +561,6 @@ AC_ARG_WITH(ssl,
 
 
 #################################################
-# set private directory location
-AC_ARG_WITH(privatedir,
-[  --with-privatedir=DIR     Where to put smbpasswd ($ac_default_prefix/private)],
-[ case "$withval" in
-  yes|no)
-  #
-  # Just in case anybody calls it without argument
-  #
-    AC_MSG_WARN([--with-privatedir called without argument - will use default])
-    privatedir='${prefix}/private'
-  ;;
-  * )
-    privatedir="$withval"
-    ;;
-  esac
-  AC_SUBST(privatedir)],
-  [privatedir='${prefix}/private'
-   AC_SUBST(privatedir)]
-)
-
-#################################################
 # set configuration directory location
 configdir="\$(LIBDIR)"
 AC_ARG_WITH(configdir,

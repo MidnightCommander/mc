@@ -841,13 +841,7 @@ static void init_globals(void)
 
   DEBUG(3,("Initialising global parameters\n"));
 
-  string_set(&Globals.szSMBPasswdFile, SMB_PASSWD_FILE);
-  /*
-   * Allow the default PASSWD_CHAT to be overridden in local.h.
-   */
-  string_set(&Globals.szPasswdChat,DEFAULT_PASSWD_CHAT);
   string_set(&Globals.szWorkGroup, WORKGROUP);
-  string_set(&Globals.szPasswdProgram, PASSWD_PROGRAM);
   string_set(&Globals.szPrintcapname, PRINTCAP_NAME);
   string_set(&Globals.szDriverFile, DRIVERFILE);
   string_set(&Globals.szRootdir, "/");
