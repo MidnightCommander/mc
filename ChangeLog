@@ -1,3 +1,10 @@
+2001-10-24  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in: Resurrect ALL_LINGUAS test, to allow specify list
+	of languages to be installed by setting env variable before
+	configure. If it is empty, it defaults to full list.
+	By Alex Tkachenko <alex@bcs.zp.ua>.
+
 2001-10-19  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/sh.syntax: Highlight reserved words inside backticks.
