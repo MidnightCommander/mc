@@ -1074,9 +1074,8 @@ mc_def_getlocalcopy (vfs *vfs, char *filename)
     fdout = open (tmp, O_CREAT|O_WRONLY|O_TRUNC|O_EXCL, 0600);
     if (fdout == -1)
 	goto fail;
-    while ((i = mc_read (fdin, buffer, sizeof (buffer))) == sizeof (buffer)){
+    while ((i = mc_read (fdin, buffer, sizeof (buffer))) > 0)
         write (fdout, buffer, i);
-    }
     if (i == -1)
 	goto fail;
     if (write (fdout, buffer, i)==-1)

@@ -1,3 +1,10 @@
+2000-05-01  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* direntry.c (vfs_s_inode_from_path): fix for stating / directory
+	done properly
+
+	* vfs.c: == 0 is right test of eof.
+
 2000-04-28  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* direntry.c (vfs_s_internal_stat): added ugly special case for /

@@ -565,12 +565,17 @@ vfs_s_inode *
 vfs_s_inode_from_path (vfs *me, char *name, int flags)
 {
     struct vfs_s_super *super;
+    struct vfs_s_inode *ino;
     char *q;
 
     if (!(q = vfs_s_get_path_mangle (me, name, &super, 0))) 
 	return NULL;
 
-    return vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
+    ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, flags & ~FL_FOLLOW);
+    if ((!ino) && (!*q))
+	/* We are asking about / directory of ftp server: assume it exists */
+	ino = vfs_s_find_inode (me, super->root, q, flags & FL_FOLLOW ? LINK_FOLLOW : LINK_NO_FOLLOW, FL_DIR | (flags & ~FL_FOLLOW));
+    return ino;
 }
 
 struct dirhandle {
@@ -683,18 +688,11 @@ vfs_s_chdir (vfs *me, char *path)
 static int
 vfs_s_internal_stat (vfs *me, char *path, struct stat *buf, int flag)
 {
-    char *path2;
     struct vfs_s_inode *ino;
 
-    path2 = g_strdup(path);
-    if (!(ino = vfs_s_inode_from_path (me, path2, flag))) {
-        if ((!path) || (*path) || !(ino = vfs_s_inode_from_path (me, path, flag|FL_DIR))) {	/* Seems we have problem: vfs_s_inode_from_path on directories always succeeds. This is *hack* to make / directory of ftp archive statable */
-	    g_free(path2);
-	    return -1;
-	}
-    }
+    if (!(ino = vfs_s_inode_from_path (me, path, flag)))
+        return -1;
     *buf = ino->st;
-    g_free(path2);
     return 0;
 }
 
