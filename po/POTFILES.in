@@ -2,8 +2,8 @@
 # Please keep this file sorted alphabetically.
 edit/edit.c
 edit/edit.h
-edit/edit_key_translator.c
 edit/editcmd.c
+edit/editkeys.c
 edit/editmenu.c
 edit/editoptions.c
 edit/editwidget.c
