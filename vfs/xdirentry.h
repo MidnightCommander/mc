@@ -141,7 +141,7 @@ typedef struct vfs_s_fh {
 	    int got, total;
 	} fish;
 	struct {
-	    int sock;
+	    int sock, append;
 	} ftp;
     } u;
     int magic;
@@ -169,7 +169,7 @@ struct vfs_s_data {
     vfs_s_entry* (*find_entry) (vfs *me, vfs_s_inode *root, char *path, int follow, int flags);
     int (*dir_load) (vfs *me, vfs_s_inode *ino, char *path);
     int (*dir_uptodate) (vfs *me, vfs_s_inode *ino);
-    int (*file_store) (vfs *me, vfs_s_super *super, char *path, char *localname);
+    int (*file_store) (vfs *me, vfs_s_fh *fh, char *path, char *localname);
 
     int (*linear_start) (vfs *me, vfs_s_fh *fh, int from);
     int (*linear_read) (vfs *me, vfs_s_fh *fh, void *buf, int len);

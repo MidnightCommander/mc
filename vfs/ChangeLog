@@ -5,6 +5,16 @@
 
 2002-05-22  Andrew V. Samoilov  <kai@cmail.ru>
 
+	* xdirentry.h (vfs_s_fh.u.ftp): Add append field.
+	(vfs_s_data.file_store): Change second argument 
+	to (vfs_s_fh *fh).
+	* direntry.c (vfs_s_close): Adjust.
+	* fish.c (file_store): Likewise.
+	* ftpfs.c (file_store): Likewise.  Use "APPE" if
+	fh->u.ftp.append is true.
+	(linear_start): Care about fh->u.ftp.append.
+	(ftpfs_fh_open): Likewise.
+
 	* fish.c (fish_fh_open): Generate fh->ino->localname
 	if this one is NULL and file is opened for writting only.
 	* ftpfs.c (ftpfs_fh_open): Likewise if control_connection_buzy

@@ -1360,7 +1360,7 @@ fallback:
 }
 
 static int
-file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
+file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 {
     int h, sock, n;
     off_t total;
@@ -1371,12 +1371,13 @@ file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
 #endif
     char buffer[8192];
     struct stat s;
+    vfs_s_super *super = FH_SUPER;
 
     h = open(localname, O_RDONLY);
     if (h == -1)
 	    ERRNOR (EIO, -1);
     fstat(h, &s);
-    sock = open_data_connection(me, super, "STOR", name, TYPE_BINARY, 0);
+    sock = open_data_connection(me, super, fh->u.ftp.append ? "APPE" : "STOR", name, TYPE_BINARY, 0);
     if (sock < 0) {
 	close(h);
 	return -1;
@@ -1436,7 +1437,7 @@ error_return:
     return -1;
 }
 
-#define FH_SOCK fh->u.ftp.sock
+//#define FH_SOCK fh->u.ftp.sock
 
 static int 
 linear_start(vfs *me, vfs_s_fh *fh, int offset)
@@ -1451,6 +1452,7 @@ linear_start(vfs *me, vfs_s_fh *fh, int offset)
 	ERRNOR (EACCES, 0);
     fh->linear = LS_LINEAR_OPEN;
     FH_SUPER->u.ftp.control_connection_buzy = 1;
+    fh->u.ftp.append = 0;
     return 1;
 }
 
@@ -1688,6 +1690,7 @@ static void my_forget (char *file)
 
 static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 {
+    fh->u.ftp.append = 0;
     /* File will be written only, so no need to retrieve it from ftp server */
     if (((flags & O_WRONLY) == O_WRONLY) && !(flags & (O_RDONLY|O_RDWR))){
 #ifdef HAVE_STRUCT_LINGER
@@ -1707,6 +1710,7 @@ static int ftpfs_fh_open (vfs *me, vfs_s_fh *fh, int flags, int mode)
 		if (handle == -1)
 		    return -1;
 		close (handle);
+		fh->u.ftp.append = flags & O_APPEND;
 	    }
 	    return 0;
 	}

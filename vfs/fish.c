@@ -467,8 +467,9 @@ error:
 }
 
 static int
-file_store(vfs *me, vfs_s_super *super, char *name, char *localname)
+file_store(vfs *me, vfs_s_fh *fh, char *name, char *localname)
 {
+    vfs_s_super *super = FH_SUPER;
     int n, total;
     char buffer[8192];
     struct stat s;

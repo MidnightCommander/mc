@@ -915,7 +915,7 @@ vfs_s_close (void *fh)
 	if (!s)
 	    res = -1;
  	else {
-	    res = MEDATA->file_store (me, FH_SUPER, s, FH->ino->localname);
+	    res = MEDATA->file_store (me, fh, s, FH->ino->localname);
 	    g_free (s);
 	}
 	vfs_s_invalidate (me, FH_SUPER);
