@@ -302,7 +302,8 @@ installdirs:
 
 
 mostlyclean-generic:
-
+	-rm -f index.html gmc.html
+	
 clean-generic:
 
 distclean-generic:
@@ -338,6 +339,8 @@ mostlyclean distclean maintainer-clean
 
 
 all: 
+
+index.html: gmc.html
 
 gmc.html: gmc/gmc.html
 	-cp gmc/gmc.html .
