@@ -181,6 +181,7 @@ static void
 desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, int ypos)
 {
 	int u, v;
+	char *filename;
 
 	if (auto_pos)
 		get_icon_auto_pos (&xpos, &ypos);
@@ -203,6 +204,12 @@ desktop_icon_info_place (struct desktop_icon_info *dii, int auto_pos, int xpos, 
 	dii->x = xpos;
 	dii->y = ypos;
 	gtk_widget_set_uposition (dii->dicon, xpos, ypos);
+
+	/* Save the information */
+
+	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+	gmeta_set_icon_pos (filename, dii->x, dii->y);
+	g_free (filename);
 }
 
 /* Unselects all the desktop icons */
@@ -628,25 +635,6 @@ desktop_init (void)
 	load_initial_desktop_icons ();
 }
 
-/* Saves the icon position metadata for all the icons in the desktop */
-static void
-save_icons_pos (void)
-{
-	int i;
-	GList *l;
-	struct desktop_icon_info *dii;
-	char *filename;
-
-	for (i = 0; i < (layout_cols * layout_rows); i++)
-		for (l = layout_slots[i].icons; l; l = l->next) {
-			dii = l->data;
-
-			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
-			gmeta_set_icon_pos (filename, dii->x, dii->y);
-			g_free (filename);
-		}
-}
-
 /**
  * desktop_destroy
  *
@@ -658,8 +646,6 @@ desktop_destroy (void)
 	int i;
 	GList *l;
 	struct desktop_icon_info *dii;
-
-	save_icons_pos ();
 
 	/* Destroy the desktop icons */
 
