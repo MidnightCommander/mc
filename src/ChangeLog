@@ -1,5 +1,11 @@
 2002-07-29  Pavel Roskin  <proski@gnu.org>
 
+	* subshell.c (feed_subshell): Reading 0 bytes in a channel with
+	FD_ISSET being set is a sign of something being wrong - exit
+	immediately.  Observed when mc is run under su in xterm and
+	xterm is closed while the subshell is running.
+	Reported by Vlad Harchev <hvv@hippo.ru>
+
 	* color.h: Replace PORT_COLOR macro with BEST_COLOR, which uses
 	MY_COLOR_PAIR.
 

@@ -990,22 +990,20 @@ static int feed_subshell (int how, int fail_on_error)
 	    /* for (i=0; i<5; ++i)  * FIXME -- experimental */
 	    {
 		bytes = read (subshell_pty, pty_buffer, pty_buffer_size);
-		/* Patch from viro@math.psu.edu 
-		 * add by MichaelBramer (Debian MC-Maintainer */
+
+		/* The subshell has died */
                 if (bytes == -1 && errno == EIO && !subshell_alive)
-                {
                     return FALSE;
-                }
-                if (bytes == -1)
-		/* end from the patch */
+
+                if (bytes <= 0)
 		{
 		    tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		    perror ("\n"__FILE__": read (subshell_pty...)");
 		    exit (1);
 		}
-		if (bytes > 0)
-		    if (how == VISIBLY)
-			write (STDOUT_FILENO, pty_buffer, bytes);
+
+		if (how == VISIBLY)
+		    write (STDOUT_FILENO, pty_buffer, bytes);
 	    }
 
 	    /* }}} */
@@ -1015,14 +1013,14 @@ static int feed_subshell (int how, int fail_on_error)
 
 	    {
 		bytes = read (subshell_pipe[READ], subshell_cwd, MC_MAXPATHLEN+1);
-		if (bytes == -1)
+		if (bytes <= 0)
 		{
 		    tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		    perror ("\n"__FILE__": read (subshell_pipe[READ]...)");
 		    exit (1);
 		}
-		if (bytes >= 1)
-		    subshell_cwd[bytes-1] = 0;  /* Squash the final '\n' */
+
+		subshell_cwd[bytes-1] = 0;  /* Squash the final '\n' */
 
 		synchronize ();
 
@@ -1041,7 +1039,7 @@ static int feed_subshell (int how, int fail_on_error)
 
 	    {
 		bytes = read (STDIN_FILENO, pty_buffer, pty_buffer_size);
-		if (bytes == -1)
+		if (bytes <= 0)
 		{
 		    tcsetattr (STDOUT_FILENO, TCSANOW, &shell_mode);
 		    perror ("\n"__FILE__": read (STDIN_FILENO, pty_buffer...)");
