@@ -60,10 +60,12 @@ int check_movement_keys (int c, int additional, int page_size, void *data,
 	
     case KEY_HOME:
     case KEY_A1:
+    case ALT ('<'):
 	(*topfn)(data, 0);
 	return 1;
     case KEY_END:
     case KEY_C1:
+    case ALT ('>'):
 	(*bottomfn)(data, 0);
 	return 1;
     }

@@ -203,12 +203,6 @@ typedef const struct {
     int action;
 } key_define_t;
 
-static key_define_t mc_bindings [] = {
-    { KEY_END,    ESC_STR ">", MCKEY_NOACTION },
-    { KEY_HOME,   ESC_STR "<", MCKEY_NOACTION },
-    { 0, 0, MCKEY_NOACTION },
-};
-
 /* Broken terminfo and termcap databases on xterminals */
 static key_define_t xterm_key_defines [] = {
     { KEY_F(1),   ESC_STR "OP",   MCKEY_NOACTION },
@@ -344,8 +338,6 @@ void init_key (void)
         ((!strncmp (term, "iris-ansi", 9)) || (!strncmp (term, "xterm", 5))))
 	define_sequences (xterm_key_defines);
 
-    define_sequences (mc_bindings);
-    
     /* load some additional keys (e.g. direct Alt-? support) */
     load_xtra_key_defines();
     
@@ -763,17 +755,15 @@ int get_key_code (int no_delay)
 		this = this->next;
 	    else {
 	        if (parent != NULL && parent->action == MCKEY_ESCAPE) {
-	            /* This is just to save a lot of define_sequences */
-	            if (isalpha(c)
-			|| (c == '\n') || (c == '\t') || (c == (31 & 'h'))
-			|| (c == KEY_BACKSPACE) || (c == '!') || (c == '\r')
-			|| c == 0177 || c == '+' || c == '-' || c == '\\' 
-			|| c == '?')
-			c = ALT(c);
-		    else if (isdigit(c))
+
+		    /* Convert escape-digits to F-keys */
+		    if (isdigit(c))
 	                c = KEY_F (c - '0');
 		    else if (c == ' ')
 			c = ESC_CHAR;
+	            else
+			c = ALT(c);
+
 		    pending_keys = seq_append = NULL;
 		    this = NULL;
 		    return correct_key_code (c);

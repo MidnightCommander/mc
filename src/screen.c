@@ -2059,9 +2059,11 @@ static const key_map panel_keymap [] = {
 
     { KEY_IC,     mark_file },
     { KEY_HOME,	  move_home },
+    { KEY_A1,     move_home },
+    { ALT ('<'),  move_home },
     { KEY_C1,     move_end },
     { KEY_END,    move_end },
-    { KEY_A1,     move_home },
+    { ALT ('>'),  move_end },
     { KEY_NPAGE,  next_page },
     { KEY_PPAGE,  prev_page },
     { KEY_NPAGE | KEY_M_CTRL, ctrl_next_page },

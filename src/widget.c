@@ -1401,9 +1401,11 @@ static const struct {
     { XCTRL('a'),         beginning_of_line },
     { KEY_HOME,	          beginning_of_line },
     { KEY_A1,	          beginning_of_line },
+    { ALT ('<'),          beginning_of_line },
     { XCTRL('e'),         end_of_line },
     { KEY_END,            end_of_line },
     { KEY_C1,             end_of_line },
+    { ALT ('>'),          end_of_line },
     { KEY_LEFT,           key_left },
     { KEY_LEFT | KEY_M_CTRL, key_ctrl_left },
     { XCTRL('b'),         backward_char },
@@ -1926,12 +1928,14 @@ listbox_key (WListbox *l, int key)
     switch (key){
     case KEY_HOME:
     case KEY_A1:
+    case ALT ('<'):
 	l->current = l->top = l->list;
 	l->pos = 0;
 	return 1;
 	
     case KEY_END:
     case KEY_C1:
+    case ALT ('>'):
 	l->current = l->top = l->list->prev;
 	for (i = min (l->height - 1, l->count - 1); i; i--)
 	    l->top = l->top->prev;

@@ -1,3 +1,15 @@
+2003-06-09  Pavel Roskin  <proski@gnu.org>
+
+	* key.c (mc_bindings): Remove.  Esc-">" and Esc-"<" are not
+	always the same as Home and End, at least in mcedit.
+	(get_key_code): Never ignore Escape outside known sequences.
+	* screen.c (panel_keymap): Add Esc-">" and Esc-"<".
+	* tree.c (tree_keymap): Likewise.
+	* widget.c (input_map): Likewise.
+	(listbox_key): Likewise.
+	(check_movement_keys): Likewise.
+	Reported by Miguel de Icaza <miguel@ximian.com>
+
 2003-06-09  David Sterba  <dave@jikos.cz>
 
 	* key.c (correct_key_code): Treat Shift-Backspace as Backspace.
