@@ -23,3 +23,5 @@ syntax_DATA =			\
 	swig.syntax		\
 	texinfo.syntax		\
 	unknown.syntax
+
+EXTRA_DIST = $(syntax_DATA)
