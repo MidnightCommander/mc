@@ -61,11 +61,12 @@ Mostra i percorsi di ricerca compilati per i file del Midnight Commander.
 Reimposta i softkeys ai valori predefiniti dal database termcap/terminfo.
 Utile solo su terminali HP quando non vanno i tasti funzione.
 .TP
-.I "-l file" 
+.I "\-l file" 
 Salva il dialogo ftpfs con il server in file.
 .TP
-.I "\-P"
-All'uscita, il Midnight Commander stampa l'ultima directory in uso.
+.I "\-P file"
+All'uscita, il Midnight Commander stampa l'ultima directory in uso 
+sul file specificato.
 Questa funzione non è fatta per un uso diretto, ma dovrebbe essere 
 utilizzata da una speciale funzione shell che imposti automaticamente 
 l'ultima directory corrente della shell come l'ultima directory in cui
@@ -645,17 +646,17 @@ elenca le azioni che permettono di personalizzare il Midnight Commander.
 .\"NODE "  Left and Right Menus"
 .SH "  Menu Sinistra e Destra"
 L'apparenza dei pannelli directory è modificabile tramite i menu
-.B "Sinistra"
+.B Sinistra
 e
-.BR "Destra" .
+.BR Destra .
 .PP
 .\"NODE "    Listing Mode..."
 .SH "    Modalità Lista..."
 La modalità lista serve a mostrare un elenco di file; ci sono quattro
 modalità elenco disponibili:
-.BR "Completa" ,
-.BR "Breve" ,
-.BR "Lunga"
+.BR Completa ,
+.BR Breve ,
+.B Lunga
 e
 .BR "Definita dall'utente" .
 La modalità completa mostra il nome del file, l'ampiezza del file e
@@ -1291,8 +1292,10 @@ comando cd interno\&.
 .PP
 .\"NODE "    Extension File Edit"
 .SH "    Modifica File Estensioni"
-Questo comando invocherà l'editor sul file ~/.mc/bindings. Il fomato di questo
-file è il seguente (il formato è cambiato dalla versione 3.0):
+Questo comando invocherà l'editor sul file 
+.IR ~/.mc/bindings . 
+Il fomato di questo file è il seguente (il formato è cambiato dalla 
+versione 3.0):
 .PP
 Tutte le righe che iniziano per # vengono ignorate.
 .PP
@@ -1305,51 +1308,45 @@ fino al fine riga è
 .I descrizione
 .PP
 parolachiave può essere: 
-.PP
+.TP
 .I shell
-.IP
 (allora descrizione è qualsiasi estensione (no caratteri jolly), 
 cioè corrisponde a tutti i file *descrizione. Esempio: .tar corrisponde a *.tar)
-.PP
+.TP
 .I regex
-.IP
 (descrizione è un'espressione regolare)
-.PP
+.TP
 .I type
-.IP
 (file corrisponde se `file %f` corrisponde all'espressione regolare descrizione
 (nome del file: a partire da `file %f` viene rimosso))
-.PP
+.TP
 .I default
-.IP
 (corrisponde a qualsiasi file indipendentemente da descrizione)
 .PP
 Le altre linee devono cominciare con uno spazio o una tabulazione e devono essere nel formato:
-.PP
 .I parolachiave=comando
 (senza spazi intorno a =), dove
 .I parolachiave
 deve essere: 
-.PP
 .I Open
 (se l'utente preme Invio o fa doppio click), 
 .I View
 (F3),
 .I Edit
 (F4).
-.PP
 .I command
 è qualsiasi comando shell di una riga, con la semplice
 .\"LINK2"
 sostituzione macro\&.
 .\"Macro Substitution"
 .PP
-Gli obiettivi sono valutati dalla cima al fondo (l'ordine perciò è 
-importante). Se alcune azioni mancano, la ricerca continua come se 
-l'obiettivo non corrispondesse (cioè se un file corrisponde alla prima e
-alla seconda voce e manca la voce View in cima, premendo F3 verrà
-usata l'azione View della seconda voce. Normalmente dovrebbero
-corrispondere tutte le azioni.
+Gli obiettivi sono valutati dalla cima al fondo, perciò l'ordine è 
+importante. Se alcune azioni mancano, la ricerca continua come se 
+la regola non corrispondesse, cioè se un file corrisponde alla prima e
+alla seconda voce e manca la voce View in cima, allora premendo F3 verrà
+usata l'azione View della seconda voce.
+.I Normalmente 
+dovrebbero corrispondere tutte le azioni.
 .PP
 .\"NODE "    Background jobs"
 .SH "    Processi in Background"
@@ -1432,7 +1429,7 @@ Sintassi condizione: 	= <sotto-cond>
 Sotto-condizione è una delle seguenti:
 
   y <modello>	        sintassi della corrispondenza modello file corrente?
-                        solo per modifica menu.
+                        (solo per modifica menu).
   f <modello>	        corrispondenza modello file corrente?
   F <modello>	        corrispondenza modello altro file?
   d <modello>	        corrispondenza modello directory corrente?
@@ -1980,83 +1977,61 @@ Le macro sono:
 .IP
 Indentazione di spazi, uguale alla colonna della
 posizione del cursore. Solo per la modifica menu.
-.PP
+.TP
 .I "%y"
-.IP
 Il tipo di sintassi del file corrente. Solo per la modifica menu.
-.PP
+.TP
 .I "%k"
-.IP
 Nome del file di blocco.
-.PP
+.TP
 .I "%e"
-.IP
 Nome del file di errore.
-.PP
+.TP
 .I "%m"
-.IP
 Nome del menu corrente.
-.PP
-.I "%f"
-e
-.I "%p"
-.IP
+.TP
+.IR "%f" e "%p"
 Nome del file corrente.
-.PP
+.TP
 .I "%x"
-.IP
 L'estensione del file corrente.
-.PP
+.TP
 .I "%b"
-.IP
 Nome del file corrente ma senza estensione.
-.PP
+.TP
 .I "%d"
-.IP
 Nome della directory corrente.
-.PP
+.TP
 .I "%F"
-.IP
 Il file corrente nel pannello non selezionato.
-.PP
+.TP
 .I "%D"
-.IP
 La directory corrente nel pannello non selezionato.
-.PP
+.TP
 .I "%t"
-.IP
 I file attualmente marcati.
-.PP
+.TP
 .I "%T"
-.IP
 I file attualmente marcati nel pannello non selezionato.
-.PP
-.I "%u"
-e
-.I "%U"
-.IP
+.TP
+.IR "%u" e "%U"
 Simili alle macro %t e %T, in aggiunta i file vengono deselezionati.
 E' possibile usare questa macro solo una volta per voce di menu file
 o per voce di file estensione, dato che la volta successiva non ci
 saranno file marcati.
-.PP
-.I "%s"
-e
-.I "%S"
-.IP
+.TP
+.IR "%s" e "%S"
 I file selezionati se ce ne sono. Altrimenti il file corrente.
-.PP
+.TP
 .I "%cd"
-.IP
 Questa è una macro speciale usata per cambiare la directory corrente
 alla directory specificata di fronte ad essa. Usata principalmente 
 come interfaccia al
 .\"LINK2"
 File System Virtuale\&.
 .\"Virtual File System"
-.PP
+.TP
 .I "%view"
-.IP
 Questa macro serve per invocare il visualizzatore interno. Può essere
 usata da sola o con argomenti. Se si passa argomenti a questa macro,
 questi dovrebbero essere racchiusi da parentesi.
@@ -2072,20 +2047,17 @@ grassetto e sottolineato di nroff;
 .I unformatted
 per dire al visualizzatore di non interpretare i comandi nroff
 per rendere il testo grassetto o sottolineato.
-.PP
+.TP
 .I "%%"
-.IP
 Il carattere % 
-.PP
+.TP
 .I "%{testo}"
-.IP
 Visualizza una richiesta di sostituzione. Viene mostrata una finestra
 contenente il testo all'interno delle graffe. La macro viene sostituita
 dal testo immesso dall'utente. L'utente può premere ESC o F10 per annullare.
 Questa macro non funziona ancora sulla riga di comando.
-.PP
+.TP
 .I "%var{ENV:default}"
-.IP
 Se la variabile di ambiente 
 .I ENV
 non è impostata, la sostituzione prenderà
@@ -3023,36 +2995,31 @@ dai menu. Comunque, c'è un piccolo numero di impostazioni che possono
 essere cambiate solo agendo sul file di configurazione.
 .PP
 Queste sono le variabili che possono essere impostate nel file ~/.mc/ini:
-.PP
+.TP
 .I clear_before_exec
-.IP
 Il valore predefinito del Midnight Commander è di cancellare lo schermo
 prima dell'esecuzione di un comando. Se si preferisce vedere il risultato
 di un comando in fondo allo schermo, si modifichi la copia locale del file
 ~/.mc/ini e si cambi il valore del campo clear_before_exec a 0.
-.PP
+.TP
 .I confirm_view_dir
-.IP
 Se si preme F3 su di una directory, normalmente MC entra nella directory.
 Se questa opzione è impostata a 1, MC chiederà una conferma prima di
 cambiare directory se si hanno dei file marcati.
-.PP
+.TP
 .I ftpfs_retry_seconds
-.IP
 Questo valore è il numero di secondi che il Midnight Commander aspetta
 prima di tentare di riconnettersi ad un ftp server che ha negato
 l'autenticazione. Se il valore è zero, l'autenticazione non verrà ritentata.
-.PP
+.TP
 .I ftpfs_use_passive_connections
-.IP
 Il valore predefinito per questa opzione è spento. Essa fa in modo che
 il codice dell'fsftp usi la modalità passiva di apertura per il
 trasferimento dei file. Viene usata dalle persone che stanno dietro
 un router che filtra i pacchetti. Quest'opzione funziona solo se non
 si sta usando un proxy ftp.
-.PP
+.TP
 .I max_dirt_limit
-.IP
 Specifica al massimo quanti aggiornamenti possono essere saltati nel
 visualizzatore di file interno. Normalmente questo valore non è 
 significativo, dato che il codice automaticamente aggiusta il numero 
@@ -3063,48 +3030,41 @@ aggiornamenti dello schermo troppo instabili.
 .IP
 Sembra che impostare max_dirt_limit a 10 porta i migliori risultati,
 e questo è il valore predefinito.
-.PP
+.TP
 .I mouse_move_pages
-.IP
 Controlla il fatto che lo scorrimento con il mouse sui pannelli sia fatto 
 per pagine o per righe.
-.PP
+.TP
 .I mouse_move_pages_viewer
-.IP
 Controlla se lo scorrimento del mouse nel visualizzatore di file interno 
 sia fatto per pagine o per righe.
-.PP
+.TP
 .I old_esc_mode
-.IP
 Normalmente il Midnight Commander tratta il tasto ESC come un prefisso
 (old_esc_mode=0), ma se si imposta quest'opzione (old_esc_mode=1),
 allora il tasto ESC agirà come un tasto di prefisso per un secondo, e 
 se non vengono premuti altri tasti, allora il tasto ESC sarà interpretato
 come un tasto di cancellazione (ESC ESC).
-.PP
+.TP
 .I only_leading_plus_minus
-.IP
 Permette una gestione speciale per '+', '-', '*' nella riga di comando 
 (selezione, de-selezione, selezione inversa) solo se la riga di comando è
 vuota. Non è necessario proteggere questi caratteri nel mezzo della riga
 di comando ma non è possibile cambiare selezione se la riga di comando
 non è vuota.
-.PP
+.TP
 .I panel_scroll_pages
-.IP
 Se impostata (valore predefinito), i pannelli scorrono di metà
 quando il cursore raggiunge la fine o l'inizio del pannello, 
 altrimenti scorrono di un file per volta.
-.PP
+.TP
 .I show_output_starts_shell
-.IP
 Questa variabile lavora solo se non si sta usando il supporto della 
 subshell. Quando si usano i tasti C-o per tornare allo schermo utente,
 se quest'opzione è impostata, si avrà una nuova shell. Altrimenti,
 premendo qualsiasi tasto si tornerà al Midnight Commander.
-.PP
+.TP
 .I torben_fj_mode
-.IP
 Se quest'opzione è impostata, allora i tasti inizio e fine lavoreranno
 leggermente differentemente sui pannelli. Invece che muovere le selezioni
 al primo e ultimo file del pannello, agiranno nel modo seguente:
@@ -3117,17 +3077,15 @@ Il tasto fine ha un comportamento simile: va giù alla riga centrale
 se era sopra di essa, altrimenti va alla riga di fondo a meno che non 
 ci sia già; in tal caso sposterà la selezione all'ultimo file del
 pannello.
-.PP
+.TP
 .I use_file_to_guess_type
-.IP
 Se questa variabile è abilitata (valore predefinito) userà il comando
 file per trovare delle corrispondenze sui tipi di file elencati nel file
 .\"LINK2"
 mc.ext\&.
 .\"Extension File Edit"
-.PP
+.TP
 .I xterm_mode
-.IP
 Se questa variabile è impostata (il valore predefinito è no) quando
 si naviga il file system su un pannello ad albero, automaticamente
 ricaricherà l'altro pannello con il contenuto della directory 
