@@ -1,3 +1,7 @@
+2003-06-25  Marco Ciampa  <ciampix@libero.it>
+
+	* doc/it/mc.1.in: small fix
+
 2003-06-23  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* lib/mc.ext: Allow ZIP in all capitals in "file" output.

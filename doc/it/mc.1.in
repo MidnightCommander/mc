@@ -1564,7 +1564,7 @@ Opzioni del pannello, Pausa dopo l'esecuzione e Altre opzioni.
 .PP
 .B Opzioni del pannello
 .PP
-.I mostra file di backup.
+.I Mostra file di backup.
 Se abilitata, il Midnight Commander mostrerà i file che terminano con una tilde.
 Altrimenti essi non verranno mostrati (come nell'opzione -B del comando GNU ls).
 .PP
@@ -1572,7 +1572,7 @@ Altrimenti essi non verranno mostrati (come nell'opzione -B del comando GNU ls).
 Se abilitata, il Midnight Commander mostrerà tutti i file che cominciano con
 un punto (come ls -a).
 .PP
-.I cursore in basso mentre seleziona.
+.I Cursore in basso mentre seleziona.
 Se abilitata, la barra di selezione si muoverà in basso dopo aver selezionato
 un file (sia con C-t che con il tasto Ins).
 .PP
