@@ -319,7 +319,7 @@ copy_cmd (void)
     }
 }
 
-/* Invoked by F6.  Move/rename, default to the other panel.  */
+/* Invoked by F6.  Move/rename, default to the other panel, ignore marks.  */
 void ren_cmd (void)
 {
     save_cwds_stat ();
@@ -329,7 +329,7 @@ void ren_cmd (void)
     }
 }
 
-/* Invoked by F15.  Copy, default to the same panel.  */
+/* Invoked by F15.  Copy, default to the same panel, ignore marks.  */
 void copy_cmd_local (void)
 {
     save_cwds_stat ();
@@ -385,6 +385,17 @@ void delete_cmd (void)
     save_cwds_stat ();
 
     if (panel_operate (cpanel, OP_DELETE, 0)){
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	repaint_screen ();
+    }
+}
+
+/* Invoked by F18.  Remove selected file, regardless of marked files.  */
+void delete_cmd_local (void)
+{
+    save_cwds_stat ();
+
+    if (panel_operate (cpanel, OP_DELETE, 1)){
 	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
 	repaint_screen ();
     }

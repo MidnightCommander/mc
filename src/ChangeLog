@@ -1,10 +1,14 @@
 2003-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (delete_cmd_local): New function.  Remove file under the
+	cursor, regardless of marks.
+	* screen.c (panel_keymap): Bind it to F18.
+
 	* file.c (panel_operate_generate_prompt): Remove source
 	calculation, it doesn't belong here.
 	(panel_operate): Change arguments: drop ask_user and thedefault,
 	introduce force_single.  force_single changes default to the
-	current file and ignores selection.  Adjust all dependencies.  
+	current file and ignores selection.  Adjust all dependencies.
 
 2003-08-17  Pavel Roskin  <proski@gnu.org>
 

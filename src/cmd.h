@@ -22,6 +22,7 @@ void copy_cmd (void);
 void ren_cmd (void);
 void copy_cmd_local (void);
 void ren_cmd_local (void);
+void delete_cmd_local (void);
 void free_vfs_now (void);
 void reselect_vfs (void);
 void mkdir_cmd (void);

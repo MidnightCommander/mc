@@ -2086,6 +2086,7 @@ static const key_map panel_keymap [] = {
     { KEY_F(14),  edit_cmd_new },
     { KEY_F(15),  copy_cmd_local },
     { KEY_F(16),  ren_cmd_local },
+    { KEY_F(18),  delete_cmd_local },
     { ALT('y'),   directory_history_prev },
     { ALT('u'),   directory_history_next },
     { ALT('+'),	  select_cmd },
