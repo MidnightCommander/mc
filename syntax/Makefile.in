@@ -1,0 +1,13 @@
+
+dunno what to do here exactly
+
+these files must be installed:
+    /usr/lib/cooledit/syntax/c.syntax
+    /usr/lib/cooledit/syntax/changelog.syntax
+etc.
+
+
+(I use automake only)
+
+-paul <psheer@obsidian.co.za>
+
