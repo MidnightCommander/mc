@@ -320,7 +320,7 @@ msgstr " Inserire stringa di sostituzione:"
 
 #: edit/editcmd.c:1118 edit/editcmd.c:1187 src/view.c:1963
 msgid " Enter search string:"
-msgstr " Inserire stringa di ricerca"
+msgstr " Inserire stringa di ricerca:"
 
 #: edit/editcmd.c:1137 edit/editcmd.c:1770 edit/editcmd.c:1800
 #: edit/editcmd.c:1802
