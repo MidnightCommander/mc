@@ -1,3 +1,11 @@
+2002-11-11  Pavel Roskin  <proski@gnu.org>
+
+	* panel.h: Simplify interdependencies between headers.  Use
+	forward declarations for structures.
+	* widget.h: Declare struct WListbox.
+	* wtools.h: Use forward declaration for struct WListbox to avoid
+	dependency on widget.h.
+
 2002-11-10  Pavel Roskin  <proski@gnu.org>
 
 	* panel.h: Remove all unused definitions.  Make format_e an

@@ -1,10 +1,12 @@
 #ifndef __WTOOLS_H
 #define __WTOOLS_H
 
+struct WListbox;
+
 /* Listbox utility functions */
 typedef struct {
     Dlg_head *dlg;
-    WListbox *list;
+    struct WListbox *list;
 } Listbox;
 
 Listbox *create_listbox_window (int cols, int lines, char *title, char *help);

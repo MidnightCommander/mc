@@ -117,7 +117,7 @@ enum {
 
 typedef int (*lcback) (void *);
 
-typedef struct {
+typedef struct WListbox {
     Widget widget;
     WLEntry *list;		/* Pointer to the circular double linked list. */
     WLEntry *top;		/* The first element displayed */

@@ -1,11 +1,8 @@
 #ifndef __PANEL_H
 #define __PANEL_H
 
-#include "fs.h"
-#include "dir.h"     /* file_entry */
-#include "dlg.h"
-#include "util.h"
-#include "widget.h"	/* for history loading and saving */
+#include "dir.h"		/* dir_list */
+#include "dlg.h"		/* Widget */
 
 #define selection(p) (&(p->dir.list[p->selected]))
 #define other_panel get_other_panel()
@@ -34,6 +31,7 @@ enum panel_display_enum {
 };
 
 struct format_e;
+struct hist_entry;
 
 typedef struct {
     Widget   widget;
@@ -43,7 +41,7 @@ typedef struct {
     int      active;		/* If panel is currently selected */
     char     cwd [MC_MAXPATHLEN];/* Current Working Directory */
     char     lwd [MC_MAXPATHLEN];/* Last Working Directory */
-    Hist     *dir_history;	/* directory history */
+    struct   hist_entry *dir_history;	/* directory history */
     char     *hist_name;	/* directory history name for history file */
     int      count;		/* Number of files in dir structure */
     int      marked;		/* Count of marked files */
