@@ -12,17 +12,16 @@ Version 
 Ez a GNU Midnight Commander súgója. 
 
 Az interaktív súgó használatának megismeréséhez csak üss egy 
-entertHow to use help. Itt közvetlenül a súgó tartalomjegyzékébe 
-Contentsjuthatsz.
+entertHow to use help. Itt közvetlenül a súgó tartalomjegyzékébe Contentsjuthatsz.
 
 A Midnight Commander-t a következõ szerzõkAUTHORS készítették.
 
-A Midnight Commander mindenféle garanciaWARRANTY nélkül kerül 
-kiadásra.
-Ez szabad szoftver, így továbbadhatod azt a 
+A Midnight Commander mindenféle garanciaWARRANTY nélkül kerül
+kiadásra. Ez szabad szoftver, így továbbadhatod azt a
 Felhasználási engedélybenLicense meghatározott feltételekkel.
 
-[License] 
+[License]
+Engedélyek
 
 Ez a rész a GNU általános felhasználási engedélyét tartalmazza. 
            -   Ennek hivatalos nyelve angol.   -
@@ -441,34 +440,32 @@ Library General Public License instead of this License.
 [QueryBox]
 Lekérdezõ box
 
-A lekérdezõ boxban kezeléséhez a nyíl billentyûket, a szövegrész
-elejének magadásást, vagy a gombokra történõ egérkattintást
-használhatod.
+A lekérdezõ boxban kezeléséhez a nyíl billentyûket, a
+szövegrész elejének magadásást, vagy a gombokra történõ
+egérkattintást használhatod.
 
 [How to use help]
 Hogyan használjuk a súgót
 
-A súgóban a navigációhoz a billentyûzet gombjait és az 
-egér gombjait is használhatod.
-A lefelé mutató nyíl lenyomására a következõ bejegyzésre
-ugorhatsz, vagy legördítheted azt.
-A felfelé mutató nyíl lenyomására ez elõzõ bejegyzésre 
-ugorhatsz, vagy felhúzhatod azt.
+A súgóban a navigációhoz a billentyûzet gombjait és az
+egér gombjait is használhatod. A lefelé mutató nyíl
+lenyomására a következõ bejegyzésre ugorhatsz, vagy
+legördítheted azt. A felfelé mutató nyíl lenyomására
+ez elõzõ bejegyzésre ugorhatsz, vagy felhúzhatod azt.
 A jobbra mutató nyíl lenyomására a linknek megfelelõ
-címre lép. 
-A balra mutató nyíl lenyomására az elõzõleg meglátogatott
-címre lépsz vissza.
+címre lép. A balra mutató nyíl lenyomására az elõzõleg
+meglátogatott címre lépsz vissza.
 
-Ha az általad használt terminál nem támogatja a kurzor 
-gombok használatát, használd a szóköz billentyût az elõre
-lépésre, a 'b' gombot a visszalépésre. Használd a TAB gombot 
-a következõ bejegyzésre való ugráshoz és az ENTER-t a 
-jelenlegi link által megadott címre történõ lépéshez. 
-Az 'l' (last=utolsó) gombot az elõzõleg látogatott oldalra
-való visszalépésre használhatod. Az ESC lenyomásával 
-kiléphetsz a Súgóból.
+Ha az általad használt terminál nem támogatja a kurzor
+gombok használatát, használd a szóköz billentyût az
+elõre lépésre, a 'b' gombot a visszalépésre. Használd a
+TAB gombot a következõ bejegyzésre való ugráshoz és az
+ENTER-t a jelenlegi link által megadott címre történõ
+lépéshez. Az 'l' (last=utolsó) gombot az elõzõleg
+látogatott oldalra való visszalépésre használhatod. Az
+ESC lenyomásával kiléphetsz a Súgóból.
 
-A bal egérgomb lenyomásával követheted a linket, vagy 
+A bal egérgomb lenyomásával követheted a linket, vagy
 gördíthetsz. A jobb gomb lenyomásával visszatérhetsz az
 elõzõleg látogatott pontra.
 
@@ -479,9 +476,9 @@ A Súgóban használható összes gomb listája:
 tab           Mozgás a következõ elemre.
 M-tab         Mozgás az elõzõ elemre. 
 down          Mozgás a következõ elemre; a sorokat lefelé 
-                                                  gördíti.
+              gördíti.
 up            Mozgás az elõzõ elemre; a sorokat felfelé 
-                                                  gördíti.
+              gördíti.
 right, enter  Követi a jelenlegi linket.    
 left, l       Visszalép az elõzõleg meglátogatott pontra.
 F1            Megjeleníti a Súgót a Súgó nézõvel.
