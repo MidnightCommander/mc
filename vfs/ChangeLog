@@ -1,3 +1,10 @@
+2003-11-14  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* undelfs.c (undelfs_loaddel): Use g_try_malloc()/g_try_relloc()
+	since we want to recover and not abort the program if we don't
+	have enough memory.
+	(com_err): Fix implementation.
+
 2003-11-14  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.c (vfs_split): Deconstify.

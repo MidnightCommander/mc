@@ -164,8 +164,9 @@ undelfs_lsdel_proc(ext2_filsys fs, blk_t *block_nr, int blockcnt, void *private)
     return 0;
 }
 
-/* We don't use xmalloc, since we want to recover and not abort the program
- * if we don't have enough memory
+/*
+ * Load information about deleted files.
+ * Don't abort if there is not enough memory - load as much as we can.
  */
 static int
 undelfs_loaddel (void)
@@ -177,12 +178,12 @@ undelfs_loaddel (void)
 
     max_delarray = 100;
     num_delarray = 0;
-    delarray = g_new (struct deleted_info, max_delarray);
+    delarray = g_try_malloc (sizeof (struct deleted_info) * max_delarray);
     if (!delarray) {
 	message (1, undelfserr, _(" not enough memory "));
 	return 0;
     }
-    block_buf = g_malloc (fs->blocksize * 3);
+    block_buf = g_try_malloc (fs->blocksize * 3);
     if (!block_buf) {
 	message (1, undelfserr, _(" while allocating block buffer "));
 	goto free_delarray;
@@ -224,15 +225,18 @@ undelfs_loaddel (void)
 	}
 	if (lsd.free_blocks && !lsd.bad_blocks) {
 	    if (num_delarray >= max_delarray) {
-		max_delarray += 50;
-		delarray =
-		    g_renew (struct deleted_info, delarray, max_delarray);
-		if (!delarray) {
+		struct deleted_info *delarray_new =
+		    g_try_realloc (delarray,
+				   sizeof (struct deleted_info) *
+				   (max_delarray + 50));
+		if (!delarray_new) {
 		    message (1, undelfserr,
 			     _
 			     (" no more memory while reallocating array "));
 		    goto error_out;
 		}
+		delarray = delarray_new;
+		max_delarray += 50;
 	    }
 
 	    delarray[num_delarray].ino = ino;
@@ -269,13 +273,24 @@ undelfs_loaddel (void)
     return 0;
 }
 
-void com_err (const char *str, long err_code, const char *s2, ...)
-{
-    char *cptr;
 
-    cptr = g_strdup_printf (" %s (%s: %ld) ", s2, str, err_code);
-    message (1, _(" Ext2lib error "), cptr);
-    g_free (cptr);
+/*
+ * This function overrides com_err() from libcom_err library.
+ * It is used in libext2fs to report errors.
+ */
+void
+com_err (const char *whoami, long err_code, const char *fmt, ...)
+{
+    char *str;
+    va_list ap;
+
+    va_start (ap, fmt);
+    str = g_strdup_vprintf (fmt, ap);
+    va_end (ap);
+
+    message (1, _(" Ext2lib error "), " %s (%s: %ld) ", str, whoami,
+	     err_code);
+    g_free (str);
 }
 
 static void *
