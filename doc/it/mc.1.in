@@ -2943,7 +2943,7 @@ base_color=
 xterm=menu=magenta:marked=,magenta:markselect=,red
 .fi
 .PP
-Il cormato della definizione dei colori è:
+Il formato della definizione dei colori è:
 .PP
 .nf
   <parolachiave>=<coloreprimopiano>,<coloresfondo>:<parolachiave>= ...
