@@ -1,3 +1,12 @@
+2002-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* key.h: Add definitions for the keyboard modifiers that can be
+	part of the key code.
+	* key.c (xterm_key_defines): Add some common key definitions
+	with modifiers for xterm and rxvt.
+	(correct_key_code): Strip and remember modifiers.
+	(get_modifier): Add support for saved modifiers.
+
 2002-12-20  Pavel Roskin  <proski@gnu.org>
 
 	* layout.c (init_curses) [!HAVE_SLANG]: Set ESCDELAY to 200ms.

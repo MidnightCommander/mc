@@ -199,6 +199,27 @@ static key_define_t xterm_key_defines [] = {
     { KEY_F(8),   ESC_STR "[19~", MCKEY_NOACTION },
     { KEY_F(9),   ESC_STR "[20~", MCKEY_NOACTION },
     { KEY_F(10),  ESC_STR "[21~", MCKEY_NOACTION },
+
+    /* xterm keys with modifiers */
+    { KEY_M_SHIFT | KEY_UP,    ESC_STR "O2A",   MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "O2B",   MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "O2C",   MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "O2D",   MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5;5~", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6;5~", MCKEY_NOACTION },
+
+    /* rxvt keys with modifiers */
+    { KEY_M_SHIFT | KEY_UP,    ESC_STR "[a",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_DOWN,  ESC_STR "[b",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_RIGHT, ESC_STR "[c",  MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_LEFT,  ESC_STR "[d",  MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_PPAGE, ESC_STR "[5^", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_NPAGE, ESC_STR "[6^", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_HOME,  ESC_STR "[7^", MCKEY_NOACTION },
+    { KEY_M_CTRL  | KEY_END,   ESC_STR "[8^", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_HOME,  ESC_STR "[7$", MCKEY_NOACTION },
+    { KEY_M_SHIFT | KEY_END,   ESC_STR "[8$", MCKEY_NOACTION },
+
     { 0, 0, MCKEY_NOACTION },
 };
 
@@ -429,10 +450,15 @@ int define_sequence (int code, char *seq, int action)
 }
 
 static int *pending_keys;
+static int last_modifiers;
 
 static int
 correct_key_code (int c)
 {
+    /* Remember key modifiers and strip them from the code */
+    last_modifiers = c & KEY_M_MASK;
+    c &= ~KEY_M_MASK;
+
     /* This is needed on some OS that do not support ncurses and */
     /* do some magic after read()ing the data */
     if (c == '\r')
@@ -953,43 +979,50 @@ int is_idle (void)
 }
 
 
+/* Get modifier state (shift, alt, ctrl) for the last key pressed */
 int
 get_modifier (void)
 {
+    int result = 0;
+
+    /* Data about modifiers determined from the escape sequences */
+    if (last_modifiers & KEY_M_SHIFT)
+	result |= SHIFT_PRESSED;
+    if (last_modifiers & KEY_M_ALT)
+	result |= ALTL_PRESSED;
+    if (last_modifiers & KEY_M_CTRL)
+	result |= CONTROL_PRESSED;
+
 #ifdef HAVE_TEXTMODE_X11_SUPPORT
     if (x11_display) {
-        Window root, child;
-        int root_x, root_y;
-        int win_x, win_y;
-        unsigned int mask;
-        Bool b;
+	Window root, child;
+	int root_x, root_y;
+	int win_x, win_y;
+	unsigned int mask;
+	Bool b;
 	int result = 0;
 
-	b = XQueryPointer(x11_display, x11_window, &root, &child,
-                                  &root_x, &root_y,
-                                  &win_x, &win_y,
-             			  &mask);
+	b = XQueryPointer (x11_display, x11_window, &root, &child, &root_x,
+			   &root_y, &win_x, &win_y, &mask);
 
 	if (mask & ShiftMask)
 	    result |= SHIFT_PRESSED;
-        if (mask & ControlMask)
+	if (mask & ControlMask)
 	    result |= CONTROL_PRESSED;
 	return result;
-    } else 
+    } else
 #endif
 #ifdef __linux__
     {
-	unsigned char modifiers;
+	unsigned char modifiers = 6;
 
-	modifiers = 6;
+	if (ioctl (0, TIOCLINUX, &modifiers) >= 0)
+	    result |= modifiers;
 
-	if (ioctl (0, TIOCLINUX, &modifiers) < 0)
-	    return 0;
-
-        return (int) modifiers;
+	return result;
     }
 #else
-    return 0;
+	return 0;
 #endif
 }
 

@@ -30,6 +30,18 @@ int mi_getch (void);
 #define ALTL_PRESSED 8
 int get_modifier (void);
 
+
+/*
+ * Internal representation of the key modifiers.  It is used in the
+ * sequence tables.  In the future, it will be part of the key code.
+ * Currently those bits are stripped in correct_key_code() and
+ * remembered in the last_modifiers variable.
+ */
+#define KEY_M_SHIFT 0x1000
+#define KEY_M_ALT   0x2000
+#define KEY_M_CTRL  0x4000
+#define KEY_M_MASK  0x7000
+
 extern int double_click_speed;
 extern int old_esc_mode;
 extern int irix_fn_keys;
