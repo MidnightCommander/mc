@@ -20,6 +20,9 @@
  */
 
 #include <config.h>
+
+#ifdef LISTMODE_EDITOR
+
 #ifdef HAVE_UNISTD_H
 #   include <unistd.h>
 #endif
@@ -325,3 +328,5 @@ char *listmode_edit (char *oldlistformat)
     listmode_done ();
     return newformat;
 }
+
+#endif /* LISTMODE_EDITOR */

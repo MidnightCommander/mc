@@ -1226,9 +1226,8 @@ tree_box (void)
 	g_free (sel_dir);
     }
 }
-#endif
 
-#if SOMEDAY_WE_WILL_FINISH_THIS_CODE
+#ifdef LISTMODE_EDITOR
 static void
 	listmode_cmd (void)
 {
@@ -1237,7 +1236,8 @@ static void
     message (0, " Listing format edit ", " New mode is \"%s\" ", newmode);
     g_free (newmode);
 }
-#endif
+#endif /* LISTMODE_EDITOR */
+#endif /* HAVE_GNOME */
 
 #ifdef HAVE_GNOME
 void init_menu (void) {};
@@ -1350,10 +1350,12 @@ static menu_entry CmdMenu [] = {
 #ifdef USE_EXT2FSLIB
     { ' ', N_("&Undelete files (ext2fs only)"), 'U', undelete_cmd },
 #endif
-#ifdef VERSION_4
+#ifdef LISTMODE_EDITOR
     { ' ', N_("&Listing format edit"),          'L', listmode_cmd},
 #endif
+#if defined (USE_EXT2FSLIB) || defined (LISTMODE_EDITOR)
     { ' ', "", ' ', 0 },
+#endif
     { ' ', N_("&Extension file edit"),          'E', ext_cmd },
     { ' ', N_("&Menu file edit"),               'M', menu_edit_cmd },
     {' ',  N_("Menu edi&Tor edit"),             'T', edit_user_menu_cmd}

@@ -1,3 +1,10 @@
+2000-09-26  Pavel Roskin  <proski@gnu.org>
+
+	* listmode.c, listmode.h, main.c: Consistently using define
+	LISTMODE_EDITOR to enable the experimental listmode editor.
+	* main.c: Don't allow two adjacent separators in the Command
+	menu.
+
 2000-09-22  Pavel Roskin  <proski@gnu.org>
 
 	* fixhlp.c: Removed.
