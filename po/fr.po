@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2000-10-04 13:12+0200\n"
-"PO-Revision-Date: 2000-10-04 13:11+0200\n"
+"POT-Creation-Date: 2000-10-18 17:56+0200\n"
+"PO-Revision-Date: 2000-10-18 18:15+0200\n"
 "Last-Translator: Christophe Merlet (RedFox) <christophe@merlet.net>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -1136,7 +1136,7 @@ msgstr " octets"
 
 #: gnome/gnome-file-property-dialog.c:252
 msgid " KBytes  ("
-msgstr " KOctets  ("
+msgstr " kOctets  ("
 
 #: gnome/gnome-file-property-dialog.c:253
 #: gnome/gnome-file-property-dialog.c:259
@@ -1254,15 +1254,15 @@ msgstr "Mode actuel : "
 #. Headings
 #: gnome/gnome-file-property-dialog.c:780 gnome/gprop.c:272
 msgid "Read"
-msgstr "Lire"
+msgstr "Lecture"
 
 #: gnome/gnome-file-property-dialog.c:781 gnome/gprop.c:273
 msgid "Write"
-msgstr "Ecrire"
+msgstr "Écriture"
 
 #: gnome/gnome-file-property-dialog.c:782 gnome/gprop.c:274
 msgid "Exec"
-msgstr "Exéc"
+msgstr "Exécution"
 
 #: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:275
 msgid "Special"
@@ -6713,139 +6713,144 @@ msgstr "Erreur raportée après l'abandon."
 msgid "Aborted transfer would be successful."
 msgstr "Le transfert abandonné devrait avoir réussi."
 
-#: vfs/ftpfs.c:315
+#: vfs/ftpfs.c:313
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "FTPfs : déconnexion de %s"
 
-#: vfs/ftpfs.c:373
+#: vfs/ftpfs.c:371
 msgid " FTP: Password required for "
 msgstr " FTP : mot de passe requis "
 
-#: vfs/ftpfs.c:402
+#: vfs/ftpfs.c:400
 msgid " Proxy: Password required for "
 msgstr " Proxy : mot de passe requis "
 
-#: vfs/ftpfs.c:428
+#: vfs/ftpfs.c:426
 msgid "ftpfs: sending proxy login name"
 msgstr "FTPfs : envoi du nom de connexion pour le proxy"
 
-#: vfs/ftpfs.c:432
+#: vfs/ftpfs.c:430
 msgid "ftpfs: sending proxy user password"
 msgstr "FTPfs : envoi du mot de passe pour le proxy"
 
-#: vfs/ftpfs.c:436
+#: vfs/ftpfs.c:434
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "FTPfs : authentification par le proxy réussie"
 
-#: vfs/ftpfs.c:440
+#: vfs/ftpfs.c:438
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "FTPfs : connecté à %s"
 
-#: vfs/ftpfs.c:457
+#: vfs/ftpfs.c:455
 msgid "ftpfs: sending login name"
 msgstr "FTPfs : envoi du nom de connexion"
 
-#: vfs/ftpfs.c:462
+#: vfs/ftpfs.c:460
 msgid "ftpfs: sending user password"
 msgstr "FTPfs : envoi du mot de passe"
 
-#: vfs/ftpfs.c:467
+#: vfs/ftpfs.c:465
 msgid "ftpfs: logged in"
 msgstr "FTPfs : loggé"
 
-#: vfs/ftpfs.c:482
+#: vfs/ftpfs.c:480
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "FTPfs : login incorrect pour l'utilisateur %s"
 
-#: vfs/ftpfs.c:514
+#: vfs/ftpfs.c:512
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " Ne peut définir le routage par la source (%s)"
 
-#: vfs/ftpfs.c:640
+#: vfs/ftpfs.c:638
 msgid "ftpfs: Invalid host name."
 msgstr "FTPfs : nom d'hôte invalide."
 
-#: vfs/ftpfs.c:660
+#: vfs/ftpfs.c:658
 msgid "ftpfs: Invalid host address."
 msgstr "FTPfs : adresse d'hôte invalide."
 
-#: vfs/ftpfs.c:683
+#: vfs/ftpfs.c:681
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "FTPfs : établissement de la connexion à %s"
 
-#: vfs/ftpfs.c:693
+#: vfs/ftpfs.c:691
 msgid "ftpfs: connection interrupted by user"
 msgstr "FTPfs : connexion interrompue par l'utilisateur"
 
-#: vfs/ftpfs.c:695
+#: vfs/ftpfs.c:693
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "FTPfs : connexion au serveur échouée : %s"
 
-#: vfs/ftpfs.c:736
+#: vfs/ftpfs.c:734
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "Attente avant de réessayer... %d (Control-C pour annuler)"
 
-#: vfs/ftpfs.c:922
+#: vfs/ftpfs.c:920
 msgid "ftpfs: could not setup passive mode"
 msgstr "FTPfs : ne peut configurer le mode passif"
 
-#: vfs/ftpfs.c:997
+#: vfs/ftpfs.c:996
 msgid "ftpfs: aborting transfer."
 msgstr "FTPfs : abandon du transfert."
 
-#: vfs/ftpfs.c:999
+#: vfs/ftpfs.c:998
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "FTPfs : erreur d'abandon : %s"
 
-#: vfs/ftpfs.c:1004
+#: vfs/ftpfs.c:1003
 msgid "ftpfs: abort failed"
 msgstr "FTPfs : échec de l'abandon"
 
-#: vfs/ftpfs.c:1093 vfs/ftpfs.c:1192
+#: vfs/ftpfs.c:1092 vfs/ftpfs.c:1191
 msgid "ftpfs: CWD failed."
 msgstr "FTPfs : échec de CWD."
 
-#: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
+#: vfs/ftpfs.c:1102 vfs/ftpfs.c:1109
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "FTPfs : ne peut résoudre le lien symbolique"
 
-#: vfs/ftpfs.c:1161
+#: vfs/ftpfs.c:1160
 msgid "Resolving symlink..."
 msgstr "Résolution du lien symbolique..."
 
-#: vfs/ftpfs.c:1180
+#: vfs/ftpfs.c:1179
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... %s%s"
 msgstr "ftpfs : lecture du répertoire FTP %s... %s%s"
 
-#: vfs/ftpfs.c:1181
+#: vfs/ftpfs.c:1180
 msgid "(strict rfc959)"
 msgstr "(rfc959 stricte)"
 
-#: vfs/ftpfs.c:1182
+#: vfs/ftpfs.c:1181
 msgid "(chdir first)"
 msgstr "(chdir d'abord)"
 
-#: vfs/ftpfs.c:1283
+#: vfs/ftpfs.c:1281
 msgid "ftpfs: failed"
 msgstr "FTPfs : échec"
 
-#: vfs/ftpfs.c:1293
+#: vfs/ftpfs.c:1291
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "FTPfs : échec ; nulle part où retomber"
 
-#: vfs/ftpfs.c:1356
+#: vfs/ftpfs.c:1354
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "FTPfs : stockage du fichier %d (%d)"
+
+#. This is place of next pointer
+#: vfs/ftpfs.c:1659
+msgid "File Tranfer Protocol (ftp)"
+msgstr "Protocole de Transfert de Fichier (FTP)"
 
 #: vfs/ftpfs.c:1771
 msgid ""
@@ -6906,7 +6911,7 @@ msgstr " Ne peut créer une socket : %s "
 #: vfs/mcfs.c:259
 #, c-format
 msgid " Can't connect to server: %s "
-msgstr " Ne peut se connecter au serveur : %s"
+msgstr " Ne peut se connecter au serveur : %s "
 
 #: vfs/mcfs.c:324
 msgid " Too many open connections "
@@ -7013,7 +7018,7 @@ msgstr "(désolé)"
 
 #: vfs/vfs.c:1794
 msgid "Internal error:"
-msgstr " Erreur interne : "
+msgstr "Erreur interne :"
 
 #: vfs/vfs.c:1804
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
@@ -7039,7 +7044,7 @@ msgstr " lors de l'allocation d'un tampon bloc "
 #: vfs/undelfs.c:193
 #, c-format
 msgid " open_inode_scan: %d "
-msgstr " open_inode_scan : %d"
+msgstr " open_inode_scan : %d "
 
 #: vfs/undelfs.c:197
 #, c-format
@@ -7055,16 +7060,16 @@ msgstr ""
 #: vfs/undelfs.c:219
 #, c-format
 msgid " while calling ext2_block_iterate %d "
-msgstr " lors de l'appel de ext2_block_iterate %d"
+msgstr " lors de l'appel de ext2_block_iterate %d "
 
 #: vfs/undelfs.c:227
 msgid " no more memory while reallocating array "
-msgstr " pas plus de mémoire lors de la réallocation du tableau"
+msgstr " pas plus de mémoire lors de la réallocation du tableau "
 
 #: vfs/undelfs.c:246
 #, c-format
 msgid " while doing inode scan %d "
-msgstr " lors du scrutage de l'i-noeud %d"
+msgstr " lors du scrutage de l'i-noeud %d "
 
 #: vfs/undelfs.c:270
 msgid " Ext2lib error "
@@ -7111,7 +7116,7 @@ msgstr "undelfs : grosse erreur"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
-msgstr " vfs_info n'est pas fs !"
+msgstr " vfs_info n'est pas fs ! "
 
 #: vfs/undelfs.c:398 vfs/undelfs.c:582
 msgid " You have to chdir to extract files first "
