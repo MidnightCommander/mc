@@ -791,7 +791,6 @@ albero directory
 .TP 
 .B "Vista rapida"
 In questa modalità il pannello si imposta come un
-In this mode, the panel will switch to a reduced 
 .\"LINK2"
 visualizzatore
 .\"Internal File Viewer"
@@ -819,87 +818,91 @@ Menu Opzioni
 .PP
 .\"NODE "    Filter..."
 .SH "    Filtro..."
-The filter command allows you to specify a shell pattern (for example
+Il comando di filtro permette di specificare un modello (per esempio
 .B "*.tar.gz"
-) which the files must match to be shown. Regardless
-of the filter pattern, the directories and the links to directories
-are always shown in the directory panel.
+) che il file deve corrispondere per essere visualizzato. Malgrado
+il modello del filtro, le directory e i collegamenti a directory
+vengono sempre visualizzati sul pannello directory.
 .PP
-.SH "    Reread"
-The reread command reload the list of files in the directory. It is
-useful if other processes have created or removed files.  If you
-have panelized file names in a panel this will reload the directory
-contents and remove the panelized information (See the section
+.\"NODE "    Reread"
+.SH "    Ricarica"
+Il comando ricarica l'elenco dei file nella directory. E' utile
+se un'altro processo ha creato o rimosso dei file. Se 
+si ha pannellizzato dei nomi di file in un pannello, questo ricaricherà
+il contenuto della directory e rimuoverà le informazioni pannellizzate
+(vedere sezione 
 .\"LINK2"
-External panelize
+Pannellizza comando
 .\"External panelize"
-for more information).
+per ulteriori informazioni).
 .PP
-.SH "  File Menu"
-The Midnight Commander uses the F1 - F10 keys as keyboard shortcuts
-for commands appearing in the file menu.  The escape sequences for the
-function keys are terminfo capabilities kf1 trough kf10.  On terminals
-without function key support, you can achieve the same functionality by
-pressing the ESC key and then a number in the range 1 through 9 and 0
-(corresponding to F1 to F9 and F10 respectively).
+.\"NODE "  File Menu"
+.SH "  Menu File"
+Il Midnight Commander usa i tasti F1 - F10 come tasti veloci 
+per i comandi che appaiono nel menu file. Le sequenze di escape
+per i tasti funzione sono capacità terminfo da kf1 a kf10. Su terminali
+senza supporto per i tasti funzione, è possibile ottenere la stessa
+funzionalità premendo il tasto ESC e un numero da 1 a 9 più lo 0 
+(corrispondentemente ai tasti da F1 a F9 e F10 rispettivamente).
 .PP
-The File menu has the following commands (keyboard shortcuts in parentheses):
+Il file menu comprende i comandi seguenti (tasti veloci tra parentesi):
 .PP
-.B Help (F1)
+.B Aiuto (F1)
 .PP
-Invokes the built-in hypertext help viewer. Inside the
+Invoca il visualizzatore incorporato di ipertesti per l'aiuto. 
+All'interno del
 .\"LINK2"
-help viewer,
+visualizzatore aiuto,
 .\"Contents"
-you can use the Tab key to select the next link and the Enter key to
-follow that link. The keys Space and Backspace are used to move
-forward and backward in a help page. Press F1 again to get the full
-list of accepted keys.
+è possibile usare il tasto tab per selezionare il successivo collegamento
+e il tasto invio per seguirlo. I tasti Barra spaziatrice e Backspace vengono
+utilizzati per muoversi avanti e indietro nella pagina di aiuto. Premere F1
+nuovamente per ottenere la lista completa dei tasti accettati.
 .PP
 .B Menu (F2)
 .PP
-Invoke the
+Invoca il
 .\"LINK2"
-user menu.
+menu utente.
 .\"Menu File Edit"
-The user menu provides an easy way to provide users with a menu and
-add extra features to the Midnight Commander.
+Il menu utente fornisce un modo semplice per dare agli utenti un menu ed
+aggiungere nuove funzionalità al Midnight Commander.
 .PP
-.B View (F3, Shift-F3)
+.B Visualizza (F3, Maiusc-F3)
 .PP
-View the currently selected file. By default this invokes the
+Visualizza il file correntemente selezionato. Nell'ipostazione predefinita
+viene invocato il  
 .\"LINK2"
-Internal File Viewer
+Visualizzatore Interno di File
 .\"Internal File Viewer"
-but if the option "Use internal view" is off, it invokes an external
-file viewer specified by the 
+ma se l'opzione "Usa Visualizzatore interno" è deselezionata, verrà invocato
+un visualizzatore esterno specificato dalla variabile ambiente
 .B PAGER 
-environment variable. If 
+. Se 
 .B PAGER
-is undefined, the "view" command is invoked.  If you use Shift-F3
-instead, the viewer will be invoked without doing any formatting or
-preprocessing to the file.
+non è definita, verrà invocato il comando "view". Se si usa invece il comando
+Maiusc-F3, il visualizzatore verrà invocato senza nessun tipo di formattazione
+o preprocessamento sul file.
 .PP
-.B Filtered View (M-!)
+.B Vista Filtrata (M-!)
 .PP
-this command prompts for a command
-and it's arguments (the argument defaults to the currently selected
-file name), the output from such command is shown in the internal file
-viewer.
+Questo tasto richiede all'utente un comando ed i suoi argomenti (l'argomento
+predefinito è il nome del file correntemente selezionato), il risultato di tale
+comando viene mostrato nel visualizzatore di file interno.
 .PP
-.B Edit (F4)
+.B Cambia (F4)
 .PP
-Currently it invokes the 
+Invoca l'editor 
 .B vi 
-editor, or the editor specified in the
+o l'editor specificato nella variabile d'ambiente 
 .B EDITOR
-environment variable, or the 
+oppure l'
 .\"LINK2"
-Internal File Editor
+Editor di File Interno
 .\"Internal File Editor"
-if the use_internal_edit option is on.
+se l'opzione, "Usa Editor interno" è stata impostata.
 .PP
-.B Copy (F5)
+.B Copia (F5)
 .PP
 Pop up an input dialog with destination that defaults to the directory
 in the non-selected panel and copies the currently selected file (or
@@ -1005,25 +1008,29 @@ Used to unselect a group of files. This is the opposite of the
 .I "Select group"
 command.
 .PP
-.B Quit (F10, Shift-F10)
+.B Uscita (F10, Maiusc-F10)
 .PP
-Terminate the Midnight Commander.  Shift-F10 is used when you want to
-quit and you are using the shell wrapper.  Shift-F10 will not take you
-to the last directory you visited with the Midnight Commander, instead
-it will stay at the directory where you started the Midnight Commander.
+Termina l'esecuzione del Midnight Commander. Maiusc-F10 viene usata se
+si esce e si sta usando lo shell wrapper. Maiusc-F10 in tal caso non
+vi porterà all'ultima directory utilizzata dal Midnight Commander ma
+vi lascerà nella directory dalla quale avete fatto partire il Midnight
+Commander.
 .PP
-.SH "    Quick cd"
-This command is useful if you have a full command line and want to 
+.\"NODE "    Quick cd"
+.SH "    Cambia dir veloce"
+Questo comando è utile se si ha la riga di comando piena e si vuole
+eseguire
 .\"LINK2"
 cd
 .\"The cd internal command"
-somewhere without having to yank and paste the command line. This command
-pops up a small dialog, where you enter everything you would enter after
+per cambiare directory senza dover cancellare e riscrivere la riga di comando.
+Questo comando fa uscire una piccola finestra di dialogo che richiede 
+l'immissione degli stessi argomenti che si darebbero al comando 
 .B cd 
-on the command line and then you press enter. This features all the things
-that are already in the 
+a riga di comando. Questo ha le stesse caratteristiche gia presenti nel
+comando
 .\"LINK2"
-internal cd command.
+comando interno cd.
 .\"The cd internal command"
 .PP
 .SH "  Command Menu"
@@ -3200,7 +3207,7 @@ Questo programma è distribuito sotto i termini della Licenza Generale
 GNU come pubblicata dalla Free Software Foundation. Vedere l'aiuto integrato
 per i dettagli sulla licenza e sulla mancanza di garanzie.
 ./"NODE "AVAILABILITY"
-.SH "DISPONIBILITA'"
+.SH "REPERIBILITA'"
 L'ultima versione di questo programma si trova su
 ftp://ftp.gnome.org/mirror/gnome.org/stable/sources/mc/ e sui
 mirror elencati sul sito GNOME http://www.gnome.org/.

@@ -366,7 +366,7 @@ msgstr " %d ricerche fatte, %d segnalibri aggiunti "
 
 #: edit/editcmd.c:1931
 msgid " Quit "
-msgstr " Esci "
+msgstr " Uscita "
 
 #: edit/editcmd.c:1931
 msgid " File was modified, Save with exit? "
@@ -374,7 +374,7 @@ msgstr " Il file è stato modificato. Lo salvo uscendo? "
 
 #: edit/editcmd.c:1931
 msgid "Cancel quit"
-msgstr "Annulla uscita"
+msgstr "Annulla l'uscita"
 
 #: edit/editcmd.c:1931 src/cmd.c:223 src/file.c:1775 src/file.c:2134
 #: src/filegui.c:563 src/hotlist.c:1012 src/main.c:634 src/screen.c:1991
@@ -560,7 +560,7 @@ msgstr "&Informazioni"
 
 #: edit/editmenu.c:129 edit/editmenu.c:148
 msgid "&Quit             F10"
-msgstr "Esci              F10"
+msgstr "&Esci              F10"
 
 #: edit/editmenu.c:135
 msgid "&New            C-x k"
@@ -989,7 +989,7 @@ msgstr "&Sovrascrittura "
 
 #: src/boxes.c:387
 msgid " confirm &Delete "
-msgstr "&Cancellazione "
+msgstr "c&Ancellazione "
 
 #: src/boxes.c:393
 msgid " Confirmation "
@@ -1287,19 +1287,19 @@ msgstr " File selezionati, cambio directory?"
 
 #: src/cmd.c:228 src/cmd.c:726 src/cmd.c:745 src/main.c:852
 msgid "Could not change directory"
-msgstr " Non posso aprire la directory `%s' "
+msgstr "Non posso cambiare directory"
 
 #: src/cmd.c:257
 msgid " View file "
-msgstr "Visualizza file"
+msgstr " Visualizza file "
 
 #: src/cmd.c:257
 msgid " Filename:"
-msgstr "File:"
+msgstr " Nomefile:"
 
 #: src/cmd.c:274
 msgid " Filtered view "
-msgstr " Visualizza file (con filtro)"
+msgstr " Vista filtrata "
 
 #: src/cmd.c:274
 msgid " Filter command and arguments:"
@@ -1307,7 +1307,7 @@ msgstr " Comando per il filtro (inclusi argomenti):"
 
 #: src/cmd.c:375
 msgid "Create a new Directory"
-msgstr "Crea nuova directory"
+msgstr "Crea una nuova directory"
 
 #: src/cmd.c:375
 msgid " Enter directory name:"
@@ -1319,7 +1319,7 @@ msgstr " Filtro "
 
 #: src/cmd.c:436
 msgid " Set expression for filtering filenames"
-msgstr " Setta espressione per filtrare i file in base al nome "
+msgstr " Imposta espressione per filtrare i file in base al nome "
 
 #: src/cmd.c:502
 msgid " Select "
@@ -1331,7 +1331,7 @@ msgstr " Espressione regolare malformata "
 
 #: src/cmd.c:554
 msgid " Unselect "
-msgstr " De-seleziona "
+msgstr " Deseleziona "
 
 #: src/cmd.c:627
 msgid "Extension file edit"
@@ -1425,7 +1425,7 @@ msgstr " Collegamento "
 
 #: src/cmd.c:1026 src/cmd.c:1140 src/file.c:1613
 msgid " to:"
-msgstr " a: "
+msgstr " a:"
 
 #: src/cmd.c:1037
 #, c-format
@@ -2924,7 +2924,7 @@ msgstr "&Disco...    M-d"
 
 #: src/main.c:977 src/main.c:1004
 msgid "&Rescan         C-r"
-msgstr "&Ri-leggi          C-r"
+msgstr "&Ricarica          C-r"
 
 #: src/main.c:1008
 msgid "&User menu          F2"
@@ -3149,11 +3149,11 @@ msgstr ""
 " visualizzazione di una directory non rispondente alla   \n"
 " realtà. In tal caso, usate il comando manuale C-r per   \n"
 " forzare l'aggiornamento della visualizzazione.          \n"
-" Vedere le pagine del manuale per i dettagli.            "
+" Vedere le pagine man per i dettagli.            "
 
 #: src/main.c:1405 src/screen.c:2214
 msgid "Menu"
-msgstr "MenuUt"
+msgstr "Menu"
 
 #: src/main.c:1544
 msgid "The TERM environment variable is unset!\n"
