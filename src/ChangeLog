@@ -1,5 +1,8 @@
 2001-08-18  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (init_sigchld): Disable subshell if SIGCHLD handler
+	cannot be installed.
+
 	* x.h: Instead of undefining MIX and MAX after <gnome.h> make
 	sure that <sys/param.h> is included before <gnome.h>.
 

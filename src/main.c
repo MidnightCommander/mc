@@ -2450,18 +2450,26 @@ init_sigchld (void)
     sigchld_action.sa_handler =
 #ifdef HAVE_SUBSHELL_SUPPORT
 	use_subshell ? sigchld_handler :
-#endif
+#endif /* HAVE_SUBSHELL_SUPPORT */
 	sigchld_handler_no_subshell;
 
     sigemptyset (&sigchld_action.sa_mask);
 
 #ifdef SA_RESTART
-        sigchld_action.sa_flags = SA_RESTART;
+    sigchld_action.sa_flags = SA_RESTART;
 #else
-        sigchld_action.sa_flags = 0;
-#endif
+    sigchld_action.sa_flags = 0;
+#endif /* !SA_RESTART */
 
-    sigaction (SIGCHLD, &sigchld_action, NULL);
+    if (sigaction (SIGCHLD, &sigchld_action, NULL) == -1) {
+#ifdef HAVE_SUBSHELL_SUPPORT
+	/*
+	 * This may happen on QNX Neutrino 6, where SA_RESTART
+	 * is defined but not implemented.  Fallback to no subshell.
+	 */
+	use_subshell = 0;
+#endif /* HAVE_SUBSHELL_SUPPORT */
+    }
 }	
 
 #endif /* _OS_NT, __os2__, UNIX */
