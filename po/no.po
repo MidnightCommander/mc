@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.10\n"
-"POT-Creation-Date: 1999-02-02 23:51+0100\n"
+"POT-Creation-Date: 1999-02-03 21:58-0500\n"
 "PO-Revision-Date: 1999-02-02 23:51+0100\n"
 "Last-Translator: Kjartan Maraas <kmaraas@fib.hl.no>\n"
 "Language-Team: Norwegian <no@li.org>\n"
@@ -152,7 +152,7 @@ msgid "Set Filter"
 msgstr "Sett filter"
 
 #: gnome/gcmd.c:562 gnome/gcmd.c:603 gnome/gcmd.c:608 gnome/gcmd.c:612
-#: gnome/gscreen.c:2464
+#: gnome/gscreen.c:2489
 msgid "Show all files"
 msgstr "Vis alle filer"
 
@@ -184,25 +184,25 @@ msgstr " Åpne med..."
 msgid "Enter extra arguments:"
 msgstr "Skriv inn ekstra argumenter:"
 
-#: gnome/gdesktop.c:346 gnome/gdesktop.c:1581
+#: gnome/gdesktop.c:347 gnome/gdesktop.c:1485
 msgid "Warning"
 msgstr "Advarsel"
 
-#: gnome/gdesktop.c:347
+#: gnome/gdesktop.c:348
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Kunne ikke åpne %s; vil ikke ha skrivebordsikoner"
 
-#: gnome/gdesktop.c:1547
+#: gnome/gdesktop.c:1451
 msgid "Trashcan"
 msgstr "Søppelkurv"
 
 #. Create the link to the user's home directory so that he will have an icon
-#: gnome/gdesktop.c:1577
+#: gnome/gdesktop.c:1481
 msgid "Home directory"
 msgstr "Hjemmekatalog"
 
-#: gnome/gdesktop.c:1582
+#: gnome/gdesktop.c:1486
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial desktop icons."
 msgstr ""
@@ -349,24 +349,24 @@ msgstr " er "
 msgid " Done."
 msgstr " Ferdig."
 
-#: gnome/gdnd.c:49
+#: gnome/gdnd.c:50
 msgid "_Move here"
 msgstr "Flytt hit"
 
-#: gnome/gdnd.c:50
+#: gnome/gdnd.c:51
 msgid "_Copy here"
 msgstr "Kopier hit"
 
-#: gnome/gdnd.c:51
+#: gnome/gdnd.c:52
 msgid "_Link here"
 msgstr "Lag lenke her"
 
-#: gnome/gdnd.c:53
+#: gnome/gdnd.c:54
 msgid "Cancel drag"
 msgstr "Avbryt dra"
 
 #. FIXME: this error message sucks
-#: gnome/gdnd.c:191
+#: gnome/gdnd.c:190
 #, c-format
 msgid ""
 "Could not stat %s\n"
@@ -822,7 +822,7 @@ msgstr "Generell"
 msgid "Title"
 msgstr "Tittel"
 
-#: gnome/gprop.c:521 gnome/gscreen.c:2246
+#: gnome/gprop.c:521 gnome/gscreen.c:2271
 msgid "Icon"
 msgstr "Ikon"
 
@@ -830,158 +830,158 @@ msgstr "Ikon"
 msgid "Select icon"
 msgstr "Velg ikon"
 
-#: gnome/gscreen.c:1544
+#: gnome/gscreen.c:1569
 msgid "All files"
 msgstr "Alle filer"
 
-#: gnome/gscreen.c:1546
+#: gnome/gscreen.c:1571
 msgid "Archives and compressed files"
 msgstr "Arkiver og komprimerte filer"
 
-#: gnome/gscreen.c:1548
+#: gnome/gscreen.c:1573
 msgid "RPM/DEB files"
 msgstr "RPM/DEB filer"
 
-#: gnome/gscreen.c:1550
+#: gnome/gscreen.c:1575
 msgid "Text/Document files"
 msgstr "Tekst-/dokumentfiler"
 
-#: gnome/gscreen.c:1552
+#: gnome/gscreen.c:1577
 msgid "HTML and SGML files"
 msgstr "HTML- og SGML-filer"
 
-#: gnome/gscreen.c:1554
+#: gnome/gscreen.c:1579
 msgid "Postscript and PDF files"
 msgstr "Postscript- of PDF-filer"
 
-#: gnome/gscreen.c:1556
+#: gnome/gscreen.c:1581
 msgid "Spreadsheet files"
 msgstr "Regnearkfiler"
 
-#: gnome/gscreen.c:1558
+#: gnome/gscreen.c:1583
 msgid "Image files"
 msgstr "Bildefiler"
 
-#: gnome/gscreen.c:1561
+#: gnome/gscreen.c:1586
 msgid "Video/animation files"
 msgstr "Video-/animasjonsfiler"
 
-#: gnome/gscreen.c:1563
+#: gnome/gscreen.c:1588
 msgid "Audio files"
 msgstr "Lydfiler"
 
-#: gnome/gscreen.c:1565
+#: gnome/gscreen.c:1590
 msgid "C program files"
 msgstr "C programfiler"
 
-#: gnome/gscreen.c:1567
+#: gnome/gscreen.c:1592
 msgid "C++ program files"
 msgstr "C++ programfiler"
 
-#: gnome/gscreen.c:1569
+#: gnome/gscreen.c:1594
 msgid "Objective-C program files"
 msgstr "Objektiv-C programfiler"
 
-#: gnome/gscreen.c:1571
+#: gnome/gscreen.c:1596
 msgid "Scheme program files"
 msgstr "Scheme programfiler"
 
-#: gnome/gscreen.c:1573
+#: gnome/gscreen.c:1598
 msgid "Assembler program files"
 msgstr "Assembler programfiler"
 
-#: gnome/gscreen.c:1575
+#: gnome/gscreen.c:1600
 msgid "Misc. program files"
 msgstr "Forskj. programfiler"
 
-#: gnome/gscreen.c:1577
+#: gnome/gscreen.c:1602
 msgid "Font files"
 msgstr "Skrifttypefiler"
 
-#: gnome/gscreen.c:1704
+#: gnome/gscreen.c:1729
 #, c-format
 msgid "Search: %s"
 msgstr "Søk: %s"
 
-#: gnome/gscreen.c:1714
+#: gnome/gscreen.c:1739
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes i %d fil"
 
-#: gnome/gscreen.c:1714
+#: gnome/gscreen.c:1739
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes i %d filer"
 
-#: gnome/gscreen.c:1740 src/screen.c:677
+#: gnome/gscreen.c:1765 src/screen.c:677
 msgid "<readlink failed>"
 msgstr "<readlink feilet>"
 
-#: gnome/gscreen.c:1794
+#: gnome/gscreen.c:1819
 msgid "Filter"
 msgstr "Filter"
 
-#: gnome/gscreen.c:2246
+#: gnome/gscreen.c:2271
 msgid "Switch view to an Icon view"
 msgstr "Bytt til ikonvisning"
 
-#: gnome/gscreen.c:2248
+#: gnome/gscreen.c:2273
 msgid "Brief"
 msgstr "Kort"
 
-#: gnome/gscreen.c:2248
+#: gnome/gscreen.c:2273
 msgid "Switch view to show just file name and type"
 msgstr "Bytt visning til kun filnavn og type"
 
-#: gnome/gscreen.c:2250
+#: gnome/gscreen.c:2275
 msgid "Detailed"
 msgstr "Detaljert"
 
-#: gnome/gscreen.c:2250
+#: gnome/gscreen.c:2275
 msgid "Switch view to show detailed file statistics"
 msgstr "Bytt visning til detaljert filstatistikk"
 
-#: gnome/gscreen.c:2252
+#: gnome/gscreen.c:2277
 msgid "Custom"
 msgstr "Egendefinert"
 
-#: gnome/gscreen.c:2252
+#: gnome/gscreen.c:2277
 msgid "Switch view to show custom determined statistics."
 msgstr "Bytt visning til å vise egendefinert statistikk."
 
-#: gnome/gscreen.c:2257
+#: gnome/gscreen.c:2282
 msgid "Back"
 msgstr "Tilbake"
 
-#: gnome/gscreen.c:2257
+#: gnome/gscreen.c:2282
 msgid "Go to the previously visited directory"
 msgstr "Gå til tidligere vist katalog"
 
-#: gnome/gscreen.c:2259
+#: gnome/gscreen.c:2284
 msgid "Up"
 msgstr "Opp"
 
-#: gnome/gscreen.c:2259
+#: gnome/gscreen.c:2284
 msgid "Go up a level in the directory heirarchy"
 msgstr "Gå opp ett nivå i kataloghierarkiet"
 
-#: gnome/gscreen.c:2261
+#: gnome/gscreen.c:2286
 msgid "Forward"
 msgstr "Fremover"
 
-#: gnome/gscreen.c:2261
+#: gnome/gscreen.c:2286
 msgid "Go to the next directory"
 msgstr "Gå til neste katalog"
 
-#: gnome/gscreen.c:2264
+#: gnome/gscreen.c:2289
 msgid "Home"
 msgstr "Hjemme"
 
-#: gnome/gscreen.c:2264
+#: gnome/gscreen.c:2289
 msgid "Go to your home directory"
 msgstr "Gå til din hjemmekatalog"
 
-#: gnome/gscreen.c:2413
+#: gnome/gscreen.c:2438
 msgid "Location:"
 msgstr "Sted:"
 
@@ -1687,7 +1687,7 @@ msgstr "Generelt...  "
 msgid "&Save mode..."
 msgstr "Lagringsmodus..."
 
-#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1300
+#: gtkedit/editmenu.c:246 gtkedit/editmenu.c:255 src/main.c:1302
 msgid "&Layout..."
 msgstr "Utseende."
 
@@ -1881,7 +1881,7 @@ msgid "Error initialising editor.\n"
 msgstr "Feil under initialisering av editor.\n"
 
 #: gtkedit/editwidget.c:1060 gtkedit/gtkedit.c:1368 src/help.c:806
-#: src/main.c:1666 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
+#: src/main.c:1668 src/screen.c:2284 src/screen.c:2314 src/tree.c:1018
 #: src/view.c:1959
 msgid "Help"
 msgstr "Hjelp"
@@ -1898,11 +1898,11 @@ msgstr "Erstatt"
 msgid "Search"
 msgstr "Søk"
 
-#: gtkedit/editwidget.c:1069 src/main.c:1668
+#: gtkedit/editwidget.c:1069 src/main.c:1670
 msgid "PullDn"
 msgstr "Trekk ned"
 
-#: gtkedit/editwidget.c:1070 src/help.c:818 src/main.c:1669 src/view.c:1961
+#: gtkedit/editwidget.c:1070 src/help.c:818 src/main.c:1671 src/view.c:1961
 #: src/view.c:1981
 msgid "Quit"
 msgstr "Avslutt"
@@ -3507,7 +3507,7 @@ msgstr "Filnavn:"
 msgid "Content: "
 msgstr "Innhold: "
 
-#: src/find.c:151 src/main.c:1197 src/main.c:1218
+#: src/find.c:151 src/main.c:1199 src/main.c:1220
 msgid "&Tree"
 msgstr "Tre"
 
@@ -4069,239 +4069,239 @@ msgstr "Trykk en tast for å fortsette..."
 msgid " The shell is already running a command "
 msgstr " Skallet kjører allerede en kommando "
 
-#: src/main.c:1194 src/main.c:1215
+#: src/main.c:1196 src/main.c:1217
 msgid "&Listing mode..."
 msgstr "Listemodus..."
 
-#: src/main.c:1195 src/main.c:1216
+#: src/main.c:1197 src/main.c:1218
 msgid "&Quick view     C-x q"
 msgstr "Rask visning   C-x q"
 
-#: src/main.c:1196 src/main.c:1217
+#: src/main.c:1198 src/main.c:1219
 msgid "&Info           C-x i"
 msgstr "Info           C-x i"
 
-#: src/main.c:1199 src/main.c:1220
+#: src/main.c:1201 src/main.c:1222
 msgid "&Sort order..."
 msgstr "Sorteringsrekkefølge..."
 
-#: src/main.c:1201 src/main.c:1222
+#: src/main.c:1203 src/main.c:1224
 msgid "&Filter..."
 msgstr "Filter..."
 
-#: src/main.c:1204 src/main.c:1225
+#: src/main.c:1206 src/main.c:1227
 msgid "&Network link..."
 msgstr "Nettverkskobling..."
 
-#: src/main.c:1205 src/main.c:1226
+#: src/main.c:1207 src/main.c:1228
 msgid "FT&P link..."
 msgstr "FTP kobling..."
 
-#: src/main.c:1209 src/main.c:1230
+#: src/main.c:1211 src/main.c:1232
 msgid "&Drive...       M-d"
 msgstr "Disk...        M-d"
 
-#: src/main.c:1211 src/main.c:1232
+#: src/main.c:1213 src/main.c:1234
 msgid "&Rescan         C-r"
 msgstr "Gjenles         C-r"
 
-#: src/main.c:1236
+#: src/main.c:1238
 msgid "&User menu          F2"
 msgstr "Brukermeny         F2"
 
-#: src/main.c:1237
+#: src/main.c:1239
 msgid "&View               F3"
 msgstr "Vis                F3"
 
-#: src/main.c:1238
+#: src/main.c:1240
 msgid "Vie&w file...         "
 msgstr "Vis fil...            "
 
-#: src/main.c:1239
+#: src/main.c:1241
 msgid "&Filtered view     M-!"
 msgstr "Filtrert visning  M-!"
 
-#: src/main.c:1240
+#: src/main.c:1242
 msgid "&Edit               F4"
 msgstr "Rediger            F4"
 
-#: src/main.c:1241
+#: src/main.c:1243
 msgid "&Copy               F5"
 msgstr "Kopier             F5"
 
-#: src/main.c:1242
+#: src/main.c:1244
 msgid "c&Hmod           C-x c"
 msgstr "chmod           C-x c"
 
-#: src/main.c:1244
+#: src/main.c:1246
 msgid "&Link            C-x l"
 msgstr "Lenke           C-x l"
 
-#: src/main.c:1245
+#: src/main.c:1247
 msgid "&SymLink         C-x s"
 msgstr "Symlenke        C-x s"
 
-#: src/main.c:1246
+#: src/main.c:1248
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "rediger symlenke C-x C-s"
 
-#: src/main.c:1247
+#: src/main.c:1249
 msgid "ch&Own           C-x o"
 msgstr "chown           C-x o"
 
-#: src/main.c:1248
+#: src/main.c:1250
 msgid "&Advanced chown       "
 msgstr "Avansert chown       "
 
-#: src/main.c:1250
+#: src/main.c:1252
 msgid "&Rename/Move        F6"
 msgstr "Gi nytt navn/flytt F6"
 
-#: src/main.c:1251
+#: src/main.c:1253
 msgid "&Mkdir              F7"
 msgstr "Lag katalog        F7"
 
-#: src/main.c:1252
+#: src/main.c:1254
 msgid "&Delete             F8"
 msgstr "Slett              F8"
 
-#: src/main.c:1253
+#: src/main.c:1255
 msgid "&Quick cd          M-c"
 msgstr "rask cd            M-c"
 
-#: src/main.c:1255
+#: src/main.c:1257
 msgid "select &Group      M-+"
 msgstr "velg gruppe        M-+"
 
-#: src/main.c:1256
+#: src/main.c:1258
 msgid "u&Nselect group    M-\\"
 msgstr "velg bort gruppe   M-\\"
 
-#: src/main.c:1257
+#: src/main.c:1259
 msgid "reverse selec&Tion M-*"
 msgstr "reverser valg      M-*"
 
-#: src/main.c:1259
+#: src/main.c:1261
 msgid "e&Xit              F10"
 msgstr "avslutt            F10"
 
-#: src/main.c:1269
+#: src/main.c:1271
 msgid "&Directory tree"
 msgstr "Katalogtre"
 
-#: src/main.c:1271
+#: src/main.c:1273
 msgid "&Find file            M-?"
 msgstr "Finn fil             M-?"
 
-#: src/main.c:1272
+#: src/main.c:1274
 msgid "s&Wap panels          C-u"
 msgstr "bytt paneler          C-u"
 
-#: src/main.c:1273
+#: src/main.c:1275
 msgid "switch &Panels on/off C-o"
 msgstr "slå paneler på/av     C-o"
 
-#: src/main.c:1274
+#: src/main.c:1276
 msgid "&Compare directories  C-x d"
 msgstr "Sammenlign kataloger C-x d"
 
-#: src/main.c:1275
+#: src/main.c:1277
 msgid "e&Xternal panelize    C-x !"
 msgstr "eksternt panel  C-x !"
 
-#: src/main.c:1276
+#: src/main.c:1278
 msgid "show directory s&Izes"
 msgstr "vis katalogstørrelser"
 
-#: src/main.c:1278
+#: src/main.c:1280
 msgid "command &History"
 msgstr "kommandohistorikk"
 
-#: src/main.c:1279
+#: src/main.c:1281
 msgid "di&Rectory hotlist    C-\\"
 msgstr "kataloghurtigliste    C-\\"
 
-#: src/main.c:1281
+#: src/main.c:1283
 msgid "&Active VFS list      C-x a"
 msgstr "Aktivt VFS liste     C-x a"
 
-#: src/main.c:1284
+#: src/main.c:1286
 msgid "&Background jobs      C-x j"
 msgstr "Bakgrunnsjobber      C-x j"
 
-#: src/main.c:1288
+#: src/main.c:1290
 msgid "&Undelete files (ext2fs only)"
 msgstr "Gjenopprett filer (kun ext2fs)"
 
-#: src/main.c:1291
+#: src/main.c:1293
 msgid "&Listing format edit"
 msgstr "Redigering av listeformat"
 
-#: src/main.c:1293
+#: src/main.c:1295
 msgid "&Extension file edit"
 msgstr "Redigering av utvidelsesfil"
 
-#: src/main.c:1294
+#: src/main.c:1296
 msgid "&Menu file edit"
 msgstr "Menyfilredigering"
 
-#: src/main.c:1299
+#: src/main.c:1301
 msgid "&Configuration..."
 msgstr "Konfigurasjon..."
 
-#: src/main.c:1301
+#: src/main.c:1303
 msgid "c&Onfirmation..."
 msgstr "bekreftelse..."
 
-#: src/main.c:1302
+#: src/main.c:1304
 msgid "&Display bits..."
 msgstr "Tastaturdefinisjon..."
 
-#: src/main.c:1304
+#: src/main.c:1306
 msgid "learn &Keys..."
 msgstr "lær taster..."
 
-#: src/main.c:1307
+#: src/main.c:1309
 msgid "&Virtual FS..."
 msgstr "Virtuelt FS..."
 
-#: src/main.c:1310
+#: src/main.c:1312
 msgid "&Save setup"
 msgstr "Lagre oppsett"
 
-#: src/main.c:1326 src/main.c:1328
+#: src/main.c:1328 src/main.c:1330
 msgid " &Left "
 msgstr " Venstre "
 
-#: src/main.c:1328
+#: src/main.c:1330
 msgid " &Above "
 msgstr " Over "
 
-#: src/main.c:1331
+#: src/main.c:1333
 msgid " &File "
 msgstr " Fil "
 
-#: src/main.c:1332
+#: src/main.c:1334
 msgid " &Command "
 msgstr " Kommando "
 
-#: src/main.c:1333
+#: src/main.c:1335
 msgid " &Options "
 msgstr " Alternativer "
 
-#: src/main.c:1335 src/main.c:1337
+#: src/main.c:1337 src/main.c:1339
 msgid " &Right "
 msgstr " Høyre "
 
-#: src/main.c:1337
+#: src/main.c:1339
 msgid " &Below "
 msgstr " Under "
 
-#: src/main.c:1392
+#: src/main.c:1394
 msgid " Information "
 msgstr " Informasjon "
 
-#: src/main.c:1393
+#: src/main.c:1395
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -4313,56 +4313,56 @@ msgstr ""
 " du utføre en manuell gjenlesing av katalogen. Se manualsiden for \n"
 " detaljene."
 
-#: src/main.c:1667 src/screen.c:2285 src/screen.c:2315
+#: src/main.c:1669 src/screen.c:2285 src/screen.c:2315
 msgid "Menu"
 msgstr "Meny"
 
-#: src/main.c:1872
+#: src/main.c:1874
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Takk for at du bruker GNU Midnight Commander"
 
-#: src/main.c:2225
+#: src/main.c:2227
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr "med musstøtte i xterm%s.\n"
 
-#: src/main.c:2226
+#: src/main.c:2228
 msgid " and the Linux console"
 msgstr " og Linux konsollet"
 
-#: src/main.c:2321
+#: src/main.c:2323
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM miljøvariabelen er ikke satt!\n"
 
-#: src/main.c:2526
+#: src/main.c:2528
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Bibliotekkatalog for Midnight Commander: %s\n"
 
-#: src/main.c:2537
+#: src/main.c:2539
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Flagget -m er utgått. Vær snill å se på visningsbiter... i "
 "alternativermenyen\n"
 
-#: src/main.c:2664
+#: src/main.c:2666
 msgid "Geometry for the window"
 msgstr "Geometri for vinduet"
 
-#: src/main.c:2664
+#: src/main.c:2666
 msgid "GEOMETRY"
 msgstr "GEOMETRI"
 
-#: src/main.c:2665
+#: src/main.c:2667
 msgid "No windows opened at startup"
 msgstr "Ingen vinduer åpnet ved oppstart"
 
-#: src/main.c:2666
+#: src/main.c:2668
 msgid "Force activation even if a server is already running"
 msgstr "Tvungen aktivisering hvis en tjener allerede kjører"
 
-#: src/main.c:2938
+#: src/main.c:2940
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -4370,11 +4370,11 @@ msgstr ""
 "Kunne ikke åpne tty linjen. Du må kjøre mc uten -P flagget.\n"
 "På noen systemer vil du kanskje bruke # `which mc`\n"
 
-#: src/main.c:3012
+#: src/main.c:3014
 msgid " Notice "
 msgstr " Notis "
 
-#: src/main.c:3013
+#: src/main.c:3015
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5135,7 +5135,7 @@ msgstr "Beklager, vi kan ikke gjøre passordautentiserte forbindelser ennå."
 msgid " Could not set source routing (%s)"
 msgstr " Kunne ikke sette opp kilderuting (%s)"
 
-#: vfs/ftpfs.c:1988 vfs/ftpfs.c:2003
+#: vfs/ftpfs.c:1995 vfs/ftpfs.c:2010
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -5212,4 +5212,3 @@ msgstr ""
 "Hmm,...\n"
 "%s\n"
 "ser ikke ut som et tar-arkiv."
-
