@@ -81,7 +81,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	win.o color.o profile.o user.o ext.o setup.o tree.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o filegui.o
+	option.o cmd.o utilunix.o xslint.o
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gdesktop-icon.o	\
@@ -152,7 +152,7 @@ libgtkedit.a:
 
 checklinks:
 	@if test -f $(gnomedir)/regex.c; then echo ok; \
-	else $(MAKE) sourcelinks; fi
+	else $(MAKE) maksourcelinks; fi
 	@if test -f regex.o; then echo ok; else $(MAKE) links; fi
 
 links:

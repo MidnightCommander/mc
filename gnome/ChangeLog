@@ -1,3 +1,13 @@
+1998-11-19  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* Makefile.in (OOBJS): Do not link ../src/filegui.o.  GMC does not
+	link right now, but I guess I'll add stubs until we finish with
+	the dialog boxes.
+
+	* gdnd.c: #include <sys/types.h>
+
+	* Makefile.in (checklinks): Fix sourcelinks -> maksourcelinks typo.
+
 1998-11-12  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gmain.c (session_save_state): Use gnome_geometry_string.
