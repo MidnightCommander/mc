@@ -1696,33 +1696,39 @@ can specify whether the area is split to the panels in vertical or
 horizontal direction. The split can be equal or you can specify an
 unequal split.
 .PP
-By default all contents of the directory panels are displayed with
-the same color, but you can specify whether
+You can specify whether
 .I permissions
 and
 .I file types
-are highlighted with special
+should be highlighted with distinctive
 .\"LINK2"
 Colors\&.
 .\"Colors"
-If permission highlighting is enabled, the parts of the
+If the permission highlighting is enabled, the parts of the
 .I perm
 and
 .I mode
 .\"LINK2"
 display fields
 .\"Listing Mode..."
-which are valid for the user running Midnight Commander
-are highlighted with the color defined with the
+which apply to the user running Midnight Commander are highlighted with
+the color defined by the
 .I selected
-keyword. If file type highlighting is enabled, files are colored according
-to their file type (e.g. directory, core file, executable, ...).
+keyword.  If the file type highlighting is enabled, files are colored
+according to their file type (e.g. directory, core file, executable,
+and so on).
 .PP
 If the
 .I Show Mini-Status
-option is enabled, one line of status
-information about the currently selected item is showed at the bottom
-of the panels.
+option is enabled, one line of status information about the currently
+selected item is shown at the bottom of the panels.
+.PP
+When run in a terminal emulator for X11, Midnight Commander sets the
+terminal window title to the current working directory and updates it
+when necessary.  If your terminal emulator is broken and you see some
+incorrect output on startup and directory change, turn off the
+.I Xterm Window Title
+option.
 .\"NODE "    Confirmation"
 .SH "    Confirmation"
 In this menu you configure the confirmation options for file deletion,
