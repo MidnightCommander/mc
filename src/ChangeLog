@@ -1,5 +1,11 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* charset.h [!HAVE_CHARSET]: Provide dummy macros for
+	convert_to_display and convert_from_input.  Eliminate uchar
+	definition, use unsigned char, adjust dependencies.
+	* charsets.c (convert_to_display): Tolerate NULL argument.
+	(convert_from_input): Likewise.
+
 	* ext.c (exec_extension): Don't create self-destructing scripts
 	for the viewer - remove those scripts manually after calling
 	view().  This fixes the problem with double F8 in the viewer on
