@@ -1,5 +1,9 @@
 2001-01-11  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: All macros from configure.in moved to
+	acinclude.m4. Added missing quotes in several places.
+	* acinclude.m4: Likewise.
+
 	* edit/Makefile.in: Don't install or uninstall mcedit -
 	it cannot be installed before mc on systems without symlinks.
 	* gtkedit/Makefile.in: Likewise.

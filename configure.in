@@ -61,7 +61,7 @@ fi
 dnl
 dnl We now use glib
 dnl 
-AM_PATH_GLIB(1.2.0,,AC_MSG_ERROR(Test for GLIB failed.  MC requires GLIB.))
+AM_PATH_GLIB(1.2.0,,[AC_MSG_ERROR([Test for GLIB failed.  MC requires GLIB.])])
 LIBS="$LIBS $GLIB_LIBS"
 
 dnl
@@ -175,7 +175,7 @@ AC_CHECK_FUNCS(statlstat)
 dnl
 dnl If running under AIX, AC_AIX does not tell us that
 dnl
-AC_MSG_CHECKING(for AIX defines)
+AC_MSG_CHECKING([for AIX defines])
 AC_EGREP_CPP(yes,
 [#if defined(AIX) || defined(_AIX) || defined(__aix__) || defined(aix)
 yes
@@ -183,7 +183,7 @@ yes
 ], [
 AC_DEFINE(IS_AIX)
 AC_MSG_RESULT(yes)
-], AC_MSG_RESULT(no))
+], [AC_MSG_RESULT(no)])
 
 dnl   
 dnl This hack is here until autoconf adds it
@@ -213,7 +213,7 @@ AC_FUNC_ALLOCA
 dnl
 dnl Cool hack, but we don't use it currently 
 dnl
-dnl AC_MSG_CHECKING(for token pasting method)
+dnl AC_MSG_CHECKING([for token pasting method])
 dnl AC_EGREP_CPP(portable,[
 dnl #define tken(a, b) a##b
 dnl tken(port, able)
@@ -238,13 +238,13 @@ AC_SUBST(MCLIBS)
 textmode_x11_support="no"
 AC_ARG_WITH(tm-x-support,
 	[--with-tm-x-support        Add X Window System support to the text edition],
-	if test x$withval = xyes; then
+	[if test x$withval = xyes; then
 		MCCFLAGS="$X_CFLAGS"
 		MCLIBS="$X_LIBS $X_PRE_LIBS -lX11 $X_EXTRA_LIBS"
 		AC_DEFINE(HAVE_TEXTMODE_X11_SUPPORT)
 		textmode_x11_support="yes"
 	fi
-)
+])
 
 dnl
 dnl Network related functions
@@ -267,7 +267,7 @@ if test $have_socket = no; then
 fi
 
 have_gethostbyname=no
-AC_CHECK_FUNC(gethostbyname, have_gethostbyname=yes)
+AC_CHECK_FUNC(gethostbyname, [have_gethostbyname=yes])
 if test $have_gethostbyname = no; then
   # gethostbyname is not in the default libraries.  See if it's in some other.
   for lib in bsd socket inet; do
@@ -301,7 +301,7 @@ then
 	LVFS="-lvfs-mc"
 	fastdepvfs=fastdepvfs
 	MCCPPFLAGS="$MCCPPFLAGS -I\$(vfsdir)"
-	AC_MSG_RESULT(Using the VFS switch code)
+	AC_MSG_RESULT([Using the VFS switch code])
 	vfs_type="Midnight Commander Virtual File System"
 fi
 AC_SUBST(LIBVFS)
@@ -311,44 +311,12 @@ AC_SUBST(fastdepvfs)
 screen_manager=unknown
 search_ncurses=false
 
-AC_DEFUN(AC_USE_SUNOS_CURSES, [
-	search_ncurses=false
-	screen_manager="SunOS 4.x /usr/5include curses"
-	AC_MSG_RESULT(Using SunOS 4.x /usr/5include curses)
-	AC_DEFINE(USE_SUNOS_CURSES)
-	AC_DEFINE(NO_COLOR_CURSES)
-	AC_DEFINE(USE_SYSV_CURSES)
-	CPPFLAGS="$CPPFLAGS -I/usr/5include"
-	XCURSES="xcurses.o /usr/5lib/libcurses.a /usr/5lib/libtermcap.a"
-	AC_MSG_RESULT(Please note that some screen refreshs may fail)
-	AC_MSG_WARN(Reconsider using Slang)
-])
-
-AC_DEFUN(AC_USE_OSF1_CURSES, [
-       AC_MSG_RESULT(Using OSF1 curses)
-       search_ncurses=false
-       screen_manager="OSF1 curses"
-       AC_DEFINE(NO_COLOR_CURSES)
-       AC_DEFINE(USE_SYSV_CURSES)
-       XCURSES="xcurses.o"
-       LIBS="$LIBS -lcurses"
-])
-
-AC_DEFUN(AC_USE_SYSV_CURSES, [
-	AC_MSG_RESULT(Using SysV curses)
-	AC_DEFINE(USE_SYSV_CURSES)
-	XCURSES=""
-	search_ncurses=false
-	screen_manager="SysV/curses"
-	LIBS="$LIBS -lcurses"
-])
-
 XCURSES=""
 AC_SUBST(XCURSES)
 
 dnl AC_ARG_WITH(bsd-curses,
 dnl [--with-bsd-curses         Used to compile with bsd curses, not very fancy],
-dnl 	search_ncurses=false
+dnl 	[search_ncurses=false
 dnl	screen_manager="Ultrix/cursesX"
 dnl	if test $system = ULTRIX
 dnl	then
@@ -360,11 +328,11 @@ dnl
 dnl	LIBS="$LIBS -l$THIS_CURSES -ltermcap"
 dnl	AC_DEFINE(USE_BSD_CURSES)
 dnl	XCURSES="xcurses.o"
-dnl	AC_MSG_RESULT(Please note that some screen refreshs may fail)
-dnl	AC_MSG_WARN(Use of the bsdcurses extension has some)
-dnl	AC_MSG_WARN(display/input problems.)
-dnl	AC_MSG_WARN(Reconsider using xcurses)
-dnl)
+dnl	AC_MSG_RESULT([Please note that some screen refreshs may fail])
+dnl	AC_MSG_WARN([Use of the bsdcurses extension has some])
+dnl	AC_MSG_WARN([display/input problems.])
+dnl	AC_MSG_WARN([Reconsider using xcurses])
+dnl])
 
 AC_ARG_WITH(sco,
 	[--with-sco                 Use this to turn on SCO-specific code],[
@@ -390,12 +358,12 @@ AC_ARG_WITH(osf1-curses,
 
 AC_ARG_WITH(vcurses,
 	[--with-vcurses[=incdir]    Used to force SysV curses],
-	if test x$withval = xyes; then :
+	[if test x$withval = xyes; then :
         else
 		CPPFLAGS="$CPPFLAGS -I$withval"
 	fi
 	AC_USE_SYSV_CURSES
-)
+])
 
 mouse_lib="xterm only"
 LGPM=""
@@ -419,7 +387,7 @@ AC_ARG_WITH(gpm-mouse,
 		LGPM="-lgpm"],[
 		if test $system = Linux
 		then 
-			AC_MSG_WARN("libgpm.a is missing or older than 0.18")
+			AC_MSG_WARN([libgpm.a is missing or older than 0.18])
 		fi
 		], $LIBS)
 	]
@@ -428,7 +396,7 @@ AC_SUBST(LGPM)
 
 AC_ARG_WITH(ncurses,
 	[--with-ncurses[=base-dir]    Compile with ncurses/locate base dir],
-	if test x$withval = xyes
+	[if test x$withval = xyes
 	then
 		search_ncurses=true
 	else
@@ -438,14 +406,14 @@ AC_ARG_WITH(ncurses,
 		screen_manager="ncurses"
 		AC_DEFINE(USE_NCURSES)
 	fi
-)
+])
 
 AC_ARG_WITH(hsc,
         [--with-hsc               Compile with support for the HSC firewall],
-        if test x$withval = xyes; then
+        [if test x$withval = xyes; then
                 AC_DEFINE(HSC_PROXY)
         fi
-)
+])
 
 dnl
 dnl Check for Gnome
@@ -472,7 +440,8 @@ dnl Check for new enough gnome-libs
 	CFLAGS=`gnome-config --cflags gnomeui`
 	LIBS=`gnome-config --libs gnomeui`
 
-	AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file, AC_DEFINE(HAVE_GNOME_WINDOW_ICON))
+	AC_CHECK_LIB(gnomeui, gnome_window_icon_set_default_from_file,
+			      [AC_DEFINE(HAVE_GNOME_WINDOW_ICON)])
 
 	CFLAGS=$CFLAGS_save
 	LIBS=$LIBS_save
@@ -489,7 +458,7 @@ dnl Check for the -mandoc package
 dnl
 AC_CHECK_PROG(HAVE_nroff, nroff, true, false)
 if $HAVE_nroff; then
-    AC_MSG_CHECKING(for manual formatting macros)
+    AC_MSG_CHECKING([for manual formatting macros])
     AC_CACHE_VAL(ac_cv_mandoc, [
     nroff -mandoc < /dev/null > /dev/null 2>&1 /dev/null
     if test $? = 0
@@ -510,7 +479,7 @@ dnl
 dnl Check if nroff accepts -Tlatin1 or -Tascii
 dnl
 if $HAVE_nroff; then
-    AC_MSG_CHECKING(if nroff accepts -Tlatin1 or -Tascii)
+    AC_MSG_CHECKING([if nroff accepts -Tlatin1 or -Tascii])
     AC_CACHE_VAL(ac_cv_nroff_tascii, [
     nroff -Tlatin1 < /dev/null > /dev/null 2>&1 /dev/null
     if test $? = 0
@@ -540,7 +509,7 @@ dnl Check for - option to file
 dnl
 AC_CHECK_PROG(HAVE_FILECMD, file, true, false)
 if $HAVE_FILECMD; then
-    AC_MSG_CHECKING(for - option to file command)
+    AC_MSG_CHECKING([for - option to file command])
     AC_CACHE_VAL(ac_cv_filestdin, [
     cat > conftest.c <<EOF
 /* A comment */
@@ -571,13 +540,13 @@ EOF
 	AC_DEFINE(FILE_STDIN)
     fi
     filestdin=$ac_cv_filestdin
-    AC_MSG_RESULT($filestdin)
+    AC_MSG_RESULT([$filestdin])
 
     dnl
     dnl Check for -L option to file
     dnl
 
-AC_MSG_CHECKING(for -L option to file command)
+AC_MSG_CHECKING([for -L option to file command])
 AC_CACHE_VAL(ac_cv_filel, [
 file -L . > /dev/null 2>&1
 if test $? = 0
@@ -591,13 +560,13 @@ if test x$ac_cv_filel = xyes; then
     AC_DEFINE(FILE_L)
 fi
 filel=$ac_cv_filel
-AC_MSG_RESULT($filel)
+AC_MSG_RESULT([$filel])
 fi 
 
 dnl
 dnl Check to see if grep program allowes dash to denote stdin 
 dnl
-AC_MSG_CHECKING(for - option to grep command)
+AC_MSG_CHECKING([for - option to grep command])
 AC_CACHE_VAL(ac_cv_grep_stdin, [
     grep ac_cv_grep_stdin - > /dev/null 2>&1 < ./configure
     if test $? = 0; then
@@ -609,16 +578,16 @@ AC_CACHE_VAL(ac_cv_grep_stdin, [
 if test x$ac_cv_grep_stdin = xyes; then
     AC_DEFINE(GREP_STDIN)
 fi
-AC_MSG_RESULT($ac_cv_grep_stdin)
+AC_MSG_RESULT([$ac_cv_grep_stdin])
 
 dnl
 dnl The subshell support
 dnl
 
-AC_MSG_CHECKING(for subshell support)
+AC_MSG_CHECKING([for subshell support])
 AC_ARG_WITH(subshell,
 	[--with-subshell            If you want to use a concurrent shell],
-	result=no
+	[result=no
 	if test x$withval = xoptional
 	then
 		AC_DEFINE(SUBSHELL_OPTIONAL)
@@ -629,8 +598,8 @@ AC_ARG_WITH(subshell,
         then 
 		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
 		result="yes"
-	fi,
-	dnl Default: provide the subshell support on non-ultrix machines
+	fi],
+	[dnl Default: provide the subshell support on non-ultrix machines
 	if test $system = ULTRIX	
 	then
 		result=no
@@ -638,8 +607,8 @@ AC_ARG_WITH(subshell,
 		AC_DEFINE(HAVE_SUBSHELL_SUPPORT)
 		result=yes
 	fi
-)
-AC_MSG_RESULT($result)
+])
+AC_MSG_RESULT([$result])
 subshell="$result"
 
 dnl
@@ -659,7 +628,7 @@ AC_ARG_WITH(mad,
 	[if test x$withval = xyes; then
 	mem_debug="Janne's MAD library"
 	AC_DEFINE(HAVE_MAD)
-	AC_MSG_RESULT(compiling with memory leak detector)
+	AC_MSG_RESULT([compiling with memory leak detector])
 fi])
 
 dnl
@@ -669,7 +638,7 @@ AC_ARG_WITH(efence,
 [--with-efence              Developers only: activates Electric Fence],
 	[if test x$withval = xyes; then
 	LIBS="$LIBS -lefence"
-	AC_MSG_RESULT(compiling with Electric fence)
+	AC_MSG_RESULT([compiling with Electric fence])
 	mem_debug="Electric Fence"
 fi])
 
@@ -694,28 +663,14 @@ AC_ARG_WITH(mmap,
 	[--with-mmap                To force using the mmap call (AIX)],
 	[if test x$withval = xyes; then
 	AC_DEFINE(HAVE_MMAP)
-        AC_MSG_RESULT(forcing MMAP support)
+        AC_MSG_RESULT([forcing MMAP support])
 fi])
 
-AC_DEFUN(AC_USE_TERMINFO,
-	AC_DEFINE(SLANG_TERMINFO)
-	AC_MSG_RESULT(Using SLang screen manager/terminfo)
-	slang_term=" with terminfo"
-)
-
-AC_DEFUN(AC_USE_TERMCAP,
-	AC_MSG_RESULT(Using SLang screen manager/termcap)
-	AC_DEFINE(USE_TERMCAP)
-	dnl Check with $LIBS at the end so that it works with ELF libs.
-	AC_CHECK_LIB(termcap, tgoto, LIBS="$LIBS -ltermcap", , $LIBS)
-	slang_term=" with termcap"
-)
-	
 slang_check_lib=true
 slang_term=""
 slang_use_system_installed_lib=false
 AC_CHECK_LIB(slang,SLang_init_tty,
-	AC_CHECK_HEADERS(slang.h)
+	[AC_CHECK_HEADERS(slang.h)
 	if test x$ac_cv_header_slang_h = xyes
 	then
              slang_use_system_installed_lib=true
@@ -729,7 +684,7 @@ AC_CHECK_LIB(slang,SLang_init_tty,
 	         AC_DEFINE(SLANG_H_INSIDE_SLANG_DIR)
 	     fi
 	fi
-)
+])
 
 AC_ARG_WITH(terminfo,
         [--with-terminfo            SLANG: Force usage of terminfo],[
@@ -757,65 +712,6 @@ AC_ARG_WITH(included-slang,
 	fi]
 )
 
-AC_DEFUN(AC_WITH_SLANG,[
-	AC_DEFINE(HAVE_SLANG)
-	search_ncurses=false
-	if $slang_use_system_installed_lib
-	then
-	    AC_DEFINE(HAVE_SYSTEM_SLANG)
-	    LSLANG="-lslang"
-	    screen_manager="SLang (system-installed library)"
-	    AC_MSG_RESULT(Using system installed SLang library)
-	    rm -f slang/slang.h
-	    ac_save_LIBS="$LIBS"
-	    LIBS="$LIBS $LSLANG"
-	    AC_TRY_RUN(
-	    [ 
-	    #ifdef SLANG_H_INSIDE_SLANG_DIR
-	    #include <slang/slang.h>
-	    #else
-	    #include <slang.h>
-	    #endif
-	    int main(void){
-		SLtt_get_terminfo();
-		SLtt_tgetflag("");
-		return 0;
-	    } ], 
-	    [LIBS="$ac_save_LIBS"; AC_USE_TERMINFO], 
-	    [LIBS="$ac_save_LIBS"; AC_USE_TERMCAP])
-	else
-	    MCCPPFLAGS="$MCCPPFLAGS -I\$(slangdir)"
-    	    LIBSLANG="libmcslang.a"
-	    screen_manager="SLang"
-	    LSLANG="-lmcslang"
-	    CPPFLAGS="$CPPFLAGS -I../slang"
-	    fastdepslang=fastdepslang
-	    mkdir -p slang
-	    rm -f slang/slang.h
-	    case "$srcdir" in
-		/*) ln -sf  $srcdir/slang/slang-mc.h slang/slang.h;;
-		*)  ln -sf  ../$srcdir/slang/slang-mc.h slang/slang.h;;
-	    esac
-	fi
-	if $slang_check_lib
-	then
-	    use_terminfo=false
-	    for dir in 	/usr/lib /usr/share/lib /usr/local/lib /lib \
-			/usr/local/share /usr/share
-	    do
-		if test -d $dir/terminfo; then
-		use_terminfo=true; 
-		break
-		fi
-	    done
-	    if $use_terminfo; then
-		AC_USE_TERMINFO
-	    else
-		AC_USE_TERMCAP
-	    fi
-        fi]
-)
-
 LIBSLANG=""
 LSLANG=""
 fastdepslang=""
@@ -830,30 +726,21 @@ AC_SUBST(LIBSLANG)
 AC_SUBST(LSLANG)
 AC_SUBST(fastdepslang)
 
-AC_DEFUN(AC_WITH_EDIT, [
-	AC_DEFINE(USE_INTERNAL_EDIT)
-	LIBEDIT_A="libedit.a"
-	MCEDIT="mcedit"
-	LEDIT="-ledit"
-	EDIT_msg="yes"
-	AC_MSG_RESULT(will call internal editor)
-])
-
 LIBEDIT_A=""
 MCEDIT=""
 LEDIT=""
 EDIT_msg=""
 AC_ARG_WITH(edit,
         [--with-edit                Define INTERNAL_EDIT],
-	if test x$withval = xyes
+	[if test x$withval = xyes
 	then
 		AC_WITH_EDIT
 	else
 		EDIT_msg="no"
-	fi, 
-	dnl Default: provide the internal editor
+	fi], 
+	[dnl Default: provide the internal editor
 	AC_WITH_EDIT
-)
+])
 AC_SUBST(LIBEDIT_A)
 AC_SUBST(MCEDIT)
 AC_SUBST(LEDIT)
@@ -862,22 +749,11 @@ AC_ARG_WITH(netrc,
 	[--with-netrc               Compile with ftp .netrc support],[
 	if test x$withval = xyes; then
 		AC_DEFINE(USE_NETRC)
-		AC_MSG_RESULT(ftpfs will have .netrc parsing code)
+		AC_MSG_RESULT([ftpfs will have .netrc parsing code])
 	fi
 ])
 
 undelfs_o=""
-AC_DEFUN(AC_EXT2_UNDEL, [
-  GNOME_UNDELFS_CHECKS
-  if test "$ext2fs_undel" = yes; then
-     AC_MSG_RESULT(With ext2fs file recovery code)
-     vfs_flags=["${vfs_flags}, undelfs"]
-     undelfs_o="undelfs.o"
-     LIBS="$LIBS $EXT2FS_UNDEL_LIBS"
-  else
-     AC_MSG_WARN(No ext2fs file recovery code)
-  fi
-])
 
 AC_ARG_WITH(ext2undel,
         [--with-ext2undel           Compile with ext2 undelete code],[
@@ -891,32 +767,14 @@ AC_ARG_WITH(ext2undel,
 		AC_EXT2_UNDEL
 	fi],[
 	dnl Default: detect
-	AC_CHECK_LIB(ext2fs, ext2fs_close, AC_EXT2_UNDEL,,-lcom_err)
+	AC_CHECK_LIB(ext2fs, ext2fs_close, [AC_EXT2_UNDEL],,-lcom_err)
 ])
 
 AC_SUBST(undelfs_o)
 	
-dnl
-dnl Parameters: directory filename LIBS_append CPPFLAGS_append nicename
-dnl
-AC_DEFUN(AC_NCURSES, [
-    if $search_ncurses
-    then
-        if test -f $1/$2
-	then
-	    AC_MSG_RESULT(Found ncurses on $1/$2)
- 	    LIBS="$LIBS $3"
-	    CPPFLAGS="$CPPFLAGS $4"
-	    search_ncurses=false
-	    screen_manager=$5
-	    AC_DEFINE(USE_NCURSES)
-	fi
-    fi
-])
-
 if $search_ncurses
 then
-    AC_CHECKING("location of ncurses.h file")
+    AC_CHECKING([location of ncurses.h file])
 
     AC_NCURSES(/usr/include, ncurses.h, -lncurses,, "ncurses on /usr/include")
     AC_NCURSES(/usr/include/ncurses, ncurses.h, -lncurses, -I/usr/include/ncurses, "ncurses on /usr/include/ncurses")
@@ -961,7 +819,7 @@ USE_NCURSES
         fi
     else
         # check for ncurses version, to properly ifdef mouse-fix
-	AC_MSG_CHECKING(for ncurses version)
+	AC_MSG_CHECKING([for ncurses version])
 	ncurses_version=unknown
 cat > conftest.$ac_ext <<EOF
 [#]line __oline__ "configure"
@@ -981,7 +839,7 @@ changequote(,)dnl
 changequote([,])dnl
 	fi
 	rm -rf conftext*
-        AC_MSG_RESULT($ncurses_version)
+        AC_MSG_RESULT([$ncurses_version])
 	case "$ncurses_version" in
 changequote(,)dnl
 	4.[01])
