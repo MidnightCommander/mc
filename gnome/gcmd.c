@@ -306,20 +306,67 @@ typedef struct ep_dlg_data {
 	GtkWidget *ep_dlg;
 	GtkWidget *clist;
 	GtkWidget *entry;
+	GtkWidget *add_button;
 	GtkWidget *remove_button;
 	gboolean setting_text;
 	gint selected; /* if this is -1 then nothing is selected, otherwise, it's the row selected */
 } ep_dlg_data;
 
+static gchar *
+get_nickname ()
+{
+	GtkWidget *dlg;
+	GtkWidget *entry;
+	GtkWidget *label;
+	gchar *retval = NULL;
+
+	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK, 
+				GNOME_STOCK_BUTTON_CANCEL, NULL);
+	entry = gtk_entry_new ();
+	label = gtk_label_new (_("Enter label for command:"));
+	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dlg)->vbox),
+			    label, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dlg)->vbox),
+			    entry, FALSE, FALSE, 0);
+	gtk_widget_show_all (GNOME_DIALOG (dlg)->vbox);
+	switch (gnome_dialog_run (GNOME_DIALOG (dlg))) {
+	case 0:
+		retval = g_strdup (gtk_entry_get_text (GTK_ENTRY (entry)));
+		break;
+	case 1:
+	default:
+	}
+	gtk_widget_destroy (dlg);
+	return retval;	
+}
 static void
 ep_add_callback (GtkWidget *widget, ep_dlg_data *data)
 {
+	gint i;
+	gchar *insert_tab[1];
 
+	insert_tab[0] = get_nickname ();
+	if (insert_tab[0] == NULL)
+		return;
+	i = gtk_clist_append (GTK_CLIST (data->clist), insert_tab);
+	gtk_clist_set_row_data (GTK_CLIST (data->clist), i,
+				g_strdup (gtk_entry_get_text (GTK_ENTRY (data->entry))));
+	g_free (insert_tab [0]);
+	data->selected = -1;
+	gtk_widget_set_sensitive (data->add_button, FALSE);
+	gtk_entry_set_text (GTK_ENTRY (data->entry), "");
 }
 static void
 ep_remove_callback (GtkWidget *widget, ep_dlg_data *data)
 {
-	
+	if (data->selected > -1) {
+		g_free (gtk_clist_get_row_data (GTK_CLIST (data->clist), data->selected));
+		gtk_clist_remove (GTK_CLIST (data->clist), data->selected);
+		data->selected = -1;
+		gtk_entry_set_text (GTK_ENTRY (data->entry), "");
+	}
+	gtk_widget_set_sensitive (data->remove_button, FALSE);
 }
 
 static void
@@ -335,6 +382,7 @@ ep_select_callback (GtkWidget *widget,
 	data->setting_text = FALSE;
 	data->selected = row;
 	gtk_widget_set_sensitive (data->remove_button, TRUE);
+	gtk_widget_set_sensitive (data->add_button, FALSE);
 }
 static void
 ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
@@ -343,10 +391,11 @@ ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
 		/* we don't want to deselect text if we just clicked on something */
 		return;
 	if (data->selected > -1) {
-		gtk_widget_set_sensitive (data->remove_button, FALSE);
 		gtk_clist_unselect_row (GTK_CLIST (data->clist), data->selected, 0);
 		data->selected = -1;
 	}
+	gtk_widget_set_sensitive (data->remove_button, FALSE);
+	gtk_widget_set_sensitive (data->add_button, TRUE);
 }
 static void
 load_settings (GtkCList *clist)
@@ -370,7 +419,7 @@ load_settings (GtkCList *clist)
 			profile_keys = profile_iterator_next (profile_keys, &key, &value);
 			insert_tab[0] = key;
 			gtk_clist_insert (clist, i, insert_tab);
-			gtk_clist_set_row_data (clist, i++, value);
+			gtk_clist_set_row_data (clist, i++, g_strdup (value));
 		}
 	}
 }
@@ -382,8 +431,8 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	GtkWidget *sw;
 	GtkWidget *vbox;
 	GtkWidget *hbox;
-	GtkWidget *button;
-
+	gint i;
+	gchar *row_data;
 
 	data = g_new0 (ep_dlg_data, 1);
 	data->setting_text = FALSE;
@@ -408,10 +457,10 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_box_pack_start (GTK_BOX (vbox), sw, TRUE, TRUE, 0);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	hbox = gtk_hbox_new (FALSE, GNOME_PAD_SMALL);
-	button = gtk_button_new_with_label (_("Add"));
-	gtk_signal_connect (GTK_OBJECT (button), "clicked", GTK_SIGNAL_FUNC (ep_add_callback), (gpointer) data);
-	gtk_widget_set_usize (button, 75, 25);
-	gtk_box_pack_end (GTK_BOX (hbox), button, FALSE, FALSE, 0);
+	data->add_button = gtk_button_new_with_label (_("Add"));
+	gtk_signal_connect (GTK_OBJECT (data->add_button), "clicked", GTK_SIGNAL_FUNC (ep_add_callback), (gpointer) data);
+	gtk_widget_set_usize (data->add_button, 75, 25);
+	gtk_box_pack_end (GTK_BOX (hbox), data->add_button, FALSE, FALSE, 0);
 	data->remove_button = gtk_button_new_with_label (_("Remove"));
 	gtk_widget_set_sensitive (data->remove_button, FALSE);
 	gtk_signal_connect (GTK_OBJECT (data->remove_button), "clicked", GTK_SIGNAL_FUNC (ep_remove_callback), (gpointer) data);
@@ -433,12 +482,16 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
 	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
 	case 0:
-		g_print ("ok\n");
-		g_print ("%s\n", gtk_entry_get_text (GTK_ENTRY (data->entry)));
 		do_external_panelize (gtk_entry_get_text (GTK_ENTRY (data->entry)));
+		/* FIXME: we want to save the state of everything that we added/removed */
 		break;
 	case 1:
 	default:
+	}
+	for (i = 0; i < GTK_CLIST (data->clist)->rows; i++) {
+		row_data = gtk_clist_get_row_data (GTK_CLIST (data->clist), i);
+		if (row_data)
+			g_free (row_data);
 	}
 	gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
 	g_free (data);

@@ -1,3 +1,8 @@
+1999-01-06  Jonathan Blandford  <jrb@redhat.com>
+
+	* gcmd.c (gnome_external_panelize): Now it works.  Just need to save
+	results so the next time works.  Will do this tomorrow.
+
 1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gdesktop.c (desktop_icon_drop_uri_list): Implement
