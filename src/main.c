@@ -1000,6 +1000,15 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     }
     directory = *new_dir ? new_dir : home_dir;
     
+#ifdef HAVE_GNOME
+    if (is_a_desktop_panel (panel)) {
+	new_panel_at (directory);
+	g_free (olddir);
+	g_free (translated_url);
+	return 0;		/* Don't add to history */
+    }
+#endif
+
     if (mc_chdir (directory) == -1){
 	strcpy (panel->cwd, olddir);
 	g_free (olddir);

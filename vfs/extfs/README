@@ -35,6 +35,9 @@ $(libdir)/extfs (in our example $(libdir)/extfs/uzip).
 * Commands that should be implemented by your shell script
 ----------------------------------------------------------
 
+Return zero from your script upon completion of the command, otherwise
+nonzero for failure or in case of an unsupported command.
+
 $libdir/extfs/prefix command [arguments]
 
 * Command: list archivename
@@ -67,9 +70,9 @@ points to. (If this PATH starts with a MC vfs prefix, then it is a symlink
 somewhere to the other virtual filesystem (if you want to specify path from
 the local root, use local:/path_name instead of /path_name, since /path_name
 means from root of the archive listed).
+
 If permissions do not start with l, but number of links is greater than one,
 then it says that this file should be a hardlinked with the other file.
-
 
 * Command: copyout archivename storedfilename extractto
 
@@ -88,6 +91,19 @@ extension you are expecting to have, like it may happen that
 archivename will be something like /tmp/f43513254 or just
 anything. Some archivers do not like it, so you'll have to find some
 workaround.
+
+* Command: rm archivename storedfilename
+
+This should remove storedfilename from archivename.
+
+* Command: mkdir archivename dirname
+
+This should create a new directory called dirname inside archivename.
+
+* Command: rmdir archivename dirname
+
+This should remove an existing directory dirname. If the directory is
+not empty, mc will recursively delete it (possibly prompting).
 
 * Command: run
 

@@ -1163,6 +1163,9 @@ create_panel_from_desktop (void)
 					marked_count++;
 					fe->f.marked = TRUE;
 
+					if (dii == last_selected_icon)
+						selected_index = count;
+
 					if (S_ISDIR (fe->buf.st_mode)) {
 						dir_marked_count++;
 						if (fe->f.dir_size_computed)
@@ -1285,11 +1288,7 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	} else {
 		WPanel *panel;
 		panel = push_desktop_panel_hack ();
-		/* we need to special case the new dir.  Otherwise we'd try to cd */
-		if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe))
-			new_panel_at (filename);
-		else
-			do_enter_on_file_entry (fe);
+		do_enter_on_file_entry (fe);
 		layout_panel_gone (panel);
 		free_panel_from_desktop (panel);
 	}

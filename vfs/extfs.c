@@ -3,6 +3,7 @@
    
    Written by: 1995 Jakub Jelinek
    Rewritten by: 1998 Pavel Machek
+   Additional changes by: 1999 Andrew T. Veliath
 
    This program is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public License
@@ -49,6 +50,7 @@
 static struct entry *
 find_entry (struct entry *dir, char *name, int make_dirs, int make_file);
 static int extfs_which (vfs *me, char *path);
+static void remove_entry (struct entry *e);
 
 static struct archive *first_archive = NULL;
 static int my_errno = 0;
@@ -734,6 +736,128 @@ static int extfs_write (void *data, char *buf, int nbyte)
     return write (file->local_handle, buf, nbyte);
 }
 
+static int extfs_unlink (vfs *me, char *file)
+{
+    struct archive *archive;
+    char *q;
+    char *mc_extfsdir;
+    struct entry *entry;
+    char *cmd;
+    char *archive_name, *p;
+
+    if ((q = get_path_mangle (file, &archive, 0, 0)) == NULL)
+	return -1;
+    entry = find_entry (archive->root_entry, q, 0, 0);
+    if (entry == NULL)
+    	return -1;
+    if ((entry = my_resolve_symlinks (entry)) == NULL)
+	return -1;
+    if (S_ISDIR (entry->inode->mode)) ERRNOR (EISDIR, -1);
+
+    p = get_path_from_entry (entry);
+    q = name_quote (p, 0);
+    g_free (p);
+    archive_name = name_quote (get_archive_name (archive), 0);
+
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
+		       " rm ",  archive_name, " ", q, NULL);
+    g_free (q);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
+    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+            g_free (cmd);
+            my_errno = EIO;
+            return -1;
+    }
+    g_free (cmd);
+    remove_entry (entry);
+
+    return 0;
+}
+
+static int extfs_mkdir (vfs *me, char *path, mode_t mode)
+{
+    struct archive *archive;
+    char *q;
+    char *mc_extfsdir;
+    struct entry *entry;
+    char *cmd;
+    char *archive_name, *p;
+
+    if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
+	    return -1;
+    entry = find_entry (archive->root_entry, q, 0, 0);
+    if (entry != NULL) ERRNOR (EEXIST, -1);
+    entry = find_entry (archive->root_entry, q, 1, 0);
+    if (entry == NULL)
+	    return -1;
+    if ((entry = my_resolve_symlinks (entry)) == NULL)
+	return -1;
+    if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, -1);
+
+    p = get_path_from_entry (entry);
+    q = name_quote (p, 0);
+    g_free (p);
+    archive_name = name_quote (get_archive_name (archive), 0);
+
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
+		       " mkdir ",  archive_name, " ", q, NULL);
+    g_free (q);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
+    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+            g_free (cmd);
+            my_errno = EIO;
+	    remove_entry (entry);
+            return -1;
+    }
+    g_free (cmd);
+
+    return 0;
+}
+
+static int extfs_rmdir (vfs *me, char *path)
+{
+    struct archive *archive;
+    char *q;
+    char *mc_extfsdir;
+    struct entry *entry;
+    char *cmd;
+    char *archive_name, *p;
+
+    if ((q = get_path_mangle (path, &archive, 0, 0)) == NULL)
+	return -1;
+    entry = find_entry (archive->root_entry, q, 0, 0);
+    if (entry == NULL)
+    	return -1;
+    if ((entry = my_resolve_symlinks (entry)) == NULL)
+	return -1;
+    if (!S_ISDIR (entry->inode->mode)) ERRNOR (ENOTDIR, -1);
+
+    p = get_path_from_entry (entry);
+    q = name_quote (p, 0);
+    g_free (p);
+    archive_name = name_quote (get_archive_name (archive), 0);
+
+    mc_extfsdir = concat_dir_and_file (mc_home, "extfs/");
+    cmd = g_strconcat (mc_extfsdir, extfs_prefixes [archive->fstype],
+		       " rmdir ",  archive_name, " ", q, NULL);
+    g_free (q);
+    g_free (mc_extfsdir);
+    g_free (archive_name);
+    if (my_system (EXECUTE_AS_SHELL | EXECUTE_SETUID | EXECUTE_WAIT, shell, cmd)){
+            g_free (cmd);
+            my_errno = EIO;
+            return -1;
+    }
+    g_free (cmd);
+    remove_entry (entry);
+
+    return 0;
+}
+
 static int extfs_chdir (vfs *me, char *path)
 {
     struct archive *archive;
@@ -796,6 +920,46 @@ static int extfs_nothingisopen (vfsid id)
     	return 1;
     else
     	return 0;
+}
+
+static void remove_entry (struct entry *e)
+{
+    int i = --(e->inode->nlink);
+    struct entry *pe, *ent, *prev;
+
+    if (S_ISDIR (e->inode->mode) && e->inode->first_in_subdir != NULL) {
+        struct entry *f = e->inode->first_in_subdir;
+        e->inode->first_in_subdir = NULL;
+	remove_entry (f);
+    }
+    pe = e->dir;
+    if (e == pe->inode->first_in_subdir)
+	    pe->inode->first_in_subdir = e->next_in_dir;
+
+    prev = NULL;
+    for (ent = pe->inode->first_in_subdir; ent && ent->next_in_dir;
+	 ent = ent->next_in_dir)
+	    if (e == ent->next_in_dir) {
+		    prev = ent;
+		    break;
+	    }
+    if (prev)
+	    prev->next_in_dir = e->next_in_dir;
+    if (e == pe->inode->last_in_subdir)
+	    pe->inode->last_in_subdir = prev;
+
+    if (i <= 0) {
+        if (e->inode->local_filename != NULL) {
+            unlink (e->inode->local_filename);
+            g_free (e->inode->local_filename);
+        }
+        if (e->inode->linkname != NULL)
+            g_free (e->inode->linkname);
+        g_free (e->inode);
+    }
+
+    g_free (e->name);
+    g_free (e);
 }
 
 static void free_entry (struct entry *e)
@@ -999,7 +1163,7 @@ vfs vfs_extfs_ops = {
     
     NULL,		/* symlink */
     NULL,
-    NULL,
+    extfs_unlink,
 
     NULL,
     extfs_chdir,
@@ -1014,8 +1178,8 @@ vfs vfs_extfs_ops = {
     extfs_getlocalcopy,
     extfs_ungetlocalcopy,
     
-    NULL,		/* mkdir */
-    NULL,
+    extfs_mkdir,	/* mkdir */
+    extfs_rmdir,
     NULL,
     extfs_setctl
 

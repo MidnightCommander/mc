@@ -1,3 +1,8 @@
+1999-04-12  Andrew T. Veliath  <andrewtv@usa.net>
+
+	* main.c (_do_panel_cd): If we are using GNOME, and the panel is a
+	desktop panel, open up a new panel for the contents.
+
 1999-04-09  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* tree.c (tree_start_search): Renamed from start_search() to avoid
