@@ -315,9 +315,11 @@ int edit_insert_file (WEdit * edit, const char *filename)
 }
 
 /* Open file and create it if necessary.  Return 0 for success, 1 for error.  */
-static int check_file_access (WEdit *edit, const char *filename, struct stat *st)
+static int
+check_file_access (WEdit *edit, const char *filename, struct stat *st)
 {
     int file;
+    int flags;
     int stat_ok = 0;
 
     /* Try stat first to prevent getting stuck on pipes */
@@ -327,20 +329,34 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
 
     /* Only regular files are allowed */
     if (stat_ok && !S_ISREG (st->st_mode)) {
-	edit_error_dialog (_ ("Error"), catstrs (_ (" Not an ordinary file: "), filename, " ", 0));
+	edit_error_dialog (_("Error"),
+			   catstrs (_(" Not an ordinary file: "), filename,
+				    " ", 0));
 	return 1;
     }
 
-    /* Open the file, create it if needed */
-    if ((file = mc_open (filename, O_RDONLY | O_CREAT | O_BINARY, 0666)) < 0) {
-	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot open file for reading: "), filename, " ", 0)));
+    /* Open the file, create it if (and only if!) needed */
+    flags = O_RDONLY | O_CREAT | O_BINARY;
+    if (!stat_ok)
+	flags |= O_EXCL;
+
+    if ((file = mc_open (filename, flags, 0666)) < 0) {
+	edit_error_dialog (_("Error"),
+			   get_sys_error (catstrs
+					  (_
+					   (" Cannot open file for reading: "),
+					   filename, " ", 0)));
 	return 1;
     }
 
     /* If the file has just been created, we don't have valid stat yet, so do it now */
     if (!stat_ok && mc_fstat (file, st) < 0) {
 	mc_close (file);
-	edit_error_dialog (_ ("Error"), get_sys_error (catstrs (_ (" Cannot get size/permissions info for file: "), filename, " ", 0)));
+	edit_error_dialog (_("Error"),
+			   get_sys_error (catstrs
+					  (_
+					   (" Cannot get size/permissions info for file: "),
+					   filename, " ", 0)));
 	return 1;
     }
     mc_close (file);
@@ -351,9 +367,12 @@ static int check_file_access (WEdit *edit, const char *filename, struct stat *st
     }
 
     if (st->st_size >= SIZE_LIMIT) {
-/* The file-name is printed after the ':' */
-	edit_error_dialog (_ ("Error"), catstrs (_ (" File is too large: "), \
-						   filename, _ (" \n Increase edit.h:MAXBUF and recompile the editor. "), 0));
+	/* The file-name is printed after the ':' */
+	edit_error_dialog (_("Error"),
+			   catstrs (_(" File is too large: "), filename,
+				    _
+				    (" \n Increase edit.h:MAXBUF and recompile the editor. "),
+				    0));
 	return 1;
     }
     return 0;

@@ -1,3 +1,9 @@
+2002-12-07  Pavel Roskin  <proski@gnu.org>
+
+	* edit.c (check_file_access): Use O_EXCL when opening new files.
+	Don't allow editing stale symlinks.
+	Reported by Max Derzhak <max@linux.zp.ua>
+
 2002-12-05  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h: Remove "from_here" and "to_here".
