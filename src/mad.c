@@ -32,7 +32,6 @@
 
 #undef g_malloc
 #undef g_malloc0
-#undef g_calloc
 #undef g_realloc
 #undef g_strdup
 #undef g_strndup

@@ -33,7 +33,7 @@
 #define tempnam(x,y)	mad_tempnam (x, y)
 
 #define malloc(x)	mad_alloc (x, __FILE__, __LINE__)
-#define calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
+#define calloc(x, y)	mad_alloc0 ((x) * (y), __FILE__, __LINE__)
 #define realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
 #define xmalloc(x, y)	mad_alloc (x, __FILE__, __LINE__)
 #ifdef strdup
@@ -56,7 +56,6 @@
 
 #define g_malloc(x)	mad_alloc (x, __FILE__, __LINE__)
 #define g_malloc0(x)	mad_alloc0 (x, __FILE__, __LINE__)
-#define g_calloc(x, y)	mad_alloc ((x) * (y), __FILE__, __LINE__)
 #define g_realloc(x, y)	mad_realloc (x, y, __FILE__, __LINE__)
 #define g_strdup(x)	mad_strdup (x, __FILE__, __LINE__)
 #define g_strndup(x, n)	mad_strndup (x, n, __FILE__, __LINE__)

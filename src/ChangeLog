@@ -1,5 +1,8 @@
 2001-07-30  Pavel Roskin  <proski@gnu.org>
 
+	* mad.c: Don't use g_calloc - it's missing in glib 1.2.x.
+	* mad.h: Likewise.  Use mad_alloc0() to emulate calloc().
+
 	* view.h: Simplify, respect WANT_WIDGETS setting.
 
 2001-07-28  Pavel Roskin  <proski@gnu.org>
