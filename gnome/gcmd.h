@@ -30,6 +30,7 @@ typedef enum {
 sortfn *sort_get_func_from_type (SortType type);
 
 void gnome_sort_cmd               (GtkWidget *widget, WPanel *panel);
+void gnome_empty_trash            (GtkWidget *widget, WPanel *panel);
 void gnome_select_all_cmd         (GtkWidget *widget, WPanel *panel);
 void gnome_start_search		  (GtkWidget *widget, WPanel *panel);
 void gnome_filter_cmd             (GtkWidget *widget, WPanel *panel);

@@ -1,3 +1,17 @@
+2000-06-16  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c (handle_empty_trash): Finished trash can.  Now I just
+	need an icon.
+
+2000-06-15  Jonathan Blandford  <jrb@redhat.com>
+
+	* gpopup2.c: Add "Move to Trash" as an option to the popup menu.
+	Also, "Empty Trash" as appropriate.
+
+	* gscreen.c (file_list_popup): Removed New File command.  It
+	wasn't working, and didn't do anything useful, anyways.  Added
+	"Empty Trash" to the options for the menu.
+
 2000-05-24  Arik Devens <arik@helixcode.com> and Ian Peters <itp@helixcode.com>
 
 	* gdesktop-init.c (desktop_load_init_from): don't crash on 

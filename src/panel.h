@@ -219,6 +219,9 @@ extern int panel_scroll_pages;
 #define selection(p) (&(p->dir.list [p->selected]))
 #ifdef HAVE_GNOME
 #define is_a_desktop_panel(p) ((p->is_a_desktop_panel))
+/* Evil empty trash_hack */
+extern int is_trash_panel;
+
 #else
 #define is_a_desktop_panel(p) FALSE
 #endif

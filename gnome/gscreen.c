@@ -1429,8 +1429,17 @@ static GnomeUIInfo file_list_popup_items[] = {
 			       handle_rescan_directory),
 	GNOMEUIINFO_ITEM_NONE (N_("New _Directory..."), N_("Creates a new directory here"),
 			       gnome_mkdir_cmd),
-	GNOMEUIINFO_ITEM_NONE (N_("New _File..."), N_("Creates a new file here"),
-			       gnome_newfile_cmd),
+	GNOMEUIINFO_END
+};
+
+/* The popup menu for file panels */
+static GnomeUIInfo trash_file_list_popup_items[] = {
+	GNOMEUIINFO_ITEM_NONE (N_("Empty _Trash"), N_("Empties the Trash"),
+			       gnome_empty_trash),
+	GNOMEUIINFO_ITEM_NONE (N_("_Rescan Directory"), N_("Reloads the current directory"),
+			       handle_rescan_directory),
+	GNOMEUIINFO_ITEM_NONE (N_("New _Directory..."), N_("Creates a new directory here"),
+			       gnome_mkdir_cmd),
 	GNOMEUIINFO_END
 };
 
@@ -1441,8 +1450,19 @@ static void
 file_list_popup (GdkEventButton *event, WPanel *panel)
 {
 	GtkWidget *popup;
+	gchar *trash_dir;
+	GnomeUIInfo *items = file_list_popup_items;
 
-	popup = gnome_popup_menu_new (file_list_popup_items);
+	trash_dir = g_strconcat (gnome_user_home_dir, "/",
+				 DESKTOP_DIR_NAME, "/",
+				 "Trash",
+				 NULL);
+
+	if ((strncmp (panel->cwd, trash_dir, strlen (trash_dir)) == 0) && (panel->count != 1))
+		items = trash_file_list_popup_items;
+	g_free (trash_dir);
+
+	popup = gnome_popup_menu_new (items);
 	gnome_popup_menu_do_popup_modal (popup, NULL, NULL, event, panel);
 	gtk_widget_destroy (popup);
 }
@@ -2489,7 +2509,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_widget_show (vbox);
 	gtk_widget_show (panel->table);
 
-	if (!(panel->widget.options & W_PANEL_HIDDEN))
+	if (!(panel->widget.options & W_PANEL_HIDDEN) && !is_trash_panel)
 		gtk_widget_show (gtk_widget_get_toplevel (panel->table));
 
 	if (!pixmaps_ready)

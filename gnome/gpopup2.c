@@ -15,6 +15,7 @@
 #include "global.h"
 #include <gnome.h>
 #include "panel.h"
+#include "file.h"
 #include "cmd.h"
 #include "dialog.h"
 #include "ext.h"
@@ -28,6 +29,7 @@
 #include "gmount.h"
 #define CLIST_FROM_SW(panel_list) GTK_CLIST (GTK_BIN (panel_list)->child)
 
+int is_trash_panel = FALSE;
 
 /* Flags for the popup menu entries.  They specify to which kinds of files an
  * entry is valid for.
@@ -64,6 +66,8 @@ static void handle_view (GtkWidget *widget, WPanel *panel);
 static void handle_view_unfiltered (GtkWidget *widget, WPanel *panel);
 static void handle_edit (GtkWidget *widget, WPanel *panel);
 static void handle_copy (GtkWidget *widget, WPanel *panel);
+static void handle_trash (GtkWidget *widget, WPanel *panel);
+static void handle_empty_trash (GtkWidget *widget, WPanel *panel);
 static void handle_delete (GtkWidget *widget, WPanel *panel);
 static void handle_move (GtkWidget *widget, WPanel *panel);
 
@@ -79,6 +83,8 @@ static gboolean check_mount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_unmount_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_eject_func (WPanel *panel, DesktopIconInfo *dii);
 static gboolean check_device_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_trash_func (WPanel *panel, DesktopIconInfo *dii);
+static gboolean check_trash_icon_func (WPanel *panel, DesktopIconInfo *dii);
 
 static gchar * get_full_filename (WPanel *panel);
 
@@ -188,6 +194,83 @@ check_device_func (WPanel *panel, DesktopIconInfo *dii)
 		check_eject_func (panel, dii));
 }
 
+static gboolean
+check_trash_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	gchar *trash_dir;
+	struct stat st;
+	gint i;
+	trash_dir = g_strconcat (gnome_user_home_dir, "/",
+				 DESKTOP_DIR_NAME, "/",
+				 "Trash",
+				 NULL);
+
+	if (mc_stat (trash_dir, &st) || !S_ISDIR (st.st_mode)) {
+		g_free (trash_dir);
+		return FALSE;
+	} 
+
+	if (strncmp (trash_dir, panel->cwd, strlen (trash_dir)) == 0) {
+		g_free (trash_dir);
+		return FALSE;
+	}
+
+	for (i = 0; i < panel->count; i++) {
+		if (panel->dir.list [i].f.marked) {
+			gchar *desktop_file = concat_dir_and_file (panel->cwd,
+								   panel->dir.list [i].fname);
+			if (strncmp (desktop_file, trash_dir, strlen (trash_dir)) == 0) {
+				g_free (desktop_file);
+				g_free (trash_dir);
+					return FALSE;
+			}
+			g_free (desktop_file);
+		}
+	}
+
+	g_free (trash_dir);
+	return TRUE;
+}
+
+static gboolean
+check_trash_icon_func (WPanel *panel, DesktopIconInfo *dii)
+{
+	gchar *trash_dir;
+	gchar *file_name;
+
+	if (!is_a_desktop_panel (panel))
+		return FALSE;
+
+	trash_dir = g_strconcat (gnome_user_home_dir, "/",
+				 DESKTOP_DIR_NAME, "/",
+				 "Trash",
+				 NULL);
+	file_name = get_full_filename (panel);
+
+	if (strncmp (trash_dir, file_name, strlen (trash_dir)) == 0) {
+		DIR *dirp;
+		struct dirent *dp;
+		gint i = 0;
+
+		dirp = mc_opendir (file_name);
+		g_free (trash_dir);
+		g_free (file_name);
+
+		for (dp = mc_readdir (dirp); dp; dp = mc_readdir (dirp)) {
+			i ++;
+			if (i > 2) {
+				mc_closedir (dirp);
+				return TRUE;
+			}
+		}
+		mc_closedir (dirp);
+		return FALSE;
+	}
+	g_free (trash_dir);
+	g_free (file_name);
+	return FALSE;
+}
+
 /* global vars */
 extern int we_can_afford_the_speed;
 
@@ -197,6 +280,7 @@ static struct action file_actions[] = {
 	{ N_("Mount device"),		F_ALL | F_SINGLE,			handle_mount,		check_mount_func },
 	{ N_("Unmount device"),		F_ALL | F_SINGLE,			handle_unmount,		check_unmount_func },
 	{ N_("Eject device"),		F_ALL | F_SINGLE,			handle_eject,		check_eject_func },
+	{ N_("Empty Trash"),            F_SINGLE,                               handle_empty_trash,     check_trash_icon_func },
 	/* Custom actions go here */
 	{ "",				F_MIME_ACTIONS | F_SINGLE,		NULL, 			check_device_func },
 	{ N_("Open with..."),		F_REGULAR | F_SINGLE, 			handle_open_with, 	NULL },
@@ -205,6 +289,7 @@ static struct action file_actions[] = {
 	{ N_("Edit"),			F_REGULAR | F_SINGLE, 			handle_edit,  		NULL },
 	{ "",				F_REGULAR | F_SINGLE, 			NULL, 			NULL },
 	{ N_("Copy..."),		F_ALL, 					handle_copy, 		NULL },
+	{ N_("Move to Trash"),          F_ALL, 					handle_trash, 		check_trash_func },
 	{ N_("Delete"),			F_ALL, 					handle_delete, 		NULL },
 	{ N_("Move..."),		F_ALL, 					handle_move, 		NULL },
 	{ N_("Hard Link..."),		F_ADVANCED | F_SINGLE, 			handle_hard_link,  	NULL },
@@ -709,6 +794,30 @@ static void
 handle_copy (GtkWidget *widget, WPanel *panel)
 {
 	copy_cmd ();
+}
+
+/* Empties trash when in the Trash panel */
+static void
+handle_trash (GtkWidget *widget, WPanel *panel)
+{
+	gchar *trash_dir;
+
+	trash_dir = g_strconcat (gnome_user_home_dir, "/",
+				 DESKTOP_DIR_NAME, "/",
+				 "Trash",
+				 NULL);
+
+	if (panel_operate (cpanel, OP_MOVE, trash_dir, FALSE)) {
+		update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+		repaint_screen ();
+	}
+}
+
+/* Empties trash from the desktop */
+static void
+handle_empty_trash (GtkWidget *widget, WPanel *panel)
+{
+	gnome_empty_trash (NULL, NULL);
 }
 
 static void

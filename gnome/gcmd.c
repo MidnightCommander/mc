@@ -24,6 +24,7 @@
 #include "layout.h"
 #include "gdesktop.h"
 #include "gmain.h"
+#include "file.h"
 #include "../vfs/vfs.h"
 
 static char *panelize_section = "Panelize";
@@ -625,6 +626,47 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 		gtk_widget_destroy (GTK_WIDGET (data->ep_dlg));
 	g_free (data);
 }
+
+
+static WPanel *
+create_trash_panel (void)
+{
+	WPanel *retval;
+	gchar *trash_dir;
+
+	is_trash_panel = TRUE;
+	trash_dir = g_strconcat (gnome_user_home_dir, "/",
+				 DESKTOP_DIR_NAME, "/",
+				 "Trash",
+				 NULL);
+	retval = new_panel_at (trash_dir);
+	g_free (trash_dir);
+	is_trash_panel = FALSE;
+
+	return retval;
+}
+
+void
+gnome_empty_trash (GtkWidget *widget, WPanel *panel)
+{
+	WPanel *trash_panel;
+	gint i;
+
+	trash_panel = create_trash_panel ();
+	for (i = 0; i < trash_panel->count; i++){
+		if (!strcmp (trash_panel->dir.list [i].fname, "..")) {
+			continue;
+		}
+		do_file_mark (trash_panel, i, 1);
+	}
+
+	panel_operate (trash_panel, OP_DELETE, NULL, FALSE);
+
+	gnome_close_panel (NULL, trash_panel);
+	update_panels (UP_OPTIMIZE, UP_KEEPSEL);
+	do_refresh ();
+}
+
 
 void
 gnome_select_all_cmd (GtkWidget *widget, WPanel *panel)
