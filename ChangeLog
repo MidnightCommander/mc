@@ -1,5 +1,10 @@
 2000-08-01  Pavel Roskin  <proski@gnu.org>
 
+	* nt, os2, tk, xv: removed all files
+	* configure.in: don't create os2 and nt directories
+
+2000-08-01  Pavel Roskin  <proski@gnu.org>
+
 	* configure.in, mc-aclocal.m4: AC_WARN replaced with AC_MSG_WARN
 
 	* README.PC, doc/mc.1.in, doc/mc.sgml: Updated e-mail address

@@ -1295,14 +1295,6 @@ doc/mc.1 doc/mcedit.1 doc/mcserv.8
 intl/Makefile po/Makefile.in
 ],[sed -e "/POTFILES =/r po/POTFILES" po/Makefile.in > po/Makefile])
 
-if test x$srcdir != x; then
-    if test $srcdir != .; then
-	mkdir nt
-	mkdir os2
-	cp $srcdir/pc/Makefile nt/Makefile
-    fi
-fi
-
 if echo "$screen_manager" | grep -q "SLang" ; then
     screen_manager="${screen_manager}${slang_term}"
 fi
