@@ -1,3 +1,9 @@
+2002-05-14  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* configure.in: Don't generate po/Makefile if
+	there is 'top_builddir' in po/Makefile.in.
+	* autogen.sh: More fixes for gettext 0.11+.
+
 2002-05-08  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* configure.in (ALL_LINGUAS): Added "be" for Belarusian.

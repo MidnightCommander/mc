@@ -24,16 +24,45 @@ if test $gettext_ver -lt 01038; then
   exit 1
 fi
 
-if test $gettext_ver -ge 01100; then
-  GETTEXTIZE_ARGS='--intl --no-changelog'
-fi
-
 rm -rf intl
-$GETTEXTIZE $GETTEXTIZE_ARGS --copy --force >tmpout || exit 1
+if test $gettext_ver -ge 01100; then
+  $GETTEXTIZE --copy --force --intl --no-changelog >tmpout || exit 1
+  if test -e Makefile.am~; then
+     rm -rf Makefile.am
+     mv Makefile.am~ Makefile.am
+  fi
+  if test -e configure.in~ ; then
+    rm -rf configure.in
+    mv configure.in~ configure.in
+  fi
+  for i in po/Rules-quot po/boldquot.sed po/en@boldquot.header \
+	   po/en@quot.header po/insert-header.sin po/quot.sed \
+	   po/remove-potcdate.sin po/Makefile.in.in
+  do
+    if diff -s $i $i~ >/dev/null 2>&1 ; then
+      mv $i~ $i
+    fi
+  done
+  # Does we need po/Makevars.in and family for gettext 0.11 ?
+  if test ! -e po/Makevars; then
+    cat > po/Makevars <<EOF
+# Usually the message domain is the same as the package name.
+DOMAIN = $(PACKAGE)
 
-if test -e po/ChangeLog~; then
-  rm -f po/ChangeLog
-  mv po/ChangeLog~ po/ChangeLog
+# These two variables depend on the location of this directory.
+subdir = po
+top_builddir = ../config
+
+# These options get passed to xgettext.
+XGETTEXT_OPTIONS = --keyword=_ --keyword=N_
+EOF
+  fi
+else
+  $GETTEXTIZE --copy --force >tmpout || exit 1
+  if test -e po/ChangeLog~; then
+    rm -f po/ChangeLog
+    mv po/ChangeLog~ po/ChangeLog
+  fi
 fi
 
 if test ! -d config; then
