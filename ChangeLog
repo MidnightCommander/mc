@@ -1,3 +1,10 @@
+2000-09-22  Pavel Roskin  <proski@gnu.org>
+
+	* doc/mc.sgml: Removed as obsoleted by doc/mc.in.1
+	* doc/gnome.sgml: Removed as obsoleted by doc-gnome/C/gmc.sgml
+	* doc/Makefile.in: Converted to ...
+	* doc/Makefile.am: ... this.
+
 2000-09-21  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.sh.in: Use $HOME instead of '~' because the tilde
