@@ -1,3 +1,7 @@
+2001-06-26  Pavel Roskin  <proski@gnu.org>
+
+	* vfs.h: Don't include <config.h>.
+
 2001-06-25  Pavel Roskin  <proski@gnu.org>
 
 	* cpio.c: Include <config.h> before everything else.
