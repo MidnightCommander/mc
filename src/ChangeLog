@@ -1,3 +1,8 @@
+2002-02-24  Pavel Roskin  <proski@gnu.org>
+
+	* chown.c (chown_cmd): Use size_trunc_len() to show the file
+	size.  Eliminate c_fsize, which wasn't properly initialized.
+
 2002-02-22  Pavel Roskin  <proski@gnu.org>
 
 	* man2hlp.c (string_len): Don't exclude characters with codes

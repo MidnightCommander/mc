@@ -68,7 +68,6 @@ static int need_update, end_chown;
 static int current_file;
 static int single_set;
 static WListbox *l_user, *l_group;
-static int c_fsize;
 
 static struct {
     int ret_cmd, flags, y, x;
@@ -273,7 +272,7 @@ chown_cmd (void)
         chown_label (0, name_trunc (fname, 15));
         chown_label (1, name_trunc (get_owner (sf_stat.st_uid), 15));
 	chown_label (2, name_trunc (get_group (sf_stat.st_gid), 15));
-        g_snprintf (buffer, sizeof (buffer), "%d", c_fsize);
+	size_trunc_len (buffer, 15, sf_stat.st_size, 0);
 	chown_label (3, buffer);
 	chown_label (4, string_perm (sf_stat.st_mode));
 
