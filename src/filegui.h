@@ -17,6 +17,7 @@ FileProgressStatus file_progress_real_query_replace (enum OperationMode mode,
 						     struct stat *_d_stat);
 
 void file_progress_set_stalled_label (char *stalled_msg);
+void fmd_init_i18n();
 
 /*
  * Shared variables used to pass information from the file.c module to

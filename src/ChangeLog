@@ -1,3 +1,7 @@
+1998-12-01  Jonathan Blandford  <jrb@redhat.com>
+
+	* file.c (panel_operate_generate_prompt): moved from filegui.c
+
 1998-11-30  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* panel.h (WPanel): Added the missing tree/pane/view_table fields

@@ -33,6 +33,7 @@ GNOMESRCS = 		\
 	gpageprop.c	\
 	gpopup.c	\
 	gprop.c		\
+	gdialogs.c	\
 	gscreen.c 	\
 	gtools.c 	\
 	gtree.c		\
@@ -55,6 +56,7 @@ GNOMEHDRS = 		\
 	gpageprop.h	\
 	gpopup.h	\
 	gprop.h		\
+	gdialogs.h	\
 	gscreen.h	\
 	gtree.h		\
 	gwidget.h
@@ -85,7 +87,7 @@ OOBJS = main.o dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	win.o color.o profile.o user.o ext.o setup.o tree.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o filegui.o
+	option.o cmd.o utilunix.o xslint.o gdialogs.o
 
 OBJS = $(LOBJS) $(OOBJS) \
 	gblist.o	\

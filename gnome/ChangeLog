@@ -1,3 +1,10 @@
+1998-12-01  Jonathan Blandford  <jrb@redhat.com>
+
+	* Makefile.in: now handles gdialogs*
+
+	* gdialogs.h: 
+	* gdialogs.c:Added new files -- takes the place of ../src/filegui.* 
+
 1998-12-01  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_switch_new_display_mode): Destroy the old

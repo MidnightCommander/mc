@@ -692,7 +692,7 @@ file_progress_set_stalled_label (char *stalled_msg)
 
 #define FMDY 13
 #define	FMD_XLEN 64
-static int fmd_xlen = FMD_XLEN, fmd_i18n_flag = 0;
+extern int fmd_xlen, fmd_i18n_flag;
 static QuickWidget fmd_widgets [] = {
 
 #define	FMCB0  FMDC
@@ -749,7 +749,7 @@ static QuickWidget fmd_widgets [] = {
       &dive_into_subdirs, 0, XV_WLAY_BELOWOF, "dive" },
     { 0 } };
 
-static void
+void
 fmd_init_i18n()
 {
 #ifdef ENABLE_NLS
@@ -924,130 +924,3 @@ ask_file_mask:
 	*do_background = 1;
     return dest_dir;
 }
-
-/*
- * This array introduced to avoid translation problems. The former (op_names)
- * is assumed to be nouns, suitable in dialog box titles; this one should
- * contain whatever is used in prompt itself (i.e. in russian, it's verb).
- * Notice first symbol - it is to fool gettext and force these strings to
- * be different for it. First symbol is skipped while building a prompt.
- * (I don't use spaces around the words, because someday they could be
- * dropped, when widgets get smarter)
- */
-static char *op_names1 [] = { N_("1Copy"), N_("1Move"), N_("1Delete") };
-
-/*
- * These are formats for building a prompt. Parts encoded as follows:
- * %o - operation from op_names1
- * %f - file/files or files/directories, as appropriate
- * %m - "with source mask" or question mark for delete
- * %s - source name (truncated)
- * %d - number of marked files
- */
-static char* one_format  = N_("%o %f \"%s\"%m");
-static char* many_format = N_("%o %d %f%m");
-
-static char* prompt_parts [] =
-{
-	N_("file"), N_("files"), N_("directory"), N_("directories"),
-	N_("files/directories"), N_(" with source mask:")
-};
-
-char*
-panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int only_one,
-			       struct stat* src_stat)
-{
-	register char *sp, *cp;
-	register int i;
-	char format_string [200];
-	char *dp = format_string;
-	char* source = NULL;
-
-#ifdef ENABLE_NLS
-	static int i18n_flag = 0;
-	if (!i18n_flag)
-	{
-		if (!fmd_i18n_flag)
-			fmd_init_i18n(); /* to get proper fmd_xlen */
-
-		for (i = sizeof (op_names1) / sizeof (op_names1 [0]); i--;)
-			op_names1 [i] = _(op_names1 [i]);
-
-		for (i = sizeof (prompt_parts) / sizeof (prompt_parts [0]); i--;)
-			prompt_parts [i] = _(prompt_parts [i]);
-
-		one_format = _(one_format);
-		many_format = _(many_format);
-		i18n_flag = 1;
-	}
-#endif /* ENABLE_NLS */
-
-	sp = only_one ? one_format : many_format;
-
-	if (only_one)
-		source = panel_get_file (panel, src_stat);
-
-	while (*sp)
-	{
-		switch (*sp)
-		{
-			case '%':
-				cp = NULL;
-				switch (sp[1])
-				{
-					case 'o':
-						cp = op_names1 [operation] + 1;
-						break;
-					case 'm':
-						cp = operation == OP_DELETE ? "?" : prompt_parts [5];
-						break;
-					case 'f':
-						if (only_one)
-						{
-							cp = S_ISDIR (src_stat->st_mode) ? 
-								prompt_parts [2] : prompt_parts [0];
-						}
-						else
-						{
-							cp = (panel->marked == panel->dirs_marked) 
-							? prompt_parts [3] 
-							: (panel->dirs_marked ? prompt_parts [4] 
-							: prompt_parts [1]);
-						}
-						break;
-					default:
-						*dp++ = *sp++;
-				}
-				if (cp)
-				{
-					sp += 2;
-					while (*cp)
-						*dp++ = *cp++;
-				}
-				break;
-			default:
-				*dp++ = *sp++;
-		}
-	}
-	*dp = '\0';
-
-	if (only_one)
-	{
-		i = fmd_xlen - strlen(format_string) - 4;
-		sprintf (cmd_buf, format_string, name_trunc (source, i));
-	}
-	else
-	{
-		sprintf (cmd_buf, format_string, panel->marked);
-		i = strlen (cmd_buf) + 6 - fmd_xlen;
-		if (i > 0)
-		{
-			fmd_xlen += i;
-			fmd_init_i18n(); /* to recalculate positions of child widgets */
-		}
-	}
-
-	return source;
-}
-
-
