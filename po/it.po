@@ -6388,7 +6388,7 @@ msgstr ""
 #: vfs/smbfs.c:1971
 #, c-format
 msgid " %s renaming files\n"
-msgstr " %s bytes in %d file %s"
+msgstr " %s bytes in %d file %s\n"
 
 #: vfs/tar.c:84 vfs/tar.c:101
 #, c-format

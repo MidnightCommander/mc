@@ -945,6 +945,11 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	new_name = gnome_icon_text_item_get_text (iti);
 
 	if (gnome_metadata_get (source, "icon-caption", &size, &buf) != 0) {
+		if (strcmp (new_name, dii->filename) == 0) {
+			g_free (source);
+			return TRUE;
+		}
+
 		/* No icon caption metadata, so rename the file */
 
 		dest = g_concat_dir_and_file (desktop_directory, new_name);

@@ -1,3 +1,8 @@
+1999-10-20  Federico Mena Quintero  <federico@redhat.com>
+
+	* gdesktop.c (text_changed): Do not try to rename the file if the
+	name did not change.  BUGFIX: GNOME bug tracker #2851.
+
 1999-10-06  Jonathan Blandford  <jrb@redhat.com>
 
 	* gpopup2.c (create_actions): Now the Mount/Unmount/Eject device
