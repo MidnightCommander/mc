@@ -1,3 +1,8 @@
+2002-02-22  Pavel Roskin  <proski@gnu.org>
+
+	* man2hlp.c (string_len): Don't exclude characters with codes
+	above 128 from the string length.
+
 2002-02-21  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* ext.c (exec_extension): Use "#! /bin/sh".

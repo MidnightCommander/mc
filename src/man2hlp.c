@@ -75,7 +75,7 @@ static int string_len (char *buffer)
 	    len ++;
 	}
 	/* Don't add control characters to the length */
-	if (c < 32)
+	if (c >= 0 && c < 32)
 	    continue;
 	/* Attempt to handle backslash quoting */
 	if (c == '\\' && !backslash_flag){
