@@ -43,7 +43,7 @@ HDRS =	color.h file.h mouse.h user.h dialog.h find.h main.h		\
 	hotlist.h layout.h fsusage.h mountlist.h eregex.h complete.h	\
 	myslang.h command.h cmd.h tty.h fs.h panelize.h achown.h	\
 	learn.h listmode.h background.h					\
-	x.h textconf.h i18n.h findme.h popt.h filegui.h keys.h xtty.h	\
+	x.h textconf.h i18n.h findme.h popt.h filegui.h keys.h		\
 	poptint.h poptalloca.h fileopctx.h treestore.h			\
 	charsets.h selcodepage.h
 

@@ -1,5 +1,14 @@
 2001-06-14  Pavel Roskin  <proski@gnu.org>
 
+	* xtty.h: Remove, move contents ...
+	* tty.h: ... here.
+	[HAVE_X]: Define attrset(), mc_refresh(), enable_interrupt_key()
+	and disable_interrupt_key(). Don't declare mc_refresh().
+	* view.c: Use braces around widget_move() since it's empty in
+	the GNOME edition.
+	* xslint.c: Eliminate attrset() and mc_refresh().
+	* Makefile.in: Remove xtty.h.
+
 	* cons.handler.c (handle_console): Remove useless default.
 	* ext.c (regex_command): Initialize include_target_len.
 	* find.c [HAVE_GNOME]: Eliminate untyped declarations.

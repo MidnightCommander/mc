@@ -1,10 +1,17 @@
 /* This file takes care of loading ncurses or slang */
 
 int got_interrupt (void);
-void mc_refresh (void);
 
 #ifdef HAVE_X
-#include "xtty.h"
+
+#include "keys.h"
+#define LINES 0
+#define COLS  0
+#define attrset(color) do {} while (0);
+#define mc_refresh() do {} while (0);
+#define enable_interrupt_key() do {} while (0);
+#define disable_interrupt_key() do {} while (0);
+
 #else /* HAVE_X */
 
 #ifdef HAVE_SLANG
@@ -142,5 +149,7 @@ int init_pair (int, int, int);
 #define KEY_KP_ADD	4001
 #define KEY_KP_SUBTRACT	4002
 #define KEY_KP_MULTIPLY	4003
+
+void mc_refresh (void);
 
 #endif /* HAVE_X */

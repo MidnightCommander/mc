@@ -840,10 +840,11 @@ display (WView *view)
 	    view_add_character (view, r_buff[0]);
 	    if ((cl != 0) && (cl % 10) == 0){
 		g_snprintf(r_buff, sizeof (r_buff), "%03d", cl);
-		if (ruler == 1)
+		if (ruler == 1) {
 		    widget_move (view, row + 1, c - 1);
-		else
+		} else {
 		    widget_move (view, row + height - 3, c - 1);
+		}
                 view_add_string (view, r_buff);
 	    }   
 	}    
