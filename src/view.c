@@ -636,7 +636,7 @@ finish:
 }
 
 void
-view_update_bytes_per_line(WView *view)
+view_update_bytes_per_line (WView *view)
 {
     int cols;
 
@@ -646,11 +646,14 @@ view_update_bytes_per_line(WView *view)
 	cols = view->widget.cols;
 
     view->bottom_first = -1;
-    view->bytes_per_line = ((2 * (cols - 8) / 9) & 0xfffc);
-    
+    if (cols < 80)
+	view->bytes_per_line = ((cols - 8) / 17) * 4;
+    else
+	view->bytes_per_line = ((cols - 8) / 18) * 4;
+
     if (view->bytes_per_line == 0)
-	view->bytes_per_line++;		/* To avoid division by 0 */
-    
+	view->bytes_per_line++;	/* To avoid division by 0 */
+
     view->dirty = max_dirt_limit + 1;	/* To force refresh */
 }
 
@@ -778,7 +781,7 @@ typedef enum {
 
 /* Shows the file pointed to by *start_display on view_win */
 static long
-display (WView * view)
+display (WView *view)
 {
     const int frame_shift = view->have_frame;
     int col = 0 + frame_shift;
@@ -853,7 +856,10 @@ display (WView * view)
 	    attrset (NORMAL_COLOR);
 
 	    /* Hex dump starts from column nine */
-	    col = 9;
+	    if (view->have_frame)
+		col = 10;
+	    else
+		col = 9;
 
 	    /* Each hex number is two digits */
 	    hex_buff[2] = 0;
@@ -908,8 +914,13 @@ display (WView * view)
 		    view_gotoyx (view, row, col - 1);
 		    view_add_character (view, ' ');
 		    view_gotoyx (view, row, col);
-		    view_add_one_vline ();
-		    col += 2;
+		    if ((view->have_frame && view->widget.cols < 82) ||
+			view->widget.cols < 80)
+			col += 1;
+		    else {
+			view_add_one_vline ();
+			col += 2;
+		    }
 
 		    if (boldflag != MARK_NORMAL
 			&& from ==

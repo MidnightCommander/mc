@@ -1,3 +1,10 @@
+2002-10-07  Miven Dooligan  <dooligan@intergate.ca>
+
+	* view.c (view_update_bytes_per_line): Don't use vertical bars
+	in the hex viewer is short of space.  Fix missing space between
+	addresses and hexdump when framed.
+	(display): Likewise.
+
 2002-10-07  Pavel Roskin  <proski@gnu.org>
 
 	* selcodepage.c (select_charset): Use g_snprintf() instead
