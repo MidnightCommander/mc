@@ -1,5 +1,6 @@
-mc.1
-mcserv.8
-mcedit.1
 Makefile
 Makefile.in
+mc.1
+mc.hlp
+mcedit.1
+mcserv.8
