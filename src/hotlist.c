@@ -693,11 +693,11 @@ static int add_new_entry_input (char *header, char *text1, char *text2, char *he
 {
     QuickDialog Quick_input;
     QuickWidget quick_widgets [] = {
-    { quick_button, 55, 80, 4, 0, _("&Cancel"), 0, B_CANCEL, 0, 0,
+    { quick_button, 55, 80, 4, 0, N_("&Cancel"), 0, B_CANCEL, 0, 0,
 	  XV_WLAY_DONTCARE, "button-cancel" },
-    { quick_button, 30, 80, 4, 0, _("&Insert"), 0, B_INSERT, 0, 0,
+    { quick_button, 30, 80, 4, 0, N_("&Insert"), 0, B_INSERT, 0, 0,
 	  XV_WLAY_DONTCARE, "button-insert" },
-    { quick_button, 10, 80, 4, 0, _("&Append"), 0, B_APPEND, 0, 0,
+    { quick_button, 10, 80, 4, 0, N_("&Append"), 0, B_APPEND, 0, 0,
 	  XV_WLAY_DONTCARE, "button-append" },
     { quick_input,  4, 80, 4, 0, "",58, 0, 0, 0, XV_WLAY_BELOWCLOSE, "input-pth" },
     { quick_label,  3, 80, 3, 0, 0, 0, 0, 0, 0, XV_WLAY_DONTCARE, "label-pth" },

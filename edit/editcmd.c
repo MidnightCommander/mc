@@ -963,7 +963,7 @@ int edit_replace_prompt (WEdit * edit, char *replace_text, int xpos, int ypos)
 
 	{
 	    QuickDialog Quick_input =
-	    {66, 6, 0, 0, _(" Replace "),
+	    {66, 6, 0, 0, N_(" Replace "),
 	     "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	    Quick_input.widgets = quick_widgets;
@@ -1040,7 +1040,7 @@ void edit_replace_dialog (WEdit * edit, char **search_text, char **replace_text,
     quick_widgets[13].text = *search_text;
     {
 	QuickDialog Quick_input =
-	{50, REPLACE_DLG_HEIGHT, -1, 0, _(" Replace "),
+	{50, REPLACE_DLG_HEIGHT, -1, 0, N_(" Replace "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -1108,7 +1108,7 @@ void edit_search_dialog (WEdit * edit, char **search_text)
 
     {
 	QuickDialog Quick_input =
-	{50, SEARCH_DLG_HEIGHT, -1, 0, _(" Search "),
+	{50, SEARCH_DLG_HEIGHT, -1, 0, N_(" Search "),
 	 "[Input Line Keys]", "quick_input", 0 /*quick_widgets */ };
 
 	Quick_input.widgets = quick_widgets;
@@ -2479,7 +2479,7 @@ void edit_mail_dialog (WEdit * edit)
     static char *mail_to_last = 0;
 
     QuickDialog Quick_input =
-    {50, MAIL_DLG_HEIGHT, -1, 0, _(" Mail "),
+    {50, MAIL_DLG_HEIGHT, -1, 0, N_(" Mail "),
 /* NLS ? */
      "[Input Line Keys]", "quick_input", 0};
 

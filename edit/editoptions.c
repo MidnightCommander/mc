@@ -86,13 +86,13 @@ void edit_options_dialog (void)
 	{quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 6, OPT_DLG_H, "", 3, 0,
 	 0, wrap_str, XV_WLAY_DONTCARE, "wrapm"},
 /*12 */
-	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, _("Wrap mode"), 0, 0,
+	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 7, OPT_DLG_H, N_("Wrap mode"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
 /*13 */
       {quick_radio, 5, OPT_DLG_W, OPT_DLG_H - 10, OPT_DLG_H, "", 2, 0,
        0, key_emu_str, XV_WLAY_DONTCARE, "keyemu"},
 /*14 */
-	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 11, OPT_DLG_H, _("Key emulation"), 0, 0,
+	{quick_label, 4, OPT_DLG_W, OPT_DLG_H - 11, OPT_DLG_H, N_("Key emulation"), 0, 0,
 	 0, 0, XV_WLAY_DONTCARE, NULL},
 	{0}};
 

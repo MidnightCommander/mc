@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-04-10 21:52:56-0500\n"
+"Date: 1998-04-13 14:04:36-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -1330,118 +1330,118 @@ msgid ""
 " the panels cannot be toggled. "
 msgstr ""
 
-#: src/cmd.c:946
+#: src/cmd.c:941
 msgid ""
 "Type `exit' to return to the Midnight Commander\n"
 "\r\n"
 "\r"
 msgstr ""
 
-#: src/cmd.c:998
+#: src/cmd.c:992
 msgid ""
 " Couldn't stat %s \n"
 " %s "
 msgstr ""
 
-#: src/cmd.c:1007 src/cmd.c:1009
+#: src/cmd.c:1001 src/cmd.c:1003
 msgid " Link "
 msgstr ""
 
-#: src/cmd.c:1008 src/cmd.c:1113
+#: src/cmd.c:1002 src/cmd.c:1107
 msgid " to:"
 msgstr ""
 
-#: src/cmd.c:1019
+#: src/cmd.c:1013
 msgid " link: %s "
 msgstr ""
 
-#: src/cmd.c:1052
+#: src/cmd.c:1046
 msgid " symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1078
+#: src/cmd.c:1072
 msgid " Symlink "
 msgstr ""
 
-#: src/cmd.c:1078
+#: src/cmd.c:1072
 msgid " points to:"
 msgstr ""
 
-#: src/cmd.c:1083
+#: src/cmd.c:1077
 msgid " Edit symlink "
 msgstr ""
 
-#: src/cmd.c:1089
+#: src/cmd.c:1083
 msgid " edit symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1113
+#: src/cmd.c:1107
 msgid " Link symbolically "
 msgstr ""
 
-#: src/cmd.c:1114
+#: src/cmd.c:1108
 msgid " Relative symlink "
 msgstr ""
 
-#: src/cmd.c:1125
+#: src/cmd.c:1119
 msgid " relative symlink: %s "
 msgstr ""
 
-#: src/cmd.c:1228
+#: src/cmd.c:1222
 msgid " Enter machine name (F1 for details): "
 msgstr ""
 
-#: src/cmd.c:1257
+#: src/cmd.c:1251
 msgid " Link to a remote machine "
 msgstr ""
 
-#: src/cmd.c:1263
+#: src/cmd.c:1257
 msgid " FTP to machine "
 msgstr ""
 
-#: src/cmd.c:1273
+#: src/cmd.c:1267
 msgid " Socket source routing setup "
 msgstr ""
 
-#: src/cmd.c:1274
+#: src/cmd.c:1268
 msgid " Enter host name to use as a source routing hop: "
 msgstr ""
 
-#: src/cmd.c:1281
+#: src/cmd.c:1275
 msgid " Host name "
 msgstr ""
 
-#: src/cmd.c:1281
+#: src/cmd.c:1275
 msgid " Error while looking up IP address "
 msgstr ""
 
-#: src/cmd.c:1292
+#: src/cmd.c:1286
 msgid " Undelete files on an ext2 file system "
 msgstr ""
 
-#: src/cmd.c:1293
+#: src/cmd.c:1287
 msgid ""
 " Enter the file system name where you want to run the\n"
 "  undelete file system on: (F1 for details)"
 msgstr ""
 
-#: src/cmd.c:1385
+#: src/cmd.c:1379
 msgid "Show directory sizes"
 msgstr ""
 
-#: src/cmd.c:1385 src/panelize.c:425
+#: src/cmd.c:1379 src/panelize.c:425
 msgid "Pipe close failed"
 msgstr ""
 
-#: src/cmd.c:1398
+#: src/cmd.c:1392
 msgid "Cannot invoke du command."
 msgstr ""
 
-#: src/cmd.c:1409
+#: src/cmd.c:1403
 msgid " Setup saved to ~/"
 msgstr ""
 
-#: src/cmd.c:1411
+#: src/cmd.c:1405
 msgid " Setup "
 msgstr ""
 
