@@ -161,7 +161,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
     for (p = (unsigned char *) text, q = p + strlen ((char *) p); p < q; p++, i++) {
 	switch (*p) {
 	case SYNTAX_TOKEN_STAR:
-	    if (++p >= q)
+	    if (++p > q)
 		return -1;
 	    for (;;) {
 		c = edit_get_byte (edit, i);
@@ -177,7 +177,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    }
 	    break;
 	case SYNTAX_TOKEN_PLUS:
-	    if (++p >= q)
+	    if (++p > q)
 		return -1;
 	    j = 0;
 	    for (;;) {
@@ -214,7 +214,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 	    }
 	    break;
 	case SYNTAX_TOKEN_BRACKET:
-	    if (++p >= q)
+	    if (++p > q)
 		return -1;
 	    c = -1;
 	    for (;; i++) {
@@ -228,15 +228,15 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		j = c;		/* dummy command */
 	    }
 	    i--;
-	    while (*p != SYNTAX_TOKEN_BRACKET && p < q)
+	    while (*p != SYNTAX_TOKEN_BRACKET && p <= q)
 		p++;
-	    if (p >= q)
+	    if (p > q)
 		return -1;
 	    if (p[1] == d)
 		i--;
 	    break;
 	case SYNTAX_TOKEN_BRACE:
-	    if (++p >= q)
+	    if (++p > q)
 		return -1;
 	    c = edit_get_byte (edit, i);
 	    for (; *p != SYNTAX_TOKEN_BRACE; p++)
@@ -244,7 +244,7 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
 		    goto found_char3;
 	    return -1;
 	  found_char3:
-	    for (; *p != SYNTAX_TOKEN_BRACE && p < q; p++);
+	    for (; *p != SYNTAX_TOKEN_BRACE && p <= q; p++);
 	    break;
 	default:
 	    if (*p != edit_get_byte (edit, i))

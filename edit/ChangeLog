@@ -1,3 +1,8 @@
+2003-10-16  Pavel Roskin  <proski@gnu.org>
+
+	* syntax.c (compare_word_to_right): Fix recent breakage - rules
+	ending with wildcard (e.g. "$+") won't match.
+
 2003-10-14  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Make static all functions and variables that don't
