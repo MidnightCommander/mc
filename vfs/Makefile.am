@@ -1,6 +1,10 @@
 SUBDIRS = extfs
 
+if USE_SAMBA_FS
+AM_CFLAGS = $(GLIB_CFLAGS) -DCONFIGDIR=\""@configdir@"\"
+else
 AM_CFLAGS = $(GLIB_CFLAGS)
+endif
 
 BASICFILES = 			\
 	cpio.c			\

@@ -250,7 +250,7 @@ smbfs_set_debug(int arg)
 static int
 smbfs_init(vfs *me)
 {
-	char *servicesf = "/etc/smb.conf";
+	char *servicesf = CONFIGDIR "/smb.conf";
 
 /*	DEBUGLEVEL = 4;	*/
 

@@ -1,4 +1,11 @@
-2001-01-02  Pavel Roskin  <proski@gnu.org>
+2002-01-11  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* Makefile.am (AM_CFLAGS): Add -DCONFIGDIR=\""@configdir@"\"
+	if smbfs support is enabled.
+
+	* smbfs.c (smbfs_init): Use CONFIGDIR for smb.conf.
+
+2002-01-02  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Add *clean-local targets to take care of the
 	samba directory.
