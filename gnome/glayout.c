@@ -401,7 +401,10 @@ GnomeUIInfo gnome_panel_edit_menu [] = {
 	  NULL, NULL, 0, NULL, 's', GDK_CONTROL_MASK  },
 	GNOMEUIINFO_SEPARATOR,
         GNOMEUIINFO_ITEM_NONE(N_("_Rescan Directory"), N_("Rescan the directory contents"), reread_cmd),
-	GNOMEUIINFO_SEPARATOR,
+	GNOMEUIINFO_END
+};
+
+GnomeUIInfo gnome_panel_settings_menu [] = {
 	GNOMEUIINFO_MENU_PREFERENCES_ITEM(gnome_configure_box, NULL),
 	GNOMEUIINFO_END
 };
@@ -442,8 +445,8 @@ GnomeUIInfo gnome_panel_commands_menu [] = {
 
 
 GnomeUIInfo gnome_panel_about_menu [] = {
-	GNOMEUIINFO_HELP ("gmc"),
 	GNOMEUIINFO_MENU_ABOUT_ITEM(gnome_about_cmd, NULL),
+	GNOMEUIINFO_HELP ("gmc"),
 	GNOMEUIINFO_END
 };
 
@@ -458,6 +461,7 @@ GnomeUIInfo gnome_panel_desktop_menu [] = {
 GnomeUIInfo gnome_panel_menu_with_desktop [] = {
         GNOMEUIINFO_MENU_FILE_TREE(gnome_panel_file_menu),
         GNOMEUIINFO_MENU_EDIT_TREE(gnome_panel_edit_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Settings"),gnome_panel_settings_menu),
         GNOMEUIINFO_SUBTREE(N_("_Layout"),gnome_panel_layout_menu),
         GNOMEUIINFO_SUBTREE(N_("_Commands"),gnome_panel_commands_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Desktop"), gnome_panel_desktop_menu),
@@ -468,6 +472,7 @@ GnomeUIInfo gnome_panel_menu_with_desktop [] = {
 GnomeUIInfo gnome_panel_menu_without_desktop [] = {
         GNOMEUIINFO_MENU_FILE_TREE(gnome_panel_file_menu),
         GNOMEUIINFO_MENU_EDIT_TREE(gnome_panel_edit_menu),
+	GNOMEUIINFO_SUBTREE(N_("_Settings"),gnome_panel_settings_menu),
         GNOMEUIINFO_SUBTREE(N_("_Layout"),gnome_panel_layout_menu),
         GNOMEUIINFO_SUBTREE(N_("_Commands"),gnome_panel_commands_menu),
 	GNOMEUIINFO_SUBTREE(N_("_Help"), gnome_panel_about_menu),
