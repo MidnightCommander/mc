@@ -1,3 +1,12 @@
+2004-0?-??  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+        * utilvfs.c (vfs_parse_ls_lga): Use atoll()/atof() instead of atol()
+        for st_size to show file sizes > 2G.
+        * fish.c (fish_dir_load): Likewise.
+        * extfs.c (struct inode): Use off_t for size.
+
+        Reported by Daradics Daniel <yotzo@freemail.hu>.
+
 2004-08-29  Roland Illig  <roland.illig@gmx.de>
 
 	* Code cleanup: Added const qualifier for variables and
