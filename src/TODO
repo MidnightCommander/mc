@@ -51,8 +51,7 @@ Scan more packages for patches, check Red Hat and Ximian Bugzilla.
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a superlong line to redefine all colors.
 
-Find file dialog should not be closed if the regex is invalid.  Make it
-possible to search for string verbatim.
+Allow verbatim search in "Find File".
 
 Filters in the editor should operate on the open file.  They don't work
 on VFS now.  Don't close and reopen the file.
