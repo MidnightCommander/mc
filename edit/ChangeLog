@@ -1,3 +1,7 @@
+2005-01-26  Roland Illig  <roland.illig@gmx.de>
+
+	* editdraw.c (edit_status): Fixed drawing bug with ncurses.
+
 2004-12-03  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Renamed multiple inclusion guards that started with a
