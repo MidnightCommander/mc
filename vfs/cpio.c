@@ -631,6 +631,7 @@ init_cpiofs (void)
     vfs_cpiofs_ops.data = &cpiofs_data;
     vfs_cpiofs_ops.read = cpio_read;
     vfs_cpiofs_ops.write = NULL;
+    vfs_cpiofs_ops.setctl = NULL;
     vfs_cpiofs_ops.ungetlocalcopy = cpio_ungetlocalcopy;
     vfs_register_class (&vfs_cpiofs_ops);
 }

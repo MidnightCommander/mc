@@ -1,5 +1,8 @@
 2003-10-11  Pavel Roskin  <proski@gnu.org>
 
+	* cpio.c (init_cpiofs): Set vfs_cpiofs_ops.setctl to NULL, or
+	bad things happen after unsuccessful deletion.
+
 	* vfs.h: Remove obsolete code.
 
 2003-10-10  Pavel Roskin  <proski@gnu.org>
