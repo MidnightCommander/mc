@@ -67,7 +67,7 @@ the need to embed this logic into configure.in.
 #    undef USE_EXT2FSLIB
 #endif
 
-#if defined (HAVE_SOCKETPAIR) || !defined (HAVE_X)
+#if defined (HAVE_SOCKETPAIR) && !defined (HAVE_X)
 #    define WITH_BACKGROUND
 #endif
 
