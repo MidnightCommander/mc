@@ -2190,14 +2190,20 @@ int fmd_xlen = FMD_XLEN, fmd_i18n_flag = 0;
  * %m - "with source mask" or question mark for delete
  * %s - source name (truncated)
  * %d - number of marked files
+ * %e - "to:" or question mark for delete
  */
+
+#ifndef HAVE_GNOME
 static char* one_format  = N_("%o %f \"%s\"%m");
 static char* many_format = N_("%o %d %f%m");
-
+#else
+static char* one_format  = N_("%o %f \"%s\"%e");
+static char* many_format = N_("%o %d %f%e");
+#endif
 static char* prompt_parts [] =
 {
 	N_("file"), N_("files"), N_("directory"), N_("directories"),
-	N_("files/directories"), N_(" with source mask:")
+	N_("files/directories"), N_(" with source mask:"), N_(" to:")
 };
 
 char*
@@ -2247,6 +2253,9 @@ panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int 
 						break;
 					case 'm':
 						cp = operation == OP_DELETE ? "?" : prompt_parts [5];
+						break;
+					case 'e':
+						cp = operation == OP_DELETE ? "?" : prompt_parts [6];
 						break;
 					case 'f':
 						if (only_one)

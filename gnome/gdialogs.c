@@ -180,10 +180,10 @@ file_mask_dialog (FileOperation operation, char *text, char *def_text, int only_
         
         /* Basic window */
         if (operation == OP_COPY)
-                fmd_win = gnome_dialog_new ("Copy\n", GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new ("Copy", GNOME_STOCK_BUTTON_OK, 
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
         else if (operation == OP_MOVE)
-                fmd_win = gnome_dialog_new ("Move\n", GNOME_STOCK_BUTTON_OK, 
+                fmd_win = gnome_dialog_new ("Move", GNOME_STOCK_BUTTON_OK, 
                                             GNOME_STOCK_BUTTON_CANCEL, NULL);
 
         hbox = gtk_hbox_new (FALSE, GNOME_PAD);
