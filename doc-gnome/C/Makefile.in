@@ -354,7 +354,7 @@ dist-hook:
 	-cp gmc/*.html gmc/*.css $(distdir)/gmc
 	-cp gmc.html $(distdir)
 	mkdir $(distdir)/figs
-	-cp figs/*.gif figs/*.jpg $(distdir)/figs
+	-cp figs/*.gif $(distdir)/figs
 
 install-data-local: gmc.html
 	$(mkinstalldirs) $(gmc_helpdir)/figs
@@ -362,7 +362,7 @@ install-data-local: gmc.html
 	basefile=`basename $$file`; \
 	$(INSTALL_DATA) $(srcdir)/$$file $(gmc_helpdir)/$$basefile; \
 	done
-	-for file in $(srcdir)/figs/*.jpg $(srcdir)/figs/*.gif; do \
+	-for file in $(srcdir)/figs/*.gif; do \
 	$(INSTALL_DATA) $(srcdir)/$$file $(gmc_helpdir)/figs;\
 	done
 
