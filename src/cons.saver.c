@@ -52,18 +52,12 @@
 
 /* Meaning of console_flag:
    -1 == to be detected,
-   0  == not a console
-   1  == is a console, Linux < 1.1.67 (black & white)
-   2  == is a console, Linux >= 1.1.67 (color)
+   0  == not a console or Linux < 1.1.92
+   1  == obsolete, not used
+   2  == obsolete, not used
    3  == is a console, Linux >= 1.1.92 (color, use /dev/vcsa$num
    */
 static signed char console_flag = -1;
-/*
-   Meaning of console_fd:
-   -1  == not opened,
-   >=0 == opened
-   */
-static int console_fd = -1;
 static char *tty_name;
 static int console_minor = 0;
 static char *buffer = NULL;
@@ -71,12 +65,8 @@ static int buffer_size = 0;
 static int columns, rows;
 static int vcs_fd;
 
-static void dwrite (int fd, char *buffer)
-{
-    write (fd, buffer, strlen (buffer));
-}
 
-static void tty_getsize (void)
+static void tty_getsize (int console_fd)
 {
     struct winsize winsz;
 
@@ -87,20 +77,10 @@ static void tty_getsize (void)
 	rows    = winsz.ws_row;
     } else {
 	/* Never happens (I think) */
-	dwrite (2, "TIOCGWINSZ failed\n");
 	columns = 80;
 	rows = 25;
 	console_flag = 0;
     }
-}
-
-static inline void tty_cursormove(int y, int x)
-{
-    char buffer [128];
-
-    /* Standard ANSI escape sequence for cursor positioning */
-    snprintf (buffer, sizeof (buffer), "\33[%d;%dH", y + 1, x + 1);
-    dwrite (console_fd, buffer);
 }
 
 static int check_file (char *filename, int check_console)
@@ -123,14 +103,6 @@ static int check_file (char *filename, int check_console)
 	if (!S_ISCHR (stat_buf.st_mode)){
 	    break;
 	}
-
-#ifdef DEBUG
-	fprintf (stderr,
-		 "Device %s: major %d, minor %d\r\n",
-		 filename,
-		 ((int) stat_buf.st_rdev & 0xff00) >> 8,
-		 ((int) stat_buf.st_rdev & 0xff));
-#endif
 
 	if (check_console){
 	    /* Major number must be 4 */
@@ -165,6 +137,7 @@ static int detect_console (void)
 {
     char console_name [16];
     static char vcs_name [16];
+    int console_fd;
 
     /* Must be console */
     console_fd = check_file (tty_name, 1);
@@ -202,117 +175,36 @@ static int detect_console (void)
 	vcs_fd = check_file (vcs_name, 0);
     }
 
-#ifdef DEBUG
-    fprintf (stderr, "vcs_fd = %d console_fd = %d\r\n", vcs_fd, console_fd);
-#endif
-    
     if (vcs_fd != -1){
 	console_flag = 3;
+	tty_getsize (console_fd);
+	close (console_fd);
+	return 0;
     }
 
-    return 0;
+    close (console_fd);
+    return -1;
 }
 
 static void save_console (void)
 {
-    int i;
-
-    if (!console_flag)
-	return;
-    buffer [1] = console_minor;
-    if (console_flag >= 2){
-	/* Linux >= 1.1.67 */
-	/* Get screen contents and cursor position */
-	buffer [0] = 8;
-	if (console_flag == 2){
-	    if ((i = ioctl (console_fd, TIOCLINUX, buffer)) == -1){
-		/* Oops, this is not Linux 1.1.67 */
-		console_flag = 1;
-	    }
-	} else {
-	    lseek (vcs_fd, 0, 0);
-	    read (vcs_fd, buffer, buffer_size);
-	}
-    }
-    if (console_flag == 1){
-	int index, x, y;
-
-	/* Linux < 1.1.67 */
-	/* Get screen contents */
-	buffer [0] = 0;
-	if (ioctl(console_fd, TIOCLINUX, buffer) == -1){
-	    buffer[0] = buffer[1] = 0;
-
-	    /* Linux bug: bad ioctl on console 8 */
-	    if (ioctl(console_fd, TIOCLINUX, buffer) == -1){
-		/* Oops, this is not a console after all */
-		console_flag = 0;
-		return;
-	    }
-	}
-	/* Select the beginning of the bottommost empty line
-	   to be the cursor position */
-	index = 2 + rows * columns;
-	for (y = rows - 1; y >= 0; y--)
-	    for (x = columns - 1; x >= 0; x--)
-		if (buffer[--index] != ' ')
-		    goto non_space_found;
-    non_space_found:
-	buffer[0] = y + 1;
-	buffer[1] = 0;
-	/*tty_cursormove(y + 1, 0);*/
-    }
+    lseek (vcs_fd, 0, 0);
+    read (vcs_fd, buffer, buffer_size);
 }
 
 static void restore_console (void)
 {
-    if (!console_flag)
-	return;
-    if (console_flag == 2){
-	/* Linux >= 1.1.67 */
-	/* Restore screen contents and cursor position */
-	buffer [0] = 9;
-	buffer [1] = console_minor;
-	ioctl (console_fd, TIOCLINUX, buffer);
-    }
-    if (console_flag == 3){
-	lseek (vcs_fd, 0, 0);
-	write (vcs_fd, buffer, buffer_size);
-    }
-    if (console_flag == 1){
-	/* Clear screen */
-	write(console_fd, "\033[H\033[2J", 7);
-	/* Output saved screen contents */
-	write(console_fd, buffer + 2, rows * columns);
-	/* Move the cursor to the previously selected position */
-	tty_cursormove(buffer[0], buffer[1]);
-    }
+    lseek (vcs_fd, 0, 0);
+    write (vcs_fd, buffer, buffer_size);
 }
 
 static void send_contents (void)
 {
     unsigned char begin_line=0, end_line=0;
-    int index, x, y;
-    int lastline;
+    int index;
     unsigned char message;
     unsigned short bytes;
-    int bytes_per_char;
-    
-    bytes_per_char = console_flag == 1 ? 1 : 2;
-    
-    /* Calculate the number of used lines */
-    if (console_flag == 2 || console_flag == 1 || console_flag == 3){
-	index = (2 + rows * columns) * bytes_per_char;
-	for (y = rows - 1; y >= 0; y--)
-	    for (x = columns - 1; x >= 0; x--){
-		index -= bytes_per_char;
-		if (buffer[index] != ' ')
-		    goto non_space_found;
-	    }
-    non_space_found:
-	lastline = y + 1;
-    } else
-	return;
+    const int bytes_per_char = 2;
 
     /* Inform the invoker that we can handle this command */
     message = CONSOLE_CONTENTS;
@@ -321,10 +213,10 @@ static void send_contents (void)
     /* Read the range of lines wanted */
     read (cmd_input, &begin_line, 1);
     read (cmd_input, &end_line, 1);
-    if (begin_line > lastline)
-	begin_line = lastline;
-    if (end_line > lastline)
-	end_line = lastline;
+    if (begin_line > rows)
+	begin_line = rows;
+    if (end_line > rows)
+	end_line = rows;
 
     /* Tell the invoker how many bytes it will be */
     bytes = (end_line - begin_line) * columns;
@@ -345,11 +237,13 @@ int main (int argc, char **argv)
     int stderr_fd;
     
     /*
-     * Make sure Stderr points to a valid place
+     * Make sure stderr points to a valid place
      */
     close (2);
     stderr_fd = open ("/dev/tty", O_RDWR);
-    if (stderr_fd == -1)	/* This may well happen if program is running non-root */
+
+    /* This may well happen if program is running non-root */
+    if (stderr_fd == -1)
 	stderr_fd = open ("/dev/null", O_RDWR);
 
     if (stderr_fd == -1)
@@ -362,7 +256,6 @@ int main (int argc, char **argv)
     if (argc != 2){
 	/* Wrong number of arguments */
 
-	dwrite (2, "Usage: cons.saver <ttyname>\n");
 	console_flag = 0;
 	write (cmd_output, &console_flag, 1);
 	return 3;
@@ -377,24 +270,13 @@ int main (int argc, char **argv)
     if (detect_console () == -1){
 	/* Not a console -> no need for privileges */
 	setuid (getuid ());
-/*	dwrite (2, error); */
 	console_flag = 0;
-	if (console_fd >= 0)
-	    close (console_fd);
     } else {
-	/* Console was detected */
-	if (console_flag != 3)
-	    console_flag = 2; /* Default to Linux >= 1.1.67 */
 	/* Allocate buffer for screen image */
-	tty_getsize ();
 	buffer_size = 4 + 2 * columns * rows;
 	buffer = (char*) malloc (buffer_size);
     }
 
-    /* If using /dev/vcs*, we don't need anymore the console fd */
-    if (console_flag == 3)
-	close (console_fd);
-    
     /* Inform the invoker about the result of the tests */
     write (cmd_output, &console_flag, 1);
 

@@ -1,3 +1,11 @@
+2002-07-28  Pavel Roskin  <proski@gnu.org>
+
+	* cons.saver.c: Remove support for Linux kernels before 2.0.
+	Massive cleanup.
+	(send_contents): Remove incorrect optimization - restore even
+	empty lines because they may be touched by the viewer.
+	From Denis Vlasenko <vda_unique@iname.com>
+
 2002-07-26  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (canonicalize_pathname): Don't extend empty path
