@@ -1,3 +1,8 @@
+1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
+
+	* main.c (main): 'session_management_setup' will be called after
+ 	'gnome_init'.
+
 Wed Jun 18   Pavel Machek  <pavel@ucw.cz>
 	
 	* i18n.h: we do not want i18n in case of compiling standalone

@@ -2969,7 +2969,6 @@ int main (int argc, char *argv [])
     /* NOTE: This call has to be before any our argument handling :) */
 
 #ifdef HAVE_GNOME
-    session_management_setup (argv [0]);
     {
 	char *base = x_basename (argv [0]);
 
@@ -2982,6 +2981,7 @@ int main (int argc, char *argv [])
 	}
     }
     gnome_init ("gmc", &mc_argp_parser, argc, argv, 0, NULL);
+    session_management_setup (argv [0]);
     probably_finish_program ();
 #endif
     
