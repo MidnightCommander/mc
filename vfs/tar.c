@@ -23,8 +23,8 @@
 #include <config.h>
 #include <errno.h>
 
-#include "xdirentry.h"
 #include "utilvfs.h"
+#include "xdirentry.h"
 
 #include "../src/dialog.h"	/* For MSG_ERROR */
 #include "tar.h"
