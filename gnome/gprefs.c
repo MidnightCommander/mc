@@ -175,6 +175,18 @@ static Property desktop_props [] = {
 		N_("Snap icons to grid"), PROPERTY_BOOL,
 		&desktop_snap_icons, NULL, NULL, NULL
 	},
+	{
+		N_("Layout icons from right to left"), PROPERTY_BOOL,
+		&desktop_arr_r2l, NULL, NULL, NULL
+	},
+	{
+		N_("Layout icons from bottom to top"), PROPERTY_BOOL,
+		&desktop_arr_b2t, NULL, NULL, NULL
+	},
+	{
+		N_("Layout icons in rows instead of columns"), PROPERTY_BOOL,
+		&desktop_arr_rows, NULL, NULL, NULL
+	},
         PROPERTIES_DONE
 };
 

@@ -451,7 +451,7 @@ GnomeUIInfo gnome_panel_about_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_desktop_menu [] = {
-	GNOMEUIINFO_ITEM_NONE (N_("Arrange Icons"), NULL, desktop_arrange_icons),
+	GNOMEUIINFO_SUBTREE(N_("Arrange Icons..."), arrange_icons_items),
 	GNOMEUIINFO_SEPARATOR,
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan System Devices"), NULL, desktop_rescan_devices),
 	GNOMEUIINFO_ITEM_NONE (N_("Rescan Desktop"), NULL, do_desktop_rescan_devices),

@@ -25,16 +25,6 @@
 #include "gdesktop.h"
 #include "../vfs/vfs.h"
 
-
-enum {
-	SORT_NAME,
-	SORT_EXTENSION,
-	SORT_ACCESS,
-	SORT_MODIFY,
-	SORT_CHANGE,
-	SORT_SIZE
-};
-
 static char *panelize_section = "Panelize";
 
 void
@@ -247,6 +237,34 @@ sort_callback (GtkWidget *menu_item, GtkWidget *cbox1)
 		gtk_widget_set_sensitive (cbox1, FALSE);
 }
 
+
+sortfn *
+sort_get_func_from_type (SortType type) {
+	sortfn *sfn = NULL;
+	
+	switch (type) {
+		case SORT_NAME:
+			sfn = (sortfn *) sort_name;
+			break;
+		case SORT_EXTENSION:
+			sfn = (sortfn *) sort_ext;
+			break;
+		case SORT_ACCESS:
+			sfn = (sortfn *) sort_atime;
+			break;
+		case SORT_MODIFY:
+			sfn = (sortfn *) sort_time;
+			break;
+		case SORT_CHANGE:
+			sfn = (sortfn *) sort_ctime;
+			break;
+		case SORT_SIZE:
+			sfn = (sortfn *) sort_size;
+			break;
+	}
+	return sfn;
+}
+	
 void
 gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 {
@@ -324,29 +342,11 @@ gnome_sort_cmd (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (GNOME_DIALOG (sort_box)->vbox);
 	switch (gnome_dialog_run (GNOME_DIALOG (sort_box))) {
 	case 0:
-		switch( (gint) gtk_object_get_data (GTK_OBJECT
+		sfn = sort_get_func_from_type(
+				GPOINTER_TO_UINT(gtk_object_get_data (GTK_OBJECT
 						    (GTK_OPTION_MENU
 						     (omenu)->menu_item),
-						    "SORT_ORDER_CODE") ) {
-		case SORT_NAME:
-			sfn = (sortfn *) sort_name;
-			break;
-		case SORT_EXTENSION:
-			sfn = (sortfn *) sort_ext;
-			break;
-		case SORT_ACCESS:
-			sfn = (sortfn *) sort_atime;
-			break;
-		case SORT_MODIFY:
-			sfn = (sortfn *) sort_time;
-			break;
-		case SORT_CHANGE:
-			sfn = (sortfn *) sort_ctime;
-			break;
-		case SORT_SIZE:
-			sfn = (sortfn *) sort_size;
-			break;
-		}
+						    "SORT_ORDER_CODE")));
 		/* case sensitive */
 		panel->case_sensitive = GTK_TOGGLE_BUTTON (cbox1)->active;
 		/* Reverse order */

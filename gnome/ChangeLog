@@ -1,3 +1,15 @@
+1999-08-08  Richard Hestilow  <hestgray@ionet.net>
+
+	* gcmd.[ch]
+	* glayout.c
+	* gprefs.c
+	* gdesktop.[ch] (mostly auto_pos and desktop_arrange_icons):
+	Reworking of the desktop's Arrange Icon code -- in addition to
+	being able to sort by various criteria now (name, file size, etc),
+	there are now 3 options (Right to Left, Bottom to Top, Rows instead
+	of Columns) controlling layout positioning. (Located in the "Desktop"
+	Preferences tab)
+	
 1999-08-08  David Martin <dmartina@usa.net>
 
 	* gaction.c (mainly gmc_unable_to_execute_dlg): Moved g_strconcat

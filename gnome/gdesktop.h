@@ -10,6 +10,7 @@
 #define GDESKTOP_H
 
 #include "dir.h"
+#include "gcmd.h"
 
 
 /* Snap granularity for desktop icons -- maybe these should be calculated in
@@ -27,7 +28,12 @@
 extern int desktop_use_shaped_icons;	/* Whether to use shaped icons or not (for slow X servers) */
 extern int desktop_auto_placement;	/* Whether to auto-place icons or not (user placement) */
 extern int desktop_snap_icons;		/* Whether to snap icons to the grid or not */
+extern int desktop_arr_r2l; /* Arrange from right to left */
+extern int desktop_arr_b2t; /* Arrange from bottom to top */
+extern int desktop_arr_rows; /* Arrange in rows instead of columns */
 extern char *desktop_directory;
+
+extern GnomeUIInfo arrange_icons_items[];
 
 /* Initializes the desktop -- init DnD, load the default desktop icons, etc. */
 void desktop_init (void);
@@ -63,7 +69,10 @@ gboolean    is_ejectable (char *filename);
 gboolean    do_mount_umount (char *filename, gboolean is_mount);
 gboolean    do_eject (char *filename);
 
-void desktop_arrange_icons (void);
+void handle_arrange_icons(GtkWidget *widget, gpointer data); 
+/* Used from two places so no longer static ^^ */
+void desktop_arrange_icons (SortType type);
+
 void desktop_rescan_devices (void);
 void desktop_reload_icons (int user_pos, int xpos, int ypos);
 void desktop_create_url (const char *filename, const char *title, const char *url, const char *icon);
