@@ -5,7 +5,7 @@
 .\"	David H. Martín Alonso <dmartina@excite.com>
 .\"
 .\"TOPICS "Índice de Contenidos:"
-.TH mc 1 "20 de Octubre de 1998" "Linux" "GNU Midnight Commander"
+.TH MC 1 "20 de Octubre de 1998" "MC Versión 4.6.0" "GNU Midnight Commander"
 .\"SKIP_SECTION"
 .SH "NOMBRE"
 mc \- Entorno visual para sistemas tipo Unix.
@@ -15,12 +15,11 @@ mc \- Entorno visual para sistemas tipo Unix.
 [\-abcCdfhPstuUVx] [\-l registro] [dir1 [dir2]] [-v fichero]
 .\"NODE "DESCRIPTION"
 .SH "DESCRIPCIÓN"
-.LP
 "Midnight Commander" (Comandante de Medianoche) es
 un navegador de directorios/gestor de ficheros para
 sistemas operativos tipo Unix.
-.\".\"DONT_SPLIT"
 .\"NODE "OPTIONS"
+.\".\"DONT_SPLIT"
 .SH "OPCIONES"
 .TP
 .I "\-a"
@@ -40,7 +39,7 @@ para más información.
 Usado para especificar un juego de colores diferentes en la línea de comandos.
 El formato de arg está documentado en la sección
 .\"LINK2"
-Colores.
+Colores\&. 
 .\"Colors"
 .TP
 .I "\-d"
@@ -106,7 +105,7 @@ parte de la pantalla está ocupada por los dos paneles de directorio. Por defecto
 la segunda línea más inferior de la pantalla es la línea de comandos del shell, y
 la línea inferior muestra las etiquetas de las teclas de función. La línea superior es la
 .\"LINK2"
-barra de menú.
+barra de menú\&.
 .\"Menu Bar"
 La línea de la barra de menú podría no ser visible, pero aparece si pulsamos
 en la primea línea de la pantalla con el ratón o pulsamos la tecla F9.
@@ -119,7 +118,7 @@ por defecto el directorio del panel no seleccionado como destino, pero
 siempre solicitan una confirmación previa y podemos cambiarlo. Para más
 información, ver las secciones sobre los
 .\"LINK2"
-Paneles de Directorio,
+Paneles de Directorio\&,
 .\"Directory Panels"
 los
 .\"LINK2"
@@ -127,7 +126,7 @@ Menús Izquierdo y Derecho
 .\"Left and Right Menus"
 y el
 .\"LINK2"
-Menú de Fichero.
+Menú de Fichero\&.
 .\"File Menu"
 .PP
 Podemos ejecutar comandos del sistema desde el Midnight Commander simplemente
@@ -141,7 +140,6 @@ y
 Teclas de la Línea de Entrada
 .\"Input Line Keys"
 para aprender más sobre la línea de comandos.
-.PP
 .\"NODE "Mouse Support"
 .SH "Soporte de Ratón"
 Midnight Commander soporta el uso del ratón. Se activa cuando
@@ -160,7 +158,7 @@ el fichero es marcado (o desmarcado, dependiendo del estado previo).
 Una doble pulsación sobre un fichero intentará ejecutar el comando si se trata de
 un programa ejecutable; y si la extensión del fichero tiene un programa
 .\"LINK2"
-asociado a esa extensión,
+asociado a esa extensión\&,
 .\"Extension File Edit"
 se ejecuta el programa especificado.
 .PP
@@ -176,7 +174,7 @@ Visor de Ayuda
 .\"Contents"
 y el
 .\"LINK2"
-Árbol de Directorios.
+Árbol de Directorios\&.
 .\"Directory Tree"
 .PP
 El valor por defecto de auto repetición para los botones del ratón es 400
@@ -185,11 +183,11 @@ milisegundos. Este valor se puede modificar editando el fichero
 \&~/.mc/ini
 .\"Save Setup"
 y cambiando el parámetro
-.I mouse_repeat_rate.
+.IR mouse_repeat_rate .
 .PP
-Si estamos ejecutando Commander con soporte de ratón, podemos dejar de lado
-el Commander y tener el comportamiento por defecto del ratón (cortando y pegando
-texto) manteniendo pulsada la tecla Shift.
+Si estamos ejecutando Midnight Commander con soporte para ratón, podemos
+recuperar el comportamiento habitual del ratón (cortar y pegar texto)
+manteniendo pulsada la tecla Mayúsculas.
 .SH ""
 .\"NODE "Keys"
 .SH "Teclas"
@@ -245,7 +243,6 @@ Teclas de línea de Entrada
 .\"Input Line Keys"
 Son usadas para editar líneas de entrada. Esto implica la línea de comandos
 y las líneas de entrada en las ventanas de preguntas.
-.PP
 .\"NODE "  Miscellaneous Keys"
 .SH "  Otras Teclas"
 Tienen cabida aquí algunas teclas que no encajan completamente en ninguna de las anteriores categorías:
@@ -297,31 +294,31 @@ Selecciona el modo de la pantalla del otro panel a vista rápida.
 .B C-x !.
 Ejecuta la utilidad de
 .\"LINK2"
-búsquedas externas.
+búsquedas externas\&.
 .\"External panelize"
 .PP
 .B C-x h
 Ejecuta el comando
 .\"LINK2"
-añadir a la Lista Rápida de Directorios.
+añadir a la Lista Rápida de Directorios\&.
 .\"Hotlist"
 .PP
 .B M-!,
 Ejecuta el comando de Vista Filtrada, descrito en el
 .\"LINK2"
-comando Ver.
+comando Ver\&.
 .\"Internal File Viewer"
 .PP
 .B M-?,
 Ejecuta el comando
 .\"LINK2"
-Buscar fichero.
+Buscar fichero\&.
 .\"Find File"
 .PP
 .B M-c,
 Muestra la ventana de diálogo del comando
 .\"LINK2"
-cd Rápido.
+"cd Rápido" .
 .\"Quick cd"
 .PP
 .B C-o,
@@ -337,14 +334,13 @@ volver a nuestra aplicación basta con volver a pulsar C-o. Si tenemos una aplica
 suspendida usando esta técnica, no podremos ejecutar otros programas
 desde Midnight Commander hasta que terminemos la aplicación
 suspendida.
-.PP
 .\"NODE "  Directory Panels"
 .SH "  Paneles de Directorio"
 Esta sección enumera las teclas que operan en los paneles de directorio. Si
 queremos saber cómo cambiar la apariencia de los paneles, deberemos echar un vistazo
 a la sección
 .\"LINK2"
-Menús Izquierdo y Derecho.
+Menús Izquierdo y Derecho\&.
 .\"Left and Right Menus"
 .PP
 .B Tab, C-i.
@@ -365,13 +361,13 @@ panel, respectivamente.
 Inicia la búsqueda de un fichero en la lista de directorios (panel activo). Cuando la búsqueda
 está activa las pulsaciones de teclado son añadidas a la cadena de búsqueda y no a
 la línea de comandos. Si la opción
-.I "Mostrar Mini-estado"
+.I Mostrar Mini-estado
 está habilitada la cadena a buscar es mostrada en la línea de mini-estado.
 Conforme tecleemos, la barra de selección se desplazará al siguiente fichero
 o directorio cuyo nombre coincida con las letras introducidas. Las teclas
-.I "borrar"
+.I borrar
 o
-.I "suprimir"
+.I suprimir
 pueden ser utilizadas para corregir errores de escritura. Si pulsamos C-s
 de nuevo, se busca la siguiente coincidencia.
 .PP
@@ -443,7 +439,6 @@ del directorio seleccionado en el panel activo.
 .B C-RePág (C-PageUp), C-AvPág (C-PageDown)
 Solamente bajo la consola Linux: realiza un chdir ".." o al
 directorio actualmente seleccionado respectivamente.
-.PP
 .\"NODE "  Shell Command Line"
 .SH "  Línea de Comandos del Shell"
 Esta sección enumera las teclas útiles para evitar la excesiva escritura
@@ -482,7 +477,6 @@ la última entrada, M-n devuelve la siguiente.
 .PP
 .B M-h.
 Visualiza el historial para la línea de entrada actual.
-.PP
 .\"NODE "  General Movement Keys"
 .SH "  Teclas Generales de Movimiento"
 El visor de ayuda, el visor de fichero y el árbol de directorios usan
@@ -524,7 +518,6 @@ Mueve la mitad de la página hacia atrás o adelante.
 .PP
 .B g, G.
 Mueve al principio o al final.
-.PP
 .\"NODE "  Input Line Keys"
 .SH "  Teclas de la Línea de Entrada"
 Las líneas de entrada (usadas en la
@@ -586,7 +579,6 @@ Realiza una
 terminación
 .\"Completion"
 del nombre de fichero, comando, variable, nombre de usuario o host.
-.PP
 .SH ""
 .\"NODE "Menu Bar"
 .SH "Barra de Menú"
@@ -614,21 +606,20 @@ Menú de Comandos
 .\"Command Menu"
 lista las acciones más generales y que no guardan relación con
 la selección actual de ficheros.
-.PP
 .\"NODE "  Left and Right Menus"
 .SH "  Menús Izquierdo y Derecho (Arriba y Abajo)"
 La presentación de los paneles de directorio puede ser cambiada desde los menús
-.B "Izquierdo"
+.B Izquierdo
 y
-.B "Derecho"
-.B ("Arriba"
+.B Derecho
+(denominados
+.B Arriba
 y
-.B "Abajo"
+.B Abajo
 si hemos elegido la disposición horizontal de paneles en las opciones de
 .\"LINK2"
-presentación).
+presentación\&).
 .\"Layout"
-.PP
 .\"NODE "    Listing Mode..."
 .SH "    Modo de Listado..."
 El modo de listado es usado para visualizar ficheros y sus atributos, hay
@@ -642,8 +633,8 @@ y
 La vista completa muestra el nombre del fichero, el tamaño del mismo y
 la hora de modificación.
 .PP
-La vista breve muestra sólo el nombre del fichero y utiliza dos columnas (
-por lo cual puede mostrar el doble de entradas que otros modos).
+La vista breve muestra sólo el nombre del fichero y utiliza dos columnas
+(por lo cual puede mostrar el doble de entradas que otros modos).
 .PP
 La vista extensa es similar a la salida del comando
 .B "ls -l".
@@ -714,7 +705,7 @@ el propietario del fichero.
 el grupo del fichero.
 .PP
 .B inode,
-el i-nodo del fichero.
+el inodo del fichero.
 .PP
 Además, podemos usar estos nombres de campo para organizar la pantalla:
 .PP
@@ -760,7 +751,7 @@ de ficheros empleado.
 .B "Árbol"
 La vista en árbol es bastante similar a la función
 .\"LINK2"
-árbol de directorios.
+árbol de directorios\&.
 .\"Directory Tree"
 Para más información véase la sección correspondiente.
 .TP
@@ -773,32 +764,28 @@ que muestra el contenido del fichero actualmente seleccionado,
 si seleccionamos el panel (con la tecla
 .I tab
 o el ratón), tendremos acceso a los comandos usuales del visor.
-.PP
 .\"NODE "    Sort Order..."
 .SH "    Modo de Ordenación..."
 Los ocho modos de ordenación son por nombre, por extensión, por hora de modificación,
-por hora de acceso, por la hora de modificación de la información del i-nodo, por tamaño,
-por i-nodo y desordenado. En el cuadro de diálogo del modo de ordenación podemos elegir
+por hora de acceso, por la hora de modificación de la información del inodo, por tamaño,
+por inodo y desordenado. En el cuadro de diálogo del modo de ordenación podemos elegir
 el modo de ordenación así como especificar si deseamos que éste se realice en orden inverso
 chequeando la casilla Invertir.
 .PP
-Por defecto los directorios son ordenados antes que los ficheros pero esto puede ser cambiado
-desde el
+Por defecto, los directorios se colocan ordenados antes que los ficheros.
+Esto se puede cambiar en Configuración dentro del
 .\"LINK2"
 Menú de Opciones
 .\"Options Menu"
-(opción
-.B "Mezcla todos los ficheros"
-).
-.PP
+activando la opción
+.BR "Mezclar ficheros y directorios" .
 .\"NODE "    Filter..."
 .SH "    Filtro..."
 El comando de filtro nos permite seleccionar un patrón (por ejemplo
-.B "*.tar.gz"
-) con el cual los ficheros deben coincidir para ser mostrados. Indiferente
+.BR "*.tar.gz" )
+con el cual los ficheros deben coincidir para ser mostrados. Indiferente
 al patrón de filtro, los directorios y enlaces a directorios
 son mostrados siempre en el panel de directorios.
-.PP
 .\"NODE "    Reread"
 .SH "    Releer"
 El comando releer recarga la lista de ficheros en el directorio. Esto es
@@ -809,7 +796,6 @@ los contenidos del directorio y eliminará la información panelizada (véase la se
 Búsquedas externas
 .\"External panelize"
 para más información).
-.PP
 .\"NODE "  File Menu"
 .SH "  Menú de Fichero"
 Midnight Commander utiliza las teclas de función
@@ -839,7 +825,7 @@ El menú de Fichero posee los siguientes comandos (atajos de teclado entre parént
 .PP
 Invoca el visor hipertexto de ayuda interno. Dentro del
 .\"LINK2"
-visor de ayuda,
+visor de ayuda\&,
 .\"Contents"
 podemos usar la tecla
 .I Tab
@@ -865,7 +851,7 @@ y añadir asimismo características extra a Midnight Commander.
 .PP
 .B Ver (
 .I F3,
-.I Shift-F3 )
+.I Mayúsculas-F3 )
 .PP
 Visualiza el fichero actualmente seleccionado. Por defecto invoca el
 .\"LINK2"
@@ -877,7 +863,7 @@ de ficheros externo especificado por la variable de entorno
 Si la variable
 .B PAGER
 no está definida, se invoca al comando "view". Si en vez de esto usamos
-.I Shift-F3,
+.I Mayúsculas-F3,
 el visor será invocado sin realizar ningún tipo de formateo o
 preprocesamiento del fichero.
 .PP
@@ -916,7 +902,7 @@ para anular la operación. Para más detalles sobre la máscara de origen
 de la selección de Uso de los patrones del shell) y los posibles comodines en destino
 véase
 .\"LINK2"
-Máscara copiar/renombrar.
+Máscara copiar/renombrar\&.
 .\"Mask Copy/Rename"
 .PP
 En algunos sistemas, es posible hacer la copia en segundo plano pulsando en el botón
@@ -960,32 +946,33 @@ queramos evitar la confusión que pueden causar los enlaces físicos.
 .PP
 .B Renombrar/mover (F6)
 .PP
-Sobreimpresiona una ventana de entrada que defectivamente apunta al directorio en el
-panel no seleccionado y mueve el fichero actualmente seleccionado (o los
-ficheros marcados si hay al menos uno) al directorio
-especificado por el usuario en la ventana. durante el proceso, podemos
-pulsar
+Presenta un diálogo de entrada proponiendo como directorio de destino el
+directorio del panel no activo, y mueve allí, o bien los ficheros marcados
+o en su defecto el fichero seleccionado. El usuario puede introducir en
+el diálogo un destino diferente. Durante el proceso, se puede pulsar
 .IR C-c " o " ESC
-para anular la operación. Para más detalles, véase la operación Copiar
-más arriba, dado que la mayoría de los aspectos son similares.
+para abortar la operación. Para más detalles, véase más arriba la
+operación Copiar, dado que la mayoría de los aspectos son similares.
 .PP
-En algunos sistemas, es posible hacer la copia en segundo plano
-pulsando con el ratón en el susodicho botón de segundo plano (o pulsando
-.I M-b en el cuadro de diálogo). Los
+En algunos sistemas, es posible hacer la copia en segundo plano pulsando
+con el ratón en el susodicho botón de segundo plano (o pulsando
+.I M-o
+en el cuadro de diálogo). Con
 .\"LINK2"
-Trabajos en Segundo Plano
+Procesos en 2º plano
 .\"Background jobs"
-es utilizado para controlar los procesos en segundo plano.
+se puede controlar estas tareas.
 .PP
 .B Crear directorio (F7)
 .PP
-Sobreimpresiona una ventana de entrada y crea el directorio especificado.
+Presenta un diálogo de entrada y crea el directorio especificado.
 .PP
 .B Borrar (F8)
 .PP
-Borra el fichero actualmente seleccionado o los ficheros marcados
-en el panel activo. Durante el proceso, podremos pulsar C-c o
-ESC para anular la operación.
+Borra, o bien los ficheros marcados o en su defecto el fichero
+seleccionado en el panel activo. Durante el proceso, se puede pulsar
+.IR C-c " o " ESC
+para abortar la operación.
 .PP
 .B Cambio rápido de directorio (M-c)
 Usaremos el comando
@@ -1013,13 +1000,12 @@ con '/'.
 Utilizado para deseleccionar un grupo de ficheros. Es la operación antagonista al comando
 .IR "Selecciona grupo" .
 .PP
-.B Salir (F10, Shift-F10)
+.B Salir (F10, Mayúsculas-F10)
 .PP
-Finaliza Midnight Commander. Shift-F10 es usado cuando queremos
-salir y estamos utilizando la envoltura del shell. Shift-F10 no nos llevará
+Finaliza Midnight Commander. Mayúsculas-F10 es usado cuando queremos
+salir y estamos utilizando la envoltura del shell. Mayúsculas-F10 no nos llevará
 al último directorio visitado con Midnight Commander, en vez de eso
 nos llevará al directorio donde fue invocado Midnight Commander.
-.PP
 .\"NODE "    Quick cd"
 .SH "    Cambiar de directorio"
 Este comando es útil si tenemos completa la línea de comandos y
@@ -1034,9 +1020,8 @@ es válido como argumento del comando
 en la línea de comandos y después pulsamos intro. Este comando caracteriza
 todas las cualidades incluidas en el
 .\"LINK2"
-comando cd interno.
+comando cd interno\&.
 .\"The cd internal command"
-.PP
 .\"NODE "  Command Menu"
 .SH "  Menú de Comando"
 El comando
@@ -1070,7 +1055,7 @@ El histórico de comandos puede ser accedido también tecleando M-p ó M-n.
 .PP
 El comando
 .\"LINK2"
-Lista de directorios frecuentes(C-\\)
+Lista de directorios frecuentes (C-\\)
 .\"Hotlist"
 realiza el cambio desde el directorio actual a directorios utilizados a menudo más rápidamente.
 .PP
@@ -1092,7 +1077,6 @@ de los ficheros de audio de SUN (.au) con el programa reproductor adecuado. El c
 Edición del fichero de extensiones
 .\"Extension File Edit"
 podría ser usado para editar el menú de usuario (el cual aparece pulsando F2).
-.PP
 .\"NODE "    Directory Tree"
 .SH "    Árbol de Directorios"
 El comando Árbol de directorios muestra una figura con la estructura de los directorios.
@@ -1179,16 +1163,15 @@ Sale del árbol de directorios. No cambia el directorio.
 El ratón es soportado. Un doble Click se comporta como pulsar Intro. Véase
 también la sección sobre
 .\"LINK2"
-soporte de ratón.
+soporte de ratón\&.
 .\"Mouse Support"
-.PP
 .\"NODE "    Find File"
 .SH "    Buscar Fichero"
 La opción Buscar Fichero primero pregunta por el directorio inicial para la búsqueda
 y el nombre de fichero a buscar. Pulsando el botón árbol
 podemos seleccionar el directorio inicial desde el
 .\"LINK2"
-Árbol de directorios.
+Árbol de directorios\&.
 .\"Directory Tree"
 .PP
 El campo de contenidos acepta expresiones regulares similares a egrep(1). Eso
@@ -1233,7 +1216,6 @@ Búsquedas externas
 en ciertas situaciones. La utilidad Buscar ficheros es sólo para consultas
 simples, pero con Búsquedas externas se pueden hacer exploraciones tan
 complejas como queramos.
-.PP
 .\"NODE "    External panelize"
 .SH "    Búsquedas Externas"
 Búsquedas externas nos permite ejecutar un programa externo, y
@@ -1264,7 +1246,6 @@ de manera que podamos llamarlos rápidamente. Haremos esto tecleando el comando
 en la línea de entrada y pulsando el botón "Añadir nuevo". Entonces introduciremos un nombre
 bajo el cual queremos que el comando sea guardado. La próxima vez, bastará elegir
 ese comando de la lista y no habrá que escribirlo de nuevo.
-.PP
 .\"NODE "    Hotlist"
 .SH "    Lista de Directorios Frecuentes"
 El historial de directorios muestra las etiquetas de los directorios en el
@@ -1278,9 +1259,8 @@ respecto a la etiqueta para el directorio.
 Esto hace el posicionamiento en directorios usados frecuentemente más rápido. Deberíamos considerar el uso
 de la variable CDPATH tal y como se describe en
 .\"LINK2"
-comando cd interno.
+comando cd interno\&.
 .\"The cd internal command"
-.PP
 .\"NODE "    Extension File Edit"
 .SH "    Edición del Fichero de Extensiones"
 Esto invocará nuestro editor con el fichero ~/.mc/ext. El formato de
@@ -1342,14 +1322,12 @@ Si no están definidas algunas acciones, la búsqueda continúa como si el objetivo
 no coincidiese (p.e. si un fichero encaja con la primera y la segunda entrada y la acción Ver
 no está definida en la segunda, entonces al pulsar F3 la acción Ver desde
 la segunda entrada será utilizada. default debe capturar todas las acciones.
-.PP
 .\"NODE "    Background jobs"
 .SH "    Trabajos en Segundo Plano"
 Nos permite controlar el estado de cualquier proceso de Midnight Commander
 en segundo plano (sólo las operaciones de copiar y mover ficheros pueden realizarse
 en segundo plano). Podemos parar, reiniciar y eliminar procesos en segundo plano desde
 aquí.
-.PP
 .\"NODE "    Menu File Edit"
 .SH "    Edición del Fichero de Menú"
 El menú de usuario es un menú de acciones útiles que puede ser personalizado
@@ -1372,7 +1350,7 @@ se copian a un fichero temporal del directorio homónimo (normalmente
 constructores normales del shell en los menús. También tiene lugar
 una sustitución simple de macros antes de ejecutar el código del menú. Para mayor información, ver
 .\"LINK2"
-Sustitución de macro.
+Sustitución de macro\&.
 .\"Macro Substitution"
 .PP
 He aquí un ejemplo de fichero mc.menu:
@@ -1434,11 +1412,11 @@ Sub-condición es una de las siguientes:
 Patrón es un patrón normal del shell o una expresión regular, de acuerdo
 con la opción de patrones del shell. Podemos cambiar el valor global de
 la opción de los patrones del shell escribiendo "shell_patterns=x" en la primera línea
-del fichero de menú (donde "x" es 0 o 1).
+del fichero de menú (donde "x" es 0 ó 1).
+.PP
+Tipo es uno o más de los siguientes caracteres:
 .PP
 .nf
-Tipo es uno o más de los siguientes caracteres:
-
   n	no directorio
   r	fichero regular
   d	directorio
@@ -1491,7 +1469,6 @@ comenzando con '+' y otra con '='.
 .PP
 Los comentarios empiezan con '#'. Las líneas adicionales de comentarios deben empezar
 con '#', espacio o tab.
-.PP
 .\"NODE "  Options Menu"
 .SH "  Menú de Opciones"
 Midnight Commander tiene opciones que pueden ser activadas o desactivadas
@@ -1543,7 +1520,6 @@ Guardar Configuración
 .\"Save Setup"
 guarda los valores actuales de los menús Izquierdo, Derecho y Opciones.
 También se guardan algunos otros valores.
-.PP
 .\"NODE "    Configuration"
 .SH "    Configuración"
 Este diálogo presenta una serie de opciones divididas en tres grupos:
@@ -1645,7 +1621,7 @@ y si no se especifica ninguno, se usará
 .B vi.
 Véase la sección sobre el
 .\"LINK2"
-editor de ficheros interno.
+editor de ficheros interno\&.
 .\"Internal File Editor"
 .PP
 .I Usar Visor Interno.
@@ -1657,7 +1633,7 @@ Si no se especifica ninguno, se usará el comando
 .B view.
 Véase la sección sobre el
 .\"LINK2"
-visor de ficheros interno.
+visor de ficheros interno\&.
 .\"Internal File Viewer"
 .PP
 .I Completar: Mostrar Todos.
@@ -1692,7 +1668,6 @@ y no al directorio donde se encontraba el enlace.
 Dificulta el borrado accidental de ficheros. La opción por defecto en el
 diálogo de confirmación de borrado se cambia a "No". Por defecto, esta
 opción está desactivada.
-.PP
 .\"NODE "    Layout"
 .SH "    Presentación"
 La ventana de presentación nos da la posibilidad de cambiar la
@@ -1732,12 +1707,10 @@ Si la opción
 .I Mostrar Mini-Estado
 está activa se muestra, en la parte inferior de cada panel, una línea
 con información sobre el fichero seleccionado en cada momento.
-.PP
 .\"NODE "    Confirmation"
 .SH "    Confirmación"
 En este menú configuramos las opciones de confirmación de eliminación de ficheros,
 sobreescritura, ejecución pulsando intro y salir del programa.
-.PP
 .\"NODE "    Display bits"
 .SH "    Bits de Visualización"
 Esta opción es utilizada para configurar el rango de caracteres visibles en la
@@ -1745,7 +1718,6 @@ pantalla. Esta selección puede ser 7-bits si nuestro terminal/curses soporta
 sólo siete bits de salida, ISO-8859-1 muestra todos los caracteres del mapa
 ISO-8859-1 despliegue de 8 bit para aquellos terminales que puedan
 los 8 bits en toda su extensión.
-.PP
 .\"NODE "    Learn keys"
 .SH "    Aprender teclas"
 Este diálogo nos permite comprobar si nuestras teclas F1-F20, Inicio, Fin, etc. funcionan adecuadamente
@@ -1773,12 +1745,11 @@ Cuando acabemos con todas las teclas, podríamos Guardar nuestras teclas
 en nuestro fichero ~/.mc/ini dentro de la sección [terminal:TERM] (donde TERM es el
 nombre de nuestro terminal actual) o descartarlas. Si todas nuestras teclas funcionan
 correctamente y no debemos corregir ninguna, entonces (lógico) no se grabará.
-.PP
 .\"NODE "    Virtual FS"
 .SH "    Opciones del VFS"
 Esta opción nos proporciona el control sobre la caché de información del
 .\"LINK2"
-Sistema de Ficheros Virtual (VFS).
+Sistema de Ficheros Virtual (VFS)\&.
 .\"Virtual File System"
 .PP
 Midnight Commander guarda en memoria la información relacionada con alguno
@@ -1819,7 +1790,6 @@ después. Puesto que la descompresión es lenta, Midnight Commander mantendrá en
 memoria la información durante una cantidad de tiempo limitado, después de alcanzado
 el momento, todos los recursos de memoria asociados con el sistema de ficheros
 serán liberados. El período por defecto es de un minuto.
-.PP
 .\"NODE "    Save Setup"
 .SH "    Guardar Configuración"
 Al arrancar Midnight Commander se carga la información
@@ -1837,7 +1807,7 @@ Izquierdo, Derecho
 .\"Left and Right Menus"
 y
 .\"LINK2"
-Opciones.
+Opciones\&.
 .\"Options Menu"
 .PP
 Si activamos la opción
@@ -1851,7 +1821,6 @@ Ver la sección sobre
 Ajustes Especiales
 .\"Special Settings"
 para más información.
-.PP
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Ejecutando Comandos del Sistema Operativo"
@@ -1863,7 +1832,7 @@ Si pulsamos Intro sobre un fichero que no es ejecutable, Midnight
 Commander compara la extensión del fichero seleccionado con las extensiones
 recogidas en el
 .\"LINK2"
-Fichero de Extensiones.
+Fichero de Extensiones\&.
 .\"Extension File Edit"
 Si se produce una coincidencia se ejecutará el código asociado con esa extensión.
 Tendrá lugar una
@@ -1871,7 +1840,6 @@ Tendrá lugar una
 expansión
 .\"Macro Substitution"
 muy simple antes de ejecutar el comando.
-.PP
 .\"NODE "  The cd internal command"
 .SH "  Comando cd Interno"
 El comando
@@ -1909,16 +1877,15 @@ el valor ~/src:/usr/src, lo que nos permitiría cambiar de directorio
 a cualquiera de los directorios dentro de ~/src y /usr/src, desde
 cualquier lugar del sistema de ficheros, usando sólo su nombre relativo
 (por ejemplo cd linux podría llevarnos a /usr/src/linux).
-.PP
 .\"NODE "  Macro Substitution"
 .SH "  Sustitución de Macro"
 Cuando se accede al
 .\"LINK2"
-menú de usuario,
+menú de usuario\&,
 .\"Menu File Edit"
 o se ejecuta un
 .\"LINK2"
-comando dependiente de extensión,
+comando dependiente de extensión\&,
 .\"Extension File Edit"
 o se ejecuta un comando desde la línea de entrada de comandos,
 se realiza una simple sustitución de macro.
@@ -1971,7 +1938,7 @@ fichero actual.
 al directorio especificado frente a él. Esto se utiliza principalmente
 como interfaz con el
 .\"LINK2"
-Sistema de Ficheros Virtual.
+Sistema de Ficheros Virtual\&.
 .\"Virtual File System"
 .PP
 .I "%view"
@@ -2002,7 +1969,6 @@ Pregunta sobre la sustitución. Un cuadro de entrada es mostrado y el texto dentr
 de las llaves se usa como mensaje. La macro es sustituida por el texto
 tecleado por el usuario. El usuario puede pulsar ESC o F10 para cancelar. Esta macro
 no funciona aún sobre la línea de comandos.
-.PP
 .\"NODE "  The subshell support"
 .SH "  Soporte de Subshell"
 El soporte del subshell es una opción de tiempo de compilación, que funciona con los
@@ -2041,7 +2007,6 @@ La sección
 OPCIONES
 .\"OPTIONS"
 tiene más información sobre cómo controlar el código del subshell.
-.PP
 .\"NODE "Chmod"
 .SH "Cambiar Permisos"
 Cambiar Permisos se usa para cambiar los bits de permisos en un grupo de
@@ -2106,12 +2071,10 @@ actúa sobre todos los permisos de cada fichero, uno a uno
 .PP
 .B [Cancelar]
 cancela Cambiar Permisos
-.PP
 .\"NODE "Chown"
 .SH "Cambiar Dueño"
 Cambiar Dueño permite cambiar el propietario y/o grupo de un fichero. La tecla
 rápida para este comando es C-x o.
-.PP
 .\"NODE "Advanced Chown"
 .SH "Cambiar Dueño y Permisos"
 Cambiar Dueño y Permisos combina
@@ -2124,7 +2087,6 @@ Cambiar Permisos
 .\"Chmod"
 en una única ventana. Se puede así cambiar los permisos, propietario y grupo
 del fichero de una sola vez.
-.PP
 .\"NODE "File Operations"
 .SH "Operaciones con Ficheros"
 Cuando copiamos, movemos o borramos ficheros, Midnight Commander muestra el
@@ -2166,7 +2128,6 @@ de que queremos una eliminación recursiva.
 Si hemos marcado ficheros y realizamos una operación sobre ellos, sólo
 los ficheros sobre los que la operación fue exitosa son desmarcados. Los ficheros
 saltados y aquellos en los que la operación falló permanecen marcados.
-.PP
 .\"NODE "Mask Copy/Rename"
 .SH "Mascara de Copiar/Renombrar"
 Las operaciones de copiar/mover permiten transformar los nombres de los ficheros
@@ -2258,7 +2219,6 @@ minúsculas.
 También podemos usar '\\' como carácter de escape evitando la interpretación de todos
 estos caracteres especiales. Por ejemplo, '\\\\' es
 una contrabarra y '\\*' es un asterisco.
-.PP
 .\"NODE "Internal File Viewer"
 .SH "Visor de Ficheros Interno"
 El visor de ficheros interno posee dos modos de pantalla: ASCII y hexadecimal.
@@ -2380,7 +2340,7 @@ Intercambia entre los diferentes modos de regla: desactivado, arriba, abajo.
 Es posible adiestrar al visor de ficheros sobre cómo mostrar un fichero, mírese
 la sección
 .\"LINK2"
-Editar Fichero de Extensiones.
+Editar Fichero de Extensiones\&.
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Editor de Ficheros Interno"
@@ -2492,7 +2452,6 @@ a 7 bits en el menú de opciones para guardar el espacio limpio.
 Véase también el fichero
 .B LEAME.edit
 para mayor información.
-.PP
 .\"NODE "Completion"
 .SH "Terminación"
 Permite a Midnight Commander escribir por nosotros.
@@ -2518,7 +2477,7 @@ MC pita, y la acción siguiente depende de la opción
 .I Completar: Mostrar Todos
 en el diálogo de
 .\"LINK2"
-Configuración.
+Configuración\&.
 .\"Configuration"
 Si está activada, se despliega inmediatamente junto a la posición actual
 una lista con todas las posibilidades donde se puede seleccionar con
@@ -2541,7 +2500,6 @@ Completar: Mostrar Todos
 está desactivado, la lista aparece cuando pulsamos
 .B M-Tab
 por segunda vez; con la primera MC sólo emite un pitido.
-.PP
 .\"NODE "Virtual File System"
 .SH "Sistemas de Ficheros Virtuales (VFS)"
 Midnight Commander dispone de una capa de código de acceso
@@ -2563,7 +2521,6 @@ manipular ficheros en sistemas remotos empleando el protocolo SMB (CIFS).
 El código VFS interpretará todos los nombres de ruta usados y
 los dirigirá al sistema de ficheros correcto. El formato usado para cada uno
 de los sistemas de ficheros se describe más adelante en su propia sección.
-.PP
 .\"NODE "  Tar File System"
 .SH "  Sistema de ficheros Tar (tarfs)"
 El sistema de ficheros tar y los ficheros tar comprimidos pueden consultarse usando
@@ -2588,7 +2545,6 @@ Ejemplos:
 .fi
 .PP
 En este último se indica la ruta completa hasta el fichero tar.
-.PP
 .\"NODE "  FTP File System"
 .SH "  Sistema de ficheros FTP (ftpfs)"
 El ftpfs permite manipular ficheros en máquinas remotas. Para
@@ -2628,7 +2584,7 @@ Para acceder a lugares a través de cortafuegos usaremos el prefijo /#ftp:!
 para hacer que Midnight Commander utilice un proxy para realizar la transferencia ftp.
 Podemos establecer el proxy en el cuadro de diálogo
 .\"LINK2"
-Sistema de Ficheros Virtual (VFS).
+Sistema de Ficheros Virtual (VFS)\&.
 .\"Virtual File System"
 .PP
 La opción
@@ -2649,13 +2605,12 @@ configuración.
 Midnight Commander guarda los listados de directorios en una caché. La vida de
 la caché es configurable en el cuadro de diálogo del
 .\"LINK2"
-Sistema de Ficheros Virtual (VFS).
+Sistema de Ficheros Virtual (VFS)\&.
 .\"Virtual File System"
 Esto tiene un efecto curioso: si cambiamos algo en un directorio, no se verá
 reflejado en el listado hasta que se fuerce un refresco de la caché con la tecla
 C-r. No se trata de un fallo, sino de una utilidad; pensemos en lo pesado
 que es manipular ficheros con ftpfs sobre una conexión lenta.
-.PP
 .\"NODE "  FIle transfer over SHell filesystem"
 .SH "  Sistema de ficheros de envío FIcheros por SHell (fish)"
 El fish es un sistema de ficheros por red que permite manipular ficheros
@@ -2693,7 +2648,6 @@ Ejemplos:
     /#sh:pepe@quiero.comprension.edu:C/privado
     /#sh:pepe@sincomprimir.ssh.edu/privado
 .fi
-.PP
 .\"NODE "  Network File System"
 .SH "  Sistema de ficheros de Red"
 El sistema de ficheros de Midnight Commander es un sistema de ficheros de red básico que
@@ -2731,7 +2685,6 @@ Ejemplos:
     /#mc:ftp.nuclecu.unam.mx/linux/local
     /#mc:pepe@foo.edu:11321/privado
 .fi
-.PP
 .\"NODE "  SMB File System"
 .SH "  Sistema de ficheros SMB"
 El smbfs permite manipular ficheros en máquinas remotas con el protocolo
@@ -2756,7 +2709,6 @@ Ejemplos:
     /#smb:otramaquina
     /#smb:invitado@maquina/publico/leyes
 .fi
-.PP
 .\"NODE "  Undelete File System"
 .SH "  Sistema de ficheros de Recuperación"
 En sistemas Linux, si el programa de configuración nos preguntó si queríamos usar
@@ -2780,7 +2732,6 @@ primer disco scsi en Linux, usaríamos el siguiente nombre de ruta:
 .PP
 Esto le llevaría un tiempo a undelfs para cargar la información
 antes de empezar a navegar por los ficheros allí contenidos.
-.PP
 .\"NODE "Colors"
 .SH "Colores"
 Midnight Commander intentará determinar si nuestro terminal soporta
@@ -2798,6 +2749,7 @@ añadiendo la variable
 .I color_terminals
 a la sección Colors del fichero de inicialización. Esto evitará que
 Midnight Commander intente la detección de soporte de color. Ejemplo:
+.PP
 .nf
 [Colors]
 color_terminals=linux,xterm
@@ -2816,9 +2768,9 @@ Actualmente los colores se configuran a través de la variable de entorno
 o en la sección Colors del fichero de inicialización.
 .PP
 En la sección Colors, el mapa de colores por defecto se carga desde la variable
-.I base_color.
+.IR base_color .
 Podemos especificar un mapa de colores alternativo para un terminal
-utilizando el nombre del terminal como clave en ésta sección. Ejemplo:
+utilizando el nombre del terminal como clave en esta sección. Ejemplo:
 .PP
 .nf
 [Colors]
@@ -2837,7 +2789,8 @@ marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
 gauge;  los colores por defecto son: dnormal, dfocus, dhotnormal, dhotfocus;
 Los colores de Ayuda son: helpnormal, helpitalic, helpbold, helplink,
 helpslink; Color del visor: viewunderline; Modo especial resaltado:
-executable, directory, link, device, special.
+executable, directory, link, stalelink, device, special, core.
+Colores del editor: editnormal, editbold, editmarked.
 .PP
 Los cuadros de diálogo usan los siguientes colores:
 .I dnormal
@@ -2890,9 +2843,16 @@ Ajustes Especiales
 ).
 .PP
 Los colores posibles son: negro (black), gris (gray), rojo (red), rojo brillante (brightred), verde (green),
-verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue), rosa (magenta), rosa claro (brightmagenta),
+verde claro (brightgreen), marrón (brown), amarillo (yellow), azul oscuro (blue), azul brillante (brightblue),
+rosa (magenta), rosa claro (brightmagenta),
 azul celeste (cyan), celeste claro (brightcyan), gris claro (lightgray) y blanco (white).
+Hay una palabra clave especial para obtener un fondo transparente. Se trata de 'default'. 'default'
+solo se puede utilizar para en el color de fondo. Ejemplo:
 .PP
+.nf
+[Colors]
+base_color=normal=white,default:marked=magenta,default
+.fi
 .\"NODE "Special Settings"
 .SH "Ajustes Especiales"
 La mayoría de las opciones de Midnight Commander pueden cambiarse desde
@@ -2995,7 +2955,7 @@ ya estemos ahí, en cuyo caso moverá la selección al último nombre de fichero del
 Si esta variable está activada (por defecto lo está) se recurrirá al
 comando "file" para reconocer los tipos de fichero referidos en el fichero
 .\"LINK2"
-mc.ext.
+mc.ext\&.
 .\"Extension File Edit"
 .PP
 .I xterm_mode
@@ -3004,7 +2964,6 @@ Si esta variable está activada (por defecto no) cuando naveguemos
 por el sistema de ficheros en un panel en árbol, se irá actualizando
 automáticamente el otro panel con los contenidos del directorio
 seleccionado en cada momento.
-.PP
 .\"NODE "Terminal databases"
 .SH "Ajustes del Terminal"
 Midnight Commander permite hacer ajustes a la base de datos de terminales
@@ -3058,62 +3017,61 @@ El programa localiza toda su información en el directorio designado
 por la variable de entorno MC_DATADIR, o en su defecto, en el directorio
 @prefix@/share/mc.
 .PP
-@prefix@/share/mc.hlp
+.I @prefix@/share/mc.hlp
 .IP
 Fichero de ayuda.
 .PP
-@prefix@/share/mc/mc.ext
+.I @prefix@/share/mc/mc.ext
 .IP
 Fichero de extensiones por defecto del sistema.
 .PP
-~/.mc/bindings
+.I ~/.mc/bindings
 .IP
 Fichero de usuario de extensiones y configuración de visor y editor. Si
 está presente prevalece sobre el contenido de los ficheros del sistema.
 .PP
-@prefix@/share/mc/mc.ini
+.I @prefix@/share/mc/mc.ini
 .IP
 Fichero de configuración del sistema para Midnight Commander, sólo si
 el usuario no dispone de su propio ~/.mc/ini.
 .PP
-@prefix@/share/mc/mc.lib
+.I @prefix@/share/mc/mc.lib
 .IP
 Opciones globales de Midnight Commander. Se aplican siempre a todos los
 usuarios, tengan ~/.mc/ini o no. Actualmente sólo se emplea para los
 .\"LINK2"
-ajustes de terminal.
+ajustes de terminal\&.
 .\"Terminal databases"
 .PP
-~/.mc/ini
+.I ~/.mc/ini
 .IP
 Configuración personal del usuario. Si este fichero está presente entonces
 se cargará la configuración desde aquí en lugar de desde el fichero de
 configuración del sistema.
 .PP
-@prefix@/share/mc/mc.hint
+.I @prefix@/share/mc/mc.hint
 .IP
 Este fichero contiene los mensajes cortos de ayuda mostrados por el
 programa.
 .PP
-@prefix@/share/mc/mc.menu
+.I @prefix@/share/mc/mc.menu
 .IP
 Este fichero contiene el menú de aplicaciones por defecto para el sistema.
 .PP
-~/.mc/menu
+.I ~/.mc/menu
 .IP
 Menú de aplicaciones personal del usuario. Si está presente será utilizado
 en lugar del menú por defecto del sistema.
 .PP
-~/.mc/Tree
+.I ~/.mc/Tree
 .IP
 La lista de directorios para el árbol de directorios y la vista en árbol.
 .PP
-\&./.mc.menu
+.I ./.mc.menu
 .IP
 Menú local definido por el usuario. Si este fichero
 está presente será usado en lugar del menú de aplicaciones
 personal o de sistema.
-.PP
 .\"SKIP_SECTION"
 .SH "LICENCIA"
 Este programa se distribuye en los términos que recoge la Licencia Pública
@@ -3145,7 +3103,6 @@ en la línea de órdenes:
 .nf
         LANG= LC_ALL= man mc
 .fi
-.PP
 .\"NODE "AUTHORS"
 .SH "AUTORES"
 Miguel de Icaza (miguel@ximian.com), Janne Kukonlehto
@@ -3176,7 +3133,6 @@ Sergey Ya. Korshunoff (root@seyko.msk.su), Thomas Pundt
 Tomasz Cholewo (tjchol01@mecca.spd.louisville.edu), Torben Fjerdingstad
 (torben.fjerdingstad@uni-c.dk), Vadim Sinolitis (vvs@nsrd.npi.msu.su)
 y Wim Osterholt (wim@djo.wtm.tudelft.nl).
-.PP
 .\"NODE "BUGS"
 .SH "ERRORES"
 Véase el fichero "TODO" en la distribución para saber qué falta por hacer.

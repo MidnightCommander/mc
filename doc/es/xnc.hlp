@@ -7,16 +7,18 @@
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
 
-Ésta es la ayuda de GNU Midnight Commander.
+Ésta es la pantalla de inicio de la ayuda de
+GNU Midnight Commander.
 
-Para aprender a navegar por el sistema de ayuda pulse introHow to use help.
-Si así lo desea puede consultar directamente los contenidosContents.
+Puede pulsar la tecla IntroHow to use help para aprender a navegar por el
+sistema de ayuda, o acceder directamente a los contenidosContents.
 
-Midnight Commander es obra de numerosos autoresAUTHORS.
+GNU Midnight Commander es obra de sus numerosos autoresAUTHORS.
 
-Midnight Commander NO INCLUYE NINGÚN TIPO DE GARANTÍAWarranty.
-Éste es un software libre, y se invita a redistribuirlo
-con ciertas condicionesLicencia.[Licencia]
+GNU Midnight Commander NO INCLUYE NINGÚN TIPO DE GARANTÍAWarranty,
+es software libre, y se alienta su redistribución en los
+terminos y condiciones que están contenidos en la
+Licencia Pública General de GNU (GPL)Licencia.[Licencia]
 
                 GNU GENERAL PUBLIC LICENSE
                    Version 2, June 1991
@@ -86,7 +88,7 @@ at all.
 
   The precise terms and conditions for copying,
 distribution and modification follow.
-
+
                 GNU GENERAL PUBLIC LICENSE
             TERMS AND CONDITIONS FOR COPYING,
               DISTRIBUTION AND MODIFICATION
