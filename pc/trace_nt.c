@@ -93,6 +93,7 @@ void _win32Trace (const char *fmt, ...)
 
 	va_start(ap, fmt);
 	vsprintf(buffer, fmt, ap);
+	va_end(ap);
 	vp = buffer;
 
 #ifdef _OS_NT					/* Write Output to Debug monitor also */
