@@ -221,6 +221,9 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     query_colors [2] = (flags & D_ERROR) ? ERROR_COLOR : COLOR_HOT_NORMAL;
     query_colors [3] = (flags & D_ERROR) ? COLOR_HOT_NORMAL :  COLOR_HOT_FOCUS;
     
+    if (header == MSG_ERROR)
+	    header = _(" Error ");
+    
     if (count > 0){
 	va_start (ap, count);
 	for (i = 0; i < count; i++)
@@ -327,9 +330,6 @@ Dlg_head *message (int error, char *header, char *text, ...)
     char     buffer [4096];
     Dlg_head *d;
 
-    if (header == MSG_ERROR)
-	    header = _(" Error ");
-    
     /* Setup the display information */
     strcpy (buffer, "\n");
     va_start (args, text);

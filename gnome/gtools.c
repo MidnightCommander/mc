@@ -43,6 +43,9 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	GList     *list;
 	int i, result = -1;
 	
+	if (header == MSG_ERROR)
+		header = _("Error");
+	
 	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
 			DLG_NO_TED | DLG_NO_TOPLEVEL);
 	dialog = GTK_DIALOG (gtk_dialog_new ());
@@ -116,9 +119,6 @@ Dlg_head *message (int error, char *header, char *text, ...)
 	char     buffer [4096];
 	Dlg_head *d;
 
-	if (header == MSG_ERROR)
-		header = _("Error");
-	
 	/* Setup the display information */
 	strcpy (buffer, "\n");
 	va_start (args, text);
