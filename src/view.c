@@ -95,6 +95,10 @@ int max_dirt_limit =
 10;
 #endif
 
+#ifdef HAVE_X
+#define is_idle() 1
+#endif
+
 extern Hook *idle_hook;
 
 /* Our callback */
@@ -1475,12 +1479,13 @@ search (WView *view, char *text, int (*search)(WView *, char *, char *, int))
     char *s = NULL;		/*  The line we read from the view buffer */
     long p, beginning;
     int found_len, search_start;
-    Dlg_head *d = 0;
     int search_status;
 #ifdef HAVE_GNOME
     char *msg;
     int abort;
     GtkWidget *gd;
+#else
+    Dlg_head *d = 0;
 #endif
     
     /* Used to keep track of where the line starts, when looking forward */

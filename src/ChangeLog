@@ -1,5 +1,7 @@
 2001-06-01  Pavel Roskin  <proski@gnu.org>
 
+	* view.c [HAVE_X]: Define is_idle() to 1. Warning fix.
+
 	* file.c (copy_file_file): Initialize src_uid, src_gid, src_mode
 	and file_size to avoid a warning.
 
