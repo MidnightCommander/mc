@@ -50,6 +50,7 @@ ALLICONS =						\
 	gnome-application-x-java-source.png     \
 	gnome-application-x-php.png             \
 	gnome-application-x-reject.png          \
+	gnome-application-x-scheme-source.png   \
 	gnome-application-x-sql.png             \
 	gnome-package.png				\
 	gnome-compressed.png				\

@@ -315,6 +315,9 @@ text/x-C++:
 
 text/x-java:
  	icon-filename=@icondir@/gnome-application-x-java-source.png
+
+text/x-scheme:
+	icon-filename=@icondir@/gnome-application-x-scheme-sourec.png
  
 text/x-sql:
  	icon-filename=@icondir@/gnome-application-x-sql.png
