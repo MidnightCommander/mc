@@ -563,6 +563,7 @@ vfs/extfs/ucpio
 vfs/extfs/ulha 
 vfs/extfs/uha
 vfs/extfs/urar
+vfs/extfs/uzip
 vfs/extfs/uzoo
 
 doc/mc.1 doc/mcedit.1 doc/mcserv.8

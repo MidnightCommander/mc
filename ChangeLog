@@ -1,3 +1,11 @@
+2002-11-28  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (MC_EXTFS_CHECKS): New macro.
+	(MC_WITH_VFS): Call MC_EXTFS_CHECKS.
+	* configure.in: Generate vfs/extfs/uzip.
+	* vfs/extfs/uzip: Move to vfs/extfs/uzip.in.
+	* vfs/extfs/Makefile.am: Corresponding adjustments.
+
 2002-11-26  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/sql.syntax: Add highlighting for dot and backticks.

@@ -15,11 +15,11 @@ use strict;
 #
 
 # Location of the zip program
-my $app_zip = '/usr/bin/zip';
+my $app_zip = "@ZIP@";
 # Location of the unzip program
-my $app_unzip = '/usr/bin/unzip';
+my $app_unzip = "@UNZIP@";
 # Set this to 1 if zipinfo (unzip -Z) is to be used (recommended), otherwise 0.
-my $op_has_zipinfo = 1;
+my $op_has_zipinfo = @HAVE_ZIPINFO@;
 
 # Command used to list archives (zipinfo mode)
 my $cmd_list_zi = "$app_unzip -Z -l -T";

@@ -35,6 +35,26 @@ AC_DEFUN([MC_UNDELFS_CHECKS], [
 
 
 
+dnl MC_EXTFS_CHECKS
+dnl    Check for tools used in extfs scripts.
+AC_DEFUN([MC_EXTFS_CHECKS], [
+    AC_PATH_PROG([ZIP], [zip], [/usr/bin/zip])
+    AC_PATH_PROG([UNZIP], [unzip], [/usr/bin/unzip])
+    AC_CACHE_CHECK([for zipinfo code in unzip], [mc_cv_have_zipinfo],
+	[mc_cv_have_zipinfo=no
+	if $UNZIP -Z </dev/null 2>&1 >/dev/null; then
+	    mc_cv_have_zipinfo=yes
+	fi])
+    if test "x$mc_cv_have_zipinfo" = xyes; then
+	HAVE_ZIPINFO=1
+    else
+	HAVE_ZIPINFO=0
+    fi
+    AC_SUBST([HAVE_ZIPINFO])
+])
+
+
+
 dnl MC_MCSERVER_CHECKS
 dnl    Check how mcserver should check passwords.
 dnl    Possible methods are PAM, pwdauth and crypt.
@@ -102,6 +122,8 @@ dnl        "no" (--without-vfs).
 
 dnl Private define
 AC_DEFUN([MC_WITH_VFS],[
+  MC_EXTFS_CHECKS
+
   dnl FIXME: network checks should probably be in their own macro.
   AC_CHECK_LIB(nsl, t_accept)
   AC_CHECK_LIB(socket, socket)
