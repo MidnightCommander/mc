@@ -1,3 +1,7 @@
+2004-02-12  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+        * glibcompat.c: Add g_strlcat() declaration for glib 1.2.x
+
 2005-02-11  Roland Illig  <roland.illig@gmx.de>
 
 	* screen.c (string_file_name): Fixed the displaying of long file

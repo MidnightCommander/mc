@@ -20,6 +20,7 @@
 
 #if GLIB_MAJOR_VERSION < 2
 
+gsize g_strlcat (gchar *dest, const gchar *src, gsize dest_size);
 gsize g_strlcpy (gchar *dest, const gchar *src, gsize dest_size);
 #define g_try_malloc(size) malloc(size)
 #define g_try_realloc(ptr,size) realloc(ptr,size)
