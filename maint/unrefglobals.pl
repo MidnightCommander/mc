@@ -7,6 +7,10 @@
 
 use strict;
 
+my %symbols;
+my %syms;
+my %objs;
+
 if ($#ARGV != 0) {
 	print "Usage: unrefglobals.pl mapfile\n";
 	exit 1;
@@ -24,10 +28,20 @@ while (1) {
 	$line = $next_line;
 	$next_line = <MAP>;
 	next unless ($line =~ m{^[A-Za-z_][A-Za-z0-9_]*  +[^ /][^ ]+\.o$} or
-		     $line =~ m{^[A-Za-z_][A-Za-z0-9_]*  +[^ ]+\.a\([^ ]+\.o\)$});
+		     $line =~ m{^[A-Za-z_][A-Za-z0-9_]*  +[^ /][^ ]+\.a\([^ ]+\.o\)$});
 	if (!$next_line or ($next_line !~ /^ /)) {
-		print $line;
+		my @arr = split (' ', $line);
+		$symbols{$arr[0]} = $arr[1];
+		$syms{$arr[0]} = 1;
+		$objs{$arr[1]} = 1;
 	}
 }
 
 close(MAP);
+
+foreach my $obj (sort keys %objs) {
+	print "$obj\n";
+	foreach my $sym (sort keys %syms) {
+		print "        $sym\n" if ($symbols{$sym} eq $obj);
+	}
+}
