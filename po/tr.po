@@ -4887,12 +4887,12 @@ msgstr ""
 " blok biteþlemi yüklenemedi. \n"
 
 #: vfs/undelfs.c:313
-msgid "undelfs: done."
-msgstr "undelfs: bitti."
+msgid "%s: done."
+msgstr "%s: bitti."
 
 #: vfs/undelfs.c:316
-msgid "undelfs: failure"
-msgstr "undelfs: baþarýsýz"
+msgid "%s: failure"
+msgstr "%s: baþarýsýz"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "

@@ -4853,12 +4853,12 @@ msgstr ""
 " %s \n"
 
 #: vfs/undelfs.c:313
-msgid "undelfs: done."
-msgstr "undelfs: 끝남."
+msgid "%s: done."
+msgstr "%s: 끝남."
 
 #: vfs/undelfs.c:316
-msgid "undelfs: failure"
-msgstr "undelfs: 실패"
+msgid "%s: failure"
+msgstr "%s: 실패"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "

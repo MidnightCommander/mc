@@ -4933,12 +4933,12 @@ msgstr ""
 " %s \n"
 
 #: vfs/undelfs.c:313
-msgid "undelfs: done."
-msgstr "undelfs: готово."
+msgid "%s: done."
+msgstr "%s: готово."
 
 #: vfs/undelfs.c:316
-msgid "undelfs: failure"
-msgstr "undelfs: неуспех"
+msgid "%s: failure"
+msgstr "%s: неуспех"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "

@@ -8922,13 +8922,13 @@ msgstr ""
 
 # vfs/undelfs.c:315
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
-msgstr "undelfs: 完成."
+msgid "%s: done."
+msgstr "%s: 完成."
 
 # vfs/undelfs.c:318
 #: vfs/undelfs.c:318
-msgid "undelfs: failure"
-msgstr "undelfs: 失敗"
+msgid "%s: failure"
+msgstr "%s: 失敗"
 
 # vfs/undelfs.c:342
 #: vfs/undelfs.c:342

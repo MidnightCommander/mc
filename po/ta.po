@@ -6721,11 +6721,11 @@ msgid ""
 msgstr ""
 
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
+msgid "%s: done."
 msgstr ""
 
 #: vfs/undelfs.c:318
-msgid "undelfs: failure"
+msgid "%s: failure"
 msgstr ""
 
 #: vfs/undelfs.c:342

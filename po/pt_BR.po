@@ -8384,14 +8384,14 @@ msgstr ""
 " %s \n"
 
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
-msgstr "undelfs: feito."
+msgid "%s: done."
+msgstr "%s: feito."
 
 # src/file.c:1997 src/file.c:2081
 #
 #: vfs/undelfs.c:318
-msgid "undelfs: failure"
-msgstr "undelfs: falha"
+msgid "%s: failure"
+msgstr "%s: falha"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "

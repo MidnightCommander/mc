@@ -4855,12 +4855,12 @@ msgid ""
 msgstr " '%s' からブロックビットマップをロード出来ませんでした\n"
 
 #: vfs/undelfs.c:313
-msgid "undelfs: done."
-msgstr "undelfs: 完了"
+msgid "%s: done."
+msgstr "%s: 完了"
 
 #: vfs/undelfs.c:316
-msgid "undelfs: failure"
-msgstr "undelfs: 失敗"
+msgid "%s: failure"
+msgstr "%s: 失敗"
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "

@@ -6397,13 +6397,13 @@ msgstr ""
 
 # vfs/undelfs.c:315
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
-msgstr "undelfs: izdarîts."
+msgid "%s: done."
+msgstr "%s: izdarîts."
 
 # vfs/undelfs.c:318
 #: vfs/undelfs.c:318
-msgid "undelfs: failure"
-msgstr "undelfs: neveiksme"
+msgid "%s: failure"
+msgstr "%s: neveiksme"
 
 # vfs/undelfs.c:342
 #: vfs/undelfs.c:342

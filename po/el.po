@@ -6742,12 +6742,12 @@ msgid ""
 msgstr ""
 
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
+msgid "%s: done."
 msgstr ""
 
 #: vfs/undelfs.c:318
 #, fuzzy
-msgid "undelfs: failure"
+msgid "%s: failure"
 msgstr "ftpfs: αποτυχία"
 
 #: vfs/undelfs.c:342

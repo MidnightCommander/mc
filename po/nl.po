@@ -4897,12 +4897,12 @@ msgstr ""
 "%s niet laden\n"
 
 #: vfs/undelfs.c:313
-msgid "undelfs: done."
-msgstr "undelfs: voltooid."
+msgid "%s: done."
+msgstr "%s: voltooid."
 
 #: vfs/undelfs.c:316
-msgid "undelfs: failure"
-msgstr " undelfs: fout "
+msgid "%s: failure"
+msgstr " %s: fout "
 
 #: vfs/undelfs.c:340
 msgid " vfs_info is not fs! "

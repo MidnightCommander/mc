@@ -7009,12 +7009,12 @@ msgstr ""
 " %s \n"
 
 #: vfs/undelfs.c:315
-msgid "undelfs: done."
-msgstr "undelfs: am terminat scanarea."
+msgid "%s: done."
+msgstr "%s: am terminat scanarea."
 
 #: vfs/undelfs.c:318
-msgid "undelfs: failure"
-msgstr "undelfs: eºec"
+msgid "%s: failure"
+msgstr "%s: eºec"
 
 #: vfs/undelfs.c:342
 msgid " vfs_info is not fs! "
