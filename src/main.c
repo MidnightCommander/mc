@@ -707,11 +707,11 @@ restore_console (void)
 void
 exec_shell ()
 {
-    do_execute (shell, 0, 1);
+    do_execute (shell, 0, 0);
 }
 
 void
-do_execute (const char *shell, const char *command, int internal_command)
+do_execute (const char *shell, const char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     char *new_dir = NULL;
@@ -732,13 +732,13 @@ do_execute (const char *shell, const char *command, int internal_command)
 #ifndef __os2__
     unlink (control_file);
 #endif
-    if (!use_subshell && !internal_command){
+    if (!use_subshell && !(flags & EXECUTE_INTERNAL)){
 	printf ("%s%s%s\n", last_paused ? "\r\n":"", prompt, command);
 	last_paused = 0;
     }
 
 #ifdef HAVE_SUBSHELL_SUPPORT
-    if (use_subshell && !internal_command){
+    if (use_subshell && !(flags & EXECUTE_INTERNAL)){
 	do_update_prompt ();
 
 	/* We don't care if it died, higher level takes care of this */
@@ -749,10 +749,10 @@ do_execute (const char *shell, const char *command, int internal_command)
 #endif
     } else
 #endif
-	my_system (!internal_command, shell, command);
+	my_system (flags, shell, command);
 
 #ifndef HAVE_GNOME
-    if (!internal_command){
+    if (!(flags & EXECUTE_INTERNAL)){
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
 	     !xterm_flag && !console_flag)) && !quit){
@@ -799,17 +799,17 @@ do_execute (const char *shell, const char *command, int internal_command)
 
 /* Executes a command */
 void
-shell_execute (char *command, int internal)
+shell_execute (char *command, int flags)
 {
 #ifdef HAVE_SUBSHELL_SUPPORT
     if (use_subshell)
         if (subshell_state == INACTIVE || force_subshell_execution)
-	    do_execute (shell, command, internal);
+	    do_execute (shell, command, flags | EXECUTE_AS_SHELL);
 	else
 	    message (1, MSG_ERROR, _(" The shell is already running a command "));
     else
 #endif
-	do_execute (shell, command, internal);
+	do_execute (shell, command, flags | EXECUTE_AS_SHELL);
 }
 
 void

@@ -291,7 +291,6 @@ static int menubar_handle_key (WMenu *menubar, int key)
 	const int selected = menubar->selected;
 	const Menu menu = menubar->menu [selected];
 	const int items = menu->count;
-	char m;
 	
 	for (i = 0; i < items; i++){
 	    if (!menu->entries [i].call_back)

@@ -1,3 +1,8 @@
+1998-04-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* ftpfs.c (retrieve_file_start2): Open file exclusively.
+	(retrieve_file): likewise.
+
 1998-03-31  Philippe De Muyter <phdm@macqel.be>
 
 	* vfs.h: compilation fix for m68k-motorola-sysv

@@ -102,7 +102,6 @@ int max_dirt_limit =
 
 /* Our callback */
 static int view_callback (Dlg_head *h, WView *view, int msg, int par);
-static void move_forward (WView *view, int i);
 
 /* If set, show a ruler */
 int ruler = 0;

@@ -30,7 +30,7 @@ void do_execute (const char *shell, const char *command, int internal_command);
 #define execute_internal(command,args) do_execute (command, args, 1)
 
 /* Execute functions that use the shell to execute */
-void shell_execute (char *command, int internal_command);
+void shell_execute (char *command, int flags);
 void execute (char *command);
 
 /* This one executes a shell */
@@ -183,6 +183,9 @@ int  do_panel_cd           (WPanel *panel, char *new_dir, enum cd_enum cd_type);
 #endif
 
 #endif
+
+void edition_pre_exec (void);
+void edition_post_exec (void);
 
 #ifdef OS2_NT
 #    define MC_BASE ""

@@ -1630,7 +1630,7 @@ int retrieve_file_start(struct ftpentry *fe)
 
 int retrieve_file_start2(struct ftpentry *fe)
 {
-    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+    remotelocal_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (remotelocal_handle == -1) {
 	ftpfserrno = EIO;
 	free(fe->local_filename);
@@ -1749,7 +1749,7 @@ int retrieve_file(struct ftpentry *fe)
 	ftpfserrno = ENOMEM;
 	return 0;
     }
-    local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC, 0600);
+    local_handle = open(fe->local_filename, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600);
     if (local_handle == -1) {
 	ftpfserrno = EIO;
 	free(fe->local_filename);
@@ -1911,8 +1911,7 @@ _get_file_entry(struct ftpfs_connection *bucket, char *file_name,
 			    ftpfserrno = ENOMEM;
 			    return NULL;
 			}
-			handle = open(ent->local_filename, O_CREAT | O_TRUNC | 
-				 O_RDWR, 0600);
+			handle = open(ent->local_filename, O_CREAT | O_TRUNC | O_RDWR | O_EXCL, 0600);
 			if (handle < 0) {
 			    ftpfserrno = EIO;
 			    return NULL;

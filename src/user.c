@@ -26,7 +26,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <errno.h>
-
+#include <fcntl.h>
 #include "mad.h"
 #include "util.h"
 #include "global.h"
@@ -491,6 +491,7 @@ void execute_menu_command (char *s)
 {
     char *commands;
     FILE *cmd_file;
+    int  cmd_file_fd;
     int  expand_prefix_found = 0;
     int parameter_found = 0;
     int do_quote;
@@ -502,11 +503,12 @@ void execute_menu_command (char *s)
     /* OS/2 and NT requires the command to end in .cmd */
     file_name = copy_strings (file_name, ".cmd", NULL);
 #endif
-    if ((cmd_file = fopen (file_name, "w+")) == NULL){
+    if ((cmd_file_fd = open (file_name, O_RDWR | O_CREAT | O_TRUNC | O_EXCL, 0600)) == -1){
 	message (1, MSG_ERROR, _(" Can't create temporary command file \n %s "),
 		 unix_error_string (errno));
 	return;
     }
+    cmd_file = fdopen (cmd_file_fd, "w");
     commands = strchr (s, '\n');
     if (!commands){
 	fclose (cmd_file);
