@@ -1,22 +1,20 @@
--*-text-*-
-
 Read the INSTALL file for the complete instructions. 
 
-   GNU Midnight Commander requires glib.  Currently only the 1.2.x
-series are supported.  You may already have glib installed, but if you
+GNU Midnight Commander requires glib.  Currently only the 1.2.x series
+are fully supported.  You may already have glib installed, but if you
 don't, take it from ftp://ftp.gtk.org/pub/gtk/v1.2/
 
-   GNU Midnight Commander by default will use the S-Lang screen manager.
-It tries the S-Lang library installed on the system, but if it's not
-found, the included S-Lang sources are used.  It is also possible to
-use ncurses as the screen manager.
+GNU Midnight Commander uses the S-Lang screen library by default. It
+tries the S-Lang library installed on the system.  If it's not found,
+the included S-Lang sources are used.  It is also possible to use
+ncurses as the screen library.
 
 1. Configure the package for your system.
 
-   Normally, you just `cd' to the package main directory and type
+Normally, you just `cd' to the package main directory and type
 `./configure'.
 
-   The most often needed options to configure are following:
+The most often needed options to configure are following:
 
 `--prefix=PATH'
 	By default, `make install' will install the package's files
@@ -27,9 +25,9 @@ use ncurses as the screen manager.
 	giving `configure' the option `--prefix=PATH'.
 
 `--with-included-slang'
-	Don't try the S-Lang library installed in the system - use the
-	included S-Lang sources.  The included library is rather old,
-	by it works very well on many terminals.
+	Use the included S-Lang sources rather than any installed
+	S-Lang library.  The included library is rather old, but it
+	works fine on most terminals.
    
 `--with-ncurses[=PATH]'
 	Use the flag without =PATH if you want to compile with ncurses
@@ -46,19 +44,24 @@ use ncurses as the screen manager.
 	and gpm.h files respectively.  Note that GPM is only available on
 	GNU/Linux systems.
 
-   You may also want to specify CFLAGS for the compiler, even if it finds
-   itself some defaults by typing e.g.
+You may also want to specify CFLAGS for the compiler, even if it finds
+itself some defaults by typing e.g.
 
-   `CFLAGS=-O2 ./configure'
+./configure CFLAGS=-O3
 
 2. Type `make' to compile the package.
 
-3. Type `make install' (as root) to install programs, data files, and
-documentation.  If you're on a GNU/Linux system, this will install the
-`cons.saver' utility, which allows the Midnight Commander to save and
-restore the screen contents.  If you're making a mc binary distribution
-for other people and want to tar the whole binary later, you may want
-to specify `make install DESTDIR=PATH', which will make PATH the root
-for installation.
+3. Type `make install' to install programs, data files, and
+documentation.  You may need to run this command as root.
+
+If you're on a GNU/Linux system, this will install the `cons.saver'
+utility, which allows the Midnight Commander to save and restore the
+screen contents.  This utility can be installed setuid root, but it's
+only needed on systems where users cannot access /dev/vcsaN, where N is
+the virtual console number, on which the uses is logged on.
+
+If you're making a mc binary distribution for other people and want to
+package the whole installed tree, use `make install DESTDIR=PATH', which
+will make PATH the root for installation.
 
 4. Type `mc' and enjoy!
