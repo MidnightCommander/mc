@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.51\n"
-"POT-Creation-Date: 2001-04-16 12:45-0400\n"
+"POT-Creation-Date: 2001-05-07 15:17+0200\n"
 "PO-Revision-Date: 2000-09-01 03:29+1\n"
-"Last-Translator: Marco Ciampa <ciampa@ismaa.it>\n"
+"Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -883,7 +883,7 @@ msgstr "_Inverti selezione file"
 msgid "Reverses the list of tagged files"
 msgstr "Inverti la selezione file"
 
-#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2081
+#: gnome/glayout.c:412 gtkedit/editwidget.c:1143 src/view.c:2075
 msgid "Search"
 msgstr "Cerca"
 
@@ -1216,7 +1216,7 @@ msgid "Use default View action"
 msgstr "Usa operazione di Vista predefinita"
 
 #: gnome/gnome-file-property-dialog.c:523 gnome/gpopup2.c:289
-#: src/screen.c:2396 src/screen.c:2426 src/view.c:2077
+#: src/screen.c:2396 src/screen.c:2426 src/view.c:2071
 msgid "Edit"
 msgstr "Cambia"
 
@@ -1633,7 +1633,7 @@ msgstr "Posizione:"
 #: gtkedit/editcmd.c:1328 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:276 src/boxes.c:376 src/boxes.c:464
 #: src/boxes.c:644 src/boxes.c:726 src/boxes.c:781 src/boxes.c:896
-#: src/filegui.c:824 src/find.c:176 src/layout.c:375 src/option.c:143
+#: src/filegui.c:824 src/find.c:173 src/layout.c:375 src/option.c:143
 #: src/wtools.c:290 src/wtools.c:563 vfs/smbfs.c:118
 msgid "&Ok"
 msgstr "&Ok"
@@ -1643,12 +1643,12 @@ msgstr "&Ok"
 msgid "Offset 0x%08lx"
 msgstr "Offset: 0x%08lx"
 
-#: gnome/gview.c:138 src/view.c:732
+#: gnome/gview.c:138 src/view.c:724
 #, c-format
 msgid "Col %d"
 msgstr "Col %d"
 
-#: gnome/gview.c:142 src/view.c:736
+#: gnome/gview.c:142 src/view.c:728
 #, c-format
 msgid "%s bytes"
 msgstr "%s byte"
@@ -1828,7 +1828,7 @@ msgstr "Menu utente disponibile solo in mcedit se chiamato da mc"
 msgid "Error trying to stat file:"
 msgstr "Errore nel provare lo stat del file:"
 
-#: gtkedit/editcmd.c:168 src/cmd.c:1212 src/tree.c:654 src/view.c:1821
+#: gtkedit/editcmd.c:168 src/cmd.c:1212 src/tree.c:654 src/view.c:1815
 msgid "mc.hlp"
 msgstr "mc.hlp"
 
@@ -1858,9 +1858,9 @@ msgstr "Fai i backup -->"
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:277 src/boxes.c:374
 #: src/boxes.c:462 src/boxes.c:642 src/boxes.c:725 src/boxes.c:779
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:867 src/filegui.c:807
-#: src/find.c:176 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
+#: src/find.c:173 src/hotlist.c:138 src/hotlist.c:799 src/hotlist.c:896
 #: src/layout.c:376 src/learn.c:59 src/option.c:144 src/panelize.c:86
-#: src/view.c:407 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
+#: src/view.c:399 src/wtools.c:111 src/wtools.c:386 src/wtools.c:561
 #: vfs/smbfs.c:118
 msgid "&Cancel"
 msgstr "&Cancella"
@@ -1881,7 +1881,7 @@ msgstr " Salva con nome "
 #: gtkedit/editcmd.c:541 gtkedit/editcmd.c:865 gtkedit/editcmd.c:890
 #: gtkedit/editcmd.c:1041 gtkedit/editcmd.c:1139 src/ext.c:315 src/file.c:619
 #: src/help.c:318 src/main.c:714 src/screen.c:1448 src/screen.c:2125
-#: src/screen.c:2175 src/subshell.c:706 src/subshell.c:732 src/utilunix.c:382
+#: src/screen.c:2175 src/subshell.c:721 src/subshell.c:747 src/utilunix.c:382
 #: src/utilunix.c:386 src/utilunix.c:406 src/utilunix.c:457 vfs/mcfs.c:167
 msgid " Warning "
 msgstr " Attenzione "
@@ -1962,7 +1962,7 @@ msgid " Save file "
 msgstr " Salva il file "
 
 #: gtkedit/editcmd.c:839 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
-#: src/view.c:2073
+#: src/view.c:2067
 msgid "Save"
 msgstr "Salva"
 
@@ -2054,7 +2054,7 @@ msgstr " Ordine dell'argomento di sostituzione es. 3,2,1,4 "
 msgid " Enter replacement string:"
 msgstr " Inserire stringa di sostituzione:"
 
-#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1992
+#: gtkedit/editcmd.c:1269 gtkedit/editcmd.c:1342 src/view.c:1986
 msgid " Enter search string:"
 msgstr " Inserire stringa di ricerca"
 
@@ -2066,8 +2066,8 @@ msgstr " Sostituisci "
 
 #. Heads the 'Search' dialog box
 #: gtkedit/editcmd.c:1356 gtkedit/editcmd.c:1586 gtkedit/editcmd.c:2321
-#: gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351 src/view.c:1518
-#: src/view.c:1615 src/view.c:1738 src/view.c:1956 src/view.c:1992
+#: gtkedit/editcmd.c:2323 gtkedit/editcmd.c:2351 src/view.c:1512
+#: src/view.c:1609 src/view.c:1732 src/view.c:1950 src/view.c:1986
 msgid " Search "
 msgstr " Cerca "
 
@@ -2247,13 +2247,13 @@ msgstr "Annulla uscita"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:590 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
 msgid "&Yes"
 msgstr " &Sì"
 
 #: gtkedit/editcmd.c:2391 src/cmd.c:249 src/file.c:1882 src/file.c:2253
 #: src/filegui.c:589 src/hotlist.c:1020 src/main.c:869 src/screen.c:2162
-#: src/subshell.c:707 src/subshell.c:733 src/tree.c:745 src/view.c:407
+#: src/subshell.c:722 src/subshell.c:748 src/tree.c:745 src/view.c:399
 msgid "&No"
 msgstr "&No"
 
@@ -2283,7 +2283,7 @@ msgid " Cut to clipboard "
 msgstr " Taglia nella clipboard "
 
 #: gtkedit/editcmd.c:2737 gtkedit/editcmd.c:2741 gtkedit/editcmd.c:2746
-#: gtkedit/editcmd.c:2749 src/view.c:1903
+#: gtkedit/editcmd.c:2749 src/view.c:1897
 msgid " Goto line "
 msgstr " Vai alla linea "
 
@@ -2837,7 +2837,7 @@ msgstr "Errore nell'inizializzazione editor.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1735 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
-#: src/view.c:2066
+#: src/view.c:2060
 msgid "Help"
 msgstr "Aiuto"
 
@@ -2855,7 +2855,7 @@ msgstr "Menu"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1738 src/view.c:2068 src/view.c:2090
+#: src/main.c:1738 src/view.c:2062 src/view.c:2084
 msgid "Quit"
 msgstr "Esci"
 
@@ -3166,7 +3166,7 @@ msgstr "Modalità visualizzazione"
 msgid "&Reverse"
 msgstr "inve&Rti"
 
-#: src/boxes.c:279 src/find.c:169
+#: src/boxes.c:279 src/find.c:166
 msgid "case sensi&tive"
 msgstr "controlla maiuscole/minuscole"
 
@@ -3255,7 +3255,7 @@ msgstr "Coll. simbolico"
 msgid "Running "
 msgstr "Attivo "
 
-#: src/boxes.c:832 src/find.c:732 src/find.c:973
+#: src/boxes.c:832 src/find.c:721 src/find.c:962
 msgid "Stopped"
 msgstr "Sospeso "
 
@@ -4341,7 +4341,7 @@ msgstr "%o %f \"%s\"%e"
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
-#: src/file.c:1707 vfs/fish.c:509
+#: src/file.c:1707 vfs/fish.c:515
 msgid "file"
 msgstr "file"
 
@@ -4562,114 +4562,114 @@ msgstr ""
 "Formato sorgente non valido `%s' \n"
 " %s "
 
-#: src/find.c:130
+#: src/find.c:127
 msgid "&Suspend"
 msgstr "&Sospende"
 
-#: src/find.c:131
+#: src/find.c:128
 msgid "Con&tinue"
 msgstr "Con&tinua"
 
-#: src/find.c:132
+#: src/find.c:129
 msgid "&Chdir"
 msgstr "&Chdir"
 
-#: src/find.c:133
+#: src/find.c:130
 msgid "&Again"
 msgstr "&Ripete"
 
-#: src/find.c:134
+#: src/find.c:131
 msgid "&Quit"
 msgstr "&Uscita"
 
-#: src/find.c:135 src/panelize.c:89
+#: src/find.c:132 src/panelize.c:89
 msgid "Pane&lize"
 msgstr "&Pannellizza"
 
-#: src/find.c:136
+#: src/find.c:133
 msgid "&View - F3"
 msgstr "&Visualizza - F3"
 
-#: src/find.c:137
+#: src/find.c:134
 msgid "&Edit - F4"
 msgstr "&Modifica - F4"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Start at:"
 msgstr "Inizia a:"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Filename:"
 msgstr "Nome file:"
 
-#: src/find.c:175
+#: src/find.c:172
 msgid "Content: "
 msgstr "Contenuto: "
 
-#: src/find.c:176 src/main.c:1251 src/main.c:1275
+#: src/find.c:173 src/main.c:1251 src/main.c:1275
 msgid "&Tree"
 msgstr "&Albero"
 
-#: src/find.c:230
+#: src/find.c:227
 msgid "Find File"
 msgstr "Trova file"
 
-#: src/find.c:465
+#: src/find.c:455
 #, c-format
 msgid "Grepping in %s"
 msgstr "Cercando in %s"
 
-#: src/find.c:503
+#: src/find.c:492
 msgid " Find/read "
 msgstr " Trova/leggi "
 
-#: src/find.c:503
+#: src/find.c:492
 msgid " Problem reading from child "
 msgstr " Problema leggendo dal processo figlio "
 
-#: src/find.c:550
+#: src/find.c:539
 msgid "Finished"
 msgstr "Terminato"
 
-#: src/find.c:574 src/view.c:1518
+#: src/find.c:563 src/view.c:1512
 #, c-format
 msgid "Searching %s"
 msgstr "Cercando %s"
 
-#: src/find.c:730 src/find.c:770
+#: src/find.c:719 src/find.c:759
 msgid "Suspend"
 msgstr "Sospende"
 
-#: src/find.c:730
+#: src/find.c:719
 msgid "Restart"
 msgstr "Riavvia"
 
-#: src/find.c:732 src/find.c:834 src/find.c:973 src/find.c:1069
+#: src/find.c:721 src/find.c:823 src/find.c:962 src/find.c:1058
 msgid "Searching"
 msgstr "Cercando"
 
-#: src/find.c:763 src/find.c:1044
+#: src/find.c:752 src/find.c:1033
 msgid "Find file"
 msgstr "Trova file"
 
 #. The buttons
-#: src/find.c:768
+#: src/find.c:757
 msgid "Change to this directory"
 msgstr "Cambia a questa directory"
 
-#: src/find.c:769
+#: src/find.c:758
 msgid "Search again"
 msgstr "Cerca ancora"
 
-#: src/find.c:774
+#: src/find.c:763
 msgid "View this file"
 msgstr "Mostra questo file"
 
-#: src/find.c:775
+#: src/find.c:764
 msgid "Edit this file"
 msgstr "Modifica questo file"
 
-#: src/find.c:776
+#: src/find.c:765
 msgid "Send the results to a Panel"
 msgstr "Mando il risultato su un pannello"
 
@@ -5983,24 +5983,24 @@ msgstr ""
 " Non posso entrare in `%s' \n"
 " %s "
 
-#: src/subshell.c:287
+#: src/subshell.c:297
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Non posso aprire la pipe %s\n"
 
-#: src/subshell.c:706
+#: src/subshell.c:721
 msgid " The shell is still active. Quit anyway? "
 msgstr " La shell è ancora attiva. Esco comunque?"
 
-#: src/subshell.c:732
+#: src/subshell.c:747
 msgid " There are stopped jobs."
 msgstr " Esistono processi latenti."
 
-#: src/subshell.c:733
+#: src/subshell.c:748
 msgid " Quit anyway? "
 msgstr " Esco comunque?? "
 
-#: src/subshell.c:798
+#: src/subshell.c:813
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
@@ -6149,7 +6149,7 @@ msgstr " Pipe fallita "
 msgid " Dup failed "
 msgstr " Dup fallita "
 
-#: src/view.c:404
+#: src/view.c:396
 msgid ""
 "File: \n"
 "\n"
@@ -6159,7 +6159,7 @@ msgstr ""
 "\n"
 "    "
 
-#: src/view.c:405
+#: src/view.c:397
 msgid ""
 "\n"
 "\n"
@@ -6169,37 +6169,37 @@ msgstr ""
 "\n"
 "è stato modificato, vuoi salvare i cambiamenti?\n"
 
-#: src/view.c:407
+#: src/view.c:399
 msgid " Save changes "
 msgstr " Salva modifiche "
 
-#: src/view.c:449
+#: src/view.c:441
 msgid " Can't spawn child program "
 msgstr " Non posso eseguire il processo figlio "
 
-#: src/view.c:458
+#: src/view.c:450
 msgid " Empty output from child filter "
 msgstr " Output nullo dal filtro figlio "
 
-#: src/view.c:463
+#: src/view.c:455
 msgid " Could not open file "
 msgstr " Non posso aprire il file "
 
-#: src/view.c:478
+#: src/view.c:470
 msgid " Can't open file \""
 msgstr " Non posso aprire il file \""
 
-#: src/view.c:485
+#: src/view.c:477
 msgid ""
 " Can't stat file \n"
 " "
 msgstr "Non posso avere informazioni sul file "
 
-#: src/view.c:491
+#: src/view.c:483
 msgid " Can't view: not a regular file "
 msgstr " Non posso vederlo: non è un file regolare "
 
-#: src/view.c:572
+#: src/view.c:564
 #, c-format
 msgid ""
 " Can't open \"%s\"\n"
@@ -6208,7 +6208,7 @@ msgstr ""
 " Non posso aprire il file %s \n"
 " %s "
 
-#: src/view.c:581
+#: src/view.c:573
 #, c-format
 msgid ""
 " Can't stat \"%s\"\n"
@@ -6217,34 +6217,34 @@ msgstr ""
 " Non riesco a verificare il file %s \n"
 " %s "
 
-#: src/view.c:716
+#: src/view.c:708
 #, c-format
 msgid "File: %s"
 msgstr "File: %s"
 
-#: src/view.c:730
+#: src/view.c:722
 #, c-format
 msgid "Offset 0x%08x"
 msgstr "Offset: 0x%08x"
 
-#: src/view.c:741
+#: src/view.c:733
 msgid "  [grow]"
 msgstr "  [grow]"
 
-#: src/view.c:1510
+#: src/view.c:1502
 #, c-format
 msgid "Searching for `%s'"
 msgstr "Sto cercando `%s'"
 
-#: src/view.c:1615 src/view.c:1738
+#: src/view.c:1609 src/view.c:1732
 msgid " Search string not found "
 msgstr " La stringa cercata non è disponibile "
 
-#: src/view.c:1777
+#: src/view.c:1771
 msgid " Invalid regular expression "
 msgstr " Espressione regolare errata "
 
-#: src/view.c:1901
+#: src/view.c:1895
 #, c-format
 msgid ""
 " The current line number is %d.\n"
@@ -6253,7 +6253,7 @@ msgstr ""
 " La linea corrente è %d.\n"
 " Inserisci nuovo numero di linea:"
 
-#: src/view.c:1923
+#: src/view.c:1917
 #, c-format
 msgid ""
 " The current address is 0x%lx.\n"
@@ -6262,67 +6262,67 @@ msgstr ""
 " L'indirizzo corrente è 0x%lx.\n"
 " Inserisci il nuovo indirizzo:"
 
-#: src/view.c:1925
+#: src/view.c:1919
 msgid " Goto Address "
 msgstr " Vai all'indirizzo "
 
-#: src/view.c:1956
+#: src/view.c:1950
 msgid " Enter regexp:"
 msgstr " Inserisci espressione regolare:"
 
-#: src/view.c:2069
+#: src/view.c:2063
 msgid "Ascii"
 msgstr "Ascii"
 
-#: src/view.c:2069
+#: src/view.c:2063
 msgid "Hex"
 msgstr "Hex"
 
-#: src/view.c:2070
+#: src/view.c:2064
 msgid "Goto"
 msgstr "Vai a"
 
-#: src/view.c:2070
+#: src/view.c:2064
 msgid "Line"
 msgstr "Linea"
 
-#: src/view.c:2073
+#: src/view.c:2067
 msgid "RxSrch"
 msgstr "CercaRx"
 
-#: src/view.c:2076
+#: src/view.c:2070
 msgid "EdText"
 msgstr "EdText"
 
-#: src/view.c:2076
+#: src/view.c:2070
 msgid "EdHex"
 msgstr "EdHex"
 
-#: src/view.c:2078
+#: src/view.c:2072
 msgid "UnWrap"
 msgstr "DesEnv"
 
-#: src/view.c:2078
+#: src/view.c:2072
 msgid "Wrap"
 msgstr "Envolver"
 
-#: src/view.c:2081
+#: src/view.c:2075
 msgid "HxSrch"
 msgstr "CercaHx"
 
-#: src/view.c:2084
+#: src/view.c:2078
 msgid "Raw"
 msgstr "Raw"
 
-#: src/view.c:2084
+#: src/view.c:2078
 msgid "Parse"
 msgstr "Processa"
 
-#: src/view.c:2088
+#: src/view.c:2082
 msgid "Unform"
 msgstr "Unformat"
 
-#: src/view.c:2088
+#: src/view.c:2082
 msgid "Format"
 msgstr "Formato"
 
@@ -6430,11 +6430,11 @@ msgstr "Freccia giu"
 
 #: src/win.c:248
 msgid "Left arrow key"
-msgstr "Freccia a sinistra"
+msgstr "Freccia sinistra"
 
 #: src/win.c:249
 msgid "Right arrow key"
-msgstr "Freccia a destra"
+msgstr "Freccia destra"
 
 #: src/win.c:250
 msgid "Home key"
@@ -6648,56 +6648,56 @@ msgstr "fish: Spedizione password..."
 msgid "fish: Sending initial line..."
 msgstr "fish: Spedizione linea iniziale..."
 
-#: vfs/fish.c:252
+#: vfs/fish.c:258
 msgid "fish: Handshaking version..."
 msgstr "fish: Versione Handshaking..."
 
-#: vfs/fish.c:256
+#: vfs/fish.c:262
 msgid "fish: Setting up current directory..."
 msgstr "fish: Impostazione directory corrente..."
 
-#: vfs/fish.c:258
+#: vfs/fish.c:264
 #, c-format
 msgid "fish: Connected, home %s."
 msgstr "fish: Connesso a %s"
 
-#: vfs/fish.c:347
+#: vfs/fish.c:353
 #, c-format
 msgid "fish: Reading directory %s..."
 msgstr "fish: Lettura directory FTP %s..."
 
-#: vfs/fish.c:451
+#: vfs/fish.c:457
 msgid "fish: failed"
 msgstr "fish: fallito"
 
 #. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
-#: vfs/fish.c:471
+#: vfs/fish.c:477
 #, c-format
 msgid "fish: store %s: sending command..."
 msgstr "fish: memorizza %s: spedizione comando..."
 
-#: vfs/fish.c:496
+#: vfs/fish.c:502
 msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Lettura locale fallita, spedizione zeri"
 
-#: vfs/fish.c:508
+#: vfs/fish.c:514
 #, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: memorizzazione %s %d (%d)"
 
-#: vfs/fish.c:509
+#: vfs/fish.c:515
 msgid "zeros"
 msgstr "zeri"
 
-#: vfs/fish.c:556
+#: vfs/fish.c:562
 msgid "Aborting transfer..."
 msgstr "Interruzione trasferimento..."
 
-#: vfs/fish.c:565
+#: vfs/fish.c:571
 msgid "Error reported after abort."
 msgstr "Errori dopo l'interruzione."
 
-#: vfs/fish.c:567
+#: vfs/fish.c:573
 msgid "Aborted transfer would be successful."
 msgstr "L'interruzione trasferimento sarebbe riuscita."
 
