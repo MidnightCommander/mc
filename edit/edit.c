@@ -2700,31 +2700,38 @@ void user_menu (WEdit *edit)
     /* run shell scripts from menu */     
     user_menu_cmd (edit);
     
-    if (mc_stat (error_file, &status) == 0) {
-        if (!status.st_size) {	/* no error messages */
-	    if (mc_stat (block_file, &status) == 0)
-    		if (!status.st_size)
-		    return;  /* no block messages */
-            if (! nomark) /* i.e. we have marked block */
-                rc = edit_block_delete_cmd(edit);
-            if (!rc) {
-                edit_cursor_to_bol (edit);
-                edit_insert_file (edit, block_file);
-                edit_cursor_to_eol (edit);
-                if ((fd = fopen (block_file, "w"))) fclose(fd);
-            }
-        } else { /* it is error */
-                edit_cursor_to_bol (edit);
-		edit_insert_file (edit, error_file);
-		if ((fd = fopen (error_file, "w"))) fclose(fd);
-		if ((fd = fopen (block_file, "w"))) fclose(fd);
-        }
+    if (mc_stat (error_file, &status) != 0 || !status.st_size) {
+	/* no error messages */
+	if (mc_stat (block_file, &status) != 0 || !status.st_size) {
+	    /* no block messages */
+	    return;
+	}
+
+	if (! nomark) {
+	    /* i.e. we have marked block */
+	    rc = edit_block_delete_cmd(edit);
+	}
+
+	if (!rc) {
+	    edit_cursor_to_bol (edit);
+	    edit_insert_file (edit, block_file);
+	    edit_cursor_to_eol (edit);
+	}
     } else {
-	edit_error_dialog ("",
-        get_sys_error (catstrs (_ ("Error trying to stat file:"),
-	    						    error_file, 0)));
-        return;
+	/* error file exists and is not empty */
+	edit_cursor_to_bol (edit);
+	edit_insert_file (edit, error_file);
+
+	/* truncate error file */
+	if ((fd = fopen (error_file, "w")))
+	    fclose(fd);
     }
+
+    /* truncate block file */
+    if ((fd = fopen (block_file, "w"))) {
+	fclose(fd);
+    }
+
     edit_refresh_cmd (edit);
     edit->force |= REDRAW_COMPLETELY;
     return;
