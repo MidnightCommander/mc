@@ -287,10 +287,10 @@ mc_message (int flags, char *title, const char *text, ...)
 	if (title == MSG_ERROR)
 	    title = _("Error");
 	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
-		     strlen (title), title, strlen (text), text);
+		     strlen (title), title, strlen (p), p);
     } else
 #endif				/* WITH_BACKGROUND */
-	message (flags, title, "%s", text);
+	message (flags, title, "%s", p);
 
     g_free (p);
 }

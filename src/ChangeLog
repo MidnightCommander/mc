@@ -1,5 +1,7 @@
 2003-10-25  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (mc_message): Fix argument expansion.
+
 	* background.c: Leave only code used when WITH_BACKGROUND is
 	defined. The rest goes ...
 	* wtools.c: ... here.
