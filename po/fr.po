@@ -5,8 +5,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.39-pre6\n"
-"POT-Creation-Date: 1999-09-21 11:50+0200\n"
+"Project-Id-Version: mc 4.5.39-pre8\n"
+"POT-Creation-Date: 1999-09-22 19:46+0200\n"
 "PO-Revision-Date: 1998-03-27 01:22+0100\n"
 "Last-Translator: Vincent Renardias <vincent@ldsol.com>\n"
 "Language-Team: GNOME French Team <gnomefr@gnomefr.traduc.org>\n"
@@ -211,7 +211,7 @@ msgid "Set Filter"
 msgstr "Définir le filtre"
 
 #: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
-#: gnome/gscreen.c:2406
+#: gnome/gscreen.c:2416
 msgid "Show all files"
 msgstr "Montrer tous les fichiers"
 
@@ -361,19 +361,19 @@ msgstr "Avertissement"
 msgid "Could not open %s; will not have desktop icons"
 msgstr "Impossible d'ouvrir %s ; il n'y aura pas d'icône sur le bureau"
 
-#: gnome/gdesktop.c:1179
+#: gnome/gdesktop.c:1176
 msgid "While running the mount/umount command"
 msgstr "Pendant l'exécution de la commande mount/umount"
 
-#: gnome/gdesktop.c:1248
+#: gnome/gdesktop.c:1245
 msgid "While running the eject command"
 msgstr "Pendant l'exécution de la commande eject"
 
-#: gnome/gdesktop.c:1432 gnome/gicon.c:218 gnome/gtools.c:46
+#: gnome/gdesktop.c:1429 gnome/gicon.c:218 gnome/gtools.c:46
 msgid "Error"
 msgstr "Erreur"
 
-#: gnome/gdesktop.c:2591
+#: gnome/gdesktop.c:2588
 msgid ""
 "Unable to locate the file:\n"
 "background-properties-capplet\n"
@@ -386,84 +386,84 @@ msgstr ""
 "dans votre chemin, et donc\n"
 "définir le fond d'écran."
 
-#: gnome/gdesktop.c:2614 gnome/glayout.c:362
+#: gnome/gdesktop.c:2611 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "_Terminal"
 
-#: gnome/gdesktop.c:2614 gnome/glayout.c:363
+#: gnome/gdesktop.c:2611 gnome/glayout.c:363
 msgid "Launch a new terminal in the current directory"
 msgstr "Démarrer un nouveau terminal dans le répertoire courant"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2616 gnome/glayout.c:365
+#: gnome/gdesktop.c:2613 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "_Répertoire..."
 
-#: gnome/gdesktop.c:2616 gnome/glayout.c:366
+#: gnome/gdesktop.c:2613 gnome/glayout.c:366
 msgid "Creates a new directory"
 msgstr "Crée un nouveau répertoire"
 
-#: gnome/gdesktop.c:2617
+#: gnome/gdesktop.c:2614
 msgid "URL L_ink..."
 msgstr "L_ien URL..."
 
-#: gnome/gdesktop.c:2617
+#: gnome/gdesktop.c:2614
 msgid "Creates a new URL link"
 msgstr "Crée un nouveau lien URL"
 
-#: gnome/gdesktop.c:2618
+#: gnome/gdesktop.c:2615
 msgid "_Launcher..."
 msgstr "_Lanceur..."
 
-#: gnome/gdesktop.c:2618
+#: gnome/gdesktop.c:2615
 msgid "Creates a new launcher"
 msgstr "Crée un nouveau lanceur"
 
-#: gnome/gdesktop.c:2624
+#: gnome/gdesktop.c:2621
 msgid "By _Name"
 msgstr "Par _nom"
 
-#: gnome/gdesktop.c:2625
+#: gnome/gdesktop.c:2622
 msgid "By File _Type"
 msgstr "Par _type de fichier"
 
-#: gnome/gdesktop.c:2626
+#: gnome/gdesktop.c:2623
 msgid "By _Size"
 msgstr "Par ta_ille "
 
-#: gnome/gdesktop.c:2627
+#: gnome/gdesktop.c:2624
 msgid "By Time Last _Accessed"
 msgstr "Par date de dernier _accès"
 
-#: gnome/gdesktop.c:2628
+#: gnome/gdesktop.c:2625
 msgid "By Time Last _Modified"
 msgstr "Par date de dernière _modification"
 
-#: gnome/gdesktop.c:2629
+#: gnome/gdesktop.c:2626
 msgid "By Time Last _Changed"
 msgstr "Par date de dernier _changement"
 
-#: gnome/gdesktop.c:2637 gnome/glayout.c:462
+#: gnome/gdesktop.c:2634 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "_Arranger les icônes"
 
-#: gnome/gdesktop.c:2638
+#: gnome/gdesktop.c:2635
 msgid "Create _New Window"
 msgstr "Créer une _nouvelle fenêtre"
 
-#: gnome/gdesktop.c:2640 gnome/glayout.c:464
+#: gnome/gdesktop.c:2637 gnome/glayout.c:464
 msgid "Rescan _Desktop Directory"
 msgstr "Rescanner le _bureau"
 
-#: gnome/gdesktop.c:2641 gnome/glayout.c:465
+#: gnome/gdesktop.c:2638 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "Rafraîchir les périphériques"
 
-#: gnome/gdesktop.c:2642 gnome/glayout.c:466
+#: gnome/gdesktop.c:2639 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "Recréer les _icônes par défaut"
 
-#: gnome/gdesktop.c:2644
+#: gnome/gdesktop.c:2641
 msgid "Configure _Background Image"
 msgstr "Configurer le _fond d'écran"
 
@@ -800,7 +800,7 @@ msgid "Creates a new file in this directory"
 msgstr "Crée un nouveau fichier dans ce répertoire"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:389 gnome/gscreen.c:2075
+#: gnome/glayout.c:389 gnome/gscreen.c:2085
 msgid "_Copy..."
 msgstr "_Copier..."
 
@@ -808,7 +808,7 @@ msgstr "_Copier..."
 msgid "Copy files"
 msgstr "Copie des fichiers"
 
-#: gnome/glayout.c:390 gnome/gscreen.c:2076
+#: gnome/glayout.c:390 gnome/gscreen.c:2086
 msgid "_Delete..."
 msgstr "_Effacer..."
 
@@ -816,7 +816,7 @@ msgstr "_Effacer..."
 msgid "Delete files"
 msgstr "Efface des fichiers"
 
-#: gnome/glayout.c:391 gnome/gscreen.c:2077
+#: gnome/glayout.c:391 gnome/gscreen.c:2087
 msgid "_Move..."
 msgstr "_Déplacer..."
 
@@ -872,7 +872,7 @@ msgstr "Rechercher"
 msgid "Search for a file in the current Panel"
 msgstr "Rechercher un fichier dans le panneau courant"
 
-#: gnome/glayout.c:411 gnome/gscreen.c:1416
+#: gnome/glayout.c:411 gnome/gscreen.c:1415
 msgid "_Rescan Directory"
 msgstr "_Rafraîchir le répertoire"
 
@@ -1265,21 +1265,21 @@ msgstr "Vous devez renommer votre fichier"
 msgid "You cannot rename a file to something containing a '/' character"
 msgstr "Un nom de fichier ne peut contenir le caractère '/'"
 
-#: gnome/gnome-open-dialog.c:384
+#: gnome/gnome-open-dialog.c:385
 #, c-format
 msgid "Select an application to open \"%s\" with."
 msgstr "Sélectionnez une application dans laquelle ouvrir \"%s\"."
 
-#: gnome/gnome-open-dialog.c:394
+#: gnome/gnome-open-dialog.c:395
 msgid "Select a file to run with"
 msgstr "Sélectionnez un fichier pour ouvrir avec"
 
 #. the file tree
-#: gnome/gnome-open-dialog.c:405
+#: gnome/gnome-open-dialog.c:406
 msgid "Applications"
 msgstr "Applications"
 
-#: gnome/gnome-open-dialog.c:421
+#: gnome/gnome-open-dialog.c:422
 msgid "Program to run"
 msgstr "Programme à lancer"
 
@@ -1456,98 +1456,98 @@ msgstr "Titre"
 msgid "Select icon"
 msgstr "Sélectionnez une icône"
 
-#: gnome/gscreen.c:1416
+#: gnome/gscreen.c:1415
 msgid "Reloads the current directory"
 msgstr "Recharger le répertoire courant"
 
-#: gnome/gscreen.c:1418
+#: gnome/gscreen.c:1417
 msgid "New _Directory..."
 msgstr "Nouveau _Répertoire..."
 
-#: gnome/gscreen.c:1418
+#: gnome/gscreen.c:1417
 msgid "Creates a new directory here"
 msgstr "Crée un nouveau répertoire ici"
 
-#: gnome/gscreen.c:1420
+#: gnome/gscreen.c:1419
 msgid "New _File..."
 msgstr "Nouveau _Fichier..."
 
-#: gnome/gscreen.c:1420
+#: gnome/gscreen.c:1419
 msgid "Creates a new file here"
 msgstr "Crée un nouveau fichier ici"
 
-#: gnome/gscreen.c:1621
+#: gnome/gscreen.c:1620
 #, c-format
 msgid "Search: %s"
 msgstr "Rechercher : %s"
 
-#: gnome/gscreen.c:1631
+#: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d file"
 msgstr " %s octets dans %d fichiers"
 
-#: gnome/gscreen.c:1631
+#: gnome/gscreen.c:1630
 #, c-format
 msgid "%s bytes in %d files"
 msgstr " %s octets dans %d fichiers"
 
-#: gnome/gscreen.c:1657 src/screen.c:688
+#: gnome/gscreen.c:1656 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<échec de readlink>"
 
-#: gnome/gscreen.c:2075
+#: gnome/gscreen.c:2085
 msgid "Copy directory"
 msgstr "Copier un répertoire"
 
-#: gnome/gscreen.c:2076
+#: gnome/gscreen.c:2086
 msgid "Delete directory"
 msgstr "Effacer un répertoire"
 
-#: gnome/gscreen.c:2077
+#: gnome/gscreen.c:2087
 msgid "Rename or move directory"
 msgstr "Renommer ou déplacer un répertoire"
 
-#: gnome/gscreen.c:2235
+#: gnome/gscreen.c:2245
 msgid "Back"
 msgstr "Retour"
 
-#: gnome/gscreen.c:2235
+#: gnome/gscreen.c:2245
 msgid "Go to the previously visited directory"
 msgstr "Retourner au répertoire visité précédement"
 
-#: gnome/gscreen.c:2237
+#: gnome/gscreen.c:2247
 msgid "Up"
 msgstr "Haut"
 
-#: gnome/gscreen.c:2237
+#: gnome/gscreen.c:2247
 msgid "Go up a level in the directory heirarchy"
 msgstr "Remonter d'un niveau dans la hiérarchie"
 
-#: gnome/gscreen.c:2239
+#: gnome/gscreen.c:2249
 msgid "Forward"
 msgstr "Avant"
 
-#: gnome/gscreen.c:2239
+#: gnome/gscreen.c:2249
 msgid "Go to the next directory"
 msgstr "Aller au répertoire suivant"
 
-#: gnome/gscreen.c:2242 src/tree.c:1010
+#: gnome/gscreen.c:2252 src/tree.c:1010
 msgid "Rescan"
 msgstr "Rafraîchir"
 
-#: gnome/gscreen.c:2242
+#: gnome/gscreen.c:2252
 msgid "Rescan the current directory"
 msgstr "Rafraîchir le répertoire courant"
 
-#: gnome/gscreen.c:2245
+#: gnome/gscreen.c:2255
 msgid "Home"
 msgstr "Rép. perso"
 
-#: gnome/gscreen.c:2245
+#: gnome/gscreen.c:2255
 msgid "Go to your home directory"
 msgstr "Aller à votre répertoire personnel"
 
-#: gnome/gscreen.c:2385
+#: gnome/gscreen.c:2395
 msgid "Location:"
 msgstr "Emplacement : "
 
@@ -6419,7 +6419,8 @@ msgstr "Mot de passe pour \\\\%s\\%s"
 msgid ""
 " reconnect to %s failed\n"
 " "
-msgstr " échec de la reconnexion à %s\n"
+msgstr ""
+" échec de la reconnexion à %s\n"
 " "
 
 #: vfs/smbfs.c:1737
