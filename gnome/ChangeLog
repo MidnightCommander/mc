@@ -1,5 +1,10 @@
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gdesktop.c (click_proxy_filter): Doh.  We may get DestroyNotify
+	for other windows than the proxy, so deal with it.
+
+1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
 	* gdesktop.c (click_proxy_button_press): Use a nice arrow cursor
 	for rubberbanding.
 	(click_proxy_filter): Keep a firm jaw when the window manager dies

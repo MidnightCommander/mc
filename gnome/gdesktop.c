@@ -1733,10 +1733,10 @@ click_proxy_filter (GdkXEvent *xevent, GdkEvent *event, gpointer data)
 		/* The proxy window was destroyed (i.e. the window manager
 		 * died), so we have to cope with it
 		 */
-		printf ("Proxy window destroyed!\n");
-		g_assert (((GdkEventAny *) event)->window == click_proxy_gdk_window);
-		gdk_window_destroy_notify (click_proxy_gdk_window);
-		click_proxy_gdk_window = NULL;
+		if (((GdkEventAny *) event)->window == click_proxy_gdk_window) {
+			gdk_window_destroy_notify (click_proxy_gdk_window);
+			click_proxy_gdk_window = NULL;
+		}
 
 		return GDK_FILTER_REMOVE;
 
