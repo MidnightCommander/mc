@@ -3008,7 +3008,7 @@ ESC).
 .PP
 .I only_leading_plus_minus
 .IP
-set special treatment for '+', '-', '*' in command line (select,
+Set special treatment for '+', '-', '*' in command line (select,
 unselect, reverse selection) only if command line is empty. No need to
 quote this characters in the middle of the command line. But we can not
 change selection when command line is not empty.
