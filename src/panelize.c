@@ -415,11 +415,7 @@ void do_external_panelize (char *command)
     } else {
 	cpanel->count = set_zero_dir (list);
     }
-#ifndef SCO_FLAVOR
     if (pclose (external) < 0)
-#else /* SCO_FLAVOR */
-    if (WEXITSTATUS(pclose (external)) < 0)
-#endif /* SCO_FLAVOR */
 	message (0, _("External panelize"), _("Pipe close failed"));
     close_error_pipe (0, 0);
     try_to_select (cpanel, NULL);

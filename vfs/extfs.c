@@ -403,9 +403,6 @@ read_archive (int fstype, char *name, struct archive **pparc)
     }
 
     close_error_pipe (1, NULL);
-#ifdef SCO_FLAVOR
-    waitpid (-1, NULL, WNOHANG);
-#endif				/* SCO_FLAVOR */
     *pparc = current_archive;
     g_free (buffer);
     return 0;

@@ -251,10 +251,6 @@ int my_system (int flags, const char *shell, const char *command)
     sigaction (SIGQUIT, &save_quit, NULL);
     sigaction (SIGTSTP, &save_stop, NULL);
 
-#ifdef SCO_FLAVOR 
-	waitpid(-1, NULL, WNOHANG);
-#endif /* SCO_FLAVOR */
-
     return WEXITSTATUS(status);
 }
 
@@ -587,9 +583,6 @@ int mc_doublepclose (int pipe, pid_t pid)
     
     close (pipe);
     waitpid (pid, &status, 0);
-#ifdef SCO_FLAVOR
-    waitpid (-1, NULL, WNOHANG);
-#endif /* SCO_FLAVOR */
     sigaction (SIGINT, &save_intr, NULL);
     sigaction (SIGQUIT, &save_quit, NULL);
     sigaction (SIGTSTP, &save_stop, NULL);
@@ -721,22 +714,6 @@ canonicalize_pathname (char *path)
     return path;
 }
 
-#ifdef SCO_FLAVOR
-int gettimeofday( struct timeval * tv, struct timezone * tz)
-{
-    struct timeb tb;
-    struct tm * l;
-    
-    ftime( &tb );
-    if (errno == EFAULT)
-	return -1;
-    l = localtime(&tb.time);
-    tv->tv_sec = l->tm_sec;
-    tv->tv_usec = (long) tb.millitm;
-    return 0;
-}
-#endif /* SCO_FLAVOR */
-
 #ifdef HAVE_GET_PROCESS_STATS
 #    include <sys/procstats.h>
 
@@ -809,101 +786,3 @@ putenv (const char *string)
 }
 #endif /* !HAVE_PUTENV */
 
-#ifdef SCO_FLAVOR
-/* Define this only for SCO */
-#ifdef USE_NETCODE
-#ifndef HAVE_SOCKETPAIR
-
-/*
- The code for s_pipe function is adapted from Section 7.9
- of the "UNIX Network Programming" by W. Richard Stevens,
- published by Prentice Hall, ISBN 0-13-949876-1
- (c) 1990 by P T R Prentice Hall
-
- It is used to implement socketpair function for SVR3 systems
- that lack it.
-*/
-
-#include <sys/types.h>
-#include <sys/stream.h>  /* defines queue_t */
-#include <stropts.h>     /* defines struct strtdinsert */
-
-#define SPX_DEVICE "/dev/spx"
-#define S_PIPE_HANDLE_ERRNO 1
-/* if the above is defined to 1, we will attempt to
-   save and restore errno to indicate failure
-   reason to the caller;
-   Please note that this will not work in environments
-   where errno is not just an integer
-*/
-
-#if S_PIPE_HANDLE_ERRNO
-#include <errno.h>
-/* This is for "extern int errno;" */
-#endif
-
- /* s_pipe returns 0 if OK, -1 on error */
- /* two file descriptors are returned   */
-static int s_pipe(int fd[2])
-{
-   struct strfdinsert  ins;  /* stream I_FDINSERT ioctl format */
-   queue_t             *pointer;
-   #if S_PIPE_HANDLE_ERRNO
-   int err_save;
-   #endif
-   /*
-    * First open the stream clone device "dev/spx" twice,
-    * obtaining the two file descriptors
-    */
-
-   if ( (fd[0] = open(SPX_DEVICE, O_RDWR)) < 0)
-      return -1;
-   if ( (fd[1] = open(SPX_DEVICE, O_RDWR)) < 0) {
-      #if S_PIPE_HANDLE_ERRNO
-      err_save = errno;
-      #endif
-      close(fd[0]);
-      #if S_PIPE_HANDLE_ERRNO
-      errno = err_save;
-      #endif
-      return -1;
-   }
-   
-   /*
-    * Now link these two stream together with an I_FDINSERT ioctl.
-    */
-   
-   ins.ctlbuf.buf     = (char *) &pointer;   /* no control information, just the pointer */
-   ins.ctlbuf.maxlen  = sizeof pointer;
-   ins.ctlbuf.len     = sizeof pointer;
-   ins.databuf.buf    = (char *) 0;   /* no data to be sent */
-   ins.databuf.maxlen = 0;
-   ins.databuf.len    = -1;  /* magic: must be -1 rather than 0 for stream pipes */
-
-   ins.fildes = fd[1];  /* the fd to connect with fd[0] */
-   ins.flags  = 0;      /* nonpriority message */
-   ins.offset = 0;      /* offset of pointer in control buffer */
-
-   if (ioctl(fd[0], I_FDINSERT, (char *) &ins) < 0) {
-      #if S_PIPE_HANDLE_ERRNO
-      err_save = errno;
-      #endif
-      close(fd[0]);
-      close(fd[1]);
-      #if S_PIPE_HANDLE_ERRNO
-      errno = err_save;
-      #endif
-      return -1;
-   }
-   /* all is OK if we came here, indicate success */
-   return 0;
-}
-
-int socketpair(int dummy1, int dummy2, int dummy3, int fd[2])
-{
-   return s_pipe(fd);
-}
-
-#endif /* ifndef HAVE_SOCKETPAIR */
-#endif /* ifdef USE_NETCODE */
-#endif /* SCO_FLAVOR */

@@ -1,3 +1,8 @@
+2003-06-18  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Remove test for SCO UNIX.  Remove all references
+	to SCO_FLAVOR everywhere.  SCO flavor is rather unsavory now.
+
 2003-06-06  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: Don't run compressed logs from /var/log through

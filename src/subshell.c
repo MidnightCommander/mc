@@ -626,7 +626,7 @@ int read_subshell_prompt (void)
 /* Resize given terminal using TIOCSWINSZ, return ioctl() result */
 static int resize_tty (int fd)
 {
-#if defined TIOCSWINSZ && !defined SCO_FLAVOR
+#if defined TIOCSWINSZ
     struct winsize tty_size;
 
     tty_size.ws_row = LINES;
@@ -1014,59 +1014,7 @@ static void synchronize (void)
 
 /* pty opening functions */
 
-#ifdef SCO_FLAVOR
-
-/* SCO version of pty_open_master */
-
-static int pty_open_master (char *pty_name)
-{
-    int pty_master;
-    int num;
-    char *ptr;
-
-    strcpy (pty_name, "/dev/ptyp");
-    ptr = pty_name+9;
-    for (num=0;;num++)
-    {
-	g_snprintf(ptr, 9, "%d",num);	/* surpriiise ... SCO lacks itoa() */
-	/* Try to open master */
-	if ((pty_master = open (pty_name, O_RDWR)) == -1) {
-	    if (errno == ENOENT)  /* Different from EIO */
-		return -1;	      /* Out of pty devices */
-	    else
-		continue;	      /* Try next pty device */
-	}
-	pty_name [5] = 't';	      /* Change "pty" to "tty" */
-	if (access (pty_name, 6)){
-	    close (pty_master);
-	    pty_name [5] = 'p';
-	    continue;
-	}
-	return pty_master;
-    }
-    return -1;  /* Ran out of pty devices */
-}
-
-/* SCO version of pty_open_slave */
-
-static int pty_open_slave (const char *pty_name)
-{
-    int pty_slave;
-    struct group *group_info = getgrnam ("terminal");
-    
-    if (group_info != NULL)
-    {
-	/* The following two calls will only succeed if we are root */
-	/* [Commented out while permissions problem is investigated] */
-	/* chown (pty_name, getuid (), group_info->gr_gid);  FIXME */
-	/* chmod (pty_name, S_IRUSR | S_IWUSR | S_IWGRP);   FIXME */
-    }
-    if ((pty_slave = open (pty_name, O_RDWR)) == -1)
-	perror ("open (pty_name, O_RDWR)");
-    return pty_slave;
-}
-
-#elif HAVE_GRANTPT /* !HAVE_SCO */
+#ifdef HAVE_GRANTPT
 
 /* System V version of pty_open_master */
 
@@ -1144,7 +1092,7 @@ static int pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 
-#else /* !HAVE_SCO && !HAVE_GRANTPT */
+#else /* !HAVE_GRANTPT */
 
 /* BSD version of pty_open_master */
 static int pty_open_master (char *pty_name)
@@ -1197,5 +1145,5 @@ static int pty_open_slave (const char *pty_name)
     return pty_slave;
 }
 
-#endif /* !HAVE_SCO && !HAVE_GRANTPT */
+#endif /* !HAVE_GRANTPT */
 #endif /* HAVE_SUBSHELL_SUPPORT */

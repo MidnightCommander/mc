@@ -728,7 +728,7 @@ static void
 low_level_change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ && !defined SCO_FLAVOR
+#if defined TIOCGWINSZ
     struct winsize winsz;
 
     winsz.ws_col = winsz.ws_row = 0;
@@ -746,7 +746,7 @@ low_level_change_screen_size (void)
 	resize_subshell ();
 #endif
     }
-#endif /* TIOCGWINSZ && !SCO_FLAVOR */
+#endif /* TIOCGWINSZ */
 #endif /* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
 }
 
@@ -754,7 +754,7 @@ void
 change_screen_size (void)
 {
 #if defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4
-#if defined TIOCGWINSZ && !defined SCO_FLAVOR
+#if defined TIOCGWINSZ
 
 #ifndef NCURSES_VERSION
     mc_noraw_mode ();
@@ -784,7 +784,7 @@ change_screen_size (void)
     /* Now, force the redraw */
     do_refresh ();
     touchwin (stdscr);
-#endif				/* TIOCGWINSZ && !SCO_FLAVOR */
+#endif				/* TIOCGWINSZ */
 #endif				/* defined(HAVE_SLANG) || NCURSES_VERSION_MAJOR >= 4 */
     winch_flag = 0;
 }

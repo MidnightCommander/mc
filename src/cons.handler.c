@@ -24,15 +24,6 @@
 #include <signal.h>
 #include <stdio.h>
 
-#ifdef SCO_FLAVOR
-#include <sys/types.h>
-#include <sys/vid.h>
-#include <sys/console.h>
-#include <sys/vtkd.h>
-#include <memory.h>
-#include <signal.h>
-#endif				/* SCO_FLAVOR */
-
 #ifdef __FreeBSD__
 #include <sys/consio.h>
 #include <sys/ioctl.h>
@@ -191,189 +182,6 @@ handle_console_linux (unsigned char action)
 	    console_flag = 0;
 	}
 	break;
-    }
-}
-
-#elif defined(SCO_FLAVOR)
-
-/* 
-**	SCO console save/restore handling routines
-**	Copyright (C) 1997 Alex Tkachenko <alex@bcs.zaporizhzhe.ua>
-*/
-
-#include "color.h"
-
-static int FD_OUT = 2;
-
-static unsigned short *vidbuf = NULL;
-static unsigned short *screen = NULL;
-static int height = 0, width = 0, saved_attr = 0;
-static int mode = 0;
-
-#define	SIG_ACQUIRE 21		/* originally: handset, line status change (?) */
-
-static int
-vt_active ()
-{
-    struct vid_info vi;
-    int adapter = ioctl (FD_OUT, CONS_CURRENT, 0);
-
-    vi.size = sizeof (struct vid_info);
-    ioctl (FD_OUT, CONS_GETINFO, &(vi));
-    return (vi.m_num == ioctl (FD_OUT, CONSADP, adapter));
-}
-
-static void
-console_acquire_vt ()
-{
-    struct vt_mode smode;
-
-    signal (SIG_ACQUIRE, SIG_DFL);
-    smode.mode = VT_AUTO;
-    smode.waitv = smode.relsig = smode.acqsig = smode.frsig = 0;
-    ioctl (FD_OUT, VT_SETMODE, &smode);
-    ioctl (FD_OUT, VT_RELDISP, VT_ACKACQ);
-}
-
-static void
-console_shutdown ()
-{
-    if (!console_flag) {
-	return;
-    }
-    if (screen != NULL) {
-	g_free (screen);
-    }
-    console_flag = 0;
-}
-
-static void
-console_save ()
-{
-    struct m6845_info mi;
-
-    if (!console_flag) {
-	return;
-    }
-
-    if (!vt_active ()) {
-	struct vt_mode smode;
-
-	/* 
-	 **     User switched out of our vt. Let's wait until we get SIG_ACQUIRE,
-	 **     otherwise we could save wrong screen image
-	 */
-	signal (SIG_ACQUIRE, console_acquire_vt);
-	smode.mode = VT_PROCESS;
-	smode.waitv = 0;
-	smode.waitv = smode.relsig = smode.acqsig = smode.frsig =
-	    SIG_ACQUIRE;
-	ioctl (FD_OUT, VT_SETMODE, &smode);
-
-	pause ();
-    }
-
-    saved_attr = ioctl (FD_OUT, GIO_ATTR, 0);
-
-    vidbuf = (unsigned short *) ioctl (FD_OUT, MAPCONS, 0);
-
-    mi.size = sizeof (struct m6845_info);
-    ioctl (FD_OUT, CONS_6845INFO, &mi);
-
-    {
-	unsigned short *start = vidbuf + mi.screen_top;
-	memcpy (screen, start, width * height * 2);
-    }
-
-    write (FD_OUT, "\0337", 2);	/* save cursor position */
-}
-
-static void
-console_restore ()
-{
-    struct m6845_info mi;
-    unsigned short *start;
-
-    if (!console_flag) {
-	return;
-    }
-
-    write (FD_OUT, "\033[2J", 4);
-
-    mi.size = sizeof (struct m6845_info);
-    ioctl (FD_OUT, CONS_6845INFO, &mi);
-
-    start = vidbuf + mi.screen_top;
-    memcpy (start, screen, width * height * 2);
-    write (FD_OUT, "\0338", 2);	/* restore cursor position */
-}
-
-static void
-console_init ()
-{
-    struct vid_info vi;
-    int adapter = ioctl (FD_OUT, CONS_CURRENT, 0);
-
-    console_flag = 0;
-
-    if (adapter != -1) {
-	vi.size = sizeof (struct vid_info);
-	ioctl (FD_OUT, CONS_GETINFO, &(vi));
-
-	if (vt_active ()) {
-	    console_flag = 1;
-
-	    height = vi.mv_rsz;
-	    width = vi.mv_csz;
-
-	    screen = (unsigned short *) g_malloc (height * width * 2);
-	    if (screen == NULL) {
-		console_shutdown ();
-		return;
-	    }
-	    console_save ();
-	    mode = ioctl (FD_OUT, CONS_GET, 0);
-	    ioctl (FD_OUT, MODESWITCH | mode, 0);
-	    console_restore ();
-	}
-    }
-}
-
-static void
-handle_console_sco (unsigned char action)
-{
-    switch (action) {
-    case CONSOLE_INIT:
-	console_init ();
-	break;
-
-    case CONSOLE_DONE:
-	console_shutdown ();
-	break;
-
-    case CONSOLE_SAVE:
-	console_save ();
-	break;
-
-    case CONSOLE_RESTORE:
-	console_restore ();
-	break;
-    default:
-	/* Nothing */ ;
-    }
-}
-
-static void
-show_console_contents_sco (int starty, unsigned char begin_line,
-			   unsigned char end_line)
-{
-    register int i, len = (end_line - begin_line) * width;
-
-    attrset (DEFAULT_COLOR);
-    for (i = 0; i < len; i++) {
-	if ((i % width) == 0)
-	    move (starty + (i / width), 0);
-	addch ((unsigned char) screen[width * starty + i]);
     }
 }
 
@@ -566,8 +374,6 @@ show_console_contents (int starty, unsigned char begin_line,
     show_console_contents_linux (starty, begin_line, end_line);
 #elif defined (__FreeBSD__)
     show_console_contents_freebsd (starty, begin_line, end_line);
-#elif defined (SCO_FLAVOR)
-    show_console_contents_sco (starty, begin_line, end_line);
 #else
     console_flag = 0;
 #endif
@@ -583,7 +389,5 @@ handle_console (unsigned char action)
     handle_console_linux (action);
 #elif defined (__FreeBSD__)
     handle_console_freebsd (action);
-#elif defined (SCO_FLAVOR)
-    handle_console_sco (action);
 #endif
 }

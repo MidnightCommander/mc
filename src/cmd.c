@@ -1205,52 +1205,36 @@ char *
 get_random_hint (int force)
 {
     char *data, *result, *eol;
-    int  len;
+    int len;
     int start;
-    
-    /* Do not change hints more often than one minute */
-
-#ifdef SCO_FLAVOR
-    static time_t last;
-    time_t now;
-
-    time (&now);
-    if (!force && (now - last) < 60)
-	return g_strdup ("");
-    last = now;
-#else
     static int last_sec;
     static struct timeval tv;
-    
+
+    /* Do not change hints more often than one minute */
     gettimeofday (&tv, NULL);
     if (!force && !(tv.tv_sec > last_sec + 60))
-	return g_strdup (""); 
+	return g_strdup ("");
     last_sec = tv.tv_sec;
-#endif /* !SCO_FLAVOR */
 
     data = load_mc_home_file (MC_HINT, NULL);
     if (!data)
 	return 0;
 
-#ifdef SCO_FLAVOR
-    srand ((short) now);
-#else
-    srand (tv.tv_sec);
-#endif /* !SCO_FLAVOR */
     /* get a random entry */
+    srand (tv.tv_sec);
     len = strlen (data);
     start = rand () % len;
-    
-    for (;start; start--){
-	if (data [start] == '\n'){
+
+    for (; start; start--) {
+	if (data[start] == '\n') {
 	    start++;
 	    break;
 	}
     }
-    eol = strchr (&data [start], '\n');
+    eol = strchr (&data[start], '\n');
     if (eol)
 	*eol = 0;
-    result = g_strdup (&data [start]);
+    result = g_strdup (&data[start]);
     g_free (data);
     return result;
 }

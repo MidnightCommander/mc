@@ -155,10 +155,6 @@ aux*)
     LIBS="$LIBS -lposix"
     AC_DEFINE(_POSIX_SOURCE)
     ;;
-sco*)
-    AC_DEFINE(SCO_FLAVOR, 1, [Define if you want to turn on SCO-specific code])
-    AC_DEFINE(_SVID3, 1, [Needs to be defined on SCO])
-    ;;
 esac
 
 

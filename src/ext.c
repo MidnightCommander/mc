@@ -315,13 +315,6 @@ get_file_type_local (char *filename, char *buf, int buflen)
 	if (read_bytes == 0)
 	    buf[0] = 0;
 	pclose (f);
-#ifdef SCO_FLAVOR
-	/*
-	 **       SCO 3.2 does has a buggy pclose(), so
-	 **       <command> become zombie (alex)
-	 */
-	waitpid (-1, NULL, WNOHANG);
-#endif				/* SCO_FLAVOR */
     } else {
 	return -1;
     }
