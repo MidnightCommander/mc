@@ -1,5 +1,9 @@
 2002-12-12  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.c (is_dos_date): Allow 4-digit years.
+	(vfs_parse_filedate): Don't limit length of the year field for
+	DOS dates, subtract 1900 if necessary.
+
 	* extfs/apt.in: Fix Y2K bug.
 	* extfs/deba.in: Likewise.
 	* extfs/debd.in: Likewise.
