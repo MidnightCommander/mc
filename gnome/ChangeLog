@@ -1,3 +1,8 @@
+1998-12-11  Owen Taylor  <otaylor@redhat.com>
+
+	* gscreen.c gdesktop.c gdnd.h: enable dragging locale files 
+	into Netscape.
+
 1998-12-11  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gicon.c (gicon_get_icon_for_file): First try to fetch the inline

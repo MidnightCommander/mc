@@ -55,7 +55,8 @@ GdkPixmap *icon_dev_pixmap;
 GdkBitmap *icon_dev_mask;
 static GtkTargetEntry drag_types [] = {
 	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain",    0, TARGET_TEXT_PLAIN }
+	{ "text/plain",    0, TARGET_TEXT_PLAIN },
+	{ "_NETSCAPE_URL", 0, TARGET_URL }
 };
 
 static GtkTargetEntry drop_types [] = {
@@ -675,15 +676,30 @@ panel_drag_data_get (GtkWidget        *widget,
 {
 	int len;
 	char *data;
+	GList *files;
 			
+	data = panel_build_selected_file_list (panel, &len);
+
 	switch (info){
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
-		data = panel_build_selected_file_list (panel, &len);
 		gtk_selection_data_set (selection_data, selection_data->target, 8, data, len);
-		g_free (data);
+		break;
+
+	case TARGET_URL:
+		files = gnome_uri_list_extract_uris (data);
+		if (files) {
+			gtk_selection_data_set (selection_data,
+						selection_data->target,
+						8,
+						files->data,
+						strlen (files->data));
+		}
+		gnome_uri_list_free_strings (files);
 		break;
 	}
+
+	g_free (data);
 }
 
 /**

@@ -95,7 +95,8 @@ static struct desktop_icon_info *last_selected_icon;
 static GtkTargetEntry dnd_icon_sources[] = {
 	{ "application/x-mc-desktop-icon", 0, TARGET_MC_DESKTOP_ICON },
 	{ "text/uri-list", 0, TARGET_URI_LIST },
-	{ "text/plain", 0, TARGET_TEXT_PLAIN }
+	{ "text/plain", 0, TARGET_TEXT_PLAIN },
+	{ "_NETSCAPE_URL", 0, TARGET_URL }
 };
 
 static GtkTargetEntry dnd_icon_targets[] = {
@@ -953,25 +954,39 @@ drag_data_get (GtkWidget *widget, GdkDragContext *context, GtkSelectionData *sel
 	struct desktop_icon_info *dii;
 	char *filelist;
 	int len;
+	GList *files;
 
 	dii = data;
+	filelist = build_selected_icons_uri_list (&len);
 
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
 	case TARGET_URI_LIST:
 	case TARGET_TEXT_PLAIN:
-		filelist = build_selected_icons_uri_list (&len);
 		gtk_selection_data_set (selection_data,
 					selection_data->target,
 					8,
 					filelist,
 					len);
-		g_free (filelist);
+		break;
+
+        case TARGET_URL:
+		files = gnome_uri_list_extract_uris (filelist);
+		if (files) {
+			gtk_selection_data_set (selection_data,
+						selection_data->target,
+						8,
+						files->data,
+						strlen (files->data));
+		}
+		gnome_uri_list_free_strings (files);
 		break;
 
 	default:
 		g_assert_not_reached ();
 	}
+
+	g_free (filelist);
 }
 
 /* Set up a desktop icon as a DnD source */
