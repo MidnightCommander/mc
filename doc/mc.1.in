@@ -2465,7 +2465,8 @@ strokes you want to be executed. Press
 .B Ctrl-R
 again when finished. You can then assign the macro to any key you
 like by pressing that key. The macro is executed when you press
-.B Ctrl-A and then the assigned key. The macro is also executed if
+.B Ctrl-A 
+and then the assigned key. The macro is also executed if
 you press Meta, Ctrl, or Esc and the assigned key, provided that the
 key is not used for any other function. Once defined, the macro
 commands go into the file
