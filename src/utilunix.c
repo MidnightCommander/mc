@@ -280,9 +280,7 @@ tilde_expand (const char *directory)
 	if (!q) {
 	    passwd = getpwnam (p);
 	} else {
-	    name = g_malloc (q - p + 1);
-	    strncpy (name, p, q - p);
-	    name[q - p] = 0;
+	    name = g_strndup (p, q - p);
 	    passwd = getpwnam (name);
 	    g_free (name);
 	}

@@ -1,3 +1,8 @@
+2004-08-21  Pavel Shirshov  <pavelsh@mail.ru>
+
+	* utilunix.c (tilde_expand): Use more suitable function 
+	g_strndup, instead sequence g_malloc, strncpy, name[len] = '\0'
+
 2004-08-19  Roland Illig  <roland.illig@gmx.de>
 
 	* util.h (move_backward2): Fixed endless loop. Cleaned up code.
