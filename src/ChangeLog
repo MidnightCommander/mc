@@ -1,3 +1,7 @@
+2004-09-26  Roland Illig  <roland.illig@gmx.de>
+
+	* pipethrough.c: #include <string.h> to compile on Solaris.
+
 2004-09-26  Mike Gorchak  <mike@malva.ua>
 
 	* key.c (qansi_key_defines[]): Add support for qansi-m terminals.
