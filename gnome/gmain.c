@@ -238,8 +238,10 @@ xtoolkit_create_dialog (Dlg_head *h, int flags)
 	h->grided = flags;
 	h->idle_fn_tag = -1;
 	if (!(flags & DLG_NO_TED)){
+		char *layout = concat_dir_and_file (mc_home, "layout");
 		g_warning ("Should never use GtkTed!!!  Write a real dialog!!!");
-		ted = gtk_ted_new_layout (h->name, LIBDIR "/layout");
+    		ted = gtk_ted_new_layout (h->name, layout);
+		g_free (layout);
 		gtk_container_add (GTK_CONTAINER (win), ted);
 		gtk_widget_show (ted);
 
@@ -264,7 +266,7 @@ x_dlg_set_window (Dlg_head *h, GtkWidget *win)
 }
 
 void
-x_set_dialog_title (Dlg_head *h, char *title)
+x_set_dialog_title (Dlg_head *h, const char *title)
 {
 	gtk_window_set_title (GTK_WINDOW (h->wdata), title);
 }

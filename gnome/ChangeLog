@@ -1,3 +1,8 @@
+2001-06-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* gmain.c (x_set_dialog_title): title constified.
+	(xtoolkit_create_dialog): Don't hardcode layout file location.
+
 2001-06-06  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Don't use terms.o.
