@@ -6385,7 +6385,7 @@ msgstr ""
 
 #, c-format
 msgid ""
-"Corrupt cpio header encountered in\n"
+"Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 "Повредено cpio заглавие срещнато в\n"

@@ -4430,7 +4430,7 @@ msgstr ""
 #: vfs/cpio.c:311 vfs/cpio.c:361
 #, c-format
 msgid ""
-"Corrupt cpio header encountered in\n"
+"Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 "Cabecera cpio corrupta encontrada en\n"

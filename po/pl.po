@@ -4395,7 +4395,7 @@ msgstr ""
 #: vfs/cpio.c:1 vfs/cpio.c:1
 #, c-format
 msgid ""
-"Corrupt cpio header encountered in\n"
+"Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 "Uszkodzony nag³ówek cpio w\n"

@@ -4412,7 +4412,7 @@ msgstr ""
 #: vfs/cpio.c:309 vfs/cpio.c:359
 #, c-format
 msgid ""
-"Corrupt cpio header encountered in\n"
+"Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 "cpio-ren goiburukoa hondatuta aurkitu da\n"

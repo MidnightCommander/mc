@@ -4426,7 +4426,7 @@ msgstr ""
 #: vfs/cpio.c:309 vfs/cpio.c:358
 #, c-format
 msgid ""
-"Corrupt cpio header encountered in\n"
+"Corrupted cpio header encountered in\n"
 "%s"
 msgstr ""
 "S'ha trobat una capçalera corrupta d'arxiu cpio a \n"
