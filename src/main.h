@@ -97,7 +97,7 @@ enum cd_enum {
 
 int do_cd           (const char *new_dir, enum cd_enum cd_type); /* For find.c */
 void change_panel   (void);
-int load_prompt     (int fd, void *unused);
+int load_prompt     (int, void *);
 void save_cwds_stat (void);
 int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
 
@@ -112,7 +112,7 @@ extern char *prompt;
 extern char *mc_home;
 char *get_mc_lib_dir (void);
 
-int maybe_cd (int char_code, int move_up_dir);
+int maybe_cd (int move_up_dir);
 void do_possible_cd (const char *dir);
 
 #ifdef WANT_WIDGETS

@@ -2,6 +2,8 @@
 
 	* dialog.c: Marked unused parameters. Now dlg_broadcast_msg_to
 	does what the comment above it says.
+	* main.c (maybe_cd): Removed unused parameter.
+	* main.h: Likewise.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
