@@ -32,11 +32,7 @@ int got_interrupt (void);
 
 void mc_refresh (void);
 
-/* print a string left-aligned, adjusted to exactly LEN characters */
-static inline void printwstr (const char *s, int len)
-{
-    if (len > 0)
-        printw("%-*.*s", len, len, s);
-}
+/* print S left-aligned, adjusted to exactly LEN characters */
+extern void printwstr (const char *s, int len);
 
 #endif

@@ -1,5 +1,11 @@
 2005-02-23  Roland Illig  <roland.illig@gmx.de>
 
+	* tty.h: Moved the function printwstr to slint.c, because the
+	SunPro compiler does not eliminate unused inline functions.
+	* slint.c: printwstr has been moved to here.
+
+2005-02-23  Roland Illig  <roland.illig@gmx.de>
+
 	* screen.c: Changed the return type of ilog10 to unsigned int
 	and adjusted some variables in format_device_number.
 

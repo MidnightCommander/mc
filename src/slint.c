@@ -537,3 +537,9 @@ mc_refresh (void)
 #endif				/* WITH_BACKGROUND */
 	refresh ();
 }
+
+extern void printwstr (const char *s, int len)
+{
+    if (len > 0)
+        printw("%-*.*s", len, len, s);
+}
