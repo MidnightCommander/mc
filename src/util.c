@@ -93,6 +93,7 @@ int tilde_trunc = 1;
 #ifndef VFS_STANDALONE
 int is_printable (int c)
 {
+#ifndef HAVE_X
     static const unsigned char xterm_printable[] = {
         0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
         1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -110,12 +111,8 @@ int is_printable (int c)
 #else
     extern int eight_bit_clean;
     extern int full_eight_bits;
-#endif
+#endif /* !HAVE_CHARSET */
 
-#ifdef HAVE_GNOME
-    return 1;
-#endif
-    
     c &= 0xff;
 #ifdef HAVE_CHARSET
     if (display_codepage < 0) {
@@ -136,7 +133,10 @@ int is_printable (int c)
 	    return ((c >31 && c < 127) || c >= 160);
     } else
 	return (c > 31 && c < 127);
-#endif
+#endif /* !HAVE_CHARSET */
+#else
+    return 1;
+#endif /* HAVE_X */
 }
 
 /* Returns the message dimensions (lines and columns) */
@@ -171,7 +171,7 @@ char *trim (char *s, char *d, int len)
 	strcpy (d, s);
     return d;
 }
-#endif
+#endif /* !VFS_STANDALONE */
 
 char *
 name_quote (const char *s, int quote_percent)
@@ -361,7 +361,7 @@ char *string_perm (mode_t mode_bits)
     if (ismode (mode_bits, S_IFDIR)) mode [0] = 'd';
 #ifdef S_IFSOCK
     if (ismode (mode_bits, S_IFSOCK)) mode [0] = 's';
-#endif
+#endif /* S_IFSOCK */
     if (ismode (mode_bits, S_IXOTH)) mode [9] = 'x';
     if (ismode (mode_bits, S_IWOTH)) mode [8] = 'w';
     if (ismode (mode_bits, S_IROTH)) mode [7] = 'r';
@@ -379,7 +379,7 @@ char *string_perm (mode_t mode_bits)
     if (ismode (mode_bits, S_ISVTX)) mode [9] = (mode [9] == 'x') ? 't' : 'T';
     if (ismode (mode_bits, S_IFLNK)) mode [0] = 'l';
     if (ismode (mode_bits, S_IFIFO)) mode [0] = 'p';
-#endif
+#endif /* !OS2_NT */
     return mode;
 }
 
@@ -797,7 +797,7 @@ void my_putenv (char *name, char *data)
     /* WARNING: NEVER FREE THE full VARIABLE!!!!!!!!!!!!!!!!!!!!!!!! */
     /* It is used by putenv. Freeing it will corrupt the environment */
 }
-#endif /* VFS_STANDALONE */
+#endif /* !VFS_STANDALONE */
 
 char *unix_error_string (int error_num)
 {
@@ -870,7 +870,7 @@ char *strip_ctrl_codes (char *s)
     return s;
 }
 
-#endif /* VFS_STANDALONE */
+#endif /* !VFS_STANDALONE */
 
 #define CHECK(x) if (x == -1) return 0;
 
@@ -1271,7 +1271,7 @@ int my_ftruncate (int fd, long size)
     lk.l_len = 0;
     
     return fcntl (fd, F_FREESP, &lk);
-#endif
+#endif /* !OS2_NT */
 }
 
 int truncate (const char *path, long size)
@@ -1290,8 +1290,8 @@ int truncate (const char *path, long size)
 
 }
 
-#endif
-#endif /* VFS_STANDALONE */
+#endif /* !HAVE_TRUNCATE */
+#endif /* !VFS_STANDALONE */
 
 /* If filename is NULL, then we just append PATH_SEP to the dir */
 char *
@@ -1310,7 +1310,7 @@ concat_dir_and_file (const char *dir, const char *file)
 /* Number of attempts to create a temporary file */
 #ifndef TMP_MAX
 #define TMP_MAX 16384
-#endif
+#endif /* !TMP_MAX */
 
 /*
  * Arguments:

@@ -215,14 +215,14 @@ int   pause_after_run = pause_on_dumb_terminals;
 /* It true saves the setup when quitting */
 int auto_save_setup = 1;
 
-#ifndef HAVE_CHARSET
+#if !defined(HAVE_CHARSET) && !defined(HAVE_X)
 /* If true, be eight bit clean */
 int eight_bit_clean = 1;
 
 /* If true, then display chars 0-255, else iso-8859-1,
    requires eight_bit_clean */
 int full_eight_bits = 1;
-#endif
+#endif /* !HAVE_CHARSET && !HAVE_X */
 
 /* If true use the internal viewer */
 int use_internal_view = 1;

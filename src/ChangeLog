@@ -1,3 +1,8 @@
+2001-07-26  Pavel Roskin  <proski@gnu.org>
+
+	* main.c [HAVE_X]: Disable eight_bit_clean and full_eight_bits.
+	* util.c (is_printable) [HAVE_X]: Simplify.
+
 2001-07-25  Pavel Roskin  <proski@gnu.org>
 
 	* cmd.c (do_link): Simplify.  Don't silently exit if the source
