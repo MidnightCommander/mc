@@ -84,11 +84,12 @@ dnl
 dnl Check availability of some functions 
 dnl 
 
-AC_CHECK_FUNCS(strerror statfs getwd strcasecmp strncasecmp strcoll strftime)
-AC_CHECK_FUNCS(strdup memmove pwdauth truncate initgroups putenv)
-AC_CHECK_FUNCS(memset memcpy tcsetattr tcgetattr cfgetospeed)
-AC_CHECK_FUNCS(sigaction sigemptyset sigprocmask sigaddset)
-AC_CHECK_FUNCS(sysconf setuid setreuid)
+AC_CHECK_FUNCS([strerror statfs getwd strcasecmp strncasecmp strcoll strftime \
+		strdup memmove pwdauth truncate initgroups putenv \
+		memset memcpy tcsetattr tcgetattr cfgetospeed \
+		sigaction sigemptyset sigprocmask sigaddset \
+		sysconf setuid setreuid \
+		telldir seekdir])
 
 dnl
 dnl getpt is a GNU Extension (glibc 2.1.x)

@@ -1,3 +1,8 @@
+2001-06-19  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Check for telldir and seekdir. Join adjacent
+	calls to AC_CHECK_FUNCS.
+
 2001-06-16  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.am: Change the order of SUBDIRS to fully compile text
