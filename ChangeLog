@@ -1,3 +1,10 @@
+2003-11-27  Pavel Roskin  <proski@gnu.org>
+
+	* src/TODO: Move ...
+	* TODO: ... here.
+	* doc/DEVEL: Move ...
+	* HACKING: ... here.  Adjust makefiles.
+
 2003-11-20  Pavel Roskin  <proski@gnu.org>
 
 	* build-glib1.sh: Use more portable syntax for functions.  Fall

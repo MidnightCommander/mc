@@ -9,7 +9,7 @@ endif
 
 pkgdata_DATA = mc.hlp
 
-EXTRA_DIST = DEVEL xnc.hlp
+EXTRA_DIST = xnc.hlp
 CLEANFILES = $(pkgdata_DATA)
 
 mc.hlp: mc.1 $(srcdir)/xnc.hlp $(top_builddir)/src/man2hlp
