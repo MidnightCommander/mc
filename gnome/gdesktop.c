@@ -1645,6 +1645,12 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 		/* If it comes from ourselves, make move the default unless the
 		 * user is explicitly asking for ASK.
 		 */
+		printf ("%s\t%s\t%s\t%s\n",
+			(context->actions & GDK_ACTION_COPY) ? "copy" : "",
+			(context->actions & GDK_ACTION_MOVE) ? "move" : "",
+			(context->actions & GDK_ACTION_LINK) ? "link" : "",
+			(context->actions & GDK_ACTION_ASK) ? "ask" : "");
+			
 		if (source_widget
 		    && context->suggested_action != GDK_ACTION_ASK
 		    && (context->actions & GDK_ACTION_MOVE))

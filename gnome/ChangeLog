@@ -1,3 +1,21 @@
+1999-01-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_setup_drag_scroll): Renamed from
+	panel_setup_drag_motion().
+	(panel_clist_drag_motion): Use gdnd_validate_action().
+	(panel_clist_motion): Return immediately if the event window is
+	not the clist_window.  Otherwise, forward the event to
+	panel_widget_motion().
+
+	* gdnd.c (gdnd_find_panel_by_drag_context): New public function to
+	find a panel based on a drag context.  This is basically the old
+	find_panel_owning_window() made public.
+	(gdnd_drop_on_directory): Test for the source widget being a tree,
+	and if so, do not use the default behavior for panels.
+	(gdnd_validate_action): New function to compute the final drag
+	action given some conditions.  This is now used to make dragging
+	behavior consistent across the desktop and the file panels.
+
 1999-01-26  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-file-property-dialog.c: Many Many Many changes.  Now it's
@@ -10,6 +28,15 @@
 	against async notifications.
 
 1999-01-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gscreen.c (panel_create_icon_display): Only use
+	GTK_DEST_DEFAULT_DROP since we want to do exotic stuff in the
+	drag_motion handler to validate drops.
+	(panel_icon_list_drag_motion): Use gdnd_validate_action().
+
+	* gdnd.c (gdnd_drop_on_directory): Removed hack that prevented the
+	user from dropping files on the same panel as the source one.
+	This should not be done here.
 
 	* gdnd.c (get_action): Sensitize the menu items based on the
 	allowed actions in the drag context.

@@ -97,56 +97,6 @@ get_action (GdkDragContext *context)
 }
 
 /*
- * Looks for a panel that has the specified window for its list
- * display.  It is used to figure out if we are receiving a drop from
- * a panel on this MC process.  If no panel is found, it returns NULL.
- */
-static WPanel *
-find_panel_owning_window (GdkDragContext *context)
-{
-	GList *list;
-	WPanel *panel;
-	GtkWidget *source_widget, *toplevel_widget;
-
-	source_widget = gtk_drag_get_source_widget (context);
-	if (!source_widget)
-		return NULL;
-
-	/*
-	 * We will scan the list of existing WPanels.  We
-	 * uniformize the thing by pulling the toplevel
-	 * widget for each WPanel and compare this to the
-	 * toplevel source_widget
-	 */
-	toplevel_widget = gtk_widget_get_toplevel (source_widget);
-
-	for (list = containers; list; list = list->next) {
-		GtkWidget *panel_toplevel_widget;
-		
-		panel = ((PanelContainer *) list->data)->panel;
-
-		panel_toplevel_widget = panel->xwindow;
-
-		if (panel->xwindow == toplevel_widget){
-
-			/*
-			 * Now a WPanel actually contains a number of
-			 * drag sources.  If the drag source is the
-			 * Tree, we must report that it was not the
-			 * contents of the WPanel
-			 */
-
-			if (source_widget == panel->tree)
-				return NULL;
-			
-			return panel;
-		}
-	}
-
-	return NULL;
-}
-
-/*
  * Performs a drop action on the specified panel.  Only supports copy
  * and move operations.  The files are moved or copied to the
  * specified destination directory.
@@ -292,6 +242,7 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 {
 	GdkDragAction action;
 	WPanel *source_panel;
+	GtkWidget *source_widget;
 	GList *names;
 
 	if (context->action == GDK_ACTION_ASK) {
@@ -303,14 +254,12 @@ gdnd_drop_on_directory (GdkDragContext *context, GtkSelectionData *selection_dat
 	} else
 		action = context->action;
 
-	/* If we are dragging from a file panel, we can display a nicer status display */
-	source_panel = find_panel_owning_window (context);
-
-	/* Check if the user did not drag the information to the same directory */
-	if (source_panel) {
-		if (strcmp (source_panel->cwd, destdir) == 0)
-			return FALSE;
-	}
+	/* If we are dragging from a file panel, we can display a nicer status
+	 * display.  But if the drag was from the tree, we cannot do this.
+	 */
+	source_panel = gdnd_find_panel_by_drag_context (context, &source_widget);
+	if (source_widget == source_panel->tree)
+		source_panel = NULL;
 
 	/* Symlinks do not use file.c */
 
@@ -355,3 +304,98 @@ gdnd_drag_context_has_target (GdkDragContext *context, TargetType type)
 	return FALSE;
 }
 
+/**
+ * gdnd_find_panel_by_drag_context:
+ * @context: The context by which to find a panel.
+ * @source_widget: The source widget is returned here.
+ * 
+ * Looks in the list of panels for the one that corresponds to the specified
+ * drag context.
+ * 
+ * Return value: The sought panel, or NULL if no panel corresponds to the
+ * context.
+ **/
+WPanel *
+gdnd_find_panel_by_drag_context (GdkDragContext *context, GtkWidget **source_widget)
+{
+	GtkWidget *source;
+	GtkWidget *toplevel;
+	GList *l;
+	WPanel *panel;
+
+	g_return_val_if_fail (context != NULL, NULL);
+
+	source = gtk_drag_get_source_widget (context);
+
+	if (source_widget)
+		*source_widget = source;
+
+	if (!source)
+		return NULL; /* different process */
+
+	toplevel = gtk_widget_get_toplevel (source);
+
+	for (l = containers; l; l = l->next) {
+		panel = ((PanelContainer *) l->data)->panel;
+
+		if (panel->xwindow == toplevel)
+			return panel;
+	}
+
+	return NULL;
+}
+
+/**
+ * gdnd_validate_action:
+ * @context: The drag context for this drag operation.
+ * @same_process: Whether the drag comes from the same process or not.
+ * @same_source: If same_process, then whether the source and dest widgets are the same.
+ * @dest: The destination file entry, or NULL if dropping on empty space.
+ * @dest_selected: If dest is non-NULL, whether it is selected or not.
+ * 
+ * Computes the final drag action based on the suggested action of the specified
+ * context and conditions.
+ * 
+ * Return value: The computed action, meant to be passed to gdk_drag_action().
+ **/
+GdkDragAction
+gdnd_validate_action (GdkDragContext *context, int same_process, int same_source,
+		      file_entry *dest_fe, int dest_selected)
+{
+	int on_directory;
+	int on_exe;
+
+	if (dest_fe) {
+		on_directory = dest_fe->f.link_to_dir || S_ISDIR (dest_fe->buf.st_mode);
+		on_exe = is_exe (dest_fe->buf.st_mode) && if_link_is_exe (dest_fe);
+	}
+
+	if (dest_fe) {
+		if (same_source && dest_selected)
+			return 0;
+
+		if (on_directory) {
+			if ((same_source || same_process) && (context->actions & GDK_ACTION_MOVE))
+				return GDK_ACTION_MOVE;
+			else
+				return context->suggested_action;
+		} else if (on_exe) {
+			if (context->actions & GDK_ACTION_COPY)
+				return GDK_ACTION_COPY;
+		} else if (same_source)
+			return 0;
+		else if (same_process && (context->actions & GDK_ACTION_MOVE))
+			return GDK_ACTION_MOVE;
+		else
+			return context->suggested_action;
+	} else {
+		if (same_source)
+			return 0;
+		else if (same_process && (context->actions & GDK_ACTION_MOVE))
+			return GDK_ACTION_MOVE;
+		else
+			return context->suggested_action;
+	}
+
+	return 0;
+}

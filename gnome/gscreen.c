@@ -601,7 +601,7 @@ typedef gboolean (*desirable_fn)(WPanel *p, int x, int y);
 typedef gboolean (*scroll_fn)(gpointer data);
 
 static gboolean
-panel_setup_drag_motion (WPanel *panel, int x, int y, desirable_fn desirable, scroll_fn scroll)
+panel_setup_drag_scroll (WPanel *panel, int x, int y, desirable_fn desirable, scroll_fn scroll)
 {
 	if (panel->timer_id != -1){
 		gtk_timeout_remove (panel->timer_id);
@@ -911,7 +911,7 @@ panel_widget_motion (GtkWidget *widget, GdkEventMotion *event, WPanel *panel)
 {
 	GtkTargetList *list;
 	GdkDragContext *context;
-		
+
 	if (!panel->maybe_start_drag)
 		return FALSE;
 
@@ -950,6 +950,18 @@ static void
 panel_drag_end (GtkWidget *widget, GdkDragContext *context, WPanel *panel)
 {
 	panel->dragging = 0;
+}
+
+/* Wrapper for the motion_notify callback; it ignores motion events from the
+ * clist if they do not come from the clist_window.
+ */
+static int
+panel_clist_motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
+{
+	if (event->window != GTK_CLIST (widget)->clist_window)
+		return FALSE;
+
+	return panel_widget_motion (widget, event, data);
 }
 
 /**
@@ -1011,25 +1023,50 @@ panel_clist_scroll (gpointer data)
 	return TRUE;
 }
 
-/**
- * panel_clist_drag_motion:
- *
- * Invoked when an application dragging over us has the the cursor moved.
- * If we are close to the top or bottom, we scroll the window
+/* Callback used for drag motion events over the clist.  We set up
+ * auto-scrolling and validate the drop to present the user with the correct
+ * feedback.
  */
 static gboolean
-panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+panel_clist_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time,
+			 gpointer data)
 {
-	WPanel *panel = data;
+	WPanel *panel;
+	GdkDragAction action;
+	GtkWidget *source_widget;
+	gint idx;
+	file_entry *fe;
 
-	if (ctx->dest_window != GTK_CLIST (widget)->clist_window)
-		gdk_drag_status (ctx, 0, time);
-	else {
-		panel_setup_drag_motion (panel, x, y,
-					 panel_clist_scrolling_is_desirable, panel_clist_scroll);
-		gdk_drag_status (ctx, ctx->suggested_action, time);
+	panel = data;
+
+	if (context->dest_window != GTK_CLIST (widget)->clist_window) {
+		printf ("squick\n");
+		gdk_drag_status (context, 0, time);
+		return TRUE;
 	}
 
+	/* Set up auto-scrolling */
+
+	panel_setup_drag_scroll (panel, x, y,
+				 panel_clist_scrolling_is_desirable,
+				 panel_clist_scroll);
+
+	/* Validate the drop */
+
+	gdnd_find_panel_by_drag_context (context, &source_widget);
+
+	if (!gtk_clist_get_selection_info (GTK_CLIST (widget), x, y, &idx, NULL))
+		fe = NULL;
+	else
+		fe = &panel->dir.list[idx];
+
+	action = gdnd_validate_action (context,
+				       source_widget != NULL,
+				       source_widget == widget,
+				       fe,
+				       fe ? fe->f.marked : FALSE);
+
+	gdk_drag_status (context, action, time);
 	return TRUE;
 }
 
@@ -1108,18 +1145,42 @@ panel_icon_list_scroll (gpointer data)
 	return TRUE;
 }
 
-/**
- * panel_icon_list_drag_motion:
- *
- * Invoked when an application dragging over us has the the cursor moved.
- * If we are close to the top or bottom, we scroll the window
+/* Callback used for drag motion events in the icon list.  We need to set up
+ * auto-scrolling and validate the drop to present the user with the correct
+ * feedback.
  */
 static gboolean
-panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, guint time, void *data)
+panel_icon_list_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, guint time,
+			     gpointer data)
 {
-	WPanel *panel = data;
-	
-	panel_setup_drag_motion (panel, x, y, panel_icon_list_scrolling_is_desirable, panel_icon_list_scroll);
+	WPanel *panel;
+	GdkDragAction action;
+	GtkWidget *source_widget;
+	int idx;
+	file_entry *fe;
+
+	panel = data;
+
+	/* Set up auto-scrolling */
+
+	panel_setup_drag_scroll (panel, x, y,
+				 panel_icon_list_scrolling_is_desirable,
+				 panel_icon_list_scroll);
+
+	/* Validate the drop */
+
+	gdnd_find_panel_by_drag_context (context, &source_widget);
+
+	idx = gnome_icon_list_get_icon_at (GNOME_ICON_LIST (widget), x, y);
+	fe = (idx == -1) ? NULL : &panel->dir.list[idx];
+
+	action = gdnd_validate_action (context,
+				       source_widget != NULL,
+				       source_widget == widget,
+				       fe,
+				       fe ? fe->f.marked : FALSE);
+
+	gdk_drag_status (context, action, time);
 	return TRUE;
 }
 
@@ -1189,15 +1250,16 @@ panel_create_file_list (WPanel *panel)
 
 	load_dnd_icons ();
 
-	gtk_drag_dest_set (GTK_WIDGET (file_list), GTK_DEST_DEFAULT_DROP,
+	gtk_drag_dest_set (GTK_WIDGET (file_list),
+			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
-
+#if 0
 	/* Make directories draggable */
 	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK | GDK_BUTTON2_MASK,
 			     drag_types, ELEMENTS (drag_types),
 			     GDK_ACTION_LINK | GDK_ACTION_MOVE | GDK_ACTION_COPY | GDK_ACTION_ASK);
-	
+#endif
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_get",
 			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_data_delete",
@@ -1226,7 +1288,7 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_clist_button_release), panel);
 
 	gtk_signal_connect (GTK_OBJECT (file_list), "motion_notify_event",
-			    GTK_SIGNAL_FUNC (panel_widget_motion), panel);
+			    GTK_SIGNAL_FUNC (panel_clist_motion), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_begin",
 			    GTK_SIGNAL_FUNC (panel_drag_begin), panel);
 	gtk_signal_connect (GTK_OBJECT (file_list), "drag_end",
@@ -1385,7 +1447,8 @@ panel_create_icon_display (WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
-	gtk_drag_dest_set (GTK_WIDGET (ilist), GTK_DEST_DEFAULT_ALL,
+	gtk_drag_dest_set (GTK_WIDGET (ilist),
+			   GTK_DEST_DEFAULT_DROP,
 			   drop_types, ELEMENTS (drop_types),
 			   GDK_ACTION_COPY | GDK_ACTION_MOVE | GDK_ACTION_LINK | GDK_ACTION_ASK);
 
@@ -1918,7 +1981,7 @@ panel_tree_drag_motion (GtkWidget *widget, GdkDragContext *ctx, int x, int y, gu
 	WPanel *panel = data;
 	int r, row, col;
 
-	if (panel_setup_drag_motion (panel, x, y, panel_tree_scrolling_is_desirable, panel_tree_scroll))
+	if (panel_setup_drag_scroll (panel, x, y, panel_tree_scrolling_is_desirable, panel_tree_scroll))
 		return TRUE;
 
 	r = gtk_clist_get_selection_info (
