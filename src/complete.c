@@ -827,9 +827,12 @@ void free_completions (WInput *in)
     in->completions = NULL;
 }
 
+#ifndef HAVE_GNOME
 static int query_height, query_width;
 static WInput *input;
-static int start, end, min_end;
+static int min_end;
+#endif /* !HAVE_GNOME */
+static int start, end;
 
 static int insert_text (WInput *in, char *text, int len)
 {
@@ -861,15 +864,14 @@ static int insert_text (WInput *in, char *text, int len)
     return len != 0;
 }
 
+#ifndef HAVE_GNOME
 static int query_callback (Dlg_head * h, int Par, int Msg)
 {
     switch (Msg) {
     	case DLG_DRAW:
-#ifndef HAVE_X
     	    attrset (COLOR_NORMAL);
 	    dlg_erase (h);
     	    draw_box (h, 0, 0, query_height, query_width);
-#endif
     	    break;
     	    
     	case DLG_KEY:
@@ -966,6 +968,7 @@ static int querylist_callback (void *data)
 {
     return 1;
 }
+#endif /* !HAVE_GNOME */
 
 #define DO_INSERTION 1
 #define DO_QUERY     2

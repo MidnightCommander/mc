@@ -381,9 +381,10 @@ int display_linksdir = 0;
 char *get_mc_lib_dir ();
 int panel_event    (Gpm_Event *event, WPanel *panel);
 int menu_bar_event (Gpm_Event *event, void *);
-static void menu_cmd (void);
 
 #ifndef HAVE_GNOME
+static void menu_cmd (void);
+
 WPanel *
 get_current_panel ()
 {
@@ -1424,6 +1425,7 @@ done_menu (void)
 }
 #endif
     
+#ifndef HAVE_GNOME
 static void
 menu_last_selected_cmd (void)
 {
@@ -1445,6 +1447,7 @@ menu_cmd (void)
 	the_menubar->selected = 4;
     menu_last_selected_cmd ();
 }
+#endif /* !HAVE_GNOME */
 
 /* Flag toggling functions */
 void
@@ -1507,6 +1510,7 @@ toggle_align_extensions (void)
  * Just a hack for allowing url-like pathnames to be accepted from the
  * command line.
  */
+#ifndef PORT_HAS_CREATE_PANELS
 static void
 translated_mc_chdir (char *dir)
 {
@@ -1517,7 +1521,6 @@ translated_mc_chdir (char *dir)
 	g_free (newdir);
 }
 
-#ifndef PORT_HAS_CREATE_PANELS
 void
 create_panels (void)
 {
@@ -1587,6 +1590,7 @@ create_panels (void)
 }
 #endif
 
+#ifndef HAVE_GNOME
 static void copy_current_pathname (void)
 {
     if (!command_prompt)
@@ -1609,6 +1613,7 @@ static void copy_other_pathname (void)
     if (cpanel->cwd [strlen (opanel->cwd) - 1] != PATH_SEP)
         stuff (input_w (cmdline), PATH_SEP_STR, 0);
 }
+#endif /* !HAVE_GNOME */
 
 static void copy_readlink (WPanel *panel)
 {
@@ -1657,6 +1662,7 @@ void copy_prog_name (void)
     g_free (tmp);
 }   
 
+#ifndef HAVE_GNOME
 static void copy_tagged (WPanel *panel)
 {
     int i;
@@ -1690,6 +1696,7 @@ static void copy_other_tagged (void)
 	return;
     copy_tagged (opanel);
 }
+#endif /* !HAVE_GNOME */
 
 static void do_suspend_cmd (void)
 {
@@ -1729,6 +1736,7 @@ suspend_cmd (void)
     do_refresh ();
 }
 
+#ifndef HAVE_GNOME
 static void
 init_labels (Widget *paneletc)
 {
@@ -1737,6 +1745,7 @@ init_labels (Widget *paneletc)
     define_label (midnight_dlg, paneletc, 9, _("PullDn"), menu_cmd);
     define_label (midnight_dlg, paneletc, 10, _("Quit"), (voidfn) quit_cmd);
 }
+#endif /* HAVE_GNOME */
 
 static const key_map ctl_x_map [] = {
     { XCTRL('c'),   (callfn) quit_cmd },
@@ -2159,15 +2168,14 @@ void load_hint ()
 }
 #endif
 
+#ifndef HAVE_GNOME
 static void
 setup_panels_and_run_mc ()
 {
     int first, second;
 
     xtoolkit_panel_setup ();
-#ifndef HAVE_X
     add_widget (midnight_dlg, the_hint);
-#endif /* HAVE_X */
     load_hint ();
     add_widget (midnight_dlg, cmdline);
     add_widget (midnight_dlg, the_prompt);
@@ -2190,6 +2198,7 @@ setup_panels_and_run_mc ()
     /* Run the Midnight Commander if no file was specified in the command line */
     run_dlg (midnight_dlg);
 }
+#endif /* !HAVE_GNOME */
 
 /* result must be free'd (I think this should go in util.c) */
 static char *
@@ -2819,9 +2828,12 @@ corba_create_window (char *startup_dir)
 static void
 handle_args (int argc, char *argv [])
 {
-    char   *tmp, *option_arg, *base;
-    int    c;
+    char   *tmp;
     poptContext   ctx;
+#ifndef HAVE_GNOME
+    char   *option_arg, *base;
+    int    c;
+#endif /* !HAVE_GNOME */
 
 #ifdef HAVE_GNOME
     /* special case, handle --desktop-linksdir without initing X */
