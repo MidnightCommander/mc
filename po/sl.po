@@ -348,7 +348,7 @@ msgstr "Prikazani stolpci"
 
 #: gnome/gcustom-layout.c:304
 msgid "Custom View"
-msgstr "Pogled po meri"
+msgstr "Prikrojen pogled"
 
 #: gnome/gdesktop.c:629 gnome/gmount.c:385
 msgid "Warning"
@@ -753,7 +753,7 @@ msgstr "Pogled po _meri"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr "Preklopi pogled, da prika¾e stanje po meri"
+msgstr "Preklopi pogled, da prika¾e stanje prikrojeno uporabniku"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -769,7 +769,7 @@ msgstr "Podrobno"
 
 #: gnome/glayout.c:66
 msgid "Custom"
-msgstr "Po Meri"
+msgstr "Prikrojeno"
 
 #: gnome/glayout.c:301
 msgid "Enter command to run"
@@ -1462,7 +1462,7 @@ msgstr "Èasovna omejitev za predpomnilnik FTP imenika :"
 
 #: gnome/gprefs.c:167
 msgid "Allow customization of icons in icon view"
-msgstr "Dovoli ikone po meri v ikonskem pogledu"
+msgstr "Dovoli prikrojene ikone v ikonskem pogledu"
 
 #: gnome/gprefs.c:176
 msgid "File display"
@@ -3140,7 +3140,7 @@ msgstr "&Dolg seznam datotek"
 
 #: src/boxes.c:71
 msgid "&User defined:"
-msgstr "&Po meri:"
+msgstr "&Prikorjeno:"
 
 #: src/boxes.c:72
 msgid "&Icon view"
@@ -4383,7 +4383,7 @@ msgstr ""
 
 #: src/file.c:2190
 msgid "&Retry"
-msgstr "&Znova poskusi"
+msgstr "Poskusi &znova"
 
 #: src/file.c:2190 src/file.c:2251 src/filegui.c:264 src/filegui.c:592
 msgid "&Abort"
@@ -6773,7 +6773,7 @@ msgstr "ftpfs: povezava do stre¾nika ni bila uspe¹na: %s"
 #: vfs/ftpfs.c:733
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
-msgstr "Èakam na ponovni poizkus... %d (Control-C za preklic)"
+msgstr "Èakam na nov poizkus... %d (Control-C za preklic)"
 
 #: vfs/ftpfs.c:919
 msgid "ftpfs: could not setup passive mode"
@@ -6928,7 +6928,7 @@ msgid ""
 " reconnect to %s failed\n"
 " "
 msgstr ""
-" ponovna povezava z %s ni uspela\n"
+" ponovno povezovanje z %s ni uspelo\n"
 " "
 
 #: vfs/smbfs.c:1243
