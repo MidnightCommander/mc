@@ -267,9 +267,9 @@ void mad_free (void *ptr, char *file, int line)
 char *mad_tempnam (char *a, char *b)
 {
     char *t, *u;
-    t = tempnam(a,b);
+    t = tempnam(a,b); /* This malloc's internal buffer.. */
     u = mad_strdup(t, "(mad_tempnam)", 0);
-    g_free(t);
+    free(t); 
     return u;    
 }
 
