@@ -39,6 +39,9 @@
 #undef g_strndup
 #undef g_free
 #undef g_get_current_dir
+#undef g_strconcat
+#undef g_strdup_printf
+#undef g_strdup_vprintf
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -346,8 +349,16 @@ void mad_finalize (const char *file, int line)
 }
 
 char *
+#ifndef __GNUC__
 mad_strconcat (const char *first, ...)
+#else
+mad_strconcat (const char *file, int line, const char *first, ...)
+#endif
 {
+#ifndef __GNUC__
+    const char *file = "(mad_strconcat)";
+    int line = 0;
+#endif
     va_list ap;
     long len;
     char *data, *result;
@@ -361,7 +372,7 @@ mad_strconcat (const char *first, ...)
     while ((data = va_arg (ap, char *)) != 0)
 	len += strlen (data);
 
-    result = mad_alloc(len, "(mad_strconcat)", 0);
+    result = mad_alloc(len, file, line);
 
     va_end (ap);
 
@@ -379,14 +390,22 @@ mad_strconcat (const char *first, ...)
 
 /* These two functions grabbed from GLib's gstrfuncs.c */
 char*
+#ifndef __GNUC__
 mad_strdup_vprintf (const char *format, va_list args1)
+#else
+mad_strdup_vprintf (const char *file, int line, const char *format, va_list args1)
+#endif
 {
+#ifndef __GNUC__
+  const char *file = "(mad_strdup_vprintf)";
+  int line = 0;
+#endif
   char *buffer;
   va_list args2;
 
   G_VA_COPY (args2, args1);
 
-  buffer = mad_alloc(g_printf_string_upper_bound(format, args1), "(mad_strdup_vprintf)", 0);
+  buffer = mad_alloc(g_printf_string_upper_bound(format, args1), file, line);
 
   vsprintf (buffer, format, args2);
   va_end (args2);
@@ -395,13 +414,21 @@ mad_strdup_vprintf (const char *format, va_list args1)
 }
 
 char*
+#ifndef __GNUC__
 mad_strdup_printf (const char *format, ...)
+#else
+mad_strdup_printf (const char *file, int line, const char *format, ...)
+#endif
 {
   char *buffer;
   va_list args;
 
   va_start (args, format);
+#ifdef __GNUC__
+  buffer = mad_strdup_vprintf(file, line, format, args);
+#else
   buffer = mad_strdup_vprintf(format, args);
+#endif
   va_end (args);
 
   return buffer;

@@ -1,3 +1,10 @@
+2002-07-03  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* mad.[ch] [__GNUC__] (mad_strconcat): Use macro varargs.
+	(mad_strdup_printf): Likewise.
+	(mad_strdup_vprintf): Likewise.
+	* main.c [HAVE_MAD] (main): Release this_dir and other_dir.
+
 2002-07-03  Pavel Roskin  <proski@gnu.org>
 
 	* main.c (stop_dialogs): New function to stop all dialogs.

@@ -67,9 +67,18 @@
 #define g_strdup(x)	mad_strdup (x, __FILE__, __LINE__)
 #define g_strndup(x, n)	mad_strndup (x, n, __FILE__, __LINE__)
 #define g_free(x)	mad_free (x, __FILE__, __LINE__)
+#ifndef __GNUC__
 #define g_strconcat		mad_strconcat
 #define g_strdup_printf		mad_strdup_printf
 #define g_strdup_vprintf	mad_strdup_vprintf
+#else
+#define g_strconcat(first, argc...) \
+	mad_strconcat (__FILE__, __LINE__, first, ## argc)
+#define g_strdup_printf(format, argc...) \
+	mad_strdup_printf(__FILE__, __LINE__, format, ## argc)
+#define g_strdup_vprintf(format, argc...) \
+	mad_strdup_vprintf (__FILE__, __LINE__, format, ## argc)
+#endif
 #define g_get_current_dir()	mad_get_current_dir (__FILE__, __LINE__)
 #endif /* MAD_GLIB */
 
@@ -84,9 +93,16 @@ char *mad_strndup (const char *s, int n, const char *file, int line);
 void mad_free (void *ptr, const char *file, int line);
 void mad_finalize (const char *file, int line);
 char *mad_tempnam (char *s1, char *s2, const char *file, int line);
+#ifndef __GNUC__
 char *mad_strconcat (const char *first, ...);
 char *mad_strdup_printf (const char *format, ...);
 char *mad_strdup_vprintf (const char *format, va_list args);
+#else
+char *mad_strconcat (const char *file, int line, const char *first, ...);
+char *mad_strdup_printf (const char *file, int line, const char *format, ...)
+    __attribute__ ((format (printf, 3, 4)));
+char *mad_strdup_vprintf (const char *file, int line, const char *format, va_list args);
+#endif
 char *mad_get_current_dir (const char *file, int line);
 
 #else
