@@ -1,3 +1,7 @@
+2001-08-11  Pavel Roskin  <proski@gnu.org>
+
+	* mad.h: Disable glib support - it doesn't work properly.
+
 2001-08-07  Pavel Roskin  <proski@gnu.org>
 
 	* view.c: Warning fixes. Include "cmd.h". Rename help_cmd()

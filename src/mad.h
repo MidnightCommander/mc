@@ -46,6 +46,13 @@
 #define strndup(x, n)	mad_strndup (x, n, __FILE__, __LINE__)
 #define free(x)		mad_free (x, __FILE__, __LINE__)
 
+/*
+ * Define MAD_GLIB to debug allocations in glib as well.
+ * This code is not functional yet.
+ */
+#undef MAD_GLIB
+
+#ifdef MAD_GLIB
 /* These definitions are grabbed from GLib.h */
 #define g_new(type, count)	  \
       ((type *) g_malloc ((unsigned) sizeof (type) * (count)))
@@ -63,6 +70,7 @@
 #define g_strconcat		mad_strconcat
 #define g_strdup_printf		mad_strdup_printf
 #define g_strdup_vprintf	mad_strdup_vprintf
+#endif /* MAD_GLIB */
 
 void mad_init (void);
 void mad_set_debug (const char *file);
