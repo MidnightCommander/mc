@@ -1613,51 +1613,56 @@ edit_find (long search_start, unsigned char *exp, int *len, long last_byte, int 
 
 #define is_digit(x) ((x) >= '0' && (x) <= '9')
 
-#define snprintf(v) { \
+#define snprint(v) { \
 		*p1++ = *p++; \
-		*p1++ = '%'; \
-		*p1++ = 'n'; \
 		*p1 = '\0'; \
-		sprintf(s,q1,v,&n); \
+		n = snprintf(s,e-s,q1,v); \
+		if (n >= e - s) goto nospc; \
 		s += n; \
 	    }
 
 /* this function uses the sprintf command to do a vprintf */
 /* it takes pointers to arguments instead of the arguments themselves */
-static int sprintf_p (char *str, const char *fmt,...)
-    __attribute__ ((format (printf, 2, 3)));
+/* The return value is the number of bytes written excluding '\0'
+   if successfull, -1 if the resulting string would be too long and
+   -2 if the format string is errorneous.  */
+static int snprintf_p (char *str, size_t size, const char *fmt,...)
+    __attribute__ ((format (printf, 3, 4)));
 
-static int sprintf_p (char *str, const char *fmt,...)
+static int snprintf_p (char *str, size_t size, const char *fmt,...)
 {
     va_list ap;
-    int n;
-    char *q, *p, *s = str;
-    char q1[32];
+    size_t n;
+    char *q, *p, *s = str, *e = str + size;
+    char q1[40];
     char *p1;
+    int nargs = 0;
 
     va_start (ap, fmt);
     p = q = (char *) fmt;
 
     while ((p = strchr (p, '%'))) {
 	n = p - q;
-	strncpy (s, q, n);	/* copy stuff between format specifiers */
+	if (n >= e - s)
+	  goto nospc;
+	memcpy (s, q, n);	/* copy stuff between format specifiers */
 	s += n;
-	*s = 0;
 	q = p;
 	p1 = q1;
 	*p1++ = *p++;
 	if (*p == '%') {
 	    p++;
 	    *s++ = '%';
+	    if (s == e)
+		goto nospc;
 	    q = p;
 	    continue;
 	}
-	if (*p == 'n') {
-	    p++;
-/* do nothing */
-	    q = p;
-	    continue;
-	}
+	if (*p == 'n')
+	    goto err;
+	/* We were passed only 16 arguments.  */
+	if (++nargs == 16)
+	    goto err;
 	if (*p == '#')
 	    *p1++ = *p++;
 	if (*p == '0')
@@ -1671,8 +1676,10 @@ static int sprintf_p (char *str, const char *fmt,...)
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace field width with a number */
 	    p1 += strlen (p1);
 	} else {
-	    while (is_digit (*p))
+	    while (is_digit (*p) && p1 < q1 + 20)
 		*p1++ = *p++;
+	    if (is_digit (*p))
+		goto err;
 	}
 	if (*p == '.')
 	    *p1++ = *p++;
@@ -1681,37 +1688,49 @@ static int sprintf_p (char *str, const char *fmt,...)
 	    strcpy (p1, MY_itoa (*va_arg (ap, int *)));	/* replace precision with a number */
 	    p1 += strlen (p1);
 	} else {
-	    while (is_digit (*p))
+	    while (is_digit (*p) && p1 < q1 + 32)
 		*p1++ = *p++;
+	    if (is_digit (*p))
+		goto err;
 	}
 /* flags done, now get argument */
 	if (*p == 's') {
-	    snprintf (va_arg (ap, char *));
+	    snprint (va_arg (ap, char *));
 	} else if (*p == 'h') {
 	    if (strchr ("diouxX", *p))
-		snprintf (*va_arg (ap, short *));
+		snprint (*va_arg (ap, short *));
 	} else if (*p == 'l') {
 	    *p1++ = *p++;
 	    if (strchr ("diouxX", *p))
-		snprintf (*va_arg (ap, long *));
+		snprint (*va_arg (ap, long *));
 	} else if (strchr ("cdiouxX", *p)) {
-	    snprintf (*va_arg (ap, int *));
+	    snprint (*va_arg (ap, int *));
 	} else if (*p == 'L') {
 	    *p1++ = *p++;
 	    if (strchr ("EefgG", *p))
-		snprintf (*va_arg (ap, double *));	/* should be long double */
+		snprint (*va_arg (ap, double *));	/* should be long double */
 	} else if (strchr ("EefgG", *p)) {
-	    snprintf (*va_arg (ap, double *));
+	    snprint (*va_arg (ap, double *));
 	} else if (strchr ("DOU", *p)) {
-	    snprintf (*va_arg (ap, long *));
+	    snprint (*va_arg (ap, long *));
 	} else if (*p == 'p') {
-	    snprintf (*va_arg (ap, void **));
-	}
+	    snprint (*va_arg (ap, void **));
+	} else
+	    goto err;
 	q = p;
     }
     va_end (ap);
-    sprintf (s, q);		/* print trailing leftover */
-    return s - str + strlen (s);
+    n = strlen (q);
+    if (n >= e - s)
+	return -1;
+    memcpy (s, q, n + 1);
+    return s + n - str;
+nospc:
+    va_end (ap);
+    return -1;
+err:
+    va_end (ap);
+    return -2;
 }
 
 static void regexp_error (WEdit *edit)
@@ -1804,7 +1823,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	for (i = 0; i < NUM_REPL_ARGS; i++) {
 	    if (s != (char *) 1 && *s) {
 		ord = atoi (s);
-		if ((ord > 0) && (ord < NUM_REPL_ARGS))
+		if ((ord > 0) && (ord <= NUM_REPL_ARGS))
 		    argord[i] = ord - 1;
 		else
 		    argord[i] = i;
@@ -1888,6 +1907,7 @@ edit_replace_cmd (WEdit *edit, int again)
 	    if (replace_yes) {	/* delete then insert new */
 		if (replace_scanf || replace_regexp) {
 		    char repl_str[MAX_REPL_LEN + 2];
+		    int ret = 0;
 
 		    /* we need to fill in sargs just like with scanf */
 		    if (replace_regexp) {
@@ -1896,6 +1916,11 @@ edit_replace_cmd (WEdit *edit, int again)
 			     k < NUM_REPL_ARGS && pmatch[k].rm_eo >= 0;
 			     k++) {
 			    unsigned char *t;
+
+			    if (pmatch[k].rm_eo - pmatch[k].rm_so > 255) {
+				ret = -1;
+				break;
+			    }
 			    t = (unsigned char *) &sargs[k - 1][0];
 			    for (j = 0;
 				 j < pmatch[k].rm_eo - pmatch[k].rm_so
@@ -1916,7 +1941,9 @@ edit_replace_cmd (WEdit *edit, int again)
 			for (; k <= NUM_REPL_ARGS; k++)
 			    sargs[k - 1][0] = 0;
 		    }
-		    if (sprintf_p (repl_str, exp2, PRINTF_ARGS) >= 0) {
+		    if (!ret)
+			ret = snprintf_p (repl_str, MAX_REPL_LEN + 2, exp2, PRINTF_ARGS);
+		    if (ret >= 0) {
 			times_replaced++;
 			while (i--)
 			    edit_delete (edit);
@@ -1924,8 +1951,9 @@ edit_replace_cmd (WEdit *edit, int again)
 			    edit_insert (edit, repl_str[i]);
 		    } else {
 			edit_error_dialog (_(" Replace "),
-					   _
-					   (" Error in replacement format string. "));
+					   ret == -2
+					   ? _(" Error in replacement format string. ")
+					   : _(" Replacement too long. "));
 			replace_continue = 0;
 		    }
 		} else {
