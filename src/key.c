@@ -713,6 +713,11 @@ int get_event (Gpm_Event *event, int redo_event, int block)
 	    maxfdp = max (add_selects (&select_set), input_fd);
 
 #ifdef HAVE_LIBGPM
+	    if (gpm_fd == -1) {
+		/* Connection to gpm broken, possibly gpm has died */
+		mouse_enabled = 0;
+		use_mouse_p = MOUSE_NONE;
+	    }
 	    if (mouse_enabled && use_mouse_p == MOUSE_GPM) {
 		FD_SET (gpm_fd, &select_set);
 		maxfdp = max (maxfdp, gpm_fd);

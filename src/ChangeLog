@@ -1,8 +1,12 @@
 2002-08-25  Pavel Roskin  <proski@gnu.org>
 
+	* key.c (get_event): Check gpm_fd before using it in FD_SET.  If
+	gpm_fd is -1 (gpm has died), disable mouse support.
+
 	* key.c: Use the maximal file descriptor, not FD_SETSIZE in all
 	calls to select().
 	* subshell.c: Likewise.
+	From Pavel Tsekov <ptsekov@gmx.net>
 
 2002-08-24  Pavel Roskin  <proski@gnu.org>
 
