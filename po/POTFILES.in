@@ -8,7 +8,6 @@ edit/editmenu.c
 edit/editoptions.c
 edit/editwidget.c
 edit/syntax.c
-pc/chmod.c
 src/achown.c
 src/background.c
 src/boxes.c
@@ -19,19 +18,16 @@ src/cmd.c
 src/command.c
 src/dialog.c
 src/dir.c
-src/dlg.c
 src/ext.c
 src/file.c
 src/filegui.c
 src/find.c
 src/help.c
 src/hotlist.c
-src/i18n.h
 src/info.c
 src/layout.c
 src/learn.c
 src/main.c
-src/menu.c
 src/option.c
 src/panelize.c
 src/popt.c
@@ -39,7 +35,6 @@ src/popthelp.c
 src/poptint.h
 src/screen.c
 src/selcodepage.c
-src/setup.c
 src/slint.c
 src/subshell.c
 src/textconf.c
