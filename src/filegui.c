@@ -622,11 +622,11 @@ init_replace (FileOpContext *ctx, enum OperationMode mode)
 
     /* "this target..." widgets */
     if (!S_ISDIR (ui->d_stat->st_mode)) {
-	if ((ui->d_stat->st_size
-	     && ui->s_stat->st_size > ui->d_stat->st_size))
-	    ADD_RD_BUTTON (7);
+	if ((ctx->operation == OP_COPY) && (ui->d_stat->st_size != 0)
+	    && (ui->s_stat->st_size > ui->d_stat->st_size))
+	    ADD_RD_BUTTON (7);	/* reget */
 
-	ADD_RD_BUTTON (8);
+	ADD_RD_BUTTON (8);	/* Overwrite all targets? */
     }
     ADD_RD_BUTTON (9);
     ADD_RD_BUTTON (10);

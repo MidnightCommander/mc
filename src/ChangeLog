@@ -1,5 +1,8 @@
 2004-01-23  Pavel Roskin  <proski@gnu.org>
 
+	* filegui.c (init_replace): Don't show the "Reget" button when
+	moving files.  Reported by Arpad Biro <biro_arpad@yahoo.com>
+
 	* fileopctx.h: Add "operation" filed to FileOpContext.
 	* fileopctx.c (file_op_context_new): Add "operation" argument.
 	* filegui.c (file_op_context_create_ui): Remove "operation"
