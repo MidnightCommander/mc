@@ -2,8 +2,8 @@
 
 Contents:
 ---------
-  Requirments
-  GNOME edition requirments
+  Requirements
+  GNOME edition requirements
   Features
   Midnight Commander editions
   Where to get more information
@@ -21,8 +21,8 @@ Most of the engine is shared between both versions, but they come with
 radically different interfaces:  the GNOME version is aimed to be a
 simple to use tool for novice users.
 
-Requirments
------------
+Requirements
+------------
 
 To compile the GNU Midnight Commander you need at least to have a copy
 of the glib library, this library is available in ftp://ftp.gtk.org/pub/gtk.
@@ -50,68 +50,72 @@ certain remote resemblance to John Socha's Norton Commander for DOS.
 It is feature packed:
 
 	o Built in Virtual File System: manipulate remote files
-	systems through the ftp protocol or Midnight Commander's own
-	mcfs protocol.  Browse tar, compressed tar files, rpm, zip,
-	cpio, lha and rar files with a single click.  
+	  systems through the FTP protocol or Midnight Commander's own
+	  mcfs protocol.  Browse tar, compressed tar files, RPM, zip,
+	  cpio, lha and rar files with a single click.
 
-	o All of the Midnight Commander operations work with the virtual
-	file system, enabling you to do complex tasks.
+	o All of the Midnight Commander operations work with the
+	  virtual file system, enabling you to do complex tasks.
 
 	o Mouse support on the Linux console and under X11's xterms. 
 
 	o Learn Keys: The Midnight Commander may be configured at run
-	time to support any kind of input keys for a given terminal,
-	making its operation even on the most wierd terminals a
-	breeze. 
+	  time to support any kind of input keys for a given terminal,
+	  making its operation even on the most weird terminals a
+	  breeze.
 
 	o Text and hex editors are available for you to use.
 
 	o Hotlist allows you to keep a list of common visited
-	locations (including ftp sites).
+	  locations (including FTP sites).
 
 	o Command completion: By pressing Alt-Tab in any place where a
-	filename or an executable are expected, the Midnight Commander
-	will complete for you the name.  If you quickly press Alt-Tab
-	twice you can get a listbox with the possible completions
-	available. 
+	  filename or an executable are expected, the Midnight
+	  Commander will complete for you the name.  If you quickly
+	  press Alt-Tab twice you can get a list box with the possible
+	  completions available.
 
 	o Subshell support: Run your commands by a real shell
-	interpreter.  The Midnight Commander interacts with bash, tcsh
-	and zsh to provide you with all of the facilities available in
-	your shell.
+	  interpreter.  The Midnight Commander interacts with bash,
+	  tcsh and zsh to provide you with all of the facilities
+	  available in your shell.
 
 	o Find file command can now search inside the contents of
-	files.
+	  files.
 
 	o Background operations allows you to copy or move files from
-	any virtual file system while you do other tasks (ie, you can
-	do background ftp copies).
+	  any virtual file system while you do other tasks (i.e., you
+	  can do background FTP copies).
 
 	o Proxy support with our ftpfs.
 
 	o Linux file recovery: If you are using Linux system, you can
-	recover deleted files from an ext2fs partition with the
-	undelete file system.  This is a low level file recovery
-	function that will recover files deleted by any program in
-	Linux. 
+	  recover deleted files from an ext2fs partition with the
+	  undelete file system.  This is a low level file recovery
+	  function that will recover files deleted by any program in
+	  Linux.
 
-	Please note that the undelete file system can only recover
-	12 file system blocks if the file was deleted with a kernel 
-	in the 2.0.x series.  The 2.1.x series have fixed this and you
-	can recover all of the file contents there.
+	  Please note that the undelete file system can only recover
+	  12 file system blocks if the file was deleted with a kernel
+	  in the 2.0.x series.  The 2.1.x series have fixed this and
+	  you can recover all of the file contents there.
 
 	o External panelization: You can run any arbitrary external
-	command and the Midnight Commander will display the output
-	generated as a file listing that can be manipulated as a
-	regular directory. 
+	  command and the Midnight Commander will display the output
+	  generated as a file listing that can be manipulated as a
+	  regular directory.
 
 	o Emacs like key bindings in all of our widgets.
 
-	o Powerfull context dependant actions are available. 
+	o Powerful context dependent actions are available. 
 
-	o Powerfull built-in file viewer:  The file viewer, together
-	with the context dependant actions is used to format man pages
-	on the fly, coloring mail messages and more.
+	o Powerful built-in file viewer:  The file viewer, together
+	  with the context dependent actions is used to format man
+	  pages on the fly, coloring mail messages and more.
+
+This list of features pertains to the terminal edition of the Midnight
+Commander.  The GNOME edition's feature set is slightly different, for
+example, it does not include subshell support.
 
 
 Where to get more information:
@@ -122,20 +126,20 @@ directions and announcements; if you want to subscribe, send mail to:
 
 majordomo@roxanne.nuclecu.unam.mx
 
-There is a WWW page for the Midnight Commander with the URL:
-<http://mc.blackdown.org/mc/>.
+There is a WWW page for the Midnight Commander at http://www.gnome.org/mc.
 
 
 The Midnight Commander:
 -----------------------
 
-The Midnight Commander is released under the GNU General Public License
-version 2.0 or any later version.  A copy of the file is included with
-this distribution package.
+The Midnight Commander is released under the GNU General Public
+License version 2.0 or any later version.  A copy of the file is
+included with this distribution package.
 
-If you have comments, you can send them to me:
+If you have comments, you can send them to us:
 
-miguel@roxanne.nuclecu.unam.mx
+miguel@nuclecu.unam.mx
+federico@nuclecu.unam.mx
 
 or if it would benefit more people, to the mailing list:
 
@@ -164,8 +168,8 @@ o M-Enter copies the currently selected file name to the input line.
 
 o M-Tab completes the current word (or tries to).
 
-o The Virtual File System is a cute addition to the project, you may 
-  browse in tar and compressed tar files as well as browsing remote 
+o The Virtual File System is a cute addition to the project, you may
+  browse in tar and compressed tar files as well as browsing remote
   machines with the mcfs file system.
 
 o Please read the manual page.
@@ -179,16 +183,13 @@ although it's not as nice as the groff printed manual page :-)
 Where you may obtain the Midnight Commander
 -------------------------------------------
 
-The software should be available by anonymous ftp at sunsite.unc.edu
-in the directory /pub/Linux/utils/file and at ftp.nuclecu.unam.mx
-in the directory /linux/local.
-
-The last alpha versions are available at ftp.nuclecu.unam.mx in the
-directory /linux/local/devel.
+You can download the latest version of the Midnight Commander by
+anonymous fTP at ftp.gnome.org in the directory /pub/GNOME/sources/mc.  
+Please note that this is a very busy site; use a mirror if possible.
 
 European mirrors of both version 3.1 and alpha versions are available
-at sunsite.mff.cuni.cz in the directory /GNU/mc and at ftp.teuto.de
-in the directory /lmb/mc.
+at sunsite.mff.cuni.cz in the directory /GNU/mc and at ftp.teuto.de in
+the directory /lmb/mc.
 
 
 Reporting problems
@@ -211,4 +212,12 @@ gdb mc core
 (gdb) where
 
 
+Addendum
+--------
 
+No new features are being added to the GNOME edition of the Midnight
+Commander anymore.  It is just in maintenance and bug fixing stage.
+The reason for this is that the current design of the Midnight
+Commander is not suited well at all for a graphical version with
+multiple windows and asynchronous file operations.  A new file manager
+is being written for the GNOME project.

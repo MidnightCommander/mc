@@ -1,3 +1,9 @@
+1999-09-01  Federico Mena Quintero  <federico@redhat.com>
+
+	* README: Updated and spell-checked.
+
+	* NEWS: Updated.
+
 1999-08-31  Richard Hult  <rhult@hem2.passagen.se>
 
 	* configure.in (ALL_LINGUAS): Added sv.
