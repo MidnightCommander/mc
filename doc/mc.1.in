@@ -2617,7 +2617,6 @@ supports color. Example:
 color_terminals=linux,xterm
 .fi
 .nf
-<tscreen><verb>
 color_terminals=terminal-name1,terminal-name2...
 .fi
 .PP

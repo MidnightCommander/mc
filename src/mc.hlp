@@ -2347,7 +2347,6 @@ Commander from trying to detect if your terminal supports
 color. Example:
 [Colors]
 color_terminals=linux,xterm
-<tscreen><verb>
 color_terminals=terminal-name1,terminal-name2...
 
 The program can be compiled with both ncurses and slang,
