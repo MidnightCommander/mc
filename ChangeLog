@@ -1,3 +1,8 @@
+2002-07-09  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/c.syntax: Don't treat #define separately from other
+	preprocessor directives.
+
 2002-07-08  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/perl.syntax: Highlight text after __END__ as a comment.
