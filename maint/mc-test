@@ -1,0 +1,514 @@
+#!/bin/sh
+
+# Midnight Commander Test Suite
+#
+# (c) 2005 Roland Illig <roland.illig@gmx.de>
+#
+# Licensed under the GPL 2.0
+
+set -efu
+
+### initialize environment ###
+
+LC_CTYPE="C"; export LC_ALL
+LC_COLLATE="C"; export LC_COLLATE
+LC_MONETARY="C"; export LC_MONETARY
+LC_NUMERIC="C"; export LC_NUMERIC
+LC_TIME="C"; export LC_TIME
+LC_MESSAGES="C"; export LC_MESSAGES
+LC_ALL="C"; export LC_ALL
+
+### set default configuration ###
+
+mc_nice_value="19"
+
+mc_basedir="/tmp/mc-current-build"
+mc_srcdir=""			# default: ${mc_basedir}/src
+mc_builddir=""			# default: ${mc_basedir}/build
+mc_prefixdir=""			# default: ${mc_basedir}/installed
+mc_logdir=""			# default: ${mc_basedir}/logs
+
+mc_cvs_rsh="ssh"
+mc_cvs_repository=":ext:anoncvs@cvs.gnu.org:/cvsroot/mc"
+mc_cvs_module="mc"
+mc_cvs_tag="HEAD"
+
+mc_configure_args_pre="--enable-maintainer-mode"
+mc_configure_args_post=""
+
+mc_make="make"
+mc_make_flags=""
+
+mc_cpp=""			# default: ${mc_cc} -E
+mc_cppflags=""
+
+mc_cc="cc"
+mc_cflags=""
+
+mc_ldflags=""
+
+do_clean_basedir=no
+do_download=auto
+do_autoconf=auto
+do_clean_workdir=no
+do_configure=auto
+do_make_clean=no
+do_make_all=yes
+do_make_install=yes
+
+### command line parsing ###
+
+usage() {
+	cat >&2 <<EOF
+usage: `basename $0` [options ...] [<testname ...>]
+
+	-config <file>		load the configuration from <file>
+	-basedir <dir>		set the base directory
+	-srcdir <dir>		select the directory where the source code is
+				read from or will be downloaded to from CVS
+
+	-[dont-]download	checkout or update from CVS (default: ${do_download})
+	-[dont-]autoconf	generate the configure script (default: ${do_autoconf})
+	-[dont-]cleanwork	recreate the build directory (default: ${do_clean_workdir})
+	-[dont-]configure	run configure (default: ${do_configure})
+	-[dont-]clean		make clean (default: ${do_make_clean})
+	-[dont-]build		make all (default: ${do_make_all})
+	-[dont-]install		make install (default: ${do_make_install})
+
+	-fast			only do what's necessary
+	-nice <n>		set the nice(1) value (default: ${mc_nice_value})
+	-quiet			disable most status messages (default: ${quiet:-"no"}${quiet+"yes"})
+EOF
+	exit 1
+}
+
+while test $# -ne 0; do
+	case "$1" in
+		-config)		shift; . "$1"; shift;;
+		-basedir)		shift; mc_basedir="$1"; shift;;
+		-cvs-repository)	shift; mc_cvs_repository="$1"; shift;;
+		-cvs-module)		shift; mc_cvs_module="$1"; shift;;
+		-srcdir)		shift; mc_srcdir="$1"; shift;;
+
+		-cleanup)		shift; do_clean_basedir=yes;;
+
+		-download)		shift; do_download=yes;;
+		-dont-download)		shift; do_download=no;;
+		-autoconf)		shift; do_autoconf=yes;;
+		-dont-autoconf)		shift; do_autoconf=no;;
+		-cleanwork)		shift; do_clean_workdir=yes;;
+		-dont-cleanwork)	shift; do_clean_workdir=no;;
+		-configure)		shift; do_configure=yes;;
+		-dont-configure)	shift; do_configure=no;;
+		-clean)			shift; do_make_clean=yes;;
+		-dont-clean)		shift; do_make_clean=no;;
+		-build)			shift; do_make_all=yes;;
+		-dont-build)		shift; do_make_all=no;;
+		-install)		shift; do_make_install=yes;;
+		-dont-install)		shift; do_make_install=no;;
+
+		-fast)			shift; do_clean_workdir=no
+					do_autoconf=no
+					do_configure=no
+					do_make_clean=no
+					do_make_all=yes;;
+		-nice)			shift; nice_value="$1"; shift;;
+		-quiet)			shift; quiet="yes";;
+
+		--) shift; break;;
+		-) shift; break;;
+		-*) usage;;
+		*) break;;
+	esac
+done
+
+
+### Initialization ###
+
+renice ${mc_nice_value} $$ 1>/dev/null 2>&1 || true
+
+### Tools ###
+
+configure_args_enable_all="--enable-largefile --enable-nls "\
+"--enable-netcode --enable-background --enable-charset "\
+"--with-mmap --with-included-gettext --with-x "\
+"--with-vfs --with-mcfs --with-samba --with-ext2undel "\
+"--with-gpm-mouse --with-subshell --with-edit"
+configure_args_disable_all="--disable-largefile --disable-nls "\
+"--disable-netcode --disable-background --disable-charset "\
+"--without-mmap --without-included-gettext --without-x "\
+"--without-vfs --without-mcfs --without-samba --without-ext2undel "\
+"--without-gpm-mouse --without-subshell --without-edit"
+
+errors=0
+warnings=0
+
+# feature tests
+if test x"`echo -n`" = x"-n"; then
+	echo_n="echo"
+	echo_cont="	" # a tab character
+else
+	echo_n="echo -n"
+	echo_cont=" "
+fi
+
+
+show_file() {
+	if test -f "$1"; then
+		echo "" 1>&2
+		sed -e '10s,.*,(more lines follow ...),' -e '10q' "$1" 1>&2
+		echo "" 1>&2
+	fi
+	return 0
+}
+
+phase_start() {
+	${echo_n} "[`date`] $1"
+	return 0
+}
+
+phase_ok() {
+	echo "${echo_cont}ok"
+	return 0
+}
+
+phase_warnings() {
+	echo "${echo_cont}WARNINGS"
+	warnings=`expr $warnings + 1`
+	if test $# -gt 0; then show_file "$1"; fi
+	return 0
+}
+
+phase_ok_or_warnings() {
+	fsize=`wc -c < "$1"`
+
+	{ test -n "${fsize}" && test ${fsize} -eq 0
+	} && phase_ok || phase_warnings "$1"
+	return 0
+}
+
+phase_failed() {
+	echo "${echo_cont}FAILED"
+	failed=yes
+	errors=`expr $errors + 1`
+	if test $# -gt 0; then show_file "$1"; fi
+	return 0
+}
+
+setup_preconf_env=\
+"out=\"\${mc_logdir}/\${test_phase}.out\";"\
+"err=\"\${mc_logdir}/\${test_phase}.err\";"
+
+preconf_download() {
+	test_phase="download"
+	eval "${setup_preconf_env}"
+
+	if test ${do_download} = no && test -d "${mc_srcdir}/CVS"; then
+		return 0
+	fi
+
+	mkdir -p "${mc_logdir}"
+
+	if test -d "${mc_srcdir}/CVS"; then
+		phase_start "updating CVS copy ..."
+		( cd "${mc_srcdir}" \
+		  && env CVS_RSH=${mc_cvs_rsh} cvs update -r "${mc_cvs_tag}" -dP
+		) 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+	else
+		phase_start "getting fresh CVS copy ..."
+		( mkdir -p "${mc_srcdir}" \
+		  && cd "${mc_srcdir}/.." \
+		  && env CVS_RSH=${mc_cvs_rsh} cvs -d "${mc_cvs_repository}" checkout -P -r "${mc_cvs_tag}" -d "`basename "${mc_srcdir}"`" "${mc_cvs_module}"
+		) 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+	fi
+}
+
+preconf_autoconf() {
+	test_phase="autoconf"
+	eval "${setup_preconf_env}"
+
+	if test ${do_autoconf} != yes && test -f "${mc_srcdir}/configure"; then
+		return 0
+	fi
+
+	mkdir -p "${mc_logdir}"
+
+	phase_start "creating ./configure script ..."
+	{ cd "${mc_srcdir}" \
+	  && echo "#!/bin/sh" > ./configure.mc \
+	  && chmod +x ./configure.mc \
+	  && ${SHELL-"/bin/sh"} ./autogen.sh
+	} 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+}
+
+setup_testenv=\
+"test_srcdir=\"\${mc_srcdir}\";"\
+"test_workdir=\"\${mc_builddir}/\${testname}\";"\
+"test_prefix=\"\${mc_prefixdir}/\${testname}\";"\
+"test_logdir=\"\${mc_logdir}/\${testname}\";"\
+"out=\"\${test_logdir}/\${test_phase}.out\";"\
+"err=\"\${test_logdir}/\${test_phase}.err\";"
+
+confbuild_cleanwork() {
+	test_phase="cleanwork"
+	eval "${setup_testenv}"
+
+	if test ${do_clean_workdir} = no || test ! -d "${test_workdir}"; then
+		return 0
+	fi
+
+	mkdir -p "${test_logdir}"
+
+	phase_start "cleaning directory for ${testname} ..."
+	{ rm -rf "${test_workdir}"
+	} 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+}
+
+confbuild_configure() {
+	test_phase="configure"
+	eval "${setup_testenv}"
+
+	if test ${do_configure} = no && test -f "${test_workdir}/Makefile"; then
+		return 0
+	fi
+
+	mkdir -p "${test_logdir}"
+
+	phase_start "configuring for ${testname} ..."
+	( set -e
+	  mkdir -p "${test_workdir}"
+	  cd "${test_workdir}"
+	  cmd="${test_srcdir}/configure"
+	  cmd="${cmd} --prefix=\"${test_prefix}\""
+	  cmd="${cmd} CPP=\"${mc_cpp}\""
+	  cmd="${cmd} CPPFLAGS=\"${mc_cppflags}\""
+	  cmd="${cmd} CC=\"${mc_cc}\""
+	  cmd="${cmd} CFLAGS=\"${mc_cflags}\""
+	  cmd="${cmd} LDFLAGS=\"${mc_ldflags}\""
+	  cmd="${cmd} ${mc_configure_args_pre}"
+	  cmd="${cmd} ${configure_args}"
+	  cmd="${cmd} ${mc_configure_args_post}"
+	  echo "running $cmd"
+	  eval "$cmd"
+	) 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+}
+
+confbuild_make() {
+	make_target="$1"
+	test_phase="make_${make_target}"
+	eval "${setup_testenv}"
+
+	if eval "test \${do_make_${make_target}} = no"; then
+		return 0
+	fi
+
+	mkdir -p "${test_logdir}"
+
+	phase_start "running \"make ${make_target}\" for ${testname} ..."
+	( cd "${test_workdir}" \
+	  && eval "${mc_make} ${mc_make_flags} ${make_target}"
+	) 1>"${out}" 2>"${err}" && phase_ok_or_warnings "${err}" || phase_failed "${err}"
+}
+
+confbuild() {
+	failed=no
+
+	confbuild_cleanwork
+	if test ${failed} = yes; then return 0; fi
+
+	confbuild_configure
+	if test ${failed} = yes; then return 0; fi
+
+	confbuild_make "clean"
+	if test ${failed} = yes; then return 0; fi
+
+	confbuild_make "all"
+	if test ${failed} = yes; then return 0; fi
+
+	confbuild_make "install"
+	if test ${failed} = yes; then return 0; fi
+}
+
+
+test_plain() {
+	testname="plain" \
+	configure_args="" \
+	confbuild
+}
+
+test_charset() {
+	testname="charset" \
+	configure_args="--enable-charset" \
+	confbuild
+}
+
+test_no_charset() {
+	testname="no_charset" \
+	configure_args="--disable-charset" \
+	confbuild
+}
+
+test_X11() {
+	testname="X11" \
+	configure_args="--with-x" \
+	confbuild
+}
+
+test_no_X11() {
+	testname="no_X11" \
+	configure_args="--without-x" \
+	confbuild
+}
+
+test_vfs() {
+	testname="vfs" \
+	configure_args="--with-vfs" \
+	confbuild
+}
+
+test_no_vfs() {
+	testname="no_vfs" \
+	configure_args="--without-vfs" \
+	confbuild
+}
+
+test_mcfs() {
+	testname="mcfs" \
+	configure_args="--with-mcfs" \
+	confbuild
+}
+
+test_no_mcfs() {
+	testname="no_mcfs" \
+	configure_args="--without-mcfs" \
+	confbuild
+}
+
+test_samba() {
+	testname="samba" \
+	configure_args="--with-samba" \
+	confbuild
+}
+
+test_no_samba() {
+	testname="no_samba" \
+	configure_args="--without-samba" \
+	confbuild
+}
+
+test_ext2undel() {
+	testname="ext2undel" \
+	configure_args="--with-ext2undel" \
+	confbuild
+}
+
+test_no_ext2undel() {
+	testname="no_ext2undel" \
+	configure_args="--without-ext2undel" \
+	confbuild
+}
+
+test_slang() {
+	testname="slang" \
+	configure_args="--with-screen=slang" \
+	confbuild
+}
+
+test_mcslang() {
+	testname="mcslang" \
+	configure_args="--with-screen=mcslang" \
+	confbuild
+}
+
+test_ncurses() {
+	testname="ncurses" \
+	configure_args="--with-screen=ncurses" \
+	confbuild
+}
+
+test_maintainer() {
+	testname="maintainer" \
+	configure_args="--enable-maintainer-mode" \
+	confbuild
+}
+
+test_no_maintainer() {
+	testname="no_maintainer" \
+	configure_args="--disable-maintainer-mode" \
+	confbuild
+}
+
+test_i18n() {
+	testname="i18n" \
+	configure_args="--enable-nls" \
+	confbuild
+}
+
+test_no_i18n() {
+	testname="no_i18n" \
+	configure_args="--disable-nls" \
+	confbuild
+}
+
+test_no_features() {
+	testname="no_features" \
+	configure_args="${configure_args_disable_all}"
+	confbuild
+}
+
+test_all_features() {
+	testname="all_features" \
+	configure_args="${configure_args_enable_all}" \
+	confbuild
+}
+
+test_all_warnings() {
+	testname="all_warnings" \
+	configure_args="${configure_args_enable_all} --enable-gcc-warnings" \
+	confbuild
+}
+
+run_tests() {
+	failed=no
+
+	preconf_download
+	if test ${failed} = yes; then return 0; fi
+
+	preconf_autoconf
+	if test ${failed} = yes; then return 0; fi
+
+	for i in "$@"; do
+		if type test_"${i}" 2>/dev/null \
+		   | grep "function" 1>/dev/null 2>&1; then
+			eval "test_${i}"
+		else
+			echo "[`date`] test \"$i\" not found." 1>&2
+			errors=`expr $errors + 1`
+		fi
+	done
+}
+
+if test -z "${mc_srcdir}";    then mc_srcdir="${mc_basedir}/src";          fi
+if test -z "${mc_prefixdir}"; then mc_prefixdir="${mc_basedir}/installed"; fi
+if test -z "${mc_builddir}";  then mc_builddir="${mc_basedir}/build";      fi
+if test -z "${mc_logdir}";    then mc_logdir="${mc_basedir}/logs";         fi
+if test -z "${mc_cpp}";       then mc_cpp="${mc_cc} -E";                   fi
+
+if test ${do_clean_basedir} = yes; then
+	phase_start "cleaning up everything ..."
+	{ rm -rf "${mc_basedir}"
+	} && phase_ok || phase_failed
+else
+	if test $# -gt 0; then
+		run_tests "$@"
+	else
+		run_tests `sed -n -e 's,^test_\([a-z0-9_]*\)() .*{,\1,p' $0`
+	fi
+fi
+
+if test ${errors} -ne 0 || test ${warnings} -ne 0; then
+	echo "[`date`] finished with ${errors} errors and ${warnings} warnings."
+else
+	echo "[`date`] finished successfully."
+fi
+exit ${errors}
