@@ -1,3 +1,8 @@
+2000-08-30  Pavel Roskin  <proski@gnu.org>
+
+	* features.h, keys.h, textconf.h, x.h: added protection against
+	multiple inclusion
+
 2000-08-23  Pavel Roskin  <proski@gnu.org>
 
 	* features.c: include <sys/param.h> to avoid a warning

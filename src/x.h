@@ -1,3 +1,5 @@
+#ifndef __X_H
+#define __X_H
 
 #ifndef HAVE_X
 #   include "textconf.h"
@@ -12,3 +14,4 @@
 #   include "gmain.h"
 #endif
 
+#endif /* __X_H */

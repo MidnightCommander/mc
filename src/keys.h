@@ -1,3 +1,6 @@
+#ifndef __KEYS_H
+#define __KEYS_H
+
 /* Key constants as used by mc for non-curses ports */
 
 enum {
@@ -13,3 +16,5 @@ enum {
 
 
 #define KEY_F(x) 1000+x
+
+#endif /* __KEYS_H */
