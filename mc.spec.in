@@ -25,7 +25,9 @@ files, and poke into RPMs for specific files.  :-)
 %package -n gmc
 Summary:  Midnight Commander visual shell (GNOME version)
 Requires: mc >= %{PACKAGE_VERSION}
+BuildPreq: stylesheets
 Group:    Interface/Desktops
+
 %description -n gmc
 Midnight Commander is a visual shell much like a file manager, only with
 way more features.  This is the GNOME version. It's coolest feature is the
@@ -100,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/extfs/*
 %{prefix}/lib/mc/syntax/*
+%{prefix}/lib/mc/term/*
 %{prefix}/man/man1/*
 %config /etc/profile.d/*
 %config /etc/mc.global
@@ -125,8 +128,12 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/share/gnome/help/gmc/*
 %{prefix}/share/locale/*
 %config /etc/CORBA/servers/*
+%dir %{prefix}/lib/mc/desktop-scripts
 
 %changelog
+* Sat Sep 04 1999 Gregory McLean <gregm@comstar.net>
+- Added a build prereq so that rpms get built with documentation ;)
+
 * Mon Jul 12 1999 Kjartan Maraas  <kmaraas@online.no>
 - added help and locale files to %files
 
