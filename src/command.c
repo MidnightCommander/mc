@@ -42,84 +42,93 @@
 /* This holds the command line */
 WInput *cmdline;
 
-/*Tries variable substitution, and if a variable CDPATH
-of the form e.g. CDPATH=".:~:/usr" exists, we try then all the paths which
-are mentioned there. Also, we do not support such extraordinary things as
-${var:-value}, etc. Use the eval cd 'path' command instead.
-Bugs: No quoting occurrs here, so ${VAR} and $VAR will be always
-substituted. I think we can encourage users to use in such extreme
-cases instead of >cd path< command a >eval cd 'path'< command, which works
-as they might expect :) 
-FIXME: Perhaps we should do wildcard matching as well? */
-static int examine_cd (char *path)
+/*
+ * Expand the argument to "cd" and change directory.  First try tilde
+ * expansion, then variable substitution.  If the CDPATH variable is set
+ * (e.g. CDPATH=".:~:/usr"), try all the paths contained there.
+ * We do not support such rare substitutions as ${var:-value} etc.
+ * No quoting is implemented here, so ${VAR} and $VAR will be always
+ * substituted.  Wildcards are not supported either.
+ * Advanced users should be encouraged to use "\cd" instead of "cd" if
+ * they want the behavior they are used to in the shell.
+ */
+static int
+examine_cd (char *path)
 {
-    char *p;
-    int result;
-    char *q, *r, *s, *t, c;
+    int result, qlen;
+    char *path_tilde;
+    char *p, *q, *r, *s, *t, c;
 
-    q = g_malloc (MC_MAXPATHLEN + 10);
+    /* Tilde expansion */
+    path_tilde = tilde_expand (path);
+
+    /* Leave space for further expansion */
+    qlen = strlen (path_tilde) + MC_MAXPATHLEN;
+    q = g_malloc (qlen);
+
     /* Variable expansion */
-    for (p = path, r = q; *p && r < q + MC_MAXPATHLEN; ) {
-        if (*p != '$' || (p [1] == '[' || p [1] == '('))
-            *(r++)=*(p++);
-        else {
-            p++;
-            if (*p == '{') {
-                p++;
-                s = strchr (p, '}');
-            } else
-            	s = NULL;
-            if (s == NULL)
-            	s = strchr (p, PATH_SEP);
-            if (s == NULL)
-            	s = strchr (p, 0);
-            c = *s;
-            *s = 0;
-            t = getenv (p);
-            *s = c;
-            if (t == NULL) {
-                *(r++) = '$';
-                if (*(p - 1) != '$')
-                    *(r++) = '{';
-            } else {
-                if (r + strlen (t) < q + MC_MAXPATHLEN) {
-                    strcpy (r, t);
-                    r = strchr (r, 0);
-                }
-                if (*s == '}')
-                    p = s + 1;
-                else
-                    p = s;
-            }
-        }
+    for (p = path_tilde, r = q; *p && r < q + MC_MAXPATHLEN;) {
+	if (*p != '$' || (p[1] == '[' || p[1] == '('))
+	    *(r++) = *(p++);
+	else {
+	    p++;
+	    if (*p == '{') {
+		p++;
+		s = strchr (p, '}');
+	    } else
+		s = NULL;
+	    if (s == NULL)
+		s = strchr (p, PATH_SEP);
+	    if (s == NULL)
+		s = strchr (p, 0);
+	    c = *s;
+	    *s = 0;
+	    t = getenv (p);
+	    *s = c;
+	    if (t == NULL) {
+		*(r++) = '$';
+		if (*(p - 1) != '$')
+		    *(r++) = '{';
+	    } else {
+		if (r + strlen (t) < q + MC_MAXPATHLEN) {
+		    strcpy (r, t);
+		    r = strchr (r, 0);
+		}
+		if (*s == '}')
+		    p = s + 1;
+		else
+		    p = s;
+	    }
+	}
     }
     *r = 0;
-    
+
     result = do_cd (q, cd_parse_command);
 
     /* CDPATH handling */
     if (*q != PATH_SEP && !result) {
-        p = getenv ("CDPATH");
-        if (p == NULL)
-            c = 0;
-        else
-            c = ':';
-        while (!result && c == ':') {
-            s = strchr (p, ':');
-            if (s == NULL)
-            	s = strchr (p, 0);
-            c = *s;
-            *s = 0;
-            if (*p) {
+	p = getenv ("CDPATH");
+	if (p == NULL)
+	    c = 0;
+	else
+	    c = ':';
+	while (!result && c == ':') {
+	    s = strchr (p, ':');
+	    if (s == NULL)
+		s = strchr (p, 0);
+	    c = *s;
+	    *s = 0;
+	    if (*p) {
 		r = concat_dir_and_file (p, q);
-                result = do_cd (r, cd_parse_command);
-                g_free (r);
-            }
-            *s = c;
-            p = s + 1;
-        }
+		result = do_cd (r, cd_parse_command);
+		g_free (r);
+	    }
+	    *s = c;
+	    p = s + 1;
+	}
     }
     g_free (q);
+    g_free (path_tilde);
     return result;
 }
 
