@@ -282,8 +282,11 @@ int my_system (int flags, const char *shell, const char *command)
 #if 0
 	prepare_environment ();
 #endif
+
+#ifdef USE_VFS
 	if (flags & EXECUTE_SETUID)
 	    setreuid (vfs_uid, vfs_uid);
+#endif
 	
 	if (flags & EXECUTE_AS_SHELL)
 	    execl (shell, shell, "-c", command, (char *) 0);

@@ -1,3 +1,10 @@
+Thu Oct  1 18:43:34 1998  Pavel Roskin <pavel_roskin@geocities.com>
+
+	* file.c: Commented out search for egrep because execvp() does
+	it itself
+
+	* utilunix.c: vfs_uid should not be used if VFS is disabled
+
 Tue Sep 29 17:53:56 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* main.c: removed stupid reference to {sfs,extfs}_which

@@ -353,9 +353,12 @@ find_add_match (Dlg_head *h, char *dir, char *file)
 #endif	    
 }
 
-char *
+static char *
 locate_egrep (void)
 {
+/* commented out because mc runs egrep via execvp() which searches PATH
+    itself. It is likely that egrep in PATH is better than in /bin */
+#if 0
     char *paths [] = {
 	"/bin/egrep",
 	"/usr/bin/egrep",
@@ -370,6 +373,7 @@ locate_egrep (void)
 	if (stat (*p, &s) == 0)
 	    return *p;
     }
+#endif
     return "egrep";
 }
 
