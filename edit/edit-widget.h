@@ -1,7 +1,7 @@
 #ifndef __EDIT_WIDGET_H
 #define __EDIT_WIDGET_H
 
-#include "src/dialog.h"		/* Widget */
+#include "../src/dialog.h"		/* Widget */
 
 #define MAX_MACRO_LENGTH 1024
 #define N_LINE_CACHES 32

@@ -31,16 +31,16 @@
 #include "editcmddef.h"
 #include "edit-widget.h"
 
-#include "src/color.h"		/* dialog_colors */
-#include "src/tty.h"		/* LINES */
-#include "src/widget.h"		/* listbox_new() */
-#include "src/layout.h"		/* clr_scr() */
-#include "src/main.h"		/* mc_home */
-#include "src/help.h"		/* interactive_display() */
-#include "src/key.h"		/* XCTRL */
-#include "src/dialog.h"		/* do_refresh() */
-#include "src/wtools.h"		/* message() */
-#include "src/charsets.h"
+#include "../src/color.h"	/* dialog_colors */
+#include "../src/tty.h"		/* LINES */
+#include "../src/widget.h"	/* listbox_new() */
+#include "../src/layout.h"	/* clr_scr() */
+#include "../src/main.h"	/* mc_home */
+#include "../src/help.h"	/* interactive_display() */
+#include "../src/key.h"		/* XCTRL */
+#include "../src/dialog.h"	/* do_refresh() */
+#include "../src/wtools.h"	/* message() */
+#include "../src/charsets.h"
 
 #define edit_get_load_file(f,h) input_dialog (h, _(" Enter file name: "), f)
 #define edit_get_save_file(f,h) input_dialog (h, _(" Enter file name: "), f)

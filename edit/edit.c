@@ -26,9 +26,9 @@
 #include "edit-widget.h"
 #include "editcmddef.h"
 
-#include "src/cmd.h"		/* view_other_cmd() */
-#include "src/user.h"		/* user_menu_cmd() */
-#include "src/wtools.h"		/* query_dialog() */
+#include "../src/cmd.h"		/* view_other_cmd() */
+#include "../src/user.h"	/* user_menu_cmd() */
+#include "../src/wtools.h"	/* query_dialog() */
 
 /*
    what editor are we going to emulate? one of EDIT_KEY_EMULATION_NORMAL

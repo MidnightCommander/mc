@@ -37,7 +37,7 @@
 
 #include <stdlib.h>
 
-#include "src/global.h"
+#include "../src/global.h"
 
 #define N_menus 5
 

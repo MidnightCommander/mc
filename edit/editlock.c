@@ -25,7 +25,7 @@
 #include "edit.h"
 #include "editlock.h"
 
-#include "src/wtools.h"		/* edit_query_dialog () */
+#include "../src/wtools.h"	/* edit_query_dialog () */
 
 #define BUF_SIZE 255
 #define PID_BUF_SIZE 10

@@ -33,8 +33,8 @@
 #include "execute.h"
 #include "setup.h"
 
-#include "edit/edit.h"		/* BLOCK_FILE */
-#include "edit/edit-widget.h"	/* WEdit */
+#include "../edit/edit.h"		/* BLOCK_FILE */
+#include "../edit/edit-widget.h"	/* WEdit */
 
 /* For the simple listbox manager */
 #include "dialog.h"

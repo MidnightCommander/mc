@@ -23,12 +23,12 @@
 #include <config.h>
 
 #include "edit.h"
-#include "src/wtools.h"		/* query_dialog() */
-#include "src/menu.h"		/* menu_entry */
-#include "src/tty.h"		/* KEY_F */
-#include "src/key.h"		/* XCTRL */
-#include "src/main.h"		/* drop_menus */
-#include "src/learn.h"		/* learn_keys */
+#include "../src/wtools.h"	/* query_dialog() */
+#include "../src/menu.h"	/* menu_entry */
+#include "../src/tty.h"		/* KEY_F */
+#include "../src/key.h"		/* XCTRL */
+#include "../src/main.h"	/* drop_menus */
+#include "../src/learn.h"	/* learn_keys */
 
 #include "edit-widget.h"
 #include "editcmddef.h"
