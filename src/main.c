@@ -1319,9 +1319,8 @@ copy_other_readlink (void)
     copy_readlink (opanel);
 }
 
-/* Inserts the selected file name into the input line */
-/* Exported so that the command modules uses it */
-void
+/* Insert the selected file name into the input line */
+static void
 copy_prog_name (void)
 {
     char *tmp;
@@ -1469,8 +1468,6 @@ static const key_map default_map[] = {
     {KEY_F (20), (key_callback) quiet_quit_cmd},
 
     /* Copy useful information to the command line */
-    {ALT ('\n'), copy_prog_name},
-    {ALT ('\r'), copy_prog_name},
     {ALT ('a'), copy_current_pathname},
     {ALT ('A'), copy_other_pathname},
 
@@ -1741,14 +1738,14 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (id == '\t')
 	    free_completions (cmdline);
 
-	/* Ctrl-Enter */
-	if (id == ('\n' | KEY_M_CTRL)) {
-	    copy_prog_name ();
+	if (id == '\n' && cmdline->buffer[0]) {
+	    send_message ((Widget *) cmdline, WIDGET_KEY, id);
 	    return MSG_HANDLED;
 	}
 
-	if (id == '\n' && cmdline->buffer[0]) {
-	    send_message ((Widget *) cmdline, WIDGET_KEY, id);
+	/* Ctrl-Enter and Alt-Enter */
+	if ((id & ~(KEY_M_CTRL | KEY_M_ALT)) == '\n') {
+	    copy_prog_name ();
 	    return MSG_HANDLED;
 	}
 

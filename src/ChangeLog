@@ -1,5 +1,10 @@
 2002-12-25  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (copy_prog_name): Make static.
+	(midnight_callback): Handle both Alt-Enter and Ctrl-Enter before
+	the widgets, because the input widget interprets them now.
+	(default_map): Remove Alt-Enter, it's handled elsewhere.
+
 	* key.c (correct_key_code): Convert Shift-Tab and Ctrl-Tab to
 	Back Tab (used in dialogs to jump to the previous widget).
 

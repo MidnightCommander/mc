@@ -126,7 +126,6 @@ void change_panel   (void);
 void init_sigchld   (void);	/* For subshell.c */
 int load_prompt     (int fd, void *unused);
 void save_cwds_stat (void);
-void copy_prog_name (void);
 int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
 
 void untouch_bar    (void);
