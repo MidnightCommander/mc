@@ -1833,7 +1833,6 @@ msgid " Continue "
 msgstr " Folytatás "
 
 #: gtkedit/editcmd.c:1151
-#, fuzzy
 msgid "o&Ne"
 msgstr "e&Gy"
 
@@ -2767,6 +2766,9 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Nem sikerült megnyitni az ispell programot. \n"
+" Nézd meg, hogy bent van-e a path-ban, és a -a opció mûködik-e. \n"
+" Egyébként tiltsd a helyesírásellenõrzést az Opciók menüben. "
 
 #: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
 #: gtkedit/syntax.c:1078
@@ -2779,6 +2781,9 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Nem sikerült megnyitni az ispell szûrõt. \n"
+" Nézd meg, hogy bent van-e a path-ban, és a -a opció mûködik-e. \n"
+" Egyébként tiltsd a helyesírásellenõrzést az Opciók menüben. "
 
 #: gtkedit/syntax.c:1069
 msgid ""
@@ -2786,12 +2791,17 @@ msgid ""
 " Check that it is in your path and works with the -a option. \n"
 " Alternatively, disable spell checking from the Options menu. "
 msgstr ""
+" Nem sikerült megnyitni az ispell szûrõt. \n"
+" Nézd meg, hogy bent van-e a path-ban, és a -a opció mûködik-e. \n"
+" Egyébként tiltsd a helyesírásellenõrzést az Opciók menüben. "
 
 #: gtkedit/syntax.c:1078
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
+" Nem tudok olvasni az ispell-tõl. \n"
+" Újraindítom az ispell-t. "
 
 #: gtkedit/syntax.c:1351 gtkedit/syntax.c:1353
 msgid " Load Syntax Rules "
@@ -2803,6 +2813,9 @@ msgid ""
 " A new rule file is being installed. \n"
 " Your old rule file has been saved with a .OLD extension. "
 msgstr ""
+" A szintaxis fájlod régi \n"
+" Egy új szintaxis fájl lesz telepítve. \n"
+" A régi fájlod .OLD kiterjesztéssel el lesz mentve. "
 
 #: gtkedit/syntax.c:1487
 msgid " File access error "
@@ -3739,7 +3752,7 @@ msgstr ""
 
 #: src/file.c:619
 msgid " Reget failed, about to overwrite file "
-msgstr ""
+msgstr " Az újraletöltés nem sikerült, felül kell írni "
 
 #: src/file.c:625
 #, c-format
@@ -5181,7 +5194,7 @@ msgstr "A munkakönyvtár kiíratása program kilépéskor"
 
 #: src/main.c:2716
 msgid "Resets soft keys on HP terminals"
-msgstr ""
+msgstr "Soft key-ek rezetelése HP terminálokon"
 
 #: src/main.c:2718
 msgid "To run on slow terminals"
@@ -6098,7 +6111,7 @@ msgid "fish: Local read failed, sending zeros"
 msgstr "fish: Helyi olvasás sikertelen, 0-k küldése"
 
 #: vfs/fish.c:476
-#, fuzzy, c-format
+#, c-format
 msgid "fish: storing %s %d (%d)"
 msgstr "fish: %s fájl feltöltése %d (%d)"
 
