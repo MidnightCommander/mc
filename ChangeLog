@@ -1,5 +1,9 @@
 2001-08-24  Pavel Roskin  <proski@gnu.org>
 
+	* FAQ: Remove information about GNOME edition.  Minor fixes.
+	* README: Likewise.
+	* NEWS: Mention removing the GNOME edition.
+
 	* acinclude.m4: Include all used macros from the macros
 	directory.
 	* autogen.sh: Remove all references to "macros".

@@ -87,7 +87,7 @@ Questions and Answers
 
 1.1 What is Midnight Commander?
 
-   The Midnight Commander is a user-friendly yet powerful file manager
+   GNU Midnight Commander is a user-friendly yet powerful file manager
    and visual shell, useful to novice and guru alike. It provides a
    clear, user-friendly, and somewhat protected interface to a Unix
    system while making many frequent file operations more efficient and
@@ -139,8 +139,6 @@ Questions and Answers
    your terminal works with vi, emacs, elm or pine it will work with
    Midnight Commander.
    
-   The GNOME edition requires an X terminal.
-   
 1.4 What else do I need to run MC?
 
    You need an Unix compatible operating system. Support for Windows 95/NT
@@ -154,9 +152,6 @@ Questions and Answers
    from ftp://ftp.systemy.it/pub/develop/. You need nothing extra to use
    mouse on xterm.
    
-   To compile the GNOME edition you need GNOME libraries as well as the
-   libraries they depend on. See http://www.gnome.org/ for details.
-   
    If you do not want to use the S-Lang library you could try using
    ncurses (we recommend only version 4.1 and above).
    
@@ -169,11 +164,11 @@ Questions and Answers
    that you may freely copy, change and distribute it, but that you may
    not impose any restrictions on further distribution, and that you must
    make the source code available. This is not the same as Public Domain.
-   For details, the GNU license is included in the Midnight Commander
+   For details, the GNU license is included in GNU Midnight Commander
    source distribution (the COPYING file).
    
    Midnight Commander is nowadays officially a part of GNU project. All
-   the authors of the Midnight Commander have given all their rights on
+   the authors of GNU Midnight Commander have given all their rights on
    the program to the Free Software Foundation.
    
 1.6 Where can I get Midnight Commander?
@@ -211,7 +206,7 @@ Questions and Answers
    for function keys. Type "mc -V" to see what terminal database is being
    used. If the result is "using the S-Lang library with terminfo
    database" you should install one of the enhanced terminfo databases
-   included in the Midnight Commander source distribution. For example,
+   included in GNU Midnight Commander source distribution. For example,
    if you are using xterm type "tic xterm.ti".
    
    If the result is "using the S-Lang library with termcap database" you
@@ -261,9 +256,6 @@ Questions and Answers
    the ESC key cancels. There is no way to make ESC cancel immediately
    (if we want to be able to use arrows keys and function keys).
    
-   X terminals allow more control over keyboard, so these ESC limitations
-   does not concern the GNOME edition of the Midnight Commander.
-   
 2.5 How can I add the plus sign (+) on the command line?
 
    Press C-q first, then press the + sign.
@@ -304,11 +296,8 @@ Questions and Answers
    
 3.3 How do I get the extension dependent pop-up menu to pop up?
 
-   You need a GNOME edition. Normal MC (text-mode edition) doesn't
+   It was developed for the GNOME edition. The text-mode edition doesn't
    support this feature yet.
-
-   In the GNOME edition you can access the extension dependent
-   pop-up menu by pressing the right mouse button.
 
 4 Display
 
@@ -460,7 +449,7 @@ Questions and Answers
    
    Third, if you use ncurses library, check that your terminfo database
    supports color. If not you should install one of the enhanced terminfo
-   databases included in the Midnight Commander source distribution.
+   databases included in GNU Midnight Commander source distribution.
    
    Fourth, you might want to set the TERM environment variable so that
    you use the correct terminfo database or termcap entry.
@@ -547,14 +536,7 @@ enough?
 
 5.1 Xview, Tk and Gnome editions?
 
-   Xview and Tk editions have been removed from the sources.
-
-   GNOME edition will compile by default if the necessary libraries are
-   present on the system. If it's not desired, give the "--without-gnome"
-   option to the configure script and otherwise compile as usual.
-   
-   The GNOME edition is work in progress. It may lack some functionality
-   of the text edition.
+   Xview and Tk and GNOME editions have been removed from the sources.
    
 6 Command line problems
 
@@ -807,10 +789,10 @@ into drive D:"?
    You might first want to get the newest development version to see if
    the bug is fixed or the feature is added already.
    
-   Send your report/request to mc-devel@gnome.org or
-   mc@gnome.org. These mailing lists are the most certain
-   way to contact the developers. Remember to mention if you are not on
-   the mailing list to make sure that you will receive a copy of replies.
+   Send your report/request to mc-devel@gnome.org or mc@gnome.org. These
+   mailing lists are the most certain way to contact the
+   developers. Remember to mention if you are not on the mailing list
+   to make sure that you will receive a copy of replies.
    
    Give as much details as possible. A too long message is a lot better
    than a too short message.
@@ -840,7 +822,7 @@ into drive D:"?
    Before you start coding check the latest development version. It might
    be that your feature has already been implemented.
    
-   Note that the authors of the Midnight Commander have given all their
+   Note that the authors of GNU Midnight Commander have given all their
    rights on the program to the Free Software Foundation. You will have
    to do the same if you contribute non-trivial patches. Otherwise we
    have to reject your patches in order to avoid copyright problems.
@@ -864,7 +846,7 @@ answer?
    Following mailing lists discuss about Midnight Commander:
    
    mc@gnome.org
-          General discussion of the Midnight Commander
+          General discussion of GNU Midnight Commander
           To subscribe visit
           http://mail.gnome.org/mailman/listinfo/mc/
           
@@ -894,7 +876,7 @@ answer?
    
 11.2 Feedback is invited
 
-   Send your comments about this document and the Midnight Commander to
+   Send your comments about this document and GNU Midnight Commander to
    mc@gnome.org
    
 11.3 Disclaimer and copyright
@@ -903,5 +885,5 @@ answer?
    not warranted to be correct; you use it at your own risk.
    
    You can use Questions and Answers according to GNU Public License (see
-   the COPYING file in the Midnight Commander source distribution).
+   the COPYING file in GNU Midnight Commander source distribution).
    Questions and Answers is not public domain.
