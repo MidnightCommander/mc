@@ -1,3 +1,8 @@
+2004-02-09  Pavel Roskin  <proski@gnu.org>
+
+	* subshell.c: Use "\r\n" at the end of all error messages. 
+	Don't use perror().  Make error messages more exact.
+
 2004-01-23  Pavel Roskin  <proski@gnu.org>
 
 	* utilunix.c (canonicalize_pathname): Add support for UNC paths.
