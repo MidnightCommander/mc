@@ -49,7 +49,7 @@
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #    include <rx.h>
 #else
-#    include <regex.h>
+#    include "eregex.h"
 #endif
 
 /* Size of the find parameters window */

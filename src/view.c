@@ -43,7 +43,7 @@
 #if defined(HAVE_RX_H) && defined(HAVE_REGCOMP)
 #    include <rx.h>
 #else
-#    include <regex.h>
+#    include "eregex.h"
 #endif
 
 #include "global.h"

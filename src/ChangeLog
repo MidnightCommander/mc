@@ -1,5 +1,12 @@
 2002-03-18  Pavel Roskin  <proski@gnu.org>
 
+	* eregex.h: Update from glibc-2.2.5.
+	* regex.c: Likewise.
+	* find.c: Use eregex.h, not regex.h.
+	* util.c: Likewise.
+	* view.c: Likewise.
+	From Alexander Varakin <avarakin00@hotmail.com>
+
 	* find.c (find_parameters): Invert condition when find is case
 	sensitive.
 
