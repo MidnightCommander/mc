@@ -1,6 +1,18 @@
 .\" Tradotto dal 15 agosto 2002 da
 .\"     Marco Ciampa <ciampix@libero.it>
-.\" Chi vuole contribuire si aggiunga il nome qui sotto.
+.\" Chi vuole contribuire aggiunga il nome qui sotto.
+.\"
+.\" Come tutte le traduzioni ho dovuto fare dei compromessi.
+.\" Il più importante (e che mi provoca tuttora dei dubbi) è stato la
+.\" traduzione dei comandi Chmod, Chown e Advanced Chown con Permessi,
+.\" Proprietario e Proprietario avanzato rispettivamente. Lo spirito che
+.\" mi ha mosso in questa direzione è stato il desiderio di rendere mc più
+.\" user frendly che coerente con altre traduzioni, visto il ruolo che si
+.\" è conquistato soprattutto nei nuovi utenti.
+.\" Altro esempio è l'uso (per questioni 'estetiche') indifferente di
+.\" selezionato e marcato, quando il contesto rendeva ovvio il significato.
+.\"
+.\" Prego mantenere la linea di traduzione generale (per quanto possibile).
 .\"
 .TH mc 1 "30 Ottobre 1998"
 .\"SKIP_SECTION"
@@ -2261,47 +2273,53 @@ Aggiorna per sovrascriverli solo se il file sorgente è più recente
 del file di destinazione. E' possibile bloccare l'intera operazione
 premendo il tasto Esci.
 .PP
-The recursive delete dialog is shown when you try to delete a
-directory which is not empty. Press the Yes button to delete the
-directory recursively, the No button to skip the directory, the alL
-button to delete all the directories and the nonE button to skip all
-the non-empty directories. You can abort the whole operation by
-pressing the Abort button. If you selected the Yes or alL button you
-will be asked for a confirmation. Type "yes" only if you are really
-sure you want to do the recursive delete.
+La finestra di dialogo della cancellazione ricorsiva appare quando
+si tenta di cancellare una directory che non è vuota. Premere il
+tasto Si per cancellare la directory ricorsivamente o No per 
+saltare la directory, il tasto Tutto per cancellare tutte le
+directory non vuote e Nessuno per saltare tutte le directory non
+vuote. Per fermare l'intera operazione premere il tasto Esci.
+Se si seleziona il tasto Si o Tutto verrà richiesta una conferma.
+Premere "si" solo se si è veramente sicuri di voler fare una
+cancellazione ricorsiva.
 .PP
-If you have tagged files and perform an operation on them only the
-files on which the operation succeeded are untagged. Failed and
-skipped files are left tagged.
+Se si hanno dei file marcati e si esegue un'operazione su di essi, solo
+i file sui quali l'operazione ha avuto successo verranno deselezionati.
+I file su cui è fallita l'operazione o che sono stati saltati vengono 
+lasciati marcati.
 .PP
-.SH "Mask Copy/Rename"
-The copy/move operations lets you translate the names of files in an easy
-way. To do it, you have to specify the correct source mask and usually in
-the trailing part of the destination specify some wildcards.
-All the files matching the source mask are copied/renamed according to
-the target mask. If there are tagged files, only the tagged files
-matching the source mask are renamed.
+.\"NODE "Mask Copy/Rename"
+.SH "Maschera Copia/Rinomina"
+L'operazione di copia/rinomina permette di cambiare il nomi dei file in
+maniera semplice. Per farlo, è necessario specificare la maschera di 
+sorgente corretta e generalmente, nella parte finale della destinazione,
+specificare alcuni caratteri jolly.
+Tutti i file corrispondenti alla maschera sorgente sono 
+copiati/rinominati secondo la maschera destinazione. Se ci sono file
+marcati, vengono rinominati solo i file marcati che corrispondono alla
+maschera sorgente.
 .PP
-There are other option which you can set: 
+Queste le opzioni che possono essere impostate:
 .PP
-Follow links tells whether make the symlinks and hardlinks in the source 
-directory (recursively in subdirectories) new links in the target 
-directory or whether would you like to copy their content.
+Segue i collegamenti, specifica se creare i collegamenti simbolici o no
+(hard link), presenti nella directory sorgente (e ricorsivamente nelle
+sue sotto directory) come nuovi collegamenti oppure se invece si 
+desidera che venga copiato il loro contenuto.
 .PP
-Dive into subdirs tells what to do if in the target
-directory exists a directory with the same name as the
-file/directory being copied. The default action is to copy
-it's content into that directory, by enabling this 
-you can copy the source directory into that directory. 
-Perhaps an example will help:
+In una sottodir se esiste già, specifica cosa fare se nella 
+directory obiettivo esiste una directory con lo stesso nome del
+file/directory in copia. L'azione predefinita è di copiare
+il suo contenuto in quella directory, ma selezionando quest'opzione
+si può copiare la directory sorgente in questa directory.
+Forse un esempio aiuterà:
 .PP
-You want to copy content of a directory foo to /bla/foo,
-which is an already existing directory. Normally (when
-Dive is not set), mc would copy it exactly into /bla/foo. 
-By enabling this option you will copy the content into /bla/foo/foo,
-because the directory already exists.
+Si vuole copiare il contenuto di una directory pallo su /pinco/pallo,
+che è una directory che esiste già. Normalmente (quando l'opzione
+non è impostata), mc farebbe la copia in /pinco/pallo. Abilitando 
+quest'opzione verrà eseguita la copia in /pinco/pallo/pallo, perchè
+la directory esiste già.
 .PP
-Preserve attributes tells whether to preserve the original files' 
+Mantiene gli attributi, tells whether to preserve the original files' 
 permissions, timestamps and if you are root whether to preserve 
 the original files' UID and GID. If this option is not set the current 
 value of the umask will be respected.
