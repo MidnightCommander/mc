@@ -1,5 +1,8 @@
 2002-09-05  Pavel Roskin  <proski@gnu.org>
 
+	* man2hlp.c (handle_command): Make clear that unsupported
+	command is a warning, not an error.  Avoid unsafe strcat().
+
 	* view.c (view_mode_callback): Eliminate, use the default
 	callback.
 

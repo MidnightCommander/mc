@@ -459,10 +459,10 @@ handle_command (char *buffer)
     } else {
 	/* Other commands are ignored */
 	/* There is no memmove on some systems */
-	char buf[BUFFER_SIZE];
-	strcpy (buf, "Unsupported command ");
-	strcat (buf, buffer);
-	print_error (buf);
+	char warn_str[BUFFER_SIZE];
+	strcpy (warn_str, "Warning: unsupported command ");
+	strncat (warn_str, buffer, sizeof(warn_str));
+	print_error (warn_str);
 	return;
     }
 }
