@@ -1,9 +1,3 @@
-Before 4.6.1
-============
-
-Regression - restore tilde expansion, but do it properly this time.
-
-
 Before 4.6.2
 ============
 
