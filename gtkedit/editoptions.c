@@ -196,8 +196,8 @@ void edit_options_dialog (void)
 
 	    edit_key_emulation = *quick_widgets[13 + OA].result;
 
-	    /* Load syntax rules if user turned syntax highlighting on */
-	    if (option_syntax_highlighting && !old_syntax_hl)
+	    /* Load or unload syntax rules if the option has changed */
+	    if (option_syntax_highlighting != old_syntax_hl)
 		edit_load_syntax (wedit, 0, 0);
 
 	    return;
