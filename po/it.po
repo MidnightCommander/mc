@@ -3862,7 +3862,7 @@ msgstr "&Mai"
 
 #: src/option.c:98
 msgid "on dumb &Terminals"
-msgstr "Solo su Terminali stupidi."
+msgstr "Solo su Terminali stupidi"
 
 #: src/option.c:99
 msgid "alwa&Ys"
