@@ -250,56 +250,74 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
 
 #define I18N(x) (do_int && *x ? (x = _(x)): x)
 
-int quick_dialog_skip (QuickDialog *qd, int nskip)
+int
+quick_dialog_skip (QuickDialog *qd, int nskip)
 {
     Dlg_head *dd;
-    void     *widget;
-    WRadio   *r;
-    int      xpos;
-    int      ypos;
-    int      return_val;
-    WInput   *input;
+    void *widget;
+    WRadio *r;
+    int xpos;
+    int ypos;
+    int return_val;
+    WInput *input;
     QuickWidget *qw;
-    int      do_int;
+    int do_int;
+    int count = 0;		/* number of quick widgets */
+    int curr_widget;		/* number of the current quick widget */
+    Widget **widgets;		/* table of corresponding widgets */
 
-    if (!qd->i18n){
+    if (!qd->i18n) {
 	qd->i18n = 1;
 	do_int = 1;
 	if (*qd->title)
 	    qd->title = _(qd->title);
     } else
 	do_int = 0;
-    
+
     if (qd->xpos == -1)
-        dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors, quick_callback,
-		         qd->help, qd->title, DLG_CENTER | DLG_TRYUP);
+	dd = create_dlg (0, 0, qd->ylen, qd->xlen, dialog_colors,
+			 quick_callback, qd->help, qd->title,
+			 DLG_CENTER | DLG_TRYUP);
     else
-        dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen, dialog_colors, 
-                         quick_callback,
-		         qd->help, qd->title, DLG_NONE);
-    
+	dd = create_dlg (qd->ypos, qd->xpos, qd->ylen, qd->xlen,
+			 dialog_colors, quick_callback, qd->help,
+			 qd->title, DLG_NONE);
+
     /* We pass this to the callback */
-    dd->cols  = qd->xlen;
+    dd->cols = qd->xlen;
     dd->lines = qd->ylen;
 
-    for (qw = qd->widgets; qw->widget_type; qw++){
-	xpos = (qd->xlen * qw->relative_x)/qw->x_divisions;
-	ypos = (qd->ylen * qw->relative_y)/qw->y_divisions;
-	
-	switch (qw->widget_type){
+    /* Count widgets */
+    for (qw = qd->widgets; qw->widget_type; qw++) {
+	count++;
+    }
+
+    widgets = (Widget **) g_new (Widget *, count);
+
+    for (curr_widget = 0, qw = qd->widgets; qw->widget_type; qw++) {
+	xpos = (qd->xlen * qw->relative_x) / qw->x_divisions;
+	ypos = (qd->ylen * qw->relative_y) / qw->y_divisions;
+
+	switch (qw->widget_type) {
 	case quick_checkbox:
-	    widget = check_new (ypos, xpos, *qw->result, I18N (qw->text), qw->tkname);
+	    widget =
+		check_new (ypos, xpos, *qw->result, I18N (qw->text),
+			   qw->tkname);
 	    break;
 
 	case quick_radio:
-	    r = radio_new (ypos, xpos, qw->hotkey_pos, qw->str_result, 1, qw->tkname);
+	    r = radio_new (ypos, xpos, qw->hotkey_pos, qw->str_result, 1,
+			   qw->tkname);
 	    r->pos = r->sel = qw->value;
 	    widget = r;
 	    break;
-	    
+
 	case quick_button:
-	    widget = button_new (ypos, xpos, qw->value, (qw->value==B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
-	    I18N (qw->text), 0, 0, qw->tkname);
+	    widget =
+		button_new (ypos, xpos, qw->value,
+			    (qw->value ==
+			     B_ENTER) ? DEFPUSH_BUTTON : NORMAL_BUTTON,
+			    I18N (qw->text), 0, 0, qw->tkname);
 	    break;
 
 	    /* We use the hotkey pos as the field length */
@@ -309,20 +327,20 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
 	    input->is_password = qw->value == 1;
 	    input->point = 0;
 	    if (qw->value & 2)
-	        input->completion_flags |= INPUT_COMPLETE_CD;
+		input->completion_flags |= INPUT_COMPLETE_CD;
 	    widget = input;
 	    break;
 
 	case quick_label:
-	    widget = label_new (ypos, xpos, I18N(qw->text), qw->tkname);
+	    widget = label_new (ypos, xpos, I18N (qw->text), qw->tkname);
 	    break;
-	    
+
 	default:
 	    widget = 0;
 	    fprintf (stderr, "QuickWidget: unknown widget type\n");
 	    break;
 	}
-	qw->the_widget = widget;
+	widgets[curr_widget++] = widget;
 	add_widget (dd, widget);
     }
 
@@ -332,26 +350,29 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     run_dlg (dd);
 
     /* Get the data if we found something interesting */
-    if (dd->ret_value != B_CANCEL){
-	for (qw = qd->widgets; qw->widget_type; qw++){
-	    switch (qw->widget_type){
+    if (dd->ret_value != B_CANCEL) {
+	for (curr_widget = 0, qw = qd->widgets; qw->widget_type; qw++) {
+	    Widget *w = widgets[curr_widget++];
+
+	    switch (qw->widget_type) {
 	    case quick_checkbox:
-		*qw->result = ((WCheck *) qw->the_widget)->state & C_BOOL;
+		*qw->result = ((WCheck *) w)->state & C_BOOL;
 		break;
 
 	    case quick_radio:
-		*qw->result = ((WRadio *) qw->the_widget)->sel;
+		*qw->result = ((WRadio *) w)->sel;
 		break;
-		
+
 	    case quick_input:
-		*qw->str_result = g_strdup (((WInput *) qw->the_widget)->buffer);
+		*qw->str_result = g_strdup (((WInput *) w)->buffer);
 		break;
 	    }
 	}
     }
     return_val = dd->ret_value;
     destroy_dlg (dd);
-    
+    g_free (widgets);
+
     return return_val;
 }
 

@@ -40,7 +40,6 @@ typedef struct {
     int  *result;		/* Checkbutton: where to store result */
     char **str_result;		/* Input lines: destination  */
     char *tkname;		/* Name of the widget used for Tk only */
-    void *the_widget;		/* For the quick quick dialog manager */
 } QuickWidget;
     
 typedef struct {

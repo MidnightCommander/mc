@@ -1,5 +1,8 @@
 2002-11-12  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.h: Eliminate the_widget filed in QuickWidget.
+	* wtools.c (quick_callback): Allocate widget table dynamically.
+
 	* dlg.c (widget_redraw): Remove.
 	* widget.c (find_buttonbar): Use find_widget_type().  Make
 	global.
