@@ -793,7 +793,7 @@ La vista ad albero è abbastanza simile al comando
 .\"LINK2"
 albero directory
 .\"Directory Tree"
-\&. Vedere la sezione corrispondente per maggiori informazioni.
+ . Vedere la sezione corrispondente per maggiori informazioni.
 .TP 
 .B "Vista rapida"
 In questa modalità il pannello si imposta come un
@@ -883,8 +883,8 @@ Visualizzatore Interno di File
 .\"Internal File Viewer"
 ma se l'opzione "Usa Visualizzatore interno" è deselezionata, verrà invocato
 un visualizzatore esterno specificato dalla variabile ambiente
-.B PAGER 
-\&. Se 
+.BR PAGER .
+Se 
 .B PAGER
 non è definita, verrà invocato il comando "view". Se si usa invece il comando
 Maiusc-F3, il visualizzatore verrà invocato senza nessun tipo di formattazione
@@ -1593,8 +1593,8 @@ un file (sia con C-t che con il tasto Ins).
 .I Rilascia menu a cascata.
 Quando quest'opzione è abilitata, la discesa dei menu sarà attivata non appena
 si preme il tasto
-.B F9
- .  Altrimenti si avrà solo il titolo del menu e si dovrà attivare il menu con
+.BR F9 .
+Altrimenti si avrà solo il titolo del menu e si dovrà attivare il menu con
 i tasti freccia o con i tasti di selezione rapida.
 E' raccomanda se si sta usando i tasti di selezione rapida.
 .PP
@@ -1671,11 +1671,10 @@ Utile per creare menu per utenti non abituati a unix.
 Se quest'opzione è abilitata, verrà usato l'editor integrato interno per
 modificare i file. Se l'opzione è disabilitata, verrà usato l'editor
 specificato dalla variabile ambiente
-.B EDITOR
- . 
+.BR EDITOR . 
 Se non nessun editor è specificato, verrà usato  
-.B vi
- . Vedere la sezione
+.BR vi .
+Vedere la sezione
 .\"LINK2"
 editor di file interno.
 .\"Internal File Editor"
@@ -1684,11 +1683,10 @@ editor di file interno.
 Se quest'opzione è abilitata, verrà usato il visualizzatore di file 
 interno per visualizzare i file. Se l'opzione è disabilitata, verrà
 utilizzato il visualizzatore specificato dalla variabile ambiente
-.B PAGER
- . Se il visualizzatore non è definito, verrà usato il comando
-If no pager is specified, the 
-.B view
- . Vedere sezione
+.BR PAGER .
+Se il visualizzatore non è definito, verrà usato il comando
+.BR view .
+Vedere sezione
 .\"LINK2"
 visualizzatore file interno.
 .\"Internal File Viewer"
@@ -1705,8 +1703,8 @@ ambiguo se si preme
 una seconda volta, la prima completa per quanto possibile
 e, in caso di ambiguità, emette un suono. Se si vuole vedere
 tutti i possibili completamenti già al pressione del primo
-.B M-Tab
-, abilitare quest'opzione.
+.RB M-Tab ,
+abilitare quest'opzione.
 .PP
 .I Barre che girano.
 Se quest'opzione è abilitata, il Midnight Commander mostra
@@ -1734,8 +1732,7 @@ Se quest'opzione è abilitata, la cancellazione non intenzionale dei file
 sarà più difficile. La preimpostazione della finestra di dialogo della
 conferma cambia da "Si" a "No" e la cancellazione delle directory non 
 vuote deve essere confermata immettendo la parola 
-.I si
-\&. 
+.IR si . 
 Normalmente quest'opzione è disabilitata.
 .PP
 .\"NODE "    Layout"
@@ -2633,8 +2630,8 @@ alla posizione corrente per poter selezionare con i tasti freccia e
 la voce corretta. Si può anche battere le prime lettere nelle quali le varie
 possibilità differiscono per muoversi in un sottoinsieme di tutte le 
 possibilità e completare il più possibile. Se si preme nuovamente
-.B M-Tab
- , verrà mostrato solo il sottoinsieme nella finestra dell'elenco, altrimenti
+.BR M-Tab , 
+verrà mostrato solo il sottoinsieme nella finestra dell'elenco, altrimenti
 la prima voce che corrisponde a tutti i caratteri precedenti verrà evidenziata.
 Non appena non c'è più ambiguità, la finestra scompare, ma la si può nascondere
 con i tasti di cancellamento
@@ -3264,7 +3261,7 @@ del menu delle applicazioni di sistema.
 .IP
 L'elenco di directory per l'albero directory e per la vista ad albero.
 .PP
-\&./.mc.menu
+ ./.mc.menu
 .IP
 Menu locale definito dall'utente. Se questo file è presente viene usato
 al posto del menu delle applicazioni utente o di sistema.
