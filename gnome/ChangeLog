@@ -1,3 +1,10 @@
+1999-04-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gcorba.c: #include "../vfs/vfs.h"
+
+	* gdesktop.c (click_proxy_button_release): Call gdk_flush() after
+	doing XUngrabServer().
+
 1999-04-04  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (file_list_popup_items): Use "New Directory", not "New

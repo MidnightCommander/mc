@@ -2680,6 +2680,7 @@ click_proxy_button_release (GtkWidget *widget, GdkEventButton *event, gpointer d
 	update_drag_selection (event->x, event->y);
 
 	XUngrabServer (GDK_DISPLAY ());
+	gdk_flush ();
 
 	return TRUE;
 }

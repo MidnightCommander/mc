@@ -9,6 +9,7 @@
 
 #include <config.h>
 #include "panel.h"
+#include "../vfs/vfs.h"
 #include <libgnorba/gnorba.h>
 #include "FileManager.h"
 #include "gcmd.h"
