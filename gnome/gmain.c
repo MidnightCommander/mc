@@ -111,18 +111,16 @@ interactive_display (char *filename, char *node)
 	/* FIXME: Implement gnome version */
 }
 
-int
+void
 beep (void)
 {
 	gdk_beep ();
-
-	return 0;
 }
 
-int
+void
 xtoolkit_end (void)
 {
-	return 1;
+	/* Do nothing */
 }
 
 /*

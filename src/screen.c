@@ -2029,20 +2029,19 @@ start_search (WPanel *panel)
 }
 
 int
-do_enter (WPanel *panel)
+do_enter_on_file_entry (file_entry *fe)
 {
-    if (S_ISDIR (selection (panel)->buf.st_mode)
-	|| link_isdir (selection (panel))){
-	do_cd (selection (panel)->fname, cd_exact);
+    if (S_ISDIR (fe->buf.st_mode) || link_isdir (fe)) {
+	do_cd (fe->fname, cd_exact);
 	return 1;
     } else { 
-	if (is_exe (selection (panel)->buf.st_mode) &&
-	    if_link_is_exe (selection (panel))) {
+	if (is_exe (fe->buf.st_mode) &&
+	    if_link_is_exe (fe)) {
 #ifdef USE_VFS	    
 	    if (vfs_current_is_local ()) 
 #endif	    
 	    {
-	        char *tmp = name_quote (selection (panel)->fname, 0);
+	        char *tmp = name_quote (fe->fname, 0);
 	        char *cmd = copy_strings (".", PATH_SEP_STR, tmp, 0);
 	        if (!confirm_execute || (query_dialog (_(" The Midnight Commander "),
 						       _(" Do you really want to execute? "),
@@ -2058,7 +2057,7 @@ do_enter (WPanel *panel)
                  call...                              -- pavel@ucw.cz*/
 	        char *tmp;
 
-		tmp = concat_dir_and_file (vfs_get_current_dir(), selection (panel)->fname);
+		tmp = concat_dir_and_file (vfs_get_current_dir(), fe->fname);
 		if (!mc_setctl (tmp, MCCTL_EXTFS_RUN, NULL))
 		    message (1, _(" Warning "), _(" No action taken "));
 
@@ -2069,13 +2068,19 @@ do_enter (WPanel *panel)
 	} else {
 	    char *p;
 	    
-	    p = regex_command (selection (panel)->fname, "Open", NULL, 0);
+	    p = regex_command (fe->fname, "Open", NULL, 0);
 	    if (p && (strcmp (p, "Success") == 0))
 		    return 1;
 	    else
 		    return 0;
 	}
     }
+}	
+
+int
+do_enter (WPanel *panel)
+{
+    do_enter_on_file_entry (selection (panel));
 }
 
 static void

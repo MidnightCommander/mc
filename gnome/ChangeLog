@@ -1,3 +1,23 @@
+1998-12-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdesktop.c (drag_data_received): We do not need to call
+	gtk_drag_finish(), since we are using the GTK_DEST_DEFAULT_DROP
+	flag for drops on the desktop.
+	(desktop_icon_info_event): Reload the desktop icons after
+	executing a command from the popup menu.  This kind of sucks, but
+	will do for now.
+	(desktop_icon_info_event): Upon receiving a button-1 press, if the
+	icon was already selected in the first place, delay the
+	re-selection phase until we get a mouse release event.  This lets
+	us start a multiple-selection drag without having the initial
+	click clear the selection first.
+	(desktop_icon_info_event): Open the file or directory when the
+	desktop icon receives a double click.
+
+	* gmain.c (beep): Made it void, since it does not (need to) return
+	anything.
+	(xtoolkit_end): Likewise.
+
 1998-12-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_build_selected_file_list): Provide space for

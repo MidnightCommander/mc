@@ -260,6 +260,7 @@ void do_file_mark (WPanel *panel, int index, int val);
 int  file_compute_color (int attr, file_entry *fe);
 int  file_entry_color (file_entry *fe);
 void do_file_mark_range (WPanel *panel, int r1, int r2);
+int do_enter_on_file_entry (file_entry *fe);
 int do_enter (WPanel *panel);
 
 /* NOTE: Have to be ifdefed for HAVE_X */

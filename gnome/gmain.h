@@ -5,7 +5,7 @@
 #include "widget.h"
 
 int xtoolkit_init (int *argc, char *argv []);
-int xtoolkit_end (void);
+void xtoolkit_end (void);
 
 extern Dlg_head *desktop_dlg;
 extern int nowindows;
