@@ -457,7 +457,7 @@ init_growing_view (WView * view, char *name, char *filename)
 	    view->stdfile = NULL;
 	    /* Avoid two messages.  Message from stderr has priority.  */
 	    if (!close_error_pipe (view->have_frame ? -1 : 1, view->data))
-		err_msg = _(" Empty output from child filter ");
+		err_msg = _("Empty output from child filter");
 	    return set_view_init_error (view, err_msg);
 	}
     } else {
