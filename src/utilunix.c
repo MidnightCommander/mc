@@ -38,9 +38,6 @@
 #ifdef HAVE_SYS_IOCTL_H
 #   include <sys/ioctl.h>
 #endif
-#ifdef __QNX__
-#   include <unix.h>		/* exec*() from <process.h> */
-#endif
 
 #include "global.h"
 #include "fsusage.h"

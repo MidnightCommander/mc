@@ -49,10 +49,6 @@
 #   include <stropts.h> /* For I_PUSH */
 #endif /* HAVE_STROPTS_H */
 
-#ifdef __QNX__
-#   include <unix.h>	/* exec*() from <process.h> */
-#endif
-
 #include "global.h"	/* For home_dir			      */
 #include "tty.h"
 #include "dir.h"	/* Required by panel.h below	      */

@@ -64,6 +64,11 @@ struct timeval {
 #  include <pwd.h>
 #endif
 
+#if defined(__QNX__) && !defined(__QNXNTO__)
+/* exec*() from <process.h> */
+#  include <unix.h>
+#endif
+
 #include <glib.h>
 
 #ifndef __GNUC__
