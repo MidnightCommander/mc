@@ -21,6 +21,7 @@
 #include <time.h>
 #include "gnome-file-property-dialog.h"
 #include "dir.h"
+#include "gdesktop.h"
 #include <pwd.h>
 #include <grp.h>
 #include <sys/types.h>
@@ -31,7 +32,6 @@
 static void gnome_file_property_dialog_init		(GnomeFilePropertyDialog	 *file_property_dialog);
 static void gnome_file_property_dialog_class_init	(GnomeFilePropertyDialogClass	 *klass);
 static void gnome_file_property_dialog_finalize         (GtkObject *object);
-
 
 static GnomeDialogClass *parent_class = NULL;
 
@@ -79,7 +79,19 @@ gnome_file_property_dialog_init (GnomeFilePropertyDialog *file_property_dialog)
 	file_property_dialog->file_name = NULL;
 	file_property_dialog->file_entry = NULL;
 	file_property_dialog->group_name = NULL;
+	file_property_dialog->modifyable = TRUE;
 	file_property_dialog->user_name = NULL;
+	file_property_dialog->prop1_label = NULL;
+	file_property_dialog->prop2_label = NULL;
+	file_property_dialog->prop1_entry = NULL;
+	file_property_dialog->prop2_entry = NULL;
+	file_property_dialog->prop1_cbox = NULL;
+	file_property_dialog->prop2_cbox = NULL;
+	file_property_dialog->fm_open = NULL;
+	file_property_dialog->fm_view = NULL;
+	file_property_dialog->edit = NULL;
+	file_property_dialog->drop_target = NULL;
+	file_property_dialog->im = NULL;
 }
 static void
 gnome_file_property_dialog_finalize (GtkObject *object)
@@ -93,7 +105,8 @@ gnome_file_property_dialog_finalize (GtkObject *object)
 
 	if (gfpd->file_name)
 		g_free (gfpd->file_name);
-
+	if (gfpd->im)
+		gdk_imlib_destroy_image (gfpd->im);
 	(* GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
@@ -111,7 +124,6 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	gchar size[50]; /* this is a HUGE file. (: */
 	gchar size2[20]; /* this is a HUGE file. (: */
 	file_entry *fe;
-	GdkImlibImage *im;
 	GtkWidget *icon;
 	struct tm *time;
 	GtkWidget *table;
@@ -124,10 +136,9 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	direc = g_strdup (fp_dlg->file_name);
 	rindex (direc, '/')[0] = NULL;
 	fe = file_entry_from_file (fp_dlg->file_name);
-	im = gicon_get_icon_for_file (direc, fe);
+	fp_dlg->im = gicon_get_icon_for_file (direc, fe);
 	g_free (direc);
-	icon = gnome_pixmap_new_from_imlib (im);
-	gdk_imlib_destroy_image (im);
+	icon = gnome_pixmap_new_from_imlib (fp_dlg->im);
 	gtk_box_pack_start (GTK_BOX (vbox), icon, FALSE, FALSE, 0);
 
      /* we set the file part */
@@ -152,8 +163,7 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 	/* We want to prevent editing of the file if
 	 * the thing is a BLK, CHAR, or we don't own it */
 	/* FIXME: We can actually edit it if we're in the same grp of the file. */
-	if (S_ISCHR (fp_dlg->st.st_mode) || S_ISBLK (fp_dlg->st.st_mode)
-	    || ((fp_dlg->euid != fp_dlg->st.st_uid) && (fp_dlg->euid != 0)))
+	if (fp_dlg->modifyable == FALSE)
 		gtk_widget_set_sensitive (fp_dlg->file_entry, FALSE);
 	gtk_box_pack_start (GTK_BOX (hbox), fp_dlg->file_entry, FALSE, FALSE, 0);
 	gtk_container_add (GTK_CONTAINER (align), hbox);
@@ -258,6 +268,304 @@ create_general_properties (GnomeFilePropertyDialog *fp_dlg)
 }
 
 
+
+/* Settings Pane */
+static void
+metadata_toggled (GtkWidget *cbox, GnomeFilePropertyDialog *fp_dlg)
+{
+	if (fp_dlg->changing)
+		return;
+	if (cbox == fp_dlg->prop1_cbox) {
+		if (GTK_TOGGLE_BUTTON (cbox)->active) {
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
+			if (fp_dlg->executable && fp_dlg->mime_fm_open) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->mime_fm_open);
+			} else if (!fp_dlg->executable &&  fp_dlg->mime_fm_view) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->mime_fm_view);
+			} else {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), "");
+			}
+		} else {
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, TRUE);
+			if (fp_dlg->executable && fp_dlg->fm_open) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_open);
+			} else if (!fp_dlg->executable &&  fp_dlg->fm_view) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_view);
+			} 
+		}
+	} else {
+		if (GTK_TOGGLE_BUTTON (cbox)->active) {
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, FALSE);
+			if (fp_dlg->executable && fp_dlg->mime_drop_target) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->mime_drop_target);
+			} else if (!fp_dlg->executable &&  fp_dlg->mime_edit) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->mime_edit);
+			} else {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), "");
+			}
+		} else {
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, TRUE);
+			if (fp_dlg->executable && fp_dlg->drop_target) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->drop_target);
+			} else if (!fp_dlg->executable &&  fp_dlg->edit) {
+				gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->edit);
+			}
+		}
+	}
+}
+static void
+switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
+{
+	if (NULL == fp_dlg->prop1_label)
+		return;
+	fp_dlg->changing = TRUE;
+	if (fp_dlg->executable) {
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "Open");
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop2_label), "Drop Action");
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default Open options");
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop2_cbox)->child), "Use default Drop Action options");
+		if (fp_dlg->fm_open) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_open);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), FALSE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, TRUE);
+		} else if (fp_dlg->mime_fm_open) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->mime_fm_open);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
+		} else {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), "");
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
+		}
+		if (fp_dlg->drop_target) {
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), FALSE);
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->drop_target);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, TRUE);
+		} else if (fp_dlg->mime_drop_target) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->mime_drop_target);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, FALSE);
+		} else {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), "");
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, FALSE);
+		}
+	} else {
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "View");
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop2_label), "Edit");
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default View options");
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop2_cbox)->child), "Use default Edit options");
+		if (fp_dlg->fm_view) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_view);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), FALSE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, TRUE);
+		} else if (fp_dlg->mime_fm_view) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->mime_fm_view);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
+		} else {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), "");
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
+		}
+		if (fp_dlg->edit) {
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), FALSE);
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->edit);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, TRUE);
+		} else if (fp_dlg->mime_edit) {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), fp_dlg->mime_edit);
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, FALSE);
+		} else {
+			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop2_entry), "");
+			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop2_cbox), TRUE);
+			gtk_widget_set_sensitive (fp_dlg->prop2_entry, FALSE);
+		}
+	}
+	fp_dlg->changing = FALSE;
+}
+
+/* Stolen from gnome-icon-entry.c */
+/* - jrb */
+static void
+icon_selected_cb(GtkButton * button, GnomeFilePropertyDialog *fp_dlg)
+{
+	const gchar * icon;
+	GnomeIconSelection * gis;
+
+	gis =  gtk_object_get_user_data(GTK_OBJECT(fp_dlg));
+	icon = gnome_icon_selection_get_icon(gis, TRUE);
+
+	if (icon != NULL) {
+		g_print ("icon:%s:\n",icon);
+	}
+}
+#if 0
+static void
+gil_icon_selected_cb(GnomeIconList *gil, gint num, GdkEvent *event, GnomeIconEntry *ientry)
+{
+	if(event && event->type == GDK_2BUTTON_PRESS && ((GdkEventButton *)event)->button == 1) {
+		icon_selected_cb(NULL, ientry);
+		gtk_widget_hide(ientry->pick_dialog);
+	}
+	g_print ("in gil_icon_selected_cb callback \n");
+}
+#endif
+static void
+icon_sel_callback (GtkWidget *button, GnomeFilePropertyDialog *fp_dlg)
+{
+	GtkWidget *icon_sel;
+
+	if (fp_dlg->dlg)
+	fp_dlg->dlg = gnome_dialog_new("Select An Icon",
+			       GNOME_STOCK_BUTTON_OK,
+			       GNOME_STOCK_BUTTON_CANCEL,
+			       NULL);
+	gnome_dialog_close_hides(GNOME_DIALOG(fp_dlg->dlg), TRUE);
+	gnome_dialog_set_close  (GNOME_DIALOG(fp_dlg->dlg), TRUE);
+
+	gtk_window_set_policy(GTK_WINDOW(fp_dlg->dlg), 
+			      TRUE, TRUE, TRUE);
+
+	icon_sel = gnome_icon_selection_new();
+
+	gnome_icon_selection_add_directory(GNOME_ICON_SELECTION(icon_sel),
+					   "/opt/gnome/share/pixmaps/");
+
+
+	gtk_container_add(GTK_CONTAINER(GNOME_DIALOG(fp_dlg->dlg)->vbox), icon_sel);
+
+	gtk_widget_show_all(fp_dlg->dlg);
+
+	gnome_icon_selection_show_icons(GNOME_ICON_SELECTION(icon_sel));
+	gtk_object_set_user_data(GTK_OBJECT(fp_dlg), icon_sel);
+	gnome_dialog_button_connect(GNOME_DIALOG(fp_dlg->dlg), 
+				    0, /* OK button */
+				    GTK_SIGNAL_FUNC(icon_selected_cb),
+				    fp_dlg);
+#if 0
+	gtk_signal_connect_after(GTK_OBJECT(GNOME_ICON_SELECTION(iconsel)->gil), "select_icon",
+				 GTK_SIGNAL_FUNC(gil_icon_selected_cb),
+				 ientry);
+#endif
+
+}
+static GtkWidget *
+generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
+{
+	GtkWidget *retval;
+	GtkWidget *icon;
+	
+	retval = gtk_button_new ();
+	gtk_widget_set_usize (retval, 64,  64);
+	icon = gnome_pixmap_new_from_imlib (fp_dlg->im);
+	gtk_container_add (GTK_CONTAINER (retval), icon);
+	gtk_signal_connect (GTK_OBJECT (retval), "clicked", icon_sel_callback, fp_dlg);
+	
+	return retval;
+}
+static GtkWidget *
+generate_actions_box (GnomeFilePropertyDialog *fp_dlg)
+{
+	GtkWidget *vbox;
+	GtkWidget *table;
+
+	/* Here's the Logic: */
+	/* If we are a file, and an Executable, we want to edit our "open" and "drop-target" */
+	/* Metadata, as it is meaningful to us.  */
+	/* If we are non-executable, we want to edit our "edit" and "view" fields. */
+	/* Sym links want to have the same options as above, but use their Target's */
+	/* Executable/set bit in order to determine which one. */
+	/* Note, symlinks can set their own metadata, independent from their */
+	/* targets. */
+
+	table = gtk_table_new (5, 2, FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (table), GNOME_PAD_SMALL);
+		
+	if (fp_dlg->executable)
+		fp_dlg->prop1_label = gtk_label_new (_("Open"));
+	else
+		fp_dlg->prop1_label = gtk_label_new (_("View"));
+	gtk_misc_set_alignment (GTK_MISC (fp_dlg->prop1_label), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (fp_dlg->prop1_label), 2, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table),
+				   fp_dlg->prop1_label,
+				   0, 1, 0, 1);
+	fp_dlg->prop1_entry = gtk_entry_new ();
+	gtk_table_attach_defaults (GTK_TABLE (table),
+				   fp_dlg->prop1_entry,
+				   1, 2, 0, 1);
+	if (fp_dlg->executable)
+		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default Open options"));
+	else
+		fp_dlg->prop1_cbox = gtk_check_button_new_with_label (_("Use default View options"));
+	gtk_signal_connect (GTK_OBJECT (fp_dlg->prop1_cbox), "toggled", metadata_toggled, fp_dlg);
+	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->prop1_cbox, 0, 2, 1, 2);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), gtk_hseparator_new (), FALSE, FALSE, GNOME_PAD_SMALL);
+	gtk_table_attach_defaults (GTK_TABLE (table), vbox, 0, 2, 2, 3);
+
+	if (fp_dlg->executable)
+		fp_dlg->prop2_label = gtk_label_new (_("Drop Action"));
+	else
+		fp_dlg->prop2_label = gtk_label_new (_("Edit"));
+	gtk_misc_set_alignment (GTK_MISC (fp_dlg->prop2_label), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (fp_dlg->prop2_label), 2, 0);
+	gtk_table_attach_defaults (GTK_TABLE (table),
+				   fp_dlg->prop2_label, 
+				   0, 1, 3, 4);
+	fp_dlg->prop2_entry = gtk_entry_new ();
+	gtk_table_attach_defaults (GTK_TABLE (table),
+				   fp_dlg->prop2_entry,
+				   1, 2, 3, 4);
+	if (fp_dlg->executable)
+		fp_dlg->prop2_cbox = gtk_check_button_new_with_label (_("Use default Drop Action options"));
+	else
+		fp_dlg->prop2_cbox = gtk_check_button_new_with_label (_("Use default Edit options"));
+	gtk_signal_connect (GTK_OBJECT (fp_dlg->prop2_cbox), "toggled", metadata_toggled, fp_dlg);
+	gtk_table_attach_defaults (GTK_TABLE (table), fp_dlg->prop2_cbox, 0, 2, 4, 5);
+	/* It's okay to do this now... */
+	switch_metadata_box (fp_dlg);
+	return table;
+}
+static GtkWidget *
+create_settings_pane (GnomeFilePropertyDialog *fp_dlg)
+{
+	GtkWidget *vbox;
+	GtkWidget *hbox;
+	GtkWidget *vbox2;
+	GtkWidget *button;
+	GtkWidget *frame;
+	GtkWidget *align;
+	GtkWidget *table;
+	
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
+
+	frame = gtk_frame_new (_("Icon"));
+	vbox2 = gtk_vbox_new (FALSE, 0);
+	hbox = gtk_hbox_new (FALSE, 0);
+	align = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
+	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
+	button = generate_icon_sel (fp_dlg);
+	gtk_container_add (GTK_CONTAINER (frame), vbox2);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox2), GNOME_PAD_SMALL);
+	gtk_box_pack_start (GTK_BOX (vbox2), hbox, TRUE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), align, TRUE, FALSE, 0);
+	gtk_container_add (GTK_CONTAINER (align), button);
+
+	/* Are we a directory?  If so, we do nothing else. */
+	if (!(S_ISREG (fp_dlg->st.st_mode) || S_ISLNK (fp_dlg->st.st_mode)))
+		return vbox;
+	/* We must be a file or a link. */
+	frame = gtk_frame_new (_("Actions"));
+	gtk_box_pack_start (GTK_BOX (vbox), frame, TRUE, TRUE, 0);
+	table = generate_actions_box (fp_dlg);
+	gtk_container_add (GTK_CONTAINER (frame), table);
+	return vbox;
+}
+
 /* Permissions Pane */
 static GtkWidget *
 label_new (char *text, double xalign, double yalign)
@@ -310,8 +618,14 @@ perm_set_mode_label (GtkWidget *widget, gpointer data)
 	char s_mode[5];
 
 	fp_dlg = GNOME_FILE_PROPERTY_DIALOG (data);
-
 	umode = perm_get_umode (fp_dlg);
+	if (!fp_dlg->executable && (umode & (S_IXUSR | S_IXGRP | S_IXOTH))) {
+		fp_dlg->executable = TRUE;
+		switch_metadata_box (fp_dlg);
+	} else if (fp_dlg->executable && !(umode & (S_IXUSR | S_IXGRP | S_IXOTH))) {
+		fp_dlg->executable = FALSE;
+		switch_metadata_box (fp_dlg);
+	}
 
 	s_mode[0] = '0' + ((umode & (S_ISUID | S_ISGID | S_ISVTX)) >> 9);
 	s_mode[1] = '0' + ((umode & (S_IRUSR | S_IWUSR | S_IXUSR)) >> 6);
@@ -333,7 +647,7 @@ perm_check_new (char *text, int state, GnomeFilePropertyDialog *fp_dlg)
 
 	gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (check), FALSE);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check), state ? TRUE : FALSE);
-
+	
 	gtk_signal_connect (GTK_OBJECT (check), "toggled",
 			    (GtkSignalFunc) perm_set_mode_label,
 			    fp_dlg);
@@ -369,9 +683,9 @@ perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *table;
 	gchar *mode;
 
-	frame = gtk_frame_new (_("File mode (permissions)"));
+	frame = gtk_frame_new (_("File Permissions"));
 
-	vbox = gtk_vbox_new (FALSE, 4);
+	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
@@ -386,6 +700,8 @@ perm_mode_new (GnomeFilePropertyDialog *fp_dlg)
 	gtk_box_pack_start (GTK_BOX (hbox), fp_dlg->mode_label, FALSE, FALSE, 0);
 
 	table = gtk_table_new (4, 5, FALSE);
+	if (!fp_dlg->modifyable || S_ISLNK (fp_dlg->st.st_mode))
+		gtk_widget_set_sensitive (table, FALSE);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
 	gtk_box_pack_start (GTK_BOX (vbox), table, FALSE, FALSE, 0);
@@ -568,7 +884,6 @@ perm_ownership_new (GnomeFilePropertyDialog *fp_dlg)
 			  GTK_FILL | GTK_SHRINK,
 			  0, 0);
 	gtk_widget_show (fp_dlg->group_entry);
-
 	return frame;
 }
 
@@ -580,32 +895,86 @@ create_perm_properties (GnomeFilePropertyDialog *fp_dlg)
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD);
 	gtk_box_pack_start (GTK_BOX (vbox), perm_mode_new (fp_dlg), FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (vbox), perm_ownership_new (fp_dlg), FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (vbox), perm_ownership_new (fp_dlg), TRUE, TRUE, 0);
 	return vbox;
 } 
 /* finally the new dialog */
+static void
+init_metadata (GnomeFilePropertyDialog *fp_dlg)
+{
+	gint size;
+	gchar *mime_type;
+
+	if (gnome_metadata_get (fp_dlg->file_name, "fm-open", &size, &fp_dlg->fm_open) != 0)
+		gnome_metadata_get (fp_dlg->file_name, "open", &size, &fp_dlg->fm_open);
+	if (gnome_metadata_get (fp_dlg->file_name, "fm-view", &size, &fp_dlg->fm_view) != 0)
+		gnome_metadata_get (fp_dlg->file_name, "view", &size, &fp_dlg->fm_view);
+	gnome_metadata_get (fp_dlg->file_name, "edit", &size, &fp_dlg->edit);
+	gnome_metadata_get (fp_dlg->file_name, "drop-target", &size, &fp_dlg->drop_target);
+
+	mime_type = gnome_mime_type_or_default (fp_dlg->file_name, NULL);
+	if (!mime_type)
+		return;
+	fp_dlg->mime_fm_open = gnome_mime_get_value (mime_type, "fm-open");
+	if (!fp_dlg->mime_fm_open)
+		fp_dlg->mime_fm_open = gnome_mime_get_value (mime_type, "open");
+	fp_dlg->mime_fm_view = gnome_mime_get_value (mime_type, "fm-view");
+	if (!fp_dlg->mime_fm_view)
+		fp_dlg->mime_fm_view = gnome_mime_get_value (mime_type, "view");
+	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "edit");
+	fp_dlg->mime_edit = gnome_mime_get_value (mime_type, "drop-target");
+	g_print ("mime_type:%s:\n", mime_type);
+	g_print ("fm-open:%s:\n", fp_dlg->fm_open);
+	g_print ("fm-view:%s:\n", fp_dlg->fm_view);
+	g_print ("edit:%s:\n", fp_dlg->edit);
+	g_print ("drop-target:%s:\n", fp_dlg->drop_target);
+	g_print ("mime-fm-open:%s:\n", fp_dlg->mime_fm_open);
+	g_print ("mime-fm-view:%s:\n", fp_dlg->mime_fm_view);
+	g_print ("mime-edit:%s:\n", fp_dlg->mime_edit);
+	g_print ("mime-drop-target:%s:\n", fp_dlg->mime_drop_target);
+	
+}
 GtkWidget *
 gnome_file_property_dialog_new (gchar *file_name)
 {
 	GnomeFilePropertyDialog *fp_dlg;
 	GtkWidget *notebook;
 	gchar *title_string;
-	g_return_val_if_fail (file_name != NULL, NULL);
+	gint size;
 	
+
+	g_return_val_if_fail (file_name != NULL, NULL);
 	fp_dlg = gtk_type_new (gnome_file_property_dialog_get_type ());
+
+	/* We set non-gui specific things first */
 	if (mc_lstat (file_name, &fp_dlg->st) == -1) {
 		/* Bad things man, bad things */
 		gtk_object_unref (GTK_OBJECT (fp_dlg));
 		return NULL;
 	}
 
+				
+	if (fp_dlg->st.st_mode & (S_IXUSR | S_IXGRP |S_IXOTH)) {
+		fp_dlg->executable = TRUE;
+	} else {
+		fp_dlg->executable = FALSE;
+	}
+
 	fp_dlg->file_name = g_strdup (file_name);
 	fp_dlg->euid = geteuid ();
-	/* ugh:  This is sort of messy -- we need to standardize on fe's by next mc. */
+	if (S_ISCHR (fp_dlg->st.st_mode) || S_ISBLK (fp_dlg->st.st_mode)
+	    || ((fp_dlg->euid != fp_dlg->st.st_uid) && (fp_dlg->euid != 0)))
+		fp_dlg->modifyable = FALSE;
+	init_metadata (fp_dlg);
+
+	/* and now, we set up the gui. */
 	notebook = gtk_notebook_new ();
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  create_general_properties (fp_dlg),
-				  gtk_label_new (_("General")));
+				  gtk_label_new (_("Statistics")));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
+				  create_settings_pane (fp_dlg),
+				  gtk_label_new (_("Options")));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook),
 				  create_perm_properties (fp_dlg),
 				  gtk_label_new (_("Permissions")));
@@ -619,6 +988,7 @@ gnome_file_property_dialog_new (gchar *file_name)
 	gnome_dialog_append_button ( GNOME_DIALOG(fp_dlg), 
 				     GNOME_STOCK_BUTTON_CANCEL);
 	gtk_widget_show_all (GNOME_DIALOG (fp_dlg)->vbox);
+	
 	return GTK_WIDGET (fp_dlg);
 }
 static gint
@@ -627,7 +997,6 @@ apply_mode_change (GnomeFilePropertyDialog *fpd)
 	gchar *new_mode;
 	gtk_label_get (GTK_LABEL (fpd->mode_label), &new_mode);
 	if (strcmp (new_mode, fpd->mode_name)) {
-		g_print ("changed mode:%d:\n", (mode_t) strtol(new_mode, (char **)NULL, 8));
 		mc_chmod (fpd->file_name, (mode_t) strtol(new_mode, (char **)NULL, 8));
 		return 1;
 	}
@@ -719,6 +1088,76 @@ apply_name_change (GnomeFilePropertyDialog *fpd)
 	}
 	return 1;
 }
+static gint
+apply_metadata_change (GnomeFilePropertyDialog *fpd)
+{
+	gchar *text;
+	if (fpd->executable) {
+		if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
+			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
+			if (text && text[0])
+				gnome_metadata_set (fpd->file_name,
+						    "fm_open",
+						    strlen (text) + 1,
+						    text);
+			else
+				gnome_metadata_remove (fpd->file_name,
+						       "fm_open");
+		} else {
+			if (fpd->fm_open)
+				gnome_metadata_remove (fpd->file_name,
+						       "fm_open");
+		}
+		if (!GTK_TOGGLE_BUTTON (fpd->prop2_cbox)->active) {
+			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop2_entry));
+			if (text && text[0])
+				gnome_metadata_set (fpd->file_name,
+						    "drop-target",
+						    strlen (text) + 1,
+						    text);
+			else
+				gnome_metadata_remove (fpd->file_name,
+						       "drop-target");
+		} else {
+			if (fpd->drop_target)
+				gnome_metadata_remove (fpd->file_name,
+						       "drop-target");
+		}
+	} else {
+		if (!GTK_TOGGLE_BUTTON (fpd->prop1_cbox)->active) {
+			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop1_entry));
+			if (text && text[0])
+				gnome_metadata_set (fpd->file_name,
+						    "fm-view",
+						    strlen (text) + 1,
+						    text);
+			else
+				gnome_metadata_remove (fpd->file_name,
+						       "fm-view");
+		} else {
+			if (fpd->fm_view)
+				gnome_metadata_remove (fpd->file_name,
+						       "fm-view");
+		}
+		if (!GTK_TOGGLE_BUTTON (fpd->prop2_cbox)->active) {
+			text = gtk_entry_get_text (GTK_ENTRY (fpd->prop2_entry));
+			if (text && text[0])
+				gnome_metadata_set (fpd->file_name,
+						    "edit",
+						    strlen (text) + 1,
+						    text);
+			else
+				gnome_metadata_remove (fpd->file_name,
+						       "edit");
+		} else {
+			if (fpd->edit)
+				gnome_metadata_remove (fpd->file_name,
+						       "edit");
+		}
+	}
+	return 1;
+}
+
 /* This function will apply what changes it can do.  It is meant to be used in conjunction
  * with a gnome_dialog_run_and_hide.  Please note that doing a gnome_dialog_run
  * will (obviously) cause greivious bogoness. */
@@ -733,6 +1172,7 @@ gnome_file_property_dialog_make_changes (GnomeFilePropertyDialog *file_property_
 	retval += apply_mode_change (file_property_dialog);
 	retval += apply_uid_group_change (file_property_dialog);
 	retval += apply_name_change (file_property_dialog);
+	retval += apply_metadata_change (file_property_dialog);
 
 	return retval;
 }

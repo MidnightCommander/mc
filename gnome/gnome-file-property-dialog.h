@@ -34,7 +34,6 @@ extern "C" {
 #define GNOME_IS_FILE_PROPERTY_DIALOG(obj)			(GTK_CHECK_TYPE ((obj), GNOME_TYPE_FILE_PROPERTY_DIALOG))
 #define GNOME_IS_FILE_PROPERTY_DIALOG_CLASS(klass)		(GTK_CHECK_CLASS_TYPE ((obj), GNOME_TYPE_FILE_PROPERTY_DIALOG))
 
-
 typedef struct _GnomeFilePropertyDialog       GnomeFilePropertyDialog;
 typedef struct _GnomeFilePropertyDialogClass  GnomeFilePropertyDialogClass;
 
@@ -48,12 +47,13 @@ struct _GnomeFilePropertyDialog
 	gchar *mode_name;
 	
 	struct stat st;
-	/* Regular Stuff */
+	gboolean executable;
+	gboolean modifyable;
 	GtkWidget *file_entry;
 
 	/* Permissions stuff */
 	GtkWidget *mode_label;
-
+	
 	GtkWidget *suid, *sgid, *svtx;
 	GtkWidget *rusr, *wusr, *xusr;
 	GtkWidget *rgrp, *wgrp, *xgrp;
@@ -62,6 +62,24 @@ struct _GnomeFilePropertyDialog
 	GtkWidget *owner_entry;
 	GtkWidget *group_entry;
 	gint euid;
+
+	/* Settings Stuff */
+	GtkWidget *prop1_label, *prop1_entry, *prop1_cbox;
+	GtkWidget *prop2_label, *prop2_entry, *prop2_cbox;
+	GtkWidget *dlg;
+
+	gchar *fm_open;
+	gchar *fm_view;
+	gchar *drop_target;
+	gchar *edit;
+	gchar *mime_fm_open;
+	gchar *mime_fm_view;
+	gchar *mime_drop_target;
+	gchar *mime_edit;
+	GdkImlibImage *im;
+
+	/* Private Data */
+	gboolean changing;
 };
 struct _GnomeFilePropertyDialogClass
 {
