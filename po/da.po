@@ -377,7 +377,7 @@ msgstr "Hjemmemappe"
 #, c-format
 msgid "Could not symlink %s to %s; will not have initial home desktop icon."
 msgstr ""
-"Kunne ikke lave symbolsk lænke fra %s til %s; kan ikke få skrivebordsikon."
+"Kunne ikke lave symbolsk lænke fra %s til %s; vil ikke have skrivebordsikon."
 
 #: gnome/gdesktop.c:2587
 msgid ""
