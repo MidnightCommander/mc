@@ -1,3 +1,8 @@
+2001-06-14  Pavel Roskin  <proski@gnu.org>
+
+	* text.c [HAVE_X]: Remove useless #error.
+	* cons.saver.c: Indent #error to hide it from old compilers.
+
 2001-06-13  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (display_mini_info): Avoid nested i18n calls.

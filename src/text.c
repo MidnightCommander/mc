@@ -5,10 +5,6 @@
  */
 #include <config.h>
 
-#ifdef HAVE_X
-#error This file is for text-mode editions only.
-#endif
-
 #include <stdio.h>
 
 #define WANT_WIDGETS

@@ -415,6 +415,6 @@ int main (int argc, char **argv)
 
 #else
 
-#error The Linux console screen saver works only on Linux.
+ #error "The Linux console screen saver works only on Linux"
 
 #endif /* #ifdef linux */
