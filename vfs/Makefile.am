@@ -21,4 +21,4 @@ ftpfs.c ftpfs.h libvfs.c local.c $(mad_ch) mcfs.c mcfs.h mcserv.c \
 names.c names.h shared.c tar.c tar.h tcputil.c tcputil.h undelfs.c \
 undelfs.h util-alone.c util-alone.h utilvfs.c vfs.c vfs.h
 
-libvfs_la_LDFLAGS = -version-info 26:0:26
+libvfs_la_LDFLAGS = -version-info 27:0:27
