@@ -30,6 +30,7 @@
 #define PORT_WANTS_ARGP                  1
 #define PORT_WIDGET_WANTS_HISTORY        0
 #define PORT_HAS_UPDATE_MARKS            1
+#define PORT_HAS_RADIO_TOGGLE            1
 
 #define mi_getch() fprintf (stderr, "mi_getch is not implemented in this port\n")
 #define frontend_run_dlg(x)        gtkrundlg_event (x)

@@ -1,3 +1,7 @@
+1998-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_radio_toggle): Never commit non-compilable code.
+
 1998-04-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (remove_hotkey, x_create_radio): Radio buttons should

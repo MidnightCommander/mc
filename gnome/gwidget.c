@@ -161,8 +161,6 @@ x_radio_toggle (WRadio *radio)
 	for (i = 0; i < radio->count; i++){
 		GtkBoxChild *bc = (GtkBoxChild *) children->data;
 
-		if (GTK_TOGGLE_BUTTON (bc->widget)->active)
-			gtk_toggle_button_toggled
 		gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (bc->widget), (i == radio->sel) ? 1 : 0);
 		children = children->next;
 	}

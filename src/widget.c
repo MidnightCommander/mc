@@ -66,6 +66,10 @@
 #   define x_radio_focus_item(r)
 #endif
 
+#ifndef PORT_HAS_RADIO_TOGGLE
+#   define x_radio_toggle
+#endif
+
 static int button_event (Gpm_Event *event, WButton *b);
 
 int quote = 0;
