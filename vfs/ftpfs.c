@@ -1324,10 +1324,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
     else
         print_vfs_message(_("ftpfs: Reading FTP directory %s..."), remote_path);
     if (has_spaces || bucket->strict_rfc959_list_cmd || ftpfs_first_cd_then_ls) {
-        char *p;
-    
-        p = translate_path (bucket, remote_path);
-        if (ftpfs_chdir_internal (bucket, p) != COMPLETE) {
+        if (ftpfs_chdir_internal (bucket, remote_path) != COMPLETE) {
             my_errno = ENOENT;
 	    print_vfs_message(_("ftpfs: CWD failed."));
 	    return NULL;
@@ -1448,6 +1445,7 @@ retrieve_dir(struct connection *bucket, char *remote_path, int resolve_symlinks)
         (file_list->next == file_list))
         goto fallback;
 
+ok:
     if (!dot_found)
 	insert_dots (file_list, bucket);
 
@@ -1487,6 +1485,33 @@ fallback:
 	linklist_destroy(file_list, direntry_destructor);
 	return retrieve_dir (bucket, remote_path, resolve_symlinks);
     }
+
+    /* Ok, maybe the directory exists but the remote server doesn't
+       list "." and "..". 
+       Check whether the directory exists:
+     */
+    if (has_spaces || bucket->strict_rfc959_list_cmd || 
+	ftpfs_first_cd_then_ls) /* CWD has been already performed, i.e. 
+                                   we know that remote_path exists */
+	goto ok;
+    else {
+	if (bucket->remote_is_amiga) {
+	    /* The Amiga ftp server needs extra processing because it
+               always gets relative pathes instead of absolute pathes
+               like anyone else */
+	    char *p = ftpfs_get_current_directory (bucket);
+	
+	    if (ftpfs_chdir_internal (bucket, remote_path) == COMPLETE) {
+	        ftpfs_chdir_internal (bucket, p);
+	        g_free (p);
+	        goto ok;
+	    }
+        } else {
+	    if (ftpfs_chdir_internal (bucket, remote_path) == COMPLETE)
+	        goto ok;
+	}
+    }
+
     my_errno = EACCES;
     g_free(dcache->remote_path);
     g_free(dcache);

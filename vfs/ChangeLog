@@ -1,3 +1,9 @@
+Fri Apr 23 21:02:32 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* ftpfs.c (retrieve_dir): If we don't get any valid directory entry
+	(i.e. not even "." and "..") check whether the directory is empty
+	or not existend (instead of failing with "ftpfs: failed").
+
 1999-04-23  Pavel Machek  <pavel@artax.karlin.mff.cuni.cz>
 
 	* vfs.c (vfs_parse_filemode): fix for solaris which uses 'l'
