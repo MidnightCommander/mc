@@ -7,12 +7,12 @@
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
 
-Questa è la principale schermata di aiuto 
+Questa è la principale schermata della guida interattiva
 del GNU Midnight Commander. 
 
-Per saperne di più su come usare l'aiuto interattivo, premere
+Per saperne di più su come usare la guida interattiva, premere
 semplicemente invioHow to use help. Se lo si desidera, è possibile 
-consultare direttamente il contenutoContents dell'aiuto.
+consultare direttamente il sommarioContents della guida.
 
 Il Midnight Commander è stato scritto dai suoi autoriAUTHORS.
 
@@ -437,10 +437,10 @@ usare i tasti freccia o la prima lettera per selezionare
 una voce o cliccare con il mouse sul bottone.
 
 [How to use help]
-Come usare l'aiuto interattivo
+Come usare la guida interattiva
 
 Usare i tasti del cursore o il mouse per navigare
-nel visualizzatore dell'aiuto.
+nel visualizzatore della guida.
 
 Premere freccia in giù per spostarsi alla voce
 successiva o per spostarsi in basso.
@@ -458,14 +458,14 @@ TAB per spostarsi sulla prossima voce e premere
 INVIO per seguire il collegamento corrente. Usare il 
 tasto 'l' per tornare indietro nello storico dei nodi
 visitati. 
-Premere ESC per uscire dal visualizzatore dell'aiuto.
+Premere ESC per uscire dal visualizzatore della guida.
 
 Il tasto sinistro del mouse segue il collegamento 
 o sfoglia le pagine. 
 Il tasto destro del mouse torna indietro nello storico 
 dei nodi visitati.
 
-Elenco completo dei tasti visualizzatore dell'aiuto:
+Elenco completo dei tasti del visualizzatore della guida:
 
 Sono accettati i tasti generali di movimentoGeneral Movement Keys.
 
@@ -475,11 +475,12 @@ giù           Va alla voce successiva o una linea in basso.
 su            Va alla voce precedente o una linea in alto.
 destra, invio Segue il collegamento corrente.    
 sinistra, l   Torna indietro nello storico dei nodi visitati.
-F1            Mostra l'aiuto per il visualizzatore dell'aiuto.
+F1            Mostra la guida per il visualizzatore della 
+              guida stessa.
 n             Va al nodo successivo.
 p             Va al nodo precedente.    
-c             Va al nodo dei contenuti.    
-F10, esc      Esce dal visualizzatore dell'aiuto.
+c             Va al nodo del sommario.    
+F10, esc      Esce dal visualizzatore della guida.
 
 Local variables:
 fill-column: 58
