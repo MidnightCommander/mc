@@ -2538,8 +2538,7 @@ taglia in
 .B cooledit.clip, 
 e
 .B Ctrl-Del
-cancella il testo selezionato. Il tasto di completamento esegue anche
-un Invio con indentamento automatico.
+cancella il testo selezionato. 
 Funziona anche l'evidenziazione con il mouse che, come al solito, si può 
 utilizzare come in un normale terminale, premendo contemporaneamente 
 il tasto Maiuscolo mentre si clicca trascinando con il mouse.
