@@ -210,8 +210,8 @@ static int
 fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
 {
     {
-	char *argv[10];
-	char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
+	const char *argv[10];
+	const char *xsh = (SUP.flags == FISH_FLAG_RSH ? "rsh" : "ssh");
 	int i = 0;
 
 	argv[i++] = xsh;
