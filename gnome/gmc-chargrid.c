@@ -327,10 +327,10 @@ update_region (GmcCharGrid *cgrid, int x, int y, int width, int height)
 	if ((width == 0) || (height == 0))
 		return;
 
-	/* sanity checks */
-
-	g_assert ((x + width) <= cgrid->width);
-	g_assert ((y + height) <= cgrid->height);
+	x = MAX (0, x);
+	y = MAX (0, y);
+	width = MIN (width, cgrid->width - x);
+	height = MIN (height, cgrid->height - y);
 
 	for (i = 0; i < height; i++)
 		update_strip (cgrid, x, y + i, width);

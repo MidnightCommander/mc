@@ -2,6 +2,7 @@
 
 	* gmc-chargrid.c (gmc_char_grid_draw): Someone teach me how to
 	subtract.  Fixed a stupid offsetting bug.
+	(update_region): Added clipping of region bounds.
 
 	* gmc-chargrid.c: Changed the struct attr with pointers mess with
 	something saner.
