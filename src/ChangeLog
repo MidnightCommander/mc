@@ -1,5 +1,8 @@
 2003-10-27  Pavel Roskin  <proski@gnu.org>
 
+	* slint.c (mc_refresh): Revert last change - it breaks screen
+	restoring on rxvt.
+
 	* tree.c (tree_rmdir_cmd): Don't change to the root directory -
 	it's not needed now.
 
