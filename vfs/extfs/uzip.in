@@ -9,6 +9,7 @@
 
 DZIP=/usr/bin
 XZIP="$DZIP/zip -g"
+XDZIP="$DZIP/zip -d"
 XUNZIP="$DZIP/unzip"
 XZIPINFO="$DZIP/unzip -Z"
 #
@@ -71,6 +72,20 @@ else
 fi
 }
 
+mczipfs_mkdir ()
+{
+# preserve pwd. It is clean, but is it necessary?
+    pwd=`pwd`
+# Create a directory and create in it a tmp directory with the good name     
+    dir=tmpdir.${RANDOM}
+    mkdir $dir
+    cd $dir
+    mkdir -p "$2"  
+    $XZIP "$1" "$2" &>/dev/null
+    cd $pwd
+    rm -rf $dir
+}
+
 mczipfs_copyin ()
 {
 # preserve pwd. It is clean, but is it necessary?
@@ -94,12 +109,25 @@ mczipfs_copyout ()
 {
     $XUNZIP -p "$1" "$2" > $3 2>/dev/null
 }
+
+mczipfs_rm ()
+{
+    $XDZIP "$1" "$2" &>/dev/null
+}
+
+mczipfs_rmdir ()
+{
+    $XDZIP "$1" "$2"/ &>/dev/null
+}
+
 umask 077
 
 #echo "`date +%T` ${0##*/} $1 $2 to=$3 tmp=$4" >>/tmp/${0##*/}.log
 case "$1" in
   list)    mczipfs_list    "$2"; exit 0;;
-# delete)  mczipfs_delete  "$2" "$3" ; exit 0;;
+  rm)      mczipfs_rm      "$2" "$3" ; exit 0;;
+  rmdir)   mczipfs_rmdir   "$2" "$3" ; exit 0;;
+  mkdir)   mczipfs_mkdir   "$2" "$3" ; exit 0;;
   copyin)  mczipfs_copyin  "$2" "$3" $4 ; exit 0;;
   copyout) mczipfs_copyout "$2" "$3" $4 ; exit 0;;
 esac
