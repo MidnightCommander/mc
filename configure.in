@@ -1239,6 +1239,8 @@ Makefile
 mc.spec
 VERSION
 doc/Makefile 
+doc-gnome/Makefile
+doc-gnome/C/Makefile
 vfs/Makefile:vfs/Make-mc.in
 lib/Makefile
 gnome/Makefile 
