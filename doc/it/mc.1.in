@@ -262,13 +262,13 @@ comando allora se la barra di selezione è sopra una directory il
 Midnight Commander esegue un
 .B chdir(2)
 alla directory selezionata e ricarica le informazioni sul pannello;
-if the selection is an executable file then it is executed. Finally,
-if the extension of the selected file name matches one of the
-extensions in the
+se la selezione è un file eseguibile allora esso viene eseguito.
+Per ultimo, se l'estensione del file selezionato corrisponde ad una
+delle estensioni presenti nel
 .\"LINK2"
-extensions file
+file estensioni,
 .\"Extension File Edit"
-then the corresponding command is executed.
+il comando corrispondente viene eseguito.
 .PP
 .B C-l.
 Ridisegna tutto nel Midnight Commander.
@@ -281,64 +281,63 @@ Chmod
 su un file o su un gruppo di file marcati.
 .PP
 .B C-x o.
-Run the
+Esegue il comando
 .\"LINK2"
 Chown
 .\"Chown"
-command on the current file or on the tagged files.
+sul file corrente o sui file marcati.
 .PP
 .B C-x l.
-Run the link command.
+Crea un collegamento.
 .PP
 .B C-x s.
-Run the symbolic link command.
+Crea un collegamento simbolico .
 .PP
 .B C-x i.
-Set the other panel display mode to information.
+Imposta la modalità della visualizzazione dell'altro pannello a informazioni.
 .PP
 .B C-x q.
-Set the other panel display mode to quick view.
+Imposta la modalità della visualizzazione dell'altro pannello a vista rapida.
 .PP
 .B C-x !.
-Execute the 
+Esegue il comando
 .\"LINK2"
-External panelize
+Pannellizza comando
 .\"External panelize"
-command.
+.
 .PP
 .B C-x h
-Run the 
+Esegue il comando
 .\"LINK2"
-add directory to hotlist
+aggiungi directory alla lista directory favorite
 .\"Hotlist"
-command.
+.
 .PP
 .B M-!,
-Executes the Filtered view command, described in the
+Esegue il comando Vista filtrata, descritto in
 .\"LINK2"
-view command.
+Vista filtrata.
 .\"Internal File Viewer"
 .PP
 .B M-?,
-Executes the 
+Esegui il comando
 .\"LINK2"
-Find file
+Trova file
 .\"Find File"
-command.
+.
 .PP
 .B M-c,
-Pops up the
+Mostra la finestra
 .\"LINK2"
-quick cd
+cambia dir veloce
 .\"Quick cd"
-dialog.
+.
 .PP
 .B C-o,
-When the program is being run in the Linux or SCO console or under an xterm,
-it will show you the output of the previous command.  When ran on the
-Linux console, the Midnight Commander uses an external program
-(cons.saver) to handle saving and restoring of information on the
-screen.
+Quando il programma viene eseguito in una console Linux o SCO o in un xterm,
+mostrerà il risultato del comando precedente. Eseguito in console Linux, il
+Midnight Commander usa un programma esterno (cons.saver) per gestire il
+salvataggio e recupero delle informazioni sullo schermo.
 .PP
 When the subshell support is compiled in, you can type C-o at any time
 and you will be taken back to the Midnight Commander main screen, to
@@ -347,28 +346,28 @@ suspended by using this trick, you won't be able to execute other
 programs from the Midnight Commander until you terminate the suspended
 application. 
 .PP
-.SH "  Directory Panels"
-This section lists the keys which operate on the directory panels. If
-you want to know how to change the appearance of the panels take a
-look at the section on
+./"NODE "  Directory Panels"
+.SH "  Pannelli Directory"
+Questa sezione elenca i tasti che operano sui pannelli directory. 
+Se si desidera sapere come cambiare la visualizzazione dei pannelli,
+date un'occhiata alla sezione su
 .\"LINK2"
-Left and Right Menus.
+Menu Sinistro e Destro.
 .\"Left and Right Menus"
 .PP
 .B Tab, C-i.
-Change the current panel. The old other panel becomes the new current
-panel and the old current panel becomes the new other panel. The
-selection bar moves from the old current panel to the new current
-panel.
+Cambia il pannello corrente. L'altro pannello diventa il nuovo pannello 
+corrente mentre il pannello corrente diventa l'altro pannello.
+La barra di selezione si sposta dal vecchio pannello al nuovo corrente.
 .PP
 .B Insert, C-t.
-To tag files you may use the Insert key (the kich1 terminfo sequence)
-or the C-t (Control-t) sequence. To untag files, just retag a tagged
-file.
+Per marcare i file si può usare il tasto di Inserimento (la sequenza
+teminfo kich1) o la sequenza C-t (Control-t). Per smarcare i file
+basta marcare un file gia marcato.
 .PP
-.B M-g, M-h (or M-r), M-j.
-Used to select the top file in a panel, the middle file and the bottom one,
-respectively. 
+.B M-g, M-h (o M-r), M-j.
+Usato per selezionare rispettivamente il file superiore, il file centrale o 
+quello inferiore in un pannello.
 .PP
 .B C-s, M-s.
 Start a filename search in the directory listing. When the search is
