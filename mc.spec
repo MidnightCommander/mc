@@ -1,6 +1,6 @@
 Summary:   Midnight Commander visual shell
 Name:      mc
-Version:   4.1.28
+Version:   4.1.29
 Release:   1
 Copyright: GPL
 Group:     Shells

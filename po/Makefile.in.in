@@ -198,6 +198,8 @@ dist distdir: update-po $(DISTFILES)
 	    || cp -p $(srcdir)/$$file $(distdir); \
 	done
 
+distcopy:
+
 update-po: Makefile
 	$(MAKE) $(PACKAGE).pot
 	PATH=`pwd`/../src:$$PATH; \
