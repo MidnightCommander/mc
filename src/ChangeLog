@@ -1,3 +1,8 @@
+2002-07-16  Pavel Roskin  <proski@gnu.org>
+
+	* main.c (do_execute): Don't ask to press any key when the shell
+	is running a command - the user has already pressed Ctrl-O.
+
 2002-07-15  Pavel Roskin  <proski@gnu.org>
 
 	* slint.c: Eliminate hardcoded color terminals.  Most users no

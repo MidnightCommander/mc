@@ -690,17 +690,18 @@ do_execute (const char *shell, const char *command, int flags)
 #endif /* HAVE_SUBSHELL_SUPPORT */
 	my_system (flags, shell, command);
 
-    if (!(flags & EXECUTE_INTERNAL)){
+    if (!(flags & EXECUTE_INTERNAL)) {
 	if ((pause_after_run == pause_always ||
 	    (pause_after_run == pause_on_dumb_terminals &&
-	     !xterm_flag && !console_flag)) && !quit){
+	     !xterm_flag && !console_flag)) && !quit &&
+	     subshell_state != RUNNING_COMMAND) {
 	    printf (_("Press any key to continue..."));
 	    last_paused = 1;
 	    fflush (stdout);
 	    mc_raw_mode ();
 	    xgetch ();
 	}
-	if (console_flag){
+	if (console_flag) {
 	    if (output_lines && keybar_visible) {
 		putchar('\n');
 		fflush(stdout);
