@@ -988,6 +988,7 @@ static void init_globals(void)
   interpret_coding_system(KANJI);
 }
 
+#if 0
 /***************************************************************************
 check if a string is initialised and if not then initialise it
 ***************************************************************************/
@@ -996,7 +997,6 @@ static void string_initial(char **s,char *v)
   if (!*s || !**s)
     string_init(s,v);
 }
-
 
 /***************************************************************************
 Initialise the sDefault parameter structure.
@@ -1047,7 +1047,9 @@ static void init_locals(void)
       
     }
 }
-
+#else
+#define init_locals()
+#endif /* 0 */
 
 /******************************************************************* a
 convenience routine to grab string parameters into a rotating buffer,
