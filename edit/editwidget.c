@@ -25,7 +25,6 @@
 #include "edit-widget.h"
 
 #include "src/tty.h"		/* LINES */
-#include "src/key.h"		/* get_modifier() */
 #include "src/widget.h"		/* redraw_labels() */
 #include "src/menu.h"		/* menubar_new() */
 
@@ -294,13 +293,6 @@ edit_labels (WEdit *edit)
     redraw_labels (h);
 }
 
-
-static long
-get_key_state (void)
-{
-    return (long) get_modifier ();
-}
-
 void edit_update_screen (WEdit * e)
 {
     edit_scroll_screen_over_cursor (e);
@@ -337,7 +329,7 @@ static int edit_callback (WEdit *e, int msg, int par)
 	    int cmd, ch;
 	    if (edit_drop_hotkey_menu (e, par))		/* first check alt-f, alt-e, alt-s, etc for drop menus */
 		return 1;
-	    if (!edit_translate_key (e, 0, par, get_key_state (), &cmd, &ch))
+	    if (!edit_translate_key (e, 0, par, &cmd, &ch))
 		return 0;
 	    edit_execute_key_command (e, cmd, ch);
 	    edit_update_screen (e);

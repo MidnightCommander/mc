@@ -28,7 +28,7 @@
 #include "src/user.h"		/* user_menu_cmd() */
 #include "src/tty.h"		/* keys */
 #include "src/main.h"		/* edit_one_file */
-#include "src/key.h"		/* SHIFT_PRESSED */
+#include "src/key.h"		/* KEY_M_SHIFT */
 #include "src/wtools.h"		/* query_dialog() */
 
 #include "src/charsets.h"
@@ -2034,7 +2034,9 @@ static void check_and_wrap_line (WEdit * edit)
 
 static void edit_execute_macro (WEdit *edit, struct macro macro[], int n);
 
-int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch)
+int
+edit_translate_key (WEdit *edit, unsigned int x_keycode, long x_key,
+		    int *cmd, int *ch)
 {
     int command = -1;
     int char_for_insertion = -1;
@@ -2044,8 +2046,11 @@ int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_
     *cmd = command;
     *ch = char_for_insertion;
 
-    if((command == -1 || command == 0) && char_for_insertion == -1)  /* unchanged, key has no function here */
+    if ((command == -1 || command == 0) && char_for_insertion == -1) {
+	/* unchanged, key has no function here */
 	return 0;
+    }
+
     return 1;
 }
 

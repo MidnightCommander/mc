@@ -123,7 +123,8 @@ void menu_save_mode_cmd (void);
 int edit_raw_key_query (char *heading, char *query, int cancel);
 char *strcasechr (const unsigned char *s, int c);
 int edit (const char *_file, int line);
-int edit_translate_key (WEdit * edit, unsigned int x_keycode, long x_key, int x_state, int *cmd, int *ch);
+int edit_translate_key (WEdit *edit, unsigned int x_keycode, long x_key,
+			int *cmd, int *ch);
 
 #ifndef NO_INLINE_GETBYTE
 int edit_get_byte (WEdit * edit, long byte_index);

@@ -24,9 +24,7 @@
    This is #include'd into the function edit_translate_key in edit.c.
    This sequence of code takes 'x_state' and 'x_key' and translates them
    into either 'command' or 'char_for_insertion'. 'x_key' holds one of
-   KEY_NPAGE, KEY_HOME etc., and 'x_state' holds a bitwise inclusive OR of
-   CONTROL_PRESSED, ALT_PRESSED or SHIFT_PRESSED, although none may
-   be supported.
+   KEY_NPAGE, KEY_HOME etc., possibly with modifiers.
    'command' is one of the editor commands editcmddef.h.
 
    Almost any C code can go into this file. The code below is an example
@@ -180,13 +178,8 @@
 	    command = edit->macro_i < 0 ? CK_Begin_Record_Macro : CK_End_Record_Macro;
 	    goto fin;
 	}
-/*    if (x_key == KEY_NUMLOCK) {
-   num_lock = 1 - num_lock;
-   return 1;
-   }
- */
 
-/* first translate the key-pad */
+    /* first translate the key-pad */
     if (num_lock) {
 	if (x_key >= '0' && x_key <= '9') {
 	    x_key = key_pad_map[x_key - '0'];
@@ -195,105 +188,101 @@
 	    x_key = KEY_DC;
 	}
     }
-    if ((x_state & SHIFT_PRESSED) && (x_state & CONTROL_PRESSED)) {
-	switch (x_key) {
-	case KEY_PPAGE:
+
+    /* keys with modifiers */
+    switch (x_key) {
+	/* shift + ctrl */
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_PPAGE:
 	    command = CK_Beginning_Of_Text_Highlight;
 	    goto fin;
-	case KEY_NPAGE:
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_NPAGE:
 	    command = CK_End_Of_Text_Highlight;
 	    goto fin;
-	case KEY_LEFT:
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_LEFT:
 	    command = CK_Word_Left_Highlight;
 	    goto fin;
-	case KEY_RIGHT:
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_RIGHT:
 	    command = CK_Word_Right_Highlight;
 	    goto fin;
-	case KEY_UP:
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_UP:
 	    command = CK_Scroll_Up_Highlight;
 	    goto fin;
-	case KEY_DOWN:
+	case KEY_M_SHIFT | KEY_M_CTRL | KEY_DOWN:
 	    command = CK_Scroll_Down_Highlight;
 	    goto fin;
-	}
-    }
-    if ((x_state & SHIFT_PRESSED) && !(x_state & CONTROL_PRESSED)) {
-	switch (x_key) {
-	case KEY_PPAGE:
+
+	/* shift */
+	case KEY_M_SHIFT | KEY_PPAGE:
 	    command = CK_Page_Up_Highlight;
 	    goto fin;
-	case KEY_NPAGE:
+	case KEY_M_SHIFT | KEY_NPAGE:
 	    command = CK_Page_Down_Highlight;
 	    goto fin;
-	case KEY_LEFT:
+	case KEY_M_SHIFT | KEY_LEFT:
 	    command = CK_Left_Highlight;
 	    goto fin;
-	case KEY_RIGHT:
+	case KEY_M_SHIFT | KEY_RIGHT:
 	    command = CK_Right_Highlight;
 	    goto fin;
-	case KEY_UP:
+	case KEY_M_SHIFT | KEY_UP:
 	    command = CK_Up_Highlight;
 	    goto fin;
-	case KEY_DOWN:
+	case KEY_M_SHIFT | KEY_DOWN:
 	    command = CK_Down_Highlight;
 	    goto fin;
-	case KEY_HOME:
+	case KEY_M_SHIFT | KEY_HOME:
 	    command = CK_Home_Highlight;
 	    goto fin;
-	case KEY_END:
+	case KEY_M_SHIFT | KEY_END:
 	    command = CK_End_Highlight;
 	    goto fin;
-	case KEY_IC:
+	case KEY_M_SHIFT | KEY_IC:
 	    command = CK_XPaste;
 	    goto fin;
-	case KEY_DC:
+	case KEY_M_SHIFT | KEY_DC:
 	    command = CK_XCut;
 	    goto fin;
-	}
-    }
-/* things that need a control key */
-    if (x_state & CONTROL_PRESSED) {
-	switch (x_key) {
-	case KEY_F (2):
+
+	/* ctrl */
+	case KEY_M_CTRL | (KEY_F (2)):
 	    command = CK_Save_As;
 	    goto fin;
-	case KEY_F (4):
+	case KEY_M_CTRL | (KEY_F (4)):
 	    command = CK_Replace_Again;
 	    goto fin;
-	case KEY_F (7):
+	case KEY_M_CTRL | (KEY_F (7)):
 	    command = CK_Find_Again;
 	    goto fin;
-	case KEY_BACKSPACE:
+	case KEY_M_CTRL | KEY_BACKSPACE:
 	    command = CK_Undo;
 	    goto fin;
-	case KEY_PPAGE:
+	case KEY_M_CTRL | KEY_PPAGE:
 	    command = CK_Beginning_Of_Text;
 	    goto fin;
-	case KEY_NPAGE:
+	case KEY_M_CTRL | KEY_NPAGE:
 	    command = CK_End_Of_Text;
 	    goto fin;
-	case KEY_UP:
+	case KEY_M_CTRL | KEY_UP:
 	    command = CK_Scroll_Up;
 	    goto fin;
-	case KEY_DOWN:
+	case KEY_M_CTRL | KEY_DOWN:
 	    command = CK_Scroll_Down;
 	    goto fin;
-	case KEY_LEFT:
+	case KEY_M_CTRL | KEY_LEFT:
 	    command = CK_Word_Left;
 	    goto fin;
-	case KEY_RIGHT:
+	case KEY_M_CTRL | KEY_RIGHT:
 	    command = CK_Word_Right;
 	    goto fin;
-	case KEY_IC:
+	case KEY_M_CTRL | KEY_IC:
 	    command = CK_XStore;
 	    goto fin;
-	case KEY_DC:
+	case KEY_M_CTRL | KEY_DC:
 	    command = CK_Remove;
 	    goto fin;
-	}
     }
 
-/* an ordinary insertable character */
+    /* an ordinary insertable character */
     if (x_key < 256) {
 	int c = convert_from_input_c (x_key);
 
@@ -303,7 +292,7 @@
 	}
     }
 
-/* other commands */
+    /* other commands */
     i = 0;
     while (key_map[i] != x_key && (key_map[i] || key_map[i + 1]))
 	i += 2;
