@@ -137,12 +137,34 @@ int my_system_get_child_pid (int flags, const char *shell, const char *command, 
 	}
 	if (*pid == 0){
 		const int top = max_open_files ();
+		struct sigaction default_pipe;
+
 		sigaction (SIGINT,  &save_intr, NULL);
 		sigaction (SIGQUIT, &save_quit, NULL);
 
-		for (i = 3; i < top; i++)
+		/*
+		 * reset sigpipe
+		 */
+		default_pipe.sa_handler = SIG_DFL;
+		sigemptyset (&default_pipe.sa_mask);
+		default_pipe.sa_flags = 0;
+		
+		sigaction (SIGPIPE, &default_pipe, NULL);
+		
+		for (i = 0; i < top; i++)
 			close (i);
 
+		/* Setup the file descriptor for the child */
+		   
+		/* stdin */
+		open ("/dev/null");
+
+		/* stdout */
+		open ("/dev/null");
+
+		/* stderr */
+		open ("/dev/null");
+		
 		if (!(flags & EXECUTE_WAIT))
 			*pid = fork ();
 		

@@ -922,18 +922,11 @@ is_mountable (char *filename, file_entry *fe, int *is_mounted, char **point)
 	if (!S_ISLNK (fe->buf.st_mode))
 		return FALSE;
 
-	if (stat (filename, &s) == -1)
-		return FALSE;
-	mode = s.st_mode;
-		
-	if (!S_ISBLK (mode))
-		return FALSE;
-
 	len = readlink (filename, buffer, sizeof (buffer));
 	if (len == -1)
 		return FALSE;
-	buffer [len] = 0;
-	
+	buffer [len] = 0;	
+		
 	p = is_block_device_mountable (buffer);
 	if (!p)
 		return FALSE;
@@ -1006,6 +999,20 @@ static char *eject_known_locations [] = {
 gboolean 
 is_ejectable (char *filename)
 {
+	char *buf;
+	int size, retval;
+
+	if (gnome_metadata_get (filename, "device-is-ejectable", &size, &buf) == 0){
+		if (*buf)
+			retval = TRUE;
+		else
+			retval = FALSE;
+		g_free (buf);
+
+		if (retval)
+			return TRUE;
+	}
+	
 	if (find_command (eject_known_locations))
 		return TRUE;
 	else

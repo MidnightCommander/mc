@@ -407,13 +407,18 @@ create_actions (GtkWidget *menu, WPanel *panel,
 				if (fe){
 					v = is_mountable (fullname, fe, &is_mounted, NULL);
 					file_entry_free (fe);
+					
+					if (!v){
+						g_free (fullname);
+						continue;
+					}
+
+					if (!is_ejectable (fullname)){
+						g_free (fullname);
+						continue;
+					}
 					g_free (fullname);
 					
-					if (!v)
-						continue;
-
-					if (!is_ejectable (fullname))
-						continue;
 				} else {
 					g_free (fullname);
 					continue;

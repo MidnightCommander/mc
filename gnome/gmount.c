@@ -96,11 +96,13 @@ void free (void *ptr);
 
 typedef struct {
 	char *devname;
-
+	char *mount_point;
+	
 	/* This is just a good guess */
 	enum {
 		TYPE_UNKNOWN,
-		TYPE_CDROM
+		TYPE_CDROM,
+		TYPE_NFS
 	} type;
 } devname_info_t;
 
@@ -126,7 +128,7 @@ option_has_user (char *str)
  * g_strdup()ed string with the mount point
  */
 char *
-is_block_device_mountable (char *devname)
+is_block_device_mountable (char *mount_point)
 {
 	FILE *f;
 	struct mntent *mnt;
@@ -140,8 +142,15 @@ is_block_device_mountable (char *devname)
 		return NULL;
 
 	while ((mnt = getmntent (f))){
-		if (strcmp (mnt->mnt_fsname, devname) != 0)
-			continue;
+		if (strcmp (mnt->mnt_dir, mount_point) != 0){
+
+			/*
+			 * This second test is for compatibility with older
+			 * desktops that might be using this
+			 */
+			if (strcmp (mnt->mnt_dir, mount_point) != 0)
+				continue;
+		}
 		
 		if (option_has_user (mnt->mnt_opts)){
 			retval = g_strdup (mnt->mnt_dir);
@@ -164,7 +173,7 @@ is_block_device_mounted (char *filename)
 		return FALSE;
 
 	while ((mnt = getmntent (f))){
-		if (strcmp (mnt->mnt_fsname, filename) == 0)
+		if (strcmp (mnt->mnt_dir, filename) == 0)
 			retval = TRUE;
 	}
 	endmntent (f);
@@ -188,10 +197,14 @@ get_mountable_devices (void)
 			
 			dit = g_new0 (devname_info_t, 1);
 			dit->devname = g_strdup (mnt->mnt_fsname);
+			dit->mount_point = g_strdup (mnt->mnt_dir);
 			dit->type = TYPE_UNKNOWN;
 
 			if (strcmp (mnt->mnt_type, "iso9660") == 0)
 				dit->type = TYPE_CDROM;
+
+			if (strcmp (mnt->mnt_type, "nfs") == 0)
+				dit->type = TYPE_NFS;
 			
 			list = g_list_prepend (list, dit);
 		}
@@ -203,7 +216,7 @@ get_mountable_devices (void)
 #else
 
 char *
-is_block_device_mountable (char *devname)
+is_block_device_mountable (char *mount_point)
 {
 	return NULL;
 }
@@ -215,7 +228,7 @@ get_mountable_devices (void)
 }
 
 gboolean
-is_block_device_mounted (char *devname)
+is_block_device_mounted (char *mount_point)
 {
 	return TRUE;
 }
@@ -261,12 +274,13 @@ desktop_cleanup_devices (void)
 
 /* Creates the desktop link for the specified device */
 static void
-create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon)
+create_device_link (char *dev_name, char *short_dev_name, char *caption, char *icon, gboolean ejectable)
 {
 	char *full_name;
 	char *icon_full;
 	char type = 'D';
-
+	char ejectable_c = ejectable;
+	
 	icon_full = g_concat_dir_and_file (ICONDIR, icon);
 	full_name = g_concat_dir_and_file (desktop_directory, short_dev_name);
 	if (mc_symlink (dev_name, full_name) != 0) {
@@ -280,6 +294,7 @@ create_device_link (char *dev_name, char *short_dev_name, char *caption, char *i
 
 	gnome_metadata_set (full_name, "icon-filename", strlen (icon_full) + 1, icon_full);
 	gnome_metadata_set (full_name, "icon-caption", strlen (caption) + 1, caption);
+	gnome_metadata_set (full_name, "device-is-ejectable", 1, &ejectable_c);
 	gnome_metadata_set (full_name, "is-desktop-device", 1, &type); /* hack a boolean value */
 
 	g_free (full_name);
@@ -295,7 +310,8 @@ setup_devices (void)
 	int hd_count;
 	int cdrom_count;
 	int generic_count;
-
+	int nfs_count;
+	
 	list = get_mountable_devices ();
 
 	hd_count = 0;
@@ -311,19 +327,27 @@ setup_devices (void)
 		char *icon;
 		int count;
 		char buffer[128];
+		gboolean release_format;
+		gboolean ejectable;
+
 
 		dev_name = dit->devname;
 		short_dev_name = x_basename (dev_name);
 
+		release_format = FALSE;
+		ejectable = FALSE;
+		
 		/* Create the format/icon/count.  This could use better heuristics. */
 		if (dit->type == TYPE_CDROM){
 			format = _("CD-ROM %d");
 			icon = "i-cdrom.png";
 			count = cdrom_count++;
+			ejectable = TRUE;
 		} else if (strncmp (short_dev_name, "fd", 2) == 0) {
 			format = _("Floppy %d");
 			icon = "i-floppy.png";
 			count = floppy_count++;
+			ejectable = TRUE;
 		} else if (strncmp (short_dev_name, "hd", 2) == 0
 			   || strncmp (short_dev_name, "sd", 2) == 0) {
 			format = _("Disk %d");
@@ -333,6 +357,12 @@ setup_devices (void)
 			format = _("CD-ROM %d");
 			icon = "i-cdrom.png";
 			count = cdrom_count++;
+			ejectable = TRUE;
+		} else if (dit->type == TYPE_NFS){
+			release_format = TRUE;
+			format = g_strdup_printf (_("NFS dir %s"), dit->mount_point);
+			icon = "i-blockdev.png";
+			count = nfs_count++;
 		} else {
 			format = _("Device %d");
 			icon = "i-blockdev.png";
@@ -340,13 +370,19 @@ setup_devices (void)
 		}
 
 		g_snprintf (buffer, sizeof (buffer), format, count);
+		if (release_format){
+			g_free (format);
+			format = NULL;
+		}
 
 		/* Create the actual link */
 
-		create_device_link (dev_name, short_dev_name, buffer, icon);
+		create_device_link (dit->mount_point, short_dev_name, buffer, icon, ejectable);
 
 		g_free (dit->devname);
+		g_free (dit->mount_point);
 		g_free (dit);
+
 	}
 
 	g_list_free (list);

@@ -1,3 +1,10 @@
+1999-03-08  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gutil.c (my_system_get_child_pid): reset SIGPIPE to a sensible
+	value. 
+	(my_system_get_child_pid): Close also stdin/stdout/stderr
+
+	* gdesktop.c (is_mountable): Allow user-nfs devices to be mounted
 1999-03-08  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gscreen.c (can_drop_on_clist): New function to figure out if the
