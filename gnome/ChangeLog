@@ -1,3 +1,13 @@
+1998-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* glayout.c: Move the New window menu entry from ``Window'' to
+	``File''. 
+
+	* gwidget.c (x_unfocus_widget): Fix wartning.
+
+	* glayout.c (set_hintbar): Call flush events after setting the
+	hintbar. 
+
 1998-05-22  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gwidget.c (x_create_input): Disable the use of the GNOME entries

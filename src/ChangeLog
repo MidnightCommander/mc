@@ -1,3 +1,8 @@
+1998-05-24  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* widget.c (port_region_marked_for_delete): New per-port
+	piece of code:  Provides a way for good selection killing.
+
 Sun May 24 02:45:03 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* utilunix.c, util.h (errno_dir_not_empty): deleted

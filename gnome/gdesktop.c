@@ -384,20 +384,32 @@ check_window_id_in_one_panel (gpointer data, gpointer user_data)
 	PanelContainer *pc    = (PanelContainer *) data;
 	int id                = (int) user_data;
 	WPanel *panel         = pc->panel;
-	GtkCList *clist       = GTK_CLIST (panel->list);
 	GdkWindowPrivate  *gdk_wp;
 
-	gdk_wp = (GdkWindowPrivate *) clist->clist_window;
-	if (gdk_wp->xwindow == id){
-		temp_panel = panel;
-		return;
-	}
+	if (panel->list_type == list_icons){
+		GnomeIconList *icon_list = GNOME_ICON_LIST (panel->icons);
+		
+		gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (icon_list)->window;
 
-	gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (clist)->window;
-	
-	if (gdk_wp->xwindow == id){
-		temp_panel = panel;
-		return;
+		if (gdk_wp->xwindow == id){
+			temp_panel = panel;
+			return;
+		}
+	} else {
+		GtkCList *clist       = GTK_CLIST (panel->list);
+		
+		gdk_wp = (GdkWindowPrivate *) clist->clist_window;
+		if (gdk_wp->xwindow == id){
+			temp_panel = panel;
+			return;
+		}
+		
+		gdk_wp = (GdkWindowPrivate *) GTK_WIDGET (clist)->window;
+		
+		if (gdk_wp->xwindow == id){
+			temp_panel = panel;
+			return;
+		}
 	}
 }
 

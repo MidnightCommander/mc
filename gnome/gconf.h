@@ -34,6 +34,7 @@
 #define PORT_DOES_BACKGROUND_EXEC        1
 #define PORT_HAS_UPDATE_PANELS           1
 #define PORT_HAS_ICON_VIEW               1
+#define PORT_WINPUT_DELETES_MARKED       1
 #define PORT_LIST_MODE_NAME              "gnome_list_mode"
 #define PORT_LIST_MODE_DEFAULT           "icons"
 

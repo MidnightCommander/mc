@@ -1532,6 +1532,22 @@ is_in_input_map (WInput *in, int c_code)
     return 0;
 }
 
+#ifdef PORT_WINPUT_DELETES_MARKED
+static void
+port_region_marked_for_delete (WInput *in)
+{
+	kill_region (in);
+}
+#else
+static void
+port_region_marked_for_delete (WInput *in)
+{
+    *in->buffer = 0;
+    in->point = 0;
+    in->first = 0;
+}
+#endif
+
 int
 handle_char (WInput *in, int c_code)
 {
@@ -1564,9 +1580,7 @@ handle_char (WInput *in, int c_code)
 	if (c_code > 255 || !is_printable (c_code))
 	    return 0;
 	if (in->first){
-	    *in->buffer = 0;
-	    in->point = 0;
-	    in->first = 0;
+	    port_region_marked_for_delete (in);
 	}
     	free_completions (in);
 	v = insert_char (in, c_code);

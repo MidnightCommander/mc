@@ -47,8 +47,12 @@ void
 x_unfocus_widget (Widget_Item *p)
 {
 	GtkWidget *w = get_gtk_widget (p);
+	GtkWidget *toplevel = gtk_widget_get_toplevel (w);
 
-	gtk_window_set_focus (GTK_WINDOW (gtk_widget_get_toplevel (w)), NULL);
+	/* Only happens if the widget is not yet added to its container */
+	/* I am not yet sure why this happens */
+	if (GTK_IS_WINDOW (toplevel))
+		gtk_window_set_focus (GTK_WINDOW (gtk_widget_get_toplevel (w)), NULL);
 }
 
 void
@@ -256,6 +260,7 @@ entry_release (GtkEditable *entry, GdkEvent *event, WInput *in)
 	in->point = entry->current_pos;
 	in->mark  = (entry->current_pos == entry->selection_start_pos) ?
 		entry->selection_end_pos : entry->selection_start_pos;
+	in->first = 1;
 }
 
 int

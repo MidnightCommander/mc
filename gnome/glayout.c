@@ -177,6 +177,7 @@ void
 set_hintbar (char *str)
 {
 	gtk_label_set (GTK_LABEL (current_panel_ptr->panel->status), str);
+	x_flush_events ();
 }
 
 void
@@ -264,6 +265,7 @@ void configure_box (void);
 GtkCheckMenuItem *gnome_toggle_snap (void);
 
 GnomeUIInfo gnome_panel_file_menu [] = {
+	{ GNOME_APP_UI_ITEM, N_("New window"),        N_("Opens a new window"), gnome_open_panel },
 	{ GNOME_APP_UI_ITEM, N_("Open Terminal"),     N_("Opens a terminal"), gnome_open_terminal },
 	{ GNOME_APP_UI_SEPARATOR },	
 	{ GNOME_APP_UI_ITEM, N_("Copy..."),           N_("Copy files"),       copy_cmd },
@@ -285,7 +287,6 @@ GnomeUIInfo gnome_panel_file_menu [] = {
 };
 
 GnomeUIInfo gnome_panel_panel_menu [] = {
-	{ GNOME_APP_UI_ITEM, N_("New window"),        N_("Opens a new window"), gnome_open_panel },
 	{ GNOME_APP_UI_ITEM, N_("Display mode..."),   N_("Set the display mode for the panel"),  gnome_listing_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Sort order..."),     N_("Changes the sort order of the files"), sort_cmd },
 	{ GNOME_APP_UI_ITEM, N_("Filter..."),         N_("Set a filter for the files"), filter_cmd },
