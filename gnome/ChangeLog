@@ -1,5 +1,8 @@
 1998-04-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
+	* gcache.c (image_cache_load_image): Federico spooted the problem:
+	I have to duplicate my keys for the hash.
+
 	* gmain.c (create_panels): Create one panel per directory
 	specified.  For some strange reason the code hangs if you start up
 	more than one panel at once.  This is not a gmc bug, it appears to

@@ -13,6 +13,7 @@ static void
 destroy_image_callback (gpointer key, gpointer data, gpointer user_data)
 {
 	gdk_imlib_destroy_image (data);
+	g_free (key);
 }
 
 void
@@ -36,7 +37,7 @@ image_cache_load_image (char *file)
 
 	data = gdk_imlib_load_image (file);
 	if (data){
-		g_hash_table_insert (image_cache, file, data);
+		g_hash_table_insert (image_cache, g_strdup (file), data);
 	}
 	return data;
 }
