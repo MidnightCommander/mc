@@ -19,8 +19,7 @@ to `autogen.sh' are passed to `configure'.  Then run `make' as usually.
 The distribution tarball is created by the command `make distcheck'. 
 This command can take a while.
 
-The next version, mc-4.6.0, is expected to be released using the latest
-versions of the GNU tools, which are currently:
+Tools currently used for snapshots:
 
 Autoconf 2.57
 Automake 1.7.2
