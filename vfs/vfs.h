@@ -266,7 +266,7 @@ struct utimbuf {
 #   define vfs_free_resources()
 #   define vfs_timeout_handler()
 #   define vfs_timeouts() 0
-#   define vfs_force_expire () 
+#   define vfs_force_expire()
 
     typedef int vfs;
     
