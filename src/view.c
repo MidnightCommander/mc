@@ -93,7 +93,7 @@ struct WView {
     char *command;		/* Command used to pipe data in */
     int view_active;
     int have_frame;
-    
+
     unsigned char *data;	/* Memory area for the file to be viewed */
     size_t datasize;		/* Number of bytes in the data */
     /* view_update_last_byte() must be called after assignment to datasize */
@@ -114,23 +114,23 @@ struct WView {
     offset_type start_display;  /* First char displayed */
     int start_col;		/* First displayed column, negative */
     offset_type edit_cursor;    /* HexEdit cursor position in file */
-    int hexedit_mode:1;		/* Hexidecimal editing mode flag */ 
+    int hexedit_mode:1;		/* Hexadecimal editing mode flag */
     int nib_shift:1;		/* Set if editing the least significant nibble */
-    int hexedit_text:1;		/* Set if hexedit is in the text mode */ 
-    screen_dimen start_save;	/* Line start shift between text and hex */ 
+    int hexedit_text:1;		/* Set if hexedit is in the text mode */
+    screen_dimen start_save;	/* Line start shift between text and hex */
     screen_dimen cursor_col;	/* Cursor column */
     screen_dimen cursor_row;	/* Cursor row */
     struct hexedit_change_node *change_list;   /* Linked list of changes */
 
     int dirty;			/* Number of skipped updates */
     int wrap_mode:1;		/* wrap_mode */
-	
+
     /* Mode variables */
     int hex_mode:1;		/* Hexadecimal mode flag */
     int bytes_per_line;		/* Number of bytes per line in hex mode */
     int viewer_magic_flag:1;	/* Selected viewer */
     int viewer_nroff_flag:1;	/* Do we do nroff style highlighting? */
-    
+
     /* Growing buffers information */
     int growing_buffer;		/* Use the growing buffers? */
     char **block_ptr;		/* Pointer to the block pointers */
@@ -139,7 +139,7 @@ struct WView {
                                    growing buffer */
     /* view_update_last_byte() must be called after assignment to
        growing_buffer, blocks, growbuf_lastindex */
-    
+
     /* Search variables */
     offset_type search_start;	/* First character to start searching from */
     offset_type found_len;	/* Length of found string or 0 if none was found */
@@ -153,9 +153,8 @@ struct WView {
     /* Markers */
     int marker;			/* mark to use */
     offset_type marks [10];	/* 10 marks: 0..9 */
-    
-	
-    int  move_dir;		/* return value from widget:  
+
+    int  move_dir;		/* return value from widget:
 				 * 0 do nothing
 				 * -1 view previous file
 				 * 1 view next file
@@ -348,7 +347,7 @@ get_byte (WView *view, unsigned int byte_index)
         if (pageno == view->blocks - 1 && pageindex < view->growbuf_lastindex)
             return view->block_ptr[pageno][pageindex];
         return -1;
-	}
+    }
 
     /* g_assert (view->data != NULL); */
     if (byte_index < view->datasize)
@@ -1346,19 +1345,19 @@ static offset_type
 move_backward2 (WView *view, offset_type current, int lines)
 {
     if (view->hex_mode) {
-    	if (view->edit_cursor >= lines * view->bytes_per_line) {
-    	    view->edit_cursor -= lines * view->bytes_per_line;
-    	} else {
-    	    view->edit_cursor %= view->bytes_per_line;
-    	}
-    	if (current > view->edit_cursor) {
-    	    /* cursor is out-of-view -- adjust the view */
+        if (view->edit_cursor >= lines * view->bytes_per_line) {
+            view->edit_cursor -= lines * view->bytes_per_line;
+        } else {
+            view->edit_cursor %= view->bytes_per_line;
+        }
+        if (current > view->edit_cursor) {
+            /* cursor is out-of-view -- adjust the view */
             if (current >= lines * view->bytes_per_line) {
                 current -= lines * view->bytes_per_line;
             } else {
                 current %= view->bytes_per_line;
             }
-    	}
+        }
         return current;
     } else {
         if (current == view->first)
@@ -2784,7 +2783,7 @@ view_callback (WView *view, widget_msg_t msg, int parm)
 	return MSG_HANDLED;
 
     case WIDGET_RESIZED:
-    	view_update_bytes_per_line (view);
+        view_update_bytes_per_line (view);
 	/* FALLTROUGH */
 
     default:
