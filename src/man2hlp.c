@@ -48,6 +48,64 @@ static struct node {
     struct node *next;
 } nodes, *cnode;
 
+#define MAX_STREAM_BLOCK 8192
+
+/*
+ * Read in blocks of reasonable size and make sure we read everything.
+ * Failure to read everything is an error.
+ */
+static size_t
+persistent_fread (void *data, size_t len, FILE * stream)
+{
+    size_t count;
+    size_t bytes_done = 0;
+    char *ptr = (char *) data;
+
+    while (bytes_done < len) {
+	count = len - bytes_done;
+	if (count > MAX_STREAM_BLOCK)
+	    count = MAX_STREAM_BLOCK;
+
+	count = fread (ptr, 1, count, stream);
+
+	if (count <= 0)
+	    return -1;
+
+	bytes_done += count;
+	ptr += count;
+    }
+
+    return bytes_done;
+}
+
+/*
+ * Write in blocks of reasonable size and make sure we write everything.
+ * Failure to write everything is an error.
+ */
+static size_t
+persistent_fwrite (const void *data, size_t len, FILE * stream)
+{
+    size_t count;
+    size_t bytes_done = 0;
+    const char *ptr = (const char *) data;
+
+    while (bytes_done < len) {
+	count = len - bytes_done;
+	if (count > MAX_STREAM_BLOCK)
+	    count = MAX_STREAM_BLOCK;
+
+	count = fwrite (ptr, 1, count, stream);
+
+	if (count <= 0)
+	    return -1;
+
+	bytes_done += count;
+	ptr += count;
+    }
+
+    return bytes_done;
+}
+
 /* Report error in input */
 static void
 print_error (char *message)
@@ -531,7 +589,7 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    if (fread (Topics, 1, file_end, fout) != file_end) {
+    if (persistent_fread (Topics, file_end, fout) < 0) {
 	perror (output);
 	return 1;
     }
@@ -547,13 +605,14 @@ main (int argc, char **argv)
 	return 1;
     }
 
-    if (fwrite (Topics + cont_start, 1, file_end - cont_start, fout) !=
-	file_end - cont_start) {
+    if (persistent_fwrite
+	(Topics + cont_start, file_end - cont_start, fout)
+	< 0) {
 	perror (output);
 	return 1;
     }
 
-    if (fwrite (Topics, 1, cont_start, fout) != cont_start) {
+    if (persistent_fwrite (Topics, cont_start, fout) < 0) {
 	perror (output);
 	return 1;
     }

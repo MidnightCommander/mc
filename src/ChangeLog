@@ -1,3 +1,8 @@
+2002-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* man2hlp.c: Implement persistent fread and fwrite to make sure
+	that all output is read and written.
+
 2002-08-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* help.c (show): Cast *paint_start to unsigned char to display
