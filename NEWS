@@ -16,6 +16,8 @@ Yet to be released version 4.6.
 - Colors are enabled on all capable terminals when using S-Lang.
 - Syntax highlighting now works with ncurses.
 - .netrc support in ftpfs is enabled by default.
+- Shift-F5 and Shift-F6 copy and rename like F5 and F6, but suggest the
+  selected filename as the destination.
 
 Version 4.5.55
 
