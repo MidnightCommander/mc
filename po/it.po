@@ -7,14 +7,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.99a\n"
-"POT-Creation-Date: 2002-09-26 21:21-0400\n"
-"PO-Revision-Date: 2001-09-30 20:25GMT+1\n"
+"POT-Creation-Date: 2002-09-27 11:11+0200\n"
+"PO-Revision-Date: 2002-09-27 11:11+0200\n"
 "Last-Translator: Marco Ciampa <ciampix@libero.it>\n"
-"Language-Team: Italiano (use this)<tp@lists.linux.it> <it@li.org>\n"
+"Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 0.9.6\n"
 
+#. The file-name is printed after the ':'
 #: edit/edit.c:163 edit/edit.c:289 edit/edit.c:294 edit/edit.c:332
 #: edit/edit.c:338 edit/edit.c:345 edit/edit.c:357 edit/editcmd.c:255
 #: edit/editcmd.c:261 edit/editcmd.c:1564 src/wtools.c:132 vfs/vfs.c:1848
@@ -65,6 +67,7 @@ msgstr " Inserire nome file: "
 msgid "&Dismiss"
 msgstr "&Chiudi"
 
+#. 1
 #: edit/edit.h:325 edit/editcmd.c:335 edit/editcmd.c:1083 edit/editcmd.c:1164
 #: edit/editcmd.c:2341 edit/editmenu.c:30 edit/editoptions.c:65
 #: src/boxes.c:139 src/boxes.c:276 src/boxes.c:374 src/boxes.c:466
@@ -115,6 +118,7 @@ msgstr "Salva sicuro"
 msgid "Do backups -->"
 msgstr "Fai i backup -->"
 
+#. 0
 #: edit/editcmd.c:333 edit/editcmd.c:1025 edit/editcmd.c:1081
 #: edit/editcmd.c:1162 edit/editcmd.c:2339 edit/editoptions.c:62
 #: src/achown.c:71 src/boxes.c:140 src/boxes.c:277 src/boxes.c:372
@@ -139,6 +143,7 @@ msgstr " Modifica modo salvataggio"
 msgid " Save As "
 msgstr " Salva con nome "
 
+#. Warning message with a query to continue or cancel the operation
 #: edit/editcmd.c:424 edit/editcmd.c:708 edit/editcmd.c:733 edit/editcmd.c:877
 #: edit/editcmd.c:975 src/file.c:613 src/help.c:317 src/main.c:463
 #: src/screen.c:1374 src/screen.c:1944 src/selcodepage.c:101
@@ -151,6 +156,7 @@ msgstr " Attenzione "
 msgid " A file already exists with this name. "
 msgstr " Un file con lo stesso nome esiste già. "
 
+#. Push buttons to over-write the current file, or cancel the operation
 #: edit/editcmd.c:427
 msgid "Overwrite"
 msgstr "Sovrascrivi"
@@ -164,14 +170,17 @@ msgstr "Annulla"
 msgid " Error trying to save file. "
 msgstr " Errore nel salvataggio del file. "
 
+#. This heads the delete macro error dialog box
 #: edit/editcmd.c:542 edit/editcmd.c:550 edit/editcmd.c:575
 msgid " Delete macro "
 msgstr " Elimina macro "
 
+#. 'Open' = load temp file
 #: edit/editcmd.c:544
 msgid " Error trying to open temp file "
 msgstr " Errore nell'apertura del file temporaneo "
 
+#. 'Open' = load temp file
 #: edit/editcmd.c:552 edit/editcmd.c:613 edit/editcmd.c:670
 msgid " Error trying to open macro file "
 msgstr " Errore nell'apertura del file delle macro "
@@ -180,14 +189,17 @@ msgstr " Errore nell'apertura del file delle macro "
 msgid " Error trying to overwrite macro file "
 msgstr " Errore sovrascrivendo il file delle macro "
 
+#. This heads the 'Macro' dialog box
 #: edit/editcmd.c:592
 msgid " Macro "
 msgstr " Macro "
 
+#. Input line for a single key press follows the ':'
 #: edit/editcmd.c:594
 msgid " Press the macro's new hotkey: "
 msgstr " Premi nuovo tasto veloce macro: "
 
+#. This heads the 'Save Macro' dialog box
 #: edit/editcmd.c:613
 msgid " Save macro "
 msgstr " Salva macro "
@@ -196,6 +208,7 @@ msgstr " Salva macro "
 msgid " Delete Macro "
 msgstr " Elimina Macro "
 
+#. This heads the 'Load Macro' dialog box
 #: edit/editcmd.c:669
 msgid " Load macro "
 msgstr " Carica macro "
@@ -204,6 +217,7 @@ msgstr " Carica macro "
 msgid " Confirm save file? : "
 msgstr " Conferma:  salvo il file?: "
 
+#. Buttons to 'Confirm save file' query
 #: edit/editcmd.c:684 src/view.c:385
 msgid " Save file "
 msgstr " Salva il file "
@@ -309,6 +323,7 @@ msgstr " Inserire stringa di ricerca:"
 msgid " Replace "
 msgstr " Sostituisci "
 
+#. in response to number of bookmarks added because of string being found %d times
 #: edit/editcmd.c:1192 edit/editcmd.c:1869 edit/editcmd.c:1871
 #: edit/editcmd.c:1899 src/view.c:1490 src/view.c:1569 src/view.c:1689
 #: src/view.c:1701 src/view.c:1918 src/view.c:1960
@@ -322,6 +337,7 @@ msgstr ""
 " L'espressione regolare non è valida, o espressione di scanf con troppe "
 "conversioni "
 
+#. "Invalid regexp string or scanf string"
 #: edit/editcmd.c:1763
 msgid " Error in replacement format string. "
 msgstr " Errore nella sostituzione della stringa. "
@@ -707,10 +723,12 @@ msgstr "Paragrafi dinamici"
 msgid "Type writer wrap"
 msgstr "A capo automatico"
 
+#. 2
 #: edit/editoptions.c:68
 msgid "Word wrap line length : "
 msgstr "Auto a capo colonna : "
 
+#. 4
 #: edit/editoptions.c:74
 msgid "Tab spacing : "
 msgstr "Spaziatura tab : "
@@ -719,30 +737,37 @@ msgstr "Spaziatura tab : "
 msgid "synta&X highlighting"
 msgstr "&Sintassi Evidenziata"
 
+#. 7
 #: edit/editoptions.c:88
 msgid "confir&M before saving"
 msgstr "Conferma &Prima di salvare"
 
+#. 8
 #: edit/editoptions.c:91
 msgid "fill tabs with &Spaces"
 msgstr "&Riempie i tabulatori di spazi"
 
+#. 9
 #: edit/editoptions.c:94
 msgid "&Return does autoindent"
 msgstr "A &Capo autoindenta"
 
+#. 10
 #: edit/editoptions.c:97
 msgid "&Backspace through tabs"
 msgstr "&Backspace attraverso i tab"
 
+#. 11
 #: edit/editoptions.c:100
 msgid "&Fake half tabs"
 msgstr "&Imbroglia i mezzi tab"
 
+#. 13
 #: edit/editoptions.c:106
 msgid "Wrap mode"
 msgstr "Modalità a capo"
 
+#. 15
 #: edit/editoptions.c:112
 msgid "Key emulation"
 msgstr "Emulazione tasti"
@@ -1015,6 +1040,7 @@ msgstr " Impostazione File System Virtuale (VFS) "
 msgid "Quick cd"
 msgstr "Cambia dir Rapido "
 
+#. want cd like completion
 #: src/boxes.c:800
 msgid "cd"
 msgstr "cd"
@@ -1214,6 +1240,7 @@ msgstr " Nome utente "
 msgid " Chown command "
 msgstr " Proprietario "
 
+#. add fields for unknown names (numbers)
 #: src/chown.c:185
 msgid "<Unknown user>"
 msgstr "<Utente ignoto>"
@@ -1370,9 +1397,9 @@ msgid "Type `exit' to return to the Midnight Commander"
 msgstr "Premi `exit' per tornare a Midnight Commander"
 
 #: src/cmd.c:1024
-#, fuzzy, c-format
+#, c-format
 msgid "Link %s to:"
-msgstr " collegamento: %s"
+msgstr "Collega %s a:"
 
 #: src/cmd.c:1025
 msgid " Link "
@@ -1534,6 +1561,7 @@ msgstr "&Dimensione"
 msgid "&Inode"
 msgstr "&Inode"
 
+#. New sort orders
 #: src/dir.c:61
 msgid "&Type"
 msgstr "&Tipo"
@@ -1826,6 +1854,7 @@ msgstr ""
 "Directory sorgente \"%s\" non è una directory \n"
 " %s "
 
+#. we found a cyclic symbolic link
 #: src/file.c:921
 #, c-format
 msgid ""
@@ -1862,6 +1891,7 @@ msgstr ""
 " Non posso cambiare proprietario/gruppo della directory \"%s\"\n"
 " %s "
 
+#. Source doesn't exist
 #: src/file.c:1101
 #, c-format
 msgid ""
@@ -1943,6 +1973,15 @@ msgstr ""
 " Non posso cancellae la directory `%s' \n"
 " %s "
 
+#.
+#. * This array introduced to avoid translation problems. The former (op_names)
+#. * is assumed to be nouns, suitable in dialog box titles; this one should
+#. * contain whatever is used in prompt itself (i.e. in russian, it's verb).
+#. * Notice first symbol - it is to fool gettext and force these strings to
+#. * be different for it. First symbol is skipped while building a prompt.
+#. * (I don't use spaces around the words, because someday they could be
+#. * dropped, when widgets get smarter)
+#.
 #: src/file.c:1645
 msgid "1Copy"
 msgstr "1Copia"
@@ -1955,6 +1994,15 @@ msgstr "1Sposta"
 msgid "1Delete"
 msgstr "1Cancella"
 
+#.
+#. * These are formats for building a prompt. Parts encoded as follows:
+#. * %o - operation from op_names1
+#. * %f - file/files or files/directories, as appropriate
+#. * %m - "with source mask" or question mark for delete
+#. * %s - source name (truncated)
+#. * %d - number of marked files
+#. * %e - "to:" or question mark for delete
+#. *
 #: src/file.c:1660
 #, no-c-format
 msgid "%o %f \"%s\"%m"
@@ -2164,14 +2212,17 @@ msgstr " Il file esiste "
 msgid " Background process: File exists "
 msgstr " Processo in background: il file esiste "
 
+#. follow symlinks and preserve Attributes must be the first
 #: src/filegui.c:737
 msgid "preserve &Attributes"
 msgstr "Preserva gli &Attributi"
 
+#. &op_preserve
 #: src/filegui.c:739
 msgid "follow &Links"
 msgstr "Segue i co&Llegamenti"
 
+#. &file_mask_op_follow_links
 #: src/filegui.c:741
 msgid "to:"
 msgstr "a:"
@@ -2188,6 +2239,7 @@ msgstr "&Background"
 msgid "&Stable Symlinks"
 msgstr "Collegamenti &Statici"
 
+#. &file_mask_stable_symlinks
 #: src/filegui.c:774
 msgid "&Dive into subdir if exists"
 msgstr "In una sotto&Dir se esiste già"
@@ -2357,6 +2409,7 @@ msgstr "Directory di uso frequente"
 msgid " Directory path "
 msgstr "Path della directory"
 
+#. This one holds the displayed pathname
 #: src/hotlist.c:622 src/hotlist.c:672
 msgid " Directory label "
 msgstr " Etichetta directory "
@@ -2430,6 +2483,7 @@ msgstr " Carica favorite "
 msgid "Midnight Commander %s"
 msgstr "Midnight Commander %s"
 
+#. This printf pattern string is used as a reference for size
 #: src/info.c:99
 #, c-format
 msgid "File:       %s"
@@ -2574,6 +2628,7 @@ msgstr "&Tipo di file"
 msgid "&Save"
 msgstr "&Salva"
 
+#. length of line with '<' '>' buttons
 #: src/layout.c:373
 msgid " Panel split "
 msgstr " Divisione pannello "
@@ -2833,6 +2888,10 @@ msgstr "Inver&Ti selezione      M-*"
 msgid "e&Xit              F10"
 msgstr "&Esci                   F10"
 
+#. I know, I'm lazy, but the tree widget when it's not running
+#. * as a panel still has some problems, I have not yet finished
+#. * the WTree widget port, sorry.
+#.
 #: src/main.c:1029
 msgid "&Directory tree"
 msgstr "&Albero directory"
@@ -3005,11 +3064,11 @@ msgstr ""
 
 #: src/main.c:2082
 msgid "+number"
-msgstr ""
+msgstr "+numero"
 
 #: src/main.c:2083
 msgid "Set initial line number for the internal editor"
-msgstr ""
+msgstr "Imposta numero di riga iniziale per l'editor interno"
 
 #: src/main.c:2085
 msgid ""
@@ -3089,12 +3148,11 @@ msgstr "Annota i messaggi dell'ftp in un file specificato"
 
 #: src/main.c:2207
 msgid "Set debug level"
-msgstr ""
+msgstr "Imposta livello di debug"
 
 #: src/main.c:2211
-#, fuzzy
 msgid "Print data directory"
-msgstr "directory"
+msgstr "Stampa dati directory"
 
 #: src/main.c:2213
 msgid "Requests to run in black and white"
@@ -3109,9 +3167,8 @@ msgid "Disables subshell support"
 msgstr "Disabilita il supporto delle sottoshell"
 
 #: src/main.c:2220
-#, fuzzy
 msgid "Force subshell execution"
-msgstr "imposta UID"
+msgstr "Forza esecuzione subshell"
 
 #: src/main.c:2223
 msgid "Prints working directory at program exit"
@@ -3172,6 +3229,7 @@ msgstr ""
 " da questo momento sono in ~/.mc,\n"
 " i file sono appena stati spostati.\n"
 
+#. other options
 #: src/option.c:64
 msgid "safe de&Lete"
 msgstr "cance&Llazione sicura"
@@ -3220,6 +3278,7 @@ msgstr "calcola &Totali"
 msgid "&Verbose operation"
 msgstr "operazioni &Prolisse"
 
+#. panel options
 #: src/option.c:77
 msgid "&Fast dir reload"
 msgstr "aggiornamento rapido &Directory"
@@ -3256,6 +3315,7 @@ msgstr "su terminali stupidi (&Q)"
 msgid "alwa&Ys"
 msgstr "sempre (&X)"
 
+#. Similar code is in layout.c (init_layout())
 #: src/option.c:157
 msgid " Panel options "
 msgstr " Opzioni del pannello "
@@ -3655,6 +3715,7 @@ msgstr " Impossibile eseguire programmi su una directory non locale"
 msgid " No suitable entries found in %s "
 msgstr " Non trovo voci appropriate in %s "
 
+#. Create listbox
 #: src/user.c:783
 msgid " User menu "
 msgstr " Menu utente "
@@ -3663,10 +3724,12 @@ msgstr " Menu utente "
 msgid "name_trunc: too big"
 msgstr "name_trunc: troppo grande"
 
+#. strftime() format string for recent dates
 #: src/util.c:670 src/util.c:696
 msgid "%b %e %H:%M"
 msgstr "%b %e %H:%M"
 
+#. strftime() format string for old dates
 #: src/util.c:671 src/util.c:694
 msgid "%b %e  %Y"
 msgstr "%b %e  %Y"
@@ -3856,6 +3919,8 @@ msgstr "Formatt"
 msgid " History "
 msgstr " Storico comandi "
 
+#. KEY_F(0) is not here, since we are mapping it to f10, so there is no reason
+#. to define f0 as well. Also, it makes Learn keys a bunch of problems :(
 #: src/win.c:186
 msgid "Function key 1"
 msgstr "Tasto Funzione  1"
@@ -3996,6 +4061,7 @@ msgstr "- sul tastierino "
 msgid "* on keypad"
 msgstr "* sul tastierino "
 
+#. From here on, these won't be shown in Learn keys (no space)
 #: src/win.c:222
 msgid "Left arrow keypad"
 msgstr "Freccia a sinistra sul tastierino"
@@ -4088,6 +4154,11 @@ msgstr ""
 "in archivio cpio\n"
 "%s"
 
+#. In case entry is already there
+#. This shouldn't happen! (well, it can happen if there is a record for a
+#. file and than a record for a directory it is in; cpio would die with
+#. 'No such file or directory' is such case)
+#. This can be considered archive inconsistency
 #: vfs/cpio.c:453
 #, c-format
 msgid "%s contains duplicate entries! Skipping!"
@@ -4181,6 +4252,7 @@ msgstr "%s: fatto."
 msgid "%s: failure"
 msgstr "%s: errore"
 
+#. Use this as stor: ( dd block ; dd smallblock ) | ( cat > file; cat > /dev/null )
 #: vfs/fish.c:493
 #, c-format
 msgid "fish: store %s: sending command..."
