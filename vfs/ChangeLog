@@ -1,5 +1,8 @@
 2002-12-11  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
+	* extfs/patchfs: Use quotemeta() before giving filename to
+	shell.
+
 	* vfs.c (mc_stat): Make first argument const.
 	(mc_lstat): Likewise.
 	* vfs.h: Adjust declarations and remove some useless defines.
