@@ -71,15 +71,15 @@ XLIBS = @LIBS@
 
 # Where do we have the sources?
 # You shouldn't have to edit this :)
-mcsrcdir = $(rootdir)/src
-docdir   = $(rootdir)/doc
-mclibdir = $(rootdir)/lib
-slangdir = $(rootdir)/slang
-vfsdir   = $(rootdir)/vfs
-xvdir    = $(rootdir)/xv
-tkdir	 = $(rootdir)/tk
-gnomedir = $(rootdir)/gnome
-icodir   = $(rootdir)/icons
+mcsrcdir    = $(rootdir)/src
+docdir      = $(rootdir)/doc
+mcsrclibdir = $(rootdir)/lib
+slangdir    = $(rootdir)/slang
+vfsdir      = $(rootdir)/vfs
+xvdir       = $(rootdir)/xv
+tkdir	    = $(rootdir)/tk
+gnomedir    = $(rootdir)/gnome
+icodir      = $(rootdir)/icons
 
 hpath = -I$(mcsrcdir) -I$(slangdir) -I$(vfsdir) -I$(xvdir) -I$(xvdir)/support/xview_private -I$(tkdir)
 

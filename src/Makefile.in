@@ -98,9 +98,9 @@ libedit.a:
 @PCENTRULE@	-$(RMF) libedit.a
 @PCENTRULE@	$(LN_S) ../edit/libedit.a .
 
-$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mclibdir)/xnc.hlp $(srcdir)/gindex.pl
+$(srcdir)/mc.hlp: $(docdir)/mc.1.in $(mcsrclibdir)/xnc.hlp $(srcdir)/gindex.pl
 	$(MAKE) man2hlp
-	./man2hlp 58 $(docdir)/mc.1.in | cat - $(mclibdir)/xnc.hlp | \
+	./man2hlp 58 $(docdir)/mc.1.in | cat - $(mcsrclibdir)/xnc.hlp | \
 	perl $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
 
 mc.html: $(docdir)/mc.1.in man2hlp
