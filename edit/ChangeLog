@@ -7,6 +7,33 @@
 	* syntax.c: (edit_read_syntax_rules): Dynamically allocate
 	more space for contexts and for words in context. 
 
+2004-08-16  Roland Illig  <roland.illig@gmx.de>
+
+	* edit.c (several functions): Changed the data type of some
+	variables from int to size_t (for string lengths) or unsigned
+	long (for editor offsets) to avoid implicit sign conversions.
+	No functional changes.
+
+	* edit.c, editcmds.h: Moved the semicolon out of the macro
+	definition SHELL_COMMANDS_i, so that the declaration in edit.c
+	looks more natural. No functional changes.
+
+	* editcmd.c: Added missing initializers for QuickDialogs.i18n.
+	Replaced the last item in QuickWidgets from {0} to
+	NULL_QuickWidget (that is, added missing initializers).
+	(edit_completion_dialog): Made dlg_h and dlg_w unsigned to
+	avoid implicit sign conversion. No functional changes.
+	
+	* editlock.c (lock_build_name, edit_lock_file): Casted pid to
+	int to avoid wrong type argument for printf. No other functional
+	changes.
+
+	* editoptions.c: Added missing initializers for QuickDialogs
+	and QuickWidgets. No functional changes.
+	
+	* syntax.c (xx_strchr): Removed explicit loop unrolling. It's
+	the job of the compiler.
+
 2004-02-04  Pavel Roskin  <proski@gnu.org>
 
 	* editcmddef.h: Split CK_No_Command into CK_Insert_Char and
