@@ -745,8 +745,6 @@ static int getch_with_delay (void)
     return c;
 }
 
-extern int max_dirt_limit;
-
 /* Returns a character read from stdin with appropriate interpretation */
 /* Also takes care of generated mouse events */
 /* Returns EV_MOUSE if it is a mouse event */

@@ -1,3 +1,9 @@
+2002-12-27  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (max_dirt_limit): Make global to match view.h.
+	* setup.c (options): Actually save max_dirt_limit, which is
+	documented as a "special setting".
+
 2002-12-26  Pavel Roskin  <proski@gnu.org>
 
 	* key,c (get_modifier): Warning fix.

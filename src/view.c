@@ -170,7 +170,7 @@ struct WView {
 
 
 /* Maxlimit for skipping updates */
-static int max_dirt_limit =
+int max_dirt_limit =
 #ifdef NATIVE_WIN32
     0;
 #else

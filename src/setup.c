@@ -172,6 +172,7 @@ static const struct {
     { "cd_symlinks", &cd_symlinks },
     { "show_all_if_ambiguous", &show_all_if_ambiguous },
     { "have_fast_cpu", &have_fast_cpu },
+    { "max_dirt_limit", &max_dirt_limit },
     { "torben_fj_mode", &torben_fj_mode },
     { "use_file_to_guess_type", &use_file_to_check_type },
     { "alternate_plus_minus", &alternate_plus_minus },
