@@ -1,3 +1,8 @@
+Fri Sep 18 10:37:28 1998  Pavel Roskin <pavel_roskin@geocities.com)
+
+	* extfs.c: free() was called twice for the some place in memory
+	in extfs_open()
+
 Tue Sep 15 20:31:32 1998  Norbert Warmuth  <k3190@fh-sw.de>
 
 	* ftpfs.c (ftp_use_unix_list_options): New global variable/option. 

@@ -187,7 +187,6 @@ static FILE *open_archive (int fstype, char *name, struct archive **pparc)
     struct entry *root_entry;
     char *local_name = NULL, *tmp = 0;
     int uses_archive = extfs_need_archive [fstype];
-    char *tmpfile;
     
     if (uses_archive){
 	if (mc_stat (name, &mystat) == -1)
@@ -622,12 +621,10 @@ static void *extfs_open (char *file, int flags, int mode)
             free (entry->inode->local_filename);
             entry->inode->local_filename = NULL;
             free (cmd);
-	    free (mc_extfsdir);
             my_errno = EIO;
             return NULL;
         }
         free (cmd);
-	free (mc_extfsdir);
     }
     
     local_handle = open (entry->inode->local_filename, flags, mode);
