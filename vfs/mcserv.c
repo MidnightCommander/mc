@@ -1225,9 +1225,6 @@ int main (int argc, char *argv [])
     extern char *optarg;
     int c;
 
-#ifdef HAVE_MAD
-    mad_init ();
-#endif
     while ((c = getopt (argc, argv, "fdiqp:v")) != -1){
 	switch (c){
 	case 'd':
@@ -1291,9 +1288,6 @@ int main (int argc, char *argv [])
 	    pmap_unset (RPC_PROGNUM, RPC_PROGVER);
 #endif
     }
-#ifdef HAVE_MAD
-    mad_finalize (__FILE__, __LINE__);
-#endif
     exit (return_code);
 }
 
@@ -1304,7 +1298,3 @@ void vfs_die( char *m )
     exit (1);
 }
 
-/* Here to avoid undefining of malloc and family */
-#ifdef HAVE_MAD
-#include "../src/mad.c"
-#endif

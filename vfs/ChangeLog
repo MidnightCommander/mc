@@ -1,6 +1,11 @@
+2002-08-01  Pavel Roskin  <proski@gnu.org>
+
+	* mcserv.c: Remove all references to MAD.
+	* vfs.c: Likewise.
+
 2002-07-31  Andrew V. Samoilov  <kai@cmail.ru>
 
-	* samba/libsmb/clientgen.c (cli_send_tconX): Add missed 
+	* samba/libsmb/clientgen.c (cli_send_tconX): Add missing
 	unix_to_dos() call.
 	(cli_printjob_del): Commented out.
 	(cli_print_queue): Ditto.

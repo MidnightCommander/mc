@@ -755,11 +755,7 @@ vfs_canon (const char *path)
      */
     {
 	char *result = g_strdup (path);
-        
-	mad_check("(pre-canonicalize)", 0);
 	canonicalize_pathname (result);
-	mad_check("(post-canonicalize)", 0);
-
         return result;
     }
 }
