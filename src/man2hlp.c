@@ -454,9 +454,8 @@ handle_alt_font (char *buffer)
 }
 
 /* Handle .IP and .TP commands.  is_tp is 1 for .TP, 0 for .IP */
-/* buffer is not used now */
 static void
-handle_tp_ip (char *buffer, int is_tp)
+handle_tp_ip (int is_tp)
 {
     if (col > 0)
 	newline ();
@@ -538,9 +537,9 @@ handle_command (char *buffer)
 	*w = 0;
 	print_string (buffer);
     } else if (strcmp (buffer, ".TP") == 0) {
-	handle_tp_ip (buffer, 1);
+	handle_tp_ip (1);
     } else if (strcmp (buffer, ".IP") == 0) {
-	handle_tp_ip (buffer, 0);
+	handle_tp_ip (0);
     } else if (strcmp (buffer, ".\\\"TOPICS") == 0) {
 	if (out_row > 1) {
 	    print_error

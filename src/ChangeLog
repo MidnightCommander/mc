@@ -1,5 +1,8 @@
 2003-10-24  Pavel Roskin  <proski@gnu.org>
 
+	* fs.h (compute_namelen): Fix warning about unused argument.
+	* man2hlp.c (handle_tp_ip): Likewise.
+
 	* dialog.c (dlg_key_event): Simplify logic, return void.
 
 	* dialog.c: Remove duplication between two chains of dialogs.

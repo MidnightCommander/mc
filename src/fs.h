@@ -70,7 +70,9 @@
 #   endif /* HAVE_NDIR_H */
 #endif /* not (HAVE_DIRENT_H or _POSIX_VERSION) */
 
-static inline void compute_namelen(struct dirent* dent) {
+static inline void
+compute_namelen (struct dirent *dent __attribute__ ((unused)))
+{
 #ifdef DIRENT_LENGTH_COMPUTED
     return;
 #else
