@@ -1,3 +1,9 @@
+2002-08-30  Pavel Roskin  <proski@gnu.org>
+
+	* filegui.c (file_op_context_create_ui): Use
+	common_dialog_callback().  Set title to the operation name.
+	(op_win_callback): Remove, it's unused.
+
 2002-08-27  Pavel Roskin  <proski@gnu.org>
 
 	* view.c: Make static whatever possible.

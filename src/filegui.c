@@ -190,19 +190,6 @@ check_progress_buttons (FileOpContext *ctx)
 
 /* {{{ File progress display routines */
 
-static int
-op_win_callback (struct Dlg_head *h, int id, int msg)
-{
-    switch (msg){
-    case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 1, 2, h->lines-2, h->cols-4);
-	return 1;
-    }
-    return 0;
-}
-
 void
 file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
 {
@@ -234,13 +221,13 @@ file_op_context_create_ui (FileOpContext *ctx, FileOperation op, int with_eta)
     x_size = (WX + 4) + ui->eta_extra;
 
     ui->op_dlg = create_dlg (0, 0, WY-minus+4, x_size, dialog_colors,
-			     op_win_callback, "", "opwin", DLG_CENTER);
+			     common_dialog_callback, "", "opwin", DLG_CENTER);
 
     last_hint_line = the_hint->widget.y;
     if ((ui->op_dlg->y + ui->op_dlg->lines) > last_hint_line)
 	the_hint->widget.y = ui->op_dlg->y + ui->op_dlg->lines+1;
 
-    x_set_dialog_title (ui->op_dlg, "");
+    x_set_dialog_title (ui->op_dlg, op_names[op]);
 
     add_widget (ui->op_dlg, button_new (BY-minus, WX - 19 + eta_offset, FILE_ABORT,
 					 NORMAL_BUTTON, _("&Abort"), 0, 0, "abort"));
