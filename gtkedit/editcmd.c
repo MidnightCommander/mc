@@ -2767,7 +2767,7 @@ void edit_paste_from_X_buf_cmd (WEdit * edit)
     edit_insert_file (edit, catstrs (home_dir, CLIP_FILE, 0));
 }
 
-#endif				/* MIDMIGHT */
+#endif /* MIDNIGHT */
 
 void edit_goto_cmd (WEdit *edit)
 {
