@@ -962,7 +962,11 @@ g_readlink (char *path)
 		return g_strdup (small_buffer);
 	}
 
+	str = NULL;
 	for (size = 256; size < 8192; size += 128){
+		if (str)
+			g_free (str);
+		
 		str = g_malloc (size);
 
 		n = readlink (path, str, size-1);
@@ -974,12 +978,11 @@ g_readlink (char *path)
 		if (n < size-1){
 			char *s;
 			
-			s [n] = 0;
+			str [n] = 0;
 			s = g_strdup (str);
 			g_free (str);
 			return s;
 		}
-		g_free (str);
 	}
 	str [n] = 0;
 	return str;
