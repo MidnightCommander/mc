@@ -82,18 +82,6 @@ common_dialog_callback (struct Dlg_head *h, int id, int msg)
 /* }}} */
 /* {{{ Listbox utility functions */
 
-#define listbox_refresh(h)	common_dialog_repaint(h)
-
-static int listbox_callback (Dlg_head *h, int id, int msg)
-{
-    switch (msg) {
-    case DLG_DRAW:
-        listbox_refresh(h);
-        return 1;
-    }
-    return 0;
-}
-
 Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 {
     int xpos, ypos, len;
@@ -118,7 +106,8 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 
     /* Create components */
     listbox->dlg = create_dlg (ypos, xpos, lines+6, cols+4, dialog_colors,
-			       listbox_callback, help, "listbox", DLG_CENTER);
+			       common_dialog_callback, help, "listbox",
+			       DLG_CENTER);
     x_set_dialog_title (listbox->dlg, title);	       
     
     listbox->list = listbox_new (2, 2, cols, lines, listbox_finish, 0, "li");
@@ -127,7 +116,7 @@ Listbox *create_listbox_window (int cols, int lines, char *title, char *help)
 		button_new (lines+3, (cols/2 + 2) - len/2, 
 		B_CANCEL, NORMAL_BUTTON, cancel_string, 0, 0, "c"));
     add_widget (listbox->dlg, listbox->list);
-    listbox_refresh(listbox->dlg);
+    common_dialog_repaint (listbox->dlg);
     return listbox;
 }
 

@@ -1,5 +1,8 @@
 2002-09-02  Pavel Roskin  <proski@gnu.org>
 
+	* wtools.c (listbox_callback): Eliminate in favor of
+	common_dialog_callback().
+
 	* wtools.c (dialog_repaint): Eliminate, nobody should be using
 	non-standard colors.  Adjust all dependencies.
 	(common_dialog_repaint): Fix return code.
