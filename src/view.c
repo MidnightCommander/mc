@@ -585,13 +585,15 @@ load_view_file (WView *view, int fd)
     }
 #endif				/* HAVE_MMAP */
 
-    /* For those OS that dont provide mmap call. Try to load all the
-     * file into memory (alex@bcs.zaporizhzhe.ua). Also, mmap can fail
+    /* For the OSes that don't provide mmap call, try to load all the
+     * file into memory (alex@bcs.zaporizhzhe.ua).  Also, mmap can fail
      * for any reason, so we use this as fallback (pavel@ucw.cz) */
 
-    view->data = (unsigned char *) g_malloc (view->s.st_size);
-    if (view->data == NULL
-	|| mc_lseek (view->file, 0, SEEK_SET) != 0
+    /* Make sure view->s.st_size is not truncated when passed to g_malloc */
+    if ((gulong) view->s.st_size == view->s.st_size)
+	view->data = (unsigned char *) g_malloc ((gulong) view->s.st_size);
+
+    if (view->data == NULL || mc_lseek (view->file, 0, SEEK_SET) != 0
 	|| mc_read (view->file, view->data,
 		    view->s.st_size) != view->s.st_size) {
 	if (view->data != NULL)

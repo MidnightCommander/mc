@@ -1,3 +1,9 @@
+2003-02-26  Pavel Roskin  <proski@gnu.org>
+
+	* view.c (load_view_file): Make sure view->s.st_size is not
+	truncated when passed to g_malloc().
+	Reported by Philipp Thomas <pthomas@suse.de>
+
 2003-02-23  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* key.c (get_modifier): Add support for QNX Neutrino console.
