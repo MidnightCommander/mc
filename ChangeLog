@@ -1,3 +1,8 @@
+Sun Jan 17 03:19:47 1999  Timur Bakeyev  <mc@bat.ru>
+
+	* configure.in: Add comments before "Let" and "the" - typo. Add new
+	path to include's search.
+
 1999-01-10  Ilya Zakharevich <ilya@math.ohio-state.edu>
 
         * gtkedit/edit.c (edit_load_file): Off-by-one error disabled editing.

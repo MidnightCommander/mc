@@ -12,7 +12,7 @@ AC_SUBST(VERSION)
 
 dnl This is path where we're looking for headers in addition to /usr/include
 dnl and whatever cpp defaults to.
-include_additional_path="/usr/local/include /opt/gnu/include"
+include_additional_path="/usr/local/include /usr/contrib/include /opt/gnu/include"
 
 dnl This sets/resets compiling with -g by default. It should be set to yes for
 dnl development versions and set to no for release versions.
@@ -150,8 +150,8 @@ AC_SHORT_D_NAME_LEN
 AC_HEADER_STDC
 
 
-Let me check for an incompatible regcomp in HP-UX before making this
-the default
+#Let me check for an incompatible regcomp in HP-UX before making this
+#the default
 
 REGEX_O="regex.o"
 AC_SUBST(REGEX_O)
