@@ -27,6 +27,7 @@ syntax_DATA =			\
 	smalltalk.syntax	\
 	slang.syntax		\
 	swig.syntax		\
+	tcl.syntax		\
 	texinfo.syntax		\
 	unknown.syntax		\
 	xml.syntax

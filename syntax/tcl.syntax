@@ -1,0 +1,125 @@
+wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._
+wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._
+
+context default
+	keyword whole after yellow/24
+	keyword whole append yellow/24
+	keyword whole array yellow/24
+	keyword whole bgerror yellow/24
+	keyword whole binary yellow/24
+	keyword whole break yellow/24
+	keyword whole case yellow/24
+	keyword whole catch yellow/24
+	keyword whole cd yellow/24
+	keyword whole clock yellow/24
+	keyword whole close yellow/24
+	keyword whole concat yellow/24
+	keyword whole continue yellow/24
+	keyword whole dde yellow/24
+	keyword whole else yellow/24
+	keyword whole elsif yellow/24
+	keyword whole encoding yellow/24
+	keyword whole eof yellow/24
+	keyword whole error yellow/24
+	keyword whole eval yellow/24
+	keyword whole exec yellow/24
+	keyword whole exit yellow/24
+	keyword whole expr yellow/24
+	keyword whole fblocked yellow/24
+	keyword whole fconfigure yellow/24
+	keyword whole fcopy yellow/24
+	keyword whole file yellow/24
+	keyword whole fileevent yellow/24
+	keyword whole filename yellow/24
+	keyword whole flush yellow/24
+	keyword whole for yellow/24
+	keyword whole foreach yellow/24
+	keyword whole format yellow/24
+	keyword whole gets yellow/24
+	keyword whole glob yellow/24
+	keyword whole global yellow/24
+	keyword whole history yellow/24
+	keyword whole http yellow/24
+	keyword whole if yellow/24
+	keyword whole incr yellow/24
+	keyword whole info yellow/24
+	keyword whole interp yellow/24
+	keyword whole join yellow/24
+	keyword whole lappend yellow/24
+	keyword whole library yellow/24
+	keyword whole lindex yellow/24
+	keyword whole linsert yellow/24
+	keyword whole list yellow/24
+	keyword whole llength yellow/24
+	keyword whole load yellow/24
+	keyword whole lrange yellow/24
+	keyword whole lreplace yellow/24
+	keyword whole lsearch yellow/24
+	keyword whole lset yellow/24
+	keyword whole lsort yellow/24
+	keyword whole memory yellow/24
+	keyword whole msgcat yellow/24
+	keyword whole namespace yellow/24
+	keyword whole open yellow/24
+	keyword whole package yellow/24
+	keyword whole packagens yellow/24
+	keyword whole pid yellow/24
+	keyword whole pkgMkIndex yellow/24
+	keyword whole proc yellow/24
+	keyword whole puts yellow/24
+	keyword whole pwd yellow/24
+	keyword whole re_syntax yellow/24
+	keyword whole read yellow/24
+	keyword whole regexp yellow/24
+	keyword whole registry yellow/24
+	keyword whole regsub yellow/24
+	keyword whole rename yellow/24
+	keyword whole resource yellow/24
+	keyword whole return yellow/24
+	keyword whole safe yellow/24
+	keyword whole scan yellow/24
+	keyword whole seek yellow/24
+	keyword whole set yellow/24
+	keyword whole socket yellow/24
+	keyword whole source yellow/24
+	keyword whole split yellow/24
+	keyword whole string yellow/24
+	keyword whole subst yellow/24
+	keyword whole switch yellow/24
+	keyword whole tcltest yellow/24
+	keyword whole tclvars yellow/24
+	keyword whole tell yellow/24
+	keyword whole time yellow/24
+	keyword whole then yellow/24
+	keyword whole trace yellow/24
+	keyword whole unknown yellow/24
+	keyword whole unset yellow/24
+	keyword whole update yellow/24
+	keyword whole uplevel yellow/24
+	keyword whole upvar yellow/24
+	keyword whole variable yellow/24
+	keyword whole vwait yellow/24
+	keyword whole while yellow/24
+
+	keyword wholeright #\{0123456789\} brightred/18
+	keyword ${+} brightgreen/16
+	keyword wholeright $+ brightgreen/16
+
+	keyword { brightcyan/14
+	keyword } brightcyan/14
+	keyword ( brightcyan/15
+	keyword ) brightcyan/15
+	keyword [ brightcyan/14
+	keyword ] brightcyan/14
+	keyword ; brightmagenta/19
+	keyword :: yellow/24
+
+context # \n brown/22
+
+context " " green/6
+	keyword wholeright $+ brightgreen/16
+	keyword \\" brightgreen/16
+	keyword \\\n brightgreen/16
+	keyword \\\\ brightgreen/16
+	keyword \\' brightgreen/16
+	keyword \\\{abtnvfr\} brightgreen/16

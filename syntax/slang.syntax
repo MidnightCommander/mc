@@ -85,7 +85,6 @@ context default
     keyword ] brightcyan/14
     keyword , brightcyan/14
     keyword : brightcyan/14
-    keyword #define\[\t\s\]\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]\[\t\s\]0x\[0123456789abcdefABCDEF\] brightred/18
 context % \n brown/22
     spellcheck
 context linestart # \n brightred/18

@@ -57,6 +57,9 @@ include pascal.syntax
 file ..\*\\.(ada|adb|ads|ADA|ADB|ADS)$ Ada\sProgram
 include ada95.syntax
 
+file ..\*\\.(tcl|TCL)$ Tcl\sProgram
+include tcl.syntax
+
 file ..\*\\.(sl|SL)$ S-Lang\sProgram
 include slang.syntax
 

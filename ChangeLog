@@ -1,3 +1,13 @@
+2002-07-10  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/tcl.syntax: New file.
+	* syntax/Syntax: Add tcl.syntax.
+	* syntax/Makefile.am: Likewise.
+	* syntax/java.syntax: Don't treat #define separately from other
+	preprocessor directives.
+	* syntax/slang.syntax: Likewise.
+	* syntax/swig.syntax: Likewise.
+
 2002-07-09  Pavel Roskin  <proski@gnu.org>
 
 	* syntax/c.syntax: Don't treat #define separately from other
