@@ -1,3 +1,8 @@
+2002-09-02  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_raw_key_query): Eliminate
+	x_set_dialog_title().
+
 2002-09-01  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c (edit_block_process_cmd): Restore third argument

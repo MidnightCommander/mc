@@ -479,19 +479,17 @@ int raw_callback (struct Dlg_head *h, int key, int Msg)
 }
 
 /* gets a raw key from the keyboard. Passing cancel = 1 draws
-   a cancel button thus allowing c-c etc.. Alternatively, cancel = 0 
-   will return the next key pressed */
+   a cancel button thus allowing c-c etc.  Alternatively, cancel = 0 
+   will return the next key pressed.  ctrl-a (=B_CANCEL), ctrl-g, ctrl-c,
+   and Esc are cannot returned */
 int
 edit_raw_key_query (char *heading, char *query, int cancel)
 {
     int w = strlen (query) + 7;
-    struct Dlg_head *raw_dlg = create_dlg (0, 0, 7, w, dialog_colors,
-/* NLS ? */
-					   raw_callback, "[Raw Key Query]",
-					   "raw_key_input",
-					   DLG_CENTER | DLG_TRYUP |
-					   DLG_WANT_TAB);
-    x_set_dialog_title (raw_dlg, heading);
+    struct Dlg_head *raw_dlg =
+	create_dlg (0, 0, 7, w, dialog_colors, raw_callback,
+		    "[Raw Key Query]", heading,
+		    DLG_CENTER | DLG_TRYUP | DLG_WANT_TAB);
     if (cancel)
 	add_widget (raw_dlg,
 		    button_new (4, w / 2 - 5, B_CANCEL, NORMAL_BUTTON,
@@ -502,11 +500,12 @@ edit_raw_key_query (char *heading, char *query, int cancel)
     run_dlg (raw_dlg);
     w = raw_dlg->ret_value;
     destroy_dlg (raw_dlg);
-    if (cancel)
+    if (cancel) {
 	if (w == XCTRL ('g') || w == XCTRL ('c') || w == ESC_CHAR
 	    || w == B_CANCEL)
 	    return 0;
-/* hence ctrl-a (=B_CANCEL), ctrl-g, ctrl-c, and Esc are cannot returned */
+    }
+
     return w;
 }
 
