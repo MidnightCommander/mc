@@ -74,7 +74,7 @@ GNOMEHDRS = 		\
 	gprop.h		\
 	gdialogs.h	\
 	gscreen.h	\
-	gtkree.h	\
+	gtkdtree.h	\
 	gtree.h		\
 	gwidget.h
 
