@@ -32,15 +32,30 @@ RPM_SRC_DIR="/usr/src/redhat"
 SITE="login.ibiblio.org"
 DIR="/public/ftp/pub/Linux/utils/file/managers/mc/snapshots"
 
-MCVERSION=`ls mc*.tar.gz | sort | sed -n '$s/\.tar\.gz//p'`
-MCNAME=mc-`date "+%Y-%m-%d-%H" --utc`.tar.gz
-MCTARBALL="$MCVERSION.tar.gz"
+# Sanity check
+if ! test -f ./autogen.sh || ! test -f src/screen.c; then
+  echo "Not in the MC CVS working directory"
+  exit 1
+fi
 
-if test -z "$MCVERSION" || test ! -f "$MCTARBALL"; then
+# Remove old tarballs and build the new one
+rm -f "mc*.tar.gz"
+MCVERSION=`date "+%Y-%m-%d-%H" --utc`
+cp -f configure.in configure.in.cvs
+sed "s/AM_INIT_AUTOMAKE([^)]*)/AM_INIT_AUTOMAKE(mc, $MCVERSION)/" \
+  configure.in.cvs >configure.in
+./autogen.sh
+make all
+make distcheck
+
+# Make sure that the new tarball exists
+MCTARBALL="mc-$MCVERSION.tar.gz"
+if test ! -f "$MCTARBALL"; then
   echo "No tarball found!!!"
   exit 1
 fi
 
+# Make an RPM package
 rm -f $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm
 rpmbuild -tb "$MCTARBALL"
 MC_RPM=`echo $RPM_SRC_DIR/RPMS/i386/mc-*.i386.rpm`
@@ -50,22 +65,23 @@ if test ! -f $MC_RPM; then
 fi
 
 # Make a patch against the latest released version
-MC_PATCH="mc-$BASE_VERSION-current.diff.bz2"
+MC_PATCH="mc-$BASE_VERSION-$MCVERSION.diff"
+MC_PATCH_BZ2="$MC_PATCH.bz2"
 if test ! -d $MC_BASE_DIR; then
   echo "Cannot find unpacked base version!!!"
   exit 1
 fi
-rm -f mc-$BASE_VERSION-current.diff mc-$BASE_VERSION-current.diff.bz2
+rm -f $MC_PATCH $MC_PATCH_BZ2
 
 # Don't merge PO-files, we are skipping them in the patch
 make distdir MSGMERGE=
 
 # Sometimes GNU diff returns 1 for unclear reasons
-diff -urN -x po $MC_BASE_DIR mc-*/ >mc-$BASE_VERSION-current.diff || :
-bzip2 mc-$BASE_VERSION-current.diff
+diff -urN -x po $MC_BASE_DIR mc-*/ >$MC_PATCH || :
+bzip2 $MC_PATCH
 
 upload "$MCTARBALL" "mc*.tar.gz"
 upload "$MC_RPM" "mc*.i386.rpm"
-upload "$MC_PATCH" "mc*.diff.bz2"
+upload "$MC_PATCH_BZ2" "mc*.diff.bz2"
 
 echo "Done"
