@@ -1,5 +1,8 @@
 2003-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* HACKING: New file - technical documentation for VFS.
+	* Makefile.am: Distribute it.
+
 	* vfs.c (vfs_rmstamp): Rescan the tree after the parents have
 	been removed.  Otherwise using old data causes data corruption
 	in some combinations (e.g. extfs inside tatfs).

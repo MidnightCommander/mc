@@ -47,7 +47,7 @@ NETFILES = tcputil.c fish.c ftpfs.c mcfs.c mcfsutil.c $(SMB_NETFILES)
 
 NONETFILES = $(BASICFILES) $(UNDEL_FILES)
 
-EXTRA_DIST = ChangeLog README README.fish \
+EXTRA_DIST = ChangeLog HACKING README README.fish \
 	$(VFSHDRS) $(BASICFILES) $(NETFILES) $(SMBFILES) $(UNDELFILES)
 
 dist-hook:
