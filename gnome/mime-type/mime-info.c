@@ -420,15 +420,15 @@ write_keys (GHashTable *spec_hash, GHashTable *generic_hash)
 	if ((stat (dirname, &s) < 0) || !(S_ISDIR (s.st_mode))){
 		if (errno == ENOENT) {
 			if (mkdir (dirname, S_IRWXU) < 0) {
-				run_error ("We are unable to create the directory\n"
+				run_error (_("We are unable to create the directory\n"
 					   "~/.gnome/mime-info\n\n"
-					   "We will not be able to save the state.");
+					   "We will not be able to save the state."));
 				return;
 			}
 		} else {
-			run_error ("We are unable to access the directory\n"
+			run_error (_("We are unable to access the directory\n"
 				   "~/.gnome/mime-info\n\n"
-				   "We will not be able to save the state.");
+				   "We will not be able to save the state."));
 			return;
 		}
 	}
