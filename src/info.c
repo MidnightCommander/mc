@@ -123,7 +123,7 @@ info_show_info (struct WInfo *info)
     case 14:
 	widget_move (&info->widget, 14, 3);
 	printw (_("Type:      %s "), myfs_stats.typename ? myfs_stats.typename : _("non-local vfs"));
-	if (myfs_stats.type != 0xffff && myfs_stats.type != 0xffffffff)
+	if (myfs_stats.type != 0xffff && myfs_stats.type != -1)
 	    printw (" (%Xh)", myfs_stats.type);
 
     case 13:
