@@ -40,8 +40,6 @@ void clean_dir (dir_list * list, int count);
 int set_zero_dir (dir_list * list);
 
 #ifdef DIR_H_INCLUDE_HANDLE_DIRENT
-int handle_dirent (dir_list *list, char *filter, struct dirent *dp,
-		   struct stat *buf1, int next_free, int *link_to_dir, int *stale_link);
 int handle_path (dir_list *list, char *path, struct stat *buf1, int next_free, 
 		   int *link_to_dir, int *stale_link);
 #endif

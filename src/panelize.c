@@ -73,6 +73,7 @@ static struct {
 };
 
 static char *panelize_section = "Panelize";
+static void do_external_panelize (char *command);
 
 /* Directory panelize */
 static struct panelize {
@@ -219,7 +220,7 @@ static void add2panelize (char *label, char *command)
     }
 }
 
-void
+static void
 add2panelize_cmd (void)
 {
     char *label;
@@ -355,7 +356,7 @@ void done_panelize (void)
     }
 }
 
-void do_external_panelize (char *command)
+static void do_external_panelize (char *command)
 {
     int status, link_to_dir, stale_link;
     int next_free = 0;

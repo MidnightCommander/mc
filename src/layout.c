@@ -72,7 +72,7 @@
 int nice_rotating_dash = 1;
 
 /* If set, then we have to call the layout_change routine from main */
-int layout_do_change = 0;
+static int layout_do_change = 0;
 
 /* Set if the panels are split horizontally */
 int horizontal_split = 0;
@@ -863,23 +863,6 @@ void rotate_dash (void)
     addch (rotating_dash [pos]);
     mc_refresh ();
     pos++;
-}
-
-void remove_dash (void)
-{
-    if (!nice_rotating_dash)
-	return;
-
-    /* Currently, it's much nicer with the CPU to do this instead of
-       calling do_refresh.
-
-       I should implement a routine called invalidate_region that would
-       send a draw message only to the affected views.  But for now
-       this is fine.
-    */
-    
-    move (0, COLS-1);
-    addch (' ');
 }
 
 char *get_nth_panel_name (int num)

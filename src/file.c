@@ -118,10 +118,10 @@ struct link {
 };
 
 /* the hard link cache */
-struct link *linklist = NULL;
+static struct link *linklist = NULL;
 
 /* the files-to-be-erased list */
-struct link *erase_list;
+static struct link *erase_list;
 
 /*
  * In copy_dir_dir we use two additional single linked lists: The first - 
@@ -133,7 +133,7 @@ struct link *erase_list;
  * Both lists don't use the linkcount and name structure members of struct
  * link.
  */
-struct link *dest_dirs = 0;
+static struct link *dest_dirs = 0;
 
 char *op_names[3] = {
     N_(" Copy "),
@@ -147,6 +147,12 @@ static int query_replace (FileOpContext * ctx, char *destname,
 			  struct stat *_s_stat, struct stat *_d_stat);
 static int query_recursive (FileOpContext * ctx, char *s);
 static int do_file_error (char *str);
+static int erase_dir_iff_empty (FileOpContext *ctx, char *s);
+static int erase_file (FileOpContext *ctx, char *s,
+		       off_t *progress_count, double *progress_bytes,
+		       int is_toplevel_file);
+static int files_error (const char *format, const char *file1,
+			const char *file2);
 
 
 enum CaseConvs { NO_CONV = 0, UP_CHAR = 1, LOW_CHAR = 2, UP_SECT =
@@ -1088,7 +1094,7 @@ copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 
 /* {{{ Move routines */
 
-int
+static int
 move_file_file (FileOpContext *ctx, char *s, char *d,
 		off_t *progress_count, double *progress_bytes)
 {
@@ -1342,7 +1348,7 @@ move_dir_dir (FileOpContext *ctx, char *s, char *d,
 
 /* {{{ Erase routines */
 /* Don't update progress status if progress_count==NULL */
-int
+static int
 erase_file (FileOpContext *ctx, char *s, off_t *progress_count,
 	    double *progress_bytes, int is_toplevel_file)
 {
@@ -1497,7 +1503,7 @@ erase_dir (FileOpContext *ctx, char *s, off_t *progress_count,
     return FILE_CONT;
 }
 
-int
+static int
 erase_dir_iff_empty (FileOpContext *ctx, char *s)
 {
     int error;
@@ -2185,8 +2191,8 @@ file_error (char *format, char *file)
 }
 
 /* Report error with two files */
-int
-files_error (char *format, char *file1, char *file2)
+static int
+files_error (const char *format, const char *file1, const char *file2)
 {
     char nfile1[16];
     char nfile2[16];

@@ -92,7 +92,6 @@ typedef struct {
 } key_map;
 
 void update_panels (int force_update, char *current_file);
-void create_panels (void);
 void repaint_screen (void);
 void outrefresh_screen (void);
 void do_update_prompt (void);
@@ -109,12 +108,10 @@ enum cd_enum {
 
 int do_cd           (char *new_dir, enum cd_enum cd_type);	/* For find.c */
 void change_panel   (void);
-void init_sigchld   (void);	/* For subshell.c */
 int load_prompt     (int fd, void *unused);
 void save_cwds_stat (void);
 int quiet_quit_cmd  (void);	/* For cmd.c and command.c */
 
-void untouch_bar    (void);
 void touch_bar      (void);
 void update_xterm_title_path (void);
 void load_hint      (int force);

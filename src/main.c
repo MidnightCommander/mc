@@ -517,12 +517,6 @@ quiet_quit_cmd (void)
 /* to avoid the refreshing the menu bar */
 
 void
-untouch_bar (void)
-{
-    do_refresh ();
-}
-
-void
 repaint_screen (void)
 {
     do_refresh ();
@@ -1040,7 +1034,7 @@ translated_mc_chdir (char *dir)
     g_free (newdir);
 }
 
-void
+static void
 create_panels (void)
 {
     int current_index;
@@ -1822,7 +1816,7 @@ sigchld_handler_no_subshell (int sig)
     /* If we got here, some other child exited; ignore it */
 }
 
-void
+static void
 init_sigchld (void)
 {
     struct sigaction sigchld_action;

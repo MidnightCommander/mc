@@ -719,11 +719,6 @@ edit_syntax_cmd (void)
 #endif
 
 #ifdef USE_VFS
-void free_vfs_now (void)
-{
-    vfs_expire (1);
-}
-
 void reselect_vfs (void)
 {
     char *target;

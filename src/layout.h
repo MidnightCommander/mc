@@ -33,7 +33,6 @@ extern int first_panel_size;
 extern int output_lines;
 extern int command_prompt;
 extern int keybar_visible;
-extern int layout_do_change;
 extern int output_start_y;
 extern int message_visible;
 extern int xterm_title;

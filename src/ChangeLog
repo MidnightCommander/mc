@@ -1,3 +1,16 @@
+2003-10-14  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c: Cleanup of unneeded global functions and data.
+	* color.c: Likewise.
+	* dir.c: Likewise.
+	* file.c: Likewise.
+	* filegui.c: Likewise.
+	* hotlist.c: Likewise.
+	* layout.c: Likewise.
+	* main.c: Likewise.
+	* panelize.c: Likewise.
+	* wtools.c: Likewise.
+
 2003-10-12  Pavel Roskin  <proski@gnu.org>
 
 	* screen.c (do_enter_on_file_entry): Remove annoying message "no
@@ -4466,7 +4479,7 @@
 	and input widgets, then char is greater than 128. They were processed
 	incorrectly. As usual, char != unsigned char problem.
 
-2000-03-03  Björn Eriksson  <mdeans@algonet.se>
+2000-03-03  BjÃ¶rn Eriksson  <mdeans@algonet.se>
 
 	* Similar patches came from Andrew V. Samoilov <sav@bcs.zp.ua>.
 

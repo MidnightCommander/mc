@@ -105,7 +105,7 @@ int run_listbox (Listbox *l)
 
 
 /* {{{ Query Dialog functions */
-Dlg_head *last_query_dlg;
+static Dlg_head *last_query_dlg;
 
 static int sel_pos = 0;
 

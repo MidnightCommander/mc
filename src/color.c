@@ -49,7 +49,7 @@ struct colorpair {
     CTYPE bg;			/* background color */
 };
 
-struct colorpair color_map [] = {
+static struct colorpair color_map [] = {
     { "normal=",     0, 0 },	/* normal */               /*  1 */
     { "selected=",   0, 0 },	/* selected */
     { "marked=",     0, 0 },	/* marked */

@@ -142,7 +142,7 @@ enum {
     REPLACE_ABORT,
     REPLACE_SIZE,
     REPLACE_REGET
-} FileReplaceCode;
+};
 
 static FileProgressStatus
 check_progress_buttons (FileOpContext *ctx)

@@ -96,7 +96,6 @@ int my_rmdir (char *s);
 /* Rotating dash routines */
 void use_dash (int flag); /* Disable/Enable rotate_dash routines */
 void rotate_dash (void);
-void remove_dash (void);
 
 /* Creating temporary files safely */
 const char *mc_tmpdir (void);

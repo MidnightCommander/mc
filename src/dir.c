@@ -368,7 +368,7 @@ set_zero_dir (dir_list *list)
 
 /* If you change handle_dirent then check also handle_path. */
 /* Return values: -1 = failure, 0 = don't add, 1 = add to the list */
-int
+static int
 handle_dirent (dir_list *list, char *filter, struct dirent *dp,
 	       struct stat *buf1, int next_free, int *link_to_dir,
 	       int *stale_link)

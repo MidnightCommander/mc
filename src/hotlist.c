@@ -144,6 +144,7 @@ static void init_movelist (int, struct hotlist *);
 static void add_new_group_cmd (void);
 static void add_new_entry_cmd (void);
 static void remove_from_hotlist (struct hotlist *entry);
+static void load_hotlist (void);
 
 #define new_hotlist() g_new0(struct hotlist, 1)
 
@@ -1368,7 +1369,8 @@ clean_up_hotlist_groups (char *section)
 
 
 
-void load_hotlist (void)
+static void
+load_hotlist (void)
 {
     int		remove_old_list = 0;
     struct stat stat_buf;

@@ -11,8 +11,6 @@ struct link;
 int copy_file_file (FileOpContext *ctx, char *s, char *d,
 		    int ask_overwrite, off_t *progress_count,
 		    double *progress_bytes, int is_toplevel_file);
-int move_file_file (FileOpContext *ctx, char *s, char *d,
-		    off_t *progress_count, double *progress_bytes);
 int move_dir_dir (FileOpContext *ctx, char *s, char *d,
 		  off_t *progress_count, double *progress_bytes);
 int copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
@@ -20,9 +18,6 @@ int copy_dir_dir (FileOpContext *ctx, char *s, char *d, int toplevel,
 		  off_t *progress_count, double *progress_bytes);
 int erase_dir (FileOpContext *ctx, char *s, off_t *progress_count,
 	       double *progress_bytes);
-int erase_file (FileOpContext *ctx, char *s, off_t *progress_count,
-		double *progress_bytes, int is_toplevel_file);
-int erase_dir_iff_empty (FileOpContext *ctx, char *s);
 
 int panel_operate (void *source_panel, FileOperation op, int force_single);
 
@@ -32,9 +27,6 @@ extern int file_op_compute_totals;
 
 /* Report error with one file */
 int file_error (char *format, char *file);
-
-/* Report error with two files */
-int files_error (char *format, char *file1, char *file2);
 
 /* Query routines */
 

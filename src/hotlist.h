@@ -7,7 +7,6 @@
 
 void add2hotlist_cmd (void);
 char *hotlist_cmd (int list_vfs);
-void load_hotlist (void);
 int  save_hotlist (void);
 void done_hotlist (void);
 
