@@ -6,10 +6,6 @@
 #include <sys/mman.h>
 #endif
 
-/*
- * Define this to allow /any/path/#ftp/ to access ftp tree. Broken, yes.
- */ 
-#undef BROKEN_PATHS
 
 /*
  * The following line is needed, because as usual, AIX pollutes every single

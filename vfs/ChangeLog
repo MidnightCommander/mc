@@ -1,5 +1,7 @@
 2002-09-10  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Remove BROKEN_PATHS, it's unused.
+
 	* Make-alone.am: Get rid of all standalone code, it has been
 	unmaintained for years.
 
