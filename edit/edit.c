@@ -2137,7 +2137,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->prev_col = edit_get_col (edit);
 	edit->search_start = edit->curs1;
 	edit_find_bracket (edit);
-	edit_check_spelling (edit);
 	return 1;
     }
     switch (command) {
@@ -2582,7 +2581,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->search_start = edit->curs1;
 	edit->found_len = 0;
 	edit_find_bracket (edit);
-	edit_check_spelling (edit);
 	return 1;
 	break;
     default:
@@ -2591,7 +2589,6 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	edit->search_start = edit->curs1;
     }
     edit_find_bracket (edit);
-    edit_check_spelling (edit);
 
     if (option_auto_para_formatting) {
 	switch (command) {

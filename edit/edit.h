@@ -23,8 +23,6 @@
 #ifndef __EDIT_H
 #define __EDIT_H
 
-#define HAVE_SYNTAXH 1
-
 #include <stdio.h>
 #include <stdarg.h>
 #include <sys/types.h>
@@ -275,7 +273,6 @@ void edit_split_filename (WEdit * edit, const char *name);
 void edit_load_syntax (WEdit * edit, char **names, char *type);
 void edit_free_syntax_rules (WEdit * edit);
 void edit_get_syntax_color (WEdit * edit, long byte_index, int *color);
-int edit_check_spelling (WEdit * edit);
 
 
 void book_mark_insert (WEdit * edit, int line, int c);

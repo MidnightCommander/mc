@@ -1,5 +1,9 @@
 2002-11-29  Pavel Roskin  <proski@gnu.org>
 
+	* edit.h: Don't define HAVE_SYNTAXH.
+	* syntax.c: Syntax highlighting is no more optional.
+	(edit_check_spelling): Remove.
+
 	* editoptions.c (edit_options_dialog): Add "Save file position"
 	option, make "Syntax highlighting" unconditional.
 

@@ -42,10 +42,7 @@
 
 #define UNKNOWN_FORMAT "unknown"
 
-#ifdef HAVE_SYNTAXH
-
 int option_syntax_highlighting = 1;
-int option_auto_spellcheck = 1;
 
 static inline void *syntax_malloc (size_t x)
 {
@@ -774,11 +771,6 @@ static int edit_read_syntax_rules (WEdit * edit, FILE * f)
     return result;
 }
 
-int edit_check_spelling (WEdit * edit)
-{
-    return 0;
-}
-
 void edit_free_syntax_rules (WEdit * edit)
 {
     int i, j;
@@ -967,29 +959,3 @@ void edit_load_syntax (WEdit * edit, char **names, char *type)
 	return;
     }
 }
-
-#else
-
-int option_syntax_highlighting = 0;
-
-void edit_load_syntax (WEdit * edit, char **names, char *type)
-{
-    return;
-}
-
-void edit_free_syntax_rules (WEdit * edit)
-{
-    return;
-}
-
-void edit_get_syntax_color (WEdit * edit, long byte_index, int *color)
-{
-    *color = use_colors ? EDITOR_NORMAL_COLOR_INDEX : 0;
-}
-
-int edit_check_spelling (WEdit * edit)
-{
-    return 0;
-}
-
-#endif /* HAVE_SYNTAXH */
