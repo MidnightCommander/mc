@@ -37,7 +37,7 @@ audiofs_copyout ()
     fi
 }
 
-if [ ! -b $2 ]
+if [ ! -b "$2" ]
     then
     BASE=/dev/cdrom
 else
