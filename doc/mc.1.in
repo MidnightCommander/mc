@@ -437,16 +437,19 @@ if needed.  If the current panel is panelized, the other panel doesn't
 become panelized.
 .TP
 .B C-PageUp, C-PageDown
-only when ran on the Linux console: does a chdir to ".." and to the
-currently selected directory respectively.
+only when supported by the terminal: change to ".." and to the currently
+selected directory respectively.
 .TP
 .B M-y
-moves to the previous directory in the history, equivalent
-to depressing the '<' with the mouse.
+moves to the previous directory in the history, equivalent to clicking
+the
+.I <
+with the mouse.
 .TP
 .B M-u
-moves to the next directory in the history, equivalent
-to depressing the '>' with the mouse.
+moves to the next directory in the history, equivalent to clicking the
+.I >
+with the mouse.
 .TP
 .B M-S-h, M-H
 displays the directory history, equivalent to depressing the 'v' with
@@ -1181,7 +1184,7 @@ means you have to escape characters with a special meaning to egrep with "\\",
 e.g. if you search for "strcmp (" you will have to input "strcmp \\("
 (without the double quotes).
 .PP
-You can start the search by pressing the Ok button.
+You can start the search by pressing the OK button.
 During the search you can stop from the Stop button and continue from
 the Start button.
 .PP
@@ -1194,10 +1197,10 @@ that you can do additional operations on them (view, copy, move,
 delete and so on). After panelizing you can press C-r to return to the
 normal file listing.
 .PP
-It is possible to have a list of directories that the Find File
-command should skip during the search (for example, you may want to
-avoid searches on a CDROM or on a NFS directory that is mounted across
-a slow link).
+It is possible to have a list of directories that the Find File command
+should skip during the search (for example, you may want to avoid
+searches on a CD-ROM or on a NFS directory that is mounted across a slow
+link).
 .PP
 Directories to be skipped should be set on the variable
 .B find_ignore_dirs
@@ -1270,34 +1273,53 @@ description.
 .SH "    Extension File Edit"
 This will invoke your editor on the file
 .IR ~/.mc/bindings .
-The format of this file is as follows (the format has changed with
-version 3.0):
+The format of this file following:
 .PP
 All lines starting with # or empty lines are thrown away.
 .PP
 Lines starting in the first column should have following format:
 .PP
-.IR keyword/desc ,
-i.e. everything after
-.I keyword/
-until new line is
-.I desc
+.IR keyword/expr ,
+i.e. everything after the slash until new line is
+.IR expr .
 .PP
-keyword can be:
+.I keyword
+can be:
 .TP
 .I shell
-(desc is then any extension (no wildcards), i.e. matches all the files
-*desc . Example: .tar matches *.tar)
+\-
+.I expr
+is an extension (no wildcards).  File matches it its name ends
+with
+.IR expr .
+Example:
+.I shell/.tar
+matches
+.IR *.tar .
 .TP
 .I regex
-(desc is a regular expression)
+\-
+.I expr
+is a regular expression.  File matches if its name matches the regular
+expression.
 .TP
 .I type
-(file matches this if `file %f` matches regular expression desc
-(the filename: part from `file %f` is removed))
+\-
+.I expr
+is a regular expression.  File matches if the output of
+.I file %f
+without the initial "filename:" part matches regular expression
+.IR expr .
 .TP
 .I default
-(matches any file no matter what desc is)
+\- matches any file.
+.I expr
+is ignored.
+.TP
+.I include
+\- denotes a common section.
+.I expr
+is the name of the section.
 .PP
 Other lines should start with a space or tab and should be of the format:
 .I keyword=command
@@ -1305,11 +1327,13 @@ Other lines should start with a space or tab and should be of the format:
 .I keyword
 should be:
 .I Open
-(if the user presses Enter or doubleclicks it),
+(invoked on Enter or double click),
 .I View
-(F3) or
+(F3),
 .I Edit
-(F4).
+(F4) or
+.I Include
+(to add rules from the common section).
 .I command
 is any one-line shell command, with the simple
 .\"LINK2"
@@ -1421,15 +1445,15 @@ line of the menu file (where "x" is either 0 or 1).
 Type is one or more of the following characters:
 .PP
 .nf
-  n	not directory
+  n	not a directory
   r	regular file
   d	directory
   l	link
-  c	char special
-  b	block special
-  f	fifo (pipe)
+  c	character device
+  b	block device
+  f	FIFO (pipe)
   s	socket
-  x	executable
+  x	executable file
   t	tagged
 .fi
 .PP
@@ -1790,7 +1814,7 @@ take up resources, you may want to tune the parameters of the cached
 information to decrease your resource usage or to maximize the speed of
 access to frequently used file systems.
 .PP
-Because of the format of the tar achives, the
+Because of the format of the tar archives, the
 .I Tar filesystem
 needs to read the whole file just to load the file entries.  Since most
 tar files are usually kept compressed (plain tar files are species in
@@ -1800,7 +1824,7 @@ regular tar file.
 .PP
 Now, since we all love to browse files and tar files all over the disk,
 it's common that you will leave a tar file and the re-enter it later.
-Since uncompression is slow, the Midnight Commander will cache the
+Since decompression is slow, the Midnight Commander will cache the
 information in memory for a limited time.  When the timeout expires, all
 the resources associated with the file system are released.  The default
 timeout is set to one minute.
@@ -1852,7 +1876,7 @@ file, which keeps login names and passwords for ftp servers.  See netrc
 .PP
 .I Use passive mode
 enables using FTP passive mode, when the connection for data transfer is
-initated by the client, not by the server.  This option is recommended
+initiated by the client, not by the server.  This option is recommended
 and enabled by default.  If this option is turned off, the data
 connection is initiated by the server.  This may not work with some
 firewalls.
@@ -2174,39 +2198,38 @@ skipped.
 There are three other dialogs which you can run into during the file
 operations.
 .PP
-The error dialog informs about error conditions and has three
-choices. Normally you select either the Skip button to skip the file
-or the Abort button to abort the operation altogether. You can also
-select the Retry button if you fixed the problem from another
-terminal.
+The error dialog informs about error conditions and has three choices.
+Normally you select either the Skip button to skip the file or the Abort
+button to abort the operation altogether.  You can also select the Retry
+button if you fixed the problem from another terminal.
 .PP
 The replace dialog is shown when you attempt to copy or move a file on
-the top of an existing file. The dialog shows the dates and sizes of
-the both files. Press the Yes button to overwrite the file, the No
-button to skip the file, the alL button to overwrite all the files,
-the nonE button to never overwrite and the Update button to overwrite
-if the source file is newer than the target file. You can abort the
-whole operation by pressing the Abort button.
+the top of an existing file.  The dialog shows the dates and sizes of
+the both files.  Press the Yes button to overwrite the file, the No
+button to skip the file, the All button to overwrite all the files, the
+None button to never overwrite and the Update button to overwrite if the
+source file is newer than the target file.  You can abort the whole
+operation by pressing the Abort button.
 .PP
-The recursive delete dialog is shown when you try to delete a
-directory which is not empty. Press the Yes button to delete the
-directory recursively, the No button to skip the directory, the alL
-button to delete all the directories and the nonE button to skip all
-the non-empty directories. You can abort the whole operation by
-pressing the Abort button. If you selected the Yes or alL button you
-will be asked for a confirmation. Type "yes" only if you are really
-sure you want to do the recursive delete.
+The recursive delete dialog is shown when you try to delete a directory
+which is not empty.  Press the Yes button to delete the directory
+recursively, the No button to skip the directory, the All button to
+delete all the directories and the None button to skip all the non-empty
+directories.  You can abort the whole operation by pressing the Abort
+button.  If you selected the Yes or All button you will be asked for a
+confirmation.  Type "yes" only if you are really sure you want to do the
+recursive delete.
 .PP
-If you have tagged files and perform an operation on them only the
-files on which the operation succeeded are untagged. Failed and
-skipped files are left tagged.
+If you have tagged files and perform an operation on them only the files
+on which the operation succeeded are untagged. Failed and skipped files
+are left tagged.
 .\"NODE "Mask Copy/Rename"
 .SH "Mask Copy/Rename"
-The copy/move operations lets you translate the names of files in an easy
-way. To do it, you have to specify the correct source mask and usually in
-the trailing part of the destination specify some wildcards.
+The copy/move operations lets you translate the names of files in an
+easy way.  To do it, you have to specify the correct source mask and
+usually in the trailing part of the destination specify some wildcards.
 All the files matching the source mask are copied/renamed according to
-the target mask. If there are tagged files, only the tagged files
+the target mask.  If there are tagged files, only the tagged files
 matching the source mask are renamed.
 .PP
 There are other options which you can set:
@@ -2215,35 +2238,33 @@ Follow links tells whether make the symlinks and hardlinks in the source
 directory (recursively in subdirectories) new links in the target
 directory or whether would you like to copy their content.
 .PP
-Dive into subdirs tells what to do if in the target
-directory exists a directory with the same name as the
-file/directory being copied. The default action is to copy
-its content into that directory, by enabling this
-you can copy the source directory into that directory.
-Perhaps an example will help:
+Dive into subdirs tells what to do if in the target directory exists a
+directory with the same name as the file/directory being copied.  The
+default action is to copy its content into that directory, by enabling
+this you can copy the source directory into that directory.  Perhaps an
+example will help:
 .PP
-You want to copy content of a directory foo to /bla/foo,
-which is an already existing directory. Normally (when
-Dive is not set), mc would copy it exactly into /bla/foo.
-By enabling this option you will copy the content into /bla/foo/foo,
-because the directory already exists.
+You want to copy content of a directory foo to /bla/foo, which is an
+already existing directory.  Normally (when Dive is not set), mc would
+copy it exactly into /bla/foo.  By enabling this option you will copy
+the content into /bla/foo/foo, because the directory already exists.
 .PP
 Preserve attributes tells whether to preserve the original files'
-permissions, timestamps and if you are root whether to preserve
-the original files' UID and GID. If this option is not set the current
+permissions, timestamps and if you are root whether to preserve the
+original files' UID and GID.  If this option is not set the current
 value of the umask will be respected.
 .PP
 .B "Use shell patterns on"
 .PP
 When the shell patterns option is on you can use the '*' and '?'
-wildcards in the source mask. They work like they do in the shell. In
-the target mask only the '*' and '\\<digit>' wildcards are allowed. The
-first '*' wildcard in the target mask corresponds to the first
-wildcard group in the source mask, the second '*' corresponds to the
-second group and so on. The '\\1' wildcard corresponds to the first
-wildcard group in the source mask, the '\\2' wildcard corresponds to
-the second group and so on all the way up to '\\9'. The '\\0' wildcard
-is the whole filename of the source file.
+wildcards in the source mask.  They work like they do in the shell.  In
+the target mask only the '*' and '\\<digit>' wildcards are allowed.  The
+first '*' wildcard in the target mask corresponds to the first wildcard
+group in the source mask, the second '*' corresponds to the second group
+and so on.  The '\\1' wildcard corresponds to the first wildcard group
+in the source mask, the '\\2' wildcard corresponds to the second group
+and so on all the way up to '\\9'.  The '\\0' wildcard is the whole
+filename of the source file.
 .PP
 Two examples:
 .PP
@@ -2324,7 +2345,7 @@ Here is a listing of the actions associated with each key that the
 Midnight Commander handles in the internal file viewer.
 .PP
 .B F1
-Invoke the builtin hypertext help viewer.
+Invoke the built-in hypertext help viewer.
 .PP
 .B F2
 Toggle the wrap mode.
@@ -2411,22 +2432,22 @@ Extension File Edit section
 .\"Extension File Edit"
 .\"NODE "Internal File Editor"
 .SH "Internal File Editor"
-The internal file editor provides most of the features of
-common full screen editors. It is invoked using
+The internal file editor is a full-featured full screen editor.  It can
+edit files up to 64 megabytes.  It is possible to edit binary files. 
+The internal file editor is invoked using
 .B F4
-provided the
+if the
 .I use_internal_edit
-option is set in the initialization file. It has an extendable file size
-limit of sixteen megabytes and edits binary files flawlessly.
+option is set in the initialization file.
 .PP
-The features it presently supports are: Block
-copy, move, delete, cut and paste;
-.IR "key for key undo" ;
-pull-down menus; file insertion; macro definition; regular expression
-search and replace (and our own scanf-printf search and replace);
-shift-arrow MSW-MAC text highlighting (for the linux console only);
-insert-overwrite toggle; and an option to pipe text blocks through shell
-commands like indent.
+The features it presently supports are: block copy, move, delete, cut,
+paste; key for key undo; pull-down menus; file insertion; macro
+commands; regular expression search and replace (and our own
+scanf-printf search and replace); shift-arrow text highlighting (if
+supported by the terminal); insert-overwrite toggle; word wrap;
+autoindent; tunable tab size; syntax highlighting for various file
+types; and an option to pipe text blocks through shell commands like
+indent and ispell.
 .PP
 The editor is very easy to use and requires no tutoring. To see what
 keys do what, just consult the appropriate pull-down menu. Other keys
@@ -2480,16 +2501,15 @@ a C format string. First take a look at the
 .B sscanf
 and
 .B sprintf
-man pages to see what a format string
-is and how it works. An example is as follows: Suppose you want
-to replace all occurrences of say, an open bracket, three
-comma separated numbers, and a close bracket, with the
-word
+man pages to see what a format string is and how it works.  Consider
+following example.  Suppose you want to replace all occurrences of an
+open bracket, three comma separated numbers, and a close bracket, with
+the word
 .IR apples ,
 the third number, the word
 .I oranges
-and then the second number, I would fill in the Replace dialog
-box as follows:
+and then the second number.  Then fill in the Replace dialog box as
+follows:
 .PP
 .nf
  Enter search string
@@ -2517,38 +2537,38 @@ to 7 bits in the options menu to keep the spacing clean.
 .SH "Completion"
 Let the Midnight Commander type for you.
 .PP
-Attempt to perform completion on the text before current position. MC
-attempts completion treating the text as variable (if the text begins with
+Attempt to perform completion on the text before current position.  MC
+attempts completion treating the text as variable (if the text begins
+with
 .BR $ ),
 username (if the text begins with
 .BR ~ ),
 hostname (if the text begins with
 .BR @ )
-or command (if you are on the command line in the
-position where you might type a command, possible completions then include
-shell reserved words and shell builtin commands as well) in turn. If none
-of these produces a match, filename completion is attempted.
+or command (if you are on the command line in the position where you
+might type a command, possible completions then include shell reserved
+words and shell built-in commands as well) in turn.  If none of these
+matches, filename completion is attempted.
 .PP
 Filename, username, variable and hostname completion works on all input
-lines, command completion is command line specific.
-If the completion is ambiguous (there are more different possibilities),
-MC beeps and the following action depends on the setting of the
+lines, command completion is command line specific.  If the completion
+is ambiguous (there are more different possibilities), MC beeps and the
+following action depends on the setting of the
 .I Complete: show all
 option in the
 .\"LINK2"
 Configuration
 .\"Configuration"
-dialog. If it is enabled, a list of all
-possibilities pops up next to the current position and you can select with
-the arrow keys and
+dialog.  If it is enabled, a list of all possibilities pops up next to
+the current position and you can select with the arrow keys and
 .B Enter
-the correct entry. You can also type the first letters in which the
-possibilities differ to move to a subset of all possibilities and complete
-as much as possible. If you press
+the correct entry.  You can also type the first letters in which the
+possibilities differ to move to a subset of all possibilities and
+complete as much as possible.  If you press
 .B M-Tab
 again, only the subset will be shown in the listbox, otherwise the first
-item which matches all the previous characters will be highlighted. As soon
-as there is no ambiguity, dialog disappears, but you can hide it by
+item which matches all the previous characters will be highlighted.  As
+soon as there is no ambiguity, dialog disappears, but you can hide it by
 canceling keys
 .BR Esc ,
 .B F10
@@ -2561,34 +2581,31 @@ is disabled, the dialog pops up only if you press
 for the second time, for the first time MC just beeps.
 .\"NODE "Virtual File System"
 .SH "Virtual File System"
-The Midnight Commander is provided with a code layer to access the
-file system; this code layer is known as the virtual file system
-switch.  The virtual file system switch allows the Midnight Commander
-to manipulate files not located on the Unix file system.
+The Midnight Commander is provided with a code layer to access the file
+system; this code layer is known as the virtual file system switch.  The
+virtual file system switch allows the Midnight Commander to manipulate
+files not located on the Unix file system.
 .PP
 Currently the Midnight Commander is packaged with some Virtual File
 Systems (VFS): the
 .I local
-file system, used for accessing the regular
-Unix file system; the
+file system, used for accessing the regular Unix file system; the
 .IR ftpfs ,
-used to manipulate files on remote
-systems with the FTP protocol; the
+used to manipulate files on remote systems with the FTP protocol; the
 .IR tarfs ,
-used to manipulate tar and
-compressed tar files; the
+used to manipulate tar and compressed tar files; the
 .IR undelfs ,
-used to recover deleted files on
-ext2 file systems (the default file system for Linux systems),
+used to recover deleted files on ext2 file systems (the default file
+system for Linux systems),
 .I fish
 (for manipulating files over shell connections such as rsh and ssh) and
 finally the
 .I mcfs
-(Midnight Commander file system), a network based
-file system.  If the code was compiled with
+(Midnight Commander file system), a network based file system.  If the
+code was compiled with
 .I smbfs
-support, you can
-manipulate files on remote systems with the SMB (CIFS) protocol.
+support, you can manipulate files on remote systems with the SMB (CIFS)
+protocol.
 .PP
 A generic
 .I extfs
@@ -3295,7 +3312,7 @@ If you want to report a problem with the program, please send mail to
 this address: mc-devel@gnome.org.
 .PP
 Provide a detailed description of the bug, the version of the program
-you are running (mc -V display this information), the operating system
-you are running the program on and if the program crashes, we would
-appreciate a stack trace.
-
+you are running
+.RI ( "mc -V"
+displays this information), the operating system you are running the
+program on.  If the program crashes, we would appreciate a stack trace.
