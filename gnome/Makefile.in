@@ -15,7 +15,7 @@ INSTALL_PROGRAM = @INSTALL_PROGRAM@
 INSTALL_DATA = @INSTALL_DATA@
 
 GNOMESRCS = gkey.c gmain.c gscreen.c gwidget.c \
-	gmenu.c ginfo.c ghelp.c glayout.c gtools.c
+	gmenu.c ginfo.c ghelp.c glayout.c gtools.c gdesktop.c
 
 GNOMEHDRS = gmain.h gscreen.h  gwidget.h gconf.h
 
@@ -45,7 +45,7 @@ OBJS = $(LOBJS) $(OOBJS) \
 
 PIXMAPS = directory.xpm
 
-DISTGNOME = Makefile.in gnome.TODO $(PIXMAPS) $(GNOMESRCS) $(GNOMEHDRS) 
+DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(GNOMESRCS) $(GNOMEHDRS) 
 
 .c.o:
 	$(CC) -c $(CPPFLAGS) $(DEFS) $(CFLAGS) $<
