@@ -1,4 +1,10 @@
-2004-09-17 Dmitry Alexeyev <dmi_a@qnx.org.ru>
+2004-10-05 Gergely Sza'sz,,,  <szaszg@hu.inter.net> 
+
+	* syntax/perl.syntax: Fix highlight the hashes.
+	* syntax/diff.syntax: highlight comments (lines begin with #),
+	and garbage in diff files.
+
+2004-09-17 Dmitry Alexeyev  <dmi_a@qnx.org.ru>
 
 	* mc.qpg.in: New file. Description for QNX 6.x packager.
 

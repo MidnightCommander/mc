@@ -69,7 +69,6 @@ context default
     keyword - yellow
     keyword \* yellow
     keyword / yellow
-    keyword % yellow
     keyword = yellow
     keyword != yellow
     keyword == yellow
@@ -102,12 +101,14 @@ context default
     keyword whole STDARGV brightred
     keyword whole DATA brightred
 
-    keyword & brightmagenta
     keyword wholeright $+ brightgreen/PaleGreen
     keyword wholeright %+ brightcyan
     keyword wholeright @+ white
     keyword \\" brightred
     keyword \\' brightred
+
+    keyword % yellow
+    keyword & brightmagenta
 
     keyword whole and magenta
     keyword whole or magenta
