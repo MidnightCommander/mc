@@ -21,6 +21,8 @@ Implement --with-screen option.
 
 Remove side effects from --with-termcap option.
 
+ftp and fish with home != '/' - readjust directory to the home.
+
 
 Before 4.6.0
 ============
@@ -39,8 +41,6 @@ Hard links in cpio have 0 length (if easy to fix).
 Add "Ignore" and "Ignore all" buttons when reporting permission
 problems.
 
-ftp and fish with home != '/' - readjust directory to the home.
-
 Better date parser - support files beginning with "2000 ".
 
 Report errors in fish operations and recover from them.
@@ -52,6 +52,8 @@ Scan more packages for patches, check Red Hat and Ximian Bugzilla.
 
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a superlong line to redefine all colors.
+
+Allow modifiers for keys in mc.lib, like "shift-up".
 
 
 After 4.6.0
