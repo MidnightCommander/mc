@@ -130,10 +130,9 @@ char *catstrs (const char *first,...)
     len++;
 
     i = (i + 1) % 16;
-    if (stacked[i])
-	free (stacked[i]);
+    g_free (stacked[i]);
 
-    stacked[i] = malloc (len);
+    stacked[i] = g_malloc (len);
     va_end (ap);
     va_start (ap, first);
     strcpy (stacked[i], first);
@@ -150,8 +149,8 @@ void freestrs(void)
     int i;
 
     for (i = 0; i < sizeof(stacked) / sizeof(stacked[0]); i++) {
-	if (stacked[i])
-	    free (stacked[i]);
+	g_free (stacked[i]);
+	stacked[i] = NULL;
     }
 }
 
