@@ -1035,7 +1035,8 @@ comando
 comando interno cd.
 .\"The cd internal command"
 .PP
-.SH "  Command Menu"
+.\"NODE "  Command Menu"
+.SH "  Menu Commando"
 Il comando
 .\"LINK2"
 Albero directory
@@ -1917,74 +1918,79 @@ Impostazioni speciali
 per ulteriori informazioni.
 .PP
 .SH ""
-.SH "Executing operating system commands"
-You may execute commands by typing them directly in the Midnight
-Commander's input line, or by selecting the program you want to
-execute with the selection bar in one of the panels and hitting Enter.
+.\"NODE "Executing operating system commands"
+.SH "Esecuzione comandi del sistema operativo"
+E' possibile eseguire comandi del sistema operativo direttamente
+nella riga di comando del Midnight Commander o selezionando il
+programma che si vuole eseguire con la barra di selezione in uno 
+dei pannelli e premendo Invio.
 .PP
-If you press Enter over a file that is not executable, the Midnight
-Commander checks the extension of the selected file against the
-extensions in the
+Se si preme Invio su di un file che non è eseguibile, il Midnight
+Commander controllerà l'estensione del file selezionato con ciò 
+che trova nel
 .\"LINK2"
+File Estensioni.
 Extensions File.
 .\"Extension File Edit"
-If a match is found then the code associated with that extension is
-executed. A very simple
+Se viene trovata una corrispondenza, verrà eseguito il codice associato.
+Verrà eseguita una semplice 
 .\"LINK2"
-macro expansion
+espansione di macro
 .\"Macro Substitution"
-takes place before executing the command.
+prima di eseguire il comando.
 .PP
-.SH "  The cd internal command"
-The 
+.\"NODE "  The cd internal command"
+.SH "Il comando cd interno"
+Il comando 
 .I cd
-command is interpreted by the Midnight Commander, it is not passed to
-the command shell for execution.  Thus it may not handle all of the
-nice macro expansion and substitution that your shell does, although it
-does some of them:
+non viene passato alla shell per l'esecuzione ma è iterpretato dal 
+Midnight Commander. Perciò può non gestire tutte quelle simpatiche 
+espansioni di macro e sostituzioni che fa la shell, malgrado alcune
+le possa fare:
 .PP
-.I Tilde substitution
-The (~) will be substituted with your home directory, if you append a
-username after the tilde, then it will be substituted with the login
-directory of the the specified user.
+.I Sostituzione della tilde 
+La (~) verrà sostituita con la vostra directory home e se si appende
+un nome utente dopo la tilde allora verrà sostituita con la directory
+di login dell'utente indicato.
 .PP
-For example, ~guest is the home directory for the user guest, while
-~/guest is the directory guest in your home directory.
+Per esempio, ~ospite è la directory home dell'utente ospite, mentre
+~/ospite è la directory ospite nella vostra home directory.
 .PP
-.I Previous directory
-You can jump to the directory you were previously by using the special
-directory name '-' like this:
+.I Directory precedente
+E' possibile saltare alla directory dove si era precedentemente usando
+il nome directory speciale '-' così:
 .B cd -
 .PP
-.I CDPATH directories
-If the directory specified to the 
+.I Directory CDPATH
+Se la directory indicata al comando 
 .B cd 
-command is not in the current directory, then The Midnight Commander
-uses the value in the environment variable 
+non è nella directory corrente, il The Midnight Commander userà il
+valore della viariabile ambiente
 .B CDPATH
-to search for the directory in any of the named directories.
+per cercare la directory in ogniuna delle directory nominate.
 .PP
-For example you could set your
+Per esempio si può impostare la variabile
 .B CDPATH
-variable to ~/src:/usr/src, allowing you to change your directory to
-any of the directories inside the ~/src and /usr/src directories, from
-any place in the file system by using it's relative name (for example
-cd linux could take you to /usr/src/linux).
+a ~/src:/usr/src, permettendo di cambiare directory verso ogniuna
+delle directory presenti nelle directory ~/src e /usr/src da qualunque
+parte nel file system (per esempio cd linux vi porterà in 
+/usr/src/linux).
 .PP
-.SH "  Macro Substitution"
+.\"NODE "  Macro Substitution"
+.SH "  Sostituzione di Macro"
 .PP
-When accessing a
+Quando si accede ad un
 .\"LINK2"
-user menu, 
+menu utente, 
 .\"Menu File Edit"
-or executing an
+o si esegue un
 .\"LINK2"
-extension dependent command,
+comando dipendente dall'estensione,
 .\"Extension File Edit"
-or running a command from the command line input,
-a simple macro substitution takes place.
+o si esegue un comando dalla riga di ingresso,
+viene eseguita una semplice sostituzione di macro.
 .PP
-The macros are:
+Le macro sono:
 .PP
 .I "%i"
 .IP
@@ -2142,74 +2148,80 @@ OPTIONS
 .\"OPTIONS"
 section has more information on how you can control the subshell code.
 .PP
-.SH "Chmod"
-The Chmod window is used to change the attribute bits in a group of
-files and directories.  It can be invoked with the C-x c key combination.
+.\"NODE "Chmod"
+.SH "Permessi"
+La finestra Permessi serve a cambiare i bit di attributo in gruppi di
+file o directory. La si può invocare con la combinazione di tasti C-x c.
 .PP
+La finestra dei Permessi ha due parti -
 The Chmod window has two parts -
-.I Permissions
-and 
+.I Permessi
+e
 .I File
 .PP
-In the File section are displayed the name of the file or directory
-and its permissions in octal form, as well as its owner and group.
+Nella sezione File somo mostrati il nome del file o della directory
+ed i suoi permessi in forma ottale, oltre che il proprietario e il
+gruppo.
 .PP
-In the Permissions section there is a set of check buttons which
-correspond to the file attribute bits.  As you change the attribute
-bits, you can see the octal value change in the File section.
+Nella sezione Permessi c'è un set di caselle che corrispondono
+agli attributi dei file. Come si cambia il bit di attributo,
+si può vedere il valore in ottale aggiornato nella sezione File.
 .PP
-To move between the widgets (buttons and check buttons) use the
-.I arrow keys
-or the
+Per muoversi attraverso le sezioni (bottoni e caselle) usare i
+.I tasti freccia
+oppure
 .I Tab
-key.  To change the state of the check buttons or to select a button
-use
-.I Space.
-You can also use the hotkeys on the buttons to quickly activate them.
-Hotkeys are shown as highlighted letters on the buttons.
+ . Per cambiare lo stato delle caselle o per selezionare un bottone
+usare lo
+.I Spazio.
+Si può usare anche i tasti di scelta rapida sui bottoni per attivarli
+velocemente. I tasti di scelta rapida corrispondono alle lettere evidenziate
+dei bottoni.
 .PP
-To set the attribute bits, use the Enter key.
+Per impostare i bit degli attributi, usare il tasto Invio.
 .PP
-When working with a group of files or directories, you just click on
-the bits you want to set or clear.  Once you have selected the bits
-you want to change, you select one of the action buttons (Set marked
-or Clear marked).
+Quando si lavora con un gruppo di file o directory, basta cliccare sui
+bit che si vogliono impostare o cancellare. Una volta selezionati i bit
+da cambiare, selezionare una delle azioni (Imposta marcati o Cancella
+marcati).
 .PP
-Finally, to set the attributes exactly to those specified, you can use
-the
-.B [Set all]
-button, which will act on all the tagged files.
+Infine, per impostare gli attributi esattamente come specificato, usare
+il tasto
+.B [Imposta tutti]
+ , che agisce su tutti i file marcati.
 .PP
-.B [Marked all]
-set only marked attributes to all selected files
+.B [Modifica tutti]
+modifica solo gli attributi marcati su tutti i file.
 .PP
-.B [Set marked]
-set marked bits in attributes of all selected files
+.B [Imposta marcati]
+pone a uno i bit marcati degli attributi di tutti i file selezionati.
 .PP
-.B [Clean marked]
-clear marked bits in attributes of all selected files
+.B [Cancella marcati]
+pone a zero i bit marcati degli attributi di tutti i file selezionati.
 .PP
-.B [Set]
-set the attributes of one file
+.B [Imposta]
+imposta gli attributi di un file.
 .PP
-.B [Cancel]
-cancel the Chmod command
+.B [Cancella]
+cancella il comando Permessi.
 .PP
-.SH "Chown"
-The Chown command is used to change the owner/group of a file. The hot
-key for this command is C-x o.
+.\"NODE "Chown"
+.SH "Proprietario"
+Il comando proprietario serve a cambiare il proprietario/gruppo di un 
+file. Il tasto di scelta rapida per questo comando è C-x o.
 .PP
-.SH "Advanced Chown"
-The Advanced Chown command is the 
+.\"NODE "Advanced Chown"
+.SH "Proprietario Avanzato"
+Il comando Proprietario Avanzato consiste nel comando 
 .\"LINK2"
-Chmod
+Permessi
 .\"Chmod"
-and 
+e
 .\"LINK2"
-Chown
+Proprietario
 .\"Chown"
-command combined into one window. You can change the permissions and 
-owner/group of files at once.
+combinati assieme in una finestra. E' così possibile cambiare i permessi
+ed il proprietario/gruppo dei file in un sol colpo.
 .PP
 .SH "File Operations"
 When you copy, move or delete files the Midnight Commander shows the
