@@ -99,7 +99,7 @@ OOBJS = dlg.o screen.o widget.o wtools.o info.o boxes.o \
 	win.o color.o profile.o user.o ext.o setup.o \
 	subshell.o terms.o achown.o fsusage.o mountlist.o \
 	@XCURSES@ @REGEX_O@ complete.o command.o \
-	option.o cmd.o utilunix.o xslint.o filegui.o filenot.o 
+	option.o cmd.o utilunix.o xslint.o gdialogs.o filenot.o 
 
 CORBAOBJS = 			\
 	main-corba.o		\
