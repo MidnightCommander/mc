@@ -73,7 +73,7 @@ gnome_open_terminal_with_cmd (const char *command)
 			char *q;
 
 			if (quote_all)
-				q = g_strconcat (p, " -e '", command, "'", NULL);
+				q = g_strconcat (p, " --start-factory-server --use-factory -e '", command, "'", NULL);
 			else
 				q = g_strconcat (p, " -e ", command, NULL);
 			my_system (EXECUTE_AS_SHELL, shell, q);

@@ -2939,7 +2939,7 @@ new_terminal (GtkWidget *widget, gpointer data)
 	if (is_a_desktop_panel (cpanel))
 		mc_chdir (home_dir);
 
-	gnome_open_terminal_with_cmd ("--use-factory --start-factory-server");
+	gnome_open_terminal ();
 }
 
 static GnomeUIInfo gnome_panel_new_menu [] = {

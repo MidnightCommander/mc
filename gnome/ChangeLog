@@ -1,3 +1,12 @@
+2001-04-20  Miguel de Icaza  <miguel@ximian.com>
+
+	* gdesktop.c (new_terminal): Use gnome_open_terminal, and do not
+	pass arguments here.
+
+	* gcmd.c (gnome_open_terminal_with_cmd): When launching
+	gnome-terminal, pass the --start-factory-server --use-factory
+	arguments here.
+
 2001-04-14  Federico Mena Quintero  <federico@ximian.com>
 
 	* gdesktop.c (desktop_icon_set_busy): Use a pretty arrow instead
