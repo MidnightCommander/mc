@@ -260,7 +260,7 @@ gicon_get_icon_for_file (file_entry *fe)
 	if (mime_type){
 		char *icon;
 
-		icon = gnome_mime_type_get_value (mime_type, "icon-filename");
+		icon = gnome_mime_get_value (mime_type, "icon-filename");
 
 		if (icon){
 			image = gicon_get_by_filename (icon);

@@ -175,16 +175,6 @@ extern WMenu      *the_menubar;
 
 extern Dlg_head *midnight_dlg;
 
-/* Back hack to define the following routines only if the client code
- * has included panel.h
- */
-#ifdef __PANEL_H
-void directory_history_add   (WPanel *panel, char *s);
-int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
-void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
-int  midnight_callback       (struct Dlg_head *h, int id, int msg);
-#endif
-
 #endif
 
 void edition_pre_exec (void);
@@ -198,5 +188,19 @@ void exec_shell (void);
 #    define MC_BASE ""
 #else
 #    define MC_BASE "/.mc/"
+#endif
+#endif
+
+/* Back hack to define the following routines only if the client code
+ * has included panel.h
+ */
+#ifdef __PANEL_H
+
+#ifndef PANEL_DEFS_DONE
+#define PANEL_DEFS_DONE
+void directory_history_add   (WPanel *panel, char *s);
+int  do_panel_cd             (WPanel *panel, char *new_dir, enum cd_enum cd_type);
+void update_one_panel_widget (WPanel *panel, int force_update, char *current_file);
+int  midnight_callback       (struct Dlg_head *h, int id, int msg);
 #endif
 #endif

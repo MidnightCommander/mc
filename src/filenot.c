@@ -9,6 +9,8 @@
  */
 
 #include <config.h>
+#include <string.h>
+#include <malloc.h>
 #include "util.h"
 #include <errno.h>
 #include "../vfs/vfs.h"

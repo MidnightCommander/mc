@@ -144,6 +144,12 @@ typedef struct {
     int click_x, click_y;
 
     int dragging;
+
+    /* Used for scrolling nicely during drags */
+    int timer_id;
+    int drag_motion_x;
+    int drag_motion_y;
+    
 #endif
     void *corbadat;
 } WPanel;

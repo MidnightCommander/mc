@@ -16,9 +16,9 @@
    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.  */
 
 #include <config.h>
+#define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "tty.h"
 #include "fs.h"
-
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +27,6 @@
 #include "x.h"
 #include "mad.h"
 #include "global.h"
-#define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "dir.h"
 #include "util.h"
 #include "dialog.h"
@@ -496,8 +495,6 @@ int do_load_dir(dir_list *list, sortfn *sort, int reverse, int case_sensitive, c
 
 int link_isdir (file_entry *file)
 {
-    struct stat b;
-
     if (file->f.link_to_dir)
 	return 1;
     else

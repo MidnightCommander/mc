@@ -27,7 +27,7 @@ Hint: Have you plenty of RAM/Virtual RAM? Set the tar VFS memlimit to -1.
 Hint: Completion works on all input lines in all dialogs. Just press M-Tab.
 Hint: On slow terminals the -s flag may help.
 Hint: Find File: you can work on the files found using the Panelize button.
-Hint: Want to do complex searchs? Use the External Panelize command.
+Hint: Want to do complex searches? Use the External Panelize command.
 Hint: To change directory halfway through typing a command, use M-c (quick cd).
 Note: Shell commands will not work when you are on a non-local file system.
 Hint: Bring text back from the dead with C-y.

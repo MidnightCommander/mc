@@ -132,6 +132,7 @@ void change_nroff       (WView *view);
 void set_monitor        (WView *view, int set_on);
 void view_move_forward  (WView *view, int i);
 void view_move_backward (WView *view, int i);
+void view_add_one_vline (void);
 #endif
 
 /* Command: view a file, if _command != NULL we use popen on _command */

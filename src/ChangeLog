@@ -1,3 +1,7 @@
+1998-12-15  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* dir.c (link_isdir): Remove unused variable.
+
 Sun Dec 13 18:35:05 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* screen.c (panel_reload): Don't set panel->selected to zero here,
