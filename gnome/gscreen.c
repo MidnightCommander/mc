@@ -469,33 +469,6 @@ file_popup_add_context (GtkMenu *menu, WPanel *panel, char *filename)
 }
 
 static void
-test_it (void)
-{
-	GtkWidget *window;
-	GpropGeneral *gpg;
-	GpropPerm *gpp;
-	GpropDir *gpd;
-
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gpg = gprop_general_new ("/hola/mundo/como/estas.txt", "estas.txt");
-	gtk_container_add (GTK_CONTAINER (window), gpg->top);
-	gtk_widget_show (gpg->top);
-	gtk_widget_show (window);
-
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gpp = gprop_perm_new (0, "yomero", "gnome");
-	gtk_container_add (GTK_CONTAINER (window), gpp->top);
-	gtk_widget_show (gpp->top);
-	gtk_widget_show (window);
-
-	window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-	gpd = gprop_dir_new ("/da/share/gnome-install/share/pixmaps/cards/10club.xpm");
-	gtk_container_add (GTK_CONTAINER (window), gpd->top);
-	gtk_widget_show (gpd->top);
-	gtk_widget_show (window);
-}
-
-static void
 file_popup (GdkEvent *event, WPanel *panel, int row, char *filename)
 {
 	GtkWidget *menu = gtk_menu_new ();
@@ -511,15 +484,7 @@ file_popup (GdkEvent *event, WPanel *panel, int row, char *filename)
 	
 	file_popup_add_context (GTK_MENU (menu), panel, filename);
 
-	item = gtk_menu_item_new_with_label ("Chingado");
-	gtk_signal_connect (GTK_OBJECT (item), "activate",
-			    (GtkSignalFunc) test_it,
-			    NULL);
-	gtk_widget_show (item);
-	gtk_menu_append (GTK_MENU (menu), item);
-	
 	gtk_menu_popup (GTK_MENU (menu), NULL, NULL, NULL, NULL, 3, event->button.time);
-/*	gtk_widget_show (menu);*/
 }
 
 static void

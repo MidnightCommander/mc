@@ -1,5 +1,8 @@
 1998-03-18  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gscreen.c: Removed tests for the gprop stuff.
+	(file_popup): It is not necessary to show the popup menu.
+
 	* gprop.c (perm_group_new):
 	(perm_owner_new): Fill the combo lists with users and groups,
 	respectively.
