@@ -15,7 +15,7 @@ for oldfile in $backup_files; do
     { newfile="/dev/null"; newlabel="/dev/null"; }
   case $newfile in
     *.c) dflags="-u -p" ;;
-    *.po) dflags="-u1 -I'^#[:,.~]'";;
+    *.po) dflags='-u1 -I^#[:,.~]';;
     *ChangeLog*) dflags="-u1" ;;
     *) dflags="-u" ;;
   esac
