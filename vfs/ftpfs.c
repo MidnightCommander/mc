@@ -383,7 +383,6 @@ free_archive (vfs *me, vfs_s_super *super)
 	close(SUP.sock);
     }
     g_free (SUP.host);
-    g_free (SUP.home);
     g_free (SUP.user);
     g_free (SUP.cwdir);
     g_free (SUP.password);
@@ -812,9 +811,9 @@ open_archive_int (vfs *me, vfs_s_super *super)
 	}
     } while (retry_seconds);
     
-    SUP.home = ftpfs_get_current_directory (me, super);
-    if (!SUP.home)
-        SUP.home = g_strdup (PATH_SEP_STR);
+    SUP.cwdir = ftpfs_get_current_directory (me, super);
+    if (!SUP.cwdir)
+        SUP.cwdir = g_strdup (PATH_SEP_STR);
     return 0;
 }
 
@@ -829,7 +828,7 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     SUP.host = host;
     SUP.user = user;
     SUP.port = port;
-    SUP.home = NULL;
+    SUP.cwdir = NULL;
     SUP.proxy = 0;
     if (ftpfs_check_proxy (host))
 	SUP.proxy = ftpfs_proxy_host;
@@ -1238,8 +1237,11 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     int has_symlinks = 0;
 #endif
     char buffer[BUF_8K];
+    int cd_first;
     
-    int cd_first = ftpfs_first_cd_then_ls || (strchr (remote_path, ' ') != NULL) || (SUP.strict == RFC_STRICT);
+    cd_first = ftpfs_first_cd_then_ls || (strchr (remote_path, ' ') != NULL)
+	|| (SUP.strict == RFC_STRICT);
+
 again:
     print_vfs_message(_("ftpfs: Reading FTP directory %s... %s%s"), remote_path,
 		      SUP.strict == RFC_STRICT ? _("(strict rfc959)") : "",
@@ -1605,7 +1607,7 @@ static int ftpfs_unlink (vfs *me, char *path)
     return send_ftp_command(me, path, "DELE /%s", OPT_FLUSH);
 }
 
-/* Return true if path is the same directoy as the one we are on now */
+/* Return 1 if path is the same directory as the one we are in now */
 static int
 is_same_dir (vfs *me, vfs_s_super *super, const char *path)
 {
@@ -1632,8 +1634,7 @@ ftpfs_chdir_internal (vfs *me, vfs_s_super *super, char *remote_path)
     if (r != COMPLETE) {
 	my_errno = EIO;
     } else {
-	if (SUP.cwdir)
-	    g_free(SUP.cwdir);
+	g_free(SUP.cwdir);
 	SUP.cwdir = g_strdup (remote_path);
 	SUP.cwd_defered = 0;
     }

@@ -1,5 +1,10 @@
 2002-07-19  Pavel Roskin  <proski@gnu.org>
 
+	* ftpfs.c: Don't use SUP.home, use SUP.cwdir.
+	* fish.c: Likewise.
+	(dir_load): Update SUP.cwdir.
+	* xdirentry.h: Remove "home" field for fish and ftpfs.
+
 	* xdirentry.h: Get rid of ifree(), it's equivalent to g_free().
 	* direntry.c: Likewise.
 	* fish.c: Likewise.

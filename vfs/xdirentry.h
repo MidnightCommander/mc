@@ -89,14 +89,14 @@ typedef struct vfs_s_super {
 	} tar;
 	struct {
 	    int sockr, sockw;
-	    char *home, *cwdir;
+	    char *cwdir;
 	    char *host, *user;
 	    char *password;
 	    int flags;
 	} fish;
 	struct {
 	    int sock;
-	    char *home, *cwdir;
+	    char *cwdir;
 	    char *host, *user;
 	    char *password;
 	    int port;

@@ -151,7 +151,6 @@ free_archive (vfs *me, vfs_s_super *super)
 	SUP.sockw = SUP.sockr = -1;
     }
     g_free (SUP.host);
-    g_free (SUP.home);
     g_free (SUP.user);
     g_free (SUP.cwdir);
     g_free (SUP.password);
@@ -274,8 +273,8 @@ open_archive_int (vfs *me, vfs_s_super *super)
         ERRNOR (E_PROTO, -1);
 
     print_vfs_message( _("fish: Setting up current directory...") );
-    SUP.home = fish_getcwd (me, super);
-    print_vfs_message( _("fish: Connected, home %s."), SUP.home );
+    SUP.cwdir = fish_getcwd (me, super);
+    print_vfs_message( _("fish: Connected, home %s."), SUP.cwdir );
 #if 0
     super->name = g_strconcat ( "/#sh:", SUP.user, "@", SUP.host, "/", NULL );
 #endif
@@ -301,7 +300,7 @@ open_archive (vfs *me, vfs_s_super *super, char *archive_name, char *op)
     SUP.flags = flags;
     if (!strncmp( op, "rsh:", 4 ))
 	SUP.flags |= FISH_FLAG_RSH;
-    SUP.home = NULL;
+    SUP.cwdir = NULL;
     if (password)
 	SUP.password = password;
     return open_archive_int (me, super);
@@ -465,6 +464,8 @@ dir_load(vfs *me, vfs_s_inode *dir, char *remote_path)
     vfs_s_free_entry (me, ent);
     me->verrno = E_REMOTE;
     if (decode_reply(buffer+4, 0) == COMPLETE) {
+	g_free (SUP.cwdir);
+	SUP.cwdir = g_strdup (remote_path);
 	print_vfs_message (_("%s: done."), me->name);
 	return 0;
     }
