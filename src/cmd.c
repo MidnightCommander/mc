@@ -1032,26 +1032,22 @@ do_link (int symbolic_link, char *fname)
 	if (-1 == mc_link (fname, dest))
 	    message (1, MSG_ERROR, _(" link: %s "), unix_error_string (errno));
     } else {
-#ifdef OLD_SYMLINK_VERSION
-        symlink_dialog (fname, "", &dest, &src);
-#else
+	char *s;
+	char *d;
+
 	/* suggest the full path for symlink */
-        char s[MC_MAXPATHLEN];
-        char d[MC_MAXPATHLEN];
-	
-        strcpy(s, cpanel->cwd);
-        if ( ! ((s[0] == '/') && (s[1] == 0)))
-            strcat(s, "/");
-        strcat(s, fname);
-	if (get_other_type () == view_listing)
-	    strcpy(d, opanel->cwd);
-	else
-	    strcpy (d,"");
-	
-        if ( ! ((d[0] == '/') && (d[1] == 0)))
-            strcat(d, "/");
+	s = concat_dir_and_file (cpanel->cwd, fname);
+
+	if (get_other_type () == view_listing) {
+	    d = concat_dir_and_file (opanel->cwd, fname);
+	} else {
+	    d = g_strdup (fname);
+	}
+
         symlink_dialog (s, d, &dest, &src);
-#endif /* !OLD_SYMLINK_VERSION */
+	g_free (d);
+	g_free (s);
+
 	if (!dest || !*dest || !src || !*src) {
 	    if (src)
 	        g_free (src);

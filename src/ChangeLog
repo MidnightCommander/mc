@@ -1,5 +1,10 @@
 2001-07-26  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (do_link): Append filename to the default symlink
+	target.  Don't add path separator if there is no listing on
+	the other panel.  Avoid using fixed size buffers.
+	From Max Schedriviy <max@tavrida.net>
+
 	* main.c [HAVE_X]: Disable eight_bit_clean and full_eight_bits.
 	* util.c (is_printable) [HAVE_X]: Simplify.
 
