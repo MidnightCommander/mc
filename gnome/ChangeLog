@@ -1,6 +1,6 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
-	* gtkflist.c: Include <gtkflist.c> for abs().
+	* gtkflist.c: Include <stdlib.h> for abs().
 
 	* gdesktop-icon.c: Reorder includes - local after system.
 	* gdesktop-prefs.c: Likewise.
@@ -524,7 +524,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 
 1999-09-16  Owen Taylor  <otaylor@redhat.com>
 
-        * gmount.c: Remove the HAVE_MAGICDEV conditional.
+	* gmount.c: Remove the HAVE_MAGICDEV conditional.
 
 	* Makefile.in magicdev.idl: Add the magicdev.idl file
 	here to avoid creating dependency loops.
@@ -915,7 +915,7 @@ Wed Jan 10 15:52:51 2001  Jonathan Blandford  <jrb@redhat.com>
 1999-07-17  Karsten Weiss  <karsten@addx.au.s.shuttle.de>
 
 	* mc.keys.in.in: changed "x11amp" references to "xmms" (xmms is
-        the new name of x11amp).
+	the new name of x11amp).
 
 1999-07-13  Miguel de Icaza  <miguel@gnu.org>
 
@@ -1767,9 +1767,9 @@ Mon Mar 15 17:09:37 1999  Gregory McLean  <gregm@comstar.net>
 
 1999-03-08  Sergey Panov  <sipan@mit.edu>
 
-        * gcustom-layout.c, gprefs.c: Make the preferences dialog
-        translatable. (include files in gcustom-layout.c and use of
-        the _() macro in gprefs.c)
+	* gcustom-layout.c, gprefs.c: Make the preferences dialog
+	translatable. (include files in gcustom-layout.c and use of
+	the _() macro in gprefs.c)
 
 1999-02-28  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
@@ -2102,9 +2102,9 @@ Tue Feb 23 01:57:22 1999  George Lebl  <jirka@5z.com>
 
 1999-02-14  Sergey Panov <sipan@mit.edu>
 
-        * glayout.c: Fixed my own stupid typo( stock ID instead of NULL)
-        it was not critical. A few minor, rather cosmetic changes in
-        GnomeUIInfo structures.
+	* glayout.c: Fixed my own stupid typo( stock ID instead of NULL)
+	it was not critical. A few minor, rather cosmetic changes in
+	GnomeUIInfo structures.
 
 1999-02-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -2303,8 +2303,8 @@ Sun Feb  7 05:29:17 1999  Timur Bakeyev <mc@bat.ru>
 1999-02-06  Ettore Perazzoli  <ettore@comm2000.it>
 
 	* gscreen.c (x_create_panel): The location bar is now a simple
- 	GtkHBox instead of a GtkToolbar, and as a consequence the location
- 	entry widget is expanded to fill all of the window horizontally.
+	GtkHBox instead of a GtkToolbar, and as a consequence the location
+	entry widget is expanded to fill all of the window horizontally.
 
 1999-02-05  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -2856,7 +2856,7 @@ Wed Jan 27 03:14:46 1999  Timur Bakeyev <mc@bat.ru>
 
 1999-01-13  bertrand <Bertrand.Guiheneuf@inria.fr>
 
-        * gdialogs.c
+	* gdialogs.c
 	* gwidget.c:
 	* gprop.c:
 	s/gtk_toggle_button_state/gtk_toggle_button_active
@@ -3378,10 +3378,10 @@ Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
 	caused a segfault.
 
 	* gscreen.c (x_create_panel): More changes.  The toolbar is moved
- 	to a gtk_toolbar, and is movable.  The entry will be put in it's
- 	own toolbar, too.
+	to a gtk_toolbar, and is movable.  The entry will be put in it's
+	own toolbar, too.
 	(panel_create_cwd): For now, hardcode the usize of the entry
- 	widget.  Later on, have it expand (when toolbar supports it)
+	widget.  Later on, have it expand (when toolbar supports it)
 
 1998-12-10  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
@@ -3407,7 +3407,7 @@ Tue Dec 15 10:51:12 1998  Gregory McLean <gregm@comstar.net>
 1998-12-10  Jonathan Blandford  <jrb@redhat.com>
 
 	* gscreen.c (x_create_panel): made some small stylistic changes.
-  	Also, removed the hint bar and consolidated the status bar.
+	Also, removed the hint bar and consolidated the status bar.
 
 Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
@@ -4105,8 +4105,8 @@ Mon Aug 31 10:46:32 1998  Owen Taylor  <otaylor@redhat.com>
 Wed Aug 19 19:45:16 EDT 1998 The Rasterman <raster@redhat.com>
 
 	* gdesktop.c - changed dnd setting routine for desktop icon to set
-          events on child window...
-        * gtrans.c - chnaged routines to make window with child rawing area
+	  events on child window...
+	* gtrans.c - chnaged routines to make window with child rawing area
 	  and set shape on parent window
 
 1998-08-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
@@ -4116,7 +4116,7 @@ Wed Aug 19 19:45:16 EDT 1998 The Rasterman <raster@redhat.com>
 1998-07-04  Carsten Schaar  <nhadcasc@fs-maphy.uni-hannover.de>
 
 	* gmain.c (session_management_setup): Replaced
- 	'gnome_client_new_default' with 'gnome_master_client'.
+	'gnome_client_new_default' with 'gnome_master_client'.
 
 1998-06-23  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
