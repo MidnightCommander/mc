@@ -1,3 +1,7 @@
+1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* configure.in (VERSION): bumped version number to 4.5.28.
+
 Fri Mar 26 19:16:38 1999  Timur Bakeyev  <mc@bat.ru>
 
 	* */Makefie.*: fixed several missed conversions from libdir to

@@ -816,7 +816,8 @@ void subshell_get_console_attributes (void)
 
 void sigchld_handler (int sig)
 {
-    int pid, status;
+    int status;
+    pid_t pid;
 
     pid = waitpid (subshell_pid, &status, WUNTRACED | WNOHANG);
 

@@ -1,3 +1,11 @@
+1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	Patch courtesy of John Bley (jbb6@acpub.duke.edu):
+
+	* background.c (do_background): Use pid_t instead of int.
+
+	* subshell.c (sigchld_handler): Likewise.
+
 1999-03-24  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* Makefile.in: Use mcsrclibdir where appropriate.

@@ -127,7 +127,7 @@ int
 do_background (FileOpContext *ctx, char *info)
 {
     int comm [2];		/* control connection stream */
-    int pid;
+    pid_t pid;
 
     if (socketpair (AF_UNIX, SOCK_STREAM, 0, comm) == -1)
 	return -1;

@@ -3,6 +3,7 @@
 #include <config.h>
 #include "panel.h"
 #include <gnome.h>
+#include "dialog.h"
 #include "global.h"
 #include "file.h"
 #include "filegui.h"
@@ -281,7 +282,7 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
         double perc;
 
         g_return_val_if_fail (ctx != NULL, FILE_CONT);
-        g_return_val_if_fail (total > 0, FILE_CONT);
+
         /* ctx->ui might be NULL for background processes */
         if (ctx->ui == NULL)
                 return FILE_CONT;
@@ -291,7 +292,11 @@ file_progress_show_bytes (FileOpContext *ctx, double done, double total)
         if (ui->aborting)
                 return FILE_ABORT;
 
-        perc = done / total;
+        if (total == 0.0)
+                perc = 1.0;
+        else
+                perc = done / total;
+
         gtk_progress_bar_update (GTK_PROGRESS_BAR (ui->byte_prog), CLAMP (perc, 0.0, 1.0));
 
         while (gtk_events_pending ())

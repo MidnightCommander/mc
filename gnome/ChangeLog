@@ -1,3 +1,14 @@
+1999-03-26  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* mc.keys.in: Now that the menu code uses the full filename, we do
+	not need "%d/%f" for html files.
+
+1999-03-25  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdialogs.c (file_progress_show_bytes): Total may be zero (for
+	instance, if you are copying zero-byte files).  Take this into
+	account instead of issuing a warning.
+
 1999-03-25  Jonathan Blandford  <jrb@redhat.com>
 
 	* gdesktop.c (set_background_image): now we can set the background
