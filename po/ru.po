@@ -3700,7 +3700,7 @@ msgstr "Файл: %s"
 
 #: src/view.c:828
 #, c-format
-msgid "Offset 0x%08x"
+msgid "Offset 0x%08lx"
 msgstr "Смещение 0x%08x"
 
 #: src/view.c:830
