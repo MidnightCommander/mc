@@ -119,6 +119,11 @@ struct WListbox {
     int cursor_x, cursor_y;	/* Cache the values */
 };
 
+typedef struct WGroupbox {
+    Widget widget;
+    char *title;
+} WGroupbox;
+
 typedef void (*buttonbarfn)(void *);
 
 typedef struct {
@@ -140,6 +145,7 @@ WInput  *input_new    (int y, int x, int color, int len, const char *text, char 
 WLabel  *label_new    (int y, int x, const char *text);
 WGauge  *gauge_new    (int y, int x, int shown, int max, int current);
 WListbox *listbox_new (int x, int y, int width, int height, lcback callback);
+WGroupbox *groupbox_new (int x, int y, int width, int height, char *title);
 
 /* Input lines */
 void winput_set_origin (WInput *i, int x, int field_len);

@@ -2354,3 +2354,58 @@ redraw_labels (Dlg_head *h)
     send_message ((Widget *) bb, WIDGET_DRAW, 0);
 }
 
+static int
+groupbox_callback (WGroupbox *g, int msg, int parm)
+{
+    switch (msg) {
+    case WIDGET_INIT:
+	return MSG_HANDLED;
+
+    case WIDGET_FOCUS:
+	return MSG_NOT_HANDLED;
+
+    case WIDGET_DRAW:
+	attrset (COLOR_NORMAL);
+	draw_box (g->widget.parent, g->widget.y - g->widget.parent->y,
+		  g->widget.x - g->widget.parent->x, g->widget.lines,
+		  g->widget.cols);
+
+	attrset (COLOR_HOT_NORMAL);
+	dlg_move (g->widget.parent, g->widget.y - g->widget.parent->y,
+		  g->widget.x - g->widget.parent->x + 1);
+	addstr (g->title);
+	return MSG_HANDLED;
+
+    default:
+	return default_proc (msg, parm);
+    }
+}
+
+static void
+groupbox_destroy (WGroupbox *g)
+{
+    g_free (g->title);
+}
+
+WGroupbox *
+groupbox_new (int x, int y, int width, int height, char *title)
+{
+    WGroupbox *g = g_new (WGroupbox, 1);
+
+    init_widget (&g->widget, y, x, height, width,
+		 (callback_fn) groupbox_callback,
+		 (destroy_fn) groupbox_destroy, NULL);
+
+    g->widget.options &= ~W_WANT_CURSOR;
+    widget_want_hotkey (g->widget, 0);
+
+    /* Strip existing spaces, add one space before and after the title */
+    if (title) {
+	char *t;
+	t = g_strstrip (g_strdup (title));
+	g->title = g_strconcat (" ", t, " ", NULL);
+	g_free (t);
+    }
+
+    return g;
+}

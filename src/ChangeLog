@@ -1,5 +1,8 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* widget.c: Implement new widget - groupbox.
+	* option.c: Use it.
+
 	* layout.c: Fix remaining callback calls.
 	* widget.c: Likewise.
 
