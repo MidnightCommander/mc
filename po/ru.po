@@ -1,8 +1,10 @@
 # Russian translation of Midnight Commander
-# Copyright (C) 1998-99 Free Software Foundation, Inc.
+# Copyright (C) 1998-2000 Free Software Foundation, Inc.
 #
-# Current translator Evgeny Bulgakov <bgav@netvision.net.il>, 1999.
-# Based on work of Sergey Panov <sipan@mit.edu>, 1999,
+# Current translator Andrew V. Samoilov <sav@bcs.zp.ua>, 2000
+# Based on work of Valek Filippov <frob@df.ru>, 2000
+# Evgeny Bulgakov <bgav@netvision.net.il>, 1999,
+# Sergey Panov <sipan@mit.edu>, 1999,
 # Andrew V. Samoilov <sav@bcs.zp.ua>, 1999, 
 # and Alex Tkachenko <alex@bcs.zp.ua>, 1998.
 #
@@ -13,7 +15,7 @@
 #: gtkedit/editcmd.c:2893 gtkedit/editcmd.c:2898 gtkedit/editcmd.c:2943
 msgid ""
 msgstr ""
-"Project-Id-Version: mc 4.5.50\n"
+"Project-Id-Version: mc 4.5.51\n"
 "POT-Creation-Date: 2000-06-17 19:33+0000\n"
 "PO-Revision-Date: 2000-06-17 19:35+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
@@ -143,7 +145,7 @@ msgstr "Без учета регистра"
 
 #: gnome/gcmd.c:299
 msgid "Sort files by "
-msgstr "Сортировать файлы по"
+msgstr "Сортировать файлы по "
 
 #: gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
@@ -755,7 +757,7 @@ msgstr "Специальный"
 
 #: gnome/glayout.c:51 gnome/glayout.c:67
 msgid "Switch view to show user-defined statistics"
-msgstr "Заказанное пользователем описание файлов"
+msgstr "Определенное пользователем описание файлов"
 
 #: gnome/glayout.c:57
 msgid "Icons"
@@ -1512,12 +1514,12 @@ msgstr "Очистить мусорную корзину"
 msgid "Search: %s"
 msgstr "Ищем: %s"
 
-#: gnome/gscreen.c:1663
+#: gnome/gscreen.c:1663 src/screen.c:663
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s байт в %d файле"
 
-#: gnome/gscreen.c:1663
+#: gnome/gscreen.c:1663 src/screen.c:663
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s байт в %d файлах"
@@ -2115,7 +2117,7 @@ msgstr "Закладки"
 #. Tool hint
 #: gtkedit/editcmd.c:1476 gtkedit/editcmd.c:1477
 msgid "Create bookmarks at all lines found"
-msgstr "Создать закладки для всех найденых строк"
+msgstr "Создать закладки для всех найденных строк"
 
 #: gtkedit/editcmd.c:1480
 msgid " Scanf expression "
@@ -2128,7 +2130,7 @@ msgid ""
 "see the scanf man page"
 msgstr ""
 "Позволяет задавать строку в формате языка C,\n"
-"см. руководство по команде scanf"
+"см. руководство по функции scanf"
 
 #. Tool hint
 #: gtkedit/editcmd.c:1507
@@ -5073,7 +5075,7 @@ msgstr ""
 "и подождите, пока это сообщение пропадет.\n"
 "\n"
 "Затем нажмите ее еще раз, чтобы убедиться,\n"
-"что справа от ее названия появилось 'OK'.\n"
+"что справа от ее названия появилось '√'.\n"
 "\n"
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
@@ -5089,7 +5091,7 @@ msgstr " Вы ввели \"%s\""
 
 #: src/learn.c:170
 msgid "OK"
-msgstr "Дальше"
+msgstr " √"
 
 #: src/learn.c:177
 msgid ""
@@ -5121,7 +5123,7 @@ msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
 
 #: src/learn.c:302
 msgid "which keys are not marked with OK.  Press space on the missing"
-msgstr "какие клавиши не имеют пометки OK. Для обучения клавише выберите"
+msgstr "какие клавиши не имеют пометки √. Для обучения клавише выберите"
 
 #: src/learn.c:304
 msgid "key, or click with the mouse to define it. Move around with Tab."
@@ -5583,7 +5585,7 @@ msgstr "Запрос на запуск в цветном режиме"
 
 #: src/main.c:2704
 msgid "Specifies a color configuration"
-msgstr "Определяет настройки цветов"
+msgstr "Определить настройки цветов"
 
 #: src/main.c:2709
 msgid "Edits one file"
@@ -5595,7 +5597,7 @@ msgstr "Отобразить это справочное сообщение"
 
 #: src/main.c:2716
 msgid "Displays a help screen on how to change the color scheme"
-msgstr "Отображает экран помощи о том, как изменить цветовую схему"
+msgstr "Отобразить экран помощи о том, как изменить цветовую схему"
 
 #: src/main.c:2719
 msgid "Log ftp dialog to specified file"
@@ -5623,7 +5625,7 @@ msgstr "Печатать рабочий каталог при выходе из программы"
 
 #: src/main.c:2739
 msgid "Resets soft keys on HP terminals"
-msgstr "Сбрасывает программные клавиши на терминалах HP"
+msgstr "Сбросить программные клавиши на терминалах HP"
 
 #: src/main.c:2741
 msgid "To run on slow terminals"
@@ -5862,11 +5864,11 @@ msgstr "Показать краткую инструкцию"
 
 #: src/screen.c:227
 msgid "SUB-DIR"
-msgstr "Подкаталог"
+msgstr "ПОД-КАТ"
 
 #: src/screen.c:227
 msgid "UP--DIR"
-msgstr ""
+msgstr "НАД-КАТ"
 
 #: src/screen.c:417
 msgid "MTime"
@@ -5899,16 +5901,6 @@ msgstr "UID"
 #: src/screen.c:425
 msgid "GID"
 msgstr "GID"
-
-#: src/screen.c:662
-#, c-format
-msgid "  %s bytes in %d file"
-msgstr "  %s байт в %d файле"
-
-#: src/screen.c:662
-#, c-format
-msgid "  %s bytes in %d files"
-msgstr "  %s байт в %d файлах"
 
 #: src/screen.c:1325
 msgid "Unknow tag on display format: "
@@ -6128,7 +6120,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"был модифицирован, Вы хотите сохранить изменения?\n"
+"был модифицирован, сохранить изменения?\n"
 
 #: src/view.c:406
 msgid " Save changes "
