@@ -46,9 +46,9 @@ o  This code is distributed under the GNU General Public License and
 
    The code has almost no hardcoded limits, there are a lot of ways of
    avoiding them.  For example, when you want to concatenate strings,
-   use the copy_strings functions, it is used like this:
+   use the g_strconcat functions, it is used like this:
 
-	new_text = copy_strings (username, " ", password, NULL);
+	new_text = g_strconcat (username, " ", password, NULL);
 
    This mallocs the required area, so it still needs to be freed.
 
