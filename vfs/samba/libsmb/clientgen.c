@@ -2895,7 +2895,7 @@ BOOL cli_chkpath(struct cli_state *cli, char *path)
 	pstring path2;
 	char *p;
 	
-	safe_strcpy(path2,path,sizeof(pstring));
+	safe_strcpy(path2,path,sizeof(pstring)-1);
 	trim_string(path2,NULL,"\\");
 	if (!*path2) *path2 = '\\';
 	
