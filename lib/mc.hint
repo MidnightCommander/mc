@@ -30,7 +30,6 @@ Hint: Bring text back from the dead with C-y.
 Hint: Are some of your keys not working? Look at Options/Learn keys.
 Hint: To look at the output of a command in the viewer, use M-!
 Hint: F13 (or Shift-F3) invokes the viewer in raw mode.
-Hint: Keys not working in xterms? Use our xterm.ad, .ti and .tcap files.
 Hint: You may specify the editor for F4 with the shell variable EDITOR.
 Hint: You may specify the external viewer with the shell variable PAGER.
 Hint: You can disable all requests for confirmation in Options/Confirmation.

@@ -32,7 +32,6 @@ Ayudita: Con C-y puede recuperar texto eliminado.
 Ayudita: ¿Alguna tecla rebelde? Puede educarla con "Redefinir teclas".
 Ayudita: Para ver la salida de una orden por el visor M-!
 Ayudita: F13 (o Mayúsculas-F3) invoca el visor en modo primitivo, sin formatos.
-Ayudita: ¿Problemas de teclas en terminales X? Use xterm.ad, .ti y .tcap
 Ayudita: F4 puede usar cualquier editor que indiquemos en la variable EDITOR.
 Ayudita: Se puede usar un visor externo indicado en la variable PAGER.
 Ayudita: Para deshabilitar los mensajes de Confirmación vaya al menú Opciones.

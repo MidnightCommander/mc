@@ -29,7 +29,6 @@ Poznámka: Pøíkazy shellu nefungují, pokud nepracujete na lokální systému souborù
 Tip: Smazaný text obnovíte C-y.
 Tip: Pokud nìkteré klávesy nefungují, pou¾ijte menu Nastavení/uèení kláves.
 Tip: F13 (nebo Shift-F3) vyvolá prohlí¾ení bez zpracování obsahu souboru.
-Tip: Pokud v xtermu nepracují klávesy, zkuste soubory xterm.ad, .ti a .tcap.
 Tip: Editor pro klávesu F4 urèíte pomocí promìnné prostøedí EDITOR.
 Tip: Externí prohlí¾eè urèíte promìnnou PAGER.
 Tip: V¹echny ¾ádosti o potvrzení mù¾ete zakázat v Nastavení/Potvrzování.

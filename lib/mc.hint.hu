@@ -31,7 +31,6 @@ Tipp: A pufferben levõ (például "C-k"-val oda tett) szöveg visszahozása: C-y
 Tipp: Ha nem mûködnek bizonyos billentyûk: "Beállítások/Billentyûk megtanulása".
 Tipp: Egy parancs kimenetének megjelenítése a fájlmegjelenítõben: M-!
 Tipp: Az F13 (vagy Shift-F3) a fájlmegjelenítõt "nyers" módban indítja el.
-Tipp: X-terminálon nem mûködõ billentyûk? Lásd "xterm.ad", ".ti", ".tcap" fájlok.
 Tipp: Az F4-re használandó szerkesztõt az EDITOR shell-változóval lehet megadni.
 Tipp: A külsõ fájlmegjelenítõt a PAGER shell-változóval lehet megadni.
 Tipp: Az összes megerõsítéskérés kikapcsolható: "Beállítások/Megerõsítés".

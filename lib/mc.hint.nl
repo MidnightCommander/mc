@@ -31,7 +31,6 @@ Hint: Laat tekst herleven met C-y.
 Hint: Werken sommige toetsen niet? Kijk naar Opties/Leer toetsen.
 Hint: Om naar de uitvoer van een commando in d viewer te kijken, drukke men M-!
 Hint: F13 (of Shift-F3) roept de viewer aan in ruwe modus.
-Hint: Werken toetsen in xterms niet? Gebruik onze xterm.ad, .ti en .tcap!
 Hint: Je kunt een editor onder F4 specificeren met de shell variabele EDITOR.
 Hint: Je kunt een externe viewer specificeren met de shell variabele PAGER.
 Hint: Je kunt alle aanvragen voor bevestiging instellen in Opties/Bevestiging.

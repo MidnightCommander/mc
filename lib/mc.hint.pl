@@ -31,7 +31,6 @@ Porada: Przywróæ skasowany tekst za pomoc± C-y.
 Porada: Niektóre klawisze nie dzia³aj±? Patrz menu Opcje|Definiuj klawisze...
 Porada: Aby obejrzeæ wyj¶cie polecenia w przegl±darce u¿yj M-!
 Porada: F13 (lub Shift-F3) wywo³uje przegl±darkê w trybie surowym.
-Porada: Nie dzia³aj± klawisze w xterm? U¿yj naszych plików xterm.ad, .ti i .tcap
 Porada: Mo¿esz okre¶liæ edytor pod F4 przez zmienn± pow³oki EDITOR.
 Porada: Mo¿esz okre¶liæ zewnêtrzn± przegl±darkê przez zmienn± pow³oki PAGER.
 Porada: Mo¿esz wy³±czyæ ¿±dania potwierdzenia przez menu Opcje|Potwierdzanie...
