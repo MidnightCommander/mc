@@ -1,3 +1,7 @@
+2001-08-16  Pavel Roskin  <proski@gnu.org>
+
+	* ru.po: Update. Translate every message.
+
 2001-08-12  Pavel Roskin  <proski@gnu.org>
 
 	* POTFILES.in: Remove gnome/gmc-window.c.

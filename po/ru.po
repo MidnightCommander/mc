@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.51\n"
-"POT-Creation-Date: 2001-08-12 00:01-0400\n"
+"POT-Creation-Date: 2001-08-16 18:27-0400\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <sav@bcs.zp.ua>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -1799,7 +1799,7 @@ msgstr "прекратить"
 #: gtkedit/edit.c:348 gtkedit/edit.c:380 gtkedit/edit.c:386 gtkedit/edit.c:393
 #: gtkedit/edit.c:400 gtkedit/edit.c:406 gtkedit/editcmd.c:327
 #: gtkedit/editcmd.c:333 gtkedit/editcmd.c:2090 gtkedit/editwidget.c:1024
-#: src/dir.c:396 src/wtools.c:216
+#: src/dir.c:427 src/wtools.c:216
 msgid " Error "
 msgstr " Ошибка "
 
@@ -1843,7 +1843,7 @@ msgstr ""
 msgid "User menu available only in mcedit invoked from mc"
 msgstr "Меню пользователя доступно только в mcedit, запущенном из mc"
 
-#: gtkedit/edit.c:2801 gtkedit/editcmd.c:3020
+#: gtkedit/edit.c:2804 gtkedit/editcmd.c:3020
 msgid "Error trying to stat file:"
 msgstr "Ошибка получения атрибутов файла:"
 
@@ -2427,8 +2427,8 @@ msgstr ""
 "               Создан для Midnight Commander.\n"
 
 #: gtkedit/editmenu.c:128 gtkedit/editmenu.c:147
-msgid "&Open/load...     C-o"
-msgstr "&Открыть файл...      C-o"
+msgid "&Open file..."
+msgstr "&Открыть файл..."
 
 #: gtkedit/editmenu.c:129
 msgid "&New              C-n"
@@ -2452,7 +2452,7 @@ msgstr "&Копировать в файл... C-f"
 
 #: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
 msgid "&User menu...     F11"
-msgstr "&Меню пользователя...     F11"
+msgstr "&Меню пользователя... F11"
 
 #: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
 msgid "a&Bout...            "
@@ -2512,7 +2512,7 @@ msgstr "&Поиск...          F7"
 
 #: gtkedit/editmenu.c:201 gtkedit/editmenu.c:208
 msgid "search &Again     F17"
-msgstr "Продолжить поиск  F17"
+msgstr "П&родолжить поиск F17"
 
 #: gtkedit/editmenu.c:202 gtkedit/editmenu.c:209
 msgid "&Replace...        F4"
@@ -2524,7 +2524,7 @@ msgstr "&Перейти к строке           M-l"
 
 #: gtkedit/editmenu.c:215 gtkedit/editmenu.c:238
 msgid "goto matching &Bracket   M-b"
-msgstr "перейти к парной скобке    M-b"
+msgstr "Перейти к парной ско&бке    M-b"
 
 #: gtkedit/editmenu.c:217 gtkedit/editmenu.c:240
 msgid "insert &Literal...       C-q"
@@ -2568,7 +2568,7 @@ msgstr "&Сортировка                 M-t"
 
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
 msgid "E&xternal Formatter      F19"
-msgstr "Внешняя программа форматирования  F19"
+msgstr "&Форматирование             F19"
 
 #: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
@@ -3275,7 +3275,12 @@ msgstr "&Снять"
 msgid "Background Jobs"
 msgstr " Фоновые задания "
 
-#: src/charsets.c:173 src/charsets.c:186
+#: src/charsets.c:33 vfs/extfs.c:1337 vfs/sfs.c:301
+#, c-format
+msgid "Warning: file %s not found\n"
+msgstr "Предупреждение: файл %s не найден\n"
+
+#: src/charsets.c:174 src/charsets.c:187
 #, c-format
 msgid "Cannot translate from %s to %s"
 msgstr "Невозможно перекодировать из %s в %s"
@@ -3761,12 +3766,12 @@ msgstr "&Владелец"
 msgid "&Group"
 msgstr "&Группа"
 
-#: src/dir.c:396
+#: src/dir.c:427
 #, c-format
 msgid "File '%s' exists but can not be stat-ed: %s"
 msgstr "Файл '%s' существует, но невозможно получить свойства: %s"
 
-#: src/dir.c:667
+#: src/dir.c:698
 msgid "Unknown"
 msgstr "Неизвестный"
 
@@ -4840,7 +4845,7 @@ msgstr "Права д&оступа"
 msgid "&File types"
 msgstr "Типы &файлов"
 
-#: src/layout.c:371 src/learn.c:60 src/learn.c:177 src/option.c:137
+#: src/layout.c:371 src/learn.c:60 src/learn.c:183 src/option.c:137
 msgid "&Save"
 msgstr "&Сохранить"
 
@@ -4898,20 +4903,20 @@ msgstr ""
 "Если вы хотите прервать обучение, нажмите\n"
 "клавишу Esc и тоже немного подождите."
 
-#: src/learn.c:120
+#: src/learn.c:126
 msgid " Cannot accept this key "
 msgstr " Невозможно принять эту клавишу "
 
-#: src/learn.c:121
+#: src/learn.c:127
 #, c-format
 msgid " You have entered \"%s\""
 msgstr " Вы ввели \"%s\""
 
-#: src/learn.c:168
+#: src/learn.c:174
 msgid "OK"
 msgstr " √"
 
-#: src/learn.c:175
+#: src/learn.c:181
 msgid ""
 "It seems that all your keys already\n"
 "work fine. That's great."
@@ -4919,11 +4924,11 @@ msgstr ""
 "Похоже, что все Ваши клавиши теперь\n"
 "работают нормально. Просто здорово."
 
-#: src/learn.c:177
+#: src/learn.c:183
 msgid "&Discard"
 msgstr "Отменить"
 
-#: src/learn.c:181
+#: src/learn.c:187
 msgid ""
 "Great! You have a complete terminal database!\n"
 "All your keys work well."
@@ -4931,19 +4936,19 @@ msgstr ""
 "Отлично! У вас есть полная база описаний терминалов!\n"
 "Все ваши клавиши работают хорошо."
 
-#: src/learn.c:265
+#: src/learn.c:271
 msgid "Learn keys"
 msgstr "Распознавание клавиш"
 
-#: src/learn.c:298
+#: src/learn.c:304
 msgid "Press all the keys mentioned here. After you have done it, check"
 msgstr "Нажмите все перечисленные выше клавиши. После нажатий найдите,"
 
-#: src/learn.c:300
+#: src/learn.c:306
 msgid "which keys are not marked with OK.  Press space on the missing"
 msgstr "какие клавиши не имеют пометки √. Для обучения клавише выберите"
 
-#: src/learn.c:302
+#: src/learn.c:308
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
@@ -5244,15 +5249,15 @@ msgstr ""
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
-#: src/main.c:1929
+#: src/main.c:1934
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Благодарим Вас за использование GNU Midnight Commander"
 
-#: src/main.c:2372
+#: src/main.c:2377
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
-#: src/main.c:2477
+#: src/main.c:2482
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5264,20 +5269,20 @@ msgstr ""
 "mc [флаги] [этот_каталог] [каталог_другой_панели]\n"
 "\n"
 
-#: src/main.c:2480
+#: src/main.c:2485
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr ""
 "-a, --stickchars   Принудительно использовать +, -, | для рисования линий.\n"
 
-#: src/main.c:2482
+#: src/main.c:2487
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Использовать черно-белое изображение.\n"
 
-#: src/main.c:2484
+#: src/main.c:2489
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [ТОЛЬКО для РАЗРАБОТЧИКОВ: Отладка фонового кода]\n"
 
-#: src/main.c:2486
+#: src/main.c:2491
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5288,11 +5293,11 @@ msgstr ""
 "список).\n"
 "-d, --nomouse      Отключить поддержку мыши.\n"
 
-#: src/main.c:2490
+#: src/main.c:2495
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Запуск встроенного редактора.\n"
 
-#: src/main.c:2492
+#: src/main.c:2497
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5305,16 +5310,16 @@ msgstr ""
 "-k, --resetsoft    Сбросить программируемые клавиши (только HP-терминалы)\n"
 "                   до исходных terminfo/termcap значений.\n"
 
-#: src/main.c:2497
+#: src/main.c:2502
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog файл  Записывать команды ftpfs в файл.\n"
 
-#: src/main.c:2500
+#: src/main.c:2505
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr ""
 "-M, --memory файл  [ТОЛЬКО для РАЗРАБОТЧИКОВ: Запись сообщений MAD в файл.]\n"
 
-#: src/main.c:2502
+#: src/main.c:2507
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5323,18 +5328,18 @@ msgstr ""
 "-s, --slow         Отключить многословные операции (для медленных "
 "терминалов).\n"
 
-#: src/main.c:2505
+#: src/main.c:2510
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Активировать поддержку переменной TERMCAP.\n"
 
-#: src/main.c:2508
+#: src/main.c:2513
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Создать командный файл для установки каталога по "
 "умолчанию после выхода.\n"
 
-#: src/main.c:2511
+#: src/main.c:2516
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5344,7 +5349,7 @@ msgstr ""
 "-U, --subshell     Принудительно использовать дочерний интерпретатор.\n"
 "-r, --forceexec    Принудительное исполнение в дочернем интерпретаторе.\n"
 
-#: src/main.c:2515
+#: src/main.c:2520
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5357,11 +5362,11 @@ msgstr ""
 "экрана.\n"
 "+число             число - номер начальной строки для редактора.\n"
 
-#: src/main.c:2520
+#: src/main.c:2525
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [Отладка дочернего интерпретатора.\n"
 
-#: src/main.c:2522
+#: src/main.c:2527
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5371,7 +5376,7 @@ msgstr ""
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-devel@gnome.org\n"
 
-#: src/main.c:2537
+#: src/main.c:2542
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5391,123 +5396,140 @@ msgid ""
 "   brightcyan, lightgray and white\n"
 "\n"
 msgstr ""
+"--colors {КЛЮЧЕВОЕ СЛОВО}={ТЕКСТ},{ФОН}\n"
+"\n"
+"{ТЕКСТ} и {ФОН} можно опустить, чтобы использовать значение по умолчанию\n"
+"\n"
+"Ключевые слова:\n"
+"   Общие:        errors, reverse, gauge, input\n"
+"   Панели:       normal, selected, marked, markselect\n"
+"   Диалоги:      dnormal, dfocus, dhotnormal, dhotfocus\n"
+"   Меню:         menu, menuhot, menusel, menuhotsel\n"
+"   Справка:      helpnormal, helpitalic, helplink, helpslink\n"
+"   Типы файлов:  directory, execute, link, device, special, core\n"
+"\n"
+"Цвета:\n"
+"   black, gray, red, brightred, green, brightgreen, brown,\n"
+"   yellow, blue, brightblue, magenta, brightmagenta, cyan,\n"
+"   brightcyan, lightgray, white\n"
+"\n"
 
-#: src/main.c:2589
+#: src/main.c:2594
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Библиотечный каталог Midnight Commander: %s\n"
 
-#: src/main.c:2603
+#: src/main.c:2608
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "Ключ -m устарел. Пожалуйста взгляните на `Биты символов' в меню Настройки\n"
 
-#: src/main.c:2662
+#: src/main.c:2667
 msgid "Use to debug the background code"
 msgstr "Использовать для отладки фонового кода"
 
-#: src/main.c:2668
+#: src/main.c:2673
 msgid "Request to run in color mode"
 msgstr "Запрос на запуск в цветном режиме"
 
-#: src/main.c:2670
+#: src/main.c:2675
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
-#: src/main.c:2675
+#: src/main.c:2680
 msgid "Edits one file"
 msgstr "Редактирует один файл"
 
-#: src/main.c:2679
+#: src/main.c:2684
 msgid "Displays this help message"
 msgstr "Отобразить это справочное сообщение"
 
-#: src/main.c:2682
+#: src/main.c:2687
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Отобразить экран помощи о том, как изменить цветовую схему"
 
-#: src/main.c:2685
+#: src/main.c:2690
 msgid "Log ftp dialog to specified file"
 msgstr "Протоколировать диалог с FTP в определенный файл"
 
-#: src/main.c:2692
+#: src/main.c:2697
 msgid "Obsolete"
 msgstr "Устаревшее"
 
-#: src/main.c:2694
+#: src/main.c:2699
 msgid "Requests to run in black and white"
 msgstr "Запрос на запуск в черно-белом режиме"
 
-#: src/main.c:2696
+#: src/main.c:2701
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
-#: src/main.c:2699
+#: src/main.c:2704
 msgid "Disables subshell support"
 msgstr "Отключить поддержку встроенной командной оболочки"
 
-#: src/main.c:2703
+#: src/main.c:2708
 msgid "Prints working directory at program exit"
 msgstr "Печатать рабочий каталог при выходе из программы"
 
-#: src/main.c:2705
+#: src/main.c:2710
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#: src/main.c:2707
+#: src/main.c:2712
 msgid "To run on slow terminals"
 msgstr "Запуск на медленных терминалах"
 
-#: src/main.c:2710
+#: src/main.c:2715
 msgid "Use stickchars to draw"
 msgstr "Псевдографика для рисования"
 
-#: src/main.c:2714
+#: src/main.c:2719
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
-#: src/main.c:2719
+#: src/main.c:2724
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Попытаться использовать termcap вместо terminfo"
 
-#: src/main.c:2723
+#: src/main.c:2728
 msgid "Displays the current version"
 msgstr "Отобразить текущую версию"
 
-#: src/main.c:2725
+#: src/main.c:2730
 msgid "Launches the file viewer on a file"
 msgstr "Запускает программу просмотра для файла"
 
-#: src/main.c:2727
+#: src/main.c:2732
 msgid "Forces xterm features"
 msgstr "Навязывает свойства xterm"
 
-#: src/main.c:2729
+#: src/main.c:2734
 msgid "Geometry for the window"
 msgstr "Геометрия окна"
 
-#: src/main.c:2729
+#: src/main.c:2734
 msgid "GEOMETRY"
 msgstr "ГЕОМЕТРИЯ"
 
-#: src/main.c:2730
+#: src/main.c:2735
 msgid "No windows opened at startup"
 msgstr "Нет открытых окон при загрузке"
 
-#: src/main.c:2731
+#: src/main.c:2736
 msgid "No desktop icons"
 msgstr "Нет пиктограмм рабочего стола"
 
-#: src/main.c:2732
+#: src/main.c:2737
 msgid "Look more like traditional gmc"
 msgstr "Более похожий на традиционный gmc вид."
 
-#: src/main.c:2734
+#: src/main.c:2739
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Показать каталог с .ссылками стартовых файлов и выйти"
 
-#: src/main.c:3057
+#: src/main.c:3062
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5515,11 +5537,11 @@ msgstr ""
 "Невозможно открыть tty линию. Вы должны запустить mc без флага -P.\n"
 "На некоторых системах вы можете захотеть запустить # `which mc`\n"
 
-#: src/main.c:3144
+#: src/main.c:3149
 msgid " Notice "
 msgstr " Предупреждение "
 
-#: src/main.c:3145
+#: src/main.c:3150
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5773,13 +5795,15 @@ msgstr " Выберите кодировку ввода "
 
 #: src/selcodepage.c:37
 msgid "-  < No translation >"
-msgstr ""
+msgstr "-  < Без перекодировки >"
 
 #: src/selcodepage.c:75
 msgid ""
 "Midnight Commander was compiled without iconv support,\n"
 "so charsets recoding feature is not available!"
 msgstr ""
+"Midnight Commander был скомпилирован без поддержки iconv,\n"
+"поэтому поддержка перекодировки отсутствует!"
 
 #: src/selcodepage.c:92
 msgid ""
@@ -5787,11 +5811,9 @@ msgid ""
 "Setup / Display Bits dialog!\n"
 "Do not forget to save options."
 msgstr ""
-
-#: src/setup.c:654
-#, c-format
-msgid "Cannot load %s/%s"
-msgstr "Невозможно загрузить %s/%s"
+"Чтобы использовать перекодировку, установите\n"
+"кодировку в меню Настройки / Биты символов...!\n"
+"Не забудте сохранить настройки."
 
 #: src/slint.c:199
 #, c-format
@@ -5799,6 +5821,8 @@ msgid ""
 "Screen size %dx%d is not supported.\n"
 "Check the TERM environment variable.\n"
 msgstr ""
+"Размер экрана %dx%d не поддерживается.\n"
+"Проверьте переменную окружения TERM.\n"
 
 #: src/subshell.c:451
 #, c-format
@@ -5867,12 +5891,12 @@ msgid "With builtin Editor\n"
 msgstr "Со встроенным редактором\n"
 
 #: src/textconf.c:47
-msgid "Using S-Lang library"
-msgstr "Использует библиотеку S-Lang"
-
-#: src/textconf.c:49
 msgid "Using system-installed S-Lang library"
 msgstr "Использует установленную в системе библиотеку S-Lang"
+
+#: src/textconf.c:49
+msgid "Using S-Lang library"
+msgstr "Использует библиотеку S-Lang"
 
 #: src/textconf.c:55
 msgid "with terminfo database"
@@ -5921,7 +5945,7 @@ msgstr "С поддержкой многих кодировок\n"
 #: src/textconf.c:101
 #, c-format
 msgid "GNU Midnight Commander %s\n"
-msgstr ""
+msgstr "GNU Midnight Commander, версия %s\n"
 
 #: src/tree.c:194
 #, c-format
@@ -6516,24 +6540,11 @@ msgstr ""
 msgid "Dir cache expired for %s"
 msgstr "Кэш каталога устарел для %s"
 
-#: vfs/direntry.c:433 vfs/direntry.c:436
-msgid " Direntry warning "
-msgstr "Предупреждение строки каталога"
-
-#: vfs/direntry.c:433
-#, c-format
-msgid "Super ino_usage is %d, memory leak"
-msgstr "Super ino_usage -- %d, утечка памяти"
-
-#: vfs/direntry.c:436
-msgid "Super has want_stale set"
-msgstr ""
-
-#: vfs/direntry.c:818
+#: vfs/direntry.c:820
 msgid "Starting linear transfer..."
 msgstr "Запуск линейной передачи..."
 
-#: vfs/direntry.c:962
+#: vfs/direntry.c:964
 msgid "Getting file"
 msgstr "Получение файла"
 
@@ -6827,11 +6838,6 @@ msgstr "Невозможно соединиться с сервером: %s "
 msgid " Too many open connections "
 msgstr " Слишком много открытых соединений "
 
-#: vfs/sfs.c:301
-#, c-format
-msgid "Warning: file %s not found\n"
-msgstr "Предупреждение: файл %s не найден\n"
-
 #: vfs/sfs.c:329
 #, c-format
 msgid ""
@@ -7010,7 +7016,7 @@ msgstr " Вы должны сначала сменить каталог чтобы извлечь файлы "
 
 #: vfs/undelfs.c:521
 msgid " while iterating over blocks "
-msgstr ""
+msgstr " при переборе блоков "
 
 #: vfs/undelfs.c:626
 #, c-format
