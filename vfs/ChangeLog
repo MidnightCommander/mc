@@ -1,3 +1,7 @@
+2002-01-22  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* ftpfs.c (ftpfs_chmod): Add missed '/'.
+
 2002-01-21  Pavel Roskin  <proski@gnu.org>
 
 	* vfs.h: Remove all tricks with system headers, they all should
@@ -103,7 +107,8 @@
 	Use "%4o" for st_mode.
 	(fake_server_stat): Likewise.  Return -1 if server_list != True.
 
-	(get_master_browser): Declare ipzero extern. By drk@sgi.com.
+	(get_master_browser): Declare ipzero extern.
+	By David Kaelbling <drk@sgi.com>.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60933
 
 	* cpio.c (cpio_read_bin_head): Release name if mc_read fails.
@@ -112,7 +117,8 @@
 2001-10-25  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* cpio.c (cpio_read_crc_head): Fix buffer overflow.
-	(cpio_read_oldc_head): Likewise. By drk@sgi.com.
+	(cpio_read_oldc_head): Likewise.
+	By David Kaelbling <drk@sgi.com>.
 	http://bugzilla.gnome.org/show_bug.cgi?id=60933
 
 	* (cpio_read_oldc_head): Release name if mc_read fails.

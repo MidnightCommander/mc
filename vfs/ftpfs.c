@@ -1520,7 +1520,7 @@ static int ftpfs_chmod (vfs *me, char *path, int mode)
 {
     char buf[BUF_SMALL];
     
-    g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o %%s", mode & 07777);
+    g_snprintf(buf, sizeof(buf), "SITE CHMOD %4.4o /%%s", mode & 07777);
     return send_ftp_command(me, path, buf, OPT_IGNORE_ERROR | OPT_FLUSH);
 }
 
