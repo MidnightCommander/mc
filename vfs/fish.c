@@ -273,7 +273,7 @@ fish_open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
      */
     if (fish_command
 	(me, super, WAIT_REPLY,
-	 "#FISH\necho; start_fish_server 2>&1;" " echo '### 200'\n") !=
+	 "#FISH\necho; start_fish_server 2>&1; echo '### 200'\n") !=
 	COMPLETE)
 	ERRNOR (E_PROTO, -1);
 
@@ -686,7 +686,7 @@ fish_send_command(struct vfs_class *me, struct vfs_s_super *super, char *cmd, in
 {
     int r;
 
-    r = fish_command (me, super, WAIT_REPLY, cmd);
+    r = fish_command (me, super, WAIT_REPLY, "%s", cmd);
     vfs_stamp_create (&vfs_fish_ops, super);
     if (r != COMPLETE) ERRNOR (E_REMOTE, -1);
     if (flags & OPT_FLUSH)

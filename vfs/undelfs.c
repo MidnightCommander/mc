@@ -354,7 +354,7 @@ static void *
 undelfs_readdir(void *vfs_info)
 {
     static union vfs_dirent undelfs_readdir_data;
-    char *dirent_dest;
+    static char *const dirent_dest = undelfs_readdir_data.dent.d_name;
 
     if (vfs_info != fs) {
 	message (1, undelfserr, _(" vfs_info is not fs! "));
@@ -362,9 +362,8 @@ undelfs_readdir(void *vfs_info)
     }
     if (readdir_ptr == num_delarray)
 	return NULL;
-    dirent_dest = undelfs_readdir_data.dent.d_name;
     if (readdir_ptr < 0)
-	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%s",
+	g_snprintf(dirent_dest, MC_MAXPATHLEN,
 		   readdir_ptr == -2 ? "." : "..");
     else
 	g_snprintf(dirent_dest, MC_MAXPATHLEN, "%ld:%d",
