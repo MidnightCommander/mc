@@ -229,7 +229,7 @@ WEdit *edit_init (WEdit * edit, int lines, int columns, const char *filename, co
 #endif
     if (!edit) {
 	edit = malloc (sizeof (WEdit));
-	memset (edit, 0, sizeof (sizeof (WEdit)));
+	memset (edit, 0, sizeof (WEdit));
 	to_free = 1;
     }
     if (!edit) {
