@@ -1,3 +1,8 @@
+1999-01-07  Jonathan Blandford  <jrb@redhat.com>
+
+	* gscreen.c (x_create_panel): now uses gnome-appbar instead of the
+	old, psuedo status bar.
+
 1999-01-06  Jonathan Blandford  <jrb@redhat.com>
 
 	* gcmd.c (gnome_external_panelize): Now it works.  Just need to save

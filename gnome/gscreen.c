@@ -1572,13 +1572,14 @@ show_filter_popup (GtkWidget *button, gpointer data)
 void
 display_mini_info (WPanel *panel)
 {
-	GtkLabel *label = GTK_LABEL (panel->ministatus);
+	GnomeAppBar *bar = GNOME_APPBAR (panel->ministatus);
 
 	if (panel->searching) {
 		char *buf;
 
 		buf = g_strdup_printf (_("Search: %s"), panel->search_buffer);
-		gtk_label_set (label, buf);
+		gnome_appbar_pop (bar);
+		gnome_appbar_push (bar, buf);
 		g_free (buf);
 		return;
 	}
@@ -1589,7 +1590,8 @@ display_mini_info (WPanel *panel)
 		buf = g_strdup_printf ((panel->marked == 1) ? _("%s bytes in %d file") : _("%s bytes in %d files"),
 				       size_trunc_sep (panel->total),
 				       panel->marked);
-		gtk_label_set (label, buf);
+		gnome_appbar_pop (bar);
+		gnome_appbar_push (bar, buf);
 		g_free (buf);
 		return;
 	}
@@ -1606,10 +1608,13 @@ display_mini_info (WPanel *panel)
 			link_target [len] = 0;
 			/* FIXME: Links should be handled differently */
 			/* str = copy_strings ("-> ", link_target, NULL); */
-			gtk_label_set (label, " ");
-			   /*free (str); */
-		} else
-			gtk_label_set (label, _("<readlink failed>"));
+			gnome_appbar_pop (bar);
+			gnome_appbar_push (bar, " ");
+			/*free (str); */
+		} else {
+			gnome_appbar_pop (bar);
+			gnome_appbar_push (bar, _("<readlink failed>"));
+		}
 		return;
 	}
 
@@ -1620,12 +1625,14 @@ display_mini_info (WPanel *panel)
 		buffer = xmalloc (len + 2, "display_mini_info");
 		format_file (buffer, panel, panel->selected, panel->estimated_total-2, 0, 1);
 		buffer [len] = 0;
-		gtk_label_set (label, buffer);
+		gnome_appbar_pop (bar);
+		gnome_appbar_push (bar, buffer);
 		free (buffer);
 	}
 	if (panel->list_type == list_icons){
 		if (panel->marked == 0){
-			gtk_label_set (label, " ");
+			gnome_appbar_pop (bar);
+			gnome_appbar_push (bar, " ");
 		}
 	}
 }
@@ -2253,20 +2260,23 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * ministatus
 	 */
+	panel->ministatus = GNOME_APPBAR(gnome_appbar_new(FALSE, TRUE, GNOME_PREFERENCES_USER));
+	gnome_app_set_statusbar(GNOME_APP (panel->xwindow), GTK_WIDGET(panel->ministatus));
+#if 0
 	panel->ministatus = gtk_label_new (" "); /* was a cliplabel */
 	gtk_widget_set_usize (panel->ministatus, 0, -1);
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
 	gtk_widget_show (panel->ministatus);
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
-
 	/*
 	 * The statusbar
 	 * This status bar now holds the  ministatus.
 	 */
+
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_set_border_width (GTK_CONTAINER (frame), 3);
+	gtk_container_set_border_width (GTK_CONTAINER (frame), 0);
 
 	panel->status = gtk_label_new (""); /* used to be a cliplabel */
 
@@ -2278,6 +2288,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
 	gtk_widget_show_all (frame);
 
+#endif 
 
 	panel->view_table = gtk_table_new (1, 1, 0);
 	gtk_widget_show (panel->view_table);
@@ -2328,10 +2339,10 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
 			  0, 0, 0);
 
-#endif
 	gtk_table_attach (GTK_TABLE (panel->table), frame, 0, 1, 3, 4,
 			  GTK_EXPAND | GTK_FILL,
 			  0, 0, 0);
+#endif
 
 	/* Ultra nasty hack: pull the vbox from wdata */
 	vbox =  GTK_WIDGET (panel->widget.wdata);
