@@ -1,4 +1,4 @@
-lsrcdir = @srcdir@
+srcdir = @srcdir@
 VPATH  = @srcdir@
 
 rootdir = $(srcdir)
