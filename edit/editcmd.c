@@ -1765,13 +1765,10 @@ edit_replace_cmd (WEdit *edit, int again)
 {
     static regmatch_t pmatch[NUM_REPL_ARGS];
     /* 1 = search string, 2 = replace with, 3 = argument order */
-    static char *saved1 = NULL; /* saved default[123] */
+    static char *saved1 = NULL;	/* saved default[123] */
     static char *saved2 = NULL;
     static char *saved3 = NULL;
-    char *default1 = NULL; /* default values */
-    char *default2 = NULL;
-    char *default3 = NULL;
-    char *input1 = NULL; /* user input from the dialog */
+    char *input1 = NULL;	/* user input from the dialog */
     char *input2 = NULL;
     char *input3 = NULL;
     int replace_yes;
@@ -1791,24 +1788,25 @@ edit_replace_cmd (WEdit *edit, int again)
 
     edit->force |= REDRAW_COMPLETELY;
 
-    default1 = g_strdup (saved1 ? saved1 : "");
-    default2 = g_strdup (saved2 ? saved2 : "");
-    default3 = g_strdup (saved3 ? saved3 : "");
+    if (again && !saved1 && !saved2)
+	again = 0;
 
     if (again) {
-	if (saved1 == NULL || saved2 == NULL)
-	    goto cleanup;
+	input1 = g_strdup (saved1 ? saved1 : "");
+	input2 = g_strdup (saved2 ? saved2 : "");
+	input3 = g_strdup (saved3 ? saved3 : "");
     } else {
-	char *disp1 = g_strdup (default1);
-	char *disp2 = g_strdup (default2);
-	char *disp3 = g_strdup (default3);
+	char *disp1 = g_strdup (saved1 ? saved1 : "");
+	char *disp2 = g_strdup (saved2 ? saved2 : "");
+	char *disp3 = g_strdup (saved3 ? saved3 : "");
 
 	convert_to_display (disp1);
 	convert_to_display (disp2);
 	convert_to_display (disp3);
 
 	edit_push_action (edit, KEY_PRESS + edit->start_display);
-	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2, &input3);
+	edit_replace_dialog (edit, disp1, disp2, disp3, &input1, &input2,
+			     &input3);
 
 	g_free (disp1);
 	g_free (disp2);
@@ -1819,16 +1817,16 @@ edit_replace_cmd (WEdit *edit, int again)
 	convert_from_input (input3);
 
 	treplace_prompt = replace_prompt;
-    }
+	if (input1 == NULL || *input1 == '\0') {
+	    edit->force = REDRAW_COMPLETELY;
+	    goto cleanup;
+	}
 
-    if (input1 == NULL || *input1 == '\0') {
-	edit->force = REDRAW_COMPLETELY;
-	goto cleanup;
-    }
+	g_free (saved1), saved1 = g_strdup (input1);
+	g_free (saved2), saved2 = g_strdup (input2);
+	g_free (saved3), saved3 = g_strdup (input3);
 
-    g_free (saved1), saved1 = g_strdup (input1);
-    g_free (saved2), saved2 = g_strdup (input2);
-    g_free (saved3), saved3 = g_strdup (input3);
+    }
 
     {
 	const char *s;
@@ -1961,7 +1959,9 @@ edit_replace_cmd (WEdit *edit, int again)
 			    sargs[k - 1][0] = 0;
 		    }
 		    if (!ret)
-			ret = snprintf_p (repl_str, MAX_REPL_LEN + 2, input2, PRINTF_ARGS);
+			ret =
+			    snprintf_p (repl_str, MAX_REPL_LEN + 2, input2,
+					PRINTF_ARGS);
 		    if (ret >= 0) {
 			times_replaced++;
 			while (i--)
@@ -1970,8 +1970,10 @@ edit_replace_cmd (WEdit *edit, int again)
 			    edit_insert (edit, repl_str[i]);
 		    } else {
 			edit_error_dialog (_(" Replace "),
-					   ret == -2
-					   ? _(" Error in replacement format string. ")
+					   ret ==
+					   -2 ?
+					   _
+					   (" Error in replacement format string. ")
 					   : _(" Replacement too long. "));
 			replace_continue = 0;
 		    }
@@ -2012,10 +2014,7 @@ edit_replace_cmd (WEdit *edit, int again)
 
     edit->force = REDRAW_COMPLETELY;
     edit_scroll_screen_over_cursor (edit);
-cleanup:
-    g_free (default1);
-    g_free (default2);
-    g_free (default3);
+  cleanup:
     g_free (input1);
     g_free (input2);
     g_free (input3);

@@ -1,3 +1,8 @@
+2005-03-17  Pavel Roskin  <proski@gnu.org>
+
+	* editcmd.c (edit_replace_cmd): Restore correct behavior of
+	Shift-F4.
+
 2005-02-22  Roland Illig  <roland.illig@gmx.de>
 
 	* edit.h: Removed unnecessary #include directives ...
@@ -7,7 +12,7 @@
 
 	* editdraw.c: Renamed redraw_labels to buttonbar_redraw.
 	* editwidget.c: Likewise. Renamed define_label_data to
-	buttonbar_set_label_data. 
+	buttonbar_set_label_data.
 
 2005-02-08  Roland Illig  <roland.illig@gmx.de>
 
