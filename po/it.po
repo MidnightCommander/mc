@@ -111,9 +111,8 @@ msgid " There is no other panel to compare contents to "
 msgstr " Non esistono altri pannelli per il confronto "
 
 #: gnome/gcmd.c:85
-#, fuzzy
 msgid " Could not start a terminal "
-msgstr " Non posso creare il link fisico "
+msgstr " Non posso eseguire un terminale "
 
 #: gnome/gcmd.c:100
 msgid "The Midnight Commander Team"
@@ -430,36 +429,35 @@ msgstr "Crea un nuovo esecutore di comandi"
 
 #: gnome/gdesktop.c:2865
 msgid "By _Name"
-msgstr "_Nome"
+msgstr "per _Nome"
 
 #: gnome/gdesktop.c:2866
 msgid "By File _Type"
-msgstr "_Tipo file"
+msgstr "per _Tipo file"
 
 #: gnome/gdesktop.c:2867
 msgid "By _Size"
-msgstr "Dimen_sione "
+msgstr "per Dimen_sione "
 
 #: gnome/gdesktop.c:2868
 msgid "By Time Last _Accessed"
-msgstr "Ora Ultimo _Accesso"
+msgstr "per ora Ultimo _Accesso"
 
 #: gnome/gdesktop.c:2869
 msgid "By Time Last _Modified"
-msgstr "Ora Ultima _Modifica"
+msgstr "per ora Ultima _Modifica"
 
 #: gnome/gdesktop.c:2870
 msgid "By Time Last _Changed"
-msgstr "Ora Ultimo _Cambiamento"
+msgstr "per ora Ultimo _Cambiamento"
 
 #: gnome/gdesktop.c:2878 gnome/glayout.c:462
 msgid "_Arrange Icons"
-msgstr "Ordina icone per"
+msgstr "Ordina icone"
 
 #: gnome/gdesktop.c:2879
-#, fuzzy
 msgid "_Tidy Icons"
-msgstr "Icone"
+msgstr "Icone piccole"
 
 #: gnome/gdesktop.c:2880
 msgid "Create _New Window"
@@ -1775,9 +1773,8 @@ msgstr ""
 
 #. Not essential to translate
 #: gtkedit/edit.c:2769 gtkedit/editcmd.c:2945
-#, fuzzy
 msgid "Error trying to stat file:"
-msgstr " Errore nel leggere lo stato del file "
+msgstr "Errore nel provare lo stat del file:"
 
 #: gtkedit/editcmd.c:298
 msgid " Error writing to pipe: "
@@ -2296,27 +2293,24 @@ msgid " Sort returned non-zero: "
 msgstr " Il `sort' è uscito con valore non-zero "
 
 #: gtkedit/editcmd.c:2881
-#, fuzzy
 msgid "Error create script:"
-msgstr " Errore leggendo dalla pipe: "
+msgstr "Errore creazione script:"
 
 #: gtkedit/editcmd.c:2887
-#, fuzzy
 msgid "Error read script:"
-msgstr " Errore leggendo dalla pipe: "
+msgstr "Errore lettura script:"
 
 #: gtkedit/editcmd.c:2894
 msgid "Error close script:"
-msgstr ""
+msgstr "Errore chiusura script:"
 
 #: gtkedit/editcmd.c:2899
 msgid "Script created:"
-msgstr ""
+msgstr "Script creato:"
 
 #: gtkedit/editcmd.c:2906
-#, fuzzy
 msgid "Process block"
-msgstr " Analizza blocco testo "
+msgstr "Elabora blocco"
 
 #: gtkedit/editcmd.c:3018
 msgid " Mail "
@@ -2394,9 +2388,8 @@ msgid "copy to &File...  C-f"
 msgstr "&Copia su File...  C-f"
 
 #: gtkedit/editmenu.c:137 gtkedit/editmenu.c:156
-#, fuzzy
 msgid "&User menu...     F11"
-msgstr "Menu &Utente             F2"
+msgstr "Menu &Utente       F11"
 
 #: gtkedit/editmenu.c:140 gtkedit/editmenu.c:159
 msgid "a&Bout...            "
@@ -2511,9 +2504,8 @@ msgid "sor&T...                 M-t"
 msgstr "&Ordina...                      M-t"
 
 #: gtkedit/editmenu.c:231 gtkedit/editmenu.c:254
-#, fuzzy
 msgid "E&xternal Formatter      F19"
-msgstr "Forma&Tta in C                  F19"
+msgstr "Forma&Ttatore Esterno           F19"
 
 #: gtkedit/editmenu.c:232
 msgid "&Mail...                    "
@@ -3470,14 +3462,12 @@ msgid "&System Wide"
 msgstr "&Sistema"
 
 #: src/cmd.c:664
-#, fuzzy
 msgid " Menu edit "
-msgstr "Modifica file del menu"
+msgstr "Modifica menu"
 
 #: src/cmd.c:665
-#, fuzzy
 msgid " Which menu file will you edit ? "
-msgstr " Quale file del menu vuoi editare?"
+msgstr " Quale file menu vuoi modificare?"
 
 #: src/cmd.c:667
 msgid "&Local"
@@ -3593,9 +3583,8 @@ msgid " relative symlink: %s "
 msgstr " coll. simbolico relativo: %s "
 
 #: src/cmd.c:1260
-#, fuzzy
 msgid "Using default locale"
-msgstr "Usa operazione di Deselezione predefinita"
+msgstr "Uso locale predefinita"
 
 #: src/cmd.c:1262
 #, c-format
@@ -5330,9 +5319,8 @@ msgid "&Menu file edit"
 msgstr "Modifica il file &Menu"
 
 #: src/main.c:1351
-#, fuzzy
 msgid "Menu edi&Tor edit"
-msgstr "Modifica file del menu"
+msgstr "Modifica editor menu"
 
 #: src/main.c:1356
 msgid "&Configuration..."
@@ -5408,14 +5396,12 @@ msgid "Thank you for using GNU Midnight Commander"
 msgstr "Grazie per aver usato GNU Midnight Commander"
 
 #: src/main.c:2287
-#, fuzzy
 msgid "with mouse support on xterm and the Linux console.\n"
-msgstr "con supporto del mouse nell'xterm%s.\n"
+msgstr "con supporto del mouse in xterm e in console Linux.\n"
 
 #: src/main.c:2288
-#, fuzzy
 msgid "with mouse support on xterm.\n"
-msgstr "con supporto del mouse nell'xterm%s.\n"
+msgstr "con supporto del mouse in xterm.\n"
 
 #: src/main.c:2389
 msgid "The TERM environment variable is unset!\n"
@@ -5509,7 +5495,6 @@ msgstr ""
 "-r, --forceexec    Forza esecuzione subshell.\n"
 
 #: src/main.c:2533
-#, fuzzy
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5518,8 +5503,9 @@ msgid ""
 msgstr ""
 "-v, --view fname   Parte in modalità vista.\n"
 "-V, --version      Mostra versione e opzioni di configurazione.\n"
-"-x, --xterm        Forza supporto mouse xterm e savataggio/recupero "
-"schermo.\n"
+"-x, --xterm        Forza supporto mouse xterm e savataggio/recupero schermo.\n"
+"+numero            numero è il numero di riga di partenza del file per `mcedit'.\n"
+
 
 #: src/main.c:2538
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
