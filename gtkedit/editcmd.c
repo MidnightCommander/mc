@@ -409,10 +409,33 @@ void menu_save_mode_cmd (void)
 
     if (!i18n_flag) {
         int i;
+	int maxlen = 0;
+	int dlg_x;
+	int l1;
+
+	/* Ok/Cancel buttons */
+	l1 = strlen (_(widgets[0].text)) + strlen (_(widgets[1].text)) + 5;
+	maxlen = max (maxlen, l1);
         
-        for (i = 0; i < 3; i++ )
+        for (i = 0; i < 3; i++ ) {
             str[i] = _(str[i]);
+	    maxlen = max (maxlen, strlen (str[i]) + 7);
+	}
         i18n_flag = 1;
+
+        dlg_x = maxlen + strlen (_(widgets[3].text)) + 5 + 1;
+        widgets[2].hotkey_pos = strlen (_(widgets[3].text)); /* input field length */
+        dlg_x = min (COLS, dlg_x);
+	dialog.xlen = dlg_x;
+
+        i = (dlg_x - l1)/3;
+	widgets[1].relative_x = i;
+	widgets[0].relative_x = i + strlen (_(widgets[1].text)) + i + 4;
+
+	widgets[2].relative_x = widgets[3].relative_x = maxlen + 2;
+
+	for (i = 0; i < sizeof (widgets)/sizeof (widgets[0]); i++)
+		widgets[i].x_divisions = dlg_x;
     }
 
     widgets[2].text = option_backup_ext;
