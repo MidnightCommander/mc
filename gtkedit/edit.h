@@ -45,7 +45,9 @@
 #    include <fcntl.h>
 
 #    include <stdlib.h>
-#    include <malloc.h>
+#    ifdef HAVE_MALLOC_H
+#	 include <malloc.h>
+#    endif
 
 #else       /* ! MIDNIGHT */
 

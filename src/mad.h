@@ -3,7 +3,9 @@
 
 /* To prevent molesting these files with the malloc/calloc/free macros.  */
 #include <stdlib.h>
-#include <malloc.h>
+#ifdef HAVE_MALLOC_H
+#   include <malloc.h>
+#endif
 
 #ifdef HAVE_MAD
 #   define INLINE

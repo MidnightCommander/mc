@@ -1,5 +1,9 @@
 2001-01-13  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Don't create a faked malloc.h.
+	* gtkedit/edit.h: Don't assume that malloc.h always exists.
+	* src/mad.h: Likewise.
+
 	* configure.in: Simplified handling of cons.saver.
 	* src/Makefile.in: Likewise. Don't install cons.saver setuid.
 	* mc.spec.in: Remove a workaround for the above.
