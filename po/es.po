@@ -1058,7 +1058,7 @@ msgstr "<Usuario desconocido>"
 #. add fields for unknown names (numbers)
 #: src/chown.c:192
 msgid "<Unknown group>"
-msgstr "<Gruop desconocido>"
+msgstr "<Grupo desconocido>"
 
 #: src/chown.c:257
 msgid " I can't run the Chown command on an extfs "
@@ -1841,7 +1841,7 @@ msgstr "&Todos"
 
 #: src/file.c:2450
 msgid "Overwrite all targets?"
-msgstr "¿Sobreescribir todos los archivos en el destino?"
+msgstr "¿Sobre-escribir todos los archivos en el destino?"
 
 #: src/file.c:2459
 msgid "&Reget"
