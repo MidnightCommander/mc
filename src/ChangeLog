@@ -4,6 +4,8 @@
 	if there are no changes.
 	(save_edit_changes): Use messages from ../po/mc.pot.
 
+	* mad.c (mad_tempnam): Commented out to make linker happy.
+
 2002-05-27  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (save_edit_changes): Handle errors.

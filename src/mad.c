@@ -305,6 +305,7 @@ void mad_free (void *ptr, const char *file, int line)
         Alloc_idx_hint = i;
 }
 
+#if 0 /* Commented out to make linker happy */
 char *mad_tempnam (char *a, char *b, const char *file, int line)
 {
     char *t, *u;
@@ -313,6 +314,7 @@ char *mad_tempnam (char *a, char *b, const char *file, int line)
     free(t);
     return u;
 }
+#endif
 
 /* Outputs a list of unfreed memory areas,
    to be called as a last thing before exiting */
