@@ -919,11 +919,11 @@ msgstr "Poi¹èi datoteke na disku"
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
 #: gnome/glayout.c:436
 msgid "_Edit mime types..."
-msgstr "_Uredi mime tipe..."
+msgstr "_Uredi tipe mime..."
 
 #: gnome/glayout.c:436
 msgid "Edits the MIME type bindings"
-msgstr "Uredi povezave MIME tipov"
+msgstr "Uredi povezave tipov MIME"
 
 #: gnome/glayout.c:438
 msgid "_Run Command..."
