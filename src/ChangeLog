@@ -1,5 +1,7 @@
 2002-10-21  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (print_mc_usage): Remove unnecessary newline.
+
 	* main.c (print_mc_usage): Partly revert previous patch -
 	poptPrintHelp() has side effects and should not be called
 	inside fprintf(), which can be a macro.

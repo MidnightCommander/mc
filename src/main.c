@@ -2075,7 +2075,7 @@ print_mc_usage (poptContext ctx, FILE *stream)
     int leftColWidth;
 
     poptSetOtherOptionHelp (ctx,
-			    _("[flags] [this_dir] [other_panel_dir]\n\n"));
+			    _("[flags] [this_dir] [other_panel_dir]\n"));
 
     /* print help for options */
     leftColWidth = poptPrintHelp (ctx, stream, 0);
