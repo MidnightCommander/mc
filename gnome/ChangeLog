@@ -1,3 +1,15 @@
+1999-01-29  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gdesktop.c (reload_desktop_icons): Move metadata_unlock after
+	the positioning loop (as we use the metadata there too).
+	(desktop_icon_info_new): Accept a new parameter: url.
+	(drop_url): New function.  Creates the files that represent urls
+	on the desktop.
+	(text_changed_url): New routine to handle url-renames
+
+	Use the metadata "desktop-url" property to figure out if an icon
+	represents an url.
+
 1999-01-28  Jonathan Blandford  <jrb@redhat.com>
 
 	* gnome-file-property-dialog.c (create_settings_pane): We only let

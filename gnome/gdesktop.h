@@ -42,6 +42,7 @@ typedef struct {
 	char *filename;			/* The file this icon refers to
                                          * (relative to the desktop_directory)
 					 */
+	char *url;			/* URL this icon points to */
 	int selected : 1;		/* Is the icon selected? */
 	int tmp_selected : 1;		/* Temp storage for original selection while rubberbanding */
 } DesktopIconInfo;

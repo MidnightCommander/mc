@@ -14,10 +14,10 @@
  */
 
 #include <config.h>
+#include "global.h"
 #include <gdk/gdkx.h>
 #include <gtk/gtkinvisible.h>
 #include <gnome.h>
-#include "global.h"
 #include "dialog.h"
 #define DIR_H_INCLUDE_HANDLE_DIRENT /* bleah */
 #include "dir.h"
@@ -79,10 +79,11 @@ static GtkTargetEntry dnd_icon_sources[] = {
 
 static GtkTargetEntry dnd_icon_targets[] = {
 	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
-	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
+	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST },
 };
 
 static GtkTargetEntry dnd_desktop_targets[] = {
+	{ "_NETSCAPE_URL", 0, TARGET_URL },
 	{ TARGET_MC_DESKTOP_ICON_TYPE, 0, TARGET_MC_DESKTOP_ICON },
 	{ TARGET_URI_LIST_TYPE, 0, TARGET_URI_LIST }
 };
@@ -128,7 +129,8 @@ static int click_current_y;
 static int click_dragging;
 
 
-static DesktopIconInfo *desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos);
+static DesktopIconInfo *desktop_icon_info_new (char *filename, char *url,
+					       int auto_pos, int xpos, int ypos);
 
 
 /* Looks for a free slot in the layout_slots array and returns the coordinates that coorespond to
@@ -324,9 +326,16 @@ icon_exists_in_list (GList *list, char *filename)
 	return NULL;
 }
 
-/* Reloads the desktop icons efficiently.  If there are "new" files for which no
- * icons have been created, then icons for them will be created started at the
- * specified position -- this is used when dragging new icons to the desktop.
+typedef struct {
+	char *filename;
+	char *url;
+} file_and_url_t;
+
+/*
+ * Reloads the desktop icons efficiently.  If there are "new" files
+ * for which no icons have been created, then icons for them will be
+ * created started at the specified position -- this is used when
+ * dragging new icons to the desktop.
  */
 static void
 reload_desktop_icons (int xpos, int ypos)
@@ -334,11 +343,11 @@ reload_desktop_icons (int xpos, int ypos)
 	struct dirent *dirent;
 	DIR *dir;
 	char *full_name;
-	int have_pos, x, y;
+	int have_pos, x, y, size;
 	DesktopIconInfo *dii;
 	GSList *need_position_list, *sl;
 	GList *all_icons, *l;
-
+	char *desktop_url;
 	
 	dir = mc_opendir (desktop_directory);
 	if (!dir) {
@@ -377,14 +386,26 @@ reload_desktop_icons (int xpos, int ypos)
 		full_name = g_concat_dir_and_file (desktop_directory, dirent->d_name);
 		have_pos = gmeta_get_icon_pos (full_name, &x, &y);
 
+		if (!gnome_metadata_get (full_name, "desktop-url", &size, &desktop_url))
+			desktop_url = NULL;
+		
 		if (have_pos) {
-			dii = desktop_icon_info_new (dirent->d_name, FALSE, x, y);
+			dii = desktop_icon_info_new (dirent->d_name, desktop_url, FALSE, x, y);
 			gtk_widget_show (dii->dicon);
 
 			g_free (full_name);
-		} else
-			need_position_list = g_slist_prepend (need_position_list,
-							      g_strdup (dirent->d_name));
+		} else {
+			file_and_url_t *fau;
+
+			fau = g_new (file_and_url_t, 1);
+			fau->filename = g_strdup (dirent->d_name);
+			fau->url = g_strdup (desktop_url);
+			
+			need_position_list = g_slist_prepend (need_position_list, fau);
+		}
+
+		if (desktop_url)
+			g_free (desktop_url);
 	}
 
 	mc_closedir (dir);
@@ -405,8 +426,6 @@ reload_desktop_icons (int xpos, int ypos)
 
 	g_list_free (all_icons);
 
-	gnome_metadata_unlock ();
-	
 	/* Now create the icons for all the files that did not have their
 	 * position set.  This makes auto-placement work correctly without
 	 * overlapping icons.
@@ -415,12 +434,19 @@ reload_desktop_icons (int xpos, int ypos)
 	need_position_list = g_slist_reverse (need_position_list);
 
 	for (sl = need_position_list; sl; sl = sl->next) {
-		dii = desktop_icon_info_new (sl->data, TRUE, xpos, ypos);
+		file_and_url_t *fau = sl->data;
+		
+		dii = desktop_icon_info_new (fau->filename, fau->url, TRUE, xpos, ypos);
 		gtk_widget_show (dii->dicon);
-		g_free (sl->data);
+
+		g_free (fau->url);
+		g_free (fau->filename);
+		g_free (fau);
 	}
 
 	g_slist_free (need_position_list);
+
+	gnome_metadata_unlock ();
 
 	/* Flush events to make the icons paint themselves */
 	x_flush_events ();
@@ -636,6 +662,24 @@ text_changed (GnomeIconTextItem *iti, gpointer data)
 	return retval;
 }
 
+/*
+ * Callback when an icon's text changes and the icon reprensents an
+ * URL
+ */
+static int
+text_changed_url (GnomeIconTextItem *iti, gpointer data)
+{
+	DesktopIconInfo *dii = data;
+	char *fullname;
+	char *new_text;
+	
+	fullname = g_concat_dir_and_file (desktop_directory, dii->filename);
+	new_text = gnome_icon_text_item_get_text (iti);
+	gnome_metadata_set (fullname, "desktop-url", strlen (new_text)+1, new_text);
+
+	return TRUE;
+}
+
 /* Sets up the mouse grab for when a desktop icon is being edited */
 static void
 setup_editing_grab (DesktopIconInfo *dii)
@@ -737,6 +781,10 @@ desktop_icon_info_open (DesktopIconInfo *dii)
 	char *filename;
 	file_entry *fe;
 
+	if (dii->url){
+		gnome_url_show (dii->url);
+		return;
+	}
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
 	fe = file_entry_from_file (filename);
@@ -1108,7 +1156,8 @@ setup_icon_dnd_source (DesktopIconInfo *dii)
 			    dii);
 }
 
-/* Callback used when we get a drag_motion event from a desktop icon.  We have
+/*
+ * Callback used when we get a drag_motion event from a desktop icon.  We have
  * to decide which operation to perform based on the type of the data the user
  * is dragging.
  */
@@ -1146,7 +1195,10 @@ icon_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y, gu
 	return TRUE;
 }
 
-/* Returns the desktop icon that started the drag from the specified context */
+/*
+ * Returns the desktop icon that started the drag from the specified
+ * context
+ */
 static DesktopIconInfo *
 find_icon_by_drag_context (GdkDragContext *context)
 {
@@ -1173,8 +1225,9 @@ find_icon_by_drag_context (GdkDragContext *context)
 }
 
 /*
- * Performs a drop of desktop icons onto the desktop.  It basically moves the icons from their
- * original position to the new coordinates.
+ * Performs a drop of desktop icons onto the desktop.  It basically
+ * moves the icons from their original position to the new
+ * coordinates.
  */
 static void
 drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int y)
@@ -1185,8 +1238,9 @@ drop_desktop_icons (GdkDragContext *context, GtkSelectionData *data, int x, int 
 	GList *l;
 	GSList *sel_icons, *sl;
 
-	/* FIXME: this needs to do the right thing (what Windows does) when desktop_auto_placement
-	 * is enabled.
+	/*
+	 * FIXME: this needs to do the right thing (what Windows does)
+	 * when desktop_auto_placement is enabled.
 	 */
 
 	/* Find the icon that the user is dragging */
@@ -1237,7 +1291,8 @@ desktop_icon_drop_uri_list (DesktopIconInfo *dii, GdkDragContext *context, GtkSe
 	char *filename;
 	file_entry *fe;
 	int size;
-	char *buf, *mime_type;
+	char *buf;
+	const char *mime_type;
 	
 	filename = g_concat_dir_and_file (desktop_directory, dii->filename);
 
@@ -1370,13 +1425,14 @@ setup_icon_dnd_dest (DesktopIconInfo *dii)
  * not show the icon.
  */
 static DesktopIconInfo *
-desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
+desktop_icon_info_new (char *filename, char *url, int auto_pos, int xpos, int ypos)
 {
 	DesktopIconInfo *dii;
 	file_entry *fe;
 	char *full_name;
 	GdkImlibImage *icon_im;
-
+	GtkSignalFunc text_changed_func;
+	
 	/* Create the icon structure */
 
 	full_name = g_concat_dir_and_file (desktop_directory, filename);
@@ -1390,7 +1446,8 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 	dii->slot = -1;
 	dii->filename = g_strdup (filename);
 	dii->selected = FALSE;
-
+	dii->url = g_strdup (url);
+	
 	file_entry_free (fe);
 	g_free (full_name);
 
@@ -1420,9 +1477,14 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	/* Connect to the text item's signals */
 
+	if (dii->url)
+		text_changed_func = (GtkSignalFunc) text_changed_url;
+	else
+		text_changed_func = (GtkSignalFunc) text_changed;
+
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "text_changed",
-			    (GtkSignalFunc) text_changed,
-			    dii);
+			    text_changed_func, dii);
+
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_started",
 			    (GtkSignalFunc) editing_started,
 			    dii);
@@ -1456,6 +1518,7 @@ desktop_icon_info_destroy (DesktopIconInfo *dii)
 	gtk_widget_destroy (dii->dicon);
 	remove_from_slot (dii);
 
+	g_free (dii->url);
 	g_free (dii->filename);
 	g_free (dii);
 }
@@ -1649,6 +1712,33 @@ desktop_drag_motion (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
 	return TRUE;
 }
 
+/*
+ * drop_url: Invoked when we have received an URL from Netscape.
+ * Install the url on the ~/desktop directory
+ */
+static void
+drop_url (GdkDragContext *context, GtkSelectionData *data, gint x, gint y)
+{
+	char *template;
+
+	template = g_concat_dir_and_file (desktop_directory, "urlXXXXXX");
+
+	if (mktemp (template)){
+		FILE *f;
+
+		f = fopen (template, "w");
+		if (f){
+			fprintf (f, "URL: %s\n", data->data);
+			fclose (f);
+
+			gnome_metadata_set (template, "desktop-url",
+					    strlen (data->data)+1, data->data);
+		}
+	}
+
+	g_free (template);
+}
+
 /* Callback used when the root window receives a drop */
 static void
 desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, gint y,
@@ -1663,6 +1753,7 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 	x += dx;
 	y += dy;
 
+	printf ("Drag!!\n");
 	switch (info) {
 	case TARGET_MC_DESKTOP_ICON:
 		drop_desktop_icons (context, data, x, y);
@@ -1672,9 +1763,13 @@ desktop_drag_data_received (GtkWidget *widget, GdkDragContext *context, gint x, 
 		retval = gdnd_drop_on_directory (context, data, desktop_directory);
 		if (retval)
 			reload_desktop_icons (x, y);
-
 		break;
 
+	case TARGET_URL:
+		printf ("Aqui!\n");
+		drop_url (context, data, x, y);
+		break;
+		
 	default:
 		break;
 	}
