@@ -31,7 +31,9 @@
 #include "gtk/gtkselection.h"
 #include "gtk/gtksignal.h"
 #include "edit.h"
+#ifndef MIDNIGHT
 #include "mousemark.h"
+#endif
 
 #define EDIT_BORDER_ROOM         1
 #define MIN_EDIT_WIDTH_LINES     20

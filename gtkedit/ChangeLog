@@ -1,3 +1,10 @@
+2000-08-03  Pavel Roskin <proski@gnu.org>
+
+	* mousemark.c, mousemark.h: removed
+	* Makefile.in: don't distribute mousemark.h
+	* gtkedit.c [MIDNIGHT]: don't include mousemark.h
+	* gtkedit.h [MIDNIGHT]: likewise
+
 2000-07-20  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* gtkedit/editcmd.c (edit_save_file): check fclose()s return value

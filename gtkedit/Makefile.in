@@ -20,7 +20,7 @@ AR = @AR@
 
 EDITSRC = edit.c editcmd.c editdraw.c gtkedit.c gtkeditkey.c \
 	propfont.c syntax.c wordproc.c edit.h editcmddef.h global.h gtkedit.h \
-	libgettext.h lkeysym.h editmenu.c editoptions.c mousemark.h \
+	libgettext.h lkeysym.h editmenu.c editoptions.c \
 	editwidget.c bookmark.c edit-widget.h
 
 EDITOBJS = edit.o editcmd.o editdraw.o gtkedit.o gtkeditkey.o \

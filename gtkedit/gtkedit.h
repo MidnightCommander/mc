@@ -23,7 +23,9 @@
 #include <gdk/gdk.h>
 #include <gtk/gtkadjustment.h>
 #include <gtk/gtkeditable.h>
+#ifndef MIDNIGHT
 #include <gtkedit/mousemark.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
