@@ -1,3 +1,9 @@
+2003-10-25  Pavel Roskin  <proski@gnu.org>
+
+	* background.c: Replace all message stubs with a new function
+	mc_message().  Protect against strlen(MSG_ERROR).  Adjust all
+	dependencies.
+
 2003-10-25  Jindrich Makovicka  <makovick@kmlinux.fjfi.cvut.cz>
 
 	* hotlist.c (remove_from_hotlist): Fix improper check of the

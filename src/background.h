@@ -36,11 +36,8 @@ int parent_call (void *routine, struct FileOpContext *ctx, int argc, ...);
 
 void unregister_task_running (pid_t, int fd);
 
-/* stubs */
-void message_1s (int flags, char *title, const char *str1);
-void message_2s (int flags, char *title, const char *str1, const char *str2);
-void message_3s (int flags, char *title, const char *str1, const char *str2,
-		 const char *str3);
-void message_1s1d (int flags, char *title, const char *str, int d);
+/* Show message box, background safe */
+void mc_message (int flags, char *title, const char *text, ...)
+    __attribute__ ((format (printf, 3, 4)));
 
 #endif

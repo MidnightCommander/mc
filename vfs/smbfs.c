@@ -572,7 +572,7 @@ reconnect(smbfs_connection *conn, int *retries)
 	cli_shutdown(conn->cli);
 
    	if (!(conn->cli = smbfs_do_connect(host, conn->service))) {
-		message_2s (1, MSG_ERROR,
+		mc_message (1, MSG_ERROR,
 			_(" reconnect to %s failed\n "), conn->host);
 		g_free(host);
 		return False;
@@ -1109,7 +1109,7 @@ smbfs_open_link (char *host, char *path, const char *user, int *port,
 
 	if (my_errno != EPERM)
 	    return 0;
-	message_1s (1, MSG_ERROR, _(" Authentication failed "));
+	mc_message (1, MSG_ERROR, _(" Authentication failed "));
 
 	/* authentication failed, try again */
 	authinfo_remove (bucket->host, bucket->service);
@@ -1621,7 +1621,7 @@ smbfs_mkdir (struct vfs_class * me, char *path, mode_t mode)
 
     if (!cli_mkdir (sc->cli, path)) {
 	my_errno = cli_error (sc->cli, NULL, &err, NULL);
-	message_3s (1, MSG_ERROR, _(" Error %s creating directory %s "),
+	mc_message (1, MSG_ERROR, _(" Error %s creating directory %s "),
 		    cli_errstr (sc->cli), CNV_LANG (path));
 	g_free (path);
 	return -1;
@@ -1644,7 +1644,7 @@ smbfs_rmdir (struct vfs_class *me, char *path)
 
 	if (!cli_rmdir(sc->cli, path)) {
 		my_errno = cli_error(sc->cli, NULL, &err, NULL);
-		message_3s (1, MSG_ERROR, _(" Error %s removing directory %s "), 
+		mc_message (1, MSG_ERROR, _(" Error %s removing directory %s "), 
 			cli_errstr(sc->cli), CNV_LANG(path));
 		g_free (path);
 		return -1;
@@ -1753,7 +1753,7 @@ open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 		  DENY_NONE);
 
     if (remote_handle->fnum == -1) {
-	message_3s (1, MSG_ERROR, _(" %s opening remote file %s "),
+	mc_message (1, MSG_ERROR, _(" %s opening remote file %s "),
 		    cli_errstr (remote_handle->cli), CNV_LANG (rname));
 	DEBUG (1, ("smbfs_open(rname:%s) error:%s\n",
 		   rname, cli_errstr (remote_handle->cli)));
@@ -1769,7 +1769,7 @@ open_readwrite (smbfs_handle *remote_handle, char *rname, int flags, int mode)
 			NULL)
 	&& !cli_getattrE (remote_handle->cli, remote_handle->fnum,
 			  &remote_handle->attr, &size, NULL, NULL, NULL)) {
-	message_2s (1, MSG_ERROR, " getattrib: %s ",
+	mc_message (1, MSG_ERROR, " getattrib: %s ",
 		    cli_errstr (remote_handle->cli));
 	DEBUG (1,
 	       ("smbfs_open(rname:%s) getattrib:%s\n", rname,
@@ -1826,7 +1826,7 @@ smbfs_unlink (struct vfs_class *me, char *path)
     g_free (p);
 
     if (!cli_unlink(sc->cli, remote_file)) {
-	message_3s (1, MSG_ERROR, _(" %s removing remote file %s "), 
+	mc_message (1, MSG_ERROR, _(" %s removing remote file %s "), 
 			cli_errstr(sc->cli), CNV_LANG(remote_file));
 	g_free (remote_file);
 	return -1;
@@ -1864,7 +1864,7 @@ smbfs_rename (struct vfs_class *me, char *a, char *b)
     g_free (rb);
 
     if (!retval) {
-	message_2s (1, MSG_ERROR, _(" %s renaming files\n"), 
+	mc_message (1, MSG_ERROR, _(" %s renaming files\n"), 
 			cli_errstr(sc->cli));
 	return -1;
     }   

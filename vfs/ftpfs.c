@@ -505,7 +505,7 @@ login_server (struct vfs_class *me, struct vfs_s_super *super, const char *netrc
 	    goto login_fail;
 	}
     }
-    message_2s (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "),
+    mc_message (1, MSG_ERROR, _("ftpfs: Login incorrect for user %s "),
 		SUP.user);
   login_fail:
     wipe_password (pass);
@@ -1765,7 +1765,7 @@ static int netrc_has_incorrect_mode (char *netrcname, char *netrc)
 
     if (stat (netrcname, &mystat) >= 0 && (mystat.st_mode & 077)) {
 	if (be_angry) {
-	    message_1s (1, MSG_ERROR,
+	    mc_message (1, MSG_ERROR,
 			_("~/.netrc file has not correct mode.\n"
 			  "Remove password or correct mode."));
 	    be_angry = 0;

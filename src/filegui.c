@@ -9,8 +9,8 @@
  *   process).
  *
  *   For example, instead of using the message() routine, in this
- *   file, you should use one of the stubs that call message with the
- *   proper number of arguments (ie, message_1s, message_2s and so on).
+ *   file, you should use mc_message(), which can talk to the foreground
+ *   process.
  *
  *   Actually, that is a rule that should be followed by any routines
  *   that may be called from this module.
@@ -75,7 +75,7 @@
 #include "setup.h"		/* verbose */
 #include "dialog.h"		/* do_refresh() */
 #include "color.h"		/* dialog_colors */
-#include "background.h"		/* message_3s */
+#include "background.h"		/* mc_message */
 #include "widget.h"		/* WLabel */
 #define WANT_WIDGETS
 #include "main.h"		/* the_hint */
@@ -878,7 +878,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
 
     g_return_val_if_fail (ctx != NULL, NULL);
 #if 0
-    message_3s (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
+    mc_message (1, __FUNCTION__, "text = `%s' \n def_text = `%s'", text,
 		def_text);
 #endif
     fmd_init_i18n (FALSE);
@@ -951,7 +951,7 @@ file_mask_dialog (FileOpContext *ctx, FileOperation operation, char *text,
 				&ctx->rx);
 
     if (error) {
-	message_3s (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
+	mc_message (1, MSG_ERROR, _("Invalid source pattern `%s' \n %s "),
 		    orig_mask, error);
 	if (orig_mask)
 	    g_free (orig_mask);

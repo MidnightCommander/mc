@@ -157,51 +157,14 @@ do_background (struct FileOpContext *ctx, char *info)
     }
 }
 
-static char *
-background_title (char *str)
-{
-    return g_strconcat (_("Background process:"), str, NULL);
-}
-
-/* {{{ Routines that do the real job */
 static void
-real_message_1s (enum OperationMode mode, int *flags, char *title, const char *str1)
+bg_message (enum OperationMode mode, int *flags, char *title,
+	    const char *text)
 {
-    if (mode == Background)
-	title = background_title (title);
-
-    message (*flags, title, "%s", str1);
-
-    if (mode == Background)
-	g_free (title);
+    title = g_strdup_printf ("%s %s", _("Background process:"), title);
+    message (*flags, title, "%s", text);
+    g_free (title);
 }
-
-static void
-real_message_2s (enum OperationMode mode, int *flags, char *title,
-		 const char *str1, const char *str2)
-{
-    if (mode == Background)
-	title = background_title (title);
-    
-    message (*flags, title, str1, str2);
-    
-    if (mode == Background)
-	g_free (title);
-}
-
-static void
-real_message_3s (enum OperationMode mode, int *flags, char *title,
-		 const char *str1, const char *str2, const char *str3)
-{
-    if (mode == Background)
-	title = background_title (title);
-    
-    message (*flags, title, str1, str2, str3);
-    
-    if (mode == Background)
-	g_free (title);
-}
-/* }}} */
 
 /* {{{ Parent handlers */
 
@@ -470,92 +433,44 @@ tell_parent (int msg)
 {
     write (parent_fd, &msg, sizeof (int));
 }
+#endif				/* WITH_BACKGROUND */
 
+/* Show message box, background safe */
 void
-message_1s (int flags, char *title, const char *str1)
+mc_message (int flags, char *title, const char *text, ...)
 {
-    if (we_are_background)
-	parent_call ((void *)real_message_1s, NULL, 3, sizeof (flags), &flags,
-		     strlen (title), title, strlen (str1), str1);
-    else
-	real_message_1s (Foreground, &flags, title, str1);
-}
+    char *p;
+    va_list ap;
 
-void
-message_2s (int flags, char *title, const char *str1, const char *str2)
-{
-    if (we_are_background)
-	parent_call ((void *)real_message_2s, NULL, 4, sizeof (flags), &flags,
-		     strlen (title), title, strlen (str1), str1,
-	             strlen (str2), str2);
-    else
-	real_message_2s (Foreground, &flags, title, str1, str2);
-}
+    va_start (ap, text);
+    p = g_strdup_vprintf (text, ap);
+    va_end (ap);
 
-void
-message_3s (int flags, char *title, const char *str1,
-	    const char *str2, const char *str3)
-{
-    if (we_are_background)
-	parent_call ((void *)real_message_3s, NULL, 5, sizeof (flags), &flags,
-		     strlen (title), title, strlen (str1), str1,
-	             strlen (str2), str2, strlen (str3), str3);
-    else
-	real_message_3s (Foreground, &flags, title, str1, str2, str3);
-}
+#ifdef WITH_BACKGROUND
+    if (we_are_background) {
+	if (title == MSG_ERROR)
+	    title = _("Error");
+	parent_call ((void *) bg_message, NULL, 3, sizeof (flags), &flags,
+		     strlen (title), title, strlen (text), text);
+    } else
+#endif				/* WITH_BACKGROUND */
+	message (flags, title, "%s", text);
 
-char *
-input_dialog_help (char *header, char *text, char *help, char *def_text)
-{
-    if (we_are_background)
-	return parent_call_string ((void *)real_input_dialog_help, 4,
-				   strlen (header),   header,
-				   strlen (text),     text,
-				   strlen (help),     help,
-				   strlen (def_text), def_text);
-    else
-	return real_input_dialog_help (header, text, help, def_text);
-}
-
-#else /* Else => No background code support */
-
-/* {{{ Stubs if background code is not supported */
-void
-message_1s (int flags, char *title, const char *str1)
-{
-    message (flags, title, "%s", str1);
-}
-
-void
-message_2s (int flags, char *title, const char *str1, const char *str2)
-{
-    message (flags, title, str1, str2);
-}
-
-void
-message_3s (int flags, char *title, const char *str1,
-	    const char *str2, const char *str3)
-{
-    message (flags, title, str1, str2, str3);
-}
-
-char *
-input_dialog_help (char *header, char *text, char *help, char *def_text)
-{
-    return real_input_dialog_help (header, text, help, def_text);
-}
-/* }}} */
-
-#endif /* !WITH_BACKGROUND */
-
-/* {{{ Functions shared between background and foreground */
-
-void
-message_1s1d (int flags, char *title, const char *str, int d)
-{
-    char *p = g_strdup_printf (str, d);
-    message_1s (flags, title, p);
     g_free (p);
 }
 
-/* }}} */
+/* Show input dialog, background safe */
+char *
+input_dialog_help (char *header, char *text, char *help, char *def_text)
+{
+#ifdef WITH_BACKGROUND
+    if (we_are_background)
+	return parent_call_string ((void *) real_input_dialog_help, 4,
+				   strlen (header), header, strlen (text),
+				   text, strlen (help), help,
+				   strlen (def_text), def_text);
+    else
+#endif				/* WITH_BACKGROUND */
+	return real_input_dialog_help (header, text, help, def_text);
+}
+

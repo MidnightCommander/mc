@@ -238,7 +238,7 @@ open_archive_int (struct vfs_class *me, struct vfs_s_super *super)
        /dev/tty, not from stdin :-(. */
 
 #ifndef HAVE_HACKED_SSH
-	    message_1s (1, MSG_ERROR, _("Sorry, we cannot do password authenticated connections for now."));
+	    mc_message (1, MSG_ERROR, _("Sorry, we cannot do password authenticated connections for now."));
 	    ERRNOR (EPERM, -1);
 #endif
 	    if (!SUP.password){

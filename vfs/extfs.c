@@ -288,7 +288,7 @@ read_archive (int fstype, char *name, struct archive **pparc)
     char *current_file_name, *current_link_name;
 
     if ((extfsd = open_archive (fstype, name, &current_archive)) == NULL) {
-	message_3s (1, MSG_ERROR, _("Cannot open %s archive\n%s"),
+	mc_message (1, MSG_ERROR, _("Cannot open %s archive\n%s"),
 		    extfs_prefixes[fstype], name);
 	return -1;
     }
@@ -1274,7 +1274,7 @@ static int extfs_init (struct vfs_class *me)
     mc_extfsini = concat_dir_and_file (mc_home, "extfs" PATH_SEP_STR "extfs.ini");
     cfg = fopen (mc_extfsini, "r");
 
-    /* We may not use vfs_die() message or message_1s or similar,
+    /* We may not use vfs_die() message or mc_message or similar,
      * UI is not initialized at this time and message would not
      * appear on screen. */
     if (!cfg) {
