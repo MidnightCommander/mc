@@ -400,8 +400,8 @@ switch_metadata_box (GnomeFilePropertyDialog *fp_dlg)
 			gtk_widget_set_sensitive (fp_dlg->prop1_entry, FALSE);
 		}
 	} else {
-		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), "View");
-		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), "Use default View options");
+		gtk_label_set_text (GTK_LABEL (fp_dlg->prop1_label), _("View"));
+		gtk_label_set_text (GTK_LABEL (GTK_BIN (fp_dlg->prop1_cbox)->child), _("Use default View options"));
 		if (fp_dlg->fm_view) {
 			gtk_entry_set_text (GTK_ENTRY (fp_dlg->prop1_entry), fp_dlg->fm_view);
 			gtk_toggle_button_set_active ( GTK_TOGGLE_BUTTON  (fp_dlg->prop1_cbox), FALSE);
@@ -436,7 +436,7 @@ generate_icon_sel (GnomeFilePropertyDialog *fp_dlg)
 	GtkWidget *retval;
 	gchar *icon;
 	
-	retval = gnome_icon_entry_new ("gmc_file_icon", "Select an Icon");
+	retval = gnome_icon_entry_new ("gmc_file_icon", _("Select an Icon"));
 	icon = g_strdup (gicon_get_filename_for_icon (fp_dlg->im));
 
 	if (icon == NULL)

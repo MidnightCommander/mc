@@ -1,3 +1,11 @@
+1999-04-18  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (create_general_properties): Mark
+	some more strings for translations.  Thanks to David Martina for
+	pointing these out.
+
+	* mc.keys.in.in: New icons from Tim Davis <davist@cs.man.ac.uk>
+
 1999-04-16  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c: Include the glib.h header file here.
