@@ -1,5 +1,10 @@
 2002-10-30  Pavel Roskin  <proski@gnu.org>
 
+	* charset.h: Provide new inline functions convert_to_display_c()
+	and convert_from_input_c().
+	* view.c: Include charset.h unconditionally, use new conversion
+	functions that don't require ifdefs.
+
 	* charset.h [!HAVE_CHARSET]: Provide dummy macros for
 	convert_to_display and convert_from_input.  Eliminate uchar
 	definition, use unsigned char, adjust dependencies.

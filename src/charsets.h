@@ -11,7 +11,6 @@ extern int n_codepages;
 
 extern unsigned char conv_displ[256];
 extern unsigned char conv_input[256];
-extern unsigned char printable[256];
 
 struct codepage_desc {
     char *id;
@@ -29,9 +28,30 @@ void convert_to_display (char *str);
 void convert_from_input (char *str);
 void convert_string (unsigned char *str);
 
+/* Convert single characters */
+static inline int
+convert_to_display_c (int c)
+{
+    if (c < 0 || c >= 256)
+	return c;
+    return conv_displ[c];
+}
+
+static inline int
+convert_from_input_c (int c)
+{
+    if (c < 0 || c >= 256)
+	return c;
+    return conv_input[c];
+}
+
 #else /* !HAVE_CHARSET */
-#define convert_to_display(x) do {} while (0)
-#define convert_from_input(x) do {} while (0)
+
+#define convert_to_display_c(c) (c)
+#define convert_from_input_c(c) (c)
+#define convert_to_display(str) do {} while (0)
+#define convert_from_input(str) do {} while (0)
+
 #endif /* HAVE_CHARSET */
 
 #endif /* __CHARSETS_H__ */

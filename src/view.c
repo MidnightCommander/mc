@@ -57,10 +57,8 @@
 #define WANT_WIDGETS
 #include "view.h"
 
-#ifdef HAVE_CHARSET
 #include "charsets.h"
 #include "selcodepage.h"
-#endif				/* HAVE_CHARSET */
 
 #ifndef MAP_FILE
 #define MAP_FILE 0
@@ -935,9 +933,7 @@ display (WView *view)
 		/* Print the corresponding ascii character */
 		view_gotoyx (view, row, text_start + bytes);
 
-#ifdef HAVE_CHARSET
-		c = conv_displ[c];
-#endif
+		c = convert_to_display_c (c);
 
 		if (!is_printable (c))
 		    c = '.';
@@ -1024,9 +1020,7 @@ display (WView *view)
 		&& col < width - view->start_col) {
 		view_gotoyx (view, row, col + view->start_col);
 
-#ifdef HAVE_CHARSET
-		c = conv_displ[c];
-#endif
+		c = convert_to_display_c (c);
 
 		if (!is_printable (c))
 		    c = '.';
@@ -1972,20 +1966,15 @@ normal_search (WView *view, int direction)
 
     exp = old ? old : exp;
 
-#ifdef HAVE_CHARSET
-    if (*exp)
-	convert_to_display (exp);
-#endif
+    convert_to_display (exp);
 
     exp = input_dialog (_("Search"), _(" Enter search string:"), exp);
 
     if ((!exp) || (!*exp)) {
 	if (exp)
 	    g_free (exp);
-#ifdef HAVE_CHARSET
-	if (old && *old)
-	    convert_from_input (old);
-#endif
+
+	convert_from_input (old);
 	return;
     }
 
@@ -1993,9 +1982,7 @@ normal_search (WView *view, int direction)
 	g_free (old);
     old = exp;
 
-#ifdef HAVE_CHARSET
     convert_from_input (exp);
-#endif
 
     view->direction = direction;
     do_normal_search (view, exp);
@@ -2142,11 +2129,7 @@ view_handle_key (WView *view, int c)
 
     set_monitor (view, off);
 
-#ifdef HAVE_CHARSET
-    if (c >= 128 && c <= 255) {
-	c = conv_input[c];
-    }
-#endif
+    c = convert_from_input_c (c);
 
     if (view->hex_mode) {
 	switch (c) {
