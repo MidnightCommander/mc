@@ -7,18 +7,25 @@ context default
 	keyword whole array yellow/24
 	keyword whole bgerror yellow/24
 	keyword whole binary yellow/24
+	keyword whole body yellow/24
 	keyword whole break yellow/24
 	keyword whole case yellow/24
 	keyword whole catch yellow/24
 	keyword whole cd yellow/24
+	keyword whole class yellow/24
 	keyword whole clock yellow/24
 	keyword whole close yellow/24
 	keyword whole concat yellow/24
+	keyword whole constructor yellow/24
 	keyword whole continue yellow/24
 	keyword whole dde yellow/24
+	keyword whole default yellow/24
+	keyword whole delete yellow/24
+	keyword whole destructor yellow/24
 	keyword whole else yellow/24
 	keyword whole elsif yellow/24
 	keyword whole encoding yellow/24
+	keyword whole end yellow/24
 	keyword whole eof yellow/24
 	keyword whole error yellow/24
 	keyword whole eval yellow/24
@@ -43,6 +50,8 @@ context default
 	keyword whole if yellow/24
 	keyword whole incr yellow/24
 	keyword whole info yellow/24
+	keyword whole inherit yellow/24
+	keyword whole insert yellow/24
 	keyword whole interp yellow/24
 	keyword whole join yellow/24
 	keyword whole lappend yellow/24
@@ -58,14 +67,18 @@ context default
 	keyword whole lset yellow/24
 	keyword whole lsort yellow/24
 	keyword whole memory yellow/24
+	keyword whole method yellow/24
 	keyword whole msgcat yellow/24
 	keyword whole namespace yellow/24
+	keyword whole object yellow/24
 	keyword whole open yellow/24
 	keyword whole package yellow/24
 	keyword whole packagens yellow/24
 	keyword whole pid yellow/24
 	keyword whole pkgMkIndex yellow/24
 	keyword whole proc yellow/24
+	keyword whole protected yellow/24
+	keyword whole public yellow/24
 	keyword whole puts yellow/24
 	keyword whole pwd yellow/24
 	keyword whole re_syntax yellow/24
@@ -101,18 +114,28 @@ context default
 	keyword whole vwait yellow/24
 	keyword whole while yellow/24
 
-	keyword wholeright #\{0123456789\} brightred/18
 	keyword ${+} brightgreen/16
-	keyword wholeright $+ brightgreen/16
 
+wholechars right abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+wholechars left abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_
+	keyword wholeright $+ brightgreen/16
+	keyword wholeright \s-\{abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ\}+ cyan/16
+
+	keyword < yellow/24
+	keyword > yellow/24
+	keyword = yellow/24
+	keyword || yellow/24
+	keyword && yellow/24
+	keyword != yellow/24
+	keyword == yellow/24
+	keyword :: yellow/24
 	keyword { brightcyan/14
 	keyword } brightcyan/14
-	keyword ( brightcyan/15
-	keyword ) brightcyan/15
+	keyword ( brightcyan/14
+	keyword ) brightcyan/14
 	keyword [ brightcyan/14
 	keyword ] brightcyan/14
 	keyword ; brightmagenta/19
-	keyword :: yellow/24
 
 context # \n brown/22
 
