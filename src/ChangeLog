@@ -1,5 +1,11 @@
 2001-06-22  Pavel Roskin  <proski@gnu.org>
 
+	* fsusage.c: Use HAVE_INFOMOUNT.
+	* mountlist.c: Likewise. Fix condition when mount_list is
+	declared.
+	(fstype_to_string): Rename mount_list to mlist to avoid
+	confusion with the file-scoped static variable.
+
 	* cmd.c [HAVE_X]: Disable more code. Reorder includes.
 
 2001-06-20  Pavel Roskin  <proski@gnu.org>

@@ -91,11 +91,7 @@ void free (void *ptr);
 #include <sys/statfs.h>
 #endif
 
-#if defined (__QNX__) && !defined (__QNXNTO__)
-#define HAVE_QNX_MOUNT
-#endif
-
-#ifdef HAVE_QNX_MOUNT
+#ifdef HAVE_INFOMOUNT_QNX
 #include <sys/disk.h>
 #include <sys/fsys.h>
 #endif
@@ -112,14 +108,14 @@ void free (void *ptr);
 #define MOUNTED_GETMNTTBL
 #endif
 
+#ifdef HAVE_INFOMOUNT_LIST
+
+static struct mount_entry *mount_list = NULL;
+
 #ifdef MOUNTED_GETMNTENT1	/* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
 /* Return the value of the hexadecimal number represented by CP.
    No prefix (like '0x') or suffix (like 'h') is expected to be
    part of CP. */
-
-#ifndef NO_INFOMOUNT
-
-static struct mount_entry *mount_list = NULL;
 
 static int xatoi (char *cp)
 {
@@ -139,7 +135,7 @@ static int xatoi (char *cp)
     }
     return val;
 }
-#endif				/* MOUNTED_GETMNTENT1.  */
+#endif /* MOUNTED_GETMNTENT1 */
 
 #if defined (MOUNTED_GETMNTINFO) && !defined (HAVE_F_FSTYPENAME)
 static char *fstype_to_string (short t)
@@ -173,7 +169,7 @@ static char *fstype_to_string (short t)
 	return "?";
     }
 }
-#endif				/* MOUNTED_GETMNTINFO */
+#endif /* MOUNTED_GETMNTINFO && !HAVE_F_FSTYPENAME */
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
 static char *fstype_to_string (int t)
@@ -186,7 +182,7 @@ static char *fstype_to_string (int t)
     else
 	return e->vfsent_name;
 }
-#endif				/* MOUNTED_VMOUNT */
+#endif /* MOUNTED_VMOUNT */
 
 /* Return a list of the currently mounted filesystems, or NULL on error.
    Add each entry to the tail of the list so that they stay in order.
@@ -197,14 +193,14 @@ static char *fstype_to_string (int t)
 
 struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 {
-    struct mount_entry *mount_list;
+    struct mount_entry *mlist;
     struct mount_entry *me;
     struct mount_entry *mtail;
 
     /* Start the list off with a dummy entry. */
     me = (struct mount_entry *) malloc (sizeof (struct mount_entry));
     me->me_next = NULL;
-    mount_list = mtail = me;
+    mlist = mtail = me;
 
 #ifdef MOUNTED_GETMNTENT1	/* 4.3BSD, SunOS, HP-UX, Dynix, Irix.  */
     {
@@ -244,7 +240,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	if (endmntent (fp) == 0)
 	    return NULL;
     }
-#endif				/* MOUNTED_GETMNTENT1. */
+#endif /* MOUNTED_GETMNTENT1 */
 
 #ifdef MOUNTED_GETMNTINFO	/* 4.4BSD.  */
     {
@@ -272,7 +268,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	    fsp++;
 	}
     }
-#endif				/* MOUNTED_GETMNTINFO */
+#endif /* MOUNTED_GETMNTINFO */
 
 #ifdef MOUNTED_GETMNT		/* Ultrix.  */
     {
@@ -296,9 +292,9 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	if (val < 0)
 	    return NULL;
     }
-#endif				/* MOUNTED_GETMNT. */
+#endif /* MOUNTED_GETMNT */
 
-#if defined (MOUNTED_GETFSSTAT)	/* __alpha running OSF_1 */
+#ifdef MOUNTED_GETFSSTAT	/* __alpha running OSF_1 */
     {
 	int numsys, counter, bufsize;
 	struct statfs *stats;
@@ -330,7 +326,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 
 	free (stats);
     }
-#endif				/* MOUNTED_GETFSSTAT */
+#endif /* MOUNTED_GETFSSTAT */
 
 #if defined (MOUNTED_FREAD) || defined (MOUNTED_FREAD_FSTYP)	/* SVR[23].  */
     {
@@ -374,7 +370,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	if (fclose (fp) == EOF)
 	    return NULL;
     }
-#endif				/* MOUNTED_FREAD || MOUNTED_FREAD_FSTYP.  */
+#endif /* MOUNTED_FREAD || MOUNTED_FREAD_FSTYP */
 
 #ifdef MOUNTED_GETMNTTBL	/* DolphinOS goes it's own way */
     {
@@ -393,7 +389,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	}
 	endmnttbl ();
     }
-#endif
+#endif /* MOUNTED_GETMNTTBL */
 
 #ifdef MOUNTED_GETMNTENT2	/* SVR4.  */
     {
@@ -423,7 +419,7 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	if (fclose (fp) == EOF)
 	    return NULL;
     }
-#endif				/* MOUNTED_GETMNTENT2.  */
+#endif /* MOUNTED_GETMNTENT2 */
 
 #ifdef MOUNTED_VMOUNT		/* AIX.  */
     {
@@ -467,17 +463,17 @@ struct mount_entry *read_filesystem_list (int need_fs_type, int all_fs)
 	}
 	free (entries);
     }
-#endif				/* MOUNTED_VMOUNT. */
+#endif /* MOUNTED_VMOUNT */
 
     /* Free the dummy head. */
-    me = mount_list;
-    mount_list = mount_list->me_next;
+    me = mlist;
+    mlist = mlist->me_next;
     free (me);
-    return mount_list;
+    return mlist;
 }
-#endif /* NO_INFOMOUNT */
+#endif /* HAVE_INFOMOUNT_LIST */
 
-#if defined(NO_INFOMOUNT) && defined(HAVE_QNX_MOUNT)
+#ifdef HAVE_INFOMOUNT_QNX
 /*
 ** QNX has no [gs]etmnt*(), [gs]etfs*(), or /etc/mnttab, but can do
 ** this via the following code.
@@ -540,22 +536,22 @@ struct mount_entry *read_filesystem_list(int need_fs_type, int all_fs)
 		de.disk_type, tp, _DRIVER_NAME_LEN, _DRIVER_NAME_LEN, de.driver_name, de.disk_drv);
 	fprintf(stderr, "fsys_get_mount_dev():\n\tdevice='%s'\n", dev);
 	fprintf(stderr, "fsys_get_mount_pt():\n\tmount point='%s'\n", dir);
-#endif
+#endif /* DEBUG */
 
 	return (me);
 }
-#endif /* HAVE_QNX_MOUNT */
+#endif /* HAVE_INFOMOUNT_QNX */
 
 void init_my_statfs (void)
 {
-#ifndef NO_INFOMOUNT
+#ifdef HAVE_INFOMOUNT_LIST
     mount_list = read_filesystem_list (1, 1);
-#endif
+#endif /* HAVE_INFOMOUNT_LIST */
 }
 
 void my_statfs (struct my_statfs *myfs_stats, char *path)
 {
-#ifndef NO_INFOMOUNT
+#ifdef HAVE_INFOMOUNT_LIST
     int i, len = 0;
     struct mount_entry *entry = NULL;
     struct mount_entry *temp = mount_list;
@@ -583,8 +579,9 @@ void my_statfs (struct my_statfs *myfs_stats, char *path)
 	myfs_stats->nfree = fs_use.fsu_ffree;
 	myfs_stats->nodes = fs_use.fsu_files;
     } else
-#endif
-#if defined(NO_INFOMOUNT) && defined(HAVE_QNX_MOUNT)
+#endif /* HAVE_INFOMOUNT_LIST */
+
+#ifdef HAVE_INFOMOUNT_QNX
 /*
 ** This is the "other side" of the hack to read_filesystem_list() in
 ** mountlist.c.
@@ -609,7 +606,7 @@ void my_statfs (struct my_statfs *myfs_stats, char *path)
 		myfs_stats->nodes = fs_use.fsu_files;
 	}
 	else
-#endif
+#endif /* HAVE_INFOMOUNT_QNX */
     {
 	myfs_stats->type = 0;
 	myfs_stats->mpoint = "unknown";
