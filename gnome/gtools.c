@@ -84,7 +84,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 
 	/* Now do the GTK stuff */
 	gtk_container_add (GTK_CONTAINER (dialog->vbox), GTK_WIDGET (label->widget.wdata));
-	gtk_container_border_width (GTK_CONTAINER (dialog->vbox), 5);
+	gtk_container_set_border_width (GTK_CONTAINER (dialog->vbox), 5);
 
 	g_list_foreach (list, (GFunc) pack_button, dialog->action_area);
 	g_list_free (list);

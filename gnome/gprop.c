@@ -60,7 +60,7 @@ gprop_filename_new (char *complete_filename, char *filename)
 	gtk_widget_show (frame);
 
 	vbox = gtk_vbox_new (FALSE, 6);
-	gtk_container_border_width (GTK_CONTAINER (vbox), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
 
@@ -111,7 +111,7 @@ gprop_exec_new (GnomeDesktopEntry *dentry)
 	gtk_widget_show (frame);
 	
 	table = gtk_table_new (0, 0, 0);
-	gtk_container_border_width (GTK_CONTAINER (table), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (table), 6);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 6);
 	gtk_container_add (GTK_CONTAINER (frame), table);
@@ -248,7 +248,7 @@ perm_mode_new (GpropPerm *gp, umode_t umode)
 	frame = gtk_frame_new (_("File mode (permissions)"));
 
 	vbox = gtk_vbox_new (FALSE, 4);
-	gtk_container_border_width (GTK_CONTAINER (vbox), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
 	gtk_container_add (GTK_CONTAINER (frame), vbox);
 	gtk_widget_show (vbox);
 
@@ -379,7 +379,7 @@ perm_ownership_new (GpropPerm *gp, char *owner, char *group)
 	frame = gtk_frame_new ("File ownership");
 
 	table = gtk_table_new (2, 2, FALSE);
-	gtk_container_border_width (GTK_CONTAINER (table), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (table), 6);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 6);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 4);
 	gtk_container_add (GTK_CONTAINER (frame), table);
@@ -497,7 +497,7 @@ gprop_general_new (char *title, char *icon_filename)
 	gtk_widget_show (frame);
 
 	table = gtk_table_new (3, 2, FALSE);
-	gtk_container_border_width (GTK_CONTAINER (table), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (table), 6);
 	gtk_table_set_row_spacings (GTK_TABLE (table), 6);
 	gtk_table_set_col_spacings (GTK_TABLE (table), 4);
 	gtk_container_add (GTK_CONTAINER (frame), table);

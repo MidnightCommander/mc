@@ -2154,7 +2154,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 * Status line and packing of all of the toys
 	 */
 	status_line = gtk_hbox_new (0, 0);
-	gtk_container_border_width (GTK_CONTAINER (status_line), 3);
+	gtk_container_set_border_width (GTK_CONTAINER (status_line), 3);
 	
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->back_b, 0, 0, 2);
@@ -2174,7 +2174,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	 */
 	frame = gtk_frame_new (NULL);
 	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-	gtk_container_border_width (GTK_CONTAINER (frame), 3);
+	gtk_container_set_border_width (GTK_CONTAINER (frame), 3);
 
 	panel->status = gtk_label_new (""); /* used to be a cliplabel */
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);

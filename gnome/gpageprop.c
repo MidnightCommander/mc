@@ -28,7 +28,7 @@ static int prop_dialog_result;
 static GtkWidget *
 c_spacing (GtkWidget *widget)
 {
-	gtk_container_border_width (GTK_CONTAINER (widget), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (widget), 6);
 	return widget;
 }
 
