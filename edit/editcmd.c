@@ -220,7 +220,7 @@ edit_save_file (WEdit *edit, const char *filename)
 
     if (*filename != PATH_SEP && edit->dir) {
 	savename = concat_dir_and_file (edit->dir, filename);
-	filename = catstrs (savename, NULL);
+	filename = catstrs (savename, (char *) NULL);
 	g_free (savename);
     }
 
@@ -283,7 +283,7 @@ edit_save_file (WEdit *edit, const char *filename)
 	    if (pclose (file) != 0) {
 		edit_error_dialog (_("Error"),
 				   catstrs (_(" Error writing to pipe: "),
-					    p, " ", 0));
+					    p, " ", (char *) NULL));
 		g_free (p);
 		goto error_save;
 	    }
@@ -293,7 +293,7 @@ edit_save_file (WEdit *edit, const char *filename)
 			       get_sys_error (catstrs
 					      (_
 					       (" Cannot open pipe for writing: "),
-					       p, " ", 0)));
+					       p, " ", (char *) NULL)));
 	    g_free (p);
 	    goto error_save;
 	}
@@ -344,7 +344,7 @@ edit_save_file (WEdit *edit, const char *filename)
     if (filelen != edit->last_byte)
 	goto error_save;
     if (this_save_mode == EDIT_DO_BACKUP)
-	if (mc_rename (filename, catstrs (filename, option_backup_ext, 0))
+	if (mc_rename (filename, catstrs (filename, option_backup_ext, (char *) NULL))
 	    == -1)
 	    goto error_save;
     if (this_save_mode != EDIT_QUICK_SAVE)
@@ -586,7 +586,7 @@ static FILE *edit_open_macro_file (const char *r)
 {
     char *filename;
     int file;
-    filename = catstrs (home_dir, MACRO_FILE, 0);
+    filename = catstrs (home_dir, MACRO_FILE, (char *) NULL);
     if ((file = open (filename, O_CREAT | O_RDWR, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	return 0;
     close (file);
@@ -622,7 +622,7 @@ edit_delete_macro (WEdit * edit, int k)
     if (saved_macros_loaded)
 	if ((j = macro_exists (k)) < 0)
 	    return 0;
-    g = fopen (catstrs (home_dir, TEMP_FILE, 0), "w");
+    g = fopen (catstrs (home_dir, TEMP_FILE, (char *) NULL), "w");
     if (!g) {
 /* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
@@ -656,7 +656,7 @@ edit_delete_macro (WEdit * edit, int k)
     }
     fclose (f);
     fclose (g);
-    if (rename (catstrs (home_dir, TEMP_FILE, 0), catstrs (home_dir, MACRO_FILE, 0)) == -1) {
+    if (rename (catstrs (home_dir, TEMP_FILE, (char *) NULL), catstrs (home_dir, MACRO_FILE, (char *) NULL)) == -1) {
 /* This heads the delete macro error dialog box */
 	edit_error_dialog (_(" Delete macro "),
 	   get_sys_error (_(" Cannot overwrite macro file ")));
@@ -765,7 +765,7 @@ int edit_save_confirm_cmd (WEdit * edit)
     char *f;
 
     if (edit_confirm_save) {
-	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", 0);
+	f = catstrs (_(" Confirm save file? : "), edit->filename, " ", (char *) NULL);
 /* Buttons to 'Confirm save file' query */
 	if (edit_query_dialog2 (_(" Save file "), f, _("&Save"), _("&Cancel")))
 	    return 0;
@@ -2215,7 +2215,7 @@ edit_save_block (WEdit * edit, const char *filename, long start,
 /* copies a block to clipboard file */
 static int edit_save_block_to_clip_file (WEdit * edit, long start, long finish)
 {
-    return edit_save_block (edit, catstrs (home_dir, CLIP_FILE, 0), start, finish);
+    return edit_save_block (edit, catstrs (home_dir, CLIP_FILE, (char *) NULL), start, finish);
 }
 
 
@@ -2252,7 +2252,7 @@ int edit_cut_to_X_buf_cmd (WEdit * edit)
 
 void edit_paste_from_X_buf_cmd (WEdit * edit)
 {
-    edit_insert_file (edit, catstrs (home_dir, CLIP_FILE, 0));
+    edit_insert_file (edit, catstrs (home_dir, CLIP_FILE, (char *) NULL));
 }
 
 
@@ -2304,7 +2304,7 @@ edit_save_block_cmd (WEdit *edit)
     if (eval_marks (edit, &start_mark, &end_mark))
 	return 1;
     exp =
-	edit_get_save_file (catstrs (home_dir, CLIP_FILE, 0),
+	edit_get_save_file (catstrs (home_dir, CLIP_FILE, (char *) NULL),
 			    _(" Save Block "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2333,7 +2333,7 @@ edit_save_block_cmd (WEdit *edit)
 int
 edit_insert_file_cmd (WEdit *edit)
 {
-    char *exp = edit_get_load_file (catstrs (home_dir, CLIP_FILE, 0),
+    char *exp = edit_get_load_file (catstrs (home_dir, CLIP_FILE, (char *) NULL),
 				    _(" Insert File "));
     edit_push_action (edit, KEY_PRESS + edit->start_display);
     if (exp) {
@@ -2369,7 +2369,7 @@ int edit_sort_cmd (WEdit * edit)
 	edit_error_dialog (_(" Sort block "), _(" You must first highlight a block of text. "));
 	return 0;
     }
-    edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, 0), start_mark, end_mark);
+    edit_save_block (edit, catstrs (home_dir, BLOCK_FILE, (char *) NULL), start_mark, end_mark);
 
     exp = old ? old : "";
 
@@ -2382,7 +2382,7 @@ int edit_sort_cmd (WEdit * edit)
 	g_free (old);
     old = exp;
 
-    e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, 0));
+    e = system (catstrs (" sort ", exp, " ", home_dir, BLOCK_FILE, " > ", home_dir, TEMP_FILE, (char *) NULL));
     if (e) {
 	if (e == -1 || e == 127) {
 	    edit_error_dialog (_(" Sort "), 
@@ -2391,7 +2391,7 @@ int edit_sort_cmd (WEdit * edit)
 	    char q[8];
 	    sprintf (q, "%d ", e);
 	    edit_error_dialog (_(" Sort "), 
-	    catstrs (_(" Sort returned non-zero: "), q, 0));
+	    catstrs (_(" Sort returned non-zero: "), q, (char *) NULL));
 	}
 	return -1;
     }
@@ -2400,7 +2400,7 @@ int edit_sort_cmd (WEdit * edit)
 
     if (edit_block_delete_cmd (edit))
 	return 1;
-    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, 0));
+    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, (char *) NULL));
     return 0;
 }
 
@@ -2421,7 +2421,7 @@ edit_ext_cmd (WEdit *edit)
     if (!exp)
 	return 1;
 
-    e = system (catstrs (exp, " > ", home_dir, TEMP_FILE, 0));
+    e = system (catstrs (exp, " > ", home_dir, TEMP_FILE, (char *) NULL));
     g_free (exp);
 
     if (e) {
@@ -2432,7 +2432,7 @@ edit_ext_cmd (WEdit *edit)
 
     edit->force |= REDRAW_COMPLETELY;
 
-    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, 0));
+    edit_insert_file (edit, catstrs (home_dir, TEMP_FILE, (char *) NULL));
     return 0;
 }
 
@@ -2452,16 +2452,16 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
     char *b = NULL;
     char *quoted_name = NULL;
 
-    o = catstrs (mc_home, shell_cmd, 0);	/* original source script */
-    h = catstrs (home_dir, EDIT_DIR, shell_cmd, 0);	/* home script */
-    b = catstrs (home_dir, BLOCK_FILE, 0);	/* block file */
+    o = catstrs (mc_home, shell_cmd, (char *) NULL);	/* original source script */
+    h = catstrs (home_dir, EDIT_DIR, shell_cmd, (char *) NULL);	/* home script */
+    b = catstrs (home_dir, BLOCK_FILE, (char *) NULL);	/* block file */
 
     if (!(script_home = fopen (h, "r"))) {
 	if (!(script_home = fopen (h, "w"))) {
 	    edit_error_dialog ("", get_sys_error (catstrs
 						  (_
 						   ("Error creating script:"),
-						   h, 0)));
+						   h, (char *) NULL)));
 	    return;
 	}
 	if (!(script_src = fopen (o, "r"))) {
@@ -2469,7 +2469,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	    unlink (h);
 	    edit_error_dialog ("", get_sys_error (catstrs
 						  (_("Error reading script:"),
-						   o, 0)));
+						   o, (char *) NULL)));
 	    return;
 	}
 	while (fgets (buf, sizeof (buf), script_src))
@@ -2478,12 +2478,12 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	    edit_error_dialog ("", get_sys_error (catstrs
 						  (_
 						   ("Error closing script:"),
-						   h, 0)));
+						   h, (char *) NULL)));
 	    return;
 	}
 	chmod (h, 0700);
 	edit_error_dialog ("", get_sys_error (catstrs
-					      (_("Script created:"), h, 0)));
+					      (_("Script created:"), h, (char *) NULL)));
     }
 
     open_error_pipe ();
@@ -2507,7 +2507,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 *        (for compatibility with old scripts).
 	 */
 	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ", quoted_name,
-			 " ", home_dir, BLOCK_FILE " /dev/null", NULL));
+			 " ", home_dir, BLOCK_FILE " /dev/null", (char *) NULL));
 
     } else {
 	/*
@@ -2516,7 +2516,7 @@ edit_block_process_cmd (WEdit *edit, const char *shell_cmd, int block)
 	 *   $1 - name of the edited file.
 	 */
 	system (catstrs (" ", home_dir, EDIT_DIR, shell_cmd, " ",
-			 quoted_name, NULL));
+			 quoted_name, (char *) NULL));
     }
     g_free (quoted_name);
     close_error_pipe (0, 0);
@@ -2558,7 +2558,7 @@ static void pipe_mail (WEdit *edit, char *to, char *subject, char *cc)
     to = name_quote (to, 0);
     subject = name_quote (subject, 0);
     cc = name_quote (cc, 0);
-    s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "" , cc, " ",  to, NULL);
+    s = g_strconcat ("mail -s ", subject, *cc ? " -c " : "" , cc, " ",  to, (char *) NULL);
     g_free (to);
     g_free (subject);
     g_free (cc);

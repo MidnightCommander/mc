@@ -132,7 +132,7 @@ edit_lock_file (const char *fname)
 	return 0;
 
     /* Check if already locked */
-    lockfname = g_strconcat (".#", fname, NULL);
+    lockfname = g_strconcat (".#", fname, (char *) NULL);
     if (lstat (lockfname, &statbuf) == 0) {
 	lock = lock_get_info (lockfname);
 	if (!lock) {
@@ -191,7 +191,7 @@ edit_unlock_file (const char *fname)
     if (!fname || !*fname)
 	return 0;
 
-    lockfname = g_strconcat (".#", fname, NULL);
+    lockfname = g_strconcat (".#", fname, (char *) NULL);
 
     /* Check if lock exists */
     if (lstat (lockfname, &statbuf) == -1) {

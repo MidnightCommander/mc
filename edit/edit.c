@@ -147,7 +147,7 @@ edit_load_file_fast (WEdit *edit, const char *filename)
 			   get_sys_error (catstrs
 					  (_
 					   (" Cannot open file for reading: "),
-					   filename, " ", 0)));
+					   filename, " ", (char *) NULL)));
 	return 1;
     }
 
@@ -276,7 +276,7 @@ edit_insert_file (WEdit *edit, const char *filename)
 		edit_error_dialog (_("Error"),
 				   catstrs (_
 					    (" Error reading from pipe: "),
-					    p, " ", 0));
+					    p, " ", (char *) NULL));
 		g_free (p);
 		return 0;
 	    }
@@ -285,7 +285,7 @@ edit_insert_file (WEdit *edit, const char *filename)
 			       get_sys_error (catstrs
 					      (_
 					       (" Cannot open pipe for reading: "),
-					       p, " ", 0)));
+					       p, " ", (char *) NULL)));
 	    g_free (p);
 	    return 0;
 	}
@@ -333,7 +333,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 			       get_sys_error (catstrs
 					      (_
 					       (" Cannot open file for reading: "),
-					       filename, " ", 0)));
+					       filename, " ", (char *) NULL)));
 	    return 1;
 	} else {
 	    /* New file, delete it if it's not modified or saved */
@@ -348,7 +348,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 			   get_sys_error (catstrs
 					  (_
 					   (" Cannot get size/permissions info for file: "),
-					   filename, " ", 0)));
+					   filename, " ", (char *) NULL)));
 	return 1;
     }
 
@@ -357,7 +357,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 	mc_close (file);
 	edit_error_dialog (_("Error"),
 			   catstrs (_(" Not an ordinary file: "), filename,
-				    " ", 0));
+				    " ", (char *) NULL));
 	return 1;
     }
 
@@ -373,7 +373,7 @@ check_file_access (WEdit *edit, const char *filename, struct stat *st)
 	mc_close (file);
 	edit_error_dialog (_("Error"),
 			   catstrs (_(" File is too large: "), filename,
-				    0));
+				    (char *) NULL));
 	return 1;
     }
 
@@ -2655,7 +2655,7 @@ user_menu (WEdit * edit)
     int nomark;
     struct stat status;
     long start_mark, end_mark;
-    char *block_file = catstrs (home_dir, BLOCK_FILE, 0);
+    char *block_file = catstrs (home_dir, BLOCK_FILE, (char *) NULL);
     int rc = 0;
 
     nomark = eval_marks (edit, &start_mark, &end_mark);

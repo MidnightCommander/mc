@@ -3,6 +3,12 @@
 	* editdraw.c (status_string): Removed unused parameter.
 	(edit_status): Rewrote to allow longer filenames to be displayed
 	completely whenever possible.
+	* edit.c: Replaced NULL with (char *) NULL. Likewise for 0, where
+	NULL was meant.
+	* editcmd.c: Likewise.
+	* editlock.c: Likewise.
+	* editwidget.c: Likewise.
+	* syntax.c: Likewise.
 
 2004-09-19  Roland Illig  <roland.illig@gmx.de>
 

@@ -622,14 +622,14 @@ static FILE *open_include_file (const char *filename)
 
     g_free (error_file_name);
     error_file_name = g_strconcat (home_dir, EDIT_DIR PATH_SEP_STR,
-				   filename, NULL);
+				   filename, (char *) NULL);
     f = fopen (error_file_name, "r");
     if (f)
 	return f;
 
     g_free (error_file_name);
     error_file_name = g_strconcat (mc_home, PATH_SEP_STR "syntax" PATH_SEP_STR,
-				   filename, NULL);
+				   filename, (char *) NULL);
     return fopen (error_file_name, "r");
 }
 
@@ -1107,7 +1107,7 @@ edit_load_syntax (WEdit *edit, char **names, const char *type)
 	if (!*edit->filename && !type)
 	    return;
     }
-    f = catstrs (home_dir, SYNTAX_FILE, 0);
+    f = catstrs (home_dir, SYNTAX_FILE, (char *) NULL);
     r = edit_read_syntax_file (edit, names, f, edit ? edit->filename : 0,
 			       get_first_editor_line (edit), type);
     if (r == -1) {

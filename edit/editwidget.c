@@ -176,7 +176,7 @@ edit_file (const char *_file, int line)
 		sizeof (int));
     }
     if (!made_directory) {
-	mkdir (catstrs (home_dir, EDIT_DIR, 0), 0700);
+	mkdir (catstrs (home_dir, EDIT_DIR, (char *) NULL), 0700);
 	made_directory = 1;
     }
 
