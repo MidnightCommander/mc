@@ -39,7 +39,6 @@
 #define NEEDS_FCNTL_H
 
 #define HAS_ACS_AS_PCCHARS
-#define NEEDS_CR_LF_TRANSLATION
 
 #ifdef MC_NT
 #  ifndef WIN32
