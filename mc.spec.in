@@ -1,7 +1,7 @@
 # Conditional build:
 #
 #%define _with_ncurses 1	# use ncurses
-%define _with_included_slang 1	# use included S-Lang library
+#%define _with_included_slang 1	# use included S-Lang library
 #%define _with_charset 1	# enable experimental code for charset conversion
 #%define _with_samba 1		# enable SMB/CIFS virtual file system
 #%define _with_glib2 1		# compile against glib2
@@ -99,6 +99,10 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/term
 
 %changelog
+* Tue Oct 22 2002 Pavel Roskin <proski@gnu.org>
+- Don't use the included S-Lang, there is a workaround for Red Hat 8.0
+  S-Lang, and binary compatibility with Red Hat 7.x doesn't work anyway.
+
 * Tue Oct 08 2002 Pavel Roskin <proski@gnu.org>
 - Use the included S-Lang again, since we include a better version now.
   This should avoid incompatibility with Red Hat 7.x.
