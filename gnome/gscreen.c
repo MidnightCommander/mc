@@ -1657,7 +1657,10 @@ panel_create_tree_view (WPanel *panel)
 	GtkWidget *tree;
 
 	tree = gtk_dtree_new ();
-	
+	gtk_ctree_set_line_style (GTK_CTREE (tree), GTK_CTREE_LINES_SOLID);
+        gtk_ctree_set_expander_style (GTK_CTREE (tree), GTK_CTREE_EXPANDER_SQUARE);
+        gtk_ctree_set_indent (GTK_CTREE (tree), 10);
+
 	gtk_signal_connect (GTK_OBJECT (tree), "directory_changed",
 			    GTK_SIGNAL_FUNC (panel_chdir), panel);
 
@@ -1861,7 +1864,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	/*
 	 * ministatus
 	 */
-	panel->ministatus = gtk_label_new (""); /* was a cliplabel */
+	panel->ministatus = gtk_label_new (" "); /* was a cliplabel */
 	gtk_widget_set_usize (panel->ministatus, 0, -1);
 	gtk_misc_set_alignment (GTK_MISC (panel->ministatus), 0.0, 0.0);
 	gtk_misc_set_padding (GTK_MISC (panel->ministatus), 3, 0);
@@ -1896,7 +1899,7 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	panel->status = gtk_label_new (""); /* used to be a cliplabel */
 	gtk_misc_set_alignment (GTK_MISC (panel->status), 0.0, 0.5);
 	gtk_misc_set_padding (GTK_MISC (panel->status), 3, 0);
-	gtk_container_add (GTK_CONTAINER (frame), panel->status);
+	gtk_container_add (GTK_CONTAINER (frame), panel->ministatus);
 	gtk_label_set_justify (GTK_LABEL (panel->status), GTK_JUSTIFY_LEFT);
 	gtk_widget_show_all (frame);
 

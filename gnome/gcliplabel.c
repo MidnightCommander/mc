@@ -11,7 +11,7 @@
 
 #include <string.h>
 #include "gcliplabel.h"
-
+#include <gtk/gtkcompat.h>
 
 static void gtk_clip_label_class_init    (GtkClipLabelClass  *klass);
 static void gtk_clip_label_size_request  (GtkWidget          *widget,

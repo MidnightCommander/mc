@@ -1,3 +1,8 @@
+1998-12-10  Jonathan Blandford  <jrb@redhat.com>
+
+	* gscreen.c (x_create_panel): made some small stylistic changes.
+	Also, removed the hint bar and consolidated the status bar.
+
 Thu Dec 10 21:38:55 1998  Owen Taylor  <otaylor@redhat.com>
 
 	* gkey.c (delete_select_channel): Fixed list handling

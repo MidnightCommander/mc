@@ -176,7 +176,7 @@ layout_panel_gone (WPanel *panel)
 void
 set_hintbar (char *str)
 {
-	gtk_label_set (GTK_LABEL (current_panel_ptr->panel->status), str);
+  /*gtk_label_set (GTK_LABEL (current_panel_ptr->panel->status), str);*/
 	x_flush_events ();
 }
 
