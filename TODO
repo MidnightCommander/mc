@@ -38,9 +38,6 @@ locking of the config files.
 Totals are not calculated when copying or moving a single directory. 
 Totals should only be omitted for single files.
 
-Add support for mouse wheel with gpm.  Latest versions of gpm (1.20)
-have mouse wheel support.
-
 Recheck all mouse handlers, make sure that they check button number.  We
 don't want mouse scrolling to be interpreted as mouse click.
 
