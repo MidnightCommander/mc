@@ -1,5 +1,11 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* samba/configure.in: Don't check for root permissions. Don't
+	call tests/trapdoor.c and tests/ftruncroot.c.
+	* samba/tests/trapdoor.c: Remove.
+	* samba/tests/ftruncroot.c: Likewise.
+	* samba/tests/summary.c: Don't warn about trapdoor uid systems.
+
 	* Make-mc.in: Don't link container.o into libvfs-mc.a - it's
 	not used.
 

@@ -11,10 +11,6 @@ main()
 	printf("WARNING: no shared memory. Running with slow locking code\n");
 #endif
 
-#ifdef HAVE_TRAPDOOR_UID
-	printf("WARNING: trapdoor uid system - Samba may not operate correctly\n");
-#endif
-
 #if !(defined(HAVE_NETMASK_IFCONF) || defined(HAVE_NETMASK_IFREQ) || defined(HAVE_NETMASK_AIX))
 	printf("WARNING: No automated netmask determination - use an interfaces line\n");
 #endif
