@@ -1,3 +1,7 @@
+2002-12-24  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/mailfs.in: Quote filename when openning mailbox.
+
 2002-12-24  Adam Byrtek  <alpha@debian.org>
  
 	* extfs/apt.in, extfs/dpkg.in: Avoid stat on non-existing file.

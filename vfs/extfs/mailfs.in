@@ -125,12 +125,13 @@ exit 1 unless ($#ARGV >= 1);
 $msg_nr=0;
 $cmd=shift;
 $mbox_name=shift;
-$_=`$file $mbox_name`;
+my $mbox_qname = quotemeta ($mbox_name);
+$_=`$file $mbox_qname`;
 
 if (/gzip/) {
-    exit 1 unless (open IN, "$zcat $mbox_name|");
+    exit 1 unless (open IN, "$zcat $mbox_qname|");
 } elsif (/bzip/) {
-    exit 1 unless (open IN, "$bzcat $mbox_name|");
+    exit 1 unless (open IN, "$bzcat $mbox_qname|");
 } else {
     exit 1 unless (open IN, "<$mbox_name");
 }
