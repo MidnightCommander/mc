@@ -93,7 +93,6 @@ struct WEdit {
     long last_get_rule;
     struct syntax_rule rule;
     char *syntax_type;		/* description of syntax highlighting type being used */
-    int explicit_syntax;	/* have we forced the syntax hi. type in spite of the filename? */
 
     /* macro stuff */
     int macro_i;		/* index to macro[], -1 if not recording a macro */

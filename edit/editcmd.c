@@ -487,7 +487,7 @@ edit_save_as_cmd (WEdit *edit)
 		g_free (exp);
 		edit->modified = 0;
 		edit->delete_file = 0;
-		if (different_filename && !edit->explicit_syntax)
+		if (different_filename)
 		    edit_load_syntax (edit, 0, 0);
 		edit->force |= REDRAW_COMPLETELY;
 		return 1;

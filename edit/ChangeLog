@@ -1,5 +1,7 @@
 2003-07-08  Pavel Roskin  <proski@gnu.org>
 
+	* edit-widget.h: Eliminate unused explicit_syntax field.
+
 	* edit-widget.h: Stop misusing "unsigned char" for boolean.
 	Eliminate have_frame - it's unused.  Adjust all dependencies.
 
