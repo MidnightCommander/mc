@@ -360,15 +360,15 @@ int mc_##name inarg \
     return result; \
 }
 
-MC_NAMEOP (chmod, (const char *path, int mode), (vfs, mpath, mode))
-MC_NAMEOP (chown, (const char *path, int owner, int group), (vfs, mpath, owner, group))
+MC_NAMEOP (chmod, (const char *path, mode_t mode), (vfs, mpath, mode))
+MC_NAMEOP (chown, (const char *path, uid_t owner, gid_t group), (vfs, mpath, owner, group))
 MC_NAMEOP (utime, (const char *path, struct utimbuf *times), (vfs, mpath, times))
 MC_NAMEOP (readlink, (const char *path, char *buf, int bufsiz), (vfs, mpath, buf, bufsiz))
 MC_NAMEOP (unlink, (const char *path), (vfs, mpath))
 MC_NAMEOP (symlink, (const char *name1, const char *path), (vfs, name1, mpath))
 MC_NAMEOP (mkdir, (const char *path, mode_t mode), (vfs, mpath, mode))
 MC_NAMEOP (rmdir, (const char *path), (vfs, mpath))
-MC_NAMEOP (mknod, (const char *path, int mode, int dev), (vfs, mpath, mode, dev))
+MC_NAMEOP (mknod, (const char *path, mode_t mode, dev_t dev), (vfs, mpath, mode, dev))
 
 
 #define MC_HANDLEOP(name, inarg, callarg) \

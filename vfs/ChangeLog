@@ -1,5 +1,12 @@
 2004-11-15  Leonard den Ottolander  <leonard * den ottolander nl>
 
+	* vfs.c: Changed types for mc_chmod, mc_chown, mc_mknod to mode_t,
+	uid_t, gid_t, and dev_t where appropriate.
+
+	Patch extended by Roland Illig.
+
+2004-11-15  Leonard den Ottolander  <leonard * den ottolander nl>
+
 	* vfs.c: fix MC_NAMEOP macro calls to use the canonicalized path.
 
 2004-11-10  Roland Illig  <roland.illig@gmx.de>

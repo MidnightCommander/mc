@@ -32,14 +32,14 @@ int mc_stat (const char *path, struct stat *buf);
 int mc_lstat (const char *path, struct stat *buf);
 int mc_fstat (int fd, struct stat *buf);
 
-int mc_chmod (const char *path, int mode);
-int mc_chown (const char *path, int owner, int group);
+int mc_chmod (const char *path, mode_t mode);
+int mc_chown (const char *path, uid_t owner, gid_t group);
 int mc_utime (const char *path, struct utimbuf *times);
 int mc_readlink (const char *path, char *buf, int bufsiz);
 int mc_unlink (const char *path);
 int mc_symlink (const char *name1, const char *name2);
 int mc_link (const char *name1, const char *name2);
-int mc_mknod (const char *, int, int);
+int mc_mknod (const char *, mode_t, dev_t);
 int mc_rename (const char *original, const char *target);
 int mc_rmdir (const char *path);
 int mc_mkdir (const char *path, mode_t mode);
