@@ -398,11 +398,13 @@ static int read_archive (int fstype, char *name, struct archive **pparc)
 static char *get_path (char *inname, struct archive **archive, int is_dir,
     int do_not_open);
 
-/* Returns path inside argument. Returned char* is inside inname, which is mangled
- * by this operation (so you must not free it's return value)
+/*
+ * Return path inside argument.  Returned char* is inside inname, which is mangled
+ * by this operation, so don't free the return value.
  */
-static char *get_path_mangle (char *inname, struct archive **archive, int is_dir,
-    int do_not_open)
+static char *
+get_path_mangle (char *inname, struct archive **archive, int is_dir,
+		 int do_not_open)
 {
     char *local, *archive_name, *op;
     int result = -1;
@@ -410,44 +412,38 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
     struct vfs_stamping *parent;
     vfs *v;
     int fstype;
-    
-    archive_name = inname;
-    vfs_split( inname, &local, &op );
-    fstype = extfs_which( NULL, op ); /* FIXME: we really should pass
-					 self pointer. But as we know that extfs_which does not touch vfs
-					 *me, it does not matter for now */
-    if (fstype == -1)
-        return NULL;
-    if (!local)
-        local = "";
 
-    /* All filesystems should have some local archive, at least
+    archive_name = inname;
+    vfs_split (inname, &local, &op);
+
+    /*
+     * FIXME: we really should pass self pointer. But as we know that
+     * extfs_which does not touch vfs *me, it does not matter for now
+     */
+    fstype = extfs_which (NULL, op);
+
+    if (fstype == -1)
+	return NULL;
+    if (!local)
+	local = "";
+
+    /*
+     * All filesystems should have some local archive, at least
      * it can be '/'.
-     *
-     * Actually, we should implement an alias mechanism that would
-     * translate: "a:" to "dos:a.
-     *
      */
     for (parc = first_archive; parc != NULL; parc = parc->next)
-        if (parc->name) {
+	if (parc->name) {
 	    if (!strcmp (parc->name, archive_name)) {
-		struct stat *s=&(parc->extfsstat);
-		if (vfs_uid && (!(s->st_mode & 0004)))
-		    if ((s->st_gid != vfs_gid) || !(s->st_mode & 0040))
-			if ((s->st_uid != vfs_uid) || !(s->st_mode & 0400))
-			    return NULL; 
- /* This is not too secure - in some cases (/#mtools) files created
-    under user a are probably visible to everyone else since / usually
-    has permissions 755 */
-	        vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
+		vfs_stamp (&vfs_extfs_ops, (vfsid) parc);
 		goto return_success;
 	    }
 	}
 
     result = do_not_open ? -1 : read_archive (fstype, archive_name, &parc);
-    if (result == -1) ERRNOR (EIO, NULL);
+    if (result == -1)
+	ERRNOR (EIO, NULL);
 
-    if (archive_name){
+    if (archive_name) {
 	v = vfs_type (archive_name);
 	if (v == &vfs_local_ops) {
 	    parent = NULL;
@@ -460,7 +456,7 @@ static char *get_path_mangle (char *inname, struct archive **archive, int is_dir
 	vfs_add_noncurrent_stamps (&vfs_extfs_ops, (vfsid) parc, parent);
 	vfs_rm_parents (parent);
     }
- return_success:
+  return_success:
     *archive = parc;
     return local;
 }

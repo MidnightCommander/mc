@@ -107,18 +107,16 @@ static char *
 redirect (vfs *me, char *name)
 {
     struct cachedfile *cur = head;
-    uid_t uid = vfs_uid;
     char *cache;
     int handle;
 
-    while (cur){
-        if ((!strcmp (name, cur->name)) &&
-	    (uid == cur->uid) &&
-	    (uptodate (cur->name, cur->cache)))
-		/* FIXME: when not uptodate, we might want to kill cache
-		 * file immediately, not to wait until timeout. */ {
-		vfs_stamp (&vfs_sfs_ops, cur);
-		return cur->cache;
+    while (cur) {
+	/* FIXME: when not uptodate, we might want to kill cache
+	 * file immediately, not to wait until timeout. */
+	if ((!strcmp (name, cur->name)) && (cur->uid == 0)
+	    && (uptodate (cur->name, cur->cache))) {
+	    vfs_stamp (&vfs_sfs_ops, cur);
+	    return cur->cache;
 	}
 	cur = cur->next;
     }
@@ -131,11 +129,11 @@ redirect (vfs *me, char *name)
 
     close (handle);
 
-    if (!vfmake (me, name, cache)){
+    if (!vfmake (me, name, cache)) {
 	cur = g_new (struct cachedfile, 1);
 	cur->name = g_strdup (name);
 	cur->cache = cache;
-	cur->uid = uid;
+	cur->uid = 0;
 	cur->next = head;
 	head = cur;
 
@@ -144,7 +142,7 @@ redirect (vfs *me, char *name)
 
 	return cache;
     }
-    
+
     unlink (cache);
     g_free (cache);
     return "/I_MUST_NOT_EXIST";
@@ -207,16 +205,16 @@ static int sfs_readlink (vfs *me, char *path, char *buf, int size)
     return readlink (path, buf, size);
 }
 
-static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
-{	/* FIXME: what should I do? */
+static vfsid
+sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
+{				/* FIXME: what should I do? */
     vfs *v;
     vfsid id;
     struct vfs_stamping *par;
     struct cachedfile *cur = head;
 
     while (cur) {
-        if ((!strcmp( path, cur->name )) &&
-	    (vfs_uid == cur->uid))
+	if ((!strcmp (path, cur->name)) && (cur->uid == 0))
 	    break;
 	cur = cur->next;
     }
@@ -224,22 +222,27 @@ static vfsid sfs_getid (vfs *me, char *path, struct vfs_stamping **parent)
     *parent = NULL;
 
     if (!cur)
-	return (vfsid)(-1);
+	return (vfsid) (-1);
 
     {
-        char *path2 = g_strdup (path);
-	v = vfs_split (path2, NULL, NULL);	/* Strip suffix which led to this being sfs */
-	v = vfs_split (path2, NULL, NULL);	/* ... and learn whoever was the parent system */
+	char *path2 = g_strdup (path);
+
+	/* Strip suffix which led to this being sfs */
+	v = vfs_split (path2, NULL, NULL);
+
+	/* ... and learn whoever was the parent system */
+	v = vfs_split (path2, NULL, NULL);
+
 	id = (*v->getid) (v, path2, &par);
 	g_free (path2);
     }
 
-    if (id != (vfsid)-1) {
-        *parent = g_new (struct vfs_stamping, 1);
-        (*parent)->v = v;
-        (*parent)->id = id;
-        (*parent)->parent = par;
-        (*parent)->next = NULL;
+    if (id != (vfsid) - 1) {
+	*parent = g_new (struct vfs_stamping, 1);
+	(*parent)->v = v;
+	(*parent)->id = id;
+	(*parent)->parent = par;
+	(*parent)->next = NULL;
     }
     return (vfsid) cur;
 }

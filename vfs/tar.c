@@ -441,18 +441,18 @@ static void *tar_super_check(vfs *me, char *archive_name, char *op)
     return &stat_buf;
 }
 
-static int tar_super_same(vfs *me, struct vfs_s_super *parc, char *archive_name, char *op, void *cookie)
-{	
+static int
+tar_super_same (vfs *me, struct vfs_s_super *parc, char *archive_name,
+		char *op, void *cookie)
+{
     struct stat *archive_stat = cookie;	/* stat of main archive */
 
-    if (strcmp (parc->name, archive_name)) return 0;
+    if (strcmp (parc->name, archive_name))
+	return 0;
 
-    if (vfs_uid && (!(archive_stat->st_mode & 0004)))
-	if ((archive_stat->st_gid != vfs_gid) || !(archive_stat->st_mode & 0040))
-	    if ((archive_stat->st_uid != vfs_uid) || !(archive_stat->st_mode & 0400))
-		return 0;
-/* Has the cached archive been changed on the disk? */
-    if (parc->u.tar.tarstat.st_mtime < archive_stat->st_mtime) { /* Yes, reload! */
+    /* Has the cached archive been changed on the disk? */
+    if (parc->u.tar.tarstat.st_mtime < archive_stat->st_mtime) {
+	/* Yes, reload! */
 	(*vfs_tarfs_ops.free) ((vfsid) parc);
 	vfs_rmstamp (&vfs_tarfs_ops, (vfsid) parc, 0);
 	return 2;

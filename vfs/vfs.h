@@ -355,9 +355,6 @@ extern void vfs_print_stats (const char *fs_name, const char *action,
 #define MCCTL_WANT_STALE_DATA	9
 #define MCCTL_NO_STALE_DATA    10
 
-#define vfs_uid 0
-#define vfs_gid 0
-
 #define FL_ALWAYS_MAGIC 1
 #define FL_NO_MCFS 2
 #define FL_NO_FTPFS 4
