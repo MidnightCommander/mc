@@ -35,7 +35,7 @@ int invoke_subshell (const char *command, int how, char **new_dir);
 int read_subshell_prompt (int how);
 void resize_subshell (void);
 int exit_subshell (void);
-void do_subshell_chdir (char *command, int update_prompt, int reset_prompt);
+void do_subshell_chdir (const char *directory, int update_prompt, int reset_prompt);
 void subshell_get_console_attributes (void);
 void sigchld_handler (int sig);
 
