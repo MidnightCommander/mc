@@ -2649,7 +2649,7 @@ marked, markselect, errors, input, reverse menu, menusel, menuhot, menuhotsel,
 gauge;  the dialog colors are: dnormal, dfocus, dhotnormal, dhotfocus;
 Help colors are: helpnormal, helpitalic, helpbold, helplink,
 helpslink; Viewer color is: viewunderline; Special highlighting mode: 
-directory, link, device, special.
+executable, directory, link, device, special.
 .PP
 The dialog boxes use the following colors:
 .I dnormal 
@@ -2684,16 +2684,23 @@ how many percent of files were copied etc. in a graphical way.
 .PP
 For file type highlighting mode 
 .I directory
-specifies the color in witch directories shows; 
+specifies the color in which directories are shown; 
+.I executable
+for executable files;
 .I link 
-is used to
-represent links; 
+is used to represent links; 
 .I device 
 for character and block devices;
 .I special
-is for special files, such as FIFO and IPC sockets (see
-also: <lnk name="special settings" id="Special Settings">, option
-.B highlight_mode.
+is for special files, such as FIFO and IPC sockets;
+.I core
+is for core files (see also the option 
+.B highlight_mode
+at the section on
+.\"LINK2"
+Special Settings).
+.\"Special Settings"
+
 .PP
 The possible colors are: black, gray, red, brightred, green,
 brightgreen, brown, yellow, blue, brightblue, magenta, brightmagenta,
@@ -2851,7 +2858,7 @@ is equal to 2, then all lines are displaying by the color according to
 their type (see 
 .\"LINK2"
 Colors).
-.\"Colors"). 
+.\"Colors"
 Permissions highlighting also works in this mode.
 .PP
 .I use_file_to_guess_type

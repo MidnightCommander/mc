@@ -338,7 +338,7 @@ locate_egrep (void)
 	if (stat (*p, &s) == 0)
 	    return *p;
     }
-    return "/bin/grep";
+    return "egrep";
 }
 
 /* 

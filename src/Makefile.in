@@ -97,11 +97,11 @@ cross:
 $(srcdir)/mc.hlp: ync.hlp $(datadir)/xnc.hlp $(srcdir)/gindex.pl
 	cat ync.hlp $(datadir)/xnc.hlp | $(srcdir)/gindex.pl > $(srcdir)/mc.hlp
 
-ync.hlp: $(docdir)/mc.1 man2hlp
-	./man2hlp 58 $(docdir)/mc.1 > ync.hlp
+ync.hlp: $(docdir)/mc.1.in man2hlp
+	./man2hlp 58 $(docdir)/mc.1.in > ync.hlp
 
-mc.html: $(docdir)/mc.1 man2hlp
-	./man2hlp 0 $(docdir)/mc.1 > body.html
+mc.html: $(docdir)/mc.1.in man2hlp
+	./man2hlp 0 $(docdir)/mc.1.in > body.html
 	cat index.html body.html > mc.html
 	$(RM) index.html body.html
 

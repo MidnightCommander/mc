@@ -1,5 +1,19 @@
-Tue Mar  3 20:21:53 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+Wed Mar  4 14:49:55 1998    <k3190@fh-sw.de>
 
+	* doc/mc.1.in, mc.hlp: updated (these files haven't been updated
+	at the last change to mc.sgml)
+
+	* doc/mc.sgml: spelling error corrected
+
+	* Makefile.in: renamed all references of mc.1 to mc.1.in
+
+	* find.c (locate_egrep): Don't use an absolute path if egrep isn't
+	found at the usual places. Then execvp will search the directories 
+	passed in the environment PATH variable (a little bit slower but
+	better than a defunct find content).
+
+	* tree.c: removed the include file I mistakenly added with my
+	last patch.
 
 Tue Mar  3 20:00:36 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
