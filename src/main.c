@@ -1477,30 +1477,6 @@ done_mc_profile (void)
     free_profiles ();
 }
 
-/*
- * Partly repaint the contents of the panels.
- * Ideally, all painting should be done in the panel's callback.
- * Since we are bypassing the standard widget library by forcing
- * the repaint, the cursor position needs to be preserved.
- */
-static void
-make_panels_dirty (void)
-{
-    int col, row;
-
-    /* Preserve current cursor position */
-    getyx (stdscr, row, col);
-
-    if (cpanel->dirty)
-	panel_update_contents (cpanel);
-
-    if ((get_other_type () == view_listing) && opanel->dirty)
-	panel_update_contents (opanel);
-
-    /* Restore cursor position */
-    move (row, col);
-}
-
 static int
 midnight_callback (struct Dlg_head *h, int id, int msg)
 {
@@ -1514,10 +1490,6 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	if (auto_menu) {
 	    user_file_menu_cmd ();
 	}
-	return MSG_HANDLED;
-
-    case DLG_PRE_EVENT:
-	make_panels_dirty ();
 	return MSG_HANDLED;
 
     case DLG_KEY:
@@ -1596,8 +1568,10 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	break;
 
     case DLG_HOTKEY_HANDLED:
-	if (get_current_type () == view_listing)
+	if ((get_current_type () == view_listing) && cpanel->searching) {
 	    cpanel->searching = 0;
+	    cpanel->dirty = 1;
+	}
 	break;
 
     case DLG_UNHANDLED_KEY:
@@ -1625,9 +1599,8 @@ midnight_callback (struct Dlg_head *h, int id, int msg)
 	}
 	return MSG_NOT_HANDLED;
 
-	/* We handle the special case of the output lines */
     case DLG_DRAW:
-	attrset (SELECTED_COLOR);
+	/* We handle the special case of the output lines */
 	if (console_flag && output_lines)
 	    show_console_contents (output_start_y,
 				   LINES - output_lines - keybar_visible -

@@ -1,5 +1,10 @@
 2003-09-07  Pavel Roskin  <proski@gnu.org>
 
+	* main.c (make_panels_dirty): Remove, it's unneded now.
+	(midnight_callback): Don't call make_panels_dirty().  Mark
+	current panel dirty if the search mode is unset.  No need to set
+	attibutes before calling show_console_contents().
+
 	* dlg.h: Convert send_idle_msg field to a publicly visible flag
 	DLG_WANT_IDLE.
 	* main.c (midnight_callback): Move auto_menu handling to the
