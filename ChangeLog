@@ -1,3 +1,8 @@
+2001-09-19  Pavel Roskin  <proski@gnu.org>
+
+	* syntax/php.syntax: Replace with a better implementation by
+	Max Schedriviy <max@tavrida.net>
+
 2001-09-15  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.1.in: Fix location of mcedit files.
