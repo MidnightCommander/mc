@@ -1,4 +1,4 @@
-          Scrivere scripts per il vfs esterno di Midnight Commander
+         Scrivere scripts per il vfs esterno del Midnight Commander
 	(Traduzione a cura di Marco Ciampa (C) GNU 2000 - it@li.org)
 
 NOTA IMPORTANTE: ci possono essere ancora alcuni bachi in extfs. 
@@ -86,7 +86,7 @@ l'altro file.
 
 Questo dovrebbe estrarre dall'archivio nomearchivio nel file di
 nome nomefilememorizzato (possibilmente con percorso se non collocato
-nella radice dell'archivio [questo è sbagliato. extfs corrente toglie il
+nella radice dell'archivio [questo è sbagliato. l'attuale extfs toglie il
 percorso! -- pavel@ucw.cz]) nel file estraea.
 
 * Comando: copyin nomearchive nomefilememorizzato filesorgente
@@ -200,5 +200,5 @@ impostazioni.
 Questo è tutto. La parte più dura è fare una funzione di elenco che ordini
 l'uscita di un comando di listato di sistema e lo converta in un formato che
 permetta ad mc di poterlo usare. Attualmente viene usato awk (o gawk) perché
-quasi tutti i sistemi ne sono provvisti. Se è disponibile un'altro linguaggio
-di scripting, come il perl, esso può anche essere utilizzato.
+quasi tutti i sistemi ne sono provvisti. Si può usare anche un'altro linguaggio
+di scripting come il perl, se è disponibile.
