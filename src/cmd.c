@@ -1174,7 +1174,7 @@ char *get_random_hint (void)
 	return strdup ("");
     last = now;
 #else
-    static last_sec;
+    static int last_sec;
     static struct timeval tv;
     
     gettimeofday (&tv, NULL);
@@ -1480,7 +1480,7 @@ listing_cmd (void)
     int   view_type, use_msformat;
     char  *user, *status;
     WPanel *p;
-    int   display_type, err;
+    int   display_type;
 
     display_type = get_display_type (MENU_PANEL_IDX);
     if (display_type == view_listing)

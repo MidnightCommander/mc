@@ -1033,7 +1033,7 @@ struct _command {
     { "utime",      do_utime },
 };
 
-static ncommands = sizeof(commands)/sizeof(struct _command);
+static int ncommands = sizeof(commands)/sizeof(struct _command);
 
 void exec_command (int command)
 {

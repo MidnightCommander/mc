@@ -8,5 +8,4 @@
 void
 x_interactive_display ()
 {
-	printf ("show help\n");
 }

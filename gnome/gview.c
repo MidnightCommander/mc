@@ -263,12 +263,6 @@ gnome_toggle_wrap (GtkWidget *widget, WView *view)
 }
 
 static void
-gnome_toggle_parse (GtkWidget *widget, WView *view)
-{
-	change_viewer (view);
-}
-
-static void
 gnome_toggle_format (GtkWidget *widget, WView *view)
 {
 	change_nroff (view);

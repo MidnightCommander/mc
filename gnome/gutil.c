@@ -47,6 +47,7 @@
 #include <gnome.h>
 #include <X11/Xlib.h>
 #include <gdk/gdkprivate.h>
+#include "util.h"
 
 int my_system_get_child_pid (int as_shell_command, const char *shell, const char *command, pid_t *pid)
 {

@@ -13,16 +13,17 @@
 #include "panel.h"
 #include "gscreen.h"
 #include "main.h"
+#include "gmain.h"
 #include "cmd.h"
 #include "boxes.h"
 #include "panelize.h"
 #include "gcmd.h"
 #include "dialog.h"
+#include "layout.h"
 
 void
 gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
 {
-	GtkAllocation *alloc = &GTK_WIDGET (panel->list)->allocation;
 	int   view_type, use_msformat;
 	char  *user, *status;
 	

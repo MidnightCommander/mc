@@ -26,6 +26,12 @@ void x_filter_changed   	     (WPanel *panel);
 void x_list_insert      	     (WListbox *l, WLEntry *p, WLEntry *e);
 void x_redefine_label   	     (WButtonBar *bb, int idx);
 void x_add_widget       	     (Dlg_head *h, Widget_Item *w);
+int  translate_gdk_keysym_to_curses (GdkEventKey *event);
+void gnome_init_panels ();
+void set_current_panel (int index);
+void bind_gtk_keys (GtkWidget *w, Dlg_head *h);
+void new_panel_at (char *dir);
+void layout_panel_gone (WPanel *panel);
 
 struct gmc_color_pairs_s {
 	GdkColor *fore, *back;

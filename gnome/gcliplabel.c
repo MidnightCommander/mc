@@ -110,7 +110,6 @@ gtk_clip_label_size_request (GtkWidget      *widget,
 			     GtkRequisition *requisition)
 {
 	GtkClipLabel *label;
-	GSList *row;
 	
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (GTK_IS_CLIP_LABEL (widget));

@@ -20,6 +20,8 @@
 #include "gcmd.h"
 #include "gcliplabel.h"
 #include "gdesktop.h"
+#include "setup.h"
+#include "../vfs/vfs.h"
 
 #define UNDEFINED_INDEX -1
 
@@ -364,7 +366,7 @@ gnome_toggle_snap (void)
 }
 
 void
-gnome_init_panels ()
+gnome_init_panels (void)
 {
 	current_panel_ptr = NULL;
 	other_panel_ptr = NULL;
@@ -394,7 +396,6 @@ create_container (Dlg_head *h, char *name)
 	PanelContainer *container = g_new (PanelContainer, 1);
 	WPanel     *panel;
 	GtkWidget  *app, *vbox;
-	int slot;
 
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);

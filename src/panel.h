@@ -176,9 +176,17 @@ void paint_dir (WPanel *panel);
 void show_dir (WPanel *panel);
 
 /* NOTE: Have to be ifdefed for HAVE_X */
-void x_fill_panel (WPanel *panel);
-
-void change_view (WPanel *panel, int view_type);
+void x_panel_set_size        (int index);
+void x_create_panel          (Dlg_head *h, widget_data parent, WPanel *panel);
+void x_fill_panel            (WPanel *panel);
+void x_adjust_top_file       (WPanel *panel);
+void x_filter_changed        (WPanel *panel);
+void x_add_sort_label        (WPanel *panel, int index, char *text, char *tag, void *sr);
+void x_sort_label_start      (WPanel *panel);
+void x_reset_sort_labels     (WPanel *panel);
+void x_panel_destroy         (WPanel *panel);
+void change_view             (WPanel *panel, int view_type);
+void x_panel_update_marks    (WPanel *panel);
 
 extern void paint_info_panel (WPanel *);
 extern void paint_quick_view_panel (WPanel *);

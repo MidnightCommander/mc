@@ -21,6 +21,8 @@
 #include "gscreen.h"
 #include "tty.h"		/* for KEY_BACKSPACE */
 #include "command.h"
+#include "cmd.h"
+#include "gdesktop.h"
 
 GdkColorContext *mc_cc;
 

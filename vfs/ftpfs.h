@@ -67,8 +67,8 @@ struct ftpfs_connection {
 
 extern char *ftpfs_anonymous_passwd;
 extern char *ftpfs_proxy_host;
-extern ftpfs_directory_timeout;
-extern ftpfs_always_use_proxy;
+extern int ftpfs_directory_timeout;
+extern int ftpfs_always_use_proxy;
 
 void ftpfs_init_passwd ();
 #endif

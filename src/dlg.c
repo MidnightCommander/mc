@@ -21,6 +21,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <malloc.h>
+#include <ctype.h>
 #include "tty.h"
 #include <stdarg.h>
 #include "mad.h"

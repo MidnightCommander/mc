@@ -130,6 +130,8 @@ void normal_search_cmd  (WView *);
 void continue_search    (WView *);
 void change_nroff       (WView *view);
 void set_monitor        (WView *view, int set_on);
+void view_move_forward  (WView *view, int i);
+void view_move_backward (WView *view, int i);
 #endif
 
 /* Command: view a file, if _command != NULL we use popen on _command */
@@ -171,8 +173,6 @@ void view_add_string    (WView *view, char *s);
 void view_gotoyx        (WView *view, int r, int c);
 void view_set_color     (WView *view, int font);
 void view_display_clean (WView *view, int h, int w);
-void view_move_backward (WView *view, int i);
-void view_move_forward  (WView *view, int i);
 
 void x_destroy_view     (WView *);
 void x_create_viewer    (WView *);

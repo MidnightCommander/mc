@@ -21,6 +21,8 @@
 #include "gpageprop.h"
 #include <gdk/gdkx.h>
 #include <gdk/gdkprivate.h>
+#include "gcache.h"
+#include "gmain.h"
 
 /* places used in the grid */
 static char *spot_array;
@@ -659,10 +661,7 @@ desktop_icon_drag_request (GtkWidget *widget, GdkEventDragRequest *event, deskto
 			set_spot_val (di->grid_x, di->grid_y, 0);
 
 		if (icons_snap_to_grid){
-			int px, py;
-
 			snap_to (di, 0, drop_x, drop_y);
-
 			get_icon_screen_x_y (di, &drop_x, &drop_y);
 		}
 

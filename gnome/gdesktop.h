@@ -48,6 +48,9 @@ GtkWidget *make_transparent_window (char *file);
 void drop_on_directory (GdkEventDropDataAvailable *event, char *dest, int force_manually);
 void gnome_arrange_icons (void);
 void artificial_drag_start (GdkWindow *source_window, int x, int y);
+void start_desktop (void);
+void stop_desktop (void);
+
 extern int icons_snap_to_grid;
 
 #endif

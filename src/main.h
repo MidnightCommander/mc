@@ -137,12 +137,6 @@ extern const int status_using_ncurses;
 void clr_scr (void);
 void restore_console (void);
 
-/* int do_panel_cd (WPanel *panel, char *new_dir); */
-/* FIXME: this declaration is *needed*, but forces every file that
-   includes main.h to include panel.h first!  Really, main.c shouldn't
-   be a repository for all the little auxiliary functions that are used
-   elsewhere.  do_panel_cd should be moved to util.c or somewhere. */
-
 enum cd_enum {
     cd_parse_command,
     cd_exact

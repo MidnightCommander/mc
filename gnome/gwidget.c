@@ -236,7 +236,6 @@ int
 x_create_check (Dlg_head *h, widget_data parent, WCheck *c)
 {
 	GtkWidget *w;
-	int i;
 
 	w = gtk_check_button_new_with_label (c->text);
 	gtk_toggle_button_set_state (GTK_TOGGLE_BUTTON (w), (c->state & C_BOOL));
@@ -394,9 +393,9 @@ listbox_select (GtkWidget *widget, int row, int column, GdkEvent *event, WListbo
 	}
 
 	/* Send an artificial DLG_POST_KEY */
-	if (event->type = GDK_BUTTON_PRESS){
+	if (event->type == GDK_BUTTON_PRESS)
 		(*l->widget.parent->callback)(l->widget.parent, 0, DLG_POST_KEY);
-	}
+
 	inside = 0;
 }
 

@@ -7,6 +7,7 @@
 #include "util.h"
 #include <gnome.h>
 #include <gdk/gdkkeysyms.h>
+#include <string.h>
 #include "gconf.h"
 #include "myslang.h"
 #include "dlg.h"
@@ -18,7 +19,6 @@
 #include "dialog.h"
 #include "color.h"
 #include "gmain.h"
-
 Dlg_head *last_query_dlg;
 static int sel_pos;
 
@@ -50,7 +50,7 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
 	h = create_dlg (0, 0, 0, 0, dialog_colors, default_dlg_callback, "[QueryBox]", "query",
 			DLG_NO_TED | DLG_NO_TOPLEVEL);
 	dialog = GTK_DIALOG (gtk_dialog_new ());
-	x_dlg_set_window (h, dialog);
+	x_dlg_set_window (h, GTK_WIDGET (dialog));
 	gtk_window_set_policy (GTK_WINDOW (dialog), 0, 0, 0);
 
 	x_set_dialog_title (h, header);

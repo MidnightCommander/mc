@@ -36,3 +36,4 @@
 #define frontend_run_dlg(x)        gtkrundlg_event (x)
 
 void port_shutdown_extra_fds(void);
+void x_flush_events (void);
