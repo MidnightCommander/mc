@@ -1,3 +1,8 @@
+Mon Jun  1 12:33:08 1998  Alexander V. Lukyanov <lav@yars.free.net>
+
+	* configure.in: allowed to use `configure --with-included-gettext' 
+	on systems (like solaris) that have their own libintl
+
 1998-05-31  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* complete.c (filename_completion_function): Use the vfs routines

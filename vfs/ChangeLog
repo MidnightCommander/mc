@@ -1,3 +1,12 @@
+Mon Jun  1 14:19:20 1998  Bakeyev I. Timur <timur@comtat.kazan.ru>
+	* vfs.c (parse_ls_lga): allow a bit wider range of listings.
+
+	* vfs.c (is_time, is_year): new functions
+
+Mon Jun  1 12:47:50 1998  Norbert Warmuth  <k3190@fh-sw.de>
+
+	* ftpfs.c (ftpfs_forget): Use the new ftpfs prefix.
+
 Thu May 28 16:42:31 1998  Pavel Machek <pavel@bug.mj.gts.cz>
 
 	* extfs.c, shared.c, tar.c: I changed semantics in my previous

@@ -65,6 +65,7 @@ extern int cd_symlinks; /* Defined in main.c */
 static vfs *current_vfs = &local_vfs_ops;
 char *current_dir = NULL;
 
+static int current_mday;
 static int current_mon;
 static int current_year;
 
@@ -1072,7 +1073,8 @@ void vfs_init (void)
     memset (vfs_file_table, 0, sizeof (vfs_file_table));
     current_time = time (NULL);
     t = localtime (&current_time);
-    current_mon = t->tm_mon;
+    current_mday = t->tm_mday;
+    current_mon  = t->tm_mon;
     current_year = t->tm_year;
     
 #ifdef USE_NETCODE
@@ -1180,15 +1182,51 @@ static int is_num (int idx)
     return 1;
 }
 
+static int is_time (char *str, struct tm *tim)
+{
+    char *p, *p2;
+
+    if ((p=strchr(str, ':')) && (p2=strrchr(str, ':'))) {
+	if (p != p2) {
+    	    if (sscanf (str, "%2d:%2d:%2d", &tim->tm_hour, &tim->tm_min, &tim->tm_sec) != 3)
+		return (0);
+	}
+	else {
+	    if (sscanf (str, "%2d:%2d", &tim->tm_hour, &tim->tm_min) != 2)
+		return (0);
+	}
+    }
+    else 
+        return (0);
+    
+    return (1);
+}
+
+static int is_year(char *str, struct tm *tim)
+{
+    long year;
+
+    if (!strchr(str, ':')) {
+	year = atol (str);
+	if (year < 1900 || year > 3000)
+            return (0);
+	tim->tm_year = (int) (year - 1900);
+        return (1);
+    }
+    else 
+        return (0);
+}
+
 #define free_and_return(x) { free (p_copy); return (x); }
 int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 {
+    static char *month = "JanFebMarAprMayJunJulAugSepOctNovDec";
+    static char *week = "SunMonTueWedThuFriSat";
+    char *pos;
     int idx, idx2, num_cols, isconc = 0;
     int i;
-    long l;
     struct tm tim;
     int extfs_format_date = 0;
-    int year_supplied = 0;
     char *p_copy;
     
     s->st_mode = 0;
@@ -1339,42 +1377,36 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	s->st_rdev = 0;
 #endif
     }
+
+    /* Let's setup default time values */
+    tim.tm_year = current_year;
+    tim.tm_mon  = current_mon;
+    tim.tm_mday = current_mday;
+    tim.tm_hour = 0;
+    tim.tm_min  = 0;
+    tim.tm_sec  = 0;
+    tim.tm_isdst = 0;
     
     p = columns [idx++];
     
-    if (!strcmp (p, "Jan"))
-        tim.tm_mon = 0; 
-    else if (!strcmp (p, "Feb"))
-        tim.tm_mon = 1; 
-    else if (!strcmp (p, "Mar"))
-        tim.tm_mon = 2; 
-    else if (!strcmp (p, "Apr"))
-        tim.tm_mon = 3; 
-    else if (!strcmp (p, "May"))
-        tim.tm_mon = 4; 
-    else if (!strcmp (p, "Jun"))
-        tim.tm_mon = 5; 
-    else if (!strcmp (p, "Jul"))
-        tim.tm_mon = 6; 
-    else if (!strcmp (p, "Aug"))
-        tim.tm_mon = 7; 
-    else if (!strcmp (p, "Sep"))
-        tim.tm_mon = 8; 
-    else if (!strcmp (p, "Oct"))
-        tim.tm_mon = 9; 
-    else if (!strcmp (p, "Nov"))
-        tim.tm_mon = 10; 
-    else if (!strcmp (p, "Dec"))
-        tim.tm_mon = 11; 
+    if((pos=strstr(week, p)) != NULL){
+        tim.tm_wday = (pos - week)/3;
+	p = columns [idx++];
+	}
+
+    if((pos=strstr(month, p)) != NULL)
+        tim.tm_mon = (pos - month)/3;
     else {
         /* This case should not normaly happen, but in extfs we allow these
            date formats:
            Mon DD hh:mm
            Mon DD YYYY
            Mon DD YYYY hh:mm
+	   Wek Mon DD hh:mm:ss YYYY
            MM-DD-YY hh:mm
            where Mon is Jan-Dec, DD, MM, YY two digit day, month, year,
            YYYY four digit year, hh, mm two digit hour and minute. */
+
         if (strlen (p) == 8 && p [2] == '-' && p [5] == '-'){
             p [2] = 0;
             p [5] = 0;
@@ -1397,39 +1429,20 @@ int parse_ls_lga (char *p, struct stat *s, char **filename, char **linkname)
 	    free_and_return (0);
         tim.tm_mday = (int)atol (columns [idx++]);
     }
-
-    /* Microsoft ftp server may send a non padded digit */
-    if (columns [idx][2] != ':' && columns [idx][1] != ':'){
-	/* There is a year */
-        l = atol (columns [idx++]);
-        if (l < 1900 || l > 3000)
-            free_and_return (0);
-        tim.tm_year = (int) (l - 1900);
-        tim.tm_hour = 0;
-        tim.tm_min = 0;
-        tim.tm_sec = 0;
-        year_supplied = 1;
+    
+    if (is_num (idx)) {
+        if(is_time(columns[idx], &tim) || is_year(columns[idx], &tim)) {
+	idx++;
+	 
+	if(is_num (idx) && 
+	    (is_year(columns[idx], &tim) || is_time(columns[idx], &tim)))
+	    idx++; /* time & year or reverse */
+	 } /* only time or date */
     }
-    if (columns [idx][2] == ':' || columns [idx][1] == ':'){
-        if (sscanf (columns [idx],
-		    "%2d:%2d", &tim.tm_hour, &tim.tm_min) != 2){
-	    if (!year_supplied)
-	        free_and_return (0);
-	    tim.tm_hour = 0;
-	    tim.tm_min = 0;
-	    tim.tm_sec = 0;
-        } else {
-            idx++;
-            tim.tm_sec = 0;
-            if (!extfs_format_date && !year_supplied){
-                tim.tm_year = current_year;
-                if (tim.tm_mon > current_mon)
-                    tim.tm_year--;
-            }
-        }
-    } else if (!year_supplied)
-        free_and_return (0);
-    tim.tm_isdst = 0;
+    else 
+        free_and_return (0); /* Nor time or date */
+
+    /* Use resultimg time value */    
     s->st_mtime = mktime (&tim);
     if (s->st_mtime == -1)
         s->st_mtime = 0;

@@ -944,9 +944,8 @@ fi])
 
 INTLSUB=""
 LINTL=""
-AC_CHECK_HEADER(libintl.h)
 if test x$USE_NLS = xyes; then
-    if test $ac_cv_header_libintl_h = no; then
+    if test x$USE_INCLUDED_LIBINTL = xyes; then
 	CPPFLAGS="$CPPFLAGS -I\$(builddir)/intl"
 	LINTL="-L\$(builddir)/intl -lintl"
     fi

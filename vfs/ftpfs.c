@@ -2569,8 +2569,13 @@ void ftpfs_forget (char *file)
     char *host, *user, *pass, *rp;
     int port;
 
-    if (strncmp (file, "ftp://", 6) != 0)
-	return;
+#ifndef BROKEN_PATHS
+    if (strncmp (file, "/#ftp:", 6))
+        return NULL; 	/* Normal: consider cd /bla/#ftp */ 
+#else
+    if (!(file = strstr (file, "/#ftp:")))
+        return NULL;
+#endif    
 
     file += 6;
     if (!(rp = ftpfs_get_host_and_username (file, &host, &user, &port, &pass))) {
