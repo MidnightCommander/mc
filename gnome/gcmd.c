@@ -498,7 +498,10 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	gtk_widget_show_all (GNOME_DIALOG (data->ep_dlg)->vbox);
 	switch (gnome_dialog_run (GNOME_DIALOG (data->ep_dlg))) {
 	case 0:
-		gtk_window_hide (data->ep_dlg);
+		gtk_widget_hide (data->ep_dlg);
+		while (gtk_events_pending () )
+			gtk_main_iteration ();
+
 		do_external_panelize (gtk_entry_get_text (GTK_ENTRY (data->entry)));
 		save_settings (GTK_CLIST (data->clist));
 		break;
