@@ -489,6 +489,7 @@ int regexp_match (char *pattern, char *string, int match_type)
 	if (old_pattern){
 	    regfree (&r);
 	    g_free (old_pattern);
+	    old_pattern = NULL;
 	}
 	pattern = convert_pattern (pattern, match_type, 0);
 	if (regcomp (&r, pattern, REG_EXTENDED|REG_NOSUB|MC_ARCH_FLAGS)) {
