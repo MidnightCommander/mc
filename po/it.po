@@ -9,7 +9,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 4.5.51\n"
-"POT-Creation-Date: 2000-09-18 11:08+0200\n"
+"POT-Creation-Date: 2000-10-06 11:47+0200\n"
 "PO-Revision-Date: 2000-09-01 03:29+1\n"
 "Last-Translator: Marco Ciampa <ciampa@ismaa.it>\n"
 "Language-Team: Marco Ciampa <it@li.org>\n"
@@ -91,15 +91,15 @@ msgstr ""
 "con il comando:\n"
 "\"%s\"%s"
 
-#: gnome/gaction.c:137 gnome/gaction.c:154
+#: gnome/gaction.c:138 gnome/gaction.c:155
 msgid "open"
 msgstr "apri"
 
-#: gnome/gaction.c:194 gnome/gaction.c:211
+#: gnome/gaction.c:195 gnome/gaction.c:212
 msgid "edit"
 msgstr "cambia"
 
-#: gnome/gaction.c:351
+#: gnome/gaction.c:354
 msgid "view"
 msgstr "vista"
 
@@ -2564,7 +2564,7 @@ msgstr "&Generale...  "
 msgid "&Save mode..."
 msgstr "Modalità &Salvataggio..."
 
-#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1365
+#: gtkedit/editmenu.c:264 gtkedit/editmenu.c:273 src/main.c:1367
 msgid "&Layout..."
 msgstr "&Aspetto..."
 
@@ -2829,7 +2829,7 @@ msgid "Error initialising editor.\n"
 msgstr "Errore nell'inizializzazione editor.\n"
 
 #: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
-#: src/main.c:1731 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
+#: src/main.c:1733 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Aiuto"
@@ -2842,13 +2842,13 @@ msgstr "Marca"
 msgid "Replac"
 msgstr "Sostit"
 
-#: gtkedit/editwidget.c:1146 src/main.c:1733
+#: gtkedit/editwidget.c:1146 src/main.c:1735
 msgid "PullDn"
 msgstr "Menu"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
-#: src/main.c:1734 src/view.c:2072 src/view.c:2094
+#: src/main.c:1736 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Esci"
 
@@ -2915,7 +2915,7 @@ msgstr "Elimina"
 msgid "Delete highlighted text"
 msgstr "Cancella testo selezionato"
 
-#: gtkedit/gtkedit.c:1257 src/main.c:1732 src/screen.c:2394 src/screen.c:2424
+#: gtkedit/gtkedit.c:1257 src/main.c:1734 src/screen.c:2394 src/screen.c:2424
 msgid "Menu"
 msgstr "MenuUt"
 
@@ -4655,23 +4655,6 @@ msgstr "Modifica questo file"
 msgid "Send the results to a Panel"
 msgstr "Mando il risultato su un pannello"
 
-#: src/fixhlp.c:169
-msgid "Usage: fixhlp <width> <tocname>\n"
-msgstr "Usa: fixhlp <width> <tocname>\n"
-
-#: src/fixhlp.c:174
-msgid "fixhlp: Cannot open toc for writing"
-msgstr "fixhlp: impossibile aprire l'indice in scrittura "
-
-#: src/fixhlp.c:177
-msgid ""
-"[Contents]\n"
-" Topics:\n"
-"\n"
-msgstr ""
-"[Indice]\n"
-" Titoli:\n"
-
 #: src/help.c:279
 msgid ""
 " Help file format error\n"
@@ -5361,75 +5344,75 @@ msgstr "&Ripristina file (solo ext2fs)"
 msgid "&Listing format edit"
 msgstr "Modifica formato &Lista"
 
-#: src/main.c:1357
+#: src/main.c:1359
 msgid "&Extension file edit"
 msgstr "Modifica file &Estensioni"
 
-#: src/main.c:1358
+#: src/main.c:1360
 msgid "&Menu file edit"
 msgstr "Modifica il file &Menu"
 
-#: src/main.c:1359
+#: src/main.c:1361
 msgid "Menu edi&Tor edit"
 msgstr "Modifica edi&Tor menu"
 
-#: src/main.c:1364
+#: src/main.c:1366
 msgid "&Configuration..."
 msgstr "&Configurazione..."
 
-#: src/main.c:1366
+#: src/main.c:1368
 msgid "c&Onfirmation..."
 msgstr "C&Onferme..."
 
-#: src/main.c:1367
+#: src/main.c:1369
 msgid "&Display bits..."
 msgstr "&Mostra bit..."
 
-#: src/main.c:1369
+#: src/main.c:1371
 msgid "learn &Keys..."
 msgstr "Memorizza &Tasti..."
 
-#: src/main.c:1372
+#: src/main.c:1374
 msgid "&Virtual FS..."
 msgstr "Opzioni &VFS..."
 
-#: src/main.c:1375
+#: src/main.c:1377
 msgid "&Save setup"
 msgstr "&Salva configurazione"
 
-#: src/main.c:1391 src/main.c:1393
+#: src/main.c:1393 src/main.c:1395
 msgid " &Left "
 msgstr " &Sinistra "
 
-#: src/main.c:1393
+#: src/main.c:1395
 msgid " &Above "
 msgstr " Sopr&A "
 
-#: src/main.c:1396
+#: src/main.c:1398
 msgid " &File "
 msgstr " &File "
 
-#: src/main.c:1397
+#: src/main.c:1399
 msgid " &Command "
 msgstr " &Comando "
 
-#: src/main.c:1398
+#: src/main.c:1400
 msgid " &Options "
 msgstr " &Opzioni "
 
-#: src/main.c:1400 src/main.c:1402
+#: src/main.c:1402 src/main.c:1404
 msgid " &Right "
 msgstr " &Destra "
 
-#: src/main.c:1402
+#: src/main.c:1404
 msgid " &Below "
 msgstr " Sot&To "
 
-#: src/main.c:1457
+#: src/main.c:1459
 msgid " Information "
 msgstr " Informazioni "
 
-#: src/main.c:1458
+#: src/main.c:1460
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5442,15 +5425,15 @@ msgstr ""
 " forzare l'aggiornamento della visualizzazione.          \n"
 " Vedere le pagine del manuale per i dettagli.            "
 
-#: src/main.c:1939
+#: src/main.c:1941
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Grazie per aver usato GNU Midnight Commander"
 
-#: src/main.c:2372
+#: src/main.c:2374
 msgid "The TERM environment variable is unset!\n"
 msgstr "La variabile TERM non è definita!\n"
 
-#: src/main.c:2479
+#: src/main.c:2481
 msgid ""
 "Usage is:\n"
 "\n"
@@ -5462,19 +5445,19 @@ msgstr ""
 "mc [flag] [questa_dir] [altra_dir_pannello]\n"
 "\n"
 
-#: src/main.c:2482
+#: src/main.c:2484
 msgid "-a, --stickchars   Force use of +, -, | for line drawing.\n"
 msgstr "-a, --stickchars   Forza l'uso di +, -, | per il disegno linee.\n"
 
-#: src/main.c:2484
+#: src/main.c:2486
 msgid "-b, --nocolor      Force black and white display.\n"
 msgstr "-b, --nocolor      Forza visualizzazione bianco e nero.\n"
 
-#: src/main.c:2486
+#: src/main.c:2488
 msgid "-B, --background   [DEVEL-ONLY: Debug the background code]\n"
 msgstr "-B, --background   [SOLO-SVILUPPO: Debug codice in background]\n"
 
-#: src/main.c:2488
+#: src/main.c:2490
 msgid ""
 "-c, --color        Force color mode.\n"
 "-C, --colors       Specify colors (use --help-colors to get a list).\n"
@@ -5484,11 +5467,11 @@ msgstr ""
 "-C, --colors       Specifica colori (usare --help-colors per l'elenco).\n"
 "-d, --nomouse      Disabilita supporto mouse.\n"
 
-#: src/main.c:2492
+#: src/main.c:2494
 msgid "-e, --edit         Startup the internal editor.\n"
 msgstr "-e, --edit         Esecuzione editor interno.\n"
 
-#: src/main.c:2494
+#: src/main.c:2496
 msgid ""
 "-f, --libdir       Print configured paths.\n"
 "-h, --help         Shows this help message.\n"
@@ -5501,15 +5484,15 @@ msgstr ""
 "-k, --resetsoft    Reimposta softkeys (solo terminali HP) ai loro\n"
 "                   terminfo/termcap predefiniti.\n"
 
-#: src/main.c:2499
+#: src/main.c:2501
 msgid "-l, --ftplog file  Log ftpfs commands to the file.\n"
 msgstr "-l, --ftplog file  Registra comandi ftpfs nel file.\n"
 
-#: src/main.c:2502
+#: src/main.c:2504
 msgid "-M, --memory file  [DEVEL-ONLY: Log MAD messages to the file.]\n"
 msgstr "-M, --memory file  [SOLO-SVILUPPO: Registra messaggi MAD nel file.]\n"
 
-#: src/main.c:2504
+#: src/main.c:2506
 msgid ""
 "-P, --printwd      At exit, print the last working directory.\n"
 "-s, --slow         Disables verbose operation (for slow terminals).\n"
@@ -5517,17 +5500,17 @@ msgstr ""
 "-P, --printwd      In uscita, stampa l'ultima directory di lavoro.\n"
 "-s, --slow         Disabilita operazioni verbose (per terminali lenti).\n"
 
-#: src/main.c:2507
+#: src/main.c:2509
 msgid "-t, --termcap      Activate support for the TERMCAP variable.\n"
 msgstr "-t, --termcap      Attiva supporto per la variabile TERMCAP.\n"
 
-#: src/main.c:2510
+#: src/main.c:2512
 msgid ""
 "-S, --createcmdile Create command file to set default directory upon exit.\n"
 msgstr ""
 "-S, --createcmdile Crea file comandi per impostare directory in uscita.\n"
 
-#: src/main.c:2513
+#: src/main.c:2515
 msgid ""
 "-u, --nosubshell   Disable the concurrent subshell mode.\n"
 "-U, --subshell     Force the concurrent subshell mode.\n"
@@ -5537,7 +5520,7 @@ msgstr ""
 "-U, --subshell     Forza modalità subshell concorrente.\n"
 "-r, --forceexec    Forza esecuzione subshell.\n"
 
-#: src/main.c:2517
+#: src/main.c:2519
 msgid ""
 "-v, --view fname   Start up into the viewer mode.\n"
 "-V, --version      Report version and configuration options.\n"
@@ -5551,11 +5534,11 @@ msgstr ""
 "+numero            numero è il numero di riga di partenza del file per "
 "`mcedit'.\n"
 
-#: src/main.c:2522
+#: src/main.c:2524
 msgid "-X, --dbgsubshell  [DEVEL-ONLY: Debug the subshell].\n"
 msgstr "-X, --dbgsubshell  [SOLO-SVILUPPO: Debug subshell].\n"
 
-#: src/main.c:2524
+#: src/main.c:2526
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -5565,7 +5548,7 @@ msgstr ""
 "Prego spedire rapporti su bug (inclusa l'uscita di `mc -V')\n"
 "a mc-bugs@nuclecu.unam.mx\n"
 
-#: src/main.c:2540
+#: src/main.c:2542
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -5603,121 +5586,121 @@ msgstr ""
 "   brightcyan, lightgray e white\n"
 "\n"
 
-#: src/main.c:2592
+#: src/main.c:2594
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Directory delle librerie di Midnight Commander: %s\n"
 
-#: src/main.c:2606
+#: src/main.c:2608
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr "L'opzione -m è obsoleta.  Controlla Display Bit... nel menu opzioni\n"
 
-#: src/main.c:2683
+#: src/main.c:2685
 msgid "Use to debug the background code"
 msgstr "Usare per correggere il codice in background"
 
-#: src/main.c:2689
+#: src/main.c:2691
 msgid "Request to run in color mode"
 msgstr "Richiede l'esecuzione a colori"
 
-#: src/main.c:2691
+#: src/main.c:2693
 msgid "Specifies a color configuration"
 msgstr "Specifica la configurazione dei colori"
 
-#: src/main.c:2696
+#: src/main.c:2698
 msgid "Edits one file"
 msgstr "Modifica un file"
 
-#: src/main.c:2700
+#: src/main.c:2702
 msgid "Displays this help message"
 msgstr "Mostra questo messaggio di aiuto"
 
-#: src/main.c:2703
+#: src/main.c:2705
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Mostra un messaggio di aiuto su come cambiare lo schema dei colori"
 
-#: src/main.c:2706
+#: src/main.c:2708
 msgid "Log ftp dialog to specified file"
 msgstr "Annota i messaggi dell'ftp in un file specificato"
 
-#: src/main.c:2713
+#: src/main.c:2715
 msgid "Obsolete"
 msgstr "Obsoleto"
 
-#: src/main.c:2715
+#: src/main.c:2717
 msgid "Requests to run in black and white"
 msgstr "Richiede l'esecuzione in bianco e nero"
 
-#: src/main.c:2717
+#: src/main.c:2719
 msgid "Disable mouse support in text version"
 msgstr "Disabilita il supporto del mouse nella modalità testo"
 
-#: src/main.c:2720
+#: src/main.c:2722
 msgid "Disables subshell support"
 msgstr "Disabilita il supporto delle sottoshell"
 
-#: src/main.c:2724
+#: src/main.c:2726
 msgid "Prints working directory at program exit"
 msgstr "Visualizza la directory corrente in uscita"
 
-#: src/main.c:2726
+#: src/main.c:2728
 msgid "Resets soft keys on HP terminals"
 msgstr "Ripristina i tasti soft nei terminali HP"
 
-#: src/main.c:2728
+#: src/main.c:2730
 msgid "To run on slow terminals"
 msgstr "Per farlo andare su terminali lenti"
 
-#: src/main.c:2731
+#: src/main.c:2733
 msgid "Use stickchars to draw"
 msgstr "Usa caratteri semigrafici"
 
-#: src/main.c:2735
+#: src/main.c:2737
 msgid "Enables subshell support (default)"
 msgstr "Abilita il supporto sottoshell (predefinito)"
 
-#: src/main.c:2740
+#: src/main.c:2742
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Prova a usare termcap invece di terminfo"
 
-#: src/main.c:2744
+#: src/main.c:2746
 msgid "Displays the current version"
 msgstr "Visualizza la versione corrente"
 
-#: src/main.c:2746
+#: src/main.c:2748
 msgid "Launches the file viewer on a file"
 msgstr "Esegue il visualizzatore per un file"
 
-#: src/main.c:2748
+#: src/main.c:2750
 msgid "Forces xterm features"
 msgstr "Forza il comportamento xterm"
 
-#: src/main.c:2750
+#: src/main.c:2752
 msgid "Geometry for the window"
 msgstr "Geometria della finestra"
 
-#: src/main.c:2750
+#: src/main.c:2752
 msgid "GEOMETRY"
 msgstr "GEOMETRIA"
 
-#: src/main.c:2751
+#: src/main.c:2753
 msgid "No windows opened at startup"
 msgstr "Nessuna finestra aperta all'esecuzione"
 
-#: src/main.c:2752
+#: src/main.c:2754
 msgid "No desktop icons"
 msgstr "Nessuna icona sulla scrivania"
 
-#: src/main.c:2753
+#: src/main.c:2755
 msgid "Look more like traditional gmc"
 msgstr "Vedi più tradizionale gmc"
 
-#: src/main.c:2755
+#: src/main.c:2757
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr "Mostra la directory che contiene il file di partenza .links e esce"
 
-#: src/main.c:3071
+#: src/main.c:3073
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5725,11 +5708,11 @@ msgstr ""
 "Non posso aprire il terminale.  Devi eseguire mc senza l'opzione -P\n"
 "Su alcuni sistemi, basta eseguire `which mc`\n"
 
-#: src/main.c:3149
+#: src/main.c:3151
 msgid " Notice "
 msgstr " Avviso "
 
-#: src/main.c:3150
+#: src/main.c:3152
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -7106,3 +7089,4 @@ msgstr " Non posso aprire il file: %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Ripristina filesystem per ext2"
+
