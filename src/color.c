@@ -241,7 +241,7 @@ static void configure_colors (void)
 }
 
 #ifndef HAVE_SLANG
-#define MAX_PAIRS 34
+#define MAX_PAIRS 64
 int attr_pairs [MAX_PAIRS];
 #endif
 

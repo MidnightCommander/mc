@@ -49,6 +49,13 @@
 #include "../src/util.h"
 #include "../src/dialog.h"
 
+#ifdef get_default_editor
+#undef get_default_editor
+#endif
+
+char *get_default_shell();
+
+
 #ifndef ENOTEMPTY
 #define ENOTEMPTY ERROR_DIR_NOT_EMPTY
 #endif
@@ -167,9 +174,21 @@ my_system (int as_shell_command, const char *shell, const char *command)
    char *parm;          /* This is the parameter (can be more than one) */
    register int length, i;
    char temp[4096];     /* That's enough! */
+   char *t, *t1;
 
    sh = get_default_shell();
-   if (strcmp(sh, shell)) {
+   if (!strcmp("/bin/sh", shell)) {	/* Translate "/bin/sh" to "sh" */
+	return spawnlp(P_WAIT, "sh", shell, "-c", command, NULL);
+   } else if (( (t = strrchr(shell,'/'))	/* Specialcase Bourne */
+		|| (t = strrchr(shell,'\\')))
+		&& (t1 = strchr(t, '.'))
+		&& (
+		    ((t1 - t == 4) && strncmp("bash", t, 4))
+		    || ((t1 - t == 3) && strncmp("ksh", t, 3))
+		    || ((t1 - t == 2) && strncmp("sh", t, 2))
+		   )) {
+	return spawnlp(P_WAIT, shell, shell, "-c", command, NULL);
+   } else if (strcmp(sh, shell)) {
       /* 
          Not equal  -- That means: shell is the program and command is the
          parameter 
@@ -524,6 +543,7 @@ my_statfs (struct my_statfs *myfs_stats, char *path)
     free(pFsInfo);
 }
 
+#ifndef __EMX__
 int 
 gettimeofday (struct timeval* tvp, void *p)
 {
@@ -540,6 +560,7 @@ gettimeofday (struct timeval* tvp, void *p)
     tvp->tv_sec = tvp->tv_usec * 1000 + pdt.hundredths * 10;
     return 0;
 }
+#endif
 
 /* FAKE functions */
 
@@ -634,7 +655,7 @@ init_uid_gid_cache (void)
 int 
 mc_doublepopen (int inhandle, int inlen, pid_t *the_pid, char *command, ...)
 {
-	return 0;
+	return -1;
 }
 
 int 
@@ -643,12 +664,14 @@ mc_doublepclose (int pipe, pid_t pid)
 	return 0;
 }
 
+#ifndef HAVE_VFS
 /*hacks to get it compile, remove these after vfs works */
 char *
 vfs_get_current_dir (void)
 {
 	return NULL;
 }
+#endif
 
 int 
 vfs_current_is_extfs (void)
@@ -656,6 +679,7 @@ vfs_current_is_extfs (void)
 	return 0;
 }
 
+#ifndef HAVE_VFS
 int 
 vfs_file_is_ftp (char *filename)
 {
@@ -674,14 +698,34 @@ extfs_run (char *file)
 {
    return;
 }
+#endif
+
+void *
+getgrent(void) {   return NULL; }
+
+void
+setgrent(void) {}
+
+void
+endgrent(void) {}
 
 int
-geteuid(void)
+setreuid(uid_t ruid, uid_t euid) {    return -1; }
+
+pid_t
+setsid(void) { return (pid_t)-1; }
+
+int
+mkfifo(const char *path, mode_t mode) { return -1; }
+
+int 
+socketpair(int i, int i1, int i2, int *i3)
 {
-   return 0;
+   return -1;
 }
 
 
+#ifndef HAVE_VFS
 int
 mc_chdir(char *pathname)
 {
@@ -711,6 +755,7 @@ mc_chmod(char *pathName, int unxmode)
    int os2Mode = unxmode & 0x0FFF;
    return chmod(pathName, os2Mode);
 }
+#endif
 
 static int
 conv_os2_unx_rc(int os2rc)
@@ -738,6 +783,7 @@ conv_os2_unx_rc(int os2rc)
    return errCode;
 }
 
+#ifndef HAVE_VFS
 int
 mc_open (char *file, int flags, int pmode)
 {
@@ -768,6 +814,7 @@ mc_unlink(char *pathName)
       return -1;
    }
 }
+#endif
 
 char *
 get_default_editor (void)

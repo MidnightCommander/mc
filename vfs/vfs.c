@@ -28,7 +28,10 @@
 
 #include <config.h>
 
-#include <syslog.h>
+#ifndef NO_SYSLOG_H
+#  include <syslog.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>	/* For atol() */
 #include <stdarg.h>

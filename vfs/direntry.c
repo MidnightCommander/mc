@@ -28,6 +28,7 @@ static volatile int total_inodes = 0, total_entries = 0;
 
 #include "utilvfs.h"
 #include "xdirentry.h"
+#include "../src/tty.h"
 
 #define CALL(x) if (MEDATA->x) MEDATA->x
 

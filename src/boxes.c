@@ -847,7 +847,7 @@ static int
 task_cb (int action, void *ignored)
 {
     TaskList *tl;
-    int sig;
+    int sig = 0;
     
     if (!bg_list->list)
 	return 0;
@@ -855,13 +855,16 @@ task_cb (int action, void *ignored)
     /* Get this instance information */
     tl = (TaskList *) bg_list->current->data;
     
+#  ifdef SIGTSTP
     if (action == B_STOP){
 	sig   = SIGSTOP;
 	tl->state = Task_Stopped;
     } else if (action == B_RESUME){
 	sig   = SIGCONT;
 	tl->state = Task_Running;
-    } else if (action == B_KILL){
+    } else 
+#  endif
+    if (action == B_KILL){
 	sig = SIGKILL;
     }
     

@@ -818,6 +818,7 @@ void sigchld_handler (int sig)
     if (pid == subshell_pid) {
 	/* {{{ Figure out what has happened to the subshell */
 
+#  ifdef SIGTSTP
 	if (WIFSTOPPED (status))
 	{
 	    if (WSTOPSIG (status) == SIGTSTP)
@@ -828,6 +829,7 @@ void sigchld_handler (int sig)
 		subshell_stopped = TRUE;
 	}
 	else  /* The subshell has either exited normally or been killed */
+#  endif
 	{
 	    subshell_alive = FALSE;
 	    if (WIFEXITED (status) && WEXITSTATUS (status) != FORK_FAILURE)
@@ -844,9 +846,11 @@ void sigchld_handler (int sig)
     if (pid == cons_saver_pid) {
 	/* {{{ Someone has stopped or killed cons.saver; restart it */
 
+#  ifdef SIGTSTP
 	if (WIFSTOPPED (status))
 	    kill (pid, SIGCONT);
 	else
+#  endif
 	{
 	    handle_console (CONSOLE_DONE);
 	    handle_console (CONSOLE_INIT);
@@ -860,6 +864,9 @@ void sigchld_handler (int sig)
 #endif /* ! SCO_FLAVOR */
 #endif /* ! HAVE_X */
     /* If we get here, some other child exited; ignore it */
+#  ifdef __EMX__				/* Need to report */
+    pid = wait(&status);
+#  endif
 }
 
 /* }}} */
@@ -1007,7 +1014,9 @@ static void synchronize (void)
     while (subshell_alive && !subshell_stopped)
 	sigsuspend (&old_mask);
     subshell_stopped = FALSE;
+#  ifdef SIGTSTP
     kill (subshell_pid, SIGCONT);
+#  endif
 
     sigprocmask (SIG_SETMASK, &old_mask, NULL);
     /* We can't do any better without modifying the shell(s) */

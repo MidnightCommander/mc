@@ -1631,7 +1631,7 @@ static void do_suspend_cmd (void)
     if (console_flag && !use_subshell)
 	restore_console ();
 
-#ifndef OS2_NT
+#ifdef SIGTSTP
     {
 	struct sigaction sigtstp_action;
 	
@@ -2372,9 +2372,11 @@ sigchld_handler_no_subshell (int sig)
     if (pid == cons_saver_pid){
 	/* {{{ Someone has stopped or killed cons.saver; restart it */
 
+#  ifdef SIGTSTP
 	if (WIFSTOPPED (status))
 	    kill (pid, SIGCONT);
 	else
+#  endif
 	{
 	    handle_console (CONSOLE_DONE);
 	    handle_console (CONSOLE_INIT);

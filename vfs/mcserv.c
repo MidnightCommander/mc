@@ -1095,6 +1095,7 @@ char *get_client (int portnum)
     struct hostent *hp;
     char hostname [255];
     int yes = 1;
+    char *me;
     
     if ((sock = socket (AF_INET, SOCK_STREAM, 0)) < 0)
 	return "Can't create socket";
@@ -1106,6 +1107,10 @@ char *get_client (int portnum)
     gethostname (hostname, 255);
     if (verbose) printf ("hostname=%s\n", hostname);
     hp = gethostbyname (hostname);
+#ifdef __EMX__
+    if (hp == 0 && (me = getenv("HOSTNAME")) && (0 == strcmp(hostname, me)))
+	hp = gethostbyname ("localhost");
+#endif
     if (hp == 0)
 	return "hp = 0!";
     

@@ -31,6 +31,7 @@
 #include <stdarg.h>
 #include <fcntl.h>
 #include <pwd.h>
+#include <sys/types.h>		/* POSIX-required by sys/socket.h and netdb.h */
 #include <netdb.h>		/* struct hostent */
 #include <sys/socket.h>		/* AF_INET */
 #include <netinet/in.h>		/* struct in_addr */
