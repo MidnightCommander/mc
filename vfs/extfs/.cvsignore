@@ -1,8 +1,16 @@
 Makefile
 Makefile.in
+a
+apt
 audio
 deb
+deba
+debd
+dpkg
 lslR
+mailfs
+patchfs
+rpms
 uar
 uha
 ulha
