@@ -20,6 +20,12 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+
+#include <fcntl.h>		/* O_RDONLY, O_WRONLY */
+#ifdef HAVE_UNISTD_H
+#   include <unistd.h>
+#endif
+
 #include "help.h"
 
 #define BUFFER_SIZE 256
@@ -37,6 +43,15 @@ static int skip_flag = 0;	/* Flag: Skip this section.
 static int link_flag = 0;	/* Flag: Next line is a link */
 static int verbatim_flag = 0;	/* Flag: Copy input to output verbatim */
 static int node = 0;		/* Flag: This line is an original ".SH" */
+
+static char *output;		/* The name of the output mc.hlp */
+static char *Topics = "Topics:";
+
+static struct node {
+    char *node;
+    char *lname;
+    struct node *next;
+} nodes, *cnode;
 
 /* Report error in input */
 static void print_error (char *message)
@@ -214,11 +229,27 @@ static void handle_command (char *buffer)
 	    else {
 		if (!SH || !node){
 		/* Start a new section */
+		  if (!output)
 		    printf ("%c[%s]", CHAR_NODE_END, buffer);
+		  else {
+		    printf ("%c[%s]", CHAR_NODE_END, buffer + heading_level);
+		    if (!cnode){
+			cnode = &nodes;
+			cnode->next = NULL;
+		    } else {
+			cnode->next = malloc (sizeof (nodes));
+			cnode = cnode->next;
+		    }
+		    cnode->node = strdup (buffer);
+		    cnode->lname = NULL;
+		  }
 		    col ++;
 		    newline ();
 		}
 		if (SH){
+		    if (output)
+		    /* print_string() strtok()es buffer, so */
+			cnode->lname = strdup (buffer + heading_level);
 		    print_string (buffer + heading_level);
 		    newline ();
 		    newline ();
@@ -291,7 +322,10 @@ static void handle_command (char *buffer)
 	    print_error ("Syntax error: .\\\"TOPICS: no text");
 	    return;
 	}
-	printf ("%s\n", buffer);
+	if (output)
+	    Topics = strdup (buffer);
+	else
+	    printf ("%s\n", buffer);
     }
     else {
 	/* Other commands are ignored */
@@ -340,18 +374,31 @@ int main (int argc, char **argv)
     FILE *file;			/* Input file */
     char buffer2 [BUFFER_SIZE];	/* Temp input line */
     char *buffer = buffer2;	/* Input line */
+    char *node = NULL;
+
+    int file_fd;
+    long contents_beginning, file_end;
 
     /* Validity check for arguments */
-    if (argc != 3 || ((width = atoi (argv[1])) <= 10)){
-	fprintf (stderr, "Usage: man2hlp <width> <file.man>\n");
+    if ((argc != 3 && argc != 5) || ((width = atoi (argv[1])) <= 10)){
+	fprintf (stderr, "Usage: man2hlp <width> <file.man> [template_file helpfile]\n");
 	return 3;
     }
+
+    if (argc == 5)
+	output = argv[4];
 
     /* Open the input file */
     filename = argv[2];
     file = fopen (filename, "r");
     if (file == NULL){
 	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
+	perror (buffer);
+	return 3;
+    }
+
+    if (argc == 5 && freopen (argv [4], "w", stdout) == NULL){
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", argv[4]);
 	perror (buffer);
 	return 3;
     }
@@ -399,5 +446,94 @@ int main (int argc, char **argv)
     /* All done */
     newline ();
     fclose (file);
+
+    if (argc != 5)
+	return 0;
+
+    /* Open the template file */
+    filename = argv[3];
+    file = fopen (filename, "r");
+    if (file == NULL){
+	sprintf (buffer, "man2hlp: Cannot open file \"%s\"", filename);
+	perror (buffer);
+	return 3;
+    }
+    /* Repeat for each input line */
+    while (!feof (file)){
+	/* Read a line */
+	if (!fgets (buffer2, BUFFER_SIZE, file)){
+	    break;
+	}
+	if (node){
+	    if (*buffer2 && *buffer2 != '\n'){
+		cnode->lname = strdup (buffer2);
+		node = strchr (cnode->lname, '\n');
+		if (node)
+		    *node = 0;
+	    }
+	    node = NULL;
+	} else {
+	node = strchr (buffer, CHAR_NODE_END);
+	if (node && (node[1] == '[')){
+	    char *p = strrchr (node, ']');
+	    if (p && strncmp (node+2, "main", 4) == 0 && node[6] == ']') {
+		node = 0;
+	    } else {
+		if (!cnode){
+		    cnode = &nodes;
+		    cnode->next = NULL;
+		} else {
+		    cnode->next = malloc (sizeof (nodes));
+		    cnode = cnode->next;
+		}
+		cnode->node = strdup (node + 2);
+		cnode->node [p - node - 2] = 0;
+		cnode->lname = NULL;
+	    }
+	} else
+	    node = NULL;
+	}
+	fputs (buffer, stdout);
+    }
+
+    contents_beginning = ftell (stdout);
+    printf ("\004[Contents]\n%s\n\n", Topics);
+
+    for (cnode = &nodes; cnode && cnode->node; cnode = cnode->next){
+	char *node = cnode->node;
+	int heading_level = 0;
+	while (*node == ' '){
+	    heading_level++;
+	    node++;
+	}
+	if (*node)
+	    printf ("  %*s\001 %s \002%s\003", heading_level, "", 
+		    cnode->lname ? cnode->lname : node,
+		    node);
+	printf ("\n");
+
+	free (cnode->node);
+	if (cnode->lname)
+	    free (cnode->lname);
+	if (cnode != &nodes)
+	    free (cnode);
+    }
+
+    file_end = ftell (stdout);
+    fclose (file);
+
+    Topics = malloc (file_end);
+    file_fd = open (output, O_RDONLY);
+    if (file_fd == -1)
+	perror (output);
+    if (read (file_fd, Topics, file_end) != file_end)
+	perror (output);
+    if (close (file_fd) == -1)
+	perror (output);
+    file_fd = open (output, O_WRONLY);
+    write (file_fd, Topics + contents_beginning, file_end - contents_beginning);
+    write (file_fd, Topics, contents_beginning);
+    close (file_fd);
+
     return 0;
 }

@@ -70,12 +70,12 @@ mc_SOURCES = $(SRCS)
 endif
 
 EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
-	gindex.pl ncurses.patch mc.hlp $(CHARSET_SRC)
+	ncurses.patch mc.hlp $(CHARSET_SRC)
 
-$(srcdir)/mc.hlp: $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
+$(srcdir)/mc.hlp: $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp man2hlp.c
 	- $(MAKE) man2hlp
-	- perl $(srcdir)/gindex.pl $(top_builddir)/doc/mc.1 \
-	       $(top_srcdir)/lib/xnc.hlp $(srcdir)/mc.hlp
+	- ./man2hlp 58 $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp \
+	    $(srcdir)/mc.hlp
 	- touch $(srcdir)/mc.hlp
 
 install-exec-hook:
