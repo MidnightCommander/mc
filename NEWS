@@ -1,3 +1,13 @@
+Version 4.6.0.
+
+- Core functionality.
+	- Fixed infinite loop under xterm if xterm is forcedly closed.
+
+- Portability.
+	- ncurses can be found even if it's renamed to curses (OpenBSD).
+	- Warning fixes for 64-bit systems.
+
+
 Version 4.6.0-pre3.
 
 Another release candidate for 4.6.0.
