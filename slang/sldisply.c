@@ -375,10 +375,10 @@ void SLtt_putchar (char ch)
    else tt_write (&ch, 1);
 }
 
-static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
+static unsigned int tt_sprintf(char *buf, unsigned int buflen, char *fmt, int x, int y)
 {
    char *fmt_max;
-   register unsigned char *b, ch;
+   unsigned char *b, *bmax, ch;
    int offset;
    int z, z1, parse_level;
    int zero_pad;
@@ -407,9 +407,11 @@ static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
    field_width = 0;
 
    b = (unsigned char *) buf;
+   bmax = b + buflen;
+
    fmt_max = fmt + strlen (fmt);
 
-   while (fmt < fmt_max)
+   while ((fmt < fmt_max) && (b < bmax))
      {
 	ch = *fmt++;
 
@@ -509,6 +511,7 @@ static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
 	     else if (zero_pad && (field_width >= 2))
 	       *b++ = '0';
 
+	     if (b == bmax) break;
 	     *b++ = z + '0';
 	     field_width = zero_pad = 0;
 	     break;
@@ -516,6 +519,8 @@ static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
 	   case 'x':
 	     z = STACK_POP;
 	     z += offset;
+	     if (b + 16 >= bmax)
+	       break;
 	     sprintf ((char *) b, "%X", z);
 	     b += strlen ((char *)b);
 	     break;
@@ -663,7 +668,10 @@ static unsigned int tt_sprintf(char *buf, char *fmt, int x, int y)
 	     break;
 	  }
      }
+   if (b >= bmax)
+     b = bmax - 1;
    *b = 0;
+
    return (unsigned int) (b - (unsigned char *) buf);
 }
 
@@ -672,7 +680,7 @@ static void tt_printf(char *fmt, int x, int y)
    char buf[1024];
    unsigned int n;
    if (fmt == NULL) return;
-   n = tt_sprintf(buf, fmt, x, y);
+   n = tt_sprintf(buf, sizeof (buf), fmt, x, y);
    tt_write(buf, n);
 }
 
@@ -1609,7 +1617,7 @@ static void forward_cursor (unsigned int n, int row)
    else if (Curs_F_Str != NULL)
      {
 	Cursor_c += n;
-	n = tt_sprintf(buf, Curs_F_Str, (int) n, 0);
+	n = tt_sprintf(buf, sizeof (buf), Curs_F_Str, (int) n, 0);
 	tt_write(buf, n);
      }
    else SLtt_goto_rc (row, (int) (Cursor_c + n));

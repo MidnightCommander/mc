@@ -741,7 +741,7 @@ extern int SLarray_map_array (SLCONST SLarray_Map_Type *);
 
   extern char *SLang_User_Prompt;
   /* Prompt to use when reading from stdin */
-  extern const int SLang_Version;
+  extern int SLang_Version;
   extern char *SLang_Version_String;
 extern char *SLang_Doc_Dir;
 
