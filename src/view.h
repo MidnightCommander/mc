@@ -28,18 +28,18 @@ typedef struct {
     int file;			/* File descriptor (for mmap and munmap) */
     FILE *stdfile;		/* Stdio struct for reading file in parts */
     int reading_pipe;		/* Flag: Reading from pipe(use popen/pclose) */
-    long bytes_read;		/* How much of file is read */
+    unsigned long bytes_read;   /* How much of file is read */
     int mmapping;		/* Did we use mmap on the file? */
 
     /* Display information */
-    long last;			/* Last byte shown */
-    long last_byte;		/* Last byte of file */
+    unsigned long last;         /* Last byte shown */
+    unsigned long last_byte;    /* Last byte of file */
     long first;			/* First byte in file */
     long bottom_first;	/* First byte shown when very last page is displayed */
 				/* For the case of WINCH we should reset it to -1 */
-    long start_display;		/* First char displayed */
+    unsigned long start_display;/* First char displayed */
     int  start_col;		/* First displayed column, negative */
-    int  edit_cursor;           /* HexEdit cursor position in file */
+    unsigned int  edit_cursor;  /* HexEdit cursor position in file */
     char hexedit_mode;          /* Hexidecimal editing mode flag */ 
     char nib_shift;             /* A flag for inserting nibbles into bytes */
     enum ViewSide view_side;	/* A flag for the active editing panel */
@@ -78,16 +78,6 @@ typedef struct {
     int marker;			/* mark to use */
     int marks [10];		/* 10 marks: 0..9 */
     
-#ifdef HAVE_TK
-    /* Tk version, line cache */
-    int  current_line;		/* The current screen line cached */
-    char *cache;		/* Current cache */
-    char *color_cache;		/* Attributes: keep in sync with cache */
-    int  dest;			/* Index in the cache to write to */
-    int  cache_len;		/* Length of the cache buffer -1 */
-    int  last_col;		/* last column used */
-    int  status_shown;		/* Have we show the file information? */
-#endif
 	
 #ifdef HAVE_GNOME
     int  current_x, current_y;	/* Current x,y position */

@@ -214,7 +214,7 @@ view_destroy (WView *view)
 }
 
 static int
-get_byte (WView *view, int byte_index)
+get_byte (WView *view, unsigned int byte_index)
 {
     int page   = byte_index / VIEW_PAGE_SIZE + 1;
     int offset = byte_index % VIEW_PAGE_SIZE;
@@ -800,7 +800,7 @@ display (WView *view)
     int col = 0 + frame_shift;
     int row = STATUS_LINES + frame_shift;
     int height, width;
-    long from;
+    unsigned long from;
     int c;
     int boldflag = 0;
     struct hexedit_change_node *curr = view->change_list;
@@ -1096,7 +1096,7 @@ my_define (Dlg_head *h, int idx, char *text,
 static long
 move_forward2 (WView *view, long current, int lines, long upto)
 {
-    long p, q;
+    unsigned long q, p;
     int  line;
     int  col = 0;
 
@@ -1179,7 +1179,7 @@ move_forward2 (WView *view, long current, int lines, long upto)
    of lines up to there and then use move_forward2(p, something, 0), which we
    return */
 static long
-move_backward2 (WView *view, long current, int lines)
+move_backward2 (WView *view, unsigned long current, int lines)
 {
     long p, q, pm;
     int line;
@@ -1393,13 +1393,13 @@ grow_string_buffer (char *text, int *size)
 }
 
 static char *
-get_line_at (WView *view, long *p)
+get_line_at (WView *view, unsigned long *p)
 {
     char *buffer = 0;
     int  buffer_size, usable_size;
     int  ch;
     int  direction;
-    long pos = *p;
+    unsigned long pos = *p;
     long i;
 
     direction = view->direction;
@@ -1615,7 +1615,7 @@ block_search (WView *view, char *buffer, int len)
 {
     int w = view->widget.cols - (view->have_frame * 2);
     char *d = buffer, b;
-    long e;
+    unsigned long e;
 
     /* clear interrupt status */
     got_interrupt ();
@@ -1880,8 +1880,9 @@ void
 goto_line (WView *view)
 {
     char *line, prompt [BUF_SMALL];
-    int i, oldline = 1;
+    int oldline = 1;
     int saved_wrap_mode = view->wrap_mode;
+    unsigned long i;
 
     view->wrap_mode = 0;
     for (i = view->first; i < view->start_display; i++)
