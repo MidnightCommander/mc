@@ -1,5 +1,8 @@
 2002-08-25  Pavel Roskin  <proski@gnu.org>
 
+	* configure.in: Fix interpretation of the iconv test result.
+	Reported by Pavel Shirshov <pavelsh@mail.ru>
+
 	* mc.sh.in: Only bash needs the mc() function to be exported.
 
 	* doc/pl/mc.1.in: Add node names and options.  Use @prefix@

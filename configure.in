@@ -644,7 +644,7 @@ AC_ARG_ENABLE([charset],
 	      [--enable-charset           Support for charset selection and conversion])
 have_charset=
 if test "x$enable_charset" = xyes; then
-  if test -z "$am_cv_func_iconv"; then
+  if test "x$am_cv_func_iconv" != xyes; then
     AC_MSG_WARN([Cannot enable charset support because iconv function is missing])
   else
     AC_DEFINE(HAVE_CHARSET, 1,
