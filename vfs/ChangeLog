@@ -1,3 +1,9 @@
+Mon Oct  5 20:11:01 1998  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* vfs.c: added stat to avoid hiding files by naming them
+ 	#ftp:localhost and similar. Vfs will not treat files as local if
+ 	they already exists, regardless of name.
+
 Tue Oct  6 15:34:22 1998  Pavel Machek  <pavel@atrey.karlin.mff.cuni.cz>
 
 	* vfs.h: disable BROKEN_PATHS by default. See if you can live
