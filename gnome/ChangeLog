@@ -1,3 +1,8 @@
+1999-09-10  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gnome-file-property-dialog.c (apply_uid_group_change): Fix more
+	broken code. 
+
 1999-09-09  Federico Mena Quintero  <federico@redhat.com>
 
 	* gcorba.c (WindowFactory_close_invalid_windows): Doh.  Walk the

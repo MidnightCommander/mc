@@ -812,7 +812,7 @@ perm_owner_new (GnomeFilePropertyDialog *fp_dlg)
 	} else {
 		char buf[100];
 
-		g_snprintf (buf, sizeof (buf), _("<Unknown> (%d)"), (int) fp_dlg->st.st_uid);
+		g_snprintf (buf, sizeof (buf), "%d", (int) fp_dlg->st.st_uid);
 		gtk_entry_set_text (GTK_ENTRY (gentry), buf);
 	}
 
@@ -1136,7 +1136,8 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 	/* we only check if our euid == 0 */
 	if (fpd->euid == 0) {
 		new_user_name = gtk_entry_get_text (GTK_ENTRY (fpd->owner_entry));
-		if (new_user_name && strcmp (fpd->user_name, new_user_name)) {
+
+		if (fpd->user_name && new_user_name && strcmp (fpd->user_name, new_user_name)) {
 			/* now we need to get the new uid */
 			p = getpwnam (new_user_name);
 			if (!p) {
@@ -1147,8 +1148,19 @@ apply_uid_group_change (GnomeFilePropertyDialog *fpd)
 				}
 			} else
 				uid = p->pw_uid;
+		} else {
+			if (new_user_name){
+				p = getpwnam (new_user_name);
+				if (!p) {
+					uid = atoi (new_user_name);
+					if (uid == 0) {
+						message (1, "Error", _("You entered an invalid username"));
+						uid = fpd->st.st_uid;
+					}
+				} else
+					uid = p->pw_uid;
+			}
 		}
-
 	}
 
 	/* now we check the group */
