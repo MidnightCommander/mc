@@ -1,3 +1,7 @@
+2003-07-08  Adam Byrtek  <alpha@debian.org>
+
+	* edit.c (edit_clean): Remove stale lock if any.
+
 2003-07-08  Pavel Roskin  <proski@gnu.org>
 
 	* edit-widget.h: Add new field loading_done.

@@ -584,6 +584,10 @@ edit_clean (WEdit *edit)
     if (!edit)
 	return 0;
 
+    /* a stale lock, remove it */
+    if (edit->locked)
+	edit->locked = edit_unlock_file (edit->filename);
+    
     /* save cursor position */
     if (option_save_position)
 	edit_save_position (edit);
