@@ -230,7 +230,7 @@ audio/x-s3m:
 	view=xmms %f
 
 audio/x-xi:
-	icon-filename=@icondir/gnome-audio-x-xi.png
+	icon-filename=@icondir@/gnome-audio-x-xi.png
 
 audio/x-xm:
 	icon-filename=@icondir@/gnome-audio-x-xm.png

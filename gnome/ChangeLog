@@ -1,3 +1,7 @@
+2001-05-23  jacob berkman  <jacob@ximian.com>
+
+	* mc.keys.in.in: fix missing trailing @ in audio/x-xi entry
+
 2001-05-20  Pavel Roskin  <proski@gnu.org>
 
 	* gmount.c: Fix warning "extra token after endif".
