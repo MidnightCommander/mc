@@ -54,7 +54,10 @@ get_color (char *cpp, GdkColor **colp)
 
 	new_color = g_new (GdkColor, 1);
 	gdk_color_parse (cpp, new_color);
-	new_color->pixel = gdk_color_context_get_pixel (mc_cc, new_color->red, new_color->green, new_color->blue, &status);
+	new_color->pixel = 0;
+	status = 0;
+	gdk_color_context_get_pixels (mc_cc, &new_color->red, &new_color->green, &new_color->blue, 1,
+				      &new_color->pixel, &status);
 	*colp = new_color;
 }
 

@@ -1,5 +1,7 @@
 1998-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
+	* gmain.c (get_color): Make it use GdkColorContext correctly.
+
 	* gscreen.c (panel_create_filter): The filter control is now a
 	nice GnomeEntry.  It does not work due to gmc trapping key events;
 	I'll look into it tomorrow.
