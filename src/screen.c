@@ -968,7 +968,7 @@ is_a_panel (Widget *w)
 /* Panel creation */
 /* The parameter specifies the name of the panel for setup retieving */
 WPanel *
-panel_new (char *panel_name)
+panel_new (const char *panel_name)
 {
 #ifdef HAVE_GNOME
     static int panel_id = 0;

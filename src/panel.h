@@ -202,7 +202,7 @@ typedef struct {
 #endif
 } WPanel;
 
-WPanel *panel_new (char *panel_name);
+WPanel *panel_new (const char *panel_name);
 void panel_set_size (WPanel *panel, int x1, int y1, int x2, int y2);
 void paint_paint (WPanel *panel);
 void panel_refresh (WPanel *panel);

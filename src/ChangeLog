@@ -1,3 +1,8 @@
+2001-03-30  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* panel.h, screen.c (panel_new): panel_name constified to do gcc
+	some more happy when gmc is compiled
+
 2001-03-18  Miguel de Icaza  <miguel@ximian.com>
 
 	* widget.c (forward_word, backward_word): Revert Timur's patch
@@ -56,6 +61,8 @@
 2001-01-17  Pavel Roskin  <proski@gnu.org>
 
 	* Makefile.in: Respect LDFLAGS when linking cons.saver.
+
+2000-11-20  Andrew V. Samoilov <sav@bcs.zp.ua>
 
 	* view.c: Fixed long existed bugs in internal viewer. When search is
 	doing in binary file it ignore skipped zero(es), so cursor is before
