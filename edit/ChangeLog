@@ -3,7 +3,7 @@
 	* editcmd.c (edit_save_file): Call mc_chown () and mc_chmod ()
 	before mc_open () to prevent hangs over ftpfs. 
 
-	* edit.h: Remove open, close, write, read and mkdir declaration.
+	* edit.h: Remove open, close, write, read and mkdir definitions.
 	* edit.c: Use mc_open, mc_close, mc_write, mc_read, mc_rename,
 	mc_chmod and mc_chown. Don't cast (char *) to (unsigned long)
 	in pointer arithmetics.
