@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 1999-08-30 13:07+0200\n"
-"PO-Revision-Date: 1999-08-20 05:31:36+0900\n"
+"POT-Creation-Date: 1999-09-06 20:26+0900\n"
+"PO-Revision-Date: 1999-09-06 11:29:24+0900\n"
 "Last-Translator: Sung-Hyun Nam <namsh@lgic.co.kr>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,125 +97,125 @@ msgstr "편집"
 msgid "view"
 msgstr "보기"
 
-#: gnome/gcmd.c:48
+#: gnome/gcmd.c:49
 msgid " There is no other panel to compare contents to "
 msgstr " There is no other panel to compare contents to "
 
-#: gnome/gcmd.c:99
+#: gnome/gcmd.c:100
 msgid "The Midnight Commander Team"
 msgstr " The Midnight Commander 팀"
 
-#: gnome/gcmd.c:101
+#: gnome/gcmd.c:102
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "버그 레포트: http://bugs.gnome.org 혹은 gnome-bug 사용"
 
-#: gnome/gcmd.c:113
+#: gnome/gcmd.c:114
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:116
+#: gnome/gcmd.c:117
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "The GNOME edition of the Midnight Commander file manager."
 
-#: gnome/gcmd.c:289
+#: gnome/gcmd.c:290
 msgid "Sort By"
 msgstr "정렬"
 
 #. we define this up here so we can pass it in to our callback
-#: gnome/gcmd.c:294
+#: gnome/gcmd.c:295
 msgid "Ignore case sensitivity."
 msgstr "대소문자 무시"
 
-#: gnome/gcmd.c:297
+#: gnome/gcmd.c:298
 msgid "Sort files by "
 msgstr "Sort files by "
 
-#: gnome/gcmd.c:302 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
+#: gnome/gcmd.c:303 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
 msgstr "이름"
 
-#: gnome/gcmd.c:309
+#: gnome/gcmd.c:310
 msgid "File Type"
 msgstr "파일 종류"
 
-#: gnome/gcmd.c:315 gnome/gcustom-layout.c:45 src/screen.c:414
+#: gnome/gcmd.c:316 gnome/gcustom-layout.c:45 src/screen.c:414
 #: src/screen.c:415
 msgid "Size"
 msgstr "크기"
 
-#: gnome/gcmd.c:321
+#: gnome/gcmd.c:322
 msgid "Time Last Accessed"
 msgstr "마지막 액세스 시간"
 
-#: gnome/gcmd.c:327
+#: gnome/gcmd.c:328
 msgid "Time Last Modified"
 msgstr "마지막 수정 시간"
 
-#: gnome/gcmd.c:333
+#: gnome/gcmd.c:334
 msgid "Time Last Changed"
 msgstr "마지막 고쳐진 시간"
 
-#: gnome/gcmd.c:347
+#: gnome/gcmd.c:348
 msgid "Reverse the order."
 msgstr "순서 뒤집기."
 
-#: gnome/gcmd.c:394
+#: gnome/gcmd.c:395
 msgid "Enter name."
 msgstr "이름 입력."
 
-#: gnome/gcmd.c:400
+#: gnome/gcmd.c:401
 msgid "Enter label for command:"
 msgstr "명령어 꼬리표 입력:"
 
-#: gnome/gcmd.c:505
+#: gnome/gcmd.c:506
 msgid "Find all core files"
 msgstr "모든 core 파일 찾기"
 
-#: gnome/gcmd.c:508 src/panelize.c:350
+#: gnome/gcmd.c:509 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr "기운 후 거부파일이 생겼습니다"
 
-#: gnome/gcmd.c:553
+#: gnome/gcmd.c:554
 msgid "Run Command"
 msgstr "명령 실행"
 
 #. Frame 1
-#: gnome/gcmd.c:558
+#: gnome/gcmd.c:559
 msgid "Preset Commands"
 msgstr "명령 미리 조절"
 
 #. add add/remove buttons in center
-#: gnome/gcmd.c:575 gnome/gcustom-layout.c:183
+#: gnome/gcmd.c:576 gnome/gcustom-layout.c:183
 msgid "Add"
 msgstr "추가"
 
-#: gnome/gcmd.c:579 gnome/gcustom-layout.c:184
+#: gnome/gcmd.c:580 gnome/gcustom-layout.c:184
 msgid "Remove"
 msgstr "삭제"
 
 #. Frame 2
-#: gnome/gcmd.c:587
+#: gnome/gcmd.c:588
 msgid "Run this Command"
 msgstr "이 명령 실행"
 
-#: gnome/gcmd.c:594
+#: gnome/gcmd.c:595
 msgid "Command: "
 msgstr "명령: "
 
-#: gnome/gcmd.c:673
+#: gnome/gcmd.c:674
 msgid "Set Filter"
 msgstr "필터 설정"
 
-#: gnome/gcmd.c:678 gnome/gcmd.c:719 gnome/gcmd.c:724 gnome/gcmd.c:728
-#: gnome/gscreen.c:2478
+#: gnome/gcmd.c:679 gnome/gcmd.c:720 gnome/gcmd.c:725 gnome/gcmd.c:729
+#: gnome/gscreen.c:2469
 msgid "Show all files"
 msgstr "모든 파일 보여주기"
 
-#: gnome/gcmd.c:685
+#: gnome/gcmd.c:686
 msgid "."
 msgstr "."
 
-#: gnome/gcmd.c:701
+#: gnome/gcmd.c:702
 msgid ""
 "Enter a filter here for files in the panel view.\n"
 "\n"
@@ -227,27 +227,27 @@ msgstr ""
 "예를 들면:\n"
 "*.png는 png 그림만을 보여줄 것입니다"
 
-#: gnome/gcmd.c:703
+#: gnome/gcmd.c:704
 msgid "Enter a Regular Expression to filter files in the panel view."
 msgstr "패널 보기에서 파일 필터링을 위한 정규 표현식 입력."
 
-#: gnome/gcmd.c:763
+#: gnome/gcmd.c:764
 msgid " Open with..."
 msgstr " Open with..."
 
-#: gnome/gcmd.c:764
+#: gnome/gcmd.c:765
 msgid "Enter extra arguments:"
 msgstr "extra 인자 입력:"
 
-#: gnome/gcmd.c:827
+#: gnome/gcmd.c:835
 msgid "Desktop entry properties"
 msgstr "데스크탑 엔트리 속성"
 
-#: gnome/gcmd.c:853
+#: gnome/gcmd.c:861
 msgid "Select File"
 msgstr "파일 선택"
 
-#: gnome/gcmd.c:861
+#: gnome/gcmd.c:869
 msgid ""
 "Enter a filter here to select files in the panel view with.\n"
 "\n"
@@ -259,19 +259,19 @@ msgstr ""
 "예를 들면:\n"
 "*.png는 모든 png 그림을 선택할 것입니다"
 
-#: gnome/gcmd.c:863
+#: gnome/gcmd.c:871
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "패널 보기에서 파일 선택을 위한 정규 표현식 입력."
 
-#: gnome/gcmd.c:909 src/cmd.c:543 src/cmd.c:594
+#: gnome/gcmd.c:917 src/cmd.c:543 src/cmd.c:594
 msgid "  Malformed regular expression  "
 msgstr "  이해할 수 없는 정규표현식  "
 
-#: gnome/gcmd.c:954
+#: gnome/gcmd.c:962
 msgid "Creating a desktop link"
 msgstr "데스크탑 링크 생성"
 
-#: gnome/gcmd.c:955
+#: gnome/gcmd.c:963
 msgid "Enter the URL:"
 msgstr "URL 입력:"
 
@@ -344,33 +344,6 @@ msgstr "표시될 행"
 msgid "Custom View"
 msgstr "사용자 보기"
 
-#. Icon position
-#: gnome/gdesktop-prefs.c:242
-msgid "Icon position"
-msgstr ""
-
-#. Snap and placement
-#: gnome/gdesktop-prefs.c:258
-msgid "Automatic icon placement"
-msgstr ""
-
-#: gnome/gdesktop-prefs.c:262
-msgid "Snap icons to grid"
-msgstr "Snap icons to grid"
-
-#: gnome/gdesktop-prefs.c:277
-msgid "Use shaped icons"
-msgstr "Use shaped icons"
-
-#: gnome/gdesktop-prefs.c:281
-#, fuzzy
-msgid "Use shaped text"
-msgstr "Use shaped icons"
-
-#: gnome/gdesktop-prefs.c:335
-msgid "Desktop"
-msgstr "데스크탑"
-
 #: gnome/gdesktop.c:520 gnome/gdesktop.c:2207 gnome/gmount.c:324
 msgid "Warning"
 msgstr "경고"
@@ -416,38 +389,38 @@ msgstr ""
 "\n"
 "배경을 설정할 수 없습니다."
 
-#: gnome/gdesktop.c:2610 gnome/glayout.c:361
-msgid "Launch a new terminal in the current directory"
-msgstr "현재 디렉토리에서 새 터미널 열기"
-
-#: gnome/gdesktop.c:2610 gnome/glayout.c:361
+#: gnome/gdesktop.c:2610 gnome/glayout.c:362
 msgid "_Terminal"
 msgstr "터미널(_T)"
 
-#: gnome/gdesktop.c:2612 gnome/glayout.c:363
-msgid "Creates a new directory"
-msgstr "새로운 디렉토리을 생성"
+#: gnome/gdesktop.c:2610 gnome/glayout.c:363
+msgid "Launch a new terminal in the current directory"
+msgstr "현재 디렉토리에서 새 터미널 열기"
 
 #. If this ever changes, make sure you update create_new_menu accordingly.
-#: gnome/gdesktop.c:2612 gnome/glayout.c:363
+#: gnome/gdesktop.c:2612 gnome/glayout.c:365
 msgid "_Directory..."
 msgstr "디렉토리(_D)..."
 
-#: gnome/gdesktop.c:2613
-msgid "Creates a new URL link"
-msgstr "새로운 URL 링크 생성"
+#: gnome/gdesktop.c:2612 gnome/glayout.c:366
+msgid "Creates a new directory"
+msgstr "새로운 디렉토리을 생성"
 
 #: gnome/gdesktop.c:2613
 msgid "URL L_ink..."
 msgstr "URL 링크(_i)..."
 
-#: gnome/gdesktop.c:2614
-msgid "Creates a new launcher"
-msgstr "새로운 launcher 생성"
+#: gnome/gdesktop.c:2613
+msgid "Creates a new URL link"
+msgstr "새로운 URL 링크 생성"
 
 #: gnome/gdesktop.c:2614
 msgid "_Launcher..."
 msgstr "_Launcher..."
+
+#: gnome/gdesktop.c:2614
+msgid "Creates a new launcher"
+msgstr "새로운 launcher 생성"
 
 #: gnome/gdesktop.c:2620
 msgid "By _Name"
@@ -473,7 +446,7 @@ msgstr "마지막 수정 시간으로(_M)"
 msgid "By Time Last _Changed"
 msgstr "마지막 고쳐진 시간으로(_C)"
 
-#: gnome/gdesktop.c:2633 gnome/glayout.c:455
+#: gnome/gdesktop.c:2633 gnome/glayout.c:460
 msgid "_Arrange Icons"
 msgstr "아이콘 정렬(_A)"
 
@@ -481,17 +454,43 @@ msgstr "아이콘 정렬(_A)"
 msgid "Create _New Window"
 msgstr "새 창 생성(_N)"
 
-#: gnome/gdesktop.c:2636 gnome/glayout.c:457
+#: gnome/gdesktop.c:2636 gnome/glayout.c:462
 msgid "Recreate Desktop _Shortcuts"
 msgstr "데스크탑 지름길 재생성(_S)"
 
-#: gnome/gdesktop.c:2637 gnome/glayout.c:458
+#: gnome/gdesktop.c:2637 gnome/glayout.c:463
 msgid "Rescan _Desktop"
 msgstr "데스크탑 다시 읽기(_D)"
 
 #: gnome/gdesktop.c:2638
 msgid "Configure _Background Image"
 msgstr "배경 그림 설정(_B)"
+
+#. Icon position
+#: gnome/gdesktop-prefs.c:242
+msgid "Icon position"
+msgstr "아이콘 위치"
+
+#. Snap and placement
+#: gnome/gdesktop-prefs.c:258
+msgid "Automatic icon placement"
+msgstr "아이콘 위치 자동"
+
+#: gnome/gdesktop-prefs.c:262
+msgid "Snap icons to grid"
+msgstr "Snap icons to grid"
+
+#: gnome/gdesktop-prefs.c:277
+msgid "Use shaped icons"
+msgstr "shaped 아이콘 사용"
+
+#: gnome/gdesktop-prefs.c:281
+msgid "Use shaped text"
+msgstr "shaped 텍스트 사용"
+
+#: gnome/gdesktop-prefs.c:335
+msgid "Desktop"
+msgstr "데스크탑"
 
 #: gnome/gdialogs.c:60
 msgid "To: "
@@ -654,15 +653,15 @@ msgstr "is "
 msgid "done."
 msgstr "done."
 
+#. Translators should take care as "Password" or its translations
+#. are used to identify password boxes and hide characters with "*"
+#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1854
+msgid "Password:"
+msgstr "비밀번호:"
+
 #: gnome/gdialogs.c:1007
 msgid "Password"
 msgstr "비밀번호"
-
-#. Translators should take care as "Password" or its translations
-#. are used to identify password boxes and hide characters with "*"
-#: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1808
-msgid "Password:"
-msgstr "비밀번호:"
 
 #. Create the dialog
 #: gnome/gdialogs.c:1039
@@ -788,165 +787,173 @@ msgstr ""
 "응용프로그램을 종료하기 위해 확인 버튼을 누르거나 계속 사용하시려면\n"
 "취소 버튼을 누르십시오."
 
-#: gnome/glayout.c:384
-msgid "Copy files"
-msgstr "파일 복사"
+#: gnome/glayout.c:367
+msgid "_File..."
+msgstr "파일(_F)..."
+
+#: gnome/glayout.c:368
+msgid "Creates a new file in this directory"
+msgstr "이 디렉토리에 새로운 파일을 생성"
 
 #. GNOMEUIINFO_ITEM_NONE(N_("Open _FTP site"),  N_("Opens an FTP site"), ftplink_cmd },
-#: gnome/glayout.c:384 gnome/gscreen.c:2147
+#: gnome/glayout.c:389 gnome/gscreen.c:2138
 msgid "_Copy..."
 msgstr "복사(_C)..."
 
-#: gnome/glayout.c:385
-msgid "Delete files"
-msgstr "파일 지움"
+#: gnome/glayout.c:389
+msgid "Copy files"
+msgstr "파일 복사"
 
-#: gnome/glayout.c:385 gnome/gscreen.c:2148
+#: gnome/glayout.c:390 gnome/gscreen.c:2139
 msgid "_Delete..."
 msgstr "지우기(_D)..."
 
-#: gnome/glayout.c:386
-msgid "Rename or move files"
-msgstr "파일 이름을 바꾸거나 이동"
+#: gnome/glayout.c:390
+msgid "Delete files"
+msgstr "파일 지움"
 
-#: gnome/glayout.c:386 gnome/gscreen.c:2149
+#: gnome/glayout.c:391 gnome/gscreen.c:2140
 msgid "_Move..."
 msgstr "이동(_M)..."
 
-#: gnome/glayout.c:388
+#: gnome/glayout.c:391
+msgid "Rename or move files"
+msgstr "파일 이름을 바꾸거나 이동"
+
+#: gnome/glayout.c:393
 msgid "Show directory sizes"
 msgstr "디렉토리 크기 보기"
 
-#: gnome/glayout.c:388
+#: gnome/glayout.c:393
 msgid "Shows the disk space used by each directory"
 msgstr "각 디렉토리이 사용하고 있는 디스크 용량을 보여줌"
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:400
 msgid "Select _All"
 msgstr "모두 선택(_A)"
 
-#: gnome/glayout.c:395
+#: gnome/glayout.c:400
 msgid "Select all files in the current Panel"
 msgstr "현재 패널의 모든 파일 선택"
 
-#: gnome/glayout.c:397
-msgid "Select a group of files"
-msgstr "파일을 묶어서 선택"
-
-#: gnome/glayout.c:397
+#: gnome/glayout.c:402
 msgid "_Select Files..."
 msgstr "파일 선택(_S)..."
 
-#: gnome/glayout.c:398
-msgid "Reverses the list of tagged files"
-msgstr "선택된 파일과 선택되지 않은 파일을 반전시킴"
+#: gnome/glayout.c:402
+msgid "Select a group of files"
+msgstr "파일을 묶어서 선택"
 
-#: gnome/glayout.c:398
+#: gnome/glayout.c:403
 msgid "_Invert Selection"
 msgstr "선택 반전(_I)"
 
-#: gnome/glayout.c:401 gtkedit/editwidget.c:1099 src/view.c:2083
+#: gnome/glayout.c:403
+msgid "Reverses the list of tagged files"
+msgstr "선택된 파일과 선택되지 않은 파일을 반전시킴"
+
+#: gnome/glayout.c:406 gtkedit/editwidget.c:1099 src/view.c:2083
 msgid "Search"
 msgstr "찾기"
 
-#: gnome/glayout.c:401
+#: gnome/glayout.c:406
 msgid "Search for a file in the current Panel"
 msgstr "현재 패널에서 파일 찾기"
 
-#: gnome/glayout.c:404
-msgid "Rescan the directory contents"
-msgstr "디렉토리 다시 읽기"
-
-#: gnome/glayout.c:404 gnome/gscreen.c:1508
+#: gnome/glayout.c:409 gnome/gscreen.c:1497
 msgid "_Rescan Directory"
 msgstr "디렉토리 다시 읽기(_R)"
 
-#: gnome/glayout.c:414
-msgid "Confirmation settings"
-msgstr "확인 내용 설정"
+#: gnome/glayout.c:409
+msgid "Rescan the directory contents"
+msgstr "디렉토리 다시 읽기"
 
-#: gnome/glayout.c:414
+#: gnome/glayout.c:419
 msgid "_Sort By..."
 msgstr "정렬(_S)..."
 
-#: gnome/glayout.c:415
-msgid "Global option settings"
-msgstr "전체 선택항목 설정"
+#: gnome/glayout.c:419
+msgid "Confirmation settings"
+msgstr "확인 내용 설정"
 
-#: gnome/glayout.c:415
+#: gnome/glayout.c:420
 msgid "_Filter View..."
 msgstr "필터 보기(_F)..."
 
-#: gnome/glayout.c:422
-msgid "Locate files on disk"
-msgstr "디스크에서의 파일 위치"
+#: gnome/glayout.c:420
+msgid "Global option settings"
+msgstr "전체 선택항목 설정"
 
-#: gnome/glayout.c:422
+#: gnome/glayout.c:427
 msgid "_Find File..."
 msgstr "파일 찾기(_F)"
 
-#: gnome/glayout.c:425
-msgid "Edits the MIME type bindings"
-msgstr "MIME 형식 바인딩 편집"
+#: gnome/glayout.c:427
+msgid "Locate files on disk"
+msgstr "디스크에서의 파일 위치"
 
 #. { GNOME_APP_UI_ITEM, N_("_Compare panels..."), N_("Compare two panel contents"), gnome_compare_panels },
-#: gnome/glayout.c:425
+#: gnome/glayout.c:430
 msgid "_Edit mime types..."
 msgstr "mime 형식 편집(_E)..."
 
-#: gnome/glayout.c:427
-msgid "Runs a command"
-msgstr "명령 실행"
+#: gnome/glayout.c:430
+msgid "Edits the MIME type bindings"
+msgstr "MIME 형식 바인딩 편집"
 
-#: gnome/glayout.c:427
+#: gnome/glayout.c:432
 msgid "_Run Command..."
 msgstr "명령 실행(_R)"
 
-#: gnome/glayout.c:429
-msgid "Run a command and put the results in a panel"
-msgstr "명령을 실행하여 그 결과를 패널에 표시"
+#: gnome/glayout.c:432
+msgid "Runs a command"
+msgstr "명령 실행"
 
-#: gnome/glayout.c:429
+#: gnome/glayout.c:434
 msgid "_Run Command in panel..."
 msgstr "패널에서 명령 실행(_R)..."
 
-#: gnome/glayout.c:439
-msgid "List of background operations"
-msgstr "background operations 목록"
+#: gnome/glayout.c:434
+msgid "Run a command and put the results in a panel"
+msgstr "명령을 실행하여 그 결과를 패널에 표시"
 
-#: gnome/glayout.c:439
+#: gnome/glayout.c:444
 msgid "_Background jobs..."
 msgstr "Background jobs(_B)..."
 
-#: gnome/glayout.c:442
+#: gnome/glayout.c:444
+msgid "List of background operations"
+msgstr "background operations 목록"
+
+#: gnome/glayout.c:447
 msgid "Exit"
 msgstr "종료"
 
-#: gnome/glayout.c:442
+#: gnome/glayout.c:447
 msgid "Terminates the file manager and the desktop"
 msgstr "파일 관리자와 데스크탑 종료"
 
-#: gnome/glayout.c:465 gnome/glayout.c:476
+#: gnome/glayout.c:470 gnome/glayout.c:481
 msgid "_Settings"
 msgstr "설정(_S)"
 
-#: gnome/glayout.c:466 gnome/glayout.c:477
+#: gnome/glayout.c:471 gnome/glayout.c:482
 msgid "_Layout"
 msgstr "배치(_L)"
 
-#: gnome/glayout.c:467 gnome/glayout.c:478
+#: gnome/glayout.c:472 gnome/glayout.c:483
 msgid "_Commands"
 msgstr "명령(_C)"
 
-#: gnome/glayout.c:468
+#: gnome/glayout.c:473
 msgid "_Desktop"
 msgstr "데스크탑(_D)"
 
-#: gnome/glayout.c:469 gnome/glayout.c:479
+#: gnome/glayout.c:474 gnome/glayout.c:484
 msgid "_Help"
 msgstr "도움말(_H)"
 
-#: gnome/glayout.c:619
+#: gnome/glayout.c:624
 msgid "File/New/Directory..."
 msgstr "파일(F)/새로운(N)/디렉토리(D)..."
 
@@ -1043,14 +1050,14 @@ msgid "File Type: FIFO"
 msgstr "파일 종류: 피포"
 
 #: gnome/gnome-file-property-dialog.c:238
-msgid " bytes"
-msgstr " 바이트"
-
-#: gnome/gnome-file-property-dialog.c:238
 #: gnome/gnome-file-property-dialog.c:242
 #: gnome/gnome-file-property-dialog.c:248
 msgid "File Size: "
 msgstr "파일 크기: "
+
+#: gnome/gnome-file-property-dialog.c:238
+msgid " bytes"
+msgstr " 바이트"
 
 #: gnome/gnome-file-property-dialog.c:242
 msgid " KBytes  ("
@@ -1435,90 +1442,98 @@ msgstr "제목"
 msgid "Select icon"
 msgstr "아이콘 선택"
 
-#: gnome/gscreen.c:1508
+#: gnome/gscreen.c:1497
 msgid "Reloads the current directory"
 msgstr "현재 디렉토리 다시 읽기"
 
-#: gnome/gscreen.c:1510
-msgid "Creates a new directory here"
-msgstr "새로운 디렉토리을 생성"
-
-#: gnome/gscreen.c:1510
+#: gnome/gscreen.c:1499
 msgid "New _Directory..."
 msgstr "새 디렉토리(_D)..."
 
-#: gnome/gscreen.c:1711
+#: gnome/gscreen.c:1499
+msgid "Creates a new directory here"
+msgstr "새로운 디렉토리을 생성"
+
+#: gnome/gscreen.c:1501
+msgid "New _File..."
+msgstr "새 파일(_F)..."
+
+#: gnome/gscreen.c:1501
+msgid "Creates a new file here"
+msgstr "여기에 새 파일을 생성"
+
+#: gnome/gscreen.c:1702
 #, c-format
 msgid "Search: %s"
 msgstr "찾기: %s"
 
-#: gnome/gscreen.c:1721
+#: gnome/gscreen.c:1712
 #, c-format
 msgid "%s bytes in %d file"
 msgstr "%s bytes in %d file"
 
-#: gnome/gscreen.c:1721
+#: gnome/gscreen.c:1712
 #, c-format
 msgid "%s bytes in %d files"
 msgstr "%s bytes in %d files"
 
-#: gnome/gscreen.c:1747 src/screen.c:688
+#: gnome/gscreen.c:1738 src/screen.c:688
 msgid "<readlink failed>"
 msgstr "<readlink 실패>"
 
-#: gnome/gscreen.c:2147
+#: gnome/gscreen.c:2138
 msgid "Copy directory"
 msgstr "디렉토리 복사"
 
-#: gnome/gscreen.c:2148
+#: gnome/gscreen.c:2139
 msgid "Delete directory"
 msgstr "디렉토리 삭제"
 
-#: gnome/gscreen.c:2149
+#: gnome/gscreen.c:2140
 msgid "Rename or move directory"
 msgstr "디렉토리 이름을 바꾸거나 이동"
 
-#: gnome/gscreen.c:2305
+#: gnome/gscreen.c:2296
 msgid "Back"
 msgstr "뒤로"
 
-#: gnome/gscreen.c:2305
+#: gnome/gscreen.c:2296
 msgid "Go to the previously visited directory"
 msgstr "바로 전 디렉토리으로 가기"
 
-#: gnome/gscreen.c:2307
-msgid "Go up a level in the directory heirarchy"
-msgstr "윗 디렉토리으로 가기"
-
-#: gnome/gscreen.c:2307
+#: gnome/gscreen.c:2298
 msgid "Up"
 msgstr "위로"
 
-#: gnome/gscreen.c:2309
+#: gnome/gscreen.c:2298
+msgid "Go up a level in the directory heirarchy"
+msgstr "윗 디렉토리으로 가기"
+
+#: gnome/gscreen.c:2300
 msgid "Forward"
 msgstr "앞으로"
 
-#: gnome/gscreen.c:2309
+#: gnome/gscreen.c:2300
 msgid "Go to the next directory"
 msgstr "다음 디렉토리으로 가기"
 
-#: gnome/gscreen.c:2312 src/tree.c:1011
+#: gnome/gscreen.c:2303 src/tree.c:1011
 msgid "Rescan"
 msgstr "Rescan"
 
-#: gnome/gscreen.c:2312
+#: gnome/gscreen.c:2303
 msgid "Rescan the current directory"
 msgstr "현재 디렉토리 다시 읽기"
 
-#: gnome/gscreen.c:2315
-msgid "Go to your home directory"
-msgstr "홈 디렉토리으로 가기"
-
-#: gnome/gscreen.c:2315
+#: gnome/gscreen.c:2306
 msgid "Home"
 msgstr "홈"
 
-#: gnome/gscreen.c:2456
+#: gnome/gscreen.c:2306
+msgid "Go to your home directory"
+msgstr "홈 디렉토리으로 가기"
+
+#: gnome/gscreen.c:2447
 msgid "Location:"
 msgstr "위치:"
 
@@ -1556,12 +1571,12 @@ msgid "Jump to a specified line number"
 msgstr "주어진 줄로 점프"
 
 #: gnome/gview.c:309
-msgid "Monitor file growing"
-msgstr "파일이 커지는지 감시"
-
-#: gnome/gview.c:309
 msgid "_Monitor file"
 msgstr "파일 감시(_M)"
+
+#: gnome/gview.c:309
+msgid "Monitor file growing"
+msgstr "파일이 커지는지 감시"
 
 #: gnome/gview.c:316
 msgid "Regexp search"
@@ -1701,7 +1716,7 @@ msgstr " 새이름으로 저장 "
 #. Warning message with a query to continue or cancel the operation
 #: gtkedit/editcmd.c:491 gtkedit/editcmd.c:814 gtkedit/editcmd.c:847
 #: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095 src/ext.c:315 src/file.c:619
-#: src/help.c:318 src/main.c:699 src/screen.c:1450 src/screen.c:2128
+#: src/help.c:318 src/main.c:703 src/screen.c:1450 src/screen.c:2128
 #: src/screen.c:2178 src/subshell.c:705 src/subshell.c:731 src/utilunix.c:390
 #: src/utilunix.c:394 src/utilunix.c:465 vfs/mcfs.c:170
 msgid " Warning "
@@ -1711,24 +1726,24 @@ msgstr " 경고 "
 msgid " A file already exists with this name. "
 msgstr " 같은 이름의 파일이 이미 있습니다. "
 
+#. Push buttons to over-write the current file, or cancel the operation
+#: gtkedit/editcmd.c:494
+msgid "Overwrite"
+msgstr "겹쳐쓰기"
+
 #: gtkedit/editcmd.c:494 gtkedit/editcmd.c:561 gtkedit/editcmd.c:788
 #: gtkedit/editcmd.c:814 gtkedit/editcmd.c:847 gtkedit/editcmd.c:998
 #: gtkedit/editcmd.c:1585
 msgid "Cancel"
 msgstr "취소"
 
-#. Push buttons to over-write the current file, or cancel the operation
-#: gtkedit/editcmd.c:494
-msgid "Overwrite"
-msgstr "겹쳐쓰기"
+#: gtkedit/editcmd.c:513
+msgid " Save as "
+msgstr " 새이름으로 저장 "
 
 #: gtkedit/editcmd.c:513 gtkedit/editcmd.c:2657
 msgid " Error trying to save file. "
 msgstr " 파일 저장 에러. "
-
-#: gtkedit/editcmd.c:513
-msgid " Save as "
-msgstr " 새이름으로 저장 "
 
 #. This heads the delete macro error dialog box
 #: gtkedit/editcmd.c:631 gtkedit/editcmd.c:639 gtkedit/editcmd.c:664
@@ -1805,26 +1820,26 @@ msgstr ""
 msgid "Continue"
 msgstr "계속"
 
-#: gtkedit/editcmd.c:837
-msgid " Error trying to open file for reading "
-msgstr " 파일 열기 에러 "
-
 #. Heads the 'Load' file dialog box
 #: gtkedit/editcmd.c:837 gtkedit/editcmd.c:853
 msgid " Load "
 msgstr " 불러오기 "
+
+#: gtkedit/editcmd.c:837
+msgid " Error trying to open file for reading "
+msgstr " 파일 열기 에러 "
 
 #: gtkedit/editcmd.c:998 gtkedit/editcmd.c:1095
 msgid " Block is large, you may not be able to undo this action. "
 msgstr " 구역이 너무 커서 나중에 무를 수 없습니다. "
 
 #: gtkedit/editcmd.c:1095
-msgid " Cancel "
-msgstr " 취소 "
-
-#: gtkedit/editcmd.c:1095
 msgid " Continue "
 msgstr " 계속 "
+
+#: gtkedit/editcmd.c:1095
+msgid " Cancel "
+msgstr " 취소 "
 
 #: gtkedit/editcmd.c:1151
 msgid "o&Ne"
@@ -2005,16 +2020,16 @@ msgid "Replace"
 msgstr "바꿈"
 
 #: gtkedit/editcmd.c:1585
+msgid "Skip"
+msgstr "건너뜀"
+
+#: gtkedit/editcmd.c:1585
 msgid "Replace all"
 msgstr "모두 바꿈"
 
 #: gtkedit/editcmd.c:1585
 msgid "Replace one"
 msgstr "하나 바꿈"
-
-#: gtkedit/editcmd.c:1585
-msgid "Skip"
-msgstr "건너뜀"
 
 #: gtkedit/editcmd.c:1947
 msgid ""
@@ -2052,33 +2067,33 @@ msgstr ""
 msgid " File was modified, Save with exit? "
 msgstr " 파일이 바뀌었는 데, 저장하고 종료할까요? "
 
-#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
-#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
-msgid "&No"
-msgstr "아니오(&N)"
+#: gtkedit/editcmd.c:2265
+msgid "Cancel quit"
+msgstr "종료 취소"
 
 #: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
-#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:854 src/screen.c:2164
+#: src/filegui.c:603 src/hotlist.c:1035 src/main.c:858 src/screen.c:2164
 #: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
 msgid "&Yes"
 msgstr "예(&Y)"
 
-#: gtkedit/editcmd.c:2265
-msgid "Cancel quit"
-msgstr "종료 취소"
+#: gtkedit/editcmd.c:2265 src/cmd.c:249 src/file.c:1878 src/file.c:2252
+#: src/filegui.c:602 src/hotlist.c:1035 src/main.c:858 src/screen.c:2164
+#: src/subshell.c:706 src/subshell.c:732 src/tree.c:746 src/view.c:404
+msgid "&No"
+msgstr "아니오(&N)"
 
 #: gtkedit/editcmd.c:2269
 msgid " &Cancel quit "
 msgstr " 종료 취소(&C) "
 
 #: gtkedit/editcmd.c:2269
-msgid " &No "
-msgstr " 아니오(&N) "
-
-#: gtkedit/editcmd.c:2269
 msgid " &Yes "
 msgstr " 예(&Y) "
+
+#: gtkedit/editcmd.c:2269
+msgid " &No "
+msgstr " 아니오(&N) "
 
 #: gtkedit/editcmd.c:2501 gtkedit/editcmd.c:2576
 msgid " Copy to clipboard "
@@ -2094,14 +2109,14 @@ msgid " Cut to clipboard "
 msgstr " 클립보드로 오려두기 "
 
 #: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
-#: gtkedit/editcmd.c:2623
-msgid " Enter line: "
-msgstr " 줄 번호 입력: "
-
-#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
 #: gtkedit/editcmd.c:2623 src/view.c:1913
 msgid " Goto line "
 msgstr " 줄찾기 "
+
+#: gtkedit/editcmd.c:2611 gtkedit/editcmd.c:2615 gtkedit/editcmd.c:2620
+#: gtkedit/editcmd.c:2623
+msgid " Enter line: "
+msgstr " 줄 번호 입력: "
 
 #: gtkedit/editcmd.c:2644 gtkedit/editcmd.c:2657
 msgid " Save Block "
@@ -2112,12 +2127,12 @@ msgid " Insert File "
 msgstr " 파일 끼워넣기 "
 
 #: gtkedit/editcmd.c:2707
-msgid " Error trying to insert file. "
-msgstr " 파일 끼워넣기 실패 "
-
-#: gtkedit/editcmd.c:2707
 msgid " Insert file "
 msgstr " 파일 끼워넣기 "
+
+#: gtkedit/editcmd.c:2707
+msgid " Error trying to insert file. "
+msgstr " 파일 끼워넣기 실패 "
 
 #. Not essential to translate
 #: gtkedit/editcmd.c:2729
@@ -2369,7 +2384,7 @@ msgstr "일반(&G)...  "
 msgid "&Save mode..."
 msgstr "모드 저장(&S)..."
 
-#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260 src/main.c:1345
+#: gtkedit/editmenu.c:251 gtkedit/editmenu.c:260 src/main.c:1349
 msgid "&Layout..."
 msgstr "배치(&L)..."
 
@@ -2552,20 +2567,20 @@ msgid "Macros and internal commands"
 msgstr "매크로와 내장 명령"
 
 #: gtkedit/editoptions.c:36
-msgid "Emacs"
-msgstr "이맥스"
-
-#: gtkedit/editoptions.c:36
 msgid "Intuitive"
 msgstr "직관적"
 
-#: gtkedit/editoptions.c:39
-msgid "Dynamic paragraphing"
-msgstr "Dynamic paragraphing"
+#: gtkedit/editoptions.c:36
+msgid "Emacs"
+msgstr "이맥스"
 
 #: gtkedit/editoptions.c:39
 msgid "None"
 msgstr "없음"
+
+#: gtkedit/editoptions.c:39
+msgid "Dynamic paragraphing"
+msgstr "Dynamic paragraphing"
 
 #: gtkedit/editoptions.c:39
 msgid "Type writer wrap"
@@ -2630,7 +2645,7 @@ msgid "Error initialising editor.\n"
 msgstr "Error initialising editor.\n"
 
 #: gtkedit/editwidget.c:1093 gtkedit/gtkedit.c:1246 src/help.c:806
-#: src/main.c:1711 src/screen.c:2394 src/screen.c:2424 src/tree.c:1009
+#: src/main.c:1715 src/screen.c:2394 src/screen.c:2424 src/tree.c:1009
 #: src/view.c:2068
 msgid "Help"
 msgstr "도움말"
@@ -2643,13 +2658,13 @@ msgstr "선택"
 msgid "Replac"
 msgstr "바꿈"
 
-#: gtkedit/editwidget.c:1102 src/main.c:1713
+#: gtkedit/editwidget.c:1102 src/main.c:1717
 msgid "PullDn"
 msgstr "풀다운"
 
 #. gtk_edit_menu
 #: gtkedit/editwidget.c:1103 gtkedit/gtkedit.c:1256 src/help.c:818
-#: src/main.c:1714 src/view.c:2070 src/view.c:2092
+#: src/main.c:1718 src/view.c:2070 src/view.c:2092
 msgid "Quit"
 msgstr "종료"
 
@@ -2684,12 +2699,12 @@ msgid "Toggle In/Off invisible marker to highlight text"
 msgstr "Toggle In/Off invisible marker to highlight text"
 
 #: gtkedit/gtkedit.c:1249
-msgid "Find and replace strings/regular expressions"
-msgstr "문자열/정규표현식을 찾아서 바꾸기"
-
-#: gtkedit/gtkedit.c:1249
 msgid "Replc"
 msgstr "바꿈"
+
+#: gtkedit/gtkedit.c:1249
+msgid "Find and replace strings/regular expressions"
+msgstr "문자열/정규표현식을 찾아서 바꾸기"
 
 #: gtkedit/gtkedit.c:1250
 msgid "Copy highlighted block to cursor position"
@@ -2708,14 +2723,14 @@ msgid "Find strings/regular expressions"
 msgstr "문자열/정규표현식 찾기"
 
 #: gtkedit/gtkedit.c:1254
-msgid "Delete highlighted text"
-msgstr "선택된 텍스트 삭제"
-
-#: gtkedit/gtkedit.c:1254
 msgid "Dlete"
 msgstr "지우기"
 
-#: gtkedit/gtkedit.c:1255 src/main.c:1712 src/screen.c:2395 src/screen.c:2425
+#: gtkedit/gtkedit.c:1254
+msgid "Delete highlighted text"
+msgstr "선택된 텍스트 삭제"
+
+#: gtkedit/gtkedit.c:1255 src/main.c:1716 src/screen.c:2395 src/screen.c:2425
 msgid "Menu"
 msgstr "메뉴"
 
@@ -2751,6 +2766,11 @@ msgstr "블럭을 파일로 복사"
 msgid "Search/Replace"
 msgstr "찾기/바꿈"
 
+#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
+#: gtkedit/syntax.c:1078
+msgid " Spelling Message "
+msgstr " Spelling Message "
+
 #: gtkedit/syntax.c:1051
 msgid ""
 " Fail trying to open ispell program. \n"
@@ -2760,11 +2780,6 @@ msgstr ""
 " ispell 프로그램을 열 수 없습니다. \n"
 " 경로에 있고, -a 옵션이 동작하는 지를 확인하시기 바랍니다. \n"
 " 그렇지 않으면 옵션 메뉴에서 spell 확인기능을 끄십시요. "
-
-#: gtkedit/syntax.c:1051 gtkedit/syntax.c:1060 gtkedit/syntax.c:1069
-#: gtkedit/syntax.c:1078
-msgid " Spelling Message "
-msgstr " Spelling Message "
 
 #: gtkedit/syntax.c:1060
 msgid ""
@@ -2808,13 +2823,13 @@ msgstr ""
 " 새로운 규칙 파일이 인스톨될 것입니다. \n"
 " 오래된 규칙 파일을 .OLD 확장자를 붙여 보관합니다. "
 
-#: gtkedit/syntax.c:1487
-msgid " File access error "
-msgstr " 파일 액세스 에러 "
-
 #: gtkedit/syntax.c:1487 gtkedit/syntax.c:1494
 msgid " Load syntax file "
 msgstr " 구문 파일 읽어오기 "
+
+#: gtkedit/syntax.c:1487
+msgid " File access error "
+msgstr " 파일 액세스 에러 "
 
 #: gtkedit/syntax.c:1493
 #, c-format
@@ -2988,16 +3003,16 @@ msgid " Confirmation "
 msgstr " 확인 "
 
 #: src/boxes.c:461
-msgid "7 bits"
-msgstr "7 비트"
-
-#: src/boxes.c:461
 msgid "Full 8 bits output"
 msgstr "8 bits 출력"
 
 #: src/boxes.c:461
 msgid "ISO 8859-1"
 msgstr "ISO 8859-1"
+
+#: src/boxes.c:461
+msgid "7 bits"
+msgstr "7 비트"
 
 #: src/boxes.c:468
 msgid "F&ull 8 bits input"
@@ -3243,28 +3258,28 @@ msgid "Could not change directory"
 msgstr "디렉토리을 바꿀 수 없습니다"
 
 #: src/cmd.c:283
-msgid " Filename:"
-msgstr " 파일명:"
-
-#: src/cmd.c:283
 msgid " View file "
 msgstr " 파일 보기 "
 
-#: src/cmd.c:300
-msgid " Filter command and arguments:"
-msgstr " 필터 명령 및 인자:"
+#: src/cmd.c:283
+msgid " Filename:"
+msgstr " 파일명:"
 
 #: src/cmd.c:300
 msgid " Filtered view "
 msgstr " 필터로 보기 "
 
-#: src/cmd.c:388
-msgid " Enter directory name:"
-msgstr " 디렉토리 이름 입력:"
+#: src/cmd.c:300
+msgid " Filter command and arguments:"
+msgstr " 필터 명령 및 인자:"
 
 #: src/cmd.c:388
 msgid "Create a new Directory"
 msgstr "새로운 디렉토리을 생성"
+
+#: src/cmd.c:388
+msgid " Enter directory name:"
+msgstr " 디렉토리 이름 입력:"
 
 #: src/cmd.c:449
 msgid " Filter "
@@ -3290,13 +3305,13 @@ msgstr "Extension 파일 수정"
 msgid " Which extension file you want to edit? "
 msgstr " 수정하기를 원하는 extension 파일은? "
 
-#: src/cmd.c:642 src/cmd.c:668
-msgid "&System Wide"
-msgstr "체계 전체(&S)"
-
 #: src/cmd.c:642
 msgid "&User"
 msgstr "사용자(&U)"
+
+#: src/cmd.c:642 src/cmd.c:668
+msgid "&System Wide"
+msgstr "체계 전체(&S)"
 
 #: src/cmd.c:665
 msgid "Menu file edit"
@@ -3307,12 +3322,12 @@ msgid " Which menu file will you edit? "
 msgstr " 수정하기를 원하는 메뉴 파일은? "
 
 #: src/cmd.c:668
-msgid "&Home"
-msgstr "홈(&H)"
-
-#: src/cmd.c:668
 msgid "&Local"
 msgstr "로컬(&L)"
+
+#: src/cmd.c:668
+msgid "&Home"
+msgstr "홈(&H)"
 
 #: src/cmd.c:853
 msgid " Compare directories "
@@ -3447,12 +3462,12 @@ msgid " Enter host name to use as a source routing hop: "
 msgstr " 원천 라우팅 홉을 사용하기 위한 호스트 이름: "
 
 #: src/cmd.c:1392
-msgid " Error while looking up IP address "
-msgstr " IP 주소 찾는 중 오류 발생 "
-
-#: src/cmd.c:1392
 msgid " Host name "
 msgstr " 호스트 이름 "
+
+#: src/cmd.c:1392
+msgid " Error while looking up IP address "
+msgstr " IP 주소 찾는 중 오류 발생 "
 
 #: src/cmd.c:1403
 msgid " Undelete files on an ext2 file system "
@@ -3608,6 +3623,10 @@ msgid " file error "
 msgstr " 파일 에러 "
 
 #: src/ext.c:432
+msgid "Format of the ~/"
+msgstr "Format of the ~/"
+
+#: src/ext.c:432
 msgid ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
@@ -3616,10 +3635,6 @@ msgstr ""
 " file has changed\n"
 "with version 3.0. You may want either to\n"
 "copy it from "
-
-#: src/ext.c:432
-msgid "Format of the ~/"
-msgstr "Format of the ~/"
 
 #: src/ext.c:434
 msgid ""
@@ -3967,12 +3982,12 @@ msgid "1Copy"
 msgstr "1Copy"
 
 #: src/file.c:1680
-msgid "1Delete"
-msgstr "1Delete"
-
-#: src/file.c:1680
 msgid "1Move"
 msgstr "1Move"
+
+#: src/file.c:1680
+msgid "1Delete"
+msgstr "1Delete"
 
 #: src/file.c:1695
 #, c-format
@@ -3995,14 +4010,6 @@ msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
 
 #: src/file.c:1703
-msgid "directories"
-msgstr "directories"
-
-#: src/file.c:1703
-msgid "directory"
-msgstr "directory"
-
-#: src/file.c:1703
 msgid "file"
 msgstr "file"
 
@@ -4010,25 +4017,33 @@ msgstr "file"
 msgid "files"
 msgstr "files"
 
-#: src/file.c:1704
-msgid " with source mask:"
-msgstr " with source mask:"
+#: src/file.c:1703
+msgid "directory"
+msgstr "directory"
+
+#: src/file.c:1703
+msgid "directories"
+msgstr "directories"
 
 #: src/file.c:1704
 msgid "files/directories"
 msgstr "files/directories"
+
+#: src/file.c:1704
+msgid " with source mask:"
+msgstr " with source mask:"
 
 #: src/file.c:1856
 msgid " Can't operate on \"..\"! "
 msgstr " \"..\"에 대해서는 작업할 수 없습니다! "
 
 #: src/file.c:1875 src/screen.c:2116
-msgid "No"
-msgstr "아니오"
-
-#: src/file.c:1875 src/screen.c:2116
 msgid "Yes"
 msgstr "예"
+
+#: src/file.c:1875 src/screen.c:2116
+msgid "No"
+msgstr "아니오"
 
 #: src/file.c:1928
 msgid " Sorry, I could not put the job in background "
@@ -4051,13 +4066,13 @@ msgstr ""
 " 대상 \"%s\"는 디렉토리이어야 합니다 \n"
 " %s "
 
-#: src/file.c:2193 src/file.c:2254 src/filegui.c:264 src/filegui.c:592
-msgid "&Abort"
-msgstr "중단(&A)"
-
 #: src/file.c:2193
 msgid "&Retry"
 msgstr "재시도(&R)"
+
+#: src/file.c:2193 src/file.c:2254 src/filegui.c:264 src/filegui.c:592
+msgid "&Abort"
+msgstr "중단(&A)"
 
 #: src/file.c:2245
 msgid ""
@@ -4248,18 +4263,18 @@ msgid "&Edit - F4"
 msgstr "편집(&E) - F4"
 
 #: src/find.c:170
-msgid "Content: "
-msgstr "내용: "
+msgid "Start at:"
+msgstr "시작위치:"
 
 #: src/find.c:170
 msgid "Filename:"
 msgstr "파일명:"
 
 #: src/find.c:170
-msgid "Start at:"
-msgstr "시작위치:"
+msgid "Content: "
+msgstr "내용: "
 
-#: src/find.c:171 src/main.c:1236 src/main.c:1260
+#: src/find.c:171 src/main.c:1240 src/main.c:1264
 msgid "&Tree"
 msgstr "나무꼴(&T)"
 
@@ -4289,13 +4304,13 @@ msgstr "끝났어요"
 msgid "Searching %s"
 msgstr "%s 찾는 중"
 
-#: src/find.c:717
-msgid "Restart"
-msgstr "재시도"
-
 #: src/find.c:717 src/find.c:757
 msgid "Suspend"
 msgstr "일시중지"
+
+#: src/find.c:717
+msgid "Restart"
+msgstr "재시도"
 
 #: src/find.c:719 src/find.c:821 src/find.c:960 src/find.c:1056
 msgid "Searching"
@@ -4448,16 +4463,16 @@ msgid "Moving "
 msgstr "이동 "
 
 #: src/hotlist.c:892
+msgid "New hotlist entry"
+msgstr "새 단축목록 엔트리"
+
+#: src/hotlist.c:892
 msgid "Directory label"
 msgstr "디렉토리 꼬리표"
 
 #: src/hotlist.c:892
 msgid "Directory path"
 msgstr "디렉토리 경로"
-
-#: src/hotlist.c:892
-msgid "New hotlist entry"
-msgstr "새 단축목록 엔트리"
 
 #: src/hotlist.c:973
 msgid " New hotlist group "
@@ -4519,20 +4534,20 @@ msgid " file, your old hotlist entries were not deleted"
 msgstr " file, your old hotlist entries were not deleted"
 
 #: src/hotlist.c:1431
-msgid " file and [Hotlist] section in ~/"
-msgstr " file and [Hotlist] section in ~/"
-
-#: src/hotlist.c:1431
 msgid "You have ~/"
 msgstr "You have ~/"
 
-#: src/hotlist.c:1432
-msgid " most probably was created\n"
-msgstr " most probably was created\n"
+#: src/hotlist.c:1431
+msgid " file and [Hotlist] section in ~/"
+msgstr " file and [Hotlist] section in ~/"
 
 #: src/hotlist.c:1432
 msgid "Your ~/"
 msgstr "Your ~/"
+
+#: src/hotlist.c:1432
+msgid " most probably was created\n"
+msgstr " most probably was created\n"
 
 #: src/hotlist.c:1433
 msgid ""
@@ -4830,7 +4845,7 @@ msgstr "지 않은 글쇠가 있는 지 확인하십시오.  그 위에서 SPACE 글쇠를 누르거"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "나 마우스로 클릭한 후 글쇠를 정의하십시오. 탭글쇠로 이동하십시오"
 
-#: src/main.c:700
+#: src/main.c:704
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -4842,259 +4857,259 @@ msgstr ""
 " 작업 디렉토리을 지웠거나, 아니면 \"su\" 명령을\n"
 " 사용하여 특별한 액세스 권한을 가진 것 아녜요? "
 
-#: src/main.c:775
+#: src/main.c:779
 msgid "Press any key to continue..."
 msgstr "계속하려면 아무 글쇠나 누르십시오..."
 
-#: src/main.c:825
+#: src/main.c:829
 msgid " The shell is already running a command "
 msgstr " 명령해석기가 이미 명령을 수행중입니다 "
 
-#: src/main.c:852 src/screen.c:2114 src/screen.c:2162
+#: src/main.c:856 src/screen.c:2114 src/screen.c:2162
 msgid " The Midnight Commander "
 msgstr " The Midnight Commander "
 
-#: src/main.c:853
+#: src/main.c:857
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " 정말로 Midnight Commander를 종료하시겠읍니까? "
 
-#: src/main.c:1233 src/main.c:1257
+#: src/main.c:1237 src/main.c:1261
 msgid "&Listing mode..."
 msgstr "파일목록보기 설정(&L)..."
 
-#: src/main.c:1234 src/main.c:1258
+#: src/main.c:1238 src/main.c:1262
 msgid "&Quick view     C-x q"
 msgstr "빠르게 보기(&Q)        C-x q"
 
-#: src/main.c:1235 src/main.c:1259
+#: src/main.c:1239 src/main.c:1263
 msgid "&Info           C-x i"
 msgstr "정보(&I)               C-x i"
 
-#: src/main.c:1238 src/main.c:1262
+#: src/main.c:1242 src/main.c:1266
 msgid "&Sort order..."
 msgstr "정렬 순서(&S)..."
 
-#: src/main.c:1240 src/main.c:1264
+#: src/main.c:1244 src/main.c:1268
 msgid "&Filter..."
 msgstr "필터(&F)..."
 
-#: src/main.c:1243 src/main.c:1267
+#: src/main.c:1247 src/main.c:1271
 msgid "&Network link..."
 msgstr "네트워크 연결(&N)..."
 
-#: src/main.c:1244 src/main.c:1268
+#: src/main.c:1248 src/main.c:1272
 msgid "FT&P link..."
 msgstr "FTP 연결(&P)..."
 
-#: src/main.c:1246 src/main.c:1270
+#: src/main.c:1250 src/main.c:1274
 msgid "SM&B link..."
 msgstr "SMB 연결(&B)..."
 
-#: src/main.c:1251 src/main.c:1275
+#: src/main.c:1255 src/main.c:1279
 msgid "&Drive...       M-d"
 msgstr "드라이브(&D)...          M-d"
 
-#: src/main.c:1253 src/main.c:1277
+#: src/main.c:1257 src/main.c:1281
 msgid "&Rescan         C-r"
 msgstr "다시 읽기(&R)            C-r"
 
-#: src/main.c:1281
+#: src/main.c:1285
 msgid "&User menu          F2"
 msgstr "사용자 메뉴(&U)            F2"
 
-#: src/main.c:1282
+#: src/main.c:1286
 msgid "&View               F3"
 msgstr "보기(&V)                   F3"
 
-#: src/main.c:1283
+#: src/main.c:1287
 msgid "Vie&w file...         "
 msgstr "파일 보기(&w)...      "
 
-#: src/main.c:1284
+#: src/main.c:1288
 msgid "&Filtered view     M-!"
 msgstr "필터로 보기(&F)           M-!"
 
-#: src/main.c:1285
+#: src/main.c:1289
 msgid "&Edit               F4"
 msgstr "편집(&E)                   F4"
 
-#: src/main.c:1286
+#: src/main.c:1290
 msgid "&Copy               F5"
 msgstr "복사(&C)                   F5"
 
-#: src/main.c:1287
+#: src/main.c:1291
 msgid "c&Hmod           C-x c"
 msgstr "파일 모드 바꾸기(&H)    C-x c"
 
-#: src/main.c:1289
+#: src/main.c:1293
 msgid "&Link            C-x l"
 msgstr "링크(&L)                C-x l"
 
-#: src/main.c:1290
+#: src/main.c:1294
 msgid "&SymLink         C-x s"
 msgstr "심볼릭링크(&S)          C-x s"
 
-#: src/main.c:1291
+#: src/main.c:1295
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "심볼릭링크 수정(&Y)   C-x C-s"
 
-#: src/main.c:1292
+#: src/main.c:1296
 msgid "ch&Own           C-x o"
 msgstr "소유자 바꾸기(&O)       C-x o"
 
-#: src/main.c:1293
+#: src/main.c:1297
 msgid "&Advanced chown       "
 msgstr "고급 소유자 바꾸기(&A)       "
 
-#: src/main.c:1295
+#: src/main.c:1299
 msgid "&Rename/Move        F6"
 msgstr "바꾸기/이동(&R)            F6"
 
-#: src/main.c:1296
+#: src/main.c:1300
 msgid "&Mkdir              F7"
 msgstr "디렉토리 생성(&M)            F7"
 
-#: src/main.c:1297
+#: src/main.c:1301
 msgid "&Delete             F8"
 msgstr "지우기(&D)                 F8"
 
-#: src/main.c:1298
+#: src/main.c:1302
 msgid "&Quick cd          M-c"
 msgstr "디렉토리 빨리 바꾸기(&Q)    M-c"
 
-#: src/main.c:1300
+#: src/main.c:1304
 msgid "select &Group      M-+"
 msgstr "집단선택(&G)              M-+"
 
-#: src/main.c:1301
+#: src/main.c:1305
 msgid "u&Nselect group    M-\\"
 msgstr "집단선택 해제(&N)         M-\\"
 
-#: src/main.c:1302
+#: src/main.c:1306
 msgid "reverse selec&Tion M-*"
 msgstr "선택반전(&T)              M-*"
 
-#: src/main.c:1304
+#: src/main.c:1308
 msgid "e&Xit              F10"
 msgstr "종료(&X)                  F10"
 
-#: src/main.c:1314
+#: src/main.c:1318
 msgid "&Directory tree"
 msgstr "디렉토리 나무꼴(&D)"
 
-#: src/main.c:1316
+#: src/main.c:1320
 msgid "&Find file            M-?"
 msgstr "파일 찾기(&F)              M-?"
 
-#: src/main.c:1317
+#: src/main.c:1321
 msgid "s&Wap panels          C-u"
 msgstr "패널 바꾸기(&W)            C-u"
 
-#: src/main.c:1318
+#: src/main.c:1322
 msgid "switch &Panels on/off C-o"
 msgstr "패널 열기/닫기(&P)         C-o"
 
-#: src/main.c:1319
+#: src/main.c:1323
 msgid "&Compare directories  C-x d"
 msgstr "디렉토리 비교(&C)          C-x d"
 
-#: src/main.c:1320
+#: src/main.c:1324
 msgid "e&Xternal panelize    C-x !"
 msgstr "외부명령 패널화하기(&X)  C-x !"
 
-#: src/main.c:1321
+#: src/main.c:1325
 msgid "show directory s&Izes"
 msgstr "디렉토리 크기 보기(&I)"
 
-#: src/main.c:1323
+#: src/main.c:1327
 msgid "command &History"
 msgstr "명령 히스토리(&H)"
 
-#: src/main.c:1324
+#: src/main.c:1328
 msgid "di&Rectory hotlist    C-\\"
 msgstr "디렉토리 단축목록(&R)        C-\\"
 
-#: src/main.c:1326
+#: src/main.c:1330
 msgid "&Active VFS list      C-x a"
 msgstr "활성 VFS 목록(&A)        C-x a"
 
-#: src/main.c:1329
+#: src/main.c:1333
 msgid "&Background jobs      C-x j"
 msgstr "백그라운드 jobs(&B)      C-x j"
 
-#: src/main.c:1333
+#: src/main.c:1337
 msgid "&Undelete files (ext2fs only)"
 msgstr "파일 되살림 (est2fs만 가능)"
 
-#: src/main.c:1336
+#: src/main.c:1340
 msgid "&Listing format edit"
 msgstr "파일 목록 형식 바꾸기(&L)"
 
-#: src/main.c:1338
+#: src/main.c:1342
 msgid "&Extension file edit"
 msgstr "확장자 파일 수정(&E)"
 
-#: src/main.c:1339
+#: src/main.c:1343
 msgid "&Menu file edit"
 msgstr "메뉴 파일 수정(&M)"
 
-#: src/main.c:1344
+#: src/main.c:1348
 msgid "&Configuration..."
 msgstr "환경설정(&C)..."
 
-#: src/main.c:1346
+#: src/main.c:1350
 msgid "c&Onfirmation..."
 msgstr "확인(&O)..."
 
-#: src/main.c:1347
+#: src/main.c:1351
 msgid "&Display bits..."
 msgstr "출력 비트(&D)..."
 
-#: src/main.c:1349
+#: src/main.c:1353
 msgid "learn &Keys..."
 msgstr "글쇠 배우기(&K)..."
 
-#: src/main.c:1352
+#: src/main.c:1356
 msgid "&Virtual FS..."
 msgstr "가상 파일체계(&V)..."
 
-#: src/main.c:1355
+#: src/main.c:1359
 msgid "&Save setup"
 msgstr "환경 저장(&S)"
 
-#: src/main.c:1371 src/main.c:1373
+#: src/main.c:1375 src/main.c:1377
 msgid " &Left "
 msgstr " 왼쪽(&L) "
 
-#: src/main.c:1373
+#: src/main.c:1377
 msgid " &Above "
 msgstr " 위(&A) "
 
-#: src/main.c:1376
+#: src/main.c:1380
 msgid " &File "
 msgstr " 파일(&F) "
 
-#: src/main.c:1377
+#: src/main.c:1381
 msgid " &Command "
 msgstr " 명령(&C) "
 
-#: src/main.c:1378
+#: src/main.c:1382
 msgid " &Options "
 msgstr " 선택항목(&O) "
 
-#: src/main.c:1380 src/main.c:1382
+#: src/main.c:1384 src/main.c:1386
 msgid " &Right "
 msgstr " 오른쪽(&R) "
 
-#: src/main.c:1382
+#: src/main.c:1386
 msgid " &Below "
 msgstr " 아래(&B) "
 
-#: src/main.c:1437
+#: src/main.c:1441
 msgid " Information "
 msgstr " 정보 "
 
-#: src/main.c:1438
+#: src/main.c:1442
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -5106,131 +5121,131 @@ msgstr ""
 " 당신은 수동으로 디렉토리을 다시 읽어야만 합니다.         \n"
 " 자세한 내용을 알고 싶으시면 설명서를 보십시오.         "
 
-#: src/main.c:1917
+#: src/main.c:1921
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "GNU Midnight Commander를 사용해주셔서 감사합니다"
 
-#: src/main.c:2276
+#: src/main.c:2280
 #, c-format
 msgid "with mouse support on xterm%s.\n"
 msgstr "with mouse support on xterm%s.\n"
 
-#: src/main.c:2277
+#: src/main.c:2281
 msgid " and the Linux console"
 msgstr " and the Linux console"
 
-#: src/main.c:2372
+#: src/main.c:2376
 msgid "The TERM environment variable is unset!\n"
 msgstr "TERM 환경변수가 설정되어있지 않습니다!\n"
 
-#: src/main.c:2582
+#: src/main.c:2586
 #, c-format
 msgid "Library directory for the Midnight Commander: %s\n"
 msgstr "Midnight Commander용 라이브러리 디렉토리: %s\n"
 
-#: src/main.c:2596
+#: src/main.c:2600
 msgid ""
 "Option -m is obsolete. Please look at Display Bits... in the Option's menu\n"
 msgstr ""
 "-m 선택항목은 의미가 없습니다. 선택항목 메뉴의 '출력 비트'를 보십시오\n"
 
-#: src/main.c:2673
+#: src/main.c:2677
 msgid "Use to debug the background code"
 msgstr "백그라운드 코드를 디버깅할 때 사용"
 
-#: src/main.c:2679
+#: src/main.c:2683
 msgid "Request to run in color mode"
 msgstr "컬러 모드로 실행을 요구"
 
-#: src/main.c:2681
+#: src/main.c:2685
 msgid "Specifies a color configuration"
 msgstr "컬러 환경을 명세"
 
-#: src/main.c:2686
+#: src/main.c:2690
 msgid "Edits one file"
 msgstr "한 파일 편집"
 
-#: src/main.c:2690
+#: src/main.c:2694
 msgid "Displays this help message"
 msgstr "이 도움말 보여주기"
 
-#: src/main.c:2693
+#: src/main.c:2697
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "컬러를 어떻게 바꿀 수 있는 지 도움말 화면 출력"
 
-#: src/main.c:2696
+#: src/main.c:2700
 msgid "Log ftp dialog to specified file"
 msgstr "주어진 파일로 ftp 다이알로그 로깅"
 
-#: src/main.c:2703
+#: src/main.c:2707
 msgid "Obsolete"
 msgstr "쓸모없음"
 
-#: src/main.c:2705
+#: src/main.c:2709
 msgid "Requests to run in black and white"
 msgstr "흑백 모드로 실행을 요구"
 
-#: src/main.c:2707
+#: src/main.c:2711
 msgid "Disable mouse support in text version"
 msgstr "텍스크 버젼에서 마우스 사용않함"
 
-#: src/main.c:2710
+#: src/main.c:2714
 msgid "Disables subshell support"
 msgstr "subshell 지원 않함"
 
-#: src/main.c:2714
+#: src/main.c:2718
 msgid "Prints working directory at program exit"
 msgstr "프로그램 종료시 작업 디렉토리 출력"
 
-#: src/main.c:2716
+#: src/main.c:2720
 msgid "Resets soft keys on HP terminals"
 msgstr "HP 터미널에서 소프트 글쇠 리셋"
 
-#: src/main.c:2718
+#: src/main.c:2722
 msgid "To run on slow terminals"
 msgstr "느린 터미널에서 실행 시"
 
-#: src/main.c:2721
+#: src/main.c:2725
 msgid "Use stickchars to draw"
 msgstr "Use stickchars to draw"
 
-#: src/main.c:2725
+#: src/main.c:2729
 msgid "Enables subshell support (default)"
 msgstr "subshell 지원함 (기본값)"
 
-#: src/main.c:2730
+#: src/main.c:2734
 msgid "Tries to use termcap instead of terminfo"
 msgstr "terminfo 대신 termcap 사용 시도"
 
-#: src/main.c:2734
+#: src/main.c:2738
 msgid "Displays the current version"
 msgstr "현재 버젼 출력"
 
-#: src/main.c:2736
+#: src/main.c:2740
 msgid "Launches the file viewer on a file"
 msgstr "파일에 대해 파일 보기 실행"
 
-#: src/main.c:2738
+#: src/main.c:2742
 msgid "Forces xterm features"
 msgstr "xterm 기능을 무조건 사용"
 
-#: src/main.c:2740
-msgid "GEOMETRY"
-msgstr "GEOMETRY"
-
-#: src/main.c:2740
+#: src/main.c:2744
 msgid "Geometry for the window"
 msgstr "창의 크기/위치"
 
-#: src/main.c:2741
+#: src/main.c:2744
+msgid "GEOMETRY"
+msgstr "GEOMETRY"
+
+#: src/main.c:2745
 msgid "No windows opened at startup"
 msgstr "시작할 때 창을 열지 않아요"
 
-#: src/main.c:2743
+#: src/main.c:2747
 msgid "Display the directory that holds the .links startup files and exit"
 msgstr ".links 시작파일을 가진 디렉토리 출력하고 종료"
 
-#: src/main.c:3034
+#: src/main.c:3038
 msgid ""
 "Couldn't open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
@@ -5238,11 +5253,11 @@ msgstr ""
 "tty 선을 열수 없네요. 당신은 -P 선택항목없이 MC를 실행해야 합니다.\n"
 "특정 체계에서는 # `which mc` 와 같이 실행할 수도 있습니다.\n"
 
-#: src/main.c:3112
+#: src/main.c:3116
 msgid " Notice "
 msgstr " Notice "
 
-#: src/main.c:3113
+#: src/main.c:3117
 msgid ""
 " The Midnight Commander configuration files \n"
 " are now stored in the ~/.mc directory, the \n"
@@ -5544,12 +5559,12 @@ msgid "  Delete %s?  "
 msgstr "  %s를 지울까요?  "
 
 #: src/tree.c:777
-msgid "Dynamc"
-msgstr "Dynamc"
-
-#: src/tree.c:777
 msgid "Static"
 msgstr "Static"
+
+#: src/tree.c:777
+msgid "Dynamc"
+msgstr "Dynamc"
 
 #: src/tree.c:867
 #, c-format
@@ -5791,12 +5806,12 @@ msgid "RxSrch"
 msgstr "RxSrch"
 
 #: src/view.c:2078
-msgid "EdHex"
-msgstr "EdHex"
-
-#: src/view.c:2078
 msgid "EdText"
 msgstr "EdText"
+
+#: src/view.c:2078
+msgid "EdHex"
+msgstr "EdHex"
 
 #: src/view.c:2080
 msgid "UnWrap"
@@ -5811,20 +5826,20 @@ msgid "HxSrch"
 msgstr "HxSrch"
 
 #: src/view.c:2086
-msgid "Parse"
-msgstr "Parse"
-
-#: src/view.c:2086
 msgid "Raw"
 msgstr "Raw"
 
-#: src/view.c:2090
-msgid "Format"
-msgstr "Format"
+#: src/view.c:2086
+msgid "Parse"
+msgstr "Parse"
 
 #: src/view.c:2090
 msgid "Unform"
 msgstr "Unform"
+
+#: src/view.c:2090
+msgid "Format"
+msgstr "Format"
 
 #: src/widget.c:999
 msgid " History "
@@ -6112,154 +6127,154 @@ msgstr "중단 후에 에러 보고됨."
 msgid "Aborted transfer would be successful."
 msgstr "송신이 성공적으로 중단되었습니다."
 
-#: vfs/ftpfs.c:326
+#: vfs/ftpfs.c:328
 #, c-format
 msgid "ftpfs: Disconnecting from %s"
 msgstr "ftpfs: %s로부터 연결 끊어짐"
 
-#: vfs/ftpfs.c:377
+#: vfs/ftpfs.c:379
 msgid " FTP: Password required for "
 msgstr " FTP: Password required for "
 
-#: vfs/ftpfs.c:409
+#: vfs/ftpfs.c:411
 msgid " Proxy: Password required for "
 msgstr " Proxy: Password required for "
 
-#: vfs/ftpfs.c:435
+#: vfs/ftpfs.c:437
 msgid "ftpfs: sending proxy login name"
 msgstr "ftpfs: 프록시 로그인 이름 보냄"
 
-#: vfs/ftpfs.c:439
+#: vfs/ftpfs.c:441
 msgid "ftpfs: sending proxy user password"
 msgstr "ftpfs: 프록시 사용자 비밀번호 보냄"
 
-#: vfs/ftpfs.c:443
+#: vfs/ftpfs.c:445
 msgid "ftpfs: proxy authentication succeeded"
 msgstr "ftpfs: 프록시 인증 성공"
 
-#: vfs/ftpfs.c:447
+#: vfs/ftpfs.c:449
 #, c-format
 msgid "ftpfs: connected to %s"
 msgstr "ftpfs: %s로 연결됨"
 
-#: vfs/ftpfs.c:464
+#: vfs/ftpfs.c:466
 msgid "ftpfs: sending login name"
 msgstr "ftpfs: 로그인 이름 보냄"
 
-#: vfs/ftpfs.c:469
+#: vfs/ftpfs.c:471
 msgid "ftpfs: sending user password"
 msgstr "ftpfs: 사용자 비밀번호 보냄"
 
-#: vfs/ftpfs.c:474
+#: vfs/ftpfs.c:476
 msgid "ftpfs: logged in"
 msgstr "ftpfs: 로그 인"
 
-#: vfs/ftpfs.c:489
+#: vfs/ftpfs.c:491
 #, c-format
 msgid "ftpfs: Login incorrect for user %s "
 msgstr "ftpfs: Login incorrect for user %s "
 
-#: vfs/ftpfs.c:521
+#: vfs/ftpfs.c:523
 #, c-format
 msgid " Could not set source routing (%s)"
 msgstr " 소스 라우팅 (%s)를 설정할 수 없습니다"
 
-#: vfs/ftpfs.c:650
+#: vfs/ftpfs.c:652
 msgid "ftpfs: Invalid host name."
 msgstr "ftpfs: 유효하지 않은 호스트 이름."
 
-#: vfs/ftpfs.c:670
+#: vfs/ftpfs.c:672
 msgid "ftpfs: Invalid host address."
 msgstr "ftpfs: 유효하지 않은 호스트 주소."
 
-#: vfs/ftpfs.c:695
+#: vfs/ftpfs.c:697
 #, c-format
 msgid "ftpfs: making connection to %s"
 msgstr "ftpfs: %s로 연결 시도중"
 
-#: vfs/ftpfs.c:705
+#: vfs/ftpfs.c:707
 msgid "ftpfs: connection interrupted by user"
 msgstr "ftpfs: 사용자에 의해 연결 중단됨"
 
-#: vfs/ftpfs.c:707
+#: vfs/ftpfs.c:709
 #, c-format
 msgid "ftpfs: connection to server failed: %s"
 msgstr "ftpfs: 서버로 연결 실패: %s"
 
-#: vfs/ftpfs.c:791
+#: vfs/ftpfs.c:793
 #, c-format
 msgid "Waiting to retry... %d (Control-C to cancel)"
 msgstr "재시도 기다림... %d (취소하려면 Control-C)"
 
-#: vfs/ftpfs.c:985
+#: vfs/ftpfs.c:987
 msgid "ftpfs: could not setup passive mode for source routing"
 msgstr "ftpfs: 소스 라우팅을 위한 수동 모드로 설정할 수 없습니다"
 
-#: vfs/ftpfs.c:995
+#: vfs/ftpfs.c:997
 msgid "ftpfs: could not setup passive mode"
 msgstr "ftpfs: 수동 모드로 설정할 수 없습니다"
 
-#: vfs/ftpfs.c:1066
+#: vfs/ftpfs.c:1070
 msgid "ftpfs: aborting transfer."
 msgstr "ftpfs: 송신 중단됨."
 
-#: vfs/ftpfs.c:1068
+#: vfs/ftpfs.c:1072
 #, c-format
 msgid "ftpfs: abort error: %s"
 msgstr "ftpfs: 중단 에러: %s"
 
-#: vfs/ftpfs.c:1073
+#: vfs/ftpfs.c:1077
 msgid "ftpfs: abort failed"
 msgstr "ftpfs: 중단 실패"
 
-#: vfs/ftpfs.c:1161 vfs/ftpfs.c:1340
+#: vfs/ftpfs.c:1165 vfs/ftpfs.c:1344
 msgid "ftpfs: CWD failed."
 msgstr "ftpfs: CWD 실패."
 
-#: vfs/ftpfs.c:1171 vfs/ftpfs.c:1178
+#: vfs/ftpfs.c:1175 vfs/ftpfs.c:1182
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: 심볼릭링크를 해석할 수 없습니다"
 
-#: vfs/ftpfs.c:1232
+#: vfs/ftpfs.c:1236
 msgid "Resolving symlink..."
 msgstr "심볼릭링크 해석..."
 
-#: vfs/ftpfs.c:1334
+#: vfs/ftpfs.c:1338
 #, c-format
 msgid "ftpfs: Reading FTP directory %s... (don't use UNIX ls options)"
 msgstr "ftpfs: FTP 디렉토리 %s 읽는 중... (UNIX ls 옵션 사용않함)"
 
-#: vfs/ftpfs.c:1336
+#: vfs/ftpfs.c:1340
 #, c-format
 msgid "ftpfs: Reading FTP directory %s..."
 msgstr "ftpfs: FTP 디렉토리 %s 읽는 중..."
 
-#: vfs/ftpfs.c:1352
+#: vfs/ftpfs.c:1356
 msgid "ftpfs: FAIL"
 msgstr "ftpfs: 실패"
 
-#: vfs/ftpfs.c:1443
+#: vfs/ftpfs.c:1447
 msgid "ftpfs: reading FTP directory interrupt by user"
 msgstr "ftpfs: FTP 디렉토리 읽기가 사용자에 의해 중단되었습니다"
 
-#: vfs/ftpfs.c:1473
+#: vfs/ftpfs.c:1477
 msgid "ftpfs: got listing"
 msgstr "ftpfs: 목록 얻어옴"
 
-#: vfs/ftpfs.c:1486
+#: vfs/ftpfs.c:1490
 msgid "ftpfs: failed"
 msgstr "ftpfs: 실패"
 
-#: vfs/ftpfs.c:1530
+#: vfs/ftpfs.c:1534
 msgid "ftpfs: failed; nowhere to fallback to"
 msgstr "ftpfs: 실패; nowhere to fallback to"
 
-#: vfs/ftpfs.c:1594
+#: vfs/ftpfs.c:1598
 #, c-format
 msgid "ftpfs: storing file %d (%d)"
 msgstr "ftpfs: 파일 저장 %d (%d)"
 
-#: vfs/ftpfs.c:2030 vfs/ftpfs.c:2045
+#: vfs/ftpfs.c:2036 vfs/ftpfs.c:2051
 msgid ""
 "~/.netrc file has not correct mode.\n"
 "Remove password or correct mode."
@@ -6286,12 +6301,12 @@ msgstr ""
 " 원격 서버쪽에서는 안전하지 않습니다. 계속할까요? \n"
 
 #: vfs/mcfs.c:174
-msgid " No "
-msgstr " 아니오 "
-
-#: vfs/mcfs.c:174
 msgid " Yes "
 msgstr " 예 "
+
+#: vfs/mcfs.c:174
+msgid " No "
+msgstr " 아니오 "
 
 #: vfs/mcfs.c:176
 msgid " The remote server is running on strange port. Giving up.\n"
@@ -6357,11 +6372,11 @@ msgstr ""
 "%s\n"
 "테잎 아카이브 파일같지 않습니다."
 
-#: vfs/vfs.c:1792
+#: vfs/vfs.c:1838
 msgid "%s: %s: %s %3d%% (%ld bytes transfered)"
 msgstr "%s: %s: %s %3d%% (%ld 바이트 송신)"
 
-#: vfs/vfs.c:1793
+#: vfs/vfs.c:1839
 #, c-format
 msgid "%s: %s: %s %ld bytes transfered"
 msgstr "%s: %s: %s %ld 바이트 송신됨"
