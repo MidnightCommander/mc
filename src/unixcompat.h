@@ -19,12 +19,15 @@
 #endif
 
 #ifndef major
+# warning major() is undefined. Device numbers will not be shown correctly.
 # define major(devnum) (((devnum) >> 8) & 0xff)
 #endif
 #ifndef minor
+# warning minor() is undefined. Device numbers will not be show correctly.
 # define minor(devnum) (((devnum) & 0xff)
 #endif
 #ifndef makedev
+# warning makedev() is undefined. Device numbers will not be show correctly.
 # define makedev(major,minor) ((((major) & 0xff) << 8) | ((minor) & 0xff))
 #endif
 

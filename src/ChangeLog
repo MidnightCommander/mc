@@ -1,5 +1,10 @@
 2005-02-07  Roland Illig  <roland.illig@gmx.de>
 
+	* unixcompat.h: Emit warnings for the fallback case of the
+	major/minor/makedev macros.
+
+2005-02-07  Roland Illig  <roland.illig@gmx.de>
+
 	* view.c: Changed type of view->blocks from int to size_t.
 	* view.c: Removed unused parameters from local functions.
 	* view.c: Reordered #include files.
