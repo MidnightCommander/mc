@@ -58,7 +58,7 @@ Resetea softkeys a su valor por defecto según la base de datos de termcap/termin
 Sólo útil en terminales HP cuando la función keys no funciona.
 .TP
 .I "\-l reg"
-Guarda el diálogo ftpfs con el servidor en el archivo.
+Guarda el diálogo FTPfs con el servidor en el archivo.
 .TP
 .I "\-P"
 Al salir del programa, Midnight Commander imprimirá el último directorio de trabajo.
@@ -1521,8 +1521,8 @@ En
 .\"LINK2"
 Sistema de Archivos Virtual (VFS)
 .\"Virtual FS"
-podemos especificar algunas opciones relacionadas con VFS (Sistema de
-Archivos Virtual).
+podemos especificar algunas opciones relacionadas con el VFS (Sistema
+de Archivos Virtual).
 .PP
 .\"LINK2"
 Guardar Configuración
@@ -1755,62 +1755,92 @@ en nuestro archivo ~/.mc/ini dentro de la sección [terminal:TERM] (donde TERM es
 nombre de nuestro terminal actual) o descartarlas. Si todas nuestras teclas funcionan
 correctamente y no debemos corregir ninguna, entonces (lógico) no se grabará.
 .\"NODE "    Virtual FS"
-.SH "    Opciones del VFS"
-Esta opción nos proporciona el control sobre la caché de información del
+.SH "    Sistema de Archivos Virtual (VFS)"
+Este diálogo permite ajustar opciones del
 .\"LINK2"
 Sistema de Archivos Virtual (VFS)\&.
 .\"Virtual File System"
 .PP
-Midnight Commander guarda en memoria la información relacionada con alguno
-de los sistemas de archivos virtuales para acelerar el acceso a los archivos en el
-sistema de archivos. Puesto que la información que debe ser guardada puede ser grande
-(por ejemplo, los archivos tar comprimidos podrían ser guardados en la RAM para acceder
-más rápidamente), podríamos querer ajustar los parámetros de la información con caché
-para disminuir la utilización de memoria o aumentar la velocidad de acceso a
-los sistemas de archivos más utilizados.
+Midnight Commander guarda en memoria o en disco información de algunos
+de los sistemas de archivos virtuales con el fin de acelerar el acceso
+a sus archivos.  Ejemplo de esto son los listados descargados desde
+servidores FTP o los archivos temporales descomprimidos creados para
+acceder rápidamente a los contenidos de archivos tipo tar comprimidos.
 .PP
-El sistema de archivos Tar es bastante inteligente a la hora de manejar sus archivos:
-sólo carga las entradas de los directorios y, cuando necesita usar la
-información contenida en el archivo tar, va y la toma.
+Esas informaciones se conservan para permitirnos navegar, salir y volver a
+entrar rápidamente en los correspondientes sistemas de archivos virtuales.
+Al cabo de un cierto tiempo sin usarlos deben ser liberados y recuperar
+los recursos utilizados.  Por defecto ese tiempo es de un minuto, pero
+se puede configurar por el usuario.
 .PP
-A grosso modo, los archivos tar son normalmente guardados comprimidos (los archivos tar sin comprimir
-son especies en extinción), y debido a la naturaleza de esos archivos
-(las entradas de directorio de los archivos tar no están allí esperando a que
-las carguemos nosotros), el sistema de archivos tar tiene dos posibilidades: cargar todo
-el archivo tar descomprimido en memoria o descomprimir el archivo en el disco
-en una localización temporal y acceder entonces al archivo descomprimido como
-a un archivo tar normal.
+También podemos adelantar la liberación de los VFS desde el diálogo de
+control de
+.IR "Directorios virtuales (VFS)" .
 .PP
-En este cuadro de diálogo indicamos a Midnight Commander que tamaños
-de archivos tar comprimidos toleraremos cargar a nuestra preciada
-memoria. La selección por defecto es un megabyte, esto significa que los
-archivos tar comprimidos cuyo tamaño sea como máximo una mega serán cargados
-en memoria, si no es así será creado un archivo tar descomprimido
-para acceder a los contenidos (todo esto es transparente para el usuario).
+El
+.\"LINK2"
+Sistema de Archivos FTP (FTPfs)
+.\"FTP File System"
+permite navegar por los directorios de servidores FTP remotos. Admite
+diversas opciones.
 .PP
-El programa nos permitirá añadir un sufijo para especificar las unidades
-del número que tecleamos, usaremos 'k' para kilobytes y 'm' para indicar megabytes.
-Nuestra rutina no acepta números en formato de coma flotante, de modo que no podremos usar
-".5 m" para indicar 512 kilobytes, tendremos que usar "512 k" en su lugar.
+.I Contraseña de FTP anónimo
+es la contraseña a utilizar en conexiones en modo anónimo, esto es,
+empleando el nombre de usuario "anonymous".  Algunos sitios exigen que
+ésta sea una dirección de correo electrónico válida, pero tampoco es
+conveniente dar nuestra dirección real a desconocidos para protegernos
+de los envíos de correo masivo.
 .PP
-Ahora, dado que a todos nos encanta navegar por los archivos, incluidos los tar,
-sobre el disco, es común que salgamos de un archivo tar y volvamos a entrar en él
-después. Puesto que la descompresión es lenta, Midnight Commander mantendrá en
-memoria la información durante una cantidad de tiempo limitado, después de alcanzado
-el momento, todos los recursos de memoria asociados con el sistema de archivos
-serán liberados. El período por defecto es de un minuto.
+FTPfs conserva en caché los listados de los directorios consultados.
+La duración de la caché es el valor indicado tras
+.IR "Descartar el caché FTPfs" .
+Un valor pequeño ralentiza el proceso porque cualquier pequeña operación
+iría siempre acompañada de una conexión con el servidor FTP.
+.PP
+Se puede configurar un sistema proxy para FTP, aunque los cortafuegos
+modernos son transparentes (al menos para FTP pasivo, ver más abajo)
+y está opción es generalmente innecesaria.
+.PP
+Si la opción
+.I Usar siempre proxy
+no está activa, aún se puede emplear el proxy en casos concretos. Véanse
+los ejemplos en la sección
+.\"LINK2"
+Sistema de Archivos FTP (FTPfs)\&.
+.\"FTP File System"
+.PP
+Si la opción
+.I Usar siempre proxy
+está puesta, el programa asume que cualquier nombre de máquina
+sin puntos es accesible directamente y también consulta el archivo
+@prefix@/share/mc.no_proxy en busca de nombres de máquinas locales (o
+dominios completos si el nombre empieza con un punto).  En todos los
+demás casos se usará siempre el proxy de FTP indicado arriba.
+.PP
+Se puede usar el archivo
+.IR ~/.netrc ,
+que contiene información de usuarios y contraseñas para determinados
+servidores FTP.  Para conocer el formato de los archivos .netrc véase
+netrc (5).
+.PP
+.I Usar FTP pasivo
+habilita el modo de tranferencia FTP pasivo (la conexión para
+transferencia de datos es iniciada por la máquina cliente, no por el
+servidor).  Esta opción es la recomendada, y de hecho está activada
+por defecto.  Si se desactiva, la conexión la inicia el servidor,
+y puede ser impedida por algún cortafuegos.
+.PP
 .\"NODE "    Save Setup"
 .SH "    Guardar Configuración"
-Al arrancar Midnight Commander se carga la información
-de inicio del archivo ~/.mc/ini. Si éste no existe,
-se cargará la información del archivo de configuración genérico del sistema,
-@prefix@/share/mc/mc.ini. Si el archivo de configuración
-genérico del sistema no existe, MC utiliza la configuración por defecto.
+Al arrancar Midnight Commander se carga la información de inicio del
+archivo ~/.mc/ini.  Si éste no existe, se cargará la información del
+archivo de configuración genérico del sistema, @prefix@/share/mc/mc.ini.
+Si el archivo de configuración genérico del sistema no existe, MC utiliza
+la configuración por defecto.
 .PP
 El comando
 .I Guardar Configuración
-crea el archivo ~/.mc/ini guardando la configuración actual
-de los menús
+crea el archivo ~/.mc/ini guardando la configuración actual de los menús
 .\"LINK2"
 Izquierdo, Derecho
 .\"Left and Right Menus"
@@ -1819,17 +1849,16 @@ y
 Opciones\&.
 .\"Options Menu"
 .PP
-Si activamos la opción
-.I Auto-guarda configuración,
+Si se activa la opción
+.IR "Auto-guarda configuración" ,
 MC guardará siempre la configuración actual al salir.
 .PP
-Existen también configuraciones que no pueden ser cambiadas desde los menús. Para
-cambiarlas hay que editar manualmente el archivo de configuración.
-Ver la sección sobre
+Existen también configuraciones que no pueden ser cambiadas desde
+los menús.  Para cambiarlas hay que editar manualmente el archivo de
+configuración.  Para más información, véase la sección sobre
 .\"LINK2"
-Ajustes Especiales
+Ajustes Especiales\&.
 .\"Special Settings"
-para más información.
 .SH ""
 .\"NODE "Executing operating system commands"
 .SH "Ejecutando Órdenes del Sistema Operativo"
@@ -2530,15 +2559,15 @@ comprimidos;
 .I undelfs
 para recuperar archivos borrados en sistemas de archivos de tipo ext2
 (sistema de archivos habitual en Linux);
-.I ftpfs
+.I FTPfs
 para manipular archivos en sistemas remotos a través de FTP;
-.I fish
+.I FISH
 para manipular archivos a través de conexiones a shell como rsh o ssh
 y finalmente
-.I mcfs
+.I MCfs
 (Midnight Commander file system), un sistema de archivos para red. Si
 el programa se compiló incluyendo
-.I smbfs
+.I SMBfs
 se pueden manipular archivos en sistemas remotos empleando el protocolo
 SMB (CIFS).
 .PP
@@ -2575,28 +2604,38 @@ Ejemplos:
 .PP
 En este último se indica la ruta completa hasta el archivo tar.
 .\"NODE "  FTP File System"
-.SH "  Sistema de archivos FTP (ftpfs)"
-El ftpfs permite manipular archivos en máquinas remotas. Para
-comenzar a usarlo, se puede emplear la "Conexión por FTP..."
-(accesible desde la barra de  menús) o podemos cambiar directamente el
-directorio actual desde la línea de órdenes con el comando cd y la ruta
-tal como esto:
+.SH "  Sistema de archivos FTP (FTPfs)"
+FTPfs permite manipular archivos en máquinas remotas. Para utilizarlo
+se puede emplear la opción de menú
+.I Conexión por FTP
+o simplemente emplear la orden
+.I cd
+como cuando cambiamos habitualmente de directorio, pero indicando
+como ruta:
 .PP
 .I /#ftp:[!][usuario[:clave]@]maquina[:puerto][dir-remoto]
 .PP
-los elementos,
-.I usuario,
+Los elementos
+.IR usuario ,
 .I puerto
 y
 .I directorio-remoto
 son opcionales. Si especificamos el elemento
-.I usuario,
-entonces Midnight Commander intentará entrar en la máquina
-remota como ese usuario, en otro caso usará nuestro nombre. El elemento opcional
-.I clave,
-si está presente, es la contraseña de acceso usada para autentificar la conexión. Esto
-no es muy recomendable (y menos guardarlo en nuestra lista de accesos favoritos, a menos que
-fijemos los atributos adecuados en ella, y aún así, puede no ser seguro).
+.IR usuario ,
+entonces Midnight Commander intentará conectarse con la máquina remota
+como ese usuario, y si no, establecerá una conexión en modo anónimo o
+con el nombre de usuario indicado en el archivo
+.IR ~/.netrc .
+El elemento
+.I clave
+también es opcional, y si está presente, se emplea como contraseña
+de acceso.  Esta forma de colocar la contraseña como parte del nombre
+del directorio virtual no es muy recomendable porque eventualmente puede
+aparecer en pantalla y guardarse en el histórico de directorios.
+.PP
+Si es necesario utilizar un proxy de FTP, se añade un símbolo de exclamación
+.B !
+delante del nombre de la máquina.
 .PP
 Ejemplos:
 .PP
@@ -2609,42 +2648,15 @@ Ejemplos:
     /#ftp:ftp.um.es/pub
 .fi
 .PP
-Para acceder a lugares a través de cortafuegos usaremos el prefijo /#ftp:!
-para hacer que Midnight Commander utilice un proxy para realizar la transferencia ftp.
-Podemos establecer el proxy en el cuadro de diálogo
+La opciones de FTPfs se encuentran entre las opciones de configuración del
 .\"LINK2"
 Sistema de Archivos Virtual (VFS)\&.
-.\"Virtual File System"
-.PP
-La opción
-.I Usar siempre proxy
-obliga al programa a
-utilizar siempre el proxy. Si está fijada, el programa
-hará dos cosas: consultar el archivo @prefix@/share/mc.no_proxy para leer
-las líneas que contienen nombres de máquinas locales (si el nombre de máquina
-empieza con un punto, se supone que es un dominio) y se asume que cualquier
-cualquier máquina sin puntos en su nombre es directamente accesible.
-.PP
-Si estamos usando ftpfs con un encaminador con filtrado de paquetes
-que no nos permita usar el modo regular de apertura de archivos, podríamos
-querer forzar al programa a usar el modo de apertura pasivo. Para ello
-tendríamos que poner la opción ftpfs_use_passive_connections en el archivo de
-configuración.
-.PP
-Midnight Commander guarda los listados de directorios en una caché. La vida de
-la caché es configurable en el cuadro de diálogo del
-.\"LINK2"
-Sistema de Archivos Virtual (VFS)\&.
-.\"Virtual File System"
-Esto tiene un efecto curioso: si cambiamos algo en un directorio, no se verá
-reflejado en el listado hasta que se fuerce un refresco de la caché con la tecla
-C-r. No se trata de un fallo, sino de una utilidad; pensemos en lo pesado
-que es manipular archivos con ftpfs sobre una conexión lenta.
+.\"Virtual FS"
 .\"NODE "  FIle transfer over SHell filesystem"
-.SH "  Sistema de archivos de envío Archivos por SHell (fish)"
-El fish es un sistema de archivos por red que permite manipular archivos
+.SH "  Sistema de archivos de envío Archivos por SHell (FISH)"
+El FISH es un sistema de archivos por red que permite manipular archivos
 en una máquina remota como si estuvieran almacenados localmente. Para
-ello es preciso que el sistema remoto este ejecutando el servidor fish
+ello es preciso que el sistema remoto este ejecutando el servidor FISH
 o que la shell sea de tipo bash.
 .PP
 Para conectar con la máquina remota basta cambiar de directorio a un
@@ -2716,7 +2728,7 @@ Ejemplos:
 .fi
 .\"NODE "  SMB File System"
 .SH "  Sistema de archivos SMB"
-El smbfs permite manipular archivos en máquinas remotas con el protocolo
+El SMBfs permite manipular archivos en máquinas remotas con el protocolo
 denominado SMB (o CIFS). Esto incluye Windows Trabajo en Grupo, Windows
 9x/ME/XP, Windows NT, Windows 2000 y Samba. Para comenzar a usarlo,
 se puede emplear la "Conexión por SMB..." (accesible desde la barra de
