@@ -1,3 +1,10 @@
+1998-12-02  Raja R Harinath  <harinath@cs.umn.edu>
+
+	* Makefile.am (EXTRA_DIST): Distribute files that the
+	BUILT_SOURCES depend on.
+	(mad.c, mad.h): Don't use GNU make specific features in rule.
+	(libvfs_la_SOURCES): Update from Make-mc.in.
+
 1998-12-02  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* direntry.c (vfs_s_insert_super): This routine does not return

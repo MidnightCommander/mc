@@ -15,16 +15,41 @@ libvfsincludedir=$(includedir)/vfs
 
 libvfsinclude_HEADERS=vfs.h
 
+EXTRA_DIST = mc-src/mad.c mc-src/mad.h
+
 mad.c: mc-src/mad.c
-	$(LN_S) $< $@
+	$(LN_S) $(srcdir)/mc-src/mad.c mad.c
 
 mad.h: mc-src/mad.h
-	$(LN_S) $< $@
+	$(LN_S) $(srcdir)/mc-src/mad.h mad.h
 
-libvfs_la_SOURCES = callback.h container.c direntry.c container.h extfs.c \
-extfs.h ftpfs.c ftpfs.h fish.c fish.h local.c mad.c mad.h mcfs.c mcfs.h \
-mcserv.c names.c names.h shared_ftp_fish.c shared_tar_ext.c tar.c tar.h \
-sfs.c tcputil.c tcputil.h undelfs.c undelfs.h util-alone.c util-alone.h \
-utilvfs.c vfs.c vfs.h xdirentry.h
+libvfs_la_SOURCES = \
+	container.c 		\
+	direntry.c		\
+	extfs.c 		\
+	fish.c 			\
+	ftpfs.c 		\
+	local.c 		\
+	mcfs.c			\
+	mcserv.c 		\
+	names.c 		\
+	sfs.c 			\
+	shared_ftp_fish.c	\
+	shared_tar_ext.c 	\
+	tar.c 			\
+	tcputil.c		\
+	undelfs.c 		\
+	utilvfs.c		\
+	vfs.c			\
+	container.h 		\
+	extfs.h 		\
+	fish.h			\
+	ftpfs.h 		\
+	mcfs.h 			\
+	names.h 		\
+	tar.h 			\
+	tcputil.h 		\
+	vfs.h			\
+	xdirentry.h
 
 libvfs_la_LDFLAGS = -version-info 27:0:27
