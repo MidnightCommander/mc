@@ -13,7 +13,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.6.0\n"
-"POT-Creation-Date: 2002-10-30 19:03-0500\n"
+"POT-Creation-Date: 2002-10-31 01:54-0500\n"
 "PO-Revision-Date: 2000-08-21 12:24+00:00\n"
 "Last-Translator: Andrew V. Samoilov <kai@cmail.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -150,9 +150,9 @@ msgid " Save As "
 msgstr " Сохранить как "
 
 #: edit/editcmd.c:421 edit/editcmd.c:705 edit/editcmd.c:730 edit/editcmd.c:878
-#: edit/editcmd.c:976 src/file.c:623 src/help.c:317 src/main.c:460
+#: edit/editcmd.c:976 src/file.c:623 src/help.c:317 src/main.c:462
 #: src/screen.c:1365 src/screen.c:1938 src/selcodepage.c:106
-#: src/subshell.c:702 src/utilunix.c:355 src/utilunix.c:359 src/utilunix.c:381
+#: src/subshell.c:703 src/utilunix.c:355 src/utilunix.c:359 src/utilunix.c:381
 #: src/utilunix.c:433 vfs/mcfs.c:139
 msgid "Warning"
 msgstr "Предупреждение"
@@ -334,7 +334,7 @@ msgstr " Искомая строка не найдена "
 msgid " %d finds made, %d bookmarks added "
 msgstr " %d найдено, %d закладок добавлено "
 
-#: edit/editcmd.c:1935 edit/editwidget.c:296 src/help.c:823 src/main.c:1392
+#: edit/editcmd.c:1935 edit/editwidget.c:296 src/help.c:823 src/main.c:1419
 #: src/view.c:396 src/view.c:2051 src/view.c:2076
 msgid "Quit"
 msgstr "Выход"
@@ -348,14 +348,14 @@ msgid "Cancel quit"
 msgstr "Прервать выход"
 
 #: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1877 src/file.c:2269
-#: src/filegui.c:554 src/hotlist.c:1030 src/main.c:621 src/screen.c:1926
-#: src/subshell.c:703 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
+#: src/filegui.c:554 src/hotlist.c:1030 src/main.c:625 src/screen.c:1926
+#: src/subshell.c:704 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
 msgid "&Yes"
 msgstr "&Да"
 
 #: edit/editcmd.c:1935 src/cmd.c:229 src/file.c:1877 src/file.c:2269
-#: src/filegui.c:553 src/hotlist.c:1030 src/main.c:621 src/screen.c:1927
-#: src/subshell.c:703 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
+#: src/filegui.c:553 src/hotlist.c:1030 src/main.c:625 src/screen.c:1927
+#: src/subshell.c:704 src/tree.c:754 src/view.c:398 vfs/mcfs.c:144
 msgid "&No"
 msgstr "&Нет"
 
@@ -653,7 +653,7 @@ msgstr "&Разное..."
 msgid "&Save mode..."
 msgstr "Режим &сохранения..."
 
-#: edit/editmenu.c:248 edit/editmenu.c:257 src/main.c:1064
+#: edit/editmenu.c:248 edit/editmenu.c:257 src/main.c:1074
 msgid "&Layout..."
 msgstr "&Внешний вид"
 
@@ -741,7 +741,7 @@ msgstr "Эмуляция раскладки клавиш"
 msgid " Editor options "
 msgstr " Настройки редактора "
 
-#: edit/editwidget.c:286 src/help.c:790 src/help.c:811 src/main.c:1389
+#: edit/editwidget.c:286 src/help.c:790 src/help.c:811 src/main.c:1415
 #: src/screen.c:2149 src/tree.c:1017 src/view.c:2049
 msgid "Help"
 msgstr "Помощь"
@@ -766,7 +766,7 @@ msgstr "Переместить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: edit/editwidget.c:295 src/main.c:1391
+#: edit/editwidget.c:295 src/main.c:1418
 msgid "PullDn"
 msgstr "МенюMC"
 
@@ -1212,7 +1212,7 @@ msgstr " Невозможно получить локальную копию %s "
 msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
 
-#: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:839
+#: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:847
 msgid "Could not change directory"
 msgstr "Невозможно сменить каталог"
 
@@ -2179,7 +2179,7 @@ msgstr "Шаблон имени:"
 msgid "Content: "
 msgstr "Содержит текст:"
 
-#: src/find.c:148 src/main.c:944 src/main.c:971
+#: src/find.c:148 src/main.c:954 src/main.c:981
 msgid "&Tree"
 msgstr "Д&ерево"
 
@@ -2603,7 +2603,7 @@ msgstr "какие клавиши не имеют пометки OK. Для обучения клавише выберите"
 msgid "key, or click with the mouse to define it. Move around with Tab."
 msgstr "ее при помощи Tab или мышкой и нажмите пробел."
 
-#: src/main.c:461
+#: src/main.c:463
 msgid ""
 " The Commander can't change to the directory that \n"
 " the subshell claims you are in.  Perhaps you have \n"
@@ -2615,284 +2615,284 @@ msgstr ""
 " удалили рабочий каталог или дали себе дополнительные \n"
 " привилегии доступа при помощи команды \"su\"? "
 
-#: src/main.c:536
+#: src/main.c:537
 msgid "Press any key to continue..."
 msgstr "Для продолжения нажмите любую клавишу..."
 
-#: src/main.c:582
+#: src/main.c:584
 msgid " The shell is already running a command "
 msgstr " Интерпретатор уже озабочен выполнением команды "
 
-#: src/main.c:619 src/screen.c:1925
+#: src/main.c:623 src/screen.c:1925
 msgid " The Midnight Commander "
 msgstr " Midnight Commander "
 
-#: src/main.c:620
+#: src/main.c:624
 msgid " Do you really want to quit the Midnight Commander? "
 msgstr " Вы действительно хотите выйти из Midnight Commander? "
 
-#: src/main.c:934
+#: src/main.c:943
 msgid " Listing format edit "
 msgstr "&Редактирование формата списка"
 
-#: src/main.c:934
+#: src/main.c:943
 #, c-format
 msgid " New mode is \"%s\" "
 msgstr " Новый формат: \"%s\" "
 
-#: src/main.c:941 src/main.c:968
+#: src/main.c:951 src/main.c:978
 msgid "&Listing mode..."
 msgstr "Фор&мат списка..."
 
-#: src/main.c:942 src/main.c:969
+#: src/main.c:952 src/main.c:979
 msgid "&Quick view     C-x q"
 msgstr "&Быстрый просмотр   C-x q"
 
-#: src/main.c:943 src/main.c:970
+#: src/main.c:953 src/main.c:980
 msgid "&Info           C-x i"
 msgstr "&Информация         C-x i"
 
-#: src/main.c:946 src/main.c:973
+#: src/main.c:956 src/main.c:983
 msgid "&Sort order..."
 msgstr "Порядок &сортировки"
 
-#: src/main.c:948 src/main.c:975
+#: src/main.c:958 src/main.c:985
 msgid "&Filter..."
 msgstr "&Фильтр"
 
-#: src/main.c:952 src/main.c:979
+#: src/main.c:962 src/main.c:989
 msgid "&Network link..."
 msgstr "Се&тевое соединение..."
 
-#: src/main.c:954 src/main.c:981
+#: src/main.c:964 src/main.c:991
 msgid "FT&P link..."
 msgstr "&FTP-соединение"
 
-#: src/main.c:955 src/main.c:982
+#: src/main.c:965 src/main.c:992
 msgid "S&hell link..."
 msgstr "S&hell связь..."
 
-#: src/main.c:957 src/main.c:984
+#: src/main.c:967 src/main.c:994
 msgid "SM&B link..."
 msgstr "SM&B связь..."
 
-#: src/main.c:962 src/main.c:989
+#: src/main.c:972 src/main.c:999
 msgid "&Drive...       M-d"
 msgstr "&Диск...              M-d"
 
-#: src/main.c:964 src/main.c:991
+#: src/main.c:974 src/main.c:1001
 msgid "&Rescan         C-r"
 msgstr "&Пересмотреть         C-r"
 
-#: src/main.c:995
+#: src/main.c:1005
 msgid "&User menu          F2"
 msgstr "&Меню пользователя     F2"
 
-#: src/main.c:996
+#: src/main.c:1006
 msgid "&View               F3"
 msgstr "Просмотр &файла        F3"
 
-#: src/main.c:997
+#: src/main.c:1007
 msgid "Vie&w file...         "
 msgstr "&Просмотр файла..."
 
-#: src/main.c:998
+#: src/main.c:1008
 msgid "&Filtered view     M-!"
 msgstr "&Просмотр команды     M-!"
 
-#: src/main.c:999
+#: src/main.c:1009
 msgid "&Edit               F4"
 msgstr "&Редактирование        F4"
 
-#: src/main.c:1000
+#: src/main.c:1010
 msgid "&Copy               F5"
 msgstr "&Копирование           F5"
 
-#: src/main.c:1001
+#: src/main.c:1011
 msgid "c&Hmod           C-x c"
 msgstr "Права &доступа      C-x c"
 
-#: src/main.c:1003
+#: src/main.c:1013
 msgid "&Link            C-x l"
 msgstr "&Жесткая ссылка     C-x l"
 
-#: src/main.c:1004
+#: src/main.c:1014
 msgid "&SymLink         C-x s"
 msgstr "&Символич. ссылка   C-x s"
 
-#: src/main.c:1005
+#: src/main.c:1015
 msgid "edit s&Ymlink  C-x C-s"
 msgstr "Правка ссы&лки    C-x C-s"
 
-#: src/main.c:1006
+#: src/main.c:1016
 msgid "ch&Own           C-x o"
 msgstr "&Владелец/группа    C-x o"
 
-#: src/main.c:1007
+#: src/main.c:1017
 msgid "&Advanced chown       "
 msgstr "Пр&ава (расширенные)    "
 
-#: src/main.c:1009
+#: src/main.c:1019
 msgid "&Rename/Move        F6"
 msgstr "Пере&именование        F6"
 
-#: src/main.c:1010
+#: src/main.c:1020
 msgid "&Mkdir              F7"
 msgstr "Со&здание каталога     F7"
 
-#: src/main.c:1011
+#: src/main.c:1021
 msgid "&Delete             F8"
 msgstr "&Удаление              F8"
 
-#: src/main.c:1012
+#: src/main.c:1022
 msgid "&Quick cd          M-c"
 msgstr "Сме&на каталога       M-c"
 
-#: src/main.c:1014
+#: src/main.c:1024
 msgid "select &Group      M-+"
 msgstr "Отметить &группу      M-+"
 
-#: src/main.c:1015
+#: src/main.c:1025
 msgid "u&Nselect group    M-\\"
 msgstr "Снять &отметку        M-\\"
 
-#: src/main.c:1016
+#: src/main.c:1026
 msgid "reverse selec&Tion M-*"
 msgstr "Инвер&тировать отметку  *"
 
-#: src/main.c:1018
+#: src/main.c:1028
 msgid "e&Xit              F10"
 msgstr "Вы&ход                F10"
 
-#: src/main.c:1026
+#: src/main.c:1036
 msgid "&Directory tree"
 msgstr "&Дерево каталогов"
 
-#: src/main.c:1027
+#: src/main.c:1037
 msgid "&Find file            M-?"
 msgstr "Поиск &файла           M-?"
 
-#: src/main.c:1028
+#: src/main.c:1038
 msgid "s&Wap panels          C-u"
 msgstr "&Переставить панели    C-u"
 
-#: src/main.c:1029
+#: src/main.c:1039
 msgid "switch &Panels on/off C-o"
 msgstr "&Отключить панели      C-o"
 
-#: src/main.c:1030
+#: src/main.c:1040
 msgid "&Compare directories  C-x d"
 msgstr "&Сравнить каталоги     C-x d"
 
-#: src/main.c:1031
+#: src/main.c:1041
 msgid "e&Xternal panelize    C-x !"
 msgstr "&Критерий панелизации  C-x !"
 
-#: src/main.c:1032
+#: src/main.c:1042
 msgid "show directory s&Izes"
 msgstr "&Размеры каталогов"
 
-#: src/main.c:1034
+#: src/main.c:1044
 msgid "command &History"
 msgstr "&История команд"
 
-#: src/main.c:1035
+#: src/main.c:1045
 msgid "di&Rectory hotlist    C-\\"
 msgstr "Справочник ката&логов  C-\\"
 
-#: src/main.c:1037
+#: src/main.c:1047
 msgid "&Active VFS list      C-x a"
 msgstr "Список &активных ВФС   C-x a"
 
-#: src/main.c:1038
+#: src/main.c:1048
 msgid "Fr&ee VFSs now"
 msgstr "Освободить ВФС сейчас"
 
-#: src/main.c:1041
+#: src/main.c:1051
 msgid "&Background jobs      C-x j"
 msgstr "Фо&новые задания       C-x j"
 
-#: src/main.c:1045
+#: src/main.c:1055
 msgid "&Undelete files (ext2fs only)"
 msgstr "&Восстановление файлов"
 
-#: src/main.c:1048
+#: src/main.c:1058
 msgid "&Listing format edit"
 msgstr "&Редактирование формата"
 
-#: src/main.c:1053
+#: src/main.c:1063
 msgid "&Extension file edit"
 msgstr "Файл рас&ширений"
 
-#: src/main.c:1054
+#: src/main.c:1064
 msgid "&Menu file edit"
 msgstr "Файл &меню"
 
-#: src/main.c:1056
+#: src/main.c:1066
 msgid "Menu edi&Tor edit"
 msgstr "Правка меню р&едактора"
 
-#: src/main.c:1057
+#: src/main.c:1067
 msgid "&Syntax file edit"
 msgstr "Файл синтаксиса"
 
-#: src/main.c:1063
+#: src/main.c:1073
 msgid "&Configuration..."
 msgstr "&Конфигурация"
 
-#: src/main.c:1065
+#: src/main.c:1075
 msgid "c&Onfirmation..."
 msgstr "&Подтверждение"
 
-#: src/main.c:1066
+#: src/main.c:1076
 msgid "&Display bits..."
 msgstr "&Биты символов..."
 
-#: src/main.c:1068
+#: src/main.c:1078
 msgid "learn &Keys..."
 msgstr "&Распознавание клавиш..."
 
-#: src/main.c:1071
+#: src/main.c:1081
 msgid "&Virtual FS..."
 msgstr "Виртуальные &ФС..."
 
-#: src/main.c:1074
+#: src/main.c:1084
 msgid "&Save setup"
 msgstr "&Сохранить настройки"
 
-#: src/main.c:1084
+#: src/main.c:1095
 msgid " &Above "
 msgstr " Верхняя "
 
-#: src/main.c:1084
+#: src/main.c:1095
 msgid " &Left "
 msgstr " &Левая панель "
 
-#: src/main.c:1087
+#: src/main.c:1099
 msgid " &File "
 msgstr " &Файл "
 
-#: src/main.c:1089
+#: src/main.c:1102
 msgid " &Command "
 msgstr " &Команда "
 
-#: src/main.c:1091
+#: src/main.c:1105
 msgid " &Options "
 msgstr " &Настройки "
 
-#: src/main.c:1093
+#: src/main.c:1108
 msgid " &Below "
 msgstr " Нижняя "
 
-#: src/main.c:1093
+#: src/main.c:1108
 msgid " &Right "
 msgstr " &Правая панель "
 
-#: src/main.c:1136
+#: src/main.c:1151
 msgid " Information "
 msgstr " Информация "
 
-#: src/main.c:1137
+#: src/main.c:1153
 msgid ""
 " Using the fast reload option may not reflect the exact \n"
 " directory contents. In this cases you'll need to do a  \n"
@@ -2904,36 +2904,36 @@ msgstr ""
 " перезагрузить каталог. Для дополнительной информации смотрите  \n"
 " руководство (man)."
 
-#: src/main.c:1390 src/screen.c:2150
+#: src/main.c:1416 src/screen.c:2150
 msgid "Menu"
 msgstr "Меню"
 
-#: src/main.c:1528
+#: src/main.c:1559
 msgid "The TERM environment variable is unset!\n"
 msgstr "Переменная среды TERM не определена!\n"
 
-#: src/main.c:1627
+#: src/main.c:1659
 msgid "Thank you for using GNU Midnight Commander"
 msgstr "Благодарим Вас за использование GNU Midnight Commander"
 
-#: src/main.c:1819 src/textconf.c:116
+#: src/main.c:1851 src/textconf.c:116
 #, c-format
 msgid "GNU Midnight Commander %s\n"
 msgstr "GNU Midnight Commander, версия %s\n"
 
-#: src/main.c:2074
+#: src/main.c:2104
 msgid "[flags] [this_dir] [other_panel_dir]\n"
 msgstr "[флаги] [этот_каталог] [каталог_другой_панели]\n"
 
-#: src/main.c:2078
+#: src/main.c:2108
 msgid "+number"
 msgstr "+число"
 
-#: src/main.c:2079
+#: src/main.c:2109
 msgid "Set initial line number for the internal editor"
 msgstr "Задать начальную строку для встроенного редактора"
 
-#: src/main.c:2080
+#: src/main.c:2111
 msgid ""
 "\n"
 "Please send any bug reports (including the output of `mc -V')\n"
@@ -2943,8 +2943,7 @@ msgstr ""
 "Пожалуйста, посылайте любые сообщения об ошибках (включая вывод 'mc -V')\n"
 "по адресу mc-devel@gnome.org\n"
 
-#. TRANSLATORS: don't translate keywords and names of colors
-#: src/main.c:2094
+#: src/main.c:2126
 msgid ""
 "--colors KEYWORD={FORE},{BACK}\n"
 "\n"
@@ -2984,101 +2983,93 @@ msgstr ""
 "   brightcyan, lightgray, white\n"
 "\n"
 
-#: src/main.c:2181
+#: src/main.c:2201
 msgid "Use to debug the background code"
 msgstr "Использовать для отладки фонового кода"
 
-#: src/main.c:2184
+#: src/main.c:2204
 msgid "Request to run in color mode"
 msgstr "Принудительно установить цветной режим"
 
-#: src/main.c:2186
+#: src/main.c:2206
 msgid "Specifies a color configuration"
 msgstr "Определить настройки цветов"
 
-#: src/main.c:2190
+#: src/main.c:2210
 msgid "Edits one file"
 msgstr "Редактировать файл"
 
-#: src/main.c:2194
+#: src/main.c:2214
 msgid "Displays this help message"
 msgstr "Показать это справочное сообщение"
 
-#: src/main.c:2196
+#: src/main.c:2216
 msgid "Displays a help screen on how to change the color scheme"
 msgstr "Показать справку, как изменить цветовую схему"
 
-#: src/main.c:2199
+#: src/main.c:2219
 msgid "Log ftp dialog to specified file"
 msgstr "Записывать диалог с FTP в заданный файл"
 
-#: src/main.c:2202
+#: src/main.c:2222
 msgid "Set debug level"
 msgstr "Установить уровень отладки"
 
-#: src/main.c:2206
+#: src/main.c:2226
 msgid "Print data directory"
 msgstr "Распечатать имя каталога для данных"
 
-#: src/main.c:2208
+#: src/main.c:2228
 msgid "Requests to run in black and white"
 msgstr "Принудительно установить черно-белый режим"
 
-#: src/main.c:2210
+#: src/main.c:2230
 msgid "Disable mouse support in text version"
 msgstr "Отключить поддержку мыши в текстовой версии"
 
-#: src/main.c:2213
+#: src/main.c:2233
 msgid "Disables subshell support"
 msgstr "Отключить поддержку встроенной командной оболочки"
 
-#: src/main.c:2215
+#: src/main.c:2235
 msgid "Force subshell execution"
 msgstr "Принудительное исполнение во встроенной командной оболочке"
 
-#: src/main.c:2218
-msgid "Prints working directory at program exit"
-msgstr "Печатать рабочий каталог при выходе из программы"
+#: src/main.c:2238
+msgid "Print last working directory to specified file"
+msgstr "Записать последний рабочий каталог в указанный файл"
 
-#: src/main.c:2220
+#: src/main.c:2240
 msgid "Resets soft keys on HP terminals"
 msgstr "Сбросить программные клавиши на терминалах HP"
 
-#: src/main.c:2222
+#: src/main.c:2242
 msgid "To run on slow terminals"
 msgstr "Подразумевать медленный терминал"
 
-#: src/main.c:2225
+#: src/main.c:2245
 msgid "Use stickchars to draw"
 msgstr "Использовать псевдографику для рисования"
 
-#: src/main.c:2229
+#: src/main.c:2249
 msgid "Enables subshell support (default)"
 msgstr "Включить поддержку встроенной командной оболочки (по умолчанию)"
 
-#: src/main.c:2233
+#: src/main.c:2253
 msgid "Tries to use termcap instead of terminfo"
 msgstr "Пытаться использовать termcap вместо terminfo"
 
-#: src/main.c:2236
+#: src/main.c:2256
 msgid "Displays the current version"
 msgstr "Показать текущую версию"
 
-#: src/main.c:2238
+#: src/main.c:2258
 msgid "Launches the file viewer on a file"
 msgstr "Просматривать файл"
 
-#: src/main.c:2240
+#: src/main.c:2260
 msgid "Forces xterm features"
 msgstr "Подразумевать свойства xterm"
-
-#: src/main.c:2417
-msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
-"On some systems you may want to run # `which mc`\n"
-msgstr ""
-"Невозможно открыть tty линию. Вы должны запустить mc без флага -P.\n"
-"На некоторых системах вы можете захотеть запустить # `which mc`\n"
 
 #: src/main.c:2480
 msgid " Notice "
@@ -3403,16 +3394,16 @@ msgstr ""
 "Размер экрана %dx%d не поддерживается.\n"
 "Проверьте переменную окружения TERM.\n"
 
-#: src/subshell.c:417
+#: src/subshell.c:418
 #, c-format
 msgid "Couldn't open named pipe %s\n"
 msgstr "Невозможно открыть именованный канал %s\n"
 
-#: src/subshell.c:702
+#: src/subshell.c:703
 msgid " The shell is still active. Quit anyway? "
 msgstr " Оболочка все еще активна. Выйти все-таки? "
 
-#: src/subshell.c:830
+#: src/subshell.c:842
 #, c-format
 msgid "Warning: Couldn't change to %s.\n"
 msgstr "Внимание: Невозможно перейти в %s. \n"
