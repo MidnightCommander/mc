@@ -31,7 +31,7 @@
 #include "src/charsets.h"
 #endif
 
-static void status_string (WEdit * edit, char *s, int w, int fill, int font_width)
+static void status_string (WEdit * edit, char *s, int w, int fill)
 {
     char byte_str[16];
 
@@ -57,7 +57,7 @@ static void status_string (WEdit * edit, char *s, int w, int fill, int font_widt
 		edit->modified ? 'M' : '-',
 		edit->macro_i < 0 ? '-' : 'R',
 		edit->overwrite == 0 ? '-' : 'O',
-		edit->curs_col / font_width,
+		edit->curs_col,
 
 		edit->start_line + 1,
 		edit->curs_row,
@@ -75,22 +75,23 @@ void edit_status (WEdit * edit)
     int w, i, t;
     char *s;
     w = edit->widget.cols - (edit->have_frame * 2);
-    s = malloc (w + 15);
+    s = malloc (w + 16);
     if (w < 4)
 	w = 4;
     memset (s, ' ', w);
     attrset (SELECTED_COLOR);
     if (w > 4) {
 	widget_move (edit, edit->have_frame, edit->have_frame);
-	i = w > 24 ? 18 : w - 6;
-	i = i < 13 ? 13 : i;
-	strcpy (s, (char *) name_trunc (edit->filename ? edit->filename : "", i));
-	i = strlen (s);
-	s[i] = ' ';
+	if (edit->filename) {
+	    i = w > 24 ? 18 : w - 6;
+	    i = i < 13 ? 13 : i;
+	    strcpy (s, name_trunc (edit->filename, i));
+	    i = strlen (s);
+	    s[i] = ' ';
+	}
 	t = w - 20;
-	if (t < 0)
-	    t = 0;
-	status_string (edit, s + 20, t, ' ', 1);
+	if (t > 1)	/* g_snprintf() must write at least '\000' */
+	    status_string (edit, s + 20, t + 1 /* for '\000' */ , ' ');
     }
     s[w] = 0;
 
