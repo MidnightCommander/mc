@@ -197,13 +197,16 @@ char *listbox_add_item (WListbox *l, enum append_pos pos, int
 /* Hintbar routines */
 
 /* Buttonbar routines */
+typedef void (*voidfn)(void);
+
 WButtonBar *buttonbar_new (int visible);
 WButtonBar *find_buttonbar (Dlg_head *h);
-typedef void (*voidfn)(void);
-void define_label (Dlg_head *, int index, const char *text, voidfn);
-void define_label_data (Dlg_head *h, int idx, const char *text,
-			buttonbarfn cback, void *data);
-void redraw_labels (Dlg_head *h);
-void buttonbar_hint (WButtonBar *bb, const char *s);
+void buttonbar_set_label (Dlg_head *, int index, const char *text, voidfn);
+#define define_label buttonbar_set_label
+void buttonbar_set_label_data (Dlg_head *h, int idx, const char *text,
+			       buttonbarfn cback, void *data);
+#define define_label_data buttonbar_set_label_data
+void buttonbar_redraw (Dlg_head *h);
+#define redraw_labels buttonbar_redraw
 
 #endif

@@ -2328,7 +2328,7 @@ find_buttonbar (Dlg_head *h)
 }
 
 void
-define_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
+buttonbar_set_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
 		   void *data)
 {
     WButtonBar *bb = find_buttonbar (h);
@@ -2342,14 +2342,13 @@ define_label_data (Dlg_head *h, int idx, const char *text, buttonbarfn cback,
 }
 
 void
-define_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
+buttonbar_set_label (Dlg_head *h, int idx, const char *text, void (*cback) (void))
 {
     define_label_data (h, idx, text, (buttonbarfn) cback, 0);
 }
 
-/* Redraw labels of the buttonbar */
 void
-redraw_labels (Dlg_head *h)
+buttonbar_redraw (Dlg_head *h)
 {
     WButtonBar *bb = find_buttonbar (h);
 
