@@ -866,13 +866,14 @@ static int edit_read_syntax_file (WEdit * edit, char **names, char *syntax_file,
     int count = 0;
     char *lib_file;
 
-    lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
-    check_for_default (lib_file, syntax_file);
-    g_free (lib_file);
-
     f = fopen (syntax_file, "r");
-    if (!f)
-	return -1;
+    if (!f){
+	lib_file = concat_dir_and_file (mc_home, "syntax" PATH_SEP_STR "Syntax");
+	f = fopen (lib_file, "r");
+	g_free (lib_file);
+	if (!f)
+	    return -1;
+    }
     args[0] = 0;
     for (;;) {
 	line++;

@@ -1,3 +1,8 @@
+2002-03-25  Andrew V. Samoilov  <kai@cmail.ru>
+
+	* syntax.c (edit_read_syntax_file): Use system wide Syntax
+	Highlighting definitions' file if there is no users one.
+
 2002-03-18  Pavel Roskin  <proski@gnu.org>
 
 	* edit.h: Use eregex.h, not regex.h.
