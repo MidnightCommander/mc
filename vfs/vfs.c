@@ -634,7 +634,7 @@ char *
 mc_get_current_wd (char *buffer, int size)
 {
     char *cwd = mc_return_cwd();
-    
+
     strncpy (buffer, cwd, size);
     return buffer;
 }

@@ -226,9 +226,12 @@ panel_fill_panel_icons (WPanel *panel)
 
 	for (i = 0; i < top; i++){
 		file_entry *fe = &panel->dir.list [i];
-
+		int p;
+		
 		image = gicon_get_icon_for_file (fe);
-		gnome_icon_list_append_imlib (icons, image, fe->fname);
+		p = gnome_icon_list_append_imlib (icons, image, fe->fname);
+		if (fe->f.marked)
+			gnome_icon_list_select_icon (icons, p);
 	}
 	/* This is needed as the gtk_clist_append changes selected under us :-( */
 	panel->selected = selected;
@@ -249,7 +252,13 @@ x_fill_panel (WPanel *panel)
 
 	gtk_signal_handler_block_by_data (GTK_OBJECT (panel->tree), panel);
 
-	gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd);
+	if (vfs_current_is_local ()){
+		char buffer [MC_MAXPATHLEN];
+
+		get_current_wd (buffer, sizeof (buffer)-1);
+		gtk_dtree_select_dir (GTK_DTREE (panel->tree), buffer);
+	} else
+		gtk_dtree_select_dir (GTK_DTREE (panel->tree), panel->cwd);
 
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (panel->tree), panel);
 }

@@ -266,7 +266,8 @@ gtk_dtree_do_select_dir (GtkDTree *dtree, char *path)
         g_free (npath);
 	
 	if (current_node){
-		if (!gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node)){
+		gtk_ctree_select (GTK_CTREE (dtree), current_node);
+		if (gtk_ctree_node_is_visible (GTK_CTREE (dtree), current_node) != GTK_VISIBILITY_FULL){
 			gtk_ctree_node_moveto (GTK_CTREE (dtree), current_node, 0, 0.5, 0.0);
 		}
 

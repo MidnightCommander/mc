@@ -205,7 +205,7 @@ tree_store_load (char *name)
 	int len, common;
 	int do_load;
 	
-	g_return_val_if_fail (name != NULL, FALSE);
+	g_return_val_if_fail (name != NULL, TRUE);
 
 	if (ts.loaded)
 		return TRUE;
@@ -274,6 +274,7 @@ tree_store_load (char *name)
 					e->scanned = scanned;
 					strcpy (oldname, name);
 				}
+			free (name);
 		}
 		fclose (file);
 	}
@@ -659,6 +660,7 @@ tree_store_end_check (void)
 	}
 
 	free (ts.check_name);
+	ts.check_name = NULL;
 }
 
 tree_entry *
