@@ -1,3 +1,8 @@
+2003-12-24  Dmitry Alexeyev  <dmi_a@qnx.org.ru>
+
+	* syntax.c (edit_read_syntax_rules): Fix crash if syntax file
+	has more than 1024 keywords.
+
 2003-11-27  Pavel Roskin  <proski@gnu.org>
 
 	* editcmd.c: Use input_expand_dialog() instead of input_dialog()

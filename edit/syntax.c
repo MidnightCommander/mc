@@ -800,6 +800,8 @@ edit_read_syntax_rules (WEdit *edit, FILE *f, char **args)
 	    struct key_word *k;
 	    if (num_words == -1)
 		break_a;
+	    if (num_words >= MAX_WORDS_PER_CONTEXT) 
+		break;
 	    check_a;
 	    k = r[num_contexts - 1]->keyword[num_words] = g_malloc0 (sizeof (struct key_word));
 	    if (!strcmp (*a, "whole")) {
