@@ -781,7 +781,9 @@ static void
 start_icon_drag (GtkWidget *wi, GdkEventMotion *event)
 {
 	printf ("MOTION NOTIF!\n");
+#ifdef OLD_DND
 	artificial_drag_start (wi->window, event->x, event->y);
+#endif
 }
 
 GdkPoint root_icon_drag_hotspot = { 15, 15 };
@@ -1058,6 +1060,7 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 
 	/* Setup the widget to make it useful: */
 
+#ifdef OLD_DND
 	/* 1. Drag and drop functionality */
   
         child = gtk_container_children(GTK_CONTAINER(di->widget));
@@ -1070,6 +1073,7 @@ post_setup_desktop_icon (desktop_icon_t *di, int show)
 	if (show)
 		gtk_widget_show (di->widget);
 
+#endif
 	/* lower the window */
 	gdk_window_lower (di->widget->window);
 }
@@ -1438,9 +1442,11 @@ desktop_root (void)
 	GtkWidget *rw;
 
 	rw = gnome_rootwin_new ();
+#ifdef OLD_DND
 	connect_drop_signals (rw, NULL);
 	gtk_widget_realize (rw);
 	gtk_widget_dnd_drop_set (rw, TRUE, root_drop_types, ELEMENTS (root_drop_types), FALSE);
+#endif
 	gtk_widget_show (rw);
 	root_window = GNOME_ROOTWIN (rw);
 }

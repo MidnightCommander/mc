@@ -59,8 +59,22 @@ static GdkImlibImage *icon_view_regular;
 static GdkImlibImage *icon_view_core;
 static GdkImlibImage *icon_view_sock;
 
+#ifdef OLD_DND
 static char *drag_types [] = { "text/plain", "file:ALL", "url:ALL" };
 static char *drop_types [] = { "url:ALL" };
+#endif
+
+enum {
+	TARGET_URI_LIST,
+	TARGET_URL_LIST,
+	TARGET_TEXT_PLAIN,
+};
+
+static GtkTargetEntry drag_types [] = {
+	{ "text/uri-list", 0, TARGET_URI_LIST },
+	{ "text/url-list", 0, TARGET_URL_LIST },
+	{ "text/plain",    0, TARGET_TEXT_PLAIN },
+};
 
 #define ELEMENTS(x) (sizeof (x) / sizeof (x[0]))
 
@@ -931,34 +945,81 @@ panel_configure_file_list (WPanel *panel, GtkWidget *file_list)
 				  GTK_SIGNAL_FUNC (panel_file_list_scrolled), panel);
 }
 
+/*
+ * Creates an uri list to be transfered during a drop operation.
+ */
 static void *
 panel_build_selected_file_list (WPanel *panel, int *file_list_len)
 {
 	if (panel->marked){
+		char *sep = "\r\n";
 		char *data, *copy;
-		int i, total_len = 0;
+		int i, total_len;
 		int cwdlen = strlen (panel->cwd) + 1;
+		int filelen = strlen ("file:");
+		int seplen  = strlen ("\r\n");
 		
 		/* first pass, compute the length */
+		total_len = 0;
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked)
-				total_len += (cwdlen + panel->dir.list [i].fnamelen + 1);
+				total_len += (filelen + cwdlen + panel->dir.list [i].fnamelen + seplen);
 
+		total_len++;
 		data = copy = xmalloc (total_len, "build_selected_file_list");
 		for (i = 0; i < panel->count; i++)
 			if (panel->dir.list [i].f.marked){
-				strcpy (copy, panel->cwd);
-				copy [cwdlen-1] = '/';
-				strcpy (&copy [cwdlen], panel->dir.list [i].fname);
-				copy += panel->dir.list [i].fnamelen + 1 + cwdlen;
+				strcpy (copy, "file:");
+				strcpy (&copy [filelen], panel->cwd);
+				copy [filelen+cwdlen-1] = '/';
+				strcpy (&copy [filelen + cwdlen], panel->dir.list [i].fname);
+				strcpy (&copy [filelen + cwdlen + panel->dir.list [i].fnamelen], sep);
+				copy += filelen + cwdlen + panel->dir.list [i].fnamelen + seplen;
 			}
+		data [total_len] = 0;
 		*file_list_len = total_len;
 		return data;
 	} else {
-		char *fullname = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+		char *fullname, *uri;
+
+		fullname = concat_dir_and_file (panel->cwd, panel->dir.list [panel->selected].fname);
+
+		uri = copy_strings ("file:", fullname, NULL);
+		free (fullname);
 		
-		*file_list_len = strlen (fullname) + 1;
-		return fullname;
+		*file_list_len = strlen (uri) + 1;
+		return uri;
+	}
+}
+
+/**
+ * panel_drag_data_get:
+ *
+ * Invoked when a drag operation has been performed, this routine
+ * provides the data to be transfered
+ */
+static void
+panel_drag_data_get (GtkWidget        *widget,
+		     GdkDragContext   *context,
+		     GtkSelectionData *selection_data,
+		     guint            info,
+		     guint32          time,
+		     WPanel           *panel)
+{
+	int len;
+	char *data;
+			
+	switch (info){
+	case TARGET_URL_LIST:
+	case TARGET_URI_LIST:
+	case TARGET_TEXT_PLAIN:
+		data = panel_build_selected_file_list (panel, &len);
+
+		printf ("TRANSFERING: %s\n", data);
+		gtk_selection_data_set (
+			selection_data, selection_data->target, 8,
+			data, len);
+		break;
 	}
 }
 
@@ -1165,14 +1226,18 @@ load_dnd_icons (void)
 	if (!drag_multiple_ok)
 		drag_multiple_ok = gnome_stock_transparent_window (GNOME_STOCK_PIXMAP_MULTIPLE, NULL);
 
+#if OLD_DND
 	if (drag_directory && drag_directory_ok)
 		gdk_dnd_set_drag_shape (drag_directory->window, &hotspot,
-					drag_directory_ok->window, &hotspot);	
+					drag_directory_ok->window, &hotspot);
+#endif
 }
 
 /*
  * Pixmaps can only be loaded once the window has been realized, so
  * this is why this hook is here
+ *
+ * FIXME: We no longer need to configure DnD on the realize handler 
  */
 static void
 panel_realized (GtkWidget *file_list, WPanel *panel)
@@ -1181,6 +1246,12 @@ panel_realized (GtkWidget *file_list, WPanel *panel)
 
 	load_dnd_icons ();
 
+	gtk_drag_source_set (GTK_WIDGET (file_list), GDK_BUTTON1_MASK,
+			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
+
+	gtk_signal_connect (obj, "drag_data_get",
+			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
+	
 #if OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_clist_drag_request), panel);
@@ -1391,6 +1462,12 @@ panel_icon_list_realized (GtkObject *obj, WPanel *panel)
 	load_imlib_icons ();
 	load_dnd_icons ();
 
+	gtk_drag_source_set (GTK_WIDGET (icon), GDK_BUTTON1_MASK,
+			     drag_types, ELEMENTS (drag_types), GDK_ACTION_COPY);
+
+	gtk_signal_connect (obj, "drag_data_get",
+			    GTK_SIGNAL_FUNC (panel_drag_data_get), panel);
+	
 #ifdef OLD_DND
 	/* DND: Drag setup */
 	gtk_signal_connect (obj, "drag_request_event", GTK_SIGNAL_FUNC (panel_icon_list_drag_request), panel);

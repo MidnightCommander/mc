@@ -103,9 +103,8 @@ xtoolkit_init (int *argc, char *argv [])
 		"so dont even report them, when the major design has finished\n"
 		"I will remove this notice\n");
 
-/*	gnome_init ("gmc", NULL, *argc, argv, 0, NULL); */
 	gmc_color_init ();
-	/* FIXME: Maybe this should return something from gnome_init() */
+
 	return 0;
 }
 
@@ -115,11 +114,38 @@ xtoolkit_end (void)
 	return 1;
 }
 
+/*
+ * Keystroke event handler for all of the Gtk widgets created by
+ * the GNOME Midnight Commander.  A special case is handled at
+ * the top
+ */
 int
 dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 {
+	GtkWidget *w;
 	static int on_escape;
 	int key;
+
+	/*
+	 * Find out if the focused widget is an IconList and
+	 * if so, check if it has a currently focused item is
+	 * on editing mode as we do not want to handle key
+	 * events while the icon name is being edited.
+	 */
+	w = win;
+	while (w && (GTK_IS_CONTAINER (w) && !GNOME_IS_ICON_LIST (w)))
+		w = GTK_CONTAINER (w)->focus_child;
+	
+	if (w && GNOME_IS_ICON_LIST (w)){
+		GnomeCanvas *c = GNOME_CANVAS (w);
+
+		if (GNOME_IS_ICON_TEXT_ITEM (c->focused_item)){
+			GnomeIconTextItem *i = GNOME_ICON_TEXT_ITEM (c->focused_item);
+
+			if (i->editing)
+				return FALSE;
+		}
+	} 
 
 	key = translate_gdk_keysym_to_curses (event);
 	if (key == -1)
@@ -146,10 +172,10 @@ dialog_key_pressed (GtkWidget *win, GdkEventKey *event, Dlg_head *h)
 		on_escape = 0;
 	}
 	
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (win), "key_press_event");
-	if (dlg_key_event (h, key))
+	if (dlg_key_event (h, key)){
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (win), "key_press_event");
 		return TRUE;
-	else
+	} else
 		return FALSE;
 }
 

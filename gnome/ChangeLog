@@ -1,3 +1,16 @@
+1998-10-20  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+
+1998-10-19  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gscreen.c (panel_drag_data_get): New routine to provide data
+	with the new DnD protocol.
+	
+	* gmain.c (dialog_key_pressed): If an icon has the focus, then do
+	not process any of our events.
+	Only stop the signal if we actually handled the event.
+	(dialog_key_pressed): 
+
 1998-10-14  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* gscreen.c (panel_icon_renamed): Add support for renaming files. 
