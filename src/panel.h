@@ -145,6 +145,7 @@ typedef struct {
 
     int dragging;
 #endif
+    void *corbadat;
 } WPanel;
 
 WPanel *panel_new (char *panel_name);
