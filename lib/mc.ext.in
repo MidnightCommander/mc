@@ -418,7 +418,7 @@ regex/\.(tar|TAR)$
 	Extract=tar xf %f
 
 # zip
-regex/\.(zip|ZIP|jar|JAR)$
+type/^Zip\ archive
 	Open=%cd %p#uzip
 	View=%view{ascii} unzip -v %f
 	Extract=unzip %f
@@ -432,7 +432,7 @@ regex/\.(zoo|ZOO)$
 	Extract=zoo x %f '*'
 	
 # lha
-regex/\.(lha|LHA|lzh|LZH)$
+type/^LHa\ .*archive
 	Open=%cd %p#ulha
 	View=%view{ascii} lharc l %f
 	Extract=lharc x %f '*'

@@ -1,3 +1,7 @@
+2001-11-29  Pavel Roskin  <proski@gnu.org>
+
+	* lib/mc.ext.in: Use "type" to recognize zip and lha archives.
+
 2001-11-27  Pavel Roskin  <proski@gnu.org>
 
 	* lib/mc.ext.in: When running X programs in background, do it
