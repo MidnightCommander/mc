@@ -1,3 +1,8 @@
+1998-12-13  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* gdnd.c (perform_action): Fixed a pair of incorrect braces.
+	Files were not being operated on because of this.
+
 1998-12-12  Owen Taylor  <otaylor@gtk.org>
 
 	* gscreen.c (panel_tree_drag_motion): Doubled timeout

@@ -201,32 +201,31 @@ perform_action (GList *names, GdkDragAction action, char *destdir)
 				/* FIXME: this error message sucks */
 				if (file_error (_("Could not stat %s\n%s"), dest_name) != FILE_RETRY)
 					result = 0;
-				else {
-					long count = 0;
-					double bytes = 0;
+			} else {
+				long count = 0;
+				double bytes = 0;
 					
-					if (S_ISDIR (s.st_mode)) {
-						if (action == GDK_ACTION_COPY)
-							copy_dir_dir (
-								name, dest_name,
-								TRUE, FALSE,
-								FALSE, FALSE,
-								&count, &bytes);
-						else
-							move_dir_dir (
-								name, dest_name,
-								&count, &bytes);
-					} else {
-						if (action == GDK_ACTION_COPY)
-							copy_file_file (
-								name, dest_name,
-								TRUE,
-								&count, &bytes);
-						else
-							move_file_file (
-								name, dest_name,
-								&count, &bytes);
-					}
+				if (S_ISDIR (s.st_mode)) {
+					if (action == GDK_ACTION_COPY)
+						copy_dir_dir (
+							name, dest_name,
+							TRUE, FALSE,
+							FALSE, FALSE,
+							&count, &bytes);
+					else
+						move_dir_dir (
+							name, dest_name,
+							&count, &bytes);
+				} else {
+					if (action == GDK_ACTION_COPY)
+						copy_file_file (
+							name, dest_name,
+							TRUE,
+							&count, &bytes);
+					else
+						move_file_file (
+							name, dest_name,
+							&count, &bytes);
 				}
 			}
 		} while (result != 0);
