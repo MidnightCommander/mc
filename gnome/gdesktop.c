@@ -363,6 +363,33 @@ text_event (GnomeCanvasItem *item, GdkEvent *event, gpointer data)
 	return desktop_icon_info_event (data, event, TRUE);
 }
 
+/* Callback used when an icon's text changes.  We must validate the rename and return the
+ * appropriate value.  The desktop icon info structure is passed in the user data.
+ */
+static int
+text_changed (GnomeIconTextItem *iti, gpointer data)
+{
+	struct desktop_icon_info *dii;
+	char *source;
+	char *dest;
+	int retval;
+
+	dii = data;
+
+	source = g_concat_dir_and_file (desktop_directory, dii->filename);
+	dest = g_concat_dir_and_file (desktop_directory, gnome_icon_text_item_get_text (iti));
+
+	if (mc_rename (source, dest) == 0)
+		retval = TRUE;
+	else
+		retval = FALSE; /* FIXME: maybe pop up a warning/query dialog? */
+
+	g_free (source);
+	g_free (dest);
+
+	return retval;
+}
+
 /* Callback used when the user begins editing the icon text item in a desktop icon.  It installs the
  * mouse and keyboard grabs that are required while an icon is being edited.
  */
@@ -450,6 +477,9 @@ desktop_icon_info_new (char *filename, int auto_pos, int xpos, int ypos)
 
 	/* Connect to the text item's signals */
 
+	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "text_changed",
+			    (GtkSignalFunc) text_changed,
+			    dii);
 	gtk_signal_connect (GTK_OBJECT (DESKTOP_ICON (dii->dicon)->text), "editing_started",
 			    (GtkSignalFunc) editing_started,
 			    dii);
@@ -547,6 +577,7 @@ load_initial_desktop_icons (void)
 
 		have_pos = meta_get_icon_pos (full_name, &x, &y);
 		desktop_icon_info_new (dirent->d_name, !have_pos, x, y);
+		printf (have_pos ? "%s: %d %d\n" : "%s: no pos\n", full_name, x, y);
 
 		g_free (full_name);
 	}
@@ -576,6 +607,26 @@ desktop_init (void)
 	load_initial_desktop_icons ();
 }
 
+/* Saves the icon position metadata for all the icons in the desktop */
+static void
+save_icons_pos (void)
+{
+	int i;
+	GList *l;
+	struct desktop_icon_info *dii;
+	char *filename;
+
+	for (i = 0; i < (layout_cols * layout_rows); i++)
+		for (l = layout_slots[i].icons; l; l = l->next) {
+			dii = l->data;
+
+			filename = g_concat_dir_and_file (desktop_directory, dii->filename);
+			printf ("%s: %d %d\n", filename, dii->x, dii->y);
+			meta_set_icon_pos (filename, dii->x, dii->y);
+			g_free (filename);
+		}
+}
+
 /**
  * desktop_destroy
  *
@@ -587,6 +638,8 @@ desktop_destroy (void)
 	int i;
 	GList *l;
 	struct desktop_icon_info *dii;
+
+	save_icons_pos ();
 
 	/* Destroy the desktop icons */
 
