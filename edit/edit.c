@@ -409,9 +409,8 @@ edit_load_file (WEdit *edit)
      * VFS may report file size incorrectly, and slow load is not a big
      * deal considering overhead in VFS.
      */
-    if (!vfs_current_is_local ()) {
+    if (!vfs_file_is_local (edit->filename))
 	fast_load = 0;
-    }
 
     /*
      * FIXME: line end translation should disable fast loading as well

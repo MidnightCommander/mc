@@ -109,6 +109,10 @@ edit_lock_file (char *fname)
     if (!fname || !*fname)
 	return 0;
 
+    /* Locking on VFS is not supported */
+    if (!vfs_file_is_local (fname))
+	return 0;
+
     /* Check if already locked */
     lockfname = g_strconcat (".#", fname, NULL);
     if (lstat (lockfname, &statbuf) == 0) {
