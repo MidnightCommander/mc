@@ -1341,7 +1341,7 @@ msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" Це не xterm ╕ не консоль Linux/SCO; \n"
+" Це не xterm ╕ не консоль Linux; \n"
 "    Панел╕ не можна перемикнути. "
 
 #: src/cmd.c:1010

@@ -1327,7 +1327,7 @@ msgid ""
 " Not an xterm or Linux console; \n"
 " the panels cannot be toggled. "
 msgstr ""
-" Гэта ня xterm і не кансоль Linux/SCO; \n"
+" Гэта ня xterm і не кансоль Linux; \n"
 "    Панэлі ня могуць быць адключаны. "
 
 #: src/cmd.c:1010
