@@ -46,7 +46,8 @@ int tree_panel_visible = -1;
 #include "dir-close.xpm"
 #include "link.xpm"
 #include "dev.xpm"
-#include "gl
+#include <glib.h>
+
 /* Timeout for auto-scroll on drag */
 #define SCROLL_TIMEOUT 100
 
