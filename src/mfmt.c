@@ -55,9 +55,9 @@ omain (void)
 int
 main (void)
 {
-    int state = newline;
-    int space_seen;
     int c;
+    int state = newline;
+    int space_seen = 0;
     
     while ((c = getchar ()) != EOF){
 	switch (state){

@@ -1,5 +1,7 @@
 2001-06-05  Pavel Roskin  <proski@gnu.org>
 
+	* mfmt.c (omain): Warning fix.
+
 	* key.c [HAVE_TEXTMODE_X11_SUPPORT]: Rename `display' to
 	`x11_display' and `w' to `x11_window'. Make them static.
 	(init_textmode_x11_support): Include into init_key().
