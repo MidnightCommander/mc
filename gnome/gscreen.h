@@ -10,6 +10,7 @@ void x_sort_label_start (WPanel *panel);
 void x_reset_sort_labels (WPanel *panel);
 
 WPanel *create_container (Dlg_head *h, char *str);
+void panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height);
 
 typedef struct {
 	int splitted;

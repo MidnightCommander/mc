@@ -2874,7 +2874,9 @@ int main (int argc, char *argv [])
 
     load_setup ();
 
-#ifndef HAVE_GNOME
+#ifdef HAVE_GNOME
+    init_colors ();
+#else
     init_curses ();
 #endif
     

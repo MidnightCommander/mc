@@ -315,6 +315,14 @@ string_file_ctime (file_entry *fe, int len)
     return file_date (fe->buf.st_ctime);
 }
 
+#ifdef HAVE_GNOME
+/* In GNOME, the CList truncates the names */
+char *
+string_file_name (file_entry *fe, int len)
+{
+	return fe->fname;
+}
+#else
 char *
 string_file_name (file_entry *fe, int len)
 {
@@ -323,6 +331,7 @@ string_file_name (file_entry *fe, int len)
     else
 	return fe->fname;
 }
+#endif
 
 char *
 string_space (file_entry *fe, int len)
@@ -2030,7 +2039,9 @@ static key_map panel_keymap [] = {
     { XCTRL('t'), mark_file },
     { ALT('o'),   chdir_other_panel },
     { ALT('l'),   chdir_to_readlink },
+#ifndef HAVE_X
     { KEY_DC,     delete_cmd},
+#endif
     { 0, 0 }
 };
     

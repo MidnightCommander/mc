@@ -62,4 +62,5 @@ void quick_cmd_no_menu (void);
 void info_cmd_no_menu (void);
 void quick_view_cmd (void);
 void toggle_listing_cmd (void);
+void configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status);
 #endif /* __CMD_H */

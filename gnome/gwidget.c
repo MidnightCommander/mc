@@ -76,6 +76,16 @@ x_button_set (WButton *b, char *text)
 }
 
 /* Radio buttons */
+void
+radio_toggle (GtkObject *object, WRadio *r)
+{
+	int idx = (int) gtk_object_get_data (object, "index");
+
+	g_return_if_fail (idx != 0);
+	idx--;
+	r->sel = idx;
+}
+
 int
 x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 {
@@ -91,6 +101,8 @@ x_create_radio (Dlg_head *h, widget_data parent, WRadio *r)
 		} else {
 			w = gtk_radio_button_new_with_label (group, r->texts [i]);
 		}
+		gtk_signal_connect (GTK_OBJECT (w), "toggled", GTK_SIGNAL_FUNC (radio_toggle), r);
+		gtk_object_set_data (GTK_OBJECT (w), "index", (void *) (i+1));
 		gtk_box_pack_start_defaults (GTK_BOX (vbox), w);
 		gtk_widget_show (w);
 	}
@@ -123,6 +135,7 @@ x_create_input (Dlg_head *h, widget_data parent, WInput *in)
 	gtk_widget_show (entry);
 	in->widget.wdata = (widget_data) entry;
 	gtk_entry_set_text (GTK_ENTRY (entry), in->buffer);
+	gtk_entry_set_position (GTK_ENTRY (entry), in->point);
 	return 1;
 }
 
@@ -130,6 +143,10 @@ void
 x_update_input (WInput *in)
 {
 	GtkEntry *entry = GTK_ENTRY (in->widget.wdata);
+
+	/* If the widget has not been initialized yet (done by WIDGET_INIT) */
+	if (!entry)
+		return;
 	
 	gtk_entry_set_text (entry, in->buffer);
 	gtk_entry_set_position (entry, in->point);

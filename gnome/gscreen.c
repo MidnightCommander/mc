@@ -193,7 +193,7 @@ x_adjust_top_file (WPanel *panel)
 #define COLUMN_INSET 3
 #define CELL_SPACING 1
 
-static void
+void
 panel_file_list_configure_contents (GtkWidget *file_list, WPanel *panel, int main_width, int height)
 {
 	format_e *format = panel->format;
@@ -748,6 +748,21 @@ panel_create_file_list (WPanel *panel)
 			    GTK_SIGNAL_FUNC (panel_file_list_select_row), panel);
 
 	return file_list;
+}
+
+void
+panel_switch_new_display_mode (WPanel *panel)
+{
+	GtkWidget *old_list = panel->list;
+	
+	panel->list = panel_create_file_list (panel);
+	gtk_widget_destroy (old_list);
+	gtk_table_attach (GTK_TABLE (panel->table), panel->list, 0, 1, 1, 2,
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK, 
+			  GTK_EXPAND | GTK_FILL | GTK_SHRINK,
+			  0, 0);
+	gtk_widget_show (panel->list);
+	panel_update_contents (panel);
 }
 
 static GtkWidget *

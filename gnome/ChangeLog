@@ -1,3 +1,13 @@
+Fri Mar  6 14:48:34 1998  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* gwidget.c (x_create_radio): Connect to the "toggled" signal to
+	keep track of the radio button.
+
+	* gwidget.c (x_update_input): This can be invoked before the
+	widget X resources have been allocated.  Take care of this.
+
+	(x_create_input): update the cursor position as well.
+	
 1998-03-06  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* gmain.c (get_color): Make it use GdkColorContext correctly.

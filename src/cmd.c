@@ -1379,6 +1379,47 @@ save_setup_cmd (void)
     message (0, " Setup ", " Setup saved to ~/" PROFILE_NAME);
 }
 
+void
+configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user, char *status)
+{
+    int err;
+    
+    p->user_mini_status = use_msformat; 
+    p->list_type = view_type;
+    
+    if (view_type == list_user || use_msformat){
+    
+	free (p->user_format);
+	p->user_format = user;
+    
+	free (p->user_status_format [view_type]);
+	p->user_status_format [view_type] = status;
+    
+	err = set_panel_formats (p);
+	
+	if (err){
+	    if (err & 0x01){
+	    	free (p->user_format);
+		p->user_format  = strdup (DEFAULT_USER_FORMAT);
+	    }
+		
+	    if (err & 0x02){
+		free (p->user_status_format [view_type]);
+		p->user_status_format [view_type]  = strdup (DEFAULT_USER_FORMAT);
+	    }
+	}
+    }
+    else {
+        free (user);
+        free (status);
+    }
+
+    set_panel_formats (p);
+    paint_panel (p);
+    
+    do_refresh ();
+}
+
 #ifndef HAVE_GNOME
 void
 info_cmd_no_menu (void)
@@ -1422,40 +1463,7 @@ listing_cmd (void)
 
     p = MENU_PANEL_IDX == 0 ? left_panel : right_panel;
 
-    p->user_mini_status = use_msformat; 
-    p->list_type = view_type;
-    
-    if (view_type == list_user || use_msformat){
-    
-	free (p->user_format);
-	p->user_format = user;
-    
-	free (p->user_status_format [view_type]);
-	p->user_status_format [view_type] = status;
-    
-	err = set_panel_formats (p);
-	
-	if (err){
-	    if (err & 0x01){
-	    	free (p->user_format);
-		p->user_format  = strdup (DEFAULT_USER_FORMAT);
-	    }
-		
-	    if (err & 0x02){
-		free (p->user_status_format [view_type]);
-		p->user_status_format [view_type]  = strdup (DEFAULT_USER_FORMAT);
-	    }
-	}
-    }
-    else {
-        free (user);
-        free (status);
-    }
-
-    set_panel_formats (p);
-    paint_panel (p);
-    
-    do_refresh ();
+    configure_panel_listing (p, view_type, use_msformat, user, status);
 }
 
 void

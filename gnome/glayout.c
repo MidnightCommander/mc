@@ -157,26 +157,23 @@ get_panel_widget (int index)
 }
 
 void
-gnome_listing_cmd (void)
+gnome_listing_cmd (GtkWidget *widget, WPanel *panel)
 {
+	GtkAllocation *alloc = &GTK_WIDGET (panel->list)->allocation;
 	int   view_type, use_msformat;
 	char  *user, *status;
-	WPanel *p;
-	int   index = 0;
 	
-	fprintf (stderr, "FIXME: index is hardcoded to 0 now\n");
-
-	p = (WPanel *)get_panel_widget (index);
-	
-	view_type = display_box (p, &user, &status, &use_msformat, index);
+	view_type = display_box (panel, &user, &status, &use_msformat, index);
 	
 	if (view_type == -1)
 		return;
 
+	configure_panel_listing (panel, view_type, use_msformat, user, status);
+	panel_switch_new_display_mode (panel);
 }
 
 void configure_box (void);
-	
+
 GnomeUIInfo gnome_panel_filemenu [] = {
 	{ GNOME_APP_UI_ITEM, "Network link...", NULL, netlink_cmd },
 	{ GNOME_APP_UI_ITEM, "FTP link...",     NULL, ftplink_cmd },
@@ -228,14 +225,13 @@ create_container (Dlg_head *h, char *name)
 	container->splitted = 0;
 	app = gnome_app_new ("gmc", name);
 	gtk_widget_set_usize (GTK_WIDGET (app), 400, 200);
+	panel = panel_new (name);
 
 	vbox = gtk_vbox_new (0, 0);
 	gtk_widget_show (vbox);
 	gnome_app_set_contents (GNOME_APP (app), vbox);
-	gnome_app_create_menus (GNOME_APP (app), gnome_panel_menu);
+	gnome_app_create_menus_with_data (GNOME_APP (app), gnome_panel_menu, panel);
 	gtk_widget_show (app);
-
-	panel = panel_new (name);
 
 	gtk_signal_connect (GTK_OBJECT (app),
 			    "enter_notify_event",
