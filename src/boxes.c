@@ -72,9 +72,7 @@ static char *displays [LIST_TYPES] = {
     N_("&Brief file list"),
     N_("&Long file list"),
     N_("&User defined:"),
-#ifdef PORT_HAS_ICON_VIEW
-    N_("&Icon view")
-#endif
+    N_("&Icon view"),
 };
 
 static int user_hotkey = 'u';
@@ -211,7 +209,11 @@ static void display_init (int radio_sel, char *init_text,
     add_widgetl (dd, user, XV_WLAY_RIGHTDOWN);
     input_set_point (user, 0);
 
+#ifdef PORT_HAS_ICON_VIEW
     my_radio = radio_new (3, 5, LIST_TYPES, displays, 1, "radio");
+#else
+    my_radio = radio_new (3, 5, LIST_TYPES-1, displays, 1, "radio");
+#endif
     my_radio->sel = my_radio->pos = current_mode;
     add_widgetl (dd, my_radio, XV_WLAY_BELOWCLOSE);
 }

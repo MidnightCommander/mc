@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Date: 1998-05-09 18:40:09-0500\n"
+"Date: 1998-05-11 03:43:33-0500\n"
 "From: Miguel de Icaza,computo,622-4680 <miguel@metropolis.nuclecu.unam.mx>\n"
 "Content-Type: text/plain; charset=\n"
 "Xgettext-Options: --default-domain=mc --directory=.. --add-comments --keyword=_ --keyword=N_ --files-from=./POTFILES.in\n"
@@ -308,11 +308,11 @@ msgstr ""
 msgid "Cancel quit"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2323 src/file.c:2649 src/file.c:2839 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2654 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&Yes"
 msgstr ""
 
-#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2323 src/file.c:2648 src/file.c:2839 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
+#: edit/editcmd.c:1969 gnome/gcmd.c:94 gnome/gdesktop.c:806 gnome/gdesktop.c:1118 src/cmd.c:248 src/file.c:2328 src/file.c:2653 src/file.c:2844 src/hotlist.c:1027 src/main.c:840 src/screen.c:1989 src/subshell.c:697 src/subshell.c:723 src/tree.c:1195 src/view.c:410
 msgid "&No"
 msgstr ""
 
@@ -810,7 +810,7 @@ msgid ""
 "\n"
 msgstr ""
 
-#: src/achown.c:72 src/boxes.c:144 src/boxes.c:279 src/boxes.c:376 src/boxes.c:463 src/boxes.c:642 src/boxes.c:763 src/boxes.c:816 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1956 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
+#: src/achown.c:72 src/boxes.c:145 src/boxes.c:280 src/boxes.c:377 src/boxes.c:464 src/boxes.c:643 src/boxes.c:764 src/boxes.c:817 src/chmod.c:115 src/chown.c:81 src/cmd.c:840 src/file.c:1960 src/find.c:158 src/hotlist.c:140 src/hotlist.c:810 src/hotlist.c:903 src/layout.c:365 src/learn.c:58 src/option.c:143 src/panelize.c:89 src/view.c:410 src/wtools.c:114 src/wtools.c:408 src/wtools.c:581 src/wtools.c:661
 msgid "&Cancel"
 msgstr ""
 
@@ -886,7 +886,7 @@ msgstr ""
 msgid "Background process:"
 msgstr ""
 
-#: src/background.c:284 src/file.c:2561
+#: src/background.c:284 src/file.c:2566
 msgid " Background process error "
 msgstr ""
 
@@ -908,169 +908,169 @@ msgid ""
 " than we can handle. \n"
 msgstr ""
 
-#: src/boxes.c:65
+#: src/boxes.c:66
 msgid " Listing mode "
 msgstr ""
 
-#: src/boxes.c:70
+#: src/boxes.c:71
 msgid "&Full file list"
 msgstr ""
 
-#: src/boxes.c:71
+#: src/boxes.c:72
 msgid "&Brief file list"
 msgstr ""
 
-#: src/boxes.c:72
+#: src/boxes.c:73
 msgid "&Long file list"
 msgstr ""
 
-#: src/boxes.c:73
+#: src/boxes.c:74
 msgid "&User defined:"
 msgstr ""
 
-#: src/boxes.c:75
+#: src/boxes.c:76
 msgid "&Icon view"
 msgstr ""
 
-#: src/boxes.c:142
+#: src/boxes.c:143
 msgid "user &Mini status"
 msgstr ""
 
 #. WITH_BACKGROUND
-#: gnome/gtools.c:130 src/boxes.c:143 src/boxes.c:278 src/boxes.c:378 src/boxes.c:465 src/boxes.c:644 src/boxes.c:764 src/boxes.c:818 src/boxes.c:929 src/file.c:1973 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
+#: gnome/gtools.c:130 src/boxes.c:144 src/boxes.c:279 src/boxes.c:379 src/boxes.c:466 src/boxes.c:645 src/boxes.c:765 src/boxes.c:819 src/boxes.c:930 src/file.c:1977 src/find.c:158 src/layout.c:364 src/option.c:142 src/wtools.c:302 src/wtools.c:583
 msgid "&Ok"
 msgstr ""
 
-#: src/boxes.c:191
+#: src/boxes.c:192
 msgid "Listing mode"
 msgstr ""
 
-#: src/boxes.c:280
+#: src/boxes.c:281
 msgid "&Reverse"
 msgstr ""
 
-#: src/boxes.c:281
+#: src/boxes.c:282
 msgid "case sensi&tive"
 msgstr ""
 
-#: src/boxes.c:282
+#: src/boxes.c:283
 msgid "Sort order"
 msgstr ""
 
-#: src/boxes.c:381
+#: src/boxes.c:382
 msgid " confirm &Exit "
 msgstr ""
 
-#: src/boxes.c:383
+#: src/boxes.c:384
 msgid " confirm e&Xecute "
 msgstr ""
 
-#: src/boxes.c:385
+#: src/boxes.c:386
 msgid " confirm o&Verwrite "
 msgstr ""
 
-#: src/boxes.c:387
+#: src/boxes.c:388
 msgid " confirm &Delete "
 msgstr ""
 
-#: src/boxes.c:393
+#: src/boxes.c:394
 msgid " Confirmation "
 msgstr ""
 
-#: src/boxes.c:460
+#: src/boxes.c:461
 msgid "Full 8 bits output"
 msgstr ""
 
-#: src/boxes.c:460
+#: src/boxes.c:461
 msgid "ISO 8859-1"
 msgstr ""
 
-#: src/boxes.c:460
+#: src/boxes.c:461
 msgid "7 bits"
 msgstr ""
 
-#: src/boxes.c:467
+#: src/boxes.c:468
 msgid "F&ull 8 bits input"
 msgstr ""
 
-#: src/boxes.c:475
+#: src/boxes.c:476
 msgid " Display bits "
 msgstr ""
 
-#: src/boxes.c:639
+#: src/boxes.c:640
 msgid "Always to memory"
 msgstr ""
 
-#: src/boxes.c:639
+#: src/boxes.c:640
 msgid "If size less than:"
 msgstr ""
 
-#: src/boxes.c:649
+#: src/boxes.c:650
 msgid "&Always use ftp proxy"
 msgstr ""
 
-#: src/boxes.c:651
+#: src/boxes.c:652
 msgid "sec"
 msgstr ""
 
-#: src/boxes.c:655
+#: src/boxes.c:656
 msgid "ftpfs directory cache timeout:"
 msgstr ""
 
-#: src/boxes.c:659
+#: src/boxes.c:660
 msgid "ftp anonymous password:"
 msgstr ""
 
-#: src/boxes.c:666
+#: src/boxes.c:667
 msgid "Gzipped tar archive extract:"
 msgstr ""
 
-#: src/boxes.c:672
+#: src/boxes.c:673
 msgid "Timeout for freeing VFSs:"
 msgstr ""
 
-#: src/boxes.c:678
+#: src/boxes.c:679
 msgid " Virtual File System Setting "
 msgstr ""
 
-#: src/boxes.c:776
+#: src/boxes.c:777
 msgid "Quick cd"
 msgstr ""
 
 #. want cd like completion
-#: src/boxes.c:781
+#: src/boxes.c:782
 msgid "cd"
 msgstr ""
 
-#: src/boxes.c:836
+#: src/boxes.c:837
 msgid "Symbolic link filename:"
 msgstr ""
 
-#: src/boxes.c:838
+#: src/boxes.c:839
 msgid "Existing filename (filename symlink will point to):"
 msgstr ""
 
-#: src/boxes.c:867
+#: src/boxes.c:868
 msgid "Running "
 msgstr ""
 
-#: src/boxes.c:868 src/find.c:664
+#: src/boxes.c:869 src/find.c:664
 msgid "Stopped"
 msgstr ""
 
-#: src/boxes.c:926
+#: src/boxes.c:927
 msgid "&Stop"
 msgstr ""
 
-#: src/boxes.c:927
+#: src/boxes.c:928
 msgid "&Resume"
 msgstr ""
 
-#: src/boxes.c:928
+#: src/boxes.c:929
 msgid "&Kill"
 msgstr ""
 
-#: src/boxes.c:967
+#: src/boxes.c:968
 msgid "Background Jobs"
 msgstr ""
 
@@ -1603,11 +1603,11 @@ msgstr ""
 msgid " Delete "
 msgstr ""
 
-#: src/file.c:391 src/file.c:2562 src/file.c:2638 src/file.c:2839
+#: src/file.c:391 src/file.c:2567 src/file.c:2643 src/file.c:2844
 msgid "&Abort"
 msgstr ""
 
-#: src/file.c:394 src/file.c:2562
+#: src/file.c:394 src/file.c:2567
 msgid "&Skip"
 msgstr ""
 
@@ -1778,104 +1778,104 @@ msgid ""
 " `%s' "
 msgstr ""
 
-#: src/file.c:1403
+#: src/file.c:1406
 msgid ""
 " Cannot create target directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1422
+#: src/file.c:1425
 msgid ""
 " Cannot chown target directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1530
+#: src/file.c:1533
 msgid ""
 " Cannot stat file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1552
+#: src/file.c:1555
 msgid " `%s' and `%s' are the same file "
 msgstr ""
 
-#: src/file.c:1559
+#: src/file.c:1562
 msgid " Cannot overwrite directory `%s' "
 msgstr ""
 
-#: src/file.c:1599
+#: src/file.c:1602
 msgid ""
 " Cannot move file \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1617
+#: src/file.c:1620
 msgid ""
 " Cannot remove file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1658
+#: src/file.c:1661
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr ""
 
-#: src/file.c:1660
+#: src/file.c:1663
 msgid " Cannot overwrite file \"%s\" %s "
 msgstr ""
 
-#: src/file.c:1683
+#: src/file.c:1686
 msgid ""
 " Cannot move directory \"%s\" to \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1739
+#: src/file.c:1742
 msgid ""
 " Cannot delete file \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1793 src/file.c:1826 src/file.c:1852
+#: src/file.c:1796 src/file.c:1829 src/file.c:1855
 msgid ""
 " Cannot remove directory \"%s\" \n"
 " %s "
 msgstr ""
 
-#: src/file.c:1888
+#: src/file.c:1891
 msgid " Internal error: get_file \n"
 msgstr ""
 
 #. follow symlinks and preserve Attributes must be the first
-#: src/file.c:1930
+#: src/file.c:1934
 msgid "preserve &Attributes"
 msgstr ""
 
-#: src/file.c:1932
+#: src/file.c:1936
 msgid "follow &Links"
 msgstr ""
 
-#: src/file.c:1941
+#: src/file.c:1945
 msgid "to:"
 msgstr ""
 
-#: src/file.c:1942
+#: src/file.c:1946
 msgid "&Using shell patterns"
 msgstr ""
 
-#: src/file.c:1965
+#: src/file.c:1969
 msgid "&Background"
 msgstr ""
 
-#: src/file.c:1974
+#: src/file.c:1978
 msgid "&Stable Symlinks"
 msgstr ""
 
-#: src/file.c:1976
+#: src/file.c:1980
 msgid "&Dive into subdir if exists"
 msgstr ""
 
-#: src/file.c:2123
+#: src/file.c:2127
 msgid ""
 "Invalid source pattern `%s' \n"
 " %s "
@@ -1890,15 +1890,15 @@ msgstr ""
 #. * (I don't use spaces around the words, because someday they could be
 #. * dropped, when widgets get smarter)
 #.
-#: src/file.c:2163
+#: src/file.c:2168
 msgid "1Copy"
 msgstr ""
 
-#: src/file.c:2163
+#: src/file.c:2168
 msgid "1Move"
 msgstr ""
 
-#: src/file.c:2163
+#: src/file.c:2168
 msgid "1Delete"
 msgstr ""
 
@@ -1910,147 +1910,147 @@ msgstr ""
 #. * %s - source name (truncated)
 #. * %d - number of marked files
 #.
-#: src/file.c:2173
+#: src/file.c:2178
 msgid "%o %f \"%s\"%m"
 msgstr ""
 
-#: src/file.c:2174
+#: src/file.c:2179
 msgid "%o %d %f%m"
 msgstr ""
 
-#: src/file.c:2178
+#: src/file.c:2183
 msgid "file"
 msgstr ""
 
-#: src/file.c:2178
+#: src/file.c:2183
 msgid "files"
 msgstr ""
 
-#: src/file.c:2178
+#: src/file.c:2183
 msgid "directory"
 msgstr ""
 
-#: src/file.c:2178
+#: src/file.c:2183
 msgid "directories"
 msgstr ""
 
-#: src/file.c:2179
+#: src/file.c:2184
 msgid "files/directories"
 msgstr ""
 
-#: src/file.c:2179
+#: src/file.c:2184
 msgid " with source mask:"
 msgstr ""
 
-#: src/file.c:2308
+#: src/file.c:2313
 msgid " Can't operate on \"..\"! "
 msgstr ""
 
-#: src/file.c:2358
+#: src/file.c:2363
 msgid " Sorry, I could not put the job in background "
 msgstr ""
 
-#: src/file.c:2421 src/file.c:2491
+#: src/file.c:2426 src/file.c:2496
 msgid " Internal failure "
 msgstr ""
 
-#: src/file.c:2421 src/file.c:2492
+#: src/file.c:2426 src/file.c:2497
 msgid " Unknown file operation "
 msgstr ""
 
-#: src/file.c:2437
+#: src/file.c:2442
 msgid ""
 " Destination \"%s\" must be a directory \n"
 " %s "
 msgstr ""
 
-#: src/file.c:2562
+#: src/file.c:2567
 msgid "&Retry"
 msgstr ""
 
-#: src/file.c:2600 src/file.c:2636
+#: src/file.c:2605 src/file.c:2641
 msgid "Target file \"%s\" already exists!"
 msgstr ""
 
-#: src/file.c:2639
+#: src/file.c:2644
 msgid "if &Size differs"
 msgstr ""
 
-#: src/file.c:2641 src/file.c:2839
+#: src/file.c:2646 src/file.c:2844
 msgid "non&E"
 msgstr ""
 
-#: src/file.c:2642
+#: src/file.c:2647
 msgid "&Update"
 msgstr ""
 
-#: src/file.c:2643
+#: src/file.c:2648
 msgid "al&L"
 msgstr ""
 
-#: src/file.c:2644
+#: src/file.c:2649
 msgid "Overwrite all targets?"
 msgstr ""
 
-#: src/file.c:2646
+#: src/file.c:2651
 msgid "&Reget"
 msgstr ""
 
-#: src/file.c:2647
+#: src/file.c:2652
 msgid "ap&Pend"
 msgstr ""
 
-#: src/file.c:2650
+#: src/file.c:2655
 msgid "Overwrite this target?"
 msgstr ""
 
-#: src/file.c:2652
+#: src/file.c:2657
 msgid "Target date: %s, size %d"
 msgstr ""
 
-#: src/file.c:2654
+#: src/file.c:2659
 msgid "Source date: %s, size %d"
 msgstr ""
 
-#: src/file.c:2742
+#: src/file.c:2747
 msgid " File exists "
 msgstr ""
 
-#: src/file.c:2742
+#: src/file.c:2747
 msgid " Background process: File exists "
 msgstr ""
 
-#: src/file.c:2832
+#: src/file.c:2837
 msgid ""
 "\n"
 "   Directory not empty.   \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2833
+#: src/file.c:2838
 msgid ""
 "\n"
 "   Background process: Directory not empty \n"
 "   Delete it recursively? "
 msgstr ""
 
-#: src/file.c:2839
+#: src/file.c:2844
 msgid "a&ll"
 msgstr ""
 
-#: src/file.c:2847
+#: src/file.c:2852
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr ""
 
-#: src/file.c:2849
+#: src/file.c:2854
 msgid "all the directories "
 msgstr ""
 
-#: src/file.c:2850
+#: src/file.c:2855
 msgid " Recursive Delete "
 msgstr ""
 
-#: src/file.c:2851
+#: src/file.c:2856
 msgid " Background process: Recursive Delete "
 msgstr ""
 
