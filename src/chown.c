@@ -218,7 +218,7 @@ static inline void
 do_chown (uid_t u, gid_t g)
 {
     if (mc_chown (cpanel->dir.list [current_file].fname, u, g) == -1)
-	message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
+	message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 	     cpanel->dir.list [current_file].fname, unix_error_string (errno));
 
     do_file_mark (cpanel, current_file, 0);
@@ -326,7 +326,7 @@ chown_cmd (void)
 	    if (ch_dlg->ret_value==B_ENTER) {
 		need_update = 1;
 		if (mc_chown (fname, new_user, new_group) == -1)
-		    message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
+		    message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 	 		 fname, unix_error_string (errno));
 	    } else
 		apply_chowns (new_user, new_group);

@@ -1245,7 +1245,7 @@ get_port_number (void)
     if (port == -1) {
 	if (geteuid () == 0) {
 	    fprintf (stderr,
-		     "Could not bind the server on a reserved port\n");
+		     "Cannot bind the server on a reserved port\n");
 	    DO_QUIT_NONVOID (-1);
 	}
 	port = 0;
@@ -1269,7 +1269,7 @@ register_port (int portnum, int abort_if_fail)
     if (pmap_set (RPC_PROGNUM, RPC_PROGVER, IPPROTO_TCP, portnum))
 	signal (SIGINT, signal_int_handler);
     else {
-	fprintf (stderr, "Could not register service with portmapper\n");
+	fprintf (stderr, "Cannot register service with portmapper\n");
 	if (abort_if_fail)
 	    exit (1);
     }

@@ -1780,7 +1780,7 @@ error:
       static int errorcount = 0;
 
       if (++errorcount < 5) {
-	message_1s (1, _("Could not parse:"), (p_copy && *p_copy) ? p_copy : line);
+	message_1s (1, _("Cannot parse:"), (p_copy && *p_copy) ? p_copy : line);
       } else if (errorcount == 5)
 	message_1s (1, _("Error"), _("More parsing errors will be ignored."));
     }

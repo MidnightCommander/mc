@@ -606,12 +606,12 @@ static void apply_advanced_chowns (struct stat *sf)
     fname = cpanel->dir.list[current_file].fname;
     need_update = end_chown = 1;
     if (mc_chmod (fname, get_mode ()) == -1)
-	message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
+	message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     /* call mc_chown only, if mc_chmod didn't fail */
     else if (mc_chown (fname, (ch_flags[9] == '+') ? sf->st_uid : -1,
 		       (ch_flags[10] == '+') ? sf->st_gid : -1) == -1)
-	message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
+	message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		 fname, unix_error_string (errno));
     do_file_mark (cpanel, current_file, 0);
 
@@ -622,11 +622,11 @@ static void apply_advanced_chowns (struct stat *sf)
 	    break;
 	ch_cmode = sf->st_mode;
 	if (mc_chmod (fname, get_mode ()) == -1)
-	    message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
+	    message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 	/* call mc_chown only, if mc_chmod didn't fail */
 	else if (mc_chown (fname, (ch_flags[9] == '+') ? a_uid : -1, (ch_flags[10] == '+') ? a_gid : -1) == -1)
-	    message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
+	    message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 		     fname, unix_error_string (errno));
 
 	do_file_mark (cpanel, current_file, 0);
@@ -668,11 +668,11 @@ chown_advanced_cmd (void)
 	case B_ENTER:
 	    need_update = 1;
 	    if (mc_chmod (fname, get_mode ()) == -1)
-		message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
+		message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    /* call mc_chown only, if mc_chmod didn't fail */
 	    else if (mc_chown (fname, (ch_flags[9] == '+') ? sf_stat->st_uid : -1, (ch_flags[10] == '+') ? sf_stat->st_gid : -1) == -1)
-		message (1, MSG_ERROR, _(" Couldn't chown \"%s\" \n %s "),
+		message (1, MSG_ERROR, _(" Cannot chown \"%s\" \n %s "),
 			 fname, unix_error_string (errno));
 	    break;
 	case B_SETALL:

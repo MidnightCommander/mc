@@ -825,7 +825,7 @@ msgstr " Impostazione proprietario avanzata "
 #: src/chmod.c:319
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Impossibile eseguire chown su \"%s\" \n"
@@ -835,7 +835,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Impossibile eseguire chown su \"%s\" \n"
@@ -1210,7 +1210,7 @@ msgid "Files tagged, want to cd?"
 msgstr " File selezionati, cambio directory?"
 
 #: src/cmd.c:217 src/cmd.c:676 src/cmd.c:738 src/main.c:852
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Non posso cambiare directory"
 
 #: src/cmd.c:250
@@ -1388,7 +1388,7 @@ msgstr "`%s' non è un coll. simbolico"
 
 #: src/cmd.c:1250
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Impossibile entrare in %s "
 
 #: src/cmd.c:1259
@@ -1609,7 +1609,7 @@ msgid " Invalid target mask "
 msgstr " La maschera di destinazione è errata"
 
 #: src/file.c:329
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Non posso creare il link fisico "
 
 #: src/file.c:372
@@ -3390,7 +3390,7 @@ msgstr ""
 
 #: src/subshell.c:416
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Non posso aprire la pipe %s\n"
 
 #: src/subshell.c:701
@@ -3399,7 +3399,7 @@ msgstr " La shell è ancora attiva. Esco comunque?"
 
 #: src/subshell.c:840
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Attenzione: non posso entrare su %s.\n"
 
 #: src/textconf.c:50
@@ -3606,7 +3606,7 @@ msgid "Empty output from child filter"
 msgstr "Risultato vuoto da filtro figlio"
 
 #: src/view.c:554
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Non posso aprire il file "
 
 #: src/view.c:649
@@ -3944,7 +3944,7 @@ msgstr "NumLock sul tastierino"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Non posso aprire l'archivio cpio\n"
@@ -4011,7 +4011,7 @@ msgstr "Ottenuto file "
 #: vfs/extfs.c:290
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Non posso aprire l'archivio %s\n"
@@ -4132,7 +4132,7 @@ msgstr "ftpfs: login errato per utente %s "
 
 #: vfs/ftpfs.c:518
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Impossibile impostare instradamento sorgente (%s)"
 
 #: vfs/ftpfs.c:640
@@ -4325,7 +4325,7 @@ msgstr " %s rinomina file\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "Non posso aprire l'archivio tar\n"
@@ -4397,7 +4397,7 @@ msgstr " errore Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Non posso aprire il file %s "
 
 #: vfs/undelfs.c:295
@@ -4407,7 +4407,7 @@ msgstr "undelfs: lettura bitmap inode..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Impossibile caricare bitmap inode da: \n"
@@ -4420,7 +4420,7 @@ msgstr "undelfs: lettura bitmap blocchi..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " Impossibile caricare bitmap blocchi da: \n"
@@ -4443,7 +4443,7 @@ msgid "Changes to file lost"
 msgstr "Cambiamenti al file persi"
 
 #: vfs/vfs.c:1783
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Non riesco ad analizzare:"
 
 #: vfs/vfs.c:1785

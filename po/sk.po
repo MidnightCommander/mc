@@ -827,7 +827,7 @@ msgstr " Rozšírená zmena vlastníka "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Nemohol som zmeniť práva \"%s\" \n"
@@ -837,7 +837,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Nemohol som zmeniť vlastníka \"%s\" \n"
@@ -1208,7 +1208,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Označené súbory chcú cd?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Nemohol som zmeniť adresár"
 
 #: src/cmd.c:263
@@ -1384,7 +1384,7 @@ msgstr "`%s' nie je symbolický odkaz"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr "Nemohol som chdir na %s  "
 
 #: src/cmd.c:1282
@@ -1606,7 +1606,7 @@ msgid " Invalid target mask "
 msgstr " Neplatná maska cieľa "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Nemohol som vyrobiť hard odkaz "
 
 #: src/file.c:367
@@ -3074,7 +3074,7 @@ msgstr "Vnucujem xterm funkcie"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "Nemohol som otvoriť tty riadok. Máte spustený mc bez označenia -P .\n"
@@ -3398,7 +3398,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Nemohol som otvoriť pipe %s\n"
 
 #: src/subshell.c:702
@@ -3407,7 +3407,7 @@ msgstr " Shell je ešte stále aktívny. Skončiť napriek tomu? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Varovanie: Nemohol som zmeniť na %s.\n"
 
 #: src/textconf.c:50
@@ -3620,7 +3620,7 @@ msgid " Cannot spawn child program "
 msgstr " Nemôžem spustiť program potomka procesu "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Nemohol som otvoriť súbor "
 
 #: src/view.c:559
@@ -3958,7 +3958,7 @@ msgstr "NumLock na kláves."
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Nemohol som otvoriť cpio archív\n"
@@ -4025,7 +4025,7 @@ msgstr "Získavam súbor"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Nemohol som otvoriť %s archív\n"
@@ -4146,7 +4146,7 @@ msgstr "ftpfs: Nesprávne prihlásenie sa používateľa %s "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Nemohol som nastaviť trasu  zdroja (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4339,7 +4339,7 @@ msgstr " %s premenúvam súbor\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "Nemohol som otvoriť tar archív\n"
@@ -4411,7 +4411,7 @@ msgstr " Ext2lib: chyba"
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Nemohol som otvoriť súbor %s"
 
 #: vfs/undelfs.c:295
@@ -4421,7 +4421,7 @@ msgstr "undelfs: čítam bitovú mapu inode..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nemohol som načítať bitmapu inode z: \n"
@@ -4434,7 +4434,7 @@ msgstr "undelfs: čítam bitovú mapu blokov..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nemôžem načítať bitovú mapu blokov z: \n"
@@ -4457,7 +4457,7 @@ msgid "Changes to file lost"
 msgstr "Zmeny súboru stratené"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Nemohol som spracovať:"
 
 #: vfs/vfs.c:1848

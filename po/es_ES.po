@@ -826,7 +826,7 @@ msgstr " Cambiar dueño y permisos "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " No puedo cambiar los permisos de \"%s\" \n"
@@ -836,7 +836,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " No puedo cambiar el dueño de \"%s\" \n"
@@ -1211,7 +1211,7 @@ msgid "Files tagged, want to cd?"
 msgstr " Hay ficheros marcados. ¿Quiere cambiar de directorio?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:847
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "No puedo cambiar de directorio"
 
 #: src/cmd.c:263
@@ -1387,7 +1387,7 @@ msgstr "'%s' no es un enlace simbólico"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " No puedo cambiar al directorio %s "
 
 #: src/cmd.c:1282
@@ -1607,7 +1607,7 @@ msgid " Invalid target mask "
 msgstr "La máscara destino es incorrecta"
 
 #: src/file.c:329
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " No puedo crear el enlace "
 
 #: src/file.c:372
@@ -3391,7 +3391,7 @@ msgstr ""
 
 #: src/subshell.c:418
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "No pude abrir la tubería con nombre %s\n"
 
 #: src/subshell.c:703
@@ -3400,7 +3400,7 @@ msgstr " El shell todavía está activo. ¿Terminar de todas maneras?"
 
 #: src/subshell.c:842
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Cuidado: no pude cambiar a %s.\n"
 
 #: src/textconf.c:50
@@ -3615,7 +3615,7 @@ msgid "Empty output from child filter"
 msgstr "Salida del filtro vacía"
 
 #: src/view.c:459
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " No puedo abrir el fichero "
 
 #: src/view.c:554
@@ -3955,7 +3955,7 @@ msgstr "Bloquea números, pad"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "No se pudo abrir el fichero cpio\n"
@@ -4022,7 +4022,7 @@ msgstr "Trayendo fichero"
 #: vfs/extfs.c:288
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "No se pudo abrir el fichero %s\n"
@@ -4143,7 +4143,7 @@ msgstr "ftpfs: denegada autorización al usuario %s"
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " No se pudo prefijar la ruta (%s)"
 
 #: vfs/ftpfs.c:642
@@ -4336,7 +4336,7 @@ msgstr " %s renombrando ficheros\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "No pude abrir fichero de tipo tar\n"
@@ -4408,7 +4408,7 @@ msgstr " error Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " No puedo abrir el fichero %s "
 
 #: vfs/undelfs.c:295
@@ -4418,7 +4418,7 @@ msgstr "undelfs: leyendo mapa de inodos..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " No puedo cargar el inodo de: \n"
@@ -4431,7 +4431,7 @@ msgstr "undelfs: leyendo mapa de bloques..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " No puedo cargar bloques de: \n"
@@ -4454,7 +4454,7 @@ msgid "Changes to file lost"
 msgstr "Los cambios del fichero se han perdido"
 
 #: vfs/vfs.c:1788
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Imposible analizar:"
 
 #: vfs/vfs.c:1790
@@ -4476,7 +4476,7 @@ msgid "%s: %s: %s %lu bytes transferred"
 msgstr "%s: %s: %s %lu bytes transferidos"
 
 #~ msgid ""
-#~ "Couldn't open tty line. You have to run mc without the -P flag.\n"
+#~ "Cannot open tty line. You have to run mc without the -P flag.\n"
 #~ "On some systems you may want to run # `which mc`\n"
 #~ msgstr ""
 #~ "No se pudo abrir la línea del terminal. Debe ejecutar \"mc\" sin\n"

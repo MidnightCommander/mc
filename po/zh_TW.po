@@ -824,7 +824,7 @@ msgstr " 進階的 chown 指令 "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " 無法 chmod \"%s\" \n"
@@ -834,7 +834,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " 無法 chown \"%s\" \n"
@@ -1205,7 +1205,7 @@ msgid "Files tagged, want to cd?"
 msgstr "有檔案貼上標籤了，還是要改變目錄？"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "無法改變目錄"
 
 #: src/cmd.c:263
@@ -1383,7 +1383,7 @@ msgstr "`%s' 不是符號連結"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " 無法將目錄改變至 %s "
 
 #: src/cmd.c:1282
@@ -1605,7 +1605,7 @@ msgid " Invalid target mask "
 msgstr " 無效的目標遮罩 "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " 無法製造此一硬連結 "
 
 #: src/file.c:367
@@ -3075,7 +3075,7 @@ msgstr "強迫使用 xterm 特性"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "無法開啟終端機連線，您不能用 -P 選項來執行 mc。 \n"
@@ -3400,7 +3400,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "無法開啟具名管線 %s\n"
 
 #: src/subshell.c:702
@@ -3409,7 +3409,7 @@ msgstr " 系統殼仍未結束，無論如何都要結束？ "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "警告： 無法改變到 %s.\n"
 
 #: src/textconf.c:50
@@ -3624,7 +3624,7 @@ msgid " Cannot spawn child program "
 msgstr " 無法產生子程式 "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " 無法開啟檔案 "
 
 #: src/view.c:559
@@ -3962,7 +3962,7 @@ msgstr "數字區的 NumLock 鍵"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "無法開啟 cpio 檔案集\n"
@@ -4029,7 +4029,7 @@ msgstr "取得檔案中"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "無法開啟 %s 檔案集\n"
@@ -4150,7 +4150,7 @@ msgstr "ftpfs: 使用者 %s 登入錯誤"
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " 無法設定來源路由 (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4343,7 +4343,7 @@ msgstr " %s 剩下的檔案\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "無法開啟 tar 檔案集\n"
@@ -4415,7 +4415,7 @@ msgstr " ext2lib 錯誤 "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " 無法開啟檔案 %s "
 
 #: vfs/undelfs.c:295
@@ -4425,7 +4425,7 @@ msgstr "undelfs: 讀取 inode 點陣圖..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " 無法從 %s 中 \n"
@@ -4438,7 +4438,7 @@ msgstr "undelfs: 讀取區塊點陣圖中..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " 無法從 %s 中 \n"
@@ -4461,7 +4461,7 @@ msgid "Changes to file lost"
 msgstr "改變到檔案遺失"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "無法分析:"
 
 #: vfs/vfs.c:1848

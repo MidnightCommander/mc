@@ -829,7 +829,7 @@ msgstr " Zaawansowane chown "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Nie mo¿na ustawiæ uprawnieñ do pliku \"%s\" \n"
@@ -839,7 +839,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Nie mo¿na ustawiæ w³a¶ciciela pliku \"%s\" \n"
@@ -1210,7 +1210,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Zaznaczono pliki, zmieniæ katalog?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Nie mo¿na zmieniæ katalogu"
 
 #: src/cmd.c:263
@@ -1388,7 +1388,7 @@ msgstr "\"%s\" nie jest dowi±zaniem symbolicznym"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Nie mo¿na zmieniæ katalogu na %s "
 
 #: src/cmd.c:1282
@@ -1610,7 +1610,7 @@ msgid " Invalid target mask "
 msgstr " Niepoprawna maska docelowa "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Nie mo¿na utworzyæ dowi±zania "
 
 #: src/file.c:367
@@ -3077,7 +3077,7 @@ msgstr "Bezwzglêdnie aktywuje obs³ugê xterma"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "Nie mo¿na otworzyæ pliku terminala. Nale¿y uruchomiæ mc bez opcji -P.\n"
@@ -3401,7 +3401,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Nie mo¿na otworzyæ nazwanego ³±cza %s\n"
 
 #: src/subshell.c:702
@@ -3410,7 +3410,7 @@ msgstr " Pow³oka jest wci±¿ aktywna. Zakoñczyæ pomimo tego? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Ostrze¿enie: Nie mo¿na zmieniæ katalogu na %s.\n"
 
 #: src/textconf.c:50
@@ -3623,7 +3623,7 @@ msgid " Cannot spawn child program "
 msgstr " Nie mo¿na uruchomiæ programu potomnego "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Nie mo¿na otworzyæ pliku "
 
 #: src/view.c:559
@@ -3961,7 +3961,7 @@ msgstr "NumLock (numer.)"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Nie mo¿na otworzyæ archiwum cpio\n"
@@ -4028,7 +4028,7 @@ msgstr "Pobieranie pliku"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Nie mo¿na otworzyæ archiwum %s\n"
@@ -4150,7 +4150,7 @@ msgstr "ftpfs: Niew³a¶ciwe has³o dla u¿ytkownika %s "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Nie mo¿na ustawiæ trasowania przez ¼ród³o (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4343,7 +4343,7 @@ msgstr " %s przy zmianie nazw plików\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "Nie mo¿na otworzyæ archiwum tar\n"
@@ -4415,7 +4415,7 @@ msgstr " b³±d Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Nie mo¿na otworzyæ pliku %s "
 
 #: vfs/undelfs.c:295
@@ -4425,7 +4425,7 @@ msgstr "undelfs: czytanie mapy i-wêz³ów..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nie mo¿na odczytaæ mapy i-wêz³ów z: \n"
@@ -4438,7 +4438,7 @@ msgstr "undelfs: czytanie mapy bloków..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nie mo¿na odczytaæ mapy bloków z: \n"
@@ -4461,7 +4461,7 @@ msgid "Changes to file lost"
 msgstr "Utracono zmiany w pliku"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Nie mo¿na przeanalizowaæ:"
 
 #: vfs/vfs.c:1848

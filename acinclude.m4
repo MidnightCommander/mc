@@ -818,7 +818,7 @@ dnl
 AC_DEFUN([MC_WITH_NCURSES], [
     dnl has_colors() is specific to ncurses, it's not in the old curses
     AC_CHECK_LIB([ncurses], [has_colors], [MCLIBS="$MCLIBS -lncurses"],
-		 [AC_MSG_ERROR([Could not find ncurses library])])
+		 [AC_MSG_ERROR([Cannot find ncurses library])])
 
     dnl Check the header
     ncurses_h_found=
@@ -826,7 +826,7 @@ AC_DEFUN([MC_WITH_NCURSES], [
 		     [ncurses_h_found=yes; break])
 
     if test -z "$ncurses_h_found"; then
-	AC_MSG_ERROR([Could not find ncurses header file])
+	AC_MSG_ERROR([Cannot find ncurses header file])
     fi
 
     screen_type=ncurses

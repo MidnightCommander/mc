@@ -326,7 +326,7 @@ check_hardlinks (char *src_name, char *dst_name, struct stat *pstat)
 		    }
 		}
 	    }
-	    message_1s (1, MSG_ERROR, _(" Could not make the hardlink "));
+	    message_1s (1, MSG_ERROR, _(" Cannot make the hardlink "));
 	    return 0;
 	}
     lp = (struct link *) g_malloc (sizeof (struct link) + strlen (src_name)

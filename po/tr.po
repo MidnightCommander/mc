@@ -827,7 +827,7 @@ msgstr " Dosya özellikleri "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " chmod \"%s\" yapýlamadý \n"
@@ -837,7 +837,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " chown \"%s\" yapýlamadý \n"
@@ -1208,7 +1208,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Dosyalar iþaretli, dizin deðiþsin mi?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Dizin deðiþtirilemedi"
 
 #: src/cmd.c:263
@@ -1386,7 +1386,7 @@ msgstr "`%s' bir sembolik bað deðil"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " %s dizinine geçilemedi"
 
 #: src/cmd.c:1282
@@ -1607,7 +1607,7 @@ msgid " Invalid target mask "
 msgstr " Geçersiz hedef maský "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Sabit bað oluþturulamadý "
 
 #: src/file.c:367
@@ -3077,7 +3077,7 @@ msgstr "xterm özelliklerini etkinleþtirir"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "tty satýrý açýlamadý. mc'yi -P seçeneði olmaksýzýn çalýþtýrýnýz.\n"
@@ -3402,7 +3402,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr " %s isimli veri yolu açýlamadý\n"
 
 #: src/subshell.c:702
@@ -3411,7 +3411,7 @@ msgstr " Kabuk hala etkin. Yine de çýkýlsýn mý? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Uyarý: %s'e geçilemedi.\n"
 
 #: src/textconf.c:50
@@ -3624,7 +3624,7 @@ msgid " Cannot spawn child program "
 msgstr " Alt uygulama çalýþtýrýlamadý "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Dosya açýlamadý "
 
 #: src/view.c:559
@@ -3962,7 +3962,7 @@ msgstr "Numlock tuþu"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "cpio arþivi açýlamadý\n"
@@ -4029,7 +4029,7 @@ msgstr "Dosya alýnmasý"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "%s\n"
@@ -4151,7 +4151,7 @@ msgstr "ftpfs: kullanýcý %s için baðlantý reddedildi"
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Kaynak güzergahý (%s) belirlenemedi"
 
 #: vfs/ftpfs.c:641
@@ -4344,7 +4344,7 @@ msgstr " %s dosyalarý yeniden adlandýrýlýyor\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "%s\n"
@@ -4416,7 +4416,7 @@ msgstr " Ext2lib hatasý "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " %s dosyasý açýlamadý "
 
 #: vfs/undelfs.c:295
@@ -4426,7 +4426,7 @@ msgstr "undelfs: i-düðüm biteþlemi okunuyor..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " %s'den\n"
@@ -4439,7 +4439,7 @@ msgstr "undelfs: blok biteþlemi okunuyor..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " %s'den \n"
@@ -4462,7 +4462,7 @@ msgid "Changes to file lost"
 msgstr "Deðiþiklikler kayýp"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Ayrýþtýrýlamadý:"
 
 #: vfs/vfs.c:1848

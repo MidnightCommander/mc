@@ -176,7 +176,7 @@ U       Uudecode marked news articles (needs work)
 	done
 	) |sed '/^$/d' |sed -n '/^begin 6/,/^end$/p' | uudecode
 	if [ "$?" != "0" ]; then
-	  echo "Could not decode %t"
+	  echo "Cannot decode %t"
 	fi
 	echo "Please test the output file before deleting anything"
 

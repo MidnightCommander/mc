@@ -214,7 +214,7 @@ do_view_cmd (int normal)
 	    }
 	}
 	if (!do_cd (selection (cpanel)->fname, cd_exact))
-	    message (1, MSG_ERROR, _("Could not change directory"));
+	    message (1, MSG_ERROR, _("Cannot change directory"));
 
 	return;
 
@@ -673,7 +673,7 @@ void quick_chdir_cmd (void)
 	tree_chdir (the_tree, target);
     else
         if (!do_cd (target, cd_exact))
-	    message (1, MSG_ERROR, _("Could not change directory") );
+	    message (1, MSG_ERROR, _("Cannot change directory") );
     g_free (target);
 }
 
@@ -735,7 +735,7 @@ void reselect_vfs (void)
 	return;
 
     if (!do_cd (target, cd_exact))
-        message (1, MSG_ERROR, _("Could not change directory") );
+        message (1, MSG_ERROR, _("Cannot change directory") );
     g_free (target);
 }
 #endif /* USE_VFS */
@@ -1247,7 +1247,7 @@ nice_cd (char *text, char *xtext, char *help, char *prefix, int to_home)
     if (do_panel_cd (MENU_PANEL, cd_path, 0))
 	directory_history_add (MENU_PANEL, (MENU_PANEL)->cwd);
     else
-	message (1, MSG_ERROR, _(" Could not chdir to %s "), cd_path);
+	message (1, MSG_ERROR, _(" Cannot chdir to %s "), cd_path);
     g_free (cd_path);
     g_free (machine);
 }

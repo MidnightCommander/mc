@@ -829,7 +829,7 @@ msgstr " Ordre avançada de canvi de propietari "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " No s'han pogut canviar els permisos de \"%s\" \n"
@@ -839,7 +839,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " No s'ha pogut canviar la propietat de \"%s\" \n"
@@ -1210,7 +1210,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Hi ha fitxers seleccionats. Voleu canviar de directori?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "No he pogut canviar de directori"
 
 #: src/cmd.c:263
@@ -1388,7 +1388,7 @@ msgstr "`%s' no és un enllaç simbòlic"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " No s'ha pogut canviar a %s "
 
 #: src/cmd.c:1282
@@ -1611,7 +1611,7 @@ msgid " Invalid target mask "
 msgstr " La màscara objectiu no és vàlida "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " No s'ha pogut fer l'enllaç fort "
 
 #: src/file.c:367
@@ -3087,7 +3087,7 @@ msgstr "Força l'ús de característiques d'xterm"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "No puc obrir una línia al terminal. Heu d'executar mc sense l'opció -P.\n"
@@ -3416,7 +3416,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "No puc obrir el conducte designat amb %s\n"
 
 #: src/subshell.c:702
@@ -3425,7 +3425,7 @@ msgstr " L'intèrpret encara és actiu. Voleu sortir de tota manera? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Avís: No s'ha pogut canviar a %s.\n"
 
 #: src/textconf.c:50
@@ -3639,7 +3639,7 @@ msgid " Cannot spawn child program "
 msgstr " No puc llançar el procés fill "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " No puc obrir el fitxer "
 
 #: src/view.c:559
@@ -3977,7 +3977,7 @@ msgstr "BloqNum teclat numèric"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "No s'ha pogut obrir l'arxiu cpio\n"
@@ -4044,7 +4044,7 @@ msgstr "S'està recuperant el fitxer"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "No s'ha pogut obrir l'arxiu %s\n"
@@ -4165,7 +4165,7 @@ msgstr "ftpfs: La identificació per a l'usuari %s no és correcta"
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " No s'ha pogut establir l'encaminament (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4359,7 +4359,7 @@ msgstr " %s està reanomenant els fitxers\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "No s'ha pogut obrir l'arxiu tar\n"
@@ -4432,7 +4432,7 @@ msgstr " Error de l'Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " No s'ha pogut obrir el fitxer %s"
 
 #: vfs/undelfs.c:295
@@ -4442,7 +4442,7 @@ msgstr "undelfs: s'està llegint el mapa de bits de l'inode..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " No s'ha pogut carregar el mapa de bits de l'inode de: \n"
@@ -4455,7 +4455,7 @@ msgstr "undelfs: s'està llegint el mapa de bits del bloc..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " No he pogut carregar el mapa de bits del bloc de: \n"
@@ -4478,7 +4478,7 @@ msgid "Changes to file lost"
 msgstr "Canvia al fitxer perdut"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "No s'ha pogut analitzar:"
 
 #: vfs/vfs.c:1848

@@ -824,7 +824,7 @@ msgstr " Chown 高级命令 "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " 无法 chmod “%s” \n"
@@ -834,7 +834,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " 无法 chown “%s” \n"
@@ -1203,7 +1203,7 @@ msgid "Files tagged, want to cd?"
 msgstr "文件已经标记，要更改目录吗？"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "无法改变目录"
 
 #: src/cmd.c:263
@@ -1381,7 +1381,7 @@ msgstr "“%s”不是符号链接"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " 无法进入目录 %s "
 
 #: src/cmd.c:1282
@@ -1594,7 +1594,7 @@ msgid " Invalid target mask "
 msgstr " 无效的目标掩码 "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " 无法创建硬链接 "
 
 #: src/file.c:367
@@ -3053,7 +3053,7 @@ msgstr "强制使用 xterm 特性"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "无法打开 tty 线。您不能用 -P 标记。\n"
@@ -3376,7 +3376,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "无法打开有名管道 %s\n"
 
 #: src/subshell.c:702
@@ -3385,7 +3385,7 @@ msgstr " shell 仍然活动。仍然退出？"
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "警告：无法换到 %s。\n"
 
 #: src/textconf.c:50
@@ -3598,7 +3598,7 @@ msgid " Cannot spawn child program "
 msgstr " 无法生成子程序 "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " 无法打开文件 "
 
 #: src/view.c:559
@@ -3936,7 +3936,7 @@ msgstr "小键盘上的 NumLock"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "无法打开 cpio 归档\n"
@@ -4004,7 +4004,7 @@ msgstr "正在获取文件"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "无法打开 %s 归档\n"
@@ -4125,7 +4125,7 @@ msgstr "ftpfs：用户 %s 登录不正确"
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " 无法设置源路由 (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4318,7 +4318,7 @@ msgstr " %s 正在重命名文件\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "无法打开 tar 归档文件\n"
@@ -4389,7 +4389,7 @@ msgstr " Ext2lib 错误 "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " 无法打开文件 %s "
 
 #: vfs/undelfs.c:295
@@ -4399,7 +4399,7 @@ msgstr "undelfs：正在读取 inode bitmap..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " 无法载入 inode bitmap 自：\n"
@@ -4412,7 +4412,7 @@ msgstr "undelfs：正在读取 block bitmap..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " 无法载入 block bitmap 自：\n"
@@ -4435,7 +4435,7 @@ msgid "Changes to file lost"
 msgstr "对文件的修改被丢失"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "无法解析："
 
 #: vfs/vfs.c:1848

@@ -826,7 +826,7 @@ msgstr " Comando avançado chown "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Incapaz de executar chmod \"%s\" \n"
@@ -836,7 +836,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Incapaz de executar chown \"%s\" \n"
@@ -1207,7 +1207,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Ficheiros marcados, quer executar cd?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Incapaz de mudar de directório"
 
 #: src/cmd.c:263
@@ -1385,7 +1385,7 @@ msgstr "`%s' não é um atalho"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Incapaz de chdir para %s "
 
 #: src/cmd.c:1282
@@ -1607,7 +1607,7 @@ msgid " Invalid target mask "
 msgstr " Máscara de alvo inválida "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Incapaz de criar o atalho 'hard' "
 
 #: src/file.c:367
@@ -3077,7 +3077,7 @@ msgstr "Força funcionalidades xterm"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "Incapaz de abrir linha tty. Tem de executar o mc sem o parâmetro -P.\n"
@@ -3404,7 +3404,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Incapaz de abrir canal nomeado %s\n"
 
 #: src/subshell.c:702
@@ -3413,7 +3413,7 @@ msgstr " O terminal ainda está activo. Sair à mesma? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Aviso: Incapaz de mudar para %s.\n"
 
 #: src/textconf.c:50
@@ -3627,7 +3627,7 @@ msgid " Cannot spawn child program "
 msgstr " Incapaz de lançar aplicação filha "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Incapaz de abrir ficheiro "
 
 #: src/view.c:559
@@ -3965,7 +3965,7 @@ msgstr "NumLock no teclado numérico"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Incapaz de abrir arquivo cpio\n"
@@ -4032,7 +4032,7 @@ msgstr "A obter ficheiro"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Incapaz de abrir arquivo %s\n"
@@ -4153,7 +4153,7 @@ msgstr "ftpfs: Utilizador/senha incorrecto para utilizador %s "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Incapaz de definit routeamento de origem (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4346,7 +4346,7 @@ msgstr " %s a renomear ficheiro\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "Incapaz de abrir arquivo tar\n"
@@ -4418,7 +4418,7 @@ msgstr " Erro Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Incapaz de abrir ficheiro %s "
 
 #: vfs/undelfs.c:295
@@ -4428,7 +4428,7 @@ msgstr "undelfs: a ler mapa de bits do inode..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Incapaz de ler mapa de bits de inode para: \n"
@@ -4441,7 +4441,7 @@ msgstr "undelfs: a ler bloco de mapa de bits..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " Incapaz de ler bloco de mapa de bits para: \n"
@@ -4464,7 +4464,7 @@ msgid "Changes to file lost"
 msgstr "Modificações ao ficheiro perdidas"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Incapaz de parsear:"
 
 #: vfs/vfs.c:1848

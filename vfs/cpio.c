@@ -138,7 +138,7 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
     vfs_s_inode *root;
 
     if((fd = mc_open(name, O_RDONLY)) == -1) {
-	message_2s(1, MSG_ERROR, _("Couldn't open cpio archive\n%s"), name);
+	message_2s(1, MSG_ERROR, _("Cannot open cpio archive\n%s"), name);
 	return -1;
     }
 
@@ -154,7 +154,7 @@ static int cpio_open_cpio_file(vfs *me, vfs_s_super *super, char *name)
 	mc_close(fd);
 	s = g_strconcat(name, decompress_extension(type), NULL);
 	if((fd = mc_open(s, O_RDONLY)) == -1) {
-	    message_2s(1, MSG_ERROR, _("Couldn't open cpio archive\n%s"), s);
+	    message_2s(1, MSG_ERROR, _("Cannot open cpio archive\n%s"), s);
 	    g_free(s);
 	    return -1;
 	}

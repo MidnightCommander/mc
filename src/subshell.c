@@ -413,7 +413,7 @@ void init_subshell (void)
 	    if ((subshell_pipe[READ] = open (tcsh_fifo, O_RDWR)) == -1 ||
 		(subshell_pipe[WRITE] = open (tcsh_fifo, O_RDWR)) == -1)
 	    {
-		fprintf (stderr, _("Couldn't open named pipe %s\n"), tcsh_fifo);
+		fprintf (stderr, _("Cannot open named pipe %s\n"), tcsh_fifo);
 		perror (__FILE__": open");
 		use_subshell = FALSE;
 		return;
@@ -837,7 +837,7 @@ void do_subshell_chdir (const char *directory, int do_update, int reset_prompt)
     feed_subshell (QUIETLY, FALSE);
     
     if (subshell_alive && strcmp (subshell_cwd, cpanel->cwd) && strcmp (cpanel->cwd, "."))
-	fprintf (stderr, _("Warning: Couldn't change to %s.\n"), cpanel->cwd);
+	fprintf (stderr, _("Warning: Cannot change to %s.\n"), cpanel->cwd);
 
     if (reset_prompt)
 	prompt_pos = 0;

@@ -287,7 +287,7 @@ read_archive (int fstype, char *name, struct archive **pparc)
     char *current_file_name, *current_link_name;
 
     if ((extfsd = open_archive (fstype, name, &current_archive)) == NULL) {
-	message_3s (1, MSG_ERROR, _("Couldn't open %s archive\n%s"),
+	message_3s (1, MSG_ERROR, _("Cannot open %s archive\n%s"),
 		    extfs_prefixes[fstype], name);
 	return -1;
     }

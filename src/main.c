@@ -849,7 +849,7 @@ directory_history_list (WPanel *panel)
 		    directory_history_add (panel, panel->cwd);
 		else
 		    message (1, MSG_ERROR,
-			     _("Could not change directory"));
+			     _("Cannot change directory"));
 		g_free (s);
 	    }
 	}

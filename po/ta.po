@@ -825,7 +825,7 @@ msgstr ""
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 
@@ -1202,7 +1202,7 @@ msgid "Files tagged, want to cd?"
 msgstr ""
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr ""
 
 #: src/cmd.c:263
@@ -1376,7 +1376,7 @@ msgstr ""
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr ""
 
 #: src/cmd.c:1282
@@ -1576,7 +1576,7 @@ msgid " Invalid target mask "
 msgstr ""
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr ""
 
 #: src/file.c:367
@@ -2932,7 +2932,7 @@ msgstr ""
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
@@ -3245,7 +3245,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr ""
 
 #: src/subshell.c:702
@@ -3254,7 +3254,7 @@ msgstr ""
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr ""
 
 #: src/textconf.c:50
@@ -3459,7 +3459,7 @@ msgid " Cannot spawn child program "
 msgstr ""
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr ""
 
 #: src/view.c:559
@@ -3790,7 +3790,7 @@ msgstr ""
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 
@@ -3845,7 +3845,7 @@ msgstr ""
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 
@@ -3964,7 +3964,7 @@ msgstr ""
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr ""
 
 #: vfs/ftpfs.c:641
@@ -4146,7 +4146,7 @@ msgstr ""
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 
@@ -4213,7 +4213,7 @@ msgstr ""
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr ""
 
 #: vfs/undelfs.c:295
@@ -4223,7 +4223,7 @@ msgstr ""
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 
@@ -4234,7 +4234,7 @@ msgstr ""
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 
@@ -4255,7 +4255,7 @@ msgid "Changes to file lost"
 msgstr ""
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr ""
 
 #: vfs/vfs.c:1848

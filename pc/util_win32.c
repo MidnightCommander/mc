@@ -63,7 +63,7 @@ int win32_GetVersionEx ()
 		EXE_win32GUI    - NT or Chicago GUI API
 		EXE_otherCUI	- DOS COM, MZ, ZM, Phar Lap
 		EXE_Unknown	- Unknown
-		EXE_Error	- Couldn't read file/EXE image
+		EXE_Error	- Cannot read file/EXE image
 
   TODO:   better management of OS/2 images
 	  EXE_CompressedArchive can be easily implemented
@@ -114,7 +114,7 @@ int win32_GetEXEType (const char* a_szFileName)
     hImage = CreateFile(a_szFileName, GENERIC_READ, FILE_SHARE_READ, NULL,
                         OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
     if (hImage == INVALID_HANDLE_VALUE)  {
-        win32Trace (("win32_GetEXEType: Could not open file %s. API Error %d.", a_szFileName, GetLastError()));
+        win32Trace (("win32_GetEXEType: Cannot open file %s. API Error %d.", a_szFileName, GetLastError()));
 	return EXE_Error;
     }
 

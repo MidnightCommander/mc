@@ -914,7 +914,7 @@ void set_display_type (int num, int type)
     x = y = cols = lines = 0;
     old_widget = 0;
     if (num >= MAX_VIEWS){
-	fprintf (stderr, "Could not allocate more that %d views\n", MAX_VIEWS);
+	fprintf (stderr, "Cannot allocate more that %d views\n", MAX_VIEWS);
 	abort ();
     }
 

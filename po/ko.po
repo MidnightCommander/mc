@@ -822,7 +822,7 @@ msgstr " 고급 chown 명령 "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " \"%s\"의 모드를 바꿀 수 없습니다 \n"
@@ -832,7 +832,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " \"%s\"의 소유자를 바꿀 수 없습니다 \n"
@@ -1203,7 +1203,7 @@ msgid "Files tagged, want to cd?"
 msgstr "선택된 파일이 있는 데, 그래도 디렉토리을 바꿀까요?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "디렉토리을 바꿀 수 없습니다"
 
 #: src/cmd.c:263
@@ -1379,7 +1379,7 @@ msgstr "`%s'는 심볼릭링크가 아닙니다"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " %s로 디렉토리을 바꿀 수 없음 "
 
 #: src/cmd.c:1282
@@ -1600,7 +1600,7 @@ msgid " Invalid target mask "
 msgstr " Invalid target mask "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " 하드링크를 만들 수 없습니다 "
 
 #: src/file.c:367
@@ -3067,7 +3067,7 @@ msgstr "xterm 기능을 무조건 사용"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "tty 선을 열수 없네요. 당신은 -P 선택항목없이 MC를 실행해야 합니다.\n"
@@ -3392,7 +3392,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "%s 파이프를 열 수 없어요\n"
 
 #: src/subshell.c:702
@@ -3401,7 +3401,7 @@ msgstr " 명령해석기가 아직 활성상태입니다. 그래도 종료하실래요? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "경고: %s로 바꿀 수 없습니다.\n"
 
 #: src/textconf.c:50
@@ -3612,7 +3612,7 @@ msgid " Cannot spawn child program "
 msgstr " 자식(child) 풀그림을 실행할 수 없습니다 "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " 파일 열기 실패 "
 
 #: src/view.c:559
@@ -3950,7 +3950,7 @@ msgstr "NumLock on keypad"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "cpio 아카이브 파일을 열 수 없습니다\n"
@@ -4013,7 +4013,7 @@ msgstr "파일 받음"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "%s 아카이브 파일을 열 수 없습니다\n"
@@ -4134,7 +4134,7 @@ msgstr "ftpfs: Login incorrect for user %s "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " 소스 라우팅 (%s)를 설정할 수 없습니다"
 
 #: vfs/ftpfs.c:641
@@ -4327,7 +4327,7 @@ msgstr ""
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "테잎 아카이브 파일을 열 수 없습니다\n"
@@ -4399,7 +4399,7 @@ msgstr " Ext2lib 에러 "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " %s 파일을 열 수 없습니다 "
 
 #: vfs/undelfs.c:295
@@ -4409,7 +4409,7 @@ msgstr "undelfs: inode 비트맵을 읽는 중..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " 다음에서 inode 비트맵을 읽을 수 없음: \n"
@@ -4422,7 +4422,7 @@ msgstr "undelfs: 블럭 비트맵 읽는 중..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " 다음에서 블럭 비트맵을 읽을 수 없습니다: \n"
@@ -4445,7 +4445,7 @@ msgid "Changes to file lost"
 msgstr "수정 내용 잃어버림"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "분석할 수 없음:"
 
 #: vfs/vfs.c:1848

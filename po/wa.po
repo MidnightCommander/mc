@@ -838,7 +838,7 @@ msgstr " Comande chown avanceye "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Dji n' sai fé on chmod «%s» \n"
@@ -848,7 +848,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Dji n' sai fé on chown «%s» \n"
@@ -1223,7 +1223,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Essegne metowe so les fitchîs, voloz-ve fé on cd?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Dji n' sai candjî di ridant"
 
 #: src/cmd.c:263
@@ -1403,7 +1403,7 @@ msgstr "«%s» n' est nén on loyén simbolike"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Dji n' a savu fé on chdir viè %s "
 
 #: src/cmd.c:1282
@@ -1619,7 +1619,7 @@ msgid " Invalid target mask "
 msgstr " Li masse såme n' est nén valåbe "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Dji n' a savu fé li deur loyén "
 
 #: src/file.c:367
@@ -3073,7 +3073,7 @@ msgstr ""
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 
@@ -3390,7 +3390,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Dji n' sai drovî li lomêye bûze %s\n"
 
 #: src/subshell.c:702
@@ -3399,7 +3399,7 @@ msgstr " Li shell est co en alaedje. Voloz-ve tot l' minme moussî foû? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Advertixhmint: dji n' sai candjî dins %s.\n"
 
 #: src/textconf.c:50
@@ -3617,7 +3617,7 @@ msgid " Cannot spawn child program "
 msgstr ""
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Dji n' sai drovî li fitchî "
 
 #: src/view.c:559
@@ -3956,7 +3956,7 @@ msgstr ""
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Dji n' sai drovî li fitchî cpio\n"
@@ -4013,7 +4013,7 @@ msgstr "Aberwetant l' fitchî"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 
@@ -4132,7 +4132,7 @@ msgstr "ftpfs: måva login po l' ûzeu %s "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr ""
 
 #: vfs/ftpfs.c:641
@@ -4314,7 +4314,7 @@ msgstr "  %s fitchîs ki restèt\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 
@@ -4381,7 +4381,7 @@ msgstr " Aroke di ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Dji n' sai drovî li fitchî %s"
 
 #: vfs/undelfs.c:295
@@ -4391,7 +4391,7 @@ msgstr ""
 #: vfs/undelfs.c:298
 #, fuzzy, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr " Dji n' a savu fé on chdir viè %s "
 
@@ -4402,7 +4402,7 @@ msgstr ""
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 
@@ -4424,7 +4424,7 @@ msgstr "Les candjmints do fitchî ont stî pierdous"
 
 #: vfs/vfs.c:1846
 #, fuzzy
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr ""
 "Dji n' sai enonder li foncsion stat %s\n"
 "%s"

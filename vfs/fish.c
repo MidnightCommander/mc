@@ -160,10 +160,10 @@ pipeopen(vfs_s_super *super, char *path, char *argv[])
     int res;
 
     if ((pipe(fileset1)<0) || (pipe(fileset2)<0)) 
-	vfs_die("Could not pipe(): %m.");
+	vfs_die("Cannot pipe(): %m.");
     
     if ((res = fork())) {
-        if (res<0) vfs_die("Could not fork(): %m.");
+        if (res<0) vfs_die("Cannot fork(): %m.");
 	/* We are the parent */
 	close(fileset1[0]);
 	SUP.sockw = fileset1[1];

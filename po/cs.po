@@ -830,7 +830,7 @@ msgstr " Zmìna práv a vlastníka "
 #: src/chmod.c:325
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Nelze zmìnit práva souboru \"%s\" \n"
@@ -840,7 +840,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Nelze zmìnit vlastníka souboru \"%s\" \n"
@@ -1209,7 +1209,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Soubory oznaèeny, chcete zmìnit adresáø?"
 
 #: src/cmd.c:234 src/cmd.c:735 src/cmd.c:754 src/main.c:842
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Není mo¾no zmìnit adresáø"
 
 #: src/cmd.c:263
@@ -1386,7 +1386,7 @@ msgstr "`%s' není symbolický odkaz"
 
 #: src/cmd.c:1273
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Pracovní adresáø nelze zmìnit na %s "
 
 #: src/cmd.c:1282
@@ -1608,7 +1608,7 @@ msgid " Invalid target mask "
 msgstr " Chybná maska cíle "
 
 #: src/file.c:325
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Nelze vytvoøit pøímý odkaz "
 
 #: src/file.c:367
@@ -3078,7 +3078,7 @@ msgstr "Vnutí pou¾ití mo¾ností programu xterm"
 
 #: src/main.c:2435
 msgid ""
-"Couldn't open tty line. You have to run mc without the -P flag.\n"
+"Cannot open tty line. You have to run mc without the -P flag.\n"
 "On some systems you may want to run # `which mc`\n"
 msgstr ""
 "Nelze pou¾ít(otevøít) ¾ádnou terminálovou linku. Zkuste pustit MC\n"
@@ -3404,7 +3404,7 @@ msgstr ""
 
 #: src/subshell.c:417
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Nelze otevøít pojmenovanout rouru %s\n"
 
 #: src/subshell.c:702
@@ -3413,7 +3413,7 @@ msgstr " Shell je státe aktivní, pøesto ukonèit? "
 
 #: src/subshell.c:830
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Varování: Adresáø nelze zmìnit na %s.\n"
 
 #: src/textconf.c:50
@@ -3627,7 +3627,7 @@ msgid " Cannot spawn child program "
 msgstr " Nelze vytvoøit proces potomka "
 
 #: src/view.c:467
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Nelze otevøít soubor "
 
 #: src/view.c:559
@@ -3965,7 +3965,7 @@ msgstr "NumLock na numerické klávesnici"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Nelze otevøít cpio archiv\n"
@@ -4032,7 +4032,7 @@ msgstr "Získává se soubor"
 #: vfs/extfs.c:295
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Nelze otevøít %s archiv\n"
@@ -4153,7 +4153,7 @@ msgstr "ftpfs: Pøihlá¹ení u¾ivatele %s selhalo "
 
 #: vfs/ftpfs.c:520
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr " Nelze nastavit zdrojové smìrování (%s)"
 
 #: vfs/ftpfs.c:641
@@ -4346,7 +4346,7 @@ msgstr " %s pøejmenovává soubory\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 " Nelze otevøít archív .tar\n"
@@ -4418,7 +4418,7 @@ msgstr " chyba ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Nelze otevøít soubor %s "
 
 #: vfs/undelfs.c:295
@@ -4428,7 +4428,7 @@ msgstr "undelfs: ète se bitová mapa i-uzlù..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nelze naèíst bitovou mapu i-uzlù z: \n"
@@ -4441,7 +4441,7 @@ msgstr "undelfs: ète se bitová mapa blokù..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 " Nelze naèíst bitovou mapu blokù z: \n"
@@ -4464,7 +4464,7 @@ msgid "Changes to file lost"
 msgstr "Zmìny souboru byly ztraceny"
 
 #: vfs/vfs.c:1846
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Nelze analyzovat:"
 
 #: vfs/vfs.c:1848

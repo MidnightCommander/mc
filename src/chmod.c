@@ -246,7 +246,7 @@ static void do_chmod (struct stat *sf)
     sf->st_mode &= and_mask;
     sf->st_mode |= or_mask;
     if (mc_chmod (cpanel->dir.list [c_file].fname, sf->st_mode) == -1)
-	message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
+	message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 	     cpanel->dir.list [c_file].fname, unix_error_string (errno));
 
     do_file_mark (cpanel, c_file, 0);
@@ -316,7 +316,7 @@ void chmod_cmd (void)
 	case B_ENTER:
 	    if (mode_change)
 		if (mc_chmod (fname, c_stat) == -1)
-		    message (1, MSG_ERROR, _(" Couldn't chmod \"%s\" \n %s "),
+		    message (1, MSG_ERROR, _(" Cannot chmod \"%s\" \n %s "),
 	 		 fname, unix_error_string (errno));
 	    need_update = 1;
 	    break;

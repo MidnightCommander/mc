@@ -520,7 +520,7 @@ setup_source_route (int socket, int dest)
 	ptr++;
     if (setsockopt (socket, IPPROTO_IP, IP_OPTIONS,
 		    buffer, ptr - buffer) < 0)
-	message_2s (1, MSG_ERROR, _(" Could not set source routing (%s)"), unix_error_string (errno));
+	message_2s (1, MSG_ERROR, _(" Cannot set source routing (%s)"), unix_error_string (errno));
 }
 #else
 #define setup_source_route(x,y)

@@ -77,7 +77,7 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
     
     result = mc_open (name, O_RDONLY);
     if (result == -1) {
-        message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), name);
+        message_2s (1, MSG_ERROR, _("Cannot open tar archive\n%s"), name);
 	ERRNOR (ENOENT, -1);
     }
     
@@ -94,7 +94,7 @@ static int tar_open_archive (vfs *me, char *name, vfs_s_super *archive)
 	s = g_strconcat ( archive->name, decompress_extension (type), NULL );
 	result = mc_open (s, O_RDONLY);
 	if (result == -1) 
-	    message_2s (1, MSG_ERROR, _("Couldn't open tar archive\n%s"), s);
+	    message_2s (1, MSG_ERROR, _("Cannot open tar archive\n%s"), s);
 	g_free(s);
 	if (result == -1)
 	    ERRNOR (ENOENT, -1);

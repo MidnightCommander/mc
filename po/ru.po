@@ -829,7 +829,7 @@ msgstr " Расширенная команда chown "
 #: src/chmod.c:319
 #, c-format
 msgid ""
-" Couldn't chmod \"%s\" \n"
+" Cannot chmod \"%s\" \n"
 " %s "
 msgstr ""
 " Невозможно изменить доступ \"%s\" \n"
@@ -839,7 +839,7 @@ msgstr ""
 #: src/chown.c:329
 #, c-format
 msgid ""
-" Couldn't chown \"%s\" \n"
+" Cannot chown \"%s\" \n"
 " %s "
 msgstr ""
 " Невозможно изменить владельца \"%s\" \n"
@@ -1214,7 +1214,7 @@ msgid "Files tagged, want to cd?"
 msgstr "Файлы помечены, сменить каталог?"
 
 #: src/cmd.c:217 src/cmd.c:676 src/cmd.c:738 src/main.c:850
-msgid "Could not change directory"
+msgid "Cannot change directory"
 msgstr "Невозможно сменить каталог"
 
 #: src/cmd.c:250
@@ -1390,7 +1390,7 @@ msgstr "`%s' не является символической ссылкой"
 
 #: src/cmd.c:1250
 #, c-format
-msgid " Could not chdir to %s "
+msgid " Cannot chdir to %s "
 msgstr " Невозможно перейти в %s "
 
 #: src/cmd.c:1259
@@ -1611,7 +1611,7 @@ msgid " Invalid target mask "
 msgstr " Неправильный шаблон цели "
 
 #: src/file.c:329
-msgid " Could not make the hardlink "
+msgid " Cannot make the hardlink "
 msgstr " Невозможно создать жесткую ссылку "
 
 #: src/file.c:372
@@ -3389,7 +3389,7 @@ msgstr ""
 
 #: src/subshell.c:416
 #, c-format
-msgid "Couldn't open named pipe %s\n"
+msgid "Cannot open named pipe %s\n"
 msgstr "Невозможно открыть именованный канал %s\n"
 
 #: src/subshell.c:701
@@ -3398,7 +3398,7 @@ msgstr " Оболочка все еще активна. Выйти все-таки? "
 
 #: src/subshell.c:840
 #, c-format
-msgid "Warning: Couldn't change to %s.\n"
+msgid "Warning: Cannot change to %s.\n"
 msgstr "Внимание: Невозможно перейти в %s. \n"
 
 #: src/textconf.c:50
@@ -3606,7 +3606,7 @@ msgid "Empty output from child filter"
 msgstr "Дочерний фильтр не вернул данных"
 
 #: src/view.c:554
-msgid " Could not open file "
+msgid " Cannot open file "
 msgstr " Невозможно открыть файл "
 
 #: src/view.c:649
@@ -3944,7 +3944,7 @@ msgstr "NumLock on keypad"
 #: vfs/cpio.c:141 vfs/cpio.c:157
 #, c-format
 msgid ""
-"Couldn't open cpio archive\n"
+"Cannot open cpio archive\n"
 "%s"
 msgstr ""
 "Невозможно открыть cpio-архив\n"
@@ -4011,7 +4011,7 @@ msgstr "Получение файла"
 #: vfs/extfs.c:288
 #, c-format
 msgid ""
-"Couldn't open %s archive\n"
+"Cannot open %s archive\n"
 "%s"
 msgstr ""
 "Невозможно открыть %s-архив\n"
@@ -4132,7 +4132,7 @@ msgstr "ftpfs: Ошибка регистрации пользователя %s "
 
 #: vfs/ftpfs.c:518
 #, c-format
-msgid " Could not set source routing (%s)"
+msgid " Cannot set source routing (%s)"
 msgstr "Невозможно установить распределение источника (%s)"
 
 #: vfs/ftpfs.c:640
@@ -4325,7 +4325,7 @@ msgstr " %s при переименовывании файлa\n"
 #: vfs/tar.c:80 vfs/tar.c:97
 #, c-format
 msgid ""
-"Couldn't open tar archive\n"
+"Cannot open tar archive\n"
 "%s"
 msgstr ""
 "Невозможно открыть tar-архив\n"
@@ -4397,7 +4397,7 @@ msgstr " Сбой Ext2lib "
 
 #: vfs/undelfs.c:292 vfs/undelfs.c:611
 #, c-format
-msgid " Could not open file %s "
+msgid " Cannot open file %s "
 msgstr " Невозможно открыть файл %s "
 
 #: vfs/undelfs.c:295
@@ -4407,7 +4407,7 @@ msgstr "undelfs: чтение битовой карты узлов..."
 #: vfs/undelfs.c:298
 #, c-format
 msgid ""
-" Could not load inode bitmap from: \n"
+" Cannot load inode bitmap from: \n"
 " %s \n"
 msgstr ""
 " Невозможно загрузить битовую карту узлов с:\n"
@@ -4420,7 +4420,7 @@ msgstr "undelfs: чтение блока битовой карты..."
 #: vfs/undelfs.c:304
 #, c-format
 msgid ""
-" Could not load block bitmap from: \n"
+" Cannot load block bitmap from: \n"
 " %s \n"
 msgstr ""
 "  Невозможно загрузить блок битовой карты с:\n"
@@ -4443,7 +4443,7 @@ msgid "Changes to file lost"
 msgstr "Изменения для файла потеряны"
 
 #: vfs/vfs.c:1783
-msgid "Could not parse:"
+msgid "Cannot parse:"
 msgstr "Невозможно проанализировать:"
 
 #: vfs/vfs.c:1785

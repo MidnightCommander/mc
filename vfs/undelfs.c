@@ -289,19 +289,19 @@ undelfs_opendir (vfs *me, char *dirname)
     }
 
     if (ext2fs_open (ext2_fname, 0, 0, 0, unix_io_manager, &fs)){
-	message_2s (1, undelfserr, _(" Could not open file %s "), ext2_fname);
+	message_2s (1, undelfserr, _(" Cannot open file %s "), ext2_fname);
 	return 0;
     }
     print_vfs_message (_("undelfs: reading inode bitmap..."));
     if (ext2fs_read_inode_bitmap (fs)){
 	message_2s (1, undelfserr,
-		 _(" Could not load inode bitmap from: \n %s \n"), ext2_fname);
+		 _(" Cannot load inode bitmap from: \n %s \n"), ext2_fname);
 	goto quit_opendir;
     }
     print_vfs_message (_("undelfs: reading block bitmap..."));
     if (ext2fs_read_block_bitmap (fs)){
 	message_2s (1, undelfserr,
-		 _(" Could not load block bitmap from: \n %s \n"), ext2_fname);
+		 _(" Cannot load block bitmap from: \n %s \n"), ext2_fname);
 	goto quit_opendir;
     }
     /* Now load the deleted information */
@@ -608,7 +608,7 @@ undelfs_chdir(vfs *me, char *path)
     /* this could be fixed by making an ext2fs io manager to use */
     /* our vfs, but that is left as an excercise for the reader */
     if ((fd = open (file, O_RDONLY)) == -1){
-	message_2s (1, undelfserr, _(" Could not open file %s "), file);
+	message_2s (1, undelfserr, _(" Cannot open file %s "), file);
 	g_free (f);
 	g_free (file);
 	return -1;

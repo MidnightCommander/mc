@@ -551,7 +551,7 @@ init_growing_view (WView *view, char *name, char *filename)
     } else {
 	view->stdfile = NULL;
 	if ((view->file = mc_open (filename, O_RDONLY)) == -1)
-	    return set_view_init_error (view, _(" Could not open file "));
+	    return set_view_init_error (view, _(" Cannot open file "));
     }
     return NULL;
 }
