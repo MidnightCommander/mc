@@ -1,3 +1,15 @@
+2000-10-16  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* ftpfs.c (open_data_connection): don't generate //filename, some
+	ftp servers can't store it;
+
+	(command): g_strdup_vprintf() and g_strconcat() replaced
+	by g_strdup_vprintf(), g_realloc() and strcpy()
+	to reduce memory usage when trailing "\r\n" added;
+
+	(ftpfs_set_debug, ftp_data): ftp_data.logfile assigned with logfile
+	value to log servers replies
+
 2000-10-09  Andrew V. Samoilov  <sav@bcs.zp.ua>
 
 	* sfs.c (redirect): temporary file unlinked on error;
