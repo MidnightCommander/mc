@@ -50,6 +50,17 @@
 #  define O_BINARY 0
 #endif
 
+
+/* Replacement for O_NONBLOCK */
+#ifndef O_NONBLOCK 
+#ifdef O_NDELAY /* SYSV */ 
+#define O_NONBLOCK O_NDELAY 
+#else /* BSD */ 
+#define O_NONBLOCK FNDELAY 
+#endif /* !O_NDELAY */ 
+#endif /* !O_NONBLOCK */ 
+
+
 #ifdef HAVE_SYS_TIMEB_H
 #  include <sys/timeb.h>
 #endif
