@@ -27,9 +27,6 @@
 #include "vfs.h"
 #include "local.h"
 
-/* This is needed, or libvfs.so will lack symbol shell. Should look up who requires it */
-char *shell = "/bin/sh";
-
 struct cachedfile {
     char *name, *cache;
     uid_t uid;

@@ -43,6 +43,7 @@
 #  include <sys/ioctl.h>
 #endif
 
+#include <glib.h>
 #include "../src/util.h"
 #include "vfs.h"
 #include "callback.h"
@@ -53,6 +54,9 @@
 
 int source_route = 0;
 int cd_symlinks = 0;
+
+/* User's shell */
+char *shell = "/bin/sh";
 
 /*
  * We do not want/need many of midnight's functions, stub routines.
@@ -155,29 +159,29 @@ exist_file (char *name)
 }
 
 void
-message_1s (int i, char *c1, const char *c2)
+message_1s (int i, char *header, const char *c2)
 {
     char buf [4096];
 
-    snprintf (buf, sizeof (buf), "%s %s", c1, c2);
+    snprintf (buf, sizeof (buf), "%s %s", header, c2);
     box_puts (buf);
 }
 
 void
-message_2s (int i, char *c1, char *c2, char *c3)
+message_2s (int i, char *header, const char *c2, const char *c3)
 {
     char buf [4096];
     
-    snprintf (buf, sizeof (buf), "%s %s %s", c1, c2, c3 );
+    snprintf (buf, sizeof (buf), "%s %s %s", header, c2, c3 );
     box_puts (buf );
 }
 
 void
-message_3s( int i, char *c1, char *c2, char *c3, const char *c4 )
+message_3s( int i, char *header, const char *c2, const char *c3, const char *c4)
 {
     char buf [4096];
     
-    snprintf (buf, sizeof (buf), "%s %s %s %s", c1, c2, c3, c4);
+    snprintf (buf, sizeof (buf), "%s %s %s %s", header, c2, c3, c4);
     box_puts (buf);
 }
 

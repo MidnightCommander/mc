@@ -351,14 +351,8 @@ int boot_current_is_left = 1;
 /* Used for keeping track of the original stdout */
 int stdout_fd = 0;
 
-/*
- * Ugh.  Pavel, you shell hack in sfs is BAD.
- * We need to kill shell from vfs
- */
-#ifndef USE_VFS
 /* The user's shell */
 char *shell;
-#endif
 
 /* mc_home: The home of MC */
 char *mc_home;
@@ -1028,7 +1022,7 @@ _do_panel_cd (WPanel *panel, char *new_dir, enum cd_enum cd_type)
     if (mc_chdir (directory) == -1){
 	strcpy (panel->cwd, olddir);
 	g_free (olddir);
-       g_free (translated_url);
+	g_free (translated_url);
 	return 0;
     }
     g_free (translated_url);
@@ -2600,7 +2594,7 @@ process_args (int c, const char *option_arg)
     case 'l':
 	ftpfs_set_debug (option_arg);
 #ifdef WITH_SMBFS
-	smbfs_set_debug (option_arg);
+/*	smbfs_set_debug (option_arg); */
 #endif
 	break;
 #endif
@@ -2627,29 +2621,23 @@ process_args (int c, const char *option_arg)
 	use_mouse_p = NO_MOUSE;
 	break;
 		
-    case 'X':
 #ifdef HAVE_SUBSHELL_SUPPORT
+    case 'X':
 	debug_subshell = 1;
-#endif
 	break;
 		
     case 'U':
-#ifdef HAVE_SUBSHELL_SUPPORT
 	use_subshell = 1;
-#endif
 	break;
 		
     case 'u':
-#ifdef HAVE_SUBSHELL_SUPPORT
 	use_subshell = 0;
-#endif
 	break;
 
     case 'r':
-#ifdef HAVE_SUBSHELL_SUPPORT
 	force_subshell_execution = 1;
-#endif
 	break;
+#endif	/* HAVE_SUBSHELL_SUPPORT */
 	    
 #ifndef HAVE_X
     case 'H':
@@ -2872,7 +2860,7 @@ handle_args (int argc, char *argv [])
 	finish_program = 1;
     }
     probably_finish_program ();
-#endif /* HAVE_GNOME */
+#endif /* !HAVE_GNOME */
 
     tmp = poptGetArg (ctx);
 
@@ -2909,7 +2897,7 @@ handle_args (int argc, char *argv [])
 	    probably_finish_program ();
  	}
     } else
-#endif /* HAVE_GNOME */
+#endif /* !HAVE_GNOME */
     {
        	/* sets the current dir and the other dir */
 	if (tmp) {
@@ -2986,7 +2974,7 @@ compatibility_move_mc_files (void)
 	do_compatibility_move (mc_dir);
 	g_free (mc_dir);
 }
-#endif
+#endif	/* OS2_NT */
 
 int
 main (int argc, char *argv [])
