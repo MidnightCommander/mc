@@ -1,5 +1,7 @@
 2002-01-17  Pavel Roskin  <proski@gnu.org>
 
+	* main.c: Remove unused toggle_* functions.
+
 	* dir.c: Show backups by default.
 
 2002-01-15  Andrew V. Samoilov  <kai@cmail.ru>

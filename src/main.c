@@ -1306,12 +1306,6 @@ menu_cmd (void)
 
 /* Flag toggling functions */
 void
-toggle_confirm_delete (void)
-{
-    confirm_delete = !confirm_delete;
-}
-
-void
 toggle_fast_reload (void)
 {
     fast_reload = !fast_reload;
@@ -1344,21 +1338,6 @@ toggle_show_hidden (void)
 {
     show_dot_files = !show_dot_files;
     update_panels (UP_RELOAD, UP_KEEPSEL);
-}
-
-void
-toggle_show_mini_status (void)
-{
-    show_mini_info = !show_mini_info;
-    paint_panel (cpanel);
-    if (get_other_type () == view_listing)
-	paint_panel (opanel);
-}
-
-void
-toggle_align_extensions (void)
-{
-    align_extensions = !align_extensions;
 }
 
 /*
