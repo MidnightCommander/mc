@@ -1622,7 +1622,7 @@ static char* prompt_parts [] =
 };
 
 static char *
-panel_operate_generate_prompt (char* cmd_buf, WPanel* panel, int operation, int only_one,
+panel_operate_generate_prompt (WPanel* panel, int operation, int only_one,
 			       struct stat* src_stat)
 {
 	register char *sp, *cp;
@@ -1777,7 +1777,7 @@ panel_operate (void *source_panel, FileOperation operation, char *thedefault, in
     }
 
     /* Generate confirmation prompt */
-    source = panel_operate_generate_prompt (cmd_buf, panel, operation, only_one, &src_stat);
+    source = panel_operate_generate_prompt (panel, operation, only_one, &src_stat);
 
     /* Show confirmation dialog */
     if (operation == OP_DELETE && confirm_delete){

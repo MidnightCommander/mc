@@ -1,3 +1,13 @@
+1999-01-31  Federico Mena Quintero  <federico@nuclecu.unam.mx>
+
+	* file.c (panel_operate_generate_prompt): Removed the cmd_buf
+	argument, since it is a global variable anyway (this function is
+	only called once from file.c, and the global cmd_buf was being
+	passed in).
+	(panel_operate): Do not pass cmd_buf to
+	panel_operate_generate_prompt().  
+	Thanks to Alexander Savelyev <fano@vcom.kiev.ua> for noticing this.
+
 1999-01-30  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* achown.c (XTRACT): Add missing call to _().
