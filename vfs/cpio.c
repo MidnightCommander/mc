@@ -295,20 +295,20 @@ static int cpio_read_oldc_head(vfs *me, vfs_s_super *super)
 {
     struct new_cpio_header hd;
     struct stat stat;
-    char *buf[HEAD_LENGTH + 1];
+    char buf[HEAD_LENGTH + 1];
     int len;
     char *name;
 
-    if((len = mc_read(super->u.cpio.fd, (void *)buf, HEAD_LENGTH)) < HEAD_LENGTH)
+    if((len = mc_read(super->u.cpio.fd, buf, HEAD_LENGTH)) < HEAD_LENGTH)
 	return STATUS_EOF;
     CPIO_POS(super) += len;
     buf[HEAD_LENGTH] = 0;
 
-    if(sscanf((void *)buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
+    if(sscanf(buf, "070707%6lo%6lo%6lo%6lo%6lo%6lo%6lo%11lo%6lo%11lo",
 	      &hd.c_dev, &hd.c_ino, &hd.c_mode, &hd.c_uid, &hd.c_gid,
 	      &hd.c_nlink, &hd.c_rdev, &hd.c_mtime,
 	      &hd.c_namesize, &hd.c_filesize) < 10) {
-	message_2s(1, MSG_ERROR, _("Corrupt cpio header encountered in\n%s"), super->name);
+	message_2s(1, MSG_ERROR, _("Corrupted cpio header encountered in\n%s"), super->name);
 	return STATUS_FAIL;
     }
 
@@ -501,6 +501,7 @@ static int cpio_create_entry(vfs *me, vfs_s_super *super, struct stat *stat, cha
 
     } /* !entry */
 
+    g_free (name);
     return STATUS_OK;
 }
 
