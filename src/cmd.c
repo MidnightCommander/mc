@@ -362,24 +362,27 @@ void ren_cmd_local (void)
     }
 }
 
-void mkdir_cmd (void)
+void
+mkdir_cmd (void)
 {
     char *tempdir;
     char *dir;
-    
-    dir = input_expand_dialog (_("Create a new Directory"), _(" Enter directory name:") , "");
-    
-    if (!dir)
+
+    dir =
+	input_expand_dialog (_("Create a new Directory"),
+			     _(" Enter directory name:"), "");
+
+    if (!dir || !*dir)
 	return;
-    
-    if (dir [0] && (dir [0] == '/' || dir [0] == '~'))
-	    tempdir = g_strdup (dir);
+
+    if (dir[0] == '/' || dir[0] == '~')
+	tempdir = g_strdup (dir);
     else
-	    tempdir = concat_dir_and_file (cpanel->cwd, dir);
+	tempdir = concat_dir_and_file (cpanel->cwd, dir);
     g_free (dir);
-    
+
     save_cwds_stat ();
-    if (my_mkdir (tempdir, 0777) == 0){
+    if (my_mkdir (tempdir, 0777) == 0) {
 	update_panels (UP_OPTIMIZE, tempdir);
 	repaint_screen ();
 	select_item (cpanel);

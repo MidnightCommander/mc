@@ -1,5 +1,8 @@
 2002-12-15  Pavel Roskin  <proski@gnu.org>
 
+	* cmd.c (mkdir_cmd): Don't try to create a directory with empty
+	name.
+
 	* global.h: Add replacement for O_NONBLOCK.
 
 2002-12-11  Pavel Roskin  <proski@gnu.org>
