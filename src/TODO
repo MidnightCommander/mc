@@ -45,6 +45,8 @@ Report errors in fish operations and recover from them.
 Allow colors to be defined in the mc.lib file.  Make it possible to
 avoid using a superlong line to redefine all colors.
 
+Use separate colors for hotkeys in error dialogs.
+
 Allow verbatim search in "Find File".
 
 Filters in the editor should operate on the open file.  They don't work
