@@ -87,7 +87,7 @@ include java.syntax
 file ..\*\\.(st)$ SmallTalk\sProgram
 include smalltalk.syntax
 
-file ..\*\\.(el|EL)$ Lisp\sProgram
+file ..\*\\.(lisp|lsp|el)$ Lisp\sProgram
 include lisp.syntax
 
 file ..\*\\.(ml|mli|mly|mll|mlp)$ ML\sProgram
