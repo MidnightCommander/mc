@@ -6,7 +6,7 @@ EXTFS_MISC  = README extfs.ini unarj.diff sfs.ini
 
 # Filters that don't need adaptation to the local system
 EXTFS_CONST = a apt audio deba debd dpkg hp48 mailfs patchfs rpm bpp \
-	rpms trpm uarj
+	rpms trpm uarj uzip
 
 # Filters that need adaptation to the local system - source files
 EXTFS_IN    = 			\
@@ -18,8 +18,7 @@ EXTFS_IN    = 			\
 	ftplist.in 		\
 	uar.in 			\
 	ulha.in 		\
-	uha.in			\
-	uzip.in
+	uha.in
 
 # Filters that need adaptation to the local system - files to install
 EXTFS_OUT = 			\
@@ -31,8 +30,7 @@ EXTFS_OUT = 			\
 	ftplist 		\
 	uar 			\
 	ulha 			\
-	uha			\
-	uzip
+	uha
 
 extfs_DATA = $(EXTFS_MISC)
 

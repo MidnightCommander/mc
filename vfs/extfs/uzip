@@ -1,0 +1,400 @@
+#! /usr/bin/perl -w
+#
+# zip file archive Virtual File System for Midnight Commander
+# Version 1.3.0 (2001-03-01).
+#
+# (C) 2000-2001  Oskar Liljeblad <osk@hem.passagen.se>.
+#
+
+use POSIX;
+use File::Basename;
+use strict;
+
+#
+# Configuration options
+#
+
+# Location of the zip program
+my $app_zip = '/usr/bin/zip';
+# Location of the unzip program
+my $app_unzip = '/usr/bin/unzip';
+# Set this to 1 if zipinfo (unzip -Z) is to be used (recommended), otherwise 0.
+my $op_has_zipinfo = 1;
+
+# Command used to list archives (zipinfo mode)
+my $cmd_list_zi = "$app_unzip -Z -l -T";
+# Command used to list archives (non-zipinfo mode)
+my $cmd_list_nzi = "$app_unzip -qq -v";
+# Command used to add a file to the archive
+my $cmd_add = "$app_zip -g";
+# Command used to add a link file to the archive (unused)
+my $cmd_addlink = "$app_zip -g -y";
+# Command used to delete a file from the archive
+my $cmd_delete = "$app_zip -d";
+# Command used to extract a file to standard out
+my $cmd_extract = "$app_unzip -p";
+
+#
+# Main code
+#
+
+die "uzip: missing command and/or archive arguments\n" if ($#ARGV < 1);
+
+# Initialization of some global variables
+my $cmd = shift;
+my %known = ( './' => 1 );
+my %pending = ();
+my $oldpwd = POSIX::getcwd();
+my $archive = shift;
+my $aarchive = absolutize($archive, $oldpwd);
+my $cmd_list = ($op_has_zipinfo ? $cmd_list_zi : $cmd_list_nzi);
+my ($qarchive, $aqarchive) = map (quotemeta, $archive, $aarchive);
+
+if ($cmd eq 'list')    { &mczipfs_list(@ARGV); }
+if ($cmd eq 'rm')      { &mczipfs_rm(@ARGV); }
+if ($cmd eq 'rmdir')   { &mczipfs_rmdir(@ARGV); }
+if ($cmd eq 'mkdir')   { &mczipfs_mkdir(@ARGV); }
+if ($cmd eq 'copyin')  { &mczipfs_copyin(@ARGV); }
+if ($cmd eq 'copyout') { &mczipfs_copyout(@ARGV); }
+if ($cmd eq 'run')		 { &mczipfs_run(@ARGV); }
+#if ($cmd eq 'mklink')  { &mczipfs_mklink(@ARGV); }		# Not supported by MC extfs
+#if ($cmd eq 'linkout') { &mczipfs_linkout(@ARGV); }	# Not supported by MC extfs
+exit 1;
+
+# Remove a file from the archive.
+sub mczipfs_rm {
+	my ($qfile) = map (quotemeta, @_);
+	&checkargs(1, 'archive file', @_);
+	&safesystem("$cmd_delete $qarchive $qfile >/dev/null");
+	exit;
+}
+
+# Remove an empty directory from the archive.
+# The only difference from mczipfs_rm is that we append an 
+# additional slash to the directory name to remove. I am not
+# sure this is absolutely necessary, but it doesn't hurt.
+sub mczipfs_rmdir {
+	my ($qfile) = map (quotemeta, @_);
+	&checkargs(1, 'archive directory', @_);
+	&safesystem("$cmd_delete $qarchive $qfile/ >/dev/null 2>&1", 12);
+  exit;
+}
+
+# Extract a file from the archive.
+# Note that we don't need to check if the file is a link,
+# because mc apparently doesn't call copyout for symbolic links.
+sub mczipfs_copyout {
+	my ($qafile, $qfsfile) = map (quotemeta, @_);
+	&checkargs(1, 'archive file', @_);
+	&checkargs(2, 'local file', @_);
+	&safesystem("$cmd_extract $qarchive $qafile > $qfsfile 2>/dev/null", 11);
+  exit;
+}
+
+# Add a file to the archive.
+# This is done by making a temporary directory, in which
+# we create a symlink the original file (with a new name).
+# Zip is then run to include the real file in the archive,
+# with the name of the symbolic link.
+# Here we also doesn't need to check for symbolic links,
+# because the mc extfs doesn't allow adding of symbolic
+# links.
+sub mczipfs_copyin {
+	my ($afile, $fsfile) = @_;
+	&checkargs(1, 'archive file', @_);
+	&checkargs(2, 'local file', @_);
+	my ($qafile) = quotemeta $afile;
+	$fsfile = &absolutize($fsfile, $oldpwd);
+	my $adir = File::Basename::dirname($afile);
+
+	my $tmpdir = &mktmpdir();
+	chdir $tmpdir || &croak("chdir $tmpdir failed");
+	&mkdirs($adir, 0700);
+	symlink ($fsfile, $afile) || &croak("link $afile failed");
+	&safesystem("$cmd_add $aqarchive $qafile >/dev/null");
+	unlink $afile || &croak("unlink $afile failed");
+	&rmdirs($adir);
+	chdir $oldpwd || &croak("chdir $oldpwd failed");
+	rmdir $tmpdir || &croak("rmdir $tmpdir failed");
+  exit;
+}
+
+# Add an empty directory the the archive.
+# This is similar to mczipfs_copyin, except that we don't need
+# to use symlinks.
+sub mczipfs_mkdir {
+	my ($dir) = @_;
+	&checkargs(1, 'directory', @_);
+	my ($qdir) = quotemeta $dir;
+
+	my $tmpdir = &mktmpdir();
+	chdir $tmpdir || &croak("chdir $tmpdir failed");
+	&mkdirs($dir, 0700);
+	&safesystem("$cmd_add $aqarchive $qdir >/dev/null");
+	&rmdirs($dir);
+	chdir $oldpwd || &croak("chdir $oldpwd failed");
+	rmdir $tmpdir || &croak("rmdir $tmpdir failed");
+  exit;
+}
+
+# Add a link to the archive. This operation is not used yet,
+# because it is not supported by the MC extfs.
+sub mczipfs_mklink {
+	my ($linkdest, $afile) = @_;
+	&checkargs(1, 'link destination', @_);
+	&checkargs(2, 'archive file', @_);
+	my ($qafile) = quotemeta $afile;
+	my $adir = File::Basename::dirname($afile);
+
+	my $tmpdir = &mktmpdir();
+	chdir $tmpdir || &croak("chdir $tmpdir failed");
+	&mkdirs($adir, 0700);
+	symlink ($linkdest, $afile) || &croak("link $afile failed");
+	&safesystem("$cmd_addlink $aqarchive $qafile >/dev/null");
+	unlink $afile || &croak("unlink $afile failed");
+	&rmdirs($adir);
+	chdir $oldpwd || &croak("chdir $oldpwd failed");
+	rmdir $tmpdir || &croak("rmdir $tmpdir failed");
+  exit;
+}
+
+# This operation is not used yet, because it is not
+# supported by the MC extfs.
+sub mczipfs_linkout {
+	my ($afile, $fsfile) = @_;
+	&checkargs(1, 'archive file', @_);
+	&checkargs(2, 'local file', @_);
+	my ($qafile) = map (quotemeta, $afile);
+
+	my $linkdest = &get_link_destination($afile);
+	symlink ($linkdest, $fsfile) || &croak("link $fsfile failed");
+  exit;
+}
+
+# Use unzip to find the link destination of a certain file in the
+# archive.
+sub get_link_destination {
+	my ($afile) = @_;
+	my ($qafile) = map (quotemeta, $afile);
+	my $linkdest = safeticks("$cmd_extract $qarchive $qafile");
+	&croak ("extract failed", "link destination of $afile not found")
+			if (!defined $linkdest || $linkdest eq '');
+	return $linkdest;
+}
+
+# List files in the archive.
+# Because mc currently doesn't allow a file's parent directory
+# to be listed after the file itself, we need to do some
+# rearranging of the output. Most of this is done in
+# checked_print_file.
+sub mczipfs_list {
+	open (PIPE, "$cmd_list $qarchive |") || &croak("$app_unzip failed");
+	if ($op_has_zipinfo) {
+		while (<PIPE>) {
+			chomp;
+			next if /^Archive:/;
+			next if /^\d+ file/;
+			next if /^Empty zipfile\.$/;
+			my @match = /^(.{10}) +([\d.]+) +([a-z\d]+) +(\d+) +([^ ]{2}) +(\d+) +([^ ]{4}) +(\d{4})(\d\d)(\d\d)\.(\d\d)(\d\d)(\d\d) +(.*)$/;
+			next if ($#match != 13);
+			&checked_print_file(@match);
+		}
+	} else {
+		while (<PIPE>) {
+			chomp;
+			my @match = /^ +(\d+) +([^ ]+) +(\d+) +(\d+\%) +(\d?\d)-(\d?\d)-(\d\d) (\d?\d):(\d\d) +([0-9a-f]+) +(.*)$/;
+			next if ($#match != 10);
+			my @rmatch = ('', '', 'unknown', $match[0], '', $match[2], $match[1],
+					$match[6] + ($match[6] < 70 ? 2000 : 1900), $match[4], $match[5],
+					$match[7], $match[8], "00", $match[10]);
+			&checked_print_file(@rmatch);
+		}
+	}
+	if (!close (PIPE)) {
+		&croak("$app_unzip failed") if ($! != 0);
+		&croak("$app_unzip failed", 'non-zero exit status ('.($? >> 8).')') 
+	}
+
+	foreach my $key (sort keys %pending) {
+		foreach my $file (@{ $pending{$key} }) {
+			&print_file(@{ $file });
+		}
+	}
+
+  exit;
+}
+
+# Execute a file in the archive, by first extracting it to a
+# temporary directory. The name of the extracted file will be
+# the same as the name of it in the archive.
+sub mczipfs_run {
+	my ($afile) = @_;
+	&checkargs(1, 'archive file', @_);
+	my $qafile = quotemeta $afile;
+	my $tmpdir = &mktmpdir();
+	my $tmpfile = File::Basename::basename($afile);
+
+	chdir $tmpdir || &croak("chdir $tmpdir failed");
+	&safesystem("$cmd_extract $aqarchive $qafile > $tmpfile");
+  chmod 0700, $tmpfile;
+	&safesystem("./$tmpfile");
+	unlink $tmpfile || &croak("rm $tmpfile failed");
+	chdir $oldpwd || &croak("chdir $oldpwd failed");
+	rmdir $tmpdir || &croak("rmdir $tmpdir failed");
+  exit;
+}
+
+# This is called prior to printing the listing of a file.
+# A check is done to see if the parent directory of the file has already
+# been printed or not. If it hasn't, we must cache it (in %pending) and
+# print it later once the parent directory has been listed. When all
+# files have been processed, there may still be some that haven't been 
+# printed because their parent directories weren't listed at all. These
+# files are dealt with in mczipfs_list.
+sub checked_print_file {
+	my @waiting = ([ @_ ]);
+
+	while ($#waiting != -1) {
+		my $item = shift @waiting;
+		my $filename = ${$item}[13];
+		my $dirname = File::Basename::dirname($filename) . '/';
+
+		if (exists $known{$dirname}) {
+			&print_file(@{$item});
+			if ($filename =~ /\/$/) {
+				$known{$filename} = 1;
+				if (exists $pending{$filename}) {
+					push @waiting, @{ $pending{$filename} };
+					delete $pending{$filename};
+				}
+			}
+		} else {
+			push @{$pending{$dirname}}, $item;
+		}
+	}
+}
+
+# Print the mc extfs listing of a file from a set of parsed fields.
+# If the file is a link, we extract it from the zip archive and
+# include the output as the link destination. Because this output
+# is not newline terminated, we must execute unzip once for each
+# link file encountered.
+sub print_file {
+	my ($perms,$zipver,$platform,$realsize,$format,$cmpsize,$comp,$year,$mon,$day,$hours,$mins,$secs,$filename) = @_;
+	$mon = (qw/Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec/)[$mon-1];
+	if ($platform ne 'unx') {
+		$perms = ($filename =~ /\/$/ ? 'drwxr-xr-x' : '-rw-r--r--');
+	}
+	printf "%-10s    1 %-8d %-8d %8d $mon $day $year $hours:$mins $filename", $perms, $<, $(, $realsize;
+	if ($platform eq 'unx' && $perms =~ /^l/) {
+		my $linkdest = &get_link_destination($filename);
+		print " -> $linkdest";
+	}
+	print "\n";
+}
+
+# Die with a reasonable error message.
+sub croak {
+	my ($command, $desc) = @_;
+	die "uzip ($cmd): $command - $desc\n" if (defined $desc);
+	die "uzip ($cmd): $command - $!\n";
+}
+
+# Make a set of directories, like the command `mkdir -p'.
+# This subroutine has been tailored for this script, and
+# because of that, it ignored the directory name '.'.
+sub mkdirs {
+	my ($dirs, $mode) = @_;
+	$dirs = &cleandirs($dirs);
+	return if ($dirs eq '.');
+
+	my $newpos = -1;
+	while (($newpos = index($dirs, '/', $newpos+1)) != -1) {
+		my $dir = substr($dirs, 0, $newpos);
+		mkdir ($dir, $mode) || &croak("mkdir $dir failed");
+	}
+	mkdir ($dirs, $mode) || &croak("mkdir $dirs failed");
+}
+
+# Remove a set of directories, failing if the directories
+# contain other files.
+# This subroutine has been tailored for this script, and
+# because of that, it ignored the directory name '.'.
+sub rmdirs {
+	my ($dirs) = @_;
+	$dirs = &cleandirs($dirs);
+	return if ($dirs eq '.');
+
+	rmdir $dirs || &croak("rmdir $dirs failed");
+	my $newpos = length($dirs);
+	while (($newpos = rindex($dirs, '/', $newpos-1)) != -1) {
+		my $dir = substr($dirs, 0, $newpos);
+		rmdir $dir || &croak("rmdir $dir failed");
+	}
+}
+
+# Return a semi-canonical directory name.
+sub cleandirs {
+	my ($dir) = @_;
+	$dir =~ s:/+:/:g;
+	$dir =~ s:/*$::;
+	return $dir;
+}
+
+# Make a temporary directory with mode 0700.
+sub mktmpdir {
+	while (1) {
+		my $dir = POSIX::tmpnam();
+		return $dir if mkdir ($dir, 0700);
+	}
+}
+
+# Make a filename absolute and return it.
+sub absolutize {
+	my ($file, $pwd) = @_;
+	return "$pwd/$file" if ($file !~ /^\//);
+	return $file;
+}
+
+# Like the system built-in function, but with error checking.
+# The other argument is an exit status to allow.
+sub safesystem {
+	my ($command, @allowrc) = @_;
+	my ($desc) = ($command =~ /^([^ ]*) */);
+	$desc = File::Basename::basename($desc);
+	system $command;
+	my $rc = $?;
+	&croak("`$desc' failed") if (($rc & 0xFF) != 0);
+	if ($rc != 0) {
+		$rc = $rc >> 8;
+		foreach my $arc (@allowrc) {
+			return if ($rc == $arc);
+		}
+		&croak("`$desc' failed", "non-zero exit status ($rc)");
+	}
+}
+
+# Like backticks built-in, but with error checking.
+sub safeticks {
+	my ($command, @allowrc) = @_;
+	my ($desc) = ($command =~ /^([^ ]*) /);
+	$desc = File::Basename::basename($desc);
+	my $out = `$command`;
+	my $rc = $?;
+	&croak("`$desc' failed") if (($rc & 0xFF) != 0);
+	if ($rc != 0) {
+		$rc = $rc >> 8;
+		foreach my $arc (@allowrc) {
+			return if ($rc == $arc);
+		}
+		&croak("`$desc' failed", "non-zero exit status ($rc)");
+	}
+	return $out;
+}
+
+# Make sure enough arguments are supplied, or die.
+sub checkargs {
+	my $count = shift;
+	my $desc = shift;
+	&croak('missing argument', $desc) if ($count-1 > $#_);
+}
