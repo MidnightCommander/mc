@@ -1,5 +1,13 @@
 2001-02-07  Pavel Roskin  <proski@gnu.org>
 
+	* macros/curses.m4: Quote first argument to AC_DEFUN.
+	* macros/gnome-cxx-check.m4: Likewise.
+	* macros/gnome-gettext.m4: Likewise.
+	* macros/gnome-libgtop-check.m4: Likewise.
+	* macros/gnome-print-check.m4: Likewise.
+	* macros/linger.m4: Likewise.
+	* macros/need-declaration.m4: Likewise.
+
 	* configure.in: Only configure in vfs/samba if smbfs support is
 	enabled even with Autoconf 2.13.
 
