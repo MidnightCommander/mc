@@ -1236,7 +1236,7 @@ longer be the directory listing of the current directory, but all the
 files that are symbolic links.
 .PP
 If you want to panelize all of the files that have been downloaded
-from your ftp server, you can use this awk command to extract the file
+from your FTP server, you can use this awk command to extract the file
 name from the transfer log files:
 .PP
 .nf
@@ -1766,75 +1766,87 @@ are not saved.
 .SH "    Virtual FS"
 This option gives you control over the settings of the
 .\"LINK2"
-Virtual File System
+Virtual File System\&.
 .\"Virtual File System"
-information cache.
 .PP
-The Midnight Commander keeps in memory the information
-related to some of the virtual file systems to speed up
-the access to the files in the file system (for example,
-directory listings fetched from ftp servers).
+The Midnight Commander keeps in memory the information related to some
+of the virtual file systems to speed up the access to the files in the
+file system (for example, directory listings fetched from FTP servers).
 .PP
-Moreover in order to access the contents of compressed files
-(for example, compressed tar files) the Midnight Commander
-has to create a temporary uncompressed file on your disk.
+Also, in order to access the contents of compressed files (for example,
+compressed tar files) the Midnight Commander needs to create temporary
+uncompressed files on your disk.
 .PP
-Since both the information in memory and the temporary files on
-disk take up resources, you may want to tune the parameters of
-the cached information to decrease your resource usage or to maximize
-the speed of access to frequently used file systems.
+Since both the information in memory and the temporary files on disk
+take up resources, you may want to tune the parameters of the cached
+information to decrease your resource usage or to maximize the speed of
+access to frequently used file systems.
 .PP
-The Tar file system is quite clever about how it handles
-tar files: it just loads the directory entries and when it
-needs to use the information contained in the tar file, it
-goes and grab it.
+Because of the format of the tar achives, the
+.I Tar filesystem
+needs to read the whole file just to load the file entries.  Since most
+tar files are usually kept compressed (plain tar files are species in
+extinction), the tar file system has to uncompress the file on the disk
+in a temporary location and then access the uncompressed file as a
+regular tar file.
 .PP
-In the wild, tar files are usually kept compressed (plain
-tar files are species in extinction), and because of the
-nature of those files (the directory entries for the tar
-files is not there waiting for us to be loaded), the tar
-file system has to uncompress the file
-on the disk in a temporary location and then access the
-uncompressed file as a regular tar file.
-.PP
-Now, since we all love to browse files and tar files all
-over the disk, it's common that you will leave a tar file
-and the re-enter it later. Since uncompression is slow,
-the Midnight Commander will cache the information in
-memory for a limited amount of time, after you hit the
-timeout, all of the resources associated with the
-file system will be freed. The default timeout is set to
-one minute.
+Now, since we all love to browse files and tar files all over the disk,
+it's common that you will leave a tar file and the re-enter it later.
+Since uncompression is slow, the Midnight Commander will cache the
+information in memory for a limited time.  When the timeout expires, all
+the resources associated with the file system are released.  The default
+timeout is set to one minute.
 .PP
 The
 .\"LINK2"
 FTP File System
 .\"FTP File System"
-keeps the directory listing it fetches from a ftp server
-in a cache.  The cache
-expire time is configurable with the
-.I ftpfs directory cache timeout
-option.
-A low value for this
-option may slow down every operation on the ftp file System
-because every operation is accompanied by a query of the
-ftp server.
+(ftpfs) allows you to browse directories on remote FTP servers.  It has
+several options.
 .PP
-Moreover you can define a proxy host for doing ftp transfers
-and configure the Midnight Commander to always use the proxy host.
-See
-the section on
+.I ftp anonymous password
+is the password used when you login as "anonymous".  Some sites require
+a valid e-mail address.  On the other hand, you probably don't want to
+give your real e-mail address to untrusted sites, especially if you are
+not using spam filtering.
+.PP
+ftpfs keeps the directory listing it fetches from a FTP server in a cache. 
+The cache expire time is configurable with the
+.I ftpfs directory cache timeout
+option.  A low value for this option may slow down every operation on
+the ftpfs because every operation would require sending a request to the
+FTP server.
+.PP
+You can define an FTP proxy host for doing FTP.  Note that most modern
+firewalls are fully transparent at least for passive FTP (see below), so
+FTP proxies are considered obsolete.
+.PP
+You can set
+.I Always use ftp proxy
+to use proxy for all connections or use the exclamation sign to enable
+proxy for certain hosts.  See
 .\"LINK2"
 FTP File System
 .\"FTP File System"
 for more information.
+.PP
+You can enable using
+.I ~/.netrc
+file, which keeps login names and passwords for ftp servers.  See netrc
+(5) for the description of the .netrc format.
+.PP
+.I Use passive mode
+enables using FTP passive mode, when the existing connection is reused
+to transfer data.  This option is recommended and enabled by default. 
+If this option is turned off, the data connection is initiated by the
+server.  This may not work with some firewalls.
 .\"NODE "    Save Setup"
 .SH "    Save Setup"
 At startup the Midnight Commander will try to load initialization
-information from the ~/.mc/ini file. If this file doesn't exist,
-it will load the information from the system-wide configuration file,
-located in @prefix@/share/mc/mc.ini. If the system-wide configuration
-file doesn't exist, MC uses the default settings.
+information from the ~/.mc/ini file. If this file doesn't exist, it will
+load the information from the system-wide configuration file, located in
+@prefix@/share/mc/mc.ini. If the system-wide configuration file doesn't
+exist, MC uses the default settings.
 .PP
 The
 .I Save Setup
@@ -2395,15 +2407,14 @@ The features it presently supports are: Block
 copy, move, delete, cut and paste;
 .IR "key for key undo" ;
 pull-down menus; file insertion; macro definition; regular expression
-search and replace (and our own scanf-printf search and
-replace); shift-arrow MSW-MAC text highlighting (for the
-linux console only); insert-overwrite toggle; and an option
-to pipe text blocks through shell commands like indent.
+search and replace (and our own scanf-printf search and replace);
+shift-arrow MSW-MAC text highlighting (for the linux console only);
+insert-overwrite toggle; and an option to pipe text blocks through shell
+commands like indent.
 .PP
-The editor is very easy to use and requires no tutoring.
-To see what keys do what, just consult the appropriate
-pull-down menu. Other keys are: Shift movement
-keys do text highlighting.
+The editor is very easy to use and requires no tutoring. To see what
+keys do what, just consult the appropriate pull-down menu. Other keys
+are: Shift movement keys do text highlighting.
 .B Ctrl-Ins
 copies to the file
 .B cooledit.clip
@@ -2555,26 +2566,34 @@ forward them to the correct file system, the formats used for each one
 of the file systems is described later in their own section.
 .\"NODE "  FTP File System"
 .SH "  FTP File System"
-The ftpfs allows you to manipulate files on remote machines, to
-actually use it, you may try to use the panel command FTP link
-(accessible from the menubar) or you may directly change your current
-directory to it using the cd command to a path name that looks like this:
+The FTP File System (ftpfs) allows you to manipulate files on remote
+machines.  To actually use it, you can use the
+.I FTP link
+item in the menu or directly change your current directory using the
+.I cd
+command to a path name that looks like this:
 .PP
 .I /#ftp:[!][user[:pass]@]machine[:port][remote-dir]
 .PP
 The
-.I user, port
+.IR user ,
+.I port
 and
 .I remote-dir
 elements are optional.  If you specify the
 .I user
-element, then the Midnight Commander will try to logon on the remote
-machine as that user, otherwise it will use your login name.  The
-optional
+element, the Midnight Commander will login to the remote machine as that
+user, otherwise it will use your login name or the login name from the
+.I ~/.netrc
+file.  The optional
 .I pass
-element, if present is the password used for the connection.  This is not
-recommended (nor keeping the password in your hotlist, unless you set the
-appropriate permissions there, and even then it may not be entirely safe).
+element is the password used for the connection.  Using the password in
+the VFS directory name is not recommended, since it can appear on the
+screen unobscured and can be saved to the directory history.
+.PP
+To enable using FTP proxy, prepend
+.B !
+(an exclamation sign) to the hostname.
 .PP
 Examples:
 .PP
@@ -2586,43 +2605,11 @@ Examples:
     /#ftp:miguel:xxx@server/pub
 .fi
 .PP
-To connect to sites behind a firewall, you will need to use the prefix
-/#ftp:! (i.e. add a bang character before the hostname) to make the
-Midnight Commander use a proxy host for doing the ftp transfer. You can
-define the proxy host in the
+Please check the
 .\"LINK2"
 Virtual File System
 .\"Virtual FS"
-dialog box.
-.PP
-Another option to set is the
-.I Always use ftp proxy
-option in the
-.\"LINK2"
-Virtual File System
-.\"Virtual FS"
-dialog box.  This will configure the program
-to always use the proxy host.  If this variable is set, the program
-will do two things: consult the @prefix@/share/mc/mc.no_proxy file for
-lines containing host names that are local (if the host name starts
-with a dot, it is assumed to be a domain) and to assume that any
-hostnames without dots in their names are directly accessible.
-.PP
-If you are using the ftpfs code with a filtering packet router that
-does not allow you to use the regular mode of opening files, you may
-want to force the program to use the passive-open mode.  To use this,
-set the ftpfs_use_passive_connections option in the initialization file.
-.PP
-The Midnight Commander keeps the directory listing in a cache.  The cache
-expire time is configurable in the
-.\"LINK2"
-Virtual File System
-.\"Virtual FS"
-dialog box.  This has the funny behavior that even if you make changes to a
-directory, they will not be reflected in the directory listing until you
-force a cache reload with the C-r key.  This is a feature (when you think
-it's a bug, think about manipulating files on the other side of the Atlantic
-with ftpfs).
+dialog box for ftpfs options.
 .\"NODE "  Tar File System"
 .SH "  Tar File System"
 The tar file system provides you with read-only access to your tar
@@ -2922,14 +2909,8 @@ changing the directory if you have files tagged.
 .TP
 .I ftpfs_retry_seconds
 This value is the number of seconds the Midnight Commander will wait
-before attempting to reconnect to an ftp server that has denied the login.
+before attempting to reconnect to an FTP server that has denied the login.
 If the value is zero, the login will no be retried.
-.TP
-.I ftpfs_use_passive_connections
-This option is off by default.  This makes the ftpfs code use the
-passive open mode for transferring files.  This is used by people that
-are behind a filtering packet router.  This option just works if you
-are not using an ftp proxy.
 .TP
 .I max_dirt_limit
 Specifies how many screen updates can be skipped at most in the internal
