@@ -108,7 +108,7 @@ smbfs_auth_free (struct smb_authinfo const *a)
 }
 
 static void
-smbfs_auth_free_all ()
+smbfs_auth_free_all (void)
 {
     if (auth_list) {
         g_slist_foreach (auth_list, (GFunc)smbfs_auth_free, 0);
@@ -1002,7 +1002,7 @@ smbfs_free_bucket (smbfs_connection *bucket)
 }
 
 static smbfs_connection *
-smbfs_get_free_bucket ()
+smbfs_get_free_bucket (void)
 {
     int i;
     
@@ -1214,14 +1214,14 @@ static int
 smbfs_fake_server_stat (const char *server_url, const char *path, struct stat *buf)
 {
     dir_entry *dentry;
-    char *p;
+    const char *p;
 
     if ((p = strrchr (path, '/')))
 	path = p + 1;		/* advance until last '/' */
 
     if (!current_info->entries) {
-	if (!smbfs_loaddir (current_info));	/* browse host */
-	return -1;
+	if (!smbfs_loaddir (current_info))	/* browse host */
+	    return -1;
     }
 
     if (current_info->server_list == True) {
