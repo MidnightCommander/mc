@@ -2577,12 +2577,10 @@ main (int argc, char *argv [])
 
     flush_extension_file (); /* does only free memory */
 
-    /* Miguel, maybe the fix in slang is not required and
-     * it could be done by removing the slang_done_screen.
-     * Do I need to call slang_reset_tty then?
-     */
     endwin ();
+#ifdef HAVE_SLANG
     slang_shutdown ();
+#endif
 
     if (console_flag && !(quit & SUBSHELL_EXIT))
 	restore_console ();

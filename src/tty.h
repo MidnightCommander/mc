@@ -10,12 +10,6 @@ int got_interrupt (void);
 #else
 #   define enable_interrupt_key()
 #   define disable_interrupt_key()
-#   define slang_shutdown()
-#   define slang_done_screen()
-#   define slang_init()
-#   define slang_init_screen()
-#   define slang_init_tty()
-#   define slang_done_tty();
 #   define acs()
 #   define noacs()
 #   define one_vline() addch (slow_terminal ? ' ' : ACS_VLINE)

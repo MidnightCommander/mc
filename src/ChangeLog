@@ -1,3 +1,9 @@
+2002-09-08  Pavel Roskin  <proski@gnu.org>
+
+	* tty.h [!HAVE_SLANG]: Remove all slang_* definitions.
+	* main.c (main) [!HAVE_SLANG]: Don't call slang_shutdown().
+	* myslang.h: Remove slang_done_screen(), it's unused.
+
 2002-09-08  Oskar Liljeblad  <oskar@osk.mine.nu>
 
 	* key.c (get_event): Check gpm_fd only if gpm is actually used.

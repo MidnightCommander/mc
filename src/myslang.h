@@ -85,7 +85,6 @@ void slint_goto (int y, int x);
 void attrset (int color);
 void set_slang_delay (int);
 void slang_init (void);
-void slang_done_screen (void);
 void slang_prog_mode (void);
 void hline (int ch, int len);
 void vline (int ch, int len);
