@@ -1,18 +1,16 @@
 [main]
- lqwqk     k           k     
+ lqwqk     k           k     
  x x x .   x     .     x     
  x x x k lqu wqk k lqw tqk n 
  x x x x x x x x x x x x x x 
  v   v v mqv v v v mqu v v mj
      qqqqqqCommanderqj 
-
 
-Version 
+Ez a GNU Midnight Commander súgója.
 
-Ez a GNU Midnight Commander súgója. 
-
-Az interaktív súgó használatának megismeréséhez csak üss egy 
-entertHow to use help. Itt közvetlenül a súgó tartalomjegyzékébe Contentsjuthatsz.
+Az interaktív súgó használatának megismeréséhez csak üss
+egy entertHow to use help. Itt közvetlenül a súgó tartalomjegyzékébeContents
+juthatsz.
 
 A Midnight Commander-t a következõ szerzõkAUTHORS készítették.
 
@@ -23,7 +21,8 @@ kiadásra. Ez szabad szoftver, így továbbadhatod azt a
 [License]
 Engedélyek
 
-Ez a rész a GNU általános felhasználási engedélyét tartalmazza. 
+          Ez a rész a GNU általános felhasználási
+                  engedélyét tartalmazza.
            -   Ennek hivatalos nyelve angol.   -
 
 
@@ -96,7 +95,7 @@ at all.
   The precise terms and conditions for copying,
 distribution and modification follow.
 
-    
+
             GNU GENERAL PUBLIC LICENSE
             TERMS AND CONDITIONS FOR COPYING,
               DISTRIBUTION AND MODIFICATION
@@ -379,7 +378,7 @@ file to most effectively convey the exclusion of warranty;
 and each file should have at least the "copyright" line
 and a pointer to where the full notice is found.
 
-<one line to give the program's name and a brief idea of 
+<one line to give the program's name and a brief idea of
 what it does.>
 Copyright (C) 19yy  <name of author>
 
@@ -474,17 +473,17 @@ A Súgóban használható összes gomb listája:
 Általános mozgási lehetõségek billentyûzettelGeneral Movement Keys.
 
 tab           Mozgás a következõ elemre.
-M-tab         Mozgás az elõzõ elemre. 
-down          Mozgás a következõ elemre; a sorokat lefelé 
+M-tab         Mozgás az elõzõ elemre.
+down          Mozgás a következõ elemre; a sorokat lefelé
               gördíti.
-up            Mozgás az elõzõ elemre; a sorokat felfelé 
+up            Mozgás az elõzõ elemre; a sorokat felfelé
               gördíti.
-right, enter  Követi a jelenlegi linket.    
+right, enter  Követi a jelenlegi linket.
 left, l       Visszalép az elõzõleg meglátogatott pontra.
 F1            Megjeleníti a Súgót a Súgó nézõvel.
 n             Átlép a következõ pontra.
-p             Átlép az elõzõ pontra.    
-c             A Tartalomjegyzékhez ugrik.    
+p             Átlép az elõzõ pontra.
+c             A Tartalomjegyzékhez ugrik.
 F10, esc      Kilép a Súgóból.
 
 Local variables:
