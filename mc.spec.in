@@ -23,9 +23,11 @@ Group:     Applications/File
 Source0:   ftp://ftp.ibiblio.org/pub/Linux/utils/file/managers/mc/mc-%{ver}.tar.gz
 URL:       http://www.ibiblio.org/mc/
 BuildRoot: /var/tmp/mc-%{PACKAGE_VERSION}-root
-BuildRequires: glib-devel
-%{!?_with_included_slang:%{!?_with_ncurses:BuildRequires: slang-devel}}
-%{?_with_ncurses:BuildRequires: ncurses-devel}
+
+# Names of those packages are distribution specific
+#BuildRequires: glib-devel
+#%{!?_with_included_slang:%{!?_with_ncurses:BuildRequires: slang-devel}}
+#%{?_with_ncurses:BuildRequires: ncurses-devel}
 
 %description
 GNU Midnight Commander is a visual file manager.  It's a feature rich
@@ -98,6 +100,9 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_prefix}/share/mc/syntax
 
 %changelog
+* Thu Mar 31 2005 Pavel Roskin <proski@gnu.org>
+- Comment out build dependencies - they are too distribution specific.
+
 * Tue Sep 23 2003 Pavel Roskin <proski@gnu.org>
 - Remove term directory, it's obsolete and irrelevant on modern systems.
 - Include translated menu files.
