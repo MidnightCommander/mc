@@ -1,5 +1,10 @@
 2001-07-15  Pavel Roskin  <proski@gnu.org>
 
+	* gscreen.c (panel_tree_button_release): New function, opens a
+	new window on middle click.
+	(panel_create_tree_view): Bind panel_tree_button_release() to
+	"button_release_event".
+
 	* gmain.c (xtoolkit_create_dialog): Don't use "layout" - abort
 	instead.
 	* layout: Remove.

@@ -2137,6 +2137,38 @@ panel_tree_button_press (GtkWidget *widget, GdkEventButton *event, WPanel *panel
 }
 #endif
 
+/*
+ * Middle click on the directory tree opens a new window.
+ */
+static void
+panel_tree_button_release (GtkWidget *widget, GdkEventButton *event, WPanel *panel)
+{
+	GtkDTree *dtree;
+	GtkCTreeNode *node;
+	int row;
+	char *path;
+
+	if (event->type != GDK_BUTTON_RELEASE)
+		return;
+
+	if (event->button != 2)
+		return;
+
+	dtree = GTK_DTREE (widget);
+	if (!gtk_clist_get_selection_info (GTK_CLIST (dtree), event->x, event->y, &row, NULL))
+		return;
+
+	node = gtk_ctree_node_nth (GTK_CTREE (dtree), row);
+	if (!node)
+		return;
+
+	path = gtk_dtree_get_row_path (dtree, node);
+	if (!path)
+		return;
+
+	new_panel_at (path);
+}
+
 /**
  * panel_create_tree_view:
  *
@@ -2198,6 +2230,9 @@ panel_create_tree_view (WPanel *panel)
 				  GTK_SIGNAL_FUNC (panel_tree_button_press), panel);
 	gtk_clist_set_button_actions (GTK_CLIST (tree), 2, GTK_BUTTON_SELECTS);
 #endif
+
+	gtk_signal_connect_after (GTK_OBJECT (tree), "button_release_event",
+				  GTK_SIGNAL_FUNC (panel_tree_button_release), panel);
 	return tree;
 }
 
