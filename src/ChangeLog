@@ -1,5 +1,12 @@
 2002-11-28  Pavel Roskin  <proski@gnu.org>
 
+	* tree.c: Make struct WTree opaque.  Remove "done" flag - it's
+	broken by design.
+	(tree_selected_name): New function, return name of the currently
+	selected entry.  Use it where WTree is opaque.
+	* boxes.c (tree_callback): Don't check for the "done" flag - it
+	causes closing the dialog on any key after mouse selection.
+
 	* user.h: Don't include edit/edit-widget.h.
 	* user.c: Include edit/edit-widget.h and edit/edit.h.
 

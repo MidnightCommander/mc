@@ -643,7 +643,7 @@ tree_callback (struct Dlg_head *h, int id, int msg)
 
     case DLG_POST_KEY:
 	/* The enter key will be processed by the tree widget */
-	if (id == '\n' || ((WTree *)(h->current->widget))->done){
+	if (id == '\n') {
 	    h->ret_value = B_ENTER;
 	    dlg_stop (h);
 	}
@@ -677,7 +677,7 @@ tree_box (char *current_dir)
     
     run_dlg (dlg);
     if (dlg->ret_value == B_ENTER)
-	val = g_strdup (mytree->selected_ptr->name);
+	val = g_strdup (tree_selected_name (mytree));
     else
 	val = 0;
     

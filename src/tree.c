@@ -56,6 +56,19 @@ extern int command_prompt;
 /* Specifies the display mode: 1d or 2d */
 static int tree_navigation_flag;
 
+struct WTree {
+    Widget widget;
+    TreeStore *store;
+    tree_entry *selected_ptr;	/* The selected directory */
+    char search_buffer[256];	/* Current search string */
+    tree_entry **tree_shown;	/* Entries currently on screen */
+    int is_panel;		/* panel or plain widget flag */
+    int active;			/* if it's currently selected */
+    int searching;		/* Are we on searching mode? */
+    int topdiff;		/* The difference between the topmost
+				   shown and the selected */
+};
+
 /* Forwards */
 static void save_tree (WTree *tree);
 static void tree_rescan_cmd (WTree *tree);
@@ -862,12 +875,11 @@ move_nextp (WTree *tree)
 static void
 chdir_sel (WTree *tree)
 {
-    if (!tree->is_panel){
-	tree->done = 1;
+    if (!tree->is_panel) {
 	return;
     }
     change_panel ();
-    if (do_cd (tree->selected_ptr->name, cd_exact)){
+    if (do_cd (tree->selected_ptr->name, cd_exact)) {
 	paint_panel (cpanel);
 	select_item (cpanel);
     } else {
@@ -1069,7 +1081,6 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     tree->search_buffer[0] = 0;
     tree->topdiff = tree->widget.lines / 2;
     tree->searching = 0;
-    tree->done = 0;
     tree->active = 0;
 
     /* We do not want to keep the cursor */
@@ -1077,3 +1088,11 @@ tree_new (int is_panel, int y, int x, int lines, int cols)
     load_tree (tree);
     return tree;
 }
+
+/* Return name of the currently selected entry */
+char *
+tree_selected_name (WTree *tree)
+{
+    return tree->selected_ptr->name;
+}
+

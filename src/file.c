@@ -1559,12 +1559,12 @@ panel_get_file (WPanel *panel, struct stat *stat_buf)
 {
     int i;
 
-    /* No problem with Gnome, as get_current_type never returns view_tree there */
     if (get_current_type () == view_tree) {
 	WTree *tree = (WTree *) get_panel_widget (get_current_index ());
+	char *tree_name = tree_selected_name (tree);
 
-	mc_stat (tree->selected_ptr->name, stat_buf);
-	return tree->selected_ptr->name;
+	mc_stat (tree_name, stat_buf);
+	return tree_name;
     }
 
     if (panel->marked) {
