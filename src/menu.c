@@ -239,6 +239,7 @@ static void menubar_execute (WMenu *menubar, int entry)
     */
     menubar_finish (menubar);
     (*call_back)(0);
+    do_refresh ();
 }
 
 static void menubar_move (WMenu *menubar, int step)

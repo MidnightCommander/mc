@@ -1,3 +1,8 @@
+1999-06-24  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* menu.c (menubar_execute): Now needs an additional do_refresh in order
+	to make layout changes visible.
+
 1999-06-01  Robert Brady  <rwb197@ecs.soton.ac.uk>
 
 	* file.c (move_dir_dir): Give an error when an attempt is made to
