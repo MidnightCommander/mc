@@ -255,19 +255,12 @@ compare_word_to_right (WEdit *edit, long i, const char *text,
     return i;
 }
 
-#define XXX							\
-	    if (*s < '\005' || *s == (unsigned char) c)		\
-		goto done;					\
-	    s++;
-
-static inline char *xx_strchr (const unsigned char *s, int c)
+static inline const char *xx_strchr (const unsigned char *s, int c)
 {
-  repeat:
-    XXX XXX XXX XXX XXX XXX XXX XXX;
-    XXX XXX XXX XXX XXX XXX XXX XXX;
-    goto repeat;
-  done:
-    return (char *) s;
+    while (*s >= '\005' && *s != (unsigned char) c) {
+    	s++;
+    }
+    return (const char *) s;
 }
 
 static inline struct syntax_rule apply_rules_going_right (WEdit * edit, long i, struct syntax_rule rule)
