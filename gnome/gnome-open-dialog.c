@@ -362,6 +362,7 @@ gnome_open_dialog_get_tree (GnomeOpenDialog *dialog)
 	prefix = gnome_unconditional_datadir_file ("gnome/apps");
 	node = read_directory (prefix);
 	gnome_open_dialog_generate_tree_helper (GTK_CTREE (retval), NULL, node);
+	gtk_ctree_expand_recursive (GTK_CTREE (retval), NULL);
 	g_node_destroy (node);
 	g_free (prefix);
 	return retval;

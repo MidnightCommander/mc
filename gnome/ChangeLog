@@ -1,3 +1,8 @@
+1999-09-22  Federico Mena Quintero  <federico@redhat.com>
+
+	* gnome-open-dialog.c (gnome_open_dialog_new): Expand the tree
+	when we are done generating it.
+
 1999-09-21  Federico Mena Quintero  <federico@redhat.com>
 
 	* gdesktop.c (desktop_reload_icons): Do not call x_flush_events()
