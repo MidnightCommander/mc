@@ -1,3 +1,10 @@
+2002-12-25  Pavel Roskin  <proski@gnu.org>
+
+	* cmd.c (execute_with_vfs_arg): New function.  Work around
+	defects of VFS localcopy code.
+	(view_file_at_line): Use execute_with_vfs_arg().
+	(do_edit_at_line): Likewise.
+
 2002-12-24  Pavel Roskin  <proski@gnu.org>
 
 	* key.c (is_idle): Check for input on input_fd and gpm_fd.

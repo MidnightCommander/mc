@@ -84,6 +84,50 @@ int source_route = 0;
 int use_internal_edit = 1;
 
 
+/*
+ * Execute command on a filename that can be on VFS.
+ * Errors are reported to the user.
+ */
+static void
+execute_with_vfs_arg (const char *command, const char *filename)
+{
+    char *localcopy;
+    char *fn;
+    struct stat st;
+    time_t mtime;
+
+    /* Simplest case, this file is local */
+    if (vfs_file_is_local (filename)) {
+	execute_internal (command, filename);
+	return;
+    }
+
+    /* FIXME: Creation of new files on VFS is not supported */
+    if (!*filename)
+	return;
+
+    localcopy = mc_getlocalcopy (filename);
+    if (localcopy == NULL) {
+	message (1, MSG_ERROR, _(" Can not fetch a local copy of %s "),
+		 filename);
+	return;
+    }
+
+    /*
+     * filename can be an entry on panel, it can be changed by executing
+     * the command, so make a copy.  Smarter VFS code would make the code
+     * below unnecessary.
+     */
+    fn = g_strdup (filename);
+    mc_stat (localcopy, &st);
+    mtime = st.st_mtime;
+    execute_internal (command, localcopy);
+    mc_stat (localcopy, &st);
+    mc_ungetlocalcopy (fn, localcopy, mtime != st.st_mtime);
+    g_free (fn);
+}
+
+
 int
 view_file_at_line (char *filename, int plain_view, int internal,
 		   int start_line)
@@ -133,26 +177,12 @@ view_file_at_line (char *filename, int plain_view, int internal,
 	    repaint_screen ();
 	}
     } else {
-	char *localcopy;
-
 	if (!viewer) {
 	    viewer = getenv ("PAGER");
 	    if (!viewer)
 		viewer = "view";
 	}
-	/* The file may be a non local file, get a copy */
-	if (!vfs_file_is_local (filename)) {
-	    localcopy = mc_getlocalcopy (filename);
-	    if (localcopy == NULL) {
-		message (1, MSG_ERROR,
-			 _(" Can not fetch a local copy of %s "),
-			 filename);
-		return 0;
-	    }
-	    execute_internal (viewer, localcopy);
-	    mc_ungetlocalcopy (filename, localcopy, 0);
-	} else
-	    execute_internal (viewer, filename);
+	execute_with_vfs_arg (viewer, filename);
     }
     return move_dir;
 }
@@ -297,7 +327,7 @@ void do_edit_at_line (const char *what, int start_line)
 	if (!editor)
 	    editor = get_default_editor ();
     }
-    execute_internal (editor, what);
+    execute_with_vfs_arg (editor, what);
     update_panels (UP_OPTIMIZE, UP_KEEPSEL);
     repaint_screen ();
 }
