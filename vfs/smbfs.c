@@ -322,7 +322,7 @@ smbfs_init (struct vfs_class * me)
 }
 
 static void
-smbfs_fill_names (struct vfs_class *me, void (*func)(char *))
+smbfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     int i;
     char *path;

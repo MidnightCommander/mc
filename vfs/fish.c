@@ -846,7 +846,7 @@ fish_fh_open (struct vfs_class *me, struct vfs_s_fh *fh, int flags,
 }
 
 static void
-fish_fill_names (struct vfs_class *me, void (*func)(char *))
+fish_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct vfs_s_super *super = MEDATA->supers;
     char *flags;

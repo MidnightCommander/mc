@@ -964,7 +964,7 @@ vfs_s_retrieve_file (struct vfs_class *me, struct vfs_s_inode *ino)
 /* ------------------------------- mc support ---------------------------- */
 
 static void
-vfs_s_fill_names (struct vfs_class *me, void (*func)(char *))
+vfs_s_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct vfs_s_super *a = MEDATA->supers;
     char *name;

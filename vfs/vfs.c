@@ -897,7 +897,6 @@ mc_ungetlocalcopy (const char *pathname, const char *local, int has_changed)
             (*vfs->ungetlocalcopy)(vfs, path, local, has_changed) :
             mc_def_ungetlocalcopy (vfs, path, local, has_changed);
     g_free (path);
-    g_free (local);
     return return_value;
 }
 
@@ -956,7 +955,7 @@ vfs_shut (void)
  *  and handles them to an upper layer
  */
 void
-vfs_fill_names (void (*func)(char *))
+vfs_fill_names (fill_names_f func)
 {
     struct vfs_class *vfs;
 

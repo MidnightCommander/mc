@@ -13,6 +13,8 @@ struct vfs_stamping;
 #define VFSF_LOCAL 1		/* Class is local (not virtual) filesystem */
 #define VFSF_NOLINKS 2		/* Hard links not supported */
 
+typedef void (*fill_names_f) (const char *);
+
 struct vfs_class {
     struct vfs_class *next;
     char *name;			/* "FIles over SHell" */
@@ -23,7 +25,7 @@ struct vfs_class {
 
     int (*init) (struct vfs_class *me);
     void (*done) (struct vfs_class *me);
-    void (*fill_names) (struct vfs_class *me, void (*)(char *));
+    void (*fill_names) (struct vfs_class *me, fill_names_f);
 
     int (*which) (struct vfs_class *me, /*FIXME:const*/ char *path);
 
@@ -123,7 +125,7 @@ vfs_file_is_local (const char *filename)
     return vfs_file_class_flags (filename) & VFSF_LOCAL;
 }
 
-void vfs_fill_names (void (*)(char *));
+void vfs_fill_names (fill_names_f);
 char *vfs_translate_url (const char *);
 
 #ifdef USE_NETCODE

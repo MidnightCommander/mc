@@ -275,7 +275,7 @@ static void sfs_free (vfsid id)
     g_free (cur);
 }
 
-static void sfs_fill_names (struct vfs_class *me, void (*func)(char *))
+static void sfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct cachedfile *cur = head;
 

@@ -104,7 +104,7 @@ static char extfs_need_archive [MAXEXTFS];
 static int extfs_no = 0;
 
 static void
-extfs_fill_names (struct vfs_class *me, void (*func) (char *))
+extfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct archive *a = first_archive;
     char *name;

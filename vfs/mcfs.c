@@ -90,7 +90,7 @@ mcfs_get_host_and_username (const char *path, char **host, char **user,
 }
 
 static void
-mcfs_fill_names (struct vfs_class *me, void (*func) (char *))
+mcfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     int i;
     char *name;

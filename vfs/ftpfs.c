@@ -1653,7 +1653,7 @@ ftpfs_done (struct vfs_class *me)
 }
 
 static void
-ftpfs_fill_names (struct vfs_class *me, void (*func)(char *))
+ftpfs_fill_names (struct vfs_class *me, fill_names_f func)
 {
     struct vfs_s_super *super = MEDATA->supers;
     char *name;
