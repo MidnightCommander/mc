@@ -1,3 +1,7 @@
+2002-05-22  Pavel Roskin  <proski@gnu.org>
+
+	* Makefile.am: doc/mc.1 is in top_builddir, not in top_srcdir.
+
 2002-05-15  Andrew V. Samoilov  <kai@cmail.ru>
 
 	* view.c (do_view_init): Close fd if it is unused.

@@ -72,9 +72,9 @@ endif
 EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
 	gindex.pl ncurses.patch mc.hlp $(CHARSET_SRC)
 
-$(srcdir)/mc.hlp: $(top_srcdir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
+$(srcdir)/mc.hlp: $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp $(srcdir)/gindex.pl man2hlp.c
 	- $(MAKE) man2hlp
-	- perl $(srcdir)/gindex.pl $(top_srcdir)/doc/mc.1 \
+	- perl $(srcdir)/gindex.pl $(top_builddir)/doc/mc.1 \
 	       $(top_srcdir)/lib/xnc.hlp $(srcdir)/mc.hlp
 	- touch $(srcdir)/mc.hlp
 
