@@ -1,5 +1,10 @@
 2001-07-10  Pavel Roskin  <proski@gnu.org>
 
+	* extfs.c: Include contents of shared_tar_ext.c - it's no
+	longer shared.
+	* shared_tar_ext.c: Remove.
+	* Make-mc.in (VFSSRCS): Remove shared_tar_ext.c.
+
 	* smbfs.c (vfs_smbfs_ops): Use short name "smbfs" for the
 	filesystem. Don't translate it.
 

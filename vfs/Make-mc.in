@@ -123,7 +123,6 @@ VFSSRCS = \
 	names.c 		\
 	mcserv.c 		\
 	sfs.c 			\
-	shared_tar_ext.c 	\
 	smbfs.c			\
 	tar.c 			\
 	tcputil.c		\
