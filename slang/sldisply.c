@@ -2431,7 +2431,7 @@ int SLtt_initialize (char *term)
    if (Color_Bg_Str == NULL)
      {
 	Color_Bg_Str = SLtt_tgetstr ("Sb");   /* setb */
-	Is_Fg_BGR = (Color_Bg_Str != NULL);
+	Is_Bg_BGR = (Color_Bg_Str != NULL);
      }
 
    if ((Max_Terminfo_Colors = SLtt_tgetnum ("Co")) < 0)

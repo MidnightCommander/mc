@@ -1,3 +1,8 @@
+2005-03-19  Pavel S. Shirshov  <me@pavelsh.pp.ru>
+
+	* sldisply.c (SLtt_initialize): Fix typo. Change Is_Bg_BGR,
+	not Is_Fg_BGR.
+
 2005-02-10  Roland Illig  <roland.illig@gmx.de>
 
 	* include/slang.h: Define __unix__ if __NetBSD__ is defined.
