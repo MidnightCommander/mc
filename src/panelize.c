@@ -36,6 +36,9 @@
 #   include <grp.h>
 #   include <pwd.h>
 #endif
+
+/* Needed for the extern declarations of integer parameters */
+#define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "tty.h"
 #include "x.h"
 #include "global.h"
@@ -46,9 +49,6 @@
 #include "dialog.h"		/* For do_refresh() */
 #include "setup.h"		/* For profile_bname */
 #include "profile.h"		/* Load/save directories panelize */
-
-/* Needed for the extern declarations of integer parameters */
-#define DIR_H_INCLUDE_HANDLE_DIRENT
 #include "dir.h"
 #include "panel.h"		/* Needed for the externs */
 #include "file.h"

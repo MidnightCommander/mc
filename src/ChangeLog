@@ -1,5 +1,8 @@
 2001-06-15  Pavel Roskin  <proski@gnu.org>
 
+	* panelize.c: Define DIR_H_INCLUDE_HANDLE_DIRENT earlier, since
+	the GNOME edition includes dir.h from other headers.
+
 	* background.c: Include "x.h".
 	* panelize.c: Likewise.
 	* treestore.c: Likewise.
