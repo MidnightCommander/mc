@@ -313,7 +313,7 @@ typedef struct ep_dlg_data {
 } ep_dlg_data;
 
 static gchar *
-get_nickname ()
+get_nickname (gchar *text)
 {
 	GtkWidget *dlg;
 	GtkWidget *entry;
@@ -323,6 +323,8 @@ get_nickname ()
 	dlg = gnome_dialog_new (_("Enter name."), GNOME_STOCK_BUTTON_OK, 
 				GNOME_STOCK_BUTTON_CANCEL, NULL);
 	entry = gtk_entry_new ();
+	if (text)
+		gtk_entry_set_text (GTK_ENTRY (entry), text);
 	label = gtk_label_new (_("Enter label for command:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 	gtk_box_pack_start (GTK_BOX (GNOME_DIALOG (dlg)->vbox),
@@ -346,7 +348,7 @@ ep_add_callback (GtkWidget *widget, ep_dlg_data *data)
 	gint i;
 	gchar *insert_tab[1];
 
-	insert_tab[0] = get_nickname ();
+	insert_tab[0] = get_nickname (NULL);
 	if (insert_tab[0] == NULL)
 		return;
 	i = gtk_clist_append (GTK_CLIST (data->clist), insert_tab);
@@ -376,13 +378,23 @@ ep_select_callback (GtkWidget *widget,
 		    GdkEventButton *event,
 		    ep_dlg_data *data)
 {
-	data->setting_text = TRUE;
-	gtk_entry_set_text (GTK_ENTRY (data->entry),
-			    (gchar *) gtk_clist_get_row_data (GTK_CLIST (widget), row));
-	data->setting_text = FALSE;
-	data->selected = row;
-	gtk_widget_set_sensitive (data->remove_button, TRUE);
-	gtk_widget_set_sensitive (data->add_button, FALSE);
+	if (event && event->type == GDK_2BUTTON_PRESS) {
+		gchar *nick;
+
+		gtk_clist_get_text (GTK_CLIST (widget), row, 0, &nick);
+		/* ugly but correct... (: */
+		nick = get_nickname (nick);
+		gtk_clist_set_text (GTK_CLIST (data->clist), row, 0, nick);
+		gtk_clist_select_row (GTK_CLIST (data->clist), row, 0);
+	} else {
+		data->setting_text = TRUE;
+		gtk_entry_set_text (GTK_ENTRY (data->entry),
+				    (gchar *) gtk_clist_get_row_data (GTK_CLIST (widget), row));
+		data->setting_text = FALSE;
+		data->selected = row;
+		gtk_widget_set_sensitive (data->remove_button, TRUE);
+		gtk_widget_set_sensitive (data->add_button, FALSE);
+	}
 }
 static void
 ep_text_changed_callback (GtkWidget *widget, ep_dlg_data *data)
@@ -409,17 +421,17 @@ load_settings (GtkCList *clist)
     
 	if (!profile_keys){
 		insert_tab[0] = _("Find all core files");
-		gtk_clist_insert (clist, i, insert_tab);
-		gtk_clist_set_row_data (clist, i++, g_strdup ("find / -name core"));
+		i = gtk_clist_insert (clist, i, insert_tab);
+		gtk_clist_set_row_data (clist, i, g_strdup ("find / -name core"));
 		insert_tab[0] = _("Find rejects after patching");
-		gtk_clist_insert (clist, i, insert_tab);
-		gtk_clist_set_row_data (clist, i++, g_strdup ("find . -name \\*.rej -print"));
+		i = gtk_clist_insert (clist, i, insert_tab);
+		gtk_clist_set_row_data (clist, i, g_strdup ("find . -name \\*.rej -print"));
 	} else {
 		while (profile_keys) {
 			profile_keys = profile_iterator_next (profile_keys, &key, &value);
 			insert_tab[0] = key;
-			gtk_clist_insert (clist, i, insert_tab);
-			gtk_clist_set_row_data (clist, i++, g_strdup (value));
+			i = gtk_clist_insert (clist, i, insert_tab);
+			gtk_clist_set_row_data (clist, i, g_strdup (value));
 		}
 	}
 }
@@ -463,8 +475,9 @@ gnome_external_panelize (GtkWidget *widget, WPanel *panel)
 	data->clist = gtk_clist_new (1);
 	load_settings (GTK_CLIST (data->clist));
 	gtk_signal_connect (GTK_OBJECT (data->clist), "select_row", GTK_SIGNAL_FUNC (ep_select_callback), (gpointer) data);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (data->clist), 1, TRUE);
 	vbox = gtk_vbox_new (FALSE, GNOME_PAD_SMALL);
+	gtk_clist_columns_autosize (GTK_CLIST (data->clist));
+	gtk_clist_set_auto_sort (GTK_CLIST (data->clist), TRUE);
 	gtk_container_set_border_width (GTK_CONTAINER (vbox), GNOME_PAD_SMALL);
 	sw = gtk_scrolled_window_new (GTK_CLIST (data->clist)->hadjustment, GTK_CLIST (data->clist)->vadjustment);
 	gtk_widget_set_usize (sw, 300, 100);

@@ -2,6 +2,7 @@
 
 	* gcmd.c (gnome_external_panelize): Now it works.  Just need to save
 	results so the next time works.  Will do this tomorrow.
+	(gnome_external_panelize): think I finished this now.
 
 1999-01-05  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
