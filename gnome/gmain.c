@@ -582,7 +582,7 @@ session_save_state (GnomeClient *client, gint phase, GnomeRestartStyle save_styl
 		argv [i++] = pc->panel->cwd;
 		argv [i++] = "--geometry";
 		argv [i++] = geom;
-		free_list = g_list_append (free_list, buffer);
+		free_list = g_list_append (free_list, geom);
 	}
 
 	/* If no windows were open */
