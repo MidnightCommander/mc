@@ -3102,25 +3102,25 @@ The program will retrieve all of its information relative to the
 MC_DATADIR environment variable, if this variable is not set, then it will
 fall back to the @prefix@/share/mc directory.
 .PP
-@prefix@/share/mc/mc.hlp
+.I @prefix@/share/mc/mc.hlp
 .IP
 The help file for the program.
 .PP
-@prefix@/share/mc/mc.ext
+.I @prefix@/share/mc/mc.ext
 .IP
 The default system-wide extensions file.
 .PP
-~/.mc/bindings
+.I ~/.mc/bindings
 .IP
 User's own extension, view configuration and edit configuration
 file.  They override the contents of the system wide files if present.
 .PP
-@prefix@/share/mc/mc.ini
+.I @prefix@/share/mc/mc.ini
 .IP
 The default system-wide setup for the Midnight Commander, used only if
 the user doesn't have his own ~/.mc/ini file.
 .PP
-@prefix@/share/mc/mc.lib
+.I @prefix@/share/mc/mc.lib
 .IP
 Global settings for the Midnight Commander.  Settings in this file
 affect all users, whether they have ~/.mc/ini or not.  Currently, only
@@ -3129,29 +3129,29 @@ terminal settings
 .\"Terminal databases"
 are loaded from mc.lib.
 .PP
-~/.mc/ini
+.I ~/.mc/ini
 .IP
 User's own setup. If this file is present then the setup is loaded
 from here instead of the system-wide startup file.
 .PP
-@prefix@/share/mc/mc.hint
+.I @prefix@/share/mc/mc.hint
 .IP
 This file contains the hints (cookies) displayed by the program.
 .PP
-@prefix@/share/mc/mc.menu
+.I @prefix@/share/mc/mc.menu
 .IP
 This file contains the default system-wide applications menu.
 .PP
-~/.mc/menu
+.I ~/.mc/menu
 .IP
 User's own application menu. If this file is present it is used
 instead of the system-wide applications menu.
 .PP
-~/.mc/Tree
+.I ~/.mc/Tree
 .IP
 The directory list for the directory tree and tree view features.
 .PP
-\&./.mc.menu
+.I ./.mc.menu
 .IP
 Local user-defined menu. If this file
 is present it is used instead of the home or system-wide
