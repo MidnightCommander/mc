@@ -468,8 +468,8 @@ discard_key_info (void)
 	
 	current_lang = getenv ("LANG");
 	g_hash_table_foreach (generic_types, clean_mime_foreach, NULL);
-/*        g_hash_table_foreach (specific_types, print_mime_foreach, NULL);*/
-	g_hash_table_foreach (specific_types, clean_mime_foreach, NULL);
+/*          g_hash_table_foreach (specific_types, print_mime_foreach, NULL);  */
+  	g_hash_table_foreach (specific_types, clean_mime_foreach, NULL); 
 	g_hash_table_destroy (generic_types);
 	g_hash_table_destroy (specific_types);
 	specific_types = g_hash_table_new (g_str_hash, g_str_equal);

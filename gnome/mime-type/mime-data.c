@@ -22,7 +22,7 @@
 /* Prototypes */
 static void mime_fill_from_file (const char *filename, gboolean init_user);
 static void mime_load_from_dir (const char *mime_info_dir, gboolean system_dir);
-static void add_to_key (char *mime_type, char *def, GHashTable *table);
+void add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user);
 static char *get_priority (char *def, int *priority);
 
 
@@ -30,7 +30,7 @@ static char *get_priority (char *def, int *priority);
 static char *current_lang;
 static GHashTable *mime_types = NULL;
 static GHashTable *initial_user_mime_types = NULL;
-static GHashTable *user_mime_types = NULL;
+GHashTable *user_mime_types = NULL;
 static GtkWidget *clist = NULL;
 extern GtkWidget *delete_button;
 extern GtkWidget *capplet;
@@ -73,8 +73,8 @@ free_mime_info (MimeInfo *mi)
 {
 
 }
-static void
-add_to_key (char *mime_type, char *def, GHashTable *table)
+void
+add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user)
 {
 	int priority = 1;
 	char *s, *p, *ext;
@@ -89,6 +89,8 @@ add_to_key (char *mime_type, char *def, GHashTable *table)
 		info->regex[1] = NULL;
 		info->ext[0] = NULL;
 		info->ext[1] = NULL;
+                info->user_ext[0] = NULL;
+                info->user_ext[1] = NULL;
                 info->regex_readable[0] = NULL;
                 info->regex_readable[1] = NULL;
                 info->ext_readable[0] = NULL;
@@ -107,7 +109,11 @@ add_to_key (char *mime_type, char *def, GHashTable *table)
 		
 		while ((ext = strtok_r (s, " \t\n\r,", &tokp)) != NULL){
                         /* FIXME: We really need to check for duplicates before entering this. */
-			info->ext[priority] = g_list_prepend (info->ext[priority], ext);
+                        if (!init_user) {
+                                info->ext[priority] = g_list_prepend (info->ext[priority], ext);
+                        } else {
+                                info->user_ext[priority] = g_list_prepend (info->user_ext[priority], ext);
+                        }
 			used = 1;
 			s = NULL;
 		}
@@ -178,10 +184,13 @@ mime_fill_from_file (const char *filename, gboolean init_user)
 
 				if (*p == 0)
 					continue;
-				add_to_key (current_key, p, mime_types);
+				add_to_key (current_key, p, mime_types, init_user);
 				if (init_user) {
-                                        add_to_key (current_key, p, initial_user_mime_types);
-                                        add_to_key (current_key, p, user_mime_types);
+                                        add_to_key (current_key, p, 
+                                                    initial_user_mime_types,
+                                                    TRUE);
+                                        add_to_key (current_key, p, 
+                                                    user_mime_types, TRUE);
                                 }
 				used = TRUE;
 			}
@@ -255,6 +264,13 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
                 if (list->next != NULL)
                         g_string_append (extension, ", ");
         }
+        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[0])
+                g_string_append (extension, ", ");
+        for (list = ((MimeInfo *) mi)->user_ext[0]; list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next != NULL)
+                        g_string_append (extension, ", ");
+        }
         ((MimeInfo *) mi)->ext_readable[0] = extension->str;
         g_string_free (extension, FALSE);
         
@@ -264,16 +280,23 @@ add_mime_vals_to_clist (gchar *mime_type, gpointer mi, gpointer cl)
                 if (list->next)
                         g_string_append (extension, ", ");
         }
+        if (strcmp (extension->str, "") != 0 && ((MimeInfo *)mi)->user_ext[1])
+                g_string_append (extension, ", ");
+        for (list = ((MimeInfo *) mi)->user_ext[1]; list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next != NULL)
+                        g_string_append (extension, ", ");
+        }
         ((MimeInfo *) mi)->ext_readable[1] = extension->str;
         g_string_free (extension, FALSE);
 
-        if (((MimeInfo *) mi)->ext[0]) {
+        if (((MimeInfo *) mi)->ext[0] || ((MimeInfo *) mi)->user_ext[0]) {
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
-                if (((MimeInfo *) mi)->ext[1]) {
+                if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {
                         g_string_append (extension, ", ");
                         g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
                 }
-        } else if (((MimeInfo *) mi)->ext[1])
+        } else if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1])
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
         else
                 extension = g_string_new ("");
@@ -338,6 +361,9 @@ edit_clicked (GtkWidget *widget, gpointer data)
         mi = (MimeInfo *) gtk_clist_get_row_data (GTK_CLIST (clist), row);
         if (mi)
                 launch_edit_window (mi);
+        gtk_clist_remove (GTK_CLIST (clist), row);
+        row = add_mime_vals_to_clist (mi->mime_type, mi, clist);
+        gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 }
 void
 add_clicked (GtkWidget *widget, gpointer data)
@@ -378,10 +404,16 @@ finalize_mime_type_foreach (gpointer mime_type, gpointer info, gpointer data)
         MimeInfo *mi = (MimeInfo *)info;
         GList *list;
         GString *extension;
-        gint row;
         
         extension = g_string_new ("");
         for (list = ((MimeInfo *) mi)->ext[0];list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next != NULL)
+                        g_string_append (extension, ", ");
+        }
+        if (strcmp (extension->str, "") != 0 && mi->user_ext[0])
+                g_string_append (extension, ", ");
+        for (list = ((MimeInfo *) mi)->user_ext[0]; list; list=list->next) {
                 g_string_append (extension, (gchar *) list->data);
                 if (list->next != NULL)
                         g_string_append (extension, ", ");
@@ -395,16 +427,23 @@ finalize_mime_type_foreach (gpointer mime_type, gpointer info, gpointer data)
                 if (list->next)
                         g_string_append (extension, ", ");
         }
+        if (strcmp (extension->str, "") != 0 && mi->user_ext[1]) 
+                g_string_append (extension, ", ");
+        for (list = ((MimeInfo *) mi)->user_ext[1]; list; list=list->next) {
+                g_string_append (extension, (gchar *) list->data);
+                if (list->next != NULL)
+                        g_string_append (extension, ", ");
+        }
         ((MimeInfo *) mi)->ext_readable[1] = extension->str;
         g_string_free (extension, FALSE);
 
-        if (((MimeInfo *) mi)->ext[0]) {
+        if (((MimeInfo *) mi)->ext[0] || ((MimeInfo *) mi)->user_ext[0]) {
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[0]));
-                if (((MimeInfo *) mi)->ext[1]) {
+                if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1]) {
                         g_string_append (extension, ", ");
                         g_string_append (extension, (((MimeInfo *) mi)->ext_readable[1]));
                 }
-        } else if (((MimeInfo *) mi)->ext[1])
+        } else if (((MimeInfo *) mi)->ext[1] || ((MimeInfo *) mi)->user_ext[1])
                 extension = g_string_new ((((MimeInfo *) mi)->ext_readable[1]));
         else
                 extension = g_string_new ("");
@@ -476,18 +515,18 @@ add_new_mime_type (gchar *mime_type, gchar *raw_ext, gchar *regexp1, gchar *rege
         /* passed check, now we add it. */
         if (ext) {
                 temp = g_strconcat ("ext: ", ext, NULL);
-                add_to_key (mime_type, temp, user_mime_types);
+                add_to_key (mime_type, temp, user_mime_types, TRUE);
                 mi = (MimeInfo *) g_hash_table_lookup (user_mime_types, mime_type);
                 g_free (temp);
         }
         if (regexp1) {
                 temp = g_strconcat ("regex: ", regexp1, NULL);
-                add_to_key (mime_type, temp, user_mime_types);
+                add_to_key (mime_type, temp, user_mime_types, TRUE);
                 g_free (temp);
         }
         if (regexp2) {
                 temp = g_strconcat ("regex,2: ", regexp2, NULL);
-                add_to_key (mime_type, temp, user_mime_types);
+                add_to_key (mime_type, temp, user_mime_types, TRUE);
                 g_free (temp);
         }
         /* Finally add it to the clist */
@@ -608,4 +647,10 @@ discard_mime_info ()
         reread_list ();
 	g_free (filename);
 }
+
+
+
+
+
+
 

@@ -11,11 +11,15 @@ typedef struct {
 	char     *mime_type;
 	regex_t  *regex[2];
 	GList    *ext[2];
+        GList    *user_ext[2];
         char     *ext_readable[2];
         char     *regex_readable[2];
 	char     *file_name;
         GList    *keys;
 } MimeInfo;
+
+extern GHashTable *user_mime_types;
+extern void add_to_key (char *mime_type, char *def, GHashTable *table, gboolean init_user);
 
 GtkWidget *get_mime_clist (void);
 void init_mime_type (void);

@@ -30,7 +30,7 @@ left_aligned_button (gchar *label)
 			  0.0, 0.5);
   gtk_misc_set_padding (GTK_MISC (GTK_BIN (button)->child),
 			GNOME_PAD_SMALL, 0);
-
+  
   return button;
 }
 
@@ -74,7 +74,7 @@ init_mime_capplet ()
         GtkWidget *vbox;
         GtkWidget *hbox;
         GtkWidget *button;
-
+        
 	capplet = capplet_widget_new ();
         delete_button = left_aligned_button (_("Delete"));
         gtk_signal_connect (GTK_OBJECT (delete_button), "clicked",
