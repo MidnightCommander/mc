@@ -119,9 +119,6 @@ distdirs:
 
 distcopy:
 	sed -e "s/^%define ver .*/%define ver      $(VERSION)/; s/^%define rel .*/%define rel      1/" mc.spec > Specfile
-	sed "s/@VERSION@/$(VERSION)/" VERSION.in > VERSION.tmp
-	if cmp -s VERSION VERSION.tmp; then rm -f VERSION.tmp; \
-	else mv -f VERSION.tmp VERSION; fi
 	cp $(DISTMAIN) ../mc-$(VERSION);
 	-mkdir ../mc-$(VERSION)/intl
 	for I in $(alldirs); do \
