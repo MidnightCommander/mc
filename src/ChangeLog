@@ -1,3 +1,12 @@
+Fri Apr 16 07:51:42 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* wtools.c (message): Use g_vsnprintf instead of vsprintf.
+
+Fri Apr 16 07:50:59 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* view.c (do_view_init): Don't view files with negative file size.
+	Added some error checking (I'm not sure whether this is needed).
+
 1999-04-15  Federico Mena Quintero  <federico@nuclecu.unam.mx>
 
 	* panel.h (WPanel): Added a drag_tree_row field to the WPanel

@@ -1,3 +1,9 @@
+Thu Apr 15 21:59:52 1999  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
+	* configure.in: Linking from $srcdir/slang is broken when configure
+	isn't called with an absolute path. Link from ../$srcdir/slang if
+	configure was invoked with a relative path.
+
 1999-03-20  Nuno Ferreira  <nmrf@rnl.ist.utl.pt>
 
 	* configure.in: Do not rm the destination file and then link, use

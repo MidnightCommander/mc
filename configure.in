@@ -819,7 +819,7 @@ AC_ARG_WITH(included-slang,
 	fi]
 )
 
-AC_DEFUN(AC_WITH_SLANG,
+AC_DEFUN(AC_WITH_SLANG,[
 	AC_DEFINE(HAVE_SLANG)
 	search_ncurses=false
 	if $slang_use_system_installed_lib
@@ -853,7 +853,10 @@ AC_DEFUN(AC_WITH_SLANG,
 	    CPPFLAGS="$CPPFLAGS -I../slang"
 	    fastdepslang=fastdepslang
 	    mkdir -p slang
-	    ln -sf  $srcdir/slang/slang-mc.h slang/slang.h
+	    case "$srcdir" in
+		/*) ln -sf  $srcdir/slang/slang-mc.h slang/slang.h;;
+		*)  ln -sf  ../$srcdir/slang/slang-mc.h slang/slang.h;;
+	    esac
 	fi
 	if $slang_check_lib
 	then
@@ -871,7 +874,7 @@ AC_DEFUN(AC_WITH_SLANG,
 	    else
 		AC_USE_TERMCAP
 	    fi
-        fi
+        fi]
 )
 
 LIBSLANG=""

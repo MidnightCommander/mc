@@ -562,10 +562,28 @@ do_view_init (WView *view, char *_command, char *_file, int start_line)
 
     {
         int fd;
-	fd = mc_open(_file, O_RDONLY);
+
+	if ((fd = mc_open(_file, O_RDONLY)) == -1) {
+	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n %s "),
+			_file, unix_error_string (errno));
+	    return -1;
+	}
+	if (mc_fstat (fd, &view->s) == -1) {
+	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n %s "),
+			_file, unix_error_string (errno));
+	    mc_close(fd);
+	    return -1;
+	}
+
+	if (view->s.st_size < 0) {
+	    message (1, MSG_ERROR, _(" Can't open \"%s\"\n File too large (%d) "),
+			_file, view->s.st_size);
+	    return -1;
+	}
 	if (_file[0] && view->viewer_magic_flag && (is_gunzipable (fd, &type)) != 0)
 	    view->filename = g_strconcat (_file, decompress_extension(type), NULL);
-	else view->filename = g_strdup (_file);
+	else 
+	    view->filename = g_strdup (_file);
 	mc_close(fd);
     }
 

@@ -327,7 +327,7 @@ Dlg_head *message (int error, char *header, char *text, ...)
     /* Setup the display information */
     strcpy (buffer, "\n");
     va_start (args, text);
-    vsprintf (&buffer [1], text, args);
+    g_vsnprintf (&buffer [1], sizeof (buffer), text, args);
     strcat (buffer, "\n");
     va_end (args);
     
