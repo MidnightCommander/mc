@@ -3,9 +3,6 @@ Before 4.6.0-pre2
 
 Don't allow stdout and stderr from extfs scripts pollute the screen.
 
-reimplement "-P" in a safer way (temp file instead of stdout) - possibly
-security issues.
-
 Consider applying a patch from PLD to make M-o propagate the current
 directory to the other panel.
 
