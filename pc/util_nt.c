@@ -29,12 +29,10 @@
 #include <signal.h>		/* my_system */
 #include <limits.h>		/* INT_MAX */
 #include <errno.h>
-#include <sys/time.h>		/* select: timeout */
-#include <sys/param.h>
 #include <sys/stat.h>
 #include <stdarg.h>
 #include <process.h>
-#include "../src/fs.h"
+#include "../src/global.h"
 #include "../src/util.h"
 #include "util_win32.h"
 

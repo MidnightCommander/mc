@@ -23,10 +23,9 @@
  #error "This file is for Win32 systems only"
 #else
 
-#include <windows.h>
 #include <stdio.h>
-#include "../src/mouse.h"
 #include "../src/global.h"
+#include "../src/mouse.h"
 #include "../src/main.h"
 #include "../src/key.h"
 #include "../vfs/vfs.h"

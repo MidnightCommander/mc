@@ -20,14 +20,11 @@
    */
 
 #include <config.h>
-#ifdef _OS_NT
-#include <windows.h>
-#include "util_win32.h"
-#endif
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include "../src/global.h"
 #include "../src/tty.h"
 #include "../src/mad.h"
 #include "../src/util.h"
@@ -40,6 +37,7 @@
 #include "../src/panel.h"
 #include "../src/main.h"
 #include "../src/cmd.h"
+#include "util_win32.h"
 
 struct Dlg_head *drive_dlg;
 WPanel *this_panel;

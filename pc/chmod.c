@@ -18,14 +18,13 @@
 
 #include <config.h>
 
-#include <windows.h>
-
 #include <string.h>
 #include <stdio.h>
 /* for chmod and stat */
 #include <io.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include "../src/global.h"
 #include "../src/tty.h"
 #include "../src/mad.h"
 #include "../src/util.h"

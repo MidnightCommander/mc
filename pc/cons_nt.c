@@ -22,7 +22,7 @@
 */
 #include <config.h>
 
-#include <windows.h>
+#include "../src/global.h"
 #include "trace_nt.h"
 
 int    cons_saver_pid = 1;
