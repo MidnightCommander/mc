@@ -9,9 +9,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 1999-09-24 21:04+0200\n"
-"PO-Revision-Date: 1999-09-24 22:52+0200\n"
-"Last-Translator: Henrik Steen <hsteen@sw.seisy.abb.se>\n"
+"POT-Creation-Date: 1999-09-28 17:48+0200\n"
+"PO-Revision-Date: 1999-09-27 18:20+0100\n"
+"Last-Translator: Richard Hult <rhult@hem2.passagen.se>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
@@ -1119,26 +1119,26 @@ msgstr "URL:"
 
 #: gnome/gnome-file-property-dialog.c:310
 msgid "Caption:"
-msgstr "Överskrift:"
+msgstr "Namn:"
 
 #: gnome/gnome-file-property-dialog.c:387
 #: gnome/gnome-file-property-dialog.c:489
 msgid "Drop Action"
-msgstr "Släppbeteende"
+msgstr "Handling för drag-och-släpp"
 
 #: gnome/gnome-file-property-dialog.c:388
 msgid "Use default Drop Action options"
-msgstr "Använd standardinställningar för släppbeteende"
+msgstr "Använd standardhandling när filen släpps"
 
 #: gnome/gnome-file-property-dialog.c:403
 #: gnome/gnome-file-property-dialog.c:491 gnome/gpopup2.c:194
 #: src/screen.c:2397 src/screen.c:2427
 msgid "View"
-msgstr "Vy"
+msgstr "Visa"
 
 #: gnome/gnome-file-property-dialog.c:404
 msgid "Use default View options"
-msgstr "Använd standardinställningar för vyn"
+msgstr "Använd standardmetod för att visa"
 
 #: gnome/gnome-file-property-dialog.c:439
 msgid "Select an Icon"
@@ -1151,15 +1151,15 @@ msgstr "Öppna"
 
 #: gnome/gnome-file-property-dialog.c:479
 msgid "Use default Open action"
-msgstr "Använd standard öppningsbeteende"
+msgstr "Använd standardmetod för att öppna"
 
 #: gnome/gnome-file-property-dialog.c:502
 msgid "Use default Drop action"
-msgstr "Använd standard släppbeteende"
+msgstr "Använd standardhandling då filen släpps"
 
 #: gnome/gnome-file-property-dialog.c:504
 msgid "Use default View action"
-msgstr "Använd standard vybeteende"
+msgstr "Använd standardmetod för att visa"
 
 #: gnome/gnome-file-property-dialog.c:513 gnome/gpopup2.c:196
 #: src/screen.c:2398 src/screen.c:2428 src/view.c:2079
@@ -1177,11 +1177,11 @@ msgstr "Ikon"
 #. We must be a file or a link to a file.
 #: gnome/gnome-file-property-dialog.c:611
 msgid "File Actions"
-msgstr "Filaktioner"
+msgstr "Filhandlingar"
 
 #: gnome/gnome-file-property-dialog.c:616
 msgid "Open action"
-msgstr "Öppna aktion"
+msgstr "Metod för att Öppna"
 
 #: gnome/gnome-file-property-dialog.c:617
 msgid "Needs terminal to run"
@@ -1233,7 +1233,7 @@ msgstr "Sätt GID"
 
 #: gnome/gnome-file-property-dialog.c:783 gnome/gprop.c:287
 msgid "Sticky"
-msgstr "Orörlig"
+msgstr "\"Sticky\""
 
 #: gnome/gnome-file-property-dialog.c:905
 #, c-format
