@@ -2520,7 +2520,7 @@ int edit_execute_cmd (WEdit * edit, int command, int char_for_insertion)
 	break;
 
     case CK_Exit:
-	edit_quit_cmd (edit);
+	dlg_stop (edit->widget.parent);
 	break;
     case CK_New:
 	edit_new_cmd (edit);

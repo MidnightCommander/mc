@@ -141,12 +141,19 @@ edit_adjust_size (Dlg_head *h)
 
 /* Callback for the edit dialog */
 static int
-edit_dialog_callback (Dlg_head * h, int id, int msg)
+edit_dialog_callback (Dlg_head *h, int id, int msg)
 {
+    WEdit *edit;
+
     switch (msg) {
     case DLG_RESIZE:
 	edit_adjust_size (h);
 	return MSG_HANDLED;
+    case DLG_VALIDATE:
+	edit = (WEdit *) find_widget_type (h, (callback_fn) edit_callback);
+	if (!edit_ok_to_exit (edit)) {
+	    h->running = 1;
+	}
     }
     return default_dlg_callback (h, id, msg);
 }

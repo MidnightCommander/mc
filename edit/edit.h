@@ -198,6 +198,7 @@ int edit_save_as_cmd (WEdit * edit);
 WEdit *edit_init (WEdit *edit, int lines, int columns,
 		  const char *filename, long line);
 int edit_clean (WEdit * edit);
+int edit_ok_to_exit (WEdit *edit);
 int edit_renew (WEdit * edit);
 int edit_new_cmd (WEdit * edit);
 int edit_reload (WEdit *edit, const char *filename);
@@ -205,7 +206,6 @@ int edit_load_cmd (WEdit * edit);
 void edit_mark_cmd (WEdit * edit, int unmark);
 void edit_set_markers (WEdit * edit, long m1, long m2, int c1, int c2);
 void edit_push_markers (WEdit * edit);
-void edit_quit_cmd (WEdit * edit);
 void edit_replace_cmd (WEdit * edit, int again);
 void edit_search_cmd (WEdit * edit, int again);
 void edit_complete_word_cmd (WEdit * edit);

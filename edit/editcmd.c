@@ -2049,28 +2049,37 @@ void edit_search_cmd (WEdit * edit, int again)
 }
 
 
-/* Real edit only */
-void edit_quit_cmd (WEdit * edit)
+/*
+ * Check if it's OK to close the editor.  If there are unsaved changes,
+ * ask user.  Return 1 if it's OK to exit, 0 to continue editing.
+ */
+int
+edit_ok_to_exit (WEdit *edit)
 {
-    if (edit->modified) {
-	switch (edit_query_dialog3 (_ ("Quit"), _ (" File was modified, Save with exit? "), _ ("Cancel quit"), _ ("&Yes"), _ ("&No"))) {
-	case 1:
-	    edit_push_markers (edit);
-	    edit_set_markers (edit, 0, 0, 0, 0);
-	    if (!edit_save_cmd (edit))
-		return;
-	    break;
-	case 2:
-	    if (edit->locked)
-		edit->locked = edit_unlock_file (edit->filename);
-	    break;
-	case 0:
-	case -1:
-	    return;
-	}
+    if (!edit->modified)
+	return 1;
+
+    switch (edit_query_dialog3
+	    (_("Quit"), _(" File was modified, Save with exit? "),
+	     _("Cancel quit"), _("&Yes"), _("&No"))) {
+    case 1:
+	edit_push_markers (edit);
+	edit_set_markers (edit, 0, 0, 0, 0);
+	if (!edit_save_cmd (edit))
+	    return 0;
+	break;
+    case 2:
+	if (edit->locked)
+	    edit->locked = edit_unlock_file (edit->filename);
+	break;
+    case 0:
+    case -1:
+	return 0;
     }
-    dlg_stop (edit->widget.parent);
+
+    return 1;
 }
+
 
 #define TEMP_BUF_LEN 1024
 
