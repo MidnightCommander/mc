@@ -1,5 +1,8 @@
 2002-08-15  Pavel Roskin  <proski@gnu.org>
 
+	* fs.h (compute_namelen): New inline function to take care of
+	the d_namlen field if and only if it's needed.
+
 	* screen.c (string_file_name): Replace non-printable characters
 	with question marks.
 
