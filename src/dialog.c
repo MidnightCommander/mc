@@ -17,9 +17,6 @@
 
 #include <config.h>
 #include <stdio.h>
-#include <stdarg.h>
-#include <sys/types.h>
-#include <string.h>
 #include "global.h"
 #include "dialog.h"
 #include "key.h"		/* we_are_background */
@@ -27,21 +24,21 @@
 
 
 /* The refresh stack */
-typedef struct Refresh {
+struct Refresh {
     void (*refresh_fn)(void *);
     void *parameter;
     int  flags;
     struct Refresh *next;
-} Refresh;
+};
 
-static Refresh *refresh_list;
+static struct Refresh *refresh_list;
 
 void
 push_refresh (refresh_fn new_refresh, void *parameter, int flags)
 {
-    Refresh *new;
+    struct Refresh *new;
 
-    new = g_new (Refresh, 1);
+    new = g_new (struct Refresh, 1);
     new->next = (struct Refresh *) refresh_list;
     new->refresh_fn = new_refresh;
     new->parameter = parameter;
@@ -52,7 +49,7 @@ push_refresh (refresh_fn new_refresh, void *parameter, int flags)
 void
 pop_refresh (void)
 {
-    Refresh *old;
+    struct Refresh *old;
 
     if (!refresh_list)
 	fprintf (stderr, _("\n\n\nrefresh stack underflow!\n\n\n"));
@@ -64,7 +61,7 @@ pop_refresh (void)
 }
 
 static void
-do_complete_refresh (Refresh *refresh_list)
+do_complete_refresh (struct Refresh *refresh_list)
 {
     if (!refresh_list)
 	return;
