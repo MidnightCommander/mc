@@ -191,7 +191,7 @@ enum { pause_never, pause_on_dumb_terminals, pause_always };
 int   pause_after_run = pause_on_dumb_terminals;
 
 /* It true saves the setup when quitting */
-int auto_save_setup = 0;
+int auto_save_setup = 1;
 
 /* If true, be eight bit clean */
 int eight_bit_clean = 0;

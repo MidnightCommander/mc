@@ -83,6 +83,7 @@ typedef struct {
     int      split;		/* Split panel to allow two columns */
     int      is_panelized;	/* Flag: special filelisting, can't reload */
     int      frame_size;	/* half or full frame */
+    int      icons_per_row;     /* Icon view; how many icons displayed per row */
     sortfn   *sort_type;	/* Sort type */
     char     *filter;		/* File name filter */
 

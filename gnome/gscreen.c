@@ -38,7 +38,8 @@
 #include "directory.xpm"
 #include "link.xpm"
 #include "dev.xpm"
-
+#include "listing-list.xpm"
+#include "listing-iconic.xpm"
 /* This is used to initialize our pixmaps */
 static int pixmaps_ready;
 GdkPixmap *icon_directory_pixmap;
@@ -307,31 +308,51 @@ x_panel_select_item (WPanel *panel, int index, int value)
 void
 x_select_item (WPanel *panel)
 {
-	GtkCList *clist = GTK_CLIST (panel->list);
-	int color, marked;
-
-	if (panel->dir.list [panel->selected].f.marked)
-		marked = 1;
-	else
-		marked = 0;
-	
-	color = file_compute_color (marked ? MARKED_SELECTED : SELECTED, &panel->dir.list [panel->selected]);
-	panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
-
-	/* Make it visible */
-	if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL)
-		gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
+	if (panel->list_type == list_icons){
+		GnomeIconList *list = GNOME_ICON_LIST (panel->icons);
+		
+		do_file_mark (panel, panel->selected, 1);
+		display_mini_info (panel);
+		gnome_icon_list_select_icon (list, panel->selected);
+		if (list->icon_rows){
+			if (!gnome_icon_list_icon_is_visible (list, panel->selected))
+				gnome_icon_list_moveto (list, panel->selected, 0.5);
+		}
+	} else {
+		GtkCList *clist = GTK_CLIST (panel->list);
+		int color, marked;
+		
+		if (panel->dir.list [panel->selected].f.marked)
+			marked = 1;
+		else
+			marked = 0;
+		
+		color = file_compute_color (marked ? MARKED_SELECTED : SELECTED, &panel->dir.list [panel->selected]);
+		panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
+		
+		/* Make it visible */
+		if (gtk_clist_row_is_visible (clist, panel->selected) != GTK_VISIBILITY_FULL)
+			gtk_clist_moveto (clist, panel->selected, 0, 0.5, 0.0);
+	}
 }
 
 void
 x_unselect_item (WPanel *panel)
 {
-	int color;
-	int val;
+	if (panel->list_type == list_icons){
+	        int selected = panel->selected;
 
-	val = panel->dir.list [panel->selected].f.marked ? MARKED : NORMAL;
-	color = file_compute_color (val, &panel->dir.list [panel->selected]);
-	panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
+		/* This changes the panel->selected */
+		gnome_icon_list_unselect_all (GNOME_ICON_LIST (panel->icons), NULL, NULL);
+		panel->selected = selected;
+	} else {
+		int color;
+		int val;
+
+		val = panel->dir.list [panel->selected].f.marked ? MARKED : NORMAL;
+		color = file_compute_color (val, &panel->dir.list [panel->selected]);
+		panel_file_list_set_row_colors (GTK_CLIST (panel->list), panel->selected, color);
+	}
 }
 
 void
@@ -1068,6 +1089,9 @@ panel_icon_list_select_icon (GtkWidget *widget, int index, GdkEvent *event, WPan
 	display_mini_info (panel);
 	execute_hooks (select_file_hook);
 
+	if (!event)
+		return;
+	
 	switch (event->type){
 	case GDK_BUTTON_PRESS:
 		if (event->button.button == 3){
@@ -1550,6 +1574,45 @@ panel_up (GtkWidget *button, WPanel *panel)
 	do_panel_cd (panel, "..", cd_exact);
 }
 
+static GtkWidget *
+button_switch_to (char **icon, GtkSignalFunc fn, void *closure)
+{
+	GtkWidget *button, *pix;
+
+	button = gtk_button_new ();
+	pix = gnome_pixmap_new_from_xpm_d (icon);
+	gtk_container_add (GTK_CONTAINER (button), pix);
+	gtk_signal_connect (GTK_OBJECT (button), "clicked", fn, closure);
+			    
+	return button;
+}
+
+static void
+do_switch_to_iconic (GtkWidget *widget, WPanel *panel)
+{
+	if (panel->list_type == list_icons)
+		return;
+}
+
+static void
+do_switch_to_listing (GtkWidget *widget, WPanel *panel)
+{
+	if (panel->list_type != list_icons)
+		return;
+}
+
+static GtkWidget *
+button_switch_to_icon (WPanel *panel)
+{
+	return button_switch_to (listing_iconic_xpm, GTK_SIGNAL_FUNC (do_switch_to_iconic), panel);
+}
+
+static GtkWidget *
+button_switch_to_listing (WPanel *panel)
+{
+	return button_switch_to (listing_list_xpm, GTK_SIGNAL_FUNC (do_switch_to_listing), panel);
+}
+
 void
 x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 {
@@ -1598,12 +1661,19 @@ x_create_panel (Dlg_head *h, widget_data parent, WPanel *panel)
 	gtk_widget_show (panel->ministatus);
 	
 	status_line = gtk_hbox_new (0, 0);
+	gtk_container_border_width (GTK_CONTAINER (status_line), 3);
+	
 	gtk_label_set_justify (GTK_LABEL (panel->ministatus), GTK_JUSTIFY_LEFT);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->back_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->up_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), panel->fwd_b, 0, 0, 2);
 	gtk_box_pack_start (GTK_BOX (status_line), cwd, 1, 1, 5);
+	gtk_box_pack_start (GTK_BOX (status_line), button_switch_to_icon (panel), 0, 0, 2);
+	gtk_box_pack_start (GTK_BOX (status_line), button_switch_to_listing (panel), 0, 0, 2);
+#if 0
+	/* Remove the filter for now, until I add another toolbar */
 	gtk_box_pack_end   (GTK_BOX (status_line), filter, 0, 0, 0);
+#endif
 	gtk_widget_show_all (status_line);
 	
 	/* The statusbar */

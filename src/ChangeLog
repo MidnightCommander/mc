@@ -1,3 +1,9 @@
+1998-05-11  Miguel de Icaza  <miguel@nuclecu.unam.mx>
+
+	* main.c: New default: auto-save setup.
+
+	* screen.c (move_right, move_left): Add support for icon-view movement.
+
 1998-05-09  Miguel de Icaza  <miguel@nuclecu.unam.mx>
 
 	* setup.c (panel_load_setup): On non-icon editions, fall back to

@@ -107,10 +107,12 @@ OBJS = $(LOBJS) $(OOBJS) \
 # Distribution variables
 #
 
-PIXMAPS =		\
-	dev.xpm		\
-	link.xpm	\
-	directory.xpm
+PIXMAPS =			\
+	dev.xpm			\
+	link.xpm		\
+	directory.xpm		\
+	listing-list.xpm	\
+	listing-iconic.xpm
 
 DISTGNOME = Makefile.in gnome.TODO layout $(PIXMAPS) $(ICONS) $(GNOMESRCS) $(GNOMEHDRS) 
 

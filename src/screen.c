@@ -138,6 +138,10 @@ set_colors (WPanel *panel)
 }
 #endif
 
+#ifndef ICONS_PER_ROW
+#    define ICONS_PER_ROW(x) 1
+#endif
+
 /* Delete format string, it is a linked list */
 void
 delete_format (format_e *format)
@@ -1576,10 +1580,8 @@ unselect_item (WPanel *panel)
 }
 #endif
 
-/*                           */
-/* Panel key binded commands */
-/*                           */
-static void move_down (WPanel *panel)
+static void
+do_move_down (WPanel *panel)
 {
     if (panel->selected+1 == panel->count)
 	return;
@@ -1602,7 +1604,7 @@ static void move_down (WPanel *panel)
 }
 
 static void
-move_up (WPanel *panel)
+do_move_up (WPanel *panel)
 {
     if (panel->selected == 0)
 	return;
@@ -1620,6 +1622,45 @@ move_up (WPanel *panel)
     select_item (panel);
 }
 
+static int
+move_rel (WPanel *panel, int rel)
+{
+    unselect_item (panel);
+    
+    if (rel < 0){
+	if (panel->selected + rel < 0)
+	    panel->selected = 0;
+	else
+	    panel->selected = panel->selected + rel;
+    } else {
+	if (panel->selected + rel >= panel->count)
+	    panel->selected = panel->count - 1;
+	else
+	    panel->selected = panel->selected + rel;
+    }
+    select_item (panel);
+}
+
+/*                           */
+/* Panel key binded commands */
+/*                           */
+static void
+move_up (WPanel *panel)
+{
+    if (panel->list_type == list_icons){
+	move_rel (panel, -ICONS_PER_ROW (panel));
+    } else
+	do_move_up (panel);
+}
+
+static void
+move_down (WPanel *panel)
+{
+    if (panel->list_type == list_icons){
+	move_rel (panel, ICONS_PER_ROW (panel));
+    } else
+	do_move_down (panel);
+}
 
 /* Changes the selection by lines (may be negative) */
 static void
@@ -1663,21 +1704,31 @@ move_selection (WPanel *panel, int lines)
 static int
 move_left (WPanel *panel, int c_code)
 {
-    if (panel->split){
-	move_selection (panel, -llines (panel));
+    if (panel->list_type == list_icons){
+	do_move_up (panel);
 	return 1;
-    } else 
-	return maybe_cd (c_code, 0);
+    } else {    
+	if (panel->split){
+	    move_selection (panel, -llines (panel));
+	    return 1;
+	} else 
+	    return maybe_cd (c_code, 0);
+    }
 }
 
 static int
 move_right (WPanel *panel, int c_code)
 {
-    if (panel->split){
-	move_selection (panel, llines (panel));
+    if (panel->list_type == list_icons){
+	do_move_down (panel);
 	return 1;
-    } else
-	return maybe_cd (c_code, 1);
+    } else {
+	if (panel->split){
+	    move_selection (panel, llines (panel));
+	    return 1;
+	} else
+	    return maybe_cd (c_code, 1);
+    }
 }
 
 static void

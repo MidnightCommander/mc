@@ -1429,7 +1429,6 @@ configure_panel_listing (WPanel *p, int view_type, int use_msformat, char *user,
     p->list_type = view_type;
     
     if (view_type == list_user || use_msformat){
-    
 	free (p->user_format);
 	p->user_format = user;
     
