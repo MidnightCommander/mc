@@ -1068,7 +1068,7 @@ char *syntax_text[] = {
 "file ..\\*\\\\.(htm|html|HTM|HTML)$ HTML\\sFile",
 "include html.syntax",
 "",
-"file ..\\*\\\\.(pp|PP|pas|PAS|)$ Pascal Program",
+"file ..\\*\\\\.(pp|PP|pas|PAS)$ Pascal Program",
 "include pascal.syntax",
 "",
 "file ..\\*\\\\.tex$ LaTeX\\s2.09\\sDocument",

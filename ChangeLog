@@ -1,6 +1,17 @@
+Mon Mar 22 03:00:15 1999  Timur Bakeyev  <mc@bat.ru>
+	
+	* edit/syntax.c: Remove extra "|"  in "file ..\*\\.(pp|PP|pas|PAS|)$ \
+	Pascal Program" (Heh, second time :)
+	
+	* Makefile.common: Until things gets clear, keep syntax rules in 
+	$(prefix)/lib/mc//syntax, as this is how (LIBDIR "/syntax") expands.
+	
+	Also, $(libdir) changed to $(mclibdir), to avoid confusion with expanded
+	@libdir@.
+
 Mon Mar 22 01:52:32 1999  Timur Bakeyev  <mc@bat.ru>
 
-	* configure.in, Makefile.in, Makefile-common: Add syntax/Makefile.in,
+	* configure.in, Makefile.in, Makefile.common: Add syntax/Makefile.in,
 	as requested by Paul. Still, need some checking...
 
 Sun Mar 21 03:55:24 1999 Paul Sheer <psheer@obsidian.co.za>
