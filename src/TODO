@@ -106,7 +106,7 @@ New syntax for mc.ext - path check, desktop environment check.  Detach X
 programs into a separate process group.  Allow forcing the full path on
 local files.
 
-Click on a png image doesn't always work on remote vfs - local copy may
+Click on an image doesn't always work on remote vfs - local copy may
 be deleted before the application has time to load it.
 
 Allow running executables from remote VFS.  Possibly warn the user.
