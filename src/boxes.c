@@ -472,7 +472,7 @@ static QuickWidget display_widgets [] = {
 
 static QuickDialog display_bits =
 { DISPX, DISPY, -1, -1, N_(" Display bits "), "[Display bits]",
-  "dbits", display_widgets, 0 };
+  display_widgets, 0 };
 
 void
 display_bits_box (void)
@@ -1003,7 +1003,7 @@ vfs_smb_get_authinfo (const char *host, const char *share, const char *domain,
     static int dialog_x = 44;
     int dialog_y = 12;
     struct smb_authinfo *return_value;
-    static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password: ")};
+    static char* labs[] = {N_("Domain:"), N_("Username:"), N_("Password:")};
     static char* buts[] = {N_("&Ok"), N_("&Cancel")};
     static int ilen = 30, istart = 14;
     static int b0 = 3, b2 = 30;
