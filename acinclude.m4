@@ -692,13 +692,6 @@ AC_DEFUN([AC_WITH_SLANG], [
 	else
 	    screen_manager="SLang"
 	    CPPFLAGS="$CPPFLAGS -I../slang"
-	    fastdepslang=fastdepslang
-	    mkdir -p slang
-	    rm -f slang/slang.h
-	    case "$srcdir" in
-		/*) ln -sf  $srcdir/slang/slang-mc.h slang/slang.h;;
-		*)  ln -sf  ../$srcdir/slang/slang-mc.h slang/slang.h;;
-	    esac
 	fi
 	if $slang_check_lib
 	then

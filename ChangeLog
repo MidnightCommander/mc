@@ -1,3 +1,9 @@
+2001-12-21  Pavel Roskin  <proski@gnu.org>
+
+	* acinclude.m4 (AC_WITH_SLANG): Don't make symlink from
+	slang-mc.h to slang.h.  Remove fastdepslang variable, it's
+	unused.
+
 2001-12-01  Wang Jian  <lark@linux.net.cn>
 
 	* configure.in(ALL_LINGUAS): Renamed zh_CN.GB2312 to zh_CN.
