@@ -183,10 +183,10 @@ void common_dialog_repaint (struct Dlg_head *h);
 
 extern Dlg_head *current_dlg;
 
-static inline int
-send_message (Widget *w, int Msg, int Par)
+static inline cb_ret_t
+send_message (Widget *w, widget_msg_t msg, int parm)
 {
-    return (*(w->callback))(w, Msg, Par);
+    return (*(w->callback)) (w, msg, parm);
 }
 
 void dlg_replace_widget   (Dlg_head *h, Widget *old, Widget *new);
