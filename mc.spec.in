@@ -101,6 +101,7 @@ chmod 755 $RPM_BUILD_ROOT%{prefix}/lib/mc/bin/cons.saver
 %{prefix}/lib/mc/syntax/*
 %{prefix}/man/man1/*
 %config /etc/profile.d/*
+%config /etc/mc.global
 %dir %{prefix}/lib/mc
 %dir %{prefix}/lib/mc/bin
 
