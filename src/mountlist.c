@@ -84,22 +84,11 @@ void free (void *ptr);
 #include <sys/vfs.h>
 #endif
 
-#ifdef __bsdi__
+/* 4.4BSD2 derived systems */
+#if defined(__bsdi__) || defined(__NetBSD__) || defined(__OpenBSD__) || defined(__FreeBSD__)
 #  ifndef MOUNT_UFS
 #    define xBSD
 #  endif
-#endif
-
-#ifdef __NetBSD__
-#   define xBSD
-#endif
-
-#ifdef __OpenBSD__
-#   define xBSD
-#endif
-
-#ifdef __FreeBSD__
-#   define xBSD
 #endif
 
 /* void error (void);  FIXME -- needed? */

@@ -1,3 +1,9 @@
+Tue Dec 29 22:25:34 1998  Timur Bakeyev <mc@bat.ru>
+
+	* mountlist.c: Compress all xBSD systems to one line and add check
+	for MOUNT_UFS - it seems, that 4.4BSD and 4.4BSD2 systems different-
+	ly handles FS names. (currently affects BSDI and FreeBSD)
+
 Tue Dec 29 16:34:02 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* file.c (progress_update_one): Ignore files in subdirectories
@@ -12,7 +18,7 @@ Tue Dec 29 16:34:02 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	(various places): adpations for the above changes.
 
-mon Dec 28 22:15:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+Mon Dec 28 22:15:43 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* slint.c (try_alloc_color_pair): Changed hardcoded values into
 	defines.
@@ -87,6 +93,7 @@ Thu Dec 24 18:42:52 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 	* file.c: add a HAVE_GNOME only function
 
 Mon Dec 21 22:39:35 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
+
 	* mountlist.c: Define xBSD on FreeBSD.
 
 	* main.c (parse_an_arg): New function, popt callback. Option
