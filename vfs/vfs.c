@@ -1472,8 +1472,9 @@ int vfs_parse_filedate(int idx, time_t *t)
                 tim.tm_mon--;
             tim.tm_mday = (int) atol (p + 3);
             tim.tm_year = (int) atol (p + 6);
+	    /* Y2K madness */
             if (tim.tm_year < 70)
-                tim.tm_year += 70;
+                tim.tm_year += 100;
             extfs_format_date = 1;
         } else
             return 0;

@@ -1,3 +1,7 @@
+Thu Jan  7 03:47:35 1999  Timur I. Bakeyev <timur@com.bat.ru>
+
+	* vfs.c (parse_ls_lga): Fixed Y2K typo pointed by Alex.
+
 Thu Dec 31 08:47:15 1998  Norbert Warmuth  <nwarmuth@privat.circular.de>
 
 	* sfs.c (sfs_nothingisopen): Assume for now it's always save to free
