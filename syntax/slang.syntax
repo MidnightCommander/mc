@@ -1,0 +1,110 @@
+context default
+    keyword whole forever white/24
+    keyword whole foreach white/24
+    keyword whole using white/24
+    keyword whole orelse white/24
+    keyword whole andelse white/24
+    keyword whole loop white/24
+    keyword whole variable white/24
+    keyword whole define white/24
+    keyword whole break white/24
+    keyword whole case white/24
+    keyword whole continue white/24
+    keyword whole do white/24
+    keyword whole else white/24
+    keyword whole for white/24
+    keyword whole goto white/24
+    keyword whole if white/24
+    keyword whole !if white/24
+    keyword whole return white/24
+    keyword whole sizeof white/24
+    keyword whole static white/24
+    keyword whole struct white/24
+    keyword whole switch white/24
+    keyword whole typedef white/24
+    keyword whole while white/24
+    keyword whole typecast white/24
+    keyword whole delete white/24
+    keyword whole private white/24
+    keyword whole protected white/24
+    keyword whole public white/24
+    keyword whole namespace white/24
+    keyword whole implements white/24
+
+    keyword whole EXIT_BLOCK white/24
+    keyword whole ERROR_BLOCK white/24
+    keyword whole EXECUTE_ERROR_BLOCK white/24
+
+    keyword whole and white/24
+    keyword whole or white/24
+    keyword whole xor white/24
+
+
+    keyword whole Char_Type yellow/24
+    keyword whole UChar_Type yellow/24
+    keyword whole Short_Type yellow/24
+    keyword whole UShort_Type yellow/24
+    keyword whole Integer_Type yellow/24
+    keyword whole UInteger_Type yellow/24
+    keyword whole Long_Type yellow/24
+    keyword whole ULong_Type yellow/24
+    keyword whole Float_Type yellow/24
+    keyword whole Double_Type yellow/24
+    keyword whole Complex_Type yellow/24
+    keyword whole String_Type yellow/24
+    keyword whole BString_Type yellow/24
+    keyword whole Struct_Type yellow/24
+    keyword whole Ref_Type yellow/24
+    keyword whole Null_Type yellow/24
+    keyword whole Array_Type yellow/24
+    keyword whole DataType_Type yellow/24
+    keyword whole Assoc_Type yellow/24
+
+    keyword '\\\{"abtnvfr\}' brightgreen/16
+    keyword '\\\{0123\}\{01234567\}\{01234567\}' brightgreen/16
+    keyword '\\'' brightgreen/16
+    keyword '\\\\' brightgreen/16
+    keyword '\\0' brightgreen/16
+    keyword '\{\s!"#$%&()\*\+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]^_`abcdefghijklmnopqrstuvwxyz{|}~ ¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿ\}' brightgreen/16
+
+    keyword > white/24
+    keyword < white/24
+    keyword \+ white/24
+    keyword - white/24
+    keyword \* white/24
+#    keyword / white/24
+    keyword = white/24
+    keyword != white/24
+    keyword == white/24
+    keyword ; white/19
+    keyword { brightcyan/14
+    keyword } brightcyan/14
+    keyword ( brightcyan/15
+    keyword ) brightcyan/15
+    keyword [ brightcyan/14
+    keyword ] brightcyan/14
+    keyword , brightcyan/14
+    keyword : brightcyan/14
+    keyword #define\[\t\s\]\[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_0123456789\]\[\t\s\]0x\[0123456789abcdefABCDEF\] brightred/18
+context % \n brown/22
+    spellcheck
+context linestart # \n brightred/18
+    keyword \\\n yellow/24
+    keyword /\**\*/ brown/22
+    keyword "+" red/19
+    keyword <+> red/19
+context " " green/6
+    spellcheck
+    keyword \\" brightgreen/16
+    keyword \\\n brightgreen/16
+    keyword %% brightgreen/16
+    keyword %\[#0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[L\]\{eEfgGoxX\} brightgreen/16
+    keyword %\[0\s-\+,\]\[0123456789\]\[.\]\[0123456789\]\[hl\]\{diu\} brightgreen/16
+    keyword %\[hl\]n brightgreen/16
+    keyword %\[.\]\[0123456789\]s brightgreen/16
+    keyword %[*] brightgreen/16
+    keyword %c brightgreen/16
+    keyword \\\{0123\}\{01234567\}\{01234567\} brightgreen/16
+    keyword \\\\ brightgreen/16
+    keyword \\' brightgreen/16
+    keyword \\\{abtnvfr\} brightgreen/16

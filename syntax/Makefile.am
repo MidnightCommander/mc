@@ -21,6 +21,7 @@ syntax_DATA =			\
 	python.syntax		\
 	sh.syntax		\
 	smalltalk.syntax	\
+	slang.syntax		\
 	swig.syntax		\
 	texinfo.syntax		\
 	unknown.syntax
