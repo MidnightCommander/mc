@@ -74,7 +74,7 @@ local_errno (struct vfs_class *me)
 }
 
 static void *
-local_opendir (struct vfs_class *me, char *dirname)
+local_opendir (struct vfs_class *me, const char *dirname)
 {
     DIR **local_info;
     DIR *dir;
@@ -193,7 +193,7 @@ local_rename (struct vfs_class *me, char *a, char *b)
 }
 
 static int
-local_chdir (struct vfs_class *me, char *path)
+local_chdir (struct vfs_class *me, const char *path)
 {
     return chdir (path);
 }

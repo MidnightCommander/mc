@@ -561,7 +561,7 @@ struct dirhandle {
 };
 
 static void *
-vfs_s_opendir (struct vfs_class *me, char *dirname)
+vfs_s_opendir (struct vfs_class *me, const char *dirname)
 {
     struct vfs_s_inode *dir;
     struct dirhandle *info;
@@ -618,7 +618,7 @@ vfs_s_closedir (void *data)
 }
 
 static int
-vfs_s_chdir (struct vfs_class *me, char *path)
+vfs_s_chdir (struct vfs_class *me, const char *path)
 {
     void *data;
     if (!(data = vfs_s_opendir (me, path)))

@@ -1187,7 +1187,7 @@ is_error (int result, int errno_num)
 #endif
 
 static void *
-smbfs_opendir (struct vfs_class *me, char *dirname)
+smbfs_opendir (struct vfs_class *me, const char *dirname)
 {
     opendir_info *smbfs_info;
 	smbfs_connection *sc;
@@ -1436,16 +1436,16 @@ smbfs_get_stat_info (smbfs_connection * sc, char *path, struct stat *buf)
 }
 
 static int
-smbfs_chdir (struct vfs_class *me, char *path)
+smbfs_chdir (struct vfs_class *me, const char *path)
 {
-	char *remote_dir;
-	smbfs_connection *sc;
-	
-	DEBUG(3, ("smbfs_chdir(path:%s)\n", path));
+    char *remote_dir;
+    smbfs_connection *sc;
+
+    DEBUG (3, ("smbfs_chdir(path:%s)\n", path));
     if (!(remote_dir = smbfs_get_path (&sc, path)))
-		return -1;
+	return -1;
     g_free (remote_dir);
-	
+
     return 0;
 }
 

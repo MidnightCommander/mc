@@ -453,17 +453,18 @@ mc_close (int handle)
 }
 
 DIR *
-mc_opendir (char *dirname)
+mc_opendir (const char *dirname)
 {
     int  handle, *handlep;
     void *info;
     struct vfs_class *vfs;
+    char *dname;
 
-    dirname = vfs_canon (dirname);
-    vfs = vfs_get_class (dirname);
+    dname = vfs_canon (dirname);
+    vfs = vfs_get_class (dname);
 
-    info = vfs->opendir ? (*vfs->opendir)(vfs, dirname) : NULL;
-    g_free (dirname);
+    info = vfs->opendir ? (*vfs->opendir)(vfs, dname) : NULL;
+    g_free (dname);
     if (!info){
         errno = vfs->opendir ? ferrno (vfs) : E_NOTSUPP;
 	return NULL;
@@ -663,9 +664,9 @@ vfs_canon (const char *path)
  * Return 0 on success, -1 on failure.
  */
 int
-mc_chdir (char *path)
+mc_chdir (const char *path)
 {
-    char *new_dir, *new_dir_copy;
+    char *new_dir;
     struct vfs_class *old_vfs, *new_vfs;
     vfsid old_vfsid;
     struct vfs_stamping *parent;
@@ -676,10 +677,7 @@ mc_chdir (char *path)
     if (!new_vfs->chdir)
 	return -1;
 
-    /* new_vfs->chdir can write to the second argument, use a copy */
-    new_dir_copy = g_strdup (new_dir);
-    result = (*new_vfs->chdir) (new_vfs, new_dir_copy);
-    g_free (new_dir_copy);
+    result = (*new_vfs->chdir) (new_vfs, new_dir);
 
     if (result == -1) {
 	errno = ferrno (new_vfs);

@@ -1,5 +1,11 @@
 2003-11-13  Pavel Roskin  <proski@gnu.org>
 
+	* vfs.h: Constify chdir() and opendir() methods.  Adjust all
+	dependencies.
+	* vfs.c (mc_chdir): Constify, eliminate protection against
+	broken implementations of chdir() method.
+	(mc_opendir): Constify.
+
 	* direntry.c (vfs_s_stamp_me): Generalize and move ...
 	* gc.c (vfs_stamp_create): ... here.  Use whenever possible.
 

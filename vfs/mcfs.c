@@ -629,7 +629,7 @@ typedef struct {
 } opendir_info;
 
 static void *
-mcfs_opendir (struct vfs_class *me, char *dirname)
+mcfs_opendir (struct vfs_class *me, const char *dirname)
 {
     opendir_info *mcfs_info;
     mcfs_connection *mc;
@@ -1011,7 +1011,7 @@ mcfs_rename (struct vfs_class *me, char *a, char *b)
 }
 
 static int
-mcfs_chdir (struct vfs_class *me, char *path)
+mcfs_chdir (struct vfs_class *me, const char *path)
 {
     char *remote_dir;
     mcfs_connection *mc;

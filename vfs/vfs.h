@@ -33,7 +33,7 @@ struct vfs_class {
     int (*read) (void *vfs_info, char *buffer, int count);
     int (*write) (void *vfs_info, char *buf, int count);
 
-    void *(*opendir) (struct vfs_class *me, char *dirname);
+    void *(*opendir) (struct vfs_class *me, const char *dirname);
     void *(*readdir) (void *vfs_info);
     int (*closedir) (void *vfs_info);
 
@@ -52,7 +52,7 @@ struct vfs_class {
     int (*link) (struct vfs_class *me, char *p1, char *p2);
     int (*unlink) (struct vfs_class *me, char *path);
     int (*rename) (struct vfs_class *me, char *p1, char *p2);
-    int (*chdir) (struct vfs_class *me, char *path);
+    int (*chdir) (struct vfs_class *me, const char *path);
     int (*ferrno) (struct vfs_class *me);
     int (*lseek) (void *vfs_info, off_t offset, int whence);
     int (*mknod) (struct vfs_class *me, char *path, int mode, int dev);
@@ -138,9 +138,9 @@ int mc_close (int handle);
 int mc_read (int handle, char *buffer, int count);
 int mc_write (int handle, char *buffer, int count);
 off_t mc_lseek (int fd, off_t offset, int whence);
-int mc_chdir (char *);
+int mc_chdir (const char *path);
 
-DIR *mc_opendir (char *dirname);
+DIR *mc_opendir (const char *dirname);
 struct dirent *mc_readdir (DIR * dirp);
 int mc_closedir (DIR * dir);
 

@@ -854,7 +854,7 @@ static int extfs_errno (struct vfs_class *me)
     return my_errno;
 }
 
-static void * extfs_opendir (struct vfs_class *me, char *dirname)
+static void * extfs_opendir (struct vfs_class *me, const char *dirname)
 {
     struct archive *archive;
     char *q;
@@ -1071,7 +1071,7 @@ static int extfs_rmdir (struct vfs_class *me, char *path)
     return 0;
 }
 
-static int extfs_chdir (struct vfs_class *me, char *path)
+static int extfs_chdir (struct vfs_class *me, const char *path)
 {
     struct archive *archive;
     char *q;
