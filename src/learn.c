@@ -72,7 +72,7 @@ static learnkey *learnkeys = NULL;
 static int learn_total;
 static int learnok;
 static int learnchanged;
-static char* learn_title = N_(" Learn keys ");
+static char* learn_title = N_("Learn keys");
 
 
 static int learn_button (int action, void *param)
@@ -257,7 +257,7 @@ static void init_learn (void)
 
     learn_dlg = create_dlg (0, 0, 23, 78, dialog_colors,
 			      learn_callback, "[Learn keys]",
-			      _("Learn keys"), DLG_CENTER);
+			      learn_title, DLG_CENTER);
 
 #define XTRACT(i) BY+learn_but[i].y, learn_but[i].x, learn_but[i].ret_cmd, learn_but[i].flags, _(learn_but[i].text), 0, 0, NULL
 
