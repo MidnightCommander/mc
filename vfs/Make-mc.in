@@ -191,6 +191,21 @@ mcserv: mcserv.o tcputil.o mad.o
 @USE_SAMBA_FS_FALSE@	$(AR) cr $@ $(VFSOBJS)
 	$(RANLIB) $@
 
+#
+# Commands to build standalone version (.so)
+#
+
+VFSSOOBJS = tcputil.so ftpfs.so mcfs.so utilvfs.so local.so vfs.so tar.so names.so container.so extfs.so util-alone.so util.sor utilunix.sor sfs.so fish.so direntry.so cpio.so
+
+%.sor:	../src/%.c
+	$(CC) -c -fpic $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+
+%.so:	%.c
+	$(CC) -c -fpic $(CPPFLAGS) $(DEFS) $(CFLAGS) -DVFS_STANDALONE $< -o $@
+
+libvfs.so: $(VFSSOOBJS)
+	gcc $(VFSSOOBJS) -shared -o libvfs.so
+
 samba/libsamba.a:
 	cd samba && $(MAKE) libsamba.a
 

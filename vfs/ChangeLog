@@ -1,3 +1,7 @@
+2001-05-14  Pavel Machek  <pavel@bug.ucw.cz>
+
+	* Make-mc.in: add possibility to build libvfs.so
+
 2001-04-19  Pavel Roskin  <proski@gnu.org>
 
 	* extfs/rpm (mcrpmfs_list): Use cpio for the listing since the
