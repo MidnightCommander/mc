@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mc 4.5.38\n"
-"POT-Creation-Date: 2000-08-28 10:15+0200\n"
-"PO-Revision-Date: 2000-09-07 17:10+0200\n"
+"POT-Creation-Date: 2000-09-08 13:44+0200\n"
+"PO-Revision-Date: 2000-09-08 18:51+0200\n"
 "Last-Translator: Szabolcs Szasz <sz@szasz.hu>\n"
 "Language-Team: Hungarian GNOME team <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
@@ -47,8 +47,8 @@ msgstr ""
 "\"%s\".\n"
 "\n"
 "Ellenõrizd, hogy tényleg létezõ parancsra mutat-e."
-# !!FIXME: "lefuttatni"?
 
+# !!FIXME: "lefuttatni"?
 #: gnome/gaction.c:40
 #, c-format
 msgid ""
@@ -59,8 +59,8 @@ msgid ""
 msgstr ""
 "\".\n"
 "\n"
-"A hiba javításához a GNOME Beállítóközpontban módosítsd a(z) "
-"\"%s\" alapértelmezett \"%s-action\"-jét a MIME-tulajdonságoknál"
+"A hiba javításához a GNOME Beállítóközpontban módosítsd a(z) \"%s\" "
+"alapértelmezett \"%s-action\"-jét a MIME-tulajdonságoknál"
 
 #: gnome/gaction.c:46
 #, c-format
@@ -91,17 +91,14 @@ msgstr ""
 #: gnome/gaction.c:137 gnome/gaction.c:154
 msgid "open"
 msgstr "megnyitás"
-#!!FIXME: mi ez? kell forditani?
 
 #: gnome/gaction.c:194 gnome/gaction.c:211
 msgid "edit"
 msgstr "szerkesztés"
-#!!FIXME: mi ez? kell forditani?
 
 #: gnome/gaction.c:351
 msgid "view"
 msgstr "megtekintés"
-#!!FIXME: mi ez? kell forditani?
 
 #: gnome/gcmd.c:50
 msgid " There is no other panel to compare contents to "
@@ -119,11 +116,11 @@ msgstr "A Midnight Commander Team"
 msgid "bug reports: http://bugs.gnome.org, or use gnome-bug"
 msgstr "hibajelentések: http://bugs.gnome.org, vagy használd a 'gnome-bug'-ot"
 
-#: gnome/gcmd.c:115
+#: gnome/gcmd.c:115 gnome/gmc-window.c:68
 msgid "GNU Midnight Commander"
 msgstr "GNU Midnight Commander"
 
-#: gnome/gcmd.c:118
+#: gnome/gcmd.c:118 gnome/gmc-window.c:71
 msgid "The GNOME edition of the Midnight Commander file manager."
 msgstr "A Midnight Commander fájlkezelõ GNOME-os kiadása"
 
@@ -139,8 +136,8 @@ msgstr "Kis-/nagybetû nem számít."
 #: gnome/gcmd.c:299
 msgid "Sort files by "
 msgstr "Fájlok rendezése: "
-# !!FIXME
 
+# !!FIXME
 #: gnome/gcmd.c:304 gnome/gcustom-layout.c:41 src/chmod.c:150 src/screen.c:413
 msgid "Name"
 msgstr "Név"
@@ -161,13 +158,13 @@ msgstr "Utolsó hozzáférés ideje"
 #: gnome/gcmd.c:329
 msgid "Time Last Modified"
 msgstr "Utolsó módosítás ideje"
-# !!FIXME: mtime
 
+# !!FIXME: mtime
 #: gnome/gcmd.c:335
 msgid "Time Last Changed"
 msgstr "Utolsó változás ideje"
-# !!FIXME: ctime?
 
+# !!FIXME: ctime?
 #: gnome/gcmd.c:349
 msgid "Reverse the order."
 msgstr "Fordított sorrend"
@@ -175,13 +172,13 @@ msgstr "Fordított sorrend"
 #: gnome/gcmd.c:396
 msgid "Enter name."
 msgstr "Név beírása"
-# !!FIXME: hova irja ezt ki? itt miert . van?
 
+# !!FIXME: hova irja ezt ki? itt miert . van?
 #: gnome/gcmd.c:402
 msgid "Enter label for command:"
 msgstr "A parancs címkéje:"
-# !!FIXME: hova irja ezt ki? itt miert : van?
 
+# !!FIXME: hova irja ezt ki? itt miert : van?
 #: gnome/gcmd.c:507
 msgid "Find all core files"
 msgstr "'core' fájlok keresése"
@@ -189,8 +186,8 @@ msgstr "'core' fájlok keresése"
 #: gnome/gcmd.c:510 src/panelize.c:350
 msgid "Find rejects after patching"
 msgstr "'patch' utáni 'reject' fájlok"
-# !!FIXME
 
+# !!FIXME
 #: gnome/gcmd.c:555
 msgid "Run Command"
 msgstr "Parancs futtatása"
@@ -199,8 +196,8 @@ msgstr "Parancs futtatása"
 #: gnome/gcmd.c:560
 msgid "Preset Commands"
 msgstr "Elõre beállított parancsok"
-# !!FIXME: jo ide a mell.nevi igenev?
 
+# !!FIXME: jo ide a mell.nevi igenev?
 #. add add/remove buttons in center
 #: gnome/gcmd.c:577 gnome/gcustom-layout.c:183
 msgid "Add"
@@ -251,8 +248,8 @@ msgstr "Reguáris kifejezés a panelon lévõ fájlok megjelenítéséhez."
 #: gnome/gcmd.c:806
 msgid " Open with..."
 msgstr " Megnyitás ...-tal"
-# !!FIXME
 
+# !!FIXME
 #: gnome/gcmd.c:807
 msgid "Enter extra arguments:"
 msgstr "További paraméterek:"
@@ -276,8 +273,8 @@ msgstr ""
 "\n"
 "Pl.: * minden fájlt kiszûr (könyvtárakat nem!);\n"
 "*.png csak a .png végûeket fogja mutatni."
-# !!FIXME: meghagy? (mukodik ez egyaltalan?)
 
+# !!FIXME: meghagy? (mukodik ez egyaltalan?)
 #: gnome/gcmd.c:913
 msgid "Enter a regular expression here to select files in the panel view with."
 msgstr "Reguáris kifejezés a panelon lévõ fájlok kijelöléséhez."
@@ -301,8 +298,8 @@ msgstr "Hozzáférés ideje"
 #: gnome/gcustom-layout.c:35
 msgid "Creation Time"
 msgstr "Adatvált. ideje"
-# !NOTE: This is _not_ creation but metadata modification.
 
+# !NOTE: This is _not_ creation but metadata modification.
 #. Group
 #: gnome/gcustom-layout.c:36 gnome/gnome-file-property-dialog.c:788
 #: gnome/gnome-file-property-dialog.c:957 gnome/gprop.c:280 gnome/gprop.c:405
@@ -321,8 +318,8 @@ msgstr "'Inode'"
 #: gnome/gcustom-layout.c:39 src/achown.c:378
 msgid "Mode"
 msgstr "Mód"
-# !NOTE: permissions in numeric form
 
+# !NOTE: permissions in numeric form
 #: gnome/gcustom-layout.c:40
 msgid "Modification Time"
 msgstr "Módosítás ideje"
@@ -336,13 +333,13 @@ msgstr "'Hard' linkek száma"
 #: gnome/gprop.c:390 src/screen.c:426
 msgid "Owner"
 msgstr "Tulajdonos"
-# !NOTE: stupid alignment cuts the beginning of long labels
 
+# !NOTE: stupid alignment cuts the beginning of long labels
 #: gnome/gcustom-layout.c:44 src/screen.c:420
 msgid "Permission"
 msgstr "Jogok"
-# !NOTE: permissions in mnemonic form
 
+# !NOTE: permissions in mnemonic form
 #: gnome/gcustom-layout.c:46
 msgid "Size (short)"
 msgstr "Méret (rövid)"
@@ -375,8 +372,8 @@ msgstr "Figyelmeztetés"
 #, c-format
 msgid "Could not open %s; will not have desktop icons"
 msgstr "%s megnyitása nem sikerült; nem lesznek ikonjai a munkaasztalon"
-# !!FIXME: ikonja, ikonok? minek is? kell a desktop is?
 
+# !!FIXME: ikonja, ikonok? minek is? kell a desktop is?
 #: gnome/gdesktop.c:1347
 msgid "While running the mount/umount command"
 msgstr "A mount/umount parancs végrehajtásakor"
@@ -455,13 +452,13 @@ msgstr "Utolsó _elérés szerint"
 #: gnome/gdesktop.c:2875
 msgid "By Time Last _Modified"
 msgstr "Utolsó _módosítás szerint"
-# !!FIXME
 
+# !!FIXME
 #: gnome/gdesktop.c:2876
 msgid "By Time Last _Changed"
 msgstr "Utolsó _változás szerint"
-# !!FIXME
 
+# !!FIXME
 #: gnome/gdesktop.c:2884 gnome/glayout.c:462
 msgid "_Arrange Icons"
 msgstr "Ikonok _elrendezése"
@@ -481,8 +478,8 @@ msgstr "Munkaasztal-könyvtá_r újraolvasása"
 #: gnome/gdesktop.c:2889 gnome/glayout.c:465
 msgid "Rescan De_vices"
 msgstr "_Hardvereszközök újraolvasása"
-# !!FIXME: tényleg hardver?...
 
+# !!FIXME: tényleg hardver?...
 #: gnome/gdesktop.c:2890 gnome/glayout.c:466
 msgid "Recreate Default _Icons"
 msgstr "\"_Gyári\" ikonok helyreállítása"
@@ -496,7 +493,6 @@ msgid "Des_ktop Properties"
 msgstr "Munkaasztal t_ulajdonságai"
 
 # !!FIXME: a fentieknél a hotkey-ket ellenõrizni
-
 #. Icon position
 #: gnome/gdesktop-prefs.c:242
 msgid "Icon position"
@@ -549,8 +545,7 @@ msgid ""
 "Some of the files you are trying to copy already exist in the destination "
 "folder.  Please select the action to be performed."
 msgstr ""
-"Egy vagy több fájl már létezik a célkönyvtárban "
-"Válaszd ki, mit szeretnél."
+"Egy vagy több fájl már létezik a célkönyvtárban Válaszd ki, mit szeretnél."
 
 #: gnome/gdialogs.c:399
 msgid "Prompt me before overwriting any file."
@@ -589,12 +584,12 @@ msgstr "A célfájl már létezik: %s"
 msgid "Replace it?"
 msgstr "Lecseréljük?"
 
-#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1140 gtkedit/gtkedit.c:1252
+#: gnome/gdialogs.c:568 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1252
 #: src/file.c:802 src/screen.c:2397 src/screen.c:2427 src/tree.c:1014
 msgid "Copy"
 msgstr "Másol"
 
-#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1141 gtkedit/gtkedit.c:1254
+#: gnome/gdialogs.c:571 gtkedit/editwidget.c:1142 gtkedit/gtkedit.c:1254
 msgid "Move"
 msgstr "Áthlyz"
 
@@ -694,8 +689,8 @@ msgstr "kész."
 #: gnome/gdialogs.c:1007 src/wtools.c:587 vfs/vfs.c:1820
 msgid "Password:"
 msgstr "Jelszó"
-# !!FIXME: direkt nincs : ?
 
+# !!FIXME: direkt nincs : ?
 #: gnome/gdialogs.c:1007
 msgid "Password"
 msgstr "Jelszó"
@@ -896,10 +891,9 @@ msgstr "Kijelölés meg_fordítása"
 msgid "Reverses the list of tagged files"
 msgstr "A fájlkijelöléseket az ellenkezõjére változtatja"
 
-#: gnome/glayout.c:408 gtkedit/editwidget.c:1142 src/view.c:2085
+#: gnome/glayout.c:408 gtkedit/editwidget.c:1143 src/view.c:2085
 msgid "Search"
 msgstr "Keres"
-#!!FIXME
 
 #: gnome/glayout.c:408
 msgid "Search for a file in the current Panel"
@@ -994,7 +988,7 @@ msgstr "_Parancsok"
 msgid "_Desktop"
 msgstr "_Munkaasztal"
 
-#: gnome/glayout.c:477 gnome/glayout.c:487
+#: gnome/glayout.c:477 gnome/glayout.c:487 gnome/gmc-window.c:121
 msgid "_Help"
 msgstr "_Súgó"
 
@@ -1013,6 +1007,47 @@ msgstr ""
 "\n"
 "'root'-ként könnyen tönkreteheted a rendszeredet, ha nem vagy elég óvatos, "
 "és a GNOME fájlkezelõ nem fog meggátolni ebben..."
+
+#: gnome/gmc-window.c:69
+msgid "Copyright (C) 1998 The Free Software Foundation"
+msgstr "Copyright (C) 1998 The Free Software Foundation"
+
+#: gnome/gmc-window.c:81
+msgid "Open _new window"
+msgstr "Új _ablak"
+
+#: gnome/gmc-window.c:86
+msgid "_Close this window"
+msgstr "Bezárja ezt az ablakot"
+
+#: gnome/gmc-window.c:88
+msgid "E_xit"
+msgstr "Kilépés"
+
+#: gnome/gmc-window.c:95
+msgid "_Listing view"
+msgstr "Listázási mód"
+
+#: gnome/gmc-window.c:96
+msgid "_Icon view"
+msgstr "_Ikon nézet"
+
+#: gnome/gmc-window.c:102
+msgid "Display _tree view"
+msgstr " Képernyõ-bitek "
+
+#: gnome/gmc-window.c:112
+msgid "_About the Midnight Commander..."
+msgstr " A Midnight Commanderrõl... "
+
+#: gnome/gmc-window.c:119
+msgid "_File"
+msgstr "Fájl"
+
+# !!FIXME: kifér ez? kell bele a r. r. ? kell a használata?
+#: gnome/gmc-window.c:120
+msgid "_View"
+msgstr "Megnéz"
 
 #: gnome/gmount.c:218
 msgid "Could not open the /etc/fstab file"
@@ -1089,7 +1124,6 @@ msgstr "Fájltípus: blokkos eszközfájl"
 #: gnome/gnome-file-property-dialog.c:236
 msgid "File Type: Socket"
 msgstr "Fájltípus: 'socket'"
-#!!FIXME
 
 #: gnome/gnome-file-property-dialog.c:238
 msgid "File Type: FIFO"
@@ -1125,8 +1159,8 @@ msgstr "Fájlméret: ---"
 #: gnome/gnome-file-property-dialog.c:277
 msgid "File Created on: "
 msgstr "Adatai módosítva: "
-# NOTE: Not always a file, it can be e.g. directory too.
 
+# NOTE: Not always a file, it can be e.g. directory too.
 #: gnome/gnome-file-property-dialog.c:281
 #: gnome/gnome-file-property-dialog.c:290
 #: gnome/gnome-file-property-dialog.c:299
@@ -1157,8 +1191,8 @@ msgstr "Ráhúzás"
 #: gnome/gnome-file-property-dialog.c:398
 msgid "Use default Drop Action options"
 msgstr "Alapértelmezett ráhúzási beállítások használata"
-# !!FIXME: kifér ez? kell bele a r. r. ? kell a használata?
 
+# !!FIXME: kifér ez? kell bele a r. r. ? kell a használata?
 #: gnome/gnome-file-property-dialog.c:413
 #: gnome/gnome-file-property-dialog.c:501 gnome/gpopup2.c:287
 #: src/screen.c:2395 src/screen.c:2425
@@ -1291,8 +1325,8 @@ msgstr "Jogosultságok"
 #: gnome/gnome-file-property-dialog.c:1112
 msgid " Properties"
 msgstr " tulajdonságai"
-# NOTE this is the window title tail...
 
+# NOTE this is the window title tail...
 #: gnome/gnome-file-property-dialog.c:1164
 #: gnome/gnome-file-property-dialog.c:1175
 msgid "You entered an invalid username"
@@ -1356,12 +1390,12 @@ msgstr "Másolás..."
 msgid "Move to Trash"
 msgstr "Kidobás a kukába"
 
-#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1143 src/screen.c:2400
+#: gnome/gpopup2.c:293 gtkedit/editwidget.c:1144 src/screen.c:2400
 #: src/screen.c:2430
 msgid "Delete"
 msgstr "Töröl"
-# !NOTE: F-key label
 
+# !NOTE: F-key label
 #: gnome/gpopup2.c:294
 msgid "Move..."
 msgstr "Áthelyezés..."
@@ -1417,8 +1451,8 @@ msgstr "Futtatás elõtt"
 #: gnome/gprefs.c:129
 msgid "Show progress while operations are being performed"
 msgstr "Folyamatjelzõ sáv a mûveletek közben"
-# !!FIXME
 
+# !!FIXME
 #: gnome/gprefs.c:138
 msgid "VFS Timeout:"
 msgstr "VFS idõkorlát:"
@@ -1482,8 +1516,8 @@ msgstr "Teljes név: "
 #: gnome/gprop.c:109 src/panelize.c:205
 msgid "Command"
 msgstr "Parancs:"
-# !NOTE: ":" added for consistency with other prompts
 
+# !NOTE: ":" added for consistency with other prompts
 #: gnome/gprop.c:119
 msgid "Command:"
 msgstr "Parancs:"
@@ -1608,8 +1642,8 @@ msgid "Location:"
 msgstr "Hely:"
 
 #. 1
-#: gnome/gtools.c:105 gtkedit/editcmd.c:387 gtkedit/editcmd.c:1236
-#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3022 gtkedit/editoptions.c:69
+#: gnome/gtools.c:105 gtkedit/editcmd.c:391 gtkedit/editcmd.c:1236
+#: gtkedit/editcmd.c:1321 gtkedit/editcmd.c:3023 gtkedit/editoptions.c:69
 #: src/boxes.c:138 src/boxes.c:278 src/boxes.c:378 src/boxes.c:466
 #: src/boxes.c:646 src/boxes.c:728 src/boxes.c:783 src/boxes.c:898
 #: src/filegui.c:839 src/find.c:171 src/layout.c:370 src/option.c:143
@@ -1686,7 +1720,6 @@ msgid "ok"
 msgstr "ok"
 
 # !!FIXME: miert 
-
 #: gnome/gwidget.c:97
 msgid "cancel"
 msgstr "mégsem"
@@ -1718,14 +1751,14 @@ msgstr "Nem sikerült a fájlkezelõt elérni\n"
 #: gnome/gmc-client.c:45
 msgid "Could not get the desktop\n"
 msgstr "Nem sikerült a munkaasztalt elérni\n"
-# !!FIXME: elerni?
 
+# !!FIXME: elerni?
 #: gnome/gmc-client.c:142
 #, c-format
 msgid "Unknown arrange type `%s'\n"
 msgstr "Ismeretlen elrendezési típus: `%s'\n"
-# !!FIXME:
 
+# !!FIXME:
 #: gnome/gmc-client.c:206
 msgid "Create window showing the specified directory"
 msgstr "Ablak nyitása a megadott könyvtár tartalmával"
@@ -1759,81 +1792,81 @@ msgid "Close windows whose directories cannot be reached"
 msgstr "Elérhetetlen könyvtárakra hivatkozó ablakokat bezárni"
 
 #. The file-name is printed after the ':'
-#: gtkedit/edit.c:149 gtkedit/edit.c:318 gtkedit/edit.c:323 gtkedit/edit.c:337
-#: gtkedit/edit.c:341 gtkedit/edit.c:373 gtkedit/edit.c:379 gtkedit/edit.c:386
-#: gtkedit/edit.c:393 gtkedit/edit.c:399 gtkedit/editcmd.c:298
-#: gtkedit/editcmd.c:304 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1023
+#: gtkedit/edit.c:151 gtkedit/edit.c:320 gtkedit/edit.c:325 gtkedit/edit.c:339
+#: gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381 gtkedit/edit.c:388
+#: gtkedit/edit.c:395 gtkedit/edit.c:401 gtkedit/editcmd.c:301
+#: gtkedit/editcmd.c:307 gtkedit/editcmd.c:2032 gtkedit/editwidget.c:1024
 #: src/dir.c:386 src/tree.c:682 src/tree.c:688 src/wtools.c:222
 msgid " Error "
 msgstr " Hiba "
 
-#: gtkedit/edit.c:149 gtkedit/edit.c:341 gtkedit/edit.c:379
+#: gtkedit/edit.c:151 gtkedit/edit.c:343 gtkedit/edit.c:375 gtkedit/edit.c:381
 msgid " Failed trying to open file for reading: "
 msgstr " Nem sikerült olvasásra megnyitni ezt a fájlt: "
 
-#: gtkedit/edit.c:318
+#: gtkedit/edit.c:320
 msgid " Error reading from pipe: "
 msgstr " Hiba a csõ-fájl olvasásakor: "
 
-#: gtkedit/edit.c:323
+#: gtkedit/edit.c:325
 msgid " Failed trying to open pipe for reading: "
 msgstr " Nem sikerült a csõ-fájlt olvasásra megyitni: "
 
-#: gtkedit/edit.c:337
+#: gtkedit/edit.c:339
 msgid " Error reading file: "
 msgstr " Hiba a fájl olvasásakor: "
 
-#: gtkedit/edit.c:386
+#: gtkedit/edit.c:388
 msgid " Cannot get size/permissions info on file: "
 msgstr " Méret-/hozzáférési adatok lekérése nem sikerült: "
 
-#: gtkedit/edit.c:393
+#: gtkedit/edit.c:395
 msgid " Not an ordinary file: "
 msgstr " Nem közönséges fájl: "
 
-#: gtkedit/edit.c:399
+#: gtkedit/edit.c:401
 msgid " File is too large: "
 msgstr " Ez a fájl túl nagy: "
 
-#: gtkedit/edit.c:400
+#: gtkedit/edit.c:402
 msgid ""
 " \n"
 " Increase edit.h:MAXBUF and recompile the editor. "
 msgstr " Növeld meg az edit.h-ban a MAXBUF értékét, aztán rebuild... "
 
-#: gtkedit/edit.c:2567
+#: gtkedit/edit.c:2569
 msgid "User menu avalaible only in mcedit invoked from mc"
 msgstr "'mcedit' felhasználói menü nem használató az 'mc'-bõl."
-# !!FIXME: vagy a csak az mc-bol inditott mcedit user menuje...
 
+# !!FIXME: vagy a csak az mc-bol inditott mcedit user menuje...
 #. Not essential to translate
-#: gtkedit/edit.c:2765 gtkedit/editcmd.c:2939
+#: gtkedit/edit.c:2767 gtkedit/editcmd.c:2939
 msgid "Error trying to stat file:"
 msgstr "Hiba a fájl adatainak lekérdezésekor:"
 
-#: gtkedit/editcmd.c:298
+#: gtkedit/editcmd.c:301
 msgid " Error writing to pipe: "
 msgstr " Hiba a csõ-fájl írásakor: "
 
-#: gtkedit/editcmd.c:304
+#: gtkedit/editcmd.c:307
 msgid " Failed trying to open pipe for writing: "
 msgstr " Nem sikerült a csõ-fájlt írásra megyitni: "
 
-#: gtkedit/editcmd.c:380
+#: gtkedit/editcmd.c:384
 msgid "Quick save "
 msgstr "Gyors mentés "
 
-#: gtkedit/editcmd.c:381
+#: gtkedit/editcmd.c:385
 msgid "Safe save "
 msgstr "Bizt. mentés "
 
-#: gtkedit/editcmd.c:382
+#: gtkedit/editcmd.c:386
 msgid "Do backups -->"
 msgstr "Másolatok -->"
 
 #. NLS  for hotkeys?
-#: gtkedit/editcmd.c:385 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
-#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3020 gtkedit/editoptions.c:66
+#: gtkedit/editcmd.c:389 gtkedit/editcmd.c:1190 gtkedit/editcmd.c:1234
+#: gtkedit/editcmd.c:1319 gtkedit/editcmd.c:3021 gtkedit/editoptions.c:66
 #: src/achown.c:71 src/boxes.c:139 src/boxes.c:279 src/boxes.c:376
 #: src/boxes.c:464 src/boxes.c:644 src/boxes.c:727 src/boxes.c:781
 #: src/chmod.c:114 src/chown.c:79 src/cmd.c:859 src/filegui.c:822
@@ -1844,13 +1877,13 @@ msgstr "Másolatok -->"
 msgid "&Cancel"
 msgstr "&Mégsem"
 
-#: gtkedit/editcmd.c:391
+#: gtkedit/editcmd.c:395
 msgid "Extension:"
 msgstr " Végzõdés:"
-# !NOTE: check the positioning; that space is intentional!
 
+# !NOTE: check the positioning; that space is intentional!
 #. NLS ?
-#: gtkedit/editcmd.c:398
+#: gtkedit/editcmd.c:402
 msgid " Edit Save Mode "
 msgstr " Mentési mód "
 
@@ -1948,7 +1981,7 @@ msgstr " Tényleg mentsük a fájlt? - "
 msgid " Save file "
 msgstr " Fájl mentése "
 
-#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1249
+#: gtkedit/editcmd.c:837 gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1249
 #: src/view.c:2077
 msgid "Save"
 msgstr "Ment"
@@ -2342,29 +2375,28 @@ msgstr "Nem sikerült a parancsfált bezárni: "
 #: gtkedit/editcmd.c:2898
 msgid "Script created:"
 msgstr "Parancsfál: "
-#!!FIXME: filename assumed after the colon...
 
 #: gtkedit/editcmd.c:2905
 msgid "Process block"
 msgstr "Blokk feldolgozása"
 
-#: gtkedit/editcmd.c:3013
+#: gtkedit/editcmd.c:3014
 msgid " Mail "
 msgstr " E-mail "
 
-#: gtkedit/editcmd.c:3026
+#: gtkedit/editcmd.c:3027
 msgid " Copies to"
 msgstr " Másolatot kap:"
 
-#: gtkedit/editcmd.c:3030
+#: gtkedit/editcmd.c:3031
 msgid " Subject"
 msgstr " Tárgy:"
 
-#: gtkedit/editcmd.c:3034
+#: gtkedit/editcmd.c:3035
 msgid " To"
 msgstr " Címzett:"
 
-#: gtkedit/editcmd.c:3036
+#: gtkedit/editcmd.c:3037
 msgid " mail -s <subject> -c <cc> <to>"
 msgstr " mail -s <tárgy> -c <másolatot_kap> <címzett>"
 
@@ -2823,30 +2855,30 @@ msgid " Editor options "
 msgstr " Szövegszerkesztõ beállításai "
 
 #. Not essential to translate
-#: gtkedit/editwidget.c:323
+#: gtkedit/editwidget.c:324
 msgid "Error initialising editor.\n"
 msgstr "Nem sikerült inicializálni a szövegszerkesztõt.\n"
 
-#: gtkedit/editwidget.c:1136 gtkedit/gtkedit.c:1248 src/help.c:806
+#: gtkedit/editwidget.c:1137 gtkedit/gtkedit.c:1248 src/help.c:806
 #: src/main.c:1729 src/screen.c:2393 src/screen.c:2423 src/tree.c:1008
 #: src/view.c:2070
 msgid "Help"
 msgstr "Súgó"
 
-#: gtkedit/editwidget.c:1138 gtkedit/gtkedit.c:1250
+#: gtkedit/editwidget.c:1139 gtkedit/gtkedit.c:1250
 msgid "Mark"
 msgstr "Blokk"
 
-#: gtkedit/editwidget.c:1139
+#: gtkedit/editwidget.c:1140
 msgid "Replac"
 msgstr "Csere"
 
-#: gtkedit/editwidget.c:1145 src/main.c:1731
+#: gtkedit/editwidget.c:1146 src/main.c:1731
 msgid "PullDn"
 msgstr "Fõmenü"
 
 #. gtk_edit_menu
-#: gtkedit/editwidget.c:1146 gtkedit/gtkedit.c:1258 src/help.c:818
+#: gtkedit/editwidget.c:1147 gtkedit/gtkedit.c:1258 src/help.c:818
 #: src/main.c:1732 src/view.c:2072 src/view.c:2094
 msgid "Quit"
 msgstr "Kilép"
@@ -2928,7 +2960,6 @@ msgstr "Kilépés a szövegszerkesztõbõl"
 #: gtkedit/gtkedit.c:1292
 msgid "Clear the edit buffer"
 msgstr "A szerkesztõablak törlése"
-#!!FIXME: a teljes szöveg törlése?
 
 #: gtkedit/gtkedit.c:1297
 msgid "Insert File"
@@ -2950,12 +2981,12 @@ msgstr "Kijelölt szövegrész mentése fájlba"
 msgid "Search/Replace"
 msgstr "Keresés/csere"
 
-#: gtkedit/syntax.c:1072 gtkedit/syntax.c:1081 gtkedit/syntax.c:1090
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1074 gtkedit/syntax.c:1083 gtkedit/syntax.c:1092
+#: gtkedit/syntax.c:1101
 msgid " Spelling Message "
 msgstr " Helyesírás-ellenõrzés "
 
-#: gtkedit/syntax.c:1072
+#: gtkedit/syntax.c:1074
 msgid ""
 " Fail trying to open ispell program. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2965,7 +2996,7 @@ msgstr ""
 " Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
-#: gtkedit/syntax.c:1081
+#: gtkedit/syntax.c:1083
 msgid ""
 " Fail trying to open ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2975,7 +3006,7 @@ msgstr ""
 " Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
-#: gtkedit/syntax.c:1090
+#: gtkedit/syntax.c:1092
 msgid ""
 " Fail trying to read ispell pipes. \n"
 " Check that it is in your path and works with the -a option. \n"
@@ -2985,20 +3016,19 @@ msgstr ""
 " Ellenõrizd, hogy ott van-e az elérési utadon, és ismeri a '-a' opciót. \n"
 " Ha nem, kapcsold ki a helyesírás-ellenõrzést a 'Beállítások'-nál. "
 
-#: gtkedit/syntax.c:1099
+#: gtkedit/syntax.c:1101
 msgid ""
 " Error reading from ispell. \n"
 " Ispell is being restarted. "
 msgstr ""
 " 'ispell' olvasási hiba. \n"
 " Az 'ispell' újraindítása... "
-#!!FIXME
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
 msgid " Load Syntax Rules "
 msgstr " Szintaxis-szabályok betöltése "
 
-#: gtkedit/syntax.c:1370 gtkedit/syntax.c:1372
+#: gtkedit/syntax.c:1373 gtkedit/syntax.c:1375
 msgid ""
 " Your syntax rule file is outdated \n"
 " A new rule file is being installed. \n"
@@ -3008,15 +3038,15 @@ msgstr ""
 " Lecserélem egy újabb változatra. \n"
 " (A régi fájl .OLD névvel lesz elmentve.). "
 
-#: gtkedit/syntax.c:1515 gtkedit/syntax.c:1522
+#: gtkedit/syntax.c:1518 gtkedit/syntax.c:1525
 msgid " Load syntax file "
 msgstr " Szintaxis-fájl betöltése "
 
-#: gtkedit/syntax.c:1515
+#: gtkedit/syntax.c:1518
 msgid " File access error "
 msgstr " Fájl-hozzáférési hiba "
 
-#: gtkedit/syntax.c:1521
+#: gtkedit/syntax.c:1524
 #, c-format
 msgid " Error in file %s on line %d "
 msgstr " Hiba a %s fájl %d. sorában "
@@ -3027,7 +3057,7 @@ msgstr "&Beállít"
 
 #: src/achown.c:73
 msgid "S&kip"
-msgstr "&Kihagy"	
+msgstr "&Kihagy"
 
 #: src/achown.c:74 src/chmod.c:119 src/chown.c:83
 msgid "Set &all"
@@ -3048,9 +3078,9 @@ msgstr "Mások"
 #: src/achown.c:374
 msgid "On"
 msgstr "  "
+
 # NOTE:	no meaningful short translation here 
 # 	(See the chown dialog...)
-
 #: src/achown.c:376
 msgid "Flag"
 msgstr "Jel"
@@ -3059,7 +3089,6 @@ msgstr "Jel"
 #, c-format
 msgid "%6d of %d"
 msgstr "%6d a %d-bõl"
-#!!FIXME
 
 #: src/achown.c:391
 msgid " Chown advanced command "
@@ -3153,7 +3182,6 @@ msgstr "&Ikon-nézet"
 #: src/boxes.c:137
 msgid "user &Mini status"
 msgstr "Beállított mini-&státusz:"
-#!NOTE: ":" is to be consistent with "User defined:"
 
 #: src/boxes.c:186
 msgid "Listing mode"
@@ -3230,7 +3258,6 @@ msgstr "Anonymous FTP jelszó:"
 #: src/boxes.c:668
 msgid "Timeout for freeing VFSs:"
 msgstr "VFS felszabadítási idõ:"
-#!!FIXME
 
 #: src/boxes.c:674
 msgid " Virtual File System Setting "
@@ -3252,7 +3279,6 @@ msgstr "Szimbolikus link"
 #: src/boxes.c:833
 msgid "Running "
 msgstr "Futtatás: "
-#!!FIXME
 
 #: src/boxes.c:834 src/find.c:719 src/find.c:960
 msgid "Stopped"
@@ -3333,8 +3359,8 @@ msgstr "Jelöltek &beállítása"
 #: src/chmod.c:118
 msgid "&Marked all"
 msgstr "Jelölteket mind"
-# !!FIXME
 
+# !!FIXME
 #: src/chmod.c:152
 msgid "Permissions (Octal)"
 msgstr "Jogok (oktálisan):"
@@ -3480,7 +3506,6 @@ msgstr " Szûrõ "
 #: src/cmd.c:447
 msgid " Set expression for filtering filenames"
 msgstr " Állítsd be a fájlnevekre vonatkozó szûrõkifejezést"
-#!!FIXME: irasjel? muszaj felszolito modban?
 
 #: src/cmd.c:513
 msgid " Select "
@@ -3582,8 +3607,8 @@ msgstr " 'Hard' link "
 #: src/cmd.c:1035 src/cmd.c:1174 src/file.c:1704
 msgid " to:"
 msgstr " ide: "
-# !NOTE:  used within prompts, like: "link ... ide:"
 
+# !NOTE:  used within prompts, like: "link ... ide:"
 #: src/cmd.c:1046
 #, c-format
 msgid " link: %s "
@@ -3607,7 +3632,6 @@ msgstr " Szibolikus link módósítása "
 #, c-format
 msgid " edit symlink, unable to remove %s: %s "
 msgstr " %s törlése nem sikerült: %s "
-#!!FIXME
 
 #: src/cmd.c:1147
 #, c-format
@@ -3660,7 +3684,6 @@ msgstr " SMB kapcsolat "
 #: src/cmd.c:1405
 msgid " Socket source routing setup "
 msgstr " 'Socket source routing' beállítása "
-#!!FIXME: beallitas?
 
 #: src/cmd.c:1406
 msgid " Enter host name to use as a source routing hop: "
@@ -3706,8 +3729,8 @@ msgstr ""
 #: src/command.c:198
 msgid " You can not execute commands on non-local filesystems"
 msgstr " Távoli fájlrendszeren nem lehet parancsokat futtatni. "
-# NOTE: format diff. is deliberate. (It's an error box e.g. in FTP.)
 
+# NOTE: format diff. is deliberate. (It's an error box e.g. in FTP.)
 #: src/dialog.c:56
 msgid ""
 "\n"
@@ -3880,7 +3903,6 @@ msgstr "szöveges mód"
 #: src/features.c:15
 msgid " with X11 support to read modifiers"
 msgstr " X11-támogatással "
-#!!FIXME
 
 #: src/features.c:20
 msgid "Virtual File System: tarfs, extfs"
@@ -4021,7 +4043,6 @@ msgid ""
 msgstr ""
 " Nem sikerült a szimbolikus linket létrehozni: \"%s\" \n"
 " %s "
-#!!FIXME: kell a target?
 
 #: src/file.c:509
 #, c-format
@@ -4258,7 +4279,6 @@ msgstr " `%s' és `%s' ugyanaz a könyvtár "
 #, c-format
 msgid " Cannot overwrite directory \"%s\" %s "
 msgstr " Nem sikerült a \"%s\" könyvtárat felülírni: %s "
-#!!FIXME (chk source)
 
 #: src/file.c:1267
 #, c-format
@@ -4273,7 +4293,6 @@ msgid ""
 msgstr ""
 " Nem sikerült a \"%s\" könyvtár átnevezése \"%s\"-ra \n"
 " %s "
-#!!FIXME (move)
 
 #: src/file.c:1357
 #, c-format
@@ -4322,27 +4341,25 @@ msgstr "1törlése"
 #, c-format
 msgid "%o %f \"%s\"%m"
 msgstr "\"%s\" nevû %f %o%m"
+
 # !NOTE: used as e.g. "dfdsfds" nevû fájl törlése?
 #	Copy, Move, Delete...
-
 #: src/file.c:1696
 #, c-format
 msgid "%o %d %f%m"
 msgstr "%d kijelölt %f %o%m"
+
 # !NOTE: used as e.g. "44 kijelölt fájl/könyvtár törlése?
 #	Copy, Move, Delete...
-
 #: src/file.c:1698
 #, c-format
 msgid "%o %f \"%s\"%e"
 msgstr "%o %f \"%s\"%e"
-#!!FIXME: when is this used?
 
 #: src/file.c:1699
 #, c-format
 msgid "%o %d %f%e"
 msgstr "%o %d %f%e"
-#!!FIXME: when is this used?
 
 #: src/file.c:1703 vfs/fish.c:509
 msgid "file"
@@ -4351,8 +4368,8 @@ msgstr "fájl"
 #: src/file.c:1703
 msgid "files"
 msgstr "fájl"
-# !NOTE: this plural is used in contexts as "4 files"
 
+# !NOTE: this plural is used in contexts as "4 files"
 #: src/file.c:1703
 msgid "directory"
 msgstr "könyvtár"
@@ -4360,13 +4377,13 @@ msgstr "könyvtár"
 #: src/file.c:1703
 msgid "directories"
 msgstr "könyvtár"
-# !NOTE: this plural is used in contexts as "4 directories"
 
+# !NOTE: this plural is used in contexts as "4 directories"
 #: src/file.c:1704
 msgid "files/directories"
 msgstr "fájl/könyvtár"
-# !NOTE: these plurals are used in contexts as "4 files/directories"
 
+# !NOTE: these plurals are used in contexts as "4 files/directories"
 #: src/file.c:1704
 msgid " with source mask:"
 msgstr " ezzel a maszkkal:"
@@ -4374,8 +4391,8 @@ msgstr " ezzel a maszkkal:"
 #: src/file.c:1856
 msgid " Can't operate on \"..\"! "
 msgstr " A \"..\" könyvtárat nem lehet ilyesmire haszálni... "
-# !NOTE: Copy, Move, Delete...
 
+# !NOTE: Copy, Move, Delete...
 #: src/file.c:1875 src/screen.c:2115
 msgid "Yes"
 msgstr "Igen"
@@ -4444,7 +4461,6 @@ msgstr "&Egyiket sem"
 #: src/file.c:2260
 msgid " Type 'yes' if you REALLY want to delete "
 msgstr " Írj be 'yes'-t, ha TÉNYLEG törölni akarod "
-#!!FIXME: yes vagy igen??
 
 #: src/file.c:2262
 msgid "all the directories "
@@ -4477,7 +4493,6 @@ msgstr "Forrás"
 #: src/filegui.c:528
 msgid "Target"
 msgstr "Cél"
-#!!FIXME: it was empty previously
 
 #: src/filegui.c:550
 msgid "Deleting"
@@ -4548,8 +4563,8 @@ msgstr "Cél:"
 #: src/filegui.c:810
 msgid "&Using shell patterns"
 msgstr "'&Shell'-minta"
-# !NOTE: checkbox on the copy/move/del dialog (plural is surplus!)
 
+# !NOTE: checkbox on the copy/move/del dialog (plural is surplus!)
 #: src/filegui.c:831
 msgid "&Background"
 msgstr "&Háttérben"
@@ -4683,15 +4698,15 @@ msgstr "A fájl szerkesztése"
 msgid "Send the results to a Panel"
 msgstr "Eredményeket a panelra"
 
-#: src/fixhlp.c:171
+#: src/fixhlp.c:169
 msgid "Usage: fixhlp <width> <tocname>\n"
 msgstr "Használata: fixhlp <szélesség> <tartalomjegyzék_neve>\n"
 
-#: src/fixhlp.c:176
+#: src/fixhlp.c:174
 msgid "fixhlp: Cannot open toc for writing"
 msgstr "fixhlp: nem sikerült a tartalomjegyzék megnyitása írásra"
 
-#: src/fixhlp.c:179
+#: src/fixhlp.c:177
 msgid ""
 "[Contents]\n"
 " Topics:\n"
@@ -4778,7 +4793,6 @@ msgstr "&Aktuálist hozzáadni"
 #: src/hotlist.c:141
 msgid "Change &To"
 msgstr "&Belépés"
-#!!FIXME
 
 #: src/hotlist.c:188
 msgid "Subgroup - press ENTER to see list"
@@ -4804,13 +4818,12 @@ msgstr " Címke "
 #: src/hotlist.c:650
 msgid "Moving "
 msgstr "Áthelyezés/-nevezés: "
-#!!FIXME
 
 #: src/hotlist.c:879
 msgid "New hotlist entry"
 msgstr " Új gyorslista-bejegyzés "
-# !NOTE: just a sick pedantic fix with those spaces... :)
 
+# !NOTE: just a sick pedantic fix with those spaces... :)
 #: src/hotlist.c:879
 msgid "Directory label"
 msgstr "Könyvtárcímke:"
@@ -5005,8 +5018,8 @@ msgstr "Módosítva:    %s"
 #, c-format
 msgid "Created:   %s"
 msgstr "Adatváltozt.: %s"
-# !NOTE: This is _not_ creation but metadata modification.
 
+# !NOTE: This is _not_ creation but metadata modification.
 #: src/info.c:179
 msgid "Size:      "
 msgstr "Méret:        "
@@ -5039,7 +5052,6 @@ msgstr "Hely:         %Xh:%Xh"
 #: src/info.c:212
 msgid "File:       None"
 msgstr "Fájl:         Nincs"
-#!!FIXME
 
 #: src/layout.c:159
 msgid "&Vertical"
@@ -5097,7 +5109,6 @@ msgstr " Megjelenés "
 #: src/layout.c:381
 msgid " Panel split "
 msgstr " Panelok elhelyezkedése "
-#!!FIXME
 
 #: src/layout.c:382
 msgid " Highlight... "
@@ -5978,7 +5989,6 @@ msgstr "GID"
 #: src/screen.c:1322
 msgid "Unknow tag on display format: "
 msgstr "Ismeretlen formátum-mezõ: "
-#!!FIXME
 
 #: src/screen.c:1448
 msgid "User suplied format looks invalid, reverting to default."
@@ -6321,7 +6331,6 @@ msgstr "RegKer"
 #: src/view.c:2080
 msgid "EdText"
 msgstr "ASCSzrk"
-#!!FIXME
 
 #: src/view.c:2080
 msgid "EdHex"
@@ -6563,7 +6572,6 @@ msgstr ""
 "Nem sikerült megynitni a 'cpio' archívumot:\n"
 "%s"
 
-
 #: vfs/cpio.c:224
 #, c-format
 msgid ""
@@ -6639,7 +6647,6 @@ msgstr "Lineáris átvitel intdítása..."
 #: vfs/direntry.c:957
 msgid "Getting file"
 msgstr "Fájl-letöltés"
-#!!FIXME: van utana fajlnev?
 
 #: vfs/extfs.c:270
 #, c-format
@@ -6651,7 +6658,6 @@ msgstr ""
 "%s"
 
 #: vfs/extfs.c:302 vfs/extfs.c:322
-
 msgid "Inconsistent extfs archive"
 msgstr "Inkonzisztens 'extfs' archívum."
 
@@ -6732,7 +6738,6 @@ msgstr "Megszakítás után hibajelzés érkezett."
 #: vfs/fish.c:567
 msgid "Aborted transfer would be successful."
 msgstr "Megszakított átvitel sikeres lenne."
-#!!FIXME
 
 #: vfs/ftpfs.c:315
 #, c-format
@@ -6837,7 +6842,6 @@ msgstr "ftpfs: sikertelen könyvtárváltás."
 #: vfs/ftpfs.c:1103 vfs/ftpfs.c:1110
 msgid "ftpfs: couldn't resolve symlink"
 msgstr "ftpfs: nem sikerült a szimbolikus linket követni"
-#!!FIXME
 
 #: vfs/ftpfs.c:1161
 msgid "Resolving symlink..."
@@ -7151,4 +7155,3 @@ msgstr " Nem sikerült megnyitni a fájlt: %s "
 #: vfs/undelfs.c:684
 msgid "Undelete filesystem for ext2"
 msgstr "Fájlhelyreállító fájlrendszer 'ext2fs'-hez"
-
