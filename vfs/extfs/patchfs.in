@@ -4,9 +4,7 @@
 # 
 # extfs to handle patches in unified diff format
 
-use bytes;
 use strict;
-use POSIX;
 
 # standard binaries
 my $bzip = "bzip2";
@@ -56,12 +54,14 @@ sub list
     import Date::Parse if ($parsedates);
     
     # state==1 means diff contents, state==0 means comments
-    $state=1; $f="";
+    $state = 1; $f = '';
+    my $cpos = 0;
     while (<I>) {
-	if (/^-{3} /) {
+	$cpos += length;
+	if (/^--- /) {
 	    # parse diff header
 	    if ($state==1) {
-		$npos=tell(I)-length;
+		$npos = $cpos - length;
 		printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
 		  if $f;
 		$pos=$npos;
@@ -69,10 +69,10 @@ sub list
 	    $state=1;
 
 	    error "Can't parse unified diff header"
-	      unless ((($_.=<I>).=<I>)=~/^\-{3} .*\n\+{3} .*\n@@ .* @@.*\n$/);
-	    ($fsrc)=/^-{3} ([^\s]+).*\n.*\n.*\n$/;
-	    ($fdst)=/^.*\n\+{3} ([^\s]+).*\n.*\n$/;
-	    ($time)=/^.*\n\+{3} [^\s]+\s+([^\t\n]+).*\n.*\n$/;
+	      unless ((($_.=<I>).=<I>)=~/^\--- .*\n\+\+\+ .*\n@@ .* @@.*\n$/);
+	    ($fsrc)=/^--- ([^\s]+).*\n.*\n.*\n$/;
+	    ($fdst)=/^.*\n\+\+\+ ([^\s]+).*\n.*\n$/;
+	    ($time)=/^.*\n\+\+\+ [^\s]+\s+([^\t\n]+).*\n.*\n$/;
 
 	    # select filename, conform with (diff.info)Multiple patches
 	    $prefix="";
@@ -110,14 +110,14 @@ sub list
 
 	} elsif ($state==1 && !/^([+\- \n]|@@)/) {
 	    # start of comments, end of diff contents
-	    $npos=tell(I)-length;
+	    $npos = $cpos - length;
 	    printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
 	      if $f;
 	    $pos=$npos;
 	    $state=0;
 	}
     }
-    $npos=tell(I);
+    $npos = $cpos;
     printf "-rw-r--r-- 1 %s %s %d %s %s%s\n", $uid, $gid, $npos-$pos, datetime($time), $prefix, $f
       if $f;
 }
@@ -132,15 +132,15 @@ sub copyout
     # state==1 means diff contents, state==0 mens comments
     $state=1; $found=0; $buf="";
     while (<I>) {
-	if (/^-{3} /) {
+	if (/^--- /) {
 	    # parse diff header
 	    last if ($state==1 && $found);
 	    $state=1;
 
 	    error "Can't parse unified diff header"
-	      unless ((($_.=<I>).=<I>)=~/^\-{3} .*\n\+{3} .*\n@@ .* @@.*\n$/);
-	    ($fsrc)=/^-{3} ([^\s]+).*\n.*\n.*\n$/;
-	    ($fdst)=/^.*\n\+{3} ([^\s]+).*\n.*\n$/;
+	      unless ((($_.=<I>).=<I>)=~/^\--- .*\n\+\+\+ .*\n@@ .* @@.*\n$/);
+	    ($fsrc)=/^--- ([^\s]+).*\n.*\n.*\n$/;
+	    ($fdst)=/^.*\n\+\+\+ ([^\s]+).*\n.*\n$/;
 	    $found=1 if (($fsrc eq $file) || ($fdst eq $file));
 
 	} elsif ($state==1 && !/^([+\- \n]|@@)/) {

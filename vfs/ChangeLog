@@ -1,3 +1,9 @@
+2002-12-19  Andrew V. Samoilov  <sav@bcs.zp.ua>
+
+	* extfs/patchfs.in: Don't rely on tell() - it doesn't always
+	work on pipes.  Determine patch size by adding together the line
+	lengths.
+
 2002-12-19  Adam Byrtek  <alpha@debian.org>
 
 	* extfs/patchfs.in: Allow diffs with function names after "@@".
