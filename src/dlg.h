@@ -97,7 +97,6 @@ typedef struct Dlg_head {
 
     int cols;
     int lines;
-    void *data;
     
     int flags;		/* Different flags, specified in create_dlg() */
 } Dlg_head;

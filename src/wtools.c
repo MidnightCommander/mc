@@ -154,26 +154,11 @@ int run_listbox (Listbox *l)
 
 
 /* {{{ Query Dialog functions */
-struct text_struct {
-    char *text;
-    char *header;
-};
-
 static int query_callback (struct Dlg_head *h, int Id, int Msg)
 {
-    struct text_struct *info;
-
-    info = (struct text_struct *) h->data;
-    
     switch (Msg){
     case DLG_DRAW:
-	/* designate window */
-	attrset (NORMALC);
-	dlg_erase (h);
-	draw_box (h, 1, 1, h->lines-2, h->cols-2);
-	attrset (HOT_NORMALC);
-	dlg_move (h, 1, (h->cols-strlen (info->header))/2);
-	addstr (info->header);
+	dialog_repaint (h, NORMALC, HOT_NORMALC);
 	break;
     }
     return 0;
@@ -196,7 +181,6 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     int cols, lines;
     char *cur_name;
     static int query_colors [4];
-    static struct text_struct pass;
     
     /* set dialog colors */
     query_colors [0] = (flags & D_ERROR) ? ERROR_COLOR :  Q_UNSELECTED_COLOR;
@@ -224,8 +208,6 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     lines += 4 + (count > 0 ? 2 : 0);
     xpos = COLS/2 - cols/2;
     ypos = LINES/3 - (lines-3)/2;
-    pass.header = header;
-    pass.text   = text;
 
     /* prepare dialog */
     query_dlg = create_dlg (ypos, xpos, lines, cols, query_colors,
@@ -235,7 +217,6 @@ int query_dialog (char *header, char *text, int flags, int count, ...)
     /* The data we need to pass to the callback */
     query_dlg->cols = cols; 
     query_dlg->lines = lines; 
-    query_dlg->data  = &pass;
 	
     query_dlg->direction = DIR_BACKWARD;
 
@@ -379,13 +360,7 @@ static int quick_callback (struct Dlg_head *h, int id, int Msg)
 {
     switch (Msg){
     case DLG_DRAW:
-	attrset (COLOR_NORMAL);
-	dlg_erase (h);
-	draw_box (h, 1, 1, h->lines-2, h->cols-2);
-	
-	attrset (COLOR_HOT_NORMAL);
-	dlg_move (h, 1,((h->cols-strlen (h->data))/2));
-	addstr (h->data);
+	common_dialog_repaint (h);
 	break;
     case DLG_KEY:
 	if (id == '\n'){
@@ -432,7 +407,6 @@ int quick_dialog_skip (QuickDialog *qd, int nskip)
     /* We pass this to the callback */
     dd->cols  = qd->xlen;
     dd->lines = qd->ylen;
-    dd->data  = qd->title;
 
     for (qw = qd->widgets; qw->widget_type; qw++){
 	xpos = (qd->xlen * qw->relative_x)/qw->x_divisions;

@@ -1,5 +1,10 @@
 2002-08-22  Pavel Roskin  <proski@gnu.org>
 
+	* dlg.h (struct Dlg_head): Eliminate "data" field, it duplicated
+	functionality of "title".
+	* wtools.c (query_callback): Use dialog_repaint().
+	(quick_callback): Use common_dialog_repaint().
+
 	* learn.c (learn_callback): Use common_dialog_repaint().
 	* achown.c (chl_callback): Likewise.
 
