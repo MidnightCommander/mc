@@ -1,5 +1,11 @@
 2002-08-09  Pavel Roskin  <proski@gnu.org>
 
+	* lib/xnc.hlp: Move ...
+	* doc/xnc.hlp: ... here.
+	* doc/Makefile.am: Necessary adjustments.
+	* lib/Makefile.am: Likewise.
+	* src/Makefile.am: Likewise.
+
 	* configure.in: Add Spanish documentation.
 	* doc/Makefile.am: Likewise.
 	* doc/es: Spanish documentation.

@@ -16,7 +16,6 @@ LIBFILES_CONST = mc.hint mc.hint.cs mc.hint.es mc.hint.hu mc.hint.it \
 	mc.menu cedit.menu edit.indent.rc edit.spell.rc
 
 noinst_DATA = \
-	xnc.hlp			\
 	mcserv.init 		\
 	mcserv.pamd 		\
 	mc.global

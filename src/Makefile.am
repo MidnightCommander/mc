@@ -14,9 +14,6 @@ endif
 
 noinst_PROGRAMS = man2hlp
 
-mclib_DATA = mc.hlp
-MAINTAINERCLEANFILES = mc.hlp
-
 mcmfmt_SOURCES = mfmt.c
 
 cons_saver_SOURCES = cons.saver.c
@@ -70,13 +67,7 @@ mc_SOURCES = $(SRCS)
 endif
 
 EXTRA_DIST = TODO ChangeLog OChangeLog man2hlp.c \
-	ncurses.patch mc.hlp $(CHARSET_SRC)
-
-$(srcdir)/mc.hlp: $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp man2hlp.c
-	- $(MAKE) man2hlp
-	- ./man2hlp 58 $(top_builddir)/doc/mc.1 $(top_srcdir)/lib/xnc.hlp \
-	    $(srcdir)/mc.hlp
-	- touch $(srcdir)/mc.hlp
+	ncurses.patch $(CHARSET_SRC)
 
 install-exec-hook:
 	$(MAKE) install_mcview
