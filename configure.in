@@ -1222,9 +1222,7 @@ if test x$ac_cv_prog_gnu_make = xyes; then
     MCFGR='include ./Make.common'
     MCF=/dev/null
     PHONY='.PHONY:'
-    DOTDEPEND='ifeq (.depend,$(wildcard .depend)) \
-include .depend \
-endif'
+    DOTDEPEND='-include .depend'
     WRITEDEP=":"
     ac_cv_make_with_percent_rules=yes
 else

@@ -1,3 +1,9 @@
+2000-08-18  Pavel Roskin  <proski@gnu.org>
+
+	* configure.in: Simplified dependency tracking by using
+	"-include" with GNU Make
+	* autogen.sh: Exit on all failures
+
 2000-08-17  Pavel Roskin  <proski@gnu.org>
 
 	* doc/mc.sgml: Curly braces replaced with &lcub; and &rcub;
